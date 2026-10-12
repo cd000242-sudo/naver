@@ -1,20 +1,705 @@
 {
-  "publishedAt": "2026-10-12T03:17:38.409Z",
+  "publishedAt": "2026-10-12T09:23:07.355Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 236,
-    "niche": 0,
-    "preemption": 6,
+    "candidates": 177,
+    "niche": 2,
+    "preemption": 9,
     "pending": 0
   },
   "freeSample": {
     "day": "2026-10-12",
     "keywords": []
   },
-  "rows": [],
+  "rows": [
+    {
+      "keyword": "사우디아라비아 시차",
+      "issue": "사우디아라비아",
+      "topic": "사우디아라비아",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 1건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 1,
+        "sampledTitles": 10,
+        "topTitles": [
+          "사우디아라비아 여행 리야드 알울라 제다 삼각 코스, 이동은 국내선 비행이 현실적",
+          "026 사우디아라비아 여행 완벽가이드 날씨·환율·전자비자(e-Visa)·카드 결제 팁 총정리",
+          "한국 사우디 농구 몇 시? 9월 10일 아시안게임 경기시간·중계 어디서 보나",
+          "한국 중국 축구 몇 시? 오늘 오후 3시 아시안게임 준결승｜4연패 향한 마지막 관문",
+          "사우디아라비아 (1)",
+          "사우디 공항 연쇄 공격! 국제유가 100달러 돌파, 국내 휘발유·경유 가격 다시 오를까?",
+          "한국 사우디 축구 몇시? 아시안게임 경기시간·중계·조별순위 정리",
+          "한국 사우디 축구 내일 몇 시? 2026 아시안게임 남자축구 8강 확정·조 1위 조건·중계 일정",
+          "사우디와 한국, 시차는 얼마나? 비행 소요 시간까지 간단 정리",
+          "중동 정세 또 격화? 사우디-예멘 후티 대공세 속보와 유가·국내 증시 영향 정리"
+        ],
+        "measuredAt": "2026-10-12T09:22:20.041Z"
+      },
+      "documentCount": 8628,
+      "documentCountMeasured": true,
+      "searchVolume": 590,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 1.3308412249720332,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 590",
+        "문서수 8,628",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 590 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.3배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        },
+        "home": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 217,
+      "kinTop": [
+        {
+          "title": "사우디아라비아에 대해서",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6130201&docId=484491654&answerNo=1",
+          "views": 622,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-12T09:20:12.874Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2"
+    },
+    {
+      "keyword": "네이버클라우드 콘솔",
+      "issue": "네이버클라우드",
+      "topic": "네이버클라우드",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "스타트업 클라우드 비용 절감, NAVER API HUB 프로모션 활용법",
+          "네이버 지도 API 연결하기",
+          "개발자 클라우드 입문 추천 | 네이버 클라우드 플랫폼 \"20만 원 혜택\" 정리 NAVER API HUB",
+          "스타트업 클라우드 비용 절감, NAVER API HUB 프로모션 활용법",
+          "네이버 클로바 스튜디오 API 신청부터 키 발급까지 한 번에 끝내는 가이드",
+          "네이버 API 이관 방법에 대해 알려드립니다. 네이버 클라우드 플랫폼 가입",
+          "네이버 검색 API 발급처 변경, NAVER API HUB 신청 순서",
+          "사이드 프로젝트 서버 비용, 네이버 클라우드 플랫폼 크레딧으로 아끼기",
+          "네이버플러스 멤버십 혜택 총정리, 월 4,900원 정말 본전 뽑을까? (넷플릭스 무료·스포티파이·쇼핑 5% 적립 연간권 환불 팩트체크)",
+          "네이버 검색 API·데이터랩 HUB 이관, 2027/6/30 키 종료"
+        ],
+        "measuredAt": "2026-10-12T09:22:25.726Z"
+      },
+      "documentCount": 8597,
+      "documentCountMeasured": true,
+      "searchVolume": 510,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 1.058295988618313,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 510",
+        "문서수 8,597",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 510 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.1배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        },
+        "home": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 355,
+      "kinTop": [
+        {
+          "title": "네이버 클라우드 검색 api 신청",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=113&docId=494368470&answerNo=1",
+          "views": 874,
+          "answers": 2
+        },
+        {
+          "title": "네이버 클라우드 플랫폼 이거 뭔가요??",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1060104&docId=495175877&answerNo=1",
+          "views": 116,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-12T09:20:12.874Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2"
+    }
+  ],
   "observations": [
+    {
+      "keyword": "아나토미 에스테틱 강남",
+      "issue": "아나토미",
+      "topic": "아나토미",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 144,
+      "documentCountMeasured": true,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 10",
+        "문서수 144",
+        "선점 후보 — 경쟁 문서 144건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-12T09:20:12.874Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "사우디아라비아 캄사 뜻",
+      "issue": "사우디아라비아",
+      "topic": "사우디아라비아",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 8,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 8",
+        "선점 후보 — 경쟁 문서 8건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "정보",
+      "adsenseFit": true,
+      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-12T09:20:12.874Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "아나토미 오브 뜻",
+      "issue": "아나토미",
+      "topic": "아나토미",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 292,
+      "documentCountMeasured": true,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 10",
+        "문서수 292",
+        "선점 후보 — 경쟁 문서 292건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "정보",
+      "adsenseFit": true,
+      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 23,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-12T09:20:12.874Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "아나토미 스트랭스 뜻",
+      "issue": "아나토미",
+      "topic": "아나토미",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 12,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 12",
+        "선점 후보 — 경쟁 문서 12건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "정보",
+      "adsenseFit": true,
+      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-12T09:20:12.874Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "오르카라우터",
+      "issue": "오르카라우터",
+      "topic": "오르카라우터",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 25,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 25",
+        "선점 후보 — 경쟁 문서 25건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-12T09:20:12.874Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "ai2-thor",
+      "issue": "Ai2",
+      "topic": "Ai2",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 29,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 29",
+        "선점 후보 — 경쟁 문서 29건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-12T09:20:12.874Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "아나토미 빈야사 뜻",
+      "issue": "아나토미",
+      "topic": "아나토미",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 47,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 47",
+        "선점 후보 — 경쟁 문서 47건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "정보",
+      "adsenseFit": true,
+      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-12T09:20:12.874Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "아나토미 오피스 결말",
+      "issue": "아나토미",
+      "topic": "아나토미",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 80,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 80",
+        "선점 후보 — 경쟁 문서 80건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 6,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-12T09:20:12.874Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "올모 코어 3",
+      "issue": "올모 코어 3",
+      "topic": "올모 코어 3",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 157,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 157",
+        "선점 후보 — 경쟁 문서 157건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-12T09:20:12.874Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "故 김현이 비보",
       "issue": "故 김현이 비보",
@@ -65,7 +750,8 @@
       "monetize": null,
       "measuredAt": "2026-10-12T03:16:52.037Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "앤트로픽 엔스로픽 차이",
@@ -128,7 +814,8 @@
       "monetize": null,
       "measuredAt": "2026-10-12T03:16:52.037Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "ms 콜백신청방법",
@@ -191,7 +878,8 @@
       "monetize": null,
       "measuredAt": "2026-10-12T03:16:52.037Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "김종철 경찰청장 국감",
@@ -243,7 +931,8 @@
       "monetize": null,
       "measuredAt": "2026-10-12T03:16:52.037Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "cg인바이츠 캄렐리주맙",
@@ -299,7 +988,8 @@
       "monetize": null,
       "measuredAt": "2026-10-12T03:16:52.037Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "신현송 총재 국정감사",
@@ -351,7 +1041,8 @@
       "monetize": null,
       "measuredAt": "2026-10-12T03:16:52.037Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "김용지 깜짝 결혼",
@@ -2881,487 +3572,154 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "데이터센터 전문 퍼머스",
-      "issue": "데이터센터 전문 퍼머스",
-      "topic": "데이터센터 전문 퍼머스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 51,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 51",
-        "선점 후보 — 경쟁 문서 51건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "엔비디아가 지원한 데이터센터 기업 퍼머스가 호주 IPO를 철회했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "데이터센터 전문 퍼머스 50억달러 IPO 철회 이유",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "데이터센터 전문 퍼머스가 50억달러 상장을 접은 건 생각보다 다른 데 있더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-10T08:56:34.845Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "오픈AI 닷츠 이용방법",
-      "issue": "오픈AI",
-      "topic": "오픈AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 110,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 110",
-        "선점 후보 — 경쟁 문서 110건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "오픈AI의 '닷츠'를 처음 쓰려는 사람들이 가입·사용 순서를 찾는다",
-        "basis": "AI 추론 — 뉴스 헤드라인 6건 + 실측 확인된 확장어 2개"
-      },
-      "intentLabel": "거래",
-      "adsenseFit": false,
-      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-      "titles": {
-        "seo": {
-          "text": "오픈AI 닷츠 이용방법 가입부터 첫 사용까지 단계별로",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "오픈AI 닷츠 이용방법 한국에서 가격부터 보려다 잠깐 멈칫했어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "오픈AI 닷츠 가격",
-          "searchVolume": 10,
-          "frame": "price"
-        },
-        {
-          "keyword": "오픈AI 닷츠 한국",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "오픈AI 닷츠 가격",
-          "searchVolume": 10,
-          "documentCount": 368,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "오픈AI 닷츠 한국",
-          "searchVolume": 10,
-          "documentCount": 369,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-10T08:56:34.845Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "아르텍스 공개 중단",
-      "issue": "아르텍스 공개 중단",
-      "topic": "아르텍스 공개 중단",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 138,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 138",
-        "선점 후보 — 경쟁 문서 138건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "한국 금융권 해킹에 악용된 중국 AI 아르텍스가 공개 개발을 중단했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "아르텍스 공개 중단, 금융권 해킹에 쓰인 중국 AI 정체",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "아르텍스 공개 중단까지 간 걸 보면 금융권 해킹이 생각보다 컸나 봐요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "아르텍스 AI",
-          "searchVolume": 330,
-          "frame": "generic"
-        },
-        {
-          "keyword": "아르텍스 해킹",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "아르텍스 AI",
-          "searchVolume": 330,
-          "documentCount": 650,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "아르텍스 해킹",
-          "searchVolume": 10,
-          "documentCount": 556,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-10T08:56:34.845Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "이태성 외지주",
-      "issue": "이태성",
-      "topic": "이태성",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 271,
-      "documentCountMeasured": true,
-      "searchVolume": 30,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "rising",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 30",
-        "문서수 271",
-        "선점 후보 — 경쟁 문서 271건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 357,
-      "kinTop": [
-        {
-          "title": "외지주싸움순위",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=30511&docId=483982293&answerNo=2",
-          "views": 735,
-          "answers": 2
-        },
-        {
-          "title": "외모지상주의 이태성 자퇴",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=30511&docId=484446548&answerNo=1",
-          "views": 78,
-          "answers": 1
-        },
-        {
-          "title": "외지주 정주행했는데 이태성vs신겐",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70404&docId=489965114&answerNo=2",
-          "views": 37,
-          "answers": 2
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-10T03:40:22.033Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "초강력 메디컬 다크히어로",
-      "issue": "초강력 메디컬 다크히어로",
-      "topic": "초강력 메디컬 다크히어로",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 3,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 3",
-        "선점 후보 — 경쟁 문서 3건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-10T03:40:22.033Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "호날두 통산 980호골",
-      "issue": "호날두 통산 980호골",
-      "topic": "호날두 통산 980호골",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 28,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 28",
-        "선점 후보 — 경쟁 문서 28건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-10T03:40:22.033Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "남창희 윤영경 임신",
-      "issue": "남창희 윤영경 임신",
-      "topic": "남창희 윤영경 임신",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 200,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 200",
-        "선점 후보 — 경쟁 문서 200건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-10T03:40:22.033Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
   "issues": [
+    {
+      "issue": "사우디아라비아",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": null,
+      "headlines": [
+        {
+          "title": "사우디, 후티 반군 공세에 몰려 고전…미국 참전 여부 주목",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-12T01:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014246132?sid=104"
+        },
+        {
+          "title": "'13명 사망' 하루만에 미사일 '쾅'…사우디 리야드 공항 또 피격(종합3보...",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-11T23:52:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016369779?sid=104"
+        },
+        {
+          "title": "사우디 공세 강화하는 후티... 고민 깊어진 트럼프",
+          "press": "ohmynews.com",
+          "publishedAt": "2026-10-12T05:01:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/047/0002531899?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "사우디아라비아 수도",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "사우디아라비아 전쟁",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "사우디아라비아 여행",
+          "searchVolume": 1540,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "사우디아라비아 시간",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "사우디아라비아 국기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "사우디아라비아 공항",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "사우디아라비아 시차",
+          "searchVolume": 590,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "사우디아라비아 왕",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 1
+    },
+    {
+      "issue": "네이버클라우드",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": null,
+      "headlines": [
+        {
+          "title": "네이버클라우드 베트남 FPT와 협업…APAC 진출 발판 다졌다",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-10-12T06:10:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005424943?sid=105"
+        },
+        {
+          "title": "네이버클라우드, 베트남 FPT와 맞손…\"아시아 AI 클라우드 공략\"",
+          "press": "news.mtn.co.kr",
+          "publishedAt": "2026-10-12T06:04:00.000Z",
+          "link": "https://news.mtn.co.kr/article/2026101211050442213"
+        },
+        {
+          "title": "[AI픽] 네이버클라우드, 베트남 FPT와 AI 인프라 사업 확대",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-12T01:17:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016370109?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "네이버 클라우드 마이박스",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "네이버클라우드 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "네이버 클라우드 용량",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "네이버클라우드 사진첩",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "네이버 클라우드 사용법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "네이버 클라우드 플랫폼",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "네이버 클라우드 무료",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "네이버클라우드 가입하는법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 1
+    },
     {
       "issue": "유현조 HJ중공업 동부건설",
       "issueType": "fresh",
@@ -3938,155 +4296,23 @@
       "nextWave": [],
       "rowCount": 0,
       "carried": true
-    },
-    {
-      "issue": "오픈AI",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "앤트로픽 AI, 미제 살인사건 경찰에 허위 제보 논란",
-      "headlines": [
-        {
-          "title": "AI가 경찰에 미제사건 가짜 제보까지…앤트로픽, 뒤늦게 확인",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-09T23:30:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016368070?sid=104"
-        },
-        {
-          "title": "금융권 연쇄 해킹 도구 지목된 AI '아르텍스' 결국 비공개 전환",
-          "press": "hankookilbo.com",
-          "publishedAt": "2026-10-10T07:43:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/469/0000958665?sid=104"
-        },
-        {
-          "title": "앤트로픽 AI, 美 경찰에 미제 살인 허위 제보…두 달 뒤 당국 통보",
-          "press": "segye.com",
-          "publishedAt": "2026-10-10T10:21:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/022/0004165523?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "오픈ai 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 대표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 종류",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 실적",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 닷츠",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 순위",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "아르텍스 공개 중단",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "한국 금융권 해킹에 악용된 중국 AI 아르텍스가 공개 개발을 중단했다",
-      "headlines": [
-        {
-          "title": "한국 금융권 해킹에 등장한 '아르텍스' 결국 공개 중단",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-10T01:59:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016368174?sid=105"
-        },
-        {
-          "title": "한국 금융권 해킹 공격에 쓰인 '아르텍스', 공개 중단",
-          "press": "news.jtbc.co.kr",
-          "publishedAt": "2026-10-10T06:06:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/437/0000515035?sid=104"
-        },
-        {
-          "title": "금융권 해킹에 쓰인 '아르텍스', 공개 중단…中 개발자 \"악용 우려\"",
-          "press": "news.tvchosun.com",
-          "publishedAt": "2026-10-10T05:25:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/448/0000644077?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "아르텍스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "데이터센터 전문 퍼머스",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "엔비디아가 지원한 데이터센터 기업 퍼머스가 호주 IPO를 철회했다",
-      "headlines": [
-        {
-          "title": "데이터센터 전문 퍼머스, 호주 IPO 철회…'엔비디아 후광'도 안 통했다",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-09T10:30:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216103"
-        },
-        {
-          "title": "[호주 특징주] 엔비디아 지원 퍼머스, 50억달러 IPO 철회…AI 투자 '옥석...",
-          "press": "newspim.com",
-          "publishedAt": "2026-10-09T02:31:00.000Z",
-          "link": "https://www.newspim.com/news/view/20261009000071"
-        },
-        {
-          "title": "\"동남아서 챗GPT 굴린다\"… 오픈AI, 호주 '퍼머스'와 말레이시아 AI 데이...",
-          "press": "g-enews.com",
-          "publishedAt": "2026-09-08T21:56:00.000Z",
-          "link": "https://www.g-enews.com/view.php?ud=2026090823433016850c8c1c064d_1"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "데이터센터",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
     }
-  ]
+  ],
+  "enrichedAt": "2026-10-12T09:23:27.791Z",
+  "enrichStats": {
+    "enriched": 0,
+    "subsAdded": 0,
+    "titleUpgraded": 0,
+    "proposed": 0,
+    "verified": 0,
+    "judged": 0,
+    "judgedBad": 0,
+    "related": 0,
+    "picked": 0,
+    "pooled": 0,
+    "aiTitled": 0,
+    "trended": 0,
+    "aiCalls": 2,
+    "partial": false
+  }
 }
