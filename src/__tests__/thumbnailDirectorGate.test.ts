@@ -28,6 +28,10 @@ let userPhoto = '';
 beforeAll(async () => {
   dir = fs.mkdtempSync(path.join(os.tmpdir(), 'thumb-gate-'));
   saved.base = path.join(dir, 'saved');
+  // writeImageFile resolves the folder inside imageUtils (the module mock above cannot intercept that
+  // internal call); the TEST_MODE guard routes it into this test's folder instead of the real Downloads.
+  process.env.TEST_MODE = '1';
+  process.env.GENERATED_IMAGES_DIR = saved.base;
   aiFile = path.join(dir, 'base.png');
   userPhoto = path.join(dir, 'user.jpg');
   await sharp({ create: { width: 1024, height: 1024, channels: 3, background: '#557799' } }).png().toFile(aiFile);
@@ -173,10 +177,14 @@ describe('generateImagesWithThumbnailDirector', () => {
     );
     expect(generate).not.toHaveBeenCalled();
     expect(images[0]).toMatchObject({ provider: 'collected-image', isCollected: true });
-    // Work files stay inside the test's own folder, and only the chosen thumbnail is kept.
-    const work = path.join(saved.base, 'thumbnail-candidates');
-    expect(path.resolve(images[0].filePath).startsWith(path.resolve(work))).toBe(true);
-    expect(fs.readdirSync(work)).toEqual([path.basename(images[0].filePath)]);
+    // [2026-10-13 사장님 "real-….png 왜 자꾸 다운로드"] Work files are composed in the OS temp dir; the chosen
+    // thumbnail is saved like every other image (under the image folder, never in a thumbnail-candidates dir).
+    expect(fs.existsSync(images[0].filePath)).toBe(true);
+    expect(path.resolve(images[0].filePath).startsWith(path.resolve(saved.base))).toBe(true);
+    expect(images[0].filePath).not.toContain('thumbnail-candidates');
+    expect(path.basename(images[0].filePath)).not.toMatch(/^real-\d+-/);
+    expect(fs.existsSync(path.join(saved.base, 'thumbnail-candidates'))).toBe(false);
+    expect((await sharp(images[0].filePath).metadata()).width).toBe(800);
   });
 
   it('real-photo topic without a usable photo: honest cover plus a one-line notice', async () => {

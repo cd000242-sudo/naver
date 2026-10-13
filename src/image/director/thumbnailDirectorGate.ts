@@ -6,9 +6,11 @@
  * injected by the caller so this module never imports imageGenerator (no cycle).
  */
 import fs from 'fs';
+import os from 'os';
+import path from 'path';
 import type { GenerateImagesOptions, GeneratedImage, ImageRequestItem, ThumbnailDirectorRequest } from '../types.js';
 import { shouldApplyContextualPromptForProvider } from '../contextualImagePrompt.js';
-import { getImageSaveBasePath } from '../imageUtils.js';
+import { writeImageFile } from '../imageUtils.js';
 import { resolveIssueVisionRoute } from '../../crawler/issueHarness/visionRoute.js';
 import { judgeImagesWithRoute } from '../../crawler/issueHarness/visionJudges.js';
 import { toVisionJpegBase64 } from '../../crawler/issueHarness/candidateFetcher.js';
@@ -40,6 +42,30 @@ export interface ThumbnailDirectorContext {
 }
 
 const LOG = '[ThumbnailDirector]';
+
+// [2026-10-13 사장님 "real-….png 이 이미지들은 왜 자꾸 마음대로 다운로드되는거니"] Real-photo candidates were composed
+//   straight into <image folder>/thumbnail-candidates as real-<stamp>-<kind>.png, and the winner stayed there
+//   (272 files in Downloads). Work files now live in the OS temp dir; only the winner is saved like every
+//   other image (posts/<title>/…) and its temp copy is removed.
+const REAL_WORK_DIR = path.join(os.tmpdir(), 'bln-thumbnail-candidates');
+
+async function persistRealWinner(
+  result: ThumbnailDirectorResult,
+  item: ImageRequestItem,
+  title: string,
+  log: (message: string) => void,
+): Promise<ThumbnailDirectorResult> {
+  const { winner } = result;
+  if (!winner.real || !path.resolve(winner.filePath).startsWith(path.resolve(REAL_WORK_DIR))) return result;
+  try {
+    const saved = await writeImageFile(fs.readFileSync(winner.filePath), 'png', item.heading, title, undefined, { keepSize: true });
+    await fs.promises.unlink(winner.filePath).catch(() => undefined);
+    return { ...result, winner: { ...winner, filePath: saved.savedToLocal || saved.filePath } };
+  } catch (error) {
+    log(`${LOG} ⚠️ 채택한 썸네일을 이미지 폴더에 저장하지 못해 작업 파일을 그대로 씁니다: ${(error as Error)?.message || error}`);
+    return result;
+  }
+}
 
 /** The lone thumbnail item this call is about, or null to pass straight through. */
 export function resolveThumbnailDirectorTarget(options: GenerateImagesOptions, config?: unknown): ImageRequestItem | null {
@@ -195,7 +221,7 @@ export async function generateImagesWithThumbnailDirector(
     // The engine draws the copy itself whenever the director decides there is copy (사장님 2026-09-23).
     engineDrawsText,
     realImages,
-    realWorkDir: `${await getImageSaveBasePath()}/thumbnail-candidates`,
+    realWorkDir: REAL_WORK_DIR,
   }, {
     generateBase: async (coverItem) => {
       const images = await context.generate({ ...options, items: [coverItem], thumbnailTextInclude: false, thumbnailDirector: undefined }, apiKeys);
@@ -216,7 +242,7 @@ export async function generateImagesWithThumbnailDirector(
   });
   if (!result) return [];
 
-  let image = toDirectorImage(result, item, provider);
+  let image = toDirectorImage(await persistRealWinner(result, item, title, log), item, provider);
   if (result.engineDrewText) {
     // [2026-09-23 사장님] The engine drew the copy itself — no app overlay on top of it.
     image = withTextInImage(image);

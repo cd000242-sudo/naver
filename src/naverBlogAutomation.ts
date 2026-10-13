@@ -6,6 +6,7 @@ import { waitForLoginRedirectToSettle, isRestartRecoverableEntryError, describeU
 import { explainUserRunStop, resumePausedAccountForUserRun, type UserRunResumeDeps } from './automation/userRunResume.js';
 import { classifyPublishFailure } from './automation/publishFailureClassifier.js';
 import { removeBareUrlParagraphs } from './automation/bareUrlCleanupDom.js';
+import { recoverSubtitleTyping } from './automation/subtitleRecovery.js';
 // [2026-10-11] Plain puppeteer (see browserSessionManager): no puppeteer-extra global plugins on the publish window.
 import puppeteer, { Browser, Dialog, Frame, Page, ElementHandle, KeyInput } from 'puppeteer';
 import type { StructuredContent, ImagePlan } from './contentGenerator.js';
@@ -4626,9 +4627,19 @@ export class NaverBlogAutomation {
       await this.delay(this.DELAYS.SHORT);
 
       // ✅ 6. 검증
-      const verified = await this.verifyContentInDOM(frame, normalizedText, 'subtitle');
+      let verified = await this.verifyContentInDOM(frame, normalizedText, 'subtitle');
       if (!verified) {
-        this.log('   ⚠️ 소제목(인용구) DOM 검증 실패 (계속 진행)');
+        // [2026-10-13] Live 10/11 02:46: the caret had slipped into Naver's hidden input buffer, the heading never
+        //   landed and the section published without it. The quotation block exists (toolbar), so click into it and type again.
+        this.log('   ⚠️ 소제목(인용구) DOM 검증 실패 — 인용구 블록을 눌러 다시 입력합니다');
+        verified = await recoverSubtitleTyping(page, frame, normalizedText, {
+          log: (message) => this.log(message),
+          delay: (ms) => this.delay(ms),
+          verify: () => this.verifyContentInDOM(frame, normalizedText, 'subtitle'),
+        });
+      }
+      if (!verified) {
+        this.log('   ⚠️ 소제목(인용구) 재입력 뒤에도 확인되지 않았습니다 (계속 진행)');
       } else {
         this.log('   ✅ 소제목(인용구) 입력 완료');
       }

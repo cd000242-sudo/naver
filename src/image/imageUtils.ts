@@ -71,6 +71,8 @@ const NEAR_SQUARE_MAX_RATIO = 1.34;
 export interface WriteImageFileOptions {
   /** true 면 자르지 않는다 — 수집/다운로드 이미지 전용. */
   keepAspect?: boolean;
+  /** true 면 크기를 전혀 바꾸지 않는다 — 이미 완성된 800×800 썸네일 카드처럼 다시 키우면 글자가 흐려지는 파일 전용. */
+  keepSize?: boolean;
 }
 
 function resolveGeneratedImageTarget(
@@ -172,8 +174,8 @@ export async function writeImageFile(
       options.keepAspect === true,
       options.keepAspect === true ? null : currentSquareImageTarget(),
     );
-    const targetWidth = target.width;
-    const targetHeight = target.height;
+    const targetWidth = options.keepSize === true ? (metadata.width || 0) : target.width;
+    const targetHeight = options.keepSize === true ? (metadata.height || 0) : target.height;
 
     // 이미지가 목표 크기와 다르면 리사이징 (정사각 목표는 높이도 봐야 한다 — 800x1200 이 그냥 지나가면 안 된다)
     if (metadata.width && (metadata.width !== targetWidth || (metadata.height || 0) !== targetHeight)) {
