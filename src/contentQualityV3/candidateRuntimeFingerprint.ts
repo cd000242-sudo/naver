@@ -784,6 +784,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/renderer/modules/postManager.ts',
   'src/renderer/modules/priceInfoModal.ts',
   'src/renderer/modules/promptTranslation.ts',
+  'src/renderer/modules/publishFlowChooser.ts',
   'src/renderer/modules/publishingHandlers.ts',
   'src/renderer/modules/rendererUtils.ts',
   'src/renderer/modules/revenueOperationsDashboard.ts',

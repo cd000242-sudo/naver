@@ -357,6 +357,7 @@ import { initImageNarrativeMode } from './modules/imageNarrativeMode.js';
 import { initPlacePicker, readPickedPlace, readPickedPlaces } from './modules/placePicker.js';
 import { initLewordBoardPicker } from './modules/lewordBoardPicker.js';
 import { initHeadingControlPanel, renderHeadingList } from './modules/headingControlPanel.js';
+import { initPublishFlowChooser } from './modules/publishFlowChooser.js';
 import { initImageTabTitleMirror } from './modules/contentGeneration.js';
 import { resetPhotoModeForNextPost } from './modules/photoModeReset.js';
 import { initStartupEngineGate } from './modules/startupEngineGate.js';
@@ -912,6 +913,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initSettingsModalFunc(); // ✅ [2026-01-25] 환경설정 모달 초기화
   // [2026-09-09] 소제목 직접 지정 패널 — 모든 모드 공용(반자동 편집 영역)
   initHeadingControlPanel();
+  // [2026-10-13] 글 발행하기 탭을 "원고 가져오기(기본) / 앱에서 생성" 두 흐름으로 — 기존 칸 재배치만.
+  try { initPublishFlowChooser(); } catch (e) { console.warn('[renderer] 흐름 선택 초기화 실패(화면은 그대로):', e); }
   // [2026-09-12] 편집 화면 제목 → 이미지 관리 탭 제목 미러링(붙여넣기 포함).
   try { initImageTabTitleMirror(); } catch { /* 미러링 실패는 화면을 막지 않는다 */ }
 
