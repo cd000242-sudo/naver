@@ -32,7 +32,10 @@ test('every toolbar button has the same size, nothing is squeezed, and there is 
     }, size);
     await page.locator('.tab-button[data-tab="images"]').focus();
     await page.keyboard.press('Enter');
-    await page.waitForTimeout(300);
+    // [2026-10-13] The physical cursor can sit where #launch-leword-btn lands; its :hover scale(1.05) then reads
+    //   as 37.8px (gate 10/13 failed on exactly that). Park the pointer in the corner before measuring.
+    await page.mouse.move(2, 2);
+    await page.waitForTimeout(400);
     const { items, bar } = await toolbarBoxes();
     expect(items.length).toBeGreaterThanOrEqual(5);
     for (const item of items) {
