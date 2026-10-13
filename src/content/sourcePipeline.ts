@@ -26,6 +26,19 @@ export interface SourcePipelineMetrics {
   usedStructured: boolean;
   level: 'ok' | 'warn' | 'weak';
   topicType: TopicType;
+  /** [2026-10-13 A5] Numeric/date facts seen in >= 2 accepted documents (0 in URL mode). */
+  corroboratedFacts: number;
+  /** [2026-10-13 A5] Numeric/date facts only one accepted document carries (0 in URL mode). */
+  singleSourceFacts: number;
+}
+
+/**
+ * [2026-10-13 A5] One user-facing line for the generation result:
+ * "📚 자료 12건 · 확인된 사실 7 · 단일 출처 4". Empty for URL/paraphrase mode (no research round ran).
+ */
+export function formatResearchStatsLine(m: Pick<SourcePipelineMetrics, 'acceptedSources' | 'corroboratedFacts' | 'singleSourceFacts' | 'usedStructured'>): string {
+  if (!m.usedStructured || m.acceptedSources <= 0) return '';
+  return `📚 자료 ${m.acceptedSources}건 · 확인된 사실 ${m.corroboratedFacts} · 단일 출처 ${m.singleSourceFacts}`;
 }
 
 export interface SourcePipelineResult {
@@ -85,7 +98,8 @@ function formatLog(m: SourcePipelineMetrics): string {
     + `unknown_date=${m.unknownDateSources} mode=${m.usedStructured ? 'structured' : 'legacy-bundle'} `
     + `topic=${m.topicType} entity_mismatch=${reasonCount(m.rejectedReasons, 'REJECT_ENTITY_MISMATCH')} `
     + `body_irrelevant=${reasonCount(m.rejectedReasons, 'REJECT_BODY_IRRELEVANT')} too_old=${reasonCount(m.rejectedReasons, 'REJECT_TOO_OLD')} `
-    + `duplicate=${reasonCount(m.rejectedReasons, 'REJECT_DUPLICATE')} low_quality=${reasonCount(m.rejectedReasons, 'REJECT_LOW_SOURCE_QUALITY')}`;
+    + `duplicate=${reasonCount(m.rejectedReasons, 'REJECT_DUPLICATE')} low_quality=${reasonCount(m.rejectedReasons, 'REJECT_LOW_SOURCE_QUALITY')} `
+    + `corroborated=${m.corroboratedFacts} single_source=${m.singleSourceFacts}`;
 }
 
 function cleanDocuments(docs: SourceDocument[]): SourceDocument[] {
@@ -139,6 +153,8 @@ export function prepareSourceMaterial(
       usedStructured: false,
       level: 'ok',
       topicType: 'EVERGREEN',
+      corroboratedFacts: 0,
+      singleSourceFacts: 0,
     };
     metrics.level = levelFor(metrics.removedRatio);
     return { rawText: noise.text, documents: [], ranking: [], metrics, logLine: formatLog(metrics) };
@@ -199,7 +215,8 @@ export function prepareSourceMaterial(
   const rendered = renderSourceDocumentsForWriter(writerDocs);
   // [P1] Research Summary (code-extracted) goes BEFORE the long documents so numbers, dates and
   // official statements — with their source ids — are the first thing the writer reads.
-  const research = buildResearchSummary(writerDocs, keyword).text;
+  const researchSummary = buildResearchSummary(writerDocs, keyword);
+  const research = researchSummary.text;
   const parts = [preambleTierNotice, research, rendered, snippetSection.trim()].filter(Boolean);
   const finalText = parts.join('\n\n');
   // Retention measures CLEANING loss only (chrome stripped from bodies). Relevance/freshness
@@ -220,6 +237,8 @@ export function prepareSourceMaterial(
     usedStructured,
     level: 'ok',
     topicType,
+    corroboratedFacts: researchSummary.corroboratedCount,
+    singleSourceFacts: researchSummary.singleSourceCount,
   };
   metrics.level = levelFor(metrics.removedRatio);
   return { rawText: finalText, documents: scored, ranking, metrics, logLine: formatLog(metrics) };

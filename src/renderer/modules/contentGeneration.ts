@@ -1605,6 +1605,12 @@ export async function generateContentFromKeywords(
     // ✅ 완료!
     showUnifiedProgress(100, '✅ 글 생성 완료!', `${structuredContent.bodyPlain?.length || 0}자 생성됨`);
     appendLog('✅ 키워드 기반 콘텐츠 생성 완료');
+    // [2026-10-13 심층 리서치 A5] 자료가 얼마나, 어떻게 뒷받침됐는지 한 줄 — 생성기가 결과에 붙인 값만 그대로 보여 준다.
+    const researchLine = String((structuredContent as any)?._researchStats?.line || '').trim();
+    if (researchLine) {
+      appendLog(researchLine);
+      if (activeModal.addLog) activeModal.addLog(researchLine);
+    }
 
     // ✅ [v2.11.140] 생성 즉시 글 목록에 저장 — 발행 안 해도 남아야 함(사용자 요청).
     //   saveGeneratedPost가 currentPostId를 설정하므로 이후 발행/수정 시 같은 글로 업데이트(중복 없음).

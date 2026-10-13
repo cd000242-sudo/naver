@@ -451,7 +451,7 @@ import {
 import { OutputTruncatedError, isTruncatedFinishReason, raisedOutputBudget } from './content/outputTruncation.js';
 import { contentTextOf, recordPostProcessStep } from './content/postProcessTrace.js';
 import { buildAttributionEvidence } from './content/attributionEvidence.js';
-import { prepareSourceMaterial } from './content/sourcePipeline.js';
+import { prepareSourceMaterial, formatResearchStatsLine } from './content/sourcePipeline.js';
 import { PartialResponseError } from './jsonParser.js';
 import { STRUCTURED_CONTENT_SCHEMA, assertResponseComplete, describeCompleteness } from './content/structuredResponseContract.js';
 import { describeIntegrity, evaluatePipelineIntegrity } from './content/pipelineIntegrityGate.js';
@@ -9419,8 +9419,18 @@ function attachGenerationIntegrity(
   });
   // Assigned in place: downstream V3 publication tickets and identity-based guards key on this object.
   if (!Object.isExtensible(result)) return result;
+  // [2026-10-13 심층 리서치 A5] 생성 결과에 "자료 N건 · 확인된 사실 M · 단일 출처 K" 한 줄 — 화면 로그가 그대로 보여 준다.
+  const researchLine = formatResearchStatsLine(ctx.pipeline.metrics);
   return Object.assign(result, {
     ...(loop ? { _qualityLoop: summarizeQualityLoopForContent(loop) } : {}),
+    ...(researchLine ? {
+      _researchStats: {
+        sources: ctx.pipeline.metrics.acceptedSources,
+        corroborated: ctx.pipeline.metrics.corroboratedFacts,
+        singleSource: ctx.pipeline.metrics.singleSourceFacts,
+        line: researchLine,
+      },
+    } : {}),
     _generationRunId: run.runId,
     _generationIntegrity: {
       publishDecision: integrity.publishDecision,
