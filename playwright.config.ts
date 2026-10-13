@@ -23,7 +23,9 @@ export default defineConfig({
   //   specs then fail one at a time on different tests (never the same one); a single retry separates that from a
   //   real regression, which fails twice. Default stays 0 for local runs; the release launcher sets E2E_RETRIES=1.
   retries: Number.parseInt(process.env.E2E_RETRIES || '0', 10) || 0,
-  timeout: 60_000,
+  // Also the worker teardown budget ("Worker teardown timeout of N ms"): under the same load the last worker's
+  // Electron shutdown can exceed 60s after every test passed. The release launcher sets E2E_TIMEOUT_MS=150000.
+  timeout: Number.parseInt(process.env.E2E_TIMEOUT_MS || '', 10) || 60_000,
   expect: {
     timeout: 10_000,
   },
