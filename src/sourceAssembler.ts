@@ -4,6 +4,8 @@ import { isSearchRedirectedToHome, looksLikeEmptySearchResult } from './content/
 import { narrowSearchQueries } from './content/searchQueryNarrowing.js';
 import type { NaverSearchParams, NaverSearchType } from './naver/index.js';
 import { orderFullTextCandidates } from './content/fullTextCandidateOrder.js';
+import { assessQueryCoverage, mergeCandidateRounds } from './content/researchRounds.js';
+import { resolveResearchQueriesForCollection } from './content/researchQueryRoute.js';
 import { auditSourceMaterial, classifySourceKind } from './content/sourceMaterialAudit.js';
 import { buildMaterialTierNotice } from './content/materialTierNotice.js';
 import { buildSupplementQuery, filterOnTopicSupplement, isOnTopicForKeyword, isPrimaryTopicMaterial, scoreTopicMatch } from './content/supplementTopicGuard.js';
@@ -1788,6 +1790,8 @@ export async function collectTopArticleFullTexts(
     if (searchKeyword !== keyword) {
       logger(`[상위글 수집] 🔎 검색어를 좁힙니다: "${keyword}" → "${searchKeyword}"`);
     }
+    // [2026-10-13 심층 리서치 A3] 질문 분해(선택 엔진 저비용 1회)는 기본 검색과 겹쳐 돌린다 — 실패·구독 CLI 면 빈 목록.
+    const extraQueriesPromise = resolveResearchQueriesForCollection(searchKeyword, undefined, logger);
     const settled = await Promise.allSettled([
       // [2026-10-13 심층 리서치 A1] 후보 풀 8/4/8/6 → 12/8/12/8: 성공 상한 16건을 채우려면 풀이 더 커야 한다.
       searchNaverForContent(searchKeyword, clientId, clientSecret, 'blog', 12, 'sim'),
@@ -1815,7 +1819,19 @@ export async function collectTopArticleFullTexts(
     // [2026-10-13 A1] 8+10 → 12+14 (성공 상한 16건).
     const mergedNews = mergeRecentFirst(recentNews, newsLinks, 12, (r) => String(r.link || ''));
     const mergedBlogs = mergeRecentFirst(recentBlogs, blogLinks, 14, (r) => String(r.link || ''));
-    const candidates = orderFullTextCandidates({ news: mergedNews, blogs: mergedBlogs });
+    const baseCandidates = orderFullTextCandidates({ news: mergedNews, blogs: mergedBlogs });
+    // [2026-10-13 심층 리서치 A3] 질문별 검색 라운드: 질문마다 뉴스 4·블로그 4(관련도순)를 더 찾아 기본 후보 뒤에 붙인다.
+    const extraQueries = await extraQueriesPromise;
+    let extraCandidates: typeof baseCandidates = [];
+    if (extraQueries.length > 0 && remainingMs() > FULLTEXT_STOP_MARGIN_MS) {
+      const extraSettled = await Promise.allSettled(extraQueries.flatMap((q) => [
+        searchNaverForContent(q, clientId, clientSecret, 'news', 4, 'sim'),
+        searchNaverForContent(q, clientId, clientSecret, 'blog', 4, 'sim'),
+      ]));
+      extraCandidates = extraSettled.flatMap((r) => (r.status === 'fulfilled' ? r.value : [])) as typeof baseCandidates;
+      logger(`[심층 리서치] 질문 ${extraQueries.length}개 검색 → 후보 ${extraCandidates.length}건 추가 (기본 ${baseCandidates.length}건)`);
+    }
+    const candidates = mergeCandidateRounds(baseCandidates, extraCandidates);
 
     const parts: string[] = [];
     const usedUrls: string[] = [];
@@ -1826,7 +1842,9 @@ export async function collectTopArticleFullTexts(
     let secondaryDropped = 0;   // [2026-09-02] 곁가지 몫 초과로 버린 자료 수
 
     let stoppedByDeadline = false;
-    for (const candidate of candidates) {
+    const seenCandidateLinks = new Set(candidates.map((c) => String(c.link || '')));
+    const runRound = async (roundCandidates: typeof candidates): Promise<void> => {
+    for (const candidate of roundCandidates) {
       if (parts.length >= FULLTEXT_MAX_SUCCESS || totalChars >= FULLTEXT_TOTAL_BUDGET_CHARS) break;
       // 남은 시간이 없으면 새로 시작하지 않는다 — 확보한 만큼 돌려주는 게 전부 잃는 것보다 낫다
       if (remainingMs() <= FULLTEXT_STOP_MARGIN_MS) { stoppedByDeadline = true; break; }
@@ -1929,6 +1947,32 @@ export async function collectTopArticleFullTexts(
         await new Promise((resolve) => setTimeout(resolve, 300));
       } catch {
         // Per-URL failures are expected (deleted posts, blocks) — keep going.
+      }
+    }
+    };
+    await runRound(candidates);
+
+    // [2026-10-13 심층 리서치 A4] 갭 보충(모델 호출 없음): 수집 본문이 아직 답하지 않은 질문만 골라 한 번 더 찾는다.
+    if (
+      extraQueries.length > 0 && !stoppedByDeadline
+      && parts.length < FULLTEXT_MAX_SUCCESS && totalChars < FULLTEXT_TOTAL_BUDGET_CHARS
+      && remainingMs() > FULLTEXT_STOP_MARGIN_MS + 6000
+    ) {
+      const coverage = assessQueryCoverage(extraQueries, parts.join('\n'), keyword);
+      const missing = coverage.missing.slice(0, 3);
+      if (missing.length === 0) {
+        logger(`[심층 리서치] 질문 ${extraQueries.length}개가 1차 수집에 모두 들어 있어 2차 검색을 생략합니다.`);
+      } else {
+        const secondSettled = await Promise.allSettled(missing.flatMap((q) => [
+          searchNaverForContent(q, clientId, clientSecret, 'news', 4, 'sim'),
+          searchNaverForContent(q, clientId, clientSecret, 'blog', 4, 'sim'),
+        ]));
+        const secondRound = mergeCandidateRounds([], secondSettled.flatMap((r) => (r.status === 'fulfilled' ? r.value : [])) as typeof candidates)
+          .filter((c) => !seenCandidateLinks.has(String(c.link || '')));
+        const before = parts.length;
+        logger(`[심층 리서치] 빠진 질문 ${missing.length}개(${missing.join(' · ')}) → 2차 후보 ${secondRound.length}건 수집 시작`);
+        await runRound(secondRound);
+        logger(`[심층 리서치] 2차 수집 ${parts.length - before}건 추가 (총 ${parts.length}건 · ${totalChars.toLocaleString()}자)`);
       }
     }
 

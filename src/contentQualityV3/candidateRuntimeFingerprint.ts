@@ -242,6 +242,8 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/content/regenerationFallback.ts',
   'src/content/relativeDateResolution.ts',
   'src/content/researchNoteHygiene.ts',
+  'src/content/researchQueryRoute.ts',
+  'src/content/researchRounds.ts',
   'src/content/researchSummary.ts',
   'src/content/revenueEngine.ts',
   'src/content/reviewDecisionBlueprint.ts',
