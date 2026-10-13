@@ -1240,7 +1240,9 @@ export async function generateContentFromKeywords(
       // [2026-09-22 audit H8] The old log claimed "최근 30일 이내 자료만 수집" — the Naver search API
       //   ignores date parameters. Freshness is applied per document downstream (applyFreshnessPolicy).
       appendLog(`📅 ${scheduleDate ? '발행 날짜' : '오늘 날짜'} 기준: ${targetCrawlDate} (자료 게시일은 수집 후 개별 표시·필터)`);
-      const crawlResult = await withTimeout(window.api.collectContentFromPlatforms(searchQuery, crawlOptions), 30000, '실시간 크롤링');
+      // [2026-10-13 심층 리서치 A1] 30초 → 60초: 메인의 본문 수집 예산(FULLTEXT_COLLECT_BUDGET_MS 45초)보다 넉넉히 길어야
+      //   모은 자료가 여기서 통째로 버려지지 않는다(realtimeCrawlPartialResult 불변식: 차이 ≥ 5초).
+      const crawlResult = await withTimeout(window.api.collectContentFromPlatforms(searchQuery, crawlOptions), 60000, '실시간 크롤링');
       noteCrawlResult(crawlResult);
 
       if (crawlResult.success && crawlResult.collectedText) {

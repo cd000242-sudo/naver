@@ -9,6 +9,11 @@ export interface ResearchFact {
   sourceId: string;
   sentence: string;
   kind: 'number' | 'date' | 'statement';
+  /**
+   * [2026-10-13 A2] How many accepted documents carry the same number/date token. 1 = only this source
+   * says it ("단일 출처"); >= 2 = corroborated. Undefined for statements and facts without a token.
+   */
+  corroboration?: number;
 }
 
 export interface ResearchConflict {
@@ -23,6 +28,10 @@ export interface ResearchSummary {
   readerQuestions: string[];
   conflicts: ResearchConflict[];
   sourceIds: string[];
+  /** [A2] Numeric/date items seen in >= 2 documents. */
+  corroboratedCount: number;
+  /** [A2] Numeric/date items only one document carries. */
+  singleSourceCount: number;
   text: string;
 }
 
@@ -31,9 +40,10 @@ const DATE_RE = /(?:20\d{2}년\s*)?\d{1,2}월\s*\d{1,2}일|20\d{2}년\s*\d{1,2}�
 const STATEMENT_RE = /(?:에\s*따르면|밝혔다|발표했다|발표한|공식\s*(?:발표|입장|안내)|관계자는|설명했다|전했다|기준으로)/;
 const QUESTION_RE = /(?:일까|나요|을까|ㄹ까|할까|되나|되나요|어떻게|왜|언제|얼마|가능할까|되는지|무엇)/;
 
-const MAX_PER_BUCKET = 12;
+// [2026-10-13 A1] 12 → 16 / 3200 → 4200: the collector now keeps up to 16 documents (was 8).
+const MAX_PER_BUCKET = 16;
 const MAX_SENTENCE_CHARS = 140;
-const MAX_TEXT_CHARS = 3200;
+const MAX_TEXT_CHARS = 4200;
 
 function splitSentences(text: string): string[] {
   return String(text || '')
@@ -66,6 +76,34 @@ function metricLabel(sentence: string): string | null {
 function numberToken(sentence: string): string | null {
   const m = sentence.match(/\d[\d,.]*\s*(?:원|만원|억|%|%p|명|건|회|일|년)/);
   return m ? m[0].replace(/\s+/g, '') : null;
+}
+
+/** Token used to check whether another document repeats the same figure: number+unit, or a date. */
+function corroborationToken(fact: ResearchFact): string | null {
+  if (fact.kind === 'date') {
+    const m = fact.sentence.match(DATE_RE);
+    return m ? m[0].replace(/\s+/g, '') : null;
+  }
+  return numberToken(fact.sentence);
+}
+
+/**
+ * [2026-10-13 A2] Cross-source check, code only: a number/date that two or more accepted documents repeat is
+ * "확인됨"; one that a single document carries is "단일 출처" and the writer is told not to state it flatly.
+ */
+function corroborate(items: ResearchFact[], bodies: ReadonlyMap<string, string>): ResearchFact[] {
+  return items.map((fact) => {
+    const token = corroborationToken(fact);
+    if (!token) return fact;
+    let count = 0;
+    for (const body of bodies.values()) if (body.includes(token)) count += 1;
+    return { ...fact, corroboration: Math.max(1, count) };
+  });
+}
+
+function corroborationMark(fact: ResearchFact): string {
+  if (fact.corroboration === undefined) return '';
+  return fact.corroboration >= 2 ? ` ✔ 자료 ${fact.corroboration}건 일치` : ' ⚠ 단일 출처';
 }
 
 function findConflicts(facts: ResearchFact[]): ResearchConflict[] {
@@ -108,21 +146,29 @@ export function buildResearchSummary(docs: readonly SourceDocument[], keyword: s
     if (title && QUESTION_RE.test(title) && questions.length < 6 && !questions.includes(title)) questions.push(title);
   }
 
-  const cleanFacts = dedupe(facts);
+  // Whitespace-free bodies so "3,000 원" and "3,000원" match the same token.
+  const bodies = new Map(accepted.map((d) => [d.id, String(d.cleanedBody ?? d.body).replace(/\s+/g, '')]));
+  const cleanFacts = corroborate(dedupe(facts), bodies);
   const cleanStatements = dedupe(statements);
-  const cleanDates = dedupe(dates);
+  const cleanDates = corroborate(dedupe(dates), bodies);
+  const checked = [...cleanFacts, ...cleanDates].filter((f) => f.corroboration !== undefined);
+  const corroboratedCount = checked.filter((f) => (f.corroboration ?? 0) >= 2).length;
+  const singleSourceCount = checked.length - corroboratedCount;
   const conflicts = findConflicts([...cleanFacts, ...cleanStatements, ...cleanDates]);
   const sourceIds = accepted.map((d) => d.id);
 
-  const lines: string[] = [`[리서치 요약 — 코드 추출, 자료 ${accepted.length}건 · 주제: ${keyword}]`];
+  const lines: string[] = [`[리서치 요약 — 코드 추출, 자료 ${accepted.length}건 · 확인된 사실 ${corroboratedCount} · 단일 출처 ${singleSourceCount} · 주제: ${keyword}]`];
   lines.push('※ 아래 항목은 자료에서 그대로 뽑은 문장이다. 숫자·날짜·기관명은 이 표기를 유지하고, 항목 끝 (Sxx)는 출처 번호이니 본문에는 옮기지 말고 기관·매체 이름으로 귀속한다.');
+  if (singleSourceCount > 0) {
+    lines.push('※ "⚠ 단일 출처" 수치·날짜는 한 자료만 말한 것이다 — "A 자료 기준" 처럼 출처를 밝혀 쓰고 사실로 단정하지 않는다. "✔ 자료 N건 일치"는 여러 자료가 같은 값을 적은 것이다.');
+  }
   if (cleanFacts.length) {
     lines.push('■ 숫자 사실');
-    for (const f of cleanFacts.slice(0, MAX_PER_BUCKET)) lines.push(`- ${f.sentence} (${f.sourceId})`);
+    for (const f of cleanFacts.slice(0, MAX_PER_BUCKET)) lines.push(`- ${f.sentence} (${f.sourceId})${corroborationMark(f)}`);
   }
   if (cleanDates.length) {
     lines.push('■ 날짜·일정');
-    for (const f of cleanDates.slice(0, 8)) lines.push(`- ${f.sentence} (${f.sourceId})`);
+    for (const f of cleanDates.slice(0, 8)) lines.push(`- ${f.sentence} (${f.sourceId})${corroborationMark(f)}`);
   }
   if (cleanStatements.length) {
     lines.push('■ 공식 발표·귀속 문장');
@@ -139,5 +185,8 @@ export function buildResearchSummary(docs: readonly SourceDocument[], keyword: s
   let text = lines.join('\n');
   if (text.length > MAX_TEXT_CHARS) text = `${text.slice(0, MAX_TEXT_CHARS - 1)}…`;
 
-  return { facts: cleanFacts, statements: cleanStatements, dates: cleanDates, readerQuestions: questions, conflicts, sourceIds, text };
+  return {
+    facts: cleanFacts, statements: cleanStatements, dates: cleanDates, readerQuestions: questions, conflicts, sourceIds,
+    corroboratedCount, singleSourceCount, text,
+  };
 }

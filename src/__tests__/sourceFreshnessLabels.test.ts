@@ -112,7 +112,8 @@ describe('배선', () => {
     // [2026-09-01] 호출 인자까지 통째로 박제했더니, 검색어 변수명이 바뀌자
     //   ('keyword' -> 'searchKeyword', 문장형 키워드 좁힘) 의도와 무관하게 깨졌다.
     //   이 테스트의 뜻은 "date 정렬을 함께 긁는가" 하나다. 그것만 본다.
-    expect(assembler).toMatch(/searchNaverForContent\([^)]*'blog',\s*8,\s*'date'\)/u);
+    // [2026-10-13 심층 리서치 A1] 최신순 블로그 후보 8 → 12.
+    expect(assembler).toMatch(/searchNaverForContent\([^)]*'blog',\s*12,\s*'date'\)/u);
     expect(assembler).toContain('mergeRecentFirst(recentBlogs, blogLinks');
   });
 

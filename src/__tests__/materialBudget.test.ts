@@ -64,6 +64,9 @@ describe('수집 예산 — 설계도가 받을 수 있는 만큼 모은다', ()
 
   it('본문 건수도 함께 늘린다 — 예산만 늘리면 건수 상한에 걸린다', () => {
     expect(value('FULLTEXT_MAX_SUCCESS')).toBeGreaterThan(5);
+    // [2026-10-13 심층 리서치 A1] 16건·40,000자 — 첫 검색에 안 걸린 사실도 재료에 들어오게.
+    expect(value('FULLTEXT_MAX_SUCCESS')).toBeGreaterThanOrEqual(16);
+    expect(value('FULLTEXT_TOTAL_BUDGET_CHARS')).toBeGreaterThanOrEqual(40_000);
   });
 
   it('수집 예산이 설계도 상한을 넘지 않는다 — 모아도 못 쓰면 시간만 버린다', () => {

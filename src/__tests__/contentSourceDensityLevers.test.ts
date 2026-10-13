@@ -36,8 +36,9 @@ describe('lever 1: full-text merge on top of snippets (keyword flows)', () => {
   it('uses relevance sort for full-text candidates without changing snippet callers', () => {
     // New optional param defaults to 'date' — existing snippet calls unchanged.
     expect(code).toMatch(/sort: 'date' \| 'sim' = 'date'/);
-    expect(code).toMatch(/'blog', 8, 'sim'/);
-    expect(code).toMatch(/'news', 4, 'sim'/);
+    // [2026-10-13 심층 리서치 A1] 후보 풀 8/4 → 12/8.
+    expect(code).toMatch(/'blog', 12, 'sim'/);
+    expect(code).toMatch(/'news', 8, 'sim'/);
   });
 });
 

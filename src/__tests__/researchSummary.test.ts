@@ -43,8 +43,38 @@ describe('buildResearchSummary', () => {
     const docs = [doc('S01', long), doc('S02', '무관한 자료 5,000원', '무관', false)];
     const s = buildResearchSummary(docs, 'k');
     expect(s.sourceIds).toEqual(['S01']);
-    expect(s.text.length).toBeLessThanOrEqual(3200);
+    expect(s.text.length).toBeLessThanOrEqual(4200);
     expect(s.text).not.toContain('(S02)');
+  });
+
+  // [2026-10-13 A2] Cross-source check: the same figure in two documents is "확인됨", a lone figure is "단일 출처".
+  it('marks figures repeated by another document as corroborated and lone figures as single-source', () => {
+    const docs = [
+      doc('S01', '청년도약계좌 정부기여금은 월 최대 33,000원이다. 신청은 10월 7일부터다.'),
+      doc('S02', '정부기여금 월 최대 33,000원으로 올해 확대됐다. 가입 대상은 총급여 7,500만원 이하다.'),
+      doc('S03', '서민금융진흥원에 따르면 가입자가 200만명을 넘었다.'),
+    ];
+    const s = buildResearchSummary(docs, '청년도약계좌');
+    const kept = s.facts.find((f) => f.sentence.includes('33,000원') && f.sourceId === 'S01');
+    expect(kept?.corroboration).toBe(2);
+    const lone = s.facts.find((f) => f.sentence.includes('7,500만원'));
+    expect(lone?.corroboration).toBe(1);
+    const date = s.dates.find((f) => f.sentence.includes('10월 7일'));
+    expect(date?.corroboration).toBe(1);
+    expect(s.corroboratedCount).toBe(2); // S01 and S02 both carry 33,000원
+    expect(s.singleSourceCount).toBeGreaterThanOrEqual(2);
+    expect(s.text).toContain('확인된 사실 2 · 단일 출처 2');
+    expect(s.text).toContain('33,000원이다. (S01) ✔ 자료 2건 일치');
+    expect(s.text).toContain('(S02) ⚠ 단일 출처');
+    expect(s.text).toContain('출처를 밝혀 쓰고 사실로 단정하지 않는다');
+  });
+
+  it('statements carry no corroboration mark and a summary without lone figures omits the warning line', () => {
+    const docs = [doc('S01', '금리는 연 3.1%다.'), doc('S02', '금리는 연 3.1%로 안내됐다.')];
+    const s = buildResearchSummary(docs, 'k');
+    expect(s.singleSourceCount).toBe(0);
+    expect(s.text).not.toContain('⚠ 단일 출처');
+    expect(s.statements.every((f) => f.corroboration === undefined)).toBe(true);
   });
 
   it('returns an empty-but-valid summary when there are no accepted documents', () => {

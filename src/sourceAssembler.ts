@@ -1718,7 +1718,8 @@ async function collectNaverSearchContent(
  */
 // [2026-09-22 P1] 18000 → 20000, 건당 2500 → 3200: 관련도 v2 가 무관 자료를 거르면 남는 자료가 절반이라
 //   지시문:자료 비율이 8:1 로 벌어졌다(라이브 청약통장 금리). 통과한 자료가 더 길게 실리게 한다.
-const FULLTEXT_TOTAL_BUDGET_CHARS = 20000;
+// [2026-10-13 심층 리서치 A1] 20000 → 40000: 설계도가 재료를 압축하므로 본문 호출 비용은 그대로다(materialBudget).
+const FULLTEXT_TOTAL_BUDGET_CHARS = 40000;
 /*
  * [2026-09-02 실측] 곁가지 자료의 몫 상한.
  *
@@ -1733,7 +1734,8 @@ const FULLTEXT_TOTAL_BUDGET_CHARS = 20000;
 const FULLTEXT_SECONDARY_RATIO = 0.3;
 const FULLTEXT_PER_ARTICLE_CHARS = 3200;
 // [2026-09-11] 5 → 8. 예산만 늘리면 건수 상한에 먼저 걸린다.
-const FULLTEXT_MAX_SUCCESS = 8;
+// [2026-10-13 심층 리서치 A1] 8 → 16. 첫 검색에 안 걸린 사실은 글에 못 들어가던 것이 품질의 뿌리였다.
+const FULLTEXT_MAX_SUCCESS = 16;
 
 /**
  * [2026-08-11] 한 편이 오래 걸려도 **확보한 만큼은 건진다.**
@@ -1754,7 +1756,8 @@ const FULLTEXT_STOP_MARGIN_MS = 2000;
  * 렌더러 상한이 30초인데(contentGeneration.ts:1051) 그 안에는 검색 API 호출과
  * IPC 왕복도 들어간다. 20초로 잡아 **렌더러가 끊기 전에 반드시 반환**되게 한다.
  */
-const FULLTEXT_COLLECT_BUDGET_MS = 20000;
+// [2026-10-13 심층 리서치 A1] 20초 → 45초: 수집은 순차라 16건이면 시간이 더 필요하다.
+const FULLTEXT_COLLECT_BUDGET_MS = 45000;
 
 export async function collectTopArticleFullTexts(
   keyword: string,
@@ -1786,12 +1789,13 @@ export async function collectTopArticleFullTexts(
       logger(`[상위글 수집] 🔎 검색어를 좁힙니다: "${keyword}" → "${searchKeyword}"`);
     }
     const settled = await Promise.allSettled([
-      searchNaverForContent(searchKeyword, clientId, clientSecret, 'blog', 8, 'sim'),
-      searchNaverForContent(searchKeyword, clientId, clientSecret, 'news', 4, 'sim'),
-      searchNaverForContent(searchKeyword, clientId, clientSecret, 'blog', 8, 'date'),
+      // [2026-10-13 심층 리서치 A1] 후보 풀 8/4/8/6 → 12/8/12/8: 성공 상한 16건을 채우려면 풀이 더 커야 한다.
+      searchNaverForContent(searchKeyword, clientId, clientSecret, 'blog', 12, 'sim'),
+      searchNaverForContent(searchKeyword, clientId, clientSecret, 'news', 8, 'sim'),
+      searchNaverForContent(searchKeyword, clientId, clientSecret, 'blog', 12, 'date'),
       // [2026-08-27] 최신 기사를 따로 찾는다. 이슈 키워드는 방금 나온 기사가 뼈대다 —
       //   sim 만 보면 오래된 기사가 상위를 차지해 지금 사건을 놓친다.
-      searchNaverForContent(searchKeyword, clientId, clientSecret, 'news', 6, 'date'),
+      searchNaverForContent(searchKeyword, clientId, clientSecret, 'news', 8, 'date'),
     ]);
     const blogLinks = settled[0].status === 'fulfilled' ? settled[0].value : [];
     const newsLinks = settled[1].status === 'fulfilled' ? settled[1].value : [];
@@ -1808,8 +1812,9 @@ export async function collectTopArticleFullTexts(
      * 기사가 1차 자료다. 결과물의 형식은 프롬프트가 정하지 재료가 정하지 않는다.
      */
     // [2026-09-22 P1] 후보 풀 6+8 → 8+10: 수집 시점 관련도 사전검사가 무관 기사를 건너뛰므로 여유가 필요하다.
-    const mergedNews = mergeRecentFirst(recentNews, newsLinks, 8, (r) => String(r.link || ''));
-    const mergedBlogs = mergeRecentFirst(recentBlogs, blogLinks, 10, (r) => String(r.link || ''));
+    // [2026-10-13 A1] 8+10 → 12+14 (성공 상한 16건).
+    const mergedNews = mergeRecentFirst(recentNews, newsLinks, 12, (r) => String(r.link || ''));
+    const mergedBlogs = mergeRecentFirst(recentBlogs, blogLinks, 14, (r) => String(r.link || ''));
     const candidates = orderFullTextCandidates({ news: mergedNews, blogs: mergedBlogs });
 
     const parts: string[] = [];

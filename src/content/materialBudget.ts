@@ -14,7 +14,8 @@
 
 export const MATERIAL_BUDGET = Object.freeze({
   /** 설계도(Blueprint)에 넘길 재료 상한. buildBlueprintPrompt 의 기본 상한과 같다. */
-  blueprintMaxChars: 30_000,
+  // [2026-10-13 심층 리서치 A1] 30,000 → 45,000 (수집 40,000자 + 리서치 요약·스니펫).
+  blueprintMaxChars: 45_000,
   /** 본문 프롬프트의 [원본 텍스트] 상한. 여기를 키우면 편당 본문 호출이 바로 비싸진다. */
   bodyMaxChars: 10_000,
 });

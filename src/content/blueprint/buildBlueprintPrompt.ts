@@ -21,7 +21,8 @@ export interface BlueprintPromptInput {
   readonly confirmedTitle?: string;
 }
 
-const DEFAULT_MATERIAL_MAX_CHARS = 30_000;
+// [2026-10-13 심층 리서치 A1] 30,000 → 45,000 — materialBudget.blueprintMaxChars 와 같다.
+const DEFAULT_MATERIAL_MAX_CHARS = 45_000;
 
 function modeFraming(mode: string): string {
   if (mode === 'homefeed') {
