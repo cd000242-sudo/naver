@@ -5,6 +5,7 @@
  */
 import { useEffect, useMemo, useState } from 'react';
 import { shuffleWithinTiers } from '../../../lib/hourlyShuffle.mjs';
+import { withGuides } from '../../../lib/homefeedGuides.mjs';
 import { useShuffleSeed } from '../../../lib/useShuffleSeed';
 import HomefeedBenchmarkStyles from '../homefeed/HomefeedBenchmarkStyles';
 import { bridgeBenchmarkTitles } from '../../../lib/bridge';
@@ -152,6 +153,21 @@ function AdsenseCardView({ c }: { c: AdsenseCard }) {
                 <span>파워링크 3위 입찰가<b>{typeof c.metrics?.bid === 'number' ? `${c.metrics.bid.toLocaleString('ko-KR')}원` : '미측정'}</b></span>
             </div>
             {c.why?.length > 0 && <div className="hfb-why"><span>검토 이유</span><ul>{c.why.map((w) => <li key={w}>{w}</li>)}</ul></div>}
+            {/* 작성 안내(2026-10-13 사장님 "애드센스도 글 쓰는 방향 · 넣을 것 · 넣지 말 것") — 안내가 있는 카드에만 */}
+            {c.writingDirection && (
+                <div className="hfb-direction">
+                    <h4>이렇게 쓰세요</h4>
+                    <p>{c.writingDirection}</p>
+                    {(c.searchTargets?.length ?? 0) > 0 && <p className="hfb-alternatives"><span>노릴 검색어 · 네이버 자동완성</span> {c.searchTargets!.join(' · ')}</p>}
+                </div>
+            )}
+            {((c.mustInclude?.length ?? 0) > 0 || (c.mustAvoid?.length ?? 0) > 0) && (
+                <div className="hfb-writing-grid">
+                    {(c.mustInclude?.length ?? 0) > 0 && <div className="hfb-points include"><h4>반드시 들어갈 내용</h4><ul>{c.mustInclude!.map((t, i) => <li key={i}>{t}</li>)}</ul></div>}
+                    {(c.mustAvoid?.length ?? 0) > 0 && <div className="hfb-points avoid"><h4>넣지 않을 내용</h4><ul>{c.mustAvoid!.map((t, i) => <li key={i}>{t}</li>)}</ul></div>}
+                </div>
+            )}
+            {(c.verificationNeeded?.length ?? 0) > 0 && <div className="hfb-verify"><b>작성 전 확인</b> {c.verificationNeeded!.join(' · ')}</div>}
             <SearchTitles c={c} />
             <div className="hfb-title-box">
                 <div className="hfb-title-head"><h4>고수들이 쓴 제목 <span>{c.sources.length}개</span></h4></div>
@@ -181,9 +197,11 @@ export default function AdsenseBenchmarkBoard() {
 
     useEffect(() => {
         const controller = new AbortController();
+        // 작성 안내는 따로 쌓이는 파일(2026-10-13 안내 작업이 카드마다 지음) — 못 받아도 판은 그린다(안내 칸만 빈다).
+        const guidesFile = fetch('/data/adsense-benchmark-guides.json', { cache: 'no-store', signal: controller.signal }).then((r) => (r.ok ? r.json() : null)).catch(() => null);
         fetch('/data/adsense-benchmarks.json', { cache: 'no-store', signal: controller.signal })
             .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
-            .then((data: AdsenseBoard) => { if (data && Array.isArray(data.candidates)) setBoard(data); else setError('판 형식이 올바르지 않습니다.'); })
+            .then(async (data: AdsenseBoard) => { if (data && Array.isArray(data.candidates)) setBoard(withGuides(data, await guidesFile)); else setError('판 형식이 올바르지 않습니다.'); })
             .catch((e) => { if ((e as Error)?.name !== 'AbortError') setError('애드센스 벤치마크 판을 불러오지 못했습니다 — 잠시 뒤 다시 열어 주세요.'); })
             .finally(() => setLoading(false));
         return () => controller.abort();

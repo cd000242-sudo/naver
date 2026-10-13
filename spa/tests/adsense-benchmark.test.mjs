@@ -92,3 +92,12 @@ test('검색용 제목마다 고수보다 나은 점(titleEdges · 브리지 edg
   const bridge = readFileSync(new URL('../src/lib/bridge.ts', import.meta.url), 'utf8');
   assert.ok(bridge.includes('edges?: string[]'));
 });
+
+// 2026-10-13 사장님 "오늘의 글감처럼 애드센스도 글 쓰는 방향과 넣을 것 · 넣지 말 것" — 앱 레포 adsense-guides.yml 이 지은 안내 파일을 합쳐 그린다
+test('애드센스 작성 안내 — 안내 파일을 판과 합쳐(withGuides) 카드에 방향 · 노릴 검색어 · 반드시 · 넣지 말 것 · 작성 전 확인을 그린다', () => {
+  const src = readFileSync(new URL('../src/components/leword/adsense/AdsenseBenchmarkBoard.tsx', import.meta.url), 'utf8');
+  assert.match(src, /\/data\/adsense-benchmark-guides\.json/);
+  assert.match(src, /withGuides\(/);
+  for (const label of ['이렇게 쓰세요', '노릴 검색어', '반드시 들어갈 내용', '넣지 않을 내용', '작성 전 확인']) assert.ok(src.includes(label), label);
+  assert.match(src, /c\.writingDirection &&/, '안내가 없는 카드는 칸을 그리지 않는다');
+});
