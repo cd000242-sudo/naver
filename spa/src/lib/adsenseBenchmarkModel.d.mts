@@ -6,6 +6,8 @@ export interface AdsenseCard {
   titles: string[]; sources: AdsenseSource[];
   /** titles 와 같은 순서 — 그 제목이 고수 제목보다 나은 점(같은 채점표로 가장 높은 고수 제목을 넘은 것만 실린다). */
   titleEdges?: string[]; masterBest?: number;
+  /** 작성 안내(2026-10-13, 앱 레포 adsense-guides.yml → /data/adsense-benchmark-guides.json 을 화면이 합친다). 없으면 칸을 안 그린다. */
+  writingDirection?: string; searchTargets?: string[]; mustInclude?: string[]; mustAvoid?: string[]; verificationNeeded?: string[];
 }
 export interface AdsenseTitleShape { count: number; lengthMedian: number | null; yearPct: number | null; numberPct: number | null; questionPct: number | null; bracketPct: number | null }
 export interface AdsenseBoard {
