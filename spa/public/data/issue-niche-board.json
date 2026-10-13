@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-10-12T21:33:57.043Z",
+  "publishedAt": "2026-10-13T03:02:27.234Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
     "candidates": 240,
-    "niche": 1,
-    "preemption": 28,
+    "niche": 0,
+    "preemption": 27,
     "pending": 0
   },
   "freeSample": {
@@ -194,7 +194,8 @@
         "provider": "claude",
         "proposed": 7,
         "verified": 2
-      }
+      },
+      "carried": true
     },
     {
       "keyword": "사우디아라비아 시차",
@@ -580,7 +581,7 @@
         }
       ],
       "whySearch": {
-        "text": "오르카라우터가 100만 토큰 컨텍스트의 사이버 보안 모델을 공개했다.",
+        "text": "오르카라우터, 100만 토큰 컨텍스트 사이버 보안 모델 공개",
         "basis": "뉴스 헤드라인 2건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "분류 안 됨",
@@ -588,12 +589,12 @@
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "오르카라우터 컨텍스트 100만 토큰 사이버 보안 모델 정체",
+          "text": "오르카라우터 컨텍스트 100만 토큰 보안 모델 공개",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "오르카라우터 컨텍스트 100만 토큰이 사이버 보안용이라는 게 생각보다 중요하더라고요",
+          "text": "오르카라우터 컨텍스트 100만 토큰 된다는데 보안 모델이라 좀 걸리네요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -604,7 +605,1812 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-12T21:24:32.777Z",
+      "measuredAt": "2026-10-13T02:51:54.943Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "Ai2 몰모액트 2",
+      "issue": "Ai2",
+      "topic": "Ai2",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 5,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 5",
+        "선점 후보 — 경쟁 문서 5건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "Ai2, MoE 효율 높인 올모 코어 3 오픈소스 공개",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "Ai2 몰모액트 2 오픈소스 로봇 AI 공개, 스탠퍼드 의대 실험실 적용",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "Ai2 몰모액트 2 나왔는데 스탠퍼드 의대 실험실이 자꾸 같이 언급되더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-13T02:51:54.943Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "아나토미 에스테틱 강남",
+      "issue": "아나토미",
+      "topic": "아나토미",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 144,
+      "documentCountMeasured": true,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 10",
+        "문서수 144",
+        "선점 후보 — 경쟁 문서 144건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "클로드 코드용 아나토미 공개, 말로 3D 기계 그려",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "아나토미 에스테틱 강남 가격대와 실제 후기 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "아나토미 에스테틱 강남 가격만 보고 고르면 많이들 놓치는 게 있어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-13T02:51:54.943Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "오르카라우터 사용법",
+      "issue": "오르카라우터",
+      "topic": "오르카라우터",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "모델 활용 방법",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 7,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 7",
+        "선점 후보 — 경쟁 문서 7건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 모델 활용 방법"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "오르카라우터, 100만 토큰 컨텍스트 사이버 보안 모델 공개",
+        "basis": "뉴스 헤드라인 2건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "오르카라우터 사용법 100만 토큰 컨텍스트 설정 방법",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "오르카라우터 사용법 100만 토큰 컨텍스트 설정에서 많이들 헷갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-13T02:51:54.943Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "오르카라우터 보안",
+      "issue": "오르카라우터",
+      "topic": "오르카라우터",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 8,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 8",
+        "선점 후보 — 경쟁 문서 8건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "오르카라우터, 100만 토큰 컨텍스트 사이버 보안 모델 공개",
+        "basis": "뉴스 헤드라인 2건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "오르카라우터 보안 모델 100만 토큰 컨텍스트 실제 성능",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "오르카라우터 보안 모델 100만 토큰이면 기존이랑 뭐가 다른지 봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-13T02:51:54.943Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "몰모액트 2",
+      "issue": "Ai2",
+      "topic": "Ai2",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "로봇 AI 관심",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 10,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 10",
+        "선점 후보 — 경쟁 문서 10건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 로봇 AI 관심"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "Ai2, MoE 효율 높인 올모 코어 3 오픈소스 공개",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "몰모액트 2 Ai2 오픈소스 로봇 AI 뭐가 바뀌었나",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "몰모액트 2 공개됐다는데 스탠퍼드 의대 실험실 얘기가 많이들 걸리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-13T02:51:54.943Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "오르카라우터 성능",
+      "issue": "오르카라우터",
+      "topic": "오르카라우터",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 11,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 11",
+        "선점 후보 — 경쟁 문서 11건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "오르카라우터, 100만 토큰 컨텍스트 사이버 보안 모델 공개",
+        "basis": "뉴스 헤드라인 2건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "오르카라우터 성능 100만 토큰 컨텍스트 사이버보안 모델",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "오르카라우터 성능 100만 토큰 컨텍스트가 실제로 어디까지 가나 봤더니",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-13T02:51:54.943Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "오르카라우터 AI",
+      "issue": "오르카라우터",
+      "topic": "오르카라우터",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 10,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 10",
+        "선점 후보 — 경쟁 문서 10건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "오르카라우터, 100만 토큰 컨텍스트 사이버 보안 모델 공개",
+        "basis": "뉴스 헤드라인 2건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "home": {
+          "text": "오르카라우터 AI 며칠 써보다가 공유기 설정 화면을 계속 들여다봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-13T02:51:54.943Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "아나토미 오브 뜻",
+      "issue": "아나토미",
+      "topic": "아나토미",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 292,
+      "documentCountMeasured": true,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 10",
+        "문서수 292",
+        "선점 후보 — 경쟁 문서 292건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "클로드 코드용 아나토미 공개, 말로 3D 기계 그려",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "정보",
+      "adsenseFit": true,
+      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
+      "titles": {
+        "seo": {
+          "text": "아나토미 오브 뜻 해부학부터 드라마·월가 칼럼까지 어디 쓰나",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "아나토미 오브 뜻 해부학 그거랑 같은 말인 줄 알고 찾다가 멈칫했어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "아나토미 뜻",
+          "searchVolume": 590,
+          "frame": "generic"
+        },
+        {
+          "keyword": "아나토미 해부학",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "아나토미 뜻",
+          "searchVolume": 590,
+          "documentCount": 3556,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "아나토미 해부학",
+          "searchVolume": 10,
+          "documentCount": 8655,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 23,
+      "kinTop": null,
+      "monetize": {
+        "verdict": "bad",
+        "points": [
+          {
+            "text": "주 검색어 '아나토미 뜻'(월 590)은 'anatomy of = ~의 구조/해부/분석'이라는 한 줄 뜻만 손에 넣으면 끝나는 정의 검색이다. 도구·구매처·절차가 아니라 단순 정보 획득이 목적이다."
+          },
+          {
+            "text": "'아나토미 오브 뜻'은 영화·노래·책 제목(예: 'Anatomy of a Fall')에서 마주친 영어 표현의 뜻을 찾는 전형적 번역 질의로, 상업적 의도가 0에 가깝다. 뜰 광고는 저단가 범용 디스플레이뿐이고 검색자는 클릭할 상태가 아니다."
+          },
+          {
+            "text": "'아나토미 해부학'(월 10)이 붙는 것도 의료·전문 구매 의도가 아니라 단어의 원뜻 확인일 뿐이어서, 이 클러스터 전체가 정의 확인용임을 재확인시킨다."
+          },
+          {
+            "text": "읽어야 풀리는 검색이 아니라 한 줄 보고 이탈하는 검색이다. 체류시간 짧고 바운스 높아 광고 노출·수익 모두 안 나온다."
+          }
+        ],
+        "angle": "굳이 쓴다면 '뜻' 단독이 아니라 '아나토미 오브'가 들어간 특정 콘텐츠(영화 'Anatomy of a Fall', 'Grey's Anatomy' 등)의 제목 해설+작품 정보로 각도를 틀어, 정의 검색자를 콘텐츠 소비·OTT 탐색 의도로 넘기는 글. 순수 단어 뜻 글로는 가지 마라."
+      },
+      "measuredAt": "2026-10-13T02:51:54.943Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "아나토미 스트랭스 뜻",
+      "issue": "아나토미",
+      "topic": "아나토미",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 12,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 12",
+        "선점 후보 — 경쟁 문서 12건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "클로드 코드용 아나토미 공개, 말로 3D 기계 그려",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "정보",
+      "adsenseFit": true,
+      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
+      "titles": {
+        "seo": {
+          "text": "아나토미 스트랭스 뜻 그리고 아나토미 뜻 차이까지",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "아나토미 스트랭스 뜻 찾는데 아나토미가 생각보다 여러 갈래더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "아나토미 뜻",
+          "searchVolume": 590,
+          "frame": "generic"
+        },
+        {
+          "keyword": "아나토미 스트랭스",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "아나토미 뜻",
+          "searchVolume": 590,
+          "documentCount": 3556,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "아나토미 스트랭스",
+          "searchVolume": 20,
+          "documentCount": 535,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": {
+        "verdict": "bad",
+        "points": [
+          {
+            "text": "검색어가 전부 '뜻'·명사 확인형이다. 핵심 수요인 \"아나토미 뜻\"(월 590)은 단어 정의 한 줄만 원하는 사전식 검색이라, 검색자가 손에 넣고 싶은 건 도구 URL도 구매처도 아닌 '한 문장 정의'다."
+          },
+          {
+            "text": "'뜻'을 치는 사람은 구매·행동 모드가 아니다. 뜰 광고는 저단가 일반 디스플레이뿐이고, 상업 의도가 실릴 유일한 신호인 \"아나토미 스트랭스\"(월 20)는 볼륨이 너무 얇아 쇼핑/브랜드 광고를 끌어올 힘이 없다."
+          },
+          {
+            "text": "\"아나토미 뜻\"(월 590) 같은 정의 검색은 답 한 줄 보고 바로 이탈하는 전형적 바운스 패턴이다. 읽어야 풀리는 질문이 아니라 체류·스크롤이 거의 안 나와 광고 노출·클릭 기회 자체가 적다."
+          },
+          {
+            "text": "결국 트래픽의 무게는 저단가 정의 검색(590)에 쏠려 있고, 돈이 될 상업 검색(\"아나토미 스트랭스\" 20)은 지엽적이다. 애드센스 관점에서 노출은 돼도 클릭 상태가 아닌 유입이라 수익이 안 붙는다."
+          }
+        ],
+        "angle": "굳이 쓴다면 '뜻' 정의를 메인으로 삼지 말고, \"아나토미 스트랭스\"(20)가 실제로 가리키는 대상(제품/브랜드/운동법)이 무엇인지 먼저 확정한 뒤 그걸 리뷰·비교·구매 가이드로 전환하는 각도. 즉 590짜리 정의 수요는 미끼 한 줄로만 받고, 상업 의도 있는 소수를 전환 콘텐츠로 잡는 방향 — 다만 상업 신호가 20에 불과하니 기대는 낮게 잡을 것."
+      },
+      "measuredAt": "2026-10-13T02:51:54.943Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "오르카라우터 모델",
+      "issue": "오르카라우터",
+      "topic": "오르카라우터",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 15,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 15",
+        "선점 후보 — 경쟁 문서 15건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "오르카라우터, 100만 토큰 컨텍스트 사이버 보안 모델 공개",
+        "basis": "뉴스 헤드라인 2건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "오르카라우터 모델 100만 토큰 컨텍스트 실제 성능",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "오르카라우터 모델 100만 토큰 컨텍스트 의외로 여기서 갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-13T02:51:54.943Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "밀워키 한인 침례교회",
+      "issue": "밀워키",
+      "topic": "밀워키",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 21,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 21",
+        "선점 후보 — 경쟁 문서 21건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "밀워키가 다저스 7-4 제압 NLCS 2연승으로 WS 눈앞",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": [
+        {
+          "title": "밀워키한인침례교회(위스칸신)",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60901&docId=165069030&answerNo=0",
+          "views": 327,
+          "answers": null
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-13T02:51:54.943Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "오르카라우터",
+      "issue": "오르카라우터",
+      "topic": "오르카라우터",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 25,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 25",
+        "선점 후보 — 경쟁 문서 25건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "오르카라우터, 100만 토큰 컨텍스트 사이버 보안 모델 공개",
+        "basis": "뉴스 헤드라인 2건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-13T02:51:54.943Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "ai2-thor",
+      "issue": "Ai2",
+      "topic": "Ai2",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 29,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 29",
+        "선점 후보 — 경쟁 문서 29건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "Ai2, MoE 효율 높인 올모 코어 3 오픈소스 공개",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "ai2-thor 설치부터 첫 예제 실행까지 환경 구성 순서",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "ai2-thor 설치가 자꾸 막히는데 의외로 여기서 갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-13T02:51:54.943Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "Ai2 올모",
+      "issue": "Ai2",
+      "topic": "Ai2",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 41,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 2,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 41",
+        "선점 후보 — 경쟁 문서 41건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 2건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "Ai2, MoE 효율 높인 올모 코어 3 오픈소스 공개",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "Ai2 올모 코어 3, MoE 학습 효율 2.7배 오픈소스 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "Ai2 올모 코어 3가 MoE 학습 2.7배라는데 많이들 놓치는 부분이 있네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-13T02:51:54.943Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "아나토미 빈야사 뜻",
+      "issue": "아나토미",
+      "topic": "아나토미",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 47,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 47",
+        "선점 후보 — 경쟁 문서 47건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "클로드 코드용 아나토미 공개, 말로 3D 기계 그려",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "정보",
+      "adsenseFit": true,
+      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
+      "titles": {
+        "seo": {
+          "text": "아나토미 빈야사 뜻 하타·아쉬탕가 빈야사와 차이",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "아나토미 빈야사 뜻 모르고 들었다가 일반 빈야사랑 뭐가 다른지 헷갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": {
+        "verdict": "bad",
+        "points": [
+          {
+            "text": "검색어가 '아나토미 빈야사 뜻'으로 끝난다. '뜻'은 단어 정의를 찾는 신호다. 검색자는 '아나토미 빈야사 = 해부학적 정렬에 기반한 빈야사 요가 흐름' 같은 한 줄 정의만 손에 넣으면 만족하고 끝난다. 도구·구매처·절차가 아니라 순수 정보형이다."
+          },
+          {
+            "text": "'뜻'을 찾는 사람은 지금 뭘 사거나 등록할 상태가 아니다. 용어가 궁금한 단계지, 요가원을 끊거나 매트를 사려는 단계가 아니다. 뜰 법한 광고는 요가원·온라인 클래스·요가용품 정도인데, 정의만 확인하려는 검색 의도와 광고 상업성 사이 간극이 커서 클릭이 안 붙는다."
+          },
+          {
+            "text": "'뜻' 검색은 전형적인 '한 줄 얻고 나가는' 검색이다. 답이 글 상단 한 문장으로 끝나면 체류·스크롤이 거의 없고, 광고 노출 자체가 적다. 읽어야 풀리는 종류의 검색이 아니다."
+          },
+          {
+            "text": "같이 검색되는 확인된 검색어가 '(없음)'이다. 뒤로 이어지는 상업 의도(가격·추천·등록·비교) 키워드가 붙지 않으니, 정의 검색자를 수익 구간으로 넘길 다음 경로가 데이터상 비어 있다."
+          }
+        ],
+        "angle": "굳이 쓴다면 '아나토미 빈야사 뜻' 한 줄 정의는 맨 위에서 즉답으로 끝내 이탈을 막지 말고, 그 아래를 '일반 빈야사와 아나토미 빈야사 차이 / 어떤 몸 상태·부상 이력에 맞나 / 수업 고를 때 체크포인트'로 끌어 체류와 상업 의도를 만들어내는 구성. 단 확인된 연관 검색어가 없어 수요 자체가 작을 공산이 크니, 단독 글보다 빈야사 요가 상위 글의 한 섹"
+      },
+      "measuredAt": "2026-10-13T02:51:54.943Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "ms 콜백신청방법",
+      "issue": "MS",
+      "topic": "MS",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 59,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 59",
+        "선점 후보 — 경쟁 문서 59건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "MS 자체 AI칩 마이아 공개로 시총 4조달러 복귀",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "거래",
+      "adsenseFit": false,
+      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+      "titles": {
+        "seo": {
+          "text": "ms 콜백신청방법 처음 해도 막히지 않는 순서",
+          "frame": "howto",
+          "basis": "검색 질문 'ms 콜백신청방법' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+        },
+        "home": {
+          "text": "ms 콜백신청방법 혼자 해보다 막혔던 데서 이렇게 넘어갔어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-13T02:51:54.943Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "뮤즈 원더 벤치마크",
+      "issue": "뮤즈 원더",
+      "topic": "뮤즈 원더",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 60,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 60",
+        "선점 후보 — 경쟁 문서 60건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "메타 AI모델 뮤즈 원더 공개, 성능 평가서 2위",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "뮤즈 원더 벤치마크 GPT·클로드 대비 성능 2위 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "뮤즈 원더 벤치마크 2위라던데 GPT 최신 모델이랑 의외로 갈리네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-13T02:51:54.943Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "아나토미 오피스 결말",
+      "issue": "아나토미",
+      "topic": "아나토미",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 80,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 80",
+        "선점 후보 — 경쟁 문서 80건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "클로드 코드용 아나토미 공개, 말로 3D 기계 그려",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "home": {
+          "text": "아나토미 오피스 결말 마지막 장면 다시 돌려보고 나서 한참 멍했어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 6,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-13T02:51:54.943Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "뮤즈 원더 GPT",
+      "issue": "뮤즈 원더",
+      "topic": "뮤즈 원더",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 91,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 91",
+        "선점 후보 — 경쟁 문서 91건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "메타 AI모델 뮤즈 원더 공개, 성능 평가서 2위",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "뮤즈 원더 GPT 성능 비교, 챗GPT·클로드와 뭐가 다른지",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "뮤즈 원더가 챗GPT보다 똑똑하다더니 성능 순위에선 의외로 2위네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-13T02:51:54.943Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "뮤즈 원더 클로드",
+      "issue": "뮤즈 원더",
+      "topic": "뮤즈 원더",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 91,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 91",
+        "선점 후보 — 경쟁 문서 91건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "메타 AI모델 뮤즈 원더 공개, 성능 평가서 2위",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "뮤즈 원더 클로드·GPT 성능 비교와 평가 2위 실제 순위",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "뮤즈 원더가 클로드랑 GPT 사이에서 평가 2위라는데 순위가 좀 애매하네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 3,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-13T02:51:54.943Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "뮤즈 원더 지능",
+      "issue": "뮤즈 원더",
+      "topic": "뮤즈 원더",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 142,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 142",
+        "선점 후보 — 경쟁 문서 142건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "메타 AI모델 뮤즈 원더 공개, 성능 평가서 2위",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "뮤즈 원더 지능 성능 평가 2위, GPT·클로드와 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "뮤즈 원더 지능이 GPT보다 높다길래 봤더니 2위인 게 좀 의외더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 5,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-13T02:51:54.943Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "올모 코어 3",
+      "issue": "올모 코어 3",
+      "topic": "올모 코어 3",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 160,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 160",
+        "선점 후보 — 경쟁 문서 160건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "Ai2, MoE 학습 효율 2.7배 높인 올모 코어 3 공개",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "올모 코어 3 MoE 학습 2.7배 빨라진 Ai2 오픈소스 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "올모 코어 3가 MoE 학습 2.7배 빠른 비결 생각보다 단순하네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "올모 3",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-13T02:51:54.943Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "뮤즈 원더 성능",
+      "issue": "뮤즈 원더",
+      "topic": "뮤즈 원더",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 176,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 176",
+        "선점 후보 — 경쟁 문서 176건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "메타 AI모델 뮤즈 원더 공개, 성능 평가서 2위",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "뮤즈 원더 성능 평가 2위, GPT·클로드와 뭐가 다를까",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "뮤즈 원더 성능 2위 올랐다는데 GPT랑 여기서 갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-13T02:51:54.943Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "MS 마이아 300",
+      "issue": "마이아 300",
+      "topic": "마이아 300",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 214,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 214",
+        "선점 후보 — 경쟁 문서 214건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "MS 자체 AI칩 마이아 300 공개 내년 100만개 이상 배치",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "MS 마이아 300 엔비디아 의존 줄이는 자체 AI칩 성능",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "MS 마이아 300 나왔는데 엔비디아 독주 저지는 생각보다 다른 얘기더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-13T02:51:54.943Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "브레이킹 배드 한글자막",
+      "issue": "브레이킹 배드",
+      "topic": "브레이킹 배드",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 225,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 225",
+        "선점 후보 — 경쟁 문서 225건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "브레이킹 배드 아들 역 RJ 미티 34세로 사망",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "브레이킹 배드 한글자막 넷플릭스 왓챠 어디가 나은지",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "브레이킹 배드 한글자막 다시 보려는데 넷플릭스랑 왓챠 중에 여기서 갈려요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "브레이킹 배드 시즌1",
+          "searchVolume": 4430,
+          "frame": "generic"
+        },
+        {
+          "keyword": "브레이킹 배드 ott",
+          "searchVolume": 410,
+          "frame": "generic"
+        },
+        {
+          "keyword": "브레이킹 배드 넷플릭스",
+          "searchVolume": 190,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "브레이킹 배드 시즌1",
+          "searchVolume": 4430,
+          "documentCount": 8013,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "브레이킹 배드 ott",
+          "searchVolume": 410,
+          "documentCount": 995,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "브레이킹 배드 넷플릭스",
+          "searchVolume": 190,
+          "documentCount": 6075,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "브레이킹 배드 줄거리",
+          "searchVolume": 180,
+          "documentCount": 2296,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "브레이킹 배드 명대사",
+          "searchVolume": 80,
+          "documentCount": 377,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "브레이킹 배드 다시보기",
+          "searchVolume": 10,
+          "documentCount": 8715,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "브레이킹 배드 자막",
+          "searchVolume": 10,
+          "documentCount": 971,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 67,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-13T02:51:54.943Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "메타 뮤즈 원더",
+      "issue": "뮤즈 원더",
+      "topic": "뮤즈 원더",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 287,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 287",
+        "선점 후보 — 경쟁 문서 287건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "메타 AI모델 뮤즈 원더 공개, 성능 평가서 2위",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "메타 뮤즈 원더 성능 평가 2위, 챗GPT·클로드와 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "메타 뮤즈 원더가 GPT보다 똑똑하다는데 2위 받은 게 의외네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 3,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-13T02:51:54.943Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -693,7 +2499,8 @@
       },
       "measuredAt": "2026-10-12T21:24:32.777Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "올모 코어3다운로드",
@@ -755,7 +2562,8 @@
       "monetize": null,
       "measuredAt": "2026-10-12T21:24:32.777Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "오르카라우터 사이버보안",
@@ -817,7 +2625,8 @@
       "monetize": null,
       "measuredAt": "2026-10-12T21:24:32.777Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "오르카라우터 벤치마크",
@@ -879,7 +2688,8 @@
       "monetize": null,
       "measuredAt": "2026-10-12T21:24:32.777Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "오르카라우터 보안활용",
@@ -940,7 +2750,8 @@
       "monetize": null,
       "measuredAt": "2026-10-12T21:24:32.777Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "오르카라우터 보안모델",
@@ -1002,215 +2813,8 @@
       "monetize": null,
       "measuredAt": "2026-10-12T21:24:32.777Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "Ai2 몰모액트2",
-      "issue": "Ai2",
-      "topic": "Ai2",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 5,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 5",
-        "선점 후보 — 경쟁 문서 5건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "Ai2가 오픈소스 로봇 AI '몰모액트 2'를 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "Ai2 몰모액트2 오픈소스 로봇AI 스탠퍼드 실험실서 공개",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "Ai2 몰모액트2 나왔는데 중국 AI2로보틱스랑 자꾸 헷갈리더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-12T21:24:32.777Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "아나토미 에스테틱 강남",
-      "issue": "아나토미",
-      "topic": "아나토미",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 144,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 144",
-        "선점 후보 — 경쟁 문서 144건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "클로드 코드용 '아나토미'가 공개돼 말로 3D 기계를 그릴 수 있다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "아나토미 에스테틱 강남 예약 전 가격·후기 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "아나토미 에스테틱 강남 예약하기 전에 많이들 놓치는 게 있더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "아나토미 에스테틱",
-          "searchVolume": 280,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "아나토미 에스테틱",
-          "searchVolume": 280,
-          "documentCount": 690,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-12T21:24:32.777Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "오르카라우터 사용법",
-      "issue": "오르카라우터",
-      "topic": "오르카라우터",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "공개 후 활용법 수요",
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 7,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 7",
-        "선점 후보 — 경쟁 문서 7건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — 공개 후 활용법 수요"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "오르카라우터가 100만 토큰 컨텍스트의 사이버 보안 모델을 공개했다.",
-        "basis": "뉴스 헤드라인 2건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "오르카라우터 사용법 100만 토큰 컨텍스트 적용하는 법",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "오르카라우터 사용법 100만 토큰 컨텍스트 켜고 나서 체감이 달라지더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-12T21:24:32.777Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "올모 코어3사용법",
@@ -1276,69 +2880,8 @@
       "monetize": null,
       "measuredAt": "2026-10-12T21:24:32.777Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "오르카라우터 성능",
-      "issue": "오르카라우터",
-      "topic": "오르카라우터",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 11,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 11",
-        "선점 후보 — 경쟁 문서 11건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "오르카라우터가 100만 토큰 컨텍스트의 사이버 보안 모델을 공개했다.",
-        "basis": "뉴스 헤드라인 2건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "오르카라우터 성능 100만 토큰 컨텍스트 어디까지 되나",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "오르카라우터 성능 100만 토큰 컨텍스트가 진짜인지 여기서 갈리더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-12T21:24:32.777Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "오르카라우터 토큰",
@@ -1400,182 +2943,8 @@
       "monetize": null,
       "measuredAt": "2026-10-12T21:24:32.777Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "아나토미 오브 뜻",
-      "issue": "아나토미",
-      "topic": "아나토미",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 292,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 292",
-        "선점 후보 — 경쟁 문서 292건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "클로드 코드용 '아나토미'가 공개돼 말로 3D 기계를 그릴 수 있다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "정보",
-      "adsenseFit": true,
-      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
-      "titles": {
-        "seo": {
-          "text": "아나토미 오브 뜻 해부학 어원과 제목 속 쓰임까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "아나토미 오브 뜻 월가 칼럼 제목에 붙는 이유 많이들 모르더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "아나토미 뜻",
-          "searchVolume": 590,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "아나토미 뜻",
-          "searchVolume": 590,
-          "documentCount": 3555,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 23,
-      "kinTop": null,
-      "monetize": {
-        "verdict": "bad",
-        "points": [
-          {
-            "text": "검색자가 손에 넣으려는 건 '아나토미 오브 뜻'·'아나토미 뜻'이 보여주듯 단어 해석 한 줄이다. 도구 URL도 구매처도 절차도 아니고, '아나토미=해부(학)', '아나토미 오브=~의 구조/해부' 라는 정의 하나면 끝난다."
-          },
-          {
-            "text": "'아나토미 뜻'을 치는 사람은 구매·가입·견적 의사가 전혀 없는 정보 소비자다. 이 상태에서 뜨는 광고는 상업 키워드가 걸리지 않아 저단가 범용 디스플레이(어학/유튜브/무관한 리타겟팅)뿐이고, 클릭할 유인이 없다."
-          },
-          {
-            "text": "'아나토미 오브 뜻'은 한 줄 얻고 나가는 즉시이탈형 검색이다. 상단에 정의가 보이는 순간 뒤로가기이며, 읽어야 풀리는 과정형 질의가 아니라 체류시간·스크롤 깊이가 짧아 광고 노출 자체가 적다."
-          },
-          {
-            "text": "월 590(아나토미 뜻)은 검색량도 얇은데 그마저 정의 질의라, 애드센스 수익 관점에선 트래픽의 질과 양이 둘 다 부족하다."
-          }
-        ],
-        "angle": "굳이 쓴다면 '아나토미 오브 뜻' 단독 글은 버리고, 정의를 미끼로 삼아 실제 상업성이 붙는 문맥으로 끌고 간다 — 예: 그레이 아나토미(드라마) OTT 시청/정주행 가이드, 해부학 전공서·아나토미 피규어/모델 구매 비교, 어학 강좌처럼 광고가 걸리는 주제의 서브 섹션으로 '뜻' 설명을 흡수시키는 방식."
-      },
-      "measuredAt": "2026-10-12T21:24:32.777Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "아나토미 스트랭스 뜻",
-      "issue": "아나토미",
-      "topic": "아나토미",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 12,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 12",
-        "선점 후보 — 경쟁 문서 12건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "클로드 코드용 '아나토미'가 공개돼 말로 3D 기계를 그릴 수 있다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "정보",
-      "adsenseFit": true,
-      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
-      "titles": {
-        "home": {
-          "text": "아나토미 스트랭스 뜻 운동하다 친구한테 물어봤는데 다들 다르게 알고 있더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": {
-        "verdict": "bad",
-        "points": [
-          {
-            "text": "검색어가 '아나토미 스트랭스 뜻' — '뜻'을 묻는 정의형 질문이다. 검색자가 손에 넣고 싶은 건 '이게 무슨 말인가' 한 줄 설명뿐이고, 도구 URL도 구매처도 절차도 필요 없다. 정보 한 조각으로 만족하고 끝난다."
-          },
-          {
-            "text": "'같이 검색되는 확인된 검색어: (없음)'이 결정적이다. 보통 구매 의도가 있으면 '가격/후기/사는 곳/효과' 같은 돈 되는 동반 검색어가 붙는데, 그게 하나도 안 잡혔다. '뜻' 단독이라 광고주가 돈을 싣는 상업 문맥이 없다 — 떠봤자 아드센스가 문맥 못 잡은 저단가 일반 광고다."
-          },
-          {
-            "text": "'뜻' 검색은 한 줄 얻고 나가는 전형이다. 읽어야 풀리는 절차형·비교형이 아니라, 정의 한 문장 보는 순간 뒤로가기다. 체류시간이 짧으면 광고 노출 전에 이탈하고, 설령 노출돼도 정의만 얻은 사람은 클릭할 심리 상태가 아니다."
-          },
-          {
-            "text": "'아나토미 스트랭스'가 무엇인지(게임·운동 프로그램·브랜드·용어 중 어느 것인지) 검색어만으로 특정되지 않는다. 즉 실체도 불명확하고 상업 신호도 없어, 쓰기 전에 타깃 자체가 흐릿하다."
-          }
-        ],
-        "angle": "정 쓴다면 '뜻' 자체로는 수익이 안 나오니, 이 용어가 특정 제품·프로그램·게임을 가리킨다는 게 확인될 때만 정의를 미끼로 '어디서/얼마에/어떻게 시작' 같은 상업 의도 섹션을 본문으로 붙여 구매·전환 문맥을 만들 것. 그 실체 확인 전에는 착수 보류."
-      },
-      "measuredAt": "2026-10-12T21:24:32.777Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "클로드코드 아나토미",
@@ -1694,7 +3063,8 @@
       "monetize": null,
       "measuredAt": "2026-10-12T21:24:32.777Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "아나토미 클로드코드",
@@ -1756,414 +3126,8 @@
       "monetize": null,
       "measuredAt": "2026-10-12T21:24:32.777Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "오르카라우터",
-      "issue": "오르카라우터",
-      "topic": "오르카라우터",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 25,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 25",
-        "선점 후보 — 경쟁 문서 25건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "오르카라우터가 100만 토큰 컨텍스트의 사이버 보안 모델을 공개했다.",
-        "basis": "뉴스 헤드라인 2건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "오르카라우터 100만 토큰 보안 모델 성능 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "오르카라우터 보안 모델 나왔는데 100만 토큰이 생각보다 중요하네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-12T21:24:32.777Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "ai2-thor",
-      "issue": "Ai2",
-      "topic": "Ai2",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 29,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 29",
-        "선점 후보 — 경쟁 문서 29건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "Ai2가 오픈소스 로봇 AI '몰모액트 2'를 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "ai2-thor 설치부터 예제 실행까지 윈도우 세팅 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "ai2-thor 설치하다 막히는 구간 많이들 여기서 헤매더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-12T21:24:32.777Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "Ai2 올모",
-      "issue": "Ai2",
-      "topic": "Ai2",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "같은 기관 모델 관심",
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 40,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 2,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 40",
-        "선점 후보 — 경쟁 문서 40건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — 같은 기관 모델 관심"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 2건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "Ai2가 오픈소스 로봇 AI '몰모액트 2'를 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "Ai2 올모 코어 3 공개, MoE 학습 효율 2.7배",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "Ai2 올모 코어 3 공개됐는데 MoE 학습 효율 올리는 방식이 생각보다 다르더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-12T21:24:32.777Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "아나토미 빈야사 뜻",
-      "issue": "아나토미",
-      "topic": "아나토미",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 47,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 47",
-        "선점 후보 — 경쟁 문서 47건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "클로드 코드용 '아나토미'가 공개돼 말로 3D 기계를 그릴 수 있다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "정보",
-      "adsenseFit": true,
-      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-12T21:24:32.777Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "아나토미 오피스 결말",
-      "issue": "아나토미",
-      "topic": "아나토미",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 80,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 80",
-        "선점 후보 — 경쟁 문서 80건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "클로드 코드용 '아나토미'가 공개돼 말로 3D 기계를 그릴 수 있다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "home": {
-          "text": "아나토미 오피스 결말 그 장면 보고 한참 멍하니 앉아 있었네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 6,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-12T21:24:32.777Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "메타 뮤즈원더",
-      "issue": "뮤즈 원더",
-      "topic": "뮤즈 원더",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 116,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 116",
-        "선점 후보 — 경쟁 문서 116건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "메타가 오픈AI·앤트로픽을 겨냥한 최고 성능 AI '뮤즈 원더'를 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "메타 뮤즈원더 성능 오픈AI 앤스로픽과 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "메타 뮤즈원더가 오픈AI 앤스로픽까지 다 따라잡았다는데 뭐가 달라진 건지 봤더니",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "메타 AI",
-          "searchVolume": 21430,
-          "frame": "generic"
-        },
-        {
-          "keyword": "메타 AI 모델",
-          "searchVolume": 30,
-          "frame": "generic"
-        },
-        {
-          "keyword": "메타 AI 성능",
-          "searchVolume": 20,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "메타 AI",
-          "searchVolume": 21430,
-          "documentCount": 574982,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "메타 AI 모델",
-          "searchVolume": 30,
-          "documentCount": 186073,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "메타 AI 성능",
-          "searchVolume": 20,
-          "documentCount": 112152,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 3,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-12T21:24:32.777Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "Ai2 앨런연구소",
@@ -2225,7 +3189,8 @@
       "monetize": null,
       "measuredAt": "2026-10-12T21:24:32.777Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "레이예스 211안타 달성!",
@@ -2346,69 +3311,8 @@
       "monetize": null,
       "measuredAt": "2026-10-12T21:24:32.777Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "올모 코어 3",
-      "issue": "올모 코어 3",
-      "topic": "올모 코어 3",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 159,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 159",
-        "선점 후보 — 경쟁 문서 159건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "Ai2가 MoE 학습 효율을 2.7배 높인 오픈소스 '올모 코어 3'을 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "올모 코어 3 MoE 학습 효율 2.7배, Ai2 오픈소스 뜯어보기",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "올모 코어 3가 MoE 학습 2.7배 높인 방식 많이들 헷갈리더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-12T21:24:32.777Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "포스코dx 블라인드",
@@ -2527,7 +3431,8 @@
       "monetize": null,
       "measuredAt": "2026-10-12T21:24:32.777Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "포스코dx 전신",
@@ -2634,7 +3539,8 @@
       "monetize": null,
       "measuredAt": "2026-10-12T21:24:32.777Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "사우디아라비아 캄사 뜻",
@@ -2803,70 +3709,6 @@
       "keywordPool": null,
       "trend": null,
       "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-12T03:16:52.037Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "ms 콜백신청방법",
-      "issue": "MS",
-      "topic": "MS",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 59,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 59",
-        "선점 후보 — 경쟁 문서 59건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "거래",
-      "adsenseFit": false,
-      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-      "titles": {
-        "seo": {
-          "text": "ms 콜백신청방법 처음 해도 막히지 않는 순서",
-          "frame": "howto",
-          "basis": "검색 질문 'ms 콜백신청방법' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        },
-        "home": {
-          "text": "ms 콜백신청방법, 어렵게 할 필요 없습니다",
-          "frame": "howto",
-          "basis": "검색 질문 'ms 콜백신청방법' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 2,
       "kinTop": null,
       "monetize": null,
       "measuredAt": "2026-10-12T03:16:52.037Z",
@@ -4783,6 +5625,1188 @@
   "rejectedCount": 0,
   "issues": [
     {
+      "issue": "코스피 4% 급락",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "코스피 장중 4%대 급락에 두 달 만에 매도 사이드카 발동",
+      "headlines": [
+        {
+          "title": "코스피, 장중 4%대 급락…약 2달만 '매도 사이드카' 발동",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-13T00:53:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016372661?sid=101"
+        },
+        {
+          "title": "코스피 장중 4%대 급락…매도 사이드카 발동",
+          "press": "news.kbs.co.kr",
+          "publishedAt": "2026-10-13T00:58:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/056/0012272435?sid=101"
+        },
+        {
+          "title": "코스피, 장중 4%대 급락‥두 달 만에 '매도 사이드카'",
+          "press": "imnews.imbc.com",
+          "publishedAt": "2026-10-13T00:51:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/214/0001528666?sid=101"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "렉서스",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "렉서스 8세대 올 뉴 ES 국내 출시 7160만원부터",
+      "headlines": [
+        {
+          "title": "렉서스 세단 ES 350e 전기차 공개",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-13T00:40:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014248860?sid=101"
+        },
+        {
+          "title": "렉서스, 8세대 ES 국내 출시..전기차 7,160만원부터",
+          "press": "autotimes.co.kr",
+          "publishedAt": "2026-10-13T01:12:00.000Z",
+          "link": "http://autotimes.co.kr/detail.php?number=689488&thread=27"
+        },
+        {
+          "title": "8세대 완전변경 모델로 거듭난 '올 뉴 ES'",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-13T00:35:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016372583?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "렉서스 nx350h",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "렉서스 es300h",
+          "searchVolume": 94400,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "렉서스 suv",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "렉서스 rx450h",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "렉서스 lm",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "렉서스 lx",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "렉서스 rx",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "렉서스 하이브리드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "렉서스 ES 출고",
+          "reason": "출고 대기 기간",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "렉서스 ES 시승",
+          "reason": "실차 체험 수요",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "브레이킹 배드",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "브레이킹 배드 아들 역 RJ 미티 34세로 사망",
+      "headlines": [
+        {
+          "title": "미드 '브레이킹 배드' 주인공 아들 역 미티 사망…향년 34세",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-12T23:38:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016372403?sid=104"
+        },
+        {
+          "title": "미드 '브레이킹 배드' 아들 역 배우, 숨진 채 발견…향년 34세",
+          "press": "wowtv.co.kr",
+          "publishedAt": "2026-10-13T00:04:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/215/0001268961?sid=104"
+        },
+        {
+          "title": "‘브레이킹 배드’ 뇌성마비 배우, 34세로 사망…자택서 숨진 채 발견",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-10-13T01:50:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005747683?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "브레이킹 배드 시즌1",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "브레이킹 배드 등장인물",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "브레이킹 배드 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "브레이킹 배드 시즌5",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "브레이킹 배드 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "브레이킹 배드 ott",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "브레이킹 배드 시즌2",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "브레이킹 배드 아들",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "브레이킹 배드 다시보기",
+          "reason": "작품 재조명",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "삼전 주가",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "중국 CXMT 차세대 D램 진전 공세에 삼전·닉스 급락",
+      "headlines": [
+        {
+          "title": "中 CXMT, 차세대 D램 기술 진전…\"삼전닉스에 도전\"(종합)",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-12T11:49:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016372048?sid=104"
+        },
+        {
+          "title": "\"SK하닉 너마저\" 주가 이런데 쪼개기 상장?…솔리다임 IPO 진짜 셈법",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-10-12T21:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005425229?sid=101"
+        },
+        {
+          "title": "'반도체, 여기까지 쫓아왔나'…中 공세에 삼전닉스 '초비상' [분석+]",
+          "press": "hankyung.com",
+          "publishedAt": "2026-10-13T01:58:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005341855?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "삼전 주가 전망",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼전 주가 배당",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼전 주가 예상",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼전 주가 최고가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "삼전 주가 전망",
+          "reason": "급락 후 향방",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "밀워키",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "밀워키가 다저스 7-4 제압 NLCS 2연승으로 WS 눈앞",
+      "headlines": [
+        {
+          "title": "밀워키, 다저스 야마모토 무너뜨리고 NLCS 2연승…44년 만에 WS에 '한 발...",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-13T01:01:00.000Z",
+          "link": "https://m.sports.naver.com/wbaseball/article/003/0014248952"
+        },
+        {
+          "title": "MLB 밀워키, 야마모토 무너뜨리고 다저스 7-4 제압…'NLCS 2연승'",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-13T00:58:00.000Z",
+          "link": "https://m.sports.naver.com/wbaseball/article/421/0009224004"
+        },
+        {
+          "title": "믿었던 야마모토도 오타니도 부진… 밀워키, 다저스 상대 NLCS 2연승",
+          "press": "joongang.co.kr",
+          "publishedAt": "2026-10-13T01:28:00.000Z",
+          "link": "https://m.sports.naver.com/wbaseball/article/025/0003557489"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "밀워키 브루어스",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "밀워키 임팩드릴",
+          "searchVolume": 4890,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "밀워키 팩아웃",
+          "searchVolume": 4620,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "밀워키 전동공구",
+          "searchVolume": 2870,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "다저스 밀워키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "밀워키 다저스",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "밀워키 송풍기",
+          "searchVolume": 2610,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "밀워키 샌디에이고",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "이정은",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "이정은·최수영 모녀로 KBS 학교 다녀왔습니다 내년 방송",
+      "headlines": [
+        {
+          "title": "이정은·최수영 모녀 호흡…'학교 다녀왔습니다' 내년 방송",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-13T01:55:00.000Z",
+          "link": "https://m.entertain.naver.com/article/003/0014249177"
+        },
+        {
+          "title": "이정은·최수영, 모녀 된다…‘학교 다녀왔습니다’ 내년 방송",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-10-13T01:13:00.000Z",
+          "link": "https://m.entertain.naver.com/article/009/0005747638"
+        },
+        {
+          "title": "이정은·최수영, KBS 새 주말드라마 ‘학교 다녀왔습니다’ 모녀 호흡",
+          "press": "news.kbs.co.kr",
+          "publishedAt": "2026-10-13T01:14:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/056/0012272448?sid=103"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "배우 이정은",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이정은 배우",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이정은 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이정은 프로",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "닥터x 이정은",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이정은 드라마",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이정은 영화",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이정은 결혼",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "이정은 출연작",
+          "reason": "필모 정리 수요",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "경기도교육청",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "경기도교육청 신규·저경력 교사 멘토단 운영 성과나눔 개최",
+      "headlines": [
+        {
+          "title": "경기도교육청, ‘신규·저경력 교사 지원 멘토단 운영 성과나눔’ 성료",
+          "press": "sportsseoul.com",
+          "publishedAt": "2026-10-12T08:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/468/0001272023?sid=102"
+        },
+        {
+          "title": "경기도교육청, 신규교사 멘토링 지원 강화",
+          "press": "enewstoday.co.kr",
+          "publishedAt": "2026-10-12T09:00:00.000Z",
+          "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2479173"
+        },
+        {
+          "title": "CJ올리브네트웍스, 경기도교육청 신나는공유학교와 'AX창의캠프' 운영",
+          "press": "cnbnews.com",
+          "publishedAt": "2026-10-13T01:28:00.000Z",
+          "link": "https://www.cnbnews.com/news/articleView.html?idxno=1019018"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "경기도교육청 임용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "경기도교육청 구인",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "경기도교육청 임용공고",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "경기도교육청 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "경기도교육청 신고하는법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "경기도교육청 라스 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "경기도교육청 남부청사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "경기도교육청 클라우드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "경기도교육청 임용",
+          "reason": "임용시험 일정 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "경기도교육청 티오",
+          "reason": "채용 규모 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "경기도교육청 경쟁률",
+          "reason": "임용 경쟁률 체크",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "이강인",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "이강인 손흥민 왕따·96라인 은퇴설에 소속사 사실무근 법적대응",
+      "headlines": [
+        {
+          "title": "이강인, 96라인 은퇴설 불씨?…소속사 “사실무근”",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-10-13T01:54:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005747686?sid=102"
+        },
+        {
+          "title": "'이강인이 손흥민 왕따 주도?'…소속사 \"사실무근\" 법적대응 예고",
+          "press": "hankyung.com",
+          "publishedAt": "2026-10-13T01:09:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005341829?sid=102"
+        },
+        {
+          "title": "“손흥민 따돌림 가담” 96라인 은퇴설 불똥…이강인 측 “사실무근”",
+          "press": "joongang.co.kr",
+          "publishedAt": "2026-10-13T01:41:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/025/0003557491?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "이강인 군면제",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이강인 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이강인 갤러리",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이강인 아틀레티코",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이강인 유니폼",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이강인 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "손흥민 이강인",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이강인 골",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "이강인 법적대응",
+          "reason": "고소 진행 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "이강인 대표팀 발표",
+          "reason": "차기 소집 영향",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "이재명 대통령 발언",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "이 대통령 국익 지키는 외교·굴종 사대적 태도 지양 발언",
+      "headlines": [
+        {
+          "title": "이 대통령 \"국익 지켜지는 외교해야…굴종·사대적 태도 지양\"",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-10-13T02:03:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001395008?sid=100"
+        },
+        {
+          "title": "李대통령 \"국가간 이견 있기 마련…굴종·사대적 태도 지양해야\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-13T01:38:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016372863?sid=100"
+        },
+        {
+          "title": "[속보] 이대통령 \"한미동맹 중요하지만 국익이 우선…굴종·사대 외교 지...",
+          "press": "kado.net",
+          "publishedAt": "2026-10-13T02:24:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/654/0000205050?sid=100"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "마이아 300",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "MS 자체 AI칩 마이아 300 공개 내년 100만개 이상 배치",
+      "headlines": [
+        {
+          "title": "MS, 자체 AI칩 '마이아 300' 공개…\"내년 100만개 이상 배치\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-12T22:44:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016372340?sid=101"
+        },
+        {
+          "title": "MS, 엔비디아 의존 줄인다…자체 AI칩 '마이아 300' 공개",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-12T14:09:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014248388?sid=104"
+        },
+        {
+          "title": "[IT큐레이션] MS 추론의 왕 마이아 300",
+          "press": "econovill.com",
+          "publishedAt": "2026-10-12T23:54:00.000Z",
+          "link": "https://www.econovill.com/news/articleView.html?idxno=753356"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "마이아",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "마이아 300 사양",
+          "reason": "칩 스펙 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "MS",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "MS 자체 AI칩 마이아 공개로 시총 4조달러 복귀",
+      "headlines": [
+        {
+          "title": "MS, 자체 AI칩 '마이아 300' 공개…\"내년 100만개 이상 배치\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-12T22:44:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016372340?sid=101"
+        },
+        {
+          "title": "“엔비디아 세상 달라질 것”...MS의 자체 칩 백만 개 공급 구상[김창영...",
+          "press": "sedaily.com",
+          "publishedAt": "2026-10-12T20:49:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/011/0004670498?sid=104"
+        },
+        {
+          "title": "MS, '탈(脫)엔비디아' 시동… 추론은 자체 칩, 학습은 GPU '이원화'",
+          "press": "ddaily.co.kr",
+          "publishedAt": "2026-10-12T23:17:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/138/0002244468?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "ms 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스",
+          "searchVolume": 21010,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스 무료",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스 영구",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스 365",
+          "searchVolume": 9670,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 정품인증방법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 콜백신청방법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 쿠키허용방법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "MS 주가",
+          "reason": "칩 공개 후 주가",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "MS 시총 4조",
+          "reason": "시총 회복 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "MS 코파일럿",
+          "reason": "자체 칩 활용처",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "MS 실적",
+          "reason": "다음 실적 체크",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "뮤즈 원더",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "메타 AI모델 뮤즈 원더 공개, 성능 평가서 2위",
+      "headlines": [
+        {
+          "title": "오픈AI·앤트로픽 쫓는 메타…AI 모델 '뮤즈 원더' 공개",
+          "press": "etnews.com",
+          "publishedAt": "2026-10-13T01:09:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/030/0003474340?sid=105"
+        },
+        {
+          "title": "메타의 새 AI모델 '뮤즈 원더' 공개....GPT 최신 모델보다 높은 지능",
+          "press": "fnnews.com",
+          "publishedAt": "2026-10-12T22:47:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/014/0005588142?sid=104"
+        },
+        {
+          "title": "오픈AI·앤트로픽 따라잡는 메타…새 AI모델 '뮤즈 원더' 공개",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-12T22:37:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016372338?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "뮤즈",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "뮤즈 원더 사용법",
+          "reason": "이용 방법 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "뮤즈 원더 무료",
+          "reason": "이용 조건 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "뮤즈 원더 API",
+          "reason": "개발 활용 수요",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "메타",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "메타 AI모델 뮤즈 원더 공개로 오픈AI·앤트로픽 추격",
+      "headlines": [
+        {
+          "title": "오픈AI·앤트로픽 쫓는 메타…AI 모델 '뮤즈 원더' 공개",
+          "press": "etnews.com",
+          "publishedAt": "2026-10-13T01:09:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/030/0003474340?sid=105"
+        },
+        {
+          "title": "저커버그 \"메타 AI, 오픈AI·앤트로픽 따라잡았다\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-12T18:50:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014248442?sid=104"
+        },
+        {
+          "title": "메타의 새 AI모델 '뮤즈 원더' 공개....GPT 최신 모델보다 높은 지능",
+          "press": "fnnews.com",
+          "publishedAt": "2026-10-12T22:47:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/014/0005588142?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "메타 ai 글라스",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "메타 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "메타 뮤즈",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "메타 AI",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "메타 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "메타 안경",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "메타 인스타",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "메타 글래스",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "메타 주가",
+          "reason": "AI 공개 후 주가",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "메타 AI 글라스",
+          "reason": "안경 신제품 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "메타 네이버 지도",
+          "reason": "국내 협력 주목",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "아나토미",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "클로드 코드용 아나토미 공개, 말로 3D 기계 그려",
+      "headlines": [
+        {
+          "title": "빈 라덴 잡은 이 기업…AI 시대 승자 될까 [박신영의 월가 아나토미]",
+          "press": "hankyung.com",
+          "publishedAt": "2026-10-09T19:57:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005340974?sid=104"
+        },
+        {
+          "title": "\"말 한마디로 3D 기계 그려내\"...클로드 코드용 '아나토미' 공개",
+          "press": "aitimes.com",
+          "publishedAt": "2026-10-12T09:00:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=216170"
+        },
+        {
+          "title": "메디톡스, 태국서 'MAP 아나토미 워크샵' 성료",
+          "press": "ziksir.com",
+          "publishedAt": "2026-09-29T06:04:00.000Z",
+          "link": "https://www.ziksir.com/news/articleView.html?idxno=147753"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "아나토미 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "그레이 아나토미 시즌23",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아나토미 책",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아나토미 해부학",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아나토미 오브 스캔들",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아나토미 마곡",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아나토미 영화",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아나토미 자세",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "아나토미 사용법",
+          "reason": "이용 방법 수요",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "아나토미 3D 모델링",
+          "reason": "기능 활용 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "아나토미 무료",
+          "reason": "이용 조건 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "아나토미 CAD",
+          "reason": "설계 활용 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "올모 코어 3",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "Ai2, MoE 학습 효율 2.7배 높인 올모 코어 3 공개",
+      "headlines": [
+        {
+          "title": "Ai2, MoE 학습 효율 2.7배 높인 오픈소스 프레임워크 '올모 코어 3' 공개",
+          "press": "aitimes.com",
+          "publishedAt": "2026-10-12T08:56:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=216173"
+        },
+        {
+          "title": "[유로 S코어북] 'GK 시몬의 실수를 극복' 스페인, 연장 끝 크로아티아에...",
+          "press": "stnsports.co.kr",
+          "publishedAt": "2021-06-28T18:35:00.000Z",
+          "link": "https://m.sports.naver.com/wfootball/article/450/0000075593"
+        },
+        {
+          "title": "[S코어북] '황희찬 결장' 라이프치히, 묀헨글라트바흐에 3-2 대역전승",
+          "press": "stnsports.co.kr",
+          "publishedAt": "2021-02-27T19:29:00.000Z",
+          "link": "https://m.sports.naver.com/wfootball/article/450/0000072212"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "올모",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "Ai2",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "Ai2, MoE 효율 높인 올모 코어 3 오픈소스 공개",
+      "headlines": [
+        {
+          "title": "Ai2, MoE 학습 효율 2.7배 높인 오픈소스 프레임워크 '올모 코어 3' 공개",
+          "press": "aitimes.com",
+          "publishedAt": "2026-10-12T08:56:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=216173"
+        },
+        {
+          "title": "[금융AX리포트]KB 경진대회 AI 에이전트 적용했더니…은행 민원 처리 속...",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-10-07T06:02:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006382977?sid=101"
+        },
+        {
+          "title": "[금융지주 임원 인사 전망] [KB금융] \"AI에 그룹 명운\"…디지털·IT 인사...",
+          "press": "dealsite.co.kr",
+          "publishedAt": "2026-10-01T23:02:00.000Z",
+          "link": "https://dealsite.co.kr/articles/169896"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "ai2.com",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ai2-thor",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ai2 셋탑",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "올모 코어 3",
+          "reason": "공개 모델 상세",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "몰모액트 2",
+          "reason": "로봇 AI 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "Ai2 오픈소스",
+          "reason": "공개 자료 접근",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "Ai2 올모 성능",
+          "reason": "성능 비교 수요",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "오르카라우터",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "오르카라우터, 100만 토큰 컨텍스트 사이버 보안 모델 공개",
+      "headlines": [
+        {
+          "title": "오르카라우터, 100만 토큰 컨텍스트 지원 사이버 보안 모델 공개",
+          "press": "aitimes.com",
+          "publishedAt": "2026-10-12T09:06:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=216167"
+        },
+        {
+          "title": "큐원3.8-플래시-넥스트, '무검열판' 등장...\"성능 유지·거부율 0%\"",
+          "press": "aitimes.com",
+          "publishedAt": "2026-08-29T08:08:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=214597"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [
+        {
+          "keyword": "오르카라우터 사용법",
+          "reason": "모델 활용 방법",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "오르카라우터 무료",
+          "reason": "이용 조건 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "오르카라우터 API",
+          "reason": "개발 연동 수요",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
       "issue": "레이예스 211안타 달성!",
       "issueType": "fresh",
       "lane": "realtime",
@@ -4817,75 +6841,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "강경화 한미 정보협력",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "강경화가 한미 정보협력을 가장 어려운 현안이라 밝혔다.",
-      "headlines": [
-        {
-          "title": "강경화 \"한미 정보협력, 제일 어려운 현안…백악관 소통도 한계\"(종합)",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-12T19:10:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016372194?sid=104"
-        },
-        {
-          "title": "한동훈 \"美국무가 韓정보라인 정상화 요청\"…강경화 \"개인언급 없어\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-12T18:24:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014248441?sid=104"
-        },
-        {
-          "title": "강경화 \"한미 정보협력, 제일 어려운 현안…백악관 소통도 한계\"",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-10-12T19:19:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001394900?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "강경화",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "차준환 국가대표 중단",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "차준환이 오랜 고민 끝에 국가대표·대회 출전 중단을 선언했다.",
-      "headlines": [
-        {
-          "title": "‘피겨 간판’ 차준환, 국가대표·대회 출전 중단…“정말 많이 고민했...",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-10-12T12:57:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005747484?sid=102"
-        },
-        {
-          "title": "은퇴설 일축하더니…차준환, 국가대표 활동 중단 선언, “오랜 고민 끝...",
-          "press": "biz.heraldcorp.com",
-          "publishedAt": "2026-10-12T13:13:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/016/0002708311?sid=103"
-        },
-        {
-          "title": "\"은퇴는 아니지만…\" 피겨 차준환, 돌연 국가대표·선수 활동 중단 선언...",
-          "press": "fnnews.com",
-          "publishedAt": "2026-10-12T14:25:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/014/0005588088?sid=103"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "배달",
@@ -4965,183 +6922,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
-    },
-    {
-      "issue": "故 김현이 추모",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "액션배우 김현이의 사망 비보가 뒤늦게 전해져 드라마들이 추모했다.",
-      "headlines": [
-        {
-          "title": "김지원·김유정 드라마, 엔딩서 故 김현이 잇따라 추모…누구길래",
-          "press": "tenasia.co.kr",
-          "publishedAt": "2026-10-12T00:14:00.000Z",
-          "link": "https://m.entertain.naver.com/article/312/0000779551"
-        },
-        {
-          "title": "故김현이, 뒤늦게 전해진 사망 비보…김지원·김유정 드라마, 엔딩 추모",
-          "press": "enews.imbc.com",
-          "publishedAt": "2026-10-12T04:20:00.000Z",
-          "link": "https://m.entertain.naver.com/article/408/0000324140"
-        },
-        {
-          "title": "“故 김현이, 잊지 않겠다”…김지원·김유정 드라마에 나란히 등장한 ...",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-10-12T06:24:00.000Z",
-          "link": "https://m.entertain.naver.com/article/410/0001142991"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "故 김현이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "우크라이나",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "트럼프가 러시아·우크라이나의 에너지 휴전 합의를 발표했다.",
-      "headlines": [
-        {
-          "title": "트럼프 \"러시아·우크라이나, 에너지 휴전 합의\"(종합)",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-11T17:10:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014245563?sid=104"
-        },
-        {
-          "title": "트럼프 \"러시아·우크라이나 '에너지 휴전' 합의…즉시 발효\"",
-          "press": "news.tf.co.kr",
-          "publishedAt": "2026-10-11T22:24:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/629/0000540922?sid=104"
-        },
-        {
-          "title": "우크라 외무, 北포로 한국행 공개 논란에 \"종결된 사안\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-12T15:48:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016372157?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "우크라이나 북한포로",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "우크라이나 전쟁",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "우크라이나 러시아 전쟁",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "우크라이나 대통령",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "우크라이나 포로",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "러시아 우크라이나",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "우크라이나 국기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "우크라이나 수도",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "2026년 운세",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "2026년 10월 13일 띠별·별자리 운세가 공개됐다.",
-      "headlines": [
-        {
-          "title": "오늘의 운세 띠별 운세 10월13일",
-          "press": "bntnews.co.kr",
-          "publishedAt": "2026-10-12T15:02:00.000Z",
-          "link": "https://www.bntnews.co.kr/article/view/bnt202610120223"
-        },
-        {
-          "title": "[오늘의 운세] 2026년 10월 13일 별자리 운세",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-10-12T21:03:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006386807?sid=103"
-        },
-        {
-          "title": "오늘의 운세-띠별(10월13일)",
-          "press": "kjdaily.com",
-          "publishedAt": "2026-10-12T15:02:00.000Z",
-          "link": "http://www.kjdaily.com/article.php?aid=1791817201688894227"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "2026년 운세 무료",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "2026년 운세 쥐띠",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "2026년 운세 용띠",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "2026년 운세 돼지띠",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "2026년 운세 띠",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "2026년 운세 양띠",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "2026년 운세 닭띠",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "뉴캐슬",
@@ -5235,582 +7017,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 1
-    },
-    {
-      "issue": "우리 발라드2 150인",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "'우리들의 발라드2'에서 최초로 150인 만장일치 무대가 나왔다.",
-      "headlines": [
-        {
-          "title": "‘우리들의발라드 2’ 150인 만장일치",
-          "press": "bntnews.co.kr",
-          "publishedAt": "2026-10-11T23:40:00.000Z",
-          "link": "https://www.bntnews.co.kr/article/view/bnt202610120108"
-        },
-        {
-          "title": "정재형 \"회초리 같은 무대\"…'우발라2'서 폭풍 오열",
-          "press": "enews.imbc.com",
-          "publishedAt": "2026-10-12T04:05:00.000Z",
-          "link": "https://m.entertain.naver.com/article/408/0000324132"
-        },
-        {
-          "title": "문근영도 홀렸다…'우리들의 발라드2' 최초 150인 만장일치 무대 탄생",
-          "press": "sportschosun.com",
-          "publishedAt": "2026-10-12T01:37:00.000Z",
-          "link": "https://m.entertain.naver.com/article/076/0004455123"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "패밀리",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "하나증권이 첫 패밀리오피스 가문 선정식을 열어 10개 가문을 뽑았다.",
-      "headlines": [
-        {
-          "title": "하나증권, 패밀리오피스 첫 '가문 선정식' 개최",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-10-12T04:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005424856?sid=101"
-        },
-        {
-          "title": "삼성전자 '패밀리허브·무빙스타일', 美 포브스 '스마트홈 어워드' 수상",
-          "press": "news1.kr",
-          "publishedAt": "2026-10-11T23:37:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009221135?sid=101"
-        },
-        {
-          "title": "하나증권 '패밀리오피스 가문' 첫 선정",
-          "press": "fnnews.com",
-          "publishedAt": "2026-10-12T09:21:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/014/0005588001?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "패밀리 레스토랑",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "패밀리 드라마",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "패밀리 레스토랑 가자",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "패밀리 김밥",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "패밀리 약국 놀웍",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "패밀리 밴",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "패밀리 카",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "패밀리 도사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "뮤즈 원더",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "메타가 오픈AI·앤트로픽을 겨냥한 최고 성능 AI '뮤즈 원더'를 공개했다.",
-      "headlines": [
-        {
-          "title": "저커버그 \"메타 AI, 오픈AI·앤트로픽 따라잡았다\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-12T18:50:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014248442?sid=104"
-        },
-        {
-          "title": "메타, AI 반격…오픈AI·앤스로픽 겨냥 '뮤즈 원더' 공개",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-10-12T20:05:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006386791?sid=101"
-        },
-        {
-          "title": "'다 따라 잡았다'…메타, '뮤즈 원더' 공개",
-          "press": "biz.sbs.co.kr",
-          "publishedAt": "2026-10-12T19:27:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/374/0000537398?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "메타 뮤즈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "뮤즈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "뮤즈 원더사용법",
-          "reason": "공개 후 이용 방법 수요",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "뮤즈 원더비교",
-          "reason": "경쟁모델 성능 비교",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "메타",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "네이버지도가 메타·구글·삼성 AI 글래스와 연동해 길안내를 제공한다.",
-      "headlines": [
-        {
-          "title": "저커버그 \"메타 AI, 오픈AI·앤트로픽 따라잡았다\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-12T18:50:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014248442?sid=104"
-        },
-        {
-          "title": "AI 안경에 '네이버 지도' 실린다…삼성·구글·메타와 협력",
-          "press": "nocutnews.co.kr",
-          "publishedAt": "2026-10-12T05:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/079/0004197707?sid=101"
-        },
-        {
-          "title": "[AI픽] 네이버지도, 이젠 안경 쓰고 길 찾는다…AI 글래스 연동",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-12T00:30:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016369938?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "메타 ai 글라스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 뮤즈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 AI",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 안경",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 인스타",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 글래스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "메타 글래스출시",
-          "reason": "국내 출시 시점 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "아나토미",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "클로드 코드용 '아나토미'가 공개돼 말로 3D 기계를 그릴 수 있다.",
-      "headlines": [
-        {
-          "title": "빈 라덴 잡은 이 기업…AI 시대 승자 될까 [박신영의 월가 아나토미]",
-          "press": "hankyung.com",
-          "publishedAt": "2026-10-09T19:57:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005340974?sid=104"
-        },
-        {
-          "title": "\"말 한마디로 작동하는 3D 기계 그려\"...클로드 코드용 '아나토미' 공개",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-12T09:00:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216170"
-        },
-        {
-          "title": "메디톡스, 태국서 'MAP 아나토미 워크샵' 성료",
-          "press": "ziksir.com",
-          "publishedAt": "2026-09-29T06:04:00.000Z",
-          "link": "https://www.ziksir.com/news/articleView.html?idxno=147753"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "아나토미 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "그레이 아나토미 시즌23",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "그레이 아나토미",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "아나토미 책",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "아나토미 해부학",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "아나토미 오브 스캔들",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "아나토미 마곡",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "아나토미 영화",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "아나토미 사용법",
-          "reason": "공개 후 사용 방법 수요",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "클로드코드 아나토미",
-          "reason": "연동 방법 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "아나토미 무료",
-          "reason": "이용 비용 여부 확인",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "올모 코어 3",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "Ai2가 MoE 학습 효율을 2.7배 높인 오픈소스 '올모 코어 3'을 공개했다.",
-      "headlines": [
-        {
-          "title": "Ai2, MoE 학습 효율 2.7배 높인 오픈소스 프레임워크 '올모 코어 3' 공개",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-12T08:56:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216173"
-        },
-        {
-          "title": "[유로 S코어북] 'GK 시몬의 실수를 극복' 스페인, 연장 끝 크로아티아에...",
-          "press": "stnsports.co.kr",
-          "publishedAt": "2021-06-28T18:35:00.000Z",
-          "link": "https://m.sports.naver.com/wfootball/article/450/0000075593"
-        },
-        {
-          "title": "[S코어북] '황희찬 결장' 라이프치히, 묀헨글라트바흐에 3-2 대역전승",
-          "press": "stnsports.co.kr",
-          "publishedAt": "2021-02-27T19:29:00.000Z",
-          "link": "https://m.sports.naver.com/wfootball/article/450/0000072212"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "올모",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "올모 코어3사용법",
-          "reason": "공개 후 활용법 수요",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "Ai2",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "Ai2가 오픈소스 로봇 AI '몰모액트 2'를 공개했다.",
-      "headlines": [
-        {
-          "title": "Ai2, MoE 학습 효율 2.7배 높인 오픈소스 프레임워크 '올모 코어 3' 공개",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-12T08:56:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216173"
-        },
-        {
-          "title": "[금융AX리포트]KB 경진대회 AI 에이전트 적용했더니…은행 민원 처리 속...",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-10-07T06:02:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006382977?sid=101"
-        },
-        {
-          "title": "[금융지주 임원 인사 전망] [KB금융] \"AI에 그룹 명운\"…디지털·IT 인사...",
-          "press": "dealsite.co.kr",
-          "publishedAt": "2026-10-01T23:02:00.000Z",
-          "link": "https://dealsite.co.kr/articles/169896"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "ai2.com",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ai2-thor",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ai2 셋탑",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "Ai2 올모",
-          "reason": "같은 기관 모델 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "오르카라우터",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "오르카라우터가 100만 토큰 컨텍스트의 사이버 보안 모델을 공개했다.",
-      "headlines": [
-        {
-          "title": "오르카라우터, 100만 토큰 컨텍스트 지원 사이버 보안 모델 공개",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-12T09:06:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216167"
-        },
-        {
-          "title": "큐원3.8-플래시-넥스트, '무검열판' 등장...\"성능 유지·거부율 0%\"",
-          "press": "aitimes.com",
-          "publishedAt": "2026-08-29T08:08:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=214597"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [
-        {
-          "keyword": "오르카라우터 사용법",
-          "reason": "공개 후 활용법 수요",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "오르카라우터 보안활용",
-          "reason": "보안 적용 사례 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "오르카라우터 한국",
-          "reason": "국내 이용 가능성 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "모두의 AI",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "KT가 17개 기업과 함께 '모두의 AI'를 12월 출시한다.",
-      "headlines": [
-        {
-          "title": "[AI픽] KT '모두의 AI' 12월 출격…17개 기업 뭉쳤다",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-12T00:28:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016369932?sid=105"
-        },
-        {
-          "title": "KT '모두의 AI' 12월 출격…17개사 모여 서비스 준비 점검",
-          "press": "ddaily.co.kr",
-          "publishedAt": "2026-10-12T07:48:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/138/0002244428?sid=105"
-        },
-        {
-          "title": "[기업] KT \"모두의 AI 12월에 출시\"...17개 기업 협력 회의",
-          "press": "ytn.co.kr",
-          "publishedAt": "2026-10-12T08:59:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/052/0002417756?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "모두의 ai 실험실",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kt 모두의 ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "모두의 ai 사업",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "모두의 ai 공모전",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "모두의 ai 프로젝트",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "모두의 AI 서비스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "모두의 ai 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "모두의 ai 경진대회",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "모두의AI 요금",
-          "reason": "12월 출시 이용료 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "모두의AI 사용법",
-          "reason": "출시 후 이용 방법 수요",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "모두의AI 참여기업",
-          "reason": "17개사 명단 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 1,
+      "carried": true
     },
     {
       "issue": "포스코DX",
@@ -5897,7 +7105,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "사우디아라비아",
@@ -6416,24 +7625,5 @@
       "rowCount": 0,
       "carried": true
     }
-  ],
-  "enrichedAt": "2026-10-12T21:34:58.339Z",
-  "enrichStats": {
-    "enriched": 3,
-    "subsAdded": 2,
-    "titleUpgraded": 0,
-    "proposed": 21,
-    "verified": 11,
-    "judged": 0,
-    "judgedBad": 0,
-    "related": 0,
-    "picked": 0,
-    "pooled": 6,
-    "aiTitled": 3,
-    "trended": 1,
-    "whyAdded": 2,
-    "homeRetried": 2,
-    "aiCalls": 3,
-    "partial": false
-  }
+  ]
 }
