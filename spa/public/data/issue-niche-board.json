@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-10-13T03:32:22.083Z",
+  "publishedAt": "2026-10-13T09:22:43.155Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
-    "issues": 16,
-    "candidates": 161,
-    "niche": 0,
-    "preemption": 35,
+    "issues": 18,
+    "candidates": 240,
+    "niche": 3,
+    "preemption": 6,
     "pending": 0
   },
   "freeSample": {
@@ -18,6 +18,536 @@
     ]
   },
   "rows": [
+    {
+      "keyword": "킬링타임 장모님 배우",
+      "issue": "킬링타임",
+      "topic": "킬링타임",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 1건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 1,
+        "sampledTitles": 10,
+        "topTitles": [
+          "킬링타임 ㅡ 친구와 장모님",
+          "(중국 숏드) 어리숙한 사위: 공대생의 고대 사회 정복기",
+          "2026.7.26.(일요일) TV편성표 예고편 ♥ KBS1 KBS2 EBS1 tvN TV조선 JTBC MBN MBC SBS 채널A OBS iHQ 황정민 김정은",
+          "와일드씽(2026)",
+          "넷플릭스 데이 시프트 Day Shift 2022 제이미 폭스. 스눕 독. 데이브 프랭코. 뱀파이어 사냥꾼.",
+          "2026년 8월 독서일기 - 혼모노, 유성의 인연, 홀",
+          "[미드]Nemesis(완전한 적) 리뷰",
+          "가벼운 로맨스코미디 영화, 30일",
+          "[영화리뷰] 헬머니 (Granny's Got Talent, 2015)",
+          "2021년 영화 박스오피스 - 영화진흥위원회"
+        ],
+        "measuredAt": "2026-10-13T09:19:53.992Z"
+      },
+      "documentCount": 224,
+      "documentCountMeasured": true,
+      "searchVolume": 700,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 1.1723838569752427,
+      "issueStatus": "rising",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 700",
+        "문서수 224",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 700 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.2배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "공포액션 영화 킬링타임, 남윤수가 첫 영화 데뷔한다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "킬링타임 장모님 배우, 류혜영 남윤수 출연진 개봉일",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "킬링타임 장모님 배우 궁금해서 출연진 찾아봤다가 의외로 헷갈렸네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "킬링타임 영화",
+          "searchVolume": 3850,
+          "frame": "generic"
+        },
+        {
+          "keyword": "킬링타임 시사회",
+          "searchVolume": 140,
+          "frame": "generic"
+        },
+        {
+          "keyword": "킬링타임 출연진",
+          "searchVolume": 130,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "킬링타임 영화",
+          "searchVolume": 3850,
+          "documentCount": 229845,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "킬링타임 시사회",
+          "searchVolume": 140,
+          "documentCount": 6607,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "킬링타임 출연진",
+          "searchVolume": 130,
+          "documentCount": 28101,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "킬링타임 등장인물",
+          "searchVolume": 60,
+          "documentCount": 41492,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "킬링타임 류혜영",
+          "searchVolume": 30,
+          "documentCount": 398,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "킬링타임 남윤수",
+          "searchVolume": 20,
+          "documentCount": 328,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "킬링타임 개봉일",
+          "searchVolume": 10,
+          "documentCount": 58405,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "킬링타임 줄거리",
+          "searchVolume": 10,
+          "documentCount": 66583,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": {
+        "series": [
+          13,
+          5,
+          10,
+          6,
+          0,
+          9,
+          8,
+          0,
+          0,
+          13,
+          0,
+          6,
+          0,
+          61,
+          30,
+          55,
+          34,
+          41,
+          34,
+          51,
+          23,
+          40,
+          16,
+          16,
+          7,
+          9,
+          7,
+          70,
+          100
+        ],
+        "label": "🚀 떡상",
+        "recommendation": "지금 당장 작성! 3일 내 급증 포착 → 선점 시 상위 노출 확률 매우 높음"
+      },
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-13T09:17:45.967Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null
+    },
+    {
+      "keyword": "신동엽 2728",
+      "issue": "신동엽",
+      "topic": "신동엽",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "직장인들) 자는 신동엽 한방에 깨우는 김원훈.jpg",
+          "소장장서목록 (2015.2.19, 7614권)",
+          "거제 고현 안경나라 -라피스센시블레 라피스센시블레 AS002 신동엽선글라스, 김성은선글라스- 고현안경, 고현라피스센시블레, 거제도라피스센시블레, 거제라피스센시블레, 거제라피스센시....",
+          "충청남도 천안시 동남구 전문건설업체",
+          "이병헌 이민정 결혼식 (이병헌 이민정 본식)",
+          "'미우새' 임영웅 콘서트 피켓팅…주제 파악 좀 하고 더 큰 데서 하라더라",
+          "공감 요정 된 임영웅 '미우새'에서 입담 매력 뿜뿜",
+          "임영웅 ‘미운 우리 새끼’ 전격 출연",
+          "충청남도 약국 현황",
+          "2024 마지막 컨텐츠 결산"
+        ],
+        "measuredAt": "2026-10-13T09:19:49.139Z"
+      },
+      "documentCount": 38,
+      "documentCountMeasured": true,
+      "searchVolume": 810,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "declining",
+      "demandRatio": 0.2867923753648869,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 810",
+        "문서수 38",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 810 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.3배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "신동엽이 짠한형에서 정웅인에게 20년 만에 축의금을 전달했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "신동엽 2728 정웅인 폭행설 진실과 짠한형 딸 서울대 합격",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "신동엽 2728 정웅인한테 20년 만에 축의금 주는 이유가 있더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": {
+        "series": [
+          100,
+          92,
+          87,
+          32,
+          51,
+          46,
+          44,
+          32,
+          37,
+          29,
+          33,
+          20,
+          37,
+          30,
+          22,
+          28,
+          13,
+          14,
+          15,
+          22,
+          10,
+          0,
+          8,
+          8,
+          16,
+          0,
+          9,
+          13,
+          9
+        ]
+      },
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-13T09:17:45.967Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null
+    },
+    {
+      "keyword": "공군 기수",
+      "issue": "공군",
+      "topic": "공군",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "공군 수료식·수료외박·특기학교 준비물 한 번에 정리 (2026년)",
+          "공군 부사관 모집 일정, 제257기 면접과 합격 발표일 확인하기",
+          "공군 일반병 모집 접수하기",
+          "공군 일반병 26년 8월 28일~9월 2일 접수 자격증 없어도 되는 진짜 이유",
+          "공군부사관 지원, 접수부터 항공정비 진로 준비까지",
+          "[공군♡곰신] 특기학교 영외면회 외출 꿀팁(2026ver)",
+          "군 입대 준비물 어떻게 준비해야 하나? : 공군 입대 필수 지참 품목, 지참 가능 품목 리스트 확인은 공군 기본 군사훈련단 누리집에서...",
+          "여자 공군되는법, 부사관 지원 조건부터 준비 순서까지",
+          "공군수료식 준비물과 확인사항, 꽃다발은 어떻게 준비할까",
+          "27년 공군 일반병 입대 모집 일정 신청 지원 방법"
+        ],
+        "measuredAt": "2026-10-13T09:19:18.527Z"
+      },
+      "documentCount": 19883,
+      "documentCountMeasured": true,
+      "searchVolume": 1080,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 0.9765458265024547,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 1,080",
+        "문서수 19,883",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 1,080 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.0배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "2027년 입영 공군 일반병 5520명 선발, 경쟁률 약 9대 1",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "공군 기수표로 2027 일반병 입영일자 확인하기",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "공군 기수 확인하려다 입영일자 계산에서 의외로 많이들 헷갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "공군 기수표",
+          "searchVolume": 40,
+          "frame": "generic"
+        },
+        {
+          "keyword": "공군 입대 기수",
+          "searchVolume": 20,
+          "frame": "generic"
+        },
+        {
+          "keyword": "공군 기수 계산",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "공군 기수표",
+          "searchVolume": 40,
+          "documentCount": 4,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "공군 입대 기수",
+          "searchVolume": 20,
+          "documentCount": 3034,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": {
+        "series": [
+          77,
+          81,
+          62,
+          43,
+          68,
+          79,
+          68,
+          51,
+          77,
+          81,
+          72,
+          89,
+          77,
+          60,
+          72,
+          74,
+          100,
+          96,
+          62,
+          49,
+          51,
+          79,
+          60,
+          79,
+          62,
+          62,
+          70,
+          79,
+          77
+        ],
+        "label": "🐢 연금형",
+        "recommendation": "한 번 쓰면 1년 꾸준 방문자. 안정적 연금 키워드"
+      },
+      "kinCount": 12274,
+      "kinTop": [
+        {
+          "title": "공군 항공정비 부사관 질문",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6030203&docId=495156510&answerNo=5",
+          "views": 232,
+          "answers": 5
+        },
+        {
+          "title": "공군 부사관 기술병 기계",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6030203&docId=495145422&answerNo=3",
+          "views": 205,
+          "answers": 3
+        },
+        {
+          "title": "공군 운전병",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6030203&docId=495416283&answerNo=1",
+          "views": 94,
+          "answers": 1
+        },
+        {
+          "title": "공군 조종 장교",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6030203&docId=495424311&answerNo=1",
+          "views": 68,
+          "answers": 1
+        },
+        {
+          "title": "옛 공군 병 계급별 진급 기간",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6030203&docId=495515271&answerNo=3",
+          "views": 22,
+          "answers": 3
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-13T09:17:45.967Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null
+    },
     {
       "keyword": "뉴캐슬 구단주",
       "issue": "뉴캐슬",
@@ -337,7 +867,6 @@
       ],
       "trend": {
         "series": [
-          0,
           16,
           16,
           9,
@@ -365,11 +894,12 @@
           16,
           10,
           9,
-          8
+          8,
+          32
         ],
         "label": "📉 단발성",
         "recommendation": "회피! 지난 며칠 폭발 후 급락 중. 글 써도 유입 없음",
-        "measuredAt": "2026-10-12T21:33:57.832Z"
+        "measuredAt": "2026-10-13T09:22:43.749Z"
       },
       "kinCount": 217,
       "kinTop": [
@@ -485,7 +1015,6 @@
       "keywordPool": null,
       "trend": {
         "series": [
-          36,
           79,
           68,
           54,
@@ -513,9 +1042,12 @@
           89,
           39,
           79,
-          39
+          39,
+          79
         ],
-        "measuredAt": "2026-10-12T21:33:57.832Z"
+        "label": "❄️ 시즌성",
+        "recommendation": "시즌 임박 신호. 2주 안에 작성해서 시즌 동안 트래픽 확보",
+        "measuredAt": "2026-10-13T09:22:43.749Z"
       },
       "kinCount": 355,
       "kinTop": [
@@ -546,6 +1078,437 @@
     }
   ],
   "observations": [
+    {
+      "keyword": "크래프톤 김재서",
+      "issue": "크래프톤",
+      "topic": "크래프톤",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 21,
+      "documentCountMeasured": true,
+      "searchVolume": 20,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "declining",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 20",
+        "문서수 21",
+        "선점 후보 — 경쟁 문서 21건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "크래프톤이 역대 최대 규모 AI Native 신입 100명 이상 채용한다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "크래프톤 김재서 AI Native 신입 100명 채용 23일 마감",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "크래프톤 김재서 신입 채용 기준 듣고 나니 지원서를 다시 열어봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "크래프톤 신입 채용",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "크래프톤 신입 채용",
+          "searchVolume": 10,
+          "documentCount": 1885,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-13T09:17:45.967Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "비드래프트 NPU",
+      "issue": "비드래프트",
+      "topic": "비드래프트",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 35,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 35",
+        "선점 후보 — 경쟁 문서 35건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "비드래프트가 NPU 가속 SW VKORE로 추론·학습 동시 구현했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "비드래프트 NPU 가속 VKORE, 추론·학습 동시 구현 방식",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "비드래프트 NPU 투자 결정하기 전에 이 부분부터 다시 보게 되더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "비드래프트 투자",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-13T09:17:45.967Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "마이아 300 스펙",
+      "issue": "마이아 300",
+      "topic": "마이아 300",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "사양 궁금",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 48,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 48",
+        "선점 후보 — 경쟁 문서 48건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 사양 궁금"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "MS가 자체 AI칩 마이아 300을 공개, 내년 대규모 배치한다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "마이아 300 스펙 성능과 내년 100만개 배치 규모 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "마이아 300 스펙 보니 내년 100만개 배치가 왜 나왔는지 알겠더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-13T09:17:45.967Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "ms 콜백신청방법",
+      "issue": "MS",
+      "topic": "MS",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 59,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 59",
+        "선점 후보 — 경쟁 문서 59건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "MS가 자체 AI칩 마이아 300을 공개, 내년 100만개 배치한다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "거래",
+      "adsenseFit": false,
+      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+      "titles": {
+        "seo": {
+          "text": "ms 콜백신청방법 처음 해도 막히지 않는 순서",
+          "frame": "howto",
+          "basis": "검색 질문 'ms 콜백신청방법' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+        },
+        "home": {
+          "text": "ms 콜백신청방법 이 순서대로 눌렀더니 안내 전화가 오더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-13T09:17:45.967Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "오픈AI 닷츠 이용방법",
+      "issue": "오픈AI",
+      "topic": "오픈AI",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 122,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 122",
+        "선점 후보 — 경쟁 문서 122건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "메타가 새 AI모델 뮤즈 원더를 공개하며 오픈AI·앤트로픽을 추격",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "거래",
+      "adsenseFit": false,
+      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+      "titles": {
+        "seo": {
+          "text": "오픈AI 닷츠 이용방법 처음 쓸 때 막히는 설정부터",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "오픈AI 닷츠 이용방법 그냥 따라하다 보니 사용법부터 다시 봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "오픈AI 사용법",
+          "searchVolume": 10,
+          "frame": "howto"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "오픈AI 사용법",
+          "searchVolume": 10,
+          "documentCount": 226499,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-13T09:17:45.967Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "비드래프트 김민식",
+      "issue": "비드래프트",
+      "topic": "비드래프트",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 169,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 169",
+        "선점 후보 — 경쟁 문서 169건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "비드래프트가 NPU 가속 SW VKORE로 추론·학습 동시 구현했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "비드래프트 김민식 대표의 VKORE NPU 가속 기술 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "비드래프트 김민식 투자 얘기 듣고 나서 통장 잔고를 다시 세어봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "비드래프트 투자",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-13T09:17:45.967Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "이범호 전두환",
       "issue": "이범호",
@@ -628,7 +1591,8 @@
       "monetize": null,
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "메디톡스 아나토미",
@@ -743,7 +1707,8 @@
       "monetize": null,
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "Ai2 몰모액트",
@@ -805,7 +1770,8 @@
       "monetize": null,
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "아나토미 에스테틱 강남",
@@ -872,7 +1838,8 @@
       "monetize": null,
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "오르카라우터 사용법",
@@ -938,7 +1905,8 @@
       "monetize": null,
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "오르카라우터 보안",
@@ -995,7 +1963,8 @@
       "monetize": null,
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "오르카라우터 성능",
@@ -1057,69 +2026,8 @@
       "monetize": null,
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "몰모액트 2",
-      "issue": "Ai2",
-      "topic": "Ai2",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 10,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 10",
-        "선점 후보 — 경쟁 문서 10건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "Ai2가 오픈소스 올모 코어 3와 로봇 AI 몰모액트 2 공개",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "몰모액트 2 Ai2 오픈소스 로봇 AI 뭐가 달라졌나",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "몰모액트 2 공개됐는데 스탠퍼드 의대 실험실 얘기가 눈에 띄네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-13T03:21:59.628Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "오르카라우터 공개",
@@ -1181,7 +2089,8 @@
       "monetize": null,
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "아나토미 오브 뜻",
@@ -1289,7 +2198,8 @@
       },
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "아나토미 스트랭스 뜻",
@@ -1396,7 +2306,8 @@
       },
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "오르카라우터 모델",
@@ -1458,7 +2369,8 @@
       "monetize": null,
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "아나토미 클로드코드",
@@ -1520,7 +2432,8 @@
       "monetize": null,
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "아나토미 AI툴",
@@ -1582,7 +2495,8 @@
       "monetize": null,
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "아나토미 CAD",
@@ -1644,7 +2558,8 @@
       "monetize": null,
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "오르카라우터",
@@ -1706,7 +2621,8 @@
       "monetize": null,
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "ai2-thor",
@@ -1761,7 +2677,8 @@
       "monetize": null,
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "광주 루아 MVP",
@@ -1840,7 +2757,8 @@
       "monetize": null,
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "Ai2 올모",
@@ -1902,7 +2820,8 @@
       "monetize": null,
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "아나토미 빈야사 뜻",
@@ -1985,7 +2904,8 @@
       },
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "답변하는 임광현 국세청장",
@@ -2051,7 +2971,8 @@
       "monetize": null,
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "뮤즈 원더 벤치마크",
@@ -2113,73 +3034,8 @@
       "monetize": null,
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "ms 콜백신청방법",
-      "issue": "MS",
-      "topic": "MS",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 59,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 59",
-        "선점 후보 — 경쟁 문서 59건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "MS가 자체 AI칩 마이아 공개 후 시총 4조달러 복귀",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "거래",
-      "adsenseFit": false,
-      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-      "titles": {
-        "seo": {
-          "text": "ms 콜백신청방법 처음 해도 막히지 않는 순서",
-          "frame": "howto",
-          "basis": "검색 질문 'ms 콜백신청방법' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        },
-        "home": {
-          "text": "ms 콜백신청방법, 어렵게 할 필요 없습니다",
-          "frame": "howto",
-          "basis": "검색 질문 'ms 콜백신청방법' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-13T03:21:59.628Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "마이아 300 사양",
@@ -2241,7 +3097,8 @@
       "monetize": null,
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "아나토미 오피스 결말",
@@ -2302,7 +3159,8 @@
       "monetize": null,
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "뮤즈 원더 GPT",
@@ -2364,7 +3222,8 @@
       "monetize": null,
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "뮤즈 원더 클로드",
@@ -2426,7 +3285,8 @@
       "monetize": null,
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "뮤즈 원더 지능",
@@ -2488,7 +3348,8 @@
       "monetize": null,
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "아나토미 3D 설계",
@@ -2550,7 +3411,8 @@
       "monetize": null,
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "올모 코어 3",
@@ -2618,7 +3480,8 @@
       "monetize": null,
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "뮤즈 원더 성능",
@@ -2669,7 +3532,8 @@
       "monetize": null,
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "마이아 300 출시일",
@@ -2735,7 +3599,8 @@
       "monetize": null,
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "마이아 300 추론",
@@ -2810,7 +3675,8 @@
       "monetize": null,
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "마이아 300 성능",
@@ -2885,7 +3751,8 @@
       "monetize": null,
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "마이아 300 배치",
@@ -2947,7 +3814,8 @@
       "monetize": null,
       "measuredAt": "2026-10-13T03:21:59.628Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "오르카라우터 컨텍스트",
@@ -5085,1066 +5953,1166 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "심휘윤 우산",
-      "issue": "심휘윤",
-      "topic": "심휘윤",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 11,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 11",
-        "선점 후보 — 경쟁 문서 11건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "키움이 심휘윤·박주성 등 8명을 방출하며 선수단을 정리했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "심휘윤 우산 키움 방출 8명 명단과 근황 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "심휘윤 우산 들고 나온 모습 보다가 프로필까지 다시 찾아보게 되더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "심휘윤 프로필",
-          "searchVolume": 30,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "심휘윤 프로필",
-          "searchVolume": 30,
-          "documentCount": 7,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-11T09:18:18.735Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "심휘윤 이적",
-      "issue": "심휘윤",
-      "topic": "심휘윤",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "새 팀 여부",
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 9,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 9",
-        "선점 후보 — 경쟁 문서 9건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — 새 팀 여부"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "키움이 심휘윤·박주성 등 8명을 방출하며 선수단을 정리했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "심휘윤 이적? 키움 방출 8명 명단과 미남 선수 근황",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "심휘윤 이적 찾다가 프로필 보니 이 선수 이야기가 좀 다르더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "심휘윤 프로필",
-          "searchVolume": 30,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "심휘윤 프로필",
-          "searchVolume": 30,
-          "documentCount": 7,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-11T09:18:18.735Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "심휘윤 여자친구",
-      "issue": "심휘윤",
-      "topic": "심휘윤",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 14,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 14",
-        "선점 후보 — 경쟁 문서 14건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "키움이 심휘윤·박주성 등 8명을 방출하며 선수단을 정리했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "심휘윤 여자친구부터 키움 방출 8명 명단과 프로필까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "심휘윤 여자친구 궁금해서 들어갔다가 프로필에 먼저 눈이 가더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "심휘윤 프로필",
-          "searchVolume": 30,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "심휘윤 프로필",
-          "searchVolume": 30,
-          "documentCount": 7,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-11T09:18:18.735Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "심휘윤 나이",
-      "issue": "심휘윤",
-      "topic": "심휘윤",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 21,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 21",
-        "선점 후보 — 경쟁 문서 21건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "키움이 심휘윤·박주성 등 8명을 방출하며 선수단을 정리했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "심휘윤 나이 키움 방출된 미남 선수 프로필까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "심휘윤 나이에 심휘윤 프로필까지 찾아보다 생각보다 오래 붙잡혀 있었네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "심휘윤 프로필",
-          "searchVolume": 30,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "심휘윤 프로필",
-          "searchVolume": 30,
-          "documentCount": 7,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-11T09:18:18.735Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "심휘윤 올스타",
-      "issue": "심휘윤",
-      "topic": "심휘윤",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 54,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 54",
-        "선점 후보 — 경쟁 문서 54건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "키움이 심휘윤·박주성 등 8명을 방출하며 선수단을 정리했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "심휘윤 올스타 키움 방출 8명 명단과 현재 상황",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "심휘윤 올스타 프로필 찾다가 방출 명단에서 이름을 봤네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "심휘윤 프로필",
-          "searchVolume": 30,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "심휘윤 프로필",
-          "searchVolume": 30,
-          "documentCount": 7,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-11T09:18:18.735Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "심휘윤 성적",
-      "issue": "심휘윤",
-      "topic": "심휘윤",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 60,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 60",
-        "선점 후보 — 경쟁 문서 60건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "키움이 심휘윤·박주성 등 8명을 방출하며 선수단을 정리했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "심휘윤 성적과 키움 방출 이유 통산 기록까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "심휘윤 성적 보다가 프로필 나이에 눈이 한 번 더 갔네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "심휘윤 프로필",
-          "searchVolume": 30,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "심휘윤 프로필",
-          "searchVolume": 30,
-          "documentCount": 7,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-11T09:18:18.735Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "심휘윤 포지션",
-      "issue": "심휘윤",
-      "topic": "심휘윤",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 59,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 59",
-        "선점 후보 — 경쟁 문서 59건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "키움이 심휘윤·박주성 등 8명을 방출하며 선수단을 정리했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "심휘윤 포지션 키움 방출 8명 미남 선수 프로필",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "심휘윤 포지션 알고 싶어 프로필 뒤적이다 방출 명단에서 이름 보고 다시 봤네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "심휘윤 프로필",
-          "searchVolume": 30,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "심휘윤 프로필",
-          "searchVolume": 30,
-          "documentCount": 7,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-11T09:18:18.735Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "심휘윤 키움",
-      "issue": "심휘윤",
-      "topic": "심휘윤",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 198,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 198",
-        "선점 후보 — 경쟁 문서 198건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "키움이 심휘윤·박주성 등 8명을 방출하며 선수단을 정리했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "심휘윤 키움 방출 8명 명단, 1차지명 박주성까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "심휘윤 키움 프로필 보다가 한 줄에서 눈이 멈춰 한참 다시 봤네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "심휘윤 프로필",
-          "searchVolume": 30,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "심휘윤 프로필",
-          "searchVolume": 30,
-          "documentCount": 7,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 3,
-      "kinTop": [
-        {
-          "title": "키움 심휘윤선수",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1061203&docId=483130285&answerNo=1",
-          "views": 330,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-11T09:18:18.735Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "닥터X 고증 시청자",
-      "issue": "닥터X 고증 시청자",
-      "topic": "닥터X 고증 시청자",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 247,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 247",
-        "선점 후보 — 경쟁 문서 247건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "드라마 닥터X가 의학 고증 논란 속 시청률 14.9%를 기록했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "닥터X 고증 시청자 반응, 14.9% 시청률 김지원 화제",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "닥터X 고증 시청자들이 등장인물 실제 모델이 누군지 찾다가 밤새우더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "닥터X 시청률",
-          "searchVolume": 45480,
-          "frame": "generic"
-        },
-        {
-          "keyword": "닥터X 재방송",
-          "searchVolume": 27890,
-          "frame": "generic"
-        },
-        {
-          "keyword": "닥터X 등장인물",
-          "searchVolume": 10450,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "닥터X 시청률",
-          "searchVolume": 45480,
-          "documentCount": 8928,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "닥터X 재방송",
-          "searchVolume": 27890,
-          "documentCount": 1450,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "닥터X 등장인물",
-          "searchVolume": 10450,
-          "documentCount": 14464,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "닥터X 몇부작",
-          "searchVolume": 8780,
-          "documentCount": 3876,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "닥터X 출연진",
-          "searchVolume": 6910,
-          "documentCount": 12033,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "닥터X 김지원",
-          "searchVolume": 2270,
-          "documentCount": 10006,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "닥터X OST",
-          "searchVolume": 1330,
-          "documentCount": 3710,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "닥터X 결말",
-          "searchVolume": 740,
-          "documentCount": 6355,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "닥터X 의학자문",
-          "searchVolume": 10,
-          "documentCount": 1788,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-11T09:18:18.735Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "심휘윤 선수",
-      "issue": "심휘윤",
-      "topic": "심휘윤",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 270,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 270",
-        "선점 후보 — 경쟁 문서 270건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "키움이 심휘윤·박주성 등 8명을 방출하며 선수단을 정리했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "심휘윤 선수 프로필 포지션과 키움 방출 8명 명단",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "심휘윤 선수 프로필 보다가 키움 방출 명단에서 눈이 멈췄네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "심휘윤 프로필",
-          "searchVolume": 30,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "심휘윤 프로필",
-          "searchVolume": 30,
-          "documentCount": 7,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 7,
-      "kinTop": [
-        {
-          "title": "야구 선수 중에 잘생긴 선수",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10010202&docId=469904270&answerNo=7",
-          "views": 2640,
-          "answers": 7
-        },
-        {
-          "title": "인스타에 잘생긴 야구선수",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1001020201&docId=475394269&answerNo=3",
-          "views": 715,
-          "answers": 3
-        },
-        {
-          "title": "키움 심휘윤선수",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1061203&docId=483130285&answerNo=1",
-          "views": 330,
-          "answers": 1
-        },
-        {
-          "title": "야구선수 이름",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10010202&docId=462455064&answerNo=1",
-          "views": 325,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-11T09:18:18.735Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "심휘윤 야구",
-      "issue": "심휘윤",
-      "topic": "심휘윤",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 266,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 266",
-        "선점 후보 — 경쟁 문서 266건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "키움이 심휘윤·박주성 등 8명을 방출하며 선수단을 정리했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "심휘윤 야구 키움 방출 8명 명단과 재계약 불발",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "심휘윤 야구 그만두나 싶어 프로필 찾아봤더니 뭔가 좀 이상하더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "심휘윤 프로필",
-          "searchVolume": 30,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "심휘윤 프로필",
-          "searchVolume": 30,
-          "documentCount": 7,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 6,
-      "kinTop": [
-        {
-          "title": "야구 선수 중에 잘생긴 선수",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10010202&docId=469904270&answerNo=7",
-          "views": 2641,
-          "answers": 7
-        },
-        {
-          "title": "인스타에 잘생긴 야구선수",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1001020201&docId=475394269&answerNo=3",
-          "views": 716,
-          "answers": 3
-        },
-        {
-          "title": "야구선수 이름",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10010202&docId=462455064&answerNo=1",
-          "views": 325,
-          "answers": 1
-        },
-        {
-          "title": "고교야구 유니폼 구하는 방법",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10010202&docId=457750099&answerNo=1",
-          "views": 275,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-11T09:18:18.735Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
-  "rejectedCount": 0,
+  "rejectedCount": 1,
   "issues": [
     {
-      "issue": "코스피 매도 사이드카",
+      "issue": "코스피 하락 마감",
       "issueType": "fresh",
       "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "코스피 장중 4%대 급락에 두 달 만에 매도 사이드카 발동",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "코스피 5%대 급락해 6천선 사수, 외국인이 4.5조 순매도했다",
       "headlines": [
         {
-          "title": "코스피, 장중 4%대 급락…약 2달만 '매도 사이드카' 발동",
+          "title": "코스피, 5.5% 급락 '6천피' 간신히 사수…외국인 4.5조 팔았다(종합)",
           "press": "yna.co.kr",
-          "publishedAt": "2026-10-13T00:53:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016372661?sid=101"
+          "publishedAt": "2026-10-13T07:22:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016374202?sid=101"
         },
         {
-          "title": "코스피 장중 4%대 급락…매도 사이드카 발동",
-          "press": "news.kbs.co.kr",
-          "publishedAt": "2026-10-13T00:58:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/056/0012272435?sid=101"
+          "title": "코스피 5%대 하락 마감...장중 '6천피' 붕괴",
+          "press": "ytn.co.kr",
+          "publishedAt": "2026-10-13T07:38:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/052/0002418210?sid=101"
         },
         {
-          "title": "코스피, 장중 4%대 급락‥두 달 만에 '매도 사이드카'",
-          "press": "imnews.imbc.com",
-          "publishedAt": "2026-10-13T00:51:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/214/0001528666?sid=101"
+          "title": "코스피, 삼전 역대급 실적에도 3.7% 급락…코스닥도 4.8%↓",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-10-12T06:35:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001394785?sid=101"
         }
       ],
       "concentrated": [],
       "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "오동운 공수처장 질의",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "공수처장이 대통령·국회의원 수사권 현행 유지해야 한다고 밝혔다",
+      "headlines": [
+        {
+          "title": "질의에 답하는 오동운 공수처장",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-13T07:10:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016374171?sid=100"
+        },
+        {
+          "title": "[국감] 질의 답변하는 오동운 공수처장",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-13T06:42:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009225178?sid=100"
+        },
+        {
+          "title": "오동운 공수처장 \"대통령·국회의원 수사 현행 제도 유지해야\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-13T08:11:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014250861?sid=102"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "인천 칼부림 심정지",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "인천 홈플러스 상업시설 칼부림으로 1명 심정지·7명 부상",
+      "headlines": [
+        {
+          "title": "[단독]인천 홈플러스 칼부림 용의자, 지난달 1인시위 영상 입수",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-13T07:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014250522?sid=102"
+        },
+        {
+          "title": "홈플러스 입점 인천 상업시설서 칼부림…심정지 1명·7명 부상(종합)",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-13T05:58:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016373815?sid=102"
+        },
+        {
+          "title": "인천서 묻지마 칼부림…1명 심정지·7명 부상",
+          "press": "hankyung.com",
+          "publishedAt": "2026-10-13T06:26:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005341951?sid=102"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "국민연금",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "833만원 내고 1억 넘게 받은 10배 수급자가 2만명",
+      "headlines": [
+        {
+          "title": "[단독] 국민연금, 국감 직후 기금위…7월 운용성과 들여다본다",
+          "press": "sedaily.com",
+          "publishedAt": "2026-10-13T08:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/011/0004670811?sid=101"
+        },
+        {
+          "title": "[단독] 국민연금 관리운영비, 국고부담 1.7%에 불과",
+          "press": "hani.co.kr",
+          "publishedAt": "2026-10-13T08:20:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/028/0002827270?sid=102"
+        },
+        {
+          "title": "“1000만원도 안냈는데” 국민연금 1억 타갔다",
+          "press": "magazine.hankyung.com",
+          "publishedAt": "2026-10-13T05:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/050/0000111920?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "국민연금 수령나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "국민연금 납부액 조회",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "국민연금 조회",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "국민연금 납부",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "국민연금 조기수령",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "국민연금 해지",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "국민연금 가입",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "국민연금 추납",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "국민연금 고갈",
+          "reason": "지속가능성 우려",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "국민연금 개혁",
+          "reason": "제도 손질 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "국민연금 수익률",
+          "reason": "운용성과 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "킬링타임",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": "공포액션 영화 킬링타임, 남윤수가 첫 영화 데뷔한다",
+      "headlines": [
+        {
+          "title": "[포토] 류혜영, ‘킬링타임’만 생각",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-10-13T06:58:00.000Z",
+          "link": "https://m.entertain.naver.com/article/009/0005747853"
+        },
+        {
+          "title": "몰카가 진짜 살인 현장으로 바뀌었다…공포액션 영화 '킬링타임'",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-13T08:50:00.000Z",
+          "link": "https://m.entertain.naver.com/article/001/0016374453"
+        },
+        {
+          "title": "[포토] 류혜영, 킬링타임으로 즐기세요",
+          "press": "enews.imbc.com",
+          "publishedAt": "2026-10-13T07:17:00.000Z",
+          "link": "https://m.entertain.naver.com/article/408/0000324306"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "킬링타임 영화",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "킬링타임 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "킬링타임 유튜브",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "킬링타임 장모님",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "영화 킬링타임",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "킬링타임 윤과장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "킬링타임 ott",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "킬링타임 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "킬링타임 결말",
+          "reason": "관람 후 검색",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "킬링타임 쿠키영상",
+          "reason": "상영 후 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "킬링타임 손익분기점",
+          "reason": "흥행 성적",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "킬링타임 ott",
+          "reason": "공개 플랫폼",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "킬링타임 2",
+          "reason": "속편 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 1
+    },
+    {
+      "issue": "공군",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "2027년 입영 공군 일반병 5520명 선발, 경쟁률 약 9대 1",
+      "headlines": [
+        {
+          "title": "2027년 입영 예정 공군 일반병 5520명 공개 선발…경쟁률 약 9대 1",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-13T06:51:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009225205?sid=100"
+        },
+        {
+          "title": "내년 입영 공군 일반병 공개 전산추첨",
+          "press": "kookbang.dema.mil.kr",
+          "publishedAt": "2026-10-13T07:44:00.000Z",
+          "link": "https://kookbang.dema.mil.kr/newsWeb/20261014/4/ATCE_CTGR_0010010000/view.do"
+        },
+        {
+          "title": "한미 공군 교신 도청·반출한 중국군 퇴역장교, 재판서 “공소사실 인정...",
+          "press": "dt.co.kr",
+          "publishedAt": "2026-10-13T06:19:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/029/0003052818?sid=100"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "공군 지원",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "공군 복무기간",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "공군 훈련소",
+          "searchVolume": 7140,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "공군 모집",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "공군 군복",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "공군 경쟁률",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "공군 키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "공군 기간",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "공군 추첨 결과",
+          "reason": "합격 여부 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "공군 입영일 조회",
+          "reason": "입대 날짜",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "공군 특기",
+          "reason": "보직 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "공군 신체검사",
+          "reason": "입영 준비",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "공군 복무기간",
+          "reason": "복무 기간 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 1
+    },
+    {
+      "issue": "김도영 MVP 후보",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "김도영·곽빈 등 14명 MVP 후보, 신인상은 허인서·문정빈 각축",
+      "headlines": [
+        {
+          "title": "'역대급 경쟁' 김도영·곽빈 등 MVP 후보 발표…허인서·문정빈 신인왕...",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-13T06:47:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/003/0014250470"
+        },
+        {
+          "title": "김도영·곽빈 프로야구 MVP 후보…문정빈·허인서 신인상 각축",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-13T06:18:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/001/0016373898"
+        },
+        {
+          "title": "김도영·곽빈 등 14명 MVP 경쟁…허인서·문정빈 신인상 후보",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-13T07:23:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/421/0009225347"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "김수현",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "김새론 2016년 카톡 상대가 김수현 아닌 연예인 A씨로 지목됐다",
+      "headlines": [
+        {
+          "title": "[단독] \"2016년 카톡은, 연예인 A씨\"…김수현, 조작의 피해자",
+          "press": "dispatch.co.kr",
+          "publishedAt": "2026-10-13T01:04:00.000Z",
+          "link": "https://m.entertain.naver.com/article/433/0000131364"
+        },
+        {
+          "title": "김수현 '미성년자 교제' 낙인 찍은 카톡은 가짜? \"가세연이 조작\"",
+          "press": "hankyung.com",
+          "publishedAt": "2026-10-13T04:54:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005341897?sid=102"
+        },
+        {
+          "title": "김새론 2016년 카톡 상대, 김수현 아닌 연예인 A씨로 지목",
+          "press": "etoday.co.kr",
+          "publishedAt": "2026-10-13T07:20:00.000Z",
+          "link": "https://www.etoday.co.kr/news/view/2635300"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "김수현 드라마",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김새론 김수현",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김수현 치어리더",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김수현 몽티",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김수현 키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김수현 근황",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김수현 나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김수현 논란",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "김수현 복귀작",
+          "reason": "활동 재개",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "김수현 입장문",
+          "reason": "공식 반응",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "김수현 광고 복귀",
+          "reason": "이미지 회복",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "배경훈 부총리 로봇",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "배경훈 부총리가 피지컬 AI 글로벌 1강 도약을 강조했다",
+      "headlines": [
+        {
+          "title": "배경훈 부총리 \"피지컬 AI, 세계 시장 제패할 만큼 준비해야\"",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-10-13T08:51:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002440800?sid=105"
+        },
+        {
+          "title": "AI 로봇 관람하는 배경훈 부총리",
+          "press": "newspim.com",
+          "publishedAt": "2026-10-13T08:20:00.000Z",
+          "link": "https://www.newspim.com/news/view/20261013001225"
+        },
+        {
+          "title": "\"中 로봇 무섭게 달린다\"…배 부총리 \"피지컬 AI, 3년 뒤 후회 없을 목표...",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-13T07:36:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014250763?sid=105"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "신동엽",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "신동엽이 짠한형에서 정웅인에게 20년 만에 축의금을 전달했다",
+      "headlines": [
+        {
+          "title": "“딸 셋 생각나 미안했다”…신동엽, 정웅인 ‘후배 괴롭힘설’ 뒤늦게...",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-10-12T23:30:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005747539?sid=103"
+        },
+        {
+          "title": "'짠한형' 신동엽 \"장진, 게이인 줄 알았다\"…대학 시절 추억",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-12T12:21:00.000Z",
+          "link": "https://m.entertain.naver.com/article/421/0009223372"
+        },
+        {
+          "title": "정웅인, 신동엽 딸 서울대 합격에 \"이건 좀 아니지 않나\"…부러움 폭발...",
+          "press": "xportsnews.com",
+          "publishedAt": "2026-10-12T23:44:00.000Z",
+          "link": "https://m.entertain.naver.com/article/311/0002068140"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "신동엽 위스키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "신동엽 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "신동엽 교도소",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "신동엽 시인",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "신동엽 와이프",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "신동엽 신발",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "신동엽 콘돔",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "신동엽 2728",
+          "searchVolume": 810,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "신동엽 딸 서울대",
+          "reason": "자녀 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "신동엽 정웅인 화해",
+          "reason": "관계 회복",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 1
+    },
+    {
+      "issue": "오픈AI",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "메타가 새 AI모델 뮤즈 원더를 공개하며 오픈AI·앤트로픽을 추격",
+      "headlines": [
+        {
+          "title": "저커버그 \"메타 AI, 오픈AI·앤트로픽 따라잡았다\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-12T18:50:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014248442?sid=104"
+        },
+        {
+          "title": "오픈AI·앤트로픽 쫓는 메타…AI 모델 '뮤즈 원더' 공개",
+          "press": "etnews.com",
+          "publishedAt": "2026-10-13T01:09:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/030/0003474340?sid=105"
+        },
+        {
+          "title": "오픈AI·앤트로픽 따라잡는 메타…새 AI모델 '뮤즈 원더' 공개",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-12T22:37:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016372338?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "오픈ai 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈AI 매출",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 대표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 닷츠",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 종류",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 순위",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "오픈AI 대응",
+          "reason": "반격 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "코드 비디오 모델",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "MS가 코드로 영상 물리법칙을 제어하는 코드 비디오 모델을 공개",
+      "headlines": [
+        {
+          "title": "MS, 코드로 영상 속 물리법칙 정밀 제어하는 '코드 비디오 모델' 공개",
+          "press": "aitimes.com",
+          "publishedAt": "2026-10-13T08:20:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=216205"
+        },
+        {
+          "title": "깃허브 코파일럿, 윈도우서 로컬 모델 쓴다…기기용이 터미널 평가서 클...",
+          "press": "wikitree.co.kr",
+          "publishedAt": "2026-10-07T21:10:00.000Z",
+          "link": "https://www.wikitree.co.kr/articles/1164681"
+        },
+        {
+          "title": "구글, 네이티브 멀티모달 임베딩 지원 7.4억 파라미터 온디바이스 오픈...",
+          "press": "aitimes.kr",
+          "publishedAt": "2026-10-07T03:06:00.000Z",
+          "link": "https://www.aitimes.kr/news/articleView.html?idxno=42208"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "코드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "MS",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "MS가 자체 AI칩 마이아 300을 공개, 내년 100만개 배치한다",
+      "headlines": [
+        {
+          "title": "MS, 자체 AI칩 '마이아 300' 공개…\"내년 100만개 이상 배치\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-12T22:44:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016372340?sid=101"
+        },
+        {
+          "title": "MS, '탈(脫)엔비디아' 시동… 추론은 자체 칩, 학습은 GPU '이원화'",
+          "press": "ddaily.co.kr",
+          "publishedAt": "2026-10-12T23:17:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/138/0002244468?sid=105"
+        },
+        {
+          "title": "MS, 자체 AI칩 '마이아' 공개…주가 1.1%↑·시총 4조달러 복귀",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-10-13T02:26:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005425427?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "ms 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스",
+          "searchVolume": 21010,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스 무료",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스 영구",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스 365",
+          "searchVolume": 9670,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 정품인증방법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 콜백신청방법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 쿠키허용방법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "MS 주가",
+          "reason": "시장 반응",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "크래프톤",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "declining",
+      "isHot": false,
+      "why": "크래프톤이 역대 최대 규모 AI Native 신입 100명 이상 채용한다",
+      "headlines": [
+        {
+          "title": "크래프톤, 'AI Native' 신입 100명 이상 채용…역대 최대 규모",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-10-13T06:18:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002440759?sid=105"
+        },
+        {
+          "title": "크래프톤, 역대 최대 규모 'AI Native' 신입 채용…전 직군 100명 이상 선...",
+          "press": "inews24.com",
+          "publishedAt": "2026-10-13T03:11:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/031/0001065467?sid=105"
+        },
+        {
+          "title": "크래프톤, AI 인재 확대…채용연계형 인턴십 채용 실시",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-10-13T03:13:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005747738?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "크래프톤 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "크래프톤 본사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "크래프톤 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "크래프톤 게임",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "크래프톤 베트남",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "크래프톤 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "크래프톤 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "크래프톤 정글",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "크래프톤 채용 일정",
+          "reason": "마감일 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "크래프톤 연봉",
+          "reason": "처우 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "크래프톤 코딩테스트",
+          "reason": "전형 준비",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "크래프톤 면접",
+          "reason": "전형 대비",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "트럼프 행정부",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "dead",
+      "isHot": false,
+      "why": "트럼프가 테러범 총살형 생중계 역풍에 철회를 시사했다",
+      "headlines": [
+        {
+          "title": "靑, 트럼프와 ‘골프 회동’ 위해 전담 TF 가동",
+          "press": "chosun.com",
+          "publishedAt": "2026-10-13T07:19:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004003589?sid=100"
+        },
+        {
+          "title": "美 '총살형 생중계' 역풍 맞을라…트럼프 \"무산될수도\" 일보후퇴",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-13T03:14:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016373282?sid=104"
+        },
+        {
+          "title": "'사형 쇼' 역풍 맞은 트럼프…테러범 총살 생중계 철회하나",
+          "press": "nocutnews.co.kr",
+          "publishedAt": "2026-10-13T05:42:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/079/0004198212?sid=104"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "비드래프트",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "비드래프트가 NPU 가속 SW VKORE로 추론·학습 동시 구현했다",
+      "headlines": [
+        {
+          "title": "추론 전용 NPU로 AI 학습까지…비드래프트, 가속 기술 개발",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-10-13T03:03:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002440716?sid=105"
+        },
+        {
+          "title": "비드래프트, 퍼플렉시티·클라우드플레어·메타 제치고 ‘디시전 AI’ 글...",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-10-13T05:05:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001197631?sid=101"
+        },
+        {
+          "title": "비드래프트, NPU 가속 소프트웨어 'VKORE' 개발… 추론·학습 동시 구현",
+          "press": "aitimes.com",
+          "publishedAt": "2026-10-13T05:24:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=216203"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "비드래프트 투자방법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "비드래프트 ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "비드래프트 투자",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "비드래프트 김민식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "주식회사 비드래프트",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "비드래프트 투자",
+          "reason": "투자 유치 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "비드래프트 상장",
+          "reason": "IPO 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "비드래프트 채용",
+          "reason": "기업 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "팔레트 에이전트",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "팔레트가 AI 에이전트 서비스 Palette Agent를 글로벌 출시했다",
+      "headlines": [
+        {
+          "title": "팔레트, AI 에이전트 서비스 ‘Palette Agent’ 출시",
+          "press": "etoday.co.kr",
+          "publishedAt": "2026-10-13T01:22:00.000Z",
+          "link": "https://www.etoday.co.kr/news/view/2635069"
+        },
+        {
+          "title": "팔레트, AI 에이전트 서비스 '팔레트 에이전트' 출시",
+          "press": "datanet.co.kr",
+          "publishedAt": "2026-10-13T05:00:00.000Z",
+          "link": "https://www.datanet.co.kr/news/articleView.html?idxno=215035"
+        },
+        {
+          "title": "“똑똑한 AI 넘어 정확한 AI로”…AI 플랫폼기업 팔레트, ‘Palette Agent’...",
+          "press": "donga.com",
+          "publishedAt": "2026-10-13T05:01:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/020/0003754596?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "팔레트",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "팔레트 에이전트 사용법",
+          "reason": "활용 방법",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "팔레트 에이전트 기능",
+          "reason": "제공 기능",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "팔레트 에이전트 체험",
+          "reason": "무료 사용",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "마이아 300",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "MS가 자체 AI칩 마이아 300을 공개, 내년 대규모 배치한다",
+      "headlines": [
+        {
+          "title": "MS, 자체 AI칩 '마이아 300' 공개…\"내년 100만개 이상 배치\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-12T22:44:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016372340?sid=101"
+        },
+        {
+          "title": "MS, 자체 AI 반도체 ‘마이아 300’ 공개…엔비디아 의존도 낮춘다",
+          "press": "khan.co.kr",
+          "publishedAt": "2026-10-13T06:23:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/032/0003475986?sid=105"
+        },
+        {
+          "title": "MS, 엔비디아 의존 줄인다…자체 AI칩 '마이아 300' 공개",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-12T14:09:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014248388?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "마이아",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "마이아 300 스펙",
+          "reason": "사양 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
       "rowCount": 0
     },
     {
@@ -6187,7 +7155,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "이범호",
@@ -6259,157 +7228,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "김영훈 고용노동부 장관",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "메가특구 노동특례는 대화로 결과 만들겠다고 밝힘",
-      "headlines": [
-        {
-          "title": "김영훈 \"메가특구 노동특례, 결과 정해두지 않아…정부는 조력자\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-13T01:23:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014249033?sid=102"
-        },
-        {
-          "title": "노동장관 “메가특구 주 52시간 예외, 대화 통해 결과 만들어낼 것” [국...",
-          "press": "segye.com",
-          "publishedAt": "2026-10-13T02:14:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/022/0004166225?sid=102"
-        },
-        {
-          "title": "김영훈 노동부 장관 “메가특구 특례, 대화로 결과 만들 수 있게 조력”",
-          "press": "biz.chosun.com",
-          "publishedAt": "2026-10-13T02:36:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/366/0001197597?sid=102"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "유럽 연합군",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "나토 유럽사령관이 러시아에 대규모 보복 경고",
-      "headlines": [
-        {
-          "title": "\"공격 땐 대규모 보복\"…나토 유럽사령관, 러시아에 경고",
-          "press": "hankyung.com",
-          "publishedAt": "2026-10-12T13:18:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005341734?sid=104"
-        },
-        {
-          "title": "후티 공습에 사우디 영공 비상… 유럽·亞 잇는 하늘길 ‘흔들’",
-          "press": "segye.com",
-          "publishedAt": "2026-10-12T11:14:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/022/0004166034?sid=104"
-        },
-        {
-          "title": "나토 유럽사령관 \"동맹국 공격해봐야 헛일\"…러시아에 경고",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-12T13:05:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016372123?sid=104"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "삼성전기 주가",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "삼성전기 주가가 장중 6.93% 하락하며 코스피 급락 동반",
-      "headlines": [
-        {
-          "title": "“많이 벌어도 못 믿겠다”…코스피 싼 이유, 금리 때문만은 아니라는데",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-10-12T23:31:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005747540?sid=101"
-        },
-        {
-          "title": "“내 주식 어쩌지”...역대급 삼전 실적에도 코스피 ‘뚝’",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-10-12T06:07:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/024/0000108860?sid=101"
-        },
-        {
-          "title": "삼성전기 주가, 10월 13일 장중 1,384,000원 6.93% 하락",
-          "press": "topstarnews.net",
-          "publishedAt": "2026-10-13T01:18:00.000Z",
-          "link": "https://www.topstarnews.net/news/articleView.html?idxno=16245364"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "오늘 삼성전기 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼성전기 주가 예상",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼성전기 주가 분석",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼성전기 주가 목표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼성전기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "이재명 대통령 발언",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "굴종·사대적 외교 태도 지양하며 한미균열론 반박",
-      "headlines": [
-        {
-          "title": "이 대통령 \"국익 지켜지는 외교해야…굴종·사대적 태도 지양\"",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-10-13T02:03:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001395008?sid=100"
-        },
-        {
-          "title": "李대통령 \"국가간 이견 있기 마련…굴종·사대적 태도 지양해야\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-13T01:38:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016372863?sid=100"
-        },
-        {
-          "title": "이 대통령 \"굴종·사대적 태도 안 돼\"‥'한미 균열론' 반박",
-          "press": "imnews.imbc.com",
-          "publishedAt": "2026-10-13T02:12:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/214/0001528698?sid=100"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "광주 루아 MVP",
@@ -6440,146 +7260,8 @@
       ],
       "concentrated": [],
       "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "마이아 300",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "MS가 자체 AI칩 마이아 300 공개, 내년 100만개 이상 배치 예정",
-      "headlines": [
-        {
-          "title": "MS, 자체 AI칩 '마이아 300' 공개…\"내년 100만개 이상 배치\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-12T22:44:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016372340?sid=101"
-        },
-        {
-          "title": "MS, 엔비디아 의존 줄인다…자체 AI칩 '마이아 300' 공개",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-12T14:09:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014248388?sid=104"
-        },
-        {
-          "title": "[IT큐레이션] MS 추론의 왕 마이아 300",
-          "press": "econovill.com",
-          "publishedAt": "2026-10-12T23:54:00.000Z",
-          "link": "https://www.econovill.com/news/articleView.html?idxno=753356"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "마이아",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "마이아 300 출시일",
-          "reason": "배치 시점 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "MS",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "MS가 자체 AI칩 마이아 공개 후 시총 4조달러 복귀",
-      "headlines": [
-        {
-          "title": "MS, 자체 AI칩 '마이아 300' 공개…\"내년 100만개 이상 배치\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-12T22:44:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016372340?sid=101"
-        },
-        {
-          "title": "“엔비디아 세상 달라질 것”...MS의 자체 칩 백만 개 공급 구상[김창영...",
-          "press": "sedaily.com",
-          "publishedAt": "2026-10-12T20:49:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/011/0004670498?sid=104"
-        },
-        {
-          "title": "MS, '탈(脫)엔비디아' 시동… 추론은 자체 칩, 학습은 GPU '이원화'",
-          "press": "ddaily.co.kr",
-          "publishedAt": "2026-10-12T23:17:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/138/0002244468?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "ms 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 오피스",
-          "searchVolume": 21010,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 오피스 무료",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 오피스 영구",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 오피스 365",
-          "searchVolume": 9670,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 정품인증방법",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 콜백신청방법",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 쿠키허용방법",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "MS 주가",
-          "reason": "투자 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "MS 코파일럿",
-          "reason": "AI 서비스 연계",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "MS 실적",
-          "reason": "다음 발표 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "뮤즈 원더",
@@ -6610,11 +7292,6 @@
       ],
       "concentrated": [
         {
-          "keyword": "메타 뮤즈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
           "keyword": "뮤즈",
           "searchVolume": null,
           "origin": "autocomplete"
@@ -6636,101 +7313,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
-    },
-    {
-      "issue": "메타",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "저커버그, 메타 AI가 오픈AI·앤트로픽 따라잡았다고 발언",
-      "headlines": [
-        {
-          "title": "오픈AI·앤트로픽 쫓는 메타…AI 모델 '뮤즈 원더' 공개",
-          "press": "etnews.com",
-          "publishedAt": "2026-10-13T01:09:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/030/0003474340?sid=105"
-        },
-        {
-          "title": "메타의 새 AI모델 '뮤즈 원더' 공개....GPT 최신 모델보다 높은 지능",
-          "press": "fnnews.com",
-          "publishedAt": "2026-10-12T22:47:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/014/0005588142?sid=104"
-        },
-        {
-          "title": "저커버그 \"메타 AI, 오픈AI·앤트로픽 따라잡았다\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-12T18:50:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014248442?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "메타 ai 글라스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 뮤즈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 AI",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 안경",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 인스타",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 글래스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "메타 주가",
-          "reason": "투자 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "뮤즈 원더",
-          "reason": "모델 상세 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "메타 실적발표",
-          "reason": "다음 분기 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "아나토미",
@@ -6817,7 +7401,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "올모 코어 3",
@@ -6854,7 +7439,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "Ai2",
@@ -6909,7 +7495,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "오르카라우터",
@@ -6942,7 +7529,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "브레이킹 배드",
@@ -7575,119 +8163,6 @@
       ],
       "concentrated": [],
       "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "닥터X 고증 시청자",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "드라마 닥터X가 의학 고증 논란 속 시청률 14.9%를 기록했다",
-      "headlines": [
-        {
-          "title": "“‘김부장’급 시청률인데”…‘닥터X’ 의학 고증에 시청자들 “모니...",
-          "press": "sports.khan.co.kr",
-          "publishedAt": "2026-10-11T08:04:00.000Z",
-          "link": "https://m.entertain.naver.com/article/144/0001143357"
-        },
-        {
-          "title": "“다들 은은히 미쳐있어”…14.9% 터진 김지원 ‘닥터X’, 자문 의사 후...",
-          "press": "isplus.com",
-          "publishedAt": "2026-10-11T08:36:00.000Z",
-          "link": "https://m.entertain.naver.com/article/241/0003534720"
-        },
-        {
-          "title": "드디어 오늘 첫방…캐스팅 미쳤다는 한국 드라마, 넷플릭스·tvN 동시 출...",
-          "press": "wikitree.co.kr",
-          "publishedAt": "2026-10-09T21:00:00.000Z",
-          "link": "https://www.wikitree.co.kr/articles/1164888"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "심휘윤",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "키움이 심휘윤·박주성 등 8명을 방출하며 선수단을 정리했다",
-      "headlines": [
-        {
-          "title": "키움, 재정비 위해 선수단 정리 단행…박주성·심휘윤 등 8명 방출",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-11T05:19:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/003/0014245171"
-        },
-        {
-          "title": "키움, 선수단 정리 단행...'1차 지명' 박주성 '미남 선수' 심휘윤 등 8명...",
-          "press": "isplus.com",
-          "publishedAt": "2026-10-11T05:35:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/241/0003534689"
-        },
-        {
-          "title": "\"1차지명 투수 포함\" 키움 히어로즈, 박주성 등 8명 방출 정리",
-          "press": "topstarnews.net",
-          "publishedAt": "2026-10-11T05:58:00.000Z",
-          "link": "https://www.topstarnews.net/news/articleView.html?idxno=16243780"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "키움 심휘윤",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "심휘윤 나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "심휘윤 디시",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "심휘윤 선수",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "심휘윤 야구",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "심휘윤 우산",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "심휘윤 키움",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "심휘윤 올스타",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "심휘윤 이적",
-          "reason": "새 팀 여부",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
       "rowCount": 0,
       "carried": true
     }
