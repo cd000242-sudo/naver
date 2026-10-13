@@ -19,7 +19,10 @@ export default defineConfig({
   testDir: './e2e',
   fullyParallel: false,
   workers: 1,
-  retries: 0,
+  // [2026-10-13] The release gate runs on a PC that also hosts the always-on 홈판봇 (free RAM ~1GB). Focus/timing
+  //   specs then fail one at a time on different tests (never the same one); a single retry separates that from a
+  //   real regression, which fails twice. Default stays 0 for local runs; the release launcher sets E2E_RETRIES=1.
+  retries: Number.parseInt(process.env.E2E_RETRIES || '0', 10) || 0,
   timeout: 60_000,
   expect: {
     timeout: 10_000,
