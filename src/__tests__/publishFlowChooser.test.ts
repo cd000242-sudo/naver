@@ -78,9 +78,28 @@ describe('initPublishFlowChooser — 실제 골격', () => {
     expect(details.open).toBe(false);
     expect(details.contains(document.getElementById('unified-tone-style'))).toBe(true);
     expect(details.contains(document.getElementById('custom-prompt-section'))).toBe(true);
-    // The publish-mode select and the category block stay where they were (E2E and users rely on them).
+    // The publish-mode select stays where it was (E2E and users rely on it).
     expect(details.contains(document.getElementById('publish-mode-top-select'))).toBe(false);
-    expect(details.contains(document.getElementById('open-category-modal-btn'))).toBe(false);
+  });
+
+  it('카테고리·콘텐츠 모드 블록은 가져오기에서 고급 설정 맨 위로 들어가고, 앱 생성에서는 제자리로 돌아온다', () => {
+    const storage = memoryStorage();
+    initPublishFlowChooser(document, storage);
+    const details = document.getElementById('unified-advanced-settings')!;
+    const categoryBtn = document.getElementById('open-category-modal-btn')!;
+    expect(details.contains(categoryBtn)).toBe(true);
+    expect(details.querySelector('summary')?.textContent).toContain('카테고리');
+    (document.querySelector('.publish-flow-card[data-flow="app"]') as HTMLButtonElement).click();
+    expect(details.contains(categoryBtn)).toBe(false);
+    // Back in document order: account → category → advanced(details) → …
+    const account = document.getElementById('publish-account-block')!;
+    const categoryBlock = categoryBtn.closest('.field')!.parentElement === details ? null : categoryBtn.closest('.field');
+    expect(categoryBlock).not.toBeNull();
+    expect(account.compareDocumentPosition(categoryBlock!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(categoryBlock!.compareDocumentPosition(details) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(details.querySelector('summary')?.textContent).not.toContain('카테고리');
+    (document.querySelector('.publish-flow-card[data-flow="import"]') as HTMLButtonElement).click();
+    expect(details.contains(categoryBtn)).toBe(true);
   });
 
   it('앱 카드를 누르면 생성 칸이 보이고 빈 원고 칸은 숨으며 선택이 저장된다; 글이 있으면 원고 칸은 남는다', () => {

@@ -97,6 +97,12 @@ function ensureStyles(doc: Document): void {
   doc.head.appendChild(style);
 }
 
+const CATEGORY_ANCHOR_ID = 'publish-flow-category-anchor';
+const SUMMARY: Record<PublishFlow, string> = {
+  app: '⚙️ 고급 설정 — 글 톤 · 개인 프롬프트 (기본값으로 두어도 됩니다)',
+  import: '⚙️ 고급 설정 — 카테고리·콘텐츠 모드 · 글 톤 · 개인 프롬프트 (가져온 원고에는 거의 영향 없음)',
+};
+
 /** Moves the tone block and the personal-prompt section into one collapsed "고급 설정" details (listeners survive). */
 function foldAdvancedSettings(doc: Document): void {
   if (doc.getElementById(ADVANCED_ID)) return;
@@ -106,9 +112,43 @@ function foldAdvancedSettings(doc: Document): void {
   if (!first || !first.parentElement) return;
   const details = doc.createElement('details');
   details.id = ADVANCED_ID;
-  details.innerHTML = '<summary>⚙️ 고급 설정 — 글 톤 · 개인 프롬프트 (기본값으로 두어도 됩니다)</summary>';
+  details.innerHTML = `<summary>${SUMMARY.app}</summary>`;
   first.parentElement.insertBefore(details, first);
   for (const block of [toneBlock, promptBlock]) if (block) details.appendChild(block);
+  // Remember where the category/content-mode block lives so the import flow can tuck it away and the
+  // app flow can put it back (사장님 10/13: "이것도 앱에서 글 생성할 때 사용하는 건데?").
+  const categoryBlock = tabBlockOf(doc, doc.getElementById('open-category-modal-btn'));
+  if (categoryBlock && categoryBlock.parentElement && !doc.getElementById(CATEGORY_ANCHOR_ID)) {
+    const anchor = doc.createElement('span');
+    anchor.id = CATEGORY_ANCHOR_ID;
+    anchor.hidden = true;
+    categoryBlock.parentElement.insertBefore(anchor, categoryBlock);
+  }
+}
+
+/** Import flow: category/content-mode block goes to the top of 고급 설정; app flow: back to its own place. */
+function placeCategoryBlock(doc: Document, flow: PublishFlow): void {
+  const details = doc.getElementById(ADVANCED_ID);
+  const anchor = doc.getElementById(CATEGORY_ANCHOR_ID);
+  const button = doc.getElementById('open-category-modal-btn');
+  if (!details || !anchor || !button) return;
+  // Inside the details the block is its direct child; outside it is a tab-level block.
+  let categoryBlock: HTMLElement | null = null;
+  if (details.contains(button)) {
+    let node: Element = button;
+    while (node.parentElement && node.parentElement !== details) node = node.parentElement;
+    categoryBlock = node as HTMLElement;
+  } else {
+    categoryBlock = tabBlockOf(doc, button);
+  }
+  if (!categoryBlock) return;
+  const summary = details.querySelector('summary');
+  if (summary) summary.textContent = SUMMARY[flow];
+  if (flow === 'import') {
+    if (categoryBlock.parentElement !== details) details.insertBefore(categoryBlock, summary ? summary.nextSibling : details.firstChild);
+  } else if (categoryBlock.parentElement === details && anchor.parentElement) {
+    anchor.parentElement.insertBefore(categoryBlock, anchor.nextSibling);
+  }
 }
 
 function ensureImportHint(doc: Document): HTMLElement | null {
@@ -134,6 +174,7 @@ export function applyPublishFlow(flow: PublishFlow, doc: Document = document, st
   if (semi) semi.style.display = visibility.semiAuto ? 'block' : 'none';
   const hint = ensureImportHint(doc);
   if (hint) hint.style.display = flow === 'import' ? '' : 'none';
+  placeCategoryBlock(doc, flow);
   doc.querySelectorAll<HTMLElement>(`#${CHOOSER_ID} .publish-flow-card`).forEach((card) => {
     card.classList.toggle('active', card.dataset.flow === flow);
   });

@@ -24,6 +24,9 @@ test.afterAll(async () => { await closeElectronTestSession(app, profile); });
 test('manual FTC selection updates the panel and survives preset changes', async () => {
   const checkbox = page.locator('#unified-ftc-disclosure');
   const panel = page.locator('#ftc-options-panel');
+  // [2026-10-13] The publish tab opens in the "원고 가져오기" flow, where category/content-mode are folded into
+  //   고급 설정; they belong to the app-generation flow, so pick that flow before touching them.
+  await page.locator('.publish-flow-card[data-flow="app"]').click();
   await page.locator('.content-mode-btn[data-mode="seo"]').click();
   await expect(checkbox).not.toBeChecked();
   await checkbox.locator('..').click();
