@@ -18,6 +18,10 @@ export interface AdsenseBoard {
   trends: { categories: Array<{ category: string; posts: number; blogs: number }>; titleShape: AdsenseTitleShape };
 }
 export function blogCount(card: AdsenseCard): number;
-export function filterAdsenseCards(cards: AdsenseCard[], opts?: { mode?: 'all' | 'star'; category?: string; query?: string }): AdsenseCard[];
+export function filterAdsenseCards(cards: AdsenseCard[], opts?: { mode?: 'all' | 'star' | 'low'; category?: string; query?: string; nowMs?: number }): AdsenseCard[];
 export function adsenseCategories(cards: AdsenseCard[]): Array<{ category: string; count: number }>;
 export function adsenseWritingAdvice(shape: AdsenseTitleShape | null | undefined, cards?: AdsenseCard[]): string[];
+
+export interface AdsenseCompetition { tier: number; ratio: number | null; label: string }
+export function adsenseCompetition(card: AdsenseCard, nowMs?: number): AdsenseCompetition;
+export function rankAdsenseCards(cards: AdsenseCard[], nowMs?: number): AdsenseCard[];

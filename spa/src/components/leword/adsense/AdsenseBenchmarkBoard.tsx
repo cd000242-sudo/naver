@@ -4,13 +4,11 @@
  * 최근 7일 소재 판을 싣는다. 화면은 홈판 추천 판과 같은 틀 · 같은 스타일(hfb-*)이다. 수치는 판에 실린 실측만 그린다.
  */
 import { useEffect, useMemo, useState } from 'react';
-import { shuffleWithinTiers } from '../../../lib/hourlyShuffle.mjs';
 import { withGuides } from '../../../lib/homefeedGuides.mjs';
-import { useShuffleSeed } from '../../../lib/useShuffleSeed';
 import HomefeedBenchmarkStyles from '../homefeed/HomefeedBenchmarkStyles';
 import { bridgeBenchmarkTitles } from '../../../lib/bridge';
 import { callWorkerRaw } from '../../../lib/keywordApi';
-import { adsenseCategories, adsenseWritingAdvice, blogCount, filterAdsenseCards, type AdsenseBoard, type AdsenseCard } from '../../../lib/adsenseBenchmarkModel.mjs';
+import { adsenseCompetition, rankAdsenseCards, adsenseCategories, adsenseWritingAdvice, blogCount, filterAdsenseCards, type AdsenseBoard, type AdsenseCard } from '../../../lib/adsenseBenchmarkModel.mjs';
 
 const kst = (iso: string | null | undefined) => {
     if (!iso) return '—';
@@ -133,10 +131,11 @@ function AdsenseGoldStyles() {
     );
 }
 
-function AdsenseCardView({ c }: { c: AdsenseCard }) {
+function AdsenseCardView({ c, now }: { c: AdsenseCard; now: number }) {
+    const competition = adsenseCompetition(c, now);
     const blogs = blogCount(c);
     return (
-        <article className={`hfb-card${c.recommended ? ' recommended' : ''}`}>
+        <article className={`hfb-card${competition.tier === 0 ? ' recommended' : ''}`} >
             <div className="hfb-card-top">
                 <span className="hfb-status review-now">{c.grade}등급 블로그</span>
                 {c.recommended && <span className="hfb-star">★ 고수 {blogs}곳</span>}
@@ -144,13 +143,17 @@ function AdsenseCardView({ c }: { c: AdsenseCard }) {
                 <span className="hfb-category">{c.category}</span>
                 <span className="hfb-timing">발행 {day(c.publishedAt)}</span>
             </div>
-            <h3>{c.title}</h3>
+            <h3>{c.metrics?.query || c.keyword}</h3>
+            <p style={{ color: '#a8b6cb', fontSize: 13, margin: '4px 0 10px' }}>{c.title}</p>
+            <div style={{ color: competition.tier === 0 ? '#a7f3d0' : competition.tier === 3 ? '#fca5a5' : '#cbd5e1', fontSize: 13, marginBottom: 8 }}>
+                <b>{competition.label}</b> · 문서/월 검색 {competition.ratio !== null ? `${competition.ratio.toLocaleString('ko-KR', { maximumFractionDigits: 2 })}배` : '미확인'} · 측정 {kst(c.metrics?.measuredAt)}
+            </div>
             {/* 실측(2단계) — 대표 검색어(소재 낱말 후보의 정확 검색량 최대) · 블로그 문서수 · 파워링크 3위 입찰가. 없으면 '미측정'만. */}
             <div className="hfb-keyword">
                 <strong>{c.metrics?.query || c.keyword}</strong>
-                <span>월 검색량<b>{typeof c.metrics?.searchVolume === 'number' ? c.metrics.searchVolume.toLocaleString('ko-KR') : '미측정'}</b></span>
-                <span>블로그 문서수<b>{typeof c.metrics?.documentCount === 'number' ? c.metrics.documentCount.toLocaleString('ko-KR') : '미측정'}</b></span>
-                <span>파워링크 3위 입찰가<b>{typeof c.metrics?.bid === 'number' ? `${c.metrics.bid.toLocaleString('ko-KR')}원` : '미측정'}</b></span>
+                <span>월 검색량<b>{typeof c.metrics?.searchVolume === 'number' && Number.isFinite(c.metrics.searchVolume) && c.metrics.searchVolume >= 0 ? c.metrics.searchVolume.toLocaleString('ko-KR') : '미측정'}</b></span>
+                <span>블로그 문서수<b>{typeof c.metrics?.documentCount === 'number' && Number.isFinite(c.metrics.documentCount) && c.metrics.documentCount >= 0 ? c.metrics.documentCount.toLocaleString('ko-KR') : '미측정'}</b></span>
+                <span>파워링크 3위 입찰가<b>{typeof c.metrics?.bid === 'number' && Number.isFinite(c.metrics.bid) && c.metrics.bid >= 0 ? `${c.metrics.bid.toLocaleString('ko-KR')}원` : '미측정'}</b></span>
             </div>
             {c.why?.length > 0 && <div className="hfb-why"><span>검토 이유</span><ul>{c.why.map((w) => <li key={w}>{w}</li>)}</ul></div>}
             {/* 작성 안내(2026-10-13 사장님 "애드센스도 글 쓰는 방향 · 넣을 것 · 넣지 말 것") — 안내가 있는 카드에만 */}
@@ -190,7 +193,7 @@ export default function AdsenseBenchmarkBoard() {
     const [board, setBoard] = useState<AdsenseBoard | null>(null);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
-    const [mode, setMode] = useState<'all' | 'star'>('all');
+    const [mode, setMode] = useState<'all' | 'star' | 'low'>('all');
     const [category, setCategory] = useState('');
     const [query, setQuery] = useState('');
     const [limit, setLimit] = useState(24);
@@ -208,9 +211,11 @@ export default function AdsenseBenchmarkBoard() {
     }, []);
 
     const cards = board?.candidates ?? [];
-    // ★(고수 3곳 이상) 먼저, 묶음 안은 매시 정각 새로 섞는다(2026-10-10 사장님 "상위만 본다 — 1시간 주기로 섞고 수동 버튼")
-    const [seed, reshuffle] = useShuffleSeed();
-    const items = useMemo(() => filterAdsenseCards(shuffleWithinTiers(cards, (c) => (c.recommended ? 0 : 1), seed), { mode, category, query }), [cards, mode, category, query, seed]);
+    const [now, setNow] = useState(Date.now);
+    useEffect(() => { const timer = window.setInterval(() => setNow(Date.now()), 60000); return () => window.clearInterval(timer); }, []);
+    const ranked = useMemo(() => rankAdsenseCards(cards, now), [cards, now]);
+    const items = useMemo(() => filterAdsenseCards(ranked, { mode, category, query, nowMs: now }), [ranked, mode, category, query, now]);
+    const lowCount = ranked.filter((c) => adsenseCompetition(c, now).tier === 0).length;
     const cats = useMemo(() => adsenseCategories(cards), [cards]);
     const advice = adsenseWritingAdvice(board?.trends?.titleShape, cards);
     const shape = board?.trends?.titleShape;
@@ -224,7 +229,7 @@ export default function AdsenseBenchmarkBoard() {
                 <div>
                     <span className="hfb-eyebrow">ADSENSE BENCHMARK · 애드센스 고수 블로그 {board?.sourceCount ?? '—'}곳</span>
                     <h2>애드센스 고수 <span>벤치마크</span></h2>
-                    <p>애드센스로 수익을 내는 고수 블로그(티스토리 · 워드프레스)가 최근 {board?.windowDays ?? 7}일 안에 쓴 글을 소재별로 모았습니다. 여러 고수가 함께 다룬 소재가 먼저 나옵니다.</p>
+                    <p>애드센스로 수익을 내는 고수 블로그(티스토리 · 워드프레스)가 최근 {board?.windowDays ?? 7}일 안에 쓴 글을 소재별로 모았습니다. 월 검색 수요가 있고, 검색량 대비 블로그 문서가 적은 키워드부터 보여 드립니다.</p>
                 </div>
                 <div className="hfb-count"><strong>{board ? cards.length : '—'}</strong><span>검토할 소재</span></div>
             </header>
@@ -257,9 +262,10 @@ export default function AdsenseBenchmarkBoard() {
                 <div className="hfb-filters">
                     <div className="hfb-filter-row" role="group" aria-label="보기">
                         <button type="button" aria-pressed={mode === 'all'} onClick={() => setMode('all')}>전체 <span>{cards.length}</span></button>
+                        <button type="button" aria-pressed={mode === 'low'} onClick={() => { setMode('low'); setLimit(24); }}>낮은 문서 경쟁 <span>{lowCount}</span></button>
                         <button type="button" aria-pressed={mode === 'star'} onClick={() => setMode('star')}>★ 고수 3곳 이상 <span>{cards.filter((c) => c.recommended).length}</span></button>
                     </div>
-                    <div className="hfb-shuffle"><button type="button" onClick={() => { reshuffle(); setLimit(24); }}>순서 섞기</button><small>매시 정각 새 순서로 섞입니다 · ★ 소재가 먼저</small></div>
+                    <p style={{ color: '#a8b6cb', fontSize: 12 }}>문서 경쟁 낮은 순 · 최근 7일 실측 · 월 검색 100 이상·문서/검색 1배 이하 우선 → 5배 이하 → 고경쟁. 미측정·0건·오래된 자료는 뒤에서 확인합니다.</p>
                     <div className="hfb-filter-bottom">
                         <div className="hfb-categories" role="group" aria-label="분야">
                             <button type="button" aria-pressed={category === ''} onClick={() => setCategory('')}>전체</button>
@@ -268,8 +274,8 @@ export default function AdsenseBenchmarkBoard() {
                         <input type="search" aria-label="애드센스 벤치마크 소재 검색" placeholder="키워드·제목 검색" value={query} onChange={(e) => setQuery(e.target.value)} />
                     </div>
                 </div>
-                <p className="hfb-legend">★는 최근 {board.windowDays}일 안에 애드센스 고수 블로그 세 곳 이상이 함께 다룬 소재입니다. 제목을 누르면 고수의 원문이 열립니다.</p>
-                <div className="hfb-list">{items.slice(0, limit).map((c) => <AdsenseCardView key={c.id} c={c} />)}</div>
+                <p className="hfb-legend">★는 고수 3곳 이상 발행 근거이며 낮은 경쟁을 뜻하지 않습니다. 문서/검색은 네이버 지표로 구글 경쟁도나 애드센스 수익을 나타내지 않습니다. 원문 제목을 누르면 해당 글이 열립니다.</p>
+                <div className="hfb-list">{items.slice(0, limit).map((c) => <AdsenseCardView key={c.id} c={c} now={now} />)}</div>
                 {items.length === 0 && <p className="hfb-empty">조건에 맞는 소재가 없습니다.</p>}
                 {items.length > limit && <button type="button" className="hfb-more" onClick={() => setLimit((n) => n + 24)}>소재 더 보기 · {Math.min(limit, items.length)}/{items.length}</button>}
             </>}
