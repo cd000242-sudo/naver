@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-14T05:37:48.771Z",
+  "generatedAt": "2026-10-14T06:26:14.044Z",
   "rules": "2026-10-10-traffic",
   "model": "sonnet",
   "guides": [
@@ -666,39 +666,6 @@
         "checkBefore": [
           "국세청 연말정산 소득공제 요건(무주택 세대주, 총급여 기준)을 국세청 공식 안내로 확인",
           "5년 내 해지 추징 예외 사유(해외이주, 사망 등)를 주택도시기금 공식 공지로 확인"
-        ]
-      },
-      "at": "2026-10-13T04:40:18.450Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "9c612a2d5dea5e06",
-      "urls": [
-        "https://felixkim.tistory.com/entry/LG%EC%83%9D%ED%99%9C%EA%B1%B4%EA%B0%95-%EC%A3%BC%EA%B0%80-%EC%A0%84%EB%A7%9D-%EC%98%81%EC%97%85%EC%9D%B4%EC%9D%B5-7%EB%B6%84%EC%9D%98-1",
-        "https://pryra.tistory.com/entry/%EB%B3%B4%EC%9B%90%EC%BC%80%EC%9D%B4%EC%B9%BC-%EC%A3%BC%EA%B0%80-%EC%A0%84%EB%A7%9D",
-        "https://honeypencil.tistory.com/entry/sk%ED%95%98%EC%9D%B4%EB%8B%89%EC%8A%A4-%EC%A3%BC%EA%B0%80-%EC%A0%84%EB%A7%9D",
-        "https://salespeople.tistory.com/entry/%EB%91%90%EC%82%B0%EC%97%90%EB%84%88%EB%B9%8C%EB%A6%AC%ED%8B%B0-%EC%A3%BC%EA%B0%80-%EC%A0%84%EB%A7%9D-%EC%A4%91%EC%9E%A5%EA%B8%B0",
-        "https://pryra.tistory.com/entry/%EB%8C%80%EC%A3%BC%EC%A0%84%EC%9E%90%EC%9E%AC%EB%A3%8C-%EC%A3%BC%EA%B0%80-%EC%A0%84%EB%A7%9D",
-        "https://lmn.bluemoha.com/entry/%ED%8B%B0%EC%97%A0%EC%94%A8-%EC%A3%BC%EA%B0%80-%EC%A0%84%EB%A7%9D-AI%EA%B4%91%ED%86%B5%EC%8B%A0-%EC%88%98%ED%98%9C-%EA%B8%B0%EB%8C%80%EA%B4%80%EB%A0%A8-%EC%B6%94%EC%B2%9C%EC%A3%BC"
-      ],
-      "guide": {
-        "direction": "① '티엠씨 주가전망·공모가'로 들어오는 독자는 신규 상장주 티엠씨가 공모가 대비 올랐는지 내렸는지를 가장 궁금해한다. ② 고수 글들은 LG생활건강·SK하이닉스 등 각 종목을 따로 다뤘지만 '공모가 대비 현재가 수익률'을 한 표로 비교한 글은 비어 있다. ③ 공모가·상장일·현재가 표와 테마주 묶음 비교표를 넣으면 재방문을 유도할 수 있다.",
-        "searchTargets": [
-          "티엠씨 주가전망",
-          "티엠씨 주가공모가"
-        ],
-        "mustInclude": [
-          "티엠씨 공모가와 상장일 (확인 필요: 금융감독원 전자공시·한국거래소)",
-          "AI광통신 관련 테마주 묶음(LG생활건강·SK하이닉스·두산에너빌리티·대주전자재료 등) 비교",
-          "영업이익 '7분의 1' 수치 출처 (확인 필요: 실적 공시)"
-        ],
-        "mustAvoid": [
-          "티엠씨를 다른 테마주(보원케미칼 등)와 혼동해 서술"
-        ],
-        "checkBefore": [
-          "티엠씨 공모가·상장일·현재가를 한국거래소/전자공시시스템에서 확인",
-          "LG생활건강 영업이익 수치를 분기보고서·공시자료에서 확인"
         ]
       },
       "at": "2026-10-13T04:40:18.450Z",
@@ -3028,41 +2995,6 @@
       "provider": "claude"
     },
     {
-      "id": "377239f9d5e82faf",
-      "urls": [
-        "https://tstrnys.tistory.com/215",
-        "https://comstory50s.tistory.com/entry/doosan-tesna-outlook-2027-2028",
-        "https://evrthing.tistory.com/33",
-        "https://growthcompanyy.tistory.com/393",
-        "https://growthcompanyy.tistory.com/389"
-      ],
-      "guide": {
-        "direction": "이 소재의 실제 검색 수요는 리얼티인컴이 아니라 두산테스나 주가전망·목표가에 몰려 있다(자동완성 전부 두산테스나). 고수 글은 가동률·CIS 분석 각도를 이미 썼으니, 비어 있는 각도는 최근 목표가 변동과 실적 발표 전후 주가 흐름 비교다. 독자는 목표가 수치와 실적 숫자를 다시 확인하려 재방문한다.",
-        "searchTargets": [
-          "두산테스나 주가전망",
-          "두산테스나 주가 목표가",
-          "두산테스나 주가시세",
-          "두산테스나 주가 목표"
-        ],
-        "mustInclude": [
-          "두산테스나 사업모델(반도체 후공정 테스트·CIS 이미지센서 비중) 설명 (확인 필요: 회사 IR자료)",
-          "최근 증권사 목표가 범위와 평균치 (확인 필요: 네이버금융·FnGuide)",
-          "직전 분기 실적(매출·영업이익) 전년 대비 변화 (확인 필요: DART 공시)",
-          "2027~2028년 가동률 전망 근거 (확인 필요: 증권사 리포트)"
-        ],
-        "mustAvoid": [
-          "특정 리포트 목표가를 투자 확정 신호처럼 서술",
-          "리얼티인컴 등 전혀 다른 종목 내용과 섞어 쓰기"
-        ],
-        "checkBefore": [
-          "네이버금융·FnGuide에서 최신 목표가·실적 수치 확인"
-        ]
-      },
-      "at": "2026-10-13T04:40:18.450Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
       "id": "fbf95bec2ca31fa6",
       "urls": [
         "https://info.kjchoi.co.kr/farmland-survey-disposal-exemption/",
@@ -4148,39 +4080,6 @@
         ],
         "checkBefore": [
           "한국주택금융공사 공식 홈페이지에서 최신 금리·한도·취급은행 목록 확인"
-        ]
-      },
-      "at": "2026-10-13T04:40:18.450Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "7756b6aa94d6c3af",
-      "urls": [
-        "https://bookshelf-journey.tistory.com/entry/%ED%95%98%EB%82%98%EC%9B%90%ED%81%90-%EC%B6%95%EA%B5%ACPlay-%ED%80%B4%EC%A6%88HANA-%ED%80%B4%EC%A6%88%ED%92%80%EA%B3%A0-%EC%9B%90%ED%81%90%EB%B3%BC%EB%8F%84-%EB%B0%9B%EA%B3%A0-%EC%B5%9C%EB%8C%80-5000-%EC%9B%90%ED%81%90%EB%B3%BC-%EC%A7%80%EA%B8%89",
-        "https://3040-lifeanswer.tistory.com/entry/2026-%ED%95%98%EB%82%98%EC%9B%90%ED%81%90-%EC%B6%95%EA%B5%AC%ED%80%B4%EC%A6%88-10%EC%9B%94-11%EC%9D%BC-%EC%A0%95%EB%8B%B5-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://3040lifeinfo.tistory.com/entry/2026%EB%85%84-10%EC%9B%94-10%EC%9D%BC-%ED%95%98%EB%82%98%EC%9B%90%ED%81%90-%EC%8A%AC%EA%B8%B0%EB%A1%9C%EC%9A%B4-%EA%B8%88%EC%9C%B5%EC%83%9D%ED%99%9C-OX-%EC%A0%95%EB%8B%B5-%EC%B4%9D%EC%A0%95%EB%A6%AC"
-      ],
-      "guide": {
-        "direction": "10월12일·11일 등 날짜별로 정답을 바로 찾는 사람이 많아 '하나원큐 축구퀴즈10월12일'처럼 날짜형 검색어를 대표로 잡아야 한다. 고수 글들은 날짜별 단발 정답과 슬기로운 금융생활 OX 퀴즈까지 다뤘지만 날짜별 정답을 모은 누적표는 비어 있다. 지난 날짜 정답 모음표와 간단 해설을 함께 두면 매일 재방문해 다시 찾는다.",
-        "searchTargets": [
-          "하나원큐 축구퀴즈10월12일",
-          "하나원큐 축구퀴즈10월11일",
-          "하나원큐 축구퀴즈 10월10일"
-        ],
-        "mustInclude": [
-          "날짜별 정답(문제·정답·간단 해설) 누적표, 최신 날짜부터 역순 정리(확인 필요: 각 날짜 실제 문제)",
-          "축구Play 퀴즈HANA 참여 방법·경품 여부(확인 필요: 하나원큐 공식 공지)",
-          "슬기로운 금융생활 OX 퀴즈와 별개 이벤트임을 명시적으로 구분",
-          "이벤트 진행 기간·종료일(확인 필요: 하나원큐 공식 공지)"
-        ],
-        "mustAvoid": [
-          "다른 날짜 정답을 그대로 가져와 당일 정답처럼 쓰는 것",
-          "슬기로운 금융생활 OX 퀴즈와 축구Play 퀴즈를 같은 이벤트로 혼동하는 것"
-        ],
-        "checkBefore": [
-          "해당 날짜 하나원큐 앱 실제 문제·정답을 공식 앱/이벤트 페이지에서 확인",
-          "이벤트 종료일·경품 지급 조건을 하나원큐 공식 공지에서 확인"
         ]
       },
       "at": "2026-10-13T04:40:18.450Z",
@@ -5641,43 +5540,6 @@
         "checkBefore": [
           "국민건강보험공단 공식 공지에서 2025년 진료분 소득분위별 상한액 최신 수치 확인",
           "환급 신청 소멸시효 및 지급동의계좌 운영 방식은 건보공단 공식 안내에서 확인"
-        ]
-      },
-      "at": "2026-10-13T04:40:18.450Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "d5e3e78833f1a0c6",
-      "urls": [
-        "https://moduuri1004.tistory.com/11843176",
-        "https://insurancekr.com/%ec%a0%84%ea%b8%b0%ec%9e%90%ec%a0%84%ea%b1%b0-%eb%b0%b0%eb%8b%ac-%eb%b3%b4%ed%96%89%ec%9e%90-%ec%82%ac%ea%b3%a0/",
-        "https://sosojin.tistory.com/entry/%EC%9E%90%EB%8F%99%EC%B0%A8%EB%B3%B4%ED%97%98-%EC%82%AC%EA%B3%A0-%EB%82%98%EB%A9%B4-%ED%95%A0%EC%A6%9D%EC%9D%80-%EB%AA%87-%EB%85%84-%EA%B0%80%EB%82%98%EC%9A%94",
-        "https://insurancekr.com/%ec%a0%84%ea%b8%b0%ec%9e%90%ec%a0%84%ea%b1%b0-%eb%b0%b0%eb%8b%ac-%eb%b3%b4%ed%97%98-2/"
-      ],
-      "guide": {
-        "direction": "검색자는 사고 접수 절차보다 '할증이 몇 년 가는지'와 '사고이력이 남는지'를 더 궁금해한다(자동완성 비중). 고수 글들은 전기자전거 배달사고·보험 처리를 각각 다뤘지만, 보험사별 사고접수 연락처와 할증 적용기간을 한 표로 묶은 글은 비어 있다. 할증 등급표와 중도해지 시 환급 계산을 넣으면 사고 처리 중 재방문할 이유가 생긴다.",
-        "searchTargets": [
-          "자동차보험 사고 할증 몇년",
-          "자동차보험 사고시 할증",
-          "자동차보험 사고이력",
-          "자동차보험 사고후 해지"
-        ],
-        "mustInclude": [
-          "사고 할증 적용 기간(확인 필요: 보험사 공지, 보통 3년 수준)",
-          "사고이력 조회 방법(보험개발원 카히스토리 등)",
-          "DB·메리츠·롯데·동부 등 보험사별 사고접수 연락처(확인 필요: 각사 홈페이지)",
-          "사고 후 중도해지 시 환급금 계산 방식",
-          "사고건수별 할증 등급표"
-        ],
-        "mustAvoid": [
-          "특정 보험사 보험료를 광고성으로 추천",
-          "사고 경중(과실비율)을 법적 판단처럼 단정",
-          "법인차량과 개인차량 할증 기준을 섞어서 설명"
-        ],
-        "checkBefore": [
-          "DB·메리츠·롯데·동부 공식 홈페이지에서 사고접수 연락처·절차 확인",
-          "금융감독원/보험개발원 공지로 할증 적용기간(몇 년) 정확한 기준 확인"
         ]
       },
       "at": "2026-10-13T04:40:18.450Z",
