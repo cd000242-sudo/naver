@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-14T17:56:31.257Z",
+  "generatedAt": "2026-10-14T18:12:53.826Z",
   "rules": "2026-10-10-traffic",
   "model": "sonnet",
   "guides": [
@@ -14398,39 +14398,6 @@
         ],
         "checkBefore": [
           "OpenAI/ChatGPT 공식 업데이트 공지나 도움말 센터에서 기능명·제공 범위 확인"
-        ]
-      },
-      "at": "2026-10-13T11:28:09.769Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "5651598fa7154e66",
-      "urls": [
-        "https://moneypolicynote.tistory.com/entry/KTX-%EC%8A%B9%EC%B0%A8%EA%B6%8C-2%EA%B0%9C%EC%9B%94-%EC%A0%84%EB%B6%80%ED%84%B0-%EC%98%88%EB%A7%A4%EF%BD%9C10%EC%9B%94-1%EC%9D%BC%EB%B6%80%ED%84%B0-%EC%98%88%EC%95%BD%EA%B8%B0%EA%B0%84%C2%B7%EC%98%88%EB%A7%A4%EC%9D%BC-%EA%B3%84%EC%82%B0%EB%B2%95-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://piwpiw.tistory.com/entry/KTX-%EC%8A%B9%EC%B0%A8%EA%B6%8C-%EC%98%88%EB%A7%A4-2%EA%B0%9C%EC%9B%94-%EC%A0%84%EC%9C%BC%EB%A1%9C-%ED%99%95%EB%8C%80-10%EC%9B%94-%EB%8B%AC%EB%9D%BC%EC%A7%84-%EC%A0%90"
-      ],
-      "guide": {
-        "direction": "자동완성 상위가 '변경·환불·조회·캡쳐·변경 안됨'인 만큼 'ktx 승차권 변경'을 대표 검색어로 잡는다—2개월 확대 시행 직후 가장 많이 막히는 지점이기 때문이다. 고수 글은 '예약기간 계산법·10월 달라진 점'까지만 다뤄 변경·환불·캡쳐 같은 실전 FAQ는 비어 있다. 시행 전후 비교표와 변경 횟수·환불 수수료 기준표가 있어야 끝까지 읽고 재방문한다.",
-        "searchTargets": [
-          "ktx 승차권 변경",
-          "ktx 승차권 환불",
-          "ktx 승차권 변경 안됨",
-          "ktx 승차권 캡쳐"
-        ],
-        "mustInclude": [
-          "시행일 10월 1일 기준 기존(1개월 전) vs 변경(2개월 전) 예매 가능일 비교표",
-          "2개월 전 예매일 계산 예시(출발일 기준 날짜 세는 법)",
-          "승차권 변경 가능 횟수 제한 (확인 필요: 코레일 공지)",
-          "캡쳐(화면 저장) 승차권 인정 여부 (확인 필요: 코레일/레츠코레일)",
-          "환불 수수료 구간표 (확인 필요: 코레일 여객운송약관)"
-        ],
-        "mustAvoid": [
-          "SRT 등 다른 열차 예매 규정과 혼동",
-          "변경·환불 수수료를 추측으로 단정"
-        ],
-        "checkBefore": [
-          "변경 횟수 제한, 환불 수수료율 최신 여객운송약관 확인"
         ]
       },
       "at": "2026-10-13T11:28:09.769Z",
