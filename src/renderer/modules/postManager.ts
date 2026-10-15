@@ -19,6 +19,7 @@ import {
 } from './postListUI.js';
 import { normalizeImageForStorage } from '../utils/imageStorageNormalize.js';
 import { normalizeHashtags } from '../utils/hashtagUtils.js';
+import { normalizePreviousPostCategoryId, parsePreviousPostUrl } from '../../shared/previousPostPolicy.js';
 
 // ✅ renderer.ts의 전역 변수/함수 참조 (인라인 빌드에서 동일 스코프)
 declare let currentPostId: string | null;
@@ -754,6 +755,10 @@ export function saveGeneratedPost(structuredContent: any, isUpdate: boolean = fa
       isFavorite: existingPost?.isFavorite || false, // 기존 즐겨찾기 유지
       category: resolvedCategory || undefined,
       publishedUrl: existingPost?.publishedUrl || undefined, // 기존 발행 URL 유지
+      publishedBlogId: existingPost?.publishedBlogId,
+      publishedCategoryId: existingPost?.publishedCategoryId,
+      isPublished: existingPost?.isPublished,
+      publishMode: existingPost?.publishMode,
       publishedAt: existingPost?.publishedAt || undefined, // 기존 발행일 유지
       toneStyle: structuredContent.toneStyle || 'professional', // ✅ 글 톤 저장
       ctaText: ctaText || existingPost?.ctaText || '', // ✅ CTA 텍스트 저장
@@ -805,37 +810,54 @@ export function saveGeneratedPost(structuredContent: any, isUpdate: boolean = fa
 
 // ✅ 발행 완료 시 글 정보 업데이트
 // ✅ [2026-03-05] publishMode 파라미터 추가 (임시/즉시/예약 구분)
-export function updatePostAfterPublish(postId: string, publishedUrl: string, publishMode?: 'draft' | 'publish' | 'schedule'): void {
+export function updatePostAfterPublish(
+  postId: string,
+  publishedUrl: string,
+  publishMode?: 'draft' | 'publish' | 'schedule',
+  destination?: { blogId?: string; categoryId?: string; publishedAt?: string },
+): void {
   try {
     const posts = loadGeneratedPosts();
-    const post = posts.find(p => p.id === postId);
-    if (post) {
-      post.publishedUrl = publishedUrl;
-      post.publishedAt = new Date().toISOString();
-      post.updatedAt = new Date().toISOString();
-      post.isPublished = true; // ✅ 발행 상태 추가
-      post.naverId = post.naverId || getCurrentNaverId() || undefined; // ✅ [2026-03-11 FIX] 기존 naverId 우선 유지
-      // ✅ [2026-03-05] 발행 모드 저장 (임시발행/즉시발행/예약발행 구분)
-      if (publishMode) {
-        (post as any).publishMode = publishMode;
-      }
-
-      const index = posts.findIndex(p => p.id === postId);
-      if (index >= 0) {
-        posts[index] = post;
-        safeLocalStorageSetItem(GENERATED_POSTS_KEY, JSON.stringify(posts)); _invalidatePostsCache();
-        // ✅ [2026-03-05] 발행 모드에 따른 상태 메시지
-        const modeLabel = publishMode === 'draft' ? '📝 임시발행됨' : publishMode === 'schedule' ? '📅 예약발행됨' : '✅ 발행됨';
-        appendLog(`${modeLabel}: "${post.title}"`);
-        // ✅ [2026-03-05] localStorage 이중 백업 (데이터 보존 강화)
-        try {
-          // ✅ [FIX] 백업도 100개 제한 — localStorage 용량 압박 방지
-          const postsForBackup = posts.slice(0, 100);
-          safeLocalStorageSetItem(`${GENERATED_POSTS_KEY}_backup`, JSON.stringify(postsForBackup));
-        } catch { /* 백업 실패 무시 */ }
-        refreshGeneratedPostsList();
-      }
+    const existingPost = posts.find(p => p.id === postId);
+    if (!existingPost) return;
+    const now = new Date().toISOString();
+    const mode = publishMode || 'publish';
+    const actualPost = parsePreviousPostUrl(publishedUrl);
+    const priorPost = parsePreviousPostUrl(existingPost.publishedUrl);
+    const samePublication = Boolean(actualPost && priorPost
+      && actualPost.blogId === priorPost.blogId && actualPost.postId === priorPost.postId
+      && existingPost.publishMode === 'publish' && existingPost.isPublished === true);
+    const timestamp = Date.parse(destination?.publishedAt
+      || (samePublication ? existingPost.publishedAt : undefined) || now);
+    const isPublic = mode === 'publish' && Boolean(actualPost)
+      && Number.isFinite(timestamp) && timestamp <= Date.now();
+    const destinationMatches = Boolean(destination?.blogId)
+      && destination!.blogId!.trim().toLowerCase() === actualPost?.blogId;
+    const updatedPost: GeneratedPost = {
+      ...existingPost,
+      publishedUrl,
+      publishedAt: isPublic ? new Date(timestamp).toISOString() : undefined,
+      updatedAt: now,
+      isPublished: isPublic,
+      publishMode: mode,
+      publishedBlogId: isPublic ? actualPost?.blogId : undefined,
+      publishedCategoryId: isPublic && destinationMatches
+        ? normalizePreviousPostCategoryId(destination?.categoryId)
+        : isPublic && samePublication && !destination
+          ? normalizePreviousPostCategoryId(existingPost.publishedCategoryId) : undefined,
+      naverId: existingPost.naverId || getCurrentNaverId() || undefined,
+    };
+    const nextPosts = posts.map(post => post.id === postId ? updatedPost : post);
+    safeLocalStorageSetItem(GENERATED_POSTS_KEY, JSON.stringify(nextPosts));
+    _invalidatePostsCache();
+    const modeLabel = mode === 'draft' ? '📝 임시발행됨' : mode === 'schedule' ? '📅 예약발행됨' : '✅ 발행됨';
+    appendLog(`${modeLabel}: "${updatedPost.title}"`);
+    try {
+      safeLocalStorageSetItem(`${GENERATED_POSTS_KEY}_backup`, JSON.stringify(nextPosts.slice(0, 100)));
+    } catch (error) {
+      console.warn('발행 정보 백업 실패:', error);
     }
+    refreshGeneratedPostsList();
   } catch (error) {
     console.error('발행 정보 업데이트 실패:', error);
   }
@@ -901,6 +923,12 @@ export function copyGeneratedPost(postId: string): void {
     const copiedPost = normalizeGeneratedPostForLoad({
       ...post,
       id: newPostId,
+      publishedUrl: undefined,
+      publishedAt: undefined,
+      publishedBlogId: undefined,
+      publishedCategoryId: undefined,
+      publishMode: undefined,
+      isPublished: false,
       createdAt: new Date().toISOString(),
       title: `${post.title} (복사본)`,
       naverId: naverId || post.naverId // 현재 계정으로 설정

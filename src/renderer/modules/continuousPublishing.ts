@@ -3,6 +3,8 @@
 // modules/continuousPublishing.ts
 // ============================================
 
+import { applyPreviousPostPolicy } from '../../shared/previousPostPolicy.js';
+import { resolveRendererPublicationScope } from '../utils/previousPostScope.js';
 import { normalizeRetiredNanoEngine } from '../../runtime/imageProviderMigration.js';
 import { createTime24Select, bindTime24Events, setTime24Value, setTime24ValueByIdx } from '../utils/time24Select';
 import { applyKeywordPrefixToTitle } from '../utils/titleUtils.js';
@@ -2229,8 +2231,10 @@ export function initContinuousPublishingV2(): void {
           return;
         }
 
+        const categoryLookupBlogId = resolveRendererPublicationScope({ naverId }).blogId;
         const response = await (window.api as any).fetchBlogCategories({
-          naverId,
+          naverId: categoryLookupBlogId || naverId,
+          blogId: categoryLookupBlogId,
           naverPassword
         });
 
@@ -2239,9 +2243,9 @@ export function initContinuousPublishingV2(): void {
           const realCatSelect = document.getElementById('continuous-modal-real-category') as HTMLSelectElement;
 
           if (realCatContainer && realCatSelect) {
-            realCatSelect.innerHTML = response.categories.map((cat: any) =>
-              `<option value="${cat.categoryNo || cat.id}">${cat.categoryName || cat.name}</option>`
-            ).join('');
+            realCatSelect.replaceChildren(...response.categories.map((cat: any) =>
+              new Option(String(cat.categoryName || cat.name || ''), String(cat.categoryNo || cat.id || ''))
+            ));
             realCatContainer.style.display = 'block';
           }
 
@@ -4637,6 +4641,8 @@ async function startContinuousPublishingV2(): Promise<void> {
 
   for (let i = 0; i < continuousQueueV2.length; i++) {
     const item = continuousQueueV2[i];
+    // Capture this item's actual destination before asynchronous generation.
+    const itemPublicationScope = resolveRendererPublicationScope({ categoryId: item.realCategory || '' });
     // [2026-08-05] 무료 한도 소진 시 즉시 중단.
     //   이전에는 남은 항목마다 PAYWALL로 실패하며 연속 실패 5회를 채워야 멈춰서,
     //   사용자가 "5번 실패했다"로 원인을 오해했다.
@@ -5172,6 +5178,7 @@ async function startContinuousPublishingV2(): Promise<void> {
         }
 
         const formData = {
+          postId: savedPostId,
           mode: 'full-auto',
           generator: UnifiedDOMCache.getGenerator(),
           structuredContent: finalStructuredContent,
@@ -5231,6 +5238,8 @@ async function startContinuousPublishingV2(): Promise<void> {
               }] : undefined),
           ctaPosition: item.ctaPosition || 'bottom',
           category: item.category || selectedCategory, // ✅ [2026-01-22 FIX] 연속발행 항목의 콘텐츠 카테고리 우선 사용 (CTA 이전글 찾기용)
+          blogId: itemPublicationScope.blogId,
+          categoryId: itemPublicationScope.categoryId,
           categoryName: item.realCategoryName, // ✅ [2026-02-03 FIX] 네이버 블로그 카테고리 이름 전달
           contentMode: item.contentMode, // ✅ 콘텐츠 모드 추가
           affiliateLink: item.affiliateLink, // ✅ 제휴 링크 추가
@@ -5277,7 +5286,8 @@ async function startContinuousPublishingV2(): Promise<void> {
         (item as any)._publishStarted = true;
         item.fullAutoStage = 'publishing';
         requestAnimationFrame(() => renderQueueListV2());
-        await withStopCheck(executeUnifiedAutomation(formData), { kind: 'publish' });
+        const scopedFormData = applyPreviousPostPolicy(formData, loadAllGeneratedPosts(), itemPublicationScope);
+        await withStopCheck(executeUnifiedAutomation(scopedFormData), { kind: 'publish' });
 
         // [2026-07-02 FIX] 발행 실패를 '완료'로 오보하던 버그 차단.
         //   executeUnifiedAutomation은 내부 withErrorHandling이 모든 에러를 삼키고 정상
@@ -5298,7 +5308,7 @@ async function startContinuousPublishingV2(): Promise<void> {
       item.status = 'completed';
       delete (item as any)._publishStarted;
       // Memory hygiene: drop heavy payload references after success.
-      // Queue length is preserved (previous-post chaining uses idx > i lookups),
+      // Queue length is preserved for progress and retry tracking,
       // but the LLM/image/links payload is freed so 1000-queue runs do not retain
       // hundreds of MB of completed items. Callers only check status afterwards.
       (item as any).structuredContent = undefined;
@@ -5309,37 +5319,7 @@ async function startContinuousPublishingV2(): Promise<void> {
       _captchaFailCount = 0;     // ✅ [2026-03-23] 성공 시 캡차 실패 카운터도 리셋
       appendLog(`✅ 완료: ${item.value.substring(0, 30)}... (${modeLabel})`);
 
-      // ✅ [2026-03-20 FIX] 이전글 체이닝: 발행 성공 후 방금 발행한 URL을 다음 아이템에 전달
-      // - 글 선택 안 하면: 첫 글 → 카테고리 최신 발행글 엮기(autoLinkPreviousPost), 2번째부터 → 방금 발행한 글
-      // - 글 선택하면: 첫 글 → 선택한 글, 2번째부터 → 방금 발행한 글
-      if (item.ctaType === 'previous-post') {
-        try {
-          // 방금 발행한 글의 URL을 currentPostId로부터 가져오기
-          const recentPosts = loadAllGeneratedPosts();
-          const justPublished = recentPosts.find((p: any) => p.id === currentPostId && p.publishedUrl);
-          const justPublishedUrl = justPublished?.publishedUrl || '';
-          if (justPublishedUrl) {
-            // 다음 pending 아이템 중 ctaType='previous-post'인 첫 번째에만 전달
-            const nextPendingIdx = continuousQueueV2.findIndex(
-              (it, idx) => idx > i && it.status === 'pending' && it.ctaType === 'previous-post'
-            );
-            if (nextPendingIdx >= 0) {
-              continuousQueueV2[nextPendingIdx].previousPostUrl = justPublishedUrl;
-              // v2.6.8: 이전 글 제목에 메타-비평 문구가 들어 있으면 폴백 사용
-              const rawPrevTitle = String(finalStructuredContent?.selectedTitle || '').trim();
-              const hasMetaLeak = rawPrevTitle && META_CRITIQUE_PHRASES.some((p) => rawPrevTitle.includes(p));
-              if (hasMetaLeak) {
-                console.warn('[Continuous] 🚫 이전글 제목에 메타-비평 문구 포함 — 폴백 사용:', rawPrevTitle);
-              }
-              continuousQueueV2[nextPendingIdx].previousPostTitle = (rawPrevTitle && !hasMetaLeak) ? rawPrevTitle : '이전 글';
-              console.log(`[Continuous] 🔗 이전글 체이닝: 대기열[${nextPendingIdx}]에 URL 전달 → ${justPublishedUrl}`);
-              appendLog(`🔗 이전글 체이닝: 다음 글에 방금 발행한 URL을 전달합니다.`);
-            }
-          }
-        } catch (chainErr) {
-          console.warn('[Continuous] 이전글 체이닝 오류 (무시 가능):', chainErr);
-        }
-      }
+      // Resolve history afresh for each item; completed posts never overwrite another item's explicit selection.
 
       updateContinuousProgressModal({
         success: successCount,

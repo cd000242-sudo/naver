@@ -1,4 +1,4 @@
-import { getVerifiedRealBlogCategoryName, getVerifiedRealBlogCategoryValue } from '../utils/realBlogCategoryPolicy.js';
+import { getVerifiedRealBlogCategoryId, getVerifiedRealBlogCategoryName, getVerifiedRealBlogCategoryValue } from '../utils/realBlogCategoryPolicy.js';
 
 // ============================================
 // unifiedDOMCache.ts — renderer.ts에서 추출한 DOM 캐시 시스템
@@ -268,6 +268,10 @@ const UnifiedDOMCache = {
   getRealCategory(): string | undefined {
     const select = document.getElementById('real-blog-category-select') as HTMLSelectElement | null;
     return getVerifiedRealBlogCategoryValue(select);
+  },
+
+  getRealCategoryId(): string | undefined {
+    return getVerifiedRealBlogCategoryId(document.getElementById('real-blog-category-select') as HTMLSelectElement | null);
   },
 
   getRealCategoryName(): string | undefined {

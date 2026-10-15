@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import fs from 'fs';
 import path from 'path';
+import { runInNewContext } from 'node:vm';
+import ts from 'typescript';
 
 /**
  * SPEC-STABILITY-2026 Phase 7.4
@@ -207,10 +209,41 @@ describe('Phase 7.4 characterization - Naver editor automation contracts', () =>
     const fullAuto = read('src', 'renderer', 'modules', 'fullAutoFlow.ts');
     const publishingHandlers = read('src', 'renderer', 'modules', 'publishingHandlers.ts');
 
-    expectAll(automation, [
-      'return resolveNaverRunOptions({',
-      'defaults: this.options',
-    ]);
+    // Execute the thin wrapper so spreading normalized options plus destination
+    // metadata remains valid, while dropping or bypassing the policy still fails.
+    const wrapperBody = automation.match(
+      /private resolveRunOptions\(runOptions: RunOptions\): ResolvedRunOptions\s*\{([\s\S]*?)\n {2}\}/,
+    )?.[1];
+    expect(wrapperBody).toBeDefined();
+    const runOptions = {
+      categoryId: '12', blogId: 'my_blog', ctaType: 'previous-post',
+      previousPostCandidate: { publishedUrl: 'https://blog.naver.com/my_blog/123' },
+      previousPostSelection: 'manual', previousPostRequestedUrl: 'https://blog.naver.com/my_blog/123',
+    };
+    const defaults = { defaultTitle: 'Default title' };
+    const normalized = {
+      hashtags: ['normalized'], previousPostUrl: 'https://blog.naver.com/my_blog/123',
+      previousPostTitle: 'Previous title', ctaPosition: 'middle', includeThumbnailText: true,
+    };
+    const logMessages: string[] = [];
+    let policyCalls = 0;
+    const invokeWrapper = runInNewContext(ts.transpileModule(
+      `(function(runOptions: any) { ${wrapperBody} })`,
+      { compilerOptions: { target: ts.ScriptTarget.ES2022 } },
+    ).outputText, {
+      resolveNaverRunOptions: (args: any) => {
+        policyCalls++;
+        expect(args.runOptions).toBe(runOptions);
+        expect(args.defaults).toBe(defaults);
+        args.log('policy diagnostic');
+        return normalized;
+      },
+    });
+    const resolved = invokeWrapper.call({ options: defaults, log: (message: string) => logMessages.push(message) }, runOptions);
+    expect(policyCalls).toBe(1);
+    expect(logMessages).toEqual(['policy diagnostic']);
+    expect(resolved).toMatchObject(normalized);
+    expect(resolved).toMatchObject(runOptions);
 
     expectAll(runOptionsPolicy, [
       'normalizePublishHashtags(runOptions.hashtags, structured?.hashtags)',

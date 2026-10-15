@@ -1,3 +1,6 @@
+import { fetchNaverPreviousPostCandidates, resolveNaverPreviousPostCategoryId } from './main/services/naverPreviousPostLookup.js';
+import { refreshRuntimePreviousPost, readEditorBlogId } from './automation/previousPostRuntimePolicy.js';
+import type { PreviousPostCandidate } from './shared/previousPostPolicy.js';
 // ✅ puppeteer-extra + stealth plugin 적용 (봇 감지 완벽 우회)
 import { randomUUID } from 'node:crypto';
 import { getPublicationCommitJournal } from './automation/publicationCommitJournal.js';
@@ -313,6 +316,8 @@ export interface AutomationOptions {
   defaultTitle?: string;
   defaultContent?: string;
   defaultLines?: number;
+  categoryId?: string;
+  blogId?: string;
   categoryName?: string; // ✅ 추가: 발행할 카테고리(폴더)명
   accountProxyUrl?: string; // ✅ 계정별 프록시 URL (미설정 시 프록시 없이 직접 연결)
   // [R8-1] 카테고리 적용 실패 시 기본 카테고리로 폴백 발행 허용 (기본: 중단)
@@ -338,6 +343,8 @@ export interface RunOptions {
   hashtags?: string[];
   images?: AutomationImage[];
   publishMode?: PublishMode;
+  categoryId?: string;
+  blogId?: string;
   categoryName?: string; // ✅ 추가: 발행할 카테고리(폴더)명
   scheduleDate?: string; // 예약발행 날짜 (YYYY-MM-DD HH:mm 형식)
   scheduleTime?: string; // ✅ [2026-03-19 FIX] 예약 시간 (HH:mm) — scheduleDate와 별도 전달 시 사용
@@ -370,6 +377,10 @@ export interface RunOptions {
   createProductThumbnail?: boolean; // ✅ 추가: 제품 이미지 기반 썸네일 합성 여부
   includeThumbnailText?: boolean; // ✅ 추가: 썸네일 텍스트 합성 여부
   isFullAuto?: boolean; // ✅ 추가: 풀오토 모드 여부 (이미지 인덱스 폴백용)
+  previousPostCandidate?: PreviousPostCandidate;
+  previousPostSelection?: 'auto' | 'manual';
+  previousPostRequestedUrl?: string;
+  ctaType?: string;
   previousPostTitle?: string; // ✅ 추가: 같은 카테고리 이전글 제목
   previousPostUrl?: string; // ✅ 추가: 같은 카테고리 이전글 URL
   // [R8-1] 카테고리 적용 실패 시 기본 카테고리로 폴백 발행 허용 (기본: 중단)
@@ -430,6 +441,8 @@ interface ResolvedRunOptions {
   hashtags: string[];
   images: AutomationImage[];
   publishMode: PublishMode;
+  categoryId?: string;
+  blogId?: string;
   categoryName?: string; // ✅ 추가
   scheduleDate?: string;
   scheduleType?: 'app-schedule' | 'naver-server'; // 예약 발행 타입: 앱 스케줄 관리 vs 네이버 서버 예약
@@ -458,6 +471,10 @@ interface ResolvedRunOptions {
   createProductThumbnail?: boolean; // ✅ 추가
   includeThumbnailText: boolean; // ✅ 추가
   isFullAuto?: boolean; // ✅ 추가: 풀오토 모드 여부
+  previousPostCandidate?: PreviousPostCandidate;
+  previousPostSelection?: 'auto' | 'manual';
+  previousPostRequestedUrl?: string;
+  ctaType?: string;
   previousPostTitle?: string; // ✅ 추가: 같은 카테고리 이전글 제목
   previousPostUrl?: string; // ✅ 추가: 같은 카테고리 이전글 URL
   thumbnailPath?: string; // ✅ [2026-03-03 FIX] 추가: 대표사진 경로
@@ -533,7 +550,7 @@ export class NaverBlogAutomation {
   );
 
   constructor(
-    private readonly options: AutomationOptions,
+    private options: AutomationOptions,
     private readonly logger: (message: string) => void = console.log,
     private readonly progressCallback?: (step: number, total: number, message: string) => void,
   ) { }
@@ -1064,11 +1081,27 @@ export class NaverBlogAutomation {
   }
 
   private resolveRunOptions(runOptions: RunOptions): ResolvedRunOptions {
-    return resolveNaverRunOptions({
-      runOptions,
-      defaults: this.options,
-      log: (message) => this.log(message),
-    }) as ResolvedRunOptions;
+    return {
+      ...resolveNaverRunOptions({ runOptions, defaults: this.options, log: (message) => this.log(message) }),
+      categoryId: runOptions.categoryId,
+      blogId: runOptions.blogId,
+      ctaType: runOptions.ctaType,
+      previousPostCandidate: runOptions.previousPostCandidate,
+      previousPostSelection: runOptions.previousPostSelection,
+      previousPostRequestedUrl: runOptions.previousPostRequestedUrl,
+    } as ResolvedRunOptions;
+  }
+
+  private async guardPreviousPostBeforeTyping(options: ResolvedRunOptions): Promise<ResolvedRunOptions> {
+    const editorUrls = [this.page?.url() || '', this.mainFrame?.url() || ''];
+    const guarded = await refreshRuntimePreviousPost(
+      options, editorUrls, fetchNaverPreviousPostCandidates,
+      (message) => this.log(message), resolveNaverPreviousPostCategoryId,
+    );
+    this.options = { ...this.options, categoryId: guarded.categoryId };
+    (this as any).__publicationBlogId = readEditorBlogId(editorUrls);
+    (this as any).__strictCategoryForPreviousPost = Boolean(guarded.previousPostUrl);
+    return guarded;
   }
 
   async setupBrowser(): Promise<void> {
@@ -6053,7 +6086,11 @@ export class NaverBlogAutomation {
 
   private async runPostOnlyInternal(runOptions: RunOptions = {}, keepBrowserOpen: boolean = true): Promise<void> {
     this.cancelRequested = false;
-    const resolvedOptions = this.resolveRunOptions(runOptions);
+    let resolvedOptions = this.resolveRunOptions(runOptions);
+    (this as any).__verifiedPublicationCategoryId = undefined;
+    (this as any).__publicationBlogId = undefined;
+    (this as any).__strictCategoryForPreviousPost = false;
+    this.options = { ...this.options, categoryName: resolvedOptions.categoryName, categoryId: resolvedOptions.categoryId };
     beginMainProcessEditorCommitCandidate(runOptions, resolvedOptions, {
       structured: Boolean(resolvedOptions.structuredContent),
     });
@@ -6119,6 +6156,7 @@ export class NaverBlogAutomation {
 
       // 2단계: 도움말 패널 닫기
       await this.closePopups();
+      resolvedOptions = await this.guardPreviousPostBeforeTyping(resolvedOptions);
 
       try {
         if (resolvedOptions.structuredContent) {
@@ -6430,7 +6468,7 @@ export class NaverBlogAutomation {
     }
   }
 
-  async run(runOptions: RunOptions = {}): Promise<{ success: boolean; url?: string }> {
+  async run(runOptions: RunOptions = {}): Promise<{ success: boolean; url?: string; publicationDestination?: { blogId: string; categoryId: string } }> {
     // [2026-10-08 사장님] A semi-auto publish the user pressed re-checks a stale stop itself (automation/userRunResume).
     if (runOptions.resumeOnUserRun !== true) return this.withAccountExecution(() => this.runAccountInternal(runOptions));
     const deps = this.userRunResumeDeps();
@@ -6536,7 +6574,7 @@ export class NaverBlogAutomation {
     await this.activateEditorForEditing();
   }
 
-  private async runAccountInternal(runOptions: RunOptions = {}): Promise<{ success: boolean; url?: string }> {
+  private async runAccountInternal(runOptions: RunOptions = {}): Promise<{ success: boolean; url?: string; publicationDestination?: { blogId: string; categoryId: string } }> {
     // ✅ [v2.7.27] Adaptive Limiter — Puppeteer 부하 시 발행 동시성 자동 다운
     const { globalLimiter } = await import('./runtime/adaptiveLimiter.js');
     const release = await globalLimiter.acquire('publish');
@@ -6555,7 +6593,11 @@ export class NaverBlogAutomation {
 
     this.ensureNotCancelled();
 
-    const resolvedOptions = this.resolveRunOptions(runOptions);
+    let resolvedOptions = this.resolveRunOptions(runOptions);
+    (this as any).__verifiedPublicationCategoryId = undefined;
+    (this as any).__publicationBlogId = undefined;
+    (this as any).__strictCategoryForPreviousPost = false;
+    this.options = { ...this.options, categoryName: resolvedOptions.categoryName, categoryId: resolvedOptions.categoryId };
     beginMainProcessEditorCommitCandidate(runOptions, resolvedOptions, {
       structured: Boolean(resolvedOptions.structuredContent),
     });
@@ -6680,6 +6722,7 @@ export class NaverBlogAutomation {
 
       // 2단계: 도움말 패널 닫기
       await this.closePopups();
+      resolvedOptions = await this.guardPreviousPostBeforeTyping(resolvedOptions);
 
       let editorContentApplied = false;
       try {
@@ -6751,7 +6794,11 @@ export class NaverBlogAutomation {
         this.log(`📎 발행된 글 URL: ${this.publishedUrl}`);
       }
 
-      return { success: true, url: this.publishedUrl || undefined };
+      const verifiedCategory = (this as any).__verifiedPublicationCategoryId as string | undefined;
+      const verifiedBlog = (this as any).__publicationBlogId as string | undefined;
+      return { success: true, url: this.publishedUrl || undefined,
+        ...(verifiedBlog && verifiedCategory ? { publicationDestination: { blogId: verifiedBlog, categoryId: verifiedCategory } } : {}),
+      };
     } catch (error) {
       if ((error as Error).message === '사용자가 자동화를 취소했습니다.') {
         this.log('⏹️ 사용자가 자동화를 취소했습니다.');

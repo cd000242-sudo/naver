@@ -4,6 +4,7 @@
 // ═══════════════════════════════════════════════════════════════════
 
 // ✅ renderer.ts의 전역 변수/함수 참조
+import { markAutomaticPreviousPostCta } from '../utils/previousPostScope.js';
 import { extractSemiAutoHeadingsFromBody } from '../utils/semiAutoHeadingExtractor.js';
 import { bodyIsTitlelessReconstruction } from '../utils/semiAutoHeadingExtractor.js';
 import { hideAppProgressModal, showAppProgressModal } from '../utils/appProgressModal.js';
@@ -1701,7 +1702,7 @@ export function autoGenerateCTA(structuredContent: any): void {
     const autoCTA = generateAutoCTA(structuredContent?.selectedTitle || structuredContent?.title || '', '');
     if (autoCTA.ctaLink) {
       ctaTextInput.value = autoCTA.ctaText;
-      ctaLinkInput.value = autoCTA.ctaLink;
+      markAutomaticPreviousPostCta(ctaLinkInput, autoCTA.ctaLink);
       appendLog(`🔗 CTA 자동 생성: 내 블로그 이전 글 "${autoCTA.ctaText.replace(/^📖\s*/, '')}"`);
       return;
     }
@@ -1710,7 +1711,7 @@ export function autoGenerateCTA(structuredContent: any): void {
   }
 
   ctaTextInput.value = '';
-  ctaLinkInput.value = '';
+  markAutomaticPreviousPostCta(ctaLinkInput, '');
   appendLog(`ℹ️ 발행된 이전 글이 없어 CTA가 비어있습니다. 글 선택 버튼으로 연결할 글을 선택하세요.`);
 }
 

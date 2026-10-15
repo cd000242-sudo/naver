@@ -63,6 +63,13 @@ export interface AutomationRequest {
     imageMode?: string;
     collectedImages?: any[];
     toneStyle?: string;
+    blogId?: string;
+    categoryId?: string;
+    ctaType?: string;
+    previousPostSelection?: 'auto' | 'manual';
+    previousPostRequestedUrl?: string;
+    ctaUrl?: string;
+    previousPostCandidate?: import('../../shared/previousPostPolicy.js').PreviousPostCandidate;
     categoryName?: string;
     keepBrowserOpen?: boolean;
     useAiImage?: boolean;

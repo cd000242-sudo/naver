@@ -1,7 +1,8 @@
+import { snapshotScheduledPublication, type ScheduledPublicationSnapshot } from '../main/services/previousPostBoundary.js';
 import type { ScheduledPost } from '../scheduledPostsManager.js';
 import { parseScheduledDate } from './scheduledPostLookupPolicy.js';
 
-export interface AppScheduleInput {
+export interface AppScheduleInput extends ScheduledPublicationSnapshot {
   postId?: string;
   title?: string;
   scheduleDate?: string;
@@ -70,6 +71,7 @@ export function createAppScheduledPost(input: AppScheduleInput): ScheduledPost {
   if (!title) throw new Error('APP_SCHEDULE_TITLE_REQUIRED');
 
   return {
+    ...snapshotScheduledPublication(input),
     id: stableScheduleId(postId),
     postId,
     title,

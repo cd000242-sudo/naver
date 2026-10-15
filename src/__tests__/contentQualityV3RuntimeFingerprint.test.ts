@@ -945,12 +945,17 @@ describe('Content Quality V3 candidate runtime fingerprint', () => {
     expect(automationSource.match(publishBlogPostForwardPattern) ?? []).toHaveLength(2);
 
     const runIndex = automationSource.indexOf('async run(runOptions: RunOptions = {})');
-    const resolveIndex = automationSource.indexOf('const resolvedOptions = this.resolveRunOptions(runOptions);', runIndex);
+    const resolveIndex = automationSource.indexOf('let resolvedOptions = this.resolveRunOptions(runOptions);', runIndex);
+    const previousPostGuardIndex = automationSource.indexOf(
+      'resolvedOptions = await this.guardPreviousPostBeforeTyping(resolvedOptions);',
+      resolveIndex,
+    );
     const structuredIndex = automationSource.indexOf('await this.applyStructuredContent(resolvedOptions);', resolveIndex);
     const plainIndex = automationSource.indexOf('await this.applyPlainContent(resolvedOptions);', resolveIndex);
     expect(runIndex).toBeGreaterThanOrEqual(0);
     expect(resolveIndex).toBeGreaterThan(runIndex);
-    expect(structuredIndex).toBeGreaterThan(resolveIndex);
+    expect(previousPostGuardIndex).toBeGreaterThan(resolveIndex);
+    expect(structuredIndex).toBeGreaterThan(previousPostGuardIndex);
     expect(plainIndex).toBeGreaterThan(structuredIndex);
   });
 

@@ -162,6 +162,8 @@ interface GeneratedPost {
   category?: string;
   publishedUrl?: string;
   publishedAt?: string;
+  publishedBlogId?: string;
+  publishedCategoryId?: string;
   toneStyle?: string; // ✅ 글 톤 저장
   sourceUrl?: string; // ✅ URL로 생성한 경우 원본 URL 저장
   naverId?: string; // ✅ [2026-03-11 FIX] 다중계정 발행 시 계정별 저장 구분
