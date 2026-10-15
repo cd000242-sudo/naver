@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-15T18:05:00.043Z",
+  "generatedAt": "2026-10-15T22:00:20.366Z",
   "rules": "2026-10-10-traffic",
   "model": "sonnet",
   "guides": [
@@ -1446,43 +1446,6 @@
         "checkBefore": [
           "고용노동부 퇴직급여보장법 시행령상 중간정산 사유 최신 조문 확인",
           "회사 인사팀/사내 규정으로 실제 신청 가능 여부 확인"
-        ]
-      },
-      "at": "2026-10-13T04:40:18.450Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "ecd2633fdc752e03",
-      "urls": [
-        "https://www.tripenguin.com/feeds/5411053969748172632/comments/default",
-        "https://honeypencil.tistory.com/entry/%ED%9A%A1%EC%84%B1-%ED%95%9C%EC%9A%B0%EC%B6%95%EC%A0%9C-%EC%9D%BC%EC%A0%95-%EC%B4%88%EB%8C%80%EA%B0%80%EC%88%98-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://acecomm.tistory.com/entry/%ED%9A%A1%EC%84%B1%ED%95%9C%EC%9A%B0%EC%B6%95%EC%A0%9C-%EC%9D%BC%EC%A0%95-%EB%B0%8F-%EC%A3%BC%EC%B0%A8-%EA%BF%80%ED%8C%81",
-        "https://gurujjang.tistory.com/entry/%F0%9F%90%84%F0%9F%94%A5-%EC%A0%9C22%ED%9A%8C-%ED%9A%A1%EC%84%B1%ED%95%9C%EC%9A%B0%EC%B6%95%EC%A0%9C-10%EC%9B%94-7%EC%9D%BC11%EC%9D%BC-%EC%84%AC%EA%B0%95%EB%91%94%EC%B9%98%EC%84%9C-%EA%B0%9C%EB%A7%89",
-        "https://www.activitycamp.kr/feeds/3879093295035733879/comments/default"
-      ],
-      "guide": {
-        "direction": "① '초대가수'와 '주차장'이 함께 자동완성에 오르는 걸 보면, 검색자는 이찬원·박서진·김희재를 언제 볼 수 있는지와 어디에 차를 세울지를 동시에 궁금해한다. ② 고수 글들이 라인업·일정·가격·주차를 각각 다뤘지만 날짜별 공연시간과 불꽃쇼 시각을 한 표로 정리한 글은 비어 있다. ③ 날짜·시간·장소를 묶은 일정표를 주면 현장 가기 전 다시 찾아본다.",
-        "searchTargets": [
-          "횡성한우축제 라인업",
-          "횡성한우축제 주차",
-          "횡성한우축제 가격",
-          "2026 횡성 한우축제"
-        ],
-        "mustInclude": [
-          "제22회 횡성한우축제 10월 7일~11일, 섬강둔치 개최 (확인 필요: 횡성군 공식 공지)",
-          "이찬원·박서진·김희재 출연일과 시간 (확인 필요: 공식 라인업 공고)",
-          "불꽃쇼 일정 및 시간 (확인 필요)",
-          "주차장 위치·셔틀버스 운영 여부 (확인 필요)",
-          "먹거리 가격대(한우 시식·구매 가격, 확인 필요)"
-        ],
-        "mustAvoid": [
-          "대관령·홍천 등 다른 지역 한우축제와 혼동",
-          "출연 가수 라인업을 확정처럼 쓰고 변경·취소 가능성 언급 안 함"
-        ],
-        "checkBefore": [
-          "횡성군청·축제 공식 SNS에서 최종 라인업과 시간표 확인",
-          "주차장 운영 공지 최신본 확인"
         ]
       },
       "at": "2026-10-13T04:40:18.450Z",
@@ -3365,39 +3328,6 @@
       "provider": "claude"
     },
     {
-      "id": "72f6abc1cde0d024",
-      "urls": [
-        "https://info-guide.co.kr/2026-%ec%83%9d%ea%b3%84%eb%b9%84-%ea%b3%84%ec%a2%8c-%ea%b0%9c%ec%84%a4-%eb%b0%a9%eb%b2%95-%ec%b4%9d%ec%a0%95%eb%a6%ac%ec%9b%94-250%eb%a7%8c-%ec%9b%90-%ec%95%95%eb%a5%98%eb%b0%a9%ec%a7%80%ec%8b%a0/",
-        "https://bongbong200.com/entry/%EC%83%9D%EA%B3%84%EB%B9%84-%EA%B3%84%EC%A2%8C-%EC%B4%9D%EC%A0%95%EB%A6%AC-%EA%B0%9C%EC%84%A4-%EB%8C%80%EC%83%81%EB%B6%80%ED%84%B0-250%EB%A7%8C-%EC%9B%90-%EB%B3%B4%ED%98%B8-%ED%95%9C%EB%8F%84-%EA%B8%B0%EC%A1%B4-%EC%95%95%EB%A5%98%EB%B0%A9%EC%A7%80%ED%86%B5%EC%9E%A5%EA%B3%BC%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90-%EC%99%84%EB%B2%BD-%EB%B9%84%EA%B5%90",
-        "https://fh.bluemoha.com/entry/%EC%83%9D%EA%B3%84%EB%B9%84-%EA%B3%84%EC%A2%8C-%EB%B3%B4%ED%98%B8-%EC%95%95%EB%A5%98%EB%B0%A9%EC%A7%80%ED%86%B5%EC%9E%A5-%EB%B3%B4%ED%98%B8-%EA%B8%B0%EC%A4%80-%ED%95%84%EC%9A%94%EC%84%9C%EB%A5%98-%EC%9D%B4%EC%9A%A9%EA%BF%80%ED%8C%81"
-      ],
-      "guide": {
-        "direction": "검색자는 '생계비 계좌'라는 공식명보다 은행이 실제 쓰는 '생계비보호통장'이란 이름과 '토스' 같은 특정 은행 상품을 먼저 검색하므로 대표 검색어는 '생계비보호통장'·'토스 생계비보호통장'이 맞다. 고수 글들은 압류방지통장과의 차이·신청자격까지는 다뤘지만 은행별(토스·농협) 상품명·신청경로 비교는 비어 있어, 이 부분을 표로 채우면 독자가 자기 은행 항목만 찾아 다시 방문한다.",
-        "searchTargets": [
-          "토스 생계비보호통장",
-          "생계비보호통장",
-          "생계비보호통장 압류",
-          "생계비보호통장 농협"
-        ],
-        "mustInclude": [
-          "월 250만 원 압류방지 한도와 기존 압류방지(행복지킴이)통장 한도 비교표",
-          "토스뱅크 생계비보호통장 정확한 상품명·신청 경로 (확인 필요: 토스뱅크 공식 공지)",
-          "농협 버전 생계비보호통장 명칭·신청 조건 (확인 필요: 농협 공식 공지)",
-          "생계비보호통장 이자 수준 (확인 필요: 해당 은행 상품설명서)",
-          "신청 시 필요서류 목록"
-        ],
-        "mustAvoid": [
-          "기존 압류방지통장(행복지킴이통장)과 완전히 동일한 제도로 혼동 서술하지 않기"
-        ],
-        "checkBefore": [
-          "250만 원 보호 한도의 법적 근거와 최신 기준 - 관련 법령·금융위 공지"
-        ]
-      },
-      "at": "2026-10-13T04:40:18.450Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
       "id": "28320e339697a5b6",
       "urls": [
         "https://seoyun7412.co.kr/%eb%a9%94%eb%8b%ac-%ea%b5%b0%eb%a9%b4%ec%a0%9c-%ed%8f%90%ec%a7%80-%ed%99%95%ec%a0%95%eb%90%90%eb%82%98-2026-%ec%95%84%ec%8b%9c%ec%95%88%ea%b2%8c%ec%9e%84%c2%b7%ec%98%ac%eb%a6%bc%ed%94%bd-%eb%b3%91/",
@@ -5003,36 +4933,6 @@
         ],
         "checkBefore": [
           "대한당뇨병학회 또는 질병관리청 공식 진단 기준수치 확인"
-        ]
-      },
-      "at": "2026-10-13T11:28:09.769Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "600d469bca77a26e",
-      "urls": [
-        "https://namtaegi.com/2026-health-insurance-premium-reduction-1/",
-        "https://namtaegi.com/2026-health-insurance-premium-reduction/",
-        "https://fds2104.tistory.com/152",
-        "https://ivan0520.tistory.com/entry/%EC%9B%94%EA%B8%89%EC%97%90%EC%84%9C-%EB%B9%A0%EC%A7%80%EB%8A%94-%EA%B1%B4%EA%B0%95%EB%B3%B4%ED%97%98%EB%A3%8C-2026%EB%85%84%EC%97%90%EB%8A%94-%EC%96%BC%EB%A7%88%EB%82%98-%EB%8B%AC%EB%9D%BC%EC%A1%8C%EC%9D%84%EA%B9%8C"
-      ],
-      "guide": {
-        "direction": "① 검색자는 '2026 건강보험료 경감'이라는 제목 핵심어로 본인이 대상인지 확인하러 온다(자동완성 없어 제목 키워드로 판단). ② 고수 글은 대상·조건·산정기준 설명에 머물렀고, 신청 절차·기한·경감률 구체 수치는 비어 있다. ③ 대상 조건별 체크리스트와 신청 순서(어디서·언제까지)를 정리하면 본인 해당 여부를 바로 판단해 신청까지 이어진다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "경감 대상 조건(소득·재산 기준 등)(확인 필요: 국민건강보험공단 공고)",
-          "경감률(%)과 2026년 변경 사항(확인 필요: 보건복지부 보도자료)",
-          "신청 방법(공단 지사 방문/홈페이지/앱)과 신청 기한(확인 필요)",
-          "지역가입자·직장가입자별 조건 구분표"
-        ],
-        "mustAvoid": [
-          "건강보험료 경감 제도를 기초연금·긴급복지 등 다른 복지제도와 혼동",
-          "이전 연도(2025년 이전) 경감 기준을 2026년 기준인 것처럼 혼용"
-        ],
-        "checkBefore": [
-          "국민건강보험공단 공식 홈페이지·고객센터 공지에서 2026년 대상·비율·기한 확인",
-          "보건복지부 2026년 건강보험료 관련 보도자료 확인"
         ]
       },
       "at": "2026-10-13T11:28:09.769Z",
@@ -9339,29 +9239,6 @@
       "provider": "claude"
     },
     {
-      "id": "157c2f1a3b92a856",
-      "urls": [
-        "https://4jsm.com/entry/%ED%99%94%EC%84%B1%EA%B3%A0%EC%9A%A9%EB%B3%B5%EC%A7%80%ED%94%8C%EB%9F%AC%EC%8A%A4%EC%84%BC%ED%84%B0-%ED%99%88%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%9D%B4%EC%9A%A9%ED%9B%84%EA%B8%B0%EF%BD%9C%EC%8B%A4%EC%97%85%EA%B8%89%EC%97%AC%C2%B7%EA%B5%AD%EB%AF%BC%EC%B7%A8%EC%97%85%EC%A7%80%EC%9B%90%EC%A0%9C%EB%8F%84%C2%B7%EB%82%B4%EC%9D%BC%EB%B0%B0%EC%9B%80%EC%B9%B4%EB%93%9C",
-        "https://apel.tirtory.com/entry/%ED%99%94%EC%84%B1%EA%B3%A0%EC%9A%A9%EB%B3%B5%EC%A7%80-%ED%94%8C%EB%9F%AC%EC%8A%A4%EC%84%BC%ED%84%B0"
-      ],
-      "guide": {
-        "direction": "화성 지역에서 실업급여·국민취업지원제도·내일배움카드를 신청하려는 사람이 방문 전 위치·준비물을 확인하려고 '화성고용복지플러스센터'를 검색하므로 이를 대표 검색어로 잡는다. 고수 글은 이용후기와 센터 소개까지만 다뤄 방문 전 준비물 체크리스트와 제도별 동시신청 가능 여부가 비어 있다. 찾아가는 길·운영시간·필요서류를 정리하면 방문을 앞둔 독자가 다시 찾는다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "센터 주소와 대중교통 접근법(확인 필요: 고용노동부 홈페이지)",
-          "실업급여 신청 시 필수 지참서류 목록",
-          "국민취업지원제도와 내일배움카드 동시 신청 가능 여부"
-        ],
-        "mustAvoid": [],
-        "checkBefore": [
-          "고용노동부 고용복지플러스센터 홈페이지에서 주소·운영시간 확인"
-        ]
-      },
-      "at": "2026-10-13T11:28:09.769Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
       "id": "e5cd91b925765739",
       "urls": [
         "https://law.tipmany.com/entry/%EC%95%8C%EB%9C%B0%ED%8F%B0%EC%9A%94%EA%B8%88%EC%A0%9C%EB%B9%84%EA%B5%90%EC%82%AC%EC%9D%B4%ED%8A%B8",
@@ -10291,31 +10168,6 @@
         "checkBefore": [
           "참가자 16명 명단 확정 여부 넷플릭스 공식 계정·보도자료에서 확인",
           "시즌3 공개일·방영일이 가제인지 확정인지 넷플릭스 편성 공지에서 확인"
-        ]
-      },
-      "at": "2026-10-13T11:28:09.769Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "353ff868cf69f37e",
-      "urls": [
-        "https://xn--2i0bj7ghwb1vexzada718wmmz.kr/2272",
-        "https://k-girlband.tistory.com/entry/%EC%9C%88%EB%8F%84%EC%9A%B011-%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8-%EC%98%A4%EB%A5%98-0x80248007-%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95%EF%BD%9C%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8-%EC%84%9C%EB%B9%84%EC%8A%A4%C2%B7SoftwareDistribution%C2%B7catroot2-%EC%B4%88%EA%B8%B0%ED%99%94"
-      ],
-      "guide": {
-        "direction": "① '고용산재토탈서비스 edi 홈페이지 바로가기'로 들어오는 사람은 EDI 접속 링크와 로그인 방법이 급한 사업주·보험사무대행기관이다. ② 경쟁 글이 단순 바로가기 링크만 제공하는 비어 있는 시장이라 로그인 인증수단·자주 뜨는 오류 해결법을 채우면 차별화된다. ③ 바로가기 링크와 인증 방법·오류 해결 체크리스트를 함께 두면 재접속할 때마다 즐겨찾기처럼 다시 찾아온다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "고용산재토탈서비스 EDI 공식 바로가기 주소 (확인 필요: 근로복지공단 공식 홈페이지)",
-          "EDI 신고서 작성·제출 메뉴 위치 안내",
-          "자주 발생하는 접속·로그인 오류와 해결법 (확인 필요: 공식 FAQ·고객센터)"
-        ],
-        "mustAvoid": [
-          "대행업체 홍보성 링크를 공식 바로가기처럼 섞어 쓰는 것"
-        ],
-        "checkBefore": [
-          "EDI 공식 URL이 최신인지 근로복지공단 공식 홈페이지에서 재확인"
         ]
       },
       "at": "2026-10-13T11:28:09.769Z",
