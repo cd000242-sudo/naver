@@ -1305,6 +1305,16 @@
                                 <div id="leword-board-list" style="display: none; margin-top: 0.5rem; max-height: 320px; overflow-y: auto; border: 1px solid var(--border-medium); border-radius: 8px;"></div>
                             </div>
 
+                            <!-- [2026-10-15] 홈판 오토파일럿 P1 — Claude가 홈판 노출 확률 × 트래픽으로 글감을 골라 자동 채택 -->
+                            <div style="margin-bottom: 0.6rem;">
+                                <button type="button" id="homefeed-auto-btn"
+                                    style="width: 100%; padding: 0.6rem; background: linear-gradient(135deg, #f97316, #ea580c); color: #fff; border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 700; cursor: pointer;">
+                                    🏠 홈판 글감 자동 선정 (Claude)
+                                </button>
+                                <div style="margin-top: 0.3rem; font-size: 0.72rem; color: var(--text-muted);">홈판 노출 글·오늘의 글감을 분석해 가장 유리한 글감을 키워드·홈판 모드·추가 요청사항에 자동으로 넣습니다.</div>
+                                <div id="homefeed-auto-result" style="display: none; margin-top: 0.5rem; padding: 0.6rem 0.7rem; font-size: 0.8rem; line-height: 1.5; color: var(--text-secondary); background: var(--bg-tertiary); border: 1px solid var(--border-medium); border-radius: 8px;"></div>
+                            </div>
+
                             <!-- ✅ [SPEC-KEYWORD-ENDGAME Phase 2-B] 블루오션 자동선정 (옵트인, 기본 OFF) -->
                             <label for="blueocean-auto-select"
                                 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-secondary); cursor: pointer;"

@@ -358,6 +358,7 @@ import { initImageNarrativeMode } from './modules/imageNarrativeMode.js';
 // [v2.11.206] 장소(지도) 미리 확정 UI
 import { initPlacePicker, readPickedPlace, readPickedPlaces } from './modules/placePicker.js';
 import { initLewordBoardPicker } from './modules/lewordBoardPicker.js';
+import { initHomefeedTopicAuto } from './modules/homefeedTopicAuto.js';
 import { initHeadingControlPanel, renderHeadingList } from './modules/headingControlPanel.js';
 import { initPublishFlowChooser } from './modules/publishFlowChooser.js';
 import { initImageTabTitleMirror } from './modules/contentGeneration.js';
@@ -10975,6 +10976,8 @@ initImageNarrativeMode();
 initPlacePicker();
 // [2026-09-10] leword 오늘의 글감 — 앱이 랜덤 시드로 키워드를 뽑던 것을 대체한다.
 initLewordBoardPicker();
+// [2026-10-15] 홈판 오토파일럿 P1 — Claude가 고른 홈판 글감을 폼에 자동 채택한다.
+initHomefeedTopicAuto();
 (window as any).readPickedPlace = readPickedPlace;
 (window as any).readPickedPlaces = readPickedPlaces;
 // [2026-09-09] publishingHandlers 의 풀오토 발행 경로에서도 발행 후 초기화를 부를 수 있게 연다.

@@ -755,6 +755,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/renderer/modules/headingControlPanel.ts',
   'src/renderer/modules/headingImageContext.ts',
   'src/renderer/modules/headingImageGen.ts',
+  'src/renderer/modules/homefeedTopicAuto.ts',
   'src/renderer/modules/imageDisplayGrid.ts',
   'src/renderer/modules/imageGenStudio.ts',
   'src/renderer/modules/imageGenStudioCore.ts',
