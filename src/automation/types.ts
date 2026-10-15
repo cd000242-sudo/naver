@@ -20,6 +20,8 @@ export interface AutomationOptions {
     defaultContent?: string;
     defaultLines?: number;
     categoryName?: string;
+    categoryId?: string;
+    blogId?: string;
 }
 
 /**
@@ -58,6 +60,8 @@ export interface RunOptions {
     images?: AutomationImage[];
     publishMode?: PublishMode;
     categoryName?: string;
+    categoryId?: string;
+    blogId?: string;
     keepBrowserOpen?: boolean;
     scheduleDate?: string;
     scheduleMethod?: 'datetime-local' | 'individual-inputs';

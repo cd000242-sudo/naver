@@ -492,6 +492,13 @@ export interface PostCyclePayload {
 
     // 기타 옵션
     toneStyle?: string;
+    blogId?: string;
+    categoryId?: string;
+    ctaType?: string;
+    previousPostSelection?: 'auto' | 'manual';
+    previousPostRequestedUrl?: string;
+    ctaUrl?: string;
+    previousPostCandidate?: import('../../shared/previousPostPolicy.js').PreviousPostCandidate;
     categoryName?: string;
     keepBrowserOpen?: boolean;
     isFullAuto?: boolean;
@@ -536,6 +543,9 @@ export interface PostCycleContext {
  * 발행 결과
  */
 export interface PostCycleResult {
+    postId?: string;
+    publishMode?: 'draft' | 'publish' | 'schedule';
+    publicationDestination?: import('./previousPostBoundary.js').PublicationDestination;
     success: boolean;
     message?: string;
     url?: string;

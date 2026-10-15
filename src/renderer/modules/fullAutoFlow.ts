@@ -1,6 +1,7 @@
 // @ts-nocheck
 // Restored from dist/renderer/modules/fullAutoFlow.js after source encoding damage; keep runtime parity with the last successful build.
 "use strict";
+import { captureRendererPublicationScope, resolveRendererPreviousPostPayload } from '../utils/previousPostScope.js';
 import { buildPublishFailureReport, classifyPublishFailure } from '../../automation/publishFailureClassifier.js';
 import { buildPastePreviewHtml } from '../../automation/richTextPaste.js';
 import { applyPendingArticleTablesToGeneratedContent } from './articleTableComposer.js';
@@ -414,107 +415,19 @@ if (typeof window !== 'undefined') {
     window.clearFullAutoContentRetryCache = clearFullAutoContentRetryCache;
 }
 function autoLinkPreviousPost(formData, modal) {
-    appendLog(`🔗 이전글 자동 엮기: 같은 계정+카테고리의 이전 발행글 찾기 시작...`);
-    ensureCategoryMigration();
-    const allPosts = loadAllGeneratedPosts();
-    const currentNaverId = getCurrentNaverId();
-    const rawCategory = formData.category || formData.categoryName || '';
-    const currentCategory = normalizeCategory(rawCategory);
-    appendLog(`   📂 현재 카테고리: "${currentCategory || '없음'}" (원본: "${rawCategory}")`);
-    appendLog(`   👤 현재 계정: "${currentNaverId || '미지정'}"`);
-    const publishedPosts = allPosts.filter((p) => p.publishedUrl && p.publishedUrl.trim() &&
-        (!currentNaverId || !p.naverId || p.naverId === currentNaverId));
-    appendLog(`   📊 전체 발행글: ${publishedPosts.length}개`);
-    const canAutoLink = formData.ctaType === 'previous-post';
-    const needsLinkLookup = !formData.ctaUrl || formData.ctaUrl.trim() === '';
-    if (canAutoLink && needsLinkLookup) {
-        const prevPosts = publishedPosts
-            .filter((p) => {
-            if (!currentCategory)
-                return false;
-            const postCat = normalizeCategory(p.category || '');
-            return postCat === currentCategory;
-        })
-            .sort((a, b) => {
-            const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
-            const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
-            return dateB - dateA;
-        });
-        appendLog(`   🔍 동일 카테고리 글: ${prevPosts.length}개`);
-        const prevPost = prevPosts[0];
-        if (prevPost) {
-            const validUrl = prevPost.publishedUrl && prevPost.publishedUrl.startsWith('http') ? prevPost.publishedUrl : '';
-            formData.ctaUrl = validUrl;
-            if (validUrl)
-                formData.ctaLink = validUrl;
-            formData.previousPostTitle = prevPost.title || '이전 글 보기';
-            if (validUrl)
-                formData.previousPostUrl = validUrl;
-            if (!formData.ctaText || formData.ctaText.startsWith('📖')) {
-                formData.ctaText = `📖 추천 글: ${prevPost.title}`;
-            }
-            appendLog(`✅ CTA 이전글 매칭 성공: "${prevPost.title}" (카테고리: ${prevPost.category || '없음'})`);
-            appendLog(`   👉 URL: ${formData.ctaUrl}`);
-            modal?.addLog?.(`🔗 이전글 자동 매칭: ${prevPost.title}`);
-        }
-        else {
-            if (!currentCategory) {
-                appendLog('⚠️ 현재 카테고리가 설정되지 않았습니다.');
-            }
-            else {
-                appendLog(`⚠️ "${currentCategory}" 카테고리의 이전 발행글을 찾지 못했습니다.`);
-            }
-            if (!formData.ctaUrl)
-                formData.ctaType = 'none';
-        }
+    const resolved = resolveRendererPreviousPostPayload(
+        { ...formData, postId: formData.postId || currentPostId || undefined },
+        () => loadAllGeneratedPosts(),
+    );
+    if (resolved.previousPostUrl) {
+        appendLog(`🔗 같은 블로그·카테고리 이전글 연결: ${resolved.previousPostTitle}`);
+        modal?.addLog?.(`🔗 이전글 연결: ${resolved.previousPostTitle}`);
+    } else {
+        appendLog('🔗 같은 블로그·카테고리로 확인된 이전 발행글이 없어 연결을 생략합니다.');
     }
-    const needsPreviousPostLookup = !formData.previousPostUrl || formData.previousPostUrl.trim() === '';
-    const isShoppingConnectMode = formData.affiliateLink && formData.affiliateLink.trim();
-    const isMateMode = formData.contentMode === 'mate';
-    const isStandardContentMode = ['seo', 'homefeed', 'custom', 'business', 'affiliate'].includes(String(formData.contentMode || 'seo'));
-    const skipBecauseCtaIsPrevPost = formData.ctaType === 'previous-post' && !isShoppingConnectMode && !isMateMode;
-    const ctaLinkAlreadyHasPreviousPost = formData.ctaLink && formData.ctaLink.trim() &&
-        formData.ctaLink.startsWith('http') && formData.ctaLink.includes('blog.naver.com');
-    const skipBecauseCtaLinkAlreadySet = ctaLinkAlreadyHasPreviousPost && !isShoppingConnectMode;
-    if (needsPreviousPostLookup && (formData.ctaType !== 'none' || isMateMode || isStandardContentMode) && !skipBecauseCtaIsPrevPost && !skipBecauseCtaLinkAlreadySet) {
-        let prevPosts = [];
-        if (isShoppingConnectMode) {
-            prevPosts = publishedPosts
-                .filter((p) => {
-                if (!currentCategory)
-                    return false;
-                const postCat = normalizeCategory(p.category || '');
-                const categoryMatch = postCat === currentCategory;
-                const isPostShoppingConnect = !!(p.affiliateLink || p.contentMode === 'shopping-connect');
-                return categoryMatch && isPostShoppingConnect;
-            })
-                .sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime());
-            appendLog(`   🔍 동일 카테고리 쇼핑커넥트 글: ${prevPosts.length}개`);
-        }
-        if (prevPosts.length === 0 && currentCategory) {
-            prevPosts = publishedPosts
-                .filter((p) => normalizeCategory(p.category || '') === currentCategory)
-                .sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime());
-            appendLog(`   🔍 동일 카테고리 전체 글: ${prevPosts.length}개`);
-        }
-        const prevPost = prevPosts[0];
-        if (prevPost) {
-            formData.previousPostTitle = prevPost.title;
-            formData.previousPostUrl = prevPost.publishedUrl;
-            appendLog(`✅ 이전글 자동 매칭 성공: "${prevPost.title}" (카테고리: ${prevPost.category || '없음'})`);
-            appendLog(`   👉 이전글 URL: ${formData.previousPostUrl}`);
-            modal?.addLog?.(`🔗 이전글 자동 매칭: ${prevPost.title}`);
-        }
-        else {
-            if (!currentCategory) {
-                appendLog('⚠️ 현재 카테고리가 설정되지 않았습니다.');
-            }
-            else {
-                appendLog(`⚠️ "${currentCategory}" 카테고리의 이전 발행글을 찾지 못했습니다.`);
-            }
-        }
-    }
+    return resolved;
 }
+
 function emitLog(message, modal, type = 'info') {
     appendLog(message);
     if (modal?.addLog) {
@@ -709,7 +622,7 @@ function friendlyErrorMessage(error) {
     return `⚠️ 오류가 발생했습니다: ${error?.message || String(error)}`;
 }
 async function executeFullAutoFlow(formData) {
-    formData = createPipelineFormDataSnapshot('full-auto', formData || {});
+    formData = captureRendererPublicationScope(createPipelineFormDataSnapshot('full-auto', formData || {}));
     const isContinuousInvocation = window.isContinuousMode === true;
     if (!isContinuousInvocation) {
         window.stopFullAutoPublish = false;
@@ -1471,7 +1384,7 @@ async function executeFullAutoFlow(formData) {
         modal?.setStep(3, 'active', '로그인 중...');
         checkShouldStop();
         try {
-            autoLinkPreviousPost(formData, modal);
+            formData = autoLinkPreviousPost(formData, modal);
         }
         catch (linkError) {
             // Previous-post lookup is optional enrichment. Corrupt or migrated
@@ -1481,12 +1394,12 @@ async function executeFullAutoFlow(formData) {
             modal?.addLog?.('⚠️ 이전글 연결 건너뜀 — 발행 계속');
         }
         const automationResult = await executeBlogPublishing(structuredContent, finalImages, formData);
-        if (currentPostId && automationResult?.success) {
+        if ((automationResult?.postId || formData.postId || currentPostId) && automationResult?.success) {
             const publishedUrl = automationResult.url || automationResult.postUrl || automationResult.blogUrl;
             if (publishedUrl) {
-                updatePostAfterPublish(currentPostId, publishedUrl, formData.publishMode);
+                updatePostAfterPublish(automationResult.postId || formData.postId || currentPostId, publishedUrl, automationResult.publishMode || formData.publishMode, automationResult.publicationDestination);
             }
-            updatePostImages(currentPostId, finalImages);
+            updatePostImages(automationResult.postId || formData.postId || currentPostId, finalImages);
         }
         modal?.setStep(3, 'completed', '완료');
         modal?.setStep(4, 'completed', '완료');
@@ -1539,7 +1452,7 @@ async function executeFullAutoFlow(formData) {
     }
 }
 async function executeSemiAutoFlow(formData) {
-    formData = createPipelineFormDataSnapshot('full-auto', formData || {});
+    formData = captureRendererPublicationScope(createPipelineFormDataSnapshot('full-auto', formData || {}));
     formData._semiAutoMode = true;
     const isContinuousInvocation = window.isContinuousMode === true;
     if (!isContinuousInvocation) {
@@ -1635,19 +1548,19 @@ async function executeSemiAutoFlow(formData) {
             appendLog('⏭️ 이미지 생성 건너뛰기 (skipImages = true)');
         }
         checkSemiAutoStop();
-        autoLinkPreviousPost(formData);
+        formData = autoLinkPreviousPost(formData);
         checkSemiAutoStop();
         showUnifiedProgress(80, '블로그 발행 준비 중...', '네이버 블로그에 발행할 준비를 하고 있습니다.');
         appendLog('📤 블로그 발행 시작...');
         appendLog(`📊 발행 정보: 제목="${structuredContent.selectedTitle}", 이미지=${generatedImagesForPublish.length}개`);
         showUnifiedProgress(90, '블로그 발행 중...', '네이버 블로그에 콘텐츠를 발행하고 있습니다.');
         const automationResult = await executeBlogPublishing(structuredContent, generatedImagesForPublish, formData);
-        if (currentPostId && automationResult?.success) {
+        if ((automationResult?.postId || formData.postId || currentPostId) && automationResult?.success) {
             const publishedUrl = automationResult.url || automationResult.postUrl || automationResult.blogUrl;
             if (publishedUrl) {
-                updatePostAfterPublish(currentPostId, publishedUrl, formData.publishMode);
+                updatePostAfterPublish(automationResult.postId || formData.postId || currentPostId, publishedUrl, automationResult.publishMode || formData.publishMode, automationResult.publicationDestination);
             }
-            updatePostImages(currentPostId, generatedImagesForPublish);
+            updatePostImages(automationResult.postId || formData.postId || currentPostId, generatedImagesForPublish);
         }
         showUnifiedProgress(100, '발행 완료!', '🎉 반자동 발행이 성공적으로 완료되었습니다!');
         appendLog('✅ 반자동 모드 자동화 완료');
@@ -2201,6 +2114,8 @@ function collectFullAutoFormData() {
         || document.getElementById('unified-manual-title')?.value?.trim()
         || undefined;
     return {
+        ...captureRendererPublicationScope({}),
+        categoryName: UnifiedDOMCache.getRealCategoryName(),
         pipelineConfigSnapshot: pipelineCfg,
         urls,
         keywords,
@@ -2270,7 +2185,7 @@ function validateFullAutoFormData(data) {
     return true;
 }
 async function executeFullAutoAutomation(formData) {
-    formData = createPipelineFormDataSnapshot('full-auto', formData || {});
+    formData = captureRendererPublicationScope(createPipelineFormDataSnapshot('full-auto', formData || {}));
     const startBtn = document.getElementById('full-auto-start-btn');
     const progressContainer = document.createElement('div');
     progressContainer.id = 'full-auto-progress-container';
@@ -2398,10 +2313,10 @@ async function executeFullAutoAutomation(formData) {
         updateProgress(90, '블로그 발행 중...');
         showUnifiedProgress(90, '블로그 발행 중...', '네이버 블로그에 콘텐츠를 발행하고 있습니다.');
         const automationResult = await executeBlogPublishing(structuredContent, generatedImages, formData);
-        if (currentPostId && automationResult?.success) {
+        if ((automationResult?.postId || formData.postId || currentPostId) && automationResult?.success) {
             const publishedUrl = automationResult.url || automationResult.postUrl || automationResult.blogUrl;
             if (publishedUrl) {
-                updatePostAfterPublish(currentPostId, publishedUrl, formData.publishMode);
+                updatePostAfterPublish(automationResult.postId || formData.postId || currentPostId, publishedUrl, automationResult.publishMode || formData.publishMode, automationResult.publicationDestination);
             }
         }
         updateProgress(100, '발행 완료! 🎉');
@@ -2887,7 +2802,7 @@ async function generateLibraryImagesForHeadings(headings, formData) {
     return images;
 }
 async function generateAIImagesForHeadings(headings, formData, structuredContentSnapshot) {
-    formData = createPipelineFormDataSnapshot('full-auto', formData || {});
+    formData = captureRendererPublicationScope(createPipelineFormDataSnapshot('full-auto', formData || {}));
     if (!headings || !Array.isArray(headings)) {
         console.warn('[AI Images] headings is undefined or not an array, failing image generation');
         appendLog('⚠️ 소제목 정보가 없어 이미지 생성을 중단합니다.');
@@ -3584,11 +3499,12 @@ async function logImageDiversityBeforePublish(generatedImages, postTitle) {
     }
 }
 async function executeBlogPublishing(structuredContent, generatedImages, formData) {
-    formData = createPipelineFormDataSnapshot('full-auto', formData || {});
+    formData = captureRendererPublicationScope(createPipelineFormDataSnapshot('full-auto', formData || {}));
     if (window.stopFullAutoPublish === true) {
         appendLog('⏹️ 발행 시작 전 취소 감지 → 건너뜁니다.');
         throw new Error('사용자가 작업을 취소했습니다.');
     }
+    formData = autoLinkPreviousPost({ ...formData, postId: formData.postId || currentPostId || undefined });
     const pipelineCfg = formData.pipelineConfigSnapshot;
     const modal = resolveFullAutoProgressModal(
         window.currentProgressModal,
@@ -3628,11 +3544,6 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
     showUnifiedProgress(87, '페이로드 구성 중...', '발행할 콘텐츠를 준비하고 있습니다.');
     let ctaText = formData.ctaText;
     let ctaLink = formData.ctaLink;
-    if (!ctaText || !ctaLink) {
-        const autoCTA = generateAutoCTA(structuredContent.selectedTitle || '', '');
-        ctaText = ctaText || autoCTA.ctaText;
-        ctaLink = ctaLink || autoCTA.ctaLink;
-    }
     if (ctaLink) {
         appendLog(`📢 CTA 버튼 포함: "${ctaText}"`);
     }
@@ -3890,8 +3801,10 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
         scheduleTime: formData.publishMode === 'schedule' ? formData.scheduleTime : undefined,
         scheduleType: formData.publishMode === 'schedule' ? (formData.scheduleType || 'naver-server') : undefined,
         toneStyle: formData.toneStyle,
-        postId: currentPostId || undefined,
+        postId: formData.postId || currentPostId || undefined,
         thumbnailPath: thumbnailPath,
+        blogId: formData.blogId,
+        categoryId: formData.categoryId,
         categoryName: resolvedBlogCategoryName,
         ...((() => { console.log(`[executeBlogPublishing] 📂 IPC categoryName: "${resolvedBlogCategoryName || '(없음)'}"`); return {}; })()),
         ctaText: formData.skipCta ? undefined : ctaText,
@@ -3924,6 +3837,10 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
         // [2026-06-12] 업체홍보 문의 표 이미지용 — 발행 단계에 연락 채널 전달
         businessInfo: formData.contentMode === 'business' ? (window._businessInfo || undefined) : undefined,
         contentPolicyContext,
+        ctaType: formData.ctaType,
+        previousPostCandidate: formData.previousPostCandidate,
+        previousPostSelection: formData.previousPostSelection,
+        previousPostRequestedUrl: formData.previousPostRequestedUrl,
         previousPostTitle: formData.previousPostTitle || undefined,
         previousPostUrl: formData.previousPostUrl || undefined,
         customBannerPath: formData.customBannerPath || window.customBannerPath || undefined,
@@ -4076,7 +3993,7 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
         appendLog('✅ 블로그 발행이 성공적으로 완료되었습니다!');
         console.log('[FullAuto] 블로그 발행 완료');
     }, 500);
-    return automationResult;
+    return { ...automationResult, postId: automationResult.postId || payload.postId, publishMode: automationResult.publishMode || payload.publishMode };
 }
 function hydrateNarrativeImageMetadata(image, heading, sourceById) {
     const sourceId = String(image?.blobId || image?.filePath || image?.url || '').trim();

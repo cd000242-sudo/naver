@@ -1,3 +1,4 @@
+import { publicationCompletion } from '../main/services/previousPostBoundary.js';
 import { describe, expect, it, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import ts from 'typescript';
@@ -34,7 +35,7 @@ async function runMain(code: string, throws = false, extra: Record<string, unkno
     const account = { name: accountId }; const payload = {}; const accountQuotaLease = { rollback, commit() {} };
     const contentQualityV3PublishOwnerKey = accountId;
     try { ${source.slice(start, end)} return results;`;
-  const results = await compile(run, { ...classifierBindings, executeWithContentPolicyManualReview: execute,
+  const results = await compile(run, { ...classifierBindings, publicationCompletion, executeWithContentPolicyManualReview: execute,
     AutomationService: { executePostCycle() {} }, confirmContentPolicyManualReview() {}, assertImmediatePublishResultUrl() {},
     sendLog() {}, rollback, contentQualityV3PublishHandoffStore: { releaseOwner } });
   return { results, execute, rollback, releaseOwner };
@@ -42,7 +43,7 @@ async function runMain(code: string, throws = false, extra: Record<string, unkno
 
 async function runRenderer(code: string, extra: Record<string, unknown> = {}) {
   const source = readFileSync('src/renderer/modules/multiAccountManager.ts', 'utf8').replace(/\r\n/g, '\n');
-  const start = source.indexOf('                    const result = await window.api.multiAccountPublish([queueItem.accountId], publishOptions);');
+  const start = source.indexOf('                    const result = await window.api.multiAccountPublish([queueItem.accountId], scopedPublishOptions);');
   const end = source.indexOf('                if (i < queueSnapshot.length - 1 && !stopRequested', start);
   expect(start).toBeGreaterThan(-1); expect(end).toBeGreaterThan(start);
   const publish = vi.fn(async () => ({ success: true, results: [{ success: false, message: '작업 실패', failureCode: code, ...extra }] }));
@@ -52,7 +53,7 @@ async function runRenderer(code: string, extra: Record<string, unknown> = {}) {
     const queueSnapshot = [{ accountId: 'a', accountName: 'a' }, { accountId: 'b', accountName: 'b' }];
     const totalItems = queueSnapshot.length;
     for (let i = 0; i < totalItems && !stopRequested && !window.stopFullAutoPublish; i++) {
-      const queueItem = queueSnapshot[i], publishOptions = {}; let publishStarted = true, publishConfirmed = false;
+      const queueItem = queueSnapshot[i], scopedPublishOptions = {}; let publishStarted = true, publishConfirmed = false;
       try { ${source.slice(start, end)}
       if (!stopRequested && !window.stopFullAutoPublish) rotate();
     }

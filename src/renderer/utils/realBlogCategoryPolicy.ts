@@ -153,3 +153,13 @@ export function getVerifiedRealBlogCategoryValue(select: HTMLSelectElement | nul
 
   return value || text || undefined;
 }
+
+/** Only analyzer-issued numeric category IDs are usable as publication identity. */
+export function getVerifiedRealBlogCategoryId(select: HTMLSelectElement | null | undefined): string | undefined {
+  if (!select || select.selectedIndex < 0) return undefined;
+  const option = select.options[select.selectedIndex];
+  if (option?.dataset.realBlogCategory !== 'true') return undefined;
+  const value = String(option.dataset.realBlogCategoryId || '').trim();
+  if (!/^\d+$/.test(value)) return undefined;
+  return value.replace(/^0+/, '') || undefined;
+}

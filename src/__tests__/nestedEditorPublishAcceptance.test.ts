@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import ts from 'typescript';
 import { describe, expect, it, vi } from 'vitest';
+import { readEditorBlogId, refreshRuntimePreviousPost } from '../automation/previousPostRuntimePolicy.js';
 import { insertImagesAtCurrentCursor } from '../automation/imageHelpers.js';
 import { ImageUploadNotRetryableError } from '../automation/imageUploadPreflight.js';
 import { isBlogWriteLoginRedirect, resolveBlogWriteFrameSwitchSurface } from '../automation/editorNavigationUrlPolicy.js';
@@ -48,6 +49,9 @@ function harness(mode: 'success' | 'no-dom-image' | 'upload-error' | 'partial-up
   const resolved = { publishMode: 'publish', structuredContent: { title: 'Fixture', headings: [] } };
   const guard = { getStatus: () => ({ paused: false }), pause: vi.fn() };
   const dependencies = {
+    readEditorBlogId, refreshRuntimePreviousPost,
+    fetchNaverPreviousPostCandidates: vi.fn(async () => []),
+    resolveNaverPreviousPostCategoryId: vi.fn(async () => undefined),
     isBlogWriteLoginRedirect, resolveBlogWriteFrameSwitchSurface, isLoginChallengeUrl,
     findReadyEditorFrame, EditorFrameProtectionError,
     getAccountExecutionGuard: () => guard,
@@ -70,6 +74,7 @@ function harness(mode: 'success' | 'no-dom-image' | 'upload-error' | 'partial-up
     publishBlogPost: vi.fn(async () => { events.push('publish'); }),
     verifyImmediatePublishOutcome: vi.fn(async () => { events.push('verify-publish'); }),
   };
+  state.guardPreviousPostBeforeTyping = productionMethod('guardPreviousPostBeforeTyping', dependencies);
   state.pauseEntry = productionMethod('pauseEntry', dependencies);
   state.switchToMainFrame = productionMethod('switchToMainFrame', dependencies);
   state.getAttachedFrame = productionMethod('getAttachedFrame', dependencies);

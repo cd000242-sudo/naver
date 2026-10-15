@@ -1,3 +1,5 @@
+import { markAutomaticPreviousPostCta, isAutomaticPreviousPostCtaInput, readManualCtaLink, captureRendererPublicationScope, resolveRendererPublicationScope, resolveRendererPreviousPostPayload } from './utils/previousPostScope.js';
+import { selectPreviousPost } from '../shared/previousPostPolicy.js';
 import './utils/browserPreviewBridge.js';
 
 // [v-auto-sync] Top-level version banner — must appear in user console on every load.
@@ -1052,6 +1054,7 @@ function readUnifiedCtasFromUi(): Array<{ text: string; link?: string; position?
     for (const row of rows) {
       const textEl = row.querySelector('.unified-cta-text') as HTMLInputElement | null;
       const linkEl = row.querySelector('.unified-cta-link') as HTMLInputElement | null;
+      if (isAutomaticPreviousPostCtaInput(linkEl)) continue;
       // [v2.11.142] CTA별 위치 — 빈 값이면 전역 CTA 위치 설정을 따른다.
       const posEl = row.querySelector('.unified-cta-pos') as HTMLSelectElement | null;
       const text = String(textEl?.value || '').trim();
@@ -1064,9 +1067,10 @@ function readUnifiedCtasFromUi(): Array<{ text: string; link?: string; position?
 
   // 2. 레거시 입력도 항상 읽기 (새 row가 비어있거나 없을 때)
   const legacyText = (document.getElementById('unified-cta-text') as HTMLInputElement | null)?.value?.trim() || '';
-  const legacyLink = (document.getElementById('unified-cta-link') as HTMLInputElement | null)?.value?.trim() || '';
+  const legacyLinkInput = document.getElementById('unified-cta-link') as HTMLInputElement | null;
+  const legacyLink = readManualCtaLink(legacyLinkInput);
 
-  if (legacyText) {
+  if (legacyText && !isAutomaticPreviousPostCtaInput(legacyLinkInput)) {
     // 레거시 입력에 값이 있으면 추가 (중복 방지: 같은 텍스트가 없을 때만)
     const alreadyExists = items.some(item => item.text === legacyText);
     if (!alreadyExists) {
@@ -1458,6 +1462,9 @@ if (calendarDateModal) {
 // 포스팅 완료 시 발행 글 저장 (자동화 완료 시)
 if (typeof window !== 'undefined' && window.api) {
   window.api.onStatus((status: any) => {
+    if (status.success && status.url && status.postId) {
+      updatePostAfterPublish(status.postId, status.url, status.publishMode, status.publicationDestination);
+    }
     if (status.success) {
       const titleInput = document.getElementById('post-title') as HTMLInputElement;
       const title = titleInput?.value.trim();
@@ -1502,15 +1509,15 @@ if (typeof window !== 'undefined' && window.api) {
         }
 
         // ✅ 현재 글에도 URL 저장
-        if (status.url) {
+        if (status.url && !status.postId) {
           if (currentPostId) {
-            updatePostAfterPublish(currentPostId, status.url);
+            updatePostAfterPublish(currentPostId, status.url, status.publishMode, status.publicationDestination);
           } else {
             // ✅ currentPostId가 없으면 제목으로 글 찾아서 URL 저장
             const posts = loadGeneratedPosts();
             const matchingPost = posts.find(p => p.title === title && !p.publishedUrl);
             if (matchingPost) {
-              updatePostAfterPublish(matchingPost.id, status.url);
+              updatePostAfterPublish(matchingPost.id, status.url, status.publishMode, status.publicationDestination);
             }
           }
         }
@@ -2266,6 +2273,9 @@ function updateProgress(percent: number, status: string): void {
     }
 
     window.api.onStatus((status: any) => {
+      if (status.success && status.url && status.postId) {
+        updatePostAfterPublish(status.postId, status.url, status.publishMode, status.publicationDestination);
+      }
       if (status.success) {
         const titleInput = document.getElementById('post-title') as HTMLInputElement;
         const title = titleInput?.value.trim();
@@ -2276,9 +2286,9 @@ function updateProgress(percent: number, status: string): void {
           savePublishedPost(today, title, publishedUrl);
 
           // ✅ 현재 글에도 URL 저장
-          if (status.url) {
+          if (status.url && !status.postId) {
             if (currentPostId) {
-              updatePostAfterPublish(currentPostId, status.url, (document.getElementById('unified-publish-mode') as HTMLInputElement)?.value as any || undefined);
+              updatePostAfterPublish(currentPostId, status.url, status.publishMode, status.publicationDestination);
               appendLog(`📎 발행 URL이 저장되었습니다: ${status.url}`);
 
               // ✅ 발행/임시/예약 등 어떤 모드든 이미지도 함께 저장
@@ -2303,7 +2313,7 @@ function updateProgress(percent: number, status: string): void {
               const posts = loadGeneratedPosts();
               const matchingPost = posts.find(p => p.title === title && !p.publishedUrl);
               if (matchingPost) {
-                updatePostAfterPublish(matchingPost.id, status.url, (document.getElementById('unified-publish-mode') as HTMLInputElement)?.value as any || undefined);
+                updatePostAfterPublish(matchingPost.id, status.url, status.publishMode, status.publicationDestination);
                 appendLog(`📎 발행 URL이 저장되었습니다 (제목 매칭): ${status.url}`);
 
                 try {
@@ -5838,7 +5848,7 @@ URL: ${firstUrl}
     const skipCta = (document.getElementById('unified-skip-cta') as HTMLInputElement)?.checked || false;
     const ctasUi = readUnifiedCtasFromUi();
     const ctaText = ctasUi[0]?.text || (document.getElementById('unified-cta-text') as HTMLInputElement)?.value || '';
-    const ctaLink = ctasUi[0]?.link || (document.getElementById('unified-cta-link') as HTMLInputElement)?.value || '';
+    const ctaLink = ctasUi[0]?.link || readManualCtaLink(document.getElementById('unified-cta-link') as HTMLInputElement | null);
     const ctaPosition = (document.getElementById('unified-cta-position') as HTMLSelectElement)?.value || 'bottom';
     // ✅ [2026-01-28 FIX] HeadingImageSettings 모달의 localStorage 설정 최우선
     // ✅ [2026-03-10 CLEANUP] full-auto-thumbnail-text, semi-auto-thumbnail-text 유령 참조 제거 → localStorage 단일 소스
@@ -6589,6 +6599,10 @@ URL: ${firstUrl}
       <select class="unified-cta-pos" title="이 CTA의 삽입 위치" style="width: 150px; padding: 0.7rem 0.5rem; border: 1px solid var(--border-light); border-radius: var(--radius-sm); font-size: 0.8rem; background: var(--bg-primary); cursor: pointer;">${positionOptions}</select>
       <button type="button" class="unified-cta-remove" style="padding:0.5rem 0.75rem; background: rgba(239,68,68,0.15); color:#ef4444; border: 1px solid rgba(239,68,68,0.35); border-radius: 8px; cursor:pointer;">✕</button>
     `;
+    if (isAutomaticPreviousPostCtaInput(ctaLinkInput) && presetLink === ctaLinkInput?.value.trim()) {
+      const linkInput = row.querySelector('.unified-cta-link') as HTMLInputElement | null;
+      if (linkInput) markAutomaticPreviousPostCta(linkInput, presetLink);
+    }
     ctaItemsContainer.appendChild(row);
   };
 
@@ -6767,7 +6781,7 @@ URL: ${firstUrl}
               if (textEl) textEl.value = `📖 ${selectedPost.title}`;
               if (selectedPost.publishedUrl) {
                 const linkEl = firstRow.querySelector('.unified-cta-link') as HTMLInputElement | null;
-                if (linkEl) linkEl.value = selectedPost.publishedUrl;
+                if (linkEl) { delete linkEl.dataset.autoPreviousPostUrl; linkEl.value = selectedPost.publishedUrl; }
               }
             }
           }
@@ -6781,6 +6795,7 @@ URL: ${firstUrl}
           if (selectedPost.publishedUrl) {
             // 발행된 글이면 URL도 자동 입력
             if (ctaLinkInput) {
+              delete ctaLinkInput.dataset.autoPreviousPostUrl;
               ctaLinkInput.value = selectedPost.publishedUrl;
             }
             appendLog(`✅ 이전 글 선택됨: "${selectedPost.title}" (CTA 자동 입력됨)`);
@@ -8857,87 +8872,16 @@ function getUnifiedUrls(): string[] {
 }
 
 // ✅ CTA 자동 생성 함수 (내 블로그 이전 글만 연결 - 외부 사이트 연결 금지!)
-function generateAutoCTA(title: string, keywords?: string): { ctaText: string; ctaLink: string } {
-  // ✅ 중요: 외부 사이트(쿠팡, 네이버 건강, 정부24 등)로 연결하지 않음!
-  // 오직 사용자의 이전 블로그 글만 CTA로 연결
-
-  const isJabBlog = (() => {
-    const publishingSettings = (window as any).currentPublishingAccountSettings;
-    if (publishingSettings && typeof publishingSettings === 'object') {
-      return publishingSettings.isJabBlog === true;
-    }
-    const mainSettings = (window as any).currentMainAccountSettings;
-    if (mainSettings && typeof mainSettings === 'object') {
-      return mainSettings.isJabBlog === true;
-    }
-    return false;
-  })();
-
-  const getCurrentCategoryKey = (): string | null => {
-    const fromUi = String((document.getElementById('unified-article-type') as HTMLSelectElement | null)?.value || '').trim();
-    if (fromUi) return fromUi;
-    if (currentPostId) {
-      const p = loadGeneratedPost(currentPostId);
-      const fromPost = String((p as any)?.category || '').trim();
-      if (fromPost) return fromPost;
-    }
-    return null;
-  };
-
-  const pickLatestPublished = (candidates: any[]): any | null => {
-    if (!candidates || candidates.length === 0) return null;
-    const sorted = [...candidates].sort((a, b) => {
-      const at = new Date(a.publishedAt || a.updatedAt || a.createdAt || 0).getTime();
-      const bt = new Date(b.publishedAt || b.updatedAt || b.createdAt || 0).getTime();
-      return bt - at;
-    });
-    return sorted[0] || null;
-  };
-
-  // 저장된 이전 글 목록에서 발행된 글 찾기
+function generateAutoCTA(_title: string, _keywords?: string): { ctaText: string; ctaLink: string } {
   try {
-    const posts = loadGeneratedPosts();
-    // publishedUrl이 있는 글만 필터링 (발행된 글)
-    // ✅ [2026-02-26 FIX] 현재 계정의 글만 매칭 (타계정 글 CTA 엮기 방지)
-    const ctaNaverId = getCurrentNaverId();
-    const publishedPosts = posts
-      .filter(p => p.publishedUrl && p.publishedUrl.length > 0)
-      .filter(p => !currentPostId || p.id !== currentPostId)
-      .filter(p => !ctaNaverId || !(p as any).naverId || (p as any).naverId === ctaNaverId);
-
-    if (publishedPosts.length > 0) {
-      let candidates = publishedPosts;
-      if (!isJabBlog) {
-        const categoryKey = getCurrentCategoryKey();
-        if (categoryKey) {
-          const byCategory = publishedPosts.filter(p => String((p as any)?.category || '').trim() === categoryKey);
-          if (byCategory.length > 0) {
-            candidates = byCategory;
-          }
-        }
-      }
-
-      const latestPost = pickLatestPublished(candidates) || pickLatestPublished(publishedPosts);
-      if (!latestPost) {
-        return {
-          ctaText: '📖 관련 글 더 보기',
-          ctaLink: ''
-        };
-      }
-      return {
-        ctaText: `📖 ${latestPost.title}`,
-        ctaLink: latestPost.publishedUrl || ''
-      };
-    }
-  } catch (e) {
-    console.warn('[CTA] 이전 글 목록 로드 실패:', e);
+    const latestPost = selectPreviousPost(loadGeneratedPosts(), resolveRendererPublicationScope(), {
+      excludePostId: currentPostId || undefined,
+    });
+    if (latestPost) return { ctaText: `📖 ${latestPost.title || '관련 글 더 보기'}`, ctaLink: latestPost.publishedUrl || '' };
+  } catch (error) {
+    console.warn('[CTA] 이전 글 목록 로드 실패:', error);
   }
-
-  // ✅ 이전 글이 없으면 CTA 링크를 비워둠 (외부 사이트로 연결하지 않음!)
-  return {
-    ctaText: '📖 관련 글 더 보기',
-    ctaLink: '' // 빈 링크 - CTA 텍스트만 표시되고 링크는 없음
-  };
+  return { ctaText: '📖 관련 글 더 보기', ctaLink: '' };
 }
 
 // 풀오토 발행 처리
@@ -9487,6 +9431,7 @@ function collectUnifiedFormDataForPublish(mode: 'full-auto' | 'semi-auto'): any 
     false;
 
   const baseData = {
+    ...captureRendererPublicationScope({}),
     mode,
     generator,
     targetAge: 'all', // 고정
@@ -9753,6 +9698,7 @@ const yieldToUI = () => new Promise<void>(resolve => setTimeout(resolve, 0));
 
 // 자동화 실행 시 오류 처리
 async function executeAutomationWithErrorHandling(payload: RendererAutomationPayload): Promise<RendererStatus> {
+  payload = resolveRendererPreviousPostPayload(payload, () => loadGeneratedPosts());
   const result = await withErrorHandling(
     async () => {
       // ✅ 자동화 실행 전 ImageMap 동기화 (Renderer -> Main)
