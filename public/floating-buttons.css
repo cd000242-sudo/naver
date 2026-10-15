@@ -150,11 +150,11 @@
  */
 /*
  * [2026-10-11 사장님] 오른쪽 도구 모음 — 안쪽 스크롤 상자 없이 전부 보이게, 버튼 크기·모양을 하나로 맞춘다.
- * 위쪽 바로가기 줄 바로 아래(56px)에서 시작해 스크롤해도 화면에 고정된다. 버튼은 줄어들지 않는다(환경 설정 찌그러짐의 뿌리).
+ * 위쪽 바로가기 줄과 접기 버튼 아래(90px)에서 시작해 스크롤해도 화면에 고정된다. 버튼은 줄어들지 않는다.
  * 표시·숨김(display)은 각 기능의 스크립트가 정하므로 여기서 건드리지 않는다.
  */
 #right-floating-buttons {
-  top: 56px !important;
+  top: 90px !important;
   right: 16px !important;
   width: 178px;
   max-height: none !important;
@@ -163,6 +163,38 @@
   gap: 6px !important;
   transform: none !important;
   opacity: 1 !important;
+}
+
+/* 인라인 display:flex보다 우선해야 접힌 버튼이 클릭·키보드 탐색 대상에서 빠진다. */
+#right-floating-buttons[hidden] {
+  display: none !important;
+}
+
+#right-toolbar-toggle {
+  position: fixed;
+  top: 56px;
+  right: 16px;
+  z-index: 999;
+  height: 28px;
+  padding: 0 10px;
+  border: 1px solid #655735;
+  border-radius: 999px;
+  background: #282319;
+  color: #f6e8c4;
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+#right-toolbar-toggle:hover {
+  background: #3c3320;
+}
+
+#right-toolbar-toggle:focus-visible {
+  outline: 2px solid #f8d775;
+  outline-offset: 2px;
 }
 
 #right-floating-buttons > .floating-btn {
@@ -202,10 +234,10 @@
   font-size: 0.85rem !important;
 }
 
-/* 아주 낮은 창에서만, 아래 메인 풀오토 이미지 설정 버튼을 덮지 않게 안쪽 스크롤을 다시 쓴다. */
-@media (max-height: 560px) {
+/* 접기 버튼과 최대 9개 도구의 높이를 고려해 아래 이미지 설정 버튼과 겹치지 않게 한다. */
+@media (max-height: 660px) {
   #right-floating-buttons {
-    max-height: calc(100dvh - 250px) !important;
+    max-height: calc(100dvh - 280px) !important;
     overflow-y: auto !important;
   }
 }
