@@ -27,6 +27,8 @@ const GLOBAL_KEYS = new Set([
     // 라이선스/앱 수준 설정은 계정별로 분리하지 않음
     'app_theme',
     'app_language',
+    // 도구 모음은 계정 초기화 전에도 복원되는 앱 전체의 화면 배치 설정이다.
+    'rightToolbarCollapsed',
     'electron-tutorial-completed',
 ]);
 
