@@ -20051,8 +20051,8 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-10-04T00:48:14.460Z",
-    "reason": "최근 검색결과 재검증에서 추천 조건을 충족하지 못했습니다."
+    "checkedAt": "2026-10-16T01:30:01.267Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
   {
@@ -37397,7 +37397,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-10-03T07:23:15.416Z",
+    "checkedAt": "2026-10-16T01:29:59.157Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -39125,6 +39125,11 @@
     "measuredAt": null,
     "windowEnd": null,
     "series": []
+   },
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-10-16T01:29:51.876Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
   {
@@ -41621,7 +41626,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-10-03T07:23:12.504Z",
+    "checkedAt": "2026-10-16T01:29:55.959Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -42379,7 +42384,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-10-04T00:48:14.713Z",
+    "checkedAt": "2026-10-16T01:30:02.133Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -71512,6 +71517,11 @@
     "measuredAt": null,
     "windowEnd": null,
     "series": []
+   },
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-10-16T01:30:04.863Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
   {
@@ -74347,8 +74357,8 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-10-14T01:21:54.719Z",
-    "reason": "최근 검색결과 재검증에서 추천 조건을 충족하지 못했습니다."
+    "checkedAt": "2026-10-16T01:29:39.567Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
   {
@@ -74737,7 +74747,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-10-04T00:48:16.596Z",
+    "checkedAt": "2026-10-16T01:30:03.963Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -75401,6 +75411,11 @@
     "tier": "none",
     "pc": 70,
     "mobile": 70
+   },
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-10-16T01:30:03.035Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
   {
@@ -75841,7 +75856,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-10-03T07:23:05.550Z",
+    "checkedAt": "2026-10-16T01:29:48.567Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -82010,5 +82025,6 @@
     "SERP 1번째 구획이 쇼핑 — 검색 화면이 상품판이다"
    ]
   }
- ]
+ ],
+ "revalidatedAt": "2026-10-16T01:30:04.863Z"
 }
