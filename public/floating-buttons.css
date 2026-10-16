@@ -166,7 +166,10 @@
 }
 
 /* 인라인 display:flex보다 우선해야 접힌 버튼이 클릭·키보드 탐색 대상에서 빠진다. */
-#right-floating-buttons[hidden] {
+/* 하단 버튼은 늦게 생성되거나 탭 변경으로 display가 바뀌어도 같은 접기 상태를 따른다. */
+#right-floating-buttons[hidden],
+body.right-tools-collapsed #heading-image-setting-btn,
+body.right-tools-collapsed #ai-assistant-btn {
   display: none !important;
 }
 
