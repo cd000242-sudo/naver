@@ -814,13 +814,13 @@ function joinHtmlPartsWithParagraphSpacers(parts: string[], spacerHtml: string):
   return joined.join('\n\n');
 }
 
-function qaQuestionStyle(): string {
+function qaQuestionStyle(centerAlign: boolean): string {
   return [
     'font-size:24px',
     'line-height:1.65',
     'margin:34px auto 12px',
     'max-width:520px',
-    'text-align:center',
+    centerAlign ? 'text-align:center' : 'text-align:left',
     'color:#5a3f35',
     'background-color:#ffffff',
     'font-weight:500',
@@ -1992,7 +1992,7 @@ export function buildMobileRichHtml(text: string, options: MobileRichHtmlOptions
     }
 
     if (node.type === 'qa-question') {
-      htmlParts.push(`<p style="${qaQuestionStyle()}">${formatInline(node.text, terms, false, highlightTheme)}</p>`);
+      htmlParts.push(`<p style="${qaQuestionStyle(centerAlign)}">${formatInline(node.text, terms, false, highlightTheme)}</p>`);
       plainParts.push(node.plain);
       paragraphCount += 1;
       return;

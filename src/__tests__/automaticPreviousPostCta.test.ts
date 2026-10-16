@@ -2,7 +2,7 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import ts from 'typescript';
-import { markAutomaticPreviousPostCta, readManualCtaLink, isAutomaticPreviousPostCtaInput, resolveRendererPreviousPostPayload } from '../renderer/utils/previousPostScope';
+import { markAutomaticPreviousPostCta, readManualCtaText, readManualCtaLink, isAutomaticPreviousPostCtaInput, resolveRendererPreviousPostPayload } from '../renderer/utils/previousPostScope';
 
 describe('auto-filled previous CTA provenance', () => {
   beforeEach(() => { document.body.innerHTML = ''; });
@@ -48,12 +48,69 @@ describe('actual CTA generation and UI collection wiring', () => {
     const autoGenerate = loadSourceFunction('src/renderer/modules/contentGeneration.ts', 'export function autoGenerateCTA(', '// ✅ 불러오기/백업 복원 시 CTA 자동 채움', {
       document, generateAutoCTA: () => ({ ctaText: '이전 글 A', ctaLink: 'https://blog.naver.com/myblog/100' }), appendLog: () => {}, markAutomaticPreviousPostCta,
     });
-    const readCtas = loadSourceFunction('src/renderer/renderer.ts', 'function readUnifiedCtasFromUi()', '// RendererAutomationPayload 타입은', { document, isAutomaticPreviousPostCtaInput, readManualCtaLink });
+    const readCtas = loadSourceFunction('src/renderer/renderer.ts', 'function readUnifiedCtasFromUi()', '// RendererAutomationPayload 타입은', { document, isAutomaticPreviousPostCtaInput, readManualCtaText, readManualCtaLink });
     autoGenerate({ selectedTitle: '다음 글' });
     expect(readCtas()).toEqual([]);
     const input = document.getElementById('unified-cta-link') as HTMLInputElement;
     input.value = 'https://example.com/custom';
     input.dispatchEvent(new Event('input'));
     expect(readCtas()).toEqual([{ text: '이전 글 A', link: 'https://example.com/custom' }]);
+  });
+});
+
+describe('automatic previous-post text provenance', () => {
+  function fillAutomaticInputs() {
+    document.body.innerHTML = '<input id="unified-cta-text"><input id="unified-cta-link"><div id="unified-cta-items-container"></div>';
+    const autoGenerate = loadSourceFunction('src/renderer/modules/contentGeneration.ts', 'export function autoGenerateCTA(', '// ✅ 불러오기/백업 복원 시 CTA 자동 채움', {
+      document, generateAutoCTA: () => ({ ctaText: '자동 이전 글 A', ctaLink: 'https://blog.naver.com/myblog/100' }), appendLog: () => {}, markAutomaticPreviousPostCta,
+    });
+    autoGenerate({ selectedTitle: '다음 글' });
+    return {
+      textInput: document.getElementById('unified-cta-text') as HTMLInputElement,
+      linkInput: document.getElementById('unified-cta-link') as HTMLInputElement,
+      readCtas: loadSourceFunction('src/renderer/renderer.ts', 'function readUnifiedCtasFromUi()', '// RendererAutomationPayload 타입은', { document, isAutomaticPreviousPostCtaInput, readManualCtaText, readManualCtaLink }),
+    };
+  }
+  it('does not treat an auto-filled title as manual text after its URL is cleared programmatically', () => {
+    const { textInput, linkInput, readCtas } = fillAutomaticInputs();
+    expect(readManualCtaText(textInput, linkInput)).toBe('');
+    linkInput.value = '';
+    expect(readManualCtaText(textInput, linkInput)).toBe('');
+    expect(readCtas()).toEqual([]);
+  });
+  it('preserves an explicit text edit even while the old URL is still automatic', () => {
+    const { textInput, linkInput, readCtas } = fillAutomaticInputs();
+    textInput.value = '댓글로 의견을 남겨 주세요.';
+    textInput.dispatchEvent(new Event('input'));
+    expect(readManualCtaText(textInput, linkInput)).toBe(textInput.value);
+    expect(readCtas()).toEqual([{ text: textInput.value, link: undefined }]);
+  });
+  it('preserves retyping the same automatic words as an intentional text-only CTA', () => {
+    const { textInput, linkInput, readCtas } = fillAutomaticInputs();
+    textInput.dispatchEvent(new Event('input'));
+    linkInput.value = '';
+    expect(readManualCtaText(textInput, linkInput)).toBe('자동 이전 글 A');
+    expect(readCtas()).toEqual([{ text: '자동 이전 글 A', link: undefined }]);
+  });
+  it('preserves the label when the user clears or replaces the link', () => {
+    const { textInput, linkInput, readCtas } = fillAutomaticInputs();
+    linkInput.value = '';
+    linkInput.dispatchEvent(new Event('input'));
+    expect(readManualCtaText(textInput, linkInput)).toBe('자동 이전 글 A');
+    expect(readCtas()).toEqual([{ text: '자동 이전 글 A', link: undefined }]);
+  });
+});
+
+describe('automatic CTA rows', () => {
+  it('omits automatic row text until the user edits it, then retains a text-only row', () => {
+    document.body.innerHTML = '<div id="unified-cta-items-container"><div class="unified-cta-item"><input class="unified-cta-text"><input class="unified-cta-link"></div></div>';
+    const textInput = document.querySelector('.unified-cta-text') as HTMLInputElement;
+    const linkInput = document.querySelector('.unified-cta-link') as HTMLInputElement;
+    markAutomaticPreviousPostCta(linkInput, 'https://blog.naver.com/myblog/100', textInput, '자동 이전 글 A');
+    const readCtas = loadSourceFunction('src/renderer/renderer.ts', 'function readUnifiedCtasFromUi()', '// RendererAutomationPayload 타입은', { document, isAutomaticPreviousPostCtaInput, readManualCtaText, readManualCtaLink });
+    expect(readCtas()).toEqual([]);
+    textInput.value = '직접 입력한 안내';
+    textInput.dispatchEvent(new Event('change'));
+    expect(readCtas()).toEqual([{ text: '직접 입력한 안내', link: undefined, position: undefined }]);
   });
 });

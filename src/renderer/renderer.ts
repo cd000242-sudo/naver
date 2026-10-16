@@ -1,4 +1,4 @@
-import { markAutomaticPreviousPostCta, isAutomaticPreviousPostCtaInput, readManualCtaLink, captureRendererPublicationScope, resolveRendererPublicationScope, resolveRendererPreviousPostPayload } from './utils/previousPostScope.js';
+import { markAutomaticPreviousPostCta, isAutomaticPreviousPostCtaInput, readManualCtaText, readManualCtaLink, captureRendererPublicationScope, resolveRendererPublicationScope, resolveRendererPreviousPostPayload } from './utils/previousPostScope.js';
 import { selectPreviousPost } from '../shared/previousPostPolicy.js';
 import './utils/browserPreviewBridge.js';
 
@@ -1055,11 +1055,10 @@ function readUnifiedCtasFromUi(): Array<{ text: string; link?: string; position?
     for (const row of rows) {
       const textEl = row.querySelector('.unified-cta-text') as HTMLInputElement | null;
       const linkEl = row.querySelector('.unified-cta-link') as HTMLInputElement | null;
-      if (isAutomaticPreviousPostCtaInput(linkEl)) continue;
       // [v2.11.142] CTA별 위치 — 빈 값이면 전역 CTA 위치 설정을 따른다.
       const posEl = row.querySelector('.unified-cta-pos') as HTMLSelectElement | null;
-      const text = String(textEl?.value || '').trim();
-      const link = String(linkEl?.value || '').trim();
+      const text = readManualCtaText(textEl, linkEl);
+      const link = readManualCtaLink(linkEl);
       const position = String(posEl?.value || '').trim();
       // [2026-10-13] A row with only a link used to be dropped here (user typed 3 links, got 1 CTA).
       if (text || link) items.push({ text: text || '자세히 보러가기', link: link || undefined, position: position || undefined });
@@ -1067,11 +1066,11 @@ function readUnifiedCtasFromUi(): Array<{ text: string; link?: string; position?
   }
 
   // 2. 레거시 입력도 항상 읽기 (새 row가 비어있거나 없을 때)
-  const legacyText = (document.getElementById('unified-cta-text') as HTMLInputElement | null)?.value?.trim() || '';
+  const legacyText = readManualCtaText(document.getElementById('unified-cta-text') as HTMLInputElement | null, document.getElementById('unified-cta-link') as HTMLInputElement | null);
   const legacyLinkInput = document.getElementById('unified-cta-link') as HTMLInputElement | null;
   const legacyLink = readManualCtaLink(legacyLinkInput);
 
-  if (legacyText && !isAutomaticPreviousPostCtaInput(legacyLinkInput)) {
+  if (legacyText) {
     // 레거시 입력에 값이 있으면 추가 (중복 방지: 같은 텍스트가 없을 때만)
     const alreadyExists = items.some(item => item.text === legacyText);
     if (!alreadyExists) {
@@ -5848,7 +5847,7 @@ URL: ${firstUrl}
     const skipImages = isImageSkipEnabled();
     const skipCta = (document.getElementById('unified-skip-cta') as HTMLInputElement)?.checked || false;
     const ctasUi = readUnifiedCtasFromUi();
-    const ctaText = ctasUi[0]?.text || (document.getElementById('unified-cta-text') as HTMLInputElement)?.value || '';
+    const ctaText = ctasUi[0]?.text || readManualCtaText(document.getElementById('unified-cta-text') as HTMLInputElement | null, document.getElementById('unified-cta-link') as HTMLInputElement | null);
     const ctaLink = ctasUi[0]?.link || readManualCtaLink(document.getElementById('unified-cta-link') as HTMLInputElement | null);
     const ctaPosition = (document.getElementById('unified-cta-position') as HTMLSelectElement)?.value || 'bottom';
     // ✅ [2026-01-28 FIX] HeadingImageSettings 모달의 localStorage 설정 최우선
@@ -6602,7 +6601,9 @@ URL: ${firstUrl}
     `;
     if (isAutomaticPreviousPostCtaInput(ctaLinkInput) && presetLink === ctaLinkInput?.value.trim()) {
       const linkInput = row.querySelector('.unified-cta-link') as HTMLInputElement | null;
-      if (linkInput) markAutomaticPreviousPostCta(linkInput, presetLink);
+      const textInput = row.querySelector('.unified-cta-text') as HTMLInputElement | null;
+      const autoText = ctaTextInput?.dataset.autoPreviousPostText === presetText.trim();
+      if (linkInput) markAutomaticPreviousPostCta(linkInput, presetLink, autoText ? textInput : undefined);
     }
     ctaItemsContainer.appendChild(row);
   };
@@ -8882,7 +8883,7 @@ function generateAutoCTA(_title: string, _keywords?: string): { ctaText: string;
   } catch (error) {
     console.warn('[CTA] 이전 글 목록 로드 실패:', error);
   }
-  return { ctaText: '📖 관련 글 더 보기', ctaLink: '' };
+  return { ctaText: '', ctaLink: '' };
 }
 
 // 풀오토 발행 처리

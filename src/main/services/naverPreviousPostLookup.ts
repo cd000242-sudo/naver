@@ -38,6 +38,18 @@ export function parseNaverPreviousPostCandidates(data: unknown, scope: PreviousP
   });
 }
 
+/** Retry a transient API failure or confirm an empty index before declaring that no history exists. */
+async function withLookupRecovery<T>(lookup: () => Promise<T>, isEmpty: (value: T) => boolean = () => false): Promise<T> {
+  try {
+    const value = await lookup();
+    if (!isEmpty(value)) return value;
+  } catch {
+    // The final attempt propagates its error; a failed confirmation is never an empty history.
+  }
+  await new Promise(resolve => setTimeout(resolve, 350));
+  return lookup();
+}
+
 /** Read fresh public history immediately before publishing; failures remain visible to the caller. */
 export async function fetchNaverPreviousPostCandidates(
   scope: PreviousPostScope,
@@ -45,6 +57,13 @@ export async function fetchNaverPreviousPostCandidates(
 ): Promise<PreviousPostCandidate[]> {
   const target = validLookupScope(scope);
   if (!target) return [];
+  return withLookupRecovery(() => fetchPreviousPostPages(target, options), candidates => candidates.length === 0);
+}
+
+async function fetchPreviousPostPages(
+  target: { blogId: string; categoryId: string },
+  options: { fetchImpl?: typeof fetch; now?: number },
+): Promise<PreviousPostCandidate[]> {
   const url = new URL(`https://m.blog.naver.com/api/blogs/${target.blogId}/post-list`);
   const signal = AbortSignal.timeout(8000);
   for (let page = 1; page <= 10; page += 1) {
@@ -73,6 +92,10 @@ export async function resolveNaverPreviousPostCategoryId(
   const blogId = String(scope.blogId || '').trim().toLowerCase();
   const name = actualCategoryLabel(categoryName);
   if (!/^[a-z0-9_-]{1,100}$/.test(blogId) || !name) return undefined;
+  return withLookupRecovery(() => fetchPreviousPostCategoryId(blogId, name, options));
+}
+
+async function fetchPreviousPostCategoryId(blogId: string, name: string, options: { fetchImpl?: typeof fetch }): Promise<string | undefined> {
   const response = await (options.fetchImpl || fetch)(`https://m.blog.naver.com/api/blogs/${blogId}/category-list`, {
     headers: { 'User-Agent': 'Mozilla/5.0', Referer: `https://m.blog.naver.com/${blogId}`, Accept: 'application/json' },
     redirect: 'error', signal: AbortSignal.timeout(8000),

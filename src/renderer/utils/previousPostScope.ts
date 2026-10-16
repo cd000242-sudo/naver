@@ -36,7 +36,21 @@ export function resolveRendererPreviousPostPayload<T extends Record<string, any>
 }
 
 /** A generated previous-post URL remains automatic until the user edits the input. */
-export function markAutomaticPreviousPostCta(input: HTMLInputElement, url: string): void {
+export function markAutomaticPreviousPostCta(input: HTMLInputElement, url: string, textInput?: HTMLInputElement | null, text?: string): void {
+  if (textInput) {
+    if (text !== undefined) textInput.value = text;
+    const automaticText = textInput.value.trim();
+    if (automaticText) textInput.dataset.autoPreviousPostText = automaticText;
+    else delete textInput.dataset.autoPreviousPostText;
+    if (textInput.dataset.autoPreviousPostTextBound !== 'true') {
+      const clearAutomaticText = () => { delete textInput.dataset.autoPreviousPostText; };
+      textInput.addEventListener('input', clearAutomaticText);
+      textInput.addEventListener('change', clearAutomaticText);
+      input.addEventListener('input', clearAutomaticText);
+      input.addEventListener('change', clearAutomaticText);
+      textInput.dataset.autoPreviousPostTextBound = 'true';
+    }
+  }
   input.value = url;
   if (url.trim()) input.dataset.autoPreviousPostUrl = url.trim();
   else delete input.dataset.autoPreviousPostUrl;
@@ -55,4 +69,12 @@ export function isAutomaticPreviousPostCtaInput(input: HTMLInputElement | null |
 
 export function readManualCtaLink(input: HTMLInputElement | null | undefined): string {
   return isAutomaticPreviousPostCtaInput(input) ? '' : String(input?.value || '').trim();
+}
+
+/** Automatic labels are enrichment, not a user's text-only CTA. */
+export function readManualCtaText(input: HTMLInputElement | null | undefined, linkInput?: HTMLInputElement | null): string {
+  const value = String(input?.value || '').trim();
+  const markedAutomatic = Boolean(value && input?.dataset.autoPreviousPostText === value);
+  const manualLink = Boolean(String(linkInput?.value || '').trim() && !isAutomaticPreviousPostCtaInput(linkInput));
+  return markedAutomatic && !manualLink ? '' : value;
 }

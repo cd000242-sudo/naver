@@ -14,6 +14,7 @@ import GoldenTab from '../components/leword/GoldenTab';
 import IssueNicheTab from '../components/leword/IssueNicheTab';
 import HomefeedTab from '../components/leword/homefeed/HomefeedTab';
 import AdsenseBenchmarkBoard from '../components/leword/adsense/AdsenseBenchmarkBoard';
+import SeasonalKeywordsBoard from '../components/leword/seasonal/SeasonalKeywordsBoard';
 import KeysTab from '../components/leword/KeysTab';
 import KinGoldenTab from '../components/leword/KinGoldenTab';
 import LewordStyles from '../components/leword/LewordStyles';
@@ -47,6 +48,7 @@ const TABS = [
     { id: 'homefeed', label: '리더남 홈판 추천 소재 · 제목', short: '홈판 추천', icon: '◉' },
     // 애드센스 고수 벤치마크(2026-10-07 사장님 "홈판 아래에") — 엑셀 고수 블로그 786곳 최근 7일 소재. 이용권 탭.
     { id: 'adsense', label: '애드센스 고수 벤치마크', short: '애드센스', icon: '◈' },
+    { id: 'seasonal', label: '시즌별 키워드 모음', short: '시즌 키워드', icon: '◷' },
     { id: 'picks', label: '오늘의 네이버 추천키워드', short: '추천키워드', icon: 'N' },
     { id: 'briefs', label: '오늘의 글감', short: '글감', icon: '✎' },
     { id: 'analyze', label: '키워드 분석', short: '키워드 분석', icon: '◎' },
@@ -412,6 +414,7 @@ function LewordPage() {
                 {!lockedTab && activeTab === 'issue' && <IssueNicheTab key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} onPlan={sendToPlan} />}
                 {!lockedTab && activeTab === 'homefeed' && <HomefeedTab />}
                 {!lockedTab && activeTab === 'adsense' && <AdsenseBenchmarkBoard />}
+                {!lockedTab && activeTab === 'seasonal' && <SeasonalKeywordsBoard onAnalyze={sendToAnalyze} />}
                 {/* 실검 틈새키워드와 키워드 분석 사이의 서브탭 — 오늘의 네이버 추천키워드(사장님 2026-09-08). */}
                 {!lockedTab && activeTab === 'picks' && <TodayPicksBoard key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} topic={currentPicksTopic} onTopics={setPicksTopics} onTopicChange={choosePicksTopic} />}
                 {/* 오늘의 글감 — NOW/NEXT/ALWAYS 브리프(사장님 예시 형식 2026-09-09). */}

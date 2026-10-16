@@ -4,7 +4,7 @@
 // ═══════════════════════════════════════════════════════════════════
 
 // ✅ renderer.ts의 전역 변수/함수 참조 (인라인 빌드에서 동일 스코프)
-import { readManualCtaLink, captureRendererPublicationScope, resolveRendererPublicationScope, resolveRendererPreviousPostPayload } from '../utils/previousPostScope.js';
+import { readManualCtaText, readManualCtaLink, captureRendererPublicationScope, resolveRendererPublicationScope, resolveRendererPreviousPostPayload } from '../utils/previousPostScope.js';
 import { selectPreviousPost } from '../../shared/previousPostPolicy.js';
 import { readSemiAutoEditorDraft } from './tailUIUtils.js';
 import { describeAccountStop, extractAccountStopCode, requiresAccountStop, stopsAllAccounts } from '../../automation/publishFailureClassifier.js';
@@ -644,11 +644,11 @@ export async function handleFullAutoPublish(): Promise<void> {
       const autoCTA = generateAutoCTA(generatedTitle, keywords);
 
       // 수동 입력된 CTA가 있으면 우선 사용
-      const manualCtaText = ctasUi[0]?.text || (document.getElementById('unified-cta-text') as HTMLInputElement)?.value?.trim();
+      const manualCtaText = ctasUi[0]?.text || readManualCtaText(document.getElementById('unified-cta-text') as HTMLInputElement | null, document.getElementById('unified-cta-link') as HTMLInputElement | null);
       const manualCtaLink = ctasUi[0]?.link || readManualCtaLink(document.getElementById('unified-cta-link') as HTMLInputElement | null);
 
       hasManualCta = Boolean(manualCtaLink);
-      finalCtaText = manualCtaText || autoCTA.ctaText;
+      finalCtaText = manualCtaText || (autoCTA.ctaLink ? autoCTA.ctaText : '');
       finalCtaLink = manualCtaLink || autoCTA.ctaLink;
 
       if (finalCtaLink) {
@@ -2541,17 +2541,17 @@ export async function handleSemiAutoPublish(): Promise<any> {
     const autoCTA = generateAutoCTA(title, '');
 
     // 수동 입력된 CTA가 있으면 우선 사용
-    const manualCtaText = ctasUi[0]?.text || (document.getElementById('unified-cta-text') as HTMLInputElement)?.value?.trim();
+    const manualCtaText = ctasUi[0]?.text || readManualCtaText(document.getElementById('unified-cta-text') as HTMLInputElement | null, document.getElementById('unified-cta-link') as HTMLInputElement | null);
     const manualCtaLink = ctasUi[0]?.link || readManualCtaLink(document.getElementById('unified-cta-link') as HTMLInputElement | null);
 
     hasManualCta = Boolean(manualCtaLink);
-    finalCtaText = manualCtaText || autoCTA.ctaText;
+    finalCtaText = manualCtaText || (autoCTA.ctaLink ? autoCTA.ctaText : '');
     finalCtaLink = manualCtaLink || autoCTA.ctaLink;
 
     if (finalCtaLink) {
       appendLog(`✅ CTA 자동 포함: "${finalCtaText}" → ${finalCtaLink.substring(0, 50)}...`);
     } else {
-      appendLog(`ℹ️ 연결할 이전 글이 없습니다. CTA 텍스트만 포함됩니다.`);
+      appendLog(`ℹ️ 자동으로 연결할 이전 글이 없습니다. 직접 입력한 CTA가 있으면 그대로 포함합니다.`);
     }
   } else {
     appendLog(`🚫 CTA 없이 발행 옵션이 선택되었습니다.`);
