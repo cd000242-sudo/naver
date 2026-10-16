@@ -85,29 +85,48 @@ test('a short viewport keeps all tools reachable without covering image settings
   });
 });
 
-test('toolbar collapses with keyboard, frees the page, and remembers its state after reload', async () => {
+test('toolbar and bottom tools collapse with keyboard and remember their state after reload', async () => {
   const toggle = page.locator('#right-toolbar-toggle');
   const toolbar = page.locator('#right-floating-buttons');
+  const imageSettings = page.locator('#heading-image-setting-btn');
+  const aiButton = page.locator('#ai-assistant-btn');
+  await expect(imageSettings).toBeVisible();
+  await expect(aiButton).toBeVisible();
   await expect(toggle).toHaveAttribute('aria-expanded', 'true');
   const before = (await toolbar.boundingBox())!;
   await toggle.focus();
   await page.keyboard.press('Enter');
   await expect(toggle).toHaveAttribute('aria-expanded', 'false');
   await expect(toolbar).toBeHidden();
+  await expect(imageSettings).toBeAttached();
+  await expect(imageSettings).toBeHidden();
+  await expect(aiButton).toBeHidden();
   await expect(page.locator('#image-shortcut-btn')).toBeVisible();
   await expect(page.locator('#publish-shortcut-btn')).toBeVisible();
+  // Switching tabs must not re-show the bottom button while tools are collapsed.
+  await page.locator('.tab-button[data-tab="unified"]').focus();
+  await page.keyboard.press('Enter');
+  await page.locator('.tab-button[data-tab="images"]').focus();
+  await page.keyboard.press('Enter');
+  await expect(imageSettings).toBeHidden();
+  await toggle.focus();
   expect(await page.evaluate(({ x, y }) => {
     return !document.elementFromPoint(x, y)?.closest('#right-floating-buttons');
   }, { x: before.x + 20, y: before.y + 20 })).toBe(true);
   await page.keyboard.press('Tab');
-  expect(await page.evaluate(() => !!document.activeElement?.closest('#right-floating-buttons'))).toBe(false);
+  expect(await page.evaluate(() => !!document.activeElement?.closest('#right-floating-buttons, #heading-image-setting-btn, #ai-assistant-btn'))).toBe(false);
   await page.reload();
   await expect(toggle).toHaveAttribute('aria-expanded', 'false');
   await expect(toolbar).toBeHidden();
+  await expect(imageSettings).toBeAttached();
+  await expect(imageSettings).toBeHidden();
+  await expect(aiButton).toBeHidden();
   await page.screenshot({ path: path.join(__dirname, '../tmp/right-toolbar-collapsed.png') });
   await toggle.focus();
   await page.keyboard.press('Space');
   await expect(toggle).toHaveAttribute('aria-expanded', 'true');
   await expect(toolbar).toBeVisible();
+  await expect(imageSettings).toBeVisible();
+  await expect(aiButton).toBeVisible();
   await page.screenshot({ path: path.join(__dirname, '../tmp/right-toolbar-expanded.png') });
 });

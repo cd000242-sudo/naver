@@ -73,7 +73,7 @@ function ensureTopShortcutBar() {
   });
 })();
 
-// 오른쪽 도구 모음만 접는다. 개별 버튼의 표시 조건과 위쪽 바로가기는 그대로 유지한다.
+// 오른쪽 도구 모음과 하단 이미지 설정·AI 버튼을 함께 접는다. 개별 표시 조건과 위쪽 바로가기는 유지한다.
 (function initRightToolbarCollapse() {
   const toolbar = document.getElementById('right-floating-buttons');
   if (!toolbar || document.getElementById('right-toolbar-toggle')) return;
@@ -81,11 +81,12 @@ function ensureTopShortcutBar() {
   const toggle = document.createElement('button');
   toggle.id = 'right-toolbar-toggle';
   toggle.type = 'button';
-  toggle.setAttribute('aria-controls', toolbar.id);
+  toggle.setAttribute('aria-controls', `${toolbar.id} heading-image-setting-btn ai-assistant-btn`);
   document.body.appendChild(toggle);
 
   function setCollapsed(collapsed) {
     toolbar.hidden = collapsed;
+    document.body.classList.toggle('right-tools-collapsed', collapsed);
     toggle.setAttribute('aria-expanded', String(!collapsed));
     toggle.textContent = collapsed ? '도구 펼치기 ‹' : '도구 접기 ›';
   }
