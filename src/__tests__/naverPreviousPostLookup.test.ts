@@ -85,3 +85,52 @@ describe('parent category pagination', () => {
     expect(fetchImpl.mock.calls[0][1].signal).toBe(fetchImpl.mock.calls[1][1].signal);
   });
 });
+
+
+describe('existing history lookup recovery', () => {
+  it('rechecks an initially empty response before declaring a category empty', async () => {
+    const fetchImpl = vi.fn().mockResolvedValueOnce({ ok: true, json: async () => body([]) })
+      .mockResolvedValueOnce({ ok: true, json: async () => body() });
+    const posts = await fetchNaverPreviousPostCandidates(scope, { fetchImpl, now });
+    expect(posts[0]?.publishedUrl).toBe('https://blog.naver.com/sample_blog/224442529695');
+    expect(fetchImpl).toHaveBeenCalledTimes(2);
+  });
+  it('recovers from a transient failed public index without local history', async () => {
+    const fetchImpl = vi.fn().mockRejectedValueOnce(new TypeError('fetch failed'))
+      .mockResolvedValueOnce({ ok: true, json: async () => body() });
+    await expect(fetchNaverPreviousPostCandidates(scope, { fetchImpl, now })).resolves.toHaveLength(1);
+  });
+  it('does not turn a failed empty-response confirmation into no previous posts', async () => {
+    const fetchImpl = vi.fn().mockResolvedValueOnce({ ok: true, json: async () => body([]) })
+      .mockRejectedValue(new TypeError('offline'));
+    await expect(fetchNaverPreviousPostCandidates(scope, { fetchImpl, now })).rejects.toThrow('offline');
+  });
+  it('confirms a genuinely new category is empty', async () => {
+    const fetchImpl = vi.fn().mockResolvedValue({ ok: true, json: async () => body([]) });
+    await expect(fetchNaverPreviousPostCandidates(scope, { fetchImpl, now })).resolves.toEqual([]);
+    expect(fetchImpl).toHaveBeenCalledTimes(2);
+  });
+  it('retries category API failure when restoring a legacy category name', async () => {
+    const fetchImpl = vi.fn().mockResolvedValueOnce({ ok: true, json: async () => ({ isSuccess: false }) })
+      .mockResolvedValueOnce({ ok: true, json: async () => ({ isSuccess: true, result: { mylogCategoryList: [{ categoryNo: 6, categoryName: '축구', openYN: true }] } }) });
+    await expect(resolveNaverPreviousPostCategoryId({ blogId: 'sample_blog' }, '축구', { fetchImpl })).resolves.toBe('6');
+  });
+});
+
+
+describe('bounded parent-category discovery cannot report a false empty history', () => {
+  const children = Array.from({ length: 30 }, (_, i) => ({ ...item, logNo: 300 + i, categoryNo: 7 }));
+  it('preserves a lookup-limit error after both ten-page searches contain only child-category posts', async () => {
+    const fetchImpl = vi.fn().mockResolvedValue({ ok: true, json: async () => body(children) });
+    await expect(fetchNaverPreviousPostCandidates(scope, { fetchImpl, now })).rejects.toThrow('PREVIOUS_POST_LOOKUP_LIMIT');
+    expect(fetchImpl).toHaveBeenCalledTimes(20);
+  });
+  it('does not treat a page-two failure after child posts as an empty parent category', async () => {
+    const fetchImpl = vi.fn(async (url: string | URL | Request) => {
+      if (String(url).endsWith('page=2')) throw new Error('second page timeout');
+      return { ok: true, json: async () => body(children) } as Response;
+    });
+    await expect(fetchNaverPreviousPostCandidates(scope, { fetchImpl, now })).rejects.toThrow('second page timeout');
+    expect(fetchImpl).toHaveBeenCalledTimes(4);
+  });
+});
