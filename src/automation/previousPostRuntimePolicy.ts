@@ -52,10 +52,16 @@ export async function refreshRuntimePreviousPost<T extends Record<string, any>>(
     try {
       categoryId = normalizePreviousPostCategoryId(await resolveCategory({ blogId }, payload.categoryName));
     } catch {
-      log('📎 실제 카테고리 ID 조회에 실패하여 이전 글 연결을 생략합니다.');
+      log('📎 실제 카테고리 ID 조회를 완료하지 못했습니다.');
     }
   }
   const resolvedPayload = { ...payload, categoryId };
+  // Legacy renderer helpers also stamp auto on ordinary/custom CTA payloads.
+  // Only the explicit previous-post mode promises that publication includes this link.
+  const required = payload.ctaType === 'previous-post';
+  if (required && (!blogId || !categoryId)) {
+    throw Object.assign(new Error('[NETWORK_WAIT] 이전글을 연결할 블로그와 카테고리를 확인하지 못했습니다. 원고는 보존됐습니다. 계정과 카테고리를 확인한 뒤 다시 발행해 주세요.'), { code: 'PREVIOUS_POST_CATEGORY_UNCONFIRMED' });
+  }
   const manual = payload.previousPostSelection === 'manual'
     || (payload.previousPostSelection !== 'auto' && Boolean(payload.previousPostRequestedUrl || payload.previousPostUrl));
   if (!requested || !blogId || !categoryId || (manual && String(payload.blogId || '').toLowerCase() === blogId)) {
@@ -69,6 +75,9 @@ export async function refreshRuntimePreviousPost<T extends Record<string, any>>(
     return applyPreviousPostPolicy(resolvedPayload, mergedCandidates, { blogId, categoryId });
   } catch {
     const fallback = guardRuntimePreviousPost(resolvedPayload, editorUrls);
+    if (required && !fallback.previousPostUrl) {
+      throw Object.assign(new Error('[NETWORK_WAIT] 같은 블로그·카테고리의 이전글 조회를 완료하지 못했습니다. 원고는 보존됐습니다. 연결 상태를 확인한 뒤 다시 발행해 주세요.'), { code: 'PREVIOUS_POST_LOOKUP_UNAVAILABLE' });
+    }
     log(fallback.previousPostUrl
       ? '📎 최신 이전 글 조회에 실패하여 같은 블로그·카테고리로 확인된 기존 글을 연결합니다.'
       : '📎 실제 블로그의 이전 글 조회에 실패하여 이전 글 연결을 생략합니다.');
