@@ -1,20 +1,18 @@
 {
-  "publishedAt": "2026-10-17T03:35:08.088Z",
+  "publishedAt": "2026-10-17T10:05:33.423Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
     "candidates": 240,
     "niche": 0,
-    "preemption": 8,
+    "preemption": 6,
     "pending": 0
   },
   "freeSample": {
     "day": "2026-10-17",
     "keywords": [
-      "솔비 그룹",
-      "인벤 디아4",
-      "인벤 오픈이슈"
+      "솔비 그룹"
     ]
   },
   "rows": [
@@ -117,7 +115,6 @@
           0,
           0,
           0,
-          0,
           2,
           0,
           2,
@@ -140,11 +137,12 @@
           0,
           0,
           0,
-          100
+          100,
+          46
         ],
         "label": "🚀 떡상",
         "recommendation": "지금 당장 작성! 3일 내 급증 포착 → 선점 시 상위 노출 확률 매우 높음",
-        "measuredAt": "2026-10-16T21:36:54.549Z"
+        "measuredAt": "2026-10-17T10:05:33.846Z"
       },
       "kinCount": 824,
       "kinTop": [
@@ -167,572 +165,14 @@
       "exclusionReason": null,
       "kinMode": "date-views-v2",
       "carried": true
-    },
-    {
-      "keyword": "인벤 디아4",
-      "issue": "인벤",
-      "topic": "인벤",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 1건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 1,
-        "sampledTitles": 10,
-        "topTitles": [
-          "디아블로4인벤, 모바일로 하는 방법은?",
-          "디아블로4 플스 PC 연동 정리 :: 진행은 배틀넷 계정으로 이어지고, 구매는 기기마다 따로입니다",
-          "[디아블로4 시즌15]신규 룬워드 총정리 수수께끼·스피릿·무한까지? 역대급 장비들이 돌아왔다",
-          "디아블로4 ssf 15시즌 부캐릭 성기사 빌드변경 완료!!(격돌에서 축방으로) 세팅할때 주의할점",
-          "디아블로4 시즌15 나락 문양 레벨업 방법, 문양 얻는 법과 단계별 정리",
-          "디아블로4 신화 제작 총정리 :: 시즌15 세 가지 방법, 제작 태그는 하나만 됩니다",
-          "[디아블로4 시즌15]악마술사 만렙 레벨링 타오르는 비명 빌드 완벽 가이드",
-          "[디아블로4 시즌15] 고행1부터 12까지! 엔드게임 성장 순서 총정리",
-          "디아블로4 바알런 완전정리 :: 시즌15 세계석 성채 위치와 난이도, 신화는 확정이 아닙니다",
-          "디아블로4 ssf 시즌15 강령술사 조폭네크에서 피파도 빌드로 전환완료!장비 타겟파밍 노가다 방법!!"
-        ],
-        "measuredAt": "2026-10-15T08:40:59.780Z"
-      },
-      "documentCount": 3484,
-      "documentCountMeasured": true,
-      "searchVolume": 820,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 0.569653847045793,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 820",
-        "문서수 3,484",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 820 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.6배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "",
-          "frame": "generic",
-          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-        },
-        "home": {
-          "text": "",
-          "frame": "generic",
-          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": {
-        "series": [
-          90,
-          75,
-          66,
-          100,
-          59,
-          56,
-          53,
-          37,
-          46,
-          46,
-          47,
-          58,
-          42,
-          42,
-          53,
-          44,
-          36,
-          34,
-          32,
-          15,
-          36,
-          32,
-          32,
-          36,
-          25,
-          8,
-          22,
-          25,
-          34
-        ],
-        "measuredAt": "2026-10-16T21:36:54.549Z"
-      },
-      "kinCount": 2602,
-      "kinTop": [],
-      "monetize": null,
-      "measuredAt": "2026-10-15T08:39:05.788Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "kinMode": "date-views-v2",
-      "carried": true
-    },
-    {
-      "keyword": "인벤 오픈이슈",
-      "issue": "인벤",
-      "topic": "인벤",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 0,
-        "sampledTitles": 10,
-        "topTitles": [
-          "윤님의 IT 관련 북마크",
-          "여러가지",
-          "[구글 Gboard 키보드] 이것은 키보드인가, 리듬게임인가",
-          "플스5 해킹 pc버전 에뮬로 독점작은 물론 울버린도 무료로 가능? 플스근황 알아보기",
-          "23년 된 한국 판타지 소설이 프랑스에서 상을 받았다. 같은 달, 그 소설의 게임 부제도 드러났다.",
-          "리니지M도 제쳤다! '도깨비의세계' 출시 5일 만에 벌어진 일",
-          "4월 관심 뉴스 메모",
-          "2026 롤 케스파컵 일정·대진표(준결승, 결승) 총정리, 결승 중계와 다시보기 방법",
-          "도깨비의세계 멤버십 총정리 | 전투·성장·통합 가격·혜택 비교·거래소 구매·PC 90% 할인 (10/9)",
-          "GTA6 PC판, 이렇게 빨리 나온다고? 2027년 출시설에 120FPS 기대감까지 폭발!"
-        ],
-        "measuredAt": "2026-10-15T08:40:50.485Z"
-      },
-      "documentCount": 3956,
-      "documentCountMeasured": true,
-      "searchVolume": 1050,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 0.7742745019013471,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 1,050",
-        "문서수 3,956",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 1,050 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.8배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "",
-          "frame": "generic",
-          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-        },
-        "home": {
-          "text": "",
-          "frame": "generic",
-          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": {
-        "series": [
-          100,
-          73,
-          38,
-          25,
-          95,
-          87,
-          63,
-          53,
-          40,
-          42,
-          23,
-          95,
-          80,
-          65,
-          72,
-          65,
-          38,
-          22,
-          28,
-          73,
-          73,
-          58,
-          40,
-          33,
-          13,
-          57,
-          75,
-          32,
-          42
-        ],
-        "measuredAt": "2026-10-16T21:36:54.549Z"
-      },
-      "kinCount": 31,
-      "kinTop": [],
-      "monetize": null,
-      "measuredAt": "2026-10-15T08:39:05.788Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "kinMode": "date-views-v2",
-      "carried": true
-    },
-    {
-      "keyword": "인벤 디아2",
-      "issue": "인벤",
-      "topic": "인벤",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 0,
-        "sampledTitles": 10,
-        "topTitles": [
-          "디아2 초반 필수 룬워드 총정리",
-          "디아블로2 피트 위치와 파밍 :: 1막 구덩이 찾는법, 지옥 85레벨 지역에서 200바퀴 돌면 나오는 것",
-          "디아블로2레저렉션 석궁스킨 공유!",
-          "디아블로2 노바소서 세팅 스킬트리 육성방법, 초승달 노바소서",
-          "[디아2레저렉션] 활악술, 절대 예능캐가 아닌 메인캐릭",
-          "디아블로2 상점런 하는법 :: 찰시·아카라·드로그난·오르무스·안야별 노리는 템과 상점 갱신 요령",
-          "[DIABLO2] 9/4 디아우버 예정!! PM 21:00 !!",
-          "디아블로2 레저렉션 스킨 수정 했어요",
-          "디아블로2 거래 사이트",
-          "디아2 레저렉션 확장팩 역대급 업데이트 터짐 신규 직업+룬워드+파괴참 미쳤다"
-        ],
-        "measuredAt": "2026-10-15T08:41:23.615Z"
-      },
-      "documentCount": 5152,
-      "documentCountMeasured": true,
-      "searchVolume": 750,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 0.9179497014030473,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 750",
-        "문서수 5,152",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 750 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.9배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "",
-          "frame": "generic",
-          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-        },
-        "home": {
-          "text": "",
-          "frame": "generic",
-          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": {
-        "series": [
-          62,
-          81,
-          100,
-          73,
-          51,
-          68,
-          68,
-          68,
-          65,
-          59,
-          68,
-          51,
-          73,
-          65,
-          70,
-          62,
-          59,
-          57,
-          65,
-          54,
-          81,
-          41,
-          62,
-          70,
-          68,
-          54,
-          78,
-          51,
-          30
-        ],
-        "label": "🐢 연금형",
-        "recommendation": "한 번 쓰면 1년 꾸준 방문자. 안정적 연금 키워드",
-        "measuredAt": "2026-10-16T21:36:54.549Z"
-      },
-      "kinCount": 4962,
-      "kinTop": [
-        {
-          "title": "디아2 레저렉션 현거래 질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=20108&docId=494432727&answerNo=1",
-          "views": 178,
-          "answers": 2
-        },
-        {
-          "title": "디아2 악마술사 맨땅 육성법 질문?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=20108&docId=492567915&answerNo=1",
-          "views": 132,
-          "answers": 2
-        },
-        {
-          "title": "디아2 악마의 군림 질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=20108&docId=495081209&answerNo=2",
-          "views": 92,
-          "answers": 2
-        },
-        {
-          "title": "디아블로2 인벤토리",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=20108&docId=495309356&answerNo=1",
-          "views": 38,
-          "answers": 2
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-15T08:39:05.788Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "kinMode": "date-views-v2",
-      "carried": true
-    },
-    {
-      "keyword": "인벤 로아",
-      "issue": "인벤",
-      "topic": "인벤",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 0,
-        "sampledTitles": 10,
-        "topTitles": [
-          "[로아커마/스페셜리스트] 갸또 환수사 커마 상시공유",
-          "내가 보려고만든 로아 정보 모음",
-          "[로스트아크] 무신사 아바타 - 로맨틱 캐주얼B 클라우드(구름) 염색 - (염색코드)",
-          "로스트아크 응답없음 튕김? 카던 레이드 멈춤 3분만에 해결하는 방법",
-          "로스트아크 꿀팁 : 스펙업 효율 순서 [서론]",
-          "[로스트아크] 코디 - 핑크 몽마",
-          "로스트아크 / 신규 RPG게임 / 1일차 / 로스트아크인벤",
-          "로스트아크 인벤 지도 특징 및 지도 소개",
-          "[로스트아크] 코디 - 복숭아 우유",
-          "로스트아크 복귀"
-        ],
-        "measuredAt": "2026-10-15T08:42:07.360Z"
-      },
-      "documentCount": 6101,
-      "documentCountMeasured": true,
-      "searchVolume": 420,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 0.7932122724144904,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 420",
-        "문서수 6,101",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 420 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.8배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "",
-          "frame": "generic",
-          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-        },
-        "home": {
-          "text": "",
-          "frame": "generic",
-          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": {
-        "series": [
-          45,
-          95,
-          68,
-          36,
-          50,
-          64,
-          68,
-          95,
-          45,
-          64,
-          36,
-          86,
-          55,
-          50,
-          64,
-          50,
-          100,
-          23,
-          50,
-          36,
-          41,
-          50,
-          32,
-          32,
-          36,
-          36,
-          36,
-          82,
-          55
-        ],
-        "measuredAt": "2026-10-16T21:36:54.549Z"
-      },
-      "kinCount": 1150,
-      "kinTop": [
-        {
-          "title": "로아 직업추천",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=201&docId=490308438&answerNo=1",
-          "views": 61,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-15T08:39:05.788Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "kinMode": "date-views-v2",
-      "carried": true
     }
   ],
   "observations": [
     {
-      "keyword": "트웰브랩스 연봉",
-      "issue": "트웰브랩스",
-      "topic": "트웰브랩스",
-      "lane": "tech",
+      "keyword": "치지직 닉변",
+      "issue": "치지직",
+      "topic": "치지직",
+      "lane": "realtime",
       "issueType": "fresh",
       "isDerived": true,
       "origin": "autocomplete",
@@ -740,7 +180,7 @@
       "verdict": "preemption",
       "preemptionKind": "no-demand",
       "serp": null,
-      "documentCount": 60,
+      "documentCount": 19,
       "documentCountMeasured": true,
       "searchVolume": 10,
       "searchVolumeLt10": true,
@@ -748,13 +188,13 @@
       "demandStatus": "unknown",
       "demandRatio": 0,
       "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
+      "isHot": true,
+      "frontalDocCount": 1,
       "freshFrontalCount": 0,
       "reasons": [
         "검색량 10",
-        "문서수 60",
-        "선점 후보 — 경쟁 문서 60건, 수요 미검출"
+        "문서수 19",
+        "선점 후보 — 경쟁 문서 19건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -763,7 +203,11 @@
         },
         {
           "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
         }
       ],
       "whySearch": null,
@@ -774,17 +218,35 @@
       "subKeywords": null,
       "keywordPool": null,
       "trend": null,
-      "kinCount": 1,
+      "kinCount": 5,
       "kinTop": [
         {
-          "title": "트웰브랩스 취업 경쟁률은 얼마나 되나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=406&docId=479862289&answerNo=0",
-          "views": 30,
+          "title": "치지직 구독 관련",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10610&docId=492208343&answerNo=1",
+          "views": 341,
+          "answers": 1
+        },
+        {
+          "title": "치지직 닉네임 바꾸면",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=109&docId=484732113&answerNo=1",
+          "views": 159,
+          "answers": 1
+        },
+        {
+          "title": "2024~2025년도 치지직 무명버튜버 신선비님 아는사람",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=130405&docId=494520028&answerNo=0",
+          "views": 60,
           "answers": null
+        },
+        {
+          "title": "치지직 닉변 관련",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10610&docId=486844904&answerNo=1",
+          "views": 41,
+          "answers": 1
         }
       ],
       "monetize": null,
-      "measuredAt": "2026-10-17T03:34:01.095Z",
+      "measuredAt": "2026-10-17T10:03:55.668Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -851,14 +313,14 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-17T03:34:01.095Z",
+      "measuredAt": "2026-10-17T10:03:55.668Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
     {
-      "keyword": "트웰브랩스 채용",
-      "issue": "트웰브랩스",
-      "topic": "트웰브랩스",
+      "keyword": "오픈ai 닷츠 후기",
+      "issue": "오픈AI",
+      "topic": "오픈AI",
       "lane": "tech",
       "issueType": "fresh",
       "isDerived": true,
@@ -867,21 +329,21 @@
       "verdict": "preemption",
       "preemptionKind": "no-demand",
       "serp": null,
-      "documentCount": 211,
+      "documentCount": 107,
       "documentCountMeasured": true,
-      "searchVolume": 20,
-      "searchVolumeLt10": false,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
       "hasLiveDemand": false,
       "demandStatus": "unknown",
       "demandRatio": 0,
       "issueStatus": "stable",
       "isHot": false,
-      "frontalDocCount": 0,
+      "frontalDocCount": 1,
       "freshFrontalCount": 0,
       "reasons": [
-        "검색량 20",
-        "문서수 211",
-        "선점 후보 — 경쟁 문서 211건, 수요 미검출"
+        "검색량 10",
+        "문서수 107",
+        "선점 후보 — 경쟁 문서 107건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -890,28 +352,46 @@
         },
         {
           "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
         }
       ],
       "whySearch": null,
-      "intentLabel": "분류 안 됨",
+      "intentLabel": "구매 검토",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
+      "titles": {
+        "seo": {
+          "text": "오픈ai 닷츠 후기 경험담을 판단할 기준",
+          "frame": "review",
+          "basis": "검색 질문 '오픈ai 닷츠 후기' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+        },
+        "home": {
+          "text": "오픈ai 닷츠 후기 누구에게 맞는지 먼저 살펴보세요",
+          "frame": "review",
+          "basis": "검색 질문 '오픈ai 닷츠 후기' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+        }
+      },
       "subKeywords": null,
       "keywordPool": null,
       "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
+      "kinCount": 1,
+      "kinTop": [
+        {
+          "title": "새로운 AI 에이전트 닷츠, 실제로 얼마나 효율적일까요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1122&docId=495387990&answerNo=0",
+          "views": 35,
+          "answers": null
+        }
+      ],
       "monetize": null,
-      "measuredAt": "2026-10-17T03:34:01.095Z",
+      "measuredAt": "2026-10-17T10:03:55.668Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
     {
-      "keyword": "엄지성 인종차별 남성",
-      "issue": "엄지성 인종차별 남성",
-      "topic": "엄지성 인종차별 남성",
+      "keyword": "정형돈의 기러기 욕심",
+      "issue": "정형돈의 기러기 욕심",
+      "topic": "정형돈의 기러기 욕심",
       "lane": "realtime",
       "issueType": "fresh",
       "isDerived": false,
@@ -920,7 +400,7 @@
       "verdict": "preemption",
       "preemptionKind": "no-demand",
       "serp": null,
-      "documentCount": 14,
+      "documentCount": 23,
       "documentCountMeasured": true,
       "searchVolume": null,
       "searchVolumeLt10": true,
@@ -929,16 +409,16 @@
       "demandRatio": 0,
       "issueStatus": "unknown",
       "isHot": true,
-      "frontalDocCount": 2,
-      "freshFrontalCount": 2,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
       "reasons": [
-        "문서수 14",
-        "선점 후보 — 경쟁 문서 14건, 수요 미검출"
+        "문서수 23",
+        "선점 후보 — 경쟁 문서 23건, 수요 미검출"
       ],
       "evidence": [
         {
           "code": "empty-field",
-          "text": "정면으로 다룬 글 2건 (최근 2건)"
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
         },
         {
           "code": "fresh",
@@ -956,59 +436,7 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-17T03:34:01.095Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "트웰브랩스 면접",
-      "issue": "트웰브랩스",
-      "topic": "트웰브랩스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 41,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 41",
-        "선점 후보 — 경쟁 문서 41건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-17T03:34:01.095Z",
+      "measuredAt": "2026-10-17T10:03:55.668Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -1071,9 +499,293 @@
       "kinCount": 2,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-17T03:34:01.095Z",
+      "measuredAt": "2026-10-17T10:03:55.668Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "오픈AI 닷츠 이용방법",
+      "issue": "오픈AI",
+      "topic": "오픈AI",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 165,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 165",
+        "선점 후보 — 경쟁 문서 165건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "거래",
+      "adsenseFit": false,
+      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+      "titles": {
+        "seo": {
+          "text": "오픈AI 닷츠 이용방법 처음 해도 막히지 않는 순서",
+          "frame": "howto",
+          "basis": "검색 질문 '오픈AI 닷츠 이용방법' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+        },
+        "home": {
+          "text": "오픈AI 닷츠 이용방법, 어렵게 할 필요 없습니다",
+          "frame": "howto",
+          "basis": "검색 질문 '오픈AI 닷츠 이용방법' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-17T10:03:55.668Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "트웰브랩스 연봉",
+      "issue": "트웰브랩스",
+      "topic": "트웰브랩스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 60,
+      "documentCountMeasured": true,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 10",
+        "문서수 60",
+        "선점 후보 — 경쟁 문서 60건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": [
+        {
+          "title": "트웰브랩스 취업 경쟁률은 얼마나 되나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=406&docId=479862289&answerNo=0",
+          "views": 30,
+          "answers": null
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-17T03:34:01.095Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "트웰브랩스 채용",
+      "issue": "트웰브랩스",
+      "topic": "트웰브랩스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 211,
+      "documentCountMeasured": true,
+      "searchVolume": 20,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 20",
+        "문서수 211",
+        "선점 후보 — 경쟁 문서 211건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-17T03:34:01.095Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "엄지성 인종차별 남성",
+      "issue": "엄지성 인종차별 남성",
+      "topic": "엄지성 인종차별 남성",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 14,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 2,
+      "freshFrontalCount": 2,
+      "reasons": [
+        "문서수 14",
+        "선점 후보 — 경쟁 문서 14건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 2건 (최근 2건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-17T03:34:01.095Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "트웰브랩스 면접",
+      "issue": "트웰브랩스",
+      "topic": "트웰브랩스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 41,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 41",
+        "선점 후보 — 경쟁 문서 41건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-17T03:34:01.095Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "트웰브랩스 이재성",
@@ -1138,7 +850,8 @@
       "monetize": null,
       "measuredAt": "2026-10-17T03:34:01.095Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "트웰브랩스 주소",
@@ -1190,7 +903,8 @@
       "monetize": null,
       "measuredAt": "2026-10-17T03:34:01.095Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "인텔리빅스 블라인드",
@@ -2179,1094 +1893,6 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "조재복 에펨",
-      "issue": "조재복",
-      "topic": "조재복",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 1,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "declining",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 1",
-        "선점 후보 — 경쟁 문서 1건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-15T08:39:05.788Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "인벤 닉변 하는법",
-      "issue": "인벤",
-      "topic": "인벤",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 40,
-      "documentCountMeasured": true,
-      "searchVolume": 30,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 30",
-        "문서수 40",
-        "선점 후보 — 경쟁 문서 40건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "인벤 닉변 하는법 단계별 방법",
-          "frame": "howto",
-          "basis": "검색 질문 '인벤 닉변 하는법' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        },
-        "home": {
-          "text": "인벤 닉변 하는법, 어렵게 할 필요 없습니다",
-          "frame": "howto",
-          "basis": "검색 질문 '인벤 닉변 하는법' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 12,
-      "kinTop": [
-        {
-          "title": "롤인벤 베니 올리는법좀...",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=20132&docId=223836506&answerNo=3",
-          "views": 17513,
-          "answers": 3
-        },
-        {
-          "title": "와우 인벤사이트 닉네임 바꾸는방법 있나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=20122&docId=336518373&answerNo=1",
-          "views": 12053,
-          "answers": 1
-        },
-        {
-          "title": "인벤에 베니 획득하는법 알려주세요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=211&docId=243853926&answerNo=0",
-          "views": 17,
-          "answers": null
-        },
-        {
-          "title": "인벤 사이트 레벨업 빨리 하는 방법 알려주세요.",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10603&docId=442755736&answerNo=0",
-          "views": null,
-          "answers": null
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-15T08:39:05.788Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "인벤 무인도 뜻",
-      "issue": "인벤",
-      "topic": "인벤",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 53,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 53",
-        "선점 후보 — 경쟁 문서 53건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "정보",
-      "adsenseFit": true,
-      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 7,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-15T08:39:05.788Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "오픈ai 닷츠 후기",
-      "issue": "오픈AI",
-      "topic": "오픈AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 98,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 98",
-        "선점 후보 — 경쟁 문서 98건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "오픈ai 닷츠 후기 경험담을 판단할 기준",
-          "frame": "review",
-          "basis": "검색 질문 '오픈ai 닷츠 후기' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        },
-        "home": {
-          "text": "오픈ai 닷츠 후기 누구에게 맞는지 먼저 살펴보세요",
-          "frame": "review",
-          "basis": "검색 질문 '오픈ai 닷츠 후기' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": [
-        {
-          "title": "새로운 AI 에이전트 닷츠, 실제로 얼마나 효율적일까요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1122&docId=495387990&answerNo=0",
-          "views": 32,
-          "answers": null
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-15T08:39:05.788Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "유재학 정신분석",
-      "issue": "유재학",
-      "topic": "유재학",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 249,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 2,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 249",
-        "선점 후보 — 경쟁 문서 249건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 2건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-15T08:39:05.788Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "베슬ai 연봉",
-      "issue": "베슬AI",
-      "topic": "베슬AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 28,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 28",
-        "선점 후보 — 경쟁 문서 28건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-15T08:39:05.788Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "로아 인벤 맛보기",
-      "issue": "인벤",
-      "topic": "인벤",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 35,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 35",
-        "선점 후보 — 경쟁 문서 35건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-15T08:39:05.788Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "유재학 짤",
-      "issue": "유재학",
-      "topic": "유재학",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 77,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 2,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 77",
-        "선점 후보 — 경쟁 문서 77건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 2건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": [
-        {
-          "title": "따뜻한 말한마디 유재학 비서에 대해 아시는분 따말에서 유....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40610&docId=188962353&answerNo=1",
-          "views": 940,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-15T08:39:05.788Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "유재학 근황",
-      "issue": "유재학",
-      "topic": "유재학",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 96,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 96",
-        "선점 후보 — 경쟁 문서 96건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": [
-        {
-          "title": "이상범 전창진 안준호 허재 그 사령탑했던사람들 근황",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10010305&docId=238483347&answerNo=1",
-          "views": 208,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-15T08:39:05.788Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "유재학 테이프",
-      "issue": "유재학",
-      "topic": "유재학",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 107,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 3,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 107",
-        "선점 후보 — 경쟁 문서 107건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 3건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 6,
-      "kinTop": [
-        {
-          "title": "프로농구 유재학 감독이",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10010305&docId=191452119&answerNo=2",
-          "views": 1113,
-          "answers": 2
-        },
-        {
-          "title": "소치올림픽 테이프로 입막은 선수",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10010105&docId=191703183&answerNo=1",
-          "views": 590,
-          "answers": 1
-        },
-        {
-          "title": "유재학 감독과 유도훈 감독",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1001030201&docId=241952035&answerNo=2",
-          "views": 65,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-15T08:39:05.788Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "조재복 지적 장애인",
-      "issue": "조재복",
-      "topic": "조재복",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 91,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "declining",
-      "isHot": true,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 91",
-        "선점 후보 — 경쟁 문서 91건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-15T08:39:05.788Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "조재복 학교",
-      "issue": "조재복",
-      "topic": "조재복",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 145,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "declining",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 145",
-        "선점 후보 — 경쟁 문서 145건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-15T08:39:05.788Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "베슬ai 채용",
-      "issue": "베슬AI",
-      "topic": "베슬AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 135,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 135",
-        "선점 후보 — 경쟁 문서 135건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-15T08:39:05.788Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "조재복 최선정",
-      "issue": "조재복",
-      "topic": "조재복",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 118,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "declining",
-      "isHot": true,
-      "frontalDocCount": 4,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 118",
-        "선점 후보 — 경쟁 문서 118건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 4건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-15T08:39:05.788Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "베슬ai 안재만",
-      "issue": "베슬AI",
-      "topic": "베슬AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 118,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 118",
-        "선점 후보 — 경쟁 문서 118건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-15T08:39:05.788Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "오픈AI 닷츠 이용방법",
-      "issue": "오픈AI",
-      "topic": "오픈AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 147,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 147",
-        "선점 후보 — 경쟁 문서 147건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "거래",
-      "adsenseFit": false,
-      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-      "titles": {
-        "seo": {
-          "text": "오픈AI 닷츠 이용방법 처음 해도 막히지 않는 순서",
-          "frame": "howto",
-          "basis": "검색 질문 '오픈AI 닷츠 이용방법' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        },
-        "home": {
-          "text": "오픈AI 닷츠 이용방법, 어렵게 할 필요 없습니다",
-          "frame": "howto",
-          "basis": "검색 질문 '오픈AI 닷츠 이용방법' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-15T08:39:05.788Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "클리말라 이달의",
-      "issue": "클리말라 이달의",
-      "topic": "클리말라 이달의",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 221,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 2,
-      "freshFrontalCount": 2,
-      "reasons": [
-        "문서수 221",
-        "선점 후보 — 경쟁 문서 221건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 2건 (최근 2건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-15T08:39:05.788Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "베슬ai 투자유치",
-      "issue": "베슬AI",
-      "topic": "베슬AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 267,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 267",
-        "선점 후보 — 경쟁 문서 267건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-15T08:39:05.788Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
@@ -3342,79 +1968,6 @@
       ],
       "nextWave": [],
       "rowCount": 1,
-      "carried": true
-    },
-    {
-      "issue": "인벤",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": null,
-      "headlines": [
-        {
-          "title": "게임전문 미디어 인벤, 창간 22주년 맞이 대규모 경품 이벤트",
-          "press": "globale.co.kr",
-          "publishedAt": "2026-10-14T20:52:00.000Z",
-          "link": "https://www.globale.co.kr/news/articleView.html?idxno=41048"
-        },
-        {
-          "title": "퍼니스톰, 위치기반 RPG '드래곤 레이드' 글로벌 정식 출시",
-          "press": "ksilbo.co.kr",
-          "publishedAt": "2026-10-14T05:28:00.000Z",
-          "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1069547"
-        },
-        {
-          "title": "퍼니스톰, 위치기반 RPG '드래곤 레이드' 글로벌 출시",
-          "press": "it-b.co.kr",
-          "publishedAt": "2026-10-14T00:22:00.000Z",
-          "link": "https://www.it-b.co.kr/news/articleView.html?idxno=90230"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "아이온2 인벤",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메이플 인벤",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "피파4 인벤",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "로스트아크 인벤",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인벤 닉변 하는법",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인벤 무인도 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인벤 로아",
-          "searchVolume": 420,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인벤 디아2",
-          "searchVolume": 750,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 4,
       "carried": true
     }
   ]
