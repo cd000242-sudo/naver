@@ -615,6 +615,8 @@ try {
     // ✅ [v2.11.206] 장소(지도) 미리 확정 UI — 사진 모드 장소 블록
     'placePicker.js',
     'lewordBoardPicker.js',
+    // [2026-10-15] 홈판 글감 자동 선정 (Claude 판단 → 키워드·홈판 모드·추가 요청 자동 채택)
+    'homefeedTopicAuto.js',
     'agentModelSelect.js',
     // ✅ [SPEC-DROPSHOT-2026] 이미지 생성 스튜디오 (멀티엔진 대량 생성 서브탭)
     'imageGenStudio.js',

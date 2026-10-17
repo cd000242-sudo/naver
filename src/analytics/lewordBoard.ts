@@ -59,6 +59,10 @@ export interface LewordPick {
   readonly layoutHeadline?: string;
   /** 오늘의 글감 브리프 제목(브리프에만 있다). 키워드만으로는 무슨 글인지 안 보인다. */
   readonly briefTitle?: string;
+  /** [2026-10-15] Brief reader question, core value and differentiating angle — a bare keyword loses the angle. */
+  readonly primaryIntent?: string;
+  readonly briefValue?: string;
+  readonly differentiation?: string;
 }
 
 export interface LewordBoard {
@@ -231,6 +235,9 @@ export function parseTopicBriefs(raw: unknown): LewordBoard {
       lane: str(row.field),
       recommended: true,
       briefTitle: str(row.title),
+      primaryIntent: str(row.primaryIntent),
+      briefValue: str(row.value),
+      differentiation: str(row.differentiation),
     });
   }
 
