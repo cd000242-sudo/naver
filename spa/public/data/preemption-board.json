@@ -33824,7 +33824,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-10-04T00:48:20.570Z",
+    "checkedAt": "2026-10-18T00:10:58.677Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -38876,7 +38876,12 @@
    "effectiveVolume": 550,
    "peakConfidence": "",
    "preemptRank": 2,
-   "carried": true
+   "carried": true,
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-10-18T00:11:18.981Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
+   }
   },
   {
    "serpSections": [
@@ -40491,7 +40496,12 @@
    "effectiveVolume": 530,
    "peakConfidence": "",
    "preemptRank": 2,
-   "carried": true
+   "carried": true,
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-10-18T00:11:15.855Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
+   }
   },
   {
    "serpSections": [
@@ -66606,7 +66616,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-10-04T00:48:33.484Z",
+    "checkedAt": "2026-10-18T00:11:07.338Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -67702,8 +67712,8 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-10-04T00:48:20.333Z",
-    "reason": "최근 검색결과 재검증에서 추천 조건을 충족하지 못했습니다."
+    "checkedAt": "2026-10-18T00:10:57.812Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
   {
@@ -73033,7 +73043,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-10-04T00:48:28.393Z",
+    "checkedAt": "2026-10-18T00:11:04.318Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -74357,7 +74367,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-10-17T00:39:02.972Z",
+    "checkedAt": "2026-10-18T00:10:56.017Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -75023,7 +75033,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-10-04T00:48:27.528Z",
+    "checkedAt": "2026-10-18T00:11:03.451Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -82026,5 +82036,5 @@
    ]
   }
  ],
- "revalidatedAt": "2026-10-17T00:39:28.112Z"
+ "revalidatedAt": "2026-10-18T00:11:18.981Z"
 }
