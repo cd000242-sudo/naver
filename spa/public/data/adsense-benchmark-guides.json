@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18T12:02:20.266Z",
+  "generatedAt": "2026-10-18T12:16:39.248Z",
   "rules": "2026-10-10-traffic",
   "model": "sonnet",
   "guides": [
@@ -2208,44 +2208,6 @@
         ],
         "checkBefore": [
           "보건복지부 기초연금 선정기준액 최신 공지 확인"
-        ]
-      },
-      "at": "2026-10-13T11:28:09.769Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "6787f42f5dc9eb71",
-      "urls": [
-        "https://aluminum.zncloud.pw/entry/%EC%A2%85%ED%95%A9%EC%86%8C%EB%93%9D%EC%84%B8-%EC%A4%91%EA%B0%84%EC%98%88%EB%82%A9-%EB%B6%84%EB%82%A9-%EB%82%A9%EB%B6%80%EA%B8%B0%ED%95%9C%EA%B3%BC-%EB%A9%B4%EC%A0%9C-%EB%8C%80%EC%83%81%EC%9E%90-%EC%B9%B4%EB%93%9C%EB%82%A9%EB%B6%80-%EA%B8%B0%EA%B0%84",
-        "https://infoarounds.com/%ea%b2%bd%ec%a0%9c%ec%a0%95%eb%b3%b4/2026-income-tax-interim-notice-preparation/",
-        "https://seolj.tistory.com/245",
-        "https://muramara.com/entry/%EC%A2%85%ED%95%A9%EC%86%8C%EB%93%9D%EC%84%B8-%EC%A4%91%EA%B0%84%EC%98%88%EB%82%A9-%EA%B3%84%EC%82%B0%EB%B2%95-2026-%EC%B6%94%EA%B3%84%EC%95%A1-%EA%B0%90%EC%95%A1%EC%8B%A0%EA%B3%A0%EA%B9%8C%EC%A7%80",
-        "https://mashemellong.tistory.com/entry/2026-%EC%A2%85%ED%95%A9%EC%86%8C%EB%93%9D%EC%84%B8-%EC%A4%91%EA%B0%84%EC%98%88%EB%82%A9-11%EC%9B%9430%EC%9D%BC-%EB%82%A9%EB%B6%80-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://ace3.jspeopleone.com/entry/%EC%A2%85%ED%95%A9%EC%86%8C%EB%93%9D%EC%84%B8-%EC%A4%91%EA%B0%84%EC%98%88%EB%82%A9-%EB%82%A9%EB%B6%80%EA%B8%B0%ED%95%9C-%EB%8C%80%EC%83%81-11%EC%9B%94-30%EC%9D%BC%EA%B9%8C%EC%A7%80-50%EB%A7%8C%EC%9B%90-%EA%B8%B0%EC%A4%80-%EC%A0%95%EB%A6%AC"
-      ],
-      "guide": {
-        "direction": "'종합소득세 중간예납 분납', '계산' 자동완성은 고지서를 받은 사람이 분납 가능 여부와 금액을 즉시 확인하려는 의도다. 고수 글들이 이미 총정리·계산법·11월30일 기한을 다뤄, 남은 각도는 '고지서 수령자'와 '추계신고 대상자'를 가르는 기준표다. 분납 기준액·소액부징수 기준·감액신고 조건을 표로 정리하면 납부 전 재검색 없이 바로 행동할 수 있다.",
-        "searchTargets": [
-          "종합소득세 중간예납 기간",
-          "종합소득세 중간예납 분납",
-          "종합소득세 중간예납 대상자",
-          "종합소득세 중간예납 계산"
-        ],
-        "mustInclude": [
-          "납부기한(11월30일) (확인 필요: 국세청 공지)",
-          "분납 가능 기준 금액 (확인 필요: 국세청)",
-          "소액부징수(면제) 기준금액 (확인 필요: 국세청)",
-          "추계신고·감액신고 대상 및 방법",
-          "카드납부 가능 기간 및 홈택스 경로"
-        ],
-        "mustAvoid": [
-          "중간예납과 5월 확정 종합소득세 신고를 혼동하지 않기",
-          "신규사업자 등 제외 대상이 있음에도 모든 사업자가 대상인 것처럼 쓰지 않기"
-        ],
-        "checkBefore": [
-          "국세청 홈택스 공지에서 2026년 중간예납 납부기한·고지 기준액 확인",
-          "국세청 보도자료에서 분납·감액신고 조건 확인"
         ]
       },
       "at": "2026-10-13T11:28:09.769Z",
