@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18T14:53:23.704Z",
+  "generatedAt": "2026-10-18T18:29:13.141Z",
   "rules": "2026-10-10-traffic",
   "model": "sonnet",
   "guides": [
@@ -133,32 +133,6 @@
       "provider": "claude"
     },
     {
-      "id": "49ee3fac49315201",
-      "urls": [
-        "https://blog.naver.com/jieun_3088/224438452701",
-        "https://blog.naver.com/gdora/224437869961",
-        "https://blog.naver.com/rcn0005/224435827574",
-        "https://blog.naver.com/gdora/224435411160",
-        "https://blog.naver.com/car__together/224434815302"
-      ],
-      "guide": {
-        "direction": "홈판용 소재다 — '아무도 안알려줬다'는 후킹 카피 자체가 검색어가 아니라 피드 클릭을 노리는 문구이기 때문이다. 벤치마크 제목들이 전부 자동차(카니발·BYD) 얘기라 코스트코 먹거리 앵글은 비어 있어 선점 여지가 크다. 독자는 제품명 4개를 한 번에 정리한 리스트를 저장할 이유로 가져간다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "소개할 먹거리 4종 제품명 명확히 — (확인 필요: 원문/코스트코 공식몰)",
-          "가격·용량 정보 (확인 필요: 코스트코 공식 홈페이지)",
-          "시즌 한정 여부·판매 매장 범위 (확인 필요: 코스트코 공지)"
-        ],
-        "mustAvoid": [],
-        "checkBefore": [
-          "제품 4종 실명과 현재 판매 여부를 코스트코 공식 홈페이지에서 확인"
-        ]
-      },
-      "at": "2026-10-13T17:51:34.592Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
       "id": "e06229cff701c77e",
       "urls": [
         "https://blog.naver.com/goodstoryda/224440018158",
@@ -187,37 +161,6 @@
         ],
         "checkBefore": [
           "지역별 들깨 적정 수확·탈곡 시기 농촌진흥청·농업기술센터 자료 확인"
-        ]
-      },
-      "at": "2026-10-13T17:51:34.592Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "8f59c515cf4f0ac5",
-      "urls": [
-        "https://blog.naver.com/kj_vb/224440861078",
-        "https://blog.naver.com/kj_vb/224439627786",
-        "https://blog.naver.com/kj_vb/224438460457",
-        "https://blog.naver.com/babydreamer5/224437932387",
-        "https://blog.naver.com/kj_vb/224437552265"
-      ],
-      "guide": {
-        "direction": "자동완성에 날짜별 실용 검색어가 많아 검색 방향이 맞다. 벤치마크가 매일 같은 포맷으로 날짜만 바꿔 쓰고 있어 비어있는 각도가 없으니, 날짜 정확성과 정답 형식의 완성도로 승부한다. 독자는 그날 정답만 빠르게 확인하고 떠나되, 표현 뜻풀이가 있으면 저장 가능성이 생긴다.",
-        "searchTargets": [
-          "모니모 영어챌린지"
-        ],
-        "mustInclude": [
-          "제목과 본문에 10월 14일 날짜 명시",
-          "정답 번호별 리스트(feelings, irrelevant 등) 정리",
-          "각 표현의 한글 뜻풀이 간단 설명"
-        ],
-        "mustAvoid": [
-          "전날(10월13일)·다음날 정답과 섞여 오답 게재",
-          "오탈자로 정답 단어가 틀리게 표기"
-        ],
-        "checkBefore": [
-          "모니모 앱 내 실제 10월14일 문제·정답을 직접 캡처해 확인"
         ]
       },
       "at": "2026-10-13T17:51:34.592Z",
