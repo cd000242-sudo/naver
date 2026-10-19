@@ -16,6 +16,7 @@ import { decodeBase64Async } from '../utils/base64Async.js';
 import { sanitizeDropshotErrorMessage } from '../../image/dropshotBrowser.js';
 import { trackChild, untrackChild } from '../../runtime/childProcessRegistry.js';
 import { resolveStylePreviewEngine } from '../../image/stylePreviewEnginePolicy.js';
+import { applyNanoBanana21Availability, markNanoBanana21UnavailableIfModelError } from '../../image/nanoBanana21Guard.js';
 
 // [2026-10-10] 젠스파크 로그인 결과를 dropshot 과 같은 응답 모양({loggedIn,message,phase,ready,code})으로 맞춘다.
 function toGensparkLoginReply(status: { state: string; message: string; code?: string }) {
@@ -475,8 +476,8 @@ export function registerImageHandlers(ctx: IpcContext): void {
                         return { success: false, error: 'Gemini API 키가 설정되지 않았습니다. 환경설정에서 입력해주세요.' };
                     }
 
-                    const response = await axios.post(
-                        `https://generativelanguage.googleapis.com/v1beta/models/${route.model}:generateContent`,
+                    const postPreview = (model: string) => axios.post(
+                        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
                         {
                             contents: [{ parts: [{ text: fullPrompt }] }],
                             generationConfig: {
@@ -488,6 +489,17 @@ export function registerImageHandlers(ctx: IpcContext): void {
                             timeout: 120000
                         }
                     );
+                    // [2026-10-20] 나노바나나2 = 2.1. 2.1 이 모델로 거부되면 같은 엔진 직전 버전으로 한 번만 다시.
+                    let previewModel = applyNanoBanana21Availability(route.model);
+                    let response;
+                    try {
+                        response = await postPreview(previewModel);
+                    } catch (previewErr: any) {
+                        const reason = String(previewErr?.response?.data?.error?.message || previewErr?.message || '');
+                        if (!markNanoBanana21UnavailableIfModelError(previewModel, previewErr?.response?.status, reason)) throw previewErr;
+                        previewModel = applyNanoBanana21Availability(previewModel);
+                        response = await postPreview(previewModel);
+                    }
 
                     const candidates = response.data?.candidates;
                     if (candidates?.[0]?.content?.parts) {

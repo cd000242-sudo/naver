@@ -160,7 +160,8 @@ describe('renderer — 별칭·이관', () => {
 
   it('연속발행 나노바나나2 라벨이 3.1 Flash ₩97 로 고쳐졌다 (기존 2.5 ₩54 오표기 버그)', () => {
     const cp = read('renderer/modules/continuousPublishing.ts');
-    expect(cp).toContain("'nano-banana-2': '🍌 나노바나나2 (Gemini 3.1 Flash Image, ₩97/장) ★'");
+    // [2026-10-20] 나노바나나2 = Nano Banana 2.1 (모델 목록 API 실측 최신). 가격 표기 ₩97 은 그대로.
+    expect(cp).toContain("'nano-banana-2': '🍌 나노바나나2 (Nano Banana 2.1, ₩97/장) ★'");
     expect(cp).not.toContain('Gemini 2.5 Flash Image, ₩54/장');
   });
 });

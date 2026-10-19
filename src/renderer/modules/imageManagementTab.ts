@@ -389,7 +389,7 @@ export async function initImageManagementTab(): Promise<void> {
       if (selectedSource === 'genspark') {
         appendLog('✅ ✨ 젠스파크가 선택되었습니다. — 전용 창에서 직접 로그인 후 사용 · 모델은 아래 목록에서 선택(크레딧 차감 모델은 확인창)');
       } else if (selectedSource === 'nano-banana-2') {
-        appendLog('✅ 🍌 나노바나나2(Gemini 3.1 Flash Image)가 선택되었습니다. — Gemini API 키 필요, 장당 ₩97 | 한글 가능');
+        appendLog('✅ 🍌 나노바나나2(Nano Banana 2.1)가 선택되었습니다. — Gemini API 키 필요, 장당 ₩97 | 한글 가능');
       } else if (selectedSource === 'saved') {
         const confirmed = window.confirm(
           '⚠️ 저작권 경고\n\n' +

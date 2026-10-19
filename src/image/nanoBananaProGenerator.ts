@@ -33,6 +33,11 @@ import { probeDuplicate, commitHashes, applyDiversityHint } from './imageHashUti
 // [SPEC-FREEZE-GUARD-001-P2 R3 / v2.10.262] Base64 디코딩 워커 분리 — 1MB+ Gemini/Imagen 4 inline data
 import { decodeBase64Async } from '../main/utils/base64Async.js';
 import { normalizeRetiredNanoSlotModel } from '../runtime/imageProviderMigration.js';
+import {
+  applyNanoBanana21Availability,
+  markNanoBanana21UnavailableIfModelError,
+  NANO_BANANA_21_FALLBACK_NOTICE,
+} from './nanoBanana21Guard.js';
 
 // ✅ [2026-03-02] 실시간 이미지 생성 로그 → 렌더러 UI로 IPC 전송
 function sendImageLog(message: string): void {
@@ -1401,6 +1406,14 @@ async function generateSingleImageWithGemini(
         selectedResolution = configForSub.resolution;
         console.log(`[NanoBananaPro] 📷 서브 이미지: ${requestedModelKey} (${selectedModel}, ${selectedResolution})`);
       }
+      // [2026-10-20] 같은 나노바나나2 안의 버전만: 2.1 이 이번 실행에서 모델 오류를 냈으면 직전 버전으로.
+      {
+        const versioned = applyNanoBanana21Availability(selectedModel);
+        if (versioned !== selectedModel) {
+          console.log(`[NanoBananaPro] 🔁 ${selectedModel} 모델 오류 이력 → 같은 엔진 직전 버전 ${versioned}`);
+          selectedModel = versioned;
+        }
+      }
       lastSelectedModel = selectedModel; // ✅ [2026-04-06] 최종 안전망용 추적
 
       // ✅ [v2.7.22] 사용자 환경에서 작동하는 모델로 자동 교체 (사용자 모름)
@@ -1760,6 +1773,11 @@ async function generateSingleImageWithGemini(
       //   사용자 제보: "제미나이 키는 정확한데 400 오류"
       //   원인: 선택한 이미지 모델이 사용자 Tier 또는 지역에서 미지원
       //   대응: 안정 모델(gemini-2.5-flash-image)로 즉시 전환 + 명확한 안내
+      // [2026-10-20] 2.1 자체가 모델로 거부되면 다음 재시도부터 같은 엔진의 직전 버전(3.1 Flash Image) — 화면 로그 남김.
+      if (markNanoBanana21UnavailableIfModelError(lastSelectedModel, statusCode, `${errorMessage}\n${String((error as any)?.response?.data?.error?.message || '')}`)) {
+        console.warn(`[NanoBananaPro] 🔁 ${lastSelectedModel} 모델 오류(${statusCode}) → 다음 시도부터 gemini-3.1-flash-image`);
+        sendImageLog(NANO_BANANA_21_FALLBACK_NOTICE);
+      }
       const isBadModelError = statusCode === 400 && (
         errorMessage.toLowerCase().includes('model') ||
         errorMessage.toLowerCase().includes('not found') ||

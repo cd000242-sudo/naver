@@ -496,6 +496,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/image/imageViewpointRotation.ts',
   'src/image/koreanTitleWrap.ts',
   'src/image/legacyImageModelPolicy.ts',
+  'src/image/nanoBanana21Guard.ts',
   'src/image/nanoBananaProGenerator.ts',
   'src/image/naverImageTranscode.ts',
   'src/image/openaiImageModelReconcile.ts',
