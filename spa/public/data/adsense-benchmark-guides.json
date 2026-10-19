@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-19T14:18:01.937Z",
+  "generatedAt": "2026-10-19T14:52:02.492Z",
   "rules": "2026-10-10-traffic",
   "model": "sonnet",
   "guides": [
@@ -373,37 +373,6 @@
       "provider": "claude"
     },
     {
-      "id": "b40d465319f2f817",
-      "urls": [
-        "https://chicha14.com/%ec%86%8c%ec%83%81%ea%b3%b5%ec%9d%b8-%eb%b0%94%ec%9a%b0%ec%b2%98-%ec%8b%a0%ec%b2%ad/",
-        "https://info.mhb-blog.com/housing-benefit-application-2027/",
-        "https://vv.wealthcareyou.kr/84",
-        "https://vv.wealthcareyou.kr/85",
-        "https://vv.wealthcareyou.kr/83",
-        "https://vv.wealthcareyou.kr/82"
-      ],
-      "guide": {
-        "direction": "① '소상공인 바우처 신청방법' 검색은 내가 대상인지와 받을 금액을 빠르게 확인하려는 수요라 대표 검색어로 잡는다. ② 고수 글들은 25만 원 금액과 소상공인24 경로는 다뤘지만 폐업·경영지원까지 신청 순서를 한 번에 정리한 글은 비어 있다. ③ 대상 조건표와 단계별 신청 체크리스트를 넣으면 서류 준비 중 독자가 다시 찾아본다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "지원대상 조건(매출·업종 기준) (확인 필요: 소상공인24 공고)",
-          "지원금액 25만 원 바우처 산정 기준 (확인 필요: 중기부 공고)",
-          "소상공인24 홈페이지 온라인 신청 절차",
-          "신청기간 및 마감일 (확인 필요: 공고문)",
-          "필요서류 목록"
-        ],
-        "mustAvoid": [
-          "같은 시기 발표된 주거급여 등 타 복지제도와 혼동"
-        ],
-        "checkBefore": [
-          "소상공인24(sbiz24.kr) 공식 공고"
-        ]
-      },
-      "at": "2026-10-13T04:40:18.450Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
       "id": "2ca149fbea6f3d65",
       "urls": [
         "https://bookshelf-journey.tistory.com/entry/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%8E%98%EC%9D%B4-%ED%80%B4%EC%A6%88%ED%83%80%EC%9E%84-%EC%A0%95%EB%8B%B5%EC%9D%84-%EB%A7%9E%EC%B6%94%EA%B3%A0-%EC%B5%9C%EB%8C%80-10000%EC%9B%90P%EA%B9%8C%EC%A7%80-%EB%8B%B9%EC%B2%A8",
@@ -544,37 +513,6 @@
         "checkBefore": [
           "속리산국립공원 또는 국립공원공단 공식 사이트에서 단풍 절정 예상 시기 확인",
           "보은군청·축제 주최 측 공지에서 단풍가요제 날짜와 가수 라인업 확인"
-        ]
-      },
-      "at": "2026-10-13T04:40:18.450Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "06f9190feda7f302",
-      "urls": [
-        "https://comme-baleine.tistory.com/entry/%EB%AA%A8%EB%B0%94%EC%9D%BC-%ED%8B%B0%EB%A8%B8%EB%8B%88-%EC%B9%B4%EB%93%9C-%EC%82%AD%EC%A0%9C-%EB%B0%A9%EB%B2%95-%EA%B3%A0%EA%B0%9D%EC%84%BC%ED%84%B0-%ED%99%98%EB%B6%88%C2%B7%ED%99%98%EA%B8%89%EA%B9%8C%EC%A7%80-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://wealti.tistory.com/entry/ChatGPT-%EA%B3%A0%EC%A0%95-%EB%8C%80%ED%99%94-%EB%AC%B4%ED%95%9C-%EB%A1%9C%EB%94%A9-%EC%98%A4%EB%A5%98%EF%BD%9C%EC%98%88%EC%95%BD-%EC%9E%91%EC%97%85-%EC%82%AD%EC%A0%9C-%ED%9B%84-%EB%AA%A8%EB%B0%94%EC%9D%BC-%EC%97%B0%EA%B2%B0-%EB%81%8A%EA%B9%80-%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95",
-        "https://beyond-the-story.tistory.com/entry/ChatGPT-PC%EC%99%80-%EB%AA%A8%EB%B0%94%EC%9D%BC-%EB%8C%80%ED%99%94%EA%B0%80-%EB%8F%99%EA%B8%B0%ED%99%94%EB%90%98%EC%A7%80-%EC%95%8A%EC%9D%84-%EB%95%8C-%ED%99%95%EC%9D%B8-%EB%B0%A9%EB%B2%95",
-        "https://wealti.tistory.com/entry/ChatGPT-%EB%AA%A8%EB%B0%94%EC%9D%BC-%EC%95%B1%EC%97%90%EC%84%9C-%EA%B8%B0%EC%A1%B4-%EB%8C%80%ED%99%94%EA%B0%80-%EB%A1%9C%EB%94%A9%EB%90%98%EC%A7%80-%EC%95%8A%EC%9D%84-%EB%95%8C-%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95",
-        "https://techdoctor.tistory.com/entry/ChatGPT-%EC%82%AC%EC%9D%B4%EB%93%9C%EB%B0%94-%ED%99%9C%EC%9A%A9-%EA%B0%80%EC%9D%B4%EB%93%9C-GPT-6-%EC%B5%9C%EC%8B%A0-UI-%EC%99%84%EB%B2%BD-%EC%A0%95%EB%A6%AC"
-      ],
-      "guide": {
-        "direction": "모바일 티머니 카드를 지우려는 사람은 삭제 전 잔액이 사라지는지, 환불·환급 절차가 어떤지를 가장 궁금해한다. 기존 글들은 삭제 방법 자체에 집중해 환불 신청 창구와 소요 기간을 구체적으로 짚지 않는 경우가 많다. 삭제 전 체크리스트와 환급 신청 단계를 표로 정리하면 끝까지 읽고 다시 찾아볼 글이 된다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "모바일 티머니 앱에서 카드 삭제하는 단계별 방법 (확인 필요: 티머니 앱 공식 화면)",
-          "카드 삭제 전 잔액 환불·환급 신청 절차와 소요 기간 (확인 필요: 티머니 고객센터)",
-          "고객센터 전화번호·운영시간·온라인 환불 신청 경로 (확인 필요: 티머니 공식 홈페이지)",
-          "환불 수수료 또는 한도 기준표 (확인 필요: 티머니 공지)"
-        ],
-        "mustAvoid": [
-          "모바일 티머니(앱 교통카드)와 실물 티머니카드·삼성페이 교통카드를 혼동해 설명",
-          "옛 버전 환불 수수료·절차를 최신 기준인 것처럼 안내"
-        ],
-        "checkBefore": [
-          "티머니 공식 홈페이지·고객센터 공지에서 현재 환불 절차와 수수료 기준 확인",
-          "모바일 티머니 앱 최신 버전의 카드 삭제 화면 UI 확인"
         ]
       },
       "at": "2026-10-13T04:40:18.450Z",
