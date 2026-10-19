@@ -23,7 +23,7 @@ import { buildOpenaiImageEditsRequest } from './openaiImageEditsRequest.js';
 import { resolveOpenAIImageQuality } from './openaiImageQuality.js';
 // [SPEC-FREEZE-GUARD-001-P2 R4 / v2.10.263] Base64 디코딩 워커 분리 — gpt-image-2 b64_json 1.18MB+
 import { decodeBase64Async } from '../main/utils/base64Async.js';
-import { buildContextualImagePrompt, buildHeadingTitleTypography, buildPosterTitleTypography } from './contextualImagePrompt.js';
+import { STOCK_PHOTO_LOOK, buildContextualImagePrompt, buildHeadingTitleTypography, buildPosterTitleTypography } from './contextualImagePrompt.js';
 
 const OPENAI_IMAGES_API_URL = 'https://api.openai.com/v1/images/generations';
 // [2026-10-08 사장님 "AI 티가 많이 난다"] A cover reads as a real photo, not a render.
@@ -169,7 +169,10 @@ export async function generateWithOpenAIImage(
                 headingText: (item as any).headingText,
                 // 이 생성기는 아래에서 dh.angle 을 프롬프트 앞머리에 붙인다 — 카메라 소유자는 여기다.
                 engineOwnsCamera: true,
+                imageLook: (item as any).imageLook,
             });
+            // [2026-10-20 사장님] 스톡(Orbit) 분위기: 무작위 각도·조명·색 회전(더치앵글·네온 등) 대신 스톡 사진 문구 하나.
+            const stockLook = (item as any).imageLook === 'stock' && !isShoppingConnect;
 
             // ✅ [v1.5.5] gpt-image-2는 한글 네이티브 지원 — 한글 제거 제거
             //   이전: gpt-image-1은 영어 프롬프트 최적이라 한글 제거 필요
@@ -223,7 +226,7 @@ export async function generateWithOpenAIImage(
             const posterText = wantsThumbnailText && (item as any).coverStyle === 'poster';
             const headingText = !wantsThumbnailText ? String((item as any).headingText || '').trim() : '';
             const newTypography = posterText
-                ? buildPosterTitleTypography(koreanTextToRender)
+                ? buildPosterTitleTypography(koreanTextToRender, stockLook ? 'stock' : 'editorial')
                 : (headingText ? buildHeadingTitleTypography(headingText) : '');
             const typographyDirective = newTypography
                 // The brief's TEXT POLICY already carries the same block — point at it instead of repeating it,
@@ -256,7 +259,9 @@ export async function generateWithOpenAIImage(
                 // [SPEC-NAVER-IMAGE-2026] With a planned role the brief owns camera and look (natural light);
                 //   the random angle/lighting/colour rotation (dutch angle, neon, tilt-shift…) read as AI.
                 // [2026-10-08 사장님 "AI 티"] Covers drop the rotation too and get the natural photo look.
-                if (directorCover) {
+                if ((item as any).imageLook === 'stock') {
+                    prompt = `${textDirective} ${koreanPersonDirective}${prompt} ${STOCK_PHOTO_LOOK}`;
+                } else if (directorCover) {
                     prompt = `${textDirective} ${koreanPersonDirective}${prompt} ${NATURAL_PHOTO_LOOK}`;
                 } else {
                     prompt = (item as any).visualRole

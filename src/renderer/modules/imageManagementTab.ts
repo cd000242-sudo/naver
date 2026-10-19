@@ -698,6 +698,25 @@ export async function initImageManagementTab(): Promise<void> {
     });
   }
 
+  // [2026-10-20 사장님] 이미지 분위기 — 기본 스톡 사진(Orbit), 체크 시 기사 삽화. main 의 generateImages·썸네일 디렉터가 config 로 읽는다.
+  const imageLookCheckbox = document.getElementById('image-look-editorial') as HTMLInputElement | null;
+  if (imageLookCheckbox) {
+    try {
+      const cfg = await (window as any).api?.getConfig?.();
+      imageLookCheckbox.checked = cfg?.imageLook === 'editorial';
+    } catch { /* 무시 */ }
+    imageLookCheckbox.addEventListener('change', async () => {
+      try {
+        await (window as any).api?.saveConfig?.({ imageLook: imageLookCheckbox.checked ? 'editorial' : 'stock' });
+        appendLog(imageLookCheckbox.checked
+          ? '📰 이미지 분위기: 기사 삽화 — 사람을 줄이고 상황을 그대로 보여 줍니다'
+          : '📸 이미지 분위기: 스톡 사진(기본) — 깔끔하고 밝은 사진 느낌으로 만듭니다');
+      } catch (e: any) {
+        console.warn('[ImageLook] 설정 저장 실패:', e);
+      }
+    });
+  }
+
   // ✅ OpenAI 이미지 모델·품질 라디오 — config 양방향 sync + 실시간 비용 표시
   const openaiModelRadios = document.querySelectorAll('input[name="openai-image-model"]');
   const openaiQualityRadios = document.querySelectorAll('input[name="openai-image-quality"]');

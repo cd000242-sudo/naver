@@ -169,6 +169,9 @@ export interface AppConfig {
   // [2026-10-08] 이미지 관리 탭 "소제목 이미지에 소제목 글자 넣기" — true 면 한글을 직접 그리는 엔진
   //   (koreanTextEngines)이 소제목 이미지에 소제목 문장을 그대로 그린다. 기본 OFF.
   headingImageTextInclude?: boolean;
+  // [2026-10-20 사장님 "Orbit 이미지가 마음에 든다"] 이미지 분위기 — 미설정·'stock' = Orbit 식 스톡 사진(기본),
+  //   'editorial' = 9~10월 기사 삽화 브리프(이미지 관리탭 "기사 삽화 스타일" 체크).
+  imageLook?: 'stock' | 'editorial';
 
   externalApiCostConsent?: boolean;
   externalApiCostConsentAt?: string;

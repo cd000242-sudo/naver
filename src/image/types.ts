@@ -62,6 +62,8 @@ export interface ImageRequestItem {
   coverStyle?: 'poster' | 'photo';
   /** [2026-10-08] Heading drawn verbatim on this section image (generateImages sets it; "소제목 글자 넣기"). */
   headingText?: string;
+  /** [2026-10-20] Image look for this item ('stock' = Orbit look, default from config; generateImages sets it). */
+  imageLook?: 'stock' | 'editorial';
 }
 
 /**

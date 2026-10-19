@@ -48,6 +48,35 @@ export interface ContextualImagePromptInput {
   coverStyle?: 'poster' | 'photo';
   /** [2026-10-08] The heading to draw verbatim ("소제목 글자 넣기" on, article section image only). */
   headingText?: string;
+  /**
+   * [2026-10-20 사장님] Image look. 'stock' = the Orbit nano-banana look the owner prefers (clean professional
+   * stock photo, Korean people welcome, full-frame cover with a bold Korean overlay). 'editorial' = the 9~10월
+   * literal-illustration brief. Undefined keeps the editorial brief so tools that do not pass a look are unchanged.
+   */
+  imageLook?: ImageLook;
+}
+
+export type ImageLook = 'stock' | 'editorial';
+
+/** Config value → look. Only an explicit 'editorial' turns the stock look off (stock is the default). */
+export function resolveImageLook(value: unknown): ImageLook {
+  return value === 'editorial' ? 'editorial' : 'stock';
+}
+
+/** [2026-10-20] Orbit (blogger-gpt-cli src/thumbnail.ts) stock-photo style line, shared with the GPT Image path. */
+export const STOCK_PHOTO_LOOK = 'STYLE: Clean, professional stock photography (Shutterstock/Getty quality), bright clear lighting, modern trustworthy aesthetic, sharp focus, Korean setting.';
+const STOCK_SECTION_MODE = 'STOCK PHOTO MODE: A professional stock photograph that directly and obviously represents this section — a viewer must understand the topic at a glance. Composition priority: 1) the setting in a Korean context, 2) the action or process, 3) the key objects, 4) people.';
+const STOCK_COVER_MODE = 'COVER MODE: A professional blog thumbnail for a Korean audience — one full-frame scene in a Korean context showing the situation, the action and the key objects, in that priority. Modern, vibrant, eye-catching, clean composition.';
+const STOCK_PEOPLE_LINE = '- If people appear, they must be Korean / East Asian — natural, relatable Korean people in an everyday moment that fits the section.';
+
+function stockVarietyLine(index?: number): string {
+  return Number.isFinite(index)
+    ? `- VARIETY: This is section ${Number(index) + 1} of the article — show a scene clearly different from the other sections (different angle, location, props and composition); never repeat another section's scene.`
+    : '- VARIETY: Make this scene clearly different from the other sections of the article (angle, location, props, composition).';
+}
+
+function isStockLook(input: ContextualImagePromptInput): boolean {
+  return input.imageLook === 'stock' && input.isShoppingConnect !== true;
 }
 
 function cleanDrawnText(value: unknown): string {
@@ -79,7 +108,7 @@ export function posterEmphasisTokens(title: string): string[] {
  * [2026-10-08 사장님] Cover text = the whole title laid out as a Korean blog poster, never a cut hook.
  * Shared by the brief and the GPT Image generator so both say the same thing.
  */
-export function buildPosterTitleTypography(title: string): string {
+export function buildPosterTitleTypography(title: string, look: ImageLook = 'editorial'): string {
   const { kicker, headline } = splitPosterTitle(title);
   const tokens = posterEmphasisTokens(title);
   // The title is stated once — as label + headline when it splits — so it cannot be drawn twice.
@@ -87,7 +116,10 @@ export function buildPosterTitleTypography(title: string): string {
     kicker
       ? `Cover text, drawn once and nothing else: a small label line "${kicker}" above the headline "${headline}" (2 to 4 lines).`
       : `Cover text, drawn once and nothing else: the headline "${headline}" (2 to 4 lines).`,
-    'Headline: very large, heavy bold sans-serif, dark navy or black on a light area, aligned to one side of the square.',
+    look === 'stock'
+      // [2026-10-20] Orbit cover: "Include the title as stylish KOREAN text overlay … bold typography".
+      ? 'Headline: a stylish, bold Korean text overlay integrated into the scene — very large heavy sans-serif with strong contrast (a subtle shadow or a soft band behind it), never covering the main subject.'
+      : 'Headline: very large, heavy bold sans-serif, dark navy or black on a light area, aligned to one side of the square.',
     EXACT_SPELLING,
     tokens.length > 0 ? `Highlight ${tokens.map((token) => `"${token}"`).join(', ')} in a bright accent colour (a yellow or orange highlight).` : '',
     'Keep every letter inside the safe area, well away from the edges.',
@@ -115,7 +147,7 @@ function isPosterCover(input: ContextualImagePromptInput): boolean {
 function resolveThumbnailTextPolicy(input: ContextualImagePromptInput): string | null {
   const text = cleanDrawnText(input.thumbnailText);
   if (!input.isThumbnail || !input.allowText || !text) return null;
-  if (isPosterCover(input)) return buildPosterTitleTypography(text);
+  if (isPosterCover(input)) return buildPosterTitleTypography(text, isStockLook(input) ? 'stock' : 'editorial');
   return `Render exactly this Korean text once, at most 2 lines, large and legible: "${text}". It is a short hook, not the article title; never write the article title. No other labels, captions, logos, or watermarks.`;
 }
 
@@ -621,16 +653,23 @@ export function buildContextualImagePrompt(input: ContextualImagePromptInput): s
   const referencePolicy = input.hasReferenceImage
     ? REFERENCE_IDENTITY_POLICY
     : NO_REFERENCE_IDENTITY_POLICY;
+  const stock = isStockLook(input);
   const modePolicy = input.isShoppingConnect
     ? 'SHOPPING MODE: The referenced product remains the unmistakable hero subject; illustrate the section-specific use, feature, inspection, or decision without redesigning it.'
-    : posterCover
-      ? 'COVER POSTER MODE: A clean, bright Korean blog cover — a believable photo subject with real topic props on one side, the title headline on the other.'
-      : 'EDITORIAL MODE: Depict the real, literal situation described by the section rather than a symbolic stock-photo substitute.';
+    : stock
+      ? (input.isThumbnail ? STOCK_COVER_MODE : STOCK_SECTION_MODE)
+      : posterCover
+        ? 'COVER POSTER MODE: A clean, bright Korean blog cover — a believable photo subject with real topic props on one side, the title headline on the other.'
+        : 'EDITORIAL MODE: Depict the real, literal situation described by the section rather than a symbolic stock-photo substitute.';
 
-  const roleLine = !input.isThumbnail && input.visualRole?.composition
-    ? `- VISUAL ROLE (${input.visualRole.name}): ${input.visualRole.composition}. Other sections of this article use different roles; keep to this one.`
-    : '';
-  const roleConstraintLines = !input.isThumbnail && input.visualRole
+  // [2026-10-20] The stock look varies sections like Orbit ("Section i of N: a unique scene") instead of the
+  //   editorial role plan, whose people rules (small, from behind, no people) are the opposite of that look.
+  const roleLine = stock
+    ? (input.isThumbnail ? '' : stockVarietyLine(input.viewpointIndex))
+    : !input.isThumbnail && input.visualRole?.composition
+      ? `- VISUAL ROLE (${input.visualRole.name}): ${input.visualRole.composition}. Other sections of this article use different roles; keep to this one.`
+      : '';
+  const roleConstraintLines = !stock && !input.isThumbnail && input.visualRole
     ? input.visualRole.constraints.map((line) => `- ${line}`)
     : [];
   const coverLines = input.isThumbnail && input.coverDirection && input.coverDirection.length > 0
@@ -664,7 +703,7 @@ export function buildContextualImagePrompt(input: ContextualImagePromptInput): s
     '',
     'COMPOSITION:',
     // 엔진이 각도를 앞머리에 박는 경우 여기서는 카메라를 말하지 않는다(지시 충돌 방지).
-    input.engineOwnsCamera ? '' : (resolveRoleCameraLine(input) || resolveViewpointLine(input) || GENERIC_COMPOSITION_LINE),
+    input.engineOwnsCamera ? '' : ((stock ? null : resolveRoleCameraLine(input)) || resolveViewpointLine(input) || GENERIC_COMPOSITION_LINE),
     '- Keep the required subject sharp, unobstructed, and visually dominant with natural depth and realistic scale.',
     '',
     referencePolicy,
@@ -672,9 +711,12 @@ export function buildContextualImagePrompt(input: ContextualImagePromptInput): s
     '',
     'CONSTRAINTS:',
     '- No unrelated or generic scene. Never substitute a decorative generic living room, generic kitchen, generic sofa, dining setup, ornamental decor, or aspirational interior for the stated subject.',
-    posterCover ? '' : '- No posed person, smiling family, lounging person, cooking person, or decorative human figure unless the section evidence explicitly requires that exact human action.',
+    stock
+      ? STOCK_PEOPLE_LINE
+      : posterCover ? '' : '- No posed person, smiling family, lounging person, cooking person, or decorative human figure unless the section evidence explicitly requires that exact human action.',
     '- Do not omit, generalize, beautify away, or contradict the article subject and section evidence.',
     ...roleConstraintLines,
+    stock ? `- ${STOCK_PHOTO_LOOK}` : '',
     `- ${textPolicy}`,
   ].filter(Boolean).join('\n');
 

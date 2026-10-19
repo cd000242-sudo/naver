@@ -55,6 +55,22 @@ const POSTER_SUBJECT: Readonly<Record<ThumbnailDirection, string>> = Object.free
 });
 
 /**
+ * [2026-10-20 사장님 "Orbit 대표이미지가 마음에 든다"] Stock-look cover lines (Orbit src/thumbnail.ts thumbnail
+ * template): one full-frame Korean scene — situation, action, key objects in that priority — with Korean people
+ * welcome. The card promise and the real-person guard stay; the poster split layout and "candid, not staged" go.
+ */
+export function stockCoverLines(options: { cardPromise?: string }): string[] {
+  const promise = String(options.cardPromise || '').replace(/\s+/gu, ' ').replace(/"/gu, "'").trim().slice(0, 160);
+  return [
+    promise ? `The cover must make this one point obvious: "${promise}".` : '',
+    'Professional blog thumbnail for a Korean audience, seen as a small card in a phone feed: one clear, full-frame scene in a Korean setting that shows the situation, the action and the key objects, in that priority.',
+    'If people appear, they are Korean / East Asian adults who fit the article\'s audience — natural, relatable, well lit.',
+    'Modern, vibrant, eye-catching, clean composition with strong contrast.',
+    'If the story is about a real, named person, do not depict that person\'s face or a lookalike; show the setting or objects instead.',
+  ].filter(Boolean);
+}
+
+/**
  * [2026-10-08 사장님] Cover lines when the engine draws the whole title itself: a square Korean blog
  * poster — headline on one side, a believable person with topic props on the other (the leadernam
  * youth-housing covers). Replaces the "do not draw digits" numeric line, since the digits are the headline.

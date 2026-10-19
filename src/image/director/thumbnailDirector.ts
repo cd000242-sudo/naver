@@ -14,7 +14,7 @@ import type { GeneratedImage, ImageRequestItem } from '../types.js';
 import type { ComposeResult } from './thumbnailComposer.js';
 import type { ThumbnailJudgeCandidate, ThumbnailJudgeContext, ThumbnailJudgeVerdict } from './thumbnailJudge.js';
 import type { ArticleVisualKind } from './sectionRolePlanner.js';
-import { chooseThumbnailDirection, coverDirectionLines, posterCoverLines, type ThumbnailDirection } from './thumbnailStrategy.js';
+import { chooseThumbnailDirection, coverDirectionLines, posterCoverLines, stockCoverLines, type ThumbnailDirection } from './thumbnailStrategy.js';
 import { decidePosterTitleText, decideThumbnailText, type ThumbnailTextDecision, type ThumbnailTextMode } from './thumbnailText.js';
 
 export type CandidateKind =
@@ -47,6 +47,8 @@ export interface ThumbnailDirectorInput {
   readonly realImages: readonly string[];
   /** Directory for real-photo composites (AI variants go next to the AI base file). */
   readonly realWorkDir: string;
+  /** [2026-10-20] 'stock' = Orbit cover lines (default from config); 'editorial' / undefined = 9~10월 cover lines. */
+  readonly imageLook?: 'stock' | 'editorial';
 }
 
 export interface ThumbnailDirectorDeps {
@@ -110,9 +112,12 @@ export function buildCoverItem(
       .filter(Boolean)
       .join(' / ')
       .slice(0, 900) || undefined,
-    coverDirection: poster
-      ? posterCoverLines(direction, { cardPromise: input.cardPromise })
-      : coverDirectionLines(direction, { titleBandPlanned, cardPromise: input.cardPromise }),
+    coverDirection: input.imageLook === 'stock'
+      ? stockCoverLines({ cardPromise: input.cardPromise })
+      : poster
+        ? posterCoverLines(direction, { cardPromise: input.cardPromise })
+        : coverDirectionLines(direction, { titleBandPlanned, cardPromise: input.cardPromise }),
+    ...(input.imageLook ? { imageLook: input.imageLook } : {}),
   };
 }
 

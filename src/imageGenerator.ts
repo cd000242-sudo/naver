@@ -47,7 +47,9 @@ import {
 } from './image/referenceImageLoader.js';
 import {
   prepareProviderContextualImagePrompt,
+  resolveImageLook,
   shouldApplyContextualPromptForProvider,
+  type ImageLook,
 } from './image/contextualImagePrompt.js';
 import { engineRotatesViewpoint } from './image/imageViewpointRotation.js';
 import { assignSectionRolesWithHistory } from './image/director/sectionRoleAssignment.js';
@@ -255,6 +257,19 @@ function shouldAllowTextForImageItem(item: any, options: GenerateImagesOptions):
 
   if (!thumbnailOnlyContext) return true;
   return item?.isThumbnail === true;
+}
+
+/**
+ * [2026-10-20 사장님 "Orbit 이미지가 마음에 든다"] config.imageLook — 기본 'stock'(Orbit 스톡 사진),
+ * 이미지 관리탭 "기사 삽화 스타일" 체크 시 'editorial'. 읽지 못하면 기본값.
+ */
+async function readImageLookSetting(): Promise<ImageLook> {
+  try {
+    const { loadConfig } = await import('./configManager.js');
+    return resolveImageLook((await loadConfig())?.imageLook);
+  } catch {
+    return 'stock';
+  }
 }
 
 /** config.headingImageTextInclude, read defensively: an unreadable config keeps section images text-free. */
@@ -575,7 +590,10 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
   // so the set stops repeating the same subject type. Shopping keeps its product-hero logic.
   // [NAVER FULL AUTO §11/§12] The plan also knows which roles the EARLIER H2 images of this article used,
   //   so a one-item call can be told not to repeat their subject, framing or background (no model call).
-  const sectionRoleHistory = options.isShoppingConnect
+  // [2026-10-20] The stock look (default) varies sections Orbit-style inside the brief; the editorial role plan
+  //   (people small / from behind / none) is only for the "기사 삽화" look.
+  const imageLook = await readImageLookSetting();
+  const sectionRoleHistory = options.isShoppingConnect || imageLook === 'stock'
     ? generationSourceItems.map(() => ({ role: null, previousRoles: [] as const }))
     : assignSectionRolesWithHistory(generationSourceItems, {
       sectionPlanHeadings: options.sectionPlanHeadings,
@@ -661,6 +679,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         thumbnailText,
         coverStyle: item.isThumbnail === true ? item.coverStyle : undefined,
         headingText: headingText ?? undefined,
+        imageLook,
       });
 
       return {
@@ -677,6 +696,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         ...(thumbnailText ? { thumbnailText } : {}),
         ...(item.isThumbnail === true && item.coverStyle ? { coverStyle: item.coverStyle } : {}),
         ...(headingText ? { headingText } : {}),
+        imageLook,
         allowText, // text is thumbnail-only in auto publish contexts, unless "소제목 글자 넣기" draws the heading
         englishPrompt: useContextualPrompt ? prompt : item.englishPrompt,
         sourceEnglishPrompt: item.sourceEnglishPrompt || item.englishPrompt,

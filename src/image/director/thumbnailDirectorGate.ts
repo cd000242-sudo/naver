@@ -9,7 +9,7 @@ import fs from 'fs';
 import os from 'os';
 import path from 'path';
 import type { GenerateImagesOptions, GeneratedImage, ImageRequestItem, ThumbnailDirectorRequest } from '../types.js';
-import { shouldApplyContextualPromptForProvider } from '../contextualImagePrompt.js';
+import { resolveImageLook, shouldApplyContextualPromptForProvider } from '../contextualImagePrompt.js';
 import { writeImageFile } from '../imageUtils.js';
 import { resolveIssueVisionRoute } from '../../crawler/issueHarness/visionRoute.js';
 import { judgeImagesWithRoute } from '../../crawler/issueHarness/visionJudges.js';
@@ -222,6 +222,8 @@ export async function generateImagesWithThumbnailDirector(
     engineDrawsText,
     realImages,
     realWorkDir: REAL_WORK_DIR,
+    // [2026-10-20 사장님] 이미지 분위기 — 기본 스톡(Orbit), 이미지 관리탭 "기사 삽화" 체크 시 editorial.
+    imageLook: resolveImageLook((context.config as { imageLook?: unknown } | undefined)?.imageLook),
   }, {
     generateBase: async (coverItem) => {
       const images = await context.generate({ ...options, items: [coverItem], thumbnailTextInclude: false, thumbnailDirector: undefined }, apiKeys);
