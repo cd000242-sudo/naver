@@ -42,7 +42,7 @@ export const NANO_BANANA_2: ImageEngineSpec = {
   koreanText: true,
   icon: '🍌',
   freeTierNote:
-    '무료 플랜: Gemini 3.1 Flash Image는 프리뷰 모델로, 무료 한도가 프로젝트·지역·과금 상태에 ' +
+    '무료 플랜: Nano Banana 2.1(gemini-nano-banana-2.1)은 무료 한도가 프로젝트·지역·과금 상태에 ' +
     '따라 다르며 유료 전용일 수 있습니다. 무료 티어 이미지 요청은 일반적으로 모델별 일일 한도(RPD)가 ' +
     '적용되고 매일 자정(태평양시) 초기화됩니다. 정확한 한도는 Google AI Studio 사용량 페이지에서 ' +
     '프로젝트별로 확인하세요.',

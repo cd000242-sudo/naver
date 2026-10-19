@@ -46,6 +46,7 @@ export async function detectGeminiTierAndModels(apiKey: string): Promise<GeminiT
   // Official stable model IDs only. Ended preview IDs must never re-enter recovery.
   const candidates = [
     'gemini-3-pro-image',                          // 나노바나나 프로 (Gemini 3 Pro Image)
+    'gemini-nano-banana-2.1',                      // 나노바나나 2.1 (2026-10-20 최신)
     'gemini-3.1-flash-image',                      // 나노바나나2 (Gemini 3.1 Flash Image)
     'gemini-3.1-flash-lite-image',                 // 최신 가성비 안정 모델
     'gemini-2.5-flash-image',                      // 나노바나나 구버전 GA — 모든 Tier 작동
@@ -134,6 +135,7 @@ export async function pickWorkingImageModel(
   // 2. 작동 가능 모델 중 가장 가까운 동급 선택 — 신형 우선
   const PREFERENCE_ORDER = [
     'gemini-3-pro-image',                        // 나노바나나 프로, 1순위
+    'gemini-nano-banana-2.1',                    // 나노바나나 2.1
     'gemini-3.1-flash-image',                    // 나노바나나2
     'gemini-3.1-flash-lite-image',               // 최신 가성비 안정 모델
     'gemini-2.5-flash-image',                    // 구버전 GA
@@ -285,6 +287,7 @@ export async function diagnoseGeminiAccess(apiKey: string): Promise<{
 
     const appCandidates = [
       'gemini-3-pro-image',
+      'gemini-nano-banana-2.1',
       'gemini-3.1-flash-image',
       'gemini-3.1-flash-lite-image',
       'gemini-2.5-flash-image',

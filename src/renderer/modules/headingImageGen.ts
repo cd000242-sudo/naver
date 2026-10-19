@@ -999,6 +999,11 @@ export function initHeadingImageGeneration(): void {
           return;
         }
 
+        // [2026-10-20 사장님] 모달이 "너무 늦게" 떴다 — 소제목마다 AI 프롬프트 번역(3개씩, 수십 초)을 다 끝낸 뒤에야
+        //   liveImagePreview.show 를 불렀다. 클릭 즉시 띄우고, 번역 진행을 모달 로그로 보여 준다.
+        liveImagePreview.show(filteredHeadings, sourceLabel);
+        liveImagePreview.addLog(`🤖 AI 프롬프트 번역 중... (소제목 ${filteredHeadings.length}개 → 영어 이미지 프롬프트)`);
+
         // ✅ [2026-02-27 FIX] AI 비동기 프롬프트 업그레이드 — Sync 폴백 프롬프트를 AI 번역으로 교체
         // Gemini → OpenAI → Claude → Perplexity 순 AI 폴백 체인으로 소제목에 맞는 정확한 프롬프트 생성
         appendLog('🤖 AI 프롬프트 번역 중... (소제목 → 영어 이미지 프롬프트)', 'images-log-output');
@@ -1032,7 +1037,7 @@ export function initHeadingImageGeneration(): void {
         }
 
         // ✅ [2026-03-09 FIX] aiProgressModal.show() 제거 — liveImagePreview가 이미지 미리보기+로그 통합 제공
-        liveImagePreview.show(filteredHeadings, sourceLabel);
+        //   (모달 자체는 위에서 번역 전에 이미 띄웠다 — 여기서는 로그만.)
         liveImagePreview.addLog(`🎨 ${sourceLabel}로 이미지 생성 시작...`);
         liveImagePreview.addLog('🧵 안정성을 위해 이미지는 1개씩 순차 생성합니다.');
 
@@ -1747,9 +1752,16 @@ export function initHeadingImageGeneration(): void {
 
         const results: Array<any | null> = [];
         if (shouldRunSequentially) {
-          for (let i = 0; i < filteredHeadings.length; i++) {
-            results.push(await generateOne(filteredHeadings[i], i));
-          }
+          // [2026-10-20 사장님 "저번부터 고치라 했는데"] 9/2 의 미리보기 자리 배치(imagePreviewBatch)는 "비어있는 소제목만"
+          //   버튼에만 붙어 있었다. 이 버튼의 루프도 소제목마다 IPC 1번 → main 은 늘 index 0 → 1번 타일이 생성된
+          //   이미지를 전부 차례로 보여 줬다. 루프가 자기 자리를 알려준다.
+          beginImagePreviewBatch(filteredHeadings.length);
+          try {
+            for (let i = 0; i < filteredHeadings.length; i++) {
+              setImagePreviewBatchSlot(i);
+              results.push(await generateOne(filteredHeadings[i], i));
+            }
+          } finally { endImagePreviewBatch(); }
         }
 
         // ✅ IMPORTANT: 결과 null(실패) 때문에 인덱스가 당겨지면 소제목 매칭이 깨짐.

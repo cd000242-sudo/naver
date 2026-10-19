@@ -82,7 +82,7 @@ export function initUserGuideModal(): void {
           <ul style="padding-left: 1.5rem; margin: 0;">
             <li><strong>무료 티어(정책/계정 설정에 따라 다름)</strong> - 일일/월간 할당량은 Google 정책에 따릅니다</li>
             <li><strong>글 생성</strong> - Gemini 2.0 Flash (빠르고 안정적)</li>
-            <li><strong>이미지 생성</strong> - 나노바나나2 (Gemini 3.1 Flash Image)</li>
+            <li><strong>이미지 생성</strong> - 나노바나나2 (Nano Banana 2.1)</li>
           </ul>
           <div style="margin-top: 1rem; padding: 0.75rem; background: rgba(212, 175, 55, 0.2); border-radius: 8px;">
             <strong>발급 방법:</strong> <a href="https://aistudio.google.com/apikey" target="_blank" style="color: #D4AF37;">aistudio.google.com/apikey</a> → Google 로그인 → "Create API Key" 클릭

@@ -156,7 +156,9 @@ describe('modelRegistry SSOT 회귀 가드', () => {
   it('GEMINI_IMAGE_MODELS — 현재 나노바나나 4종 + 레거시 키 호환', () => {
     expect(GEMINI_IMAGE_MODELS.STANDARD).toBe('gemini-2.5-flash-image');
     expect(GEMINI_IMAGE_MODELS.NANO_BANANA_LITE).toBe('gemini-3.1-flash-lite-image');
-    expect(GEMINI_IMAGE_MODELS.NANO_BANANA_2).toBe('gemini-3.1-flash-image');
+    // [2026-10-20] 나노바나나2 키는 최신 Nano Banana 2.1 로, 직전 ID 는 폴백용으로 남긴다.
+    expect(GEMINI_IMAGE_MODELS.NANO_BANANA_2).toBe('gemini-nano-banana-2.1');
+    expect(GEMINI_IMAGE_MODELS.NANO_BANANA_2_PREV).toBe('gemini-3.1-flash-image');
     expect(GEMINI_IMAGE_MODELS.NANO_BANANA_PRO).toBe('gemini-3-pro-image');
     expect('FREE_EXP' in GEMINI_IMAGE_MODELS).toBe(false);
   });
@@ -198,6 +200,7 @@ describe('modelRegistry SSOT 회귀 가드', () => {
     expect(VERIFIED_IMAGE_MODELS).toContain('gemini-2.5-flash-image');
     expect(VERIFIED_IMAGE_MODELS).toContain('gemini-3.1-flash-lite-image');
     expect(VERIFIED_IMAGE_MODELS).toContain('gemini-3.1-flash-image');
+    expect(VERIFIED_IMAGE_MODELS).toContain('gemini-nano-banana-2.1');
     expect(VERIFIED_IMAGE_MODELS).toContain('gemini-3-pro-image');
     expect(VERIFIED_IMAGE_MODELS).not.toContain('gemini-2.0-flash-preview-image-generation');
     expect(VERIFIED_IMAGE_MODELS).not.toContain('gemini-2.0-flash-exp-image-generation');

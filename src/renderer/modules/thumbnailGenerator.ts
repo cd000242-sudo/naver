@@ -88,6 +88,9 @@ export function removePreviousThumbnailImages(): void {
 }
 
 export class ThumbnailGenerator {
+  /** The instance DOM listeners dispatch to — the newest one (see setupEventListeners). */
+  private static current: ThumbnailGenerator | null = null;
+  private static listenersBound = false;
   private canvas: HTMLCanvasElement | null = null;
   private ctx: CanvasRenderingContext2D | null = null;
   private backgroundImage: HTMLImageElement | null = null;
@@ -200,97 +203,104 @@ export class ThumbnailGenerator {
   }
 
   private setupEventListeners(): void {
+    // [2026-10-20 사장님 실사고] 발행이 끝날 때마다 renderer.resetThumbnailGeneratorOnPublish 가 새 인스턴스를 만들고,
+    //   생성자마다 같은 버튼에 리스너를 또 붙였다 → 4번째 글에서 '썸네일 다운로드' 1클릭에 다운로드 4번. 리스너는 한 번만
+    //   붙이고, 어느 인스턴스가 받든 항상 '현재' 인스턴스(gen())로 보낸다.
+    ThumbnailGenerator.current = this;
+    if (ThumbnailGenerator.listenersBound) return;
+    ThumbnailGenerator.listenersBound = true;
+    const gen = (): ThumbnailGenerator => ThumbnailGenerator.current ?? this;
     // 텍스트 입력
     const mainTextInput = document.getElementById('thumb-main-text') as HTMLTextAreaElement;
     const subTextInput = document.getElementById('thumb-sub-text') as HTMLInputElement;
 
     mainTextInput?.addEventListener('input', (e) => {
-      this.settings.mainText = (e.target as HTMLTextAreaElement).value;
-      this.render();
+      gen().settings.mainText = (e.target as HTMLTextAreaElement).value;
+      gen().render();
     });
 
     subTextInput?.addEventListener('input', (e) => {
-      this.settings.subText = (e.target as HTMLInputElement).value;
-      this.render();
+      gen().settings.subText = (e.target as HTMLInputElement).value;
+      gen().render();
     });
 
     // 폰트 설정
     const fontFamily = document.getElementById('thumb-font-family') as HTMLSelectElement;
     fontFamily?.addEventListener('change', (e) => {
-      this.settings.fontFamily = (e.target as HTMLSelectElement).value;
-      this.render();
+      gen().settings.fontFamily = (e.target as HTMLSelectElement).value;
+      gen().render();
     });
 
     // 폰트 크기
     const fontSize = document.getElementById('thumb-font-size') as HTMLInputElement;
     const fontSizeValue = document.getElementById('thumb-font-size-value') as HTMLSpanElement;
     fontSize?.addEventListener('input', (e) => {
-      this.settings.fontSize = parseInt((e.target as HTMLInputElement).value);
-      if (fontSizeValue) fontSizeValue.textContent = `${this.settings.fontSize}px`;
-      this.render();
+      gen().settings.fontSize = parseInt((e.target as HTMLInputElement).value);
+      if (fontSizeValue) fontSizeValue.textContent = `${gen().settings.fontSize}px`;
+      gen().render();
     });
 
     // 텍스트 색상
     const textColor = document.getElementById('thumb-text-color') as HTMLInputElement;
     textColor?.addEventListener('input', (e) => {
-      this.settings.textColor = (e.target as HTMLInputElement).value;
-      this.render();
+      gen().settings.textColor = (e.target as HTMLInputElement).value;
+      gen().render();
     });
 
     // 텍스트 정렬
     const textAlign = document.getElementById('thumb-text-align') as HTMLSelectElement;
     textAlign?.addEventListener('change', (e) => {
-      this.settings.textAlign = (e.target as HTMLSelectElement).value as CanvasTextAlign;
-      this.render();
+      gen().settings.textAlign = (e.target as HTMLSelectElement).value as CanvasTextAlign;
+      gen().render();
     });
 
     // 텍스트 효과
     const textShadow = document.getElementById('thumb-text-shadow') as HTMLInputElement;
     textShadow?.addEventListener('change', (e) => {
-      this.settings.textShadow = (e.target as HTMLInputElement).checked;
-      this.render();
+      gen().settings.textShadow = (e.target as HTMLInputElement).checked;
+      gen().render();
     });
 
     const textOutline = document.getElementById('thumb-text-outline') as HTMLInputElement;
     const outlineSettings = document.getElementById('thumb-outline-settings') as HTMLDivElement;
     textOutline?.addEventListener('change', (e) => {
-      this.settings.textOutline = (e.target as HTMLInputElement).checked;
-      if (outlineSettings) outlineSettings.style.display = this.settings.textOutline ? 'block' : 'none';
-      this.render();
+      gen().settings.textOutline = (e.target as HTMLInputElement).checked;
+      if (outlineSettings) outlineSettings.style.display = gen().settings.textOutline ? 'block' : 'none';
+      gen().render();
     });
 
     const textHighlight = document.getElementById('thumb-text-highlight') as HTMLInputElement;
     const highlightSettings = document.getElementById('thumb-highlight-settings') as HTMLDivElement;
     textHighlight?.addEventListener('change', (e) => {
-      this.settings.textHighlight = (e.target as HTMLInputElement).checked;
-      if (highlightSettings) highlightSettings.style.display = this.settings.textHighlight ? 'block' : 'none';
-      this.render();
+      gen().settings.textHighlight = (e.target as HTMLInputElement).checked;
+      if (highlightSettings) highlightSettings.style.display = gen().settings.textHighlight ? 'block' : 'none';
+      gen().render();
     });
 
     // 외곽선 설정
     const outlineColor = document.getElementById('thumb-outline-color') as HTMLInputElement;
     outlineColor?.addEventListener('input', (e) => {
-      this.settings.outlineColor = (e.target as HTMLInputElement).value;
-      this.render();
+      gen().settings.outlineColor = (e.target as HTMLInputElement).value;
+      gen().render();
     });
 
     const outlineWidth = document.getElementById('thumb-outline-width') as HTMLInputElement;
     outlineWidth?.addEventListener('input', (e) => {
-      this.settings.outlineWidth = parseInt((e.target as HTMLInputElement).value);
-      this.render();
+      gen().settings.outlineWidth = parseInt((e.target as HTMLInputElement).value);
+      gen().render();
     });
 
     // 형광펜 설정
     const highlightColor = document.getElementById('thumb-highlight-color') as HTMLInputElement;
     highlightColor?.addEventListener('input', (e) => {
-      this.settings.highlightColor = (e.target as HTMLInputElement).value;
-      this.render();
+      gen().settings.highlightColor = (e.target as HTMLInputElement).value;
+      gen().render();
     });
 
     const highlightOpacity = document.getElementById('thumb-highlight-opacity') as HTMLInputElement;
     highlightOpacity?.addEventListener('input', (e) => {
-      this.settings.highlightOpacity = parseInt((e.target as HTMLInputElement).value);
-      this.render();
+      gen().settings.highlightOpacity = parseInt((e.target as HTMLInputElement).value);
+      gen().render();
     });
 
     // 텍스트 위치 프리셋
@@ -307,17 +317,17 @@ export class ThumbnailGenerator {
         (e.target as HTMLElement).style.borderColor = 'var(--primary)';
         (e.target as HTMLElement).classList.add('selected');
 
-        this.settings.textPosition = (e.target as HTMLElement).dataset.position || 'center';
-        this.updateTextPosition();
-        this.render();
+        gen().settings.textPosition = (e.target as HTMLElement).dataset.position || 'center';
+        gen().updateTextPosition();
+        gen().render();
       });
     });
 
     // 배경 색상
     const bgColor = document.getElementById('thumb-bg-color') as HTMLInputElement;
     bgColor?.addEventListener('input', (e) => {
-      this.settings.bgColor = (e.target as HTMLInputElement).value;
-      this.render();
+      gen().settings.bgColor = (e.target as HTMLInputElement).value;
+      gen().render();
     });
 
     // 배경 이미지 업로드
@@ -333,7 +343,7 @@ export class ThumbnailGenerator {
       bgFileInput.setAttribute('data-listener-added', 'true');
       bgFileInput.addEventListener('change', (e) => {
         const file = (e.target as HTMLInputElement).files?.[0];
-        if (file) this.loadBackgroundImage(file);
+        if (file) gen().loadBackgroundImage(file);
         try {
           (e.target as HTMLInputElement).value = '';
         } catch (e) {
@@ -344,7 +354,7 @@ export class ThumbnailGenerator {
 
     // 저장소에서 배경 선택
     const bgStorageBtn = document.getElementById('thumb-bg-storage-btn') as HTMLButtonElement;
-    bgStorageBtn?.addEventListener('click', () => this.openStorageModal());
+    bgStorageBtn?.addEventListener('click', () => gen().openStorageModal());
 
     // ✅ AI 배경 이미지 생성 (나노 바나나 프로 + NEVER TEXT 고정)
     const bgAiBtn = document.getElementById('thumb-bg-ai-btn') as HTMLButtonElement;
@@ -373,8 +383,8 @@ export class ThumbnailGenerator {
             const img = new Image();
             img.crossOrigin = 'anonymous';
             img.onload = () => {
-              this.backgroundImage = img;
-              this.render();
+              gen().backgroundImage = img;
+              gen().render();
               toastManager.success('✅ 나노바나나2로 배경 생성 완료!');
             };
             img.onerror = () => {
@@ -400,61 +410,61 @@ export class ThumbnailGenerator {
     const overlayEnable = document.getElementById('thumb-overlay-enable') as HTMLInputElement;
     const overlaySettings = document.getElementById('thumb-overlay-settings') as HTMLDivElement;
     overlayEnable?.addEventListener('change', (e) => {
-      this.settings.overlayEnabled = (e.target as HTMLInputElement).checked;
-      if (overlaySettings) overlaySettings.style.display = this.settings.overlayEnabled ? 'block' : 'none';
-      this.render();
+      gen().settings.overlayEnabled = (e.target as HTMLInputElement).checked;
+      if (overlaySettings) overlaySettings.style.display = gen().settings.overlayEnabled ? 'block' : 'none';
+      gen().render();
     });
 
     const overlayColor = document.getElementById('thumb-overlay-color') as HTMLInputElement;
     overlayColor?.addEventListener('input', (e) => {
-      this.settings.overlayColor = (e.target as HTMLInputElement).value;
-      this.render();
+      gen().settings.overlayColor = (e.target as HTMLInputElement).value;
+      gen().render();
     });
 
     const overlayOpacity = document.getElementById('thumb-overlay-opacity') as HTMLInputElement;
     const overlayOpacityValue = document.getElementById('thumb-overlay-opacity-value') as HTMLSpanElement;
     overlayOpacity?.addEventListener('input', (e) => {
-      this.settings.overlayOpacity = parseInt((e.target as HTMLInputElement).value);
-      if (overlayOpacityValue) overlayOpacityValue.textContent = String(this.settings.overlayOpacity);
-      this.render();
+      gen().settings.overlayOpacity = parseInt((e.target as HTMLInputElement).value);
+      if (overlayOpacityValue) overlayOpacityValue.textContent = String(gen().settings.overlayOpacity);
+      gen().render();
     });
 
     const overlayType = document.getElementById('thumb-overlay-type') as HTMLSelectElement;
     overlayType?.addEventListener('change', (e) => {
-      this.settings.overlayType = (e.target as HTMLSelectElement).value;
-      this.render();
+      gen().settings.overlayType = (e.target as HTMLSelectElement).value;
+      gen().render();
     });
 
     // 배경 효과
     const bgBlur = document.getElementById('thumb-bg-blur') as HTMLInputElement;
     const blurValue = document.getElementById('thumb-blur-value') as HTMLSpanElement;
     bgBlur?.addEventListener('input', (e) => {
-      this.settings.bgBlur = parseInt((e.target as HTMLInputElement).value);
-      if (blurValue) blurValue.textContent = String(this.settings.bgBlur);
-      this.render();
+      gen().settings.bgBlur = parseInt((e.target as HTMLInputElement).value);
+      if (blurValue) blurValue.textContent = String(gen().settings.bgBlur);
+      gen().render();
     });
 
     const bgBrightness = document.getElementById('thumb-bg-brightness') as HTMLInputElement;
     const brightnessValue = document.getElementById('thumb-brightness-value') as HTMLSpanElement;
     bgBrightness?.addEventListener('input', (e) => {
-      this.settings.bgBrightness = parseInt((e.target as HTMLInputElement).value);
-      if (brightnessValue) brightnessValue.textContent = String(this.settings.bgBrightness);
-      this.render();
+      gen().settings.bgBrightness = parseInt((e.target as HTMLInputElement).value);
+      if (brightnessValue) brightnessValue.textContent = String(gen().settings.bgBrightness);
+      gen().render();
     });
 
     // 종횡비 설정
     const aspectRatio = document.getElementById('thumb-aspect-ratio') as HTMLSelectElement;
     aspectRatio?.addEventListener('change', (e) => {
-      this.settings.aspectRatio = (e.target as HTMLSelectElement).value;
-      this.updateCanvasSize();
-      this.render();
+      gen().settings.aspectRatio = (e.target as HTMLSelectElement).value;
+      gen().updateCanvasSize();
+      gen().render();
     });
 
     // 배경 모드 설정
     const bgMode = document.getElementById('thumb-bg-mode') as HTMLSelectElement;
     bgMode?.addEventListener('change', (e: Event) => {
-      this.settings.bgMode = (e.target as HTMLSelectElement).value;
-      this.render();
+      gen().settings.bgMode = (e.target as HTMLSelectElement).value;
+      gen().render();
     });
 
     // 배경 줌(확대/축소) 활성화 설정
@@ -463,7 +473,7 @@ export class ThumbnailGenerator {
     document.querySelectorAll('.thumb-sticker-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const emoji = (e.target as HTMLElement).dataset.sticker || '⭐';
-        this.addSticker(emoji);
+        gen().addSticker(emoji);
       });
     });
 
@@ -471,25 +481,25 @@ export class ThumbnailGenerator {
     document.querySelectorAll('.thumb-preset-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const preset = (e.target as HTMLElement).dataset.preset || 'modern';
-        this.applyPreset(preset);
+        gen().applyPreset(preset);
       });
     });
 
     // 액션 버튼들
     const resetBtn = document.getElementById('thumb-reset-btn') as HTMLButtonElement;
-    resetBtn?.addEventListener('click', () => this.reset());
+    resetBtn?.addEventListener('click', () => gen().reset());
 
     const downloadBtn = document.getElementById('thumb-download-btn') as HTMLButtonElement;
-    downloadBtn?.addEventListener('click', () => this.download());
+    downloadBtn?.addEventListener('click', () => gen().download());
 
     const applyBtn = document.getElementById('thumb-apply-btn') as HTMLButtonElement;
-    applyBtn?.addEventListener('click', () => this.applyToPost());
+    applyBtn?.addEventListener('click', () => gen().applyToPost());
 
     // 캔버스 드래그 이벤트
-    this.canvas?.addEventListener('mousedown', (e) => this.onMouseDown(e));
-    this.canvas?.addEventListener('mousemove', (e) => this.onMouseMove(e));
-    this.canvas?.addEventListener('mouseup', () => this.onMouseUp());
-    this.canvas?.addEventListener('mouseleave', () => this.onMouseUp());
+    gen().canvas?.addEventListener('mousedown', (e) => gen().onMouseDown(e));
+    gen().canvas?.addEventListener('mousemove', (e) => gen().onMouseMove(e));
+    gen().canvas?.addEventListener('mouseup', () => gen().onMouseUp());
+    gen().canvas?.addEventListener('mouseleave', () => gen().onMouseUp());
   }
 
   private updateCanvasSize(): void {

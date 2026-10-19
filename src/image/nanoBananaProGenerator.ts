@@ -114,6 +114,7 @@ const MODEL_COST_KRW: Record<string, number> = {
   //   gemini-3.1-flash-image: 나노바나나2 (Flash) — 추정 ₩97
   //   gemini-3-pro-image: 나노바나나 프로 — $0.134/장 ≈ ₩185
   'gemini-3.1-flash-lite-image': 46,
+  'gemini-nano-banana-2.1': 97,    // 나노바나나 2.1 — 공식 단가 미확인, 3.1 Flash 와 같은 추정치
   'gemini-3.1-flash-image': 97,    // 나노바나나2 (Gemini 3.1 Flash Image)
   'gemini-3-pro-image': 185,       // 나노바나나 프로 (Gemini 3 Pro Image)
   'gemini-2.5-flash-image': 54,            // 나노바나나 구버전 (~₩54/장)
@@ -1364,8 +1365,8 @@ async function generateSingleImageWithGemini(
         'gemini-3-pro-4k': { model: 'gemini-3-pro-image', resolution: '4K' },
         // 사용자 UI: "나노바나나 프로"
         'gemini-3-pro': { model: 'gemini-3-pro-image', resolution: '1K' },
-        // 사용자 UI: "나노바나나2" — Gemini 3.1 Flash Image
-        'gemini-3-1-flash': { model: 'gemini-3.1-flash-image', resolution: '1K' },
+        // 사용자 UI: "나노바나나2" — [2026-10-20] Nano Banana 2.1 (최신). 거부되면 아래 폴백 체인이 3.1 Flash Image 로.
+        'gemini-3-1-flash': { model: 'gemini-nano-banana-2.1', resolution: '1K' },
         // Imagen 4 — Tier 1+ 작동 확인됨
         'imagen-4': { model: 'imagen-4.0-generate-001', resolution: '1K' },
         // 나노바나나 (구버전 — Gemini 2.5 Flash Image)
@@ -1439,6 +1440,7 @@ async function generateSingleImageWithGemini(
 
         // Stable Nano Banana models only. Imagen 4 is deprecated and is no longer an automatic fallback.
         const FALLBACK_CHAIN: Array<{ name: string; model: string; type: 'gemini' | 'imagen' }> = [
+          { name: '나노바나나 2.1', model: 'gemini-nano-banana-2.1', type: 'gemini' },
           { name: '나노바나나2', model: 'gemini-3.1-flash-image', type: 'gemini' },
           { name: '나노바나나 라이트', model: 'gemini-3.1-flash-lite-image', type: 'gemini' },
           { name: '나노바나나(정식)', model: 'gemini-2.5-flash-image', type: 'gemini' },
@@ -1930,6 +1932,7 @@ async function generateSingleImageWithGemini(
 
           // 검증된 안정 ID만 사용한다.
           const NANO_ROTATION = [
+            { name: '나노바나나 2.1', model: 'gemini-nano-banana-2.1' },
             { name: '나노바나나2', model: 'gemini-3.1-flash-image' },
             { name: '나노바나나 라이트', model: 'gemini-3.1-flash-lite-image' },
             { name: '나노바나나(정식)', model: 'gemini-2.5-flash-image' },
@@ -1974,6 +1977,7 @@ async function generateSingleImageWithGemini(
   // 선택 모델 재시도 실패 후 → 다른 나노바나나 모델을 순차 시도
   // Stable models only; ended preview/experimental IDs are permanently excluded.
   const FINAL_ROTATION = [
+    { name: '나노바나나 2.1', model: 'gemini-nano-banana-2.1' },
     { name: '나노바나나2', model: 'gemini-3.1-flash-image' },
     { name: '나노바나나 라이트', model: 'gemini-3.1-flash-lite-image' },
     { name: '나노바나나(정식)', model: 'gemini-2.5-flash-image' },

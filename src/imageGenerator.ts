@@ -445,7 +445,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
   // ✅ [엔진명 한글 매핑]
   const providerDisplayNames: Record<string, string> = {
     'nano-banana': '나노바나나 (Gemini 2.5 Flash Image, ₩54/장)',
-    'nano-banana-2': '나노바나나2 (Gemini 3.1 Flash Image, ₩97/장)',
+    'nano-banana-2': '나노바나나2 (Nano Banana 2.1, ₩97/장)',
     'nano-banana-pro': '나노바나나 프로 (Gemini 3 Pro Image, ₩185/장)',
     'deepinfra': '딥인프라 FLUX-2',
     'openai-image': 'OpenAI 덕테이프',

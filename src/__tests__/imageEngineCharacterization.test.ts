@@ -47,10 +47,11 @@ describe('Stage 0 — 마이그레이션 타깃 측정 (레거시 nano-banana-pr
     expect(genCode).toMatch(/nanoBananaSubModel\)?\s*\|\|\s*'gemini-3-1-flash'/);
   });
 
-  it("MODEL_MAP에서 'gemini-3-1-flash'는 gemini-3.1-flash-image로 매핑된다", () => {
+  it("MODEL_MAP에서 'gemini-3-1-flash'는 [2026-10-20] gemini-nano-banana-2.1 로 매핑되고 3.1 Flash 는 폴백에 남는다", () => {
     expect(genCode).toMatch(
-      /'gemini-3-1-flash':\s*\{\s*model:\s*'gemini-3\.1-flash-image'/,
+      /'gemini-3-1-flash':\s*\{\s*model:\s*'gemini-nano-banana-2\.1'/,
     );
+    expect(genCode).toContain("{ name: '나노바나나2', model: 'gemini-3.1-flash-image' }");
   });
 
   it("MODEL_MAP에서 'gemini-3-pro'는 gemini-3-pro-image로 매핑된다", () => {
@@ -86,9 +87,9 @@ describe('Stage 0 — 마이그레이션 타깃 측정 (레거시 nano-banana-pr
    *     → API 모델 'gemini-3.1-flash-image' (= 신규 UI "나노바나나2")
    *   따라서 레거시 'nano-banana-pro' 저장값은 신규 'nano-banana-2'로 마이그레이션한다 (행동 보존).
    */
-  it('결론: 레거시 nano-banana-pro 마이그레이션 타깃 = nano-banana-2 (gemini-3.1-flash-image)', () => {
+  it('결론: 레거시 nano-banana-pro 마이그레이션 타깃 = nano-banana-2 (현재 gemini-nano-banana-2.1)', () => {
     const defaultKey = 'gemini-3-1-flash';
-    expect(genCode).toContain(`'${defaultKey}': { model: 'gemini-3.1-flash-image'`);
+    expect(genCode).toContain(`'${defaultKey}': { model: 'gemini-nano-banana-2.1'`);
   });
 });
 

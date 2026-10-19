@@ -63,8 +63,13 @@ export const GEMINI_IMAGE_MODELS = {
   STANDARD: 'gemini-2.5-flash-image',
   /** Value: latest stable Nano Banana image model. */
   NANO_BANANA_LITE: 'gemini-3.1-flash-lite-image',
-  /** 나노바나나2 — Gemini 3.1 Flash Image (적정 가격, 한글 텍스트 가능) */
-  NANO_BANANA_2: 'gemini-3.1-flash-image',
+  /**
+   * 나노바나나2 → [2026-10-20] Nano Banana 2.1 (`gemini-nano-banana-2.1`, Google 모델 목록 API 실측 · 최신).
+   *   이전 ID gemini-3.1-flash-image 는 폴백 체인·화이트리스트에 남긴다.
+   */
+  NANO_BANANA_2: 'gemini-nano-banana-2.1',
+  /** 직전 나노바나나2 ID — 2.1 이 거부될 때의 1차 폴백 */
+  NANO_BANANA_2_PREV: 'gemini-3.1-flash-image',
   /** 나노바나나 프로 — Gemini 3 Pro Image (최고 품질·한글 최강, 고가) */
   NANO_BANANA_PRO: 'gemini-3-pro-image',
 } as const;
@@ -365,6 +370,7 @@ export const VERIFIED_IMAGE_MODELS = [
   'gemini-2.5-flash-image',
   'gemini-3.1-flash-lite-image',
   'gemini-3.1-flash-image',
+  'gemini-nano-banana-2.1',
   'gemini-3-pro-image',
   'imagen-4.0-generate-001',
   'gpt-image-2.5-flare',

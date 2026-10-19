@@ -3211,9 +3211,9 @@ function hideProgressFloatingButton(): void {
 }
 
 const imageSourceNames: Record<string, string> = {
-  'nano-banana-2': '🍌 나노바나나2 (Gemini 3.1 Flash Image, ₩97/장) ★',
+  'nano-banana-2': '🍌 나노바나나2 (Nano Banana 2.1, ₩97/장) ★',
   // [2026-10-10] 옛 큐에 남은 프로 값은 나노바나나2로 이관되어 실행된다
-  'nano-banana-pro': '🍌 나노바나나2 (Gemini 3.1 Flash Image, ₩97/장) ★',
+  'nano-banana-pro': '🍌 나노바나나2 (Nano Banana 2.1, ₩97/장) ★',
   'naver': '🔍 네이버 검색',
   'prodia': '⚡ Prodia',
   'stability': '🚀 Stability AI',

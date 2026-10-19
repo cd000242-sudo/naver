@@ -20,7 +20,7 @@ export function getCostRiskProviderLabel(provider: string): string {
     const p = String(provider || '').trim();
     if (p === 'pollinations') return 'Pollinations';
     if (p === 'nano-banana') return '나노바나나 (Gemini 2.5 Flash Image, ₩54/장)';
-    if (p === 'nano-banana-2') return '나노바나나2 (Gemini 3.1 Flash Image, ₩97/장)';
+    if (p === 'nano-banana-2') return '나노바나나2 (Nano Banana 2.1, ₩97/장)';
     if (p === 'nano-banana-pro') return '나노바나나 프로 (Gemini 3 Pro Image, ₩185/장)';
     if (p === 'falai') return 'Fal.ai';
     if (p === 'prodia') return 'Prodia AI';

@@ -106,7 +106,7 @@ export const MODE_NAMES: Record<HeadingImageMode, string> = {
 
 export const SOURCE_NAMES: Record<GlobalImageSource, string> = {
   'nano-banana': '나노바나나 (₩54/장, Gemini 2.5 Flash Image)',
-  'nano-banana-2': '나노바나나2 (₩97/장, Gemini 3.1 Flash Image)',
+  'nano-banana-2': '나노바나나2 (₩97/장, Nano Banana 2.1)',
   'nano-banana-pro': '나노바나나 프로 (₩185/장, Gemini 3 Pro Image)',
   'falai': 'Fal.ai',
   'prodia': 'Prodia',
@@ -865,7 +865,7 @@ export function createHeadingImageModal(): void {
             <div id="local-folder-fallback-engine-wrap" style="display: none; margin-top: 8px; padding: 10px 12px; border-radius: 8px; background: rgba(99,102,241,0.08); border: 1px dashed rgba(99,102,241,0.3);">
               <div style="font-size: 11px; color: #a5b4fc; margin-bottom: 6px; font-weight: 600;">🎨 부족분 생성에 사용할 AI 엔진</div>
               <select id="local-folder-fallback-engine" style="width: 100%; padding: 8px 10px; border-radius: 6px; background: #1e1e2e; color: #e2e8f0; border: 1px solid rgba(99,102,241,0.3); font-size: 12px; cursor: pointer;">
-                <option value="nano-banana-2" selected>나노바나나2 (₩97/장, Gemini 3.1 Flash Image)</option>
+                <option value="nano-banana-2" selected>나노바나나2 (₩97/장, Nano Banana 2.1)</option>
                 <option value="deepinfra">FLUX-2 (DeepInfra)</option>
                 <option value="openai-image">덕트테이프 (gpt-image-2.5 Flare / Sunburst)</option>
                 <option value="leonardoai">Leonardo AI</option>
@@ -2403,7 +2403,7 @@ export function createHeadingImageModal(): void {
             <div>
               <label style="display: block; font-weight: 500; color: #d1d5db; margin-bottom: 6px; font-size: 12px;">🖼️ 썸네일 (대표) 모델</label>
               <select id="submodal-nano-main-model" style="width: 100%; padding: 10px; background: #1a1a2e; border: 2px solid rgba(251, 191, 36, 0.4); border-radius: 8px; color: white; font-size: 13px; cursor: pointer;">
-                <option value="gemini-3-1-flash">⚡ 나노바나나2 (Gemini 3.1 Flash Image) - ₩97/장 ★추천</option>
+                <option value="gemini-3-1-flash">⚡ 나노바나나2 (Nano Banana 2.1) - ₩97/장 ★추천</option>
               </select>
               <div style="font-size: 10px; color: #9ca3af; margin-top: 4px; line-height: 1.4;">
                 ℹ️ 나노바나나2(Gemini 3.1 Flash)는 한글 텍스트가 가능합니다.
@@ -2413,7 +2413,7 @@ export function createHeadingImageModal(): void {
             <div>
               <label style="display: block; font-weight: 500; color: #d1d5db; margin-bottom: 6px; font-size: 12px;">📝 본문 (서브) 모델</label>
               <select id="submodal-nano-sub-model" style="width: 100%; padding: 10px; background: #1a1a2e; border: 2px solid rgba(251, 191, 36, 0.4); border-radius: 8px; color: white; font-size: 13px; cursor: pointer;">
-                <option value="gemini-3-1-flash">⚡ 나노바나나2 (Gemini 3.1 Flash Image) - ₩97/장 ★추천</option>
+                <option value="gemini-3-1-flash">⚡ 나노바나나2 (Nano Banana 2.1) - ₩97/장 ★추천</option>
               </select>
             </div>
           </div>

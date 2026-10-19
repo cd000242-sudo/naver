@@ -19,12 +19,12 @@ describe('style preview engine routing', () => {
       kind: 'gemini', model: 'gemini-3.1-flash-lite-image',
     });
     expect(resolveStylePreviewEngine('nano-banana-2')).toMatchObject({
-      kind: 'gemini', model: 'gemini-3.1-flash-image',
+      kind: 'gemini', model: 'gemini-nano-banana-2.1',
     });
     // [2026-10-10] 프로·2.5는 화면에서 내려가 옛 값이 들어와도 나노바나나2 경로로 간다
     for (const retired of ['nano-banana', 'nano-banana-pro']) {
       expect(resolveStylePreviewEngine(retired)).toMatchObject({
-        engine: 'nano-banana-2', kind: 'gemini', model: 'gemini-3.1-flash-image',
+        engine: 'nano-banana-2', kind: 'gemini', model: 'gemini-nano-banana-2.1',
       });
     }
   });

@@ -116,7 +116,7 @@ describe('legacy image model generator guard', () => {
 
     expect(axiosPostMock).toHaveBeenCalledTimes(1);
     expect(String(axiosPostMock.mock.calls[0][0]))
-      .toContain('/models/gemini-3.1-flash-image:generateContent');
+      .toContain('/models/gemini-nano-banana-2.1:generateContent');
     expect(fetchSpy).not.toHaveBeenCalled();
   });
 
