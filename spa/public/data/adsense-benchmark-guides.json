@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-19T06:18:57.293Z",
+  "generatedAt": "2026-10-19T14:18:01.937Z",
   "rules": "2026-10-10-traffic",
   "model": "sonnet",
   "guides": [
@@ -297,80 +297,6 @@
       "provider": "claude"
     },
     {
-      "id": "5a9120baaeb0c672",
-      "urls": [
-        "https://123.dbswjd11.com/181",
-        "https://someofthem.tistory.com/84",
-        "https://sooahealth.com/entry/%EB%88%84%EB%A6%AC%ED%98%B8-%EA%B4%80%EB%A0%A8%EC%A3%BC-%ED%95%9C%ED%99%94%EC%97%90%EC%96%B4%EB%A1%9C%EC%8A%A4%ED%8E%98%EC%9D%B4%EC%8A%A4%EB%B6%80%ED%84%B0-AP%EC%9C%84%EC%84%B1-%EB%B9%84%EC%B8%A0%EB%A1%9C%ED%85%8C%ED%81%AC%EA%B9%8C%EC%A7%80-%ED%95%B5%EC%8B%AC-%EC%A0%95%EB%A6%AC",
-        "https://coolmool-economy.tistory.com/entry/nuri-related-stocks-hanwha-kai-vitzro-financial-comparison",
-        "https://money-phd.com/1566"
-      ],
-      "guide": {
-        "direction": "① 자동완성에 '한화시스템', 'ap위성' 등 구체적 종목명이 들어 있어, 누리호 관련주를 종목별로 찾아보는 수요다. ② 고수 글들은 한화에어로스페이스·AP위성·비츠로테크·KAI·비츠로넥스텍은 다뤘지만 '한화시스템' 단독 분석은 제목에서 비어 있다. ③ 종목별 누리호 사업 역할과 실적을 비교한 표를 주면 다음 발사 소식 때도 다시 찾는다.",
-        "searchTargets": [
-          "누리호관련주식",
-          "누리호 관련주 한화시스템",
-          "누리호 관련주 ap위성",
-          "누리호 관련주 비츠로테크"
-        ],
-        "mustInclude": [
-          "누리호 5차 발사 성공 및 초소형군집위성 5기 교신 성공 결과(확인 필요: 과학기술정보통신부·항우연 발표)",
-          "한화에어로스페이스·한화시스템·AP위성·비츠로테크의 누리호 사업 내 구체적 역할 비교표(확인 필요: 각사 IR·공시)",
-          "발사 당일 관련주 주가 변동(확인 필요: 증권거래소 시세)",
-          "다음 단계(15기 위성 사출 등) 일정이 관련주에 미칠 영향(확인 필요: 항우연·과기정통부 공지)"
-        ],
-        "mustAvoid": [
-          "천리안·다누리 등 다른 발사체·위성 사업 관련주와 혼동하지 말 것"
-        ],
-        "checkBefore": [
-          "누리호 5차 발사 및 위성 교신 세부 결과 - 과학기술정보통신부·한국항공우주연구원(KARI) 공식 발표 확인",
-          "한화시스템 등 각 종목의 누리호 사업 내 실제 역할 - 기업 공시·IR 자료 확인",
-          "발사 당일 주가 변동 수치 - 증권거래소 시세 확인"
-        ]
-      },
-      "at": "2026-10-13T04:40:18.450Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "2d42f3a322329c29",
-      "urls": [
-        "https://nada0303.tistory.com/41",
-        "https://blogger00220.tistory.com/entry/%EC%83%9D%ED%99%9C%EA%B8%88%EC%9C%B5-%EC%8B%A4%EC%A0%84-36%ED%8E%B8-%EC%97%B0%EA%B8%88%EC%A0%80%EC%B6%95-IRP-ISA%E2%80%A6-%EB%82%B4-%EC%97%B0%EA%B8%88-%ED%86%B5%EC%9E%A5-%EA%B3%BC%EC%97%B0-%EB%AC%B4%EC%8A%A8-%EC%88%9C%EC%84%9C%EB%A1%9C-%EA%B9%A8%EC%95%BC-%EC%84%B8%EA%B8%88%EC%9D%84-%EB%8D%9C-%EB%82%BC%EA%B9%8C",
-        "https://lifekeep.kr/irp-retirement-pension-withdrawal/",
-        "https://economicstory1.tistory.com/entry/%ED%87%B4%EC%A7%81%EA%B8%88-%EC%9D%B4%EB%A0%87%EA%B2%8C-%EB%B0%9B%EC%9C%BC%EB%A9%B4-%EC%84%B8%EA%B8%88-40-%EA%B9%8E%EC%95%84%EC%A4%98%EC%9A%94-%EC%9D%BC%EC%8B%9C%EA%B8%88-vs-IRP-2026",
-        "https://donsunbae.com/entry/%EC%97%B0%EA%B8%88%EC%A0%80%EC%B6%95%EA%B3%BC-IRP-%EC%B0%A8%EC%9D%B4-%E2%80%94-%EC%88%9C%EC%84%9C%EB%8C%80%EB%A1%9C-%EA%B0%80%EC%9E%85%ED%95%98%EB%A9%B4-%EC%84%B8%EA%B8%88-%EC%B5%9C%EB%8C%80-148%EB%A7%8C-5%EC%B2%9C%EC%9B%90-%EB%8F%8C%EB%A0%A4%EB%B0%9B%EB%8A%94%EB%8B%A4",
-        "https://namuh9.tistory.com/entry/%ED%87%B4%EC%A7%81%EC%97%B0%EA%B8%88-%EC%88%98%EB%A0%B9-%EB%B0%A9%EB%B2%95-%EC%B4%9D%EC%A0%95%EB%A6%AC%E3%85%A3IRP-%EC%A1%B0%EA%B1%B4%EB%B6%80%ED%84%B0-%EC%84%B8%EA%B8%88%EA%B9%8C%EC%A7%80"
-      ],
-      "guide": {
-        "direction": "irp 중도인출 사유, irp 중도인출 결혼, irp중도인출시 세금 검색은 '내 상황에서 지금 뺄 수 있는지, 세금 얼마 떼이는지'를 알고 싶어서 들어온다. 고수 글들은 연금저축·IRP 수령방법과 세액공제 환급액 계산에 집중했고, 중도인출 사유별 요건·서류와 중도인출 대 해지 세금 차이는 비어 있다. 사유별 조건표와 세율 비교표를 넣으면 끝까지 읽고 서류 챙기러 다시 찾아온다.",
-        "searchTargets": [
-          "irp 중도인출 사유",
-          "irp중도인출시 세금",
-          "irp 중도인출 해지 차이",
-          "irp 중도인출 결혼"
-        ],
-        "mustInclude": [
-          "IRP 중도인출 법정사유 목록(주택구입·전세자금·요양·개인회생·혼인 등, 확인 필요: 국세청 공지)",
-          "사유별 필요서류(등기부등본·요양진단서·법원 결정문 등, 확인 필요: 원문)",
-          "중도인출시 기타소득세율 vs 정상 수령시 연금소득세율 비교표",
-          "중도인출(일부)과 해지(전액+계좌폐쇄)의 세금·절차 차이"
-        ],
-        "mustAvoid": [
-          "연금저축과 IRP의 중도인출 조건을 동일하게 설명(연금저축은 자유, IRP는 법정사유 제한)",
-          "중도인출(일부 인출)과 전액 해지를 같은 세금으로 혼동",
-          "혼인 사유 인출 가능 여부를 확정된 것처럼 단정"
-        ],
-        "checkBefore": [
-          "국세청·고용노동부 공지에서 IRP 중도인출 법정사유 최신 목록(혼인·출산 포함 여부) 확인",
-          "중도인출시 과세방식(기타소득세 vs 연금소득세) 확인"
-        ]
-      },
-      "at": "2026-10-13T04:40:18.450Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
       "id": "262a875aec4ff316",
       "urls": [
         "https://onblanc.com/kospi-foreign-selling-199-trillion/",
@@ -447,72 +373,6 @@
       "provider": "claude"
     },
     {
-      "id": "a91e2a465a3c30a3",
-      "urls": [
-        "https://hini0610.tistory.com/28",
-        "https://21psps-3.tistory.com/19",
-        "https://gilwon.tistory.com/158",
-        "https://muramara.com/entry/%EC%A3%BC%ED%83%9D%EC%B2%AD%EC%95%BD-%ED%95%B4%EC%A7%80-%EC%9C%84%EC%95%BD%EA%B8%88-%EB%B6%88%EC%9D%B4%EC%9D%B5%EA%B3%BC-%EC%86%8C%EB%93%9D%EA%B3%B5%EC%A0%9C-%EC%B6%94%EC%A7%95-%EC%B4%9D%EC%A0%95%EB%A6%AC-2026",
-        "https://sosojin.tistory.com/entry/%EC%B2%AD%EC%95%BD%ED%86%B5%EC%9E%A5%EC%97%90-%ED%95%9C-%EB%B2%88%EC%97%90-%EB%AA%B0%EC%95%84-%EB%84%A3%EC%96%B4%EB%8F%84-%EC%86%8C%EB%93%9D%EA%B3%B5%EC%A0%9C%EA%B0%80-%EB%90%A0%EA%B9%8C"
-      ],
-      "guide": {
-        "direction": "'기준'·'대상'·'확인방법'을 찾는 검색자는 내가 공제 대상인지와 실제로 얼마를 돌려받는지가 궁금해 '청약통장 소득공제 조건'을 대표 검색어로 잡는다. 고수 글들은 해지 추징·몰아넣기 가능여부·청년주택드림 조건을 이미 다뤘으니, 무주택확인서 등록·홈택스 확인방법처럼 실행 단계로 채워야 한다. 독자는 연봉·납입액별 공제 한도표와 신청 순서를 보려 다시 찾는다.",
-        "searchTargets": [
-          "청약통장 소득공제 조건",
-          "청약통장 소득공제 등록",
-          "청약통장 소득공제 확인방법",
-          "청약통장 소득공제 추징"
-        ],
-        "mustInclude": [
-          "월 25만원·연 300만원 한도의 40%인 120만원 공제액 계산",
-          "무주택확인서 제출·등록 절차(국세청 홈택스/은행 창구)",
-          "배우자 명의 청약통장은 공제 불가, 본인 명의·세대주 조건(확인 필요: 국세청)",
-          "5년 내 해지 시 추징세율과 예외사유",
-          "국세청 홈택스에서 소득공제 적용 여부 확인하는 방법"
-        ],
-        "mustAvoid": [
-          "배우자 공제를 '부부합산 공제 가능'처럼 오해시키는 서술",
-          "소득공제와 청년주택드림 청약통장 우대금리를 같은 혜택으로 섞어 설명",
-          "해지 추징을 모든 해지 사례에 동일 적용되는 것처럼 일반화(예외사유 존재)"
-        ],
-        "checkBefore": [
-          "국세청 연말정산 소득공제 요건(무주택 세대주, 총급여 기준)을 국세청 공식 안내로 확인",
-          "5년 내 해지 추징 예외 사유(해외이주, 사망 등)를 주택도시기금 공식 공지로 확인"
-        ]
-      },
-      "at": "2026-10-13T04:40:18.450Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "c9188ecf3d3d036e",
-      "urls": [
-        "https://dailylucky1208.com/394",
-        "https://ese.pensionhub.co.kr/25",
-        "https://ongidream.tistory.com/101",
-        "https://wisehub.kr/%ed%95%9c%ec%a7%84-%ec%86%8c%ec%83%81%ea%b3%b5%ec%9d%b8-%eb%ac%bc%eb%a5%98-%ec%a7%80%ec%9b%90%ec%82%ac%ec%97%85-%ec%84%a0%ec%a0%95-%ec%84%b1%ec%9e%a5-%ec%82%ac%eb%8b%a4%eb%a6%ac-%eb%ac%bc%eb%a5%98/",
-        "https://ongidream.tistory.com/89",
-        "https://tistorying333.tistory.com/entry/2026%EB%85%84-%EC%86%8C%EC%83%81%EA%B3%B5%EC%9D%B8-%EC%8A%A4%EB%A7%88%ED%8A%B8%EC%83%81%EC%A0%90-%EC%A7%80%EC%9B%90%EC%82%AC%EC%97%85-%EB%86%93%EC%B9%98%EC%A7%80-%EB%A7%88%EC%84%B8%EC%9A%94"
-      ],
-      "guide": {
-        "direction": "자동완성이 없어 소재 제목 핵심어(가사간병방문지원사업 신청대상/비용)로 대표 검색어를 잡는다. 다른 고수 글은 전혀 다른 지원사업을 다뤄 이 주제 자체가 비어 있는 자리이며, 24시간과 27시간의 본인부담금 차액을 숫자로 보여주는 비교표가 핵심 차별점이다. 신청 대상 조건과 접수처까지 정리해야 실제 신청 전 다시 찾아본다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "신청 대상 조건(기준 중위소득 기준, 가구 특성 등) (확인 필요: 보건복지부 공지)",
-          "월 24시간 vs 27시간 본인부담금 차액 비교표 (확인 필요: 복지부/시군구 공지)",
-          "신청 방법 및 접수처(읍면동 주민센터/복지로)"
-        ],
-        "mustAvoid": [],
-        "checkBefore": [
-          "보건복지부/복지로 공식 공지에서 2026년 기준 중위소득 및 시간별 본인부담금 확인",
-          "거주 지자체 공고문에서 신청기간·접수처 확인"
-        ]
-      },
-      "at": "2026-10-13T04:40:18.450Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
       "id": "b40d465319f2f817",
       "urls": [
         "https://chicha14.com/%ec%86%8c%ec%83%81%ea%b3%b5%ec%9d%b8-%eb%b0%94%ec%9a%b0%ec%b2%98-%ec%8b%a0%ec%b2%ad/",
@@ -537,79 +397,6 @@
         ],
         "checkBefore": [
           "소상공인24(sbiz24.kr) 공식 공고"
-        ]
-      },
-      "at": "2026-10-13T04:40:18.450Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "4ad22749e9d1c8b0",
-      "urls": [
-        "https://bangulnote.com/entry/youth-future-savings-2nd-apply/",
-        "https://dbswjd11.com/383",
-        "https://expert-j.com/entry/%EC%B2%AD%EB%85%84%EB%AF%B8%EB%9E%98%EC%A0%81%EA%B8%88-2%EC%B0%A8-%EC%8B%A0%EC%B2%AD%EB%B0%A9%EB%B2%95-%EC%B4%9D%EC%A0%95%EB%A6%AC-%EA%B0%80%EC%9E%85-%EC%A1%B0%EA%B1%B4%C2%B7%EC%8B%A0%EC%B2%AD%EA%B8%B0%EA%B0%84%C2%B7%EA%B8%B0%EC%97%AC%EA%B8%88",
-        "https://sdjoon.tistory.com/665",
-        "https://jelly-story.tistory.com/73",
-        "https://financialfragrance.com/%ec%b2%ad%eb%85%84%eb%af%b8%eb%9e%98%ec%a0%81%ea%b8%88-2%ec%b0%a8-%eb%82%98%ec%9d%b4-%ea%b8%b0%ec%a4%80-1991%eb%85%84%ec%83%9d-%ea%b0%80%ec%9e%85-%ea%b0%80%eb%8a%a5-%ec%83%9d%eb%85%84%ec%9b%94/"
-      ],
-      "guide": {
-        "direction": "검색자는 '내가 신청할 수 있는지'와 '마감까지 며칠 남았는지'를 가장 궁금해해 '청년미래적금 마감일'을 대표 검색어로 잡는다. 고수 글들은 나이·소득 조건과 일반형·우대형 수치를 이미 다뤘지만, 1991년생 생년월일 경계처럼 '내 조건이 어디 해당하는지' 바로 확인하는 표는 비어 있다. 신청기간 D-day 계산과 은행 앱별 신청 순서를 함께 주면 끝까지 읽고 다시 찾는다.",
-        "searchTargets": [
-          "청년미래적금 마감일"
-        ],
-        "mustInclude": [
-          "2차 신청 마감일 10월 16일 명시 및 남은 일수 계산",
-          "일반형 6% vs 우대형 12% 조건 비교표",
-          "나이·소득 기준별 일반형/우대형 구분 기준",
-          "은행 앱 신청 단계별 순서",
-          "1991년생 등 생년월일 경계 기준(확인 필요: 금융위원회 공지)"
-        ],
-        "mustAvoid": [
-          "청년도약계좌 등 유사 정부 적금과 조건 혼동",
-          "특정 은행 상품을 금리 높다고 단정적으로 추천",
-          "우대형 조건을 충족 안 해도 되는 것처럼 단순화"
-        ],
-        "checkBefore": [
-          "정확한 마감 시각(자정/영업시간)을 운영 은행 공식 공지에서 확인",
-          "소득 조건 산정 기준(전년도/연간)을 금융위원회 자료에서 확인"
-        ]
-      },
-      "at": "2026-10-13T04:40:18.450Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "24692416f93c6445",
-      "urls": [
-        "https://realmoneyshot.kr/health-insurance-voluntary-continuation-vs-regional-premium-2026/",
-        "https://iiisssuuu.tistory.com/144",
-        "https://all-worldstory.tistory.com/82",
-        "https://hjwdf.tistory.com/entry/11%EC%9B%94-%EA%B1%B4%EA%B0%95%EB%B3%B4%ED%97%98%EB%A3%8C-%EC%98%A4%EB%A5%B4%EB%8A%94-%EC%9D%B4%EC%9C%A0-%EC%A7%80%EC%97%AD%EA%B0%80%EC%9E%85%EC%9E%90-%EC%A0%95%EA%B8%B0-%EC%A1%B0%EC%A0%95-%EC%A4%84%EC%9D%B4%EB%8A%94-%EB%B0%A9%EB%B2%95%EA%B9%8C%EC%A7%80",
-        "https://supercoms.tistory.com/entry/%EA%B1%B4%EA%B0%95%EB%B3%B4%ED%97%98-%EB%B3%B4%ED%97%98%EB%A3%8C-%EC%A1%B0%EC%A0%95-%EC%8B%A0%EC%B2%AD-%EC%86%8C%EB%93%9D-%EC%A4%84%EC%97%88%EB%8A%94%EB%8D%B0-%EB%B0%A9%EB%B2%95-%EC%9E%88%EB%82%98%EC%9A%94-%EC%9D%B4-%EB%B0%A9%EB%B2%95%EC%9C%BC%EB%A1%9C-%EC%8B%A0%EC%B2%AD%ED%95%98%EB%A9%B4-%EC%A1%B0%EC%A0%95-%EA%B0%80%EB%8A%A5%ED%95%98%EB%8B%A4"
-      ],
-      "guide": {
-        "direction": "① 자동완성은 '건강보험료 오르는 이유/기준'에 몰려 있어, 퇴사자가 아니라 11월 정기조정으로 보험료가 갑자기 오른 직장인·은퇴자가 원인을 찾는 수요가 크다. ② 고수 글들은 계산기 오차·조정 신청·일반 계산법을 다뤘지만, 월급 400만 원 기준 임의계속가입과 지역가입자 중 어느 쪽이 유리한지 공시가 6.29억 분기점으로 쪼갠 글은 없다. ③ 독자는 본인 공시가·월급을 넣어 바로 판단할 수 있는 분기표를 보려고 다시 찾아온다.",
-        "searchTargets": [
-          "건강보험료 오르는 이유",
-          "건강보험료 오르는 기준",
-          "건강보험료 오름"
-        ],
-        "mustInclude": [
-          "11월 정기조정에서 전년도 소득·재산 반영 시점과 인상 시작월",
-          "월급 400만 원 기준 임의계속가입 vs 지역가입자 보험료 비교표",
-          "공시가 6.29억이 재산 보험료 부과 분기점이 되는 기준(확인 필요: 건강보험공단 고시)",
-          "임의계속가입 신청 기한·방법(확인 필요: 건강보험공단 공식 안내)",
-          "보험료 조정 신청 가능한 소득감소 사유와 서류"
-        ],
-        "mustAvoid": [
-          "임의계속가입 자격을 지역가입자 전환 자격과 혼동해서 안내",
-          "2025년 이전 공시가·보험료 기준을 2026년 기준인 것처럼 쓰는 것",
-          "특정 소득·재산 구간을 개인 사례처럼 단정하는 것"
-        ],
-        "checkBefore": [
-          "국민건강보험공단 공식 사이트에서 2026년 11월 정기조정 기준과 임의계속가입 신청기한 확인",
-          "공시가 6.29억 기준이 어떤 고시(재산보험료 등급표)에서 나온 수치인지 확인"
         ]
       },
       "at": "2026-10-13T04:40:18.450Z",
@@ -795,145 +582,6 @@
       "provider": "claude"
     },
     {
-      "id": "bd2cef9b2d1551f1",
-      "urls": [
-        "https://2.happyfactorygraphic.com/entry/%EA%B0%80%EC%9D%84-%EB%B3%B4%EC%9D%BC%EB%9F%AC-%EC%BC%9C%EA%B8%B0-%EC%A0%84-%EA%BC%AD-%ED%95%A0-%EC%A0%90%EA%B2%80-5%EA%B0%80%EC%A7%80-%EB%82%9C%EB%B0%A9%EB%B9%84-%EC%A4%84%EC%9D%B4%EB%8A%94-%EC%8B%A4%EC%A0%84-%EC%88%9C%EC%84%9C",
-        "https://thinkingatelier.tistory.com/entry/%EB%B3%B4%EC%9D%BC%EB%9F%AC-%EC%99%B8%EC%B6%9C%EB%AA%A8%EB%93%9C-%EA%B0%80%EC%8A%A4%EB%B9%84%EF%BD%9C%EC%99%B8%EC%B6%9C%ED%95%A0-%EB%95%8C-%EB%81%84%EB%8A%94-%EA%B2%8C-%EC%8C%80%EA%B9%8C-%EC%9B%90%EB%A3%B8-%EB%82%9C%EB%B0%A9%EB%B9%84-%EC%A4%84%EC%9D%B4%EB%8A%94-%EC%84%A4%EC%A0%95-%EA%B8%B0%EC%A4%80",
-        "https://gaon1015.com/entry/%EB%B3%B4%EC%9D%BC%EB%9F%AC-%EC%99%B8%EC%B6%9C%EB%AA%A8%EB%93%9C-%EB%82%9C%EB%B0%A9%EB%B9%84-%EC%A4%84%EC%9D%B4%EB%8A%94-%EC%A7%91%EB%B3%84-%EC%84%A4%EC%A0%95",
-        "https://benefitscoop.tistory.com/entry/%EA%B2%A8%EC%9A%B8%EC%B2%A0-%EB%82%9C%EB%B0%A9%EB%B9%84-%EC%A0%88%EC%95%BD%EB%B0%A9%EB%B2%95%EF%BD%9C%EB%8F%84%EC%8B%9C%EA%B0%80%EC%8A%A4-%EC%9A%94%EA%B8%88%C2%B7%EB%B3%B4%EC%9D%BC%EB%9F%AC-%EA%B0%80%EC%8A%A4%EB%B9%84-%EC%A4%84%EC%9D%B4%EB%8A%94-10%EA%B0%80%EC%A7%80"
-      ],
-      "guide": {
-        "direction": "자동완성을 보면 사람들은 외출모드를 켜두는 것과 끄는 것 중 가스비가 더 싼지, 동파·고장 걱정 없이 얼마나 오래 켜둬도 되는지를 가장 궁금해한다. 기존 글들은 외출모드 vs 끄기 비교와 절약법 10가지를 다뤘지만 '집 비우는 시간대별로 언제 끄고 언제 외출모드를 쓸지' 표는 비어 있다. 가을철 첫 가동 전 점검 5가지와 외출모드 설정 기준표를 함께 주면 겨울까지 다시 찾아볼 이유가 생긴다.",
-        "searchTargets": [
-          "보일러 외출모드 가스비",
-          "보일러 외출모드 가동",
-          "보일러 외출모드 동파방지",
-          "보일러 외출모드 고장"
-        ],
-        "mustInclude": [
-          "외출시간별 외출모드 vs 끄기 가스비 비교표 (확인 필요: 도시가스사·보일러 제조사 공지)",
-          "가을철 보일러 첫 가동 전 점검 5가지 체크리스트",
-          "동파방지를 위한 외출모드 최소 유지 온도 기준 (확인 필요: 제조사 매뉴얼)",
-          "외출모드 장시간 가동 시 고장·소음 발생 대응 순서"
-        ],
-        "mustAvoid": [
-          "보일러 브랜드별 외출모드 작동 방식 차이를 무시하고 일반화",
-          "외출모드와 동파방지모드를 같은 기능으로 혼동해 설명"
-        ],
-        "checkBefore": [
-          "보일러 제조사(경동나비엔 등) 공식 매뉴얼의 외출모드 작동 기준 확인",
-          "지역 도시가스사 공지에서 최신 가스요금 기준 확인"
-        ]
-      },
-      "at": "2026-10-13T04:40:18.450Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "186e26461b8fd1b6",
-      "urls": [
-        "https://acecomm.tistory.com/entry/%EB%86%80%EB%A9%B4%EB%AD%90%ED%95%98%EB%8B%8895-%EC%84%9C%EC%9A%B8%EA%B0%80%EC%9A%94%EC%A0%9C%EC%B0%B8%EA%B0%80%EC%9E%90-%EC%A0%95%EC%B2%B4-%EC%9D%B4%EC%86%8C%EB%9D%BC-%EA%B1%B0%EB%AF%B8-%EB%A6%AC%EC%8A%A4%ED%8A%B8-%EA%B2%B0%EA%B3%BC",
-        "https://yun11.tistory.com/entry/%EB%86%80%EB%A9%B4%EB%AD%90%ED%95%98%EB%8B%88-95-MBC-%EC%84%9C%EC%9A%B8%EA%B0%80%EC%9A%94%EC%A0%9C-%EC%B0%B8%EA%B0%80%EC%9E%90-%EC%A0%95%EC%B2%B4%EC%99%80-%EC%98%88%EC%84%A0-%EA%B2%B0%EA%B3%BC-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://yjfreelifestyle.tistory.com/entry/%EB%86%80%EB%A9%B4-%EB%AD%90%ED%95%98%EB%8B%88-%EC%84%9C%EC%9A%B8%EA%B0%80%EC%9A%94%EC%A0%9C-%EC%B0%B8%EA%B0%80%EC%9E%90-%EC%B4%9D%EC%A0%95%EB%A6%AC-95-%EC%84%9C%EC%9A%B8%EA%B0%80%EC%9A%94%EC%A0%9C-%ED%95%A9%EA%B2%A9%C2%B7%EB%B3%B4%EB%A5%98%C2%B7%ED%83%88%EB%9D%BD-%EA%B2%B0%EA%B3%BC-10%EC%9B%94-10%EC%9D%BC-%EA%B8%B0%EC%A4%80",
-        "https://www.uptoinfo.com/feeds/5051605999971737790/comments/default"
-      ],
-      "guide": {
-        "direction": "'참가자 정체'와 '합격·보류·탈락 결과'를 궁금해하는 검색이 많아 '놀면뭐하니95 서울가요제참가자 정체'를 대표 검색어로 잡는다. 총정리·결과·추리 각도는 고수 글들이 이미 썼지만, 이소라·거미 두 팀 명단별 결과를 회차 순서로 정리한 글은 비어 있다. 회차별 결과표와 정체 공개 시점을 담아야 다음 회차 때 재검색으로 돌아온다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "방영 회차와 날짜(확인 필요: MBC 공식 편성)",
-          "이소라 팀·거미 팀 참가자 명단과 합격·보류·탈락 결과표(확인 필요: 방송 내용)",
-          "정체가 공개된 참가자 실명과 공개 시점(확인 필요: 방송·공식 계정)",
-          "시청률 수치(확인 필요: 닐슨코리아)"
-        ],
-        "mustAvoid": [
-          "미확인 참가자 정체를 확정된 사실처럼 단정하지 않기"
-        ],
-        "checkBefore": [
-          "MBC 놀면뭐하니 공식 방송·유튜브에서 실제 합격·보류·탈락 결과 확인",
-          "참가자 정체 공개 여부를 공식 계정이나 기사로 재확인"
-        ]
-      },
-      "at": "2026-10-13T04:40:18.450Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "ceeba2213b3cd49c",
-      "urls": [
-        "https://tistorying333.tistory.com/entry/%EC%A0%95%EB%B6%80-%EC%B2%AD%EB%85%84%EC%A7%80%EC%9B%90%EA%B8%88-%EB%86%93%EC%B9%98%EB%A9%B4-%ED%9B%84%ED%9A%8C%ED%95%A0-%ED%95%B5%EC%8B%AC-%EC%A0%95%EB%B3%B4-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://kinghell.tistory.com/entry/%EC%A0%95%EB%B6%80-%EC%A7%80%EC%9B%90%EA%B8%88-%EA%B5%AD%EB%AF%BC%EB%B9%84%EC%84%9C-%EC%95%8C%EB%A6%BC-%EB%88%84%EB%9D%BD-%EB%B0%A9%EC%A7%80-%EC%B2%B4%ED%81%AC%EB%A6%AC%EC%8A%A4%ED%8A%B8-%EC%B1%84%EB%84%90%EB%B3%84-%EC%84%A4%EC%A0%95-%EC%98%A4%EB%A5%98-%EC%A0%90%EA%B2%80%EA%B3%BC-%EA%B0%80%EA%B5%AC%EC%9B%90-%EC%97%B0%EB%8F%99-%EC%88%98%EC%B9%99",
-        "https://edgeo.gong24.kr/52",
-        "https://inydle.tistory.com/entry/%EC%A0%95%EB%B6%80-%EC%9E%AC%EB%82%9C-%EC%A7%80%EC%9B%90%EA%B8%88-%ED%99%9C%EC%9A%A9-%EB%B0%A9%EB%B2%95%EA%B3%BC-%EC%A3%BC%EC%9D%98%EC%82%AC%ED%95%AD"
-      ],
-      "guide": {
-        "direction": "'10월 정부지원금'처럼 날짜가 붙은 검색은 '지금 신청 가능한 것'을 즉시 알고 싶어하는 수요라 대표 검색어로 잡는다. 경쟁 글은 '총정리'·'알림 체크리스트'·'요일별신청' 등 안내 방식만 다뤄 분야별(청년·출산·소상공인·창업·전기차·보청기) 10월 기준 비교는 비어 있다. 분야별 자격·금액·마감을 표로 묶고 마감 임박 항목을 따로 강조해야 재방문 이유가 생긴다.",
-        "searchTargets": [
-          "10월 정부지원금",
-          "청년 정부지원금",
-          "소상공인 정부지원금",
-          "창업 정부지원금"
-        ],
-        "mustInclude": [
-          "2026년 10월 기준 신청 가능한 지원금 분야별(청년/출산/소상공인/창업/전기차/보청기) 목록 (확인 필요: 복지로·정부24)",
-          "분야별 신청 자격·지원금액·신청기간 비교표",
-          "국민비서 알림 신청 방법(누락 방지)",
-          "신청 접수처(복지로/정부24/지자체) 안내",
-          "예산 소진 임박·마감 가까운 지원금 별도 강조"
-        ],
-        "mustAvoid": [
-          "지난 연도 지원금 정보를 2026년 현재 가능한 것처럼 혼동해서 쓰지 않기",
-          "지자체별로 조건이 다른 지원금을 전국 공통처럼 일반화하지 않기",
-          "전기차 보조금처럼 예산 소진 시 조기 마감되는 항목을 상시 가능한 것처럼 안내하지 않기"
-        ],
-        "checkBefore": [
-          "복지로·정부24 공식 사이트에서 2026년 10월 현재 신청 가능한 지원금 목록 확인",
-          "전기차 보조금 등 예산 소진 여부는 각 지자체 최신 공고에서 확인"
-        ]
-      },
-      "at": "2026-10-13T04:40:18.450Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "658e730a29710bc0",
-      "urls": [
-        "https://ilpaclf.linkistat.com/116",
-        "https://annas.co.kr/%ec%a7%80%ea%b2%8c%ec%b0%a8-%ec%9e%90%ea%b2%a9%ec%a6%9d/",
-        "https://seniorguides.tistory.com/25",
-        "https://sy1s.tistory.com/entry/%EC%A7%80%EA%B2%8C%EC%B0%A8-%EC%9E%90%EA%B2%A9%EC%A6%9D-%EC%B7%A8%EB%93%9D-%EB%B0%A9%EB%B2%95-%EC%B4%9D%EC%A0%95%EB%A6%AC-3%ED%86%A4-%EB%AF%B8%EB%A7%8C-%EA%B5%90%EC%9C%A1%C2%B7%EA%B8%B0%EB%8A%A5%EC%82%AC-%EC%8B%9C%ED%97%98-%EC%B0%A8%EC%9D%B4%EC%99%80-2026-%EB%B9%84%EC%9A%A9"
-      ],
-      "guide": {
-        "direction": "자동완성이 전부 '지게차 자격증'이므로 실제 수요는 요양보호사가 아니라 비용·필기·대구 학원 등 지게차 쪽이다. 고수 글은 '3톤 미만 교육·기능사 차이'까지만 다뤘고 지역별 학원비 비교, 필기 합격선, 실기 코스 구성은 비어 있다. 필기·실기 평가표와 발급 절차를 정리해 주면 재방문한다.",
-        "searchTargets": [
-          "지게차 자격증 비용",
-          "3톤 지게차 자격증",
-          "지게차 자격증 필기",
-          "대구 지게차 자격증"
-        ],
-        "mustInclude": [
-          "3톤 미만 조종교육이수증과 지게차운전기능사의 응시자격·비용 차이표(확인 필요: 한국산업인력공단 공고)",
-          "필기시험 과목 수·합격 기준 점수(확인 필요: Q-net)",
-          "실기시험 주행·화물 적재 코스 평가 항목(확인 필요: Q-net 실기 안내)",
-          "대구 등 지역별 학원 교육비·기간 비교 예시(확인 필요: 해당 학원 공식 홈페이지)",
-          "조종사면허 발급 절차와 제출 서류(확인 필요: 관할 시·군·구청)"
-        ],
-        "mustAvoid": [
-          "지게차운전기능사와 3톤 미만 소형 조종교육이수증을 같은 자격증처럼 혼용",
-          "특정 학원 가격을 확정 사실처럼 단정",
-          "요양보호사 자격증 정보를 무리하게 같은 글에 엮기"
-        ],
-        "checkBefore": [
-          "지게차운전기능사 필기·실기 시험 과목·일정: Q-net 공식 공고",
-          "3톤 미만 조종교육이수증 발급 요건: 관할 지자체 또는 교육기관 공지",
-          "지역별 학원 교육비·기간: 해당 학원 최신 공식 안내"
-        ]
-      },
-      "at": "2026-10-13T04:40:18.450Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
       "id": "10c08c62b857c35f",
       "urls": [
         "https://goodp7.tistory.com/entry/%EB%82%98%EB%A5%BC-%EC%B6%A9%EC%A0%84%ED%95%B4%EC%A4%98-%EC%A4%84%EA%B1%B0%EB%A6%AC-2%ED%9A%8C%EB%B6%80%ED%84%B0-9%ED%9A%8C%EA%B9%8C%EC%A7%80%ED%98%B8%EB%9E%91%EA%B3%BC-%EB%B3%B4%EB%B0%B0%EC%9D%98-%EC%82%AC%EB%9E%91",
@@ -959,38 +607,6 @@
         "checkBefore": [
           "정확한 총 회차수를 넷플릭스 공식 페이지에서 확인",
           "원작 유무 및 출연진 캐스팅을 공식 발표 자료에서 확인"
-        ]
-      },
-      "at": "2026-10-13T04:40:18.450Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "c5c13e71f9ac1542",
-      "urls": [
-        "https://jjyiu.tistory.com/entry/2027-%EC%B5%9C%EC%A0%80%EC%9E%84%EA%B8%88-%EC%8B%9C%EA%B8%89-1%EB%A7%8C700%EC%9B%90-%ED%99%95%EC%A0%95-%EC%9B%94%EA%B8%89%C2%B7%EC%A3%BC%ED%9C%B4%EC%88%98%EB%8B%B9%C2%B7%EC%97%B0%EB%B4%89-%ED%95%9C-%EB%B2%88%EC%97%90-%EA%B3%84%EC%82%B0%ED%95%98%EA%B8%B0",
-        "https://memo55445.tistory.com/135",
-        "https://hjwdf.tistory.com/entry/%ED%95%98%EB%A3%A8-4%EC%8B%9C%EA%B0%84-%EC%95%8C%EB%B0%94-%EC%9B%94%EA%B8%89-%EA%B3%84%EC%82%B0-2026-%EC%B5%9C%EC%A0%80%EC%9E%84%EA%B8%88-%EA%B8%B0%EC%A4%80-%EC%A3%BC%ED%9C%B4%EC%88%98%EB%8B%B9-%ED%8F%AC%ED%95%A8"
-      ],
-      "guide": {
-        "direction": "'하루 알바 급여'·'하루 알바 시간'으로 들어오는 사람은 짧은 교대 근무의 실수령액이 궁금해 이 검색어를 대표로 잡는다. 기존 고수 글은 월급·주휴수당 환산표를 다뤘지만 4·6·8시간 단위 하루치 금액표는 비어 있다. 시급 1만700원 기준 시간대별 하루 급여표를 넣으면 재방문이 유도된다.",
-        "searchTargets": [
-          "하루 알바 급여",
-          "하루 알바 시간",
-          "쿠팡 하루 알바 급여"
-        ],
-        "mustInclude": [
-          "시급 1만700원 기준 4·6·8시간 근무 시 하루 실수령액 표",
-          "월급 2,236,300원(209시간 기준) 계산 과정",
-          "주휴수당 포함 여부와 계산 공식",
-          "적용 시작일 2027년 1월 1일(확인 필요: 고용노동부 공식 발표)"
-        ],
-        "mustAvoid": [
-          "특정 플랫폼(쿠팡 등) 실제 지급액과 최저임금 계산액을 동일시",
-          "2026년 기존 최저임금 수치와 혼동"
-        ],
-        "checkBefore": [
-          "최저임금액·시행일을 고용노동부 공식 고시로 확인"
         ]
       },
       "at": "2026-10-13T04:40:18.450Z",
@@ -1301,137 +917,6 @@
       "provider": "claude"
     },
     {
-      "id": "f13692503cca02fa",
-      "urls": [
-        "https://noticanbutido.tistory.com/entry/hyperlipidemia-symptoms-and-best-foods",
-        "https://zsewqzsewq.tistory.com/272",
-        "https://hyperlipidemia.tistory.com/entry/%F0%9F%9B%92-%EC%A3%BC%EB%A7%90-%EC%9E%A5%EB%B3%B4%EA%B8%B0-%ED%98%88%EA%B4%80-%EA%B1%B4%EA%B0%95-%EC%A7%80%ED%82%A4%EB%8A%94-%EB%A7%88%ED%8A%B8-%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88-%EA%B0%80%EC%9D%B4%EB%93%9C"
-      ],
-      "guide": {
-        "direction": "콜레스테롤 낮추는 음식·방법을 검색하는 사람은 '당장 뭘 먹고 뭘 끊어야 하는지'와 'LDL·HDL 수치 기준'을 궁금해한다. 고수 글은 음식 7가지·마트 장보기 각도를 이미 썼으므로, LDL/HDL 수치별 관리 기준표와 약 없이 낮추는 방법 vs 약 복용 기준 비교로 차별화한다. 콜레스테롤 수치 구간별 대처 체크리스트를 넣으면 재방문 유도가 가능하다.",
-        "searchTargets": [
-          "콜레스테롤 낮추는 음식",
-          "LDL 콜레스테롤 낮추는 방법",
-          "콜레스테롤 낮추는 HDL",
-          "콜레스테롤 낮추는 약"
-        ],
-        "mustInclude": [
-          "LDL·HDL·총콜레스테롤 정상/경계/위험 수치 구간표 (확인 필요: 대한심장학회 또는 질병관리청 자료)",
-          "콜레스테롤 낮추는 음식 7가지와 각 음식의 작용 기전(불포화지방산, 식이섬유 등)",
-          "약(스타틴 등) 복용이 필요한 수치 기준 (확인 필요: 의료기관 가이드라인)",
-          "피해야 할 음식·식습관 리스트"
-        ],
-        "mustAvoid": [
-          "특정 영양제·제품을 콜레스테롤 '치료제'처럼 단정하는 표현"
-        ],
-        "checkBefore": [
-          "LDL·HDL 정상 수치 기준을 대한심장학회·질병관리청 공식 자료에서 확인",
-          "콜레스테롤 약 복용 권고 기준을 의료기관 가이드라인에서 확인"
-        ]
-      },
-      "at": "2026-10-13T04:40:18.450Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "6767507b10aa7b8b",
-      "urls": [
-        "https://shinnaburo.tistory.com/entry/korea-daily-news-october-12-2026",
-        "https://money-phd.com/1587",
-        "https://money-phd.com/1586",
-        "https://shinnaburo.tistory.com/entry/korea-daily-news-october-11-2026",
-        "https://shinnaburo.tistory.com/entry/korea-daily-news-october-8-2026",
-        "https://shinnaburo.tistory.com/entry/korea-daily-news-october-7-2026"
-      ],
-      "guide": {
-        "direction": "이런 일자별 종합 요약은 포괄 제목으로는 검색 유입이 약하고, 실제 유입은 그날 다뤄진 개별 이슈명(예: 이진숙 과방위 제척안, 2026 국정감사 일정) 검색에서 들어온다. 고수 글들이 이미 '종합 요약'과 '개별 이슈 단독 글'을 둘 다 쓰고 있으므로, 이 글은 10월 12일 이슈들을 시간순 흐름과 서로의 연결고리로 정리해 요약글 하나로 여러 이슈를 찾는 독자를 붙잡는 방향이 비어 있다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "2026년 10월 12일 날짜를 제목·본문 상단에 명시",
-          "이진숙 과방위 제척안 가결 핵심 배경과 경위 (확인 필요: 원문 기사)",
-          "2026 국정감사 당일 주요 일정표 (확인 필요: 국회 공지)",
-          "전날(10월 11일) 이슈와의 연결 맥락 요약"
-        ],
-        "mustAvoid": [],
-        "checkBefore": [
-          "이진숙 과방위 제척안 가결 사실관계·날짜 - 원문 보도 확인",
-          "국정감사 일정 세부 - 국회 공식 공지 확인"
-        ]
-      },
-      "at": "2026-10-13T04:40:18.450Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "d2462915f1012cf2",
-      "urls": [
-        "https://work-booster.tistory.com/entry/2026-%EC%B2%AD%EB%85%84-%EB%B2%84%ED%8C%80%EB%AA%A9-%EC%A0%84%EC%84%B8%EC%9E%90%EA%B8%88%EB%8C%80%EC%B6%9C-%EC%A1%B0%EA%B1%B4-%EC%B4%9D%EC%A0%95%EB%A6%AC-%EC%97%B0-15-%EC%A0%80%EA%B8%88%EB%A6%AC-%EB%B3%B4%EC%A6%9D%EA%B8%88-80-%ED%95%9C%EB%8F%84-%EC%B9%98%ED%8A%B8%ED%82%A4-%F0%9F%8F%A0",
-        "https://richclip.tistory.com/entry/2026-%EC%B2%AD%EB%85%84-%EB%B2%84%ED%8C%80%EB%AA%A9-%EC%A0%84%EC%84%B8%EC%9E%90%EA%B8%88%EB%8C%80%EC%B6%9C-%EB%AC%B4%EC%A7%81%EC%9E%90-%EC%A1%B0%EA%B1%B4-%EC%97%B0-15-%EC%B5%9C%EC%A0%80-%EA%B8%88%EB%A6%AC-%EB%B0%8F-HUG-%EB%B3%B4%EC%A6%9D",
-        "https://orbitjournal.tistory.com/entry/%EC%A0%84%EC%84%B8%EC%9E%90%EA%B8%88%EB%8C%80%EC%B6%9C-%EA%B8%88%EB%A6%AC-%EB%B9%84%EA%B5%902026%EB%85%84-10%EC%9B%94-%EB%B2%84%ED%8C%80%EB%AA%A9%EC%A0%84%EC%84%B8%EC%9E%90%EA%B8%88%EB%8C%80%EC%B6%9C-vs-%EC%8B%9C%EC%A4%91%EC%9D%80%ED%96%89"
-      ],
-      "guide": {
-        "direction": "'청년버팀목대출 조건', 'hf 청년버팀목', 'hug 청년버팀목'이 함께 자동완성되는 건 독자들이 보증기관(HUG·HF)을 헷갈려 한다는 신호다. 고수 글들은 이미 '조건 총정리', '무직자 조건', '금리 비교' 각도를 다뤘으니, HUG와 HF 보증 중 어느 쪽을 선택해야 하는지 비교하는 각도가 비어있다. 독자는 본인 소득구간별 금리와 보증기관별 조건을 표로 대입해보려 다시 찾아온다.",
-        "searchTargets": [
-          "청년버팀목대출 조건",
-          "hf 청년버팀목",
-          "hug 청년버팀목",
-          "청년버팀목대출 금리"
-        ],
-        "mustInclude": [
-          "HUG·HF·서울보증 보증기관별 조건 차이 비교표",
-          "소득구간별 금리 구간표(확인 필요: 주택도시기금 공식 공고)",
-          "무주택·소득·자산 기준 및 청년 연령 요건(확인 필요: 주택도시기금)",
-          "보증금 80% 한도 적용 조건 및 예외 사례"
-        ],
-        "mustAvoid": [
-          "일반 버팀목전세자금대출(청년 전용 아님)과 조건·금리 혼동",
-          "디딤돌대출 등 주택구입자금대출과 전세자금대출을 혼동"
-        ],
-        "checkBefore": [
-          "2026년 기준 금리·한도 변경 여부: 주택도시기금 공식 홈페이지",
-          "HUG·HF 보증기관별 세부 조건 차이: 각 기관 공식 공고"
-        ]
-      },
-      "at": "2026-10-13T04:40:18.450Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "6b6961fe7677038d",
-      "urls": [
-        "https://kwinner.starkjk.com/144",
-        "https://mulnamuu.tistory.com/193",
-        "https://onsum.kr/entry/2027-%EC%97%B0%EB%A7%90%EC%A0%95%EC%82%B0-%EA%B0%84%EC%86%8C%ED%99%94%EC%84%9C%EB%B9%84%EC%8A%A4-%EC%99%84%EB%B2%BD-%EA%B0%80%EC%9D%B4%EB%93%9C%EF%BD%9C%EC%A1%B0%ED%9A%8C-%EC%95%88-%EB%90%98%EB%8A%94-%EC%9E%90%EB%A3%8C%C2%B7%EB%88%84%EB%9D%BD-%ED%95%AD%EB%AA%A9%C2%B7%EC%B6%94%EA%B0%80%EC%84%9C%EB%A5%98-%ED%95%B4%EA%B2%B0%EB%B0%A9%EB%B2%95"
-      ],
-      "guide": {
-        "direction": "자동완성은 경정청구보다 '간소화서비스 자료조회·기간·의료비'에 몰려 있어, 검색자는 먼저 간소화 자료에서 뭘 놓쳤는지부터 확인하려 들어온다. 경쟁 글은 이미 간소화 누락 점검표와 추가서류 해결법을 다뤘으니, 놓친 공제를 찾은 뒤 경정청구로 환급받는 연결 흐름(환급기간·신청경로)이 비어 있는 각도다. 독자는 누락 항목 체크리스트와 경정청구 가능 기간을 다시 확인하러 재방문한다.",
-        "searchTargets": [
-          "연말정산 간소화 자료 조회",
-          "연말정산 간소화 서비스 기간",
-          "연말정산 간소화 의료비",
-          "연말정산간소화서비스"
-        ],
-        "mustInclude": [
-          "간소화 자료에서 자주 빠지는 공제(의료비·월세 등) 목록(확인 필요: 홈택스 공지)",
-          "경정청구 가능 기간(법정 신고기한 후 일정 연수)(확인 필요: 국세청 홈택스)",
-          "올해 간소화서비스 제공·일괄제공 신청 일정(확인 필요: 홈택스 공지)",
-          "홈택스 경정청구 신청 경로(로그인→신고/납부→경정청구) 순서",
-          "경정청구 환급금 지급까지 걸리는 기간(확인 필요: 국세청 안내)"
-        ],
-        "mustAvoid": [
-          "경정청구와 종합소득세 신고를 같은 절차처럼 혼동",
-          "매년 바뀌는 간소화서비스 제공 기간을 지난 연도 수치로 그대로 인용"
-        ],
-        "checkBefore": [
-          "올해 간소화서비스 제공 시작일·일괄제공 신청 기간 - 국세청 홈택스 공지",
-          "경정청구 법정 기간 변경 여부 - 국세청 공식 안내"
-        ]
-      },
-      "at": "2026-10-13T04:40:18.450Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
       "id": "713093383df947d2",
       "urls": [
         "https://salespeople.tistory.com/entry/%EB%85%B8%EB%A0%B9%EC%97%B0%EA%B8%88-%EC%96%BC%EB%A7%88",
@@ -1496,76 +981,6 @@
         "checkBefore": [
           "보건복지부 2026년 기초연금 선정기준액 공고",
           "소득인정액 산정방식 공식 자료 (보건복지부·국민연금공단)"
-        ]
-      },
-      "at": "2026-10-13T11:28:09.769Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "9fd2bc0690a64d10",
-      "urls": [
-        "https://kooltip.com/gyeonggi-youth-basic-income-payment-date/",
-        "https://fh.bluemoha.com/entry/%EA%B2%BD%EA%B8%B0%EB%8F%84-%EC%B2%AD%EB%85%84%EA%B8%B0%EB%B3%B8%EC%86%8C%EB%93%9D-%EC%A7%80%EA%B8%89%EC%A0%9C%EC%99%B8%EC%A7%80%EC%97%AD-%EC%98%88%EC%99%B8%EC%82%AC%ED%95%AD-%ED%99%95%EC%9D%B8%EB%B0%A9%EB%B2%95-%EC%A0%84%ED%99%94%EB%B2%88%ED%98%B8-%EC%83%81%EB%8B%B4%EC%A0%84%ED%99%94-%ED%99%95%EC%9D%B8",
-        "https://lmn.bluemoha.com/entry/%EA%B2%BD%EA%B8%B0%EB%8F%84-%EC%B2%AD%EB%85%84%EA%B8%B0%EB%B3%B8%EC%86%8C%EB%93%9D-%EA%B0%81%EC%A2%85-%EC%A1%B0%EA%B1%B4%EB%93%A4-%EC%A7%80%EA%B8%89%EC%8B%A0%EC%B2%AD-%EB%A7%88%EA%B0%90%EC%9D%BC-%EC%98%88%EC%99%B8%EC%82%AC%ED%95%AD-%EC%A1%B0%ED%9A%8C-%ED%99%95%EC%9D%B8%EB%B0%A9%EB%B2%95",
-        "https://lmn.bluemoha.com/entry/%EA%B2%BD%EA%B8%B0%EB%8F%84-%EC%B2%AD%EB%85%84%EA%B8%B0%EB%B3%B8%EC%86%8C%EB%93%9D-3%EB%B6%84%EA%B8%B0-4%EB%B6%84%EA%B8%B0-%EC%8B%A0%EC%B2%AD%EC%A1%B0%EA%B1%B4-%EC%A7%80%EA%B8%89%EC%9D%BC-%ED%95%9C%EB%B2%88%EC%97%90-%EC%A0%95%EB%A6%AC"
-      ],
-      "guide": {
-        "direction": "'지급일'·'안들어왔을 때' 검색자는 당장 돈이 들어왔는지 확인하려는 사람이므로 '경기 청년기본소득 지급일'을 대표 검색어로 잡는다. 고수 글들은 지급제외지역·조건 정리는 이미 다뤘으니, 10월20일 당일 '안들어왔을 때 확인 순서(앱 확인→상담전화→재발급 신청)'를 비어 있는 각도로 채운다. 독자는 사용처 목록과 문의전화번호를 다시 찾으러 재방문하므로 표로 정리한다.",
-        "searchTargets": [
-          "경기 청년기본소득 지급일",
-          "경기 청년기본소득 3분기",
-          "경기청년기본소득 사용처",
-          "경기청년기본소득 조건"
-        ],
-        "mustInclude": [
-          "3분기 지급 시작일 10월20일 (확인 필요: 경기도청/청년기본소득 포털 공지)",
-          "지역화폐 사용처 범위(소상공인 매장 가능, 대형마트·온라인 불가 등) (확인 필요: 지역화폐 앱 공지)",
-          "지급 안 됐을 때 확인 순서: 지역화폐 앱 조회→고객센터 상담전화→지급제외 여부 확인",
-          "신청 대상 나이·거주기간 조건 요약표 (확인 필요: 경기도청 공고)",
-          "지급제외지역 및 예외사항 처리 방법"
-        ],
-        "mustAvoid": [
-          "일부 시군 지급제외 사례를 전체 경기도로 일반화",
-          "신청 마감일을 추측해 확정적으로 단정"
-        ],
-        "checkBefore": [
-          "경기도청 또는 청년기본소득 공식 홈페이지에서 10월20일 지급 확정 여부 확인",
-          "지역화폐 앱 공지사항에서 사용처 제한 최신 내용 확인",
-          "지급제외지역 상담전화번호 최신본 확인"
-        ]
-      },
-      "at": "2026-10-13T11:28:09.769Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "8aabaec4a0869e51",
-      "urls": [
-        "https://blogger00220.tistory.com/entry/%EC%83%9D%ED%99%9C%EA%B8%88%EC%9C%B5-%EC%8B%A4%EC%A0%84-38%ED%8E%B8-%EA%B5%AD%EB%AF%BC%EC%97%B0%EA%B8%88-%EB%8B%B9%EA%B2%A8-%EB%B0%9B%EC%9D%84%EA%B9%8C-%EB%AF%B8%EB%A4%84-%EB%B0%9B%EC%9D%84%EA%B9%8C-%EC%A1%B0%EA%B8%B0%EC%88%98%EB%A0%B9-vs-%EC%97%B0%EA%B8%B0%EC%97%B0%EA%B8%88-%EC%86%90%EC%9D%B5%EB%B6%84%EA%B8%B0%EC%A0%90-%EC%99%84%EB%B2%BD-%ED%95%B4%EB%B6%80",
-        "https://da.tipmany.com/entry/%EA%B5%AD%EB%AF%BC%EC%97%B0%EA%B8%88%EC%9C%A0%EC%A1%B1%EC%97%B0%EA%B8%88%EC%88%98%EB%A0%B9%EC%A1%B0%EA%B1%B4",
-        "https://coolmool-economy.tistory.com/entry/national-pension-deferral-break-even-survivor-benefit"
-      ],
-      "guide": {
-        "direction": "'연기연금 계산기'·'신청 방법' 검색자는 당겨 받을지 미룰지 숫자로 결론을 보고 싶어하므로 '국민연금 연기연금 계산기'를 대표 검색어로 잡는다. 고수 글들은 가산율과 유족연금 차이는 다뤘지만 조기수령과 나란히 놓은 손익분기점 연차표는 비어 있다. 독자는 자신의 예상수령액을 대입할 손익분기점 표를 다시 찾으러 재방문한다.",
-        "searchTargets": [
-          "국민연금 연기연금 장점",
-          "국민연금 연기연금 계산기",
-          "국민연금 연기연금 신청 방법"
-        ],
-        "mustInclude": [
-          "조기수령 1년당 감액률(확인 필요: 국민연금공단 고시, 통상 6%대)",
-          "연기연금 가산율 7.2%(1개월당 0.6%×12개월) 구조 설명",
-          "조기수령 vs 연기연금 손익분기점 연차 비교표(몇 년 후 역전되는지)",
-          "연기연금 신청 기한 및 신청 방법(최대 5년, 1회 신청 등) (확인 필요: 공단 안내)",
-          "유족연금 수급권과 연기연금 선택 시 영향 차이"
-        ],
-        "mustAvoid": [
-          "조기수령 신청기한과 연기연금 신청기한을 같은 것으로 혼동"
-        ],
-        "checkBefore": [
-          "국민연금공단 '내 연금 알아보기'에서 조기수령/연기연금 최신 감액·가산율 확인",
-          "유족연금 지급률 및 청구기한 최신 공단 안내 확인"
         ]
       },
       "at": "2026-10-13T11:28:09.769Z",
@@ -1884,33 +1299,6 @@
       "provider": "claude"
     },
     {
-      "id": "3a01775da8b66a9d",
-      "urls": [
-        "https://acecomm.tistory.com/entry/%EC%83%9D%EC%83%9D%EC%A0%95%EB%B3%B4-%ED%95%9C%EC%9A%B0%EA%B3%B0%ED%83%955000%EC%9B%90-%EB%B0%A9%EA%B0%80%EB%84%A4%ED%95%9C%EC%9A%B0%EC%A0%95%EC%9C%A1%EC%8B%9D%EB%8B%B9-%EC%9C%84%EC%B9%98-%EA%B0%80%EA%B2%A9-%EC%A0%95%EB%B3%B4",
-        "https://shinnaburo.tistory.com/entry/bangane-hanwoo-gomtang-price-guide"
-      ],
-      "guide": {
-        "direction": "'생생정보 한우곰탕5000원'을 그대로 대표 검색어로 잡는다. 방송을 본 사람이 궁금한 건 정확한 위치와 그 가격에 뭐가 나오는지이기 때문이다. 고수 글들은 이미 위치·가격을 다뤘으니, 영업시간·웨이팅·주차·메뉴 구성표처럼 '가서 어떻게 먹을지'를 상세히 정리해줘야 차별화된다.",
-        "searchTargets": [
-          "생생정보 한우곰탕5000원"
-        ],
-        "mustInclude": [
-          "방가네한우정육식당 정확한 주소와 찾아가는 길 (확인 필요: 매장 정보)",
-          "한우곰탕 5000원 메뉴 구성(1++ 한우 포함 여부, 양, 반찬)",
-          "방송 방영일(10월 12일 KBS2TV 생생정보)과 방송 내용 요약"
-        ],
-        "mustAvoid": [
-          "5000원 가격이 상시인지 한시 이벤트인지 확인 없이 '늘 이 가격'처럼 쓰는 것"
-        ],
-        "checkBefore": [
-          "현재도 5000원 가격이 유지되는지 - 매장 공식 정보나 최근 후기로 확인"
-        ]
-      },
-      "at": "2026-10-13T11:28:09.769Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
       "id": "91c4ec9f18cd52e1",
       "urls": [
         "https://come-on-yo.tistory.com/entry/%ED%81%B4%EB%A1%9C%EB%93%9C-%EB%AC%B4%EB%A3%8C-%EC%9C%A0%EB%A3%8C-%EC%B0%A8%EC%9D%B4-%EC%9A%94%EA%B8%88%EC%A0%9C-%EB%B9%84%EA%B5%90",
@@ -1938,40 +1326,6 @@
         "checkBefore": [
           "Anthropic 공식 요금제 페이지에서 현재 가격·한도 수치 확인",
           "결제·환불 정책 공지(공식 고객센터) 확인"
-        ]
-      },
-      "at": "2026-10-13T11:28:09.769Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "178a7068bf448a18",
-      "urls": [
-        "https://info-myview.co.kr/2026-basic-pension-income-eligibility/",
-        "https://lim7.tistory.com/151"
-      ],
-      "guide": {
-        "direction": "자동완성이 전부 '자동차' 관련(기준·리스·가액·2대·배기량)인 걸 보면, 실제 검색자는 수급자격 전체보다 '내 차가 소득인정액에 어떻게 잡히는지'가 가장 궁금하다. 대표 검색어는 '기초연금 수급자격 자동차 기준'. 경쟁 글은 소득인정액·재산 계산법 총론에 머물러 있어, 리스차·2대 보유·배기량별 처리라는 구체 각도가 비어 있다. 사례별 계산표를 넣으면 '내 경우는?'을 확인하러 재방문한다.",
-        "searchTargets": [
-          "기초연금 수급자격 자동차 기준",
-          "기초연금 수급자격 자동차 리스",
-          "기초연금 수급자격 자동차 2대",
-          "기초연금 수급자격 자동차 배기량"
-        ],
-        "mustInclude": [
-          "자동차 가액 산정 방식과 소득인정액 반영 기준 (확인 필요: 보건복지부 2026 공고)",
-          "리스 차량일 경우 소유 여부·가액 처리 방법 (확인 필요: 국민연금공단 안내)",
-          "차량 2대 이상 보유 시 합산·예외 처리 기준 (확인 필요)",
-          "배기량·차종(고급차 등)에 따른 기준 차이 (확인 필요)",
-          "사례별(1대/2대/리스) 소득인정액 계산 예시표"
-        ],
-        "mustAvoid": [
-          "기초생활수급자 등 다른 복지제도의 자동차 기준과 섞어서 서술",
-          "2025년 이전 기준을 2026년 기준으로 잘못 표기"
-        ],
-        "checkBefore": [
-          "보건복지부·국민연금공단 공식 공고에서 2026년 자동차 가액 산정 기준 확인",
-          "기초연금 홈페이지 재산기준 세부 지침에서 리스·2대 보유 처리 규정 확인"
         ]
       },
       "at": "2026-10-13T11:28:09.769Z",
@@ -2265,40 +1619,6 @@
       "provider": "claude"
     },
     {
-      "id": "b19a99c328bb4d35",
-      "urls": [
-        "https://da.tipmany.com/entry/%EC%A6%9D%EC%97%AC%EC%84%B8-%EB%A9%B4%EC%A0%9C-%ED%95%9C%EB%8F%84%EC%95%A1-%EB%B3%80%EA%B2%BD",
-        "https://comstory50s.tistory.com/entry/child-apartment-gift-tax-allowance-2026"
-      ],
-      "guide": {
-        "direction": "①자동완성이 '자녀 아파트 증여세'에 쏠려 있으므로 '자녀 아파트 증여세 계산'을 대표 검색어로 잡아 실제 세액 산출을 보여줘야 한다. ②고수 글은 5천만원·1억5천만원 같은 면제 한도 자체는 다뤘지만 아파트 가액 적용 사례별 계산과 신고 절차는 비어 있다. ③공제액별 계산 예시표와 신고 기한·방법을 담으면 재검색 없이 끝까지 읽힌다.",
-        "searchTargets": [
-          "자녀 아파트 증여세 면제",
-          "자녀 아파트 증여세 계산",
-          "자녀 아파트 증여세 신고방법"
-        ],
-        "mustInclude": [
-          "2026년 기준 증여세 공제 한도 표 (확인 필요: 국세청 최신 고시)",
-          "아파트 시가 산정 기준(공시가·실거래가 적용 우선순위)",
-          "증여세 신고 기한(증여일로부터 3개월 이내) 및 신고처",
-          "공제 적용 후 과세표준·세율 계산 예시",
-          "증여세와 아파트 취득세(별도 부과)를 나눈 비교"
-        ],
-        "mustAvoid": [
-          "특정 유명인·재벌가 증여 사례와 혼동시키는 서술",
-          "혼인·출산 증여재산공제처럼 개정된 제도를 구법 기준으로 설명",
-          "증여와 저가 매매(양도)를 같은 세율로 오인시키는 표현"
-        ],
-        "checkBefore": [
-          "2026년 귀속 증여세 공제 한도 개정 여부 확인 (국세청·기획재정부 공지)",
-          "혼인·출산 증여재산공제 시행 여부와 한도액 확인 (국세청 홈택스)"
-        ]
-      },
-      "at": "2026-10-13T11:28:09.769Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
       "id": "18f7673bd741c61e",
       "urls": [
         "https://theworldroad.tistory.com/117",
@@ -2585,40 +1905,6 @@
       "provider": "claude"
     },
     {
-      "id": "1bf9a74d0d8e5a1a",
-      "urls": [
-        "https://comme-baleine.tistory.com/entry/%EC%A2%85%EB%B6%80%EC%84%B8-1%EC%A3%BC%ED%83%9D%EC%9E%90-%EA%B3%BC%EC%84%B8%EB%8C%80%EC%83%81-12%EC%96%B5-%EA%B8%B0%EC%A4%80-%EA%B3%84%EC%82%B0%EB%B0%A9%EB%B2%95%C2%B7%EB%82%A9%EB%B6%80%EA%B8%B0%ED%95%9C%C2%B7%EB%B6%80%EB%B6%80-%EA%B3%B5%EB%8F%99%EB%AA%85%EC%9D%98%EA%B9%8C%EC%A7%80",
-        "https://comstory50s.tistory.com/entry/joint-ownership-property-tax-comparison-2026"
-      ],
-      "guide": {
-        "direction": "검색자는 '종부세 줄이려고 공동명의 바꿔야 하나'를 판단하려 들어온다. 고수 글들은 12억 기준·특례 설명과 공동명의 비교는 이미 다뤘지만, '어느 경우에 특례가 유리하고 어느 경우에 공동명의가 유리한지'를 가르는 기준(고령자·장기보유공제 적용 여부, 집값대)은 비어 있다. 결정표와 신청 기한을 같이 주면 저장·재방문이 생긴다.",
-        "searchTargets": [
-          "부부 공동명의 종부세 특례",
-          "부부 공동명의 종부세 계산",
-          "부부공동명의 종부세 비교",
-          "부부 공동명의 종부세 특례 신청"
-        ],
-        "mustInclude": [
-          "1세대1주택자 특례 신청기간 매년 9.16~9.30, 국세청 홈택스 신청 (확인 필요: 국세청 공지)",
-          "단독명의 12억 공제 vs 공동명의 각자 9억 공제(합산효과) 비교표",
-          "공동명의 선택 시 고령자·장기보유 세액공제 적용 불가 여부 (확인 필요: 국세청 안내)",
-          "과세기준일 매년 6월 1일 기준 소유자 확정",
-          "공동명의 2주택자 종부세 계산 시 각자 지분별 합산 방식"
-        ],
-        "mustAvoid": [
-          "1세대1주택 특례와 일반 공동명의 9억 공제를 혼동해서 비교표에 넣기",
-          "2026년 세율·공제금액 변경을 확정 사실처럼 쓰기"
-        ],
-        "checkBefore": [
-          "국세청 홈택스 1세대1주택 특례신청 기간·방법 공지",
-          "기획재정부 세법개정안 중 종부세 공제금액 2026년 적용 여부"
-        ]
-      },
-      "at": "2026-10-13T11:28:09.769Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
       "id": "cb8e8e0340927a7d",
       "urls": [
         "https://dinorich830.tistory.com/308",
@@ -2669,100 +1955,6 @@
         ],
         "checkBefore": [
           "외출모드와 실내온도 유지 중 어느 쪽이 절약되는지의 근거 (보일러 제조사 공식 가이드 또는 에너지공단 자료)"
-        ]
-      },
-      "at": "2026-10-13T11:28:09.769Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "58b6f7964223ff6d",
-      "urls": [
-        "https://memo55445.tistory.com/136",
-        "https://essay7989.tistory.com/entry/%EC%B6%9C%EC%82%B0%ED%9C%B4%EA%B0%80-%EA%B8%89%EC%97%AC-%EC%8B%A0%EC%B2%AD%EB%B0%A9%EB%B2%95-90%EC%9D%BC-%EC%9C%A0%EA%B8%89-%EC%B6%9C%EC%82%B0%ED%9C%B4%EA%B0%80-%EC%9B%94-210%EB%A7%8C%EC%9B%90"
-      ],
-      "guide": {
-        "direction": "검색자는 출산휴가가 끝난 뒤 신청기한(12개월)을 놓치지 않는 법과 급여 금액(월 210만원)을 가장 궁금해한다. 고수 글은 신청방법·90일·210만원 각도를 이미 다뤘지만, 기한이 임박했거나 신청을 놓쳤을 때의 대처법은 비어 있다. 신청기한·서류 체크리스트를 넣으면 다시 찾아본다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "신청기한: 휴가 종료 후 12개월 이내",
-          "신청방법: 고용보험 홈페이지(또는 고용센터) 절차",
-          "90일 유급 출산휴가 기간 안내",
-          "월 210만원 급여 금액(확인 필요: 고용보험 공지)"
-        ],
-        "mustAvoid": [
-          "육아휴직급여와 출산휴가급여를 혼동해서 서술"
-        ],
-        "checkBefore": []
-      },
-      "at": "2026-10-13T11:28:09.769Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "113d78bcd04da655",
-      "urls": [
-        "https://mozzi-devlog.tistory.com/589",
-        "https://tali.kr/real-estate-commission"
-      ],
-      "guide": {
-        "direction": "부동산 중개수수료는 매매·전세·월세 금액을 넣고 바로 요율을 알고 싶어하는 '계산기' 수요가 가장 크고, 부가세·현금영수증·카드결제 같은 결제 단계 조건까지 함께 검색한다. 고수 글들은 계산법과 협상법, 거래유형별 요율표까지 다뤘지만 부가세 포함 여부·현금영수증 발급 의무·지원금 제도는 비어 있다. 거래유형별 요율표와 협상 체크리스트를 넣으면 계산 끝낸 독자가 결제 직전 다시 찾아온다.",
-        "searchTargets": [
-          "부동산 중개수수료 계산기",
-          "부동산 중개수수료율",
-          "부동산 중개수수료 부가세",
-          "부동산 중개수수료 네고"
-        ],
-        "mustInclude": [
-          "거래유형별(매매/전세/월세) 중개수수료 요율표 (확인 필요: 국토교통부/지자체 고시)",
-          "중개수수료 부가세 10% 별도 여부 및 세금계산서·현금영수증 발급 기준",
-          "법정 상한요율 내 협상(네고) 가능 범위와 한도초과 수수료 구분",
-          "중개수수료 카드결제 가능 여부 (확인 필요: 중개업소별 상이)",
-          "청년·신혼부부 등 중개수수료 지원제도 존재 여부 (확인 필요: 지자체 공고)"
-        ],
-        "mustAvoid": [
-          "법정 상한요율을 넘는 '네고'를 유도하는 듯한 표현(불법 수수료 오인 소지)",
-          "양도소득세·취득세 등 다른 부동산 세금과 혼동",
-          "지역별 요율 차이를 무시하고 전국 단일 수치로 일반화"
-        ],
-        "checkBefore": [
-          "최신 공인중개사법 시행규칙상 중개수수료 상한요율표 (국토교통부/시·도 공고)",
-          "부가가치세 과세 여부 및 현금영수증 발급 의무 (국세청 안내)",
-          "지자체별 중개수수료 지원사업 운영 여부 (해당 지자체 공고)"
-        ]
-      },
-      "at": "2026-10-13T11:28:09.769Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "4b240b4a3cde2e89",
-      "urls": [
-        "https://edget.gong24.kr/56",
-        "https://kittyoppa.com/120"
-      ],
-      "guide": {
-        "direction": "자동완성은 '가족관계증명서'가 아니라 '인감증명서 인터넷발급'에 몰려있다. '왜 안되는지'와 '개인·법인 차이'를 찾는 사람이 많은데, 고수 글은 발급불가 이유+위임장만 다뤘다. 용도별 인정 여부 표와 대리발급 준비물 체크리스트를 넣으면 체류시간이 늘어난다.",
-        "searchTargets": [
-          "인감증명서 인터넷발급 안됨",
-          "개인인감증명서 인터넷발급",
-          "법인인감증명서 인터넷 발급",
-          "인감증명서 인터넷발급 용도"
-        ],
-        "mustInclude": [
-          "개인 인감증명서는 정부24에서 전자본인서명확인서로 대체되며 원본 인감증명서 자체는 인터넷발급 불가(확인 필요: 정부24 공지)",
-          "법인 인감증명서는 인터넷발급 전면 불가, 등기소 방문 필수(확인 필요: 대법원 인터넷등기소)",
-          "대리인 발급 시 필요 서류(위임장, 대리인 신분증, 인감도장 등) 목록(확인 필요: 정부24 안내)",
-          "정부24 모바일 앱에서도 인감증명서 원본 발급은 안 되고 전자본인서명확인서만 가능(확인 필요)"
-        ],
-        "mustAvoid": [
-          "가족관계증명서와 인감증명서를 같은 글에서 혼용 설명 - 발급 가능 여부가 완전히 다름",
-          "'인터넷발급 가능'이라고 단정 - 전자본인서명확인서와 인감증명서 원본은 다른 문서",
-          "법인 관련 안내에서 세무사·법무사 대리발급 사설 서비스처럼 보이는 서술"
-        ],
-        "checkBefore": [
-          "정부24 공식 사이트에서 전자본인서명확인서 발급 절차·조건 최신 확인",
-          "대법원 인터넷등기소에서 법인인감증명서 발급 절차 확인"
         ]
       },
       "at": "2026-10-13T11:28:09.769Z",
@@ -2913,35 +2105,6 @@
         "checkBefore": [
           "인터넷 발급이 실제 무료인지, 수수료 600원이 어떤 경우에 적용되는지 (자동차365 공식 공지 확인)",
           "정부24에서도 자동차등록증 발급이 가능한지 여부 (정부24 공식 사이트 확인)"
-        ]
-      },
-      "at": "2026-10-13T19:51:08.302Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "73a6a83734d613a9",
-      "urls": [
-        "https://good.lifeup329.com/entry/%EA%B0%80%EC%A1%B1%EB%8F%8C%EB%B4%84%EC%B2%AD%EB%85%84-%EC%9E%90%EA%B8%B0%EB%8F%8C%EB%B4%84%EB%B9%84-%EC%A4%91%EC%9C%84%EC%86%8C%EB%93%9D-150-%EC%A1%B0%EA%B1%B4-%ED%8C%90%EC%A0%95-%EB%B0%8F-%EC%8B%A0%EC%B2%AD-%EC%9E%90%EA%B2%A9-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://2.happyfactorygraphic.com/entry/%EC%84%9C%EC%9A%B8-%EA%B0%80%EC%A1%B1%EB%8F%8C%EB%B4%84%EC%B2%AD%EB%85%84-%EC%9E%90%EA%B8%B0%EB%8F%8C%EB%B4%84%EB%B9%84-200%EB%A7%8C%EC%9B%90-%EC%A1%B0%EA%B1%B4%EA%B3%BC-%EC%8B%A0%EC%B2%AD-5%EB%8B%A8%EA%B3%84"
-      ],
-      "guide": {
-        "direction": "① '중위소득 150% 조건 판정'은 자기 가구가 지원 대상인지 가구원수별 기준액을 확인하려는 검색이라 대표 검색어로 잡는다. ② 고수 글이 총정리와 서울형 200만원·5단계를 다뤘으니, 전국 공통 사업과 서울시 사업의 금액·대상 차이를 비교표로 채우는 자리가 비어 있다. ③ 가구원수별 중위소득 150% 기준표와 신청 서류 체크리스트를 넣으면 독자가 자기 기준을 확인하러 다시 찾는다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "중위소득 150% 가구원수별 기준금액표 (확인 필요: 보건복지부 2026 공고)",
-          "자기돌봄비 지급액 (확인 필요: 서울시 200만원 vs 전국 사업 금액)",
-          "신청 대상 연령 기준 (확인 필요: 공고문)",
-          "신청 기관 및 방법 (읍면동 주민센터·복지로)",
-          "신청 필요 서류 체크리스트 (확인 필요: 공고문)"
-        ],
-        "mustAvoid": [
-          "서울시 사업(200만원)과 전국 보건복지부 사업의 금액·대상을 같은 것처럼 섞어 쓰기",
-          "중위소득 150% 기준을 추정치로 확정 수치처럼 단정하기"
-        ],
-        "checkBefore": [
-          "보건복지부 가족돌봄청년 지원사업 공고(복지로)",
-          "서울시 가족돌봄청년 자기돌봄비 사업 공고(서울시 복지정책과)"
         ]
       },
       "at": "2026-10-13T19:51:08.302Z",
