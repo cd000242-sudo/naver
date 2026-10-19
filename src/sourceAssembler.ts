@@ -1974,6 +1974,13 @@ export async function collectTopArticleFullTexts(
         await runRound(secondRound);
         logger(`[심층 리서치] 2차 수집 ${parts.length - before}건 추가 (총 ${parts.length}건 · ${totalChars.toLocaleString()}자)`);
       }
+    } else if (extraQueries.length > 0) {
+      // [2026-10-20 실측] 13건·40,000자 예산을 1차에서 다 쓰면 2차가 조용히 빠졌다 — 이유를 남긴다.
+      const why = stoppedByDeadline ? '시간 마감'
+        : parts.length >= FULLTEXT_MAX_SUCCESS ? `건수 상한 ${FULLTEXT_MAX_SUCCESS}건`
+        : totalChars >= FULLTEXT_TOTAL_BUDGET_CHARS ? `글자 예산 ${FULLTEXT_TOTAL_BUDGET_CHARS.toLocaleString()}자`
+        : '남은 시간 부족';
+      logger(`[심층 리서치] 2차 검색 생략 — ${why} (1차 ${parts.length}건 · ${totalChars.toLocaleString()}자)`);
     }
 
     if (stoppedByDeadline) {

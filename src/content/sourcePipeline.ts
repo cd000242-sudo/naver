@@ -37,7 +37,10 @@ export interface SourcePipelineMetrics {
  * "📚 자료 12건 · 확인된 사실 7 · 단일 출처 4". Empty for URL/paraphrase mode (no research round ran).
  */
 export function formatResearchStatsLine(m: Pick<SourcePipelineMetrics, 'acceptedSources' | 'corroboratedFacts' | 'singleSourceFacts' | 'usedStructured'>): string {
-  if (!m.usedStructured || m.acceptedSources <= 0) return '';
+  // [2026-10-20 실측] 앱의 키워드 흐름은 자료를 legacy-bundle 문자열로 넘겨 usedStructured=false 다 — 그래도 리서치
+  //   요약은 돈다(corroborated=30 single_source=12 실측). 모드가 아니라 "교차 확인 결과가 있는가"로 판단한다.
+  //   URL(원문) 모드는 리서치 라운드가 없어 0·0 → 빈 문자열.
+  if (m.acceptedSources <= 0 || m.corroboratedFacts + m.singleSourceFacts <= 0) return '';
   return `📚 자료 ${m.acceptedSources}건 · 확인된 사실 ${m.corroboratedFacts} · 단일 출처 ${m.singleSourceFacts}`;
 }
 

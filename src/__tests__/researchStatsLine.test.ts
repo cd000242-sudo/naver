@@ -31,6 +31,13 @@ describe('prepareSourceMaterial — 리서치 지표(A5)', () => {
     const line = formatResearchStatsLine({ acceptedSources: 12, corroboratedFacts: 7, singleSourceFacts: 4, usedStructured: true } as any);
     expect(line).toBe('📚 자료 12건 · 확인된 사실 7 · 단일 출처 4');
   });
+
+  it('[2026-10-20 실측 회귀] 앱 키워드 흐름(legacy-bundle, usedStructured=false)에서도 교차 확인 결과가 있으면 한 줄을 낸다', () => {
+    const line = formatResearchStatsLine({ acceptedSources: 10, corroboratedFacts: 30, singleSourceFacts: 12, usedStructured: false } as any);
+    expect(line).toBe('📚 자료 10건 · 확인된 사실 30 · 단일 출처 12');
+    // 교차 확인 결과가 전혀 없으면(원문 모드) 여전히 비어 있다.
+    expect(formatResearchStatsLine({ acceptedSources: 1, corroboratedFacts: 0, singleSourceFacts: 0, usedStructured: false } as any)).toBe('');
+  });
 });
 
 describe('배선(소스 가드)', () => {
