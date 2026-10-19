@@ -4,6 +4,8 @@
 // ═══════════════════════════════════════════════════════════════════
 
 // ✅ renderer.ts의 전역 변수/함수 참조 (인라인 빌드에서 동일 스코프)
+import { readManualCtaText, readManualCtaLink, captureRendererPublicationScope, resolveRendererPublicationScope, resolveRendererPreviousPostPayload } from '../utils/previousPostScope.js';
+import { selectPreviousPost } from '../../shared/previousPostPolicy.js';
 import { readSemiAutoEditorDraft } from './tailUIUtils.js';
 import { describeAccountStop, extractAccountStopCode, requiresAccountStop, stopsAllAccounts } from '../../automation/publishFailureClassifier.js';
 import { toCollectedImagePreviews } from './collectedImagePreview.js';
@@ -191,66 +193,21 @@ function applyManualTitleOverrideForPublish(structuredContent: any, manualTitle?
   structuredContent.titleCandidates = [{ text: title, score: 100, reasoning: '사용자 지정 제목' }];
 }
 
-function normalizePreviousPostCategoryForPublish(value: any): string {
-  return String(value || '').replace(/\s+/g, '').toLowerCase();
-}
-
-function shouldAutoLinkPreviousPostForMode(contentMode?: string): boolean {
-  return ['seo', 'homefeed', 'custom', 'business', 'affiliate', 'mate'].includes(String(contentMode || 'seo'));
-}
-
-function findPreviousPostForPublish(contentMode?: string, categoryName?: string): { title?: string; url?: string } {
-  if (!shouldAutoLinkPreviousPostForMode(contentMode)) return {};
-
-  const categoryKey = normalizePreviousPostCategoryForPublish(
-    categoryName ||
-    UnifiedDOMCache.getRealCategoryName?.() ||
-    UnifiedDOMCache.getRealCategory?.() ||
-    ''
-  );
-  if (!categoryKey) return {};
-
-  let posts: any[] = [];
+function readSelectedPreviousPostForPublish(contentMode?: string, _categoryName?: string): { title?: string; url?: string; selection?: 'auto' | 'manual'; requestedUrl?: string } {
+  if (!['seo', 'homefeed', 'custom', 'business', 'affiliate', 'mate'].includes(String(contentMode || 'seo'))) return {};
+  const selected = (window as any).selectedPreviousPost || {};
+  const requestedUrl = String(selected.publishedUrl || selected.url || (window as any).previousPostUrl || '').trim();
+  const selection = requestedUrl ? 'manual' : 'auto';
   try {
-    posts = loadGeneratedPosts() || [];
+    const chosen = selectPreviousPost(loadGeneratedPosts() || [], resolveRendererPublicationScope(), {
+      excludePostId: currentPostId || undefined,
+      requestedUrl: requestedUrl || undefined,
+    });
+    return { selection, requestedUrl: requestedUrl || undefined, ...(chosen ? { title: chosen.title || '이전 글 보기', url: chosen.publishedUrl } : {}) };
   } catch (error) {
     console.warn('[PreviousPost] failed to load generated posts:', error);
-    return {};
+    return { selection, requestedUrl: requestedUrl || undefined };
   }
-
-  const mode = String(contentMode || '').trim();
-  const published = posts
-    .filter((post: any) => String(post?.publishedUrl || '').trim().startsWith('http'))
-    .filter((post: any) => normalizePreviousPostCategoryForPublish(post?.category || post?.categoryName) === categoryKey);
-
-  const preferred = mode === 'affiliate'
-    ? published.filter((post: any) => post?.affiliateLink || post?.contentMode === 'affiliate' || post?.contentMode === 'shopping-connect')
-    : published;
-  const candidates = preferred.length > 0 ? preferred : published;
-
-  const chosen = candidates
-    .slice()
-    .sort((a: any, b: any) => {
-      const at = new Date(a?.publishedAt || a?.updatedAt || a?.createdAt || 0).getTime() || 0;
-      const bt = new Date(b?.publishedAt || b?.updatedAt || b?.createdAt || 0).getTime() || 0;
-      return bt - at;
-    })[0];
-
-  const url = String(chosen?.publishedUrl || '').trim();
-  if (!url) return {};
-  return { title: String(chosen?.title || '이전 글 보기').trim(), url };
-}
-
-function readSelectedPreviousPostForPublish(contentMode?: string, categoryName?: string): { title?: string; url?: string } {
-  const selected = (window as any).selectedPreviousPost || {};
-  const manualTitle = String((window as any).previousPostTitle || '').trim();
-  const manualUrl = String((window as any).previousPostUrl || '').trim();
-  const ctaText = String((document.getElementById('unified-cta-text') as HTMLInputElement | null)?.value || '').trim();
-  const ctaLink = String((document.getElementById('unified-cta-link') as HTMLInputElement | null)?.value || '').trim();
-  const url = String(selected.publishedUrl || selected.url || manualUrl || (/^https?:\/\//i.test(ctaLink) ? ctaLink : '')).trim();
-  const title = String(selected.title || manualTitle || ctaText.replace(/^[\s📖👉:\-]+/, '').trim() || '이전 글 보기').trim();
-  if (url) return { title, url };
-  return findPreviousPostForPublish(contentMode, categoryName);
 }
 
 function clonePublishRetryContent(content: any): any {
@@ -680,16 +637,18 @@ export async function handleFullAutoPublish(): Promise<void> {
     // ✅ CTA 자동 생성 (skipCta가 false인 경우만)
     let finalCtaText = '';
     let finalCtaLink = '';
+    let hasManualCta = false;
 
     if (!skipCta) {
       const generatedTitle = structuredContent.selectedTitle || title || '';
       const autoCTA = generateAutoCTA(generatedTitle, keywords);
 
       // 수동 입력된 CTA가 있으면 우선 사용
-      const manualCtaText = ctasUi[0]?.text || (document.getElementById('unified-cta-text') as HTMLInputElement)?.value?.trim();
-      const manualCtaLink = ctasUi[0]?.link || (document.getElementById('unified-cta-link') as HTMLInputElement)?.value?.trim();
+      const manualCtaText = ctasUi[0]?.text || readManualCtaText(document.getElementById('unified-cta-text') as HTMLInputElement | null, document.getElementById('unified-cta-link') as HTMLInputElement | null);
+      const manualCtaLink = ctasUi[0]?.link || readManualCtaLink(document.getElementById('unified-cta-link') as HTMLInputElement | null);
 
-      finalCtaText = manualCtaText || autoCTA.ctaText;
+      hasManualCta = Boolean(manualCtaLink);
+      finalCtaText = manualCtaText || (autoCTA.ctaLink ? autoCTA.ctaText : '');
       finalCtaLink = manualCtaLink || autoCTA.ctaLink;
 
       if (finalCtaLink) {
@@ -741,6 +700,7 @@ export async function handleFullAutoPublish(): Promise<void> {
       ? selectedShoppingSubImageMode === 'ai'
       : ((document.getElementById('unified-use-ai-image') as HTMLInputElement)?.checked ?? true);
     const formData = {
+      ...captureRendererPublicationScope({}),
       mode: 'full-auto',
       generator: UnifiedDOMCache.getGenerator(), // ✅ [2026-02-22 FIX] perplexity 지원
       targetAge: 'all',
@@ -767,9 +727,11 @@ export async function handleFullAutoPublish(): Promise<void> {
       placeAddress: pickedPlaceForPublish?.address || '',
       placePosition: pickedPlaceForPublish?.position || 'auto',
       places: pickedPlacesForPublish,
-      ctaType: linkPreviousPostChecked || selectedPreviousPost.url ? 'previous-post' : (ctasUi.length > 0 || finalCtaLink ? 'custom' : undefined),
+      ctaType: linkPreviousPostChecked ? 'previous-post' : (hasManualCta ? 'custom' : (selectedPreviousPost.url || selectedPreviousPost.requestedUrl ? 'previous-post' : undefined)),
       ctaUrl: selectedPreviousPost.url || finalCtaLink || undefined,
-      previousPostTitle: selectedPreviousPost.title || undefined,
+      previousPostSelection: selectedPreviousPost.selection,
+    previousPostRequestedUrl: selectedPreviousPost.requestedUrl,
+    previousPostTitle: selectedPreviousPost.title || undefined,
       previousPostUrl: selectedPreviousPost.url || undefined,
       hashtags: publishHashtags,
       generatedHashtags: publishHashtags.join(' '),
@@ -2012,6 +1974,10 @@ export async function handleMultiAccountPublish(): Promise<void> {
       );
 
       const publishOptions = {
+        blogId: account.blogId,
+        categoryId: undefined,
+        categoryName: account.settings?.category,
+        postId: currentPostId || undefined,
         naverId: credResult.credentials.naverId,
         naverPassword: credResult.credentials.naverPassword,
         url: mainSettings.url,
@@ -2038,8 +2004,10 @@ export async function handleMultiAccountPublish(): Promise<void> {
         ctas: skipCta ? [] : ctasUi,
         ctaText: skipCta ? '' : (ctasUi[0]?.text || ''),
         ctaLink: skipCta ? '' : (ctasUi[0]?.link || ''),
-        ctaType: selectedPreviousPost.url ? 'previous-post' : (skipCta ? 'none' : (ctasUi.length > 0 ? 'custom' : undefined)),
+        ctaType: skipCta ? 'none' : (ctasUi.length > 0 ? 'custom' : (selectedPreviousPost.url || selectedPreviousPost.requestedUrl ? 'previous-post' : undefined)),
         ctaUrl: selectedPreviousPost.url || (skipCta ? '' : (ctasUi[0]?.link || '')),
+        previousPostSelection: selectedPreviousPost.selection,
+        previousPostRequestedUrl: selectedPreviousPost.requestedUrl,
         previousPostTitle: selectedPreviousPost.title || undefined,
         previousPostUrl: selectedPreviousPost.url || undefined,
         hashtags: multiPublishHashtags,
@@ -2065,7 +2033,7 @@ export async function handleMultiAccountPublish(): Promise<void> {
       };
 
       // 발행 실행
-      const result = await window.api.multiAccountPublish([accountId], publishOptions);
+      const result = await window.api.multiAccountPublish([accountId], resolveRendererPreviousPostPayload(publishOptions, () => loadGeneratedPosts()));
 
       if ((window as any).stopFullAutoPublish === true) {
         appendLog('⏹️ 사용자가 다중계정 발행을 중지했습니다.');
@@ -2567,21 +2535,23 @@ export async function handleSemiAutoPublish(): Promise<any> {
   // ✅ CTA 자동 생성 (skipCta가 false인 경우만)
   let finalCtaText = '';
   let finalCtaLink = '';
+  let hasManualCta = false;
 
   if (!skipCta) {
     const autoCTA = generateAutoCTA(title, '');
 
     // 수동 입력된 CTA가 있으면 우선 사용
-    const manualCtaText = ctasUi[0]?.text || (document.getElementById('unified-cta-text') as HTMLInputElement)?.value?.trim();
-    const manualCtaLink = ctasUi[0]?.link || (document.getElementById('unified-cta-link') as HTMLInputElement)?.value?.trim();
+    const manualCtaText = ctasUi[0]?.text || readManualCtaText(document.getElementById('unified-cta-text') as HTMLInputElement | null, document.getElementById('unified-cta-link') as HTMLInputElement | null);
+    const manualCtaLink = ctasUi[0]?.link || readManualCtaLink(document.getElementById('unified-cta-link') as HTMLInputElement | null);
 
-    finalCtaText = manualCtaText || autoCTA.ctaText;
+    hasManualCta = Boolean(manualCtaLink);
+    finalCtaText = manualCtaText || (autoCTA.ctaLink ? autoCTA.ctaText : '');
     finalCtaLink = manualCtaLink || autoCTA.ctaLink;
 
     if (finalCtaLink) {
       appendLog(`✅ CTA 자동 포함: "${finalCtaText}" → ${finalCtaLink.substring(0, 50)}...`);
     } else {
-      appendLog(`ℹ️ 연결할 이전 글이 없습니다. CTA 텍스트만 포함됩니다.`);
+      appendLog(`ℹ️ 자동으로 연결할 이전 글이 없습니다. 직접 입력한 CTA가 있으면 그대로 포함합니다.`);
     }
   } else {
     appendLog(`🚫 CTA 없이 발행 옵션이 선택되었습니다.`);
@@ -2634,6 +2604,7 @@ export async function handleSemiAutoPublish(): Promise<any> {
   }
 
   const formData: any = {
+    ...captureRendererPublicationScope({}),
     mode: 'semi-auto',
     generator: UnifiedDOMCache.getGenerator(), // ✅ [2026-02-22 FIX] perplexity 지원
     targetAge: 'all',
@@ -2661,8 +2632,10 @@ export async function handleSemiAutoPublish(): Promise<any> {
     placeAddress: pickedPlaceForPublish?.address || '',
     placePosition: pickedPlaceForPublish?.position || 'auto',
     places: pickedPlacesForPublish,
-    ctaType: linkPreviousPostChecked || selectedPreviousPost.url ? 'previous-post' : (ctasUi.length > 0 || finalCtaLink ? 'custom' : undefined),
+    ctaType: linkPreviousPostChecked ? 'previous-post' : (hasManualCta ? 'custom' : (selectedPreviousPost.url || selectedPreviousPost.requestedUrl ? 'previous-post' : undefined)),
     ctaUrl: selectedPreviousPost.url || finalCtaLink || undefined,
+    previousPostSelection: selectedPreviousPost.selection,
+    previousPostRequestedUrl: selectedPreviousPost.requestedUrl,
     previousPostTitle: selectedPreviousPost.title || undefined,
     previousPostUrl: selectedPreviousPost.url || undefined,
     hashtags: publishHashtags,

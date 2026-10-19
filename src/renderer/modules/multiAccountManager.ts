@@ -1,6 +1,7 @@
 // @ts-nocheck
 // Restored from dist/renderer/modules/multiAccountManager.js after source encoding damage; keep runtime parity with the last successful build.
 "use strict";
+import { applyPreviousPostPolicy, normalizePreviousPostCategoryId } from '../../shared/previousPostPolicy.js';
 import { awaitNetworkWaitRecheck, classifyPublishFailure, describeAccountStop, extractAccountStopCode, findPausedQueueAccounts, readAccountPause, stopsAllAccounts } from '../../automation/publishFailureClassifier.js';
 import { installAccountSafetyControls } from './accountSafetyControls.js';
 import { normalizeRetiredNanoEngine } from '../../runtime/imageProviderMigration.js';
@@ -1628,6 +1629,12 @@ async function initMultiAccountPublishModal() {
                         ctaUrlInput.value = item.ctaUrl;
                     if (ctaTextInput && item.ctaText)
                         ctaTextInput.value = item.ctaText;
+                    const realCatSelect = document.getElementById('ma-setting-real-category');
+                    const realCategoryId = normalizePreviousPostCategoryId(item.realCategoryId);
+                    if (realCatSelect) {
+                        realCatSelect.replaceChildren(new Option(item.realCategoryName || '카테고리를 선택해주세요', realCategoryId || '', true, true));
+                        realCatSelect.dataset.restoredCategoryName = item.realCategoryName || '';
+                    }
                     if (item.publishMode) {
                         const radio = document.querySelector(`input[name="ma-setting-publish-mode"][value="${item.publishMode}"]`);
                         if (radio)
@@ -1678,6 +1685,11 @@ async function initMultiAccountPublishModal() {
         }
     }
     function openFullautoSettingModal(accountId, accountName) {
+        const realCategorySelect = document.getElementById('ma-setting-real-category');
+        if (realCategorySelect) {
+            realCategorySelect.replaceChildren(new Option('카테고리를 선택해주세요', ''));
+            delete realCategorySelect.dataset.restoredCategoryName;
+        }
         const modal = document.getElementById('ma-fullauto-setting-modal');
         if (!modal)
             return;
@@ -1748,10 +1760,10 @@ async function initMultiAccountPublishModal() {
                 if (contentModeSel && typeof last.contentMode === 'string')
                     contentModeSel.value = last.contentMode;
                 const realCatSel = document.getElementById('ma-setting-real-category');
-                if (realCatSel && typeof last.realCategoryName === 'string') {
-                    const matchOpt = Array.from(realCatSel.options).find(o => o.text === last.realCategoryName);
-                    if (matchOpt)
-                        realCatSel.value = matchOpt.value;
+                if (realCatSel && (normalizePreviousPostCategoryId(last.realCategoryId) || last.realCategoryName)) {
+                    const categoryId = normalizePreviousPostCategoryId(last.realCategoryId);
+                    realCatSel.replaceChildren(new Option(last.realCategoryName || categoryId, categoryId || '', true, true));
+                    realCatSel.dataset.restoredCategoryName = last.realCategoryName || '';
                 }
                 if (typeof last.publishMode === 'string') {
                     const radio = document.querySelector(`input[name="ma-setting-publish-mode"][value="${last.publishMode}"]`);
@@ -1844,14 +1856,16 @@ async function initMultiAccountPublishModal() {
                         return;
                     }
                     const response = await window.api.fetchBlogCategories({
-                        naverId: account.naverId,
+                        naverId: account.blogId || account.naverId,
+                        blogId: account.blogId,
                         naverPassword: account.naverPassword
                     });
                     if (response.success && response.categories && response.categories.length > 0) {
                         const realCatContainer = document.getElementById('ma-setting-real-category-container');
                         const realCatSelect = document.getElementById('ma-setting-real-category');
                         if (realCatContainer && realCatSelect) {
-                            realCatSelect.innerHTML = response.categories.map((cat) => `<option value="${cat.categoryNo || cat.id}">${cat.categoryName || cat.name}</option>`).join('');
+                            delete realCatSelect.dataset.restoredCategoryName;
+                            realCatSelect.replaceChildren(...response.categories.map(cat => new Option(String(cat.categoryName || cat.name || ''), String(cat.categoryNo || cat.id || ''))));
                             realCatContainer.style.display = 'block';
                         }
                         toastManager.success(`✅ ${response.categories.length}개의 블로그 카테고리 분석 완료`);
@@ -1934,44 +1948,12 @@ async function initMultiAccountPublishModal() {
         if (ctaTypeSelect && !ctaTypeSelect.hasAttribute('data-listener-added')) {
             ctaTypeSelect.setAttribute('data-listener-added', 'true');
             ctaTypeSelect.addEventListener('change', () => {
-                const v = String(ctaTypeSelect.value || '').trim();
-                if (v !== 'previous-post')
-                    return;
-                const isJabBlog = String(modal?.dataset?.isJabBlog || '0') === '1';
-                const catKey = String(categorySelectForCta?.value || '').trim();
-                const postsAll = loadGeneratedPosts();
-                const published = (postsAll || []).filter((p) => String(p?.publishedUrl || '').trim().length > 0);
-                if (published.length === 0) {
-                    toastManager.warning('발행된 이전 글이 없습니다. 먼저 글을 발행한 뒤 다시 시도하세요.');
-                    return;
-                }
-                if (!isJabBlog && catKey) {
-                    const candidates = published.filter((p) => String(p?.category || '').trim() === catKey);
-                    if (candidates.length > 0) {
-                        candidates.sort((a, b) => {
-                            const aT = new Date(a.publishedAt || a.updatedAt || a.createdAt || 0).getTime();
-                            const bT = new Date(b.publishedAt || b.updatedAt || b.createdAt || 0).getTime();
-                            return bT - aT;
-                        });
-                        const chosen = candidates[0];
-                        const url = String(chosen?.publishedUrl || '').trim();
-                        if (ctaUrlInput && url)
-                            ctaUrlInput.value = url;
-                        if (ctaTextInput && chosen?.title)
-                            ctaTextInput.value = `📖 ${chosen.title}`;
-                        toastManager.success('✅ 같은 카테고리의 최신 발행글이 자동으로 연결되었습니다.');
-                        return;
-                    }
-                }
-                showPostSelectionModal(published, (selectedPost) => {
-                    if (!selectedPost)
-                        return;
-                    const url = String(selectedPost.publishedUrl || '').trim();
-                    if (ctaUrlInput && url)
-                        ctaUrlInput.value = url;
-                    if (ctaTextInput && selectedPost.title)
-                        ctaTextInput.value = `📖 ${selectedPost.title}`;
-                }, { defaultCategory: catKey || undefined });
+                if (String(ctaTypeSelect.value || '').trim() !== 'previous-post') return;
+                // Automatic linking is resolved at publish time against the destination blog/category.
+                // A URL is filled only by the explicit selection button or the user's own input.
+                if (ctaUrlInput) ctaUrlInput.value = '';
+                if (ctaTextInput) ctaTextInput.value = '';
+                toastManager.info('발행할 때 같은 블로그·카테고리의 최신 공개 글을 자동으로 연결합니다.');
             });
         }
         modal.style.display = 'flex';
@@ -2010,9 +1992,11 @@ async function initMultiAccountPublishModal() {
         const toneStyle = document.getElementById('ma-setting-tone')?.value || 'friendly';
         const category = String(document.getElementById('ma-setting-category')?.value || '').trim() || 'general';
         const realCatSelect = document.getElementById('ma-setting-real-category');
-        const realCategoryName = (realCatSelect?.options && realCatSelect.selectedIndex >= 0)
+        const realCategoryId = normalizePreviousPostCategoryId(realCatSelect?.value);
+        const realCategoryName = realCategoryId && (realCatSelect?.options && realCatSelect.selectedIndex >= 0)
             ? realCatSelect.options[realCatSelect.selectedIndex]?.text || ''
-            : '';
+            : realCatSelect?.dataset.restoredCategoryName || '';
+        // Legacy name-only settings still publish to that name, but cannot assert a category ID.
         const contentMode = (document.getElementById('ma-setting-content-mode')?.value || 'seo');
         const customPrompt = (() => {
             const modalPrompt = document.getElementById('ma-setting-custom-prompt')?.value?.trim();
@@ -2136,6 +2120,7 @@ async function initMultiAccountPublishModal() {
                 affiliateLink,
                 videoOption,
                 manualThumbnail: manualThumbnailForQueue,
+                realCategoryId,
                 realCategoryName,
                 keywordAsTitle,
                 keywordTitlePrefix,
@@ -2183,6 +2168,7 @@ async function initMultiAccountPublishModal() {
                     affiliateLink,
                     videoOption,
                     manualThumbnail: manualThumbnailForQueue,
+                    realCategoryId,
                     realCategoryName,
                     keywordAsTitle,
                     keywordTitlePrefix,
@@ -2205,6 +2191,7 @@ async function initMultiAccountPublishModal() {
             publishMode,
             contentMode,
             category,
+            realCategoryId,
             realCategoryName,
             imageSource,
             includeThumbnailText,
@@ -3925,117 +3912,15 @@ async function initMultiAccountPublishModal() {
                     updateMAStep('ma-step-login', 'completed');
                     updateMAStep('ma-step-publish', 'active');
                     updateMAProgress(i, totalItems, queueItem.accountName, '📤 블로그 발행 중...', 3, TOTAL_SUB_STEPS);
-                    if (queueItem.ctaType === 'previous-post' && !queueItem.ctaUrl) {
-                        try {
-                            const catKey = String(queueItem.category || '').trim();
-                            const postsAll = loadGeneratedPosts();
-                            const ctaAcctNaverId = (credResult?.credentials?.naverId || '').trim().toLowerCase();
-                            const published = (postsAll || []).filter((p) => {
-                                const hasUrl = String(p?.publishedUrl || '').trim().length > 0;
-                                const accountMatch = !ctaAcctNaverId || !p.naverId || p.naverId === ctaAcctNaverId;
-                                return hasUrl && accountMatch;
-                            });
-                            console.log(`[FullAuto] CTA 매칭 시작 - 카테고리: ${catKey}, 계정: ${ctaAcctNaverId || '미지정'}, 발행된 글 수: ${published.length}`);
-                            if (catKey && published.length > 0) {
-                                const normCat = catKey.replace(/\s+/g, '').toLowerCase();
-                                const candidates = published.filter((p) => {
-                                    const pCat = String(p?.category || '').trim();
-                                    if (!pCat)
-                                        return false;
-                                    const normPCat = pCat.replace(/\s+/g, '').toLowerCase();
-                                    return normPCat === normCat || normPCat.includes(normCat) || normCat.includes(normPCat);
-                                });
-                                console.log(`[FullAuto] 매칭된 후보 수: ${candidates.length}`);
-                                if (candidates.length > 0) {
-                                    candidates.sort((a, b) => {
-                                        const aT = new Date(a.publishedAt || a.updatedAt || a.createdAt || 0).getTime();
-                                        const bT = new Date(b.publishedAt || b.updatedAt || b.createdAt || 0).getTime();
-                                        return bT - aT;
-                                    });
-                                    const chosen = candidates[0];
-                                    queueItem.ctaUrl = String(chosen?.publishedUrl || '').trim();
-                                    queueItem.previousPostUrl = queueItem.ctaUrl;
-                                    queueItem.previousPostTitle = String(chosen?.title || '이전 글 보기').trim();
-                                    queueItem.ctaText = `📖 ${chosen.title}`;
-                                    addMALog(`🔗 CTA 자동 연동: "${chosen.title}"`, 'info');
-                                    console.log(`[FullAuto] CTA 연동 완료: ${queueItem.ctaUrl}`);
-                                }
-                                else {
-                                    console.log('[FullAuto] 일치하는 카테고리의 이전 글을 찾지 못했습니다.');
-                                }
-                            }
-                        }
-                        catch (ctaErr) {
-                            console.warn('[FullAuto] CTA 자동 연동 실패:', ctaErr);
-                        }
-                    }
-                    const isShoppingConnectMode = !!(queueItem.affiliateLink && String(queueItem.affiliateLink).trim());
-                    const isMateMode = queueItem.contentMode === 'mate';
-                    const needsPreviousPostLookup = !(queueItem?.previousPostUrl && String(queueItem.previousPostUrl).trim());
-                    if (needsPreviousPostLookup && (isShoppingConnectMode || isMateMode || queueItem.ctaType === 'previous-post')) {
-                        try {
-                            const catKey = String(queueItem.category || '').trim();
-                            const postsAll = loadGeneratedPosts();
-                            const prevAcctNaverId = (credResult?.credentials?.naverId || '').trim().toLowerCase();
-                            const published = (postsAll || []).filter((p) => {
-                                const hasUrl = String(p?.publishedUrl || '').trim().length > 0;
-                                const accountMatch = !prevAcctNaverId || !p.naverId || p.naverId === prevAcctNaverId;
-                                return hasUrl && accountMatch;
-                            });
-                            console.log(`[FullAuto] 이전글 엮기 매칭 시작 - 카테고리: ${catKey}, 계정: ${prevAcctNaverId || '미지정'}, 발행된 글 수: ${published.length}, 쇼핑커넥트: ${isShoppingConnectMode}`);
-                            if (catKey && published.length > 0) {
-                                const normCat = catKey.replace(/\s+/g, '').toLowerCase();
-                                let candidates = published.filter((p) => {
-                                    const pCat = String(p?.category || '').trim();
-                                    if (!pCat)
-                                        return false;
-                                    const normPCat = pCat.replace(/\s+/g, '').toLowerCase();
-                                    const categoryMatch = normPCat === normCat;
-                                    if (isShoppingConnectMode) {
-                                        const isPostShoppingConnect = !!(p.affiliateLink || p.contentMode === 'shopping-connect');
-                                        return categoryMatch && isPostShoppingConnect;
-                                    }
-                                    return categoryMatch;
-                                });
-                                if (candidates.length === 0 && isShoppingConnectMode) {
-                                    candidates = published.filter((p) => {
-                                        const pCat = String(p?.category || '').trim();
-                                        if (!pCat)
-                                            return false;
-                                        const normPCat = pCat.replace(/\s+/g, '').toLowerCase();
-                                        return normPCat === normCat;
-                                    });
-                                }
-                                console.log(`[FullAuto] 이전글 매칭 후보 수: ${candidates.length}`);
-                                if (candidates.length > 0) {
-                                    candidates.sort((a, b) => {
-                                        const aT = new Date(a.publishedAt || a.updatedAt || a.createdAt || 0).getTime();
-                                        const bT = new Date(b.publishedAt || b.updatedAt || b.createdAt || 0).getTime();
-                                        return bT - aT;
-                                    });
-                                    const chosen = candidates[0];
-                                    if (isShoppingConnectMode || isMateMode) {
-                                        queueItem.previousPostUrl = String(chosen?.publishedUrl || '').trim();
-                                        queueItem.previousPostTitle = String(chosen?.title || '이전 글 보기').trim();
-                                    }
-                                    else {
-                                        queueItem.ctaUrl = String(chosen?.publishedUrl || '').trim();
-                                        queueItem.previousPostUrl = queueItem.ctaUrl;
-                                        queueItem.ctaText = `📖 추천 글: ${String(chosen?.title || '이전 글 보기').trim()}`;
-                                        queueItem.previousPostTitle = String(chosen?.title || '이전 글 보기').trim();
-                                    }
-                                    addMALog(`📖 이전글 자동 매칭: "${chosen.title}"`, 'info');
-                                    console.log(`[FullAuto] 이전글 엮기 연동 완료: ${queueItem.previousPostUrl || queueItem.ctaUrl}`);
-                                }
-                                else {
-                                    console.log('[FullAuto] 일치하는 카테고리의 이전 글을 찾지 못했습니다.');
-                                }
-                            }
-                        }
-                        catch (prevPostErr) {
-                            console.warn('[FullAuto] 이전글 엮기 자동 연동 실패:', prevPostErr);
-                        }
-                    }
+                    const publicationAccounts = await window.api.getAllBlogAccounts().catch(error => {
+                        console.warn('[FullAuto] 이전글 대상 계정 확인 실패 — 확인되지 않은 연결은 생략합니다:', error);
+                        return { accounts: [] };
+                    });
+                    const publicationAccount = publicationAccounts.accounts?.find(account => String(account.id) === String(queueItem.accountId));
+                    const publicationScope = {
+                        blogId: publicationAccount?.blogId,
+                        categoryId: normalizePreviousPostCategoryId(queueItem.realCategoryId),
+                    };
                     if (queueItem.publishMode === 'schedule' && queueItem.scheduleDate && queueItem.scheduleTime) {
                         const scheduledMoment = new Date(`${queueItem.scheduleDate}T${queueItem.scheduleTime}`);
                         const now = new Date();
@@ -4072,6 +3957,11 @@ async function initMultiAccountPublishModal() {
                         }
                     }
                     const publishOptions = {
+                        postId: generatedPostId,
+                        blogId: publicationScope.blogId,
+                        categoryId: publicationScope.categoryId,
+                        ctaType: queueItem.ctaType,
+                        ctaUrl: queueItem.ctaUrl,
                         naverId: credResult.credentials.naverId,
                         naverPassword: credResult.credentials.naverPassword,
                         url: queueItem.sourceUrl || undefined,
@@ -4154,15 +4044,16 @@ async function initMultiAccountPublishModal() {
                             businessInfo: queueItem.businessInfo || queueItem?.formData?.businessInfo,
                             contentMode: queueItem.contentMode,
                             accountId: queueItem.accountId,
-                            blogId: credResult.credentials.naverId,
+                            blogId: publicationScope.blogId,
                             cta: String((queueItem?.formData?.ctaText ?? queueItem.ctaText) || '').trim(),
                         }),
                     };
-                    console.log('[FullAuto] 발행 옵션:', publishOptions);
+                    const scopedPublishOptions = applyPreviousPostPolicy(publishOptions, loadGeneratedPosts(), publicationScope);
+                    console.log('[FullAuto] 발행 대상:', publicationScope);
                     console.log(`[🔍 DIAG-2 IPC전달] publishMode=${publishOptions.publishMode}, scheduleDate=${publishOptions.scheduleDate}, scheduleTime=${publishOptions.scheduleTime}, scheduleType=${publishOptions.scheduleType}`);
                     publishStarted = true;
                     queueItem.pipelineStatus = 'publishing';
-                    const result = await window.api.multiAccountPublish([queueItem.accountId], publishOptions);
+                    const result = await window.api.multiAccountPublish([queueItem.accountId], scopedPublishOptions);
                     console.log('[FullAuto] 발행 결과:', result);
                     if (result.success && result.results?.[0]?.success) {
                         publishConfirmed = true;
@@ -4171,6 +4062,7 @@ async function initMultiAccountPublishModal() {
                         networkWaitFailures.delete(queueItem.accountId);
                         updateMAStep('ma-step-publish', 'completed');
                         const publishedUrl = result.results?.[0]?.url;
+                        const publicationDestination = result.results?.[0]?.publicationDestination;
                         if (publishedUrl && structuredContent?.selectedTitle) {
                             const today = new Date();
                             savePublishedPost(today, structuredContent.selectedTitle, publishedUrl);
@@ -4178,14 +4070,14 @@ async function initMultiAccountPublishModal() {
                                 const posts = loadGeneratedPosts();
                                 const matchingPost = posts.find(p => p.title === structuredContent.selectedTitle && !p.publishedUrl);
                                 if (matchingPost) {
-                                    updatePostAfterPublish(matchingPost.id, publishedUrl, queueItem.publishMode);
+                                    updatePostAfterPublish(matchingPost.id, publishedUrl, queueItem.publishMode, publicationDestination);
                                     addMALog(`📎 발행 URL 저장됨: ${publishedUrl}`, 'info');
                                 }
                             }
                         }
                         try {
                             if (generatedPostId && publishedUrl) {
-                                updatePostAfterPublish(generatedPostId, publishedUrl, queueItem.publishMode);
+                                updatePostAfterPublish(generatedPostId, publishedUrl, queueItem.publishMode, publicationDestination);
                                 updatePostImages(generatedPostId, generatedImages);
                             }
                         }
@@ -4194,22 +4086,8 @@ async function initMultiAccountPublishModal() {
                         }
                         addMALog(`✅ ${queueItem.accountName}: 발행 성공!`, 'success');
                         addProgressItem(`✅ [${i + 1}/${totalItems}] ${queueItem.accountName}: 발행 성공!`, 'success');
-                        if (queueItem.ctaType === 'previous-post' && publishedUrl) {
-                            for (let j = i + 1; j < queueSnapshot.length; j++) {
-                                const nextItem = queueSnapshot[j];
-                                if (nextItem.ctaType === 'previous-post' && nextItem.accountName === queueItem.accountName) {
-                                    const validChainUrl = publishedUrl.startsWith('http') ? publishedUrl : '';
-                                    nextItem.ctaUrl = validChainUrl;
-                                    nextItem.ctaLink = validChainUrl;
-                                    nextItem.ctaText = `📖 추천 글: ${structuredContent?.selectedTitle || '이전 글'}`;
-                                    nextItem.previousPostUrl = validChainUrl;
-                                    nextItem.previousPostTitle = structuredContent?.selectedTitle || '이전 글';
-                                    console.log(`[FullAuto] 🔗 이전글 체이닝: 대기열[${j}] (${nextItem.accountName})에 URL 전달 → ${publishedUrl}`);
-                                    addMALog(`🔗 이전글 체이닝: ${nextItem.accountName}의 다음 항목에 방금 발행한 URL 전달`, 'info');
-                                    break;
-                                }
-                            }
-                        }
+                        // The next item resolves its own blog/category from confirmed history.
+
                     }
                     else {
                         const failedResult = result.results?.find(item => !item.success) || result;
@@ -4999,6 +4877,7 @@ function initMainAccountSelector() {
             accountSelector.value = selectedId;
             currentAccountId = selectedId;
             window.currentMainAccountSettings = selected.settings || {};
+            window.currentMainAccountPublicationScope = { blogId: selected.blogId, naverId: credentials.credentials.naverId };
             if (naverIdInput) naverIdInput.value = credentials.credentials.naverId;
             if (naverPwInput) naverPwInput.value = credentials.credentials.naverPassword;
             if (selectedAccountInfo) selectedAccountInfo.style.display = 'block';
@@ -5033,12 +4912,14 @@ function initMainAccountSelector() {
                     realCategories.replaceChildren(); delete realCategories.dataset.ldbAccountId;
                 }
                 window.currentMainAccountSettings = account.settings || {};
+                window.currentMainAccountPublicationScope = null;
                 if (selectedAccountInfo)
                     selectedAccountInfo.style.display = 'block';
                 if (selectedAccountName)
                     selectedAccountName.textContent = account.name;
                 const credResult = await window.api.getAccountCredentials(selectedId);
                 if (credResult.success && credResult.credentials) {
+                    window.currentMainAccountPublicationScope = { blogId: account.blogId, naverId: credResult.credentials.naverId };
                     if (naverIdInput)
                         naverIdInput.value = credResult.credentials.naverId || '';
                     if (naverPwInput)
@@ -5057,6 +4938,7 @@ function initMainAccountSelector() {
         else {
             currentAccountId = null;
             window.currentMainAccountSettings = null;
+            window.currentMainAccountPublicationScope = null;
             if (selectedAccountInfo)
                 selectedAccountInfo.style.display = 'none';
             clearSession();

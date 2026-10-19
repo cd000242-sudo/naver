@@ -11,13 +11,14 @@ export function blogCount(card) {
 }
 
 /** 거르기 — mode 'star'(고수 3곳 이상) · 분야 · 검색어(키워드 · 제목 · 출처 글 제목). */
-export function filterAdsenseCards(cards, { mode = 'all', category = '', query = '' } = {}) {
+export function filterAdsenseCards(cards, { mode = 'all', category = '', query = '', nowMs = Date.now() } = {}) {
   const q = clean(query).toLowerCase().replace(/\s+/g, '');
   return (Array.isArray(cards) ? cards : []).filter((c) => {
+    if (mode === 'low' && adsenseCompetition(c, nowMs).tier !== 0) return false;
     if (mode === 'star' && !c.recommended) return false;
     if (category && c.category !== category) return false;
     if (!q) return true;
-    const hay = [c.keyword, c.title, ...(c.sources || []).map((s) => s?.title)].map((v) => clean(v).toLowerCase().replace(/\s+/g, '')).join(' ');
+    const hay = [c.metrics?.query, c.keyword, c.title, ...(c.sources || []).map((s) => s?.title)].map((v) => clean(v).toLowerCase().replace(/\s+/g, '')).join(' ');
     return hay.includes(q);
   });
 }
@@ -61,4 +62,30 @@ export function adsenseWritingAdvice(shape, cards = []) {
   if (has('questionPct')) out.push(`질문형 제목 ${shape.questionPct}%${ex.question}`);
   if (has('bracketPct')) out.push(`괄호·대괄호를 쓴 제목 ${shape.bracketPct}%${ex.bracket}`);
   return out;
+}
+
+// 앱과 같은 수요 대비 문서 경쟁 기준. 광고가·발행 수는 동률에서만 비교한다.
+export function adsenseCompetition(card, nowMs = Date.now()) {
+  const m = card?.metrics || {};
+  const positive = (n) => typeof n === 'number' && Number.isFinite(n) && n > 0;
+  const ratio = positive(m.searchVolume) && positive(m.documentCount) ? m.documentCount / m.searchVolume : null;
+  const age = nowMs - Date.parse(m.measuredAt);
+  if (!String(m.query || '').trim() || !Number.isFinite(age)) return { tier: 4, ratio, label: '실측 확인 필요' };
+  if (age < 0 || age >= 7 * 86400000) return { tier: 5, ratio, label: '재측정 필요' };
+  if (ratio === null) return { tier: 4, ratio, label: m.documentCount === 0 ? '문서 0건 재확인' : '실측 확인 필요' };
+  if (ratio > 5) return { tier: 3, ratio, label: '문서 경쟁 높음' };
+  if (m.searchVolume < 100) return { tier: 2, ratio, label: '검색 수요 적음' };
+  return ratio <= 1 ? { tier: 0, ratio, label: '낮은 문서 경쟁' } : { tier: 1, ratio, label: '문서 경쟁 비교' };
+}
+
+export function rankAdsenseCards(cards, nowMs = Date.now()) {
+  const number = (v) => typeof v === 'number' && Number.isFinite(v) && v >= 0 ? v : -1;
+  return (Array.isArray(cards) ? cards : []).map((c) => ({ card: c, competition: adsenseCompetition(c, nowMs) }))
+    .sort((a, b) => a.competition.tier - b.competition.tier
+      || (a.competition.ratio ?? Infinity) - (b.competition.ratio ?? Infinity)
+      || number(b.card.metrics?.searchVolume) - number(a.card.metrics?.searchVolume)
+      || number(b.card.metrics?.bid) - number(a.card.metrics?.bid)
+      || blogCount(b.card) - blogCount(a.card)
+      || String(a.card.id).localeCompare(String(b.card.id)))
+    .map((entry) => entry.card);
 }

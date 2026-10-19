@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import * as fs from 'fs';
 import * as path from 'path';
+import { resolveRendererPreviousPostPayload } from '../renderer/utils/previousPostScope';
+import { applyPreviousPostPolicy } from '../shared/previousPostPolicy';
 
 const ROOT = path.resolve(__dirname, '..');
 
@@ -211,13 +213,18 @@ describe('continuous and multi-account image generation safety', () => {
     const fullAutoCode = read('renderer/modules/fullAutoFlow.ts');
     const multiAccountCode = read('renderer/modules/multiAccountManager.ts');
 
-    expect(fullAutoCode).toMatch(/const isMateMode = formData\.contentMode === 'mate'/);
-    expect(fullAutoCode).toMatch(/formData\.ctaType !== 'none' \|\| isMateMode/);
+    expect(fullAutoCode).toContain('const resolved = resolveRendererPreviousPostPayload(');
     expect(fullAutoCode).toMatch(/function resolveFallbackHashtags/);
     expect(fullAutoCode).toMatch(/return resolveFallbackHashtags\(structuredContent, formData\)/);
-    expect(multiAccountCode).toMatch(/const isMateMode = queueItem\.contentMode === 'mate'/);
-    expect(multiAccountCode).toMatch(/isShoppingConnectMode \|\| isMateMode \|\| queueItem\.ctaType === 'previous-post'/);
-    expect(multiAccountCode).toMatch(/if \(isShoppingConnectMode \|\| isMateMode\)/);
+    expect(multiAccountCode).toContain('const scopedPublishOptions = applyPreviousPostPolicy(publishOptions, loadGeneratedPosts(), publicationScope);');
+    const payload = { contentMode: 'mate', ctaType: 'none', blogId: 'mate_blog', categoryId: '12', hashtags: ['태그'] };
+    const previous = { id: 'previous', title: '이전 글', publishedUrl: 'https://blog.naver.com/mate_blog/123', publishedBlogId: 'mate_blog', publishedCategoryId: '12', publishedAt: '2025-01-01', publishMode: 'publish', isPublished: true };
+    const fullAutoResult = resolveRendererPreviousPostPayload(payload, () => [previous]);
+    const multiAccountResult = applyPreviousPostPolicy(payload, [previous], payload);
+    for (const result of [fullAutoResult, multiAccountResult]) {
+      expect(result.previousPostUrl).toBe(previous.publishedUrl);
+      expect(result.hashtags).toEqual(['태그']);
+    }
   });
 
   it('explains ImageFX access denial as a Google Labs account/IP restriction', () => {

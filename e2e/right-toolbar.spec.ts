@@ -58,3 +58,75 @@ test('every toolbar button has the same size, nothing is squeezed, and there is 
   }
   await page.screenshot({ path: path.join(__dirname, '../tmp/right-toolbar.png') });
 });
+
+test('a short viewport keeps all tools reachable without covering image settings', async () => {
+  await app.evaluate(({ BrowserWindow }) => {
+    const win = BrowserWindow.getAllWindows().find(item => item.webContents.getURL().includes('index.html'))!;
+    win.webContents.setZoomFactor(1);
+    win.setContentSize(900, 600);
+  });
+  await page.evaluate(() => {
+    document.querySelectorAll<HTMLElement>('#right-floating-buttons > .floating-btn').forEach(button => {
+      button.style.display = 'flex';
+    });
+  });
+  await expect(page.locator('#right-toolbar-toggle')).toBeInViewport({ ratio: 1 });
+  await page.mouse.move(2, 2);
+  await page.waitForTimeout(400); // Existing toolbar resize transition is 300ms.
+  const bar = (await page.locator('#right-floating-buttons').boundingBox())!;
+  const imageSettings = (await page.locator('#heading-image-setting-btn').boundingBox())!;
+  expect(bar.y + bar.height).toBeLessThan(imageSettings.y);
+  const lastTool = page.locator('#launch-leword-btn');
+  await lastTool.scrollIntoViewIfNeeded();
+  // Windows display scaling can clip a fractional pixel at the scroll area's edge.
+  await expect(lastTool).toBeInViewport({ ratio: 0.98 });
+  await app.evaluate(({ BrowserWindow }) => {
+    BrowserWindow.getAllWindows().find(item => item.webContents.getURL().includes('index.html'))!.setContentSize(1280, 860);
+  });
+});
+
+test('toolbar and bottom tools collapse with keyboard and remember their state after reload', async () => {
+  const toggle = page.locator('#right-toolbar-toggle');
+  const toolbar = page.locator('#right-floating-buttons');
+  const imageSettings = page.locator('#heading-image-setting-btn');
+  const aiButton = page.locator('#ai-assistant-btn');
+  await expect(imageSettings).toBeVisible();
+  await expect(aiButton).toBeVisible();
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+  const before = (await toolbar.boundingBox())!;
+  await toggle.focus();
+  await page.keyboard.press('Enter');
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  await expect(toolbar).toBeHidden();
+  await expect(imageSettings).toBeAttached();
+  await expect(imageSettings).toBeHidden();
+  await expect(aiButton).toBeHidden();
+  await expect(page.locator('#image-shortcut-btn')).toBeVisible();
+  await expect(page.locator('#publish-shortcut-btn')).toBeVisible();
+  // Switching tabs must not re-show the bottom button while tools are collapsed.
+  await page.locator('.tab-button[data-tab="unified"]').focus();
+  await page.keyboard.press('Enter');
+  await page.locator('.tab-button[data-tab="images"]').focus();
+  await page.keyboard.press('Enter');
+  await expect(imageSettings).toBeHidden();
+  await toggle.focus();
+  expect(await page.evaluate(({ x, y }) => {
+    return !document.elementFromPoint(x, y)?.closest('#right-floating-buttons');
+  }, { x: before.x + 20, y: before.y + 20 })).toBe(true);
+  await page.keyboard.press('Tab');
+  expect(await page.evaluate(() => !!document.activeElement?.closest('#right-floating-buttons, #heading-image-setting-btn, #ai-assistant-btn'))).toBe(false);
+  await page.reload();
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  await expect(toolbar).toBeHidden();
+  await expect(imageSettings).toBeAttached();
+  await expect(imageSettings).toBeHidden();
+  await expect(aiButton).toBeHidden();
+  await page.screenshot({ path: path.join(__dirname, '../tmp/right-toolbar-collapsed.png') });
+  await toggle.focus();
+  await page.keyboard.press('Space');
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+  await expect(toolbar).toBeVisible();
+  await expect(imageSettings).toBeVisible();
+  await expect(aiButton).toBeVisible();
+  await page.screenshot({ path: path.join(__dirname, '../tmp/right-toolbar-expanded.png') });
+});

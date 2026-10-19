@@ -1,3 +1,4 @@
+import { matchPublicationCategory, verifyCategorySelection } from './previousPostRuntimePolicy.js';
 import { waitForScheduleConfirmation } from './scheduleConfirmation.js';
 import { getBlogIdentityStore } from './blogIdentityStore.js';
 /**
@@ -24,6 +25,7 @@ import {
 // ✅ [2026-02-19] 카테고리 자동 선택 — 스톨 방지 최적화 버전
 // 통합 CSS 쿼리, 전체 15초 타임아웃, ESC 정리 일관성
 export async function selectCategoryInPublishModal(self: any, frame: Frame, page: Page): Promise<void> {
+  self.__verifiedPublicationCategoryId = undefined;
   if (!self.options.categoryName) {
     self.log('📂 [카테고리] categoryName이 전달되지 않음 — 기본 카테고리로 발행');
     return;
@@ -38,7 +40,7 @@ export async function selectCategoryInPublishModal(self: any, frame: Frame, page
   // the publish retry loop; content is already saved, nothing is lost.
   // options.allowCategoryFallback === true restores the old proceed behavior.
   const failCategory = (code: string, detail: string): void => {
-    if (self.options.allowCategoryFallback === true) {
+    if (self.options.allowCategoryFallback === true && !self.__strictCategoryForPreviousPost) {
       self.log(`   ⚠️ ${code}: ${detail} — allowCategoryFallback=true 설정에 따라 폴백 발행을 계속합니다.`);
       return;
     }
@@ -356,16 +358,14 @@ export async function selectCategoryInPublishModal(self: any, frame: Frame, page
         if (!text || text.length < 1) continue;
         allCandidates.push(text);
 
-        const normalizedText = stripCategoryDecorations(text);
+        const itemIdentity = await ctx.evaluate((el: Element) => {
+          const identified = el.matches('[data-testid^="categoryItemText_"]') ? el : el.querySelector('[data-testid^="categoryItemText_"]');
+          return { id: /^categoryItemText_(\d+)$/.exec(identified?.getAttribute('data-testid') || '')?.[1], name: identified?.textContent?.trim() };
+        }, item).catch(() => undefined);
+        const itemId = itemIdentity?.id;
+        const itemName = itemIdentity?.name || text;
 
-        if (
-          text === targetName ||
-          normalizedText === normalizedTarget ||
-          text.includes(targetName) ||
-          normalizedText.includes(normalizedTarget) ||
-          targetName.includes(text) ||
-          normalizedTarget.includes(normalizedText)
-        ) {
+        if (matchPublicationCategory(self.options.categoryId, targetName, { id: itemId, name: itemName })) {
           let itemClicked = false;
           try {
             await item.click();
@@ -384,7 +384,7 @@ export async function selectCategoryInPublishModal(self: any, frame: Frame, page
 
             try {
               await self.delay(300);
-              const verifySelectors = [...categoryBtnSelectors];
+              const verifySelectors = [...categoryBtnSelectors, ...fallbackBtnSelectors];
               const afterText = await (searchContext === 'frame' ? frame : page).evaluate(
                 (sel: string[]) => {
                   for (const s of sel) {
@@ -395,13 +395,22 @@ export async function selectCategoryInPublishModal(self: any, frame: Frame, page
                 }, verifySelectors
               ).catch(() => '');
 
+              self.__verifiedPublicationCategoryId = verifyCategorySelection(itemId, itemName, afterText);
+              if (self.options.categoryId && !self.__verifiedPublicationCategoryId) {
+                found = false;
+                failCategory('CATEGORY_SELECTION_UNVERIFIED', '요청한 카테고리 ID와 선택 결과를 확인하지 못함');
+              }
               if (afterText && afterText !== beforeText) {
                 self.log(`   🎯 선택 확인: 드롭다운 텍스트 "${beforeText}" → "${afterText}"`);
               } else if (afterText === beforeText && beforeText) {
                 self.log(`   ℹ️ 드롭다운 텍스트 변경 없음 (이미 선택되어 있었을 수 있음)`);
               }
-            } catch {
-              // 검증 실패해도 클릭은 성공했으므로 계속 진행
+            } catch (verificationError) {
+              if ((verificationError as Error)?.message?.startsWith('CATEGORY_')) throw verificationError;
+              if (self.options.categoryId) {
+                found = false;
+                failCategory('CATEGORY_SELECTION_UNVERIFIED', '카테고리 선택 결과 확인 실패');
+              }
             }
 
             break;

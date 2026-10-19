@@ -4,6 +4,7 @@
 // ═══════════════════════════════════════════════════════════════════
 
 // ✅ renderer.ts의 전역 변수/함수 참조
+import { markAutomaticPreviousPostCta } from '../utils/previousPostScope.js';
 import { extractSemiAutoHeadingsFromBody } from '../utils/semiAutoHeadingExtractor.js';
 import { bodyIsTitlelessReconstruction } from '../utils/semiAutoHeadingExtractor.js';
 import { hideAppProgressModal, showAppProgressModal } from '../utils/appProgressModal.js';
@@ -1700,8 +1701,7 @@ export function autoGenerateCTA(structuredContent: any): void {
   try {
     const autoCTA = generateAutoCTA(structuredContent?.selectedTitle || structuredContent?.title || '', '');
     if (autoCTA.ctaLink) {
-      ctaTextInput.value = autoCTA.ctaText;
-      ctaLinkInput.value = autoCTA.ctaLink;
+      markAutomaticPreviousPostCta(ctaLinkInput, autoCTA.ctaLink, ctaTextInput, autoCTA.ctaText);
       appendLog(`🔗 CTA 자동 생성: 내 블로그 이전 글 "${autoCTA.ctaText.replace(/^📖\s*/, '')}"`);
       return;
     }
@@ -1709,9 +1709,8 @@ export function autoGenerateCTA(structuredContent: any): void {
     console.warn('[CTA] CTA 자동 생성 실패:', e);
   }
 
-  ctaTextInput.value = '';
-  ctaLinkInput.value = '';
-  appendLog(`ℹ️ 발행된 이전 글이 없어 CTA가 비어있습니다. 글 선택 버튼으로 연결할 글을 선택하세요.`);
+  markAutomaticPreviousPostCta(ctaLinkInput, '', ctaTextInput, '');
+  appendLog(`ℹ️ 앱에 저장된 이전 글 후보가 없습니다. 이전 글 엮기를 사용하면 발행 시 네이버에서 같은 블로그·카테고리의 최신 글을 조회합니다.`);
 }
 
 // ✅ 불러오기/백업 복원 시 CTA 자동 채움

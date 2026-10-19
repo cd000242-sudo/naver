@@ -20,7 +20,8 @@ describe('scheduled publishing content-policy wiring', () => {
   });
 
   it('routes persisted scheduled posts through the common post cycle', () => {
-    const block = between('const runOptions: RunOptions', 'const publishedPost = createPublishedScheduledPostState');
+    const block = between('const runOptions: RunOptions', 'await saveScheduledPost(publishedPost);');
+    expect(block).toContain('createPublishedScheduledPostState(post, resolvedPublishedUrl)');
     expect(block).toContain('AutomationService.executePostCycle');
     expect(block).not.toMatch(/activeSchedulerAutomation\.run\s*\(/);
   });

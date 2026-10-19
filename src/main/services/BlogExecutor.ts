@@ -1,3 +1,7 @@
+import { fetchNaverPreviousPostCandidates, resolveNaverPreviousPostCategoryId } from './naverPreviousPostLookup.js';
+import { enforcePreviousPostScope, publicationCompletion, snapshotScheduledPublication, resolveDuePreviousPost } from './previousPostBoundary.js';
+import { resolveExpectedBlog } from '../../automation/expectedBlogIdentity.js';
+import { getBlogIdentityStore } from '../../automation/blogIdentityStore.js';
 // src/main/services/BlogExecutor.ts
 // 블로그 발행 비즈니스 로직 - executePostCycle의 실제 구현체
 //
@@ -540,7 +544,7 @@ export async function executePublishing(
     payload: PostCyclePayload,
     processedImages: ProcessedImage[],
     beforePublishCommit?: (candidate: EditorCommitCandidate) => Promise<void>,
-): Promise<{ success: boolean; url?: string; message?: string; failureCode?: import('../../automation/publishFailureClassifier.js').PublishFailureCode; refusedBeforeStart?: boolean }> {
+): Promise<PostCycleResult> {
     // 취소 체크
     if (AutomationService.isCancelRequested()) {
         return { success: false, message: '사용자가 취소했습니다.', failureCode: 'USER_CANCELLED' };
@@ -668,7 +672,13 @@ export async function executePublishing(
             affiliateLink: payload.affiliateLink,
             contentMode: payload.contentMode,
             toneStyle: payload.toneStyle,
+            blogId: payload.blogId,
+            categoryId: payload.categoryId,
             categoryName: payload.categoryName,
+            ctaType: payload.ctaType,
+            previousPostSelection: payload.previousPostSelection,
+            previousPostRequestedUrl: payload.previousPostRequestedUrl,
+            previousPostCandidate: payload.previousPostCandidate,
             previousPostTitle: payload.previousPostTitle,
             previousPostUrl: payload.previousPostUrl,
             isFullAuto: payload.isFullAuto,
@@ -703,7 +713,7 @@ export async function executePublishing(
 
         if (result.success) {
             sendLog(`✅ 발행 완료: ${result.url || '(URL 없음)'}`);
-            sendStatus({ success: true, url: result.url });
+            sendStatus({ success: true, url: result.url, ...publicationCompletion(result, payload) });
         } else {
             sendLog(`❌ 발행 실패: ${result.message}`);
             const failure = classifyPublishFailure(result.message);
@@ -716,7 +726,7 @@ export async function executePublishing(
             return { ...result, failureCode: failure.code };
         }
 
-        return result;
+        return { ...result, ...publicationCompletion(result, payload) };
     } catch (error) {
         const message = (error as Error).message || '발행 중 오류가 발생했습니다.';
         sendLog(`❌ 발행 오류: ${message}`);
@@ -874,6 +884,37 @@ export async function runFullPostCycle(
             return { success: false, message, failureCode: failure.code };
         }
         accountId = account.accountId;
+        const accountManager = deps.blogAccountManager as typeof deps.blogAccountManager & {
+            getAllAccounts?: () => Array<{ naverId?: string; blogId: string }>;
+        };
+        const expectedBlog = resolveExpectedBlog(account.naverId, accountManager?.getAllAccounts?.() || []);
+        const actualBlogId = expectedBlog.configured ? expectedBlog.blogId : getBlogIdentityStore().get(account.naverId);
+        const wantsPreviousPost = effectivePayload.ctaType === 'previous-post'
+            || effectivePayload.previousPostSelection === 'auto' || effectivePayload.previousPostSelection === 'manual'
+            || Boolean(effectivePayload.previousPostUrl || effectivePayload.previousPostRequestedUrl);
+        if (wantsPreviousPost && actualBlogId && !effectivePayload.categoryId && effectivePayload.categoryName) {
+            try {
+                const resolvedCategoryId = await resolveNaverPreviousPostCategoryId(
+                    { blogId: actualBlogId, categoryId: effectivePayload.categoryId }, effectivePayload.categoryName,
+                );
+                effectivePayload = { ...effectivePayload, categoryId: resolvedCategoryId };
+            } catch (categoryLookupError) {
+                sendLog(`⚠️ 실제 블로그 카테고리 번호를 확인하지 못해 이전글 연결을 생략합니다: ${sanitizeUserVisibleError(categoryLookupError)}`);
+            }
+        }
+        const previousScope = { blogId: actualBlogId, categoryId: effectivePayload.categoryId };
+        const localPrevious = effectivePayload.previousPostCandidate ? [effectivePayload.previousPostCandidate] : [];
+        let freshPrevious = [] as typeof localPrevious;
+        if (wantsPreviousPost && actualBlogId && effectivePayload.categoryId) {
+            try {
+                freshPrevious = await fetchNaverPreviousPostCandidates(previousScope);
+            } catch (lookupError) {
+                sendLog(`⚠️ 네이버 이전글 조회를 완료하지 못해 확인된 발행 기록에서 찾습니다: ${sanitizeUserVisibleError(lookupError)}`);
+            }
+        }
+        effectivePayload = wantsPreviousPost
+            ? resolveDuePreviousPost({ ...effectivePayload, blogId: actualBlogId }, [...freshPrevious, ...localPrevious], previousScope)
+            : enforcePreviousPostScope({ ...effectivePayload, blogId: actualBlogId }, previousScope);
 
         // 5. 취소 체크
         if (AutomationService.isCancelRequested()) {
@@ -984,6 +1025,7 @@ export async function runFullPostCycle(
         if (effectivePayload.publishMode === 'schedule' && effectivePayload.scheduleType === 'app-schedule') {
             const schedulePolicy = preparedPolicy;
             const scheduledPost = createAppScheduledPost({
+                ...snapshotScheduledPublication(effectivePayload),
                 postId: effectivePayload.postId,
                 title: effectivePayload.structuredContent?.selectedTitle || effectivePayload.title,
                 scheduleDate: effectivePayload.scheduleDate,
@@ -1069,6 +1111,7 @@ export async function runFullPostCycle(
         finalResult = {
             success: result.success,
             url: result.url,
+            ...publicationCompletion(result, effectivePayload),
             message: result.message,
             failureCode: result.failureCode,
             ...(result.refusedBeforeStart ? { refusedBeforeStart: true } : {}),

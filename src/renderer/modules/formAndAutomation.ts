@@ -2,6 +2,7 @@
 // [2026-02-26] formAndAutomation.ts - 폼 데이터 수집 + 자동화 실행/취소
 // ═══════════════════════════════════════════════════════════════════
 
+import { captureRendererPublicationScope, resolveRendererPreviousPostPayload } from '../utils/previousPostScope.js';
 import { buildRendererContentPolicyContext } from '../utils/contentPolicyContext.js';
 import { normalizePublishImageSequence } from '../../image/publishImageSequence.js';
 import { cancelActiveVisionInfer } from './visionInferCancel.js';
@@ -66,6 +67,7 @@ export function collectFormData(skipImages: boolean = false): RendererAutomation
   }
 
   const payload: RendererAutomationPayload = {
+    ...captureRendererPublicationScope({}),
     naverId,
     naverPassword,
     _publishFlow: 'legacy_form',
@@ -339,16 +341,7 @@ export function collectFormData(skipImages: boolean = false): RendererAutomation
 
     // ✅ 카테고리명 수집 고도화 (수동 입력이 우선, 비어있으면 선택된 카테고리명 사용)
     const categoryInput = document.getElementById('unified-category-name') as HTMLInputElement;
-    const articleTypeSelect = document.getElementById('unified-article-type') as HTMLSelectElement;
-
-    let categoryName = categoryInput?.value.trim() || '';
-
-    // 수동 입력이 없고 카테고리가 선택되어 있다면 해당 텍스트 사용
-    if (!categoryName && articleTypeSelect && articleTypeSelect.selectedIndex > 0) {
-      categoryName = articleTypeSelect.options[articleTypeSelect.selectedIndex].text;
-      // "건강/의학" -> "건강" 처럼 슬래시 앞부분만 취할지 고민했으나, 
-      // 사용자가 네이버 카테고리를 UI와 동일하게 맞췄을 가능성이 크므로 전체 텍스트 사용
-    }
+    const categoryName = categoryInput?.value.trim() || UnifiedDOMCache.getRealCategoryName() || '';
 
     if (categoryName) {
       payload.categoryName = categoryName;
@@ -417,7 +410,7 @@ export function collectFormData(skipImages: boolean = false): RendererAutomation
     cta: payload.ctaText,
   });
 
-  return payload;
+  return resolveRendererPreviousPostPayload(payload, () => loadGeneratedPosts());
 }
 
 // ✅ 풀오토 발행 중 플래그 (다른 모달 표시 방지)

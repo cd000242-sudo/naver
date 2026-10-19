@@ -31,6 +31,9 @@ export function sendLog(message: string): void {
  * 렌더러에 상태 전송
  */
 export function sendStatus(status: {
+    postId?: string;
+    publishMode?: 'draft' | 'publish' | 'schedule';
+    publicationDestination?: { blogId: string; categoryId?: string };
     success: boolean;
     cancelled?: boolean;
     message?: string;

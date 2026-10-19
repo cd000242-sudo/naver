@@ -73,6 +73,42 @@ function ensureTopShortcutBar() {
   });
 })();
 
+// 오른쪽 도구 모음과 하단 이미지 설정·AI 버튼을 함께 접는다. 개별 표시 조건과 위쪽 바로가기는 유지한다.
+(function initRightToolbarCollapse() {
+  const toolbar = document.getElementById('right-floating-buttons');
+  if (!toolbar || document.getElementById('right-toolbar-toggle')) return;
+  const storageKey = 'rightToolbarCollapsed';
+  const toggle = document.createElement('button');
+  toggle.id = 'right-toolbar-toggle';
+  toggle.type = 'button';
+  toggle.setAttribute('aria-controls', `${toolbar.id} heading-image-setting-btn ai-assistant-btn`);
+  document.body.appendChild(toggle);
+
+  function setCollapsed(collapsed) {
+    toolbar.hidden = collapsed;
+    document.body.classList.toggle('right-tools-collapsed', collapsed);
+    toggle.setAttribute('aria-expanded', String(!collapsed));
+    toggle.textContent = collapsed ? '도구 펼치기 ‹' : '도구 접기 ›';
+  }
+
+  let initiallyCollapsed = false;
+  try {
+    initiallyCollapsed = window.localStorage.getItem(storageKey) === 'true';
+  } catch {
+    console.warn('[RightToolbar] 도구 모음 표시 설정을 불러오지 못했습니다.');
+  }
+  setCollapsed(initiallyCollapsed);
+
+  toggle.addEventListener('click', () => {
+    setCollapsed(!toolbar.hidden);
+    try {
+      window.localStorage.setItem(storageKey, String(toolbar.hidden));
+    } catch {
+      console.warn('[RightToolbar] 도구 모음 표시 설정을 저장하지 못했습니다.');
+    }
+  });
+})();
+
 // 플로팅 버튼 스크롤 따라다니기 스크립트
 (function() {
   let lastScrollTop = 0;

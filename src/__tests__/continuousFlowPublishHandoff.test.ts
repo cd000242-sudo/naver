@@ -50,7 +50,7 @@ describe('continuous Flow publish handoff regression guard', () => {
     const fullAuto = read('renderer/modules/fullAutoFlow.ts');
 
     expect(fullAuto.match(/resolveFullAutoProgressModal\(/g)?.length).toBeGreaterThanOrEqual(2);
-    expect(fullAuto).toMatch(/try\s*{\s*autoLinkPreviousPost\(formData, modal\);\s*}\s*catch/);
+    expect(fullAuto).toMatch(/try\s*{\s*formData = autoLinkPreviousPost\(formData, modal\);\s*}\s*catch/);
   });
 
   it('distinguishes entering the renderer flow from dispatching automation to the main process', () => {
@@ -72,7 +72,7 @@ describe('continuous Flow publish handoff regression guard', () => {
   it('announces and reasserts the continuous state before the login handoff', () => {
     const continuous = read('renderer/modules/continuousPublishing.ts');
     const handoffIndex = continuous.indexOf('네이버 로그인 및 발행 단계로 이동합니다.');
-    const publishIndex = continuous.indexOf("await withStopCheck(executeUnifiedAutomation(formData), { kind: 'publish' });");
+    const publishIndex = continuous.indexOf("await withStopCheck(executeUnifiedAutomation(scopedFormData), { kind: 'publish' });");
     const reassertIndex = continuous.lastIndexOf('setContinuousModeState(true);', publishIndex);
 
     expect(handoffIndex).toBeGreaterThan(-1);

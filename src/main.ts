@@ -1,3 +1,5 @@
+import { publicationCompletion, snapshotScheduledPublication, resolveDuePreviousPost } from './main/services/previousPostBoundary.js';
+import { getBlogIdentityStore } from './automation/blogIdentityStore.js';
 import { findAccountsNamingBlog, resolveExpectedBlog } from './automation/expectedBlogIdentity.js';
 import { app, BrowserWindow, dialog, ipcMain, nativeImage, NativeImage, shell, Notification, Tray, Menu } from 'electron';
 import './runtime/e2eUserDataBootstrap.js';
@@ -5419,7 +5421,7 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
 
     sendLog(`🚀 다중계정 동시발행 시작: ${accountIds.length}개 계정`);
 
-    const results: Array<{ accountId: string; success: boolean; message?: string; url?: string; failureCode?: string; refusedBeforeStart?: boolean }> = [];
+    const results: Array<{ accountId: string; success: boolean; message?: string; url?: string; failureCode?: string; refusedBeforeStart?: boolean; postId?: string; publishMode?: 'draft' | 'publish' | 'schedule'; publicationDestination?: { blogId: string; categoryId?: string } }> = [];
 
     // ✅ [2026-01-20] 순차 예약 시간 계산을 위한 기준값
     let baseScheduleDate = options?.scheduleDate;
@@ -6144,6 +6146,7 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
           success: result.success,
           message: result.message,
           url: result.url,
+          ...publicationCompletion(result, payload),
           failureCode,
           // The guard refused the job before any browser opened: the caller must not read it as an unknown outcome.
           ...((result as any).refusedBeforeStart === true ? { refusedBeforeStart: true } : {}),
@@ -9803,7 +9806,7 @@ app.whenReady().then(async () => {
                       debugInfo.finalResult = 'found';
                       debugInfo.foundTitle = foundPost.title;
                       debugInfo.foundId = foundPost.id;
-                      return { posts: [foundPost], found: true, debug: debugInfo };
+                      return { posts: [foundPost], candidates: posts, found: true, debug: debugInfo };
                     } else {
                       debugInfo.finalResult = 'not_found';
                       return { posts: [], found: false, error: '글을 찾을 수 없습니다', debug: debugInfo };
@@ -9966,6 +9969,7 @@ app.whenReady().then(async () => {
               });
 
               const runOptions: RunOptions = {
+                ...snapshotScheduledPublication(post),
                 title: sanitizedScheduledTitle,
                 content: sanitizedScheduledContent,
                 structuredContent: sanitizedScheduledStructuredContent,
@@ -9974,11 +9978,11 @@ app.whenReady().then(async () => {
                 publishMode: 'publish', // ✅ 즉시 발행 (예약이 아님!)
                 toneStyle: postData.toneStyle || 'professional',
                 // [2026-10-13] The saved post's CTAs were never replayed here — scheduled posts went out without them.
-                ctas: Array.isArray(postData.ctas) ? postData.ctas : undefined,
-                ctaText: postData.ctaText || undefined,
-                ctaLink: postData.ctaLink || undefined,
-                ctaPosition: postData.ctaPosition || undefined,
-                skipCta: postData.skipCta === true,
+                ctas: post.ctas ?? (Array.isArray(postData.ctas) ? postData.ctas : undefined),
+                ctaText: post.ctaText ?? postData.ctaText ?? undefined,
+                ctaLink: post.ctaLink ?? postData.ctaLink ?? undefined,
+                ctaPosition: post.ctaPosition ?? postData.ctaPosition ?? undefined,
+                skipCta: post.skipCta ?? (postData.skipCta === true),
               };
 
               console.log(`[Scheduler] 자동화 실행 시작: ${postData.title}`);
@@ -9989,7 +9993,7 @@ app.whenReady().then(async () => {
               await saveScheduledPost(createPublishingScheduledPostState(post));
 
               const activeSchedulerAutomation = schedulerAutomation;
-              const scheduledPublishPayload = {
+              let scheduledPublishPayload = {
                   ...runOptions,
                   naverId: accountNaverId,
                   naverPassword: accountNaverPassword,
@@ -10008,6 +10012,14 @@ app.whenReady().then(async () => {
                   _publishFlow: 'app_scheduler',
                   _contentPolicyManualReviewPromptAllowed: true,
                 } as any;
+              const expectedScheduledBlog = resolveExpectedBlog(accountNaverId, blogAccountManager.getAllAccounts());
+              const scheduledBlogId = expectedScheduledBlog.configured
+                ? expectedScheduledBlog.blogId : getBlogIdentityStore().get(accountNaverId);
+              const completedSchedules = (await getAllScheduledPosts()).filter(item => item.status === 'published');
+              scheduledPublishPayload = resolveDuePreviousPost(scheduledPublishPayload, [
+                ...(Array.isArray(generatedPosts.candidates) ? generatedPosts.candidates : []),
+                ...completedSchedules,
+              ], { blogId: scheduledBlogId, categoryId: post.categoryId });
               const automationResult = await withAbortableDeadline(
                 () => executeWithContentPolicyManualReview(scheduledPublishPayload, {
                   execute: (approvedPayload) => AutomationService.executePostCycle(approvedPayload as any),
@@ -10032,7 +10044,13 @@ app.whenReady().then(async () => {
                 `https://blog.naver.com/${accountNaverId}`,
               );
 
-              const publishedPost = createPublishedScheduledPostState(post, resolvedPublishedUrl);
+              const scheduledCompletion = publicationCompletion({ ...automationResult, url: resolvedPublishedUrl }, scheduledPublishPayload);
+              const publishedPost = {
+                ...createPublishedScheduledPostState(post, resolvedPublishedUrl),
+                isPublished: true,
+                publishedBlogId: scheduledCompletion.publicationDestination?.blogId,
+                publishedCategoryId: scheduledCompletion.publicationDestination?.categoryId,
+              };
               scheduledQuotaLease.commit();
               // From this point the remote outcome is known. No local/UI
               // post-processing failure may downgrade it to failed/uncertain.
@@ -10050,7 +10068,7 @@ app.whenReady().then(async () => {
 
               // ✅ UI에 알림 전송
               mainWindow?.webContents.send('automation:log', `✅ 예약 발행 완료: ${post.title}`);
-              mainWindow?.webContents.send('automation:status', { success: true, message: `예약 발행 완료: ${post.title}` });
+              mainWindow?.webContents.send('automation:status', { success: true, message: `예약 발행 완료: ${post.title}`, url: resolvedPublishedUrl, ...scheduledCompletion });
 
               // ✅ 자동 초기화 (다음 글 작성 준비)
               mainWindow?.webContents.send('automation:reset-fields');
@@ -10074,6 +10092,12 @@ app.whenReady().then(async () => {
                   success: true,
                   message: `발행 완료: ${post.title} (일부 후처리 확인 필요)`,
                   url: stateAfterError.publishedUrl,
+                  postId: post.postId,
+                  publishMode: 'publish',
+                  publicationDestination: stateAfterError.publishedBlogId ? {
+                    blogId: stateAfterError.publishedBlogId,
+                    categoryId: stateAfterError.publishedCategoryId,
+                  } : undefined,
                 });
                 continue;
               }

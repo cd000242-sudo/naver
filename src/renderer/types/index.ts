@@ -185,6 +185,8 @@ export interface GeneratedPost {
     category?: string;
     publishedUrl?: string;
     publishedAt?: string;
+    publishedBlogId?: string;
+    publishedCategoryId?: string;
     isPublished?: boolean;
     publishMode?: 'draft' | 'publish' | 'schedule'; // ✅ [2026-03-05] 발행 상태 구분
     toneStyle?: string;

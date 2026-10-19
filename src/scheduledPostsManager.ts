@@ -1,3 +1,4 @@
+import type { ScheduledPublicationSnapshot } from './main/services/previousPostBoundary.js';
 import { app } from 'electron';
 import path from 'path';
 import fs from 'fs/promises';
@@ -8,7 +9,10 @@ import { sanitizeUserVisibleError } from './runtime/userVisibleError.js';
 // ✅ 반복 일정 타입 추가
 export type RecurrenceType = 'none' | 'daily' | 'weekly' | 'monthly';
 
-export interface ScheduledPost {
+export interface ScheduledPost extends ScheduledPublicationSnapshot {
+  publishedBlogId?: string;
+  publishedCategoryId?: string;
+  isPublished?: boolean;
   id: string;
   postId?: string; // ✅ localStorage의 generatedPosts에서 찾을 때 사용
   title: string;
