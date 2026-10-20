@@ -2,6 +2,8 @@
 <html lang="ko">
 
 <head>
+    <!-- 2026-10-20 주문조회는 이메일 인증번호를 거쳐야 한다(이메일만으로 코드가 보이던 구멍). 인증 단계를 아는 새 화면으로 보낸다. -->
+    <script>location.replace('/lookup/' + location.search + location.hash);</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>주문 조회 — Leaders Pro</title>

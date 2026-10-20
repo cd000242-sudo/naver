@@ -76,6 +76,9 @@ function LookupPage() {
     const [cancellingCode, setCancellingCode] = useState<string | null>(null);
     const [error, setError] = useState<{ title: string; message: string } | null>(null);
     const [notice, setNotice] = useState<string | null>(null);
+    // 이메일 인증(2026-10-20) — 이메일만으로 남의 코드가 보이던 구멍을 막았다. 그 메일함으로 간 6자리를 맞혀야 조회된다.
+    const [codeSent, setCodeSent] = useState(false);
+    const [authCode, setAuthCode] = useState('');
     const emailInputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
@@ -88,7 +91,7 @@ function LookupPage() {
 
     const onTab = (t: 'email' | 'order') => { reset(); setTab(t); };
 
-    const lookupByEmail = async () => {
+    const requestLookupCode = async () => {
         const e = email.trim();
         if (!e || !e.includes('@')) {
             setError({ title: '입력 오류', message: '올바른 이메일 주소를 입력해주세요.' });
@@ -96,12 +99,44 @@ function LookupPage() {
         }
         reset(); setLoading(true);
         try {
-            // 주문 + 구독 동시 조회
+            const result = await callGAS('lookup-email-request-code', { email: e });
+            setLoading(false);
+            if (result?.ok) {
+                setCodeSent(true);
+                setAuthCode('');
+                setNotice(result.message || '인증번호를 보냈습니다. 메일함을 확인해 주세요.');
+            } else {
+                setError({ title: '인증번호 요청 실패', message: result?.error || '잠시 후 다시 시도해주세요.' });
+            }
+        } catch {
+            setLoading(false);
+            setError({ title: '연결 실패', message: '서버에 연결할 수 없습니다. 잠시 후 다시 시도해주세요.' });
+        }
+    };
+
+    const lookupByEmail = async () => {
+        const e = email.trim();
+        const c = authCode.trim();
+        if (!/^\d{6}$/.test(c)) {
+            setError({ title: '입력 오류', message: '메일로 받은 6자리 인증번호를 입력해주세요.' });
+            return;
+        }
+        reset(); setLoading(true);
+        try {
+            const verified = await callGAS('lookup-email-verify', { email: e, authCode: c });
+            if (!verified?.ok || !verified.lookupToken) {
+                setLoading(false);
+                setError({ title: '인증 실패', message: verified?.error || '인증번호가 올바르지 않습니다.' });
+                return;
+            }
+            // 주문 + 구독 동시 조회 — 같은 조회 토큰(30분)으로
             const [orderResult, subResult] = await Promise.all([
-                callGAS('lookup-by-email', { email: e }),
-                callGAS('lookup-subscriptions-by-email', { email: e }),
+                callGAS('lookup-by-email', { email: e, lookupToken: verified.lookupToken }),
+                callGAS('lookup-subscriptions-by-email', { email: e, lookupToken: verified.lookupToken }),
             ]);
             setLoading(false);
+            setCodeSent(false);
+            setAuthCode('');
             const hasOrders = orderResult?.ok && (orderResult.orders || []).length > 0;
             const hasSubs = subResult?.ok && (subResult.subscriptions || []).length > 0;
             if (hasOrders) setOrders(orderResult.orders || []);
@@ -191,12 +226,30 @@ function LookupPage() {
                             ref={emailInputRef}
                             type="email"
                             value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            onKeyDown={(e) => { if (e.key === 'Enter') lookupByEmail(); }}
+                            onChange={(e) => { setEmail(e.target.value); setCodeSent(false); setAuthCode(''); }}
+                            onKeyDown={(e) => { if (e.key === 'Enter' && !codeSent) requestLookupCode(); }}
                             placeholder="구매 시 입력한 이메일 주소"
                             style={inputStyle}
                         />
-                        <button onClick={lookupByEmail} disabled={loading} style={btnStyle}>{loading ? '조회 중...' : '조회하기'}</button>
+                        {codeSent && (
+                            <input
+                                type="text"
+                                inputMode="numeric"
+                                autoComplete="one-time-code"
+                                maxLength={6}
+                                value={authCode}
+                                onChange={(e) => setAuthCode(e.target.value.replace(/\D/g, ''))}
+                                onKeyDown={(e) => { if (e.key === 'Enter') lookupByEmail(); }}
+                                placeholder="메일로 받은 6자리 인증번호"
+                                style={inputStyle}
+                            />
+                        )}
+                        {codeSent
+                            ? <button onClick={lookupByEmail} disabled={loading} style={btnStyle}>{loading ? '조회 중...' : '확인하고 조회'}</button>
+                            : <button onClick={requestLookupCode} disabled={loading} style={btnStyle}>{loading ? '보내는 중...' : '인증번호 받기'}</button>}
+                        {codeSent && (
+                            <button onClick={requestLookupCode} disabled={loading} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.55)', fontSize: 13, marginTop: 10, cursor: 'pointer', width: '100%' }}>인증번호 다시 받기</button>
+                        )}
                     </div>
                 )}
 

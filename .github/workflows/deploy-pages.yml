@@ -52,7 +52,7 @@ jobs:
       - name: Verify seasonal keyword data and filters
         run: node --test spa/tests/seasonal-keywords.test.mjs spa/tests/seasonal-publication.test.mjs
       - name: Verify purchase guide, sessions, key sync and product pages
-        run: node --test spa/tests/purchase-guide.test.mjs spa/tests/leword-web-session.test.mjs spa/tests/app-key-sync.test.mjs spa/tests/product-pages.test.mjs scripts/tests/free-sample-repair.test.mjs spa/tests/post-plan-site.test.mjs
+        run: node --test spa/tests/purchase-guide.test.mjs spa/tests/lookup-email-verify.test.mjs spa/tests/leword-web-session.test.mjs spa/tests/app-key-sync.test.mjs spa/tests/product-pages.test.mjs scripts/tests/free-sample-repair.test.mjs spa/tests/post-plan-site.test.mjs
 
       - name: Prepare deploy directory
         run: |
