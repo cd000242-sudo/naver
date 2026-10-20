@@ -385,6 +385,7 @@
 
                     const script = document.createElement('script');
                     script.src = `${CONFIG.GAS_URL}?action=send-code-email` +
+                        `&orderId=${encodeURIComponent(currentOrderId || '')}` +
                         `&email=${encodeURIComponent(email)}` +
                         `&code=${encodeURIComponent(code)}` +
                         `&product=${encodeURIComponent(product)}` +
@@ -442,6 +443,7 @@
 
                     const script = document.createElement('script');
                     script.src = `${CONFIG.GAS_URL}?action=send-code-email` +
+                        `&orderId=${encodeURIComponent(currentOrderId || '')}` +
                         `&email=${encodeURIComponent(email)}` +
                         `&code=${encodeURIComponent(currentCode)}` +
                         `&product=${encodeURIComponent(currentProduct)}` +
