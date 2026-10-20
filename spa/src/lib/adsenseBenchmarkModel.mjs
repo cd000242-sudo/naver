@@ -3,7 +3,25 @@
  * 여기서는 거르고 · 세고 · 실측 통계를 문장으로 옮기기만 한다(지어낸 수치 없음).
  */
 
+import { shuffleWithinTiers } from './hourlyShuffle.mjs';
+
 const clean = (v) => (typeof v === 'string' ? v.trim() : '');
+
+/*
+ * 플랫폼(2026-10-20 사장님 "워드프레스랑 티스토리, 블로그스팟 구분 — 각각 성격이 다릅니다. 워드프레스 먼저").
+ * 판의 출처 글마다 platform 이 실린다(앱 레포 adsense-benchmarks-core.cjs, 엑셀 '플랫폼' 열 기준).
+ * note 는 검색 유입 경로만 적는다 — 수익 · 노출 성과를 말하지 않는다.
+ */
+export const ADSENSE_PLATFORMS = [
+  { key: 'wordpress', label: '워드프레스', note: '독립 도메인 · 구글 검색 유입 중심' },
+  { key: 'tistory', label: '티스토리', note: '다음(카카오) · 구글 검색 유입' },
+  { key: 'blogspot', label: '블로그스팟', note: '구글 블로거 · 구글 검색 유입 중심' },
+];
+
+/** 카드의 플랫폼 — 출처 글들의 플랫폼 모음. */
+export function cardPlatforms(card) {
+  return new Set((card?.sources || []).map((s) => clean(s?.platform)).filter(Boolean));
+}
 
 /** 블로그 수(같은 블로그의 글 여러 개는 1). */
 export function blogCount(card) {
@@ -11,9 +29,10 @@ export function blogCount(card) {
 }
 
 /** 거르기 — mode 'star'(고수 3곳 이상) · 분야 · 검색어(키워드 · 제목 · 출처 글 제목). */
-export function filterAdsenseCards(cards, { mode = 'all', category = '', query = '', nowMs = Date.now() } = {}) {
+export function filterAdsenseCards(cards, { mode = 'all', category = '', query = '', platform = '', nowMs = Date.now() } = {}) {
   const q = clean(query).toLowerCase().replace(/\s+/g, '');
   return (Array.isArray(cards) ? cards : []).filter((c) => {
+    if (platform && !cardPlatforms(c).has(platform)) return false;
     if (mode === 'low' && adsenseCompetition(c, nowMs).tier !== 0) return false;
     if (mode === 'star' && !c.recommended) return false;
     if (category && c.category !== category) return false;
@@ -88,4 +107,32 @@ export function rankAdsenseCards(cards, nowMs = Date.now()) {
       || blogCount(b.card) - blogCount(a.card)
       || String(a.card.id).localeCompare(String(b.card.id)))
     .map((entry) => entry.card);
+}
+
+/*
+ * 지금 쓰면 트래픽이 오나(2026-10-20) — 판의 card.demand 는 앱 레포 adsense-benchmarks-trend.cjs 가 데이터랩 주별 실측으로 붙인다
+ * (지금 오르는 중 · 곧 시즌 · 꾸준함 · 식는 중 · 피크 지남). 화면은 그 판정으로 순서를 정하고 '지금 써야 할 키워드'를 고른다.
+ */
+const HOT_VERDICTS = new Set(['rising', 'season-soon']);
+const isHot = (card) => HOT_VERDICTS.has(card?.demand?.verdict);
+
+/** 표시 묶음 — 경쟁 등급이 먼저, 같은 등급 안에서는 지금 오르는 · 곧 시즌 소재가 앞 묶음. */
+export function adsenseOrderTier(card, nowMs = Date.now()) {
+  return adsenseCompetition(card, nowMs).tier * 2 + (isHot(card) ? 0 : 1);
+}
+
+/** 순위대로 세운 뒤 같은 묶음 안에서만 섞는다(사장님 선택 '같은 등급 안에서만'). 원본은 바꾸지 않는다. */
+export function shuffleAdsenseCards(cards, nowMs = Date.now(), seed = 0) {
+  return shuffleWithinTiers(rankAdsenseCards(cards, nowMs), (c) => adsenseOrderTier(c, nowMs), seed);
+}
+
+/** 지금 써야 할 키워드 — 오르는 중 · 곧 시즌이면서 경쟁 등급 0~1(실측 · 검색 100 이상 · 문서/검색 5배 이하). 급상승 → 경쟁 낮은 순. */
+export function adsenseNowPicks(cards, nowMs = Date.now(), limit = 6) {
+  const verdictRank = (c) => (c.demand.verdict === 'rising' ? 0 : 1);
+  return (Array.isArray(cards) ? cards : [])
+    .filter((c) => isHot(c) && adsenseCompetition(c, nowMs).tier <= 1)
+    .map((c) => ({ c, ratio: adsenseCompetition(c, nowMs).ratio ?? Infinity }))
+    .sort((a, b) => verdictRank(a.c) - verdictRank(b.c) || a.ratio - b.ratio || (b.c.metrics?.searchVolume || 0) - (a.c.metrics?.searchVolume || 0))
+    .slice(0, Math.max(0, limit))
+    .map((x) => x.c);
 }
