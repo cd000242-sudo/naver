@@ -7,6 +7,9 @@ import { naverSearchUrl } from './preemptionMeta';
 import { BoardFreshness } from './BoardFreshness';
 import { normalizeTopicBrief, searchVolumeLabel, briefVolumeLabel, briefVolumeDetail, topicBriefCopy, type TopicBriefView } from '../../lib/topicBriefsModel';
 import './TopicBriefsBoard.css';
+// 검색어 덧붙이기(2026-10-20 사장님 "오늘의 글감도 마찬가지") — 그래프 · 지식인 · 해결할 문제 · 행동 제목 · 벤치마킹, 지금 뜨는 글감 먼저
+import { enrichKey, isHotEnrich, loadKeywordEnrich, type KeywordEnrich } from '../../lib/keywordEnrich.mjs';
+import KeywordAids from './shared/KeywordAids';
 
 type RoundSlot = '아침' | '오후' | '저녁';
 // day 는 7일 창고(2026-09-29)부터 적힌다. 없으면 builtAt 의 KST 날짜로 읽는다.
@@ -36,7 +39,7 @@ function CopyTitle({ text }: { text: string }) {
     return <button type="button" className="tb-title-copy" onClick={(event) => void copy(event)} aria-label={`제목 복사: ${text}`}>{done || '복사'}</button>;
 }
 
-export function BriefCard({ brief, featured = false, onAnalyze }: { brief: TopicBriefView; featured?: boolean; onAnalyze?: (keyword: string) => void }) {
+export function BriefCard({ brief, featured = false, onAnalyze, enrich }: { brief: TopicBriefView; featured?: boolean; onAnalyze?: (keyword: string) => void; enrich?: KeywordEnrich }) {
     const groupId = useId();
     const seoTitles = brief.guide.seoTitles.length ? brief.guide.seoTitles : brief.titles.map(title => title.text);
     const [selectedTitle, setSelectedTitle] = useState(seoTitles[0] || brief.title);
@@ -58,6 +61,7 @@ export function BriefCard({ brief, featured = false, onAnalyze }: { brief: Topic
         <div className="tb-metrics"><a className="tb-keyword" href={naverSearchUrl(brief.core.keyword)} target="_blank" rel="noreferrer">{brief.core.keyword}</a><span title={briefVolumeDetail(brief.core)}>월 검색량 <b>{briefVolumeLabel(brief.core)}</b></span><span title={brief.core.documentCountMeasuredAt ? `문서량 측정 ${kst(brief.core.documentCountMeasuredAt)}` : undefined}>블로그 문서량 <b>{searchVolumeLabel(brief.core.documentCount)}</b></span><span className={`tb-fit tb-fit-${brief.core.fit}`}>상위노출 가능성 <b>{brief.core.fit === '미측정' ? '판단 보류' : `경쟁 여유 ${brief.core.fit}`}</b></span>{brief.alternative && <a className="tb-alternative" href={naverSearchUrl(brief.alternative.keyword)} target="_blank" rel="noreferrer">대안 · {brief.alternative.keyword}</a>}</div>
         <p className="tb-volume-note">{briefVolumeDetail(brief.core)}</p>
         <p className="tb-measurement-note">{brief.core.serpFacing === null ? '상위 검색 결과 미측정' : `상위 10개 중 핵심어를 포함한 제목 ${brief.core.serpFacing}개`} · 노출 보장 아님{!brief.alternative && ' · 대안 키워드 미확보'}</p>
+        <KeywordAids query={brief.core.keyword} enrich={enrich} />
         <section className="tb-summary"><h4>무슨 일이 있었나요</h4><p>{brief.summary}</p></section>
         <fieldset className="tb-titles"><legend>제목 후보</legend><h4>네이버 SEO 제목 <small>{brief.guide.seoTitles.length ? '검색 의도 중심' : '기존 제목 후보 · 적합성 확인'}</small></h4>{seoTitles.map((title, index) => <label key={`seo-${index}`}><input type="radio" name={`${groupId}-title`} checked={selectedTitle === title} onChange={() => setSelectedTitle(title)} /><span className="tb-title-kind">검색</span><span>{title}</span><CopyTitle text={title} /></label>)}<h4>네이버 홈판 제목 <small>따옴표 스타터 · 후킹형</small></h4>{brief.guide.homeTitles.length ? brief.guide.homeTitles.map((title,index) => <label key={`home-${index}`}><input type="radio" name={`${groupId}-title`} checked={selectedTitle === title} onChange={() => setSelectedTitle(title)} /><span className="tb-title-kind tb-home-title">홈판</span><span>{title}</span><CopyTitle text={title} /></label>) : <p className="tb-muted">확인된 내용에 맞춘 홈판 제목을 아직 확보하지 못했습니다.</p>}</fieldset>
         <section className="tb-direction"><h4>글을 쓰는 방향</h4><p>{brief.guide.direction || brief.angle || '원문에서 대상·조건·시점을 확인하고 독자가 해결할 질문부터 설명하세요.'}</p></section>
@@ -71,7 +75,7 @@ export function BriefCard({ brief, featured = false, onAnalyze }: { brief: Topic
     </article>;
 }
 
-export function TopicBriefsContent({ data, error = '', onAnalyze, sourceNotice }: { data: TopicBriefs | null; error?: string; onAnalyze?: (keyword: string) => void; sourceNotice?: ReactNode }) {
+export function TopicBriefsContent({ data, error = '', onAnalyze, sourceNotice, enrich }: { data: TopicBriefs | null; error?: string; onAnalyze?: (keyword: string) => void; sourceNotice?: ReactNode; enrich?: Map<string, KeywordEnrich> }) {
     const [unlocked, setUnlocked] = useState(() => isUnlocked());
     const [preferred, setPreferred] = useState(loadPreference);
     const choosePreference = (value: string) => { setPreferred(value); try { localStorage.setItem(PRIORITY_STORAGE, value); } catch { /* This session still uses the selected order. */ } };
@@ -104,7 +108,9 @@ export function TopicBriefsContent({ data, error = '', onAnalyze, sourceNotice }
     const priority = (brief: TopicBriefView) => activePreference === FINANCIAL_FIRST ? Number(financialField(brief.field)) : Number(brief.field === activePreference);
     // 먼저 볼 분야 → 추천 → 작성 안내 있음 묶음은 지키고, 묶음 안은 매시 정각 새로 섞는다(2026-10-10 사장님 "오늘의 글감도 1시간 주기로 섞고 수동 버튼").
     // 무료(잠김)는 고정 3장 그대로 — 섞으면 매시간 다른 3장이 보여 무료 한도가 사실상 풀린다.
-    const tier = ({ brief }: { brief: TopicBriefView }) => (1 - priority(brief)) * 4 + (brief.recommended ? 0 : 2) + (brief.writing ? 0 : 1);
+    // 2026-10-20: 같은 분야 우선 묶음 안에서는 지금 검색 관심이 뜨는(새로 뜬 · 오르는 · 곧 시즌) 글감이 먼저.
+    const enrichOf = (brief: TopicBriefView) => enrich?.get(enrichKey(brief.core.keyword));
+    const tier = ({ brief }: { brief: TopicBriefView }) => (1 - priority(brief)) * 8 + (isHotEnrich(enrichOf(brief)) ? 0 : 4) + (brief.recommended ? 0 : 2) + (brief.writing ? 0 : 1);
     const ordered = unlocked ? shuffleWithinTiers(filtered, tier, seed) : [...filtered].sort((a, b) => tier(a) - tier(b));
     const visible = unlocked ? ordered.slice(0, shown) : ordered.slice(0, FREE_BRIEFS);
     const remaining = unlocked ? ordered.length - visible.length : 0;
@@ -117,7 +123,7 @@ export function TopicBriefsContent({ data, error = '', onAnalyze, sourceNotice }
         {rounds.length > 0 && <div className="tb-rounds" aria-label="회차 선택"><button type="button" aria-pressed={!activeRound} className={`tb-round${!activeRound?' is-active':''}`} onClick={()=>showRound(null)}><strong>전체 누적</strong><span>{shelfItems.length}건 · {dayCount > 1 ? `최근 ${shelfDays}일 ${dayCount}일치` : `최근 ${shelfDays}일 · 오늘 회차만`}</span></button>{(['아침','오후','저녁'] as const).map(name => {const round=latestRounds.find(item=>item.slot===name);return <button type="button" key={name} disabled={!round} aria-pressed={activeRound?.slot===name} className={`tb-round${activeRound?.slot===name?' is-active':''}`} onClick={()=>showRound(name)}><strong>{name}</strong><span>{round?`${round.items.length}건 · ${kst(round.builtAt)}`:`${SLOT_TIME[name]} 예정`}</span></button>;})}</div>}
         {data && <div className="tb-preference"><label>먼저 볼 분야 <select aria-label="먼저 볼 분야" value={activePreference} onChange={event => choosePreference(event.target.value)}><option value={FINANCIAL_FIRST}>지원금·비즈니스·경제 우선</option><option value={ORIGINAL_ORDER}>전체 분야</option>{fields.filter(name => name !== '전체').map(name => <option key={name} value={name}>{name}</option>)}</select></label><small>공개된 글감의 표시 순서만 바뀝니다. 다른 분야도 함께 볼 수 있습니다. 같은 묶음 안은 매시 정각 새로 섞입니다.</small>{unlocked && <button type="button" className="tb-shuffle" onClick={() => { reshuffle(); setShown(PAGE_SIZE); }}>순서 섞기</button>}</div>}
         {data && <div className="tb-fields" aria-label="분야 선택"><strong>{filtered.length} / {all.length}개</strong>{fields.map(name=><button type="button" key={name} aria-pressed={activeField===name} className={`tb-field${activeField===name?' is-active':''}`} onClick={()=>showField(name)}>{name}<b>{name==='전체'?all.length:all.filter(brief=>brief.field===name).length}</b></button>)}</div>}
-        <div className="tb-list">{visible.map(({ brief, key })=><BriefCard key={key} brief={brief} onAnalyze={onAnalyze} />)}</div>
+        <div className="tb-list">{visible.map(({ brief, key })=><BriefCard key={key} brief={brief} onAnalyze={onAnalyze} enrich={enrichOf(brief)} />)}</div>
         {remaining > 0 && <button type="button" className="lw-picks-btn tb-more" onClick={()=>setShown(value=>value+PAGE_SIZE)}>더 보기 · 남은 {remaining}개</button>}
         {data && !error && !filtered.length && <p className="tb-empty">이 회차에 공개된 글감이 없습니다.</p>}
         {data && !unlocked && filtered.length>FREE_BRIEFS && <LicenseGate onUnlock={()=>setUnlocked(isUnlocked())} remaining={filtered.length-FREE_BRIEFS} freeRows={FREE_BRIEFS} boardLabel="오늘의 글감" />}
@@ -130,6 +136,8 @@ export default function TopicBriefsBoard({ onAnalyze }: { onAnalyze?: (keyword: 
     const [notice, setNotice] = useState('');
     const [attempt, setAttempt] = useState(0);
     const [loading, setLoading] = useState(true);
+    const [enrich, setEnrich] = useState<Map<string, KeywordEnrich>>(() => new Map());
+    useEffect(() => { let alive = true; void loadKeywordEnrich().then(map => { if (alive) setEnrich(map); }); return () => { alive = false; }; }, [attempt]);
     useEffect(() => {
         let alive = true;
         setLoading(true); setError('');
@@ -141,7 +149,7 @@ export default function TopicBriefsBoard({ onAnalyze }: { onAnalyze?: (keyword: 
         }).catch(() => { if (alive) {setError('자료를 불러오지 못했습니다. 기존 결과를 유지합니다.');setLoading(false);} });
         return () => { alive = false; };
     }, [attempt]);
-    return <TopicBriefsContent data={data} error={error} onAnalyze={onAnalyze} sourceNotice={<><span>{loading ? '사이트와 앱 저장 결과를 확인하고 있습니다…' : notice}</span><button type="button" className="lw-picks-btn" disabled={loading} onClick={() => setAttempt(value => value + 1)}>다시 확인</button></>} />;
+    return <TopicBriefsContent data={data} error={error} onAnalyze={onAnalyze} enrich={enrich} sourceNotice={<><span>{loading ? '사이트와 앱 저장 결과를 확인하고 있습니다…' : notice}</span><button type="button" className="lw-picks-btn" disabled={loading} onClick={() => setAttempt(value => value + 1)}>다시 확인</button></>} />;
 }
 
 

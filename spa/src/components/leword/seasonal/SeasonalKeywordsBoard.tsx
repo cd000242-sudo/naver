@@ -1,5 +1,10 @@
 import { useEffect, useMemo, useState, type CSSProperties } from 'react';
 import { filterSeasonalTopics, isPlanningPriority, koreaMonth, loadSeasonalBoard, nextMonth, paginateTopics, timingNotice, type SeasonalBoard, type SeasonalTopic } from './seasonalModel.mjs';
+// 검색어 덧붙이기(2026-10-20 사장님 "시즌키워드도 마찬가지") — 그래프 · 검색량 · 문서수 · 지식인 · 해결할 문제 · 행동 제목 · 벤치마킹, 섞기
+import { enrichKey, loadKeywordEnrich, seasonalOrderTier, type KeywordEnrich } from '../../../lib/keywordEnrich.mjs';
+import { shuffleWithinTiers } from '../../../lib/hourlyShuffle.mjs';
+import { useShuffleSeed } from '../../../lib/useShuffleSeed';
+import KeywordAids from '../shared/KeywordAids';
 
 const colors = { ink: '#eef4fc', muted: '#a8b9cc', line: '#304157', teal: '#71e4d3', gold: '#ffda75' };
 const button: CSSProperties = { border: `1px solid ${colors.line}`, borderRadius: 10, padding: '10px 14px', background: '#131e30', color: colors.ink, cursor: 'pointer', font: 'inherit', fontSize: 13, fontWeight: 700, minHeight: 42 };
@@ -7,7 +12,7 @@ const input: CSSProperties = { ...button, background: '#0b1423', fontWeight: 400
 const badge: CSSProperties = { padding: '4px 8px', borderRadius: 6, background: '#1b2d3d', color: colors.teal, fontSize: 12, fontWeight: 700 };
 const monthLabel = (value: string) => new Date(value).toLocaleDateString('ko-KR', { timeZone: 'Asia/Seoul', year: 'numeric', month: 'numeric', day: 'numeric' });
 
-function TopicCard({ topic, currentMonth, onAnalyze }: { topic: SeasonalTopic; currentMonth: number; onAnalyze: (keyword: string) => void }) {
+function TopicCard({ topic, currentMonth, onAnalyze, enrich }: { topic: SeasonalTopic; currentMonth: number; onAnalyze: (keyword: string) => void; enrich?: KeywordEnrich }) {
   const [copyStatus, setCopyStatus] = useState('');
   const priority = isPlanningPriority(topic, currentMonth);
   const copy = async () => {
@@ -26,8 +31,9 @@ function TopicCard({ topic, currentMonth, onAnalyze }: { topic: SeasonalTopic; c
     </div>
     <p style={{ margin: 0, color: colors.muted, fontSize: 12, lineHeight: 1.65 }}><strong style={{ color: colors.gold }}>{topic.type}</strong> · {timingNotice(topic.type)}</p>
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 7, fontSize: 12, color: '#adbed1' }}>
-      {['검색량', '문서량', '광고 수'].map(label => <span key={label} style={{ padding: '5px 8px', borderRadius: 6, background: '#0b1423' }}>{label} <strong style={{ fontWeight: 400, color: '#d0d9e5' }}>미측정</strong></span>)}
+      {([['월 검색량', enrich?.measure?.searchVolume], ['블로그 문서량', enrich?.measure?.documentCount]] as const).map(([label, value]) => <span key={label} style={{ padding: '5px 8px', borderRadius: 6, background: '#0b1423' }}>{label} <strong style={{ fontWeight: value == null ? 400 : 700, color: value == null ? '#d0d9e5' : colors.ink }}>{value == null ? '미측정' : value.toLocaleString('ko-KR')}</strong></span>)}
     </div>
+    <KeywordAids query={topic.keyword} enrich={enrich} />
     <details style={{ background: '#0c1727', border: `1px solid ${colors.line}`, borderRadius: 9, padding: '10px 12px' }}>
       <summary style={{ cursor: 'pointer', color: colors.teal, fontSize: 13, lineHeight: 1.6 }}>실제 자동완성 표현 {topic.suggestions.length}개 보기</summary>
       {topic.suggestions.length > 0 ? <>
@@ -59,6 +65,9 @@ export default function SeasonalKeywordsBoard({ onAnalyze }: { onAnalyze: (keywo
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [attempt, setAttempt] = useState(0);
+  const [enrich, setEnrich] = useState<Map<string, KeywordEnrich>>(() => new Map());
+  const [seed, reshuffle] = useShuffleSeed();
+  useEffect(() => { let alive = true; void loadKeywordEnrich().then(map => { if (alive) setEnrich(map); }); return () => { alive = false; }; }, [attempt]);
   useEffect(() => {
     const controller = new AbortController();
     let active = true;
@@ -71,7 +80,8 @@ export default function SeasonalKeywordsBoard({ onAnalyze }: { onAnalyze: (keywo
   }, [attempt]);
   const topics = board?.topics ?? [];
   const categories = useMemo(() => Array.from(new Set(topics.map(t => t.category))).sort((a, b) => a.localeCompare(b, 'ko')), [topics]);
-  const filtered = useMemo(() => filterSeasonalTopics(topics, { month, category, query, moneyOnly }), [topics, month, category, query, moneyOnly]);
+  // 지금 뜨는 소재 → 이번 달 · 다음 달 → 나머지 묶음은 지키고, 묶음 안은 매시 정각(또는 [순서 섞기])마다 섞는다.
+  const filtered = useMemo(() => shuffleWithinTiers(filterSeasonalTopics(topics, { month, category, query, moneyOnly }), (t: SeasonalTopic) => seasonalOrderTier(enrich.get(enrichKey(t.keyword)), isPlanningPriority(t, currentMonth)), seed), [topics, month, category, query, moneyOnly, enrich, currentMonth, seed]);
   const visible = paginateTopics(filtered, page);
   const chooseMonth = (value: number | 'all') => { setMonth(value); setPage(1); };
   const clearFilters = () => { setMonth('all'); setCategory('all'); setQuery(''); setMoneyOnly(false); setPage(1); };
@@ -98,12 +108,12 @@ export default function SeasonalKeywordsBoard({ onAnalyze }: { onAnalyze: (keywo
           <label style={{ fontSize: 13, color: colors.gold, cursor: 'pointer', minHeight: 42, display: 'flex', gap: 7, alignItems: 'center' }}><input type="checkbox" checked={moneyOnly} onChange={e => { setMoneyOnly(e.target.checked); setPage(1); }} style={{ accentColor: colors.teal, width: 17, height: 17 }} />세금·지원금·노무만</label>
         </div>
       </div>
-      <p style={{ color: colors.muted, fontSize: 12, lineHeight: 1.8, margin: '0 0 14px' }}><span style={{ color: colors.gold }}>★ 이번 달·다음 달 우선 기획 후보</span> · 수익 등급이 아닙니다.<br />월은 기획 시기이며 검색량 최고점이 아닙니다. 검색량·문서량·광고 수는 아직 미측정입니다.</p>
+      <p style={{ color: colors.muted, fontSize: 12, lineHeight: 1.8, margin: '0 0 14px' }}><span style={{ color: colors.gold }}>★ 이번 달·다음 달 우선 기획 후보</span> · 수익 등급이 아닙니다.<br />월은 기획 시기이며 검색량 최고점이 아닙니다. 검색량·문서량·검색 추이는 하루 세 번 실측해 붙입니다(아직 안 잰 주제는 미측정).<br />지금 검색 관심이 오르는(새로 뜬 · 오르는 · 곧 시즌) 주제가 먼저, 그다음 이번 달·다음 달 주제입니다. 같은 묶음 안은 매시 정각 새로 섞입니다.</p>
       <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 10, justifyContent: 'space-between', marginBottom: 14 }}>
-        <h3 style={{ margin: 0, fontSize: 16 }}>{month === 'all' ? '연간 전체' : `${month}월 기획`} <span style={{ color: colors.teal }}>{filtered.length}개</span></h3>
+        <h3 style={{ margin: 0, fontSize: 16 }}>{month === 'all' ? '연간 전체' : `${month}월 기획`} <span style={{ color: colors.teal }}>{filtered.length}개</span> <button type="button" onClick={() => { reshuffle(); setPage(1); }} style={{ ...button, minHeight: 32, padding: '5px 12px', fontSize: 12, marginLeft: 8 }}>순서 섞기</button></h3>
         <span style={{ fontSize: 11, color: colors.muted }}>자료 검토 {monthLabel(board.updatedAt)} · 월이 다르면 같은 주제가 반복될 수 있습니다.</span>
       </div>
-      {visible.items.length ? <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 380px), 1fr))', gap: 14 }}>{visible.items.map(topic => <TopicCard key={topic.id} topic={topic} currentMonth={currentMonth} onAnalyze={onAnalyze} />)}</div> : <div style={{ padding: 32, textAlign: 'center', border: `1px dashed ${colors.line}`, borderRadius: 14 }}><h3>조건에 맞는 시즌 주제가 없습니다.</h3><p style={{ color: colors.muted, fontSize: 14 }}>다른 달이나 분야를 선택하거나 검색어를 줄여 보세요.</p><button type="button" style={button} onClick={clearFilters}>전체 주제 보기</button></div>}
+      {visible.items.length ? <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 380px), 1fr))', gap: 14 }}>{visible.items.map(topic => <TopicCard key={topic.id} topic={topic} currentMonth={currentMonth} onAnalyze={onAnalyze} enrich={enrich.get(enrichKey(topic.keyword))} />)}</div> : <div style={{ padding: 32, textAlign: 'center', border: `1px dashed ${colors.line}`, borderRadius: 14 }}><h3>조건에 맞는 시즌 주제가 없습니다.</h3><p style={{ color: colors.muted, fontSize: 14 }}>다른 달이나 분야를 선택하거나 검색어를 줄여 보세요.</p><button type="button" style={button} onClick={clearFilters}>전체 주제 보기</button></div>}
       {visible.pages > 1 && <nav aria-label="시즌 키워드 페이지" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap', gap: 16, marginTop: 22 }}>
         <button type="button" disabled={visible.page === 1} onClick={() => setPage(visible.page - 1)} style={{ ...button, opacity: visible.page === 1 ? 0.4 : 1 }}>← 이전</button>
         <span aria-live="polite" style={{ color: colors.muted, fontSize: 13 }}>{visible.page} / {visible.pages} 페이지 · 24개씩</span>
