@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-10-19T21:43:52.357Z",
+  "publishedAt": "2026-10-20T03:43:38.817Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 240,
+    "candidates": 220,
     "niche": 0,
-    "preemption": 19,
+    "preemption": 24,
     "pending": 0
   },
   "freeSample": {
@@ -15,6 +15,72 @@
   },
   "rows": [],
   "observations": [
+    {
+      "keyword": "글림프스 아스트라 비교",
+      "issue": "글림프스",
+      "topic": "글림프스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "성능 우위 궁금",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 1,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 1",
+        "선점 후보 — 경쟁 문서 1건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 성능 우위 궁금"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "엘로리안이 시각 추론 AI 글림프스를 공개해 일부 평가서 아스트라를 앞서서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "구매 검토",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "글림프스 아스트라 비교, 시각 추론 성능 어디서 앞섰나",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "글림프스 아스트라 비교해보니 애플이 왜 인수했는지 알겠더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-20T03:36:09.245Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "엘로리안 글림프스",
       "issue": "글림프스",
@@ -49,7 +115,7 @@
         }
       ],
       "whySearch": {
-        "text": "엘로리안이 시각 추론 AI '글림프스'를 공개해 일부 평가서 아스트라를 앞섰다.",
+        "text": "엘로리안이 시각 추론 AI 글림프스를 공개해 일부 평가서 아스트라를 앞서서",
         "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "분류 안 됨",
@@ -57,12 +123,12 @@
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "엘로리안 글림프스 아스트라 비교, 어떤 평가서 앞섰나",
+          "text": "엘로리안 글림프스, 아스트라 성능 비교부터 애플 인수까지",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "엘로리안 글림프스가 아스트라보다 낫다는데 평가마다 결과가 갈리네요",
+          "text": "엘로리안 글림프스가 아스트라 앞섰다는데 애플 인수는 의외로 다른 얘기더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -73,7 +139,1439 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-19T21:37:09.832Z",
+      "measuredAt": "2026-10-20T03:36:09.245Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "엘로리안 창업자 이력",
+      "issue": "엘로리안",
+      "topic": "엘로리안",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "제미나이 개발 배경",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 1,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 1",
+        "선점 후보 — 경쟁 문서 1건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 제미나이 개발 배경"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "제미나이 개발자가 구글을 나와 창업한 엘로리안이 시각 추론 AI를 공개해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "엘로리안 창업자 이력, 구글 제미나이 출신 창업 배경",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "엘로리안 창업자 이력에서 구글 제미나이 떠난 진짜 이유 다들 놓치더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-20T03:36:09.245Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "글림프스 아스트라",
+      "issue": "글림프스",
+      "topic": "글림프스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 2,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 2",
+        "선점 후보 — 경쟁 문서 2건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "엘로리안이 시각 추론 AI 글림프스를 공개해 일부 평가서 아스트라를 앞서서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "글림프스 아스트라 시각 추론 성능 어디서 앞섰나",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "글림프스가 아스트라를 일부 앞섰다는 평가 결과 어디서 갈렸는지 봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-20T03:36:09.245Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "앤트로픽 엔스로픽 차이",
+      "issue": "앤트로픽",
+      "topic": "앤트로픽",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 36,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "rising",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 36",
+        "선점 후보 — 경쟁 문서 36건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "앤트로픽이 지분 5%를 공익기금에 출연하며 AI 일자리 충격 대응에 나서서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "구매 검토",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "앤트로픽 엔스로픽 차이와 지분 5% 공익기금 뜻",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "앤트로픽 엔스로픽 차이 클로드 매일 쓰면서도 몰랐는데 주가 뉴스 보고 다시 찾아보네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "앤트로픽 오픈ai 차이",
+          "searchVolume": 10,
+          "frame": "compare"
+        },
+        {
+          "keyword": "앤트로픽 주가",
+          "searchVolume": 3280,
+          "frame": "generic"
+        },
+        {
+          "keyword": "앤트로픽 클로드",
+          "searchVolume": 1490,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "앤트로픽 주가",
+          "searchVolume": 3280,
+          "documentCount": 40007,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "앤트로픽 클로드",
+          "searchVolume": 1490,
+          "documentCount": 34224,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "앤트로픽 상장일",
+          "searchVolume": 1220,
+          "documentCount": 20301,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "앤트로픽 뜻",
+          "searchVolume": 230,
+          "documentCount": 19018,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "앤트로픽 기업가치",
+          "searchVolume": 50,
+          "documentCount": 35503,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "앤트로픽 오픈ai 차이",
+          "searchVolume": 10,
+          "documentCount": 12058,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-20T03:36:09.245Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "글림프스 성능",
+      "issue": "글림프스",
+      "topic": "글림프스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 9,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 9",
+        "선점 후보 — 경쟁 문서 9건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "엘로리안이 시각 추론 AI 글림프스를 공개해 일부 평가서 아스트라를 앞서서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "글림프스 성능 아스트라와 비교, 평가서 어디까지 앞섰나",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "글림프스 성능 두고 아스트라를 앞섰다는 평가 나왔는데 의외로 갈리는 지점이 있네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-20T03:36:09.245Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "글림프스 AI",
+      "issue": "글림프스",
+      "topic": "글림프스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 13,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 1,
+      "reasons": [
+        "문서수 13",
+        "선점 후보 — 경쟁 문서 13건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 1건)"
+        }
+      ],
+      "whySearch": {
+        "text": "엘로리안이 시각 추론 AI 글림프스를 공개해 일부 평가서 아스트라를 앞서서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-20T03:36:09.245Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "에릭 슈밋 앤스로픽",
+      "issue": "에릭 슈밋",
+      "topic": "에릭 슈밋",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 17,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 17",
+        "선점 후보 — 경쟁 문서 17건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "에릭 슈밋이 앤스로픽 초기 투자로 27조원 잭팟 터뜨려서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "에릭 슈밋 앤스로픽 초기 투자 27조 잭팟 내막",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "에릭 슈밋 앤스로픽 투자로 27조 벌었다는데 왜 졸업식에선 야유받았을까",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-20T03:36:09.245Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "엘로리안 창업자",
+      "issue": "엘로리안",
+      "topic": "엘로리안",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 18,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 18",
+        "선점 후보 — 경쟁 문서 18건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "제미나이 개발자가 구글을 나와 창업한 엘로리안이 시각 추론 AI를 공개해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-20T03:36:09.245Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "엘로리안 스타트업",
+      "issue": "엘로리안",
+      "topic": "엘로리안",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 23,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 23",
+        "선점 후보 — 경쟁 문서 23건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "제미나이 개발자가 구글을 나와 창업한 엘로리안이 시각 추론 AI를 공개해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "home": {
+          "text": "엘로리안 스타트업 첫 출근날 책상 위에 놓인 봉투를 조용히 열어봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-20T03:36:09.245Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "엘로리안 ai",
+      "issue": "엘로리안",
+      "topic": "엘로리안",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 30,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 1,
+      "reasons": [
+        "문서수 30",
+        "선점 후보 — 경쟁 문서 30건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 1건)"
+        }
+      ],
+      "whySearch": {
+        "text": "제미나이 개발자가 구글을 나와 창업한 엘로리안이 시각 추론 AI를 공개해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "엘로리안 ai 글림프스 성능, 아스트라와 어디서 앞섰나",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "엘로리안 글림프스가 아스트라를 일부 평가서 앞섰다는데 생각보다 애매하더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-20T03:36:09.245Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "글림프스 평가",
+      "issue": "글림프스",
+      "topic": "글림프스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 26,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 26",
+        "선점 후보 — 경쟁 문서 26건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "엘로리안이 시각 추론 AI 글림프스를 공개해 일부 평가서 아스트라를 앞서서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "글림프스 평가 아스트라와 시각 추론 성능 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "글림프스 평가 뜯어보니 아스트라 앞섰다는 말 많이들 오해하더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-20T03:36:09.245Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "글림프스 공개",
+      "issue": "글림프스",
+      "topic": "글림프스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 27,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 1,
+      "reasons": [
+        "문서수 27",
+        "선점 후보 — 경쟁 문서 27건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 1건)"
+        }
+      ],
+      "whySearch": {
+        "text": "엘로리안이 시각 추론 AI 글림프스를 공개해 일부 평가서 아스트라를 앞서서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "글림프스 공개 시각 추론 성능 아스트라와 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "글림프스 공개되자마자 애플이 데려간 이유가 아스트라 비교에서 보이더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-20T03:36:09.245Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "엘로리안 투자",
+      "issue": "엘로리안",
+      "topic": "엘로리안",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "유치 규모 관심",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 41,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 41",
+        "선점 후보 — 경쟁 문서 41건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 유치 규모 관심"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "제미나이 개발자가 구글을 나와 창업한 엘로리안이 시각 추론 AI를 공개해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "엘로리안 투자, 글림프스 공개 후 아스트라 비교와 전망",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "엘로리안 투자 하려다 글림프스가 어떤 평가선 아스트라 앞섰다길래 멈칫했어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-20T03:36:09.245Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "엘로리안 모델",
+      "issue": "엘로리안",
+      "topic": "엘로리안",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 47,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 47",
+        "선점 후보 — 경쟁 문서 47건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "제미나이 개발자가 구글을 나와 창업한 엘로리안이 시각 추론 AI를 공개해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "엘로리안 모델 글림프스, 아스트라 앞선 시각추론 평가",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "엘로리안 글림프스가 아스트라 앞섰다지만 평가마다 결과가 다른 편이네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-20T03:36:09.245Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "센드버드 솔라",
+      "issue": "센드버드",
+      "topic": "센드버드",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 50,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 4,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 50",
+        "선점 후보 — 경쟁 문서 50건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 4건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "센드버드가 업스테이지 솔라를 AI 에이전트에 탑재해 국산 LLM 상용화를 추진해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "센드버드 솔라, 업스테이지 AI 에이전트 상용화 뭐가 바뀌나",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "센드버드 솔라 올린 AI 에이전트 보는데 상장 얘기는 왜 나오나 싶더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "센드버드 채용",
+          "searchVolume": 20,
+          "frame": "generic"
+        },
+        {
+          "keyword": "센드버드 상장",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "센드버드 채용",
+          "searchVolume": 20,
+          "documentCount": 438,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-20T03:36:09.245Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "센드버드 구조조정",
+      "issue": "센드버드",
+      "topic": "센드버드",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 112,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 112",
+        "선점 후보 — 경쟁 문서 112건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "센드버드가 업스테이지 솔라를 AI 에이전트에 탑재해 국산 LLM 상용화를 추진해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-20T03:36:09.245Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "센드버드 업스테이지",
+      "issue": "센드버드",
+      "topic": "센드버드",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 113,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 113",
+        "선점 후보 — 경쟁 문서 113건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "센드버드가 업스테이지 솔라를 AI 에이전트에 탑재해 국산 LLM 상용화를 추진해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "센드버드 업스테이지 솔라 탑재, AI 에이전트 상용화 협력",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "센드버드 업스테이지 발표 보고 상장 타이밍을 다시 따져보게 되더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "센드버드 채용",
+          "searchVolume": 20,
+          "frame": "generic"
+        },
+        {
+          "keyword": "센드버드 상장",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "센드버드 채용",
+          "searchVolume": 20,
+          "documentCount": 438,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-20T03:36:09.245Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "에릭 슈밋 로켓",
+      "issue": "에릭 슈밋",
+      "topic": "에릭 슈밋",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "신규 CEO 행보",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 114,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 114",
+        "선점 후보 — 경쟁 문서 114건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 신규 CEO 행보"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "에릭 슈밋이 앤스로픽 초기 투자로 27조원 잭팟 터뜨려서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-20T03:36:09.245Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "슈밋 로켓",
+      "issue": "에릭 슈밋",
+      "topic": "에릭 슈밋",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 138,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 138",
+        "선점 후보 — 경쟁 문서 138건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "에릭 슈밋이 앤스로픽 초기 투자로 27조원 잭팟 터뜨려서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "슈밋 로켓 스타트업 CEO 맡은 에릭 슈밋 구글 이후 행보",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "슈밋 로켓 CEO 맡은 에릭 슈밋 앤스로픽 투자까지 보면 그림이 좀 다르더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-20T03:36:09.245Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "에릭 슈밋 재산",
+      "issue": "에릭 슈밋",
+      "topic": "에릭 슈밋",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 177,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 177",
+        "선점 후보 — 경쟁 문서 177건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "에릭 슈밋이 앤스로픽 초기 투자로 27조원 잭팟 터뜨려서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "에릭 슈밋 재산 앤스로픽 초기 투자로 27조원 잭팟 규모",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "에릭 슈밋 재산 규모 듣고 에릭 슈미트 투자 이력을 다시 찾아봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "에릭 슈미트",
+          "searchVolume": 210,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "에릭 슈미트",
+          "searchVolume": 210,
+          "documentCount": 18312,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-20T03:36:09.245Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "센드버드 AI에이전트",
+      "issue": "센드버드",
+      "topic": "센드버드",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 169,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 169",
+        "선점 후보 — 경쟁 문서 169건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "센드버드가 업스테이지 솔라를 AI 에이전트에 탑재해 국산 LLM 상용화를 추진해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-20T03:36:09.245Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "글림프스",
+      "issue": "글림프스",
+      "topic": "글림프스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 244,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 1,
+      "reasons": [
+        "문서수 244",
+        "선점 후보 — 경쟁 문서 244건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 1건)"
+        }
+      ],
+      "whySearch": {
+        "text": "엘로리안이 시각 추론 AI 글림프스를 공개해 일부 평가서 아스트라를 앞서서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 31,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-20T03:36:09.245Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "센드버드 연봉",
+      "issue": "센드버드",
+      "topic": "센드버드",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 198,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 198",
+        "선점 후보 — 경쟁 문서 198건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "센드버드가 업스테이지 솔라를 AI 에이전트에 탑재해 국산 LLM 상용화를 추진해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-20T03:36:09.245Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -137,126 +1635,8 @@
       "monetize": null,
       "measuredAt": "2026-10-19T21:37:09.832Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "글림프스 아스트라",
-      "issue": "글림프스",
-      "topic": "글림프스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 2,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 2",
-        "선점 후보 — 경쟁 문서 2건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "엘로리안이 시각 추론 AI '글림프스'를 공개해 일부 평가서 아스트라를 앞섰다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "home": {
-          "text": "글림프스 아스트라 처음 켜고 설정 만지다 생각보다 헤맸던 이야기네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-19T21:37:09.832Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "글림프스 성능",
-      "issue": "글림프스",
-      "topic": "글림프스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 8,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 8",
-        "선점 후보 — 경쟁 문서 8건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "엘로리안이 시각 추론 AI '글림프스'를 공개해 일부 평가서 아스트라를 앞섰다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "글림프스 성능 아스트라와 비교, 어느 평가서 앞섰나",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "글림프스 성능 아스트라보다 앞선다더니 평가 종류 따라 갈리더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-19T21:37:09.832Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "설인아 성형전",
@@ -374,7 +1754,8 @@
       "monetize": null,
       "measuredAt": "2026-10-19T21:37:09.832Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "이효리 후계자 다영",
@@ -460,254 +1841,8 @@
       "monetize": null,
       "measuredAt": "2026-10-19T21:37:09.832Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "엘로리안 창업자",
-      "issue": "엘로리안",
-      "topic": "엘로리안",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 18,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 18",
-        "선점 후보 — 경쟁 문서 18건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "제미나이 개발자가 구글을 나와 창업한 엘로리안이 시각 추론 AI를 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "엘로리안 창업자, 구글 제미나이 출신이 만든 글림프스 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "엘로리안 창업자가 구글 나와 차린 글림프스, 아스트라보다 앞섰다는 평가가 나왔더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-19T21:37:09.832Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "엘로리안 ai",
-      "issue": "엘로리안",
-      "topic": "엘로리안",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 30,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "문서수 30",
-        "선점 후보 — 경쟁 문서 30건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 1건)"
-        }
-      ],
-      "whySearch": {
-        "text": "제미나이 개발자가 구글을 나와 창업한 엘로리안이 시각 추론 AI를 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "엘로리안 ai 글림프스, 아스트라 앞섰다는 평가 결과",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "엘로리안 글림프스 공개됐는데 아스트라 앞섰다는 평가가 좀 의외더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-19T21:37:09.832Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "글림프스 공개",
-      "issue": "글림프스",
-      "topic": "글림프스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 26,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "문서수 26",
-        "선점 후보 — 경쟁 문서 26건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 1건)"
-        }
-      ],
-      "whySearch": {
-        "text": "엘로리안이 시각 추론 AI '글림프스'를 공개해 일부 평가서 아스트라를 앞섰다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "글림프스 공개 아스트라 앞선 성능과 애플 인수 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "글림프스 공개되자 아스트라보다 앞섰다는데 애플은 왜 인수에 나섰나",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-19T21:37:09.832Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "엘로리안 투자",
-      "issue": "엘로리안",
-      "topic": "엘로리안",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 41,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 41",
-        "선점 후보 — 경쟁 문서 41건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "제미나이 개발자가 구글을 나와 창업한 엘로리안이 시각 추론 AI를 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "home": {
-          "text": "엘로리안 투자 처음 들어갔다가 다음 날 호가창 보고 커피를 내려놨네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-19T21:37:09.832Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "엘로리안 기업",
@@ -758,64 +1893,8 @@
       "monetize": null,
       "measuredAt": "2026-10-19T21:37:09.832Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "엘로리안 모델",
-      "issue": "엘로리안",
-      "topic": "엘로리안",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 47,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 47",
-        "선점 후보 — 경쟁 문서 47건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "제미나이 개발자가 구글을 나와 창업한 엘로리안이 시각 추론 AI를 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "home": {
-          "text": "엘로리안 모델 고민하다가 매장에서 직접 보고 왔는데 생각보다 이렇더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-19T21:37:09.832Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "케트진스키 대한항공 삼성화재",
@@ -881,385 +1960,8 @@
       "monetize": null,
       "measuredAt": "2026-10-19T21:37:09.832Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "센드버드 구조조정",
-      "issue": "센드버드",
-      "topic": "센드버드",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 112,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 112",
-        "선점 후보 — 경쟁 문서 112건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "센드버드가 업스테이지 '솔라'를 AI 에이전트에 탑재해 상용화를 추진한다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "센드버드 구조조정 뒤 업스테이지 AI 에이전트 협력 현황",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "센드버드 구조조정 한다는데 채용 공고는 아직 그대로 떠 있더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "센드버드 채용",
-          "searchVolume": 20,
-          "frame": "generic"
-        },
-        {
-          "keyword": "센드버드 상장",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "센드버드 채용",
-          "searchVolume": 20,
-          "documentCount": 438,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-19T21:37:09.832Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "센드버드 업스테이지",
-      "issue": "센드버드",
-      "topic": "센드버드",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 113,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 113",
-        "선점 후보 — 경쟁 문서 113건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "센드버드가 업스테이지 '솔라'를 AI 에이전트에 탑재해 상용화를 추진한다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "센드버드 업스테이지 솔라 탑재, 국산 LLM AI 에이전트 상용화 협력",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "센드버드 업스테이지 소식 보고 상장 타이밍이 생각보다 가까운가 다시 봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "센드버드 채용",
-          "searchVolume": 20,
-          "frame": "generic"
-        },
-        {
-          "keyword": "센드버드 상장",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "센드버드 채용",
-          "searchVolume": 20,
-          "documentCount": 438,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-19T21:37:09.832Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "센드버드 AI에이전트",
-      "issue": "센드버드",
-      "topic": "센드버드",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 169,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 169",
-        "선점 후보 — 경쟁 문서 169건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "센드버드가 업스테이지 '솔라'를 AI 에이전트에 탑재해 상용화를 추진한다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "센드버드 AI에이전트에 업스테이지 솔라 탑재, 기업용 상용화 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "센드버드 AI에이전트에 국산 솔라 얹는다길래 업스테이지 협력부터 봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-19T21:37:09.832Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "글림프스",
-      "issue": "글림프스",
-      "topic": "글림프스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 243,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "문서수 243",
-        "선점 후보 — 경쟁 문서 243건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 1건)"
-        }
-      ],
-      "whySearch": {
-        "text": "엘로리안이 시각 추론 AI '글림프스'를 공개해 일부 평가서 아스트라를 앞섰다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "글림프스 애플이 인수한 이유와 아스트라 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "글림프스가 아스트라를 앞섰다는 평가 나오자 애플이 바로 인수한다네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 31,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-19T21:37:09.832Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "센드버드 연봉",
-      "issue": "센드버드",
-      "topic": "센드버드",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 198,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 198",
-        "선점 후보 — 경쟁 문서 198건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "센드버드가 업스테이지 '솔라'를 AI 에이전트에 탑재해 상용화를 추진한다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "센드버드 연봉 채용 복지와 업스테이지 협력 근황",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "센드버드 연봉 보다가 센드버드 코리아 채용 공고에서 눈이 멈췄어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "센드버드 코리아",
-          "searchVolume": 60,
-          "frame": "generic"
-        },
-        {
-          "keyword": "센드버드 채용",
-          "searchVolume": 20,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "센드버드 코리아",
-          "searchVolume": 60,
-          "documentCount": 580,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "센드버드 채용",
-          "searchVolume": 20,
-          "documentCount": 438,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-19T21:37:09.832Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "KBS 이사 임명안",
@@ -1366,7 +2068,8 @@
       "monetize": null,
       "measuredAt": "2026-10-19T21:37:09.832Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "사이버펑크 밀코",
@@ -1421,74 +2124,6 @@
       "kinTop": null,
       "monetize": null,
       "measuredAt": "2026-10-19T16:45:38.703Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "앤트로픽 엔스로픽 차이",
-      "issue": "앤트로픽",
-      "topic": "앤트로픽",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 36,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "rising",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 36",
-        "선점 후보 — 경쟁 문서 36건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "앤트로픽 엔스로픽 차이 무엇이 어떻게 다른가",
-          "frame": "compare",
-          "basis": "검색 질문 '앤트로픽 엔스로픽 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        },
-        "home": {
-          "text": "앤트로픽 엔스로픽 차이, 기준은 하나면 됩니다",
-          "frame": "compare",
-          "basis": "검색 질문 '앤트로픽 엔스로픽 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-18T21:39:22.297Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
@@ -1756,102 +2391,1132 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "ms 콜백신청방법",
-      "issue": "MS",
-      "topic": "MS",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 59,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 59",
-        "선점 후보 — 경쟁 문서 59건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "거래",
-      "adsenseFit": false,
-      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-      "titles": {
-        "seo": {
-          "text": "ms 콜백신청방법 처음 해도 막히지 않는 순서",
-          "frame": "howto",
-          "basis": "검색 질문 'ms 콜백신청방법' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        },
-        "home": {
-          "text": "ms 콜백신청방법, 어렵게 할 필요 없습니다",
-          "frame": "howto",
-          "basis": "검색 질문 'ms 콜백신청방법' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-18T03:38:07.607Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
   "issues": [
     {
-      "issue": "트럼프 김정은 회담",
+      "issue": "발언하는 이재명 대통령",
       "issueType": "fresh",
       "lane": "realtime",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "트럼프가 내달 중국서 김정은 회담 여부에 \"모르겠다\"고 답했다.",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "주택공급 전격전·인허가 단축 지시로 부동산 정책 발언이 주목받아서",
       "headlines": [
         {
-          "title": "[속보] 트럼프, 내달 中서 김정은과 회담 여부에 \"모르겠다\"",
-          "press": "hankyung.com",
-          "publishedAt": "2026-10-19T21:08:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005344257?sid=104"
+          "title": "[속보] 李대통령 “부동산 관행·절차 깨고 인허가 단축...공급 전격전 ...",
+          "press": "kyeonggi.com",
+          "publishedAt": "2026-10-20T03:10:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/666/0000128265?sid=101"
         },
         {
-          "title": "트럼프, 내달 中서 김정은과 회담 여부에 \"모르겠다\"",
+          "title": "李대통령 \"관행·절차 얽매이지 말고 주택공급 전격전 펼치길\"",
           "press": "yna.co.kr",
-          "publishedAt": "2026-10-19T20:05:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016387037?sid=104"
+          "publishedAt": "2026-10-20T01:21:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016387550?sid=100"
         },
         {
-          "title": "트럼프, 다음 달 김정은과 회담 여부에 \"모르겠다\"",
-          "press": "ytn.co.kr",
-          "publishedAt": "2026-10-19T21:08:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/052/0002420950?sid=104"
+          "title": "국무회의 참석 중수청·경찰 수장, 대통령의 신신당부",
+          "press": "ohmynews.com",
+          "publishedAt": "2026-10-20T03:01:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/047/0002532824?sid=100"
         }
       ],
       "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "아리셀 화재 박순관",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "23명 숨진 아리셀 화재 박순관 대표 징역 4년 확정돼서",
+      "headlines": [
+        {
+          "title": "[2보] 23명 숨진 '아리셀 화재참사' 박순관 대표 징역 4년 확정",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-20T01:10:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016387508?sid=102"
+        },
+        {
+          "title": "‘23명 화재 참사’ 아리셀 박순관 대표 징역 4년 확정",
+          "press": "seoul.co.kr",
+          "publishedAt": "2026-10-20T01:13:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/081/0003690592?sid=102"
+        },
+        {
+          "title": "23명 사망 ‘아리셀 화재’ 박순관 대표 징역 4년 확정",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-10-20T01:13:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001199033?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "아리셀",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아리셀 화재",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "합참",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "dead",
+      "isHot": true,
+      "why": "합참의장이 북 추가 도발 시 단호 대응·DMZ 주도권 작전 예고해서",
+      "headlines": [
+        {
+          "title": "합참의장 \"北 적반하장 용납 못해…추가 도발시 단호 대응\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-20T00:53:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014264721?sid=100"
+        },
+        {
+          "title": "합참 “北 적반하장…DMZ 주도권 강화 작전 시행할 것”",
+          "press": "donga.com",
+          "publishedAt": "2026-10-20T00:58:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/020/0003756190?sid=100"
+        },
+        {
+          "title": "합참의장 \"북 적반하장 용납 못해…추가 도발시 단호 대응\"",
+          "press": "news.jtbc.co.kr",
+          "publishedAt": "2026-10-20T01:33:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/437/0000516546?sid=100"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "합참 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "합참 공보실장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "합참 작전본부장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "합참 국직 차이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "합참 주임원사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "합참 부서",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "합참 북진",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "합참 북한",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "이형일 세계은행 총재",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "이형일 부총리가 올해 성장률 3%대 중반 전망하고 세계은행 총재 면담해서",
+      "headlines": [
+        {
+          "title": "이형일 \"올해 성장률 3.4∼3.6% 전망…잠재성장률 반등 임박\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-19T01:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016384766?sid=101"
+        },
+        {
+          "title": "재경부, 세계은행 AI 서밋 개최…160개국 참석",
+          "press": "dt.co.kr",
+          "publishedAt": "2026-10-20T03:22:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/029/0003054078?sid=104"
+        },
+        {
+          "title": "반도체 덕에 성장률 전망도 '쑥'…이형일 \"올해 성장률 3%대 중반 가능\"",
+          "press": "mbn.mk.co.kr",
+          "publishedAt": "2026-10-19T07:37:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/057/0001974162?sid=101"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "나솔",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "나솔 34기 솔로녀 가족 소개와 10기 옥순 결혼 소식이 화제라서",
+      "headlines": [
+        {
+          "title": "'나솔' 다둥이 솔로녀에 경악 \"8자매 막내…조카만 16명\"",
+          "press": "enews.imbc.com",
+          "publishedAt": "2026-10-20T02:08:00.000Z",
+          "link": "https://m.entertain.naver.com/article/408/0000324962"
+        },
+        {
+          "title": "'나솔' 34기, 가족 소개부터 심상치 않다…\"조카만 16명, 8자매 중 막내...",
+          "press": "tenasia.co.kr",
+          "publishedAt": "2026-10-20T03:00:00.000Z",
+          "link": "https://m.entertain.naver.com/article/312/0000780751"
+        },
+        {
+          "title": "'나솔' 34기 솔로녀, 플러팅 자신만만…\"남자는 내가 꼬셔\" 대체 누구길...",
+          "press": "atstar1.com",
+          "publishedAt": "2026-10-20T02:31:00.000Z",
+          "link": "https://m.entertain.naver.com/article/415/0000052926"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "나솔 34기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "나솔 33기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "나솔 33기 영수",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "나솔 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "나솔 출연료",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "나솔 옥순",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "나솔 28기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "나솔 31기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "나솔 34기 직업",
+          "reason": "출연자 배경 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "나솔 34기 라방",
+          "reason": "방송 후 라이브",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "김수영 원산지 질문",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "개그맨 김수영이 게장 원산지 질문 차단 논란에 사과해서",
+      "headlines": [
+        {
+          "title": "“국산이냐” 물었더니 차단…김수영 게장 ‘원산지 논란’, 결국 해명",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-10-19T22:37:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005750953?sid=102"
+        },
+        {
+          "title": "[단독] 김수영, \"원산지 질문하니 차단\" 논란 직접 입 연다..SNS 해명 영...",
+          "press": "osen.co.kr",
+          "publishedAt": "2026-10-19T22:51:00.000Z",
+          "link": "https://m.entertain.naver.com/article/109/0005625808"
+        },
+        {
+          "title": "김수영, 게장 원산지 질문 차단 논란에 사과 \"악의적 비방 힘들어\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-20T01:09:00.000Z",
+          "link": "https://m.entertain.naver.com/article/003/0014264811"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "LG 준PO 3차전",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "NCT 지성이 LG-KIA 준PO 3차전 시구자로 나서서",
+      "headlines": [
+        {
+          "title": "LG 승리요정 뜬다…보이그룹 NCT 지성, 3차전 시구[준PO]",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-20T01:36:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/003/0014264911"
+        },
+        {
+          "title": "NCT 지성, LG 준PO 3차전 시구…“승리의 기운도 두 배”",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-10-20T01:46:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/018/0006392079"
+        },
+        {
+          "title": "NCT 지성, 준PO 3차전 시구…잠실구장 마지막 시구자 되나",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-20T01:25:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/001/0016387572"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "에릭 슈밋",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "에릭 슈밋이 앤스로픽 초기 투자로 27조원 잭팟 터뜨려서",
+      "headlines": [
+        {
+          "title": "에릭 슈밋, AI 앤스로픽 초기 투자로 27조원 잭팟",
+          "press": "chosun.com",
+          "publishedAt": "2026-10-19T22:45:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004004812?sid=105"
+        },
+        {
+          "title": "‘스타벅스’와 ‘에릭 슈밋’에게 없었던 단 하나 [허태윤의 브랜드스...",
+          "press": "economist.co.kr",
+          "publishedAt": "2026-06-21T01:01:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/243/0000099419?sid=110"
+        },
+        {
+          "title": "AI 옹호하자 \"우~\"…에릭 슈밋 전 구글 CEO 졸업식 축사에 야유",
+          "press": "yonhapnewstv.co.kr",
+          "publishedAt": "2026-05-18T05:54:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/422/0000865916?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "에릭",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "에릭 슈밋 로켓",
+          "reason": "신규 CEO 행보",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "에릭 슈밋 재산",
+          "reason": "27조 잭팟 후 자산",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "김정은 사망설 뉴스",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "김정은 사망설·건강이상설이 온라인 확산되며 북한이 가짜뉴스라 반박해서",
+      "headlines": [
+        {
+          "title": "트럼프 \"김정은과 관계 매우 좋다\"...김정은 건강이상설",
+          "press": "christiantoday.co.kr",
+          "publishedAt": "2026-10-20T02:40:00.000Z",
+          "link": "https://www.christiantoday.co.kr/news/378005"
+        },
+        {
+          "title": "김정은 뇌출혈·혼수상태설 해외 확산… 北, 전날 전시회 시찰 사진 공...",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-10-20T02:20:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001199066?sid=104"
+        },
+        {
+          "title": "김정은 '사망설' 온라인 확산…만 42세·100kg 넘는 몸무게·수면장애, 국...",
+          "press": "imaeil.com",
+          "publishedAt": "2026-10-20T02:48:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/088/0001035407?sid=100"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "무인 항공기",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "해군이 2040년대 유·무인전력모함·드론항모 도입을 추진해서",
+      "headlines": [
+        {
+          "title": "해군 \"핵잠·드론항모 동시 확보 추진…北 대응 해군력 강화\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-20T01:51:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016387731?sid=100"
+        },
+        {
+          "title": "해군, 2040년까지 유·무인전력모함 추진",
+          "press": "view.asiae.co.kr",
+          "publishedAt": "2026-10-20T01:56:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/277/0005830879?sid=100"
+        },
+        {
+          "title": "해군, 3만톤급 '유·무인전력모함' 도입 추진…2040년대 초 전력화 목표",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-20T01:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009237847?sid=100"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "무인항공기 학과",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "무인항공기 자격증",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "무인항공기 개발",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "무인항공기 4종",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "무인항공기 1종",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "무인항공기 운용병",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "무인항공기 영어로",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "무인항공기 정의",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "앤트로픽",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": "앤트로픽이 지분 5%를 공익기금에 출연하며 AI 일자리 충격 대응에 나서서",
+      "headlines": [
+        {
+          "title": "앤트로픽, 지분 5% 공익기금에 출연…\"AI 일자리 충격 대응\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-18T21:28:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016384371?sid=101"
+        },
+        {
+          "title": "앤트로픽, 주식 5% 공익 기금에…\"기업 성장하면 추가 기부\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-18T22:47:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014261413?sid=104"
+        },
+        {
+          "title": "몸값 뛴 앤트로픽, 지분 5% 내놓는다…왜?",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-10-19T01:53:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002441423?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "앤트로픽 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 실적",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 클로드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 ipo",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 ceo",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 매출",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 실적발표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "앤트로픽 상장일",
+          "reason": "IPO 시점 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "앤트로픽 티커",
+          "reason": "주식 거래 준비",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "앤트로픽 기업가치",
+          "reason": "몸값 상승 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "앤트로픽 지분구조",
+          "reason": "출연 후 지배구조",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "하네스²",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "구글이 AI 프레임워크 하네스²를 공개하고 스토케는 트립트랩 쿠션을 출시해서",
+      "headlines": [
+        {
+          "title": "구글, AI 성능 스스로 높이는 자기개선 프레임워크 '하네스²' 공개",
+          "press": "aitimes.com",
+          "publishedAt": "2026-10-19T09:02:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=216410"
+        },
+        {
+          "title": "스토케, 리디자인으로 새롭게 탄생한 트립트랩 쿠션 4종 출시",
+          "press": "kizmom.com",
+          "publishedAt": "2025-09-05T04:40:00.000Z",
+          "link": "https://www.kizmom.com/news/articleView.html?idxno=104405"
+        },
+        {
+          "title": "스토케, 리디자인으로 새롭게 탄생한 트립트랩 쿠션 4종 선봬",
+          "press": "thefirstmedia.net",
+          "publishedAt": "2025-09-04T07:38:00.000Z",
+          "link": "http://www.thefirstmedia.net/news/articleView.html?idxno=180143"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "스토케 하네스2",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "트립트랩 하네스2",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "구글 하네스2 성능",
+          "reason": "AI 프레임워크 효과",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "구글",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "구글 지도가 석 달 연속 1천만 명 돌파하며 국내 지도앱과 경쟁해서",
+      "headlines": [
+        {
+          "title": "\"구글 공습 막아라\"…국내 지도앱들 서비스 고도화로 맞불",
+          "press": "view.asiae.co.kr",
+          "publishedAt": "2026-10-20T02:37:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/277/0005830921?sid=105"
+        },
+        {
+          "title": "구글지도, 석달 연속 1천만명 돌파…국내 지도앱 '4강 구도'",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-19T21:15:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016387075?sid=105"
+        },
+        {
+          "title": "구글 지도 3달 연속 1000만 돌파…티맵·카카오맵 턱밑 추격",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-20T01:17:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014264850?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "구글 제미나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 번역기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 영국",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글지도",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 클래스룸",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 제팬",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 클라우드 콘솔",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "웨이모 로보택시",
+          "reason": "5배 확대 세부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "구글 계정 유출",
+          "reason": "개인정보 피해 우려",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "텐센트",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "텐센트가 챗봇 AI 메모리를 통합하고 AI 투자용 6.7조원 채권 발행을 앞둬서",
+      "headlines": [
+        {
+          "title": "텐센트, 챗봇마다 저장하던 AI 메모리 통합...클로드·챗GPT에서 공유",
+          "press": "aitimes.com",
+          "publishedAt": "2026-10-19T08:56:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=216413"
+        },
+        {
+          "title": "삼성전자·SK하이닉스 위협하는 CXMT…텐센트·바이트댄스도 서버 D램 주...",
+          "press": "topstarnews.net",
+          "publishedAt": "2026-10-18T07:12:00.000Z",
+          "link": "https://www.topstarnews.net/news/articleView.html?idxno=16250583"
+        },
+        {
+          "title": "\"텐센트, 6.7조원 채권발행 임박…AI 투자용\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-13T00:08:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016372489?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "텐센트 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "중국 텐센트",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "텐센트 게임",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "텐센트 뮤직",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "텐센트 코리아",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "텐센트 시총",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "텐센트 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "텐센트 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "텐센트 채권 발행",
+          "reason": "6.7조 자금 용도",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "텐센트 AI 메모리",
+          "reason": "챗봇 공유 기능",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "텐센트 실적",
+          "reason": "AI 투자 영향",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "텐센트 주가 전망",
+          "reason": "대규모 투자 영향",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "글림프스",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "엘로리안이 시각 추론 AI 글림프스를 공개해 일부 평가서 아스트라를 앞서서",
+      "headlines": [
+        {
+          "title": "엘로리안, 시각 추론 AI '글림프스' 공개…일부 평가서 아스트라 앞서",
+          "press": "aitimes.com",
+          "publishedAt": "2026-10-19T08:36:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=216403"
+        },
+        {
+          "title": "애플, 건강 및 의료 분야 진출 위해 글림프스 인수",
+          "press": "betanews.net",
+          "publishedAt": "2016-08-24T09:49:00.000Z",
+          "link": "http://www.betanews.net/article/641038"
+        },
+        {
+          "title": "미국인들 ‘직장에 갇혔다’...경기침체 두려움에 이직 포기",
+          "press": "etoday.co.kr",
+          "publishedAt": "2024-08-11T06:36:00.000Z",
+          "link": "https://www.etoday.co.kr/news/view/2389512"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [
+        {
+          "keyword": "글림프스 아스트라 비교",
+          "reason": "성능 우위 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "글림프스 사용법",
+          "reason": "공개 후 접근 방법",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "시각 추론 AI",
+          "reason": "기술 원리 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "글림프스 출시일",
+          "reason": "상용 시점 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "엘로리안",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "제미나이 개발자가 구글을 나와 창업한 엘로리안이 시각 추론 AI를 공개해서",
+      "headlines": [
+        {
+          "title": "엘로리안, 시각 추론 AI '글림프스' 공개…일부 평가서 아스트라 앞서",
+          "press": "aitimes.com",
+          "publishedAt": "2026-10-19T08:36:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=216403"
+        },
+        {
+          "title": "제미나이 개발자가 구글 나와 창업한 이유… \"AI 변곡점? '이 기술'\"",
+          "press": "hankookilbo.com",
+          "publishedAt": "2026-08-24T19:31:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/469/0000949848?sid=105"
+        },
+        {
+          "title": "[미국 특징주] \"GPT·클로드 비싸\"...스타트업들, 저비용 AI 모델 자체 구...",
+          "press": "newspim.com",
+          "publishedAt": "2026-09-21T23:08:00.000Z",
+          "link": "https://www.newspim.com/news/view/20260922000057"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "엘로리안 ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "엘로리안 창업자 이력",
+          "reason": "제미나이 개발 배경",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "엘로리안 투자",
+          "reason": "유치 규모 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "엘로리안 글림프스",
+          "reason": "대표 모델 성능",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "엘로리안 채용",
+          "reason": "스타트업 합류 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "센드버드",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "센드버드가 업스테이지 솔라를 AI 에이전트에 탑재해 국산 LLM 상용화를 추진해서",
+      "headlines": [
+        {
+          "title": "센드버드, AWS ‘KPPL’ 리테일·CPG 부문 수상",
+          "press": "economist.co.kr",
+          "publishedAt": "2026-10-20T01:24:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/243/0000104440?sid=105"
+        },
+        {
+          "title": "업스테이지 ‘솔라’, 센드버드 AI 에이전트에 탑재…상용화 추진",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-10-19T04:38:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006391451?sid=105"
+        },
+        {
+          "title": "센드버드-업스테이지, 국산 LLM·AI 에이전트 상용화 협력",
+          "press": "etnews.com",
+          "publishedAt": "2026-10-19T01:45:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/030/0003476240?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "센드버드 코리아",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "센드버드 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "센드버드 매출",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "센드버드 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "센드버드 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "센드버드 김동신",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "센드버드 구조조정",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "AI",
+          "searchVolume": 141600,
+          "origin": "related"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "센드버드 상장",
+          "reason": "IPO 추진 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "업스테이지 솔라",
+          "reason": "탑재 LLM 성능",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "AI 에이전트 상용화",
+          "reason": "출시 시점 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "센드버드 매출",
+          "reason": "협력 후 실적",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "센드버드 김동신",
+          "reason": "창업자 행보 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "중국 CXMT",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": "중국 CXMT가 AI 메모리 호황 속 급성장하며 D램 초미세 공정 선도를 자신해서",
+      "headlines": [
+        {
+          "title": "\"삼전닉스 따라잡을 자신 있다\"…턱밑까지 쫓아온 中의 야심",
+          "press": "hankyung.com",
+          "publishedAt": "2026-10-20T02:45:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005344390?sid=101"
+        },
+        {
+          "title": "AI발 메모리 호황에 中 CXMT도 '급성장'…韓 메모리 경쟁 변수로",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-19T09:49:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014264133?sid=101"
+        },
+        {
+          "title": "CXMT \"D램 시장 장기적 발전에 자신…초미세화 영역 선도할 것\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-20T02:20:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016387931?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "중국 cxmt 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "중국 cxmt 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "중국 cxmt 사는법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "중국 cxmt etf",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "중국 cxmt 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "중국 cxmt 반도체",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "중국 cxmt 시총",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "중국",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
       "nextWave": [],
       "rowCount": 0
     },
@@ -1890,38 +3555,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "중앙일보 인수 우선협상",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "중앙일보 인수 우선협상대상자에 다우키움·CJ 컨소시엄이 선정됐다.",
-      "headlines": [
-        {
-          "title": "중앙일보 인수 우선협상자에 다우키움·CJ 컨소시엄 선정",
-          "press": "hankyung.com",
-          "publishedAt": "2026-10-19T13:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005344234?sid=101"
-        },
-        {
-          "title": "중앙일보 인수 우선협상대상자에 ‘다우키움·CJ컨소시엄’ 선정",
-          "press": "hani.co.kr",
-          "publishedAt": "2026-10-19T14:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/028/0002828180?sid=103"
-        },
-        {
-          "title": "중앙일보 매각 우선협상대상에 '다우·CJ 컨소시엄'",
-          "press": "nocutnews.co.kr",
-          "publishedAt": "2026-10-19T14:36:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/079/0004200437?sid=101"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "설인아",
@@ -2001,7 +3636,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "케트진스키 대한항공 삼성화재",
@@ -2032,118 +3668,8 @@
       ],
       "concentrated": [],
       "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "토트넘",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "손흥민이 토트넘 떠날 때 \"정말 많이 울었다\"고 고백했다.",
-      "headlines": [
-        {
-          "title": "토트넘, 코번트리 3-1 격파…강등권 탈출",
-          "press": "bntnews.co.kr",
-          "publishedAt": "2026-10-19T21:12:00.000Z",
-          "link": "https://www.bntnews.co.kr/article/view/bnt202610200007"
-        },
-        {
-          "title": "\"토트넘 떠날 때 정말 많이 울었습니다\" 손흥민의 솔직 고백 \"팬들만큼...",
-          "press": "spotvnews.co.kr",
-          "publishedAt": "2026-10-19T10:09:00.000Z",
-          "link": "https://m.sports.naver.com/wfootball/article/477/0000633963"
-        },
-        {
-          "title": "토트넘 떠난 손흥민 보러 온 팬들... 6살 아이가 울었다는 말에 꺼낸 진...",
-          "press": "insight.co.kr",
-          "publishedAt": "2026-10-19T01:46:00.000Z",
-          "link": "https://www.insight.co.kr/news/578229"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "토트넘 경기일정",
-          "searchVolume": 18580,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "토트넘 순위",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "토트넘 선수",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "토트넘 맨유",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "맨유 토트넘",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "토트넘 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "토트넘 유니폼",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "토트넘 카페",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "토트넘 다음경기",
-          "reason": "일정 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "금감원장 해킹 CEO",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "금감원장이 금융권 해킹 사고로 CEO 책임을 묻는 첫 사례가 될 수 있다고 말했다.",
-      "headlines": [
-        {
-          "title": "금감원장 \"해킹 사태, CEO 책임 첫 사례 될 수도\" [국감2026]",
-          "press": "it.chosun.com",
-          "publishedAt": "2026-10-19T07:52:00.000Z",
-          "link": "https://it.chosun.com/news/articleView.html?idxno=2023092172319"
-        },
-        {
-          "title": "5대 은행장, 국감장 해킹 대응·피해보상 질의에 진땀",
-          "press": "bloter.net",
-          "publishedAt": "2026-10-19T08:16:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/293/0000091803?sid=101"
-        },
-        {
-          "title": "금감원장 \"금융권 해킹사고, CEO 책임 다룰 것\"",
-          "press": "efnews.co.kr",
-          "publishedAt": "2026-10-19T08:50:00.000Z",
-          "link": "http://www.efnews.co.kr/news/articleView.html?idxno=133258"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "이효리 후계자 다영",
@@ -2180,632 +3706,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "머스크",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "머스크가 내년 미국 모든 어린이에게 스페이스X 주식 1주씩 주겠다고 했다.",
-      "headlines": [
-        {
-          "title": "머스크 \"내년 미국 모든 어린이에 스페이스X 1주씩 줄 것\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-19T11:50:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016386970?sid=104"
-        },
-        {
-          "title": "\"美 어린이 모두에게 스페이스X 주식 1주씩\"…머스크, 파격 약속",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-19T13:12:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014264209?sid=104"
-        },
-        {
-          "title": "머스크 “내년 美 모든 어린이에 스페이스X 1주 줄 것”",
-          "press": "kmib.co.kr",
-          "publishedAt": "2026-10-19T13:38:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/005/0001879620?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "머스크 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "키엘 머스크 향수",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "머스크 재산",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "머스크 향 특징",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "머스크 과일",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "머스크 냄새",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "머스크 메론",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "머스크 본사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "김현지",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "declining",
-      "isHot": false,
-      "why": "김현지 남편 세무법인 출신들이 금융지주·조세심판관에 줄줄이 위촉돼 논란이다.",
-      "headlines": [
-        {
-          "title": "“김현지 남편 세무법인서 금융지주 계열사 줄줄이 사외이사…조세심판...",
-          "press": "donga.com",
-          "publishedAt": "2026-10-19T07:03:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/020/0003755955?sid=100"
-        },
-        {
-          "title": "서류·면접 모두 꼴찌인데 사장?…'김현지 주례' 하동근 낙하산 논란",
-          "press": "hankyung.com",
-          "publishedAt": "2026-10-19T12:46:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005344223?sid=100"
-        },
-        {
-          "title": "“김현지 배우자 설립 세무법인 인사, 금융지주에 한자리씩 차지”…최...",
-          "press": "munhwa.com",
-          "publishedAt": "2026-10-19T03:04:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/021/0002826140?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "김현지 부속실장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김현지 간첩",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이재명 김현지",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김현지 배구",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김현지 정체",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김현지 김정일",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김현지 비서관 논란",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김현지 pd",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "하네스²",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "구글이 AI 성능을 스스로 높이는 자기개선 프레임워크 '하네스²'를 공개했다.",
-      "headlines": [
-        {
-          "title": "구글, AI 성능 스스로 높이는 자기개선 프레임워크 '하네스²' 공개",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-19T09:02:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216410"
-        },
-        {
-          "title": "스토케, 리디자인으로 새롭게 탄생한 트립트랩 쿠션 4종 출시",
-          "press": "kizmom.com",
-          "publishedAt": "2025-09-05T04:40:00.000Z",
-          "link": "https://www.kizmom.com/news/articleView.html?idxno=104405"
-        },
-        {
-          "title": "스토케, 리디자인으로 새롭게 탄생한 트립트랩 쿠션 4종 선봬",
-          "press": "thefirstmedia.net",
-          "publishedAt": "2025-09-04T07:38:00.000Z",
-          "link": "http://www.thefirstmedia.net/news/articleView.html?idxno=180143"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "스토케 하네스2",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "트립트랩 하네스2",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "구글",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "구글이 양자컴퓨터 핵심 연산 오류를 40분의 1로 줄였다.",
-      "headlines": [
-        {
-          "title": "구글, 양자컴퓨터 핵심 연산 오류 40분의 1로 줄였다",
-          "press": "etnews.com",
-          "publishedAt": "2026-10-18T23:57:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/030/0003476119?sid=105"
-        },
-        {
-          "title": "억만장자세 저지에 1억달러 쏟은 구글 창업자, 본인은 투표 못해",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-17T23:10:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016383318?sid=104"
-        },
-        {
-          "title": "구글 창업자, 억만장자세 반대에 1350억원…본인은 투표 못해",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-18T01:28:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014260402?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "구글 제미나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 번역기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 영국",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 클래스룸",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 원",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 폼",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 홈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "텐센트",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "텐센트가 챗봇별로 저장하던 AI 메모리를 통합해 클로드·챗GPT에서 공유하게 했다.",
-      "headlines": [
-        {
-          "title": "텐센트, 챗봇마다 저장하던 AI 메모리 통합...클로드·챗GPT에서 공유",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-19T08:56:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216413"
-        },
-        {
-          "title": "삼성전자·SK하이닉스 위협하는 CXMT…텐센트·바이트댄스도 서버 D램 주...",
-          "press": "topstarnews.net",
-          "publishedAt": "2026-10-18T07:12:00.000Z",
-          "link": "https://www.topstarnews.net/news/articleView.html?idxno=16250583"
-        },
-        {
-          "title": "중국서도 AI '통제 상실' 사례 있었다…지도 서비스에 접근 시도",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-18T08:55:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016384117?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "텐센트 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "중국 텐센트",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "텐센트 뮤직",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "텐센트 게임",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "텐센트 코리아",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "텐센트 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "텐센트 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "텐센트 시총",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "텐센트 주가",
-          "reason": "투자 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "글림프스",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "엘로리안이 시각 추론 AI '글림프스'를 공개해 일부 평가서 아스트라를 앞섰다.",
-      "headlines": [
-        {
-          "title": "엘로리안, 시각 추론 AI '글림프스' 공개…일부 평가서 아스트라 앞서",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-19T08:36:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216403"
-        },
-        {
-          "title": "애플, 건강 및 의료 분야 진출 위해 글림프스 인수",
-          "press": "betanews.net",
-          "publishedAt": "2016-08-24T09:49:00.000Z",
-          "link": "http://www.betanews.net/article/641038"
-        },
-        {
-          "title": "미국인들 ‘직장에 갇혔다’...경기침체 두려움에 이직 포기",
-          "press": "etoday.co.kr",
-          "publishedAt": "2024-08-11T06:36:00.000Z",
-          "link": "https://www.etoday.co.kr/news/view/2389512"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "엘로리안",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "제미나이 개발자가 구글을 나와 창업한 엘로리안이 시각 추론 AI를 공개했다.",
-      "headlines": [
-        {
-          "title": "엘로리안, 시각 추론 AI '글림프스' 공개…일부 평가서 아스트라 앞서",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-19T08:36:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216403"
-        },
-        {
-          "title": "제미나이 개발자가 구글 나와 창업한 이유… \"AI 변곡점? '이 기술'\"",
-          "press": "hankookilbo.com",
-          "publishedAt": "2026-08-24T19:31:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/469/0000949848?sid=105"
-        },
-        {
-          "title": "[미국 특징주] \"GPT·클로드 비싸\"...스타트업들, 저비용 AI 모델 자체 구...",
-          "press": "newspim.com",
-          "publishedAt": "2026-09-21T23:08:00.000Z",
-          "link": "https://www.newspim.com/news/view/20260922000057"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "엘로리안 ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "센드버드",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "센드버드가 업스테이지 '솔라'를 AI 에이전트에 탑재해 상용화를 추진한다.",
-      "headlines": [
-        {
-          "title": "업스테이지 ‘솔라’, 센드버드 AI 에이전트에 탑재…상용화 추진",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-10-19T04:38:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006391451?sid=105"
-        },
-        {
-          "title": "센드버드·업스테이지, 국산 LLM·AI 에이전트 상용화 ‘맞손’",
-          "press": "economist.co.kr",
-          "publishedAt": "2026-10-19T01:02:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/243/0000104383?sid=105"
-        },
-        {
-          "title": "센드버드-업스테이지, 국산 LLM·AI 에이전트 상용화 협력",
-          "press": "etnews.com",
-          "publishedAt": "2026-10-19T01:45:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/030/0003476240?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "센드버드 코리아",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "센드버드 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "센드버드 매출",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "센드버드 연봉",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "센드버드 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "센드버드 김동신",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "센드버드 구조조정",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "AI",
-          "searchVolume": 141600,
-          "origin": "related"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "센드버드 상장",
-          "reason": "IPO 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "중국 CXMT",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "중국 CXMT 급성장과 머스크 발언이 삼성·SK 메모리 경쟁 변수로 떠올랐다.",
-      "headlines": [
-        {
-          "title": "AI발 메모리 호황에 中 CXMT도 '급성장'…韓 메모리 경쟁 변수로",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-19T09:49:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014264133?sid=101"
-        },
-        {
-          "title": "\"갈취 수준\" 삼전닉스 겨냥한 머스크…전문가는 정면반박",
-          "press": "hankyung.com",
-          "publishedAt": "2026-10-19T12:05:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005344222?sid=101"
-        },
-        {
-          "title": "애플도 테슬라도 '중국 반도체' 눈독…삼성·SK 흔든다",
-          "press": "wowtv.co.kr",
-          "publishedAt": "2026-10-19T04:11:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/215/0001269640?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "중국 cxmt 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "중국 cxmt 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "중국 cxmt 사는법",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "중국 cxmt 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "중국 cxmt etf",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "중국 cxmt 반도체",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "중국 cxmt 시총",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "디즈니",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "유연석·서현진 주연 '라이어'가 디즈니+에서 30일 공개 확정됐다.",
-      "headlines": [
-        {
-          "title": "\"디즈니런 뛰고 구몬체험 해보세요\"…이달 24일",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-19T00:47:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014261798?sid=101"
-        },
-        {
-          "title": "구몬학습, '디즈니런 2026' 스폰서 참여… 현장 부스 운영",
-          "press": "fnnews.com",
-          "publishedAt": "2026-10-19T00:33:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/014/0005590941?sid=102"
-        },
-        {
-          "title": "구몬학습, '디즈니런'서 체험 부스 운영",
-          "press": "kfenews.co.kr",
-          "publishedAt": "2026-10-19T08:46:00.000Z",
-          "link": "https://www.kfenews.co.kr/news/articleView.html?idxno=666530"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "디즈니 플러스",
-          "searchVolume": 481900,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "디즈니 드라마",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "디즈니 플러스 추천",
-          "searchVolume": 28920,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "디즈니 영화",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "디즈니 캐릭터",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "디즈니 성인인증",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "디즈니 키링",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "디즈니 크루즈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     }
   ]
 }
