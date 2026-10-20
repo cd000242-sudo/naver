@@ -113,7 +113,8 @@ export function rankAdsenseCards(cards, nowMs = Date.now()) {
  * 지금 쓰면 트래픽이 오나(2026-10-20) — 판의 card.demand 는 앱 레포 adsense-benchmarks-trend.cjs 가 데이터랩 주별 실측으로 붙인다
  * (지금 오르는 중 · 곧 시즌 · 꾸준함 · 식는 중 · 피크 지남). 화면은 그 판정으로 순서를 정하고 '지금 써야 할 키워드'를 고른다.
  */
-const HOT_VERDICTS = new Set(['rising', 'season-soon']);
+// 'new' = 데이터랩 기록이 최근 몇 주부터 시작된 새로 뜬 말(아이폰듀오 · 태풍 등, 2026-10-20 실측)
+const HOT_VERDICTS = new Set(['new', 'rising', 'season-soon']);
 const isHot = (card) => HOT_VERDICTS.has(card?.demand?.verdict);
 
 /** 표시 묶음 — 경쟁 등급이 먼저, 같은 등급 안에서는 지금 오르는 · 곧 시즌 소재가 앞 묶음. */
@@ -128,7 +129,7 @@ export function shuffleAdsenseCards(cards, nowMs = Date.now(), seed = 0) {
 
 /** 지금 써야 할 키워드 — 오르는 중 · 곧 시즌이면서 경쟁 등급 0~1(실측 · 검색 100 이상 · 문서/검색 5배 이하). 급상승 → 경쟁 낮은 순. */
 export function adsenseNowPicks(cards, nowMs = Date.now(), limit = 6) {
-  const verdictRank = (c) => (c.demand.verdict === 'rising' ? 0 : 1);
+  const verdictRank = (c) => (c.demand.verdict === 'season-soon' ? 1 : 0);
   return (Array.isArray(cards) ? cards : [])
     .filter((c) => isHot(c) && adsenseCompetition(c, nowMs).tier <= 1)
     .map((c) => ({ c, ratio: adsenseCompetition(c, nowMs).ratio ?? Infinity }))

@@ -57,3 +57,9 @@ test('지금 써야 할 키워드: 오르는 중 · 곧 시즌이면서 문서 �
   assert.deepEqual(ids(adsenseNowPicks(cards, NOW, 6)), ['rise-a', 'rise-b', 'season']);
   assert.deepEqual(ids(adsenseNowPicks(cards, NOW, 1)), ['rise-a']);
 });
+
+test('새로 뜬 말도 지금 써야 할 키워드에 들고, 급상승과 같은 앞줄이다', () => {
+  const cards = [card('season', { dc: 100, verdict: 'season-soon' }), card('brand-new', { dc: 900, verdict: 'new' }), card('rise', { dc: 300, verdict: 'rising' })];
+  assert.deepEqual(ids(adsenseNowPicks(cards, NOW, 6)), ['rise', 'brand-new', 'season']);
+  assert.ok(adsenseOrderTier(card('n', { dc: 900, verdict: 'new' }), NOW) < adsenseOrderTier(card('p', { dc: 100 }), NOW));
+});
