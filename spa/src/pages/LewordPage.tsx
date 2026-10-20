@@ -10,7 +10,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import AffiliateTab from '../components/leword/AffiliateTab';
 import AnalyzeTab from '../components/leword/AnalyzeTab';
 import PostPlanTab from '../components/leword/PostPlanTab';
-import GoldenTab from '../components/leword/GoldenTab';
+import { GoldenTabWithEnrich } from '../components/leword/GoldenTab';
 import IssueNicheTab from '../components/leword/IssueNicheTab';
 import HomefeedTab from '../components/leword/homefeed/HomefeedTab';
 import AdsenseBenchmarkBoard from '../components/leword/adsense/AdsenseBenchmarkBoard';
@@ -410,7 +410,7 @@ function LewordPage() {
                         <button type="button" className="lw-acct-btn on" onClick={() => setAuthOpen(true)}>로그인 · 계정 만들기</button>
                     </section>
                 )}
-                {!lockedTab && activeTab === 'golden' && <GoldenTab key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} onPlan={sendToPlan} />}
+                {!lockedTab && activeTab === 'golden' && <GoldenTabWithEnrich key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} onPlan={sendToPlan} />}
                 {!lockedTab && activeTab === 'issue' && <IssueNicheTab key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} onPlan={sendToPlan} />}
                 {!lockedTab && activeTab === 'homefeed' && <HomefeedTab />}
                 {!lockedTab && activeTab === 'adsense' && <AdsenseBenchmarkBoard />}
