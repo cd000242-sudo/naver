@@ -117,9 +117,14 @@ export function rankAdsenseCards(cards, nowMs = Date.now()) {
 const HOT_VERDICTS = new Set(['new', 'rising', 'season-soon']);
 const isHot = (card) => HOT_VERDICTS.has(card?.demand?.verdict);
 
-/** 표시 묶음 — 경쟁 등급이 먼저, 같은 등급 안에서는 지금 오르는 · 곧 시즌 소재가 앞 묶음. */
+/*
+ * 표시 묶음 — 굵은 경쟁 칸이 먼저, 같은 칸 안에서는 지금 뜨는 소재가 앞 묶음.
+ * 경쟁 칸: 0 = 실측 · 문서/검색 5배 이하(0·1등급) / 1 = 수요 적음 · 경쟁 높음(2·3등급) / 2 = 미측정 · 재측정 필요(4·5등급).
+ * 2026-10-20 사장님 "순서 섞기해도 안 섞이네요" — 6칸으로 나누면 맨 위 묶음이 1장뿐인 화면이 많아 섞어도 맨 위가 그대로였다.
+ */
+const COARSE_TIER = [0, 0, 1, 1, 2, 2];
 export function adsenseOrderTier(card, nowMs = Date.now()) {
-  return adsenseCompetition(card, nowMs).tier * 2 + (isHot(card) ? 0 : 1);
+  return (COARSE_TIER[adsenseCompetition(card, nowMs).tier] ?? 2) * 2 + (isHot(card) ? 0 : 1);
 }
 
 /** 순위대로 세운 뒤 같은 묶음 안에서만 섞는다(사장님 선택 '같은 등급 안에서만'). 원본은 바꾸지 않는다. */

@@ -11,6 +11,7 @@ import { callWorkerRaw } from '../../../lib/keywordApi';
 import { adsenseCompetition, adsenseCategories, adsenseWritingAdvice, blogCount, filterAdsenseCards, ADSENSE_PLATFORMS, cardPlatforms, shuffleAdsenseCards, adsenseNowPicks, type AdsenseBoard, type AdsenseCard } from '../../../lib/adsenseBenchmarkModel.mjs';
 import { useShuffleSeed } from '../../../lib/useShuffleSeed';
 import { DemandBlock, NowPicksPanel } from './AdsenseDemand';
+import { SolveBlock, KinBlock, BenchmarkBlock, DemandPending } from './AdsenseWriteAids';
 
 const kst = (iso: string | null | undefined) => {
     if (!iso) return '—';
@@ -149,6 +150,7 @@ function AdsenseCardView({ c, now }: { c: AdsenseCard; now: number }) {
             <h3>{c.metrics?.query || c.keyword}</h3>
             <p style={{ color: '#a8b6cb', fontSize: 13, margin: '4px 0 10px' }}>{c.title}</p>
             <DemandBlock c={c} />
+            <DemandPending c={c} />
             <div style={{ color: competition.tier === 0 ? '#a7f3d0' : competition.tier === 3 ? '#fca5a5' : '#cbd5e1', fontSize: 13, marginBottom: 8 }}>
                 <b>{competition.label}</b> · 문서/월 검색 {competition.ratio !== null ? `${competition.ratio.toLocaleString('ko-KR', { maximumFractionDigits: 2 })}배` : '미확인'} · 측정 {kst(c.metrics?.measuredAt)}
             </div>
@@ -175,6 +177,9 @@ function AdsenseCardView({ c, now }: { c: AdsenseCard; now: number }) {
                 </div>
             )}
             {(c.verificationNeeded?.length ?? 0) > 0 && <div className="hfb-verify"><b>작성 전 확인</b> {c.verificationNeeded!.join(' · ')}</div>}
+            <SolveBlock c={c} />
+            <KinBlock c={c} />
+            <BenchmarkBlock c={c} />
             <SearchTitles c={c} />
             <div className="hfb-title-box">
                 <div className="hfb-title-head"><h4>고수들이 쓴 제목 <span>{c.sources.length}개</span></h4></div>
@@ -291,8 +296,8 @@ export default function AdsenseBenchmarkBoard() {
                         <button type="button" aria-pressed={mode === 'low'} onClick={() => { setMode('low'); setLimit(24); }}>낮은 문서 경쟁 <span>{lowCount}</span></button>
                         <button type="button" aria-pressed={mode === 'star'} onClick={() => setMode('star')}>★ 고수 3곳 이상 <span>{inPlatform.filter((c) => c.recommended).length}</span></button>
                     </div>
-                    <p style={{ color: '#a8b6cb', fontSize: 12 }}>문서 경쟁 낮은 순 · 최근 7일 실측 · 월 검색 100 이상·문서/검색 1배 이하 우선 → 5배 이하 → 고경쟁. 같은 경쟁 등급 안에서는 지금 오르는 · 곧 시즌 소재가 먼저입니다. 미측정·0건·오래된 자료는 뒤에서 확인합니다.</p>
-                    <div className="hfb-shuffle"><button type="button" onClick={() => { reshuffle(); setLimit(24); }}>순서 섞기</button><small>매시 정각 새 순서로 섞입니다 · 같은 경쟁 등급 안에서만 섞여 문서 적고 검색량 많은 순은 그대로입니다</small>{query && <button type="button" onClick={() => setQuery('')}>검색어 지우기</button>}</div>
+                    <p style={{ color: '#a8b6cb', fontSize: 12 }}>문서 경쟁 낮은 순 · 최근 7일 실측 · 월 검색 100 이상·문서/검색 1배 이하 우선 → 5배 이하 → 고경쟁. 같은 칸 안에서는 새로 뜬 · 지금 오르는 · 곧 시즌 소재가 먼저입니다. 미측정·0건·오래된 자료는 뒤에서 확인합니다.</p>
+                    <div className="hfb-shuffle"><button type="button" onClick={() => { reshuffle(); setLimit(24); }}>순서 섞기</button><small>매시 정각 새 순서로 섞입니다 · 실측 저경쟁(문서/검색 5배 이하) → 수요 적음·고경쟁 → 미측정 칸은 지키고, 같은 칸 안에서 지금 뜨는 소재가 먼저입니다</small>{query && <button type="button" onClick={() => setQuery('')}>검색어 지우기</button>}</div>
                     <div className="hfb-filter-bottom">
                         <div className="hfb-categories" role="group" aria-label="분야">
                             <button type="button" aria-pressed={category === ''} onClick={() => setCategory('')}>전체</button>

@@ -16,6 +16,16 @@ export function withGuides(board, store) {
     const writingDirection = str(g?.guide?.direction, 600);
     if (typeof g?.id !== 'string' || !writingDirection) continue;
     const guide = { writingDirection, searchTargets: strs(g.guide.searchTargets, 6, 120), mustInclude: strs(g.guide.mustInclude, 6, 200), mustAvoid: strs(g.guide.mustAvoid, 4, 200), checkBefore: strs(g.guide.checkBefore, 4, 200) };
+    // 애드센스 안내 새 칸(2026-10-20): 이 글이 해결할 문제 · 행동 키워드 제목 · 지식인 질문(지식인 주소만 링크로)
+    const solves = strs(g.guide.solves, 3, 200);
+    const actionTitles = strs(g.guide.actionTitles, 3, 120);
+    const kinQuestions = (Array.isArray(g.kinQuestions) ? g.kinQuestions : [])
+      .filter((q) => typeof q?.link === 'string' && /^https:\/\/kin\.naver\.com\//.test(q.link) && str(q.title, 160))
+      .slice(0, 3)
+      .map((q) => ({ title: str(q.title, 160), link: q.link, views: Number.isFinite(Number(q.views)) ? Number(q.views) : null, answers: Number.isFinite(Number(q.answers)) && q.answers !== null ? Number(q.answers) : null, askedAt: str(q.askedAt, 20) }));
+    if (solves.length) guide.solves = solves;
+    if (actionTitles.length) guide.actionTitles = actionTitles;
+    if (kinQuestions.length) guide.kinQuestions = kinQuestions;
     if (!byId.has(g.id)) byId.set(g.id, guide);
     for (const url of Array.isArray(g.urls) ? g.urls : []) if (typeof url === 'string' && url && !byUrl.has(url)) byUrl.set(url, guide);
   }
