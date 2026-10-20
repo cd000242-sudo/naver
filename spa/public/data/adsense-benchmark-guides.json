@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-20T22:18:45.770Z",
+  "generatedAt": "2026-10-20T22:34:09.996Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -4613,36 +4613,6 @@
         ],
         "checkBefore": [
           "2026년 이태원 할로윈 행사 공식 운영 여부 — 용산구청 또는 서울시 공식 발표"
-        ]
-      },
-      "at": "2026-10-19T21:58:25.467Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "9d4d869a93aa6026",
-      "urls": [
-        "https://sw.jshan.kr/entry/%EB%8B%B4%EC%96%91%EA%B5%B0-%EC%9E%84%ED%94%8C%EB%9E%80%ED%8A%B8-%EA%B0%80%EA%B2%A9-BEST10-%EB%B9%84%EA%B5%90",
-        "https://sw.jshan.kr/entry/%EB%82%98%EC%A3%BC%EC%8B%9C-%EC%9E%84%ED%94%8C%EB%9E%80%ED%8A%B8-%EC%B9%98%EA%B3%BC-%EA%B0%80%EA%B2%A9-%EC%A0%80%EB%A0%B4%ED%95%9C-%EA%B3%B3-BEST10",
-        "https://sw.jshan.kr/entry/%EA%B4%91%EC%96%91%EC%8B%9C-%EC%B9%98%EA%B3%BC-%EC%9E%84%ED%94%8C%EB%9E%80%ED%8A%B8-%EA%B0%80%EA%B2%A9-BEST10-%EB%B9%84%EA%B5%90",
-        "https://sw.jshan.kr/entry/%EA%B3%A0%ED%9D%A5%EA%B5%B0-%EC%9E%84%ED%94%8C%EB%9E%80%ED%8A%B8-%EA%B0%80%EA%B2%A9-%EB%B9%84%EA%B5%90-BEST10-%EC%A0%80%EB%A0%B4%ED%95%9C-%EC%B9%98%EA%B3%BC-%EC%A0%95%EB%A6%AC",
-        "https://sw.jshan.kr/entry/%EC%A0%95%EC%9D%8D%EC%8B%9C-%EC%9E%84%ED%94%8C%EB%9E%80%ED%8A%B8-%EB%B9%84%EC%9A%A9-%EC%A0%80%EB%A0%B4%ED%95%9C-%EC%B9%98%EA%B3%BC-BEST10"
-      ],
-      "guide": {
-        "direction": "담양군에서 임플란트를 알아보는 사람은 '어디가 싸고 믿을만한가'를 찾으므로 지역명+임플란트 가격이 대표 검색어다. 나주·광양·고흥·정읍 등 같은 패턴 글이 쏟아진 상황에서 가격표만으론 차별화가 안 되고, 1개 식립 기준 가격과 뼈이식 등 추가 비용을 분리한 글은 비어 있다. 치과 선택 체크리스트까지 담아야 끝까지 읽힌다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "담양군 치과 BEST10 리스트와 각 치과 임플란트 가격대 (확인 필요: 실제 치과명·가격)",
-          "1개 식립 기준 가격과 뼈이식·발치 등 추가 비용 구분표",
-          "비급여 진료비 공개 자료 기준 가격 범위 (확인 필요: 건강보험심사평가원 자료)",
-          "치과 선택 체크리스트(원장 경력, 임플란트 식립 재료 브랜드 등)"
-        ],
-        "mustAvoid": [
-          "나주·광양 등 다른 지역 가격 자료를 담양군 가격처럼 섞어 쓰는 것"
-        ],
-        "checkBefore": [
-          "건강보험심사평가원 비급여 진료비 공개 자료에서 담양군 치과별 실제 가격 확인",
-          "해당 치과 공식 홈페이지에서 가격 변동 여부 재확인"
         ]
       },
       "at": "2026-10-19T21:58:25.467Z",
@@ -79035,6 +79005,788 @@
           "views": 172,
           "answers": 3,
           "askedAt": "2026.10.14"
+        }
+      ]
+    },
+    {
+      "id": "fd564eeeada6323d",
+      "urls": [
+        "https://zipbid.tistory.com/entry/%EC%B6%A9%EB%B6%81-%EC%A1%B0%EB%A6%AC%EC%82%AC-%EC%9D%BC%EC%9E%90%EB%A6%AC-%EC%8B%9C%EA%B8%89-%EB%86%92%EC%9D%80-%EA%B3%B3-%EC%B1%84%EC%9A%A9-%EA%B0%80%EC%9D%B4%EB%93%9C-10-21",
+        "https://zipbid.tistory.com/entry/%EB%8C%80%EC%A0%84-%EC%A1%B0%EB%A6%AC%EC%82%AC-%EC%B1%84%EC%9A%A9-%EC%B4%88%EB%B3%B4-%EA%B0%80%EB%8A%A5-%EC%B6%94%EC%B2%9C-%EC%88%9C%EC%9C%84-10-21",
+        "https://noinjob.kr/%eb%85%b8%ec%9d%b8%ec%9d%bc%ec%9e%90%eb%a6%ac-%ed%83%9c%ec%98%81%ec%b2%ad%ec%86%94%ec%95%84%ed%8c%8c%ed%8a%b8-%ea%b2%bd%eb%b9%84%ec%9b%90-%ec%b1%84%ec%9a%a9/",
+        "https://noinjob.kr/%eb%85%b8%ec%9d%b8%ec%9d%bc%ec%9e%90%eb%a6%ac-%ec%84%9c%ec%82%b0%ec%8b%9c%ec%9e%a5%ec%95%a0%ec%9d%b8%eb%b3%b5%ec%a7%80%ea%b4%80-%ec%82%ac%ed%9a%8c%eb%b3%b5%ec%a7%80%ec%82%ac-%ec%b1%84%ec%9a%a9/",
+        "https://noinjob.kr/%eb%85%b8%ec%9d%b8%ec%9d%bc%ec%9e%90%eb%a6%ac-%ec%84%9c%eb%a9%b4%ec%95%84%ec%9d%b4%ed%8c%8c%ed%81%ac-%eb%af%b8%ed%99%94%ec%9b%90-%ec%b1%84%ec%9a%a9-2/"
+      ],
+      "guide": {
+        "direction": "충북에서 조리사로 일하려는 사람은 어느 지역·시설이 시급이 높은지부터 궁금해한다. 고수 블로그 제목들은 '시급 높은 곳'이라 써놓고도 실제 지역별 시급 비교표나 자격요건은 보여주지 않는다. 지역·시설 유형별 시급과 조리사 자격증 필요 여부를 표로 정리하면 독자는 바로 지원처를 고를 수 있다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "충북 내 지역(청주·충주·제천 등)별 시급 비교표 (확인 필요: 워크넷·지자체 공고)",
+          "조리사 자격증(조리기능사) 필요 여부 표시",
+          "채용 신청 마감일과 신청 방법 (확인 필요: 해당 공고 원문)"
+        ],
+        "mustAvoid": [
+          "노인일자리 경비원·미화원 등 다른 직종 채용과 섞어서 혼동 주지 않기",
+          "공고별로 다른데 '최고 시급'처럼 단정해서 쓰지 않기"
+        ],
+        "checkBefore": [
+          "워크넷·충북 지자체 노인일자리지원센터 공고에서 실제 시급·마감일 확인"
+        ],
+        "solves": [
+          "어디가 시급이 높은지 모름 → 지역·시설별 시급 비교표로 정리",
+          "조리사 자격증이 꼭 필요한지 모름 → 공고별 자격요건 표시"
+        ],
+        "actionTitles": [
+          "충북 조리사 일자리 시급 높은 곳 비교해서 지원하기",
+          "충북 조리사 채용 공고 모음에서 자격요건까지 확인하기",
+          "충북 조리사 모집 지역별 시급 정리표로 빠르게 비교하기"
+        ]
+      },
+      "at": "2026-10-20T22:32:13.260Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "한국의 경치,풍경,수도,날씨,음식",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=130102&docId=38661068&answerNo=1&qb=7Lap67aBIOyhsOumrOyCrCDsnbzsnpDrpqwg7Iuc6riJIOuGkuydgA==",
+          "views": 78509,
+          "answers": 10,
+          "askedAt": "2008.01.25"
+        },
+        {
+          "title": "다문화가정 내공 50",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=613&docId=61795301&answerNo=2&qb=7Lap67aBIOyhsOumrOyCrCDsnbzsnpDrpqwg7Iuc6riJIOuGkuydgA==",
+          "views": 52398,
+          "answers": 6,
+          "askedAt": "2007.09.10"
+        },
+        {
+          "title": "날씨와 관련된 생활조사 (3가지)",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=130102&docId=36617564&answerNo=7&qb=7Lap67aBIOyhsOumrOyCrCDsnbzsnpDrpqwg7Iuc6riJIOuGkuydgA==",
+          "views": 49724,
+          "answers": 9,
+          "askedAt": "2008.07.15"
+        }
+      ]
+    },
+    {
+      "id": "5edd152c530ceef1",
+      "urls": [
+        "https://poohzn.tistory.com/2491",
+        "https://mindocean.tistory.com/2296"
+      ],
+      "guide": {
+        "direction": "검색자는 '건강보험 무사고 할인'이 어떤 보험 제도인지, 전화·모바일로 신청하는 절차와 자신이 대상자인지 궁금해한다. 고수 블로그 제목은 '간소화'와 '즉시 신청'을 강조하면서도 신청 경로별 차이와 대상자 확인 기준은 명확히 안 보여준다. 신청 절차와 대상자 확인 체크리스트를 정리하면 독자는 할인 가능 여부를 바로 판단할 수 있다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "무사고 할인이 국민건강보험공단 제도인지 민영 실손보험 제도인지 명시 (확인 필요: 공식 공지)",
+          "전화 신청과 모바일 신청의 절차 차이",
+          "대상자 확인 기준(무사고 기간 등) (확인 필요: 원문 공지)",
+          "신청 기한 또는 적용 시점 (확인 필요: 원문 공지)"
+        ],
+        "mustAvoid": [
+          "자동차보험 무사고 할인과 혼동하지 않기(별개 제도)",
+          "'간소화'를 보장 축소로 오해하게 쓰지 않기(절차만 간편화)"
+        ],
+        "checkBefore": [
+          "해당 발표를 낸 기관(국민건강보험공단 또는 보험사) 공식 공지에서 대상자 기준·신청 방법 원문 확인"
+        ],
+        "solves": [
+          "신청이 전화인지 모바일인지 몰라 헷갈림 → 신청 경로별 절차 비교로 해결",
+          "내가 할인 대상자인지 모름 → 대상자 확인 체크리스트 제공"
+        ],
+        "actionTitles": [
+          "건강보험 무사고 할인 신청방법 전화와 모바일로 비교하기",
+          "건강보험 무사고 할인 대상자 확인하는 법 바로 정리하기",
+          "건강보험료 할인 간소화 신청 전 꼭 확인할 것 정리"
+        ]
+      },
+      "at": "2026-10-20T22:32:13.260Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "Sk폰요금 미납",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=50101&docId=270932741&answerNo=1&qb=7KCE7ZmU64KYIOuqqOuwlOydvCDsponsi5wg66y07IKs6rOgIOqxtOqwleuztO2XmOujjA==",
+          "views": 550,
+          "answers": 1,
+          "askedAt": "2017.02.23"
+        }
+      ]
+    },
+    {
+      "id": "5722e47859ff4ca5",
+      "urls": [
+        "https://zipbid.tistory.com/entry/%EC%B6%A9%EB%82%A8-%EC%A1%B0%EB%A6%AC%EC%82%AC-%EB%AA%A8%EC%A7%91-%EC%A7%80%EC%97%AD%EB%B3%84-%EC%A0%95%EB%B3%B4-%EB%AA%A8%EC%9D%8C-10-21"
+      ],
+      "guide": {
+        "direction": "충남에서 조리사로 취업하려는 사람은 지역별 모집 정보보다 먼저 조리기능사 자격증과 시험장 위치가 궁금하다. 고수 블로그의 '지역별 정보 모음' 제목은 지역명만 나열하고 자격 요건·시험 일정은 다루지 않는다. 지역별 모집처와 조리기능사 시험장·학원 정보를 함께 정리하면 독자는 자격 취득부터 취업까지 한 글에서 끝낼 수 있다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "충남권 조리기능사 실기시험장 선택 방법(큐넷에서 지역 '충남' 선택) (확인 필요: 큐넷)",
+          "충남 천안 등 지역별 조리기능사 학원 정보 (확인 필요: 학원 현황)",
+          "충남 지역 조리 특성화고(병천고 등) 진학 경로",
+          "조리사 모집처별 자격증(한식·양식조리기능사) 필요 여부 표시"
+        ],
+        "mustAvoid": [
+          "서울-웅천 맛집 등 채용과 무관한 정보 섞지 않기",
+          "충남과 충북 지역명을 혼동하지 않기"
+        ],
+        "checkBefore": [
+          "한국산업인력공단 큐넷에서 충남권 조리기능사 시험일정·시험장 원문 확인"
+        ],
+        "solves": [
+          "어느 자격증이 필요한지 몰라 학원부터 찾음 → 모집처별 필요 자격증 정리로 해결",
+          "충남권 실기시험장이 어디인지 몰라 헷갈림 → 큐넷 지역선택 방법 안내"
+        ],
+        "actionTitles": [
+          "충남 조리사 모집 정보와 필요 자격증 함께 확인하기",
+          "충남 조리기능사 시험장 큐넷에서 바로 찾는 방법 정리"
+        ]
+      },
+      "at": "2026-10-20T22:32:13.260Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "요리 고등학교진학",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110308&docId=492814446&answerNo=8&qb=7Lap64KoIOyhsOumrOyCrCDsp4Dsl63rs4Q=",
+          "views": 1116,
+          "answers": 9,
+          "askedAt": "2026.08.28"
+        },
+        {
+          "title": "충남 천안에 양식조리기능사 학원이 있을까....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80209&docId=276656842&answerNo=2&qb=7Lap64KoIOyhsOumrOyCrCDsp4Dsl63rs4Q=",
+          "views": 1016,
+          "answers": 2,
+          "askedAt": "2017.05.15"
+        },
+        {
+          "title": "한식양식 조리기능사 실기 시험충남권에",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80209&docId=454672869&answerNo=1&qb=7Lap64KoIOyhsOumrOyCrCDsp4Dsl63rs4Q=",
+          "views": 174,
+          "answers": 2,
+          "askedAt": "2023.09.15"
+        }
+      ]
+    },
+    {
+      "id": "d227ab20d7af842c",
+      "urls": [
+        "https://zipbid.tistory.com/entry/%EA%B0%95%EC%9B%90-%EC%A1%B0%EB%A6%AC%EC%82%AC-%EA%B5%AC%EC%9D%B8-%EC%A1%B0%EA%B1%B4-%EC%A2%8B%EC%9D%80-%EA%B3%B3-%ED%95%B5%EC%8B%AC%EC%A0%95%EB%A6%AC-10-21",
+        "https://zipbid.tistory.com/entry/%EA%B2%BD%EA%B8%B0-%EC%96%B4%EB%A6%B0%EC%9D%B4%EC%A7%91%EC%A1%B0%EB%A6%AC%EC%82%AC-%EA%B5%AC%EC%9D%B8-%EC%A0%95%EA%B7%9C%EC%A7%81-%EC%B1%84%EC%9A%A9-%EA%B5%AC%EC%9D%B8-%EC%B4%9D%EC%A7%91%ED%95%A9-10-21"
+      ],
+      "guide": {
+        "direction": "검색자는 알바몬·알바천국 말고 강원 지역 조리사 전용 구인 채널(어린이집·학교·병원)이 어디인지와 영양사 겸직 시 조리기능사 자격증이 꼭 필요한지에 막혀 있다. 고수 글 제목은 '조건 좋은 곳'만 말하고 실제 채널·자격요건 차이는 짚지 않는다. 이 글은 채널별 비교표와 자격증 요건표로 지원 여부를 바로 정하게 한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "워크넷 강원지역 조리사 채용공고 필터 검색법 (확인 필요: work.go.kr)",
+          "어린이집 조리사 구인 전용 채널(보육시설정보시스템 등) (확인 필요)",
+          "학교·병원 조리사 채용 공고가 올라오는 곳(교육청 나이스 등) (확인 필요)",
+          "조리사자격증·조리기능사·영양사면허 겸직 시 자격요건 비교표",
+          "채널별 정규직/계약직·급여 조건 비교표 (확인 필요: 공고 원문)"
+        ],
+        "mustAvoid": [
+          "특정 어린이집·학교명을 거론해 채용조건을 단정하지 말 것",
+          "자격증 필요 여부를 시설 유형 구분 없이 일반화하지 말 것",
+          "사설 구인사이트를 광고성으로 나열하지 말 것"
+        ],
+        "checkBefore": [
+          "워크넷(work.go.kr) 강원지역 조리사 채용 최신 현황 확인",
+          "보육시설정보시스템·강원도교육청 공식 채용 공고 확인",
+          "조리사/조리기능사/영양사 자격요건은 한국산업인력공단 공식 안내 확인"
+        ],
+        "solves": [
+          "주방조리사구인사이트 어떤게 있나요(알바몬·알바천국 말고) → 강원 지역 공공 채용채널 정리",
+          "어린이집 조리사 구인 사이트 주소를 몰라요 → 전용 채널 안내",
+          "영양사 구인시 조리기능사 자격증 없어도 되나요 → 자격요건 비교표로 정리"
+        ],
+        "actionTitles": [
+          "강원 조리사 구인 사이트 모음, 워크넷 채용공고 조회법",
+          "어린이집 조리사 구인 사이트 총정리, 지원 전 확인할 것",
+          "조리사 자격증 없이 구직 가능할까, 조건별 비교 정리"
+        ]
+      },
+      "at": "2026-10-20T22:32:13.260Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "조리사구인",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40613&docId=270639737&answerNo=3&qb=6rCV7JuQIOyhsOumrOyCrCDqtazsnbgg7ZW17Ius7KCV66as",
+          "views": 8095,
+          "answers": 4,
+          "askedAt": "2024.08.20"
+        },
+        {
+          "title": "어린이집 조리사 구인 사이트",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40613&docId=374649455&answerNo=1&qb=6rCV7JuQIOyhsOumrOyCrCDqtazsnbgg7ZW17Ius7KCV66as",
+          "views": 4427,
+          "answers": 1,
+          "askedAt": "2020.12.01"
+        },
+        {
+          "title": "영양사 구인할 때 조리기능사 자격증 없어도 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=711&docId=434829844&answerNo=2&qb=6rCV7JuQIOyhsOumrOyCrCDqtazsnbgg7ZW17Ius7KCV66as",
+          "views": 1153,
+          "answers": 4,
+          "askedAt": "2022.12.15"
+        }
+      ]
+    },
+    {
+      "id": "a5fbedb99202eb3c",
+      "urls": [
+        "https://zipbid.tistory.com/entry/%EC%84%B8%EC%A2%85-%EC%A4%91%EC%8B%9D%EB%8B%B9-%EA%B5%AC%EC%9D%B8%EA%B5%AC%EC%A7%81-5060-%EC%9E%AC%EC%B7%A8%EC%97%85-%EC%99%84%EC%A0%84%EC%A0%95%EB%A6%AC-10-21"
+      ],
+      "guide": {
+        "direction": "실제 '세종 중식당' 검색자는 구인구직이 아니라 상견례·돌잔치·회식용 룸이 있는 코스요리 맛집을 찾는다. 고수 글 제목(5060 재취업 구인구직)은 이 실수요를 전혀 다루지 않아 유입 후 바로 이탈한다. 이 글은 룸 유무·코스 구성·상견례/돌잔치 적합도를 한 표로 정리해 매장을 바로 고르게 한다.",
+        "searchTargets": [
+          "세종 중식당 룸",
+          "세종 중식당 코스",
+          "세종 중식당 돌잔치",
+          "세종 중식당 상견례"
+        ],
+        "mustInclude": [
+          "룸(방) 있는 세종 중식당과 좌석 수 (확인 필요: 매장 안내/네이버플레이스)",
+          "상견례용 코스요리 가격대와 구성 (확인 필요: 매장 공식 메뉴판)",
+          "돌잔치 대관 가능 매장과 수용 인원 (확인 필요: 매장 공지)",
+          "룸·코스가격·상견례 적합도를 담은 비교표"
+        ],
+        "mustAvoid": [
+          "'구인구직' 기획 의도를 억지로 끼워 넣어 식당 정보를 흐리지 말 것",
+          "대전·청주 등 다른 지역 중식당과 혼동해 기재하지 말 것"
+        ],
+        "checkBefore": [
+          "각 중식당 룸/코스/대관 가능 여부는 네이버플레이스·매장 공지로 확인",
+          "상견례·돌잔치 수용 인원과 최소 인원 조건은 매장에 직접 전화 확인"
+        ],
+        "solves": [
+          "세종 중식당 룸 있는 곳 어디 → 룸 보유 매장과 수용 인원 정리",
+          "세종 중식당 상견례 하기 좋은 곳 → 코스요리 가격·구성 비교",
+          "세종 중식당 돌잔치 가능한 곳 → 대관 가능 매장과 조건 정리"
+        ],
+        "actionTitles": [
+          "세종 중식당 룸 있는 곳 추천, 상견례 전 확인할 것",
+          "세종 중식당 코스요리 가격 비교, 돌잔치 장소 고르기",
+          "세종 중식당 상견례 맛집 비교, 예약 전 체크리스트"
+        ]
+      },
+      "at": "2026-10-20T22:32:13.260Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "11fa6ea2470477a8",
+      "urls": [
+        "https://zipbid.tistory.com/entry/%EC%9A%B8%EC%82%B0-%EC%98%81%EC%96%91%EC%82%AC-%EC%B7%A8%EC%97%85-%EA%B2%BD%EB%A0%A5-%EC%9A%B0%EB%8C%80-%EC%B5%9C%EC%8B%A0-%EC%B1%84%EC%9A%A9-10-21",
+        "https://zipbid.tistory.com/entry/%EB%B6%80%EC%82%B0-%EC%98%81%EC%96%91%EC%82%AC-%EA%B5%AC%EC%9D%B8-%EC%A1%B0%EA%B1%B4-%EC%A2%8B%EC%9D%80-%EA%B3%B3-%EC%B1%84%EC%9A%A9-%EA%B0%80%EC%9D%B4%EB%93%9C-10-21"
+      ],
+      "guide": {
+        "direction": "울산 영양사 취업 검색자는 경력 우대가 몇 년 경력부터 인정되는지와 영양사 면허 외 조리사 자격증을 겸직 우대로 보는지에 막혀 있다. 고수 글 제목(경력 우대 최신 채용)은 울산 지역 공고 채널과 경력 산정 기준을 구체적으로 짚지 못한다. 이 글은 채널 목록과 경력·자격증 비교표로 지원 여부를 바로 판단하게 한다.",
+        "searchTargets": [
+          "울산 영양사",
+          "울산 영양사 채용",
+          "울산 영양사 구인"
+        ],
+        "mustInclude": [
+          "울산 영양사 채용 공고가 올라오는 채널(워크넷·보건소·학교급식) (확인 필요)",
+          "경력 우대 기준이 되는 단체급식 조리 경력 연차 (확인 필요: 공고별 상이)",
+          "영양사 면허 외 조리사/조리기능사 겸직 자격 우대 여부 비교",
+          "신입 vs 경력직 지원 조건 비교표"
+        ],
+        "mustAvoid": [
+          "국민건강보험공단 등 다른 직군 채용 정보를 영양사 채용과 섞지 말 것",
+          "특정 병원·학교 채용조건을 확인 없이 울산 전역 기준처럼 쓰지 말 것"
+        ],
+        "checkBefore": [
+          "울산 지역 영양사 최신 채용 공고는 워크넷·각 기관 홈페이지에서 날짜 확인",
+          "경력 우대 인정 기준(경력 산정 방식)은 공고문 원문에서 확인"
+        ],
+        "solves": [
+          "울산 영양사 채용 어디서 찾나요 → 지역 채용 채널 목록 정리",
+          "영양사 구인시 조리기능사 자격증 없어도 되나요 → 자격증 겸직 요건 비교",
+          "울산 영양사 구인 경력 우대 기준이 뭔가요 → 경력 산정 기준표 정리"
+        ],
+        "actionTitles": [
+          "울산 영양사 채용 공고 모음, 경력 우대 기준 확인법",
+          "울산 영양사 구인 지원 전, 자격증 요건 비교 정리",
+          "울산 영양사 취업 경력 산정 기준, 지원 조건 체크"
+        ]
+      },
+      "at": "2026-10-20T22:32:13.260Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "국민건강보험공단채용시험질문",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100401&docId=170648389&answerNo=1&qb=7Jq47IKwIOyYgeyWkeyCrCDst6jsl4Ug6rK966ClIOyasOuMgA==",
+          "views": 43583,
+          "answers": 1,
+          "askedAt": "2013.04.11"
+        },
+        {
+          "title": "국민건강보험공단 상담직에 대해 잘 아시나....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100402&docId=171151577&answerNo=2&qb=7Jq47IKwIOyYgeyWkeyCrCDst6jsl4Ug6rK966ClIOyasOuMgA==",
+          "views": 18280,
+          "answers": 3,
+          "askedAt": "2013.04.25"
+        },
+        {
+          "title": "전기산업기사 질문요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1118&docId=265185699&answerNo=2&qb=7Jq47IKwIOyYgeyWkeyCrCDst6jsl4Ug6rK966ClIOyasOuMgA==",
+          "views": 8641,
+          "answers": 3,
+          "askedAt": "2016.11.28"
+        }
+      ]
+    },
+    {
+      "id": "26fd1a7638908e33",
+      "urls": [
+        "https://zipbid.tistory.com/entry/%EC%9D%B8%EC%B2%9C-%EC%A3%BC%EB%B0%A9%EC%9E%A5-%EA%B5%AC%EC%9D%B8-%EC%A7%80%EC%97%AD%EB%B3%84-%EC%B4%9D%EB%A7%9D%EB%9D%BC-10-21"
+      ],
+      "guide": {
+        "direction": "인천에서 주방장을 구하는 사람은 '어느 구에 공고가 많은지'와 '급여 수준'을 함께 알고 싶어 검색한다. 고수 블로그의 제목은 '지역별 총망라'라고만 해 구체적인 구·동별 공고와 급여 비교가 빠져 있다. 이 글은 10/21 기준 인천 구별 주방장 구인 공고와 급여대를 표로 정리해 검색자가 바로 지원처를 고르게 한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "10/21 기준 인천 구별(연수·남동·부평 등) 주방장 구인 공고 수(확인 필요: 알바몬·알바천국)",
+          "구별 주방장 평균 급여·시급 비교(확인 필요: 구인사이트 공고)"
+        ],
+        "mustAvoid": [],
+        "checkBefore": [
+          "알바천국·알바몬·잡코리아에서 인천 지역 주방장 공고 날짜·급여 확인"
+        ],
+        "solves": [
+          "인천 어디에 주방장 구인이 많은지 모르겠다 → 10/21 기준 구별 공고 정리로 해결"
+        ],
+        "actionTitles": [
+          "인천 주방장 구인 지역별 총정리, 급여·지원방법까지 확인",
+          "인천 구별 주방장 채용공고 바로 비교하는 법",
+          "인천 주방장 구인, 구별 급여 수준 한눈에 확인하기"
+        ]
+      },
+      "at": "2026-10-20T22:32:13.260Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "9ce2e4c10a10e347",
+      "urls": [
+        "https://zipbid.tistory.com/entry/%EB%8C%80%EA%B5%AC-%EC%A3%BC%EB%B0%A9%EB%B3%B4%EC%A1%B0-%EC%95%8C%EB%B0%94-%EC%8B%9C%EA%B8%89-%EB%86%92%EC%9D%80-%EA%B3%B3-%EC%A0%95%EB%B3%B4-%EB%AA%A8%EC%9D%8C-10-21"
+      ],
+      "guide": {
+        "direction": "대구에서 주방보조 알바를 찾는 사람은 '시급 높은 곳이 어디인지'와 '청소년도 할 수 있는지'를 함께 궁금해한다. 고수 블로그 제목은 '정보 모음'이라고만 해 구·업종별 시급 비교표와 청소년 고용 가능 조건이 빠져 있다. 이 글은 알바천국·알바몬 기준 지역·업종별 시급표와 청소년 고용 가능 여부 체크리스트로 검색을 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "대구 구별·업종별(족발·고깃집·백반 등) 주방보조 시급 비교표(확인 필요: 알바천국·알바몬)",
+          "청소년(만 18세 미만) 주방보조 알바 가능 여부·근로시간 기준(확인 필요: 고용노동부)",
+          "알바천국·알바몬 등 구인 플랫폼별 공고 등록 현황 비교"
+        ],
+        "mustAvoid": [
+          "특정 업장의 시급을 확인 없이 최고가로 단정하기"
+        ],
+        "checkBefore": [
+          "알바천국·알바몬에서 대구 주방보조 공고 시급 확인, 고용노동부에서 청소년 근로 가능 연령·시간 기준 확인"
+        ],
+        "solves": [
+          "대구에서 주방보조 알바 시급 높은 곳을 모르겠다 → 구·업종별 비교표로 해결",
+          "17세도 주방보조 알바가 가능한지 헷갈린다 → 청소년 고용 가능 조건 체크리스트 제공"
+        ],
+        "actionTitles": [
+          "대구 주방보조 알바 시급 높은 곳 바로 비교하기",
+          "대구 주방보조 알바, 청소년도 가능한지 확인하는 법",
+          "대구 요식업 알바 시급, 알바천국·알바몬에서 비교하는 법"
+        ]
+      },
+      "at": "2026-10-20T22:32:13.260Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "국가수준학업성취도평가 요점정리",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1301&docId=113177162&answerNo=3&qb=64yA6rWsIOyjvOuwqeuztOyhsCDslYzrsJQg7Iuc6riJIOuGkuydgA==",
+          "views": 21859,
+          "answers": 8,
+          "askedAt": "2010.07.13"
+        },
+        {
+          "title": "지금 98년생 17살 남자인데요 아르바이트 구해....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40611&docId=198036761&answerNo=8&qb=64yA6rWsIOyjvOuwqeuztOyhsCDslYzrsJQg7Iuc6riJIOuGkuydgA==",
+          "views": 16051,
+          "answers": 3,
+          "askedAt": "2014.06.01"
+        },
+        {
+          "title": "국어 4학년 5학년 6학년 요점정리좀",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=130101&docId=43683086&answerNo=1&qb=64yA6rWsIOyjvOuwqeuztOyhsCDslYzrsJQg7Iuc6riJIOuGkuydgA==",
+          "views": 5473,
+          "answers": 1,
+          "askedAt": "2009.10.12"
+        }
+      ]
+    },
+    {
+      "id": "cc3112a89f42d288",
+      "urls": [
+        "https://decalfactory.co.kr/1052",
+        "https://decalfactory.co.kr/1042",
+        "https://decalfactory.co.kr/1037"
+      ],
+      "guide": {
+        "direction": "주식 초보자는 AI로 시장을 분석하거나 삼성전자 같은 종목에 대한 조언을 받고 싶어 '주식 분석 ai'와 '프롬프트'를 검색한다. 고수 블로그 글은 매일의 시황 감상평이라 실제 어떤 AI 어플·사이트를 쓰고 어떻게 질문(프롬프트)해야 하는지는 답을 주지 않는다. 이 글은 주식분석 AI 어플·사이트 비교표와 바로 쓸 수 있는 프롬프트 예시로 검색자의 선택을 끝낸다.",
+        "searchTargets": [
+          "주식분석 ai앱 비교",
+          "주식 분석 ai 사이트",
+          "주식 분석 ai 프롬프트",
+          "주식 분석 ai 비교"
+        ],
+        "mustInclude": [
+          "주식분석 AI 어플·사이트별 기능·무료 여부 비교표(확인 필요: 각 서비스 공식 페이지)",
+          "주식 분석에 바로 쓸 수 있는 프롬프트 예시(예: 종목·지표 입력법)",
+          "AI 분석 결과를 투자 판단에 그대로 쓰면 안 되는 이유(확인 필요: 투자 유의사항)",
+          "코인·주식 커뮤니티에서 전문가 의견 찾는 방법과 AI 분석의 차이"
+        ],
+        "mustAvoid": [
+          "특정 종목(삼성전자 등) 매수·매도를 AI 분석 결과로 단정 추천하기"
+        ],
+        "checkBefore": [
+          "언급할 주식분석 AI 어플·사이트의 실제 기능·요금을 공식 홈페이지에서 확인"
+        ],
+        "solves": [
+          "주식분석 AI 어플·사이트가 많아 뭘 써야 할지 모르겠다 → 비교표로 정리",
+          "AI에게 어떻게 물어봐야 유용한 분석이 나오는지 모르겠다 → 프롬프트 예시 제공"
+        ],
+        "actionTitles": [
+          "주식분석 AI 어플·사이트 비교, 나에게 맞는 거 고르는 법",
+          "주식분석 AI앱 비교, 초보자도 쉽게 고르는 기준"
+        ]
+      },
+      "at": "2026-10-20T22:32:13.260Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "요즘 이슈가 되는 시사거리 좀 알려주세요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1121&docId=212071630&answerNo=1&qb=7KO87Iud67aE7ISdIGFpIOyDge2ZqSDsoovqsqDsp4Ag7KeA64+E",
+          "views": 9468,
+          "answers": 2,
+          "askedAt": "2014.12.01"
+        },
+        {
+          "title": "미국에 갈수 있을까요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110601&docId=489380397&answerNo=3&qb=7KO87Iud67aE7ISdIGFpIOyDge2ZqSDsoovqsqDsp4Ag7KeA64+E",
+          "views": 2711,
+          "answers": 5,
+          "askedAt": "2025.10.10"
+        },
+        {
+          "title": "코인 커뮤니티와 전문가 의견, 어디서 어떻게....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=491802750&answerNo=7&qb=7KO87Iud67aE7ISdIGFpIOyDge2ZqSDsoovqsqDsp4Ag7KeA64+E",
+          "views": 1699,
+          "answers": 11,
+          "askedAt": "2026.04.02"
+        }
+      ]
+    },
+    {
+      "id": "348a8899efaa5ce2",
+      "urls": [
+        "https://creator-kyle.tistory.com/190"
+      ],
+      "guide": {
+        "direction": "검색자가 실제로 막히는 지점은 신상품 금리 비교가 아니라 '적금 해지할 때 도장이 꼭 있어야 하는지', '마이너스통장 연계로 든 적금을 해지하면 불이익이 있는지'다. 고수 블로그들은 신상품 조건만 나열하고 해지 실무와 연계상품 주의점을 다루지 않는다. 이 글은 금리 비교표와 함께 해지 절차·필요서류·연계상품 체크리스트로 끝낸다.",
+        "searchTargets": [
+          "신한은행 적금 해지 방법",
+          "신한은행 적금금리",
+          "신한은행 적금 특판",
+          "신한은행 적금 이율"
+        ],
+        "mustInclude": [
+          "현재 판매 중인 신상품명·가입기간·금리 비교표 (확인 필요: 신한은행 공식 홈페이지/앱)",
+          "적금 해지시 필요서류(신분증·도장 필요 여부, 비대면/서류 가입별 차이)",
+          "마이너스통장 개설 연계로 가입한 적금 중도해지시 불이익 여부 (확인 필요: 약관)",
+          "비대면 가입시 수집되는 개인정보 항목 안내"
+        ],
+        "mustAvoid": [
+          "적금 상품을 보험 특약(사망·1급 보장 등)과 혼동해서 서술하기",
+          "단종된 과거 특판 금리를 현재 신상품 금리인 것처럼 섞어 쓰기"
+        ],
+        "checkBefore": [
+          "현재 판매 중인 신상품명과 우대금리 조건 (신한은행 공식 홈페이지/앱 공지)",
+          "해지시 도장 필요 여부 현행 정책 (신한은행 고객센터 1599)"
+        ],
+        "solves": [
+          "적금 해지할 때 도장 꼭 있어야 하나 궁금하다 → 가입 경로별 필요서류 정리로 해결",
+          "마이너스통장 만들며 든 적금 해지하면 불이익 있는지 모른다 → 연계상품 해지 체크리스트 제공",
+          "신상품 금리가 기존보다 나은지 비교가 안 된다 → 조건표로 한눈에 비교"
+        ],
+        "actionTitles": [
+          "신한은행 적금 해지 방법, 도장 없이도 되는지 확인",
+          "신한은행 적금 특판 금리, 가입 전 조건표로 비교하기",
+          "신한은행 적금금리 신상품, 해지 체크리스트까지 정리"
+        ]
+      },
+      "at": "2026-10-20T22:32:13.260Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "보험 정리좀 하려는데 좀 도와주십시요...(ING....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=401030201&docId=33828124&answerNo=10&qb=7Iug7ZWc7J2A7ZaJIOyggeq4iCDrgpjsmKgg7Iug7IOB7ZKI",
+          "views": 7111,
+          "answers": 5,
+          "askedAt": "2007.05.30"
+        },
+        {
+          "title": "신한은행 적금해지",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40101&docId=194943432&answerNo=1&qb=7Iug7ZWc7J2A7ZaJIOyggeq4iCDrgpjsmKgg7Iug7IOB7ZKI",
+          "views": 5609,
+          "answers": 1,
+          "askedAt": "2014.04.05"
+        },
+        {
+          "title": "신한증권 인덱스 연금보험이요.",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010301&docId=117796772&answerNo=1&qb=7Iug7ZWc7J2A7ZaJIOyggeq4iCDrgpjsmKgg7Iug7IOB7ZKI",
+          "views": 3010,
+          "answers": 1,
+          "askedAt": "2010.10.02"
+        }
+      ]
+    },
+    {
+      "id": "eac6f3278fdf7444",
+      "urls": [
+        "https://niscity.com/medical-indemnity-conversion-pros-cons/"
+      ],
+      "guide": {
+        "direction": "검색자가 막힌 지점은 전환 장단점 자체가 아니라 '내 현재 세대에서 전환하면 자기부담금·보험료가 구체적으로 얼마나 바뀌는지', '건강심사 없는 자동전환과 별도가입전환의 차이'다. 고수 블로그 제목은 장단점만 나열하고 세대별 조건표가 빠져 있다. 이 글은 세대별 자기부담금 비교표와 자동전환 여부 구분표로 판단을 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "1~4세대별 자기부담금 비율 비교표(급여·비급여 구분) (확인 필요: 금융감독원/보험사 공시자료)",
+          "자동전환(건강심사 없음)과 별도 신규가입전환(심사 필요)의 차이표",
+          "갱신주기(1년/3년)별 보험료 변동 예시",
+          "전환 후 원래 세대로 재전환 가능 여부"
+        ],
+        "mustAvoid": [
+          "특정 보험사·설계사 영업 멘트처럼 보이는 전환 권유",
+          "개인 의료비 지출 패턴 사례를 일반 기준처럼 제시",
+          "전환시 병력고지로 거절·부담보 될 수 있는 불이익을 생략하고 장점만 강조"
+        ],
+        "checkBefore": [
+          "보험사별 실손 세대전환 특약 정확한 조건 (보험사 공식 약관·금융감독원 실손전환 안내)",
+          "세대별 자기부담금 비율 정확한 수치 (공시자료)"
+        ],
+        "solves": [
+          "전환하면 보험료가 얼마나 바뀌는지 모르겠다 → 세대별 자기부담금·보험료 비교표 제공",
+          "자동전환이 건강심사 없다는데 불이익 없는지 궁금하다 → 자동전환 vs 신규가입전환 차이 정리",
+          "전환하면 다시 예전 세대로 못 돌아가는지 궁금하다 → 재전환 가능 여부 확인"
+        ],
+        "actionTitles": [
+          "실손보험 세대전환, 자기부담금 비교로 유불리 확인",
+          "4세대 실손 전환 보험료, 갱신주기별로 계산해보기",
+          "실비보험 전환 전 건강심사 여부부터 체크하는 법"
+        ]
+      },
+      "at": "2026-10-20T22:32:13.260Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "1세대 실비보험 나중에 전환되는지?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=401030201&docId=477048279&answerNo=7&qb=7Iuk7IaQ7J2Y66OM67mEIOyghO2ZmCDrs7Ttl5jro4wg7KO86riwIOyekOq4sOu2gOuLtOq4iA==",
+          "views": 2474,
+          "answers": 8,
+          "askedAt": "2024.12.12"
+        },
+        {
+          "title": "4세대 실손 전환 보험료 어떻게 달라지나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010302&docId=451041577&answerNo=5&qb=7Iuk7IaQ7J2Y66OM67mEIOyghO2ZmCDrs7Ttl5jro4wg7KO86riwIOyekOq4sOu2gOuLtOq4iA==",
+          "views": 1550,
+          "answers": 8,
+          "askedAt": "2023.07.27"
+        },
+        {
+          "title": "실손보험 실비보험 세대 전환에대해서",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010302&docId=491036112&answerNo=6&qb=7Iuk7IaQ7J2Y66OM67mEIOyghO2ZmCDrs7Ttl5jro4wg7KO86riwIOyekOq4sOu2gOuLtOq4iA==",
+          "views": 510,
+          "answers": 9,
+          "askedAt": "2025.12.28"
+        }
+      ]
+    },
+    {
+      "id": "e245e22b93d5b82a",
+      "urls": [
+        "https://wellsy.tistory.com/entry/%EB%A7%88%EC%9A%B4%EC%9E%90%EB%A1%9C-5%EB%85%84-%EC%9D%B4%ED%9B%84%EB%8A%94-%EC%95%8C-%EC%88%98-%EC%97%86%EB%8B%A4-%EC%84%9C%EC%9A%B8%EB%8C%80%EB%B3%91%EC%9B%90%EC%9D%B4-%EC%A0%84%ED%95%98%EB%8A%94-%EB%B9%84%EB%A7%8C%EC%B9%98%EB%A3%8C%EC%A0%9C-%EC%A7%84%EC%8B%A4"
+      ],
+      "guide": {
+        "direction": "검색자가 막힌 지점은 '5년 이후 장기데이터가 없다'는 사실 자체가 아니라 '그래도 지금 맞아도 되는지, 끊으면 요요가 오는지, 내성이 생기는지'의 판단 기준이다. 고수 블로그 제목은 불안감만 키우고 중단시 대처나 계열별 차이는 다루지 않는다. 이 글은 서울대병원 발표 근거와 계열 구분표, 중단시 체크리스트로 판단을 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "서울대병원(분당서울대병원 등)이 밝힌 장기 안전성 데이터 공백 기간과 근거 (확인 필요: 원문 기사)",
+          "마운자로(GIP/GLP-1)와 위고비(GLP-1) 계열·작용기전 차이",
+          "내성 발생 여부에 대한 전문의 소견 요약"
+        ],
+        "mustAvoid": [
+          "처방 용량·가격을 구체적 수치로 단정하기(병원마다 다르며 질문자도 '가격은 병원 문의'라 답함)",
+          "특정 환자 사례를 근거로 효과·부작용을 일반화"
+        ],
+        "checkBefore": [
+          "서울대병원(분당서울대병원)이 실제 발표한 원문 보도자료·기사 내용",
+          "마운자로·위고비 국내 허가 사항 및 임상시험 현황 공식 발표"
+        ],
+        "solves": [
+          "마운자로·위고비 내성 생기는지 궁금하다 → 전문의 소견과 장기데이터 공백 설명으로 해결",
+          "5년 이후 장기 안전성을 모른다는데 지금 맞아도 되는지 모르겠다 → 서울대병원 발표 근거로 판단기준 제시",
+          "마운자로 하고 싶은데 무섭다 → 계열 차이와 중단시 주의점 체크리스트로 정리"
+        ],
+        "actionTitles": [
+          "마운자로 내성·부작용, 서울대병원 발표로 확인하기",
+          "위고비 마운자로 차이, 5년 데이터 공백 전에 체크",
+          "비만치료제 중단 전 요요 가능성부터 확인하는 법"
+        ]
+      },
+      "at": "2026-10-20T22:32:13.260Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "위고비 같은 다이어트 주시도 내성 생기나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70101&docId=491743581&answerNo=3&qb=66eI7Jq07J6QIOydtO2bhCDsl4bri6Qg7ISc7Jq464yA67OR7JuQIOu5hOunjOy5mOujjOygnA==",
+          "views": 727,
+          "answers": 9,
+          "askedAt": "2026.02.06"
+        },
+        {
+          "title": "마운자로 하고 싶은데 무섭네요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80304&docId=495342737&answerNo=2&qb=66eI7Jq07J6QIOydtO2bhCDsl4bri6Qg7ISc7Jq464yA67OR7JuQIOu5hOunjOy5mOujjOygnA==",
+          "views": 264,
+          "answers": 8,
+          "askedAt": "2026.09.29"
+        }
+      ]
+    },
+    {
+      "id": "75f1188c02b6e8cf",
+      "urls": [
+        "https://ongidream.tistory.com/141"
+      ],
+      "guide": {
+        "direction": "검색자는 '장애인 개인예산제 시범지역이 어디냐'를 묻는데, 2024년 전국 시범사업은 충청남도 예산군·전라남도 해남군이라 2026년 '서울형'과 지역·대상이 다르다. 고수 글은 240만원 지원만 내세우고 전국 시범사업과의 관계를 안 짚었다. 두 제도 비교표와 발달재활바우처와의 차이까지 넣어 신청 전 헷갈림을 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "서울형 장애인 개인예산제와 2024년 전국 시범사업(충남 예산군·전남 해남군) 비교",
+          "240만원 지원 산정 기준(확인 필요: 서울시 공고)",
+          "신청 대상 연령·소득 기준(확인 필요: 서울시 복지정책 발표)",
+          "신청 방법·기간(확인 필요: 주민센터 또는 서울시청 공지)",
+          "발달재활바우처와 개인예산제의 차이"
+        ],
+        "mustAvoid": [
+          "2024년 전국 시범지역(충남 예산군·전남 해남군) 정보를 서울형 대상 지역처럼 섞어 쓰지 않기",
+          "발달재활바우처와 개인예산제를 같은 제도처럼 단순화하지 않기",
+          "240만원을 확정 금액처럼 과장하지 않기(공고 확인 전)"
+        ],
+        "checkBefore": [
+          "서울시 공식 복지정책 공고에서 240만원 지원 금액과 대상 확인",
+          "2024년 전국 시범사업(충남 예산군·전남 해남군)과 서울형의 관계·중복 여부 확인"
+        ],
+        "solves": [
+          "장애인 개인예산제 시범지역이 어디냐 → 2024년 전국 시범(충남 예산군·전남 해남군)과 2026년 서울형 차이 정리",
+          "발달재활바우처와 뭐가 다른가 → 바우처와 개인예산제 비교표 제공"
+        ],
+        "actionTitles": [
+          "서울형 장애인 개인예산제 자격 확인, 240만원 신청법",
+          "장애인 개인예산제 vs 발달재활바우처 신청 전 비교"
+        ]
+      },
+      "at": "2026-10-20T22:32:13.260Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "2008년 달라지는 것들",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80102&docId=31197954&answerNo=3&qb=7ISc7Jq47ZiVIOyepeyVoOyduCDqsJzsnbjsmIjsgrDsoJwg7Iuc67KU7IKs7JeFIOuCtOyaqQ==",
+          "views": 16632,
+          "answers": 4,
+          "askedAt": "2026.06.30"
+        },
+        {
+          "title": "전기차 보조금, 지역별 차이 큰가요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40702&docId=492419785&answerNo=8&qb=7ISc7Jq47ZiVIOyepeyVoOyduCDqsJzsnbjsmIjsgrDsoJwg7Iuc67KU7IKs7JeFIOuCtOyaqQ==",
+          "views": 1357,
+          "answers": 10,
+          "askedAt": "2026.05.06"
+        },
+        {
+          "title": "장애인 개인예산제 시범지역",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100102&docId=428184853&answerNo=5&qb=7ISc7Jq47ZiVIOyepeyVoOyduCDqsJzsnbjsmIjsgrDsoJwg7Iuc67KU7IKs7JeFIOuCtOyaqQ==",
+          "views": 440,
+          "answers": 7,
+          "askedAt": "2025.06.12"
+        }
+      ]
+    },
+    {
+      "id": "3ead27f3458470ff",
+      "urls": [
+        "https://pension.life-infoworld.com/entry/%EA%B8%B0%EC%B4%88%EC%97%B0%EA%B8%88-%EC%A7%80%EA%B8%89%EA%B8%B0%EC%A4%80-65%EC%84%B8-%EB%90%98%EB%A9%B4-%EA%BC%AD-%ED%99%95%EC%9D%B8"
+      ],
+      "guide": {
+        "direction": "검색자는 '65세 되면 자동으로 받는지, 신청은 어디서부터 시작해야 하는지' 몰라서 막혀 있고 소득인정액·소득하위 70% 개념도 헷갈린다. 고수 글은 '꼭 확인' 문구만 있고 부부가구 감액·박탈·포기서 효력까지는 못 짚었다. 신청 순서와 단독·부부가구 기준표로 바로 신청까지 가게 한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "만 65세 이상 & 소득인정액이 선정기준액 이하(단독·부부가구 금액, 확인 필요: 보건복지부 공지)",
+          "소득하위 70% 기준의 의미(소득인정액 계산 방식)",
+          "신청 방법(주민센터 방문·복지로 온라인) 순서",
+          "부부가구 수급 시 20% 감액 규정(확인 필요: 기초연금법)",
+          "수급자격 포기서 제출 시 효력(다음 달 지급일부터 중단)"
+        ],
+        "mustAvoid": [
+          "폐지된 기초노령연금과 현행 기초연금을 같은 제도처럼 혼용하지 않기",
+          "소득인정액을 월급여로만 단순화하지 않기(재산 환산액 포함임을 명시)",
+          "특정 개인 사례의 소득액을 일반 선정기준처럼 제시하지 않기"
+        ],
+        "checkBefore": [
+          "보건복지부 기초연금 홈페이지·복지로에서 올해 선정기준액(단독·부부가구) 확인",
+          "올해 기준연금액 및 부부가구 감액률 확인"
+        ],
+        "solves": [
+          "수급자격 확인 후 신청 어디서부터 하나 → 주민센터·복지로 신청 순서와 필요서류 정리",
+          "소득하위 70% 기준이 뭔지 모르겠다 → 소득인정액 계산 방식과 선정기준액표 제공",
+          "부부가구면 자격이 어떻게 달라지나 → 단독·부부가구 기준 비교 및 감액 규정 설명"
+        ],
+        "actionTitles": [
+          "기초연금 수급자격 확인하고 신청하는 순서 정리",
+          "기초연금 소득하위 70% 계산법과 선정기준 확인",
+          "기초연금 부부가구 자격 기준과 감액 규정 비교"
+        ]
+      },
+      "at": "2026-10-20T22:32:13.260Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "기초연금 수급자격 확인 후 신청, 어디서부터....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=601&docId=492877827&answerNo=45&qb=6riw7LSI7Jew6riIIOyngOq4ieq4sOykgA==",
+          "views": 7032,
+          "answers": 45,
+          "askedAt": "2026.10.18"
+        },
+        {
+          "title": "기초연금 수급자격 박탈 질문드립니다.",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100101&docId=476405641&answerNo=29&qb=6riw7LSI7Jew6riIIOyngOq4ieq4sOykgA==",
+          "views": 5124,
+          "answers": 29,
+          "askedAt": "2026.10.11"
+        },
+        {
+          "title": "기초노령연금 수급 자격, 어떻게 확인하나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=601&docId=493701556&answerNo=25&qb=6riw7LSI7Jew6riIIOyngOq4ieq4sOykgA==",
+          "views": 1071,
+          "answers": 27,
+          "askedAt": "2026.10.19"
         }
       ]
     }
