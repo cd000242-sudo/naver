@@ -8,7 +8,9 @@ import { withGuides } from '../../../lib/homefeedGuides.mjs';
 import HomefeedBenchmarkStyles from '../homefeed/HomefeedBenchmarkStyles';
 import { bridgeBenchmarkTitles } from '../../../lib/bridge';
 import { callWorkerRaw } from '../../../lib/keywordApi';
-import { adsenseCompetition, rankAdsenseCards, adsenseCategories, adsenseWritingAdvice, blogCount, filterAdsenseCards, type AdsenseBoard, type AdsenseCard } from '../../../lib/adsenseBenchmarkModel.mjs';
+import { adsenseCompetition, adsenseCategories, adsenseWritingAdvice, blogCount, filterAdsenseCards, ADSENSE_PLATFORMS, cardPlatforms, shuffleAdsenseCards, adsenseNowPicks, type AdsenseBoard, type AdsenseCard } from '../../../lib/adsenseBenchmarkModel.mjs';
+import { useShuffleSeed } from '../../../lib/useShuffleSeed';
+import { DemandBlock, NowPicksPanel } from './AdsenseDemand';
 
 const kst = (iso: string | null | undefined) => {
     if (!iso) return '—';
@@ -141,10 +143,12 @@ function AdsenseCardView({ c, now }: { c: AdsenseCard; now: number }) {
                 {c.recommended && <span className="hfb-star">★ 고수 {blogs}곳</span>}
                 {!c.recommended && blogs > 1 && <span className="hfb-category">고수 {blogs}곳</span>}
                 <span className="hfb-category">{c.category}</span>
+                {ADSENSE_PLATFORMS.filter((p) => cardPlatforms(c).has(p.key)).map((p) => <span key={p.key} style={{ color: '#cbd5e1', border: '1px solid #33415a', borderRadius: 5, padding: '1px 6px' }}>{p.label}</span>)}
                 <span className="hfb-timing">발행 {day(c.publishedAt)}</span>
             </div>
             <h3>{c.metrics?.query || c.keyword}</h3>
             <p style={{ color: '#a8b6cb', fontSize: 13, margin: '4px 0 10px' }}>{c.title}</p>
+            <DemandBlock c={c} />
             <div style={{ color: competition.tier === 0 ? '#a7f3d0' : competition.tier === 3 ? '#fca5a5' : '#cbd5e1', fontSize: 13, marginBottom: 8 }}>
                 <b>{competition.label}</b> · 문서/월 검색 {competition.ratio !== null ? `${competition.ratio.toLocaleString('ko-KR', { maximumFractionDigits: 2 })}배` : '미확인'} · 측정 {kst(c.metrics?.measuredAt)}
             </div>
@@ -197,25 +201,39 @@ export default function AdsenseBenchmarkBoard() {
     const [category, setCategory] = useState('');
     const [query, setQuery] = useState('');
     const [limit, setLimit] = useState(24);
+    // 플랫폼 — 워드프레스 먼저(2026-10-20 사장님 "각각 성격이 다릅니다. 특히 워드프레스 먼저"). '' 는 전체.
+    const [platform, setPlatform] = useState<string>('wordpress');
+    // [새로고침] — 판 파일을 다시 받는다(회차가 3시간마다 갱신).
+    const [reloadKey, setReloadKey] = useState(0);
+    // 매시 섞기 + [순서 섞기] — 같은 경쟁 등급(+ 지금 오르는 소재 묶음) 안에서만(사장님 선택 2026-10-20).
+    const [seed, reshuffle] = useShuffleSeed();
 
     useEffect(() => {
         const controller = new AbortController();
+        setLoading(true);
         // 작성 안내는 따로 쌓이는 파일(2026-10-13 안내 작업이 카드마다 지음) — 못 받아도 판은 그린다(안내 칸만 빈다).
         const guidesFile = fetch('/data/adsense-benchmark-guides.json', { cache: 'no-store', signal: controller.signal }).then((r) => (r.ok ? r.json() : null)).catch(() => null);
         fetch('/data/adsense-benchmarks.json', { cache: 'no-store', signal: controller.signal })
             .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
-            .then(async (data: AdsenseBoard) => { if (data && Array.isArray(data.candidates)) setBoard(withGuides(data, await guidesFile)); else setError('판 형식이 올바르지 않습니다.'); })
+            .then(async (data: AdsenseBoard) => { if (data && Array.isArray(data.candidates)) { setBoard(withGuides(data, await guidesFile)); setError(''); } else setError('판 형식이 올바르지 않습니다.'); })
             .catch((e) => { if ((e as Error)?.name !== 'AbortError') setError('애드센스 벤치마크 판을 불러오지 못했습니다 — 잠시 뒤 다시 열어 주세요.'); })
             .finally(() => setLoading(false));
         return () => controller.abort();
-    }, []);
+    }, [reloadKey]);
 
     const cards = board?.candidates ?? [];
     const [now, setNow] = useState(Date.now);
     useEffect(() => { const timer = window.setInterval(() => setNow(Date.now()), 60000); return () => window.clearInterval(timer); }, []);
-    const ranked = useMemo(() => rankAdsenseCards(cards, now), [cards, now]);
-    const items = useMemo(() => filterAdsenseCards(ranked, { mode, category, query, nowMs: now }), [ranked, mode, category, query, now]);
-    const lowCount = ranked.filter((c) => adsenseCompetition(c, now).tier === 0).length;
+    const ranked = useMemo(() => shuffleAdsenseCards(cards, now, seed), [cards, now, seed]);
+    // 플랫폼이 실리기 전 판(2026-10-20 이전 회차)이면 탭을 숨기고 전체를 보인다 — 빈 워드프레스 탭을 띄우지 않는다.
+    const hasPlatforms = useMemo(() => cards.some((c) => cardPlatforms(c).size > 0), [cards]);
+    const activePlatform = hasPlatforms ? platform : '';
+    const items = useMemo(() => filterAdsenseCards(ranked, { mode, category, query, platform: activePlatform, nowMs: now }), [ranked, mode, category, query, activePlatform, now]);
+    const inPlatform = useMemo(() => filterAdsenseCards(ranked, { platform: activePlatform, nowMs: now }), [ranked, activePlatform, now]);
+    const picks = useMemo(() => adsenseNowPicks(inPlatform, now, 6), [inPlatform, now]);
+    const platformCount = (key: string) => cards.filter((c) => cardPlatforms(c).has(key)).length;
+    const platformInfo = ADSENSE_PLATFORMS.find((p) => p.key === activePlatform);
+    const lowCount = inPlatform.filter((c) => adsenseCompetition(c, now).tier === 0).length;
     const cats = useMemo(() => adsenseCategories(cards), [cards]);
     const advice = adsenseWritingAdvice(board?.trends?.titleShape, cards);
     const shape = board?.trends?.titleShape;
@@ -229,11 +247,11 @@ export default function AdsenseBenchmarkBoard() {
                 <div>
                     <span className="hfb-eyebrow">ADSENSE BENCHMARK · 애드센스 고수 블로그 {board?.sourceCount ?? '—'}곳</span>
                     <h2>애드센스 고수 <span>벤치마크</span></h2>
-                    <p>애드센스로 수익을 내는 고수 블로그(티스토리 · 워드프레스)가 최근 {board?.windowDays ?? 7}일 안에 쓴 글을 소재별로 모았습니다. 월 검색 수요가 있고, 검색량 대비 블로그 문서가 적은 키워드부터 보여 드립니다.</p>
+                    <p>애드센스로 수익을 내는 고수 블로그(워드프레스 · 티스토리 · 블로그스팟)가 최근 {board?.windowDays ?? 7}일 안에 쓴 글을 소재별로 모았습니다. 지금 검색 관심이 오르는 소재를 먼저, 그다음 검색량 대비 블로그 문서가 적은 순으로 보여 드립니다.</p>
                 </div>
                 <div className="hfb-count"><strong>{board ? cards.length : '—'}</strong><span>검토할 소재</span></div>
             </header>
-            <div className="hfb-meta"><span>{board ? `정기 수집 ${kst(board.generatedAt || board.attemptedAt)} KST · 3시간마다 다시 읽습니다` : loading ? '벤치마크 자료 연결 중' : ''}</span></div>
+            <div className="hfb-meta"><span>{board ? `정기 수집 ${kst(board.generatedAt || board.attemptedAt)} KST · 3시간마다 다시 읽습니다` : loading ? '벤치마크 자료 연결 중' : ''}</span><button type="button" disabled={loading} onClick={() => setReloadKey((n) => n + 1)}>{loading ? '불러오는 중…' : '새로고침'}</button></div>
             {error && <div className="hfb-alert" role="alert">{error}</div>}
             {board?.status === 'stale' && <div className="hfb-alert" role="status">이번 수집에서 새 글을 받지 못해 마지막 판을 보여 드립니다.</div>}
             {!board && !loading && !error && <p className="hfb-empty">아직 공개된 애드센스 벤치마크 자료가 없습니다.</p>}
@@ -259,13 +277,22 @@ export default function AdsenseBenchmarkBoard() {
                         {board.trends.categories.length > 0 && <p style={{ marginTop: 8, fontSize: 12, color: '#a8b6cb' }}>많이 쓴 분야: {board.trends.categories.slice(0, 6).map((c) => `${c.category} ${c.posts.toLocaleString('ko-KR')}글`).join(' · ')}</p>}
                     </div>
                 )}
+                {hasPlatforms && (
+                    <div className="hfb-filter-row" role="group" aria-label="플랫폼" style={{ marginTop: 6 }}>
+                        {ADSENSE_PLATFORMS.map((p) => <button type="button" key={p.key} aria-pressed={activePlatform === p.key} onClick={() => { setPlatform(p.key); setLimit(24); }}>{p.label} <span>{platformCount(p.key)}</span></button>)}
+                        <button type="button" aria-pressed={activePlatform === ''} onClick={() => { setPlatform(''); setLimit(24); }}>전체 플랫폼 <span>{cards.length}</span></button>
+                    </div>
+                )}
+                {platformInfo && <p style={{ color: '#a8b6cb', fontSize: 12, margin: '6px 0 0' }}>{platformInfo.label} — {platformInfo.note}. 같은 소재를 여러 플랫폼 고수가 썼으면 각 탭에 함께 보입니다.</p>}
+                <NowPicksPanel picks={picks} now={now} platformLabel={platformInfo?.label || '전체 플랫폼'} onPick={(q) => { setQuery(q); setMode('all'); setCategory(''); setLimit(24); }} />
                 <div className="hfb-filters">
                     <div className="hfb-filter-row" role="group" aria-label="보기">
-                        <button type="button" aria-pressed={mode === 'all'} onClick={() => setMode('all')}>전체 <span>{cards.length}</span></button>
+                        <button type="button" aria-pressed={mode === 'all'} onClick={() => setMode('all')}>전체 <span>{inPlatform.length}</span></button>
                         <button type="button" aria-pressed={mode === 'low'} onClick={() => { setMode('low'); setLimit(24); }}>낮은 문서 경쟁 <span>{lowCount}</span></button>
-                        <button type="button" aria-pressed={mode === 'star'} onClick={() => setMode('star')}>★ 고수 3곳 이상 <span>{cards.filter((c) => c.recommended).length}</span></button>
+                        <button type="button" aria-pressed={mode === 'star'} onClick={() => setMode('star')}>★ 고수 3곳 이상 <span>{inPlatform.filter((c) => c.recommended).length}</span></button>
                     </div>
-                    <p style={{ color: '#a8b6cb', fontSize: 12 }}>문서 경쟁 낮은 순 · 최근 7일 실측 · 월 검색 100 이상·문서/검색 1배 이하 우선 → 5배 이하 → 고경쟁. 미측정·0건·오래된 자료는 뒤에서 확인합니다.</p>
+                    <p style={{ color: '#a8b6cb', fontSize: 12 }}>문서 경쟁 낮은 순 · 최근 7일 실측 · 월 검색 100 이상·문서/검색 1배 이하 우선 → 5배 이하 → 고경쟁. 같은 경쟁 등급 안에서는 지금 오르는 · 곧 시즌 소재가 먼저입니다. 미측정·0건·오래된 자료는 뒤에서 확인합니다.</p>
+                    <div className="hfb-shuffle"><button type="button" onClick={() => { reshuffle(); setLimit(24); }}>순서 섞기</button><small>매시 정각 새 순서로 섞입니다 · 같은 경쟁 등급 안에서만 섞여 문서 적고 검색량 많은 순은 그대로입니다</small>{query && <button type="button" onClick={() => setQuery('')}>검색어 지우기</button>}</div>
                     <div className="hfb-filter-bottom">
                         <div className="hfb-categories" role="group" aria-label="분야">
                             <button type="button" aria-pressed={category === ''} onClick={() => setCategory('')}>전체</button>
