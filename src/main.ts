@@ -2519,7 +2519,7 @@ async function createWindow(): Promise<void> {
     });
 
     // ✅ [2026-04-03] 최소화(-) 버튼 = 일반 최소화 (작업표시줄에 남음)
-    // 트레이 숨기기는 별도 IPC 'app:minimize-to-tray'로 처리
+    // 기존 최소화 IPC도 같은 일반 최소화 동작을 사용한다.
     (mainWindow as any).on('minimize', () => {
       console.log('[Main] 일반 최소화 (작업표시줄에 남음)');
     });
@@ -2557,10 +2557,8 @@ async function createWindow(): Promise<void> {
         const { setSessionValidationActive } = require('./licenseManager.js');
         setSessionValidationActive(false);
       } catch { /* ignore */ }
-      // ✅ [v2.7.47] 게임 친화: minimize 시 작업표시줄에서 완전 격리
-      //   효과: fullscreen 게임이 작업표시줄을 그릴 때 본 앱 항목이 깜빡임 유발 안 함
-      //   복귀: Tray 아이콘 클릭으로 다시 띄우기 가능
-      try { mainWindow?.setSkipTaskbar(true); } catch { /* ignore */ }
+      // 최소화해도 작업표시줄에서 다시 창을 열 수 있어야 한다.
+      try { mainWindow?.setSkipTaskbar(false); } catch { /* ignore */ }
     });
     mainWindow.on('restore', () => {
       try {
@@ -4805,15 +4803,12 @@ try { ipcMain.handle('openExternalUrl', async (_e: any, url: string) => {
   const { shell } = require('electron');
   await shell.openExternal(url);
 }); } catch { /* 이미 등록됨 */ }
-// ✅ [2026-04-03] 트레이 아이콘화 — 렌더러에서 버튼 클릭 시 호출
+// 기존 IPC 이름은 호환용으로 유지하되 일반 최소화로 처리한다.
 try { ipcMain.handle('app:minimize-to-tray', async () => {
   if (mainWindow && !mainWindow.isDestroyed()) {
-    mainWindow.hide();
-    console.log('[Main] 트레이로 숨김');
-    if (tray && !(globalThis as any).trayNotified) {
-      tray.displayBalloon({ title: 'Leaders Pro', content: '트레이로 최소화되었습니다. 아이콘 클릭으로 복원합니다.' });
-      (globalThis as any).trayNotified = true;
-    }
+    mainWindow.setSkipTaskbar(false);
+    mainWindow.minimize();
+    console.log('[Main] 일반 최소화 (작업표시줄에 남음)');
   }
 }); } catch { /* 이미 등록됨 */ }
 registerQuotaHandlers(_earlyCtx);

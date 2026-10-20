@@ -7,7 +7,7 @@ import * as path from 'path';
 /**
  * 윈도우 관리자 싱글톤
  * ✅ [100점 수정] 트레이 아이콘 지원 추가
- * - 최소화 버튼 → 트레이로 숨김
+ * - 최소화 버튼 → 작업표시줄에 남는 일반 최소화
  * - 트레이 아이콘 클릭 → 앱 표시
  * - 닫기 버튼 → 앱 완전 종료
  */
@@ -50,15 +50,9 @@ class WindowManagerImpl {
             this.mainWindow?.show();
         });
 
-        // ✅ [100점 수정] 최소화 버튼 클릭 시 트레이로 숨김
-        // @ts-ignore - Electron의 minimize 이벤트는 실제로 존재하지만 타입 정의가 불완전함
-        (this.mainWindow as any).on('minimize', () => {
-            this.mainWindow?.hide();
-
-            // 트레이 아이콘이 없으면 생성
-            if (!this.tray) {
-                this.createTray();
-            }
+        // 일반 최소화 상태에서도 작업표시줄에서 창을 복원할 수 있다.
+        this.mainWindow.on('minimize', () => {
+            this.mainWindow?.setSkipTaskbar(false);
         });
 
         // ✅ [100점 수정] 닫기 버튼 클릭 시 앱 완전 종료 (백그라운드 프로세스 포함)
@@ -175,12 +169,12 @@ class WindowManagerImpl {
     }
 
     /**
-     * ✅ [100점 수정] 윈도우 최소화 → 트레이로 숨김
+     * 작업표시줄에 남는 일반 최소화
      */
     minimize(): void {
-        this.mainWindow?.hide();
-        if (!this.tray) {
-            this.createTray();
+        if (this.mainWindow && !this.mainWindow.isDestroyed()) {
+            this.mainWindow.setSkipTaskbar(false);
+            this.mainWindow.minimize();
         }
     }
 
