@@ -1,19 +1,221 @@
 {
-  "publishedAt": "2026-10-20T09:02:55.500Z",
+  "publishedAt": "2026-10-20T21:49:17.869Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 217,
-    "niche": 0,
-    "preemption": 12,
+    "candidates": 188,
+    "niche": 1,
+    "preemption": 9,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-10-20",
-    "keywords": []
+    "day": "2026-10-21",
+    "keywords": [
+      "엘리스그룹 주식"
+    ]
   },
-  "rows": [],
+  "rows": [
+    {
+      "keyword": "엘리스그룹 주식",
+      "issue": "엘리스그룹",
+      "topic": "엘리스그룹",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "“AI 기업이면 오를 줄 알았는데?”… 엘리스그룹 상장 첫날 30% 추락",
+          "엘리스그룹 공모주 투자 실패 후기｜상장 첫날 -30%, 공모주도 손실을 볼 수 있다",
+          "엘리스그룹 공모주 상장일 매도 후기 -26% 손절, 코어위브 악재에 무너진 주가",
+          "엘리스그룹, 상장 첫날 30%대 폭락…10조 청약 흥행은 왜 무너졌나?",
+          "[공모주 상장] 10월 20일 엘리스그룹 코스닥 상장 후기 실시간 매매 현장 분석 (feat. 빨간조끼아저씨)",
+          "엘리스그룹 상장일 시초가 범위와 균등 몇 주, 주가 보기 전 위험 3가지",
+          "엘리스그룹 상장일·공모가·주가 전망 총정리",
+          "엘리스그룹 공모주 주가 32% 폭락, 청약 흥행에도 상장일 하락한 이유",
+          "엘리스그룹 상장 D-1: 교육 플랫폼에서 'GPU 임대업'으로 갈아탄 회사, 상단 9만500원은 어디까지 반영했나",
+          "[10월 공모주 매도 후기] 엘리스그룹 손절! 시드머니 지키는 갓성비 멘탈 관리법"
+        ],
+        "measuredAt": "2026-10-20T21:45:42.572Z"
+      },
+      "documentCount": 6828,
+      "documentCountMeasured": true,
+      "searchVolume": 380,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 1,
+      "issueStatus": "declining",
+      "isHot": false,
+      "frontalDocCount": 2,
+      "freshFrontalCount": 1,
+      "reasons": [
+        "검색량 380",
+        "문서수 6,828",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 380 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.0배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 2건 (최근 1건)"
+        }
+      ],
+      "whySearch": {
+        "text": "AI 투자 회의론 속 엘리스그룹 코스닥 상장 첫날 30%가량 급락",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "엘리스그룹 주식 상장 첫날 30% 급락과 공모가 하회",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "엘리스그룹 주식 청약 흥행만 믿고 들어갔다가 상장 첫날 공모가 아래서 당황한 분들 많더",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "엘리스그룹 공모주",
+          "searchVolume": 64100,
+          "frame": "generic"
+        },
+        {
+          "keyword": "엘리스그룹 상장일",
+          "searchVolume": 9510,
+          "frame": "generic"
+        },
+        {
+          "keyword": "엘리스그룹 상장",
+          "searchVolume": 5760,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "엘리스그룹 공모주",
+          "searchVolume": 64100,
+          "documentCount": 6297,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "엘리스그룹 상장일",
+          "searchVolume": 9510,
+          "documentCount": 5896,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "엘리스그룹 상장",
+          "searchVolume": 5760,
+          "documentCount": 6264,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "엘리스그룹 주가",
+          "searchVolume": 5620,
+          "documentCount": 4616,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "엘리스그룹 청약",
+          "searchVolume": 3960,
+          "documentCount": 5599,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "엘리스그룹 공모가",
+          "searchVolume": 3370,
+          "documentCount": 5832,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "엘리스그룹 청약 경쟁률",
+          "searchVolume": 250,
+          "documentCount": 3975,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": {
+        "series": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          100
+        ],
+        "label": "🚀 떡상",
+        "recommendation": "지금 당장 작성! 3일 내 급증 포착 → 선점 시 상위 노출 확률 매우 높음"
+      },
+      "kinCount": 40,
+      "kinTop": [
+        {
+          "title": "대한전선 주식... 내일?ㅠㅠ",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=391824555&answerNo=7",
+          "views": 569,
+          "answers": 7
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-20T21:40:09.804Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null
+    }
+  ],
   "observations": [
     {
       "keyword": "엘리스그룹 비례주",
@@ -53,7 +255,7 @@
         }
       ],
       "whySearch": {
-        "text": "AI기업 엘리스그룹이 코스닥 상장 첫날 30%대 급락했다.",
+        "text": "AI 투자 회의론 속 엘리스그룹 코스닥 상장 첫날 30%가량 급락",
         "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "분류 안 됨",
@@ -61,12 +263,12 @@
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "엘리스그룹 비례주 배정 수량과 상장 첫날 30% 급락 주가",
+          "text": "엘리스그룹 비례주 상장 첫날 30% 급락 공모가 하회 대응",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "엘리스그룹 비례주 청약은 대박이었는데 상장 첫날 왜 30% 빠졌을까요",
+          "text": "엘리스그룹 비례주 상장일 첫날 주가 보고 다들 손이 멈췄다는데요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -74,73 +276,67 @@
       "subKeywords": [
         {
           "keyword": "엘리스그룹 공모주",
-          "searchVolume": 52600,
+          "searchVolume": 64100,
           "frame": "generic"
         },
         {
           "keyword": "엘리스그룹 상장일",
-          "searchVolume": 7780,
+          "searchVolume": 9510,
           "frame": "generic"
         },
         {
-          "keyword": "엘리스그룹 상장",
-          "searchVolume": 3860,
+          "keyword": "엘리스그룹 주가",
+          "searchVolume": 5620,
           "frame": "generic"
         }
       ],
       "keywordPool": [
         {
           "keyword": "엘리스그룹 공모주",
-          "searchVolume": 52600,
-          "documentCount": 6087,
+          "searchVolume": 64100,
+          "documentCount": 6297,
           "source": "ai-verified"
         },
         {
           "keyword": "엘리스그룹 상장일",
-          "searchVolume": 7780,
-          "documentCount": 5667,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "엘리스그룹 상장",
-          "searchVolume": 3860,
-          "documentCount": 6024,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "엘리스그룹 청약",
-          "searchVolume": 3740,
-          "documentCount": 5454,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "엘리스그룹 공모가",
-          "searchVolume": 2380,
-          "documentCount": 5630,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "엘리스그룹 균등",
-          "searchVolume": 1580,
-          "documentCount": 2646,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "엘리스그룹 환불일",
-          "searchVolume": 600,
-          "documentCount": 3196,
+          "searchVolume": 9510,
+          "documentCount": 5896,
           "source": "ai-verified"
         },
         {
           "keyword": "엘리스그룹 주가",
-          "searchVolume": 330,
-          "documentCount": 4397,
+          "searchVolume": 5620,
+          "documentCount": 4616,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "엘리스그룹 공모가",
+          "searchVolume": 3370,
+          "documentCount": 5832,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "엘리스그룹 환불일",
+          "searchVolume": 610,
+          "documentCount": 3243,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "엘리스그룹 균등배정",
+          "searchVolume": 470,
+          "documentCount": 2423,
           "source": "ai-verified"
         },
         {
           "keyword": "엘리스그룹 청약 경쟁률",
-          "searchVolume": 230,
-          "documentCount": 3870,
+          "searchVolume": 250,
+          "documentCount": 3975,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "엘리스그룹 비례배정",
+          "searchVolume": 20,
+          "documentCount": 1764,
           "source": "ai-verified"
         }
       ],
@@ -148,7 +344,714 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-20T08:58:06.727Z",
+      "measuredAt": "2026-10-20T21:40:09.804Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "스카이폴AI 투자유치",
+      "issue": "스카이폴AI",
+      "topic": "스카이폴AI",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "시리즈 투자 관심",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 9,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 9",
+        "선점 후보 — 경쟁 문서 9건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 시리즈 투자 관심"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "스카이폴AI가 3D 설계 자동화 월드모델 스카이-001 공개",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "스카이폴AI 투자유치, 월드모델 스카이-001로 보는 경쟁력",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "스카이폴AI 투자유치 소식에 스카이-001 월드모델 다시 보니 좀 다르네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-20T21:40:09.804Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "NC AI 모델러",
+      "issue": "NC AI",
+      "topic": "NC AI",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 53,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 53",
+        "선점 후보 — 경쟁 문서 53건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "NC AI가 바르코 3D·사운드 생성 AI 첫 달 구독료 50% 할인",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "NC AI 모델러 바르코 3D 첫 달 구독료 50% 할인 조건",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "NC AI 모델러 써보려다 VARCO 요금제 앞에서 한참을 망설였네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "NC AI VARCO",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "NC AI VARCO",
+          "searchVolume": 10,
+          "documentCount": 539,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 4,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-20T21:40:09.804Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "스카이폴AI 기업",
+      "issue": "스카이폴AI",
+      "topic": "스카이폴AI",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 98,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 98",
+        "선점 후보 — 경쟁 문서 98건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "스카이폴AI가 3D 설계 자동화 월드모델 스카이-001 공개",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "스카이폴AI 기업 스카이-001, CAD·BIM 설계 자동화 월드모델 공개",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "스카이폴AI 기업이 내놓은 스카이-001 설계 자동화 어디까지 왔나 싶더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-20T21:40:09.804Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "kia 리콜신청방법",
+      "issue": "KIA",
+      "topic": "KIA",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 170,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 170",
+        "선점 후보 — 경쟁 문서 170건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "김도영 만루홈런으로 KIA가 LG 꺾고 23년 만에 PO 진출",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "거래",
+      "adsenseFit": false,
+      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+      "titles": {
+        "seo": {
+          "text": "kia 리콜신청방법 대상 조회하고 무상수리 받는 순서",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "kia 리콜신청방법 찾다 보면 대상 조회에서 다들 한 번씩 막혀요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-20T21:40:09.804Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "임시완 말투 혼란",
+      "issue": "임시완 말투 혼란",
+      "topic": "임시완 말투 혼란",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 209,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 209",
+        "선점 후보 — 경쟁 문서 209건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "나의 유죄인간에서 임시완 말투에 시청자 혼란, 시청률 화제",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "임시완 말투 혼란 '나의 유죄인간' 재벌 3세 설인아 남장 조합",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "임시완 말투 혼란스럽다던 유죄인간 보다가 설인아 나오는 장면에서 혼자 멈칫했어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "임시완 드라마",
+          "searchVolume": 3160,
+          "frame": "generic"
+        },
+        {
+          "keyword": "임시완 설인아",
+          "searchVolume": 2570,
+          "frame": "generic"
+        },
+        {
+          "keyword": "임시완 말투",
+          "searchVolume": 150,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "임시완 드라마",
+          "searchVolume": 3160,
+          "documentCount": 47001,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "임시완 설인아",
+          "searchVolume": 2570,
+          "documentCount": 4077,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "임시완 말투",
+          "searchVolume": 150,
+          "documentCount": 2701,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-20T21:40:09.804Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "mds테크 연봉",
+      "issue": "MDS테크",
+      "topic": "MDS테크",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 239,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 239",
+        "선점 후보 — 경쟁 문서 239건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "MDS테크가 휴머노이드 홈로봇에 엔비디아 AI칩 40억원 규모 공급",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "mds테크 연봉 신입 초봉부터 직급별 평균까지 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "mds테크 연봉 보러 갔다가 주가전망 쪽에 더 오래 머물렀네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "mds테크 주가",
+          "searchVolume": 4470,
+          "frame": "generic"
+        },
+        {
+          "keyword": "mds테크 기업정보",
+          "searchVolume": 50,
+          "frame": "generic"
+        },
+        {
+          "keyword": "mds테크 주가전망",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "mds테크 주가",
+          "searchVolume": 4470,
+          "documentCount": 16483,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "mds테크 기업정보",
+          "searchVolume": 50,
+          "documentCount": 21971,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "mds테크 주가전망",
+          "searchVolume": 20,
+          "documentCount": 8062,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-20T21:40:09.804Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "엘리스그룹 블라인드",
+      "issue": "엘리스그룹",
+      "topic": "엘리스그룹",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 220,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "declining",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 220",
+        "선점 후보 — 경쟁 문서 220건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "AI 투자 회의론 속 엘리스그룹 코스닥 상장 첫날 30%가량 급락",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "엘리스그룹 블라인드 상장 첫날 급락 두고 직원 반응은",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "엘리스그룹 블라인드 청약 흥행했다더니 상장 첫날 분위기가 묘하더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "엘리스그룹 상장",
+          "searchVolume": 5760,
+          "frame": "generic"
+        },
+        {
+          "keyword": "엘리스그룹 주가",
+          "searchVolume": 5620,
+          "frame": "generic"
+        },
+        {
+          "keyword": "엘리스그룹 청약",
+          "searchVolume": 3960,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "엘리스그룹 상장",
+          "searchVolume": 5760,
+          "documentCount": 6264,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "엘리스그룹 주가",
+          "searchVolume": 5620,
+          "documentCount": 4616,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "엘리스그룹 청약",
+          "searchVolume": 3960,
+          "documentCount": 5599,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "엘리스그룹 공모가",
+          "searchVolume": 3370,
+          "documentCount": 5832,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "엘리스그룹 주식",
+          "searchVolume": 380,
+          "documentCount": 6828,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "엘리스그룹 채용",
+          "searchVolume": 100,
+          "documentCount": 1038,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "엘리스그룹 코스닥",
+          "searchVolume": 50,
+          "documentCount": 3409,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "엘리스그룹 연봉",
+          "searchVolume": 40,
+          "documentCount": 447,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 4,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-20T21:40:09.804Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "MDS테크 40억 수주",
+      "issue": "MDS테크",
+      "topic": "MDS테크",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 268,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 1,
+      "reasons": [
+        "문서수 268",
+        "선점 후보 — 경쟁 문서 268건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 1건)"
+        }
+      ],
+      "whySearch": {
+        "text": "MDS테크가 휴머노이드 홈로봇에 엔비디아 AI칩 40억원 규모 공급",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "MDS테크 40억 수주 휴머노이드 홈로봇 젯슨 공급 내용",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "MDS테크 40억 수주 터지니까 주가전망 보는 눈이 좀 달라지더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "MDS테크 주가",
+          "searchVolume": 4470,
+          "frame": "generic"
+        },
+        {
+          "keyword": "MDS테크 목표주가",
+          "searchVolume": 120,
+          "frame": "generic"
+        },
+        {
+          "keyword": "MDS테크 주가전망",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "MDS테크 주가",
+          "searchVolume": 4470,
+          "documentCount": 16483,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "MDS테크 목표주가",
+          "searchVolume": 120,
+          "documentCount": 4228,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "MDS테크 주가전망",
+          "searchVolume": 20,
+          "documentCount": 8062,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-20T21:40:09.804Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -216,73 +1119,8 @@
       "monetize": null,
       "measuredAt": "2026-10-20T08:58:06.727Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "NC AI 모델러",
-      "issue": "NC AI",
-      "topic": "NC AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 53,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 53",
-        "선점 후보 — 경쟁 문서 53건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "NC AI가 바르코 3D·사운드 생성 AI 첫 달 구독료 50% 할인을 시작했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "NC AI 모델러 바르코 첫 달 구독료 50% 할인 조건",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "NC AI 모델러 첫 달 반값인 줄 알았는데 바르코 구독에서 많이들 걸리네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 4,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-20T08:58:06.727Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "스카이폴AI 투자",
@@ -348,7 +1186,8 @@
       "monetize": null,
       "measuredAt": "2026-10-20T08:58:06.727Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "스카이폴AI 모델",
@@ -410,7 +1249,8 @@
       "monetize": null,
       "measuredAt": "2026-10-20T08:58:06.727Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "토치뉴런 엔비디아",
@@ -472,7 +1312,8 @@
       "monetize": null,
       "measuredAt": "2026-10-20T08:58:06.727Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "스카이폴AI 대표",
@@ -534,7 +1375,8 @@
       "monetize": null,
       "measuredAt": "2026-10-20T08:58:06.727Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "스카이폴AI 기술",
@@ -596,7 +1438,8 @@
       "monetize": null,
       "measuredAt": "2026-10-20T08:58:06.727Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "스카이폴AI 공개",
@@ -658,7 +1501,8 @@
       "monetize": null,
       "measuredAt": "2026-10-20T08:58:06.727Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "NC AI 효과음",
@@ -727,210 +1571,8 @@
       "monetize": null,
       "measuredAt": "2026-10-20T08:58:06.727Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "mds테크 연봉",
-      "issue": "MDS테크",
-      "topic": "MDS테크",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 239,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 239",
-        "선점 후보 — 경쟁 문서 239건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "MDS테크가 휴머노이드 홈로봇에 40억원 규모 AI 솔루션을 공급한다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "mds테크 연봉 신입 초봉과 평균연봉 채용 조건 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "mds테크 연봉 보고 지원하려는데 신입 초봉이 생각보다 다르더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-20T08:58:06.727Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "엘리스그룹 블라인드",
-      "issue": "엘리스그룹",
-      "topic": "엘리스그룹",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 220,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "declining",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 220",
-        "선점 후보 — 경쟁 문서 220건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "AI기업 엘리스그룹이 코스닥 상장 첫날 30%대 급락했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "엘리스그룹 블라인드 코스닥 상장 첫날 30% 급락 반응",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "엘리스그룹 블라인드 분위기가 상장 첫날 급락에 많이들 갈리더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "엘리스그룹 공모주",
-          "searchVolume": 52600,
-          "frame": "generic"
-        },
-        {
-          "keyword": "엘리스그룹 상장",
-          "searchVolume": 3860,
-          "frame": "generic"
-        },
-        {
-          "keyword": "엘리스그룹 청약",
-          "searchVolume": 3740,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "엘리스그룹 공모주",
-          "searchVolume": 52600,
-          "documentCount": 6087,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "엘리스그룹 상장",
-          "searchVolume": 3860,
-          "documentCount": 6024,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "엘리스그룹 청약",
-          "searchVolume": 3740,
-          "documentCount": 5454,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "엘리스그룹 공모가",
-          "searchVolume": 2380,
-          "documentCount": 5630,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "엘리스그룹 주가",
-          "searchVolume": 330,
-          "documentCount": 4397,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "엘리스그룹 채용",
-          "searchVolume": 90,
-          "documentCount": 1041,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "엘리스그룹 주가전망",
-          "searchVolume": 70,
-          "documentCount": 2396,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "엘리스그룹 연봉",
-          "searchVolume": 30,
-          "documentCount": 450,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "엘리스그룹 코스닥",
-          "searchVolume": 10,
-          "documentCount": 3249,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 4,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-20T08:58:06.727Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "글림프스 아스트라 비교",
@@ -3001,682 +3643,187 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "오픈ai 닷츠 후기",
-      "issue": "오픈AI",
-      "topic": "오픈AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 106,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 106",
-        "선점 후보 — 경쟁 문서 106건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "오픈ai 닷츠 후기 경험담을 판단할 기준",
-          "frame": "review",
-          "basis": "검색 질문 '오픈ai 닷츠 후기' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        },
-        "home": {
-          "text": "오픈ai 닷츠 후기 누구에게 맞는지 먼저 살펴보세요",
-          "frame": "review",
-          "basis": "검색 질문 '오픈ai 닷츠 후기' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": [
-        {
-          "title": "새로운 AI 에이전트 닷츠, 실제로 얼마나 효율적일까요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1122&docId=495387990&answerNo=0",
-          "views": 41,
-          "answers": null
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-18T21:39:22.297Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "오픈AI 닷츠 이용방법",
-      "issue": "오픈AI",
-      "topic": "오픈AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 166,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 166",
-        "선점 후보 — 경쟁 문서 166건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "거래",
-      "adsenseFit": false,
-      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-      "titles": {
-        "seo": {
-          "text": "오픈AI 닷츠 이용방법 처음 해도 막히지 않는 순서",
-          "frame": "howto",
-          "basis": "검색 질문 '오픈AI 닷츠 이용방법' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        },
-        "home": {
-          "text": "오픈AI 닷츠 이용방법, 어렵게 할 필요 없습니다",
-          "frame": "howto",
-          "basis": "검색 질문 '오픈AI 닷츠 이용방법' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-18T21:39:22.297Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "강풍 강된장 레시피",
-      "issue": "강풍",
-      "topic": "강풍",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 21,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "rising",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 21",
-        "선점 후보 — 경쟁 문서 21건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "강풍 강된장 레시피 따라하기 쉬운 순서",
-          "frame": "recipe",
-          "basis": "검색 질문 '강풍 강된장 레시피' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        },
-        "home": {
-          "text": "강풍 강된장 레시피, 이 순서대로만 하면 됩니다",
-          "frame": "recipe",
-          "basis": "검색 질문 '강풍 강된장 레시피' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-18T09:33:48.620Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "선관위 특검 탈세",
-      "issue": "선관위 특검 탈세",
-      "topic": "선관위 특검 탈세",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 258,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 2,
-      "freshFrontalCount": 2,
-      "reasons": [
-        "문서수 258",
-        "선점 후보 — 경쟁 문서 258건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 2건 (최근 2건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 26,
-      "kinTop": [
-        {
-          "title": "문재인 대표님의 탈세 의혹, 아들 특혜 팩트검증 부탁드립니....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60701&docId=272919397&answerNo=5",
-          "views": 1512,
-          "answers": 3
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-18T09:33:48.620Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
-  "rejectedCount": 1,
+  "rejectedCount": 0,
   "issues": [
     {
-      "issue": "김지용 초대 중수청장",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "초대 중수청장으로 취임해 '지위 막론 동일 수사 원칙'을 밝혔다.",
-      "headlines": [
-        {
-          "title": "초대 중수청장 취임 김지용 \"수사 대상 지위 가리지 않고 동일 원칙 적...",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-10-20T06:30:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001396820?sid=102"
-        },
-        {
-          "title": "김지용 초대 중수청장 취임…\"지위 막론 동일 수사 원칙 적용\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-20T06:17:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014266301?sid=102"
-        },
-        {
-          "title": "[속보] 김지용 초대 중수청장 취임... “특정인 겨냥한 수사 경계할 것...",
-          "press": "biz.chosun.com",
-          "publishedAt": "2026-10-20T06:05:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/366/0001199122?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "김지용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "서울 역삼동 빌딩",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "역삼동 빌딩 2곳 연쇄방화 혐의 70대 남성이 검거됐다.",
-      "headlines": [
-        {
-          "title": "[단독] 역삼동 방화 용의자 '1호선 동묘앞역'서 검거...1호선 타고 도주",
-          "press": "news.jtbc.co.kr",
-          "publishedAt": "2026-10-20T07:29:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/437/0000516623?sid=102"
-        },
-        {
-          "title": "[단독] ‘4년전 같은 건물들 방화’ 그놈이었다…역삼동 화재 용의자 체...",
-          "press": "joongang.co.kr",
-          "publishedAt": "2026-10-20T05:55:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/025/0003559176?sid=102"
-        },
-        {
-          "title": "역삼동빌딩 2곳 연쇄방화 혐의 70대 남성 검거…수서경찰서로 압송",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-20T07:42:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016389359?sid=102"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "김정은 뇌출혈 사망",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "김정은 뇌출혈 사망설이 확산되자 북한이 근황 사진을 공개했다.",
-      "headlines": [
-        {
-          "title": "\"김정은 뇌출혈 사망\" 소문 확산에…재빨리 사진 공개한 北",
-          "press": "hankyung.com",
-          "publishedAt": "2026-10-20T08:20:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005344519?sid=100"
-        },
-        {
-          "title": "\"김정은, 뇌출혈로 사망한 듯?\" 소문 확산…북한, 근황 공개",
-          "press": "mbn.mk.co.kr",
-          "publishedAt": "2026-10-20T08:08:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/057/0001974340?sid=104"
-        },
-        {
-          "title": "“北 김정은, 뇌출혈로 죽었다” 또다시 퍼지는 ‘김정은 사망설’",
-          "press": "kmib.co.kr",
-          "publishedAt": "2026-10-20T06:59:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/005/0001879784?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "김정은",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "코스피 급락 마감",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "코스피가 3.7% 급락해 5,552로 6개월래 최저를 기록했다.",
-      "headlines": [
-        {
-          "title": "코스피, 3.7% 급락한 5,552 마감…코스닥도 3.3%↓",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-20T06:39:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016389004?sid=101"
-        },
-        {
-          "title": "코스피 3.7% 급락 마감…코스닥도 3.3% 하락",
-          "press": "news.kbs.co.kr",
-          "publishedAt": "2026-10-20T07:38:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/056/0012277164?sid=101"
-        },
-        {
-          "title": "[속보]“이틀 올랐다고 좋아했더니”…코스피 5550선, 6개월래 최저",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-10-20T06:37:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006392296?sid=101"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "박세영 곽정욱 결혼",
+      "issue": "KIA",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "stable",
       "isHot": true,
-      "why": "박세영이 8년 연애 끝 곽정욱과 결혼했다고 밝혔다.",
+      "why": "김도영 만루홈런으로 KIA가 LG 꺾고 23년 만에 PO 진출",
       "headlines": [
         {
-          "title": "박세영 “곽정욱과 8년 연애…내가 멱살 잡고 결혼했다”",
-          "press": "donga.com",
-          "publishedAt": "2026-10-20T08:08:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/020/0003756314?sid=103"
-        },
-        {
-          "title": "박세영, '♥연하 남편' 곽정욱과 8년 연애…\"내가 멱살 잡고 결혼했다\"",
-          "press": "sportschosun.com",
-          "publishedAt": "2026-10-20T08:38:00.000Z",
-          "link": "https://m.entertain.naver.com/article/076/0004457741"
-        },
-        {
-          "title": "박세영 “8년 연애 끝 곽정욱과 결혼…내가 멱살 잡았다”",
+          "title": "김도영 145m 만루홈런 … KIA, 플레이오프 진출",
           "press": "mk.co.kr",
-          "publishedAt": "2026-10-20T05:11:00.000Z",
-          "link": "https://m.entertain.naver.com/article/009/0005751191"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "김종출 KAI 사장",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "김종출 사장이 KAI 매각설에 '아무나 가질 수 없다'며 선을 그었다.",
-      "headlines": [
-        {
-          "title": "수은 '18억 항공우주 용역' 국감서 논란…KAI 민영화 의혹 부인",
-          "press": "bloter.net",
-          "publishedAt": "2026-10-20T07:27:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/293/0000091859?sid=101"
+          "publishedAt": "2026-10-20T14:15:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/009/0005751522"
         },
         {
-          "title": "김종출 KAI 사장 \"아무나 가질 수 없다\"…매각설 선긋기",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-10-20T07:49:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005429131?sid=100"
-        },
-        {
-          "title": "[국감2026] 황기연 \"KAI 지분 매각 계획, 현재 없어\"…김종출 \"한화 경영...",
-          "press": "weekly.hankooki.com",
-          "publishedAt": "2026-10-20T07:50:00.000Z",
-          "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7189856"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "김종출",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김종출 kai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "넷플",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "'닥터X'가 넷플에서 2주 연속 1위를 기록했다.",
-      "headlines": [
-        {
-          "title": "‘닥터X’ 넷플 2주 연속 1위",
-          "press": "bntnews.co.kr",
-          "publishedAt": "2026-10-19T23:14:00.000Z",
-          "link": "https://www.bntnews.co.kr/article/view/bnt202610200067"
-        },
-        {
-          "title": "교도소서 마사지 받고 넷플 시청까지...'황제 수감' 힙합 거물 결국 [글...",
-          "press": "wowtv.co.kr",
-          "publishedAt": "2026-10-17T06:48:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/215/0001269489?sid=104"
-        },
-        {
-          "title": "넷플, 성장 둔화 속 최고콘텐츠책임자 교체…후임은 디즈니 출신",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-16T01:25:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014257697?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "넷플 영화 추천",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "넷플 드라마 추천",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "넷플 19",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "넷플 루키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "넷플 드라마",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "넷플 트랩 결말",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "넷플 팟",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "넷플 공유",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "에덴의 동쪽 CJ",
-          "reason": "제작사 화제성 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "김지용 미국 넷플",
-          "reason": "미국 톱10 진입 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "넷플 다음 신작",
-          "reason": "후속 공개작 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "합참",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "dead",
-      "isHot": false,
-      "why": "합참의장이 북한 추가 도발 시 단호 대응과 DMZ 주도권 강화를 밝혔다.",
-      "headlines": [
-        {
-          "title": "합참의장 \"北 적반하장 용납 못해…추가 도발시 단호 대응\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-20T00:53:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014264721?sid=100"
-        },
-        {
-          "title": "합참의장 \"북 적반하장 용납 못해…추가 도발시 단호 대응\"",
-          "press": "news.jtbc.co.kr",
-          "publishedAt": "2026-10-20T01:33:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/437/0000516546?sid=100"
-        },
-        {
-          "title": "합참 “北 적반하장 용납 못해...추가 도발 시 단호히 대응”",
-          "press": "chosun.com",
-          "publishedAt": "2026-10-20T00:54:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0004004829?sid=100"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "합참 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "합참 공보실장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "합참 작전본부장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "합참 국직 차이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "합참 주임원사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "합참 부서",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "합참 북진",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "합참 북한",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "합참 대응 수위",
-          "reason": "단호 대응 수준 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "이재명 주택 현장",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "이재명 대통령이 3기 신도시 현장서 '실제 착공·입주 전격전'을 주문했다.",
-      "headlines": [
-        {
-          "title": "李, 국무회의 참석한 중수청장에 “존재 의의 증명하라”",
-          "press": "donga.com",
-          "publishedAt": "2026-10-20T01:24:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/020/0003756207?sid=100"
-        },
-        {
-          "title": "李 \"계획 발표 아닌 실제 입주가 중요…주택공급 전격전 펼쳐야\"",
-          "press": "news.tvchosun.com",
-          "publishedAt": "2026-10-20T01:34:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/448/0000645867?sid=100"
-        },
-        {
-          "title": "1년에 산재 3명 이상 숨지면 영업익 5% 과징금…국무회의 의결",
+          "title": "김도영, 잠실 최후의 만루포…KIA, LG 꺾고 23년 만에 PO 진출(종합)",
           "press": "yna.co.kr",
-          "publishedAt": "2026-10-20T04:11:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016388408?sid=100"
+          "publishedAt": "2026-10-20T13:19:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/001/0016390021"
+        },
+        {
+          "title": "KIA 이범호 감독 \"아쉬움 없어…두려움 없이 PO 치르겠다\"[준PO]",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-20T14:19:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/003/0014267365"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "KIA 타이거즈",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kia 자동차",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "KIA LG",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "lg kia",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kia connect",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "KIA 김도영",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kia 리콜신청방법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kia 홈런 순위",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "KIA 삼성 PO",
+          "reason": "다음 상대 매치업 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "2026년 운세",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "띠별·별자리 오늘의 운세 공개와 새해 운세 특강 모집",
+      "headlines": [
+        {
+          "title": "오늘의 운세 띠별 운세 21일",
+          "press": "bntnews.co.kr",
+          "publishedAt": "2026-10-20T15:02:00.000Z",
+          "link": "https://www.bntnews.co.kr/article/view/bnt202610200174"
+        },
+        {
+          "title": "[오늘의 운세] 2026년 10월 21일 별자리 운세",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-10-20T21:06:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006392557?sid=103"
+        },
+        {
+          "title": "오늘의 운세-띠별(21일)",
+          "press": "kjdaily.com",
+          "publishedAt": "2026-10-20T15:02:00.000Z",
+          "link": "http://www.kjdaily.com/article.php?aid=1792508401689697227"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "2026년 운세 무료",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "2026년 운세 보기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "2026년 운세 양띠",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "2026년 운세 농협",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "2026년 운세 돼지띠",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "2026년 운세 개띠",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "2026년 운세 닭띠",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "2026년 운세 쥐띠",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "우크라이나 공관원 철수",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "전향적 조치 없어 정부가 주우크라이나 공관원 절반 철수 결정",
+      "headlines": [
+        {
+          "title": "우크라이나 공관원 절반 철수…\"전향적 조치 없어\"",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-10-20T11:22:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001396908?sid=100"
+        },
+        {
+          "title": "정부, 우크라이나 공관원 일부 철수‥\"전향적 조치 없어\"",
+          "press": "imnews.imbc.com",
+          "publishedAt": "2026-10-20T05:44:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/214/0001530204?sid=100"
+        },
+        {
+          "title": "외교부 \"우크라 공관원 절반 철수…전향적 조치 없어\"(종합)",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-20T08:01:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014266896?sid=100"
         }
       ],
       "concentrated": [],
@@ -3684,99 +3831,313 @@
       "rowCount": 0
     },
     {
-      "issue": "명륜진사갈비",
+      "issue": "강신일 아내 남편",
       "issueType": "fresh",
       "lane": "realtime",
-      "issueStatus": "stable",
+      "issueStatus": "unknown",
       "isHot": true,
-      "why": "중수청이 명륜진사갈비 본사 가맹점 이자 장사 의혹 사건을 배당했다.",
+      "why": "간암 투병 강신일이 동상이몽2에서 아내 오수미 최초 공개",
       "headlines": [
         {
-          "title": "[단독] 중수청, 명륜진사갈비 본사 사건 배당…“공정위 전속고발”",
-          "press": "news.kbs.co.kr",
-          "publishedAt": "2026-10-20T03:14:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/056/0012276995?sid=102"
+          "title": "강신일, ♥아내 최초 공개… “남편 뇌 열어보고파” (동상이몽2)",
+          "press": "sports.donga.com",
+          "publishedAt": "2026-10-20T00:33:00.000Z",
+          "link": "https://m.entertain.naver.com/article/382/0001299947"
         },
         {
-          "title": "명륜진사갈비 본사 '이자 장사 의혹', 서울중수청 반독점국 배당",
+          "title": "강신일, 데뷔 47년만에 첫 예능…아내 \"뇌 열어보고 싶어\"",
           "press": "newsis.com",
-          "publishedAt": "2026-10-20T05:26:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014266015?sid=102"
+          "publishedAt": "2026-10-20T09:00:00.000Z",
+          "link": "https://m.entertain.naver.com/article/003/0014267036"
         },
         {
-          "title": "중수청, 명륜진사갈비 부당 내부거래 사건 반독점수사국 배당",
-          "press": "news1.kr",
-          "publishedAt": "2026-10-20T04:51:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009238758?sid=102"
+          "title": "강신일 아내 충격 고백 \"남편 뇌 열어보고 싶었다\"[동상이몽][별별TV]",
+          "press": "starnewskorea.com",
+          "publishedAt": "2026-10-20T14:23:00.000Z",
+          "link": "https://m.entertain.naver.com/article/108/0003480407"
         }
       ],
       "concentrated": [
         {
-          "keyword": "명륜진사갈비 막창",
+          "keyword": "강신일",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "프랑스 야간 통행금지",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "폭력시위 피해 2조원 육박에 파리 곳곳 이틀째 야간 통행금지",
+      "headlines": [
+        {
+          "title": "이틀째 야간 통행금지‥대테러 부대 투입",
+          "press": "imnews.imbc.com",
+          "publishedAt": "2026-10-20T21:08:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/214/0001530336?sid=104"
+        },
+        {
+          "title": "프랑스 폭력시위 피해액 2조원 육박…이틀째 야간 통행금지",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-20T08:08:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016389435?sid=104"
+        },
+        {
+          "title": "불 지르고 빵집 습격까지 프랑스 ‘충격’… 파리 일부 야간 통금",
+          "press": "kmib.co.kr",
+          "publishedAt": "2026-10-19T20:40:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/005/0001879689?sid=104"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "생산자물가 상승",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "명절 농축산물 급등으로 9월 생산자물가 0.2% 두 달째 상승",
+      "headlines": [
+        {
+          "title": "농축산물 급등에 생산자물가 두 달 연속 상승...9월 0.2%↑[Pick코노미]",
+          "press": "sedaily.com",
+          "publishedAt": "2026-10-20T21:01:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/011/0004673373?sid=101"
+        },
+        {
+          "title": "명절 농·축산물 가격 상승에 9월 생산자물가 0.2% 올라",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-20T21:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016390112?sid=101"
+        },
+        {
+          "title": "명절 농축산물 가격 상승에…9월 생산자물가 0.2%↑",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-20T21:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014267478?sid=101"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "김정은 벙커와 화성-11",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "북 화성-11과 현무 미사일로 지하벙커 타격력 공방 부각",
+      "headlines": [
+        {
+          "title": "요격망 피하는 ‘北 화성-11’ vs 김정은 벙커 깨는 ‘K 현무’ [심층기...",
+          "press": "segye.com",
+          "publishedAt": "2026-10-20T21:02:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/022/0004168352?sid=100"
+        },
+        {
+          "title": "[고유환 칼럼] 김정은이 후계를 서두르는 까닭은",
+          "press": "ajunews.com",
+          "publishedAt": "2026-04-08T21:02:00.000Z",
+          "link": "https://www.ajunews.com/view/20260407150024896"
+        },
+        {
+          "title": "김정은은 핵무기를 사용할까? | 북, 서울 무력화와 부산항 파괴 위해 핵...",
+          "press": "monthly.chosun.com",
+          "publishedAt": "2025-10-20T03:12:00.000Z",
+          "link": "http://monthly.chosun.com/client/news/viw.asp?ctcd=G&nNewsNumb=202511100025"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "임시완 말투 혼란",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "나의 유죄인간에서 임시완 말투에 시청자 혼란, 시청률 화제",
+      "headlines": [
+        {
+          "title": "“임시완 말투가 왜 저래?” ‘나의 유죄인간’ 시청자 혼란 속 시청률...",
+          "press": "newsen.com",
+          "publishedAt": "2026-10-19T22:52:00.000Z",
+          "link": "https://m.entertain.naver.com/article/609/0001179662"
+        },
+        {
+          "title": "재벌 임시완·남장 설인아의 언더커버 로맨스…'나의 유죄인간'",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-14T08:14:00.000Z",
+          "link": "https://m.entertain.naver.com/article/003/0014253851"
+        },
+        {
+          "title": "'앙칼진 재벌 3세' 임시완♥'잘생쁨 남장 비서' 설인아…이 조합부터 유...",
+          "press": "mydaily.co.kr",
+          "publishedAt": "2026-10-14T06:13:00.000Z",
+          "link": "https://m.entertain.naver.com/article/117/0004114939"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "스페이스X 3Q 매출",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "스타링크·AI 성장에 스페이스X 3분기 매출 161% 증가, 예상 상회",
+      "headlines": [
+        {
+          "title": "[속보]스페이스X 3Q 매출 161%↑…스타링크·AI 성장에 예상 상회",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-10-20T20:13:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006392532?sid=101"
+        },
+        {
+          "title": "'매출 폭증' CXMT, 물량 공세로 삼전닉스 압박…기술력 '물음표'",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-19T05:57:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009236603?sid=101"
+        },
+        {
+          "title": "[GAM]'상승 날개' MU ② AI 인프라로 구조적 전환점, 3Q 실적 관전 포인트",
+          "press": "newspim.com",
+          "publishedAt": "2026-06-23T23:01:00.000Z",
+          "link": "https://www.newspim.com/news/view/20260623000522"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "스페이스x",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "구글 클라우드 장애",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "전력 문제로 구글 클라우드 장애, 영국 은행·공공의료 먹통 뒤 복구",
+      "headlines": [
+        {
+          "title": "구글 클라우드 장애로 영국 은행·공공의료 사이트 차질(종합)",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-20T16:26:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016390064?sid=104"
+        },
+        {
+          "title": "구글 클라우드 장애에 영국 은행·우편 서비스 차질",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-10-20T11:34:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001199190?sid=104"
+        },
+        {
+          "title": "구글 클라우드 장애…영국 은행·공공의료 사이트 먹통",
+          "press": "biz.sbs.co.kr",
+          "publishedAt": "2026-10-20T20:03:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/374/0000538875?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "구글",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "구글",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "구글 클라우드 장애와 구글지도 국내 이용자 1000만 돌파 부각",
+      "headlines": [
+        {
+          "title": "구글 클라우드 장애로 영국 은행·공공의료 사이트 차질(종합)",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-20T16:26:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016390064?sid=104"
+        },
+        {
+          "title": "\"구글 공습 막아라\"…국내 지도앱들 서비스 고도화로 맞불",
+          "press": "view.asiae.co.kr",
+          "publishedAt": "2026-10-20T02:37:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/277/0005830921?sid=105"
+        },
+        {
+          "title": "구글지도 국내 이용자 석달 연속 1000만명…1년새 15% 늘어",
+          "press": "donga.com",
+          "publishedAt": "2026-10-20T06:22:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/020/0003756269?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "구글 제미나이",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "명륜진사갈비 혼밥",
+          "keyword": "구글 번역기",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "명륜진사갈비 메뉴",
+          "keyword": "구글 영국",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "명륜진사갈비 장어",
+          "keyword": "구글 주가",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "청주 명륜진사갈비",
+          "keyword": "구글 클래스룸",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "대전 명륜진사갈비",
+          "keyword": "구글 원",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "원주 명륜진사갈비",
+          "keyword": "구글 폼",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "명륜진사갈비 교하",
+          "keyword": "구글 홈",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [
         {
-          "keyword": "명륜진사갈비 창업",
-          "reason": "가맹 피해 창업주 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "명륜진사갈비 본사 압수",
-          "reason": "수사 진행 상황 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "명륜진사갈비 가맹비",
-          "reason": "가맹 조건 논란 확인",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "명륜진사갈비 처벌",
-          "reason": "혐의 처벌 수위 관심",
+          "keyword": "구글 규제",
+          "reason": "국내 규제 향방",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -3790,7 +4151,7 @@
       "lane": "tech",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "스카이폴AI가 CAD·BIM 3D 설계 자동화 월드모델 '스카이-001'을 공개했다.",
+      "why": "스카이폴AI가 CAD·BIM 3D 설계 자동화 월드모델 스카이-001 공개",
       "headlines": [
         {
           "title": "스카이폴AI, CAD·BIM 3D 설계 자동화 월드모델 '스카이-001' 공개",
@@ -3814,8 +4175,8 @@
       "concentrated": [],
       "nextWave": [
         {
-          "keyword": "스카이-001 출시",
-          "reason": "정식 출시 시점 궁금",
+          "keyword": "스카이001 출시",
+          "reason": "정식 공개 시점",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -3829,7 +4190,7 @@
       "lane": "tech",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "스카이폴AI가 설계 자동화 월드모델 '스카이-001'을 공개했다.",
+      "why": "스카이폴AI가 3D 설계 자동화 월드모델 스카이-001 공개",
       "headlines": [
         {
           "title": "스카이폴AI, CAD·BIM 3D 설계 자동화 월드모델 '스카이-001' 공개",
@@ -3853,29 +4214,8 @@
       "concentrated": [],
       "nextWave": [
         {
-          "keyword": "스카이폴AI 투자",
-          "reason": "신기업 투자유치 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "스카이폴AI 채용",
-          "reason": "AI기업 채용 수요",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "스카이폴AI 경쟁사",
-          "reason": "유사 설계AI 비교",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "스카이폴AI 매출",
-          "reason": "사업 규모 관심",
+          "keyword": "스카이폴AI 투자유치",
+          "reason": "시리즈 투자 관심",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -3889,8 +4229,14 @@
       "lane": "tech",
       "issueStatus": "declining",
       "isHot": false,
-      "why": "AI기업 엘리스그룹이 코스닥 상장 첫날 30%대 급락했다.",
+      "why": "AI 투자 회의론 속 엘리스그룹 코스닥 상장 첫날 30%가량 급락",
       "headlines": [
+        {
+          "title": "외신, 엘리스 상장 첫날 폭락 주목…\"AI 투자 회의론 커져\"",
+          "press": "view.asiae.co.kr",
+          "publishedAt": "2026-10-20T20:42:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/277/0005831169?sid=101"
+        },
         {
           "title": "하락장에 ‘1조 대어’도 별 수 없나…AI 엘리스그룹, 상장 첫날 30% 뚝",
           "press": "mk.co.kr",
@@ -3902,12 +4248,6 @@
           "press": "hankyung.com",
           "publishedAt": "2026-10-20T00:10:00.000Z",
           "link": "https://n.news.naver.com/mnews/article/015/0005344322?sid=101"
-        },
-        {
-          "title": "AI 인프라기업 엘리스, 코스닥 상장 첫날 32% 급락 마감(종합)",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-20T07:21:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014266734?sid=101"
         }
       ],
       "concentrated": [
@@ -3927,11 +4267,6 @@
           "origin": "autocomplete"
         },
         {
-          "keyword": "엘리스그룹 청약",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
           "keyword": "엘리스그룹 수요예측",
           "searchVolume": null,
           "origin": "autocomplete"
@@ -3942,54 +4277,23 @@
           "origin": "autocomplete"
         },
         {
+          "keyword": "엘리스그룹 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "엘리스그룹 청약",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
           "keyword": "엘리스그룹 균등",
           "searchVolume": null,
           "origin": "autocomplete"
-        },
-        {
-          "keyword": "공모주 엘리스그룹",
-          "searchVolume": null,
-          "origin": "autocomplete"
         }
       ],
-      "nextWave": [
-        {
-          "keyword": "엘리스그룹 전망",
-          "reason": "급락 후 반등 여부 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "엘리스그룹 손절",
-          "reason": "공모 투자자 대응 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "엘리스그룹 데이터센터",
-          "reason": "AI 인프라 사업 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "엘리스그룹 유통물량",
-          "reason": "급락 원인 물량 확인",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "엘리스그룹 재무",
-          "reason": "실적 건전성 점검",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "nextWave": [],
+      "rowCount": 1
     },
     {
       "issue": "MDS테크",
@@ -3997,7 +4301,7 @@
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "MDS테크가 휴머노이드 홈로봇에 40억원 규모 AI 솔루션을 공급한다.",
+      "why": "MDS테크가 휴머노이드 홈로봇에 엔비디아 AI칩 40억원 규모 공급",
       "headlines": [
         {
           "title": "MDS테크, 피지컬 AI 사업 본격 매출화",
@@ -4006,16 +4310,16 @@
           "link": "https://n.news.naver.com/mnews/article/018/0006391967?sid=101"
         },
         {
+          "title": "MDS테크, 휴머노이드용 엔비디아 AI 칩 40억원 규모 공급",
+          "press": "sedaily.com",
+          "publishedAt": "2026-10-20T21:01:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/011/0004673367?sid=101"
+        },
+        {
           "title": "MDS테크, 휴머노이드 홈로봇 프로젝트 40억원 수주",
           "press": "newspim.com",
           "publishedAt": "2026-10-20T00:46:00.000Z",
           "link": "https://www.newspim.com/news/view/20261020000284"
-        },
-        {
-          "title": "MDS테크, ‘휴머노이드 홈로봇’ 사업 참여",
-          "press": "biz.heraldcorp.com",
-          "publishedAt": "2026-10-20T02:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/016/0002711810?sid=101"
         }
       ],
       "concentrated": [
@@ -4030,12 +4334,12 @@
           "origin": "autocomplete"
         },
         {
-          "keyword": "mds테크 채용",
+          "keyword": "mds테크 배당",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "mds테크 모회사",
+          "keyword": "mds테크 채용",
           "searchVolume": null,
           "origin": "autocomplete"
         },
@@ -4055,43 +4359,15 @@
           "origin": "autocomplete"
         },
         {
-          "keyword": "mds테크 거래정지",
+          "keyword": "mds테크 모회사",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [
         {
-          "keyword": "MDS테크 주가 전망",
-          "reason": "수주 호재 주가 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "휴머노이드 홈로봇",
-          "reason": "로봇 제품 실체 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "MDS테크 관련주",
-          "reason": "피지컬AI 테마 확인",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "MDS테크 엔비디아",
-          "reason": "젯슨 공급 협력 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "MDS테크 매출",
-          "reason": "매출화 규모 궁금",
+          "keyword": "MDS테크 주가",
+          "reason": "수주 호재 반영",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -4105,7 +4381,7 @@
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "모픽이 클로드·코덱스서 영상 제작을 연결하는 MCP를 출시했다.",
+      "why": "클로드 코드로 구글TV 앱 정리해 메모리 192MB→83MB 절감 사례 화제",
       "headlines": [
         {
           "title": "스패로우, AI 생성코드 보안 어시스턴트 日 시장 공개",
@@ -4114,16 +4390,16 @@
           "link": "https://n.news.naver.com/mnews/article/003/0014261926?sid=105"
         },
         {
+          "title": "클로드 코드로 TCL 구글TV 앱 25개를 껐더니 메모리 192MB가 83MB로 줄었다",
+          "press": "wikitree.co.kr",
+          "publishedAt": "2026-10-20T15:12:00.000Z",
+          "link": "https://www.wikitree.co.kr/articles/1167807"
+        },
+        {
           "title": "클로드·코덱스에서 영상 제작까지···모픽AI, 외부 AI 연동 확대",
           "press": "enewstoday.co.kr",
           "publishedAt": "2026-10-20T08:08:00.000Z",
           "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2482386"
-        },
-        {
-          "title": "익숙한 LLM 안에서 영상 만든다… 모픽, 클로드·ChatGPT 연결형 '모픽 M...",
-          "press": "kr.aving.net",
-          "publishedAt": "2026-10-20T01:28:00.000Z",
-          "link": "https://kr.aving.net/news/articleView.html?idxno=1815784"
         }
       ],
       "concentrated": [
@@ -4148,17 +4424,12 @@
           "origin": "autocomplete"
         },
         {
-          "keyword": "클로드 코드 설치",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
           "keyword": "클로드 코드 교육",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "클로드 코드 비용",
+          "keyword": "클로드 코드 설치",
           "searchVolume": null,
           "origin": "autocomplete"
         },
@@ -4170,8 +4441,15 @@
       ],
       "nextWave": [
         {
-          "keyword": "클로드 코드 비용",
-          "reason": "유료 요금 체계 확인",
+          "keyword": "클로드 코드 요금",
+          "reason": "비용 부담 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "클로드 코드 사례",
+          "reason": "실사용 적용 참고",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -4185,7 +4463,7 @@
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "NC AI가 바르코 3D·사운드 생성 AI 첫 달 구독료 50% 할인을 시작했다.",
+      "why": "NC AI가 바르코 3D·사운드 생성 AI 첫 달 구독료 50% 할인",
       "headlines": [
         {
           "title": "NC AI, 콘텐츠 제작 문턱 낮춘다…구독료 50% 할인",
@@ -4218,15 +4496,7 @@
           "origin": "autocomplete"
         }
       ],
-      "nextWave": [
-        {
-          "keyword": "NC AI 경쟁사",
-          "reason": "유사 생성AI 비교",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
+      "nextWave": [],
       "rowCount": 0
     },
     {
@@ -4235,14 +4505,8 @@
       "lane": "tech",
       "issueStatus": "rising",
       "isHot": true,
-      "why": "트럼프 행정부가 중국 AI '딥시크'를 연방기관서 보안 우려로 퇴출했다.",
+      "why": "보안 우려로 트럼프 행정부가 美 연방기관서 중국 딥시크 AI 퇴출",
       "headlines": [
-        {
-          "title": "美, 中 딥시크 AI 정부기관서 퇴출…기술 패권 경쟁 격화",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-20T01:12:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014264826?sid=104"
-        },
         {
           "title": "트럼프 행정부, 연방기관 시스템서 中 '딥시크' AI 모델 퇴출",
           "press": "yna.co.kr",
@@ -4254,16 +4518,22 @@
           "press": "mt.co.kr",
           "publishedAt": "2026-10-20T02:32:00.000Z",
           "link": "https://n.news.naver.com/mnews/article/008/0005428911?sid=101"
+        },
+        {
+          "title": "트럼프 행정부, 미 연방기관서 중국 딥시크 퇴출 추진",
+          "press": "hani.co.kr",
+          "publishedAt": "2026-10-20T10:12:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/028/0002828360?sid=104"
         }
       ],
       "concentrated": [
         {
-          "keyword": "딥시크 ai",
+          "keyword": "딥시크 뜻",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "딥시크 뜻",
+          "keyword": "딥시크 ai",
           "searchVolume": null,
           "origin": "autocomplete"
         },
@@ -4301,28 +4571,7 @@
       "nextWave": [
         {
           "keyword": "딥시크 대안",
-          "reason": "퇴출 후 대체 AI 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "딥시크 국내 사용",
-          "reason": "한국 사용 가능 여부 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "딥시크 보안 문제",
-          "reason": "구체 보안 우려 확인",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "딥시크 관련주",
-          "reason": "퇴출 영향 주식 체크",
+          "reason": "대체 AI 수요",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -4367,7 +4616,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "에릭 슈밋",
