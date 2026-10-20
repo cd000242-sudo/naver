@@ -37,7 +37,9 @@ describe('sourcePipeline — 자료 블록 단위 정제·라벨·손실 계측'
       doc('S02', `${ON_TOPIC} 두 번째 기사 본문입니다. 이 조치는 무주택 서민의 자산 형성을 돕기 위한 것으로, 국토교통부는 후속 대책도 순차적으로 발표할 계획이라고 밝혔다. 전문가들은 이번 인상이 청약 경쟁률에 영향을 줄 것으로 내다봤다.`),
       doc('S03', `${ON_TOPIC} 세 번째 기사 본문입니다. 지역 부동산 업계에서는 이번 금리 인상이 청약 시장 전반에 미칠 파급 효과를 주목하고 있으며, 실수요자들의 자금 계획에도 변화가 예상된다는 분석이 나온다.`, { pubDate: undefined, dateStatus: 'UNKNOWN_DATE' }),
     ];
-    const result = prepareSourceMaterial({ rawText: '', contentMode: 'seo', metadata: { sourceDocuments: docs } }, KEYWORD);
+    // This checks block cleaning and labels; freeze freshness at the fixture's publication period.
+    const result = prepareSourceMaterial({ rawText: '', contentMode: 'seo', metadata: { sourceDocuments: docs } }, KEYWORD,
+      { now: new Date('2026-09-22T00:00:00Z') });
     expect(result.metrics.usedStructured).toBe(true);
     expect(result.metrics.rawSources).toBe(3);
     expect(result.metrics.acceptedSources).toBe(3);
@@ -68,7 +70,7 @@ describe('sourcePipeline — 자료 블록 단위 정제·라벨·손실 계측'
     }
     const bundle = `[자료 등급 — 이 글의 재료가 어디서 왔는지]\n기사 8건이 근거를 받칩니다.\n\n=== 사실 자료 (수치·조건·절차는 이 범위에서만 사용) ===\n※ 번호표 안내\n${parts.join('\n\n')}\n\n=== 검색 결과 스니펫 (맥락 참고용) ===\n【스니펫】\n청약통장 금리 인상 안내`;
     expect(bundle.length).toBeGreaterThan(29000);
-    const result = prepareSourceMaterial({ rawText: bundle, contentMode: 'seo', metadata: {} }, KEYWORD);
+    const result = prepareSourceMaterial({ rawText: bundle, contentMode: 'seo', metadata: {} }, KEYWORD, { now: new Date('2026-09-22T00:00:00Z') });
     expect(result.metrics.usedStructured).toBe(false);
     expect(result.metrics.rawSources).toBe(8);
     expect(result.rawText.length).toBeGreaterThan(bundle.length * 0.9);
@@ -82,17 +84,17 @@ describe('sourcePipeline — 자료 블록 단위 정제·라벨·손실 계측'
       doc('S01', ON_TOPIC),
       doc('S02', '쌍꺼풀 수술 비용과 사각턱 보톡스 후기입니다. 병원 선택 기준을 정리했습니다.', { sourceType: 'blog', sourceTier: 'BLOG', sourceName: '티스토리' }),
     ];
-    const result = prepareSourceMaterial({ rawText: '', contentMode: 'seo', metadata: { sourceDocuments: docs } }, KEYWORD);
+    const result = prepareSourceMaterial({ rawText: '', contentMode: 'seo', metadata: { sourceDocuments: docs } }, KEYWORD, { now: new Date('2026-09-22T00:00:00Z') });
     expect(result.metrics.acceptedSources).toBe(1);
     expect(result.metrics.rejectedSources).toBe(1);
     expect(result.rawText).not.toContain('쌍꺼풀 수술');
-    const allOff = prepareSourceMaterial({ rawText: '', contentMode: 'seo', metadata: { sourceDocuments: [docs[1]] } }, KEYWORD);
+    const allOff = prepareSourceMaterial({ rawText: '', contentMode: 'seo', metadata: { sourceDocuments: [docs[1]] } }, KEYWORD, { now: new Date('2026-09-22T00:00:00Z') });
     expect(allOff.rawText).toContain('쌍꺼풀 수술');
     expect(allOff.metrics.rejectedReasons.ALL_REJECTED_KEPT).toBe(1);
   });
 
   it('URL mode keeps the legacy string path (block-aware noise strip only)', () => {
-    const result = prepareSourceMaterial({ rawText: `${ON_TOPIC}\n무단 전재 및 재배포 금지`, contentMode: 'custom', url: 'https://n.news.naver.com/x', metadata: {} }, KEYWORD);
+    const result = prepareSourceMaterial({ rawText: `${ON_TOPIC}\n무단 전재 및 재배포 금지`, contentMode: 'custom', url: 'https://n.news.naver.com/x', metadata: {} }, KEYWORD, { now: new Date('2026-09-22T00:00:00Z') });
     expect(result.metrics.usedStructured).toBe(false);
     expect(result.rawText).toContain('국토교통부 발표에 따르면');
   });
