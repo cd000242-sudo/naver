@@ -63,3 +63,32 @@ test('새로 뜬 말도 지금 써야 할 키워드에 들고, 급상승과 같�
   assert.deepEqual(ids(adsenseNowPicks(cards, NOW, 6)), ['rise', 'brand-new', 'season']);
   assert.ok(adsenseOrderTier(card('n', { dc: 900, verdict: 'new' }), NOW) < adsenseOrderTier(card('p', { dc: 100 }), NOW));
 });
+
+// 2026-10-20 사장님 "순서 섞기해도 안 섞이네요" — 경쟁 등급 6칸으로 나누니 맨 위 묶음이 1장뿐인 화면이 많았다(실측: 워드프레스 · 정부지원금 1/4/15).
+test('섞기 묶음은 굵게 — 실측 · 문서/검색 5배 이하(0·1등급)는 한 묶음이라 섞으면 맨 위가 바뀐다', () => {
+  const low = card('low', { dc: 300 });
+  const mid = card('mid', { dc: 3000 });
+  assert.equal(adsenseOrderTier(low, NOW), adsenseOrderTier(mid, NOW));
+  const cards = ['a', 'b', 'c', 'd', 'e', 'f'].map((id, i) => card(id, { dc: 200 + i * 700 }));
+  const firsts = new Set([1, 2, 3, 4, 5, 6, 7, 8].map((seed) => shuffleAdsenseCards(cards, NOW, seed)[0].id));
+  assert.ok(firsts.size > 1, '시드가 바뀌면 맨 위 카드가 바뀐다');
+});
+
+// 2026-10-20 — 작성 안내 새 칸: 이 글이 해결할 문제 · 행동 키워드 제목 · 지식인 질문(링크는 지식인 주소만)
+import { withGuides } from '../src/lib/homefeedGuides.mjs';
+test('안내 파일의 해결 · 행동 제목 · 지식인 질문이 카드에 붙고, 지식인 밖 링크는 버린다', () => {
+  const board = { candidates: [{ id: 'a', sources: [] }] };
+  const store = { guides: [{ id: 'a', urls: [], guide: { direction: '방향 문장입니다', searchTargets: [], mustInclude: ['x'], mustAvoid: [], checkBefore: [], solves: ['문제 → 해결'], actionTitles: ['기초연금 모의계산 하는 법'] }, kinQuestions: [{ title: '질문1', link: 'https://kin.naver.com/qna/detail.naver?docId=1', views: 10 }, { title: '나쁜 링크', link: 'https://evil.example/x', views: 1 }] }] };
+  const c = withGuides(board, store).candidates[0];
+  assert.deepEqual(c.solves, ['문제 → 해결']);
+  assert.deepEqual(c.actionTitles, ['기초연금 모의계산 하는 법']);
+  assert.equal(JSON.stringify(c.kinQuestions), JSON.stringify([{ title: '질문1', link: 'https://kin.naver.com/qna/detail.naver?docId=1', views: 10, answers: null, askedAt: '' }]));
+});
+
+test('카드에 해결할 문제 · 지식인 질문 · 벤치마킹할 곳 · 그래프 대기 안내가 배선돼 있다', async () => {
+  const { readFileSync } = await import('node:fs');
+  const src = readFileSync(new URL('../src/components/leword/adsense/AdsenseBenchmarkBoard.tsx', import.meta.url), 'utf8');
+  for (const part of ['<DemandBlock c={c} />', '<DemandPending c={c} />', '<SolveBlock c={c} />', '<KinBlock c={c} />', '<BenchmarkBlock c={c} />']) assert.ok(src.includes(part), part);
+  const aids = readFileSync(new URL('../src/components/leword/adsense/AdsenseWriteAids.tsx', import.meta.url), 'utf8');
+  assert.match(aids, /callWorkerRaw\('keyword-frontal', \{ keywords: query \}\)/);
+});

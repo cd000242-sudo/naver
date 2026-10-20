@@ -11,6 +11,9 @@ export interface AdsenseCard {
   /** 작성 안내(2026-10-13, 앱 레포 adsense-guides.yml → /data/adsense-benchmark-guides.json 을 화면이 합친다). 없으면 칸을 안 그린다. */
   writingDirection?: string; searchTargets?: string[]; mustInclude?: string[]; mustAvoid?: string[]; verificationNeeded?: string[];
   demand?: AdsenseDemand;
+  /** 작성 안내 새 칸(2026-10-20): 이 글이 해결할 문제 · 행동 키워드 제목 · 지식인 질문. */
+  solves?: string[]; actionTitles?: string[];
+  kinQuestions?: Array<{ title: string; link: string; views: number | null; answers: number | null; askedAt: string }>;
 }
 export interface AdsenseTitleShape { count: number; lengthMedian: number | null; yearPct: number | null; numberPct: number | null; questionPct: number | null; bracketPct: number | null }
 export interface AdsenseBoard {
