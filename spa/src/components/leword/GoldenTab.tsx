@@ -20,6 +20,9 @@ import { loadSavedBoard, boardSourceNote } from '../../lib/boardBridge';
 import { currentGoldenBriefRows } from '../../lib/goldenCurrentBriefs';
 import { defaultGoldenDailyView, goldenDailyCheckedAt, goldenDailyStatus, selectGoldenDailyRows, summarizeGoldenDaily } from '../../lib/goldenDailyModel';
 import GoldenTrendCandidates, { type GoldenTrendCandidate } from './GoldenTrendCandidates';
+// 검색어 덧붙이기(2026-10-21 사장님 "리더남 황금키워드에도 마찬가지") — 판정 문장 · 해결할 문제 · 행동 제목 · 벤치마킹, 같은 등급 · 입찰가 안에서 지금 뜨는 키워드 먼저
+import { enrichKey, isHotEnrich, loadKeywordEnrich, type KeywordEnrich } from '../../lib/keywordEnrich.mjs';
+import KeywordAids from './shared/KeywordAids';
 
 /**
  * 네이버 데이터랩 검색어 트렌드. 우리가 그리는 그림이 아니라 네이버가 그린 것을 연다.
@@ -44,7 +47,7 @@ type Board = {
 };
 
 const BOARD_URL = '/data/preemption-board.json';
-function GoldenTab({ onAnalyze, onPlan }: { onAnalyze: (keyword: string) => void; onPlan?: (keyword: string) => void }) {
+function GoldenTab({ onAnalyze, onPlan, enrich }: { onAnalyze: (keyword: string) => void; onPlan?: (keyword: string) => void; enrich?: Map<string, KeywordEnrich> }) {
     const [board, setBoard] = useState<Board | null>(null);
     const [status, setStatus] = useState<'loading' | 'ready' | 'empty' | 'error'>('loading');
     const [topic, setTopic] = useState('전체');
@@ -54,6 +57,8 @@ function GoldenTab({ onAnalyze, onPlan }: { onAnalyze: (keyword: string) => void
     const [moneyMin, setMoneyMin] = useState(0);
     // 라이선스 코드 또는 자기 API 키. 둘 중 하나면 전부 열린다.
     const [unlocked, setUnlocked] = useState(() => isUnlocked());
+    // 덧붙이기 자료는 바깥 껍데기(GoldenTabWithEnrich)가 읽어 넘긴다 — 이 컴포넌트에 상태 · effect 를 늘리면 화면 테스트의 훅 순서가 밀린다.
+    const enrichOf = (keyword: string) => enrich?.get(enrichKey(keyword));
     /** 실행 계획을 펼친 카드. 한 번에 하나만 연다 — 다 펼치면 목록이 안 읽힌다. */
     const [openPlan, setOpenPlan] = useState('');
     const [focus, setFocus] = useState<GoldenFocus>('all');
@@ -235,6 +240,13 @@ function GoldenTab({ onAnalyze, onPlan }: { onAnalyze: (keyword: string) => void
             const mb = moneyRank(b.money);
             if (ma !== null && mb !== null && ma !== mb) return ma - mb;
             /*
+             * 같은 등급 · 같은 입찰가 구간이면 **지금 검색 관심이 뜨는 말을 위로**(2026-10-21 사장님 "황금키워드에도 마찬가지").
+             * 데이터랩 주별 실측 판정(새로 뜬 · 오르는 · 곧 시즌 — 검색어 덧붙이기)이다. 못 잰 말은 벌주지 않고 아래 축으로 넘긴다.
+             */
+            const ha = isHotEnrich(enrichOf(a.keyword));
+            const hb = isHotEnrich(enrichOf(b.keyword));
+            if (ha !== hb) return ha ? -1 : 1;
+            /*
              * **오르는 중인 것을 위로**(사장님 지시 2026-08-29: "우상향이 예상되는
              * 키워드가 특히 상위로 와야 된다").
              *
@@ -333,7 +345,7 @@ function GoldenTab({ onAnalyze, onPlan }: { onAnalyze: (keyword: string) => void
             depth += 1;
         }
         return hoistFree(interleaved);
-    }, [dailyRows, dailyView, topic, writeLane, moneyMin, focus, now, shuffleSeed, unlocked, freeNames]);
+    }, [dailyRows, dailyView, topic, writeLane, moneyMin, focus, now, shuffleSeed, unlocked, freeNames, enrich]);
 
     /** 계획 창에 띄울 행. 목록 밖에 한 개만 둔다 — 카드마다 창을 만들 이유가 없다. */
     const planRow = useMemo(() => rows.find((row) => row.keyword === openPlan) || null, [rows, openPlan]);
@@ -477,9 +489,9 @@ function GoldenTab({ onAnalyze, onPlan }: { onAnalyze: (keyword: string) => void
                                     ? !freeNames.includes(row.keyword)
                                     : index >= FREE_BOARD_ROWS);
                             return (
+                        <div key={`${row.topic}-${row.keyword}`}>
                         <PreemptionCard
                             onPlan={onPlan}
-                            key={`${row.topic}-${row.keyword}`}
                             /*
                              * 행은 발행본 그대로 넘긴다 — 시기 배지(timingGroup)·장기 추세(trendLabel)는
                              * 발행이 잰 시즌성 실측이다. 09-28 판이 이 둘을 지우고 7일 라벨로 덮어써서
@@ -510,6 +522,8 @@ function GoldenTab({ onAnalyze, onPlan }: { onAnalyze: (keyword: string) => void
                             onMindmap={() => openMindmap(row)}
                             onAnalyze={onAnalyze}
                         />
+                        {!locked && <KeywordAids query={row.keyword} enrich={enrichOf(row.keyword)} variant="issue" />}
+                        </div>
                             );
                         })}
                     </div>
@@ -577,6 +591,13 @@ function GoldenTab({ onAnalyze, onPlan }: { onAnalyze: (keyword: string) => void
             )}
         </>
     );
+}
+
+/** 덧붙이기 자료(/data/keyword-enrich.json)를 읽어 황금 탭에 넘기는 껍데기(2026-10-21). */
+export function GoldenTabWithEnrich(props: { onAnalyze: (keyword: string) => void; onPlan?: (keyword: string) => void }) {
+    const [enrich, setEnrich] = useState<Map<string, KeywordEnrich>>(() => new Map());
+    useEffect(() => { let alive = true; void loadKeywordEnrich().then((map) => { if (alive) setEnrich(map); }); return () => { alive = false; }; }, []);
+    return <GoldenTab {...props} enrich={enrich} />;
 }
 
 export default GoldenTab;

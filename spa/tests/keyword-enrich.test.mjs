@@ -57,3 +57,13 @@ test('틈새 카드에 판정 문장 · 해결할 문제 · 행동 제목 · 벤
   const aids = readFileSync(new URL('../src/components/leword/shared/KeywordAids.tsx', import.meta.url), 'utf8');
   assert.match(aids, /variant === 'issue'/);
 });
+
+// 2026-10-21 사장님 "리더남 황금키워드에도 마찬가지" — 큰 순서(등급 → 입찰가 구간)는 지키고, 그 안에서 지금 뜨는 키워드 먼저 · 카드에 덧붙이기.
+test('황금 카드에 판정 문장 · 해결할 문제 · 행동 제목 · 벤치마킹이 붙고, 등급 · 입찰가 다음 순서로 지금 뜨는 키워드가 앞선다', () => {
+  const tab = readFileSync(new URL('../src/components/leword/GoldenTab.tsx', import.meta.url), 'utf8');
+  assert.match(tab, /<KeywordAids query=\{row\.keyword\} enrich=\{enrichOf\(row\.keyword\)\} variant="issue" \/>/);
+  const money = tab.indexOf('if (ma !== null && mb !== null && ma !== mb) return ma - mb;');
+  const hot = tab.indexOf('isHotEnrich(enrichOf(a.keyword))');
+  const slope = tab.indexOf('const sa = slope(a);');
+  assert.ok(money > 0 && hot > money && slope > hot, '등급 → 입찰가 → 지금 뜨는 → 오름세 순');
+});
