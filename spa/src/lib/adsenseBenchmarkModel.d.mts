@@ -1,6 +1,6 @@
 export interface AdsenseSource { id: string; name: string; grade: string; category: string; title: string; url: string; publishedAt: string | null; platform?: string }
 /** 지금 쓰면 트래픽이 오나(2026-10-20, 앱 레포 adsense-benchmarks-trend.cjs — 데이터랩 주별 실측). */
-export interface AdsenseDemand { verdict: 'rising' | 'season-soon' | 'steady' | 'cooling' | 'past-peak' | 'unknown'; label: string; fact: string; recentChangePct: number | null; lastYearNextPct: number | null; series: number[]; asOf: string | null }
+export interface AdsenseDemand { verdict: 'new' | 'rising' | 'season-soon' | 'steady' | 'cooling' | 'past-peak' | 'unknown'; label: string; fact: string; recentChangePct: number | null; lastYearNextPct: number | null; series: number[]; asOf: string | null }
 export interface AdsenseCard {
   id: string; keyword: string; title: string; category: string; grade: string; recommended: boolean; priority: number;
   publishedAt: string | null; capturedAt: string; why: string[];

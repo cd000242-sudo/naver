@@ -7,6 +7,7 @@ import { useRef, useState } from 'react';
 import { adsenseCompetition, blogCount, type AdsenseCard, type AdsenseDemand } from '../../../lib/adsenseBenchmarkModel.mjs';
 
 const TONE: Record<AdsenseDemand['verdict'], { fg: string; bg: string }> = {
+    new: { fg: '#3b0a24', bg: '#f9a8d4' },
     rising: { fg: '#052e16', bg: '#4ade80' },
     'season-soon': { fg: '#3b2a07', bg: '#fbbf24' },
     steady: { fg: '#e2e8f0', bg: '#334155' },
@@ -30,7 +31,7 @@ export function DemandSpark({ series, verdict }: { series: number[]; verdict: Ad
     const step = (w - pad * 2) / (series.length - 1);
     const xy = series.map((v, i) => [pad + i * step, h - pad - (v / max) * (h - pad * 2)] as const);
     const line = xy.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' ');
-    const stroke = verdict === 'rising' ? '#4ade80' : verdict === 'season-soon' ? '#fbbf24' : verdict === 'cooling' || verdict === 'past-peak' ? '#fb7185' : '#7c9cff';
+    const stroke = verdict === 'new' ? '#f9a8d4' : verdict === 'rising' ? '#4ade80' : verdict === 'season-soon' ? '#fbbf24' : verdict === 'cooling' || verdict === 'past-peak' ? '#fb7185' : '#7c9cff';
     const onMove = (e: React.MouseEvent<SVGSVGElement>) => {
         const r = ref.current?.getBoundingClientRect();
         if (!r || !r.width) return;
@@ -69,7 +70,7 @@ export function NowPicksPanel({ picks, now, onPick, platformLabel }: { picks: Ad
     return (
         <section aria-label="지금 써야 할 키워드" style={{ margin: '6px 0 16px', padding: '16px 18px', border: '1px solid #b8962e', borderRadius: 16, background: 'radial-gradient(ellipse at 0 0,rgba(74,222,128,.10),transparent 60%),linear-gradient(130deg,#1c2133,#111a2a)' }}>
             <h3 style={{ margin: 0, fontSize: 17, color: '#fff7d1', letterSpacing: '-.3px' }}>지금 써야 할 키워드 <small style={{ fontSize: 12, color: '#fcd34d', fontWeight: 500 }}>{platformLabel} · {picks.length}개</small></h3>
-            <p style={{ margin: '4px 0 12px', fontSize: 12.5, color: '#b6c4d6' }}>데이터랩 주별 실측으로 <b style={{ color: '#4ade80' }}>지금 검색 관심이 오르고 있거나</b> <b style={{ color: '#fbbf24' }}>작년 이맘때 곧 올랐던</b> 소재 중, 검색량 대비 블로그 문서가 적은 것만 골랐습니다.</p>
+            <p style={{ margin: '4px 0 12px', fontSize: 12.5, color: '#b6c4d6' }}>데이터랩 주별 실측으로 <b style={{ color: '#f9a8d4' }}>새로 검색되기 시작했거나</b> <b style={{ color: '#4ade80' }}>지금 검색 관심이 오르고 있거나</b> <b style={{ color: '#fbbf24' }}>작년 이맘때 곧 올랐던</b> 소재 중, 검색량 대비 블로그 문서가 적은 것만 골랐습니다.</p>
             <div style={{ display: 'grid', gap: 8 }}>
                 {picks.map((c) => {
                     const comp = adsenseCompetition(c, now);
