@@ -47,3 +47,13 @@ test('시즌 · 글감 화면에 덧붙이기가 배선돼 있다', () => {
   assert.match(briefs, /<KeywordAids /);
   assert.match(briefs, /isHotEnrich\(/);
 });
+
+// 2026-10-20 사장님 "실시간검색어 틈새키워드도 마찬가지로" — 카드에 이미 있는 30일 추세 · 지식인은 겹치지 않게 빼고 붙인다.
+test('틈새 카드에 판정 문장 · 해결할 문제 · 행동 제목 · 벤치마킹이 붙고, 지금 뜨는 키워드 먼저 섞는다', () => {
+  const tab = readFileSync(new URL('../src/components/leword/IssueNicheTab.tsx', import.meta.url), 'utf8');
+  assert.match(tab, /<KeywordAids query=\{row\.keyword\} enrich=\{enrichOf\(row\.keyword\)\} variant="issue" \/>/);
+  assert.match(tab, /shuffleWithinTiers\(/);
+  assert.match(tab, /순서 섞기/);
+  const aids = readFileSync(new URL('../src/components/leword/shared/KeywordAids.tsx', import.meta.url), 'utf8');
+  assert.match(aids, /variant === 'issue'/);
+});

@@ -14,6 +14,11 @@ import RealtimeStrip from './RealtimeStrip';
 import { realtimeSources, type RealtimeSourceId } from '../../lib/realtimeSources.mjs';
 import LiveNichePanel from './LiveNichePanel';
 import { useMindmap } from './useMindmap';
+// 검색어 덧붙이기(2026-10-20 사장님 "실시간검색어 틈새키워드도 마찬가지로") — 판정 문장 · 해결할 문제 · 행동 제목 · 벤치마킹, 지금 뜨는 키워드 먼저 섞기
+import { enrichKey, isHotEnrich, loadKeywordEnrich, type KeywordEnrich } from '../../lib/keywordEnrich.mjs';
+import { shuffleWithinTiers } from '../../lib/hourlyShuffle.mjs';
+import { useShuffleSeed } from '../../lib/useShuffleSeed';
+import KeywordAids from './shared/KeywordAids';
 import { fetchHotKeywords, fetchRealtimeIssues } from '../../lib/keywordApi';
 import {
     compactKey, fetchIssueBoard, rowsOfIssue,
@@ -122,6 +127,10 @@ function IssueNicheTab({ onAnalyze, onPlan }: { onAnalyze?: (keyword: string) =>
     const [chartKeyword, setChartKeyword] = useState('');
     const [jumpTo, setJumpTo] = useState('');
     const [unlocked, setUnlocked] = useState(() => isUnlocked());
+    const [enrich, setEnrich] = useState<Map<string, KeywordEnrich>>(() => new Map());
+    useEffect(() => { let alive = true; void loadKeywordEnrich().then((map) => { if (alive) setEnrich(map); }); return () => { alive = false; }; }, []);
+    const enrichOf = (keyword: string) => enrich.get(enrichKey(keyword));
+    const [seed, reshuffle] = useShuffleSeed();
     /* 서브탭 — 실시간 검색어가 먼저, 실검 틈새는 그다음(사장님 2026-09-10). */
     const [sub, setSub] = useState<'live' | 'niche'>('live');
     const nowMs = useEvidenceClock();
@@ -237,12 +246,14 @@ function IssueNicheTab({ onAnalyze, onPlan }: { onAnalyze?: (keyword: string) =>
 
     const rows = useMemo(() => {
         const list = verdictRows.filter(inLane);
-        if (unlocked) return list;
+        // 로그인하면 지금 뜨는(새로 뜬 · 오르는 · 곧 시즌) 키워드 묶음을 먼저, 묶음 안은 매시 정각 · [순서 섞기]마다 섞는다.
+        // 무료(잠김)는 발행본이 고정한 3건 그대로 — 섞으면 매시간 다른 3건이 보여 무료 한도가 사실상 풀린다.
+        if (unlocked) return shuffleWithinTiers(list, (row: IssueBoardRow) => (isHotEnrich(enrichOf(row.keyword)) ? 0 : 1), seed);
         // 무료 3건은 발행본이 하루 동안 고정한 이름이다 — 위로 올려 블러 사이에 흩어지지 않게 한다.
         const freeNames = freeNamesOf(board);
         if (freeNames.length === 0) return list;
         return [...list.filter((row) => freeNames.includes(row.keyword)), ...list.filter((row) => !freeNames.includes(row.keyword))];
-    }, [verdictRows, lane, unlocked, board]);
+    }, [verdictRows, lane, unlocked, board, enrich, seed]);
 
     const flowItems = useMemo(() => briefs.filter(inLane), [briefs, lane]);
 
@@ -454,6 +465,12 @@ role="group" aria-label="판정">
                                 />
                             )}
 
+                            {unlocked && rows.length > 1 && (
+                                <div className="hfb-shuffle" style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '4px 0 8px' }}>
+                                    <button type="button" className="lw-picks-btn" onClick={() => reshuffle()}>순서 섞기</button>
+                                    <small style={{ color: '#9baac1', fontSize: 11 }}>지금 검색 관심이 뜨는 키워드가 먼저 · 같은 묶음 안은 매시 정각 새로 섞입니다</small>
+                                </div>
+                            )}
                             <div className="lw-board-list">
                                 {rows.map((row, index) => {
                                     const freeNames = freeNamesOf(board);
@@ -461,9 +478,9 @@ role="group" aria-label="판정">
                                         ? false
                                         : (freeNames.length > 0 ? !freeNames.includes(row.keyword) : index >= FREE_ISSUE_ROWS);
                                     return (
+                                        <div key={`${row.issue}-${row.keyword}`}>
                                         <PreemptionCard
                                             onPlan={onPlan}
-                                            key={`${row.issue}-${row.keyword}`}
                                             row={row}
                                             rank={view === 'observe' ? 0 : index + 1}
                                             variant="issue"
@@ -483,6 +500,8 @@ role="group" aria-label="판정">
                                             onMindmap={() => openMindmap(row)}
                                             onAnalyze={onAnalyze}
                                         />
+                                        {!locked && <KeywordAids query={row.keyword} enrich={enrichOf(row.keyword)} variant="issue" />}
+                                        </div>
                                     );
                                 })}
                             </div>
