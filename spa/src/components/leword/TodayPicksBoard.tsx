@@ -40,7 +40,13 @@ interface PickRow {
     /** 네이버 광고 3위 입찰가 실측(2026-09-24) — 옛 회차 행엔 없다. */
     money?: MoneyBid | null;
     freshness?: { status: 'new' | 'repeated'; lastShownAt?: string };
+    /** 초황금(2026-10-20) — 앱 등급표 SSS(월 검색 1,000+ · 문서 5,000↓ · 황금비 5+ 또는 월 검색 100~1,500 · 문서 500↓ · 황금비 3+). */
+    ultra?: boolean;
+    /** 연관 황금(2026-10-20) — 같은 주제에서 이미 잰 황금 중 이 말과 같은 갈래(판에 실린 말 제외). */
+    related?: RelatedPick[];
 }
+
+interface RelatedPick { keyword: string; searchVolume: number; documentCount: number; ratio: number; ultra?: boolean }
 
 interface PickTopic {
     topic: string;
@@ -207,10 +213,27 @@ export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicCha
                                     <tr key={row.keyword}>
                                         <td>
                                             <a href={naverSearchUrl(row.keyword)} target="_blank" rel="noreferrer">{row.keyword}</a>
-                                            {row.ratio >= minRatio && <span className="lw-picks-chip">황금 비율</span>}
+                                            {row.ultra
+                                                ? <span className="lw-picks-chip lw-picks-ultra" title="월 검색 1,000+ · 문서 5,000↓ · 황금비 5+ 또는 월 검색 100~1,500 · 문서 500↓ · 황금비 3+">초황금</span>
+                                                : row.ratio >= minRatio && <span className="lw-picks-chip">황금 비율</span>}
                                             {row.money?.tier === 'high' && <span className="lw-picks-chip lw-picks-money">고단가</span>}
                                             {row.seasonPeakMonth && <span className="lw-picks-chip lw-picks-season">{row.seasonPeakMonth}월 시즌 앞</span>}
                                             {pickFreshnessLabel(row) && <span className="lw-picks-chip" title="최근 추천 이력에 포함된 키워드입니다">{pickFreshnessLabel(row)}</span>}
+                                            {unlocked && (row.related?.length ?? 0) > 0 && (
+                                                <details className="lw-picks-related">
+                                                    <summary>연관 황금 {row.related!.length}</summary>
+                                                    <ul>
+                                                        {row.related!.map((r) => (
+                                                            <li key={r.keyword}>
+                                                                <a href={naverSearchUrl(r.keyword)} target="_blank" rel="noreferrer">{r.keyword}</a>
+                                                                {r.ultra && <span className="lw-picks-chip lw-picks-ultra">초황금</span>}
+                                                                <span className="lw-picks-related-num">월 {num(r.searchVolume)} · 문서 {num(r.documentCount)} · 황금비 {ratioText(r.ratio)}</span>
+                                                                {onAnalyze && <button type="button" className="lw-picks-btn" onClick={() => onAnalyze(r.keyword)}>분석</button>}
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </details>
+                                            )}
                                         </td>
                                         <td className="n">{num(row.searchVolume)}</td>
                                         <td className="n" title={row.measuredAt ? `문서수 실측: ${kst(row.measuredAt)}` : '문서수 실측 시각 미기록'}>{num(row.documentCount)}</td>

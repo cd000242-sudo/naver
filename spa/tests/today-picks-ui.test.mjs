@@ -65,3 +65,16 @@ test('sidebar badges use actual row counts while preserving golden detail',()=>{
  assert.match(page,/className="lw-navi-count"[^\n]+\{topic\.rowCount\}/);
  assert.match(page,/전체 \$\{topic\.rowCount\}개 · 황금 \$\{topic\.golden\}개/);
 });
+
+// 2026-10-20 사장님 "드롭다운 펼치면 연관 황금키워드도 같이 · 초황금키워드면 초황금키워드라고".
+test('초황금 행은 초황금 칩, 펼치면 연관 황금(초황금 표시 포함)이 보이고 로그인 전엔 연관을 숨긴다',()=>{
+ const special=[{keyword:'절임배추',searchVolume:9000,documentCount:100,ratio:90,depth:2,comp:null,source:'hint',ultra:true,freshness:{status:'new'},related:[{keyword:'절임배추 20kg',searchVolume:3000,documentCount:200,ratio:15,ultra:true},{keyword:'절임배추 가격',searchVolume:800,documentCount:600,ratio:1.33,ultra:false}]},...rows.slice(1)];
+ const input={...data,topics:[{topic:'경제',rows:special,targetCount:30,shortfall:0}]};
+ const html=render(true,input);
+ assert.match(html,/절임배추<\/a><span class="lw-picks-chip lw-picks-ultra"[^>]*>초황금<\/span>/);
+ assert.match(html,/<details class="lw-picks-related"><summary>연관 황금 2<\/summary>/);
+ assert.match(html,/절임배추 20kg[\s\S]*초황금[\s\S]*절임배추 가격/);
+ assert.ok(!/후보 2<\/a><span class="lw-picks-chip lw-picks-ultra"/.test(html),'초황금이 아닌 행엔 초황금 칩이 없다');
+ const locked=render(false,input);
+ assert.ok(!locked.includes('lw-picks-related'),'로그인 전엔 연관 황금을 싣지 않는다');
+});

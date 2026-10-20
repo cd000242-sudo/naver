@@ -2219,6 +2219,13 @@ function LewordStyles() {
             .lw-picks-panel-head strong { font-size: 15px; }
             .lw-picks-panel-head span { font-size: 12px; opacity: 0.65; }
             .lw-picks-season { background: color-mix(in srgb, #7dd3fc 16%, transparent); color: #7dd3fc; }
+            /* 초황금 · 연관 황금 펼치기(2026-10-20) */
+            .lw-picks-ultra { background: linear-gradient(135deg, #ffd700, #ffa500); color: #2b1f00; font-weight: 800; }
+            .lw-picks-related { margin-top: 4px; font-size: 12px; }
+            .lw-picks-related summary { cursor: pointer; color: #fcd34d; width: max-content; }
+            .lw-picks-related ul { list-style: none; margin: 6px 0 2px; padding: 8px 10px; display: grid; gap: 6px; border: 1px solid color-mix(in srgb, #ffa500 30%, transparent); border-radius: 8px; background: color-mix(in srgb, #ffa500 6%, transparent); min-width: 320px; }
+            .lw-picks-related li { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+            .lw-picks-related-num { color: var(--lw-muted, #94a3b8); font-variant-numeric: tabular-nums; }
             .lw-picks-grid { display: grid; gap: 8px; margin-top: 10px; }
             .lw-picks-topic { border: 1px solid color-mix(in srgb, currentColor 12%, transparent); border-radius: 10px; background: color-mix(in srgb, currentColor 3%, transparent); }
             .lw-picks-topic summary { cursor: pointer; padding: 10px 14px; display: flex; gap: 10px; align-items: baseline; list-style: none; }
