@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'fs';
+import ts from 'typescript';
 
 function read(rel: string): string {
   return readFileSync(new URL(`../${rel}`, import.meta.url), 'utf8');
@@ -47,7 +48,27 @@ describe('dropshot login button binding', () => {
 
   it('이미지 관리 탭 초기화에서 실제로 호출된다 (죽은 함수 재발 방지)', () => {
     expect(tab).toContain("import { bindAllStaticDropshotLoginUis } from './dropshotLoginUi.js'");
-    expect(tab).toMatch(/initImageManagementTab\(\): Promise<void> \{[\s\S]{0,300}bindAllStaticDropshotLoginUis\(\)/);
+    const source = ts.createSourceFile('imageManagementTab.ts', tab, ts.ScriptTarget.Latest, true);
+    const initialize = source.statements.find((node): node is ts.FunctionDeclaration =>
+      ts.isFunctionDeclaration(node) && node.name?.text === 'initImageManagementTab');
+    expect(initialize?.body).toBeDefined();
+    const calls = new Map<string, number>();
+    const awaits: number[] = [];
+    const visit = (node: ts.Node): void => {
+      // Deferred callbacks do not run as part of synchronous initialization.
+      if (ts.isFunctionLike(node)) return;
+      if (ts.isAwaitExpression(node)) awaits.push(node.getStart(source));
+      if (ts.isCallExpression(node) && ts.isIdentifier(node.expression)) {
+        if (!calls.has(node.expression.text)) calls.set(node.expression.text, node.getStart(source));
+      }
+      ts.forEachChild(node, visit);
+    };
+    visit(initialize!.body!);
+    expect(awaits.length).toBeGreaterThan(0);
+    for (const binding of ['bindAllStaticDropshotLoginUis', 'bindImageAiDisclosureSetting']) {
+      expect(calls.has(binding), `${binding} must be called during initialization`).toBe(true);
+      expect(calls.get(binding), `${binding} must bind before waiting for settings`).toBeLessThan(Math.min(...awaits));
+    }
   });
 
   it('요소가 없으면 조용히 건너뛴다 (다른 화면에서 예외 금지)', () => {
