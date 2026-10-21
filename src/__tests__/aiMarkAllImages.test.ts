@@ -106,7 +106,11 @@ describe('AI mark 발행 루프 — source regression', () => {
     expect(loop).toMatch(/const isAiTarget = resolveAiMarkTarget\(\{\s*\n\s*aiMarkAllImages,/);
     expect(readSrc('configManager.ts')).toMatch(/aiMarkAllImages\?: boolean/);
     expect(readSrc('renderer/modules/imageManagementTab.ts')).toMatch(/getElementById\('image-ai-mark-all'\)/);
-    expect(readSrc('renderer/modules/imageManagementTab.ts')).toMatch(/saveConfig\?\.\(\{ aiMarkAllImages: aiMarkAllCheckbox\.checked \}\)/);
+    const imageTab = readSrc('renderer/modules/imageManagementTab.ts');
+    const initialize = imageTab.slice(imageTab.indexOf('async function initImageManagementTab'));
+    expect(initialize.indexOf('bindImageAiDisclosureSetting(')).toBeGreaterThan(-1);
+    expect(initialize.indexOf('bindImageAiDisclosureSetting(')).toBeLessThan(initialize.indexOf('await '));
+    expect(readSrc('renderer/modules/imageAiDisclosureSetting.ts')).toContain('api.saveConfig({ aiMarkAllImages: requested })');
     const html = fs.readFileSync(path.resolve(__dirname, '..', '..', 'public', 'index.html'), 'utf8');
     expect(html).toMatch(/id="image-ai-mark-all"/);
   });

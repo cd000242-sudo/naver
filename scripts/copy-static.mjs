@@ -143,6 +143,7 @@ try {
     // CommonJS imports are stripped below, so the registry must exist first.
     'geminiTextModelNormalization.js',
     'imageProviderMigration.js',
+    'imageStudioPreferences.js',
   ];
   let runtimeSource = '';
   for (const runtimeFile of runtimeModules) {
@@ -554,6 +555,7 @@ try {
     'priceInfoModal.js',
     'agentQuotaBadge.js',          // [2026-08-26] 에이전트 구독 잔여 배찌
     'noticeAdmin.js',
+    'imageAiDisclosureSetting.js',
     'imageManagementTab.js',
     'guideModals.js',
     'dashboardUI.js',
@@ -573,6 +575,7 @@ try {
     'accountManageWindow.js',  // [2026-10-09] ⚙️ 계정 관리 창 (accountPauseModal 의 [풀기] 패널을 쓰므로 그 뒤에 로드)
     'continuousPublishModeHelpers.js',  // ✅ 연속발행 publishMode 해석 헬퍼 (continuousPublishing보다 먼저 로드)
     'continuousPublishing.js',
+    'thumbnailStudioCore.js',
     'thumbnailGenerator.js',
     'intervalJitter.js',  // ✅ [2026-05-23 A5] 발행 간격 jitter 유틸 (multiAccountManager보다 먼저 로드 필수)
     'featureLockModal.js',  // ✅ [2026-05-25 v2.10.353] Pro 기능 잠금 모달 (continuousPublishing/multiAccountManager보다 먼저 로드 필수 — window 글로벌 등록)

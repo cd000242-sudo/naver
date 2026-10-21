@@ -15,6 +15,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="floating-buttons.css">
+    <link rel="stylesheet" href="thumbnail-studio.css">
 </head>
 
 <body>
@@ -2565,468 +2566,26 @@
             </section>
         </div>
 
-        <!-- 🎨 썸네일 생성기 탭 -->
-        <div id="tab-image-tools" class="tab-panel" role="tabpanel">
-            <section class="form-section">
-                <h2
-                    style="display: flex; align-items: center; gap: 1rem; background: linear-gradient(135deg, #f472b6, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1rem;">
-                    <span style="font-size: 2rem;">🎨</span>
-                    <span>썸네일/배너 생성기</span>
-                </h2>
-
-                <!-- 썸네일 생성기 가이드 -->
-                <details class="guide-accordion"
-                    style="background: linear-gradient(135deg, rgba(244, 114, 182, 0.1), rgba(6, 182, 212, 0.1)); border: 2px solid rgba(244, 114, 182, 0.3); border-radius: var(--radius-lg); margin-bottom: 1.5rem; overflow: hidden;">
-                    <summary
-                        style="padding: 1rem 1.5rem; cursor: pointer; display: flex; align-items: center; gap: 0.75rem; font-weight: 600; color: var(--text-strong); user-select: none;">
-                        <span style="font-size: 1.5rem;">📖</span>
-                        <span>썸네일 생성기 사용법</span>
-                        <span style="margin-left: auto; font-size: 0.8rem; color: var(--text-muted);">(클릭하여 펼치기)</span>
-                    </summary>
-                    <div style="padding: 1rem 1.5rem; border-top: 1px solid rgba(244, 114, 182, 0.2);">
-                        <div style="display: grid; gap: 1rem;">
-                            <div
-                                style="background: rgba(244, 114, 182, 0.1); padding: 1rem; border-radius: 10px; border-left: 4px solid #f472b6;">
-                                <div
-                                    style="font-weight: 700; color: #f472b6; margin-bottom: 0.5rem; font-size: 1.1rem;">
-                                    1️⃣ 이미지 선택</div>
-                                <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">
-                                    "파일 선택" 버튼을 클릭하여 썸네일로 만들 이미지를 선택하세요.
-                                </p>
-                            </div>
-                            <div
-                                style="background: rgba(6, 182, 212, 0.1); padding: 1rem; border-radius: 10px; border-left: 4px solid #06b6d4;">
-                                <div
-                                    style="font-weight: 700; color: #06b6d4; margin-bottom: 0.5rem; font-size: 1.1rem;">
-                                    2️⃣ 텍스트 입력</div>
-                                <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">
-                                    썸네일에 들어갈 텍스트를 입력하세요. 폰트, 크기, 위치, 색상 등을 설정할 수 있어요.
-                                </p>
-                            </div>
-                            <div
-                                style="background: rgba(139, 92, 246, 0.1); padding: 1rem; border-radius: 10px; border-left: 4px solid #8b5cf6;">
-                                <div
-                                    style="font-weight: 700; color: #8b5cf6; margin-bottom: 0.5rem; font-size: 1.1rem;">
-                                    3️⃣ 생성 & 다운로드</div>
-                                <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">
-                                    "썸네일 생성" 버튼을 클릭하면 완성! 원하는 형식으로 다운로드하세요.
-                                </p>
-                            </div>
-                        </div>
-                        <div
-                            style="margin-top: 1rem; padding: 0.75rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.3);">
-                            <p style="margin: 0; font-size: 0.85rem; color: var(--text-strong);">
-                                💡 <strong>팁:</strong> 이미지 관리 탭에서 AI 자동 수집으로 본문 이미지를 준비하고, 여기서 썸네일을 만들면 완벽해요!
-                            </p>
-                        </div>
-                    </div>
-                </details>
-
-                <!-- 서브 탭 버튼 -->
-                <div
-                    style="display: flex; gap: 0.5rem; margin-bottom: 2rem; background: var(--bg-tertiary); padding: 0.5rem; border-radius: var(--radius-lg);">
-                    <button type="button" class="image-tools-subtab active" data-subtab="thumbnail"
-                        style="flex: 1; padding: 0.75rem 1.5rem; border: none; border-radius: var(--radius-md); background: var(--accent-primary); color: white; cursor: pointer; font-weight: 600; transition: all 0.2s;">
-                        🎨 썸네일/배너
-                    </button>
-                    <button type="button" class="image-tools-subtab" data-subtab="converter"
-                        style="flex: 1; padding: 0.75rem 1.5rem; border: none; border-radius: var(--radius-md); background: transparent; color: var(--text-muted); cursor: pointer; font-weight: 600; transition: all 0.2s;">
-                        🔄 이미지 변환기
-                    </button>
-                    <button type="button" class="image-tools-subtab" data-subtab="shopping-banner"
-                        style="flex: 1; padding: 0.75rem 1.5rem; border: none; border-radius: var(--radius-md); background: transparent; color: var(--text-muted); cursor: pointer; font-weight: 600; transition: all 0.2s;">
-                        🛒 쇼핑커넥트 배너
-                    </button>
+        <!-- Thumbnail studio: existing renderer control contracts are preserved. -->
+        <div id="tab-image-tools" class="tab-panel" role="tabpanel"><section class="form-section thumbnail-studio-shell">
+            <header class="thumb-studio-heading"><div><p class="studio-eyebrow">이미지 도구</p><h2>썸네일 스튜디오</h2><p>템플릿을 고르고, 문구와 배경을 다듬어 대표 이미지로 적용하세요.</p></div><span class="studio-heading-mark" aria-hidden="true">Aa<span>↗</span></span></header>
+            <nav class="studio-tool-tabs" aria-label="이미지 편집 도구"><button type="button" class="image-tools-subtab active" data-subtab="thumbnail">썸네일 디자인</button><button type="button" class="image-tools-subtab" data-subtab="converter">이미지 변환</button><button type="button" class="image-tools-subtab" data-subtab="shopping-banner">쇼핑커넥트 배너</button></nav>
+            <div id="subtab-thumbnail" class="image-tools-subpanel" style="display:block">
+                <section class="thumb-template-section" aria-label="디자인 템플릿"><div class="studio-section-heading"><h3>디자인 시작하기</h3><span>문구와 사진은 유지됩니다</span></div><div class="thumb-template-grid"><button type="button" class="thumb-preset-btn" data-preset="modern" aria-pressed="true" aria-label="에디토리얼 템플릿"><span class="thumb-template-sample sample-modern" aria-hidden="true"><span>발견을 담는<br>새로운 시선</span><i></i></span><span class="thumb-template-caption">에디토리얼<small>차분한 깊이</small></span></button>
+<button type="button" class="thumb-preset-btn" data-preset="minimal" aria-pressed="false" aria-label="페이퍼 템플릿"><span class="thumb-template-sample sample-minimal" aria-hidden="true"><span>담백하게,<br>핵심만.</span><i></i></span><span class="thumb-template-caption">페이퍼<small>여백과 문장</small></span></button>
+<button type="button" class="thumb-preset-btn" data-preset="vibrant" aria-pressed="false" aria-label="포인트 템플릿"><span class="thumb-template-sample sample-vibrant" aria-hidden="true"><span>시선이 머무는<br>한 가지</span><i></i></span><span class="thumb-template-caption">포인트<small>선명한 대비</small></span></button>
+<button type="button" class="thumb-preset-btn" data-preset="nature" aria-pressed="false" aria-label="세이지 템플릿"><span class="thumb-template-sample sample-nature" aria-hidden="true"><span>일상에 더하는<br>작은 영감</span><i></i></span><span class="thumb-template-caption">세이지<small>편안한 분위기</small></span></button>
+<button type="button" class="thumb-preset-btn" data-preset="dark" aria-pressed="false" aria-label="시네마틱 템플릿"><span class="thumb-template-sample sample-dark" aria-hidden="true"><span>장면 너머의<br>이야기</span><i></i></span><span class="thumb-template-caption">시네마틱<small>사진을 위한 무대</small></span></button></div></section>
+                <div class="thumb-studio-workspace">
+                    <section class="thumb-studio-preview" aria-label="썸네일 미리보기 및 적용">
+                        <div class="thumb-preview-toolbar"><div class="thumb-preview-title"><span class="studio-live-dot" aria-hidden="true"></span><strong id="thumb-template-name">에디토리얼</strong><span id="thumb-size-label"><span id="thumb-canvas-size-text">760×400</span> px</span></div><div class="thumb-history-actions"><button type="button" id="thumb-undo" aria-label="실행 취소" title="실행 취소" disabled>↶</button><button type="button" id="thumb-redo" aria-label="다시 실행" title="다시 실행" disabled>↷</button><button type="button" id="thumb-reset-btn" class="">초기화</button></div></div>
+                        <div class="thumb-preview-stage"><div id="thumb-canvas-container"><div id="thumb-canvas-wrap"><canvas id="thumbnail-canvas" width="760" height="400" aria-label="썸네일 디자인 미리보기"></canvas><div id="thumb-safe-guide" aria-hidden="true"></div></div></div><p class="thumb-canvas-hint">문구와 사진을 드래그해서 위치를 조절하세요</p></div>
+                        <div class="thumb-preview-options"><div class="studio-field"><label for="thumb-aspect-ratio">이미지 비율</label><select id="thumb-aspect-ratio"><option value="1.91:1">가로형 · 760 × 400</option><option value="1:1">정사각형 · 760 × 760</option></select></div><label class="studio-check"><input type="checkbox" id="thumb-safe-area" checked>안전 영역 보기</label><button type="button" id="thumb-fit-text" class="studio-text-button">문구 맞춤</button></div><p id="thumb-studio-status" class="thumb-studio-status" role="status" aria-live="polite">문구를 입력하거나 템플릿을 선택해 시작하세요.</p>
+                        <div class="thumb-delivery-bar"><div class="thumb-delivery-target"><div class="studio-field"><label for="thumb-apply-target">대표 이미지 적용 대상</label><select id="thumb-apply-target"><option value="image-tab">이미지 관리 · 반자동</option><option value="full-auto">풀오토 발행</option><option value="continuous">연속 발행</option><option value="ma-semi-auto">다중 계정 · 반자동</option><option value="ma-full-auto">다중 계정 · 풀오토</option></select></div></div><button type="button" id="thumb-download-btn" class="studio-secondary-button">PNG 저장</button><button type="button" id="thumb-apply-btn" class="studio-primary-button">대표 이미지로 적용 <span aria-hidden="true">↗</span></button></div><p class="thumb-delivery-note">선택한 발행 모드의 대표 이미지에 적용됩니다. 글은 발행되지 않습니다.</p>
+                    </section>
+                    <aside class="thumb-studio-inspector" aria-label="썸네일 세부 편집"><section class="thumb-control-section"><div class="studio-section-heading"><h3>문구</h3><span>Enter로 줄바꿈</span></div><label class="studio-sr-only" for="thumb-main-text">메인 문구</label><textarea id="thumb-main-text" rows="3" placeholder="한눈에 읽히는 제목을 입력하세요">제목을 입력하세요</textarea><div class="studio-field"><label for="thumb-sub-text">보조 문구 <span class="studio-optional">선택</span></label><input type="text" id="thumb-sub-text" placeholder="제목을 보완하는 짧은 한 줄"></div><div class="studio-field-pair"><div class="studio-field"><label for="thumb-font-family">글꼴</label><select id="thumb-font-family"><option value="'Noto Sans KR', sans-serif">Noto Sans KR</option><option value="'Nanum Gothic', sans-serif">나눔고딕</option><option value="'Nanum Myeongjo', serif">나눔명조</option><option value="'Black Han Sans', sans-serif">검은고딕</option><option value="'Do Hyeon', sans-serif">도현</option><option value="'Jua', sans-serif">주아</option><option value="'Gothic A1', sans-serif">고딕 A1</option><option value="'Sunflower', sans-serif">해바라기</option></select></div><div class="studio-field"><label for="thumb-font-size">크기 <span id="thumb-font-size-value">48px</span></label><input type="range" id="thumb-font-size" min="16" max="100" value="48"></div></div><div class="studio-field-pair"><div class="studio-field"><label for="thumb-text-color">글자 색상</label><input type="color" id="thumb-text-color" value="#ffffff"></div><div class="studio-field"><label for="thumb-text-align">정렬</label><select id="thumb-text-align"><option value="center">가운데</option><option value="left">왼쪽</option><option value="right">오른쪽</option></select></div></div><span class="studio-control-label">세로 위치</span><div class="studio-segmented" role="group" aria-label="문구 세로 위치"><button type="button" class="thumb-position-btn " data-position="top">상단</button><button type="button" class="thumb-position-btn selected" data-position="center">중앙</button><button type="button" class="thumb-position-btn " data-position="bottom">하단</button></div></section><section class="thumb-control-section"><div class="studio-section-heading"><h3>배경</h3><span>사진 또는 단색</span></div><div class="studio-field-pair"><button type="button" id="thumb-bg-upload-btn" class="">사진 업로드</button><button type="button" id="thumb-bg-storage-btn" class="">보관함</button></div><input type="file" id="thumb-bg-file-input" accept="image/*" hidden><label for="thumb-bg-ai-prompt">AI로 배경 만들기</label><div class="thumb-ai-input"><input type="text" id="thumb-bg-ai-prompt" placeholder="예: 부드러운 빛이 드는 작업실"><button type="button" id="thumb-bg-ai-btn" class="">생성</button></div><div class="studio-field-pair"><div class="studio-field"><label for="thumb-bg-color">배경 색상</label><input type="color" id="thumb-bg-color" value="#1a1a2e"></div><div class="studio-field"><label for="thumb-bg-mode">사진 맞춤</label><select id="thumb-bg-mode"><option value="cover">빈틈없이 채우기</option><option value="contain">사진 전체 보기</option></select></div></div></section><details class="thumb-advanced-controls"><summary>텍스트 효과<span>그림자 · 외곽선 · 강조</span></summary><div class="thumb-details-body"><div class="studio-check-row"><label class="studio-check"><input type="checkbox" id="thumb-text-shadow" checked>그림자</label><label class="studio-check"><input type="checkbox" id="thumb-text-outline" >외곽선</label><label class="studio-check"><input type="checkbox" id="thumb-text-highlight" >강조 배경</label></div><div id="thumb-outline-settings" style="display:none"><div class="studio-field-pair"><div class="studio-field"><label for="thumb-outline-color">외곽선 색상</label><input type="color" id="thumb-outline-color" value="#000000"></div><div class="studio-field"><label for="thumb-outline-width">외곽선 두께</label><input type="range" id="thumb-outline-width" min="1" max="5" value="2"></div></div></div><div id="thumb-highlight-settings" style="display:none"><div class="studio-field-pair"><div class="studio-field"><label for="thumb-highlight-color">강조 색상</label><input type="color" id="thumb-highlight-color" value="#ffff00"></div><div class="studio-field"><label for="thumb-highlight-opacity">강조 불투명도</label><input type="range" id="thumb-highlight-opacity" min="20" max="100" value="50"></div></div></div></div></details><details class="thumb-advanced-controls"><summary>배경 효과<span>명암 · 흐림 · 오버레이</span></summary><div class="thumb-details-body"><div class="studio-field-pair"><div class="studio-field"><label for="thumb-bg-blur">흐림 <span id="thumb-blur-value">0</span> px</label><input type="range" id="thumb-bg-blur" min="0" max="20" value="0"></div><div class="studio-field"><label for="thumb-bg-brightness">밝기 <span id="thumb-brightness-value">0</span></label><input type="range" id="thumb-bg-brightness" min="-100" max="100" value="0"></div></div><label class="studio-check"><input type="checkbox" id="thumb-overlay-enable" >색상 오버레이</label><div id="thumb-overlay-settings" style="display:none"><div class="studio-field-pair"><div class="studio-field"><label for="thumb-overlay-color">오버레이 색상</label><input type="color" id="thumb-overlay-color" value="#000000"></div><div class="studio-field"><label for="thumb-overlay-opacity">불투명도 <span id="thumb-overlay-opacity-value">0</span>%</label><input type="range" id="thumb-overlay-opacity" min="0" max="100" value="0"></div></div><div class="studio-field"><label for="thumb-overlay-type">오버레이 방향</label><select id="thumb-overlay-type"><option value="solid">단색</option><option value="gradient-v">위에서 아래로</option><option value="gradient-h">왼쪽에서 오른쪽으로</option></select></div></div></div></details><details class="thumb-advanced-controls"><summary>스티커<span>작은 포인트 추가</span></summary><div class="thumb-details-body"><div class="thumb-sticker-grid"><button type="button" class="thumb-sticker-btn" data-sticker="🔥" aria-label="불꽃 스티커">🔥</button><button type="button" class="thumb-sticker-btn" data-sticker="⭐" aria-label="별 스티커">⭐</button><button type="button" class="thumb-sticker-btn" data-sticker="💡" aria-label="전구 스티커">💡</button><button type="button" class="thumb-sticker-btn" data-sticker="❤️" aria-label="하트 스티커">❤️</button><button type="button" class="thumb-sticker-btn" data-sticker="✅" aria-label="체크 스티커">✅</button><button type="button" class="thumb-sticker-btn" data-sticker="🎯" aria-label="과녁 스티커">🎯</button><button type="button" class="thumb-sticker-btn" data-sticker="💰" aria-label="동전 스티커">💰</button><button type="button" class="thumb-sticker-btn" data-sticker="🚀" aria-label="로켓 스티커">🚀</button><button type="button" class="thumb-sticker-btn" data-sticker="📢" aria-label="확성기 스티커">📢</button><button type="button" class="thumb-sticker-btn" data-sticker="🎁" aria-label="선물 스티커">🎁</button></div><p class="studio-help">추가한 스티커는 미리보기에서 드래그할 수 있습니다.</p></div></details></aside>
                 </div>
-
-                <!-- 썸네일 생성기 서브패널 -->
-                <div id="subtab-thumbnail" class="image-tools-subpanel" style="display: block;">
-
-                    <!-- 안내 섹션 -->
-                    <div
-                        style="background: linear-gradient(135deg, rgba(244, 114, 182, 0.15), rgba(236, 72, 153, 0.15)); padding: 1.5rem; border-radius: var(--radius-lg); border: 2px solid rgba(236, 72, 153, 0.4); margin-bottom: 2rem;">
-                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
-                            <span style="font-size: 1.3rem;">💡</span>
-                            <strong style="color: var(--text-strong);">네이버 블로그 최적화 썸네일 생성기</strong>
-                        </div>
-                        <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
-                            760×400px 네이버 블로그 썸네일 최적 사이즈로 제작됩니다. 텍스트, 배경, 효과를 자유롭게 편집하고 "적용하기"를 클릭하면 1번 소제목 위치에 자동
-                            삽입됩니다.
-                        </p>
-                    </div>
-
-                    <!-- 메인 에디터 영역 - 좌측: 텍스트 설정, 우측: 배경/스티커 설정 -->
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
-                        <!-- 좌측: 텍스트 설정 -->
-                        <div
-                            style="background: var(--bg-secondary); border-radius: var(--radius-lg); padding: 1.5rem; border: 1px solid var(--border-light);">
-                            <h4
-                                style="margin: 0 0 1rem 0; color: var(--text-strong); display: flex; align-items: center; gap: 0.5rem;">
-                                <span>✏️</span> 텍스트 설정
-                            </h4>
-
-                            <div class="field" style="margin-bottom: 1rem;">
-                                <label
-                                    style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.25rem; display: block;">메인
-                                    텍스트 (Enter로 줄바꿈)</label>
-                                <textarea id="thumb-main-text" placeholder="메인 타이틀 입력&#10;(줄바꿈 가능)" rows="2"
-                                    style="width: 100%; padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-medium); background: var(--bg-primary); color: var(--text-strong); resize: vertical; font-family: inherit;">제목을 입력하세요</textarea>
-                            </div>
-
-                            <div class="field" style="margin-bottom: 1rem;">
-                                <label
-                                    style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.25rem; display: block;">서브
-                                    텍스트</label>
-                                <input type="text" id="thumb-sub-text" placeholder="서브 타이틀 (선택)"
-                                    style="width: 100%; padding: 0.6rem; border-radius: var(--radius-sm); border: 1px solid var(--border-medium); background: var(--bg-primary); color: var(--text-strong);">
-                            </div>
-
-                            <div
-                                style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem;">
-                                <div class="field">
-                                    <label
-                                        style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.25rem; display: block;">폰트</label>
-                                    <select id="thumb-font-family"
-                                        style="width: 100%; padding: 0.5rem; border-radius: var(--radius-sm); border: 1px solid var(--border-medium); background: var(--bg-primary); color: var(--text-strong); font-size: 0.85rem;">
-                                        <option value="'Noto Sans KR', sans-serif">Noto Sans KR</option>
-                                        <option value="'Nanum Gothic', sans-serif">나눔고딕</option>
-                                        <option value="'Nanum Myeongjo', serif">나눔명조</option>
-                                        <option value="'Black Han Sans', sans-serif">검은고딕</option>
-                                        <option value="'Do Hyeon', sans-serif">도현</option>
-                                        <option value="'Jua', sans-serif">주아</option>
-                                        <option value="'Gothic A1', sans-serif">고딕 A1</option>
-                                        <option value="'Sunflower', sans-serif">해바라기</option>
-                                    </select>
-                                </div>
-                                <div class="field">
-                                    <label
-                                        style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.25rem; display: block;">글자
-                                        크기: <span id="thumb-font-size-value">48</span>px</label>
-                                    <input type="range" id="thumb-font-size" min="20" max="100" value="48"
-                                        style="width: 100%;">
-                                </div>
-                            </div>
-
-                            <div
-                                style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem;">
-                                <div class="field">
-                                    <label
-                                        style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.25rem; display: block;">글자
-                                        색상</label>
-                                    <input type="color" id="thumb-text-color" value="#ffffff"
-                                        style="width: 100%; height: 32px; border-radius: var(--radius-sm); border: 1px solid var(--border-medium); cursor: pointer;">
-                                </div>
-                                <div class="field">
-                                    <label
-                                        style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.25rem; display: block;">텍스트
-                                        정렬</label>
-                                    <select id="thumb-text-align"
-                                        style="width: 100%; padding: 0.5rem; border-radius: var(--radius-sm); border: 1px solid var(--border-medium); background: var(--bg-primary); color: var(--text-strong); font-size: 0.85rem;">
-                                        <option value="center">중앙</option>
-                                        <option value="left">좌측</option>
-                                        <option value="right">우측</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <!-- 텍스트 효과 -->
-                            <div
-                                style="background: var(--bg-tertiary); padding: 0.75rem; border-radius: var(--radius-sm); margin-bottom: 1rem;">
-                                <label
-                                    style="font-size: 0.85rem; color: var(--text-strong); margin-bottom: 0.5rem; display: block; font-weight: 600;">✨
-                                    텍스트 효과</label>
-                                <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
-                                    <label
-                                        style="display: flex; align-items: center; gap: 0.25rem; cursor: pointer; font-size: 0.85rem; color: var(--text-muted);">
-                                        <input type="checkbox" id="thumb-text-shadow" checked> 그림자
-                                    </label>
-                                    <label
-                                        style="display: flex; align-items: center; gap: 0.25rem; cursor: pointer; font-size: 0.85rem; color: var(--text-muted);">
-                                        <input type="checkbox" id="thumb-text-outline"> 외곽선
-                                    </label>
-                                    <label
-                                        style="display: flex; align-items: center; gap: 0.25rem; cursor: pointer; font-size: 0.85rem; color: var(--text-muted);">
-                                        <input type="checkbox" id="thumb-text-highlight"> 형광펜
-                                    </label>
-                                </div>
-                                <div id="thumb-outline-settings"
-                                    style="display: none; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border-light);">
-                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
-                                        <div>
-                                            <label style="font-size: 0.75rem; color: var(--text-muted);">외곽선 색상</label>
-                                            <input type="color" id="thumb-outline-color" value="#000000"
-                                                style="width: 100%; height: 28px;">
-                                        </div>
-                                        <div>
-                                            <label style="font-size: 0.75rem; color: var(--text-muted);">두께</label>
-                                            <input type="range" id="thumb-outline-width" min="1" max="5" value="2"
-                                                style="width: 100%;">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="thumb-highlight-settings"
-                                    style="display: none; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border-light);">
-                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
-                                        <div>
-                                            <label style="font-size: 0.75rem; color: var(--text-muted);">형광펜 색상</label>
-                                            <input type="color" id="thumb-highlight-color" value="#ffff00"
-                                                style="width: 100%; height: 28px;">
-                                        </div>
-                                        <div>
-                                            <label style="font-size: 0.75rem; color: var(--text-muted);">투명도</label>
-                                            <input type="range" id="thumb-highlight-opacity" min="20" max="100"
-                                                value="50" style="width: 100%;">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 텍스트 위치 프리셋 -->
-                            <div>
-                                <label
-                                    style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; display: block;">텍스트
-                                    위치</label>
-                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;">
-                                    <button type="button" class="thumb-position-btn" data-position="top"
-                                        style="padding: 0.5rem; background: var(--bg-tertiary); border: 1px solid var(--border-medium); border-radius: var(--radius-sm); color: var(--text-muted); cursor: pointer; font-size: 0.8rem;">상단</button>
-                                    <button type="button" class="thumb-position-btn selected" data-position="center"
-                                        style="padding: 0.5rem; background: var(--primary); border: 1px solid var(--primary); border-radius: var(--radius-sm); color: white; cursor: pointer; font-size: 0.8rem;">중앙</button>
-                                    <button type="button" class="thumb-position-btn" data-position="bottom"
-                                        style="padding: 0.5rem; background: var(--bg-tertiary); border: 1px solid var(--border-medium); border-radius: var(--radius-sm); color: var(--text-muted); cursor: pointer; font-size: 0.8rem;">하단</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 우측: 배경 설정 + 스티커 -->
-                        <div
-                            style="background: var(--bg-secondary); border-radius: var(--radius-lg); padding: 1.5rem; border: 1px solid var(--border-light);">
-                            <h4
-                                style="margin: 0 0 1rem 0; color: var(--text-strong); display: flex; align-items: center; gap: 0.5rem;">
-                                <span>🖼️</span> 배경 설정
-                            </h4>
-
-                            <div
-                                style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; margin-bottom: 1rem;">
-                                <button type="button" id="thumb-bg-upload-btn"
-                                    style="padding: 0.6rem; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; border-radius: var(--radius-sm); cursor: pointer; font-weight: 600; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; gap: 0.25rem;">
-                                    <span>📁</span> 업로드
-                                </button>
-                                <button type="button" id="thumb-bg-storage-btn"
-                                    style="padding: 0.6rem; background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; border: none; border-radius: var(--radius-sm); cursor: pointer; font-weight: 600; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; gap: 0.25rem;">
-                                    <span>💾</span> 저장소
-                                </button>
-                                <button type="button" id="thumb-bg-ai-btn"
-                                    style="padding: 0.6rem; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: var(--radius-sm); cursor: pointer; font-weight: 600; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; gap: 0.25rem;">
-                                    <span>🤖</span> AI
-                                </button>
-                            </div>
-                            <div style="margin-bottom: 1rem;">
-                                <input type="text" id="thumb-bg-ai-prompt"
-                                    placeholder="AI 배경 프롬프트 (예: sunset, gradient)"
-                                    style="width: 100%; padding: 0.6rem; border-radius: var(--radius-sm); border: 1px solid var(--border-medium); background: var(--bg-primary); color: var(--text-strong); font-size: 0.85rem;">
-                            </div>
-                            <div
-                                style="font-size: 0.8rem; color: var(--accent-primary); background: rgba(59, 130, 246, 0.1); padding: 0.5rem; border-radius: 4px; border-left: 3px solid var(--accent-primary); margin-bottom: 0.5rem;">
-                                💡 <b>배경 조작:</b> 캔버스를 <b>드래그</b>하여 위치를 이동하세요.
-                            </div>
-                            <!-- 종횡비 및 자르기 모드 -->
-                            <div
-                                style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem;">
-                                <div>
-                                    <label
-                                        style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.25rem; display: block;">🔲
-                                        종횡비</label>
-                                    <select id="thumb-aspect-ratio"
-                                        style="width: 100%; padding: 0.5rem; border-radius: var(--radius-sm); border: 1px solid var(--border-medium); background: var(--bg-primary); color: var(--text-strong); font-size: 0.85rem;">
-                                        <option value="1.91:1">와이드 (1.91:1)</option>
-                                        <option value="1:1">정사각형 (1:1)</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label
-                                        style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.25rem; display: block;">✂️
-                                        자르기 모드</label>
-                                    <select id="thumb-bg-mode"
-                                        style="width: 100%; padding: 0.5rem; border-radius: var(--radius-sm); border: 1px solid var(--border-medium); background: var(--bg-primary); color: var(--text-strong); font-size: 0.85rem;">
-                                        <option value="cover">채우기 (Cover)</option>
-                                        <option value="contain">맞춤 (Contain)</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <input type="file" id="thumb-bg-file-input" accept="image/*" style="display: none;">
-
-                            <div class="field" style="margin-bottom: 1rem;">
-                                <label
-                                    style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.25rem; display: block;">배경
-                                    색상</label>
-                                <input type="color" id="thumb-bg-color" value="#1a1a2e"
-                                    style="width: 100%; height: 32px; border-radius: var(--radius-sm); border: 1px solid var(--border-medium); cursor: pointer;">
-                            </div>
-
-                            <!-- 오버레이 설정 -->
-                            <div
-                                style="background: var(--bg-tertiary); padding: 0.75rem; border-radius: var(--radius-sm); margin-bottom: 1rem;">
-                                <div
-                                    style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
-                                    <label style="font-size: 0.85rem; color: var(--text-strong); font-weight: 600;">🎭
-                                        오버레이</label>
-                                    <label
-                                        style="display: flex; align-items: center; gap: 0.25rem; cursor: pointer; font-size: 0.8rem; color: var(--text-muted);">
-                                        <input type="checkbox" id="thumb-overlay-enable"> 사용
-                                    </label>
-                                </div>
-                                <div id="thumb-overlay-settings">
-                                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem;">
-                                        <div>
-                                            <label style="font-size: 0.75rem; color: var(--text-muted);">색상</label>
-                                            <input type="color" id="thumb-overlay-color" value="#000000"
-                                                style="width: 100%; height: 28px;">
-                                        </div>
-                                        <div>
-                                            <label style="font-size: 0.75rem; color: var(--text-muted);">투명도: <span
-                                                    id="thumb-overlay-opacity-value">40</span>%</label>
-                                            <input type="range" id="thumb-overlay-opacity" min="0" max="100" value="40"
-                                                style="width: 100%;">
-                                        </div>
-                                        <div>
-                                            <label style="font-size: 0.75rem; color: var(--text-muted);">타입</label>
-                                            <select id="thumb-overlay-type"
-                                                style="width: 100%; padding: 0.3rem; border-radius: var(--radius-sm); border: 1px solid var(--border-medium); background: var(--bg-primary); color: var(--text-strong); font-size: 0.8rem;">
-                                                <option value="solid">단색</option>
-                                                <option value="gradient-v">상→하</option>
-                                                <option value="gradient-h">좌→우</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 배경 효과 -->
-                            <div
-                                style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem;">
-                                <div class="field">
-                                    <label
-                                        style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.25rem; display: block;">블러:
-                                        <span id="thumb-blur-value">0</span>px</label>
-                                    <input type="range" id="thumb-bg-blur" min="0" max="20" value="0"
-                                        style="width: 100%;">
-                                </div>
-                                <div class="field">
-                                    <label
-                                        style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.25rem; display: block;">밝기:
-                                        <span id="thumb-brightness-value">0</span></label>
-                                    <input type="range" id="thumb-bg-brightness" min="-100" max="100" value="0"
-                                        style="width: 100%;">
-                                </div>
-                            </div>
-
-                            <!-- 아이콘/스티커 -->
-                            <div style="padding-top: 1rem; border-top: 1px solid var(--border-light);">
-                                <h4
-                                    style="margin: 0 0 0.75rem 0; color: var(--text-strong); display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem;">
-                                    <span>⭐</span> 스티커
-                                </h4>
-                                <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
-                                    <button type="button" class="thumb-sticker-btn" data-sticker="🔥"
-                                        style="width: 36px; height: 36px; font-size: 1.1rem; background: var(--bg-tertiary); border: 1px solid var(--border-medium); border-radius: var(--radius-sm); cursor: pointer;">🔥</button>
-                                    <button type="button" class="thumb-sticker-btn" data-sticker="⭐"
-                                        style="width: 36px; height: 36px; font-size: 1.1rem; background: var(--bg-tertiary); border: 1px solid var(--border-medium); border-radius: var(--radius-sm); cursor: pointer;">⭐</button>
-                                    <button type="button" class="thumb-sticker-btn" data-sticker="💡"
-                                        style="width: 36px; height: 36px; font-size: 1.1rem; background: var(--bg-tertiary); border: 1px solid var(--border-medium); border-radius: var(--radius-sm); cursor: pointer;">💡</button>
-                                    <button type="button" class="thumb-sticker-btn" data-sticker="❤️"
-                                        style="width: 36px; height: 36px; font-size: 1.1rem; background: var(--bg-tertiary); border: 1px solid var(--border-medium); border-radius: var(--radius-sm); cursor: pointer;">❤️</button>
-                                    <button type="button" class="thumb-sticker-btn" data-sticker="✅"
-                                        style="width: 36px; height: 36px; font-size: 1.1rem; background: var(--bg-tertiary); border: 1px solid var(--border-medium); border-radius: var(--radius-sm); cursor: pointer;">✅</button>
-                                    <button type="button" class="thumb-sticker-btn" data-sticker="🎯"
-                                        style="width: 36px; height: 36px; font-size: 1.1rem; background: var(--bg-tertiary); border: 1px solid var(--border-medium); border-radius: var(--radius-sm); cursor: pointer;">🎯</button>
-                                    <button type="button" class="thumb-sticker-btn" data-sticker="💰"
-                                        style="width: 36px; height: 36px; font-size: 1.1rem; background: var(--bg-tertiary); border: 1px solid var(--border-medium); border-radius: var(--radius-sm); cursor: pointer;">💰</button>
-                                    <button type="button" class="thumb-sticker-btn" data-sticker="🚀"
-                                        style="width: 36px; height: 36px; font-size: 1.1rem; background: var(--bg-tertiary); border: 1px solid var(--border-medium); border-radius: var(--radius-sm); cursor: pointer;">🚀</button>
-                                    <button type="button" class="thumb-sticker-btn" data-sticker="📢"
-                                        style="width: 36px; height: 36px; font-size: 1.1rem; background: var(--bg-tertiary); border: 1px solid var(--border-medium); border-radius: var(--radius-sm); cursor: pointer;">📢</button>
-                                    <button type="button" class="thumb-sticker-btn" data-sticker="🎁"
-                                        style="width: 36px; height: 36px; font-size: 1.1rem; background: var(--bg-tertiary); border: 1px solid var(--border-medium); border-radius: var(--radius-sm); cursor: pointer;">🎁</button>
-                                </div>
-                                <p style="margin: 0.5rem 0 0 0; font-size: 0.75rem; color: var(--text-muted);">💡 클릭 →
-                                    캔버스 추가, 드래그로 이동</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 하단: 미리보기 캔버스 (전체 너비) -->
-                    <div
-                        style="background: var(--bg-secondary); border-radius: var(--radius-lg); padding: 1.5rem; border: 1px solid var(--border-light);">
-                        <h4
-                            style="margin: 0 0 1rem 0; color: var(--text-strong); display: flex; align-items: center; gap: 0.5rem;">
-                            <span>👁️</span> 실시간 미리보기 (<span id="thumb-canvas-size-text">760×400</span>)
-                        </h4>
-
-                        <div style="display: flex; justify-content: center; margin-bottom: 1rem;">
-                            <div id="thumb-canvas-container"
-                                style="background: #1a1a2e; border-radius: var(--radius-md); overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.3);">
-                                <canvas id="thumbnail-canvas" width="760" height="400"
-                                    style="display: block; max-width: 100%; height: auto; cursor: move;"></canvas>
-                            </div>
-                        </div>
-
-                        <!-- 프리셋 템플릿 -->
-                        <div style="margin-bottom: 1rem;">
-                            <label
-                                style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; display: block;">🎨
-                                빠른 스타일 프리셋</label>
-                            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center;">
-                                <button type="button" class="thumb-preset-btn" data-preset="modern"
-                                    style="padding: 0.5rem 1rem; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: var(--radius-sm); cursor: pointer; font-size: 0.8rem; font-weight: 600;">모던</button>
-                                <button type="button" class="thumb-preset-btn" data-preset="minimal"
-                                    style="padding: 0.5rem 1rem; background: linear-gradient(135deg, #f5f5f5, #e0e0e0); color: #333; border: none; border-radius: var(--radius-sm); cursor: pointer; font-size: 0.8rem; font-weight: 600;">미니멀</button>
-                                <button type="button" class="thumb-preset-btn" data-preset="vibrant"
-                                    style="padding: 0.5rem 1rem; background: linear-gradient(135deg, #ff416c, #ff4b2b); color: white; border: none; border-radius: var(--radius-sm); cursor: pointer; font-size: 0.8rem; font-weight: 600;">바이브런트</button>
-                                <button type="button" class="thumb-preset-btn" data-preset="nature"
-                                    style="padding: 0.5rem 1rem; background: linear-gradient(135deg, #11998e, #38ef7d); color: white; border: none; border-radius: var(--radius-sm); cursor: pointer; font-size: 0.8rem; font-weight: 600;">네이처</button>
-                                <button type="button" class="thumb-preset-btn" data-preset="dark"
-                                    style="padding: 0.5rem 1rem; background: linear-gradient(135deg, #232526, #414345); color: white; border: none; border-radius: var(--radius-sm); cursor: pointer; font-size: 0.8rem; font-weight: 600;">다크</button>
-                            </div>
-                        </div>
-
-                        <!-- 적용 대상 선택 -->
-                        <div style="margin-bottom: 1rem;">
-                            <label
-                                style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; display: block;">🎯
-                                적용 대상 선택</label>
-                            <select id="thumb-apply-target"
-                                style="width: 100%; padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-medium); background: var(--bg-primary); color: var(--text-strong); font-size: 0.9rem; font-weight: 600;">
-                                <option value="image-tab">🖼️ 이미지관리탭 (반자동)</option>
-                                <option value="full-auto">🤖 풀오토발행</option>
-                                <option value="continuous">🔄 연속발행</option>
-                                <option value="ma-semi-auto">👥 반자동 다중계정발행</option>
-                                <option value="ma-full-auto">🚀 풀오토 다중계정발행</option>
-                            </select>
-                        </div>
-
-                        <!-- 액션 버튼들 -->
-                        <div
-                            style="display: flex; justify-content: center; gap: 0.75rem; max-width: 600px; margin: 0 auto;">
-                            <button type="button" id="thumb-reset-btn"
-                                style="flex: 1; padding: 0.875rem; background: var(--bg-tertiary); color: var(--text-strong); border: 1px solid var(--border-medium); border-radius: var(--radius-md); cursor: pointer; font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
-                                <span>🔄</span> 초기화
-                            </button>
-                            <button type="button" id="thumb-download-btn"
-                                style="flex: 1; padding: 0.875rem; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; border-radius: var(--radius-md); cursor: pointer; font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
-                                <span>💾</span> 다운로드
-                            </button>
-                            <button type="button" id="thumb-apply-btn"
-                                style="flex: 1; padding: 0.875rem; background: linear-gradient(135deg, #ec4899, #f472b6); color: white; border: none; border-radius: var(--radius-md); cursor: pointer; font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; box-shadow: 0 4px 12px rgba(236, 72, 153, 0.4);">
-                                <span>✅</span> 적용하기
-                            </button>
-                        </div>
-                        <p
-                            style="margin: 0.75rem 0 0 0; font-size: 0.8rem; color: var(--text-muted); text-align: center;">
-                            💡 선택한 발행 모드에 맞게 썸네일이 미리 세팅됩니다
-                        </p>
-                    </div>
-                </div><!-- 썸네일 생성기 서브패널 끝 -->
+            </div><!-- 썸네일 생성기 서브패널 끝 -->
 
                 <!-- 이미지 변환기 서브패널 -->
                 <div id="subtab-converter" class="image-tools-subpanel" style="display: none;">
@@ -4044,93 +3603,24 @@
                     </div>
                 </div>
 
-                <!-- 이미지 소스 선택 (깔끔한 UI) -->
-                <div class="field"
-                    style="background: var(--bg-secondary); padding: 1.25rem; border-radius: 12px; border: 1px solid var(--border-light); margin-bottom: 1.5rem;">
-                    <h3 style="margin-bottom: 1rem; color: var(--text-strong); font-size: 0.95rem; font-weight: 600;">🎨
-                        이미지 소스 선택</h3>
-
-                    <!-- ✅ [2026-01-27] 드롭다운으로 리뉴얼 - 7개 옵션 깔끔하게 정리 -->
-                    <!-- [2026-10-10] 나노바나나는 나노바나나2(Gemini 3.1 Flash) 한 종류만 노출 — 프로·2.5 저장값은 나노바나나2로 이관 -->
-                    <div style="display: flex; gap: 0.75rem; align-items: center;">
-                        <select id="image-source-select"
-                            style="flex: 1; padding: 0.875rem 1rem; background: var(--bg-tertiary); border: 2px solid var(--border-gold); border-radius: 10px; color: var(--text-strong); font-size: 0.95rem; font-weight: 600; cursor: pointer; appearance: none; background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 viewBox=%220 0 12 12%22%3E%3Cpath fill=%22%23d4af37%22 d=%22M2 4l4 4 4-4%22/%3E%3C/svg%3E'); background-repeat: no-repeat; background-position: right 1rem center;">
-                            <option value="nano-banana-2" data-icon="🍌" data-price="Gemini 3.1 Flash Image | ₩97/장 | 한글 가능">🍌 나노바나나2 (Gemini 3.1 Flash, ₩97/장, 한글 가능) ★추천</option>
-                            <option value="deepinfra" data-icon="⚡" data-price="$0.01/장 | FLUX-2">⚡ DeepInfra (FLUX-2,
-                                $0.01/장)</option>
-                            <option value="openai-image" data-icon="🦆" data-price="gpt-image-2.5 Sunburst(기본)/Flare | $0.006~$0.21 | 한글 최강" selected>🦆 덕트테이프
-                                (gpt-image-2.5 Sunburst/Flare 선택 가능, 다국어 최강 | Org 인증 필요할 수 있음)</option>
+                <!-- Image creation settings -->
+                <div class="field image-source-studio" id="image-source-studio"><div class="studio-section-heading"><h3>이미지 만들기</h3><span>생성 엔진과 이미지 파일을 한곳에서</span></div>
+                    <div class="image-source-toolbar"><div class="image-engine-field"><label for="image-source-select">생성 엔진</label><select id="image-source-select" aria-describedby="image-source-help">
+                            <option value="nano-banana-2" data-icon="🍌" data-price="Gemini 3.1 Flash Image | ₩97/장 | 한글 가능">나노바나나 2</option>
+                            <option value="deepinfra" data-icon="⚡" data-price="$0.01/장 | FLUX-2">DeepInfra</option>
+                            <option value="openai-image" data-icon="🦆" data-price="gpt-image-2.5 Sunburst(기본)/Flare | $0.006~$0.21 | 한글 최강" selected>덕테이프 · OpenAI</option>
                             <!-- v2.10.295: DALL-E 3 옵션 완전 삭제 — OpenAI 2026-05-12 폐기 + 사용자 요청 -->
 
-                            <option value="leonardoai" data-icon="🦁" data-price="Phoenix 1.0 | $0.01~$0.02">🦁 Leonardo
-                                AI ($0.01~$0.02/장)</option>
+                            <option value="leonardoai" data-icon="🦁" data-price="Phoenix 1.0 | $0.01~$0.02">Leonardo AI</option>
                             <!-- 2026-06-14: Flow/Prodia 복구 (기존 사용자 선택권 유지). ImageFX만 비노출 유지. -->
-                            <option value="flow" data-icon="🍌" data-price="Google Flow | UI 자동화 · 로그인 필요">🍌 Flow (Google Labs, 로그인 필요)</option>
-                            <option value="prodia" data-icon="⚡" data-price="Prodia API | $0.0025~$0.01/장">⚡ Prodia (API 키 필요)</option>
+                            <option value="flow" data-icon="🍌" data-price="Google Flow | UI 자동화 · 로그인 필요">Google Flow</option>
+                            <option value="prodia" data-icon="⚡" data-price="Prodia API | $0.0025~$0.01/장">Prodia</option>
                             <!-- ✅ [SPEC-DROPSHOT-2026] 리더스 나노바나나 무제한 (UI 자동화 · 로그인 필요) -->
-                            <option value="dropshot" data-icon="🍌" data-price="Pro 구독자 무제한 · 추가비용 0원 | UI 자동화 · 로그인 필요">🍌 리더스 나노바나나 무제한 (구독자 무제한 · 추가비용 0원)</option>
-                            <option value="genspark" data-icon="✨" data-price="로그인 필요 · 모델 선택 · UI 자동화">✨ 젠스파크 (모델 선택 · 로그인 필요)</option>
-                        </select>
-
-                        <!-- 선택된 소스 정보 배지 -->
-                        <div id="image-source-info-badge"
-                            style="padding: 0.5rem 0.875rem; background: linear-gradient(135deg, #03c75a, #02a94f); border-radius: 8px; font-size: 0.75rem; font-weight: 700; color: white; white-space: nowrap; min-width: 90px; text-align: center;">
-                            선택됨 ✓
-                        </div>
-                        <!-- [v2.11.x] 내 폴더 / 저장된 이미지 — AI 엔진 드롭다운에서 분리한 별도 버튼 -->
-                        <button type="button" id="image-source-local-folder-btn"
-                            style="padding: 0.5rem 0.75rem; background: linear-gradient(135deg, #4338ca, #6366f1); color: white; border: none; border-radius: 8px; font-size: 0.75rem; font-weight: 700; cursor: pointer; white-space: nowrap;"
-                            title="폴더를 선택하면 파일명 숫자 순서대로 이미지를 매핑합니다">📂 폴더 선택 및 숫자대로 선택</button>
-                        <button type="button" id="image-source-saved-btn"
-                            style="padding: 0.5rem 0.75rem; background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; border: none; border-radius: 8px; font-size: 0.75rem; font-weight: 700; cursor: pointer; white-space: nowrap;"
-                            title="폴더를 만들고 이미지를 저장·불러옵니다">📁 폴더 생성 및 이미지 불러오기</button>
-                    </div>
-
-                    <!-- [2026-09-22] AI 활용 체크하기 — 켜면 발행 시 모든 이미지에 네이버 "AI 활용" 마크를 자동으로 켠다 -->
-                    <label
-                        style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.75rem; cursor: pointer; padding: 0.5rem 0.75rem; background: rgba(3, 199, 90, 0.08); border-radius: var(--radius-sm); border: 1px solid rgba(3, 199, 90, 0.25);">
-                        <input type="checkbox" id="image-ai-mark-all"
-                            style="width: 16px; height: 16px; accent-color: #03c75a;">
-                        <div>
-                            <span style="font-size: 0.85rem; color: var(--text-strong); font-weight: 600;">🤖 AI 활용 체크하기</span>
-                            <span style="font-size: 0.7rem; color: var(--text-muted); margin-left: 0.4rem;">발행 시 본문의 모든 이미지에 네이버 "AI 활용" 마크를 자동으로 켭니다 (끄면 AI 생성 엔진 이미지만 자동 판정)</span>
-                        </div>
-                    </label>
-
-                    <!-- [SPEC-NAVER-IMAGE-2026] 고품질 썸네일 — 켜면 썸네일 후보 2~3장을 만들고 자동 심사 1회로 1장을 고른다. 기본은 1장(심사 없음). -->
-                    <label
-                        style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem; cursor: pointer; padding: 0.5rem 0.75rem; background: rgba(59, 130, 246, 0.08); border-radius: var(--radius-sm); border: 1px solid rgba(59, 130, 246, 0.25);">
-                        <input type="checkbox" id="image-thumbnail-quality-high"
-                            style="width: 16px; height: 16px; accent-color: var(--primary);">
-                        <div>
-                            <span style="font-size: 0.85rem; color: var(--text-strong); font-weight: 600;">🏆 고품질 썸네일</span>
-                            <span style="font-size: 0.7rem; color: var(--text-muted); margin-left: 0.4rem;">후보 2~3장 중 자동 심사로 1장 선택 (심사 1회 · 고른 엔진의 최저가 비전 모델, 에이전트는 추가 과금 0). 끄면 썸네일 1장.</span>
-                        </div>
-                    </label>
-
-                    <!-- [2026-10-08] 소제목 이미지에 소제목 글자 넣기 — 한글을 직접 그리는 엔진(GPT 이미지·나노바나나2·Flow·리더스 나노바나나)만. 기본 OFF. -->
-                    <label
-                        style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem; cursor: pointer; padding: 0.5rem 0.75rem; background: rgba(59, 130, 246, 0.08); border-radius: var(--radius-sm); border: 1px solid rgba(59, 130, 246, 0.25);">
-                        <input type="checkbox" id="image-heading-text-include"
-                            style="width: 16px; height: 16px; accent-color: var(--primary);">
-                        <div>
-                            <span style="font-size: 0.85rem; color: var(--text-strong); font-weight: 600;">🔤 소제목 이미지에 소제목 글자 넣기</span>
-                            <span style="font-size: 0.7rem; color: var(--text-muted); margin-left: 0.4rem;">소제목 문장을 줄이지 않고 그대로 이미지에 넣습니다. GPT 이미지·나노바나나2·Flow·리더스 나노바나나에서만 적용 (한글이 깨지는 엔진은 글자 없이).</span>
-                        </div>
-                    </label>
-
-                    <!-- [2026-10-20 사장님] 이미지 분위기 — 기본은 Orbit 식 스톡 사진. 체크하면 9~10월 기사 삽화 방식으로 되돌린다. -->
-                    <label
-                        style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem; cursor: pointer; padding: 0.5rem 0.75rem; background: rgba(59, 130, 246, 0.08); border-radius: var(--radius-sm); border: 1px solid rgba(59, 130, 246, 0.25);">
-                        <input type="checkbox" id="image-look-editorial"
-                            style="width: 16px; height: 16px; accent-color: var(--primary);">
-                        <div>
-                            <span style="font-size: 0.85rem; color: var(--text-strong); font-weight: 600;">📰 기사 삽화 스타일로 만들기</span>
-                            <span style="font-size: 0.7rem; color: var(--text-muted); margin-left: 0.4rem;">끄면(기본) 깔끔한 스톡 사진 느낌으로 대표·소제목 이미지를 만듭니다. 켜면 예전처럼 사람을 줄이고 상황을 그대로 보여 주는 기사 삽화 방식입니다.</span>
-                        </div>
-                    </label>
-
-
+                            <option value="dropshot" data-icon="🍌" data-price="Pro 구독자 무제한 · 추가비용 0원 | UI 자동화 · 로그인 필요">리더스 나노바나나 무제한</option>
+                            <option value="genspark" data-icon="✨" data-price="로그인 필요 · 모델 선택 · UI 자동화">젠스파크</option>
+                        </select><span id="image-source-info-badge">선택됨</span></div><div class="image-file-actions"><button type="button" id="image-source-local-folder-btn" class="">폴더에서 순서대로</button><button type="button" id="image-source-saved-btn" class="">이미지 보관함</button></div></div>
+                    <p id="image-source-help" class="studio-help">선택한 엔진으로 이미지를 만듭니다. 직접 준비한 사진은 폴더나 보관함에서 가져오세요.</p>
+                    <div class="image-ai-disclosure"><label for="image-ai-mark-all" class="image-ai-toggle-label"><span><strong>AI 활용 표시</strong><small>발행할 때 모든 이미지에 네이버의 ‘AI 활용’ 표시를 켭니다.</small></span><input type="checkbox" id="image-ai-mark-all" aria-describedby="image-ai-mark-help image-ai-mark-status"><span class="studio-switch-track" aria-hidden="true"></span></label><div class="image-ai-disclosure-footer"><span id="image-ai-mark-help">끄면 AI로 생성한 이미지만 자동 판정합니다.</span><span id="image-ai-mark-status" role="status" aria-live="polite">설정 확인 중</span></div></div>
 
                     <!-- ✅ [SPEC-DROPSHOT-2026 2단계] dropshot 선택 시 로그인/확인 -->
                     <div id="mgmt-dropshot-login" style="display:none; margin-bottom:1rem; padding:0.6rem 0.75rem; background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.3); border-radius:8px;">
@@ -4225,15 +3715,11 @@
                     </div>
 
                     <!-- 안내 문구 -->
-                    <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem;">
-                        💡 Leonardo AI 키 하나로 SeeDream, Phoenix, Ideogram, Nano Banana Pro 모든 모델 사용 가능 | OpenAI 덕트테이프(gpt-image-2.5 Flare / Sunburst)는
-                        OpenAI API 키가
-                        필요합니다.
-                    </p>
+                    <p class="studio-help">덕테이프는 환경설정에 등록한 OpenAI API 키를 사용합니다.</p>
 
                     <!-- 🍌 나노바나나2 모델 및 프로젝트 한도 안내 -->
                     <details style="margin-bottom: 0.75rem; font-size: 0.75rem; color: var(--text-muted);">
-                        <summary style="cursor: pointer; font-weight: 600; color: var(--text-strong);">🍌 나노바나나2 사용 한도는?</summary>
+                        <summary style="cursor: pointer; font-weight: 600; color: var(--text-strong);">나노바나나 2 사용 한도</summary>
                         <div style="margin-top: 0.5rem; padding: 0.5rem 0.75rem; background: rgba(251, 191, 36, 0.08); border-radius: 8px; border: 1px solid rgba(251, 191, 36, 0.2); line-height: 1.5;">
                             <p style="margin: 0 0 0.5rem 0;"><strong>나노바나나2 (Gemini 3.1 Flash Image):</strong><br>종료된 preview ID 대신 안정 모델을 사용합니다. 사용 가능 여부와 RPM·TPM·RPD는 프로젝트 등급과 과금 상태에 따라 달라지므로 Google AI Studio 사용량 페이지에서 확인하세요.</p>
                         </div>
@@ -4246,7 +3732,7 @@
                             <input type="checkbox" id="thumbnail-text-option"
                                 style="width: 16px; height: 16px; accent-color: var(--primary);">
                             <div>
-                                <span style="font-size: 0.8rem; color: var(--text-strong); font-weight: 600;">🖼️ 썸네일 문구 넣기 (짧게)</span>
+                                <span style="font-size: 0.8rem; color: var(--text-strong); font-weight: 600;">썸네일에 짧은 문구 넣기</span>
                                 <span style="font-size: 0.7rem; color: var(--text-muted); margin-left: 0.5rem;">제목 전체 대신 숫자·핵심 문구만 짧게 넣습니다. 꺼 두면 이미지 탭 생성은 자동 판단</span>
                             </div>
                         </label>
