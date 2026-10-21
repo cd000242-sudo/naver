@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-21T13:07:47.233Z",
+  "generatedAt": "2026-10-21T13:18:34.286Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -3034,40 +3034,6 @@
       "provider": "claude"
     },
     {
-      "id": "381d8c6a53427254",
-      "urls": [
-        "https://hanbre.tistory.com/1589",
-        "https://www.tripenguin.com/feeds/6249570363993494717/comments/default"
-      ],
-      "guide": {
-        "direction": "검색자는 '참피가 지금 어디 있고 한국엔 언제 영향을 주는지'를 가장 궁금해하며, 자동완성에 괌·오키나와·대만·일본이 섞여 있어 경로가 여러 지역을 거치는 중임을 시사한다. 고수 글들은 이미 '경로·대만 상륙'을 다뤘으므로 괌·오키나와 통과 시점과 한국 영향 확률을 날짜별로 나눠 비어 있는 각도를 채워야 한다. 예보는 계속 갱신되므로 발표 시각을 명시한 표로 정리하면 재방문이 생긴다.",
-        "searchTargets": [
-          "태풍 참피 경로",
-          "괌 태풍 참피",
-          "태풍 참피 오키나와",
-          "태풍 참피 대만"
-        ],
-        "mustInclude": [
-          "10월 19일 기준 참피의 위치·중심기압·최대풍속(확인 필요: 기상청 발표)",
-          "괌→오키나와→대만 예상 이동 경로와 각 지점 통과 예상 시각(확인 필요)",
-          "대만 상륙 가능성을 확률·시나리오별로 구분한 표",
-          "한국 영향 시작 예상 시점과 영향권 지역(확인 필요: 기상청)",
-          "제주·남해안 항공편 결항 여부(확인 필요: 항공사 공지)"
-        ],
-        "mustAvoid": [
-          "같은 시기 발생한 다른 태풍(예: 29호 등)과 참피를 혼동",
-          "과거 대형 태풍과 단순 비교해 불필요한 공포를 조성"
-        ],
-        "checkBefore": [
-          "기상청 태풍정보 최신 발표(통보문 발표 시각 확인)",
-          "일본 기상청(JMA)·괌 국립기상청 공지와 국내 발표 간 경로 차이 확인"
-        ]
-      },
-      "at": "2026-10-19T21:06:48.786Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
       "id": "87249ece6b441be8",
       "urls": [
         "https://tali.kr/iphone-duo-buying",
@@ -4090,34 +4056,6 @@
         "checkBefore": [
           "jejuhappycall.com 공식 공지에서 이용대상·요금·운영시간 최신 정보 확인",
           "'본인확인즉시차단해제' 검색어가 이 소재에 실제로 해당하는지 원 데이터 재확인"
-        ]
-      },
-      "at": "2026-10-20T00:58:09.872Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "9b3b523fea686a5c",
-      "urls": [
-        "https://mexckorea.kr/megafile-homepage/",
-        "https://adaybook.com/osb-bank-internet-banking/",
-        "https://limeade.kr/samsung-support-center/"
-      ],
-      "guide": {
-        "direction": "검색자는 '메가파일' 이름은 아는데 정확한 도메인이 기억 안 나거나 유사·피싱 사이트와 혼동될까 봐 공식 주소를 재확인하려는 사람이 대표라 '메가파일/메가파일 홈페이지/www.megafile.co.kr' 계열을 대표 검색어로 잡는다. OSB은행·삼성 고객지원센터 글처럼 고수들은 주소+로그인 경로까지만 다뤘고, 메가파일이 정확히 어떤 서비스인지 설명해 유사 사이트와 구분해주는 지점은 비어 있다. 로그인·고객센터·요금 정보를 한 번에 정리하면 다시 찾는다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "메가파일의 정확한 서비스 성격 1줄 설명 (확인 필요: 공식 홈페이지 소개 페이지)",
-          "공식 도메인 www.megafile.co.kr과 유사·피싱 도메인 구분 안내 (확인 필요: 공식 공지)",
-          "로그인/회원가입 절차와 필요한 본인인증 수단 (확인 필요: 홈페이지 가입 화면)",
-          "고객센터 전화번호와 운영시간 (확인 필요: 홈페이지 하단 고객센터 정보)"
-        ],
-        "mustAvoid": [
-          "OSB은행·삼성 고객지원센터 등 다른 바로가기 글의 로그인 경로를 그대로 가져와 혼동 주지 않기"
-        ],
-        "checkBefore": [
-          "메가파일의 정확한 업종을 공식 홈페이지 소개 페이지에서 확인",
-          "공식 고객센터 번호와 최신 도메인 변경 여부를 홈페이지 공지사항에서 재확인"
         ]
       },
       "at": "2026-10-20T00:58:09.872Z",
@@ -12306,73 +12244,6 @@
           "views": 539,
           "answers": 6,
           "askedAt": "2026.10.17"
-        }
-      ]
-    },
-    {
-      "id": "64acd533eb74471e",
-      "urls": [
-        "https://niscity.com/employee-stock-ownership-income-tax-exemption/",
-        "https://orakb.happycommu.com/entry/%EC%96%91%EB%8F%84%EC%84%B8-%EC%8B%A0%EA%B3%A0%EA%B8%B0%EA%B0%84-%EB%B9%84%EA%B3%BC%EC%84%B8-%EC%9A%94%EA%B1%B4-%ED%99%95%EC%9D%B8-%EC%96%91%EB%8F%84%EC%86%8C%EB%93%9D%EC%84%B8-%EA%B3%84%EC%82%B0%EA%B8%B0",
-        "https://infc.bankhub.co.kr/34",
-        "https://ingc.happycommu.com/entry/%EC%96%91%EB%8F%84%EC%86%8C%EB%93%9D%EC%84%B8-%EC%8B%A0%EA%B3%A0%EA%B8%B0%ED%95%9C-%EC%8B%A0%EA%B3%A0%EB%B0%A9%EB%B2%95-%EB%B9%84%EA%B3%BC%EC%84%B8-%EC%9A%94%EA%B1%B4-%EA%B3%84%EC%82%B0%EA%B8%B0"
-      ],
-      "guide": {
-        "direction": "퇴직이나 인출 시점에 우리사주 세금이 근로소득인지 양도소득인지 헷갈리고, 조합 대출로 산 주식과 현금으로 산 주식의 과세가 다른지 몰라 막힌다. 고수 글들은 '과세특례·비과세 요건'만 나열하고 취득 방식별 차이와 보유기간별 매각 세금 계산은 안 보여준다. 인출 전 의무예탁기간 확인→취득자금(현금/대출) 구분→인출금 원천징수 여부→매각 시세차익 과세 순서로 정리해 판단하게 한다.",
-        "searchTargets": [
-          "우리사주 인출 과세",
-          "우리사주 인출시 세금",
-          "우리사주 인출 원천징수",
-          "우리사주 인출 비과세"
-        ],
-        "mustInclude": [
-          "의무예탁기간 경과 여부가 인출 가능 여부를 가름",
-          "조합 대출로 취득한 주식과 개인 현금으로 취득한 주식의 과세 방식 차이",
-          "인출금은 근로소득으로 보아 기본세율 원천징수될 수 있음",
-          "매각 시 시세차익은 보유기간에 따라 과세금액이 달라질 수 있음(확인 필요: 국세청·우리사주조합 규정)"
-        ],
-        "mustAvoid": [
-          "모든 우리사주 인출이 비과세라고 단정하기",
-          "대출로 산 주식과 현금으로 산 주식을 같은 과세로 설명하기"
-        ],
-        "checkBefore": [
-          "인출금 근로소득 원천징수 세율 및 대상 — 국세청 또는 우리사주조합 운영 규정",
-          "의무예탁기간 기준 기간 — (확인 필요: 우리사주조합 지침·관련 법령)",
-          "보유기간별 시세차익 과세·비과세 특례 적용 조건 — 국세청 소득세법 관련 고시"
-        ],
-        "solves": [
-          "퇴직 시 우리사주를 인출해도 되는지 헷갈림 → 의무예탁기간 경과 여부로 판단 기준 제시",
-          "인출시 근로소득으로 과세되는지 궁금함 → 원천징수 방식과 대상 정리",
-          "대출로 산 주식과 현금으로 산 주식 세금 차이를 모름 → 취득 방식별 과세 차이 구분 설명"
-        ],
-        "actionTitles": [
-          "우리사주 인출 방법과 인출시 세금 미리 확인하기"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "퇴직시 우리사주 인출",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=34227099&answerNo=1&qb=7Jqw66as7IKs7KO87J247Lac",
-          "views": 12454,
-          "answers": 1,
-          "askedAt": "2007.08.23"
-        },
-        {
-          "title": "우리사주 인출시 근로소득으로 잡히나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40301&docId=491336607&answerNo=1&qb=7Jqw66as7IKs7KO87J247Lac",
-          "views": 405,
-          "answers": 1,
-          "askedAt": "2026.01.14"
-        },
-        {
-          "title": "우리사주 인출",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40309&docId=491887402&answerNo=1&qb=7Jqw66as7IKs7KO87J247Lac",
-          "views": 125,
-          "answers": 1,
-          "askedAt": "2026.02.15"
         }
       ]
     },
@@ -25191,132 +25062,6 @@
       ]
     },
     {
-      "id": "bebadd6f1da90fc2",
-      "urls": [
-        "https://yoanarc.com/1409"
-      ],
-      "guide": {
-        "direction": "지식인 질문들은 두 사람이 실제 혼인신고·결혼식을 했는지와 딸 나엘이 슈돌에 언제 나오는지에서 막혀 있다. 고수 글 제목은 결혼·프로필·나이·딸·슈돌을 나열만 해 혼인 시점과 출연 회차 확인은 비워 두었다. 이 글은 학교 2013에서의 만남부터 결혼 발표, 딸 출생과 슈돌 출연까지 타임라인표로 정리해 끝낸다.",
-        "searchTargets": [
-          "박세영 곽정욱"
-        ],
-        "mustInclude": [
-          "박세영·곽정욱 만남 계기(드라마 '학교 2013' 동료, 지식인 기준 2022년) (확인 필요: 공식 인터뷰·기사)",
-          "결혼(혼인신고/결혼식) 공식 발표 날짜 및 경로 (확인 필요: 소속사 공식 입장)",
-          "딸 나엘 출생일 및 슈퍼맨이 돌아왔다 출연 회차·방영일 (확인 필요: 방송사 공식 편성표)",
-          "두 사람 나이·프로필(생년월일, 출연작) (확인 필요: 공식 프로필)"
-        ],
-        "mustAvoid": [
-          "혼인 여부를 확정하지 않고 결혼했다고 단정 — 비혼출산 가능성과 혼동 금지",
-          "같은 시기 활동하는 다른 연예인 부부·육아 예능 출연자와 혼동"
-        ],
-        "checkBefore": [
-          "실제 혼인신고/결혼식 여부와 날짜 — 소속사 공식 입장 또는 본인 SNS 확인",
-          "슈돌 출연 방영일과 회차 — KBS 공식 편성표·예고편 확인",
-          "딸 나엘 출생일 및 200일 날짜 — 공식 인터뷰·기사 확인"
-        ],
-        "solves": [
-          "박세영 곽정욱 진짜 결혼한거야? → 혼인 발표 시점과 경로를 확인해 정리",
-          "슈돌에 언제 나오나 → 출연 회차·방영일 정리",
-          "두 사람 어떻게 만났나 → 학교 2013 인연부터 교제·결혼까지 타임라인 제공"
-        ],
-        "actionTitles": [
-          "박세영 곽정욱 결혼 확인, 프로필·나이·만남 타임라인",
-          "박세영 곽정욱 딸 나엘 슈돌 출연 정보 지금 확인하기"
-        ]
-      },
-      "at": "2026-10-20T12:32:18.112Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "곽정욱과 박세영의 딸, 200일 기념 촬영은 어....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=31402&docId=490293124&answerNo=1&qb=67CV7IS47JiBIOqzveygleyasSDqsrDtmLztlITroZztlYQg64KY7J20IOuCmOyXmA==",
-          "views": 60,
-          "answers": 1,
-          "askedAt": "2025.11.21"
-        },
-        {
-          "title": "박세영 곽정욱 부부의 나들이, 가장 인상적인....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=30104&docId=492894147&answerNo=2&qb=67CV7IS47JiBIOqzveygleyasSDqsrDtmLztlITroZztlYQg64KY7J20IOuCmOyXmA==",
-          "views": 47,
-          "answers": 2,
-          "askedAt": "2026.04.11"
-        },
-        {
-          "title": "박세영과 곽정욱의 14개월 딸, 어떤 모습일까....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=3010101&docId=495609855&answerNo=1&qb=67CV7IS47JiBIOqzveygleyasSDqsrDtmLztlITroZztlYQg64KY7J20IOuCmOyXmA==",
-          "views": 14,
-          "answers": 1,
-          "askedAt": "2026.10.19"
-        }
-      ]
-    },
-    {
-      "id": "d44feec43fe2e5a4",
-      "urls": [
-        "https://xn--2i0bj7ghwb1vexzada718wmmz.kr/2299",
-        "https://routeit.kr/%eb%9d%bc%ec%8a%a4%ed%8a%b8%eb%a7%88%ec%9d%bc-%ed%99%88%ed%8e%98%ec%9d%b4%ec%a7%80/",
-        "https://soyblog.co.kr/%eb%8c%80%ea%b5%ac-%ed%95%99%eb%b6%80%eb%aa%a8-%ec%9b%90%ec%8a%a4%ed%86%b1-%ec%a7%80%ec%9b%90%ec%84%bc%ed%84%b0-%ed%99%88%ed%8e%98%ec%9d%b4%ec%a7%80-%eb%b0%94%eb%a1%9c%ea%b0%80%ea%b8%b0-https-www-d/",
-        "https://xn--2i0bj7ghwb1vexzada718wmmz.kr/2175",
-        "https://adaybook.com/bupyeong-health-center-homepage/",
-        "https://lifekeep.kr/police-lost-and-found-center/"
-      ],
-      "guide": {
-        "direction": "검색자는 처음학교로가 유보통합포털로 바뀐 뒤 대기번호가 어떻게 운영되는지, 어린이집 재원 중 유치원 대기 당첨 시 퇴소신청을 따로 해야 하는지 막혀 있다. '바로가기' 제목들은 링크만 주고 이 절차는 안 짚는다. 연령별 신청 가능 시기표와 대기 당첨 후 처리 순서로 글을 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "2025년부터 처음학교로가 유보통합포털로 전환된 사실",
-          "일반모집 추첨 후 대기번호 운영 방식",
-          "만3세~4세 등 연령별 입학 가능 시기",
-          "어린이집 재원 중 당첨 시 퇴소신청 직접 해야 하는지 여부(확인 필요: 유보통합포털 공지)"
-        ],
-        "mustAvoid": [
-          "어린이집 입소대기(복지로·구청 소관)와 유치원 입소대기(유보통합포털) 제도를 섞어 쓰지 않기",
-          "같은 날 다룬 라스트마일·보건소·유실물센터 등 다른 바로가기 소재와 내용 혼동하지 않기"
-        ],
-        "checkBefore": [
-          "enter.childinfo.go.kr 공식 공지에서 2026학년도 일반모집·추가모집 일정 확인",
-          "유보통합포털에서 처음학교로 명칭변경 적용 범위 확인"
-        ],
-        "solves": [
-          "유치원 입소대기 어디서 신청하는지 모른다 → 유보통합포털(enter.childinfo.go.kr) 신청 경로 안내",
-          "어린이집 다니며 유치원 대기 당첨되면 퇴소신청을 따로 해야 하는지 모른다 → 처리 순서 안내",
-          "만3·4세 아동이 지금 신청 가능한지 모른다 → 연령별 신청 가능 시기표 제공"
-        ],
-        "actionTitles": [
-          "유치원입소대기 신청 방법과 대기번호 뜻 한번에 확인",
-          "유치원 입소대기 사이트 바로가기, 연령별 신청 시기"
-        ]
-      },
-      "at": "2026-10-20T12:32:18.112Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "어린이집 유치원 입소대기",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110102&docId=488542334&answerNo=7&qb=7Jyg7LmY7JuQ7J6F7IaM64yA6riwIGh0dHBzIGVudGVyIGNoaWxkaW5mbyBnbw==",
-          "views": 2019,
-          "answers": 7,
-          "askedAt": "2025.12.13"
-        },
-        {
-          "title": "유치원 입소대기",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110102&docId=490425157&answerNo=2&qb=7Jyg7LmY7JuQ7J6F7IaM64yA6riwIGh0dHBzIGVudGVyIGNoaWxkaW5mbyBnbw==",
-          "views": 1358,
-          "answers": 2,
-          "askedAt": "2025.12.10"
-        },
-        {
-          "title": "유치원, 어린이집 입소 신청",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110102&docId=435938163&answerNo=12&qb=7Jyg7LmY7JuQ7J6F7IaM64yA6riwIGh0dHBzIGVudGVyIGNoaWxkaW5mbyBnbw==",
-          "views": 840,
-          "answers": 13,
-          "askedAt": "2025.11.23"
-        }
-      ]
-    },
-    {
       "id": "c865d009c7fc6344",
       "urls": [
         "https://tnalnext.com/entry/2026-%EB%B6%80%EC%97%AC-%EB%82%99%ED%99%94%EB%86%80%EC%9D%B4-11%EC%9B%94-7%EC%9D%BC-%EC%9D%BC%EC%A0%95%C2%B7%EC%9E%85%EC%9E%A5%EB%A3%8C-%EB%A7%A4%EC%A7%84-%ED%9B%84-%EC%B7%A8%EC%86%8C%ED%91%9C-%ED%99%95%EC%9D%B8-%EB%B0%A9%EB%B2%95",
@@ -30417,68 +30162,6 @@
       ]
     },
     {
-      "id": "ee6982791c612ed9",
-      "urls": [
-        "https://infoarounds.com/%ec%9d%bc%ec%83%81%ec%86%8d-%ed%95%84%ec%9a%94%ec%a0%95%eb%b3%b4/national-assistant-duplicate-alert-two-apps/",
-        "https://poweroftryhope.infoboxsunny.com/114"
-      ],
-      "guide": {
-        "direction": "지식인에는 국민비서 알림이 문자와 카톡으로 중복 오거나 수단을 바꾸는 법을 묻는 질문이 반복된다. 고수 블로그 제목은 신청 채널과 서비스 구독을 구분한다고만 하고 실제 변경·재신청 절차는 짚지 않는다. 이 글은 채널 변경, 서비스별 구독 해지, 예약번호 재발급 순서를 단계별로 정리해 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "알림 중복 원인: 여러 채널(문자+카톡)로 동시 신청된 경우 설명",
-          "신청 채널 변경 절차(홈페이지 로그인 후 알림수단 변경)(확인 필요: 공식 사이트)",
-          "서비스 구독과 신청 채널의 차이를 구분한 표",
-          "예약번호·알림 재발급(다시 받는 법) 절차(확인 필요: 공식 사이트)"
-        ],
-        "mustAvoid": [
-          "종료된 코로나19 백신 예약 알림 서비스를 현재 서비스처럼 설명",
-          "국민비서 전체 서비스를 백신예약 한 가지로만 좁혀서 설명",
-          "예시에 실제 전화번호·개인정보 노출"
-        ],
-        "checkBefore": [
-          "현재 국민비서 홈페이지의 서비스 목록과 알림 변경 메뉴 명칭 — 공식 홈페이지",
-          "중복 알림 관련 공지사항 — 정부24/행정안전부 공식 공지"
-        ],
-        "solves": [
-          "알림이 문자와 카톡으로 두 번 와서 헷갈림 → 신청 채널과 서비스 구독의 차이를 구분해 설명",
-          "알림 수단을 카톡으로 바꾸고 싶은데 방법을 모름 → 채널 변경 절차 단계별 정리",
-          "예약번호·알림을 다시 받고 싶음 → 재신청·재발급 절차 안내"
-        ],
-        "actionTitles": [
-          "국민비서 알림 두 번 올 때, 신청 채널 변경하는 법",
-          "국민비서 구삐 알림 서비스 구독 구분, 바로 확인",
-          "국민비서구삐 예약번호 다시 받는 법, 신청 절차 정리"
-        ]
-      },
-      "at": "2026-10-20T12:32:18.112Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "국민비서 구삐 알림 서비스 변경하는 법",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60222&docId=398295100&answerNo=9&qb=6rWt66+867mE7IScIOyCrOyghCDslYzrprzshJzruYTsiqQg6rWs7IKQ",
-          "views": 5889,
-          "answers": 12,
-          "askedAt": "2025.07.16"
-        },
-        {
-          "title": "국민비서 구삐 코로나백신",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=111604&docId=392749328&answerNo=1&qb=6rWt66+867mE7IScIOyCrOyghCDslYzrprzshJzruYTsiqQg6rWs7IKQ",
-          "views": 5710,
-          "answers": 2,
-          "askedAt": "2021.06.20"
-        },
-        {
-          "title": "코로나19 백신예약 국민비서 구삐 예약알림톡",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6010104&docId=396149288&answerNo=1&qb=6rWt66+867mE7IScIOyCrOyghCDslYzrprzshJzruYTsiqQg6rWs7IKQ",
-          "views": 4352,
-          "answers": 2,
-          "askedAt": "2021.08.02"
-        }
-      ]
-    },
-    {
       "id": "c26e61f258750890",
       "urls": [
         "https://abencom.com/%eb%a0%89%ec%84%9c%ec%8a%a4-es-%ea%b0%80%ea%b2%a9%ea%b3%bc-%ec%97%b0%eb%b9%84-%ec%b4%9d%ec%a0%95%eb%a6%ac-2026-%ed%92%80%ec%b2%b4%ec%9d%b8%ec%a7%80-%eb%aa%a8%eb%8d%b8-%ed%8a%b9%ec%a7%95%ec%9d%80/",
@@ -30850,76 +30533,6 @@
           "views": 3078,
           "answers": 1,
           "askedAt": "2004.08.03"
-        }
-      ]
-    },
-    {
-      "id": "329c02b73fbe2607",
-      "urls": [
-        "https://smans.tistory.com/entry/%EC%95%94%ED%98%B8%ED%99%94%ED%8F%90-%EC%84%B8%EA%B8%88-%EC%99%84%EB%B2%BD-%EA%B0%80%EC%9D%B4%EB%93%9C-6-%EC%84%B8%EB%AC%B4-%EC%A1%B0%EC%82%AC-%EB%8C%80%EB%B9%84-%EC%8B%A4%EC%88%98-%EC%82%AC%EB%A1%80-%EB%B6%84%EC%84%9D-%EA%B0%80%EC%82%B0%EC%84%B8%EC%99%80-%EA%B3%BC%ED%83%9C%EB%A3%8C-%EA%B3%84%EC%82%B0",
-        "https://niscity.com/tax-audit-preliminary-response-steps/",
-        "https://niscity.com/nts-notice-response-guide/"
-      ],
-      "guide": {
-        "direction": "세무조사 사전통지서를 받은 사람은 등기로 오는지 전화로 오는지, 통지 후 조사 개시까지 며칠이나 준비 기간이 있는지부터 막막해한다. 고수 글들은 '대응 절차·주의사항'만 짚고 실제 가산세·과태료가 얼마나 불어나는지 계산을 보여주지 않는다. 독자는 통지 수령 방식별 확인법, 조사 종류 구분, 신고불성실·납부지연 가산세 계산 공식을 표로 보면 이 글로 끝낸다.",
-        "searchTargets": [
-          "세무조사 사전통지 기간",
-          "세무조사 사전통지서",
-          "세무 조사 종류",
-          "세무조사 대상"
-        ],
-        "mustInclude": [
-          "세무조사 사전통지서 수령 방식(등기우편·전화)별 확인 절차",
-          "사전통지~조사개시까지 준비 기간(확인 필요: 국세청 공식 안내)",
-          "신고불성실가산세·납부지연가산세 계산 공식과 예시",
-          "세무조사 종류(정기/비정기) 구분과 암호화폐 거래소 자료제출 관련 대상 선정 기준",
-          "소명자료 준비 체크리스트(거래내역, 매매단가 등)"
-        ],
-        "mustAvoid": [
-          "특정 세무사·세무법인 상호를 신뢰 보증처럼 인용하지 말 것",
-          "양도세·상속세 세무조사와 암호화폐 세무조사를 같은 절차로 혼동하지 말 것",
-          "수술·입원 등 개인 사정으로 조사가 연기된다는 사례를 일반 규칙처럼 쓰지 말 것"
-        ],
-        "checkBefore": [
-          "암호화폐 세무조사 사전통지서의 실제 서식과 등기/전화 통지 관행 (국세청 공식 안내 확인)",
-          "가산세·과태료 계산에 쓰이는 최신 세율 (국세청 홈페이지·세법 원문 확인)",
-          "세무조사 종류별(정기/비정기) 구분 기준 (국세청 공지 확인)"
-        ],
-        "solves": [
-          "세무조사 사전통지서가 등기로 오는지 전화로 오는지 몰라 불안하다 → 통지 방식별 확인 절차와 준비 기간 안내",
-          "사전통지 받으면 뭘 준비해야 하는지 모른다 → 소명자료 체크리스트 제공",
-          "가산세·과태료가 얼마나 나올지 감이 안 온다 → 가산세 계산 공식과 예시표 제공"
-        ],
-        "actionTitles": [
-          "세무조사 사전통지서 등기·전화로 왔다면 기간부터 확인하는 법",
-          "국세청 세무조사 대상되면 가산세·과태료 얼마? 계산법 정리",
-          "세무조사 종류와 대상 기준, 암호화폐 투자자가 꼭 확인할 점"
-        ]
-      },
-      "at": "2026-10-20T12:32:18.112Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "세무조사 사전통지 받았는데 미리 준비할 게 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40309&docId=494318357&answerNo=1&qb=7IS466y0IOyhsOyCrCDsgqzsoIQg7Ya17KeA",
-          "views": 77,
-          "answers": 1,
-          "askedAt": "2026.07.15"
-        },
-        {
-          "title": "세무조사 사전통지를 받았는데 수술과 입원 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40309&docId=495250781&answerNo=1&qb=7IS466y0IOyhsOyCrCDsgqzsoIQg7Ya17KeA",
-          "views": 27,
-          "answers": 1,
-          "askedAt": "2026.09.21"
-        },
-        {
-          "title": "양도세 세무조사 사전 통지 대응 여부",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40305&docId=466858475&answerNo=7&qb=7IS466y0IOyhsOyCrCDsgqzsoIQg7Ya17KeA",
-          "views": 1942,
-          "answers": 8,
-          "askedAt": "2026.06.10"
         }
       ]
     },
@@ -33213,43 +32826,6 @@
           "askedAt": "2025.03.14"
         }
       ]
-    },
-    {
-      "id": "e2880848ef0ec22e",
-      "urls": [
-        "https://comstory50s.tistory.com/entry/10%EC%9B%94-19%EC%9D%BC-%EB%AC%B4%EC%88%9C%EC%9C%84-%EC%9E%84%EC%9D%98%EA%B3%B5%EA%B8%89-9%EA%B3%B3-%EB%B9%84%EA%B5%90-%EB%B6%80%EC%82%B0-%EC%9D%B8%EC%B2%9C-%EC%84%9C%EC%9A%B8-%EC%9D%98%EC%99%95-%EC%B2%AD%EC%95%BD-%EB%B6%84%EC%84%9D",
-        "https://hanoelswould.com/entry/%EA%B2%BD%EA%B8%B0%EB%8F%84-%EB%B6%80%EC%82%B0-%EC%9D%B8%EC%B2%9C-%EC%B6%9C%EC%82%B0%EC%A7%80%EC%9B%90%EA%B8%88-2026%EB%85%84-%ED%98%9C%ED%83%9D-%EB%B9%84%EA%B5%90"
-      ],
-      "guide": {
-        "direction": "무순위와 임의공급이 뭐가 다른지 몰라 자동완성에 '차이'를 바로 붙여 검색한다. 고수 글은 '9곳 비교'만 나열하고 두 제도의 신청자격 차이는 못 풀었다. 자격요건 비교표와 10월 19일 부산·인천·서울·의왕 등 9곳 중 내 지역 조건을 확인하면 끝낸다.",
-        "searchTargets": [
-          "무순위 임의공급차이"
-        ],
-        "mustInclude": [
-          "무순위 공급과 임의공급의 신청자격 차이(청약통장 필요 여부 등) (확인 필요: 청약홈 공고문)",
-          "10월 19일 공급 9곳 지역(부산·인천·서울·의왕) 단지별 공급 정보 (확인 필요: 각 지자체/시행사 공고)",
-          "지역별 거주요건(해당지역 거주자 우선 여부) 비교 (확인 필요: 청약홈)"
-        ],
-        "mustAvoid": [
-          "무순위와 임의공급을 같은 제도로 혼동해 신청자격을 잘못 안내하는 것",
-          "9곳 중 일부 지역 정보만 보고 전체 공급조건이 동일한 것처럼 일반화하는 것"
-        ],
-        "checkBefore": [
-          "10월 19일 공급 9곳의 정확한 단지명·물량·신청자격 (출처: 한국부동산원 청약홈 공고)",
-          "무순위·임의공급 용어의 법적 정의 차이 (출처: 청약홈 FAQ 또는 주택공급에 관한 규칙)"
-        ],
-        "solves": [
-          "무순위랑 임의공급이 뭐가 다른지 헷갈림 → 자격요건·청약통장 필요 여부 비교로 차이 정리",
-          "부산·인천·서울·의왕 중 내 지역 공급조건이 궁금함 → 지역별 거주요건·신청방법 정리"
-        ],
-        "actionTitles": [
-          "무순위 임의공급차이부터 보는 부산·인천·서울 청약 비교",
-          "무순위 임의공급차이 확인 후 보는 의왕 포함 9곳 신청조건"
-        ]
-      },
-      "at": "2026-10-20T12:32:18.112Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
     },
     {
       "id": "4b06ad31838ce086",
@@ -84452,6 +84028,954 @@
           "askedAt": "2026.10.17"
         }
       ]
+    },
+    {
+      "id": "ea7edfe793c29618",
+      "urls": [
+        "https://economyfactory.com/tesla-roadster/",
+        "https://whitepebble.tistory.com/entry/%EC%9D%BC%EB%A1%A0-%EB%A8%B8%EC%8A%A4%ED%81%AC%EC%9D%98-%ED%85%8C%EC%8A%AC%EB%9D%BC-%EB%A1%9C%EB%93%9C%EC%8A%A4%ED%84%B0-%EA%B3%B5%EA%B0%9C-%ED%95%98%EB%8A%98%EC%9D%84-%EB%82%98%EB%8A%94-%EC%A0%84%EA%B8%B0-%EC%8A%A4%ED%8F%AC%EC%B8%A0%EC%B9%B4%EC%9D%98-%EB%93%B1%EC%9E%A5"
+      ],
+      "guide": {
+        "direction": "검색자는 '일론머스크 차'·'일론머스크 자동차'를 치면서 로드스터의 실제 가격·제로백보다 머스크의 재산·발언 논란에 더 쏠려 정작 로드스터 스펙은 못 찾는다. 고수 글은 제목에 가격·사전예약·제로백을 걸었지만 머스크의 보유 차량·자산과 로드스터를 연결해 정리한 글은 없다. 이 글은 로드스터 사양표와 머스크 보유 차량 목록을 함께 정리해 독자가 한 번에 비교하게 한다.",
+        "searchTargets": [
+          "일론머스크 차",
+          "일론머스크 자동차",
+          "일론머스크 재산"
+        ],
+        "mustInclude": [
+          "테슬라 로드스터 예상 가격 (확인 필요: 테슬라 공식 발표)",
+          "사전예약 방법·절차 단계별 정리 (확인 필요: 테슬라 공식 홈페이지)",
+          "제로백 수치 (확인 필요: 테슬라 공식 발표)",
+          "일론 머스크 보유 차량·자산 목록과 로드스터 연결 정리 (확인 필요: 공식 자료)",
+          "로드스터 공개 행사 일자·장소 (확인 필요: 원문 기사)"
+        ],
+        "mustAvoid": [
+          "일론 머스크 재산 규모를 지식인처럼 과장 비교하는 서술(예: '재산 100조는 패배자' 식 인용)",
+          "호날두 등 다른 유명인과의 우월 비교로 흐르는 내용",
+          "사전예약을 사칭한 사기 이슈와 혼동되지 않게 공식 채널만 안내"
+        ],
+        "checkBefore": [
+          "테슬라 로드스터 공식 가격·사양 발표 (테슬라 공식 뉴스룸/사이트)",
+          "사전예약 공식 절차 (테슬라 공식 홈페이지)",
+          "로드스터 공개 행사 날짜·장소 (원문 기사)"
+        ],
+        "solves": [
+          "일론머스크 차가 정확히 뭔지 궁금함 → 로드스터 사양·가격·제로백을 표로 정리해 준다",
+          "사전예약 방법을 모름 → 사전예약 절차를 단계별로 안내한다",
+          "일론머스크 자동차 전체가 궁금함 → 보유 차량 목록과 로드스터를 연결해 정리한다"
+        ],
+        "actionTitles": [
+          "테슬라 로드스터 공개, 예상 가격·사전예약 방법·제로백 총정리",
+          "일론머스크 차, 테슬라 로드스터 제로백·스펙 비교 정리",
+          "테슬라 로드스터 사전예약 신청 방법과 예상 가격 확인하기"
+        ]
+      },
+      "at": "2026-10-21T13:15:41.661Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "오늘 일론머스크 사칭 사기를 당했습니다",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60220&docId=395595901&answerNo=2&qb=7J2866Gg66i47Iqk7YGs",
+          "views": 436,
+          "answers": 2,
+          "askedAt": "2026.09.22"
+        },
+        {
+          "title": "일론머스크가 이런발언 하면",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=111002&docId=495402767&answerNo=1&qb=7J2866Gg66i47Iqk7YGs",
+          "views": 91,
+          "answers": 3,
+          "askedAt": "2026.10.03"
+        },
+        {
+          "title": "일론머스크가 이 세상의 왕인가요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=111002&docId=494804490&answerNo=4&qb=7J2866Gg66i47Iqk7YGs",
+          "views": 89,
+          "answers": 5,
+          "askedAt": "2026.08.20"
+        }
+      ]
+    },
+    {
+      "id": "5079d182e1209fde",
+      "urls": [
+        "https://jab-guyver.co.kr/3229",
+        "https://felixkim.tistory.com/entry/%EC%97%91%EC%85%80-%EC%A1%B0%EA%B1%B4%EB%B6%80%EC%84%9C%EC%8B%9D-%EC%88%98%EC%8B%9D%EC%9C%BC%EB%A1%9C-%ED%96%89-%EC%A0%84%EC%B2%B4-%EC%83%89%EC%B9%A0%ED%95%98%EA%B8%B0"
+      ],
+      "guide": {
+        "direction": "지식인 사용자들은 LEFT 수식을 조건부서식 새규칙에 넣어도 색이 적용되지 않는 이유를 못 찾고, 짝수행 전체 색칠이나 월이 바뀔 때마다 자동으로 색이 이어지는 설정법도 막막해한다. 고수 글들은 '복사붙여넣기 오류'와 '행 전체 색칠'을 각각 다루지만 =LEFT($A4,4)=\"2024\"가 안 먹히는 셀 참조 오류 원인은 짚어주지 않는다. 이 글은 행 전체 색칠·날짜 자동 변경 수식 예시와 자주 틀리는 포인트를 체크리스트로 줘 독자가 바로 따라 고치게 한다.",
+        "searchTargets": [
+          "엑셀 조건부 서식 수식",
+          "엑셀 조건부서식 날짜",
+          "엑셀 조건부서식 새규칙",
+          "엑셀 조건부서식 색 해제방법"
+        ],
+        "mustInclude": [
+          "LEFT 함수 조건부서식 수식 예시와 셀 참조($A4 vs $A$4) 오류 포인트",
+          "행 전체 색칠용 수식(열 고정 $ 사용법) 정리",
+          "짝수/홀수 행 구분 수식(ISEVEN·MOD+ROW) 정리",
+          "월이 바뀔 때마다 자동으로 색이 바뀌는 날짜 조건부서식 설정법",
+          "조건부서식 색 해제·삭제 방법"
+        ],
+        "mustAvoid": [
+          "영상 튜토리얼로 때우고 텍스트 설명을 생략하는 것(지식인 질문자가 '영상 말고 디테일하게' 요청)",
+          "엑셀 버전별(2016/2021/365) 메뉴 위치 차이를 무시하고 한 가지 버전만 설명",
+          "'서식 복사'와 '조건부서식 규칙'을 혼동해서 설명"
+        ],
+        "checkBefore": [
+          "LEFT 함수 조건부서식 셀 참조($A4 vs $A$4) 동작 방식 (엑셀 자체 테스트로 확인)",
+          "최신 엑셀(365) 조건부서식 메뉴 경로가 이전 버전과 같은지 (마이크로소프트 공식 지원 문서)"
+        ],
+        "solves": [
+          "LEFT 함수 조건부서식 새규칙 넣어도 적용 안됨 → 셀 참조 오류와 올바른 수식 예시 제공",
+          "짝수행만 전체 색칠하고 싶음 → ISEVEN(ROW())/MOD 수식으로 행 전체 색칠하는 법 정리",
+          "월 바뀔 때마다 색이 자동으로 이어지길 원함 → 날짜 기반 조건부서식 자동 적용 설정법 안내"
+        ],
+        "actionTitles": [
+          "엑셀 조건부서식 수식으로 행 전체 색칠하는 방법 정리",
+          "엑셀 조건부서식 날짜·텍스트 수식으로 새규칙 설정하는 법",
+          "엑셀 조건부서식 색 삭제·해제하는 방법 한번에 총정리"
+        ]
+      },
+      "at": "2026-10-21T13:15:41.661Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "엑셀 조건부서식",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=102020101&docId=491435493&answerNo=1&qb=7JeR7IWA7KGw6rG067aA7ISc7Iud",
+          "views": 763,
+          "answers": 2,
+          "askedAt": "2026.01.18"
+        },
+        {
+          "title": "엑셀 조건부 서식",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=102020101&docId=493688260&answerNo=2&qb=7JeR7IWA7KGw6rG067aA7ISc7Iud",
+          "views": 142,
+          "answers": 3,
+          "askedAt": "2026.06.04"
+        },
+        {
+          "title": "엑셀 조건부서식",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=102020101&docId=493490517&answerNo=2&qb=7JeR7IWA7KGw6rG067aA7ISc7Iud",
+          "views": 98,
+          "answers": 2,
+          "askedAt": "2026.07.05"
+        }
+      ]
+    },
+    {
+      "id": "0e3e30d2a8c89b9c",
+      "urls": [
+        "https://economyfactory.com/windows-10-security-update/",
+        "https://tmtmfh-it.tistory.com/entry/windows-11-vbs-core-isolation-gaming-boost-200"
+      ],
+      "guide": {
+        "direction": "검색자는 '윈도우 보안 업데이트'를 치면서 ESU 연장 소식보다 지금 당장 Defender가 꺼지거나 Secure Boot가 안 켜지는 문제를 더 자주 겪는다. 고수 글은 ESU 무료 신청 방법에 집중해 알약 등 타 백신과 충돌로 보안이 꺼지는 원인이나 GPT·MBR 안 맞아 부팅이 막히는 상황은 못 풀어준다. 이 글은 ESU 신청 절차와 함께 Secure Boot 활성화 전 디스크 형식 확인, 보안 꺼짐 원인 체크리스트를 줘 끝까지 해결하게 한다.",
+        "searchTargets": [
+          "윈도우 보안 업데이트",
+          "윈도우 보안 부팅 활성화",
+          "윈도우 보안 끄기",
+          "윈도우 보안해제하는법"
+        ],
+        "mustInclude": [
+          "Windows 10 ESU(확장 보안 업데이트) 2027년까지 연장 여부 (확인 필요: 마이크로소프트 공식 발표)",
+          "ESU 무료 신청 조건·절차 단계별 정리 (확인 필요: 마이크로소프트 공식 지원 문서)",
+          "Secure Boot 활성화 전 디스크 형식(GPT/MBR) 확인법",
+          "Windows 보안(Defender)이 계속 꺼지는 원인과 타 백신(알약 등) 충돌 체크",
+          "보안 설정창 멈춤 시 시스템 파일 복구(sfc /scannow) 안내"
+        ],
+        "mustAvoid": [
+          "Secure Boot 활성화와 BIOS/UEFI 설정을 혼동해 설명(디스크 형식 안 맞으면 부팅 자체가 막히는 위험을 명확히 경고)",
+          "ESU 무료 대상(가정용)과 유료/기업용 라이선스를 뭉뚱그려 설명",
+          "Windows 보안(Defender)과 타사 백신(알약 등)을 동시에 켜두라고 권장하는 것"
+        ],
+        "checkBefore": [
+          "Windows 10 ESU 연장 발표의 정확한 날짜·대상(가정용/기업용) (마이크로소프트 공식 발표)",
+          "ESU 무료 신청 가능한 조건과 신청 경로 (마이크로소프트 공식 지원 페이지)",
+          "Secure Boot 활성화 시 GPT/MBR 확인 메뉴 경로의 최신 버전 (마이크로소프트 공식 문서)"
+        ],
+        "solves": [
+          "ESU 신청하려는데 조건을 모름 → 무료 신청 조건과 단계별 절차 정리",
+          "보안부팅 켰더니 윈도우 진입이 안 됨 → 활성화 전 GPT/MBR 확인 체크리스트 제공",
+          "윈도우 보안이 계속 꺼짐 → 알약 등 타 백신과 충돌 원인과 해결 순서 정리"
+        ],
+        "actionTitles": [
+          "윈도우10 ESU 무료 신청 방법과 조건 한눈에 정리",
+          "윈도우 보안 부팅 활성화 전 GPT·MBR 확인하는 법",
+          "윈도우 보안 계속 꺼짐, 원인 확인하고 끄는법 정리"
+        ]
+      },
+      "at": "2026-10-21T13:15:41.661Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "윈도우 보안 프로그램 질문입니다.",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110&docId=493341172&answerNo=1&qb=7JyI64+E7Jqw67O07JWI",
+          "views": 350,
+          "answers": 3,
+          "askedAt": "2026.05.11"
+        },
+        {
+          "title": "윈도우 보안부팅",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10301&docId=494434794&answerNo=1&qb=7JyI64+E7Jqw67O07JWI",
+          "views": 290,
+          "answers": 1,
+          "askedAt": "2026.07.24"
+        },
+        {
+          "title": "윈도우보안을 누르면 설정창이 멈춰요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10301&docId=494152522&answerNo=1&qb=7JyI64+E7Jqw67O07JWI",
+          "views": 142,
+          "answers": 1,
+          "askedAt": "2026.07.03"
+        }
+      ]
+    },
+    {
+      "id": "7336689db843027a",
+      "urls": [
+        "https://tmhub.co.kr/1297",
+        "https://dn12.tmddn14.com/entry/%EB%B6%81%ED%95%9C%EC%82%B0%EB%93%B1%EC%82%B0%EC%BD%94%EC%8A%A4"
+      ],
+      "guide": {
+        "direction": "검색자는 천황사와 도갑사 중 어디서 출발해야 구름다리와 억새밭을 모두 보는지, 왕복이냐 종주냐에 따라 몇 시간 잡아야 하는지 헷갈려 들어온다. 고수 글 제목은 '비교'를 걸었지만 코스별 소요시간을 한 표로 정리했는지는 확인되지 않아 독자가 직접 비교하기 어렵다. 이 글은 천황사 코스·도갑사 코스·종주 코스의 구간별 시간과 난이도를 표로 묶어 한 번에 선택하게 한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "천황사 코스 구간별 소요시간(확인 필요: 월출산국립공원 공식 탐방로 안내)",
+          "도갑사 코스 구간별 소요시간(확인 필요: 월출산국립공원 공식 탐방로 안내)",
+          "구름다리 위치와 왕복 거리(확인 필요: 공식 안내판)",
+          "억새밭 포인트와 시기(확인 필요: 지자체/공원 공지)",
+          "종주 코스 전체 소요시간과 난이도(확인 필요: 공식 탐방로 안내)"
+        ],
+        "mustAvoid": [
+          "북한산 등산코스 정보와 섞어서 월출산 코스인 것처럼 쓰지 않기",
+          "구름다리·탐방로 통제 여부를 확인 안 하고 상시 개방인 것처럼 쓰지 않기"
+        ],
+        "checkBefore": [
+          "월출산국립공원 공식 홈페이지에서 코스별 거리·소요시간과 탐방로 통제 현황 확인",
+          "구름다리 개방 여부와 억새 개화 시기는 공원 공지로 재확인"
+        ],
+        "solves": [
+          "천황사냐 도갑사냐 출발지 선택이 막막한 문제 → 코스별 특징과 소요시간 비교표로 바로 선택하게 해결",
+          "왕복과 종주 중 시간 가늠이 안 되는 문제 → 구간별 시간을 합산해 전체 종주 시간까지 제시"
+        ],
+        "actionTitles": [
+          "월출산 등산코스 천황사·도갑사 비교로 코스 바로 고르기",
+          "월출산 구름다리·억새밭 위치 확인하고 코스 정하는 법",
+          "월출산 종주코스 전체 시간 가늠하고 출발지 정하는 법"
+        ]
+      },
+      "at": "2026-10-21T13:15:41.661Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "북한산성입구부터 출발하는 등반코스 좀 가....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=100502&docId=117221166&answerNo=1&qb=67aB7ZWc7IKw65Ox7IKw7L2U7IqkIOy2nOuwnOyngOuzhCDsi5zqsIQ=",
+          "views": 10777,
+          "answers": 1,
+          "askedAt": "2010.09.21"
+        },
+        {
+          "title": "북한산등산코스 질문드립니다.(북한산성 주....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=100502&docId=274613277&answerNo=1&qb=67aB7ZWc7IKw65Ox7IKw7L2U7IqkIOy2nOuwnOyngOuzhCDsi5zqsIQ=",
+          "views": 2809,
+          "answers": 1,
+          "askedAt": "2017.04.13"
+        },
+        {
+          "title": "북한산 등산코스 좀 알려주세요(경복궁쪽 출....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=90102&docId=221918636&answerNo=1&qb=67aB7ZWc7IKw65Ox7IKw7L2U7IqkIOy2nOuwnOyngOuzhCDsi5zqsIQ=",
+          "views": 2338,
+          "answers": 1,
+          "askedAt": "2015.04.01"
+        }
+      ]
+    },
+    {
+      "id": "7a39f6167fb5221b",
+      "urls": [
+        "https://work.pinetreem.com/48"
+      ],
+      "guide": {
+        "direction": "검색자는 창원에서 주택연금 상담을 어디서 받고 신청 조건과 필요서류가 뭔지 몰라 들어온다. 고수 글 제목은 조건·서류 안내를 내세웠지만 지역 지사 위치나 상담 예약 방법까지 짚었는지는 확인되지 않는다. 이 글은 가입 조건·구비서류·창원 지사 상담 순서를 체크리스트로 정리해 바로 신청까지 이어지게 한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "가입 연령·주택가격 기준(확인 필요: 한국주택금융공사 공식 홈페이지)",
+          "창원 지역 지사 위치와 상담 예약 방법(확인 필요: 한국주택금융공사 홈페이지)",
+          "신청 시 필요서류 목록(확인 필요: 공식 안내자료)",
+          "신청 절차 순서(상담→심사→약정 등, 확인 필요: 공식 절차 안내)"
+        ],
+        "mustAvoid": [
+          "운영기관을 '공단'으로 써서 한국주택금융공사가 아닌 다른 공단(국민연금공단 등)과 혼동시키지 않기",
+          "주택연금을 주택담보대출·전세자금대출 등 다른 대출상품과 섞어 설명하지 않기"
+        ],
+        "checkBefore": [
+          "한국주택금융공사 공식 홈페이지에서 정확한 기관명·가입조건·창원 지사 연락처 확인",
+          "최신 필요서류 목록은 공식 상담 안내자료로 재확인"
+        ],
+        "solves": [
+          "주택연금을 어디서 신청해야 할지 모르는 문제 → 창원 지사 위치와 상담 예약 방법 안내로 해결",
+          "필요서류를 빠뜨려 재방문하는 문제 → 구비서류 체크리스트로 한 번에 준비하게 해결"
+        ],
+        "actionTitles": [
+          "창원 주택연금 신청조건과 필요서류 한 번에 확인하기",
+          "창원 주택연금 상담 예약부터 신청절차까지 정리",
+          "주택연금 가입조건 확인하고 창원에서 신청하는 법"
+        ]
+      },
+      "at": "2026-10-21T13:15:41.661Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "저신용자햇살론 쉬운곳?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010503&docId=405154632&answerNo=3&qb=7KO87YOd7Jew6riI6rO164uoIOywveybkCDtmZXsnbjtlbTslbwg7ZWE7JqU7ISc66WY",
+          "views": 47521,
+          "answers": 17,
+          "askedAt": "2021.11.16"
+        },
+        {
+          "title": "공기업 취준 무엇이 필요한가요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=406&docId=201400308&answerNo=1&qb=7KO87YOd7Jew6riI6rO164uoIOywveybkCDtmZXsnbjtlbTslbwg7ZWE7JqU7ISc66WY",
+          "views": 21153,
+          "answers": 1,
+          "askedAt": "2014.07.13"
+        },
+        {
+          "title": "국민임대주택 예비입주자 신청시 유리한 방....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=402&docId=111782257&answerNo=1&qb=7KO87YOd7Jew6riI6rO164uoIOywveybkCDtmZXsnbjtlbTslbwg7ZWE7JqU7ISc66WY",
+          "views": 14097,
+          "answers": 1,
+          "askedAt": "2010.06.18"
+        }
+      ]
+    },
+    {
+      "id": "ab327922e48a560e",
+      "urls": [
+        "https://hanbre.tistory.com/1637"
+      ],
+      "guide": {
+        "direction": "검색자는 확성기를 왜 다시 트는지, 담화에서 정확히 뭐라 했는지, 정동영 쪽 반응이 뭔지 궁금해 들어온다. 고수 글 제목은 사안을 나열했을 뿐 담화 발표 시점과 원문 인용을 함께 보여줬는지는 확인되지 않는다. 이 글은 담화 발표일·재가동 이유·정동영 입장을 시간순 표로 정리해 한 번에 맥락을 잡게 한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "담화 발표 날짜와 발표 경로(확인 필요: 조선중앙통신 등 원문 보도)",
+          "확성기 재가동의 공식 명분(확인 필요: 담화 원문)",
+          "정동영 발언 요지와 직책(확인 필요: 통일부 브리핑/원문 기사)"
+        ],
+        "mustAvoid": [
+          "김여정 개인 신상·사생활을 추측해서 쓰지 않기",
+          "정동영 발언을 다른 정부 인사 입장과 섞어서 쓰지 않기"
+        ],
+        "checkBefore": [
+          "조선중앙통신·통일부 공식 발표문으로 담화 날짜와 원문 확인",
+          "정동영 현재 직책과 실제 발언 내용을 원문 기사로 확인"
+        ],
+        "solves": [
+          "확성기를 왜 다시 트는지 모르는 문제 → 담화에서 밝힌 재가동 이유를 정리해 해결",
+          "담화 내용과 정동영 입장이 뒤섞여 헷갈리는 문제 → 시간순 표로 분리해 정리"
+        ],
+        "actionTitles": [
+          "대남확성기 재개 배경과 정동영 입장 확인하기"
+        ]
+      },
+      "at": "2026-10-21T13:15:41.661Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "e47590966f3e40e7",
+      "urls": [
+        "https://secondary4u.tistory.com/587"
+      ],
+      "guide": {
+        "direction": "검색자는 '김여정이 왜 지금 확성기 재가동을 예고했는지'와 '국경 요새화가 구체적으로 뭘 뜻하는지'가 궁금해 들어온다. 고수 블로그 제목은 배경 분석을 예고하지만 전면 가동 시점·과거 재개 사례와의 비교·요새화 조치 목록까지는 정리해주지 않는다. 이 글은 발표부터 전면 가동까지 경과를 표로, 요새화 조치를 항목별로 정리해 끝까지 읽히게 한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "김여정 발표 날짜와 원문 발언(확인 필요: 조선중앙통신 보도)",
+          "'10월 중 전면 가동' 의미(부분 가동과 전면 가동 차이)",
+          "2024년 대남 확성기 재개 당시 경과와의 비교",
+          "국경 요새화로 지목되는 구체 조치 목록(확인 필요: 통일부·합참 발표)"
+        ],
+        "mustAvoid": [
+          "김여정 개인 신상·후계 구도에 대한 추측성 서술",
+          "2016년 등 과거 확성기 중단·재개 사례와 혼동"
+        ],
+        "checkBefore": [],
+        "solves": [
+          "왜 지금 확성기 재가동을 예고했나 → 최근 경과를 시점별 표로 정리해 배경 설명",
+          "국경 요새화가 뭔지 모르겠다 → 지목되는 구체 조치를 항목별로 정리"
+        ]
+      },
+      "at": "2026-10-21T13:15:41.661Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "e0e282c80800e221",
+      "urls": [
+        "https://youngdr.tistory.com/208"
+      ],
+      "guide": {
+        "direction": "검색자는 '이물질 신고하면 보상도 자동으로 되는지', '포상금은 얼마나 받는지'가 막힌 지점이다. 고수 블로그는 1399 접수와 보상 요구를 구분했지만 포상금 기준, 치아파절 등 실제 피해 사례별 대응, 증거 보존 체크리스트까지는 안 짚었다. 이 글은 신고(행정)와 보상(민사) 절차를 표로 나누고 증거 보존 체크리스트로 끝까지 읽히게 한다.",
+        "searchTargets": [
+          "음식 이물질 신고 보상",
+          "음식 이물질 신고 포상금",
+          "음식 이물질 식약처 신고",
+          "음식 이물질 환불"
+        ],
+        "mustInclude": [
+          "1399 신고 전화번호와 접수 방법(식품의약품안전처 불량식품 신고)",
+          "증거 보존 항목 — 이물질 실물, 포장, 영수증, 사진·영상",
+          "식약처 신고(행정조치)와 업체 대상 보상 요구(민사)의 절차 구분",
+          "포상금 지급 기준(확인 필요: 식약처 공식 공지)",
+          "치아파절·전신마취 등 상해 발생 시 추가로 입증해야 할 항목"
+        ],
+        "mustAvoid": [
+          "1399 신고만 하면 보상까지 자동으로 된다고 오해시키는 서술",
+          "구체 보상 금액을 재료 없이 추정해서 제시하는 것",
+          "특정 업체·가게를 단정적으로 비방하는 표현"
+        ],
+        "checkBefore": [
+          "1399 신고 절차와 포상금 지급 기준 — 식품의약품안전처 공식 사이트·공지"
+        ],
+        "solves": [
+          "이물질 나오면 1399 신고로 보상도 되나? → 신고(행정)와 보상(민사) 절차를 구분표로 정리",
+          "포상금 받을 수 있나? → 포상금 지급 기준 안내",
+          "치아파절 등 피해 시 뭘 준비해야 하나? → 증거 보존 체크리스트 제공"
+        ],
+        "actionTitles": [
+          "음식 이물질 신고 보상 받는 법, 1399 신고 전 확인할 것"
+        ]
+      },
+      "at": "2026-10-21T13:15:41.661Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "편의점음식안 이물질 보상관련",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60213&docId=490398362&answerNo=3&qb=7J2M7IudIOydtOusvOyniCDsi6Dqs6Ag67O07IOBIOyalOq1rA==",
+          "views": 1259,
+          "answers": 4,
+          "askedAt": "2025.11.25"
+        },
+        {
+          "title": "식당 음식물 내 금속 이물질로 인한 치아 파....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80201&docId=492429436&answerNo=3&qb=7J2M7IudIOydtOusvOyniCDsi6Dqs6Ag67O07IOBIOyalOq1rA==",
+          "views": 929,
+          "answers": 3,
+          "askedAt": "2026.03.12"
+        },
+        {
+          "title": "식당 음식 이물질로 ‘전신마취 수술’을 받....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60213&docId=492984197&answerNo=2&qb=7J2M7IudIOydtOusvOyniCDsi6Dqs6Ag67O07IOBIOyalOq1rA==",
+          "views": 596,
+          "answers": 5,
+          "askedAt": "2026.04.16"
+        }
+      ]
+    },
+    {
+      "id": "58f3c0528365e2e8",
+      "urls": [
+        "https://economyfactory.com/kakaotalk-excel-tmp-file/"
+      ],
+      "guide": {
+        "direction": "검색자는 '엑셀 파일이 왜 tmp로 바뀌는지', '지금 당장 보내거나 열려면 어떻게 해야 하는지'가 막힌 지점이다. 고수 블로그 제목은 '해결방법'만 예고할 뿐 파일이 열린 상태에서 전송하면 생긴다는 원인과 압축 전송 대안, 받는 쪽 확장자 변경법까지는 안 짚었다. 이 글은 원인·보내는 쪽 해결·받는 쪽 해결을 단계별로 정리해 끝까지 읽히게 한다.",
+        "searchTargets": [
+          "카카오톡 엑셀 파일 안열림",
+          "카카오톡 엑셀 보내기",
+          "카카오톡 엑셀 파일 보내기",
+          "카카오톡 엑셀 공유"
+        ],
+        "mustInclude": [
+          "원인 — 엑셀 파일이 열린 상태로 전송하면 tmp로 변환됨(지식인 답변 근거)",
+          "해결1 — 파일을 닫고 다시 전송하기",
+          "해결2 — 파일을 압축(zip)해서 전송하기",
+          "받는 사람 측 대처 — tmp 확장자를 xlsx로 수동 변경하는 법",
+          "PC·모바일 카톡 버전별 재현 여부 차이(확인 필요: 카카오톡 공식 고객센터)"
+        ],
+        "mustAvoid": [
+          "안드로이드·아이폰 구분 없이 하나의 해결법으로 뭉뚱그려 설명",
+          "전송 포맷 문제를 엑셀 파일 자체 손상 문제와 혼동해서 설명"
+        ],
+        "checkBefore": [
+          "최신 카카오톡 버전에서도 동일 현상이 재현되는지 — 최신 버전 테스트 또는 카카오톡 공식 고객센터 확인"
+        ],
+        "solves": [
+          "엑셀 파일 보내면 tmp로 바뀌는데 왜 그런가 → 파일이 열린 상태에서 전송 시 발생한다는 원인 설명",
+          "받은 tmp 파일 어떻게 열어야 하나 → 확장자를 xlsx로 수동 변경하는 방법 안내",
+          "압축해서 보내면 되는지 → 지식인 답변 근거로 압축 전송 방법 안내"
+        ],
+        "actionTitles": [
+          "카카오톡 엑셀 파일 안열림, tmp 전송 원인과 해결법",
+          "카카오톡 엑셀 파일 보내기, tmp 오류 없이 공유하는 법",
+          "카카오톡 엑셀 공유시 tmp 파일 변환, 이렇게 해결하세요"
+        ]
+      },
+      "at": "2026-10-21T13:15:41.661Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "카카오톡에서 엑셀파일 전송하면 확장자가 tm....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=102020101&docId=495604244&answerNo=3&qb=7Lm07Lm07Jik7YahIOyXkeyFgCB0bXAg7YyM7J28IOyghOyGoQ==",
+          "views": 1289,
+          "answers": 4,
+          "askedAt": "2026.10.21"
+        },
+        {
+          "title": "카톡으로 엑셀파일 업로드 문제...",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=102020101&docId=495515550&answerNo=2&qb=7Lm07Lm07Jik7YahIOyXkeyFgCB0bXAg7YyM7J28IOyghOyGoQ==",
+          "views": 163,
+          "answers": 2,
+          "askedAt": "2026.10.15"
+        },
+        {
+          "title": "카톡으로 엑셀파일이 열린채로 파일전송",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1060801&docId=311690228&answerNo=0&qb=7Lm07Lm07Jik7YahIOyXkeyFgCB0bXAg7YyM7J28IOyghOyGoQ==",
+          "views": 33,
+          "answers": 0,
+          "askedAt": "2018.10.09"
+        }
+      ]
+    },
+    {
+      "id": "29010e3b74bca202",
+      "urls": [
+        "https://jab-guyver.co.kr/2640"
+      ],
+      "guide": {
+        "direction": "검색자는 192.168.0.1 접속이 안 되거나 관리자 비번을 잊어 로그인부터 막힌다. 지식인 질문처럼 랜선 연결 위치·공유기 IP가 바뀐 경우를 헷갈려 한다. 고수 글은 '설치·로그인 방법'만 다뤄 로그인 실패 시 복구(초기화 후 재설정) 루트는 비워둘 가능성이 크다. 독자는 '유선 연결 확인→192.168.0.1 접속→비번 입력 또는 초기화→와이파이 설정' 순서 체크리스트로 끝낼 수 있다.",
+        "searchTargets": [
+          "아이피타임 공유기 설정",
+          "아이피타임 공유기 초기화",
+          "아이피타임 공유기 비번 찾는법",
+          "아이피타임 공유기 연결"
+        ],
+        "mustInclude": [
+          "192.168.0.1 접속 안 될 때 확인할 랜선 연결 순서",
+          "초기화 버튼 위치·누르는 시간(확인 필요: 아이피타임 공식 매뉴얼)",
+          "모델별 기본 관리자 아이디/비번 값(확인 필요: 제품 공식 고지)",
+          "와이파이 이름(SSID)·비밀번호 변경 화면 경로",
+          "비번을 잊었을 때 공장 초기화 후 재설정하는 절차"
+        ],
+        "mustAvoid": [
+          "특정 모델(AX 시리즈 등) 전용 설정 화면을 전체 기종 공통처럼 쓰는 것",
+          "통신사 임대 공유기(기가와이어 등)와 아이피타임 자체 구매 공유기를 혼동하는 것"
+        ],
+        "checkBefore": [
+          "모델별 기본 IP·관리자 비번 차이는 아이피타임 공식 홈페이지/매뉴얼에서 확인",
+          "최신 펌웨어로 바뀐 설정 화면 UI는 공식 지원 페이지에서 확인"
+        ],
+        "solves": [
+          "192.168.0.1 접속이 안 돼요 → 랜선 연결 위치·접속 전 확인 순서를 체크리스트로 제공",
+          "비번 찾는법을 몰라 로그인이 안 돼요 → 초기화 버튼으로 공장 초기화 후 재설정 절차 안내",
+          "와이파이 비밀번호를 바꾸고 싶어요 → 관리자 로그인 후 무선랜 설정 경로 안내"
+        ],
+        "actionTitles": [
+          "아이피타임 공유기 192.168.0.1 접속 안 될 때 확인하는 법",
+          "아이피타임 공유기 비번 잊었을 때 초기화하고 재설정하는 법",
+          "아이피타임 공유기 와이파이 비밀번호 바로 설정하는 법"
+        ]
+      },
+      "at": "2026-10-21T13:15:41.661Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "iptime관리자192.168.0.1",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1010406&docId=148501000&answerNo=2&qb=7JWE7J207ZS87YOA7J6EIOqzteycoOq4sCDqtIDrpqzsnpAg67Cp67KVMTkyIOyZgOydtO2MjA==",
+          "views": 1420,
+          "answers": 1,
+          "askedAt": "2012.03.28"
+        },
+        {
+          "title": "와이파이 공유기 제발도와주세요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10801&docId=492388670&answerNo=1&qb=7JWE7J207ZS87YOA7J6EIOqzteycoOq4sCDqtIDrpqzsnpAg67Cp67KVMTkyIOyZgOydtO2MjA==",
+          "views": 348,
+          "answers": 3,
+          "askedAt": "2026.03.09"
+        }
+      ]
+    },
+    {
+      "id": "95d429bb17476815",
+      "urls": [
+        "https://benefitscoop.tistory.com/entry/%EC%97%94%EB%B9%84%EB%94%94%EC%95%84%EA%B0%80-%EB%8F%88%EB%B6%80%ED%84%B0-%EC%8F%9C%EB%8B%A4-%EA%B8%B0%ED%8C%90-25%EB%B0%B0%C2%B7%EA%B4%91%EC%97%94%EC%A7%84-15%EB%B0%B0-%EC%A6%9D%EC%84%A4-%EC%82%BC%EC%84%B1%EC%A0%84%EA%B8%B0%EB%8F%84-%EB%93%A4%EC%96%B4%EA%B0%94%EB%8B%A4"
+      ],
+      "guide": {
+        "direction": "검색자는 '기판 2.5배·광엔진 15배'라는 수치가 무엇을 기준으로 한 증설인지, 삼성전기가 정확히 어떤 역할로 들어갔는지를 못 찾아 막힌다. 고수 글 제목은 수치만 던지고 기준과 삼성전기의 구체 품목·역할은 비워뒀을 가능성이 크다. 독자는 '증설 수치 기준 정리+삼성전기 역할+관련 기업 비교표'로 이 소식을 한 번에 정리할 수 있다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "기판 2.5배·광엔진 15배 증설의 기준(생산능력/투자금/기간 등)(확인 필요: 원문 기사)",
+          "삼성전기가 맡는 구체 품목·역할(기판/광학모듈 등)(확인 필요: 원문 기사)",
+          "엔비디아의 선지급(투자금 선지원) 방식과 대상 기업(확인 필요: 원문 기사)",
+          "관련 수혜 기업(삼성전기 외) 정리표(확인 필요: 원문 기사)"
+        ],
+        "mustAvoid": [],
+        "checkBefore": [
+          "'기판 2.5배·광엔진 15배' 수치의 원문 출처(기사·공시) 확인",
+          "삼성전기의 구체 공급 품목이 공식 발표·공시에 나왔는지 확인"
+        ],
+        "solves": [
+          "엔비디아 기판 2.5배가 무슨 뜻인지 모르겠다 → 증설 수치의 기준을 정리해 설명",
+          "삼성전기가 왜 들어갔는지 궁금하다 → 삼성전기 역할을 구체 품목 단위로 정리"
+        ],
+        "actionTitles": [
+          "엔비디아 기판 2.5배·광엔진 15배 증설 기준 확인하는 법",
+          "삼성전기 엔비디아 수주 품목 정리로 확인하기",
+          "엔비디아발 기판·광엔진 증설 수혜 기업 비교로 정리하기"
+        ]
+      },
+      "at": "2026-10-21T13:15:41.661Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "ee4c5b0cb84cc023",
+      "urls": [
+        "https://benefitscoop.tistory.com/entry/10%EC%9B%94-21%EC%9D%BC-%EB%A7%88%EA%B0%90%EC%8B%9C%ED%99%A9-%EB%93%9C%EB%94%94%EC%96%B4-%EB%82%98%EC%98%A8-AI-%ED%98%B8%EC%9E%AC-%EC%8A%A4%ED%8E%98%EC%9D%B4%EC%8A%A4X%C2%B7%EC%8A%88%ED%8D%BC-%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EA%B0%80-%ED%9D%94%EB%93%A0-%EC%BD%94%EC%8A%A4%ED%94%BC"
+      ],
+      "guide": {
+        "direction": "검색자는 마감 직후 '오늘 코스피가 왜 올랐는지', 스페이스X·슈퍼마이크로 호재가 정확히 무엇인지를 수치 없이 못 찾아 막힌다. 고수 글 제목은 '흔든 코스피'라고만 해 실제 등락 지수·관련 종목·호재 내용은 비워뒀을 가능성이 크다. 독자는 '마감 지수+호재 내용 한 줄 정리+등락 종목표'로 그날 시황을 한 번에 끝낼 수 있다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "10월 21일 코스피 마감 지수·등락률(확인 필요: 원문 기사/시세)",
+          "스페이스X·슈퍼마이크로 관련 호재의 구체 내용(수주/실적 등)(확인 필요: 원문 기사)",
+          "코스피 등락에 영향을 준 개별 종목명·등락률 정리표(확인 필요: 원문 기사)"
+        ],
+        "mustAvoid": [
+          "비상장 스페이스X와 국내 관련 테마주를 실제 공급 계약 종목처럼 혼동하는 것"
+        ],
+        "checkBefore": [
+          "10월 21일 코스피 마감 지수·거래량은 거래소 공식 시세로 재확인",
+          "'AI 호재'로 지목된 스페이스X·슈퍼마이크로 뉴스의 원문 소스 확인"
+        ],
+        "solves": [
+          "오늘 코스피 왜 올랐는지 모르겠다 → 당일 호재 내용을 한 줄로 정리",
+          "스페이스X·슈퍼마이크로 호재가 뭔지 모르겠다 → 호재 내용과 관련 테마 정리"
+        ],
+        "actionTitles": [
+          "10월 21일 코스피 마감 지수·등락 종목 확인하는 법",
+          "스페이스X·슈퍼마이크로 AI 호재 내용 정리로 확인하기",
+          "10월 21일 코스피 급등 이유 한 번에 정리로 확인하기"
+        ]
+      },
+      "at": "2026-10-21T13:15:41.661Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "c74a31cb91d8a938",
+      "urls": [
+        "https://infodemic.kr/3286",
+        "https://infodemic.kr/3285"
+      ],
+      "guide": {
+        "direction": "검색자는 '박해룡이 고려제약과 어떤 관계인지, 100억짜리 미술관·카페는 실제로 어디에 있는지'를 궁금해한다. 고수 글들은 '박해룡'과 '박혜룡' 표기를 섞어 써서 같은 인물인지조차 헷갈리게 남겨뒀다. 이 글은 정확한 이름·직함과 미술관 위치, 고려제약과의 관계를 표로 정리해 혼란을 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "고려제약 박해룡 회장 정확한 직함 표기 (확인 필요: 고려제약 공식 소개)",
+          "100억 미술관·카페 명칭과 위치 (확인 필요: 방송/원문 기사)",
+          "'이웃집 백만장자' 프로그램명과 방영 회차 (확인 필요: 방송사 공지)",
+          "고려제약 사업과 미술관 운영의 관계 요약"
+        ],
+        "mustAvoid": [
+          "박해룡/박혜룡 이름 표기를 확인 없이 같은 인물로 섞어 쓰지 않기",
+          "'이웃집 백만장자' 시리즈의 다른 등장인물과 혼동하지 않기"
+        ],
+        "checkBefore": [
+          "정확한 이름 표기(박해룡 vs 박혜룡) - 고려제약 공식 홈페이지·사업자 정보 확인",
+          "미술관·카페 명칭과 위치 - 원문 기사 확인"
+        ],
+        "solves": [
+          "'박해룡이 누구인지' → 고려제약 회장 직함과 관계를 정확히 정리",
+          "'미술관·카페가 어디 있는지' → 위치와 운영 형태를 확인된 범위에서 정리"
+        ],
+        "actionTitles": [
+          "박해룡 회장 프로필 확인, 미술관·카페 운영 방식은"
+        ]
+      },
+      "at": "2026-10-21T13:15:41.661Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "531906c5f83f3ae8",
+      "urls": [
+        "https://tmhub.co.kr/1298"
+      ],
+      "guide": {
+        "direction": "검색자는 '월출산 높이가 정확히 몇 미터인지, 다른 명산과 순위가 어떤지'를 숫자로 확인하고 싶어 한다. 고수 글은 천황봉·구름다리·국보 문화유산을 다뤘지만 정확한 해발고도 수치와 국립공원 지정 배경은 뭉뚱그렸다. 이 글은 808.7m 해발고도와 위치, 100명산 선정사유를 표로 정리해 숫자 궁금증을 바로 끝낸다.",
+        "searchTargets": [
+          "월출산 높이",
+          "월출산 높이 해발",
+          "월출산 높이 순위"
+        ],
+        "mustInclude": [
+          "월출산 높이 808.7m, 위치 전남 영암군 영암읍 군서면",
+          "월출산국립공원 전화번호 (061)433-3456, 영암군·강진군 관할",
+          "100명산 선정사유 - 경관이 아름답고 난대림·온대림 혼생",
+          "천황봉, 구름다리, 국보 문화유산 명칭 (확인 필요: 국보 지정번호 등 세부)"
+        ],
+        "mustAvoid": [
+          "설악산(1970년 지정, 대청봉) 등 다른 국립공원 사례와 월출산을 섞어 쓰지 않기",
+          "속리산 등 다른 명산 수치와 혼용하지 않기"
+        ],
+        "checkBefore": [
+          "월출산 국립공원 지정 연도 - 국립공원공단 공식 홈페이지 확인",
+          "천황봉 높이, 구름다리 길이 등 세부 수치 - 영암군·국립공원공단 공식 자료 확인"
+        ],
+        "solves": [
+          "'월출산 높이가 몇 미터인지' → 808.7m 해발고도를 명시하고 천황봉과의 관계를 정리",
+          "'명산 순위가 어떻게 되는지' → 100명산 선정사유와 특징을 정리",
+          "'강진·영암 관광지 정보' → 월출산국립공원 위치와 연락처(061-433-3456) 정리"
+        ],
+        "actionTitles": [
+          "월출산 높이 해발 정리, 국립공원 100명산 선정이유 확인",
+          "월출산 높이 순위 비교, 구름다리·국보 문화유산까지 정리"
+        ]
+      },
+      "at": "2026-10-21T13:15:41.661Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "우리 전라남도의 관광지를 알려주세요.",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1212&docId=20560694&answerNo=2&qb=7JuU7Lac7IKwIOuGkuydtCDtirnsp5Ug6rWt66a96rO17JuQIOuqheyCsA==",
+          "views": 39080,
+          "answers": 3,
+          "askedAt": "2006.03.19"
+        },
+        {
+          "title": "국립공원 산 이름",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=90102&docId=102024054&answerNo=2&qb=7JuU7Lac7IKwIOuGkuydtCDtirnsp5Ug6rWt66a96rO17JuQIOuqheyCsA==",
+          "views": 22168,
+          "answers": 2,
+          "askedAt": "2010.01.04"
+        },
+        {
+          "title": "세계문화유산으로 지정된 문화제?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=130102&docId=35589102&answerNo=35&qb=7JuU7Lac7IKwIOuGkuydtCDtirnsp5Ug6rWt66a96rO17JuQIOuqheyCsA==",
+          "views": 18294,
+          "answers": 57,
+          "askedAt": "2007.10.09"
+        }
+      ]
+    },
+    {
+      "id": "be71d6b58b601d44",
+      "urls": [
+        "https://economyfactory.com/chef-sam-kims-marriage/"
+      ],
+      "guide": {
+        "direction": "검색자는 '케데헌 루미 역할·골든 부른 이재가 어떤 사람인지'와 결혼 상대 정체를 궁금해하지만, 나무위키·학교·사주 검색만으로는 결혼 소식까지 확인이 안 된다. 고수 제목은 '신영균 외손녀'를 이재와 같은 사건처럼 묶어놨는데 동일인 여부가 불확실해 오히려 혼란을 더한다. 이 글은 이재의 확인된 경력 정보와 결혼 소식을 구분해 정리하고, 동일인 여부는 확인된 선에서만 밝혀 궁금증을 끝낸다.",
+        "searchTargets": [
+          "케데헌 이재 나무",
+          "케데헌 이재 학교",
+          "케데헌 이재 사주"
+        ],
+        "mustInclude": [
+          "이재(EJAE) 프로필 - 케데헌 루미 역할, OST '골든' 보컬 참여",
+          "미국 이민자 출신, 한국 기획사 연습생 경력",
+          "예비 신랑 이름·직업 (확인 필요: 원문 기사)",
+          "'신영균 외손녀'가 이재와 동일인인지 여부 (확인 필요: 원문 기사)",
+          "예식장 정보 (확인 필요: 원문 기사)"
+        ],
+        "mustAvoid": [
+          "이재(EJAE)와 '신영균 외손녀'를 확인 없이 같은 인물로 서술하지 않기",
+          "사주·나이 등 사생활 정보를 근거 없이 추정하지 않기",
+          "싱글앨범 발표설 등 확인되지 않은 루머를 사실처럼 쓰지 않기"
+        ],
+        "checkBefore": [
+          "이재와 '신영균 외손녀'가 동일 인물·동일 기사인지 - 원문 기사 및 소속사 공식 발표 확인",
+          "결혼 날짜와 예식장 정보 - 원문 기사 또는 소속사 공지 확인"
+        ],
+        "solves": [
+          "'케데헌 루미·골든 부른 사람이 이재인지' → 참여 경력을 확인해 정리",
+          "'이재 나무위키에 안 나온 정보' → 결혼 소식 등 최신 정보로 보완",
+          "'이재 결혼 후 활동이 기대됨' → 결혼 소식과 향후 활동 전망을 분리해 정리"
+        ],
+        "actionTitles": [
+          "케데헌 이재 나무 정리, 결혼 상대 정체까지 확인",
+          "이재 결혼 예비신랑 정체 확인, 나무위키에 없는 정보"
+        ]
+      },
+      "at": "2026-10-21T13:15:41.661Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "이재(EJAE)가 참여한 케데헌 OST '골든'의 라이....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=3021401&docId=489740518&answerNo=1&qb=7LyA642w7ZeM7J207J6s",
+          "views": 230,
+          "answers": 2,
+          "askedAt": "2025.10.25"
+        },
+        {
+          "title": "케데헌 이재 싱글 내는거 진짜인가요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=3021401&docId=489560498&answerNo=2&qb=7LyA642w7ZeM7J207J6s",
+          "views": 165,
+          "answers": 3,
+          "askedAt": "2025.10.24"
+        },
+        {
+          "title": "케데헌 이재 질문",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=3021401&docId=490439660&answerNo=2&qb=7LyA642w7ZeM7J207J6s",
+          "views": 54,
+          "answers": 2,
+          "askedAt": "2025.11.27"
+        }
+      ]
+    },
+    {
+      "id": "545483126eff5a48",
+      "urls": [
+        "https://benefitscoop.tistory.com/entry/%EA%B8%89%EB%9D%BD-%EB%92%A4-%EC%98%A4%EB%8A%98-%EC%BD%94%EC%8A%A4%ED%94%BC%EB%8A%94-%EB%B0%98%EB%B0%9C-%EB%A7%A4%EC%88%98-vs-%EA%B4%80%EB%A7%9D-%EC%A0%A0%EC%8A%A8-%ED%99%A9-%EC%97%B0%EC%84%A4-%EC%A0%84-%EC%B2%B4%ED%81%AC%ED%8F%AC%EC%9D%B8%ED%8A%B8"
+      ],
+      "guide": {
+        "direction": "급락 당일 검색자는 지식인에서도 보이듯 '매수하기 두려워 발만 동동거리다 놓치는' 공포를 풀어달라고 묻는다. 고수 블로그는 '반발매수 vs 관망'이라는 틀만 던지고 젠슨 황 연설 전 구체적 판단 기준은 비워둔다. 급락 원인·반발매수 신호·관망 신호를 조건표로 나눠 연설 전후 체크포인트까지 주면 글이 끝난다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "급락 당일 코스피 하락폭과 주요 원인(확인 필요: 증권사 리포트·한국거래소 공시)",
+          "젠슨 황 연설 정확한 일시·장소(확인 필요: 엔비디아 공식 행사 공지)",
+          "반발매수 신호 vs 관망 신호 조건표(지지선·거래량·외국인 수급 등)"
+        ],
+        "mustAvoid": [
+          "급락폭·반등 가능성을 발표 전부터 확정된 숫자처럼 단정하는 것",
+          "코스피를 코스닥·나스닥 등 다른 지수와 섞어서 설명하는 것"
+        ],
+        "checkBefore": [
+          "코스피 급락 당일 실제 하락폭과 원인(한국거래소 공시, 증권사 리포트)",
+          "젠슨 황 연설 정확한 일정(엔비디아 공식 발표·행사 공지)"
+        ],
+        "solves": [
+          "매수 타이밍을 놓칠까 두려워 발만 동동거리는 고민 → 반발매수·관망 조건표로 판단 기준 제공",
+          "젠슨 황 연설 전 코스피 전망이 궁금함 → 연설 전후 체크포인트 정리"
+        ],
+        "actionTitles": [
+          "코스피 급락 오늘, 반발매수 vs 관망 체크포인트 확인",
+          "젠슨 황 연설 전 코스피 반발매수 신호 체크리스트 정리",
+          "코스피 급락 후 반발매수 vs 관망 조건표로 비교하기"
+        ]
+      },
+      "at": "2026-10-21T13:15:41.661Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "증권사 리포트 유료 무료 차이에 대해서 궁금....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=317205149&answerNo=1&qb=6riJ6529IOy9lOyKpO2UvCDrsJjrsJwg66ek7IiYIHZz",
+          "views": 7344,
+          "answers": 2,
+          "askedAt": "2018.12.24"
+        },
+        {
+          "title": "삼전vs삼전우 고민입니다",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=394518639&answerNo=4&qb=6riJ6529IOy9lOyKpO2UvCDrsJjrsJwg66ek7IiYIHZz",
+          "views": 2208,
+          "answers": 5,
+          "askedAt": "2021.07.13"
+        },
+        {
+          "title": "애플 장기투자 VS ETF SPY 장기투자",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=408810594&answerNo=4&qb=6riJ6529IOy9lOyKpO2UvCDrsJjrsJwg66ek7IiYIHZz",
+          "views": 1620,
+          "answers": 5,
+          "askedAt": "2022.01.05"
+        }
+      ]
+    },
+    {
+      "id": "9c17bb4d50031d47",
+      "urls": [
+        "https://benefitscoop.tistory.com/entry/%EB%AF%B8-%EC%9D%B4%EB%9E%80-%EC%A4%91%EC%9E%AC%EC%95%88-%EB%B3%B4%EB%8F%84%EC%97%90-%EC%9C%A0%EA%B0%80-%ED%95%98%EB%9D%BD-%EC%BD%94%EC%96%B4%EC%9C%84%EB%B8%8C%EB%8A%94-%EB%B0%98%EB%93%B1%E2%80%A6-%EA%B7%B8%EB%9F%B0%EB%8D%B0-%EC%8B%A0%EC%9A%A9-%EC%8B%A0%ED%98%B8%EB%8A%94-%EC%95%84%EC%A7%81-%EB%B9%A8%EA%B0%84%EB%B6%88"
+      ],
+      "guide": {
+        "direction": "'이란 중재안' 검색자는 지식인 질문처럼 '종전이 언제쯤일지'를 가장 궁금해하며 유가·코어위브 반등이 그 기대와 어떻게 연결되는지 묻는다. 고수 블로그는 유가·코어위브·신용 신호를 나열만 하고 신용 신호가 '왜 여전히 빨간불'인지는 풀지 않는다. 중재안 보도 내용과 신용 지표 뜻을 정리해 종전 전망·시장 영향까지 묶어주면 글이 끝난다.",
+        "searchTargets": [
+          "이란 중재안"
+        ],
+        "mustInclude": [
+          "중재안 보도 주체·시점(확인 필요: 로이터·블룸버그 등 원문 보도)",
+          "유가 하락폭(확인 필요: WTI·브렌트 시세)",
+          "코어위브 주가 반등폭(확인 필요: 증시 시세)",
+          "신용 신호(CDS·신용스프레드) 수치와 의미(확인 필요: 신용평가사 보고서)"
+        ],
+        "mustAvoid": [
+          "종전 시점을 '곧 끝난다'처럼 단정하는 것",
+          "이란-이라크 전쟁 등 과거 중동 분쟁 사례와 혼동하는 것"
+        ],
+        "checkBefore": [
+          "중재안 보도 원문 출처와 정확한 내용(로이터·블룸버그 등 원문기사)",
+          "코어위브 실제 주가 변동과 신용 지표 수치(증권사 시세·신용평가사 보고서)"
+        ],
+        "solves": [
+          "미국-이란 전쟁 종전이 언제쯤일지 궁금함 → 중재안 보도 내용으로 전망 정리",
+          "유가 하락이 내 투자와 무슨 상관인지 모름 → 코어위브·신용 신호로 연결 설명"
+        ],
+        "actionTitles": [
+          "이란 중재안 뜻과 종전 전망, 유가 영향 확인하기",
+          "코어위브 반등과 신용 신호 빨간불 이유 체크하기",
+          "미이란 중재안 보도 이후 유가·신용 신호 비교 정리"
+        ]
+      },
+      "at": "2026-10-21T13:15:41.661Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "미국 이란 전쟁 종전 언제쯤 예상 될까요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110302&docId=492746591&answerNo=1&qb=7J20656AIOykkeyerOyViCDrs7Trj4Qg7Jyg6rCAIO2VmOudvQ==",
+          "views": 281,
+          "answers": 2,
+          "askedAt": "2026.04.01"
+        }
+      ]
+    },
+    {
+      "id": "fa9cebd9d2527944",
+      "urls": [
+        "https://gilbert-choi.tistory.com/761"
+      ],
+      "guide": {
+        "direction": "'git bash'를 쓰다 TZ=Asia/Seoul을 적었는데 date가 UTC 그대로 나오는 이유는 Git Bash(MSYS2) 환경에 tzdata가 없어 IANA 타임존 이름을 못 읽기 때문이다. 고수 블로그는 현상만 보여주고 'git bash rpm 설치 방법'으로 이어지는 tzdata 설치·영구 설정 절차는 비워둔다. tzdata 설치 명령과 TZ=KST-9 대체 표기, .bashrc 영구 설정까지 순서대로 주면 글이 끝난다.",
+        "searchTargets": [
+          "git bash",
+          "git bash 사용법",
+          "git bash rpm 설치 방법"
+        ],
+        "mustInclude": [
+          "TZ=Asia/Seoul 미동작 원인: Git Bash(MSYS2)에 tzdata 미설치(확인 필요: MSYS2 저장소)",
+          "tzdata 설치 명령어(확인 필요: pacman -S tzdata 등 MSYS2 공식 안내)",
+          "TZ=KST-9 같은 POSIX 오프셋 표기로 대체하는 방법",
+          ".bashrc에 export TZ를 추가해 영구 설정하는 법"
+        ],
+        "mustAvoid": [
+          "리눅스 서버의 timedatectl 명령과 혼동하는 것(Git Bash엔 없음)",
+          "WSL 환경과 Git Bash(MSYS2) 환경을 같은 것으로 설명하는 것"
+        ],
+        "checkBefore": [
+          "Git Bash(MSYS2)가 tzdata 패키지를 지원하는지, 설치 명령이 실제로 동작하는지(MSYS2 공식 문서)"
+        ],
+        "solves": [
+          "TZ=Asia/Seoul 적었는데 9시간 전 시각(UTC) 나옴 → tzdata 미설치가 원인임을 설명",
+          "매번 터미널마다 시간대 다시 설정해야 함 → .bashrc 영구 설정법 제공",
+          "git bash rpm/패키지 설치 방법을 몰라 막힘 → tzdata 설치 명령 안내"
+        ],
+        "actionTitles": [
+          "Git Bash TZ=Asia/Seoul UTC 뜰 때 해결하는 법",
+          "Git Bash TZ 영구 설정, bashrc에 등록하는 법"
+        ]
+      },
+      "at": "2026-10-21T13:15:41.661Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
     }
   ],
   "misses": [
