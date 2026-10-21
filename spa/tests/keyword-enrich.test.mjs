@@ -67,3 +67,24 @@ test('황금 카드에 판정 문장 · 해결할 문제 · 행동 제목 · 벤
   const slope = tab.indexOf('const sa = slope(a);');
   assert.ok(money > 0 && hot > money && slope > hot, '등급 → 입찰가 → 지금 뜨는 → 오름세 순');
 });
+
+// 2026-10-22 사장님 "리더남 홈판 추천에는 그래프가 안 나오네요 · 벤치마크로 들고 와도 어떻게 활용해야 성과가 나는지 모르겠다"
+test('홈판 카드에 그래프와 성과 내는 순서, 애드센스 카드에도 성과 내는 순서, 두 판 맨 위에 활용 순서', () => {
+  const card = readFileSync(new URL('../src/components/leword/homefeed/HomefeedBenchmarkCard.tsx', import.meta.url), 'utf8');
+  assert.match(card, /<DemandBlock c=\{/);
+  assert.match(card, /<BenchmarkPlaybook steps=\{/);
+  assert.match(card, /trackUrl\(c\.keyword\)/);
+  const board = readFileSync(new URL('../src/components/leword/homefeed/HomefeedBenchmarkBoard.tsx', import.meta.url), 'utf8');
+  assert.match(board, /<BenchmarkHowTo kind="homefeed" \/>/);
+  assert.match(board, /enrich=\{enrich\.get\(enrichKey\(c\.keyword\)\)\}/);
+  const ads = readFileSync(new URL('../src/components/leword/adsense/AdsenseBenchmarkBoard.tsx', import.meta.url), 'utf8');
+  assert.match(ads, /<BenchmarkHowTo kind="adsense" \/>/);
+  assert.match(ads, /<BenchmarkPlaybook steps=\{/);
+});
+
+test('판정마다 할 일이 정해져 있고 예상 수치 표현이 없다', async () => {
+  const src = readFileSync(new URL('../src/components/leword/shared/BenchmarkPlaybook.tsx', import.meta.url), 'utf8');
+  for (const v of ['new', 'rising', "'season-soon'", 'steady', 'cooling', "'past-peak'", 'unknown']) assert.ok(src.includes(`${v}:`), v);
+  const shown = src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, ''); // 주석은 빼고 화면 문구만
+  assert.doesNotMatch(shown, /예상\s*(유입|방문|수익)|확률\s*\d|\d+\s*%\s*(확률|가능)/);
+});

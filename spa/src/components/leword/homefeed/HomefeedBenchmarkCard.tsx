@@ -2,6 +2,11 @@ import { useState } from 'react';
 import { bridgeBenchmarkTitles } from '../../../lib/bridge';
 import { benchmarkTime, metricText, type BenchmarkCandidate } from '../../../lib/homefeedBenchmarkModel.mjs';
 import type { HomefeedEvidence } from '../../../lib/homefeedEvidence.mjs';
+// 그래프 · 성과 내는 순서(2026-10-22 사장님 "홈판 추천에는 그래프가 안 나오네요 · 어떻게 활용해야 성과가 나는지 모르겠다")
+import type { AdsenseCard } from '../../../lib/adsenseBenchmarkModel.mjs';
+import type { KeywordEnrich } from '../../../lib/keywordEnrich.mjs';
+import { DemandBlock } from '../adsense/AdsenseDemand';
+import BenchmarkPlaybook, { DemandStep, trackUrl } from '../shared/BenchmarkPlaybook';
 const monthDay=(day:string)=>{const m=/^\d{4}-(\d{2})-(\d{2})$/.exec(day||'');return m?`${Number(m[1])}/${Number(m[2])}`:day;};
 const LABELS = {'review-now':'지금 검토',verify:'추가 확인',stale:'시점 재검토'};
 function TitleRow({label,text,editor=false}:{label:string;text:string;editor?:boolean}) {
@@ -57,12 +62,21 @@ function Points({title,items,kind}:{title:string;items:string[];kind:string}) {r
 /*
  * 실측 홈판 증거(2026-10-01) — 어드바이저가 잰 실제 홈판 상위 · 내 블로그 홈판 유입과 맞댄 결과. 확률이 아니라 확인된 사실만 단다.
  */
-export default function HomefeedBenchmarkCard({candidate:c,evidence}:{candidate:BenchmarkCandidate;evidence?:HomefeedEvidence|null}) {
+export default function HomefeedBenchmarkCard({candidate:c,evidence,enrich}:{candidate:BenchmarkCandidate;evidence?:HomefeedEvidence|null;enrich?:KeywordEnrich}) {
  const proof=evidence?.homefeed;
+ const demandCard={id:c.id,keyword:c.keyword,metrics:{query:c.keyword},demand:enrich?.demand} as unknown as AdsenseCard;
+ const firstTitle=c.homeTitles[0]||c.homeTitle;
+ const steps=[
+  {label:'지금 쓸지',body:<>{proof?<b>같은 소재가 실제 홈판 {proof.rank?`${proof.rank}위`:''}({monthDay(proof.day)})에 올랐습니다 — 이 흐름이 살아 있을 때 쓰세요. </b>:null}<DemandStep demand={enrich?.demand} fallback={`검색 추이 그래프 준비 중 — ${c.freshnessLabel||'작성 시점'}과 원문 반응(공감 · 댓글이 늘어나는지)으로 판단하세요.`}/></>},
+  {label:'무엇을 쓸지',body:c.writingDirection?<>{c.writingDirection.split(/(?<=[.다요])\s/)[0]}{c.mustInclude.length>0?` 아래 "반드시 들어갈 내용" ${c.mustInclude.length}가지를 소제목으로 쓰세요.`:''}</>:<>원문에서 확인한 사실만으로 사건 → 사람들 반응 → 내가 짚을 한 가지 순서로 쓰세요.</>},
+  {label:'제목',body:firstTitle?<>위 후킹형 제목 중 내 글과 맞는 하나를 고르세요(예: 「{firstTitle}」). 따옴표 인용은 원문에 실제로 있는 말인지 확인합니다.</>:<>회차가 제목을 짓는 중입니다 — [지금 제목 만들기]로 바로 받을 수 있습니다.</>},
+  {label:'발행 후',body:<><a href={trackUrl(c.keyword)}>노출 추적에 등록</a>하고 24시간 안에 홈판 · 검색 노출을 확인하세요. 안 뜨면 같은 소재를 붙잡지 말고 다음 카드로 넘어갑니다.</>},
+ ];
  return <article className={`hfb-card ${c.recommended?'recommended':''}`}>
   <div className="hfb-card-top"><span className={`hfb-status ${c.status}`}>{LABELS[c.status]}</span>{c.recommended&&<span className="hfb-star" aria-label="우선 검토 추천">★ 추천</span>}{proof&&<span className={`hfb-proof ${proof.kind}`}>{proof.kind==='same-post'?'이 글이 실제 홈판':'비슷한 소재가 실제 홈판'} {proof.rank?`${proof.rank}위`:''} · {monthDay(proof.day)}</span>}{evidence?.mine&&<span className="hfb-proof mine">내 블로그 홈판 유입 소재 · {evidence.mine.count.toLocaleString('ko-KR')}회</span>}<span className="hfb-category">{c.category}</span><span className="hfb-timing">{c.freshnessLabel||'작성 시점 확인 필요'}</span></div>
   <div className="hfb-headline"><h3>{c.title||c.keyword}</h3><CopyHeadline text={c.title||c.keyword}/></div>
   <div className="hfb-keyword"><strong>{c.keyword}</strong><span>검색량 <b>{metricText(c.metrics.searchVolume)}</b></span><span>문서량 <b>{metricText(c.metrics.documentCount)}</b></span><span>상위노출 <b>판정 보류</b></span></div>
+  {enrich?.demand?<DemandBlock c={demandCard}/>:<p style={{margin:'6px 0 0',fontSize:12,color:'#8d9db4'}}>검색 추이 그래프 준비 중 — 추천 · 지금 검토 소재부터 데이터랩으로 재서 붙입니다.</p>}
   {c.relatedKeywords.length>0&&<p className="hfb-alternatives"><span>대안·연관 키워드</span> {c.relatedKeywords.join(' · ')}</p>}
   <p className="hfb-summary">{c.summary||'원문을 확인한 뒤 사건 내용을 정리해 주세요.'}</p>
   {c.summaryAttribution&&<p className="hfb-attribution">{c.summaryAttribution}</p>}
@@ -73,6 +87,7 @@ export default function HomefeedBenchmarkCard({candidate:c,evidence}:{candidate:
   {c.writingDirection&&<div className="hfb-direction"><h4>이렇게 쓰세요</h4><p>{c.writingDirection}</p>{c.searchTargets.length>0&&<p className="hfb-alternatives"><span>노릴 검색어 · 네이버 자동완성</span> {c.searchTargets.join(' · ')}</p>}</div>}
   {(c.mustInclude.length>0||c.mustAvoid.length>0)&&<div className="hfb-writing-grid">{c.mustInclude.length>0&&<Points title="반드시 들어갈 내용" items={c.mustInclude} kind="include"/>}{c.mustAvoid.length>0&&<Points title="넣지 않을 내용" items={c.mustAvoid} kind="avoid"/>}</div>}
   {c.verificationNeeded.length>0&&<div className="hfb-verify"><b>작성 전 확인</b> {c.verificationNeeded.join(' · ')}</div>}
+  <BenchmarkPlaybook steps={steps}/>
   <details className="hfb-reference"><summary>이미지·캡처 안내와 출처 <span>{c.sources.length}곳</span></summary>
    <div className="hfb-image-guide"><h4>이미지 레퍼런스</h4><p>{c.imageGuide.instruction||'원출처의 이미지 재사용 조건을 확인하고 직접 촬영·제작한 이미지를 준비해 주세요.'}</p>{c.imageGuide.url&&<a href={c.imageGuide.url} target="_blank" rel="noopener noreferrer">캡처할 원문 열기 ↗</a>}</div>
    <ul className="hfb-source-list">{c.sources.map((s,i)=><li key={`${s.id}-${i}`}><div>{s.url?<a href={s.url} target="_blank" rel="noopener noreferrer">{s.title||s.name} ↗</a>:<b>{s.title||s.name}</b>}<small>{s.name} · 발행 {benchmarkTime(s.publishedAt)}{s.discoveryOnly?' · 소재 발견 출처':''}</small></div><div className="hfb-reactions">{s.metrics.views!==null&&<span>조회 {metricText(s.metrics.views)}</span>}{s.metrics.likes!==null&&<span>공감 {metricText(s.metrics.likes)}</span>}{s.growth?.likes&&s.growth.likes.change>0&&<span className="hfb-growth">공감 +{s.growth.likes.change.toLocaleString('ko-KR')} ({s.growth.likes.elapsedMinutes}분 사이)</span>}{s.metrics.comments!==null&&<span>댓글 {metricText(s.metrics.comments)}</span>}{Object.values(s.metrics).every(n=>n===null)&&<span>반응 미측정</span>}</div></li>)}</ul>
