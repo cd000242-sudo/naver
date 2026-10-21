@@ -64,19 +64,21 @@ function Points({title,items,kind}:{title:string;items:string[];kind:string}) {r
  */
 export default function HomefeedBenchmarkCard({candidate:c,evidence,enrich}:{candidate:BenchmarkCandidate;evidence?:HomefeedEvidence|null;enrich?:KeywordEnrich}) {
  const proof=evidence?.homefeed;
- const demandCard={id:c.id,keyword:c.keyword,metrics:{query:c.keyword},demand:enrich?.demand} as unknown as AdsenseCard;
+ // 그래프 검색어 = 작성 안내의 노릴 검색어 첫 번째(카드 keyword 는 기사 제목 조각이라 데이터랩 기록이 없다 — 2026-10-22 실측)
+ const searchQuery=c.searchTargets[0]||'';
+ const demandCard={id:c.id,keyword:searchQuery,metrics:{query:searchQuery},demand:enrich?.demand} as unknown as AdsenseCard;
  const firstTitle=c.homeTitles[0]||c.homeTitle;
  const steps=[
   {label:'지금 쓸지',body:<>{proof?<b>같은 소재가 실제 홈판 {proof.rank?`${proof.rank}위`:''}({monthDay(proof.day)})에 올랐습니다 — 이 흐름이 살아 있을 때 쓰세요. </b>:null}<DemandStep demand={enrich?.demand} fallback={`검색 추이 그래프 준비 중 — ${c.freshnessLabel||'작성 시점'}과 원문 반응(공감 · 댓글이 늘어나는지)으로 판단하세요.`}/></>},
   {label:'무엇을 쓸지',body:c.writingDirection?<>{c.writingDirection.split(/(?<=[.다요])\s/)[0]}{c.mustInclude.length>0?` 아래 "반드시 들어갈 내용" ${c.mustInclude.length}가지를 소제목으로 쓰세요.`:''}</>:<>원문에서 확인한 사실만으로 사건 → 사람들 반응 → 내가 짚을 한 가지 순서로 쓰세요.</>},
   {label:'제목',body:firstTitle?<>위 후킹형 제목 중 내 글과 맞는 하나를 고르세요(예: 「{firstTitle}」). 따옴표 인용은 원문에 실제로 있는 말인지 확인합니다.</>:<>회차가 제목을 짓는 중입니다 — [지금 제목 만들기]로 바로 받을 수 있습니다.</>},
-  {label:'발행 후',body:<><a href={trackUrl(c.keyword)}>노출 추적에 등록</a>하고 24시간 안에 홈판 · 검색 노출을 확인하세요. 안 뜨면 같은 소재를 붙잡지 말고 다음 카드로 넘어갑니다.</>},
+  {label:'발행 후',body:<><a href={trackUrl(searchQuery||c.keyword)}>노출 추적에 등록</a>하고 24시간 안에 홈판 · 검색 노출을 확인하세요. 안 뜨면 같은 소재를 붙잡지 말고 다음 카드로 넘어갑니다.</>},
  ];
  return <article className={`hfb-card ${c.recommended?'recommended':''}`}>
   <div className="hfb-card-top"><span className={`hfb-status ${c.status}`}>{LABELS[c.status]}</span>{c.recommended&&<span className="hfb-star" aria-label="우선 검토 추천">★ 추천</span>}{proof&&<span className={`hfb-proof ${proof.kind}`}>{proof.kind==='same-post'?'이 글이 실제 홈판':'비슷한 소재가 실제 홈판'} {proof.rank?`${proof.rank}위`:''} · {monthDay(proof.day)}</span>}{evidence?.mine&&<span className="hfb-proof mine">내 블로그 홈판 유입 소재 · {evidence.mine.count.toLocaleString('ko-KR')}회</span>}<span className="hfb-category">{c.category}</span><span className="hfb-timing">{c.freshnessLabel||'작성 시점 확인 필요'}</span></div>
   <div className="hfb-headline"><h3>{c.title||c.keyword}</h3><CopyHeadline text={c.title||c.keyword}/></div>
   <div className="hfb-keyword"><strong>{c.keyword}</strong><span>검색량 <b>{metricText(c.metrics.searchVolume)}</b></span><span>문서량 <b>{metricText(c.metrics.documentCount)}</b></span><span>상위노출 <b>판정 보류</b></span></div>
-  {enrich?.demand?<DemandBlock c={demandCard}/>:<p style={{margin:'6px 0 0',fontSize:12,color:'#8d9db4'}}>검색 추이 그래프 준비 중 — 추천 · 지금 검토 소재부터 데이터랩으로 재서 붙입니다.</p>}
+  {enrich?.demand?<><p style={{margin:'8px 0 0',fontSize:12,color:'#a8b6cb'}}>「{searchQuery}」 검색 추이</p><DemandBlock c={demandCard}/></>:<p style={{margin:'6px 0 0',fontSize:12,color:'#8d9db4'}}>{searchQuery?`「${searchQuery}」 검색 추이 그래프 준비 중 — 데이터랩으로 재서 붙입니다.`:'이 소재는 아직 노릴 검색어(자동완성)가 없어 검색 추이 그래프가 없습니다 — 홈판 반응(공감 · 댓글)으로 판단하세요.'}</p>}
   {c.relatedKeywords.length>0&&<p className="hfb-alternatives"><span>대안·연관 키워드</span> {c.relatedKeywords.join(' · ')}</p>}
   <p className="hfb-summary">{c.summary||'원문을 확인한 뒤 사건 내용을 정리해 주세요.'}</p>
   {c.summaryAttribution&&<p className="hfb-attribution">{c.summaryAttribution}</p>}
