@@ -73,10 +73,11 @@ test('홈판 카드에 그래프와 성과 내는 순서, 애드센스 카드에
   const card = readFileSync(new URL('../src/components/leword/homefeed/HomefeedBenchmarkCard.tsx', import.meta.url), 'utf8');
   assert.match(card, /<DemandBlock c=\{/);
   assert.match(card, /<BenchmarkPlaybook steps=\{/);
-  assert.match(card, /trackUrl\(c\.keyword\)/);
+  assert.match(card, /trackUrl\(searchQuery\|\|c\.keyword\)/);
+  assert.match(card, /const searchQuery=c\.searchTargets\[0\]\|\|'';/);
   const board = readFileSync(new URL('../src/components/leword/homefeed/HomefeedBenchmarkBoard.tsx', import.meta.url), 'utf8');
   assert.match(board, /<BenchmarkHowTo kind="homefeed" \/>/);
-  assert.match(board, /enrich=\{enrich\.get\(enrichKey\(c\.keyword\)\)\}/);
+  assert.match(board, /enrich=\{c\.searchTargets\[0\]\?enrich\.get\(enrichKey\(c\.searchTargets\[0\]\)\):undefined\}/);
   const ads = readFileSync(new URL('../src/components/leword/adsense/AdsenseBenchmarkBoard.tsx', import.meta.url), 'utf8');
   assert.match(ads, /<BenchmarkHowTo kind="adsense" \/>/);
   assert.match(ads, /<BenchmarkPlaybook steps=\{/);

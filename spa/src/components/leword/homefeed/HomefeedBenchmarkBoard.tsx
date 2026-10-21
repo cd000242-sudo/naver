@@ -139,7 +139,7 @@ export default function HomefeedBenchmarkBoard() {
    </div>
    <div className="hfb-shuffle"><button type="button" onClick={()=>{reshuffle();setLimit(12);}}>순서 섞기</button><small>매시 정각 새 순서로 섞입니다 · 실제 홈판 증거 · ★ 소재가 먼저</small></div>
    <p className="hfb-legend">★는 최근 이틀 안에 벤치마크 채널 두 곳 이상이 함께 다룬 소재입니다. 홈판 노출 확인과는 별개이며, 제목은 작성용 제안입니다. 방금 새로 잡힌 소재는 다음 정기 수집(매시) 때 홈판 제목이 붙습니다.</p>
-   <div className="hfb-list">{items.slice(0,limit).map(c=><HomefeedBenchmarkCard key={c.id} candidate={c} evidence={c.evidence} enrich={enrich.get(enrichKey(c.keyword))}/>)}</div>
+   <div className="hfb-list">{items.slice(0,limit).map(c=><HomefeedBenchmarkCard key={c.id} candidate={c} evidence={c.evidence} enrich={c.searchTargets[0]?enrich.get(enrichKey(c.searchTargets[0])):undefined}/>)}</div>
    {items.length===0 && <div className="hfb-empty"><strong>이 조건에 맞는 소재가 없습니다.</strong><button type="button" onClick={()=>{setCategory('전체');setStatus('all');setQuery('');}}>전체 소재 보기</button></div>}
    {items.length>limit&&<button type="button" className="hfb-more" onClick={()=>setLimit(n=>n+12)}>소재 더 보기 · {Math.min(limit,items.length)}/{items.length}</button>}
   </>}
