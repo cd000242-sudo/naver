@@ -1,9 +1,9 @@
 {
- "builtAt": "2026-10-20T22:47:40.459Z",
+ "builtAt": "2026-10-21T05:34:50.142Z",
  "round": {
-  "id": "2026-10-21-morning",
-  "label": "오전",
-  "scheduledAt": "2026-10-20T21:30:00.000Z"
+  "id": "2026-10-21-afternoon",
+  "label": "오후",
+  "scheduledAt": "2026-10-21T04:30:00.000Z"
  },
  "warehouseBuiltAt": "2026-10-20T22:47:39.744Z",
  "perTopic": 240,
@@ -609,10 +609,10 @@
   },
   {
    "topic": "영화",
-   "candidates": 153,
-   "measured": 163,
-   "golden": 11,
-   "priorGolden": 8,
+   "candidates": 150,
+   "measured": 162,
+   "golden": 12,
+   "priorGolden": 12,
    "expandedGolden": 0,
    "targetCount": 30,
    "shortfall": 0,
@@ -842,6 +842,34 @@
      }
     },
     {
+     "keyword": "현재상영영화 순위",
+     "searchVolume": 39320,
+     "documentCount": 37399,
+     "measuredAt": "2026-10-20T22:52:07.825Z",
+     "ratio": 1.05,
+     "depth": null,
+     "comp": null,
+     "source": "preemption",
+     "freshness": {
+      "status": "new"
+     },
+     "money": {
+      "value": 70,
+      "tier": "none",
+      "pc": 70,
+      "mobile": 70
+     },
+     "related": [
+      {
+       "keyword": "넷플릭스주간순위",
+       "searchVolume": 74800,
+       "documentCount": 15052,
+       "ratio": 4.97,
+       "ultra": false
+      }
+     ]
+    },
+    {
      "keyword": "현재상영영화",
      "searchVolume": 409900,
      "documentCount": 396335,
@@ -866,53 +894,6 @@
      "documentCount": 88071,
      "measuredAt": "2026-10-20T22:52:06.855Z",
      "ratio": 1,
-     "depth": null,
-     "comp": null,
-     "source": "hint",
-     "freshness": {
-      "status": "new"
-     },
-     "money": {
-      "value": 70,
-      "tier": "none",
-      "pc": 70,
-      "mobile": 70
-     }
-    },
-    {
-     "keyword": "현재상영영화 순위",
-     "searchVolume": 36810,
-     "documentCount": 37399,
-     "measuredAt": "2026-10-20T22:52:07.825Z",
-     "ratio": 0.98,
-     "depth": null,
-     "comp": null,
-     "source": "preemption",
-     "freshness": {
-      "status": "new"
-     },
-     "money": {
-      "value": 70,
-      "tier": "none",
-      "pc": 70,
-      "mobile": 70
-     },
-     "related": [
-      {
-       "keyword": "넷플릭스주간순위",
-       "searchVolume": 74800,
-       "documentCount": 15052,
-       "ratio": 4.97,
-       "ultra": false
-      }
-     ]
-    },
-    {
-     "keyword": "패노메논",
-     "searchVolume": 2620,
-     "documentCount": 2794,
-     "measuredAt": "2026-10-20T22:52:10.675Z",
-     "ratio": 0.94,
      "depth": null,
      "comp": null,
      "source": "hint",
@@ -1370,6 +1351,34 @@
       "pc": 100,
       "mobile": 100
      }
+    },
+    {
+     "keyword": "넷플릭스신작",
+     "searchVolume": 51300,
+     "documentCount": 250542,
+     "measuredAt": "2026-10-20T22:52:23.972Z",
+     "ratio": 0.2,
+     "depth": 1,
+     "comp": "M",
+     "source": "hint",
+     "freshness": {
+      "status": "new"
+     },
+     "money": {
+      "value": 70,
+      "tier": "none",
+      "pc": 70,
+      "mobile": 70
+     },
+     "related": [
+      {
+       "keyword": "넷플릭스주간순위",
+       "searchVolume": 74800,
+       "documentCount": 15052,
+       "ratio": 4.97,
+       "ultra": false
+      }
+     ]
     }
    ]
   },
@@ -2776,10 +2785,10 @@
   },
   {
    "topic": "음악",
-   "candidates": 111,
+   "candidates": 110,
    "measured": 114,
    "golden": 3,
-   "priorGolden": 2,
+   "priorGolden": 3,
    "expandedGolden": 0,
    "targetCount": 30,
    "shortfall": 0,
@@ -3367,10 +3376,10 @@
   },
   {
    "topic": "드라마",
-   "candidates": 89,
+   "candidates": 88,
    "measured": 104,
    "golden": 17,
-   "priorGolden": 16,
+   "priorGolden": 17,
    "expandedGolden": 0,
    "targetCount": 30,
    "shortfall": 0,
@@ -4077,10 +4086,10 @@
   },
   {
    "topic": "스타·연예인",
-   "candidates": 45,
+   "candidates": 44,
    "measured": 106,
    "golden": 2,
-   "priorGolden": 1,
+   "priorGolden": 2,
    "expandedGolden": 0,
    "targetCount": 30,
    "shortfall": 0,
@@ -5250,10 +5259,10 @@
   },
   {
    "topic": "방송",
-   "candidates": 42,
+   "candidates": 41,
    "measured": 50,
-   "golden": 9,
-   "priorGolden": 7,
+   "golden": 10,
+   "priorGolden": 9,
    "expandedGolden": 0,
    "targetCount": 30,
    "shortfall": 0,
@@ -5334,6 +5343,34 @@
       "pc": 70,
       "mobile": 70
      }
+    },
+    {
+     "keyword": "나솔사계",
+     "searchVolume": 162000,
+     "documentCount": 121015,
+     "measuredAt": "2026-10-20T23:10:34.964Z",
+     "ratio": 1.34,
+     "depth": 0,
+     "comp": "L",
+     "source": "section",
+     "freshness": {
+      "status": "new"
+     },
+     "money": {
+      "value": 70,
+      "tier": "none",
+      "pc": 70,
+      "mobile": 70
+     },
+     "related": [
+      {
+       "keyword": "나솔사계 혜성",
+       "searchVolume": 1320,
+       "documentCount": 157,
+       "ratio": 8.41,
+       "ultra": true
+      }
+     ]
     },
     {
      "keyword": "이주승",
@@ -5438,34 +5475,6 @@
       "pc": 70,
       "mobile": 70
      }
-    },
-    {
-     "keyword": "나솔사계",
-     "searchVolume": 117500,
-     "documentCount": 121015,
-     "measuredAt": "2026-10-20T23:10:34.964Z",
-     "ratio": 0.97,
-     "depth": null,
-     "comp": null,
-     "source": "section",
-     "freshness": {
-      "status": "new"
-     },
-     "money": {
-      "value": 70,
-      "tier": "none",
-      "pc": 70,
-      "mobile": 70
-     },
-     "related": [
-      {
-       "keyword": "나솔사계 혜성",
-       "searchVolume": 1320,
-       "documentCount": 157,
-       "ratio": 8.41,
-       "ultra": true
-      }
-     ]
     },
     {
      "keyword": "말자쇼",
@@ -7844,10 +7853,10 @@
   {
    "topic": "좋은글·이미지",
    "candidates": 134,
-   "measured": 194,
+   "measured": 180,
    "golden": 1,
-   "priorGolden": 0,
-   "expandedGolden": 1,
+   "priorGolden": 1,
+   "expandedGolden": 0,
    "targetCount": 30,
    "shortfall": 0,
    "rows": [
@@ -7906,25 +7915,6 @@
       "tier": "low",
       "pc": 280,
       "mobile": 290
-     }
-    },
-    {
-     "keyword": "LG서비스센터",
-     "searchVolume": 133400,
-     "documentCount": 728164,
-     "measuredAt": "2026-10-20T23:24:22.357Z",
-     "ratio": 0.18,
-     "depth": null,
-     "comp": "높음",
-     "source": "related",
-     "freshness": {
-      "status": "new"
-     },
-     "money": {
-      "value": 1210,
-      "tier": "mid",
-      "pc": 1210,
-      "mobile": 1080
      }
     },
     {
@@ -8079,25 +8069,6 @@
      ]
     },
     {
-     "keyword": "LG베스트샵",
-     "searchVolume": 23270,
-     "documentCount": 194244,
-     "measuredAt": "2026-10-20T23:24:26.328Z",
-     "ratio": 0.12,
-     "depth": null,
-     "comp": "중간",
-     "source": "related",
-     "freshness": {
-      "status": "new"
-     },
-     "money": {
-      "value": 860,
-      "tier": "low",
-      "pc": 820,
-      "mobile": 860
-     }
-    },
-    {
      "keyword": "네스프레소매장",
      "searchVolume": 6000,
      "documentCount": 56507,
@@ -8114,25 +8085,6 @@
       "tier": "low",
       "pc": 320,
       "mobile": 240
-     }
-    },
-    {
-     "keyword": "LGU플러스대리점",
-     "searchVolume": 7150,
-     "documentCount": 69413,
-     "measuredAt": "2026-10-20T23:09:42.532Z",
-     "ratio": 0.1,
-     "depth": null,
-     "comp": "높음",
-     "source": "related",
-     "freshness": {
-      "status": "new"
-     },
-     "money": {
-      "value": 1420,
-      "tier": "mid",
-      "pc": 1280,
-      "mobile": 1420
      }
     },
     {
@@ -8283,25 +8235,6 @@
       "tier": "none",
       "pc": 70,
       "mobile": 70
-     }
-    },
-    {
-     "keyword": "LG공기청정기필터",
-     "searchVolume": 12270,
-     "documentCount": 140319,
-     "measuredAt": "2026-10-20T23:24:30.248Z",
-     "ratio": 0.09,
-     "depth": null,
-     "comp": "높음",
-     "source": "related",
-     "freshness": {
-      "status": "new"
-     },
-     "money": {
-      "value": 1370,
-      "tier": "mid",
-      "pc": 910,
-      "mobile": 1370
      }
     },
     {
@@ -8475,25 +8408,6 @@
      }
     },
     {
-     "keyword": "LG유플러스직영점",
-     "searchVolume": 1910,
-     "documentCount": 29175,
-     "measuredAt": "2026-10-20T23:24:57.700Z",
-     "ratio": 0.07,
-     "depth": null,
-     "comp": "높음",
-     "source": "related",
-     "freshness": {
-      "status": "new"
-     },
-     "money": {
-      "value": 1080,
-      "tier": "mid",
-      "pc": 1080,
-      "mobile": 930
-     }
-    },
-    {
      "keyword": "별자리",
      "searchVolume": 76120,
      "documentCount": 1184802,
@@ -8586,15 +8500,119 @@
        "ultra": false
       }
      ]
+    },
+    {
+     "keyword": "생일축하이모티콘",
+     "searchVolume": 2080,
+     "documentCount": 33895,
+     "measuredAt": "2026-10-20T23:23:01.907Z",
+     "ratio": 0.06,
+     "depth": 9,
+     "comp": "H",
+     "source": "hint",
+     "freshness": {
+      "status": "new"
+     },
+     "money": {
+      "value": 230,
+      "tier": "low",
+      "pc": 230,
+      "mobile": 150
+     },
+     "related": [
+      {
+       "keyword": "특수문자이모티콘",
+       "searchVolume": 38320,
+       "documentCount": 29692,
+       "ratio": 1.29,
+       "ultra": false
+      }
+     ]
+    },
+    {
+     "keyword": "한샘서비스센터",
+     "searchVolume": 1780,
+     "documentCount": 32050,
+     "measuredAt": "2026-10-20T23:25:05.210Z",
+     "ratio": 0.06,
+     "depth": null,
+     "comp": "중간",
+     "source": "related",
+     "freshness": {
+      "status": "new"
+     },
+     "money": {
+      "value": 70,
+      "tier": "none",
+      "pc": 70,
+      "mobile": 70
+     }
+    },
+    {
+     "keyword": "한샘몰매장",
+     "searchVolume": 1370,
+     "documentCount": 23212,
+     "measuredAt": "2026-10-20T23:25:11.941Z",
+     "ratio": 0.06,
+     "depth": null,
+     "comp": "중간",
+     "source": "related",
+     "freshness": {
+      "status": "new"
+     },
+     "money": {
+      "value": 1330,
+      "tier": "mid",
+      "pc": 520,
+      "mobile": 1330
+     }
+    },
+    {
+     "keyword": "한샘리클라이너쇼파",
+     "searchVolume": 1260,
+     "documentCount": 20039,
+     "measuredAt": "2026-10-20T23:25:14.835Z",
+     "ratio": 0.06,
+     "depth": null,
+     "comp": "중간",
+     "source": "related",
+     "freshness": {
+      "status": "new"
+     },
+     "money": {
+      "value": 320,
+      "tier": "low",
+      "pc": 160,
+      "mobile": 320
+     }
+    },
+    {
+     "keyword": "무료폰트",
+     "searchVolume": 12270,
+     "documentCount": 253078,
+     "measuredAt": "2026-10-20T23:22:23.772Z",
+     "ratio": 0.05,
+     "depth": 10,
+     "comp": "H",
+     "source": "hint",
+     "freshness": {
+      "status": "new"
+     },
+     "money": {
+      "value": 520,
+      "tier": "low",
+      "pc": 520,
+      "mobile": 170
+     }
     }
    ]
   },
   {
    "topic": "패션·미용",
-   "candidates": 185,
-   "measured": 70,
+   "candidates": 182,
+   "measured": 73,
    "golden": 30,
-   "priorGolden": 70,
+   "priorGolden": 73,
    "expandedGolden": 0,
    "targetCount": 30,
    "shortfall": 0,
@@ -8666,34 +8684,6 @@
      }
     },
     {
-     "keyword": "아이오페레티놀",
-     "searchVolume": 40450,
-     "documentCount": 19319,
-     "measuredAt": "2026-10-20T23:26:00.364Z",
-     "ratio": 2.09,
-     "depth": null,
-     "comp": null,
-     "source": "shopping",
-     "freshness": {
-      "status": "new"
-     },
-     "money": {
-      "value": 680,
-      "tier": "low",
-      "pc": 680,
-      "mobile": 660
-     },
-     "related": [
-      {
-       "keyword": "아이오페레티놀세럼",
-       "searchVolume": 12440,
-       "documentCount": 12148,
-       "ratio": 1.02,
-       "ultra": false
-      }
-     ]
-    },
-    {
      "keyword": "분크",
      "searchVolume": 58130,
      "documentCount": 23999,
@@ -8710,25 +8700,6 @@
       "tier": "low",
       "pc": 260,
       "mobile": 640
-     }
-    },
-    {
-     "keyword": "불가리목걸이",
-     "searchVolume": 114700,
-     "documentCount": 55509,
-     "measuredAt": "2026-10-20T23:25:34.464Z",
-     "ratio": 2.07,
-     "depth": null,
-     "comp": null,
-     "source": "shopping",
-     "freshness": {
-      "status": "new"
-     },
-     "money": {
-      "value": 610,
-      "tier": "low",
-      "pc": 360,
-      "mobile": 610
      }
     },
     {
@@ -8824,6 +8795,25 @@
      }
     },
     {
+     "keyword": "만다리나덕백팩",
+     "searchVolume": 23440,
+     "documentCount": 9997,
+     "measuredAt": "2026-10-21T00:37:15.866Z",
+     "ratio": 2.34,
+     "depth": null,
+     "comp": null,
+     "source": "shopping",
+     "freshness": {
+      "status": "new"
+     },
+     "money": {
+      "value": 430,
+      "tier": "low",
+      "pc": 270,
+      "mobile": 430
+     }
+    },
+    {
      "keyword": "나이키이니시에이터",
      "searchVolume": 51030,
      "documentCount": 3869,
@@ -8897,7 +8887,16 @@
       "tier": "low",
       "pc": 280,
       "mobile": 420
-     }
+     },
+     "related": [
+      {
+       "keyword": "불가리목걸이",
+       "searchVolume": 114700,
+       "documentCount": 55509,
+       "ratio": 2.07,
+       "ultra": false
+      }
+     ]
     },
     {
      "keyword": "스투시후드집업",
@@ -9045,8 +9044,8 @@
     {
      "keyword": "이지듀",
      "searchVolume": 54820,
-     "documentCount": 19793,
-     "measuredAt": "2026-10-20T05:33:29.966Z",
+     "documentCount": 19807,
+     "measuredAt": "2026-10-21T05:36:07.128Z",
      "ratio": 2.77,
      "depth": null,
      "comp": null,
@@ -9340,6 +9339,26 @@
      ]
     },
     {
+     "keyword": "마스마룰즈백팩",
+     "searchVolume": 23450,
+     "documentCount": 2179,
+     "measuredAt": "2026-10-21T00:37:06.037Z",
+     "ratio": 10.76,
+     "depth": null,
+     "comp": null,
+     "source": "shopping",
+     "freshness": {
+      "status": "new"
+     },
+     "money": {
+      "value": 150,
+      "tier": "low",
+      "pc": 100,
+      "mobile": 150
+     },
+     "ultra": true
+    },
+    {
      "keyword": "케네스레이디",
      "searchVolume": 31950,
      "documentCount": 13333,
@@ -9385,11 +9404,11 @@
   },
   {
    "topic": "인테리어·DIY",
-   "candidates": 239,
-   "measured": 303,
-   "golden": 20,
-   "priorGolden": 15,
-   "expandedGolden": 4,
+   "candidates": 238,
+   "measured": 302,
+   "golden": 19,
+   "priorGolden": 19,
+   "expandedGolden": 0,
    "targetCount": 30,
    "shortfall": 0,
    "rows": [
@@ -9738,25 +9757,6 @@
      "ultra": true
     },
     {
-     "keyword": "딥디크일리오",
-     "searchVolume": 1030,
-     "documentCount": 1031,
-     "measuredAt": "2026-10-20T23:26:46.225Z",
-     "ratio": 1,
-     "depth": null,
-     "comp": null,
-     "source": "related",
-     "freshness": {
-      "status": "new"
-     },
-     "money": {
-      "value": 250,
-      "tier": "low",
-      "pc": 220,
-      "mobile": 250
-     }
-    },
-    {
      "keyword": "조말론스칼렛포피",
      "searchVolume": 1190,
      "documentCount": 353,
@@ -9777,22 +9777,22 @@
      "ultra": true
     },
     {
-     "keyword": "조말론카디퓨저",
-     "searchVolume": 1490,
-     "documentCount": 1500,
-     "measuredAt": "2026-10-20T23:26:43.452Z",
-     "ratio": 0.99,
+     "keyword": "딥디크일리오",
+     "searchVolume": 930,
+     "documentCount": 1031,
+     "measuredAt": "2026-10-20T23:26:46.225Z",
+     "ratio": 0.9,
      "depth": null,
-     "comp": null,
+     "comp": "중간",
      "source": "related",
      "freshness": {
       "status": "new"
      },
      "money": {
-      "value": 1360,
-      "tier": "mid",
-      "pc": 580,
-      "mobile": 1360
+      "value": 250,
+      "tier": "low",
+      "pc": 220,
+      "mobile": 250
      }
     },
     {
@@ -9965,16 +9965,35 @@
       "pc": 640,
       "mobile": 650
      }
+    },
+    {
+     "keyword": "자코모3인소파",
+     "searchVolume": 8950,
+     "documentCount": 18346,
+     "measuredAt": "2026-10-20T23:30:46.014Z",
+     "ratio": 0.49,
+     "depth": null,
+     "comp": "중간",
+     "source": "related",
+     "freshness": {
+      "status": "new"
+     },
+     "money": {
+      "value": 370,
+      "tier": "low",
+      "pc": 280,
+      "mobile": 370
+     }
     }
    ]
   },
   {
    "topic": "요리·레시피",
-   "candidates": 234,
-   "measured": 265,
-   "golden": 18,
-   "priorGolden": 17,
-   "expandedGolden": 0,
+   "candidates": 233,
+   "measured": 263,
+   "golden": 19,
+   "priorGolden": 18,
+   "expandedGolden": 1,
    "targetCount": 30,
    "shortfall": 0,
    "rows": [
@@ -10244,6 +10263,25 @@
      }
     },
     {
+     "keyword": "시나노골드10KG",
+     "searchVolume": 4480,
+     "documentCount": 3082,
+     "measuredAt": "2026-10-20T23:31:51.500Z",
+     "ratio": 1.45,
+     "depth": null,
+     "comp": "중간",
+     "source": "related",
+     "freshness": {
+      "status": "new"
+     },
+     "money": {
+      "value": 260,
+      "tier": "low",
+      "pc": 250,
+      "mobile": 260
+     }
+    },
+    {
      "keyword": "로렌조올리브오일",
      "searchVolume": 6950,
      "documentCount": 2271,
@@ -10374,81 +10412,6 @@
       "pc": 70,
       "mobile": 70
      }
-    },
-    {
-     "keyword": "홍어무침레시피",
-     "searchVolume": 9450,
-     "documentCount": 9527,
-     "measuredAt": "2026-10-20T23:31:45.776Z",
-     "ratio": 0.99,
-     "depth": null,
-     "comp": null,
-     "source": "section",
-     "freshness": {
-      "status": "new"
-     },
-     "money": {
-      "value": 180,
-      "tier": "low",
-      "pc": 150,
-      "mobile": 180
-     },
-     "related": [
-      {
-       "keyword": "소갈비찜레시피",
-       "searchVolume": 185150,
-       "documentCount": 99263,
-       "ratio": 1.87,
-       "ultra": false
-      }
-     ]
-    },
-    {
-     "keyword": "시나노골드10KG",
-     "searchVolume": 3060,
-     "documentCount": 3082,
-     "measuredAt": "2026-10-20T23:31:51.500Z",
-     "ratio": 0.99,
-     "depth": null,
-     "comp": null,
-     "source": "related",
-     "freshness": {
-      "status": "new"
-     },
-     "money": {
-      "value": 260,
-      "tier": "low",
-      "pc": 250,
-      "mobile": 260
-     }
-    },
-    {
-     "keyword": "LA갈비찜레시피",
-     "searchVolume": 17370,
-     "documentCount": 18168,
-     "measuredAt": "2026-10-20T23:31:43.620Z",
-     "ratio": 0.96,
-     "depth": null,
-     "comp": null,
-     "source": "section",
-     "freshness": {
-      "status": "new"
-     },
-     "money": {
-      "value": 150,
-      "tier": "low",
-      "pc": 110,
-      "mobile": 150
-     },
-     "related": [
-      {
-       "keyword": "소갈비찜레시피",
-       "searchVolume": 185150,
-       "documentCount": 99263,
-       "ratio": 1.87,
-       "ultra": false
-      }
-     ]
     },
     {
      "keyword": "시나노스위트",
@@ -10637,6 +10600,44 @@
       "tier": "low",
       "pc": 850,
       "mobile": 840
+     }
+    },
+    {
+     "keyword": "괴산절임배추",
+     "searchVolume": 9060,
+     "documentCount": 22701,
+     "measuredAt": "2026-10-20T23:34:37.427Z",
+     "ratio": 0.4,
+     "depth": 8,
+     "comp": "M",
+     "source": "biztp",
+     "freshness": {
+      "status": "new"
+     },
+     "money": {
+      "value": 240,
+      "tier": "low",
+      "pc": 170,
+      "mobile": 240
+     }
+    },
+    {
+     "keyword": "도토리묵양념장",
+     "searchVolume": 34890,
+     "documentCount": 94371,
+     "measuredAt": "2026-10-20T23:32:19.092Z",
+     "ratio": 0.37,
+     "depth": 4,
+     "comp": "M",
+     "source": "section",
+     "freshness": {
+      "status": "new"
+     },
+     "money": {
+      "value": 130,
+      "tier": "low",
+      "pc": 120,
+      "mobile": 130
      }
     }
    ]
@@ -12523,7 +12524,7 @@
   {
    "topic": "스포츠",
    "candidates": 198,
-   "measured": 62,
+   "measured": 61,
    "golden": 30,
    "priorGolden": 61,
    "expandedGolden": 0,
@@ -13334,10 +13335,10 @@
   },
   {
    "topic": "사진",
-   "candidates": 170,
+   "candidates": 169,
    "measured": 230,
    "golden": 1,
-   "priorGolden": 0,
+   "priorGolden": 1,
    "expandedGolden": 0,
    "targetCount": 30,
    "shortfall": 0,
@@ -14873,9 +14874,9 @@
    "topic": "취미",
    "candidates": 240,
    "measured": 260,
-   "golden": 10,
-   "priorGolden": 7,
-   "expandedGolden": 3,
+   "golden": 11,
+   "priorGolden": 10,
+   "expandedGolden": 1,
    "targetCount": 30,
    "shortfall": 0,
    "rows": [
@@ -14915,6 +14916,25 @@
       "tier": "low",
       "pc": 260,
       "mobile": 490
+     }
+    },
+    {
+     "keyword": "만수피싱",
+     "searchVolume": 1950,
+     "documentCount": 1767,
+     "measuredAt": "2026-10-21T05:36:40.892Z",
+     "ratio": 1.1,
+     "depth": null,
+     "comp": "낮음",
+     "source": "related",
+     "freshness": {
+      "status": "new"
+     },
+     "money": {
+      "value": 440,
+      "tier": "low",
+      "pc": 210,
+      "mobile": 440
      }
     },
     {
@@ -15435,34 +15455,15 @@
       "pc": 270,
       "mobile": 300
      }
-    },
-    {
-     "keyword": "활쭈꾸미",
-     "searchVolume": 2520,
-     "documentCount": 26130,
-     "measuredAt": "2026-10-21T00:00:52.257Z",
-     "ratio": 0.1,
-     "depth": 8,
-     "comp": "M",
-     "source": "section",
-     "freshness": {
-      "status": "new"
-     },
-     "money": {
-      "value": 200,
-      "tier": "low",
-      "pc": 200,
-      "mobile": 200
-     }
     }
    ]
   },
   {
    "topic": "국내여행",
-   "candidates": 190,
-   "measured": 69,
+   "candidates": 189,
+   "measured": 70,
    "golden": 30,
-   "priorGolden": 69,
+   "priorGolden": 70,
    "expandedGolden": 0,
    "targetCount": 30,
    "shortfall": 0,
@@ -15536,25 +15537,6 @@
        "ultra": false
       }
      ]
-    },
-    {
-     "keyword": "경산대추축제",
-     "searchVolume": 5650,
-     "documentCount": 3097,
-     "measuredAt": "2026-10-21T00:04:52.725Z",
-     "ratio": 1.82,
-     "depth": null,
-     "comp": null,
-     "source": "month",
-     "freshness": {
-      "status": "new"
-     },
-     "money": {
-      "value": 390,
-      "tier": "low",
-      "pc": 390,
-      "mobile": 140
-     }
     },
     {
      "keyword": "시흥갯골축제",
@@ -15795,7 +15777,16 @@
       "tier": "low",
       "pc": 150,
       "mobile": 190
-     }
+     },
+     "related": [
+      {
+       "keyword": "경산대추축제",
+       "searchVolume": 5650,
+       "documentCount": 3097,
+       "ratio": 1.82,
+       "ultra": false
+      }
+     ]
     },
     {
      "keyword": "임실N치즈축제",
@@ -15876,6 +15867,34 @@
       "pc": 160,
       "mobile": 170
      }
+    },
+    {
+     "keyword": "대전빵축제",
+     "searchVolume": 199000,
+     "documentCount": 88860,
+     "measuredAt": "2026-10-21T00:36:50.358Z",
+     "ratio": 2.24,
+     "depth": null,
+     "comp": null,
+     "source": "section",
+     "freshness": {
+      "status": "new"
+     },
+     "money": {
+      "value": 160,
+      "tier": "low",
+      "pc": 160,
+      "mobile": 130
+     },
+     "related": [
+      {
+       "keyword": "안흥찐빵축제",
+       "searchVolume": 22060,
+       "documentCount": 5909,
+       "ratio": 3.73,
+       "ultra": false
+      }
+     ]
     },
     {
      "keyword": "대하전어축제",
@@ -16231,7 +16250,16 @@
       "tier": "none",
       "pc": 70,
       "mobile": 70
-     }
+     },
+     "related": [
+      {
+       "keyword": "경산대추축제",
+       "searchVolume": 5650,
+       "documentCount": 3097,
+       "ratio": 1.82,
+       "ultra": false
+      }
+     ]
     },
     {
      "keyword": "장성황룡강축제",
@@ -16350,10 +16378,10 @@
   },
   {
    "topic": "세계여행",
-   "candidates": 240,
+   "candidates": 239,
    "measured": 301,
    "golden": 2,
-   "priorGolden": 1,
+   "priorGolden": 2,
    "expandedGolden": 0,
    "targetCount": 30,
    "shortfall": 0,
@@ -17706,10 +17734,10 @@
   },
   {
    "topic": "맛집",
-   "candidates": 240,
+   "candidates": 239,
    "measured": 291,
    "golden": 2,
-   "priorGolden": 1,
+   "priorGolden": 2,
    "expandedGolden": 0,
    "targetCount": 30,
    "shortfall": 0,
@@ -18288,10 +18316,10 @@
   },
   {
    "topic": "IT·컴퓨터",
-   "candidates": 239,
-   "measured": 249,
+   "candidates": 237,
+   "measured": 248,
    "golden": 5,
-   "priorGolden": 2,
+   "priorGolden": 4,
    "expandedGolden": 0,
    "targetCount": 30,
    "shortfall": 0,
@@ -18478,41 +18506,6 @@
       "tier": "mid",
       "pc": 800,
       "mobile": 1260
-     },
-     "related": [
-      {
-       "keyword": "아이폰듀오",
-       "searchVolume": 331100,
-       "documentCount": 38781,
-       "ratio": 8.54,
-       "ultra": false
-      },
-      {
-       "keyword": "아이폰18프로",
-       "searchVolume": 1072600,
-       "documentCount": 160824,
-       "ratio": 6.67,
-       "ultra": false
-      }
-     ]
-    },
-    {
-     "keyword": "아이폰SE1",
-     "searchVolume": 6220,
-     "documentCount": 6258,
-     "measuredAt": "2026-10-21T00:14:58.721Z",
-     "ratio": 0.99,
-     "depth": null,
-     "comp": null,
-     "source": "related",
-     "freshness": {
-      "status": "new"
-     },
-     "money": {
-      "value": 280,
-      "tier": "low",
-      "pc": 170,
-      "mobile": 280
      },
      "related": [
       {
@@ -19155,6 +19148,48 @@
       "pc": 330,
       "mobile": 310
      }
+    },
+    {
+     "keyword": "갤럭시워치스트랩",
+     "searchVolume": 21100,
+     "documentCount": 98913,
+     "measuredAt": "2026-10-21T00:16:19.576Z",
+     "ratio": 0.21,
+     "depth": 8,
+     "comp": "M",
+     "source": "biztp",
+     "freshness": {
+      "status": "new"
+     },
+     "money": {
+      "value": 780,
+      "tier": "low",
+      "pc": 780,
+      "mobile": 730
+     },
+     "related": [
+      {
+       "keyword": "갤럭시폴드8",
+       "searchVolume": 556800,
+       "documentCount": 213277,
+       "ratio": 2.61,
+       "ultra": false
+      },
+      {
+       "keyword": "갤럭시워치9",
+       "searchVolume": 165700,
+       "documentCount": 113352,
+       "ratio": 1.46,
+       "ultra": false
+      },
+      {
+       "keyword": "갤럭시캠퍼스스토어",
+       "searchVolume": 11090,
+       "documentCount": 9836,
+       "ratio": 1.13,
+       "ultra": false
+      }
+     ]
     }
    ]
   },
@@ -19878,9 +19913,9 @@
   {
    "topic": "건강·의학",
    "candidates": 221,
-   "measured": 61,
+   "measured": 62,
    "golden": 30,
-   "priorGolden": 61,
+   "priorGolden": 62,
    "expandedGolden": 0,
    "targetCount": 30,
    "shortfall": 0,
@@ -20837,10 +20872,10 @@
   },
   {
    "topic": "비즈니스·경제",
-   "candidates": 236,
+   "candidates": 234,
    "measured": 271,
    "golden": 22,
-   "priorGolden": 20,
+   "priorGolden": 22,
    "expandedGolden": 0,
    "targetCount": 30,
    "shortfall": 0,
@@ -21496,32 +21531,13 @@
   {
    "topic": "어학·외국어",
    "candidates": 240,
-   "measured": 286,
-   "golden": 3,
-   "priorGolden": 3,
+   "measured": 289,
+   "golden": 2,
+   "priorGolden": 2,
    "expandedGolden": 0,
    "targetCount": 30,
    "shortfall": 0,
    "rows": [
-    {
-     "keyword": "토익점수환산기",
-     "searchVolume": 5030,
-     "documentCount": 5041,
-     "measuredAt": "2026-10-21T00:27:33.071Z",
-     "ratio": 1,
-     "depth": null,
-     "comp": null,
-     "source": "related",
-     "freshness": {
-      "status": "new"
-     },
-     "money": {
-      "value": 620,
-      "tier": "low",
-      "pc": 620,
-      "mobile": 70
-     }
-    },
     {
      "keyword": "이루밍스터디카페",
      "searchVolume": 2010,
@@ -21577,6 +21593,25 @@
       "tier": "mid",
       "pc": 1550,
       "mobile": 1350
+     }
+    },
+    {
+     "keyword": "일취월장독서실",
+     "searchVolume": 1590,
+     "documentCount": 5127,
+     "measuredAt": "2026-10-21T05:37:08.928Z",
+     "ratio": 0.31,
+     "depth": null,
+     "comp": "중간",
+     "source": "related",
+     "freshness": {
+      "status": "new"
+     },
+     "money": {
+      "value": 200,
+      "tier": "low",
+      "pc": 190,
+      "mobile": 200
      }
     },
     {
@@ -21903,6 +21938,25 @@
      }
     },
     {
+     "keyword": "관리형독서실",
+     "searchVolume": 22900,
+     "documentCount": 493198,
+     "measuredAt": "2026-10-21T00:32:55.010Z",
+     "ratio": 0.05,
+     "depth": null,
+     "comp": "높음",
+     "source": "related",
+     "freshness": {
+      "status": "new"
+     },
+     "money": {
+      "value": 4300,
+      "tier": "high",
+      "pc": 4300,
+      "mobile": 3300
+     }
+    },
+    {
      "keyword": "IB교육",
      "searchVolume": 9280,
      "documentCount": 226455,
@@ -22053,34 +22107,15 @@
       "pc": 790,
       "mobile": 640
      }
-    },
-    {
-     "keyword": "캐나다벤프",
-     "searchVolume": 530,
-     "documentCount": 14978,
-     "measuredAt": "2026-10-21T00:32:12.293Z",
-     "ratio": 0.04,
-     "depth": null,
-     "comp": "높음",
-     "source": "related",
-     "freshness": {
-      "status": "new"
-     },
-     "money": {
-      "value": 1220,
-      "tier": "mid",
-      "pc": 1220,
-      "mobile": 820
-     }
     }
    ]
   },
   {
    "topic": "교육·학문",
-   "candidates": 239,
+   "candidates": 238,
    "measured": 263,
    "golden": 5,
-   "priorGolden": 4,
+   "priorGolden": 5,
    "expandedGolden": 0,
    "targetCount": 30,
    "shortfall": 0,
@@ -22838,14 +22873,14 @@
   }
  ],
  "changes": {
-  "added": 960,
-  "changed": 0,
-  "retained": 0
+  "added": 16,
+  "changed": 5,
+  "retained": 939
  },
  "measurements": {
-  "requested": 6469,
-  "reused": 47,
-  "succeeded": 6469
+  "requested": 34,
+  "reused": 6470,
+  "succeeded": 34
  },
  "novelty": {
   "windowDays": 7,
@@ -22859,234 +22894,3846 @@
   "entries": [
    {
     "keyword": "100일의거짓말",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "10모답지",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "10월모의고사",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "10월모의고사등급컷",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "10월인사말",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "2023gv80",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "2023k8하이브리드",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "2023년9월모의고사",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "2023지프그랜드체로키4xe",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "2024ev5",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "2024xm3제원",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "2024쉐보레트래버스제원",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "2024스타리아포토",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "2025bmwx4",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "2025g70",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "2025g90",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "2025gv70",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "2025gv80",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "2025k5",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "2025k8하이브리드",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "2025볼보s60",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "2025볼보s60포토",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "2025수능등급컷",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "2025스포티지포토",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "2025아반떼포토",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "3d운전게임버스도색",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "4대보험계산기",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "9월모의고사등급컷",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "a2o",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "aau",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "ai",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "aia생명보험",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "aula키보드",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "bmw530ixdrive",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "ccm악보",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "cgv할인쿠폰",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "cj방문택배",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "daw",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "dmc타워웨딩",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "eq의천재들",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "gv80",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "gv806인승",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "gv807인승",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "hsk",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "ib교육",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "ilac",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "iptime공유기",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "itq자격증",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "jlptn4",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "kbo",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "kbo일정",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "klpga",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "kodex200",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "kspodome",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "la갈비찜레시피",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "lgu플러스",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "lgu플러스대리점",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
    },
    {
     "keyword": "lgu플러스직영점",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "lg워시타워",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "lg헬로비전",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "lh임대주택",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "lh청년전세임대주택",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "lotto당첨번호",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "mnm영양제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "neon",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "openai",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "pc게임랭킹",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "petethecat",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "ptz카메라",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "sk브로드밴드",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "sk텔레콤",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "summer피아노악보",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "ucla",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "uc버클리",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "wavve",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "xbox게임패스",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "가구박람회",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "가마가츠낚시복",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "가을단풍명소",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "가을인사말",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "가족관계증명서",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "간장게장황금레시피",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "감우성",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "감홍사과",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "감홍사과10kg",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "갑오징어로드",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "갑오징어봉돌",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "갑오징어애기",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "갑오징어에기추천",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "갑오징어철",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "강남인강",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "강릉애견동반숙소",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "강아지산소방",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "강아지슬링백",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "개인택시자격",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "갤럭시a35",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "갤럭시s25",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "갤럭시s27",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "갤럭시워치",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "갤럭시워치스트랩",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "갤럭시핏",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "갤럭시핏3",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "거창감악산축제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "건강보험요율",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "게이밍의자",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "겐차야자",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "결혼축하메세지",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "경기도청년지원금",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "경인웰빙산악회",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "경주맛집",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "계수정",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "계약결혼",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "고구마줄기볶음",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "고덱스캡슐",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "고막남친ott",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "고약사오메가3",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "고양호수예술축제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "고체물감",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "고프로마운트",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "곤지름사진",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "골든디스크",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "골전도이어폰",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "공덕키링",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "관리형독서실",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "관악푸르지오",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "관저동푸르지오",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "관저푸르지오",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "관저푸르지오센트럴파크",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "괌pic",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "광교풍경채어바니티",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "광주제주항공권",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "광화문맛집",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "괴산절임배추",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "구미콜택시",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "국가평생교육진흥원학점은행제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "국민연금",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "국민취업지원제도",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "국민행복카드바우처신청",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "군산시간여행축제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "군산제주항공권",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "귀멸의칼날만화책",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "극장판치이카와",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "금산인삼축제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "금전수물주기",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "금토드라마",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "금호선인장",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "급여계산기",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "기계식키보드",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "기넥신에프정",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "기넥신에프정80mg",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "기타악보사이트",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "기타타브악보",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "김부장",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "김승리모의고사",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "김승윤",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "김유정",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "김정",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "김제지평선축제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "김지원",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "김포공항택시예약",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "김포제주항공권",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "김현",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "김혜자",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "끓임쪽",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "나솔사계",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "나올셀타55",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "나올셀타에기",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "나이키이니시에이터",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "나조린점안액",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "나트랑패스트트랙",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "난타공연",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "남당항대하축제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "남당항쭈꾸미낚시배",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "남여주cc",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "남이섬놀거리",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "남이섬입장권",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "남이섬짚라인",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "남춘천cc",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "남포동맛집",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "내신콘서트",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "내일배움카드",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "내일배움카드실업급여",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "내일은실험왕",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "너말고다른연애",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "네스프레소매장",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "네스프레소머신",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "네스프레소버츄오캡슐호환",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "네스프레소부티크",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "네스프레소캡슐수거",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "네스프레소커피머신",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "네온테트라",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "네즈코피규어",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "넷플릭스신작",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "넷플릭스요금제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "노란공제우산",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "노맨틱코미디",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "노스페이스경량패딩",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "노스페이스키즈바람막이",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "논산맛집",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "놀면뭐하니서울가요제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "농협택배",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "뇌출혈",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "뇌출혈후유증",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "뉴발란스키즈셋업",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "뉴베인",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "뉴베인가격",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "니콘d750",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "니콘z6",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "닌텐도스위치2",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "닌텐도스위치oled",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "다낭항공권",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "다이슨드라이기",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "다이슨무선청소기",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "다이슨에어랩",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "다이치원픽스360",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "닥터x",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "닥터예스키놀젤",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "닭볶음탕레시피",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "담백하루오메가3",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "담양맛집",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "당진맛집",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "대구뮤지컬",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "대구제주항공권",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "대구토익학원",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "대둔산단풍",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "대부도맛집",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "대부도펜션",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "대연힐스테이트푸르지오",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "대장암3기생존율",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "대전도안푸르지오",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "대전도안푸르지오디아델",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "대전빵축제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "대전콜택시",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "대하전어축제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "대학로공연",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "대학로공포연극",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "대학로뮤지컬",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "대학로연극",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "대학로연극예매순위",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "더리틀스오메가3",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "더마팩토리",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "더블케어알티지오메가3",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "더커뮤니티2",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "더프모의고사",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "데못죽",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "데뷔못하면죽는병걸림",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "데이식스팬미팅",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "도깨비의세계",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "도깨비의세계쿠폰",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "도깨비페인트클렌저",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "도깨비페클",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "도담도담트리플비타",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "도둑맞은집중력",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "도레미곰전집",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "도마뱀사육장",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "도미나크림",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "도안디아델",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "도안푸르지오디아델",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "도쿄리벤저스",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "도토리묵양념장",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "독거미키보드",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "동구동락",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "동대구역맛집",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "동요악보",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "동유럽패키지",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "동촌cc",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "동탄밴스의원",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "두유제조기",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "듀오링고",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "드럼세탁기청소비용",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "드론쇼",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "등급컷",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "디즈니플러스",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "디즈니플러스무료",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "디즈니플러스무료체험",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "디즈니플러스연간구독",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "디즈니플러스오리지널",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "디즈니플러스요금제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "디즈니플러스추천",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "디즈니플러스추천작",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "디즈니플러스한달무료",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "디즈니플러스할인",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "디지니플러스",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "디폼블럭",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "딜라이브",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "딥디크고체향수",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "딥디크로파피에",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "딥디크롬브로단로",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "딥디크방향제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "딥디크베티베리오",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "딥디크솔리드퍼퓸",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "딥디크오데썽",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "딥디크오듀엘르",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "딥디크오드민떼",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "딥디크오르페옹",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "딥디크오카피탈",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "딥디크올렌느",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "딥디크일리오",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "딥디크차량방향제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "딥디크차량용방향제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "딥디크탐다오",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "딥디크템포",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "딥디크플레르드뽀",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "딥디크필로시코스",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "딥디크헤어미스트",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "딥티크오르페옹",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "딥티크플레르드뽀",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "땡처리닷컴항공권",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "땡처리항공권",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "떡갈고무나무",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "라벨프린터기",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "라보에이치샴푸",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "라브르27",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "라싸cc",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "라피아노용인공세",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "랏코",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "래핑차일드",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "레드와인비니거",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "레스큐라이트액",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "로또1등",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "로또1등당첨금",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "로또1등당첨지역",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "로렌조올리브오일",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "로스트아크",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "로엠걸즈",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "로이코비에스액",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "로지텍마우스",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "루메나온풍기단점",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "루카831",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "르무통",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "르무통운동화",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "르반테올리브오일",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "르엘어퍼하우스",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "리니지2m",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "리쥬비넥스크림",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "리코카메라",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "리타방앗간",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "마그비스피드더블액션",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "마스마룰즈백팩",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "마이크로킥보드",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "마포래미안푸르지오",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "마포새우젓축제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "만다리나덕백팩",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "만수피싱",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "만화갤러리",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "말본골프웨어",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "말자쇼",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "맛다시",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "매교역팰루시드",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "매교역펠루시드분양가",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "맥세이프카드지갑",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "먼작귀굿즈",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "먼작귀마우스패드",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "먼작귀바디필로우",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "먼작귀인형",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "먼작귀쿠션",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "먼작귀파우치",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "먼지다듬이",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "먼치킨웹툰",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "멜라노사크림",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "멜라논크림",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "명절인사말",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "모나크cc",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "모두의마블메가디럭스",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "모루인형만들기",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "모리와함께한화요일",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "모모애견풀빌라",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "모의고사등급컷",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "모자무싸",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "목동보컬학원",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "목포맛집",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "몬스테라",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "몰타어학연수",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "몽베르cc",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "무냐무냐",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "무냐무냐내복",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "무늬오징어",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "무료게임crazy",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "무료티비다시보기",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "무료폰트",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "문경감홍사과",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "뮤지컬",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "뮤지컬순위",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "미야자키항공권",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "미츠리피규어",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "미쿠피규어",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "민둥산억새축제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "밀양맛집",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "바디캠",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "바르베라올리브오일",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "박람회",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "박시백의조선왕조실록",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "박위",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "박진영올리브오일",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "반클리프목걸이",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "발산역꽃집",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "방부목화분",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "방송댄스의상",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "방청신청",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "배틀그라운드",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "백령도여행",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "백운호수맛집",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "밴스의원구월",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "밴스의원부산",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "버니즈마운틴독",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "버티칼마우스",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "버티컬마우스",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "베네통가디건",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "베라수",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "베베팡",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "베어크리크cc",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "베이비뵨바운서",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "벤츠cla2504matic",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "벤츠e3004matic",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "벤츠e3504matic",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "벤츠e4504matic",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "벤츠지바겐",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "벤포벨s가격",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "벨리타앤보이즈",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "벨크로타이",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "별내맛집",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "별자리",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "병원동행매니저",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "보더콜리",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "보리굴비",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "보은대추축제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "보조배터리20000",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "보컬학원",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "부가부드래곤플라이",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "부디행복해질것",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "부레옥잠",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "부산국민연금웨딩홀",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "부산국제영화제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "부산그랜드모먼트웨딩홀",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "부산뮤지컬",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "북한",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "분크",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "불갑사상사화축제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "브레이킹배드",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "브롤스타즈쿠폰",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "브롤스타즈할로윈",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "블루록만화책",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "블리치",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "비료살포기",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "비밀요원레너드",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "비와이디전기차",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "비허밍스터디카페",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "빈폴키즈",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "빛의시어터",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "사설보정",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "사이다뱅크",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "사진용량줄이기",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "사춘기테스트",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "산리오",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "산세베리아",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "삼성디카",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "삼성전자배당금",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "삼양라운드힐",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "삼척맛집",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "삿포로항공권",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "상무지구맛집",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "상영중인영화",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "상추겉절이양념",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "샌드박스코인",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "생일축하이모티콘",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "샤오미드라이기",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "서동탄역랜시티",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "서면만화카페",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "서산맛집",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "서신더샵비발디",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "서울가요제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "서울랜드자유이용권",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "서울전시회",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "설민석한국사대모험",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "성인할로윈코스튬",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "세척마사토",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "세포랩",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "셔틀랜드쉽독",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "소니a1",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "소니카메라",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "소마셈",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "소상공인새출발기금",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "소상공인스마트상점",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "소상공인철거지원금",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "소설베스트셀러순위",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "소엽풍란",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "소형라디오",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "속리산단풍",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "속초맛집",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "송도뉴욕주립대",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "송도스터디카페",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "송파파크하비오푸르지오",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "수원반지공방",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "수원연극",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "순자",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "순천국가정원",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "순천만국가정원숙소",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "순천만정원박람회",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "순천맛집",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "순천정원박람회",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "쉬즈미스",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "쉬즈미스자켓",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "슈나우저",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "슈슈앤크라",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "슈퍼마리오오디세이",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "스릴러웹툰",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "스컬트라후기",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "스케치업",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "스코티시폴드",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "스킨부스터종류",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "스테들러색연필",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "스투시후드집업",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "스트리트파이터",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "스파오",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "시각장애인안마원",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "시그마렌즈",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "시나노골드10kg",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "시나노골드5kg",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "시나노골드사과",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "시나노골드수확시기",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "시나노스위트",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "시나노스위트사과",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "시대인재모의고사",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "시흥갯골축제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "신발수선집",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "신병국대",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "신인감독",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "신태진",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "실업급여",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "실업급여신청",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "실업급여신청방법",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "실업급여조건6개월",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "싸이벡스레모",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "싸이벡스제로나t",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "썸머피아노악보",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "아기할로윈코스튬",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "아너스웰가",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "아디다스져지",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "아뜰리에슈블랭킷",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "아람북스",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "아레카야자",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "아마란스10",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "아버지의해방일지",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "아식스젤카야노14",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "아이러브제이",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "아이맘콕",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "아이브앨범",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "아이엠택시",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "아이온클래식",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "아이쥐옷",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "아이폰16e",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "아이폰듀오케이스",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "아이폰자급제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "아젤리아크림",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "아쿠아디파르마",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "아크릴등신대",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "아크릴마그넷",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "아크릴물감사용법",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "아크릴액자제작",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "아크릴판",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "아크테릭스바람막이",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "아크테릭스백팩",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "아토팜판테놀크림",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "아톰피규어",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "아페르한강",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "악뮤콘서트",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "악보사이트",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "안동국제탈춤페스티벌",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "안동콜택시",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "안산교차로구인구직",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "안산스터디카페",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "안성hcc",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "안성바우덕이축제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "안양시화상영어",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "안중사진관",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "알티지오메가쓰리",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "암살자",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "앙부일구",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "야근수당",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "야채도사",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "약들약오메가3",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "양양맛집",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "양재화훼단지",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "양평만화카페",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "어벤져스엔드게임",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "언포게터블듀엣2",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "업소용로봇청소기",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "에뜨와",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "에어프라이어군밤",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "에이투오라이트",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "에코백스창문로봇청소기",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "에테르노청담",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "엔드그레인도마",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "엔믹스앨범",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "엔타스상품권",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "엘지워시타워",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "엘지유플러스대리점",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "여권사진",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "여권사진규정",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "여수제주항공권",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "여인초키우기",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "여주맛집",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "연금복권사는법",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "연산대추축제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "연애박사",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "연어필렛",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "영어회화100일의기적",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "영천보현산별빛축제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "영통역자이프라시엘",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "영화순위",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "영흥도갑오징어",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "영흥도갑오징어낚시",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "영흥도갑오징어배",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "영흥도골드피싱호",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "영흥도나이스호",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "영흥도낚시배",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "영흥도만수피싱",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "영흥도선상낚시",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "영흥도스타트호",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "영흥도아라호",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "영흥도쭈꾸미낚시",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "영흥도쭈꾸미낚시배",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "영흥도카리스마호",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "예술의전당전시",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "오늘의코스피",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "오늘주식",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "오니츠카타이거",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "오디세이ott",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "오르페옹",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "오메가3담백하루",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "오바로크",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "오백년째열다섯",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "오베라는남자",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "오이도낚시배",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "오타마톤",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "오타마톤디럭스",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "옥광밤",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "옥스포드리딩트리",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "옥탑방의문제아들",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "올리비아로렌",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "와이파이도시락",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "와팬",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "완결웹툰추천",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "요양보호사국비지원",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "요양보호사시험",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "요양보호사월급",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "요즈리틴셀",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "요즈리틴셀3호",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "우리들의발라드2",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "우발라",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "우체국계약택배",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "우체국방문택배",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "우체국알뜰폰",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "우체국택배비용",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "우체국택배요금",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "우체국택배접수",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "운동화수선집",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "울산보컬학원",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "울산셀프사진관",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "웅진정수기렌탈",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "워시타워",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "원리금균등상환계산기",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "원소주기율표",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "웨딩사설보정",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "웨딩포토테이블액자",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "위파크일곡공원",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "유니클로",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "유부녀킬러황봄이",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "유영우",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "유청분리기",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "유플러스직영점",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "유한양행마그비맥스",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "윤영경",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "음성푸르지오더퍼스트",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "음악검색",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "음원차트",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "음치클리닉",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "응급실",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "의정부입주청소",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "이감등급컷",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "이감모의고사",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "이감모의고사등급컷",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "이덴큐",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "이루밍스터디카페",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "이마트24택배예약",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "이모튼캡슐",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "이모티콘샵",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "이뮤골드액",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "이번달전시회",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "이북리더기추천",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "이삿짐보관창고",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "이서진양모이불",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "이야이야올리브오일",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "이주승",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "이지듀",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "이지포스",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "이터널리턴",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "이희진",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "익산맛집",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "인덕원센트럴푸르지오",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "인스탁스카메라",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "인제가을꽃축제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "인투셀",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "일렉기타",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "일렉기타입문",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "일본알펜루트",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "일본이심",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "일취월장독서실",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "일회용필름카메라",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "임신출산육아대백과",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "임실n치즈축제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "임실치즈축제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "임팩타민시그니처",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "잇미샤",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "자녀결혼인사말",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "자동차극장",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "자코모3인소파",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "자코모4인쇼파",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "작사공모전",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "잠실스터디카페",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "장가계",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "장성황룡강축제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "장애인차량스티커",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "재혼황후",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "전기차보조금",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "전문대순위",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "전주강아지분양",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "전주포장이사",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "접이식카트",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "정부지원산후도우미",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "정읍구절초축제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "정주행드라마추천",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "정호영",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "제네시스gv70",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "제주김포항공권",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "제주청주항공권",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "제주항공권",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "제주항공권땡처리",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "조말론머르앤통카",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "조말론스칼렛포피",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "조말론차량방향제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "조이아이스핀360",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "조호바루",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "조호바루한달살기",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "존박",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "주의은혜라악보",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "죽기전에꼭봐야할웹툰",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "중국계림",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "중국계림패키지",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "중국곤명",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "중국구채구",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "중국구채구여행",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "중국대련",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "중국대련여행",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "중국리장",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "중국리장여행",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "중국샤먼",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "중국샤먼여행",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "중국시안여행",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "중국심천",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "중국싼야",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "중국여강",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "중국연길",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "중국연태여행",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "중국제남",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "중국집",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "중국차마고도",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "중국태항산패키지",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "중국텐진",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "중국하문",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "중국하문여행",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "중국황산",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "중국황산패키지",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "중드추천",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "증명사진인화",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "증명사진출력",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "지게차기능사필기",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "지게차자격증",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "지압슬리퍼",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "직사각화분",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "진영단감축제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "진주남강유등축제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "진주아너스웰가",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "진주유등축제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "질레트면도날",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "찰스앤키스",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "창원가로수길카페",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "창원보컬학원",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "창원콜택시",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "챗gpt무료",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "천안드럼학원",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "천안연극",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "천안포장이사",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "천우희",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "천일문",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "청라더리브티아모까사",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "청원생명축제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "청주삿포로항공권",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "청주에서제주항공권",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "청주제주항공권",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "초소형카메라",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "최신영화순위",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "최현우마술쇼",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "최현우마술쇼서울",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "최후의만찬그림",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "추석선물세트",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "충주밴스의원",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "치이카와가챠",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "치이카와굿즈",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "치이카와마우스패드",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "치이카와만화책",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "치이카와샵",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "치이카와인형",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "치이카와정품",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "치이카와직구",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "치이카와쿠션",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "치이카와피규어",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "친칠라",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "칠성사이다190",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "칠성사이다355",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "카메라슬링백",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "카사바모래",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "카카오택시",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "카카오택시예약",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "캉골키즈",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "캐나다밴프",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "캐나다밴프여행",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "캐나다밴프패키지",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "캐나다벤프여행",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "캐나다비행기값",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "캐나다옐로나이프",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "캐나다오로라",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "캐나다오로라투어",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "캐나다퀘백여행",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "캐릭터바디필로우",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "캐슬파인cc",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "캠핑박람회",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "커버낫키즈",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "케네스레이디",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "코스",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "코스닥시총순위",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "코스카cc",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "코스트코회원권",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "코어위브",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "코엑스맛집",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "코웨이얼음정수기렌탈",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "코웨이음식물처리기",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "콘서트",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "콜밴비용",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "큐업액",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "클유아",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "키드냅게임ott",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "키링부자재",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "키플링크로스백",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "킨텍스가구박람회",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "타브악보",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "탄소매트",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "탑백귀",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "탑텐키즈",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "태백하늘김치",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "태안맛집",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "태안애견동반펜션",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "택시기사월급",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "택시기사자격증",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "택시면허시험",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "택시운전자격증",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "택시자격증시험",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "테이블야자",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "텝스",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "토스플레이스",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "통기타",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "퇴계원강남아파트",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "투란도트",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "트레이딩뷰",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "트루엔알티지오메가3",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "트루엔오메가3",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "트루엔오엠비",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "트와이스콘서트",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "특수문자",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "틈만나면",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "티벳사자의서",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "팁런에기",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "파나소닉루믹스",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "파슨스",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "파슨스디자인스쿨",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "파이널테이블",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "파타고니아신칠라",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "팔공산카페",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "패브릭물감",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "팰월드",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "퍼시닌바디워시",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "펫보험",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "펫테일게코",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "평택역꽃집",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "포스티딜세린",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "포스파디딜세린",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "포제스한강",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "포천맛집",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "포항디디하우스",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "폴라로이드카메라",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "폴햄키즈",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "표기식",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "푸꾸옥",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "푸꾸옥패키지",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "푸르지오디아델",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "풍기인삼축제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "프랜치캣",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "프렌치캣",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "프로야구일정",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "프뢰벨영아테마동화",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "플래시게임사이트",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "플레시게임",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "피규어아크릴케이스",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "피아노악보",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "피아노악보사이트",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "피아노연습실",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "필로덴드론",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "필로덴드론플로리다뷰티",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "하노이항공권",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "하루담백오메가3",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "하모니카악보",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "하이웍스메일",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "하파크리스틴",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "한뼘사이연극",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "한샘",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "한샘리클라이너",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "한샘리클라이너쇼파",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "한샘몰",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "한샘몰매장",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "한샘서비스센터",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "한샘쌤페스타",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "한양파인cc",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "한일의료기탄소매트",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "한정선",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "할로윈코스튬",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "할로윈코스튬대여",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "할로윈코스프레",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "항공권",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "해남절임배추20kg",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "해미읍성축제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "햄스터분양",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "행운목",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "헤이홈카메라",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "현대해상다이렉트",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "현재상영영화",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "현재상영영화순위",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "호그와트",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "호두정과",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "호카운동화",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "홈매트리필",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "홈캠",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "홍성남당항대하축제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "홍익대미술활동보고서",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "화서역파크푸르지오",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "활꽃게",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "횡성한우축제",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "후그수영복",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "훗카이도항공권",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "휴대용라디오",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "힐데스하임cc",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "힙합댄스복",
+    "lastShownAt": "2026-10-21T05:34:50.142Z"
+   },
+   {
+    "keyword": "la갈비찜레시피",
     "lastShownAt": "2026-10-20T22:47:40.459Z"
    },
    {
@@ -23102,203 +26749,7 @@
     "lastShownAt": "2026-10-20T22:47:40.459Z"
    },
    {
-    "keyword": "lg워시타워",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
     "keyword": "lg유플러스직영점",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "lg헬로비전",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "lh임대주택",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "lh청년전세임대주택",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "lotto당첨번호",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "mnm영양제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "neon",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "openai",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "pc게임랭킹",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "petethecat",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "ptz카메라",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "sk브로드밴드",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "sk텔레콤",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "summer피아노악보",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "ucla",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "uc버클리",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "wavve",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "xbox게임패스",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "가구박람회",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "가마가츠낚시복",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "가을단풍명소",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "가을인사말",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "가족관계증명서",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "간장게장황금레시피",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "감우성",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "감홍사과",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "감홍사과10kg",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "갑오징어로드",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "갑오징어봉돌",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "갑오징어애기",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "갑오징어에기추천",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "갑오징어철",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "강남인강",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "강릉애견동반숙소",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "강아지산소방",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "강아지슬링백",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "개인택시자격",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "갤럭시a35",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "갤럭시s25",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "갤럭시s27",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "갤럭시워치",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "갤럭시핏",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "갤럭시핏3",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "거창감악산축제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "건강보험요율",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "게이밍의자",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "겐차야자",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "결혼축하메세지",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "경기도청년지원금",
     "lastShownAt": "2026-10-20T22:47:40.459Z"
    },
    {
@@ -23306,1727 +26757,7 @@
     "lastShownAt": "2026-10-20T22:47:40.459Z"
    },
    {
-    "keyword": "경인웰빙산악회",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "경주맛집",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "계수정",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "계약결혼",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "고구마줄기볶음",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "고덱스캡슐",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "고막남친ott",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "고약사오메가3",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "고양호수예술축제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "고체물감",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "고프로마운트",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "곤지름사진",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "골든디스크",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "골전도이어폰",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "공덕키링",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "관악푸르지오",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "관저동푸르지오",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "관저푸르지오",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "관저푸르지오센트럴파크",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "괌pic",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "광교풍경채어바니티",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "광주제주항공권",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "광화문맛집",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "구미콜택시",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "국가평생교육진흥원학점은행제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "국민연금",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "국민취업지원제도",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "국민행복카드바우처신청",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "군산시간여행축제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "군산제주항공권",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "귀멸의칼날만화책",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "극장판치이카와",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "금산인삼축제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "금전수물주기",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "금토드라마",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "금호선인장",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "급여계산기",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "기계식키보드",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "기넥신에프정",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "기넥신에프정80mg",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "기타악보사이트",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "기타타브악보",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "김부장",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "김승리모의고사",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "김승윤",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "김유정",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "김정",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "김제지평선축제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "김지원",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "김포공항택시예약",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "김포제주항공권",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "김현",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "김혜자",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "끓임쪽",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "나솔사계",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "나올셀타55",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "나올셀타에기",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "나이키이니시에이터",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "나조린점안액",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "나트랑패스트트랙",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "난타공연",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "남당항대하축제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "남당항쭈꾸미낚시배",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "남여주cc",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "남이섬놀거리",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "남이섬입장권",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "남이섬짚라인",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "남춘천cc",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "남포동맛집",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "내신콘서트",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "내일배움카드",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "내일배움카드실업급여",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "내일은실험왕",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "너말고다른연애",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "네스프레소매장",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "네스프레소머신",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "네스프레소버츄오캡슐호환",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "네스프레소부티크",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "네스프레소캡슐수거",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "네스프레소커피머신",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "네온테트라",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "네즈코피규어",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "넷플릭스요금제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "노란공제우산",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "노맨틱코미디",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "노스페이스경량패딩",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "노스페이스키즈바람막이",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "논산맛집",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "놀면뭐하니서울가요제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "농협택배",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "뇌출혈",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "뇌출혈후유증",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "뉴발란스키즈셋업",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "뉴베인",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "뉴베인가격",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "니콘d750",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "니콘z6",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "닌텐도스위치2",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "닌텐도스위치oled",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "다낭항공권",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "다이슨드라이기",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "다이슨무선청소기",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "다이슨에어랩",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "다이치원픽스360",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "닥터x",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "닥터예스키놀젤",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "닭볶음탕레시피",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "담백하루오메가3",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "담양맛집",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "당진맛집",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "대구뮤지컬",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "대구제주항공권",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "대구토익학원",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "대둔산단풍",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "대부도맛집",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "대부도펜션",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "대연힐스테이트푸르지오",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "대장암3기생존율",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "대전도안푸르지오",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "대전도안푸르지오디아델",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "대전콜택시",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "대하전어축제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "대학로공연",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "대학로공포연극",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "대학로뮤지컬",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "대학로연극",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "대학로연극예매순위",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "더리틀스오메가3",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "더마팩토리",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "더블케어알티지오메가3",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "더커뮤니티2",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "더프모의고사",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "데못죽",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "데뷔못하면죽는병걸림",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "데이식스팬미팅",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "도깨비의세계",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "도깨비의세계쿠폰",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "도깨비페인트클렌저",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "도깨비페클",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "도담도담트리플비타",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "도둑맞은집중력",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "도레미곰전집",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "도마뱀사육장",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "도미나크림",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "도안디아델",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "도안푸르지오디아델",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "도쿄리벤저스",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "독거미키보드",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "동구동락",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "동대구역맛집",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "동요악보",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "동유럽패키지",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "동촌cc",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "동탄밴스의원",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "두유제조기",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "듀오링고",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "드럼세탁기청소비용",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "드론쇼",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "등급컷",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "디즈니플러스",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "디즈니플러스무료",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "디즈니플러스무료체험",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "디즈니플러스연간구독",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "디즈니플러스오리지널",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "디즈니플러스요금제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "디즈니플러스추천",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "디즈니플러스추천작",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "디즈니플러스한달무료",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "디즈니플러스할인",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "디지니플러스",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "디폼블럭",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "딜라이브",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "딥디크고체향수",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "딥디크로파피에",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "딥디크롬브로단로",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "딥디크방향제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "딥디크베티베리오",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "딥디크솔리드퍼퓸",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "딥디크오데썽",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "딥디크오듀엘르",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "딥디크오드민떼",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "딥디크오르페옹",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "딥디크오카피탈",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "딥디크올렌느",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "딥디크일리오",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "딥디크차량방향제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "딥디크차량용방향제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "딥디크탐다오",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "딥디크템포",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "딥디크플레르드뽀",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "딥디크필로시코스",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "딥디크헤어미스트",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "딥티크오르페옹",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "딥티크플레르드뽀",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "땡처리닷컴항공권",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "땡처리항공권",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "떡갈고무나무",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "라벨프린터기",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "라보에이치샴푸",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "라브르27",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "라싸cc",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "라피아노용인공세",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "랏코",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "래핑차일드",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "레드와인비니거",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "레스큐라이트액",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "로또1등",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "로또1등당첨금",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "로또1등당첨지역",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "로렌조올리브오일",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "로스트아크",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "로엠걸즈",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "로이코비에스액",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "로지텍마우스",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "루메나온풍기단점",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "루카831",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "르무통",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "르무통운동화",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "르반테올리브오일",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "르엘어퍼하우스",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "리니지2m",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "리쥬비넥스크림",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "리코카메라",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "리타방앗간",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "마그비스피드더블액션",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "마이크로킥보드",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "마포래미안푸르지오",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "마포새우젓축제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "만화갤러리",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "말본골프웨어",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "말자쇼",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "맛다시",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "매교역팰루시드",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "매교역펠루시드분양가",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "맥세이프카드지갑",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "먼작귀굿즈",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "먼작귀마우스패드",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "먼작귀바디필로우",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "먼작귀인형",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "먼작귀쿠션",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "먼작귀파우치",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "먼지다듬이",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "먼치킨웹툰",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "멜라노사크림",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "멜라논크림",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "명절인사말",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "모나크cc",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "모두의마블메가디럭스",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "모루인형만들기",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "모리와함께한화요일",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "모모애견풀빌라",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "모의고사등급컷",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "모자무싸",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "목동보컬학원",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "목포맛집",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "몬스테라",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "몰타어학연수",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "몽베르cc",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "무냐무냐",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "무냐무냐내복",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "무늬오징어",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "무료게임crazy",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "무료티비다시보기",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "문경감홍사과",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "뮤지컬",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "뮤지컬순위",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "미야자키항공권",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "미츠리피규어",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "미쿠피규어",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "민둥산억새축제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "밀양맛집",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "바디캠",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "바르베라올리브오일",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "박람회",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "박시백의조선왕조실록",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "박위",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "박진영올리브오일",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "반클리프목걸이",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "발산역꽃집",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "방부목화분",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "방송댄스의상",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "방청신청",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "배틀그라운드",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "백령도여행",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "백운호수맛집",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "밴스의원구월",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "밴스의원부산",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "버니즈마운틴독",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "버티칼마우스",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "버티컬마우스",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "베네통가디건",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "베라수",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "베베팡",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "베어크리크cc",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "베이비뵨바운서",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "벤츠cla2504matic",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "벤츠e3004matic",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "벤츠e3504matic",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "벤츠e4504matic",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "벤츠지바겐",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "벤포벨s가격",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "벨리타앤보이즈",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "벨크로타이",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "별내맛집",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "별자리",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "병원동행매니저",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "보더콜리",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "보리굴비",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "보은대추축제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "보조배터리20000",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "보컬학원",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "부가부드래곤플라이",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "부디행복해질것",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "부레옥잠",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "부산국민연금웨딩홀",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "부산국제영화제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "부산그랜드모먼트웨딩홀",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "부산뮤지컬",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "북한",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "분크",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
     "keyword": "불가리목걸이",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "불갑사상사화축제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "브레이킹배드",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "브롤스타즈쿠폰",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "브롤스타즈할로윈",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "블루록만화책",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "블리치",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "비료살포기",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "비밀요원레너드",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "비와이디전기차",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "비허밍스터디카페",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "빈폴키즈",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "빛의시어터",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "사설보정",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "사이다뱅크",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "사진용량줄이기",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "사춘기테스트",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "산리오",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "산세베리아",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "삼성디카",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "삼성전자배당금",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "삼양라운드힐",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "삼척맛집",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "삿포로항공권",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "상무지구맛집",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "상영중인영화",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "상추겉절이양념",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "샌드박스코인",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "샤오미드라이기",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "서동탄역랜시티",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "서면만화카페",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "서산맛집",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "서신더샵비발디",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "서울가요제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "서울랜드자유이용권",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "서울전시회",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "설민석한국사대모험",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "성인할로윈코스튬",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "세척마사토",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "세포랩",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "셔틀랜드쉽독",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "소니a1",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "소니카메라",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "소마셈",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "소상공인새출발기금",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "소상공인스마트상점",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "소상공인철거지원금",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "소설베스트셀러순위",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "소엽풍란",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "소형라디오",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "속리산단풍",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "속초맛집",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "송도뉴욕주립대",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "송도스터디카페",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "송파파크하비오푸르지오",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "수원반지공방",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "수원연극",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "순자",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "순천국가정원",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "순천만국가정원숙소",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "순천만정원박람회",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "순천맛집",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "순천정원박람회",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "쉬즈미스",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "쉬즈미스자켓",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "슈나우저",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "슈슈앤크라",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "슈퍼마리오오디세이",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "스릴러웹툰",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "스컬트라후기",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "스케치업",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "스코티시폴드",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "스킨부스터종류",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "스테들러색연필",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "스투시후드집업",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "스트리트파이터",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "스파오",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "시각장애인안마원",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "시그마렌즈",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "시나노골드10kg",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "시나노골드5kg",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "시나노골드사과",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "시나노골드수확시기",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "시나노스위트",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "시나노스위트사과",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "시대인재모의고사",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "시흥갯골축제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "신발수선집",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "신병국대",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "신인감독",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "신태진",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "실업급여",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "실업급여신청",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "실업급여신청방법",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "실업급여조건6개월",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "싸이벡스레모",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "싸이벡스제로나t",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "썸머피아노악보",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "아기할로윈코스튬",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "아너스웰가",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "아디다스져지",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "아뜰리에슈블랭킷",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "아람북스",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "아레카야자",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "아마란스10",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "아버지의해방일지",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "아식스젤카야노14",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "아이러브제이",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "아이맘콕",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "아이브앨범",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "아이엠택시",
     "lastShownAt": "2026-10-20T22:47:40.459Z"
    },
    {
@@ -25034,771 +26765,7 @@
     "lastShownAt": "2026-10-20T22:47:40.459Z"
    },
    {
-    "keyword": "아이온클래식",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "아이쥐옷",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "아이폰16e",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
     "keyword": "아이폰se1",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "아이폰듀오케이스",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "아이폰자급제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "아젤리아크림",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "아쿠아디파르마",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "아크릴등신대",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "아크릴마그넷",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "아크릴물감사용법",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "아크릴액자제작",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "아크릴판",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "아크테릭스바람막이",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "아크테릭스백팩",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "아토팜판테놀크림",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "아톰피규어",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "아페르한강",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "악뮤콘서트",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "악보사이트",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "안동국제탈춤페스티벌",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "안동콜택시",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "안산교차로구인구직",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "안산스터디카페",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "안성hcc",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "안성바우덕이축제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "안양시화상영어",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "안중사진관",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "알티지오메가쓰리",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "암살자",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "앙부일구",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "야근수당",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "야채도사",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "약들약오메가3",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "양양맛집",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "양재화훼단지",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "양평만화카페",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "어벤져스엔드게임",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "언포게터블듀엣2",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "업소용로봇청소기",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "에뜨와",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "에어프라이어군밤",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "에이투오라이트",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "에코백스창문로봇청소기",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "에테르노청담",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "엔드그레인도마",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "엔믹스앨범",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "엔타스상품권",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "엘지워시타워",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "엘지유플러스대리점",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "여권사진",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "여권사진규정",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "여수제주항공권",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "여인초키우기",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "여주맛집",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "연금복권사는법",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "연산대추축제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "연애박사",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "연어필렛",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "영어회화100일의기적",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "영천보현산별빛축제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "영통역자이프라시엘",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "영화순위",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "영흥도갑오징어",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "영흥도갑오징어낚시",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "영흥도갑오징어배",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "영흥도골드피싱호",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "영흥도나이스호",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "영흥도낚시배",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "영흥도만수피싱",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "영흥도선상낚시",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "영흥도스타트호",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "영흥도아라호",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "영흥도쭈꾸미낚시",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "영흥도쭈꾸미낚시배",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "영흥도카리스마호",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "예술의전당전시",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "오늘의코스피",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "오늘주식",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "오니츠카타이거",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "오디세이ott",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "오르페옹",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "오메가3담백하루",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "오바로크",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "오백년째열다섯",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "오베라는남자",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "오이도낚시배",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "오타마톤",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "오타마톤디럭스",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "옥광밤",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "옥스포드리딩트리",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "옥탑방의문제아들",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "올리비아로렌",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "와이파이도시락",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "와팬",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "완결웹툰추천",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "요양보호사국비지원",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "요양보호사시험",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "요양보호사월급",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "요즈리틴셀",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "요즈리틴셀3호",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "우리들의발라드2",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "우발라",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "우체국계약택배",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "우체국방문택배",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "우체국알뜰폰",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "우체국택배비용",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "우체국택배요금",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "우체국택배접수",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "운동화수선집",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "울산보컬학원",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "울산셀프사진관",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "웅진정수기렌탈",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "워시타워",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "원리금균등상환계산기",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "원소주기율표",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "웨딩사설보정",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "웨딩포토테이블액자",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "위파크일곡공원",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "유니클로",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "유부녀킬러황봄이",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "유영우",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "유청분리기",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "유플러스직영점",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "유한양행마그비맥스",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "윤영경",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "음성푸르지오더퍼스트",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "음악검색",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "음원차트",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "음치클리닉",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "응급실",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "의정부입주청소",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "이감등급컷",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "이감모의고사",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "이감모의고사등급컷",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "이덴큐",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "이루밍스터디카페",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "이마트24택배예약",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "이모튼캡슐",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "이모티콘샵",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "이뮤골드액",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "이번달전시회",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "이북리더기추천",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "이삿짐보관창고",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "이서진양모이불",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "이야이야올리브오일",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "이주승",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "이지듀",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "이지포스",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "이터널리턴",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "이희진",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "익산맛집",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "인덕원센트럴푸르지오",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "인스탁스카메라",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "인제가을꽃축제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "인투셀",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "일렉기타",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "일렉기타입문",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "일본알펜루트",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "일본이심",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "일회용필름카메라",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "임신출산육아대백과",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "임실n치즈축제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "임실치즈축제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "임팩타민시그니처",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "잇미샤",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "자녀결혼인사말",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "자동차극장",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "자코모4인쇼파",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "작사공모전",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "잠실스터디카페",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "장가계",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "장성황룡강축제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "장애인차량스티커",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "재혼황후",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "전기차보조금",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "전문대순위",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "전주강아지분양",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "전주포장이사",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "접이식카트",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "정부지원산후도우미",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "정읍구절초축제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "정주행드라마추천",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "정호영",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "제네시스gv70",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "제주김포항공권",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "제주청주항공권",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "제주항공권",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "제주항공권땡처리",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "조말론머르앤통카",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "조말론스칼렛포피",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "조말론차량방향제",
     "lastShownAt": "2026-10-20T22:47:40.459Z"
    },
    {
@@ -25806,523 +26773,7 @@
     "lastShownAt": "2026-10-20T22:47:40.459Z"
    },
    {
-    "keyword": "조이아이스핀360",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "조호바루",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "조호바루한달살기",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "존박",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "주의은혜라악보",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "죽기전에꼭봐야할웹툰",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "중국계림",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "중국계림패키지",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "중국곤명",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "중국구채구",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "중국구채구여행",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "중국대련",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "중국대련여행",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "중국리장",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "중국리장여행",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "중국샤먼",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "중국샤먼여행",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "중국시안여행",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "중국심천",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "중국싼야",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "중국여강",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "중국연길",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "중국연태여행",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "중국제남",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "중국집",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "중국차마고도",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "중국태항산패키지",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "중국텐진",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "중국하문",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "중국하문여행",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "중국황산",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "중국황산패키지",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "중드추천",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "증명사진인화",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "증명사진출력",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "지게차기능사필기",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "지게차자격증",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "지압슬리퍼",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "직사각화분",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "진영단감축제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "진주남강유등축제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "진주아너스웰가",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "진주유등축제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "질레트면도날",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "찰스앤키스",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "창원가로수길카페",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "창원보컬학원",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "창원콜택시",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "챗gpt무료",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "천안드럼학원",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "천안연극",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "천안포장이사",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "천우희",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "천일문",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "청라더리브티아모까사",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "청원생명축제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "청주삿포로항공권",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "청주에서제주항공권",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "청주제주항공권",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "초소형카메라",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "최신영화순위",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "최현우마술쇼",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "최현우마술쇼서울",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "최후의만찬그림",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "추석선물세트",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "충주밴스의원",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "치이카와가챠",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "치이카와굿즈",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "치이카와마우스패드",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "치이카와만화책",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "치이카와샵",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "치이카와인형",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "치이카와정품",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "치이카와직구",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "치이카와쿠션",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "치이카와피규어",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "친칠라",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "칠성사이다190",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "칠성사이다355",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "카메라슬링백",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "카사바모래",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "카카오택시",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "카카오택시예약",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "캉골키즈",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "캐나다밴프",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "캐나다밴프여행",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "캐나다밴프패키지",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
     "keyword": "캐나다벤프",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "캐나다벤프여행",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "캐나다비행기값",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "캐나다옐로나이프",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "캐나다오로라",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "캐나다오로라투어",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "캐나다퀘백여행",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "캐릭터바디필로우",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "캐슬파인cc",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "캠핑박람회",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "커버낫키즈",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "케네스레이디",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "코스",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "코스닥시총순위",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "코스카cc",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "코스트코회원권",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "코어위브",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "코엑스맛집",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "코웨이얼음정수기렌탈",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "코웨이음식물처리기",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "콘서트",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "콜밴비용",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "큐업액",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "클유아",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "키드냅게임ott",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "키링부자재",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "키플링크로스백",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "킨텍스가구박람회",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "타브악보",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "탄소매트",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "탑백귀",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "탑텐키즈",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "태백하늘김치",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "태안맛집",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "태안애견동반펜션",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "택시기사월급",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "택시기사자격증",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "택시면허시험",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "택시운전자격증",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "택시자격증시험",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "테이블야자",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "텝스",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "토스플레이스",
     "lastShownAt": "2026-10-20T22:47:40.459Z"
    },
    {
@@ -26330,323 +26781,7 @@
     "lastShownAt": "2026-10-20T22:47:40.459Z"
    },
    {
-    "keyword": "통기타",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "퇴계원강남아파트",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "투란도트",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "트레이딩뷰",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "트루엔알티지오메가3",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "트루엔오메가3",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "트루엔오엠비",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "트와이스콘서트",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "특수문자",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "틈만나면",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "티벳사자의서",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "팁런에기",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "파나소닉루믹스",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "파슨스",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "파슨스디자인스쿨",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "파이널테이블",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "파타고니아신칠라",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "팔공산카페",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
     "keyword": "패노메논",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "패브릭물감",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "팰월드",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "퍼시닌바디워시",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "펫보험",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "펫테일게코",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "평택역꽃집",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "포스티딜세린",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "포스파디딜세린",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "포제스한강",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "포천맛집",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "포항디디하우스",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "폴라로이드카메라",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "폴햄키즈",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "표기식",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "푸꾸옥",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "푸꾸옥패키지",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "푸르지오디아델",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "풍기인삼축제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "프랜치캣",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "프렌치캣",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "프로야구일정",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "프뢰벨영아테마동화",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "플래시게임사이트",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "플레시게임",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "피규어아크릴케이스",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "피아노악보",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "피아노악보사이트",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "피아노연습실",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "필로덴드론",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "필로덴드론플로리다뷰티",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "하노이항공권",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "하루담백오메가3",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "하모니카악보",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "하이웍스메일",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "하파크리스틴",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "한뼘사이연극",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "한샘",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "한샘리클라이너",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "한샘몰",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "한샘쌤페스타",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "한양파인cc",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "한일의료기탄소매트",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "한정선",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "할로윈코스튬",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "할로윈코스튬대여",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "할로윈코스프레",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "항공권",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "해남절임배추20kg",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "해미읍성축제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "햄스터분양",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "행운목",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "헤이홈카메라",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "현대해상다이렉트",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "현재상영영화",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "현재상영영화순위",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "호그와트",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "호두정과",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "호카운동화",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "홈매트리필",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "홈캠",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "홍성남당항대하축제",
     "lastShownAt": "2026-10-20T22:47:40.459Z"
    },
    {
@@ -26654,43 +26789,7 @@
     "lastShownAt": "2026-10-20T22:47:40.459Z"
    },
    {
-    "keyword": "홍익대미술활동보고서",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "화서역파크푸르지오",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "활꽃게",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
     "keyword": "활쭈꾸미",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "횡성한우축제",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "후그수영복",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "훗카이도항공권",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "휴대용라디오",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "힐데스하임cc",
-    "lastShownAt": "2026-10-20T22:47:40.459Z"
-   },
-   {
-    "keyword": "힙합댄스복",
     "lastShownAt": "2026-10-20T22:47:40.459Z"
    },
    {
@@ -47728,114 +47827,6 @@
    {
     "keyword": "흰운동화세탁법",
     "lastShownAt": "2026-10-14T11:24:05.888Z"
-   },
-   {
-    "keyword": "bmwz4",
-    "lastShownAt": "2026-10-14T05:28:52.837Z"
-   },
-   {
-    "keyword": "벤츠e200",
-    "lastShownAt": "2026-10-14T05:28:52.837Z"
-   },
-   {
-    "keyword": "벤츠glb250",
-    "lastShownAt": "2026-10-14T05:28:52.837Z"
-   },
-   {
-    "keyword": "벤츠gls580",
-    "lastShownAt": "2026-10-14T05:28:52.837Z"
-   },
-   {
-    "keyword": "제주탐라렌트카",
-    "lastShownAt": "2026-10-14T05:28:52.837Z"
-   },
-   {
-    "keyword": "9급세무직공무원",
-    "lastShownAt": "2026-10-13T23:49:14.385Z"
-   },
-   {
-    "keyword": "bmwi8",
-    "lastShownAt": "2026-10-13T23:49:14.385Z"
-   },
-   {
-    "keyword": "cmyk",
-    "lastShownAt": "2026-10-13T23:49:14.385Z"
-   },
-   {
-    "keyword": "gv60전기차",
-    "lastShownAt": "2026-10-13T23:49:14.385Z"
-   },
-   {
-    "keyword": "kt올레",
-    "lastShownAt": "2026-10-13T23:49:14.385Z"
-   },
-   {
-    "keyword": "saas",
-    "lastShownAt": "2026-10-13T23:49:14.385Z"
-   },
-   {
-    "keyword": "꿈꾸던어른이",
-    "lastShownAt": "2026-10-13T23:49:14.385Z"
-   },
-   {
-    "keyword": "대추방울토마토",
-    "lastShownAt": "2026-10-13T23:49:14.385Z"
-   },
-   {
-    "keyword": "돼지국밥레시피",
-    "lastShownAt": "2026-10-13T23:49:14.385Z"
-   },
-   {
-    "keyword": "못난이토마토",
-    "lastShownAt": "2026-10-13T23:49:14.385Z"
-   },
-   {
-    "keyword": "벤츠eqs",
-    "lastShownAt": "2026-10-13T23:49:14.385Z"
-   },
-   {
-    "keyword": "벤츠glc300",
-    "lastShownAt": "2026-10-13T23:49:14.385Z"
-   },
-   {
-    "keyword": "벤츠g바겐",
-    "lastShownAt": "2026-10-13T23:49:14.385Z"
-   },
-   {
-    "keyword": "스테비아토마토",
-    "lastShownAt": "2026-10-13T23:49:14.385Z"
-   },
-   {
-    "keyword": "쏘렌토하이브리드",
-    "lastShownAt": "2026-10-13T23:49:14.385Z"
-   },
-   {
-    "keyword": "아디다스갤럭시",
-    "lastShownAt": "2026-10-13T23:49:14.385Z"
-   },
-   {
-    "keyword": "운전면허필기시험접수",
-    "lastShownAt": "2026-10-13T23:49:14.385Z"
-   },
-   {
-    "keyword": "캐스퍼가격",
-    "lastShownAt": "2026-10-13T23:49:14.385Z"
-   },
-   {
-    "keyword": "코나하이브리드",
-    "lastShownAt": "2026-10-13T23:49:14.385Z"
-   },
-   {
-    "keyword": "토마토주스",
-    "lastShownAt": "2026-10-13T23:49:14.385Z"
-   },
-   {
-    "keyword": "토마토즙",
-    "lastShownAt": "2026-10-13T23:49:14.385Z"
-   },
-   {
-    "keyword": "토마토효능",
-    "lastShownAt": "2026-10-13T23:49:14.385Z"
    }
   ],
   "days": {
@@ -47943,6 +47934,7 @@
     "갤럭시s25",
     "갤럭시s27",
     "갤럭시워치",
+    "갤럭시워치스트랩",
     "갤럭시핏",
     "갤럭시핏3",
     "거창감악산축제",
@@ -47967,6 +47959,7 @@
     "골든디스크",
     "골전도이어폰",
     "공덕키링",
+    "관리형독서실",
     "관악푸르지오",
     "관저동푸르지오",
     "관저푸르지오",
@@ -47975,6 +47968,7 @@
     "광교풍경채어바니티",
     "광주제주항공권",
     "광화문맛집",
+    "괴산절임배추",
     "구미콜택시",
     "국가평생교육진흥원학점은행제",
     "국민연금",
@@ -48034,6 +48028,7 @@
     "네스프레소커피머신",
     "네온테트라",
     "네즈코피규어",
+    "넷플릭스신작",
     "넷플릭스요금제",
     "노란공제우산",
     "노맨틱코미디",
@@ -48072,6 +48067,7 @@
     "대장암3기생존율",
     "대전도안푸르지오",
     "대전도안푸르지오디아델",
+    "대전빵축제",
     "대전콜택시",
     "대하전어축제",
     "대학로공연",
@@ -48099,6 +48095,7 @@
     "도안디아델",
     "도안푸르지오디아델",
     "도쿄리벤저스",
+    "도토리묵양념장",
     "독거미키보드",
     "동구동락",
     "동대구역맛집",
@@ -48177,9 +48174,12 @@
     "리코카메라",
     "리타방앗간",
     "마그비스피드더블액션",
+    "마스마룰즈백팩",
     "마이크로킥보드",
     "마포래미안푸르지오",
     "마포새우젓축제",
+    "만다리나덕백팩",
+    "만수피싱",
     "만화갤러리",
     "말본골프웨어",
     "말자쇼",
@@ -48215,6 +48215,7 @@
     "무늬오징어",
     "무료게임crazy",
     "무료티비다시보기",
+    "무료폰트",
     "문경감홍사과",
     "뮤지컬",
     "뮤지컬순위",
@@ -48300,6 +48301,7 @@
     "상영중인영화",
     "상추겉절이양념",
     "샌드박스코인",
+    "생일축하이모티콘",
     "샤오미드라이기",
     "서동탄역랜시티",
     "서면만화카페",
@@ -48544,6 +48546,7 @@
     "일렉기타입문",
     "일본알펜루트",
     "일본이심",
+    "일취월장독서실",
     "일회용필름카메라",
     "임신출산육아대백과",
     "임실n치즈축제",
@@ -48552,6 +48555,7 @@
     "잇미샤",
     "자녀결혼인사말",
     "자동차극장",
+    "자코모3인소파",
     "자코모4인쇼파",
     "작사공모전",
     "잠실스터디카페",
@@ -48765,7 +48769,10 @@
     "한뼘사이연극",
     "한샘",
     "한샘리클라이너",
+    "한샘리클라이너쇼파",
     "한샘몰",
+    "한샘몰매장",
+    "한샘서비스센터",
     "한샘쌤페스타",
     "한양파인cc",
     "한일의료기탄소매트",
