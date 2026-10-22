@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-22T19:24:17.033Z",
+  "generatedAt": "2026-10-22T22:19:00.473Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -1965,40 +1965,6 @@
       "provider": "claude"
     },
     {
-      "id": "92e1b2abf81e8e36",
-      "urls": [
-        "https://life.ohgominfo.com/%ec%9d%bc%ec%83%81%ec%83%9d%ed%99%9c%eb%b0%b0%ec%83%81%ec%b1%85%ec%9e%84%eb%b3%b4%ed%97%98-%eb%88%84%ec%88%98-%eb%88%84%ec%88%98-%ec%82%ac%ea%b3%a0%ea%b0%80-%eb%b0%9c%ec%83%9d%ed%96%88%eb%8b%a4/",
-        "https://trendofkorea.tistory.com/entry/%EC%95%84%ED%8C%8C%ED%8A%B8-%EB%B2%A0%EB%9E%80%EB%8B%A4-%EB%88%84%EC%88%98-%EB%B0%9C%EC%83%9D-%EC%8B%9C-%EC%9C%97%EC%A7%91-%EC%9D%BC%EC%83%81%EC%83%9D%ED%99%9C%EB%B0%B0%EC%83%81%EC%B1%85%EC%9E%84%EB%B3%B4%ED%97%98-%EC%B2%AD%EA%B5%AC-%EB%B0%8F-%ED%83%90%EC%A7%80%EB%B9%84-%EC%A6%9D%EB%B9%99-%EC%99%84%EB%B2%BD-%EA%B0%80%EC%9D%B4%EB%93%9C"
-      ],
-      "guide": {
-        "direction": "검색자는 본인이 피해자(아랫집)인지 가해자(윗집)인지에 따라 청구 절차가 다르다는 것을 궁금해하므로 '아랫집' 포함 검색어를 대표로 잡는다. 고수 글은 탐지비 증빙 가이드를 다뤘지만, 자기부담금 금액과 보상 범위(수리비·가재도구 등 어디까지)를 표로 정리한 글은 비어 있다. 입장별(윗집/아랫집) 청구 순서와 자기부담금 조건표를 주면 끝까지 읽고 다시 찾게 된다.",
-        "searchTargets": [
-          "일상생활배상책임보험 누수",
-          "일상생활배상책임보험 누수 아랫집",
-          "일상생활배상책임보험 누수 보상 범위",
-          "일상생활배상책임보험 누수 자기부담금"
-        ],
-        "mustInclude": [
-          "윗집(가해자)과 아랫집(피해자) 입장별 청구 절차 차이를 단계별로 구분",
-          "탐지비용 증빙서류 목록(누수탐지업체 견적서·관리사무소 확인서 등)",
-          "자기부담금 범위와 금액대(확인 필요: 가입 보험사 약관)",
-          "보상 범위에 수리비 외 가재도구·도배 등이 포함되는지 여부(확인 필요: 약관)"
-        ],
-        "mustAvoid": [
-          "특정 보험사의 자기부담금·보상한도를 모든 보험사에 일반화해서 서술",
-          "화재보험 특약의 누수 보상과 일상생활배상책임보험을 혼동",
-          "실제 가입 약관 확인 없이 보상 가능 여부를 단정"
-        ],
-        "checkBefore": [
-          "본인이 가입한 보험사의 일상생활배상책임보험 약관상 자기부담금·보상범위",
-          "금융감독원 민원사례 또는 보험사 공식 안내의 청구 절차"
-        ]
-      },
-      "at": "2026-10-19T21:06:48.786Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
       "id": "b7bee0355128576d",
       "urls": [
         "https://happycoiner.tistory.com/entry/%EC%98%AC%ED%95%B4-%EB%B3%91%EC%9B%90%EB%B9%84-%EC%96%BC%EB%A7%88-%EC%93%B0%EC%85%A8%EB%82%98%EC%9A%94-%EC%9D%98%EB%A3%8C%EB%B9%84-%EA%B3%B5%EC%A0%9C-%EB%AC%B8%ED%84%B1-%ED%99%95%EC%9D%B8",
@@ -3300,36 +3266,6 @@
       "provider": "claude"
     },
     {
-      "id": "dcb8bf14b413d75f",
-      "urls": [
-        "https://flameleaf.tistory.com/entry/KB%ED%96%89%EB%B3%B5%EC%A7%80%ED%82%B4%EC%9D%B4%ED%86%B5%EC%9E%A5-%EC%95%95%EB%A5%98%EB%B0%A9%EC%A7%80-%ED%86%B5%EC%9E%A5-%EA%B8%B0%EC%B4%88%EC%83%9D%ED%99%9C%EC%88%98%EA%B8%89%EC%9E%90-%EA%B0%80%EC%9E%85-%EC%9E%90%EA%B2%A9-%EC%8B%A0%EC%B2%AD-%EB%B0%A9%EB%B2%95-%EA%B8%88%EB%A6%AC-%EC%A0%95%EB%B3%B4"
-      ],
-      "guide": {
-        "direction": "압류방지 통장을 찾는 사람은 기초생활수급자 급여나 정부지원금이 압류될까 걱정하는 당사자·가족이며, 대표 검색어는 '가입 자격'과 '신청 방법'이다. 고수 글들은 이미 자격·신청·금리를 다뤘으니 압류방지 한도액과 입금 가능한 돈의 종류를 표로 정리해 차별화한다. 수급자증명서 등 서류 체크리스트가 있으면 끝까지 읽고 재방문한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "가입대상 범위(기초생활수급자·기초연금수급자 등) (확인 필요: KB국민은행 공식 안내)",
-          "신청 시 필요서류(수급자증명서 등) (확인 필요: KB국민은행)",
-          "압류방지 한도금액 (확인 필요: 관련 법령·KB 공시)",
-          "현재 적용 금리 (확인 필요: KB국민은행 공시금리)",
-          "비대면/영업점 신청 가능 여부"
-        ],
-        "mustAvoid": [
-          "압류방지 통장이 모든 압류를 막아준다는 과장(한도 내 보호만 가능)",
-          "신한 등 타 은행 유사 압류방지통장과 혼동",
-          "수급자격 무관하게 누구나 가입 가능하다는 오해 유발"
-        ],
-        "checkBefore": [
-          "가입 대상·필요서류 - KB국민은행 공식 홈페이지/영업점 공지",
-          "압류방지 한도금액 - 관련 법령 또는 금융위 공지",
-          "현재 금리 - KB국민은행 상품 공시"
-        ]
-      },
-      "at": "2026-10-20T00:58:09.872Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
       "id": "df9b3ec6ac956e0d",
       "urls": [
         "https://lim7.tistory.com/160"
@@ -3575,39 +3511,6 @@
         "checkBefore": [
           "국세청 홈택스 연말정산 미리보기 서비스 2026년 개통일",
           "2026년 신용카드 소득공제율·한도 변경 여부(국세청 보도자료)"
-        ]
-      },
-      "at": "2026-10-20T05:40:24.242Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "c3b63ba8b3bc99b6",
-      "urls": [
-        "https://yoanarc.com/1400",
-        "https://groundche.com/kbo-postseason-2026-schedule/",
-        "https://everydaywell.tistory.com/entry/2026-KBO-%ED%8F%AC%EC%8A%A4%ED%8A%B8%EC%8B%9C%EC%A6%8C-%EB%8C%80%EC%A7%84%ED%91%9C%EC%99%80-%EA%B2%BD%EA%B8%B0-%EB%82%A0%EC%A7%9C%EF%BD%9C%EA%B0%80%EC%9D%84%EC%95%BC%EA%B5%AC-%EC%A7%84%EC%B6%9C-%EA%B5%AC%EC%A1%B0%EB%B6%80%ED%84%B0-%ED%95%9C%EA%B5%AD%EC%8B%9C%EB%A6%AC%EC%A6%88%EA%B9%8C%EC%A7%80"
-      ],
-      "guide": {
-        "direction": "자동완성 1위가 '예매'로, 검색자는 대진표보다 '내가 직관 갈 티켓을 언제 어디서 사는지'를 더 궁금해한다. 고수 글들은 이미 일정·대진 구조를 다 다뤄 비어 있는 각도는 라운드별 티켓 오픈 시점과 예매처·구장별 좌석 정보다. 날짜·구장·예매 오픈 시간을 표로 묶으면 경기 전마다 다시 찾아볼 이유가 생긴다.",
-        "searchTargets": [
-          "kbo 포스트시즌 예매",
-          "2026 kbo 포스트시즌 일정",
-          "2026 KBO 포스트시즌 예매",
-          "kbo 포스트시즌 중계"
-        ],
-        "mustInclude": [
-          "라운드별(와일드카드·준PO·PO·한국시리즈) 경기 날짜와 구장(확인 필요: KBO 공식 발표)",
-          "라운드별 티켓 예매 오픈 일시와 예매처(확인 필요: 각 구단 공식 공지)",
-          "중계 채널 및 편성표(확인 필요: 중계권사 공지)",
-          "진출팀 확정 순서에 따른 대진 확정 규정 설명"
-        ],
-        "mustAvoid": [
-          "2025시즌 포스트시즌 일정·결과와 2026시즌을 혼동해서 기재"
-        ],
-        "checkBefore": [
-          "KBO 공식 홈페이지 및 각 구단 공식 SNS의 2026 포스트시즌 일정·예매 공지",
-          "중계권사(SPOTV 등) 편성 확정 여부"
         ]
       },
       "at": "2026-10-20T05:40:24.242Z",
@@ -7100,77 +7003,6 @@
           "views": 22,
           "answers": 2,
           "askedAt": "2026.10.16"
-        }
-      ]
-    },
-    {
-      "id": "9728f755fcfbb6f4",
-      "urls": [
-        "https://todayminwon.tistory.com/entry/%EA%B1%B4%EA%B0%95%EB%B3%B4%ED%97%98-%ED%94%BC%EB%B6%80%EC%96%91%EC%9E%90-%EC%9E%90%EA%B2%A9%EC%9A%94%EA%B1%B4%EA%B3%BC-%ED%83%88%EB%9D%BD-%EA%B8%B0%EC%A4%80",
-        "https://observerlife.tistory.com/535",
-        "https://hjwdf.tistory.com/entry/%EA%B1%B4%EA%B0%95%EB%B3%B4%ED%97%98-%EC%9E%90%EA%B2%A9%ED%99%95%EC%9D%B8%EC%84%9C-%EB%B0%9C%EA%B8%89-%EB%B0%A9%EB%B2%95-%EC%9E%90%EA%B2%A9%EB%93%9D%EC%8B%A4%ED%99%95%EC%9D%B8%EC%84%9C%EC%99%80-%EB%8B%A4%EB%A6%85%EB%8B%88%EB%8B%A4-%ED%94%BC%EB%B6%80%EC%96%91%EC%9E%90-%EC%A6%9D%EB%AA%85%EC%9D%80-%EC%9D%B4%EA%B1%B8%EB%A1%9C",
-        "https://kjw6633.tistory.com/entry/%EA%B1%B4%EA%B0%95%EB%B3%B4%ED%97%98-%ED%94%BC%EB%B6%80%EC%96%91%EC%9E%90-%EC%9E%90%EA%B2%A9-%EC%A1%B0%EA%B1%B4-2026%EF%BD%9C%EC%86%8C%EB%93%9D-2000%EB%A7%8C%EC%9B%90%C2%B7%EC%9E%AC%EC%82%B0-54%EC%96%B5-%EA%B8%B0%EC%A4%80%EA%B3%BC-%EC%8B%A0%EC%B2%AD-%EC%A0%88%EC%B0%A8-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://seniorguides.tistory.com/35"
-      ],
-      "guide": {
-        "direction": "검색자는 '자격확인서'와 '자격득실확인서' 이름이 비슷해 어디서 뭘 떼야 하는지 헷갈리고, 무인발급기·주민센터·대리발급 중 뭐가 되는지와 가족 명의 조회 시 본인 사업장명이 노출되는지를 반복해서 묻는다. 고수 글들은 소득·재산 기준 총정리까지는 갔지만 발급 방법별 가능 여부는 비워뒀다. 글은 두 서류 구분표+발급방법별 체크리스트+대리발급 준비물 순으로 끝내도록 구성한다.",
-        "searchTargets": [
-          "건강보험자격확인서 발급",
-          "건강보험 자격확인서 무인발급기",
-          "건강보험자격확인서 동사무소",
-          "건강보험자격확인서 대리발급"
-        ],
-        "mustInclude": [
-          "건강보험자격확인서 vs 자격득실확인서 구분표(용도·발급처 차이)",
-          "발급 방법별 비교(온라인 간편로그인·무인발급기·주민센터·대리발급)",
-          "대리발급 필요서류(위임장·대리인 신분증 등, 확인 필요: 국민건강보험공단)",
-          "피부양자 소득 2,000만원·재산과표 5.4억원 기준(확인 필요: 공단 2026 고시)",
-          "가족 조회시 타인 사업장명 노출 여부(확인 필요: 공단 고객센터)"
-        ],
-        "mustAvoid": [
-          "자격확인서와 자격득실확인서를 같은 서류처럼 혼용 표기",
-          "소득·재산 기준 수치를 연도 구분 없이 단정",
-          "예시에 특정 사업장명·소득 등 민감정보를 구체적으로 노출"
-        ],
-        "checkBefore": [
-          "무인발급기·주민센터 발급 가능 여부와 대리발급 필요서류는 국민건강보험공단 공식 안내로 확인",
-          "2026년 피부양자 소득·재산 기준은 공단 최신 고시로 재확인"
-        ],
-        "solves": [
-          "자격확인서와 자격득실확인서가 뭐가 다른지 모르겠다 → 용도·발급처 구분표로 정리",
-          "무인발급기나 주민센터에서도 뗄 수 있는지 모르겠다 → 발급방법별 체크리스트 제공",
-          "가족 명의로 조회하면 내 사업장명이 뜨는지 궁금하다 → 조회 범위 안내로 답변"
-        ],
-        "actionTitles": [
-          "건강보험자격확인서 무인발급기·주민센터 발급법",
-          "건강보험 자격확인서·자격득실확인서 구분하는 법",
-          "건강보험자격확인서 대리발급 필요서류 확인"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "건강보험자격득실확인서",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100401&docId=494947275&answerNo=3&qb=6rG06rCV67O07ZeY7J6Q6rKp7ZmV7J247ISc",
-          "views": 707,
-          "answers": 4,
-          "askedAt": "2026.08.29"
-        },
-        {
-          "title": "건강보험자격득실확인서 질문입니다.",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100401&docId=495064337&answerNo=1&qb=6rG06rCV67O07ZeY7J6Q6rKp7ZmV7J247ISc",
-          "views": 463,
-          "answers": 3,
-          "askedAt": "2026.09.07"
-        },
-        {
-          "title": "국가건강보험 자격득실확인서",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100401&docId=495399634&answerNo=2&qb=6rG06rCV67O07ZeY7J6Q6rKp7ZmV7J247ISc",
-          "views": 391,
-          "answers": 7,
-          "askedAt": "2026.10.03"
         }
       ]
     },
@@ -15644,69 +15476,6 @@
       "provider": "claude"
     },
     {
-      "id": "563a9e6f1203d332",
-      "urls": [
-        "https://funfactlab.tistory.com/entry/%EC%8B%A4%EC%97%85%EA%B8%89%EC%97%AC-%EC%95%95%EB%A5%98%EB%B0%A9%EC%A7%80-%ED%86%B5%EC%9E%A5-%ED%96%89%EB%B3%B5%EC%A7%80%ED%82%B4%EC%9D%B4%ED%86%B5%EC%9E%A5-%EC%95%88%EB%82%B4",
-        "https://flameleaf.tistory.com/entry/KB%ED%96%89%EB%B3%B5%EC%A7%80%ED%82%B4%EC%9D%B4%ED%86%B5%EC%9E%A5-%EC%95%95%EB%A5%98%EB%B0%A9%EC%A7%80-%ED%86%B5%EC%9E%A5-%EA%B8%B0%EC%B4%88%EC%83%9D%ED%99%9C%EC%88%98%EA%B8%89%EC%9E%90-%EA%B0%80%EC%9E%85-%EC%9E%90%EA%B2%A9-%EC%8B%A0%EC%B2%AD-%EB%B0%A9%EB%B2%95-%EA%B8%88%EB%A6%AC-%EC%A0%95%EB%B3%B4"
-      ],
-      "guide": {
-        "direction": "지식인에는 기초수급자용 행복지킴이통장과 실업급여까지 보호되는 전국민 압류방지통장을 헷갈려 하거나, 다른 통장이 압류돼도 지킴이통장 돈은 안전한지 묻는 질문이 많다. 고수 블로그들은 KB행복지킴이통장 자격·신청·금리만 다뤄 실업급여가 실제로 이 통장에 입금되는지, 전국민용과 수급자 전용 중 무엇을 가입해야 하는지는 풀지 못했다. 이 글은 두 통장의 대상·한도·가입은행을 비교표로 정리해 실업급여 수급자가 바로 맞는 통장을 고르게 한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "전국민행복지킴이통장 vs 행복지킴이통장 대상·한도 비교표(확인 필요: 은행 공식 공지)",
-          "압류방지 한도 월 185만원 여부(확인 필요: 공식 공지)",
-          "가입 가능 은행 목록(국민·신한·농협 등, 확인 필요: 은행 상품페이지)",
-          "실업급여 입금 가능 여부(확인 필요: 고용센터)"
-        ],
-        "mustAvoid": [
-          "실업급여가 법적으로 압류금지라는 점을 통장 가입 불필요론으로 오인시키는 설명",
-          "기초수급자 전용 상품을 전국민 대상으로 혼동시키는 서술",
-          "은행별 금리·혜택을 광고처럼 과장"
-        ],
-        "checkBefore": [
-          "가입 자격 기준(기초수급자 등 특정 대상 여부) - 은행 공식 상품페이지",
-          "실업급여 입금 가능 여부 - 고용센터/워크넷 공지",
-          "압류방지 한도 금액 - 금융위/보건복지부 공지"
-        ],
-        "solves": [
-          "전국민압류방지통장 어디서 만드나요 → 가입 가능 은행과 조건을 정리해 바로 찾아가게 한다",
-          "행복지킴이통장 자격이 기초수급자뿐인지 → 전국민용과 수급자 전용의 대상·한도 비교로 해소",
-          "다른 통장이 압류돼도 지킴이통장 돈은 안전한지 → 입금 가능한 급여 종류와 압류 한도를 명확히 짚어준다"
-        ],
-        "actionTitles": [
-          "실업급여 압류방지통장 가입 자격·신청 방법 한눈에 정리",
-          "행복지킴이통장과 전국민통장 비교로 바로 확인하기",
-          "압류방지통장 신청 전 꼭 확인할 조건 체크리스트"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "전국민압류방지 통장 어디서 만드나요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40106&docId=483798687&answerNo=7&qb=a2Ltlonrs7Xsp4DtgrTsnbTthrXsnqUg7JWV66WY67Cp7KeAIO2GteyepSDquLDstIjsg53tmZzsiJjquInsnpA=",
-          "views": 2814,
-          "answers": 11,
-          "askedAt": "2026.02.03"
-        },
-        {
-          "title": "kb행복지킴이 통장",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100402&docId=494244877&answerNo=3&qb=a2Ltlonrs7Xsp4DtgrTsnbTthrXsnqUg7JWV66WY67Cp7KeAIO2GteyepSDquLDstIjsg53tmZzsiJjquInsnpA=",
-          "views": 360,
-          "answers": 4,
-          "askedAt": "2026.07.10"
-        },
-        {
-          "title": "행복지킴이통장압류방지정용기초수급자 통....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100101&docId=484451274&answerNo=1&qb=a2Ltlonrs7Xsp4DtgrTsnbTthrXsnqUg7JWV66WY67Cp7KeAIO2GteyepSDquLDstIjsg53tmZzsiJjquInsnpA=",
-          "views": 75,
-          "answers": 1,
-          "askedAt": "2025.04.21"
-        }
-      ]
-    },
-    {
       "id": "65bb97ee21a57e56",
       "urls": [
         "https://hereissuetell.tistory.com/entry/2026%EB%85%84-10%EC%9B%94-%ED%86%B5%EC%8B%A0%EC%9A%94%EA%B8%88-%EC%B5%9C%EC%A0%81%EC%9A%94%EA%B8%88%EC%A0%9C-%EC%95%88%EB%82%B4-%EC%8B%9C%EC%9E%91-%ED%9C%B4%EB%8C%80%ED%8F%B0-%EC%9A%94%EA%B8%88-%EC%A4%84%EC%9D%B4%EB%8A%94-%EB%B0%A9%EB%B2%95%C2%B7%ED%99%95%EC%9D%B8%EC%82%AC%ED%95%AD-5%EA%B0%80%EC%A7%80",
@@ -16093,72 +15862,6 @@
           "views": 490,
           "answers": 2,
           "askedAt": "2025.06.02"
-        }
-      ]
-    },
-    {
-      "id": "544e3884c5ad1bb8",
-      "urls": [
-        "https://yjfreelifestyle.tistory.com/entry/%EA%B0%80%EC%83%81%EC%9E%90%EC%82%B0-%EA%B3%BC%EC%84%B8-%EA%B3%84%EC%82%B0-%EB%B0%A9%EB%B2%95%EA%B3%BC-%EC%8B%A0%EA%B3%A0-%EA%B8%B0%EC%A4%80-%EC%84%B8%EC%9C%A8-22%C2%B7%EA%B8%B0%EB%B3%B8%EA%B3%B5%EC%A0%9C-250%EB%A7%8C%EC%9B%90-%EC%A0%95%EB%A6%AC",
-        "https://recreation.comingmoney.com/entry/%EC%BD%94%EC%9D%B8-%EA%B3%BC%EC%84%B8-%EC%84%B8%EC%9C%A8%EA%B3%BC-%EA%B8%B0%EB%B3%B8%EA%B3%B5%EC%A0%9C-%EC%8B%A0%EA%B3%A0-%EC%8B%9C%EA%B8%B0-%EC%A0%95%EB%A6%AC"
-      ],
-      "guide": {
-        "direction": "검색자는 과세 유예·폐지 가능성에 따라 지금 팔아야 하는지, 세율과 공제가 실제로 언제부터 적용되는지에서 막힌다. 고수 블로그는 세율 22%·기본공제 250만원 계산법만 다루고 유예 법안 진행 상황, 폐지 청원과 유예의 차이는 못 짚었다. 이 글은 공제·세율 계산 공식과 유예 변수를 구분해 줘서 지금 당장 무엇을 준비해야 하는지로 끝내게 한다.",
-        "searchTargets": [
-          "가상자산 과세유예",
-          "가상자산 과세 기준",
-          "가상자산 과세 유예 법안",
-          "가상자산 과세율"
-        ],
-        "mustInclude": [
-          "기본공제 250만원, 세율 22%(지방소득세 포함) 계산 공식과 예시",
-          "과세 시행 시점은 2027년 1월 1일로 거론됨 (확인 필요: 기재부/국세청 공식 발표)",
-          "유예 법안 국회 논의 현황 (확인 필요: 국회 의안정보시스템·최신 기사)",
-          "공제 적용 위해 자산별 손익·거래내역을 합산 정리해야 하는 이유"
-        ],
-        "mustAvoid": [
-          "'유예되면 무조건 팔아야 한다'처럼 세금 정보를 투자 조언처럼 쓰기",
-          "과세 유예와 과세 폐지를 같은 사안처럼 섞어 쓰기(법안 성격이 다름)"
-        ],
-        "checkBefore": [
-          "가상자산 과세 시행일이 2027년으로 재유예됐는지 최신 확정 여부 (국세청/기재부 공식 발표)",
-          "유예 법안의 국회 통과 여부 및 일정 (국회 의안정보시스템, 보도자료)"
-        ],
-        "solves": [
-          "과세 유예되면 지금 팔아야 하나 → 유예 여부에 따라 달라지는 매도·신고 타이밍을 구분해서 설명",
-          "기본공제 250만원 넘으면 세금이 얼마인지 → 세율 22% 계산 공식과 예시로 정리",
-          "과세 유예·폐지·청원이 뭐가 다른지 → 세 개념을 구분해서 정리"
-        ],
-        "actionTitles": [
-          "가상자산 과세유예 가능성과 세율 22% 계산법 정리",
-          "가상자산 과세 기준 세율 22% 기본공제 250만원 계산",
-          "가상자산 과세 폐지 청원과 유예 법안 현황 비교"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "내년 가상자산 과세, 초보 투자자가 알아야 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40307&docId=492334574&answerNo=4&qb=6rCA7IOB7J6Q7IKw6rO87IS4",
-          "views": 106,
-          "answers": 6,
-          "askedAt": "2026.05.08"
-        },
-        {
-          "title": "가상자산 과세 유예, 그럼 지금 팔아야 할까....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=601&docId=492279663&answerNo=2&qb=6rCA7IOB7J6Q7IKw6rO87IS4",
-          "views": 102,
-          "answers": 3,
-          "askedAt": "2026.05.08"
-        },
-        {
-          "title": "가상자산 과세 공제 한도 250만 원, 개인 투자....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=601&docId=492279653&answerNo=3&qb=6rCA7IOB7J6Q7IKw6rO87IS4",
-          "views": 82,
-          "answers": 4,
-          "askedAt": "2026.05.08"
         }
       ]
     },
@@ -17965,73 +17668,6 @@
       "at": "2026-10-20T10:55:31.225Z",
       "rules": "2026-10-20-solve",
       "provider": "claude"
-    },
-    {
-      "id": "c3e790733b8569c9",
-      "urls": [
-        "https://hohoblog.co.kr/fc-bga-substrate-materials-equipment-stocks/",
-        "https://felixkim.tistory.com/entry/2%EC%B0%A8%EC%A0%84%EC%A7%80-%EC%86%8C%EC%9E%AC-%EA%B4%80%EB%A0%A8%EC%A3%BC-3%EC%82%AC-%ED%9D%91%EC%9E%90%EB%8A%94-%EB%91%98%EB%BF%90"
-      ],
-      "guide": {
-        "direction": "검색자는 기업명은 알지만 그 기업이 FC-BGA 공정에서 제조·소재·장비 중 어디를 맡는지 구분이 안 돼 막혀 있다. 고수 글은 기업을 나열만 하고 2차전지 글처럼 흑자·적자 구분이나 일본 선두업체와의 격차 같은 비교는 다루지 않는다. 공정 단계별 구조표와 기업별 담당 영역·실적 비교표로 한 번에 정리해 끝낸다.",
-        "searchTargets": [
-          "fc bga 기판 관련주",
-          "fc bga 기판 대장주",
-          "FCBGA무슨뜻",
-          "fc bga 장비 관련주"
-        ],
-        "mustInclude": [
-          "FC-BGA 공정 단계(기판 제조→적층·접합→후공정) 구조도 (확인 필요: 증권사 리포트)",
-          "제조사·소재·장비 기업 구분표 (확인 필요: 기업 IR·뉴스)",
-          "대면적 기판 Capa 및 양산 레코드 현황 (확인 필요: 각사 공시)",
-          "일본 이비덴 등 선두업체와의 격차 수치 (확인 필요: 증권사 리포트)",
-          "FCBGA(Flip Chip BGA) 뜻 한 줄 정의"
-        ],
-        "mustAvoid": [
-          "특정 종목을 매수·목표가처럼 투자 권유로 보이게 쓰기",
-          "2차전지 소재 관련주 글과 섞어서 다른 산업 기업을 혼동시키기"
-        ],
-        "checkBefore": [
-          "각 기업이 제조·소재·장비 중 어디에 속하는지 — 기업 IR 자료·증권사 섹터 리포트",
-          "최근 분기 흑자·적자 여부 — 각사 최신 공시",
-          "FC-BGA capa 증설 발표 여부 — 기업 보도자료·공시"
-        ],
-        "solves": [
-          "FCBGA무슨뜻 검색 → Flip Chip BGA 정의와 패키지 내 역할을 한 줄로 정리",
-          "fc bga 관련주가 뭐가 다른지 모르겠다 → 제조·소재·장비 단계별 구분표로 해결",
-          "fc bga 기판 대장주가 누구냐 → capa·실적 기준 비교표로 답"
-        ],
-        "actionTitles": [
-          "FC BGA 기판 관련주 제조·소재·장비 단계별 비교정리",
-          "FCBGA무슨뜻부터 FC BGA 대장주까지 한번에 확인"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "인공지능 관련주 숨은 정보좀",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=342866690&answerNo=5&qb=ZmMgYmdhIOq4sO2MkCDqtIDroKjso7wg7KCc7KGw7IKs",
-          "views": 7644,
-          "answers": 6,
-          "askedAt": "2026.02.01"
-        },
-        {
-          "title": "2026년 상반기 상승주식 알려주서요.",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=493538815&answerNo=3&qb=ZmMgYmdhIOq4sO2MkCDqtIDroKjso7wg7KCc7KGw7IKs",
-          "views": 1755,
-          "answers": 10,
-          "askedAt": "2026.05.24"
-        },
-        {
-          "title": "LG이노텍의 AI 반도체 기판 기술, 실제로 얼마....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1126&docId=493607319&answerNo=1&qb=ZmMgYmdhIOq4sO2MkCDqtIDroKjso7wg7KCc7KGw7IKs",
-          "views": 439,
-          "answers": 5,
-          "askedAt": "2026.05.29"
-        }
-      ]
     },
     {
       "id": "7756b6aa94d6c3af",
@@ -21116,71 +20752,6 @@
       ]
     },
     {
-      "id": "00356ae907f8f93c",
-      "urls": [
-        "https://muhanloop.tistory.com/3060",
-        "https://livingtt.tistory.com/65"
-      ],
-      "guide": {
-        "direction": "검색자는 '트랩부터 확인해도' 싱크대 배수구 냄새가 안 없어지는 경우를 지식인에 반복해서 묻는다. 고수 글 제목 자체가 '트랩부터 확인하면 해결될까요?'라는 의문형으로 끝나 답을 못 준다. 트랩→호스 연결부→음식물 찌꺼기 순서의 원인별 체크리스트와 다이소 제품·안전한 세정법까지 줘서 글 안에서 원인을 찾게 한다.",
-        "searchTargets": [
-          "싱크대 배수구 냄새 트랩",
-          "싱크대 배수구 냄새 제거",
-          "싱크대 배수구 냄새 다이소",
-          "싱크대 배수구 냄새 차단 덮개"
-        ],
-        "mustInclude": [
-          "원인별 체크리스트(트랩→배수호스 연결부 틈새→음식물 찌꺼기→환풍구 역류)",
-          "다이소 냄새차단 제품 종류(확인 필요: 현재 판매 제품명)",
-          "락스 외 안전한 세정법(지식인 답변 근거)",
-          "배수호스 교체 효과(지식인에서 언급된 사례, 확인 필요: 일반화 가능 여부)"
-        ],
-        "mustAvoid": [
-          "락스와 다른 세정제를 섞어 쓰면 유독가스가 나는 위험을 누락하는 것",
-          "트랩 문제로 단정해 불필요한 하부 배관 공사를 유도하는 것"
-        ],
-        "checkBefore": [
-          "다이소 판매 제품명과 현재 재고 여부(다이소 공식몰·매장 확인)",
-          "락스 혼용 위험 정보(제품 라벨·식약처 안전정보 확인)"
-        ],
-        "solves": [
-          "트랩 확인해도 냄새가 안 없어짐 → 호스 연결부·음식물 찌꺼기 등 원인별 체크리스트 제공",
-          "락스 쓰기 꺼려짐 → 다이소 냄새차단 제품과 안전한 청소법 정리",
-          "배수구 차단덮개가 효과 있는지 모름 → 트랩과 함께 쓰는 법 설명"
-        ],
-        "actionTitles": [
-          "싱크대 배수구 냄새, 트랩 말고 이것부터 확인하기",
-          "싱크대 배수구 냄새 제거, 다이소 제품으로 해결하는 법"
-        ]
-      },
-      "at": "2026-10-20T12:32:18.112Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "싱크대 하수구 냄새 악취가 나요 싱크대 밑에....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8080103&docId=493940909&answerNo=12&qb=7Iux7YGs64yAIOuwsOyImOq1rCDrg4Tsg4gg7KCc6rGwIO2KuOueqQ==",
-          "views": 2442,
-          "answers": 12,
-          "askedAt": "2026.10.02"
-        },
-        {
-          "title": "싱크대 하수구 냄새",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8080103&docId=486992650&answerNo=12&qb=7Iux7YGs64yAIOuwsOyImOq1rCDrg4Tsg4gg7KCc6rGwIO2KuOueqQ==",
-          "views": 2214,
-          "answers": 12,
-          "askedAt": "2026.10.02"
-        },
-        {
-          "title": "싱크대 배수구 하수구 냄새 잡는 법",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=50501&docId=491048075&answerNo=5&qb=7Iux7YGs64yAIOuwsOyImOq1rCDrg4Tsg4gg7KCc6rGwIO2KuOueqQ==",
-          "views": 1604,
-          "answers": 5,
-          "askedAt": "2026.10.02"
-        }
-      ]
-    },
-    {
       "id": "6566ed97956bfcb7",
       "urls": [
         "https://yjfreelifestyle.tistory.com/entry/%EC%A3%BC%ED%83%9D-%EC%96%91%EB%8F%84%EC%84%B8-%EB%B9%84%EA%B3%BC%EC%84%B8-%EC%A1%B0%EA%B1%B4%EA%B3%BC-%EC%8B%A0%EA%B3%A0-%EB%B0%A9%EB%B2%95-1%EC%84%B8%EB%8C%80-1%EC%A3%BC%ED%83%9D-%EA%B8%B0%EC%A4%80%EB%B6%80%ED%84%B0-%EC%98%88%EC%99%B8%EA%B9%8C%EC%A7%80",
@@ -23172,68 +22743,6 @@
       ]
     },
     {
-      "id": "d072e68cee95b5b2",
-      "urls": [
-        "https://wealti.tistory.com/entry/%EC%9C%88%EB%8F%84%EC%9A%B011-%EC%9D%B4%EC%96%B4%ED%8F%B0-%ED%95%9C%EC%AA%BD-%EC%86%8C%EB%A6%AC-%EC%9E%91%EA%B1%B0%EB%82%98-%EC%95%88-%EB%93%A4%EB%A6%B4-%EB%95%8C-%ED%95%B4%EA%B2%B0-%EC%88%9C%EC%84%9C",
-        "https://beyond-the-story.tistory.com/entry/%EC%9C%88%EB%8F%84%EC%9A%B0-%EB%85%B8%ED%8A%B8%EB%B6%81-%ED%8F%AC%EB%A7%B7-%ED%9B%84-%EC%86%8C%EB%A6%AC%EA%B0%80-%EC%9E%91%EA%B2%8C-%EB%93%A4%EB%A6%B4-%EB%95%8C-%ED%99%95%EC%9D%B8-%EB%B0%A9%EB%B2%95",
-        "https://beyond-the-story.tistory.com/entry/%EC%9C%88%EB%8F%84%EC%9A%B0-11-%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8-%ED%9B%84-%EC%86%8C%EB%A6%AC-%EC%84%A4%EC%A0%95-%EC%95%88-%EC%97%B4%EB%A6%B4-%EB%95%8C-%ED%99%95%EC%9D%B8-%EB%B0%A9%EB%B2%95"
-      ],
-      "guide": {
-        "direction": "검색자는 이어폰 한쪽 소리가 작거나 안 들릴 때 설정 메뉴 어디서 밸런스를 조절하는지, 윈도우10에서 11로 넘어오며 이퀄라이저 고급설정이 사라진 것에서 막힌다. 고수 글들은 해결 순서·포맷 후 증상·업데이트 후 설정 안 열림까지 다뤘지만 사라진 이퀄라이저 메뉴 위치와 소프트웨어·하드웨어 구분법은 비어 있다. 설정>시스템>소리와 제어판 사운드 속성의 밸런스 메뉴 경로, 구분 체크리스트를 주면 글에서 끝난다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "설정>시스템>소리>볼륨 믹서에서 좌우 밸런스 조절 경로",
-          "제어판 사운드 장치 속성 > 레벨 탭 > 밸런스 메뉴 경로",
-          "윈도우10→11 전환 시 이퀄라이저(고급설정) 메뉴 사라짐 현상",
-          "Realtek 오디오 콘솔 등 드라이버 재설치로 이퀄라이저 복구하는 법",
-          "소프트웨어 설정 문제인지 이어폰 자체 단선인지 구분하는 체크리스트"
-        ],
-        "mustAvoid": [
-          "특정 노트북 제조사 전체의 하드웨어 결함처럼 일반화",
-          "윈도우7·10 전용 해결법을 검증 없이 윈도우11에 그대로 적용"
-        ],
-        "checkBefore": [
-          "마이크로소프트 공식 지원문서에서 윈도우11 소리 밸런스·이퀄라이저 메뉴 위치 재확인",
-          "이어폰 제조사 또는 Realtek 홈페이지에서 최신 드라이버 유무 확인"
-        ],
-        "solves": [
-          "이어폰 한쪽 소리가 작거나 안 들린다 → 설정·제어판에서 밸런스 조절하는 순서 정리",
-          "윈도우11로 넘어오니 이퀄라이저 고급설정이 안 보인다 → 사라진 메뉴 위치와 대안 정리",
-          "소프트웨어 문제인지 이어폰 고장인지 구분이 안 된다 → 구분 체크리스트 제공"
-        ],
-        "actionTitles": [
-          "윈도우11 이어폰 소리 안 들릴 때 해결 순서 확인하기",
-          "윈도우11 이퀄라이저 사라졌을 때 설정 찾는 방법"
-        ]
-      },
-      "at": "2026-10-20T12:32:18.112Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "노트북 이어폰마이크",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=50103&docId=210049129&answerNo=1&qb=7JyI64+E7JqwMTEg7J207Ja07Y+wIO2VnOyqvSDshozrpqwg7J6R6rGw64KY",
-          "views": 10624,
-          "answers": 1,
-          "askedAt": "2014.11.01"
-        },
-        {
-          "title": "메인보드의 커넥터는 제조회사에 관련없이 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1010304&docId=71930049&answerNo=1&qb=7JyI64+E7JqwMTEg7J207Ja07Y+wIO2VnOyqvSDshozrpqwg7J6R6rGw64KY",
-          "views": 9248,
-          "answers": 1,
-          "askedAt": "2008.11.14"
-        },
-        {
-          "title": "★아이리버 iFP-590T & N10 비교★",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=50103&docId=22515715&answerNo=1&qb=7JyI64+E7JqwMTEg7J207Ja07Y+wIO2VnOyqvSDshozrpqwg7J6R6rGw64KY",
-          "views": 3078,
-          "answers": 1,
-          "askedAt": "2004.08.03"
-        }
-      ]
-    },
-    {
       "id": "2b0349abb177ff6f",
       "urls": [
         "https://c.foqvjtm100.com/entry/%EB%82%98-%ED%98%BC%EC%9E%90-%EC%82%B0%EB%8B%A4-%EB%8C%80%EC%A0%84-%EB%B9%B5%EC%A7%80%EC%88%9C%EB%A1%80-%EC%B4%9D%EC%A0%95%EB%A6%AC-%EC%84%9C%EB%B2%94%EC%A4%80-%EB%B9%B5%EC%A7%91-%EC%9C%84%EC%B9%98%C2%B7%EB%A9%94%EB%89%B4%C2%B7%EA%B0%80%EA%B2%A9%C2%B7%EC%98%88%EC%95%BD",
@@ -24218,65 +23727,6 @@
       ]
     },
     {
-      "id": "c6350c8b7362d8a2",
-      "urls": [
-        "https://blogger00220.tistory.com/entry/%EC%83%9D%ED%99%9C%EA%B8%88%EC%9C%B5-%EC%8B%A4%EC%A0%84-43%ED%8E%B8-%EA%B3%A8%EB%93%9C%EB%B0%94%C2%B7%EB%8B%AC%EB%9F%AC-%ED%98%84%EB%AC%BC-%EC%A6%9D%EC%97%AC%EC%9D%98-%EC%B9%98%EB%AA%85%EC%A0%81-%ED%95%A8%EC%A0%95%EA%B3%BC-KRX-%EA%B8%88%EC%8B%9C%EC%9E%A5%C2%B7%EC%99%B8%ED%99%94-%EC%98%88%EA%B8%88-%EC%84%B8%EA%B8%88-0%EC%9B%90-%EC%A0%88%EC%84%B8-%EB%B9%84%EB%B2%95",
-        "https://danielnamy.tistory.com/entry/2026-%EA%B8%88-%ED%88%AC%EC%9E%90-%EB%B0%A9%EB%B2%95-4%EA%B0%80%EC%A7%80-%EB%B9%84%EA%B5%90%EF%BD%9CKRX-%EA%B8%88%EC%8B%9C%EC%9E%A5%C2%B7%EA%B3%A8%EB%93%9C%EB%B1%85%ED%82%B9%C2%B7%EA%B8%88-ETF%C2%B7%EA%B3%A8%EB%93%9C%EB%B0%94-%EC%84%B8%EA%B8%88%EA%B3%BC-%EC%88%98%EC%88%98%EB%A3%8C"
-      ],
-      "guide": {
-        "direction": "검색자는 골드바·달러 현금을 가족에게 줄 때 '현물이라 세금이 안 걸린다'는 말이 진짜인지, KRX 금시장·외화예금으로 하면 뭐가 다른지 궁금해한다. 고수 글은 '절세 비법'을 강조하지만 공제 한도와 현물 증여 적발 구조는 구체적으로 안 보여준다. 이 글은 증여재산 공제 한도와 현물 vs 계좌 증여 세금을 비교표로 정리해 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "증여재산 공제 한도 (확인 필요: 국세청 홈택스 최신 고시)",
-          "현물(골드바·달러) 증여시 적발·추적 가능성 (확인 필요: 국세청 자료)",
-          "KRX 금시장·외화예금 증여와 현물 증여 세금 비교표",
-          "증여세 신고 기한 (확인 필요: 증여일 기준 3개월, 국세청)"
-        ],
-        "mustAvoid": [
-          "'세금 0원'을 탈세 조장처럼 단정적으로 표현",
-          "금 투자 방법(ETF·골드뱅킹) 수수료 비교글과 증여세 초점을 혼동"
-        ],
-        "checkBefore": [
-          "국세청 홈택스에서 현행 증여재산 공제 한도와 증여세율표 확인"
-        ],
-        "solves": [
-          "금이나 달러 현금으로 주면 증여세 안 걸린다는데 진짜인가요? → 현물 증여 적발 구조와 리스크 설명",
-          "KRX 금시장으로 증여하면 세금이 줄어드나요? → 현물 vs 계좌 증여 세금 비교"
-        ],
-        "actionTitles": [
-          "골드바·달러 증여세 신고, 현물 증여 함정 피하는 법",
-          "금·달러 증여세 공제 한도 계산하고 세금 줄이는 법",
-          "현물 증여 세금 비교, KRX 금시장으로 신고하는 법"
-        ]
-      },
-      "at": "2026-10-20T12:32:18.112Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "금융상식 용어",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=401&docId=188141217&answerNo=1&qb=7IOd7Zmc6riI7Jy1IOqzqOuTnOuwlCDri6zrn6wg7ZiE66y8IOymneyXrA==",
-          "views": 131173,
-          "answers": 2,
-          "askedAt": "2014.01.08"
-        },
-        {
-          "title": "고졸 은행텔러 면접볼때 알아야할 금융상식....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=401&docId=198866164&answerNo=1&qb=7IOd7Zmc6riI7Jy1IOqzqOuTnOuwlCDri6zrn6wg7ZiE66y8IOymneyXrA==",
-          "views": 32783,
-          "answers": 1,
-          "askedAt": "2014.05.31"
-        },
-        {
-          "title": "한국경제 생글생글 경제상식퀴즈(323회 ~ 351회....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=4&docId=157498157&answerNo=0&qb=7IOd7Zmc6riI7Jy1IOqzqOuTnOuwlCDri6zrn6wg7ZiE66y8IOymneyXrA==",
-          "views": 616,
-          "answers": 0,
-          "askedAt": "2012.09.01"
-        }
-      ]
-    },
-    {
       "id": "67abb229d627e93f",
       "urls": [
         "https://dailylucky1208.com/411",
@@ -24674,71 +24124,6 @@
           "views": 7608,
           "answers": 2,
           "askedAt": "2006.06.06"
-        }
-      ]
-    },
-    {
-      "id": "fb0d655a00d86794",
-      "urls": [
-        "https://queenohora.tistory.com/805",
-        "https://teacafe-story230726.tistory.com/entry/%EC%A0%9C%EB%A1%9C%EC%8A%88%EA%B1%B0%C2%B7%ED%98%88%EB%8B%B9-%EA%B4%80%EB%A6%AC-%EC%A0%95%EB%A7%90-%ED%9A%A8%EA%B3%BC-%EC%9E%88%EC%9D%84%EA%B9%8C"
-      ],
-      "guide": {
-        "direction": "늙은호박즙이 붓기·혈당에 좋다는데 당뇨약 복용 중에도 괜찮은지 성분 근거를 모른다. 고수 글은 '정말 효과있나'만 묻고 당뇨약 복용자 주의점은 못 풀었다. 칼륨·식이섬유 등 성분별 효능표와 복용 주의점, 손질법·호박죽 만드는법까지 정리해 끝낸다.",
-        "searchTargets": [
-          "늙은호박 효능",
-          "늙은호박 효능 성분",
-          "늙은 호박즙",
-          "늙은호박 효능 신장"
-        ],
-        "mustInclude": [
-          "붓기(이뇨작용) 관련 성분: 칼륨 함량과 작용 원리 정리 (확인 필요: 식품영양성분 공식 자료)",
-          "혈당 관련 성분: 식이섬유·당 함량과 당뇨약 복용자 주의점 (확인 필요: 식약처/영양 DB)",
-          "손질법과 호박즙·호박죽 만드는법 요약",
-          "신장 기능과 관련된 효능 설명 (확인 필요: 의학적 근거·전문의 자료)"
-        ],
-        "mustAvoid": [
-          "'혈당을 감소시킨다'는 표현을 치료 효과처럼 단정해 당뇨약 대체 가능하다는 오해를 주는 것",
-          "신장질환자가 칼륨 섭취를 주의해야 하는 점을 빼고 무조건 좋다고 쓰는 것",
-          "개인 체험담처럼 1인칭 경험으로 효능을 과장하는 것"
-        ],
-        "checkBefore": [
-          "늙은호박의 실제 영양성분(칼륨·비타민A·C·식이섬유 함량) (출처: 농촌진흥청/식약처 식품영양성분 DB)",
-          "신장질환자·당뇨약 복용자의 섭취 주의사항 (출처: 의학 정보 사이트 또는 전문의 자료)"
-        ],
-        "solves": [
-          "늙은호박즙이 붓기에 좋다는데 진짜인지 궁금함 → 칼륨 이뇨작용 성분 근거로 설명",
-          "당뇨약 먹는데 늙은호박 먹어도 혈당 괜찮은지 궁금함 → 식이섬유·당 함량 기준 주의점 정리",
-          "늙은호박즙 말고 다른 방법(죽·국) 만드는법 궁금함 → 손질법부터 조리법까지 정리"
-        ],
-        "actionTitles": [
-          "늙은호박 효능 신장에도 좋을까, 영양성분으로 확인하기"
-        ]
-      },
-      "at": "2026-10-20T12:32:18.112Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "늙은호박즙효능 붓기제거에 좋다면서?!",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020305&docId=254880145&answerNo=8&qb=64qZ7J2AIO2YuOuwlSDtmqjriqUg67aT6riwIO2YiOuLuQ==",
-          "views": 28258,
-          "answers": 18,
-          "askedAt": "2021.05.11"
-        },
-        {
-          "title": "늙은 호박즙효능 및 판매처 알려주세요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70404&docId=221471718&answerNo=12&qb=64qZ7J2AIO2YuOuwlSDtmqjriqUg67aT6riwIO2YiOuLuQ==",
-          "views": 17505,
-          "answers": 17,
-          "askedAt": "2021.05.11"
-        },
-        {
-          "title": "늙은호박즙 파는곳 붓기빼는데 효능 보고 싶....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020305&docId=208100350&answerNo=3&qb=64qZ7J2AIO2YuOuwlSDtmqjriqUg67aT6riwIO2YiOuLuQ==",
-          "views": 15709,
-          "answers": 3,
-          "askedAt": "2025.03.14"
         }
       ]
     },
@@ -27144,72 +26529,6 @@
       ]
     },
     {
-      "id": "37009f69fc47d619",
-      "urls": [
-        "https://4050s.tistory.com/174",
-        "https://coolmool-economy.tistory.com/entry/housing-pension-spouse-succession-six-months"
-      ],
-      "guide": {
-        "direction": "주택연금 가입자가 사망하면 신탁방식인지 저당권방식인지에 따라 등기·법무사 필요여부가 달라져, 셀프 등기이전까지 했는데 법무사를 다시 거치라는 안내에 막히는 경우가 많다. 고수 글 제목은 '6개월·신탁·저당권 차이'를 언급했지만 형제자매·자녀는 승계가 안 되고 배우자만 가능하다는 범위 제한과 신탁형의 귀속권리자(위탁자+배우자) 개념까지는 풀지 않았다. 이 글은 방식별 승계 절차 체크리스트와 승계 가능 대상 정리표로 독자가 직접 다음 단계를 밟을 수 있게 끝낸다.",
-        "searchTargets": [
-          "주택연금 배우자사망",
-          "주택연금 배우자 동의",
-          "주택연금 배우자 상속세"
-        ],
-        "mustInclude": [
-          "신탁방식 vs 저당권방식 승계 절차 차이표 (등기 필요여부, 법무사 필요여부)",
-          "승계 가능 대상은 배우자뿐 - 형제자매·자녀는 불가 명시",
-          "가입자 사망 후 6개월 내 처리해야 하는 사항 (확인 필요: 주택금융공사 공지)",
-          "신탁형 주택연금에서 귀속권리자(위탁자+배우자) 개념 설명",
-          "셀프 등기이전 완료 후에도 법무사가 필요한 경우 사례 정리"
-        ],
-        "mustAvoid": [
-          "연금저축펀드(금융상품) 승계와 주택연금(주택담보 연금) 승계를 같은 제도처럼 섞어 쓰지 말 것",
-          "상속세 비과세를 모든 경우에 적용되는 것처럼 일반화하지 말 것"
-        ],
-        "checkBefore": [
-          "신탁형/저당권방식별 정확한 승계 절차와 6개월 기한 - 한국주택금융공사(HF) 공식 안내 확인",
-          "형제자매·자녀 승계 불가 여부 - HF 공식 Q&A 재확인"
-        ],
-        "solves": [
-          "형제가 같이 살다 사망하면 승계 못 하나요? → 배우자만 승계 가능, 형제·자녀 불가 명시",
-          "셀프 등기이전했는데 법무사 통해 하라고 한다 → 신탁형·저당권방식별 절차 차이 정리",
-          "신탁형 주택연금 상속시 귀속권리자는 누구? → 위탁자와 배우자가 귀속권리자임을 설명"
-        ],
-        "actionTitles": [
-          "주택연금 배우자 승계 신청방법, 신탁형·저당권방식 차이 확인",
-          "주택연금 배우자사망 후 승계 절차, 셀프등기 vs 법무사 비교",
-          "주택연금 배우자 동의 없이 승계 가능할까? 조건 확인하기"
-        ]
-      },
-      "at": "2026-10-20T22:12:34.821Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "남편 사망 후 배우자가 연금저축 승계시, 배....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100402&docId=408539505&answerNo=1&qb=7KO87YOd7Jew6riIIOuwsOyasOyekCDsirnqs4Qg6rCA7J6F7J6QIOyCrOunnQ==",
-          "views": 3069,
-          "answers": 1,
-          "askedAt": "2022.01.01"
-        },
-        {
-          "title": "신탁형 주택연금 대상부동산 상속시 배우자....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40303&docId=494334301&answerNo=2&qb=7KO87YOd7Jew6riIIOuwsOyasOyekCDsirnqs4Qg6rCA7J6F7J6QIOyCrOunnQ==",
-          "views": 647,
-          "answers": 6,
-          "askedAt": "2026.07.16"
-        },
-        {
-          "title": "주택연금 배우자사망시 승계 하는방법",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60223&docId=478979930&answerNo=1&qb=7KO87YOd7Jew6riIIOuwsOyasOyekCDsirnqs4Qg6rCA7J6F7J6QIOyCrOunnQ==",
-          "views": 501,
-          "answers": 1,
-          "askedAt": "2024.12.11"
-        }
-      ]
-    },
-    {
       "id": "79b5aacafcddd3cb",
       "urls": [
         "https://decalfactory.co.kr/1050",
@@ -27268,72 +26587,6 @@
           "views": 288,
           "answers": 5,
           "askedAt": "2026.07.29"
-        }
-      ]
-    },
-    {
-      "id": "9be20d36fed520aa",
-      "urls": [
-        "https://on.sano.co.kr/%eb%ac%b8%ea%b4%91%ec%a0%80%ec%88%98%ec%a7%80-%ec%9d%80%ed%96%89%eb%82%98%eb%ac%b4-%ec%b6%95%ec%a0%9c-%ed%99%a9%ea%b8%88%eb%b9%9b-%ec%a0%88%ec%a0%95-%ec%8b%9c%ea%b8%b0%ec%99%80-%ec%a3%bc%ec%b0%a8/",
-        "https://info-idea114.co.kr/entry/%EC%95%84%EC%82%B0-%EA%B3%A1%EA%B5%90%EC%B2%9C-%EC%9D%80%ED%96%89%EB%82%98%EB%AC%B4%EA%B8%B8-%EC%A0%88%EC%A0%95-%EC%8B%9C%EA%B8%B0%EC%99%80-%EC%A3%BC%EC%B0%A8-%EA%BF%80%ED%8C%81-%EC%B4%9D%EC%A0%95%EB%A6%AC"
-      ],
-      "guide": {
-        "direction": "괴산 문광저수지 은행나무길을 찾는 사람들은 절정 시기·주차 외에 축제 프로그램, 아침 물안개 촬영 시간대, 가족 단위 동선까지 궁금해한다. 고수 글 제목은 절정 시기와 주차 팁에서 멈춰 있어 포토존·포토콘테스트 일정이나 물안개 촬영 시간대는 다루지 않았다. 이 글은 프로그램 일정표와 촬영 시간대, 보강천 미루나무숲 등 주변 동선·먹거리를 정리해 방문 계획을 한 번에 끝내게 한다.",
-        "searchTargets": [
-          "문광저수지 은행나무 축제",
-          "문광저수지 은행나무 절정",
-          "문광저수지 은행나무 실시간",
-          "문광저수지 은행나무길 시기"
-        ],
-        "mustInclude": [
-          "은행나무 절정 시기 예상 날짜 (확인 필요: 괴산군 공식 공지·괴산문화관광 홈페이지)",
-          "주차 공간 및 혼잡시간대 팁 (확인 필요: 괴산군청 공지)",
-          "포토존·포토콘테스트 등 축제 프로그램 일정",
-          "아침 물안개 촬영 좋은 시간대 (확인 필요: 현지 공식계정)",
-          "주변 먹거리(사과·고추·옥수수·밤 등 농산물)와 보강천 미루나무숲 동선"
-        ],
-        "mustAvoid": [
-          "아산 곡교천 은행나무길과 혼동해 같은 글에 뒤섞지 말 것 - 완전히 다른 지역·축제",
-          "절정 시기를 단정적으로 못박기보다 해마다 유동적임을 명시 (확인 필요 문구 사용)"
-        ],
-        "checkBefore": [
-          "올해 축제 정확한 기간·절정 예상일 - 괴산군청·괴산문화관광 공식 공지 확인",
-          "포토존·포토콘테스트 등 프로그램 세부 일정 - 축제 주최측 공지 확인"
-        ],
-        "solves": [
-          "은행나무길 축제 기간 중 어떤 프로그램 하나요? → 포토존·포토콘테스트 등 프로그램 정리",
-          "아침 물안개 사진 찍으려면 언제 가야 하나요? → 물안개 촬영 좋은 시간대 안내",
-          "가족 단위로 가면 뭘 더 볼 수 있나요? → 보강천 미루나무숲 등 주변 동선·먹거리 정리"
-        ],
-        "actionTitles": [
-          "문광저수지 은행나무 절정 시기 확인하고 주차 팁 챙기기",
-          "문광저수지 은행나무 축제, 포토존·물안개 코스까지 확인"
-        ]
-      },
-      "at": "2026-10-20T22:12:34.821Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "괴산 문광저수지 은행나무길 주변의 볼거리....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=90105&docId=489963609&answerNo=1&qb=66y46rSR7KCA7IiY7KeA7J2A7ZaJ64KY66y0",
-          "views": 109,
-          "answers": 1,
-          "askedAt": "2025.11.05"
-        },
-        {
-          "title": "문광저수지 은행나무길 축제, 어떤 프로그램....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=90105&docId=490006103&answerNo=1&qb=66y46rSR7KCA7IiY7KeA7J2A7ZaJ64KY66y0",
-          "views": 106,
-          "answers": 1,
-          "askedAt": "2025.11.07"
-        },
-        {
-          "title": "문광저수지 은행나무길, 아침 물안개와 사진 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=31402&docId=490029771&answerNo=1&qb=66y46rSR7KCA7IiY7KeA7J2A7ZaJ64KY66y0",
-          "views": 93,
-          "answers": 1,
-          "askedAt": "2025.11.08"
         }
       ]
     },
@@ -29197,44 +28450,6 @@
       "provider": "claude"
     },
     {
-      "id": "7082dfb1902f84d6",
-      "urls": [
-        "https://trendofkorea.tistory.com/entry/%EB%8B%A4%EC%9D%B4%EC%86%8C-%EA%B3%B0%ED%8C%A1%EC%9D%B4-%EC%A0%9C%EA%B1%B0-%EC%A0%A4-%EB%AC%B8%EC%A7%80%EB%A5%B4%EC%A7%80-%EC%95%8A%EA%B3%A0-%EC%9A%95%EC%8B%A4-%EC%8B%A4%EB%A6%AC%EC%BD%98-%EC%B0%8C%EB%93%A0-%EB%95%8C-100-%EC%82%AD%EC%A0%9C%ED%95%98%EB%8A%94-%EC%8B%A4%EC%A0%84-%ED%9B%84%EA%B8%B0"
-      ],
-      "guide": {
-        "direction": "다이소에 곰팡이제거제·젤·벽지용·방지제·스프레이·테이프까지 제품이 많아 욕실 실리콘엔 뭘 써야 하는지 헷갈리는 사람이 많다. 고수 블로그 제목은 '100% 삭제'만 강조하고 용도별 제품 비교나 재발방지 방법은 짚지 못한다. 이 글은 제품 종류별 용도·사용법·방치시간을 표로 정리해 어떤 제품을 사야 할지 한 번에 끝내게 한다.",
-        "searchTargets": [
-          "다이소 곰팡이제거제",
-          "다이소 곰팡이젤",
-          "다이소 곰팡이 실리콘",
-          "다이소 곰팡이 방지제"
-        ],
-        "mustInclude": [
-          "제거젤·제거제·스프레이·방지제·테이프 용도별 비교표(확인 필요: 다이소몰 제품 라벨)",
-          "욕실 실리콘 전용 사용법과 방치시간",
-          "재발방지용 방지제 사용법과 사용 주기"
-        ],
-        "mustAvoid": [
-          "'100% 삭제'처럼 검증 없는 효과를 단정적으로 과장",
-          "제거제·벽지용·방지제처럼 용도가 다른 제품을 혼용해 설명"
-        ],
-        "checkBefore": [
-          "다이소 공식 제품 라인업과 가격(다이소몰·매장)"
-        ],
-        "solves": [
-          "다이소 곰팡이 제품이 여러 종류인데 뭘 사야 하나 → 용도별 비교표 제공",
-          "욕실 실리콘 찌든 곰팡이, 문지르지 않고 없앨 수 있나 → 실리콘 전용 사용법·방치시간 안내",
-          "곰팡이 제거 후 재발 막는 법 → 방지제 사용법 정리"
-        ],
-        "actionTitles": [
-          "다이소 곰팡이 방지제로 재발 막는 법, 제품별 비교"
-        ]
-      },
-      "at": "2026-10-21T05:42:05.043Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
-    },
-    {
       "id": "98672c3f46fcdfbe",
       "urls": [
         "https://queenohora.tistory.com/817"
@@ -29297,136 +28512,6 @@
           "views": 1273,
           "answers": 4,
           "askedAt": "2026.04.30"
-        }
-      ]
-    },
-    {
-      "id": "d0cb177d6c098aaa",
-      "urls": [
-        "https://zsewqzsewq.tistory.com/330"
-      ],
-      "guide": {
-        "direction": "급성 발작 환자는 응급실 진통제 이후 통증이 언제까지 가는지, 찜질이 온찜질인지 냉찜질인지, 정형외과와 내과 중 어디를 가야 하는지에서 막힌다. '경험담' 제목은 개인 사례만 전해 이 분기점을 못 짚는다. 통풍 호발 부위·요산수치 기준·약 종류(페브릭·콜킨)·찜질법을 표로 정리해 통증 단계별 대처를 한 번에 끝내준다.",
-        "searchTargets": [
-          "통풍 통증 위치",
-          "통풍 통증 완화 찜질",
-          "통풍 통증 약",
-          "통풍 통증 완화 방법"
-        ],
-        "mustInclude": [
-          "통풍 호발 부위(엄지발가락 등)와 통증 양상 (확인 필요: 대한류마티스학회)",
-          "요산수치 정상 기준과 지식인 사례(요산수치 8) 비교",
-          "급성발작 처방약 비교: 페브릭손, 콜킨(콜히친), 진통제",
-          "찜질 온/냉 여부 (확인 필요: 의료기관 가이드)",
-          "진료과 선택 기준: 정형외과 vs 내과·류마티스내과"
-        ],
-        "mustAvoid": [
-          "통풍과 봉와직염·류마티스관절염 등 유사 질환 혼동 주의"
-        ],
-        "checkBefore": [
-          "페브릭손·콜킨 용법·용량은 약학정보원 또는 식약처 의약품안전나라에서 확인",
-          "찜질 온/냉 적용 기준은 대한류마티스학회 등 공식 자료로 확인"
-        ],
-        "solves": [
-          "통풍 통증이 언제까지 가는지 모름 → 발작 후 약 복용 시 통증 소실 기간 가이드 제공",
-          "찜질을 온찜질로 할지 냉찜질로 할지 헷갈림 → 통증 완화 찜질 방법 명확히 제시",
-          "정형외과·내과 중 어디 가야할지 모름 → 통풍 호발부위별 진료과 선택 기준 정리"
-        ],
-        "actionTitles": [
-          "통풍 발작 통증 부위·위치부터 찜질 완화 방법까지 정리"
-        ]
-      },
-      "at": "2026-10-21T05:42:05.043Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "통풍 통증 지속 ㅠㅠ",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=7010108&docId=494674434&answerNo=2&qb=7Ya17ZKNIO2GteymnSDqsJHsnpDquLAg7LC+7JWE7JmU64uk66m0IOqyve2XmOuLtA==",
-          "views": 878,
-          "answers": 7,
-          "askedAt": "2026.08.10"
-        },
-        {
-          "title": "통풍 초기 증상 있을 때 약먹으면 금방 나을....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=7010108&docId=494968603&answerNo=9&qb=7Ya17ZKNIO2GteymnSDqsJHsnpDquLAg7LC+7JWE7JmU64uk66m0IOqyve2XmOuLtA==",
-          "views": 648,
-          "answers": 9,
-          "askedAt": "2026.10.01"
-        },
-        {
-          "title": "통풍증상 질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=7010108&docId=494436884&answerNo=1&qb=7Ya17ZKNIO2GteymnSDqsJHsnpDquLAg7LC+7JWE7JmU64uk66m0IOqyve2XmOuLtA==",
-          "views": 422,
-          "answers": 5,
-          "askedAt": "2026.07.24"
-        }
-      ]
-    },
-    {
-      "id": "2052d5cf9595be2d",
-      "urls": [
-        "https://aicopkr.tistory.com/99",
-        "https://aicopkr.tistory.com/98",
-        "https://aicopkr.tistory.com/97",
-        "https://aicopkr.tistory.com/96",
-        "https://aicopkr.tistory.com/95",
-        "https://aicopkr.tistory.com/93"
-      ],
-      "guide": {
-        "direction": "생활스포츠지도사 시험일정 검색자는 전체 일정표보다 필기 합격 후 실기·구술 응시 가능한 정확한 기한(지식인은 '일정 기간'으로만 답)과 종목별(유도 등) 응시자격 차이를 더 궁금해한다. '합격 로드맵'류 고수 글은 응시자격·필기실기 과목은 다루지만 이 유효기간을 수치로 못 박지 못한다. 이 글은 2026 일정표와 필기합격 유효기간, 종목별 응시자격 차이표로 검색자가 자신의 종목·나이에 맞는 응시 가능 여부를 바로 판단하게 한다.",
-        "searchTargets": [
-          "생활스포츠지도사 시험일정"
-        ],
-        "mustInclude": [
-          "2026 생활스포츠지도사 2급 필기·실기·구술 시험 일정표(확인 필요: 국민체육진흥공단 공식)",
-          "필기 합격 후 실기·구술 응시 가능한 정확한 유효기간(지식인은 '일정 기간'으로만 언급, 확인 필요: 공식 공고문)",
-          "종목별(보디빌딩, 유도 등) 응시자격 차이표",
-          "응시 가능 최소 연령 조건(확인 필요: 공식 요강)"
-        ],
-        "mustAvoid": [
-          "군복무 관련 혜택 여부를 확인 안 된 채 단정하지 말 것(지식인 질문만 있고 명확한 답 없음)",
-          "종목별 응시자격을 '모든 종목 동일'처럼 뭉뚱그려 쓰지 말 것",
-          "2026년 일정을 이전 연도 일정과 혼동해서 쓰지 말 것"
-        ],
-        "checkBefore": [
-          "2026년 정확한 시험일정 - 국민체육진흥공단 공식 공고",
-          "필기합격 유효기간 정확한 일수·년수 - 공식 시행계획 공고문",
-          "유도 등 특정 종목 응시자격 - 공식 요강"
-        ],
-        "solves": [
-          "필기합격 후 실기·구술 응시 가능 기간이 정확히 얼마인지 몰라 헷갈림 → 공식 공고 기준 유효기간 명시",
-          "종목(유도 등)별 응시자격이 다른지 몰라 헷갈림 → 종목별 응시자격 비교표 제공",
-          "나이 제한이 있는지 몰라 응시 가능 여부 판단 못함 → 연령 조건 정리"
-        ],
-        "actionTitles": [
-          "생활스포츠지도사 필기합격 후 실기 응시기간 확인하는 법"
-        ]
-      },
-      "at": "2026-10-21T05:42:05.043Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "생활스포츠 지도사 자격증 따보신 분들 ㅜㅠ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=50803&docId=492511488&answerNo=8&qb=7IOd7Zmc7Iqk7Y+s7Lig7KeA64+E7IKsIOyLnO2XmOydvOyglSDsnZHsi5zsnpDqsqkg7ZWE6riw7Iuk6riwIO2VqeqyqQ==",
-          "views": 3926,
-          "answers": 8,
-          "askedAt": "2026.06.16"
-        },
-        {
-          "title": "생활스포츠지도사 2급 필기",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1006&docId=489937449&answerNo=3&qb=7IOd7Zmc7Iqk7Y+s7Lig7KeA64+E7IKsIOyLnO2XmOydvOyglSDsnZHsi5zsnpDqsqkg7ZWE6riw7Iuk6riwIO2VqeqyqQ==",
-          "views": 954,
-          "answers": 4,
-          "askedAt": "2026.03.09"
-        },
-        {
-          "title": "생활스포츠지도사 자격증 군대",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110412&docId=491835969&answerNo=1&qb=7IOd7Zmc7Iqk7Y+s7Lig7KeA64+E7IKsIOyLnO2XmOydvOyglSDsnZHsi5zsnpDqsqkg7ZWE6riw7Iuk6riwIO2VqeqyqQ==",
-          "views": 405,
-          "answers": 3,
-          "askedAt": "2026.02.08"
         }
       ]
     },
