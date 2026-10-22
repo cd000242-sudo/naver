@@ -22,6 +22,7 @@ import { describeFullAutoImageStage } from '../../image/fullAuto/fullAutoImageSl
 import { describeFullAutoImageReview } from '../../image/fullAuto/fullAutoPublishDecision.js';
 import { recheckFullAutoDecisionBeforePublish, runFullAutoImages } from '../../image/fullAuto/fullAutoImageRunner.js';
 import { describeFullAutoQueueItem } from '../../image/fullAuto/fullAutoQueueStatus.js';
+import { mergeCustomPrompt } from '../../contentRequestSections.js';
 // ✅ [v2.10.288] subImageMode import 제거 — line 10-12에 명시된 패턴 적용.
 //   렌더러 빌드 스크립트가 require()를 정규식 삭제 → subImageMode_1 is not defined 회귀 차단.
 type SubImageMode = 'ai' | 'collected';
@@ -3059,12 +3060,16 @@ function addItemToQueueV2Impl(): void {
       //   우선순위: 1) 연속발행 모달 전용, 2) 통합 #custom-prompt-input (작업 12), 3) 메인 #unified-custom-prompt
       //   custom 모드일 때만 비어있으면 alert (필수 검증)
       customPrompt: (() => {
+        // [2026-10-22] 화면의 "추가 요청사항"을 큐 저장 때 항목에 합쳐 둔다 — 예전엔 첫 글에만 실리고
+        //   첫 생성 뒤 입력칸이 비워져 나머지 항목엔 빠졌다.
+        const extraRequest = (document.getElementById('unified-extra-request') as HTMLTextAreaElement | null)?.value?.trim();
         const modalPrompt = (document.getElementById('continuous-modal-custom-prompt') as HTMLTextAreaElement | null)?.value?.trim();
-        if (modalPrompt) return modalPrompt;
+        if (modalPrompt) return mergeCustomPrompt(modalPrompt, extraRequest);
         const unifiedPrompt = (document.getElementById('custom-prompt-input') as HTMLTextAreaElement | null)?.value?.trim();
-        if (unifiedPrompt) return unifiedPrompt;
+        if (unifiedPrompt) return mergeCustomPrompt(unifiedPrompt, extraRequest);
         const mainPrompt = (document.getElementById('unified-custom-prompt') as HTMLTextAreaElement | null)?.value?.trim();
-        if (mainPrompt) return mainPrompt;
+        if (mainPrompt) return mergeCustomPrompt(mainPrompt, extraRequest);
+        if (extraRequest && contentMode !== 'custom') return extraRequest;
         if (contentMode === 'custom') {
           alert('✏️ 사용자 정의 모드 필수:\n\n개인 프롬프트를 입력해주세요.');
           throw new Error('customPrompt 누락 — custom 모드 선택 시 필수');

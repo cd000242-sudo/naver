@@ -14,6 +14,7 @@ import { normalizeHashtags } from '../utils/hashtagUtils.js';
 import { applyPendingArticleTablesToGeneratedContent } from './articleTableComposer.js';
 import { buildRendererContentPolicyContext } from '../utils/contentPolicyContext.js';
 import { resolveTextModelProfile, isAgentTextProvider } from '../../runtime/modelRegistry.js';
+import { mergeCustomPrompt } from '../../contentRequestSections.js';
 import type { FillSemiAutoFieldsOptions } from '../types/index.js';
 import { resolveArticleTypeHint } from '../../shared/categoryTaxonomy.js';
 import { decideKeywordPrefix } from '../../content/keywordTitlePrefixPolicy.js';
@@ -246,7 +247,12 @@ export function readSummaryTableOptionFromUi(): boolean {
 
 function readCustomPromptFromUi(): string | undefined {
   const unified = (document.getElementById('custom-prompt-input') as HTMLTextAreaElement | null)?.value?.trim();
-  if (unified) return unified;
+  /*
+   * [2026-10-22] 개인 프롬프트가 있으면 요청사항을 버리던 결함 — 이제 둘 다 싣는다(개인 프롬프트 · 항목 값이 앞).
+   * 연속발행 항목 값엔 큐 저장 때 요청사항이 이미 합쳐져 있어 mergeCustomPrompt 가 두 번 붙이지 않는다.
+   */
+  const extraRequest = (document.getElementById('unified-extra-request') as HTMLTextAreaElement | null)?.value?.trim();
+  if (unified) return mergeCustomPrompt(unified, extraRequest) || undefined;
   /*
    * [2026-09-12] 단일 생성 화면의 "추가 요청사항". 배선은 이미 있었는데 입력창이 없었다 —
    * 연속발행 모달에만 있었고, 통합 화면의 입력창은 사용자정의 모드에서만 보였다.
@@ -254,8 +260,7 @@ function readCustomPromptFromUi(): string | undefined {
    * 순서: 항목별(연속발행이 hidden 으로 실어 둔 값) → 이 화면의 요청사항 → 구버전 폴백.
    * 연속발행 중에는 위 hidden 이 항목 값을 들고 있으므로 큐가 지정한 것이 그대로 이긴다.
    */
-  const extra = (document.getElementById('unified-extra-request') as HTMLTextAreaElement | null)?.value?.trim();
-  if (extra) return extra;
+  if (extraRequest) return extraRequest;
   const legacy = (document.getElementById('unified-custom-prompt') as HTMLTextAreaElement | null)?.value?.trim();
   return legacy || undefined;
 }

@@ -10,6 +10,7 @@ else installAccountSafetyControls();
 
 import { applyPendingArticleTablesToGeneratedContent } from './articleTableComposer.js';
 import { readSummaryTableOptionFromUi } from './contentGeneration.js';
+import { mergeCustomPrompt } from '../../contentRequestSections.js';
 import { buildRendererContentPolicyContext } from '../utils/contentPolicyContext.js';
 import {
     createShoppingAiBatchPlan,
@@ -1999,15 +2000,19 @@ async function initMultiAccountPublishModal() {
         // Legacy name-only settings still publish to that name, but cannot assert a category ID.
         const contentMode = (document.getElementById('ma-setting-content-mode')?.value || 'seo');
         const customPrompt = (() => {
+            // [2026-10-22] 화면의 "추가 요청사항"도 큐 항목에 합쳐 둔다 — 예전엔 다중계정 발행에 아예 안 실렸다.
+            const extraRequest = document.getElementById('unified-extra-request')?.value?.trim();
             const modalPrompt = document.getElementById('ma-setting-custom-prompt')?.value?.trim();
             if (modalPrompt)
-                return modalPrompt;
+                return mergeCustomPrompt(modalPrompt, extraRequest);
             const unifiedPrompt = document.getElementById('custom-prompt-input')?.value?.trim();
             if (unifiedPrompt)
-                return unifiedPrompt;
+                return mergeCustomPrompt(unifiedPrompt, extraRequest);
             const mainPrompt = document.getElementById('unified-custom-prompt')?.value?.trim();
             if (mainPrompt)
-                return mainPrompt;
+                return mergeCustomPrompt(mainPrompt, extraRequest);
+            if (extraRequest && contentMode !== 'custom')
+                return extraRequest;
             if (contentMode === 'custom') {
                 alert('✏️ 사용자 정의 모드 필수:\n\n개인 프롬프트를 입력해주세요.');
                 throw new Error('customPrompt 누락 — custom 모드 선택 시 필수');

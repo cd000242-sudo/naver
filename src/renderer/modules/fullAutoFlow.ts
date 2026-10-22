@@ -27,6 +27,7 @@ import {
 import { reconcileOpenaiImageModelSelection } from '../../image/openaiImageModelReconcile.js';
 import { noteAccountPauseDispatch, showAccountPauseModal } from './accountPauseModal.js';
 import { gsPrefetchMatchImages } from '../../image/fullAuto/gensparkBodyPrefetch.js';
+import { mergeCustomPrompt } from '../../contentRequestSections.js';
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.emitLog = emitLog;
 exports.resolveImageManagerKeys = resolveImageManagerKeys;
@@ -2517,8 +2518,9 @@ async function generateFullAutoContent(formData) {
             draftText,
             targetAge: formData.targetAge,
             minChars: formData.minChars || 2500,
-            customPrompt: (document.getElementById('custom-prompt-input')?.value?.trim()
-                || document.getElementById('unified-custom-prompt')?.value?.trim()) || undefined,
+            // [2026-10-22] 화면의 "추가 요청사항"도 싣는다 — 이 폴백 경로는 개인 프롬프트만 읽어 요청이 빠졌다.
+            customPrompt: mergeCustomPrompt(document.getElementById('custom-prompt-input')?.value?.trim()
+                || document.getElementById('unified-custom-prompt')?.value?.trim(), document.getElementById('unified-extra-request')?.value?.trim()) || undefined,
             categoryHint: formData.category || formData.categoryName || formData.categoryHint,
             contentMode: formData.contentMode || 'seo',
             articleType: formData.articleType,
