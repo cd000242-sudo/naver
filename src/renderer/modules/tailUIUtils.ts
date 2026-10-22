@@ -668,8 +668,26 @@ export function initContentModeHelpAndSmartPublish() {
     content.style.display = isActive ? 'block' : 'none';
   }
 
+  placeExtraRequestBlock(tab);
   console.log('[TabSwitch] Switched to:', tab);
 };
+
+/*
+ * [2026-10-22] "추가 요청사항" 칸은 키워드 탭 안에만 있어 기본 탭(URL)에선 보이지 않았다.
+ * 칸은 하나(id 중복 금지)라 열린 탭으로 옮겨 단다 — URL 탭은 [URL로 AI 글 생성하기] 바로 위, 키워드 탭은 원래 자리.
+ */
+function placeExtraRequestBlock(tab: string): void {
+  const block = document.getElementById('extra-request-block');
+  const anchor = tab === 'url' ? document.getElementById('generate-from-url-btn') : document.getElementById('extra-request-home');
+  if (!block || !anchor?.parentNode || block.nextElementSibling === anchor) return;
+  anchor.parentNode.insertBefore(block, anchor);
+}
+const placeExtraRequestForVisibleTab = () => {
+  const urlVisible = document.getElementById('tab-content-url')?.style.display !== 'none';
+  placeExtraRequestBlock(urlVisible ? 'url' : 'keyword');
+};
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', placeExtraRequestForVisibleTab);
+else placeExtraRequestForVisibleTab();
 
 // 이전 번들과 인라인 호출을 위한 호환 함수. 글 보관함은 항상 펼칩니다.
 (window as any).togglePostsListSection = function (): void {

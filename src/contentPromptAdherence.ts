@@ -1,3 +1,5 @@
+import { parseRequestSections, positiveRequestText, type RequestSections } from './contentRequestSections.js';
+
 export type PromptAdherenceReport = {
   checked: boolean;
   passed: boolean;
@@ -281,12 +283,82 @@ function detectMissingPromptFeatures(prompt: string, generatedText: string): str
 }
 
 
-function buildPromptAdherenceRetryInstruction(report: Omit<PromptAdherenceReport, 'retryInstruction'>): string {
+/*
+ * [2026-10-22] 구간형 요청("반드시 들어갈 내용" · "넣지 않을 내용" · "노릴 검색어")은 항목 단위로 잰다.
+ * 줄 단위 검사는 머리말 낱말을 검사어로 잡고 항목은 놓쳐, 일본판을 섞고 부승권을 뺀 글을 통과시켰다.
+ *   · 반드시 들어갈 항목: 요청 안에서 두 번 이상 나온 낱말(사람 · 작품 이름 같은 축)이 빠지면 누락,
+ *     축이 다 있어도 항목 낱말의 절반 미만이면 누락.
+ *   · 넣지 않을 항목: 괄호 · 따옴표 안의 구체어(없으면 항목 낱말)에서, 지켜야 할 쪽에도 나오는 낱말을 뺀 것.
+ *   · 노릴 검색어: 표현 그대로(띄어쓰기 무시) 있어야 한다.
+ */
+const SECTION_GENERIC_TERMS = new Set([
+  '의미', '요약', '정리', '여부', '맥락', '구체적', '관계', '내용', '이야기', '전개', '확인', '실제', '사실',
+  '과거', '다른', '혼동', '동명', '관련', '각도', '독자', '설명', '소개', '경우', '방법', '이유', '부분',
+]);
+
+function sectionTokens(text: string): string[] {
+  return extractPromptTokens(text).filter((t) => !SECTION_GENERIC_TERMS.has(t));
+}
+
+function specificAvoidTerms(item: string): string[] {
+  const inner = [...item.matchAll(/\(([^)]*)\)|["'“”‘’「」『』]([^"'“”‘’「」『』]+)["'“”‘’「」『』]/g)].map((m) => m[1] || m[2] || '');
+  const tokens = inner.flatMap((part) => sectionTokens(part));
+  return tokens.length > 0 ? tokens : sectionTokens(item);
+}
+
+type SectionedAssessment = Pick<PromptAdherenceReport, 'requiredTerms' | 'missingTerms' | 'forbiddenTerms' | 'foundForbiddenTerms' | 'missingFeatures'> & {
+  missingItems: string[];
+  itemCoverage: number;
+};
+
+function assessSectionedRequest(s: RequestSections, generatedText: string, generatedProbe: string): SectionedAssessment {
+  const counts = new Map<string, number>();
+  for (const line of [...s.direction, ...s.targets, ...s.mustInclude, ...s.mustAvoid, ...s.verify]) {
+    for (const token of new Set(sectionTokens(line).map(normalizePromptProbe))) counts.set(token, (counts.get(token) || 0) + 1);
+  }
+  const missingItems: string[] = [];
+  const anchors = new Set<string>();
+  const missingAnchors = new Set<string>();
+  for (const item of s.mustInclude) {
+    const tokens = uniquePromptTerms(sectionTokens(item), 20);
+    if (tokens.length === 0) continue;
+    const itemAnchors = tokens.filter((t) => (counts.get(normalizePromptProbe(t)) || 0) >= 2);
+    itemAnchors.forEach((t) => anchors.add(t));
+    const present = tokens.filter((t) => hasPromptTerm(generatedProbe, t));
+    const absentAnchors = itemAnchors.filter((t) => !present.includes(t));
+    if (absentAnchors.length > 0 || present.length / tokens.length < 0.5) {
+      missingItems.push(item);
+      absentAnchors.forEach((t) => missingAnchors.add(t));
+    }
+  }
+  const missingTargets = s.targets.filter((t) => !generatedProbe.includes(normalizePromptProbe(t)));
+  const positiveProbe = new Set(sectionTokens(positiveRequestText(s)).map(normalizePromptProbe));
+  const forbiddenTerms = uniquePromptTerms(
+    s.mustAvoid.flatMap(specificAvoidTerms).filter((t) => !positiveProbe.has(normalizePromptProbe(t))),
+    12,
+  );
+  return {
+    requiredTerms: [...s.targets, ...anchors],
+    missingTerms: [...missingTargets, ...missingAnchors],
+    forbiddenTerms,
+    foundForbiddenTerms: forbiddenTerms.filter((t) => hasPromptTerm(generatedProbe, t)),
+    // 구조 요구(표 · FAQ …)는 지켜야 할 쪽 글에서만 읽는다 — "비교표로 정리하지 말 것" 이 표 요구가 되지 않게.
+    missingFeatures: detectMissingPromptFeatures(positiveRequestText(s), generatedText),
+    missingItems,
+    itemCoverage: s.mustInclude.length === 0 ? 1 : (s.mustInclude.length - missingItems.length) / s.mustInclude.length,
+  };
+}
+
+function buildPromptAdherenceRetryInstruction(report: Omit<PromptAdherenceReport, 'retryInstruction'>, missingItems: string[] = []): string {
   const lines = [
     '[PROMPT_ADHERENCE_REPAIR]',
     '- 이전 응답은 사용자 프롬프트를 충분히 반영하지 못했습니다.',
     '- 전체 글을 다시 쓰되, 아래 누락/위반 항목을 반드시 수정하세요.',
   ];
+  if (missingItems.length > 0) {
+    lines.push('- 빠진 "반드시 들어갈 내용" — 항목마다 소제목이나 문단으로 다루세요:');
+    missingItems.forEach((item) => lines.push(`  · ${item}`));
+  }
   if (report.missingTerms.length > 0) {
     lines.push(`- 반드시 반영할 핵심어/주제: ${report.missingTerms.slice(0, 10).join(', ')}`);
   }
@@ -298,6 +370,19 @@ function buildPromptAdherenceRetryInstruction(report: Omit<PromptAdherenceReport
   }
   lines.push('- 출력은 순수 JSON 하나만 반환하세요. 설명/마크다운/사과문은 금지입니다.');
   return `\n${lines.join('\n')}\n`;
+}
+
+function assessSectionedReport(a: SectionedAssessment): PromptAdherenceReport {
+  const issues: string[] = [];
+  if (a.missingItems.length > 0) issues.push(`반드시 들어갈 내용 누락 ${a.missingItems.length}건`);
+  if (a.missingTerms.length > 0) issues.push(`요청 핵심어 누락: ${a.missingTerms.slice(0, 5).join(', ')}`);
+  if (a.foundForbiddenTerms.length > 0) issues.push(`사용자 금지 요소 포함: ${a.foundForbiddenTerms.slice(0, 5).join(', ')}`);
+  if (a.missingFeatures.length > 0) issues.push(`요청 구조 누락: ${a.missingFeatures.join(', ')}`);
+  const passed = issues.length === 0;
+  const { missingItems, itemCoverage, ...terms } = a;
+  const score = Math.max(0, Math.round(itemCoverage * 100 - a.missingFeatures.length * 15 - a.foundForbiddenTerms.length * 20 - (a.missingTerms.length > 0 ? 10 : 0)));
+  const reportBase = { checked: true, passed, score, ...terms, issues };
+  return { ...reportBase, retryInstruction: passed ? '' : buildPromptAdherenceRetryInstruction(reportBase, missingItems) };
 }
 
 export function assessCustomPromptAdherence(
@@ -322,6 +407,8 @@ export function assessCustomPromptAdherence(
 
   const generatedText = generatedTextForPromptAdherence(content);
   const generatedProbe = normalizePromptProbe(generatedText);
+  const sections = parseRequestSections(customPrompt);
+  if (sections) return assessSectionedReport(assessSectionedRequest(sections, generatedText, generatedProbe));
   const requiredTerms = extractRequiredPromptTerms(customPrompt);
   const forbiddenTerms = extractForbiddenPromptTerms(customPrompt);
   const missingTerms = requiredTerms.filter((term) => !hasPromptTerm(generatedProbe, term));
