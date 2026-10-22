@@ -380,6 +380,11 @@ try {
       filePath: path.join(projectRoot, 'dist', 'content', 'keywordTitlePrefixPolicy.js'),
     },
     {
+      // [2026-10-22] 요청사항 합치기(mergeCustomPrompt) — contentGeneration · 연속발행 · 다중계정 · 풀오토가 값으로 가져온다.
+      label: 'contentRequestSections.js',
+      filePath: path.join(projectRoot, 'dist', 'contentRequestSections.js'),
+    },
+    {
       label: 'automation/publishFailureClassifier.js',
       filePath: path.join(projectRoot, 'dist', 'automation', 'publishFailureClassifier.js'),
     },
