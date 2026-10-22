@@ -7,6 +7,7 @@ import type { AdsenseCard } from '../../../lib/adsenseBenchmarkModel.mjs';
 import type { KeywordEnrich } from '../../../lib/keywordEnrich.mjs';
 import { DemandBlock } from '../adsense/AdsenseDemand';
 import BenchmarkPlaybook, { DemandStep, trackUrl } from '../shared/BenchmarkPlaybook';
+import BenchmarkSources from './BenchmarkSources';
 const monthDay=(day:string)=>{const m=/^\d{4}-(\d{2})-(\d{2})$/.exec(day||'');return m?`${Number(m[1])}/${Number(m[2])}`:day;};
 const LABELS = {'review-now':'지금 검토',verify:'추가 확인',stale:'시점 재검토'};
 function TitleRow({label,text,editor=false}:{label:string;text:string;editor?:boolean}) {
@@ -82,6 +83,7 @@ export default function HomefeedBenchmarkCard({candidate:c,evidence,enrich}:{can
   {c.relatedKeywords.length>0&&<p className="hfb-alternatives"><span>대안·연관 키워드</span> {c.relatedKeywords.join(' · ')}</p>}
   <p className="hfb-summary">{c.summary||'원문을 확인한 뒤 사건 내용을 정리해 주세요.'}</p>
   {c.summaryAttribution&&<p className="hfb-attribution">{c.summaryAttribution}</p>}
+  <BenchmarkSources sources={c.sources} />
   {(proof||evidence?.mine)&&<div className="hfb-proof-box">{proof&&<p><b>실제 홈판 {proof.rank?`${proof.rank}위`:''} ({monthDay(proof.day)})</b> {proof.url?<a href={proof.url} target="_blank" rel="noopener noreferrer">{proof.title} ↗</a>:proof.title}</p>}{evidence?.mine&&<p><b>내 글 홈판 유입 {evidence.mine.count.toLocaleString('ko-KR')}회 ({monthDay(evidence.mine.day)})</b> {evidence.mine.title}</p>}<small>어드바이저 실측과 맞댄 결과입니다. 같은 소재라도 이번 글의 홈판 노출을 보장하지는 않습니다.</small></div>}
   {c.why.length>0&&<div className="hfb-why"><span>검토 이유</span><ul>{c.why.map((reason,i)=><li key={i}>{reason}</li>)}</ul></div>}
   <TitleList titles={c.homeTitles} editorTitle={c.homeTitle} c={c}/>
@@ -90,11 +92,9 @@ export default function HomefeedBenchmarkCard({candidate:c,evidence,enrich}:{can
   {(c.mustInclude.length>0||c.mustAvoid.length>0)&&<div className="hfb-writing-grid">{c.mustInclude.length>0&&<Points title="반드시 들어갈 내용" items={c.mustInclude} kind="include"/>}{c.mustAvoid.length>0&&<Points title="넣지 않을 내용" items={c.mustAvoid} kind="avoid"/>}</div>}
   {c.verificationNeeded.length>0&&<div className="hfb-verify"><b>작성 전 확인</b> {c.verificationNeeded.join(' · ')}</div>}
   <BenchmarkPlaybook steps={steps}/>
-  <details className="hfb-reference"><summary>이미지·캡처 안내와 출처 <span>{c.sources.length}곳</span></summary>
+  <details className="hfb-reference"><summary>이미지 캡처 안내 · 공식 자료</summary>
    <div className="hfb-image-guide"><h4>이미지 레퍼런스</h4><p>{c.imageGuide.instruction||'원출처의 이미지 재사용 조건을 확인하고 직접 촬영·제작한 이미지를 준비해 주세요.'}</p>{c.imageGuide.url&&<a href={c.imageGuide.url} target="_blank" rel="noopener noreferrer">캡처할 원문 열기 ↗</a>}</div>
-   <ul className="hfb-source-list">{c.sources.map((s,i)=><li key={`${s.id}-${i}`}><div>{s.url?<a href={s.url} target="_blank" rel="noopener noreferrer">{s.title||s.name} ↗</a>:<b>{s.title||s.name}</b>}<small>{s.name} · 발행 {benchmarkTime(s.publishedAt)}{s.discoveryOnly?' · 소재 발견 출처':''}</small></div><div className="hfb-reactions">{s.metrics.views!==null&&<span>조회 {metricText(s.metrics.views)}</span>}{s.metrics.likes!==null&&<span>공감 {metricText(s.metrics.likes)}</span>}{s.growth?.likes&&s.growth.likes.change>0&&<span className="hfb-growth">공감 +{s.growth.likes.change.toLocaleString('ko-KR')} ({s.growth.likes.elapsedMinutes}분 사이)</span>}{s.metrics.comments!==null&&<span>댓글 {metricText(s.metrics.comments)}</span>}{Object.values(s.metrics).every(n=>n===null)&&<span>반응 미측정</span>}</div></li>)}</ul>
    {c.officialSources.length>0&&<div className="hfb-image-guide"><h4>공식 자료</h4><ul className="hfb-source-list">{c.officialSources.map((s,i)=><li key={`${s.url}-${i}`}><a href={s.url} target="_blank" rel="noopener noreferrer">{s.title||s.url} ↗</a></li>)}</ul></div>}
-   <p className="hfb-caption">반응 수는 관측 시점의 값입니다. 증가 추세는 여러 시점의 비교가 필요합니다.</p>
   </details>
   <footer className="hfb-card-footer"><span>원글 발행 {benchmarkTime(c.publishedAt)}</span><span>사건 시점 {benchmarkTime(c.eventAt)}</span><span>수집 {benchmarkTime(c.capturedAt)} KST</span><span>홈판 노출 {c.homefeedExposure==='confirmed'?'확인 기록 있음':'미확인'}</span></footer>
  </article>;
