@@ -83,7 +83,8 @@ export function buildRequestChecklistBlock(prompt: string | undefined): string {
     s.mustAvoid.forEach((item) => lines.push(`  · ${item}`));
   }
   if (s.verify.length) {
-    lines.push('- 작성 전 확인 — 아래가 [원본 텍스트]로 확인되지 않으면 단정하지 말고 "확인되지 않았다"고 쓰거나 뺀다:');
+    // "확인되지 않았다" 같은 근거 메타 문구는 뒤의 근거 계약이 금지한다(2026-10-22 실주행) — 확인된 범위만 쓰거나 뺀다.
+    lines.push('- 작성 전 확인 — 아래가 [원본 텍스트]로 확인되지 않으면 그 대목은 단정하지 말고 빼거나, 자료에 있는 범위까지만 쓴다:');
     s.verify.forEach((item) => lines.push(`  · ${item}`));
   }
   return lines.join('\n');

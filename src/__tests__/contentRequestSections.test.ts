@@ -71,6 +71,8 @@ describe('buildRequestChecklistBlock', () => {
     expect(block).toContain('부승권 계약 해지 이야기와 장승조 사건의 연결 여부 정리');
     expect(block).toContain("동명의 다른 '닥터X' 시리즈(과거 일본판 등)와 혼동");
     expect(block).toContain('부승권 계약 해지 설정이 실제 대본상 사실인지 원문 기사 재확인');
+    // 뒤의 근거 계약이 "확인되지 않았습니다" 류 메타 문구를 금지한다 — 점검표가 그 문구를 시키면 안 된다(실주행에서 발견).
+    expect(block).not.toMatch(/확인되지 않았/);
   });
 
   it('구간이 없는 요청엔 점검표를 만들지 않는다', () => {
