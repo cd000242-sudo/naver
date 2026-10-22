@@ -65,6 +65,17 @@ function basePost(source, capturedAt, data) {
   return { sourceId: source.id, platform: source.platform, name: plainText(source.name || source.id, 70), eventAt: null, capturedAt, metrics: { views: null, likes: null, comments: null }, ...data };
 }
 
+/** 원문 썸네일(2026-10-22) — 네이버 이미지 서버 · 유튜브 https 만. homefeedBenchmarkModel.mjs · 앱 레포 수집기와 같은 규칙. */
+const IMAGE_HOST = /^https:\/\/([a-z0-9-]+\.)*(pstatic\.net|ytimg\.com)\//i;
+function safeBenchmarkImage(value) {
+  const url = typeof value === 'string' ? value.trim() : '';
+  return IMAGE_HOST.test(url) && url.length <= 600 ? url : null;
+}
+/** 본문의 첫 이미지. */
+function firstImage(html) {
+  const m = /<img[^>]+src=["']([^"']+)["']/i.exec(String(html || ''));
+  return m ? safeBenchmarkImage(m[1].replace(/&amp;/g, '&')) : null;
+}
 export function parseRss(xml, source, capturedAt) {
   const text = String(xml || '');
   const head = text.split(/<item[\s>]/i)[0];
@@ -72,7 +83,8 @@ export function parseRss(xml, source, capturedAt) {
   const posts = (text.match(/<item[\s>][\s\S]*?<\/item>/gi) || []).slice(0, 20).map((item) => {
     const url = safeLink(child(item, 'link'));
     if (!url || !['blog.naver.com', 'm.blog.naver.com'].includes(new URL(url).hostname)) return null;
-    return basePost({ ...source, name }, capturedAt, { title: plainText(child(item, 'title'), 160), url, publishedAt: validDate(child(item, 'pubDate'), capturedAt), summary: plainText(child(item, 'description'), 300) });
+    const image = firstImage(child(item, 'description'));
+    return basePost({ ...source, name }, capturedAt, { title: plainText(child(item, 'title'), 160), url, publishedAt: validDate(child(item, 'pubDate'), capturedAt), summary: plainText(child(item, 'description'), 300), ...(image ? { image } : {}) });
   }).filter((p) => p?.title);
   return { name, posts };
 }
@@ -83,7 +95,7 @@ export function parseYoutube(xml, source, capturedAt) {
   const posts = (text.match(/<entry[\s>][\s\S]*?<\/entry>/gi) || []).slice(0, 15).map((entry) => {
     const url = safeLink(attr(entry, 'link', 'href'));
     if (!url) return null;
-    return basePost({ ...source, name }, capturedAt, { title: plainText(child(entry, 'title'), 160), url, publishedAt: validDate(child(entry, 'published'), capturedAt), summary: plainText(child(entry, 'media:description'), 300), metrics: { views: count(attr(entry, 'media:statistics', 'views')), likes: null, comments: null } });
+    return basePost({ ...source, name }, capturedAt, { title: plainText(child(entry, 'title'), 160), url, publishedAt: validDate(child(entry, 'published'), capturedAt), summary: plainText(child(entry, 'media:description'), 300), ...(safeBenchmarkImage(attr(entry, 'media:thumbnail', 'url')) ? { image: safeBenchmarkImage(attr(entry, 'media:thumbnail', 'url')) } : {}), metrics: { views: count(attr(entry, 'media:statistics', 'views')), likes: null, comments: null } });
   }).filter((p) => p?.title);
   return { name, posts };
 }
@@ -282,7 +294,7 @@ export function buildLiveCandidates(posts, now, growthByUrl = new Map()) {
       verificationNeeded: [...(flags.includes('sensitive-claim') ? ['당사자·공식 자료 확인 전 인물 관련 의혹 제외'] : []), ...(flags.includes('sponsored') ? ['상업적 관계와 홍보성 주장 확인'] : [])],
       imageGuide: { url: lead.url, instruction: `${lead.name} 원문에서 이미지의 원출처를 먼저 확인하세요. 원본 게시물의 제목·게시일·관련 장면을 확인한 뒤 사용 조건에 맞게 캡처하고 출처를 남기세요. 벤치마크 사진 자체의 재사용 허용 여부는 미확인입니다.` },
       metrics: { searchVolume: null, documentCount: null, rankingPossibility: 'unmeasured', reactionGrowth: growth }, homefeedExposure: 'unverified',
-      sources: sorted.slice(0, 5).map((p) => ({ id: p.sourceId, platform: p.platform, name: p.name, title: p.title, url: p.url, publishedAt: p.publishedAt, summary: plainText(p.summary, 140), metrics: p.metrics, ...(p.reactionCount != null ? { reactionCount: p.reactionCount, reactionLabel: p.reactionLabel } : {}), ...(p.metricNote ? { metricNote: p.metricNote } : {}), ...(growthOf.get(p.url) ? { growth: growthOf.get(p.url) } : {}), discoveryOnly: true })),
+      sources: sorted.slice(0, 5).map((p) => ({ id: p.sourceId, platform: p.platform, name: p.name, title: p.title, url: p.url, publishedAt: p.publishedAt, summary: plainText(p.summary, 140), metrics: p.metrics, ...(safeBenchmarkImage(p.image) ? { image: p.image } : {}), ...(p.reactionCount != null ? { reactionCount: p.reactionCount, reactionLabel: p.reactionLabel } : {}), ...(p.metricNote ? { metricNote: p.metricNote } : {}), ...(growthOf.get(p.url) ? { growth: growthOf.get(p.url) } : {}), discoveryOnly: true })),
       flags,
     };
   })

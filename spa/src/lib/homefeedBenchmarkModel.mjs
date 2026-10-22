@@ -3,13 +3,22 @@ const str = (v, max = 2400) => typeof v === 'string' ? v.trim().slice(0, max) : 
 const list = (v) => Array.isArray(v) ? v.slice(0, 30).map(x => str(x)).filter(Boolean) : [];
 const date = (v) => typeof v === 'string' && Number.isFinite(Date.parse(v)) ? new Date(v).toISOString() : null;
 const number = (v) => typeof v === 'number' && Number.isFinite(v) && v >= 0 ? v : null;
+/**
+ * 원문 썸네일(2026-10-22 사장님 "이미지도 같이 볼 수 있게") — 네이버 이미지 서버 · 유튜브 썸네일의 https 주소만.
+ * 앱 레포 homefeed-benchmarks-core.cjs 의 IMAGE_HOST 와 같은 규칙(쌍둥이). 화면은 리퍼러 없이 불러온다(네이버는 다른 사이트 리퍼러면 403).
+ */
+const IMAGE_HOST = /^https:\/\/([a-z0-9-]+\.)*(pstatic\.net|ytimg\.com)\//i;
+export function safeBenchmarkImage(value) {
+ const url = typeof value === 'string' ? value.trim() : '';
+ return IMAGE_HOST.test(url) && url.length <= 600 ? url : null;
+}
 export function safeBenchmarkUrl(value) {
  try { const u = new URL(value); return ['https:', 'http:'].includes(u.protocol) && !u.username && !u.password ? u.href : null; } catch { return null; }
 }
 export function metricText(value) { const n = number(value); return n === null ? '미측정' : n.toLocaleString('ko-KR'); }
 export function benchmarkTime(value) { const d = date(value); return d ? new Intl.DateTimeFormat('ko-KR', { timeZone:'Asia/Seoul', month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit', hour12:false }).format(new Date(d)) : '미확인'; }
 function source(raw = {}) {
- return { id:str(raw.id,120), name:str(raw.name,160) || str(raw.id,120) || '출처', platform:str(raw.platform,40), url:safeBenchmarkUrl(raw.url), status:['ok','unavailable','failed'].includes(raw.status) ? raw.status : 'unavailable', reason:str(raw.reason), postCount:number(raw.postCount) ?? 0, capturedAt:date(raw.capturedAt), publishedAt:date(raw.publishedAt), title:str(raw.title), summary:str(raw.summary), discoveryOnly:raw.discoveryOnly !== false, metrics:{views:number(raw.metrics?.views), likes:number(raw.metrics?.likes), comments:number(raw.metrics?.comments)}, growth:growthOf(raw.growth) };
+ return { id:str(raw.id,120), name:str(raw.name,160) || str(raw.id,120) || '출처', platform:str(raw.platform,40), url:safeBenchmarkUrl(raw.url), status:['ok','unavailable','failed'].includes(raw.status) ? raw.status : 'unavailable', reason:str(raw.reason), postCount:number(raw.postCount) ?? 0, capturedAt:date(raw.capturedAt), publishedAt:date(raw.publishedAt), title:str(raw.title), summary:str(raw.summary), discoveryOnly:raw.discoveryOnly !== false, metrics:{views:number(raw.metrics?.views), likes:number(raw.metrics?.likes), comments:number(raw.metrics?.comments)}, growth:growthOf(raw.growth), image:safeBenchmarkImage(raw.image) };
 }
 /** 이전 수집 대비 반응 증가(CI 판이 잰 값, 2026-10-01). 모양이 맞는 칸만 옮긴다. */
 function growthOf(raw) {
