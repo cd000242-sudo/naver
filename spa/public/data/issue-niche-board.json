@@ -1,17 +1,18 @@
 {
-  "publishedAt": "2026-10-22T09:07:21.602Z",
+  "publishedAt": "2026-10-22T21:23:11.571Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 227,
+    "candidates": 240,
     "niche": 0,
     "preemption": 15,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-10-22",
+    "day": "2026-10-23",
     "keywords": [
+      "인셉션 포토",
       "플렉스 글루",
       "엘리스그룹 주식"
     ]
@@ -140,8 +141,7 @@
           0,
           23
         ],
-        "label": "",
-        "recommendation": ""
+        "measuredAt": "2026-10-22T21:23:12.052Z"
       },
       "kinCount": 17,
       "kinTop": [],
@@ -308,7 +308,7 @@
         ],
         "label": "📉 단발성",
         "recommendation": "회피! 지난 며칠 폭발 후 급락 중. 글 써도 유입 없음",
-        "measuredAt": "2026-10-22T09:07:22.397Z"
+        "measuredAt": "2026-10-22T21:23:12.052Z"
       },
       "kinCount": 44,
       "kinTop": [],
@@ -496,7 +496,7 @@
         ],
         "label": "🚀 떡상",
         "recommendation": "지금 당장 작성! 3일 내 급증 포착 → 선점 시 상위 노출 확률 매우 높음",
-        "measuredAt": "2026-10-22T09:07:22.397Z"
+        "measuredAt": "2026-10-22T21:23:12.052Z"
       },
       "kinCount": 40,
       "kinTop": [
@@ -579,7 +579,7 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-22T08:58:53.151Z",
+      "measuredAt": "2026-10-22T21:22:03.803Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -595,7 +595,7 @@
       "verdict": "preemption",
       "preemptionKind": "no-demand",
       "serp": null,
-      "documentCount": 115,
+      "documentCount": 117,
       "documentCountMeasured": true,
       "searchVolume": 10,
       "searchVolumeLt10": true,
@@ -608,8 +608,8 @@
       "freshFrontalCount": 0,
       "reasons": [
         "검색량 10",
-        "문서수 115",
-        "선점 후보 — 경쟁 문서 115건, 수요 미검출"
+        "문서수 117",
+        "선점 후보 — 경쟁 문서 117건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -645,12 +645,65 @@
         {
           "title": "새로운 AI 에이전트 닷츠, 실제로 얼마나 효율적일까요?",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=1122&docId=495387990&answerNo=0",
-          "views": 51,
+          "views": 54,
           "answers": null
         }
       ],
       "monetize": null,
-      "measuredAt": "2026-10-22T08:58:53.151Z",
+      "measuredAt": "2026-10-22T21:22:03.803Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "리커시브 뜻",
+      "issue": "리커시브",
+      "topic": "리커시브",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 179,
+      "documentCountMeasured": true,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 10",
+        "문서수 179",
+        "선점 후보 — 경쟁 문서 179건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "정보",
+      "adsenseFit": true,
+      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 12,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-22T21:22:03.803Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -703,7 +756,7 @@
       "kinCount": 134,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-22T08:58:53.151Z",
+      "measuredAt": "2026-10-22T21:22:03.803Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -756,7 +809,7 @@
       "kinCount": 8,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-22T08:58:53.151Z",
+      "measuredAt": "2026-10-22T21:22:03.803Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -808,7 +861,7 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-22T08:58:53.151Z",
+      "measuredAt": "2026-10-22T21:22:03.803Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -824,7 +877,7 @@
       "verdict": "preemption",
       "preemptionKind": "no-demand",
       "serp": null,
-      "documentCount": 46,
+      "documentCount": 47,
       "documentCountMeasured": true,
       "searchVolume": null,
       "searchVolumeLt10": true,
@@ -836,8 +889,8 @@
       "frontalDocCount": 0,
       "freshFrontalCount": 0,
       "reasons": [
-        "문서수 46",
-        "선점 후보 — 경쟁 문서 46건, 수요 미검출"
+        "문서수 47",
+        "선점 후보 — 경쟁 문서 47건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -860,7 +913,7 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-22T08:58:53.151Z",
+      "measuredAt": "2026-10-22T21:22:03.803Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -912,7 +965,7 @@
       "kinCount": 2,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-22T08:58:53.151Z",
+      "measuredAt": "2026-10-22T21:22:03.803Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -964,7 +1017,7 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-22T08:58:53.151Z",
+      "measuredAt": "2026-10-22T21:22:03.803Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -1016,7 +1069,7 @@
       "kinCount": 3,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-22T08:58:53.151Z",
+      "measuredAt": "2026-10-22T21:22:03.803Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -1070,12 +1123,12 @@
         {
           "title": "dns 리커시브 네임서버 케쉬 구조나 관리 방법 규정같은게 있....",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=10503&docId=130183681&answerNo=0",
-          "views": 13,
+          "views": 22,
           "answers": null
         }
       ],
       "monetize": null,
-      "measuredAt": "2026-10-22T08:58:53.151Z",
+      "measuredAt": "2026-10-22T21:22:03.803Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -1091,7 +1144,7 @@
       "verdict": "preemption",
       "preemptionKind": "no-demand",
       "serp": null,
-      "documentCount": 55,
+      "documentCount": 56,
       "documentCountMeasured": true,
       "searchVolume": null,
       "searchVolumeLt10": true,
@@ -1103,8 +1156,8 @@
       "frontalDocCount": 2,
       "freshFrontalCount": 0,
       "reasons": [
-        "문서수 55",
-        "선점 후보 — 경쟁 문서 55건, 수요 미검출"
+        "문서수 56",
+        "선점 후보 — 경쟁 문서 56건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -1127,7 +1180,7 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-22T08:58:53.151Z",
+      "measuredAt": "2026-10-22T21:22:03.803Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -1181,64 +1234,12 @@
         {
           "title": "영국/미국이름 좀...(+성씨랑 발음,스펠링",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=130106&docId=188494166&answerNo=1",
-          "views": 36641,
+          "views": 36649,
           "answers": 2
         }
       ],
       "monetize": null,
-      "measuredAt": "2026-10-22T08:58:53.151Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "리커시브 뜻",
-      "issue": "리커시브",
-      "topic": "리커시브",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 178,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 178",
-        "선점 후보 — 경쟁 문서 178건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "정보",
-      "adsenseFit": true,
-      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 12,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-22T08:58:53.151Z",
+      "measuredAt": "2026-10-22T21:22:03.803Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -1292,24 +1293,24 @@
         {
           "title": "MS-SQL 중복쿼리 질문 드립니다.",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=10205&docId=343270595&answerNo=1",
-          "views": 459,
+          "views": 475,
           "answers": 1
         },
         {
           "title": "계층적 쿼리(오라클)에 관해서...^^(내공 드릴수 있는만큼 드....",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=10205&docId=73864947&answerNo=2",
-          "views": 204,
+          "views": 220,
           "answers": 2
         },
         {
           "title": "recursive, interative 쿼리에 대해서 자세히좀 알려주세요",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=110&docId=195727397&answerNo=0",
-          "views": 48,
+          "views": 64,
           "answers": null
         }
       ],
       "monetize": null,
-      "measuredAt": "2026-10-22T08:58:53.151Z",
+      "measuredAt": "2026-10-22T21:22:03.803Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -1325,7 +1326,7 @@
       "verdict": "preemption",
       "preemptionKind": "no-demand",
       "serp": null,
-      "documentCount": 198,
+      "documentCount": 197,
       "documentCountMeasured": true,
       "searchVolume": null,
       "searchVolumeLt10": true,
@@ -1337,8 +1338,8 @@
       "frontalDocCount": 0,
       "freshFrontalCount": 0,
       "reasons": [
-        "문서수 198",
-        "선점 후보 — 경쟁 문서 198건, 수요 미검출"
+        "문서수 197",
+        "선점 후보 — 경쟁 문서 197건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -1361,7 +1362,7 @@
       "kinCount": 16,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-22T08:58:53.151Z",
+      "measuredAt": "2026-10-22T21:22:03.803Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
