@@ -1,20 +1,18 @@
 {
-  "publishedAt": "2026-10-23T03:24:33.111Z",
+  "publishedAt": "2026-10-23T08:55:42.126Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 203,
-    "niche": 1,
-    "preemption": 16,
+    "candidates": 170,
+    "niche": 0,
+    "preemption": 12,
     "pending": 0
   },
   "freeSample": {
     "day": "2026-10-23",
     "keywords": [
-      "인셉션 포토",
-      "플렉스 글루",
-      "엘리스그룹 주식"
+      "인셉션 포토"
     ]
   },
   "rows": [
@@ -110,14 +108,48 @@
       },
       "subKeywords": null,
       "keywordPool": null,
-      "trend": null,
+      "trend": {
+        "series": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          23,
+          100,
+          57,
+          7,
+          99,
+          55,
+          8,
+          13,
+          4,
+          4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "measuredAt": "2026-10-23T08:55:42.730Z"
+      },
       "kinCount": 5,
       "kinTop": [],
       "monetize": null,
       "measuredAt": "2026-10-23T03:21:37.132Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "kinMode": "date-views-v2"
+      "kinMode": "date-views-v2",
+      "carried": true
     },
     {
       "keyword": "인셉션 포토",
@@ -257,366 +289,646 @@
         "verified": 0
       },
       "carried": true
-    },
+    }
+  ],
+  "observations": [
     {
-      "keyword": "플렉스 글루",
-      "issue": "플렉스",
-      "topic": "플렉스",
+      "keyword": "인티그리트 주가",
+      "issue": "인티그리트",
+      "topic": "인티그리트",
       "lane": "tech",
       "issueType": "fresh",
       "isDerived": true,
       "origin": "autocomplete",
       "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 0,
-        "sampledTitles": 10,
-        "topTitles": [
-          "[펩트론] 루나플랙스 플랫폼, 그 엄중함에 대하여",
-          "서울대병원 소아당뇨 처방 인슐린 '트레시바 플렉스터치주' 사용법 및 약국 품귀 현상",
-          "초속효성 인슐린 아스파트 노보래피드 플렉스펜주",
-          "리조덱® 플렉스터치® - 공복혈당과 식후혈당, 한 펜으로 함께 잡는다!",
-          "\"1시간 레슨에 1,300만 원?!\" 테니스 명장 모라토글루, 대체 왜 이렇게 비쌀까?",
-          "당뇨 저혈당 쇼크 의식불명 응급약: 글루카겐하이포키트주 사용법 (feat. 무조건 119부터!)",
-          "TGB 포어 리파이닝 라하 파하 세럼 추천 모공관리와 초기노화 케어",
-          "알테오젠 vs 펩트론",
-          "내성발톱관리, 포디플렉스를 소개합니다. 문제성발관리사 필수정보!",
-          "9월 올영세일 추천템 택배깡(Feat. 20만원 플렉스)"
-        ],
-        "measuredAt": "2026-10-21T08:58:28.969Z"
-      },
-      "documentCount": 1916,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 182,
       "documentCountMeasured": true,
-      "searchVolume": 760,
+      "searchVolume": 30,
       "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "declining",
-      "demandRatio": 0.34255219952594157,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 760",
-        "문서수 1,916",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 760 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.3배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "플렉스 씰 계열 강력 접착제 '플렉스 글루'의 접착력·가격·사용법을 확인하려는 사람들",
-        "basis": "AI 추론 — 실측 확인된 확장어 2개"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "플렉스 글루 접착력, 씰·테이프와 뭐가 다른지 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "플렉스 글루 접착력 플렉스 씰이랑 뭐가 다른지 많이들 헷갈리더라고요",
-          "frame": "ai",
-          "basis": "메인+후킹 (실측 근거·확장어 미포함)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "플렉스 테이프",
-          "searchVolume": 510,
-          "source": "ai-verified",
-          "frame": "generic"
-        },
-        {
-          "keyword": "플렉스 씰",
-          "searchVolume": 220,
-          "source": "ai-verified",
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "플렉스 테이프",
-          "searchVolume": 510,
-          "source": "ai-verified",
-          "documentCount": 29754
-        },
-        {
-          "keyword": "플렉스 씰",
-          "searchVolume": 220,
-          "source": "ai-verified",
-          "documentCount": 6123
-        }
-      ],
-      "trend": {
-        "series": [
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          8,
-          36,
-          56,
-          30,
-          40,
-          100,
-          24,
-          13,
-          13,
-          3,
-          0,
-          0,
-          4,
-          0,
-          3,
-          3,
-          0,
-          0,
-          0
-        ],
-        "label": "📉 단발성",
-        "recommendation": "회피! 지난 며칠 폭발 후 급락 중. 글 써도 유입 없음",
-        "measuredAt": "2026-10-23T03:24:33.674Z"
-      },
-      "kinCount": 44,
-      "kinTop": [],
-      "monetize": null,
-      "measuredAt": "2026-10-21T08:55:35.452Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "kinMode": "date-views-v2",
-      "enrichedBy": {
-        "provider": "claude",
-        "proposed": 6,
-        "verified": 2
-      },
-      "carried": true
-    },
-    {
-      "keyword": "엘리스그룹 주식",
-      "issue": "엘리스그룹",
-      "topic": "엘리스그룹",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 0,
-        "sampledTitles": 10,
-        "topTitles": [
-          "“AI 기업이면 오를 줄 알았는데?”… 엘리스그룹 상장 첫날 30% 추락",
-          "엘리스그룹 공모주 투자 실패 후기｜상장 첫날 -30%, 공모주도 손실을 볼 수 있다",
-          "엘리스그룹 공모주 상장일 매도 후기 -26% 손절, 코어위브 악재에 무너진 주가",
-          "엘리스그룹, 상장 첫날 30%대 폭락…10조 청약 흥행은 왜 무너졌나?",
-          "[공모주 상장] 10월 20일 엘리스그룹 코스닥 상장 후기 실시간 매매 현장 분석 (feat. 빨간조끼아저씨)",
-          "엘리스그룹 상장일 시초가 범위와 균등 몇 주, 주가 보기 전 위험 3가지",
-          "엘리스그룹 상장일·공모가·주가 전망 총정리",
-          "엘리스그룹 공모주 주가 32% 폭락, 청약 흥행에도 상장일 하락한 이유",
-          "엘리스그룹 상장 D-1: 교육 플랫폼에서 'GPU 임대업'으로 갈아탄 회사, 상단 9만500원은 어디까지 반영했나",
-          "[10월 공모주 매도 후기] 엘리스그룹 손절! 시드머니 지키는 갓성비 멘탈 관리법"
-        ],
-        "measuredAt": "2026-10-20T21:45:42.572Z"
-      },
-      "documentCount": 7073,
-      "documentCountMeasured": true,
-      "searchVolume": 380,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 1,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
       "issueStatus": "stable",
       "isHot": false,
       "frontalDocCount": 2,
       "freshFrontalCount": 0,
       "reasons": [
-        "검색량 380",
-        "문서수 7,073",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+        "검색량 30",
+        "문서수 182",
+        "선점 후보 — 경쟁 문서 182건, 수요 미검출"
       ],
       "evidence": [
         {
           "code": "autocomplete",
           "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 380 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.0배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
         },
         {
           "code": "empty-field",
           "text": "정면으로 다룬 글 2건 (최근 0건)"
         }
       ],
-      "whySearch": {
-        "text": "AI 엘리스그룹 코스닥 상장 첫날 32% 폭락 후 상한가",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
+      "whySearch": null,
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "엘리스그룹 주식 상장 첫날 32% 폭락 후 상한가까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "엘리스그룹 주식 상장일 주가 움직이는 거 지켜보다가 이건 좀 다르더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-23T08:52:31.700Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인티그리트 연봉",
+      "issue": "인티그리트",
+      "topic": "인티그리트",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 9,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 9",
+        "선점 후보 — 경쟁 문서 9건, 수요 미검출"
+      ],
+      "evidence": [
         {
-          "keyword": "엘리스그룹 상장일",
-          "searchVolume": 9510,
-          "frame": "generic"
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
         },
         {
-          "keyword": "엘리스그룹 상장",
-          "searchVolume": 5760,
-          "frame": "generic"
-        },
-        {
-          "keyword": "엘리스그룹 주가",
-          "searchVolume": 5620,
-          "frame": "generic"
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
         }
       ],
-      "keywordPool": [
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-23T08:52:31.700Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인티그리트 전망",
+      "issue": "인티그리트",
+      "topic": "인티그리트",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 211,
+      "documentCountMeasured": true,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 10",
+        "문서수 211",
+        "선점 후보 — 경쟁 문서 211건, 수요 미검출"
+      ],
+      "evidence": [
         {
-          "keyword": "엘리스그룹 상장일",
-          "searchVolume": 9510,
-          "documentCount": 6161,
-          "source": "ai-verified"
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
         },
         {
-          "keyword": "엘리스그룹 상장",
-          "searchVolume": 5760,
-          "documentCount": 6544,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "엘리스그룹 주가",
-          "searchVolume": 5620,
-          "documentCount": 4863,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "엘리스그룹 청약",
-          "searchVolume": 3960,
-          "documentCount": 5753,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "엘리스그룹 공모가",
-          "searchVolume": 3370,
-          "documentCount": 6069,
-          "source": "ai-verified"
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
         }
       ],
-      "trend": {
-        "series": [
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          5,
-          100,
-          21,
-          10
-        ],
-        "label": "🚀 떡상",
-        "recommendation": "지금 당장 작성! 3일 내 급증 포착 → 선점 시 상위 노출 확률 매우 높음",
-        "measuredAt": "2026-10-23T03:24:33.674Z"
-      },
-      "kinCount": 40,
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-23T08:52:31.700Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인티그리트 재무",
+      "issue": "인티그리트",
+      "topic": "인티그리트",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 36,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 36",
+        "선점 후보 — 경쟁 문서 36건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-23T08:52:31.700Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인티그리트 뜻",
+      "issue": "인티그리트",
+      "topic": "인티그리트",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 44,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 4,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 44",
+        "선점 후보 — 경쟁 문서 44건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 4건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "정보",
+      "adsenseFit": true,
+      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-23T08:52:31.700Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인티그리트 채용",
+      "issue": "인티그리트",
+      "topic": "인티그리트",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 42,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 42",
+        "선점 후보 — 경쟁 문서 42건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-23T08:52:31.700Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "NC AI 모델러",
+      "issue": "NC AI",
+      "topic": "NC AI",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 53,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 53",
+        "선점 후보 — 경쟁 문서 53건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 4,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-23T08:52:31.700Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인티그리트 이창석",
+      "issue": "인티그리트",
+      "topic": "인티그리트",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 68,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 68",
+        "선점 후보 — 경쟁 문서 68건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-23T08:52:31.700Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "마루베니 로고",
+      "issue": "마루베니",
+      "topic": "마루베니",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 76,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 76",
+        "선점 후보 — 경쟁 문서 76건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-23T08:52:31.700Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "이태한 특검 중수청",
+      "issue": "이태한 특검 중수청",
+      "topic": "이태한 특검 중수청",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 102,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 102",
+        "선점 후보 — 경쟁 문서 102건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-23T08:52:31.700Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인티그리트 매출",
+      "issue": "인티그리트",
+      "topic": "인티그리트",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 103,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 103",
+        "선점 후보 — 경쟁 문서 103건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
       "kinTop": [
         {
-          "title": "대한전선 주식... 내일?ㅠㅠ",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=391824555&answerNo=7",
-          "views": 572,
-          "answers": 7
+          "title": "비상장주식 인티그리트 회사에 대해 아시는분",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=486437371&answerNo=1",
+          "views": 248,
+          "answers": 2
         }
       ],
       "monetize": null,
-      "measuredAt": "2026-10-21T03:24:43.100Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "carried": true,
-      "kinMode": "date-views-v2"
-    }
-  ],
-  "observations": [
+      "measuredAt": "2026-10-23T08:52:31.700Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인티그리트 대표",
+      "issue": "인티그리트",
+      "topic": "인티그리트",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 245,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 245",
+        "선점 후보 — 경쟁 문서 245건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-23T08:52:31.700Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "플로라 스작",
       "issue": "플로라",
@@ -668,7 +980,8 @@
       "monetize": null,
       "measuredAt": "2026-10-23T03:21:37.132Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "오픈ai 닷츠 후기",
@@ -739,7 +1052,8 @@
       "monetize": null,
       "measuredAt": "2026-10-23T03:21:37.132Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "플린트 캐리어",
@@ -792,7 +1106,8 @@
       "monetize": null,
       "measuredAt": "2026-10-23T03:21:37.132Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "리커시브 라우팅",
@@ -844,7 +1159,8 @@
       "monetize": null,
       "measuredAt": "2026-10-23T03:21:37.132Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "앤트로픽 엔스로픽 차이",
@@ -907,7 +1223,8 @@
       "monetize": null,
       "measuredAt": "2026-10-23T03:21:37.132Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "리커시브 ai 뜻",
@@ -959,7 +1276,8 @@
       "monetize": null,
       "measuredAt": "2026-10-23T03:21:37.132Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "리커시브 조인",
@@ -1011,7 +1329,8 @@
       "monetize": null,
       "measuredAt": "2026-10-23T03:21:37.132Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "플로라 놀런",
@@ -1063,7 +1382,8 @@
       "monetize": null,
       "measuredAt": "2026-10-23T03:21:37.132Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "플린트 락우드",
@@ -1115,7 +1435,8 @@
       "monetize": null,
       "measuredAt": "2026-10-23T03:21:37.132Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "리커시브 dns",
@@ -1174,7 +1495,8 @@
       "monetize": null,
       "measuredAt": "2026-10-23T03:21:37.132Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "리커시브 인텔리전스",
@@ -1226,7 +1548,8 @@
       "monetize": null,
       "measuredAt": "2026-10-23T03:21:37.132Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "플로라 스펠링",
@@ -1285,7 +1608,8 @@
       "monetize": null,
       "measuredAt": "2026-10-23T03:21:37.132Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "리커시브 뜻",
@@ -1337,7 +1661,8 @@
       "monetize": null,
       "measuredAt": "2026-10-23T03:21:37.132Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "리커시브 쿼리",
@@ -1408,7 +1733,8 @@
       "monetize": null,
       "measuredAt": "2026-10-23T03:21:37.132Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "리커시브 콜",
@@ -1460,7 +1786,8 @@
       "monetize": null,
       "measuredAt": "2026-10-23T03:21:37.132Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "오픈AI 닷츠 이용방법",
@@ -1523,7 +1850,8 @@
       "monetize": null,
       "measuredAt": "2026-10-23T03:21:37.132Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "플로라 축일 7월",
@@ -2596,1195 +2924,6 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "시냅틱스 인터내셔널 잉크",
-      "issue": "시냅틱스",
-      "topic": "시냅틱스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 1,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 1",
-        "선점 후보 — 경쟁 문서 1건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "시냅틱스가 구글 코랄 기반 저전력 엣지 AI 칩을 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "시냅틱스 인터내셔널 잉크 구글 코랄로 전력 40% 줄인 AI칩",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "시냅틱스 인터내셔널 잉크 구글 코랄 칩 전력 40% 줄였다는데 놓치는 게 있더라고요",
-          "frame": "ai",
-          "basis": "메인+후킹 (실측 근거·확장어 미포함)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "시냅틱스 주가",
-          "searchVolume": 30,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "시냅틱스 주가",
-          "searchVolume": 30,
-          "documentCount": 406,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-21T08:55:35.452Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "시냅틱스 블라인드",
-      "issue": "시냅틱스",
-      "topic": "시냅틱스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 3,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 3",
-        "선점 후보 — 경쟁 문서 3건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "시냅틱스가 구글 코랄 기반 저전력 엣지 AI 칩을 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-21T08:55:35.452Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "시냅틱스 코리아",
-      "issue": "시냅틱스",
-      "topic": "시냅틱스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 110,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 110",
-        "선점 후보 — 경쟁 문서 110건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "시냅틱스가 구글 코랄 기반 저전력 엣지 AI 칩을 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 30,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-21T08:55:35.452Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "fal 측정 논란",
-      "issue": "fal",
-      "topic": "fal",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 13,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 13",
-        "선점 후보 — 경쟁 문서 13건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "fal의 플럭스 3 맥스 22배 주장이 자체 측정에선 5.5배로도 나왔다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-21T08:55:35.452Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "시냅틱스 바이러스",
-      "issue": "시냅틱스",
-      "topic": "시냅틱스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 30,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 30",
-        "선점 후보 — 경쟁 문서 30건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "시냅틱스가 구글 코랄 기반 저전력 엣지 AI 칩을 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 12,
-      "kinTop": [
-        {
-          "title": "컴퓨터 시냅틱 바이러스 지우는법좀요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=11002&docId=392852354&answerNo=2",
-          "views": 309,
-          "answers": 2
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-21T08:55:35.452Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "시냅틱스 vs680",
-      "issue": "시냅틱스",
-      "topic": "시냅틱스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 45,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 45",
-        "선점 후보 — 경쟁 문서 45건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "시냅틱스가 구글 코랄 기반 저전력 엣지 AI 칩을 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-21T08:55:35.452Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "시냅틱스 온세미",
-      "issue": "시냅틱스",
-      "topic": "시냅틱스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 125,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 5,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "문서수 125",
-        "선점 후보 — 경쟁 문서 125건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 5건 (최근 1건)"
-        }
-      ],
-      "whySearch": {
-        "text": "시냅틱스가 구글 코랄 기반 저전력 엣지 AI 칩을 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-21T08:55:35.452Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "시냅틱스 터치패드 드라이버",
-      "issue": "시냅틱스",
-      "topic": "시냅틱스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 118,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 118",
-        "선점 후보 — 경쟁 문서 118건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "시냅틱스가 구글 코랄 기반 저전력 엣지 AI 칩을 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 112,
-      "kinTop": [
-        {
-          "title": "삼성 노트북 터치패드 안됨",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10102&docId=431863112&answerNo=1",
-          "views": 2235,
-          "answers": 4
-        },
-        {
-          "title": "삼성 노트북 터치패드 인식불가 문제",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10102&docId=440217042&answerNo=1",
-          "views": 376,
-          "answers": 1
-        },
-        {
-          "title": "터치패드 드라이버꼬임",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1010703&docId=493953238&answerNo=1",
-          "views": 104,
-          "answers": 1
-        },
-        {
-          "title": "노트북 터치패드 스크롤 안되는 문제...",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10102&docId=454810702&answerNo=0",
-          "views": 61,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-21T08:55:35.452Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "이스트소프트 JDC",
-      "issue": "이스트소프트",
-      "topic": "이스트소프트",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 138,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 138",
-        "선점 후보 — 경쟁 문서 138건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "이스트소프트가 제주 JDC 사내 생성형 AI 언어모델 구축 사업을 수주했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-21T08:55:35.452Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "시냅틱스 브로드컴",
-      "issue": "시냅틱스",
-      "topic": "시냅틱스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 232,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 232",
-        "선점 후보 — 경쟁 문서 232건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "시냅틱스가 구글 코랄 기반 저전력 엣지 AI 칩을 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-21T08:55:35.452Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "시냅틱스 AI칩",
-      "issue": "시냅틱스",
-      "topic": "시냅틱스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 300,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 300",
-        "선점 후보 — 경쟁 문서 300건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "시냅틱스가 구글 코랄 기반 저전력 엣지 AI 칩을 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-21T08:55:35.452Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "엘리스그룹 비례주",
-      "issue": "엘리스그룹",
-      "topic": "엘리스그룹",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 1,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 1",
-        "선점 후보 — 경쟁 문서 1건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "AI 엘리스그룹 코스닥 상장 첫날 32% 폭락 후 상한가",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "엘리스그룹 비례주 배정 수량과 상장 첫날 32% 급락까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "엘리스그룹 비례주 상장일 주가가 생각보다 이상하게 움직여서 계속 들여다보게 되네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "엘리스그룹 공모주",
-          "searchVolume": 64100,
-          "frame": "generic"
-        },
-        {
-          "keyword": "엘리스그룹 상장일",
-          "searchVolume": 9510,
-          "frame": "generic"
-        },
-        {
-          "keyword": "엘리스그룹 주가",
-          "searchVolume": 5620,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "엘리스그룹 공모주",
-          "searchVolume": 64100,
-          "documentCount": 6527,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "엘리스그룹 상장일",
-          "searchVolume": 9510,
-          "documentCount": 6161,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "엘리스그룹 주가",
-          "searchVolume": 5620,
-          "documentCount": 4863,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "엘리스그룹 청약",
-          "searchVolume": 3960,
-          "documentCount": 5753,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "엘리스그룹 공모가",
-          "searchVolume": 3370,
-          "documentCount": 6069,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "엘리스그룹 환불일",
-          "searchVolume": 610,
-          "documentCount": 3285,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "엘리스그룹 균등배정",
-          "searchVolume": 470,
-          "documentCount": 2465,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "엘리스그룹 청약 경쟁률",
-          "searchVolume": 250,
-          "documentCount": 4107,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "엘리스그룹 비례 경쟁률",
-          "searchVolume": 20,
-          "documentCount": 1861,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-21T03:24:43.100Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "NC AI 모델러",
-      "issue": "NC AI",
-      "topic": "NC AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 53,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 53",
-        "선점 후보 — 경쟁 문서 53건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "NC AI가 바르코 3D·사운드 생성 AI 첫 달 구독료 50% 할인",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 4,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-21T03:24:43.100Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "이중근 상고",
-      "issue": "이중근",
-      "topic": "이중근",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "대법 다툼 전망",
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 145,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 145",
-        "선점 후보 — 경쟁 문서 145건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — 대법 다툼 전망"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "한강 조망권 분쟁에서 이중근 부영 회장 항고 기각",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "이중근 상고 부영 회장 한강뷰 조망권 2심 항고 기각",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "이중근 상고 소식 찾다가 이중근 부영 회장 재산 얘기까지 보게 됐네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "이중근 회장",
-          "searchVolume": 3620,
-          "frame": "generic"
-        },
-        {
-          "keyword": "이중근 부영",
-          "searchVolume": 20,
-          "frame": "generic"
-        },
-        {
-          "keyword": "이중근 부영 회장",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "이중근 회장",
-          "searchVolume": 3620,
-          "documentCount": 7291,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "이중근 부영",
-          "searchVolume": 20,
-          "documentCount": 6426,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "이중근 부영 회장",
-          "searchVolume": 10,
-          "documentCount": 5942,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-21T03:24:43.100Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "mds테크 연봉",
-      "issue": "MDS테크",
-      "topic": "MDS테크",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 239,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 239",
-        "선점 후보 — 경쟁 문서 239건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "MDS테크가 휴머노이드 홈로봇에 엔비디아 AI 칩 40억원 공급",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "mds테크 연봉 신입 초봉과 평균 연봉 수준 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "mds테크 연봉 궁금해서 들어갔다가 주가 그래프에서 눈을 못 뗐어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "mds테크 주가",
-          "searchVolume": 4470,
-          "frame": "generic"
-        },
-        {
-          "keyword": "mds테크 기업정보",
-          "searchVolume": 50,
-          "frame": "generic"
-        },
-        {
-          "keyword": "mds테크 채용",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "mds테크 주가",
-          "searchVolume": 4470,
-          "documentCount": 16391,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "mds테크 기업정보",
-          "searchVolume": 50,
-          "documentCount": 21842,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-21T03:24:43.100Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "엘리스그룹 블라인드",
-      "issue": "엘리스그룹",
-      "topic": "엘리스그룹",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 220,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 220",
-        "선점 후보 — 경쟁 문서 220건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "AI 엘리스그룹 코스닥 상장 첫날 32% 폭락 후 상한가",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "엘리스그룹 블라인드 상장 첫날 32% 급락, 다음날 상한가 반응",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "엘리스그룹 블라인드 상장일 다가오니까 공모주 얘기 분위기가 묘하게 달라지더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "엘리스그룹 공모주",
-          "searchVolume": 64100,
-          "frame": "generic"
-        },
-        {
-          "keyword": "엘리스그룹 상장일",
-          "searchVolume": 9510,
-          "frame": "generic"
-        },
-        {
-          "keyword": "엘리스그룹 상장",
-          "searchVolume": 5760,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "엘리스그룹 공모주",
-          "searchVolume": 64100,
-          "documentCount": 6527,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "엘리스그룹 상장일",
-          "searchVolume": 9510,
-          "documentCount": 6161,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "엘리스그룹 상장",
-          "searchVolume": 5760,
-          "documentCount": 6544,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "엘리스그룹 주가",
-          "searchVolume": 5620,
-          "documentCount": 4863,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "엘리스그룹 공모가",
-          "searchVolume": 3370,
-          "documentCount": 6069,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "엘리스그룹 청약 결과",
-          "searchVolume": 130,
-          "documentCount": 4278,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "엘리스그룹 채용",
-          "searchVolume": 100,
-          "documentCount": 1042,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "엘리스그룹 연봉",
-          "searchVolume": 40,
-          "documentCount": 449,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 4,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-21T03:24:43.100Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
@@ -3859,7 +2998,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 1
+      "rowCount": 1,
+      "carried": true
     },
     {
       "issue": "이세돌 백수 체험",
@@ -4530,558 +3670,6 @@
       ],
       "rowCount": 0,
       "carried": true
-    },
-    {
-      "issue": "플렉스",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "HR 솔루션 플렉스가 한국MS와 기업용 AI 협력 MOU를 체결했다",
-      "headlines": [
-        {
-          "title": "플렉스 HR데이터에 MS 워크IQ 연계",
-          "press": "dt.co.kr",
-          "publishedAt": "2026-10-21T02:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/029/0003054312?sid=105"
-        },
-        {
-          "title": "플렉스, 한국MS와 손잡고 기업용 AI 시장 공략",
-          "press": "sedaily.com",
-          "publishedAt": "2026-10-21T00:44:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/011/0004673474?sid=101"
-        },
-        {
-          "title": "플렉스, 한국MS와 '기업용 AI 협력' MOU 체결",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-10-21T00:45:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005831329?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "플렉스 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "아가방 플렉스 차이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "플렉스 테이프",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "비보이 플렉스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "플렉스 폼",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "플렉스 간판",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "플렉스 공구",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "플렉스 글루",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "플렉스 AI 기능",
-          "reason": "제공 기능 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "플렉스 도입 기업",
-          "reason": "적용 사례 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "플렉스 출시일",
-          "reason": "서비스 시점 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 1,
-      "carried": true
-    },
-    {
-      "issue": "이스트소프트",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "이스트소프트가 제주 JDC 사내 생성형 AI 언어모델 구축 사업을 수주했다.",
-      "headlines": [
-        {
-          "title": "이스트소프트, JDC 내부망에 AI 구축…공공시장 확대",
-          "press": "zdnet.co.kr",
-          "publishedAt": "2026-10-21T08:06:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/092/0002441854?sid=105"
-        },
-        {
-          "title": "[테크스냅] 코난테크놀로지, 서울과기대와 국방AI 협력",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-21T00:25:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016390352?sid=105"
-        },
-        {
-          "title": "이스트소프트, JDC 사내 생성형 AI 구축 수주…온프레미스 sLLM 적용",
-          "press": "ziksir.com",
-          "publishedAt": "2026-10-21T00:18:00.000Z",
-          "link": "https://www.ziksir.com/news/articleView.html?idxno=150122"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "이스트소프트 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이스트소프트 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이스트소프트 ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이스트소프트 연봉",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이스트소프트 기업정보",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이스트소프트 알집",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이스트소프트 알약",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이스트소프트 대표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "이스트소프트 주가",
-          "reason": "수주 호재 반영",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "시냅틱스",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "시냅틱스가 구글 코랄 기반 저전력 엣지 AI 칩을 공개했다.",
-      "headlines": [
-        {
-          "title": "시냅틱스, 구글 '코랄' 기반 엣지 AI 칩 공개...웨어러블·산업용 기기 ...",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-21T08:36:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216493"
-        },
-        {
-          "title": "구글, 차세대 저전력 AI칩 공개…웨어러블 기기 정조준",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-15T01:09:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016378249?sid=104"
-        },
-        {
-          "title": "구글, 전력 소모 40% 줄인 AI칩 공개…웨어러블 기기 탑재 전망",
-          "press": "biz.chosun.com",
-          "publishedAt": "2026-10-15T08:13:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/366/0001198249?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "시냅틱스 코리아",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "시냅틱스 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "시냅틱스 전망",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "시냅틱스 인수",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "시냅틱스 온세미",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "시냅틱스 바이러스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "시냅틱스 브로드컴",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "시냅틱스 블라인드",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "시냅틱스 주가",
-          "reason": "신제품 공개 영향",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "이중근",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "한강 조망권 분쟁에서 이중근 부영 회장 항고 기각",
-      "headlines": [
-        {
-          "title": "\"앞집 때문에 한강 안 보여\"...이중근 부영 회장 항고 기각",
-          "press": "ytn.co.kr",
-          "publishedAt": "2026-10-20T23:15:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/052/0002421491?sid=102"
-        },
-        {
-          "title": "\"우리 집 한강뷰 가린다\"…이중근 부영 회장, 또 패소",
-          "press": "mbn.mk.co.kr",
-          "publishedAt": "2026-10-20T22:58:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/057/0001974420?sid=102"
-        },
-        {
-          "title": "'앞집이 한강 조망권 침해' 이중근 부영 회장 항고 기각",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-20T12:37:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016389968?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "부영 이중근",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이중근 아들",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이중근 재산",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이중근 회장 재산",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이중근 부영그룹 회장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "이중근 상고",
-          "reason": "대법 다툼 전망",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "엘리스그룹",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "AI 엘리스그룹 코스닥 상장 첫날 32% 폭락 후 상한가",
-      "headlines": [
-        {
-          "title": "외신, 엘리스 상장 첫날 폭락 주목…\"AI 투자 회의론 커져\"",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-10-20T20:42:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005831169?sid=101"
-        },
-        {
-          "title": "상장 첫날 엘리스 '-32%'…\"누가 얼마나 비용 부담하나\" 월가 '술렁'",
-          "press": "wowtv.co.kr",
-          "publishedAt": "2026-10-20T21:23:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/215/0001269869?sid=101"
-        },
-        {
-          "title": "엘리스, 코스닥 데뷔 첫날 32% 폭락…외신들 \"AI 투자 열풍 경고등\"",
-          "press": "joseilbo.com",
-          "publishedAt": "2026-10-20T22:39:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/123/0002392261?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "엘리스그룹 공모주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엘리스그룹 상장일",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엘리스그룹 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엘리스그룹 수요예측",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엘리스그룹 공모가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엘리스그룹 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엘리스그룹 청약",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엘리스그룹 균등",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 1,
-      "carried": true
-    },
-    {
-      "issue": "MDS테크",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "MDS테크가 휴머노이드 홈로봇에 엔비디아 AI 칩 40억원 공급",
-      "headlines": [
-        {
-          "title": "MDS테크, 피지컬 AI 사업 본격 매출화",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-10-20T00:10:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006391967?sid=101"
-        },
-        {
-          "title": "MDS테크, 휴머노이드용 엔비디아 AI 칩 40억원 규모 공급",
-          "press": "sedaily.com",
-          "publishedAt": "2026-10-20T21:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/011/0004673367?sid=101"
-        },
-        {
-          "title": "MDS테크, 휴머노이드 홈로봇 프로젝트 40억원 수주",
-          "press": "newspim.com",
-          "publishedAt": "2026-10-20T00:46:00.000Z",
-          "link": "https://www.newspim.com/news/view/20261020000284"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "MDS테크 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "mds테크 본사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "mds테크 배당",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "mds테크 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "mds테크 기업정보",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "mds테크 배당금",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "mds테크 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "mds테크 모회사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "MDS테크 매출",
-          "reason": "실적화 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "MDS테크 목표가",
-          "reason": "주가 전망 수요",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "NC AI",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "NC AI가 바르코 3D·사운드 생성 AI 첫 달 구독료 50% 할인",
-      "headlines": [
-        {
-          "title": "NC AI, 콘텐츠 제작 문턱 낮춘다…구독료 50% 할인",
-          "press": "zdnet.co.kr",
-          "publishedAt": "2026-10-20T01:26:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/092/0002441589?sid=105"
-        },
-        {
-          "title": "3D 모델·효과음 AI로 만든다…NC AI, '바르코' 첫 달 구독 반값",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-20T00:23:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014264591?sid=105"
-        },
-        {
-          "title": "NC AI, 3D 모델·사운드 생성 AI 첫달 반값…\"AI 창작 지원\"",
-          "press": "news1.kr",
-          "publishedAt": "2026-10-20T00:30:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009237735?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "NC AI 모델러",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "nc",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "NC AI 주가",
-          "reason": "수혜 종목 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
     }
-  ],
-  "enrichedAt": "2026-10-23T03:24:56.007Z",
-  "enrichStats": {
-    "enriched": 0,
-    "subsAdded": 0,
-    "titleUpgraded": 0,
-    "proposed": 0,
-    "verified": 0,
-    "judged": 0,
-    "judgedBad": 0,
-    "related": 0,
-    "picked": 0,
-    "pooled": 0,
-    "aiTitled": 0,
-    "trended": 0,
-    "aiCalls": 3,
-    "partial": false
-  }
+  ]
 }
