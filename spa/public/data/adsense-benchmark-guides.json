@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-23T06:16:34.520Z",
+  "generatedAt": "2026-10-23T12:26:25.237Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -175,41 +175,6 @@
         "checkBefore": [
           "삼성 뉴스룸·삼성멤버스 공지에서 원UI 9 정식 배포일과 수정 항목 확인",
           "삼성 커뮤니티·해외 포럼에서 실제 사용자 보고 오류 교차 확인"
-        ]
-      },
-      "at": "2026-10-19T21:06:48.786Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "1df7c5a76536ff8d",
-      "urls": [
-        "https://tmhub.co.kr/1275",
-        "https://zsewqzsewq.tistory.com/315",
-        "https://mashemellong.tistory.com/entry/2026-%EA%B0%95%EB%B6%81%EA%B5%AC-%EC%B2%AD%EB%85%84-%EC%B7%A8%EC%97%85%EC%A4%80%EB%B9%84%EB%B9%84-30%EB%A7%8C%EC%9B%90-%EC%8B%A0%EC%B2%AD%EB%B0%A9%EB%B2%95",
-        "https://ongidream.tistory.com/121",
-        "https://angju.tistory.com/936",
-        "https://yeon0720.tistory.com/entry/2027-%EC%B2%AD%EB%85%84%EC%9D%BC%EC%9E%90%EB%A6%AC%EB%8F%84%EC%95%BD%EC%9E%A5%EB%A0%A4%EA%B8%88-%EC%B5%9C%EB%8C%80-1800%EB%A7%8C%EC%9B%90%EF%BD%9C%EA%B8%B0%EC%97%85%C2%B7%EC%B2%AD%EB%85%84-%EC%A7%80%EC%9B%90%EA%B8%88-%EC%B0%A8%EC%9D%B4"
-      ],
-      "guide": {
-        "direction": "'청소년 기본지원금'은 청년월세지원·취업준비비 등 또래 제도와 달리 10대 청소년 대상이라 대상 연령·소득기준이 가장 궁금한 포인트다. 경쟁 글은 전부 '청년'(19세 이상) 지원금이라 '청소년' 전용 각도는 비어 있어, 신청 순서·지급 주기를 표로 주면 차별화된다. 성인 전환 후 이어 받을 청년월세지원 등과 중복수급 가능 여부까지 짚어주면 다시 찾아볼 이유가 된다.",
-        "searchTargets": [
-          "청년 월세 지원 대상",
-          "청년 월세 지원 신청"
-        ],
-        "mustInclude": [
-          "지급대상 연령·소득기준 구체 조건(확인 필요: 사업 주체 지자체 공고)",
-          "연 60만원 지급 방식(일시/분할)과 지급 시기(확인 필요: 공고문)",
-          "신청 기간·방법(온라인/방문) 순서와 필요서류 체크리스트(확인 필요: 복지로·정부24)",
-          "성인 전환 후 이어 신청 가능한 청년월세지원 등과 중복수급 여부(확인 필요: 각 사업 공고)"
-        ],
-        "mustAvoid": [
-          "청년(19세 이상) 대상 지원금과 대상 연령·조건을 혼동해 안내하지 않기",
-          "전국 단일 기준인 것처럼 쓰지 않기(지자체별 금액·조건 상이 가능성)"
-        ],
-        "checkBefore": [
-          "사업 시행 지자체 공식 홈페이지·복지로에서 지급대상·금액·신청기간 확인",
-          "청년월세지원 등 유사 제도와의 중복수급 가능 여부 해당 공고문에서 확인"
         ]
       },
       "at": "2026-10-19T21:06:48.786Z",
@@ -1153,38 +1118,6 @@
       "provider": "claude"
     },
     {
-      "id": "88c8469b77cba62d",
-      "urls": [
-        "https://thecheck.co.kr/bok-october-rate-meeting-loan-check/",
-        "https://yoarc.tistory.com/1821",
-        "https://moneynotediary.tistory.com/30"
-      ],
-      "guide": {
-        "direction": "'기준금리 발표일 10월 22일' 검색자는 당장 내 대출이자가 바뀌는지가 궁금해 '금통위 일정·금리' 자동완성으로 들어온다. 고수글은 발표일과 즉시 영향 여부만 다뤘을 뿐 10월·11월 금통위 날짜를 한 표로 묶거나 코픽스 반영 주기를 설명한 글은 없다. 연간 금통위 일정표와 변동금리 반영 시점 계산을 함께 주면 다음 발표 때도 재방문한다.",
-        "searchTargets": [
-          "한국은행 금통위 일정",
-          "한국은행 금통위 10월",
-          "한국은행 금통위 11월",
-          "한국은행 금통위 금리"
-        ],
-        "mustInclude": [
-          "2026년 금통위 연간 일정표(10월 22일, 11월 회차 날짜, 확인 필요: 한국은행 공지)",
-          "고정형·변동형 대출 구분표와 금리 조정 반영 시점 비교",
-          "직전 금통위 결정(동결/인상/인하, 확인 필요: 한국은행 발표)과 전망 요약"
-        ],
-        "mustAvoid": [
-          "금리 인상·인하 방향을 확정적으로 예측하는 서술",
-          "미국 연준 FOMC 일정과 한국은행 금통위 일정을 혼동"
-        ],
-        "checkBefore": [
-          "한국은행 홈페이지 금통위 회의일정 공지에서 10월·11월 정확한 날짜 확인"
-        ]
-      },
-      "at": "2026-10-19T21:06:48.786Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
       "id": "28073b7169cd7a73",
       "urls": [
         "https://it.tipmany.com/entry/%EA%B0%84%EC%88%98%EC%B9%98%EA%B0%80%EB%86%92%EC%9C%BC%EB%A9%B4%EB%82%98%ED%83%80%EB%82%98%EB%8A%94%EC%A6%9D%EC%83%81",
@@ -1456,40 +1389,6 @@
         ],
         "checkBefore": [
           "코버스 공식 홈페이지의 노선·요금·취소수수료 공지"
-        ]
-      },
-      "at": "2026-10-19T21:06:48.786Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "1f627a3246a21ace",
-      "urls": [
-        "https://comme-baleine.tistory.com/entry/%EB%82%9C%EB%B0%A9%EB%B9%84-%EC%A7%80%EC%9B%90%EA%B8%88-2026-%EC%8B%A0%EC%B2%AD%EB%B0%A9%EB%B2%95-%EC%82%AC%EB%9E%91%EC%98%A8-50%EB%A7%8C%EC%9B%90%C2%B7%EC%97%90%EB%84%88%EC%A7%80%EB%B0%94%EC%9A%B0%EC%B2%98-%EC%B5%9C%EB%8C%80-70%EB%A7%8C%EC%9B%90-%EC%B0%A8%EC%9D%B4",
-        "https://asit.kr/2026-energy-voucher-alternative-heating-cost-saving/",
-        "https://best79s.com/entry/%EB%8F%99%EC%A0%88%EA%B8%B0-%EC%97%90%EB%84%88%EC%A7%80%EB%B0%94%EC%9A%B0%EC%B2%98-%EC%8B%A0%EC%B2%AD%EB%B0%A9%EB%B2%95-2026-%EC%8B%A0%EC%B2%AD%EC%A1%B0%EA%B1%B4%C2%B7%EA%B8%B0%EA%B0%84%C2%B7%EB%8C%80%EC%83%81%EC%9E%90%C2%B7%EC%A7%80%EC%9B%90%EA%B8%88%EC%95%A1%C2%B7%EC%82%AC%EC%9A%A9%EB%B0%A9%EB%B2%95%C2%B7%EA%B5%AD%EB%AF%BC%ED%96%89%EB%B3%B5%EC%B9%B4%EB%93%9C"
-      ],
-      "guide": {
-        "direction": "검색자는 본인이 사랑온과 에너지바우처 중 어디에 해당하는지, 두 제도를 중복으로 받을 수 있는지가 가장 궁금하다. 고수 글들은 이미 신청방법·조건표를 다뤘으니, 가구 유형별 실제 수령액 비교와 중복신청 가능 여부가 비어 있는 각도다. 독자는 가구별 금액 비교표와 신청기간 캘린더를 다시 찾아본다.",
-        "searchTargets": [
-          "난방비 지원금 조건",
-          "난방비 지원금 금액",
-          "난방비 지원금 지급일",
-          "난방비 지원금 신청"
-        ],
-        "mustInclude": [
-          "사랑온 50만원 vs 에너지바우처 최대 70만원 가구별 비교표(확인 필요: 가구원수별 금액)",
-          "두 제도 중복 신청 가능 여부(확인 필요: 복지로 공지)",
-          "신청 기간·지급일 캘린더(확인 필요: 복지부·산업부 공지)",
-          "수급자·차상위 등 대상 조건 비교표",
-          "국민행복카드 사용처·사용기한"
-        ],
-        "mustAvoid": [
-          "사랑온과 에너지바우처를 같은 제도처럼 섞어 설명",
-          "2025년 지급금액을 2026년 금액인 것처럼 혼용"
-        ],
-        "checkBefore": [
-          "보건복지부·산업통상자원부 공식 공지에서 2026년 확정 금액·기간 확인"
         ]
       },
       "at": "2026-10-19T21:06:48.786Z",
@@ -2129,40 +2028,6 @@
       "provider": "claude"
     },
     {
-      "id": "149f56c9024c3a0e",
-      "urls": [
-        "https://zsewqzsewq.tistory.com/316",
-        "https://zsewqzsewq.tistory.com/311",
-        "https://zsewqzsewq.tistory.com/307",
-        "https://zsewqzsewq.tistory.com/300",
-        "https://exervital.com/loans/credit-score-boost-30days/"
-      ],
-      "guide": {
-        "direction": "검색자는 '내 점수가 몇 등급에 해당하는지'를 즉시 표로 확인하려 하며 'kcb', '1등급', '7등급' 같은 구체 등급 검색이 대표적이다. 고수 글들은 이미 '현실 꿀팁' 톤으로 올리는 법·30일 플랜까지 다뤘지만, KCB와 NICE 두 평가기관의 점수-등급 환산 기준 차이를 명확한 표로 비교한 글은 비어 있다. 등급별 점수 구간표와 무료 확인 경로를 같이 정리하면 자기 등급을 다시 확인하러 재방문한다.",
-        "searchTargets": [
-          "신용등급 점수표 2026년",
-          "신용등급 점수표 kcb",
-          "신용등급 점수표 확인방법",
-          "신용등급 점수표 1등급"
-        ],
-        "mustInclude": [
-          "KCB·NICE 점수제 기준 1~10등급 대응 점수 구간표",
-          "등급별(1등급/7등급 등) 평균 점수대",
-          "토스뱅크·카카오뱅크 등 앱에서 무료로 점수 확인하는 방법",
-          "점수가 등급으로 갱신되는 주기(확인 필요: KCB·NICE 공식 공지)"
-        ],
-        "mustAvoid": [
-          "과거 등급제(1~10등급) 설명과 현재 점수제 기준을 구분 없이 섞어 서술"
-        ],
-        "checkBefore": [
-          "최신 등급-점수 환산표는 KCB·NICE평가정보 공식 사이트에서 확인"
-        ]
-      },
-      "at": "2026-10-19T21:06:48.786Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
       "id": "d3c81a2f5577561b",
       "urls": [
         "https://bongbong200.com/entry/%EC%B2%AD%EB%85%84%EB%AF%B8%EB%9E%98%EC%A0%81%EA%B8%88-2%EC%B0%A8-%EC%8B%A0%EC%B2%AD-%EC%8B%9C-%EC%9E%90%EC%A3%BC-%EB%AC%BB%EB%8A%94-%EC%A7%88%EB%AC%B8FAQ",
@@ -2382,129 +2247,6 @@
       "provider": "claude"
     },
     {
-      "id": "2b6ca14ec8339335",
-      "urls": [
-        "https://sy1s.tistory.com/entry/%EB%A7%88%EA%B7%B8%EB%84%A4%EC%8A%98-%ED%9A%A8%EB%8A%A5%EA%B3%BC-%EB%B6%80%EC%A1%B1-%EC%8B%A0%ED%98%B8-%EB%AA%B8%EC%9D%B4-%EB%A8%BC%EC%A0%80-%EB%B3%B4%EB%82%B4%EB%8A%94-%EB%B3%80%ED%99%94-7%EA%B0%80%EC%A7%80",
-        "https://queenohora.tistory.com/794"
-      ],
-      "guide": {
-        "direction": "생강차 효능 검색자는 대추·꿀·레몬·도라지·계피 등 조합별로 어떤 증상(기침, 염증, 변비)에 맞는지 비교하고 싶어 하므로 '생강차 효능'을 대표로 잡고 조합어를 소제목에 배치해야 한다. 고수 글은 효능 5가지와 목 칼칼할 때 효과·부작용까지 다뤘지만, 조합별 비교표와 섭취량 기준은 비어 있다. 증상별·조합별 비교표와 부작용 주의선을 넣으면 재검색 시 다시 찾아온다.",
-        "searchTargets": [
-          "생강차 효능",
-          "생강차 효능 및 부작용",
-          "대추생강차 효능",
-          "생강차 효능 기침"
-        ],
-        "mustInclude": [
-          "대추·꿀·레몬·도라지·계피생강차 조합별 특징 비교표",
-          "기침·염증·변비 증상별 적합 조합 정리",
-          "부작용(위장자극, 항응고제 등 약물 상호작용)(확인 필요: 국가건강정보포털)"
-        ],
-        "mustAvoid": [
-          "홍차·녹차 등 다른 차 종류와 효능 혼동"
-        ],
-        "checkBefore": [
-          "국가건강정보포털 또는 식약처 자료에서 생강 효능·부작용 근거 확인"
-        ]
-      },
-      "at": "2026-10-19T21:06:48.786Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "2a5f24738aaf8fee",
-      "urls": [
-        "https://sosc.pensionhub.co.kr/14",
-        "https://investdiary.tistory.com/7871"
-      ],
-      "guide": {
-        "direction": "'상생임대주택 양도세 계산'으로 들어오는 사람은 본인 전세·월세 인상률이 5% 이내 조건을 충족하는지 직접 계산하려는 집주인이다. 고수 블로그는 요건과 비과세 총정리를 다뤘지만 계약 갱신 시 인상률 계산 예시는 비어 있다. 직전 계약 대비 인상률 계산 공식과 1주택·2주택 비과세 조건표를 넣으면 재검색 없이 해결된다.",
-        "searchTargets": [
-          "상생임대주택 양도세 계산"
-        ],
-        "mustInclude": [
-          "직전 계약 대비 5% 이내 인상률 계산 공식과 예시",
-          "2년 거주요건 면제 적용 조건(상생임대인 요건)",
-          "1가구 1주택·1가구 2주택 비과세 기준 비교표"
-        ],
-        "mustAvoid": [
-          "상생임대인 특례와 일반 1가구 1주택 2년 거주요건을 동일하게 서술",
-          "보유기간과 거주기간 조건을 혼용해 계산 오류 유도",
-          "전세→월세 전환 시 인상률 계산 방식을 일반 인상률과 동일하게 안내"
-        ],
-        "checkBefore": [
-          "국세청·기획재정부 공식 자료에서 상생임대주택 특례 적용기한 확인",
-          "전월세 전환 시 5% 이내 인상 기준 산정 방식 공식 확인"
-        ]
-      },
-      "at": "2026-10-19T21:06:48.786Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "cc2e021cea1ca4ae",
-      "urls": [
-        "https://orakb.happycommu.com/entry/%EB%86%8D%ED%98%91-%EA%B8%88%EB%A6%AC%EC%A0%95%EA%B8%B0%EC%98%88%EA%B8%88-%EA%B8%88%EB%A6%AC-%EB%8B%A8%EC%9C%84-%EB%86%8D%ED%98%91%EC%9D%80%ED%96%89-%EC%98%88%EA%B8%88-%EC%A0%81%EA%B8%88",
-        "https://dke.ralabla.com/37"
-      ],
-      "guide": {
-        "direction": "검색자는 지금 가입 가능한 농협 예적금 금리를 찾지만, '농협'이 농협은행과 지역 단위농협(농축협)으로 나뉘어 있다는 걸 모르고 들어온다. 고수 글은 금리 나열과 계산기 제공까지 갔지만, 두 기관 상품을 한 표로 비교하며 우대조건을 끼워 넣은 글은 비어 있다. 기간별·우대조건별 표와 이자 계산 예시를 넣으면 재방문·체류가 늘어난다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "농협은행과 단위농협(지역농축협)의 금리·상품이 별개라는 구분 설명",
-          "기간별(6개월/1년/2년/3년) 정기예금·적금 금리 비교표 (확인 필요: NH농협은행 공식 고시)",
-          "우대금리 받는 조건(자동이체·첫거래·앱가입 등) 요약 (확인 필요: 상품 약관)",
-          "100만원/1000만원 예치 시 세전·세후 이자 계산 예시"
-        ],
-        "mustAvoid": [
-          "농협은행과 단위농협을 같은 기관처럼 서술",
-          "과거 공시 금리를 현재 금리처럼 표기"
-        ],
-        "checkBefore": [
-          "NH농협은행 공식 홈페이지 예적금 금리 고시",
-          "전국은행연합회 소비자포털 금리비교",
-          "지역농축협(단위농협) 개별 공시 자료"
-        ]
-      },
-      "at": "2026-10-19T21:06:48.786Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "ee4b970dcbfe06f0",
-      "urls": [
-        "https://trendsearch.tistory.com/entry/%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90-%EC%9A%B0%EC%84%A0%EC%A3%BC-%EB%B0%B0%EB%8B%B9%EA%B8%88-%EC%B0%A8%EC%9D%B4-%EB%B3%B4%ED%86%B5%EC%A3%BC%EB%B3%B4%EB%8B%A4-%EC%96%BC%EB%A7%88%EB%82%98-%EB%8D%94-%EB%B0%9B%EC%9D%84%EA%B9%8C",
-        "https://realmoneyshot.kr/samsung-electronics-dividend-payment-date-2026-q3/"
-      ],
-      "guide": {
-        "direction": "검색자는 '삼성전자우선주' 매수 전 보통주와의 배당 차이를 숫자로 확인하려는 투자자로 '삼성전자 우선주 배당금'이 대표 검색어다. 고수 글이 3분기 추정 배당금은 선점했으니, 연도별 배당 차이표와 '우선주 소각' 이슈 연결 각도가 비어 있다. 독자는 괴리율·배당 차이 계산표를 저장해 재방문한다.",
-        "searchTargets": [
-          "삼성전자 우선주 배당금",
-          "삼성전자 우선주 차이",
-          "삼성전자 우선주 소각 가능성",
-          "삼성전자 우선주 배당일"
-        ],
-        "mustInclude": [
-          "보통주 vs 우선주 배당금 차이표(3분기 1주당 4,600원 추정 기준, 확인 필요: 삼성전자 IR 공시)",
-          "삼성전자 우선주 배당 지급일 일정(확인 필요: 삼성전자 IR)",
-          "우선주 소각 관련 최근 공시·발표 내용(확인 필요: 공시)",
-          "우선주-보통주 주가 괴리율 계산 예시"
-        ],
-        "mustAvoid": [
-          "삼성전자우선주를 삼성SDI·삼성바이오로직스 등 다른 계열사 우선주와 혼동",
-          "미확정 추정 배당금을 확정 수치처럼 단정해서 서술",
-          "소각 루머 수준의 내용을 공식 발표처럼 기술"
-        ],
-        "checkBefore": [
-          "삼성전자 공식 IR 페이지에서 해당 분기 배당 공시 확정 여부 확인",
-          "한국거래소 전자공시(DART)에서 우선주 소각 관련 공식 발표 확인"
-        ]
-      },
-      "at": "2026-10-19T21:06:48.786Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
       "id": "7d2dde2560115e56",
       "urls": [
         "https://noticanbutido.tistory.com/entry/yeongcheon-best-10-places-to-visit-2026",
@@ -2660,42 +2402,6 @@
         "checkBefore": [
           "한국전력공사(한전) 공식 복지할인 안내에서 대상별 신청 필요 여부·반영 시차 확인",
           "정부24/복지로에서 신청 경로와 필요 서류 확인"
-        ]
-      },
-      "at": "2026-10-20T00:58:09.872Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "2f3d65ab90843e2c",
-      "urls": [
-        "https://sanche.co.kr/national-pension-late-payment-chunap-guide/",
-        "https://gov.pinetreem.com/52",
-        "https://jjyiu.tistory.com/entry/%EA%B5%AD%EB%AF%BC%EC%97%B0%EA%B8%88-%EA%B8%B0%EC%A4%80%EC%86%8C%EB%93%9D%EC%9B%94%EC%95%A1-%EC%83%81%ED%95%9C-659%EB%A7%8C-%EC%9B%90-%EB%82%B4-%EB%B3%B4%ED%97%98%EB%A3%8C-%EC%96%BC%EB%A7%88%EC%9D%B8%EC%A7%80-%ED%99%95%EC%9D%B8%ED%95%98%EB%8A%94-%EB%B2%95",
-        "https://caresser.tistory.com/117",
-        "https://funfactlab.tistory.com/entry/%EC%8B%A4%EC%97%85%ED%81%AC%EB%A0%88%EB%94%A7%EC%9C%BC%EB%A1%9C-%EA%B5%AD%EB%AF%BC%EC%97%B0%EA%B8%88-%EB%B3%B4%ED%97%98%EB%A3%8C-%EC%A7%80%EC%9B%90%EB%B0%9B%EA%B8%B0"
-      ],
-      "guide": {
-        "direction": "'기준소득월액 계산방법·상한·변경'을 검색하는 사람은 결국 추납 신청 시 보험료가 얼마나 나올지 알고 싶은 것이라 추납 가이드와 직결된다. 고수 글들은 200만원 받는 법·상한 659만원·2026 변경점을 각각 다뤘지만, 기준소득월액을 추납 보험료 계산(119개월·60회 분할)에 바로 연결한 글은 비어 있다. 기준소득월액×요율로 회차별 금액을 보여주는 계산 예시를 넣으면 독자가 자기 상황에 대입해 다시 찾는다.",
-        "searchTargets": [
-          "국민연금 기준소득월액 계산방법",
-          "국민연금 기준소득월액 상한",
-          "국민연금 기준소득월액 변경",
-          "국민연금 기준소득월액표"
-        ],
-        "mustInclude": [
-          "추납 보험료 계산식: 신청 시점 기준소득월액 × 보험료율(9%) (확인 필요: 국민연금공단)",
-          "최대 추납 가능기간 119개월과 60회(최대 5년) 분할 납부 조건 (확인 필요: 국민연금공단 안내)",
-          "2026년 기준소득월액 상한액(예: 659만원) 적용 여부 (확인 필요: 국민연금공단 고시)",
-          "기준소득월액 변경·정정 신청 방법과 접수처(지사/EDI) (확인 필요: 국민연금공단)"
-        ],
-        "mustAvoid": [
-          "추납을 임의가입·반환일시금 재예치 등 다른 제도와 혼동하지 않기",
-          "기준소득월액을 건강보험 보수월액이나 세금 신고소득과 동일시하지 않기"
-        ],
-        "checkBefore": [
-          "국민연금공단 공식 홈페이지/EDI에서 본인 기준소득월액·추납 가능 개월수 확인",
-          "2026년 기준소득월액 상한액·보험료율 최신 고시 확인"
         ]
       },
       "at": "2026-10-20T00:58:09.872Z",
@@ -2888,36 +2594,6 @@
         "checkBefore": [
           "제공된 자동완성(양양군 날씨)이 이 소재와 무관함을 재확인하고 실제 '금리인하요구권' 관련 자동완성을 다시 조회할 것",
           "은행별 신청 조건·수용률은 전국은행연합회 '금리인하요구권 운영현황' 공시자료에서 확인"
-        ]
-      },
-      "at": "2026-10-20T01:25:06.341Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "540699b6ea31b7ff",
-      "urls": [
-        "https://chloe-insight.tistory.com/287",
-        "https://essay33117.tistory.com/18"
-      ],
-      "guide": {
-        "direction": "검색자는 iOS 27에서 뭐가 바뀌었는지, 특히 Siri AI가 한국어로 되는지를 궁금해한다. 고수 글은 7가지 기능과 Siri AI 소개를 이미 다뤘으니, 빈 각도는 지원 기기별 설치 가능 여부와 설정 메뉴 진입 경로 캡처다. 독자는 '내 아이폰에서 되는지'와 '어디서 눌러야 하는지'를 표로 보여줘야 다시 찾는다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "iOS 27 정식 출시일과 설치 가능한 아이폰 모델 목록 (확인 필요: 애플 공식 발표)",
-          "Siri AI 신기능 중 한국어로 바로 쓸 수 있는 항목만 구분 표시 (확인 필요: 애플 공식 발표)",
-          "업데이트 전 백업·저장공간 확보 순서",
-          "설정 > 일반 > 소프트웨어 업데이트 진입 경로 화면별 설명",
-          "구형 Siri와 새 Siri의 명령어 사용법 비교"
-        ],
-        "mustAvoid": [
-          "iOS 26이나 베타 버전 기능을 iOS 27 정식 기능으로 혼동",
-          "애플이 발표하지 않은 기능을 추측해 확정적으로 서술",
-          "Siri AI를 타사 AI와 성능 비교하며 과장"
-        ],
-        "checkBefore": [
-          "iOS 27 정확한 출시일·지원 기기 목록 (애플 공식 뉴스룸)",
-          "Siri AI 한국어 지원 범위와 적용 시점 (애플 공식 발표)"
         ]
       },
       "at": "2026-10-20T01:25:06.341Z",
@@ -3890,71 +3566,6 @@
       ]
     },
     {
-      "id": "01a16cc2064466ad",
-      "urls": [
-        "https://orbitjournal.tistory.com/entry/%EA%B7%BC%EB%A1%9C%EC%9E%A5%EB%A0%A4%EA%B8%88-%EB%8C%80%EC%83%81%EC%9E%90-%ED%99%95%EC%9D%B8-%EB%B0%A9%EB%B2%95%EA%B3%BC-%ED%83%88%EB%9D%BD-%EC%82%AC%EB%A1%80"
-      ],
-      "guide": {
-        "direction": "질문자들은 국가장학금 소득분위 등 다른 기준과 헷갈려 '내가 대상인지' 자체를 못 가린다. 기존 글은 '탈락 사례'만 나열해 조회 화면에서 '지급제외'나 결정금액 0원이 떴을 때 이게 확정 탈락인지 오류인지 못 짚었다. 가구구성별 요건표와 조회 3가지 방법, 화면 해석법으로 글을 끝낸다.",
-        "searchTargets": [
-          "근로장려금 대상자 확인 방법",
-          "근로장려금 대상자 조회 방법",
-          "근로장려금 대상자 제외",
-          "근로장려금 대상자 조건"
-        ],
-        "mustInclude": [
-          "단독·홑벌이·맞벌이 가구별 총소득 기준 구간 (확인 필요: 국세청 최신 고시 금액)",
-          "가구원 재산 합계액 기준 (확인 필요: 국세청 공지)",
-          "조회 결과 '지급제외' 또는 결정금액 0원이 뜰 때의 의미와 다음 조치",
-          "국가장학금 소득분위·국민취업지원제도 소득기준은 근로장려금과 별개라는 점",
-          "조회 방법 3가지: 홈택스, 손택스 앱, 전화 (확인 필요: 상담 전화번호)"
-        ],
-        "mustAvoid": [
-          "국가장학금 소득분위나 국민취업지원제도 기준을 근로장려금 소득요건과 동일하게 서술",
-          "신청 없이 자동으로 지급되는 제도처럼 오해를 주는 표현"
-        ],
-        "checkBefore": [
-          "국세청 홈택스·손택스 공식 공지의 최신 소득·재산 기준 금액",
-          "근로장려금 상담 전화번호 (국세청 공식 안내)"
-        ],
-        "solves": [
-          "국가장학금 소득분위가 높아도 근로장려금 대상인지 헷갈림 → 두 제도 기준이 다름을 표로 구분",
-          "조회 결과 지급제외·결정금액 0원이 떠서 탈락인지 오류인지 모름 → 화면별 의미와 대처법 안내",
-          "대상자 조회를 어디서 어떻게 하는지 몰라 못 찾음 → 홈택스·앱·전화 조회 방법 정리"
-        ],
-        "actionTitles": [
-          "근로장려금 대상자 확인 방법, 소득분위 높아도 되는지 정리",
-          "근로장려금 대상자 조건 확인하고 전화로 조회하는 방법"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "근로장려금 대상자",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60804&docId=494893154&answerNo=2&qb=6re866Gc7J6l66Ck6riI64yA7IOB7J6Q",
-          "views": 323,
-          "answers": 3,
-          "askedAt": "2026.08.26"
-        },
-        {
-          "title": "근로장려금 반기 대상자 맞을까요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=403&docId=494013096&answerNo=1&qb=6re866Gc7J6l66Ck6riI64yA7IOB7J6Q",
-          "views": 290,
-          "answers": 1,
-          "askedAt": "2026.06.24"
-        },
-        {
-          "title": "근로장려금 대상자",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100101&docId=490260069&answerNo=1&qb=6re866Gc7J6l66Ck6riI64yA7IOB7J6Q",
-          "views": 252,
-          "answers": 4,
-          "askedAt": "2025.11.18"
-        }
-      ]
-    },
-    {
       "id": "21bca779bfda484e",
       "urls": [
         "https://comstory50s.tistory.com/entry/SCHD-%EA%B5%AD%EB%82%B4-%EC%83%81%EC%9E%A5-ETF-%EB%B9%84%EA%B5%90-2026%EF%BD%9C4%EC%A2%85-%EC%88%98%EC%9D%B5%EB%A5%A0%C2%B7%EB%B9%84%EC%9A%A9%EA%B3%BC-%EC%9B%94%EB%B6%84%EB%B0%B0%EA%B8%88-%EA%B3%84%EC%82%B0"
@@ -4441,76 +4052,6 @@
           "views": 145,
           "answers": 6,
           "askedAt": "2026.10.05"
-        }
-      ]
-    },
-    {
-      "id": "841b4e594c529f6f",
-      "urls": [
-        "https://yjfreelifestyle.tistory.com/entry/%EA%B5%AD%EB%AF%BC%EC%97%B0%EA%B8%88-%EC%B6%94%EB%82%A9-%EB%B3%B4%ED%97%98%EB%A3%8C-%EA%B3%84%EC%82%B0-%EB%B0%A9%EB%B2%95%EA%B3%BC-%EC%8B%A0%EC%B2%AD-%EB%8C%80%EC%83%81-%EC%B5%9C%EB%8C%80-119%EA%B0%9C%EC%9B%94-%EB%82%A9%EB%B6%80-%EC%A1%B0%EA%B1%B4-%EC%A0%95%EB%A6%AC",
-        "https://gov.pinetreem.com/52",
-        "https://jjyiu.tistory.com/entry/%EA%B5%AD%EB%AF%BC%EC%97%B0%EA%B8%88-%EA%B8%B0%EC%A4%80%EC%86%8C%EB%93%9D%EC%9B%94%EC%95%A1-%EC%83%81%ED%95%9C-659%EB%A7%8C-%EC%9B%90-%EB%82%B4-%EB%B3%B4%ED%97%98%EB%A3%8C-%EC%96%BC%EB%A7%88%EC%9D%B8%EC%A7%80-%ED%99%95%EC%9D%B8%ED%95%98%EB%8A%94-%EB%B2%95",
-        "https://caresser.tistory.com/117",
-        "https://funfactlab.tistory.com/entry/%EC%8B%A4%EC%97%85%ED%81%AC%EB%A0%88%EB%94%A7%EC%9C%BC%EB%A1%9C-%EA%B5%AD%EB%AF%BC%EC%97%B0%EA%B8%88-%EB%B3%B4%ED%97%98%EB%A3%8C-%EC%A7%80%EC%9B%90%EB%B0%9B%EA%B8%B0"
-      ],
-      "guide": {
-        "direction": "검색자는 기준소득월액이 왜 실제 월급과 다른지, 매년 7월에 왜 바뀌는지 몰라 추납 보험료 계산에서 막히고, 회사 실수로 잘못 등록된 경우 어떻게 고치는지도 모른다. 고수 글들은 추납액·상한선 계산에 집중해 기준소득월액 정의와 정정신청 절차를 다루지 않는다. 이 글은 기준소득월액 정의·7월 재산정 구조·정정신청 절차(지사 방문·유선)로 끝낸다.",
-        "searchTargets": [
-          "국민연금 기준소득월액 뜻",
-          "국민연금 기준소득월액 계산방법",
-          "국민연금 기준소득월액 정정",
-          "국민연금 기준소득월액 상한"
-        ],
-        "mustInclude": [
-          "기준소득월액 정의: 전년도 12개월 평균 소득 기준, 매년 7월 재산정",
-          "정정신청 절차: 공단 지사 방문 또는 유선 신청, 산정기간 1개월→12개월 조정",
-          "기준소득월액 상한액(확인 필요: 국민연금공단 고시, 요약상 659만원 언급)",
-          "알바·단기근로자 기준소득월액 산정 시 주의점"
-        ],
-        "mustAvoid": [
-          "기준소득월액을 세전 월급·실수령액과 같은 개념으로 혼동하는 것",
-          "건강보험 보수월액과 국민연금 기준소득월액을 섞어 설명하는 것",
-          "연도 구분 없이 상한액 숫자를 고정값처럼 제시하는 것"
-        ],
-        "checkBefore": [
-          "기준소득월액 상한·하한액 최신 고시는 국민연금공단 공식 발표 확인",
-          "정정신청 절차와 처리기준은 국민연금공단 지사·고객센터 안내 확인"
-        ],
-        "solves": [
-          "기준소득월액이 월급과 달라 헷갈려 추납 계산을 못함 → 7월 재산정 로직과 정의로 설명",
-          "회사 실수로 기준소득월액이 잘못 등록된 경우 고치는 법을 몰라 방치함 → 정정신청 절차 안내",
-          "알바비 기준소득월액이 어떻게 잡히는지 몰라 추납액 계산을 못함 → 산정 방식과 계산방법 제시"
-        ],
-        "actionTitles": [
-          "국민연금 기준소득월액 뜻과 계산방법, 7월 재산정 이유",
-          "국민연금 기준소득월액 정정신청 절차와 변경 방법 총정리",
-          "국민연금 기준소득월액 상한 확인하고 추납액 계산하기"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "국민연금 추납 보험료 계산해봤는데 추납신....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100402&docId=494159945&answerNo=4&qb=6rWt66+87Jew6riI6riw7KSA7IaM65Od7JuU7JWh",
-          "views": 2824,
-          "answers": 9,
-          "askedAt": "2026.08.10"
-        },
-        {
-          "title": "국민연금 기준소득월액",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100402&docId=486980464&answerNo=3&qb=6rWt66+87Jew6riI6riw7KSA7IaM65Od7JuU7JWh",
-          "views": 1808,
-          "answers": 3,
-          "askedAt": "2025.08.04"
-        },
-        {
-          "title": "알바비 국민연금 기준소득월액",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60802&docId=493816478&answerNo=2&qb=6rWt66+87Jew6riI6riw7KSA7IaM65Od7JuU7JWh",
-          "views": 715,
-          "answers": 4,
-          "askedAt": "2026.06.12"
         }
       ]
     },
@@ -5244,78 +4785,6 @@
       "provider": "claude"
     },
     {
-      "id": "042b5a6ce2234038",
-      "urls": [
-        "https://seolj.tistory.com/261",
-        "https://jjyiu.tistory.com/entry/2027-%EC%9B%94%EC%84%B8-%EC%84%B8%EC%95%A1%EA%B3%B5%EC%A0%9C-%ED%95%9C%EB%8F%84-%ED%99%95%EB%8C%80-%EB%85%BC%EC%9D%98-%EC%A7%80%EA%B8%88-%EB%B0%9B%EC%9D%84-%EC%88%98-%EC%9E%88%EB%8A%94-%EA%B8%88%EC%95%A1%EC%9D%80",
-        "https://comme-baleine.tistory.com/entry/%EC%9B%94%EC%84%B8-%EC%84%B8%EC%95%A1%EA%B3%B5%EC%A0%9C-2026-%EB%8C%80%EC%83%81%C2%B7%EC%8B%A0%EC%B2%AD%EB%B0%A9%EB%B2%95-%EC%B5%9C%EB%8C%80-170%EB%A7%8C%EC%9B%90-%ED%99%98%EA%B8%89-%EC%A1%B0%EA%B1%B4%EA%B3%BC-%EA%B2%BD%EC%A0%95%EC%B2%AD%EA%B5%AC",
-        "https://financialfragrance.com/%ec%9b%94%ec%84%b8-%ea%b3%84%ec%95%bd%ec%9e%90%ea%b0%80-%eb%b0%b0%ec%9a%b0%ec%9e%90%eb%9d%bc%eb%a9%b4-%ec%97%b0%eb%a7%90%ec%a0%95%ec%82%b0-%ec%84%b8%ec%95%a1%ea%b3%b5%ec%a0%9c-%eb%88%84%ea%b0%80/",
-        "https://angju.tistory.com/946",
-        "https://dailylucky1208.com/410"
-      ],
-      "guide": {
-        "direction": "지식인 질문은 주택임차차입금원리금상환액과의 중복공제, 계약자가 배우자·부모 명의인 경우, 청년월세지원금과의 관계, 계약기간이 6개월씩 찍히는 경우를 구체적으로 묻는다. 고수 글들은 조건·한도·계산법을 총정리했지만 이런 중복·명의·계약기간 예외 케이스별 처리는 아직 짚지 않았다. 이 글은 사례별 체크리스트와 경정청구 절차까지 더해 상황별로 바로 끝내는 답을 준다.",
-        "searchTargets": [
-          "월세 세액공제 조건",
-          "월세 세액공제 계산",
-          "월세 세액공제 한도",
-          "월세 세액공제 집주인 동의"
-        ],
-        "mustInclude": [
-          "최대 공제 한도 170만원",
-          "경정청구 가능 여부와 절차",
-          "주택임차차입금원리금상환액과 월세 세액공제 중복공제 가능 여부",
-          "계약자가 배우자·부모 명의인 경우 세액공제 대상 판단",
-          "계약기간이 6개월 단위 연장으로 서류상 짧게 찍히는 경우 처리법"
-        ],
-        "mustAvoid": [
-          "청년월세지원금(현금 지원)과 월세 세액공제(세금 공제)를 같은 제도로 혼동",
-          "전세 대출(주택임차차입금) 공제와 월세 세액공제를 동일 조건으로 서술"
-        ],
-        "checkBefore": [
-          "국세청 홈택스 공식 안내 — 월세 세액공제 조건·한도",
-          "2026 소득세법 시행령 개정 여부 — 공식 발표 원문",
-          "2027 한도 확대 논의 관련 기사 원문 — 확정 여부 확인"
-        ],
-        "solves": [
-          "주택임차차입금원리금상환액과 월세 세액공제 중복 가능한지 모름 → 거주 기간별 중복 가능 여부 정리",
-          "계약서가 배우자·부모 명의면 누가 공제받는지 모름 → 명의별 대상 판단 기준 제시",
-          "계약기간이 서류상 6개월만 나오는데 실거주는 1년인 경우 처리법을 모름 → 제출 서류 보완 방법 설명"
-        ],
-        "actionTitles": [
-          "월세 세액공제 조건과 최대 170만원 계산법 확인하기",
-          "월세 세액공제 집주인 동의 없이 가능한지 확인하는 법",
-          "청년 월세 세액공제 중복 여부와 신청 기간 체크하기"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "연말정산 주택임차차입금원리금상환액/월세....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40311&docId=491606584&answerNo=4&qb=7JuU7IS47IS47JWh6rO17KCc",
-          "views": 680,
-          "answers": 4,
-          "askedAt": "2026.10.19"
-        },
-        {
-          "title": "청년월세지원금 받으면 연말정산때 월세 세....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40311&docId=492726029&answerNo=8&qb=7JuU7IS47IS47JWh6rO17KCc",
-          "views": 254,
-          "answers": 9,
-          "askedAt": "2026.10.14"
-        },
-        {
-          "title": "월세 세액공제 가능한지 궁금합니다",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40311&docId=494517065&answerNo=6&qb=7JuU7IS47IS47JWh6rO17KCc",
-          "views": 223,
-          "answers": 6,
-          "askedAt": "2026.10.13"
-        }
-      ]
-    },
-    {
       "id": "07504fbfd2376ed6",
       "urls": [
         "https://luvgg.com/sangsaeng-sobi-bokgwon-entry-tickets-30-2026/",
@@ -5938,76 +5407,6 @@
           "views": 474,
           "answers": 7,
           "askedAt": "2025.09.14"
-        }
-      ]
-    },
-    {
-      "id": "35dcda55199a689f",
-      "urls": [
-        "https://2.happyfactorygraphic.com/entry/%EA%B9%80%EC%9E%A5-%EC%96%B8%EC%A0%9C-%ED%95%A0%EA%B9%8C-%ED%8F%89%EB%85%84-%EA%B8%B0%EC%A4%80-%EC%84%9C%EC%9A%B8-1130%C2%B7%EB%8C%80%EC%A0%84-121-%EB%B0%B0%EC%B6%94-8%EC%B2%9C%EC%9B%90%EB%8C%80",
-        "https://dinorich830.tistory.com/311",
-        "https://jjanggu1612.tistory.com/entry/2026-%EA%B9%80%EC%9E%A5-%EC%A0%88%EC%9E%84%EB%B0%B0%EC%B6%94-%EC%98%88%EC%95%BD-%EB%A7%88%ED%8A%B8%EB%B3%84-%EA%B0%80%EA%B2%A9%EB%B9%84%EA%B5%90%EC%99%80-%EA%BF%80%ED%8C%81",
-        "https://happychoi20.tistory.com/579",
-        "https://sy1s.tistory.com/entry/2026-%EA%B9%80%EC%9E%A5-%EC%A4%80%EB%B9%84-%EC%B2%B4%ED%81%AC%EB%A6%AC%EC%8A%A4%ED%8A%B8-%EB%B0%B0%EC%B6%94-%EA%B0%80%EA%B2%A9%C2%B7%EA%B9%80%EC%9E%A5-%EC%8B%9C%EA%B8%B0%C2%B7%EC%A0%88%EC%9E%84%EB%B0%B0%EC%B6%94-20kg-%EC%98%88%EC%95%BD-%ED%95%9C-%EC%9E%A5-%EC%A0%95%EB%A6%AC"
-      ],
-      "guide": {
-        "direction": "지식인에서는 절임배추 양념 비율, 절이는 소금물 비율처럼 실제 담그는 디테일을 묻지만, 고수 블로그는 절임배추 가격비교와 사전예약 주의사항만 다루고 지역별 적정 날짜와 배추 수확·결구시기를 연결하지 않는다. 서울 11/30·대전 12/1 같은 평년 기준 날짜가 왜 그 시기인지(결구시기) 설명도 부족하다. 이 글은 지역별 날짜, 배추 수확시기, 양념·절임 비율까지 한 번에 체크리스트로 정리한다.",
-        "searchTargets": [
-          "김장배추 수확시기",
-          "김장배추가격",
-          "김장배추결구시기"
-        ],
-        "mustInclude": [
-          "평년 기준 김장 적정일: 서울 11월 30일, 대전 12월 1일",
-          "배추 가격 8천원대",
-          "절임배추 20kg 기준 양념 비율(고춧가루·마늘·생강)",
-          "배추 절이는 소금물 비율과 절이는 시간",
-          "배추 결구시기·수확시기를 기준으로 한 김장 날짜 선정법(확인 필요: 농촌진흥청 등)"
-        ],
-        "mustAvoid": [
-          "절임배추 20kg이 '몇 포기'인지 등 다른 글의 수치를 근거 없이 그대로 베끼지 말 것",
-          "해남·괴산 등 특정 산지 가격을 확인 없이 확정 시세로 못박지 말 것"
-        ],
-        "checkBefore": [
-          "서울 11/30, 대전 12/1 평년 김장일과 배추 8천원대 가격은 농촌진흥청·농수산물유통정보 자료로 확인",
-          "절임배추 사전예약 가격과 포기수는 산지(해남·괴산) 공식 판매처 공지로 확인",
-          "붕사 사용 관련 안전성은 농촌진흥청 등 공식 자료로 확인"
-        ],
-        "solves": [
-          "지역별로 언제 김장해야 할지 몰라 배추가 물러지거나 너무 일찍 담금 → 지역별 평년 적정 날짜 정리",
-          "절임배추 20kg에 맞는 양념 비율을 몰라 간이 안 맞음 → 비율 가이드 제공",
-          "배추 절이는 소금물 비율·시간을 몰라 짜거나 안 절여짐 → 절이는 방법 정리"
-        ],
-        "actionTitles": [
-          "김장 시기 지역별 확인, 서울 11/30·대전 12/1 평년 기준",
-          "절임배추 20kg 양념 비율 계산, 간 안 맞을 때 참고",
-          "배추 절이는 소금물 비율 정리, 김장 전 확인할 순서"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "절임배추 20kg 김장 시 최적의 양념 비율은 어....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020112&docId=490319631&answerNo=9&qb=6rmA7J6l67Cw7LaU",
-          "views": 2903,
-          "answers": 10,
-          "askedAt": "2026.10.08"
-        },
-        {
-          "title": "김장배추절이는방법",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020112&docId=477915030&answerNo=10&qb=6rmA7J6l67Cw7LaU",
-          "views": 2329,
-          "answers": 10,
-          "askedAt": "2026.10.08"
-        },
-        {
-          "title": "김장배추 재배, 붕사 사용 꼭 필요할까요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020112&docId=494832073&answerNo=1&qb=6rmA7J6l67Cw7LaU",
-          "views": 132,
-          "answers": 1,
-          "askedAt": "2026.08.21"
         }
       ]
     },
@@ -7517,74 +6916,6 @@
       ]
     },
     {
-      "id": "490bf284f50a96fa",
-      "urls": [
-        "https://economybeginner.com/376",
-        "https://thecheck.co.kr/bok-october-rate-meeting-loan-check/",
-        "https://yoarc.tistory.com/1821",
-        "https://moneynotediary.tistory.com/30"
-      ],
-      "guide": {
-        "direction": "금통위가 1년에 몇 번 열리는지, 다음 발표일이 언제인지 몰라 검색하는 사람이 많다. 고수 블로그는 10월22일 발표와 미국 CPI 영향은 다뤘지만 연간 전체 일정과 0.25%p 단위로만 움직이는 이유는 정리하지 않았다. 2026년 전체 금통위 일정표와 다음 회차 날짜, 변동 단위를 표로 보여주면 궁금증이 글 안에서 끝난다.",
-        "searchTargets": [
-          "한국은행 금통위 일정 2026",
-          "한국은행 금통위 10월",
-          "한국은행 금통위 11월"
-        ],
-        "mustInclude": [
-          "2026년 금통위 전체 개최일 일정표(확인 필요: 한국은행 홈페이지 공지)",
-          "10월22일 발표 결과와 11월 다음 회차 일정 비교",
-          "기준금리가 0.25%p 단위로만 움직이는 관행 설명",
-          "발표 후 대출·예금 금리 반영 시차(즉시 vs 변동주기) 설명"
-        ],
-        "mustAvoid": [
-          "미국 연준(Fed) 금리 발표와 한국 금통위 일정 혼동",
-          "다음 회차 인상·인하 방향을 확정적으로 예측",
-          "금통위원 개인 발언을 통화정책 결정처럼 단정"
-        ],
-        "checkBefore": [
-          "한국은행 홈페이지 '금융통화위원회 일정' 공지로 정확한 날짜 확인",
-          "10월22일 발표 직후 보도자료로 실제 결정(동결/인상/인하) 확인"
-        ],
-        "solves": [
-          "한국은행 금리는 얼마만에 발표하나요? → 연간 전체 일정표로 바로 확인",
-          "0.25% 단위로만 움직이는 이유는? → 빅스텝·스몰스텝 관행 설명",
-          "11월 금통위도 있나요? → 10월·11월 일정 나란히 비교"
-        ],
-        "actionTitles": [
-          "한국은행 금통위 일정 2026, 11월 발표일 한눈에 확인",
-          "한국은행 금통위 10월 결과와 11월 전망 바로 체크",
-          "한국은행 금통위 일정표로 다음 발표일 확인하기"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "한국은행 금리는 얼마만에 한번 발표하나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=401&docId=493591721&answerNo=4&qb=7ZWc6rWt7J2A7ZaJ6riI7Ya17JyE",
-          "views": 3117,
-          "answers": 5,
-          "askedAt": "2026.09.11"
-        },
-        {
-          "title": "왜 한국은행은 기준금리를 0.25% 단위로만 움....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=408&docId=222899407&answerNo=1&qb=7ZWc6rWt7J2A7ZaJ6riI7Ya17JyE",
-          "views": 1300,
-          "answers": 1,
-          "askedAt": "2015.04.15"
-        },
-        {
-          "title": "한국은행 직원들, 실제로 어떤 일 하나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=408&docId=494495988&answerNo=2&qb=7ZWc6rWt7J2A7ZaJ6riI7Ya17JyE",
-          "views": 135,
-          "answers": 3,
-          "askedAt": "2026.07.28"
-        }
-      ]
-    },
-    {
       "id": "fc06bdffb4e1c71c",
       "urls": [
         "https://reviewer77.tistory.com/363",
@@ -7650,76 +6981,6 @@
           "views": 183,
           "answers": 5,
           "askedAt": "2026.09.28"
-        }
-      ]
-    },
-    {
-      "id": "70cc30e651563c9f",
-      "urls": [
-        "https://showmethetime.tistory.com/312",
-        "https://comme-baleine.tistory.com/entry/%EB%82%9C%EB%B0%A9%EB%B9%84-%EC%A7%80%EC%9B%90%EA%B8%88-2026-%EC%8B%A0%EC%B2%AD%EB%B0%A9%EB%B2%95-%EC%82%AC%EB%9E%91%EC%98%A8-50%EB%A7%8C%EC%9B%90%C2%B7%EC%97%90%EB%84%88%EC%A7%80%EB%B0%94%EC%9A%B0%EC%B2%98-%EC%B5%9C%EB%8C%80-70%EB%A7%8C%EC%9B%90-%EC%B0%A8%EC%9D%B4",
-        "https://asit.kr/2026-energy-voucher-alternative-heating-cost-saving/",
-        "https://best79s.com/entry/%EB%8F%99%EC%A0%88%EA%B8%B0-%EC%97%90%EB%84%88%EC%A7%80%EB%B0%94%EC%9A%B0%EC%B2%98-%EC%8B%A0%EC%B2%AD%EB%B0%A9%EB%B2%95-2026-%EC%8B%A0%EC%B2%AD%EC%A1%B0%EA%B1%B4%C2%B7%EA%B8%B0%EA%B0%84%C2%B7%EB%8C%80%EC%83%81%EC%9E%90%C2%B7%EC%A7%80%EC%9B%90%EA%B8%88%EC%95%A1%C2%B7%EC%82%AC%EC%9A%A9%EB%B0%A9%EB%B2%95%C2%B7%EA%B5%AD%EB%AF%BC%ED%96%89%EB%B3%B5%EC%B9%B4%EB%93%9C"
-      ],
-      "guide": {
-        "direction": "난방비 지원금을 우리 가족도 받을 수 있는지, 맞벌이도 되는지 헷갈려 검색하는 사람이 많다. 고수 블로그는 사랑온 개편과 에너지바우처 비교는 다뤘지만 소득기준·지급일까지 한 표로 정리하지 않았다. 대상자 조건표와 신청 순서, 지급일을 정리하면 신청 전 헷갈림이 이 글에서 끝난다.",
-        "searchTargets": [
-          "난방비 지원금 조건",
-          "난방비 지원금 지급일",
-          "난방비 지원금 맞벌이",
-          "수급자 난방비 지원금"
-        ],
-        "mustInclude": [
-          "기초수급자·차상위·한부모가정별 지원금액·조건 비교표",
-          "맞벌이 가구 소득기준 포함 여부(확인 필요: 복지로 공지)",
-          "지급일·지급기간(확인 필요: 사랑온 또는 에너지바우처 공식 공지)",
-          "사랑온과 에너지바우처 중복·대체 여부 비교",
-          "신청 방법·순서(주민센터, 복지로 온라인 등)"
-        ],
-        "mustAvoid": [
-          "동사무소 전화로 계좌번호를 요구한 사례를 정상 절차처럼 안내(사기 의심, 확인 필요)",
-          "사랑온과 에너지바우처를 같은 제도처럼 혼동해서 설명",
-          "모든 가구가 받는 보편 지원금처럼 단정"
-        ],
-        "checkBefore": [
-          "보건복지부/산업통상자원부 사랑온·에너지바우처 공식 공지",
-          "복지로 사이트 대상자 조건·신청 방법"
-        ],
-        "solves": [
-          "우리 가족도 난방비 지원금 받을 수 있나요? → 대상자 조건표로 바로 확인",
-          "맞벌이도 되나요? → 소득기준 비교로 해당 여부 정리",
-          "동사무소에서 계좌번호 요구, 정상인가요? → 정식 절차와 비교해 사기 주의 안내"
-        ],
-        "actionTitles": [
-          "겨울 난방비 지원금 대상자 조건, 신청방법 확인",
-          "난방비 지원금 지급일과 맞벌이 포함 여부 확인",
-          "난방비 지원금 수급자·차상위 조건 비교로 확인"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "난방비 지원금",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100101&docId=476839218&answerNo=7&qb=64Kc67Cp67mE7KeA7JuQ6riI",
-          "views": 758,
-          "answers": 19,
-          "askedAt": "2025.10.23"
-        },
-        {
-          "title": "제가 차상위계층이다보니 동사무소에서 난방....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100101&docId=439457072&answerNo=1&qb=64Kc67Cp67mE7KeA7JuQ6riI",
-          "views": 399,
-          "answers": 1,
-          "askedAt": "2023.02.14"
-        },
-        {
-          "title": "난방비 지원금, 우리 가족도 받을 수 있을까....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=601&docId=492281936&answerNo=7&qb=64Kc67Cp67mE7KeA7JuQ6riI",
-          "views": 353,
-          "answers": 10,
-          "askedAt": "2026.09.01"
         }
       ]
     },
@@ -10133,76 +9394,6 @@
       ]
     },
     {
-      "id": "516809555c13b585",
-      "urls": [
-        "https://stocktt.tistory.com/119",
-        "https://trendsearch.tistory.com/entry/%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90-%EC%9A%B0%EC%84%A0%EC%A3%BC-%EB%B0%B0%EB%8B%B9%EA%B8%88-%EC%B0%A8%EC%9D%B4-%EB%B3%B4%ED%86%B5%EC%A3%BC%EB%B3%B4%EB%8B%A4-%EC%96%BC%EB%A7%88%EB%82%98-%EB%8D%94-%EB%B0%9B%EC%9D%84%EA%B9%8C",
-        "https://realmoneyshot.kr/samsung-electronics-dividend-payment-date-2026-q3/"
-      ],
-      "guide": {
-        "direction": "검색자는 우선주가 보통주보다 배당을 얼마나 더 받는지, 배당 받으려면 언제까지 보유해야 하는지, 소각 가능성이 있는지에서 막혀 있다. 고수 글들은 배당금 차이와 괴리율에 집중해 배당일 캘린더와 소각 가능성은 비워뒀다. 이 글은 배당금 비교표와 배당락일·지급일 일정, 소각 가능성 근거까지 한 번에 정리해 끝맺는다.",
-        "searchTargets": [
-          "삼성전자 우선주 배당금",
-          "삼성전자 우선주 배당일",
-          "삼성전자 우선주 소각",
-          "삼성전자 우선주 차이"
-        ],
-        "mustInclude": [
-          "보통주 vs 우선주 1주당 배당금 비교표(확인 필요: 전자공시·증권사 자료)",
-          "우선주 배당락일·지급일 구체 날짜(확인 필요: 삼성전자 IR 공지)",
-          "우선주-보통주 괴리율 확인 방법·사이트",
-          "소각 가능성 관련 근거, 과거 자사주 소각 이력(확인 필요: DART 공시)",
-          "3분기 1주당 배당 추정치(확인 필요: 증권사 리포트)"
-        ],
-        "mustAvoid": [
-          "소각 가능성을 확정된 사실처럼 단정",
-          "배당락일 전 보유 조건을 매수 추천처럼 서술",
-          "삼성전자우를 다른 종목의 배당 일정과 혼동해서 섞어쓰기"
-        ],
-        "checkBefore": [
-          "3분기 배당 지급일·배당락일 공식 일정(삼성전자 IR·전자공시)",
-          "1주당 배당 추정치 수치 출처(증권사 리포트명)",
-          "소각 가능성 관련 공시·보도 여부(DART 공시)"
-        ],
-        "solves": [
-          "우선주가 보통주보다 배당 얼마나 더 받는지 몰라 헷갈림 → 1주당 배당금 비교표로 바로 확인",
-          "배당 받으려면 언제까지 보유해야 하는지 모름 → 배당락일·지급일 일정 정리",
-          "삼성전자우 소각 가능성이 있는지 궁금함 → 소각 이력과 근거로 전망 제시"
-        ],
-        "actionTitles": [
-          "삼성전자 우선주 배당금, 보통주와 차이 한눈에 비교",
-          "삼성전자 우선주 배당일 확인, 소각 가능성까지 정리",
-          "삼성전자 우선주 괴리율 확인하는 법, 주가 전망까지"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "삼성전자 우선주",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=477555353&answerNo=3&qb=7IK87ISx7KCE7J6Q7Jqw7ISg7KO8",
-          "views": 497,
-          "answers": 4,
-          "askedAt": "2026.08.17"
-        },
-        {
-          "title": "삼성전자 삼성전자우의 시가총액 실적 PER 등....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=428040021&answerNo=3&qb=7IK87ISx7KCE7J6Q7Jqw7ISg7KO8",
-          "views": 320,
-          "answers": 3,
-          "askedAt": "2026.08.13"
-        },
-        {
-          "title": "삼성전자우",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=399429997&answerNo=6&qb=7IK87ISx7KCE7J6Q7Jqw7ISg7KO8",
-          "views": 255,
-          "answers": 6,
-          "askedAt": "2026.07.18"
-        }
-      ]
-    },
-    {
       "id": "31fd577d049c80ee",
       "urls": [
         "https://kay.young-gu.com/entry/%ED%8B%B0%EC%95%A4%EC%9D%B4%EC%BD%94%EB%A6%AC%EC%95%84-%EA%B3%B5%EB%AA%A8%EC%A3%BC-%EC%88%98%EC%9A%94%EC%98%88%EC%B8%A1%EA%B2%B0%EA%B3%BC",
@@ -12020,134 +11211,6 @@
       ]
     },
     {
-      "id": "df2cc9dc30261559",
-      "urls": [
-        "https://comstory50s.tistory.com/entry/national-pension-replacement-rate-43-2026",
-        "https://123.dbswjd11.com/186",
-        "https://easy.ddorwhat.com/200"
-      ],
-      "guide": {
-        "direction": "검색자는 소득대체율 43%가 '은퇴 전 월급의 43%를 그대로 받는다'는 뜻으로 오해해 막히고, 2026년 전후로 가입기간이 나뉠 때 계산이 어떻게 달라지는지 몰라 헷갈린다. 고수 블로그들은 제목에서 43%와 가입기간 추가산입을 다뤘지만 가입시기별 적용 비율과 추납 시 실제 증가액을 구체 수치로 보여주지 못했다. 가입시기별 소득대체율 적용표와 추납 1년·10년 증가액 예시, 공단 조회 경로를 함께 주면 독자는 이 글로 계산을 끝낼 수 있다.",
-        "searchTargets": [
-          "국민연금 소득대체율 계산",
-          "국민연금 소득대체율 추납",
-          "국민연금 소득대체율 변화",
-          "국민연금 소득대체율 43%"
-        ],
-        "mustInclude": [
-          "소득대체율 43%는 '월급의 43%를 그대로 받는다'는 뜻이 아니라 가입기간·평균소득 기준 계산값이라는 오해 교정",
-          "가입시기별 소득대체율 적용 비율 변화 추이표(확인 필요: 국민연금공단)",
-          "추납 1년 추가 가입 시 월 연금 약 3만 원 증가, 119개월(약 10년) 시 약 30만 원 증가 사례",
-          "국민연금공단 홈페이지·'내 곁에 국민연금' 앱에서 예상연금 조회 경로",
-          "연금액 계산식: 비례상수(40%→1.2, 45%→확인 필요) × 가입기간 반영 공식"
-        ],
-        "mustAvoid": [
-          "소득대체율을 '마지막 월급의 43%를 그대로 받는다'는 식으로 단순화해 오해를 키우는 서술",
-          "기금 고갈 시점이나 연금개혁 논쟁과 섞어 소득대체율 계산 자체를 흐리는 것",
-          "추납 유불리를 건강·기대수명 등 개인 상황 고려 없이 무조건 유리하다고 단정"
-        ],
-        "checkBefore": [
-          "소득대체율 연도별 변화 수치와 비례상수 값은 국민연금공단 공식 자료로 재확인",
-          "추납 시 증가액 예시(월 3만 원/119개월 30만 원)가 특정 사례인지 일반 공식인지 원문 맥락 확인"
-        ],
-        "solves": [
-          "소득대체율 43%가 월급의 43%를 그대로 받는다는 뜻인지 헷갈림 → 가입기간·평균소득 반영 계산 구조로 교정",
-          "추납하면 연금이 얼마나 늘어나는지 감이 안 잡힘 → 1년·10년 추납별 증가액 예시로 비교",
-          "내 예상연금을 어디서 조회하는지 모름 → 공단 홈페이지·앱 조회 경로 안내"
-        ],
-        "actionTitles": [
-          "국민연금 소득대체율 43% 계산법, 추납 10년이면 월 30만 원 차이",
-          "국민연금 예상연금 조회, 홈페이지·앱으로 바로 확인하는 법",
-          "국민연금 소득대체율 변화 추이, 가입기간별 적용 비율 확인하기"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "연봉 1억일 때 국민연금 30년 납입 후 월 수령....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100402&docId=488680605&answerNo=1&qb=6rWt66+87Jew6riIIOyGjOuTneuMgOyytOycqCDsoITtm4Qg6rCA7J6F6riw6rCEIOyYiOyDgeyXsOq4iA==",
-          "views": 2192,
-          "answers": 6,
-          "askedAt": "2025.09.08"
-        },
-        {
-          "title": "국민연금 추납에 대해서 지식인님들의 조언....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100402&docId=494750122&answerNo=7&qb=6rWt66+87Jew6riIIOyGjOuTneuMgOyytOycqCDsoITtm4Qg6rCA7J6F6riw6rCEIOyYiOyDgeyXsOq4iA==",
-          "views": 544,
-          "answers": 12,
-          "askedAt": "2026.10.01"
-        },
-        {
-          "title": "국민연금 소득대체율 궁금해요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100402&docId=316646823&answerNo=1&qb=6rWt66+87Jew6riIIOyGjOuTneuMgOyytOycqCDsoITtm4Qg6rCA7J6F6riw6rCEIOyYiOyDgeyXsOq4iA==",
-          "views": 214,
-          "answers": 1,
-          "askedAt": "2018.12.17"
-        }
-      ]
-    },
-    {
-      "id": "2171cd82530dd8e4",
-      "urls": [
-        "https://lsy4857.tistory.com/190",
-        "https://happycoiner.tistory.com/entry/%EC%B9%B4%EB%93%9C-%EC%86%8C%EB%93%9D%EA%B3%B5%EC%A0%9C-25-%EB%AC%B8%ED%84%B1-%EB%84%98%EC%97%88%EB%8B%A4%EB%A9%B4-%EB%82%A8%EC%9D%80-%EB%91%90-%EB%8B%AC-%EC%B2%B4%ED%81%AC%EC%B9%B4%EB%93%9C%EB%A1%9C-%EB%B0%94%EA%BF%94%EC%95%BC-%ED%95%A0%EA%B9%8C",
-        "https://eunplay.tistory.com/543"
-      ],
-      "guide": {
-        "direction": "검색자는 자신이 총급여의 25% 문턱을 이미 넘겼는지 어떻게 확인하는지, 넘겼다면 남은 석 달 동안 지금 바로 체크카드로 바꿔야 하는지 판단 기준이 없어 막힌다. 고수 블로그 제목들은 체크카드 전환 시점을 다뤘지만 '문턱 돌파 여부를 어디서 확인하는지'와 '남은 분기 지출 비중'을 구체 수치로 보여주지 못했다. 문턱 돌파 확인 방법과 돌파 전후 공제 구조 비교표를 주면 독자는 이 글로 전환 여부를 바로 결정할 수 있다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "총급여의 25%를 넘기기 전까지는 신용카드든 체크카드든 공제율 0%라는 전제 조건",
-          "25% 문턱 돌파 여부를 홈택스 연말정산 미리보기에서 확인하는 방법(확인 필요: 홈택스)",
-          "문턱 돌파 후에는 체크카드·현금영수증 공제율이 신용카드보다 높다는 구조(정확한 공제율 수치는 확인 필요: 국세청)",
-          "남은 4분기(10~12월) 동안 체크카드 전환 여부를 문턱 돌파 기준으로 판단하는 흐름"
-        ],
-        "mustAvoid": [
-          "의료비·교육비 등 다른 공제와 섞어 카드 소득공제 문턱 논리를 흐리는 것"
-        ],
-        "checkBefore": [
-          "신용카드·체크카드·현금영수증 정확한 공제율 수치는 국세청·홈택스 공식 자료로 확인",
-          "2026년 기준 25% 문턱이 총급여 기준인지 국세청 연말정산 안내로 재확인"
-        ],
-        "solves": [
-          "내가 이미 25% 문턱을 넘겼는지 모르겠음 → 홈택스 미리보기로 확인하는 방법 제시",
-          "남은 두세 달 신용카드 계속 써야 할지 체크카드로 바꿔야 할지 헷갈림 → 문턱 돌파 여부 기준으로 판단 흐름 정리"
-        ],
-        "actionTitles": [
-          "신용카드 소득공제 25% 문턱 넘었는지 확인하는 법",
-          "신용카드 체크카드 소득공제 비교, 문턱 넘은 후 선택법"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "소득공제에 유리한 방법 문의드려요.(현금영....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40309&docId=491978322&answerNo=10&qb=7IaM65Od6rO17KCcIOusuO2EsSDrhJjsl4jri6TrqbQg64Ko7J2AIOyytO2BrOy5tOuTnA==",
-          "views": 4189,
-          "answers": 11,
-          "askedAt": "2026.07.18"
-        },
-        {
-          "title": "나라사랑카드",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010506&docId=493524475&answerNo=4&qb=7IaM65Od6rO17KCcIOusuO2EsSDrhJjsl4jri6TrqbQg64Ko7J2AIOyytO2BrOy5tOuTnA==",
-          "views": 263,
-          "answers": 6,
-          "askedAt": "2026.05.24"
-        },
-        {
-          "title": "소득공제 신용카드 한도",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40104&docId=495165823&answerNo=3&qb=7IaM65Od6rO17KCcIOusuO2EsSDrhJjsl4jri6TrqbQg64Ko7J2AIOyytO2BrOy5tOuTnA==",
-          "views": 191,
-          "answers": 5,
-          "askedAt": "2026.10.08"
-        }
-      ]
-    },
-    {
       "id": "f6b4d607750699a7",
       "urls": [
         "https://seolj.tistory.com/258",
@@ -12670,68 +11733,6 @@
       ]
     },
     {
-      "id": "29154ff7318fdb2d",
-      "urls": [
-        "https://honeypencil.tistory.com/entry/%EC%95%84%EC%9D%B4%EB%A7%9E%EC%9D%B4-%EC%A7%80%EC%9B%90%EA%B8%88-%EC%8B%A0%EC%B2%AD%EB%B0%A9%EB%B2%95-%EB%8C%80%EC%83%81-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://acecomm.tistory.com/entry/2027%EB%85%84-%EC%95%84%EC%9D%B4%EB%A7%9E%EC%9D%B4%EC%A7%80%EC%9B%90%EA%B8%88-%EC%B6%9C%EC%82%B0%EC%A7%80%EC%9B%90%EA%B8%88-%EC%A1%B0%EA%B1%B4%EA%B3%BC-%EC%95%84%EB%8F%99%EA%B8%B0%EB%B3%B8%EC%88%98%EB%8B%B9-%EB%B3%80%EA%B2%BD-%EC%82%AC%ED%95%AD",
-        "https://infobox2692.tistory.com/entry/2027%EB%85%84-%EC%B6%9C%EC%82%B0%EC%A7%80%EC%9B%90%EA%B8%88-1000%EB%A7%8C-%EC%9B%90-%EC%A7%80%EA%B8%89-%EC%B4%9D%EC%A0%95%EB%A6%AC-%EC%95%84%EC%9D%B4%EB%A7%9E%EC%9D%B4%EC%A7%80%EC%9B%90%EA%B8%88-%EA%B0%9C%ED%8E%B8%EC%95%88-%EB%B9%84%EA%B5%90"
-      ],
-      "guide": {
-        "direction": "검색자는 언제 태어난 아이부터 개편된 아이맞이지원금을 받을 수 있는지와 기존 출산지원금과 뭐가 다른지를 가장 궁금해한다. 고수 글 제목은 금액(1,000만원 등)만 강조하고 26년 11월생도 해당되는지 같은 적용 시점은 명확히 짚지 않는다. 출생 시점별 적용 여부 표와 기존 제도와의 차이 비교표를 주면 글에서 바로 답을 얻는다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "2027년 시행 예정 아이맞이지원금 금액(첫째 1,000만원·둘째 1,200만원·셋째 1,500만원, 1년간 4회 분할 지급, 확인 필요: 정부 공식 발표)",
-          "신청 대상 적용 시점(26년 11월 이후 출생아 포함 여부, 확인 필요: 보건복지부 공지)",
-          "기존 지원체계(출산지원금·아동기본수당)와 아이맞이지원금 차이 비교표",
-          "2026년 1월 이후 상반기 시행 여부 등 시점 조건(확인 필요: 정부 발표)"
-        ],
-        "mustAvoid": [
-          "아직 확정되지 않은 금액·시행일을 기존 제도처럼 확정된 사실로 서술",
-          "김포시 등 지자체 자체 출산지원금과 정부 아이맞이지원금을 혼동해 안내"
-        ],
-        "checkBefore": [
-          "보건복지부·정부 공식 보도자료에서 아이맞이지원금 금액·시행일·대상 기준 확인",
-          "기존 출산지원금·아동기본수당과의 관계 및 개편 여부 공식 자료 확인"
-        ],
-        "solves": [
-          "26년 11월에 출산했는데 개편된 아이맞이지원금을 받을 수 있는지 모르겠다 → 적용 시점 기준표로 안내",
-          "첫째·둘째 계획 중인데 지원금 외 추가로 뭘 알아야 하는지 모르겠다 → 기존 제도와 달라진 점 비교표 제공",
-          "얼마를 어떻게 나눠 받는지 모르겠다 → 금액·분할 지급 방식 정리"
-        ],
-        "actionTitles": [
-          "아이맞이 지원금 신청방법, 대상 조건 완벽 총정리 가이드",
-          "아이맞이지원금과 기존 출산지원금, 뭐가 다른지 비교",
-          "아이맞이지원금 개편, 26년 11월생도 적용되는지 확인하기"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "사회수행편가 내공많이 드림 !!!",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=61402&docId=62610523&answerNo=1&qb=7JWE7J2066ee7J207KeA7JuQ6riIIOy2nOyCsOyngOybkOq4iCDslYTrj5nquLDrs7jsiJjri7kg7IKs7ZWt",
-          "views": 71202,
-          "answers": 4,
-          "askedAt": "2008.04.10"
-        },
-        {
-          "title": "아이맞이지원금, 기존 지원체계와 어떻게 달....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40403&docId=494984314&answerNo=14&qb=7JWE7J2066ee7J207KeA7JuQ6riIIOy2nOyCsOyngOybkOq4iCDslYTrj5nquLDrs7jsiJjri7kg7IKs7ZWt",
-          "views": 246,
-          "answers": 14,
-          "askedAt": "2026.10.16"
-        },
-        {
-          "title": "김포시 아이맞이지원금",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110102&docId=494946125&answerNo=13&qb=7JWE7J2066ee7J207KeA7JuQ6riIIOy2nOyCsOyngOybkOq4iCDslYTrj5nquLDrs7jsiJjri7kg7IKs7ZWt",
-          "views": 127,
-          "answers": 13,
-          "askedAt": "2026.10.11"
-        }
-      ]
-    },
-    {
       "id": "fa196d6cccbd19db",
       "urls": [
         "https://jjyiu.tistory.com/entry/DSR-3%EB%8B%A8%EA%B3%84-%EC%8B%9C%ED%96%89-%EC%A0%84-%EA%BC%AD-%EC%95%8C%EC%95%84%EC%95%BC-%ED%95%A0-%EB%8C%80%EC%B6%9C%ED%95%9C%EB%8F%84-%EB%B3%80%ED%99%94%EC%99%80-%EB%8C%80%EC%9D%91%EB%B2%95",
@@ -12859,66 +11860,6 @@
           "views": 63,
           "answers": 1,
           "askedAt": "2026.09.30"
-        }
-      ]
-    },
-    {
-      "id": "9761d8d3002787e9",
-      "urls": [
-        "https://quiet-flaneur.tistory.com/44",
-        "https://dke.ralabla.com/37"
-      ],
-      "guide": {
-        "direction": "검색자는 '적금 연5%가 예금 연4.5%보다 왜 이자가 적게 느껴지는지' 손으로 계산해도 맞는지 확인하지 못해 막힌다. 고수 글은 계산기 사용법만 안내하고 같은 금리인데 금액이 다른 이유인 월별 예치기간 원리는 설명하지 않았다. 이 글은 월 50만원 연4.3% 예시로 각 회차 예치월수를 표로 보여줘 계산기 없이도 직접 검증하게 한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "적금 월적립식 이자계산 공식(회차별 예치기간이 다른 선입선출 구조)",
-          "월 50만원 연4.3%(1년) 가정 시 회차별 예치월수·이자 표",
-          "같은 '연4%'라도 예금은 전액이 12개월, 적금은 평균 6.5개월 예치되는 차이",
-          "이자소득세(15.4%) 적용 전후 실수령액 비교"
-        ],
-        "mustAvoid": [
-          "특정 은행 상품을 추천하거나 광고성으로 언급하는 것",
-          "단리·복리 방식을 명시하지 않고 섞어서 계산하는 것"
-        ],
-        "checkBefore": [
-          "해당 은행 앱 이자계산기 결과값과 비교해 공식 검증",
-          "국세청 기준 이자소득세율 확인"
-        ],
-        "solves": [
-          "정기적금 이자 계산이 맞는지 모르겠어요 → 회차별 예치기간을 반영한 계산법으로 직접 검증 가능",
-          "정기적금 연5%가 정기예금 연4.5%보다 왜 이자가 적게 느껴지나요 → 월적립식 실질 이자 비교표로 설명"
-        ],
-        "actionTitles": [
-          "정기적금 이자 계산법 손으로 직접 계산하는 순서",
-          "정기예금 정기적금 이자 비교 계산기 사용법",
-          "연4% 적금 예금 실수령 이자 차이 계산 정리"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "정기적금 이자 계산 이거 맞나요??",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40101&docId=34764057&answerNo=1&qb=7KCV6riw7KCB6riI7J207J6Q6rOE7IKw6riw",
-          "views": 7718,
-          "answers": 1,
-          "askedAt": "2008.05.06"
-        },
-        {
-          "title": "자유입출금 / 자유입출금, 정기 적금 혼합 이....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40101&docId=27365282&answerNo=1&qb=7KCV6riw7KCB6riI7J207J6Q6rOE7IKw6riw",
-          "views": 6087,
-          "answers": 1,
-          "askedAt": "2006.03.13"
-        },
-        {
-          "title": "정기적금 이자계산 좀 해주세요~ 도통 모르겠....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40101&docId=33726714&answerNo=1&qb=7KCV6riw7KCB6riI7J207J6Q6rOE7IKw6riw",
-          "views": 4550,
-          "answers": 1,
-          "askedAt": "2005.09.08"
         }
       ]
     },
@@ -13147,72 +12088,6 @@
           "views": 2311,
           "answers": 1,
           "askedAt": "2025.10.31"
-        }
-      ]
-    },
-    {
-      "id": "0e49ed8d55ea931e",
-      "urls": [
-        "https://support.jcmoney.co.kr/%eb%b0%94%eb%94%94%ed%94%84%eb%9e%9c%eb%93%9c-%ea%b3%a0%ea%b0%9d%ec%84%bc%ed%84%b0-%ec%a0%84%ed%99%94%eb%b2%88%ed%98%b8-%ec%83%81%eb%8b%b4%ec%82%ac-%ec%97%b0%ea%b2%b0-%eb%b0%8f-%ec%95%88%eb%a7%88/",
-        "https://deuktem-lab.tistory.com/entry/%EC%95%88%EB%A7%88%EC%9D%98%EC%9E%90-%EC%B6%94%EC%B2%9C-%EB%B0%94%EB%94%94%ED%94%84%EB%9E%9C%EB%93%9C-%ED%8C%94%EC%BD%98i-%EA%B3%A0%EA%B8%89-%EC%95%88%EB%A7%88%EC%9D%98%EC%9E%90-%EA%B5%AC%EB%A7%A4-%EC%A0%84-%EC%9E%A5%EC%A0%90%EA%B3%BC-%EB%8B%A8%EC%A0%90"
-      ],
-      "guide": {
-        "direction": "검색자는 AS 전화 연결이 어렵거나 강도 고정 같은 구체 고장 증상이 AS 대상인지 헷갈려 막혀 있다. 고수 글은 전화번호·신청법과 팔콘i 장단점을 따로 다뤘지만 렌탈 고객과 구매 고객의 AS 절차·무상 기준 차이는 못 짚었다. 고객센터 접수 경로와 고장 증상 체크리스트로 글 하나에서 끝낸다.",
-        "searchTargets": [
-          "안마의자 바디프랜드 as",
-          "안마의자 바디프랜드 렌탈",
-          "안마의자 바디프랜드 팔콘",
-          "안마의자 바디프랜드 매장"
-        ],
-        "mustInclude": [
-          "바디프랜드 고객센터 대표전화번호와 상담 가능 시간(확인 필요: 바디프랜드 공식 홈페이지)",
-          "렌탈 고객과 구매(일시불) 고객의 AS 신청 절차·무상/유상 기준 차이(확인 필요: 공식 AS 정책)",
-          "팔콘·팬텀 등 모델별 단종 여부와 후속 모델명(확인 필요: 바디프랜드 공식 제품 페이지)",
-          "전원 시 강도 고정 등 흔한 고장 증상 자가 점검 체크리스트",
-          "매장 방문 AS 신청 vs 전화·앱 AS 신청 절차 비교"
-        ],
-        "mustAvoid": [
-          "타사(세라젬·코지마 등) AS 절차를 바디프랜드 절차와 혼동해 섞지 않기",
-          "모델 단종 소문을 공식 확인 없이 사실처럼 단정하지 않기"
-        ],
-        "checkBefore": [
-          "바디프랜드 공식 홈페이지·고객센터 공지에서 최신 전화번호, 상담시간, AS 접수 채널 확인",
-          "팔콘/팬텀 단종 여부는 바디프랜드 공식 제품 페이지나 매장 공지로 확인"
-        ],
-        "solves": [
-          "바디프랜드 AS 신청하려는데 전화 상담사 연결이 어려움 → 고객센터 번호·상담시간·대안 접수 채널 정리",
-          "전원 켤 때마다 강도가 3으로 고정되는데 고장인가? → 자가점검 체크리스트와 AS 신청 기준 제공",
-          "팔콘·팬텀 단종되면 AS는 어떻게 받나 → 모델별 단종 여부와 AS 지속 여부 안내"
-        ],
-        "actionTitles": [
-          "바디프랜드 고객센터 전화번호와 AS 신청 방법 정리",
-          "바디프랜드 렌탈·구매 AS 신청 절차 차이 확인하기"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "바디프랜드 안마의자 더 팬텀 vs 팔콘",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=50802&docId=458479679&answerNo=7&qb=7JWI66eI7J2Y7J6QIOuwlOuUlO2UhOuenOuTnCDtjJTsvZhpIOqzoOq4iSDqtazrp6Q=",
-          "views": 1593,
-          "answers": 7,
-          "askedAt": "2023.12.14"
-        },
-        {
-          "title": "바디프랜드 안마의자 팔콘n과 팬텀로보(메디....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=50802&docId=492701997&answerNo=3&qb=7JWI66eI7J2Y7J6QIOuwlOuUlO2UhOuenOuTnCDtjJTsvZhpIOqzoOq4iSDqtazrp6Q=",
-          "views": 761,
-          "answers": 3,
-          "askedAt": "2026.05.22"
-        },
-        {
-          "title": "바디프랜드 팔콘 누가베스트 엔모션 어르신 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=50503&docId=462419269&answerNo=2&qb=7JWI66eI7J2Y7J6QIOuwlOuUlO2UhOuenOuTnCDtjJTsvZhpIOqzoOq4iSDqtazrp6Q=",
-          "views": 323,
-          "answers": 2,
-          "askedAt": "2024.01.17"
         }
       ]
     },
@@ -14251,43 +13126,6 @@
           "askedAt": "2010.06.03"
         }
       ]
-    },
-    {
-      "id": "9113c59b4ce09d0e",
-      "urls": [
-        "https://queenohora.tistory.com/815",
-        "https://acecomm.tistory.com/entry/86%EC%84%B8-%EC%9A%94%EB%A6%AC%EC%97%B0%EA%B5%AC%EA%B0%80-%EC%8B%AC%EC%98%81%EC%88%9C-%EC%B1%84%EC%86%8C%ED%83%95-%ED%88%AC%EB%B3%91%EA%B3%BC-%EC%B7%8C%EC%9E%A5%EC%95%94-%EC%99%84%EC%B9%98-%ED%8C%90%EC%A0%95-%EB%B9%84%ED%95%98%EC%9D%B8%EB%93%9C"
-      ],
-      "guide": {
-        "direction": "검색자는 심영순이 투병 중 먹었다는 채소탕 재료 5가지와 만드는 법을 구체적으로 알고 싶어 검색한다. 기존 고수 글은 투병·완치 서사는 다뤘지만 채소탕 재료 목록과 조리 순서를 명확히 정리하지 않았다. 이 글은 채소 5가지 목록과 끓이는 순서를 표로 정리해 검색자가 바로 따라 만들 수 있게 한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "채소탕에 들어가는 채소 5가지 목록 (확인 필요: 심영순 방송·인터뷰 원문)",
-          "채소탕 끓이는 순서와 비율 (확인 필요: 원문 레시피)",
-          "심영순 췌장암 투병 시기와 완치 판정 사실 여부 (확인 필요: 언론 보도)"
-        ],
-        "mustAvoid": [
-          "채소탕을 암 치료 효능이 있는 것처럼 단정하지 않기",
-          "투병 관련 사생활을 추측성으로 서술하지 않기",
-          "심영순을 다른 요리연구가와 혼동하지 않기"
-        ],
-        "checkBefore": [
-          "심영순 본인 방송·인터뷰 원문에서 채소탕 재료와 투병 사실 확인",
-          "췌장암 완치 판정 여부는 의료진 발표나 신뢰 가능한 언론 보도로 확인"
-        ],
-        "solves": [
-          "채소탕에 들어가는 채소 5가지가 뭔지 → 재료 목록을 표로 정리해 제시",
-          "채소탕을 어떻게 끓이는지 → 조리 순서를 단계별로 정리",
-          "심영순이 정말 완치됐는지 → 투병과 완치 판정 관련 사실을 확인된 정보로 정리"
-        ],
-        "actionTitles": [
-          "심영순 채소탕 만드는 법, 채소 5가지 재료 확인하기",
-          "심영순 췌장암 투병과 완치 판정 사실 여부 확인하기"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
     },
     {
       "id": "f62f3299a820f3ef",
@@ -15706,73 +14544,6 @@
       ]
     },
     {
-      "id": "39227b5afb9303ef",
-      "urls": [
-        "https://onna.kr/apple-iphone-ios-27-2-rc-new-features-release",
-        "https://chloe-insight.tistory.com/287"
-      ],
-      "guide": {
-        "direction": "검색자는 iOS27 RC가 뭔지, 시리 AI 한국어 지원이 언제 되는지, 지역 제한이 뭔지 궁금해하면서도 업데이트는 하려 한다(지식인 조회 743). 고수 글 '핵심 기능 7가지'는 기능 나열에 그쳐 RC 설치 시 주의사항·용량 부족 해결법 같은 실무가 빠져있다. RC-정식판 차이와 용량 확보 방법, 시리 한국어 지원 현황을 체크리스트로 묶어줘야 글이 끝난다.",
-        "searchTargets": [
-          "아이폰 ios27",
-          "아이폰 ios 용량 줄이기",
-          "아이폰 ios27.0.1",
-          "아이폰 ios27 배경화면"
-        ],
-        "mustInclude": [
-          "iOS 27.2 RC와 정식 출시 버전의 차이(확인 필요: 애플 공식 발표)",
-          "업데이트 전 용량 부족 시 ios 용량 줄이기 방법 연결",
-          "시리 AI 한국어 지원 시기·지역 제한 여부(확인 필요: 애플 공식 공지)",
-          "iOS26→27 업그레이드 시 구형 기기 호환성·배터리 주의사항"
-        ],
-        "mustAvoid": [
-          "iOS27과 iOS27.0.1 등 세부 버전 혼동 설명",
-          "아직 확정 안 된 시리 AI 한국어 지원 일정을 단정적으로 서술",
-          "RC(베타성) 버전을 정식 안정 버전처럼 설명해 설치 위험 누락"
-        ],
-        "checkBefore": [
-          "iOS 27.2 RC 정확한 빌드번호·배포일은 애플 공식 지원 페이지로 확인",
-          "시리 AI 한국어 지원 시점은 애플 뉴스룸·공식 발표로 재확인"
-        ],
-        "solves": [
-          "iOS27 업데이트하면 시리 AI 핵심 기능 못 쓰는 거 아닌가 → 지역 제한·한국어 지원 현황 정리",
-          "업데이트하려는데 용량이 부족하다 → ios 용량 줄이기 방법 연결",
-          "RC 버전이 뭔지 몰라 설치해도 되는지 불안하다 → RC-정식판 차이와 설치 주의사항 설명"
-        ],
-        "actionTitles": [
-          "아이폰 iOS27 업데이트 방법과 용량 줄이기, 한번에 정리",
-          "iOS27 RC 업데이트 전 꼭 확인할 주의사항과 설치 방법",
-          "아이폰 iOS27 시리 AI 한국어 지원 현황과 업데이트 방법"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "ios27 아이폰27",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1070401&docId=493768078&answerNo=5&qb=7JWE7J207Y+wIGlvcyDtlbXsi6wg6riw64qlIHNpcmk=",
-          "views": 743,
-          "answers": 6,
-          "askedAt": "2026.09.19"
-        },
-        {
-          "title": "애플워치 울트라 4 vs 갤럭시 워치 울트라 2, ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1126&docId=495376897&answerNo=1&qb=7JWE7J207Y+wIGlvcyDtlbXsi6wg6riw64qlIHNpcmk=",
-          "views": 117,
-          "answers": 2,
-          "askedAt": "2026.10.01"
-        },
-        {
-          "title": "iOS27의 시리, AI 기능 실제로 얼마나 유용한가....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020204&docId=495189537&answerNo=3&qb=7JWE7J207Y+wIGlvcyDtlbXsi6wg6riw64qlIHNpcmk=",
-          "views": 75,
-          "answers": 4,
-          "askedAt": "2026.09.17"
-        }
-      ]
-    },
-    {
       "id": "8a76429a26f76d99",
       "urls": [
         "https://dreaminfo.tistory.com/1438",
@@ -16688,69 +15459,6 @@
       ]
     },
     {
-      "id": "ca555ebb4d11e684",
-      "urls": [
-        "https://infobox2692.tistory.com/entry/3%EB%8C%80-%EB%AA%A8%EB%91%90-%ED%98%84%EC%97%AD%EC%9D%B4%EC%96%B4%EC%95%BC-%ED%95%A0%EA%B9%8C-%EB%B3%91%EC%97%AD%EB%AA%85%EB%AC%B8%EA%B0%80-%EC%8B%A0%EC%B2%AD-%EC%9E%90%EA%B2%A9-%EB%B0%8F-%EC%98%A8%EB%9D%BC%EC%9D%B8-%EC%8B%A0%EC%B2%AD-%ED%98%9C%ED%83%9D-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://bizfundnote.tistory.com/27"
-      ],
-      "guide": {
-        "direction": "지식인 질문들을 보면 '3대가 꼭 모두 현역이어야 하는지', '사촌·이혼가정도 인정되는지'가 실제 막힘 지점이다. 고수 블로그 제목은 자격 여부만 묻고 답을 못 주며, 학사장교 등 다른 제도 질문과 섞여 혼란을 키운다. 3대 기준(직계 조부-부-본인)과 이혼·사촌 포함 여부를 조건표로, 온라인 신청과 방문 접수 절차를 순서로 정리하면 글에서 바로 판단할 수 있다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "병역명문가 기준: 3대(조부-부-본인)가 모두 현역으로 병역을 마친 경우 해당",
-          "사촌 형제까지 포함되는지, 이혼·재혼 가정도 인정되는지 예외 케이스(확인 필요: 병무청 공고)",
-          "신청 방법: 병무청 홈페이지 온라인 신청 또는 가까운 지방병무청 방문 접수",
-          "제출서류 목록과 신청 기간(확인 필요: 병무청 서식·공고)",
-          "선정 시 혜택 내용(확인 필요: 병무청 발표)"
-        ],
-        "mustAvoid": [
-          "학사장교·전문연구요원 등 다른 병역 제도와 혼동해 설명하지 않기",
-          "'명문가'와 '명문대' 등 유사 단어로 생기는 오해를 방치하지 않기",
-          "이혼가정 등 특정 가족 상황을 사생활 추측으로 다루지 않기"
-        ],
-        "checkBefore": [
-          "병무청 공식 홈페이지 '병역명문가' 공고에서 3대 인정 범위와 신청 기간 재확인",
-          "사촌·이혼가정 등 예외 인정 기준은 관할 지방병무청에 문의해 확인"
-        ],
-        "solves": [
-          "'3대가 모두 현역이어야만 되는지 모르겠다' → 3대 기준과 예외 사례를 조건표로 정리",
-          "'이혼가정도 병역명문가가 될 수 있는지 모르겠다' → 인정 여부를 사례별로 안내",
-          "'온라인 신청과 방문 접수 중 뭘 해야 할지 헷갈린다' → 두 절차를 단계별로 비교"
-        ],
-        "actionTitles": [
-          "병역명문가 신청자격 3대 현역 기준 한번에 확인하기",
-          "병역명문가 온라인 신청과 방문 접수 절차 한번에 비교정리",
-          "병역명문가 신청자격부터 온라인 신청방법까지 한번에 총정리"
-        ]
-      },
-      "at": "2026-10-20T12:32:18.112Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "병역명문가 기준",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60301&docId=486136853&answerNo=7&qb=7ZiE7Jet7J207Ja07JW8IO2VoOq5jCDrs5Hsl63rqoXrrLgg7Jio65287J24",
-          "views": 2290,
-          "answers": 7,
-          "askedAt": "2026.07.02"
-        },
-        {
-          "title": "병역명문가 기준 질문 드립니다.",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=603&docId=417328967&answerNo=5&qb=7ZiE7Jet7J207Ja07JW8IO2VoOq5jCDrs5Hsl63rqoXrrLgg7Jio65287J24",
-          "views": 1334,
-          "answers": 5,
-          "askedAt": "2026.07.02"
-        },
-        {
-          "title": "학사장교 입대 후 대학원진학 질문!!!!!!!!!!!!!",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60302&docId=63794065&answerNo=2&qb=7ZiE7Jet7J207Ja07JW8IO2VoOq5jCDrs5Hsl63rqoXrrLgg7Jio65287J24",
-          "views": 674,
-          "answers": 3,
-          "askedAt": "2009.10.16"
-        }
-      ]
-    },
-    {
       "id": "0240f21ce66f697c",
       "urls": [
         "https://usefulinfo.tistory.com/254",
@@ -17592,135 +16300,6 @@
       ]
     },
     {
-      "id": "6566ed97956bfcb7",
-      "urls": [
-        "https://yjfreelifestyle.tistory.com/entry/%EC%A3%BC%ED%83%9D-%EC%96%91%EB%8F%84%EC%84%B8-%EB%B9%84%EA%B3%BC%EC%84%B8-%EC%A1%B0%EA%B1%B4%EA%B3%BC-%EC%8B%A0%EA%B3%A0-%EB%B0%A9%EB%B2%95-1%EC%84%B8%EB%8C%80-1%EC%A3%BC%ED%83%9D-%EA%B8%B0%EC%A4%80%EB%B6%80%ED%84%B0-%EC%98%88%EC%99%B8%EA%B9%8C%EC%A7%80",
-        "https://sosc.pensionhub.co.kr/14"
-      ],
-      "guide": {
-        "direction": "지식인 질문은 단순 1주택이 아니라 일시적 2주택, 혼인합가, 상속주택(공동상속), 분양권 보유 중 비과세 판정처럼 예외 케이스에서 막힌다. 고수 글은 '기준부터 예외까지'라 했지만 사례별 처분기한·보유기간을 분기해 보여주지 못한 것으로 보인다. 기본요건표에 일시적2주택·혼인·상속주택 유형별 체크리스트와 보유·거주기간 계산 예시를 붙이면 독자가 자기 케이스를 바로 판정할 수 있다.",
-        "searchTargets": [
-          "1주택 양도세 비과세 조건",
-          "2주택 양도세",
-          "1가구 1주택 양도세 비과세"
-        ],
-        "mustInclude": [
-          "1세대 1주택 비과세 기본요건표(보유2년, 조정대상지역 거주요건 등)(확인 필요: 국세청 안내)",
-          "일시적 2주택 비과세 요건(종전주택 보유기간, 신규주택 취득 후 처분기한)(확인 필요: 소득세법 시행령)",
-          "혼인으로 인한 2주택 특례 처분기한(혼인신고일 기준)(확인 필요: 소득세법 시행령)",
-          "상속주택(공동상속 포함) 보유 중 일반주택 양도 시 비과세 판단 기준(확인 필요: 시행령 제155조)",
-          "조정대상지역 무주택자 취득 시 거주요건 면제 조건(확인 필요: 시행령 제154조 제1항)"
-        ],
-        "mustAvoid": [
-          "공동상속주택을 일반 상속주택 특례와 동일하게 서술해 오해 유발",
-          "혼인합가 특례 처분기한과 일반 일시적 2주택 처분기한을 섞어서 설명",
-          "조정대상지역 지정 여부에 따라 거주요건이 달라지는 점을 빠뜨리고 일괄 적용"
-        ],
-        "checkBefore": [
-          "현재 조정대상지역 지정 현황(국토교통부·국세청 홈택스 공지)",
-          "소득세법 시행령 제154·155조 최신 개정 여부(법제처 국가법령정보센터)"
-        ],
-        "solves": [
-          "일시적 2주택인데 비과세 되는지 몰라요 → 종전주택 보유기간·처분기한 기준표로 판정",
-          "상속주택 있는데 일반주택 팔면 비과세인가요 → 양도 순서별 비과세 가능 여부 정리",
-          "혼인신고 후 2주택 됐는데 세금 내나요 → 혼인합가 특례 처분기한 체크리스트 제공"
-        ],
-        "actionTitles": [
-          "1주택 양도세 비과세 조건 확인하고 신고까지 끝내기",
-          "2주택 양도세 비과세 여부 셀프 체크하는 법"
-        ]
-      },
-      "at": "2026-10-20T12:32:18.112Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "양도소득세 신고문의",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40201&docId=495604500&answerNo=6&qb=7KO87YOdIOyWkeuPhOyEuCDruYTqs7zshLgg7Iug6rOgIOyYiOyZuA==",
-          "views": 45,
-          "answers": 6,
-          "askedAt": "2026.10.19"
-        },
-        {
-          "title": "1세대 1주택 1분양권 양도소득세 문의",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40305&docId=493479301&answerNo=6&qb=7KO87YOdIOyWkeuPhOyEuCDruYTqs7zshLgg7Iug6rOgIOyYiOyZuA==",
-          "views": 638,
-          "answers": 6,
-          "askedAt": "2026.10.01"
-        },
-        {
-          "title": "조정지역 내 주택 매도시 실거주없이 양도세 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40201&docId=495384376&answerNo=5&qb=7KO87YOdIOyWkeuPhOyEuCDruYTqs7zshLgg7Iug6rOgIOyYiOyZuA==",
-          "views": 204,
-          "answers": 5,
-          "askedAt": "2026.10.11"
-        }
-      ]
-    },
-    {
-      "id": "ad23c6ab3c009fbb",
-      "urls": [
-        "https://cc.productinsight.kr/58",
-        "https://cnp.youmytv.com/26"
-      ],
-      "guide": {
-        "direction": "지식인 질문은 어디서 싸게 사는지, 브랜드별·사이즈별 가격을 어디서 비교하는지에 막혀 있다. 고수 글 '타이어 가격비교 사이트'는 사이트만 나열해 규격 확인법이나 공임 포함 총비용 비교까지는 못 짚는다. 타이어 규격 읽는 법과 총판·직영몰 비교표, 공임 포함 총액 계산까지 보여주면 독자가 자기 차 기준으로 바로 비교를 끝낼 수 있다.",
-        "searchTargets": [
-          "타이어가격비교표",
-          "타이어가격비교사이트"
-        ],
-        "mustInclude": [
-          "타이어 옆면 규격(폭/편평비/휠경) 읽는 법(확인 필요: 제조사 매뉴얼)",
-          "타이어뱅크·타이어프로 등 총판과 제조사 직영몰 비교표(확인 필요: 각 사이트)",
-          "금호·넥센·한국타이어 등 동일 사이즈 브랜드별 가격대 비교표(확인 필요: 각 브랜드 공식몰)"
-        ],
-        "mustAvoid": [
-          "특정 사이트 하나만 추천하고 나머지는 생략해 광고성으로 비치는 것",
-          "과거 연도 가격을 현재가처럼 제시",
-          "자전거 타이어 등 다른 '타이어' 검색과 내용 혼동"
-        ],
-        "checkBefore": [
-          "비교 대상 사이트들의 최신 가격·공임 포함 여부(각 사이트 공식 페이지)",
-          "브랜드별 현재 카드 할인·프로모션 여부(각 카드사·제조사 공지)"
-        ],
-        "solves": [
-          "내 차 타이어 사이즈를 몰라서 가격비교를 못 해요 → 규격 읽는 법부터 안내",
-          "총판이랑 직영몰 중 어디가 싼지 모르겠어요 → 사이트 유형별 가격비교표 제공"
-        ],
-        "actionTitles": [
-          "타이어가격비교표로 내 차 사이즈 가격 확인하는 법",
-          "타이어가격비교사이트 총판 vs 직영몰 비교하기",
-          "타이어 교체비용 공임까지 포함해 계산하는 법"
-        ]
-      },
-      "at": "2026-10-20T12:32:18.112Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "아반떼 97년식스틱인데요, 타이어를 갈려구하....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=811&docId=74397252&answerNo=1&qb=7YOA7J207Ja0IOqwgOqyqeu5hOq1kA==",
-          "views": 29948,
-          "answers": 2,
-          "askedAt": "2004.02.07"
-        },
-        {
-          "title": "금호타이어가격비교 부탁드려요 ㅠ.ㅠ",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=507&docId=143829259&answerNo=25&qb=7YOA7J207Ja0IOqwgOqyqeu5hOq1kA==",
-          "views": 28214,
-          "answers": 3,
-          "askedAt": "2012.02.02"
-        },
-        {
-          "title": "카렌스1.8GX 2001년식 각사별 타이어값 비교를 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=507&docId=28940709&answerNo=3&qb=7YOA7J207Ja0IOqwgOqyqeu5hOq1kA==",
-          "views": 1879,
-          "answers": 2,
-          "askedAt": "2009.10.05"
-        }
-      ]
-    },
-    {
       "id": "1c3bb375efd40be4",
       "urls": [
         "https://bwjj.tistory.com/33",
@@ -17816,73 +16395,6 @@
           "views": 771,
           "answers": 4,
           "askedAt": "2025.09.08"
-        }
-      ]
-    },
-    {
-      "id": "665bae79cd12b462",
-      "urls": [
-        "https://it.tipmany.com/entry/%EC%97%B4%EC%B0%A8%EC%8B%9C%EA%B0%84%ED%91%9C%EC%A1%B0%ED%9A%8C",
-        "https://wealti.tistory.com/entry/PC-USB-%EA%B3%BC%EC%A0%84%EB%A5%98-%EC%95%8C%EB%A6%BC-%EB%B0%98%EB%B3%B5%EB%90%A0-%EB%95%8C-%EC%95%88%EC%A0%84%ED%95%98%EA%B2%8C-%ED%99%95%EC%9D%B8%ED%95%98%EB%8A%94-%EC%88%9C%EC%84%9C"
-      ],
-      "guide": {
-        "direction": "① PC에서 'USB 과전류' 알림이 반복되면 단순 재부팅으로 끝날 문제인지 메인보드 고장으로 넘어가야 할 신호인지 판단이 안 서 검색한다. ② 기존 글은 '안전하게 확인하는 순서'를 제시했지만 포트별 재현 테스트로 교체 시점을 가르는 기준은 약하다. ③ 전원 차단→포트별 연결 확인→교체·점검 판단까지 체크리스트로 끝내준다.",
-        "searchTargets": [
-          "pc usb 연결 확인",
-          "pc usb포트 교체",
-          "pc usb 전압",
-          "pc usb 연결 포트"
-        ],
-        "mustInclude": [
-          "과전류 알림 시 1단계: 전원 완전히 끄고 전원코드 뽑기 (지식인 답변 근거)",
-          "특정 포트에서만 반복되면 포트 손상 가능성 → pc usb포트 교체 검토",
-          "메인보드/USB 회로 점검이 필요한 신호 (중고 PC 구매 후 발생 등)",
-          "차량용 USB 포트 과전류(핸드폰 충전 꺼짐)는 PC 본체 포트 문제와 별개 사례로 구분"
-        ],
-        "mustAvoid": [
-          "차량 USB 포트 과전류(핸드폰 충전 이슈)와 PC 본체 USB 과전류를 같은 원인으로 섞지 말 것",
-          "모든 과전류 알림을 전원 문제로 단정해 메인보드 교체부터 권유하지 말 것",
-          "마우스·USB기기 고속충전 이슈와 과전류 알림 원인을 혼동하지 말 것"
-        ],
-        "checkBefore": [
-          "사용 중인 USB 포트 사양(3.0/2.0, 허용 전류) - 제조사 공식 매뉴얼",
-          "알림이 특정 포트에서만 뜨는지 전체 포트에서 뜨는지 - 직접 포트별 테스트",
-          "중고 PC 구매 시 USB 회로 상태 - 서비스센터 사후 점검"
-        ],
-        "solves": [
-          "'컴퓨터 usb 과전류 알림이 계속 떠요, 고장인가요' → 전원 차단→포트별 확인→메인보드 점검 순서로 판단 기준 정리",
-          "'pc usb 연결 확인 어떻게 하나' → 포트별 테스트로 알림 재현 여부 확인하는 절차 안내",
-          "'pc usb포트 교체 필요한 시점은' → 반복 알림·중고PC 등 교체 신호 체크리스트 제공"
-        ],
-        "actionTitles": [
-          "PC USB 과전류 알림이 반복될 때 확인하는 순서",
-          "pc usb 연결 확인하는 법, 포트 교체 시점까지"
-        ]
-      },
-      "at": "2026-10-20T12:32:18.112Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "컴퓨터 usb 과전류",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1010405&docId=494343768&answerNo=5&qb=cGMgdXNiIOqzvOyghOulmCDslYzrprwg7JWI7KCE7ZWY6rKM",
-          "views": 386,
-          "answers": 5,
-          "askedAt": "2026.07.17"
-        },
-        {
-          "title": "티볼리 차내 usb포트로 핸드폰 충전시 계속 꺼....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1010405&docId=493394175&answerNo=1&qb=cGMgdXNiIOqzvOyghOulmCDslYzrprwg7JWI7KCE7ZWY6rKM",
-          "views": 328,
-          "answers": 3,
-          "askedAt": "2026.05.14"
-        },
-        {
-          "title": "컴퓨터에 usb 과전류 알림이 계속 떠요 고장난....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1010405&docId=492764526&answerNo=4&qb=cGMgdXNiIOqzvOyghOulmCDslYzrprwg7JWI7KCE7ZWY6rKM",
-          "views": 294,
-          "answers": 5,
-          "askedAt": "2026.04.02"
         }
       ]
     },
@@ -18937,67 +17449,6 @@
       ]
     },
     {
-      "id": "584e37290d07c0be",
-      "urls": [
-        "https://car.tipmany.com/entry/%EB%8C%80%EC%9A%B0%EC%9E%90%EB%8F%99%EC%B0%A8%EC%B0%A8%EC%A2%85%EB%A5%98",
-        "https://notion100.com/%eb%98%90%eb%b4%87-%eb%b3%80%ec%8b%a0%ec%9e%90%eb%8f%99%ec%b0%a8-%ec%97%b0%eb%a0%b9%eb%8c%80%eb%b3%84-%ec%b6%94%ec%b2%9c-%eb%aa%a8%eb%8d%b8-%ea%b0%80%ec%9d%b4%eb%93%9c/"
-      ],
-      "guide": {
-        "direction": "검색자는 대우자동차 전체 모델 나열보다 레간자가 언제 단종됐고 후속모델이 무엇인지, 사진 속 라세티가 몇 년식인지 구체적으로 궁금해한다. 기존 '전 모델 정리' 글은 모델명 나열에 그쳐 단종 연도·후속모델·연식 구분 같은 지식인 단골 질문에는 답하지 않는다. 모델별 단종 연도·후속모델·연식 구분 포인트를 표로 정리해 질문을 한 번에 해소한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "레간자 단종 연도와 후속모델명 (확인 필요: 대우자동차/GM대우 공식 연혁)",
-          "라세티 구형 연식 구분 포인트(02~04년식, 지식인 답변 근거)",
-          "대우자동차 수출 미실시 모델 목록(레코드 디젤 등, 지식인 답변 근거)",
-          "모델별 출시·단종 연도를 묶은 전체 모델 연표"
-        ],
-        "mustAvoid": [
-          "또봇(변신 완구·애니메이션) 관련 내용과 실제 대우자동차 모델을 섞어 쓰지 않기",
-          "대우자동차 → GM대우로 이어지는 기업 변천사를 단순화해 왜곡하지 않기",
-          "레미콘 등 산업용 차량과 승용차 모델을 혼동하지 않기"
-        ],
-        "checkBefore": [
-          "레간자 정확한 단종 연도와 후속모델명 확인(공식 브랜드 연혁·자동차 역사 자료)",
-          "라세티 연식별 외관 차이(전조등·범퍼 등) 확인(중고차 사이트·제원표)",
-          "수출 미실시 모델 목록의 정확성 확인(공식 연혁·산업 통계자료)"
-        ],
-        "solves": [
-          "레간자 언제 단종됐나요? → 단종 연도와 후속모델 명시",
-          "이 사진 차가 뭔가요(라세티 구형)? → 연식별 외관 구분 포인트 정리",
-          "대우차 중 수출 안 된 모델 있나요? → 내수 전용 모델 목록 정리"
-        ],
-        "actionTitles": [
-          "대우자동차 레간자 단종 연도와 후속모델 한번에 확인"
-        ]
-      },
-      "at": "2026-10-20T12:32:18.112Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "자동차종류",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=81101&docId=101639924&answerNo=1&qb=64yA7Jqw7J6Q64+Z7LCo7LCo7KKF66WYIOuqqOuNuA==",
-          "views": 12289,
-          "answers": 1,
-          "askedAt": "2010.01.11"
-        },
-        {
-          "title": "대우자동차의 레간자...",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=811&docId=74105142&answerNo=2&qb=64yA7Jqw7J6Q64+Z7LCo7LCo7KKF66WYIOuqqOuNuA==",
-          "views": 5121,
-          "answers": 2,
-          "askedAt": "2003.01.23"
-        },
-        {
-          "title": "사진을 보고 자동차 종류를 알려주세요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=81101&docId=167524832&answerNo=2&qb=64yA7Jqw7J6Q64+Z7LCo7LCo7KKF66WYIOuqqOuNuA==",
-          "views": 279,
-          "answers": 1,
-          "askedAt": "2013.02.18"
-        }
-      ]
-    },
-    {
       "id": "82fb8f383fed610b",
       "urls": [
         "https://coolmool-economy.tistory.com/entry/gold-etf-tax-krx-gold-market-isa",
@@ -19666,72 +18117,6 @@
           "views": 140,
           "answers": 6,
           "askedAt": "2026.02.08"
-        }
-      ]
-    },
-    {
-      "id": "7b59148520566c81",
-      "urls": [
-        "https://sug2026myblog.tistory.com/entry/%EB%AA%B8%EC%9D%B4-%EB%B3%B4%EB%82%B4%EB%8A%94-%EC%86%8C%EB%A6%AC-%EC%97%86%EB%8A%94-%EA%B2%BD%EA%B3%A0-%EB%A7%88%EA%B7%B8%EB%84%A4%EC%8A%98-%EB%B6%80%EC%A1%B1-%ED%98%84%EC%83%81%EA%B3%BC-%EC%9B%90%EC%9D%B8-%EB%B0%8F-%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95-%EC%99%84%EB%B2%BD-%EC%A0%95%EB%A6%AC-1",
-        "https://sy1s.tistory.com/entry/%EB%A7%88%EA%B7%B8%EB%84%A4%EC%8A%98-%ED%9A%A8%EB%8A%A5%EA%B3%BC-%EB%B6%80%EC%A1%B1-%EC%8B%A0%ED%98%B8-%EB%AA%B8%EC%9D%B4-%EB%A8%BC%EC%A0%80-%EB%B3%B4%EB%82%B4%EB%8A%94-%EB%B3%80%ED%99%94-7%EA%B0%80%EC%A7%80"
-      ],
-      "guide": {
-        "direction": "검색자는 눈 밑 떨림·근육 경련이 마그네슘 부족 신호인지, 복용 중인 약과 같이 먹어도 되는지를 궁금해한다. 고수 글들은 '부족 신호 7가지'만 나열했지 산화·킬레이트·젖산·수산화 마그네슘의 효능·흡수율 차이와 약물 상호작용은 못 다뤘다. 제형별 비교표와 복용 중인 약 체크리스트로 끝낸다.",
-        "searchTargets": [
-          "마그네슘 효능효과",
-          "산화마그네슘 효능",
-          "킬레이트 마그네슘 효능",
-          "마그네슘 효능 부작용"
-        ],
-        "mustInclude": [
-          "산화·킬레이트·젖산·수산화 마그네슘 흡수율·효능 비교표 (확인 필요: 제품 설명서·약학정보원)",
-          "눈 밑 떨림, 근육 경련, 긴장성 두통·생리통 완화 등 부족 신호 목록",
-          "이뇨제·골다공증약 등 복용 중인 약과 마그네슘 상호작용 주의 (확인 필요: 약사 상담)",
-          "하루 권장 섭취량·과다 복용 시 설사 등 부작용 (확인 필요: 식약처 권고량)"
-        ],
-        "mustAvoid": [
-          "특정 영양제 브랜드를 '최고'로 단정하는 광고성 추천",
-          "질병 치료 효능처럼 과장하는 표현"
-        ],
-        "checkBefore": [
-          "식약처 건강기능식품 일일 권장량·상한섭취량 (식약처 공식 자료)",
-          "제형별(산화/킬레이트 등) 흡수율 차이 (약학정보원·제품 설명서)"
-        ],
-        "solves": [
-          "눈 밑 떨림이 마그네슘 부족 신호인지 궁금함 → 부족 신호 리스트와 병원 방문 기준 제시",
-          "복용 중인 약이 있을 때 마그네슘을 먹어도 되는지 궁금함 → 상호작용 주의 약물 정리",
-          "산화/킬레이트/젖산 중 어떤 제형이 맞는지 궁금함 → 제형별 비교표로 선택 기준 제공"
-        ],
-        "actionTitles": [
-          "산화마그네슘 효능 비교, 내 몸에 맞는 제형 고르는 법",
-          "마그네슘 효능 부작용 체크, 먹기 전 확인할 것들",
-          "킬레이트 마그네슘 효능, 복용 전 약물 상호작용 확인법"
-        ]
-      },
-      "at": "2026-10-20T12:32:18.112Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "마그네슘의 효능과 효과를 정리해 주실 수 있....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70101&docId=491568576&answerNo=9&qb=66eI6re464Sk7IqYIO2aqOuKpSDrtoDsobEg7Iug7Zi4IOuquOydtA==",
-          "views": 7484,
-          "answers": 12,
-          "askedAt": "2026.09.30"
-        },
-        {
-          "title": "마그네슘 효능 및 효과는 어떤 게 있나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70117&docId=493066181&answerNo=4&qb=66eI6re464Sk7IqYIO2aqOuKpSDrtoDsobEg7Iug7Zi4IOuquOydtA==",
-          "views": 495,
-          "answers": 5,
-          "askedAt": "2026.05.28"
-        },
-        {
-          "title": "먹고 있는 약이 있는데 마그네슘을 먹어도 될....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70401&docId=493603708&answerNo=2&qb=66eI6re464Sk7IqYIO2aqOuKpSDrtoDsobEg7Iug7Zi4IOuquOydtA==",
-          "views": 288,
-          "answers": 3,
-          "askedAt": "2026.05.31"
         }
       ]
     },
@@ -20461,142 +18846,6 @@
       ]
     },
     {
-      "id": "c1db2364b524c70c",
-      "urls": [
-        "https://c.foqvjtm100.com/entry/2026%EB%85%84-%EC%9E%A5%EC%88%98%EC%B6%95%ED%95%98%EA%B8%88-%EC%B4%9D%EC%A0%95%EB%A6%AC-%EC%A7%80%EA%B8%89-%EB%8C%80%EC%83%81%C2%B7%EA%B8%88%EC%95%A1%C2%B7%EC%8B%A0%EC%B2%AD%EB%B0%A9%EB%B2%95%C2%B7%EA%B3%B5%EC%8B%9D-%EC%82%AC%EC%9D%B4%ED%8A%B8",
-        "https://kwinner.starkjk.com/147"
-      ],
-      "guide": {
-        "direction": "검색자는 장수축하금이 지역마다 지급 대상·나이·금액이 달라 내 지역 기준과 신청 서류를 몰라 막혀 있다. 고수 블로그는 지급 대상·금액·신청방법을 다뤘지만 지역별 비교표와 신청 서류 체크리스트, 지역화폐 지급의 실제 혜택까지는 풀지 못했다. 이 글은 지역별 기준표와 서류 체크리스트로 거주지 기준을 바로 확인하게 한다.",
-        "searchTargets": [
-          "장수축하금 지급 대상",
-          "장수축하금 지급 지역",
-          "장수축하금 지급 신청",
-          "장수축하금 지급 대구"
-        ],
-        "mustInclude": [
-          "지역별(대구·부산 등) 지급 연령·금액 비교표(확인 필요: 각 지자체 공고)",
-          "신청 시 필요서류 목록(확인 필요: 주민센터 공지)",
-          "신청 장소 및 방법(읍면동 주민센터/온라인, 확인 필요)",
-          "지역화폐로 지급 시 사용처·할인 혜택(확인 필요)",
-          "신청 기간·마감일(확인 필요: 지자체 공고)"
-        ],
-        "mustAvoid": [
-          "장수축하금을 기초연금·노인수당 등 다른 복지제도와 혼동하지 않기",
-          "모든 지자체에 장수축하금 제도가 있는 것처럼 일반화하지 않기",
-          "작년 기준 지급 금액을 올해 기준인 것처럼 쓰지 않기"
-        ],
-        "checkBefore": [
-          "거주지 관할 시·군·구청 또는 읍면동 주민센터 공고에서 지급 여부·기준 확인",
-          "복지로 사이트에서 지역별 장수축하금 지급 기준 확인"
-        ],
-        "solves": [
-          "장수축하금 신청 필요서류를 모름 → 지자체별 공통 준비서류 체크리스트 제공(확인 필요)",
-          "장수축하금 지역화폐로 받으면 뭐가 좋은지 모름 → 지역화폐 지급 혜택·사용처 정리(확인 필요)",
-          "지역마다 지급 대상·나이가 달라 내 지역 기준을 모름 → 지역별 비교표 제공(확인 필요)"
-        ],
-        "actionTitles": [
-          "장수축하금 지급 대상·금액 지역별 비교하고 신청하기",
-          "장수축하금 신청 필요서류 체크리스트로 미리 준비하기",
-          "장수축하금 지역화폐로 지급 받을 때 혜택과 신청 방법 확인"
-        ]
-      },
-      "at": "2026-10-20T12:32:18.112Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "65세이상 독거노인 정부 지원금 신청 방법과",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100103&docId=378514993&answerNo=3&qb=7J6l7IiY7LaV7ZWY6riIIOyngOq4iSDsi6Dssq3rsKnrspUg6rO17Iud",
-          "views": 8948,
-          "answers": 16,
-          "askedAt": "2025.06.02"
-        },
-        {
-          "title": "5학년 사회 40~41쪽",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=130102&docId=108258758&answerNo=4&qb=7J6l7IiY7LaV7ZWY6riIIOyngOq4iSDsi6Dssq3rsKnrspUg6rO17Iud",
-          "views": 7753,
-          "answers": 4,
-          "askedAt": "2010.04.16"
-        },
-        {
-          "title": "통일글짓기)현재 통일해야하는 국가",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=606&docId=61269465&answerNo=2&qb=7J6l7IiY7LaV7ZWY6riIIOyngOq4iSDsi6Dssq3rsKnrspUg6rO17Iud",
-          "views": 7608,
-          "answers": 2,
-          "askedAt": "2006.06.06"
-        }
-      ]
-    },
-    {
-      "id": "4b06ad31838ce086",
-      "urls": [
-        "https://lastplace.tistory.com/223",
-        "https://bongbong200.com/entry/%EC%A7%80%EA%B2%8C%EC%B0%A8%EC%9A%B4%EC%A0%84%EA%B8%B0%EB%8A%A5%EC%82%AC-%ED%95%84%EA%B8%B0%C2%B7%EC%8B%A4%EA%B8%B0-%ED%95%A9%EA%B2%A9%EA%B8%B0%EC%A4%80-4%EB%B6%84-%EC%BD%94%EC%8A%A4-%EC%A3%BC%ED%96%89%EC%9A%94%EB%A0%B9-%EC%99%84%EB%B2%BD-%EA%B3%B5%EC%8B%9D-%EC%8B%A4%EA%B2%A9-%EB%B0%A9%EC%A7%80-%EA%BF%80%ED%8C%81"
-      ],
-      "guide": {
-        "direction": "큐넷에 들어가도 지게차운전기능사 필기 시험일정이 안 뜨거나 접수가 품절돼버려 막막해하는 검색자가 많다. 고수 블로그는 실기 코스 주행요령과 합격기준만 다뤄 필기 상시 CBT 접수 타이밍이나 필기·실기 합격자 발표 시점은 못 풀어준다. 이 글은 상시 CBT 접수 오픈·지역별 마감 체크, 필기 당일 자정 이후 발표 조회, 실기 회차별 발표일 확인 순서를 체크리스트로 정리해 끝낸다.",
-        "searchTargets": [
-          "지게차운전기능사 필기 시험일정",
-          "지게차운전기능사 필기 접수",
-          "지게차운전기능사 필기시험",
-          "지게차운전기능사 필기 cbt"
-        ],
-        "mustInclude": [
-          "상시 CBT 특성 — 지역본부별 회차가 수시 공개되며 마감되면 바로 사라짐",
-          "필기 합격여부는 시험 당일 밤 12시 이후 큐넷 전산망 업로드 후 조회 가능",
-          "실기 합격자 발표는 회차마다 날짜가 다를 수 있음(확인 필요: 큐넷 회차별 공고)",
-          "추석 등 연휴 전후 접수 혼잡·조기 마감 가능성(확인 필요: 큐넷 공지)",
-          "지역본부별 시험장 선택에 따라 접수 가능 날짜가 달라짐"
-        ],
-        "mustAvoid": [
-          "지게차운전기능사를 굴삭기·기중기 등 다른 건설기계 기능사 일정과 혼동하지 말 것",
-          "필기 CBT와 실기(주행) 시험의 발표 방식을 같은 기준으로 설명하지 말 것"
-        ],
-        "checkBefore": [
-          "큐넷 공식 시험일정 공고에서 최신 회차·지역별 접수기간 확인",
-          "필기 합격자 발표 시각(통상 자정 전후)을 큐넷 공지사항에서 확인",
-          "실기 합격자 발표일이 회차별로 다른지 큐넷 수험자 공고에서 확인"
-        ],
-        "solves": [
-          "큐넷에 시험일정이 안 보인다 → 상시 CBT 특성과 지역본부별 공고 확인 경로 안내",
-          "필기 합격여부 언제 뜨나 → 당일 밤 12시 이후 전산망 업로드 기준 제시",
-          "실기 발표일이 회차마다 다른가 → 회차별 발표일 조회 방법 안내"
-        ],
-        "actionTitles": [
-          "지게차운전기능사 필기 시험일정 접수 전 확인할 것",
-          "지게차운전기능사 필기 cbt 접수 마감 전 체크리스트",
-          "지게차운전기능사 필기시험 합격자 발표일 조회하는 방법"
-        ]
-      },
-      "at": "2026-10-20T12:32:18.112Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "지게차운전기능사 실기시험 합격자발표",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1126&docId=402436047&answerNo=1&qb=7KeA6rKM7LCo7Jq07KCE6riw64ql7IKsIO2VhOq4sCDsi6TquLAg7ZWp6rKp6riw7KSAIOy9lOyKpA==",
-          "views": 1284,
-          "answers": 2,
-          "askedAt": "2021.10.12"
-        },
-        {
-          "title": "지게차운전기능사 필기 합격여부 표기 큐넷....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8110303&docId=390707636&answerNo=2&qb=7KeA6rKM7LCo7Jq07KCE6riw64ql7IKsIO2VhOq4sCDsi6TquLAg7ZWp6rKp6riw7KSAIOy9lOyKpA==",
-          "views": 631,
-          "answers": 4,
-          "askedAt": "2021.05.26"
-        },
-        {
-          "title": "지게차운전기능사 실기 12회 합격자 발표일",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=406&docId=362164016&answerNo=1&qb=7KeA6rKM7LCo7Jq07KCE6riw64ql7IKsIO2VhOq4sCDsi6TquLAg7ZWp6rKp6riw7KSAIOy9lOyKpA==",
-          "views": 622,
-          "answers": 1,
-          "askedAt": "2020.07.11"
-        }
-      ]
-    },
-    {
       "id": "a8d5e7ad2b2c138f",
       "urls": [
         "https://dke.ralabla.com/39",
@@ -20790,71 +19039,6 @@
       ]
     },
     {
-      "id": "c9ed2228349702e0",
-      "urls": [
-        "https://angelandlove.tistory.com/entry/%EC%98%A4%EC%9D%B4%EB%AC%B4%EC%B9%A8-%ED%99%A9%EA%B8%88%EB%A0%88%EC%8B%9C%ED%94%BC-1",
-        "https://woosu.tistory.com/entry/%EC%A4%91%EA%B5%AD%EC%8B%9D-%EC%98%A4%EC%9D%B4%EB%AC%B4%EC%B9%A8%E6%8B%8D%E9%BB%84%E7%93%9C-%ED%8C%8C%EC%9D%B4%ED%99%A9%EA%B3%BC-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EC%95%84%EC%82%AD%ED%95%98%EA%B3%A0-%EC%83%88%EC%BD%A4%EB%A7%A4%EC%BD%A4%ED%95%9C-%EC%A4%91%EC%8B%9D-%EC%98%A4%EC%9D%B4%EB%AC%B4%EC%B9%A8-%ED%99%A9%EA%B8%88%EB%A0%88%EC%8B%9C%ED%94%BC"
-      ],
-      "guide": {
-        "direction": "검색자는 '오이무침 황금레시피'라는 이름만 믿고 들어오지만 오이 2개냐 3개냐에 따라 양념 비율이 달라져 헷갈리고, 된장이 왜 들어가는지도 모른다. 고수 블로그는 중식 파이황과 버전에 쏠려 있어 한식 황금비율·고추장식/간장식 차이는 비워뒀다. 오이 개수별 정확한 양념 비율표와 두 버전 비교를 보여주면 글이 끝난다.",
-        "searchTargets": [
-          "오이무침 황금레시피 2개",
-          "오이무침 황금레시피 3개",
-          "오이무침 황금레시피 양념",
-          "오이무침 황금레시피 고추장"
-        ],
-        "mustInclude": [
-          "오이 2개 기준 고춧가루 2큰술·식초 1큰술 등 지식인 공개 비율(확인 필요: 지식인 답변 원문 전체)",
-          "고추장식 vs 간장식 양념 비교표",
-          "된장 1큰술이 들어가는 이유(맛·질감 변화) 설명",
-          "오이 절여서 물기 빼는 단계 포함 여부 비교(절임형 vs 생오이무침)",
-          "꼬마츄츄 레시피와 일반 레시피 차이 언급"
-        ],
-        "mustAvoid": [
-          "중식 파이황과(拍黄瓜)와 한식 오이무침 황금레시피를 같은 글에서 혼동시키지 않기",
-          "수분 제거 생략해도 아삭함이 보장된다는 식의 근거 없는 과장 금지"
-        ],
-        "checkBefore": [
-          "된장 버전의 정확한 계량은 지식인 답변 전문에서 재확인",
-          "꼬마츄츄 레시피 출처(유튜브/블로그) 확인"
-        ],
-        "solves": [
-          "된장 1큰술이 왜 들어가는지 모르겠다 → 맛과 질감에 미치는 역할 설명",
-          "오이 2개·3개에 따라 양념 비율이 헷갈린다 → 개수별 정확한 비율표 제공",
-          "고추장과 간장 버전 중 뭐가 맞는지 모르겠다 → 두 버전 비교로 선택 기준 제시"
-        ],
-        "actionTitles": [
-          "오이무침 황금레시피 고추장·간장 버전 비교해서 고르기"
-        ]
-      },
-      "at": "2026-10-20T12:32:18.112Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "오이무침 황금 양념 레시피에서 된장의 역할....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020108&docId=489046455&answerNo=1&qb=7Jik7J2066y07LmoIO2Zqeq4iOugiOyLnO2UvA==",
-          "views": 176,
-          "answers": 1,
-          "askedAt": "2025.09.23"
-        },
-        {
-          "title": "상큼한 생오이무침 황금레시피의 비결은 무....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020108&docId=489544051&answerNo=1&qb=7Jik7J2066y07LmoIO2Zqeq4iOugiOyLnO2UvA==",
-          "views": 171,
-          "answers": 1,
-          "askedAt": "2025.10.19"
-        },
-        {
-          "title": "오이무침 황금 레시피, 정말 따라 하면 성공....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020108&docId=493804158&answerNo=2&qb=7Jik7J2066y07LmoIO2Zqeq4iOugiOyLnO2UvA==",
-          "views": 77,
-          "answers": 2,
-          "askedAt": "2026.06.11"
-        }
-      ]
-    },
-    {
       "id": "f30b9a61679bbc64",
       "urls": [
         "https://vyomakesa.com/pension-lottery-winning-number-statistics/",
@@ -20917,113 +19101,6 @@
           "askedAt": "2025.02.13"
         }
       ]
-    },
-    {
-      "id": "916ae5f328f332d1",
-      "urls": [
-        "https://insight3429.tistory.com/entry/%EC%84%B8%EA%B3%84-%EC%B5%9C%EA%B3%A0%EC%9D%98-%EB%B0%80-%EC%83%9D%EC%82%B0%EA%B5%AD-TOP-10-%EC%99%84%EB%B2%BD%EC%A0%95%EB%A6%AC-202526-USDA-%EC%B5%9C%EC%8B%A0",
-        "https://insight3429.tistory.com/entry/%EC%84%B8%EA%B3%84-%EB%8C%80%EB%A5%99%EA%B0%84-%ED%9A%A1%EB%8B%A8%EC%97%B4%EC%B0%A8-%EB%AA%85%EC%86%8C-TOP-10%EF%BD%9C%ED%8F%89%EC%83%9D-%ED%95%9C-%EB%B2%88%EC%9D%80-%ED%83%80%EB%B4%90%EC%95%BC-%ED%95%A0-%EA%BF%88%EC%9D%98-%EA%B8%B0%EC%B0%A8-%EC%97%AC%ED%96%89-%EC%99%84%EB%B2%BD%EC%A0%95%EB%A6%AC",
-        "https://insight3429.tistory.com/entry/%EC%84%B8%EA%B3%84%EC%97%90%EC%84%9C-%EA%B0%9C%EC%8B%A0%EA%B5%90-%EA%B5%90%ED%9A%8C%EA%B0%80-%EA%B0%80%EC%9E%A5-%EB%A7%8E%EC%9D%80-%EB%82%98%EB%9D%BC-TOP-10%EF%BD%9C%EA%B5%90%ED%9A%8C-%EC%88%98%C2%B7%EC%8B%A0%EC%9E%90-%EC%88%98-%EC%99%84%EB%B2%BD%EC%A0%95%EB%A6%AC-2026-%EC%B5%9C%EC%8B%A0",
-        "https://insight3429.tistory.com/entry/%EC%84%B8%EA%B3%84-%EC%B5%9C%EA%B3%A0%EC%9D%98-%ED%8A%80%EA%B9%80-%EC%9A%94%EB%A6%AC-TOP-20-%EC%99%84%EB%B2%BD%EC%A0%95%EB%A6%AC%EF%BD%9C%ED%95%9C%EA%B5%AD-%EC%B9%98%ED%82%A8-%EC%84%B8%EA%B3%84-1%EC%9C%84-TasteAtlas-2025",
-        "https://insight3429.tistory.com/entry/%EC%84%B8%EA%B3%84-%ED%98%84%EC%A1%B4-%EC%99%95%EC%A1%B1%C2%B7%EA%B5%B0%EC%A3%BC-%EA%B5%AD%EA%B0%80-%EC%99%84%EB%B2%BD%EC%A0%95%EB%A6%AC%EF%BD%9C43%EA%B0%9C%EA%B5%AD-%EC%99%95%EC%8B%A4-TOP-%EB%A6%AC%EC%8A%A4%ED%8A%B8-2026",
-        "https://insight3429.tistory.com/entry/%EC%84%B8%EA%B3%84-%EC%9E%90%EB%8F%99%EC%B0%A8-%ED%8C%90%EB%A7%A4-%EC%88%9C%EC%9C%84-%EC%99%84%EB%B2%BD%EC%A0%95%EB%A6%AC%EF%BD%9C%EA%B7%B8%EB%A3%B9%C2%B7%EB%B8%8C%EB%9E%9C%EB%93%9C%C2%B7%EB%AA%A8%EB%8D%B8-TOP-20-2025-%EC%B5%9C%EC%8B%A0"
-      ],
-      "guide": {
-        "direction": "검색자는 '밀 생산량 1위국'과 '밀 수출량 1위국'을 같은 질문으로 혼동해 검색하지만 둘이 다른 경우가 많아 헷갈려한다. 동일 제목의 경쟁 글들은 'USDA 최신'이라는 출처만 밝히고 생산량과 수출량 순위를 구분해 비교해주지 않는다. 생산량 TOP10과 수출량 순위를 나란히 표로 비교해주면 독자가 '많이 기르는 나라'와 '많이 파는 나라'를 한 번에 구분하고 글을 끝낼 수 있다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "USDA 발표 기준연도(마케팅이어) 명시 (확인 필요: USDA 2025/26 보고서)",
-          "생산량 TOP10 국가별 수치(백만 톤) 표 (확인 필요: USDA 데이터)",
-          "생산 1위국과 수출 1위국이 다름을 보여주는 비교표 (확인 필요: USDA 수출 순위)",
-          "전년(2024/25) 대비 순위·생산량 변동 (확인 필요: USDA 이전 보고서)",
-          "한국의 밀 수입 의존도·주요 수입국 (확인 필요: 농림축산식품부 통계)"
-        ],
-        "mustAvoid": [
-          "생산량 순위를 수출량·소비량 순위와 섞어 써서 1위국을 혼동하게 만들기",
-          "EU를 단일국가처럼 순위에 넣을지 여부를 명확히 안 밝히기"
-        ],
-        "checkBefore": [
-          "USDA 최신 보고서(WASDE/PSD)에서 정확한 생산량 수치·순위 확인",
-          "마케팅이어 기준(2025/26) 날짜 범위 확인"
-        ],
-        "solves": [
-          "생산량 1위랑 수출량 1위가 왜 다른가요? → 생산 TOP10과 수출 TOP10 비교표로 설명",
-          "2025/26 기준이 정확히 언제인가요? → USDA 마케팅이어 기준 명시",
-          "작년이랑 순위가 바뀌었나요? → 전년 대비 변동 비교 제공"
-        ],
-        "actionTitles": [
-          "세계 밀 생산국 TOP10 확인｜생산 1위 수출 1위 다른 이유",
-          "2025/26 USDA 밀 생산량 순위 비교｜전년 대비 변동 확인",
-          "밀 생산국 vs 수출국 순위 비교표로 한 번에 확인하기"
-        ]
-      },
-      "at": "2026-10-20T12:32:18.112Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "2020년 세계 경제대국 베스트 15는?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=409&docId=33812847&answerNo=2&qb=7IS46rOEIOy1nOqzoCDsg53sgrDqta0gdG9wIOyZhOuyveygleumrA==",
-          "views": 4223,
-          "answers": 2,
-          "askedAt": "2003.03.03"
-        },
-        {
-          "title": "물가가 가장 비싼 나라는 어디에요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=613&docId=47606515&answerNo=2&qb=7IS46rOEIOy1nOqzoCDsg53sgrDqta0gdG9wIOyZhOuyveygleumrA==",
-          "views": 1823,
-          "answers": 2,
-          "askedAt": "2003.10.09"
-        },
-        {
-          "title": "비자없이 가서 살수있는 나라..궁굼합니다.",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6010101&docId=140224869&answerNo=1&qb=7IS46rOEIOy1nOqzoCDsg53sgrDqta0gdG9wIOyZhOuyveygleumrA==",
-          "views": 872,
-          "answers": 1,
-          "askedAt": "2011.11.16"
-        }
-      ]
-    },
-    {
-      "id": "8b2765f8b9ebce6b",
-      "urls": [
-        "https://meccagym.tistory.com/3634",
-        "https://meccagym.tistory.com/3633",
-        "https://meccagym.tistory.com/3632",
-        "https://meccagym.tistory.com/3631",
-        "https://meccagym.tistory.com/3627"
-      ],
-      "guide": {
-        "direction": "검색자는 '거제pt'를 검색해 어디서 받을지 가격·후기를 궁금해하지만, 같은 체육관 시리즈 글은 운동 순서만 나열해 어디서 상담받고 얼마인지가 안 나온다. 경쟁 글(가슴·유산소·엉덩이·레터럴레이즈편)도 숄더프레스 자세 주의점과 상담 신청 방법을 함께 안 다룬다. 숄더프레스 세트·자세 가이드와 메카짐 상담 신청 방법을 같이 정리하면 운동법도 배우고 상담까지 이어진다.",
-        "searchTargets": [
-          "거제pt"
-        ],
-        "mustInclude": [
-          "메카짐 정확한 위치(옥포동 주소) (확인 필요: 메카짐 공식 정보)",
-          "숄더프레스 세트·반복수·권장 무게 가이드",
-          "PT 상담/가격 문의 방법(전화·방문) (확인 필요: 메카짐 공지)",
-          "거제·옥포에서 PT 받기 전 확인할 계약기간·환불규정 체크리스트"
-        ],
-        "mustAvoid": [
-          "거제 다른 지역 PT샵과 메카짐 정보를 혼동되게 섞기"
-        ],
-        "checkBefore": [
-          "메카짐 정확한 영업시간·위치·연락처 (메카짐 공식 블로그/SNS)",
-          "PT 가격·패키지 정보 (메카짐 상담 또는 공지)"
-        ],
-        "solves": [
-          "거제pt 어디서 받아야 하나요? → 메카짐 위치·상담 방법 안내",
-          "숄더프레스 자세 어떻게 하나요? → 세트·자세 포인트 정리",
-          "어깨 운동할 때 다치지 않으려면? → 부상 예방 체크포인트 제공"
-        ],
-        "actionTitles": [
-          "거제pt 메카짐 숄더프레스 자세 확인하고 어깨운동 시작하기",
-          "거제pt 받기 전 메카짐 위치·상담 방법 확인하기"
-        ]
-      },
-      "at": "2026-10-20T12:32:18.112Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
     },
     {
       "id": "30bdd39123343247",
@@ -21629,67 +19706,6 @@
           "views": 1175,
           "answers": 2,
           "askedAt": "2019.10.17"
-        }
-      ]
-    },
-    {
-      "id": "bbbd479a60f07019",
-      "urls": [
-        "https://hanbre.tistory.com/1617",
-        "https://apel.tirtory.com/entry/%EB%82%98%EC%9D%B4%EC%8A%A4vpn-%EA%B3%A0%EC%A0%95-ip-%EC%95%84%EC%9D%B4%ED%94%BC%EB%AA%A8%EC%95%84-%EB%B3%80%EA%B2%BD"
-      ],
-      "guide": {
-        "direction": "검색자는 아이피박스로 한국 IP를 연결하려는데 아이폰 핫스팟이나 공유기 환경에서 VPN이 안 붙는 상황에 막힌다. 고수 글은 '해결방법'만 나열할 뿐 핫스팟·공유기 환경별로 원인(IP 충돌)이 다르다는 점은 짚지 않는다. IP 충돌 확인 순서와 iOS VPN 프로파일 재설정 단계를 순서대로 주면 끝난다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "핫스팟 사용 시와 집 공유기 사용 시 VPN 연결 안되는 원인을 구분한 체크리스트",
-          "동적 IP와 VPN 할당 IP 충돌 확인법(확인 필요: iptime 공식 설정 가이드)",
-          "아이폰 VPN 프로파일 삭제 후 재등록하는 순서",
-          "연결 후 한국 IP로 바뀌었는지 조회하는 방법"
-        ],
-        "mustAvoid": [
-          "보이스피싱 등 악성 앱의 IP 우회와 정상적인 한국 IP 우회 서비스 혼동",
-          "아이피박스·나이스VPN·아이피모아 등 유사 서비스명을 구분 없이 섞어 쓰기"
-        ],
-        "checkBefore": [
-          "아이피박스 앱의 정확한 설정 절차(공식 홈페이지·앱 안내)",
-          "iptime VPN 설정 시 IP 대역 충돌 기준(iptime 공식 설정 가이드)"
-        ],
-        "solves": [
-          "핫스팟 연결 시 iptime VPN이 안 붙는다 → 핫스팟 환경과 공유기 환경 원인 구분 설명",
-          "VPN 설정은 다 했는데 아이폰에서 연결이 안 된다 → IP 충돌 확인·해제 순서 안내",
-          "연결 후 한국 IP로 바뀌었는지 확인하고 싶다 → IP 조회 방법 안내"
-        ],
-        "actionTitles": [
-          "아이피박스 VPN 연결 안됨, 아이폰에서 바로 해결하는 법",
-          "iptime VPN 아이폰 연결 안될 때 IP 충돌 확인하는 법",
-          "한국 IP 확인하는 법, 연결 후 바로 체크하는 방법"
-        ]
-      },
-      "at": "2026-10-20T17:57:04.426Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "아이폰 핫스팟 사용 iptime VPN 설정 관련입니다",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1070401&docId=277784765&answerNo=1&qb=7JWE7J207ZS867CV7IqkIHZwbiDslYjrkKgg7JWE7J207Y+wIOyduO2EsOuEtw==",
-          "views": 4501,
-          "answers": 1,
-          "askedAt": "2017.06.02"
-        },
-        {
-          "title": "iptime 604V vpn설정후 아이폰 vpn연결이 안되요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1010406&docId=144579592&answerNo=2&qb=7JWE7J207ZS867CV7IqkIHZwbiDslYjrkKgg7JWE7J207Y+wIOyduO2EsOuEtw==",
-          "views": 4348,
-          "answers": 1,
-          "askedAt": "2012.02.10"
-        },
-        {
-          "title": "iptime VPN에 아이폰 핫스팟사용 노트북이 연결....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1010406&docId=277718663&answerNo=1&qb=7JWE7J207ZS867CV7IqkIHZwbiDslYjrkKgg7JWE7J207Y+wIOyduO2EsOuEtw==",
-          "views": 2705,
-          "answers": 1,
-          "askedAt": "2017.06.01"
         }
       ]
     },
@@ -22883,73 +20899,6 @@
       ]
     },
     {
-      "id": "41ab67ddb658a6e5",
-      "urls": [
-        "https://gilwon.tistory.com/298",
-        "https://tali.kr/galaxy-maintenance-mode-backup"
-      ],
-      "guide": {
-        "direction": "검색자는 수리모드를 켜면 개인정보가 안전한지, 수리 후 해제가 안 될 때 어떻게 하는지, 간단한 수리에도 로그가 필요한지 몰라 막혀 있다. 고수 글은 '백업 순서'만 다뤄 해제 시 본인인증이 안 되는 경우와 배터리 교체처럼 자료와 무관한 수리의 로그 생성 여부는 못 짚었다. 수리 유형별 로그 필요 여부 표와 켜기→끄기 단계, 해제 오류 시 대처를 체크리스트로 주면 독자가 끝낼 수 있다.",
-        "searchTargets": [
-          "갤럭시 수리모드 설정",
-          "갤럭시 수리모드 안됨",
-          "갤럭시 수리모드 끄기",
-          "갤럭시 수리모드 로그"
-        ],
-        "mustInclude": [
-          "수리모드 켜는 법(설정 메뉴 경로) (확인 필요: 삼성 설정/삼성 멤버스 공지)",
-          "수리모드 해제 시 비밀번호 입력 절차와 본인인증 오류 대처 (확인 필요: 삼성 서비스센터 공지)",
-          "배터리 교체처럼 단순 수리 시 로그 생성이 불필요한 사례",
-          "수리모드가 막는 범위는 자료 유출 차단이지 데이터 삭제 방지가 아니라는 점",
-          "'안됨' 증상별 원인 구분(비밀번호 오류 vs 인증 오류 vs 설정 미반영)"
-        ],
-        "mustAvoid": [
-          "비인가 방법으로 수리모드를 임의로 뚫거나 해제하는 방법 안내",
-          "삼성 공식 절차가 아닌 제3자 앱·크랙 방식 소개",
-          "수리모드와 완전 초기화(공장초기화)를 같은 것으로 서술"
-        ],
-        "checkBefore": [
-          "수리모드 공식 켜기/끄기 절차(삼성 공식 지원 페이지·삼성 멤버스 공지 확인)",
-          "본인인증 오류 시 대응 절차(삼성 서비스센터 공식 안내 확인)"
-        ],
-        "solves": [
-          "수리모드를 켜면 뭐가 바뀌는지 몰라 불안함 → 수리모드가 막는 범위와 안 막는 범위 구분 제시",
-          "수리모드 해제 시 본인인증이 안 됨 → 오류별 대처 절차 안내",
-          "배터리만 교체할 때 로그가 필요한지 헷갈림 → 수리 유형별 로그 필요 여부 표로 정리"
-        ],
-        "actionTitles": [
-          "갤럭시 수리모드 안됨·로그 궁금증, 수리 전 확인법",
-          "갤럭시 수리모드 끄기, 해제 안 될 때 확인할 점들"
-        ]
-      },
-      "at": "2026-10-21T05:42:05.043Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "갤럭시 수리모드",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1070402&docId=472347323&answerNo=4&qb=6rCk65+t7Iuc7IiY66as66qo65Oc",
-          "views": 7789,
-          "answers": 4,
-          "askedAt": "2025.04.11"
-        },
-        {
-          "title": "갤럭시 수리모드 질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1070402&docId=473974811&answerNo=1&qb=6rCk65+t7Iuc7IiY66as66qo65Oc",
-          "views": 1186,
-          "answers": 1,
-          "askedAt": "2024.08.15"
-        },
-        {
-          "title": "갤럭시 수리모드해제시 본인인증이 안될때...",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=107040201&docId=486463359&answerNo=2&qb=6rCk65+t7Iuc7IiY66as66qo65Oc",
-          "views": 841,
-          "answers": 2,
-          "askedAt": "2025.11.11"
-        }
-      ]
-    },
-    {
       "id": "976e52043a8ce1b2",
       "urls": [
         "https://muramara.com/entry/%EB%B8%94%EB%9E%99%ED%94%84%EB%9D%BC%EC%9D%B4%EB%8D%B0%EC%9D%B4-2026-%ED%95%9C%EA%B5%AD-%EC%84%B8%EC%9D%BC-%EC%9D%BC%EC%A0%95-%EB%B8%8C%EB%9E%9C%EB%93%9C%EB%B3%84-%EC%B4%9D%EC%A0%95%EB%A6%AC",
@@ -23599,68 +21548,6 @@
       ]
     },
     {
-      "id": "15c9328baf6c2f9b",
-      "urls": [
-        "https://lim7.tistory.com/162",
-        "https://beautyhealthnote.glowfly08.com/entry/%EC%A7%91%EC%97%90%EC%84%9C-%ED%95%98%EB%8A%94-%ED%99%88-%ED%97%A4%EC%96%B4%EC%BC%80%EC%96%B4%EF%BD%9C%EC%B4%88%EB%B3%B4%EC%9E%90%EB%A5%BC-%EC%9C%84%ED%95%9C-5%EB%8B%A8%EA%B3%84-%EB%AA%A8%EB%B0%9C-%EA%B4%80%EB%A6%AC-%EC%88%9C%EC%84%9C"
-      ],
-      "guide": {
-        "direction": "검색자는 '성능기록부에 교체 표기가 있으면 사고차냐', '신용점수 600점대도 할부가 되냐'를 구체적으로 묻는데 고수 글의 '초보자 체크리스트'는 보통 외관·서류 점검 순서만 나열해 이 질문엔 답을 못 준다. 성능기록부 교체/사고 표기 구분 기준과 저신용 할부 가능 조건을 표로 묶어 바로 판단하게 한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "성능기록부 교체/사고 표기 구분 기준 (확인 필요: 성능기록부 발급기관·보험개발원 안내)",
-          "저신용(600점대 등) 캐피탈 할부 가능 조건 (확인 필요: 캐피탈사 공식 안내·여신금융협회)",
-          "엔카 등 온라인 매물 확인 후 현장 점검 시 체크 항목 리스트",
-          "보험(대인·대물) 보장 범위 확인 체크포인트"
-        ],
-        "mustAvoid": [
-          "특정 중고차 플랫폼(SK엔카 등)이나 매매상사를 광고처럼 추천하지 않기",
-          "'부품 교체=사고차'로 단순화해 정상 교체까지 사고차로 단정하지 않기",
-          "신용점수별 할부 가능 여부를 특정 캐피탈사 보장처럼 확정적으로 쓰지 않기"
-        ],
-        "checkBefore": [
-          "성능기록부 교체/사고 표기 기준과 용어 정의 — 성능기록부 발급기관 공식 안내",
-          "저신용 캐피탈 할부 가능 신용점수 구간 — 캐피탈사 공식 안내 또는 여신금융협회"
-        ],
-        "solves": [
-          "성능기록부에 교체 표기가 있으면 사고차인가 → 교체/사고 표기 구분 기준 정리",
-          "신용점수 600점대도 중고차 할부가 되는가 → 저신용 캐피탈 이용 가능 조건 정리",
-          "현장에서 뭘 확인해야 하는지 모르겠다 → 체크리스트로 점검 항목 순서대로 제시"
-        ],
-        "actionTitles": [
-          "중고차 성능기록부 보고 사고차 확인하는 법 체크리스트",
-          "중고차 구매하기 전 반드시 확인할 체크리스트 총정리",
-          "신용점수 낮아도 중고차 할부 가능한지 바로 확인하기"
-        ]
-      },
-      "at": "2026-10-21T05:42:05.043Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "중고차 구매 시 주의사항은 무엇인가요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8110201&docId=477793903&answerNo=12&qb=7KSR6rOg7LCoIOuwmOuTnOyLnCDtmZXsnbjtlbTslbwg7LSI67O07J6QIOychO2VnA==",
-          "views": 2229,
-          "answers": 12,
-          "askedAt": "2026.09.26"
-        },
-        {
-          "title": "중고차를 구매하려고합니다",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8110201&docId=495272872&answerNo=3&qb=7KSR6rOg7LCoIOuwmOuTnOyLnCDtmZXsnbjtlbTslbwg7LSI67O07J6QIOychO2VnA==",
-          "views": 120,
-          "answers": 7,
-          "askedAt": "2026.09.23"
-        },
-        {
-          "title": "중고차 구매 관련해서 질문있습니다.",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8110201&docId=493072797&answerNo=2&qb=7KSR6rOg7LCoIOuwmOuTnOyLnCDtmZXsnbjtlbTslbwg7LSI67O07J6QIOychO2VnA==",
-          "views": 117,
-          "answers": 8,
-          "askedAt": "2026.04.22"
-        }
-      ]
-    },
-    {
       "id": "55ae74c13318009a",
       "urls": [
         "https://jjanggu1612.tistory.com/entry/%EA%B0%A4%EB%9F%AD%EC%8B%9C-%EC%9B%8C%EC%B9%988-vs-%EC%95%A0%ED%94%8C%EC%9B%8C%EC%B9%98-11-%EB%B9%84%EA%B5%90",
@@ -23917,69 +21804,6 @@
           "views": 844,
           "answers": 6,
           "askedAt": "2026.09.04"
-        }
-      ]
-    },
-    {
-      "id": "0bd9b0abaa20ff7b",
-      "urls": [
-        "https://x10.noonetv.com/63",
-        "https://brainhackers.kr/entry/%EC%AA%BD%ED%8C%8C%EA%B9%80%EC%B9%98-%EB%A7%9B%EC%9E%88%EA%B2%8C-%EB%8B%B4%EA%B7%B8%EB%8A%94%EB%B2%95-%EC%95%8C%EC%95%84%EB%91%90%EB%A9%B4-%EC%86%90%EB%8B%98%EC%83%81%EC%97%90%EB%8F%84-%EC%9E%90%EC%8B%A0-%EC%9E%88%EB%8A%94-%EB%B9%84%EB%B2%95"
-      ],
-      "guide": {
-        "direction": "검색자는 쪽파김치를 처음 담글 때 양파·배 비율과 찹쌀풀 역할에서 막히고, 담근 뒤 며칠째 먹어야 가장 맛있는지도 궁금해한다. 기존 고수 글은 '담그는법'만 다뤄 '익히는법'과 '볶는비법' 검색은 아직 풀어주지 못했다. 재료 비율표와 숙성 일수별 맛 변화, 실패 방지 체크리스트를 주면 검색을 바로 끝낼 수 있다.",
-        "searchTargets": [
-          "쪽파김치 맛있게 담그는법",
-          "쪽파김치 맛있게 익히는법",
-          "쪽파김치맛있게볶는비법"
-        ],
-        "mustInclude": [
-          "양파와 배 비율(확인 필요: 지식인 원문 레시피)",
-          "찹쌀풀을 넣는 이유와 생략시 차이",
-          "쪽파 밑동 다듬기·세척 방법",
-          "처음 담그는 사람을 위한 실패 방지 순서 체크리스트"
-        ],
-        "mustAvoid": [
-          "갓김치와 쪽파김치 양념·재료 비율을 같은 레시피처럼 섞어서 설명하지 말기",
-          "이영자·정호영 등 특정 셰프 레시피를 검증 없이 그대로 베낀 것처럼 서술하지 말기"
-        ],
-        "checkBefore": [
-          "이영자·정호영 레시피의 구체적 재료 비율은 해당 방송·공식 채널 원문에서 확인",
-          "찹쌀풀 사용 비율과 양파·배 비율은 전라도식 레시피 원문에서 재확인"
-        ],
-        "solves": [
-          "양파와 배 비율이 헷갈림 → 비율표로 명확히 제시",
-          "찹쌀풀을 왜 넣는지 모름 → 역할과 생략시 차이 설명",
-          "처음 담가봐서 실패할까 걱정 → 단계별 체크리스트로 실패 방지"
-        ],
-        "actionTitles": [
-          "쪽파김치맛있게볶는비법, 남은 김치 활용하는 법"
-        ]
-      },
-      "at": "2026-10-21T05:42:05.043Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "전라도 쪽파김치 황금 레시피에서 찹쌀풀의 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020112&docId=489982793&answerNo=2&qb=7Kq97YyM6rmA7LmYIOunm+yeiOqyjCDri7Tqt7jripTrspUg7JWM7JWE65GQ66m0IOyGkOuLmOyDgeyXkA==",
-          "views": 413,
-          "answers": 2,
-          "askedAt": "2026.08.04"
-        },
-        {
-          "title": "이영자 최신 파김치 레시피, 정말 10분 만에 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=2010105&docId=495375147&answerNo=1&qb=7Kq97YyM6rmA7LmYIOunm+yeiOqyjCDri7Tqt7jripTrspUg7JWM7JWE65GQ66m0IOyGkOuLmOyDgeyXkA==",
-          "views": 298,
-          "answers": 2,
-          "askedAt": "2026.10.01"
-        },
-        {
-          "title": "정호영 셰프의 쪽파김치 양념, 집에서 만들 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020112&docId=495348833&answerNo=1&qb=7Kq97YyM6rmA7LmYIOunm+yeiOqyjCDri7Tqt7jripTrspUg7JWM7JWE65GQ66m0IOyGkOuLmOyDgeyXkA==",
-          "views": 156,
-          "answers": 1,
-          "askedAt": "2026.09.29"
         }
       ]
     },
@@ -25099,52 +22923,6 @@
           "askedAt": "2026.10.21"
         }
       ]
-    },
-    {
-      "id": "fdae94dad9de796b",
-      "urls": [
-        "https://lsy4857.tistory.com/195",
-        "https://3040lifeinfo.tistory.com/entry/Hpoint-%ED%80%B4%EC%A6%88-10%EC%9B%94-18%EC%9D%BC-%EC%A0%95%EB%8B%B5-%E2%80%93-%EA%B3%A0%ED%96%A5%EC%82%AC%EB%9E%91%EA%B8%B0%EB%B6%80-10%EB%A7%8C%EC%9B%90-%EB%82%B4%EB%A9%B4-14%EB%A7%8C%EC%9B%90-%ED%98%9C%ED%83%9D",
-        "https://3040lifeinfo.tistory.com/entry/Hpoint-%ED%80%B4%EC%A6%88-10%EC%9B%94-17%EC%9D%BC-%EC%A0%95%EB%8B%B5-%E2%80%93-%EB%A6%AC%EB%B0%94%ED%8A%B8%EB%AA%B0-%EA%B0%80%EC%9D%84-%EA%B8%B0%ED%9A%8D%EC%A0%84-%EC%86%8D-%EC%9A%B0%EB%A6%AC%EB%A7%90%EC%9D%80",
-        "https://3040lifeinfo.tistory.com/entry/Hpoint-%ED%80%B4%EC%A6%88-10%EC%9B%94-16%EC%9D%BC-%EC%A0%95%EB%8B%B5-%E2%80%93-%EB%B2%A0%EC%A6%90%EB%A6%AC-%EA%B0%80%EC%9D%84-%EC%8B%A0%EC%83%81%ED%92%88%EC%97%90-%EC%97%86%EB%8A%94-%EC%9E%AC%EB%A3%8C%EB%8A%94"
-      ],
-      "guide": {
-        "direction": "검색자는 매일 'h point 퀴즈' 오늘 정답만 찾으러 오는데 10월 18일 문제가 '고향사랑기부 10만원 내면 14만원?'이라 퀴즈 답과 실제 공제 계산이 다를 수 있어 혼란스럽다. 기존 고수 글은 날짜별 퀴즈 정답만 나열해 10/16 베즐리, 10/17 리바트몰처럼 수명이 하루뿐이다. 이 글은 퀴즈 정답을 먼저 주고 바로 이어서 20만원 기준 실제 세액공제 계산(14만4천원)까지 보여줘 체류시간을 늘린다.",
-        "searchTargets": [
-          "h.point 퀴즈",
-          "h point 퀴즈",
-          "h point 퀴즈 10월 9일",
-          "h point 퀴즈 10월 15일"
-        ],
-        "mustInclude": [
-          "세액공제 구조: 10만원까지 전액, 초과분은 16.5% 공제 (확인 필요: 국세청/행안부 공지)",
-          "20만원 기부 시 2026년 기준 실제 환급액 계산 과정(14만4천원) (확인 필요: 최신 공제율)",
-          "H.point 퀴즈 10월 18일 문제·정답 원문 (확인 필요: H.point 앱 공식 공지)",
-          "고향사랑기부제 답례품(기부금의 30%) 혜택과 세액공제 비교",
-          "2026년 한도·공제율 변경 여부 비교표 (확인 필요: 행안부 고시)"
-        ],
-        "mustAvoid": [
-          "10/16 베즐리, 10/17 리바트몰 등 다른 날짜 퀴즈 소재를 세액공제 설명과 섞어 혼동 주지 않기",
-          "퀴즈 문구 '10만원 내면 14만원'을 실제 세율 적용 계산 결과처럼 단정하지 않기"
-        ],
-        "checkBefore": [
-          "H.point 퀴즈 10월 18일 실제 선택지·정답 (H.point 앱 공식)",
-          "2026년 고향사랑기부제 세액공제 한도·공제율 변경 여부 (행정안전부/국세청 공지)"
-        ],
-        "solves": [
-          "h point 퀴즈 오늘 문제 정답이 뭔지 → 10월 18일 문제·정답 바로 제시",
-          "고향사랑기부 10만원 내면 14만원 혜택이 맞는지 → 실제 공제율 구조로 재계산해 비교",
-          "20만원 기부하면 실제로 얼마 돌아오는지 → 2026년 기준 14만4천원 계산 과정 제시(확인 필요)"
-        ],
-        "actionTitles": [
-          "h point 퀴즈 10월 18일 정답, 고향사랑기부 실제 공제 계산은?",
-          "h point 퀴즈 10월 9일·15일 정답 모아보기+세액공제 계산법",
-          "h.point 퀴즈 정답 확인하고 고향사랑기부 20만원 공제 계산하기"
-        ]
-      },
-      "at": "2026-10-21T12:46:26.242Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
     },
     {
       "id": "43dd6b08cb677a99",
@@ -26630,34 +24408,6 @@
       ]
     },
     {
-      "id": "e47590966f3e40e7",
-      "urls": [
-        "https://secondary4u.tistory.com/587"
-      ],
-      "guide": {
-        "direction": "검색자는 '김여정이 왜 지금 확성기 재가동을 예고했는지'와 '국경 요새화가 구체적으로 뭘 뜻하는지'가 궁금해 들어온다. 고수 블로그 제목은 배경 분석을 예고하지만 전면 가동 시점·과거 재개 사례와의 비교·요새화 조치 목록까지는 정리해주지 않는다. 이 글은 발표부터 전면 가동까지 경과를 표로, 요새화 조치를 항목별로 정리해 끝까지 읽히게 한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "김여정 발표 날짜와 원문 발언(확인 필요: 조선중앙통신 보도)",
-          "'10월 중 전면 가동' 의미(부분 가동과 전면 가동 차이)",
-          "2024년 대남 확성기 재개 당시 경과와의 비교",
-          "국경 요새화로 지목되는 구체 조치 목록(확인 필요: 통일부·합참 발표)"
-        ],
-        "mustAvoid": [
-          "김여정 개인 신상·후계 구도에 대한 추측성 서술",
-          "2016년 등 과거 확성기 중단·재개 사례와 혼동"
-        ],
-        "checkBefore": [],
-        "solves": [
-          "왜 지금 확성기 재가동을 예고했나 → 최근 경과를 시점별 표로 정리해 배경 설명",
-          "국경 요새화가 뭔지 모르겠다 → 지목되는 구체 조치를 항목별로 정리"
-        ]
-      },
-      "at": "2026-10-21T13:15:41.661Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
-    },
-    {
       "id": "95d429bb17476815",
       "urls": [
         "https://benefitscoop.tistory.com/entry/%EC%97%94%EB%B9%84%EB%94%94%EC%95%84%EA%B0%80-%EB%8F%88%EB%B6%80%ED%84%B0-%EC%8F%9C%EB%8B%A4-%EA%B8%B0%ED%8C%90-25%EB%B0%B0%C2%B7%EA%B4%91%EC%97%94%EC%A7%84-15%EB%B0%B0-%EC%A6%9D%EC%84%A4-%EC%82%BC%EC%84%B1%EC%A0%84%EA%B8%B0%EB%8F%84-%EB%93%A4%EC%96%B4%EA%B0%94%EB%8B%A4"
@@ -27069,43 +24819,6 @@
       ]
     },
     {
-      "id": "9af3b27ea7bb446e",
-      "urls": [
-        "https://luvgg.com/special-time-deposit-rate-2026/",
-        "https://kwinner.starkjk.com/148"
-      ],
-      "guide": {
-        "direction": "검색자는 특판금리가 수시로 바뀌어 지금 얼마인지, 저축은행 고금리가 실제로 이득인지 판단 기준을 못 찾아 막힌다. 고수 글 '고금리 찾는 법'은 비교까지는 예고했지만 예금자보호 한도를 고려한 분산 가입 기준까지는 다루지 않았을 수 있다(확인 필요). 이 글은 현재 기준 비교표와 예금자보호 확인 순서로 선택을 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "작성 시점(현재 기준) 날짜를 명시한 특판금리 비교표 (확인 필요: 각 은행 공시)",
-          "저축은행과 시중은행 정기예금 금리 차이 비교",
-          "예금자보호 한도 기준 안내 (확인 필요: 예금보험공사 공시)"
-        ],
-        "mustAvoid": [
-          "특정 저축은행 금리를 '최고'로 단정하지 않기(금리는 수시로 바뀜)",
-          "예금자보호가 전액 보장이라고 오해하게 쓰지 않기(한도 내 보장)",
-          "고금리만 강조하고 저축은행 안정성 체크를 가볍게 넘기지 않기"
-        ],
-        "checkBefore": [
-          "각 은행 공식 홈페이지·공시 자료에서 현재 특판 금리와 조건 재확인",
-          "예금보험공사 공식 자료에서 예금자보호 한도 재확인"
-        ],
-        "solves": [
-          "특판금리가 지금 얼마인지 몰라 비교를 못 함 → 현재 기준 비교표로 정리",
-          "저축은행 고금리가 안전한지 불안함 → 예금자보호 확인 순서로 판단 기준 제공"
-        ],
-        "actionTitles": [
-          "정기예금특판 금리 지금 얼마인지 저축은행과 비교하는 법",
-          "저축은행 정기예금 고금리 찾는 법, 예금자보호 확인 순서",
-          "정기예금특판 금리 비교, 저축은행 가입 전 확인할 조건"
-        ]
-      },
-      "at": "2026-10-21T17:55:53.716Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
-    },
-    {
       "id": "9676ff75496a05ac",
       "urls": [
         "https://allqueen.tistory.com/1661"
@@ -27245,68 +24958,6 @@
           "views": 420,
           "answers": 1,
           "askedAt": "2023.10.17"
-        }
-      ]
-    },
-    {
-      "id": "42fa752c85abb2e0",
-      "urls": [
-        "https://lawbridge.tistory.com/entry/%EC%9E%A5%EC%95%A0%EC%9D%B8%EC%97%B0%EA%B8%88-%EC%8B%A0%EC%B2%AD%EC%9E%90%EA%B2%A9%EA%B3%BC-%EC%A7%80%EA%B8%89%EC%95%A1-%EC%86%8C%EB%93%9D%EC%9D%B8%EC%A0%95%EC%95%A1-%EA%B8%B0%EC%A4%80%C2%B7%EC%8B%A0%EC%B2%AD%EB%B0%A9%EB%B2%95%C2%B7%EC%9E%A5%EC%95%A0%EC%A0%95%EB%8F%84-%EC%8B%AC%EC%82%AC-%EC%A0%95%EB%A6%AC"
-      ],
-      "guide": {
-        "direction": "① 검색자는 소득인정액에 부모·배우자 소득이 포함되는지, 국가유공자나 시설거주자도 받을 수 있는지 구체 사례에서 막힌다. ② 고수 글은 기준·절차를 나열해도 이런 사례별 판정은 비워둔다. ③ 본인·배우자 소득 포함 여부, 국가유공자 중복 가능 여부, 시설거주 여부별 판정표를 주면 끝난다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "만 18세 이상 등록 중증장애인(장애정도 심사 기준) 자격 조건(확인 필요: 복지로·보건복지부 공고)",
-          "소득인정액 산정 시 배우자 소득·재산은 포함, 부모 소득은 미포함 원칙",
-          "국가유공자 상이등급과 장애인복지법 장애정도는 별개 제도이며 중복신청 가능 여부(확인 필요: 보건복지부)",
-          "장애인 생활시설 거주자의 수급 가능 여부 사례 정리",
-          "신청 → 장애정도 심사 → 지급까지 절차 흐름표"
-        ],
-        "mustAvoid": [
-          "국가유공자 상이등급과 장애인연금 심사 기준을 같은 제도로 혼동해 서술",
-          "지식인 개인 사례를 확정된 심사 결과처럼 사실화",
-          "기초연금 등 다른 복지제도와 혼동해서 기준 섞기"
-        ],
-        "checkBefore": [
-          "보건복지부·복지로 공식 공고에서 최신 소득인정액 기준·지급액 수치 확인",
-          "국가유공자-장애인연금 중복수급 가능 여부 보건복지부 지침 확인"
-        ],
-        "solves": [
-          "장애인연금 신청자격, 부모님 소득도 보나요? → 본인·배우자 소득만 산정됨을 표로 정리",
-          "국가유공자도 장애인연금 신청 가능한가? → 제도 차이와 중복신청 조건 정리",
-          "시설 거주 중인 중증장애인도 수급 대상인지 → 거주 형태별 수급 가능 여부 정리"
-        ],
-        "actionTitles": [
-          "장애인연금 신청자격 확인하는 법, 소득인정액 기준",
-          "장애인연금 지급액 조회와 신청방법 총정리",
-          "장애인연금 장애정도 심사 신청 순서와 자격 비교"
-        ]
-      },
-      "at": "2026-10-21T17:55:53.716Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "장애인연금신청자격",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100102&docId=179746513&answerNo=2&qb=7J6l7JWg7J247Jew6riI7Iug7LKt7J6Q6rKp",
-          "views": 3245,
-          "answers": 1,
-          "askedAt": "2013.09.01"
-        },
-        {
-          "title": "국가유공자 장애인연금",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100102&docId=488275623&answerNo=11&qb=7J6l7JWg7J247Jew6riI7Iug7LKt7J6Q6rKp",
-          "views": 1014,
-          "answers": 11,
-          "askedAt": "2026.09.29"
-        },
-        {
-          "title": "안녕하세요~~ 장애인연금 신청자격 재",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100401&docId=311657173&answerNo=1&qb=7J6l7JWg7J247Jew6riI7Iug7LKt7J6Q6rKp",
-          "views": 849,
-          "answers": 1,
-          "askedAt": "2018.10.09"
         }
       ]
     },
@@ -27580,46 +25231,6 @@
           "희망리턴패키지 점포철거비 신청 시기 확인하는 법",
           "원스톱폐업지원 2차 수정 공고 자격 조회하기",
           "점포철거비 중복 신청 가능 여부 확인하는 법"
-        ]
-      },
-      "at": "2026-10-21T22:27:46.347Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
-    },
-    {
-      "id": "6e53fd121d62aa62",
-      "urls": [
-        "https://3040lifeinfo.tistory.com/entry/2026-%EB%8B%A5%ED%84%B0%EB%82%98%EC%9A%B0-%EA%B1%B4%EA%B0%95%ED%80%B4%EC%A6%88-10%EC%9B%94-22%EC%9D%BC-%EC%A0%95%EB%8B%B5-%EC%B4%9D%EC%A0%95%EB%A6%AC-%EA%B0%84-%EB%B3%B4%ED%98%B8%EC%A0%9C",
-        "https://3040lifeinfo.tistory.com/entry/2026-%EB%8B%A5%ED%84%B0%EB%82%98%EC%9A%B0-%EA%B1%B4%EA%B0%95%ED%80%B4%EC%A6%88-10%EC%9B%94-21%EC%9D%BC-%EC%A0%95%EB%8B%B5-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://3040lifeinfo.tistory.com/entry/2026%EB%85%84-10%EC%9B%94-20%EC%9D%BC-%EB%8B%A5%ED%84%B0%EB%82%98%EC%9A%B0%C2%B7%EB%82%98%EB%A7%8C%EC%9D%98%EB%8B%A5%ED%84%B0-%EA%B1%B4%EA%B0%95%ED%80%B4%EC%A6%88-%EC%A0%95%EB%8B%B5",
-        "https://3040lifeinfo.tistory.com/entry/%EB%8B%A5%ED%84%B0%EB%82%98%EC%9A%B0%C2%B7%EB%82%98%EB%A7%8C%EC%9D%98%EB%8B%A5%ED%84%B0-%EA%B1%B4%EA%B0%95%ED%80%B4%EC%A6%88-10%EC%9B%94-18%EC%9D%BC-%EC%A0%95%EB%8B%B5-%E2%80%93-%EB%B0%9C%ED%91%9C-%EC%A0%84-%EC%86%90-%EB%96%A8%EB%A6%BC-%EA%B4%9C%EC%B0%AE%EC%9D%80-%EA%B1%B8%EA%B9%8C",
-        "https://3040lifeinfo.tistory.com/entry/%EB%8B%A5%ED%84%B0%EB%82%98%EC%9A%B0%C2%B7%EB%82%98%EB%A7%8C%EC%9D%98%EB%8B%A5%ED%84%B0-%EA%B1%B4%EA%B0%95%ED%80%B4%EC%A6%88-10%EC%9B%94-16%EC%9D%BC-%EC%A0%95%EB%8B%B5-%E2%80%93-%EC%86%8D%EC%93%B0%EB%A6%BC%EA%B3%BC-%EB%8D%94%EB%B6%80%EB%A3%A9%ED%95%A8%EC%9D%98-%EA%B4%80%EA%B3%84"
-      ],
-      "guide": {
-        "direction": "검색자는 매일 바뀌는 닥터나우·나만의닥터 건강퀴즈 정답을 빠르게 확인해 적립금을 놓치지 않으려 한다. 고수 글들은 날짜별 정답만 나열하고 간 보호제라는 주제 설명, 적립금 확인 경로, 전후 회차 연결은 비워둔다. 이 글은 10/22 정답을 먼저 주고 간 보호제 관련 한 줄 상식, 적립금 반영 시점, 10/21·다음날 정답 링크를 한 번에 묶어 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "10월22일 날짜와 '간 보호제' 주제를 제목·본문 상단에 명시",
-          "정답 번호/보기 (확인 필요: 닥터나우 앱 공지)",
-          "전날(10/21) 정답 및 다음 회차 정답 글 링크"
-        ],
-        "mustAvoid": [
-          "간 보호제를 특정 약품 효능 과장이나 광고처럼 서술하지 않기",
-          "닥터나우와 나만의닥터 두 앱의 퀴즈 문제·날짜를 혼동하지 않기",
-          "10/21과 10/22 등 다른 회차 정답을 섞어 쓰지 않기"
-        ],
-        "checkBefore": [
-          "10월22일 실제 퀴즈 문제와 정답 보기 — 닥터나우 앱 공지",
-          "간 보호제 관련 문구가 실제 퀴즈에 포함되는지 — 앱 캡처 확인"
-        ],
-        "solves": [
-          "오늘 퀴즈 정답이 뭔지 모르겠다 → 10월22일 정답 바로 제시",
-          "전날 퀴즈도 놓쳤다 → 10/21 정답 링크 연결"
-        ],
-        "actionTitles": [
-          "닥터나우 건강퀴즈 10월22일 정답 확인, 간 보호제 퀴즈",
-          "나만의닥터 퀴즈 10월22일 정답 조회하고 적립금 받는 법",
-          "닥터나우 건강퀴즈 10월21일·22일 정답 한번에 확인하기"
         ]
       },
       "at": "2026-10-21T22:27:46.347Z",
@@ -27931,66 +25542,6 @@
       ]
     },
     {
-      "id": "24cfdd52c1384146",
-      "urls": [
-        "https://yeeso.tistory.com/entry/ETF-%EC%B6%94%EC%A0%81%EC%98%A4%EC%B0%A8%EB%9E%80%EF%BD%9C%EC%A7%80%EC%88%98-%EC%88%98%EC%9D%B5%EB%A5%A0%EA%B3%BC-ETF-%EC%88%98%EC%9D%B5%EB%A5%A0%EC%9D%B4-%EB%8B%AC%EB%9D%BC%EC%A7%80%EB%8A%94-%EC%9D%B4%EC%9C%A0"
-      ],
-      "guide": {
-        "direction": "레버리지 ETF 상장폐지 가능성, ETF와 ETN 차이, 같은 지수인데 수익률이 다른 이유를 몰라 지식인에 묻는 검색자가 많다. 고수 글은 '추적오차 정의'만 다루고 ETN과의 차이나 레버리지 ETF 특유의 변동성 끌림 구조는 짚지 않는다. ETF·ETN 비교표와 추적오차 발생 요인(운용수수료·세금·환헤지)을 정리해 주면 독자가 바로 이해하고 끝낼 수 있다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "ETF vs ETN 비교표 (추적오차 발생 가능 여부, 신용위험, 상장폐지 조건)",
-          "추적오차 발생 요인: 운용수수료, 세금처리, 환헤지, 리밸런싱 비용",
-          "레버리지 ETF의 변동성 끌림(경로의존성) 구조 설명",
-          "국내 상장 ETF 세금 구조 (확인 필요: 운용사/국세청 공시)",
-          "실제 ETF 추적오차 수치 예시 (확인 필요: 운용사 공시자료)"
-        ],
-        "mustAvoid": [
-          "특정 ETF 종목을 무조건 사라는 식의 투자 권유로 단정",
-          "ETF와 ETN을 같은 상품 구조로 혼동해서 설명",
-          "레버리지 ETF 손실 구조를 단순 '두 배 손실'로만 과도 단순화"
-        ],
-        "checkBefore": [
-          "국내 상장 ETF/ETN 실제 추적오차 수치 - 운용사 공시자료/한국거래소",
-          "레버리지 ETF 변동성 끌림 산출 방식 - 금융감독원/운용사 설명자료"
-        ],
-        "solves": [
-          "ETF와 ETN이 뭐가 다른지 몰라 혼란 → 신용위험·추적오차 차이를 표로 정리해 보여준다",
-          "레버리지 ETF가 왜 지수보다 더 떨어지는지 모름 → 변동성 끌림 구조를 수치로 설명한다",
-          "같은 지수 ETF인데 수익률이 다른 이유를 모름 → 운용수수료·세금·환헤지 요인별로 분해한다"
-        ],
-        "actionTitles": [
-          "ETF와 ETN 차이, 추적오차 확인하는 방법 총정리"
-        ]
-      },
-      "at": "2026-10-21T22:27:46.347Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "레버리지 주식에 대해서 물어볼게요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=494512176&answerNo=2&qb=ZXRmIOy2lOyggeyYpOywqOuegCDsp4DsiJgg7IiY7J2166WgIOuLrOudvOyngA==",
-          "views": 550,
-          "answers": 11,
-          "askedAt": "2026.07.29"
-        },
-        {
-          "title": "etf 와 etn 차이는 뭔가요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=487653504&answerNo=3&qb=ZXRmIOy2lOyggeyYpOywqOuegCDsp4DsiJgg7IiY7J2166WgIOuLrOudvOyngA==",
-          "views": 100,
-          "answers": 7,
-          "askedAt": "2025.08.02"
-        },
-        {
-          "title": "미국배당다우존스랑 나스닥100 똑같아야하나....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110601&docId=494758663&answerNo=1&qb=ZXRmIOy2lOyggeyYpOywqOuegCDsp4DsiJgg7IiY7J2166WgIOuLrOudvOyngA==",
-          "views": 96,
-          "answers": 3,
-          "askedAt": "2026.08.16"
-        }
-      ]
-    },
-    {
       "id": "0abde25c61c5d153",
       "urls": [
         "https://kwinner.starkjk.com/151",
@@ -28172,70 +25723,6 @@
       "at": "2026-10-21T22:40:08.585Z",
       "rules": "2026-10-20-solve",
       "provider": "claude"
-    },
-    {
-      "id": "c2cbc4de3497aea5",
-      "urls": [
-        "https://coolmool-economy.tistory.com/entry/national-pension-dependent-benefit-2026-application-eligibility"
-      ],
-      "guide": {
-        "direction": "지식인 질문은 '신청 안 하면 못 받는지', '배우자가 다른 연금을 받고 있어도 되는지', '내가 조건에 해당되는지'에서 막혀 있다. 고수 글 제목은 배우자 금액(연 30만6630원)만 제시해 중복 수급 불가 조건과 미신청 시 불이익은 비어 있을 가능성이 크다. 배우자·자녀·부모별 조건표와 신청 시점을 묶으면 독자가 끝낸다.",
-        "searchTargets": [
-          "국민연금 부양가족 연금액"
-        ],
-        "mustInclude": [
-          "2026년 부양가족연금액: 배우자 연 30만6630원(확인 필요: 자녀·부모 금액은 국민연금공단 발표 확인)",
-          "배우자·자녀·부모별 부양가족 인정 요건(나이·동거·소득 기준) 정리표",
-          "신청하지 않으면 소급 적용 안 되는 점과 신청 시점의 중요성",
-          "필요서류 목록(확인 필요: 국민연금공단 안내)",
-          "부양가족이 별도의 자기 연금을 받고 있을 때 중복 수급 불가 조건"
-        ],
-        "mustAvoid": [
-          "건강보험 피부양자 등록 제도와 국민연금 부양가족연금을 같은 제도로 섞지 않기",
-          "실업크레딧 등 다른 국민연금 지원제도와 혼동하지 않기"
-        ],
-        "checkBefore": [
-          "2026년 배우자·자녀·부모별 정확한 연금액 - 국민연금공단 공식 발표 확인",
-          "신청 필요서류 목록 - 국민연금공단 지사 또는 홈페이지 확인",
-          "법 개정 전부터 지원받던 경우 예외 인정 여부 - 공단 공지 확인"
-        ],
-        "solves": [
-          "부양가족연금 신청 안 하면 못 받나? → 신청 시점과 소급 여부 정리",
-          "부모님이 다른 연금을 받고 있어도 조건이 되나? → 중복 수급 불가 조건표로 정리",
-          "내가 신청 조건에 해당되는지 모르겠다 → 배우자·자녀·부모별 조건표 제공"
-        ],
-        "actionTitles": [
-          "국민연금 부양가족연금액 신청방법, 배우자 조건 확인",
-          "국민연금 부양가족연금 신청 안 하면 못 받는 이유 정리",
-          "국민연금 부양가족연금 조건, 부모·배우자 자격 확인법"
-        ]
-      },
-      "at": "2026-10-21T22:40:08.585Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "퇴사해서 소득이 없는데 국민연금 지역가입....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100402&docId=494576598&answerNo=1&qb=6rWt66+87Jew6riIIOu2gOyWkeqwgOyhseyXsOq4iOyVoSDsi6Dssq3rsKnrspUg67Cw7Jqw7J6QIOu2gOuqqA==",
-          "views": 451,
-          "answers": 3,
-          "askedAt": "2026.08.03"
-        },
-        {
-          "title": "국민연금 예상수령액, 배우자 연금과 중복되....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100402&docId=492296387&answerNo=6&qb=6rWt66+87Jew6riIIOu2gOyWkeqwgOyhseyXsOq4iOyVoSDsi6Dssq3rsKnrspUg67Cw7Jqw7J6QIOu2gOuqqA==",
-          "views": 404,
-          "answers": 8,
-          "askedAt": "2026.08.17"
-        },
-        {
-          "title": "부양가족연금 신청 조건에 해당 되는지요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100102&docId=483404615&answerNo=8&qb=6rWt66+87Jew6riIIOu2gOyWkeqwgOyhseyXsOq4iOyVoSDsi6Dssq3rsKnrspUg67Cw7Jqw7J6QIOu2gOuqqA==",
-          "views": 384,
-          "answers": 8,
-          "askedAt": "2026.08.22"
-        }
-      ]
     }
   ],
   "misses": []
