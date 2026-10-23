@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-23T12:26:25.237Z",
+  "generatedAt": "2026-10-23T12:52:44.137Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -783,43 +783,6 @@
         "checkBefore": [
           "2026년 기준 소득대체율 정확한 수치와 적용 조건은 국민연금공단 공식 발표 자료에서 확인",
           "연도별 소득대체율 변화표는 국민연금법 개정 연혁 공식 자료에서 확인"
-        ]
-      },
-      "at": "2026-10-19T21:06:48.786Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "5854c476fab54c23",
-      "urls": [
-        "https://bwjj.tistory.com/31",
-        "https://www.primusy.com/feeds/4832590140676499501/comments/default",
-        "https://moncar.tistory.com/174",
-        "https://cheinggyemoney.tistory.com/104",
-        "https://bwjj.tistory.com/29"
-      ],
-      "guide": {
-        "direction": "검색자는 청주시 거주 예비 구매자로 '2026 전기차 보조금 조회'를 통해 내 차종의 지원금과 잔여 물량을 확인하려 한다. 고수 블로그들은 이미 청주·창원·화성의 지역별 총액을 다뤘으므로, 예산 소진 시 추경 여부와 접수 마감 전 잔여대수 확인법을 채우면 차별화된다. 차종별 보조금 비교표와 신청 순서(사전조건→계약→출고→신청)를 담아야 끝까지 읽히고 재검색 때도 다시 찾는다.",
-        "searchTargets": [
-          "2026 전기차 보조금 조회",
-          "2026 전기차 보조금",
-          "전기차 보조금 추경",
-          "전기차 보조금 조회"
-        ],
-        "mustInclude": [
-          "청주시 2026 무공해차 지원 대수(5,158대)와 전기승용 최대 보조금(1,296만 원) (확인 필요: 청주시청 공고)",
-          "차종별(전기승용·화물·버스) 보조금 지원 금액 비교표",
-          "신청 절차 순서(사전 등록→계약→출고→보조금 신청) (확인 필요: 청주시 공고문)",
-          "예산 소진 시 추경 가능성 확인 방법 (확인 필요: 환경부/청주시 공지)",
-          "신청 기간 및 접수처 (확인 필요: 청주시청 홈페이지)"
-        ],
-        "mustAvoid": [
-          "창원시·화성시 등 다른 지자체 보조금 액수와 혼동해 적지 않기",
-          "2026년과 2027년 개편 기준을 섞어서 쓰지 않기(연도별 지원금 상이)"
-        ],
-        "checkBefore": [
-          "청주시 2026 전기차 보조금 공고문에서 지원 대수·금액·신청 기간 확인(청주시청 홈페이지)",
-          "예산 소진·추경 여부 확인(환경부 무공해차 통합누리집 또는 청주시 공지)"
         ]
       },
       "at": "2026-10-19T21:06:48.786Z",
@@ -3364,73 +3327,6 @@
           "views": 151,
           "answers": 2,
           "askedAt": "2025.11.07"
-        }
-      ]
-    },
-    {
-      "id": "5e95f647e236bb28",
-      "urls": [
-        "https://bluejamis-life.tistory.com/entry/%EC%9A%B0%EC%B2%B4%EA%B5%AD-%EC%A4%80%EB%93%B1%EA%B8%B0-%EB%B3%B4%EB%82%B4%EB%8A%94-%EB%B2%95-%EC%9A%94%EA%B8%88%C2%B7200g%EC%99%80-500g-%EA%B8%B0%EC%A4%80%C2%B7%EB%B0%B0%EC%86%A1%EC%A1%B0%ED%9A%8C",
-        "https://hjwdf.tistory.com/entry/%ED%95%B4%EC%99%B8%EB%A1%9C-%ED%83%9D%EB%B0%B0-%EB%B3%B4%EB%82%B4%EB%8A%94-%EB%B2%95-%EC%9A%B0%EC%B2%B4%EA%B5%AD-EMS%C2%B7%EA%B5%AD%EC%A0%9C%EC%86%8C%ED%8F%AC%C2%B7K-Packet-%EC%B0%A8%EC%9D%B4-%EA%B9%80%EC%B9%98%EB%8A%94-%EC%95%88-%EB%90%A9%EB%8B%88%EB%8B%A4"
-      ],
-      "guide": {
-        "direction": "① 검색자는 해외택배를 처음 보낼 때 준등기·EMS·국제소포·K-Packet 중 뭘 써야 하는지, 비용이 얼마인지를 몰라 막힌다. ② 고수 글은 금지품목(김치 등)은 짚지만 방법별 요금·무게기준 비교나 통관 중 조회가 안 될 때 어디서 확인하는지는 구체적으로 안 풀어준다. ③ 이 글은 200g·500g 기준 요금표와 국내·통관·현지 구간별 배송조회 순서를 정리해 바로 끝내준다.",
-        "searchTargets": [
-          "해외택배보내기",
-          "해외택배비용",
-          "해외택배보내는법"
-        ],
-        "mustInclude": [
-          "준등기 요금 200g·500g 기준 비교표",
-          "EMS·국제소포·K-Packet·준등기 요금·무게·배송기간 비교표",
-          "해외 반입 금지품목(김치 등 음식류) 리스트(확인 필요: 우체국 공지)",
-          "배송조회 안 될 때 확인 순서(국내 우체국 → 관세청 유니패스 통관조회 → 현지 택배사)",
-          "운송장번호가 늦게 부여되는 경우 안내"
-        ],
-        "mustAvoid": [
-          "준등기(국내용 서비스)와 EMS·국제소포(해외용)를 같은 서비스로 혼동 서술",
-          "모든 국가에 동일한 금지품목·통관 규정이 적용된다고 일반화",
-          "배송기간을 국가·통관상황 구분 없이 확정적으로 단정"
-        ],
-        "checkBefore": [
-          "준등기 요금·무게기준, 금지품목 목록은 우체국 공식 홈페이지에서 확인",
-          "국가별 EMS·K-Packet 요금과 배송기간은 우체국 국제우편 요금표에서 확인"
-        ],
-        "solves": [
-          "해외배송이 며칠째 조회가 안 뜬다 → 국내·통관·현지 구간별로 어디서 조회하는지 순서를 안내",
-          "해외택배비용이 얼마나 드는지 모른다 → 무게·방법별 요금 비교표로 정리",
-          "준등기와 EMS 등 어떤 방법을 써야 할지 모른다 → 무게·금액·배송기간 기준 비교표 제공"
-        ],
-        "actionTitles": [
-          "해외택배보내는법, 준등기·EMS·K-Packet 요금 비교",
-          "해외택배비용 계산, 200g·500g 기준 요금표 확인",
-          "해외택배보내기 전, 배송조회 안 될 때 확인하는 법"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "해외배송 언제 도착하나요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=81302&docId=495548719&answerNo=1&qb=7ZW07Jm47YOd67Cw",
-          "views": 70,
-          "answers": 2,
-          "askedAt": "2026.10.14"
-        },
-        {
-          "title": "1688 해외배송조회",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=512&docId=495339559&answerNo=1&qb=7ZW07Jm47YOd67Cw",
-          "views": 59,
-          "answers": 2,
-          "askedAt": "2026.09.28"
-        },
-        {
-          "title": "해외배송 문의!",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=512&docId=495456528&answerNo=2&qb=7ZW07Jm47YOd67Cw",
-          "views": 47,
-          "answers": 2,
-          "askedAt": "2026.10.07"
         }
       ]
     },
@@ -12092,75 +11988,6 @@
       ]
     },
     {
-      "id": "7002c2f653956a78",
-      "urls": [
-        "https://kinghell.tistory.com/entry/%EC%A0%84%EA%B8%B0%EC%B0%A8-%EB%B3%B4%EC%A1%B0%EA%B8%88-%EB%A7%88%EA%B0%90-%ED%9B%84-%EC%A0%9C%EC%A1%B0%EC%82%AC-%EB%8C%80%EC%B2%B4-%ED%95%A0%EC%9D%B8-%EC%A0%84%ED%99%98-%EC%8B%9C-%EB%82%AD%ED%8C%A8-%EB%A7%89%EB%8A%94-%EA%B3%84%EC%95%BD-%EC%A1%B0%ED%95%AD-%EC%A0%90%EA%B2%80%ED%91%9C",
-        "https://kinghell.tistory.com/entry/BYD-%EC%A0%84%EA%B8%B0%EC%B0%A8-%EA%B3%84%EC%95%BD-%EC%A0%84-%EC%86%90%EC%8B%A4-%EB%A7%89%EB%8A%94-%EC%8B%A4%EB%AC%B4-%EC%B2%B4%ED%81%AC%EB%A6%AC%EC%8A%A4%ED%8A%B8-4%EA%B0%80%EC%A7%80",
-        "https://www.primusy.com/feeds/4832590140676499501/comments/default"
-      ],
-      "guide": {
-        "direction": "검색자는 보조금 소진 후 재신청 시점, 신청일-출고일 불일치, 지자체별 차이, 영업사원 신청 실수로 계약서를 어떻게 봐야 하는지에서 막힌다. 고수 글은 계약 체크리스트나 개편 총정리는 있지만 '소진 후 제조사 할인 전환' 조항 점검까지는 못 짚는다. 이 글은 지자체별 조회 방법·재신청 시기·계약서 확인 조항을 표로 정리해 끝낸다.",
-        "searchTargets": [
-          "전기차 보조금 조회",
-          "2026 전기차 보조금",
-          "2027 전기차 보조금",
-          "전기차 보조금 추경"
-        ],
-        "mustInclude": [
-          "무공해차 통합누리집에서 지자체별 보조금 소진 현황 조회하는 방법",
-          "신청일-출고일이 어긋날 때 계약서에 명시해야 할 할인 전환 조건",
-          "보조금 소진 후 재신청 시기 (확인 필요: 지자체 공식 공고로 26년 1~2월 재개 여부 확인)",
-          "영업사원 신청 실수 발생 시 확인할 서류(계약서·신청 내역)",
-          "전기화물차 등 차종별 취득세 감면 근거(지방세특례제한법 제66조) (확인 필요: 최신 조문)"
-        ],
-        "mustAvoid": [
-          "보조금 액수를 전국 동일로 단정하고 지자체별 차이를 생략하는 것",
-          "특정 대리점·영업사원 사례를 일반화해 제조사 전체를 비난하는 서술",
-          "추경 편성 여부를 확정된 사실처럼 단정하는 것"
-        ],
-        "checkBefore": [
-          "무공해차 통합누리집 지자체별 공고로 최신 소진 현황·재신청 일정 확인",
-          "환경부·지자체 공식 공지로 2026~2027년 보조금 개편안 확정 여부 확인"
-        ],
-        "solves": [
-          "보조금이 소진됐는데 언제 다시 신청할 수 있는지 모름 → 재신청 시기와 지자체별 조회법 정리",
-          "신청일과 출고일이 안 맞으면 손해 보는지 모름 → 계약서에 넣어야 할 조항 체크리스트 제공",
-          "지자체마다 보조금이 얼마나 다른지 모름 → 통합누리집으로 직접 비교하는 법 안내"
-        ],
-        "actionTitles": [
-          "전기차 보조금 조회하는 법, 지자체별 소진 현황 확인",
-          "2026 전기차 보조금 재신청 시기와 계약서 점검법",
-          "전기차 보조금 추경 여부 확인하고 낭패 막는 법"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "전기차 보조금",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8110104&docId=485695461&answerNo=14&qb=7KCE6riw7LCo67O07KGw6riI",
-          "views": 789,
-          "answers": 14,
-          "askedAt": "2026.10.08"
-        },
-        {
-          "title": "전기차 보조금신청일이랑 차량 출고일 맞춰....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=811&docId=489973443&answerNo=5&qb=7KCE6riw7LCo67O07KGw6riI",
-          "views": 530,
-          "answers": 5,
-          "askedAt": "2026.10.07"
-        },
-        {
-          "title": "전기차 전환지원금, 실제로 얼마나 도움이 될....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=80802&docId=492679040&answerNo=4&qb=7KCE6riw7LCo67O07KGw6riI",
-          "views": 182,
-          "answers": 4,
-          "askedAt": "2026.10.11"
-        }
-      ]
-    },
-    {
       "id": "b461a4eea05a1886",
       "urls": [
         "https://moduuri1004.tistory.com/11843282",
@@ -14421,71 +14248,6 @@
       "at": "2026-10-20T10:55:31.225Z",
       "rules": "2026-10-20-solve",
       "provider": "claude"
-    },
-    {
-      "id": "3a062c2969b54f0e",
-      "urls": [
-        "https://ggongmin.tistory.com/entry/a2o-lite-oa-profile-nationality-lookalike",
-        "https://ggongmin.tistory.com/entry/a2o-lite-profile-members-neon",
-        "https://trendsearch.tistory.com/entry/A2O-LITE-%EB%A9%A4%EB%B2%84-%ED%94%84%EB%A1%9C%ED%95%84%C2%B7%EB%82%98%EC%9D%B4-%EC%B4%9D%EC%A0%95%EB%A6%AC-9%EB%AA%85-%EC%B6%9C%EC%83%9D%EC%97%B0%EB%8F%84%EC%99%80-%EA%B5%AD%EC%A0%81-%ED%95%9C%EB%88%88%EC%97%90-%EB%B3%B4%EA%B8%B0"
-      ],
-      "guide": {
-        "direction": "멤버 개별 나이·국적은 알려졌지만 오아가 올리비아 핫세와 어떤 점이 닮았는지, 어떤 멤버가 자기 취향에 맞는지 궁금한 검색자가 많다. 고수 블로그의 '프로필 총정리'는 9명 나이·국적만 나열하고 멤버별 매력 포인트나 닮은꼴 비교는 다루지 않는다. 이 글은 오아의 국적·나이와 올리비아 핫세 닮은꼴 포인트, 멤버별 특징 비교를 정리해 궁금증을 끝낸다.",
-        "searchTargets": [
-          "a2o lite 오아",
-          "a2o lite 멤버",
-          "a2o lite 아이찡",
-          "a2o lite 국적"
-        ],
-        "mustInclude": [
-          "오아 국적·나이(확인 필요: 소속사 공식 프로필)",
-          "올리비아 핫세와 닮았다고 거론되는 외형 특징(확인 필요: 원문 기사·화보)",
-          "멤버 9명 명단과 국적 구성(확인 필요: 공식 발표)",
-          "아이찡 등 다른 멤버와의 매력 포인트 비교(확인 필요: 나무위키·공식 자료)"
-        ],
-        "mustAvoid": [
-          "A2O SOUL과 A2O LITE를 같은 그룹처럼 혼동하지 않기"
-        ],
-        "checkBefore": [
-          "A2O 엔터테인먼트 공식 프로필 발표 확인",
-          "나무위키 등재 정보와 데뷔 관련 원문 기사 확인"
-        ],
-        "solves": [
-          "오아가 올리비아 핫세와 왜 닮았다고 하나 → 거론되는 외형 포인트 정리",
-          "A2O LITE 멤버 국적이 어떻게 구성되나 → 9명 국적별 분류",
-          "아이찡 매력 포인트가 뭔가 → 멤버별 특징 비교"
-        ],
-        "actionTitles": [
-          "a2o lite 오아 프로필, 올리비아 핫세 닮은꼴 포인트 확인",
-          "a2o lite 아이찡 매력 포인트, 멤버별 특징 비교하기"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "새 걸그룹 A2O LITE, 입덕할 만한 멤버 누구인가....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10609&docId=495527204&answerNo=1&qb=YTJvbGl0ZQ==",
-          "views": 205,
-          "answers": 1,
-          "askedAt": "2026.10.13"
-        },
-        {
-          "title": "A2O 아이찡의 매력은 무엇인가요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=3021401&docId=495525591&answerNo=1&qb=YTJvbGl0ZQ==",
-          "views": 94,
-          "answers": 2,
-          "askedAt": "2026.10.13"
-        },
-        {
-          "title": "A2O LITE, 다른 그룹들과 차별화된 점은 뭘까요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10609&docId=495544010&answerNo=1&qb=YTJvbGl0ZQ==",
-          "views": 70,
-          "answers": 1,
-          "askedAt": "2026.10.14"
-        }
-      ]
     },
     {
       "id": "b904887a0cf71fbf",
@@ -18056,71 +17818,6 @@
       "provider": "claude"
     },
     {
-      "id": "6ac833a29634e743",
-      "urls": [
-        "https://yeeso.tistory.com/entry/%EA%B0%80%EA%B3%84%EB%B6%80-%ED%95%AD%EB%AA%A9-%EB%B6%84%EB%A5%98-%EB%B0%A9%EB%B2%95%EF%BD%9C%EC%8B%9D%EB%B9%84%C2%B7%EA%B3%A0%EC%A0%95%EB%B9%84%C2%B7%EB%B3%80%EB%8F%99%EB%B9%84-%EA%B5%AC%EB%B6%84%ED%95%98%EA%B8%B0",
-        "https://quiet-flaneur.tistory.com/40"
-      ],
-      "guide": {
-        "direction": "지식인 질문들은 고정비·변동비를 말로는 알아도 막상 내 가계부의 특정 항목(월세·통신비 vs 식비·교통비)을 어디에 넣을지 몰라 분류 단계에서 멈춘다. 고수 글은 '월급 300만원 관리법' 같은 큰 그림만 다뤄 정작 항목별 분류 기준은 비워둔다. 이 글은 고정비/변동비 분류표와 가계부 앱(토스·뱅크샐러드·머니트리) 적용법으로 그 자리에서 분류를 끝내게 한다.",
-        "searchTargets": [
-          "가계부 항목 분류",
-          "가계부 항목",
-          "가계부 항목 구분"
-        ],
-        "mustInclude": [
-          "고정비 예시: 월세, 보험료, 통신비처럼 매달 정해진 금액",
-          "변동비 예시: 식비, 교통비처럼 매달 금액이 달라지는 지출",
-          "가계부 앱 비교: 토스, 뱅크샐러드, 머니트리의 소비분류 자동화 방식",
-          "지출 패턴 파악 단계(고정비/변동비 나눈 뒤 우선순위 정하기)",
-          "월급 300만원 기준 생활비 배분 비율(확인 필요: 원문 고수 글 또는 가계부 앱 가이드)"
-        ],
-        "mustAvoid": [
-          "월세·보험료 같은 고정비를 변동비로 뭉뚱그려 적지 않기",
-          "가계부 앱 자동분류 결과를 검증 없이 그대로 맞다고 쓰지 않기"
-        ],
-        "checkBefore": [
-          "토스·뱅크샐러드·머니트리 실제 앱 UI에서 소비분류 기준 확인",
-          "월급 300만원 생활비 배분 비율 출처 재확인(확인 필요: 원문 자료)"
-        ],
-        "solves": [
-          "고정비 변동비 구분이 안 돼 가계부 작성이 막힌다 → 항목별 분류표로 바로 정리",
-          "생활비 절약을 어디서 시작해야 할지 모른다 → 지출 패턴 파악 단계 제시",
-          "가계부 앱 선택이 고민된다 → 토스·뱅크샐러드·머니트리 분류 방식 비교"
-        ],
-        "actionTitles": [
-          "가계부 항목 분류 하는 법 고정비 변동비 한눈에 정리",
-          "가계부 항목 구분 헷갈릴 때 식비 고정비 변동비 체크"
-        ]
-      },
-      "at": "2026-10-20T12:32:18.112Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "생활비 절약 위한 가계부 작성 팁은 무엇인가....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=408&docId=486476901&answerNo=4&qb=6rCA6rOE67aAIO2VreuqqSDrtoTrpZgg67Cp67KV7Iud67mEIOqzoOygleu5hA==",
-          "views": 273,
-          "answers": 6,
-          "askedAt": "2026.08.18"
-        },
-        {
-          "title": "월급 200으로 재테크할 때, 고정지출 다이어트....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40101&docId=489677364&answerNo=8&qb=6rCA6rOE67aAIO2VreuqqSDrtoTrpZgg67Cp67KV7Iud67mEIOqzoOygleu5hA==",
-          "views": 240,
-          "answers": 8,
-          "askedAt": "2025.10.24"
-        },
-        {
-          "title": "생활비 절약, 첫걸음은 어디서 시작하나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=814&docId=491781340&answerNo=3&qb=6rCA6rOE67aAIO2VreuqqSDrtoTrpZgg67Cp67KV7Iud67mEIOqzoOygleu5hA==",
-          "views": 140,
-          "answers": 6,
-          "askedAt": "2026.02.08"
-        }
-      ]
-    },
-    {
       "id": "35d4f6d57cb78526",
       "urls": [
         "https://oneulsseulmo.com/68",
@@ -18904,137 +18601,6 @@
           "views": 1342,
           "answers": 16,
           "askedAt": "2026.05.29"
-        }
-      ]
-    },
-    {
-      "id": "33f7f0d8ab4150e3",
-      "urls": [
-        "https://donsunbae.com/entry/%EC%A3%BC%ED%83%9D%EC%B2%AD%EC%95%BD%EC%A2%85%ED%95%A9%EC%A0%80%EC%B6%95-%EC%A7%80%EA%B8%88-%EA%B0%80%EC%9E%85%ED%95%B4%EB%8F%84-%EB%90%A0%EA%B9%8C-%EC%9B%94-25%EB%A7%8C%EC%9B%90%C2%B7%EA%B8%88%EB%A6%AC-31%C2%B7%EC%86%8C%EB%93%9D%EA%B3%B5%EC%A0%9C-120%EB%A7%8C%EC%9B%90-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://muramara.com/entry/2026%EB%85%84-%EC%A3%BC%ED%83%9D%EC%B2%AD%EC%95%BD%EC%A2%85%ED%95%A9%EC%A0%80%EC%B6%95-%EC%86%8C%EB%93%9D%EA%B3%B5%EC%A0%9C-%EC%A1%B0%EA%B1%B4%EA%B3%BC-%ED%95%9C%EB%8F%84-1"
-      ],
-      "guide": {
-        "direction": "지식인엔 무주택자만 되는지, 1주택자도 되는지, 한도가 얼마인지, 소득공제 등록은 어떻게 하는지를 묻는다. 고수 글은 월 25만원·소득공제 120만원 숫자만 던지고 무주택확인서 제출, 중도 추징 조건은 짚지 않는다. 가입 대상·납입 한도·신청 절차·추징 조건을 조건표로 정리해 바로 신청하게 한다.",
-        "searchTargets": [
-          "주택청약종합저축 소득공제 조건",
-          "주택청약종합저축 소득공제 한도",
-          "주택청약종합저축 소득공제 등록",
-          "주택청약종합저축 소득공제 추징"
-        ],
-        "mustInclude": [
-          "소득공제 대상은 무주택 세대주(1주택자는 대출원리금공제 대상, 청약저축공제 대상 아님)",
-          "연 300만원 한도 중 40% 소득공제(최대 120만원, 월 25만원 기준)",
-          "은행 어플(인터넷뱅킹)에서 무주택확인서·소득공제 등록 절차 필요",
-          "중도 해지·주택 취득 시 감면세액 추징 가능(확인 필요: 국세청·은행 공지)",
-          "청년주택청약·ISA와 중복 시 소득공제·비과세 적용 범위 차이(확인 필요: 은행 공지)"
-        ],
-        "mustAvoid": [
-          "1주택자도 똑같이 소득공제 받는다는 식의 단정 금지",
-          "청년주택청약과 일반 주택청약종합저축의 소득공제 조건 혼동 금지",
-          "소득공제와 이자소득 비과세 혜택을 같은 것으로 설명하지 말 것"
-        ],
-        "checkBefore": [
-          "국세청 연말정산 간소화 서비스·은행 공지에서 공제 한도·추징 조건 재확인",
-          "가입 은행(국민·하나 등) 어플의 무주택확인서 제출 절차 최신 화면 확인"
-        ],
-        "solves": [
-          "1주택자도 소득공제 되냐 → 무주택 세대주만 대상이라는 조건 명확히 정리",
-          "소득공제 등록 어떻게 하냐 → 은행 어플 무주택확인서 제출 절차 단계별 정리",
-          "한도가 얼마냐 → 연 300만원 중 40%, 최대 120만원 계산 제시"
-        ],
-        "actionTitles": [
-          "주택청약종합저축 소득공제 조건 확인하고 신청하기",
-          "주택청약종합저축 소득공제 한도 계산해보기",
-          "주택청약종합저축 소득공제 등록 방법 총정리"
-        ]
-      },
-      "at": "2026-10-20T12:32:18.112Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "주택청약종합저축 소득공제 여부",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40101&docId=165531401&answerNo=1&qb=7KO87YOd7LKt7JW97KKF7ZWp7KCA7LaVIOyGjOuTneqzteygnA==",
-          "views": 11047,
-          "answers": 1,
-          "askedAt": "2013.01.19"
-        },
-        {
-          "title": "1주택 청약통장 소득공제",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40203&docId=476954990&answerNo=1&qb=7KO87YOd7LKt7JW97KKF7ZWp7KCA7LaVIOyGjOuTneqzteygnA==",
-          "views": 1795,
-          "answers": 2,
-          "askedAt": "2024.10.22"
-        },
-        {
-          "title": "주택청약종합저축 소득공제",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40101&docId=379554739&answerNo=1&qb=7KO87YOd7LKt7JW97KKF7ZWp7KCA7LaVIOyGjOuTneqzteygnA==",
-          "views": 1033,
-          "answers": 1,
-          "askedAt": "2021.01.21"
-        }
-      ]
-    },
-    {
-      "id": "c035614e8af369ea",
-      "urls": [
-        "https://noticanbutido.tistory.com/entry/2026-government-subsidy-guide",
-        "https://da.tipmany.com/entry/%EB%AF%BC%EC%83%9D%EC%A7%80%EC%9B%90%EA%B8%88%EB%8C%80%EC%83%81%EC%9E%90%ED%99%95%EC%9D%B8"
-      ],
-      "guide": {
-        "direction": "지식인 질문들은 '내가 대상자인지 어디서 확인하는지'조차 못 찾아 막혀 있다—국민비서 구삐, 카드사 앱, 정부 웹사이트, 주민센터로 창구가 나뉘어 헷갈린다. 고수 글의 '완벽 가이드'는 '대상자 아니라고 나왔는데 다른 데서도 확인해야 하나', '가족이 대신 조회해도 정확한가' 같은 실제 혼란은 안 풀어준다. 이 글은 조회 창구별 차이표와 '대상자 아님' 떴을 때 그래도 신청해야 하는지를 정리해 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "국민비서 구삐 대상자 알림 서비스 신청 방법",
-          "카드사 앱/홈페이지 로그인 후 대상자 조회 메뉴 위치",
-          "주민센터(행정복지센터) 오프라인 조회 방법",
-          "'대상자 아님' 떠도 신청 가능한지 여부(확인 필요: 정부 공식 공지)",
-          "가족이 대신 조회한 결과는 부정확할 수 있다는 점(지식인 답변 근거)"
-        ],
-        "mustAvoid": [
-          "민생지원금과 민생회복지원금(2차) 등 비슷한 명칭의 지원금을 혼동",
-          "특정 카드사 조회법만 다뤄 다른 카드사 이용자가 '내 카드는 없다'고 느끼게 함"
-        ],
-        "checkBefore": [
-          "민생지원금 명칭(1차/2차/민생회복지원금) 및 대상자 기준 최신 공고 - 행정안전부/정부24 공식 공지",
-          "국민비서 구삐 서비스 현재 운영 여부 - 국민비서 공식 홈페이지/앱",
-          "카드사별 조회 메뉴 명칭 변경 여부 - 각 카드사 공식 앱"
-        ],
-        "solves": [
-          "대상자 아니라고 나왔는데 어디서 다시 확인하나 → 조회 창구별 차이와 재확인 순서 정리",
-          "가족이 대신 조회해도 정확한가 → 본인 확인 필요성과 대리 조회의 한계 설명",
-          "온라인으로 안 되면 어디 가야 하나 → 주민센터 방문 시 준비물·절차 안내"
-        ],
-        "actionTitles": [
-          "민생지원금 대상자 조회, 국민비서 구삐로 끝내는 법",
-          "민생지원금 대상자 확인 안 될 때 주민센터 방문 순서",
-          "카드사 앱으로 민생지원금 대상자 조회하는 법 총정리"
-        ]
-      },
-      "at": "2026-10-20T12:32:18.112Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "민생 회복 지원금 대상자 확인방법",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=408&docId=488864547&answerNo=2&qb=66+87IOd7KeA7JuQ6riI64yA7IOB7J6Q7ZmV7J24",
-          "views": 2437,
-          "answers": 10,
-          "askedAt": "2025.09.15"
-        },
-        {
-          "title": "2차 민생지원금 대상자 어디서확인하나요??",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110311&docId=489072886&answerNo=1&qb=66+87IOd7KeA7JuQ6riI64yA7IOB7J6Q7ZmV7J24",
-          "views": 1530,
-          "answers": 13,
-          "askedAt": "2025.09.24"
-        },
-        {
-          "title": "민생지원금 대상자 조회",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100101&docId=489048129&answerNo=6&qb=66+87IOd7KeA7JuQ6riI64yA7IOB7J6Q7ZmV7J24",
-          "views": 289,
-          "answers": 6,
-          "askedAt": "2025.09.23"
         }
       ]
     },
@@ -23891,72 +23457,6 @@
       ]
     },
     {
-      "id": "846daa529294c974",
-      "urls": [
-        "https://youngdr.tistory.com/206"
-      ],
-      "guide": {
-        "direction": "검색자가 막힌 지점은 '상가 확정일자를 인터넷등기소에서 조회만 되는지, 신청(접수)까지 온라인으로 가능한지'와 세무서에 뭘 들고 가야 하는지다. 고수 블로그 제목은 온라인 가능 여부를 다루지만 지식인 질문처럼 '신청'과 '조회(확인)'를 뭉뚱그려 혼동한다. 신청과 조회를 구분한 절차표와 세무서 준비물 체크리스트로 한 번에 끝낸다.",
-        "searchTargets": [
-          "상가 확정일자 온라인",
-          "상가 확정일자 신청",
-          "상가 확정일자 준비물",
-          "상가 확정일자 효력"
-        ],
-        "mustInclude": [
-          "신청(접수)과 조회(열람) 구분표 — 인터넷등기소는 조회만 가능한지 확인 (확인 필요: 대법원 인터넷등기소)",
-          "세무서 방문시 준비물 — 임대차계약서 원본·사업자등록신청서·신분증 등 (확인 필요: 국세청 홈택스)",
-          "상가 확정일자 부여 현황 열람 방법 — 세무서 열람·제공 절차(지식인 답변 기반)",
-          "보증금↓·월세↑ 전환 시 확정일자 재부여 필요 여부 (확인 필요: 세무사·관할 세무서)",
-          "확정일자의 대항력·우선변제권 효력 — 임대인 경매·회생 시 적용 조건"
-        ],
-        "mustAvoid": [
-          "주택임대차 확정일자(전입신고+온라인 신청)와 상가임대차 확정일자 절차를 같은 것으로 혼동",
-          "보증금-월세 전환시 세금 문제를 세무사 상담 없이 단정적으로 안내"
-        ],
-        "checkBefore": [
-          "대법원 인터넷등기소에서 확정일자 메뉴가 조회용인지 신청(접수)용인지 공식 안내 확인",
-          "관할 세무서·국세청 홈택스 공지에서 상가 확정일자 신청 필요서류 최신본 확인"
-        ],
-        "solves": [
-          "상가 확정일자를 인터넷등기소에서 확인 안 되냐는 질문 → 조회와 신청을 구분해 답한다",
-          "상가 전체 월세를 알 수 있냐는 질문 → 확정일자 부여 현황 세무서 열람 절차로 답한다",
-          "보증금 낮추고 월세 올리면 확정일자 재부여·세금 신고가 필요한지 → 조건별로 정리"
-        ],
-        "actionTitles": [
-          "상가 확정일자 온라인 신청 가능할까? 세무서 준비물까지",
-          "상가 확정일자 받는 방법, 신청과 조회 헷갈릴 때 정리",
-          "상가 확정일자 신고 전, 세무서 준비물 체크리스트 총정리"
-        ]
-      },
-      "at": "2026-10-21T12:46:26.242Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "상가임대차 확정일자는 인터넷등기소에서 확....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40202&docId=471311855&answerNo=3&qb=7IOB6rCAIO2ZleygleydvOyekCDsmKjrnbzsnbgg7Jes67aAIOyEuOustOyEnA==",
-          "views": 1239,
-          "answers": 4,
-          "askedAt": "2024.06.19"
-        },
-        {
-          "title": "임대인이 확정일자 날인된 계약서 사본 공개....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40202&docId=493738571&answerNo=3&qb=7IOB6rCAIO2ZleygleydvOyekCDsmKjrnbzsnbgg7Jes67aAIOyEuOustOyEnA==",
-          "views": 233,
-          "answers": 8,
-          "askedAt": "2026.06.08"
-        },
-        {
-          "title": "상가 보증금 낮추고 월세 올리면 세금은",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40309&docId=494496467&answerNo=1&qb=7IOB6rCAIO2ZleygleydvOyekCDsmKjrnbzsnbgg7Jes67aAIOyEuOustOyEnA==",
-          "views": 31,
-          "answers": 1,
-          "askedAt": "2026.07.28"
-        }
-      ]
-    },
-    {
       "id": "c36ea47146b8edab",
       "urls": [
         "https://zsewqzsewq.tistory.com/344"
@@ -24610,44 +24110,6 @@
           "비웨사 다니엘 나이 국적 귀화 정보 한눈에 확인하기",
           "비웨사 다니엘 가사마 부모님 가족관계 정리 확인",
           "비웨사 다니엘 주요 기록과 연금 지급 여부 확인하기"
-        ]
-      },
-      "at": "2026-10-21T17:55:53.716Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
-    },
-    {
-      "id": "1d83229111c421a2",
-      "urls": [
-        "https://yoanarc.com/1418",
-        "https://infodemic.kr/3283",
-        "https://infodemic.kr/3282",
-        "https://infodemic.kr/3281"
-      ],
-      "guide": {
-        "direction": "검색자는 골때녀에 새로 합류한 먹스나가 누구인지, 먹방 유튜버로서의 본명·나이·정체를 궁금해한다. 고수 글들은 유히로·우덕배 등 다른 선수별로 흩어져 있어 먹스나만의 합류 배경·포지션 정리가 빠져 있다. 프로필표와 신규 합류 선수 비교를 한 번에 정리하면 이 글에서 궁금증이 끝난다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "먹스나 본명·나이·먹방 유튜버 채널명(확인 필요: 공식 발표/소속 채널)",
-          "골때리는 그녀들 합류 발표 시점(확인 필요: SBS 공식 공지)",
-          "유히로·우덕배 등 다른 신규 합류 선수와 비교표"
-        ],
-        "mustAvoid": [
-          "확인 안 된 본명·나이를 추측으로 단정하지 않기",
-          "먹방 유튜버의 수익·사생활에 대한 근거 없는 추측 삽입하지 않기",
-          "비슷한 예명의 다른 유튜버와 혼동하지 않기"
-        ],
-        "checkBefore": [
-          "먹스나 본명·나이·합류 발표는 SBS 골때리는 그녀들 공식 계정/방송 공지에서 확인"
-        ],
-        "solves": [
-          "먹스나가 누군지 모름 → 프로필(나이·본명·유튜버 활동)로 한번에 정리",
-          "신규 합류 선수들이 헷갈림 → 유히로·우덕배 등과 비교표로 구분"
-        ],
-        "actionTitles": [
-          "먹스나 골때녀 합류, 프로필·본명·나이 한눈에 확인",
-          "먹스나 나이 본명 직업, 먹방 유튜버 정체 확인하기",
-          "골때녀 시즌 신규 합류 선수 비교, 먹스나 정체는?"
         ]
       },
       "at": "2026-10-21T17:55:53.716Z",
@@ -25602,46 +25064,6 @@
           "askedAt": "2026.09.19"
         }
       ]
-    },
-    {
-      "id": "5cdc62d11f03623f",
-      "urls": [
-        "https://kinghell.tistory.com/entry/2026%EB%85%84-%EB%86%8D%EC%97%85%EC%9D%B8-%EA%B1%B4%EA%B0%95%EB%B3%B4%ED%97%98%EB%A3%8C-%EA%B0%90%EB%A9%B4-%EB%86%93%EC%B9%98%EC%A7%80-%EC%95%8A%EB%8A%94-%EC%9E%90%EA%B2%A9-%EC%A0%90%EA%B2%80%ED%91%9C%EC%99%80-%EA%B5%AC%EA%B0%84%EB%B3%84-%EA%B3%84%EC%82%B0%EB%B2%95",
-        "https://cnp.youmytv.com/28"
-      ],
-      "guide": {
-        "direction": "검색자는 '내가 농업인 건강보험료 감면 대상인지, 감면 조건과 감면율이 소득·경작규모별로 어떻게 다른지'가 궁금해서 검색한다. 고수 블로그는 '자격 점검표와 구간별 계산법'을 제목에 걸었지만 실제 소득·면적 구간별 감면율 수치표까지는 보여주지 못한다. 독자는 이 글에서 소득·경작규모 구간별 감면율 표와 신청 절차를 보고 바로 내 감면액을 계산한다.",
-        "searchTargets": [
-          "농업인 건강보험료 감면 대상",
-          "농업인 건강보험료 감면 조건"
-        ],
-        "mustInclude": [
-          "농업인 자격 기준(농업경영체 등록 등, 확인 필요: 국민건강보험공단 공지)",
-          "소득 구간별 감면율 표(확인 필요: 2026년 고시 기준)",
-          "경작면적·농업종사기간 조건(확인 필요)",
-          "감면 신청 방법과 필요 서류(확인 필요: 공단 지사/홈페이지)"
-        ],
-        "mustAvoid": [
-          "국민연금 농업인 보험료 감면 제도와 혼동(별개 제도)",
-          "2025년 이전 감면율 수치를 2026년 수치로 단정해서 쓰기"
-        ],
-        "checkBefore": [
-          "국민건강보험공단 2026년 농업인 보험료 감면 고시(공식 공지)"
-        ],
-        "solves": [
-          "내가 농업인 건강보험료 감면 대상인지 모름 → 자격 점검표로 즉시 확인",
-          "감면 조건이 소득별로 다른지 모름 → 구간별 감면율 계산표 제공(확인 필요: 수치)",
-          "감면 신청 방법을 모름 → 신청 서류·절차 순서 안내"
-        ],
-        "actionTitles": [
-          "농업인 건강보험료 감면 대상 자격 점검표로 확인하기",
-          "농업인 건강보험료 감면 조건 구간별로 계산하는 방법",
-          "농업인 건강보험료 감면 점검표로 감면액 바로 확인하기"
-        ]
-      },
-      "at": "2026-10-21T22:40:08.585Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
     },
     {
       "id": "190be4b297e7ef04",
