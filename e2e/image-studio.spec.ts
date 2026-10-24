@@ -8,8 +8,10 @@ let page: Page;
 let profile: ElectronTestProfile;
 const errors: string[] = [];
 async function tab(name: string) {
-  await page.locator(`.tab-button[data-tab="${name}"]`).focus();
-  await page.keyboard.press('Enter');
+  const button = page.locator(`.tab-button[data-tab="${name}"]`);
+  await button.click();
+  await expect(button).toHaveAttribute('aria-selected', 'true');
+  await expect(page.locator(`#tab-${name}`)).toBeVisible();
 }
 
 test.beforeAll(async () => {
@@ -28,14 +30,24 @@ test('image defaults, AI mark persistence and retired options use the real setti
     await expect(page.locator(`#${id}`)).toHaveCount(0);
   }
   const checkbox = page.locator('#image-ai-mark-all');
+  const status = page.locator('#image-ai-mark-status');
+  await expect(status).toHaveAttribute('data-state', 'saved');
   await checkbox.check();
+  // getConfig can expose the in-memory value before saveConfig has finished.
+  // Wait for the UI's persisted-value acknowledgement before reloading.
+  await expect(status).toHaveText('저장됨 · 발행 시 모든 이미지에 AI 활용 표시');
+  await expect(status).toHaveAttribute('data-state', 'saved');
+  await expect(checkbox).toBeEnabled();
   await expect.poll(() => page.evaluate(async () => (await (window as any).api.getConfig()).aiMarkAllImages)).toBe(true);
-  await expect(page.locator('#image-ai-mark-status')).not.toHaveText('');
   await page.reload();
   await expect(page.locator('#refresh-posts-list-btn')).toHaveAttribute('data-listener-added', 'true', { timeout: 45_000 });
   await tab('images');
+  await expect(status).toHaveAttribute('data-state', 'saved');
   await expect(checkbox).toBeChecked();
   await checkbox.uncheck();
+  await expect(status).toHaveText('저장됨 · AI 생성 이미지만 자동 판정');
+  await expect(status).toHaveAttribute('data-state', 'saved');
+  await expect(checkbox).toBeEnabled();
   await expect.poll(() => page.evaluate(async () => (await (window as any).api.getConfig()).aiMarkAllImages)).toBe(false);
 });
 
