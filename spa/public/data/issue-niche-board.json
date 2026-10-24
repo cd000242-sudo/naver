@@ -1,21 +1,124 @@
 {
-  "publishedAt": "2026-10-24T09:17:44.819Z",
+  "publishedAt": "2026-10-24T21:27:01.042Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 210,
-    "niche": 2,
-    "preemption": 5,
+    "candidates": 240,
+    "niche": 1,
+    "preemption": 3,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-10-24",
+    "day": "2026-10-25",
     "keywords": [
+      "오세훈 임기",
+      "사건반장 출연진",
       "정용진 페라리"
     ]
   },
   "rows": [
+    {
+      "keyword": "김정은 가망",
+      "issue": "김정은",
+      "topic": "김정은",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "'여전히 활개치는 정체불명의 선교사들' 보수우파지키는 7인/Jesus Wave.우향.KNN",
+          "유물론적 이상주의가 계급 복수심을 추동한 수용소 대학살로 이어지는 논리적 과정에 대한 이해. 좌파 왼손잡이 십선비들이 고려 조선 내내 가진 이념 스탠스 추론.",
+          "단편소설 「오래된 기억」",
+          "문재인 양평에서도ㅡ 민간인 ㅡ 사찰을 했다라면 ㅡ 군주 ㅡ가스라이팅 심하게 되어 범죄로 여기지 않고 있다 라면",
+          "2026.08.18(화) 오전 11시 주요 Headline Summary — 세계 뉴스로 배우는 영어 표현",
+          "이 모든 범죄는 74김영 출세 하나로 일으켰다 ㅡ 골굴사 도착하자 마자 ㅡ직관이 감지된다 ㅡ",
+          "북한 주민들을 보면 마치 한국 택시기사들을 보는 것 같다",
+          "韓國 2/2",
+          "중동전쟁 이후 2",
+          "베르나르 베르베르 영혼의 왈츠 , 오늘부터 전생 체험을 시작하겠다!"
+        ],
+        "measuredAt": "2026-10-24T21:25:51.511Z"
+      },
+      "documentCount": 1096,
+      "documentCountMeasured": true,
+      "searchVolume": 420,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 1,
+      "issueStatus": "rising",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 420",
+        "문서수 1,096",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 420 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.0배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        },
+        "home": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 186,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-10-24T21:23:25.675Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2"
+    },
     {
       "keyword": "오세훈 임기",
       "issue": "오세훈",
@@ -109,7 +212,42 @@
       },
       "subKeywords": null,
       "keywordPool": null,
-      "trend": null,
+      "trend": {
+        "series": [
+          3,
+          0,
+          2,
+          5,
+          2,
+          2,
+          2,
+          13,
+          4,
+          3,
+          3,
+          2,
+          5,
+          0,
+          2,
+          2,
+          4,
+          0,
+          0,
+          5,
+          6,
+          4,
+          2,
+          2,
+          2,
+          5,
+          3,
+          4,
+          100
+        ],
+        "label": "🚀 떡상",
+        "recommendation": "지금 당장 작성! 3일 내 급증 포착 → 선점 시 상위 노출 확률 매우 높음",
+        "measuredAt": "2026-10-24T21:27:01.817Z"
+      },
       "kinCount": 598,
       "kinTop": [
         {
@@ -135,7 +273,8 @@
       "measuredAt": "2026-10-24T09:16:42.189Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "kinMode": "date-views-v2"
+      "kinMode": "date-views-v2",
+      "carried": true
     },
     {
       "keyword": "사건반장 출연진",
@@ -229,7 +368,40 @@
       },
       "subKeywords": null,
       "keywordPool": null,
-      "trend": null,
+      "trend": {
+        "series": [
+          27,
+          19,
+          16,
+          56,
+          78,
+          67,
+          78,
+          64,
+          23,
+          19,
+          25,
+          49,
+          43,
+          100,
+          83,
+          20,
+          12,
+          59,
+          64,
+          72,
+          89,
+          64,
+          23,
+          17,
+          41,
+          65,
+          65,
+          83,
+          54
+        ],
+        "measuredAt": "2026-10-24T21:27:01.817Z"
+      },
       "kinCount": 526,
       "kinTop": [
         {
@@ -249,7 +421,8 @@
       "measuredAt": "2026-10-24T09:16:42.189Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "kinMode": "date-views-v2"
+      "kinMode": "date-views-v2",
+      "carried": true
     },
     {
       "keyword": "정용진 페라리",
@@ -375,7 +548,7 @@
           0,
           0
         ],
-        "measuredAt": "2026-10-24T09:17:45.374Z"
+        "measuredAt": "2026-10-24T21:27:01.817Z"
       },
       "kinCount": 5,
       "kinTop": [],
@@ -400,7 +573,7 @@
       "verdict": "preemption",
       "preemptionKind": "no-demand",
       "serp": null,
-      "documentCount": 129,
+      "documentCount": 131,
       "documentCountMeasured": true,
       "searchVolume": 10,
       "searchVolumeLt10": true,
@@ -413,8 +586,8 @@
       "freshFrontalCount": 0,
       "reasons": [
         "검색량 10",
-        "문서수 129",
-        "선점 후보 — 경쟁 문서 129건, 수요 미검출"
+        "문서수 131",
+        "선점 후보 — 경쟁 문서 131건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -450,12 +623,138 @@
         {
           "title": "새로운 AI 에이전트 닷츠, 실제로 얼마나 효율적일까요?",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=1122&docId=495387990&answerNo=0",
-          "views": 62,
+          "views": 66,
           "answers": null
         }
       ],
       "monetize": null,
-      "measuredAt": "2026-10-24T09:16:42.189Z",
+      "measuredAt": "2026-10-24T21:23:25.675Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "앤트로픽 엔스로픽 차이",
+      "issue": "앤트로픽",
+      "topic": "앤트로픽",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 37,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 37",
+        "선점 후보 — 경쟁 문서 37건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "구매 검토",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "앤트로픽 엔스로픽 차이 무엇이 어떻게 다른가",
+          "frame": "compare",
+          "basis": "검색 질문 '앤트로픽 엔스로픽 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+        },
+        "home": {
+          "text": "앤트로픽 엔스로픽 차이, 기준은 하나면 됩니다",
+          "frame": "compare",
+          "basis": "검색 질문 '앤트로픽 엔스로픽 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-24T21:23:25.675Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "오픈AI 닷츠 이용방법",
+      "issue": "오픈AI",
+      "topic": "오픈AI",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 218,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 218",
+        "선점 후보 — 경쟁 문서 218건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "거래",
+      "adsenseFit": false,
+      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+      "titles": {
+        "seo": {
+          "text": "오픈AI 닷츠 이용방법 처음 해도 막히지 않는 순서",
+          "frame": "howto",
+          "basis": "검색 질문 '오픈AI 닷츠 이용방법' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+        },
+        "home": {
+          "text": "오픈AI 닷츠 이용방법, 어렵게 할 필요 없습니다",
+          "frame": "howto",
+          "basis": "검색 질문 '오픈AI 닷츠 이용방법' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-24T21:23:25.675Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -521,7 +820,8 @@
       "monetize": null,
       "measuredAt": "2026-10-24T09:16:42.189Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "김재윤 PO 불발",
@@ -573,133 +873,8 @@
       "monetize": null,
       "measuredAt": "2026-10-24T09:16:42.189Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "앤트로픽 엔스로픽 차이",
-      "issue": "앤트로픽",
-      "topic": "앤트로픽",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 37,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 37",
-        "선점 후보 — 경쟁 문서 37건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "앤트로픽 엔스로픽 차이 무엇이 어떻게 다른가",
-          "frame": "compare",
-          "basis": "검색 질문 '앤트로픽 엔스로픽 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        },
-        "home": {
-          "text": "앤트로픽 엔스로픽 차이, 기준은 하나면 됩니다",
-          "frame": "compare",
-          "basis": "검색 질문 '앤트로픽 엔스로픽 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-24T09:16:42.189Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "오픈AI 닷츠 이용방법",
-      "issue": "오픈AI",
-      "topic": "오픈AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 215,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 215",
-        "선점 후보 — 경쟁 문서 215건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "거래",
-      "adsenseFit": false,
-      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-      "titles": {
-        "seo": {
-          "text": "오픈AI 닷츠 이용방법 처음 해도 막히지 않는 순서",
-          "frame": "howto",
-          "basis": "검색 질문 '오픈AI 닷츠 이용방법' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        },
-        "home": {
-          "text": "오픈AI 닷츠 이용방법, 어렵게 할 필요 없습니다",
-          "frame": "howto",
-          "basis": "검색 질문 '오픈AI 닷츠 이용방법' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-24T09:16:42.189Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "유니트리 상장 일자",
@@ -2343,64 +2518,82 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "플로라 축일 7월",
-      "issue": "플로라",
-      "topic": "플로라",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 154,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 154",
-        "선점 후보 — 경쟁 문서 154건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 134,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-22T21:22:03.803Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
   "issues": [
+    {
+      "issue": "김정은",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": null,
+      "headlines": [
+        {
+          "title": "단둥 찾은 김정은, 中서열 4위 왕후닝 만나…北 복귀한 듯(종합)",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-24T12:26:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014275948?sid=104"
+        },
+        {
+          "title": "김정은, 당일치기 방중 끝났다... 中서열 4위 만나고 평양으로",
+          "press": "chosun.com",
+          "publishedAt": "2026-10-24T11:31:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004005747?sid=100"
+        },
+        {
+          "title": "김정은, '中서열 4위' 왕후닝과 단둥서 회담…\"협력 전망 넓어\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-24T11:25:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016398287?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "김정은 죽음",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "북한 김정은",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김정은 사망일",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김정은 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김정은 뇌출혈",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김정은 자녀",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김정은 배우",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김정은 김주애",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 1
+    },
     {
       "issue": "사건반장",
       "issueType": "fresh",
@@ -2471,7 +2664,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 1
+      "rowCount": 1,
+      "carried": true
     },
     {
       "issue": "오세훈",
@@ -2543,7 +2737,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 1
+      "rowCount": 1,
+      "carried": true
     },
     {
       "issue": "정용진",
@@ -2619,7 +2814,7 @@
       "carried": true
     }
   ],
-  "enrichedAt": "2026-10-24T09:18:05.134Z",
+  "enrichedAt": "2026-10-24T21:27:27.415Z",
   "enrichStats": {
     "enriched": 0,
     "subsAdded": 0,
@@ -2633,7 +2828,7 @@
     "pooled": 0,
     "aiTitled": 0,
     "trended": 0,
-    "aiCalls": 3,
+    "aiCalls": 4,
     "partial": false
   }
 }
