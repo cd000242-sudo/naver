@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-23T22:31:32.623Z",
+  "generatedAt": "2026-10-24T00:31:04.947Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -1009,42 +1009,6 @@
       "provider": "claude"
     },
     {
-      "id": "e407b7baa54f1d27",
-      "urls": [
-        "https://mingyu2100.tistory.com/552",
-        "https://ace4.jspeopleone.com/entry/%EC%B0%A8%EC%83%81%EC%9C%84%EA%B3%84%EC%B8%B5-%ED%99%95%EC%9D%B8%EC%84%9C-%EB%B0%9C%EA%B8%89-%EB%B0%A9%EB%B2%95-2026-%EC%86%8C%EB%93%9D-%EA%B8%B0%EC%A4%80%EA%B3%BC-%EC%8B%A0%EC%B2%AD-%EC%A0%88%EC%B0%A8-%EC%A0%95%EB%A6%AC",
-        "https://dailyloglab-369.com/entry/2026-%EC%B0%A8%EC%83%81%EC%9C%84%EA%B3%84%EC%B8%B5-%ED%99%95%EC%9D%B8%EC%84%9C-%EB%B0%9C%EA%B8%89-%EA%B8%B0%EC%A4%80-%ED%86%B5%EC%8B%A0%EB%B9%84-%EC%9B%94-33500%EC%9B%90-%EA%B0%90%EB%A9%B4-%EB%B0%8F-%EA%B3%B5%EA%B3%BC%EA%B8%88-%ED%95%A0%EC%9D%B8-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://dailyloglab-369.com/entry/2026-%EC%B0%A8%EC%83%81%EC%9C%84%EA%B3%84%EC%B8%B5-%EC%9E%90%EA%B2%A9-%EC%A1%B0%EA%B1%B4-5%EB%8C%80-%EB%B2%95%EC%A0%95-%EC%A2%85%EB%A5%98-%EB%B0%8F-%EB%B3%91%EC%9B%90%EB%B9%84-%EA%B0%90%EB%A9%B4%C2%B7%EA%B0%90%EB%A9%B4-%ED%98%9C%ED%83%9D-%EC%B4%9D%EC%A0%95%EB%A6%AC"
-      ],
-      "guide": {
-        "direction": "대표 검색어는 '차상위계층 확인서 발급'으로 잡는다 — 자동완성에 '자녀·무인·복지로·정부24·온라인'이 뜨는 건 발급 수단(주민센터/무인발급기/온라인)과 가족 명의 발급 가능 여부를 헷갈려하기 때문이다. 고수 글들은 소득기준·혜택·통신비 감면에 집중해 발급 방법 자체는 비어 있다. 수단별 비교표와 자녀 명의 발급 가능 여부·준비서류를 정리하면 재검색 없이 끝까지 읽힌다.",
-        "searchTargets": [
-          "차상위계층 확인서 발급",
-          "차상위계층 확인서 자녀",
-          "차상위계층 확인서 무인",
-          "차상위계층 확인서 복지로"
-        ],
-        "mustInclude": [
-          "발급 수단별 비교표(정부24·복지로 온라인, 무인발급기, 주민센터 방문)",
-          "자녀 등 가족 명의로 대신 발급 가능한지와 필요 서류(확인 필요: 복지로 공지)",
-          "수수료 없음 명시",
-          "처리 시간 '근무시간 내 3시간' 명시 및 지연 시 문의처(확인 필요: 주민센터 공지)",
-          "발급 전 준비서류 체크리스트"
-        ],
-        "mustAvoid": [
-          "기초생활수급자 증명서 등 유사 복지 서류와 혼동",
-          "소득·재산 기준 수치를 확정값처럼 단정"
-        ],
-        "checkBefore": [
-          "복지로·정부24 공식 사이트에서 발급 방법별 필요 서류 확인",
-          "보건복지부 또는 읍면동 주민센터 공지에서 자녀 명의 발급 가능 여부 확인"
-        ]
-      },
-      "at": "2026-10-19T21:06:48.786Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
       "id": "5d065402c02905e0",
       "urls": [
         "https://onsum.kr/entry/2026-%EA%B7%BC%EB%A1%9C%EC%9E%A5%EB%A0%A4%EA%B8%88-%ED%95%99%EC%9B%90%EA%B0%95%EC%82%AC%C2%B7%EA%B3%BC%EC%99%B8%EA%B5%90%EC%82%AC%EB%8F%84-%EB%B0%9B%EC%9D%84-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C-33-%EC%82%AC%EC%97%85%EC%86%8C%EB%93%9D%C2%B7%ED%94%84%EB%A6%AC%EB%9E%9C%EC%84%9C-%EA%B0%95%EC%82%AC%C2%B7%EA%B5%90%EC%8A%B5%EC%86%8C-%EC%9A%B4%EC%98%81-%EA%B8%B0%EC%A4%80-%EC%B4%9D%EC%A0%95%EB%A6%AC",
@@ -1307,39 +1271,6 @@
         "checkBefore": [
           "2026년 기준중위소득 고시 금액 (보건복지부 공식 발표)",
           "희망저축계좌Ⅱ 3차 신청 마감일 10월26일 정확성 (복지로/주최 공지)"
-        ]
-      },
-      "at": "2026-10-19T21:06:48.786Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "63292796b47d7f24",
-      "urls": [
-        "https://kodorri.tistory.com/365",
-        "https://lsy4857.tistory.com/186",
-        "https://100maan.tistory.com/entry/2026-%EA%B5%AD%EB%AF%BC%EB%82%B4%EC%9D%BC%EB%B0%B0%EC%9B%80%EC%B9%B4%EB%93%9C%E3%85%A3%EC%9E%90%EB%B6%80%EB%8B%B4-10-%EC%83%9D%EA%B2%BC%EC%A7%80%EB%A7%8C-%EC%9E%A5%EB%A0%A4%EA%B8%88-%EC%9B%94-20%EB%A7%8C%EC%9B%90-%EC%B4%9D%EC%A0%95%EB%A6%AC"
-      ],
-      "guide": {
-        "direction": "'자부담금 확인방법', '결제방법' 검색자는 이미 훈련과정을 고른 뒤 실제로 얼마를 언제 어떻게 내는지 궁금한 실행 단계의 사람이다. 고수 글들은 '왜 훈련비부터 봐야 하는지', '자부담 10%' 같은 정책 설명 각도는 다뤘지만 HRD-Net에서 직접 확인·결제하는 절차는 비어 있다. 화면 경로와 결제수단별 절차를 단계로 주면 신청 직전에 다시 찾아본다.",
-        "searchTargets": [
-          "국민내일배움카드 자부담금",
-          "국민내일배움카드 자부담금 확인방법",
-          "국민내일배움카드 자부담금 결제방법"
-        ],
-        "mustInclude": [
-          "HRD-Net 로그인 후 자부담금 확인하는 화면 경로 (확인 필요: HRD-Net 공식 안내)",
-          "훈련과정별 자부담 비율(일반 10%·특정계층 면제 등) 비교 (확인 필요: 고용노동부 고시)",
-          "자부담금 결제 가능 수단(신용카드·계좌이체)과 결제 시점 (확인 필요: HRD-Net 공지)",
-          "자부담금 미납 시 수강 취소·제한 여부 (확인 필요: 고용센터 공지)"
-        ],
-        "mustAvoid": [
-          "자부담 면제 대상(기초수급자 등)을 모든 신청자에게 적용되는 것처럼 일반화하지 않기",
-          "국민취업지원제도 등 비슷한 다른 고용복지 제도와 혼동하지 않기"
-        ],
-        "checkBefore": [
-          "자부담 비율 및 면제 대상 기준 (고용노동부/HRD-Net 공식 공지)",
-          "자부담금 결제 수단 및 절차 (HRD-Net 공식 안내)"
         ]
       },
       "at": "2026-10-19T21:06:48.786Z",
@@ -6428,74 +6359,6 @@
           "views": 155,
           "answers": 5,
           "askedAt": "2026.10.14"
-        }
-      ]
-    },
-    {
-      "id": "3c4509b35bd10e47",
-      "urls": [
-        "https://everyday-365story.tistory.com/25",
-        "https://kodorri.tistory.com/365",
-        "https://lsy4857.tistory.com/186",
-        "https://100maan.tistory.com/entry/2026-%EA%B5%AD%EB%AF%BC%EB%82%B4%EC%9D%BC%EB%B0%B0%EC%9B%80%EC%B9%B4%EB%93%9C%E3%85%A3%EC%9E%90%EB%B6%80%EB%8B%B4-10-%EC%83%9D%EA%B2%BC%EC%A7%80%EB%A7%8C-%EC%9E%A5%EB%A0%A4%EA%B8%88-%EC%9B%94-20%EB%A7%8C%EC%9B%90-%EC%B4%9D%EC%A0%95%EB%A6%AC"
-      ],
-      "guide": {
-        "direction": "검색자는 자부담금이 정확히 얼마인지, 고용24에서 어떻게 확인하는지, 결제할 때 간편결제가 막히는 이유를 몰라 막힌다. 고수 블로그 제목들은 자부담 10%·장려금 총정리에 집중해 실제 결제 수단 제한이나 과정별 자부담 비율 차이는 다루지 못했다. 이 글은 고용24에서 자부담금 확인하는 순서, 결제 가능한 수단, 훈련비-지원금으로 자부담금을 계산하는 방법을 정리해 끝낸다.",
-        "searchTargets": [
-          "국민내일배움카드 자부담금 확인방법",
-          "국민내일배움카드 자부담 결제방법",
-          "국민내일배움카드 자부담금"
-        ],
-        "mustInclude": [
-          "고용24 과정 상세페이지에서 자부담 비율·금액 확인하는 위치",
-          "결제 가능 수단(카드·계좌) vs 간편결제 제한되는 경우 구분",
-          "훈련비-지원금=자부담금 계산 구조, 예: 훈련비 500만원 중 자부담 30만원 사례",
-          "과정·직종별 자부담 비율이 고정 10%가 아니라 차등 적용됨(확인 필요: 고용24 공지)"
-        ],
-        "mustAvoid": [
-          "특정 학원을 추천하는 것처럼 보이는 서술",
-          "자부담 비율을 모든 과정에 동일한 10%로 단정",
-          "간편결제가 항상 가능한 것처럼 일반화"
-        ],
-        "checkBefore": [
-          "고용24 공식 사이트에서 신청하려는 과정의 자부담 비율·금액 직접 확인",
-          "훈련기관 공지사항에서 결제 수단(카드/계좌/간편결제 가능 여부) 확인"
-        ],
-        "solves": [
-          "자부담금이 얼마인지 모름 → 고용24 과정 상세페이지에서 확인하는 위치 안내",
-          "간편결제가 안 됨 → 결제 가능한 수단과 제한되는 경우 구분해서 안내",
-          "자부담금 계산법을 모름 → 훈련비-지원금 계산 구조와 실제 사례 제시"
-        ],
-        "actionTitles": [
-          "국민내일배움카드 자부담금 확인방법, 고용24에서 보는 법",
-          "국민내일배움카드 자부담 결제방법, 간편결제 안 될 때 대안",
-          "국민내일배움카드 자부담금 계산, 훈련비에서 얼마 낼까"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "내일배움카드 질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60804&docId=495268962&answerNo=6&qb=6rWt66+864K07J2867Cw7JuA7Lm065OcIOyekOu2gOuLtCDtm4jroKjruYQg67SQ7JW8",
-          "views": 331,
-          "answers": 8,
-          "askedAt": "2026.09.23"
-        },
-        {
-          "title": "국민내일배움카드 온라인 결제 방법",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40104&docId=495422756&answerNo=2&qb=6rWt66+864K07J2867Cw7JuA7Lm065OcIOyekOu2gOuLtCDtm4jroKjruYQg67SQ7JW8",
-          "views": 213,
-          "answers": 5,
-          "askedAt": "2026.10.05"
-        },
-        {
-          "title": "내일배움카드 수강비용",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40612&docId=495371774&answerNo=6&qb=6rWt66+864K07J2867Cw7JuA7Lm065OcIOyekOu2gOuLtCDtm4jroKjruYQg67SQ7JW8",
-          "views": 174,
-          "answers": 6,
-          "askedAt": "2026.10.03"
         }
       ]
     },
@@ -12640,73 +12503,6 @@
       ]
     },
     {
-      "id": "21cc9cafaa2b57a3",
-      "urls": [
-        "https://www.primusy.com/feeds/4002578300559257473/comments/default",
-        "https://yjfreelifestyle.tistory.com/entry/%EB%8C%80%EC%A0%84-%EB%B9%B5%EC%A7%80%EC%88%9C%EB%A1%80-%EB%B2%84%EC%8A%A4-%EC%98%88%EC%95%BD-%EC%9D%BC%EC%A0%95%EA%B3%BC-%EC%BD%94%EC%8A%A4-%EC%8B%9C%ED%8B%B0%ED%88%AC%EC%96%B4-vs-%EB%AF%BC%EA%B0%84-%EB%B9%B5%ED%88%AC%EC%96%B4-%EB%B9%84%EA%B5%90-2026%EB%85%84-1011%EC%9B%94"
-      ],
-      "guide": {
-        "direction": "검색자는 성심당 외 로컬 빵집과 대전시티투어버스·민간 빵투어(빵택시) 중 어디를 예약해야 하는지, 가격과 코스가 어떻게 다른지 헷갈려 한다. 고수 글은 예약 방법과 가격을 다뤘지만 시티투어 vs 민간투어 비교표와 정동문화사 등 숨은 빵집 코스는 정리되지 않았다. 예약처별 가격·코스·소요시간을 표로 비교하고 동선 지도를 더해 한 번에 선택하게 한다.",
-        "searchTargets": [
-          "대전 빵지순례 버스 예약",
-          "대전 빵지순례 코스",
-          "대전 빵지순례 버스 가격",
-          "대전 빵지순례 지도"
-        ],
-        "mustInclude": [
-          "대전시티투어버스 vs 민간 빵투어(빵택시) 예약처·가격·코스 비교표",
-          "빵택시 예약 방법(대전관광공사, 확인 필요: 공식 홈페이지)",
-          "2026년 10~11월 운행 일정(확인 필요: 대전관광공사 공지)",
-          "성심당 외 추천 로컬 빵집(정동문화사 등) 코스 포함",
-          "코스 동선을 보여주는 지도"
-        ],
-        "mustAvoid": [
-          "특정 방송인(서범준)의 방문 여부·사생활 추측성 내용",
-          "대전시티투어버스와 민간 빵투어의 예약처·가격을 혼동해서 섞어 쓰기",
-          "차박·캠핑장 정보로 글의 초점이 흐려지는 구성"
-        ],
-        "checkBefore": [
-          "대전관광공사 공식 홈페이지에서 시티투어버스 운행 일정·가격 확인",
-          "빵택시 등 민간 빵투어 업체의 실제 예약 플랫폼과 가격 확인"
-        ],
-        "solves": [
-          "시티투어와 민간 빵투어가 뭐가 다른지 몰라 예약을 못함 → 예약처·가격·코스 비교표로 정리",
-          "성심당 외에 어디를 가야 할지 모름 → 정동문화사 등 로컬 빵집 코스 제시",
-          "코스 동선을 어떻게 짜야 할지 모름 → 지도 기반 추천 동선 제공"
-        ],
-        "actionTitles": [
-          "대전 빵지순례 버스 투어 예약 방법과 가격 비교 총정리",
-          "대전 빵지순례 투어 예약 전 시티투어와 민간투어 차이 확인"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "대전 차박 후 성심당 빵지순례, 코스 추천해....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=90109&docId=492662508&answerNo=3&qb=64yA7KCE67m17KeA7Iic66GA",
-          "views": 345,
-          "answers": 6,
-          "askedAt": "2026.08.12"
-        },
-        {
-          "title": "대전 빵지순례에서 성심당 외에 꼭 방문해야 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=80208&docId=489713659&answerNo=5&qb=64yA7KCE67m17KeA7Iic66GA",
-          "views": 268,
-          "answers": 6,
-          "askedAt": "2026.08.22"
-        },
-        {
-          "title": "대전 빵지순례, 꼭 가봐야 할 곳 추천해주세....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=90109&docId=493775420&answerNo=4&qb=64yA7KCE67m17KeA7Iic66GA",
-          "views": 218,
-          "answers": 5,
-          "askedAt": "2026.08.15"
-        }
-      ]
-    },
-    {
       "id": "5e52e81fed99b62b",
       "urls": [
         "https://infobox2692.tistory.com/entry/ISA-%EC%A4%91%EB%8F%84%EC%9D%B8%EC%B6%9C%ED%95%98%EB%A9%B4-%EC%84%B8%EA%B8%88-%EB%82%BC%EA%B9%8C-%EC%9B%90%EA%B8%88-%EC%B6%9C%EA%B8%88%C2%B7%EC%9E%AC%EC%9E%85%EA%B8%88%C2%B73%EB%85%84-%EC%A0%84-%EC%9D%B8%EC%B6%9C-%EC%B4%9D%EC%A0%95%EB%A6%AC",
@@ -12808,67 +12604,6 @@
       "at": "2026-10-20T10:55:31.225Z",
       "rules": "2026-10-20-solve",
       "provider": "claude"
-    },
-    {
-      "id": "9e7e0ccf9d542163",
-      "urls": [
-        "https://kinghell.tistory.com/entry/%ED%86%A0%EC%8A%A4-%EC%88%A8%EC%9D%80-%EC%A0%95%EB%B6%80%EC%A7%80%EC%9B%90%EA%B8%88-%EC%A1%B0%ED%9A%8C-%ED%9B%84-%ED%83%88%EB%9D%BD%ED%95%98%EC%A7%80-%EC%95%8A%EC%9C%BC%EB%A0%A4%EB%A9%B4-%EC%8B%A4%ED%8C%A8-%EC%97%86%EB%8A%94-%EC%8B%A0%EC%B2%AD-%EC%8B%A4%EB%AC%B4-%EC%B2%B4%ED%81%AC%EB%A6%AC%EC%8A%A4%ED%8A%B8",
-        "https://lim7.tistory.com/157"
-      ],
-      "guide": {
-        "direction": "검색자는 토스에서 숨은 지원금을 조회해 신청했는데 왜 탈락하는지, 근로장려금 결정금액이 언제 뜨는지 몰라 지식인에 묻는다. 고수 글들은 조회방법만 총정리하고 조회 후 탈락 원인이나 결정금액 표기 시점은 다루지 않는다. 이 글은 조회부터 신청, 결정금액 확인까지 단계별 체크리스트와 탈락 사유별 대응법으로 끝내준다.",
-        "searchTargets": [
-          "토스 숨은 환급금",
-          "토스 숨은 환급액 찾기",
-          "토스 숨은 보험금 찾기",
-          "토스 숨은 돈 찾기"
-        ],
-        "mustInclude": [
-          "근로장려금 '결정금액' 표기 시점과 의미(지식인 질문 근거, 확인 필요: 국세청 손택스 공지)",
-          "새벽 순차 입금 시작 시간대 언급(지식인 근거, 확인 필요: 국세청 공식 공지)",
-          "토스 앱 내 숨은 지원금·환급금·보험금 조회 경로",
-          "조회 후 신청 탈락 사유 체크리스트",
-          "주거비 지원 등 함께 확인할 숨은 혜택 목록"
-        ],
-        "mustAvoid": [
-          "토스 앱을 정부기관으로 오해하게 하는 표현(토스는 조회 플랫폼일 뿐)",
-          "근로장려금 지급을 확정적으로 보장하는 과장된 서술",
-          "근로장려금과 숨은 보험금·환급액의 조건을 뭉뚱그려 설명하기"
-        ],
-        "checkBefore": [
-          "근로장려금 결정금액 표기 시점·지급일정은 국세청 홈택스·손택스 공지로 확인",
-          "토스 앱 내 실제 조회 화면·경로를 최신 업데이트 기준으로 확인"
-        ],
-        "solves": [
-          "숨은 지원금 조회는 했는데 신청이 탈락하는 이유를 모름 → 탈락 사유별 체크리스트 제공",
-          "근로장려금 결정금액이 언제 뜨는지 모름 → 표기 시점과 의미 정리",
-          "숨은 환급금·보험금·계좌를 한 번에 확인하는 법을 모름 → 통합 조회 경로 정리"
-        ],
-        "actionTitles": [
-          "토스 숨은 환급금 조회 후 탈락 안 하는 신청 체크리스트",
-          "토스 숨은 보험금 환급액 찾기부터 신청까지 한 번에",
-          "토스 숨은 돈 찾기와 근로장려금 결정금액 확인법"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "근로장려금 아직 심사중이라는데요 ㅜ",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60805&docId=494902518&answerNo=4&qb=7Yag7IqkIOyIqOydgCDsoJXrtoDsp4Dsm5DquIgg7YOI65297ZWY7KeAIOyViuycvOugpOuptA==",
-          "views": 239,
-          "answers": 5,
-          "askedAt": "2026.08.26"
-        },
-        {
-          "title": "8월27일날 근로장려금 들어오자나요 손택스에....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=61401&docId=494907189&answerNo=2&qb=7Yag7IqkIOyIqOydgCDsoJXrtoDsp4Dsm5DquIgg7YOI65297ZWY7KeAIOyViuycvOugpOuptA==",
-          "views": 222,
-          "answers": 3,
-          "askedAt": "2026.08.26"
-        }
-      ]
     },
     {
       "id": "f8a4a12568254b22",
@@ -13802,48 +13537,6 @@
           "askedAt": "2026.09.01"
         }
       ]
-    },
-    {
-      "id": "f6f33290da80b0bb",
-      "urls": [
-        "https://caffa.tistory.com/entry/%EA%B0%80%EC%8A%B5%EA%B8%B0%EC%82%B4%EA%B7%A0%EC%A0%9C-%EA%B5%AD%EA%B0%80-%EB%B0%B0%EC%83%81-%EC%8B%A0%EC%B2%AD-%EB%B0%A9%EB%B2%95-2027%EB%85%84-4%EC%9B%94-7%EC%9D%BC-%EC%A0%84-%EB%8C%80%EC%83%81%C2%B7%EC%84%9C%EB%A5%98-%ED%99%95%EC%9D%B8",
-        "https://moneypolicynote.tistory.com/entry/%EA%B0%80%EC%8A%B5%EA%B8%B0%EC%82%B4%EA%B7%A0%EC%A0%9C-%EA%B5%AD%EA%B0%80-%EC%A3%BC%EB%8F%84-%EC%86%90%ED%95%B4%EB%B0%B0%EC%83%81-10%EC%9B%94-8%EC%9D%BC-%EC%8B%9C%ED%96%89%EF%BD%9C%EC%8B%A0%EC%B2%AD%EB%8C%80%EC%83%81%C2%B7%EB%B0%B0%EC%83%81%ED%95%AD%EB%AA%A9%C2%B72027%EB%85%84-4%EC%9B%94-7%EC%9D%BC-%EB%A7%88%EA%B0%90"
-      ],
-      "guide": {
-        "direction": "검색자는 내가 가습기살균제 피해자로 국가 배상 대상이 되는지, 무슨 서류를 내야 하는지부터 막힌다. 고수 글들은 시행일·마감일만 제목에 걸고 대상 조건과 서류 목록을 표로 안 보여준다. 이 글은 대상 조건표·필요 서류 체크리스트·신청 순서를 정리해 2027년 4월 7일 마감 전 신청을 끝내게 한다.",
-        "searchTargets": [
-          "가습기살균제국가전환",
-          "가습기 살균제 국가 배상"
-        ],
-        "mustInclude": [
-          "시행일 10월 8일, 신청 마감 2027년 4월 7일 명시",
-          "신청 대상 조건표 (확인 필요: 환경부 공식 공지)",
-          "배상 항목 구분 (확인 필요: 원문 기사/환경부)",
-          "필요 서류 체크리스트 (확인 필요: 피해구제 신청 포털)",
-          "신청 순서·접수처 안내 (확인 필요: 한국환경산업기술원)"
-        ],
-        "mustAvoid": [
-          "기존 '가습기살균제 피해구제법'상 구제급여와 이번 국가배상을 혼동하지 않기",
-          "민사소송(개별 손배소)과 국가주도 배상을 같은 절차처럼 섞지 않기"
-        ],
-        "checkBefore": [
-          "시행일·마감일 공식 발표: 환경부 또는 한국환경산업기술원 공지",
-          "신청 대상·서류 목록: 피해구제 포털 공식 안내문"
-        ],
-        "solves": [
-          "내가 신청 대상인지 모름 → 대상 조건표로 바로 확인",
-          "서류 뭘 챙겨야 하는지 모름 → 서류 체크리스트 제공",
-          "마감이 언제인지 헷갈림 → 2027년 4월 7일 마감 명시"
-        ],
-        "actionTitles": [
-          "가습기살균제 국가 배상 신청 대상·서류 체크리스트 (2027.4.7 마감)",
-          "가습기살균제 국가 배상 신청방법과 대상·서류 총정리",
-          "가습기살균제 국가 전환 배상 신청 대상인지 확인하는 방법"
-        ]
-      },
-      "at": "2026-10-20T12:32:18.112Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
     },
     {
       "id": "94d1770bf148217e",
@@ -15340,67 +15033,6 @@
       "provider": "claude"
     },
     {
-      "id": "b2bdb8654749916f",
-      "urls": [
-        "https://dn12.tmddn14.com/entry/%EA%B3%A0%EC%B6%94%EA%B0%80%EB%A3%A8%EB%B3%B4%EA%B4%80%ED%95%98%EB%8A%94%EB%B2%95",
-        "https://sug2026myblog.tistory.com/entry/2026-%EC%B5%9C%EC%8B%A0-%EA%B3%A0%EC%B6%94%EA%B0%80%EB%A3%A8-%EA%B3%B0%ED%8C%A1%EC%9D%B4-%EB%A7%89%EB%8A%94-%EC%99%84%EB%B2%BD-%EB%B3%B4%EA%B4%80%EB%B2%95-%EB%83%89%EC%9E%A5%C2%B7%EB%83%89%EB%8F%99%EB%B3%B4%EB%8B%A4-%EC%8A%B5%EB%8F%84%C2%B7%EC%86%8C%EB%B6%84%C2%B7%EB%B0%80%EB%B4%89%EC%9D%B4-%ED%95%B5%EC%8B%AC%EC%9D%B8-%EC%9D%B4%EC%9C%A0"
-      ],
-      "guide": {
-        "direction": "고추가루를 조금만 샀거나 쓰다 남았을 때 냉동실에 넣으면 영양이 손실된다는 말이 맞는지, 비닐팩 대신 밀폐용기를 써야 하는 이유가 뭔지 몰라 검색한다. 고수 글은 '습도·소분·밀봉'이 핵심이라고만 짚고 냉동 영양손실 여부나 비닐팩과 밀폐용기의 실제 차이는 명확히 답하지 않는다. 이 글은 보관 장소·용기·소분량을 3단계 표로 정리해 그대로 따라 보관하게 한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "냉동실 보관 시 영양 손실 여부 정리 (확인 필요: 식품영양 자료)",
-          "1회 사용량 기준 소분 보관법과 소분 용기 추천",
-          "비닐팩 보관 대신 밀폐용기를 써야 하는 이유 비교",
-          "보관 기간별 냉장·냉동·실온 권장 기준표"
-        ],
-        "mustAvoid": [
-          "고추장아찌 삭히는 법과 혼동하지 않기(다른 주제)",
-          "근거 없이 '영양 손실 심각하다' 식으로 과장"
-        ],
-        "checkBefore": [
-          "냉동보관 시 영양소 손실 여부는 식품영양 관련 공식 자료로 확인",
-          "고춧가루 적정 보관 온도·습도는 농진청 등 공식 가이드로 확인"
-        ],
-        "solves": [
-          "냉동실에 넣으면 영양 손실된다는데 사실인가요? → 영양 손실 여부와 근거 정리",
-          "비닐팩 보관이 안 좋다는데 왜죠? → 비닐팩과 밀폐용기 차이 설명",
-          "조금 산 고추가루, 상하지 않게 오래 보관하려면? → 소분·밀봉 3단계 체크리스트 제공"
-        ],
-        "actionTitles": [
-          "고추가루 보관방법 3단계: 냉동실 영양손실 진짜일까",
-          "고춧가루 냉장 vs 냉동 보관, 올바른 방법 총정리",
-          "고추가루 보관방법, 비닐팩 대신 밀폐용기 써야 하는 이유"
-        ]
-      },
-      "at": "2026-10-20T12:32:18.112Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "고추가루를 잘 보관할 수 있는 법좀 알고 싶....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020117&docId=29584177&answerNo=1&qb=6rOg7LaU6rCA66Oo67O06rSA7ZWY64qU67KV",
-          "views": 17324,
-          "answers": 1,
-          "askedAt": "2004.09.24"
-        },
-        {
-          "title": "고춧가루 보관방법",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020603&docId=288669190&answerNo=4&qb=6rOg7LaU6rCA66Oo67O06rSA7ZWY64qU67KV",
-          "views": 5091,
-          "answers": 5,
-          "askedAt": "2026.07.02"
-        },
-        {
-          "title": "고춧가루 효능과 보관 방법은 무엇이 있나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020609&docId=479367134&answerNo=4&qb=6rOg7LaU6rCA66Oo67O06rSA7ZWY64qU67KV",
-          "views": 771,
-          "answers": 4,
-          "askedAt": "2025.09.08"
-        }
-      ]
-    },
-    {
       "id": "83adb3e25366d44b",
       "urls": [
         "https://yjfreelifestyle.tistory.com/entry/%EB%B9%99%EB%AA%A8%EC%83%81-%EB%9C%BB%EA%B3%BC-%EC%A1%B0%EB%AC%B8-%EC%98%88%EC%A0%88-%EC%A1%B0%EC%9D%98%EA%B8%88%C2%B7%EB%B6%80%EA%B3%A0-%EB%8B%B5%EB%A1%80-%EB%AC%B8%EC%9E%90-%EC%9E%91%EC%84%B1%EB%B2%95",
@@ -15634,73 +15266,6 @@
           "views": 367,
           "answers": 1,
           "askedAt": "2026.03.28"
-        }
-      ]
-    },
-    {
-      "id": "8cf716324cbfb3e8",
-      "urls": [
-        "https://kwinner.starkjk.com/149",
-        "https://ace4.jspeopleone.com/entry/%EC%B9%9C%ED%99%98%EA%B2%BD-%EB%B3%B4%EC%9D%BC%EB%9F%AC-%EA%B5%90%EC%B2%B4-%EC%A7%80%EC%9B%90%EA%B8%88-%EC%8B%A0%EC%B2%AD-%EB%B0%A9%EB%B2%95-%EB%8C%80%EC%83%81-%EC%B7%A8%EC%95%BD%EA%B3%84%EC%B8%B5-%EC%B5%9C%EB%8C%80-60%EB%A7%8C%EC%9B%90",
-        "https://kwinner.starkjk.com/146"
-      ],
-      "guide": {
-        "direction": "'친환경 보일러 보조금'을 검색하는 사람 중엔 일반 가정도 받을 수 있는지 몰라서 신청을 포기하는 경우가 많다. 고수 글은 '취약계층 최대 60만원'까지만 썼고, 일반가정 해당 여부·예산 소진 시점·저녹스 의무화와의 차이는 안 풀었다. 지원대상 조건표와 신청 순서, 저녹스 의무화와의 구분까지 주면 독자는 바로 신청 여부를 판단한다.",
-        "searchTargets": [
-          "친환경 보일러 교체 지원금",
-          "친환경 보일러 보조금",
-          "친환경 보일러 보조금 신청",
-          "친환경 보일러 지원금"
-        ],
-        "mustInclude": [
-          "지원금액 1대당 최대 60만원",
-          "지원대상 저소득층(기초생활수급권자, 차상위계층) 및 취약계층",
-          "지역별 배정 대수(예: 취약계층 77대, 확인 필요: 해당 지자체 공고)",
-          "저녹스 보일러 의무화와 교체 지원사업의 차이"
-        ],
-        "mustAvoid": [
-          "취약계층 전용 사업을 모든 가정이 받을 수 있는 것처럼 혼동",
-          "저녹스 보일러 의무화와 친환경 보일러 교체 지원사업을 같은 제도로 설명"
-        ],
-        "checkBefore": [
-          "올해 지원대상·금액·예산 소진 여부는 거주 지자체 환경과 공고 또는 한국환경공단 공고로 확인",
-          "지역별 배정 대수는 해당 지자체 최신 공고문으로 확인"
-        ],
-        "solves": [
-          "친환경 보일러 보조금, 일반 가정도 받을 수 있나? → 취약계층 우선 지원 구조와 일반가정 해당 여부 정리",
-          "보조금 신청하면 얼마 받나? → 1대당 최대 60만원 기준 설명",
-          "저녹스 보일러 의무화랑 뭐가 다른가? → 두 제도 차이 비교"
-        ],
-        "actionTitles": [
-          "친환경 보일러 교체 지원금 최대 60만원 신청 방법",
-          "친환경 보일러 보조금 지원대상 확인하고 신청하는 법",
-          "친환경 보일러 교체 지원금 60만원, 신청 서류 순서"
-        ]
-      },
-      "at": "2026-10-20T12:32:18.112Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "친환경 보일러 보조금 질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=80902&docId=388965171&answerNo=2&qb=7Lmc7ZmY6rK9IOuztOydvOufrCDqtZDssrQg7KeA7JuQ6riIIOy3qOyVveqzhOy4tQ==",
-          "views": 1605,
-          "answers": 13,
-          "askedAt": "2024.09.20"
-        },
-        {
-          "title": "보일러 친환경지원금",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=80902&docId=483104979&answerNo=8&qb=7Lmc7ZmY6rK9IOuztOydvOufrCDqtZDssrQg7KeA7JuQ6riIIOy3qOyVveqzhOy4tQ==",
-          "views": 518,
-          "answers": 10,
-          "askedAt": "2025.12.26"
-        },
-        {
-          "title": "친환경 보일러 지원금, 우리집 보일러도 해당....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=80902&docId=491806076&answerNo=3&qb=7Lmc7ZmY6rK9IOuztOydvOufrCDqtZDssrQg7KeA7JuQ6riIIOy3qOyVveqzhOy4tQ==",
-          "views": 237,
-          "answers": 6,
-          "askedAt": "2026.02.13"
         }
       ]
     },
@@ -16075,71 +15640,6 @@
           "views": 1092,
           "answers": 26,
           "askedAt": "2026.07.24"
-        }
-      ]
-    },
-    {
-      "id": "d36e6a59c3cb5723",
-      "urls": [
-        "https://youldad.tistory.com/512",
-        "https://happycoiner.tistory.com/entry/%EC%84%9C%EC%9A%B8-%EC%A0%84%EC%84%B8-1%EB%85%84-%EC%83%88-10-%EC%98%AC%EB%9E%90%EB%8B%A4-%EA%B3%84%EC%95%BD-%EC%A0%84-%EA%BC%AD-%ED%99%95%EC%9D%B8%ED%95%A0-5%EA%B0%80%EC%A7%80"
-      ],
-      "guide": {
-        "direction": "토허제 연장 여부가 매수·전세 계약 타이밍을 가르는 지금, 검색자는 '언제까지 묶이나'와 '전세 이자 144% 오른 게 내 재계약에 어떤 의미인지'를 궁금해한다. 고수 글은 전세 계약 체크리스트까지만 다뤘고, 토허제 연장 지역별 적용 기준과 재건축 공사비 점검이 매수 타이밍에 미치는 영향은 비워뒀다. 토허제 적용지역표·공사비 점검 대상 단지·이자부담 계산 예시를 묶어 보여주면 끝난다.",
-        "searchTargets": [
-          "낙원부동산 서울",
-          "부동산 서울 규제"
-        ],
-        "mustInclude": [
-          "서울 88주 연속 상승 기간·수치(확인 필요: 원문 기사)",
-          "토허제 연장 대상 지역과 연장 기한(확인 필요: 국토부 공지)",
-          "재건축 공사비 점검 대상 단지명(확인 필요: 원문 기사)"
-        ],
-        "mustAvoid": [
-          "토허제를 과거 토지거래허가구역 지정·분양가상한제 등 다른 규제와 혼동하지 않기",
-          "재건축 공사비 점검을 특정 조합·시공사 비리로 단정하지 않기",
-          "전세 이자 144% 수치를 특정 개인 사례처럼 과장해 불안을 조장하지 않기"
-        ],
-        "checkBefore": [
-          "토허제 연장 여부·지역은 국토교통부·서울시 공식 발표로 확인",
-          "재건축 공사비 점검 대상 단지는 원문 기사·조합 공지로 확인",
-          "88주 연속 상승·144% 수치의 출처(한국부동산원 등)는 원문 기사로 재확인"
-        ],
-        "solves": [
-          "서울 부동산 투자해야 하나 생존 고민(지식인) → 토허제 연장 여부에 따른 매수 타이밍 판단 기준 제시",
-          "전세 계약 전 확인할 점(고수 글) → 전세 이자 144% 상승이 재계약 부담에 미치는 계산 예시 제공",
-          "재건축 공사비 점검이 뭔지 모름 → 점검 대상·절차를 표로 정리"
-        ],
-        "actionTitles": [
-          "토허제 연장 지역 확인하고 전세 재계약 타이밍 잡는 법",
-          "전세 이자 144% 올랐다는 서울, 재계약 전 부담 계산법",
-          "재건축 공사비 점검 대상 확인, 서울 88주 상승 정리"
-        ]
-      },
-      "at": "2026-10-20T12:32:18.112Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "서울 부동산 투자? 아닌 생존 질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40201&docId=494928289&answerNo=1&qb=67aA64+Z7IKw7ISc7Jq4",
-          "views": 320,
-          "answers": 4,
-          "askedAt": "2026.08.28"
-        },
-        {
-          "title": "서울 부동산 매매 동네 비교",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=402&docId=483175789&answerNo=3&qb=67aA64+Z7IKw7ISc7Jq4",
-          "views": 243,
-          "answers": 3,
-          "askedAt": "2026.10.02"
-        },
-        {
-          "title": "LH청년전세임대주택 매물 있는 서울부동산 찾....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=4020201&docId=495387572&answerNo=3&qb=67aA64+Z7IKw7ISc7Jq4",
-          "views": 104,
-          "answers": 3,
-          "askedAt": "2026.10.02"
         }
       ]
     },
@@ -17480,74 +16980,6 @@
           "views": 260,
           "answers": 1,
           "askedAt": "2026.08.12"
-        }
-      ]
-    },
-    {
-      "id": "4b36a3b8e4436ee7",
-      "urls": [
-        "https://ace4.jspeopleone.com/entry/%EC%B0%A8%EC%83%81%EC%9C%84%EA%B3%84%EC%B8%B5-%ED%99%95%EC%9D%B8%EC%84%9C-%EB%B0%9C%EA%B8%89-%EB%B0%A9%EB%B2%95-2026-%EC%86%8C%EB%93%9D-%EA%B8%B0%EC%A4%80%EA%B3%BC-%EC%8B%A0%EC%B2%AD-%EC%A0%88%EC%B0%A8-%EC%A0%95%EB%A6%AC",
-        "https://dailyloglab-369.com/entry/2026-%EC%B0%A8%EC%83%81%EC%9C%84%EA%B3%84%EC%B8%B5-%ED%99%95%EC%9D%B8%EC%84%9C-%EB%B0%9C%EA%B8%89-%EA%B8%B0%EC%A4%80-%ED%86%B5%EC%8B%A0%EB%B9%84-%EC%9B%94-33500%EC%9B%90-%EA%B0%90%EB%A9%B4-%EB%B0%8F-%EA%B3%B5%EA%B3%BC%EA%B8%88-%ED%95%A0%EC%9D%B8-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://dailyloglab-369.com/entry/2026-%EC%B0%A8%EC%83%81%EC%9C%84%EA%B3%84%EC%B8%B5-%EC%9E%90%EA%B2%A9-%EC%A1%B0%EA%B1%B4-5%EB%8C%80-%EB%B2%95%EC%A0%95-%EC%A2%85%EB%A5%98-%EB%B0%8F-%EB%B3%91%EC%9B%90%EB%B9%84-%EA%B0%90%EB%A9%B4%C2%B7%EA%B0%90%EB%A9%B4-%ED%98%9C%ED%83%9D-%EC%B4%9D%EC%A0%95%EB%A6%AC"
-      ],
-      "guide": {
-        "direction": "검색자는 차상위계층 확인서를 복지로·정부24·동사무소 중 어디서 뗄 수 있는지, 본인 명의가 아닌 자녀나 가족이 대신 발급받을 수 있는지가 막혀서 검색한다. 고수 블로그 제목은 소득기준·절차만 정리해 발급 채널별 차이와 반려 사례(예: 장애수당 확인서로 대체 제출)는 짚지 않는다. 이 글은 발급 경로 비교표와 명의자별 준비서류, 반려 방지 체크리스트로 한 번에 끝낸다.",
-        "searchTargets": [
-          "차상위계층 확인서 발급",
-          "차상위계층 확인서 자녀",
-          "차상위계층 확인서 온라인",
-          "차상위계층 확인서 복지로"
-        ],
-        "mustInclude": [
-          "발급 경로 비교: 주민센터(무인발급기)·정부24·복지로 중 온라인 발급 가능 여부 (확인 필요: 각 기관 공식 안내)",
-          "2026년 기준 중위소득 50% 이하 소득기준 수치 (확인 필요: 보건복지부 2026년 기준 중위소득 고시)",
-          "본인 외 자녀·세대원 명의로 발급 시 필요한 위임서류",
-          "장애수당 확인서 등 다른 서류로 대체 제출 시 반려되는 이유",
-          "발급 시 필요서류 목록"
-        ],
-        "mustAvoid": [
-          "기초생활수급자 증명서와 차상위계층 확인서를 같은 서류로 혼동해서 쓰기",
-          "지자체마다 다른 무인발급기 지원 여부를 전국 공통인 것처럼 일반화하기"
-        ],
-        "checkBefore": [
-          "복지로·정부24 공식 사이트에서 온라인 발급 가능 여부 직접 확인",
-          "보건복지부 2026년 기준 중위소득 공고문에서 정확한 소득기준 확인"
-        ],
-        "solves": [
-          "온라인 발급이 되는지 헷갈림 → 복지로·정부24 중 가능한 곳과 안 되는 경우 방문 절차 구분",
-          "본인 아닌 자녀·가족 명의로 뗄 수 있는지 → 위임 필요 여부와 준비서류 정리",
-          "다른 확인서로 제출했다가 반려된 경우 → 올바른 서류 구분 기준 제시"
-        ],
-        "actionTitles": [
-          "차상위계층 확인서 발급, 온라인·복지로·정부24 중 어디서",
-          "차상위계층 확인서 발급방법과 2026 소득기준 한번에 확인",
-          "차상위계층 확인서 자녀 대리발급, 준비서류부터 확인하기"
-        ]
-      },
-      "at": "2026-10-20T12:32:18.112Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "차상위 계층 확인서와 수급자 증명서",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100101&docId=333536147&answerNo=1&qb=7LCo7IOB7JyE6rOE7Li17ZmV7J247ISc",
-          "views": 1758,
-          "answers": 1,
-          "askedAt": "2019.08.15"
-        },
-        {
-          "title": "차상위계층 확인서 발급",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100101&docId=460819233&answerNo=3&qb=7LCo7IOB7JyE6rOE7Li17ZmV7J247ISc",
-          "views": 570,
-          "answers": 5,
-          "askedAt": "2026.10.10"
-        },
-        {
-          "title": "장애수당 확인서도 차상위계층 확인서에 포....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100101&docId=414389048&answerNo=3&qb=7LCo7IOB7JyE6rOE7Li17ZmV7J247ISc",
-          "views": 482,
-          "answers": 3,
-          "askedAt": "2026.10.11"
         }
       ]
     },
@@ -21185,70 +20617,6 @@
       ]
     },
     {
-      "id": "17c625d53280dec3",
-      "urls": [
-        "https://niscity.com/fracture-diagnosis-code-criteria/",
-        "https://orbitjournal.tistory.com/entry/%EA%B3%A0%EC%9A%A9%EB%B3%B4%ED%97%98-%EA%B0%80%EC%9E%85%EA%B8%B0%EA%B0%84-180%EC%9D%BC-%EA%B8%B0%EC%A4%80%EA%B3%BC-%EC%98%88%EC%99%B8-%EC%82%AC%EB%A1%80"
-      ],
-      "guide": {
-        "direction": "가입자는 청구 전 자신의 골절 부위(손목=요골·주상골 등)가 몇 종 골절인지 몰라 지급액을 예측 못하고, 같은 '손목'도 보험사·약관마다 등급이 달라 헷갈린다. 고수 글 '골절 분류 코드'는 고용보험 180일 글과 짝지어 올라올 뿐 실제 1~5종 표를 안 보여준다. 이 글은 부위별 1~5종 분류표와 보험사별(삼성·동부·현대) 약관 차이를 표로 정리해 본인 부위를 바로 찾게 한다.",
-        "searchTargets": [
-          "골절분류표"
-        ],
-        "mustInclude": [
-          "골절분류표 1~5종 부위별 등급 정리 (확인 필요: 각 보험사 약관)",
-          "손목 골절(요골·주상골) 보험사별 등급 차이 비교 (확인 필요: 보험사 약관)",
-          "무배당삼성올라이프 Super보험Ⅲ(S0811) 5대 골절 분류 기준",
-          "현대해상 골절 보험금 '한 번 더' 받는 조건 (확인 필요: 현대해상 고객센터)",
-          "한국표준질병사인분류 제6차 이후 적용 차이(동부화재 사례)"
-        ],
-        "mustAvoid": [
-          "보험사 콜센터 상담 내용을 공식 약관 해석처럼 단정하지 않기",
-          "무보험 전동킥보드 사고 책임보험 한도 이슈와 골절분류 보험금 지급 기준을 섞지 않기"
-        ],
-        "checkBefore": [
-          "질문에 언급된 각 상품(S0811, 동부화재어린이보험, 현대해상)의 최신 약관 골절분류표 원문 (보험사 공식)",
-          "한국표준질병사인분류 최신 차수와 적용 기준 (통계청 고시)"
-        ],
-        "solves": [
-          "내 골절 부위(손목 등)가 몇 종인지 → 부위별 1~5종 분류표로 바로 찾게 해줌",
-          "보험사마다 골절분류표 해석이 다른지 → 삼성·동부·현대 약관 비교로 확인",
-          "골절로 보험금 또 받을 수 있는지 → 현대해상 재지급 조건 사례로 설명"
-        ],
-        "actionTitles": [
-          "골절분류표 1~5종, 내 부위(손목 등) 등급 바로 확인하기",
-          "골절 분류 코드 확인하고 보험금 지급 기준 비교하는 법",
-          "골절분류표 보험사별 비교, 추가 보험금 받는 조건 확인"
-        ]
-      },
-      "at": "2026-10-21T12:46:26.242Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "무배당삼성올라이프 Super보험Ⅲ(s0811) 보험의 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=401030201&docId=140491968&answerNo=2&qb=6rOo7KCIIOu2hOulmCDrs7Ttl5jquIgg7KeA6riJIOyYiOyZuA==",
-          "views": 10420,
-          "answers": 1,
-          "askedAt": "2011.11.21"
-        },
-        {
-          "title": "보험약관 골절분류표 해석",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=401030201&docId=225347883&answerNo=2&qb=6rOo7KCIIOu2hOulmCDrs7Ttl5jquIgg7KeA6riJIOyYiOyZuA==",
-          "views": 2659,
-          "answers": 1,
-          "askedAt": "2015.05.19"
-        },
-        {
-          "title": "현대해상 골절 분류코드로 보험금 한번더 받....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010302&docId=421261609&answerNo=2&qb=6rOo7KCIIOu2hOulmCDrs7Ttl5jquIgg7KeA6riJIOyYiOyZuA==",
-          "views": 1177,
-          "answers": 2,
-          "askedAt": "2022.06.08"
-        }
-      ]
-    },
-    {
       "id": "508b90395a388b8e",
       "urls": [
         "https://seolj.tistory.com/266",
@@ -21683,67 +21051,6 @@
           "views": 80,
           "answers": 4,
           "askedAt": "2026.10.13"
-        }
-      ]
-    },
-    {
-      "id": "b6b0668cab1382c8",
-      "urls": [
-        "https://info-myview.co.kr/guide-2027-april-vaccination-program-closing-hours/",
-        "https://blanc888.tistory.com/107"
-      ],
-      "guide": {
-        "direction": "지식인에는 '가입 당일 바로 운전해도 되나', '효력이 자정부터인지'를 묻는 질문이 반복되지만, '자정 기준일까' 고수 글도 보험사마다 다를 수 있는 세부 조건까지는 못 짚는다. 렌트카 임시운전자특약과 자차 단기운전자 확대특약을 혼동하는 질문도 많아 구분이 필요하다. 이 글은 효력 발생 원칙, 3주 단위 가입 여부, 약관 재확인 필요성을 체크리스트로 정리해 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "효력은 가입 당일이 아니라 다음날 자정(0시)부터 시작된다는 원칙",
-          "3주 단위 가입 가능 여부(확인 필요: 각 보험사 공지)",
-          "렌트카 임시운전자특약과 자차 단기운전자 확대특약의 차이",
-          "가입 당일 바로 운전하면 보장이 안 될 수 있다는 주의"
-        ],
-        "mustAvoid": [
-          "모든 보험사가 동일한 종료 시각 기준을 쓴다고 단정하는 것",
-          "전혀 다른 주제인 국가예방접종 사업 종료와 섞어 서술하는 것"
-        ],
-        "checkBefore": [
-          "가입한 보험사 콜센터·공식 약관에서 효력 발생·종료 시각 확인",
-          "렌트카용인지 자차용인지 가입 전 구분 확인"
-        ],
-        "solves": [
-          "'가입 당일 바로 운전해도 되나' → 자정부터 효력 발생 원칙과 주의사항으로 답변",
-          "'3주짜리로 가입 가능한가' → 가능 여부와 신청 방법 정리",
-          "'렌트카 특약이랑 뭐가 다른가' → 두 특약 차이 비교로 정리"
-        ],
-        "actionTitles": [
-          "단기운전자특약 종료 시각이 자정 기준인지 확인하기",
-          "단기운전자 확대특약 3주 가입 신청 전 체크할 것",
-          "임시운전자특약 가입 당일 운전해도 되는지 확인법"
-        ]
-      },
-      "at": "2026-10-21T12:46:26.242Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "시사, 정치 관련 공부를 하고 싶은 학생인데, ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=61301&docId=294012934&answerNo=2&qb=64uo6riw7Jq07KCE7J6Q7Yq57JW9IOyiheujjCDsi5zqsIEg7J6Q7KCV",
-          "views": 71276,
-          "answers": 10,
-          "askedAt": "2018.02.03"
-        },
-        {
-          "title": "렌트카 vs 아버지차 단기보험",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40103&docId=174955861&answerNo=5&qb=64uo6riw7Jq07KCE7J6Q7Yq57JW9IOyiheujjCDsi5zqsIEg7J6Q7KCV",
-          "views": 7843,
-          "answers": 2,
-          "askedAt": "2013.06.19"
-        },
-        {
-          "title": "3주동안 자동차 보험",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=401030202&docId=474446146&answerNo=2&qb=64uo6riw7Jq07KCE7J6Q7Yq57JW9IOyiheujjCDsi5zqsIEg7J6Q7KCV",
-          "views": 364,
-          "answers": 5,
-          "askedAt": "2024.08.25"
         }
       ]
     },
