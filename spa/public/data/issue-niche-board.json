@@ -1,19 +1,18 @@
 {
-  "publishedAt": "2026-10-23T21:29:33.198Z",
+  "publishedAt": "2026-10-24T03:28:40.404Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 240,
+    "candidates": 236,
     "niche": 0,
-    "preemption": 6,
+    "preemption": 5,
     "pending": 0
   },
   "freeSample": {
     "day": "2026-10-24",
     "keywords": [
-      "정용진 페라리",
-      "인셉션 포토"
+      "정용진 페라리"
     ]
   },
   "rows": [
@@ -151,54 +150,36 @@
       "exclusionReason": null,
       "kinMode": "date-views-v2",
       "carried": true
-    },
+    }
+  ],
+  "observations": [
     {
-      "keyword": "인셉션 포토",
-      "issue": "인셉션",
-      "topic": "인셉션",
+      "keyword": "유니트리 상장 일자",
+      "issue": "유니트리",
+      "topic": "유니트리",
       "lane": "tech",
       "issueType": "fresh",
       "isDerived": true,
       "origin": "autocomplete",
       "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 0,
-        "sampledTitles": 10,
-        "topTitles": [
-          "[프랑스] 파리 에펠탑 스냅 골목 위치, 꽃집, 센강 포토스팟",
-          "엘리엇 페이지 오디세이 출연, 인셉션 그 이후 15년 만의 재회",
-          "파리여행 8일차 에펠탑 포토존 비르하켐다리, 유람선 바토 파리지앵",
-          "영화 '주노', '인셉션', '오디세이' 시논 역 엘리엇 페이지 성전환 후회한다",
-          "[프랑스] 파리 에펠탑 포토 스팟, 인생샷 건지는 포토존 4곳 +1 추천",
-          "엘리엇 페이지 오디세이 시논 역, 인셉션 이후 16년 만에 놀란과 재회한 이유",
-          "고질라(Godzilla, 2014)｜인간의 통제를 벗어난 거대한 자연의 힘",
-          "[파리] 파리 여행 포토스팟 추천｜인생샷 찍기 좋은 에펠탑 명소 (+파리 리얼 가이드북 배포)",
-          "인셉션 OST ‘Time’ 리뷰｜한스 짐머가 완성한 가장 위대한 엔딩",
-          "크리스토퍼 놀란 감독 대표작 베스트 5"
-        ],
-        "measuredAt": "2026-10-21T21:43:00.468Z"
-      },
-      "documentCount": 5171,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 221,
       "documentCountMeasured": true,
-      "searchVolume": 470,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 0.875251544187682,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "rising",
+      "isHot": true,
+      "frontalDocCount": 0,
       "freshFrontalCount": 0,
       "reasons": [
-        "검색량 470",
-        "문서수 5,171",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+        "검색량 10",
+        "문서수 221",
+        "선점 후보 — 경쟁 문서 221건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -206,93 +187,29 @@
           "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
         },
         {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 470 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.9배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
-        },
-        {
           "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
         }
       ],
-      "whySearch": {
-        "text": "셀프 사진관 인셉션의 가격·지점·예약·프레임 정보를 찾으려는 검색으로 보임",
-        "basis": "AI 추론 — 근거 부족"
-      },
+      "whySearch": null,
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "인셉션 포토 가격과 지점별 예약, 프레임까지 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "인셉션 포토 가격이 매장마다 생각보다 갈리더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [],
+      "titles": null,
+      "subKeywords": null,
       "keywordPool": null,
-      "trend": {
-        "series": [
-          100,
-          48,
-          48,
-          23,
-          35,
-          60,
-          10,
-          13,
-          10,
-          29,
-          38,
-          19,
-          19,
-          23,
-          23,
-          12,
-          15,
-          21,
-          21,
-          15,
-          40,
-          12,
-          13,
-          21,
-          37,
-          27,
-          0,
-          23,
-          21
-        ],
-        "measuredAt": "2026-10-23T21:29:33.696Z"
-      },
-      "kinCount": 17,
-      "kinTop": [],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-22T03:24:59.023Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "kinMode": "date-views-v2",
-      "enrichedBy": {
-        "provider": "claude",
-        "proposed": 8,
-        "verified": 0
-      },
-      "carried": true
-    }
-  ],
-  "observations": [
+      "measuredAt": "2026-10-24T03:26:04.771Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "오픈ai 닷츠 후기",
       "issue": "오픈AI",
@@ -305,7 +222,7 @@
       "verdict": "preemption",
       "preemptionKind": "no-demand",
       "serp": null,
-      "documentCount": 128,
+      "documentCount": 129,
       "documentCountMeasured": true,
       "searchVolume": 10,
       "searchVolumeLt10": true,
@@ -318,8 +235,8 @@
       "freshFrontalCount": 0,
       "reasons": [
         "검색량 10",
-        "문서수 128",
-        "선점 후보 — 경쟁 문서 128건, 수요 미검출"
+        "문서수 129",
+        "선점 후보 — 경쟁 문서 129건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -355,169 +272,12 @@
         {
           "title": "새로운 AI 에이전트 닷츠, 실제로 얼마나 효율적일까요?",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=1122&docId=495387990&answerNo=0",
-          "views": 58,
+          "views": 59,
           "answers": null
         }
       ],
       "monetize": null,
-      "measuredAt": "2026-10-23T21:24:07.711Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "월즈 배당 뜻",
-      "issue": "월즈",
-      "topic": "월즈",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 74,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "rising",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 74",
-        "선점 후보 — 경쟁 문서 74건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "정보",
-      "adsenseFit": true,
-      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-23T21:24:07.711Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "유니트리 상장 일자",
-      "issue": "유니트리",
-      "topic": "유니트리",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 221,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 221",
-        "선점 후보 — 경쟁 문서 221건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-23T21:24:07.711Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "디시전스 API",
-      "issue": "디시전스 API",
-      "topic": "디시전스 API",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 39,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 4,
-      "freshFrontalCount": 2,
-      "reasons": [
-        "문서수 39",
-        "선점 후보 — 경쟁 문서 39건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 4건 (최근 2건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 4,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-23T21:24:07.711Z",
+      "measuredAt": "2026-10-24T03:26:04.771Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -580,9 +340,230 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-23T21:24:07.711Z",
+      "measuredAt": "2026-10-24T03:26:04.771Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "오픈AI 닷츠 이용방법",
+      "issue": "오픈AI",
+      "topic": "오픈AI",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 215,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 215",
+        "선점 후보 — 경쟁 문서 215건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "거래",
+      "adsenseFit": false,
+      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+      "titles": {
+        "seo": {
+          "text": "오픈AI 닷츠 이용방법 처음 해도 막히지 않는 순서",
+          "frame": "howto",
+          "basis": "검색 질문 '오픈AI 닷츠 이용방법' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+        },
+        "home": {
+          "text": "오픈AI 닷츠 이용방법, 어렵게 할 필요 없습니다",
+          "frame": "howto",
+          "basis": "검색 질문 '오픈AI 닷츠 이용방법' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-24T03:26:04.771Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "박병규 오늘 결혼!",
+      "issue": "박병규 오늘 결혼!",
+      "topic": "박병규 오늘 결혼!",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 289,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 289",
+        "선점 후보 — 경쟁 문서 289건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-24T03:26:04.771Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "월즈 배당 뜻",
+      "issue": "월즈",
+      "topic": "월즈",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 74,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "rising",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 74",
+        "선점 후보 — 경쟁 문서 74건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "정보",
+      "adsenseFit": true,
+      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-23T21:24:07.711Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "디시전스 API",
+      "issue": "디시전스 API",
+      "topic": "디시전스 API",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 39,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 4,
+      "freshFrontalCount": 2,
+      "reasons": [
+        "문서수 39",
+        "선점 후보 — 경쟁 문서 39건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 4건 (최근 2건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 4,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-23T21:24:07.711Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "체격 변화 차우민",
@@ -634,7 +615,8 @@
       "monetize": null,
       "measuredAt": "2026-10-23T21:24:07.711Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "인티그리트 주가",
@@ -2010,70 +1992,6 @@
       "carried": true
     },
     {
-      "keyword": "오픈AI 닷츠 이용방법",
-      "issue": "오픈AI",
-      "topic": "오픈AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 195,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 195",
-        "선점 후보 — 경쟁 문서 195건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "거래",
-      "adsenseFit": false,
-      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-      "titles": {
-        "seo": {
-          "text": "오픈AI 닷츠 이용방법 처음 해도 막히지 않는 순서",
-          "frame": "howto",
-          "basis": "검색 질문 '오픈AI 닷츠 이용방법' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        },
-        "home": {
-          "text": "오픈AI 닷츠 이용방법, 어렵게 할 필요 없습니다",
-          "frame": "howto",
-          "basis": "검색 질문 '오픈AI 닷츠 이용방법' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-23T03:21:37.132Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
       "keyword": "플로라 축일 7월",
       "issue": "플로라",
       "topic": "플로라",
@@ -2123,1024 +2041,6 @@
       "kinTop": null,
       "monetize": null,
       "measuredAt": "2026-10-22T21:22:03.803Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "포스코퓨처엠 초봉",
-      "issue": "포스코퓨처엠",
-      "topic": "포스코퓨처엠",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 198,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 4,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 198",
-        "선점 후보 — 경쟁 문서 198건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 4건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "포스코퓨처엠이 미국 팔란티어와 손잡고 AX를 본격화한다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "포스코퓨처엠 초봉 신입 연봉과 성과급 수준까지 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "포스코퓨처엠 초봉 보려다 포스코퓨처엠 생산직 연봉에서 한참 멈췄네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "포스코퓨처엠 채용",
-          "searchVolume": 1770,
-          "frame": "generic"
-        },
-        {
-          "keyword": "포스코퓨처엠 연봉",
-          "searchVolume": 700,
-          "frame": "generic"
-        },
-        {
-          "keyword": "포스코퓨처엠 생산직 연봉",
-          "searchVolume": 40,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "포스코퓨처엠 채용",
-          "searchVolume": 1770,
-          "documentCount": 4017,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "포스코퓨처엠 연봉",
-          "searchVolume": 700,
-          "documentCount": 1517,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "포스코퓨처엠 생산직 연봉",
-          "searchVolume": 40,
-          "documentCount": 133,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "포스코퓨처엠 복지",
-          "searchVolume": 30,
-          "documentCount": 3093,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "포스코퓨처엠 성과급",
-          "searchVolume": 10,
-          "documentCount": 1348,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "포스코퓨처엠 신입연봉",
-          "searchVolume": 10,
-          "documentCount": 334,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 6,
-      "kinTop": [
-        {
-          "title": "사부님 저 포스코퓨처엠(구 포스코 케미칼) 서류합격했습니....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8110104&docId=452511788&answerNo=1",
-          "views": 1251,
-          "answers": 1
-        },
-        {
-          "title": "제가 구 포스코케미칼 포스코퓨처엠에 입사했습니다 성공한....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=80101&docId=449742245&answerNo=2",
-          "views": 471,
-          "answers": 2
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-22T03:24:59.023Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "이정현 직무대행 질의응답",
-      "issue": "이정현 직무대행 질의응답",
-      "topic": "이정현 직무대행 질의응답",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 57,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 57",
-        "선점 후보 — 경쟁 문서 57건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "이정현 검찰총장 대행이 첫 국감서 공소취소에 선을 그었다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "이정현 직무대행 질의응답 공소취소 국감 발언",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "이정현 직무대행 질의응답 들어보니 공소청장 자리 얘기는 말을 아끼더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "이정현 검사장",
-          "searchVolume": 4620,
-          "frame": "generic"
-        },
-        {
-          "keyword": "이정현 검찰총장 대행",
-          "searchVolume": 2430,
-          "frame": "generic"
-        },
-        {
-          "keyword": "이정현 공소청장",
-          "searchVolume": 1740,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "이정현 검사장",
-          "searchVolume": 4620,
-          "documentCount": 7095,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "이정현 검찰총장 대행",
-          "searchVolume": 2430,
-          "documentCount": 820,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "이정현 공소청장",
-          "searchVolume": 1740,
-          "documentCount": 776,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "이정현 검찰총장",
-          "searchVolume": 1490,
-          "documentCount": 3612,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "이정현 공소취소",
-          "searchVolume": 190,
-          "documentCount": 762,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-22T03:24:59.023Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "신현송 총재 의사봉",
-      "issue": "신현송 총재 의사봉",
-      "topic": "신현송 총재 의사봉",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 132,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 132",
-        "선점 후보 — 경쟁 문서 132건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "신현송 한국은행 총재가 금통위에서 의사봉을 두드렸다.",
-        "basis": "뉴스 헤드라인 4건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-22T03:24:59.023Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "메인라인 최현길",
-      "issue": "메인라인",
-      "topic": "메인라인",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 133,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 133",
-        "선점 후보 — 경쟁 문서 133건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "메인라인이 문서 생성 에이전트 'AI 오피스'를 출시했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-22T03:24:59.023Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "이세돌 백수 체험",
-      "issue": "이세돌 백수 체험",
-      "topic": "이세돌 백수 체험",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 181,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 2,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "문서수 181",
-        "선점 후보 — 경쟁 문서 181건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 2건 (최근 1건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "이세돌이 예능 '백수 이세돌'에서 일자리를 체험한다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "거래",
-      "adsenseFit": false,
-      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-22T03:24:59.023Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "AI기반 IDP전문기업, 메인라인",
-      "issue": "메인라인",
-      "topic": "메인라인",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 157,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 157",
-        "선점 후보 — 경쟁 문서 157건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "메인라인이 문서 생성 에이전트 'AI 오피스'를 출시했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-22T03:24:59.023Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "챔스 팬텀 뜻",
-      "issue": "챔스",
-      "topic": "챔스",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 29,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "rising",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 29",
-        "선점 후보 — 경쟁 문서 29건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "이강인 결장 속 아틀레티코가 슈투트가르트와 무승부를 기록했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "정보",
-      "adsenseFit": true,
-      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 5,
-      "kinTop": [
-        {
-          "title": "발로란트 챔스 팬텀 총부터 사려고 하는데 먼저 총부터 사도....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=509&docId=495286374&answerNo=1",
-          "views": 69,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-21T21:29:58.948Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "fal 플럭스",
-      "issue": "fal",
-      "topic": "fal",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 50,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 50",
-        "선점 후보 — 경쟁 문서 50건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "fal이 출시 자료에서 플럭스 3 맥스 생성시간을 다르게 표기했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "fal 플럭스 3 맥스 영상 생성 속도, 시댄스 2.5와 22배 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "fal 플럭스 fal ai 속도 자랑 보고 돌렸는데 제 PC에선 좀 다르더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "fal ai",
-          "searchVolume": 110,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "fal ai",
-          "searchVolume": 110,
-          "documentCount": 1399,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-21T21:29:58.948Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "황희찬 여자친구 서울대",
-      "issue": "황희찬",
-      "topic": "황희찬",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 59,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 59",
-        "선점 후보 — 경쟁 문서 59건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "황희찬이 슈퍼카 42대 지원받고 홍보를 안 해 사기 혐의로 피소됐다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "황희찬 여자친구 서울대 소문과 슈퍼카 42대 사기 피소 정황",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "황희찬 여자친구 서울대 찾다가 슈퍼카 42대 사기 피소에 더 멈췄네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "황희찬 피소",
-          "searchVolume": 4320,
-          "frame": "generic"
-        },
-        {
-          "keyword": "황희찬 여자친구",
-          "searchVolume": 140,
-          "frame": "generic"
-        },
-        {
-          "keyword": "황희찬 사기 혐의",
-          "searchVolume": 40,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "황희찬 피소",
-          "searchVolume": 4320,
-          "documentCount": 278,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "황희찬 여자친구",
-          "searchVolume": 140,
-          "documentCount": 2754,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "황희찬 사기 혐의",
-          "searchVolume": 40,
-          "documentCount": 709,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": [
-        {
-          "title": "황희찬이랑 결혼할꺼라는 얘기 왤케 많죠??",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10010105&docId=463703838&answerNo=2",
-          "views": 1399,
-          "answers": 6
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-21T21:29:58.948Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "토치TPU 뜻",
-      "issue": "토치TPU",
-      "topic": "토치TPU",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 119,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "문서수 119",
-        "선점 후보 — 경쟁 문서 119건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 1건)"
-        }
-      ],
-      "whySearch": {
-        "text": "구글이 자체칩 생태계 확장 위해 토치TPU를 오픈소스로 공개했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "정보",
-      "adsenseFit": true,
-      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
-      "titles": {
-        "seo": {
-          "text": "토치TPU 뜻, 파이토치에 TPU 올린 구글의 노림수",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "토치TPU 뜻 찾다가 엔비디아 독점이 왜 흔들린다는 건지 알겠더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": {
-        "verdict": "bad",
-        "points": [
-          {
-            "text": "\"토치TPU 뜻\"은 '뜻'이 붙은 순수 정의 검색이다. 검색자는 그 단어가 무엇을 가리키는지 한 줄 정의만 손에 넣으면 끝난다. 도구 URL도 구매처도 절차도 아니고 오직 정보, 그것도 단답형이다."
-          },
-          {
-            "text": "'뜻'을 치는 사람은 아직 그게 뭔지도 모르는 인지 이전 단계다. 구매·비교·실행 의도가 없어 광고가 떠도 클릭할 상태가 아니다. 뜬다면 문맥상 정의 확인에 맞물릴 CPC 낮은 범용 광고라, 수익성 광고는 기대하기 어렵다."
-          },
-          {
-            "text": "\"토치TPU 뜻\"은 한 줄 얻고 나가는 전형적 bounce 검색이다. 정의만 확인하면 체류할 이유가 없어 광고가 노출될 스크롤·시간 자체가 안 나온다."
-          },
-          {
-            "text": "같이 검색되는 확인된 검색어가 (없음)이다. 연관 확장이 실측으로 안 잡혀 '토치TPU 설치', '사용법', '가격' 같은 수익 각도로 글을 늘려도 그 수요가 실제로 있다는 근거가 없다. 지금 가진 건 정의 검색 하나뿐이다."
-          }
-        ],
-        "angle": "굳이 쓴다면 '뜻' 단답으로 끝내지 말고, 정의를 맨 위 한 줄로 박아 검색 의도를 즉시 충족시킨 뒤 → 실제 수요가 확인되는(연관어가 잡히는) 상위 키워드, 예컨대 설치/사용/비교 쪽으로 자연스럽게 넘기는 '관문 글'로만 가치가 있다. 단, 연관 검색어가 실측으로 확인되기 전까지는 이 키워드 단독 집필은 보류."
-      },
-      "measuredAt": "2026-10-21T21:29:58.948Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "fal 비디오모델",
-      "issue": "fal",
-      "topic": "fal",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 163,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 163",
-        "선점 후보 — 경쟁 문서 163건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "fal이 출시 자료에서 플럭스 3 맥스 생성시간을 다르게 표기했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "fal 비디오모델 플럭스 3 맥스, 시댄스 2.5와 생성속도 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "fal 비디오모델 fal ai에서 돌려보니 22배라던 속도가 좀 다르네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "fal ai",
-          "searchVolume": 110,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "fal ai",
-          "searchVolume": 110,
-          "documentCount": 1399,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 5,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-21T21:29:58.948Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "플럭스 3맥스 사용법",
-      "issue": "플럭스 3 맥스",
-      "topic": "플럭스 3 맥스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "이용 방법 궁금",
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 232,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 232",
-        "선점 후보 — 경쟁 문서 232건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — 이용 방법 궁금"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "fal이 시댄스2.5보다 22배 빠른 비디오 모델 플럭스 3 맥스를 출시했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "플럭스 3맥스 사용법 시댄스 2.5보다 22배 빠른 비디오 생성",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "플럭스 3맥스가 시댄스 2.5보다 22배 빠른 이유 많이들 놓치더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-21T21:29:58.948Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "토치TPU 사용법",
-      "issue": "토치TPU",
-      "topic": "토치TPU",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "적용 방법 궁금",
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 288,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 288",
-        "선점 후보 — 경쟁 문서 288건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — 적용 방법 궁금"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "구글이 자체칩 생태계 확장 위해 토치TPU를 오픈소스로 공개했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "토치TPU 사용법 파이토치 TPU 연동과 GPU 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "토치TPU 사용법 파이토치 연동할 때 여기서 많이들 막히더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-21T21:29:58.948Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
@@ -3219,676 +2119,6 @@
       ],
       "nextWave": [],
       "rowCount": 1,
-      "carried": true
-    },
-    {
-      "issue": "이세돌 백수 체험",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "이세돌이 예능 '백수 이세돌'에서 일자리를 체험한다.",
-      "headlines": [
-        {
-          "title": "정재형 \"'백수 이세돌', 이 세상 모든 백수 위한 이야기\"",
-          "press": "starnewskorea.com",
-          "publishedAt": "2026-10-22T01:35:00.000Z",
-          "link": "https://m.entertain.naver.com/article/108/0003480750"
-        },
-        {
-          "title": "AI 이긴 유일한 인류인데 43살 무직 '백수'..이세돌, 체험 삶의 현장 [종...",
-          "press": "osen.co.kr",
-          "publishedAt": "2026-10-22T01:57:00.000Z",
-          "link": "https://m.entertain.naver.com/article/109/0005627184"
-        },
-        {
-          "title": "“정규편성 희망해” 이세돌, ‘백수 이세돌’ 재밌을까 (종합)[DA현장]",
-          "press": "sports.donga.com",
-          "publishedAt": "2026-10-22T02:09:00.000Z",
-          "link": "https://m.entertain.naver.com/article/382/0001300468"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "이정현 직무대행 질의응답",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "이정현 검찰총장 대행이 첫 국감서 공소취소에 선을 그었다.",
-      "headlines": [
-        {
-          "title": "이정현 공소청장 직무대행 질의응답",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-22T02:20:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014270979?sid=100"
-        },
-        {
-          "title": "이정현 검찰총장 대행 \"李 공소취소 검토 안 해\"…첫 국감서 선 긋기",
-          "press": "hg-times.com",
-          "publishedAt": "2026-10-22T02:44:00.000Z",
-          "link": "https://www.hg-times.com/news/articleView.html?idxno=306302"
-        },
-        {
-          "title": "이정현 신임 검찰총장 대행 첫 출근…공소취소엔 \"진상조사 결과 살펴봐...",
-          "press": "yonhapnewstv.co.kr",
-          "publishedAt": "2026-09-23T01:26:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/422/0000908997?sid=102"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "신현송 총재 의사봉",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "신현송 한국은행 총재가 금통위에서 의사봉을 두드렸다.",
-      "headlines": [
-        {
-          "title": "의사봉 두드리는 신현송 총재",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-22T00:49:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014270545?sid=004"
-        },
-        {
-          "title": "의사봉 두드리는 신현송 한국은행 총재",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-22T01:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016393276?sid=101"
-        },
-        {
-          "title": "[포토] 의사봉 두드리는 신현송 한국은행 총재",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-10-22T00:27:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005831884?sid=101"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "포스코퓨처엠",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "포스코퓨처엠이 미국 팔란티어와 손잡고 AX를 본격화한다.",
-      "headlines": [
-        {
-          "title": "포스코퓨처엠, AX 드라이브 속도…美 팔란티어와 협업",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-10-22T00:53:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006393455?sid=101"
-        },
-        {
-          "title": "포스코퓨처엠, 팔란티어 플랫폼 도입…AX 본격화",
-          "press": "sedaily.com",
-          "publishedAt": "2026-10-22T00:50:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/011/0004673921?sid=101"
-        },
-        {
-          "title": "포스코퓨처엠,팔란티어와 맞손…AI 기반 제조 혁신 본격화",
-          "press": "news.tf.co.kr",
-          "publishedAt": "2026-10-22T00:53:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/629/0000544371?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "포스코퓨처엠 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "포스코퓨처엠 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "포스코퓨처엠 연봉",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "포스코퓨처엠 광양",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "포스코퓨처엠 주가전망",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "포스코퓨처엠 본사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "포스코퓨처엠 유상증자",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "포스코퓨처엠 3분기 실적",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "메인라인",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "메인라인이 문서 생성 에이전트 'AI 오피스'를 출시했다.",
-      "headlines": [
-        {
-          "title": "메인라인, 기업용 AI통합플랫폼 AIFuze에 문서 생성 ‘AI 오피스’ 출시",
-          "press": "dt.co.kr",
-          "publishedAt": "2026-10-21T23:50:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/029/0003054542?sid=105"
-        },
-        {
-          "title": "삼성전기, 엔비디아에 AI 반도체용 기판 장기 공급…세종·부산 생산 라...",
-          "press": "biz.chosun.com",
-          "publishedAt": "2026-10-21T11:48:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/366/0001199487?sid=105"
-        },
-        {
-          "title": "메인라인, 문서 생성 에이전트 'AI 오피스' 출시…채팅으로 PPT 제작",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-22T03:00:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216518"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "메인라인 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메인라인 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메인라인 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메인라인 매출",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메인라인 보험",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메인라인 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메인라인 개신교",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메인라인 공화국",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "메인라인 상장",
-          "reason": "IPO 여부 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "인셉션",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "인셉션이 dLLM '머큐리 3'를 공개했다.",
-      "headlines": [
-        {
-          "title": "인셉션, 최고 성능 dLLM '머큐리 3' 공개...\"오픈AI·앤트로픽 맞먹어\"",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-21T08:52:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216483"
-        },
-        {
-          "title": "\"루크가 사라졌다\"…디즈니 16년, 포스가 함께하기를 [피플]",
-          "press": "econovill.com",
-          "publishedAt": "2026-10-20T07:30:00.000Z",
-          "link": "https://www.econovill.com/news/articleView.html?idxno=754275"
-        },
-        {
-          "title": "[포토] 현조하, 패션코드 2027 S/S서 영화 '인셉션' 모티브 컬렉션 선보...",
-          "press": "gokorea.kr",
-          "publishedAt": "2026-10-20T07:14:00.000Z",
-          "link": "https://www.gokorea.kr/news/articleView.html?idxno=882146"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "인셉션 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인셉션 영화",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인셉션 ott",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인셉션 결말",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인셉션 여주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인셉션 해석",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "영화 인셉션",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인셉션 팽이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "인셉션 투자",
-          "reason": "투자 유치 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 1,
-      "carried": true
-    },
-    {
-      "issue": "챔스",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "이강인 결장 속 아틀레티코가 슈투트가르트와 무승부를 기록했다",
-      "headlines": [
-        {
-          "title": "'이강인 결장' 아틀레티코, 슈투트가르트와 무승부…챔스리그 '1승 1무 ...",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-10-20T22:30:00.000Z",
-          "link": "https://m.sports.naver.com/wfootball/article/055/0001396976"
-        },
-        {
-          "title": "‘챔스 결장’ 60분 벽에 갇힌 이강인, 첫 위기 오나",
-          "press": "dailian.co.kr",
-          "publishedAt": "2026-10-21T12:02:00.000Z",
-          "link": "https://m.sports.naver.com/wfootball/article/119/0003145376"
-        },
-        {
-          "title": "황인범 32분 출전에도 포르투 0-1 패배⋯챔스 3연패",
-          "press": "etoday.co.kr",
-          "publishedAt": "2026-10-21T00:18:00.000Z",
-          "link": "https://www.etoday.co.kr/news/view/2638190"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "챔스 일정",
-          "searchVolume": 21570,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "챔스 순위",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "챔스 우승",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "챔스 중계",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "발로 챔스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "리버풀 챔스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "챔스 팬텀 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "챔스 리그 차이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "챔스 16강",
-          "reason": "진출 가능성 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "황희찬",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "황희찬이 슈퍼카 42대 지원받고 홍보를 안 해 사기 혐의로 피소됐다",
-      "headlines": [
-        {
-          "title": "“슈퍼카 42대 제공, 홍보는 0번”…황희찬, 사기 혐의 피소",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-10-21T13:20:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005752135?sid=102"
-        },
-        {
-          "title": "슈퍼카 42대 받고 홍보 0건?…황희찬 사기죄 '진실 공방'",
-          "press": "hankyung.com",
-          "publishedAt": "2026-10-21T07:54:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005344979?sid=102"
-        },
-        {
-          "title": "“슈퍼카 42대 지원받고 홍보 안 해”…황희찬 피소",
-          "press": "ichannela.com",
-          "publishedAt": "2026-10-21T10:43:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/449/0000364864?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "황희찬 슈퍼카",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "황희찬 누나",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "황희찬 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "황희찬 김민재",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "황희찬 인스타",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "황희찬 샬케",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "황희찬 연봉",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "황희찬 이적",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "황희찬 입장",
-          "reason": "당사자 해명 주목",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "황희찬 소속사",
-          "reason": "대응 입장 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "황희찬 재판",
-          "reason": "향후 절차 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "황희찬 대표팀",
-          "reason": "국대 영향 우려",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "토치TPU",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "구글이 자체칩 생태계 확장 위해 토치TPU를 오픈소스로 공개했다",
-      "headlines": [
-        {
-          "title": "아마존 이어 구글도 자체칩 생태계 확장...'토치TPU' 오픈소스 공개",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-21T08:30:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216476"
-        },
-        {
-          "title": "[글로벌 비즈 브리핑] AI 거품 터질라…빅테크 CDS 거래 급증 外",
-          "press": "biz.sbs.co.kr",
-          "publishedAt": "2026-10-20T19:52:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/374/0000538873?sid=104"
-        },
-        {
-          "title": "코드 수정 없이 칩 갈아탄다… 빅테크, ‘엔비디아 천하’ 흔들기",
-          "press": "kmib.co.kr",
-          "publishedAt": "2026-10-20T15:52:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/005/0001879896?sid=101"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [
-        {
-          "keyword": "토치TPU 사용법",
-          "reason": "적용 방법 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "플럭스 3 맥스",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "fal이 시댄스2.5보다 22배 빠른 비디오 모델 플럭스 3 맥스를 출시했다",
-      "headlines": [
-        {
-          "title": "fal, '시댄스 2.5'보다 22배 빠른 비디오 모델 '플럭스 3 맥스' 출시",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-21T08:12:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216487"
-        },
-        {
-          "title": "KGM, 맥스 얼라이언스 참여…\"자율주행 기술 내재화 추진\"",
-          "press": "kdfnews.com",
-          "publishedAt": "2026-10-01T02:26:00.000Z",
-          "link": "http://www.kdfnews.com/news/articleView.html?idxno=188705"
-        },
-        {
-          "title": "\"클라우드 대신 로컬서 320B 구동\"…AMD, '라이젠 AI 맥스' 포트폴리오 ...",
-          "press": "ddaily.co.kr",
-          "publishedAt": "2026-10-05T13:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/138/0002243670?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "플럭스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "플럭스 3맥스 사용법",
-          "reason": "이용 방법 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "fal",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "fal이 출시 자료에서 플럭스 3 맥스 생성시간을 다르게 표기했다",
-      "headlines": [
-        {
-          "title": "fal, '시댄스 2.5'보다 22배 빠른 비디오 모델 '플럭스 3 맥스' 출시",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-21T08:12:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216487"
-        },
-        {
-          "title": "fal Lists Different FLUX 3 Max Generation Times in Launch Materials",
-          "press": "econotimes.com",
-          "publishedAt": "2026-10-20T16:20:00.000Z",
-          "link": "https://econotimes.com/fal-Lists-Different-FLUX-3-Max-Generation-Times-in-Launch-Materials-1757845"
-        },
-        {
-          "title": "10초 영상 12.45초 생성…'22배 빠르다'는 자체 측정에선 5.5배로도 나왔...",
-          "press": "tokenpost.kr",
-          "publishedAt": "2026-10-20T02:44:00.000Z",
-          "link": "https://www.tokenpost.kr/news/ai/424657"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "fal.ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "fal 소총",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "fal 회사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "fal 사용법",
-          "reason": "이용 방법 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "fal 신뢰성",
-          "reason": "표기 논란 주목",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "fal 경쟁사",
-          "reason": "대체 서비스 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
       "carried": true
     }
   ]
