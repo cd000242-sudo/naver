@@ -92,4 +92,3 @@ describe('publication diagnostics are bounded, private and read-only', () => {
     expect(fs.statSync(stateFile).size).toBe(1024 * 1024 + 1);
   });
 });
-
