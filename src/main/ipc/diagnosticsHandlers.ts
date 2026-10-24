@@ -13,6 +13,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import { getChromiumExecutablePath } from '../../browserUtils.js';
 import { pickProblemLogLines } from './diagnosticsLogFilter.js';
+import { describePublicationState } from './diagnosticsPublicationState.js';
 import { maskUserNameInPaths } from '../../debug/privacyScrubber.js';
 
 /** [2026-10-09] 파일마다 끝 8MB만 읽는다(회전본이 70MB를 넘은 적이 있다). */
@@ -104,6 +105,7 @@ export async function generateDiagnosticReport(context?: { lastError?: string; s
   } catch { /* best-effort */ }
   lines.push(...(await describeBrowser()));
   lines.push(`기록 파일: ${describeLogSources()}`);
+  lines.push('', ...describePublicationState(path.join(app.getPath('userData'), 'content-policy-publication-state.json')));
   if (context?.stage) lines.push(`실패 단계: ${context.stage}`);
   if (context?.lastError) {
     lines.push('');
