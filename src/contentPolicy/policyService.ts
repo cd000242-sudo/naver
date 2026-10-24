@@ -583,7 +583,7 @@ export async function recordContentPolicyPublication(input: {
     await repository.record(recentPost);
   } catch (recentPostError) {
     console.warn(`[PolicyService] ⚠️ 유사도 저장소 기록 실패 → advisory 강등(발행 계속): ${(recentPostError as Error).message}`);
-    await stateStore.recordAdvisory('POLICY_RECENT_POSTS_WRITE_FAILED').catch(() => undefined);
+    advisoryReasons.push('POLICY_RECENT_POSTS_WRITE_FAILED');
   }
   try {
     await auditStore.append({
@@ -651,7 +651,12 @@ export async function recordContentPolicyReservation(input: {
     topic_angle: input.policyResult.uniqueness_plan.topic_angle,
     exposure_status: 'PENDING_INDEX',
   });
-  await repository.record(recentPost);
+  try {
+    await repository.record(recentPost);
+  } catch (recentPostError) {
+    advisoryReasons.push('POLICY_RECENT_POSTS_WRITE_FAILED');
+    console.warn(`[ContentPolicy] Scheduled comparison-cache record failed after core ledger write: ${(recentPostError as Error).message}`);
+  }
   try {
     await auditStore.append({
       ...auditRecord(
