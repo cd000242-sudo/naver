@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-25T12:20:42.035Z",
+  "generatedAt": "2026-10-25T13:02:35.636Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -100,41 +100,6 @@
         "checkBefore": [
           "삼성 뉴스룸·삼성멤버스 공지에서 원UI 9 정식 배포일과 수정 항목 확인",
           "삼성 커뮤니티·해외 포럼에서 실제 사용자 보고 오류 교차 확인"
-        ]
-      },
-      "at": "2026-10-19T21:06:48.786Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "5df132546142e2fa",
-      "urls": [
-        "https://yoanarc.com/1393",
-        "https://honeypencil.tistory.com/entry/%EC%B6%94%EB%AF%B8%EC%95%A0-%EC%86%8C%EB%B0%A9-%EB%B9%A8%EB%8C%80-%EB%85%BC%EB%9E%80-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://hanbre.tistory.com/1585",
-        "https://kimboarm92.tistory.com/69",
-        "https://saintparkmoney.tistory.com/177"
-      ],
-      "guide": {
-        "direction": "대표 검색어는 '추미애 사과'로 잡는다 — 검색자는 국정감사에서 나온 '소방 재정 빨대' 발언의 정확한 원문과 왜 사과까지 갔는지 맥락을 궁금해한다. 고수 글들은 이미 총정리형 전체 요약을 다 썼으니, 발언→논란 확산→사과까지 시간순 타임라인과 발언 원문 인용으로 차별화해야 한다. 끝까지 읽히는 이유는 쟁점별 정리표와 사과문 요지다.",
-        "searchTargets": [
-          "추미애 사과"
-        ],
-        "mustInclude": [
-          "발언 날짜·장소(국정감사 여부) (확인 필요: 원문 기사)",
-          "'소방 재정 빨대' 발언 원문 인용 (확인 필요: 원문 기사)",
-          "사과 시점과 사과문 핵심 내용 (확인 필요: 공식 발표)",
-          "제목의 '부승찬'이 실제 발언 당사자인지 추미애인지 구분 (확인 필요: 원문 기사)"
-        ],
-        "mustAvoid": [
-          "추미애 개인 사생활이나 정치적 편향 추측성 서술",
-          "제목의 '부승찬'과 '추미애'를 혼동해 다른 인물의 발언처럼 쓰는 것",
-          "발언을 실제보다 자극적으로 재구성하는 것"
-        ],
-        "checkBefore": [
-          "실제 발언 당사자가 추미애인지 부승찬인지 원문 기사로 확인",
-          "사과 공식 발표문 원문 확인",
-          "'소방 재정 빨대' 발언이 나온 정확한 맥락(어느 자리, 어떤 질의 중) 확인"
         ]
       },
       "at": "2026-10-19T21:06:48.786Z",
@@ -2406,78 +2371,6 @@
       ]
     },
     {
-      "id": "43be6a38022213d8",
-      "urls": [
-        "https://spo.theblablabla.com/entry/%EC%B6%94%EB%AF%B8%EC%95%A0-%EC%8B%A4%EC%96%B8-%EB%85%BC%EB%9E%80-%EB%8D%94%EB%B6%88%EC%96%B4%EB%AF%BC%EC%A3%BC%EB%8B%B9-%EC%A7%80%EC%A7%80%EC%9C%A8%EC%97%90-%EA%B2%B0%EC%A0%95%EC%A0%81-%ED%83%80%EA%B2%A9-%EC%9E%85%ED%98%94%EB%82%98",
-        "https://honeypencil.tistory.com/entry/%EC%B6%94%EB%AF%B8%EC%95%A0-%EC%86%8C%EB%B0%A9-%EB%B9%A8%EB%8C%80-%EB%85%BC%EB%9E%80-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://kimboarm92.tistory.com/69",
-        "https://secondary4u.tistory.com/578",
-        "https://spo.theblablabla.com/entry/%EC%B6%94%EB%AF%B8%EC%95%A0-%EB%B6%80%EC%B2%9C-%ED%99%94%EC%9E%AC-%EB%B0%9C%EC%96%B8-%EB%85%BC%EB%9E%80-%EB%A9%88%EC%B6%94%EC%A7%80-%EC%95%8A%EB%8A%94-%EB%AF%BC%EC%A3%BC%EB%8B%B9%EC%9D%98-%EB%8F%84%EB%8D%95%EC%84%B1-%EC%9C%84%EA%B8%B0",
-        "https://saintparkmoney.tistory.com/177"
-      ],
-      "guide": {
-        "direction": "지식인 질문은 추미애가 국회의원인지 경기도지사인지부터 헷갈리고, '소방 빨대' 발언으로 명예훼손 고소·고발이 가능한지를 궁금해한다. 고수 글들은 지지율 타격이나 사과 여부는 다뤘지만 직책 혼동 정리와 고소 요건(피해자 특정 필요 등)은 짚지 않았다. 이 글은 발언 당사자 직책·발언 원문 맥락·법적 가능성을 체크리스트로 정리해 혼란을 끝낸다.",
-        "searchTargets": [
-          "추미애 소방 빨대",
-          "추미애 소방 재정 빨대",
-          "추미애 소방관 빨대",
-          "추미애 소방관"
-        ],
-        "mustInclude": [
-          "추미애의 정확한 직책은 경기도지사(국회의원 아님) — 지식인에서도 반복되는 혼동",
-          "'소방은 골치 아픈 재정 빨대' 발언 원문과 맥락(확인 필요: 공식 보도자료·발언 전문)",
-          "부천 공장 화재 선착대 소방관 순직 사건과의 연결(확인 필요: 사고 날짜·경위)",
-          "소방관 명예훼손 고소·고발 가능 여부와 피해자 요건 설명",
-          "추미애 사과 여부와 시점(확인 필요: 공식 발표 날짜)"
-        ],
-        "mustAvoid": [
-          "이 발언만으로 민주당 지지율 하락을 단정하는 정치적 비약",
-          "추미애 개인 사생활·인성에 대한 추측성 서술",
-          "순직 소방관 사건을 유가족 감정 고려 없이 정쟁 소재로만 다루기"
-        ],
-        "checkBefore": [
-          "추미애 공식 직책과 발언 원문 — 경기도 공식 보도자료·뉴스 원문",
-          "부천 화재 소방관 순직 경위 — 소방청·언론 보도",
-          "사과 여부 및 시점 — 공식 발표 확인"
-        ],
-        "solves": [
-          "추미애가 국회의원인지 경기도지사인지 헷갈림 → 직책과 소속 명확히 정리",
-          "소방 빨대 발언으로 명예훼손 고소가 가능한지 모름 → 피해자 요건 기준으로 가능성 설명",
-          "발언과 부천 화재 사건이 어떻게 연결되는지 모름 → 시간순 맥락으로 정리"
-        ],
-        "actionTitles": [
-          "추미애 소방 재정빨대 발언, 경기도지사 직책부터 확인하기",
-          "추미애 소방관 빨대 발언 명예훼손 고소 가능할까 확인"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "추미애 &quot;소방은 골치 아픈 재정 빨대 소방공....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=814&docId=495566044&answerNo=2&qb=7LaU66+47JWg7IaM67Cp",
-          "views": 312,
-          "answers": 4,
-          "askedAt": "2026.10.15"
-        },
-        {
-          "title": "추미애 국회의원 소방빨대",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60702&docId=495585068&answerNo=1&qb=7LaU66+47JWg7IaM67Cp",
-          "views": 147,
-          "answers": 2,
-          "askedAt": "2026.10.17"
-        },
-        {
-          "title": "추미애 소방 재정빨대 소방관 명예훼소 고소 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60206&docId=495583471&answerNo=2&qb=7LaU66+47JWg7IaM67Cp",
-          "views": 103,
-          "answers": 2,
-          "askedAt": "2026.10.17"
-        }
-      ]
-    },
-    {
       "id": "a8333545059daed0",
       "urls": [
         "https://k-econ.co.kr/prepaid-charge-refund-guide-naver-kakao-toss/",
@@ -4493,71 +4386,6 @@
           "views": 126,
           "answers": 6,
           "askedAt": "2025.09.04"
-        }
-      ]
-    },
-    {
-      "id": "e552981e75d7f5a2",
-      "urls": [
-        "https://easy.ddorwhat.com/204",
-        "https://angju.tistory.com/939",
-        "https://wormsdlfksp.tistory.com/327",
-        "https://chicha14.com/%ec%98%a8%eb%88%84%eb%a6%ac-%ec%83%81%ed%92%88%ea%b6%8c-%ec%82%ac%ec%9a%a9%eb%b2%95-%ec%b9%b4%eb%93%9c/"
-      ],
-      "guide": {
-        "direction": "지식인에는 삼성전자에서 받은 온누리상품권을 어디에 써야 하는지, QR결제가 소득공제되는지 묻는 질문이 많다. 고수 블로그들은 개편 혜택과 사용법 단계는 다뤘지만 상생페이백 수령자의 현금화 금지·처벌 리스크는 비어 있다. 이 글은 사용 가능 가맹점 유형표와 소득공제 여부, 현금화 금지 사항을 정리해 독자가 안전하게 사용까지 끝내게 한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "상생페이백으로 받은 온누리상품권 현금화 시 가맹점 과태료·등록취소 처벌",
-          "이용자도 지급받은 상생페이백이 환수될 수 있다는 점",
-          "전통시장 가맹점 사용 가능 품목 유형(확인 필요: 소상공인시장진흥공단)",
-          "알리페이 등 간편결제 가능 여부(확인 필요: 공식 공지)",
-          "QR결제 자체는 소득공제가 아니라는 점(연말정산 신용카드공제와 구분)"
-        ],
-        "mustAvoid": [
-          "상생페이백 받은 상품권 현금화 방법을 구체적으로 안내",
-          "삼성전자 지급 상품권과 일반 구매·지류형 온누리상품권 혼동",
-          "다른 지역화폐나 지역상품권과 혼동"
-        ],
-        "checkBefore": [
-          "소상공인시장진흥공단(온누리상품권) 공식 공지",
-          "이번 개편 시행일과 세부 혜택을 다룬 원문 기사"
-        ],
-        "solves": [
-          "삼성전자에서 받은 상품권을 어디에 써야 할지 모른다 → 사용 가능 가맹점 유형표 제공",
-          "QR결제가 연말정산 소득공제 되는지 혼동한다 → 소득공제 여부와 신용카드공제 차이 설명",
-          "상생페이백 받은 상품권을 현금화해도 되는지 궁금하다 → 처벌 리스크와 금지 사항 안내"
-        ],
-        "actionTitles": [
-          "온누리상품권 사용처 확인, 현금화하면 안 되는 이유",
-          "온누리상품권 사용법, 등록부터 결제까지 단계별 확인",
-          "온누리상품권 개편 후 할인 적용 조건 확인하기"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "상생페이백 온누리상품권 현금화",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=511&docId=490520611&answerNo=22&qb=7Jio64iE66as7IOB7ZKI6raM6rCc7Y64",
-          "views": 3790,
-          "answers": 22,
-          "askedAt": "2026.10.15"
-        },
-        {
-          "title": "온누리상품권으로 전통시장 장보기, 어떤 품....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=51003&docId=494131321&answerNo=6&qb=7Jio64iE66as7IOB7ZKI6raM6rCc7Y64",
-          "views": 256,
-          "answers": 7,
-          "askedAt": "2026.10.03"
-        },
-        {
-          "title": "온누리상품권 QR결제 연말정산 소득공제",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40311&docId=495517168&answerNo=9&qb=7Jio64iE66as7IOB7ZKI6raM6rCc7Y64",
-          "views": 134,
-          "answers": 9,
-          "askedAt": "2026.10.19"
         }
       ]
     },
