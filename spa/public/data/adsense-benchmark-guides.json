@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-24T22:02:40.609Z",
+  "generatedAt": "2026-10-25T00:12:14.967Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -68,44 +68,6 @@
         "checkBefore": [
           "연금저축-IRP 간 이전 가능 여부와 세제 혜택 유지 조건은 국세청·금융감독원 공식 자료 확인",
           "2026년 세액공제 한도·공제율 변동 여부는 국세청 연말정산 안내 확인"
-        ]
-      },
-      "at": "2026-10-19T21:06:48.786Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "fd3d362e65be0e86",
-      "urls": [
-        "https://hohoblog.co.kr/iphone-duo-foldable-related-stocks/",
-        "https://misha-story.com/entry/2026-%ED%8F%B4%EB%8D%94%EB%B8%94%ED%8F%B0-5%EC%A2%85-%EB%B9%84%EA%B5%90-%EC%95%84%EC%9D%B4%ED%8F%B0-%EB%93%80%EC%98%A4%EB%B6%80%ED%84%B0-%ED%94%BD%EC%85%80%EA%B9%8C%EC%A7%80",
-        "https://daonstory.com/entry/%EC%95%84%EC%9D%B4%ED%8F%B0-%EB%93%80%EC%98%A4-%ED%92%88%EA%B7%80-%ED%98%84%EC%83%81-329%EB%A7%8C%EC%9B%90-%ED%8F%B4%EB%8D%94%EB%B8%94",
-        "https://snappick.tistory.com/entry/iphone-duo-preorder-real-price",
-        "https://snappick.tistory.com/entry/iphone-duo-foldable-spec-weight",
-        "https://info-guide.co.kr/%ec%95%84%ec%9d%b4%ed%8f%b0-%eb%93%80%ec%98%a4-%ec%82%ac%ec%a0%84-%ec%98%88%ec%95%bd-%ec%b5%9c%eb%8c%80-%ed%98%9c%ed%83%9d-70-%ed%8a%b9%ea%b0%80-%ed%95%a0%ec%9d%b8/"
-      ],
-      "guide": {
-        "direction": "'아이폰 듀오 출시일'·'사전예약' 검색자는 제품을 사고 싶어서 들어오는데, 제목의 '관련주'는 자동완성에 없는 투자자 전용 키워드라 실제 검색 유입과 어긋난다. 고수 글들은 스펙·가격·사전예약 혜택까지 다뤘지만 사전예약 이후 받은 '실물' 후기나 케이스·필름 호환 정보는 비어 있다. 제품 정보 섹션을 먼저 두고 관련주는 참고용으로 분리하면 양쪽 검색 유입을 모두 잡는다.",
-        "searchTargets": [
-          "아이폰 듀오 출시일",
-          "아이폰 듀오 사전예약",
-          "아이폰 듀오 실물",
-          "아이폰 듀오 케이스"
-        ],
-        "mustInclude": [
-          "사전예약 일정과 품귀 현상 경과 (확인 필요: 애플·통신사 공식 발표)",
-          "출고가 329만원 등 가격대 (확인 필요: 애플 공식 가격 발표)",
-          "쇼핑몰별 사전예약 혜택 비교표 (확인 필요: 각 쇼핑몰 공지)",
-          "폴더블 부품 관련주로 거론되는 기업과 해당 사업 부문 (확인 필요: 증권사 리포트·기사)",
-          "케이스·필름 등 악세서리 호환 여부 (확인 필요: 제조사·악세서리 업체 공지)"
-        ],
-        "mustAvoid": [
-          "출시 전 '실물'을 미확인 유출 이미지만으로 사실처럼 단정",
-          "커뮤니티(디시 등) 루머 스펙을 공식 정보처럼 인용"
-        ],
-        "checkBefore": [
-          "아이폰 듀오 정확한 출시일·가격·스펙은 애플 공식 발표 또는 보도자료로 확인",
-          "폴더블 부품 관련주로 거론되는 기업명과 근거는 증권사 리포트·기사 원문으로 확인"
         ]
       },
       "at": "2026-10-19T21:06:48.786Z",
@@ -548,38 +510,6 @@
       "provider": "claude"
     },
     {
-      "id": "2fd43760376b0b1b",
-      "urls": [
-        "https://felixkim.tistory.com/entry/%EA%B8%88%EC%9C%B5%EC%86%8C%EB%93%9D-%EC%A2%85%ED%95%A9%EA%B3%BC%EC%84%B8-%EA%B8%B0%EC%A4%80-%EC%B4%88%EA%B3%BC%EB%B6%84%EB%A7%8C-%EB%8D%94-%EB%83%85%EB%8B%88%EB%8B%A4",
-        "https://donpoint.co.kr/financial-income-tax-eligibility-check/",
-        "https://driht.tistory.com/entry/%EA%B8%88%EC%9C%B5%EC%86%8C%EB%93%9D-%EC%A2%85%ED%95%A9%EA%B3%BC%EC%84%B8-%EB%8C%80%EC%83%81-ETF-2000%EB%A7%8C%EC%9B%90-%EC%88%98%EC%9D%B5%EB%B6%80%ED%84%B0-%ED%99%95%EC%9D%B8",
-        "https://avatar72.tistory.com/entry/%EA%B8%88%EC%9C%B5%EC%86%8C%EB%93%9D%EC%A2%85%ED%95%A9%EA%B3%BC%EC%84%B8-%EA%B3%84%EC%82%B0%EA%B8%B0-%EC%9D%B4%EC%9E%90-%EB%B0%B0%EB%8B%B9-2%EC%B2%9C%EB%A7%8C%EC%9B%90-%EB%84%98%EC%9C%BC%EB%A9%B4-%EC%84%B8%EA%B8%88-%EC%96%BC%EB%A7%88%EB%82%98-%EB%8A%98%EC%96%B4%EB%82%A0%EA%B9%8C"
-      ],
-      "guide": {
-        "direction": "'금융소득 종합과세 기준'으로 들어오는 사람은 본인이 대상자인지와 2000만원 초과 시 세금이 얼마나 늘어나는지를 가장 궁금해한다. 고수 글들은 홈택스 조회법과 계산기 각도를 이미 썼으니, 종합과세 전환 시 건강보험 피부양자 자격 박탈 같은 부가 불이익 비교가 비어 있다. 소득 구간별 추가세액 표와 분리과세·종합과세 환산 예시를 넣으면 독자가 계산기 대신 다시 찾아본다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "금융소득 2000만원 초과 기준과 초과분에만 종합소득세율이 적용되는 구조",
-          "건강보험 피부양자 자격 상실 기준(2000만원 연동, 확인 필요: 국민건강보험공단 공지)",
-          "홈택스에서 금융소득 내역 조회하는 4단계 절차",
-          "이자·배당·ETF 등 합산되는 금융소득 범위"
-        ],
-        "mustAvoid": [
-          "금융소득 전체에 종합과세율이 적용된다는 오해(초과분만 과세됨을 명확히)",
-          "금융소득과 근로·사업소득을 혼동해 전체 소득세처럼 설명",
-          "건강보험 피부양자 탈락 기준을 종합과세 대상 기준과 동일시(별도 규정일 수 있음, 확인 필요)"
-        ],
-        "checkBefore": [
-          "국세청 홈택스 공식 안내에서 2000만원 기준과 세율표 확인",
-          "국민건강보험공단 피부양자 자격 기준 변경 여부 확인",
-          "소득세법상 종합과세 대상 금융소득 범위(이자+배당) 최신 확인"
-        ]
-      },
-      "at": "2026-10-19T21:06:48.786Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
       "id": "5224e1f4426ace0c",
       "urls": [
         "https://sweetonion1005.tistory.com/entry/%EC%98%81%EC%9B%85%EB%AC%B8s-%EA%B8%80%EB%A1%9C%EB%B2%8C-%EC%9B%90%ED%99%94-%EB%8B%AC%EB%9F%AC-%ED%99%98%EC%A0%84-%ED%99%98%EC%A0%84-%EC%A0%88%EC%B0%A8%EC%99%80-%ED%99%98%EC%9C%A8-%EC%A0%95%EB%B3%B4-%EC%99%84%EB%B2%BD-%EC%A0%95%EB%A6%AC",
@@ -773,43 +703,6 @@
       "provider": "claude"
     },
     {
-      "id": "5d065402c02905e0",
-      "urls": [
-        "https://onsum.kr/entry/2026-%EA%B7%BC%EB%A1%9C%EC%9E%A5%EB%A0%A4%EA%B8%88-%ED%95%99%EC%9B%90%EA%B0%95%EC%82%AC%C2%B7%EA%B3%BC%EC%99%B8%EA%B5%90%EC%82%AC%EB%8F%84-%EB%B0%9B%EC%9D%84-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C-33-%EC%82%AC%EC%97%85%EC%86%8C%EB%93%9D%C2%B7%ED%94%84%EB%A6%AC%EB%9E%9C%EC%84%9C-%EA%B0%95%EC%82%AC%C2%B7%EA%B5%90%EC%8A%B5%EC%86%8C-%EC%9A%B4%EC%98%81-%EA%B8%B0%EC%A4%80-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://onsum.kr/entry/2026-%EA%B7%BC%EB%A1%9C%EC%9E%A5%EB%A0%A4%EA%B8%88-%EA%B0%9C%EC%9D%B8%ED%83%9D%EC%8B%9C%C2%B7%ED%99%94%EB%AC%BC%EC%B0%A8-%EA%B8%B0%EC%82%AC%EB%8F%84-%EB%B0%9B%EC%9D%84-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C-%EC%9A%B4%EC%86%A1%EC%97%85-%EC%82%AC%EC%97%85%EC%86%8C%EB%93%9D%C2%B7%EC%B0%A8%EB%9F%89-%EC%9E%AC%EC%82%B0%C2%B7%EC%9C%A0%EB%A5%98%EB%B9%84-%EA%B8%B0%EC%A4%80-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://infobros.tistory.com/entry/%EA%B7%BC%EB%A1%9C%EC%9E%A5%EB%A0%A4%EA%B8%88-%EC%82%AC%EC%97%85%EC%86%8C%EB%93%9D",
-        "https://onsum.kr/entry/2026-%EA%B7%BC%EB%A1%9C%EC%9E%A5%EB%A0%A4%EA%B8%88-%EB%AC%B4%EC%9D%B8%EC%A0%90%ED%8F%AC%C2%B7%EB%AC%B4%EC%9D%B8%EC%B9%B4%ED%8E%98-%EC%82%AC%EC%9E%A5%EB%8B%98%EB%8F%84-%EB%B0%9B%EC%9D%84-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C-%ED%82%A4%EC%98%A4%EC%8A%A4%ED%81%AC-%EB%A7%A4%EC%B6%9C%C2%B7%EA%B3%B5%EB%8F%99%EC%82%AC%EC%97%85%C2%B7%EC%82%AC%EC%97%85%EC%86%8C%EB%93%9D-%EA%B8%B0%EC%A4%80-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://livingtt.tistory.com/60"
-      ],
-      "guide": {
-        "direction": "학원강사·과외교사는 '근로장려금 사업소득 기준'과 '최소신고' 금액을 함께 검색한다 — 3.3% 원천징수만 되고 사업자등록은 안 한 프리랜서가 기준을 충족하는지 궁금해서다. 기존 글들은 직종만 바꿔 썼을 뿐 프리랜서 강사와 교습소 사업자의 신고 방식 차이는 안 짚었다. 환산소득 계산 예시와 자가진단표를 넣으면 끝까지 읽는다.",
-        "searchTargets": [
-          "근로장려금 사업소득 기준",
-          "근로장려금 사업소득 뜻",
-          "근로장려금 사업소득자",
-          "근로장려금 사업소득 최소신고"
-        ],
-        "mustInclude": [
-          "프리랜서 강사(3.3% 사업소득)와 교습소 사업자등록자 신고 기준 차이표",
-          "가구유형별 총소득 상한액 (확인 필요: 국세청 홈택스 2026년 공지)",
-          "재산요건 합산 기준 포함 여부 (확인 필요: 국세청)",
-          "환산소득(사업소득 일정비율 반영) 계산 예시",
-          "정기신청·반기신청 기간 (확인 필요: 국세청 공지)"
-        ],
-        "mustAvoid": [
-          "개인택시·무인점포 등 다른 직종 재산기준과 섞어 쓰기",
-          "근로소득자용 소득기준을 사업소득자에 그대로 적용하는 혼동"
-        ],
-        "checkBefore": [
-          "2026년 귀속 근로장려금 소득·재산 기준 (국세청 홈택스 공지)",
-          "프리랜서 강사의 사업자등록 의무 여부 (관할 세무서/국세청 안내)"
-        ]
-      },
-      "at": "2026-10-19T21:06:48.786Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
       "id": "eccf74b4d2fd662a",
       "urls": [
         "https://onsum.kr/entry/%EC%9C%88%EB%8F%84%EC%9A%B011-%ED%8C%8C%EC%9D%BC-%ED%83%90%EC%83%89%EA%B8%B0-%EC%B2%B4%ED%81%AC%EB%B0%95%EC%8A%A4-%ED%91%9C%EC%8B%9C-%EB%B0%A9%EB%B2%95%EF%BD%9C%ED%8C%8C%EC%9D%BC-%EC%97%AC%EB%9F%AC-%EA%B0%9C-%EC%84%A0%ED%83%9D%ED%95%98%EA%B3%A0-%ED%95%9C-%EB%B2%88%EC%97%90-%EB%B3%B5%EC%82%AC%C2%B7%EC%9D%B4%EB%8F%99%ED%95%98%EA%B8%B0",
@@ -866,42 +759,6 @@
         ],
         "checkBefore": [
           "국세청 홈택스의 세액공제 반영 방식(연말정산/경정청구) 안내"
-        ]
-      },
-      "at": "2026-10-19T21:06:48.786Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "d48fbd0442a8b82d",
-      "urls": [
-        "https://usefulinfo.tistory.com/253",
-        "https://usefulinfo.tistory.com/251",
-        "https://yc93423.tistory.com/entry/%EC%9C%A1%EC%95%84%ED%9C%B4%EC%A7%81-%EC%A1%B0%EA%B1%B4-%EC%9D%B4%EC%A7%81-%ED%9B%84-%EA%B7%BC%EC%86%8D-6%EA%B0%9C%EC%9B%94%EA%B3%BC-%EA%B8%89%EC%97%AC-180%EC%9D%BC-%EC%B0%A8%EC%9D%B4",
-        "https://bebetterlifeforyou.com/141"
-      ],
-      "guide": {
-        "direction": "검색자는 '내가 얼마 받는지'를 구간표로 바로 확인하고 싶어하므로 '육아휴직 급여 계산'을 대표 검색어로 잡는다. 고수 글들은 이미 250·200·160만원 구간과 근속6개월·급여180일 차이를 다뤘으니, 6+6 동시사용 계산·공무원 비교·지급일처럼 비어있는 각도로 차별화한다. 월별 실수령액 표와 신청 타이밍 체크리스트를 넣으면 재방문이 생긴다.",
-        "searchTargets": [
-          "육아휴직 급여 6+6",
-          "육아휴직 급여 계산",
-          "육아휴직급여 지급일",
-          "공무원 육아휴직 급여"
-        ],
-        "mustInclude": [
-          "1~3개월 250만원, 4~6개월 200만원, 7개월 이후 160만원 월 상한 구간표(확인 필요: 고용노동부 공지)",
-          "6+6 부모육아휴직제 동시사용 시 통상임금 100% 적용 상한액(확인 필요: 고용노동부)",
-          "근속 6개월 요건과 급여 수급 180일 요건의 차이 비교표",
-          "공무원과 일반 근로자 육아휴직급여 지급 방식 차이",
-          "매월 지급일 및 고용보험 홈페이지 신청 순서"
-        ],
-        "mustAvoid": [
-          "2024년 이전 구제도 상한액(예 150만원)을 현재 금액과 섞어 쓰기",
-          "출산휴가급여와 육아휴직급여를 같은 제도처럼 혼동"
-        ],
-        "checkBefore": [
-          "현재 기준 월 상한액 구간과 정확한 금액(고용노동부·고용보험 공식 발표)",
-          "6+6 제도 적용 조건과 기간(고용노동부 공지)"
         ]
       },
       "at": "2026-10-19T21:06:48.786Z",
@@ -1426,37 +1283,6 @@
         "checkBefore": [
           "반대매매 규모·날짜별 수치는 증권사·거래소 공시 또는 원문 경제지 확인",
           "10월 22일 금통위 일정은 한국은행 공식 발표로 확인"
-        ]
-      },
-      "at": "2026-10-19T21:06:48.786Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "c62e7a635c3324b4",
-      "urls": [
-        "https://coda3.codaland24.com/117",
-        "https://sy1s.tistory.com/entry/%ED%95%9C%EB%AF%B8%EC%95%BD%ED%92%88-%EC%97%90%ED%8E%98-%EC%B6%9C%EC%8B%9C%EC%9D%BC-%EC%96%B8%EC%A0%9C-%EA%B0%80%EA%B2%A9%C2%B7%ED%9A%A8%EA%B3%BC-%EC%9C%84%EA%B3%A0%EB%B9%84%C2%B7%EB%A7%88%EC%9A%B4%EC%9E%90%EB%A1%9C-%EB%B9%84%EA%B5%90"
-      ],
-      "guide": {
-        "direction": "허가 뉴스를 본 독자는 '내가 실제로 언제 처방받을 수 있는지'가 가장 궁금하므로 '한미약품 에페 출시일'을 대표 검색어로 잡는다. 고수 글은 허가 소식과 위고비·마운자로 비교·주가까지 다뤘지만 처방 조건(비만도 기준)과 보험 적용 여부는 비어 있다. 가격·감량률 비교표와 처방 가능 시점을 표로 정리하면 재방문 이유가 된다.",
-        "searchTargets": [
-          "한미약품 에페 출시일",
-          "한미약품 에페 가격",
-          "한미약품 에페 효과"
-        ],
-        "mustInclude": [
-          "식약처 허가 발표 날짜(확인 필요: 식약처 공식 발표)",
-          "위고비·마운자로 대비 성분·감량률 비교표(확인 필요: 임상 결과 발표 자료)",
-          "예상 출시 시점과 처방 조건(확인 필요: 한미약품 공식 발표)",
-          "비급여 예상 가격대(확인 필요: 공식 가격 발표)"
-        ],
-        "mustAvoid": [
-          "주가 전망을 투자 추천처럼 단정적으로 제시"
-        ],
-        "checkBefore": [
-          "식약처 허가 승인 일자와 적응증 범위 — 식약처 공식 발표",
-          "국내 출시 시점 및 가격 — 한미약품 공식 발표"
         ]
       },
       "at": "2026-10-19T21:06:48.786Z",
@@ -2322,74 +2148,6 @@
       ]
     },
     {
-      "id": "ecbee94307361c97",
-      "urls": [
-        "https://summerpapa1.tistory.com/97"
-      ],
-      "guide": {
-        "direction": "검색자는 '내가 자격이 되는지' '2차·연장이 언제인지' '서류가 뭔지'를 못 찾아 헤맨다. 고수 글은 4인 199만4,600원 금액은 짚었지만 가구원수별 전체 기준표와 연장·재신청 절차는 비어 있다. 가구원수별 지급액표와 서류 체크리스트, 연장 조건 흐름을 한 번에 주면 글 하나로 신청까지 끝난다.",
-        "searchTargets": [
-          "긴급복지 생계지원금 신청",
-          "긴급복지 생계지원금 조건",
-          "긴급복지 생계지원금 연장",
-          "긴급복지 생계지원금 서류"
-        ],
-        "mustInclude": [
-          "1인~4인 가구원수별 월 지급액표(4인 199만4,600원 기준)",
-          "신청서류 목록(확인 필요: 복지로·읍면동 주민센터 공지)",
-          "연장·2차 지급 가능 기간과 횟수(확인 필요: 보건복지부 2026 기준)",
-          "소득·재산 기준표(확인 필요: 2026년 보건복지부 공고)",
-          "지급 방식과 지급일(계좌입금 주기, 확인 필요)"
-        ],
-        "mustAvoid": [
-          "기초생활수급자 생계급여와 긴급복지 생계지원금을 같은 제도로 혼동하지 말 것",
-          "특정 지자체·기관 자체 지원금(예: 대구 가스공사 사례)과 국가 긴급복지제도를 섞지 말 것",
-          "개인 사례의 소득·재산 인정 여부를 단정적으로 판정하지 말 것"
-        ],
-        "checkBefore": [
-          "2026년 긴급복지지원 금액·소득·재산 기준(보건복지부 공식 공고, 복지로)",
-          "연장·재신청 가능 횟수·기간(관할 시군구 공지)",
-          "지급 일정(복지로 또는 읍면동 주민센터 확인)"
-        ],
-        "solves": [
-          "'긴급복지생계지원금 자격되나요' → 가구원수·소득·재산 기준표에 바로 대입해 확인시켜준다",
-          "'2차는 언제쯤' → 연장·2차 신청 조건과 시기를 흐름도로 정리해준다",
-          "'서류 뭐 떼야하나' → 신청서류 체크리스트로 바로 준비하게 해준다"
-        ],
-        "actionTitles": [
-          "긴급복지 생계지원금 신청 조건, 4인 199만원 받는 법",
-          "긴급복지 생계지원금 연장·2차 신청 조건 한눈에 확인",
-          "긴급복지 생계지원금 서류 체크리스트로 한 번에 신청"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "긴급복지생계지원금 신청 조건, 어떻게 되나....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=601&docId=493701860&answerNo=11&qb=6ri06riJ67O17KeAIOyDneqzhOyngOybkOq4iA==",
-          "views": 408,
-          "answers": 12,
-          "askedAt": "2026.10.18"
-        },
-        {
-          "title": "긴급복지지원금 생계비",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110103&docId=494767760&answerNo=9&qb=6ri06riJ67O17KeAIOyDneqzhOyngOybkOq4iA==",
-          "views": 308,
-          "answers": 9,
-          "askedAt": "2026.10.12"
-        },
-        {
-          "title": "긴급복지생계지원금자격되나요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100102&docId=495416112&answerNo=1&qb=6ri06riJ67O17KeAIOyDneqzhOyngOybkOq4iA==",
-          "views": 271,
-          "answers": 6,
-          "askedAt": "2026.10.04"
-        }
-      ]
-    },
-    {
       "id": "c52966ec1f2f7bdd",
       "urls": [
         "https://iexceller.tistory.com/2309"
@@ -2735,78 +2493,6 @@
           "views": 1177,
           "answers": 1,
           "askedAt": "2003.11.13"
-        }
-      ]
-    },
-    {
-      "id": "6ef9ca759c85d4b4",
-      "urls": [
-        "https://mindocean.tistory.com/2325",
-        "https://hohoblog.co.kr/iphone-duo-foldable-related-stocks/",
-        "https://misha-story.com/entry/2026-%ED%8F%B4%EB%8D%94%EB%B8%94%ED%8F%B0-5%EC%A2%85-%EB%B9%84%EA%B5%90-%EC%95%84%EC%9D%B4%ED%8F%B0-%EB%93%80%EC%98%A4%EB%B6%80%ED%84%B0-%ED%94%BD%EC%85%80%EA%B9%8C%EC%A7%80",
-        "https://daonstory.com/entry/%EC%95%84%EC%9D%B4%ED%8F%B0-%EB%93%80%EC%98%A4-%ED%92%88%EA%B7%80-%ED%98%84%EC%83%81-329%EB%A7%8C%EC%9B%90-%ED%8F%B4%EB%8D%94%EB%B8%94",
-        "https://snappick.tistory.com/entry/iphone-duo-preorder-real-price",
-        "https://snappick.tistory.com/entry/iphone-duo-foldable-spec-weight"
-      ],
-      "guide": {
-        "direction": "검색자는 아이폰 듀오 사전예약을 해외에서도 할 수 있는지, 삼성보다 100만원 넘게 비싼 이유가 뭔지 궁금해 막혀 있다. 고수 글들은 스펙·가격 비교에 집중할 뿐 해외 사전예약 가능 여부와 품귀 시 대안 구매처는 다루지 않는다. 이 글은 사전예약 신청 순서와 가격 비교표, 품귀 시 대안을 체크리스트로 정리해 바로 행동하게 한다.",
-        "searchTargets": [
-          "아이폰 듀오 사전예약",
-          "아이폰 듀오 가격",
-          "아이폰 듀오 출시일",
-          "아이폰 듀오 후기"
-        ],
-        "mustInclude": [
-          "사전예약 시작 일시(16일 9시, 지식인 근거) 및 해외 거주자 가능 여부(확인 필요: 애플 공식 공지)",
-          "가격 329만원(고수 글 근거)과 삼성 폴더블 가격 비교표(확인 필요: 공식 가격 공시)",
-          "품귀·완판 시 대안 구매처(쿠팡 등) 비교",
-          "무게·화면주름·실물 후기 체크포인트",
-          "아이폰18 프로와의 사전예약 경쟁·인기 비교"
-        ],
-        "mustAvoid": [
-          "출시 전 미확정 스펙을 확정된 사실처럼 단정",
-          "비공식 경로의 사전예약 링크를 안내해 사기 위험 유발",
-          "삼성 등 경쟁사를 비방성으로 비교"
-        ],
-        "checkBefore": [
-          "애플 공식 홈페이지/보도자료에서 사전예약 시작일시·가격·출시일 확인",
-          "통신사(SKT/KT/LGU+) 공지에서 사전예약 혜택·재고 확인"
-        ],
-        "solves": [
-          "사전예약을 해외에서 할 수 있는지 몰라 여행 일정과 충돌 → 가능 여부와 대안 정리",
-          "삼성보다 100만원 비싼 이유를 몰라 구매 고민 → 가격 비교표로 이유 설명",
-          "품귀로 바로 구매가 안 돼서 못 삼 → 구매 가능한 경로와 순서 안내"
-        ],
-        "actionTitles": [
-          "아이폰 듀오 사전예약 지금 바로 하는 법과 해외 가능 여부",
-          "아이폰 듀오 가격 329만원, 삼성보다 비싼 이유 비교",
-          "아이폰 듀오 출시일·실물 후기, 품귀 전에 확인할 것"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "아이폰 듀오 바로 살려고그러는데",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1070401&docId=495228435&answerNo=5&qb=7JWE7J207Y+w65OA7Jik",
-          "views": 371,
-          "answers": 10,
-          "askedAt": "2026.10.01"
-        },
-        {
-          "title": "아이폰 듀오 구매 원함",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1070401&docId=495308575&answerNo=6&qb=7JWE7J207Y+w65OA7Jik",
-          "views": 247,
-          "answers": 7,
-          "askedAt": "2026.10.12"
-        },
-        {
-          "title": "아이폰18 프로와 듀오, 어떤 제품이 더 인기 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=5010603&docId=495124046&answerNo=7&qb=7JWE7J207Y+w65OA7Jik",
-          "views": 189,
-          "answers": 8,
-          "askedAt": "2026.10.13"
         }
       ]
     },
@@ -4308,77 +3994,6 @@
       ]
     },
     {
-      "id": "b4bd8a8d604ff49d",
-      "urls": [
-        "https://futurefreelance.tistory.com/entry/%ED%95%9C%EB%AF%B8%EC%95%BD%ED%92%88-%EC%97%90%ED%8E%98-%EA%B0%80%EA%B2%A9%EF%BD%9C%EC%B2%AB-%EB%8B%AC-13%EB%A7%8C%EC%9B%90-12%EC%A3%BC-%EA%B3%B5%EA%B8%89%EA%B0%80%EB%8A%94-%EC%96%BC%EB%A7%88%EC%9D%BC%EA%B9%8C",
-        "https://sungwook100djr.tistory.com/354",
-        "https://coda3.codaland24.com/117",
-        "https://sy1s.tistory.com/entry/%ED%95%9C%EB%AF%B8%EC%95%BD%ED%92%88-%EC%97%90%ED%8E%98-%EC%B6%9C%EC%8B%9C%EC%9D%BC-%EC%96%B8%EC%A0%9C-%EA%B0%80%EA%B2%A9%C2%B7%ED%9A%A8%EA%B3%BC-%EC%9C%84%EA%B3%A0%EB%B9%84%C2%B7%EB%A7%88%EC%9A%B4%EC%9E%90%EB%A1%9C-%EB%B9%84%EA%B5%90"
-      ],
-      "guide": {
-        "direction": "검색자는 에페와 위고비·마운자로 중 뭐가 다른지, 또 한미약품과 한미사이언스 주가를 같이 보며 어느 회사 얘기인지 헷갈려한다. 고수 블로그들은 가격·감량률·주가 전망은 다뤘지만 한미사이언스와 한미약품의 관계, 과거 사노피 라이선스 반환 이력까지는 정리하지 않았다. 이 글은 가격·효과 비교표와 회사 구조, 처방받는 법을 순서대로 정리해 끝낸다.",
-        "searchTargets": [
-          "한미약품 에페 가격",
-          "한미약품 에페 출시일",
-          "한미약품 에페 처방",
-          "한미약품 에페 허가"
-        ],
-        "mustInclude": [
-          "한미약품과 지주사 한미사이언스 주식이 다른 회사라는 점 정리(지식인 혼동 다수)",
-          "사노피의 에페글레나타이드 라이선스 반환·임상 중단 이력 (확인 필요: 원문 기사)",
-          "가격 비교: 에페 첫 달 13만원, 위고비 22만원, 마운자로 28만원 (고수 제목 기준)",
-          "식약처 허가 현황·출시일 (확인 필요: 한미약품 공식 발표)",
-          "처방 받는 법·가능 경로 (확인 필요: 병원·약국 공지)"
-        ],
-        "mustAvoid": [
-          "한미약품과 한미사이언스를 같은 주식으로 혼동해서 쓰지 않기",
-          "임상 데이터 없이 감량률·부작용을 위고비·마운자로보다 우월하다고 과장하지 않기",
-          "\"지금 사라\" 식 단정적 주가 전망을 투자 조언처럼 쓰지 않기"
-        ],
-        "checkBefore": [
-          "식약처 허가 현황과 정확한 출시일은 한미약품 공식 발표로 확인",
-          "13만/22만/28만 가격이 어느 시점·조건(첫 달 vs 유지) 기준인지 원문 기사 재확인",
-          "사노피 라이선스 반환 이력의 정확한 시점은 원문 기사로 확인"
-        ],
-        "solves": [
-          "한미약품 에페랑 한미사이언스 주가가 왜 같이 언급되나 → 지주사·자회사 구조 설명",
-          "위고비·마운자로랑 가격·효과 뭐가 다른가 → 가격·비교표 정리",
-          "에페 어디서 처방받을 수 있나 → 처방 경로 확인 방법 안내"
-        ],
-        "actionTitles": [
-          "한미약품 에페 가격 비교, 위고비·마운자로와 차이 정리",
-          "한미약품 에페 출시일·허가 현황 확인하는 법",
-          "한미약품 에페 처방받는 법, 가능한 경로 정리"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "한미사이언스 주식 너무 답답하네요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=277580769&answerNo=1&qb=7ZWc66+47JW97ZKI7JeQ7Y6Y",
-          "views": 12681,
-          "answers": 1,
-          "askedAt": "2017.05.30"
-        },
-        {
-          "title": "한미약품 주가 불안하네요.",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=342235631&answerNo=2&qb=7ZWc66+47JW97ZKI7JeQ7Y6Y",
-          "views": 7148,
-          "answers": 3,
-          "askedAt": "2019.12.10"
-        },
-        {
-          "title": "마운자로 효과가 멈추면 언제까지 계속 맞아....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=7010106&docId=494238268&answerNo=3&qb=7ZWc66+47JW97ZKI7JeQ7Y6Y",
-          "views": 843,
-          "answers": 4,
-          "askedAt": "2026.08.27"
-        }
-      ]
-    },
-    {
       "id": "1ffdaf31208d68f9",
       "urls": [
         "https://bok-jiri.tistory.com/entry/2026-%EC%B5%9C%EC%8B%A0%EA%B0%9C%EC%A0%95-2026%EB%85%84-%ED%95%9C%EB%B6%80%EB%AA%A8%EA%B0%80%EC%A0%95-%ED%98%9C%ED%83%9D-%EC%95%84%EB%8F%99%EC%96%91%EC%9C%A1%EB%B9%84-%EC%A7%80%EC%9B%90-%EA%B8%88%EC%95%A1-%EB%B0%8F-%EC%86%8C%EB%93%9D%EC%9D%B8%EC%A0%95%EC%95%A1-%EA%B8%B0%EC%A4%80-1",
@@ -4714,73 +4329,6 @@
           "views": 2616,
           "answers": 10,
           "askedAt": "2026.10.14"
-        }
-      ]
-    },
-    {
-      "id": "42c2b0e226cfd27b",
-      "urls": [
-        "https://comme-baleine.tistory.com/entry/%EA%B8%88%EC%9C%B5%EC%86%8C%EB%93%9D%EC%A2%85%ED%95%A9%EA%B3%BC%EC%84%B8-2000%EB%A7%8C%EC%9B%90-%EA%B8%B0%EC%A4%80-ISA%C2%B7%EA%B1%B4%EA%B0%95%EB%B3%B4%ED%97%98%EB%A3%8C%C2%B7%EB%B6%80%EB%B6%80%ED%95%A9%EC%82%B0%C2%B7%EC%8B%A0%EA%B3%A0%EB%B0%A9%EB%B2%95-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://felixkim.tistory.com/entry/%EA%B8%88%EC%9C%B5%EC%86%8C%EB%93%9D-%EC%A2%85%ED%95%A9%EA%B3%BC%EC%84%B8-%EA%B8%B0%EC%A4%80-%EC%B4%88%EA%B3%BC%EB%B6%84%EB%A7%8C-%EB%8D%94-%EB%83%85%EB%8B%88%EB%8B%A4",
-        "https://donpoint.co.kr/financial-income-tax-eligibility-check/",
-        "https://driht.tistory.com/entry/%EA%B8%88%EC%9C%B5%EC%86%8C%EB%93%9D-%EC%A2%85%ED%95%A9%EA%B3%BC%EC%84%B8-%EB%8C%80%EC%83%81-ETF-2000%EB%A7%8C%EC%9B%90-%EC%88%98%EC%9D%B5%EB%B6%80%ED%84%B0-%ED%99%95%EC%9D%B8"
-      ],
-      "guide": {
-        "direction": "검색자는 '금융소득종합과세자가 되면 ISA를 해지해야 하는지'가 실제로 막힌 지점이다. 고수 글들은 2000만원 기준·건강보험료만 다루고 ISA 해지 여부는 구체적으로 안 푼다. 이 글은 신규가입·기존계좌 유지·부적격 판정 케이스를 체크리스트로 정리해 독자가 바로 판단하게 한다.",
-        "searchTargets": [
-          "금융소득 종합과세 isa 해지"
-        ],
-        "mustInclude": [
-          "2025년 기준 금융소득종합과세자도 ISA 신규 가입 가능 여부",
-          "기존 ISA 보유 중 종합과세 대상이 된 경우 유지/해지 조건",
-          "과거 3년 중 한 번이라도 종합과세자였던 경우의 제한 규정",
-          "ISA 부적격 판정 시 대처(계좌 해지 vs 비과세 혜택 제한) (확인 필요: 증권사 공지)",
-          "배당소득 분리과세 선택이 ISA 가입 자격에 미치는 영향"
-        ],
-        "mustAvoid": [
-          "ISA 비과세 혜택과 금융소득종합과세 2000만원 기준을 같은 것으로 혼동",
-          "'무조건 해지해야 한다'는 단정(조건부 유지 가능 케이스 존재)",
-          "일반형 ISA와 서민형·농어민형 가입조건을 구분 없이 서술"
-        ],
-        "checkBefore": [
-          "금융소득종합과세자의 ISA 가입·유지 최신 규정 - 조세특례제한법 및 ISA 약관",
-          "과거 3년 소급 적용 기준 - 국세청/증권사 공식 안내"
-        ],
-        "solves": [
-          "금융소득종합과세자 ISA 해지해야 하나요? → 신규가입·유지 조건 케이스별 정리",
-          "ISA 부적격 판정 받았는데 어떻게 하나요? → 처리 절차와 체크포인트 제시",
-          "금융소득종합과세 대상인지 어떻게 확인하나요? → 홈택스 조회 단계 안내"
-        ],
-        "actionTitles": [
-          "금융소득 종합과세 ISA 해지, 하기 전에 꼭 확인할 것",
-          "금융소득종합과세자 ISA 유지 가능한지 조건부터 확인",
-          "금융소득 종합과세 대상자 확인 후 ISA 대처법 정리"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "올해 금융소득종합과세자였는데 ISA 갈아탈 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=487616147&answerNo=3&qb=6riI7Jy17IaM65Od7KKF7ZWp6rO87IS4aXNh",
-          "views": 1063,
-          "answers": 4,
-          "askedAt": "2025.08.01"
-        },
-        {
-          "title": "ISA계좌 일반형, 금융소득종합과세자도 개설....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40309&docId=492195172&answerNo=3&qb=6riI7Jy17IaM65Od7KKF7ZWp6rO87IS4aXNh",
-          "views": 506,
-          "answers": 3,
-          "askedAt": "2026.02.28"
-        },
-        {
-          "title": "금융종합소득과세자의 ISA에 대해서 궁금합니....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40305&docId=493498047&answerNo=1&qb=6riI7Jy17IaM65Od7KKF7ZWp6rO87IS4aXNh",
-          "views": 183,
-          "answers": 2,
-          "askedAt": "2026.05.22"
         }
       ]
     },
@@ -6502,76 +6050,6 @@
       "provider": "claude"
     },
     {
-      "id": "632b73ee1f0b70aa",
-      "urls": [
-        "https://onsum.kr/entry/2026-%EA%B7%BC%EB%A1%9C%EC%9E%A5%EB%A0%A4%EA%B8%88-%EB%B0%A9%EB%AC%B8%ED%8C%90%EB%A7%A4%EC%9B%90%C2%B7%EB%B3%B4%ED%97%98%EC%84%A4%EA%B3%84%EC%82%AC%EB%8F%84-%EB%B0%9B%EC%9D%84-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C-33-%EC%88%98%EC%88%98%EB%A3%8C%C2%B7%EC%8B%A4%EC%A0%81%EA%B8%89%C2%B7%EC%82%AC%EC%97%85%EC%86%8C%EB%93%9D-%EA%B8%B0%EC%A4%80-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://onsum.kr/entry/2026-%EA%B7%BC%EB%A1%9C%EC%9E%A5%EB%A0%A4%EA%B8%88-%ED%95%99%EC%9B%90%EA%B0%95%EC%82%AC%C2%B7%EA%B3%BC%EC%99%B8%EA%B5%90%EC%82%AC%EB%8F%84-%EB%B0%9B%EC%9D%84-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C-33-%EC%82%AC%EC%97%85%EC%86%8C%EB%93%9D%C2%B7%ED%94%84%EB%A6%AC%EB%9E%9C%EC%84%9C-%EA%B0%95%EC%82%AC%C2%B7%EA%B5%90%EC%8A%B5%EC%86%8C-%EC%9A%B4%EC%98%81-%EA%B8%B0%EC%A4%80-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://onsum.kr/entry/2026-%EA%B7%BC%EB%A1%9C%EC%9E%A5%EB%A0%A4%EA%B8%88-%EA%B0%9C%EC%9D%B8%ED%83%9D%EC%8B%9C%C2%B7%ED%99%94%EB%AC%BC%EC%B0%A8-%EA%B8%B0%EC%82%AC%EB%8F%84-%EB%B0%9B%EC%9D%84-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C-%EC%9A%B4%EC%86%A1%EC%97%85-%EC%82%AC%EC%97%85%EC%86%8C%EB%93%9D%C2%B7%EC%B0%A8%EB%9F%89-%EC%9E%AC%EC%82%B0%C2%B7%EC%9C%A0%EB%A5%98%EB%B9%84-%EA%B8%B0%EC%A4%80-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://infobros.tistory.com/entry/%EA%B7%BC%EB%A1%9C%EC%9E%A5%EB%A0%A4%EA%B8%88-%EC%82%AC%EC%97%85%EC%86%8C%EB%93%9D",
-        "https://onsum.kr/entry/2026-%EA%B7%BC%EB%A1%9C%EC%9E%A5%EB%A0%A4%EA%B8%88-%EB%AC%B4%EC%9D%B8%EC%A0%90%ED%8F%AC%C2%B7%EB%AC%B4%EC%9D%B8%EC%B9%B4%ED%8E%98-%EC%82%AC%EC%9E%A5%EB%8B%98%EB%8F%84-%EB%B0%9B%EC%9D%84-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C-%ED%82%A4%EC%98%A4%EC%8A%A4%ED%81%AC-%EB%A7%A4%EC%B6%9C%C2%B7%EA%B3%B5%EB%8F%99%EC%82%AC%EC%97%85%C2%B7%EC%82%AC%EC%97%85%EC%86%8C%EB%93%9D-%EA%B8%B0%EC%A4%80-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://livingtt.tistory.com/60"
-      ],
-      "guide": {
-        "direction": "검색자는 3.3% 원천징수 소득도 사업소득으로 잡혀 근로장려금 신청 시기(반기냐 정기냐)가 달라지는지, 최소 얼마부터 신고되는지 헷갈려 막힌다. 고수 블로그의 직종별 시리즈 제목들은 직종만 나열하고 사업소득자는 반기신청이 안 되고 5월 정기신청만 가능하다는 기준은 짚지 않았다. 사업소득 정의·최소신고 기준·신청 시기를 표로 정리해 끝낼 수 있다.",
-        "searchTargets": [
-          "근로장려금 사업소득 기준",
-          "근로장려금 사업소득 뜻",
-          "근로장려금 사업소득자 신청",
-          "근로장려금 사업소득 최소신고"
-        ],
-        "mustInclude": [
-          "3.3% 원천징수 사업소득의 정의(방문판매원·보험설계사 등)",
-          "사업소득자는 반기신청 불가, 5월 정기신청만 가능하다는 기준",
-          "전문직(변호사·회계사 등) 사업자 지급 제외 기준",
-          "사업소득 최소 신고 금액(확인 필요: 국세청 안내)",
-          "사업소득이 있어도 등록 사업자면 신청 가능하다는 조건"
-        ],
-        "mustAvoid": [
-          "사업소득자를 근로소득자처럼 반기신청 가능한 것으로 안내하지 않기",
-          "전문직 제외 기준을 모든 사업소득자에게 적용되는 것처럼 쓰지 않기"
-        ],
-        "checkBefore": [
-          "국세청 홈택스·근로장려금 안내에서 사업소득 최소신고 기준액 확인",
-          "국세청 공식 자료에서 지급 제외 전문직 업종 목록 확인"
-        ],
-        "solves": [
-          "사업소득이 있어도 근로장려금 받을 수 있나요 → 등록 사업자·전문직 제외 기준으로 판단",
-          "사업소득자는 반기신청 안 되나요 → 반기신청 불가, 5월 정기신청만 가능함을 안내",
-          "사업소득 최소 얼마부터 신고해야 하나요 → 최소신고 기준액 정리(확인 필요)"
-        ],
-        "actionTitles": [
-          "근로장려금 사업소득 최소신고 기준과 신청 시기 확인",
-          "근로장려금 사업소득자 신청, 반기냐 정기냐 정리"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "근로장려금 사업소득",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6080401&docId=485873639&answerNo=1&qb=6re866Gc7J6l66Ck6riI7IKs7JeF7IaM65Od",
-          "views": 1569,
-          "answers": 8,
-          "askedAt": "2025.06.05"
-        },
-        {
-          "title": "근로장려금 사업소득",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40611&docId=479035900&answerNo=1&qb=6re866Gc7J6l66Ck6riI7IKs7JeF7IaM65Od",
-          "views": 586,
-          "answers": 3,
-          "askedAt": "2024.12.12"
-        },
-        {
-          "title": "근로장려금 사업소득",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60804&docId=495018360&answerNo=9&qb=6re866Gc7J6l66Ck6riI7IKs7JeF7IaM65Od",
-          "views": 285,
-          "answers": 14,
-          "askedAt": "2026.09.04"
-        }
-      ]
-    },
-    {
       "id": "bb5ca8e04ab60ddc",
       "urls": [
         "https://onsum.kr/entry/%EC%9C%88%EB%8F%84%EC%9A%B011-%ED%8C%8C%EC%9D%BC-%ED%83%90%EC%83%89%EA%B8%B0-%ED%8C%8C%EC%9D%BC-%EB%AF%B8%EB%A6%AC-%EB%B3%B4%EA%B8%B0-%EC%84%A4%EC%A0%95-%EB%B0%A9%EB%B2%95%EF%BD%9CPDF%C2%B7%EC%82%AC%EC%A7%84%C2%B7%EB%AC%B8%EC%84%9C-%EB%AF%B8%EB%A6%AC-%EB%B3%B4%EA%B8%B0%EA%B0%80-%EC%95%88-%EB%90%A0-%EB%95%8C-%ED%95%B4%EA%B2%B0%ED%95%98%EA%B8%B0",
@@ -7114,75 +6592,6 @@
       "at": "2026-10-20T10:55:31.225Z",
       "rules": "2026-10-20-solve",
       "provider": "claude"
-    },
-    {
-      "id": "269e5f80d12ede17",
-      "urls": [
-        "https://usefulinfo.tistory.com/255",
-        "https://usefulinfo.tistory.com/251",
-        "https://yc93423.tistory.com/entry/%EC%9C%A1%EC%95%84%ED%9C%B4%EC%A7%81-%EC%A1%B0%EA%B1%B4-%EC%9D%B4%EC%A7%81-%ED%9B%84-%EA%B7%BC%EC%86%8D-6%EA%B0%9C%EC%9B%94%EA%B3%BC-%EA%B8%89%EC%97%AC-180%EC%9D%BC-%EC%B0%A8%EC%9D%B4",
-        "https://bebetterlifeforyou.com/141"
-      ],
-      "guide": {
-        "direction": "검색자는 '신청 기한이 복직일인지 종료일인지', '휴직 조건(근속 6개월)과 급여 조건(180일)이 왜 다른지'에서 막힌다. 고수 글들은 기간·조건을 나열만 하고 단기알바·두 번째 신청 소급분 같은 실제 지식인 사례는 다루지 않았다. 조건 비교표와 신청 시점 계산 예시, 소급분 정산 구조까지 넣으면 이 글에서 끝난다.",
-        "searchTargets": [
-          "육아휴직급여신청",
-          "육아휴직 급여 6+6",
-          "육아휴직 급여 계산",
-          "육아휴직 급여 기간"
-        ],
-        "mustInclude": [
-          "신청기한은 복직일이 아니라 휴직 끝난 날부터 12개월 이내라는 기준",
-          "휴직 조건(근속 6개월)과 급여 조건(180일)을 분리한 비교표",
-          "6+6 특례의 부모 동시사용 상한 구조(확인 필요: 고용24 공지)",
-          "두 번째 신청 시 소급분 정산 방식(아빠·엄마 겹치지 않는 기간 기준)",
-          "육아휴직 중 단기알바·일용직 시 월 소득 150만원 미만 기준 처리"
-        ],
-        "mustAvoid": [
-          "공무원·교사 특례를 일반 근로자 조건과 같은 것처럼 섞어 쓰기",
-          "동료 업무분담지원금을 육아휴직급여의 일부인 것처럼 혼동시키기"
-        ],
-        "checkBefore": [
-          "고용24(워크넷) 공식 공지에서 6+6 특례 상한액과 신청 서류 확인",
-          "공무원연금공단·교육청 공지에서 공무원·교사 특례 조건 확인"
-        ],
-        "solves": [
-          "신청기한을 복직일로 착각 → 휴직 끝난 날부터 12개월이라는 기준을 명시",
-          "휴직 조건과 급여 조건을 혼동 → 근속 6개월·지급 180일을 표로 분리",
-          "두 번째 신청 소급분 계산이 헷갈림 → 겹치지 않는 기간 기준 정산 구조 설명"
-        ],
-        "actionTitles": [
-          "육아휴직급여신청 기한, 끝난 날부터 12개월 계산법",
-          "육아휴직 급여 6+6 계산, 상한 구조부터 신청까지",
-          "육아휴직 급여 기간 180일, 휴직 조건과 비교표"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "육아휴직 급여 중 일용직 단기알바",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6080401&docId=494980980&answerNo=7&qb=7Jyh7JWE7Zy07KeB6riJ7Jes",
-          "views": 549,
-          "answers": 9,
-          "askedAt": "2026.09.24"
-        },
-        {
-          "title": "아빠 육아휴직 급여, 동료 지원금 얼마나 받....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=601&docId=493145252&answerNo=7&qb=7Jyh7JWE7Zy07KeB6riJ7Jes",
-          "views": 234,
-          "answers": 9,
-          "askedAt": "2026.10.02"
-        },
-        {
-          "title": "육아휴직급여 6+6 특례 질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6080402&docId=495438829&answerNo=1&qb=7Jyh7JWE7Zy07KeB6riJ7Jes",
-          "views": 87,
-          "answers": 5,
-          "askedAt": "2026.10.06"
-        }
-      ]
     },
     {
       "id": "6b12228c20a529fd",
@@ -11128,69 +10537,6 @@
           "views": 270,
           "answers": 1,
           "askedAt": "2025.09.01"
-        }
-      ]
-    },
-    {
-      "id": "f1e8af020e84afe6",
-      "urls": [
-        "https://dailylucky1208.com/417",
-        "https://dailyloglab-369.com/entry/2026-%EC%A4%91%EC%A6%9D%EC%9E%A5%EC%95%A0%EC%9D%B8-%EC%9E%A5%EC%95%A0%EC%9D%B8%EC%97%B0%EA%B8%88-%EC%8B%A0%EC%B2%AD-%EC%9E%90%EA%B2%A9-%EC%9B%94-%EC%B5%9C%EB%8C%80-424%EB%A7%8C-%EC%9B%90-%EB%8B%A8%EA%B0%80-%EB%B0%8F-%EC%9E%A5%EC%95%A0%EC%88%98%EB%8B%B9-%EC%B0%A8%EC%9D%B4%EC%A0%90-%EC%B4%9D%EC%A0%95%EB%A6%AC"
-      ],
-      "guide": {
-        "direction": "청각장애 3급, 지적장애 중증판정 등 구 등급을 가진 사람들은 자신이 장애인연금(중증) 대상인지 장애수당(경증) 대상인지 몰라서 같은 질문을 반복한다. 고수 글은 자격 기준을 다뤘지만 구 장애등급(1~6급)과 현재의 '심한장애/심하지 않은 장애' 기준을 1:1로 매칭해 보여주지 않는다. 이 글은 등급 매칭표와 소득기준, 중복장애 판정 기준을 함께 정리해 독자가 자신이 어디 해당하는지 바로 확인하게 한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "구 장애등급(1~6급)과 신 기준(심한장애/심하지 않은 장애) 매칭표",
-          "장애인연금=18세 이상 중증(심한)장애인+소득기준, 장애수당=경증(심하지 않은)장애인+기초생활수급자/차상위",
-          "월 최대 42.4만 원 단가 (확인 필요: 보건복지부/복지로 공식 공지)",
-          "중복장애(3급 포함) 판정 시 어느 쪽에 해당하는지 기준",
-          "신청 장소(읍면동 주민센터) 및 신청 절차"
-        ],
-        "mustAvoid": [
-          "질문자 개별 사례(96년생 청각장애, 할머니 지체장애 등)를 일반 자격 기준처럼 단정하지 않기",
-          "국민연금 장애연금·기초연금과 장애인연금을 혼동하지 않기",
-          "장애수당 인상 여부를 공식 확인 없이 단정하지 않기"
-        ],
-        "checkBefore": [
-          "2026년 장애인연금 지급액(42.4만원) 및 소득기준 - 보건복지부/복지로 공식 공지 확인",
-          "구 장애등급과 심한/심하지 않은 장애 매칭 기준 - 복지로 공식 자료 확인"
-        ],
-        "solves": [
-          "구 등급(3급 등)이 연금인지 수당인지 모르겠다 → 신구 등급 매칭표로 바로 확인",
-          "중복장애인은 어디에 해당하는지 → 중복장애 판정 기준 정리",
-          "장애수당이 매년 오르는지 → 인상 여부와 확인 방법 안내"
-        ],
-        "actionTitles": [
-          "장애인연금 장애수당 차이, 내 등급 바로 확인법",
-          "중증장애인 장애인연금 신청 전 자격기준 체크",
-          "장애인연금 수당 중복신청 전 자격 먼저 확인하기"
-        ]
-      },
-      "at": "2026-10-20T12:32:18.112Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "저 청각장애 3급 중증인데 장애인 수당?연금? ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100102&docId=388371219&answerNo=1&qb=7KSR7Kad7J6l7JWg7J24IOyepeyVoOyduOyXsOq4iCDri6jqsIAg7J6l7JWg7IiY64u5",
-          "views": 2297,
-          "answers": 1,
-          "askedAt": "2021.04.28"
-        },
-        {
-          "title": "중증심한장애 연금? 수당?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100102&docId=386037431&answerNo=1&qb=7KSR7Kad7J6l7JWg7J24IOyepeyVoOyduOyXsOq4iCDri6jqsIAg7J6l7JWg7IiY64u5",
-          "views": 1685,
-          "answers": 2,
-          "askedAt": "2021.04.01"
-        },
-        {
-          "title": "할머니가 중증장애인인데 장애수당 얼마나나....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100102&docId=241657436&answerNo=1&qb=7KSR7Kad7J6l7JWg7J24IOyepeyVoOyduOyXsOq4iCDri6jqsIAg7J6l7JWg7IiY64u5",
-          "views": 1351,
-          "answers": 1,
-          "askedAt": "2015.12.29"
         }
       ]
     },
