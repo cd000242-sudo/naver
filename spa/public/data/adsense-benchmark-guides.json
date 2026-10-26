@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-25T23:55:24.922Z",
+  "generatedAt": "2026-10-26T00:29:18.041Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -394,34 +394,6 @@
       "provider": "claude"
     },
     {
-      "id": "c5232fda089aa6b8",
-      "urls": [
-        "https://zsewqzsewq.tistory.com/335",
-        "https://sooahealth.com/entry/2026-%EA%B5%AD%EB%AF%BC%EC%97%B0%EA%B8%88-%EC%A1%B0%EA%B8%B0%EC%88%98%EB%A0%B9%EC%A1%B0%EA%B1%B4-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://salespeople.tistory.com/entry/%EC%B5%9C%EC%8B%A0-%EA%B5%AD%EB%AF%BC%EC%97%B0%EA%B8%88-%EC%A1%B0%EA%B8%B0%EC%88%98%EB%A0%B9%EC%A1%B0%EA%B1%B4"
-      ],
-      "guide": {
-        "direction": "검색자는 '받을 나이가 안 됐는데 목돈으로 받을 수 있는지'를 묻는데, 실제로는 반환일시금(가입기간 10년 미만 등)과 조기노령연금(나이를 앞당기는 것)이 전혀 다른 제도라 혼란스러워한다. 고수 글 다수가 조기수령조건으로 틀어 쓴 탓에 두 제도의 구분은 비어있다. 조건·차이표를 명확히 넣으면 재검색 없이 끝까지 읽힌다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "반환일시금 수령조건: 가입기간 10년 미만+연령 도달, 사망, 국외이주 등 (확인 필요: 국민연금공단)",
-          "반환일시금과 조기노령연금(조기수령)의 차이 비교표",
-          "반환일시금 신청 방법(공단 지사·EDI)과 이자 지급 여부",
-          "2026년 기준 출생연도별 수급 개시 연령 (확인 필요: 국민연금공단)"
-        ],
-        "mustAvoid": [
-          "반환일시금과 조기노령연금을 같은 제도처럼 혼용"
-        ],
-        "checkBefore": [
-          "반환일시금 수령조건(가입기간·연령·예외사유) 최신 기준 - 국민연금공단",
-          "조기노령연금과의 차이·감액률 - 국민연금공단 공식 안내"
-        ]
-      },
-      "at": "2026-10-19T21:06:48.786Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
       "id": "7585020cdbc336ec",
       "urls": [
         "https://support.jcmoney.co.kr/%ed%95%a0%eb%a6%ac%ec%8a%a4-%ea%b0%9c%ec%9d%b8%ec%a0%95%eb%b3%b4-%ec%9c%a0%ec%b6%9c-276%eb%a7%8c%ea%b1%b4-%ed%95%b4%ed%82%b9-%eb%b0%9c%ec%83%9d-%eb%a9%a4%eb%b2%84%ec%8b%ad-%eb%8c%80%ec%83%81/",
@@ -628,42 +600,6 @@
         "checkBefore": [
           "올해 연말정산 기준 의료비 공제율·한도·문턱(총급여 3%)이 전년과 동일한지 국세청 홈택스에서 확인",
           "실손보험금 제외, 산정특례자 한도 예외 등 세부 조건의 최신 여부를 국세청 공지로 재확인"
-        ]
-      },
-      "at": "2026-10-19T21:06:48.786Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "917e6e887c119d15",
-      "urls": [
-        "https://daonstory.com/entry/AI-%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%84%BC%ED%84%B0-%ED%88%AC%EC%9E%90-%EB%B6%80%EC%B1%84-%EC%9C%84%EA%B8%B0-%EC%88%98%EC%9D%B5%EC%84%B1-%EC%BD%94%EC%96%B4%EC%9C%84%EB%B8%8C",
-        "https://decalfactory.co.kr/1041",
-        "https://daonstory.com/entry/%EC%BD%94%EC%96%B4%EC%9C%84%EB%B8%8C-%EB%B6%80%EC%B1%84-%EC%9C%84%EA%B8%B0-AI-%EC%9D%B8%ED%94%84%EB%9D%BC-%EA%B3%A0%EA%B8%88%EB%A6%AC-%ED%88%AC%EC%9E%90-%EC%9C%84%ED%97%98"
-      ],
-      "guide": {
-        "direction": "'코어위브 부채위기'로 들어오는 사람과 '울산/원주/포항 ai 데이터센터'로 들어오는 사람은 서로 다른 검색이지만, 국내 지역별 AI 데이터센터 유치 현황은 아직 어느 고수 글도 다루지 않은 빈 자리다. 코어위브 재무위험을 사례로 삼아 '고금리 환경에서 국내 지역 데이터센터 투자도 같은 리스크를 안고 있는지'를 묶어 설명하면 차별화된다. 지역별 사업자·투자규모·진행단계를 표로 정리해두면 지역명이 바뀔 때마다 재검색해 돌아온다.",
-        "searchTargets": [
-          "AI 데이터센터 투자",
-          "울산 ai 데이터센터",
-          "ai 데이터센터 냉각 관련주",
-          "포항 ai 데이터센터"
-        ],
-        "mustInclude": [
-          "코어위브 부채 규모·만기 구조 (확인 필요: 공시자료·증권사 리포트)",
-          "울산·원주·포항·당진·충주·해남·동해시 등 지역별 AI 데이터센터 추진 현황표 (확인 필요: 각 지자체·사업자 보도자료)",
-          "AI 데이터센터 냉각 관련주 리스트와 사업 연관성 (확인 필요: 증권사 리포트)",
-          "고금리 환경에서 AI 인프라 투자 리스크 요인 정리"
-        ],
-        "mustAvoid": [
-          "코어위브 개별 위기를 AI 산업 전체 붕괴처럼 과장하는 것",
-          "지역별 데이터센터 사업을 확정 완료된 것처럼 단정하는 것(실제 인허가 단계는 지역마다 다름)",
-          "냉각 관련주를 투자 추천처럼 서술하는 것"
-        ],
-        "checkBefore": [
-          "코어위브 최신 부채 규모·신용등급 - 공시자료·증권사 리포트",
-          "각 지역(울산·원주·포항·당진·충주·해남·동해) 데이터센터 사업 진행 단계 - 해당 지자체·사업자 공식 발표",
-          "냉각 관련주 리스트 정확성 - 증권사 리포트 원문"
         ]
       },
       "at": "2026-10-19T21:06:48.786Z",
@@ -2354,77 +2290,6 @@
           "views": 349,
           "answers": 12,
           "askedAt": "2026.06.24"
-        }
-      ]
-    },
-    {
-      "id": "45a0956b436bd872",
-      "urls": [
-        "https://kinghell.tistory.com/entry/%EC%A3%BC%EB%8B%B4%EB%8C%80-%EA%B3%A0%EC%A0%95%EA%B8%88%EB%A6%AC-%EA%B0%88%EC%95%84%ED%83%80%EA%B8%B0-%EC%86%90%EC%9D%B5%EB%B6%84%EA%B8%B0%EC%A0%90-%EA%B3%84%EC%82%B0%EA%B3%BC-%EC%88%98%EC%88%98%EB%A3%8C-0%EC%9B%90-%ED%99%95%EC%A0%95-%EC%B2%B4%ED%81%AC%EB%A6%AC%EC%8A%A4%ED%8A%B8",
-        "https://ksdbigrich.tistory.com/149",
-        "https://codingzero.tistory.com/entry/mortgage-refinancing-fixed-rate-october-2026",
-        "https://servicenine.linkistat.com/110",
-        "https://jobmining.tistory.com/140"
-      ],
-      "guide": {
-        "direction": "지식인엔 \"혼합형 5년고정 이후 6개월변동이 기준금리 영향을 받는지\", \"가산금리가 왜 오르는지\", \"3년 지나면 수수료 면제가 맞는지\"를 묻는 사람이 많다. 고수 글은 수수료 0원 시점과 코픽스 상승은 짚었지만 고정금리 기간(5년·20년·30년)별 손익분기점 계산 차이는 비워뒀다. 기간별 비교표와 수수료 면제 조건, 손익분기 계산식을 담아 갈아타기 여부를 숫자로 끝내준다.",
-        "searchTargets": [
-          "주담대 고정금리 갈아타기",
-          "주담대 고정금리 5년 후",
-          "주담대 고정금리 비교",
-          "주담대 고정금리 변동금리"
-        ],
-        "mustInclude": [
-          "중도상환수수료가 대출 실행 후 3년 지나면 면제되는 조건",
-          "고정금리 기간별(5년·20년·30년) 손익분기점 계산 방식 차이",
-          "코픽스 3.43% 상승 수치와 고정금리 전환 유불리 판단 근거 (확인 필요: 은행연합회 공시)",
-          "혼합형(5년고정+6개월변동) 구조와 전환 시점의 기준금리 반영 여부",
-          "가산금리 상승이 갈아타기 손익분기 계산에 미치는 영향"
-        ],
-        "mustAvoid": [
-          "특정 은행 상품을 단정적으로 추천하는 서술",
-          "개인 신용·소득별 우대금리 차이를 일반 수치처럼 단정",
-          "향후 금리 방향을 확정된 전망처럼 예측"
-        ],
-        "checkBefore": [
-          "중도상환수수료 3년 면제가 모든 주담대에 법적으로 적용되는지 (금융감독원 공지/대출 약관)",
-          "코픽스 3.43% 수치의 발표 시점과 출처 (은행연합회 공시)"
-        ],
-        "solves": [
-          "고정금리 5년 후 뭐가 바뀌는지 모름 → 혼합형 구조와 전환 시점 설명으로 해결",
-          "갈아타기가 손해인지 이득인지 계산 못함 → 손익분기점 계산법과 수수료 0원 조건표로 해결",
-          "20년·30년 고정과 5년 고정의 차이 혼란 → 기간별 비교표로 해결"
-        ],
-        "actionTitles": [
-          "주담대 고정금리 갈아타기, 수수료 0원 손익분기점 계산법",
-          "주담대 고정금리 5년 후 변동 전환, 갈아타기 전 비교하기",
-          "주담대 고정금리 20년 30년 비교, 갈아타기 조건 확인"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "현재 아파트주택담보대출 고정금리로 가장저....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010501&docId=454533937&answerNo=4&qb=7KO864u064yA6rOg7KCV6riI66as",
-          "views": 5450,
-          "answers": 5,
-          "askedAt": "2025.07.12"
-        },
-        {
-          "title": "주담대혼합형금리5년고정이후6개월변동 기준....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010501&docId=484013342&answerNo=8&qb=7KO864u064yA6rOg7KCV6riI66as",
-          "views": 2113,
-          "answers": 8,
-          "askedAt": "2026.10.04"
-        },
-        {
-          "title": "주택담보대출 고정금리인데 가산금리가 오르....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010501&docId=491304626&answerNo=6&qb=7KO864u064yA6rOg7KCV6riI66as",
-          "views": 633,
-          "answers": 7,
-          "askedAt": "2026.08.20"
         }
       ]
     },
@@ -5202,73 +5067,6 @@
       ]
     },
     {
-      "id": "6ebfe6100e46c98f",
-      "urls": [
-        "https://happycoiner.tistory.com/entry/%EA%B7%BC%EB%A1%9C%EC%9E%A5%EB%A0%A4%EA%B8%88-%EA%B8%B0%ED%95%9C-%ED%9B%84-%EC%8B%A0%EC%B2%AD-12%EC%9B%94-1%EC%9D%BC-%EB%A7%88%EA%B0%90-%EB%86%93%EC%B3%A4%EB%8B%A4%EB%A9%B4-95-%EB%B0%9B%EB%8A%94-%EB%B0%A9%EB%B2%95",
-        "https://msmk.tistory.com/entry/2026-%EA%B7%BC%EB%A1%9C%C2%B7%EC%9E%90%EB%85%80%EC%9E%A5%EB%A0%A4%EA%B8%88-%EA%B8%B0%ED%95%9C-%ED%9B%84-%EC%8B%A0%EC%B2%AD%EF%BD%9C12%EC%9B%94-1%EC%9D%BC%EA%B9%8C%EC%A7%80%C2%B75-%EA%B0%90%EC%95%A1-%EC%88%9C%EC%84%9C",
-        "https://thinkingatelier.tistory.com/entry/eitc-ctc-payment-date-check-2026"
-      ],
-      "guide": {
-        "direction": "검색자는 정기 신청 기간을 놓친 뒤 '기한 후에도 받을 수 있는지, 얼마나 깎이는지'부터 막혀 있고, 반기신청과 기한후신청을 같은 것으로 혼동한다. 고수 글들은 '95% 받는 방법'을 제목에만 쓰고 5% 감액 조건과 반기신청 대상(근로소득자만 가능, 자녀장려금 제외)을 명확히 구분하지 않는다. 이 글은 12월 1일 마감일, 5% 감액 후 95% 지급 원칙, 반기신청 vs 기한후신청 대상 구분표로 끝낸다.",
-        "searchTargets": [
-          "근로자녀장려금 신청기간",
-          "근로자녀장려금 신청",
-          "근로자녀장려금 대상",
-          "근로자녀장려금 조회"
-        ],
-        "mustInclude": [
-          "기한 후 신청 마감일 12월 1일",
-          "기한 후 신청 시 산정액에서 5% 감액되어 95%만 지급되는 원칙",
-          "반기신청은 근로소득자만 가능하고 자녀장려금은 반기신청 대상 아님",
-          "맞벌이 부부합산 소득요건 4,400만 원 미만 (확인 필요: 국세청 2026년 기준 공지)"
-        ],
-        "mustAvoid": [
-          "반기신청과 기한후신청을 같은 절차로 섞어 설명",
-          "근로장려금과 자녀장려금 지급 대상·신청 방식을 구분 없이 혼용"
-        ],
-        "checkBefore": [
-          "2026년 기한 후 신청 정확한 마감일과 감액률 — 국세청 홈택스·보도자료 확인",
-          "맞벌이·단독가구 소득·재산 기준 최신 수치 — 국세청 공지 확인"
-        ],
-        "solves": [
-          "기한 후 신청도 가능한지, 얼마나 깎이는지 모름 → 12월 1일 마감일과 5% 감액 원칙 정리",
-          "반기신청과 기한후신청을 헷갈림 → 대상·절차 구분표로 정리",
-          "내 소득·재산이 대상인지 모름 → 조건표로 확인"
-        ],
-        "actionTitles": [
-          "근로장려금 기한 후 신청 12월 1일 마감, 95% 받는 법",
-          "근로자녀장려금 신청기간 놓쳤을 때 5% 감액 확인하는 법",
-          "근로장려금 대상·조회 방법, 기한 후 신청 순서 정리"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "근로자녀장려금 지급일 조회 방법과 예상 지....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6080401&docId=489538014&answerNo=11&qb=6re866GcIOyekOuFgOyepeugpOq4iCDrsJjquLAg7IOB67CY6riw67aEIOyngOq4iQ==",
-          "views": 1037,
-          "answers": 13,
-          "askedAt": "2026.09.04"
-        },
-        {
-          "title": "근로·자녀장려금 정기·추가 신청 방법과 필....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60804&docId=486754043&answerNo=15&qb=6re866GcIOyekOuFgOyepeugpOq4iCDrsJjquLAg7IOB67CY6riw67aEIOyngOq4iQ==",
-          "views": 905,
-          "answers": 16,
-          "askedAt": "2026.09.26"
-        },
-        {
-          "title": "근로·자녀장려금 지급 대상, 나도 포함될까....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=709&docId=494085763&answerNo=10&qb=6re866GcIOyekOuFgOyepeugpOq4iCDrsJjquLAg7IOB67CY6riw67aEIOyngOq4iQ==",
-          "views": 753,
-          "answers": 11,
-          "askedAt": "2026.10.11"
-        }
-      ]
-    },
-    {
       "id": "fc5c58ff0cf7d00e",
       "urls": [
         "https://muramara.com/entry/%EB%B6%80%EA%B0%80%EC%84%B8-%EC%98%88%EC%A0%95%EA%B3%A0%EC%A7%80-%EC%A4%84%EC%9D%B4%EB%8A%94-%EB%B0%A9%EB%B2%95-%EB%A7%A4%EC%B6%9C-%EA%B0%90%EC%86%8C-%EC%8B%9C-%EC%98%88%EC%A0%95%EC%8B%A0%EA%B3%A0-2026",
@@ -5763,44 +5561,6 @@
       ]
     },
     {
-      "id": "be9d8abf34074623",
-      "urls": [
-        "https://bangulnote.com/entry/coreweave-investors/",
-        "https://decalfactory.co.kr/1041"
-      ],
-      "guide": {
-        "direction": "검색자는 '코어위브 사태'가 구체적으로 무슨 사건이고 엔비디아 지분과 어떤 관계인지 궁금해 들어온다. 고수 블로그 제목은 '이번 주 무슨 일'로만 요약해 사건 순서와 주가 반응을 명확히 안 보여준다. 이 글은 날짜별 타임라인표와 엔비디아-코어위브 관계도로 한 번에 정리해 끝낸다.",
-        "searchTargets": [
-          "코어위브 사태"
-        ],
-        "mustInclude": [
-          "사건 발생 날짜별 타임라인(확인 필요: 코어위브 공식 공지·원문 기사)",
-          "엔비디아 지분율 및 투자 시점(확인 필요: 엔비디아 공식 발표)",
-          "사태 이후 코어위브 주가 변동률(확인 필요: 증권사 시세)",
-          "코어위브 사업모델(AI 클라우드·GPU 임대) 한 줄 요약"
-        ],
-        "mustAvoid": [
-          "코어위브 경영진 등 특정 인물 사생활 추측성 서술",
-          "오픈AI·마이크로소프트 등 다른 AI기업 이슈와 혼동해 서술"
-        ],
-        "checkBefore": [
-          "코어위브 공식 IR·보도자료에서 사태 경위 확인",
-          "엔비디아 공식 발표에서 지분율·투자 시점 확인"
-        ],
-        "solves": [
-          "'코어위브 사태'가 뭔지 모름 → 날짜별 타임라인표로 한눈에 정리",
-          "엔비디아와 무슨 관계인지 헷갈림 → 지분·투자 관계도로 해결"
-        ],
-        "actionTitles": [
-          "코어위브 사태 정리, 날짜별 타임라인으로 한눈에 확인하기",
-          "코어위브 사태와 엔비디아 지분관계, 표로 정리해 확인하기"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
-    },
-    {
       "id": "d752f0f2215f7f5c",
       "urls": [
         "https://johome.tistory.com/846",
@@ -6163,73 +5923,6 @@
           "views": 911,
           "answers": 10,
           "askedAt": "2026.09.22"
-        }
-      ]
-    },
-    {
-      "id": "5e52e81fed99b62b",
-      "urls": [
-        "https://infobox2692.tistory.com/entry/ISA-%EC%A4%91%EB%8F%84%EC%9D%B8%EC%B6%9C%ED%95%98%EB%A9%B4-%EC%84%B8%EA%B8%88-%EB%82%BC%EA%B9%8C-%EC%9B%90%EA%B8%88-%EC%B6%9C%EA%B8%88%C2%B7%EC%9E%AC%EC%9E%85%EA%B8%88%C2%B73%EB%85%84-%EC%A0%84-%EC%9D%B8%EC%B6%9C-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://windjiny.tistory.com/entry/ISA%EA%B3%84%EC%A2%8C-%EC%A4%91%EB%8F%84%EC%9D%B8%EC%B6%9C-%EC%A0%9C%EB%8C%80%EB%A1%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0"
-      ],
-      "guide": {
-        "direction": "검색자는 ISA 중도인출 시 세금 혜택이 사라지는지, 계좌가 해지되는지, 인출한 만큼 재입금이나 납입한도 복원이 되는지를 혼동한다. 고수 글은 중도인출 총정리를 다뤘지만 의무가입기간 전후 세금 처리와 증권사별 신청 절차 차이는 표로 정리되지 않았다. 원금 범위·세금혜택 유지·한도 복원 여부를 조건표로 정리해 사유별로 바로 판단하게 한다.",
-        "searchTargets": [
-          "isa 중도인출 세금",
-          "isa 중도인출 한도",
-          "isa 중도인출 사유",
-          "isa 중도인출 방법"
-        ],
-        "mustInclude": [
-          "의무가입기간(3년) 전/후 중도인출 세금 처리 비교표",
-          "원금 범위 내 인출 시 세금혜택 유지 여부 명시",
-          "인출 후 재입금 가능 여부와 납입한도 복원 안 됨을 구분해서 설명",
-          "중도인출과 계좌 해지의 차이 명확히 구분",
-          "삼성증권 등 증권사별 중도인출 신청 절차 차이(확인 필요: 각 증권사 공식 홈페이지)"
-        ],
-        "mustAvoid": [
-          "세금 감면 혜택 유지와 세금 추징을 혼동해서 서술",
-          "의무가입기간 전 해지와 중도인출을 같은 것처럼 섞어 쓰기"
-        ],
-        "checkBefore": [
-          "기획재정부·국세청의 ISA 중도인출 관련 공식 세법 규정 확인",
-          "삼성증권 등 증권사 공식 홈페이지에서 중도인출 신청 절차 확인"
-        ],
-        "solves": [
-          "중도인출하면 세금을 더 내는지 몰라 불안함 → 원금 범위 내 인출 시 혜택 유지됨을 조건표로 정리",
-          "인출하면 계좌가 해지되는지 궁금함 → 해지와 중도인출의 차이를 명확히 구분",
-          "인출 후 다시 넣을 수 있는지(재입금) 몰라 망설임 → 재입금 가능 여부와 한도 복원 여부 정리"
-        ],
-        "actionTitles": [
-          "ISA 중도인출 세금 낼까? 원금·한도·재입금 조건 확인",
-          "ISA 중도인출 한도와 재입금 가능 여부 꼼꼼히 계산하기",
-          "ISA 중도인출 사유별 신청 방법과 세금 체크리스트"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "Isa 중도인출 문의",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=492952299&answerNo=9&qb=aXNhIOykkeuPhOyduOy2nCDshLjquIgg64K86rmMIOybkOq4iA==",
-          "views": 2123,
-          "answers": 11,
-          "askedAt": "2026.04.14"
-        },
-        {
-          "title": "ISA 계좌에서 미국 ETF 매수 후 중도 인출시 세....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=490835476&answerNo=3&qb=aXNhIOykkeuPhOyduOy2nCDshLjquIgg64K86rmMIOybkOq4iA==",
-          "views": 1690,
-          "answers": 8,
-          "askedAt": "2025.12.17"
-        },
-        {
-          "title": "신한은행 신탁형 isa 계좌 중도인출 패널티",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10010401&docId=490367351&answerNo=3&qb=aXNhIOykkeuPhOyduOy2nCDshLjquIgg64K86rmMIOybkOq4iA==",
-          "views": 749,
-          "answers": 3,
-          "askedAt": "2025.12.27"
         }
       ]
     },
