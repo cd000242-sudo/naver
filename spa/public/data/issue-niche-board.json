@@ -1,20 +1,18 @@
 {
-  "publishedAt": "2026-10-26T03:24:19.912Z",
+  "publishedAt": "2026-10-26T09:22:17.513Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 217,
+    "candidates": 231,
     "niche": 0,
-    "preemption": 5,
+    "preemption": 11,
     "pending": 0
   },
   "freeSample": {
     "day": "2026-10-26",
     "keywords": [
-      "김정은 가망",
-      "오세훈 임기",
-      "사건반장 출연진"
+      "김정은 가망"
     ]
   },
   "rows": [
@@ -154,314 +152,134 @@
       "exclusionReason": null,
       "kinMode": "date-views-v2",
       "carried": true
-    },
-    {
-      "keyword": "오세훈 임기",
-      "issue": "오세훈",
-      "topic": "오세훈",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 0,
-        "sampledTitles": 10,
-        "topTitles": [
-          "오세훈 시장 2심 판결-서울 재건축,재개발 주택공급 영향은?",
-          "오세훈 시장직 잃으면 서울시장 다시 뽑나? ‘벌금 100만원’보다 중요한 확정판결",
-          "오세훈 2심 무죄, 2030 대권 청신호? 국민의힘 당권 경쟁 판도 바뀌나",
-          "오세훈 당선무효라면 벌어질 일…서울시장 보궐선거부터 차기 대권 구도까지",
-          "\"직위 상실 위기서 극적으로 살아났다\" 오세훈 2심 무죄 선고에 정치권 난리 난 이유",
-          "\"내년 서울시장 재선거 열리나?\" 10월 23일 오세훈 2심 선고 결과에 정계 관심 몰린다",
-          "오세훈 2심 징역 1년 6개월 구형, 이유는?",
-          "[민선 9기 광역단체장 프로필] 오세훈 서울시장은 누구?…사상 첫 5선 서울시장, 민선 9기 핵심정책은?",
-          "오세훈 무죄 확정, 유죄였으면 시장직까지 날아갈 뻔했던 사정",
-          "‘시장직 상실 위기’ 벗어난 오세훈, 2심 무죄 판결에 반응은?…“결백 믿어준 서울시민께 감사”"
-        ],
-        "measuredAt": "2026-10-24T09:17:13.916Z"
-      },
-      "documentCount": 18381,
-      "documentCountMeasured": true,
-      "searchVolume": 650,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "rising",
-      "demandRatio": 2.242237548246957,
-      "issueStatus": "rising",
-      "isHot": true,
-      "frontalDocCount": 2,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 650",
-        "문서수 18,381",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음",
-        "수요 상승중"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 650 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 2.2배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 2건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "",
-          "frame": "generic",
-          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-        },
-        "home": {
-          "text": "",
-          "frame": "generic",
-          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": {
-        "series": [
-          2,
-          5,
-          2,
-          2,
-          2,
-          13,
-          4,
-          3,
-          3,
-          2,
-          5,
-          0,
-          2,
-          2,
-          4,
-          0,
-          0,
-          5,
-          6,
-          4,
-          2,
-          2,
-          2,
-          5,
-          3,
-          4,
-          100,
-          29,
-          13
-        ],
-        "label": "🚀 떡상",
-        "recommendation": "지금 당장 작성! 3일 내 급증 포착 → 선점 시 상위 노출 확률 매우 높음",
-        "measuredAt": "2026-10-26T03:24:20.613Z"
-      },
-      "kinCount": 598,
-      "kinTop": [
-        {
-          "title": "오세훈 대법원 확정 언제 인가요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=61404&docId=494413995&answerNo=3",
-          "views": 343,
-          "answers": 4
-        },
-        {
-          "title": "오세훈 재판선고 1심인데 3심까지 임기안에",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=814&docId=494120474&answerNo=5",
-          "views": 300,
-          "answers": 5
-        },
-        {
-          "title": "오세훈 추경호 재판 결론 언제 나오나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=61404&docId=494266542&answerNo=1",
-          "views": 192,
-          "answers": 2
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-24T09:16:42.189Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "kinMode": "date-views-v2",
-      "carried": true
-    },
-    {
-      "keyword": "사건반장 출연진",
-      "issue": "사건반장",
-      "topic": "사건반장",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 2건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 2,
-        "sampledTitles": 10,
-        "topTitles": [
-          "JTBC 사건반장 여자 아나운서들",
-          "1987 출연진 근황 총정리｜김윤석·하정우·유해진·김태리, 민주화의 역사를 담은 영화",
-          "사건반장 방송 시간, 10월 23일 금요일 JTBC 저녁 8시 50분",
-          "옆자리 프란체스카 출연진 등장인물 등 드라마 정보 심혜진 박슬기 박희진 특별 출연",
-          "수사반장 1958 10회 결말 리뷰 - 이제훈 이동휘 수사물 프리퀄 등장인물 출연진 정보",
-          "배달원이 신분증 요구했다가 폭행당해 전치 6주, 치료비 600만원",
-          "“나 육영수예요” 최불암 회상 재조명…영화 ‘암살자(들)’ 논란 이유",
-          "[합숙 맞선] 출연자 A씨 사건반장 논란 정리, 제작진의 입장은?",
-          "영화 암살자들 손익분기점 돌파: 평점·역사왜곡 논란·출연진 정보까지 - 솔직 후기",
-          "사건반장 총정리! 최근 화제의 사건과 프로그램 정보"
-        ],
-        "measuredAt": "2026-10-24T09:17:02.146Z"
-      },
-      "documentCount": 15603,
-      "documentCountMeasured": true,
-      "searchVolume": 2470,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 0.996349085430547,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 2,470",
-        "문서수 15,603",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 2,470 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.0배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "",
-          "frame": "generic",
-          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-        },
-        "home": {
-          "text": "",
-          "frame": "generic",
-          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": {
-        "series": [
-          16,
-          56,
-          78,
-          67,
-          78,
-          64,
-          23,
-          19,
-          25,
-          49,
-          43,
-          100,
-          83,
-          20,
-          12,
-          59,
-          64,
-          72,
-          89,
-          64,
-          23,
-          17,
-          41,
-          65,
-          65,
-          83,
-          54,
-          14,
-          20
-        ],
-        "measuredAt": "2026-10-26T03:24:20.613Z"
-      },
-      "kinCount": 526,
-      "kinTop": [
-        {
-          "title": "'어쩔 수 없다'의 출연진과 각 캐릭터의 역할은?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=3031101&docId=488163075&answerNo=1",
-          "views": 227,
-          "answers": 3
-        },
-        {
-          "title": "드라마 '크래시' 기본정보, 가장 기억에 남는 출연진은 누구....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=3010101&docId=491369082&answerNo=3",
-          "views": 158,
-          "answers": 3
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-24T09:16:42.189Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "kinMode": "date-views-v2",
-      "carried": true
     }
   ],
   "observations": [
+    {
+      "keyword": "제논 시퀀스",
+      "issue": "제논",
+      "topic": "제논",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 216,
+      "documentCountMeasured": true,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "rising",
+      "isHot": true,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 10",
+        "문서수 216",
+        "선점 후보 — 경쟁 문서 216건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 5,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-26T09:20:35.535Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "젠가드",
+      "issue": "젠가드",
+      "topic": "젠가드",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 86,
+      "documentCountMeasured": true,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 6,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 10",
+        "문서수 86",
+        "선점 후보 — 경쟁 문서 86건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 6건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 12,
+      "kinTop": [
+        {
+          "title": "젠가드에프캡슐 잇몸건강에 도움되나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70404&docId=318036302&answerNo=1",
+          "views": 1181,
+          "answers": 1
+        },
+        {
+          "title": "젠가드에프캡슐(잇몸약)이랑 빅손정1m",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70404&docId=318069603&answerNo=1",
+          "views": 1065,
+          "answers": 1
+        },
+        {
+          "title": "대웅제악 젠가드에프캡슐에 비타민 함유",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70404&docId=318039806&answerNo=1",
+          "views": 242,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-26T09:20:35.535Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "오픈ai 닷츠 후기",
       "issue": "오픈AI",
@@ -474,7 +292,7 @@
       "verdict": "preemption",
       "preemptionKind": "no-demand",
       "serp": null,
-      "documentCount": 138,
+      "documentCount": 141,
       "documentCountMeasured": true,
       "searchVolume": 10,
       "searchVolumeLt10": true,
@@ -487,8 +305,8 @@
       "freshFrontalCount": 0,
       "reasons": [
         "검색량 10",
-        "문서수 138",
-        "선점 후보 — 경쟁 문서 138건, 수요 미검출"
+        "문서수 141",
+        "선점 후보 — 경쟁 문서 141건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -524,12 +342,430 @@
         {
           "title": "새로운 AI 에이전트 닷츠, 실제로 얼마나 효율적일까요?",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=1122&docId=495387990&answerNo=0",
-          "views": 71,
+          "views": 73,
           "answers": null
         }
       ],
       "monetize": null,
-      "measuredAt": "2026-10-26T03:23:20.346Z",
+      "measuredAt": "2026-10-26T09:20:35.535Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "셀렉트스타 연봉",
+      "issue": "셀렉트스타",
+      "topic": "셀렉트스타",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 214,
+      "documentCountMeasured": true,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 10",
+        "문서수 214",
+        "선점 후보 — 경쟁 문서 214건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-26T09:20:35.535Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "셀렉트스타 김세엽",
+      "issue": "셀렉트스타",
+      "topic": "셀렉트스타",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 224,
+      "documentCountMeasured": true,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 3,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 10",
+        "문서수 224",
+        "선점 후보 — 경쟁 문서 224건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 3건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-26T09:20:35.535Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "셀렉트스타 잡플래닛",
+      "issue": "셀렉트스타",
+      "topic": "셀렉트스타",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 15,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 15",
+        "선점 후보 — 경쟁 문서 15건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-26T09:20:35.535Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "두나무앤파트너스 이강준",
+      "issue": "두나무앤파트너스",
+      "topic": "두나무앤파트너스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 88,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 88",
+        "선점 후보 — 경쟁 문서 88건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-26T09:20:35.535Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "원티드랩 해커톤",
+      "issue": "원티드랩",
+      "topic": "원티드랩",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 138,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 138",
+        "선점 후보 — 경쟁 문서 138건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-26T09:20:35.535Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "동행안심벨 CCTV 관제센터",
+      "issue": "동행안심벨 CCTV 관제센터",
+      "topic": "동행안심벨 CCTV 관제센터",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 163,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 163",
+        "선점 후보 — 경쟁 문서 163건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-26T09:20:35.535Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "셀렉트스타 블라인드",
+      "issue": "셀렉트스타",
+      "topic": "셀렉트스타",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 221,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 221",
+        "선점 후보 — 경쟁 문서 221건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-26T09:20:35.535Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "두나무앤파트너스 채용",
+      "issue": "두나무앤파트너스",
+      "topic": "두나무앤파트너스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 262,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 262",
+        "선점 후보 — 경쟁 문서 262건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-26T09:20:35.535Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -583,7 +819,8 @@
       "monetize": null,
       "measuredAt": "2026-10-26T03:23:20.346Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "www.ripl.org",
@@ -635,7 +872,8 @@
       "monetize": null,
       "measuredAt": "2026-10-26T03:23:20.346Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "취재진 최길수 특별감찰관",
@@ -687,7 +925,8 @@
       "monetize": null,
       "measuredAt": "2026-10-26T03:23:20.346Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "네모트론 3.5 볼트",
@@ -735,7 +974,8 @@
       "monetize": null,
       "measuredAt": "2026-10-26T03:23:20.346Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "마차도 베네수엘라 귀국",
@@ -970,235 +1210,6 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "나이 변환표",
-      "issue": "나이",
-      "topic": "나이",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 232,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 232",
-        "선점 후보 — 경쟁 문서 232건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 10,
-      "kinTop": [
-        {
-          "title": "나이지리아의 의식주",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=111002&docId=319314523&answerNo=1",
-          "views": 1082,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-24T09:16:42.189Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "김재윤 PO 불발",
-      "issue": "김재윤 PO 불발",
-      "topic": "김재윤 PO 불발",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 40,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "문서수 40",
-        "선점 후보 — 경쟁 문서 40건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 1건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-24T09:16:42.189Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "유니트리 상장 일자",
-      "issue": "유니트리",
-      "topic": "유니트리",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 221,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "rising",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 221",
-        "선점 후보 — 경쟁 문서 221건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-24T03:26:04.771Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "박병규 오늘 결혼!",
-      "issue": "박병규 오늘 결혼!",
-      "topic": "박병규 오늘 결혼!",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 289,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 289",
-        "선점 후보 — 경쟁 문서 289건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-24T03:26:04.771Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
@@ -1268,152 +1279,6 @@
         },
         {
           "keyword": "김정은 김주애",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 1,
-      "carried": true
-    },
-    {
-      "issue": "사건반장",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": null,
-      "headlines": [
-        {
-          "title": "무인꽃집서 꽃 훔치고 \"본인 등장\" 당당한 학생들…보호자도 책임 회피",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-10-24T05:20:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005832929?sid=102"
-        },
-        {
-          "title": "\"엄마가 나 대신 칼 다 맞았다\"… 아내 보는 앞에서 장모 살해한 26살 사...",
-          "press": "mydaily.co.kr",
-          "publishedAt": "2026-10-22T00:37:00.000Z",
-          "link": "https://m.entertain.naver.com/article/117/0004117356"
-        },
-        {
-          "title": "\"80만회 조회수 영상이 잡았다\"…주점 돈통 현금 도난 사건의 전말",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-21T09:20:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014269796?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "사건반장 출연진",
-          "searchVolume": 2470,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "사건반장 다시보기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "사건반장 논란",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "사건반장 오늘",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "사건반장 실시간",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "사건반장 변호사 사망",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "사건반장 실시간 유튜브",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "사건반장 여자 아나운서",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 1,
-      "carried": true
-    },
-    {
-      "issue": "오세훈",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": null,
-      "headlines": [
-        {
-          "title": "오세훈 \"총선 다가오고 있다…통합된 국힘 위해 최선\"",
-          "press": "mbn.mk.co.kr",
-          "publishedAt": "2026-10-24T06:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/057/0001974968?sid=100"
-        },
-        {
-          "title": "오세훈 무죄에 조희대 탄핵론…與 “차근차근 진행” 野 “만물 조희대...",
-          "press": "chosun.com",
-          "publishedAt": "2026-10-24T05:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0004005736?sid=100"
-        },
-        {
-          "title": "무죄 선고 후 첫 행보 오세훈 \"총선 앞둔 국힘, 분열 아닌 통합해야\"",
-          "press": "news.jtbc.co.kr",
-          "publishedAt": "2026-10-24T07:25:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/437/0000517357?sid=100"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "오세훈 2심",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오세훈 당선무효",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오세훈 2심 선고",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오세훈 재판",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오세훈 선고",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오세훈 무죄",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오세훈 축구선수",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오세훈 3심",
           "searchVolume": null,
           "origin": "autocomplete"
         }
