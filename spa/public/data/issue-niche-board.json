@@ -1,21 +1,150 @@
 {
-  "publishedAt": "2026-10-26T09:41:38.507Z",
+  "publishedAt": "2026-10-26T21:30:47.222Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 17,
-    "candidates": 239,
+    "candidates": 240,
     "niche": 1,
-    "preemption": 10,
+    "preemption": 12,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-10-26",
+    "day": "2026-10-27",
     "keywords": [
-      "김정은 가망"
+      "스테이온 에이전시",
+      "거제시 버스정보시스템"
     ]
   },
   "rows": [
+    {
+      "keyword": "스테이온 에이전시",
+      "issue": "에이전시",
+      "topic": "에이전시",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "[모노키즈 에이전시] 8개월 아기 카메라테스트 후 키즈모델 합격 및 계약 관련 상세 후기",
+          "⭐STAY ON 모델 지원 방법⭐",
+          "[홍대외국인숙박업 창업 실전 1편] AI가 텅 비운 사무실, 에어비앤비 하려는데 '집'이 없다? 2026 임대차 시장 지각변동",
+          "사진과 영상에 강한 온라인홍보 콘텐츠 브랜드 에이전시, 스튜디오 참스가 잘하는 것",
+          "브랜딩 에이전시 선택 기준 5가지 | 율사이트의 고객 소통 방식",
+          "배우 은퇴 장동주, 기업인 변신 및 엑셀 방송 등 광폭 행보",
+          "10월16일 (금) 필리핀 클락 페소 환전 환율 클락 추천 한인 호텔 LIST!!",
+          "[이스트제주] 제주도 펜션, 에어비앤비 숙소 네이버 광고 블로그 플레이스 노출 작업 무료로 진행해 주는 유일한 위탁 운영 업체",
+          "[모노키즈 에이전시] 카메라 테스트/계약해지/환불 후기",
+          "트렌드 코리아 2027"
+        ],
+        "measuredAt": "2026-10-26T21:25:57.656Z"
+      },
+      "documentCount": 1431,
+      "documentCountMeasured": true,
+      "searchVolume": 1680,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 1.3339755638209099,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 1,680",
+        "문서수 1,431",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 1,680 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.3배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "MS가 관리자 없이 AI 1024개 협업하는 '에이전시'를 공개했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "home": {
+          "text": "스테이온 에이전시에 홈판 제목 다시 맡기고 나서 조회수 추이를 며칠 지켜봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": {
+        "series": [
+          0,
+          0,
+          0,
+          16,
+          28,
+          33,
+          0,
+          0,
+          6,
+          34,
+          55,
+          46,
+          20,
+          24,
+          12,
+          61,
+          88,
+          74,
+          79,
+          100,
+          37,
+          23,
+          76,
+          93,
+          72,
+          80,
+          57,
+          50,
+          40
+        ],
+        "label": "❄️ 시즌성",
+        "recommendation": "시즌 임박 신호. 2주 안에 작성해서 시즌 동안 트래픽 확보"
+      },
+      "kinCount": 982,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-26T21:25:07.025Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null
+    },
     {
       "keyword": "거제시 버스정보시스템",
       "issue": "거제시",
@@ -108,147 +237,46 @@
       },
       "subKeywords": null,
       "keywordPool": null,
-      "trend": null,
+      "trend": {
+        "series": [
+          44,
+          67,
+          80,
+          89,
+          89,
+          86,
+          57,
+          37,
+          65,
+          71,
+          79,
+          81,
+          69,
+          71,
+          50,
+          91,
+          76,
+          84,
+          86,
+          88,
+          100,
+          56,
+          80,
+          74,
+          66,
+          86,
+          86,
+          68,
+          31
+        ],
+        "label": "🐢 연금형",
+        "recommendation": "한 번 쓰면 1년 꾸준 방문자. 안정적 연금 키워드",
+        "measuredAt": "2026-10-26T21:30:48.040Z"
+      },
       "kinCount": 1990,
       "kinTop": [],
       "monetize": null,
       "measuredAt": "2026-10-26T09:40:44.823Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "kinMode": "date-views-v2"
-    },
-    {
-      "keyword": "김정은 가망",
-      "issue": "김정은",
-      "topic": "김정은",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 0,
-        "sampledTitles": 10,
-        "topTitles": [
-          "'여전히 활개치는 정체불명의 선교사들' 보수우파지키는 7인/Jesus Wave.우향.KNN",
-          "유물론적 이상주의가 계급 복수심을 추동한 수용소 대학살로 이어지는 논리적 과정에 대한 이해. 좌파 왼손잡이 십선비들이 고려 조선 내내 가진 이념 스탠스 추론.",
-          "단편소설 「오래된 기억」",
-          "문재인 양평에서도ㅡ 민간인 ㅡ 사찰을 했다라면 ㅡ 군주 ㅡ가스라이팅 심하게 되어 범죄로 여기지 않고 있다 라면",
-          "2026.08.18(화) 오전 11시 주요 Headline Summary — 세계 뉴스로 배우는 영어 표현",
-          "이 모든 범죄는 74김영 출세 하나로 일으켰다 ㅡ 골굴사 도착하자 마자 ㅡ직관이 감지된다 ㅡ",
-          "북한 주민들을 보면 마치 한국 택시기사들을 보는 것 같다",
-          "韓國 2/2",
-          "중동전쟁 이후 2",
-          "베르나르 베르베르 영혼의 왈츠 , 오늘부터 전생 체험을 시작하겠다!"
-        ],
-        "measuredAt": "2026-10-24T21:25:51.511Z"
-      },
-      "documentCount": 1096,
-      "documentCountMeasured": true,
-      "searchVolume": 420,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 1,
-      "issueStatus": "rising",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 420",
-        "문서수 1,096",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 420 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.0배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "",
-          "frame": "generic",
-          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-        },
-        "home": {
-          "text": "",
-          "frame": "generic",
-          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": {
-        "series": [
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          100,
-          18,
-          17,
-          9,
-          3,
-          0
-        ],
-        "label": "📉 단발성",
-        "recommendation": "회피! 지난 며칠 폭발 후 급락 중. 글 써도 유입 없음",
-        "measuredAt": "2026-10-26T09:41:39.263Z"
-      },
-      "kinCount": 186,
-      "kinTop": [],
-      "monetize": null,
-      "measuredAt": "2026-10-24T21:23:25.675Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
       "kinMode": "date-views-v2",
@@ -298,18 +326,129 @@
           "text": "이슈 자체가 지금 뜨는 중(HOT)"
         }
       ],
-      "whySearch": null,
+      "whySearch": {
+        "text": "제논이 AI 보안 '젠가드' 출시, 다음달 IPO 출사표를 던졌다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
+      "titles": {
+        "seo": {
+          "text": "제논 시퀀스 젠가드 출시와 다음달 IPO 공모 일정",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "제논 시퀀스 다음달 IPO 나온다는데 공모주 청약 전에 봐야 할 게 있더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "제논 상장",
+          "searchVolume": 310,
+          "frame": "generic"
+        },
+        {
+          "keyword": "제논 공모주",
+          "searchVolume": 160,
+          "frame": "generic"
+        },
+        {
+          "keyword": "제논 IPO",
+          "searchVolume": 70,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "제논 상장",
+          "searchVolume": 310,
+          "documentCount": 1332,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "제논 공모주",
+          "searchVolume": 160,
+          "documentCount": 725,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "제논 IPO",
+          "searchVolume": 70,
+          "documentCount": 427,
+          "source": "ai-verified"
+        }
+      ],
       "trend": null,
       "kinCount": 5,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-26T09:40:44.823Z",
+      "measuredAt": "2026-10-26T21:25:07.025Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "제논 젠가드",
+      "issue": "젠가드",
+      "topic": "젠가드",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 3,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 1,
+      "reasons": [
+        "문서수 3",
+        "선점 후보 — 경쟁 문서 3건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 1건)"
+        }
+      ],
+      "whySearch": {
+        "text": "제논이 기업용 AI 보안(가드레일) 솔루션 '젠가드'를 출시했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "제논 젠가드 출시, 자연어로 보안정책 설정하는 AI 가드레일",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "제논 젠가드 AI 보안을 자연어로 설정한다는데 생각보다 다르더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-26T21:25:07.025Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -334,7 +473,7 @@
       "demandRatio": 0,
       "issueStatus": "unknown",
       "isHot": false,
-      "frontalDocCount": 6,
+      "frontalDocCount": 5,
       "freshFrontalCount": 0,
       "reasons": [
         "검색량 10",
@@ -344,14 +483,28 @@
       "evidence": [
         {
           "code": "empty-field",
-          "text": "정면으로 다룬 글 6건 (최근 0건)"
+          "text": "정면으로 다룬 글 5건 (최근 0건)"
         }
       ],
-      "whySearch": null,
+      "whySearch": {
+        "text": "제논이 기업용 AI 보안(가드레일) 솔루션 '젠가드'를 출시했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
+      "titles": {
+        "seo": {
+          "text": "젠가드 제논 AI 보안 솔루션 요청·응답 통제 방식",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "젠가드는 자연어로 보안 정책 짠다는데 AI 요청 통제가 여기서 갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
       "subKeywords": null,
       "keywordPool": null,
       "trend": null,
@@ -360,24 +513,90 @@
         {
           "title": "젠가드에프캡슐 잇몸건강에 도움되나요?",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=70404&docId=318036302&answerNo=1",
-          "views": 1184,
+          "views": 1193,
           "answers": 1
         },
         {
           "title": "젠가드에프캡슐(잇몸약)이랑 빅손정1m",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=70404&docId=318069603&answerNo=1",
-          "views": 1068,
+          "views": 1077,
           "answers": 1
         },
         {
           "title": "대웅제악 젠가드에프캡슐에 비타민 함유",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=70404&docId=318039806&answerNo=1",
-          "views": 245,
+          "views": 254,
           "answers": 1
         }
       ],
       "monetize": null,
-      "measuredAt": "2026-10-26T09:40:44.823Z",
+      "measuredAt": "2026-10-26T21:25:07.025Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "젠가드 도입",
+      "issue": "젠가드",
+      "topic": "젠가드",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "적용 기업 궁금",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 4,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 4",
+        "선점 후보 — 경쟁 문서 4건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 적용 기업 궁금"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "제논이 기업용 AI 보안(가드레일) 솔루션 '젠가드'를 출시했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "젠가드 도입 전 AI 보안 가드레일 기능부터 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "젠가드 도입 앞두고 AI 요청이랑 응답을 자연어로 막는다길래 하나하나 따져봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-26T21:25:07.025Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -395,7 +614,7 @@
       "serp": null,
       "documentCount": 141,
       "documentCountMeasured": true,
-      "searchVolume": 10,
+      "searchVolume": 20,
       "searchVolumeLt10": true,
       "hasLiveDemand": false,
       "demandStatus": "unknown",
@@ -405,7 +624,7 @@
       "frontalDocCount": 1,
       "freshFrontalCount": 0,
       "reasons": [
-        "검색량 10",
+        "검색량 20",
         "문서수 141",
         "선점 후보 — 경쟁 문서 141건, 수요 미검출"
       ],
@@ -419,36 +638,579 @@
           "text": "정면으로 다룬 글 1건 (최근 0건)"
         }
       ],
-      "whySearch": null,
+      "whySearch": {
+        "text": "오픈AI 주최 스타트업 경연서 AI 활용 사례가 공개됐다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
       "intentLabel": "구매 검토",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "오픈ai 닷츠 후기 경험담을 판단할 기준",
-          "frame": "review",
-          "basis": "검색 질문 '오픈ai 닷츠 후기' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+          "text": "오픈ai 닷츠 후기 사용법과 가격 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "오픈ai 닷츠 후기 누구에게 맞는지 먼저 살펴보세요",
-          "frame": "review",
-          "basis": "검색 질문 '오픈ai 닷츠 후기' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+          "text": "오픈ai 닷츠 후기 가격 들어보고 결제창 앞에서 한참을 망설였어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
         }
       },
-      "subKeywords": null,
-      "keywordPool": null,
+      "subKeywords": [
+        {
+          "keyword": "오픈ai 닷츠",
+          "searchVolume": 2180,
+          "frame": "generic"
+        },
+        {
+          "keyword": "오픈ai 닷츠 가격",
+          "searchVolume": 10,
+          "frame": "price"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "오픈ai 닷츠",
+          "searchVolume": 2180,
+          "documentCount": 1042,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "오픈ai 닷츠 가격",
+          "searchVolume": 10,
+          "documentCount": 492,
+          "source": "ai-verified"
+        }
+      ],
       "trend": null,
       "kinCount": 2,
       "kinTop": [
         {
           "title": "새로운 AI 에이전트 닷츠, 실제로 얼마나 효율적일까요?",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=1122&docId=495387990&answerNo=0",
-          "views": 74,
+          "views": 76,
           "answers": null
         }
       ],
       "monetize": null,
-      "measuredAt": "2026-10-26T09:40:44.823Z",
+      "measuredAt": "2026-10-26T21:25:07.025Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "젠가드 출시",
+      "issue": "젠가드",
+      "topic": "젠가드",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 10,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 1,
+      "reasons": [
+        "문서수 10",
+        "선점 후보 — 경쟁 문서 10건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 1건)"
+        }
+      ],
+      "whySearch": {
+        "text": "제논이 기업용 AI 보안(가드레일) 솔루션 '젠가드'를 출시했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "젠가드 출시 제논 AI 보안 가드레일 솔루션 기능",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "젠가드 출시 소식 봤는데 AI 가드레일 보안이 의외로 낯설더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-26T21:25:07.025Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "젠가드 기능",
+      "issue": "젠가드",
+      "topic": "젠가드",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 28,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 28",
+        "선점 후보 — 경쟁 문서 28건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "제논이 기업용 AI 보안(가드레일) 솔루션 '젠가드'를 출시했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "젠가드 기능 제논 AI 보안 솔루션 어디까지 되나",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "젠가드 기능 자연어로 보안 정책 짜는 부분에서 많이들 갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 3,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-26T21:25:07.025Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "앤트로픽 엔스로픽 차이",
+      "issue": "앤트로픽",
+      "topic": "앤트로픽",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 37,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 37",
+        "선점 후보 — 경쟁 문서 37건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "앤트로픽이 나스닥 상장 위해 IPO를 신청했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "구매 검토",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "앤트로픽 엔스로픽 차이와 나스닥 상장 종목코드 ANT",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "앤트로픽 엔스로픽 차이 찾다가 오픈AI랑도 헷갈려서 메모장을 켰네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "앤트로픽 오픈AI 차이",
+          "searchVolume": 10,
+          "frame": "compare"
+        },
+        {
+          "keyword": "앤트로픽 주가",
+          "searchVolume": 3930,
+          "frame": "generic"
+        },
+        {
+          "keyword": "앤트로픽 클로드",
+          "searchVolume": 1520,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "앤트로픽 주가",
+          "searchVolume": 3930,
+          "documentCount": 42408,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "앤트로픽 클로드",
+          "searchVolume": 1520,
+          "documentCount": 35420,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "앤트로픽 상장일",
+          "searchVolume": 1370,
+          "documentCount": 21510,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "앤트로픽 뜻",
+          "searchVolume": 260,
+          "documentCount": 20211,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "앤트로픽 오픈AI 차이",
+          "searchVolume": 10,
+          "documentCount": 13016,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-26T21:25:07.025Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "두나무앤파트너스 이강준",
+      "issue": "두나무앤파트너스",
+      "topic": "두나무앤파트너스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 88,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 88",
+        "선점 후보 — 경쟁 문서 88건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "두나무앤파트너스가 美 우주 데이터센터 스타클라우드에 투자했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "두나무앤파트너스 이강준, 스타클라우드 2억5000만달러 투자 참여",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "두나무앤파트너스 이강준이 왜 우주 데이터센터 스타클라우드에 투자했나 봤더니",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "두나무앤파트너스",
+          "searchVolume": 80,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "두나무앤파트너스",
+          "searchVolume": 80,
+          "documentCount": 2208,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-26T21:25:07.025Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "원티드랩 해커톤",
+      "issue": "원티드랩",
+      "topic": "원티드랩",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 138,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 138",
+        "선점 후보 — 경쟁 문서 138건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "원티드랩이 FDE 포지션 14.5배 증가, 11월 채용 박람회 연다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "원티드랩 해커톤 아닌 FDE 채용, 공고 14배 늘었다",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "원티드랩 해커톤 아니라 FDE 채용 박람회인 거 모르는 분 많더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "원티드랩 채용",
+          "searchVolume": 60,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "원티드랩 채용",
+          "searchVolume": 60,
+          "documentCount": 4689,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-26T21:25:07.025Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "리크루팅 카니발",
+      "issue": "원티드랩",
+      "topic": "원티드랩",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 128,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 128",
+        "선점 후보 — 경쟁 문서 128건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "원티드랩이 FDE 포지션 14.5배 증가, 11월 채용 박람회 연다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-26T21:25:07.025Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "두나무앤파트너스 채용",
+      "issue": "두나무앤파트너스",
+      "topic": "두나무앤파트너스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 263,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 263",
+        "선점 후보 — 경쟁 문서 263건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "두나무앤파트너스가 美 우주 데이터센터 스타클라우드에 투자했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "두나무앤파트너스 채용 연봉부터 투자 포트폴리오까지 확인",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "두나무앤파트너스 채용 보기 전에 연봉이랑 투자 포트폴리오부터 찾아봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-26T21:25:07.025Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -503,7 +1265,8 @@
       "monetize": null,
       "measuredAt": "2026-10-26T09:40:44.823Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "셀렉트스타 김세엽",
@@ -556,7 +1319,8 @@
       "monetize": null,
       "measuredAt": "2026-10-26T09:40:44.823Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "셀렉트스타 잡플래닛",
@@ -608,111 +1372,8 @@
       "monetize": null,
       "measuredAt": "2026-10-26T09:40:44.823Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "두나무앤파트너스 이강준",
-      "issue": "두나무앤파트너스",
-      "topic": "두나무앤파트너스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 88,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 88",
-        "선점 후보 — 경쟁 문서 88건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-26T09:40:44.823Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "원티드랩 해커톤",
-      "issue": "원티드랩",
-      "topic": "원티드랩",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 138,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 138",
-        "선점 후보 — 경쟁 문서 138건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-26T09:40:44.823Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "셀렉트스타 블라인드",
@@ -764,59 +1425,8 @@
       "monetize": null,
       "measuredAt": "2026-10-26T09:40:44.823Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "두나무앤파트너스 채용",
-      "issue": "두나무앤파트너스",
-      "topic": "두나무앤파트너스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 262,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 262",
-        "선점 후보 — 경쟁 문서 262건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-26T09:40:44.823Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "동행안심벨 CCTV 관제센터",
@@ -1197,70 +1807,6 @@
       "carried": true
     },
     {
-      "keyword": "앤트로픽 엔스로픽 차이",
-      "issue": "앤트로픽",
-      "topic": "앤트로픽",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 37,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 37",
-        "선점 후보 — 경쟁 문서 37건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "앤트로픽 엔스로픽 차이 무엇이 어떻게 다른가",
-          "frame": "compare",
-          "basis": "검색 질문 '앤트로픽 엔스로픽 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        },
-        "home": {
-          "text": "앤트로픽 엔스로픽 차이, 기준은 하나면 됩니다",
-          "frame": "compare",
-          "basis": "검색 질문 '앤트로픽 엔스로픽 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-25T03:16:04.677Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
       "keyword": "최형우 빈소 찾은",
       "issue": "최형우 빈소 찾은",
       "topic": "최형우 빈소 찾은",
@@ -1316,6 +1862,1230 @@
   ],
   "rejectedCount": 0,
   "issues": [
+    {
+      "issue": "앤트로픽",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "앤트로픽이 나스닥 상장 위해 IPO를 신청했다.",
+      "headlines": [
+        {
+          "title": "[속보] 美 AI기업 앤트로픽, 나스닥 상장 위한 IPO 신청",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-10-26T13:22:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005754353?sid=104"
+        },
+        {
+          "title": "AI 거품 불안 속…앤트로픽, 나스닥 상장 위한 IPO 신청",
+          "press": "kmib.co.kr",
+          "publishedAt": "2026-10-26T13:25:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/005/0001881009?sid=101"
+        },
+        {
+          "title": "[속보] '클로드' 앤트로픽 상장 시동…역대급 AI IPO 관측",
+          "press": "hankyung.com",
+          "publishedAt": "2026-10-26T13:15:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005346754?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "앤트로픽 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 클로드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 ipo",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 실적",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 ceo",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 상장일",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "앤트로픽 상장일",
+          "reason": "신청 다음 확정일 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "앤트로픽 공모가",
+          "reason": "청약 전 가격 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "앤트로픽 관련주",
+          "reason": "국내 수혜주 탐색",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "앤트로픽 청약",
+          "reason": "개인 참여 방법",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "앤트로픽 주가 전망",
+          "reason": "상장 후 흐름 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "플레이오프 1차전 승리",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "KIA가 삼성 꺾고 PO 1차전 승리, 카스트로가 MVP.",
+      "headlines": [
+        {
+          "title": "KIA, 삼성 꺾고 PO 1차전 기선제압…3타점 카스트로 MVP",
+          "press": "news.jtbc.co.kr",
+          "publishedAt": "2026-10-26T14:54:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/437/0000517628?sid=103"
+        },
+        {
+          "title": "‘도루하는 홈런왕’ 김도영, 발로 삼성 잡았다…KIA, 1차전 5대 1로 기...",
+          "press": "khan.co.kr",
+          "publishedAt": "2026-10-26T13:11:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/032/0003478686?sid=102"
+        },
+        {
+          "title": "[사진]카스트로, 플레이오프 1차전 MVP",
+          "press": "osen.co.kr",
+          "publishedAt": "2026-10-26T13:04:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/109/0005629267"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "플레이오프",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "JYP",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "일본계 투자사가 JYP 지분 인수 추진, JYP는 제안 부인.",
+      "headlines": [
+        {
+          "title": "JYP, 때아닌 인수설…\"제안받은 적 없다\" 일축",
+          "press": "hankyung.com",
+          "publishedAt": "2026-10-26T13:28:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005346758?sid=101"
+        },
+        {
+          "title": "[단독] 일본계 자본, JYP 공개매수 예고...JYP \"제안 받은 바 없어\"",
+          "press": "ytn.co.kr",
+          "publishedAt": "2026-10-26T14:30:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/052/0002424027?sid=103"
+        },
+        {
+          "title": "日 투자그룹 지분 인수설…JYP \"제안 받은 바 없다\"",
+          "press": "sidae.com",
+          "publishedAt": "2026-10-26T13:26:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/417/0001162141?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "jyp 신사옥",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "jyp 아이돌",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "JYP 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "JYP 오디션",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "jyp 종교",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "jyp 버블",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "jyp 나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "jyp 콘서트 후기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "JYP 주가 전망",
+          "reason": "급등 후 흐름",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "JYP 인수 진실",
+          "reason": "사실 여부 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "미군 이란 재공격",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "CNN, 미군이 명령 시 96시간 내 이란 재공격 준비.",
+      "headlines": [
+        {
+          "title": "\"미군, 트럼프 명령하면 나흘내 대규모 이란 재공격 준비\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-26T13:35:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016401707?sid=104"
+        },
+        {
+          "title": "CNN “미군, 트럼프 명령하면 나흘 내 대규모 이란 재공격 준비”",
+          "press": "khan.co.kr",
+          "publishedAt": "2026-10-26T13:53:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/032/0003478691?sid=104"
+        },
+        {
+          "title": "\"명령만 떨어지면 96시간 내\"…美, 이란 대규모 재공격 준비",
+          "press": "hankyung.com",
+          "publishedAt": "2026-10-26T13:39:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005346762?sid=104"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "2026년 운세",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "2026년 10월 27일 띠별·별자리 운세가 공개됐다.",
+      "headlines": [
+        {
+          "title": "오늘의 운세 띠별 운세 27일",
+          "press": "bntnews.co.kr",
+          "publishedAt": "2026-10-26T15:08:00.000Z",
+          "link": "https://www.bntnews.co.kr/article/view/bnt202610270002"
+        },
+        {
+          "title": "오늘의 운세-띠별(27일)",
+          "press": "kjdaily.com",
+          "publishedAt": "2026-10-26T15:02:00.000Z",
+          "link": "http://www.kjdaily.com/article.php?aid=1793026801690412227"
+        },
+        {
+          "title": "[오늘의 운세] 2026년 10월 27일 별자리 운세",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-10-26T21:03:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006396738?sid=103"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "2026년 운세 무료",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "2026년 운세 보기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "2026년 운세 닭띠",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "2026년 운세 농협",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "2026년 운세 돼지띠",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "2026년 운세 양띠",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "2026년 운세 개띠",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "2026년 운세 쥐띠",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "룰라 당선 브라질",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "브라질 대선서 룰라가 당선 확정, 통산 4선 성공.",
+      "headlines": [
+        {
+          "title": "[2보] 브라질 대선서 룰라 당선 확정…통산 4선 성공",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-26T00:17:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016399687?sid=104"
+        },
+        {
+          "title": "개표율 48%에 '재역전'…브라질 대선서 룰라 당선 확정",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-10-26T00:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001398167?sid=104"
+        },
+        {
+          "title": "브라질 대선서 룰라 당선 확정… 통산 4선 성공",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-10-26T00:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001200225?sid=104"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "주가",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "일본 투자사 지분 인수설에 JYP 주가가 14% 급등했다.",
+      "headlines": [
+        {
+          "title": "\"JYP 절반 사겠다\" 日투자사 깜짝 발표…주가 14% 뛰었다",
+          "press": "hankyung.com",
+          "publishedAt": "2026-10-26T13:31:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005346759?sid=101"
+        },
+        {
+          "title": "JYP 주가 14% 뛰었는데...\"지분 인수 제안받은 적 없어\" 반박, 무슨 일?",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-10-26T12:57:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005431898?sid=101"
+        },
+        {
+          "title": "“한화오션, 트럼프 핵심 파트너” 콕 집었는데…주가는 왜 이래?",
+          "press": "seoul.co.kr",
+          "publishedAt": "2026-10-26T02:11:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/081/0003692372?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "삼성전자 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "하이닉스 주가",
+          "searchVolume": 4317700,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "SK하이닉스 주가",
+          "searchVolume": 3767200,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "현대차 주가",
+          "searchVolume": 1292000,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "테슬라 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "엔비디아 주가",
+          "searchVolume": 485900,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "주가 폭락 원인",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "주가 된다 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "JYP 주가 전망",
+          "reason": "급등 후 지속 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "무안공항 참사 유가족",
+      "issueType": "entertainment",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "국토부가 유해 부실수습 공무원 8명 징계 착수, 장관 사과.",
+      "headlines": [
+        {
+          "title": "제주항공 참사 유해 부실수습 국토부 공무원 징계 착수",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-26T08:11:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014279377?sid=102"
+        },
+        {
+          "title": "홍지선 국토장관 “무안공항 참사 유가족 일상회복 위해 계속해서 노력...",
+          "press": "biz.heraldcorp.com",
+          "publishedAt": "2026-10-26T08:53:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/016/0002714560?sid=101"
+        },
+        {
+          "title": "홍지선 장관, 무안공항서 12·29 참사 유가족 만나 \"수습 부족 사과\"",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-26T08:34:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009250793?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "무안공항",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "무안공항 참사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "실업급여",
+      "issueType": "policy",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "강레오가 실업급여로 일본여행 온 청년들을 비판했다.",
+      "headlines": [
+        {
+          "title": "\"실업급여로 일본여행?\"vs\"뭐가 문제\"…강레오 분노에 의견 분분",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-10-26T12:56:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006396681?sid=102"
+        },
+        {
+          "title": "강레오 셰프 “실업급여로 日 여행 온 청년들, 사진 거부”",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-10-26T01:05:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001200266?sid=004"
+        },
+        {
+          "title": "\"실업급여로 日여행다녀\" 강레오도 발끈…3번이상 받은 사람 11만명",
+          "press": "imaeil.com",
+          "publishedAt": "2026-10-26T10:47:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/088/0001036633?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "실업급여조건",
+          "searchVolume": 114000,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "실업급여 계산기",
+          "searchVolume": 94600,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "실업급여 금액",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "실업급여 신청",
+          "searchVolume": 68900,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "실업급여 수급기간",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "실업급여 신청방법",
+          "searchVolume": 43000,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "실업급여 구직활동",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "실업급여 기준",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "실업급여 개편",
+          "reason": "제도 손질 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "실업급여 하한액",
+          "reason": "최저 지급액 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "에이전시",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "MS가 관리자 없이 AI 1024개 협업하는 '에이전시'를 공개했다.",
+      "headlines": [
+        {
+          "title": "최고 품질 책임지는 ‘AI 에이전시’… 광고 콘텐츠 시장 패러다임 바꾼...",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-10-26T05:47:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005754049?sid=101"
+        },
+        {
+          "title": "MS, 관리자 없이 AI 1024개 협업하는 '에이전시' 공개…스스로 역할도 나...",
+          "press": "aitimes.com",
+          "publishedAt": "2026-10-26T09:38:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=216662"
+        },
+        {
+          "title": "경찰청, 수사 정보 제공 확대…영문 이름도 ‘에이전시→서비스’ 변경",
+          "press": "hani.co.kr",
+          "publishedAt": "2026-10-19T02:24:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/028/0002828040?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "에이전시 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김도영 에이전시",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "스테이온 에이전시",
+          "searchVolume": 1680,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "에이전시 소속사 차이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "에이전시 드라마",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "에이전시 회사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "에이전시 영어로",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "에이전시 에이전트 차이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "MS 에이전시 활용",
+          "reason": "실제 사용 사례",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "경찰청 영문명",
+          "reason": "서비스 변경 이유",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 1
+    },
+    {
+      "issue": "MS",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "MS가 직원 6만명에 자발적 퇴직 제안, AI 구조조정 나섰다.",
+      "headlines": [
+        {
+          "title": "MS, 직원 6만명 희망퇴직…AI 구조조정",
+          "press": "fnnews.com",
+          "publishedAt": "2026-10-26T18:07:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/014/0005594771?sid=101"
+        },
+        {
+          "title": "MS, 직원 6만 명에 '자발적 퇴직' 제안",
+          "press": "biz.sbs.co.kr",
+          "publishedAt": "2026-10-26T19:38:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/374/0000539868?sid=104"
+        },
+        {
+          "title": "MS, 직원 6만 명에 '자발적 퇴직' 제안…AI 시대 조직 재편",
+          "press": "newspim.com",
+          "publishedAt": "2026-10-26T16:20:00.000Z",
+          "link": "https://www.newspim.com/news/view/20261027000003"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "ms 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스",
+          "searchVolume": 22130,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "MS 오피스 365",
+          "searchVolume": 10420,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스 영구",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스 무료",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "MS 등록방법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 정품인증방법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 로그아웃 방법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "MS 감원 규모",
+          "reason": "몇 명 나가나",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "MS 한국 영향",
+          "reason": "국내 지사 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "오픈AI",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "오픈AI 주최 스타트업 경연서 AI 활용 사례가 공개됐다.",
+      "headlines": [
+        {
+          "title": "AI 거품 불안 속…앤트로픽, 나스닥 상장 위한 IPO 신청",
+          "press": "kmib.co.kr",
+          "publishedAt": "2026-10-26T13:25:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/005/0001881009?sid=101"
+        },
+        {
+          "title": "앤트로픽, 나스닥 IPO 신청…AI투자 우려 속 역대 최대 도전(종합)",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-26T17:41:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016401737?sid=104"
+        },
+        {
+          "title": "\"축구 영상 16시간서 하이라이트 140개 추출\"…오픈AI 스타트업 경연서...",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-26T00:36:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014277506?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "오픈ai 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 종류",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 대표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 닷츠",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 순위",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 실적",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "오픈AI 상장",
+          "reason": "IPO 가능성 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "오픈AI 앤트로픽",
+          "reason": "맞대결 구도",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "오픈AI 신제품",
+          "reason": "다음 발표 기대",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "원티드랩",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "원티드랩이 FDE 포지션 14.5배 증가, 11월 채용 박람회 연다.",
+      "headlines": [
+        {
+          "title": "\"AI 핵심 엔지니어 채용 잇는다\"...원티드랩, ‘FDE 리크루팅 카니발’ ...",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-10-26T08:12:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002442441?sid=105"
+        },
+        {
+          "title": "엔지니어 채용공고 14배 증가…원티드랩, 인재 매칭 돕는다",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-10-26T06:09:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006396386?sid=101"
+        },
+        {
+          "title": "원티드랩, FDE 채용 박람회 연다",
+          "press": "hansbiz.co.kr",
+          "publishedAt": "2026-10-26T11:56:00.000Z",
+          "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=876156"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "원티드랩 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "원티드랩 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "원티드랩 매출",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "원티드랩 위치",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "원티드랩 늇",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "원티드랩 가는법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "원티드랩 기업정보",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "원티드랩 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "원티드랩 박람회 신청",
+          "reason": "참가 방법",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "원티드랩 주가",
+          "reason": "채용 호재 반응",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "경북",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "경북서 주택화재·교통사고로 5명 사상, 파독간호사 지원도 추진.",
+      "headlines": [
+        {
+          "title": "경북도내 주택화재·교통사고 잇따라…5명 사상(종합)",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-26T00:10:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014277406?sid=102"
+        },
+        {
+          "title": "경북도 “파독간호사 한 달 살기 지원 검토하겠다”",
+          "press": "biz.heraldcorp.com",
+          "publishedAt": "2026-10-26T00:52:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/016/0002714209?sid=102"
+        },
+        {
+          "title": "경북도, 퓨리오사AI와 AI 반도체 산업 생태계 만든다",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-26T06:59:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016401147?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "경북 가볼만한곳",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "10월 경북 축제",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "경북 축제",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "경북 지도",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "경북 상주",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "경북 산",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "경북 절",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "경북 경산",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "경북 화재 원인",
+          "reason": "사고 경위 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "아픈아이 돌봄",
+          "reason": "이용 방법 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "두나무앤파트너스",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "두나무앤파트너스가 美 우주 데이터센터 스타클라우드에 투자했다.",
+      "headlines": [
+        {
+          "title": "두나무앤파트너스, 美 우주 데이터센터 스타트업 '스타클라우드' 투자",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-10-26T02:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005431552?sid=101"
+        },
+        {
+          "title": "두나무앤파트너스, 美 우주 데이터센터 기업 ‘스타클라우드’ 투자…...",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-10-26T08:55:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006396562?sid=105"
+        },
+        {
+          "title": "두나무앤파트너스, 우주 데이터센터 스타클라우드 투자…23억 달러 기업...",
+          "press": "venturesquare.net",
+          "publishedAt": "2026-10-26T01:46:00.000Z",
+          "link": "https://www.venturesquare.net/1122747/"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "두나무앤파트너스 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "두나무앤파트너스 투자",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "두나무앤파트너스(주)",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "두나무앤파트너스 이강준",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "우주 데이터센터",
+          "reason": "기술 실현성 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "젠가드",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "제논이 기업용 AI 보안(가드레일) 솔루션 '젠가드'를 출시했다.",
+      "headlines": [
+        {
+          "title": "제논, 기업용 AI 보안 솔루션 '젠가드' 출시",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-10-26T00:32:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006396142?sid=101"
+        },
+        {
+          "title": "제논, AI 보안 '젠가드' 출시",
+          "press": "hansbiz.co.kr",
+          "publishedAt": "2026-10-26T12:02:00.000Z",
+          "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=876140"
+        },
+        {
+          "title": "제논, AI 가드레일 솔루션 '젠가드' 출시",
+          "press": "inews24.com",
+          "publishedAt": "2026-10-26T01:56:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/031/0001069180?sid=105"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [
+        {
+          "keyword": "젠가드 도입",
+          "reason": "적용 기업 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "젠가드 경쟁사",
+          "reason": "유사 솔루션 비교",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "제논",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": "제논이 AI 보안 '젠가드' 출시, 다음달 IPO 출사표를 던졌다.",
+      "headlines": [
+        {
+          "title": "제논, 기업용 AI 보안 솔루션 '젠가드' 출시",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-10-26T00:32:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006396142?sid=101"
+        },
+        {
+          "title": "제논, AI 보안 '젠가드' 출시",
+          "press": "hansbiz.co.kr",
+          "publishedAt": "2026-10-26T12:02:00.000Z",
+          "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=876140"
+        },
+        {
+          "title": "제논, AI 가드레일 솔루션 '젠가드' 출시",
+          "press": "inews24.com",
+          "publishedAt": "2026-10-26T01:56:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/031/0001069180?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "제논 드라코 수경",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "제논 일렉기타",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "제논 수경",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "제논 작하는법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "제논 라이트 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "제논 할로겐 차이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "제논 어빌",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "제논 추옵",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "제논 공모가",
+          "reason": "청약 전 가격 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "제논 청약일",
+          "reason": "참여 일정 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "제논 상장일",
+          "reason": "거래 시작 시점",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "제논 실적",
+          "reason": "흑자 여부 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
     {
       "issue": "거제시",
       "issueType": "fresh",
@@ -1386,97 +3156,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 1
-    },
-    {
-      "issue": "김정은",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": null,
-      "headlines": [
-        {
-          "title": "단둥 찾은 김정은, 中서열 4위 왕후닝 만나…北 복귀한 듯(종합)",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-24T12:26:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014275948?sid=104"
-        },
-        {
-          "title": "김정은, 당일치기 방중 끝났다... 中서열 4위 만나고 평양으로",
-          "press": "chosun.com",
-          "publishedAt": "2026-10-24T11:31:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0004005747?sid=100"
-        },
-        {
-          "title": "김정은, '中서열 4위' 왕후닝과 단둥서 회담…\"협력 전망 넓어\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-24T11:25:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016398287?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "김정은 죽음",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "북한 김정은",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김정은 사망일",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김정은 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김정은 뇌출혈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김정은 자녀",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김정은 배우",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김정은 김주애",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
       "rowCount": 1,
       "carried": true
     }
-  ],
-  "enrichedAt": "2026-10-26T09:41:57.883Z",
-  "enrichStats": {
-    "enriched": 0,
-    "subsAdded": 0,
-    "titleUpgraded": 0,
-    "proposed": 0,
-    "verified": 0,
-    "judged": 0,
-    "judgedBad": 0,
-    "related": 0,
-    "picked": 0,
-    "pooled": 0,
-    "aiTitled": 0,
-    "trended": 0,
-    "aiCalls": 2,
-    "partial": false
-  }
+  ]
 }
