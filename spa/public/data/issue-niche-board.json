@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-10-26T09:22:17.513Z",
+  "publishedAt": "2026-10-26T09:41:38.507Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
-    "issues": 18,
-    "candidates": 231,
-    "niche": 0,
-    "preemption": 11,
+    "issues": 17,
+    "candidates": 239,
+    "niche": 1,
+    "preemption": 10,
     "pending": 0
   },
   "freeSample": {
@@ -16,6 +16,107 @@
     ]
   },
   "rows": [
+    {
+      "keyword": "거제시 버스정보시스템",
+      "issue": "거제시",
+      "topic": "거제시",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 1건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 1,
+        "sampledTitles": 10,
+        "topTitles": [
+          "거제도 뚜벅이 여행, 서울에서 차 없이 가는 법｜남부터미널·KTX·2000번 버스 총정리",
+          "거제 신선대전망대 주차장 가는법, 버스 정보까지",
+          "바람의 언덕만 보고 왔다면 아쉬워요｜거제 바다 옆 8.37km, 가을 해안거님길",
+          "경남 거제 옥포동 힐스테이트 거제시그니처 1,963세대",
+          "거제 산사태 현재 상황｜옥포동 아파트 1명 사망·2명 부상, 폭우 피해 총정리",
+          "거제센트럴자이 84㎡ 연초 7억6천→8억대, 교대역 환승 입지에 전세 5억 안팎",
+          "부산 연제구 거제동 거제해맞이역 인근 아파트 경매 3억대 물건 2025타경22356",
+          "고현버스터미널 시간표 부산 서울 노선 예매 직접 해보고 겪은 필수 팁",
+          "부산 양정역 인근 역세권 대형 평형 아파트 경매 매각기일 2025타경22456",
+          "거제시청 구인구직 채용공고 종류 및 자격요건 팩트체크 신청방법 총정리"
+        ],
+        "measuredAt": "2026-10-26T09:41:02.643Z"
+      },
+      "documentCount": 10122,
+      "documentCountMeasured": true,
+      "searchVolume": 3050,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 0.97852598589294,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 3,050",
+        "문서수 10,122",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 3,050 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.0배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        },
+        "home": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1990,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-10-26T09:40:44.823Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2"
+    },
     {
       "keyword": "김정은 가망",
       "issue": "김정은",
@@ -142,7 +243,7 @@
         ],
         "label": "📉 단발성",
         "recommendation": "회피! 지난 며칠 폭발 후 급락 중. 글 써도 유입 없음",
-        "measuredAt": "2026-10-26T03:24:20.613Z"
+        "measuredAt": "2026-10-26T09:41:39.263Z"
       },
       "kinCount": 186,
       "kinTop": [],
@@ -208,7 +309,7 @@
       "kinCount": 5,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-26T09:20:35.535Z",
+      "measuredAt": "2026-10-26T09:40:44.823Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -259,24 +360,24 @@
         {
           "title": "젠가드에프캡슐 잇몸건강에 도움되나요?",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=70404&docId=318036302&answerNo=1",
-          "views": 1181,
+          "views": 1184,
           "answers": 1
         },
         {
           "title": "젠가드에프캡슐(잇몸약)이랑 빅손정1m",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=70404&docId=318069603&answerNo=1",
-          "views": 1065,
+          "views": 1068,
           "answers": 1
         },
         {
           "title": "대웅제악 젠가드에프캡슐에 비타민 함유",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=70404&docId=318039806&answerNo=1",
-          "views": 242,
+          "views": 245,
           "answers": 1
         }
       ],
       "monetize": null,
-      "measuredAt": "2026-10-26T09:20:35.535Z",
+      "measuredAt": "2026-10-26T09:40:44.823Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -342,12 +443,12 @@
         {
           "title": "새로운 AI 에이전트 닷츠, 실제로 얼마나 효율적일까요?",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=1122&docId=495387990&answerNo=0",
-          "views": 73,
+          "views": 74,
           "answers": null
         }
       ],
       "monetize": null,
-      "measuredAt": "2026-10-26T09:20:35.535Z",
+      "measuredAt": "2026-10-26T09:40:44.823Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -400,7 +501,7 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-26T09:20:35.535Z",
+      "measuredAt": "2026-10-26T09:40:44.823Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -453,7 +554,7 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-26T09:20:35.535Z",
+      "measuredAt": "2026-10-26T09:40:44.823Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -505,7 +606,7 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-26T09:20:35.535Z",
+      "measuredAt": "2026-10-26T09:40:44.823Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -557,7 +658,7 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-26T09:20:35.535Z",
+      "measuredAt": "2026-10-26T09:40:44.823Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -609,7 +710,111 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-26T09:20:35.535Z",
+      "measuredAt": "2026-10-26T09:40:44.823Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "셀렉트스타 블라인드",
+      "issue": "셀렉트스타",
+      "topic": "셀렉트스타",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 221,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 221",
+        "선점 후보 — 경쟁 문서 221건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-26T09:40:44.823Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "두나무앤파트너스 채용",
+      "issue": "두나무앤파트너스",
+      "topic": "두나무앤파트너스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 262,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 262",
+        "선점 후보 — 경쟁 문서 262건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-26T09:40:44.823Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -663,111 +868,8 @@
       "monetize": null,
       "measuredAt": "2026-10-26T09:20:35.535Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "셀렉트스타 블라인드",
-      "issue": "셀렉트스타",
-      "topic": "셀렉트스타",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 221,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 221",
-        "선점 후보 — 경쟁 문서 221건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-26T09:20:35.535Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "두나무앤파트너스 채용",
-      "issue": "두나무앤파트너스",
-      "topic": "두나무앤파트너스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 262,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 262",
-        "선점 후보 — 경쟁 문서 262건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-26T09:20:35.535Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "ripl.uk",
@@ -1215,6 +1317,78 @@
   "rejectedCount": 0,
   "issues": [
     {
+      "issue": "거제시",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": null,
+      "headlines": [
+        {
+          "title": "거제시, ‘거제 야호’ 리센느에 명예시민증 수여",
+          "press": "khan.co.kr",
+          "publishedAt": "2026-10-26T04:59:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/032/0003478512?sid=102"
+        },
+        {
+          "title": "거제시, 걸그룹 '리센느' 명예시민증…\"거제 야호! 열풍 공로\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-26T02:29:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014277974?sid=102"
+        },
+        {
+          "title": "\"거제 야호!\" 한 마디에 관광 소비 '쑥'…리센느, 거제 명예시민 됐다",
+          "press": "hankyung.com",
+          "publishedAt": "2026-10-26T04:13:00.000Z",
+          "link": "https://m.entertain.naver.com/article/015/0005346468"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "거제시 인구",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "거제시 날씨",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "거제시 시장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "거제시 지도",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "거제시 위치",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "거제시 리센느",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "거제시 버스정보시스템",
+          "searchVolume": 3050,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "경상남도 거제시",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 1
+    },
+    {
       "issue": "김정은",
       "issueType": "fresh",
       "lane": "realtime",
@@ -1287,5 +1461,22 @@
       "rowCount": 1,
       "carried": true
     }
-  ]
+  ],
+  "enrichedAt": "2026-10-26T09:41:57.883Z",
+  "enrichStats": {
+    "enriched": 0,
+    "subsAdded": 0,
+    "titleUpgraded": 0,
+    "proposed": 0,
+    "verified": 0,
+    "judged": 0,
+    "judgedBad": 0,
+    "related": 0,
+    "picked": 0,
+    "pooled": 0,
+    "aiTitled": 0,
+    "trended": 0,
+    "aiCalls": 2,
+    "partial": false
+  }
 }
