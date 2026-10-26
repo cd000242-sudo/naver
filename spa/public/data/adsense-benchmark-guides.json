@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-26T05:46:20.412Z",
+  "generatedAt": "2026-10-26T06:32:45.968Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -1524,75 +1524,6 @@
       "at": "2026-10-20T10:55:31.225Z",
       "rules": "2026-10-20-solve",
       "provider": "claude"
-    },
-    {
-      "id": "07504fbfd2376ed6",
-      "urls": [
-        "https://luvgg.com/sangsaeng-sobi-bokgwon-entry-tickets-30-2026/",
-        "https://tv-sherlock.tistory.com/46",
-        "https://piwpiw.tistory.com/entry/%EC%83%81%EC%83%9D%EC%86%8C%EB%B9%84%EB%B3%B5%EA%B6%8C-%EC%9D%91%EB%AA%A8-%EB%B0%A9%EB%B2%95-11%EC%9B%94-15%EC%9D%BC%EA%B9%8C%EC%A7%80-%EB%94%94%EC%A7%80%ED%84%B8%EC%98%A8%EB%88%84%EB%A6%AC-3%EB%A7%8C%EC%9B%90",
-        "https://bongbong200.com/entry/%EB%AA%A8%EB%B0%94%EC%9D%BC-%EC%98%A8%EB%88%84%EB%A6%AC%EC%83%81%ED%92%88%EA%B6%8C-%ED%98%84%EA%B8%88%EC%98%81%EC%88%98%EC%A6%9D-%EB%B0%9C%EA%B8%89%EB%B0%A9%EB%B2%95-%EB%94%94%EC%A7%80%ED%84%B8-%EC%98%A8%EB%88%84%EB%A6%AC-%ED%99%98%EB%B6%88-%EA%B8%B0%EC%A4%80-%EC%B4%9D%EC%A0%95%EB%A6%AC-%EC%9E%90%EB%8F%99%EB%B0%9C%EA%B8%89%C2%B7%ED%99%88%ED%83%9D%EC%8A%A4%C2%B760-%ED%99%98%EB%B6%88-%EA%B7%9C%EC%A0%95",
-        "https://ss.testis.shop/379"
-      ],
-      "guide": {
-        "direction": "검색자는 상생페이백 신청만으로 상생소비복권에 자동 응모되는지, 결제금액에 따라 응모권이 몇 장 나오는지를 가장 헷갈려 한다. 고수 블로그들은 응모 방법과 환불 규정을 따로 다뤄 결제금액별 응모권 수와 1등 경품을 한 표로 보여주지 못한다. 결제금액·응모권 수·마감일(11월 15일)을 표로 정리해 주면 독자가 자신이 받을 장수를 바로 계산할 수 있다.",
-        "searchTargets": [
-          "상생소비복권 응모방법",
-          "상생소비복권 응모"
-        ],
-        "mustInclude": [
-          "디지털온누리상품권 3만원 결제 시 응모권 1장, 최대 30장 지급 기준",
-          "1등 경품 3000만원, 응모 마감 11월 15일",
-          "자동응모(상생페이백 실적)와 영수증 제출 응모 방식의 차이",
-          "디지털온누리상품권 앱에서 응모 내역·등급 조회하는 법",
-          "상생소비복권은 추첨식이라 낙첨 시 해당 회차 종료 (확인 필요: 재응모 가능 여부)"
-        ],
-        "mustAvoid": [
-          "상생페이백과 상생소비복권을 같은 제도처럼 섞어 설명",
-          "당첨을 보장하는 듯한 과장(추첨제이므로 낙첨 가능 강조 필요)",
-          "디지털온누리상품권 60% 환불 규정과 복권 응모 조건을 혼동"
-        ],
-        "checkBefore": [
-          "디지털온누리상품권 앱/홈페이지 공식 응모 안내에서 대상 기간·최소 결제금액 확인",
-          "등급별 경품 구성과 지급 방식(디지털온누리상품권) 공식 공지 확인"
-        ],
-        "solves": [
-          "상생페이백 신청만 해도 자동응모 되는지 헷갈림 → 자동응모 기준 설명",
-          "결제금액별 받는 응모권 장수를 모름 → 금액별 장수 계산표 제공",
-          "응모 내역을 어디서 확인하는지 모름 → 앱 조회 경로 안내"
-        ],
-        "actionTitles": [
-          "상생소비복권 응모방법 총정리, 최대 30장 받는 법",
-          "상생소비복권 응모 조건과 1등 당첨금 확인하는 법 정리",
-          "상생소비복권 자동응모 기준과 응모권 받는 법 확인하기"
-        ]
-      },
-      "at": "2026-10-20T10:55:31.225Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "상생소비복권 이벤트에 자동 응모되는 기준....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1060115&docId=488852849&answerNo=9&qb=7IOB7IOd7IaM67mE67O16raMIOydkeuqqCDrlJTsp4DthLjsmKjriITrpqw=",
-          "views": 1068,
-          "answers": 9,
-          "askedAt": "2025.11.09"
-        },
-        {
-          "title": "상생페이백 디지털온누리 상품권 환급금 신....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=51003&docId=491770740&answerNo=6&qb=7IOB7IOd7IaM67mE67O16raMIOydkeuqqCDrlJTsp4DthLjsmKjriITrpqw=",
-          "views": 770,
-          "answers": 8,
-          "askedAt": "2026.02.18"
-        },
-        {
-          "title": "상생소비복권 자동응모 혜택, 어떻게 참여할 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8070401&docId=488852428&answerNo=8&qb=7IOB7IOd7IaM67mE67O16raMIOydkeuqqCDrlJTsp4DthLjsmKjriITrpqw=",
-          "views": 385,
-          "answers": 12,
-          "askedAt": "2025.11.03"
-        }
-      ]
     },
     {
       "id": "7a3eb8d4a7a1c775",
@@ -5313,40 +5244,6 @@
       ]
     },
     {
-      "id": "f6be94382606e68e",
-      "urls": [
-        "https://fh.bluemoha.com/entry/%EB%8B%A8%ED%92%8D%EB%AA%85%EC%86%8C-%EB%B0%A9%ED%83%9C%EC%82%B0%EC%9E%90%EC%97%B0%ED%9C%B4%EC%96%91%EB%A6%BC-%EC%98%88%EC%95%BD%EB%B0%A9%EB%B2%95-%EC%88%99%EC%86%8C%EC%9A%94%EA%B8%88-%EC%B6%A9%EC%A0%84%EA%B6%8C-%EA%B5%AC%EC%9E%85-%EC%9C%A0%EC%9D%98%EC%82%AC%ED%95%AD-%EC%A0%95%EB%A6%AC",
-        "https://lmn.bluemoha.com/entry/%EB%B0%A9%ED%83%9C%EC%82%B0%EC%9E%90%EC%97%B0%ED%9C%B4%EC%96%91%EB%A6%BC-%EC%B6%94%EC%B2%A8%EC%A0%9C-%EC%98%88%EC%95%BD%EB%B0%A9%EB%B2%95-%EC%88%99%EB%B0%95%EC%8B%9C%EC%84%A4-%EC%B6%A9%EC%A0%84%EA%B6%8C-%EA%B5%AC%EC%9E%85-%EC%A3%BC%EC%9D%98%EC%82%AC%ED%95%AD"
-      ],
-      "guide": {
-        "direction": "방태산자연휴양림 단풍철 예약을 검색하는 사람은 선착순이 아닌 추첨제 방식에서 신청 시점과 당첨 확률을 가장 궁금해한다. 고수 블로그들은 추첨제라는 사실은 언급했지만 숙소요금 비교표와 충전권 구입 시 유의사항은 구체적으로 정리하지 않았다. 이 글은 추첨 신청 순서, 숙박시설별 요금, 충전권 구입 방법과 유의사항을 하나의 체크리스트로 묶어 끝까지 읽히게 한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "추첨제 예약 방식과 신청 가능 기간(확인 필요: 국립자연휴양림관리소 공식 사이트)",
-          "숙박시설별 요금 비교표(확인 필요: 휴양림 공식 요금표)",
-          "충전권 구입 방법과 사용처(확인 필요: 매표소·온라인 공지)",
-          "예약 시 자주 놓치는 유의사항(환불규정·입장시간 등, 확인 필요: 공식 안내문)"
-        ],
-        "mustAvoid": [],
-        "checkBefore": [
-          "방태산자연휴양림 공식 안내문에서 충전권 가격·요금표 확인"
-        ],
-        "solves": [
-          "추첨제 예약이 처음이라 신청 방법을 모르겠어요 → 신청 순서와 당첨자 발표 확인법을 단계별로 정리",
-          "숙소요금이 시설마다 달라 헷갈려요 → 숙박시설별 요금 비교표로 한눈에 정리",
-          "충전권을 어디서 어떻게 사야 하는지 모르겠어요 → 구입처와 유의사항을 체크리스트로 제공"
-        ],
-        "actionTitles": [
-          "방태산자연휴양림 예약방법 확인, 추첨제 당첨 전략 정리",
-          "방태산자연휴양림 숙소요금 비교, 충전권 구입까지 한번에",
-          "방태산자연휴양림 충전권 구입 유의사항, 예약 전 꼭 확인"
-        ]
-      },
-      "at": "2026-10-20T12:32:18.112Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
-    },
-    {
       "id": "7eeccc903bccbbdc",
       "urls": [
         "https://edgeo.gong24.kr/64",
@@ -5958,65 +5855,6 @@
           "views": 1736,
           "answers": 6,
           "askedAt": "2026.08.21"
-        }
-      ]
-    },
-    {
-      "id": "9f038c6f87848330",
-      "urls": [
-        "https://cogone.tistory.com/823",
-        "https://zsewqzsewq.tistory.com/303"
-      ],
-      "guide": {
-        "direction": "검색자는 눈이 침침하고 초점이 안 맞을 때 이게 노안인지 백내장 초기증상인지 녹내장인지 구별이 안 돼 막힌다. 고수 글 제목은 '총정리·비교'를 내세우지만 세 질환을 한 표로 비교해 구별 기준을 주는 글은 드물다. 노안·백내장·녹내장 증상 비교표와 병원 방문이 필요한 경고 신호를 체크리스트로 주면 끝난다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "노안 vs 백내장 vs 녹내장 증상 비교표(시야 흐림·빛번짐·시야 좁아짐 등 구분 기준)",
-          "광시증·안구건조증과 녹내장 안압 상승 연관성 설명(확인 필요: 안과 전문의 자료)",
-          "연령대별 발생 차이(백내장은 노화성, 녹내장은 중학생도 가능 - 지식인 사례)"
-        ],
-        "mustAvoid": [
-          "특정 질환을 자가진단으로 확정짓는 표현(실제 진단은 안과 검사 필요)",
-          "백내장과 녹내장을 혼용해서 같은 질환처럼 서술"
-        ],
-        "checkBefore": [
-          "백내장·녹내장 공식 증상 기준(대한안과학회 또는 질병관리청 자료)"
-        ],
-        "solves": [
-          "노안인지 백내장인지 구별이 안 된다 → 증상별 비교표로 구분 기준 제시",
-          "어린 나이에도 녹내장일 수 있는지 궁금하다 → 연령 무관 발생 가능성 설명",
-          "광시증·안구건조증이 큰 병의 신호인지 궁금하다 → 안압 상승 연관성과 병원 방문 시점 안내"
-        ],
-        "actionTitles": [
-          "백내장 초기증상 노안 구별법, 증상 비교표로 확인하기",
-          "눈 초점 안 맞을 때 백내장·녹내장 자가 체크리스트",
-          "광시증·안구건조증 방치하면 녹내장 위험 신호인지 확인"
-        ]
-      },
-      "at": "2026-10-20T17:57:04.426Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "눈(안과)관련 질문드려요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70112&docId=201299071&answerNo=2&qb=7Lmo7Lmo7ZWcIOyEpOuniCDrgpjrj4Qg64W564K07J6lIOy0iOq4sOymneyDgQ==",
-          "views": 1303,
-          "answers": 2,
-          "askedAt": "2014.07.03"
-        },
-        {
-          "title": "눈 초점?이 안맞는다 해야하나 난시같기도 한....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70112&docId=338429765&answerNo=2&qb=7Lmo7Lmo7ZWcIOyEpOuniCDrgpjrj4Qg64W564K07J6lIOy0iOq4sOymneyDgQ==",
-          "views": 1809,
-          "answers": 2,
-          "askedAt": "2019.10.18"
-        },
-        {
-          "title": "중학생 2학년 녹내장 의심 내공300",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70112&docId=338039836&answerNo=2&qb=7Lmo7Lmo7ZWcIOyEpOuniCDrgpjrj4Qg64W564K07J6lIOy0iOq4sOymneyDgQ==",
-          "views": 1175,
-          "answers": 2,
-          "askedAt": "2019.10.17"
         }
       ]
     },
@@ -8248,67 +8086,6 @@
       "at": "2026-10-21T17:55:53.716Z",
       "rules": "2026-10-20-solve",
       "provider": "claude"
-    },
-    {
-      "id": "d68b258f3f854900",
-      "urls": [
-        "https://economyfactory.com/drawbacks-of-the-lexus-nx350h/",
-        "https://car.tipmany.com/entry/%EB%A0%89%EC%84%9C%EC%8A%A4nx350h%EA%B0%80%EA%B2%A9"
-      ],
-      "guide": {
-        "direction": "지식인 질문들을 보면 검색자는 NX350h 프리미엄·럭셔리 트림 가격차, 전륜구동 추가 모델의 트림 구성, NX450h+와의 가격 차이를 계약 전에 알고 싶어 한다. 고수 글 '가격 트림별 비교'는 제목만 있고 트림별 실제 가격표·연비 수치를 다 안 보여줄 수 있다. 이 글은 트림별 가격·연비·구동방식을 표로 정리해 계약 전 비교를 끝내준다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "프리미엄 트림과 럭셔리 트림 출고가 차이(수백만 원 단위) (확인 필요: 렉서스코리아 공식 가격표)",
-          "2026년형 전륜구동(FWD) 모델 추가 여부와 사륜구동 대비 가격차 (확인 필요: 렉서스코리아 공지)",
-          "트림별 공인 복합연비 수치 비교 (확인 필요: 환경부 자동차 연비 사이트)",
-          "NX350h와 NX450h+ 가격·옵션 차이 비교표 (확인 필요: 렉서스코리아 공식 제원표)"
-        ],
-        "mustAvoid": [
-          "캐딜락 리릭 등 타 브랜드 비교를 메인으로 다뤄 NX350h 본래 정보가 뒷전으로 밀리는 것",
-          "아직 공식 확인 안 된 연비 수치(예: 20km/L)를 확정된 사실처럼 단정하는 것"
-        ],
-        "checkBefore": [
-          "렉서스코리아 공식 홈페이지 가격표에서 트림별(프리미엄·럭셔리) 가격·옵션 구성 확인",
-          "2026년형 전륜구동 모델 출시 여부와 공인 연비는 렉서스코리아 공식 발표 및 환경부 연비사이트에서 확인"
-        ],
-        "solves": [
-          "프리미엄·럭셔리 트림 가격차가 궁금해 검색 → 트림별 가격·옵션 비교표로 정리",
-          "전륜구동 추가 모델의 트림 구성·연비가 궁금함 → 구동방식별 연비 차이를 정리",
-          "NX350h와 NX450h+ 가격차가 궁금함 → 두 모델 가격 비교표 제공"
-        ],
-        "actionTitles": [
-          "렉서스 NX350h 트림별 가격 비교, 프리미엄·럭셔리 차이",
-          "렉서스 NX350h 단점·제원 총정리, 트림별로 확인하기",
-          "NX350h vs NX450h+ 가격 차이, 트림별로 비교해보기"
-        ]
-      },
-      "at": "2026-10-21T17:55:53.716Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "렉서스 NX 하이브리드 모델별 연비와 성능 차....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=81101&docId=490292132&answerNo=3&qb=66CJ7ISc7IqkbngzNTBo6rCA6rKpIO2KuOumvOuzhA==",
-          "views": 441,
-          "answers": 3,
-          "askedAt": "2026.07.26"
-        },
-        {
-          "title": "2026년형 렉서스 NX350h, 연비 진짜 20km/L 가능할....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=50703&docId=492532016&answerNo=3&qb=66CJ7ISc7IqkbngzNTBo6rCA6rKpIO2KuOumvOuzhA==",
-          "views": 198,
-          "answers": 3,
-          "askedAt": "2026.07.26"
-        },
-        {
-          "title": "렉서스 NX350h, 하이브리드 SUV로서 어떤 점이 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8110102&docId=493249936&answerNo=2&qb=66CJ7ISc7IqkbngzNTBo6rCA6rKpIO2KuOumvOuzhA==",
-          "views": 149,
-          "answers": 3,
-          "askedAt": "2026.07.26"
-        }
-      ]
     },
     {
       "id": "1a700f148cf195a9",
