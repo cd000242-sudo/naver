@@ -7,6 +7,7 @@ import { assessAffiliateRecommendation, compareAffiliateRecommendations } from '
 import RecommendationFilter, { type RecommendationStatus } from './RecommendationFilter';
 import AffiliateTitles from './AffiliateTitles';
 import { assessCoupangDiscovery, compareCoupangDiscovery, coupangProductUrl } from '../../lib/coupangDiscovery.mjs';
+import { compareGoldenRatio } from '../../lib/affiliateGoldenOrder.mjs';
 import CoupangDiscoveryBrief from './CoupangDiscoveryBrief';
 
 /**
@@ -100,7 +101,9 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
     const counts = { ready: 0, research: 0, excluded: 0 };
     for (const entry of all) counts[entry.recommendation.status] += 1;
     const candidateCount = all.filter(entry => entry.discovery.status === 'candidate').length;
-    const visible = all.filter(entry => discoveryMode
+    // [2026-10-28 사장님 "기본 정렬 자체를 바꾸세요"] 기본 화면은 검색량÷문서수 큰 순(검색량 100+ 먼저). 발굴 모드는 기존 순서.
+    const ordered = discoveryMode ? all : [...all].sort((a, b) => compareGoldenRatio(a.row, b.row));
+    const visible = ordered.filter(entry => discoveryMode
         ? discoveryView === 'all' || entry.discovery.status === 'candidate'
         : entry.recommendation.status === recommendationView);
 

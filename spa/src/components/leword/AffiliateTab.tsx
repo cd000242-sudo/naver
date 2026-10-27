@@ -10,6 +10,7 @@ import { useEvidenceClock } from './useEvidenceClock';
 import RecommendationFilter, { type RecommendationStatus } from './RecommendationFilter';
 import { loadUserKeys } from '../../lib/userKeys';
 import { campaignFreshness } from '../../lib/affiliateFreshness.mjs';
+import { compareGoldenRatio } from '../../lib/affiliateGoldenOrder.mjs';
 
 /**
  * 제휴 황금키워드 — 플랫폼별 서브탭.
@@ -105,7 +106,7 @@ type CampaignSnapshot = {
  */
 function exposureVerdict(ratio: number | null | undefined) {
     if (typeof ratio !== 'number') return null;
-    return { label: `검색량÷문서수 ${ratio.toFixed(2)} · 참고값`, color: '#aebccc', bg: 'rgba(174,188,204,.12)' };
+    return { label: `검색량÷문서수 ${ratio.toFixed(2)}`, color: '#aebccc', bg: 'rgba(174,188,204,.12)' };
 }
 
 /** 진짜 자리 실측 → 배지. 열림/반열림만 초록·주황, 나머지는 회색으로 사실만 적는다. */
@@ -235,7 +236,9 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const counts = { ready: 0, research: 0, excluded: 0 };
     for (const entry of assessed) counts[entry.recommendation.status] += 1;
     // 같은 추천 상태 안에서는 진짜 자리 실측(열림 → 반열림 → 나머지)이 순서를 정한다 — "작성하면 노출될 확률"이 먼저다.
-    const displayed = assessed.filter(entry => entry.recommendation.status === recommendationView).sort((a, b) => compareSeat(a.item, b.item));
+    // [2026-10-28 사장님 "기본 정렬 자체를 바꾸세요"] 기본 순서 = 검색량÷문서수 큰 순(검색량 100+ 먼저). 숫자가 없는 상품은 뒤에서 자리 순서를 지킨다.
+    const displayed = assessed.filter(entry => entry.recommendation.status === recommendationView)
+        .sort((a, b) => compareSeat(a.item, b.item)).sort((a, b) => compareGoldenRatio(a.item, b.item));
     const collectedLabel = freshness.collectedAt && Number.isFinite(Date.parse(freshness.collectedAt))
         ? new Date(freshness.collectedAt).toLocaleString('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })
         : '';
