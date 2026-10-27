@@ -260,15 +260,42 @@ function groupPosts(posts) {
  * 추천에 "출처 블로그 상위 이력 1회+ 또는 공감 10+" 를 더 요구한다. 없으면 예전 규칙 그대로.
  */
 const blogIdOf = (url) => (/blog\.naver\.com\/([A-Za-z0-9_-]+)/.exec(String(url || '')) || [])[1]?.toLowerCase() || null;
+/*
+ * 일반인 논란 · 사건과 같은 소재 상한(2026-10-27) — 수집기 homefeed-benchmarks-core.cjs 와 같은 규칙 · 같은 낱말.
+ * 연애 예능 일반인 출연자의 불화 · 폭로 · 결별과 일반인 사건은 추천하지 않는다(대표 글 제목 · 요약만 본다).
+ * 같은 소재(구체어 둘 이상을 나눠 가진 추천)는 우선순위 순으로 3장까지만 추천한다.
+ */
+const REALITY_SHOW = /나는\s*솔로|나솔|나는\s*solo|솔로지옥|환승연애|하트시그널|돌싱글즈|커플팰리스|연애남매|끝사랑|모태솔로|합숙맞선/i;
+const PRIVATE_DISPUTE = /불화|왕따|저격|폭로|유출|해명|갑질|학폭|사생활|열애설|결별|파혼|위장|의혹|루머|비난|악플|뒷담|논란/;
+const PRIVATE_CRIME = /살인(?!\s*(태클|미소|일정|스케줄|더위))|살해|폭행|성폭|성추행|성범죄|스토킹|학대|가스라이팅|피해자|가해자|신상\s*공개|흉기|납치/;
+function privatePersonRisk(post) {
+  const text = `${post.title} ${post.summary || ''}`;
+  return (REALITY_SHOW.test(text) && PRIVATE_DISPUTE.test(text)) || PRIVATE_CRIME.test(text);
+}
+const SAME_STORY_CAP = 3;
+const CAP_STOP = new Set(['입고', '입은', '맞아', '이미', '나온', '찍은', '똑같', '똑같은', '남긴', '꺼낸', '드레스', '원피스', '가을', '겨울', '총정리', '줄거리', '결말', '해석', '결말해석', '출연진', '등장인물', '드라마', '영화', '리뷰', '등장', '다들', '너무', '이게', '대신', '마음', '사람', '엄마', '팬들', '평점', '원작', '재방송', '예고', '시청률', '근황', '사복', '사복패션', '주가', '전망']);
+const storyKeys = (title) => groupTokens(title).map((t) => (/^(나솔|나는솔|나는솔로|나는solo)$/.test(t) ? '나는솔로' : t)).filter((t) => !CAP_STOP.has(t));
+function capSameStory(cards) {
+  const kept = [];
+  return cards.map((card) => {
+    if (!card.recommended) return card;
+    const keys = storyKeys(card.title);
+    const same = kept.filter((other) => sharedUnits(keys, other).filter((u) => !isGeneric(u)).length >= 2).length;
+    if (same < SAME_STORY_CAP) { kept.push(keys); return card; }
+    return { ...card, recommended: false, status: card.status === 'review-now' ? 'verify' : card.status, freshnessLabel: card.status === 'review-now' ? '원출처 확인 필요' : card.freshnessLabel, why: [...card.why, `같은 소재 추천이 이미 ${SAME_STORY_CAP}장 있어 추천에서 뺐습니다 — 판을 보는 사람끼리 같은 소재로 겨루지 않게.`] };
+  });
+}
+const byBoardOrder = (a, b) => Number(b.recommended) - Number(a.recommended) || b.priority - a.priority || (Date.parse(b.publishedAt) || 0) - (Date.parse(a.publishedAt) || 0) || a.sources[0].url.localeCompare(b.sources[0].url);
 export function buildLiveCandidates(posts, now, growthByUrl = new Map(), topBlogs = new Map()) {
   const measured = topBlogs instanceof Map && topBlogs.size > 0;
   const topsOf = (p) => (measured ? topBlogs.get(blogIdOf(p.url)) || 0 : 0);
   const groups = groupPosts(posts);
-  return groups.filter((group) => group.posts.some((p) => p.platform !== 'community-ranking' && p.summary)).map((group) => {
+  const ordered = groups.filter((group) => group.posts.some((p) => p.platform !== 'community-ranking' && p.summary)).map((group) => {
     const sorted = [...group.posts].sort((a, b) => Number(Boolean(b.summary)) - Number(Boolean(a.summary)) || (Date.parse(b.publishedAt) || 0) - (Date.parse(a.publishedAt) || 0));
     const lead = sorted[0];
     const flags = [...new Set(sorted.flatMap((p) => flagsFor(p, now)))];
     if (sorted.length > 1 && sorted.some((p, i) => sorted.slice(i + 1).some((q) => group.norms.get(p) === group.norms.get(q)))) flags.push('possible-syndication');
+    if (privatePersonRisk(lead)) flags.push('private-person');
     const age = lead.publishedAt ? (Date.parse(now) - Date.parse(lead.publishedAt)) / DAY : Infinity;
     const stale = (age > 7 && Boolean(lead.publishedAt)) || flags.includes('recycled-material');
     const platforms = new Set(sorted.map((p) => p.platform));
@@ -280,7 +307,7 @@ export function buildLiveCandidates(posts, now, growthByUrl = new Map(), topBlog
     const histTops = [...new Map(sorted.map((p) => [blogIdOf(p.url), topsOf(p)])).values()].reduce((s, n) => s + n, 0);
     const maxLikes = Math.max(0, ...sorted.map((p) => Number(p.metrics?.likes)).filter(Number.isFinite));
     const proven = !measured || histTops >= 1 || maxLikes >= 10;
-    const recommended = age <= 2 && !flags.some((f) => ['sponsored', 'sensitive-claim', 'recycled-material', 'possible-syndication'].includes(f)) && Boolean(lead.summary) && (channels >= 2 || (platforms.size >= 2 && reaction) || positiveGrowth) && proven;
+    const recommended = age <= 2 && !flags.some((f) => ['sponsored', 'sensitive-claim', 'recycled-material', 'possible-syndication', 'private-person'].includes(f)) && Boolean(lead.summary) && (channels >= 2 || (platforms.size >= 2 && reaction) || positiveGrowth) && proven;
     const keyword = tokens(lead.title).slice(0, 5).join(' ').slice(0, 55) || lead.title.slice(0, 55);
     const why = [lead.publishedAt ? `벤치마크 발행 ${lead.publishedAt.slice(0, 10)} · 사건 발생일은 별도 확인` : '발행일을 확인하지 못해 최신 사건으로 판단하지 않았습니다.'];
     if (sorted.length > 1) why.push(`${new Set(sorted.map((p) => p.sourceId)).size}개 채널에서 관련 제목 발견 · 독립 사실 확인과는 다릅니다.`);
@@ -288,6 +315,7 @@ export function buildLiveCandidates(posts, now, growthByUrl = new Map(), topBlog
     if (positiveGrowth) why.push('같은 게시물의 공개 반응이 이전 수집보다 늘었습니다. 채널 평소 대비 성과는 미확인입니다.');
     if (histTops > 0) why.push(`출처 블로그가 최근 홈판 상위 ${histTops}회(어드바이저 실측) — 홈판에 자주 뜨는 블로그의 소재입니다.`);
     if (flags.includes('sponsored')) why.push('제품 제공·협찬 고지 감지: 자연 유행 근거에서 제외');
+    if (flags.includes('private-person')) why.push('일반인 출연자 논란 · 일반인 사건 소재라 추천하지 않습니다 — 실존 일반인을 단정하는 글은 허위조작정보 위험이 큽니다.');
     if (stale) why.push('과거 자료 또는 발행 7일 경과: 새 사실 확보 전 작성 우선순위를 낮춥니다.');
     return {
       id: idOf(lead.url), keyword, title: lead.title, category: category(lead.title, sorted.map((p) => p.topic), lead.summary),
@@ -302,7 +330,7 @@ export function buildLiveCandidates(posts, now, growthByUrl = new Map(), topBlog
       writingDirection: '', searchTargets: [], mustInclude: [], mustAvoid: [],
       relatedKeywords: tokens(lead.title).slice(0, 6),
       // 작성 전 확인은 그 카드에 해당하는 경고만(어느 카드에나 붙던 '사건 날짜 · 사진 원작자'는 뺐다)
-      verificationNeeded: [...(flags.includes('sensitive-claim') ? ['당사자·공식 자료 확인 전 인물 관련 의혹 제외'] : []), ...(flags.includes('sponsored') ? ['상업적 관계와 홍보성 주장 확인'] : [])],
+      verificationNeeded: [...(flags.includes('sensitive-claim') ? ['당사자·공식 자료 확인 전 인물 관련 의혹 제외'] : []), ...(flags.includes('private-person') ? ['일반인 실명 · 신상 · 단정 표현 제외'] : []), ...(flags.includes('sponsored') ? ['상업적 관계와 홍보성 주장 확인'] : [])],
       imageGuide: { url: lead.url, instruction: `${lead.name} 원문에서 이미지의 원출처를 먼저 확인하세요. 원본 게시물의 제목·게시일·관련 장면을 확인한 뒤 사용 조건에 맞게 캡처하고 출처를 남기세요. 벤치마크 사진 자체의 재사용 허용 여부는 미확인입니다.` },
       metrics: { searchVolume: null, documentCount: null, rankingPossibility: 'unmeasured', reactionGrowth: growth }, homefeedExposure: 'unverified',
       sources: sorted.slice(0, 5).map((p) => ({ id: p.sourceId, platform: p.platform, name: p.name, title: p.title, url: p.url, publishedAt: p.publishedAt, summary: plainText(p.summary, 140), metrics: p.metrics, ...(safeBenchmarkImage(p.image) ? { image: p.image } : {}), ...(p.reactionCount != null ? { reactionCount: p.reactionCount, reactionLabel: p.reactionLabel } : {}), ...(p.metricNote ? { metricNote: p.metricNote } : {}), ...(growthOf.get(p.url) ? { growth: growthOf.get(p.url) } : {}), ...(topsOf(p) ? { homefeedTops: topsOf(p) } : {}), discoveryOnly: true })),
@@ -310,8 +338,9 @@ export function buildLiveCandidates(posts, now, growthByUrl = new Map(), topBlog
     };
   })
     .filter((c) => !c.publishedAt || Date.parse(now) - Date.parse(c.publishedAt) <= 2 * DAY)
-    .sort((a, b) => Number(b.recommended) - Number(a.recommended) || b.priority - a.priority || (Date.parse(b.publishedAt) || 0) - (Date.parse(a.publishedAt) || 0) || a.sources[0].url.localeCompare(b.sources[0].url))
-    .slice(0, MAX_CARDS);
+    .sort(byBoardOrder);
+  // 같은 소재 상한은 우선순위 순서로 봐야 해서 줄 세운 뒤에 건다 — 빠진 카드는 추천 뒤로 다시 줄 선다.
+  return capSameStory(ordered).sort(byBoardOrder).slice(0, MAX_CARDS);
 }
 
 /** 워커 원문 → 원천별 게시물. 못 푼 원천은 failed 로 남긴다(지어내지 않는다). */

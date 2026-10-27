@@ -196,3 +196,21 @@ test('실시간 판도 홈판 상위 이력 · 공감 10+ 규칙을 쓴다(이�
   assert.equal(hist.sources.find((s) => s.url.includes('/b/')).homefeedTops, 3);
   assert.equal(live.buildLiveCandidates(pair(12), now, new Map(), new Map([['zzz', 3]]))[0].recommended, true);
 });
+// 비평 5번(2026-10-27) — 수집기 scripts/homefeed-benchmarks.test.cjs 와 같은 사례.
+test('실시간 판도 일반인 출연자 논란 · 일반인 사건은 추천하지 않는다 — 데이트 공개 · 비유("살인 태클")는 그대로', () => {
+  const card = (a, b) => { const r = build([other('a', a), other('b', b)]); assert.equal(r.length, 1, `${a} / ${b}`); return r[0]; };
+  const feud = card('나는솔로 31기 상철 불화설 다시 나온 이유', '31기 상철 불화설 진짜일까 나는솔로');
+  assert.equal(feud.recommended, false);
+  assert.ok(feud.flags.includes('private-person'));
+  assert.equal(card('강서구 동거녀 살인 사건 전말', '강서구 동거녀 살인 사건 실체').recommended, false);
+  assert.equal(card('나는솔로 32기 옥순 광수 낙엽길 데이트 공개', '32기 옥순 광수 낙엽길 데이트 나는솔로').recommended, true);
+  assert.equal(card('황문기 김진수 살인 태클 시즌아웃', '김진수 살인 태클 황문기 시즌아웃 수술').recommended, true);
+});
+test('실시간 판도 같은 소재 추천은 3장까지 — 넷째부터 추천에서 빠지고 판에는 남는다', () => {
+  const words = [['사과', '포도', '수박', '참외'], ['기차', '버스', '택시', '지하철'], ['연필', '지우개', '공책', '가위'], ['바다', '하늘', '구름', '바람']];
+  const result = build(words.flatMap((w, i) => [other(`p${i}`, `100일의 거짓말 ${w.join(' ')}`), other(`q${i}`, `${w.join(' ')} 100일의 거짓말 이야기`)]));
+  assert.equal(result.length, 4);
+  assert.equal(result.filter((c) => c.recommended).length, 3);
+  assert.match(result.at(-1).why.join(' '), /같은 소재 추천이 이미 3장/);
+  assert.equal(result.at(-1).recommended, false);
+});
