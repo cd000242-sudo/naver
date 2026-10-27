@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-27T16:09:50.310Z",
+  "generatedAt": "2026-10-27T16:22:25.638Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -96380,6 +96380,659 @@
           "views": 1468,
           "answers": 5,
           "askedAt": "2025.11.25"
+        }
+      ]
+    },
+    {
+      "id": "4cc1ee2b569457a2",
+      "urls": [
+        "https://thecheck.co.kr/iphone-duo-ios-27-2-update/",
+        "https://economyfactory.com/iphone-duo-screen-display-damage/",
+        "https://healthlife88.tistory.com/entry/%EC%95%84%EC%9D%B4%ED%8F%B0-%EB%93%80%EC%98%A4-%EC%82%AC%EC%A0%84%EC%A3%BC%EB%AC%B8-%EB%B0%A9%EB%B2%95%EA%B3%BC-%EC%9A%A9%EB%9F%89%EB%B3%84256GB%C2%B72TB-%EA%B0%80%EA%B2%A9-%EB%B9%84%EA%B5%90-%EA%B0%80%EC%9D%B4%EB%93%9C",
+        "https://maccrey.tistory.com/entry/%EC%95%84%EC%9D%B4%ED%8F%B0-%EB%93%80%EC%98%A4-%ED%99%94%EB%A9%B4-%ED%8C%8C%EC%86%90-%EC%95%A0%ED%94%8C-%EC%B2%AB-%EA%B2%B0%ED%95%A8-%EC%9D%B8%EC%A0%95%E2%80%A6329%EB%A7%8C%EC%9B%90-%ED%8F%B4%EB%8D%94%EB%B8%94%ED%8F%B0-%EB%AC%B4%EC%83%81-%EA%B5%90%EC%B2%B4-%EA%B0%80%EB%8A%A5%ED%95%A0%EA%B9%8C",
+        "https://hanbre.tistory.com/entry/%EC%95%84%EC%9D%B4%ED%8F%B0-%EB%93%80%EC%98%A4-%ED%99%94%EB%A9%B4-%EA%B7%A0%EC%97%B4-%EB%85%BC%EB%9E%80-%EC%95%A0%ED%94%8C-%EB%AC%B4%EC%83%81%EA%B5%90%EC%B2%B4-%EC%A1%B0%EA%B1%B4%C2%B7%EC%88%98%EB%A6%AC%EB%B9%84-165%EB%A7%8C%EC%9B%90",
+        "https://yjfreelifestyle.tistory.com/entry/%EC%95%84%EC%9D%B4%ED%8F%B0-%EB%93%80%EC%98%A4-%EC%88%98%EB%A6%AC%EB%B9%84-%EC%B4%9D%EC%A0%95%EB%A6%AC-%EB%82%B4%EB%B6%80-%ED%99%94%EB%A9%B4-164%EB%A7%8C-9%EC%B2%9C-%EC%9B%90%E2%80%A6%EC%95%A0%ED%94%8C%EC%BC%80%EC%96%B4%ED%94%8C%EB%9F%AC%EC%8A%A4-54%EB%A7%8C-9%EC%B2%9C-%EC%9B%90-%EA%B0%80%EC%B9%98%EB%8A%94"
+      ],
+      "guide": {
+        "direction": "검색자는 '아이폰 듀오가 뭔지', 사전예약 방법, 해외 체류 중에도 예약 가능한지, 바로 구매하는 법을 몰라 막혀 있다. 고수 글들은 화면 파손·수리비·애플케어 비교에 몰려있고 '이게 뭔지'와 '해외 중 사전예약', '18 프로와 뭘 사야 할지'는 안 다룬다. 용량별(256GB·2TB) 가격표, 사전예약 시간·방법, 해외 예약 가능 여부, 수리비 조건을 표로 정리하면 이 글로 끝난다.",
+        "searchTargets": [
+          "아이폰 듀오 가격",
+          "아이폰 듀오 사전예약",
+          "아이폰 듀오 출시일",
+          "아이폰 듀오 불량"
+        ],
+        "mustInclude": [
+          "용량별(256GB·2TB) 가격 비교표 (확인 필요: 애플 공식 사이트)",
+          "사전예약 시작 시간(16일 9시) 및 신청 방법 (확인 필요: 애플 공식 공지)",
+          "화면 파손 수리비(164만9천원/165만원 등 출처별 수치 차이 명시, 확인 필요: 애플 지원 페이지)",
+          "애플케어플러스 가격(54만9천원)과 가입 시 수리비 변화 비교",
+          "해외 체류 중 사전예약 가능 여부 (확인 필요: 애플 고객센터)"
+        ],
+        "mustAvoid": [
+          "아이폰18 프로와의 인기·판매량 비교를 데이터 없이 단정하기",
+          "164만9천원·165만원·329만원 등 수리비 수치를 출처·시점 구분 없이 하나처럼 쓰기",
+          "애플의 결함 인정·무상교체 여부를 공식 발표 확인 전 확정된 사실처럼 쓰기"
+        ],
+        "checkBefore": [
+          "사전예약 날짜·시간, 용량별 가격은 애플 공식 홈페이지에서 확인",
+          "수리비·애플케어플러스 가격·무상교체 여부는 애플 공식 지원 페이지/공지로 확인",
+          "해외 체류 중 예약 가능 여부는 애플 고객센터 또는 공식 공지로 확인"
+        ],
+        "solves": [
+          "'아이폰 듀오가 뭔지 모르겠다' → 폴더블 구조와 기존 아이폰 차이를 한 번에 정리",
+          "'해외 체류 중에도 사전예약 되나' → 해외 예약 가능 여부와 방법 정리",
+          "'18 프로랑 듀오 중 뭐가 인기 많을지' → 용량별 가격·사양 비교로 선택 기준 제시"
+        ],
+        "actionTitles": [
+          "아이폰 듀오 사전예약 방법과 용량별(256GB·2TB) 가격 비교 총정리",
+          "아이폰 듀오 출시일과 가격, 사전예약 전에 꼭 확인할 것",
+          "아이폰 듀오 불량 논란, 무상교체·수리비 조건 확인하기"
+        ]
+      },
+      "at": "2026-10-27T16:20:44.173Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "아이폰 듀오 바로 살려고그러는데",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1070401&docId=495228435&answerNo=5&qb=7JWE7J207Y+w65OA7Jik",
+          "views": 532,
+          "answers": 12,
+          "askedAt": "2026.10.01"
+        },
+        {
+          "title": "아이폰 듀오 구매 원함",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1070401&docId=495308575&answerNo=6&qb=7JWE7J207Y+w65OA7Jik",
+          "views": 413,
+          "answers": 8,
+          "askedAt": "2026.10.12"
+        },
+        {
+          "title": "아이폰18 프로와 듀오, 어떤 제품이 더 인기 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=5010603&docId=495124046&answerNo=7&qb=7JWE7J207Y+w65OA7Jik",
+          "views": 260,
+          "answers": 8,
+          "askedAt": "2026.10.13"
+        }
+      ]
+    },
+    {
+      "id": "1f937390a1372ea6",
+      "urls": [
+        "https://sweetonion1005.tistory.com/entry/%EC%82%BC%EC%84%B1-Kies-%EB%AF%B8%EB%94%94%EC%96%B4-%EB%8F%99%EA%B8%B0%ED%99%94-%EC%82%AC%EC%A7%84-%EC%9D%8C%EC%95%85-%EC%98%81%EC%83%81-%ED%95%9C-%EB%B2%88%EC%97%90-%EA%B4%80%EB%A6%AC%ED%95%98%EA%B3%A0-%EB%B0%B1%EC%97%85%ED%95%98%EA%B8%B0"
+      ],
+      "guide": {
+        "direction": "검색자는 옴니아2·노트10.0 같은 구형 갤럭시 기기를 PC와 연결해 사진·음악·영상을 옮기는 법을 몰라 Kies 연결법을 찾는다. 고수 글은 Kies 기능 소개에 머물러 있고 'Kies가 지금도 쓰이는지, 안 되면 뭘 써야 하는지'는 안 다룬다. 기기별 연결 단계, 동기화 메뉴 안 뜰 때 점검 순서, 지원 종료 시 대체 프로그램 안내를 정리하면 끝난다.",
+        "searchTargets": [
+          "삼성kies 연결방법"
+        ],
+        "mustInclude": [
+          "기기 연결 단계(USB 드라이버 설치→Kies 실행→기기 인식 확인) (확인 필요: 삼성 공식 지원 문서)",
+          "동기화 메뉴가 안 뜨는 경우 점검 순서(드라이버 재설치, 케이블 교체 등) (확인 필요: 삼성 고객지원)",
+          "Kies 지원 종료 여부와 후속 프로그램 전환 안내 (확인 필요: 삼성 공식 공지)",
+          "옴니아2·갤럭시노트1/10.0 등 구형 기기별 호환 여부 정리"
+        ],
+        "mustAvoid": [
+          "최신 갤럭시 기기에도 Kies를 권장하는 것처럼 쓰기(지원 종료 가능성 확인 필요)",
+          "Kies와 후속 동기화 프로그램을 같은 프로그램처럼 혼용해서 설명하기",
+          "안드로이드 파일 전송(Mac)이나 hoppin 같은 별개 서비스와 섞어서 설명하기"
+        ],
+        "checkBefore": [
+          "Kies 지원 종료 여부와 후속 프로그램 안내는 삼성 공식 홈페이지에서 확인",
+          "기기별 호환성은 삼성 고객지원 페이지에서 확인"
+        ],
+        "solves": [
+          "'Kies 연결했는데 동기화 메뉴가 안 보인다' → 메뉴 안 뜰 때 점검 순서 제시",
+          "'옴니아2·구형 갤럭시에 사진 옮기는 법을 모른다' → 기기별 Kies 연결 단계 정리",
+          "'지금도 Kies를 써야 하나' → 지원 종료 여부와 대체 프로그램 안내"
+        ],
+        "actionTitles": [
+          "삼성 Kies 연결방법과 동기화 안 될 때 해결 순서",
+          "Kies 연결 안 될 때 확인할 점검 순서 정리"
+        ]
+      },
+      "at": "2026-10-27T16:20:44.173Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "휴대폰과 티비 연결하는방법(내공100)",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=50101&docId=161458231&answerNo=1&qb=7IK87ISxIGtpZXMg66+465SU7Ja0IOuPmeq4sO2ZlCDsgqzsp4Q=",
+          "views": 74568,
+          "answers": 1,
+          "askedAt": "2012.11.15"
+        },
+        {
+          "title": "갤럭시노트1 루팅후 삭제가능한 기본앱목록....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1070402&docId=161212100&answerNo=2&qb=7IK87ISxIGtpZXMg66+465SU7Ja0IOuPmeq4sO2ZlCDsgqzsp4Q=",
+          "views": 29324,
+          "answers": 2,
+          "askedAt": "2012.11.05"
+        },
+        {
+          "title": "옴니아 2 사진동기화에 대해",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1070202&docId=108029572&answerNo=1&qb=7IK87ISxIGtpZXMg66+465SU7Ja0IOuPmeq4sO2ZlCDsgqzsp4Q=",
+          "views": 3379,
+          "answers": 1,
+          "askedAt": "2010.04.09"
+        }
+      ]
+    },
+    {
+      "id": "33a359b79de7999b",
+      "urls": [
+        "https://flameleaf.tistory.com/entry/%EB%B0%9C%EB%AA%A9-%ED%9E%98%EC%A4%84-%EC%9E%AC%ED%99%9C-%ED%9A%A8%EA%B3%BC%EC%A0%81%EC%9D%B8-%EC%8A%A4%ED%8A%B8%EB%A0%88%EC%B9%AD%EA%B3%BC-%EC%9A%B4%EB%8F%99-%EB%B0%A9%EB%B2%95"
+      ],
+      "guide": {
+        "direction": "검색자는 발목 통증이 단순 염증인지 파열인지 구분 못하고, 수술 후 언제부터 어떤 스트레칭을 해야 하는지 궁금해한다. 고수 글은 '효과적인 스트레칭'만 뭉뚱그려 다루고 증상별(염증·파열·손상) 구분과 수술 후 재활 단계는 안 짚는다. 증상별 구분표, 수술 후 단계별 운동(까치발 들기·저항밴드), 걷기와 스트레칭 순서를 정리하면 끝난다.",
+        "searchTargets": [
+          "발목 힘줄염",
+          "발목 힘줄 파열",
+          "발목 힘줄 통증",
+          "발목 힘줄 수술"
+        ],
+        "mustInclude": [
+          "염증·파열·손상 증상 구분표(통증 양상, 부음 여부 등) (확인 필요: 의료 전문 자료)",
+          "수술 후 재활 단계별 운동(까치발 들기 등 부하 점진 증가) (확인 필요: 의료진 지침)",
+          "저항밴드를 이용한 근력운동 방법",
+          "걷기 운동과 스트레칭 순서(운동 전/후 구분)",
+          "후경골근건 손상처럼 혼동되는 유사 통증과의 구분"
+        ],
+        "mustAvoid": [
+          "급성 파열·수술 직후 상태를 일반 스트레칭 대상처럼 안내하기",
+          "증상 구분을 자가진단 확정처럼 단정하기(진단은 병원 진찰 필요)"
+        ],
+        "checkBefore": [
+          "수술 후 재활 운동 시기·강도는 담당 의사·재활치료사 지침으로 확인",
+          "증상별 구분 기준은 의료 전문 자료로 확인"
+        ],
+        "solves": [
+          "'내 발목이 힘줄염인지 파열인지 모르겠다' → 증상별 구분표로 구별 기준 제시",
+          "'수술 후 언제부터 스트레칭 해야 하나' → 재활 단계별 운동 순서 정리",
+          "'걷기 운동 전후 스트레칭 순서가 헷갈린다' → 운동 전/후 스트레칭 구분 제시"
+        ],
+        "actionTitles": [
+          "발목 힘줄 수술 후 스트레칭 단계별로 하는 법",
+          "발목 힘줄 통증, 염증인지 파열인지 확인하는 법"
+        ]
+      },
+      "at": "2026-10-27T16:20:44.173Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "걷기 운동 후 스트레칭 하는 게 좋나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70120&docId=493664063&answerNo=1&qb=67Cc66qpIO2emOykhCDsnqztmZwg7Zqo6rO87KCB7J24IOyKpO2KuOugiOy5rQ==",
+          "views": 275,
+          "answers": 1,
+          "askedAt": "2026.06.03"
+        },
+        {
+          "title": "발목 힘줄 파열로 인한 수술 후 재활치료 문....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70120&docId=495333459&answerNo=2&qb=67Cc66qpIO2emOykhCDsnqztmZwg7Zqo6rO87KCB7J24IOyKpO2KuOugiOy5rQ==",
+          "views": 153,
+          "answers": 3,
+          "askedAt": "2026.09.28"
+        },
+        {
+          "title": "평발 걸을때 발 아치 통증",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70103&docId=495563033&answerNo=1&qb=67Cc66qpIO2emOykhCDsnqztmZwg7Zqo6rO87KCB7J24IOyKpO2KuOugiOy5rQ==",
+          "views": 126,
+          "answers": 8,
+          "askedAt": "2026.10.15"
+        }
+      ]
+    },
+    {
+      "id": "1ebd8ee4d481c676",
+      "urls": [
+        "https://2ymoney.srtfighting.com/280"
+      ],
+      "guide": {
+        "direction": "지식인 질문자들은 등기부등본에 근저당이 얼마나 있는지, 분양평수와 등기부상 평수가 왜 다른지, 계약자와 소유주가 동일인인지를 직접 어떻게 확인하는지 몰라 막혀 있다. 고수 글의 용어 나열은 정의만 설명하고 '등기부등본에서 어디를 봐야 하는지' 실제 열람 순서를 안 알려준다. 전용면적·공급면적 환산표와 계약 전 열람 체크리스트로 바로 확인하게 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "전용면적·공급면적·공용면적 차이 비교표",
+          "등기부등본 열람 방법과 확인 순서 (확인 필요: 대법원인터넷등기소)",
+          "근저당권 채권최고액과 실제 채무액의 차이 설명",
+          "계약 전 소유자-계약자 동일인 확인 체크리스트",
+          "근저당·가압류 동시 발견 시 대응 순서"
+        ],
+        "mustAvoid": [
+          "경매 절차와 일반 매매 계약을 혼동해서 서술"
+        ],
+        "checkBefore": [
+          "등기부등본 열람 방법·비용은 대법원인터넷등기소 공시로 확인",
+          "근저당권 채권최고액 설정 비율 관행은 금융기관 공지로 확인"
+        ],
+        "solves": [
+          "등기부등본에서 근저당이 얼마나 있는지 어떻게 보나요? → 채권최고액 읽는 법과 실채무 추정 기준 제공",
+          "분양평수와 등기부상 평수가 다른 이유는? → 전용·공급·공용면적 환산표로 해결",
+          "계약자와 소유주가 동일인인지 어떻게 확인하나요? → 열람 순서 체크리스트 제공"
+        ],
+        "actionTitles": [
+          "등기부등본 보는 법, 근저당권 채권최고액 확인하는 순서",
+          "전용면적·공급면적 차이 계산하는 법과 분양평수 환산표",
+          "계약 전 필수 체크리스트, 근저당·가압류 확인하는 법"
+        ]
+      },
+      "at": "2026-10-27T16:20:44.173Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "경매에 대해 알고싶습니다",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40204&docId=34960678&answerNo=1&qb=67aA64+Z7IKw7Jqp7Ja0IOyghOyaqeuptOyggSDqt7zsoIDri7nqtowg6rOE7JW9IOyVjOyVhOyVvA==",
+          "views": 48243,
+          "answers": 3,
+          "askedAt": "2008.07.25"
+        },
+        {
+          "title": "부동산 용어등에 대해 알고싶습니다.",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=402&docId=117969938&answerNo=1&qb=67aA64+Z7IKw7Jqp7Ja0IOyghOyaqeuptOyggSDqt7zsoIDri7nqtowg6rOE7JW9IOyVjOyVhOyVvA==",
+          "views": 5934,
+          "answers": 1,
+          "askedAt": "2010.10.05"
+        },
+        {
+          "title": "부동산 분양평수와 등기부상의 평수가 틀리....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=402&docId=119230469&answerNo=1&qb=67aA64+Z7IKw7Jqp7Ja0IOyghOyaqeuptOyggSDqt7zsoIDri7nqtowg6rOE7JW9IOyVjOyVhOyVvA==",
+          "views": 2378,
+          "answers": 1,
+          "askedAt": "2010.10.29"
+        }
+      ]
+    },
+    {
+      "id": "bb64a20f0d6454d9",
+      "urls": [
+        "https://goldrich3333.tistory.com/entry/%EA%B0%91%EC%9E%90%EA%B8%B0-%ED%97%88%EB%A6%AC%EA%B0%80-%EC%B0%8C%EB%A5%B4%EB%8A%94-%EB%93%AF-%EC%95%84%ED%94%88-%EC%9D%B4%EC%9C%A0-7%EA%B0%80%EC%A7%80%EC%99%80-%EC%B9%98%EB%A3%8C%EB%B0%A9%EB%B2%95"
+      ],
+      "guide": {
+        "direction": "질문자들은 '찌릿하면서 다리에 힘이 풀린다', '가만히 있어도 찌릿하다', '자세 바꿀 때마다 삐끗한다'처럼 증상은 말해도 이게 디스크 응급신호인지 단순 근육통인지 구분 못해 불안해한다. 고수 글의 '원인 7가지+치료법'은 나열에 그쳐 어디로 가야 하는지 판단 기준이 없다. 증상별 응급신호 체크리스트로 정형외과·통증의학과 선택까지 바로 끝낸다.",
+        "searchTargets": [
+          "갑자기 허리통증",
+          "갑자기 허리가 찌릿",
+          "갑자기 허리 아플때",
+          "갑자기 허리디스크"
+        ],
+        "mustInclude": [
+          "다리 저림·힘빠짐 동반 시 디스크 의심 응급신호(지식인 사례 기반)",
+          "자세 바꿀 때만 삐끗 vs 가만히 있어도 찌릿한 통증의 원인 구분표",
+          "신경차단주사·통증유발점 주사 등 치료법별 설명",
+          "정형외과·통증의학과 중 어디부터 가야 하는지 안내",
+          "증상 지속 기간별 병원 방문 체크리스트 (확인 필요: 의료진 기준)"
+        ],
+        "mustAvoid": [
+          "특정 주사·시술을 부작용 설명 없이 만병통치처럼 추천",
+          "단순 근육통과 허리디스크를 근거 없이 단정 진단",
+          "스트레칭만으로 디스크까지 해결된다는 과장"
+        ],
+        "checkBefore": [
+          "신경차단주사·통증유발점 주사의 적응증은 의학 정보 출처로 확인",
+          "허리디스크 응급신호(하지마비·배뇨장애 등) 기준은 의학 가이드라인으로 확인"
+        ],
+        "solves": [
+          "허리가 찌릿하면서 다리에 힘이 풀려요, 디스크인가요? → 응급신호 체크리스트로 방문 시급성 판단 제공",
+          "자세 바꿀 때마다 삐끗하고 찌릿한데 괜찮나요? → 근육통성과 디스크성 통증 구분 기준 제공",
+          "허리 찌릿함 치료법이 뭐가 있나요? → 신경차단주사·물리치료 등 치료법 비교 정리"
+        ],
+        "actionTitles": [
+          "갑자기 허리가 찌릿할 때 근육통과 디스크 구분하는 법",
+          "갑자기 허리 아플때 통증의학과 갈지 판단하는 체크리스트"
+        ]
+      },
+      "at": "2026-10-27T16:20:44.173Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "허리가 찌릿거려서 걷기힘들어요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70106&docId=492750750&answerNo=5&qb=6rCR7J6Q6riwIO2XiOumrCDssIzrpbQg7JWE7ZSIIOy5mOujjOuwqeuylQ==",
+          "views": 453,
+          "answers": 16,
+          "askedAt": "2026.04.01"
+        },
+        {
+          "title": "허리가 찌릿한데요...",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70106&docId=158927782&answerNo=1&qb=6rCR7J6Q6riwIO2XiOumrCDssIzrpbQg7JWE7ZSIIOy5mOujjOuwqeuylQ==",
+          "views": 56,
+          "answers": 1,
+          "askedAt": "2012.09.25"
+        },
+        {
+          "title": "갑자기 허리가 찌릿하게 아픕니다.",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70107&docId=324327906&answerNo=1&qb=6rCR7J6Q6riwIO2XiOumrCDssIzrpbQg7JWE7ZSIIOy5mOujjOuwqeuylQ==",
+          "views": 28,
+          "answers": 1,
+          "askedAt": "2019.03.31"
+        }
+      ]
+    },
+    {
+      "id": "7f2c15acc1031d88",
+      "urls": [
+        "https://wisdomwavess.tistory.com/entry/%EB%A7%8C%EC%84%B1-%ED%94%BC%EB%A1%9C-%ED%9A%8C%EB%B3%B5%ED%95%98%EB%8A%94-%EB%B2%95-%EC%9E%A0-%EC%9E%90%EA%B3%A0-%EB%82%98%EC%84%9C%EB%8F%84-%ED%94%BC%EA%B3%A4%ED%95%9C-%EC%9D%B4%EC%9C%A0"
+      ],
+      "guide": {
+        "direction": "질문자들은 충분히 자도 피로가 안 풀려 영양제·수액·한약을 시도했지만 효과를 못 느껴 '언제 병원에 가야 하는지', '무슨 검사를 받아야 하는지'를 묻는다. 고수 글은 원인 나열에 머물러 영양제·수액·한방 중 어느 선택이 맞는지 구분 기준이 없다. 피로 지속 기간별 대응 체크리스트와 검사 항목 정리로 글을 끝낸다.",
+        "searchTargets": [
+          "만성피로 원인",
+          "만성피로 해결",
+          "만성피로 증상",
+          "만성피로 영양제"
+        ],
+        "mustInclude": [
+          "피로 지속 기간 기준(지식인: 6개월 이상 지속 시 만성피로증후군 의심) 구분표",
+          "영양제·수액·한방치료 중 증상별 선택 기준 비교",
+          "병원에서 받는 만성피로 검사 항목 (확인 필요: 구체 검사명)",
+          "자도 자도 피곤한 흔한 원인 체크리스트 (확인 필요: 수면무호흡·갑상선 등 의학 출처)"
+        ],
+        "mustAvoid": [
+          "특정 영양제·수액 브랜드를 효과 보장처럼 광고성으로 서술",
+          "만성피로를 '나이 탓'으로 일반화해 진단처럼 단정",
+          "한의원 보약과 양방 치료를 비교 없이 한쪽만 추천"
+        ],
+        "checkBefore": [
+          "만성피로증후군 진단 기준(6개월 이상 지속 등)은 의학 가이드라인으로 확인",
+          "피로 관련 검사 항목(혈액·갑상선검사 등)은 병원 안내로 확인"
+        ],
+        "solves": [
+          "잠을 자도 피로가 안 풀려요, 왜 그런가요? → 수면 질과 만성피로 원인 구분 설명 제공",
+          "만성피로회복제 먹으면 효과 있나요? → 영양제·수액·한방 중 증상별 선택 기준 제공",
+          "만성피로 몇 달째인데 병원 가야 하나요? → 지속 기간별 병원 방문 체크리스트 제공"
+        ],
+        "actionTitles": [
+          "만성피로 해결하려면 영양제·수액 뭐가 맞는지 구분법"
+        ]
+      },
+      "at": "2026-10-27T16:20:44.173Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "요즘 자고 일어나도 피곤한데 회복 잘하는 방....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80304&docId=486868365&answerNo=4&qb=66eM7ISxIO2UvOuhnCDtmozrs7Ug7J6Q6rOgIOuCmOyEnA==",
+          "views": 370,
+          "answers": 5,
+          "askedAt": "2025.07.07"
+        },
+        {
+          "title": "요즘 너무 피곤하네요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70109&docId=495604049&answerNo=9&qb=66eM7ISxIO2UvOuhnCDtmozrs7Ug7J6Q6rOgIOuCmOyEnA==",
+          "views": 125,
+          "answers": 12,
+          "askedAt": "2026.10.19"
+        },
+        {
+          "title": "만성피로회복제 요즘 자꾸 찾게 돼요(수서 만....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70305&docId=495184624&answerNo=1&qb=66eM7ISxIO2UvOuhnCDtmozrs7Ug7J6Q6rOgIOuCmOyEnA==",
+          "views": 72,
+          "answers": 1,
+          "askedAt": "2026.09.16"
+        }
+      ]
+    },
+    {
+      "id": "53da417aeff933dc",
+      "urls": [
+        "https://aljal.tistory.com/entry/%EC%84%9C%EC%9A%B8%ED%98%95-%ED%82%A4%EC%A6%88%EC%B9%B4%ED%8E%98-%EC%98%88%EC%95%BD-%EB%A7%A4%EC%A3%BC-%ED%99%94%EC%9A%94%EC%9D%BC-%EC%98%A4%EC%A0%84-9%EC%8B%9C%EC%97%90-%EC%97%AC%EB%8A%94-%EA%B3%B3%EA%B3%BC-%EC%98%A4%ED%9B%84-3%EC%8B%9C%EC%97%90-%EC%97%AC%EB%8A%94-%EA%B3%B3%EC%9D%B4-%EC%9E%88%EC%96%B4%EC%9A%94",
+        "https://aljal.tistory.com/entry/%EC%9E%90%EC%97%B0%ED%9C%B4%EC%96%91%EB%A6%BC-%ED%81%AC%EB%A6%AC%EC%8A%A4%EB%A7%88%EC%8A%A4-%EC%98%88%EC%95%BD-11%EC%9B%94-1%EC%9D%BC%EC%97%90-%EC%97%AC%EB%8A%94-%EA%B3%B3%EA%B3%BC-12%EC%9B%94-13%EC%9D%BC%EC%97%90-%EC%97%AC%EB%8A%94-%EA%B3%B3%EC%9D%B4-%EB%94%B0%EB%A1%9C-%EC%9E%88%EC%96%B4%EC%9A%94"
+      ],
+      "guide": {
+        "direction": "검색자는 화요일 오전9시 오픈과 오후3시 오픈 지점이 섞여 있어 어디가 몇 시에 열리는지 헷갈려 예약 타이밍을 놓친다. 고수 블로그 제목은 두 시간대가 있다는 사실만 알리고 여의도·도봉구·마포·서울숲·역삼1동·난향동 등 실제 지점별 구분은 주지 않는다. 이 글은 지점별 오픈 요일·시간 표와 키즈카페머니 사용법을 한 번에 정리해 글 하나로 예약을 끝내게 한다.",
+        "searchTargets": [
+          "서울형 키즈카페 예약",
+          "여의도 서울형 키즈카페",
+          "도봉구 서울형 키즈카페",
+          "서울형 키즈카페머니"
+        ],
+        "mustInclude": [
+          "화요일 오전9시 오픈 지점과 오후3시 오픈 지점 구분표(확인 필요: 서울시 공식 공지)",
+          "여의도·도봉구·마포·서울숲·역삼1동·난향동 지점별 오픈시간 정리",
+          "서울형 키즈카페머니 사용법과 사용 가능 지점",
+          "지점별 예약 신청 순서(앱/사이트명 확인 필요)"
+        ],
+        "mustAvoid": [
+          "자연휴양림 크리스마스 예약 등 비슷한 시기 다른 예약제와 혼동하지 않기"
+        ],
+        "checkBefore": [
+          "서울형 키즈카페머니 사용 가능 지점과 사용법을 서울시 공지로 확인"
+        ],
+        "solves": [
+          "어느 지점이 9시, 어느 지점이 3시 여는지 헷갈림 → 지점별 오픈시간 구분표 제공",
+          "여의도·도봉구·마포 등 특정 지점 예약 순서를 모름 → 지점별 예약 절차 정리",
+          "서울형 키즈카페머니 사용법을 모름 → 사용 가능 지점과 사용법 안내"
+        ],
+        "actionTitles": [
+          "서울형 키즈카페 예약, 지점별 오픈시간 한눈에 확인하기",
+          "여의도·도봉구 서울형 키즈카페 예약 오픈시간 바로 확인",
+          "서울형 키즈카페머니 사용법과 예약 순서 총정리"
+        ]
+      },
+      "at": "2026-10-27T16:20:44.173Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "66eb6466c09cb8d4",
+      "urls": [
+        "https://secondary4u.tistory.com/599"
+      ],
+      "guide": {
+        "direction": "검색자는 '소방관 재정빨대' 주장이 실제 근거가 있는지, 해외와 비교하면 어떤지 궁금해 '소방관재정 외국비교'까지 검색한다. 고수 블로그 제목은 논란이 있다는 사실만 전달하고 주장·반박의 구체 근거나 해외 비교 자료는 제시하지 않는다. 이 글은 커뮤니티 주장과 반박을 표로 정리하고 해외 재정구조 비교까지 더해 논란의 실체를 스스로 판단하게 한다.",
+        "searchTargets": [
+          "소방관 재정빨대",
+          "소방관 재정",
+          "소방관재정 외국비교"
+        ],
+        "mustInclude": [
+          "직장인 커뮤니티발 '재정 빨대' 주장의 핵심 근거 요약",
+          "소방관재정 외국비교 자료(확인 필요: 어느 국가·어느 통계)",
+          "소방공무원 실제 처우(급여·연금) 수치(확인 필요: 소방청·인사혁신처 자료)"
+        ],
+        "mustAvoid": [
+          "특정 커뮤니티나 개인을 저격하는 표현 쓰지 않기",
+          "소방관 전체를 일반화하는 자극적 표현 쓰지 않기"
+        ],
+        "checkBefore": [
+          "원문 기사 출처와 '재정 빨대' 발언의 원문 확인"
+        ],
+        "solves": [
+          "소방관 재정빨대 주장이 사실인지 궁금함 → 주장과 반박을 근거로 비교 정리",
+          "해외는 소방 재정구조가 어떻게 다른지 모름 → 외국비교 자료 정리",
+          "소방공무원 실제 처우 수치를 모름 → 급여·연금 수치 정리(확인 필요)"
+        ],
+        "actionTitles": [
+          "소방관 재정빨대 논란, 주장과 반박 비교해서 확인하기",
+          "소방관재정 외국비교로 처우 논란 진실 따져보기"
+        ]
+      },
+      "at": "2026-10-27T16:20:44.173Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "b6cdf2e2029db7f5",
+      "urls": [
+        "https://lifewisdom-review.tistory.com/157"
+      ],
+      "guide": {
+        "direction": "지식인에서는 에르고와 포그내 아기띠의 장단점, 목을 못 가눈 아기도 쓸 수 있는 시기, 한줄·두줄 힙시트 구분이 헷갈린다는 질문이 반복된다. 고수 블로그의 '사용후기' 제목은 개인 체험만 전할 뿐 모델별 비교표나 사용가능 시기 기준을 정리해주지 않는다. 이 글은 에르고 대비 장단점, 목가누기 기준 사용시기, 한줄·두줄 모델 구분을 표로 정리해 구매·착용 판단을 한 번에 끝내게 한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "에르고 아기띠 대비 포그내 아기띠 장단점 비교",
+          "목을 완전히 못 가눈 아기도 쓸 수 있는지 기준(확인 필요: 제조사 권장연령)",
+          "여름철 지퍼 내려 망사로 쓰는 방법",
+          "한줄 힙시트·두줄 힙시트 모델 구분(스텝원·넘버5 등)",
+          "모델별 가격대(확인 필요: 현재 판매가, 예: 넘버5 힙시트 30만원대·스텝원 6만원대)"
+        ],
+        "mustAvoid": [
+          "목을 못 가눈 아기에게 사용을 권장하는 듯한 서술 쓰지 않기",
+          "한줄힙시트·두줄힙시트, 스텝원·넘버5 모델을 혼동해서 쓰지 않기",
+          "실제 체험 없이 1인칭 사용후기를 지어내지 않기"
+        ],
+        "checkBefore": [
+          "포그내 공식몰·제조사 공지에서 모델별 권장 사용연령과 착용법 확인"
+        ],
+        "solves": [
+          "에르고와 포그내 중 뭐가 나은지 모름 → 장단점 비교표 제공",
+          "포그내 아기띠 언제부터 쓸 수 있는지 모름 → 목가누기 기준 사용시기 정리",
+          "한줄힙시트·두줄힙시트 모델이 헷갈림 → 모델별 구분표 제공"
+        ],
+        "actionTitles": [
+          "포그내아기띠 에르고 비교, 장단점 한눈에 확인하기",
+          "포그내아기띠 한줄 두줄 힙시트 모델 비교 정리"
+        ]
+      },
+      "at": "2026-10-27T16:20:44.173Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "에르고 아기띠와 포그내 아기띠의 장단점",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80105&docId=31932330&answerNo=2&qb=7Y+s6re464K07JWE6riw652gIOyCrOyaqe2bhOq4sA==",
+          "views": 54923,
+          "answers": 5,
+          "askedAt": "2008.08.26"
+        },
+        {
+          "title": "포그내아기띠사용시기궁금합니다.",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=50802&docId=479120697&answerNo=1&qb=7Y+s6re464K07JWE6riw652gIOyCrOyaqe2bhOq4sA==",
+          "views": 2191,
+          "answers": 2,
+          "askedAt": "2024.12.14"
+        },
+        {
+          "title": "포그내아기띠 착용법",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=8010501&docId=349806288&answerNo=2&qb=7Y+s6re464K07JWE6riw652gIOyCrOyaqe2bhOq4sA==",
+          "views": 1847,
+          "answers": 4,
+          "askedAt": "2021.10.17"
+        }
+      ]
+    },
+    {
+      "id": "3f81f2166de669e4",
+      "urls": [
+        "https://allqueen.tistory.com/1667"
+      ],
+      "guide": {
+        "direction": "'모던하우스의류'로 검색하는 사람은 이 매장에서 실제로 옷을 파는지, 어떤 종류와 가격대인지, 어디서 사는지를 궁금해한다. 고수 블로그는 '패션 소비 접점으로 진화' 같은 산업 트렌드만 짚고 실제 취급 품목·구매처는 비워둔다. 공식 홈페이지·앱 기준 취급 품목과 가격대, 온·오프라인 구매 경로를 표로 정리해 주면 궁금증이 이 글에서 끝난다.",
+        "searchTargets": [
+          "모던하우스의류"
+        ],
+        "mustInclude": [
+          "모던하우스 공식 홈페이지·앱 기준 의류 취급 여부와 품목(확인 필요: 공식 홈페이지)",
+          "가격대(확인 필요: 매장·공식몰 표기)",
+          "구매 가능 매장/온라인 구매처 안내(확인 필요)",
+          "이랜드리테일 계열 생활용품 브랜드와의 관계(확인 필요: 공식 발표)"
+        ],
+        "mustAvoid": [
+          "지식인에 섞여 나온 '영국' 관련 내용은 이 소재와 무관하니 끌어오지 말 것",
+          "자주·다이소 등 타 생활용품 브랜드 의류와 혼동하지 말 것"
+        ],
+        "checkBefore": [
+          "모던하우스 공식 홈페이지/앱에서 의류 카테고리 실제 개설 여부",
+          "이랜드그룹/모던하우스 공식 보도자료 또는 원문 기사"
+        ],
+        "solves": [
+          "모던하우스에서 옷도 파는지 궁금함 → 실제 취급 품목과 구매 가능 여부 정리",
+          "어디서 사는지 모름 → 온·오프라인 구매처와 매장 안내"
+        ],
+        "actionTitles": [
+          "모던하우스의류 매장별 구매처와 가격대 한눈에 확인하기",
+          "모던하우스의류 어디서 살 수 있는지 구매 방법 총정리",
+          "모던하우스의류 라인업과 가격대, 매장별로 비교 확인"
+        ]
+      },
+      "at": "2026-10-27T16:20:44.173Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "영국에 대해서..",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=613&docId=47965091&answerNo=1&qb=66qo642Y7ZWY7Jqw7IqkIOydmOulmCDsi5zsnqUg7KeE7LacIOyDne2ZnOyaqe2SiA==",
+          "views": 26082,
+          "answers": 10,
+          "askedAt": "2007.11.12"
+        },
+        {
+          "title": "영국에 대한 모든것-0-!",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=9020301&docId=73969957&answerNo=1&qb=66qo642Y7ZWY7Jqw7IqkIOydmOulmCDsi5zsnqUg7KeE7LacIOyDne2ZnOyaqe2SiA==",
+          "views": 9307,
+          "answers": 1,
+          "askedAt": "2005.08.10"
+        },
+        {
+          "title": "영국에 대한 모든것",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=111002&docId=61404533&answerNo=1&qb=66qo642Y7ZWY7Jqw7IqkIOydmOulmCDsi5zsnqUg7KeE7LacIOyDne2ZnOyaqe2SiA==",
+          "views": 4329,
+          "answers": 4,
+          "askedAt": "2007.08.13"
+        }
+      ]
+    },
+    {
+      "id": "b66f0fa64d13a12e",
+      "urls": [
+        "https://aljal.tistory.com/entry/%EC%95%BD%ED%95%99%EA%B3%BC-%EB%AA%A8%EC%A7%91%EC%9D%B8%EC%9B%90-2027%ED%95%99%EB%85%84%EB%8F%84%EB%8A%94-%EC%A0%95%EC%8B%9C%EA%B0%80-%EC%88%98%EC%8B%9C%EC%9D%98-2%EB%B0%B0%EA%B0%80-%EB%84%98%EB%8A%94-%EB%8C%80%ED%95%99%EC%9D%B4-%EC%9E%88%EA%B3%A0-%EC%88%98%EC%8B%9C%EA%B0%80-%EC%A0%95%EC%8B%9C%EC%9D%98-5%EB%B0%B0%EA%B0%80-%EB%84%98%EB%8A%94-%EB%8C%80%ED%95%99%EC%9D%B4-%EC%9E%88%EC%96%B4%EC%9A%94",
+        "https://aljal.tistory.com/entry/%EC%A0%95%EC%8B%9C-%EB%AA%A8%EC%A7%91%EC%9D%B8%EC%9B%90-2027%ED%95%99%EB%85%84%EB%8F%84%EB%8A%94-%EC%A0%95%EC%8B%9C%EA%B0%80-%EC%88%98%EC%8B%9C%EC%99%80-%EA%B1%B0%EC%9D%98-%EA%B0%99%EC%9D%80-%EB%8C%80%ED%95%99%EC%9D%B4-%EC%9E%88%EA%B3%A0-%EC%88%98%EC%8B%9C%EC%9D%98-4%EB%B6%84%EC%9D%98-1%EC%AF%A4%EC%9D%B8-%EB%8C%80%ED%95%99%EC%9D%B4-%EC%9E%88%EC%96%B4%EC%9A%94"
+      ],
+      "guide": {
+        "direction": "'정시 약대'로 검색하는 수험생은 2027학년도 대학별 모집인원이 수시·정시 중 어느 쪽에 쏠려 있는지, 내 성적대에 어디가 유리한지를 묻는다. 고수 블로그 제목은 '정시가 수시의 2배·수시가 정시의 5배'라는 극단값만 던지고 어느 대학이 그런지는 밝히지 않는다. 대학별 수시·정시 모집인원과 비율을 표로 정리하고 선택과목 지정 폐지 같은 변화까지 묻어주면 비교가 이 글에서 끝난다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "2027학년도 약학과 대학별 수시·정시 모집인원 비율 표(확인 필요: 각 대학 입학처 모집요강)",
+          "정시가 수시의 2배 넘는 대학명과 수치(확인 필요: 대학 입학처)",
+          "수시가 정시의 5배 넘는 대학명과 수치(확인 필요: 대학 입학처)",
+          "정시 약대 선택과목 지정 폐지 변화 내용(지식인 언급)",
+          "정시 영어 반영 방식 등 평가 기준(확인 필요)"
+        ],
+        "mustAvoid": [
+          "약대 편입 정원과 신입학 수시·정시 정원을 같은 표에 섞어 혼동시키지 말 것",
+          "의예과·한의예과 등 다른 학과 모집인원 수치와 섞지 말 것",
+          "특정 대학 합격선·커트라인을 추측성 수치로 단정하지 말 것"
+        ],
+        "checkBefore": [
+          "각 대학 2027학년도 수시·정시 모집요강 원문(대학 입학처 공식 발표)",
+          "약대 정시 선택과목 지정 폐지 확정 여부(교육부·대학 공식 공지)"
+        ],
+        "solves": [
+          "정시가 수시보다 많은 약대가 어디인지 모름 → 대학별 비율 표로 확인",
+          "선택과목 지정 폐지가 나한테 유리한지 모름 → 변경 내용과 영향 정리",
+          "모집인원이 적어 체감이 안 됨 → 배수(2배·5배) 비교로 체감 가능하게 정리"
+        ],
+        "actionTitles": [
+          "2027학년도 약학과 정시·수시 모집인원 비율 확인",
+          "약대 정시·수시 모집인원 대학별 유리한 쪽 비교하기",
+          "약학과 모집인원 수시 5배 정시 2배 대학 확인하기"
+        ]
+      },
+      "at": "2026-10-27T16:20:44.173Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "정시 약대",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=11050403&docId=481517675&answerNo=1&qb=7JW97ZWZIOuqqOynkeyduOybkCDsoJXsi5wg7IiY7IucIOuEmOuKlA==",
+          "views": 4589,
+          "answers": 2,
+          "askedAt": "2025.02.08"
+        },
+        {
+          "title": "이과와 약대에 대해 질문!ㅎㅎ",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=61075738&answerNo=1&qb=7JW97ZWZIOuqqOynkeyduOybkCDsoJXsi5wg7IiY7IucIOuEmOuKlA==",
+          "views": 1715,
+          "answers": 1,
+          "askedAt": "2005.10.02"
+        },
+        {
+          "title": "약대편입을 원하는데 전적대 학벌 중요한가....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=494372914&answerNo=4&qb=7JW97ZWZIOuqqOynkeyduOybkCDsoJXsi5wg7IiY7IucIOuEmOuKlA==",
+          "views": 1571,
+          "answers": 5,
+          "askedAt": "2026.07.20"
         }
       ]
     }
