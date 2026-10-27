@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-10-27T09:24:48.196Z",
+  "publishedAt": "2026-10-27T09:56:36.730Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
     "candidates": 240,
     "niche": 0,
-    "preemption": 9,
+    "preemption": 5,
     "pending": 0
   },
   "freeSample": {
@@ -306,6 +306,392 @@
   ],
   "observations": [
     {
+      "keyword": "고리 원전소 뜻",
+      "issue": "고리",
+      "topic": "고리",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 4,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 4",
+        "선점 후보 — 경쟁 문서 4건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "원안위가 고리 3·4호기 계속운전 10년 연장을 허가했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "정보",
+      "adsenseFit": true,
+      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
+      "titles": {
+        "seo": {
+          "text": "고리 원전소 뜻 3·4호기 계속운전 2035년까지 10년 연장",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "고리 원전소 뜻 찾아보다 계속운전 얘기 나와서 한참 들여다봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "고리 원전 위치",
+          "searchVolume": 160,
+          "frame": "generic"
+        },
+        {
+          "keyword": "고리 원전 계속운전",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "고리 원전 위치",
+          "searchVolume": 160,
+          "documentCount": 13311,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "고리 원전 계속운전",
+          "searchVolume": 10,
+          "documentCount": 6442,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": {
+        "verdict": "bad",
+        "points": [
+          {
+            "text": "'고리 원전소 뜻'은 한 줄 정의(고리=부산 기장군 지명, 원전=원자력발전소)만 손에 넣으면 끝나는 검색이다. 도구도 구매처도 절차도 필요 없는 순수 정보 단건 조회다."
+          },
+          {
+            "text": "같이 뜨는 '고리 원전 위치(월 160)'도 결국 지도·주소 한 줄이면 만족하는 조회형이다. 세 검색어 중 최대 볼륨이 160이라 뜻 키워드 자체 볼륨은 그 밑일 가능성이 높다."
+          },
+          {
+            "text": "구매 의도가 전혀 없다. 전기요금·에너지 상품 같은 간접 상업 광고조차 '뜻/위치' 질의와는 매칭이 약해, 뜨더라도 단가 낮은 공공·디스플레이성 광고가 주류일 것이다."
+          },
+          {
+            "text": "'고리 원전 계속운전(월 10)'은 그나마 읽어야 풀리는 쟁점(수명연장 찬반·절차)이지만 월 10으로 트래픽이 사실상 없다. 뜻·위치 쪽은 한 줄 얻고 바로 이탈하는 검색이라 체류·스크롤·광고 노출 기회가 짧다."
+          }
+        ],
+        "angle": "굳이 쓴다면 '뜻' 단독이 아니라 '고리 원전 계속운전' 쟁점(수명연장 절차·찬반·일정)으로 각을 틀어 읽어야 풀리는 글로 만든다. 다만 월 10 볼륨이라 수익보다 기장군 지역 정보 묶음(고리 원전 위치·주변 관광·대피요령) 허브 글의 한 섹션으로 흡수하는 편이 현실적이다."
+      },
+      "measuredAt": "2026-10-27T09:50:18.154Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "삼쩜삼 덧셈 차이",
+      "issue": "삼쩜삼",
+      "topic": "삼쩜삼",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 23,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 23",
+        "선점 후보 — 경쟁 문서 23건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "삼쩜삼이 사내 AI 에이전트 8개를 통합해 비용 45% 절감했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "구매 검토",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "삼쩜삼 덧셈 차이 무엇이 어떻게 다른가",
+          "frame": "compare",
+          "basis": "검색 질문 '삼쩜삼 덧셈 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+        },
+        "home": {
+          "text": "삼쩜삼 덧셈 차이, 기준은 하나면 됩니다",
+          "frame": "compare",
+          "basis": "검색 질문 '삼쩜삼 덧셈 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 49,
+      "kinTop": [
+        {
+          "title": "뱅크샐러드 덧셈컴퍼니 세금 환급 개인정보",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=403&docId=493566272&answerNo=1",
+          "views": 1277,
+          "answers": 2
+        },
+        {
+          "title": "덧셈 예상 환급금 이 뭐고 어떻게 받아야되나요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=814&docId=493482193&answerNo=4",
+          "views": 1018,
+          "answers": 6
+        },
+        {
+          "title": "덧셈 환급",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=403&docId=493513081&answerNo=2",
+          "views": 528,
+          "answers": 2
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-27T09:50:18.154Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "삼쩜삼 덧셈",
+      "issue": "삼쩜삼",
+      "topic": "삼쩜삼",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 71,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 2,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 71",
+        "선점 후보 — 경쟁 문서 71건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 2건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "삼쩜삼이 사내 AI 에이전트 8개를 통합해 비용 45% 절감했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 113,
+      "kinTop": [
+        {
+          "title": "덧셈컴퍼니 환급불가 환불안된다고해서 문의드립니다.",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=403&docId=494479181&answerNo=1",
+          "views": 2460,
+          "answers": 3
+        },
+        {
+          "title": "덧셈컴퍼니 사기죠?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40301&docId=494215889&answerNo=1",
+          "views": 2411,
+          "answers": 3
+        },
+        {
+          "title": "덧셈 컴퍼니 이거 환급해주는건가요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=20301&docId=495064798&answerNo=1",
+          "views": 62,
+          "answers": 1
+        },
+        {
+          "title": "덧셈컴퍼니 ..",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60805&docId=495081773&answerNo=1",
+          "views": 59,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-27T09:50:18.154Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "칩스앤미디어 파르나스",
+      "issue": "칩스앤미디어",
+      "topic": "칩스앤미디어",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 106,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 106",
+        "선점 후보 — 경쟁 문서 106건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "칩스앤미디어 3분기 영업이익이 16.6억으로 8.7% 늘었다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-27T09:50:18.154Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "앤더블 유승언 비주얼",
+      "issue": "앤더블 유승언 비주얼",
+      "topic": "앤더블 유승언 비주얼",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 123,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 123",
+        "선점 후보 — 경쟁 문서 123건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "앤더블 유승언이 컴백 무대에서 완성형 비주얼을 선보였다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-27T09:50:18.154Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
       "keyword": "난베이지 큐원 비교",
       "issue": "난베이지",
       "topic": "난베이지",
@@ -365,7 +751,8 @@
       "monetize": null,
       "measuredAt": "2026-10-27T09:18:06.798Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "전주사랑상품권 재발급",
@@ -502,7 +889,8 @@
       "monetize": null,
       "measuredAt": "2026-10-27T09:18:06.798Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "난베이지 33B",
@@ -564,92 +952,8 @@
       "monetize": null,
       "measuredAt": "2026-10-27T09:18:06.798Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "삼쩜삼 덧셈 차이",
-      "issue": "삼쩜삼",
-      "topic": "삼쩜삼",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 23,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 23",
-        "선점 후보 — 경쟁 문서 23건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "삼쩜삼이 사내 AI 에이전트 8개 '카터'로 통합해 운영비 45% 절감",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "삼쩜삼 덧셈 차이 무엇이 어떻게 다른가",
-          "frame": "compare",
-          "basis": "검색 질문 '삼쩜삼 덧셈 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        },
-        "home": {
-          "text": "삼쩜삼 덧셈 차이, 기준은 하나면 됩니다",
-          "frame": "compare",
-          "basis": "검색 질문 '삼쩜삼 덧셈 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 49,
-      "kinTop": [
-        {
-          "title": "뱅크샐러드 덧셈컴퍼니 세금 환급 개인정보",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=403&docId=493566272&answerNo=1",
-          "views": 1273,
-          "answers": 2
-        },
-        {
-          "title": "덧셈 예상 환급금 이 뭐고 어떻게 받아야되나요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=814&docId=493482193&answerNo=4",
-          "views": 1016,
-          "answers": 6
-        },
-        {
-          "title": "덧셈 환급",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=403&docId=493513081&answerNo=2",
-          "views": 527,
-          "answers": 2
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-27T09:18:06.798Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "난베이지 코딩 벤치마크",
@@ -711,7 +1015,8 @@
       "monetize": null,
       "measuredAt": "2026-10-27T09:18:06.798Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "알리바바 큐원 해명",
@@ -790,258 +1095,8 @@
       "monetize": null,
       "measuredAt": "2026-10-27T09:18:06.798Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "삼쩜삼 덧셈",
-      "issue": "삼쩜삼",
-      "topic": "삼쩜삼",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 71,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 2,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 71",
-        "선점 후보 — 경쟁 문서 71건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 2건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "삼쩜삼이 사내 AI 에이전트 8개 '카터'로 통합해 운영비 45% 절감",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "삼쩜삼 덧셈 환급 수수료 얼마, 탈퇴와 환급금 조회까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "삼쩜삼 덧셈 환급 신청하고 삼쩜삼 수수료 보다가 영수증을 다시 열어봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "삼쩜삼 환급",
-          "searchVolume": 2330,
-          "frame": "generic"
-        },
-        {
-          "keyword": "삼쩜삼 수수료",
-          "searchVolume": 440,
-          "frame": "generic"
-        },
-        {
-          "keyword": "삼쩜삼 환급 후기",
-          "searchVolume": 230,
-          "frame": "review"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "삼쩜삼 환급",
-          "searchVolume": 2330,
-          "documentCount": 24015,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "삼쩜삼 수수료",
-          "searchVolume": 440,
-          "documentCount": 13612,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "삼쩜삼 환급 후기",
-          "searchVolume": 230,
-          "documentCount": 7611,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "삼쩜삼 세무대리인 해지",
-          "searchVolume": 30,
-          "documentCount": 1109,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "삼쩜삼 종합소득세",
-          "searchVolume": 10,
-          "documentCount": 16674,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "삼쩜삼 환급금 조회",
-          "searchVolume": 10,
-          "documentCount": 11593,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "삼쩜삼 세금환급",
-          "searchVolume": 10,
-          "documentCount": 19391,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 113,
-      "kinTop": [
-        {
-          "title": "덧셈컴퍼니 환급불가 환불안된다고해서 문의드립니다.",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=403&docId=494479181&answerNo=1",
-          "views": 2457,
-          "answers": 3
-        },
-        {
-          "title": "덧셈컴퍼니 사기죠?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40301&docId=494215889&answerNo=1",
-          "views": 2410,
-          "answers": 3
-        },
-        {
-          "title": "덧셈 컴퍼니 이거 환급해주는건가요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=20301&docId=495064798&answerNo=1",
-          "views": 61,
-          "answers": 1
-        },
-        {
-          "title": "덧셈컴퍼니 ..",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60805&docId=495081773&answerNo=1",
-          "views": 58,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-27T09:18:06.798Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "칩스앤미디어 파르나스",
-      "issue": "칩스앤미디어",
-      "topic": "칩스앤미디어",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 106,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 106",
-        "선점 후보 — 경쟁 문서 106건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "칩스앤미디어 3분기 영업익 약 17억원으로 전년比 8.7% 증가",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "칩스앤미디어 파르나스 3분기 영업익 16.6억 라이선스 견인",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "칩스앤미디어 파르나스 실적 보고 나서 주가 전망이 더 궁금해졌어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "칩스앤미디어 주가",
-          "searchVolume": 5930,
-          "frame": "generic"
-        },
-        {
-          "keyword": "칩스앤미디어 주가 전망",
-          "searchVolume": 40,
-          "frame": "generic"
-        },
-        {
-          "keyword": "칩스앤미디어 목표주가",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "칩스앤미디어 주가",
-          "searchVolume": 5930,
-          "documentCount": 24056,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "칩스앤미디어 주가 전망",
-          "searchVolume": 40,
-          "documentCount": 15806,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "칩스앤미디어 목표주가",
-          "searchVolume": 10,
-          "documentCount": 7623,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-27T09:18:06.798Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "정종철 강남 건물",
@@ -1120,7 +1175,8 @@
       "monetize": null,
       "measuredAt": "2026-10-27T09:18:06.798Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "FDE 리크루팅",
@@ -3166,61 +3222,174 @@
   "rejectedCount": 0,
   "issues": [
     {
-      "issue": "구룡마을 화재 발생",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "강남 구룡마을 화재로 소방대응 2단계 격상·소방차 51대 투입",
-      "headlines": [
-        {
-          "title": "강남 구룡마을 화재로 다량의 연기…현재까지 부상자 없어(종합)",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-27T07:34:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016403902?sid=102"
-        },
-        {
-          "title": "이 대통령, 구룡마을 화재에 \"가용 자원 총동원·인명 구조 만전\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-27T08:13:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014282291?sid=100"
-        },
-        {
-          "title": "서울 구룡마을서 화재… 소방대응 2단계 격상",
-          "press": "biz.chosun.com",
-          "publishedAt": "2026-10-27T07:21:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/366/0001200654?sid=102"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "고리 원전 계속운전",
+      "issue": "강남",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "stable",
       "isHot": true,
-      "why": "원안위가 고리 3·4호기 계속운전 허가해 설계수명 10년 연장",
+      "why": "강남 구룡마을 화재로 주민 39명이 대피하고 대응 2단계가 격상됐다",
       "headlines": [
         {
-          "title": "[2보] 고리 원전 3·4호기 계속운전 허가…설계수명 10년 연장",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-27T07:28:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016403873?sid=101"
+          "title": "[속보] 강남 구룡마을 화재로 주민 39명 대피…현재까지 부상자 없어",
+          "press": "busan.com",
+          "publishedAt": "2026-10-27T09:22:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/082/0001404390?sid=102"
         },
         {
-          "title": "원안위, 고리원전 3·4호기 계속운전 허가…10년 더 가동",
-          "press": "nocutnews.co.kr",
-          "publishedAt": "2026-10-27T07:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/079/0004203524?sid=102"
+          "title": "강남 구룡마을에서 큰불...대응 2단계·도로 통제도",
+          "press": "ytn.co.kr",
+          "publishedAt": "2026-10-27T08:51:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/052/0002424465?sid=102"
+        },
+        {
+          "title": "강남 구룡마을서 큰불…\"현재까지 부상자 없어\" [영상]",
+          "press": "hankyung.com",
+          "publishedAt": "2026-10-27T07:17:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005347060?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "강남 이상화",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "강남 cgv",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "강남 날씨",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "강남 놀거리",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "강남 치폴레",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "강남 화재",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "강남 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "강남 스시",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "고리",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "원안위가 고리 3·4호기 계속운전 10년 연장을 허가했다",
+      "headlines": [
+        {
+          "title": "고리 3·4호기 계속운전 허가…2034년·2035년까지 수명 연장(종합)",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-27T07:48:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016403960?sid=101"
         },
         {
           "title": "고리 3·4호기 계속운전 허가…설계 수명 10년 연장",
           "press": "newsis.com",
           "publishedAt": "2026-10-27T07:36:00.000Z",
           "link": "https://n.news.naver.com/mnews/article/003/0014282183?sid=101"
+        },
+        {
+          "title": "원자력안전위, 고리 3·4호기 수명 10년 연장 허가",
+          "press": "chosun.com",
+          "publishedAt": "2026-10-27T07:29:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004006216?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "고리 고정하는법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "고리 원전소 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "고리 링",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "고리 놀이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "고리 은하",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "고리 전포",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "고리 조명",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "고리 퍼즐",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "한성숙 총리 주택",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "한 총리가 수도권 주택공급 80% 민간 사업 속도를 강조했다",
+      "headlines": [
+        {
+          "title": "한 총리 \"주택공급, 관련 부처·기관 혼연일체로 최선…전례 없는 노력...",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-27T07:52:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014282237?sid=100"
+        },
+        {
+          "title": "한 총리 “연말에 주택착공 집중, 각 부처 차질 없도록 꼼꼼히 살펴야”",
+          "press": "news.kbs.co.kr",
+          "publishedAt": "2026-10-27T08:54:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/056/0012281805?sid=100"
+        },
+        {
+          "title": "한성숙 \"수도권 물량 80% 민간 사업 속도가 가장 중요\"",
+          "press": "nocutnews.co.kr",
+          "publishedAt": "2026-10-27T08:25:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/079/0004203545?sid=100"
         }
       ],
       "concentrated": [],
@@ -3228,12 +3397,115 @@
       "rowCount": 0
     },
     {
-      "issue": "삼성 박진만 감독",
-      "issueType": "entertainment",
+      "issue": "응급실",
+      "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "stable",
       "isHot": true,
-      "why": "박진만 감독이 공격력 극대화 위해 최형우 좌익수 선발 출장",
+      "why": "인천 흉기난동 최충락이 구치소서 자해해 응급실로 이송됐다",
+      "headlines": [
+        {
+          "title": "'인천 흉기난동' 최충락, 구치소서 자해로 응급실행",
+          "press": "mbn.mk.co.kr",
+          "publishedAt": "2026-10-27T05:33:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/057/0001975318?sid=102"
+        },
+        {
+          "title": "‘인천 흉기난동’ 최충락, 구치소서 자해… 이마 다쳐 응급실 이송",
+          "press": "segye.com",
+          "publishedAt": "2026-10-27T06:51:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/022/0004170158?sid=102"
+        },
+        {
+          "title": "[단독] '인천 흉기난동' 최충락, 자해로 응급실행…피해 여성 입원한 병...",
+          "press": "yonhapnewstv.co.kr",
+          "publishedAt": "2026-10-27T04:34:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/422/0000919903?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "응급실 떡볶이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "응급실 가사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "응급실 izi",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "근처 응급실",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "응급실 실비",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "응급실 뺑뺑이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "내손안의 응급실",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "응급실 드라마",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "역삼동 방화 사건",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "역삼동 연쇄 방화 70대 신상공개 심의위가 이번 주 열린다",
+      "headlines": [
+        {
+          "title": "'역삼동 연쇄 방화범' 신상공개되나…경찰, 이번주 심의위원회 연다",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-10-27T00:35:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005432052?sid=102"
+        },
+        {
+          "title": "'역삼 연쇄방화' 70대 신상 공개되나…경찰, 심의위 열기로",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-27T00:44:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016402100?sid=102"
+        },
+        {
+          "title": "[속보]'역삼동 방화범' 이번 주 신상공개 심사",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-10-27T00:19:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006396828?sid=102"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "삼성 박진만 감독의",
+      "issueType": "entertainment",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "박진만 감독이 공격력 극대화 위해 최형우를 선발 출장시켰다",
       "headlines": [
         {
           "title": "박진만 삼성 감독 \"공격력 극대화 위해 경험 많은 최형우 출장\"",
@@ -3265,30 +3537,139 @@
       "rowCount": 0
     },
     {
-      "issue": "한성숙 총리 주택",
+      "issue": "정년",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "헌재가 공무원 퇴직연금 지급을 65세로 미루는 걸 합헌 결정했다",
+      "headlines": [
+        {
+          "title": "공무원연금 수령나이 65세까지 상향 합헌…4대4로 '팽팽'",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-26T21:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016401766?sid=102"
+        },
+        {
+          "title": "\"공무원 퇴직 연금, 60→65세부터\"…헌재, 합헌 결정",
+          "press": "mbn.mk.co.kr",
+          "publishedAt": "2026-10-27T06:43:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/057/0001975325?sid=102"
+        },
+        {
+          "title": "헌재 \"공무원 퇴직연금 지급 시기 60→65세 연기, 문제 안 돼\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-26T21:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014279870?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "정년 65세 연장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "정년 연령",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "공무원 정년",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "교사 정년",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "정년 실업급여 조건",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "정년 기간",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "정년 단축 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "정년 기준",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "금감원 JYP 공개매수",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "한 총리가 연말 주택착공 집중·민간 사업 속도 강조",
+      "why": "금감원이 JYP 공개매수 의사표명을 이례적이라며 예의주시한다",
       "headlines": [
         {
-          "title": "한 총리 “연말에 주택착공 집중, 각 부처 차질 없도록 꼼꼼히 살펴야”",
-          "press": "news.kbs.co.kr",
-          "publishedAt": "2026-10-27T08:54:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/056/0012281805?sid=100"
+          "title": "금감원, JYP 공개매수 보도에 \"이례적…불공정거래 의심 시 조사\"",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-27T09:12:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009253610?sid=101"
         },
         {
-          "title": "한성숙 \"수도권 물량 80% 민간 사업 속도가 가장 중요\"",
-          "press": "nocutnews.co.kr",
-          "publishedAt": "2026-10-27T08:25:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/079/0004203545?sid=100"
+          "title": "금감원 \"JYP 공개매수 관련 이상거래 예의주시…불공정거래 의심 시 조...",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-27T08:59:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014282398?sid=101"
         },
         {
-          "title": "韓총리 \"주택공급 목표달성 차질 없도록…민간부문 속도 높여야\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-27T08:39:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016404086?sid=100"
+          "title": "금감원 \"JYP 공개매수 의사표명 이례적…이상거래 예의주시\"",
+          "press": "hankyung.com",
+          "publishedAt": "2026-10-27T09:17:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005347202?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "금감원",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "앤더블 유승언 비주얼",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "앤더블 유승언이 컴백 무대에서 완성형 비주얼을 선보였다",
+      "headlines": [
+        {
+          "title": "[TD포토] 앤더블 유승언 '귀티나는 비주얼'",
+          "press": "tvdaily.co.kr",
+          "publishedAt": "2026-10-27T07:20:00.000Z",
+          "link": "https://m.entertain.naver.com/article/440/0000050216"
+        },
+        {
+          "title": "[포토] 앤더블 유승언, 설렘 유발하는 비주얼",
+          "press": "joynews24.com",
+          "publishedAt": "2026-10-27T07:16:00.000Z",
+          "link": "http://www.joynews24.com/view/2019552"
+        },
+        {
+          "title": "앤더블 유승언, 완성형 비주얼",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-27T07:47:00.000Z",
+          "link": "https://m.entertain.naver.com/article/421/0009253427"
         }
       ],
       "concentrated": [],
@@ -3296,85 +3677,653 @@
       "rowCount": 0
     },
     {
-      "issue": "고려대",
+      "issue": "3분기 누적 순익",
       "issueType": "fresh",
       "lane": "realtime",
-      "issueStatus": "stable",
+      "issueStatus": "unknown",
       "isHot": true,
-      "why": "김동원 고려대 총장이 연임 도전 위해 총장직 사퇴",
+      "why": "신한금융 3분기 누적 순익이 5조274억으로 역대 최대를 기록했다",
       "headlines": [
         {
-          "title": "김동원 고려대 총장, 연임 도전 위해 총장직 사퇴",
+          "title": "신한금융 3분기 누적 순익 5조274억원…작년 연간 순익 넘어서",
+          "press": "economist.co.kr",
+          "publishedAt": "2026-10-27T05:51:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/243/0000104782?sid=101"
+        },
+        {
+          "title": "신한금융 3분기 누적 순익 5조274억원, 12.7%↑…역대 최대(종합)",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-27T04:39:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016403076?sid=101"
+        },
+        {
+          "title": "신한금융, 3분기 누적 순익 5조 돌파…역대 최대",
           "press": "chosun.com",
-          "publishedAt": "2026-10-27T02:12:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0004006156?sid=102"
-        },
-        {
-          "title": "김동원 고려대 총장, 연임 도전 위해 사퇴",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-10-27T06:20:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006397163?sid=102"
-        },
-        {
-          "title": "\"한국 바이오, 유럽 뚫는다\"…고려대의료원, 스위스 바젤대와 맞손",
-          "press": "news1.kr",
-          "publishedAt": "2026-10-26T08:50:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009250815?sid=105"
+          "publishedAt": "2026-10-27T07:05:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004006207?sid=101"
         }
       ],
       "concentrated": [
         {
-          "keyword": "고려대 안암병원",
+          "keyword": "3분기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "난베이지",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "경량패딩·겨울옷이 2030 사이에서 화제가 되고 있다",
+      "headlines": [
+        {
+          "title": "난베이지, 33B 오픈소스 AI 모델 공개...코딩 벤치마크서 '큐원3.8-27B' 앞...",
+          "press": "aitimes.com",
+          "publishedAt": "2026-10-27T09:04:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=216711"
+        },
+        {
+          "title": "\"지금까지 나온 것 중 제일 낫다\"…숏폼서 난리 난 단돈 5000원 다이소 '...",
+          "press": "wikitree.co.kr",
+          "publishedAt": "2026-10-26T10:48:00.000Z",
+          "link": "https://www.wikitree.co.kr/articles/1169269"
+        },
+        {
+          "title": "“아재옷인 줄 알았는데…” 요즘 2030 난리난 ‘경량패딩’ 왜 [비크닉...",
+          "press": "joongang.co.kr",
+          "publishedAt": "2026-10-22T21:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/025/0003559969?sid=101"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "네이버",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "네이버가 브룩필드와 12조원 AI 인프라 계약을 맺었다",
+      "headlines": [
+        {
+          "title": "네이버, 100억 弗 AI 팩토리 사업 본궤도…브룩필드 100% 출자 '에셋코'...",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-27T07:40:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014282194?sid=105"
+        },
+        {
+          "title": "네이버·엔비디아·브룩필드 3자 협력…자본·기술 역할 분담 '정석'될까",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-10-27T08:09:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005432449?sid=105"
+        },
+        {
+          "title": "네이버, 브룩필드와 12조원 AI인프라 계약…AI팩토리 본격 공략",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-27T07:32:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016403895?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "네이버 시계",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "고려대 세종캠퍼스",
+          "keyword": "네이버 길찾기",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "고려대 화정체육관",
+          "keyword": "네이버 맞춤법",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "고려대 입학처",
+          "keyword": "네이버 주가",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "고려대 lms",
+          "keyword": "네이버 날씨",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "고려대 포털",
+          "keyword": "네이버 예약 확인",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "고려대 학과",
+          "keyword": "네이버 사전",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "고려대 수강신청",
+          "keyword": "네이버 환율",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [
         {
-          "keyword": "고려대 총장 후보",
-          "reason": "차기 선거 출마자 관심",
+          "keyword": "네이버 주가",
+          "reason": "계약 영향",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "고려대 의료원 협력",
-          "reason": "바젤대 협력 내용 관심",
+          "keyword": "네이버 AI 전망",
+          "reason": "사업 방향",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "칩스앤미디어",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "칩스앤미디어 3분기 영업이익이 16.6억으로 8.7% 늘었다",
+      "headlines": [
+        {
+          "title": "칩스앤미디어, 3분기 영업익 약 17억원·전년比 8.7%↑",
+          "press": "newspim.com",
+          "publishedAt": "2026-10-27T05:07:00.000Z",
+          "link": "https://www.newspim.com/news/view/20261027000901"
+        },
+        {
+          "title": "칩스앤미디어, 3분기 영업익 16.6억...전년비 8.7%↑",
+          "press": "digitaltoday.co.kr",
+          "publishedAt": "2026-10-27T05:56:00.000Z",
+          "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=710293"
+        },
+        {
+          "title": "칩스앤미디어, AI SoC·로보틱스 신규 실적에 3분기 매출 ↑",
+          "press": "aitimes.com",
+          "publishedAt": "2026-10-27T08:40:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=216724"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "칩스앤미디어 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "칩스앤미디어 매출",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "칩스앤미디어 대표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "칩스앤미디어 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "칩스앤미디어 구글",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "칩스앤미디어 삼성",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "칩스앤미디어 배당",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "칩스앤미디어 전망",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "칩스앤미디어 실적설명회",
+          "reason": "27일 내용",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "칩스앤미디어 주가",
+          "reason": "실적 반영",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "칩스앤미디어 신규 IP",
+          "reason": "매출 기여",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "삼쩜삼",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "삼쩜삼이 사내 AI 에이전트 8개를 통합해 비용 45% 절감했다",
+      "headlines": [
+        {
+          "title": "삼쩜삼, AI에이전트 통합구축…\"비용 최대 45%↓\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-27T00:28:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014280168?sid=101"
+        },
+        {
+          "title": "\"흩어진 AI 에이전트 한곳에\"…삼쩜삼, 자체 플랫폼 '카터' 구축",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-27T00:22:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009251599?sid=101"
+        },
+        {
+          "title": "삼쩜삼, 사내 AI 에이전트 8개 ‘카터’로 통합…운영비 45% 절감",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-10-27T01:23:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006396906?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "삼쩜삼 고객센터",
+          "searchVolume": 5380,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼쩜삼 병원비환급",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼쩜삼 환급",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼쩜삼 이용료 미납",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼쩜삼 탈퇴",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼쩜삼 이용료",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼쩜삼 환불",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼쩜삼 수수료",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "삼쩜삼 카터 기능",
+          "reason": "활용법 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "삼쩜삼 AI 서비스",
+          "reason": "적용 범위",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "AI 에이전트 통합",
+          "reason": "타 기업 사례",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "삼쩜삼 환급",
+          "reason": "본업 서비스 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "마에스트로",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "LF 마에스트로가 론칭 40주년 맞아 하이엔드 남성복으로 도약한다",
+      "headlines": [
+        {
+          "title": "LF 마에스트로, 론칭 40주년 맞아 하이엔드 남성복 도약",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-26T23:45:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014280035?sid=101"
+        },
+        {
+          "title": "40주년 맞은 LF 마에스트로, 고급화 전략으로 재도약 나선다",
+          "press": "sedaily.com",
+          "publishedAt": "2026-10-27T05:54:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/011/0004675618?sid=101"
+        },
+        {
+          "title": "수트 매출 30%가 맞춤 제작…마에스트로, 서비스 세분화한다",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-10-27T01:53:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005432149?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "마에스트로 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "닌텐도 마에스트로",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "마에스트로 정장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "마에스트로 호텔",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "마에스트로 닌텐도",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "티엠포 마에스트로",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "안성 마에스트로",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "마에스트로 가사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "마에스트로 맞춤정장",
+          "reason": "가격대 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "마에스트로 예복",
+          "reason": "결혼 수요",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "마에스트로 신상",
+          "reason": "컬렉션 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "케이던스",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "케이던스가 엔비디아 기반 반도체 설계 AI '마에스트로'를 공개했다",
+      "headlines": [
+        {
+          "title": "케이던스, 엔비디아 기반 반도체 설계 AI '마에스트로' 공개…자체 데이...",
+          "press": "aitimes.com",
+          "publishedAt": "2026-10-27T07:32:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=216719"
+        },
+        {
+          "title": "태양유전, 케이던스 'OrCAD X'에 부품 데이터 1만종 탑재…설계 편의성 ...",
+          "press": "etnews.com",
+          "publishedAt": "2026-10-26T01:18:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/030/0003478521?sid=105"
+        },
+        {
+          "title": "케이던스 \"칩 설계 1000배 쉬워진다\"...연간 실적 전망 또 올렸다",
+          "press": "thelec.kr",
+          "publishedAt": "2026-10-27T01:40:00.000Z",
+          "link": "https://www.thelec.kr/news/articleView.html?idxno=64296"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "케이던스 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "러닝 케이던스 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "러닝 케이던스",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "케이던스 160",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "케이던스 180",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "케이던스 170",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "런닝 케이던스",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "평균 케이던스",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "케이던스 실적",
+          "reason": "전망 상향",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "케이던스 엔비디아",
+          "reason": "협력 영향",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "케이던스 미국 증시",
+          "reason": "주가 흐름",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "알리바바 큐원",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "알리바바 큐원이 보안 테스트 중 베이징 서버로 파일 전송을 시도했다",
+      "headlines": [
+        {
+          "title": "\"알리바바 큐원, 테스트중 中서버로 파일 전송 시도\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-27T02:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016402568?sid=101"
+        },
+        {
+          "title": "\"알리바바 큐원, 테스트 중 中서버에 파일전송 시도\"",
+          "press": "yonhapnewstv.co.kr",
+          "publishedAt": "2026-10-27T02:15:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/422/0000919848?sid=104"
+        },
+        {
+          "title": "알리바바 큐원, 보안 테스트 중 베이징 서버로 무단 전송 시도",
+          "press": "aitimes.com",
+          "publishedAt": "2026-10-27T07:24:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=216702"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "알리바바",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "애플",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "애플이 첫 폴더블 아이폰 듀오의 화면 결함을 인정하고 교체한다",
+      "headlines": [
+        {
+          "title": "애플, 첫 폴더블 ‘아이폰 듀오’ 화면 결함 인정…“문제 제품 교체”",
+          "press": "hani.co.kr",
+          "publishedAt": "2026-10-27T07:56:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/028/0002829401?sid=105"
+        },
+        {
+          "title": "“펼쳤더니 화면이 쩍”…329만원 아이폰 듀오, 애플도 결함 인정",
+          "press": "donga.com",
+          "publishedAt": "2026-10-27T02:35:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/020/0003757957?sid=105"
+        },
+        {
+          "title": "'쩍' 갈라진 아이폰 듀오에…애플 \"소수 기기 문제, 교체 대상\"",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-27T01:17:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009251839?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "애플 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 서비스센터",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 폴더블",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 듀오",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 환불",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 ceo",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 보증 확인",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 폴더블폰",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "애플 인앱결제 과징금",
+          "reason": "추가 제재",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -3481,75 +4430,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
-    },
-    {
-      "issue": "역삼동 방화 사건",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "경찰이 역삼동 연쇄 방화범 70대 신상공개 심의위 개최 결정",
-      "headlines": [
-        {
-          "title": "'역삼동 연쇄 방화범' 신상공개되나…경찰, 이번주 심의위원회 연다",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-10-27T00:35:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005432052?sid=102"
-        },
-        {
-          "title": "'역삼 연쇄방화' 70대 신상 공개되나…경찰, 심의위 열기로",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-27T00:44:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016402100?sid=102"
-        },
-        {
-          "title": "[속보]'역삼동 방화범' 이번 주 신상공개 심사",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-10-27T00:19:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006396828?sid=102"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "2026-2027 여자프로농구 개막",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "2026-2027 여자프로농구 개막 미디어데이 열려 6개 구단 출사표",
-      "headlines": [
-        {
-          "title": "2026-2027 여자프로농구 개막 미디어데이",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-27T07:55:00.000Z",
-          "link": "https://m.sports.naver.com/basketball/article/001/0016403989"
-        },
-        {
-          "title": "'심플·뒤엎다·W 이모지'…여자농구 6개 구단 '시너지 출사표'",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-27T07:21:00.000Z",
-          "link": "https://m.sports.naver.com/basketball/article/003/0014282112"
-        },
-        {
-          "title": "금메달 동료에서 라이벌로…여자농구 AG 영웅들 WKBL 개막 출사표",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-10-27T08:46:00.000Z",
-          "link": "https://m.sports.naver.com/basketball/article/055/0001398537"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "2026-2027 여자프로농구",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "정종철",
@@ -3657,726 +4539,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
-    },
-    {
-      "issue": "러시아 경유 미국",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "러시아산 경유 실은 유조선 3척 미국행, 제재 대상 선박도 포함",
-      "headlines": [
-        {
-          "title": "러 경유 실은 유조선 3척 미국행…제재 대상 선박도 포함",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-27T06:20:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016403524?sid=104"
-        },
-        {
-          "title": "러 경유 실은 유조선 3척 미국行…트럼프 '경유딜'에 美의회 발칵",
-          "press": "nocutnews.co.kr",
-          "publishedAt": "2026-10-27T06:58:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/079/0004203474?sid=104"
-        },
-        {
-          "title": "러시아 경유 실은 유조선 3척, 다음달 美 도착…제재 선박 논란도",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-27T08:19:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014282308?sid=104"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "난베이지",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": null,
-      "headlines": [
-        {
-          "title": "난베이지, 33B 오픈소스 AI 모델 공개...코딩 벤치마크서 '큐원3.8-27B' 앞...",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-27T09:04:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216711"
-        },
-        {
-          "title": "\"지금까지 나온 것 중 제일 낫다\"…숏폼서 난리 난 단돈 5000원 다이소 '...",
-          "press": "wikitree.co.kr",
-          "publishedAt": "2026-10-26T10:48:00.000Z",
-          "link": "https://www.wikitree.co.kr/articles/1169269"
-        },
-        {
-          "title": "“아재옷인 줄 알았는데…” 요즘 2030 난리난 ‘경량패딩’ 왜 [비크닉...",
-          "press": "joongang.co.kr",
-          "publishedAt": "2026-10-22T21:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/025/0003559969?sid=101"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [
-        {
-          "keyword": "난베이지 성능 비교",
-          "reason": "큐원 대비 성능 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "난베이지 사용법",
-          "reason": "실제 구동 방법 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "난베이지 라이선스",
-          "reason": "오픈소스 이용 조건",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "난베이지 한국어",
-          "reason": "한국어 지원 여부 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "난베이지 코딩",
-          "reason": "코딩 활용 성능 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "칩스앤미디어",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "칩스앤미디어 3분기 영업익 약 17억원으로 전년比 8.7% 증가",
-      "headlines": [
-        {
-          "title": "칩스앤미디어, 3분기 영업익 약 17억원·전년比 8.7%↑",
-          "press": "newspim.com",
-          "publishedAt": "2026-10-27T05:07:00.000Z",
-          "link": "https://www.newspim.com/news/view/20261027000901"
-        },
-        {
-          "title": "칩스앤미디어, 3분기 영업익 16.6억...전년비 8.7%↑",
-          "press": "digitaltoday.co.kr",
-          "publishedAt": "2026-10-27T05:56:00.000Z",
-          "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=710293"
-        },
-        {
-          "title": "칩스앤미디어, AI SoC·로보틱스 신규 실적에 3분기 매출 ↑",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-27T08:40:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216724"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "칩스앤미디어 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "칩스앤미디어 매출",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "칩스앤미디어 대표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "칩스앤미디어 연봉",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "칩스앤미디어 구글",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "칩스앤미디어 삼성",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "칩스앤미디어 배당",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "칩스앤미디어 전망",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "칩스앤미디어 주가 전망",
-          "reason": "실적 발표 후 주가 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "칩스앤미디어 4분기",
-          "reason": "다음 분기 실적 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "칩스앤미디어 배당",
-          "reason": "실적 따른 배당 기대",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "칩스앤미디어 로보틱스",
-          "reason": "신규 사업 성장성",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "칩스앤미디어 실적 설명회",
-          "reason": "27일 설명회 내용 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "삼쩜삼",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "삼쩜삼이 사내 AI 에이전트 8개 '카터'로 통합해 운영비 45% 절감",
-      "headlines": [
-        {
-          "title": "삼쩜삼, AI에이전트 통합구축…\"비용 최대 45%↓\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-27T00:28:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014280168?sid=101"
-        },
-        {
-          "title": "\"흩어진 AI 에이전트 한곳에\"…삼쩜삼, 자체 플랫폼 '카터' 구축",
-          "press": "news1.kr",
-          "publishedAt": "2026-10-27T00:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009251599?sid=101"
-        },
-        {
-          "title": "삼쩜삼, 사내 AI 에이전트 8개 ‘카터’로 통합…운영비 45% 절감",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-10-27T01:23:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006396906?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "삼쩜삼 고객센터",
-          "searchVolume": 5380,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼쩜삼 병원비환급",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼쩜삼 환급",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼쩜삼 이용료 미납",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼쩜삼 탈퇴",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼쩜삼 이용료",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼쩜삼 환불",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼쩜삼 수수료",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "삼쩜삼 카터 효과",
-          "reason": "비용 절감 성과 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "삼쩜삼 환급 방법",
-          "reason": "세금 환급 절차 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "삼쩜삼 AI 서비스",
-          "reason": "AI 적용된 신기능 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "삼쩜삼 이용료",
-          "reason": "수수료 체계 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "삼쩜삼 탈퇴",
-          "reason": "서비스 해지 방법 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "마에스트로",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "LF 마에스트로가 론칭 40주년 맞아 하이엔드 남성복 도약 선언",
-      "headlines": [
-        {
-          "title": "LF 마에스트로, 론칭 40주년 맞아 하이엔드 남성복 도약",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-26T23:45:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014280035?sid=101"
-        },
-        {
-          "title": "40주년 맞은 LF 마에스트로, 고급화 전략으로 재도약 나선다",
-          "press": "sedaily.com",
-          "publishedAt": "2026-10-27T05:54:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/011/0004675618?sid=101"
-        },
-        {
-          "title": "수트 매출 30%가 맞춤 제작…마에스트로, 서비스 세분화한다",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-10-27T01:53:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005432149?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "마에스트로 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "닌텐도 마에스트로",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "마에스트로 정장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "마에스트로 호텔",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "마에스트로 닌텐도",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "티엠포 마에스트로",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "안성 마에스트로",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "마에스트로 가사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "마에스트로 맞춤 수트",
-          "reason": "맞춤 제작 서비스 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "마에스트로 예복",
-          "reason": "예복 라인 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "마에스트로 신상",
-          "reason": "40주년 신제품 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "마에스트로 매장",
-          "reason": "오프라인 매장 위치",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "케이던스",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "케이던스가 엔비디아 기반 반도체 설계 AI '마에스트로' 공개",
-      "headlines": [
-        {
-          "title": "케이던스, 엔비디아 기반 반도체 설계 AI '마에스트로' 공개…자체 데이...",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-27T07:32:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216719"
-        },
-        {
-          "title": "태양유전, 케이던스 'OrCAD X'에 부품 데이터 1만종 탑재…설계 편의성 ...",
-          "press": "etnews.com",
-          "publishedAt": "2026-10-26T01:18:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/030/0003478521?sid=105"
-        },
-        {
-          "title": "케이던스 \"칩 설계 1000배 쉬워진다\"...연간 실적 전망 또 올렸다",
-          "press": "thelec.kr",
-          "publishedAt": "2026-10-27T01:40:00.000Z",
-          "link": "https://www.thelec.kr/news/articleView.html?idxno=64296"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "케이던스 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "러닝 케이던스 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "러닝 케이던스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "케이던스 160",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "케이던스 180",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "케이던스 170",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "런닝 케이던스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "평균 케이던스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "케이던스 마에스트로 성능",
-          "reason": "설계 효율 효과 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "케이던스 주가 전망",
-          "reason": "실적 상향 후 주가 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "케이던스 엔비디아 협력",
-          "reason": "협업 내용 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "케이던스 시높시스",
-          "reason": "경쟁사 비교 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "케이던스 실적 전망",
-          "reason": "연간 전망 상향 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "알리바바 큐원",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "알리바바 큐원이 보안 테스트 중 베이징 서버로 파일 전송 시도",
-      "headlines": [
-        {
-          "title": "\"알리바바 큐원, 테스트중 中서버로 파일 전송 시도\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-27T02:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016402568?sid=101"
-        },
-        {
-          "title": "\"알리바바 큐원, 테스트 중 中서버에 파일전송 시도\"",
-          "press": "yonhapnewstv.co.kr",
-          "publishedAt": "2026-10-27T02:15:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/422/0000919848?sid=104"
-        },
-        {
-          "title": "알리바바 큐원, 보안 테스트 중 베이징 서버로 무단 전송 시도",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-27T07:24:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216702"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "알리바바",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "알리바바 큐원 해명",
-          "reason": "회사 측 입장 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "애플",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "애플이 첫 폴더블 '아이폰 듀오' 화면 결함 인정·문제 제품 교체",
-      "headlines": [
-        {
-          "title": "애플, 첫 폴더블 ‘아이폰 듀오’ 화면 결함 인정…“문제 제품 교체”",
-          "press": "hani.co.kr",
-          "publishedAt": "2026-10-27T07:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/028/0002829401?sid=105"
-        },
-        {
-          "title": "“펼쳤더니 화면이 쩍”…329만원 아이폰 듀오, 애플도 결함 인정",
-          "press": "donga.com",
-          "publishedAt": "2026-10-27T02:35:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/020/0003757957?sid=105"
-        },
-        {
-          "title": "'쩍' 갈라진 아이폰 듀오에…애플 \"소수 기기 문제, 교체 대상\"",
-          "press": "news1.kr",
-          "publishedAt": "2026-10-27T01:17:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009251839?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "애플 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 서비스센터",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 폴더블",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 듀오",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 환불",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 ceo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 보증 확인",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "애플 인앱결제 과징금",
-          "reason": "600억 제재 결과 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "토큰팩토리",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "KT가 500개 AI모델 연결한 '토큰팩토리' 30일 출시",
-      "headlines": [
-        {
-          "title": "\"챗GPT부터 국산 AI까지 골라 쓴다\"…KT 'AI 플랫폼' 승부수",
-          "press": "hankyung.com",
-          "publishedAt": "2026-10-27T07:07:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005347049?sid=105"
-        },
-        {
-          "title": "AI 모델 500개 골라 쓴다…KT '토큰팩토리' 30일 출시",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-10-27T01:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005432081?sid=105"
-        },
-        {
-          "title": "'KT 토큰팩토리' 시연",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-27T02:35:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016402766?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "토큰 팩토리 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kt 토큰팩토리",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "토큰팩토리 요금제",
-          "reason": "과금 방식·비용 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "토큰팩토리 사용법",
-          "reason": "실제 이용 방법 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "토큰팩토리 모델 종류",
-          "reason": "지원 AI 모델 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "토큰팩토리 비교",
-          "reason": "타사 AI 서비스 비교",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "고 최형우 영결식",
