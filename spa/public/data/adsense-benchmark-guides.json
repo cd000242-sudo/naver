@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-27T20:38:43.622Z",
+  "generatedAt": "2026-10-27T21:01:12.278Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -100353,6 +100353,73 @@
           "views": 505,
           "answers": 3,
           "askedAt": "2026.09.10"
+        }
+      ]
+    },
+    {
+      "id": "03a5589d7c346ee0",
+      "urls": [
+        "https://on.sano.co.kr/%eb%b0%b1%ec%96%91-%ea%b4%80%ea%b4%91%ed%98%b8%ed%85%94-%ec%88%99%eb%b0%95-%ec%96%b4%eb%96%a8%ea%b9%8c-%ea%b0%80%ea%b2%a9%ea%b3%bc-%ec%9c%84%ec%b9%98-%ea%b7%b8%eb%a6%ac%ea%b3%a0-%ec%a3%bc%eb%b3%80/"
+      ],
+      "guide": {
+        "direction": "백양관광호텔을 검색하는 사람은 백양사 단풍철 숙박을 앞두고 가격과 조식 포함 여부, 식당 운영 여부를 확인하지 못해 예약을 미루고 있다. 고수 글은 위치와 주변 볼거리만 다뤄 조식·식당·후기처럼 실제 숙박 결정에 필요한 정보가 빠져 있다. 조식 포함 여부, 식당 운영시간, 후기 요약, 근처 맛집 리스트를 표로 정리해 예약 여부를 그 자리에서 결정하게 한다.",
+        "searchTargets": [
+          "백양관광호텔",
+          "백양관광호텔 조식",
+          "백양관광호텔 후기",
+          "백양관광호텔 주변 맛집"
+        ],
+        "mustInclude": [
+          "백양관광호텔 1박 가격대 (확인 필요: 호텔 공식 홈페이지·네이버 예약)",
+          "조식 포함 여부와 식당 운영시간 (확인 필요: 호텔 공식 안내)",
+          "백양사까지 도보·차량 이동 거리 (확인 필요: 지도 서비스)",
+          "실제 숙박 후기 평점과 장단점 요약 (확인 필요: 네이버·예약 플랫폼 리뷰)",
+          "호텔 주변 식당 3~5곳 상호와 거리 (확인 필요: 지도 검색)"
+        ],
+        "mustAvoid": [
+          "백양사 단풍 시기를 다른 해 날짜 그대로 쓰지 않기",
+          "부산 백양터널·백양산 등 동명의 다른 장소와 혼동하지 않기",
+          "지식인에 나온 역사·문학 소재(부산 역사인물, 시 구절)를 호텔 정보처럼 끌어오지 않기"
+        ],
+        "checkBefore": [
+          "현재 1박 가격과 조식 포함 여부는 호텔 공식 홈페이지 또는 네이버 예약 페이지에서 재확인",
+          "백양사 단풍 절정 시기는 장성군청·백양사 공식 공지에서 재확인"
+        ],
+        "solves": [
+          "백양관광호텔 조식 되나요? → 조식 포함 여부와 식당 운영시간을 표로 정리해 예약 전 확인시켜 준다",
+          "숙박 후기 어때요? → 실제 후기 평점과 장단점을 한눈에 요약해 보여준다",
+          "근처에 먹을 데 있나요? → 호텔 주변 맛집을 거리별 리스트로 정리해 준다"
+        ],
+        "actionTitles": [
+          "백양관광호텔 1박 가격과 조식 포함 여부 확인하는 법",
+          "백양관광호텔 후기로 보는 숙박 전 체크리스트 총정리",
+          "백양관광호텔 근처 맛집과 호텔 식당 메뉴 모두 비교하기"
+        ]
+      },
+      "at": "2026-10-27T21:00:18.740Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "부산의 역사적 인물과 사건",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=111001&docId=59716594&answerNo=2&qb=67Cx7JaRIOq0gOq0ke2YuO2FlCDsiJnrsJUg7Ja065ao6rmMIOq3uOumrOqzoA==",
+          "views": 180077,
+          "answers": 5,
+          "askedAt": "2008.04.19"
+        },
+        {
+          "title": "우리 전라남도의 관광지를 알려주세요.",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1212&docId=20560694&answerNo=2&qb=67Cx7JaRIOq0gOq0ke2YuO2FlCDsiJnrsJUg7Ja065ao6rmMIOq3uOumrOqzoA==",
+          "views": 39085,
+          "answers": 3,
+          "askedAt": "2006.03.19"
+        },
+        {
+          "title": "정형시,서사시",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=30702&docId=198608958&answerNo=1&qb=67Cx7JaRIOq0gOq0ke2YuO2FlCDsiJnrsJUg7Ja065ao6rmMIOq3uOumrOqzoA==",
+          "views": 29404,
+          "answers": 1,
+          "askedAt": "2014.05.27"
         }
       ]
     }
