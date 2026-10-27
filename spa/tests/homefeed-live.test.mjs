@@ -181,3 +181,18 @@ test('작성 안내 — 실시간 판은 뻔한 문장을 찍지 않고, CI 카�
   const src = readFileSync(fileURLToPath(new URL('../src/lib/homefeedLive.mjs', import.meta.url)), 'utf8');
   assert.doesNotMatch(src, /독자의 질문에 답하는 해설|원문 링크와 발행일|사진 원작자와 재사용 조건/);
 });
+
+/*
+ * 2026-10-27 실측 추천 규칙 — 수집기(scripts/homefeed-benchmarks-core.cjs)와 같다. 화면의 실시간 판이 예전 규칙으로
+ * 추천을 다시 매기면 CI 규칙이 덮인다. CI 판이 싣는 홈판 상위 이력(homefeedTopBlogs)을 받아 같은 규칙을 쓴다.
+ */
+const otherPost = (id, title, extra = {}) => post({ sourceId: id, url: `https://blog.naver.com/${id}/9${id.length}1`, title, summary: `${title} 요약입니다.`, ...extra });
+test('실시간 판도 홈판 상위 이력 · 공감 10+ 규칙을 쓴다(이력이 없으면 예전 규칙)', () => {
+  const pair = (likes) => [otherPost('a', '디올과 원영의 만남 🎀', { metrics: { views: null, likes, comments: null } }), otherPost('b', '🎀 디올원영 어떤데?')];
+  assert.equal(live.buildLiveCandidates(pair(null), now)[0].recommended, true);
+  assert.equal(live.buildLiveCandidates(pair(null), now, new Map(), new Map([['zzz', 3]]))[0].recommended, false);
+  const hist = live.buildLiveCandidates(pair(null), now, new Map(), new Map([['b', 3]]))[0];
+  assert.equal(hist.recommended, true);
+  assert.equal(hist.sources.find((s) => s.url.includes('/b/')).homefeedTops, 3);
+  assert.equal(live.buildLiveCandidates(pair(12), now, new Map(), new Map([['zzz', 3]]))[0].recommended, true);
+});

@@ -18,7 +18,7 @@ export function safeBenchmarkUrl(value) {
 export function metricText(value) { const n = number(value); return n === null ? '미측정' : n.toLocaleString('ko-KR'); }
 export function benchmarkTime(value) { const d = date(value); return d ? new Intl.DateTimeFormat('ko-KR', { timeZone:'Asia/Seoul', month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit', hour12:false }).format(new Date(d)) : '미확인'; }
 function source(raw = {}) {
- return { id:str(raw.id,120), name:str(raw.name,160) || str(raw.id,120) || '출처', platform:str(raw.platform,40), url:safeBenchmarkUrl(raw.url), status:['ok','unavailable','failed'].includes(raw.status) ? raw.status : 'unavailable', reason:str(raw.reason), postCount:number(raw.postCount) ?? 0, capturedAt:date(raw.capturedAt), publishedAt:date(raw.publishedAt), title:str(raw.title), summary:str(raw.summary), discoveryOnly:raw.discoveryOnly !== false, metrics:{views:number(raw.metrics?.views), likes:number(raw.metrics?.likes), comments:number(raw.metrics?.comments)}, growth:growthOf(raw.growth), image:safeBenchmarkImage(raw.image) };
+ return { id:str(raw.id,120), name:str(raw.name,160) || str(raw.id,120) || '출처', platform:str(raw.platform,40), url:safeBenchmarkUrl(raw.url), status:['ok','unavailable','failed'].includes(raw.status) ? raw.status : 'unavailable', reason:str(raw.reason), postCount:number(raw.postCount) ?? 0, capturedAt:date(raw.capturedAt), publishedAt:date(raw.publishedAt), title:str(raw.title), summary:str(raw.summary), discoveryOnly:raw.discoveryOnly !== false, metrics:{views:number(raw.metrics?.views), likes:number(raw.metrics?.likes), comments:number(raw.metrics?.comments)}, growth:growthOf(raw.growth), image:safeBenchmarkImage(raw.image), homefeedTops:topsCount(raw.homefeedTops) };
 }
 /** 이전 수집 대비 반응 증가(CI 판이 잰 값, 2026-10-01). 모양이 맞는 칸만 옮긴다. */
 function growthOf(raw) {
@@ -51,12 +51,21 @@ export function normalizeTrends(raw) {
   writing:{ basis:str(raw.writing?.basis,40), stats:{ count:int(stats.count), length:{ median:int(stats.length?.median), p25:int(stats.length?.p25), p75:int(stats.length?.p75) }, quoteStart:int(stats.quoteStart), ellipsis:int(stats.ellipsis), question:int(stats.question), exclaim:int(stats.exclaim), number:int(stats.number), colloquial:int(stats.colloquial) }, guide:list(raw.writing?.guide).slice(0,8) },
  };
 }
+/** 홈판 상위 횟수(2026-10-27 실측 · 어드바이저) — 양의 정수만. */
+function topsCount(value) { const n = Number(value); return Number.isInteger(n) && n > 0 && n < 10000 ? n : null; }
+/** CI 판이 싣는 블로그별 홈판 상위 횟수 — 실시간 판이 같은 추천 규칙을 쓰게 넘긴다. */
+function topBlogsOf(raw) {
+ const out = {};
+ if (!raw || typeof raw !== 'object') return out;
+ for (const [blog, n] of Object.entries(raw).slice(0, 5000)) { const c = topsCount(n); if (c && /^[a-z0-9_-]{1,60}$/.test(blog)) out[blog] = c; }
+ return out;
+}
 export function normalizeBenchmarkBoard(raw) {
  if (!raw || raw.schemaVersion !== 1 || !Array.isArray(raw.candidates) || !Array.isArray(raw.sources)) throw new Error('벤치마크 데이터 형식을 확인하지 못했습니다.');
  if (!date(raw.generatedAt)) throw new Error('마지막 수집 시각을 확인하지 못했습니다.');
  // 출처 · 카드 상한 1,000(2026-10-06) — 300이면 출처 786곳 중 300곳 · 추천 791장 중 300장만 보였다. 판 생성기 MAX_CARDS 와 같은 값.
  const sources = raw.sources.slice(0,1000).filter(x=>x && typeof x==='object').map(source);
- return {schemaVersion:1,generatedAt:date(raw.generatedAt),attemptedAt:date(raw.attemptedAt),status:['fresh','partial','stale'].includes(raw.status) ? raw.status : 'partial',sources,sourceCount:sources.length,collectedPostCount:sources.filter(s=>s.status==='ok').reduce((sum,s)=>sum+s.postCount,0),candidates:raw.candidates.slice(0,1000).filter(x=>x && typeof x==='object').map(candidate),trends:normalizeTrends(raw.trends)};
+ return {schemaVersion:1,generatedAt:date(raw.generatedAt),attemptedAt:date(raw.attemptedAt),status:['fresh','partial','stale'].includes(raw.status) ? raw.status : 'partial',sources,sourceCount:sources.length,collectedPostCount:sources.filter(s=>s.status==='ok').reduce((sum,s)=>sum+s.postCount,0),candidates:raw.candidates.slice(0,1000).filter(x=>x && typeof x==='object').map(candidate),trends:normalizeTrends(raw.trends),homefeedTopBlogs:topBlogsOf(raw.homefeedTopBlogs)};
 }
 export function benchmarkView(board, now = Date.now()) {
  const isOld = (value) => !value || now - Date.parse(value) > MAX_AGE || Date.parse(value) > now + 5*60*1000;

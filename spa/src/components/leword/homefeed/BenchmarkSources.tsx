@@ -16,8 +16,10 @@ function Reactions({s}:{s:BenchmarkSource}) {
  const m=s.metrics;
  const chips=[m.views!==null&&`조회 ${metricText(m.views)}`,m.likes!==null&&`공감 ${metricText(m.likes)}`,m.comments!==null&&`댓글 ${metricText(m.comments)}`].filter(Boolean) as string[];
  const grew=s.growth?.likes&&s.growth.likes.change>0?s.growth.likes:null;
- if (!chips.length&&!grew) return null;
- return <span className="hfb-src-chips">{chips.map((t)=><span key={t}>{t}</span>)}{grew&&<span className="up">공감 +{grew.change.toLocaleString('ko-KR')} · {grew.elapsedMinutes}분 사이</span>}</span>;
+ // 홈판 상위 이력(2026-10-27 실측) — 이 블로그 글이 실제 홈판 상위에 오른 횟수(어드바이저). 상위를 가른 가장 강한 신호다.
+ const tops=s.homefeedTops||0;
+ if (!chips.length&&!grew&&!tops) return null;
+ return <span className="hfb-src-chips">{tops>0&&<span className="hf">홈판 상위 {tops}회</span>}{chips.map((t)=><span key={t}>{t}</span>)}{grew&&<span className="up">공감 +{grew.change.toLocaleString('ko-KR')} · {grew.elapsedMinutes}분 사이</span>}</span>;
 }
 function Tile({s}:{s:BenchmarkSource}) {
  const label=PLATFORM[s.platform]||'원문';

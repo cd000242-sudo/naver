@@ -255,7 +255,14 @@ function groupPosts(posts) {
  * 수집기 buildCandidates 와 같은 규칙. 최근 48시간 소재, 추천이 앞, 300장까지.
  * 반응 증가는 화면이 잴 수 없어(이전 수집이 없다) CI 판이 잰 글별 증가(growthByUrl: 원문 주소 → 증가)를 같은 기준으로 쓴다.
  */
-export function buildLiveCandidates(posts, now, growthByUrl = new Map()) {
+/*
+ * 홈판 상위 이력(2026-10-27 실측) — 수집기와 같은 규칙. CI 판의 homefeedTopBlogs(블로그 → 상위 횟수)가 있으면
+ * 추천에 "출처 블로그 상위 이력 1회+ 또는 공감 10+" 를 더 요구한다. 없으면 예전 규칙 그대로.
+ */
+const blogIdOf = (url) => (/blog\.naver\.com\/([A-Za-z0-9_-]+)/.exec(String(url || '')) || [])[1]?.toLowerCase() || null;
+export function buildLiveCandidates(posts, now, growthByUrl = new Map(), topBlogs = new Map()) {
+  const measured = topBlogs instanceof Map && topBlogs.size > 0;
+  const topsOf = (p) => (measured ? topBlogs.get(blogIdOf(p.url)) || 0 : 0);
   const groups = groupPosts(posts);
   return groups.filter((group) => group.posts.some((p) => p.platform !== 'community-ranking' && p.summary)).map((group) => {
     const sorted = [...group.posts].sort((a, b) => Number(Boolean(b.summary)) - Number(Boolean(a.summary)) || (Date.parse(b.publishedAt) || 0) - (Date.parse(a.publishedAt) || 0));
@@ -270,18 +277,22 @@ export function buildLiveCandidates(posts, now, growthByUrl = new Map()) {
     const growth = sorted.map((p) => growthOf.get(p.url)).find(Boolean) || null;
     const positiveGrowth = Boolean(growth && Object.entries(growth).some(([key, g]) => g.change >= ({ views: 100, likes: 5, comments: 10 }[key] || Infinity)));
     const channels = new Set(sorted.map((p) => p.sourceId)).size;
-    const recommended = age <= 2 && !flags.some((f) => ['sponsored', 'sensitive-claim', 'recycled-material', 'possible-syndication'].includes(f)) && Boolean(lead.summary) && (channels >= 2 || (platforms.size >= 2 && reaction) || positiveGrowth);
+    const histTops = [...new Map(sorted.map((p) => [blogIdOf(p.url), topsOf(p)])).values()].reduce((s, n) => s + n, 0);
+    const maxLikes = Math.max(0, ...sorted.map((p) => Number(p.metrics?.likes)).filter(Number.isFinite));
+    const proven = !measured || histTops >= 1 || maxLikes >= 10;
+    const recommended = age <= 2 && !flags.some((f) => ['sponsored', 'sensitive-claim', 'recycled-material', 'possible-syndication'].includes(f)) && Boolean(lead.summary) && (channels >= 2 || (platforms.size >= 2 && reaction) || positiveGrowth) && proven;
     const keyword = tokens(lead.title).slice(0, 5).join(' ').slice(0, 55) || lead.title.slice(0, 55);
     const why = [lead.publishedAt ? `벤치마크 발행 ${lead.publishedAt.slice(0, 10)} · 사건 발생일은 별도 확인` : '발행일을 확인하지 못해 최신 사건으로 판단하지 않았습니다.'];
     if (sorted.length > 1) why.push(`${new Set(sorted.map((p) => p.sourceId)).size}개 채널에서 관련 제목 발견 · 독립 사실 확인과는 다릅니다.`);
     if (reaction) why.push('공개 반응이 있는 소재 · 플랫폼별 지표는 원문별로 표시합니다.');
     if (positiveGrowth) why.push('같은 게시물의 공개 반응이 이전 수집보다 늘었습니다. 채널 평소 대비 성과는 미확인입니다.');
+    if (histTops > 0) why.push(`출처 블로그가 최근 홈판 상위 ${histTops}회(어드바이저 실측) — 홈판에 자주 뜨는 블로그의 소재입니다.`);
     if (flags.includes('sponsored')) why.push('제품 제공·협찬 고지 감지: 자연 유행 근거에서 제외');
     if (stale) why.push('과거 자료 또는 발행 7일 경과: 새 사실 확보 전 작성 우선순위를 낮춥니다.');
     return {
       id: idOf(lead.url), keyword, title: lead.title, category: category(lead.title, sorted.map((p) => p.topic), lead.summary),
       status: stale ? 'stale' : recommended ? 'review-now' : 'verify', recommended,
-      priority: Math.max(0, (age <= 1 ? 30 : age <= 2 ? 24 : age <= 7 ? 12 : 0) + (lead.summary ? 10 : 0) + Math.min(24, (channels - 1) * 8) + (platforms.size >= 2 ? 15 : 0) + (reaction ? 10 : 0) + (positiveGrowth ? 10 : 0) - (flags.includes('sponsored') ? 25 : 0) - (stale ? 30 : 0) - (flags.includes('sensitive-claim') ? 20 : 0)),
+      priority: Math.max(0, (age <= 1 ? 30 : age <= 2 ? 24 : age <= 7 ? 12 : 0) + (lead.summary ? 10 : 0) + Math.min(24, (channels - 1) * 8) + (platforms.size >= 2 ? 15 : 0) + (reaction ? 10 : 0) + (positiveGrowth ? 10 : 0) - (flags.includes('sponsored') ? 25 : 0) - (stale ? 30 : 0) - (flags.includes('sensitive-claim') ? 20 : 0) + (measured ? Math.min(30, histTops * 10) + (maxLikes >= 10 ? 10 : 0) : 0)),
       publishedAt: lead.publishedAt, eventAt: null, capturedAt: lead.capturedAt,
       freshnessLabel: stale ? '시점 재검토' : recommended ? '원문 재확인 후 우선 검토' : '원출처 확인 필요', why,
       summary: lead.summary ? plainText(lead.summary, 140) : '제목과 공개 목록만 확인했습니다. 사건 내용은 원문 확인 후 작성하세요.',
@@ -294,7 +305,7 @@ export function buildLiveCandidates(posts, now, growthByUrl = new Map()) {
       verificationNeeded: [...(flags.includes('sensitive-claim') ? ['당사자·공식 자료 확인 전 인물 관련 의혹 제외'] : []), ...(flags.includes('sponsored') ? ['상업적 관계와 홍보성 주장 확인'] : [])],
       imageGuide: { url: lead.url, instruction: `${lead.name} 원문에서 이미지의 원출처를 먼저 확인하세요. 원본 게시물의 제목·게시일·관련 장면을 확인한 뒤 사용 조건에 맞게 캡처하고 출처를 남기세요. 벤치마크 사진 자체의 재사용 허용 여부는 미확인입니다.` },
       metrics: { searchVolume: null, documentCount: null, rankingPossibility: 'unmeasured', reactionGrowth: growth }, homefeedExposure: 'unverified',
-      sources: sorted.slice(0, 5).map((p) => ({ id: p.sourceId, platform: p.platform, name: p.name, title: p.title, url: p.url, publishedAt: p.publishedAt, summary: plainText(p.summary, 140), metrics: p.metrics, ...(safeBenchmarkImage(p.image) ? { image: p.image } : {}), ...(p.reactionCount != null ? { reactionCount: p.reactionCount, reactionLabel: p.reactionLabel } : {}), ...(p.metricNote ? { metricNote: p.metricNote } : {}), ...(growthOf.get(p.url) ? { growth: growthOf.get(p.url) } : {}), discoveryOnly: true })),
+      sources: sorted.slice(0, 5).map((p) => ({ id: p.sourceId, platform: p.platform, name: p.name, title: p.title, url: p.url, publishedAt: p.publishedAt, summary: plainText(p.summary, 140), metrics: p.metrics, ...(safeBenchmarkImage(p.image) ? { image: p.image } : {}), ...(p.reactionCount != null ? { reactionCount: p.reactionCount, reactionLabel: p.reactionLabel } : {}), ...(p.metricNote ? { metricNote: p.metricNote } : {}), ...(growthOf.get(p.url) ? { growth: growthOf.get(p.url) } : {}), ...(topsOf(p) ? { homefeedTops: topsOf(p) } : {}), discoveryOnly: true })),
       flags,
     };
   })
@@ -372,7 +383,8 @@ export function mergeLiveBoard(board, feeds, now) {
   // 출처 주제(CI 판 출처 목록) — 분야를 수집기와 같게 매긴다(2026-10-01).
   const topicById = new Map((board?.sources || []).map((s) => [s.id, s.topic || null]));
   const livePosts = live.posts.map((p) => ({ ...p, topic: topicById.get(p.sourceId) ?? null, ...(likesByUrl.has(p.url) ? { metrics: { ...p.metrics, likes: likesByUrl.get(p.url) } } : {}) }));
-  const built = buildLiveCandidates([...livePosts, ...igPosts], now, growthByUrl)
+  const topBlogs = new Map(Object.entries(board?.homefeedTopBlogs || {}));
+  const built = buildLiveCandidates([...livePosts, ...igPosts], now, growthByUrl, topBlogs)
     .filter((c) => !c.sources.some((s) => reviewedUrls.has(s.url)))
     .map((c) => {
       const hit = c.sources.map((s) => titlesByUrl.get(s.url)).find(Boolean);
