@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-27T10:09:58.021Z",
+  "generatedAt": "2026-10-27T10:17:27.162Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -89360,41 +89360,877 @@
           "askedAt": "2026.10.20"
         }
       ]
+    },
+    {
+      "id": "9d6a72338b9aa52d",
+      "urls": [
+        "https://infodemic.kr/3333",
+        "https://car.homeostasises.com/entry/%EB%B0%B0%EC%9A%B0-%EC%84%9C%ED%98%84%EC%A7%84-%EB%82%98%EC%9D%B4%EF%BD%9C%ED%94%84%EB%A1%9C%ED%95%84-%EA%B3%A0%ED%96%A5-%ED%82%A4%EF%BD%9C%EC%B6%9C%EC%97%B0%EC%9E%91-%EB%93%9C%EB%9D%BC%EB%A7%88-%EC%98%81%ED%99%94%EF%BD%9C%EA%B0%80%EC%A1%B1-%EA%B2%B0%ED%98%BC%EF%BD%9C%EC%A2%85%EA%B5%90"
+      ],
+      "guide": {
+        "direction": "검색자는 '서현진 전세사기·부친상'이라는 자극적 표현보다 실제로는 드라마 '라이어'에서 강지선 역할 설정(논술교사 vs 현대무용교사)과 유연석과 10년 만의 재회 케미를 궁금해한다. 고수 블로그 제목들은 전세사기·부친상 같은 미확인 개인사를 나이·고향·출연작 프로필과 뒤섞었을 뿐, 드라마 설정 논란은 짚지 않았다. 이 글은 공식 프로필 표와 라이어 배역 설정, 유연석과의 과거 작품 이력을 정리해 끝까지 읽히게 하고 전세사기·부친상은 공식 확인 전까지 다루지 않는다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "공식 프로필(나이·고향·키·출연작) 표 (확인 필요: 소속사 공식 프로필)",
+          "드라마 라이어 속 강지선 역할이 논술교사인지 현대무용교사인지 (확인 필요: 제작사 공지)",
+          "유연석과 낭만닥터 김사부 이후 10년 만 재회라는 이력 정리",
+          "전세사기·부친상 사실관계 (확인 필요: 소속사 공식 발표/언론 보도, 미확인 시 보류)"
+        ],
+        "mustAvoid": [
+          "미확인 '부친상' 등 개인 비극을 사실처럼 단정하거나 추측하지 않기",
+          "'전세사기' 피해 여부를 확인 없이 단정해 명예훼손 소지 만들지 않기",
+          "동명이인·비슷한 시기 다른 배우 이슈와 혼동하지 않기"
+        ],
+        "checkBefore": [
+          "서현진 소속사 공식 입장/보도자료에서 전세사기·부친상 사실 여부 확인",
+          "드라마 '라이어' 제작사·방영 정보에서 강지선 역할 설정 확인",
+          "유연석과의 과거 공동 출연작(낭만닥터 김사부 등) 연도 확인"
+        ],
+        "solves": [
+          "라이어에서 강지선 역할이 논술교사로 바뀌었는지 질문 → 공식 정보로 설정 확인해 정리",
+          "유연석과 10년 만 재회, 케미 어떨지 질문 → 두 배우 과거 공동 출연작 이력으로 답",
+          "서현진 전세사기·부친상이 사실인지 궁금증 → 확인된 사실만 명시, 미확인은 보류 안내"
+        ],
+        "actionTitles": [
+          "서현진 유연석 라이어 재회, 10년 전 작품 비교",
+          "서현진 전세사기 부친상 사실 확인 전 알아야 할 것"
+        ]
+      },
+      "at": "2026-10-27T10:15:30.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "드라마 라이어 서현진배우 질문",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=3070101&docId=492931772&answerNo=2&qb=7ISc7ZiE7KeE67Cw7Jqw",
+          "views": 142,
+          "answers": 2,
+          "askedAt": "2026.04.13"
+        },
+        {
+          "title": "서현진과 유연석, '라이어'에서 어떤 케미 보....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60501&docId=495555474&answerNo=1&qb=7ISc7ZiE7KeE67Cw7Jqw",
+          "views": 43,
+          "answers": 1,
+          "askedAt": "2026.10.15"
+        },
+        {
+          "title": "'라이어'에서 유연석과 서현진 케미 어떨까요....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=3010101&docId=495635164&answerNo=3&qb=7ISc7ZiE7KeE67Cw7Jqw",
+          "views": 41,
+          "answers": 4,
+          "askedAt": "2026.10.21"
+        }
+      ]
+    },
+    {
+      "id": "0416f2574cd40140",
+      "urls": [
+        "https://jjyiu.tistory.com/entry/%EA%B0%80%EC%83%81%EC%9E%90%EC%82%B0-%EC%84%B8%EA%B8%88-%EB%98%90-%EB%AF%B8%EB%A4%84%EC%A7%84-%EC%A7%84%EC%A7%9C-%EC%9D%B4%EC%9C%A0-11%EC%9B%94-%EC%A1%B0%EC%84%B8%EC%86%8C%EC%9C%84-%EC%A0%84-%EA%BC%AD-%EC%95%8C%EC%95%84%EC%95%BC-%ED%95%A0-%EA%B2%83"
+      ],
+      "guide": {
+        "direction": "검색자는 가상자산 세금이 왜 또 유예됐는지, 언제부터 실제로 걷히는지, 지금 신고 의무가 있는지를 궁금해하지만 고수 블로그 제목은 '11월 조세소위 전 알아야 할 것'이라고만 하고 유예 연혁과 구체 쟁점을 밝히지 않았다. 이 글은 시행 예정→유예 반복 연혁표와 11월 조세소위 상정 쟁점, 과세 기준(공제액·세율)을 정리해 지금 신고해야 하는지 끝에서 답을 준다. '피하는법' 검색에는 합법적 절세와 탈세를 구분해 답한다.",
+        "searchTargets": [
+          "가상자산 세금 유예",
+          "가상자산 세금 부과",
+          "가상자산 세금 폐지",
+          "가상자산 세금 피하는법"
+        ],
+        "mustInclude": [
+          "시행 예정 연도→유예된 연도 변천 연혁표 (확인 필요: 기획재정부 보도자료/소득세법 개정안)",
+          "11월 조세소위 상정 안건과 여야 쟁점 요약 (확인 필요: 국회 기재위 공식 일정)",
+          "현재 시점(2026년) 신고 의무 있는지 여부를 유예 상태와 연결해 명시"
+        ],
+        "mustAvoid": [
+          "'피하는법'을 탈세 방법처럼 서술하지 않고 합법적 절세 범위와 명확히 구분하기",
+          "과거 유예 연도들을 뒤섞어 '이미 시행 중'처럼 혼동 주지 않기"
+        ],
+        "checkBefore": [
+          "국회 기재위 조세소위 공식 일정과 상정 법안 원문 확인",
+          "가상자산 과세 관련 소득세법 개정안 최신 버전 확인"
+        ],
+        "solves": [
+          "가상자산 세금 왜 또 미뤄졌나 질문 → 유예 연혁과 11월 조세소위 쟁점을 표로 정리",
+          "가상자산 세금 피하는법 검색 → 합법적 절세 범위와 탈세의 경계 구분해 설명",
+          "가상자산 세금 신고 검색 → 현재 시행 여부에 따라 신고 의무 있는지 정리"
+        ],
+        "actionTitles": [
+          "가상자산 세금 신고, 지금 해야 하는지 확인하기",
+          "가상자산 세금 피하는법, 합법 절세와 탈세 구분"
+        ]
+      },
+      "at": "2026-10-27T10:15:30.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "7a552259327bc0dc",
+      "urls": [
+        "https://myinfo21358.tistory.com/7"
+      ],
+      "guide": {
+        "direction": "검색자는 검침일을 바꾸면 요금이 줄어든다고 오해하거나, 여름·겨울 사용량 차이 때문에 요금이 들쭉날쭉해 보이는 이유를 궁금해하지만 고수 블로그 제목은 '이유'만 설명하고 변경 신청 방법이나 유불리한 날짜 선택법은 주지 않는다. 이 글은 검침일이 바뀌어도 총 사용량 기준 과금은 그대로라는 점을 명시하고, 계절별 사용량 패턴에 따른 체감 유불리 비교표와 공급사별 검침일 변경 신청 절차를 정리해 끝에서 답을 준다. 계량기 옆 밸브 등 검침과 무관한 장치를 안내와 혼동하는 사례도 함께 정리한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "검침일 변경 신청 방법 및 신청처 (확인 필요: 한전·도시가스사·수도사업소 고객센터)",
+          "검침일 변경은 표시 시점만 바꾸고 총 사용량 기준 과금은 그대로라는 점 명시",
+          "여름철 에어컨·겨울철 보일러 사용 패턴이 검침일과 겹칠 때 체감 요금 변동 비교표",
+          "계량기 옆 밸브 등 장치와 검침일 안내를 혼동한 지식인 사례 정리"
+        ],
+        "mustAvoid": [
+          "검침일 변경으로 요금 총액이 줄어든다는 식으로 오해 조장하지 않기",
+          "계량기 주변 밸브·장치를 검침일 안내와 섞어 설명하지 않기"
+        ],
+        "checkBefore": [
+          "한전·도시가스사·수도사업소별 검침일 변경 절차 공식 안내 확인",
+          "계절별 요금 변동이 검침일 때문인지 실제 사용량 변동 때문인지 원문 확인"
+        ],
+        "solves": [
+          "검침일 바꾸면 요금 달라지나 질문 → 총 사용량 기준 과금이라 표시 시점만 바뀐다는 점 정리",
+          "합리적인 계량기 측정일이 언제가 좋은가 질문 → 계절별 사용량 패턴에 따른 유불리 비교",
+          "검침일이라고 뭘 끄라는 게 뭔가 질문 → 계량기 주변 장치와 검침 안내를 구분해 설명"
+        ],
+        "actionTitles": [
+          "계량기 검침일 변경 신청 방법과 유리한 날짜 고르기",
+          "계량기 검침일 요금 달라 보이는 이유, 계절별 비교",
+          "수도·전기 검침일 다를 때 요금 체감 차이 확인하기"
+        ]
+      },
+      "at": "2026-10-27T10:15:30.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "원룸 LPG가스 요금",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=50104&docId=332929604&answerNo=1&qb=6rOE65+J6riwIOqygOy5qOydvCDrlLDrnbwg64us6528IOuztOydtA==",
+          "views": 5895,
+          "answers": 1,
+          "askedAt": "2019.08.07"
+        },
+        {
+          "title": "수도계량기 검침일자를 전기계량기 검침",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80902&docId=333844576&answerNo=2&qb=6rOE65+J6riwIOqygOy5qOydvCDrlLDrnbwg64us6528IOuztOydtA==",
+          "views": 1731,
+          "answers": 2,
+          "askedAt": "2019.08.27"
+        },
+        {
+          "title": "합리적인 계량기 측정일 이 언제가 좋",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1118&docId=307401863&answerNo=2&qb=6rOE65+J6riwIOqygOy5qOydvCDrlLDrnbwg64us6528IOuztOydtA==",
+          "views": 70,
+          "answers": 2,
+          "askedAt": "2018.08.09"
+        }
+      ]
+    },
+    {
+      "id": "0cceb69570dfa405",
+      "urls": [
+        "https://myinfo21358.tistory.com/70"
+      ],
+      "guide": {
+        "direction": "검색자는 이사 당일 계량기 지침을 언제·어떻게 찍어야 전 세입자 요금과 분리되는지, 주말 이사라 한전·가스사에 전화가 안 될 때 어떻게 하는지 막혀 있다. 고수 글 제목은 '사진부터 남기라'는 한 줄 조언에 머물러 전기·가스·수도별 연락처와 명의변경·자동이체 전환 순서는 비어 있다. 전기(한전123)·도시가스(지역공급사)·수도(지자체) 3갈래 연락처와 주말 대응법, 명의변경 체크리스트를 표로 주면 이 글에서 끝난다.",
+        "searchTargets": [
+          "이사 공과금 정산 주말",
+          "이사 공과금 명의 변경",
+          "이사 공과금 자동이체",
+          "이사공과금 확인방법"
+        ],
+        "mustInclude": [
+          "한전 123 또는 한전ON에서 계량기 지침 불러 실시간 정산하는 절차",
+          "도시가스는 지역 공급사별로 연락처가 다르다는 점과 확인 경로",
+          "퇴거 당일 최종 계량기 지침 확인이 정산 기준이 된다는 사실",
+          "전기·가스·수도 명의변경과 자동이체 해지를 분리해서 처리해야 하는 이유"
+        ],
+        "mustAvoid": [
+          "특정 지역(예: 대구) 공과금 절차를 전국 공통처럼 일반화하는 서술",
+          "명의변경만 하고 기존 자동이체를 해지하지 않아도 되는 것처럼 쓰는 것"
+        ],
+        "checkBefore": [
+          "한전 123·한전ON 공식 이사정산 안내 절차",
+          "지자체 상수도사업본부별 수도 정산 접수 방법 차이"
+        ],
+        "solves": [
+          "이사 당일 계량기 지침을 못 확인해 전 세입자 요금까지 떠안는 문제 → 지침 사진 찍는 시점과 방법 안내",
+          "주말 이사라 가스사·한전에 전화가 안 되는 문제 → 주말 공과금 정산 가능 경로 정리",
+          "명의변경과 자동이체를 따로 안 처리해 요금이 엉키는 문제 → 순서별 체크리스트 제공"
+        ],
+        "actionTitles": [
+          "이사 공과금 정산 체크리스트, 계량기 지침부터 확인하는 법",
+          "이사 공과금 명의변경과 자동이체 한 번에 정리하는 순서",
+          "주말 이사 공과금 정리, 전입 방법과 영수증 챙기는 법"
+        ]
+      },
+      "at": "2026-10-27T10:15:30.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "전기요금,도시가스요금 확인방법(계량기 공....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=403&docId=346627968&answerNo=1&qb=7J207IKsIOqzteqzvOq4iCDsoJXsgrAg6rOE65+J6riwIOyngOy5qA==",
+          "views": 3202,
+          "answers": 1,
+          "askedAt": "2020.02.07"
+        },
+        {
+          "title": "원룸 이사갈 때",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=4020202&docId=408811016&answerNo=10&qb=7J207IKsIOqzteqzvOq4iCDsoJXsgrAg6rOE65+J6riwIOyngOy5qA==",
+          "views": 1484,
+          "answers": 12,
+          "askedAt": "2026.09.09"
+        },
+        {
+          "title": "이사시 수도,전기 해지는 당일에 하나요???",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80902&docId=495142295&answerNo=9&qb=7J207IKsIOqzteqzvOq4iCDsoJXsgrAg6rOE65+J6riwIOyngOy5qA==",
+          "views": 453,
+          "answers": 9,
+          "askedAt": "2026.09.30"
+        }
+      ]
+    },
+    {
+      "id": "3738865043bacf52",
+      "urls": [
+        "https://limeade.kr/safety-report-processing-time-check/"
+      ],
+      "guide": {
+        "direction": "신고자는 '7일 이내 처리' 원칙을 안내받고도 결과가 늦게 와서 어디서 진행 상황을 조회하고 언제까지 기다려야 하는지 막혀 있다. 고수 글 제목은 '처리기간 확인방법'까지만 다뤄 카톡·앱·포털 중 어디서 결과를 보는지, 서버 먹통일 때 신고 자체를 못 하는 경우의 대안은 비어 있다. 처리기간 원칙과 실제 지연 사례를 구분한 표, 결과 조회 3가지 경로, 장애시 대체 신고 순서를 주면 이 글로 끝난다.",
+        "searchTargets": [
+          "안전신문고 신고 처리기간",
+          "안전신문고 신고 조회",
+          "안전신문고 신고기한"
+        ],
+        "mustInclude": [
+          "안전신문고 신고는 접수 후 7일 이내 처리가 원칙이라는 행정안전부 안내",
+          "처리 결과는 카카오톡 알림(예: 일부수용 등)으로 통보된다는 점",
+          "실제로는 5일~1주일 이상 걸릴 수 있다는 지식인 사례와 원칙의 차이",
+          "서버 먹통 시 복구 후 영상 첨부로 재신고하는 대체 방법"
+        ],
+        "mustAvoid": [
+          "불법주정차 신고와 다른 유형 신고의 처리기간을 같은 것처럼 뭉뚱그리는 서술",
+          "특정 신고자나 담당 공무원의 신원을 추측·단정하는 내용"
+        ],
+        "checkBefore": [
+          "행정안전부·안전신문고 공식 처리기간 원칙 공지",
+          "안전신문고 앱·포털의 장애(먹통) 관련 공지사항"
+        ],
+        "solves": [
+          "7일 원칙인데 결과가 안 와서 답답한 문제 → 원칙과 실제 지연 사례를 나눠 기준 제시",
+          "처리 결과를 어디서 확인하는지 모르는 문제 → 카톡·앱·포털 조회 경로 정리",
+          "안전신문고 접속 장애로 신고를 못 하는 문제 → 복구 후 재신고 방법 안내"
+        ],
+        "actionTitles": [
+          "안전신문고 신고 조회하는 법, 카톡·앱 결과 확인하기",
+          "안전신문고 먹통일 때 신고하는 법과 처리기한 대응"
+        ]
+      },
+      "at": "2026-10-27T10:15:30.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "안전신문고 신고 처리기간~~",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=601&docId=460462131&answerNo=1&qb=7JWI7KCE7Iug66y46rOgIOyLoOqzoCDsspjrpqzquLDqsIQg7ZmV7J2467Cp67KV",
+          "views": 4629,
+          "answers": 3,
+          "askedAt": "2023.12.17"
+        },
+        {
+          "title": "안전신문고 처리 기간",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=61401&docId=463286173&answerNo=1&qb=7JWI7KCE7Iug66y46rOgIOyLoOqzoCDsspjrpqzquLDqsIQg7ZmV7J2467Cp67KV",
+          "views": 1647,
+          "answers": 3,
+          "askedAt": "2024.01.30"
+        },
+        {
+          "title": "안전신문고 먹통인데 대체방법 있나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60102&docId=489578721&answerNo=1&qb=7JWI7KCE7Iug66y46rOgIOyLoOqzoCDsspjrpqzquLDqsIQg7ZmV7J2467Cp67KV",
+          "views": 727,
+          "answers": 3,
+          "askedAt": "2025.10.17"
+        }
+      ]
+    },
+    {
+      "id": "556f98d5141e3d46",
+      "urls": [
+        "https://dhsy.tistory.com/421"
+      ],
+      "guide": {
+        "direction": "검색자는 자기가 꾼 꿈이 지폐냐 동전이냐 돈다발이냐, 누가 줬는지 잃어버렸다가 주운 건지에 따라 해석이 달라 '25가지' 나열형 글에서 자기 상황을 못 찾는다. 고수 글 제목은 종류를 묻지만 리스트만 나열해 돈의 형태·상황별로 매칭하는 표는 비어 있다. 지폐·동전·돈다발·상황(혼자/타인이 줌/잃고 다시 줌)별 의미를 표로 정리하면 이 글로 자기 꿈을 바로 찾는다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "지폐 다발을 줍는 꿈은 가업 번창·사업 순조로움을 뜻한다는 해석",
+          "동전을 줍는 꿈과 지폐를 줍는 꿈의 의미 차이를 구분한 표",
+          "신분증을 잃어버리고 돈을 줍는 꿈처럼 길몽·흉몽이 섞인 사례의 해석",
+          "꽃다발 등 타인에게 받으면서 동전을 줍는 복합 상황의 의미 구분"
+        ],
+        "mustAvoid": [
+          "돈 줍는 꿈을 로또 당첨처럼 확정적인 재물운으로 단정하는 서술",
+          "길몽·흉몽을 하나로만 규정해 다른 해석 가능성을 지우는 것"
+        ],
+        "checkBefore": [
+          "지식인 답변에 인용된 전통 꿈해몽 자료의 출처 표기 확인"
+        ],
+        "solves": [
+          "지폐냐 동전이냐로 해석이 갈리는데 자기 꿈이 어디 속하는지 모르는 문제 → 돈 종류별 표로 정리",
+          "잃어버렸다가 다시 줍는 것처럼 길몽흉몽이 섞인 경우 해석이 막막한 문제 → 상황별 구분 제시",
+          "돈다발 줍는 꿈이 로또와 실제 관련 있는지 궁금한 문제 → 재물운과 로또의 연관성 설명"
+        ],
+        "actionTitles": [
+          "지폐 줍는 꿈 해몽과 로또 재물운 연관성 확인하기"
+        ]
+      },
+      "at": "2026-10-27T10:15:30.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "돈줍는꿈 해몽",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=31505&docId=241028936&answerNo=2&qb=7KSN64qUIO2VtOuqvSDsp4Dtj5Ag64+Z7KCEIOuPiOuLpOuwnA==",
+          "views": 4000,
+          "answers": 2,
+          "askedAt": "2015.12.20"
+        },
+        {
+          "title": "(내공80)돈다발을 줍는꿈.",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=31505&docId=157148713&answerNo=1&qb=7KSN64qUIO2VtOuqvSDsp4Dtj5Ag64+Z7KCEIOuPiOuLpOuwnA==",
+          "views": 2702,
+          "answers": 1,
+          "askedAt": "2012.08.24"
+        },
+        {
+          "title": "지폐 줍는 꿈 해몽 부탁드립니다^^",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=31505&docId=106300793&answerNo=1&qb=7KSN64qUIO2VtOuqvSDsp4Dtj5Ag64+Z7KCEIOuPiOuLpOuwnA==",
+          "views": 1101,
+          "answers": 2,
+          "askedAt": "2010.03.09"
+        }
+      ]
+    },
+    {
+      "id": "39b2abb4feed8016",
+      "urls": [
+        "https://infodemic.kr/3332"
+      ],
+      "guide": {
+        "direction": "검색자는 뉴스를 보고 불국사 인근에서 버스 충돌사고가 왜 자주 나는지, 석굴암 고갯길 급커브 구간이 위험한 건지부터 궁금해한다(지식인 '경주 1박2일 코스' 질문 근거). 고수 블로그 제목은 사고명만 반복해 사고 경위·불국사 통제 여부는 비워둔다. 사고 경위, 불국사 관람 영향, 위험 구간 우회법을 표로 정리해 글을 끝내준다.",
+        "searchTargets": [
+          "경주 버스투어",
+          "경주 버스 시간표",
+          "경주 버스터미널"
+        ],
+        "mustInclude": [
+          "불국사 관람·진입 통제 여부 (확인 필요: 불국사·경주시 공지)",
+          "석굴암 고갯길 급커브 구간이 상습 사고지점이라는 점 (지식인 질문 근거)",
+          "경주 버스 시간표·노선 변경 여부"
+        ],
+        "mustAvoid": [
+          "과거 경주 지진 등 전혀 다른 경주 관련 사건과 혼동"
+        ],
+        "checkBefore": [
+          "불국사 공식 홈페이지나 문화재청 공지로 관람 통제 여부 확인"
+        ],
+        "solves": [
+          "경주 버스 충돌이 불국사 관람에 지장 주는지 → 통제 여부와 우회 경로 정리",
+          "경주 버스 시간표가 사고로 바뀌었는지 → 최신 운행정보 확인법 안내",
+          "석굴암 고갯길이 왜 사고가 잦은지(지식인 1박2일 질문) → 위험 구간과 안전 수칙 정리"
+        ],
+        "actionTitles": [
+          "경주 버스 충돌 불국사 사고, 관람 통제 여부 확인하기",
+          "경주 버스 시간표 최신 운행정보로 우회 노선 찾는 법"
+        ]
+      },
+      "at": "2026-10-27T10:15:30.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "요즘 종교인들이 부패한 걸 보니 멸망의 때가....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=609&docId=491795345&answerNo=3&qb=6rK97KO8IOuyhOyKpCDstqnrj4wg67aI6rWt7IKs",
+          "views": 27006,
+          "answers": 12,
+          "askedAt": "2026.02.07"
+        },
+        {
+          "title": "대전유성구 상대동 사시는 분들께 질문이요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60903&docId=491133985&answerNo=2&qb=6rK97KO8IOuyhOyKpCDstqnrj4wg67aI6rWt7IKs",
+          "views": 23248,
+          "answers": 8,
+          "askedAt": "2026.01.03"
+        },
+        {
+          "title": "아시아의 세계문화유산",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=613&docId=50662408&answerNo=1&qb=6rK97KO8IOuyhOyKpCDstqnrj4wg67aI6rWt7IKs",
+          "views": 4535,
+          "answers": 1,
+          "askedAt": "2007.12.16"
+        }
+      ]
+    },
+    {
+      "id": "6362e5bb6ef8af7c",
+      "urls": [
+        "https://summerpapa1.tistory.com/116"
+      ],
+      "guide": {
+        "direction": "검색자는 '연봉 4천, 교회기부금 300만원이면 얼마 공제되나'처럼 종교단체 기부금이 왜 일반 지정기부금보다 한도가 낮은지, 자기 금액으로 얼마가 공제되는지 계산이 안 된다. 고수 블로그 제목은 10% 한도 자체만 알리고 실제 계산식·이월·사업소득자 차이는 비워둔다. 근로소득금액 10% 계산 예시와 이월공제 규정, 사업소득자 구분표로 글을 끝내준다.",
+        "searchTargets": [
+          "기부금 세액공제 한도",
+          "연말정산 기부금 세액공제",
+          "기부금 세액공제 이월",
+          "기부금 세액공제율"
+        ],
+        "mustInclude": [
+          "종교단체 기부금 공제한도: 근로소득금액의 10% (일반 지정기부금 30%와 구분)",
+          "연봉 4천만원·기부금 300만원 사례로 본 실제 공제액 계산 예시 (지식인 질문)",
+          "한도초과분 10년 이월공제 가능 여부 (확인 필요: 국세청 안내)",
+          "세액공제율 구간(1천만원 이하/초과 구분, 확인 필요: 정확한 비율)",
+          "사업소득자(간편장부)는 소득금액 30% 한도, 종교단체는 별도한도 적용"
+        ],
+        "mustAvoid": [
+          "종교단체 10% 한도와 일반 지정기부금 30% 한도를 혼동해서 계산",
+          "과거 소득공제 방식과 현재 세액공제 방식을 섞어서 설명",
+          "근로소득자와 사업소득자(간편장부)의 공제 방식을 같은 것으로 단정"
+        ],
+        "checkBefore": [
+          "국세청 홈택스 연말정산 간소화·기부금 공제한도 안내 페이지로 정확한 비율·구간 확인",
+          "소득세법상 종교단체 기부금 별도한도 조항 재확인"
+        ],
+        "solves": [
+          "연봉 4천, 교회기부금 300만원이면 공제액이 얼마인지 → 근로소득금액 10% 한도 계산식으로 답",
+          "한도 초과한 기부금도 공제받을 수 있는지 → 이월공제 가능 여부와 적용 방법 정리",
+          "사업소득자도 똑같이 10%인지 → 간편장부 사업자의 별도 계산법 구분"
+        ],
+        "actionTitles": [
+          "기부금 세액공제 한도 계산법, 종교단체는 근로소득 10%",
+          "기부금 세액공제 한도초과분 이월 신청하는 방법 정리",
+          "연말정산 기부금 세액공제, 내 공제액 직접 계산하기"
+        ]
+      },
+      "at": "2026-10-27T10:15:30.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "연봉4천만이고 교회기부금이 300만원이면 소....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40301&docId=491532019&answerNo=2&qb=6riw67aA6riIIOyEuOyVoeqzteygnCDsooXqtZDri6jssrQg6re866Gc7IaM65Od6riI7JWhIOq5jOyngA==",
+          "views": 185,
+          "answers": 2,
+          "askedAt": "2026.01.25"
+        },
+        {
+          "title": "근로소득지급명세서 작성 시 육아휴직자의 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40301&docId=492076021&answerNo=1&qb=6riw67aA6riIIOyEuOyVoeqzteygnCDsooXqtZDri6jssrQg6re866Gc7IaM65Od6riI7JWhIOq5jOyngA==",
+          "views": 65,
+          "answers": 1,
+          "askedAt": "2026.04.09"
+        },
+        {
+          "title": "종합소득세 신고 시 기부금 세액공제 받는 방....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40309&docId=495012552&answerNo=1&qb=6riw67aA6riIIOyEuOyVoeqzteygnCDsooXqtZDri6jssrQg6re866Gc7IaM65Od6riI7JWhIOq5jOyngA==",
+          "views": 54,
+          "answers": 1,
+          "askedAt": "2026.09.03"
+        }
+      ]
+    },
+    {
+      "id": "f5bbbbe149c18383",
+      "urls": [
+        "https://apt-view.com/%ed%86%a0%ec%a7%80%ec%9d%b4%ec%9d%8c-%ec%a7%80%eb%b2%88-%ed%86%a0%ec%a7%80%ec%9d%b4%ec%9a%a9%ea%b3%84%ed%9a%8d-%ec%97%b4%eb%9e%8c%ed%95%98%ea%b8%b0-%ec%9a%a9%eb%8f%84%ec%a7%80%ec%97%ad%ea%b3%bc/"
+      ],
+      "guide": {
+        "direction": "검색자는 특정 지번에 농막·건축이 가능한지(지식인 여주 번도리 424번지 사례) 토지이음에서 어떻게 확인하는지 몰라 막힌다. 고수 블로그 제목은 조회 절차는 설명하지만 조회결과 항목(용도지역·행위가능여부)을 어떻게 읽고 판단하는지는 비워둔다. 조회 절차와 항목별 뜻, 행위가능여부 확인법을 체크리스트로 정리해 글을 끝내준다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "토지이음(eum.go.kr) 접속 후 지번 입력해 용도지역 조회하는 절차",
+          "조회결과의 용도지역·용도지구·용도구역·도로접함 항목이 뜻하는 것",
+          "'행위가능여부' 메뉴에서 건축·농막 설치 가능 여부 확인하는 법 (지식인 여주 번도리 사례)",
+          "정부24에서도 토지이용계획확인서 발급 가능하다는 대안 경로",
+          "조회만으로 확정 안 되면 관할 시·군·구청에 재확인하는 절차"
+        ],
+        "mustAvoid": [
+          "토지이음 조회 결과만으로 건축·개발행위 가능 여부를 최종 확정하듯 단정",
+          "토지이용계획확인원을 등기부등본·건축물대장과 같은 서류로 혼동",
+          "여주 번도리 424번지 같은 특정 사례를 모든 토지에 그대로 적용되듯 일반화"
+        ],
+        "checkBefore": [
+          "토지이음(eum.go.kr) 실제 화면에서 메뉴명·조회 절차가 설명과 같은지 확인",
+          "정부24 토지이용계획확인서 발급 메뉴 경로 확인"
+        ],
+        "solves": [
+          "토지이용계획확인원 어디서 보는지 → 토지이음·정부24 조회 경로 정리",
+          "내 땅에 농막·건축 가능한지 어떻게 아는지 → 행위가능여부 메뉴 활용법 제시",
+          "용도지역이 무슨 뜻인지 모르겠다 → 조회결과 항목별 의미 정리"
+        ],
+        "actionTitles": [
+          "토지이음 지번 조회로 용도지역·행위제한 확인하는 법",
+          "토지이용계획확인원 무료 열람하고 건축 가능여부 보기",
+          "토지이음으로 농막·건축 가능 여부 직접 확인하는 방법"
+        ]
+      },
+      "at": "2026-10-27T10:15:30.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "토지이용계획확인원 열람 방법",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40306&docId=414893907&answerNo=12&qb=7Yag7KeA7J207J2MIOyngOuyiCDthqDsp4DsnbTsmqnqs4Ttmo0g7Jqp64+E7KeA7JetIO2WieychOygnO2VnA==",
+          "views": 2322,
+          "answers": 12,
+          "askedAt": "2026.06.01"
+        },
+        {
+          "title": "땅 용도 및 가능한 행위 질문",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60202&docId=494787743&answerNo=1&qb=7Yag7KeA7J207J2MIOyngOuyiCDthqDsp4DsnbTsmqnqs4Ttmo0g7Jqp64+E7KeA7JetIO2WieychOygnO2VnA==",
+          "views": 282,
+          "answers": 2,
+          "askedAt": "2026.08.18"
+        },
+        {
+          "title": "여주시 번도리424번지 토지 개발행위 가능한....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60103&docId=495144252&answerNo=8&qb=7Yag7KeA7J207J2MIOyngOuyiCDthqDsp4DsnbTsmqnqs4Ttmo0g7Jqp64+E7KeA7JetIO2WieychOygnO2VnA==",
+          "views": 207,
+          "answers": 8,
+          "askedAt": "2026.10.12"
+        }
+      ]
+    },
+    {
+      "id": "440f35a162d04cf1",
+      "urls": [
+        "https://driht.tistory.com/entry/%EC%BC%80%EC%9D%B4%ED%8C%A8%EC%8A%A4-%ED%99%98%EA%B8%89%EC%9D%BC-%EC%A0%81%EB%A6%BD%EA%B8%88%EC%9D%80-%EB%96%B4%EB%8A%94%EB%8D%B0-%ED%86%B5%EC%9E%A5%EC%97%90-%EC%97%86%EB%8A%94-3%EA%B0%80%EC%A7%80-%EC%9D%B4%EC%9C%A0"
+      ],
+      "guide": {
+        "direction": "검색자는 '적립금은 떴는데 왜 통장에 안 들어오나'를 묻는데, 카드사별(신한·티머니·토스·국민)로 계좌환급과 마일리지적립 방식이 다르다는 걸 모르고 막혀 있다. 고수 글의 '3가지 이유'는 원인만 나열하고 카드사별 환급일 기준과 조회 경로는 짚지 않는다. 이 글은 카드사별 환급 방식·환급일 기준표와 K-패스 앱 [MY]>[적립 내역] 조회 순서로 글 하나에서 확인을 끝내게 한다.",
+        "searchTargets": [
+          "케이패스 환급일",
+          "신한 케이패스 환급일",
+          "케이패스 환급일 기준",
+          "케이패스 환급 일정"
+        ],
+        "mustInclude": [
+          "계좌환급 vs 마일리지적립 방식 차이 비교표",
+          "환급 지급 시기: 보통 사용한 다음 달 지급(확인 필요: K-패스 공식 공지)",
+          "K-패스 앱 [MY]>[적립 내역]에서 당월 환급 상태 조회 경로",
+          "환급금이 들어왔다가 다시 빠져나가는 오류 사례와 재처리 절차",
+          "신한카드 등 특정 카드사에서 환급이 지연된 사례(확인 필요: 카드사 공지)"
+        ],
+        "mustAvoid": [
+          "한 카드사의 개별 오류 사례를 모든 카드사 공통 문제처럼 일반화하지 않기",
+          "체크카드 계좌환급과 토스 등 전자지갑 적립을 같은 방식으로 섞어 설명하지 않기",
+          "마일리지 적립과 계좌 환급을 동일한 결과로 단정하지 않기"
+        ],
+        "checkBefore": [
+          "K-패스 공식 홈페이지·앱 공지에서 이번 달 환급 기준일 확인",
+          "이용 중인 카드사 고객센터에서 본인 환급 방식(계좌/마일리지) 확인"
+        ],
+        "solves": [
+          "적립금은 떴는데 통장엔 없음 → 카드사별 환급 방식 비교표로 원인 구분",
+          "마일리지 적립과 계좌환급 차이를 모름 → 두 방식 차이와 전환 조건 정리",
+          "환급금이 들어왔다가 빠져나감 → 오류 재처리 절차와 확인 순서 안내"
+        ],
+        "actionTitles": [
+          "케이패스 환급일 조회, 적립금 안 들어올 때 확인법",
+          "신한 케이패스 환급일 늦어질 때 카드사별 확인 순서",
+          "케이패스 환급 일정 확인하고 마일리지 적립 구분하기"
+        ]
+      },
+      "at": "2026-10-27T10:15:30.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "케이뱅크 k패스 이용하는데 이번달 환급금이 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=812&docId=493434864&answerNo=4&qb=7LyA7J207Yyo7IqkIO2ZmOq4ieydvCDsoIHrpr3quIgg7Ya17J6l",
+          "views": 663,
+          "answers": 4,
+          "askedAt": "2026.07.07"
+        },
+        {
+          "title": "케이패스 환급금",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40107&docId=493407118&answerNo=4&qb=7LyA7J207Yyo7IqkIO2ZmOq4ieydvCDsoIHrpr3quIgg7Ya17J6l",
+          "views": 609,
+          "answers": 5,
+          "askedAt": "2026.05.17"
+        },
+        {
+          "title": "케이패스 계좌환급 마일리지적립",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40107&docId=494756808&answerNo=3&qb=7LyA7J207Yyo7IqkIO2ZmOq4ieydvCDsoIHrpr3quIgg7Ya17J6l",
+          "views": 207,
+          "answers": 3,
+          "askedAt": "2026.09.01"
+        }
+      ]
+    },
+    {
+      "id": "013e47cd0c4c09c9",
+      "urls": [
+        "https://noticanbutido.tistory.com/entry/worst-snacks-for-blood-vessels"
+      ],
+      "guide": {
+        "direction": "검색자는 콜레스테롤 검사에서 200이 나온 뒤 '지금 당장 뭘 끊어야 하나'를 찾아오지만, 고수 글의 '간식 TOP5' 제목은 구체 리스트와 수치 근거 없이 공포 문구만 앞세운다. 뇌경색 등 가족력이 있는 독자는 식습관만으로 되는지 병원 치료가 필요한지도 헷갈려 한다. 이 글은 수치 기준표와 간식별 대체 목록, 생활습관 체크리스트로 검색을 끝내게 한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "콜레스테롤 정상·경계·위험 수치 기준표(확인 필요: 대한심장학회 등 공식 자료)",
+          "'끊어야 할 간식 TOP5' 구체 품목과 포화지방 수치(확인 필요: 원문 기사)",
+          "저콜레스테롤 생활습관(금주·금연 포함) 체크리스트",
+          "식습관 개선만으로 충분한 경우와 병원 진료가 필요한 경우 구분 기준(확인 필요: 의료 가이드라인)"
+        ],
+        "mustAvoid": [
+          "'긴급 경고' 같은 공포 문구를 의학적 근거처럼 제시하지 않기",
+          "특정 간식을 의학적 수치 없이 '최악'으로 단정하지 않기",
+          "거북이사망(터틀맨) 등 무관한 사망 사건과 콜레스테롤 이슈를 섞지 않기"
+        ],
+        "checkBefore": [
+          "'간식 TOP5' 리스트와 수치의 실제 출처(원문 기사·의학 가이드라인) 확인",
+          "콜레스테롤 200이 실제 위험 수준에 해당하는지 공식 기준 확인"
+        ],
+        "solves": [
+          "콜레스테롤 200이 나왔는데 뭘 끊어야 할지 모름 → 간식 TOP5·대체식품 표로 정리(확인 필요: 구체 리스트)",
+          "가족 뇌경색 등 심뇌혈관 가족력이 있을 때 뭘 봐야 하는지 → 저콜레스테롤 생활습관 체크리스트 제공"
+        ],
+        "actionTitles": [
+          "콜레스테롤 200 넘었을 때 끊어야 할 간식 확인하기",
+          "콜레스테롤 수치 기준표로 내 혈관 상태 확인하는 법",
+          "콜레스테롤 낮추는 식습관 체크리스트 받고 관리하기"
+        ]
+      },
+      "at": "2026-10-27T10:15:30.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "영어 단어 급해요~~~",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=130106&docId=139578524&answerNo=4&qb=6ri06riJIOqxtOqwlSDqsr3qs6Ag7L2c66CI7Iqk7YWM66GkIOuEmOyXiOuLpOuptA==",
+          "views": 208779,
+          "answers": 5,
+          "askedAt": "2011.11.05"
+        },
+        {
+          "title": "마그네슘이 인체에 어떤 영양소 역활을 하나....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=708&docId=23872642&answerNo=1&qb=6ri06riJIOqxtOqwlSDqsr3qs6Ag7L2c66CI7Iqk7YWM66GkIOuEmOyXiOuLpOuptA==",
+          "views": 69651,
+          "answers": 1,
+          "askedAt": "2003.01.15"
+        },
+        {
+          "title": "비타민a,b,c,d....calcium...마그네슘...등등등..의 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=50801&docId=24620950&answerNo=1&qb=6ri06riJIOqxtOqwlSDqsr3qs6Ag7L2c66CI7Iqk7YWM66GkIOuEmOyXiOuLpOuptA==",
+          "views": 33634,
+          "answers": 2,
+          "askedAt": "2003.12.05"
+        }
+      ]
+    },
+    {
+      "id": "f0eb5218bda3a504",
+      "urls": [
+        "https://ipretty.tistory.com/entry/%EB%84%B7%ED%94%8C%EB%A6%AD%EC%8A%A4-%ED%99%94%EC%A7%88-%EC%B0%A8%EC%9D%B4-%EC%9A%94%EA%B8%88%EC%A0%9C-%EB%A9%A4%EB%B2%84%EC%8B%AD-%EB%93%B1%EA%B8%89%EB%B3%84-%ED%95%B4%EC%83%81%EB%8F%84-%EA%B8%B0%EC%A4%80-%EC%99%84%EB%B2%BD-%EB%B6%84%EC%84%9D"
+      ],
+      "guide": {
+        "direction": "검색자는 '최고 등급 멤버십인데 설정은 고화질인데 실제 화면은 왜 낮게 나오나'를 묻는데, 같은 검색 결과에 섞여 나오는 티빙 멤버십 등급 정보 때문에 더 헷갈린다. 고수 글의 '완벽 분석'은 요금제별 해상도 기준만 나열하고 설정과 실제 재생 화질이 다른 이유(기기·네트워크)는 짚지 않는다. 이 글은 요금제별 해상도 기준표, 기기별 설정 경로, 현재 화질 확인법을 한 번에 정리해 끝내게 한다.",
+        "searchTargets": [
+          "넷플릭스 화질 차이",
+          "넷플릭스 화질 설정",
+          "넷플릭스 화질 저하 이유",
+          "넷플릭스 화질 확인"
+        ],
+        "mustInclude": [
+          "요금제(베이직/스탠다드/프리미엄)별 최대 해상도 기준표(확인 필요: 넷플릭스 공식 고객센터)",
+          "화질 설정(자동/저화질/고화질/최고)이 '최고'여도 실제 재생 해상도가 다를 수 있는 이유(네트워크·기기 지원)",
+          "기기별(PC/모바일/TV/태블릿) 화질 설정 위치 차이",
+          "현재 재생 중인 화질을 확인하는 방법(단축키 등)"
+        ],
+        "mustAvoid": [
+          "티빙 등 다른 OTT의 멤버십 등급(LG VIP 등)과 넷플릭스 멤버십을 혼동하지 않기",
+          "요금제 명칭·가격을 최신 공식 안내 확인 없이 단정하지 않기"
+        ],
+        "checkBefore": [
+          "넷플릭스 공식 고객센터·도움말에서 요금제별 최대 해상도 기준 확인",
+          "현재 자신의 요금제와 최신 요금 정책 변경 여부 확인"
+        ],
+        "solves": [
+          "최고 등급 멤버십인데도 고화질 설정에도 UHD가 안 나옴 → 화질 저하 이유를 네트워크·기기 체크리스트로 구분",
+          "기기별(PC·모바일·TV·태블릿) 화질 설정 위치를 못 찾음 → 기기별 설정 경로 안내",
+          "지금 보는 화면이 실제 몇 화질인지 모름 → 화질 확인(단축키) 방법 제공"
+        ],
+        "actionTitles": [
+          "넷플릭스 화질 차이 요금제별 멤버십 비교하고 확인하기",
+          "넷플릭스 화질 저하 이유 기기·네트워크별로 점검하는 법"
+        ]
+      },
+      "at": "2026-10-27T10:15:30.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "티빙 연동 다른기기 어떻게 푸나요 ㅠ",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10905&docId=458328342&answerNo=1&qb=64S37ZSM66at7IqkIO2ZlOyniCDsmpTquIjsoJwg66mk67KE7IutIOuTseq4ieuzhA==",
+          "views": 4222,
+          "answers": 1,
+          "askedAt": "2023.11.11"
+        },
+        {
+          "title": "티빙질문입니다",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10905&docId=458305358&answerNo=2&qb=64S37ZSM66at7IqkIO2ZlOyniCDsmpTquIjsoJwg66mk67KE7IutIOuTseq4ieuzhA==",
+          "views": 705,
+          "answers": 2,
+          "askedAt": "2023.11.10"
+        },
+        {
+          "title": "넷플릭스 화질 질문드립니다.",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10905&docId=483847079&answerNo=1&qb=64S37ZSM66at7IqkIO2ZlOyniCDsmpTquIjsoJwg66mk67KE7IutIOuTseq4ieuzhA==",
+          "views": 600,
+          "answers": 1,
+          "askedAt": "2025.04.04"
+        }
+      ]
+    },
+    {
+      "id": "e12c2f48f527e017",
+      "urls": [
+        "https://memogipost.tistory.com/entry/2026-KBS%EC%A0%84%EA%B5%AD%EB%85%B8%EB%9E%98%EC%9E%90%EB%9E%91-11%EC%9B%94-%EC%9D%BC%EC%A0%95"
+      ],
+      "guide": {
+        "direction": "검색자는 11월 예심 신청 방법과 소요시간, 준비할 곡 수, 2차 심사 여부를 몰라 막혀 있다. 고수 블로그의 '일정 총정리' 제목은 날짜는 짚어도 신청 방법·대기시간·1차·2차 구조 같은 실전 정보는 비워둔 경우가 많다. 이 글은 지역별 예심 날짜·장소, 신청 방법과 마감일, 소요시간, 2차 구조를 표로 정리해 한 번에 끝내준다.",
+        "searchTargets": [
+          "전국노래자랑 예심 신청 방법",
+          "전국노래자랑 예심 소요시간",
+          "전국노래자랑 예심 2차",
+          "전국노래자랑 예심 시간"
+        ],
+        "mustInclude": [
+          "11월 지역별 예심 날짜·장소 일정표 (확인 필요: KBS 전국노래자랑 공식 홈페이지/지역총국 공지)",
+          "예심 신청 방법(인터넷 접수/현장 접수 여부와 마감일) (확인 필요: KBS 공식 공지)",
+          "예심 당일 평균 소요시간·대기시간 (확인 필요: 참가 후기/공식 안내)",
+          "준비해야 할 곡 수와 1차·2차 심사 구조 (확인 필요: KBS 공식 공지)",
+          "본방송 녹화 날짜와 예심 통과자 발표 방식 (확인 필요: KBS 공식 공지)"
+        ],
+        "mustAvoid": [
+          "과거 연도 일정을 2026년 11월 일정으로 혼동해서 올리기",
+          "특정 지역 녹화분을 다른 지역 일정과 혼동하는 것",
+          "예심 합격을 보장하는 듯한 과장된 '꿀팁' 작성"
+        ],
+        "checkBefore": [
+          "KBS 전국노래자랑 공식 홈페이지·시청자 참여 공지에서 11월 지역별 일정 확인",
+          "각 지역총국(지역 방송국) SNS·공지사항에서 신청 방법과 마감일 확인"
+        ],
+        "solves": [
+          "예심 소요시간이 얼마나 걸리는지 몰라 하루를 비워야 하는지 궁금함 → 평균 대기·소요시간 정리",
+          "예심 신청 방법을 몰라 접수 절차가 헷갈림 → 인터넷/현장 접수 단계별 정리",
+          "예심 2차가 있는지, 어떻게 진행되는지 궁금함 → 1차·2차 구조와 통과 기준 정리"
+        ],
+        "actionTitles": [
+          "전국노래자랑 예심 신청 방법과 소요시간 한눈에 정리",
+          "전국노래자랑 예심 2차까지 통과하는 조건 미리 확인하기",
+          "전국노래자랑 예심 소요시간과 꿀팁 한 번에 확인하기"
+        ]
+      },
+      "at": "2026-10-27T10:15:30.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "d70139f423ef7549",
+      "urls": [
+        "https://infobox2692.tistory.com/entry/%ED%95%9C%EA%B5%AD-%EC%9E%90%EC%82%B4%EB%A5%A0%EC%9D%80-%EC%99%9C-OECD-1%EC%9C%84%EC%9D%BC%EA%B9%8C-%EC%A3%BC%EB%B3%80%EC%9D%98-%EC%9C%84%ED%97%98-%EC%8B%A0%ED%98%B8%EB%A5%BC-%EC%95%8C%EC%95%84%EC%B0%A8%EB%A6%AC%EB%8A%94-%EB%B2%95%EA%B3%BC-%EB%8F%84%EC%9B%80%EB%B0%9B%EC%9D%84-%EC%88%98-%EC%9E%88%EB%8A%94-%EA%B3%B3"
+      ],
+      "guide": {
+        "direction": "검색자는 '한국이 OECD 자살률 1위가 맞는지', '순위가 바뀌었는지', '늘고 있는지 줄고 있는지'를 지식인에서 되묻듯 혼란스러워한다. 고수 블로그의 '왜 1위인지' 제목은 원인과 도움처는 다루지만 최신 순위·연도별 변화 수치는 명확히 안 짚는 경우가 많다. 이 글은 최신 공식 통계로 순위와 변화 추이를 표로 보여주고, 위험 신호 체크리스트와 상담 전화번호까지 한 번에 정리해 끝내준다.",
+        "searchTargets": [
+          "한국 자살률",
+          "한국 자살률 변화",
+          "한국 자살률 감소"
+        ],
+        "mustInclude": [
+          "OECD 국가별 자살률 순위표 (확인 필요: 통계청/OECD 최신 자료)",
+          "연도별 한국 자살률 변화 추이 표 (확인 필요: 통계청 KOSIS)",
+          "주변 사람의 위험 신호 체크리스트(고립, 수면·식욕 변화, 유언 같은 말 등)"
+        ],
+        "mustAvoid": [
+          "최신 공식 통계 없이 '1위가 맞다/아니다'를 단정하는 서술"
+        ],
+        "checkBefore": [
+          "통계청 KOSIS·OECD 공식 사이트에서 최신 자살률 수치와 순위 확인"
+        ],
+        "solves": [
+          "한국이 OECD 자살률 1위가 맞는지 헷갈림 → 최신 공식 순위 자료로 명확히 확인",
+          "자살률이 늘고 있는지 줄고 있는지 궁금함 → 연도별 변화 추이 표로 정리",
+          "주변 사람의 위험 신호를 어떻게 알아채는지 모름 → 체크리스트와 상담처 안내"
+        ],
+        "actionTitles": [
+          "한국 자살률 OECD 순위, 최신 통계로 꼭 확인하기",
+          "한국 자살률 변화 추이, 연도별 최신 수치로 비교하기",
+          "한국 자살률 감소했는지, 지금 최신 통계로 확인하기"
+        ]
+      },
+      "at": "2026-10-27T10:15:30.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "우리나라 자살률??",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60214&docId=299804167&answerNo=1&qb=7ZWc6rWtIOyekOyCtOuloCBvZWNkIOyjvOuzgCDsnITtl5g=",
+          "views": 1760,
+          "answers": 1,
+          "askedAt": "2018.04.22"
+        },
+        {
+          "title": "대한민국은 왜 자살률 세계1위에요??",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=61301&docId=427156142&answerNo=1&qb=7ZWc6rWtIOyekOyCtOuloCBvZWNkIOyjvOuzgCDsnITtl5g=",
+          "views": 415,
+          "answers": 1,
+          "askedAt": "2022.08.29"
+        },
+        {
+          "title": "oecd 자살률이 뭔가요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1112&docId=470994230&answerNo=1&qb=7ZWc6rWtIOyekOyCtOuloCBvZWNkIOyjvOuzgCDsnITtl5g=",
+          "views": 395,
+          "answers": 2,
+          "askedAt": "2024.06.12"
+        }
+      ]
+    },
+    {
+      "id": "079cdfae9e124e4d",
+      "urls": [
+        "https://funding.tistory.com/entry/2026%EB%85%84-10%EC%9B%94-%EC%84%B1%EB%8F%99%EA%B5%AC-%EB%8B%B9%EB%A9%B4%EA%B3%BC%EC%A0%9C-%EA%B5%AC%EB%AF%BC%EB%93%A4%EC%9D%B4-%EC%A7%84%EC%A7%9C-%EB%B0%94%EB%9D%BC%EB%8A%94-%EA%B2%83%EC%9D%80-%EC%9E%AC%EA%B0%9C%EB%B0%9C%C2%B7%EA%B5%90%ED%86%B5%C2%B7%EA%B5%90%EC%9C%A1-%EA%B7%B8%EB%A6%AC%EA%B3%A0-%E2%80%98%EC%84%B1%EC%88%98%EB%8F%99-%EB%84%88%EB%A8%B8%E2%80%99%EC%9D%98-%EC%9D%B4%EC%95%BC%EA%B8%B0"
+      ],
+      "guide": {
+        "direction": "검색자(성동구 주민)는 성수동 뉴스에 가려진 금호동·옥수동·행당동 등 다른 동네의 재개발·교통·교육 현황이 어디까지 왔는지 궁금해한다. 고수 블로그의 '성수동 너머' 제목은 문제의식은 던지지만 동별 재개발 단계, 교통 노선 일정, 교육 변화를 구체 수치로 정리하진 못한 경우가 많다. 이 글은 동별 재개발 진행 단계표, 교통 호재 일정, 교육 변화를 한 데 모아 비교해 끝내준다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "성동구 내 재개발 구역별 진행 단계(조합설립/관리처분 등) 정리표 (확인 필요: 성동구청 공고/정비사업 정보몽땅)",
+          "교통 호재 — 지하철 연장·버스 노선 변경 일정 (확인 필요: 서울시/성동구 공지)",
+          "교육 환경 — 학교 신설·배정 변경 여부 (확인 필요: 성동구 교육지원청)",
+          "성수동 외 지역(금호동·옥수동·행당동 등) 당면과제 비교표 (확인 필요: 구청 발표 자료)"
+        ],
+        "mustAvoid": [
+          "성수동 상권 이야기로만 쏠려 다른 동(금호·옥수·행당 등) 구민 관심사 소외시키기",
+          "조합 내부 상황이 유동적인 재개발 추진 여부를 확정된 사실처럼 단정"
+        ],
+        "checkBefore": [
+          "성동구 재개발 구역별 최신 진행 단계 — 성동구청 홈페이지, 정비사업 정보몽땅 사이트에서 확인",
+          "교통 계획(지하철 연장 등) 확정 여부 — 서울시 도시계획 공지, 성동구청 보도자료에서 확인"
+        ],
+        "solves": [
+          "성수동 말고 다른 동네(금호동·옥수동 등) 재개발은 어디까지 왔는지 모름 → 구역별 진행 단계표로 비교",
+          "성동구 교통 호재가 언제 실현되는지 궁금함 → 노선별 추진 일정 정리",
+          "성동구 교육 환경이 어떻게 바뀌는지 궁금함 → 학교 신설·배정 변경 정보 정리"
+        ],
+        "actionTitles": [
+          "성동구 재개발 구역별 진행 단계, 최신 현황 비교하기",
+          "성동구 교통 호재 일정, 노선별 개통 시기 확인하기"
+        ]
+      },
+      "at": "2026-10-27T10:15:30.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
     }
   ],
   "misses": [
-    {
-      "id": "d166b2f37c22dba8",
-      "at": "2026-10-26T22:00:53.145Z"
-    },
-    {
-      "id": "f8bd8ae367bc136c",
-      "at": "2026-10-26T22:00:53.145Z"
-    },
-    {
-      "id": "e21e13b1942bdd95",
-      "at": "2026-10-26T22:00:53.145Z"
-    },
-    {
-      "id": "fa1901b1e68946f0",
-      "at": "2026-10-26T22:00:53.145Z"
-    },
-    {
-      "id": "bb942795db983e98",
-      "at": "2026-10-26T22:00:53.145Z"
-    },
-    {
-      "id": "585ddb77e3293781",
-      "at": "2026-10-26T22:00:53.145Z"
-    },
-    {
-      "id": "e48981fe011d9f7b",
-      "at": "2026-10-26T22:00:53.145Z"
-    },
-    {
-      "id": "6281f759ff4db4be",
-      "at": "2026-10-26T22:00:53.145Z"
-    },
     {
       "id": "01bd3b0dfe98cfad",
       "at": "2026-10-27T01:06:41.222Z"
