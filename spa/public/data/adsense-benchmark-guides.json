@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-28T10:54:58.784Z",
+  "generatedAt": "2026-10-28T11:02:21.575Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -14164,72 +14164,6 @@
       ]
     },
     {
-      "id": "fc1eecd36041d796",
-      "urls": [
-        "https://wellsy.tistory.com/entry/%EC%9C%84%EA%B3%A0%EB%B9%84%C2%B7%EB%A7%88%EC%9A%B4%EC%9E%90%EB%A1%9C-%EC%B2%98%EB%B0%A9-%EC%A2%85%EB%A1%9C%EA%B5%AC-%EC%8F%A0%EB%A6%BC-%ED%98%84%EC%83%81-%EC%95%88%EC%A0%84-%EA%B2%BD%EA%B3%A0-%EB%AC%B4%EC%8B%9C%ED%95%9C-%EC%98%A4%EB%82%A8%EC%9A%A9%EC%9D%98-%EC%8B%A4%ED%83%9C%EC%99%80-%EC%9C%84%ED%97%98%EC%84%B1",
-        "https://jjang8892.tistory.com/entry/%EB%A7%88%EC%9A%B4%EC%9E%90%EB%A1%9C-%ED%9A%A8%EA%B3%BC-%EC%96%BC%EB%A7%88%EB%82%98-%EC%9E%88%EC%9D%84%EA%B9%8C-%EA%B0%80%EA%B2%A9%EB%B6%80%ED%84%B0-%EB%B6%80%EC%9E%91%EC%9A%A9-%EC%B2%98%EB%B0%A9-%EA%B8%B0%EC%A4%80%EA%B9%8C%EC%A7%80"
-      ],
-      "guide": {
-        "direction": "검색자는 마운자로 수급 부족 때문에 위고비로 넘어가도 되는지, 바꿀 때 용량을 어떻게 맞춰야 하는지, 실명·시력 관련 부작용 우려가 사실인지 혼란스럽다. 고수 글은 '종로구 쏠림'과 '오남용 실태'를 짚었지만 지식인에 실제로 올라온 전환 시 용량 기준과 부작용 차이는 다루지 못했다. 성분·부작용·전환 용량을 비교표로 정리해 전환 여부를 스스로 판단하게 끝낸다.",
-        "searchTargets": [
-          "위고비 마운자로 비교",
-          "위고비 마운자로 부작용",
-          "위고비 마운자로 차이",
-          "위고비 마운자로 실명"
-        ],
-        "mustInclude": [
-          "위고비(세마글루타이드) vs 마운자로(터제파타이드) 작용기전(GIP) 차이표",
-          "마운자로↔위고비 전환 시 용량 조절 기준(확인 필요: 처방 의사·식약처 자료)",
-          "공통 부작용(위장 증상)과 실명·시력 관련 우려 내용(확인 필요: 식약처·관련 보도)",
-          "종로구 처방 쏠림 현상 및 안전 경고 내용(확인 필요: 원문 기사)"
-        ],
-        "mustAvoid": [
-          "처방 없이 직접 전환·용량 조절을 권하는 것처럼 쓰기(둘 다 전문의 처방 필수)",
-          "실명·시력 부작용을 확정된 인과관계처럼 단정하기"
-        ],
-        "checkBefore": [
-          "실명·시력 관련 부작용 보고와 인과관계 여부를 식약처·해당 보도 원문에서 확인",
-          "종로구 처방 쏠림 현상의 구체 수치·시기를 원문 기사에서 확인"
-        ],
-        "solves": [
-          "마운자로 수급 부족으로 위고비로 넘어가도 되는지 고민 → 성분 차이와 전환 고려사항 정리",
-          "두 약의 부작용이 다른지 궁금함 → 공통 부작용과 시력 관련 우려 비교",
-          "약을 바꿀 때 용량을 어떻게 맞춰야 할지 모름 → 전환 시 용량 조절 기준 제시"
-        ],
-        "actionTitles": [
-          "위고비 마운자로 부작용 차이 비교하고 확인하기",
-          "마운자로 위고비 전환 시 용량 기준 확인하는 법",
-          "위고비 마운자로 효과·가격·처방 기준 비교"
-        ]
-      },
-      "at": "2026-10-26T21:14:00.940Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "마운자로 수급물량 부족으로 인한 위고비 고....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70117&docId=489672510&answerNo=10&qb=7JyE6rOg67mE66eI7Jq07J6Q",
-          "views": 1715,
-          "answers": 10,
-          "askedAt": "2026.07.18"
-        },
-        {
-          "title": "마운자로 다이어트와 위고비는 어떤 차이가 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=7010106&docId=494917978&answerNo=3&qb=7JyE6rOg67mE66eI7Jq07J6Q",
-          "views": 1026,
-          "answers": 6,
-          "askedAt": "2026.09.04"
-        },
-        {
-          "title": "마운자로와 위고비는 부작용도 서로 차이가 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=7010106&docId=495549019&answerNo=3&qb=7JyE6rOg67mE66eI7Jq07J6Q",
-          "views": 319,
-          "answers": 4,
-          "askedAt": "2026.10.21"
-        }
-      ]
-    },
-    {
       "id": "7e7958b2b2747ed2",
       "urls": [
         "https://law.tipmany.com/entry/%EA%B0%80%EC%9D%84%EC%95%BC%EA%B5%AC%EC%9D%BC%EC%A0%95",
@@ -15116,74 +15050,6 @@
       ]
     },
     {
-      "id": "a4bbf75687984852",
-      "urls": [
-        "https://thecheck.co.kr/iphone-duo-kt-insurance-vs-applecare/",
-        "https://everydaywell.tistory.com/entry/%EC%95%84%EC%9D%B4%ED%8F%B0-%EB%93%80%EC%98%A4-%EC%96%B4%EB%94%94%EC%84%9C-%EC%82%AC%EC%95%BC-%EC%A0%80%EB%A0%B4%ED%95%A0%EA%B9%8C-SKT%C2%B7KT%C2%B7LG%EC%9C%A0%ED%94%8C%EB%9F%AC%EC%8A%A4-%EA%B5%AC%EB%A7%A4-%EC%A1%B0%EA%B1%B4%EA%B3%BC-%EC%8B%A4%EA%B5%AC%EB%A7%A4%EA%B0%80-%EA%B3%84%EC%82%B0%EB%B2%95"
-      ],
-      "guide": {
-        "direction": "검색자는 '아이폰 듀오 바로 구매하고 싶은데 어떻게 하나요' 식으로 구매 방법과 구매 후 들 보험까지 한 번에 정하지 못해 막혀 있다. 기존 고수 글은 KT 듀오 보험과 애플케어플러스 중 어느 쪽이 싼지 결론만 던지고 월 보험료·수리비·가입 가능 시점 같은 구체 비교표는 빠져 있다. 이 글은 두 보험의 조건을 표로 정리해 독자가 자신의 구매처에 맞춰 바로 선택하게 한다.",
-        "searchTargets": [
-          "아이폰 듀오 가격",
-          "아이폰 듀오 사전예약",
-          "아이폰 듀오 불량",
-          "아이폰 듀오 출시일"
-        ],
-        "mustInclude": [
-          "KT 듀오 보험과 애플케어플러스 월 보험료·가입비 비교표 (확인 필요: KT·애플 공식 페이지)",
-          "파손·침수 보장 범위와 수리비 자기부담금 비교 (확인 필요: 각 공식 약관)",
-          "보험 가입 가능 시점(사전예약 시/개통 시) 조건 (확인 필요: KT 공식 공지)",
-          "SKT·KT·LG유플러스별 구매 시 보험 가입 가능 여부 차이 (확인 필요: 각 통신사 공식)"
-        ],
-        "mustAvoid": [
-          "아이폰18 프로와 듀오 중 어느 게 더 인기 많은지 식의 불필요한 비교로 주제 흐리기",
-          "출시일·가격을 공식 발표 전에 확정된 사실처럼 단정해서 쓰기",
-          "삼성 갤럭시Z 폴드 보험 등 타사 폴더블 보험 조건과 혼동해서 서술하기"
-        ],
-        "checkBefore": [
-          "KT 공식 홈페이지의 듀오 보험 요금제·보장 조건",
-          "애플 공식 홈페이지의 AppleCare+ 요금·보장 조건",
-          "아이폰 듀오 공식 출시일·사전예약 일정(애플 공식 발표)"
-        ],
-        "solves": [
-          "아이폰 듀오 바로 구매하고 싶은데 어떻게 하나요 → 통신사별 구매 절차와 보험 가입 타이밍 정리",
-          "아이폰듀오 사전예약 해외에서 가능한가요 → 사전예약 가능 여부와 지역 조건 정리",
-          "아이폰 듀오 불량 걱정 → 보험으로 처리 가능한 보장 범위 비교"
-        ],
-        "actionTitles": [
-          "아이폰 듀오 가격 확인하고 KT 보험이 싼지 계산하는 법",
-          "아이폰 듀오 사전예약 전 통신사별 구매 조건 비교하는 법",
-          "아이폰 듀오 불량 걱정되면 보험 가입 전 체크할 것"
-        ]
-      },
-      "at": "2026-10-26T21:14:00.940Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "아이폰 듀오 바로 살려고그러는데",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1070401&docId=495228435&answerNo=5&qb=7JWE7J207Y+w65OA7Jik",
-          "views": 522,
-          "answers": 12,
-          "askedAt": "2026.10.01"
-        },
-        {
-          "title": "아이폰 듀오 구매 원함",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1070401&docId=495308575&answerNo=6&qb=7JWE7J207Y+w65OA7Jik",
-          "views": 404,
-          "answers": 8,
-          "askedAt": "2026.10.12"
-        },
-        {
-          "title": "아이폰18 프로와 듀오, 어떤 제품이 더 인기 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=5010603&docId=495124046&answerNo=7&qb=7JWE7J207Y+w65OA7Jik",
-          "views": 256,
-          "answers": 8,
-          "askedAt": "2026.10.13"
-        }
-      ]
-    },
-    {
       "id": "57b071343634070d",
       "urls": [
         "https://happy-life88.tistory.com/1095",
@@ -15723,68 +15589,6 @@
           "views": 205,
           "answers": 4,
           "askedAt": "2026.10.10"
-        }
-      ]
-    },
-    {
-      "id": "012e5db8d411c823",
-      "urls": [
-        "https://info-myview.co.kr/impaired-risk-cancer-insurance-comparison-2026/",
-        "https://niscity.com/direct-insurance-renewal-vs-non-renewal/"
-      ],
-      "guide": {
-        "direction": "① 지식인 질문은 50대 유병자가 갱신형·비갱신형의 일반 차이만 궁금해하고, 유병자 전용 가입조건(문진 완화)은 못 찾는다. ② 고수 글은 갱신형 vs 비갱신형 장기 효율성만 분석해 유병자가 실제 가입 가능한 다이렉트 상품·조건표가 없다. ③ 이 글은 유병자 가입조건·갱신형vs비갱신형 보험료 변화·다이렉트 가격비교를 표로 정리해 가입 결정까지 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "유병자 전용 가입조건(문진 완화 항목) 비교표(확인 필요: 보험사 상품설명서)",
-          "갱신형 vs 비갱신형 보험료 변동 구조(가입 초기 vs 나이 든 후)",
-          "다이렉트 가입 가능 보험사 리스트와 가격비교 방법",
-          "50대 기준 갱신형·비갱신형 가입 시 보험료 비교 예시(확인 필요: 각사 견적)"
-        ],
-        "mustAvoid": [
-          "특정 보험사 상품을 유병자 전용 특가처럼 과장",
-          "암 진단 시 100% 보장된다는 식의 보장범위 과장",
-          "실비보험과 암보험 특약을 혼동해서 설명"
-        ],
-        "checkBefore": [
-          "보험사별 유병자 가입조건(문진표) 최신본 — 각 보험사 상품설명서",
-          "비갱신형 보험료 인상·동결 여부 — 보험사 공시실/금융감독원 공시"
-        ],
-        "solves": [
-          "갱신형·비갱신형 차이를 몰라 가입 못함 → 유병자 기준 가입조건·보험료 변동 비교표로 결정",
-          "비갱신형 가입 시 할인율·나이 들어도 보험료 유지 여부가 불확실 → 보험료 구조표로 정리",
-          "암보험·실비보험 특약 혼동 → 유병자 암보험 가입조건만 따로 분리해 설명"
-        ],
-        "actionTitles": [
-          "유병자 암보험 비교, 갱신형 비갱신형 가입조건 확인법",
-          "암보험 다이렉트 가격비교, 비갱신형 보험료 계산하기",
-          "2026 유병자 암보험, 비갱신형 보험료 변화 확인하기"
-        ]
-      },
-      "at": "2026-10-26T21:14:00.940Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "갱신형 비갱신형 암보험 차이점",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=401030203&docId=287881039&answerNo=13&qb=6rCx7Iug7ZiVIHZzIOu5hOqwseyLoO2YlSDrs7Ttl5jro4wg7J6l6riw",
-          "views": 4142,
-          "answers": 15,
-          "askedAt": "2026.03.25"
-        },
-        {
-          "title": "비갱신형실비보험 비교",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8&docId=233356247&answerNo=6&qb=6rCx7Iug7ZiVIHZzIOu5hOqwseyLoO2YlSDrs7Ttl5jro4wg7J6l6riw",
-          "views": 3155,
-          "answers": 5,
-          "askedAt": "2025.11.22"
-        },
-        {
-          "title": "암보험비갱신형 vs 암보험갱신형의 차이점",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010302&docId=468262807&answerNo=16&qb=6rCx7Iug7ZiVIHZzIOu5hOqwseyLoO2YlSDrs7Ttl5jro4wg7J6l6riw",
-          "views": 3007,
-          "answers": 9,
-          "askedAt": "2026.10.18"
         }
       ]
     },
@@ -66179,6 +65983,508 @@
           "askedAt": "2026.08.12"
         }
       ]
+    },
+    {
+      "id": "f49ee0c32e9fd902",
+      "urls": [
+        "https://info-myview.co.kr/military-financial-counseling-2026/",
+        "https://sanche.co.kr/military-youth-financial-counseling-2026-guide/"
+      ],
+      "guide": {
+        "direction": "검색자는 '군부대 찾아가는 재무상담소'가 누구를 대상으로 하는지, 신청이 본인 직접인지 부대 경유인지 헷갈려 막힌다. 고수 블로그 제목은 대상과 이용방법을 언급했지만 구체적 신청 단계와 마감 후 처리까지는 다루지 않았다. 이 글은 대상·신청경로·마감일을 표로 정리해 신청 여부를 바로 판단하게 한다.",
+        "searchTargets": [
+          "군부대 찾아가는 방법"
+        ],
+        "mustInclude": [
+          "상담 신청 대상(장병 본인/가족 여부, 확인 필요: 주관처 공지)",
+          "신청 마감일 11월13일 및 마감 후 처리(확인 필요)",
+          "신청 경로(온라인 신청/부대 경유, 확인 필요)",
+          "상담 분야(목돈마련·전역설계 등, 확인 필요)"
+        ],
+        "mustAvoid": [
+          "'군부대 찾아가는 방법'을 부대 위치·출입 안내로 오해해 쓰지 않기",
+          "특정 장병 개인정보나 소속부대 구체적 언급",
+          "군인공제회·병영생활고충상담 등 유사 제도와 혼동"
+        ],
+        "checkBefore": [
+          "신청 대상·방법·마감일을 주관처(국방부/군인공제회 등) 공식 공지에서 확인",
+          "신청 플랫폼 URL과 접수 방식 재확인"
+        ],
+        "solves": [
+          "'군부대 찾아가는 방법'을 검색해도 실제로는 부대 방문 길찾기가 아니라 온라인 신청 절차임을 명확히 안내",
+          "신청 대상이 장병 본인인지 가족도 되는지 불명확 → 대상 조건표로 정리",
+          "마감일(11월13일) 이후 신청 가능 여부가 궁금함 → 마감 후 절차 안내"
+        ],
+        "actionTitles": [
+          "군부대 찾아가는 재무상담소 신청, 대상과 마감일 확인하기",
+          "군부대 찾아가는 재무상담소 11월13일 마감 신청방법 정리",
+          "군부대 찾아가는 재무상담소 1:1 상담 신청 절차와 대상 체크"
+        ]
+      },
+      "at": "2026-10-28T11:00:09.593Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "대한민국 경영학자",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=111001&docId=390191773&answerNo=1&qb=6rWw67aA64yAIOywvuyVhOqwgCDsnqzrrLTsg4Hri7Tshowg66eI6rCQMSDsnbTsmqnrsKnrspU=",
+          "views": 129673,
+          "answers": 4,
+          "askedAt": "2021.05.20"
+        },
+        {
+          "title": "공기업vs대기업vs공무원",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=406&docId=391166593&answerNo=3&qb=6rWw67aA64yAIOywvuyVhOqwgCDsnqzrrLTsg4Hri7Tshowg66eI6rCQMSDsnbTsmqnrsKnrspU=",
+          "views": 8874,
+          "answers": 7,
+          "askedAt": "2021.06.01"
+        },
+        {
+          "title": "표현의 자유",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80101&docId=495646170&answerNo=7&qb=6rWw67aA64yAIOywvuyVhOqwgCDsnqzrrLTsg4Hri7Tshowg66eI6rCQMSDsnbTsmqnrsKnrspU=",
+          "views": 7394,
+          "answers": 8,
+          "askedAt": "2026.10.27"
+        }
+      ]
+    },
+    {
+      "id": "7a55153cb18d19dd",
+      "urls": [
+        "https://funding.tistory.com/entry/2026%EB%85%84-10%EC%9B%94-%EB%B8%8C%EB%9D%BC%EC%A7%88%EC%9D%B4-%EB%8D%98%EC%A7%84-%EC%A7%88%EB%AC%B8-%EB%B6%80%EC%9E%90%EC%97%90%EA%B2%8C-%EA%B1%B4%EB%84%A4%EB%A9%B4-%E2%80%98%ED%88%AC%EC%9E%90%E2%80%99-%EA%B0%80%EB%82%9C%ED%95%9C-%EC%9D%B4%EC%97%90%EA%B2%8C-%EA%B1%B4%EB%84%A4%EB%A9%B4-%E2%80%98%EB%B9%84%EC%9A%A9%E2%80%99%EC%9D%BC%EA%B9%8C"
+      ],
+      "guide": {
+        "direction": "독자는 '브라질이 던진 질문'이 구체적으로 어떤 정책이나 사건을 가리키는지 몰라 제목만 보고 막힌다. 고수 블로그 제목은 수사적 질문만 던지고 실제 수치나 정책명으로 답을 주지 않는다. 이 글은 해당 사건의 구체적 내용과 수혜자별 금액 비교를 정리해 질문에 바로 답한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "해당 브라질 정책/사건의 정확한 명칭과 발표 시점(확인 필요: 원문기사)",
+          "부자/빈자에게 주어지는 금액 또는 혜택 비교 수치(확인 필요)",
+          "'투자' vs '비용' 프레이밍을 쓰는 측(정부/야당/전문가)별 주장 정리(확인 필요)",
+          "2026년 10월 시점의 관련 발표나 통계(확인 필요)"
+        ],
+        "mustAvoid": [
+          "다른 나라 기본소득·부유세 사례와 혼동해 브라질 사례처럼 서술",
+          "검증 안 된 수치를 사실처럼 단정"
+        ],
+        "checkBefore": [
+          "원문 기사 또는 브라질 정부·국제기구 공식 발표에서 정책명과 수치 확인",
+          "날짜(2026년10월)와 발표 주체가 정확히 일치하는지 재확인"
+        ],
+        "solves": [
+          "제목의 질문이 가리키는 구체적 사건을 몰라 막힘 → 사건명과 날짜를 본문 서두에 명시",
+          "'투자'와 '비용' 프레이밍 차이가 추상적으로만 느껴짐 → 실제 금액 비교표로 체감시킴"
+        ],
+        "actionTitles": [
+          "브라질이 던진 질문, 실제 정책과 수치로 확인해보기",
+          "부자에겐 투자 빈자에겐 비용, 브라질 사례 비교해보기"
+        ]
+      },
+      "at": "2026-10-28T11:00:09.593Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "이미 출간된 자기 소설 작품을 공모전에 낼 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=3070103&docId=112063738&answerNo=2&qb=67iM65287KeIIOuNmOynhCDsp4jrrLgg67aA7J6QIOqxtOuEpOuptA==",
+          "views": 36597,
+          "answers": 5,
+          "askedAt": "2010.06.22"
+        },
+        {
+          "title": "소설 추천 부탁이요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=3070103&docId=108901993&answerNo=1&qb=67iM65287KeIIOuNmOynhCDsp4jrrLgg67aA7J6QIOqxtOuEpOuptA==",
+          "views": 20154,
+          "answers": 1,
+          "askedAt": "2010.04.25"
+        },
+        {
+          "title": "판타지소설추전좀요~ !",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=3070103&docId=110758602&answerNo=3&qb=67iM65287KeIIOuNmOynhCDsp4jrrLgg67aA7J6QIOqxtOuEpOuptA==",
+          "views": 11626,
+          "answers": 3,
+          "askedAt": "2010.05.29"
+        }
+      ]
+    },
+    {
+      "id": "904307bf4e97b6b1",
+      "urls": [
+        "https://comitube.tistory.com/1362"
+      ],
+      "guide": {
+        "direction": "검색자는 AI 데이터센터 규제 개선이 수도권과 지방 중 실제로 어디에 유리한지, 구체적으로 뭐가 바뀌는지 몰라 막힌다. 고수 블로그 제목은 '유리해질까'라는 질문만 던지고 전후 조건 비교는 주지 않는다. 이 글은 규제 개선 전후 수도권·지방 조건을 표로 비교해 입지 유불리를 바로 판단하게 한다.",
+        "searchTargets": [
+          "수도권 지방 차이",
+          "수도권 지방 일자리 차이",
+          "수도권 지방 인구 비교"
+        ],
+        "mustInclude": [
+          "AI 데이터센터 규제 개선의 구체 조항(전력·입지·인허가, 확인 필요: 정부발표)",
+          "수도권 vs 지방 조건 비교표(부지가격·전력비용·인허가기간)",
+          "규제 개선 시행일자(확인 필요)",
+          "지방 일자리·인구 영향 전망(확인 필요)"
+        ],
+        "mustAvoid": [
+          "데이터센터 이슈를 수도권·지방 전반의 불평등 논쟁으로 확대해 핵심을 벗어남"
+        ],
+        "checkBefore": [
+          "산업통상자원부 등 주관부처 공식 발표에서 규제 개선 세부내용과 시행일 확인"
+        ],
+        "solves": [
+          "수도권과 지방의 차이가 데이터센터 입지에 어떤 영향 주는지 헷갈림 → 조건 비교표로 정리",
+          "지방이 실제로 유리해지는지 모호함 → 규제 개선 전후 비교로 답함",
+          "지방 일자리 차이가 데이터센터로 좁혀질지 궁금함 → 전망 정리"
+        ],
+        "actionTitles": [
+          "수도권 지방 차이로 보는 AI데이터센터 입지 유불리 비교",
+          "수도권 지방 일자리 차이, 데이터센터 규제완화 효과 확인",
+          "수도권 지방 인구 비교로 본 데이터센터 분산 가능성"
+        ]
+      },
+      "at": "2026-10-28T11:00:09.593Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "c059190a26276eec",
+      "urls": [
+        "https://memogipost.tistory.com/entry/%ED%83%9C%EA%B5%B0%EB%85%B8%EB%9E%98%EC%9E%90%EB%9E%914-%EB%AA%A9%ED%8F%AC%EC%A0%9C%EC%A3%BC%ED%81%AC%EB%A3%A8%EC%A6%88%ED%8E%B8-261121"
+      ],
+      "guide": {
+        "direction": "검색자는 '태군노래자랑4'가 뭔지, 목포-제주 크루즈를 언제·어떻게 타고 참가·응원할 수 있는지, 상금 100만 원 조건이 뭔지 제목 외엔 정보가 없어 궁금해한다. 고수 글은 '총정리'라고만 하고 신청 방법·일정 같은 실행 정보가 빠져 있을 가능성이 크다. 이 글은 일정·승선 신청 방법·상금 조건을 표로 정리해 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "태군노래자랑4 공식 방송일자·채널(확인 필요: 방송사 공지)",
+          "목포-제주 크루즈 승선·참가 신청 방법과 마감일(확인 필요: 주최측 공지)",
+          "상금 100만 원 선정 기준·우승 조건(확인 필요: 공식 발표)",
+          "MC 박군·나태주 외 출연진 명단(확인 필요: 원문 기사)"
+        ],
+        "mustAvoid": [
+          "비슷한 이름의 일반 크루즈 여행 상품·다른 선상 행사와 혼동",
+          "박군·나태주 사생활·열애설 등 추측성 서술"
+        ],
+        "checkBefore": [
+          "'태군노래자랑4' 정확한 방송일시·회차(공식 채널·방송사 공지)",
+          "목포-제주 크루즈 승선 신청 방법과 비용(주최 측 공지)"
+        ],
+        "solves": [
+          "태군노래자랑4가 뭔지 모름 → 행사 개요·MC·상금 조건 정리",
+          "크루즈 어떻게 타고 참가하는지 모름 → 승선·참가 신청 방법 안내",
+          "상금 100만 원 받는 조건이 뭔지 모름 → 선정 기준 정리"
+        ],
+        "actionTitles": [
+          "태군노래자랑4 목포-제주 크루즈, 참가 신청 방법 확인",
+          "선상 노래방 태군노래자랑4 상금 100만원 조건 확인하기",
+          "태군노래자랑4 크루즈 일정·승선 방법 한번에 확인"
+        ]
+      },
+      "at": "2026-10-28T11:00:09.593Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "부산바다축제유래",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=130102&docId=111490401&answerNo=2&qb=6rWt64K0IOy1nOy0iCDrsJTri6Qg7ISg7IOBIOuFuOuemOuwqQ==",
+          "views": 12931,
+          "answers": 3,
+          "askedAt": "2010.06.11"
+        },
+        {
+          "title": "부산에서 전해오는 문화 축제",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=130102&docId=37743727&answerNo=2&qb=6rWt64K0IOy1nOy0iCDrsJTri6Qg7ISg7IOBIOuFuOuemOuwqQ==",
+          "views": 8985,
+          "answers": 12,
+          "askedAt": "2007.11.14"
+        },
+        {
+          "title": "부산의 문화 축제",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=130102&docId=76596530&answerNo=4&qb=6rWt64K0IOy1nOy0iCDrsJTri6Qg7ISg7IOBIOuFuOuemOuwqQ==",
+          "views": 6777,
+          "answers": 5,
+          "askedAt": "2009.11.17"
+        }
+      ]
+    },
+    {
+      "id": "eb2f6646c8f50369",
+      "urls": [
+        "https://limeade.kr/hectofinancial-payment-cancellation-guide/"
+      ],
+      "guide": {
+        "direction": "검색자는 모르는 '헥토파이낸셜' 명의로 돈이 빠져나가 당황해 조회했지만, 헥토파이낸셜은 결제대행사일 뿐이라 거기서 바로 취소가 안 되고 실제 가맹점(구글플레이 등)을 찾아야 한다는 연결 고리가 안 풀려 막힌다. 고수 글 제목은 '조회 취소 방법'까지만 말하고 이 구조를 안 짚어준다. 이 글은 조회 입력 항목부터 가맹점 확인, 취소·환불 요청 순서까지 체크리스트로 끝낸다.",
+        "searchTargets": [
+          "헥토파이낸셜 결제내역 취소방법",
+          "헥토파이낸셜 결제내역",
+          "헥토파이낸셜 결제 내역 조회"
+        ],
+        "mustInclude": [
+          "헥토파이낸셜 결제내역 조회 페이지 입력 항목(결제수단·날짜·금액) 순서",
+          "헥토파이낸셜=결제대행사, 실제 가맹점은 구글 등일 수 있다는 구조",
+          "정기결제(월정액) 의심 시 '가맹점 주문번호' 확인하는 법",
+          "이용한 적 없는 업체 확인됐을 때 가맹점에 취소·환불 요청하는 절차"
+        ],
+        "mustAvoid": [
+          "헥토파이낸셜 고객센터가 바로 환불해준다고 오해하게 하는 서술",
+          "구글플레이 정기결제와 일반 휴대폰 소액결제를 같은 절차로 섞어 안내"
+        ],
+        "checkBefore": [
+          "헥토파이낸셜 결제내역 조회 공식 페이지의 실제 입력 항목·결과 화면",
+          "구글플레이 등 사례별 취소 경로가 다른지 각 서비스 고객센터 공지"
+        ],
+        "solves": [
+          "헥토파이낸셜이 뭔지 몰라 당황함 → 결제대행사 구조와 조회 방법 설명",
+          "이용한 적 없는 결제가 찍힘 → 가맹점 확인 후 취소·환불 순서 제공",
+          "정기결제가 반복해서 빠져나감 → 가맹점 주문번호로 해지하는 법 안내"
+        ],
+        "actionTitles": [
+          "헥토파이낸셜 결제내역 조회 취소방법, 가맹점까지 찾는 순서",
+          "헥토파이낸셜 결제 내역 조회하고 모르는 결제 취소하는 법",
+          "헥토파이낸셜 정기결제 해지, 가맹점 주문번호 확인법"
+        ]
+      },
+      "at": "2026-10-28T11:00:09.593Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "헥토파이낸셜 결제 질문합니다",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40104&docId=474690419&answerNo=11&qb=7Zel7Yag7YyM7J2064K47IWcIOqysOygnOuCtOyXrSDst6jshow=",
+          "views": 33938,
+          "answers": 11,
+          "askedAt": "2026.10.28"
+        },
+        {
+          "title": "헥토파이낸셜 휴대폰 결제?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10702&docId=445585338&answerNo=9&qb=7Zel7Yag7YyM7J2064K47IWcIOqysOygnOuCtOyXrSDst6jshow=",
+          "views": 11173,
+          "answers": 15,
+          "askedAt": "2025.09.11"
+        },
+        {
+          "title": "헥토파이넨셜 결제내역 (구글) 취소",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1060305&docId=478447723&answerNo=2&qb=7Zel7Yag7YyM7J2064K47IWcIOqysOygnOuCtOyXrSDst6jshow=",
+          "views": 908,
+          "answers": 3,
+          "askedAt": "2024.11.28"
+        }
+      ]
+    },
+    {
+      "id": "70d0f0620f4eff89",
+      "urls": [
+        "https://bunny43.tistory.com/entry/%EB%B9%84%EB%8C%80%EB%A9%B4%EC%A7%84%EB%A3%8C-%EC%B4%88%EC%A7%84-12%EC%9B%94-24%EC%9D%BC%EB%B6%80%ED%84%B0-%EC%B2%98%EC%9D%8C-%EA%B0%80%EB%8A%94-%EB%B3%91%EC%9B%90%EB%8F%84-%EB%90%A0%EA%B9%8C"
+      ],
+      "guide": {
+        "direction": "검색자는 비대면진료 초진이 원래 제한됐는데 12월 24일부터 바뀐다는 게 코로나19 때 한시 허용과 뭐가 다른지, 한 번도 안 가본 병원에서도 가능한지 헷갈려한다(지식인 답변도 '처음이라도 가능' vs '초진은 안 됨'으로 엇갈림). 고수 글은 날짜만 던지고 어떤 병원·진료과에 적용되는지 조건을 안 짚어준다. 이 글은 변경 조건을 표로 정리해 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "12월 24일부터 바뀌는 비대면진료 초진 허용 조건(확인 필요: 보건복지부 공지)",
+          "처음 방문하는 병원에서도 초진 비대면진료가 가능한지(확인 필요: 원문 기사)",
+          "코로나19 한시 허용 당시와 이번 제도화의 차이(확인 필요: 원문 기사)",
+          "병원마다 초진비·시행 여부가 다를 수 있다는 점",
+          "정신과 등 비대면 제한되는 진료과 예외(확인 필요: 복지부 고시)"
+        ],
+        "mustAvoid": [
+          "코로나19 한시적 비대면진료 허용 시기와 12월 24일 제도를 같은 것으로 혼동",
+          "모든 병원·모든 진료과에서 초진 비대면이 가능하다고 일반화"
+        ],
+        "checkBefore": [
+          "12월 24일 시행 비대면진료 제도의 정확한 내용(보건복지부 공식 발표)",
+          "초진 허용 대상 진료과·질환 범위(복지부 고시·보도자료)"
+        ],
+        "solves": [
+          "비대면진료 초진이 원래 안 됐는데 이제 되는지 헷갈림 → 12월 24일 기준 조건 정리",
+          "처음 가는 병원에서도 비대면 초진이 되는지 모름 → 처음 방문 병원 기준 가능 여부 정리"
+        ],
+        "actionTitles": [
+          "비대면진료 초진, 12월24일부터 처음 가는 병원도 되는지 확인",
+          "비대면 진료 초진 가능 조건, 날짜별로 정리해서 확인하기",
+          "비대면진료 처음 병원도 되나, 바뀐 기준 한눈에 확인"
+        ]
+      },
+      "at": "2026-10-28T11:00:09.593Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "탈모약 비대면 처방",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70111&docId=489012551&answerNo=8&qb=67mE64yA66m07KeE66OMIOy0iOynhCDsspjsnYwg6rCA64qUIOuzkeybkA==",
+          "views": 2609,
+          "answers": 8,
+          "askedAt": "2026.04.24"
+        },
+        {
+          "title": "비대면 진료 이제 일반 초진환자는 안되는걸....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=709&docId=447074136&answerNo=1&qb=67mE64yA66m07KeE66OMIOy0iOynhCDsspjsnYwg6rCA64qUIOuzkeybkA==",
+          "views": 609,
+          "answers": 1,
+          "askedAt": "2023.06.01"
+        },
+        {
+          "title": "피부과 진료받는것도 돈 내야하나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70111&docId=493481523&answerNo=2&qb=67mE64yA66m07KeE66OMIOy0iOynhCDsspjsnYwg6rCA64qUIOuzkeybkA==",
+          "views": 269,
+          "answers": 5,
+          "askedAt": "2026.05.20"
+        }
+      ]
+    },
+    {
+      "id": "c8a1755a17ab2340",
+      "urls": [
+        "https://blogger00220.tistory.com/entry/ISA-%EC%97%B0%EA%B8%88%EA%B3%84%EC%A2%8C-%EC%A0%9C16%ED%8E%B8-%ED%8F%89%EC%83%9D-%EB%AA%A8%EC%9D%80-%EC%97%B0%EA%B8%88%EC%A0%80%EC%B6%95%C2%B7IRP-%EB%B0%B0%EC%9A%B0%EC%9E%90%EA%B0%80-%EC%84%B8%EA%B8%88-%EB%B6%88%EC%9D%B4%EC%9D%B5-%EC%97%86%EC%9D%B4-100-%EB%AC%BC%EB%A0%A4%EB%B0%9B%EB%8A%94-%EB%B0%B0%EC%9A%B0%EC%9E%90-%EC%8A%B9%EA%B3%84-%EA%B3%B5%EC%8B%9D%EA%B3%BC-%EC%83%81%EC%86%8D-%EC%A0%88%EC%84%B8%EB%B2%95"
+      ],
+      "guide": {
+        "direction": "지식인 질문은 ISA·연금저축·IRP 세 계좌의 한도·세액공제 차이와 전환 방법에 몰려 있고 '배우자 승계' 자체를 묻는 사례는 드물어, 검색자는 상속보다 먼저 계좌 구조를 못 잡은 상태다. 고수 블로그 제목은 승계 공식만 다뤄 더 많이 검색되는 ISA↔연금계좌 이전 한도·차이 질문을 비워둔다. 3계좌 한도·세액공제 비교표와 ISA→연금계좌 이전 절차를 먼저 정리한 뒤 배우자 승계 규정을 붙이면 글이 끝난다.",
+        "searchTargets": [
+          "isa 연금계좌 이전",
+          "isa 연금계좌 차이",
+          "isa 연금계좌 이전 한도",
+          "isa 연금계좌 irp차이"
+        ],
+        "mustInclude": [
+          "연금저축 600만원+IRP 300만원 세액공제 한도, ISA 2천만원 포함 연 2,900만원 예시(지식인 답변 기준)",
+          "ISA 만기금→연금계좌 이전 절차: 계좌 개설→이전 신청→세액공제 적용 순서",
+          "ISA·연금저축·IRP 3계좌 한도·세액공제 비교표",
+          "배우자 승계 시 과세 방식(확인 필요: 국세청 홈택스 공지)"
+        ],
+        "mustAvoid": [
+          "ISA를 일반 연금보험 상품과 혼동해 서술하지 않기",
+          "세액공제 한도를 상속세 면제 한도처럼 서술하지 않기"
+        ],
+        "checkBefore": [
+          "국세청 홈택스에서 최신 ISA·연금계좌 이전 한도와 배우자 승계 규정 확인"
+        ],
+        "solves": [
+          "ISA·연금저축·IRP 중 뭘 먼저 채워야 하나? → 3계좌 한도 비교표로 정리",
+          "ISA 만기금을 연금계좌로 옮기면 추가 공제 있는지? → 이전 절차와 조건 설명",
+          "배우자가 연금계좌를 세금 불이익 없이 받으려면? → 승계 공식 정리"
+        ],
+        "actionTitles": [
+          "ISA 연금계좌 이전 한도 확인하고 추가 공제 받는 법",
+          "ISA·연금저축·IRP 차이 비교해 한도 다 채우는 순서"
+        ]
+      },
+      "at": "2026-10-28T11:00:09.593Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "월급 500만원일 때, 연금·ISA 계좌 모두 채우는....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40301&docId=494968542&answerNo=8&qb=aXNh7Jew6riI6rOE7KKM",
+          "views": 436,
+          "answers": 9,
+          "askedAt": "2026.10.14"
+        },
+        {
+          "title": "ISA, 연금저축, IRP 중 어느 것이 세액공제 혜택....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100402&docId=494050692&answerNo=12&qb=aXNh7Jew6riI6rOE7KKM",
+          "views": 272,
+          "answers": 13,
+          "askedAt": "2026.10.18"
+        },
+        {
+          "title": "ISA 만기 후 연금저축/IRP",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100402&docId=495388148&answerNo=6&qb=aXNh7Jew6riI6rOE7KKM",
+          "views": 158,
+          "answers": 6,
+          "askedAt": "2026.10.18"
+        }
+      ]
+    },
+    {
+      "id": "ce55bcfadd147ba6",
+      "urls": [
+        "https://tmhub.co.kr/1354"
+      ],
+      "guide": {
+        "direction": "지식인 질문은 코스피가 왜 급등했는지와 더 오를지를 묻지만 최근 질문은 이미 8800~9300선을 다뤄 '6000 돌파'보다 높은 구간을 궁금해한다. 고수 블로그 제목은 6000 돌파 시점에 멈춰 있어 그 뒤 급등락과 LG전자·두산로보틱스 같은 급락 종목의 관계를 못 짚는다. 삼성전자·SK하이닉스 실적과 지수 구간을 타임라인으로 정리하고 다른 종목 급락 이유까지 붙이면 최신 질문까지 커버한다.",
+        "searchTargets": [
+          "코스피 돌파"
+        ],
+        "mustInclude": [
+          "삼성전자·SK하이닉스 실적 개선과 시가총액 비중(지식인 답변 기준)",
+          "코스피 지수 구간 타임라인: 6000→8800→9300선(확인 필요: 날짜)",
+          "LG전자·두산로보틱스 급락과 반도체 대형주 상승 대비표",
+          "마이크론·엔비디아 등 해외 반도체 급등 연계(지식인 답변 기준)"
+        ],
+        "mustAvoid": [
+          "코스피와 코스닥 지수를 혼동해 쓰지 않기",
+          "급등이 계속된다고 단정하지 않기(급락 반복 사례 있음)"
+        ],
+        "checkBefore": [
+          "현재 코스피 지수와 날짜를 증권사 리포트나 한국거래소에서 확인",
+          "삼성전자·SK하이닉스 실적 발표 원문 기사 확인"
+        ],
+        "solves": [
+          "코스피가 왜 갑자기 급등했는지 모르겠다 → 반도체 대형주 비중·실적으로 원인 정리",
+          "코스피가 더 오를지 다시 빠질지 궁금하다 → 과거 급등락 구간 타임라인으로 정리"
+        ],
+        "actionTitles": [
+          "코스피 돌파 이유 확인, 삼성전자·하이닉스 어디까지 가나",
+          "코스피 돌파 타임라인 정리, 다음 구간 전망까지 확인",
+          "코스피 돌파와 반도체 급등 이유 한번에 정리해 확인"
+        ]
+      },
+      "at": "2026-10-28T11:00:09.593Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "2026년에 우리나라 주식시장이 급등하는 이유....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=493966301&answerNo=4&qb=7L2U7Iqk7ZS8IOuPjO2MjCDsgrzshLHsoITsnpAgc2vtlZjsnbTri4nsiqQg6riJ65Ox",
+          "views": 778,
+          "answers": 9,
+          "askedAt": "2026.06.21"
+        },
+        {
+          "title": "올해 코스피가 다시 고점을 찍을까요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=494727287&answerNo=11&qb=7L2U7Iqk7ZS8IOuPjO2MjCDsgrzshLHsoITsnpAgc2vtlZjsnbTri4nsiqQg6riJ65Ox",
+          "views": 536,
+          "answers": 11,
+          "askedAt": "2026.09.02"
+        },
+        {
+          "title": "주식 다시 내려가는추세에요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=493774137&answerNo=1&qb=7L2U7Iqk7ZS8IOuPjO2MjCDsgrzshLHsoITsnpAgc2vtlZjsnbTri4nsiqQg6riJ65Ox",
+          "views": 263,
+          "answers": 7,
+          "askedAt": "2026.06.10"
+        }
+      ]
+    },
+    {
+      "id": "9549aaffd151dadd",
+      "urls": [
+        "https://life.sano.co.kr/%ed%83%88%eb%b6%81%ec%96%b4%eb%af%bc-%ea%b0%95%ec%a0%9c%eb%b6%81%ec%86%a1-%ec%83%81%ea%b3%a0-%ed%8f%ac%ea%b8%b0%ec%9d%98-%ec%9d%98%eb%af%b8%ec%99%80-%ed%95%b5%ec%8b%ac-%eb%82%b4%ec%9a%a9-%ea%bc%ad/"
+      ],
+      "guide": {
+        "direction": "자동완성은 '탈북어민 강제북송'만 걸려 있어 검색자는 상고 포기가 누가, 언제 한 결정인지부터 막혀 있다. 고수 블로그 제목은 '의미와 핵심 내용'만 예고해 실제 주체·날짜·이후 절차를 아직 안 밝힌다. 상고 포기 주체와 사건 경위를 타임라인으로, 상고 포기의 법적 효과를 표로 정리하면 글이 끝난다.",
+        "searchTargets": [
+          "탈북어민 강제북송"
+        ],
+        "mustInclude": [
+          "상고를 포기한 주체(검찰/정부 등, 확인 필요: 원문 기사)",
+          "사건 경위 타임라인(북송 시점→기소→1심·2심→상고 포기, 확인 필요)",
+          "상고 포기의 법적 의미(판결 확정 효과) 설명"
+        ],
+        "mustAvoid": [
+          "탈북어민 개인 신상·사생활을 추측해서 쓰지 않기"
+        ],
+        "checkBefore": [
+          "법원·검찰 공식 발표 또는 원문 기사에서 상고 포기 날짜와 주체 확인"
+        ],
+        "solves": [
+          "탈북어민 강제북송 상고 포기가 무슨 뜻인지 모르겠다 → 법적 의미(판결 확정)를 풀어 정리"
+        ],
+        "actionTitles": [
+          "탈북어민 강제북송 상고 포기의 의미 한번에 확인하기",
+          "탈북어민 강제북송 상고 포기 핵심 내용 확인하는 법"
+        ]
+      },
+      "at": "2026-10-28T11:00:09.593Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
     }
   ],
   "misses": [
