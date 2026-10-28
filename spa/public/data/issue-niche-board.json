@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-10-28T09:13:20.728Z",
+  "publishedAt": "2026-10-28T09:38:12.751Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 240,
-    "niche": 2,
-    "preemption": 14,
+    "candidates": 229,
+    "niche": 1,
+    "preemption": 9,
     "pending": 0
   },
   "freeSample": {
@@ -18,6 +18,219 @@
     ]
   },
   "rows": [
+    {
+      "keyword": "김연경 생일",
+      "issue": "김연경",
+      "topic": "김연경",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "김연경 사주 분석 (신해일주/성실의 아이콘)",
+          "대환장 기안장2 3화·4화 카즈하의 목마부터 대관령 여행까지, 손님들과 가까워지는 기안장",
+          "대환장 기안장 시즌2 3화 후기-우리 배구식빵언니가 인도춤을?",
+          "대환장 기안장 시즌2 1화~4화 리뷰대관령에서 더 커진 기안84의 세계관, 김연경·이준호·카즈하 케미까지",
+          "[예능] 넷플릭스｜대환장 기안장 시즌2 1~4회 후기｜확 달라진 기안장｜새직원들과의 케미",
+          "[26.09.22] 대환장 기안장 2 1~4 (출연진, 숙소 정보, 게스트)",
+          "넷플릭스 대환장 기안장 시즌2 4화 | 이준호 돼지고기 미역국에 김연경 울컥",
+          "\"코치하다가 온거야?\" 신인감독 김연경2 박상미 근황, 흥국생명 은퇴 후 트라이아웃 도전",
+          "기안장2 김연경 이준호 카즈하 너무 재밌어 5화 6회 7화 8회 공개 시간 언제 몇시?",
+          "7월 8월 9월) 불안은 자유의 현기증"
+        ],
+        "measuredAt": "2026-10-28T09:34:21.472Z"
+      },
+      "documentCount": 4611,
+      "documentCountMeasured": true,
+      "searchVolume": 1290,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "declining",
+      "demandRatio": 0.2706387864652135,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 1,290",
+        "문서수 4,611",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 1,290 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.3배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "'신인감독 김연경2'가 2주 연속 비드라마 화제성 1위를 기록했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "김연경 생일과 나이, 10월 비드라마 화제성 1위 근황",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "김연경 생일 찾다가 프로필에 적힌 키 보고 한참 멈칫했네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "김연경 키",
+          "searchVolume": 27960,
+          "frame": "generic"
+        },
+        {
+          "keyword": "김연경 나이",
+          "searchVolume": 20590,
+          "frame": "generic"
+        },
+        {
+          "keyword": "김연경 프로필",
+          "searchVolume": 13220,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "김연경 키",
+          "searchVolume": 27960,
+          "documentCount": 14611,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김연경 나이",
+          "searchVolume": 20590,
+          "documentCount": 14114,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김연경 프로필",
+          "searchVolume": 13220,
+          "documentCount": 7004,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김연경 은퇴",
+          "searchVolume": 2390,
+          "documentCount": 17555,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김연경 황연주",
+          "searchVolume": 890,
+          "documentCount": 4359,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김연경 생년월일",
+          "searchVolume": 40,
+          "documentCount": 1072,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": {
+        "series": [
+          68,
+          57,
+          66,
+          49,
+          71,
+          83,
+          100,
+          41,
+          49,
+          41,
+          54,
+          50,
+          49,
+          33,
+          21,
+          20,
+          18,
+          13,
+          22,
+          27,
+          5,
+          10,
+          15,
+          9,
+          6,
+          7,
+          17,
+          0,
+          6
+        ]
+      },
+      "kinCount": 35,
+      "kinTop": [
+        {
+          "title": "파리바게트 김연경 배너 구매 할 수 있나요,,",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10010401&docId=403500939&answerNo=3",
+          "views": 154,
+          "answers": 3
+        },
+        {
+          "title": "버블 생일축하메세지",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=302140101&docId=462425909&answerNo=1",
+          "views": 119,
+          "answers": 1
+        },
+        {
+          "title": "2020년에 김연경 선수 나이가 몇살",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10010405&docId=436286958&answerNo=1",
+          "views": 77,
+          "answers": 1
+        },
+        {
+          "title": "김연경 좋아하는 친구 선물",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10010402&docId=490632449&answerNo=2",
+          "views": 36,
+          "answers": 2
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-28T09:33:32.281Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null
+    },
     {
       "keyword": "원당역 시간표",
       "issue": "원당역",
@@ -207,7 +420,8 @@
       "monetize": null,
       "measuredAt": "2026-10-28T09:05:27.353Z",
       "recommendationStatus": "recommend",
-      "exclusionReason": null
+      "exclusionReason": null,
+      "carried": true
     },
     {
       "keyword": "플래티어 주가",
@@ -393,7 +607,8 @@
       "monetize": null,
       "measuredAt": "2026-10-28T09:05:27.353Z",
       "recommendationStatus": "recommend",
-      "exclusionReason": null
+      "exclusionReason": null,
+      "carried": true
     },
     {
       "keyword": "에코프로 방문 신청",
@@ -546,7 +761,7 @@
           81,
           54
         ],
-        "measuredAt": "2026-10-28T03:33:38.169Z"
+        "measuredAt": "2026-10-28T09:38:13.534Z"
       },
       "kinCount": 34,
       "kinTop": [
@@ -700,7 +915,7 @@
         ],
         "label": "❄️ 시즌성",
         "recommendation": "시즌 임박 신호. 2주 안에 작성해서 시즌 동안 트래픽 확보",
-        "measuredAt": "2026-10-28T03:33:38.169Z"
+        "measuredAt": "2026-10-28T09:38:13.534Z"
       },
       "kinCount": 982,
       "kinTop": [],
@@ -845,7 +1060,7 @@
         ],
         "label": "🐢 연금형",
         "recommendation": "한 번 쓰면 1년 꾸준 방문자. 안정적 연금 키워드",
-        "measuredAt": "2026-10-28T03:33:38.169Z"
+        "measuredAt": "2026-10-28T09:38:13.534Z"
       },
       "kinCount": 1990,
       "kinTop": [],
@@ -863,6 +1078,644 @@
     }
   ],
   "observations": [
+    {
+      "keyword": "AI스페라 인터폴",
+      "issue": "AI스페라",
+      "topic": "AI스페라",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 9,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 9",
+        "선점 후보 — 경쟁 문서 9건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "AI스페라가 인터폴 '게이트웨이'에 합류해 사이버범죄 수사를 지원한다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "AI스페라 인터폴 게이트웨이 합류, 크리미널IP가 하는 일",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "AI스페라가 인터폴 게이트웨이에 합류한 거 보고 크리미널IP 다시 찾아봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "AI스페라",
+          "searchVolume": 240,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "AI스페라",
+          "searchVolume": 240,
+          "documentCount": 1180,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-28T09:33:32.281Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "AI스페라 게이트웨이",
+      "issue": "AI스페라",
+      "topic": "AI스페라",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 10,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 10",
+        "선점 후보 — 경쟁 문서 10건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "AI스페라가 인터폴 '게이트웨이'에 합류해 사이버범죄 수사를 지원한다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "AI스페라 게이트웨이 인터폴 사이버범죄 수사 지원 참여 내용",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "AI스페라 게이트웨이 인터폴 합류 소식에 크리미널IP까지 찾아봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-28T09:33:32.281Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "웹케시 독파모",
+      "issue": "웹케시",
+      "topic": "웹케시",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 18,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 18",
+        "선점 후보 — 경쟁 문서 18건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "웹케시가 K-엑사원을 연결한 금융 AI 에이전트 개발에 참여한다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "웹케시 독파모, K-엑사원 금융 AI 에이전트 연결 포인트",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "웹케시 독파모 들어갔다는 소식에 주가 화면을 한참 들여다보게 되더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "웹케시 주가",
+          "searchVolume": 770,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "웹케시 주가",
+          "searchVolume": 770,
+          "documentCount": 9950,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-28T09:33:32.281Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "MAI 이미지 2.7",
+      "issue": "MAI 이미지 2.7",
+      "topic": "MAI 이미지 2.7",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 69,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 1,
+      "reasons": [
+        "문서수 69",
+        "선점 후보 — 경쟁 문서 69건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 1건)"
+        }
+      ],
+      "whySearch": {
+        "text": "MS가 'MAI 이미지 2.7'을 공개해 아레나 3위에 올랐다",
+        "basis": "뉴스 헤드라인 4건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "MAI 이미지 2.7 AA 2위 아레나 3위 성능 순위 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "MAI 이미지 2.7 공개 소식에 아레나 3위가 의외로 말 많더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-28T09:33:32.281Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "ai스페라 매출",
+      "issue": "AI스페라",
+      "topic": "AI스페라",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 143,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 143",
+        "선점 후보 — 경쟁 문서 143건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "AI스페라가 인터폴 '게이트웨이'에 합류해 사이버범죄 수사를 지원한다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "ai스페라 매출, 인터폴 게이트웨이 합류로 달라지는 점",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "ai스페라 매출 찾다 보면 인터폴 게이트웨이 합류를 다들 놓칩니다",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 21,
+      "kinTop": [
+        {
+          "title": "엘앤에프 주가 매출액 1조 778억원까지 예상하던데 매도를 할....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=395925495&answerNo=3",
+          "views": 4665,
+          "answers": 14
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-28T09:33:32.281Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "ai스페라 강병탁",
+      "issue": "AI스페라",
+      "topic": "AI스페라",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 188,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 188",
+        "선점 후보 — 경쟁 문서 188건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "AI스페라가 인터폴 '게이트웨이'에 합류해 사이버범죄 수사를 지원한다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-28T09:33:32.281Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "김재원 조이현 로맨스",
+      "issue": "김재원 조이현 로맨스",
+      "topic": "김재원 조이현 로맨스",
+      "lane": "realtime",
+      "issueType": "entertainment",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 244,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 1,
+      "reasons": [
+        "문서수 244",
+        "선점 후보 — 경쟁 문서 244건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 1건)"
+        }
+      ],
+      "whySearch": {
+        "text": "'최종면접'에서 김재원과 조이현이 로맨스 케미를 선보였다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "김재원 조이현 로맨스 최종면접 케미 200점 이유",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "김재원 조이현 로맨스 케미가 최종면접에서 200점 소리 듣는 거 보고 납득했네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 3,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-28T09:33:32.281Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "웹케시 rerp",
+      "issue": "웹케시",
+      "topic": "웹케시",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 208,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 4,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 208",
+        "선점 후보 — 경쟁 문서 208건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 4건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "웹케시가 K-엑사원을 연결한 금융 AI 에이전트 개발에 참여한다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "웹케시 rerp 금융 ERP와 K-엑사원 AI 에이전트 연결",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "웹케시 rerp 소식 나오자 주가가 들썩이길래 이유를 찾아봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "웹케시 주가",
+          "searchVolume": 770,
+          "frame": "generic"
+        },
+        {
+          "keyword": "웹케시 채용",
+          "searchVolume": 20,
+          "frame": "generic"
+        },
+        {
+          "keyword": "웹케시 브랜치",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "웹케시 주가",
+          "searchVolume": 770,
+          "documentCount": 9950,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "웹케시 채용",
+          "searchVolume": 20,
+          "documentCount": 1131,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-28T09:33:32.281Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "AI스페라 상장",
+      "issue": "AI스페라",
+      "topic": "AI스페라",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "IPO 여부",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 266,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 266",
+        "선점 후보 — 경쟁 문서 266건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — IPO 여부"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "AI스페라가 인터폴 '게이트웨이'에 합류해 사이버범죄 수사를 지원한다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "AI스페라 상장 전망과 인터폴 게이트웨이 합류가 주는 의미",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "AI스페라 상장만 기다리다 인터폴 합류 소식에 생각이 좀 달라졌어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "AI스페라",
+          "searchVolume": 240,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "AI스페라",
+          "searchVolume": 240,
+          "documentCount": 1180,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 2260,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-28T09:33:32.281Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "플래티어 연봉",
       "issue": "플래티어",
@@ -957,7 +1810,8 @@
       "monetize": null,
       "measuredAt": "2026-10-28T09:05:27.353Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "신유빈 남친",
@@ -1087,7 +1941,8 @@
       "monetize": null,
       "measuredAt": "2026-10-28T09:05:27.353Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "플래티어 블라인드",
@@ -1194,7 +2049,8 @@
       "monetize": null,
       "measuredAt": "2026-10-28T09:05:27.353Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "플래티어 잡플래닛",
@@ -1295,82 +2151,8 @@
       "monetize": null,
       "measuredAt": "2026-10-28T09:05:27.353Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "웹케시 독파모",
-      "issue": "웹케시",
-      "topic": "웹케시",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 18,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 18",
-        "선점 후보 — 경쟁 문서 18건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "웹케시가 K-엑사원 기반 금융 AI 에이전트 개발 독파모에 참여.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "웹케시 독파모 참여, K-엑사원으로 만드는 금융 AI 에이전트 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "웹케시 독파모 들어갔다는데 주가는 왜 저렇게 조용한지 찾아봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "웹케시 주가",
-          "searchVolume": 770,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "웹케시 주가",
-          "searchVolume": 770,
-          "documentCount": 9950,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-28T09:05:27.353Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "플래티어 AICC",
@@ -1450,69 +2232,8 @@
       "monetize": null,
       "measuredAt": "2026-10-28T09:05:27.353Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "MAI 이미지 2.7",
-      "issue": "MAI 이미지 2.7",
-      "topic": "MAI 이미지 2.7",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 69,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "문서수 69",
-        "선점 후보 — 경쟁 문서 69건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 1건)"
-        }
-      ],
-      "whySearch": {
-        "text": "MS가 정교함 강화한 'MAI 이미지 2.7' 공개, 아레나 3위 등극.",
-        "basis": "뉴스 헤드라인 4건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "MAI 이미지 2.7 AA 2위 아레나 3위 성능 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "MS가 공개한 MAI 이미지 2.7 아레나 순위 보면 평가가 갈리네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-28T09:05:27.353Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "플래티어 xgen",
@@ -1591,168 +2312,8 @@
       "monetize": null,
       "measuredAt": "2026-10-28T09:05:27.353Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "김재원 조이현 로맨스",
-      "issue": "김재원 조이현 로맨스",
-      "topic": "김재원 조이현 로맨스",
-      "lane": "realtime",
-      "issueType": "entertainment",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 243,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 243",
-        "선점 후보 — 경쟁 문서 243건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "영화 '최종면접'서 김재원·조이현이 로맨스 케미로 호평.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "김재원 조이현 로맨스 최종면접 케미 200점 그 이유",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "김재원 조이현 로맨스 최종면접 케미 점수 보고 다들 한마디씩 하더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 3,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-28T09:05:27.353Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "웹케시 rerp",
-      "issue": "웹케시",
-      "topic": "웹케시",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 208,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 4,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 208",
-        "선점 후보 — 경쟁 문서 208건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 4건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "웹케시가 K-엑사원 기반 금융 AI 에이전트 개발 독파모에 참여.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "웹케시 rerp 경리나라 인하우스뱅크 가격 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "웹케시 rerp 쓰다가 브랜치 얘기 나와서 결정 못 내리고 있어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "웹케시 주가",
-          "searchVolume": 770,
-          "frame": "generic"
-        },
-        {
-          "keyword": "웹케시 채용",
-          "searchVolume": 20,
-          "frame": "generic"
-        },
-        {
-          "keyword": "웹케시 브랜치",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "웹케시 주가",
-          "searchVolume": 770,
-          "documentCount": 9950,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "웹케시 채용",
-          "searchVolume": 20,
-          "documentCount": 1131,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-28T09:05:27.353Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "웹케시 오페리아",
@@ -1827,7 +2388,8 @@
       "monetize": null,
       "measuredAt": "2026-10-28T09:05:27.353Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "플래티어 본사",
@@ -1934,7 +2496,8 @@
       "monetize": null,
       "measuredAt": "2026-10-28T09:05:27.353Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "웹케시 엑사원",
@@ -2009,7 +2572,8 @@
       "monetize": null,
       "measuredAt": "2026-10-28T09:05:27.353Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "플래티어 AI에이전트",
@@ -2095,7 +2659,8 @@
       "monetize": null,
       "measuredAt": "2026-10-28T09:05:27.353Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "난베이지 33B",
@@ -4809,82 +5374,74 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "동행안심벨 CCTV 관제센터",
-      "issue": "동행안심벨 CCTV 관제센터",
-      "topic": "동행안심벨 CCTV 관제센터",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 163,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 163",
-        "선점 후보 — 경쟁 문서 163건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-26T09:20:35.535Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
   "issues": [
     {
-      "issue": "코스피 6000선 회복",
+      "issue": "구글 애플 인앱결제",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "반도체 급등과 외국인 매수로 코스피가 10거래일 만에 6000선 회복.",
+      "why": "방미통위가 인앱결제 강제로 구글·애플에 637억 과징금을 부과했다",
       "headlines": [
         {
-          "title": "외국인도 돌아왔다…10거래일 만에 6000선 회복한 코스피[시황종합]",
-          "press": "news1.kr",
-          "publishedAt": "2026-10-28T07:03:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009256084?sid=101"
+          "title": "구글·애플에 인앱결제 과징금 637억원…양사 유감·대응 검토(종합2보)",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-28T08:54:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016407201?sid=105"
         },
+        {
+          "title": "방미통위, '인앱결제 강요' 구글·애플 과징금 637억 원 부과",
+          "press": "imnews.imbc.com",
+          "publishedAt": "2026-10-28T07:35:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/214/0001531966?sid=101"
+        },
+        {
+          "title": "'인앱결제' 강제…구글·애플에 과징금 637억원",
+          "press": "mbn.mk.co.kr",
+          "publishedAt": "2026-10-28T08:10:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/057/0001975572?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "구글",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "제재 상한",
+          "reason": "법 개정 방향",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "코스피 6000선 회복",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "반도체주 급등과 외국인 매수로 코스피가 6000선을 회복했다",
+      "headlines": [
         {
           "title": "반도체가 끌고 외국인이 밀고…코스피 6000선 재돌파",
           "press": "nocutnews.co.kr",
           "publishedAt": "2026-10-28T07:29:00.000Z",
           "link": "https://n.news.naver.com/mnews/article/079/0004204013?sid=101"
+        },
+        {
+          "title": "외국인도 돌아왔다…10거래일 만에 6000선 회복한 코스피[시황종합]",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-28T07:03:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009256084?sid=101"
         },
         {
           "title": "'삼전닉스'가 끌어올린 코스피, 6000선 회복",
@@ -4904,86 +5461,12 @@
       "rowCount": 0
     },
     {
-      "issue": "삼성물산 3분기 영업익",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "건설 하이테크 호조로 삼성물산 3분기 영업익 15% 증가.",
-      "headlines": [
-        {
-          "title": "삼성물산 패션부문 3분기 영업익 200억…전년대비 66.7% 증가",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-10-28T06:49:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005433027?sid=101"
-        },
-        {
-          "title": "삼성물산, 3분기 영업익 1.1조…건설 호조에 15% 증가",
-          "press": "sedaily.com",
-          "publishedAt": "2026-10-28T08:21:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/011/0004676180?sid=101"
-        },
-        {
-          "title": "'반도체 효과' 삼성물산 건설부문, 3분기 영업익 150% 증가",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-28T07:49:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014285433?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "삼성물산",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "구글 애플 인앱결제",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "방통위가 인앱결제 강제로 구글·애플에 637억 과징금 부과.",
-      "headlines": [
-        {
-          "title": "'인앱결제' 구글·애플에 과징금 637억1천만원…시정명령 의결",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-28T07:33:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016407008?sid=105"
-        },
-        {
-          "title": "'인앱결제' 강제…구글·애플에 과징금 637억원",
-          "press": "mbn.mk.co.kr",
-          "publishedAt": "2026-10-28T08:10:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/057/0001975572?sid=102"
-        },
-        {
-          "title": "구글·애플 인앱결제 강제 637억 과징금…제재 상한 상향 검토(종합)",
-          "press": "news1.kr",
-          "publishedAt": "2026-10-28T08:04:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009256257?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "구글",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
       "issue": "빗썸 사내 시스템",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "빗썸 사내 모바일 시스템 해킹으로 개인정보 유출.",
+      "why": "빗썸 사내 모바일 시스템이 해킹돼 개인정보가 유출됐다",
       "headlines": [
         {
           "title": "빗썸 사내 시스템 해킹으로 개인정보 유출",
@@ -5015,18 +5498,55 @@
       "rowCount": 0
     },
     {
+      "issue": "삼성물산 3분기 영업익",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "건설부문 호조로 삼성물산 3분기 영업익이 1.1조를 기록했다",
+      "headlines": [
+        {
+          "title": "삼성물산 패션부문 3분기 영업익 200억…전년대비 66.7% 증가",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-10-28T06:49:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005433027?sid=101"
+        },
+        {
+          "title": "삼성물산, 3분기 영업익 1.1조…건설 호조에 15% 증가",
+          "press": "sedaily.com",
+          "publishedAt": "2026-10-28T08:21:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/011/0004676180?sid=101"
+        },
+        {
+          "title": "'반도체 효과' 삼성물산 건설부문, 3분기 영업익 150% 증가",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-28T07:49:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014285433?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "삼성물산",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
       "issue": "1라운드",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "stable",
-      "isHot": false,
-      "why": "남자배구 신인 드래프트 1라운드서 인하대 윤경이 1순위 지명.",
+      "isHot": true,
+      "why": "남자배구 신인 드래프트 1라운드에서 윤경 등이 지명됐다",
       "headlines": [
         {
           "title": "1라운드 1순위 OK저축은행에 지명된 인하대 윤경",
           "press": "newsis.com",
           "publishedAt": "2026-10-28T06:14:00.000Z",
-          "link": "https://m.sports.naver.com/volleyball/article/003/0014284958"
+          "link": "https://m.sports.naver.com/volleyball/article/003/0014284956"
         },
         {
           "title": "최태원-노소영 재산분할 대법 '2라운드', 주심에 김성수 대법관",
@@ -5084,6 +5604,823 @@
         }
       ],
       "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "김연경",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "'신인감독 김연경2'가 2주 연속 비드라마 화제성 1위를 기록했다",
+      "headlines": [
+        {
+          "title": "'신인감독 김연경2' 2주 연속 화제성 1위…김연경·황연주도 나란히 1·...",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-27T07:16:00.000Z",
+          "link": "https://m.entertain.naver.com/article/421/0009253260"
+        },
+        {
+          "title": "[공식] \"다시 김연경의 시대\"…10월 4주차 비드라마 화제성 1위",
+          "press": "mydaily.co.kr",
+          "publishedAt": "2026-10-27T05:40:00.000Z",
+          "link": "https://m.entertain.naver.com/article/117/0004118883"
+        },
+        {
+          "title": "'신인감독 김연경' 또 정상..김연경·황연주, 화제성 1·2위 싹쓸이",
+          "press": "starnewskorea.com",
+          "publishedAt": "2026-10-27T00:49:00.000Z",
+          "link": "https://m.entertain.naver.com/article/108/0003481950"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "신인감독 김연경2",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김연경 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "신인감독 김연경",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김연경 포지션",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김연경 mbti",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김연경 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김연경 배구",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김연경 갤러리",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "김연경 팀 성적",
+          "reason": "경기 결과",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 1
+    },
+    {
+      "issue": "미국 이란 공격",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": "미국이 중간선거 후 이란 고강도 공격을 검토하며 걸프국에 대비를 지시했다",
+      "headlines": [
+        {
+          "title": "\"美, 중간선거 후 이란 대규모 공습 검토…걸프국에 대비 지시\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-28T02:47:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014284049?sid=104"
+        },
+        {
+          "title": "미, 걸프국에 \"중간선거 후 이란 단기·고강도 공격 대비하라\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-28T02:36:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016405813?sid=104"
+        },
+        {
+          "title": "트럼프 \"다시 해도 이란 공격…내가 한 가장 위대한 일 중 하나\"",
+          "press": "news.tvchosun.com",
+          "publishedAt": "2026-10-27T22:37:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/448/0000647374?sid=104"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "김재원 조이현 로맨스",
+      "issueType": "entertainment",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "'최종면접'에서 김재원과 조이현이 로맨스 케미를 선보였다",
+      "headlines": [
+        {
+          "title": "'최종면접' 조이현·김재원 \"우리 로맨스 호흡? 100점 만점 200점\"",
+          "press": "sportschosun.com",
+          "publishedAt": "2026-10-28T07:23:00.000Z",
+          "link": "https://m.entertain.naver.com/article/076/0004460478"
+        },
+        {
+          "title": "'최종면접' 김재원, 조이현과 로맨스 케미 \"200점..또 만나고파\"",
+          "press": "starnewskorea.com",
+          "publishedAt": "2026-10-28T07:23:00.000Z",
+          "link": "https://m.entertain.naver.com/article/108/0003482424"
+        },
+        {
+          "title": "'최종면접' 김재원♥조이현, 미스터리 영화 속 로맨스 케미…\"100점 만점...",
+          "press": "tenasia.co.kr",
+          "publishedAt": "2026-10-28T07:33:00.000Z",
+          "link": "https://m.entertain.naver.com/article/312/0000781971"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "레버리지",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "단일종목 레버리지 ETF 관련 고발·규제 논란이 확산됐다",
+      "headlines": [
+        {
+          "title": "과세 준비는 덜 됐는데 시행 코앞…가상자산도 '레버리지 ETF 악몽'?",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-28T04:30:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014284458?sid=101"
+        },
+        {
+          "title": "“주식 이벤트로 부추기지 마라”…금감원, 거래 많으면 돈 주는 행사 ...",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-10-28T05:26:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005755253?sid=101"
+        },
+        {
+          "title": "투자자 2명에게 5억1000만원 상금 준 증권사···빚투·레버리지 금전 ...",
+          "press": "khan.co.kr",
+          "publishedAt": "2026-10-28T08:31:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/032/0003479127?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "레버리지 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "레버리지 etf 교육",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "레버리지 etf",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "레버리지 예탁금",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "하이닉스 레버리지",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "레버리지 규제",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "레버리지 책",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kodex 레버리지",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "레버리지 ETF 규제",
+          "reason": "제한 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "레버리지 손실",
+          "reason": "주의점 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "전남광주 학교무상급식 예산",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "무상급식 예산 미편성 논란에 전남광주시가 추경 반영을 결정했다",
+      "headlines": [
+        {
+          "title": "'아이들 굶기나' 비난에 전남광주시, 급식비 추경 반영",
+          "press": "ohmynews.com",
+          "publishedAt": "2026-10-28T02:21:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/047/0002533765?sid=102"
+        },
+        {
+          "title": "전남광주시, 광주 학교 무상급식 예산 추경 반영하기로",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-28T01:34:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016405397?sid=102"
+        },
+        {
+          "title": "전남광주특별시, 학교무상급식 예산 추경예산 반영 결정",
+          "press": "seoul.co.kr",
+          "publishedAt": "2026-10-28T09:10:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/081/0003693547?sid=100"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "LFM3",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "리퀴드 AI가 온디바이스 AI 모델 'LFM3'을 공개했다",
+      "headlines": [
+        {
+          "title": "리퀴드 AI, 온디바이스 AI 모델 'LFM3' 공개...브라우저·음성·이미지 처...",
+          "press": "aitimes.com",
+          "publishedAt": "2026-10-28T08:56:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=216761"
+        },
+        {
+          "title": "[인터뷰] \"반도체 안전 심사, AI로 해결\" 유승훈 헤르메스솔루션 대표",
+          "press": "newsprime.co.kr",
+          "publishedAt": "2026-10-28T01:24:00.000Z",
+          "link": "http://www.newsprime.co.kr/news/article.html?no=752683"
+        },
+        {
+          "title": "[스냅드래곤 서밋] 리퀴드 AI \"내 기기에서 돌아가는 에이전트라서 믿을...",
+          "press": "econovill.com",
+          "publishedAt": "2026-09-23T22:02:00.000Z",
+          "link": "https://www.econovill.com/news/articleView.html?idxno=751784"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [
+        {
+          "keyword": "LFM3 사용법",
+          "reason": "활용 방법",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "LFM3 비교",
+          "reason": "타 모델 성능",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "리퀴드 AI",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "애플이 온디바이스 AI 성능을 강화한 M6 맥북 프로·아이맥을 공개했다",
+      "headlines": [
+        {
+          "title": "14인치 M6 맥북 프로·아이맥 나왔다…\"AI 성능 대폭 향상\"",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-10-27T23:35:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002442650?sid=105"
+        },
+        {
+          "title": "M6 심은 맥북 프로·아이맥 출시…AI·그래픽 성능 끌어올렸다",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-27T23:28:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014283051?sid=105"
+        },
+        {
+          "title": "애플, M6 탑재한 신형 맥북프로·아이맥 공개… 온디바이스 AI 성능 강화",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-10-28T01:43:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001200856?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "리퀴드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "MS",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "MS가 AI 투자 확대 속 최대 6만명 희망퇴직을 추진한다",
+      "headlines": [
+        {
+          "title": "MS, 최대 6만명 희망퇴직 추진…AI 투자 확대 속 인력 재편",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-27T00:40:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014280229?sid=104"
+        },
+        {
+          "title": "MS, 직원 6만명에 자발적 퇴사 제안…AI 투자 확대 속 인력 재편",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-10-27T07:10:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001200652?sid=105"
+        },
+        {
+          "title": "“퇴직금 챙겨줄 때 나가실 분?”…직원 무려 6만명에 ‘희망퇴직’ 권...",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-10-27T05:49:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005754635?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "ms 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스",
+          "searchVolume": 22490,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "MS 오피스 365",
+          "searchVolume": 10680,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스 영구",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스 무료",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "MS 등록방법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 정품인증방법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 로그아웃 방법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "MS 주가",
+          "reason": "구조조정 영향",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "MS AI 투자",
+          "reason": "투자 규모",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "MS 코리아",
+          "reason": "국내 영향 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "AI스페라",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "AI스페라가 인터폴 '게이트웨이'에 합류해 사이버범죄 수사를 지원한다",
+      "headlines": [
+        {
+          "title": "AI스페라, 인터폴에 사이버범죄 수사 지원 정보 제공",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-28T01:02:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014283458?sid=105"
+        },
+        {
+          "title": "AI스페라, 인터폴 '게이트웨이' 참여…국제 사이버범죄 수사 지원",
+          "press": "etnews.com",
+          "publishedAt": "2026-10-28T00:56:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/030/0003479446?sid=105"
+        },
+        {
+          "title": "AI스페라, 인터폴 사이버범죄 대응 협력망 합류…’크리미널 IP’ 위협정...",
+          "press": "venturesquare.net",
+          "publishedAt": "2026-10-28T02:55:00.000Z",
+          "link": "https://www.venturesquare.net/1123724/"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "ai스페라 대표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ai스페라 매출",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ai스페라 투자",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ai스페라 강병탁",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "AI스페라 상장",
+          "reason": "IPO 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "크리미널 IP",
+          "reason": "서비스 활용",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "AI스페라 관련주",
+          "reason": "투자 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "인터폴 게이트웨이",
+          "reason": "이니셔티브 뜻",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "AI스페라 실적",
+          "reason": "매출 규모",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "웹케시",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "웹케시가 K-엑사원을 연결한 금융 AI 에이전트 개발에 참여한다",
+      "headlines": [
+        {
+          "title": "웹케시, K-엑사원 기반 금융 AI 에이전트 개발⋯독파모 참여",
+          "press": "inews24.com",
+          "publishedAt": "2026-10-28T08:20:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/031/0001070211?sid=105"
+        },
+        {
+          "title": "오페리아와 엑사원 연결···웹케시 독파모 프로젝트 참여",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-10-28T01:23:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006397857?sid=105"
+        },
+        {
+          "title": "웹케시 ‘독파모’ 참여…금융 특화 AI에이전트 개발",
+          "press": "biz.heraldcorp.com",
+          "publishedAt": "2026-10-28T04:12:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/016/0002715526?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "웹케시 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "웹케시 그룹",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "웹케시 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "웹케시 대표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "웹케시 기업정보",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "웹케시 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "웹케시(주)",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "웹케시 쿠콘",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "웹케시 주가",
+          "reason": "전망 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "금융 AI 에이전트",
+          "reason": "출시 시점",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "웹케시 실적",
+          "reason": "매출 영향",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "MAI 이미지 2.7",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "MS가 'MAI 이미지 2.7'을 공개해 아레나 3위에 올랐다",
+      "headlines": [
+        {
+          "title": "MS, 정교함 강화한 'MAI 이미지 2.7' 공개...AA 2위·아레나 3위 등극",
+          "press": "aitimes.com",
+          "publishedAt": "2026-10-28T07:36:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=216755"
+        },
+        {
+          "title": "메타 유증 흥행·브로드컴 목표가 상향…빅테크 훈풍 속 차별화 장세 [美...",
+          "press": "wowtv.co.kr",
+          "publishedAt": "2026-10-27T22:59:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/215/0001270730?sid=101"
+        },
+        {
+          "title": "izna(이즈나), 데뷔부터 ‘완성형 걸그룹’ 면모 입증..완벽 칼군무+강렬...",
+          "press": "breaknews.com",
+          "publishedAt": "2024-12-06T08:46:00.000Z",
+          "link": "http://www.breaknews.com/1076586"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "챗GPT",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "오픈AI가 작업 비용을 절반 낮춘 'GPT-6.1 테라'를 공개했다",
+      "headlines": [
+        {
+          "title": "\"챗GPT부터 국산 AI까지 골라 쓴다\"…KT 'AI 플랫폼' 승부수",
+          "press": "hankyung.com",
+          "publishedAt": "2026-10-27T07:07:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005347049?sid=105"
+        },
+        {
+          "title": "\"엔비디아칩 너무 비싸\" 오픈AI도 구글 TPU 찾는다",
+          "press": "view.asiae.co.kr",
+          "publishedAt": "2026-10-28T05:27:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/277/0005834721?sid=104"
+        },
+        {
+          "title": "\"오답률 줄이고 코딩 능력 2배 껑충\"…오픈AI, 가성비 AI 'GPT-6.1 테라' 출...",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-27T00:56:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014280288?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "챗 GPT 무료",
+          "searchVolume": 52600,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "챗 GPT 유료",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "챗gpt 아스트라",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "챗gpt 프롬프트",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "챗gpt 사주",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "챗gpt 플러스",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "챗gpt 요금제",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "챗gpt 제미나이 비교",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "챗GPT 요금제",
+          "reason": "변경 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "브라질",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": "대선에서 패배한 보우소나루가 여권 제출을 거부하고 미국행에 나섰다",
+      "headlines": [
+        {
+          "title": "브라질 대선 패배 이틀 만에…여권 제출 거부하고 미국행",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-10-28T03:22:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001398752?sid=104"
+        },
+        {
+          "title": "\"브라질 대선 패배 보우소나루, 여권 제출 명령 어기고 미국행\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-27T20:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016404705?sid=104"
+        },
+        {
+          "title": "시진핑, 4선 성공 룰라에 축전…\"중·브라질 관계 매우 중시\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-28T01:55:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014283735?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "브라질 대선",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "브라질 환율",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "브라질 계란",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "브라질 수도",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "브라질 시간",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "브라질 국채",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "브라질 대통령",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "브라질 문화",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "브라질 대선 결과",
+          "reason": "득표 상세",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "브라질 헤알",
+          "reason": "환율 변동",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
       "rowCount": 0
     },
     {
@@ -5178,38 +6515,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 1
-    },
-    {
-      "issue": "김재원 조이현 로맨스",
-      "issueType": "entertainment",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "영화 '최종면접'서 김재원·조이현이 로맨스 케미로 호평.",
-      "headlines": [
-        {
-          "title": "'최종면접' 조이현·김재원 \"우리 로맨스 호흡? 100점 만점 200점\"",
-          "press": "sportschosun.com",
-          "publishedAt": "2026-10-28T07:23:00.000Z",
-          "link": "https://m.entertain.naver.com/article/076/0004460478"
-        },
-        {
-          "title": "'최종면접' 김재원, 조이현과 로맨스 케미 \"200점..또 만나고파\"",
-          "press": "starnewskorea.com",
-          "publishedAt": "2026-10-28T07:23:00.000Z",
-          "link": "https://m.entertain.naver.com/article/108/0003482424"
-        },
-        {
-          "title": "'최종면접' 김재원♥조이현, 미스터리 영화 속 로맨스 케미…\"100점 만점...",
-          "press": "tenasia.co.kr",
-          "publishedAt": "2026-10-28T07:33:00.000Z",
-          "link": "https://m.entertain.naver.com/article/312/0000781971"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
+      "rowCount": 1,
+      "carried": true
     },
     {
       "issue": "신유빈",
@@ -5310,608 +6617,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
-    },
-    {
-      "issue": "미국 이란 공격",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "미국이 중간선거 후 이란 고강도 공격 검토, 걸프국에 대비 지시.",
-      "headlines": [
-        {
-          "title": "\"美, 중간선거 후 이란 대규모 공습 검토…걸프국에 대비 지시\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-28T02:47:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014284049?sid=104"
-        },
-        {
-          "title": "미, 걸프국에 \"중간선거 후 이란 단기·고강도 공격 대비하라\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-28T02:36:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016405813?sid=104"
-        },
-        {
-          "title": "트럼프 \"다시 해도 이란 공격…내가 한 가장 위대한 일 중 하나\"",
-          "press": "news.tvchosun.com",
-          "publishedAt": "2026-10-27T22:37:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/448/0000647374?sid=104"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "할인",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "이마트 쓱데이·쿠팡 멤버스데이 등 대규모 할인 행사 시작.",
-      "headlines": [
-        {
-          "title": "한우 반값-가전 초특가…이마트 30일부터 할인 행사",
-          "press": "donga.com",
-          "publishedAt": "2026-10-28T06:08:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/020/0003758325?sid=101"
-        },
-        {
-          "title": "쿠팡, 최대 할인전 '와우 멤버스데이' 내달 2일 시작",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-28T05:42:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016406425?sid=101"
-        },
-        {
-          "title": "이마트, 대규모 할인행사 '쓱데이' 개최",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-28T03:46:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014284293?sid=101"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "MS",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "MS가 AI 투자 확대 속 4개국 직원 6만명에 희망퇴직 제안.",
-      "headlines": [
-        {
-          "title": "MS, 최대 6만명 희망퇴직 추진…AI 투자 확대 속 인력 재편",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-27T00:40:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014280229?sid=104"
-        },
-        {
-          "title": "MS, 직원 6만명에 자발적 퇴사 제안…AI 투자 확대 속 인력 재편",
-          "press": "biz.chosun.com",
-          "publishedAt": "2026-10-27T07:10:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/366/0001200652?sid=105"
-        },
-        {
-          "title": "“퇴직금 챙겨줄 때 나가실 분?”…직원 무려 6만명에 ‘희망퇴직’ 권...",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-10-27T05:49:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005754635?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "ms 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 오피스",
-          "searchVolume": 22490,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "MS 오피스 365",
-          "searchVolume": 10680,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 오피스 영구",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 오피스 무료",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "MS 등록방법",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 정품인증방법",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 로그아웃 방법",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "MS 주가",
-          "reason": "구조조정 후 주가",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "MS 한국감원",
-          "reason": "국내 영향 여부",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "AI스페라",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "dead",
-      "isHot": false,
-      "why": "AI스페라가 인터폴 '게이트웨이'에 합류해 국제 사이버범죄 수사 지원.",
-      "headlines": [
-        {
-          "title": "AI스페라, 인터폴에 사이버범죄 수사 지원 정보 제공",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-28T01:02:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014283458?sid=105"
-        },
-        {
-          "title": "AI스페라, 인터폴 '게이트웨이' 참여…국제 사이버범죄 수사 지원",
-          "press": "etnews.com",
-          "publishedAt": "2026-10-28T00:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/030/0003479446?sid=105"
-        },
-        {
-          "title": "AI스페라, 인터폴 사이버범죄 대응 협력망 합류…’크리미널 IP’ 위협정...",
-          "press": "venturesquare.net",
-          "publishedAt": "2026-10-28T02:55:00.000Z",
-          "link": "https://www.venturesquare.net/1123724/"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "ai스페라 대표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ai스페라 매출",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ai스페라 투자",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ai스페라 강병탁",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "AI스페라 주가",
-          "reason": "협약 후 주가",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "AI스페라 해외진출",
-          "reason": "글로벌 확장",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "사이버범죄 수사",
-          "reason": "협력 효과",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "웹케시",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "웹케시가 K-엑사원 기반 금융 AI 에이전트 개발 독파모에 참여.",
-      "headlines": [
-        {
-          "title": "웹케시, K-엑사원 기반 금융 AI 에이전트 개발⋯독파모 참여",
-          "press": "inews24.com",
-          "publishedAt": "2026-10-28T08:20:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/031/0001070211?sid=105"
-        },
-        {
-          "title": "오페리아와 엑사원 연결···웹케시 독파모 프로젝트 참여",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-10-28T01:23:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006397857?sid=105"
-        },
-        {
-          "title": "웹케시 ‘독파모’ 참여…금융 특화 AI에이전트 개발",
-          "press": "biz.heraldcorp.com",
-          "publishedAt": "2026-10-28T04:12:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/016/0002715526?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "웹케시 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "웹케시 그룹",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "웹케시 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "웹케시 대표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "웹케시 기업정보",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "웹케시 연봉",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "웹케시(주)",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "웹케시 쿠콘",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "웹케시 주가",
-          "reason": "참여 후 주가",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "웹케시 상용화",
-          "reason": "서비스 출시 시점",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "MAI 이미지 2.7",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "MS가 정교함 강화한 'MAI 이미지 2.7' 공개, 아레나 3위 등극.",
-      "headlines": [
-        {
-          "title": "MS, 정교함 강화한 'MAI 이미지 2.7' 공개...AA 2위·아레나 3위 등극",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-28T07:36:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216755"
-        },
-        {
-          "title": "메타 유증 흥행·브로드컴 목표가 상향…빅테크 훈풍 속 차별화 장세 [美...",
-          "press": "wowtv.co.kr",
-          "publishedAt": "2026-10-27T22:59:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/215/0001270730?sid=101"
-        },
-        {
-          "title": "izna(이즈나), 데뷔부터 ‘완성형 걸그룹’ 면모 입증..완벽 칼군무+강렬...",
-          "press": "breaknews.com",
-          "publishedAt": "2024-12-06T08:46:00.000Z",
-          "link": "http://www.breaknews.com/1076586"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "챗GPT",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "오픈AI가 비용 절반 낮춘 'GPT-6.1 테라' 공개, 코딩 성능 2배 향상.",
-      "headlines": [
-        {
-          "title": "\"챗GPT부터 국산 AI까지 골라 쓴다\"…KT 'AI 플랫폼' 승부수",
-          "press": "hankyung.com",
-          "publishedAt": "2026-10-27T07:07:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005347049?sid=105"
-        },
-        {
-          "title": "\"오답률 줄이고 코딩 능력 2배 껑충\"…오픈AI, 가성비 AI 'GPT-6.1 테라' 출...",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-27T00:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014280288?sid=105"
-        },
-        {
-          "title": "\"엔비디아칩 너무 비싸\" 오픈AI도 구글 TPU 찾는다",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-10-28T05:27:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005834721?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "챗 GPT 무료",
-          "searchVolume": 52600,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "챗 GPT 유료",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "챗gpt 아스트라",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "챗gpt 프롬프트",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "챗gpt 사주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "챗gpt 플러스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "챗gpt 요금제",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "챗gpt 제미나이 비교",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "브라질",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "대선 패배한 보우소나루가 여권 제출 거부하고 미국행, 룰라 4선.",
-      "headlines": [
-        {
-          "title": "브라질 대선 패배 이틀 만에…여권 제출 거부하고 미국행",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-10-28T03:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001398752?sid=104"
-        },
-        {
-          "title": "시진핑, 4선 성공 룰라에 축전…\"중·브라질 관계 매우 중시\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-28T01:55:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014283735?sid=104"
-        },
-        {
-          "title": "\"브라질 대선 패배 보우소나루, 여권 제출 명령 어기고 미국행\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-27T20:16:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016404705?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "브라질 대선",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "브라질 환율",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "브라질 계란",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "브라질 수도",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "브라질 시간",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "브라질 국채",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "브라질 대통령",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "브라질 문화",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "브라질 헤알환율",
-          "reason": "패닉셀 후 환율",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "브라질 국채",
-          "reason": "금융시장 영향",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "브라질 미국관계",
-          "reason": "도피 후 외교",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "메타",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "메타가 자금조달 129조원으로 확대, 증자공모 5배 초과청약 흥행.",
-      "headlines": [
-        {
-          "title": "메타, 자금조달 129조원으로 확대…증자공모 5배 초과청약 흥행",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-27T18:51:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016404692?sid=104"
-        },
-        {
-          "title": "AMD, 메타 AI 에이전트 '뮤즈' 지원…10억달러 투자도",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-10-28T05:42:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005432941?sid=105"
-        },
-        {
-          "title": "메타, 자금조달 129조원으로 확대…증자공모 5배 청약 몰려",
-          "press": "hankyung.com",
-          "publishedAt": "2026-10-27T21:40:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005347291?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "메타 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 ai 글라스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 실적발표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 뮤즈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 AI",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 인스타",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 안경",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "메타 주가",
-          "reason": "증자 후 주가",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "메타 데이터센터",
-          "reason": "자금 사용처",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "메타 뮤즈",
-          "reason": "AI 에이전트 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "플래티어",
@@ -5998,7 +6705,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 1
+      "rowCount": 1,
+      "carried": true
     },
     {
       "issue": "난베이지",
