@@ -15,9 +15,12 @@ test('unverified generated titles cannot be displayed as measured recommendation
   assert.doesNotMatch(read('components/leword/CoupangBoard.tsx'), /forgeShoppingTitle/);
 });
 
-test('Coupang discovery keeps a separate default and does not masquerade as search-qualified writing', () => {
+test('Coupang discovery stays a separate view and does not masquerade as search-qualified writing', () => {
   const source = read('components/leword/CoupangBoard.tsx');
-  assert.match(source, /useState<'discovery' \| 'search'>\('discovery'\)/);
+  // 첫 화면은 황금비 순 '검색 유입 공략'(2026-10-29 사장님 "또 반대로했네 문서수가 낮고 검색량이 높은 순이라니까") —
+  // 발견 보기가 첫 화면이면 판매 목록 위치순이라 황금키워드 탭이 거꾸로 보였다. 발견 보기는 버튼 하나로 그대로 남는다.
+  assert.match(source, /useState<'discovery' \| 'search'>\('search'\)/);
+  assert.match(source, /onClick=\{\(\) => setRoute\('discovery'\)\}/);
   assert.match(source, /useState<'all' \| 'candidate'>\('all'\)/);
   assert.match(source, /!discoveryMode && <AffiliateTitles/);
   assert.match(source, /discoveryMode && <CoupangDiscoveryBrief/);
