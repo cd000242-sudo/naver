@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-28T19:08:48.794Z",
+  "generatedAt": "2026-10-28T19:21:12.441Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -5235,72 +5235,6 @@
           "views": 215,
           "answers": 3,
           "askedAt": "2026.10.08"
-        }
-      ]
-    },
-    {
-      "id": "43b7013a93637e4e",
-      "urls": [
-        "https://niscity.com/child-discount-rate-comparison/",
-        "https://limetree00.tistory.com/304",
-        "https://xzoos2001.tistory.com/entry/%EC%9E%90%EB%8F%99%EC%B0%A8%EB%B3%B4%ED%97%98-%EA%B0%B1%EC%8B%A0-%EC%A0%84-%ED%99%95%EC%9D%B8%EC%82%AC%ED%95%AD-7%EA%B0%80%EC%A7%80%EF%BD%9C2026%EB%85%84-%EB%B3%B4%ED%97%98%EB%A3%8C-%EC%A0%88%EC%95%BD%EA%B3%BC-%ED%95%A0%EC%9D%B8%ED%8A%B9%EC%95%BD-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://niscity.com/direct-insurance-discount-rate-comparison/"
-      ],
-      "guide": {
-        "direction": "검색자는 '삼성화재 다이렉트 자녀할인특약이 보험사마다 얼마나 다른지'와 '가족한정·자녀한정 운전자 범위 특약과 자녀할인특약을 같이 써도 되는지'를 가장 막혀한다. 고수 제목들은 1세대 실손·갱신 체크리스트에 머물러 보험사별 자녀할인특약 할인율을 나란히 비교해주지 못한다. 보험사별 할인율표, 가입경력인정제도 할인율, 운전자 범위 특약과의 중복 적용 여부를 정리해 보험료 비교까지 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "삼성화재 등 보험사별 자녀할인특약 명칭·할인율 비교표 (확인 필요: 각사 다이렉트 페이지)",
-          "가입경력인정제도 할인율(2년~3년 미만 소형차 최대 30%)",
-          "가족한정·부부한정·자녀한정 운전자 범위 특약과 자녀할인특약의 중복 적용 가능 여부",
-          "T맵 안전운전 할인특약 등 자녀할인특약과 함께 쓸 수 있는 추가 할인 항목",
-          "34개 보험사 다이렉트 보험료 비교 서비스로 할인율 비교하는 방법"
-        ],
-        "mustAvoid": [
-          "특정 보험사 상품을 가장 유리한 것처럼 단정해 광고성으로 쓰는 것",
-          "11월 시행 1세대 실손보험 할인특약과 자동차보험 자녀할인특약을 같은 상품으로 혼동하는 것",
-          "보험사별 할인율을 고정 수치처럼 써서 가입 시점에 따라 달라질 수 있음을 안내하지 않는 것"
-        ],
-        "checkBefore": [
-          "보험사별 자녀할인특약 정확한 할인율·적용 연령 기준 (각 보험사 다이렉트 공식 페이지)",
-          "가입경력인정제도 할인율 최신 기준 (보험개발원·금융감독원 공지)",
-          "1세대 실손 할인특약과 자동차보험 자녀할인특약이 별개 상품인지 (보험사 공지)"
-        ],
-        "solves": [
-          "보험사마다 자녀할인특약 할인율이 달라 뭘 골라야 할지 모름 → 보험사별 할인율 비교표로 정리",
-          "가족한정·자녀한정 특약과 자녀할인특약을 같이 쓸 수 있는지 궁금함 → 중복 적용 가능 여부 명확히 안내",
-          "가입경력인정제도 할인율이 얼마인지 몰라 손해 봄 → 차종·경력기간별 할인율을 구체적으로 제시"
-        ],
-        "actionTitles": [
-          "자녀할인특약 보험료 할인율 비교로 가입 전 보험사 고르는 법",
-          "자동차보험 할인특약 신청 전 운전자 범위부터 확인하는 법",
-          "다이렉트 보험료 비교로 자녀할인특약 적용 보험사 찾는 법"
-        ]
-      },
-      "at": "2026-10-26T21:14:00.940Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "삼성화재 다이렉트 자동차보험(자녀사랑할인....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=401030202&docId=480278597&answerNo=1&qb=7J6Q64WA7ZWg7J247Yq57JW9IOuztO2XmOujjCDtlaDsnbjsnKgg67O07ZeY7IKs67OE",
-          "views": 2920,
-          "answers": 7,
-          "askedAt": "2025.01.11"
-        },
-        {
-          "title": "자동차세금 보험료",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=811&docId=495386450&answerNo=4&qb=7J6Q64WA7ZWg7J247Yq57JW9IOuztO2XmOujjCDtlaDsnbjsnKgg67O07ZeY7IKs67OE",
-          "views": 182,
-          "answers": 4,
-          "askedAt": "2026.10.02"
-        },
-        {
-          "title": "자동차 보험 가입 및 할인",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=401030202&docId=494174591&answerNo=3&qb=7J6Q64WA7ZWg7J247Yq57JW9IOuztO2XmOujjCDtlaDsnbjsnKgg67O07ZeY7IKs67OE",
-          "views": 179,
-          "answers": 10,
-          "askedAt": "2026.07.05"
         }
       ]
     },
@@ -14523,71 +14457,6 @@
       ]
     },
     {
-      "id": "75c722b92b61e29e",
-      "urls": [
-        "https://niscity.com/auto-insurance-mileage-provider-comparison/",
-        "https://niscity.com/auto-insurance-mileage-registration/",
-        "https://smartnano.tistory.com/entry/%EC%9E%90%EB%8F%99%EC%B0%A8-%EB%B3%B4%ED%97%98%EB%A3%8C-30-%EC%9D%B4%EC%83%81-%EC%95%84%EB%81%BC%EB%8A%94-%ED%8A%B9%EC%95%BD-%EC%A1%B0%ED%95%A9-%EB%A7%88%EC%9D%BC%EB%A6%AC%EC%A7%80%C2%B7%EC%95%88%EC%A0%84%EC%9A%B4%EC%A0%84-%ED%95%A0%EC%9D%B8-%EC%A0%84%EB%9E%B5"
-      ],
-      "guide": {
-        "direction": "① 검색자는 '보험사별 마일리지 특약 비교'를 찾지만 1톤 화물차 같은 차종별 할인 가능 여부와 특정사 할인율을 몰라 막힌다. ② 고수 글은 혜택 비교·가입 절차·할인 조합까지 다루지만 차종별(자가용/화물차) 적용 여부와 주행거리 사진 등록 같은 실제 절차는 구체적으로 짚지 않는다. ③ 이 글은 보험사별 할인율 비교표에 차종별 가능 여부와 등록 절차를 더해 바로 가입까지 이어지게 한다.",
-        "searchTargets": [
-          "보험사별 마일리지 특약 비교"
-        ],
-        "mustInclude": [
-          "보험사별 마일리지 특약 할인율 비교표(확인 필요: 각사 공식 상품설명서)",
-          "캐롯 등 특정사 마일리지 특약 할인율(확인 필요: 공식 다이렉트 페이지)",
-          "1톤 화물차 등 차종별 마일리지 할인 가능 여부 정리",
-          "주행거리 사진 등록 절차 단계별 정리",
-          "34개 보험사 비교사이트 활용법(확인 필요: 보험다모아 등)"
-        ],
-        "mustAvoid": [
-          "한두 보험사 수치만으로 전체 할인율을 일반화하는 서술",
-          "화물차·영업용 차량 조건을 일반 자가용 조건과 혼동하는 것"
-        ],
-        "checkBefore": [
-          "보험사별 마일리지 특약 할인율은 각사 공식 상품설명서로 확인",
-          "비교사이트(보험다모아 등) 최신 수치로 재확인"
-        ],
-        "solves": [
-          "어떤 보험사 마일리지 할인율이 높은지 모르겠다 → 보험사별 비교표 제공",
-          "화물차도 마일리지 할인 되는지 궁금하다 → 차종별 가능 여부 정리",
-          "주행거리 사진 등록 방법을 모른다 → 단계별 절차 정리"
-        ],
-        "actionTitles": [
-          "보험사별 마일리지 특약 할인율 비교표로 확인하기",
-          "마일리지 특약 주행거리 사진 등록 절차 확인하는 법",
-          "1톤 화물차도 마일리지 할인되는 보험사 확인하는 법"
-        ]
-      },
-      "at": "2026-10-26T21:14:00.940Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "1톤화물차 자동차보험 마일리지 할인 되는 보....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=401030202&docId=482548299&answerNo=3&qb=67O07ZeY7IKs67OEIOuniOydvOumrOyngCDtirnslb0g67aE7ISd",
-          "views": 8412,
-          "answers": 10,
-          "askedAt": "2025.03.01"
-        },
-        {
-          "title": "캐롯 자동차보험 마일리지특약 할인율?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=401030202&docId=471400720&answerNo=1&qb=67O07ZeY7IKs67OEIOuniOydvOumrOyngCDtirnslb0g67aE7ISd",
-          "views": 737,
-          "answers": 1,
-          "askedAt": "2024.06.21"
-        },
-        {
-          "title": "차량 주행 중 접촉사고 보험 진행 문의",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60201&docId=495477077&answerNo=4&qb=67O07ZeY7IKs67OEIOuniOydvOumrOyngCDtirnslb0g67aE7ISd",
-          "views": 205,
-          "answers": 4,
-          "askedAt": "2026.10.10"
-        }
-      ]
-    },
-    {
       "id": "b8036fc862255354",
       "urls": [
         "https://stephan-review.tistory.com/4779",
@@ -15163,66 +15032,6 @@
           "views": 583,
           "answers": 1,
           "askedAt": "2020.09.23"
-        }
-      ]
-    },
-    {
-      "id": "9ab2cb9336da97c0",
-      "urls": [
-        "https://niscity.com/auto-insurance-mileage-calculation/",
-        "https://seolj.tistory.com/268"
-      ],
-      "guide": {
-        "direction": "검색자는 환급금이 현금인지 갱신 보험료 차감형 할인인지부터 헷갈려하고, 5부제 특약과 중복 적용되는지도 궁금해한다. 고수 제목들은 '계산법'만 다뤄 이 환급 방식과 중복할인 여부, Tmap·카카오내비 안전운전 점수 결합 할인은 짚지 않았다. 주행거리별 할인율표와 환급 방식(차감형), 중복할인 가능 여부를 한 표로 정리하면 독자가 끝까지 읽고 떠나지 않는다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "환급금은 현금이 아니라 갱신 보험료에서 차감하는 할인 방식임을 명시",
-          "5부제 특약과 마일리지 특약 중복할인 가능 여부 정리",
-          "Tmap·카카오내비 안전운전 점수 결합 시 5~16% 추가 할인 조건(확인 필요: 보험사 공식 약관)",
-          "보험사별(현대해상 등) 주행거리 구간별 할인율표(확인 필요: 보험사 공식 홈페이지)"
-        ],
-        "mustAvoid": [
-          "보험사 간 할인율이 동일하다는 식으로 일반화(보험사·연도별로 다름)",
-          "자동차세·개별소비세 등 다른 세금 혜택과 혼동"
-        ],
-        "checkBefore": [
-          "가입 보험사 공식 홈페이지/약관에서 실제 구간별 할인율과 환급 방식 확인",
-          "Tmap·카카오내비 안전운전 점수 할인 결합 정책 공식 공지 확인"
-        ],
-        "solves": [
-          "환급금 현금으로 받나요? → 갱신 보험료 차감 방식임을 설명",
-          "5부제와 마일리지 중복할인 되나요? → 중복 적용 가능 여부 정리",
-          "안전운전 점수로 추가할인 받는 법은? → Tmap·카카오내비 결합 조건 정리"
-        ],
-        "actionTitles": [
-          "마일리지 특약 환급금, 갱신 보험료 차감으로 받는 법",
-          "5부제·마일리지 특약 중복할인 가능 여부 확인하는 법"
-        ]
-      },
-      "at": "2026-10-26T21:14:00.940Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "현대해상 자동차보험 거리별 환급금",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=401030202&docId=489657938&answerNo=2&qb=7KO87ZaJ6rGw66as67OEIOuniOydvOumrOyngCDtlaDsnbjsnKgg7ZmY6riJ6riIIOqzhOyCsOuylQ==",
-          "views": 1066,
-          "answers": 4,
-          "askedAt": "2025.10.20"
-        },
-        {
-          "title": "20대자동차보험료 저렴하게 가입할수 있는 상....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010302&docId=438343526&answerNo=3&qb=7KO87ZaJ6rGw66as67OEIOuniOydvOumrOyngCDtlaDsnbjsnKgg7ZmY6riJ6riIIOqzhOyCsOuylQ==",
-          "views": 610,
-          "answers": 4,
-          "askedAt": "2026.06.18"
-        },
-        {
-          "title": "5부제 특약과 마일리지 특약, 중복 할인 받을 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40308&docId=493179120&answerNo=5&qb=7KO87ZaJ6rGw66as67OEIOuniOydvOumrOyngCDtlaDsnbjsnKgg7ZmY6riJ6riIIOqzhOyCsOuylQ==",
-          "views": 190,
-          "answers": 6,
-          "askedAt": "2026.05.21"
         }
       ]
     },
@@ -67060,6 +66869,137 @@
           "views": 994,
           "answers": 2,
           "askedAt": "2022.05.04"
+        }
+      ]
+    },
+    {
+      "id": "1a6c3962567b437c",
+      "urls": [
+        "https://by.infotoktok.com/7619"
+      ],
+      "guide": {
+        "direction": "국내여행자보험 검색자는 해외여행자보험과 혼동해 감기약값·비행기 지연 보상 여부를 헷갈려하고, 렌트카 동승자가 운전자 과실로 사고 났을 때 자신의 국내여행자보험으로 보상받을 수 있는지를 구체적으로 묻는다. 고수 글은 가입 방법만 다루고 '지연 몇 시간부터 보상되는지', '동승자 과실 사고 보상 구조' 같은 조건은 비워둔다. 보장 항목별 보상 기준과 비교사이트(토글·뱅카우·토파즈) 활용법을 정리해 가입 전 조건을 한 번에 확인하게 한다.",
+        "searchTargets": [
+          "삼성화재 다이렉트 여행자보험",
+          "삼성화재 다이렉트 사고접수",
+          "삼성화재 다이렉트 고객센터",
+          "삼성화재 다이렉트 전화번호"
+        ],
+        "mustInclude": [
+          "해외여행 중 의사처방 없이 약국에서 산 약값 보상 여부와 국내실비 특약 조건 비교",
+          "비행기 4시간 이상 결항·지연 보상 기준(지연 2시간은 보상 안 되는 사례 포함)",
+          "렌트카 동승자가 운전자 과실로 사고 났을 때 국내여행자보험 보상 가능 여부",
+          "다이렉트 비교사이트(토글·뱅카우·토파즈)로 가입 전 특약 조건 비교하는 방법"
+        ],
+        "mustAvoid": [
+          "해외여행자보험 사례(감기약, 비행기 결항)를 국내여행자보험 글에 그대로 적용해 혼동시키지 말 것",
+          "렌트카 동승자 과실 사고의 보상 범위를 확정적으로 단정하지 말고 약관 확인을 전제로 안내할 것",
+          "지연 2시간 보상 불가 사례를 모든 상품·특약에 일반화하지 말 것"
+        ],
+        "checkBefore": [
+          "삼성화재 다이렉트 공식 홈페이지·고객센터에서 국내여행자보험 특약별 보상 기준 확인",
+          "토글·뱅카우·토파즈 등 비교사이트에서 최신 특약 조건과 가격 비교"
+        ],
+        "solves": [
+          "해외여행 중 의사처방 없이 산 약값, 보상되는지 모르겠다 → 국내실비 특약 조건 정리",
+          "렌트카 동승자가 운전자 과실로 사고 났을 때 보상되는지 궁금하다 → 보상 구조 설명",
+          "비행기 지연 2시간은 보상 안 된다는데 몇 시간부터 되는지 모르겠다 → 지연 보상 기준 정리"
+        ],
+        "actionTitles": [
+          "삼성화재 다이렉트 국내여행자보험 가입 전 보장 조건 확인",
+          "삼성화재 다이렉트 사고접수 방법과 서류 준비 총정리",
+          "삼성화재 다이렉트 고객센터 전화번호 사고접수 전 바로 확인하는 법"
+        ]
+      },
+      "at": "2026-10-28T19:19:46.445Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "삼성화재 다이렉트 여행자 보험 서류 질문",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=401030201&docId=461793651&answerNo=2&qb=7IK87ISx7ZmU7J6sIOuLpOydtOugie2KuCDqta3rgrQg7Jes7ZaJ7J6Q67O07ZeY",
+          "views": 3582,
+          "answers": 5,
+          "askedAt": "2024.01.08"
+        },
+        {
+          "title": "삼성화재 다이렉트 여행자보험",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010302&docId=309438408&answerNo=2&qb=7IK87ISx7ZmU7J6sIOuLpOydtOugie2KuCDqta3rgrQg7Jes7ZaJ7J6Q67O07ZeY",
+          "views": 2292,
+          "answers": 2,
+          "askedAt": "2018.09.11"
+        },
+        {
+          "title": "제주도 국내 여행보험 질문드립니다!!",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=90113&docId=485739536&answerNo=1&qb=7IK87ISx7ZmU7J6sIOuLpOydtOugie2KuCDqta3rgrQg7Jes7ZaJ7J6Q67O07ZeY",
+          "views": 1550,
+          "answers": 5,
+          "askedAt": "2025.06.01"
+        }
+      ]
+    },
+    {
+      "id": "efd0d660533442fd",
+      "urls": [
+        "https://zsewqzsewq.tistory.com/366",
+        "https://zsewqzsewq.tistory.com/353"
+      ],
+      "guide": {
+        "direction": "IE·OE 에러 검색자는 중고 세탁기 설치 후 급수가 안 되거나 탈수 중 물이 안 빠질 때 '어느 호스를 열어야 하는지', '거품 안 빠짐이 IE와 관련 있는지'를 구체적으로 묻는다. 고수 글은 에러코드 의미만 나열하고 삼성 4C 에러와 섞어 다뤄 LG 모델별 호스 위치나 자가 점검 순서는 비워둔다. 에러코드별 자가 점검 순서와 잔수제거 호스·마개 위치를 정리해 AS 부르기 전 스스로 원인을 좁히게 한다.",
+        "searchTargets": [
+          "lg세탁기 에러코드 ie",
+          "lg세탁기 에러코드 oe",
+          "lg세탁기 에러코드",
+          "lg세탁기 에러코드 0E"
+        ],
+        "mustInclude": [
+          "IE(급수) 에러: 중고 세탁기 설치 후 발생 사례, 급수호스·수압 자가 점검 순서",
+          "OE 에러: 헹굼→탈수 전환 시 발생, 하단 좌측 잔수제거 호스로 물 빼는 방법",
+          "탈수 중 물 안 빠질 때 왼쪽 호스 vs 오른쪽 마개 중 어디를 열어야 하는지 구분",
+          "세탁 후 거품이 안 빠지는 증상과 IE 에러의 연관성 여부 정리"
+        ],
+        "mustAvoid": [
+          "삼성 세탁기 4C 에러와 LG IE/OE 에러를 같은 글처럼 섞어 다루지 말 것",
+          "호스 분해·부품 교체 같은 과도한 자가수리를 권장해 감전·누수 위험을 유발하지 말 것",
+          "모델마다 다른 호스 위치를 하나의 사례로 일반화하지 말 것"
+        ],
+        "checkBefore": [
+          "LG전자 공식 서비스센터 홈페이지에서 에러코드별 원인 안내 확인",
+          "사용 중인 세탁기 모델명으로 사용설명서상 잔수제거 호스 위치 확인"
+        ],
+        "solves": [
+          "중고로 산 세탁기에서 IE 에러가 뜨는데 원인을 모르겠다 → 급수 관련 자가 점검 순서 정리",
+          "탈수 중 OE 뜨고 물이 안 빠지는데 어느 호스를 열어야 하는지 모르겠다 → 호스·마개 위치 설명",
+          "세탁 후 거품이 안 빠지는 게 IE 에러와 관련 있는지 궁금하다 → 연관성 여부 정리"
+        ],
+        "actionTitles": [
+          "LG세탁기 에러코드 IE 뜰 때 급수 원인 확인하는 법"
+        ]
+      },
+      "at": "2026-10-28T19:19:46.445Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "LG 드럼세탁기 IE 급수 에러 원인 문의",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=8080103&docId=491226178&answerNo=5&qb=bGfshLjtg4HquLAg7JeQ65+s7L2U65OcIG9lIHVlIOy0iOuztA==",
+          "views": 3658,
+          "answers": 5,
+          "askedAt": "2026.01.23"
+        },
+        {
+          "title": "Lg드럼세탁기 IE 에러 어떡하나여?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=50104&docId=492541398&answerNo=1&qb=bGfshLjtg4HquLAg7JeQ65+s7L2U65OcIG9lIHVlIOy0iOuztA==",
+          "views": 3306,
+          "answers": 2,
+          "askedAt": "2026.03.19"
+        },
+        {
+          "title": "lg 트롬세탁기 ie 코드 해결법 알 수 있을까요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=50104&docId=485626149&answerNo=1&qb=bGfshLjtg4HquLAg7JeQ65+s7L2U65OcIG9lIHVlIOy0iOuztA==",
+          "views": 1525,
+          "answers": 2,
+          "askedAt": "2025.05.28"
         }
       ]
     }
