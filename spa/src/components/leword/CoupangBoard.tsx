@@ -9,7 +9,8 @@ import { assessCoupangDiscovery, compareCoupangDiscovery, coupangProductUrl } fr
 import CoupangDiscoveryBrief from './CoupangDiscoveryBrief';
 import { affiliateCategory, compareGolden, goldenOf, summarizeCategories } from '../../lib/affiliateGolden.mjs';
 import { enrichKey, loadKeywordEnrich, type KeywordEnrich } from '../../lib/keywordEnrich.mjs';
-import { AffiliateGoldenAids, CategoryChips, GoldenRatioBadge, NonGoldenList } from './AffiliateGoldenParts';
+import { AffiliateGoldenAids, CategoryChips, CategoryGoldenKeywords, GoldenRatioBadge, NonGoldenList } from './AffiliateGoldenParts';
+import { loadCategoryGolden, mergeCategorySummary, type CategoryGolden } from '../../lib/affiliateCategoryGolden.mjs';
 
 /**
  * 쿠팡 상품 보드 — 상품에서 출발한다.
@@ -26,6 +27,9 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
     // 첫 화면은 황금비 순 '검색 유입 공략'(2026-10-29 사장님 "문서수가 낮고 검색량이 높은 순") — 발견 보기는 판매 목록 위치순이라 반대로 보였다.
     const [route, setRoute] = useState<'discovery' | 'search'>('search');
     const [category, setCategory] = useState('전체');
+    // 카테고리 황금 검색어(앱 affiliate-golden-keywords.cjs, 매일) — 상품명 말보다 넓게 잰 연관어 중 문서 < 검색인 것.
+    const [catGolden, setCatGolden] = useState<CategoryGolden>(() => ({ builtAt: '', byCategory: new Map() }));
+    useEffect(() => { let alive = true; void loadCategoryGolden().then((data) => { if (alive) setCatGolden(data); }); return () => { alive = false; }; }, []);
     const [enrich, setEnrich] = useState<Map<string, KeywordEnrich>>(() => new Map());
     const [discoveryView, setDiscoveryView] = useState<'all' | 'candidate'>('all');
     const discoveryMode = route === 'discovery';
@@ -109,7 +113,7 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
         // 검색 유입 공략 = 황금(문서수 < 검색량, 검색 100+)이면서 추천 제외가 아닌 것만(2026-10-29 "문서비율이 높구요 반대가 되어야").
         : entry.golden.golden && entry.recommendation.status !== 'excluded');
     const nonGolden = discoveryMode ? [] : all.filter(entry => !inView.includes(entry)).sort((a, b) => compareGolden(a.golden, b.golden));
-    const categorySummary = summarizeCategories(inView);
+    const categorySummary = discoveryMode ? summarizeCategories(inView) : mergeCategorySummary(summarizeCategories(inView), catGolden.byCategory);
     const activeCategory = category === '전체' || categorySummary.some((s) => s.category === category) ? category : '전체';
     // 검색 유입 공략은 문서÷검색 낮은 순. 발견 보기는 원래 순서(실용 단서 → 목록 위치)를 지킨다.
     const filtered = inView.filter(entry => activeCategory === '전체' || entry.category === activeCategory);
@@ -280,6 +284,7 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
             </>}
             <CategoryChips summary={categorySummary} value={activeCategory} total={inView.length} onChange={setCategory} />
             {/* 그룹 헤더는 뺐다(사장님: 정면 설명 빼고 다 없애). 판정은 카드 배지가 이미 말한다. */}
+            {!discoveryMode && <CategoryGoldenKeywords category={activeCategory} byCategory={catGolden.byCategory} builtAt={catGolden.builtAt} onAnalyze={onAnalyze} productNames={all.map((e) => e.row.name)} />}
             <ol className="lw-product-list">
                 {visible.map((entry, index) => renderRow(entry, index + 1))}
             </ol>

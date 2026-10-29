@@ -11,7 +11,8 @@ import { loadUserKeys } from '../../lib/userKeys';
 import { campaignFreshness } from '../../lib/affiliateFreshness.mjs';
 import { affiliateCategory, compareGolden, goldenOf, summarizeCategories } from '../../lib/affiliateGolden.mjs';
 import { enrichKey, loadKeywordEnrich, type KeywordEnrich } from '../../lib/keywordEnrich.mjs';
-import { AffiliateGoldenAids, CategoryChips, GoldenRatioBadge, NonGoldenList } from './AffiliateGoldenParts';
+import { AffiliateGoldenAids, CategoryChips, CategoryGoldenKeywords, GoldenRatioBadge, NonGoldenList } from './AffiliateGoldenParts';
+import { loadCategoryGolden, mergeCategorySummary, type CategoryGolden } from '../../lib/affiliateCategoryGolden.mjs';
 
 /**
  * 제휴 황금키워드 — 플랫폼별 서브탭.
@@ -139,6 +140,9 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     /** 방금 복사한 상품 — 눌렀는데 아무 반응이 없으면 됐는지 알 수가 없다. */
     const [copied, setCopied] = useState('');
     const [category, setCategory] = useState('전체');
+    // 카테고리 황금 검색어(앱 affiliate-golden-keywords.cjs, 매일) — 상품명 말보다 넓게 잰 연관어 중 문서 < 검색인 것.
+    const [catGolden, setCatGolden] = useState<CategoryGolden>(() => ({ builtAt: '', byCategory: new Map() }));
+    useEffect(() => { let alive = true; void loadCategoryGolden().then((data) => { if (alive) setCatGolden(data); }); return () => { alive = false; }; }, []);
     const [enrich, setEnrich] = useState<Map<string, KeywordEnrich>>(() => new Map());
     useEffect(() => { let alive = true; void loadKeywordEnrich().then((map) => { if (alive) setEnrich(map); }); return () => { alive = false; }; }, []);
 
@@ -217,7 +221,7 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
      */
     const inView = assessed.filter(entry => entry.golden.golden && entry.recommendation.status !== 'excluded');
     const nonGolden = assessed.filter(entry => !inView.includes(entry)).sort((a, b) => compareGolden(a.golden, b.golden));
-    const categorySummary = summarizeCategories(inView);
+    const categorySummary = mergeCategorySummary(summarizeCategories(inView), catGolden.byCategory);
     const activeCategory = category === '전체' || categorySummary.some((s) => s.category === category) ? category : '전체';
     const displayed = inView.filter(entry => activeCategory === '전체' || entry.category === activeCategory).sort((a, b) => compareGolden(a.golden, b.golden));
     const collectedLabel = freshness.collectedAt && Number.isFinite(Date.parse(freshness.collectedAt))
@@ -291,6 +295,7 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                         </p>
                     )}
                     <CategoryChips summary={categorySummary} value={activeCategory} total={inView.length} onChange={setCategory} />
+                    <CategoryGoldenKeywords category={activeCategory} byCategory={catGolden.byCategory} builtAt={catGolden.builtAt} onAnalyze={onAnalyze} productNames={(campaigns?.items || []).map((i) => i.name)} />
                     <ol className="lw-product-list">
                         {displayed.map(({ item, recommendation, golden }, index) => {
                             // 분석·검색은 니즈 검색어가 우선 — 상품명 검색어는 수요가 없다(실측 0~140).
