@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-29T21:04:11.754Z",
+  "generatedAt": "2026-10-29T21:27:18.434Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -71578,6 +71578,873 @@
           "views": 977,
           "answers": 51,
           "askedAt": "2026.09.26"
+        }
+      ]
+    },
+    {
+      "id": "9b4d18bf2764745b",
+      "urls": [
+        "https://bookshelf-journey.tistory.com/entry/%ED%95%98%EB%82%98%EC%9B%90%ED%81%90-%EC%8A%AC%EA%B8%B0%EB%A1%9C%EC%9A%B4-%EA%B8%88%EC%9C%B5%EC%83%9D%ED%99%9C-OX-%EA%B2%8C%EC%9E%84-%EA%B2%8C%EC%9E%84%ED%95%98%EA%B3%A0-100-%EB%9E%9C%EB%8D%A4-%EC%BA%90%EC%8B%9C-%EB%B0%9B%EC%9E%90",
+        "https://3040-lifeanswer.tistory.com/entry/2026-%ED%95%98%EB%82%98%EC%9B%90%ED%81%90-%EC%8A%AC%EA%B8%B0%EB%A1%9C%EC%9A%B4-%EA%B8%88%EC%9C%B5%EC%83%9D%ED%99%9C-OX-%ED%80%B4%EC%A6%88-10%EC%9B%94-29%EC%9D%BC-%EC%A0%95%EB%8B%B5-AI-%ED%94%BC%EC%8B%B1",
+        "https://3040-lifeanswer.tistory.com/entry/2026-%EC%BC%80%EC%9D%B4%EB%B1%85%ED%81%AC-AI-%ED%80%B4%EC%A6%88-%EC%B1%8C%EB%A6%B0%EC%A7%80-10%EC%9B%94-29%EC%9D%BC-%EC%A0%95%EB%8B%B5-%EB%B9%B5",
+        "https://3040-lifeanswer.tistory.com/entry/2026-%EC%BC%80%EC%9D%B4%EB%B1%85%ED%81%AC-AI-%ED%80%B4%EC%A6%88-%EC%B1%8C%EB%A6%B0%EC%A7%80-10%EC%9B%94-28%EC%9D%BC-%EC%A0%95%EB%8B%B5-%EC%A3%BC%EC%9A%94-%EC%A0%95%EB%B3%B4",
+        "https://3040lifeinfo.tistory.com/entry/2026-%ED%95%98%EB%82%98%EC%9B%90%ED%81%90-%EC%8A%AC%EA%B8%B0%EB%A1%9C%EC%9A%B4-%EA%B8%88%EC%9C%B5%EC%83%9D%ED%99%9C-OX-%ED%80%B4%EC%A6%88-10%EC%9B%94-25%EC%9D%BC-%EC%A0%95%EB%8B%B5-%EC%B2%AD%EC%95%BD-%EC%88%9C%EC%9C%84",
+        "https://3040lifeinfo.tistory.com/entry/2026-%EC%BC%80%EC%9D%B4%EB%B1%85%ED%81%AC-AI-%ED%80%B4%EC%A6%88-%EC%B1%8C%EB%A6%B0%EC%A7%80-10%EC%9B%94-25%EC%9D%BC-%EC%A0%95%EB%8B%B5-%EC%96%B4%EB%B6%80"
+      ],
+      "guide": {
+        "direction": "검색자는 매일 바뀌는 OX 문제의 오늘자 정답이 맞는지, 왜 틀렸는지 해설까지 확인하고 랜덤캐시를 받고 싶어 한다. 고수 블로그들은 날짜별로 글을 따로 올려 과거 회차와 오늘자를 오가며 찾아야 하는 번거로움이 남아 있다. 이 글은 오늘자 문제·정답·해설·랜덤캐시 수령 순서를 한 화면에 정리해 검색 한 번으로 끝내게 한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "10월29일자 OX 문제·정답·해설 표(확인 필요: 하나원큐 앱 공지)",
+          "랜덤캐시 적립 조건과 지급 시점(확인 필요: 이벤트 페이지)",
+          "하나원큐 앱 내 OX게임 참여 경로"
+        ],
+        "mustAvoid": [
+          "케이뱅크 AI 퀴즈 챌린지 등 다른 회사 퀴즈 정답과 혼동",
+          "확인되지 않은 정답을 추측해서 단정적으로 서술"
+        ],
+        "checkBefore": [
+          "하나원큐 앱 공지사항에서 오늘자 OX 문제 원문 확인",
+          "랜덤캐시 지급 조건은 앱 내 이벤트 페이지에서 확인"
+        ],
+        "solves": [
+          "오늘자 정답이 맞는지 헷갈림 → 10월29일 문제·정답·해설 표로 즉시 확인",
+          "랜덤캐시 받는 법을 모름 → 참여부터 적립까지 순서 정리"
+        ],
+        "actionTitles": [
+          "하나원큐 OX게임 10월29일 정답 확인하고 랜덤캐시 받기",
+          "하나원큐 OX게임 오답이면 해설로 바로 확인하는 법"
+        ]
+      },
+      "at": "2026-10-29T21:25:41.371Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "하나원큐 티켓예매내역",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=51002&docId=448432843&answerNo=1&qb=7ZWY64KY7JuQ7YGQ7Iqs6riw66Gc7Jq0",
+          "views": 986,
+          "answers": 5,
+          "askedAt": "2023.06.20"
+        },
+        {
+          "title": "신용카드 신규 만들려고 하는데... 혜택받을....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40104&docId=464497903&answerNo=1&qb=7ZWY64KY7JuQ7YGQ7Iqs6riw66Gc7Jq0",
+          "views": 193,
+          "answers": 2,
+          "askedAt": "2024.02.17"
+        }
+      ]
+    },
+    {
+      "id": "1ebab37c89a8ad01",
+      "urls": [
+        "https://flexcorp.tistory.com/281",
+        "https://limeade.kr/safety-report-processing-time-check/"
+      ],
+      "guide": {
+        "direction": "검색자는 안전신문고 신고가 7일 원칙인데 왜 2주 넘게 지연되는지, 포상금은 받을 수 있는지가 궁금하다. 고수 글 제목은 처리기간 확인방법까지만 다뤄 포상금 여부와 처리결과에 불만일 때의 다음 단계는 비어 있다. 이 글은 처리기간 지연 원인부터 포상금 조건, 소극행정 신고 연계까지 이어서 끝내게 한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "안전신문고 법정 처리기간 7일 원칙(확인 필요: 행안부 공지)",
+          "실제 처리 지연 사례(2주 이상 걸린 경우, 지식인 답변 기준)",
+          "신고 포상금 지급 여부(확인 필요: 지자체별 조례)",
+          "처리결과 불만 시 소극행정 신고로 연계하는 절차"
+        ],
+        "mustAvoid": [
+          "국민신문고와 안전신문고를 같은 서비스로 혼동해서 서술",
+          "담당자 재량(케바케)인 처리기간을 고정된 숫자처럼 단정"
+        ],
+        "checkBefore": [
+          "행정안전부 안전신문고 공식 공지에서 처리기간 원칙 확인",
+          "지자체 조례에서 포상금 지급 기준 확인"
+        ],
+        "solves": [
+          "처리기간 7일인데 2주 넘게 안 됨 → 지연 원인과 담당자 재량 범위 설명",
+          "신고 포상금 받을 수 있는지 모름 → 포상금 지급 조건 정리",
+          "처리결과에 불만일 때 방법을 모름 → 소극행정 신고로 연계하는 법 안내"
+        ],
+        "actionTitles": [
+          "안전신문고 신고 처리기간 확인하고 지연 시 대처하기",
+          "국민신문고 민원신청 방법과 소극행정 신고 하는 법",
+          "안전신문고 신고 포상금 받는 조건 확인하기"
+        ]
+      },
+      "at": "2026-10-29T21:25:41.371Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "안전신문고 신고 처리기간~~",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=601&docId=460462131&answerNo=1&qb=7JWI7KCE7Iug66y46rOg7Iug6rOg7LKY66as6riw6rCE",
+          "views": 4631,
+          "answers": 3,
+          "askedAt": "2023.12.17"
+        },
+        {
+          "title": "안전신문고에 불법주정차 신고",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60102&docId=490402726&answerNo=1&qb=7JWI7KCE7Iug66y46rOg7Iug6rOg7LKY66as6riw6rCE",
+          "views": 2020,
+          "answers": 4,
+          "askedAt": "2025.11.25"
+        },
+        {
+          "title": "안전신문고 신고 처리기간",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60102&docId=468873668&answerNo=1&qb=7JWI7KCE7Iug66y46rOg7Iug6rOg7LKY66as6riw6rCE",
+          "views": 2017,
+          "answers": 4,
+          "askedAt": "2024.04.29"
+        }
+      ]
+    },
+    {
+      "id": "0e2454b2682e9850",
+      "urls": [
+        "https://youngwoo.kr/limit-account-release-conditions/",
+        "https://youngdr.tistory.com/272"
+      ],
+      "guide": {
+        "direction": "검색자는 KB·농협·신한·국민·우리 은행별로 해제 방법이 앱인지 창구인지 달라 헷갈리고, 증빙서류를 뭘 내야 하는지도 모른다. 고수 글은 목적별 준비까지는 다뤘지만 은행별 차이를 비교표로 정리하지 않아 각자 검색을 반복해야 한다. 이 글은 은행별 해제 방법·시간과 목적별 증빙서류를 표로 묶어 한 번에 끝내게 한다.",
+        "searchTargets": [
+          "한도제한계좌 해제 증빙서류",
+          "농협 한도제한계좌 해제",
+          "한도제한계좌 해제 방법",
+          "국민은행 한도제한계좌 해제"
+        ],
+        "mustInclude": [
+          "KB·농협·신한·국민·우리 은행별 해제 방법 비교표(앱 가능/창구 필수)",
+          "목적별(급여·사업·생활비) 증빙서류 목록",
+          "반려되는 주요 원인(확인 필요: 은행 공식 안내)",
+          "해제 소요 시간(즉시~영업일, 확인 필요: 은행별 공지)"
+        ],
+        "mustAvoid": [
+          "모든 은행이 앱으로 해제 가능하다고 일반화(은행별 창구 필수 여부 다름)",
+          "한 은행 기준 증빙서류를 전체 은행 공통인 것처럼 서술"
+        ],
+        "checkBefore": [
+          "KB·농협·신한·국민·우리 은행 공식 홈페이지/앱 공지에서 해제 절차와 필요서류 확인"
+        ],
+        "solves": [
+          "은행마다 해제 방법이 달라 헷갈림 → KB·농협·신한·국민·우리 비교표로 정리",
+          "증빙서류를 뭘 내야 하는지 모름 → 목적별(급여·사업·생활비) 서류 목록 제공",
+          "해제 신청이 반려됨 → 반려 원인과 재신청 방법 안내"
+        ],
+        "actionTitles": [
+          "한도제한계좌 해제 증빙서류 은행별로 비교해 신청하기",
+          "농협·국민·신한 한도제한계좌 해제 방법 한눈에 확인",
+          "한도제한계좌 해제 반려됐을 때 원인 확인하고 재신청"
+        ]
+      },
+      "at": "2026-10-29T21:25:41.371Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "농협 한도제한계좌 해제",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40107&docId=491944083&answerNo=2&qb=7ZWc64+E7KCc7ZWc6rOE7KKM7ZW07KCc",
+          "views": 1275,
+          "answers": 2,
+          "askedAt": "2026.07.25"
+        },
+        {
+          "title": "국민은행 한도제한계좌 해제",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40107&docId=494880824&answerNo=3&qb=7ZWc64+E7KCc7ZWc6rOE7KKM7ZW07KCc",
+          "views": 326,
+          "answers": 3,
+          "askedAt": "2026.08.25"
+        },
+        {
+          "title": "국민 한도제한 계좌 해제",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40107&docId=494453088&answerNo=1&qb=7ZWc64+E7KCc7ZWc6rOE7KKM7ZW07KCc",
+          "views": 138,
+          "answers": 2,
+          "askedAt": "2026.07.25"
+        }
+      ]
+    },
+    {
+      "id": "ad0f9c64ba2f6a01",
+      "urls": [
+        "https://moneyinftong.tistory.com/entry/2003%EB%85%84-%EB%AF%B8%EA%B5%AD-%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8-%EC%8B%9C%EC%83%81%EC%8B%9D%EC%97%90%EC%84%9C-%EC%9E%A5%ED%8E%B8-%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%EC%85%98%EC%83%81%EC%9D%84-%EB%B0%9B%EC%9D%80-%EC%9D%BC%EB%B3%B8-%EC%9E%91%ED%92%88%EC%9D%80"
+      ],
+      "guide": {
+        "direction": "검색자는 '2003년 미국 아카데미 장편 애니메이션상 일본 작품' 퀴즈의 정답을 바로 찾고 있고, 고수 글은 질문만 복사해 정답·근거를 안 준다. 센과 치히로의 행방불명이라는 정답과 수상 연도·배경을 한 줄로 정리해 읽자마자 끝내게 한다. 작품상·애니메이션상 구분까지 덧붙이면 일반 아카데미상 검색자도 흡수한다.",
+        "searchTargets": [
+          "미국 아카데미 시상식",
+          "미국 아카데미상",
+          "미국 아카데미상 수상",
+          "미국 아카데미 작품상"
+        ],
+        "mustInclude": [
+          "정답: 센과 치히로의 행방불명",
+          "제75회 아카데미 시상식(2002년 작품 대상, 2003년 개최) (확인 필요: 공식 오스카 자료)",
+          "일본 애니메이션 최초 수상 여부 (확인 필요: 공식 아카데미 자료)"
+        ],
+        "mustAvoid": [
+          "기생충 등 다른 해의 작품상 수상작과 혼동",
+          "장편 애니메이션상과 작품상을 같은 상으로 혼동"
+        ],
+        "checkBefore": [
+          "수상 연도·회차(75회 여부)를 공식 오스카 사이트에서 재확인"
+        ],
+        "solves": [
+          "퀴즈 정답이 뭔지 모르겠다 → 센과 치히로의 행방불명을 바로 제시",
+          "왜 이 작품이 받았는지 모르겠다 → 수상 연도·감독 등 배경 간단 정리",
+          "미국 아카데미상 자체가 궁금하다 → 작품상과 애니메이션상 차이 설명"
+        ],
+        "actionTitles": [
+          "미국 아카데미 시상식 애니메이션상 정답 바로 확인하기",
+          "미국 아카데미 작품상과 애니메이션상 차이 비교하기"
+        ]
+      },
+      "at": "2026-10-29T21:25:41.371Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "아카데미시상식에 대해서..",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=30313&docId=54557916&answerNo=1&qb=66+46rWtIOyVhOy5tOuNsOuvuCDsi5zsg4Hsi50g7J6l7Y64IOyVoOuLiOuplOydtOyFmOyDgQ==",
+          "views": 4708,
+          "answers": 1,
+          "askedAt": "2003.05.11"
+        },
+        {
+          "title": "아카데미시상식같은 시상식에서 장편애니메....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=30313&docId=54507575&answerNo=1&qb=66+46rWtIOyVhOy5tOuNsOuvuCDsi5zsg4Hsi50g7J6l7Y64IOyVoOuLiOuplOydtOyFmOyDgQ==",
+          "views": 316,
+          "answers": 1,
+          "askedAt": "2009.01.16"
+        },
+        {
+          "title": "제98회 아카데미 시상식, 어떤 작품이 가장 유....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=2010102&docId=492515138&answerNo=1&qb=66+46rWtIOyVhOy5tOuNsOuvuCDsi5zsg4Hsi50g7J6l7Y64IOyVoOuLiOuplOydtOyFmOyDgQ==",
+          "views": 66,
+          "answers": 1,
+          "askedAt": "2026.03.18"
+        }
+      ]
+    },
+    {
+      "id": "6425b69fed645555",
+      "urls": [
+        "https://pro-gramming.tistory.com/entry/%EC%8B%A0%ED%95%9C-%EC%8F%A0%ED%8E%98%EC%9D%B4-%ED%80%B4%EC%A6%88-%ED%8C%A1%ED%8C%A1-%EC%A0%95%EB%8B%B5-%EC%98%A4%EB%8A%98",
+        "https://pro-gramming.tistory.com/entry/NH-%EB%94%94%EA%B9%85-%ED%80%B4%EC%A6%88-%EC%A0%95%EB%8B%B5-%EC%98%A4%EB%8A%98"
+      ],
+      "guide": {
+        "direction": "오늘 날짜 퀴즈 정답을 찾는 당일 유입과, 쏠페이 오류·해지·환불·카드 삭제 같은 상시 문제를 겪는 유입이 겹치는데 고수 글은 정답만 쓰고 끝난다. 정답은 날짜별로 바로 보이게, 아래에 해지·삭제·환불방법·오류 해결을 체크리스트로 묶어 퀴즈가 지나도 글이 살아있게 만든다. 날짜·정답표와 절차 순서로 읽는 즉시 끝내게 한다.",
+        "searchTargets": [
+          "신한 쏠페이 오류",
+          "신한 쏠페이 카드 해지",
+          "신한 쏠페이 환불방법",
+          "신한 쏠페이 카드 삭제"
+        ],
+        "mustInclude": [
+          "오늘 날짜(10월 30일) 명시 및 전날 정답과 구분",
+          "퀴즈 정답·보기 (확인 필요: 신한쏠페이 앱 퀴즈팡팡 화면)",
+          "쏠페이 카드 해지·삭제 단계별 절차",
+          "결제 오류 시 환불방법 절차"
+        ],
+        "mustAvoid": [
+          "과거 날짜 정답을 오늘자인 것처럼 날짜 혼동해 올리기",
+          "신한카드 쏠(SOL)앱과 쏠페이(SOL pay) 앱을 혼동해서 설명하기"
+        ],
+        "checkBefore": [
+          "오늘자 정답은 신한쏠페이 앱 퀴즈팡팡 화면에서 직접 확인",
+          "이벤트 종료일·리워드 변경 여부는 신한카드 공식 공지 확인"
+        ],
+        "solves": [
+          "오늘 퀴즈 정답이 뭔지 모르겠다 → 10월 30일자 정답을 날짜별로 정리",
+          "쏠페이 카드를 해지·삭제하고 싶은데 방법을 모른다 → 단계별 절차 제공",
+          "결제 오류로 환불이 안 돼 막막하다 → 오류 원인과 환불방법 체크리스트 제공"
+        ],
+        "actionTitles": [
+          "신한 쏠페이 퀴즈 팡팡 정답 10월 30일 바로 확인하기",
+          "신한 쏠페이 카드 해지·삭제 방법과 환불방법 정리하기",
+          "신한 쏠페이 결제 오류 해결하고 카드 등록하는 법"
+        ]
+      },
+      "at": "2026-10-29T21:25:41.371Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "f0c33eec33b88779",
+      "urls": [
+        "https://on.sano.co.kr/%ec%a0%84%ec%a3%bc-%ec%84%9c%ec%8b%a0%eb%8f%99-%ec%b0%90%eb%b9%b5-%ec%98%9b%eb%82%a0%ec%8b%9c%ea%b3%a8%ec%b0%90%eb%b9%b5-%eb%a7%9b%ea%b3%bc-%ec%a3%bc%ec%b0%a8-%ec%a0%95%eb%b3%b4-%ed%99%95%ec%9d%b8/"
+      ],
+      "guide": {
+        "direction": "전주 서신동 맛집을 찾는 검색자 중 찐빵처럼 간단히 먹을 메뉴를 원하는 사람이 많은데, 고수 글은 '맛과 주차 정보'만 언급하고 영업시간·가격·주차 대수 같은 구체 정보가 빠져있다. 상호·위치·메뉴 가격·영업시간·주차 가능 대수를 표로 정리해 가게를 찾아가기 전 모든 궁금증을 한 번에 끝내게 한다.",
+        "searchTargets": [
+          "전주 서신동 맛집",
+          "전주 서신동",
+          "전주 서신동 카페",
+          "전주 서신동 족발"
+        ],
+        "mustInclude": [
+          "상호 '옛날시골찐빵' 명시",
+          "주차 가능 여부·대수 (확인 필요: 매장 현장 공지)"
+        ],
+        "mustAvoid": [
+          "전주 서신동 내 술집·카페·족발집 등 다른 업종과 혼동해 키워드 낚시하기"
+        ],
+        "checkBefore": [
+          "영업시간·휴무일·주차 가능 대수는 매장 전화나 최신 네이버지도/SNS 공지로 확인"
+        ],
+        "solves": [
+          "전주 서신동에서 주차 가능한 찐빵집인지 모르겠다 → 주차 가능 여부·공간 안내",
+          "전주 서신동 맛집 중 뭘 가야 할지 모르겠다 → 옛날시골찐빵 메뉴·맛 포인트 정리",
+          "전주 서신동 위치를 모르겠다 → 찾아가는 법과 주변 랜드마크 제공"
+        ],
+        "actionTitles": [
+          "전주 서신동 맛집 옛날시골찐빵 주차 가능 여부 확인하기",
+          "전주 서신동 찐빵집 메뉴·가격 비교하고 찾아가는 법 보기",
+          "전주 서신동에서 옛날시골찐빵 영업시간 확인하는 법"
+        ]
+      },
+      "at": "2026-10-29T21:25:41.371Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "전주에 맛있는 맛집 추천해주셔요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=121305&docId=20340799&answerNo=2&qb=7KCE7KO8IOyEnOyLoOuPmSDssJDrubUg7Jib64Kg7Iuc6rOo7LCQ67m1IOunm+qzvA==",
+          "views": 597196,
+          "answers": 21,
+          "askedAt": "2005.04.27"
+        },
+        {
+          "title": "전주에서 유명하고 맛있는 음식점좀 추천해....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80208&docId=31545397&answerNo=2&qb=7KCE7KO8IOyEnOyLoOuPmSDssJDrubUg7Jib64Kg7Iuc6rOo7LCQ67m1IOunm+qzvA==",
+          "views": 165717,
+          "answers": 11,
+          "askedAt": "2008.03.19"
+        }
+      ]
+    },
+    {
+      "id": "aec2be5757918651",
+      "urls": [
+        "https://moneyinftong.tistory.com/entry/%EB%A7%A4%EC%9D%BC-%EC%9A%A9%EB%8F%88-%EB%B0%9B%EA%B8%B0-%EB%82%B4-%EC%B6%9C%EC%84%9D%EC%B2%B4%ED%81%AC-%EC%9D%B4%EB%B2%A4%ED%8A%B8%EB%8A%94-30%EC%9D%BC-%EC%A3%BC%EA%B8%B0%EB%A1%9C-%EC%9A%B4%EC%98%81%EB%90%9C%EB%8B%A4"
+      ],
+      "guide": {
+        "direction": "① 지식인에는 틱톡 라이트 같은 영상 출석체크가 진짜 돈이 되는지, 케이뱅크 용돈받기처럼 하루 빠지면 리셋되는지를 묻는 질문이 반복된다. ② 고수 글은 '30일 주기'만 알려주고 어느 서비스의 이벤트인지, 하루 누락 시 어떻게 되는지는 다루지 않는다. ③ 이 글은 30일 주기 유지 조건과 알림 설정 순서를 표로 정리해 매일 빠뜨리지 않고 받는 법을 끝내준다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "케이뱅크 용돈받기 알림 설정 방법 (지식인 조회 726 질문 근거)",
+          "(확인 필요: 제목의 '출석체크 이벤트'가 정확히 어느 앱/서비스인지)",
+          "30일 주기 중 하루 빠지면 리셋되는지 유지되는지 (확인 필요: 공식 공지)",
+          "틱톡 라이트 출석체크·시청 조건별 지급 단계 (지식인 조회 10,170 질문 근거)"
+        ],
+        "mustAvoid": [
+          "틱톡 라이트 '현금이벤트 큰돈 정산' 같은 홍보성 문구를 검증 없이 그대로 쓰기",
+          "케이뱅크 공식 이벤트와 틱톡 라이트 부업성 이벤트를 같은 성격으로 섞어 설명하기"
+        ],
+        "checkBefore": [
+          "제목이 지칭하는 서비스명이 무엇인지 해당 앱 공식 공지/앱 내 이벤트 페이지에서 확인",
+          "30일 주기 리셋 규정은 해당 서비스 공식 FAQ에서 확인"
+        ],
+        "solves": [
+          "틱톡 라이트 돈 준다는데 뭔지 모르겠다 → 단계별 지급 조건을 표로 정리해 보여준다",
+          "출석체크 하루 빠지면 어떻게 되나 → 30일 주기 유지 규칙을 확인하고 명시한다 (확인 필요)",
+          "용돈받기 알림 설정 어떻게 하나 → 알람앱·캘린더 활용 설정 순서를 구체적으로 안내한다"
+        ],
+        "actionTitles": [
+          "케이뱅크 용돈받기 출석체크 알림 설정하는 법 총정리",
+          "틱톡 라이트 출석체크 지급 조건과 정산 단계 확인하기"
+        ]
+      },
+      "at": "2026-10-29T21:25:41.371Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "틱톡 라이트 돈 준다는데 뭔가요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1060801&docId=478932875&answerNo=29&qb=66ek7J28IOyaqeuPiCDrsJvquLAg7Lac7ISd7LK07YGsIOydtOuypO2KuA==",
+          "views": 10170,
+          "answers": 27,
+          "askedAt": "2026.10.17"
+        },
+        {
+          "title": "틱톡,틱톡라이트",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10608&docId=484316166&answerNo=7&qb=66ek7J28IOyaqeuPiCDrsJvquLAg7Lac7ISd7LK07YGsIOydtOuypO2KuA==",
+          "views": 3233,
+          "answers": 7,
+          "askedAt": "2026.10.17"
+        },
+        {
+          "title": "케이뱅크 용돈받기 알림 설정은 어떻게 하나....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10704&docId=485351096&answerNo=4&qb=66ek7J28IOyaqeuPiCDrsJvquLAg7Lac7ISd7LK07YGsIOydtOuypO2KuA==",
+          "views": 726,
+          "answers": 7,
+          "askedAt": "2025.06.07"
+        }
+      ]
+    },
+    {
+      "id": "8f16ada696d9b838",
+      "urls": [
+        "https://cogone.tistory.com/854"
+      ],
+      "guide": {
+        "direction": "① 지식인에는 당뇨가 있는데 발저림이 당뇨병성 신경병증인지 허리디스크 때문인지 구분이 안 된다는 질문이 반복된다. ② 고수 글은 '구분법 4가지'만 나열하고 양측성 여부, 특정 자세 영향, 손가락 국소 저림 같은 실제 구분 기준은 짚지 않는다. ③ 이 글은 대칭 여부·자세 영향·감각 둔화 패턴을 체크리스트로 정리해 병원에 가기 전 스스로 가늠하게 한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "양쪽 발가락 끝 저림+감각 둔화 동시 발생 시 당뇨병성 신경병증 의심 (지식인 조회 107 근거)",
+          "손가락 몇 개만 특정 자세에서 저리면 손목 주변 신경 문제 가능성 (지식인 조회 69 근거)",
+          "당뇨 외 비타민 B12 결핍·갑상선 기능 이상도 원인이 될 수 있음 (지식인 조회 277 근거)",
+          "혈액순환 장애와 신경병증을 구분하는 검사 방법 (지식인 조회 277 근거)"
+        ],
+        "mustAvoid": [
+          "증상 설명만으로 당뇨병성 신경병증 또는 디스크로 자가진단 확정짓기",
+          "연세에스의원 등 특정 병원명을 광고처럼 추천하는 식으로 서술하기"
+        ],
+        "checkBefore": [
+          "당뇨병성 말초신경병증 진단 기준은 공식 의학 정보(대한당뇨병학회 등)에서 확인",
+          "허리디스크로 인한 저림의 전형적 패턴(방사통, 자세 영향 여부)은 공식 의학 정보에서 확인"
+        ],
+        "solves": [
+          "말초신경병증 검사는 언제 받아야 하나 → 당뇨·B12결핍·갑상선 등 원인별 검사 시점 기준을 정리한다",
+          "당뇨 발저림이 디스크인지 구분 안 됨 → 대칭 여부·자세 영향 등 4가지 구분 포인트를 정리한다",
+          "손가락 몇 개만 저린데 신경병증인가 → 국소적 저림과 전신성 신경병증의 차이를 짚어준다"
+        ],
+        "actionTitles": [
+          "당뇨 발저림 신경병증인지 디스크인지 구분하는 법 4가지"
+        ]
+      },
+      "at": "2026-10-29T21:25:41.371Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "말초신경병증 검사는 손발 저림이 있을 때 받....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70110&docId=495507165&answerNo=1&qb=64u564eoIOyggOumvCDsi6Dqsr3rs5Hspp3snbjsp4Ag65SU7Iqk7YGs7J247KeAIOq1rOu2hOuylQ==",
+          "views": 277,
+          "answers": 1,
+          "askedAt": "2026.10.12"
+        },
+        {
+          "title": "말초신경병증 병원은 어떤 증상이 있을 때 찾....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70303&docId=495447272&answerNo=1&qb=64u564eoIOyggOumvCDsi6Dqsr3rs5Hspp3snbjsp4Ag65SU7Iqk7YGs7J247KeAIOq1rOu2hOuylQ==",
+          "views": 115,
+          "answers": 1,
+          "askedAt": "2026.10.07"
+        },
+        {
+          "title": "당뇨 발가락 저림이 생기고 감각까지 둔해졌....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70303&docId=495537697&answerNo=1&qb=64u564eoIOyggOumvCDsi6Dqsr3rs5Hspp3snbjsp4Ag65SU7Iqk7YGs7J247KeAIOq1rOu2hOuylQ==",
+          "views": 107,
+          "answers": 1,
+          "askedAt": "2026.10.14"
+        }
+      ]
+    },
+    {
+      "id": "94aad5549c47d13c",
+      "urls": [
+        "https://apt-view.com/%ea%b5%ad%ed%86%a0%eb%b6%80-%ec%8b%a4%ea%b1%b0%eb%9e%98%ea%b0%80-%ea%b3%b5%ea%b0%9c%ec%8b%9c%ec%8a%a4%ed%85%9c%ec%97%90%ec%84%9c-%eb%8b%a8%ec%a7%80%eb%b3%84-%eb%a7%a4%eb%a7%a4-%ec%a0%84%ec%9b%94/"
+      ],
+      "guide": {
+        "direction": "① 지식인에는 국토부 실거래가를 어떻게 조회하는지, 조회가 안 될 때 뭘 확인해야 하는지 묻는 질문이 반복된다. ② 고수 글은 '조회방법'만 다루고 실거래가 조회 안됨 오류나 호갱노노 같은 민간 플랫폼과의 차이는 짚지 않는다. ③ 이 글은 지역·단지·기간 조건 설정 순서와 조회 안 될 때 확인할 점을 단계별로 정리해 바로 단지 시세를 찾게 한다.",
+        "searchTargets": [
+          "국토부 실거래가 조회",
+          "국토부 실거래가 조회 방법",
+          "국토부 실거래가 조회 안됨",
+          "국토부 실거래가 사이트"
+        ],
+        "mustInclude": [
+          "rt.molit.go.kr 주소와 회원가입 없이 조회 가능하다는 점 (지식인 조회 6,234 근거)",
+          "지역(시·군·구) 선택부터 단지명 입력까지 조회 조건 설정 순서 (지식인 조회 7,066 근거)",
+          "아파트·연립다세대·단독다가구·오피스텔별 탭이 나뉜다는 점 (지식인 조회 6,234 근거)",
+          "'조회 안됨' 상황에서 확인할 점 (확인 필요: 공식 FAQ나 시스템 공지)"
+        ],
+        "mustAvoid": [
+          "호갱노노·네이버부동산 같은 민간 플랫폼 데이터와 국토부 공식 데이터를 같은 것처럼 섞어 설명하기",
+          "'실거래가 등록(신고)'과 '실거래가 조회'를 혼동해서 안내하기",
+          "증여 시 실거래가 관련 세금 판단을 단정적으로 안내하기(전문가 확인 필요 사안)"
+        ],
+        "checkBefore": [
+          "rt.molit.go.kr 최신 메뉴 구성(최근 개편 여부)은 공식 사이트에서 직접 확인",
+          "실거래가 등록(신고) 법정 기한 등은 국토교통부 공식 공지로 확인"
+        ],
+        "solves": [
+          "국토부 아파트 실거래가 조회 어떻게 하나 → 지역 선택부터 단지명 입력까지 순서를 단계별로 안내한다",
+          "국토부 실거래가 조회 안됨 → 조회 안 될 때 확인할 점을 정리한다 (확인 필요)",
+          "호갱노노 말고 공식 데이터로 보고 싶다 → rt.molit.go.kr에서 원문 데이터 직접 조회하는 법을 안내한다"
+        ],
+        "actionTitles": [
+          "국토부 실거래가 조회 방법, 단지별 매매·전월세 찾는 법",
+          "국토부 실거래가 조회 안됨, 원인별로 바로 확인하는 법",
+          "국토부 실거래가 사이트에서 매매·전월세 바로 조회하기"
+        ]
+      },
+      "at": "2026-10-29T21:25:41.371Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "국토부 아파트 실거래가 조회 어떻게 하는 건....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40612&docId=410418538&answerNo=9&qb=6rWt7Yag67aAIOyLpOqxsOuemCDqs7XqsJzsi5zsiqTthZwg64uo7KeA67OEIOunpOunpA==",
+          "views": 7066,
+          "answers": 15,
+          "askedAt": "2025.11.10"
+        },
+        {
+          "title": "아파트 실거래가 조회",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40602&docId=414923723&answerNo=10&qb=6rWt7Yag67aAIOyLpOqxsOuemCDqs7XqsJzsi5zsiqTthZwg64uo7KeA67OEIOunpOunpA==",
+          "views": 6234,
+          "answers": 11,
+          "askedAt": "2026.07.28"
+        },
+        {
+          "title": "증여시 아파트 실거래가",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40303&docId=491552849&answerNo=1&qb=6rWt7Yag67aAIOyLpOqxsOuemCDqs7XqsJzsi5zsiqTthZwg64uo7KeA67OEIOunpOunpA==",
+          "views": 582,
+          "answers": 7,
+          "askedAt": "2026.01.24"
+        }
+      ]
+    },
+    {
+      "id": "965cc7ddd9d0fa8a",
+      "urls": [
+        "https://bussubway.tistory.com/796"
+      ],
+      "guide": {
+        "direction": "검색자는 '렌시스'라는 이름이 처음 들어봐서 이 주소가 진짜 공식 사이트인지부터 의심하고, 환불·도수 조합·난시 렌즈 보유 여부를 묻는다. 고수 글은 주소만 던지고 '진짜 공식인지 확인하는 법'과 구매 전 체크포인트를 안 짚었다. 공식 계정 태그 확인법·좌우 도수 다르게 주문하는 법·환불 절차·난시 렌즈 보유 여부를 표로 정리해 주면 끝난다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "공식 SNS(인스타·네이버 등)에 태그된 링크인지 직접 대조하는 방법",
+          "좌우 도수 다르게 주문하는 예시(오른쪽 -2.75 / 왼쪽 -1.75식 입력법)",
+          "환불 신청 절차와 유의사항(확인 필요: 이용약관 원문)",
+          "현재 난시 교정용 렌즈 판매 여부(지식인 답변 기준, 공식 몰 확인 필요)",
+          "미사용 시에도 보관액 매일 교체해야 하는 이유"
+        ],
+        "mustAvoid": [
+          "링크 주소만 보고 '공식 사이트'라고 단정하기",
+          "특정 도수 수치를 일반적인 처방값처럼 제시하기(개인 처방전 필요 명시 없이)",
+          "환불 관련 소비자 불만·불안 글을 축소하거나 숨기기"
+        ],
+        "checkBefore": [
+          "렌시스 공식 SNS 계정에 해당 링크가 실제 태그되어 있는지 직접 확인",
+          "환불 정책 원문(이용약관) 현재 버전 확인"
+        ],
+        "solves": [
+          "이 주소가 진짜 공식인지 모름 → 공식 계정 태그 대조법으로 확인",
+          "양쪽 도수 다르게 주문 가능한지 헷갈림 → 입력 예시로 구매 방법 설명",
+          "환불이 되는지 불안함 → 신청 절차와 확인 포인트 정리"
+        ],
+        "actionTitles": [
+          "렌시스 홈페이지 바로가기, 공식 링크인지 확인하는 법",
+          "렌시스 환불 신청 전 꼭 확인할 절차 정리",
+          "렌시스 도수·난시 렌즈 구매 전 체크리스트"
+        ]
+      },
+      "at": "2026-10-29T21:25:41.371Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "도수 렌즈를 렌시스에서 온라인으로 주",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=5040205&docId=336256834&answerNo=1&qb=66CM7Iuc7IqkIGh0dHBzIGxlbnNzaXMgb2ZmaWNpYWwgY29t",
+          "views": 3066,
+          "answers": 1,
+          "askedAt": "2019.09.20"
+        },
+        {
+          "title": "렌시스 환불 어떻게 하나요??",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=511&docId=493372136&answerNo=2&qb=66CM7Iuc7IqkIGh0dHBzIGxlbnNzaXMgb2ZmaWNpYWwgY29t",
+          "views": 1617,
+          "answers": 3,
+          "askedAt": "2026.05.13"
+        },
+        {
+          "title": "렌시스에는 난시 렌즈가 없나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=50302&docId=484225750&answerNo=1&qb=66CM7Iuc7IqkIGh0dHBzIGxlbnNzaXMgb2ZmaWNpYWwgY29t",
+          "views": 529,
+          "answers": 1,
+          "askedAt": "2025.04.15"
+        }
+      ]
+    },
+    {
+      "id": "85b1487f03cc1525",
+      "urls": [
+        "https://bongbong200.com/entry/%EB%AF%B8%EA%B5%AD-%EA%B5%AD%EC%B1%84-%ED%8F%AD%EB%93%B1%EC%9D%B4-%EC%A3%BC%EC%8B%9D-%EC%8B%9C%EC%9E%A5%EC%9D%84-%EB%96%A8%EC%96%B4%EB%9C%A8%EB%A6%B0-%EC%9D%B4%EC%9C%A0-%EC%89%BD%EA%B2%8C-%ED%91%B8%EB%8A%94-%EA%B2%BD%EC%A0%9C%ED%95%99-%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98"
+      ],
+      "guide": {
+        "direction": "검색자는 '국채 금리 오르면 왜 주식이 떨어지는지'는 알아도, 그걸 내 KODEX 국채 ETF·포트폴리오 비중에 어떻게 반영할지 몰라 막힌다. 고수 글은 메커니즘 설명에서 멈추고 실제 ETF·듀레이션 선택 질문에 답을 안 준다. 10년물/30년물 금리와 증시의 역관계를 정리한 뒤 7~10년물 중기채 비중 가이드까지 주면 글이 끝난다.",
+        "searchTargets": [
+          "미국 국채 금리",
+          "미국 국채 10년물 금리",
+          "미국 국채 etf",
+          "미국 국채수익률"
+        ],
+        "mustInclude": [
+          "금리 상승 시 국채 가격 하락 → 채권 매력도 변화의 역관계 구조 설명",
+          "10년물·30년물 금리와 증시 하락 상관관계 예시(확인 필요: 최근 시점 데이터)",
+          "지식인에 언급된 상품명 기준 ETF 종류 비교(KODEX 미국30년국채타겟커버드콜, KODEX200미국채혼합 등)",
+          "포트폴리오 내 국채 비중을 7~10년물 중기채로 잡는 기준(지식인 답변 근거)"
+        ],
+        "mustAvoid": [
+          "특정 ETF를 사라는 투자 추천처럼 단정하기",
+          "과거 특정 폭락 사례를 현재 금리 상황과 그대로 동일시하기",
+          "환율-금리-증시 관계를 하나의 인과로만 지나치게 단순화하기"
+        ],
+        "checkBefore": [
+          "현재 미국 10년물·30년물 국채 금리 수준(미 재무부 또는 금융 데이터 제공처)",
+          "언급할 ETF 상품명·운용사 정확성(운용사 공시자료)",
+          "최근 실제 금리-증시 동반 하락 사례의 날짜와 수치"
+        ],
+        "solves": [
+          "금리 급등하면 왜 증시가 떨어지는지 헷갈림 → 국채가격-금리 역관계로 설명",
+          "포트폴리오 국채 비중·기간을 어떻게 잡을지 모름 → 7~10년물 중기채 가이드 제공",
+          "커버드콜 국채 ETF와 일반 국채 ETF 차이를 모름 → 상품별 특징 비교"
+        ],
+        "actionTitles": [
+          "미국 국채 금리 급등, 증시 떨어지는 이유 계산해보기",
+          "미국 국채 10년물 금리로 포트폴리오 비중 정하는 법",
+          "미국 국채 etf 투자 전 금리-주가 관계 체크리스트"
+        ]
+      },
+      "at": "2026-10-29T21:25:41.371Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "미국 국채 금리가 급등하면 증시가 떨어지잖....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=383080900&answerNo=2&qb=66+46rWtIOq1reyxhCDtj63rk7Eg7KO87IudIOyLnOyepQ==",
+          "views": 1365,
+          "answers": 2,
+          "askedAt": "2021.03.12"
+        },
+        {
+          "title": "주식초짜인데 kodex미국30년국채타겟커버드콜....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=494749933&answerNo=3&qb=66+46rWtIOq1reyxhCDtj63rk7Eg7KO87IudIOyLnOyepQ==",
+          "views": 410,
+          "answers": 15,
+          "askedAt": "2026.08.15"
+        },
+        {
+          "title": "kodex200 미국채혼합",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=493592623&answerNo=4&qb=66+46rWtIOq1reyxhCDtj63rk7Eg7KO87IudIOyLnOyepQ==",
+          "views": 316,
+          "answers": 6,
+          "askedAt": "2026.05.28"
+        }
+      ]
+    },
+    {
+      "id": "a0f8319e95529c5f",
+      "urls": [
+        "https://girst.sados21c.com/entry/%EB%8C%80%ED%8C%8C-%ED%95%9C-%EB%8B%AC-%EB%8F%99%EC%95%88-%EB%AC%B4%EB%A5%B4%EC%A7%80-%EC%95%8A%EA%B2%8C-%EB%B3%B4%EA%B4%80%ED%95%98%EB%8A%94-%EC%8B%B1%EC%8B%B1%ED%95%9C-%EB%B2%95"
+      ],
+      "guide": {
+        "direction": "검색자는 대파가 금방 물러지거나 겨울엔 얼어버려서 '자세한 보관법'을 다시 찾는다. 고수 글은 '한 달 안 무르게'라는 약속만 하고 냉장·냉동 구분, 손질 순서 같은 실행 단계가 빠질 수 있다. 수분 제거→손질→보관 용기→냉장/냉동 구분까지 순서대로 체크리스트로 주면 검색이 끝난다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "대파가 무르거나 얼어버리는 원인(수분·저온 노출)",
+          "냉장 보관 시 용기·포장 방법(밀폐용기 또는 세워서 보관 등, 지식인 답변 기준)",
+          "한 달 이상 보관 목표 시 냉동 손질법 단계",
+          "대파와 쪽파 보관법이 같은지 다른지 구분(지식인 답변 기준)"
+        ],
+        "mustAvoid": [
+          "김치 보관 온도(0℃ 등)·기간 정보를 대파 보관법에 그대로 섞어 쓰기",
+          "쪽파와 대파를 같은 보관법으로 뭉뚱그려 설명하기",
+          "냉동만 하면 무조건 신선하다는 식으로 단순화하기"
+        ],
+        "checkBefore": [
+          "대파를 냉장·냉동 보관했을 때 실제 신선도 유지 기간(농촌진흥청 등 공식 원예 정보)",
+          "쪽파와 대파의 보관법 차이(지식인 답변 외 전문 자료로 재확인)"
+        ],
+        "solves": [
+          "대파가 금방 물러지고 겨울엔 얼어버림 → 냉장·냉동 구분법으로 해결",
+          "한 달 이상 싱싱하게 유지하는 법을 모름 → 손질+보관 단계별 체크리스트 제공",
+          "쪽파도 같은 법으로 보관되는지 헷갈림 → 대파·쪽파 보관법 차이 비교"
+        ],
+        "actionTitles": [
+          "대파 한 달 안 무르게 보관하는 법 단계별 정리",
+          "대파 보관법, 냉장·냉동 구분해서 신선하게 하는 법",
+          "쪽파·대파 보관법 차이 비교로 오래 싱싱하게"
+        ]
+      },
+      "at": "2026-10-29T21:25:41.371Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "김치의 종류,김치를 만드는 방법,김치의 유래....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=13050401&docId=174319013&answerNo=1&qb=64yA7YyMIOuPmeyViCDrrLTrpbTsp4Ag7JWK6rKMIOuztOq0gA==",
+          "views": 111169,
+          "answers": 2,
+          "askedAt": "2013.06.10"
+        },
+        {
+          "title": "김치에 대하여...",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=130101&docId=35113781&answerNo=40&qb=64yA7YyMIOuPmeyViCDrrLTrpbTsp4Ag7JWK6rKMIOuztOq0gA==",
+          "views": 18723,
+          "answers": 31,
+          "askedAt": "2008.04.22"
+        },
+        {
+          "title": "대파 보관법 자세하게 알려주세요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=50502&docId=397451563&answerNo=4&qb=64yA7YyMIOuPmeyViCDrrLTrpbTsp4Ag7JWK6rKMIOuztOq0gA==",
+          "views": 3828,
+          "answers": 7,
+          "askedAt": "2021.08.18"
+        }
+      ]
+    },
+    {
+      "id": "58986e7795583788",
+      "urls": [
+        "https://on.sano.co.kr/%ea%b4%91%eb%aa%85-%eb%b3%b4%ec%8c%88-%eb%a7%9b%ec%a7%91-%ec%84%b8%ea%b3%b3%ec%9d%84-%ec%a7%81%ec%a0%91-%eb%8b%a4%eb%85%80%ec%98%a8-%ec%86%94%ec%a7%81%ed%95%9c-%ed%9b%84%ea%b8%b0%ec%99%80-%ec%b6%94/"
+      ],
+      "guide": {
+        "direction": "검색자는 광명에서 보쌈집을 고를 때 가격대·웨이팅·주차 가능 여부를 비교할 기준이 없어 막힌다(제공된 지식인 자료는 이 소재와 무관해 활용 불가). '직접 다녀온 솔직한 후기' 류 제목은 있지만 매장명·가격·대기시간을 한 번에 비교할 표가 빠져 있다. 이 글은 광명 보쌈 맛집 3곳을 가격·주차·포장여부 표로 정리해 바로 한 곳을 고르게 한다.",
+        "searchTargets": [
+          "광명 보쌈 맛집",
+          "광명 보쌈"
+        ],
+        "mustInclude": [
+          "매장명 3곳과 대표 메뉴 (확인 필요: 실제 방문 매장 정보)",
+          "매장별 가격대 (확인 필요: 메뉴판·영수증)",
+          "웨이팅/대기시간 (확인 필요: 방문 시점 후기)"
+        ],
+        "mustAvoid": [
+          "광명동과 광명시 전체를 혼동해 다른 지역 맛집을 섞어 넣기",
+          "상호가 비슷한 다른 보쌈집과 혼동해 잘못된 정보 전달"
+        ],
+        "checkBefore": [
+          "가격 변동 여부는 최근 방문 후기나 매장 공지에서 확인"
+        ],
+        "solves": [
+          "광명에서 보쌈집을 못 정함 → 가격·웨이팅·주차 비교표로 바로 선택 가능하게 정리"
+        ],
+        "actionTitles": [
+          "광명 보쌈 맛집 3곳 가격·웨이팅 한눈에 비교하기",
+          "광명 보쌈 주차 가능한 곳부터 바로 확인하는 법"
+        ]
+      },
+      "at": "2026-10-29T21:25:41.371Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "옛날말&lt;진짜 왕 급해요!!(내공100!!)",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=130101&docId=111495133&answerNo=1&qb=6rSR66qFIOuztOyMiCDrp5vsp5Eg7IS46rOzIOyngeygkQ==",
+          "views": 155168,
+          "answers": 15,
+          "askedAt": "2010.06.10"
+        },
+        {
+          "title": "초 5 학년 국수사과 다 요점정리좀;; 될수 있....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=11&docId=62990631&answerNo=2&qb=6rSR66qFIOuztOyMiCDrp5vsp5Eg7IS46rOzIOyngeygkQ==",
+          "views": 43270,
+          "answers": 2,
+          "askedAt": "2009.07.03"
+        },
+        {
+          "title": "5학년1학기중간고사요점정리",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110207&docId=109121973&answerNo=6&qb=6rSR66qFIOuztOyMiCDrp5vsp5Eg7IS46rOzIOyngeygkQ==",
+          "views": 26137,
+          "answers": 5,
+          "askedAt": "2010.04.29"
+        }
+      ]
+    },
+    {
+      "id": "8798ac8de3e980d0",
+      "urls": [
+        "https://comstory50s.tistory.com/entry/%EC%9E%AC%EA%B0%9C%EB%B0%9C-%EC%95%8C%EB%B0%95%EA%B8%B0-%EC%A0%9C%EC%B2%99-%EC%82%AC%EB%A1%80-%EC%B4%9D%EC%A0%95%EB%A6%AC%EF%BD%9C%EC%9E%A5%EC%9C%8410%EA%B5%AC%EC%97%AD%C2%B7%EC%82%BC%EC%9D%B5%EB%A7%A8%EC%88%80%C2%B7%ED%95%9C%EB%82%A8%ED%95%98%EC%9D%B4%EC%B8%A0%C2%B7%EA%B3%A0%EB%8D%956%EB%8B%A8%EC%A7%80-%EC%83%81%EA%B0%80%EC%9D%98-%EA%B2%B0%EB%A7%90"
+      ],
+      "guide": {
+        "direction": "검색자는 '알박기'가 재개발에서 정확히 무엇이고 실제로 제척(강제 매입)된 사례가 있는지, 본인 상가·주택이 그런 처지가 될 위험이 있는지를 궁금해한다. 고수 블로그 제목은 사례명만 나열해 각 사례가 어떤 기준으로, 어떤 결말로 제척됐는지가 드러나지 않는다. 이 글은 4개 사례를 매도청구권 행사 기준·결말로 정리해 독자가 자신의 상황에 적용할 수 있게 한다.",
+        "searchTargets": [
+          "재개발 알박기"
+        ],
+        "mustInclude": [
+          "장위10구역·삼익맨숀·한남하이츠·고덕6단지 상가 4개 사례명",
+          "각 사례의 제척 사유 및 결말 (확인 필요: 조합·시공사 발표, 판결문)",
+          "알박기로 판단되는 기준 (확인 필요: 법원 판례)"
+        ],
+        "mustAvoid": [
+          "알박기 당사자를 일방적으로 비난하는 표현 사용",
+          "단순 재개발 지연 사례와 알박기 제척 사례를 혼동해 묶기"
+        ],
+        "checkBefore": [
+          "각 구역의 제척 확정 여부와 날짜는 조합 공지나 원문 기사에서 확인"
+        ],
+        "solves": [
+          "알박기가 무엇인지 몰라 혼란 → 정의와 매도청구권 기준으로 설명",
+          "실제 제척 사례가 있는지 모름 → 4개 구역 결말을 표로 정리해 제공"
+        ],
+        "actionTitles": [
+          "재개발 알박기 매도청구권 행사 절차 정리",
+          "장위10구역 등 알박기 제척 결말 비교 확인"
+        ]
+      },
+      "at": "2026-10-29T21:25:41.371Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "41a08cba80aae154",
+      "urls": [
+        "https://wisdomwavess.tistory.com/entry/%EB%A0%88%EB%AA%AC%EC%A6%99-%EB%B6%80%EC%9E%91%EC%9A%A9-%EB%B0%8F-%EA%B3%B5%EB%B3%B5-%EC%84%AD%EC%B7%A8-%EC%8B%9C-%EC%A3%BC%EC%9D%98%EC%82%AC%ED%95%AD-%EC%98%AC%EB%B0%94%EB%A5%B8-%EB%8B%A4%EC%9D%B4%EC%96%B4%ED%8A%B8-%EC%9D%8C%EC%9A%A9%EB%B2%95-%EC%B4%9D%EC%A0%95%EB%A6%AC"
+      ],
+      "guide": {
+        "direction": "검색자는 레몬즙을 공복에 마셔도 되는지, 위가 약하면 어떤 방법이 안전한지, 실제로 다이어트 효과가 있는지를 궁금해한다. 고수 블로그의 '부작용·주의사항 총정리' 제목은 포괄적이지만 위염·역류성식도염이 있는 경우의 섭취 기준이나 치아부식 방지법 같은 구체 실천법은 빠지기 쉽다. 이 글은 공복 대 식후 섭취 기준표와 치아부식 방지법을 제시해 독자가 바로 자신에게 맞는 방법을 고르게 한다.",
+        "searchTargets": [
+          "레몬즙 공복에 먹는 법"
+        ],
+        "mustInclude": [
+          "위염·역류성식도염이 있을 때 공복 대신 식후 섭취 권장 기준",
+          "치아부식 방지를 위한 빨대 사용 및 섭취 후 물로 입 헹구기",
+          "레몬즙+올리브유 조합 시 총 섭취열량 증가 주의",
+          "적정 섭취량 (확인 필요: 1회 권장 ml, 식약처·전문의 자료)"
+        ],
+        "mustAvoid": [
+          "레몬즙만으로 살이 빠진다는 과장된 효과 서술",
+          "위염·역류성식도염 환자에게 공복 섭취를 권장하는 서술",
+          "레몬즙을 질병 치료 효과가 있는 것처럼 묘사"
+        ],
+        "checkBefore": [
+          "위장질환자 섭취 기준은 식약처·전문의 자료에서 확인",
+          "치아부식 방지 관련 구체적 방법은 원문 자료에서 확인"
+        ],
+        "solves": [
+          "공복에 레몬즙 마셔도 되는지 모름 → 위장 상태별 공복/식후 기준 제시",
+          "치아 부식이 걱정됨 → 빨대 사용 등 구체 방지법 제공",
+          "레몬즙+올리브유 다이어트 효과 궁금 → 총열량 관점에서 설명"
+        ],
+        "actionTitles": [
+          "레몬즙 공복 섭취 전 치아부식 방지법 확인하기"
+        ]
+      },
+      "at": "2026-10-29T21:25:41.371Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "레몬즙 다이어트",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=8030401&docId=478397229&answerNo=3&qb=66CI66qs7KaZIOqzteuztSDshK3st6gg7Jis67CU66W4IOuLpOydtOyWtO2KuA==",
+          "views": 8848,
+          "answers": 9,
+          "askedAt": "2024.11.27"
+        },
+        {
+          "title": "다이어트 레몬즙",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70601&docId=486200574&answerNo=4&qb=66CI66qs7KaZIOqzteuztSDshK3st6gg7Jis67CU66W4IOuLpOydtOyWtO2KuA==",
+          "views": 7323,
+          "answers": 13,
+          "askedAt": "2025.06.17"
+        },
+        {
+          "title": "식약청인증 부작용 없는 레몬즙 다이어트 추....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70601&docId=486289182&answerNo=5&qb=66CI66qs7KaZIOqzteuztSDshK3st6gg7Jis67CU66W4IOuLpOydtOyWtO2KuA==",
+          "views": 2034,
+          "answers": 7,
+          "askedAt": "2025.06.22"
         }
       ]
     }
