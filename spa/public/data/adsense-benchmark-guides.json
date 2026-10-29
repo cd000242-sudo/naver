@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-29T14:28:58.143Z",
+  "generatedAt": "2026-10-29T14:36:37.288Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -13328,67 +13328,6 @@
       ]
     },
     {
-      "id": "4027048e90bf9e83",
-      "urls": [
-        "https://ksmanblog.co.kr/1047",
-        "https://everydaywell.tistory.com/entry/%EA%B5%AD%EB%AF%BC%EC%97%B0%EA%B8%88-10%EB%85%84-%EB%AA%BB-%EC%B1%84%EC%9A%B0%EB%A9%B4-%EB%82%B8-%EB%8F%88%EC%9D%80-%EC%96%B4%EB%96%BB%EA%B2%8C-%EB%90%A0%EA%B9%8C-%EB%B0%98%ED%99%98%EC%9D%BC%EC%8B%9C%EA%B8%88-%EA%B3%84%EC%82%B0-%EC%9B%90%EB%A6%AC%EC%99%80-60%EC%84%B8-%EC%9D%B4%ED%9B%84-%EC%84%A0%ED%83%9D%EB%B2%95"
-      ],
-      "guide": {
-        "direction": "검색자는 10년을 못 채우고 사망하거나 지역가입자로 바뀌면 그동안 낸 돈이 사라지는지 막혀 있다. 고수 블로그 제목은 '60세 이후 선택법'만 다루고, 유족이 반환일시금과 유족연금 중 무엇을 받는지는 비교하지 않는다. 반환일시금 지급 요건과 유족연금 비교표, 신청 절차를 함께 주면 글에서 끝난다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "반환일시금 지급 요건(가입기간 10년 미만+사망 또는 탈퇴, 확인 필요: 국민연금공단)",
-          "반환일시금과 유족연금 중복 수급 불가 여부(확인 필요: 공단 공지)",
-          "반환일시금 신청 절차·필요서류(확인 필요: 국민연금공단 홈페이지)",
-          "지역가입자로 전환 시 직장가입 때 낸 금액의 승계 여부(확인 필요: 공단)"
-        ],
-        "mustAvoid": [
-          "국민연금을 저축처럼 '환급'된다고 단정해 오해를 유발하는 서술",
-          "배우자 소득 때문에 못 받는다는 소문을 근거 확인 없이 사실처럼 쓰는 것"
-        ],
-        "checkBefore": [
-          "국민연금공단 홈페이지에서 반환일시금 지급요건과 유족연금 수급 우선순위 확인",
-          "'배우자 소득으로 못 받는다'는 주장이 실제 국민연금법 조항에 근거하는지 원문 확인"
-        ],
-        "solves": [
-          "국민연금 10년 못 채우면 낸 돈이 어떻게 되는지 모름 → 반환일시금 지급 요건과 계산 원리 정리",
-          "지역가입자로 변경하면 기존 낸 돈이 어떻게 되는지 모름 → 가입기간 승계 여부 설명",
-          "배우자 돈 벌면 못 받는다는 말이 맞는지 모름 → 유족연금 수급 조건과 반환일시금 차이 비교"
-        ],
-        "actionTitles": [
-          "국민연금 10년 못 채우면 반환일시금 계산법 확인",
-          "국민연금 사망 시 반환일시금과 유족연금 비교하기",
-          "국민연금 미납 후 반환일시금 받는 법 지금 확인"
-        ]
-      },
-      "at": "2026-10-26T22:00:53.858Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "국민연금 나가는날에 깜빡하고 돈을 안넣어....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100402&docId=492318694&answerNo=1&qb=6rWt66+87Jew6riIIOyxhOyasOuptCDrj4jsnYAg7Ja065a76rKMIOuQoOq5jA==",
-          "views": 550,
-          "answers": 2,
-          "askedAt": "2026.03.05"
-        },
-        {
-          "title": "국민연금 지역가입자로 변경하면 그동안 직....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100402&docId=495332146&answerNo=3&qb=6rWt66+87Jew6riIIOyxhOyasOuptCDrj4jsnYAg7Ja065a76rKMIOuQoOq5jA==",
-          "views": 400,
-          "answers": 5,
-          "askedAt": "2026.09.28"
-        },
-        {
-          "title": "국민연금 임의가입 후 추납 제도, 어떻게 활....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=601&docId=494211393&answerNo=8&qb=6rWt66+87Jew6riIIOyxhOyasOuptCDrj4jsnYAg7Ja065a76rKMIOuQoOq5jA==",
-          "views": 343,
-          "answers": 9,
-          "askedAt": "2026.10.01"
-        }
-      ]
-    },
-    {
       "id": "d2e8163d0cc2d88b",
       "urls": [
         "https://bangulnote.com/entry/samsung-ena-buyback-q3-2026/",
@@ -19916,74 +19855,6 @@
       ]
     },
     {
-      "id": "757e54bc3db8378e",
-      "urls": [
-        "https://bebetterlifeforyou.com/154",
-        "https://cnp.youmytv.com/31"
-      ],
-      "guide": {
-        "direction": "검색자는 '내일배움카드 받을 수 있는지'가 아니라 재학생·조건부수급자·연령 등 애매한 케이스에서 본인이 자격이 되는지 막혀 있다. 고수 글은 일반 자격 요건만 나열하고 재학생 휴학·조건부수급자 같은 예외 케이스는 다루지 않는다. 이 글은 조건별 체크리스트와 고용24 조회 순서를 표로 정리해 끝내준다.",
-        "searchTargets": [
-          "국민내일배움카드 신청자격 조회방법",
-          "국민내일배움카드신청자격 신청방법",
-          "국민내일배움카드 신청 자격 확인"
-        ],
-        "mustInclude": [
-          "재학생(졸업유예 포함) 제외 조건과 휴학 처리 시 자격 변동 여부(확인 필요: 고용24 공지)",
-          "생계급여 조건부수급자의 발급 제외 원칙과 예외 조건(확인 필요: 고용24 또는 고용센터)",
-          "고용24 홈페이지에서 자격 자가진단하는 순서(단계별)",
-          "최대 지원금액 및 훈련비 지원 비율 (확인 필요: 고용24 고시)",
-          "4년제·전문대 학년별(졸업예정 2년 초과 등) 신청 가능 시점 비교표"
-        ],
-        "mustAvoid": [
-          "일반 성인 내일배움카드와 국민내일배움카드를 혼용해서 설명하지 말 것(제도명 혼동 위험)",
-          "조건부수급자 발급 가능 여부를 단정적으로 쓰지 말고 지역 고용센터 확인 필요라고 명시",
-          "학원·훈련기관 특정 과정(용접, 컴활 등) 수강 가능 여부를 확정적으로 보장하지 말 것"
-        ],
-        "checkBefore": [
-          "재학생 제외 기준과 휴학생 예외 처리 — 고용24 공식 공지 또는 고용센터 확인",
-          "생계급여 조건부수급자 발급 허용 여부 — 고용24 FAQ 또는 보건복지부 공지 확인",
-          "최대 지원금액(한도) 최신 수치 — 고용24 고시 확인"
-        ],
-        "solves": [
-          "재학생인데 발급되는지 모르겠다 → 재학생 제외 기준과 휴학 처리 시 변동을 표로 정리",
-          "조건부수급자라서 신청 막힐까 걱정된다 → 발급 제외 원칙과 예외 사례를 명시",
-          "학년·존업예정 기준이 헷갈린다 → 전문대·4년제 학년별 신청 가능 시점 비교표 제공"
-        ],
-        "actionTitles": [
-          "국민내일배움카드 신청자격 조회방법, 고용24에서 3분이면 끝",
-          "국민내일배움카드신청자격 신청방법 총정리, 재학생·수급자 예외까지",
-          "국민내일배움카드 신청 자격 확인 순서, 조건부수급자도 체크하세요"
-        ]
-      },
-      "at": "2026-10-28T01:08:43.483Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "국민내일배움카드 자격요건",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60804&docId=494833169&answerNo=8&qb=6rWt66+864K07J2867Cw7JuA7Lm065Oc7Iug7LKt7J6Q6rKp",
-          "views": 321,
-          "answers": 8,
-          "askedAt": "2026.10.21"
-        },
-        {
-          "title": "국민내일배움카드",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=111&docId=495593996&answerNo=1&qb=6rWt66+864K07J2867Cw7JuA7Lm065Oc7Iug7LKt7J6Q6rKp",
-          "views": 243,
-          "answers": 12,
-          "askedAt": "2026.10.18"
-        },
-        {
-          "title": "내일배움카드 생계급여조건부수급자",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60804&docId=495467108&answerNo=1&qb=6rWt66+864K07J2867Cw7JuA7Lm065Oc7Iug7LKt7J6Q6rKp",
-          "views": 149,
-          "answers": 3,
-          "askedAt": "2026.10.08"
-        }
-      ]
-    },
-    {
       "id": "a38d853f8d190c5c",
       "urls": [
         "https://bunny43.tistory.com/entry/%EA%B5%AD%EB%AF%BC%EC%97%B0%EA%B8%88-%EA%B5%B0%EB%B3%B5%EB%AC%B4-%ED%81%AC%EB%A0%88%EB%94%A7-2027%EB%85%84-%EC%A0%9C%EB%8C%80%ED%95%98%EB%A9%B4-18%EA%B0%9C%EC%9B%94-%EB%8B%A4-%EC%9D%B8%EC%A0%95%EB%90%98%EB%82%98%EC%9A%94"
@@ -20114,73 +19985,6 @@
           "views": 72,
           "answers": 1,
           "askedAt": "2026.07.25"
-        }
-      ]
-    },
-    {
-      "id": "791427bf79c9cd52",
-      "urls": [
-        "https://mimmi.co.kr/%eb%b2%95%ec%9b%90-%ec%a7%80%ea%b8%89%eb%aa%85%eb%a0%b9-%ec%8b%a0%ec%b2%ad-%ec%a0%88%ec%b0%a8/"
-      ],
-      "guide": {
-        "direction": "검색자는 전자소송포털에서 지급명령신청서를 쓰다가 '채권자·채무자 표시'나 '보정명령'에서 막힌다. 고수 글 제목은 절차·작성법을 포괄적으로만 안내해 보정명령 대응이나 이의신청 답변서 작성법까지는 못 푼다. 이 글은 전자소송 입력 항목별 작성 예시, 보정명령 대처, 이의신청 기간을 표로 정리해 끝내게 한다.",
-        "searchTargets": [
-          "법원 지급명령 신청",
-          "법원 지급명령 이의신청서",
-          "법원 지급명령 기간",
-          "법원 지급명령 확정"
-        ],
-        "mustInclude": [
-          "전자소송 지급명령 신청서 작성 항목(채권자/채무자 표시, 청구금액, 지연이자 연 20%)",
-          "보정명령 받았을 때 대응 순서",
-          "이의신청 기간(확인 필요: 민사소송법 상 기간)",
-          "지급명령 확정 조건",
-          "증거자료 첨부 형식(캡처 이미지 첨부 가능 여부)"
-        ],
-        "mustAvoid": [
-          "지급명령 절차와 일반 민사소송(본소) 절차를 혼동해 서술",
-          "채무자의 '이의신청서'와 이후 제출하는 '답변서'를 같은 것처럼 서술",
-          "법원마다 다른 보정명령 요구사항을 일반화"
-        ],
-        "checkBefore": [
-          "대법원 전자소송 홈페이지에서 지급명령 신청서 서식 확인",
-          "민사소송법상 이의신청 기간 확인(확인 필요)",
-          "법률구조공단 안내에서 보정명령 대응 절차 확인"
-        ],
-        "solves": [
-          "'지급명령신청서 어떻게 쓰는지 모르겠다' → 항목별 작성 예시로 해결",
-          "'보정명령 받았는데 어떻게 하나' → 대응 순서 안내로 해결",
-          "'이의신청서와 답변서 작성법' → 두 문서의 차이와 작성법 구분해 해결"
-        ],
-        "actionTitles": [
-          "법원 지급명령 이의신청서 작성법과 이의신청 기간 확인하기",
-          "법원 지급명령 확정까지 걸리는 기간과 이의신청 절차"
-        ]
-      },
-      "at": "2026-10-28T01:08:43.483Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "법원 전자소송 - 지급명령 신청서를 작성하고....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60211&docId=474938216&answerNo=4&qb=67KV7JuQIOyngOq4ieuqheuguSDsoITsnpDshozshqEg7Iug7LKt7IScIOyekeyEsQ==",
-          "views": 602,
-          "answers": 4,
-          "askedAt": "2024.09.07"
-        },
-        {
-          "title": "전자소송 임금채불 지급명령신청서 작성중",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60221&docId=495411825&answerNo=4&qb=67KV7JuQIOyngOq4ieuqheuguSDsoITsnpDshozshqEg7Iug7LKt7IScIOyekeyEsQ==",
-          "views": 194,
-          "answers": 5,
-          "askedAt": "2026.10.04"
-        },
-        {
-          "title": "전자소송 지급명령신청서 작성중 보정명령 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60221&docId=495518272&answerNo=4&qb=67KV7JuQIOyngOq4ieuqheuguSDsoITsnpDshozshqEg7Iug7LKt7IScIOyekeyEsQ==",
-          "views": 159,
-          "answers": 4,
-          "askedAt": "2026.10.13"
         }
       ]
     },
@@ -22665,67 +22469,6 @@
           "views": 2323,
           "answers": 12,
           "askedAt": "2026.06.01"
-        }
-      ]
-    },
-    {
-      "id": "b989ab6b5ef08ee3",
-      "urls": [
-        "https://sungwook100djr.tistory.com/407",
-        "https://b.paris15000.com/entry/150%EB%A7%8C-%ED%98%B8-%EC%A7%93%EB%8A%94%EB%8B%A4%EB%8A%94%EB%8D%B0-%EC%99%9C-%EC%A7%91%EC%9D%B4-%EC%97%86%EC%9D%84%EA%B9%8C-%E2%80%94-%EC%B0%A9%EA%B3%B5%EA%B3%BC-%EC%9E%85%EC%A3%BC%EC%9D%98-%ED%95%A8%EC%A0%95"
-      ],
-      "guide": {
-        "direction": "투기과열지구 재건축 매물에 '조합원 승계 가능'이라 적혀 있을 때, 도시정비법상 지위양도 금지의 예외 요건(보유기간·세대원·사업지연 등)을 충족하는지 스스로 못 가려 계약을 망설이는 지점을 짚는다. 고수 글들은 '비밀과 함정'이라 제목만 걸고 예외 조문·체크 항목은 안 보여준다. 예외 사유 체크리스트와 착공·입주 시점 차이표로 직접 대조하게 해 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "도시정비법상 조합원 지위양도 금지 예외 사유 조문(확인 필요: 법제처 국가법령정보센터)",
-          "승계조합원과 원조합원의 권리·의무 차이 비교표",
-          "'착공'과 '입주' 시점 차이에 따른 매물 리스크 구분",
-          "사례 단지 소재지·거래 시점(확인 필요: 원 재료에 없음)"
-        ],
-        "mustAvoid": [
-          "지역주택조합 조합원 모집과 재건축 조합원 지위승계를 같은 개념으로 혼동",
-          "특정 단지·매물을 법적으로 안전하다고 보증하는 듯한 표현"
-        ],
-        "checkBefore": [
-          "조합원 지위양도 금지 예외 조항 최신 조문(법제처, 도시 및 주거환경정비법)",
-          "해당 재건축 조합의 입주 완료 여부와 사업 단계(조합 또는 관할 구청 공고)"
-        ],
-        "solves": [
-          "'투기과열지구인데 왜 승계가 되나' → 지위양도 금지 예외 사유를 조문 기준 체크리스트로 제공",
-          "지역주택조합 모집과 뭐가 다른지 → 재건축 조합원 승계와 지역주택조합 모집 차이 비교",
-          "'착공했는데 왜 집이 없나' → 착공과 입주 시점 차이로 매물 리스크 구분"
-        ],
-        "actionTitles": [
-          "투기과열지구 조합원 지위승계 예외 요건 확인하는 법",
-          "재건축 틈새매물 조합원 승계 가능 여부 체크리스트",
-          "착공과 입주 차이로 재건축 매물 리스크 점검하는 법"
-        ]
-      },
-      "at": "2026-10-28T10:25:36.735Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "부산의 역사에 대해서..",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=130107&docId=39411013&answerNo=3&qb=7KeR7J20IOywqeqztSDsnoXso7wg7ZWo7KCV",
-          "views": 338130,
-          "answers": 12,
-          "askedAt": "2008.04.28"
-        },
-        {
-          "title": "부산의 역사를 연표로 나타내 주세요.",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=130102&docId=36673738&answerNo=14&qb=7KeR7J20IOywqeqztSDsnoXso7wg7ZWo7KCV",
-          "views": 125552,
-          "answers": 11,
-          "askedAt": "2008.05.15"
-        },
-        {
-          "title": "제발 ,, 답변 빨리 기다립니다....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1210&docId=21116733&answerNo=5&qb=7KeR7J20IOywqeqztSDsnoXso7wg7ZWo7KCV",
-          "views": 19634,
-          "answers": 5,
-          "askedAt": "2009.04.22"
         }
       ]
     },
@@ -74880,6 +74623,639 @@
           "views": 1644,
           "answers": 9,
           "askedAt": "2025.11.27"
+        }
+      ]
+    },
+    {
+      "id": "987f5b141d1cc6ff",
+      "urls": [
+        "https://sooahealth.com/entry/%EC%8B%9C%EB%8B%88%EC%96%B4%EC%9D%BC%EC%9E%90%EB%A6%AC-%EC%A0%95%EB%B3%B4%EC%82%AC%EC%9D%B4%ED%8A%B8-%EC%8B%A0%EC%B2%AD-%EB%B0%A9%EB%B2%95-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0",
+        "https://ilpaclf.linkistat.com/125"
+      ],
+      "guide": {
+        "direction": "지식인에는 '노인 상주 일자리 어떻게 구하나', '중장년층 일자리 사이트', '노인 일자리 신청하면 월급 얼마인가' 질문이 많아 검색자는 사이트 자체와 받는 돈을 가장 궁금해한다. 고수 블로그 제목은 서울 지역 신청 방법·모집 일정까지만 다뤄 전국 사이트 비교와 월급 범위는 비어 있다. 이 글은 공공·민간 사이트 비교표, 신청 순서, 활동유형별 월급 범위를 한 번에 정리해 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "한국노인인력개발원 등 공공 노인일자리 사이트명 (확인 필요: 공식 사이트)",
+          "고워크 등 중장년 특화 구인구직 플랫폼명과 특징",
+          "신청 순서: 회원가입→공고 확인→서류 접수→선발 안내",
+          "활동 유형별 월급·활동비 범위 (확인 필요: 공고 자료)",
+          "상·하반기 모집 일정 (확인 필요)"
+        ],
+        "mustAvoid": [
+          "노인일자리와 중장년 재취업 플랫폼을 같은 성격으로 섞어 쓰기",
+          "특정 유료 알바 사이트를 공공 노인일자리 사업처럼 소개",
+          "지역별로 다른 신청 조건을 전국 공통인 것처럼 단정"
+        ],
+        "checkBefore": [
+          "한국노인인력개발원·시니어클럽 공식 사이트의 최신 모집 공고",
+          "지자체(구청) 노인일자리 담당 부서 공지사항"
+        ],
+        "solves": [
+          "노인 상주 일자리 어디서 구하나 → 공공·민간 사이트 비교와 접속 방법으로 해결",
+          "중장년층 일자리 사이트 추천 → 플랫폼별 특징 비교표 제공",
+          "노인 일자리 신청하면 월급 얼마인지 → 유형별 금액 범위 정리"
+        ],
+        "actionTitles": [
+          "시니어일자리 정보사이트 신청 방법·월급 한눈에 정리",
+          "노인일자리 정보사이트 신청 순서와 월급 범위 확인하기",
+          "중장년 일자리 사이트 비교, 시니어 일자리 신청 전 확인"
+        ]
+      },
+      "at": "2026-10-29T14:34:20.760Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "노인관련 상주 일자리 어떻게 구하죠?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100103&docId=362795348&answerNo=8&qb=7Iuc64uI7Ja07J287J6Q66asIOygleuztOyCrOydtO2KuA==",
+          "views": 992,
+          "answers": 12,
+          "askedAt": "2026.09.25"
+        },
+        {
+          "title": "중장년층 일자리 보는 사이트좀 알려주세요....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40613&docId=470821142&answerNo=16&qb=7Iuc64uI7Ja07J287J6Q66asIOygleuztOyCrOydtO2KuA==",
+          "views": 938,
+          "answers": 15,
+          "askedAt": "2026.10.14"
+        },
+        {
+          "title": "노인 일자리 신청 방법이랑 월급 얼마나 되는....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100103&docId=493192738&answerNo=17&qb=7Iuc64uI7Ja07J287J6Q66asIOygleuztOyCrOydtO2KuA==",
+          "views": 722,
+          "answers": 21,
+          "askedAt": "2026.10.03"
+        }
+      ]
+    },
+    {
+      "id": "f3bc288435375185",
+      "urls": [
+        "https://yoanarc.com/1490",
+        "https://hampi2.tistory.com/1892"
+      ],
+      "guide": {
+        "direction": "독자는 '도경완이 정말 25만원뿐인가, 120억 펜트하우스는 뭔가'라는 모순과 방송심의 민원이 왜 걸렸는지를 궁금해한다. 고수 블로그 제목은 숫자만 던지고 편스토랑 발언의 맥락과 민원 접수 경위는 설명하지 않는다. 이 글은 방송 발언·보도된 자산 내역·민원 경위를 표로 비교해 모순의 실체를 정리해 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "120억 펜트하우스 가격 출처 (확인 필요: 보도 매체·시세 근거)",
+          "통장 잔고 25만원 발언이 나온 정확한 방송·회차 (확인 필요: 편스토랑 방영일)",
+          "방송통신심의위원회 민원 접수 날짜·건수 (확인 필요: 공식 발표)",
+          "도경완·한혜진 부부의 과거 자산 공개 발언 이력 (확인 필요)"
+        ],
+        "mustAvoid": [
+          "다른 '있어빌리티·가난 코스프레' 논란 연예인과 혼동",
+          "펜트하우스 시세를 확정된 자산으로 단정"
+        ],
+        "checkBefore": [
+          "방송통신심의위원회 민원 접수 공식 발표 자료",
+          "편스토랑 방송 원문 발언 영상·기사"
+        ],
+        "solves": [
+          "진짜 가난한가 궁금 → 보도된 자산과 방송 발언을 표로 비교해 모순 정리",
+          "방송심의 민원이 왜 걸렸나 → 민원 접수 경위와 쟁점 정리"
+        ],
+        "actionTitles": [
+          "도경완 가난 코스프레 논란, 재산과 발언 비교 정리",
+          "도경완 방송심의 민원, 왜 접수됐는지 경위 확인"
+        ]
+      },
+      "at": "2026-10-29T14:34:20.760Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "5a29fbd41eca7f45",
+      "urls": [
+        "https://brainblg.com/guryong-village-fire-summary/",
+        "https://freeplus.tistory.com/entry/guryong-village-fire-extinguished-13-hours-disaster-analysis"
+      ],
+      "guide": {
+        "direction": "지식인 질문 데이터는 이 소재와 무관해 참고하지 않았으며, 실제 독자 관심은 피해 규모(사상자·이재민 수)와 재발 원인, 재개발 일정 지연 여부다. 고수 블로그 제목은 '13시간 만의 완진과 이재민 지원대책'까지만 다루고 재개발 구체 일정은 비워둔다. 이 글은 피해 규모·이재민 지원 절차·재개발 추진 현황을 표로 정리해 끝낸다.",
+        "searchTargets": [
+          "서울 강남 화재",
+          "서울 강남 날씨"
+        ],
+        "mustInclude": [
+          "화재 발생 날짜·시간과 진화까지 13시간 소요 (요약 근거)",
+          "사상자·이재민 수 (확인 필요: 강남소방서·서울소방재난본부 발표)",
+          "구룡마을 과거 화재 이력(몇 번째 대형화재인지, 확인 필요)",
+          "이재민 지원대책(임시 거처·생계비 지원 등) 신청 방법 (확인 필요: 강남구청 공지)",
+          "재개발 추진 단계와 지연 여부 (확인 필요: 서울시·강남구 공고)"
+        ],
+        "mustAvoid": [
+          "화재 원인을 방화·누전 등으로 확정되지 않은 상태에서 단정",
+          "구룡마을과 다른 판자촌·쪽방촌 화재 사례를 섞어 서술",
+          "이재민 개인 신상이나 거주지를 특정해 노출"
+        ],
+        "checkBefore": [
+          "강남소방서·서울소방재난본부의 사상자·이재민 수 공식 발표",
+          "서울시·강남구청의 재개발 추진 현황 공고"
+        ],
+        "solves": [
+          "구룡마을 화재 피해 규모가 궁금 → 사상자·이재민 수를 표로 정리",
+          "재개발은 이제 어떻게 되나 → 추진 단계와 지연 여부 정리",
+          "이재민 지원은 어떻게 받나 → 지원대책 신청 절차 정리"
+        ],
+        "actionTitles": [
+          "서울 강남 화재 이재민 지원대책 신청 방법 확인"
+        ]
+      },
+      "at": "2026-10-29T14:34:20.760Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "마운자로 부작용, 어떤 증상이 나타날 수 있....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70303&docId=495619773&answerNo=1&qb=7ISc7Jq46rCV64Ko",
+          "views": 133,
+          "answers": 1,
+          "askedAt": "2026.10.20"
+        },
+        {
+          "title": "위고비 맞고 속이 울렁거리고 소화가 안 되는....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70303&docId=495530719&answerNo=1&qb=7ISc7Jq46rCV64Ko",
+          "views": 100,
+          "answers": 1,
+          "askedAt": "2026.10.13"
+        },
+        {
+          "title": "구취병원, 입에서 나는 냄새는 어디에서 진료....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70301&docId=495665577&answerNo=1&qb=7ISc7Jq46rCV64Ko",
+          "views": 27,
+          "answers": 1,
+          "askedAt": "2026.10.23"
+        }
+      ]
+    },
+    {
+      "id": "cd1803e19f445724",
+      "urls": [
+        "https://shcomms12.com/2026/10/29/eligibility-education-documents/",
+        "https://dailyloglab-369.com/entry/%EC%9E%A5%EC%95%A0%EC%9D%B8-%EB%93%B1%EB%A1%9D%EF%BD%9C%EC%A7%84%EB%8B%A8%C2%B7%EC%84%9C%EB%A5%98-%EC%A0%9C%EC%B6%9C%C2%B7%EC%8B%AC%EC%82%AC-%EC%A0%88%EC%B0%A8"
+      ],
+      "guide": {
+        "direction": "뇌전증·인대파열 등 진단을 받은 뒤 장애인등록을 어떻게 시작해야 하는지 몰라 지식인에 묻는 사람이 많다. 고수 블로그 제목은 '심사 절차'만 나열하고 장애 유형별로 제출서류가 다르다는 점은 짚지 못한다. 이 글은 신청→진단서 제출→공단 심사→판정 순서와 유형별 서류 체크리스트로 끝낸다.",
+        "searchTargets": [
+          "장애인등록 진단서"
+        ],
+        "mustInclude": [
+          "주민센터 신청→병원 진단서 제출→국민연금공단 심사→판정까지 이어지는 절차 흐름도",
+          "장애 유형별(지체·뇌전증·청각 등)로 제출서류가 다르다는 점과 유형별 체크리스트",
+          "장애진단서 외 소견서·진료기록지 등 유형별 추가 서류 목록(확인 필요: 복지부 시행규칙)",
+          "장애인연금 수급 중 등록·재심사 시 자격 유지 여부(확인 필요: 국민연금공단 공지)"
+        ],
+        "mustAvoid": [
+          "뇌전증·인대파열 등 특정 질환 사례를 모든 장애유형에 일반화하지 않기",
+          "구 장애등급(1~6급)과 현재 장애정도(심한/심하지 않은) 표기를 혼용하지 않기",
+          "개인별 심사결과를 장담하는 표현(판정 보장) 쓰지 않기"
+        ],
+        "checkBefore": [
+          "국민연금공단 장애심사센터 공식 안내에서 유형별 제출서류 최신 목록 확인",
+          "보건복지부 장애인복지법 시행규칙상 장애등급심사 흐름도 확인"
+        ],
+        "solves": [
+          "장애유형별 제출서류가 달라 헷갈림 → 유형별(지체·뇌전증 등) 필요 서류 체크리스트로 정리",
+          "신청 순서(주민센터→병원→심사→판정)를 몰라 막막함 → 단계별 흐름도로 안내",
+          "연금 수급 중 등록하면 자격 박탈되는지 불안 → 등록과 연금 자격의 관계 설명"
+        ],
+        "actionTitles": [
+          "장애인등록 진단서 준비하는 법, 서류부터 심사까지 정리",
+          "장애인등록 신청 순서 한눈에, 진단서 제출 체크리스트",
+          "장애인등록 진단서 어떤 서류 필요한지 유형별로 바로 확인"
+        ]
+      },
+      "at": "2026-10-29T14:34:20.760Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "뇌전증 진단을 받으면 장애 등급 심사는 어떻....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70108&docId=494101729&answerNo=2&qb=7J6l7JWg7J24IOuTseuhneynhOuLqCDsoJzstpwg7Ius7IKs",
+          "views": 1511,
+          "answers": 2,
+          "askedAt": "2026.07.25"
+        },
+        {
+          "title": "인대파열 장애인 등록",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70120&docId=494088000&answerNo=2&qb=7J6l7JWg7J24IOuTseuhneynhOuLqCDsoJzstpwg7Ius7IKs",
+          "views": 598,
+          "answers": 3,
+          "askedAt": "2026.07.09"
+        },
+        {
+          "title": "장애인 등록",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100102&docId=493264042&answerNo=1&qb=7J6l7JWg7J24IOuTseuhneynhOuLqCDsoJzstpwg7Ius7IKs",
+          "views": 269,
+          "answers": 4,
+          "askedAt": "2026.05.05"
+        }
+      ]
+    },
+    {
+      "id": "4439a1ef65529089",
+      "urls": [
+        "https://yoarc.tistory.com/1834"
+      ],
+      "guide": {
+        "direction": "3.4%라는 수치만 보고 좋은지 나쁜지, 금리에 어떤 영향을 주는지 몰라 검색하는 사람이 많다. 고수 블로그 제목은 숫자만 던지고 과거 분기와 비교하거나 연준 결정과의 연결고리는 설명하지 못한다. 이 글은 최근 분기별 성장률 비교표와 성장률→금리 결정 흐름 설명으로 끝낸다.",
+        "searchTargets": [
+          "미국 gdp 성장률",
+          "미국 gdp 2025",
+          "미국 gdp 10월 발표일",
+          "미국 gdp 순위"
+        ],
+        "mustInclude": [
+          "최근 분기별 미국 GDP 성장률 비교표(확인 필요: BEA 공식 발표치)",
+          "3.4%가 과거 분기 대비 높은지 낮은지 판단 기준(확인 필요: BEA 발표치)",
+          "GDP 성장률이 연준 금리 결정에 영향을 주는 메커니즘 설명",
+          "미국 GDP 규모·순위·1인당 GDP 등 기본 수치(확인 필요: IMF/World Bank 최신 자료)",
+          "다음 GDP 발표 예정일(확인 필요: BEA 공식 일정)"
+        ],
+        "mustAvoid": [
+          "BEA·IMF·CBO 등 출처가 다른 성장률 수치를 구분 없이 섞어 쓰지 않기",
+          "국가부채 증가와 GDP 성장률을 단순 인과관계로 단정하지 않기",
+          "QoQ 연율과 YoY 성장률을 구분 없이 섞어 쓰지 않기"
+        ],
+        "checkBefore": [
+          "미국 상무부 경제분석국(BEA) 공식 발표 자료에서 3분기 수치와 발표일 확인",
+          "BEA 공식 캘린더에서 다음 GDP 발표 예정일 확인",
+          "CBO·IMF 등 부채·성장률 전망치 출처 확인"
+        ],
+        "solves": [
+          "3.4%가 좋은지 나쁜지 감이 안 옴 → 최근 분기별 성장률 표로 비교해 해석 제공",
+          "GDP 발표일을 몰라 헷갈림 → 다음 발표 일정 정리",
+          "GDP와 금리가 무슨 관계인지 모름 → 성장률→연준 결정 흐름으로 설명"
+        ],
+        "actionTitles": [
+          "미국 GDP 성장률 3.4% 발표, 분기별 비교로 바로 확인",
+          "미국 GDP 순위·규모 한눈에, 최신 수치 정리해 확인",
+          "미국 GDP 발표일 언제인지, 다음 일정까지 확인해보기"
+        ]
+      },
+      "at": "2026-10-29T14:34:20.760Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "미국의 경제성장률",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=409&docId=234408970&answerNo=1&qb=66+46rWtIGdkcCDshLHsnqXrpaAg6rK97KCcIOyghOunnQ==",
+          "views": 1435,
+          "answers": 1,
+          "askedAt": "2015.09.15"
+        },
+        {
+          "title": "2024년 경제성장률, 2025년 경제성장률 전망",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=408&docId=481334570&answerNo=5&qb=66+46rWtIGdkcCDshLHsnqXrpaAg6rK97KCcIOyghOunnQ==",
+          "views": 1103,
+          "answers": 6,
+          "askedAt": "2025.05.07"
+        },
+        {
+          "title": "미국 국가부채 어마하다는데요 이게 언제쯤 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=475784828&answerNo=3&qb=66+46rWtIGdkcCDshLHsnqXrpaAg6rK97KCcIOyghOunnQ==",
+          "views": 314,
+          "answers": 3,
+          "askedAt": "2026.09.08"
+        }
+      ]
+    },
+    {
+      "id": "9c2efd87bd604493",
+      "urls": [
+        "https://sooahealth.com/entry/%EA%B1%B4%EA%B0%95%EA%B2%80%EC%A7%84-%EA%B2%B0%EA%B3%BC%EC%A1%B0%ED%9A%8C-%EC%98%A8%EB%9D%BC%EC%9D%B8-%ED%99%95%EC%9D%B8-%EB%B0%A9%EB%B2%95"
+      ],
+      "guide": {
+        "direction": "검진 결과지 우편을 기다리다 '결과 조회 안 뜸'을 검색하는 사람이 많지만 원인(기간 미경과·인증 오류)은 모른다. 고수 블로그 제목은 '온라인 확인 방법'만 보여주고 국가·특수·국민건강검진 조회 경로 차이는 구분하지 못한다. 이 글은 PC·모바일 앱별 조회 순서와 '결과 안 뜸' 원인별 체크리스트로 끝낸다.",
+        "searchTargets": [
+          "건강검진 결과 조회 안뜸",
+          "국가건강검진 결과 조회",
+          "특수건강검진 결과 조회",
+          "건강검진 결과 조회 모바일"
+        ],
+        "mustInclude": [
+          "PC: 국민건강보험공단 홈페이지 로그인 후 '건강검진 결과조회' 메뉴 경로",
+          "모바일: The건강보험 앱 간편인증 후 조회·PDF저장, 10년치 결과 확인 가능",
+          "결과 조회까지 걸리는 기간(확인 필요: 공단 공지)",
+          "특수건강검진은 국가건강검진과 조회 경로가 다르다는 점",
+          "고령층 등 본인인증 어려운 경우 자녀 등 가족 대리조회 방법"
+        ],
+        "mustAvoid": [
+          "국가건강검진(공단)과 특수건강검진(산업안전보건법 대상)을 같은 걸로 섞어 쓰지 않기",
+          "우편 결과지와 온라인 조회 결과의 반영 시점 차이를 혼동하지 않기",
+          "'결과 안 뜸' 원인을 하나로 단정하지 말고 기간 미경과·인증 오류 등 가능성 나열"
+        ],
+        "checkBefore": [
+          "국민건강보험공단 홈페이지·The건강보험 앱 공식 메뉴명과 경로 확인",
+          "결과 반영까지 걸리는 공식 기간(공단 고객센터 또는 공지)",
+          "특수건강검진 결과조회가 별도 시스템(안전보건공단 등)인지 확인"
+        ],
+        "solves": [
+          "결과 조회가 안 떠서 당황 → 기간 미경과·인증 오류 등 원인별 체크리스트 제공",
+          "PC/모바일 중 어디서 봐야 할지 모름 → 앱과 홈페이지 경로 각각 안내",
+          "국가·특수·국민건강검진 용어가 헷갈림 → 종류별 조회 경로 구분 정리"
+        ],
+        "actionTitles": [
+          "건강검진 결과조회 안 뜸, 원인별로 바로 확인하는 법",
+          "국가건강검진 결과조회 모바일 어플로 간편하게 확인",
+          "특수건강검진 결과조회 방법, 일반검진과 구분해 확인"
+        ]
+      },
+      "at": "2026-10-29T14:34:20.760Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "건강검진 결과 인터넷 조회 되나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70117&docId=492457069&answerNo=4&qb=6rG06rCV6rKA7KeEIOqysOqzvOyhsO2ajCDsmKjrnbzsnbg=",
+          "views": 2679,
+          "answers": 4,
+          "askedAt": "2026.10.19"
+        },
+        {
+          "title": "건강검진 결과서",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=709&docId=495259880&answerNo=1&qb=6rG06rCV6rKA7KeEIOqysOqzvOyhsO2ajCDsmKjrnbzsnbg=",
+          "views": 286,
+          "answers": 1,
+          "askedAt": "2026.09.22"
+        },
+        {
+          "title": "지난주에 국가 건강검진받았는데 결과지는 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70117&docId=495533286&answerNo=3&qb=6rG06rCV6rKA7KeEIOqysOqzvOyhsO2ajCDsmKjrnbzsnbg=",
+          "views": 273,
+          "answers": 4,
+          "askedAt": "2026.10.23"
+        }
+      ]
+    },
+    {
+      "id": "af4818b2fba4a75d",
+      "urls": [
+        "https://hanbre.tistory.com/entry/%EB%A7%88%EC%9A%B4%EC%9E%90%EB%A1%9C-%EB%A7%9E%EC%9C%BC%EB%A9%B4-%EC%88%A0-%EC%83%9D%EA%B0%81%EB%8F%84-%EC%A4%84%EC%96%B4%EB%93%A4%EA%B9%8C-%ED%95%98%EC%9D%B4%EB%84%A4%EC%BC%84-%EB%AC%B4%EC%95%8C%EC%BD%9C-%EC%A0%84%ED%99%98%C2%B7GLP-1-%EC%9D%8C%EC%A3%BC-%EB%B3%80%ED%99%94"
+      ],
+      "guide": {
+        "direction": "검색자는 '마운자로 맞으면 진짜 술 생각이 줄어드는지', '하이네켄이 왜 무알콜 전환을 서두르는지'가 실제로 연관 있는지 궁금해한다. 고수 글 제목은 두 현상을 나열만 하고 인과관계인지 추정인지 구분을 안 짚는다. 이 글은 GLP-1 계열 약물의 음주욕구 관련 보고 사례와 하이네켄 발표 내용을 분리해서 정리해 판단 기준을 준다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "마운자로(티르제파타이드) 성분과 GLP-1 계열 분류",
+          "하이네켄의 무알콜 비중 확대 발표 시점·수치(확인 필요: 하이네켄 IR·보도자료)",
+          "GLP-1 약물과 음주욕구 감소 관련 보고 사례(확인 필요: 학술자료·식약처 자료)"
+        ],
+        "mustAvoid": [
+          "마운자로를 알코올 중독 치료제로 단정하는 서술",
+          "하이네켄의 전략 변화를 GLP-1 유행과 확정적 인과관계로 서술"
+        ],
+        "checkBefore": [
+          "하이네켄 공식 IR·보도자료의 무알콜 비중 수치",
+          "GLP-1과 음주욕구 관련 논문·FDA/식약처 자료 존재 여부"
+        ],
+        "solves": [
+          "'마운자로 맞으면 술 생각이 줄어든다는 게 사실인지' → 관련 보고 사례와 근거 수준을 구분해 정리",
+          "'하이네켄이 왜 무알콜 전환을 하는지 GLP-1과 관련있는지' → 발표 내용과 유행 시점을 분리해 비교",
+          "'GLP-1 비만약 유행이 주류 시장에 미치는 영향' → 업계 전망과 실제 데이터를 구분해 제시"
+        ],
+        "actionTitles": [
+          "마운자로와 음주 욕구 변화, 근거와 추정 구분해 확인하기",
+          "하이네켄 무알콜 전환과 GLP-1 연관성 사실 확인하기"
+        ]
+      },
+      "at": "2026-10-29T14:34:20.760Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "275eaac1ac6ffe61",
+      "urls": [
+        "https://spylab.tistory.com/732"
+      ],
+      "guide": {
+        "direction": "검색자는 '상동광산 관련주가 정확히 어떤 종목인지, 알몬티 ALM의 생산 개시와 자사주 매입이 주가에 어떤 의미인지' 판단하려 한다. 고수 글은 종목명만 나열하고 생산 지연 이력이나 자사주 매입의 구체 규모·기간을 안 짚는다. 이 글은 알몬티 ALM의 생산·자사주 매입 공시 내용을 표로 정리해 투자 판단 참고자료로 끝내게 한다.",
+        "searchTargets": [
+          "상동광산 관련주"
+        ],
+        "mustInclude": [
+          "알몬티코리아텅스텐(ALMT)과 상동광산의 관계",
+          "생산 개시 일정(확인 필요: 전자공시시스템 다트)",
+          "자사주 매입 규모·기간(확인 필요: 공시자료)"
+        ],
+        "mustAvoid": [
+          "과거 생산 지연 이력을 언급 없이 낙관적 전망만 서술하는 것",
+          "비슷한 이름의 다른 텅스텐 관련주와 혼동하는 것"
+        ],
+        "checkBefore": [
+          "전자공시시스템(DART)의 알몬티 관련 최신 공시",
+          "상동광산 생산 개시 관련 최신 보도자료"
+        ],
+        "solves": [
+          "'상동광산 관련주가 정확히 뭔지' → 알몬티 ALM과 상동광산의 관계, 관련 종목명 정리",
+          "'자사주 매입이 주가에 어떤 의미인지' → 매입 규모·기간을 공시 기준으로 정리",
+          "'생산 개시가 실제 언제인지' → 공시·보도자료 기준 생산 일정 정리"
+        ],
+        "actionTitles": [
+          "상동광산 관련주 알몬티 ALM 생산 일정 확인하기",
+          "알몬티 자사주 매입 규모 공시로 확인하는 법",
+          "상동광산 관련주 투자 전 꼭 확인할 체크리스트"
+        ]
+      },
+      "at": "2026-10-29T14:34:20.760Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "abd0ea4d49bb9749",
+      "urls": [
+        "https://blanc888.tistory.com/122"
+      ],
+      "guide": {
+        "direction": "검색자는 '월세 세액공제와 현금영수증을 둘 다 받을 수 있는지, 계약서를 분실했거나 전입신고 전 월세도 공제되는지'가 막힌 지점이다. 고수 글은 선택법만 설명하고 단독주택·행복주택·청년주택·전원주택 등 주택 유형별 적용 가능 여부는 안 다룬다. 이 글은 중복 불가 규정과 주택 유형별 조건표, 계약서 분실·전입신고 타이밍 대처법까지 정리해 바로 선택하게 한다.",
+        "searchTargets": [
+          "청년주택 월세",
+          "행복주택 월세",
+          "단독주택 월세",
+          "전원주택 월세"
+        ],
+        "mustInclude": [
+          "월세 세액공제와 현금영수증 중복 불가 규정",
+          "월세 세액공제 소득·주택 요건(확인 필요: 국세청 연말정산 간소화 서비스 최신 기준)",
+          "임대차계약서 분실 시 대처법과 필요서류",
+          "전입신고 시점에 따른 공제 범위 계산 예시"
+        ],
+        "mustAvoid": [
+          "모든 주택유형(단독주택·행복주택·청년주택 등)에 동일 조건이 적용된다고 단정하는 것",
+          "월세 세액공제와 주택청약 소득공제를 혼동하는 것"
+        ],
+        "checkBefore": [
+          "국세청 연말정산 간소화 서비스의 공제 요건 최신 기준(총급여·주택가액)",
+          "홈택스 현금영수증 신청 방법 최신 공지"
+        ],
+        "solves": [
+          "'월세 세액공제와 현금영수증 둘 다 받을 수 있나' → 중복 불가 규정과 유리한 선택 기준 비교표로 제공",
+          "'계약서를 분실했는데 세액공제 받을 수 있나' → 분실 시 대처 방법과 필요서류 안내",
+          "'전입신고 전/후 월세도 공제되나' → 전입신고 타이밍별 공제 범위 계산 예시 제공"
+        ],
+        "actionTitles": [
+          "주택 월세 세액공제 vs 현금영수증 한눈에 비교하기",
+          "청년주택 월세 세액공제 조건 확인하고 신청하는 법",
+          "행복주택 월세 현금영수증 신청 전 꼭 확인할 것"
+        ]
+      },
+      "at": "2026-10-29T14:34:20.760Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "월세 - 현금 영수증 vs 월세 세액공제",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40311&docId=287228582&answerNo=1&qb=7KO87YOdIOyblOyEuCDshLjslaHqs7XsoJwgdnMg7ZiE6riI7JiB7IiY7Kad",
+          "views": 2802,
+          "answers": 1,
+          "askedAt": "2017.10.26"
+        },
+        {
+          "title": "연말정산 주택임차료 월세액 현금영수증 신....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40311&docId=437707852&answerNo=1&qb=7KO87YOdIOyblOyEuCDshLjslaHqs7XsoJwgdnMg7ZiE6riI7JiB7IiY7Kad",
+          "views": 631,
+          "answers": 1,
+          "askedAt": "2023.01.25"
+        },
+        {
+          "title": "월세 세액공제 vs 월세 현금영수증",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40311&docId=319116157&answerNo=1&qb=7KO87YOdIOyblOyEuCDshLjslaHqs7XsoJwgdnMg7ZiE6riI7JiB7IiY7Kad",
+          "views": 314,
+          "answers": 1,
+          "askedAt": "2019.01.18"
+        }
+      ]
+    },
+    {
+      "id": "04d6995e806489d7",
+      "urls": [
+        "https://blanc888.tistory.com/121"
+      ],
+      "guide": {
+        "direction": "검색자는 월세 세액공제와 주택임차차입금 공제를 같은 해에 함께 받을 수 있는지, 총급여 8천만원·무주택 세대주 같은 조건을 자신이 충족하는지 막혀 묻는다. 고수 블로그 제목은 '동시 적용 조건'만 내세우지만 지식인 글들은 집주인 동의, 계약 연장 거주, 관리비 포함 여부 같은 실전 변수를 따로 다뤄 연결이 안 돼 있다. 조건표로 두 공제 요건을 나란히 놓고 본인 상황을 체크리스트로 바로 확인하게 끝낸다.",
+        "searchTargets": [
+          "월세 세액공제 조건",
+          "월세 세액공제 한도",
+          "월세 세액공제 계산",
+          "월세 세액공제 집주인 동의"
+        ],
+        "mustInclude": [
+          "과세기간 종료일(12월 31일) 기준 무주택 세대주, 1주택 이하 조건",
+          "총급여액 8천만원 이하 기준(일반적 기준, 확인 필요: 국세청)",
+          "집주인 동의가 공제에 필요 없다는 점 명시",
+          "계약서상 기간이 끝나도 실제 거주+월세 이체내역이 있으면 공제 인정",
+          "월세 세액공제와 주택임차차입금 공제의 적용 요건 비교표"
+        ],
+        "mustAvoid": [
+          "월세 세액공제와 주택임차차입금 원리금상환 공제를 같은 주택에 무조건 동시 적용 가능하다고 단정하는 것",
+          "전세자금대출 원리금상환 공제와 월세 세액공제를 같은 제도로 혼동하는 것"
+        ],
+        "checkBefore": [
+          "월세 세액공제와 주택임차차입금 공제 동시 적용 가능 여부 — 국세청 홈택스 또는 국세상담센터(126)",
+          "총급여 8천만원 기준이 현재도 유지되는지 — 국세청 연말정산 안내"
+        ],
+        "solves": [
+          "월세 세액공제와 주택임차차입금 공제를 같은 해에 같이 받을 수 있는지 → 요건 비교표로 바로 판단",
+          "계약서 기간이 끝나고 한 달씩 연장 거주 중인데 공제되는지 → 실거주+이체내역 기준으로 설명",
+          "집주인 동의가 필요한지 → 불필요하다는 점을 명확히 정리"
+        ],
+        "actionTitles": [
+          "월세 세액공제 조건 확인하고 신청하는 방법 한도까지 정리",
+          "월세 세액공제 계산 전 집주인 동의 필요한지 꼭 확인",
+          "월세 세액공제 신청기간과 관리비 포함 여부 체크리스트"
+        ]
+      },
+      "at": "2026-10-29T14:34:20.760Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "연말정산 월세 세액공제 신청",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40311&docId=491440532&answerNo=9&qb=7JuU7IS47IS47JWh6rO17KCc",
+          "views": 200,
+          "answers": 11,
+          "askedAt": "2026.10.24"
+        },
+        {
+          "title": "월세 세액공제 관련 질문입니다.",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=4020202&docId=495403175&answerNo=3&qb=7JuU7IS47IS47JWh6rO17KCc",
+          "views": 188,
+          "answers": 4,
+          "askedAt": "2026.10.03"
+        },
+        {
+          "title": "월세세액공제",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40311&docId=494923100&answerNo=5&qb=7JuU7IS47IS47JWh6rO17KCc",
+          "views": 166,
+          "answers": 5,
+          "askedAt": "2026.10.12"
+        }
+      ]
+    },
+    {
+      "id": "ae4f60c5fcbe3c7a",
+      "urls": [
+        "https://sweetonion1005.tistory.com/entry/%EC%A3%BC%ED%83%9D%EC%97%B0%EA%B8%88-%EC%8B%A0%EC%B2%AD%EC%84%9C-%EC%9E%91%EC%84%B1-%EC%9C%A0%EC%9D%98%EC%82%AC%ED%95%AD-%ED%95%84%EC%88%98-%EC%84%9C%EB%A5%98-%EC%8B%A0%EC%B2%AD-%EC%A1%B0%EA%B1%B4-%EC%99%84%EB%B2%BD-%EC%A0%95%EB%A6%AC"
+      ],
+      "guide": {
+        "direction": "검색자는 집문서가 꼭 필요한지, 공동명의 주택은 누가 신청하는지, 근저당이 있어도 되는지 등 서류·상황별 가능 여부에서 막힌다. 고수 블로그 제목은 '필수 서류·신청조건 완벽정리'로 포괄적이지만 지식인 질문들은 공동명의 전원 동의, 근저당 말소 순서, 신청서 작성 후 취소 절차처럼 구체 상황을 각각 따로 묻고 있어 한 글에 안 모여 있다. 서류 체크리스트와 상황별(공동명의/근저당/취소) 처리 순서를 한 번에 제시해 다시 찾아보지 않게 끝낸다.",
+        "searchTargets": [
+          "주택연금 신청 서류 준비",
+          "주택연금신청서 작성방법"
+        ],
+        "mustInclude": [
+          "집문서(등기권리증)는 요구되지 않고 등기부등본이 주택 소유 확인 서류로 사용된다는 점",
+          "공동명의 주택은 모든 소유자의 동의가 필요하다는 점",
+          "근저당이 있어도 신청 가능하며 초기 인출금으로 기존 대출 상환·말소 후 신규 근저당 설정하는 순서",
+          "운영기관은 한국주택금융공사(HF)라는 점",
+          "신청서 작성 후 취소·철회가 가능한 단계와 기한(확인 필요: HF 고객센터)"
+        ],
+        "mustAvoid": [
+          "집문서와 등기부등본을 같은 서류처럼 혼동해 안내하는 것",
+          "주택연금을 국민연금·개인연금 등 다른 연금 제도와 혼동하는 것",
+          "상속포기가 주택연금 수급권에 미치는 영향을 법률 자문처럼 단정하는 것(확인 필요: 세무사·HF)"
+        ],
+        "checkBefore": [
+          "정확한 필수 서류 목록 — 한국주택금융공사 홈페이지 또는 상담센터(1688-8114)",
+          "근저당 말소 절차와 초기 인출금 한도 — HF 공식 안내",
+          "신청서 작성 후 취소 가능 기한 — HF 고객센터"
+        ],
+        "solves": [
+          "집문서(등기권리증)가 꼭 필요한지 → 등기부등본으로 충분하다는 점을 명시",
+          "공동명의 주택을 한 명이 단독 신청할 수 있는지 → 전원 동의 필요 여부 체크리스트",
+          "근저당이 있는 집도 신청되는지 → 상환·말소 후 재설정하는 순서 안내"
+        ],
+        "actionTitles": [
+          "주택연금 신청 서류 준비 체크리스트와 신청서 작성방법",
+          "주택연금신청서 작성방법과 공동명의 근저당 처리 순서",
+          "주택연금 신청 서류 준비와 신청서 작성방법 완벽정리"
+        ]
+      },
+      "at": "2026-10-29T14:34:20.760Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "주택연금 신청시 준비물",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40201&docId=495333474&answerNo=1&qb=7KO87YOd7Jew6riI7Iug7LKt7ISc",
+          "views": 371,
+          "answers": 8,
+          "askedAt": "2026.09.28"
+        },
+        {
+          "title": "주택연금 신청",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100402&docId=488186461&answerNo=6&qb=7KO87YOd7Jew6riI7Iug7LKt7ISc",
+          "views": 257,
+          "answers": 6,
+          "askedAt": "2026.08.05"
+        },
+        {
+          "title": "주택연금 신청조건",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=51002&docId=495328466&answerNo=7&qb=7KO87YOd7Jew6riI7Iug7LKt7ISc",
+          "views": 155,
+          "answers": 9,
+          "askedAt": "2026.10.02"
         }
       ]
     }
