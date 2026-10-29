@@ -76,3 +76,18 @@ export function freshness(builtAt, now = new Date()) {
   const minutes = Math.max(0, Math.floor((nowMs - built) / 60000));
   return { minutes, stale: minutes > STALE_MINUTES };
 }
+
+/**
+ * 분야별 묶음(2026-10-29 "카테고리별로 나눠주고"). 가장 빠른 토픽이 든 분야가 먼저 — 입력이 이미 빠른 순이라
+ * 처음 나온 순서대로 분야를 세운다. 분야 안 순서도 그대로. 분야가 없으면 '기타'로 맨 뒤.
+ */
+export function groupByCategory(topics) {
+  const groups = new Map();
+  for (const topic of Array.isArray(topics) ? topics : []) {
+    const category = typeof topic?.category === 'string' && topic.category.trim() ? topic.category.trim() : '기타';
+    groups.set(category, [...(groups.get(category) || []), topic]);
+  }
+  return [...groups.entries()]
+    .map(([category, list]) => ({ category, topics: list }))
+    .sort((a, b) => Number(a.category === '기타') - Number(b.category === '기타'));
+}

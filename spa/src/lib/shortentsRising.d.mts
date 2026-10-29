@@ -28,3 +28,4 @@ export const STALE_MINUTES: number;
 export function parseShortentsRising(raw: unknown): ShortentsRising;
 export function loadShortentsRising(fetcher?: typeof fetch): Promise<ShortentsRising>;
 export function freshness(builtAt: string | null | undefined, now?: Date | number): { minutes: number | null; stale: boolean };
+export function groupByCategory(topics: ShortentsTopic[]): Array<{ category: string; topics: ShortentsTopic[] }>;

@@ -92,3 +92,14 @@ test('불러오기 — 성공·실패·HTTP 오류', async () => {
   assert.deepEqual((await loadShortentsRising(async () => { throw new Error('net'); })).topics, []);
   assert.deepEqual((await loadShortentsRising(async () => ({ ok: true, json: async () => { throw new Error('bad'); } }))).topics, []);
 });
+
+// 2026-10-29 사장님 "카테고리별로 나눠주고" — 분야별 묶음. 가장 빠른 토픽이 든 분야가 먼저, 분야 안 순서는 원래(빠른 순) 그대로.
+test('분야별 묶기 — 첫 등장 순서대로 분야를 세우고, 분야 없음은 기타로 맨 뒤', async () => {
+  const { groupByCategory } = await import('../src/lib/shortentsRising.mjs');
+  const topics = [
+    { keyword: 'a', category: '경제' }, { keyword: 'b', category: '엔터' }, { keyword: 'c', category: '' },
+    { keyword: 'd', category: '경제' }, { keyword: 'e', category: '엔터' },
+  ];
+  assert.deepEqual(groupByCategory(topics).map((g) => [g.category, g.topics.map((t) => t.keyword).join('')]), [['경제', 'ad'], ['엔터', 'be'], ['기타', 'c']]);
+  assert.deepEqual(groupByCategory([]), []);
+});
