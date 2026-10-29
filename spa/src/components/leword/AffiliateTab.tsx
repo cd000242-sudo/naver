@@ -7,12 +7,11 @@ import { AFFILIATE_LANES, type LaneId } from './affiliateLanes';
 import { affiliateTitle, recommendationReason } from '../../lib/recommendationView.mjs';
 import { assessAffiliateRecommendation, compareAffiliateRecommendations } from '../../lib/affiliateRecommendation.mjs';
 import { useEvidenceClock } from './useEvidenceClock';
-import RecommendationFilter, { type RecommendationStatus } from './RecommendationFilter';
 import { loadUserKeys } from '../../lib/userKeys';
 import { campaignFreshness } from '../../lib/affiliateFreshness.mjs';
 import { affiliateCategory, compareGolden, goldenOf, summarizeCategories } from '../../lib/affiliateGolden.mjs';
 import { enrichKey, loadKeywordEnrich, type KeywordEnrich } from '../../lib/keywordEnrich.mjs';
-import { AffiliateGoldenAids, CategoryChips, GoldenRatioBadge } from './AffiliateGoldenParts';
+import { AffiliateGoldenAids, CategoryChips, GoldenRatioBadge, NonGoldenList } from './AffiliateGoldenParts';
 
 /**
  * 제휴 황금키워드 — 플랫폼별 서브탭.
@@ -139,7 +138,6 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const nowMs = useEvidenceClock();
     /** 방금 복사한 상품 — 눌렀는데 아무 반응이 없으면 됐는지 알 수가 없다. */
     const [copied, setCopied] = useState('');
-    const [recommendationView, setRecommendationView] = useState<RecommendationStatus>('ready');
     const [category, setCategory] = useState('전체');
     const [enrich, setEnrich] = useState<Map<string, KeywordEnrich>>(() => new Map());
     useEffect(() => { let alive = true; void loadKeywordEnrich().then((map) => { if (alive) setEnrich(map); }); return () => { alive = false; }; }, []);
@@ -212,10 +210,13 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
         }
         return { item, recommendation, golden: goldenOf(item, recommendation), category: affiliateCategory(item) };
     }).sort(compareAffiliateRecommendations);
-    const counts = { ready: 0, research: 0, excluded: 0 };
-    for (const entry of assessed) counts[entry.recommendation.status] += 1;
-    // 같은 추천 상태 안에서는 황금비(검색량÷문서수, 하한 통과분 먼저)가 순서를 정한다. 카테고리를 고르면 그 안에서만.
-    const inView = assessed.filter(entry => entry.recommendation.status === recommendationView);
+    /*
+     * 목록 = 황금(문서수 < 검색량, 검색 100+)이면서 추천 제외(상품과 다른 말 · 포화)가 아닌 상품만, 문서÷검색 낮은 순.
+     * 사장님 2026-10-29 "여전히 검색비율이 낮네요 문서비율이 높구요" — 줄만 바꾸고 문서가 더 많은 상품을 다 보여 준 것이 잘못이었다.
+     * 나머지는 맨 아래 접힌 칸에 이름과 숫자만. 근거 통과 / 추가 조사 상태는 카드 배지가 말한다.
+     */
+    const inView = assessed.filter(entry => entry.golden.golden && entry.recommendation.status !== 'excluded');
+    const nonGolden = assessed.filter(entry => !inView.includes(entry)).sort((a, b) => compareGolden(a.golden, b.golden));
     const categorySummary = summarizeCategories(inView);
     const activeCategory = category === '전체' || categorySummary.some((s) => s.category === category) ? category : '전체';
     const displayed = inView.filter(entry => activeCategory === '전체' || entry.category === activeCategory).sort((a, b) => compareGolden(a.golden, b.golden));
@@ -262,7 +263,7 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                         role="tab"
                         aria-selected={lane === item.id}
                         className={lane === item.id ? 'on' : ''}
-                        onClick={() => { setLane(item.id); setRecommendationView('ready'); setCategory('전체'); }}
+                        onClick={() => { setLane(item.id); setCategory('전체'); }}
                     >{item.label}</button>
                 ))}
             </div>
@@ -284,18 +285,22 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                             {' '}위 수집 시각의 마지막 확인 목록입니다. 판매 여부와 수수료는 제휴 콘솔에서 다시 확인해주세요.
                         </p>
                     )}
-                    <RecommendationFilter value={recommendationView} onChange={setRecommendationView} counts={counts} />
+                    {inView.length === 0 && (
+                        <p role="status" className="lw-note">
+                            지금 목록 {assessed.length}개 중 문서수가 검색량보다 적은 검색어를 가진 상품이 없습니다. 문서가 더 많은 상품을 황금으로 내보이지 않습니다 — 아래 접힌 칸에서 숫자를 볼 수 있습니다.
+                        </p>
+                    )}
                     <CategoryChips summary={categorySummary} value={activeCategory} total={inView.length} onChange={setCategory} />
                     <ol className="lw-product-list">
                         {displayed.map(({ item, recommendation, golden }, index) => {
                             // 분석·검색은 니즈 검색어가 우선 — 상품명 검색어는 수요가 없다(실측 0~140).
-                            const query = recommendation.demand.status === 'verified' ? recommendation.query : item.keyword || item.name;
+                            const query = golden.golden ? golden.query : recommendation.demand.status === 'verified' ? recommendation.query : item.keyword || item.name;
                             const badge = { label: recommendation.status === 'ready' ? '근거 통과 · 성과 보장 아님' : recommendation.status === 'excluded' ? '추천 제외 · 보관' : '추가 조사 필요', color: recommendation.status === 'ready' ? '#2ecc71' : '#f5a623', bg: 'rgba(245,166,35,.14)' };
                             // 글 제목 1줄 — AI 추론 제목(스냅샷) 우선, 없으면 규칙 조립 폴백.
                             const titleLine = affiliateTitle(item);
                             return (
                                 <li key={item.url || item.name} className="lw-product">
-                                    <span className="lw-product-rank">{recommendationView === 'ready' ? index + 1 : '·'}</span>
+                                    <span className="lw-product-rank">{index + 1}</span>
                                     {item.image
                                         ? <img src={item.image} alt="" loading="lazy" />
                                         : <span />}
@@ -502,6 +507,7 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                             );
                         })}
                     </ol>
+                    <NonGoldenList rows={nonGolden.map(({ item, golden }) => ({ key: item.url || item.name, name: item.name, golden }))} />
                 </>
             )}
 

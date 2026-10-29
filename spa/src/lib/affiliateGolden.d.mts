@@ -1,4 +1,9 @@
-export interface AffiliateGolden { query: string; volume: number | null; docs: number | null; ratio: number | null }
+export interface AffiliateGolden {
+  query: string; volume: number | null; docs: number | null;
+  /** 검색량 ÷ 문서수 */ ratio: number | null;
+  /** 문서수 ÷ 검색량 — 낮을수록 좋다 */ docRatio: number | null;
+  grade: 'S' | 'A' | 'B' | null; golden: boolean;
+}
 export interface AffiliateCategorySummary { category: string; count: number; top: AffiliateGolden | null }
 
 export const AFFILIATE_GOLDEN_MIN_VOLUME: number;

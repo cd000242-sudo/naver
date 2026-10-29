@@ -4,13 +4,12 @@ import { createCoupangDeeplink, fetchAffiliateBoard, type AffiliateProduct } fro
 import { type LaneId } from './affiliateLanes';
 import { affiliateTitle, recommendationReason } from '../../lib/recommendationView.mjs';
 import { assessAffiliateRecommendation, compareAffiliateRecommendations } from '../../lib/affiliateRecommendation.mjs';
-import RecommendationFilter, { type RecommendationStatus } from './RecommendationFilter';
 import AffiliateTitles from './AffiliateTitles';
 import { assessCoupangDiscovery, compareCoupangDiscovery, coupangProductUrl } from '../../lib/coupangDiscovery.mjs';
 import CoupangDiscoveryBrief from './CoupangDiscoveryBrief';
 import { affiliateCategory, compareGolden, goldenOf, summarizeCategories } from '../../lib/affiliateGolden.mjs';
 import { enrichKey, loadKeywordEnrich, type KeywordEnrich } from '../../lib/keywordEnrich.mjs';
-import { AffiliateGoldenAids, CategoryChips, GoldenRatioBadge } from './AffiliateGoldenParts';
+import { AffiliateGoldenAids, CategoryChips, GoldenRatioBadge, NonGoldenList } from './AffiliateGoldenParts';
 
 /**
  * 쿠팡 상품 보드 — 상품에서 출발한다.
@@ -24,7 +23,6 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
     const nowMs = useEvidenceClock();
     const [state, setState] = useState<'idle' | 'loading' | 'ready' | 'needs-keys' | 'error'>('idle');
     const [message, setMessage] = useState('');
-    const [recommendationView, setRecommendationView] = useState<RecommendationStatus>('ready');
     // 첫 화면은 황금비 순 '검색 유입 공략'(2026-10-29 사장님 "문서수가 낮고 검색량이 높은 순") — 발견 보기는 판매 목록 위치순이라 반대로 보였다.
     const [route, setRoute] = useState<'discovery' | 'search'>('search');
     const [category, setCategory] = useState('전체');
@@ -105,15 +103,15 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
         return { row: item, recommendation, discovery: assessCoupangDiscovery(row, { now: nowMs }),
             golden: goldenOf(item, recommendation), category: affiliateCategory(row) };
     }).sort(discoveryMode ? compareCoupangDiscovery : compareAffiliateRecommendations);
-    const counts = { ready: 0, research: 0, excluded: 0 };
-    for (const entry of all) counts[entry.recommendation.status] += 1;
     const candidateCount = all.filter(entry => entry.discovery.status === 'candidate').length;
     const inView = all.filter(entry => discoveryMode
         ? discoveryView === 'all' || entry.discovery.status === 'candidate'
-        : entry.recommendation.status === recommendationView);
+        // 검색 유입 공략 = 황금(문서수 < 검색량, 검색 100+)이면서 추천 제외가 아닌 것만(2026-10-29 "문서비율이 높구요 반대가 되어야").
+        : entry.golden.golden && entry.recommendation.status !== 'excluded');
+    const nonGolden = discoveryMode ? [] : all.filter(entry => !inView.includes(entry)).sort((a, b) => compareGolden(a.golden, b.golden));
     const categorySummary = summarizeCategories(inView);
     const activeCategory = category === '전체' || categorySummary.some((s) => s.category === category) ? category : '전체';
-    // 검색 유입 공략은 황금비(검색량÷문서수, 하한 통과분 먼저) 순. 발견 보기는 원래 순서(실용 단서 → 목록 위치)를 지킨다.
+    // 검색 유입 공략은 문서÷검색 낮은 순. 발견 보기는 원래 순서(실용 단서 → 목록 위치)를 지킨다.
     const filtered = inView.filter(entry => activeCategory === '전체' || entry.category === activeCategory);
     const visible = discoveryMode ? filtered : [...filtered].sort((a, b) => compareGolden(a.golden, b.golden));
 
@@ -122,7 +120,7 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
                 const productUrl = coupangProductUrl(row.url);
                 return (
                     <li key={row.url} className="lw-product">
-                        <span className="lw-product-rank">{!discoveryMode && recommendationView === 'ready' ? rank : '·'}</span>
+                        <span className="lw-product-rank">{!discoveryMode ? rank : '·'}</span>
                         <img src={row.image || 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="72" height="72"%3E%3C/svg%3E'} alt="" loading="lazy" />
                         <div className="lw-product-body">
                             <div className="lw-product-tags">
@@ -278,13 +276,14 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
                 제목이 이 검색어를 그대로 다룬 글이 몇 개인지 실제로 센 숫자입니다.
                 {' '}다른 표현으로 같은 질문에 답한 글이 있을 수 있으므로, 이 숫자만으로 노출 가능성을 확정하지 않습니다.
             </p>
-            <RecommendationFilter value={recommendationView} onChange={setRecommendationView} counts={counts} searchOnly />
+            {inView.length === 0 && <p role="status" className="lw-note">지금 쿠팡 상품 {all.length}개 중 문서수가 검색량보다 적은 검색어를 가진 상품이 없습니다. 문서가 더 많은 상품을 황금으로 내보이지 않습니다 — 아래 접힌 칸에서 숫자를 볼 수 있습니다.</p>}
             </>}
             <CategoryChips summary={categorySummary} value={activeCategory} total={inView.length} onChange={setCategory} />
             {/* 그룹 헤더는 뺐다(사장님: 정면 설명 빼고 다 없애). 판정은 카드 배지가 이미 말한다. */}
             <ol className="lw-product-list">
                 {visible.map((entry, index) => renderRow(entry, index + 1))}
             </ol>
+            <NonGoldenList rows={nonGolden.map(({ row, golden }) => ({ key: row.url, name: row.name, golden }))} />
         </>
     );
 }

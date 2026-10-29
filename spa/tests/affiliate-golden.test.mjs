@@ -8,41 +8,53 @@ const rec = (monthlySearches, documentCount, query = 'q') => ({
   query, demand: { monthlySearches }, competition: { documentCount, ratio: monthlySearches !== null && documentCount !== null ? monthlySearches / Math.max(1, documentCount) : null },
 });
 
-test('황금비 = 검색량 ÷ 문서수, 추천 판정이 잰 검색어를 먼저 쓴다', () => {
-  const g = goldenOf({ needKeyword: '다른말', needVolume: 9, needDocs: 9 }, rec(3570, 1650, '슈리오 스니커즈'));
-  assert.equal(g.query, '슈리오 스니커즈');
-  assert.equal(g.volume, 3570);
-  assert.equal(g.docs, 1650);
-  assert.ok(Math.abs(g.ratio - 3570 / 1650) < 1e-9);
+test('황금 = 문서수 < 검색량(검색량 100+) — 후보 검색어 중 문서÷검색이 가장 낮은 말을 고른다', () => {
+  const item = {
+    needKeyword: '가습기', needVolume: 29270, needDocs: 45000,                      // 문서÷검색 1.54 — 황금 아님
+    keyword: '케어팟 가습기', searchVolume: 29270, documentCount: 15439,              // 0.53 — A
+    slots: [{ keyword: '케어팟 가습기 세척', volume: 900, documentCount: 120 }],       // 0.13 — S
+  };
+  const g = goldenOf(item, rec(29270, 45000, '가습기'));
+  assert.equal(g.query, '케어팟 가습기 세척');
+  assert.equal(g.golden, true);
+  assert.equal(g.grade, 'S');
+  assert.ok(Math.abs(g.docRatio - 120 / 900) < 1e-9);
 });
 
-test('추천 판정에 수치가 없으면 니즈 → 상품명 검색어 순으로 폴백, 둘 다 없으면 비율 없음', () => {
-  assert.equal(goldenOf({ needKeyword: '로봇청소기', needVolume: 1000, needDocs: 500 }, rec(null, null)).ratio, 2);
-  assert.equal(goldenOf({ keyword: '콩튀', searchVolume: 30, documentCount: 28 }, null).query, '콩튀');
-  assert.equal(goldenOf({ name: '이름만' }, null).ratio, null);
+test('등급: S = 문서÷검색 0.3 미만 · 검색 500+, A = 0.7 미만, B = 1.0 미만, 그 이상은 황금 아님', () => {
+  assert.equal(goldenOf({}, rec(1000, 250)).grade, 'S');
+  assert.equal(goldenOf({}, rec(300, 60)).grade, 'A');      // 0.2 지만 검색 500 미만 → S 아님
+  assert.equal(goldenOf({}, rec(1000, 600)).grade, 'A');
+  assert.equal(goldenOf({}, rec(1000, 950)).grade, 'B');
+  const over = goldenOf({}, rec(24700, 44383));
+  assert.deepEqual([over.golden, over.grade], [false, null]);
 });
 
-test('문서수 0 은 안 잰 값 — 수집 실패가 0으로 찍혀 1등이 되는 함정(선점 판정의 문서수 0 차단과 같다)', () => {
-  assert.equal(goldenOf({ keyword: 'x', searchVolume: 300, documentCount: 0 }, null).ratio, null);
-  assert.equal(goldenOf({ needKeyword: 'n', needVolume: 500, needDocs: 0, keyword: 'k', searchVolume: 900, documentCount: 300 }, null).ratio, 3);
+test('검색량 100 미만은 문서가 적어도 황금이 아니다 — 아무도 안 찾는 말', () => {
+  const g = goldenOf({ keyword: '콩튀', searchVolume: 30, documentCount: 3 }, null);
+  assert.deepEqual([g.golden, g.grade], [false, null]);
 });
 
-test('정렬: 문서수 낮고 검색량 높은 순(비율 내림차순) — 검색량 높고 문서도 많은 것이 위로 오면 안 된다', () => {
-  const big = goldenOf({}, rec(24700, 44383));      // 비율 0.56
-  const gold = goldenOf({}, rec(3570, 1650));       // 비율 2.16
-  const best = goldenOf({}, rec(1200, 200));        // 비율 6
-  const sorted = [big, gold, best].sort(compareGolden);
-  assert.deepEqual(sorted.map((g) => g.volume), [1200, 3570, 24700]);
+test('문서수 0 은 안 잰 값 — 수집 실패가 0으로 찍혀 1등이 되는 함정', () => {
+  assert.equal(goldenOf({ keyword: 'x', searchVolume: 300, documentCount: 0 }, null).docRatio, null);
+  assert.equal(goldenOf({ needKeyword: 'n', needVolume: 500, needDocs: 0, keyword: 'k', searchVolume: 900, documentCount: 300 }, null).query, 'k');
 });
 
-test(`검색량 하한(${AFFILIATE_GOLDEN_MIN_VOLUME}) 미만은 비율이 커도 뒤로 — 아무도 안 찾는 말이 1등이 되지 않게`, () => {
-  const tiny = goldenOf({}, rec(30, 1));            // 비율 30, 수요 없음
-  const real = goldenOf({}, rec(500, 400));         // 비율 1.25
+test('황금 후보가 없으면 추천 판정이 잰 검색어 → 니즈 → 상품명 순으로 숫자만 보여 준다', () => {
+  assert.equal(goldenOf({ needKeyword: '로봇청소기', needVolume: 24700, needDocs: 44383 }, rec(null, null)).query, '로봇청소기');
+  assert.equal(goldenOf({ name: '이름만' }, null).docRatio, null);
+});
+
+test('정렬: 황금 먼저 문서÷검색 낮은 순 — 검색량은 많고 문서는 적은 것이 위', () => {
+  const big = goldenOf({}, rec(24700, 44383));      // 1.80 황금 아님
+  const gold = goldenOf({}, rec(3570, 1650));       // 0.46
+  const best = goldenOf({}, rec(2480, 173));        // 0.07
+  const tiny = goldenOf({}, rec(30, 1));            // 검색 100 미만
   const none = goldenOf({ name: 'x' }, null);
-  assert.deepEqual([none, tiny, real].sort(compareGolden), [real, tiny, none]);
+  assert.deepEqual([none, tiny, big, gold, best].sort(compareGolden).map((g) => g.volume), [2480, 3570, 24700, 30, null]);
 });
 
-test('같은 비율이면 검색량 큰 쪽이 먼저', () => {
+test('같은 문서÷검색이면 검색량 큰 쪽이 먼저', () => {
   assert.equal([goldenOf({}, rec(200, 100)), goldenOf({}, rec(2000, 1000))].sort(compareGolden)[0].volume, 2000);
 });
 

@@ -8,14 +8,12 @@
  * 쓰는 순서는 잰 사실(검색량 · 문서수 · 정면 글 수 · 추이 판정)을 할 일로 옮길 뿐 — 노출 확률 · 수익을 지어내지 않는다.
  */
 import type { KeywordEnrich } from '../../lib/keywordEnrich.mjs';
-import { AFFILIATE_GOLDEN_MIN_VOLUME } from '../../lib/affiliateGolden.mjs';
+import type { AffiliateGolden as Golden, AffiliateCategorySummary as CategorySummary } from '../../lib/affiliateGolden.mjs';
 import KeywordAids from './shared/KeywordAids';
 
-export type Golden = { query: string; volume: number | null; docs: number | null; ratio: number | null };
-export type CategorySummary = { category: string; count: number; top: Golden | null };
-
 const fmt = (n: number | null) => (n === null ? '—' : n.toLocaleString('ko-KR'));
-const ratioText = (r: number) => r.toLocaleString('ko-KR', { maximumFractionDigits: r >= 10 ? 0 : 2 });
+const ratioText = (r: number) => r.toLocaleString('ko-KR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const GRADE_COLOR: Record<string, string> = { S: '#2ecc71', A: '#4ade80', B: '#f5a623' };
 
 export function CategoryChips({ summary, value, total, onChange }: { summary: CategorySummary[]; value: string; total: number; onChange: (category: string) => void }) {
     if (summary.length < 2) return null;
@@ -27,7 +25,7 @@ export function CategoryChips({ summary, value, total, onChange }: { summary: Ca
         <div role="group" aria-label="카테고리" style={{ display: 'flex', flexWrap: 'wrap', gap: 8, margin: '4px 0 14px' }}>
             <button type="button" aria-pressed={value === '전체'} onClick={() => onChange('전체')} style={chip(value === '전체')}>
                 <strong style={{ fontSize: 13 }}>전체 <em style={{ fontStyle: 'normal', color: '#fbbf24' }}>{total}</em></strong>
-                <span style={{ fontSize: 11, color: '#94a3b8' }}>황금비 높은 순</span>
+                <span style={{ fontSize: 11, color: '#94a3b8' }}>문서÷검색 낮은 순</span>
             </button>
             {summary.map((s) => (
                 <button
@@ -35,12 +33,12 @@ export function CategoryChips({ summary, value, total, onChange }: { summary: Ca
                     type="button"
                     aria-pressed={value === s.category}
                     onClick={() => onChange(s.category)}
-                    title={s.top?.ratio != null ? `${s.category} 1위 「${s.top.query}」 검색 ${fmt(s.top.volume)} / 문서 ${fmt(s.top.docs)}` : undefined}
+                    title={s.top?.docRatio != null ? `${s.category} 1위 「${s.top.query}」 검색 ${fmt(s.top.volume)} / 문서 ${fmt(s.top.docs)}` : undefined}
                     style={chip(value === s.category)}
                 >
                     <strong style={{ fontSize: 13 }}>{s.category} <em style={{ fontStyle: 'normal', color: '#fbbf24' }}>{s.count}</em></strong>
                     <span style={{ fontSize: 11, color: '#94a3b8', maxWidth: 170, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                        {s.top?.ratio != null ? `1위 ${s.top.query} · ${ratioText(s.top.ratio)}` : '수치 미측정'}
+                        {s.top?.docRatio != null ? `1위 ${s.top.query} · ${ratioText(s.top.docRatio)}` : '수치 미측정'}
                     </span>
                 </button>
             ))}
@@ -49,16 +47,40 @@ export function CategoryChips({ summary, value, total, onChange }: { summary: Ca
 }
 
 export function GoldenRatioBadge({ golden }: { golden: Golden }) {
-    if (golden.ratio === null) return null;
-    const low = (golden.volume ?? 0) < AFFILIATE_GOLDEN_MIN_VOLUME;
-    const color = low ? '#aebccc' : golden.ratio >= 2 ? '#2ecc71' : golden.ratio >= 1 ? '#f5a623' : '#aebccc';
+    if (golden.docRatio === null) return null;
+    const color = golden.grade ? GRADE_COLOR[golden.grade] : '#aebccc';
     return (
         <span
-            title={`「${golden.query}」 월 검색량 ÷ 블로그 문서수. 높을수록 찾는 사람에 비해 글이 적습니다.${low ? ` 검색량 ${AFFILIATE_GOLDEN_MIN_VOLUME} 미만이라 뒤로 보냈습니다.` : ''}`}
+            title={`「${golden.query}」 블로그 문서수 ÷ 월 검색량. 낮을수록 찾는 사람에 비해 글이 적습니다. S 0.3 미만(검색 500+) · A 0.7 미만 · B 1.0 미만(검색 100+).`}
             style={{ color, background: `${color}1f`, border: `1px solid ${color}55`, borderRadius: 999, padding: '2px 9px', fontWeight: 900, fontSize: 11 }}
         >
-            황금비 {ratioText(golden.ratio)} · 검색 {fmt(golden.volume)} / 문서 {fmt(golden.docs)}{low ? ' · 검색량 적음' : ''}
+            {golden.grade ? `${golden.grade}등급 · ` : ''}문서÷검색 {ratioText(golden.docRatio)} · 검색 {fmt(golden.volume)} / 문서 {fmt(golden.docs)}
         </span>
+    );
+}
+
+/**
+ * 황금이 아닌 상품 — 문서가 검색보다 많거나 검색량 100 미만 · 안 잰 것. 목록에 섞지 않고 맨 아래 접어서 이름과 숫자만.
+ * 지우지 않는 이유: 제휴 링크는 있어서 상품 자체를 찾는 사람에게는 쓸모가 있다.
+ */
+export function NonGoldenList({ rows }: { rows: Array<{ key: string; name: string; golden: Golden }> }) {
+    if (!rows.length) return null;
+    return (
+        <details style={{ margin: '14px 0 0', padding: '10px 12px', border: '1px solid rgba(148,163,184,.22)', borderRadius: 10, background: 'rgba(15,23,42,.35)' }}>
+            <summary style={{ cursor: 'pointer', fontSize: 13, color: '#94a3b8' }}>
+                황금 아님 {rows.length}개 — 문서가 검색보다 많거나 검색량 100 미만 · 아직 안 잰 상품
+            </summary>
+            <ul style={{ margin: '8px 0 0', paddingLeft: 18, display: 'grid', gap: 3, fontSize: 12.5, color: '#aebccc' }}>
+                {rows.map(({ key, name, golden }) => (
+                    <li key={key}>
+                        {name}
+                        {golden.docRatio !== null
+                            ? <> — 「{golden.query}」 검색 {fmt(golden.volume)} / 문서 {fmt(golden.docs)} · 문서÷검색 {ratioText(golden.docRatio)}</>
+                            : <> — 검색량 · 문서수 미측정</>}
+                    </li>
+                ))}
+            </ul>
+        </details>
     );
 }
 

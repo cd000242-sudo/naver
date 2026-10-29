@@ -4,7 +4,7 @@
  * 사장님 "제휴황금키워드 또 반대로했네 문서수가 낮고 검색량이 높은 순이라니까" —
  * 그동안 수요(검색량)가 먼저였고 검색량÷문서수는 '참고값'으로 표시만 했다. 그래서 검색량은 크지만
  * 문서가 훨씬 많은 자리(드리미 로봇청소기 24,700 / 44,383)가 위에 섰다.
- * 이제 비율(검색량 ÷ 문서수)이 순서를 정한다. 단, 검색량 하한 미만은 비율이 커도 뒤로 —
+ * 이제 문서수 ÷ 검색량이 순서와 등급을 정한다(아래 황금 판정). 검색량 하한 미만은 문서가 적어도 황금이 아니다 —
  * 문서 1개짜리 상품명이 1등이 되는 옛 사고(2026-09-16)를 되풀이하지 않는다.
  *
  * "카테고리별로 분류해서 황금키워드를 찾아줘야지" — 분류는 실측 출처가 먼저다
@@ -15,35 +15,52 @@
 /** 기존 제휴 판의 수요 하한(compareSeat 의 월 100)과 같다 — 등급 A 하한과도 같다. */
 export const AFFILIATE_GOLDEN_MIN_VOLUME = 100;
 
+/*
+ * 황금 판정(2026-10-29 2차, 사장님 "여전히 검색비율이 낮네요 문서비율이 높구요 반대가 되어야 한다니까요" + keywordmaster.org 명세서).
+ * 1차는 줄만 바꿨고 문서가 검색보다 많은 상품도 다 보여 줬다 — 실측 280개 중 황금(문서 < 검색)은 7개뿐이라 목록 대부분이 그 반대였다.
+ * 이제 문서수 ÷ 검색량(낮을수록 좋음, keywordmaster 와 같은 방향)으로 등급을 매기고, 1.0 미만만 황금이다.
+ * keywordmaster 는 A · B 에 검색량 하한이 없어 월 10회짜리도 추천이 된다 — LEWORD 는 검색량 100 하한을 지킨다.
+ */
+const GRADES = [['S', 0.3, 500], ['A', 0.7, AFFILIATE_GOLDEN_MIN_VOLUME], ['B', 1.0, AFFILIATE_GOLDEN_MIN_VOLUME]];
+
 const num = (v) => (typeof v === 'number' && Number.isFinite(v) && v >= 0 ? v : null);
 
 function pair(query, volume, docs) {
   const v = num(volume);
   const d = num(docs);
   // 문서수 0 은 안 잰 값으로 본다 — 수집 실패가 0으로 찍혀 비율 무한대로 1등이 되는 함정(선점 판정의 문서수 0 차단과 같다).
-  return { query: String(query || ''), volume: v, docs: d, ratio: v !== null && d ? v / d : null };
+  const measured = v !== null && v > 0 && Boolean(d);
+  const docRatio = measured ? d / v : null;
+  const grade = docRatio === null ? null : (GRADES.find(([, max, minVolume]) => docRatio < max && v >= minVolume) || [null])[0];
+  return { query: String(query || ''), volume: v, docs: d, ratio: measured ? v / d : null, docRatio, grade, golden: grade !== null };
 }
 
+const byGolden = (a, b) => a.docRatio - b.docRatio || b.volume - a.volume;
+
 /**
- * 이 상품의 황금 검색어 한 쌍. 추천 판정(assessAffiliateRecommendation)이 고른 검색어의 실측을 먼저 쓴다 —
- * 카드의 분석 버튼이 그 검색어로 가므로 같은 말의 숫자여야 한다. 없으면 니즈 검색어 → 상품명 검색어.
+ * 이 상품의 황금 검색어. 잰 후보(추천 판정이 고른 말 · 니즈 · 상품명 · 근거 · 자리 잰 확장어) 중
+ * 황금인 것이 있으면 문서÷검색이 가장 낮은 말. 없으면 추천 판정이 고른 말 → 니즈 → 상품명의 숫자를 그대로 보여 준다.
  */
 export function goldenOf(item = {}, recommendation = null) {
   const fromRec = recommendation ? pair(recommendation.query, recommendation.demand?.monthlySearches, recommendation.competition?.documentCount) : null;
-  if (fromRec && fromRec.ratio !== null) return fromRec;
   const need = pair(item.needKeyword, item.needVolume, item.needDocs);
-  if (item.needKeyword && need.ratio !== null) return need;
   const product = pair(item.keyword || item.name, item.searchVolume, item.documentCount);
-  if (product.ratio !== null) return product;
+  const evidence = (Array.isArray(item.keywordEvidence) ? item.keywordEvidence : []).map((e) => pair(e?.query, e?.monthlySearches, e?.documentCount));
+  const slots = (Array.isArray(item.slots) ? item.slots : []).map((s) => pair(s?.keyword, s?.volume, s?.documentCount));
+  const candidates = [fromRec, item.needKeyword ? need : null, product, ...evidence, ...slots].filter((c) => c && c.query);
+  const best = candidates.filter((c) => c.golden).sort(byGolden)[0];
+  if (best) return best;
+  const shown = candidates.find((c) => c.docRatio !== null);
+  if (shown) return shown;
   return { ...product, query: fromRec?.query || item.needKeyword || item.keyword || item.name || '' };
 }
 
-const tier = (g) => (g.ratio === null ? 2 : (g.volume ?? 0) >= AFFILIATE_GOLDEN_MIN_VOLUME ? 0 : 1);
+const tier = (g) => (g.golden ? 0 : g.docRatio === null ? 3 : (g.volume ?? 0) >= AFFILIATE_GOLDEN_MIN_VOLUME ? 1 : 2);
 
-/** 하한 통과 → 비율 높은 순(문서수 낮고 검색량 높은 순) → 같은 비율이면 검색량 큰 순. 수치 없는 것은 맨 뒤. */
+/** 황금 먼저 → 문서÷검색 낮은 순(검색량은 많고 문서는 적은 순) → 같으면 검색량 큰 순. 수치 없는 것은 맨 뒤. */
 export function compareGolden(a, b) {
   return tier(a) - tier(b)
-    || (b.ratio ?? -1) - (a.ratio ?? -1)
+    || (a.docRatio ?? Infinity) - (b.docRatio ?? Infinity)
     || (b.volume ?? -1) - (a.volume ?? -1);
 }
 
