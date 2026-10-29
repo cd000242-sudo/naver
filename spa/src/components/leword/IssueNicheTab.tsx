@@ -13,6 +13,7 @@ import IssueFlowBrief from './IssueFlowBrief';
 import RealtimeStrip from './RealtimeStrip';
 import { realtimeSources, type RealtimeSourceId } from '../../lib/realtimeSources.mjs';
 import LiveNichePanel from './LiveNichePanel';
+import ShortentsRisingPanel from './ShortentsRisingPanel';
 import { useMindmap } from './useMindmap';
 // 검색어 덧붙이기(2026-10-20 사장님 "실시간검색어 틈새키워드도 마찬가지로") — 판정 문장 · 해결할 문제 · 행동 제목 · 벤치마킹, 지금 뜨는 키워드 먼저 섞기
 import { enrichKey, isHotEnrich, loadKeywordEnrich, type KeywordEnrich } from '../../lib/keywordEnrich.mjs';
@@ -336,6 +337,8 @@ function IssueNicheTab({ onAnalyze, onPlan }: { onAnalyze?: (keyword: string) =>
                     ? '시그널·네이트·다음·구글 — 5분마다 다시 받음 · 원문 갱신 시각은 출처별로 다름'
                     : `실시간 이슈 실측 회차${publishedLabel ? ` · ${publishedLabel} 발행` : ''} · ${board?.schedule || '매일 05·11·17시(KST) 갱신'}`}
             />
+
+            <ShortentsRisingPanel onAnalyze={onAnalyze} />
 
             {/* 실시간 검색어는 5분마다 받아 오므로 회차 개념이 없다 — 틈새 판에만 붙인다. */}
             {sub !== 'live' && (
