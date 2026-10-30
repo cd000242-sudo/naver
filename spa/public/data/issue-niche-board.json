@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-10-29T21:45:47.555Z",
+  "publishedAt": "2026-10-30T03:36:31.733Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 240,
+    "candidates": 194,
     "niche": 0,
-    "preemption": 6,
+    "preemption": 7,
     "pending": 0
   },
   "freeSample": {
@@ -617,6 +617,401 @@
   ],
   "observations": [
     {
+      "keyword": "미스트랄 패딩",
+      "issue": "미스트랄",
+      "topic": "미스트랄",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 132,
+      "documentCountMeasured": true,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 5,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 10",
+        "문서수 132",
+        "선점 후보 — 경쟁 문서 132건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 5건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-30T03:34:26.199Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "앤트로픽 엔스로픽 차이",
+      "issue": "앤트로픽",
+      "topic": "앤트로픽",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 43,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "rising",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 43",
+        "선점 후보 — 경쟁 문서 43건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "구매 검토",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "앤트로픽 엔스로픽 차이 무엇이 어떻게 다른가",
+          "frame": "compare",
+          "basis": "검색 질문 '앤트로픽 엔스로픽 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+        },
+        "home": {
+          "text": "앤트로픽 엔스로픽 차이, 기준은 하나면 됩니다",
+          "frame": "compare",
+          "basis": "검색 질문 '앤트로픽 엔스로픽 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-30T03:34:26.199Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "오픈ai 닷츠 후기",
+      "issue": "오픈AI",
+      "topic": "오픈AI",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 150,
+      "documentCountMeasured": true,
+      "searchVolume": 30,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 30",
+        "문서수 150",
+        "선점 후보 — 경쟁 문서 150건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "구매 검토",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "오픈ai 닷츠 후기 경험담을 판단할 기준",
+          "frame": "review",
+          "basis": "검색 질문 '오픈ai 닷츠 후기' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+        },
+        "home": {
+          "text": "오픈ai 닷츠 후기 누구에게 맞는지 먼저 살펴보세요",
+          "frame": "review",
+          "basis": "검색 질문 '오픈ai 닷츠 후기' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": [
+        {
+          "title": "새로운 AI 에이전트 닷츠, 실제로 얼마나 효율적일까요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1122&docId=495387990&answerNo=0",
+          "views": 91,
+          "answers": null
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-30T03:34:26.199Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "AI 신소재 나노포지에이아이",
+      "issue": "AI 신소재 나노포지에이아이",
+      "topic": "AI 신소재 나노포지에이아이",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 21,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 21",
+        "선점 후보 — 경쟁 문서 21건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-30T03:34:26.199Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "한국딥러닝 잡플래닛",
+      "issue": "한국딥러닝",
+      "topic": "한국딥러닝",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 144,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 144",
+        "선점 후보 — 경쟁 문서 144건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-30T03:34:26.199Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "미스트랄 티셔츠",
+      "issue": "미스트랄",
+      "topic": "미스트랄",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 214,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 214",
+        "선점 후보 — 경쟁 문서 214건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 3,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-30T03:34:26.199Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "미스트랄 선글라스",
+      "issue": "미스트랄",
+      "topic": "미스트랄",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 208,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 7,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 208",
+        "선점 후보 — 경쟁 문서 208건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 7건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 4,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-30T03:34:26.199Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
       "keyword": "과기정통부 쌍검술",
       "issue": "과기정통부",
       "topic": "과기정통부",
@@ -676,242 +1071,8 @@
       "monetize": null,
       "measuredAt": "2026-10-29T21:41:40.653Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "미스트랄 패딩",
-      "issue": "미스트랄",
-      "topic": "미스트랄",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 132,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 5,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 132",
-        "선점 후보 — 경쟁 문서 132건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 5건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "미스트랄이 라지4 공개와 오픈AI 형식 API를 선보였다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "미스트랄 패딩 가격 여성 남성 모델 후기 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "미스트랄 패딩 남녀 모델 뭐가 다른지 모르고 골랐다가 바꾼 분들",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-29T21:41:40.653Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "앤트로픽 엔스로픽 차이",
-      "issue": "앤트로픽",
-      "topic": "앤트로픽",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 43,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "rising",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 43",
-        "선점 후보 — 경쟁 문서 43건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "AI 대어 앤트로픽이 나스닥 IPO를 신청했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "앤트로픽 엔스로픽 차이 무엇이 어떻게 다른가",
-          "frame": "compare",
-          "basis": "검색 질문 '앤트로픽 엔스로픽 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        },
-        "home": {
-          "text": "앤트로픽 엔스로픽 차이, 기준은 하나면 됩니다",
-          "frame": "compare",
-          "basis": "검색 질문 '앤트로픽 엔스로픽 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-29T21:41:40.653Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "오픈ai 닷츠 후기",
-      "issue": "오픈AI",
-      "topic": "오픈AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 150,
-      "documentCountMeasured": true,
-      "searchVolume": 30,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 30",
-        "문서수 150",
-        "선점 후보 — 경쟁 문서 150건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "오픈AI가 구글 TPU 구매를 추진해 엔비디아 의존도를 낮춘다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "오픈ai 닷츠 후기 사용법부터 장단점까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "오픈ai 닷츠 후기 찾다가 가격 보는 데서 다들 한 번 멈추더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "오픈ai 닷츠",
-          "searchVolume": 2300,
-          "frame": "generic"
-        },
-        {
-          "keyword": "오픈ai 닷츠 가격",
-          "searchVolume": 10,
-          "frame": "price"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "오픈ai 닷츠",
-          "searchVolume": 2300,
-          "documentCount": 1105,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "오픈ai 닷츠 가격",
-          "searchVolume": 10,
-          "documentCount": 513,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": [
-        {
-          "title": "새로운 AI 에이전트 닷츠, 실제로 얼마나 효율적일까요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1122&docId=495387990&answerNo=0",
-          "views": 89,
-          "answers": null
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-29T21:41:40.653Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "미스트랄 르샤",
@@ -962,62 +1123,8 @@
       "monetize": null,
       "measuredAt": "2026-10-29T21:41:40.653Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "미스트랄 티셔츠",
-      "issue": "미스트랄",
-      "topic": "미스트랄",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 214,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 214",
-        "선점 후보 — 경쟁 문서 214건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "미스트랄이 라지4 공개와 오픈AI 형식 API를 선보였다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 3,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-29T21:41:40.653Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "알렉사 그레소",
@@ -3849,914 +3956,10 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "난베이지 33B",
-      "issue": "난베이지",
-      "topic": "난베이지",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 21,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 21",
-        "선점 후보 — 경쟁 문서 21건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "난베이지가 33B 오픈소스 AI 모델을 공개해 코딩 벤치마크서 앞섰다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "난베이지 33B 성능, 큐원3.8-27B 코딩 벤치마크 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "난베이지 33B가 코딩에서 큐원3.8-27B 앞섰다는데 여기서 갈리네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-28T03:29:18.976Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "삼쩜삼 덧셈 차이",
-      "issue": "삼쩜삼",
-      "topic": "삼쩜삼",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 23,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 23",
-        "선점 후보 — 경쟁 문서 23건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "삼쩜삼이 AI 에이전트 통합 플랫폼 카터로 운영비 45% 절감했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "삼쩜삼 덧셈 차이 무엇이 어떻게 다른가",
-          "frame": "compare",
-          "basis": "검색 질문 '삼쩜삼 덧셈 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        },
-        "home": {
-          "text": "삼쩜삼 덧셈 차이, 기준은 하나면 됩니다",
-          "frame": "compare",
-          "basis": "검색 질문 '삼쩜삼 덧셈 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 49,
-      "kinTop": [
-        {
-          "title": "뱅크샐러드 덧셈컴퍼니 세금 환급 개인정보",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=403&docId=493566272&answerNo=1",
-          "views": 1311,
-          "answers": 2
-        },
-        {
-          "title": "덧셈 예상 환급금 이 뭐고 어떻게 받아야되나요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=814&docId=493482193&answerNo=4",
-          "views": 1026,
-          "answers": 6
-        },
-        {
-          "title": "덧셈 환급",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=403&docId=493513081&answerNo=2",
-          "views": 536,
-          "answers": 2
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-28T03:29:18.976Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "난베이지 큐원",
-      "issue": "난베이지",
-      "topic": "난베이지",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 32,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 32",
-        "선점 후보 — 경쟁 문서 32건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "난베이지가 33B 오픈소스 AI 모델을 공개해 코딩 벤치마크서 앞섰다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "난베이지 큐원 33B 코딩 벤치마크 성능 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "난베이지 33B 나오자마자 큐원 코딩 벤치마크부터 따져보게 되더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-28T03:29:18.976Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "삼쩜삼 덧셈",
-      "issue": "삼쩜삼",
-      "topic": "삼쩜삼",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 71,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 2,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 71",
-        "선점 후보 — 경쟁 문서 71건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 2건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "삼쩜삼이 AI 에이전트 통합 플랫폼 카터로 운영비 45% 절감했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 114,
-      "kinTop": [
-        {
-          "title": "덧셈컴퍼니 환급불가 환불안된다고해서 문의드립니다.",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=403&docId=494479181&answerNo=1",
-          "views": 2477,
-          "answers": 3
-        },
-        {
-          "title": "덧셈 컴퍼니 이거 환급해주는건가요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=20301&docId=495064798&answerNo=1",
-          "views": 66,
-          "answers": 1
-        },
-        {
-          "title": "덧셈컴퍼니 ..",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60805&docId=495081773&answerNo=1",
-          "views": 64,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-28T03:29:18.976Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "칩스앤미디어 파르나스",
-      "issue": "칩스앤미디어",
-      "topic": "칩스앤미디어",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 105,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 105",
-        "선점 후보 — 경쟁 문서 105건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "칩스앤미디어 3분기 영업익이 8.7% 늘었으나 순손실 전환했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "칩스앤미디어 파르나스 3분기 영업익 16.6억 8.7% 실적 짚어보기",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "칩스앤미디어 파르나스 주가 전망 보려다 순손실 숫자에 눈이 멈췄어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "칩스앤미디어 주가",
-          "searchVolume": 6140,
-          "frame": "generic"
-        },
-        {
-          "keyword": "칩스앤미디어 전망",
-          "searchVolume": 40,
-          "frame": "generic"
-        },
-        {
-          "keyword": "칩스앤미디어 주가 전망",
-          "searchVolume": 40,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "칩스앤미디어 주가",
-          "searchVolume": 6140,
-          "documentCount": 23940,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "칩스앤미디어 전망",
-          "searchVolume": 40,
-          "documentCount": 24329,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "칩스앤미디어 주가 전망",
-          "searchVolume": 40,
-          "documentCount": 15829,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "칩스앤미디어 목표주가",
-          "searchVolume": 10,
-          "documentCount": 7509,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-28T03:29:18.976Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
   "issues": [
-    {
-      "issue": "배우 최불암 별세",
-      "issueType": "entertainment",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "국민 아버지 배우 최불암이 향년 87세로 별세했다.",
-      "headlines": [
-        {
-          "title": "‘국민 아버지’ 배우 최불암 별세",
-          "press": "chosun.com",
-          "publishedAt": "2026-10-29T16:15:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0004006830?sid=103"
-        },
-        {
-          "title": "배우 최불암 별세…‘국민 아버지’ 하늘로",
-          "press": "seoul.co.kr",
-          "publishedAt": "2026-10-29T15:31:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/081/0003693992?sid=103"
-        },
-        {
-          "title": "'국민 아버지' 배우 최불암 별세…향년 87세",
-          "press": "news.tvchosun.com",
-          "publishedAt": "2026-10-29T20:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/448/0000647883?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "배우",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "미국 PCE 물가",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "미 9월 PCE 물가가 전년비 3.6% 올라 예상치를 소폭 하회했다.",
-      "headlines": [
-        {
-          "title": "미국 9월 PCE 물가 전년대비 3.6%↑…전망치 부합",
-          "press": "sedaily.com",
-          "publishedAt": "2026-10-29T13:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/011/0004676842?sid=104"
-        },
-        {
-          "title": "美 9월 PCE 물가 전년 比 3.6%↑…예상치 소폭 하회",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-10-29T12:57:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005835531?sid=101"
-        },
-        {
-          "title": "[속보] 미 9월 PCE 물가 전년대비 3.6%↑…예상치 소폭 하회",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-10-29T12:55:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005756295?sid=101"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "삼성 승리 환호",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "삼성이 3차전을 잡아 한국시리즈 진출까지 1승을 남겼다.",
-      "headlines": [
-        {
-          "title": "승리 후 환호하는 삼성 선수들",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-29T13:34:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/001/0016410563"
-        },
-        {
-          "title": "[포토] 3차전 가져간 삼성, 승리의 짜릿한 환호",
-          "press": "sportschosun.com",
-          "publishedAt": "2026-10-29T14:03:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/076/0004461164"
-        },
-        {
-          "title": "삼성에 환호 보내는 팬들",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-29T13:38:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/003/0014289165"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "경기 버스 노사",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "경기 버스 노사가 11시간 밤샘 협상 끝에 타결해 파업을 철회했다.",
-      "headlines": [
-        {
-          "title": "경기 버스노사 막판 협상 내일 새벽 3시까지 연장",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-29T14:58:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016410593?sid=102"
-        },
-        {
-          "title": "경기 버스 노사 11시간 만 극적 합의…파업 안 한다",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-29T17:47:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014289237?sid=102"
-        },
-        {
-          "title": "경기 버스 노사, 협상 극적 타결…오늘 정상 운행",
-          "press": "news.tvchosun.com",
-          "publishedAt": "2026-10-29T20:44:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/448/0000647882?sid=102"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "진성준 비자 거부",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "미 국무부가 진성준 비자 거부에 미국 이익 최우선이라 밝혔다.",
-      "headlines": [
-        {
-          "title": "진성준 비자 거부에 \"미국 이익 최우선\"",
-          "press": "imnews.imbc.com",
-          "publishedAt": "2026-10-29T21:05:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/214/0001532373?sid=104"
-        },
-        {
-          "title": "美국무부, 진성준 비자 거부 배경에 \"미 국익이 우선\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-29T16:18:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014289230?sid=104"
-        },
-        {
-          "title": "美국무부, 진성준 비자 거부에 \"트럼프 행정부, 美이익 우선\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-29T14:34:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016410590?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "진성준",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "진성준 비자",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "무역",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "3분기 전국 무역항 물동량이 1.4% 늘고 부산항 컨테이너는 11.2% 증가했다.",
-      "headlines": [
-        {
-          "title": "전국 무역항 3분기 물동량 1.4% 증가…부산항 컨테이너 11.2%↑",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-29T02:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016408338?sid=101"
-        },
-        {
-          "title": "美, 로봇·산업기계 무역장벽 세우나",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-10-29T08:42:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005756154?sid=104"
-        },
-        {
-          "title": "'1800억 펀드 부실 판매 혐의' 피델리스 경영진, 2심서도 무죄",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-28T05:26:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014284681?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "무역 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "무역 자격증",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "무역 용어 정리",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "무역 물류 차이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "무역 영어로",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "무역 송",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "무역 일",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "무역 단위",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "운수",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "추락·낙상 입원율이 운수사고의 2.7배로 증가세다.",
-      "headlines": [
-        {
-          "title": "10년 전엔 비슷했는데⋯추락·낙상 입원율, 운수사고의 2.7배",
-          "press": "kormedi.com",
-          "publishedAt": "2026-10-29T08:39:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/296/0000106631?sid=103"
-        },
-        {
-          "title": "연간 손상 사망자 3만명…\"추락·낙상 증가세, 주의 필요\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-29T03:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014287142?sid=102"
-        },
-        {
-          "title": "부산시 유가보조금 감사서 26건 적발…부정 지급 심사 허점 확인",
-          "press": "inews24.com",
-          "publishedAt": "2026-10-29T02:38:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/031/0001070417?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "운수 좋은 날",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "운수 갈비찜",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "운수 보는법",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "운수 영어로",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "운수 나쁜 날",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "운수 소관 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "운수 없는 날",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "운수 법인 설립",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "에버턴 대 뉴캐슬",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "4부 플리트우드가 8강서 에버턴-뉴캐슬 승자와 맞붙는다.",
-      "headlines": [
-        {
-          "title": "아스널 잡은 '4부 리그 반란' 계속된다…플리트우드, 8강서 에버턴-뉴캐...",
-          "press": "spochoo.com",
-          "publishedAt": "2026-10-29T02:29:00.000Z",
-          "link": "https://m.sports.naver.com/wfootball/article/529/0000079098"
-        },
-        {
-          "title": "양민혁 버린 램파드, 잘 나가네! 25년 만에 EPL 홈 승리 감격…코벤트리...",
-          "press": "sportschosun.com",
-          "publishedAt": "2026-10-12T23:48:00.000Z",
-          "link": "https://m.sports.naver.com/wfootball/article/076/0004455560"
-        },
-        {
-          "title": "프리미어리그 역사상 최초 '대굴욕 기록' 본머스, 개막 3경기 모두 선제...",
-          "press": "fourfourtwo.co.kr",
-          "publishedAt": "2026-09-07T00:35:00.000Z",
-          "link": "https://m.sports.naver.com/wfootball/article/411/0000086891"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "유정복 가상자산",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "가상자산 은닉 의혹 유정복 전 인천시장이 불구속 송치됐다.",
-      "headlines": [
-        {
-          "title": "'가상자산 은닉 의혹' 유정복 전 인천시장 송치",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-29T10:42:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016410248?sid=102"
-        },
-        {
-          "title": "‘가상자산 은닉’ 의혹…유정복 전 시장, 송치",
-          "press": "chosun.com",
-          "publishedAt": "2026-10-29T11:10:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0004006726?sid=102"
-        },
-        {
-          "title": "아내 가상자산 신고 누락 의혹···유정복 전 인천시장 공소청 송치",
-          "press": "khan.co.kr",
-          "publishedAt": "2026-10-29T11:03:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/032/0003479512?sid=102"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "이태원 참사",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "이태원 참사 4주기 기억식에 대통령이 처음 참석했다.",
-      "headlines": [
-        {
-          "title": "10·29 이태원 참사 4주기…도심 곳곳에 보랏빛 추모 물결",
-          "press": "mbn.co.kr",
-          "publishedAt": "2026-10-29T10:29:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/057/0001975803?sid=102"
-        },
-        {
-          "title": "10·29 이태원 참사 4주기 기억식...이 대통령 첫 참석",
-          "press": "ytn.co.kr",
-          "publishedAt": "2026-10-29T06:10:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/052/0002425581?sid=100"
-        },
-        {
-          "title": "이 대통령 \"이태원참사 희생자에 깊은 애도…국가 부재로 국민 희생 없...",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-29T01:43:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014286687?sid=100"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "이태원 참사 사망자수",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이태원 참사 사망자",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이태원 참사 날짜",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이태원 참사 4주기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이태원 참사 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이태원 참사 대통령",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이태원 참사 위치",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이태원 참사 추모",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "라지 4",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "미스트랄이 1조 파라미터 라지4를 오픈웨이트로 공개했다.",
-      "headlines": [
-        {
-          "title": "미스트랄, 1조 파라미터 '라지4' 오픈웨이트 공개",
-          "press": "ddaily.co.kr",
-          "publishedAt": "2026-10-29T20:41:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/138/0002246614?sid=105"
-        },
-        {
-          "title": "미스트랄, '라지 4' 가중치 공개하며 정식 출시…유럽 사이버 보안 시장...",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-29T21:18:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216821"
-        },
-        {
-          "title": "헬리녹스, ‘시네마 파라디소 루브르 2026’ 에디션 출시",
-          "press": "sports.khan.co.kr",
-          "publishedAt": "2026-10-29T16:51:00.000Z",
-          "link": "https://m.entertain.naver.com/article/144/0001147137"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "라지",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "라지4 한국어",
-          "reason": "한국어 지원 여부 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "라지4 사용법",
-          "reason": "공개 직후 사용 수요",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "라지4 다운로드",
-          "reason": "오픈웨이트 접근법",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
     {
       "issue": "미스트랄",
       "issueType": "fresh",
@@ -4849,449 +4052,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
-    },
-    {
-      "issue": "오픈AI",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "오픈AI가 구글 TPU 구매를 추진해 엔비디아 의존도를 낮춘다.",
-      "headlines": [
-        {
-          "title": "[단독] AI와 전쟁 중인 美작가조합 “한국 작가들과 협력 원한다”",
-          "press": "joongang.co.kr",
-          "publishedAt": "2026-10-29T20:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/025/0003561643?sid=103"
-        },
-        {
-          "title": "\"딥시크·문샷, '아스트라'를 주된 증류 표적 삼아\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-29T06:08:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016409189?sid=101"
-        },
-        {
-          "title": "MS, AI 호황에 실적 예상치 상회…애저 매출 48% 급증",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-28T20:31:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014285884?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "오픈ai 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 종류",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 대표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 닷츠",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 순위",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "오픈AI 상장",
-          "reason": "IPO 시점 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "앤트로픽",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "AI 대어 앤트로픽이 나스닥 IPO를 신청했다.",
-      "headlines": [
-        {
-          "title": "[단독] 앤트로픽 ‘책 도둑질’ 피해, 한국 저자 250명…한강·황석영도...",
-          "press": "hani.co.kr",
-          "publishedAt": "2026-10-29T20:04:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/028/0002829907?sid=103"
-        },
-        {
-          "title": "'대어' 앤트로픽 IPO에 국내증권사 줄줄이 불참…공모주 청약 난망",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-29T07:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016409676?sid=101"
-        },
-        {
-          "title": "\"앤트로픽·오픈AI 돈줄 풀리면 수혜\"…브로드컴 목표가 '상향'",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-28T15:21:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014285818?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "앤트로픽 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 ipo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 상장일",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 클로드",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 ceo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 실적",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "앤트로픽 공모가",
-          "reason": "IPO 가격 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "앤트로픽 상장일",
-          "reason": "일정 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "앤트로픽 투자",
-          "reason": "투자 방법 수요",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "앤트로픽 수혜주",
-          "reason": "관련주 파급 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "엔비디아",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "배당 받은 국내 투자자가 2년 새 31% 늘며 엔비디아가 해외 1위다.",
-      "headlines": [
-        {
-          "title": "\"땡큐, 삼전·엔비디아\"…배당 받은 투자자 2년 새 31% '쑥'",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-29T01:50:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014286754?sid=101"
-        },
-        {
-          "title": "\"젠슨황과 술자리 중국 女기업인, 엔비디아 정보수집 中스파이\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-29T18:45:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016410633?sid=104"
-        },
-        {
-          "title": "신한증권 “배당받는 투자자 143만명 돌파…국내 삼성전자·해외 엔비디...",
-          "press": "etnews.com",
-          "publishedAt": "2026-10-29T01:25:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/030/0003479974?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "엔비디아 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 오리로봇",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 회장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 마곡",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 그래픽카드",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 gtc",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "엔비디아 실적발표",
-          "reason": "실적 일정 주목",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "엔비디아 전망",
-          "reason": "주가 방향 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "엔비디아 배당일",
-          "reason": "배당 시점 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "클로드",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "중국 딥시크·문샷의 증류 표적이 클로드에서 오픈AI 아스트라로 옮겨갔다.",
-      "headlines": [
-        {
-          "title": "'PHP 결함' 연쇄 공격에 전세계 서버 25대 장악…韓도 겨냥했다",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-29T00:04:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014286165?sid=105"
-        },
-        {
-          "title": "중국 AI '증류 공격' 표적, 클로드에서 오픈AI '아스트라'로 이동",
-          "press": "ytn.co.kr",
-          "publishedAt": "2026-10-29T06:44:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/052/0002425598?sid=104"
-        },
-        {
-          "title": "“클로드 막히자 아스트라로”…中 딥시크·문샷, 오픈AI 모델 증류 의혹",
-          "press": "biz.heraldcorp.com",
-          "publishedAt": "2026-10-29T10:51:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/016/0002716354?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "클로드 ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "클로드 요금제",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "클로드 무료",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "클로드 모네",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "클로드 코워크",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "클로드 구독료",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "클로드 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "클로드 디자인",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "클로드 신버전",
-          "reason": "차기 모델 기대",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "아스트라",
-          "reason": "표적 모델 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "카카오",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "카카오가 한국어 검색 강화한 AI 임베딩 모델 2종을 오픈소스로 공개했다.",
-      "headlines": [
-        {
-          "title": "카카오, 한국어 검색 강화한 AI 임베딩 모델 2종 공개",
-          "press": "biz.chosun.com",
-          "publishedAt": "2026-10-29T01:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/366/0001201143?sid=105"
-        },
-        {
-          "title": "카카오, 에이전트 특화 기술 오픈 소스로 공개",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-10-29T01:16:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005755746?sid=105"
-        },
-        {
-          "title": "카카오, 개인화 AI 에이전트용 '카나나' 임베딩 모델 공개",
-          "press": "news1.kr",
-          "publishedAt": "2026-10-29T00:35:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009257040?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "카카오 ai 퀴즈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "카카오 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "카카오 이모티콘샵",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "카카오 친구위치",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "카카오 콘",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "카카오 곳곳",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "카카오 구독",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "카카오 굿딜",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "카카오 주가",
-          "reason": "공개 뒤 주가 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "과기정통부",
@@ -5363,7 +4125,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "임광현 비서실장 국감",
@@ -6421,215 +5184,6 @@
         }
       ],
       "rowCount": 1,
-      "carried": true
-    },
-    {
-      "issue": "난베이지",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "난베이지가 33B 오픈소스 AI 모델을 공개해 코딩 벤치마크서 앞섰다.",
-      "headlines": [
-        {
-          "title": "난베이지, 33B 오픈소스 AI 모델 공개...코딩 벤치마크서 '큐원3.8-27B' 앞...",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-27T09:04:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216711"
-        },
-        {
-          "title": "29억뷰 웹툰 실사화 D-7 남겼다…파격 전개→美친 케미로 입소문 난리난...",
-          "press": "mhnse.com",
-          "publishedAt": "2026-10-28T00:25:00.000Z",
-          "link": "https://m.entertain.naver.com/article/445/0000482727"
-        },
-        {
-          "title": "\"지금까지 나온 것 중 제일 낫다\"…숏폼서 난리 난 단돈 5000원 다이소 '...",
-          "press": "wikitree.co.kr",
-          "publishedAt": "2026-10-26T10:48:00.000Z",
-          "link": "https://www.wikitree.co.kr/articles/1169269"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [
-        {
-          "keyword": "난베이지 성능",
-          "reason": "공개 다음 성능 비교",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "난베이지 사용법",
-          "reason": "오픈소스 다음 사용",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "칩스앤미디어",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "칩스앤미디어 3분기 영업익이 8.7% 늘었으나 순손실 전환했다.",
-      "headlines": [
-        {
-          "title": "칩스앤미디어, 3분기 영업익 약 17억원·전년比 8.7%↑",
-          "press": "newspim.com",
-          "publishedAt": "2026-10-27T05:07:00.000Z",
-          "link": "https://www.newspim.com/news/view/20261027000901"
-        },
-        {
-          "title": "칩스앤미디어, 3분기 영업익 16.6억...전년비 8.7%↑",
-          "press": "digitaltoday.co.kr",
-          "publishedAt": "2026-10-27T05:56:00.000Z",
-          "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=710293"
-        },
-        {
-          "title": "칩스앤미디어, AI SoC·로보틱스 신규 실적에 3분기 매출 ↑",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-27T08:40:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216724"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "칩스앤미디어 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "칩스앤미디어 실적",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "칩스앤미디어 매출",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "칩스앤미디어 구글",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "칩스앤미디어 연봉",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "칩스앤미디어 대표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "칩스앤미디어 배당",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "칩스앤미디어 로봇",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "칩스앤미디어 4분기",
-          "reason": "실적 다음 분기",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "삼쩜삼",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "삼쩜삼이 AI 에이전트 통합 플랫폼 카터로 운영비 45% 절감했다.",
-      "headlines": [
-        {
-          "title": "삼쩜삼, AI에이전트 통합구축…\"비용 최대 45%↓\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-27T00:28:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014280168?sid=101"
-        },
-        {
-          "title": "\"흩어진 AI 에이전트 한곳에\"…삼쩜삼, 자체 플랫폼 '카터' 구축",
-          "press": "news1.kr",
-          "publishedAt": "2026-10-27T00:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009251599?sid=101"
-        },
-        {
-          "title": "삼쩜삼, 사내 AI 에이전트 8개 ‘카터’로 통합…운영비 45% 절감",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-10-27T01:23:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006396906?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "삼쩜삼 고객센터",
-          "searchVolume": 5560,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼쩜삼 병원비환급",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼쩜삼 환급",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼쩜삼 이용료 미납",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼쩜삼 탈퇴",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼쩜삼 이용료",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼쩜삼 환불",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼쩜삼 수수료",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "연말정산 삼쩜삼",
-          "reason": "연말정산 시즌 임박",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
       "carried": true
     }
   ]
