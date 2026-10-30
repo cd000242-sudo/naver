@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-30T01:37:51.574Z",
+  "generatedAt": "2026-10-30T02:14:19.198Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -5013,71 +5013,6 @@
       ]
     },
     {
-      "id": "c048d9e257ae76bd",
-      "urls": [
-        "https://acecomm.tistory.com/entry/%EC%A1%B0%EC%A7%80%EB%A3%A8%EC%8B%9C%EA%B0%80%EC%8A%B5%EA%B8%B0-%EA%B0%80%EA%B2%A9%EB%B6%80%ED%84%B0-%EC%A0%84%EA%B8%B0%EC%84%B8%EC%99%80-%EC%84%B8%EC%B2%99-%EB%B0%A9%EB%B2%95-%EC%8B%A4%EC%82%AC%EC%9A%A9-%ED%9B%84%EA%B8%B0",
-        "https://angju.tistory.com/963",
-        "https://semoti.tistory.com/entry/%EA%B0%80%EC%8A%B5%EA%B8%B0-%EC%B2%AD%EC%86%8C-%EC%A3%BC%EA%B8%B0-%EB%AC%BC%EC%9D%80-%ED%95%98%EB%A3%A8-%ED%95%9C-%EB%B2%88-%EC%84%B8%EC%B2%99%EC%9D%80-%EC%A3%BC-1%ED%9A%8C"
-      ],
-      "guide": {
-        "direction": "검색자는 조지루시가 왜 비싼지보다 '전기세가 실제로 얼마나 나오는지'와 '아끼는 법'을 가장 궁금해한다. 고수 글들은 종류별 비교나 세척 주기는 다루지만 소비전력 기준 실제 요금 계산표가 빠져 있다. 강모드 소비전력과 하루 사용시간을 넣은 계산 예시, 한전 요금계산기 활용법을 보여주면 독자가 숫자로 바로 확인하고 글을 떠날 이유가 없어진다.",
-        "searchTargets": [
-          "조지루시 가습기 전기세 폭탄",
-          "조지루시 가습기 전기세 후기",
-          "조지루시 가습기 전기세 아끼는법"
-        ],
-        "mustInclude": [
-          "연속 강 모드 소비전력 약 462W(확인 필요: 제품 사양서)",
-          "일 8시간 사용 시 추가 전기세 약 443원 계산 예시(확인 필요: 지식인 답변 출처)",
-          "한전 전기요금계산기로 직접 계산하는 방법",
-          "가열식 특성상 초반 물 끓일 때 전기소모가 가장 큰 이유",
-          "물 교체 주 1회·세척 하루 1회 등 관리 주기"
-        ],
-        "mustAvoid": [
-          "한일 가열식 등 타사 제품과 전기세 수치 혼동",
-          "초기 물 끓임 구간을 '전기세 폭탄'처럼 과장"
-        ],
-        "checkBefore": [
-          "462W, 443원 수치 — 제품 사양서 및 한전 요금표로 재확인"
-        ],
-        "solves": [
-          "조지루시 가습기 전기세 어느정도 나오나요? → 강모드 기준 월 예상 요금 계산표 제공",
-          "조지루시 가습기 단점이 뭔가요? → 가열식 특성상 전기요금 높은 이유와 절약 방법",
-          "가습기 청소 주기 어떻게 되나요? → 물 교체·세척 주기 체크리스트"
-        ],
-        "actionTitles": [
-          "조지루시 가습기 전기세 계산법과 아끼는 법 정리",
-          "조지루시 가습기 세척·물 교체 주기 체크리스트"
-        ]
-      },
-      "at": "2026-10-26T21:14:00.940Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "조지루시같은 가열식 가습기 왜 없을까",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=508&docId=431584493&answerNo=16&qb=7KGw7KeA66Oo7Iuc6rCA7Iq16riw7KCE6riw7IS4",
-          "views": 4362,
-          "answers": 17,
-          "askedAt": "2023.11.03"
-        },
-        {
-          "title": "조지루시 가습기 전기세 어느정도 나오나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8030201&docId=478132316&answerNo=1&qb=7KGw7KeA66Oo7Iuc6rCA7Iq16riw7KCE6riw7IS4",
-          "views": 2765,
-          "answers": 4,
-          "askedAt": "2024.11.20"
-        },
-        {
-          "title": "조지루시 가습기 단점이 무엇이있을가요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=508&docId=476296518&answerNo=3&qb=7KGw7KeA66Oo7Iuc6rCA7Iq16riw7KCE6riw7IS4",
-          "views": 2641,
-          "answers": 4,
-          "askedAt": "2024.11.11"
-        }
-      ]
-    },
-    {
       "id": "931786edfdbc391c",
       "urls": [
         "https://gov.pinetreem.com/59",
@@ -9103,74 +9038,6 @@
           "views": 1223,
           "answers": 1,
           "askedAt": "2024.03.08"
-        }
-      ]
-    },
-    {
-      "id": "1175d074e8897567",
-      "urls": [
-        "https://sogon90.tistory.com/575",
-        "https://yeeso.tistory.com/entry/ETF-%EA%B4%B4%EB%A6%AC%EC%9C%A8%EC%9D%B4%EB%9E%80%EF%BD%9C%EC%8B%9C%EC%9E%A5%EA%B0%80%EA%B2%A9%EA%B3%BC-%EC%88%9C%EC%9E%90%EC%82%B0%EA%B0%80%EC%B9%98NAV%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%99%80-%ED%99%95%EC%9D%B8-%EB%B0%A9%EB%B2%95"
-      ],
-      "guide": {
-        "direction": "검색자는 '추적오차율과 괴리율이 뭐가 다른지', 'NAV보다 비싸게 사는 이유'에서 막힌다. 고수 글은 괴리율 정의는 줬지만 가장 많이 틀리는 추적오차율과의 구분을 못 짚었다. 이 글은 두 개념을 계산식과 표로 나눠 괴리율을 바로 확인하게 한다.",
-        "searchTargets": [
-          "etf 괴리율 뜻",
-          "etf 괴리율 계산",
-          "etf 괴리율 높으면",
-          "etf 괴리율 보는 법"
-        ],
-        "mustInclude": [
-          "NAV 24,419원인데 거래가 24,3xx원인 경우처럼 괴리율 계산 예시",
-          "추적오차율과 괴리율을 구분하는 비교표(가장 많이 혼동, 조회 6563)",
-          "레버리지 ETF 괴리율 관리강화 제도를 쉬운 말로 설명 (확인 필요: 거래소 공지)",
-          "운용보수는 추적오차 요인이지 괴리율 요인이 아니라는 구분",
-          "HTS·운용사 사이트에서 실시간 NAV·괴리율 확인하는 방법"
-        ],
-        "mustAvoid": [
-          "괴리율과 추적오차율을 같은 개념처럼 섞어 쓰지 않기",
-          "특정 레버리지 ETF를 단정적으로 '위험 상품'처럼 비난하듯 서술하지 않기",
-          "과거 특정 시점 괴리율 수치를 현재처럼 일반화하지 않기"
-        ],
-        "checkBefore": [
-          "레버리지 ETF 괴리율 관리강화 시행 내용·시행일은 한국거래소 공식 공지에서 확인",
-          "특정 ETF의 NAV·괴리율 수치는 운용사 공시 페이지에서 재확인"
-        ],
-        "solves": [
-          "괴리율과 추적오차율이 뭐가 다른가? → 두 개념 정의와 계산 방식을 표로 구분",
-          "NAV보다 비싸게 사는 이유? → 시장가격-NAV 차이 발생 구조와 확인 방법 제시",
-          "레버리지 ETF 괴리율 관리강화가 뭔지 쉽게? → 제도 취지를 쉬운 말로 풀어 설명"
-        ],
-        "actionTitles": [
-          "ETF 괴리율 뜻과 추적오차율 쉽게 구분하는 법 정리",
-          "ETF 괴리율 계산법으로 NAV 차이 확인하는 방법",
-          "ETF 괴리율 높으면 생기는 문제와 대응법 확인하기"
-        ]
-      },
-      "at": "2026-10-26T21:14:00.940Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "etf에서 추적오차율과 괴리율",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=176899276&answerNo=1&qb=ZXRm6rS066as7Jyo",
-          "views": 6563,
-          "answers": 1,
-          "askedAt": "2013.08.12"
-        },
-        {
-          "title": "미국주식 etf 와 nav 괴리율 조언 부탁합니다",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=379911585&answerNo=2&qb=ZXRm6rS066as7Jyo",
-          "views": 2881,
-          "answers": 2,
-          "askedAt": "2021.03.04"
-        },
-        {
-          "title": "etf 괴리율과 추적오차 관계",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=489739815&answerNo=1&qb=ZXRm6rS066as7Jyo",
-          "views": 2058,
-          "answers": 4,
-          "askedAt": "2025.10.24"
         }
       ]
     },
@@ -13805,41 +13672,6 @@
       ]
     },
     {
-      "id": "3c75015f362bb4c8",
-      "urls": [
-        "https://gilwon.tistory.com/367",
-        "https://acecomm.tistory.com/entry/%EB%A7%A5%EB%8F%84%EB%82%A0%EB%93%9C%EB%B9%85%EC%95%84%EC%B9%98-%EA%B0%80%EA%B2%A9%EA%B3%BC-%ED%81%AC%EA%B8%B0-%EB%B9%84%EA%B5%90-%EB%B0%8F-%EB%B9%85%EB%A7%A5%EA%B3%BC%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90-%EB%B6%84%EC%84%9D"
-      ],
-      "guide": {
-        "direction": "제미나이에 파일을 올렸는데 왜 다 분석이 안 되는지, 용량 제한과 실제 처리되는 분량이 다른 건지 몰라 막히는 경우가 많다. 제목 자체는 이미 구분을 짚지만 무료·Advanced 등 플랜별 구체적 제한 수치를 표로 안 주면 자기 상황에 바로 못 쓴다. 파일 크기 제한표, 플랜별 분석 가능량, 제한 초과 시 분할 업로드 같은 대응법까지 주면 한 번에 끝난다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "업로드 가능한 최대 파일 크기 (확인 필요: Google Gemini 공식 고객센터)",
-          "무료/Gemini Advanced 등 플랜별 분석 가능 페이지·토큰 제한 (확인 필요)",
-          "지원 파일 형식(PDF·문서 등) (확인 필요: 공식 도움말)",
-          "제한 초과 시 대응법(파일 분할, 요약 후 업로드 등)"
-        ],
-        "mustAvoid": [
-          "챗GPT 등 타 AI 도구의 업로드 제한과 혼동하지 않기"
-        ],
-        "checkBefore": [
-          "Google Gemini 공식 고객센터/도움말 문서에서 최신 업로드·분석 제한 수치 확인"
-        ],
-        "solves": [
-          "파일을 올렸는데 왜 다 분석이 안 되는지 모름 → 크기 제한과 분석 가능량 구분 설명",
-          "무료와 유료(Advanced) 차이가 뭔지 모름 → 플랜별 비교",
-          "제한에 걸렸을 때 어떻게 해야 하는지 모름 → 분할 업로드 등 대안 제시"
-        ],
-        "actionTitles": [
-          "제미나이 파일 크기 제한 넘었을 때 해결하는 법",
-          "제미나이 플랜별 파일 분석 가능량 비교 확인"
-        ]
-      },
-      "at": "2026-10-27T09:38:53.489Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
-    },
-    {
       "id": "2c638ccdb3b0745a",
       "urls": [
         "https://salespeople.tistory.com/entry/%EC%96%B4%EC%A7%80%EB%9F%BC%EC%A6%9D%EC%9D%98-%EC%9B%90%EC%9D%B8",
@@ -15227,56 +15059,6 @@
       "provider": "claude"
     },
     {
-      "id": "d34923dbc198ecaf",
-      "urls": [
-        "https://hyunrhee.tistory.com/entry/%EB%85%B8-%EB%82%98%EC%94%BDKnow-Nothing-%EB%8B%B9%EC%9D%98-%EA%B5%90%ED%99%A9%EC%9D%98-%EB%8F%8CPopes-Stone-%EC%A0%88%EB%8F%84-%EC%82%AC%EA%B1%B4"
-      ],
-      "guide": {
-        "direction": "검색자는 \"노 나씽 당 교황의 돌 사건\"이라는 낯선 사건명보다 \"역대 미국 대통령 순서·임기·연임 횟수\" 같은 일반 정보를 찾다가 이 글에 들어온다. 고수 블로그 제목은 사건명만 걸어 둬 이 사건이 몇 번째 대통령·어느 시기에 일어났는지 못 짚어준다. 사건 당시 대통령 재위표와 연임 규정을 함께 정리해 주면 독자가 바로 위치를 잡고 끝까지 읽는다.",
-        "searchTargets": [
-          "미국 대통령 순서",
-          "역대 미국 대통령",
-          "미국 대통령 연임 횟수",
-          "미국 대통령 임기"
-        ],
-        "mustInclude": [
-          "사건 발생 연도와 당시 대통령 (확인 필요: 역사 자료·백과사전)",
-          "역대 미국 대통령 순서·임기 정리표 (해당 시기 전후)",
-          "미국 대통령 연임 횟수 규정 근거 (수정헌법 22조)",
-          "노 나씽 당(Know Nothing Party)의 성격과 목적 요약",
-          "'교황의 돌' 사건 경위 (확인 필요: 원문 역사 자료)"
-        ],
-        "mustAvoid": [
-          "19세기 사건을 현재 정치 성향 논쟁에 끌어와 과도하게 해석하기",
-          "워싱턴 기념비 관련 다른 절도·훼손 사건과 혼동하기"
-        ],
-        "checkBefore": [
-          "사건 발생 연도와 당시 재임 대통령 (역사 자료·백과사전)",
-          "미국 대통령 연임 규정 조문 (수정헌법 22조 원문)"
-        ],
-        "solves": [
-          "역대 미국 대통령 순서가 헷갈려요 → 사건 시기 전후 대통령을 표로 정리",
-          "미국 대통령 연임은 몇 번까지 가능한가요 → 수정헌법 22조 기준으로 설명",
-          "노 나씽 당이 뭔가요 → 결성 배경과 교황의 돌 사건 연결고리 정리"
-        ],
-        "actionTitles": [
-          "역대 미국 대통령 순서 확인하며 보는 교황의 돌 사건"
-        ]
-      },
-      "at": "2026-10-27T09:38:53.489Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "고전 문학 추천해주세요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=307&docId=475623673&answerNo=11&qb=66+46rWtIOuMgO2GteuguSDsl63sgqwg64KY7JS9IOq1kO2ZqQ==",
-          "views": 208804,
-          "answers": 15,
-          "askedAt": "2026.09.09"
-        }
-      ]
-    },
-    {
       "id": "c609daa3e77ddc5a",
       "urls": [
         "https://youldad.tistory.com/547"
@@ -16116,71 +15898,6 @@
           "views": 315,
           "answers": 5,
           "askedAt": "2026.09.25"
-        }
-      ]
-    },
-    {
-      "id": "c210a6a46e8516b4",
-      "urls": [
-        "https://sweetonion1005.tistory.com/entry/%EA%B9%80%ED%8F%AC-%ED%8F%AC%EC%9E%A5%EC%9D%B4%EC%82%AC-%EB%B9%84%EC%9A%A9-%EA%B0%80%EC%9D%B4%EB%93%9C-%ED%8F%89%EC%88%98%EB%B3%84-%EA%B2%AC%EC%A0%81%EA%B3%BC-%EB%B9%84%EC%9A%A9-%EC%A0%88%EA%B0%90-%ED%8C%81"
-      ],
-      "guide": {
-        "direction": "검색자는 평수별 포장이사 비용을 몰라 과도하게 지출할까 걱정하고, 포장이사·반포장이사·용달이사 중 뭐가 더 저렴한지 헷갈려 한다. 고수 제목은 '평수별 견적과 절감 팁'이라 했지만 김포 지역 업체 시세와 포장·반포장·용달의 실제 비용 비교표는 빠졌다. 독자가 이 글로 끝내려면 평수별 예상 비용표, 세 가지 이사 방식 비교표, 여러 업체 견적 받는 순서를 함께 제시해야 한다.",
-        "searchTargets": [
-          "김포 포장이사",
-          "김포 포장이사 업체 추천",
-          "김포 포장이사 잘하는곳"
-        ],
-        "mustInclude": [
-          "평수별(원룸/투룸/쓰리룸 등) 예상 포장이사 비용 범위표(확인 필요: 실제 업체 견적 자료)",
-          "포장이사 vs 반포장이사 서비스 범위 비교표",
-          "용달이사와 포장이사 비용 차이 비교(확인 필요: 김포 지역 시세)",
-          "이사화물취급허가 등 정식 허가업체 확인 체크리스트"
-        ],
-        "mustAvoid": [
-          "특정 업체를 '최고'식으로 과장 추천해 '내돈내산' 검색자에게 광고성 후기로 오인될 위험",
-          "서울·인천 등 다른 지역 시세를 김포 시세로 혼동해서 제시하지 않기",
-          "정식 허가 없는 업체를 추천해 이사 사고 시 보상 불가 상황을 유도하지 않기"
-        ],
-        "checkBefore": [
-          "포장이사 업체의 이사화물취급허가 등록 여부 확인 방법",
-          "김포 지역 실제 견적 시세(여러 업체 견적 비교 사이트 등)에서 확인"
-        ],
-        "solves": [
-          "포장이사비용 절약할 수 있나요? → 여러 업체 견적 비교하는 순서와 절감 팁 제공",
-          "포장이사와 반포장이사 차이가 뭔가요? → 서비스 범위 비교표로 설명",
-          "용달이사가 포장이사보다 싼가요? → 비용 차이와 상황별 선택 기준 정리"
-        ],
-        "actionTitles": [
-          "김포 포장이사 업체 추천과 평수별 비용 비교하는 법",
-          "김포 포장이사 잘하는곳 찾는 법, 견적 비교 팁",
-          "김포 포장이사 비용 절감하는 법과 업체 확인 체크리스트"
-        ]
-      },
-      "at": "2026-10-27T20:32:09.044Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "포장이사비용 절약할수있나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=81002&docId=428901459&answerNo=20&qb=6rmA7Y+sIO2PrOyepeydtOyCrCDtj4nsiJjrs4Qg6rKs7KCBIOygiOqwkA==",
-          "views": 451,
-          "answers": 20,
-          "askedAt": "2024.04.15"
-        },
-        {
-          "title": "포장이사와 반포장이사 차이점이랑 포장이사....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=81002&docId=405985542&answerNo=4&qb=6rmA7Y+sIO2PrOyepeydtOyCrCDtj4nsiJjrs4Qg6rKs7KCBIOygiOqwkA==",
-          "views": 448,
-          "answers": 6,
-          "askedAt": "2021.11.27"
-        },
-        {
-          "title": "포장이사견적 일반이사 포장이사비용 절약하....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=81002&docId=414921203&answerNo=1&qb=6rmA7Y+sIO2PrOyepeydtOyCrCDtj4nsiJjrs4Qg6rKs7KCBIOygiOqwkA==",
-          "views": 324,
-          "answers": 2,
-          "askedAt": "2022.03.16"
         }
       ]
     },
@@ -64152,26 +63869,6 @@
     }
   ],
   "misses": [
-    {
-      "id": "ed5230f0d96b0bf8",
-      "at": "2026-10-29T14:07:21.947Z"
-    },
-    {
-      "id": "5612c04a1d97693b",
-      "at": "2026-10-29T14:07:21.947Z"
-    },
-    {
-      "id": "34acad83b17ec03e",
-      "at": "2026-10-29T14:07:21.947Z"
-    },
-    {
-      "id": "a3913a8abeb620ce",
-      "at": "2026-10-29T14:07:21.947Z"
-    },
-    {
-      "id": "c9dd9ba9b25575f5",
-      "at": "2026-10-29T14:07:21.947Z"
-    },
     {
       "id": "a6e9d305a1907715",
       "at": "2026-10-29T20:55:09.344Z"
