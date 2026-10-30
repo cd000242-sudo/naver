@@ -1,291 +1,20 @@
 {
-  "publishedAt": "2026-10-30T09:06:13.031Z",
+  "publishedAt": "2026-10-30T21:38:11.724Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 145,
+    "candidates": 177,
     "niche": 0,
-    "preemption": 8,
+    "preemption": 5,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-10-30",
-    "keywords": [
-      "김연경 생일"
-    ]
+    "day": "2026-10-31",
+    "keywords": []
   },
-  "rows": [
-    {
-      "keyword": "김연경 생일",
-      "issue": "김연경",
-      "topic": "김연경",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 0,
-        "sampledTitles": 10,
-        "topTitles": [
-          "김연경 사주 분석 (신해일주/성실의 아이콘)",
-          "대환장 기안장2 3화·4화 카즈하의 목마부터 대관령 여행까지, 손님들과 가까워지는 기안장",
-          "대환장 기안장 시즌2 3화 후기-우리 배구식빵언니가 인도춤을?",
-          "대환장 기안장 시즌2 1화~4화 리뷰대관령에서 더 커진 기안84의 세계관, 김연경·이준호·카즈하 케미까지",
-          "[예능] 넷플릭스｜대환장 기안장 시즌2 1~4회 후기｜확 달라진 기안장｜새직원들과의 케미",
-          "[26.09.22] 대환장 기안장 2 1~4 (출연진, 숙소 정보, 게스트)",
-          "넷플릭스 대환장 기안장 시즌2 4화 | 이준호 돼지고기 미역국에 김연경 울컥",
-          "\"코치하다가 온거야?\" 신인감독 김연경2 박상미 근황, 흥국생명 은퇴 후 트라이아웃 도전",
-          "기안장2 김연경 이준호 카즈하 너무 재밌어 5화 6회 7화 8회 공개 시간 언제 몇시?",
-          "7월 8월 9월) 불안은 자유의 현기증"
-        ],
-        "measuredAt": "2026-10-28T09:34:21.472Z"
-      },
-      "documentCount": 4611,
-      "documentCountMeasured": true,
-      "searchVolume": 1290,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "declining",
-      "demandRatio": 0.2706387864652135,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 1,290",
-        "문서수 4,611",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 1,290 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.3배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "'신인감독 김연경2'가 2주 연속 비드라마 화제성 1위를 기록했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "김연경 생일과 나이, 10월 비드라마 화제성 1위 근황",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "김연경 생일 찾다가 프로필에 적힌 키 보고 한참 멈칫했네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "김연경 키",
-          "searchVolume": 27960,
-          "frame": "generic"
-        },
-        {
-          "keyword": "김연경 나이",
-          "searchVolume": 20590,
-          "frame": "generic"
-        },
-        {
-          "keyword": "김연경 프로필",
-          "searchVolume": 13220,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "김연경 키",
-          "searchVolume": 27960,
-          "documentCount": 14611,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김연경 나이",
-          "searchVolume": 20590,
-          "documentCount": 14114,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김연경 프로필",
-          "searchVolume": 13220,
-          "documentCount": 7004,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김연경 은퇴",
-          "searchVolume": 2390,
-          "documentCount": 17555,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김연경 황연주",
-          "searchVolume": 890,
-          "documentCount": 4359,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김연경 생년월일",
-          "searchVolume": 40,
-          "documentCount": 1072,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": {
-        "series": [
-          66,
-          49,
-          71,
-          83,
-          100,
-          41,
-          49,
-          41,
-          54,
-          50,
-          49,
-          33,
-          21,
-          20,
-          18,
-          13,
-          22,
-          27,
-          5,
-          10,
-          15,
-          9,
-          6,
-          7,
-          17,
-          0,
-          6,
-          11,
-          5
-        ],
-        "measuredAt": "2026-10-30T09:06:13.814Z"
-      },
-      "kinCount": 35,
-      "kinTop": [
-        {
-          "title": "파리바게트 김연경 배너 구매 할 수 있나요,,",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10010401&docId=403500939&answerNo=3",
-          "views": 154,
-          "answers": 3
-        },
-        {
-          "title": "버블 생일축하메세지",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=302140101&docId=462425909&answerNo=1",
-          "views": 119,
-          "answers": 1
-        },
-        {
-          "title": "2020년에 김연경 선수 나이가 몇살",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10010405&docId=436286958&answerNo=1",
-          "views": 77,
-          "answers": 1
-        },
-        {
-          "title": "김연경 좋아하는 친구 선물",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10010402&docId=490632449&answerNo=2",
-          "views": 36,
-          "answers": 2
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-28T09:33:32.281Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "carried": true
-    }
-  ],
+  "rows": [],
   "observations": [
-    {
-      "keyword": "미스트랄 패딩",
-      "issue": "미스트랄",
-      "topic": "미스트랄",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 132,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 5,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 132",
-        "선점 후보 — 경쟁 문서 132건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 5건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-30T09:03:57.231Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
     {
       "keyword": "앤트로픽 엔스로픽 차이",
       "issue": "앤트로픽",
@@ -349,7 +78,7 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-30T09:03:57.231Z",
+      "measuredAt": "2026-10-30T21:37:24.147Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -365,7 +94,7 @@
       "verdict": "preemption",
       "preemptionKind": "no-demand",
       "serp": null,
-      "documentCount": 152,
+      "documentCount": 156,
       "documentCountMeasured": true,
       "searchVolume": 30,
       "searchVolumeLt10": false,
@@ -378,8 +107,8 @@
       "freshFrontalCount": 0,
       "reasons": [
         "검색량 30",
-        "문서수 152",
-        "선점 후보 — 경쟁 문서 152건, 수요 미검출"
+        "문서수 156",
+        "선점 후보 — 경쟁 문서 156건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -415,12 +144,69 @@
         {
           "title": "새로운 AI 에이전트 닷츠, 실제로 얼마나 효율적일까요?",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=1122&docId=495387990&answerNo=0",
-          "views": 93,
+          "views": 95,
           "answers": null
         }
       ],
       "monetize": null,
-      "measuredAt": "2026-10-30T09:03:57.231Z",
+      "measuredAt": "2026-10-30T21:37:24.147Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "최불암 아들 최민식",
+      "issue": "최불암",
+      "topic": "최불암",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 167,
+      "documentCountMeasured": true,
+      "searchVolume": 30,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 30",
+        "문서수 167",
+        "선점 후보 — 경쟁 문서 167건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 22,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-30T21:37:24.147Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -468,9 +254,115 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-30T09:03:57.231Z",
+      "measuredAt": "2026-10-30T21:37:24.147Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "한국딥러닝 잡플래닛",
+      "issue": "한국딥러닝",
+      "topic": "한국딥러닝",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 144,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 144",
+        "선점 후보 — 경쟁 문서 144건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-30T21:37:24.147Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "미스트랄 패딩",
+      "issue": "미스트랄",
+      "topic": "미스트랄",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 132,
+      "documentCountMeasured": true,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 5,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 10",
+        "문서수 132",
+        "선점 후보 — 경쟁 문서 132건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 5건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-30T09:03:57.231Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "G마켓 e쿠폰 핀번호",
@@ -537,59 +429,8 @@
       "monetize": null,
       "measuredAt": "2026-10-30T09:03:57.231Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "한국딥러닝 잡플래닛",
-      "issue": "한국딥러닝",
-      "topic": "한국딥러닝",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 144,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 144",
-        "선점 후보 — 경쟁 문서 144건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-30T09:03:57.231Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "미스트랄 티셔츠",
@@ -641,7 +482,8 @@
       "monetize": null,
       "measuredAt": "2026-10-30T09:03:57.231Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "미스트랄 선글라스",
@@ -693,7 +535,8 @@
       "monetize": null,
       "measuredAt": "2026-10-30T09:03:57.231Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "과기정통부 쌍검술",
@@ -2425,275 +2268,6 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "AI스페라 게이트웨이",
-      "issue": "AI스페라",
-      "topic": "AI스페라",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 10,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 10",
-        "선점 후보 — 경쟁 문서 10건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "AI스페라가 인터폴 '게이트웨이'에 합류해 사이버범죄 수사를 지원한다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "AI스페라 게이트웨이 인터폴 사이버범죄 수사 지원 참여 내용",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "AI스페라 게이트웨이 인터폴 합류 소식에 크리미널IP까지 찾아봤네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-28T09:33:32.281Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "MAI 이미지 2.7",
-      "issue": "MAI 이미지 2.7",
-      "topic": "MAI 이미지 2.7",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 69,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "문서수 69",
-        "선점 후보 — 경쟁 문서 69건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 1건)"
-        }
-      ],
-      "whySearch": {
-        "text": "MS가 'MAI 이미지 2.7'을 공개해 아레나 3위에 올랐다",
-        "basis": "뉴스 헤드라인 4건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "MAI 이미지 2.7 AA 2위 아레나 3위 성능 순위 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "MAI 이미지 2.7 공개 소식에 아레나 3위가 의외로 말 많더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-28T09:33:32.281Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "김재원 조이현 로맨스",
-      "issue": "김재원 조이현 로맨스",
-      "topic": "김재원 조이현 로맨스",
-      "lane": "realtime",
-      "issueType": "entertainment",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 244,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "문서수 244",
-        "선점 후보 — 경쟁 문서 244건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 1건)"
-        }
-      ],
-      "whySearch": {
-        "text": "'최종면접'에서 김재원과 조이현이 로맨스 케미를 선보였다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "김재원 조이현 로맨스 최종면접 케미 200점 이유",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "김재원 조이현 로맨스 케미가 최종면접에서 200점 소리 듣는 거 보고 납득했네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 3,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-28T09:33:32.281Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "AI스페라 상장",
-      "issue": "AI스페라",
-      "topic": "AI스페라",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "IPO 여부",
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 266,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 266",
-        "선점 후보 — 경쟁 문서 266건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — IPO 여부"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "AI스페라가 인터폴 '게이트웨이'에 합류해 사이버범죄 수사를 지원한다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "AI스페라 상장 전망과 인터폴 게이트웨이 합류가 주는 의미",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "AI스페라 상장만 기다리다 인터폴 합류 소식에 생각이 좀 달라졌어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "AI스페라",
-          "searchVolume": 240,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "AI스페라",
-          "searchVolume": 240,
-          "documentCount": 1180,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 2260,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-28T09:33:32.281Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
@@ -3491,151 +3065,6 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "김연경",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "'신인감독 김연경2'가 2주 연속 비드라마 화제성 1위를 기록했다",
-      "headlines": [
-        {
-          "title": "'신인감독 김연경2' 2주 연속 화제성 1위…김연경·황연주도 나란히 1·...",
-          "press": "news1.kr",
-          "publishedAt": "2026-10-27T07:16:00.000Z",
-          "link": "https://m.entertain.naver.com/article/421/0009253260"
-        },
-        {
-          "title": "[공식] \"다시 김연경의 시대\"…10월 4주차 비드라마 화제성 1위",
-          "press": "mydaily.co.kr",
-          "publishedAt": "2026-10-27T05:40:00.000Z",
-          "link": "https://m.entertain.naver.com/article/117/0004118883"
-        },
-        {
-          "title": "'신인감독 김연경' 또 정상..김연경·황연주, 화제성 1·2위 싹쓸이",
-          "press": "starnewskorea.com",
-          "publishedAt": "2026-10-27T00:49:00.000Z",
-          "link": "https://m.entertain.naver.com/article/108/0003481950"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "신인감독 김연경2",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김연경 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "신인감독 김연경",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김연경 포지션",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김연경 mbti",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김연경 연봉",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김연경 배구",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김연경 갤러리",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "김연경 팀 성적",
-          "reason": "경기 결과",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 1,
-      "carried": true
-    },
-    {
-      "issue": "김재원 조이현 로맨스",
-      "issueType": "entertainment",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "'최종면접'에서 김재원과 조이현이 로맨스 케미를 선보였다",
-      "headlines": [
-        {
-          "title": "'최종면접' 조이현·김재원 \"우리 로맨스 호흡? 100점 만점 200점\"",
-          "press": "sportschosun.com",
-          "publishedAt": "2026-10-28T07:23:00.000Z",
-          "link": "https://m.entertain.naver.com/article/076/0004460478"
-        },
-        {
-          "title": "'최종면접' 김재원, 조이현과 로맨스 케미 \"200점..또 만나고파\"",
-          "press": "starnewskorea.com",
-          "publishedAt": "2026-10-28T07:23:00.000Z",
-          "link": "https://m.entertain.naver.com/article/108/0003482424"
-        },
-        {
-          "title": "'최종면접' 김재원♥조이현, 미스터리 영화 속 로맨스 케미…\"100점 만점...",
-          "press": "tenasia.co.kr",
-          "publishedAt": "2026-10-28T07:33:00.000Z",
-          "link": "https://m.entertain.naver.com/article/312/0000781971"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "MAI 이미지 2.7",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "MS가 'MAI 이미지 2.7'을 공개해 아레나 3위에 올랐다",
-      "headlines": [
-        {
-          "title": "MS, 정교함 강화한 'MAI 이미지 2.7' 공개...AA 2위·아레나 3위 등극",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-28T07:36:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216755"
-        },
-        {
-          "title": "메타 유증 흥행·브로드컴 목표가 상향…빅테크 훈풍 속 차별화 장세 [美...",
-          "press": "wowtv.co.kr",
-          "publishedAt": "2026-10-27T22:59:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/215/0001270730?sid=101"
-        },
-        {
-          "title": "izna(이즈나), 데뷔부터 ‘완성형 걸그룹’ 면모 입증..완벽 칼군무+강렬...",
-          "press": "breaknews.com",
-          "publishedAt": "2024-12-06T08:46:00.000Z",
-          "link": "http://www.breaknews.com/1076586"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
       "rowCount": 0,
       "carried": true
     }
