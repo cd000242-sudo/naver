@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-30T23:07:26.172Z",
+  "generatedAt": "2026-10-30T23:24:25.805Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -4672,66 +4672,6 @@
           "views": 186,
           "answers": 8,
           "askedAt": "2026.10.13"
-        }
-      ]
-    },
-    {
-      "id": "a9efc4d3acf4efee",
-      "urls": [
-        "https://memogipost.tistory.com/entry/2026-%ED%8F%AC%ED%95%AD%EC%8B%9C%EB%AF%BC-%EA%B0%80%EC%9D%84%EC%9D%8C%EC%95%85%EC%A0%9C",
-        "https://www.primusy.com/feeds/1476249051038745212/comments/default"
-      ],
-      "guide": {
-        "direction": "검색자는 같은 시기 포항에서 열리는 가을 행사(일월문화제, 일월음악제 등)가 여러 개라 이 음악제가 맞는지, 몇 시에 어디서 하는지, 무료인지, 주차는 어떻게 하는지 궁금해한다. 고수 제목은 날짜·장소·라인업은 나열했지만 시작 시각, 무료 여부, 셔틀·대중교통 유무는 못 채웠다. 이 글은 일정·장소·라인업표·주차 안내를 한 번에 정리하고 비슷한 이름의 타 행사와 구분해 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "공연 날짜(10월 31일)와 장소(포항실내체육관 옆 주차장)",
-          "초대가수 8인 라인업(김소유·지원이·최영철·현송·오사랑·김시훈·호령·MC오현)",
-          "공연 시작시각 및 무료 여부(확인 필요: 포항시 공지)",
-          "주차 가능여부 및 대중교통 접근법(확인 필요)"
-        ],
-        "mustAvoid": [
-          "같은 시기 포항의 일월문화제·일월음악제 등 비슷한 이름의 다른 행사와 혼동",
-          "초대가수들의 사생활·사적 논란 추측성 언급"
-        ],
-        "checkBefore": [
-          "포항시/포항문화관광과 공식 공지에서 시작 시각·무료 여부 확인",
-          "주최 측 SNS·공지에서 우천 시 취소 여부 확인"
-        ],
-        "solves": [
-          "포항 가을 행사가 여러 개라 헷갈린다 → 날짜·장소로 명확히 구분",
-          "초대가수 라인업이 궁금하다 → 8인 명단 정리",
-          "주차를 어디서 해야 할지 모른다 → 주차장 위치 안내"
-        ],
-        "actionTitles": [
-          "포항시민 가을음악제 10월31일 라인업·주차 한번에 확인",
-          "포항실내체육관 가을음악제 주차장 위치와 시간 확인하는 법"
-        ]
-      },
-      "at": "2026-10-26T21:14:00.940Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "날씨와 관련된 생활조사 (3가지)",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=130102&docId=36617564&answerNo=7&qb=7Y+s7ZWt7Iuc66+86rCA7J2E7J2M7JWF7KCc",
-          "views": 50019,
-          "answers": 9,
-          "askedAt": "2008.07.15"
-        },
-        {
-          "title": "포항애서 가을에열리는 행사",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=121110&docId=108955202&answerNo=1&qb=7Y+s7ZWt7Iuc66+86rCA7J2E7J2M7JWF7KCc",
-          "views": 5468,
-          "answers": 1,
-          "askedAt": "2010.04.25"
-        },
-        {
-          "title": "1박2일 가을 여행 추천 인원수는 8명 포항 송....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=90111&docId=75483023&answerNo=1&qb=7Y+s7ZWt7Iuc66+86rCA7J2E7J2M7JWF7KCc",
-          "views": 5185,
-          "answers": 1,
-          "askedAt": "2009.10.19"
         }
       ]
     },
@@ -13524,72 +13464,6 @@
           "views": 2543,
           "answers": 4,
           "askedAt": "2026.07.01"
-        }
-      ]
-    },
-    {
-      "id": "4ac076ac750144d4",
-      "urls": [
-        "https://salespeople.tistory.com/entry/isa-%EA%B3%84%EC%A2%8C%EB%9E%80",
-        "https://hwa-ahn-drawingstory.tistory.com/149"
-      ],
-      "guide": {
-        "direction": "검색자는 'ISA 계좌란' 뜻보다 중개형·신탁형·일임형별 비과세 적용 차이, 중도인출 시 원금만 되는지, 국내주식도 일반계좌에서 비과세인데 굳이 ISA에 담는 이유에서 막힌다. 고수 글의 '총정리' 제목은 유형별 비과세 비교와 중도인출 한도 계산까지는 짚지 않는다. 독자는 유형별 비과세 비교표와 중도인출 가능 금액 계산, 의무가입기간 체크리스트로 글을 끝낸다.",
-        "searchTargets": [
-          "ISA 계좌란",
-          "ISA 계좌란 무엇인가",
-          "ISA 계좌란 무엇인가요"
-        ],
-        "mustInclude": [
-          "중개형·신탁형·일임형 ISA의 비과세 적용 범위 비교표(매매차익 전액 비과세 여부)",
-          "중도인출 시 원금까지만 인출 가능하다는 기준과 수익은 인출되지 않는 이유",
-          "국내주식은 일반계좌도 비과세인데 ISA에 담는 이유(손익통산·세제혜택 한도)",
-          "ISA 의무가입기간과 중도해지 시 불이익(확인 필요: 각 증권사 공식 안내)",
-          "일반형·서민형 가입 소득 기준(확인 필요: 금융위원회·국세청 공지)"
-        ],
-        "mustAvoid": [
-          "특정 증권사 고객센터 응대 민원을 그대로 인용해 비판",
-          "일반형과 서민형의 비과세 한도를 뭉뚱그려 혼동 유발",
-          "중개형 ISA를 일반 위탁계좌와 같은 것처럼 설명"
-        ],
-        "checkBefore": [
-          "유형별 비과세 적용 여부와 의무가입기간 — 금융투자협회 ISA 통합공시 또는 각 증권사 공식 안내",
-          "일반형·서민형 가입 소득 기준 — 국세청·금융위원회 공지"
-        ],
-        "solves": [
-          "중개형 ISA도 매매차익 전액 비과세인지 → 유형별 비과세 비교표로 바로 확인",
-          "ISA 중도인출하면 원금만 되는지 → 중도인출 가능 금액 산정 기준 제시",
-          "국내주식은 일반계좌도 비과세인데 ISA 써야 하나 → 손익통산 혜택으로 이유 설명"
-        ],
-        "actionTitles": [
-          "ISA 계좌란 무엇인가, 유형별 비과세 차이 한눈에 비교",
-          "ISA 계좌란 무엇인가요, 중도인출 원금 한도 계산하기"
-        ]
-      },
-      "at": "2026-10-28T10:25:36.735Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "isa 계좌에대해 질문이있어요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=483463524&answerNo=6&qb=aXNhIOqzhOyijOuegA==",
-          "views": 446,
-          "answers": 6,
-          "askedAt": "2026.10.06"
-        },
-        {
-          "title": "isa 계좌 원금 중도인출",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40107&docId=491065375&answerNo=4&qb=aXNhIOqzhOyijOuegA==",
-          "views": 382,
-          "answers": 4,
-          "askedAt": "2026.10.26"
-        },
-        {
-          "title": "isa계좌 중도인출 질문..",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=494845193&answerNo=6&qb=aXNhIOqzhOyijOuegA==",
-          "views": 167,
-          "answers": 6,
-          "askedAt": "2026.10.26"
         }
       ]
     },
