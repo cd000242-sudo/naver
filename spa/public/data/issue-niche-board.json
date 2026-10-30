@@ -1,20 +1,18 @@
 {
-  "publishedAt": "2026-10-30T03:36:31.733Z",
+  "publishedAt": "2026-10-30T09:06:13.031Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 194,
+    "candidates": 145,
     "niche": 0,
-    "preemption": 7,
+    "preemption": 8,
     "pending": 0
   },
   "freeSample": {
     "day": "2026-10-30",
     "keywords": [
-      "김연경 생일",
-      "원당역 시간표",
-      "플래티어 주가"
+      "김연경 생일"
     ]
   },
   "rows": [
@@ -168,7 +166,6 @@
       ],
       "trend": {
         "series": [
-          57,
           66,
           49,
           71,
@@ -196,9 +193,10 @@
           17,
           0,
           6,
-          11
+          11,
+          5
         ],
-        "measuredAt": "2026-10-29T21:45:48.317Z"
+        "measuredAt": "2026-10-30T09:06:13.814Z"
       },
       "kinCount": 35,
       "kinTop": [
@@ -229,387 +227,6 @@
       ],
       "monetize": null,
       "measuredAt": "2026-10-28T09:33:32.281Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "carried": true
-    },
-    {
-      "keyword": "원당역 시간표",
-      "issue": "원당역",
-      "topic": "원당역",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 2건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 2,
-        "sampledTitles": 10,
-        "topTitles": [
-          "2026 고양·화정 공항버스 시간표 총정리｜인천공항 3200번·7400번·김포공항 85번 요금·타는 곳",
-          "원당역 흉기 사건, 역무원이 동료에게 흉기 휘둘러 중상…경찰 현행범 체포, 무슨 일이 있었나?",
-          "고양시 화정 원당 능곡 행신에서 인천공항 가는 법 (26.09.05기준)",
-          "[고양시] 명성 3800번 (대화역↔의정부) 노선안내도",
-          "2026 고양시 인천공항버스 시간표! 3300·3200·7400·7500 예매·첫차",
-          "고양 공항버스, 인천공항·김포공항 리무진 시간표 요금 예매 타는곳 한 번에 정리",
-          "미엘발레학원 10월 시간표안내",
-          "원당 키즈카페 메가플레이키즈파크｜주차·튜브슬라이드 주말 시간표",
-          "[공항버스] 경기고속 3200번 (원당, 능곡 ↔ 인천공항)",
-          "고양 인천공항버스 3200번 시간표·타는 곳·노선도·요금·예매｜화정역·원당·능곡·행신동"
-        ],
-        "measuredAt": "2026-10-28T09:06:45.440Z"
-      },
-      "documentCount": 2797,
-      "documentCountMeasured": true,
-      "searchVolume": 1050,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 1.0873566293537944,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 1,050",
-        "문서수 2,797",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 1,050 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.1배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "3호선 원당역서 남성 역무원이 여성 동료에게 흉기 휘둘러 중상.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "원당역 시간표 3호선 첫차 막차 평일 주말 운행시간",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "원당역 시간표 보다가 첫차 막차 시간 생각보다 많이들 헷갈리더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "원당역 첫차",
-          "searchVolume": 60,
-          "frame": "generic"
-        },
-        {
-          "keyword": "원당역 출구",
-          "searchVolume": 40,
-          "frame": "generic"
-        },
-        {
-          "keyword": "원당역 주변 맛집",
-          "searchVolume": 40,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "원당역 첫차",
-          "searchVolume": 60,
-          "documentCount": 1365,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "원당역 출구",
-          "searchVolume": 40,
-          "documentCount": 45923,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "원당역 주변 맛집",
-          "searchVolume": 40,
-          "documentCount": 11400,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "원당역 막차",
-          "searchVolume": 20,
-          "documentCount": 1958,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "원당역 지하철 시간표",
-          "searchVolume": 20,
-          "documentCount": 716,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": {
-        "series": [
-          41,
-          53,
-          63,
-          55,
-          57,
-          69,
-          65,
-          75,
-          57,
-          51,
-          69,
-          41,
-          59,
-          84,
-          65,
-          78,
-          73,
-          90,
-          45,
-          76,
-          100,
-          73,
-          98,
-          84,
-          67,
-          43,
-          59,
-          78,
-          37
-        ],
-        "label": "🐢 연금형",
-        "recommendation": "한 번 쓰면 1년 꾸준 방문자. 안정적 연금 키워드",
-        "measuredAt": "2026-10-29T21:45:48.317Z"
-      },
-      "kinCount": 476,
-      "kinTop": [
-        {
-          "title": "대곡역에서 원당역가는 707번 버스 시간",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=81201&docId=479035189&answerNo=2",
-          "views": 61,
-          "answers": 2
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-28T09:05:27.353Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "carried": true
-    },
-    {
-      "keyword": "플래티어 주가",
-      "issue": "플래티어",
-      "topic": "플래티어",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 0,
-        "sampledTitles": 10,
-        "topTitles": [
-          "플래티어 기업분석(367000)",
-          "AI 때문에 망한다 더니 반전! JP모건이 세일즈포스 찍자 B2B SaaS주 솟구친다",
-          "증권사리포트 (제목만) 2026.10.20",
-          "키움증권 강소기업 15곳 중 12곳 성장은 2027년…지슨은 2분기 먼저 '흑자'",
-          "9월 23일 애프터마켓 상승 종목(최대주주 변경 씨싸이트, 반도체 후공정 관련주 테크엘, 비피도, 오토앤, 삼일씨앤에스, 디티앤씨, 대성하이텍, NE능률, 플래티어, HC홈센타)",
-          "플래티어 -90% 폭락 매출 380억 회복이 반등의 신호탄?",
-          "플래티어",
-          "플래티어, 2025년 매출 389억 원 기록…AX·DX 중심 구조 전환으로 실적 개선",
-          "[국내증시 마감] 8/18 코스피 6,869.83(-1.55%)… 건설 약세",
-          "플래티어(367000)"
-        ],
-        "measuredAt": "2026-10-28T09:07:18.056Z"
-      },
-      "documentCount": 4406,
-      "documentCountMeasured": true,
-      "searchVolume": 500,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 1.2108990300977012,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 500",
-        "문서수 4,406",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 500 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.2배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "플래티어가 GS네오텍과 에이전틱 AICC 공동 사업화 MOU 체결.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "플래티어 주가 GS네오텍 AICC 협력 발표 당일 흐름 짚기",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "플래티어 주가전망 보려다 기업정보부터 다시 읽게 되더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "플래티어 기업정보",
-          "searchVolume": 40,
-          "frame": "generic"
-        },
-        {
-          "keyword": "플래티어 주가전망",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "플래티어 기업정보",
-          "searchVolume": 40,
-          "documentCount": 4782,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "플래티어 주가전망",
-          "searchVolume": 10,
-          "documentCount": 2774,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": {
-        "series": [
-          60,
-          43,
-          88,
-          17,
-          12,
-          0,
-          64,
-          45,
-          48,
-          0,
-          0,
-          0,
-          36,
-          40,
-          52,
-          36,
-          57,
-          12,
-          0,
-          64,
-          100,
-          57,
-          48,
-          52,
-          0,
-          0,
-          26,
-          60,
-          67
-        ],
-        "measuredAt": "2026-10-29T21:45:48.317Z"
-      },
-      "kinCount": 25,
-      "kinTop": [
-        {
-          "title": "플래티어 주가 상장 첫날부터 따상 대박입니다",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=397018536&answerNo=4",
-          "views": 1379,
-          "answers": 4
-        },
-        {
-          "title": "플래티어 주가 드디어 부진 벗어 나나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=401901779&answerNo=3",
-          "views": 1207,
-          "answers": 3
-        },
-        {
-          "title": "코스닥 상장종목인 플래티어 질문드려요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=428873832&answerNo=2",
-          "views": 82,
-          "answers": 2
-        },
-        {
-          "title": "플래티어 주가요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=405335856&answerNo=2",
-          "views": 82,
-          "answers": 2
-        },
-        {
-          "title": "주가 손익률이 -38%가 되어가는데요ㅜㅜ",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=400265497&answerNo=5",
-          "views": null,
-          "answers": null
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-28T09:05:27.353Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
       "carried": true
@@ -665,7 +282,7 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-30T03:34:26.199Z",
+      "measuredAt": "2026-10-30T09:03:57.231Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -732,7 +349,7 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-30T03:34:26.199Z",
+      "measuredAt": "2026-10-30T09:03:57.231Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -748,7 +365,7 @@
       "verdict": "preemption",
       "preemptionKind": "no-demand",
       "serp": null,
-      "documentCount": 150,
+      "documentCount": 152,
       "documentCountMeasured": true,
       "searchVolume": 30,
       "searchVolumeLt10": false,
@@ -761,8 +378,8 @@
       "freshFrontalCount": 0,
       "reasons": [
         "검색량 30",
-        "문서수 150",
-        "선점 후보 — 경쟁 문서 150건, 수요 미검출"
+        "문서수 152",
+        "선점 후보 — 경쟁 문서 152건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -798,12 +415,12 @@
         {
           "title": "새로운 AI 에이전트 닷츠, 실제로 얼마나 효율적일까요?",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=1122&docId=495387990&answerNo=0",
-          "views": 91,
+          "views": 93,
           "answers": null
         }
       ],
       "monetize": null,
-      "measuredAt": "2026-10-30T03:34:26.199Z",
+      "measuredAt": "2026-10-30T09:03:57.231Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -851,7 +468,74 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-30T03:34:26.199Z",
+      "measuredAt": "2026-10-30T09:03:57.231Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "G마켓 e쿠폰 핀번호",
+      "issue": "G마켓 e쿠폰 핀번호",
+      "topic": "G마켓 e쿠폰 핀번호",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 123,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 2,
+      "freshFrontalCount": 2,
+      "reasons": [
+        "문서수 123",
+        "선점 후보 — 경쟁 문서 123건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 2건 (최근 2건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "거래",
+      "adsenseFit": false,
+      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 19,
+      "kinTop": [
+        {
+          "title": "G마켓에서 구매한 온라인 문화상품권 사용 방법",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=511&docId=455589509&answerNo=7",
+          "views": 977,
+          "answers": 7
+        },
+        {
+          "title": "g마켓에서 e쿠폰으로 에그머니 샀는데요 핀번호 어디서 확인....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=511&docId=435889531&answerNo=2",
+          "views": 192,
+          "answers": 2
+        },
+        {
+          "title": "지마켓에서 에그머니 e쿠폰을 구매했는데요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=2010101&docId=435888600&answerNo=0",
+          "views": 19,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-30T09:03:57.231Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -903,7 +587,7 @@
       "kinCount": 1,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-30T03:34:26.199Z",
+      "measuredAt": "2026-10-30T09:03:57.231Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -955,7 +639,7 @@
       "kinCount": 3,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-30T03:34:26.199Z",
+      "measuredAt": "2026-10-30T09:03:57.231Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -1007,7 +691,7 @@
       "kinCount": 4,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-30T03:34:26.199Z",
+      "measuredAt": "2026-10-30T09:03:57.231Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -3010,952 +2694,6 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "플래티어 연봉",
-      "issue": "플래티어",
-      "topic": "플래티어",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 158,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 158",
-        "선점 후보 — 경쟁 문서 158건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "플래티어가 GS네오텍과 에이전틱 AICC 공동 사업화 MOU 체결.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "플래티어 연봉 신입 초봉과 평균 연봉 복지까지 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "플래티어 연봉만 보려 했는데 복지랑 주가까지 자꾸 눈이 가더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "플래티어 주가",
-          "searchVolume": 500,
-          "frame": "generic"
-        },
-        {
-          "keyword": "플래티어 기업정보",
-          "searchVolume": 40,
-          "frame": "generic"
-        },
-        {
-          "keyword": "플래티어 복지",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "플래티어 주가",
-          "searchVolume": 500,
-          "documentCount": 4406,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "플래티어 기업정보",
-          "searchVolume": 40,
-          "documentCount": 4782,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-28T09:05:27.353Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "신유빈 남친",
-      "issue": "신유빈",
-      "topic": "신유빈",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 283,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "declining",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 283",
-        "선점 후보 — 경쟁 문서 283건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "신유빈이 완승으로 WTT 챔피언십 진출, 성숙해진 이미지로 화제.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "신유빈 남친 있는지 나이·키 프로필로 확인",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "신유빈 남친 찾다 들른 프로필에서 나이랑 키 보고 한참 머물렀네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "신유빈 프로필",
-          "searchVolume": 2180,
-          "frame": "generic"
-        },
-        {
-          "keyword": "신유빈 나이",
-          "searchVolume": 1160,
-          "frame": "generic"
-        },
-        {
-          "keyword": "신유빈 키",
-          "searchVolume": 530,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "신유빈 프로필",
-          "searchVolume": 2180,
-          "documentCount": 1528,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "신유빈 나이",
-          "searchVolume": 1160,
-          "documentCount": 3693,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "신유빈 키",
-          "searchVolume": 530,
-          "documentCount": 2083,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "신유빈 경기",
-          "searchVolume": 190,
-          "documentCount": 17552,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "신유빈 몸매",
-          "searchVolume": 110,
-          "documentCount": 218,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "신유빈 남자친구",
-          "searchVolume": 10,
-          "documentCount": 1045,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "신유빈 화보",
-          "searchVolume": 10,
-          "documentCount": 539,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 22,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-28T09:05:27.353Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "플래티어 블라인드",
-      "issue": "플래티어",
-      "topic": "플래티어",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 17,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 17",
-        "선점 후보 — 경쟁 문서 17건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "플래티어가 GS네오텍과 에이전틱 AICC 공동 사업화 MOU 체결.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "플래티어 블라인드 GS네오텍 에이전틱 AICC 공동사업 MOU",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "플래티어 블라인드 글 보다가 플래티어 주가 전망 얘기에 손이 멈췄어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "플래티어 주가",
-          "searchVolume": 500,
-          "frame": "generic"
-        },
-        {
-          "keyword": "플래티어 기업정보",
-          "searchVolume": 40,
-          "frame": "generic"
-        },
-        {
-          "keyword": "플래티어 주가 전망",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "플래티어 주가",
-          "searchVolume": 500,
-          "documentCount": 4406,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "플래티어 기업정보",
-          "searchVolume": 40,
-          "documentCount": 4782,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "플래티어 주가 전망",
-          "searchVolume": 10,
-          "documentCount": 2774,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "플래티어 연봉",
-          "searchVolume": 10,
-          "documentCount": 158,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-28T09:05:27.353Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "플래티어 잡플래닛",
-      "issue": "플래티어",
-      "topic": "플래티어",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 17,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 17",
-        "선점 후보 — 경쟁 문서 17건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "플래티어가 GS네오텍과 에이전틱 AICC 공동 사업화 MOU 체결.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "플래티어 잡플래닛 평점과 GS네오텍 AICC 협력 전망",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "플래티어 잡플래닛 평 보러 들어갔다가 연봉 항목에서 스크롤을 멈췄어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "플래티어 주가",
-          "searchVolume": 500,
-          "frame": "generic"
-        },
-        {
-          "keyword": "플래티어 기업정보",
-          "searchVolume": 40,
-          "frame": "generic"
-        },
-        {
-          "keyword": "플래티어 연봉",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "플래티어 주가",
-          "searchVolume": 500,
-          "documentCount": 4406,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "플래티어 기업정보",
-          "searchVolume": 40,
-          "documentCount": 4782,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "플래티어 연봉",
-          "searchVolume": 10,
-          "documentCount": 158,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-28T09:05:27.353Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "플래티어 AICC",
-      "issue": "플래티어",
-      "topic": "플래티어",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 31,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 2,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "문서수 31",
-        "선점 후보 — 경쟁 문서 31건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 2건 (최근 1건)"
-        }
-      ],
-      "whySearch": {
-        "text": "플래티어가 GS네오텍과 에이전틱 AICC 공동 사업화 MOU 체결.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "플래티어 AICC GS네오텍 에이전틱 공동 사업화 MOU 내용",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "플래티어 AICC 소식 들리고 나서 주가 흐름까지 괜히 다시 들여다보게 되더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "플래티어 주가",
-          "searchVolume": 500,
-          "frame": "generic"
-        },
-        {
-          "keyword": "플래티어 기업",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "플래티어 주가",
-          "searchVolume": 500,
-          "documentCount": 4406,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-28T09:05:27.353Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "플래티어 xgen",
-      "issue": "플래티어",
-      "topic": "플래티어",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 74,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 4,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "문서수 74",
-        "선점 후보 — 경쟁 문서 74건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 4건 (최근 1건)"
-        }
-      ],
-      "whySearch": {
-        "text": "플래티어가 GS네오텍과 에이전틱 AICC 공동 사업화 MOU 체결.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "플래티어 xgen GS네오텍 AICC 공동사업 어디까지 왔나",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "플래티어 xgen 발표 나오고 나서 주가 흐름이 좀 달라 보이더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "플래티어 주가",
-          "searchVolume": 500,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "플래티어 주가",
-          "searchVolume": 500,
-          "documentCount": 4406,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-28T09:05:27.353Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "웹케시 오페리아",
-      "issue": "웹케시",
-      "topic": "웹케시",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 233,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 5,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "문서수 233",
-        "선점 후보 — 경쟁 문서 233건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 5건 (최근 1건)"
-        }
-      ],
-      "whySearch": {
-        "text": "웹케시가 K-엑사원 기반 금융 AI 에이전트 개발 독파모에 참여.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "웹케시 오페리아 엑사원 연결한 독파모 금융 AI 에이전트 핵심",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "웹케시 오페리아 소식 뜨고 나서 웹케시 주가 창을 계속 열어보게 되네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "웹케시 주가",
-          "searchVolume": 770,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "웹케시 주가",
-          "searchVolume": 770,
-          "documentCount": 9950,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-28T09:05:27.353Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "플래티어 본사",
-      "issue": "플래티어",
-      "topic": "플래티어",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 282,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 282",
-        "선점 후보 — 경쟁 문서 282건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "플래티어가 GS네오텍과 에이전틱 AICC 공동 사업화 MOU 체결.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "플래티어 본사 어디? GS네오텍 AICC 협력과 기업정보 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "플래티어 본사 분위기 보고 나니까 연봉 얘기가 왜 그렇게 나왔는지 좀 알 것 같더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "플래티어 주가",
-          "searchVolume": 500,
-          "frame": "generic"
-        },
-        {
-          "keyword": "플래티어 기업정보",
-          "searchVolume": 40,
-          "frame": "generic"
-        },
-        {
-          "keyword": "플래티어 연봉",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "플래티어 주가",
-          "searchVolume": 500,
-          "documentCount": 4406,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "플래티어 기업정보",
-          "searchVolume": 40,
-          "documentCount": 4782,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "플래티어 연봉",
-          "searchVolume": 10,
-          "documentCount": 158,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "플래티어 주가 전망",
-          "searchVolume": 10,
-          "documentCount": 2774,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-28T09:05:27.353Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "웹케시 엑사원",
-      "issue": "웹케시",
-      "topic": "웹케시",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 266,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 2,
-      "freshFrontalCount": 2,
-      "reasons": [
-        "문서수 266",
-        "선점 후보 — 경쟁 문서 266건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 2건 (최근 2건)"
-        }
-      ],
-      "whySearch": {
-        "text": "웹케시가 K-엑사원 기반 금융 AI 에이전트 개발 독파모에 참여.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "웹케시 엑사원 독파모 참여, 금융 AI 에이전트 개발 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "웹케시 엑사원 띄웠는데 주가는 왜 저렇게 조용한지 궁금하더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "웹케시 주가",
-          "searchVolume": 770,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "웹케시 주가",
-          "searchVolume": 770,
-          "documentCount": 9950,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-28T09:05:27.353Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "플래티어 AI에이전트",
-      "issue": "플래티어",
-      "topic": "플래티어",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 293,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 3,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 293",
-        "선점 후보 — 경쟁 문서 293건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 3건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "플래티어가 GS네오텍과 에이전틱 AICC 공동 사업화 MOU 체결.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "플래티어 AI에이전트 GS네오텍 에이전틱 AICC 공동사업 추진",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "플래티어 AI에이전트 나오고 주가 들여다봤더니 생각보다 복잡하네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "플래티어 주가",
-          "searchVolume": 500,
-          "frame": "generic"
-        },
-        {
-          "keyword": "플래티어 기업정보",
-          "searchVolume": 40,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "플래티어 주가",
-          "searchVolume": 500,
-          "documentCount": 4406,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "플래티어 기업정보",
-          "searchVolume": 40,
-          "documentCount": 4782,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-28T09:05:27.353Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
@@ -4899,291 +3637,6 @@
       "concentrated": [],
       "nextWave": [],
       "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "원당역",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "3호선 원당역서 남성 역무원이 여성 동료에게 흉기 휘둘러 중상.",
-      "headlines": [
-        {
-          "title": "[단독] 3호선 원당역서 남성 역무원, 동료 역무원에게 흉기 휘둘러 체포",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-10-28T05:15:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001398779?sid=102"
-        },
-        {
-          "title": "지하철 원당역 30대 역무원, 사무실서 女동료에 흉기 휘둘러",
-          "press": "donga.com",
-          "publishedAt": "2026-10-28T07:41:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/020/0003758367?sid=102"
-        },
-        {
-          "title": "고양 원당역 여성 역무원, 남성 동료에 흉기 찔려 중상",
-          "press": "chosun.com",
-          "publishedAt": "2026-10-28T06:17:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0004006433?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "원당역 맛집",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "원당역 롯데캐슬",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "원당역 3호선",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "원당역 시간표",
-          "searchVolume": 1050,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "원당역 아파트",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "원당역 카페",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "원당역 미용실",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "원당역 술집",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "원당역 가해자 신상",
-          "reason": "피의자 정보 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "원당역 범행동기",
-          "reason": "흉기 휘두른 이유",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "원당역 피해자 회복",
-          "reason": "중상 이후 상태",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 1,
-      "carried": true
-    },
-    {
-      "issue": "신유빈",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "declining",
-      "isHot": true,
-      "why": "신유빈이 완승으로 WTT 챔피언십 진출, 성숙해진 이미지로 화제.",
-      "headlines": [
-        {
-          "title": "‘단 2점만 허용하고 1게임 완승’ 신유빈, 24분 만에 천적 꺾고 WTT 챔피...",
-          "press": "osen.co.kr",
-          "publishedAt": "2026-10-28T02:16:00.000Z",
-          "link": "https://m.sports.naver.com/general/article/109/0005630267"
-        },
-        {
-          "title": "\"딴사람 같아\"…日팬들이 주목한 신유빈, 성숙해진 일상 공개",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-24T06:01:00.000Z",
-          "link": "https://m.sports.naver.com/general/article/003/0014275727"
-        },
-        {
-          "title": "“‘삐약이’ 신유빈 맞아?” 머리 풀고 성숙해진 이미지 ‘깜짝’",
-          "press": "sportsseoul.com",
-          "publishedAt": "2026-10-23T05:21:00.000Z",
-          "link": "https://m.sports.naver.com/general/article/468/0001274756"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "탁구 신유빈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "신유빈 아시안게임",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "신유빈 세제",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "신유빈 라켓",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "신유빈 탁구",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "신유빈 gns",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "신유빈 당진",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "신유빈 랭킹",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "신유빈 다음상대",
-          "reason": "챔피언십 대진",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "신유빈 결승",
-          "reason": "우승 가능성",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "신유빈 당진축제",
-          "reason": "11월 행사 참여",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "신유빈 화보",
-          "reason": "성숙 이미지 변신",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "플래티어",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "플래티어가 GS네오텍과 에이전틱 AICC 공동 사업화 MOU 체결.",
-      "headlines": [
-        {
-          "title": "플래티어-GS네오텍, 에이전틱 AICC 사업화 MOU",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-27T23:13:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014282996?sid=101"
-        },
-        {
-          "title": "플래티어, GS네오텍과 AICC 협력",
-          "press": "hansbiz.co.kr",
-          "publishedAt": "2026-10-28T08:22:00.000Z",
-          "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=877138"
-        },
-        {
-          "title": "플래티어, GS네오텍과 '에이전틱 AICC' 공동사업 추진",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-10-28T00:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005834393?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "플래티어 기업정보",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "플래티어 회사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "플래티어 연봉",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "플래티어 매출",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "플래티어 주가",
-          "searchVolume": 500,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "플래티어 주가 전망",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "플래티어 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "플래티어 xgen",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "플래티어 주가",
-          "reason": "MOU 후 주가",
-          "searchVolume": 500,
-          "documentCount": 4406,
-          "onBoard": true
-        },
-        {
-          "keyword": "플래티어 실적",
-          "reason": "사업 성과",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 1,
       "carried": true
     }
   ]
