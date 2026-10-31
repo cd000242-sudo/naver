@@ -1,17 +1,19 @@
 {
-  "publishedAt": "2026-10-31T08:53:38.133Z",
+  "publishedAt": "2026-10-31T21:30:22.704Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 173,
-    "niche": 1,
-    "preemption": 8,
+    "candidates": 210,
+    "niche": 0,
+    "preemption": 3,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-10-31",
-    "keywords": []
+    "day": "2026-11-01",
+    "keywords": [
+      "bob 니트"
+    ]
   },
   "rows": [
     {
@@ -102,17 +104,256 @@
       },
       "subKeywords": null,
       "keywordPool": null,
-      "trend": null,
+      "trend": {
+        "series": [
+          0,
+          0,
+          5,
+          3,
+          0,
+          0,
+          0,
+          5,
+          23,
+          4,
+          4,
+          0,
+          100,
+          6,
+          8,
+          13,
+          11,
+          4,
+          0,
+          14,
+          27,
+          5,
+          52,
+          10,
+          10,
+          11,
+          15,
+          7,
+          0
+        ],
+        "label": "📉 단발성",
+        "recommendation": "회피! 지난 며칠 폭발 후 급락 중. 글 써도 유입 없음",
+        "measuredAt": "2026-10-31T21:30:23.304Z"
+      },
       "kinCount": 125,
       "kinTop": [],
       "monetize": null,
       "measuredAt": "2026-10-31T08:51:29.758Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "kinMode": "date-views-v2"
+      "kinMode": "date-views-v2",
+      "carried": true
     }
   ],
   "observations": [
+    {
+      "keyword": "오픈ai 닷츠 후기",
+      "issue": "오픈AI",
+      "topic": "오픈AI",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 158,
+      "documentCountMeasured": true,
+      "searchVolume": 30,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 30",
+        "문서수 158",
+        "선점 후보 — 경쟁 문서 158건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "구매 검토",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "오픈ai 닷츠 후기 경험담을 판단할 기준",
+          "frame": "review",
+          "basis": "검색 질문 '오픈ai 닷츠 후기' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+        },
+        "home": {
+          "text": "오픈ai 닷츠 후기 누구에게 맞는지 먼저 살펴보세요",
+          "frame": "review",
+          "basis": "검색 질문 '오픈ai 닷츠 후기' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": [
+        {
+          "title": "새로운 AI 에이전트 닷츠, 실제로 얼마나 효율적일까요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1122&docId=495387990&answerNo=0",
+          "views": 99,
+          "answers": null
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-31T21:29:07.124Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "여은 헤어샵",
+      "issue": "여은",
+      "topic": "여은",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 250,
+      "documentCountMeasured": true,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 10",
+        "문서수 250",
+        "선점 후보 — 경쟁 문서 250건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-31T21:29:07.124Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "여은 한자",
+      "issue": "여은",
+      "topic": "여은",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 208,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 208",
+        "선점 후보 — 경쟁 문서 208건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 684,
+      "kinTop": [
+        {
+          "title": "이거 한자 좀 복사해주세요ㅠ",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=11080201&docId=469630360&answerNo=3",
+          "views": 189,
+          "answers": 3
+        },
+        {
+          "title": "이름에 적힌 한자 좀 알려주세요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=11080201&docId=491526149&answerNo=6",
+          "views": 101,
+          "answers": 8
+        },
+        {
+          "title": "한자이름뜻풀이 좀 해주세요ㅠㅠ",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=31506&docId=469473208&answerNo=2",
+          "views": null,
+          "answers": null
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-31T21:29:07.124Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "차예련 학폭 저항",
       "issue": "차예련 학폭 저항",
@@ -163,7 +404,8 @@
       "monetize": null,
       "measuredAt": "2026-10-31T08:51:29.758Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "AI 신소재 나노포지에이아이",
@@ -211,7 +453,8 @@
       "monetize": null,
       "measuredAt": "2026-10-31T08:51:29.758Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "주영진 근황",
@@ -267,7 +510,8 @@
       "monetize": null,
       "measuredAt": "2026-10-31T08:51:29.758Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "주영진 앵커 부인",
@@ -323,7 +567,8 @@
       "monetize": null,
       "measuredAt": "2026-10-31T08:51:29.758Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "주영진 정치 성향",
@@ -398,7 +643,8 @@
       "monetize": null,
       "measuredAt": "2026-10-31T08:51:29.758Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "최불암 빈소 송승헌",
@@ -450,7 +696,8 @@
       "monetize": null,
       "measuredAt": "2026-10-31T08:51:29.758Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "bob's discount furniture",
@@ -502,7 +749,8 @@
       "monetize": null,
       "measuredAt": "2026-10-31T08:51:29.758Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "한국딥러닝 잡플래닛",
@@ -554,7 +802,8 @@
       "monetize": null,
       "measuredAt": "2026-10-31T08:51:29.758Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "앤트로픽 엔스로픽 차이",
@@ -620,78 +869,6 @@
       "kinTop": null,
       "monetize": null,
       "measuredAt": "2026-10-31T03:29:08.919Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "오픈ai 닷츠 후기",
-      "issue": "오픈AI",
-      "topic": "오픈AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 156,
-      "documentCountMeasured": true,
-      "searchVolume": 30,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 30",
-        "문서수 156",
-        "선점 후보 — 경쟁 문서 156건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "오픈ai 닷츠 후기 경험담을 판단할 기준",
-          "frame": "review",
-          "basis": "검색 질문 '오픈ai 닷츠 후기' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        },
-        "home": {
-          "text": "오픈ai 닷츠 후기 누구에게 맞는지 먼저 살펴보세요",
-          "frame": "review",
-          "basis": "검색 질문 '오픈ai 닷츠 후기' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": [
-        {
-          "title": "새로운 AI 에이전트 닷츠, 실제로 얼마나 효율적일까요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1122&docId=495387990&answerNo=0",
-          "views": 95,
-          "answers": null
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-30T21:37:24.147Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
@@ -1096,650 +1273,6 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "알렉사 그레소",
-      "issue": "알렉사+",
-      "topic": "알렉사+",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 1,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 1",
-        "선점 후보 — 경쟁 문서 1건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "아마존이 AI비서 '알렉사+' 탑재 신제품 5종을 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "알렉사 그레소 에코쇼 16인치 등 신제품 5종 공개 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "알렉사 그레소 에코쇼 16인치 화면이 생각보다 커서 다시 봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-29T08:59:41.771Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "알렉사 그라고",
-      "issue": "알렉사+",
-      "topic": "알렉사+",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 16,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 16",
-        "선점 후보 — 경쟁 문서 16건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "아마존이 AI비서 '알렉사+' 탑재 신제품 5종을 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "알렉사 그라고 에코 쇼 16인치 신제품 5종 공개",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "알렉사 그라고 신제품 5종 나왔는데 에코 쇼 16인치가 좀 다르더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "알렉사 청",
-          "searchVolume": 460,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "알렉사 청",
-          "searchVolume": 460,
-          "documentCount": 26365,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-29T08:59:41.771Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "한컴 낫표",
-      "issue": "한컴",
-      "topic": "한컴",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 20,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 20",
-        "선점 후보 — 경쟁 문서 20건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "한컴이 AI 에이전트 '노마디안'으로 2028년 해외 매출 2000억을 노린다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "한컴 낫표 겹낫표 홑낫표 차이와 입력 단축키",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "한컴 낫표 넣을 때 겹낫표랑 홑낫표 의외로 많이들 헷갈리더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 54,
-      "kinTop": [
-        {
-          "title": "한글 겹낫표 종류",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1020202&docId=484612210&answerNo=2",
-          "views": 482,
-          "answers": 2
-        },
-        {
-          "title": "한글에서 홑낫표 입력 시 차이 문의드립니다.",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1020202&docId=486028206&answerNo=1",
-          "views": 231,
-          "answers": 1
-        },
-        {
-          "title": "한글 문서에서 낫표, 메뉴 어디에 있나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1020202&docId=450323462&answerNo=3",
-          "views": 48,
-          "answers": 3
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-29T08:59:41.771Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "알렉사 브리스",
-      "issue": "알렉사+",
-      "topic": "알렉사+",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 64,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 64",
-        "선점 후보 — 경쟁 문서 64건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "아마존이 AI비서 '알렉사+' 탑재 신제품 5종을 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "home": {
-          "text": "알렉사 브리스 처음 연결하다가 설명서부터 다시 펼쳐보게 되더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 12,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-29T08:59:41.771Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "팔만대장경 판각 시연",
-      "issue": "팔만대장경 판각 시연",
-      "topic": "팔만대장경 판각 시연",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 97,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 97",
-        "선점 후보 — 경쟁 문서 97건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "해인사가 50년 대장정으로 팔만대장경 새 판각을 시작했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "팔만대장경 판각 시연 해인사 50년 대장정 첫 고불식",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "팔만대장경 판각 시연에 해인사가 50년을 건다는 게 무슨 말인가 했어요",
-          "frame": "ai",
-          "basis": "메인+후킹 (실측 근거·확장어 미포함)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "팔만대장경 목판",
-          "searchVolume": 390,
-          "frame": "generic"
-        },
-        {
-          "keyword": "팔만대장경 판각",
-          "searchVolume": 30,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "팔만대장경 목판",
-          "searchVolume": 390,
-          "documentCount": 10918,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "팔만대장경 판각",
-          "searchVolume": 30,
-          "documentCount": 4119,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 5,
-      "kinTop": [
-        {
-          "title": "팔만대장경을 옮기는 과정을 민속놀이로 표현한게 있다는데....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=613&docId=60945205&answerNo=1",
-          "views": 1591,
-          "answers": 1
-        },
-        {
-          "title": "팔만대장경 축제에 대해...",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=61401&docId=61726701&answerNo=1",
-          "views": 1100,
-          "answers": 2
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-29T08:59:41.771Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "임광현 비서실장 국감",
-      "issue": "임광현 비서실장 국감",
-      "topic": "임광현 비서실장 국감",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 114,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 114",
-        "선점 후보 — 경쟁 문서 114건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "운영위 국감서 한남동 관저 '아빠찬스' 공방이 벌어졌다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "임광현 비서실장 국감 3대 사회정책·한남동 관저 답변 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "임광현 비서실장 국감 보다가 프로필이랑 나이부터 다시 찾아봤네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "임광현 프로필",
-          "searchVolume": 80100,
-          "frame": "generic"
-        },
-        {
-          "keyword": "임광현 비서실장 프로필",
-          "searchVolume": 2960,
-          "frame": "generic"
-        },
-        {
-          "keyword": "임광현 나이",
-          "searchVolume": 440,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "임광현 프로필",
-          "searchVolume": 80100,
-          "documentCount": 696,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "임광현 비서실장 프로필",
-          "searchVolume": 2960,
-          "documentCount": 188,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "임광현 나이",
-          "searchVolume": 440,
-          "documentCount": 512,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "임광현 학력",
-          "searchVolume": 320,
-          "documentCount": 461,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "임광현 의원",
-          "searchVolume": 110,
-          "documentCount": 3874,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "임광현 비서실장 나이",
-          "searchVolume": 70,
-          "documentCount": 106,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "임광현 국세청",
-          "searchVolume": 30,
-          "documentCount": 4773,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-29T08:59:41.771Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "알렉사 포토프레임",
-      "issue": "알렉사+",
-      "topic": "알렉사+",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 121,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 121",
-        "선점 후보 — 경쟁 문서 121건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "아마존이 AI비서 '알렉사+' 탑재 신제품 5종을 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "알렉사 포토프레임 가격과 에코 쇼 16인치 신제품 5종",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "알렉사 포토프레임 AI가 사진 골라준다는데 에코 쇼랑 뭐가 다른지 헷갈리네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-29T08:59:41.771Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "알렉사 카츠",
-      "issue": "알렉사+",
-      "topic": "알렉사+",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 235,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 235",
-        "선점 후보 — 경쟁 문서 235건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "아마존이 AI비서 '알렉사+' 탑재 신제품 5종을 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-29T08:59:41.771Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
@@ -1814,7 +1347,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 1
+      "rowCount": 1,
+      "carried": true
     },
     {
       "issue": "미스트랄",
@@ -1983,274 +1517,6 @@
       "nextWave": [],
       "rowCount": 0,
       "carried": true
-    },
-    {
-      "issue": "임광현 비서실장 국감",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "운영위 국감서 한남동 관저 '아빠찬스' 공방이 벌어졌다.",
-      "headlines": [
-        {
-          "title": "靑 국감서 한남동 관저 공방…“李대통령 차남 거주는 아빠찬스\"",
-          "press": "biz.chosun.com",
-          "publishedAt": "2026-10-29T06:53:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/366/0001201307?sid=100"
-        },
-        {
-          "title": "운영위 국감에서 답변하는 임광현 대통령비서실장",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-29T07:55:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016409853?sid=100"
-        },
-        {
-          "title": "[국감] 인사하는 임광현 비서실장",
-          "press": "news1.kr",
-          "publishedAt": "2026-10-29T07:52:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009258841?sid=100"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "팔만대장경 판각 시연",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "해인사가 50년 대장정으로 팔만대장경 새 판각을 시작했다.",
-      "headlines": [
-        {
-          "title": "팔만대장경 전통 판각 시연",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-29T07:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016409515?sid=103"
-        },
-        {
-          "title": "해인사 팔만대장경 판각 시연",
-          "press": "news1.kr",
-          "publishedAt": "2026-10-29T06:48:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009258570?sid=103"
-        },
-        {
-          "title": "해인사, 팔만대장경 판각 시연",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-29T06:34:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016409379?sid=103"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "팔만대장경",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "해인사 팔만대장경",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "알렉사+",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "아마존이 AI비서 '알렉사+' 탑재 신제품 5종을 공개했다.",
-      "headlines": [
-        {
-          "title": "아마존, 알렉사 기기 5종 한꺼번에 공개…16인치 대형 화면 '에코 쇼' 눈...",
-          "press": "digitaltoday.co.kr",
-          "publishedAt": "2026-10-29T04:10:00.000Z",
-          "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=710931"
-        },
-        {
-          "title": "아마존 알렉사 포토프레임·에코 타임 첫선…AI가 사진 고르고 얕은 수...",
-          "press": "wikitree.co.kr",
-          "publishedAt": "2026-10-28T21:08:00.000Z",
-          "link": "https://www.wikitree.co.kr/articles/1170011"
-        },
-        {
-          "title": "아마존, AI 비서 '알렉사+' 탑재 신제품 5종 공개...기기 사업부 250명 감...",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-29T06:06:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216784"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "알렉사 알본",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "알렉사 카츠",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "알렉사 구라소",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "알렉사 그라고",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "알렉사 그라서",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "알렉사 그레소",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "알렉사 그리소",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "알렉사 브리스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "알렉사+ 국내 출시",
-          "reason": "한국 출시 여부 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "알렉사+ 요금",
-          "reason": "유료 여부 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "알렉사 한국어",
-          "reason": "언어 지원 확인",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "한컴",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "한컴이 AI 에이전트 '노마디안'으로 2028년 해외 매출 2000억을 노린다.",
-      "headlines": [
-        {
-          "title": "한컴 36년 숙제 '해외 공략'…김연수 대표 \"환경이 바뀌었다\"",
-          "press": "zdnet.co.kr",
-          "publishedAt": "2026-10-29T03:10:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/092/0002442944?sid=105"
-        },
-        {
-          "title": "김연수 한컴 대표 \"노마디안 앞세워 2028년 매출 2000억·고객 50만명 목...",
-          "press": "inews24.com",
-          "publishedAt": "2026-10-29T04:32:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/031/0001070445?sid=105"
-        },
-        {
-          "title": "\"36년간 못 이룬 해외 성과, 이젠 가능\"…한컴, 글로벌 AI 승부수",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-29T04:58:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014287512?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "한컴 무료",
-          "searchVolume": 2410,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한컴 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한컴 체크리스트",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한컴 웹",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "(주)한컴",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한컴 표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한컴 각주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한컴 공문",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "한컴 주가",
-          "reason": "사업 발표 주가 반영",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
     }
-  ],
-  "enrichedAt": "2026-10-31T08:53:56.583Z",
-  "enrichStats": {
-    "enriched": 0,
-    "subsAdded": 0,
-    "titleUpgraded": 0,
-    "proposed": 0,
-    "verified": 0,
-    "judged": 0,
-    "judgedBad": 0,
-    "related": 0,
-    "picked": 0,
-    "pooled": 0,
-    "aiTitled": 0,
-    "trended": 0,
-    "aiCalls": 1,
-    "partial": false
-  }
+  ]
 }
