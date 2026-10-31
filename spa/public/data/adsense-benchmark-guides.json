@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-31T19:55:35.998Z",
+  "generatedAt": "2026-10-31T20:11:53.520Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -5295,75 +5295,6 @@
           "views": 540,
           "answers": 19,
           "askedAt": "2025.08.06"
-        }
-      ]
-    },
-    {
-      "id": "40f748f9bd509e8f",
-      "urls": [
-        "https://honeypencil.tistory.com/entry/%EC%84%A4%EC%95%85%EC%82%B0-%EC%BC%80%EC%9D%B4%EB%B8%94%EC%B9%B4-%EC%98%88%EC%95%BD-%EB%B0%A9%EB%B2%95-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://honeypencil.tistory.com/entry/%EC%84%A4%EC%95%85%EC%82%B0-%EC%BC%80%EC%9D%B4%EB%B8%94%EC%B9%B4-%EC%9A%B4%ED%96%89%EC%8B%9C%EA%B0%84-%EC%9A%94%EA%B8%88-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://trendsearch.tistory.com/entry/%EC%84%A4%EC%95%85%EC%82%B0-%EB%8B%A8%ED%92%8D-%ED%98%84%EC%9E%AC-%EC%83%81%ED%83%9C-10%EC%9B%94-24%EC%9D%BC-%EA%B8%B0%EC%A4%80-%EC%BC%80%EC%9D%B4%EB%B8%94%EC%B9%B4-%EC%9A%94%EA%B8%88%C2%B7%ED%98%84%EC%9E%A5-%EB%B0%9C%EA%B6%8C%C2%B7%EB%8C%80%EA%B8%B0-%EC%A4%84%EC%9D%B4%EB%8A%94-%EB%B2%95"
-      ],
-      "guide": {
-        "direction": "검색자는 바람 등 기상으로 케이블카가 중단될까 걱정하면서도 정확히 언제 가야 단풍을 볼 수 있는지 판단 기준이 없다. 고수 글의 '10월 24일 기준' 제목은 날짜가 지나면 쓸모없고, 운행 중단 조건과 실시간 확인법이 빠져 있다. 중단 기준과 절정 시기 확인 경로, 백담사·신흥사 코스 조합표를 주면 끝난다.",
-        "searchTargets": [
-          "설악산 단풍 절정 시기",
-          "설악산 단풍 코스",
-          "설악산 단풍 실시간",
-          "2026 설악산 단풍시기"
-        ],
-        "mustInclude": [
-          "케이블카 운행 중단 가능 조건: 강풍 등 기상 악화 시 중단 (확인 필요: 케이블카 운영사·국립공원공단 공지)",
-          "단풍 절정 예상 시기: 통상 10월 중순~11월 초 (확인 필요: 국립공원공단·기상청 발표)",
-          "백담사-영시암-오세암 트래킹 코스 약 6km",
-          "신흥사와 케이블카를 묶는 동선 코스",
-          "단풍 절정·실시간 상태 확인하는 공식 경로 (확인 필요: 국립공원공단 홈페이지)"
-        ],
-        "mustAvoid": [
-          "설악산과 다른 지역의 유사한 단풍축제를 혼동해서 소개",
-          "특정 날짜의 단풍 상태를 매년 같다는 듯 단정적으로 예측",
-          "케이블카 운행 중단을 과장하거나 반대로 절대 안 멈춘다고 안심시키기"
-        ],
-        "checkBefore": [
-          "당일 케이블카 운행 중단 여부는 케이블카 공식 홈페이지·국립공원공단 공지에서 확인",
-          "2026년 단풍 절정 예상 시기는 국립공원공단 또는 기상청 발표로 확인"
-        ],
-        "solves": [
-          "바람 때문에 케이블카 운행 중단될까 걱정돼요 → 중단 기준과 당일 확인 방법 안내",
-          "단풍 절정 시기를 몰라서 날짜를 못 정해요 → 통상 절정 시기와 실시간 확인 경로 제공",
-          "백담사·신흥사 코스를 케이블카와 어떻게 묶을지 모르겠어요 → 코스 조합표 제공"
-        ],
-        "actionTitles": [
-          "설악산 단풍 절정 시기와 케이블카 운행 중단 기준 확인",
-          "설악산 단풍 실시간 확인하고 케이블카 예약하는 순서",
-          "설악산 단풍 코스 백담사·신흥사 케이블카 조합 비교"
-        ]
-      },
-      "at": "2026-10-26T21:14:00.940Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "설악산 단풍 시기에 맞춰 케이블카 이용 시 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=90105&docId=490008447&answerNo=3&qb=7ISk7JWF7IKw64uo7ZKN",
-          "views": 597,
-          "answers": 5,
-          "askedAt": "2026.10.08"
-        },
-        {
-          "title": "25년 11월 22일 설악산 단풍 풍경은?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=90108&docId=489895295&answerNo=1&qb=7ISk7JWF7IKw64uo7ZKN",
-          "views": 526,
-          "answers": 2,
-          "askedAt": "2025.11.01"
-        },
-        {
-          "title": "설악산 백담사 단풍 명소 가는 법과 셔틀버스....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=90102&docId=490082845&answerNo=1&qb=7ISk7JWF7IKw64uo7ZKN",
-          "views": 217,
-          "answers": 1,
-          "askedAt": "2025.11.10"
         }
       ]
     },
