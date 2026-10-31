@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-31T06:39:28.997Z",
+  "generatedAt": "2026-10-31T07:18:25.154Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -991,74 +991,6 @@
           "views": 194,
           "answers": 2,
           "askedAt": "2026.05.17"
-        }
-      ]
-    },
-    {
-      "id": "a1eca7ec1ab7b25e",
-      "urls": [
-        "https://jiwonfund.kr/%ea%b1%b4%ea%b0%95%eb%b3%b4%ed%97%98%eb%a3%8c-%ec%a1%b0%ec%a0%95%ec%8b%a0%ec%b2%ad-%ed%95%98%eb%8a%94%eb%b2%95/",
-        "https://cogone.tistory.com/840",
-        "https://jjyiu.tistory.com/entry/%EA%B1%B4%EA%B0%95%EB%B3%B4%ED%97%98%EB%A3%8C-%EB%B6%80%EA%B3%BC%EC%B2%B4%EA%B3%84-%EA%B0%9C%ED%8E%B8-%ED%95%B5%EC%8B%AC-%EC%A0%95%EB%A6%AC-%EC%A7%81%EC%9E%A5%EC%9D%B8%C2%B7%ED%94%84%EB%A6%AC%EB%9E%9C%EC%84%9C%C2%B7%EC%9D%80%ED%87%B4%EC%9E%90%EB%B3%84-%EB%8B%AC%EB%9D%BC%EC%A7%80%EB%8A%94-%EB%B3%B4%ED%97%98%EB%A3%8C",
-        "https://info-myview.co.kr/health-insurance-premium-payment-history-2026/",
-        "https://moncar.tistory.com/191",
-        "https://www.smartnotelife.kr/entry/11%EC%9B%94-%EA%B1%B4%EA%B0%95%EB%B3%B4%ED%97%98%EB%A3%8C-%EB%8B%AC%EB%9D%BC%EC%A7%80%EB%8A%94-%EC%9D%B4%EC%9C%A0-%EA%B0%80%EC%9E%85%EC%9E%90-%EC%9C%A0%ED%98%95%EB%B6%80%ED%84%B0-%ED%99%95%EC%9D%B8%ED%95%98%EC%84%B8%EC%9A%94"
-      ],
-      "guide": {
-        "direction": "지식인 질문자들은 조정신청 방법보다 '내 소득(임대·배당·연금)으로 피부양자 자격이 유지되는지'와 '부과체계 개편되면 뭐가 바뀌는지'를 더 궁금해한다. 고수 글들은 조정신청 화면 안내는 있지만 소득유형별 피부양자 영향과 2단계 개편 변경사항을 함께 묶은 글은 없다. 조정신청 접속 경로와 소득유형별 피부양자 기준표, 개편 변경사항을 한 번에 주면 독자가 자기 소득을 대입해 끝낼 수 있다.",
-        "searchTargets": [
-          "건강보험료 부과체계 개편안",
-          "건강보험료 부과체계",
-          "건강보험료 부과체계 2단계 개편"
-        ],
-        "mustInclude": [
-          "건강보험료 조정신청 공식 신청 화면 접속 경로 (확인 필요: 국민건강보험공단 홈페이지/The건강보험 앱)",
-          "피부양자 자격 유지 소득 기준선 (확인 필요: 국민건강보험공단 공고)",
-          "건강보험료 부과체계 2단계 개편 시행 시점과 변경 항목 (확인 필요: 보건복지부/공단 공식 발표)",
-          "소득 유형별(임대소득·배당소득·연금소득) 피부양자 영향 비교"
-        ],
-        "mustAvoid": [
-          "지식인 속 개인(이혼, 특정 배우자 소득 등)의 사적 상황을 사례처럼 구체 재인용",
-          "아직 확정되지 않은 2단계 개편 시행일을 단정적으로 서술"
-        ],
-        "checkBefore": [
-          "조정신청 메뉴 정확한 위치와 필요 서류 (국민건강보험공단 고객센터 1577-1000)",
-          "부과체계 2단계 개편 시행일·세부 변경사항 (보건복지부/공단 공식 보도자료)"
-        ],
-        "solves": [
-          "내 소득으로 피부양자 자격이 유지되는지 모름 → 소득 기준선과 소득유형별 판단표로 확인",
-          "건강보험료 조정신청을 어디서 어떻게 하는지 모름 → 공식 신청 화면 접속 경로 안내",
-          "부과체계 개편되면 보험료가 어떻게 바뀌는지 모름 → 2단계 개편 변경사항 정리"
-        ],
-        "actionTitles": [
-          "건강보험료 조정신청 하는법, 공식 신청 화면 바로가기",
-          "피부양자 자격 유지 소득 기준, 부과체계 개편 전 확인하기"
-        ]
-      },
-      "at": "2026-10-26T21:14:00.940Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "소액 소득(부동산임대사업자등록) 임에도 지....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100401&docId=493395045&answerNo=3&qb=6rG06rCV67O07ZeY66OMIOu2gOqzvOyytOqzhCDqsJztjrgg7ZW17IusIOyngeyepeyduA==",
-          "views": 850,
-          "answers": 6,
-          "askedAt": "2026.05.14"
-        },
-        {
-          "title": "연금저축부터 가입하는 게 맞을까요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100402&docId=494334592&answerNo=10&qb=6rG06rCV67O07ZeY66OMIOu2gOqzvOyytOqzhCDqsJztjrgg7ZW17IusIOyngeyepeyduA==",
-          "views": 468,
-          "answers": 12,
-          "askedAt": "2026.08.11"
-        },
-        {
-          "title": "건강보험 피부양자 자격관련 궁금합니다",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100401&docId=491300552&answerNo=8&qb=6rG06rCV67O07ZeY66OMIOu2gOqzvOyytOqzhCDqsJztjrgg7ZW17IusIOyngeyepeyduA==",
-          "views": 284,
-          "answers": 9,
-          "askedAt": "2026.01.12"
         }
       ]
     },
@@ -6170,66 +6102,6 @@
       ]
     },
     {
-      "id": "0f4b91c74b849762",
-      "urls": [
-        "https://fh.bluemoha.com/entry/%EC%82%AC%ED%9A%8C%EB%B3%B4%EC%9E%A5%EA%B8%89%EC%97%AC-%ED%99%95%EC%9D%B8-%EC%A1%B0%EC%82%AC-AI%EC%84%9C%EB%B9%84%EC%8A%A4-%EC%A0%81%EC%9A%A9%EC%A7%80%EC%97%AD-%EC%A0%9C%EC%B6%9C%EC%9E%90%EB%A3%8C-%EC%A1%B0%EC%82%AC%EB%8C%80%EC%83%81%EC%A0%9C%EC%99%B8-%EC%86%8C%EB%93%9D%EC%9E%90%EB%A3%8C-%EC%A6%9D%EB%AA%85%EB%B0%A9%EB%B2%95",
-        "https://lmn.bluemoha.com/entry/%EC%82%AC%ED%9A%8C%EB%B3%B4%EC%9E%A5%EA%B8%89%EC%97%AC-%ED%99%95%EC%9D%B8-%EC%A1%B0%EC%82%AC-%ED%95%98%EB%B0%98%EA%B8%B0-%EB%8C%80%EC%83%81%EC%9E%90-%EC%A0%9C%EC%B6%9C%EC%9E%90%EB%A3%8C-%EC%86%8C%EB%AA%85%EB%B0%A9%EB%B2%95"
-      ],
-      "guide": {
-        "direction": "검색자는 \"내가 조사대상인지, AI서비스 적용지역이면 뭐가 다른지, 소득증명을 어떻게 내야 하는지\"를 묻는다(지식인의 소득확인 조회 대상, 중점관리대상자 분류 질문). 고수 글들은 핵심어만 나열해 적용지역·제외대상·증명서류를 구체적으로 못 짚었다. 이 글은 AI서비스 적용지역 여부·조사대상제외 조건·소득자료 증명서류를 체크리스트로 정리해 제출 준비를 끝내게 한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "상·하반기 연 2회 정기조사 주기 및 행복e음 시스템 조회 (확인 필요: 시·군·구청 공지)",
-          "AI서비스 적용지역 범위와 비적용지역 차이 (확인 필요: 복지부 공지)",
-          "조사대상제외 기준 (예: 이미 확인된 기초생활수급 대상 등)",
-          "제출자료 종류 — 소득원천별 증명서·재직증명서 등"
-        ],
-        "mustAvoid": [
-          "특정 수급자를 '요주의 대상자'처럼 낙인찍는 서술",
-          "지자체·시기별로 다를 수 있는 기준을 단정적으로 일반화"
-        ],
-        "checkBefore": [
-          "보건복지부·사회보장정보원(행복e음) 공식 공지와 관할 시·군·구청 안내문에서 AI서비스 적용지역·제출자료 목록·조사대상제외 기준 확인"
-        ],
-        "solves": [
-          "내가 소득확인 조회 대상인지 모르겠다 → 상·하반기 정기조사 주기와 AI서비스 적용지역 여부로 판단",
-          "제출자료를 뭘 내야 하는지 모르겠다 → 소득원천별 증명서류 체크리스트로 정리",
-          "조사대상제외는 뭔지 → 제외 기준과 해당 여부를 표로 확인"
-        ],
-        "actionTitles": [
-          "사회보장급여 확인조사, 내가 대상인지 바로 확인하는 법",
-          "AI서비스 적용지역·조사대상제외 기준 한눈에 확인하기",
-          "소득자료 증명방법, 제출자료 체크리스트로 한번에 준비하기"
-        ]
-      },
-      "at": "2026-10-26T21:14:00.940Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "중국의경제성장 자료",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=409&docId=33759177&answerNo=1&qb=7IKs7ZqM67O07J6l6riJ7JesIOyhsOyCrCDtlZjrsJjquLAg64yA7IOB7J6QIOygnOy2nOyekOujjA==",
-          "views": 11117,
-          "answers": 1,
-          "askedAt": "2007.07.24"
-        },
-        {
-          "title": "소득확인 조회당할 일은 어떤 때 필요한가요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100101&docId=490659649&answerNo=2&qb=7IKs7ZqM67O07J6l6riJ7JesIOyhsOyCrCDtlZjrsJjquLAg64yA7IOB7J6QIOygnOy2nOyekOujjA==",
-          "views": 131,
-          "answers": 3,
-          "askedAt": "2025.12.08"
-        },
-        {
-          "title": "의료급여 질문요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=709&docId=495217534&answerNo=1&qb=7IKs7ZqM67O07J6l6riJ7JesIOyhsOyCrCDtlZjrsJjquLAg64yA7IOB7J6QIOygnOy2nOyekOujjA==",
-          "views": 84,
-          "answers": 3,
-          "askedAt": "2026.09.18"
-        }
-      ]
-    },
-    {
       "id": "5f5478d0bd468a18",
       "urls": [
         "https://ace3.jspeopleone.com/entry/%EC%A4%91%EB%8F%84-%ED%87%B4%EC%82%AC%EC%9E%90-%EC%97%B0%EB%A7%90%EC%A0%95%EC%82%B0-%EB%B0%A9%EB%B2%95-%EC%9E%AC%EC%B7%A8%EC%97%85-%EC%97%AC%EB%B6%80%EB%B3%84-%EC%B2%98%EB%A6%AC%EC%99%80-5%EC%9B%94-%ED%99%98%EA%B8%89%EB%B0%9B%EB%8A%94-%EB%B2%95",
@@ -7467,71 +7339,6 @@
       ]
     },
     {
-      "id": "02929120cb390e72",
-      "urls": [
-        "https://theseusm.tistory.com/entry/%EB%B9%84%ED%83%80%EB%AF%BCE-%ED%95%AD%EC%82%B0%ED%99%94-%ED%9A%A8%EA%B3%BC-%EC%98%AC%EB%B0%94%EB%A5%B8-%EB%B3%B5%EC%9A%A9%EB%B2%95",
-        "https://sweetonion1005.tistory.com/entry/%ED%91%B8%EC%9D%91-%ED%8C%BB%EB%B2%84%EB%8B%9D-%ED%94%84%EB%A1%9C-%ED%9B%84%EA%B8%B0-CLA-%EB%B3%B4%EC%A1%B0%EC%A0%9C-%ED%9A%A8%EA%B3%BC%EC%99%80-%EC%98%AC%EB%B0%94%EB%A5%B8-%EB%B3%B5%EC%9A%A9%EB%B2%95"
-      ],
-      "guide": {
-        "direction": "검색자들은 다이소 푸응 팻버닝(프로)을 영양제·치통약·독감약과 같이 먹어도 되는지, 설사 등 부작용이 있는지, 고온 보관 시 성분 변질이 있는지를 지식인에 반복해서 묻는다. 기존 글은 성분(가르시니아 캄보지아, CLA)과 일반 효과만 나열해 다이소판과 프로판의 차이, 타 약물 병용, 보관 조건 질문에는 답을 주지 못한다. 독자는 성분표와 병용 주의 항목, 다이소/프로 비교표 하나로 복용 여부를 스스로 판단하게 한다.",
-        "searchTargets": [
-          "다이소 푸응 팻버닝",
-          "푸응 팻버닝 부작용",
-          "푸응 팻버닝 다이소 차이",
-          "푸응 팻버닝 설사"
-        ],
-        "mustInclude": [
-          "주요 성분: 가르시니아 캄보지아 추출물, CLA의 작용 (지식인 답변 근거)",
-          "다이소 일반판과 '프로' 버전 성분·가격 차이 비교",
-          "영양제·치통약·독감약 등 타 약물 병용 시 주의사항 (확인 필요: 제품 설명서/약사)",
-          "여름철 고온 보관 시 성분 변질 가능성 (확인 필요: 제조사 고지)",
-          "설사 등 부작용 발생 시 대처법"
-        ],
-        "mustAvoid": [
-          "건강기능식품을 치료 효과가 있는 것처럼 과장"
-        ],
-        "checkBefore": [
-          "푸응 팻버닝/프로 정확한 성분표·함량 - 제품 패키지 또는 다이소몰 제품 페이지"
-        ],
-        "solves": [
-          "독감약·치통약과 같이 먹어도 되나? → 성분별 병용 주의사항과 복용 간격 정리",
-          "다이소판과 프로판 뭐가 다른가? → 성분·가격 비교표로 차이 정리",
-          "먹고 설사하는데 괜찮은가? → 부작용 원인 성분과 대처법 안내"
-        ],
-        "actionTitles": [
-          "다이소 푸응 팻버닝 부작용, 설사 날 때 확인할 성분",
-          "푸응 팻버닝 프로 다이소 차이, 성분·가격 비교",
-          "푸응 팻버닝 독감약 병용, 먹어도 되는지 확인하는 법"
-        ]
-      },
-      "at": "2026-10-27T01:06:41.708Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "푸응 7Days 팻버닝",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8030401&docId=489705465&answerNo=3&qb=7ZG47J2R7Yy767KE64ud",
-          "views": 909,
-          "answers": 4,
-          "askedAt": "2025.10.23"
-        },
-        {
-          "title": "푸응 팻버닝, 나이트 버닝 프로 질문이요.",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8030401&docId=475087638&answerNo=2&qb=7ZG47J2R7Yy767KE64ud",
-          "views": 630,
-          "answers": 3,
-          "askedAt": "2024.09.11"
-        },
-        {
-          "title": "맥스컷 푸응팻버닝 다이어트보조제를 샀는데....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=80304&docId=490999093&answerNo=2&qb=7ZG47J2R7Yy767KE64ud",
-          "views": 399,
-          "answers": 3,
-          "askedAt": "2025.12.28"
-        }
-      ]
-    },
-    {
       "id": "b7126d72e94f7fd7",
       "urls": [
         "https://blogger00220.tistory.com/entry/%EC%86%8C%EB%93%9D%C2%B7%EC%84%B8%EC%9C%A8-%EC%A0%9C21%ED%8E%B8-%EC%9B%94%EC%84%B8-%EB%B0%9B%EB%8B%A4%EA%B0%80-%EA%B1%B4%EB%B3%B4%EB%A3%8C-%ED%8F%AD%ED%83%84-%EC%A3%BC%ED%83%9D%C2%B7%EC%83%81%EA%B0%80-%EC%9E%84%EB%8C%80%EC%86%8C%EB%93%9D-%EA%B3%BC%EC%84%B8-%EA%B8%B0%EC%A4%80%EA%B3%BC-%EB%B6%84%EB%A6%AC%EA%B3%BC%EC%84%B8%EC%97%B0-2000%EB%A7%8C-%EC%9B%90-%EC%9D%B4%ED%95%98-%EC%A0%88%EC%84%B8-%EC%A0%84%EB%9E%B5-%EB%B0%8F-%EC%82%AC%EC%97%85%EC%9E%90-%EB%93%B1%EB%A1%9D-%EC%A3%BC%EC%9D%98%EC%A0%90",
@@ -8292,75 +8099,6 @@
       ]
     },
     {
-      "id": "7ee2dd2f6776a513",
-      "urls": [
-        "https://memo55445.tistory.com/166",
-        "https://it.tipmany.com/entry/%EB%B6%80%EA%B0%80%EC%84%B8%EB%82%A9%EB%B6%80%EA%B8%B0%EA%B0%84",
-        "https://lim7.tistory.com/163"
-      ],
-      "guide": {
-        "direction": "검색자는 부가세 신고의무자인지, 신고기간을 이미 놓쳤는지(미납·연장·법인/개인 구분), 관리비 같은 특수 거래도 과세 대상인지 헷갈려 한다. 고수 글(부가세납부기간 2기 일정)은 날짜만 나열해 '기간이 지났을 때'나 '예정신고 고지서만 받은 경우' 대응법은 못 풀었다. 이 글은 예정/확정신고 구분표와 월별 신고기간, 기한 지났을 때 가산세·연장 조건을 체크리스트로 정리해 끝낸다.",
-        "searchTargets": [
-          "부가세 납부기간 10월 31일",
-          "법인 부가세 납부기간",
-          "부가세 납부기간 연장",
-          "부가세 납부기간 지나서"
-        ],
-        "mustInclude": [
-          "부가세 예정신고기간(1~3월, 7~9월)과 확정신고기간(1월, 7월) 구분표",
-          "10월 고지서(예정신고 고지) 받았을 때 대응법",
-          "법인·개인 일반과세자의 신고 횟수 차이(개인은 고지서 납부 중심)",
-          "납부기간 지났을 때 가산세 및 연장 신청 조건(확인 필요: 국세청 공지)",
-          "관리비·공공요금 거래의 부가세 과세 여부 기준"
-        ],
-        "mustAvoid": [
-          "종합부동산세·자동차세 등 전혀 다른 세목의 납부기간과 혼동",
-          "법인과 개인 일반과세자의 신고 의무 차이를 뭉뚱그려 서술",
-          "'기간 연장'을 모든 사업자에 적용되는 것처럼 과장"
-        ],
-        "checkBefore": [
-          "부가세 예정/확정신고기간 정확한 날짜 — 국세청 홈택스 공지",
-          "기한 연장 대상 및 조건 — 국세청 보도자료/공지"
-        ],
-        "solves": [
-          "부가세 납부 기간 연장이 나도 해당되나요? → 연장 대상 조건 정리",
-          "10월에 고지된 부가가치세도 내야 하나요? → 예정신고 고지서 성격과 대응법 설명",
-          "개인 일반과세자는 1년에 몇 번 신고하나요? → 예정/확정신고 구분과 횟수 정리"
-        ],
-        "actionTitles": [
-          "부가세 납부기간 법인·개인 구분과 신고 횟수 정리",
-          "부가세 납부기간 놓쳤을 때 가산세·연장 신청법 확인",
-          "부가세 납부기간 10월 고지서 받았을 때 대응법"
-        ]
-      },
-      "at": "2026-10-27T09:38:53.489Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "상가 임차인에게 월세와 따로 받는 관리비와 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40309&docId=495490500&answerNo=1&qb=67aA6rCA7IS464Kp67aA6riw6rCE",
-          "views": 104,
-          "answers": 1,
-          "askedAt": "2026.10.10"
-        },
-        {
-          "title": "부가세 납부 기간 연장, 나도 해당될까요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=601&docId=493769754&answerNo=3&qb=67aA6rCA7IS464Kp67aA6riw6rCE",
-          "views": 92,
-          "answers": 3,
-          "askedAt": "2026.10.22"
-        },
-        {
-          "title": "개인 일반과세자 부가가치세 신고는 1년에 몇....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40309&docId=495697734&answerNo=1&qb=67aA6rCA7IS464Kp67aA6riw6rCE",
-          "views": 13,
-          "answers": 1,
-          "askedAt": "2026.10.26"
-        }
-      ]
-    },
-    {
       "id": "a9acb14f4b52e3ae",
       "urls": [
         "https://kay.young-gu.com/entry/%EB%8B%B9%EC%A7%84%EC%8B%9C-%EA%B2%BD%EC%A0%9C%ED%9A%8C%EB%B3%B5%EC%A7%80%EC%9B%90%EA%B8%88-%EC%8B%A0%EC%B2%AD%EB%B0%A9%EB%B2%95",
@@ -8543,72 +8281,6 @@
           "views": 260,
           "answers": 9,
           "askedAt": "2025.11.17"
-        }
-      ]
-    },
-    {
-      "id": "2bf925175b0ab711",
-      "urls": [
-        "https://annas.co.kr/%ed%95%b4%eb%a6%ac%ed%8f%ac%ed%84%b0-%ed%98%b8%ea%b7%b8%ec%99%80%ed%8a%b8-%ed%8a%b9%eb%b3%84%ec%a0%84/",
-        "https://www.primusy.com/feeds/8650242376129309286/comments/default"
-      ],
-      "guide": {
-        "direction": "검색자는 '해리포터 재개봉'이나 '오사카 유니버셜 해리포터'와 혼동해 이 호그와트 특별전이 정확히 무엇인지부터 헷갈려 한다. 고수 글은 서울숲 개최와 얼리버드 존재만 알리고 가격·마감일 비교표는 비워뒀다. 일반가·얼리버드가 비교와 예매 채널, 전시 기간을 정리해 예매까지 바로 끝내준다.",
-        "searchTargets": [
-          "해리포터 호그와트 특별전 예매",
-          "해리포터 호그와트 특별전 얼리버드",
-          "해리포터 호그와트 특별전 가격",
-          "해리포터 호그와트 특별전 예매 날짜"
-        ],
-        "mustInclude": [
-          "전시 장소(서울숲, 확인 필요: 주최 공지)와 전시 기간",
-          "얼리버드 가격 vs 일반가 비교표(확인 필요: 공식 예매처)",
-          "얼리버드 마감일(확인 필요: 예매처 공지)",
-          "예매 채널 및 예매 순서(확인 필요: 인터파크 등)"
-        ],
-        "mustAvoid": [
-          "영화 '해리포터' 재개봉 상영과 혼동하지 않기",
-          "오사카·도쿄 유니버셜 스튜디오 해리포터 존과 혼동하지 않기"
-        ],
-        "checkBefore": [
-          "전시 주최 측 공식 SNS·홈페이지에서 얼리버드 마감일과 가격 확인",
-          "예매처(인터파크 등) 공지에서 정확한 예매 오픈일 확인"
-        ],
-        "solves": [
-          "호그와트 특별전이 영화 재개봉인지 전시인지 헷갈림 → 전시 정의와 장소·기간으로 구분",
-          "얼리버드 가격이 얼마나 싼지 모름 → 일반가·얼리버드가 비교표 제공",
-          "예매를 어디서 어떻게 하는지 모름 → 예매처·순서 정리"
-        ],
-        "actionTitles": [
-          "해리포터 호그와트 특별전 얼리버드 예매하는 법 총정리",
-          "해리포터 호그와트 특별전 예매 날짜와 가격 확인하는 법",
-          "해리포터 호그와트 특별전 사전예약 신청 순서 알아보기"
-        ]
-      },
-      "at": "2026-10-27T09:38:53.489Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "해리포터 재개봉 언제 해요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=51001&docId=494651020&answerNo=4&qb=7ZW066as7Y+s7YSw7Zi46re47JmA7Yq47Yq567OE7KCE",
-          "views": 1520,
-          "answers": 5,
-          "askedAt": "2026.08.14"
-        },
-        {
-          "title": "오사카 유니버셜 해리포터 지팡이 구매 가이....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=9020101&docId=488518777&answerNo=3&qb=7ZW066as7Y+s7YSw7Zi46re47JmA7Yq47Yq567OE7KCE",
-          "views": 1216,
-          "answers": 3,
-          "askedAt": "2026.03.20"
-        },
-        {
-          "title": "해리포터재개봉",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=30312&docId=494728726&answerNo=2&qb=7ZW066as7Y+s7YSw7Zi46re47JmA7Yq47Yq567OE7KCE",
-          "views": 1072,
-          "answers": 8,
-          "askedAt": "2026.08.18"
         }
       ]
     },
