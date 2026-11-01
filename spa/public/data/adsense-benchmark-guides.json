@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-01T00:49:54.356Z",
+  "generatedAt": "2026-11-01T01:25:51.076Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -4203,137 +4203,6 @@
           "views": 1223,
           "answers": 1,
           "askedAt": "2024.03.08"
-        }
-      ]
-    },
-    {
-      "id": "311288618a2f4a05",
-      "urls": [
-        "https://evrthing.tistory.com/45",
-        "https://thelearninglounge.tistory.com/entry/%EC%9B%8C%EB%93%9C%ED%94%84%EB%A0%88%EC%8A%A4%C2%B7%EA%B7%B8%EB%88%84%EB%B3%B4%EB%93%9C-PHP-%EB%B2%84%EC%A0%84-%ED%99%95%EC%9D%B8%EA%B3%BC-%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8-%EB%B0%A9%EB%B2%95"
-      ],
-      "guide": {
-        "direction": "검색자는 PHP2Shell이 정확히 뭔지, 내 워드프레스·그누보드 사이트가 영향받는지, php 버전을 어떻게 확인·업데이트하는지 몰라 설치 단계별로 지식인에 묻는다. 고수 블로그 제목은 취약점 이름과 보안주 급등을 엮었지만 실제 사이트 점검 방법은 다루지 않았다. 호스팅사별 php 버전 확인 경로와 업그레이드 체크리스트를 제시하면 글 안에서 조치까지 끝낼 수 있다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "PHP2Shell 취약점 정의와 영향받는 PHP 실행 환경 (확인 필요: 보안 공지/CVE 원문)",
-          "워드프레스·그누보드 설치 시 php 버전 확인 방법(호스팅 관리자 페이지 경로, 카페24 사례 포함)",
-          "php 버전 업그레이드 전 플러그인·테마 호환성 체크리스트",
-          "구형 php(5.2.17 등) 사용 서버의 위험성과 조치 순서",
-          "미국 보안주 급등 관련 종목명과 배경 (확인 필요: 관련 기사 원문)"
-        ],
-        "mustAvoid": [
-          "보안 취약점 악용 방법을 구체적 코드·절차로 안내하는 것",
-          "PHP2Shell과 무관한 다른 웹쉘 취약점을 같은 것처럼 혼동해서 서술하는 것",
-          "특정 보안주를 투자 권유처럼 단정적으로 서술하는 것"
-        ],
-        "checkBefore": [
-          "PHP2Shell 관련 공식 보안 공지(CVE, 워드프레스/그누보드 공식 발표) 원문",
-          "호스팅사(카페24 등) PHP 버전 변경 지원 정책 공지",
-          "보안주 급등 관련 원문 기사에서 종목명과 수치"
-        ],
-        "solves": [
-          "워드프레스 php 버전을 어떻게 확인·변경하는지 몰라 막힘 → 호스팅별 확인·변경 경로 정리",
-          "오래된 php(5.2.17 등) 써도 되는지 불안함 → 구형 php의 위험성과 업그레이드 필요성 설명",
-          "PHP2Shell이 뭔지, 내 사이트가 영향받는지 모름 → 취약점 정의와 영향 범위 설명"
-        ],
-        "actionTitles": [
-          "워드프레스 php 버전 확인하는 법, 업데이트까지 정리",
-          "PHP2Shell 취약점 뜻, 내 워드프레스 안전한지 확인법",
-          "그누보드 php 업데이트 방법, 구버전 위험성까지 정리"
-        ]
-      },
-      "at": "2026-10-26T21:14:00.940Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "워드프레스 php 업데이트 하는 방법",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1040203&docId=478495521&answerNo=3&qb=7JuM65Oc7ZSE66CI7IqkIOq3uOuIhOuztOuTnCBwaHAg67KE7KCE",
-          "views": 2439,
-          "answers": 4,
-          "askedAt": "2024.12.28"
-        },
-        {
-          "title": "[워드프레스 설치중] index.php 아이콘이 보이지....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1040203&docId=213219524&answerNo=1&qb=7JuM65Oc7ZSE66CI7IqkIOq3uOuIhOuztOuTnCBwaHAg67KE7KCE",
-          "views": 599,
-          "answers": 1,
-          "askedAt": "2014.12.17"
-        },
-        {
-          "title": "워드프레스 설치했는데 config.php 파일이 안보....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10503&docId=389394887&answerNo=3&qb=7JuM65Oc7ZSE66CI7IqkIOq3uOuIhOuztOuTnCBwaHAg67KE7KCE",
-          "views": 393,
-          "answers": 4,
-          "askedAt": "2021.05.11"
-        }
-      ]
-    },
-    {
-      "id": "2207c01dd8c7d20c",
-      "urls": [
-        "https://sonsohappy.tistory.com/498",
-        "https://today-life-note.tistory.com/entry/%EB%93%B1%EA%B8%B0%EB%B6%80%EB%93%B1%EB%B3%B8-%EC%9D%B8%ED%84%B0%EB%84%B7-%EC%97%B4%EB%9E%8C-%EB%B0%A9%EB%B2%95-%EB%B0%8F-%EB%B0%9C%EA%B8%89-%EC%88%98%EC%88%98%EB%A3%8C-%EA%B0%91%EA%B5%AC-%EC%9D%84%EA%B5%AC-%EB%B3%B4%EB%8A%94-%EB%B2%95-%EC%B4%9D%EC%A0%95%EB%A6%AC"
-      ],
-      "guide": {
-        "direction": "검색자는 깡통전세 의심 상황(보증금 1.3억 vs 공시가격 1.25억 같은 사례)에서 등기부등본으로 뭘 봐야 계약금을 지킬 수 있는지 몰라 지식인에 묻는다. 고수 글들은 '열람·발급 방법'만 설명하고 이를 계약금 지급·확정일자 시점과 연결하지 않는다. 이 글은 갑구·을구 확인을 계약금 전/확정일자 전 시점별 체크리스트로 끝낸다.",
-        "searchTargets": [
-          "전세 계약금",
-          "전세계약 확정일자",
-          "전세계약서"
-        ],
-        "mustInclude": [
-          "갑구(소유권)·을구(근저당 등 권리) 구분해서 보는 법",
-          "인터넷등기소 열람·발급 수수료 (확인 필요: 대한민국 법원 인터넷등기소 공식 고시)",
-          "보증금 대비 공시가격 비율로 깡통전세 판단하는 기준표",
-          "계약금 입금 전·확정일자 받기 전 등기부등본 재확인 시점",
-          "근저당권·가압류 등 을구 권리 표시 읽는 순서"
-        ],
-        "mustAvoid": [
-          "특정 집주인의 재계약·자금 사정을 사생활처럼 추측하는 서술",
-          "등기부등본만 보면 전세금이 안전하다는 식의 단정적 보장",
-          "등기부등본 열람과 발급을 구분 없이 혼용하는 설명"
-        ],
-        "checkBefore": [
-          "열람·발급 수수료 현재 금액 — 대한민국 법원 인터넷등기소 공식 안내",
-          "전세보증금 반환보증 가입 가능 기준 — HUG·SGI서울보증 공식 안내"
-        ],
-        "solves": [
-          "깡통전세 의심인데 뭘 봐야 하는지 모름 → 보증금·공시가격 비율로 판단하는 기준표 제공",
-          "열람과 발급 차이를 모름 → 인터넷등기소에서 상황별 선택법 설명",
-          "계약금 보낸 뒤 다시 봐야 하는지 모름 → 계약금·확정일자 시점별 재확인 체크리스트 제공"
-        ],
-        "actionTitles": [
-          "전세 계약금 넣기 전 등기부등본 갑구·을구 확인하는 법",
-          "전세계약 확정일자 받기 전 등기부등본 재확인하는 법",
-          "전세계약서 쓰기 전 등기부등본으로 깡통전세 확인하는 법"
-        ]
-      },
-      "at": "2026-10-26T21:14:00.940Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "전세 계약금 돌려받을 수 있을까요???",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=4020201&docId=495237432&answerNo=6&qb=7KCE7IS46rOE7JW9",
-          "views": 161,
-          "answers": 6,
-          "askedAt": "2026.10.21"
-        },
-        {
-          "title": "전세계약 세무서",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=4020201&docId=494974058&answerNo=6&qb=7KCE7IS46rOE7JW9",
-          "views": 159,
-          "answers": 6,
-          "askedAt": "2026.10.12"
-        },
-        {
-          "title": "전세계약 질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=4020201&docId=495577398&answerNo=4&qb=7KCE7IS46rOE7JW9",
-          "views": 143,
-          "answers": 5,
-          "askedAt": "2026.10.16"
         }
       ]
     },
@@ -9299,72 +9168,6 @@
       ]
     },
     {
-      "id": "3a5351bf510afc2f",
-      "urls": [
-        "https://flameleaf.tistory.com/entry/%EC%8B%A4%EC%86%90%EB%B3%B4%ED%97%98-%EA%B0%B1%EC%8B%A0-%ED%9B%84-%EB%B3%B4%ED%97%98%EB%A3%8C-%EC%9D%B8%EC%83%81-%EB%8C%80%EB%B9%84%ED%95%98%EA%B8%B0-%ED%99%95%EC%9D%B8-%EC%B2%B4%ED%81%AC%EB%A6%AC%EC%8A%A4%ED%8A%B8%EC%99%80-%EC%A0%84%EB%9E%B5",
-        "https://jjyiu.tistory.com/entry/%EA%B5%AD%EB%AF%BC%EC%97%B0%EA%B8%88-%EB%B3%B4%ED%97%98%EB%A3%8C%EC%9C%A8-%EC%9D%B8%EC%83%81-%EB%A1%9C%EB%93%9C%EB%A7%B5-%EC%B4%9D%EC%A0%95%EB%A6%AC-%EC%84%B8%EB%8C%80%EB%B3%84-%EC%98%81%ED%96%A5%EA%B3%BC-%EB%8C%80%EC%9D%91%EB%B2%95"
-      ],
-      "guide": {
-        "direction": "2026년 국민연금 보험료율이 세대별로 다르게 적용된다는 소식에 '내 나이대는 언제부터 몇 %로 바뀌는지' 헷갈려 검색한다. 고수 블로그의 '로드맵 총정리'는 전체 흐름만 다뤄 10대·20대·30대처럼 구체 연령 기준 적용 시점은 짚지 못했다. 이 글은 연령대별 적용 시기와 2026년 9.5% 요율을 기준소득월액에 대입한 계산 예시로 끝낸다.",
-        "searchTargets": [
-          "국민연금 보험료율 인상",
-          "국민연금 보험료율 인상 시기",
-          "국민연금 보험료율 계산",
-          "국민연금 보험료율 2026"
-        ],
-        "mustInclude": [
-          "2026년 국민연금 보험료율 9.5% 적용 수치",
-          "2026년 1월 기준 세대별로 요율이 다르게 적용된다는 점과 연령대별 구분표 (확인 필요: 국민연금공단)",
-          "기준소득월액 80만원 기준 등 하한선 관련 계산 예시 (확인 필요: 국민연금공단)",
-          "직장가입자(회사 반반 부담)와 지역가입자 계산 방식 차이",
-          "10대·20대·30대 등 연령별 적용 시점 비교표 (확인 필요: 국민연금공단 공지)"
-        ],
-        "mustAvoid": [
-          "실손보험 갱신 보험료 인상 등 다른 보험료 이슈와 혼동하지 않기",
-          "국회 통과 전 로드맵(안)과 확정 시행 내용을 구분 없이 단정적으로 쓰지 않기"
-        ],
-        "checkBefore": [
-          "국민연금공단 공식 발표에서 세대별 적용 시기와 2026년 요율 확정 여부 확인",
-          "기준소득월액 상·하한액 최신 고시 수치 확인 (국민연금공단)"
-        ],
-        "solves": [
-          "문제: 세대별로 요율이 다르게 적용된다는데 내 나이대는 언제부터인지 모름 → 연령대별 적용 시기표 제공",
-          "문제: 월급에서 실제로 얼마나 더 빠지는지 계산이 안 됨 → 기준소득월액 기준 계산 예시 제공",
-          "문제: 10대·20대 등 어린 세대 요율 적용 기준이 헷갈림 → 연령 기준 적용 규칙 정리"
-        ],
-        "actionTitles": [
-          "국민연금 보험료율 인상 시기, 세대별로 언제부터인지 확인",
-          "국민연금 보험료율 계산, 월급 기준으로 직접 알아보는 법"
-        ]
-      },
-      "at": "2026-10-28T18:53:46.342Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "2026년 국민연금개혁&국민연금요율 문의드립....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100402&docId=491643778&answerNo=5&qb=6rWt66+87Jew6riI67O07ZeY66OM7Jyo",
-          "views": 673,
-          "answers": 6,
-          "askedAt": "2026.08.31"
-        },
-        {
-          "title": "25년 국민연금 보험료율 관련 문의",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100402&docId=479274505&answerNo=2&qb=6rWt66+87Jew6riI67O07ZeY66OM7Jyo",
-          "views": 374,
-          "answers": 3,
-          "askedAt": "2024.12.18"
-        },
-        {
-          "title": "국민연금 보험료 부담 줄이는 방법, 알고 계....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100402&docId=494523304&answerNo=6&qb=6rWt66+87Jew6riI67O07ZeY66OM7Jyo",
-          "views": 265,
-          "answers": 6,
-          "askedAt": "2026.10.19"
-        }
-      ]
-    },
-    {
       "id": "b248955ab90a1155",
       "urls": [
         "https://someofthem.tistory.com/102",
@@ -10078,67 +9881,6 @@
           "views": 12591,
           "answers": 3,
           "askedAt": "2005.08.12"
-        }
-      ]
-    },
-    {
-      "id": "6b57420c794b574c",
-      "urls": [
-        "https://sweetonion1005.tistory.com/entry/%EB%A9%94%EB%AA%A8%EB%A6%AC-%EC%B9%B4%EB%93%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B3%B5%EA%B5%AC-%EB%B0%A9%EB%B2%95-%EC%8A%A4%EB%A7%88%ED%8A%B8%ED%8F%B0%EA%B3%BC%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90-%EB%B9%84%EC%9A%A9-%EB%B9%84%EA%B5%90"
-      ],
-      "guide": {
-        "direction": "검색자는 메모리카드 엑박이나 파손된 폰 데이터가 복구 가능한지, 두 경우 방법이 같은지 몰라 막혀 있다. '차이점·비용 비교'라는 고수 제목은 자가복구와 전문업체 복구의 구체 비용 범위·성공 조건을 안 줬을 가능성이 크다. 이 글은 증상별(엑박·부식·파손) 복구 가능 여부와 비용 비교표로 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "메모리카드 엑박(X) 증상 원인과 자가복구 소프트웨어 방법",
-          "스마트폰 메인보드 부식/파손 시 eMMC·UFS 데이터 추출 방식",
-          "자가복구 vs 전문업체 비용 비교 (확인 필요: 구체 금액대)",
-          "저장칩 손상 여부에 따라 복구 성공률이 달라지는 조건"
-        ],
-        "mustAvoid": [
-          "복구 성공을 100% 보장하는 듯한 표현",
-          "아이폰과 안드로이드 복구 방식을 동일하게 설명",
-          "무료 복구 프로그램 효과를 과신하게 만드는 서술"
-        ],
-        "checkBefore": [
-          "복구 업체별 비용은 실제 업체 공식 견적 페이지나 원문 기사에서 확인",
-          "아이폰 데이터 암호화로 인한 복구 제한 여부는 애플 공식 지원문서에서 확인"
-        ],
-        "solves": [
-          "메모리카드 엑박(손상) 떴을 때 복구 가능한지 모름 → 증상별 자가복구·전문업체 가능 여부 정리",
-          "스마트폰 파손(부식·침수) 시 메모리카드와 같은 방법인지 혼동 → 저장 구조 차이와 복구 방식 비교",
-          "복구 비용이 자가 복구와 전문업체에서 얼마나 다른지 모름 → 비용 비교표 제공"
-        ],
-        "actionTitles": [
-          "메모리카드 엑박(X) 데이터 복구 방법, 비용까지 비교하기",
-          "스마트폰과 메모리카드 복구 방식 차이 한눈에 비교하기",
-          "메모리카드 복구 vs 전문업체 비용 비교, 선택 전 확인할 것"
-        ]
-      },
-      "at": "2026-10-28T18:53:46.342Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "아이폰 통화기록이 사라졌는데 복구방법 없....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=5010601&docId=495444588&answerNo=2&qb=66mU66qo66asIOuNsOydtO2EsCDrs7Xqtawg7Iqk66eI7Yq47Y+w6rO8",
-          "views": 426,
-          "answers": 2,
-          "askedAt": "2026.10.08"
-        },
-        {
-          "title": "아이폰 사진 복구",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=31402&docId=494843083&answerNo=3&qb=66mU66qo66asIOuNsOydtO2EsCDrs7Xqtawg7Iqk66eI7Yq47Y+w6rO8",
-          "views": 252,
-          "answers": 4,
-          "askedAt": "2026.08.26"
-        },
-        {
-          "title": "핸드폰 부식 데이터 복구(내공 100)",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=107040201&docId=489368762&answerNo=4&qb=66mU66qo66asIOuNsOydtO2EsCDrs7Xqtawg7Iqk66eI7Yq47Y+w6rO8",
-          "views": 130,
-          "answers": 4,
-          "askedAt": "2025.12.07"
         }
       ]
     },
@@ -15108,61 +14850,6 @@
           "views": 191,
           "answers": 4,
           "askedAt": "2026.10.15"
-        }
-      ]
-    },
-    {
-      "id": "9b4d18bf2764745b",
-      "urls": [
-        "https://bookshelf-journey.tistory.com/entry/%ED%95%98%EB%82%98%EC%9B%90%ED%81%90-%EC%8A%AC%EA%B8%B0%EB%A1%9C%EC%9A%B4-%EA%B8%88%EC%9C%B5%EC%83%9D%ED%99%9C-OX-%EA%B2%8C%EC%9E%84-%EA%B2%8C%EC%9E%84%ED%95%98%EA%B3%A0-100-%EB%9E%9C%EB%8D%A4-%EC%BA%90%EC%8B%9C-%EB%B0%9B%EC%9E%90",
-        "https://3040-lifeanswer.tistory.com/entry/2026-%ED%95%98%EB%82%98%EC%9B%90%ED%81%90-%EC%8A%AC%EA%B8%B0%EB%A1%9C%EC%9A%B4-%EA%B8%88%EC%9C%B5%EC%83%9D%ED%99%9C-OX-%ED%80%B4%EC%A6%88-10%EC%9B%94-29%EC%9D%BC-%EC%A0%95%EB%8B%B5-AI-%ED%94%BC%EC%8B%B1",
-        "https://3040-lifeanswer.tistory.com/entry/2026-%EC%BC%80%EC%9D%B4%EB%B1%85%ED%81%AC-AI-%ED%80%B4%EC%A6%88-%EC%B1%8C%EB%A6%B0%EC%A7%80-10%EC%9B%94-29%EC%9D%BC-%EC%A0%95%EB%8B%B5-%EB%B9%B5",
-        "https://3040-lifeanswer.tistory.com/entry/2026-%EC%BC%80%EC%9D%B4%EB%B1%85%ED%81%AC-AI-%ED%80%B4%EC%A6%88-%EC%B1%8C%EB%A6%B0%EC%A7%80-10%EC%9B%94-28%EC%9D%BC-%EC%A0%95%EB%8B%B5-%EC%A3%BC%EC%9A%94-%EC%A0%95%EB%B3%B4",
-        "https://3040lifeinfo.tistory.com/entry/2026-%ED%95%98%EB%82%98%EC%9B%90%ED%81%90-%EC%8A%AC%EA%B8%B0%EB%A1%9C%EC%9A%B4-%EA%B8%88%EC%9C%B5%EC%83%9D%ED%99%9C-OX-%ED%80%B4%EC%A6%88-10%EC%9B%94-25%EC%9D%BC-%EC%A0%95%EB%8B%B5-%EC%B2%AD%EC%95%BD-%EC%88%9C%EC%9C%84",
-        "https://3040lifeinfo.tistory.com/entry/2026-%EC%BC%80%EC%9D%B4%EB%B1%85%ED%81%AC-AI-%ED%80%B4%EC%A6%88-%EC%B1%8C%EB%A6%B0%EC%A7%80-10%EC%9B%94-25%EC%9D%BC-%EC%A0%95%EB%8B%B5-%EC%96%B4%EB%B6%80"
-      ],
-      "guide": {
-        "direction": "검색자는 매일 바뀌는 OX 문제의 오늘자 정답이 맞는지, 왜 틀렸는지 해설까지 확인하고 랜덤캐시를 받고 싶어 한다. 고수 블로그들은 날짜별로 글을 따로 올려 과거 회차와 오늘자를 오가며 찾아야 하는 번거로움이 남아 있다. 이 글은 오늘자 문제·정답·해설·랜덤캐시 수령 순서를 한 화면에 정리해 검색 한 번으로 끝내게 한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "10월29일자 OX 문제·정답·해설 표(확인 필요: 하나원큐 앱 공지)",
-          "랜덤캐시 적립 조건과 지급 시점(확인 필요: 이벤트 페이지)",
-          "하나원큐 앱 내 OX게임 참여 경로"
-        ],
-        "mustAvoid": [
-          "케이뱅크 AI 퀴즈 챌린지 등 다른 회사 퀴즈 정답과 혼동",
-          "확인되지 않은 정답을 추측해서 단정적으로 서술"
-        ],
-        "checkBefore": [
-          "하나원큐 앱 공지사항에서 오늘자 OX 문제 원문 확인",
-          "랜덤캐시 지급 조건은 앱 내 이벤트 페이지에서 확인"
-        ],
-        "solves": [
-          "오늘자 정답이 맞는지 헷갈림 → 10월29일 문제·정답·해설 표로 즉시 확인",
-          "랜덤캐시 받는 법을 모름 → 참여부터 적립까지 순서 정리"
-        ],
-        "actionTitles": [
-          "하나원큐 OX게임 10월29일 정답 확인하고 랜덤캐시 받기",
-          "하나원큐 OX게임 오답이면 해설로 바로 확인하는 법"
-        ]
-      },
-      "at": "2026-10-29T21:25:41.371Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "하나원큐 티켓예매내역",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=51002&docId=448432843&answerNo=1&qb=7ZWY64KY7JuQ7YGQ7Iqs6riw66Gc7Jq0",
-          "views": 986,
-          "answers": 5,
-          "askedAt": "2023.06.20"
-        },
-        {
-          "title": "신용카드 신규 만들려고 하는데... 혜택받을....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40104&docId=464497903&answerNo=1&qb=7ZWY64KY7JuQ7YGQ7Iqs6riw66Gc7Jq0",
-          "views": 193,
-          "answers": 2,
-          "askedAt": "2024.02.17"
         }
       ]
     },
