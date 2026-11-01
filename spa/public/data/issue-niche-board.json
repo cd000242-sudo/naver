@@ -1,11 +1,11 @@
 {
-  "publishedAt": "2026-11-01T03:37:53.072Z",
+  "publishedAt": "2026-11-01T09:37:17.475Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
     "candidates": 240,
-    "niche": 1,
+    "niche": 3,
     "preemption": 3,
     "pending": 0
   },
@@ -47,7 +47,7 @@
         ],
         "measuredAt": "2026-11-01T03:37:30.603Z"
       },
-      "documentCount": 318,
+      "documentCount": 320,
       "documentCountMeasured": true,
       "searchVolume": 380,
       "searchVolumeLt10": false,
@@ -60,7 +60,7 @@
       "freshFrontalCount": 0,
       "reasons": [
         "검색량 380",
-        "문서수 318",
+        "문서수 320",
         "데이터랩 실측 수요",
         "블로그탭 상위 10 정면글 0건 — 자리 있음"
       ],
@@ -112,7 +112,205 @@
       "kinCount": 1,
       "kinTop": [],
       "monetize": null,
-      "measuredAt": "2026-11-01T03:35:51.618Z",
+      "measuredAt": "2026-11-01T09:35:36.440Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2"
+    },
+    {
+      "keyword": "이예원 배우",
+      "issue": "이예원",
+      "topic": "이예원",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "[2026 청년예술지원사업 선정작] 《문이 닫혔을 때》",
+          "“전지현 교복 만든 사람이 장모님?” 알고 보니 처가부터 남달랐던 男배우",
+          "골프 이예원 프로 나이 23세 키 163cm 프로필 소속사 메디힐 KLPGA 통산 10승 S-OIL 챔피언십 단독 선두 시즌 2승 도전 총정리",
+          "결혼하고 나서야 알려졌다… 알고 보니 남다른 처가를 둔 남자 연예인들, 1위는?",
+          "이예원 프로 프로필, 차세대 골프 스타의 학력부터 인스타그램 근황까지",
+          "은보아,오지호 아내 직업 나이 최근근황! 골프 홀인원에 패션까지 화제",
+          "다들 무너졌는데 혼자 버텼다…이예원, 제주 강풍 속 역전 우승",
+          "단돈 3만 원 쥐고 상경해 지옥 같은 무명 견디더니… 불과 3개월 만에 초고속 결혼해 300억 재벌 사위 된 톱스타 충격 근황.jpg",
+          "[Boy in the Pool] 류연수 감독, 효우, 이민재, 이예원, 양희원이 참석한 기자간담회 현장!",
+          "탑 아이돌 삼촌이 넷이나 생김"
+        ],
+        "measuredAt": "2026-11-01T09:36:50.026Z"
+      },
+      "documentCount": 1975,
+      "documentCountMeasured": true,
+      "searchVolume": 300,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 0.8914252876008247,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 300",
+        "문서수 1,975",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 300 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.9배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        },
+        "home": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 74,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-11-01T09:35:36.440Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2"
+    },
+    {
+      "keyword": "핀란드 관광청",
+      "issue": "핀란드",
+      "topic": "핀란드",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "핀란드 여행 국가정보 총정리｜비자·입국·환전·교통·날씨·오로라·사우나·여행 준비물",
+          "핀란드 디너 데이트 신청, 16명 여행 지원과 영상·비용 조건",
+          "핀란드 오로라 여행 얼마 들까? 2026 경비·시기·숙소·추천 코스 총정리",
+          "북유럽 핀란드 여행 오로라 겨울 해외 여행지 추천",
+          "핀란드 로바니에미 12월, 산타마을과 오로라 투어 중 무엇을 먼저 예약할까?",
+          "핀란드 라플란드 자유여행 처음이라면｜로바니에미·산타마을·오로라·야간열차·숙소·현지 5박 6일",
+          "9, 10월 핀란드 여행 옷차림은?｜헬싱키·라플란드 날씨와 꼭 챙겨야 할 준비물",
+          "핀란드 오로라 10월 여행｜9~10월 좋은 이유·로바니에미 관측시간",
+          "12월 해외여행지 추천 / ❄️ 핀란드 12월 날씨, 옷차림부터 헬싱키·사리셀카·로바니에미 여행까지",
+          "핀란드 오울루 7박8일 자유여행 총정리｜근교·오로라까지"
+        ],
+        "measuredAt": "2026-11-01T09:36:10.748Z"
+      },
+      "documentCount": 15178,
+      "documentCountMeasured": true,
+      "searchVolume": 1130,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 1.2247859027082042,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 1,130",
+        "문서수 15,178",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 1,130 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.2배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        },
+        "home": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 512,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-11-01T09:35:36.440Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
       "kinMode": "date-views-v2"
@@ -315,7 +513,7 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-11-01T03:35:51.618Z",
+      "measuredAt": "2026-11-01T09:35:36.440Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -331,7 +529,7 @@
       "verdict": "preemption",
       "preemptionKind": "no-demand",
       "serp": null,
-      "documentCount": 158,
+      "documentCount": 159,
       "documentCountMeasured": true,
       "searchVolume": 30,
       "searchVolumeLt10": false,
@@ -344,8 +542,8 @@
       "freshFrontalCount": 0,
       "reasons": [
         "검색량 30",
-        "문서수 158",
-        "선점 후보 — 경쟁 문서 158건, 수요 미검출"
+        "문서수 159",
+        "선점 후보 — 경쟁 문서 159건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -381,12 +579,99 @@
         {
           "title": "새로운 AI 에이전트 닷츠, 실제로 얼마나 효율적일까요?",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=1122&docId=495387990&answerNo=0",
-          "views": 100,
+          "views": 101,
           "answers": null
         }
       ],
       "monetize": null,
-      "measuredAt": "2026-11-01T03:35:51.618Z",
+      "measuredAt": "2026-11-01T09:35:36.440Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "강유미 라미네이트",
+      "issue": "강유미",
+      "topic": "강유미",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 256,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 2,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 256",
+        "선점 후보 — 경쟁 문서 256건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 2건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 76,
+      "kinTop": [
+        {
+          "title": "라미네이트 후회할까요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70201&docId=471366377&answerNo=2",
+          "views": 1355,
+          "answers": 4
+        },
+        {
+          "title": "치아교정 후 라미네이트",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70201&docId=349454086&answerNo=6",
+          "views": 947,
+          "answers": 6
+        },
+        {
+          "title": "개그맨 강유미 라미네이트 하지 말래요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70201&docId=374772104&answerNo=1",
+          "views": 854,
+          "answers": 1
+        },
+        {
+          "title": "라미네이트",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70202&docId=365011869&answerNo=1",
+          "views": 815,
+          "answers": 1
+        },
+        {
+          "title": "앞니 벌어짐 라미네이트 , 레진 비용",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70205&docId=385765019&answerNo=1",
+          "views": 174,
+          "answers": 5
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-11-01T09:35:36.440Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -440,7 +725,8 @@
       "monetize": null,
       "measuredAt": "2026-11-01T03:35:51.618Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "여은 헤어샵",
@@ -1084,234 +1370,6 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "미스트랄 패딩",
-      "issue": "미스트랄",
-      "topic": "미스트랄",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 132,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 5,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 132",
-        "선점 후보 — 경쟁 문서 132건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 5건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-30T09:03:57.231Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "G마켓 e쿠폰 핀번호",
-      "issue": "G마켓 e쿠폰 핀번호",
-      "topic": "G마켓 e쿠폰 핀번호",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 123,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 2,
-      "freshFrontalCount": 2,
-      "reasons": [
-        "문서수 123",
-        "선점 후보 — 경쟁 문서 123건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 2건 (최근 2건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "거래",
-      "adsenseFit": false,
-      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 19,
-      "kinTop": [
-        {
-          "title": "G마켓에서 구매한 온라인 문화상품권 사용 방법",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=511&docId=455589509&answerNo=7",
-          "views": 977,
-          "answers": 7
-        },
-        {
-          "title": "g마켓에서 e쿠폰으로 에그머니 샀는데요 핀번호 어디서 확인....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=511&docId=435889531&answerNo=2",
-          "views": 192,
-          "answers": 2
-        },
-        {
-          "title": "지마켓에서 에그머니 e쿠폰을 구매했는데요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=2010101&docId=435888600&answerNo=0",
-          "views": 19,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-30T09:03:57.231Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "미스트랄 티셔츠",
-      "issue": "미스트랄",
-      "topic": "미스트랄",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 214,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 214",
-        "선점 후보 — 경쟁 문서 214건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 3,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-30T09:03:57.231Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "미스트랄 선글라스",
-      "issue": "미스트랄",
-      "topic": "미스트랄",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 208,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 7,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 208",
-        "선점 후보 — 경쟁 문서 208건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 7건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 4,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-30T09:03:57.231Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
@@ -1325,22 +1383,22 @@
       "why": null,
       "headlines": [
         {
+          "title": "8조원대 해킹 피해 바이낸스 출금 서비스 단계적 재개",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-01T08:35:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014293318?sid=104"
+        },
+        {
           "title": "美FBI \"北, 가상화폐 63억달러 탈취 배후…이더리움 전환 포착\"",
           "press": "yna.co.kr",
           "publishedAt": "2026-10-31T22:16:00.000Z",
           "link": "https://n.news.naver.com/mnews/article/001/0016413623?sid=104"
         },
         {
-          "title": "미 FBI \"북한, 바이낸스 63억 달러 가상화폐 탈취 배후\"",
-          "press": "ytn.co.kr",
-          "publishedAt": "2026-10-31T22:18:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/052/0002426705?sid=104"
-        },
-        {
-          "title": "美FBI \"바이낸스 60억달러 탈취, 北 소행…이더리움 전환 포착\"",
-          "press": "news1.kr",
-          "publishedAt": "2026-10-31T22:58:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009262415?sid=104"
+          "title": "‘8조원대 해킹’ 바이낸스, 출금 서비스 단계적 재개",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-11-01T08:59:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001201795?sid=101"
         }
       ],
       "concentrated": [
@@ -1381,6 +1439,150 @@
         },
         {
           "keyword": "바이낸스 삼성전자",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 1
+    },
+    {
+      "issue": "이예원",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": null,
+      "headlines": [
+        {
+          "title": "'봄 여왕' 이예원, 가을에 활짝…S-오일 챔피언십서 통산 11승째",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-01T07:27:00.000Z",
+          "link": "https://m.sports.naver.com/golf/article/001/0016414324"
+        },
+        {
+          "title": "‘봄의 여왕’ KLPGA 이예원, 가을에도 우승",
+          "press": "chosun.com",
+          "publishedAt": "2026-11-01T07:50:00.000Z",
+          "link": "https://m.sports.naver.com/golf/article/023/0004007145"
+        },
+        {
+          "title": "이예원, KLPGA S-OIL 챔피언십 제패…첫 11월 우승·통산 11승",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-01T08:39:00.000Z",
+          "link": "https://m.sports.naver.com/golf/article/003/0014293320"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "이예원 프로",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이예원 아나운서",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이예원 윤이나",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이예원 배우",
+          "searchVolume": 300,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "골프 이예원",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "윤이나 이예원",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이예원 기자",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이예원 프로 나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 1
+    },
+    {
+      "issue": "핀란드",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": null,
+      "headlines": [
+        {
+          "title": "데이터센터 짓는 구글, 40만 그루 ‘무단 벌채’…분노한 핀란드, 9만명...",
+          "press": "hani.co.kr",
+          "publishedAt": "2026-10-30T05:20:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/028/0002829977?sid=105"
+        },
+        {
+          "title": "핀란드·노르웨이, 푸틴 '깜짝' 통화에…덴마크·스웨덴 공개 반발",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-28T02:05:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014283806?sid=104"
+        },
+        {
+          "title": "핀란드 경찰, 구글 데이터센터 부지 조성사업 수사 착수",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-29T15:40:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016410604?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "핀란드 사우나",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "핀란드 여행",
+          "searchVolume": 4760,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "핀란드 산타마을",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "핀란드 항공권",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "핀란드 수도",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "핀란드 오로라",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "핀란드 날씨",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "핀란드 레오",
           "searchVolume": null,
           "origin": "autocomplete"
         }
@@ -1460,104 +1662,9 @@
       "nextWave": [],
       "rowCount": 1,
       "carried": true
-    },
-    {
-      "issue": "미스트랄",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "미스트랄이 라지4 공개와 오픈AI 형식 API를 선보였다.",
-      "headlines": [
-        {
-          "title": "미스트랄, 1조 파라미터 '라지4' 오픈웨이트 공개",
-          "press": "ddaily.co.kr",
-          "publishedAt": "2026-10-29T20:41:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/138/0002246614?sid=105"
-        },
-        {
-          "title": "미스트랄, '라지 4' 가중치 공개하며 정식 출시…유럽 사이버 보안 시장...",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-29T21:18:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216821"
-        },
-        {
-          "title": "클라우데라, '기업용 AI 생태계' 확장… AI 팩토리 가속",
-          "press": "etnews.com",
-          "publishedAt": "2026-10-29T05:03:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/030/0003480106?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "부가티 미스트랄",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "미스트랄 무기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "미스트랄 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "미스트랄 옷",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "미스트랄 패딩",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "미스트랄 삼성",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "미스트랄 코리아",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "미스트랄 미사일",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "미스트랄 사용법",
-          "reason": "API 공개 후 사용 수요",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "미스트랄 한국 진출",
-          "reason": "국내 서비스 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "미스트랄 요금",
-          "reason": "API 비용 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
     }
   ],
-  "enrichedAt": "2026-11-01T03:38:12.546Z",
+  "enrichedAt": "2026-11-01T09:37:37.365Z",
   "enrichStats": {
     "enriched": 0,
     "subsAdded": 0,
@@ -1571,7 +1678,7 @@
     "pooled": 0,
     "aiTitled": 0,
     "trended": 0,
-    "aiCalls": 2,
+    "aiCalls": 4,
     "partial": false
   }
 }
