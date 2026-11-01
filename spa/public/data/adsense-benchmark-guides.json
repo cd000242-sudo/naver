@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-01T16:48:57.378Z",
+  "generatedAt": "2026-11-01T17:14:33.687Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -584,76 +584,6 @@
           "views": 86,
           "answers": 1,
           "askedAt": "2026.06.02"
-        }
-      ]
-    },
-    {
-      "id": "073e78efdda352fd",
-      "urls": [
-        "https://cheinggyemoney.tistory.com/123",
-        "https://wealth.sulbiro.com/entry/%EC%86%8C%EC%83%81%EA%B3%B5%EC%9D%B8-%ED%8F%90%EC%97%85%EC%A7%80%EC%9B%90%EA%B8%88-%EC%8B%A0%EC%B2%AD%EB%B0%A9%EB%B2%95-%ED%99%95%EC%9D%B8-%EC%88%9C%EC%84%9C%EC%99%80-2026%EB%85%84-%EC%A0%91%EC%88%98-%ED%98%84%ED%99%A9",
-        "https://cheinggyemoney.tistory.com/120",
-        "https://girst.sados21c.com/entry/%EC%86%8C%EC%83%81%EA%B3%B5%EC%9D%B8-%ED%8F%90%EC%97%85%EC%A7%80%EC%9B%90%EA%B8%88-%EC%8B%A0%EC%B2%AD-%EC%9E%90%EA%B2%A9-%EB%B0%8F-%EC%A7%80%EC%9B%90-%EA%B8%88%EC%95%A1-%EC%B5%9C%EB%8C%80-600%EB%A7%8C%EC%9B%90-%EC%A1%B0%EA%B1%B4",
-        "https://servicenine.linkistat.com/112",
-        "https://everyday-365story.tistory.com/27"
-      ],
-      "guide": {
-        "direction": "지식인 질문자들은 자격조건보다 '프리랜서라 전직장려수당을 못 받는지', '신청절차가 복잡해 어디서부터 시작할지', '선정됐는데 안내가 없을 때 어떻게 하는지'를 묻는다. 고수 글들은 자격조건·지원한도 표는 잘 정리했지만 선정 후 미안내 시 대응법은 다루지 않는다. 지원 유형별 자격표와 신청 순서, 선정 후 문의 경로까지 함께 주면 독자가 신청부터 사후 문의까지 이 글로 끝낼 수 있다.",
-        "searchTargets": [
-          "소상공인 희망리턴패키지 지원금",
-          "소상공인 희망리턴패키지 재창업교육",
-          "소상공인 희망리턴패키지 경영개선",
-          "소상공인 희망리턴패키지 2차"
-        ],
-        "mustInclude": [
-          "희망리턴패키지 교육·경영개선·재창업교육·점포철거비 등 지원 유형별 구분",
-          "전직장려수당 프리랜서 자격 조건 (확인 필요: 소상공인시장진흥공단 공고)",
-          "선정 안내가 없을 때 문의 경로 - 누리집 Q&A(신청번호·공고명·선정화면 날짜 기재) 또는 통합콜센터 1533-01**",
-          "2차 접수 일정과 재창업 지원 한도 (확인 필요: 소상공인시장진흥공단 홈페이지 공고)"
-        ],
-        "mustAvoid": [
-          "지식인 속 '실제 효과 있었나요' 질문처럼 검증 안 된 후기를 사실처럼 인용",
-          "희망리턴패키지를 다른 소상공인 대출·손실보전금 지원사업과 혼동해 서술"
-        ],
-        "checkBefore": [
-          "유형별(폐업/재창업/경영개선) 정확한 지원 한도와 2026년 접수 일정 (소상공인시장진흥공단 홈페이지 공고)",
-          "콜센터 번호와 Q&A 문의 양식 정확한 내용 (희망리턴패키지 누리집)"
-        ],
-        "solves": [
-          "프리랜서는 전직장려수당을 못 받는지 헷갈림 → 자격조건 기준으로 해당 여부 정리",
-          "신청절차가 복잡해 어디서부터 시작할지 모름 → 유형별 신청 순서를 단계로 정리",
-          "선정됐는데 안내가 없을 때 어떻게 해야 할지 모름 → 누리집 Q&A·콜센터 문의 방법 안내"
-        ],
-        "actionTitles": [
-          "희망리턴패키지 폐업지원금 신청 자격과 신청 순서 정리",
-          "희망리턴패키지 재창업교육·경영개선 지원금 비교해보기",
-          "희망리턴패키지 선정 통보 없을 때 문의하는 방법 정리"
-        ]
-      },
-      "at": "2026-10-26T21:14:00.940Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "소상공인 희망리턴패키지",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40309&docId=436685859&answerNo=2&qb=7IaM7IOB6rO17J247Z2s66ed66as7YS07Yyo7YKk7KeA",
-          "views": 712,
-          "answers": 2,
-          "askedAt": "2026.10.21"
-        },
-        {
-          "title": "소상공인 희망리턴패키지",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40106&docId=488894148&answerNo=14&qb=7IaM7IOB6rO17J247Z2s66ed66as7YS07Yyo7YKk7KeA",
-          "views": 559,
-          "answers": 14,
-          "askedAt": "2026.09.22"
-        },
-        {
-          "title": "소상공인 희망리턴 패키지, 실제 지원 효과는....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=601&docId=493179202&answerNo=10&qb=7IaM7IOB6rO17J247Z2s66ed66as7YS07Yyo7YKk7KeA",
-          "views": 358,
-          "answers": 10,
-          "askedAt": "2026.10.19"
         }
       ]
     },
@@ -2619,74 +2549,6 @@
           "views": 99,
           "answers": 3,
           "askedAt": "2026.01.10"
-        }
-      ]
-    },
-    {
-      "id": "4d695fd2fbe99e6f",
-      "urls": [
-        "https://cheinggyemoney.tistory.com/122",
-        "https://everyday-365story.tistory.com/26"
-      ],
-      "guide": {
-        "direction": "검색자는 경기도 중소기업 청년지원금 신청조건이 헷갈리고(조회 306), 내일채움공제 등과 중복지원 가능한지도 궁금하다(조회 229). 고수 블로그 제목은 2026년 청년정책을 '총정리'로만 묶어 지역별 조건표나 중복지원 가능여부를 안 짚는다. 이 글은 조건표·중복지원 가능여부·신청 순서를 정리해 헷갈림을 끝낸다.",
-        "searchTargets": [
-          "청년 정책자금",
-          "청년 정책 지원금",
-          "청년 정책 모음",
-          "청년 정책 종류"
-        ],
-        "mustInclude": [
-          "경기도 중소기업 청년 지원금 신청 조건표(연령·재직기간·소득기준) (확인 필요: 경기도일자리재단 공식 공고)",
-          "청년내일채움공제와의 중복지원 가능여부 (확인 필요: 고용노동부 공지)",
-          "중소기업 청년 고용지원금 해고·계약 관련 유의사항",
-          "2026년 기준 지원금액/예산 변경 내용 (확인 필요: 2026년 예산안 공식 발표)",
-          "신청 서류 및 신청 순서 체크리스트"
-        ],
-        "mustAvoid": [
-          "과거 연도 조건을 2026년 기준인 것처럼 혼용하지 않기",
-          "전국 공통 지원금과 특정 지자체(경기도 등) 지원금을 구분 없이 섞지 않기",
-          "중복지원 가능 여부를 추측으로 단정하지 않기"
-        ],
-        "checkBefore": [
-          "고용노동부·경기도일자리재단 공식 공고로 2026년 조건·예산 확정 여부 확인",
-          "청년내일채움공제 중복지원 규정 고용노동부 공지 확인"
-        ],
-        "solves": [
-          "경기도 중소기업 청년지원금 신청조건이 헷갈린다 → 조건표로 자격 한눈에 확인",
-          "내일채움공제 등과 중복 가능한지 모르겠다 → 중복지원 가능여부 정리",
-          "지원금 받다가 해고되면 어떻게 되는지 궁금하다 → 유의사항 체크리스트 제공"
-        ],
-        "actionTitles": [
-          "청년 정책자금·지원금 2026년 신청 조건 한눈에 확인",
-          "청년 지원금 종류 총정리, 중복 신청 가능여부까지 확인",
-          "경기도 중소기업 청년지원금 신청 순서 체크리스트"
-        ]
-      },
-      "at": "2026-10-26T21:14:00.940Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "중소기업 청년 고용지원금",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6080401&docId=418843262&answerNo=1&qb=7LKt64WEIOygleyxhSDsnITtlZwg7KSR7IaM6riw7JeFIOyngOybkOq4iA==",
-          "views": 4552,
-          "answers": 3,
-          "askedAt": "2022.05.06"
-        },
-        {
-          "title": "중소기업 취업 청년한테 장려금이나 지원금",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60804&docId=420180003&answerNo=1&qb=7LKt64WEIOygleyxhSDsnITtlZwg7KSR7IaM6riw7JeFIOyngOybkOq4iA==",
-          "views": 954,
-          "answers": 1,
-          "askedAt": "2022.05.24"
-        },
-        {
-          "title": "경기도 중소기업 청년 지원금, 신청 조건이 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=601&docId=493646496&answerNo=2&qb=7LKt64WEIOygleyxhSDsnITtlZwg7KSR7IaM6riw7JeFIOyngOybkOq4iA==",
-          "views": 306,
-          "answers": 5,
-          "askedAt": "2026.09.03"
         }
       ]
     },
@@ -11356,69 +11218,6 @@
           "views": 141,
           "answers": 6,
           "askedAt": "2026.07.03"
-        }
-      ]
-    },
-    {
-      "id": "390addfd1eacf704",
-      "urls": [
-        "https://lifewisdom-review.tistory.com/169",
-        "https://moneyinftong.tistory.com/entry/%ED%95%98%EB%82%98%EC%9D%80%ED%96%89-K%EB%A6%AC%EA%B7%B81-2026-%ED%8C%8C%EC%9D%B4%EB%84%90-%EB%9D%BC%EC%9A%B4%EB%93%9C%EB%8A%94-2026%EB%85%84-10%EC%9B%94-31%EC%9D%BC%EB%B6%80%ED%84%B0-%EC%96%B8%EC%A0%9C%EA%B9%8C%EC%A7%80-%EC%A7%84%ED%96%89%EB%90%A0%EA%B9%8C%EC%9A%94",
-        "https://moneyinftong.tistory.com/entry/%ED%95%98%EB%82%98%EC%9D%80%ED%96%89-K%EB%A6%AC%EA%B7%B81-2026-%ED%8C%8C%EC%9D%B4%EB%84%90%EB%9D%BC%EC%9A%B4%EB%93%9C%EB%8A%94-%ED%8C%8C%EC%9D%B4%EB%84%90-A%EC%99%80-%ED%8C%8C%EC%9D%B4%EB%84%90-B%EB%A1%9C-%EB%82%98%EB%89%98%EC%96%B4-%EC%A7%84%ED%96%89%EB%90%A9%EB%8B%88%EB%8B%A4-%EA%B0%81-%EA%B7%B8%EB%A3%B9%EC%9D%80-%EC%B4%9D-%EB%AA%87-%EB%9D%BC%EC%9A%B4%EB%93%9C%EB%A1%9C-%EC%A7%84%ED%96%89%EB%90%A0%EA%B9%8C%EC%9A%94"
-      ],
-      "guide": {
-        "direction": "고수 글 제목조차 '파이널라운드가 10월 31일부터 언제까지인지', '파이널A·B가 몇 라운드인지'를 물음표로 던져놓고 답을 못 줬다. 검색자는 제주 유나이티드가 파이널A·B 중 어디에 속하고 남은 경기가 몇 경기인지 숫자로 알고 싶어한다. 독자는 시작·종료일, 그룹별 라운드 수, 제주 일정표, 예매 방법까지 이 글 하나로 정리받는다.",
-        "searchTargets": [
-          "하나은행 k리그1 2026"
-        ],
-        "mustInclude": [
-          "파이널라운드 시작일 2026년 10월 31일 (확인 필요: 한국프로축구연맹 공식 일정)",
-          "파이널A·파이널B 그룹별 총 라운드 수 (확인 필요: K리그 공식 공지)",
-          "제주 유나이티드의 파이널A/B 배정과 남은 경기 일정표 (확인 필요: K리그 공식 홈페이지)",
-          "경기 예매 방법/채널 (확인 필요: 제주 유나이티드 공식 채널, 티켓링크 등)"
-        ],
-        "mustAvoid": [
-          "전북현대·대전하나시티즌 등 다른 팀의 예매·MVP 사례를 제주 경기 정보처럼 섞지 말 것",
-          "FA컵·ACL 진출 조건 등 다른 대회 규정과 정규리그 파이널라운드를 혼동하지 말 것"
-        ],
-        "checkBefore": [
-          "파이널라운드 정확한 시작·종료일과 파이널A/B 라운드 수 - K리그 공식 홈페이지/한국프로축구연맹 공지 확인",
-          "제주 유나이티드 파이널A/B 배정 여부와 홈경기 일정 - 제주 유나이티드 공식 홈페이지/티켓링크 확인"
-        ],
-        "solves": [
-          "파이널라운드가 언제부터 언제까지인지 모르겠다 → 시작일과 그룹별 라운드 수를 표로 정리",
-          "제주가 파이널A인지 B인지, 남은 경기가 몇 경기인지 → 제주 일정표로 정리",
-          "경기 예매는 어떻게 하는지 → 예매 채널·방법 정리"
-        ],
-        "actionTitles": [
-          "하나은행 K리그1 2026 파이널라운드 일정 확인, 제주 경기는",
-          "하나은행 K리그1 2026 제주 유나이티드 경기 예매하는 법"
-        ]
-      },
-      "at": "2026-10-29T20:55:09.775Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "K리그1 전북현대 예매 방법",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1001010201&docId=439131443&answerNo=1&qb=7ZWY64KY7J2A7ZaJa+umrOq3uDE=",
-          "views": 1057,
-          "answers": 1,
-          "askedAt": "2023.02.10"
-        },
-        {
-          "title": "k리그2부리그팀이 하나은행 fa컵 우승하면",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10010102&docId=407013718&answerNo=1&qb=7ZWY64KY7J2A7ZaJa+umrOq3uDE=",
-          "views": 262,
-          "answers": 1,
-          "askedAt": "2021.12.11"
-        },
-        {
-          "title": "하나은행 K리그1 MVP 선정 기준과 투표 과정은?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1001010201&docId=485232219&answerNo=1&qb=7ZWY64KY7J2A7ZaJa+umrOq3uDE=",
-          "views": 129,
-          "answers": 1,
-          "askedAt": "2025.05.15"
         }
       ]
     },
