@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-01T07:13:19.893Z",
+  "generatedAt": "2026-11-01T08:00:47.465Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -2684,73 +2684,6 @@
       ]
     },
     {
-      "id": "1dac97f30fba2c33",
-      "urls": [
-        "https://whitepebble.tistory.com/entry/%EB%84%B7%ED%94%8C%EB%A6%AD%EC%8A%A4-%ED%91%B8%EB%A5%B8%EA%B8%B8-%EA%B3%B5%EA%B0%9C%EC%9D%BC-%EC%B6%9C%EC%97%B0%EC%A7%84-%EC%A4%84%EA%B1%B0%EB%A6%AC-%EC%B4%9D%EC%A0%95%EB%A6%AC-%EC%86%90%EC%84%9D%EA%B5%AC%EC%99%80-%EB%82%98%EA%B0%80%EC%95%BC%EB%A7%88-%EC%97%90%EC%9D%B4%ED%83%80%EC%9D%98-%ED%95%9C%EC%9D%BC-%EA%B3%B5%EC%A1%B0-%EC%8A%A4%EB%A6%B4%EB%9F%AC",
-        "https://muramara.com/entry/%EB%B9%8C%EB%A1%9C%EC%9A%B0-%EB%84%B7%ED%94%8C%EB%A6%AD%EC%8A%A4-%EC%B6%9C%EC%97%B0%EC%A7%84-%EA%B3%B5%EA%B0%9C%EC%9D%BC-6%EB%B6%80%EC%9E%91-%EA%B8%B0%EB%B3%B8%EC%A0%95%EB%B3%B4-%EC%B4%9D%EC%A0%95%EB%A6%AC"
-      ],
-      "guide": {
-        "direction": "검색자는 티저만 보고 기대감은 커졌지만 몇부작인지, 원작이 있는지, 원작 결말이 어떻게 다른지 같은 실용 정보가 막혀 있다. 고수 블로그들은 출연진·줄거리 총정리라는 제목을 달았지만 자동완성에 뜨는 '몇부작'·'원작 결말' 같은 구체 정보는 짚지 않았다. 이 글은 공개일·회차수·원작 여부를 표로 정리하고 원작 결말은 스포일러 경고와 함께 분리해 끝낸다.",
-        "searchTargets": [
-          "넷플릭스 푸른길 몇부작",
-          "넷플릭스 푸른길 원작",
-          "넷플릭스 푸른길 줄거리",
-          "넷플릭스 푸른길 티저 공개"
-        ],
-        "mustInclude": [
-          "손석구·나가야마 에이타 주연, 한준희 감독 연출이라는 제작 정보",
-          "정확한 공개일자와 총 몇부작(회차수) (확인 필요: 넷플릭스 공식 공지)",
-          "원작 존재 여부와 결말 요약을 스포일러 경고와 분리 배치 (확인 필요: 원작 매체)",
-          "한일 공조 스릴러라는 장르 설정과 핵심 줄거리 요약"
-        ],
-        "mustAvoid": [
-          "비슷한 시기 공개된 다른 넷플릭스 한일/공조 스릴러(예: 빌로우)와 정보를 혼동해서 섞지 않기",
-          "원작 결말을 스포일러 경고 없이 본문 상단에 바로 노출하지 않기",
-          "손석구·나가야마 에이타 등 배우의 사생활을 추측해서 서술하지 않기"
-        ],
-        "checkBefore": [
-          "정확한 공개일자와 총 회차수 - 넷플릭스 공식 계정·보도자료 확인",
-          "원작 유무와 결말 - 원작 매체(웹툰/소설 등) 존재 여부 확인"
-        ],
-        "solves": [
-          "몇부작인가요? → 총 회차수를 표로 정리해 답",
-          "원작 있나요? 결말이 어떻게 되나요? → 원작 여부와 결말을 스포 경고로 분리 안내",
-          "줄거리·출연진 궁금해요 → 한일 공조 스릴러 설정과 주연진 정리"
-        ],
-        "actionTitles": [
-          "넷플릭스 푸른길 몇부작, 공개일·줄거리 한번에 확인",
-          "넷플릭스 푸른길 원작 결말 스포 여부 확인하는 법",
-          "넷플릭스 푸른길 출연진·줄거리 총정리, 티저 공개 체크"
-        ]
-      },
-      "at": "2026-10-26T21:14:00.940Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "서인국, '월간남친' 촬영 중 근황은 어떤가요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=3031002&docId=492282241&answerNo=1&qb=64S37ZSM66at7Iqk7ZG466W46ri4",
-          "views": 75,
-          "answers": 1,
-          "askedAt": "2026.03.04"
-        },
-        {
-          "title": "‘푸른 길’, 손석구와 나가야마 에이타 케미....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10905&docId=495437514&answerNo=1&qb=64S37ZSM66at7Iqk7ZG466W46ri4",
-          "views": 66,
-          "answers": 2,
-          "askedAt": "2026.10.06"
-        },
-        {
-          "title": "'푸른 길' 공개 임박, 주변 반응은 어떤가요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10905&docId=495437513&answerNo=1&qb=64S37ZSM66at7Iqk7ZG466W46ri4",
-          "views": 58,
-          "answers": 2,
-          "askedAt": "2026.10.06"
-        }
-      ]
-    },
-    {
       "id": "d14fc1811acadd0c",
       "urls": [
         "https://dn12.tmddn14.com/entry/%EC%A0%95%EA%B8%B0%EC%98%88%EA%B8%88%EA%B8%88%EB%A6%AC%EB%B9%84%EA%B5%90%EC%82%AC%EC%9D%B4%ED%8A%B8",
@@ -3251,74 +3184,6 @@
           "views": 90,
           "answers": 1,
           "askedAt": "2026.07.27"
-        }
-      ]
-    },
-    {
-      "id": "2599d4182c8a79c7",
-      "urls": [
-        "https://www.uptoinfo.com/feeds/1093968853565416997/comments/default",
-        "https://moneynotediary.tistory.com/33"
-      ],
-      "guide": {
-        "direction": "검색자는 '파이널 테이블'이 몇부작인지, 배우-배역이 누구인지, 방송 놓쳤을 때 재방송·OTT로 어디서 볼 수 있는지가 막혀 있다. 고수 글은 기본정보·줄거리 위주라 전체 편성표와 회차별 등장인물 정리, OTT 다시보기 경로까지는 안 짚었다. 방송요일·시간표, 배우-배역 매칭표, OTT 다시보기 위치를 한 화면에 정리해 주면 검색을 끝낼 수 있다.",
-        "searchTargets": [
-          "파이널 테이블 등장인물",
-          "파이널 테이블 편성표",
-          "파이널 테이블 ott",
-          "파이널 테이블재방송"
-        ],
-        "mustInclude": [
-          "안효섭·홍화연·장률 배역명(확인 필요: 공식 포스터·제작발표회 자료)",
-          "JTBC 토일드라마 방송 요일·시간(확인 필요: JTBC 공식 편성표)",
-          "총 몇부작(확인 필요: 공식 보도자료)",
-          "원작 존재 여부(확인 필요: 원작 표기)",
-          "OTT 서비스명과 다시보기 경로(확인 필요: 공식 발표)"
-        ],
-        "mustAvoid": [
-          "배우들의 실제 요리 실력에 대한 근거 없는 평가·추측",
-          "흑백요리사 등 다른 요리 서바이벌 콘텐츠와 혼동",
-          "원작 유무를 확인 없이 단정적으로 서술"
-        ],
-        "checkBefore": [
-          "총 회차 수와 방송 요일·시간(JTBC 공식 편성표)",
-          "등장인물 배역명과 캐스팅 확정 여부(제작발표회·공식 포스터)",
-          "원작 존재 여부(공식 소개 자료의 원작 표기)"
-        ],
-        "solves": [
-          "몇부작인지 몰라 정주행 계획을 못 세움 → 총 회차·방송 요일/시간 정리",
-          "등장인물·배역이 헷갈림 → 배우-배역 매칭표 제공",
-          "방송을 놓쳤을 때 재방송·OTT 경로를 몰라 못 봄 → 재방송 편성·OTT 다시보기 위치 안내"
-        ],
-        "actionTitles": [
-          "파이널 테이블 등장인물 총정리, 배우-배역 바로 확인",
-          "파이널 테이블 ott 다시보기 경로 한눈에 찾는 법"
-        ]
-      },
-      "at": "2026-10-26T21:14:00.940Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "파이널 테이블, 요리 서바이벌 드라마로서 어....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=3010101&docId=492628948&answerNo=3&qb=7YyM7J2064SQ7YWM7J2067iU",
-          "views": 134,
-          "answers": 4,
-          "askedAt": "2026.10.24"
-        },
-        {
-          "title": "'파이널 테이블' 셰프들, 실제 요리 실력은 어....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=71104&docId=495556272&answerNo=1&qb=7YyM7J2064SQ7YWM7J2067iU",
-          "views": 99,
-          "answers": 2,
-          "askedAt": "2026.10.15"
-        },
-        {
-          "title": "드라마 '파이널 테이블'의 셰프들, 각자 어떤 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=3010102&docId=495556271&answerNo=1&qb=7YyM7J2064SQ7YWM7J2067iU",
-          "views": 77,
-          "answers": 1,
-          "askedAt": "2026.10.24"
         }
       ]
     },
@@ -4932,43 +4797,6 @@
           "askedAt": "2026.10.14"
         }
       ]
-    },
-    {
-      "id": "e9a82ece74d56895",
-      "urls": [
-        "https://beyond-the-story.tistory.com/entry/%EC%95%84%EC%9D%B4%ED%8F%B0-%EB%93%80%EC%98%A4-%EA%B8%B0%EB%8A%A5-%EA%B3%B5%EC%8B%9D-%EC%A7%80%EC%9B%90-%EC%97%AC%EB%B6%80%EF%BD%9CSplit-View%C2%B7StandBy-%EC%84%A4%EC%A0%95-%EB%B0%A9%EB%B2%95",
-        "https://supercoms.tistory.com/entry/%ED%8F%89%EC%B0%BD%EA%B4%80%EA%B4%91-%EC%95%B1-%EC%95%84%EC%9D%B4%ED%8F%B0-%EA%B3%B5%EC%8B%9D-%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C-%EB%B0%A9%EB%B2%95-%EC%8A%A4%ED%82%A4%EC%9E%A5-%EC%98%88%EC%95%BD-%EC%A0%84-%EA%B3%B5%EC%8B%9D-%EC%95%B1-%EB%A7%9E%EB%8A%94%EC%A7%80-%ED%99%95%EC%9D%B8"
-      ],
-      "guide": {
-        "direction": "검색자는 아이폰에서 안드로이드식 분할화면(Split View)이나 '듀오' 기능이 공식 지원되는지, StandBy와는 뭐가 다른지 헷갈려 한다. 고수 글은 설정법만 나열해 애플 공식 기능인지 서드파티 트릭인지 구분을 명확히 안 짚는다. 이 글은 공식 기능(StandBy)과 아이패드 전용(Split View)을 표로 구분해 끝까지 읽게 한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "StandBy는 iOS 17 이상 아이폰 공식 기능, Split View는 아이패드 전용 기능 — 구분표로 정리",
-          "아이폰에서 두 앱 동시 사용 가능한 공식 방법 정리(확인 필요: 애플 공식 지원 페이지)",
-          "평창관광 앱 아이폰 공식 다운로드 경로(App Store) 확인(확인 필요: 앱스토어 등록 여부)",
-          "기종·iOS 버전별 지원 차이 명시(확인 필요: 애플 공식 사양)"
-        ],
-        "mustAvoid": [
-          "아이폰에 없는 기능을 있다고 과장해 서드파티 앱 설치를 유도하는 서술",
-          "평창관광 앱(여행 정보 앱)과 아이폰 OS 기능(Split View·StandBy)을 같은 맥락처럼 혼동 서술"
-        ],
-        "checkBefore": [
-          "StandBy·Split View 아이폰 공식 지원 여부는 애플 공식 지원 페이지에서 확인",
-          "평창관광 앱의 실제 iOS 지원 여부는 App Store 등록 정보로 확인"
-        ],
-        "solves": [
-          "아이폰에서 분할화면이 안드로이드처럼 되는지 헷갈림 → 공식 지원 범위 표로 정리",
-          "평창관광 앱이 아이폰에서도 되는지 모름 → App Store 공식 다운로드 경로 확인법 제공"
-        ],
-        "actionTitles": [
-          "아이폰 Split View 공식 지원 여부 확인하는 법",
-          "아이폰 StandBy 모드 설정 방법 한눈에 정리",
-          "평창관광 앱 아이폰 공식 다운로드 확인하는 법"
-        ]
-      },
-      "at": "2026-10-27T09:38:53.489Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
     },
     {
       "id": "21ee45ecf9e76515",
@@ -8581,67 +8409,6 @@
       "provider": "claude"
     },
     {
-      "id": "d35cba760fde33cf",
-      "urls": [
-        "https://information.homeostasises.com/entry/%EA%B0%95%EB%AC%B4%EA%B8%B8-%EB%B6%80%EC%82%B0%EC%8B%9C%EC%9D%98%EC%9B%90-%ED%94%84%EB%A1%9C%ED%95%84%EF%BD%9C%EC%86%8C%EC%86%8D%EC%A0%95%EB%8B%B9-%EC%A7%80%EC%97%AD%EA%B5%AC%EF%BD%9C%EA%B3%A0%ED%96%A5-%EB%82%98%EC%9D%B4-%ED%95%99%EB%A0%A5-%EC%9E%AC%EC%82%B0-%EA%B0%80%EC%A1%B1%EF%BD%9C",
-        "https://mway2.tistory.com/6193"
-      ],
-      "guide": {
-        "direction": "검색자는 강무길이 어느 정당·지역구 소속 부산시의원인지부터 궁금해 들어온다. 참고 자료가 제공되지 않아 고수 글이 실제로 소속정당·지역구·재산 수치를 표로 줬는지 확인되지 않으므로, 이 글은 항목별 정리표와 출처를 명확히 밝혀 차별화한다. 독자는 소속정당·지역구·고향·나이·학력·재산을 한 표로 보고 바로 닫을 수 있어야 한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "소속정당 (확인 필요: 부산시의회 또는 선관위 후보자 정보)",
-          "지역구 명칭 (확인 필요: 부산시의회 홈페이지)",
-          "고향/출생지 (확인 필요)",
-          "학력 (확인 필요)",
-          "재산 공개액 (확인 필요: 공직자윤리위원회 관보)"
-        ],
-        "mustAvoid": [
-          "동명이인 '강무길'과 혼동",
-          "가족 관련 사생활 과도한 추측",
-          "다른 지역 시의원 프로필과 섞어 쓰기"
-        ],
-        "checkBefore": [
-          "소속정당·지역구는 부산시의회 홈페이지 또는 중앙선거관리위원회 후보자명부에서 확인",
-          "재산 내역은 공직자윤리위원회 재산공개 관보에서 확인"
-        ],
-        "solves": [
-          "강무길이 어느 정당·지역구 소속인지 모름 → 공식 자료 기반 소속정당·지역구 표로 정리",
-          "재산·학력·가족 정보가 흩어져 있음 → 항목별 한 표로 정리해 한 번에 확인"
-        ],
-        "actionTitles": [
-          "강무길 부산시의원 프로필 확인, 소속정당·지역구 한눈에 보기",
-          "강무길 소속정당·지역구·고향·나이 조건표로 확인하기"
-        ]
-      },
-      "at": "2026-10-28T18:53:46.342Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "1973년생 나이",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=814&docId=181079254&answerNo=2&qb=7J6E7YOc6rK97ZSE66Gc7ZWE",
-          "views": 24135,
-          "answers": 2,
-          "askedAt": "2013.09.23"
-        },
-        {
-          "title": "팝폐라가수 임태경씨 프로필좀 가르켜주세요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=3021401&docId=53659557&answerNo=1&qb=7J6E7YOc6rK97ZSE66Gc7ZWE",
-          "views": 12638,
-          "answers": 1,
-          "askedAt": "2003.12.28"
-        },
-        {
-          "title": "임태경 목소리같은 굵고 고음을 낼수있는 목....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=30203&docId=47044888&answerNo=4&qb=7J6E7YOc6rK97ZSE66Gc7ZWE",
-          "views": 12591,
-          "answers": 3,
-          "askedAt": "2005.08.12"
-        }
-      ]
-    },
-    {
       "id": "885858ba6a1a7b63",
       "urls": [
         "https://eziro.com/info/%ec%bf%a0%ed%8c%a1-%ec%95%88%ec%a0%84%eb%b3%b4%ea%b1%b4%ea%b5%90%ec%9c%a1-%ed%99%88%ed%8e%98%ec%9d%b4%ec%a7%80"
@@ -11241,72 +11008,6 @@
       ]
     },
     {
-      "id": "627f8eb95dbf2586",
-      "urls": [
-        "https://sweetonion1005.tistory.com/entry/%EB%B2%95%EC%9D%B8-%EA%B3%B5%EB%8F%99%EC%9D%B8%EC%A6%9D%EC%84%9C%EA%B0%80-%ED%95%84%EC%88%98%EC%9D%B8-3%EA%B0%80%EC%A7%80-%EC%9D%B4%EC%9C%A0-%EB%B3%B4%EC%95%88%C2%B7%EB%B2%95%EC%A0%81%ED%9A%A8%EB%A0%A5%C2%B7%ED%9A%A8%EC%9C%A8%EC%84%B1-%EC%99%84%EB%B2%BD-%EA%B0%80%EC%9D%B4%EB%93%9C"
-      ],
-      "guide": {
-        "direction": "검색자는 '꼭 써야 하나'가 아니라 발급 비용·갱신과 재발급 차이·복사(이동) 방법을 몰라 막혀 있다. 고수 글은 '필수인 이유 3가지'에 머물러 자동완성에 뜨는 비용·갱신·복사 질문에는 답하지 않았다. 이 글은 기관별 비용표, 갱신·재발급 조건, 복사(내보내기) 절차를 단계별로 정리해 바로 따라 하게 한다.",
-        "searchTargets": [
-          "법인 공동인증서 발급",
-          "법인 공동인증서 발급 비용",
-          "법인 공동인증서 갱신",
-          "법인 공동인증서 복사"
-        ],
-        "mustInclude": [
-          "발급기관별(코스콤·한국전자인증·금융결제원 등) 비용 비교표 (확인 필요: 각 기관 공식 홈페이지)",
-          "법인 공동인증서 발급 시 필요한 서류(사업자등록증·법인 인감 등) (확인 필요: 발급기관 안내)",
-          "갱신과 재발급의 절차·조건 차이 정리",
-          "다른 매체(USB·PC)로 복사(내보내기)하는 절차",
-          "무료 발급이 가능한 경우(홈택스 등)와 조건 (확인 필요: 국세청 홈택스 공지)"
-        ],
-        "mustAvoid": [
-          "법인 공동인증서를 금융인증서·간편인증 등 다른 인증수단과 섞어서 설명하는 것",
-          "개인용 공동인증서와 법인용 공동인증서를 같은 발급 절차로 혼동해 서술하는 것"
-        ],
-        "checkBefore": [
-          "코스콤·한국전자인증·금융결제원 등 발급기관 공식 홈페이지에서 최신 비용·절차 확인",
-          "국세청 홈택스 공지에서 무료 발급 가능 조건 확인"
-        ],
-        "solves": [
-          "발급기관마다 비용이 다른데 어디가 저렴한지 모른다 → 기관별 비용 비교표 제공",
-          "기존 인증서를 다른 매체로 옮기는(복사·내보내기) 방법을 모른다 → 단계별 절차 정리",
-          "갱신 시기와 재발급의 차이가 헷갈린다 → 조건별 비교 정리"
-        ],
-        "actionTitles": [
-          "법인 공동인증서 발급 비용 비교, 무료 발급 조건 확인",
-          "법인 공동인증서 갱신과 재발급 차이 한눈에 확인",
-          "법인 공동인증서 복사(내보내기) 방법과 종류 정리"
-        ]
-      },
-      "at": "2026-10-29T06:44:46.095Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "표현의 자유",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=80101&docId=495646170&answerNo=9&qb=67KV7J24IOqzteuPmeyduOymneyEnCDtlYTsiJjsnbgg67O07JWIIOuyleygge2aqOugpQ==",
-          "views": 8327,
-          "answers": 9,
-          "askedAt": "2026.10.29"
-        },
-        {
-          "title": "컴퓨터등 사용 사기죄",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6020604&docId=493994332&answerNo=8&qb=67KV7J24IOqzteuPmeyduOymneyEnCDtlYTsiJjsnbgg67O07JWIIOuyleygge2aqOugpQ==",
-          "views": 592,
-          "answers": 9,
-          "askedAt": "2026.08.24"
-        },
-        {
-          "title": "재개발·재건축 전자동의 시스템 도입으로 인....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60202&docId=488607078&answerNo=1&qb=67KV7J24IOqzteuPmeyduOymneyEnCDtlYTsiJjsnbgg67O07JWIIOuyleygge2aqOugpQ==",
-          "views": 269,
-          "answers": 2,
-          "askedAt": "2025.09.05"
-        }
-      ]
-    },
-    {
       "id": "5e22ee2905b5c079",
       "urls": [
         "https://filldream.co.kr/entry/%EB%B6%80%EB%8F%99%EC%82%B0-%EC%86%8C%EC%95%A1-%ED%88%AC%EC%9E%90-%ED%94%8C%EB%9E%AB%ED%8F%BC-P2P-%EB%B0%8F-%EB%A6%AC%EC%B8%A0REITs-%EC%83%81%ED%92%88-%EC%9E%A5%EB%8B%A8%EC%A0%90-%EB%B6%84%EC%84%9D"
@@ -11415,65 +11116,6 @@
           "views": 984,
           "answers": 15,
           "askedAt": "2025.10.14"
-        }
-      ]
-    },
-    {
-      "id": "4cc143ad058a5563",
-      "urls": [
-        "https://sogon90.tistory.com/598"
-      ],
-      "guide": {
-        "direction": "검색자는 마이크로소프트 다음 실적발표가 언제·몇 시인지, 이번 수치가 예상치와 비교해 어땠는지 몰라 막혀 있다. '매출 923억 달러·Azure 48%' 류 글은 숫자는 주지만 다음 발표 일정(한국시간)이나 예상치 대비 비교표는 빠진 경우가 많다. 이 글은 실적 수치 비교표와 다음 발표 일정 정리로 바로 확인하게 끝내준다.",
-        "searchTargets": [
-          "마이크로소프트 실적발표일",
-          "마이크로소프트 실적발표 날짜",
-          "마이크로소프트 실적발표 시간",
-          "마이크로소프트 실적발표 예상"
-        ],
-        "mustInclude": [
-          "이번 실적 매출 923억 달러, Azure 48% 성장률",
-          "다음 실적발표 예정 일시 및 한국시간 환산(확인 필요: MS IR 페이지)",
-          "전분기·전년동기 대비 비교표(확인 필요: 실적발표 원문)",
-          "AI 투자비와 현금흐름 수치(확인 필요: 실적발표 자료)"
-        ],
-        "mustAvoid": [
-          "구글 등 다른 빅테크 실적과 수치를 섞어 혼동 주지 않기",
-          "주가 전망을 투자 추천처럼 단정적으로 서술하지 않기",
-          "회계연도 분기(1분기·3분기 등) 표기를 혼동하지 않기"
-        ],
-        "checkBefore": [
-          "정확한 실적발표 날짜·시간은 마이크로소프트 IR 공식 발표로 확인",
-          "매출·Azure 성장률 등 수치는 실적발표 원문(보도자료·어닝콜)으로 재확인"
-        ],
-        "solves": [
-          "실적발표가 언제인지 몰라 헷갈림 → 발표 일정과 한국시간 환산 제공",
-          "매출·Azure 성장률이 예상치와 비교해 어땠는지 궁금 → 비교표로 정리",
-          "AI 투자비가 현금흐름에 준 영향이 궁금 → 투자비·현금흐름 분석 제공"
-        ],
-        "actionTitles": [
-          "마이크로소프트 실적발표 날짜·시간 한국시간 확인",
-          "마이크로소프트 실적 매출·Azure 성장률 비교 정리",
-          "마이크로소프트 실적발표 예상치 vs 결과 한눈에 비교"
-        ]
-      },
-      "at": "2026-10-29T06:44:46.095Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "구글 주가 분석 해주실 수 있나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=485452772&answerNo=2&qb=66eI7J207YGs66Gc7IaM7ZSE7Yq4IOyLpOyggSDrsJztkZzrp6Tstpwg64us65+sIGF6dXJl",
-          "views": 572,
-          "answers": 4,
-          "askedAt": "2025.05.26"
-        },
-        {
-          "title": "마이크로소프트 주가 흐름 예상 하시나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=409&docId=485452780&answerNo=1&qb=66eI7J207YGs66Gc7IaM7ZSE7Yq4IOyLpOyggSDrsJztkZzrp6Tstpwg64us65+sIGF6dXJl",
-          "views": 415,
-          "answers": 2,
-          "askedAt": "2025.05.24"
         }
       ]
     },
@@ -12422,58 +12064,6 @@
           "views": 160,
           "answers": 6,
           "askedAt": "2026.09.30"
-        }
-      ]
-    },
-    {
-      "id": "171e95f1d348020f",
-      "urls": [
-        "https://nikita20224.maelyeogtamheom.com/256",
-        "https://yjfreelifestyle.tistory.com/entry/%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90-2026%EB%85%84-3%EB%B6%84%EA%B8%B0-%EC%8B%A4%EC%A0%81-%EB%B0%9C%ED%91%9C-%ED%95%B5%EC%8B%AC-%EC%A0%95%EB%A6%AC%EF%BD%9C%EC%98%81%EC%97%85%EC%9D%B4%EC%9D%B5-1074%EC%A1%B0%C2%B7%EC%BB%A8%ED%8D%BC%EB%9F%B0%EC%8A%A4%EC%BD%9C%C2%B7%EB%B0%B0%EB%8B%B9-4601%EC%9B%90"
-      ],
-      "guide": {
-        "direction": "지식인 질문은 실적 발표를 앞두고 숫자보다 컨퍼런스콜 멘트로 매수매도를 판단하는 법을 묻는다. 고수 블로그는 영업이익 107.4조·배당 4,601원 숫자는 정리했지만, 그 멘트가 왜 주가 하락으로 이어졌는지와 배당 지급일정은 표로 안 보여준다. 독자는 발표일시·배당액·지급일·컨콜 핵심 멘트를 한 표로 받아 글을 끝낼 수 있다.",
-        "searchTargets": [
-          "삼성전자 실적발표 3분기",
-          "삼성전자 실적발표일",
-          "삼성전자 실적발표 시간",
-          "삼성전자 실적 전망"
-        ],
-        "mustInclude": [
-          "영업이익 107.4조 원 등 3분기 실적 수치(확인 필요: DART 공시)",
-          "배당금 4,601원과 지급일정(확인 필요: 삼성전자 IR)",
-          "실적발표 일시(날짜·시간) 표",
-          "컨퍼런스콜 Q&A 중 HBM/AI 관련 핵심 멘트 요약",
-          "전분기(2분기) 실적과 비교표"
-        ],
-        "mustAvoid": [
-          "단기 주가를 확정적으로 예측하는 투자 조언처럼 쓰는 것",
-          "2분기·4분기 실적 발표와 날짜 혼동"
-        ],
-        "checkBefore": [
-          "삼성전자 IR 홈페이지·DART 공시에서 실제 영업이익·배당액 확인",
-          "컨퍼런스콜 녹취·보도자료에서 HBM/AI 관련 발언 원문 확인"
-        ],
-        "solves": [
-          "실적 발표 앞두고 매수매도 고민 → 컨콜 핵심 멘트와 숫자를 분리해 정리",
-          "실적발표일이 언제인지 모름 → 발표일시 표로 제공",
-          "배당 언제 받는지 모름 → 배당액·지급일정 정리"
-        ],
-        "actionTitles": [
-          "삼성전자 3분기 실적발표 일정 확인, 배당 4,601원 지급일은",
-          "삼성전자 실적발표 시간·날짜 정리, 컨콜 핵심 멘트까지 확인"
-        ]
-      },
-      "at": "2026-10-29T14:07:22.731Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "삼성전자 실적 발표 앞두고 고민입니다....주....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=494415867&answerNo=6&qb=7IK87ISx7KCE7J6QIOyLpOyggSDtlbXsi6wg7KCV66as7JiB7JeF7J207J21IOy7qO2NvOufsOyKpOy9nA==",
-          "views": 881,
-          "answers": 12,
-          "askedAt": "2026.07.22"
         }
       ]
     },
