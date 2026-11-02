@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T10:38:58.253Z",
+ "builtAt": "2026-11-02T10:49:01.843Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,101 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 23,
  "candidates": [
-  {
-   "keyword": "LX홀딩스 CFO 선임",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 18,
-   "recent20": 1,
-   "press": 18,
-   "firstArticleAt": "2026-11-02T09:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "LX홀딩스, 정기 임원 인사… CFO에 염민석 상무",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-02T10:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202064?sid=101"
-    },
-    {
-     "title": "LX홀딩스, 재무·기획 인재 전진배치…염민석 CFO 선임",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-02T10:16:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026110218160697122"
-    },
-    {
-     "title": "LX홀딩스, 염민석 CFO 선임…정기 임원인사 단행",
-     "press": "daily.hankooki.com",
-     "publishedAt": "2026-11-02T09:58:00.000Z",
-     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1420941"
-    }
-   ]
-  },
-  {
-   "keyword": "브로드컴 과징금 확정",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 15,
-   "recent20": 8,
-   "press": 14,
-   "firstArticleAt": "2026-11-02T09:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "삼성전자에 '부품 갑질'…대법, 美 브로드컴 철퇴",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-02T10:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005349420?sid=102"
-    },
-    {
-     "title": "美브로드컴, ‘삼성전자 장기계약 강요’ 과징금 취소 소송 최종 패소",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-02T10:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000160186?sid=101"
-    },
-    {
-     "title": "삼성전자에 '3년 구매계약' 강요…브로드컴 186억 과징금 확정",
-     "press": "ziksir.com",
-     "publishedAt": "2026-11-02T10:34:00.000Z",
-     "link": "https://www.ziksir.com/news/articleView.html?idxno=151757"
-    }
-   ]
-  },
   {
    "keyword": "코스피 반등 마감",
    "sources": [
     "signal.bz"
    ],
    "articles90": 7,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-02T09:09:00.000Z",
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-02T09:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'인텔 쇼크' 주식창 열기 겁났는데…코스피는 반등, 왜?",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-02T10:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000518763?sid=101"
+    },
+    {
+     "title": "[주식마감] '합병 결정' 샘표·샘표식품 상한가... 디티에스, HLB바이오스...",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-02T10:40:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1190590"
+    },
     {
      "title": "코스피, 하락 출발 뒤 2.24% 상승 마감",
      "press": "vegannews.co.kr",
      "publishedAt": "2026-11-02T10:24:00.000Z",
      "link": "https://www.vegannews.co.kr/news/article.html?no=399634"
+    }
+   ]
+  },
+  {
+   "keyword": "박항서 감독 인종차별",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-02T09:43:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "박항서 향해 “김치맨”…태국 관중들 인종차별",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-02T10:39:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/658/0000160194"
     },
     {
-     "title": "[채권-마감] 금리 반등…중동 협상 기대에 위험선호 강화",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-02T09:56:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4442596"
+     "title": "“김치맨” 인종차별에…박항서 “내려와!” 항의",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-02T10:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000366135?sid=102"
     },
     {
-     "title": "미 기술주 급락에도…코스피 2%대 상승 마감",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-02T09:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922103?sid=101"
+     "title": "“태국이 감히 우리 박항서 감독을 욕해?”…베트남 언론도 격분, “매...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-02T10:29:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/109/0005633235"
     }
    ]
   },
@@ -131,23 +99,118 @@
      "link": "https://www.gukjenews.com/news/articleView.html?idxno=3740051"
     },
     {
-     "title": "박수현 지사, 논산서 ‘충남통행’ 국방산단·AI 방산혁신클러스터 조성...",
+     "title": "박수현 충남지사 “글로벌 기업 투자, 3력혁신·광속행정으로 뒷받침”",
      "press": "breaknews.com",
      "publishedAt": "2026-11-02T09:42:00.000Z",
-     "link": "http://www.breaknews.com/1247676"
+     "link": "http://www.breaknews.com/1247664"
+    }
+   ]
+  },
+  {
+   "keyword": "4일 헌정회 오찬",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-02T09:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이 대통령, 4일 헌정회 회장단과 오찬…\"오랜 경륜과 지혜 경청\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-02T10:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400029?sid=100"
+    },
+    {
+     "title": "이 대통령, 4일 헌정회 초청 오찬...“경륜·지혜 경청할 것”",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-02T09:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003562269?sid=100"
+    },
+    {
+     "title": "이 대통령, 4일 헌정회 회장단과 오찬…\"오랜 경륜·지혜 경청\"",
+     "press": "kado.net",
+     "publishedAt": "2026-11-02T09:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000208909?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "영원한 아버지 최불암께",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-02T09:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'국민 아버지' 최불암 영면…눈물바다 된 마지막 배웅",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-02T10:23:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/057/0001976353"
+    },
+    {
+     "title": "故최불암, 인자한 미소 남기고 영면…‘국민 아버지’ 안녕히",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-02T10:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000366116?sid=102"
+    },
+    {
+     "title": "'국민 아버지' 故 최불암, 눈물 속에 영원한 평안에 들다",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-02T09:24:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1134523"
+    }
+   ]
+  },
+  {
+   "keyword": "낮과 밤은 서로에게",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 8,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T09:39:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[포토] 인사말 하는 전소영 (낮과 밤은 서로에게)",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-02T10:38:00.000Z",
+     "link": "https://www.ajunews.com/view/20261102193559558"
+    },
+    {
+     "title": "[포토] 인사말 하는 주종혁 (낮과 밤은 서로에게)",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-02T10:36:00.000Z",
+     "link": "https://www.ajunews.com/view/20261102193401557"
+    },
+    {
+     "title": "[포토] 인사말 하는 김민하 (낮과 밤은 서로에게)",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-02T10:34:00.000Z",
+     "link": "https://www.ajunews.com/view/20261102193253555"
     }
    ]
   },
   {
    "keyword": "송미령 장관, 벼 수확 참여",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-02T09:10:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-02T09:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -170,140 +233,11 @@
      "link": "https://n.news.naver.com/mnews/article/656/0000191273?sid=102"
     }
    ]
-  },
-  {
-   "keyword": "박항서 감독 인종차별",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-02T09:43:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“김치맨” 인종차별에…박항서 “내려와!” 항의",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-02T10:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000366135?sid=102"
-    },
-    {
-     "title": "“태국이 감히 우리 박항서 감독을 욕해?”…베트남 언론도 격분, “매...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-02T10:29:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/109/0005633235"
-    },
-    {
-     "title": "“XX 김치맨” 욕설에 박항서 극대노…태국 프로축구 인종차별 논란",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-02T10:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012285616?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "낮과 밤은 서로에게 영화 이야기",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-02T09:11:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "좋은데 지루하고, 지루한 게 또 좋다…‘낮과 밤은 서로에게’ [한현정...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-02T09:54:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005757870"
-    },
-    {
-     "title": "'낮과 밤은 서로에게' 심은경 \"김종관 감독 차분함에 용기 가져\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-02T09:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/001/0016417022"
-    },
-    {
-     "title": "[영상] 장률-한선화, \"눈빛의 앙상블 잊지 못해\"(낮과 밤은 서로에게)",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-02T09:19:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000326403"
-    }
-   ]
-  },
-  {
-   "keyword": "가덕도 신공항 공사비 증액",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T09:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[사설] 가덕도신공항 착공 늦춘 정부, 공사비 증액 확약하라",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-02T10:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000160188?sid=110"
-    },
-    {
-     "title": "가덕도신공항 11월 우선 착공 불발...공사비 증액 '특별법'에 일정 또 지...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-02T09:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000963174?sid=101"
-    },
-    {
-     "title": "국힘 부산의원들 \"가덕도신공항, 정부가 공사비 증액 문제 해결해야\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-02T09:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001976341?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "샤이니 민호 마라톤 조력 논란",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T09:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "샤이니 민호, 풀코스 완주→반칙 논란→'실격 처리' 빗발…\"페이스메이...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-02T09:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001406873"
-    },
-    {
-     "title": "샤이니 민호, 마라톤 완주 후 '등 밀어주기' 논란…실격 요구까지 나온...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-02T09:44:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16266377"
-    },
-    {
-     "title": "샤이니 민호 마라톤 완주, 시끄러운 이유…등을 밀어줬다?",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-02T09:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001071558?sid=102"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 153,
+  "flagged": 155,
   "matched": 42,
   "avgLeadMin": 83,
   "recent": [
