@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T15:50:27.664Z",
+ "builtAt": "2026-11-02T16:00:31.451Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,15 +8,47 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
+  {
+   "keyword": "코스피 반등 마감",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-02T14:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘검은 월요일’ 없었다… 코스피, 예상 뒤집고 반등",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-02T15:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004007358?sid=101"
+    },
+    {
+     "title": "'인텔 쇼크' 떨었는데 2% 반등‥상승세 이어가나",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-02T15:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533054?sid=101"
+    },
+    {
+     "title": "美나스닥 반등·유가 6% 급락…코스피 2.24% 상승에도 외국인 '삼전닉스...",
+     "press": "greened.kr",
+     "publishedAt": "2026-11-02T15:03:00.000Z",
+     "link": "https://www.greened.kr/news/articleView.html?idxno=353679"
+    }
+   ]
+  },
   {
    "keyword": "대한민국",
    "sources": [
     "google"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-02T14:54:00.000Z",
    "exclusive": false,
@@ -39,38 +71,6 @@
      "press": "munhwa.com",
      "publishedAt": "2026-11-02T14:56:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/021/0002829735?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "코스피 반등 마감",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T14:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘검은 월요일’ 없었다… 코스피, 예상 뒤집고 반등",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-02T15:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004007358?sid=101"
-    },
-    {
-     "title": "美나스닥 반등·유가 6% 급락…코스피 2.24% 상승에도 외국인 '삼전닉스...",
-     "press": "greened.kr",
-     "publishedAt": "2026-11-02T15:03:00.000Z",
-     "link": "https://www.greened.kr/news/articleView.html?idxno=353679"
-    },
-    {
-     "title": "[저PBR주 강세 마감] 현대제철 11%·롯데쇼핑 9% 급등…낮은 밸류에이션...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-02T14:40:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=622294"
     }
    ]
   }
