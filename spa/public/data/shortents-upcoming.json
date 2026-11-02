@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T10:18:51.154Z",
+ "builtAt": "2026-11-02T10:28:54.932Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,81 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 28,
  "candidates": [
-  {
-   "keyword": "기아 10월 판매 증가",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 16,
-   "recent20": 1,
-   "press": 16,
-   "firstArticleAt": "2026-11-02T08:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국산차 10월 판매, 68만대 돌파…기아·GM 선전에 1.5% 증가",
-     "press": "autotimes.co.kr",
-     "publishedAt": "2026-11-02T10:06:00.000Z",
-     "link": "http://autotimes.co.kr/detail.php?number=689798&thread=27"
-    },
-    {
-     "title": "기아, 현대차 제치고 내수 1위…완성차 5개사 10월 실적 희비",
-     "press": "digitalchosun.dizzo.com",
-     "publishedAt": "2026-11-02T09:44:00.000Z",
-     "link": "http://digitalchosun.dizzo.com/site/data/html_dir/2026/11/02/2026110280226.html"
-    },
-    {
-     "title": "기아·한국GM이 살린 10월 … 완성차 5사 판매 68만대·1.7%↑",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-02T09:28:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/02/2026110200379.html"
-    }
-   ]
-  },
-  {
-   "keyword": "애경산업 3분기 최대매출 적자",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-02T08:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "애경산업, 3분기 매출 1904억원 '역대 최대'…영업손실 33억원",
-     "press": "econonews.co.kr",
-     "publishedAt": "2026-11-02T10:18:00.000Z",
-     "link": "http://www.econonews.co.kr/news/articleView.html?idxno=446620"
-    },
-    {
-     "title": "애경산업, 3분기 매출 신기록에도 영업손실…브랜드 투자 확대에 비용 ...",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-02T10:10:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=845971"
-    },
-    {
-     "title": "애경산업, 3분기 매출 1904억 ‘역대 최대’…영업손실 33억",
-     "press": "fntimes.com",
-     "publishedAt": "2026-11-02T09:58:00.000Z",
-     "link": "https://www.fntimes.com/html/view.php?ud=202611021855467796b5b890e35c_18"
-    }
-   ]
-  },
   {
    "keyword": "대전 스토킹 살해 신상공개",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 1,
-   "press": 15,
-   "firstArticleAt": "2026-11-02T08:52:00.000Z",
+   "articles90": 13,
+   "recent20": 0,
+   "press": 13,
+   "firstArticleAt": "2026-11-02T09:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -99,10 +35,42 @@
      "link": "https://n.news.naver.com/mnews/article/016/0002717800?sid=102"
     },
     {
-     "title": "'대전 교제 살인' 40대 신상공개 결정…피의자 이의제기에 일시 유예",
-     "press": "news1.kr",
+     "title": "대전 전 연인 살해 40대 신상공개 결정…이의제기로 9일 이후 공개(종합...",
+     "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-02T09:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009265662?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/079/0004205679?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "코스피 반등 마감",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 10,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-02T09:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "코스피, 하락 출발 뒤 2.24% 상승 마감",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-02T10:24:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=399634"
+    },
+    {
+     "title": "[채권-마감] 금리 반등…중동 협상 기대에 위험선호 강화",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-02T09:56:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4442596"
+    },
+    {
+     "title": "미 기술주 급락에도…코스피 2%대 상승 마감",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-02T09:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922103?sid=101"
     }
    ]
   },
@@ -111,13 +79,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 14,
+   "articles90": 8,
    "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-02T08:50:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-02T09:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "기아는 SUV로 좁히고 현대차는 신차로 반격…'9915대' 남은 내수 경쟁",
+     "press": "the-pr.co.kr",
+     "publishedAt": "2026-11-02T10:20:00.000Z",
+     "link": "https://www.the-pr.co.kr/news/articleView.html?idxno=63126"
+    },
     {
      "title": "현대차, 10월 글로벌 판매 32만9773대…전년 대비 6.3% 감소",
      "press": "econonews.co.kr",
@@ -129,44 +103,6 @@
      "press": "digitalchosun.dizzo.com",
      "publishedAt": "2026-11-02T09:44:00.000Z",
      "link": "http://digitalchosun.dizzo.com/site/data/html_dir/2026/11/02/2026110280226.html"
-    },
-    {
-     "title": "현대차 울산 제네시스 생산라인 멈췄다…신차 투입 갈등",
-     "press": "iusm.co.kr",
-     "publishedAt": "2026-11-02T09:36:00.000Z",
-     "link": "https://www.iusm.co.kr/news/articleView.html?idxno=1069978"
-    }
-   ]
-  },
-  {
-   "keyword": "코스피",
-   "sources": [
-    "google"
-   ],
-   "articles90": 13,
-   "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-02T08:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "코스피, '블랙먼데이' 우려 딛고 2%대 상승…5800선 회복",
-     "press": "paxetv.com",
-     "publishedAt": "2026-11-02T09:54:00.000Z",
-     "link": "http://www.paxetv.com/news/articleView.html?idxno=285888"
-    },
-    {
-     "title": "[집중진단] 코스피 구원투수된 '연기금·하이닉스'…코스피 공포 딛고 ...",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-02T09:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000541244?sid=101"
-    },
-    {
-     "title": "[밸류업시그널③] \"저PBR 낙인 시작\"… 코스피 '유통사' 0.15~0.17배 수준",
-     "press": "economytalk.kr",
-     "publishedAt": "2026-11-02T09:50:00.000Z",
-     "link": "http://www.economytalk.kr/news/articleView.html?idxno=425029"
     }
    ]
   },
@@ -175,10 +111,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-02T08:52:00.000Z",
+   "articles90": 9,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-02T09:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -203,14 +139,46 @@
    ]
   },
   {
-   "keyword": "송미령 장관 벼 수확",
+   "keyword": "낮과 밤은 서로에게 영화 이야기",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 9,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-02T08:57:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-02T09:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "좋은데 지루하고, 지루한 게 또 좋다…‘낮과 밤은 서로에게’ [한현정...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-02T09:54:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005757870"
+    },
+    {
+     "title": "'낮과 밤은 서로에게' 심은경 \"김종관 감독 차분함에 용기 가져\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-02T09:39:00.000Z",
+     "link": "https://m.entertain.naver.com/article/001/0016417022"
+    },
+    {
+     "title": "[영상] 장률-한선화, \"눈빛의 앙상블 잊지 못해\"(낮과 밤은 서로에게)",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-02T09:19:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000326403"
+    }
+   ]
+  },
+  {
+   "keyword": "송미령 장관, 벼 수확 참여",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-02T09:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -235,14 +203,14 @@
    ]
   },
   {
-   "keyword": "샤이니 민호, 마라톤 논란",
+   "keyword": "샤이니 민호 마라톤 조력 논란",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 5,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-02T08:53:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-02T09:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -253,61 +221,28 @@
      "link": "https://m.entertain.naver.com/article/213/0001406873"
     },
     {
-     "title": "[DM왔어요] 샤이니 민호 마라톤 완주에 ‘반칙 논란’…\"뒤에서 누가 밀...",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-02T09:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922109?sid=102"
-    },
-    {
      "title": "샤이니 민호, 마라톤 완주 후 '등 밀어주기' 논란…실격 요구까지 나온...",
      "press": "topstarnews.net",
      "publishedAt": "2026-11-02T09:44:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16266377"
-    }
-   ]
-  },
-  {
-   "keyword": "지방우대지수 개선 촉구",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-02T08:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "남양주시, 지방우대지수 개선 촉구",
-     "press": "sentv.co.kr",
-     "publishedAt": "2026-11-02T09:50:00.000Z",
-     "link": "https://www.sentv.co.kr/article/view/sentv202611020079"
     },
     {
-     "title": "남양주시, 지방우대지수 1권역 분류에 반발해 3권역 재지정 촉구",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-02T09:18:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2013369"
-    },
-    {
-     "title": "\"현실 모르는 지방우대지수…5극3특 정책과도 배치\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-02T09:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205666?sid=102"
+     "title": "샤이니 민호 마라톤 완주, 시끄러운 이유…등을 밀어줬다?",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-02T09:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001071558?sid=102"
     }
    ]
   },
   {
    "keyword": "경찰 수사개혁위 권고안 발표",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-02T08:55:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-02T09:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -330,11 +265,43 @@
      "link": "https://n.news.naver.com/mnews/article/448/0000648495?sid=102"
     }
    ]
+  },
+  {
+   "keyword": "하남시",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T09:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이현재 하남시장 \"구직 시민과 기업 한자리서 연결\"…온세대 일자리박람...",
+     "press": "thepublic.kr",
+     "publishedAt": "2026-11-02T09:32:00.000Z",
+     "link": "https://www.thepublic.kr/news/articleView.html?idxno=324680"
+    },
+    {
+     "title": "하남시, 한강 폐천부지 토양정화 소송 1심 승소",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-02T09:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002534383?sid=100"
+    },
+    {
+     "title": "하남시, 일자리박람회 2천여 명 참여...49개 기업",
+     "press": "discoverynews.kr",
+     "publishedAt": "2026-11-02T09:04:00.000Z",
+     "link": "https://www.discoverynews.kr/news/articleView.html?idxno=1105504"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 146,
+  "flagged": 150,
   "matched": 34,
   "avgLeadMin": 65,
   "recent": [
