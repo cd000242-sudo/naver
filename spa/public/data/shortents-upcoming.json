@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T04:05:26.230Z",
+ "builtAt": "2026-11-02T04:15:28.991Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 11,
+ "measured": 20,
  "candidates": [
   {
    "keyword": "인사하는 이재명 대통령",
@@ -16,30 +16,62 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 69,
-   "recent20": 9,
-   "press": 24,
+   "articles90": 71,
+   "recent20": 4,
+   "press": 26,
    "firstArticleAt": "2026-11-02T03:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "[종합] 李대통령 \"불평등 'K자 성장' 한계 극복...성장·분배 낡은 논쟁...",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-02T04:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002393107?sid=100"
+    },
+    {
+     "title": "[시정연설] 피켓 든 野 의원들 사이로 들어선 李대통령…조희대엔 \"잘 ...",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-02T04:08:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=747439"
+    },
+    {
      "title": "“대통령 아들부터 본인 살 집 직접 구하라고 하라”",
      "press": "naeil.com",
      "publishedAt": "2026-11-02T04:04:00.000Z",
      "link": "https://www.naeil.com/news/read/607219?ref=naver"
+    }
+   ]
+  },
+  {
+   "keyword": "lafc",
+   "sources": [
+    "google"
+   ],
+   "articles90": 17,
+   "recent20": 10,
+   "press": 16,
+   "firstArticleAt": "2026-11-02T03:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'손흥민 3경기 연속 침묵' LAFC, 미네소타에 1-3 완패…4위 달성 무산",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-02T04:12:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109664269031"
     },
     {
-     "title": "“재판 재개하라” vs “이재명 파이팅”…시정연설 여야 온도차 ‘뚜렷...",
+     "title": "미네소타 수비에 꽁꽁묶인 손흥민...LAFC도 1-3 완패",
      "press": "mk.co.kr",
-     "publishedAt": "2026-11-02T04:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005757533?sid=100"
+     "publishedAt": "2026-11-02T04:09:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/410/0001145728"
     },
     {
-     "title": "\"나라 빚 외면\" 국힘 구호에 이 대통령이 내놓은 답변",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-02T03:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002534314?sid=100"
+     "title": "손흥민 3경기째 침묵, LAFC도 웃지 못했다…PO 상위 시드 불발",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-02T04:08:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/025/0003562165"
     }
    ]
   },
@@ -48,30 +80,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 19,
-   "recent20": 3,
-   "press": 18,
-   "firstArticleAt": "2026-11-02T02:36:00.000Z",
+   "articles90": 15,
+   "recent20": 4,
+   "press": 15,
+   "firstArticleAt": "2026-11-02T02:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "강원 철원 육군 부대서 20대 하사 숨진 채 발견…군·경찰 조사",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-02T04:10:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=778332"
+    },
+    {
+     "title": "[속보] 강원 철원 전방 부대서 부사관 숨진 채 발견",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-02T04:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000130180?sid=102"
+    },
     {
      "title": "육군 전방 부대서 부사관 총상 사망·공군 KT-1 훈련기 공중 접촉 비상 ...",
      "press": "fnnews.com",
      "publishedAt": "2026-11-02T04:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/014/0005597976?sid=100"
-    },
-    {
-     "title": "철원 전방 소초서 20대 하사 숨져",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-02T04:01:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261102000995"
-    },
-    {
-     "title": "철원 전방부대서 하사 사망…군 당국, 부대 내 사고 원인 조사 착수",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-02T03:54:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=845915"
     }
    ]
   },
@@ -81,10 +113,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-02T02:45:00.000Z",
+   "articles90": 10,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-02T02:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -109,15 +141,111 @@
    ]
   },
   {
+   "keyword": "저pbr 기업 151 명단",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 8,
+   "recent20": 3,
+   "press": 8,
+   "firstArticleAt": "2026-11-02T02:47:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "11월 증시, 미국발 빅 이벤트보다 김현정 쇼크...기업가치 제고 법적 의...",
+     "press": "financialpost.co.kr",
+     "publishedAt": "2026-11-02T04:08:00.000Z",
+     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=283993"
+    },
+    {
+     "title": "‘저PBR’ 상장사 151곳 첫 공개…평균 PBR 0.25배",
+     "press": "naeil.com",
+     "publishedAt": "2026-11-02T04:02:00.000Z",
+     "link": "https://www.naeil.com/news/read/607203?ref=naver"
+    },
+    {
+     "title": "[특징주] 저PBR 기업 첫 공개에 관련株 '강세'",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-02T04:00:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261102000693"
+    }
+   ]
+  },
+  {
+   "keyword": "조경태 악수",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 9,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-02T02:46:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "연설끝나고 악수하는 李 대통령과 조경태 의원",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-02T03:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001882376?sid=100"
+    },
+    {
+     "title": "[단독]李와 홀로 악수…국힘 조경태 \"정치인의 기본 덕목\"",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-02T03:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006402064?sid=100"
+    },
+    {
+     "title": "홀로 남아 이재명 대통령과 인사하는 조경태 국민의힘 의원",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-02T03:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003150153?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "mls",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-02T03:13:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[MLS REVIEW] '손흥민 3경기째 침묵하자 LAFC도 와르르'…하위권 미네소...",
+     "press": "interfootball.co.kr",
+     "publishedAt": "2026-11-02T04:05:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/413/0000226028"
+    },
+    {
+     "title": "[MLS REVIEW] '손흥민 3경기 연속 침묵→LAFC 대참사!' 하위권 미네소타에...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-02T03:53:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/477/0000636559"
+    },
+    {
+     "title": "[MLS 리뷰] '초비상!' 손흥민, 결국 고배 삼켰다...LAFC, 미네소타전 1-3...",
+     "press": "sportalkorea.com",
+     "publishedAt": "2026-11-02T03:44:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/139/0002255410"
+    }
+   ]
+  },
+  {
    "keyword": "구룡마을 화재 감식",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 21,
+   "articles90": 19,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-02T02:39:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-02T02:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -138,38 +266,6 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-02T03:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016415908?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "집단소송법 서명 캠페인 기자회견",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-02T02:39:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "광화문 광장에서 열린 집단소송법 제정 위한 10만 서명 캠페인 기자회견",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-02T03:37:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261102000967"
-    },
-    {
-     "title": "구호 외치는 집단소송법 제정연대",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-02T03:37:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261102000968"
-    },
-    {
-     "title": "광화문광장서 기자회견하는 집단소송법 제정연대",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-02T03:37:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261102000970"
     }
    ]
   },
@@ -208,7 +304,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 23,
+  "flagged": 27,
   "matched": 3,
   "avgLeadMin": 29,
   "recent": [
