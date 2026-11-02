@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T22:02:31.865Z",
+ "builtAt": "2026-11-02T22:12:35.145Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "국제유가 급락",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 43,
-   "recent20": 5,
-   "press": 31,
-   "firstArticleAt": "2026-11-02T20:34:00.000Z",
+   "articles90": 45,
+   "recent20": 7,
+   "press": 33,
+   "firstArticleAt": "2026-11-02T20:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "유가 급락에 숨통 트인 증시…코스피, 기술주 약세 돌파하나",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-02T22:00:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1730189"
+     "title": "국제유가 급락에도 기술주 매도세 지속…나스닥 1.07% ↓ [뉴욕증시 브리...",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-02T22:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005349474?sid=101"
     },
     {
-     "title": "[뉴욕증시]선거 D-1 혼조 마감…유가 급락·기술주 매도세 영향",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-02T21:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005836992?sid=101"
+     "title": "미국증시 혼조 마감…국제유가 급락에도 AI주 매도세, 나스닥 1.07% 하락",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-02T22:10:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16266605"
     },
     {
-     "title": "유가 7.4% 급락에도 기술주 ‘팔자’…나스닥 1.07%↓",
-     "press": "kbmaeil.com",
-     "publishedAt": "2026-11-02T21:48:00.000Z",
-     "link": "https://www.kbmaeil.com/article/20261103500008"
-    }
-   ]
-  },
-  {
-   "keyword": "미·이란 협상에 유가 급락",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 34,
-   "recent20": 4,
-   "press": 27,
-   "firstArticleAt": "2026-11-02T20:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "유가 하락도 못 살린 기술주 매도…나스닥 1.1%↓",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-02T21:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002717857?sid=104"
-    },
-    {
-     "title": "트럼프, 선거 후 이란 공격 재개에 “아니다…서두를 것 없다”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-02T21:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012285951?sid=104"
-    },
-    {
-     "title": "[뉴욕증시]선거 D-1 혼조 마감…유가 급락·기술주 매도세 영향",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-02T21:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005836992?sid=101"
+     "title": "유가 급락에도 기술주 매도…AI·반도체 불안 지속[뉴욕마감]",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-02T22:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005435561?sid=101"
     }
    ]
   },
@@ -79,30 +47,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 25,
-   "recent20": 11,
-   "press": 24,
+   "articles90": 34,
+   "recent20": 13,
+   "press": 30,
    "firstArticleAt": "2026-11-02T21:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보]北김여정, 바이낸스 사태에 “美 정치적 도발, 황당무계한 낭설”",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-02T22:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002829763?sid=100"
+     "title": "北김여정 \"바이낸스 사태, 우리 소행 아냐\" 부인..美 적대적 행위 주장",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-02T22:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005598360?sid=100"
     },
     {
-     "title": "[속보] 北김여정, 바이낸스 사태에 \"美 도발…예의주시\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-02T22:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922243?sid=100"
+     "title": "김여정 \"미국의 정치적 도발\"…'바이낸스 해킹' 발뺌",
+     "press": "koreareport.co.kr",
+     "publishedAt": "2026-11-02T22:10:00.000Z",
+     "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=54227"
     },
     {
-     "title": "북한 김여정, 바이낸스 사태에 \"미국의 정치적 도발…예의주시\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-02T21:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922241?sid=100"
+     "title": "북한 김여정, 바이낸스 사태에 “미국 정치적 도발…국제 여론 오도”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-02T22:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012285963?sid=100"
     }
    ]
   },
@@ -111,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 17,
-   "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-02T20:34:00.000Z",
+   "articles90": 13,
+   "recent20": 0,
+   "press": 12,
+   "firstArticleAt": "2026-11-02T20:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -143,10 +111,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 10,
+   "articles90": 7,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-02T20:36:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-02T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -203,13 +171,45 @@
    ]
   },
   {
+   "keyword": "농협",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 4,
+   "press": 5,
+   "firstArticleAt": "2026-11-02T21:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "NH농협캐피탈, PF 대출 5% 줄였지만 중·후순위는 35% 증가…\"건전성 관...",
+     "press": "socialvalue.kr",
+     "publishedAt": "2026-11-02T22:06:00.000Z",
+     "link": "https://www.socialvalue.kr/news/view/1065599850144688"
+    },
+    {
+     "title": "[DQN] 하나금융 ‘보험 적자’·농협금융 ‘캐피탈 부진’···비은행 강...",
+     "press": "fntimes.com",
+     "publishedAt": "2026-11-02T22:02:00.000Z",
+     "link": "https://www.fntimes.com/html/view.php?ud=202611022206329535b4a7c6999c_18"
+    },
+    {
+     "title": "\"정동야행서 첫선\"…농협, 쌀 복합문화공간 'NH라이스스토어미담' 공개",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-02T22:00:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=66921"
+    }
+   ]
+  },
+  {
    "keyword": "트레이드",
    "sources": [
     "signal.bz",
     "google"
    ],
    "articles90": 5,
-   "recent20": 3,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-02T21:00:00.000Z",
    "exclusive": false,
@@ -232,38 +232,6 @@
      "press": null,
      "publishedAt": "2026-11-02T21:46:00.000Z",
      "link": "https://m.sports.naver.com/basketball/article/065/0000303906"
-    }
-   ]
-  },
-  {
-   "keyword": "농협",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 3,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T21:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"정동야행서 첫선\"…농협, 쌀 복합문화공간 'NH라이스스토어미담' 공개",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-02T22:00:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=66921"
-    },
-    {
-     "title": "간병인 일당 한도 조정 잇따라…미래에셋생명 상향·NH농협생명 인하",
-     "press": "news2day.co.kr",
-     "publishedAt": "2026-11-02T22:00:00.000Z",
-     "link": "https://www.news2day.co.kr/article/20261102500310"
-    },
-    {
-     "title": "NH농협은행, 신용보증기금과 손잡고 중소기업·소상공인 비대면 보증대...",
-     "press": "rcast.co.kr",
-     "publishedAt": "2026-11-02T21:50:00.000Z",
-     "link": "https://www.rcast.co.kr/news/articleView.html?idxno=31949"
     }
    ]
   }
