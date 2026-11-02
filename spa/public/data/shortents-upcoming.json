@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T04:25:32.929Z",
+ "builtAt": "2026-11-02T04:35:35.537Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,84 +8,92 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 6,
+ "measured": 10,
  "candidates": [
   {
-   "keyword": "인사하는 이재명 대통령",
+   "keyword": "손흥민 미네소타에 1-3 패배",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 71,
-   "recent20": 8,
-   "press": 27,
-   "firstArticleAt": "2026-11-02T03:01:00.000Z",
+   "articles90": 21,
+   "recent20": 4,
+   "press": 19,
+   "firstArticleAt": "2026-11-02T03:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령 \"모두의 성장으로 대전환...관건은 실행과 속도\" [전문]",
-     "press": "joongangenews.com",
+     "title": "손흥민, 3경기 연속 침묵에도 평점 7.2…팀 내에서 두 번째로 높아",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-02T04:34:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109664751219"
+    },
+    {
+     "title": "손흥민, 최다 기회 창출에도 소용없었다...팅 2회·패스 성공률 87%...LAF...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-02T04:23:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/109/0005633041"
+    },
+    {
+     "title": "'손흥민 풀타임 침묵' LAFC, 안방서 1-3 완패… PO 상위 시드 무산",
+     "press": "jnilbo.com",
      "publishedAt": "2026-11-02T04:20:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=560349"
-    },
-    {
-     "title": "국민의힘 향해 인사하는 이재명 대통령",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-02T04:15:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261102001018"
-    },
-    {
-     "title": "연설 마치고 인사 나누는 이재명 대통령",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-02T04:14:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261102001003"
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000078782"
     }
    ]
   },
   {
-   "keyword": "철원 육군 하사 사망",
+   "keyword": "시정연설 후 인사하는 이재명 대통령",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 13,
+   "articles90": 12,
    "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-02T02:56:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-02T03:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "강원 철원 전방부대서 ‘육군 하사’ 외상 입고 숨져",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-02T04:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002830267?sid=100"
+     "title": "이 대통령 시정연설서 국힘 “재판 재개”...이 대통령 “계속해도 될까...",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-02T04:30:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1134353"
     },
     {
-     "title": "강원 철원 육군 부대서 20대 하사 숨진 채 발견…군·경찰 조사",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-02T04:10:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=778332"
+     "title": "이재명 대통령 시정연설, ‘성장’ 36번 언급 속 3대 민생과제 부각…전...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-02T04:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005757539?sid=100"
     },
     {
-     "title": "[속보] 강원 철원 전방 부대서 20대 하사 숨진 채 발견",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-02T04:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000130180?sid=102"
+     "title": "[포토] 시정연설 마친 이재명 대통령",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-02T04:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003481097?sid=100"
     }
    ]
   },
   {
-   "keyword": "특검 중앙선관위 압수수색",
+   "keyword": "특검, 선관위 압수수색",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-02T03:01:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-02T03:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "선관위, 예비비에 기본 경비까지… 특검 '공추비 부당지급 의혹' 전격 압...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-02T04:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000963060?sid=102"
+    },
     {
      "title": "특검, 중앙선관위 위원장실 등 압수수색…공명선거 활동비 부당지급 혐...",
      "press": "dailian.co.kr",
@@ -97,54 +105,125 @@
      "press": "jasm.co.kr",
      "publishedAt": "2026-11-02T03:48:00.000Z",
      "link": "https://www.jasm.co.kr/news/view/323808/?sc=Naver"
-    },
-    {
-     "title": "특검, 중앙선관위 압수수색…\"활동비 9억 원 부당지급\"",
-     "press": "lawtimes.co.kr",
-     "publishedAt": "2026-11-02T03:36:00.000Z",
-     "link": "https://www.lawtimes.co.kr/news/articleView.html?idxno=228699"
     }
    ]
   },
   {
-   "keyword": "구룡마을 화재 감식",
+   "keyword": "구룡마을 화재 합동감식",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 6,
-   "recent20": 0,
+   "articles90": 4,
+   "recent20": 2,
    "press": 3,
-   "firstArticleAt": "2026-11-02T02:59:00.000Z",
+   "firstArticleAt": "2026-11-02T03:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "까맣게 불 탄 '구룡마을 화재'…경찰·소방 막바지 합동감식",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-02T04:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006402088?sid=102"
+    },
+    {
+     "title": "경찰·소방, 오늘 구룡마을 화재 현장 3차 합동감식",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-02T04:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012285385?sid=102"
+    },
     {
      "title": "구룡마을 화재 재차 감식…야속한 주민들은 방화 의심도 내놔",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-02T03:36:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016415984?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "집단소송법 10만 서명 기자회견",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T03:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[포토]집단소송법 제정을 촉구하는 시민단체",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-02T04:12:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261102010000527"
     },
     {
-     "title": "오늘 구룡마을 화재 추가 합동감식…원인 규명 주력",
+     "title": "광화문 광장에서 열린 집단소송법 제정 위한 10만 서명 캠페인 기자회견",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-02T03:37:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261102000967"
+    },
+    {
+     "title": "광화문광장서 기자회견하는 집단소송법 제정연대",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-02T03:37:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261102000970"
+    }
+   ]
+  },
+  {
+   "keyword": "북한 해커 비트코인 탈취",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T03:07:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "비트코인 국가비축량 2.3배 훔친 北 해커부대…1만8천개 '꿀꺽'",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-02T03:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005435197?sid=104"
+    },
+    {
+     "title": "“북 탈취 비트코인, 테슬라 보유량 넘어”",
      "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-02T03:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012285365?sid=102"
+     "publishedAt": "2026-11-02T03:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012285364?sid=104"
     },
     {
-     "title": "구룡마을 화재 합동감식",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-02T03:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016415908?sid=102"
+     "title": "北해커에 8조 원 털려‥\"출금 풀자 5조 원 순유출\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-02T03:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001532900?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 27,
-  "matched": 3,
-  "avgLeadMin": 29,
+  "flagged": 33,
+  "matched": 5,
+  "avgLeadMin": 36,
   "recent": [
+   {
+    "keyword": "철원 육군 하사 사망",
+    "hitKeyword": "철원 육군 하사 사망",
+    "hitAt": "2026-11-02T13:30:00+09:00",
+    "leadMin": 80
+   },
+   {
+    "keyword": "저pbr 기업 151 명단",
+    "hitKeyword": "저PBR 151곳 공개",
+    "hitAt": "2026-11-02T13:30:00+09:00",
+    "leadMin": 15
+   },
    {
     "keyword": "계주",
     "hitKeyword": "학부모 민원 계주 취소",
