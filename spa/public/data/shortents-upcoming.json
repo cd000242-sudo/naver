@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T16:20:39.064Z",
+ "builtAt": "2026-11-02T16:30:43.526Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,7 +16,7 @@
     "nate"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-02T15:03:00.000Z",
    "exclusive": false,
@@ -39,38 +39,6 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-02T15:27:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001400083?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "대한민국",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-02T14:54:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "자유 대한민국의 초석 이승만… 교과서에선 ‘反통일세력’처럼 묘사",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-02T15:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004007393?sid=103"
-    },
-    {
-     "title": "117홀 갖춘 화천, 대한민국 파크골프 본고장 입지 굳힌다",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-02T15:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001228046?sid=102"
-    },
-    {
-     "title": "대한민국 최초 軍 통신위성 ‘아나시스 1호’ 임무 성공적 완수 후 명예...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-02T14:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002829735?sid=100"
     }
    ]
   }
