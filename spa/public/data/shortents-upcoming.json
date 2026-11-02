@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T21:52:27.947Z",
+ "builtAt": "2026-11-02T22:02:31.865Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "국제유가 급락",
@@ -16,12 +16,18 @@
     "signal.bz"
    ],
    "articles90": 43,
-   "recent20": 12,
+   "recent20": 5,
    "press": 31,
-   "firstArticleAt": "2026-11-02T20:25:00.000Z",
+   "firstArticleAt": "2026-11-02T20:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "유가 급락에 숨통 트인 증시…코스피, 기술주 약세 돌파하나",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-02T22:00:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1730189"
+    },
     {
      "title": "[뉴욕증시]선거 D-1 혼조 마감…유가 급락·기술주 매도세 영향",
      "press": "view.asiae.co.kr",
@@ -33,12 +39,38 @@
      "press": "kbmaeil.com",
      "publishedAt": "2026-11-02T21:48:00.000Z",
      "link": "https://www.kbmaeil.com/article/20261103500008"
+    }
+   ]
+  },
+  {
+   "keyword": "미·이란 협상에 유가 급락",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 34,
+   "recent20": 4,
+   "press": 27,
+   "firstArticleAt": "2026-11-02T20:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "유가 하락도 못 살린 기술주 매도…나스닥 1.1%↓",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-02T21:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002717857?sid=104"
     },
     {
-     "title": "AI·반도체주 약세…이란 협상에 유가 급락",
-     "press": "koreareport.co.kr",
-     "publishedAt": "2026-11-02T21:46:00.000Z",
-     "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=54226"
+     "title": "트럼프, 선거 후 이란 공격 재개에 “아니다…서두를 것 없다”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-02T21:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012285951?sid=104"
+    },
+    {
+     "title": "[뉴욕증시]선거 D-1 혼조 마감…유가 급락·기술주 매도세 영향",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-02T21:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005836992?sid=101"
     }
    ]
   },
@@ -47,30 +79,62 @@
    "sources": [
     "daum"
    ],
-   "articles90": 18,
-   "recent20": 10,
-   "press": 18,
+   "articles90": 25,
+   "recent20": 11,
+   "press": 24,
    "firstArticleAt": "2026-11-02T21:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "北 김여정, 바이낸스 해킹 배후 지목에 “美의 정치적 도발…예의주시...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-02T21:50:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2643240"
+     "title": "[속보]北김여정, 바이낸스 사태에 “美 정치적 도발, 황당무계한 낭설”",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-02T22:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002829763?sid=100"
     },
     {
-     "title": "[속보]김여정 \"바이낸스 사태, 우리 소행 아냐\" 부인..美의 정치적 도발",
-     "press": "fnnews.com",
+     "title": "[속보] 北김여정, 바이낸스 사태에 \"美 도발…예의주시\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-02T22:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922243?sid=100"
+    },
+    {
+     "title": "북한 김여정, 바이낸스 사태에 \"미국의 정치적 도발…예의주시\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-02T21:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922241?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "북한 해커 비트코인 탈취",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 17,
+   "recent20": 2,
+   "press": 15,
+   "firstArticleAt": "2026-11-02T20:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "北 해커, 코인 1만2000개 지갑 분산···추적망 교란",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-02T21:52:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=879079"
+    },
+    {
+     "title": "북한 해커들, 바이낸스서 탈취한 자금 '2차 세탁' 중",
+     "press": "kookje.co.kr",
      "publishedAt": "2026-11-02T21:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005598356?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/658/0000160218?sid=100"
     },
     {
-     "title": "[속보]北김여정, 바이낸스 사태에 “미국의 정치적 도발”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-02T21:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002717854?sid=100"
+     "title": "북한 해킹 조직, 바이낸스 가상자산 세탁 후 비트코인 전환 시작",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-02T21:42:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=883752"
     }
    ]
   },
@@ -80,7 +144,7 @@
     "nate"
    ],
    "articles90": 10,
-   "recent20": 1,
+   "recent20": 0,
    "press": 7,
    "firstArticleAt": "2026-11-02T20:36:00.000Z",
    "exclusive": false,
@@ -109,13 +173,12 @@
   {
    "keyword": "1호기 탑승자 정보 유출",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-02T20:32:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-02T21:02:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -140,41 +203,74 @@
    ]
   },
   {
-   "keyword": "김원효 심진화에 평생 명품백 선물",
+   "keyword": "트레이드",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 3,
-   "recent20": 0,
+   "articles90": 5,
+   "recent20": 3,
    "press": 3,
-   "firstArticleAt": "2026-11-02T20:41:00.000Z",
+   "firstArticleAt": "2026-11-02T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김원효, 투자로 2억 잃고 이혼 위기…\"♥심진화와 신뢰 깨졌다\" ('말자쇼...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-02T21:29:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000782689"
+     "title": "UBS \"AI 트레이드 견조…지금이 매수 기회\"",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-02T21:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541282?sid=104"
     },
     {
-     "title": "김원효, ♥심진화에 1억 명품백 선물하고 “주식으로 2억 날려 이혼할 ...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-02T20:47:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001183750"
+     "title": "BMO \"TIPS, AI 트레이드에 대한 완벽한 헤지\"",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-02T21:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541281?sid=104"
     },
     {
-     "title": "\"매년 심진화에 명품백 선물\"…김원효, 15년간 쓴 돈이 무려",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-02T20:41:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005435534"
+     "title": "'최악의 트레이드? 아직은 좋다!' 폴 조지, 보스턴 상승세 이끄는 중",
+     "press": null,
+     "publishedAt": "2026-11-02T21:46:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/065/0000303906"
+    }
+   ]
+  },
+  {
+   "keyword": "농협",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 3,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T21:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"정동야행서 첫선\"…농협, 쌀 복합문화공간 'NH라이스스토어미담' 공개",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-02T22:00:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=66921"
+    },
+    {
+     "title": "간병인 일당 한도 조정 잇따라…미래에셋생명 상향·NH농협생명 인하",
+     "press": "news2day.co.kr",
+     "publishedAt": "2026-11-02T22:00:00.000Z",
+     "link": "https://www.news2day.co.kr/article/20261102500310"
+    },
+    {
+     "title": "NH농협은행, 신용보증기금과 손잡고 중소기업·소상공인 비대면 보증대...",
+     "press": "rcast.co.kr",
+     "publishedAt": "2026-11-02T21:50:00.000Z",
+     "link": "https://www.rcast.co.kr/news/articleView.html?idxno=31949"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 195,
+  "flagged": 199,
   "matched": 74,
   "avgLeadMin": 238,
   "recent": [
