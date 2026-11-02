@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T07:06:27.271Z",
+ "builtAt": "2026-11-02T07:16:30.604Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "삼성SDS 구미 AI 센터 착공",
@@ -16,30 +16,62 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 63,
-   "recent20": 2,
-   "press": 63,
+   "articles90": 73,
+   "recent20": 13,
+   "press": 73,
    "firstArticleAt": "2026-11-02T06:00:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "삼성전자·삼성SDS '다카르 청소년올림픽' 공식 후원·이재용 회장 '日 ...",
-     "press": "wsobi.com",
-     "publishedAt": "2026-11-02T07:02:00.000Z",
-     "link": "http://www.wsobi.com/news/articleView.html?idxno=320798"
+     "title": "삼성SDS 60MW급 AI 데이터센터 구미서 착공",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-02T07:14:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=727626"
     },
     {
-     "title": "삼성SDS 구미 60MW AI 데이터센터 착공, 4273억 투입해 2028년 준공 목표",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-02T06:56:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=450922"
+     "title": "삼성SDS, 구미 AI 데이터센터 착공…영남권 60조 투자 첫걸음",
+     "press": "it-b.co.kr",
+     "publishedAt": "2026-11-02T07:14:00.000Z",
+     "link": "https://www.it-b.co.kr/news/articleView.html?idxno=90521"
     },
     {
-     "title": "삼성SDS, 구미 AI 데이터센터 착공…서버 도입 비용 제외 건물과 설비 구...",
-     "press": "livebiz.today",
-     "publishedAt": "2026-11-02T06:42:00.000Z",
-     "link": "https://www.livebiz.today/news/articleView.html?idxno=206126"
+     "title": "삼성SDS, ‘구미 AI 데이터센터’ 착공⋯ “삼성 영남권 60조 투자 계획...",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-02T07:12:00.000Z",
+     "link": "https://www.viva100.com/article/20261102501221"
+    }
+   ]
+  },
+  {
+   "keyword": "바이낸스 해킹",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 59,
+   "recent20": 12,
+   "press": 40,
+   "firstArticleAt": "2026-11-02T05:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“글로벌 바이낸스 8조원 해킹”…금융위, 국내 거래소 긴급 점검",
+     "press": "nspna.com",
+     "publishedAt": "2026-11-02T07:14:00.000Z",
+     "link": "https://www.nspna.com/news/?mode=view&newsid=834264"
+    },
+    {
+     "title": "바이낸스 8조원 해킹에 금융당국 긴급 점검···보안 강화 주문",
+     "press": "seoulfn.com",
+     "publishedAt": "2026-11-02T07:13:00.000Z",
+     "link": "https://www.seoulfn.com/news/articleView.html?idxno=641674"
+    },
+    {
+     "title": "[코인뉴스] 바이낸스 해킹 불똥…ETF 자금도 ‘줄탈출’",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-02T07:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003150297?sid=101"
     }
    ]
   },
@@ -48,13 +80,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 36,
+   "articles90": 29,
    "recent20": 2,
-   "press": 35,
-   "firstArticleAt": "2026-11-02T05:37:00.000Z",
+   "press": 29,
+   "firstArticleAt": "2026-11-02T05:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "철강·에너지가 끌고 건설 반등…포스코홀딩스 영업익 48%↑",
+     "press": "newsinside.kr",
+     "publishedAt": "2026-11-02T07:10:00.000Z",
+     "link": "https://www.newsinside.kr/news/articleView.html?idxno=5038980"
+    },
     {
      "title": "포스코홀딩스, 3분기 영업익 9450억ㆍ전년동기 比 48%↑…철강 회복에 실...",
      "press": "dnews.co.kr",
@@ -66,12 +104,39 @@
      "press": "sidae.com",
      "publishedAt": "2026-11-02T06:52:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/417/0001162962?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "정점식 국민의힘 원내대표",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 39,
+   "recent20": 7,
+   "press": 17,
+   "firstArticleAt": "2026-11-02T05:47:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "대법원장에 아무렇지 않게 인사한 대통령...정점식 \"공감 능력 없는지 ...",
+     "press": "thepublic.kr",
+     "publishedAt": "2026-11-02T07:06:00.000Z",
+     "link": "https://www.thepublic.kr/news/articleView.html?idxno=324751"
     },
     {
-     "title": "철강 살아난 포스코, 3분기 영업익 9450억원⋯전년比 48%↑",
-     "press": "autodaily.co.kr",
-     "publishedAt": "2026-11-02T06:42:00.000Z",
-     "link": "https://www.autodaily.co.kr/news/articleView.html?idxno=601685"
+     "title": "대통령 시정연설 팩폭 꽂은 정점식 \"재정 중독 점철된 미래 약탈 선언\"",
+     "press": "thepublic.kr",
+     "publishedAt": "2026-11-02T07:06:00.000Z",
+     "link": "https://www.thepublic.kr/news/articleView.html?idxno=324745"
+    },
+    {
+     "title": "정점식 “821조 예산안은 미래 약탈 선언…국민의힘 합의 못 해”",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-02T07:04:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611020151"
     }
    ]
   },
@@ -80,10 +145,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 21,
-   "recent20": 2,
-   "press": 19,
-   "firstArticleAt": "2026-11-02T05:39:00.000Z",
+   "articles90": 14,
+   "recent20": 1,
+   "press": 14,
+   "firstArticleAt": "2026-11-02T05:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -108,35 +173,34 @@
    ]
   },
   {
-   "keyword": "정점식 국민의힘 원내대표",
+   "keyword": "제6차 금융 대전환 회의",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 44,
-   "recent20": 6,
-   "press": 18,
-   "firstArticleAt": "2026-11-02T05:42:00.000Z",
+   "articles90": 15,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-02T05:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정점식 “821조 예산안은 미래 약탈 선언…국민의힘 합의 못 해”",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-02T07:04:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611020151"
+     "title": "이억원 \"지방 금융공백 메운다\"…은행권, 3년간 4조5000억원 공급",
+     "press": "srtimes.kr",
+     "publishedAt": "2026-11-02T07:14:00.000Z",
+     "link": "http://www.srtimes.kr/news/articleView.html?idxno=216519"
     },
     {
-     "title": "국민의힘, 李대통령 시정연설에 \"미래 약탈 선언…최소 30조원 삭감\"",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-02T07:04:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4442568"
+     "title": "“지방 중소기업에 4조5000억 푼다”…금융위, 은행권과 저금리 대출 추...",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-02T07:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002246968?sid=101"
     },
     {
-     "title": "정점식 \"李 시정연설은 미래 약탈 선언…예산안 송곳 검증\"",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-02T07:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000547942?sid=100"
+     "title": "금융위, 지방 중소·중견기업에 4조5000억 규머 저리 대출 공급 추진",
+     "press": "digitaltoday.co.kr",
+     "publishedAt": "2026-11-02T06:54:00.000Z",
+     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=711911"
     }
    ]
   },
@@ -145,10 +209,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-02T05:37:00.000Z",
+   "articles90": 13,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-02T05:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -173,49 +237,23 @@
    ]
   },
   {
-   "keyword": "제6차 금융 대전환 회의",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 22,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-02T05:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "금융위, 지방 중소·중견기업에 4조5000억 규머 저리 대출 공급 추진",
-     "press": "digitaltoday.co.kr",
-     "publishedAt": "2026-11-02T06:54:00.000Z",
-     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=711911"
-    },
-    {
-     "title": "이억원 \"지역 금융공백 해소\"…은행권, 中企에 4조5000억원 공급",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-02T06:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000547912?sid=101"
-    },
-    {
-     "title": "금융위, 은행권 상생자금으로 지방기업 지원…3년간 4.5조원 저리대출",
-     "press": "kpinews.kr",
-     "publishedAt": "2026-11-02T06:27:00.000Z",
-     "link": "https://www.kpinews.kr/newsView/1065591160723676"
-    }
-   ]
-  },
-  {
    "keyword": "김정관 산업부 장관",
    "sources": [
     "nate"
    ],
    "articles90": 21,
-   "recent20": 2,
+   "recent20": 1,
    "press": 11,
-   "firstArticleAt": "2026-11-02T05:44:00.000Z",
+   "firstArticleAt": "2026-11-02T05:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "체코 원전 '팀코리아' 균열에… 산업부 장관 \"한수원이 이견 조율하라\"",
+     "press": "thepublic.kr",
+     "publishedAt": "2026-11-02T07:06:00.000Z",
+     "link": "https://www.thepublic.kr/news/articleView.html?idxno=324740"
+    },
     {
      "title": "대우건설, ‘체코 원전 협상 결렬’ 유감…산업부에 재협상 중재 요청",
      "press": "kukinews.com",
@@ -227,44 +265,6 @@
      "press": "livebiz.today",
      "publishedAt": "2026-11-02T06:52:00.000Z",
      "link": "https://www.livebiz.today/news/articleView.html?idxno=206127"
-    },
-    {
-     "title": "산업부, 10월 수출 1,153억 달러로 93.7% 증가…누적 9,300억 달러 사상 ...",
-     "press": "hellot.net",
-     "publishedAt": "2026-11-02T06:38:00.000Z",
-     "link": "https://www.hellot.net/news/article.html?no=115940"
-    }
-   ]
-  },
-  {
-   "keyword": "가덕도 신공항 공사비 증액",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-02T05:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "부산 국힘 의원들 \"가덕도신공항 공사비, 시행령 개정으로 해결하라\"",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-02T06:58:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=901636"
-    },
-    {
-     "title": "부산지역 국힘 의원들 긴급 기자회견 “李정부, 가덕도신공항 개항 의지...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-02T06:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002717743?sid=100"
-    },
-    {
-     "title": "국힘 부산 의원들 \"가덕도신 공항 공사비 증액, 정부가 나서야\"",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-02T06:46:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3739752"
     }
    ]
   },
@@ -274,7 +274,7 @@
     "daum"
    ],
    "articles90": 10,
-   "recent20": 2,
+   "recent20": 1,
    "press": 10,
    "firstArticleAt": "2026-11-02T05:50:00.000Z",
    "exclusive": true,
@@ -301,17 +301,87 @@
    ]
   },
   {
+   "keyword": "기술",
+   "sources": [
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 8,
+   "press": 8,
+   "firstArticleAt": "2026-11-02T07:10:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "에임즈미디어, 중기부 팁스(TIPS) 선정…AI 콘텐츠 제작 효율화 및 기술...",
+     "press": "itbiznews.com",
+     "publishedAt": "2026-11-02T07:14:00.000Z",
+     "link": "https://www.itbiznews.com/news/articleView.html?idxno=229958"
+    },
+    {
+     "title": "대학·기업 기술협력에 유학생 취업 연계까지…G-NEX 개막",
+     "press": "busan.com",
+     "publishedAt": "2026-11-02T07:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001405228?sid=102"
+    },
+    {
+     "title": "[재계 포커스] '기술 리더' 장인화 2년 7개월…포스코, 위기 속 반등의 ...",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-02T07:13:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=747468"
+    }
+   ]
+  },
+  {
+   "keyword": "가덕도 신공항 공사비 증액",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-02T05:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "부산 국힘 의원들 \"가덕도신공항 공사비, 시행령 개정으로 해결하라\"",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-02T06:58:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=901636"
+    },
+    {
+     "title": "부산지역 국힘 의원들 긴급 기자회견 “李정부, 가덕도신공항 개항 의지...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-02T06:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002717743?sid=100"
+    },
+    {
+     "title": "국힘 부산 의원들 \"가덕도신 공항 공사비 증액, 정부가 나서야\"",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-02T06:46:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3739752"
+    }
+   ]
+  },
+  {
    "keyword": "이강철과 박진만 대결",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 7,
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
    "firstArticleAt": "2026-11-02T05:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "KT는 기다렸고 삼성은 달려왔다…한국시리즈서 첫 맞대결",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-02T07:08:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/028/0002830292"
+    },
     {
      "title": "[KS] 이강철 vs 박진만…사상 첫 KS MVP 출신 감독 대결",
      "press": "newspim.com",
@@ -323,76 +393,38 @@
      "press": "hansbiz.co.kr",
      "publishedAt": "2026-11-02T06:54:00.000Z",
      "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=878896"
-    },
-    {
-     "title": "사상 첫 KS 맞대결 kt·삼성, 이구동성으로 우승 자신",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-02T06:54:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261102010000669"
     }
    ]
   },
   {
-   "keyword": "기술",
+   "keyword": "제트기",
    "sources": [
     "google"
    ],
    "articles90": 6,
-   "recent20": 6,
-   "press": 6,
-   "firstArticleAt": "2026-11-02T07:02:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "금호타이어, 전기차 레이싱 3년 연속 정상…'이노뷔' 타이어 기술력 입...",
-     "press": "megaeconomy.co.kr",
-     "publishedAt": "2026-11-02T07:04:00.000Z",
-     "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065596470059128"
-    },
-    {
-     "title": "부산중기청, 지역기업 AX 사례 공유 기술세미나 개최",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-02T07:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009265318?sid=102"
-    },
-    {
-     "title": "'경제성·기술적 한계' SMR 회의론 커져, 현대건설·삼성물산·대우건설...",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-02T07:02:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=450911"
-    }
-   ]
-  },
-  {
-   "keyword": "김도영",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-02T05:41:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-02T06:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "하얗게 불태웠다…김도영과 KIA, 그리고 팬들의 가을야구 뒷풀이[스경x...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-02T06:52:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/144/0001147695"
+     "title": "9명 탄 美 제트기, 플로리다 도로에 수직 추락… 전원 사망",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-02T07:14:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/323844/?sc=Naver"
     },
     {
-     "title": "'수비 요정' 최형우 vs '출루의 달인' 김도영...PO 씬스틸러 누구?",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-02T06:04:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/052/0002427237"
+     "title": "미국 플로리다 주택가 인근 도로에 제트기 추락...탑승자 9명 전원 사망",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-02T06:50:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=560468"
     },
     {
-     "title": "MLB 스카우트가 본 KBO 빅리그 후보… 김도영 \"20~25홈런\", 곽빈 \"4, 5 선...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-02T06:01:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/469/0000963086"
+     "title": "美플로리다 주택가 도로에 제트기 추락…탑승자 9명 전원 사망",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-02T06:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541175?sid=104"
     }
    ]
   },
@@ -426,6 +458,70 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-02T06:31:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016416577?sid=105"
+    }
+   ]
+  },
+  {
+   "keyword": "조경태 이재명 악수",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T05:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이재명 대통령, '821조 슈퍼예산' 시정연설 [뉴스핌 줌인]",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-02T07:00:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261102001363"
+    },
+    {
+     "title": "[영상] 악수 안할려고 도망가는 국민의힘. 황당한 대통령..조경태만 홀...",
+     "press": "facttv.kr",
+     "publishedAt": "2026-11-02T06:46:00.000Z",
+     "link": "https://www.facttv.kr/news/articleView.html?idxno=50773"
+    },
+    {
+     "title": "시정연설 끝나자 집단 퇴장한 국민의힘…홀로 남은 조경태의 악수",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-02T05:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004205523?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "김도영",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T06:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "하얗게 불태웠다…김도영과 KIA, 그리고 팬들의 가을야구 뒷풀이[스경x...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-02T06:52:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/144/0001147695"
+    },
+    {
+     "title": "'수비 요정' 최형우 vs '출루의 달인' 김도영...PO 씬스틸러 누구?",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-02T06:04:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/052/0002427237"
+    },
+    {
+     "title": "MLB 스카우트가 본 KBO 빅리그 후보… 김도영 \"20~25홈런\", 곽빈 \"4, 5 선...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-02T06:01:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/469/0000963086"
     }
    ]
   },
@@ -464,7 +560,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 85,
+  "flagged": 88,
   "matched": 23,
   "avgLeadMin": 61,
   "recent": [
