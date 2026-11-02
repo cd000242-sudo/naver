@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T12:09:29.456Z",
+ "builtAt": "2026-11-02T12:19:32.839Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "브로드컴 과징금 확정",
@@ -16,13 +16,19 @@
     "signal.bz",
     "daum"
    ],
-   "articles90": 17,
-   "recent20": 5,
-   "press": 17,
-   "firstArticleAt": "2026-11-02T10:42:00.000Z",
+   "articles90": 15,
+   "recent20": 4,
+   "press": 15,
+   "firstArticleAt": "2026-11-02T10:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "브로드컴, 과징금 186억 대법서 확정…\"삼성전자에 구매계약 강요\"",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-02T12:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005836963?sid=101"
+    },
     {
      "title": "삼성전자에 장기계약 강요한 美 브로드컴⋯186억 과징금 확정",
      "press": "etoday.co.kr",
@@ -34,12 +40,6 @@
      "press": "biz.chosun.com",
      "publishedAt": "2026-11-02T12:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/366/0001202066?sid=102"
-    },
-    {
-     "title": "'삼성전자에 갑질' 美 브로드컴, 186억원 과징금 대법서 확정",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-02T12:00:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3445304"
     }
    ]
   },
@@ -49,13 +49,19 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 10,
-   "recent20": 5,
-   "press": 10,
-   "firstArticleAt": "2026-11-02T11:28:00.000Z",
+   "articles90": 7,
+   "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-02T11:47:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
+    {
+     "title": "산청농촌관광연구회, 농업체험한마당 개최",
+     "press": "gnmaeil.com",
+     "publishedAt": "2026-11-02T12:14:00.000Z",
+     "link": "http://www.gnmaeil.com/news/articleView.html?idxno=597835"
+    },
     {
      "title": "충남, 또 \"국방연구원 등 논산 집적\"…경기도와 대조",
      "press": "obsnews.co.kr",
@@ -67,12 +73,6 @@
      "press": "mydaily.co.kr",
      "publishedAt": "2026-11-02T12:07:00.000Z",
      "link": "https://m.entertain.naver.com/article/117/0004121135"
-    },
-    {
-     "title": "\"연구하는 병원으로 가는 길\"…순천향대 중앙의료원, 학술대회 개최",
-     "press": "k-health.com",
-     "publishedAt": "2026-11-02T11:52:00.000Z",
-     "link": "https://www.k-health.com/news/articleView.html?idxno=101983"
     }
    ]
   },
@@ -81,13 +81,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-02T10:42:00.000Z",
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-02T10:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이란 “美 해상봉쇄 해제 등 ‘7단계 제안’ 수용 시 이틀 내 호르무즈...",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-02T12:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003562283?sid=104"
+    },
     {
      "title": "이란 \"美 '해상봉쇄 해제' 등 수용하면 이틀 내 호르무즈 개방\"",
      "press": "mt.co.kr",
@@ -99,84 +105,77 @@
      "press": "etoday.co.kr",
      "publishedAt": "2026-11-02T11:38:00.000Z",
      "link": "https://www.etoday.co.kr/news/view/2643221"
-    },
-    {
-     "title": "이란, “美 해상 봉쇄 해제 등 수용하면 이틀 내로 호르무즈 개방”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-02T11:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004677944?sid=104"
     }
    ]
   },
   {
-   "keyword": "코스피 반등 마감",
+   "keyword": "하남시",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 4,
+   "articles90": 6,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-02T10:40:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-02T10:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "인텔발 뉴욕증시 악재에도 코스피 반등‥중간선거 등 변수 여전",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-02T11:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533008?sid=101"
+     "title": "하남시 \"K-스타월드 민간공모 취소, 사업 백지화 아니다\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-02T11:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009265721?sid=102"
     },
     {
-     "title": "'인텔 쇼크'에도 반등…기관 매수에 코스피 2%대↑",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-02T11:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922131?sid=161"
+     "title": "하남시, 한강 폐천부지 오염 정화 책임 행정소송 '승소'",
+     "press": "safetimes.co.kr",
+     "publishedAt": "2026-11-02T11:28:00.000Z",
+     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247112"
     },
     {
-     "title": "'인텔 쇼크' 주식창 열기 겁났는데…코스피는 반등, 왜?",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-02T10:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000518763?sid=101"
+     "title": "하남시 “K-스타월드 공모 취소, 백지화 아닌 정부 계획 연계 위한 것”",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-02T11:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001882501?sid=102"
     }
    ]
   },
   {
-   "keyword": "김민재 차관, 대통령기록관 점검",
+   "keyword": "하이브",
    "sources": [
-    "signal.bz",
-    "nate"
+    "google"
    ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-02T10:43:00.000Z",
+   "articles90": 3,
+   "recent20": 3,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T12:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "행안부, '대통령의 외교, 세계를 품다' 준비 현장을 점검",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-02T11:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014296281?sid=100"
+     "title": "\"전기차 올인 전략 수정\" GM, 하이브리드까지 전동화 라인업 확대",
+     "press": "gpkorea.com",
+     "publishedAt": "2026-11-02T12:16:00.000Z",
+     "link": "https://www.gpkorea.com/news/articleView.html?idxno=148207"
     },
     {
-     "title": "김민재 행안부 차관, 대통령 외교 전시 현장 방문",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-02T10:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009265706?sid=102"
+     "title": "하이브, 전자결재·비용처리시스템 해킹…주민번호·의료정보 등 개인정...",
+     "press": "dailysecu.com",
+     "publishedAt": "2026-11-02T12:12:00.000Z",
+     "link": "https://www.dailysecu.com/news/articleView.html?idxno=209268"
     },
     {
-     "title": "대통령의 외교, 세계를 품다…전시 준비 현장 찾은 김민재 차관",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-02T10:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009265704?sid=102"
+     "title": "[개인정보 유출] 하이브, 전·현직 임직원 및 협력사 개인정보 유출…주...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-02T12:10:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=622310"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 166,
+  "flagged": 167,
   "matched": 47,
   "avgLeadMin": 86,
   "recent": [
