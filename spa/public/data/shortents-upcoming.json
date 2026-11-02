@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T03:45:21.062Z",
+ "builtAt": "2026-11-02T03:55:23.449Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,58 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 20,
  "candidates": [
+  {
+   "keyword": "국회 이재명 대통령",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 71,
+   "recent20": 38,
+   "press": 22,
+   "firstArticleAt": "2026-11-02T03:29:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "「M포토」 2027년도 예산안 등에 대한 시정연설하는 이재명 대통령",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-02T03:54:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=72448"
+    },
+    {
+     "title": "[포토] 물 마시는 이재명 대통령",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-02T03:52:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3445122"
+    },
+    {
+     "title": "\"나라 빚 외면\" 국힘 구호에 이 대통령이 내놓은 답변",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-02T03:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002534314?sid=100"
+    }
+   ]
+  },
   {
    "keyword": "철원 육군 하사 사망",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 28,
-   "recent20": 4,
-   "press": 26,
-   "firstArticleAt": "2026-11-02T02:16:00.000Z",
+   "articles90": 23,
+   "recent20": 2,
+   "press": 22,
+   "firstArticleAt": "2026-11-02T02:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "철원 전방부대서 하사 사망…군 당국, 부대 내 사고 원인 조사 착수",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-02T03:54:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=845915"
+    },
     {
      "title": "[속보] “강원도 철원서 육군 하사 1명 외상 입고 사망”",
      "press": "mk.co.kr",
@@ -33,12 +71,6 @@
      "press": "ohmynews.com",
      "publishedAt": "2026-11-02T03:31:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/047/0002534312?sid=102"
-    },
-    {
-     "title": "강원 철원 전방부대서 육군 하사 숨진 채 발견…군·민간 수사 착수",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-02T03:30:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=171771"
     }
    ]
   },
@@ -48,13 +80,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 24,
+   "articles90": 16,
    "recent20": 2,
-   "press": 23,
-   "firstArticleAt": "2026-11-02T02:16:00.000Z",
+   "press": 16,
+   "firstArticleAt": "2026-11-02T02:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "특검, 선관위원장실 등 압수수색…활동비 부당 지급 의혹",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-02T03:48:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/323808/?sc=Naver"
+    },
     {
      "title": "특검, 중앙선관위 압수수색…\"활동비 9억 원 부당지급\"",
      "press": "lawtimes.co.kr",
@@ -66,76 +104,70 @@
      "press": "mbn.mk.co.kr",
      "publishedAt": "2026-11-02T03:34:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/057/0001976297?sid=102"
-    },
-    {
-     "title": "선관위 수당 9억원 부당 지급 의혹…특검, 위원장실·사무총장실 압수수...",
-     "press": "ppss.kr",
-     "publishedAt": "2026-11-02T03:21:00.000Z",
-     "link": "https://www.ppss.kr/news/articleView.html?idxno=318543"
     }
    ]
   },
   {
-   "keyword": "결제주기 단축 발표",
+   "keyword": "티아라",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 25,
-   "recent20": 1,
-   "press": 23,
-   "firstArticleAt": "2026-11-02T02:18:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-02T02:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[Q&A] 주식 팔면 하루 빨리 돈 받는다…결제주기 단축, 뭐가 달라지나(종...",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-02T03:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016415981?sid=101"
+     "title": "티아라, 소연 임신 발표에 불화설 종료 \"너무너무 축하해\"[SC이슈]",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-02T03:32:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004462151"
     },
     {
-     "title": "\"거래 다음 날 매도대금 수령\"…2028년까지 'T+1 전환' 로드맵 발표",
-     "press": "the-biz.co.kr",
-     "publishedAt": "2026-11-02T03:22:00.000Z",
-     "link": "http://www.the-biz.co.kr/news/articleView.html?idxno=730455"
-    },
-    {
-     "title": "주식 팔면 다음 날 돈 받나‥결제주기 단축 로드맵",
-     "press": "imnews.imbc.com",
+     "title": "“언니 너무 축하해” 함은정, 소연 임신에 축하 댓글…티아라 불화설 ...",
+     "press": "isplus.com",
      "publishedAt": "2026-11-02T03:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001532908?sid=101"
+     "link": "https://m.entertain.naver.com/article/241/0003538610"
+    },
+    {
+     "title": "'티아라' 소연, 임신 발표…\"결혼 4년만에, 찾아온 선물\"",
+     "press": "dispatch.co.kr",
+     "publishedAt": "2026-11-02T03:09:00.000Z",
+     "link": "https://m.entertain.naver.com/article/433/0000131925"
     }
    ]
   },
   {
-   "keyword": "인사하는 이재명 대통령",
+   "keyword": "집단소송법 서명 캠페인 기자회견",
    "sources": [
     "nate"
    ],
-   "articles90": 70,
-   "recent20": 23,
-   "press": 20,
-   "firstArticleAt": "2026-11-02T02:54:00.000Z",
+   "articles90": 11,
+   "recent20": 5,
+   "press": 5,
+   "firstArticleAt": "2026-11-02T02:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'박수 30번' 나온 李대통령 시정연설…국힘은 \"재판 재개하라\" [현장]",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-02T03:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001071357?sid=100"
+     "title": "광화문 광장에서 열린 집단소송법 제정 위한 10만 서명 캠페인 기자회견",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-02T03:37:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261102000967"
     },
     {
-     "title": "「M포토」 국회 찾은 이재명 대통령...민주당 지도부와 인사",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-02T03:42:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=72446"
+     "title": "구호 외치는 집단소송법 제정연대",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-02T03:37:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261102000968"
     },
     {
-     "title": "李 대통령, 여야 대표에 \"경쟁은 좋지만 합리적으로 해야\"",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-02T03:42:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=171772"
+     "title": "광화문광장서 기자회견하는 집단소송법 제정연대",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-02T03:37:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261102000970"
     }
    ]
   },
@@ -174,7 +206,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 18,
+  "flagged": 21,
   "matched": 1,
   "avgLeadMin": 21,
   "recent": [
