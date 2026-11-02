@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T22:42:49.320Z",
+ "builtAt": "2026-11-02T22:52:52.514Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 50,
-   "recent20": 9,
-   "press": 44,
-   "firstArticleAt": "2026-11-02T21:21:00.000Z",
+   "articles90": 52,
+   "recent20": 10,
+   "press": 47,
+   "firstArticleAt": "2026-11-02T21:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "北김여정, 바이낸스 사태에 “美 정치적 도발…예의주시”",
-     "press": "segye.com",
-     "publishedAt": "2026-11-02T22:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004171957?sid=100"
+     "title": "北김여정 “바이낸스 해킹 美주장 황당무계 낭설…정치적 도발”",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-02T22:52:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611030006"
     },
     {
-     "title": "김여정, 바이낸스 해킹 배후 지목에 반발…\"북미 관계 재고할 문제\"",
-     "press": "ngonews.kr",
-     "publishedAt": "2026-11-02T22:38:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=242160"
+     "title": "北김여정, 美 바이낸스 사태 배후 지목에 \"여러 측면에서 재고해 볼 정...",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-02T22:50:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/03/2026110300024.html"
     },
     {
-     "title": "'펄쩍' 北 김여정, 바이낸스 사태 \"美 정치적 도발\"",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-02T22:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000541288?sid=104"
+     "title": "8조원대 해킹 배후 지목에 발끈한 김여정…북미 관계 재검토 경고",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-02T22:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004205724?sid=100"
     }
    ]
   },
@@ -47,30 +47,62 @@
    "sources": [
     "google"
    ],
-   "articles90": 19,
-   "recent20": 5,
-   "press": 18,
-   "firstArticleAt": "2026-11-02T21:16:00.000Z",
+   "articles90": 24,
+   "recent20": 7,
+   "press": 23,
+   "firstArticleAt": "2026-11-02T21:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[굿모닝 오늘의 증시] 이번엔 오라클·마벨 충격…터너스의 애플 '첫 성...",
-     "press": "mbnmoney.mbn.co.kr",
-     "publishedAt": "2026-11-02T22:34:00.000Z",
-     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005953355"
+     "title": "애플, 가격으로 실적 방어했지만…아이폰·서비스 성장 둔화 우려",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-02T22:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005757933?sid=105"
     },
     {
-     "title": "애플, 7∼9월 분기 최고매출…\"제품 가격 올려 메모리대란 상쇄\"(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-02T22:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016417231?sid=104"
+     "title": "애플, 7∼9월 분기 최고매출…\"제품 가격 올려 메모리대란 상쇄\"",
+     "press": "tfmedia.co.kr",
+     "publishedAt": "2026-11-02T22:48:00.000Z",
+     "link": "https://www.tfmedia.co.kr/news/article.html?no=208592"
     },
     {
-     "title": "[마켓 브리핑] '반짝 반등' AI 관련주가, 수익성 우려에 하락 전환",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-02T22:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000541286?sid=104"
+     "title": "‘최고매출’ 애플 “가격 올려 메모리대란 상쇄…듀오 반품은 극히 적...",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-02T22:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001882586?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "북한 해커 비트코인 탈취",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 10,
+   "recent20": 4,
+   "press": 10,
+   "firstArticleAt": "2026-11-02T21:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "北 해커, 바이낸스 탈취 자금 2차 세탁⋯비트코인으로 전환",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-02T22:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001071594?sid=104"
+    },
+    {
+     "title": "1000개 지갑에 3000번 송금…北 해커, 바이낸스 탈취금 ‘2차 세탁’ 돌...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-02T22:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002717883?sid=104"
+    },
+    {
+     "title": "바이낸스 해킹 탈취 자산, 美FBI 미공개 지갑 100곳으로도 흘러갔다",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-02T22:48:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2643252"
     }
    ]
   },
@@ -80,62 +112,30 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-02T21:20:00.000Z",
+   "articles90": 9,
+   "recent20": 3,
+   "press": 9,
+   "firstArticleAt": "2026-11-02T21:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "팔란티어, 3분기 실적 예상치 상회...시간 외 주가는 4%↓",
+     "press": "opinionnews.co.kr",
+     "publishedAt": "2026-11-02T22:50:00.000Z",
+     "link": "http://www.opinionnews.co.kr/news/articleView.html?idxno=146561"
+    },
+    {
+     "title": "팔란티어, 분기 매출 96% 급증에도 주가 약세",
+     "press": "it.chosun.com",
+     "publishedAt": "2026-11-02T22:42:00.000Z",
+     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000000079"
+    },
     {
      "title": "팔란티어, 분기 매출 3조 원 첫 돌파…美 민간 매출이 정부 첫 추월",
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-02T22:34:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000963233?sid=105"
-    },
-    {
-     "title": "팔란티어, 3분기 실적 예상 상회…美 상업 매출, 정부 부문 첫 추월",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-02T22:00:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4442621"
-    },
-    {
-     "title": "팔란티어 창사 첫 분기 매출 20억달러 돌파… 삼성SDS·더존비즈온 주가...",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-02T21:56:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=500744"
-    }
-   ]
-  },
-  {
-   "keyword": "북한 해커 비트코인 탈취",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-02T21:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "北 해커, 코인 1만2000개 지갑 분산···추적망 교란",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-02T21:52:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=879079"
-    },
-    {
-     "title": "북한 해커들, 바이낸스서 탈취한 자금 '2차 세탁' 중",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-02T21:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000160218?sid=100"
-    },
-    {
-     "title": "북한 해킹 조직, 바이낸스 가상자산 세탁 후 비트코인 전환 시작",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-02T21:42:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=883752"
     }
    ]
   },
@@ -145,7 +145,7 @@
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-02T21:55:00.000Z",
    "exclusive": false,
@@ -168,38 +168,6 @@
      "press": "dailian.co.kr",
      "publishedAt": "2026-11-02T21:57:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/119/0003150435?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "임영웅",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T21:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "임영웅, 자작곡 ‘또또’로 또 트로피…TMA 가을 부문 수상",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-02T22:26:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001302497"
-    },
-    {
-     "title": "임영웅 ‘2027 TMA’ 베스트뮤직 가을 부문 수상",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-02T22:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001147754"
-    },
-    {
-     "title": "임영웅, '또또'로 2027 TMA 베스트뮤직 가을 부문 수상",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-02T21:58:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16266597"
     }
    ]
   }
