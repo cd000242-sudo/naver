@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T15:20:16.115Z",
+ "builtAt": "2026-11-02T15:30:20.347Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,108 +11,12 @@
  "measured": 27,
  "candidates": [
   {
-   "keyword": "1호기 탑승자 168명 정보 유출",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-02T13:52:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李 대통령 부부 여권번호까지 … '1호기 탑승자' 168명 정보 유출",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-02T15:08:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/03/2026110300001.html"
-    },
-    {
-     "title": "대통령부터 경호관까지, '1호기' 탑승자 168명 정보 유출…5개월간 노출",
-     "press": "weekly.chosun.com",
-     "publishedAt": "2026-11-02T15:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/053/0000062794?sid=100"
-    },
-    {
-     "title": "李대통령 부부 여권번호까지 털렸다…‘1호기 탑승자’ 168명 정보유출",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-02T14:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002829731?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "우리들의 발라드2 박예승",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 6,
-   "recent20": 4,
-   "press": 4,
-   "firstArticleAt": "2026-11-02T14:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "비비, 박대희에 \"소속사 있나?\" 러브콜→박예승, 만점자의 충격 탈락 ('...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-02T15:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001406915"
-    },
-    {
-     "title": "‘만점’ 박예승, 탈락 이변…한로이 91표로 3라운드 진출 (‘우발라2’...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-02T15:10:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1793632184530231010"
-    },
-    {
-     "title": "파워 보컬 데스메치, 한로이 91표로 승리...박예승, 3라운드 진출 실패 ...",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-02T15:06:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=778449"
-    }
-   ]
-  },
-  {
-   "keyword": "코스피 반등 마감",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T13:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美나스닥 반등·유가 6% 급락…코스피 2.24% 상승에도 외국인 '삼전닉스...",
-     "press": "greened.kr",
-     "publishedAt": "2026-11-02T15:03:00.000Z",
-     "link": "https://www.greened.kr/news/articleView.html?idxno=353679"
-    },
-    {
-     "title": "[저PBR주 강세 마감] 현대제철 11%·롯데쇼핑 9% 급등…낮은 밸류에이션...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-02T14:40:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=622294"
-    },
-    {
-     "title": "'인텔 쇼크' 딛고 반등...코스피 5,800선 회복",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-02T13:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002427430?sid=101"
-    }
-   ]
-  },
-  {
    "keyword": "대한민국",
    "sources": [
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-02T14:54:00.000Z",
    "exclusive": false,
@@ -135,103 +39,6 @@
      "press": "dongponews.net",
      "publishedAt": "2026-11-02T14:54:00.000Z",
      "link": "https://www.dongponews.net/news/articleView.html?idxno=61427"
-    }
-   ]
-  },
-  {
-   "keyword": "5·18 내란 공소청 송치",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T14:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"5·18은 DJ·북한이 주도한 내란\" 주장 전한길 공소청 송치",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-02T14:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533045?sid=102"
-    },
-    {
-     "title": "\"5·18 북한개입\" 전한길씨 허위사실유포 혐의로 공소청 송치",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-02T14:07:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000078945"
-    },
-    {
-     "title": "“5·18은 북한이 주도한 내란”…전한길, ‘허위사실 유포 혐의’에 공...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-02T14:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005757907?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "금융지주 회장 연임 강화",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T13:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[DB증권 인사 전망] 30억 사고 놓친 2022년 감사… 곽봉석 연임·감사위...",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-02T15:00:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3081066"
-    },
-    {
-     "title": "금융당국, 지주회장 3연임 문턱 높인다",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-02T14:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005757908?sid=101"
-    },
-    {
-     "title": "금융지주 회장, 3연임 시 주주총회 75% 찬성 의무화한다",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-02T13:54:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2013412"
-    }
-   ]
-  },
-  {
-   "keyword": "탑과 나나 데이트 포착",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T13:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "탑♥나나, 생일 카페서 달달한 데이트…눈빛에 담긴 애정 '폭발'",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-02T14:22:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000051028"
-    },
-    {
-     "title": "'열애 인정' 탑♥나나, 생일카페 데이트 포착…팬 사과 다음 날 뜬 영상",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-02T14:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000485957"
-    },
-    {
-     "title": "열애 인정 한 달 만에… 데이트 현장 제대로 포착된 ‘톱스타 커플’",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-02T13:58:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1171192"
     }
    ]
   }
