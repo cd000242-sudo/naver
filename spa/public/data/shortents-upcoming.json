@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T20:52:02.841Z",
+ "builtAt": "2026-11-02T21:02:07.467Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,166 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "기온",
    "sources": [
     "google"
    ],
-   "articles90": 15,
+   "articles90": 18,
    "recent20": 3,
-   "press": 8,
+   "press": 11,
    "firstArticleAt": "2026-11-02T20:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[날씨] 출근길 기온 '뚝' 반짝 추위…큰 일교차 주의!",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-02T20:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922210?sid=103"
+     "title": "[날씨] 찬 공기 남하에 '뚝' 떨어진 기온…수요일 아침 출근길 쌀쌀",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-02T21:00:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=66918"
     },
     {
-     "title": "[제주도 날씨예보] 아침 기온 3~5도 하락…4일 밤부터 비",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-02T20:40:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=92798"
+     "title": "[오늘 날씨] 아침 기온 뚝 떨어져 '최저 0도'…일교차 주의",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-02T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005435539?sid=102"
     },
     {
-     "title": "[전남광주 날씨예보] 아침 기온 뚝…최저 3도, 일교차 15도 안팎",
-     "press": "thefairnews.co.kr",
+     "title": "[오늘 날씨] 아침 기온, 어제보다 5~8도 '뚝'…출근길 최저 0도",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-02T20:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541267?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "이란 대통령 권한 부여",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-02T20:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[국제유가] 미-이란 협상 기대감에 7% 넘게 폭락",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-02T21:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005598345?sid=101"
+    },
+    {
+     "title": "[금/유가] 미·이란 종전 협상 기대에 국제유가 7% 급락...금값 2% 반등",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-02T20:37:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261103000018"
+    },
+    {
+     "title": "이란 대통령 \"최고지도자, 정부에 평화 협상 권한 부여\"",
+     "press": "biz.sbs.co.kr",
      "publishedAt": "2026-11-02T20:36:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=92796"
+     "link": "https://n.news.naver.com/mnews/article/374/0000541262?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "관광객",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 4,
+   "press": 5,
+   "firstArticleAt": "2026-11-02T20:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서울 외국인 관광객 소비 8.8조…9개월 만에 작년 연간 실적 돌파",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-02T21:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004677984?sid=102"
+    },
+    {
+     "title": "서울 1~9월 외국 관광객 카드 소비 지난해 연간 실적 넘어",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-02T21:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004205712?sid=102"
+    },
+    {
+     "title": "서울 외국인 관광객 1314만명…카드 소비액은 8조8400억",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-02T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000548051?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "이강철",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T20:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"이강철 감독님 아니었으면 3할 쳤죠\" 30년 전 신인 유격수, KS MVP→사령...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-02T21:01:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/108/0003483944"
+    },
+    {
+     "title": "\"한국시리즈에서도 허리 많이 돌려보겠다\" 이강철 감독의 유쾌한 선언…...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-02T21:00:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/311/0002075623"
+    },
+    {
+     "title": "'1996 이강철-2006 박진만' 한국시리즈 MVP 출신 사령탑, 사상 최초로 시...",
+     "press": "thesportstimes.co.kr",
+     "publishedAt": "2026-11-02T20:31:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/472/0000042243"
+    }
+   ]
+  },
+  {
+   "keyword": "전한길 공소청 송치",
+   "sources": [
+    "signal.bz",
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T19:59:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "5·18 허위사실 유포 혐의 전한길 공소청 송치",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-02T20:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922225?sid=102"
+    },
+    {
+     "title": "‘5·18 北 개입설’ 유포 혐의 전한길 공소청 송치",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-02T20:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002829743?sid=102"
+    },
+    {
+     "title": "경찰, '5·18은 DJ 세력, 북한 주도 내란' 전한길, 허위사실로 공소청에...",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-02T19:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002463922?sid=102"
     }
    ]
   },
@@ -78,7 +207,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 183,
+  "flagged": 186,
   "matched": 59,
   "avgLeadMin": 121,
   "recent": [
