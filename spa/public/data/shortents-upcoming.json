@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T15:40:24.077Z",
+ "builtAt": "2026-11-02T15:50:27.664Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,34 @@
  "measured": 27,
  "candidates": [
   {
-   "keyword": "우리들의 발라드2 박예승",
+   "keyword": "대한민국",
    "sources": [
-    "daum"
+    "google"
    ],
-   "articles90": 6,
-   "recent20": 0,
+   "articles90": 4,
+   "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-02T14:26:00.000Z",
+   "firstArticleAt": "2026-11-02T14:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "비비, 박대희에 \"소속사 있나?\" 러브콜→박예승, 만점자의 충격 탈락 ('...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-02T15:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001406915"
+     "title": "자유 대한민국의 초석 이승만… 교과서에선 ‘反통일세력’처럼 묘사",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-02T15:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004007393?sid=103"
     },
     {
-     "title": "‘만점’ 박예승, 탈락 이변…한로이 91표로 3라운드 진출 (‘우발라2’...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-02T15:10:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1793632184530231010"
+     "title": "117홀 갖춘 화천, 대한민국 파크골프 본고장 입지 굳힌다",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-02T15:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001228046?sid=102"
     },
     {
-     "title": "파워 보컬 데스메치, 한로이 91표로 승리...박예승, 3라운드 진출 실패 ...",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-02T15:06:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=778449"
+     "title": "대한민국 최초 軍 통신위성 ‘아나시스 1호’ 임무 성공적 완수 후 명예...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-02T14:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002829735?sid=100"
     }
    ]
   },
@@ -71,38 +71,6 @@
      "press": "cbci.co.kr",
      "publishedAt": "2026-11-02T14:40:00.000Z",
      "link": "https://www.cbci.co.kr/news/articleView.html?idxno=622294"
-    }
-   ]
-  },
-  {
-   "keyword": "대한민국",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T14:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "117홀 갖춘 화천, 대한민국 파크골프 본고장 입지 굳힌다",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-02T15:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001228046?sid=102"
-    },
-    {
-     "title": "대한민국 최초 軍 통신위성 ‘아나시스 1호’ 임무 성공적 완수 후 명예...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-02T14:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002829735?sid=100"
-    },
-    {
-     "title": "\"700만 디아스포라, 대한민국의 미래 성장동력으로\"",
-     "press": "dongponews.net",
-     "publishedAt": "2026-11-02T14:54:00.000Z",
-     "link": "https://www.dongponews.net/news/articleView.html?idxno=61427"
     }
    ]
   }
