@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T02:59:35.059Z",
+ "builtAt": "2026-11-02T03:09:38.035Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,164 +11,131 @@
  "measured": 20,
  "candidates": [
   {
-   "keyword": "특검 중앙선관위 압수수색",
+   "keyword": "선관위 특검 압수수색",
    "sources": [
-    "nate",
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 48,
-   "recent20": 4,
-   "press": 38,
-   "firstArticleAt": "2026-11-02T01:30:00.000Z",
+   "articles90": 46,
+   "recent20": 3,
+   "press": 39,
+   "firstArticleAt": "2026-11-02T01:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "예산 삭감에도 9억원대 수당 지급 의혹…특검, 중앙선관위 압수수색",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-02T03:04:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=727525"
+    },
+    {
+     "title": "9억 쌈짓돈처럼 받았나…선관위 특검 “공추비 지급은 국고 등 손실” ...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-02T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002717630?sid=102"
+    },
     {
      "title": "예산 없어도 지급한 선관위 활동비…특검, 고위직 지시·공모 추적",
      "press": "ajunews.com",
      "publishedAt": "2026-11-02T02:54:00.000Z",
      "link": "https://www.ajunews.com/view/20261102112341117"
-    },
-    {
-     "title": "특검, 중앙선관위원장실 등 압수수색…9억원대 ‘활동비 부당 지급’ 의...",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-02T02:48:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611020085"
-    },
-    {
-     "title": "특검, 중앙선관위 압수수색...\"활동비 9억여 원 부당 지급\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-02T02:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002427126?sid=102"
     }
    ]
   },
   {
-   "keyword": "박항서 감독 인종차별",
+   "keyword": "결제주기 단축 시행",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 30,
-   "recent20": 6,
-   "press": 30,
-   "firstArticleAt": "2026-11-02T01:30:00.000Z",
+   "articles90": 36,
+   "recent20": 4,
+   "press": 35,
+   "firstArticleAt": "2026-11-02T01:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "박항서 감독에 \"김치맨\" 조롱…태국 프로축구서 인종차별 논란",
-     "press": "edaily.co.kr",
+     "title": "월요일 팔면 화요일 출금…주식 결제 ‘하루 단축’ 사용설명서",
+     "press": "etoday.co.kr",
      "publishedAt": "2026-11-02T02:58:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/018/0006402030"
+     "link": "https://www.etoday.co.kr/news/view/2642977"
     },
     {
-     "title": "태국에서 충격적인 ‘韓 축구 인종차별’…박항서 감독에게 “김치맨”...",
-     "press": "spotvnews.co.kr",
+     "title": "증권 결제주기 T+1 단축 내후년…주요국보다 빠른 전환 추진(종합)",
+     "press": "news.einfomax.co.kr",
      "publishedAt": "2026-11-02T02:58:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/477/0000636549"
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4442518"
     },
     {
-     "title": "박항서, “김치맨” “Fxxx” 등 관중 조롱에 격분",
-     "press": "donga.com",
-     "publishedAt": "2026-11-02T02:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003759366?sid=104"
+     "title": "\"월요일에 팔면 화요일에 돈 받는다\"…2028년 결제주기 단축",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-02T02:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005349157?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "철원 육군 하사 사망",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 31,
+   "recent20": 4,
+   "press": 29,
+   "firstArticleAt": "2026-11-02T02:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[속보] 철원 육군 전방부대서 20대 하사 외상 입고 사망",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-02T03:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003694797?sid=102"
+    },
+    {
+     "title": "강원 철원 전방 부대서 육군 하사 숨진 채 발견… 군·경 경위 조사",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-02T02:56:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3739408"
+    },
+    {
+     "title": "육군 \"철원 전방부대서 하사 1명 외상 입고 사망…군·경 조사\"",
+     "press": "ppss.kr",
+     "publishedAt": "2026-11-02T02:52:00.000Z",
+     "link": "https://www.ppss.kr/news/articleView.html?idxno=318532"
     }
    ]
   },
   {
    "keyword": "이재명 대통령 시정연설",
    "sources": [
-    "nate",
+    "signal.bz",
     "daum"
    ],
-   "articles90": 64,
-   "recent20": 64,
-   "press": 21,
-   "firstArticleAt": "2026-11-02T02:50:00.000Z",
+   "articles90": 69,
+   "recent20": 69,
+   "press": 15,
+   "firstArticleAt": "2026-11-02T03:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이 대통령, 조희대 대법원장에 \"잘 계세요?\"…대법관 갈등 후 첫 대면",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-02T02:58:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1134343"
+     "title": "[포토]시정연설 마친 李 대통령, '의원들과 찰칵'",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-02T03:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006402051?sid=100"
     },
     {
-     "title": "국회 본청 나서는 이재명 대통령",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-02T02:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016415833?sid=100"
-    },
-    {
-     "title": "국회 시정연설 마친 이재명 대통령",
+     "title": "홀로 남아 이재명 대통령과 인사하는 조경태 국민의힘 의원",
      "press": "dailian.co.kr",
-     "publishedAt": "2026-11-02T02:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003150131?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "LG CNS 해외 구축",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 21,
-   "recent20": 2,
-   "press": 21,
-   "firstArticleAt": "2026-11-02T01:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "LG CNS, 인도네시아 30MW급 AI데이터센터 완공…해외 사업 확대",
-     "press": "ziksir.com",
-     "publishedAt": "2026-11-02T02:42:00.000Z",
-     "link": "https://www.ziksir.com/news/articleView.html?idxno=151628"
+     "publishedAt": "2026-11-02T03:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003150153?sid=100"
     },
     {
-     "title": "LG CNS, 인니에 AI데이터센터 완공",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-02T02:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002717596?sid=105"
-    },
-    {
-     "title": "LG CNS, 인니 30MW AI 데이터센터 완공…국내 기업 첫 해외 구축",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-02T02:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000547782?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "KT, 3G 가입 중단",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 19,
-   "recent20": 2,
-   "press": 19,
-   "firstArticleAt": "2026-11-02T01:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "모바일 인터넷 시대 열었던 3G 통신 역사 속으로 사라지나 : SK텔레콤 이...",
-     "press": "huffingtonpost.kr",
-     "publishedAt": "2026-11-02T02:56:00.000Z",
-     "link": "https://www.huffingtonpost.kr/article/261718"
-    },
-    {
-     "title": "KT, 3G 신규가입 중단... 요금할인·기변 등 LTE·5G전환 지원",
-     "press": "meconomynews.com",
-     "publishedAt": "2026-11-02T02:56:00.000Z",
-     "link": "https://www.meconomynews.com/news/articleView.html?idxno=203159"
-    },
-    {
-     "title": "KT, 3G 서비스 종료 검토…신규가입 중단",
-     "press": "newspost.kr",
-     "publishedAt": "2026-11-02T02:24:00.000Z",
-     "link": "https://www.newspost.kr/news/articleView.html?idxno=226930"
+     "title": "국회 찾은 李대통령, 국민의힘 반발에 \"경쟁이 전쟁이 되면 안 돼\"",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-02T03:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002463806?sid=100"
     }
    ]
   },
@@ -207,16 +174,21 @@
   {
    "keyword": "이만희 총회장 법원 출석",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 11,
+   "articles90": 10,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-02T01:30:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-02T01:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘국힘 입당 강요’ 이만희 1심, 내년 3월에야 본궤도…장기화 불가피",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-02T03:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006402045?sid=102"
+    },
     {
      "title": "'국힘 당원 가입 강요' 이만희 등 신천지 간부, 첫 공판서 혐의 부인…...",
      "press": "newspim.com",
@@ -224,57 +196,90 @@
      "link": "https://www.newspim.com/news/view/20261102000714"
     },
     {
-     "title": "법원 도착한 이만희",
+     "title": "이만희 신천지 총회장 공판 출석",
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-02T01:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205328?sid=102"
-    },
-    {
-     "title": "신천지 이만희 휠체어 타고 공판 출석",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-02T01:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205330?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/079/0004205325?sid=102"
     }
    ]
   },
   {
-   "keyword": "계주",
+   "keyword": "김주형 PGA 공동 6위",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 3,
+   "articles90": 5,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T01:35:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-02T01:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"위험하다\" 학부모 민원에 운동회 계주 취소?…누리꾼 '와글'",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-02T02:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001976283?sid=102"
+     "title": "김주형, 오구 플레이 딛고 멕시코 오픈 공동 6위…3개월 만에 PGA 투어 톱...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-02T02:43:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/241/0003538608"
     },
     {
-     "title": "최민정, 쇼트트랙 2차 월드투어 1,000m 역전 우승…계주 은메달",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-02T01:44:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=560266"
+     "title": "김주형, 26위→6위 대반전!...AG 금메달 이어 PGA 시즌 5번째 톱10 달성",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-02T02:20:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/477/0000636544"
     },
     {
-     "title": "“위험하잖아요!” 초등학교 운동회의 꽃, 계주 경기 취소",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-02T01:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002829505?sid=102"
+     "title": "김주형 멕시코오픈 공동 6위..시즌 5번째 ‘톱10’",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-02T02:06:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/016/0002717526"
+    }
+   ]
+  },
+  {
+   "keyword": "박위, KTX 감사",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-02T02:13:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "박위와 '극과 극' 행보…'시각장애' 원샷한솔, 홀로 기차 여행→KTX 직원...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-02T02:47:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001406815"
+    },
+    {
+     "title": "박위와 비교되네…'시각장애' 원샷한솔, KTX 직원에 연신 고개 숙이며 '...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-02T02:31:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004120913"
+    },
+    {
+     "title": "‘시각장애’ 원샷한솔, KTX 직원 도움에 연신 감사인사…박위와 달랐다",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-02T02:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002717575?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 10,
-  "matched": 0,
-  "avgLeadMin": null,
-  "recent": []
+  "flagged": 15,
+  "matched": 1,
+  "avgLeadMin": 21,
+  "recent": [
+   {
+    "keyword": "박항서 감독 인종차별",
+    "hitKeyword": "박항서 인종차별 분노",
+    "hitAt": "2026-11-02T12:00:00+09:00",
+    "leadMin": 21
+   }
+  ]
  }
 }
