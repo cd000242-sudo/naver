@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T21:42:24.285Z",
+ "builtAt": "2026-11-02T21:52:27.947Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,63 +15,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 37,
-   "recent20": 13,
-   "press": 28,
+   "articles90": 43,
+   "recent20": 12,
+   "press": 31,
    "firstArticleAt": "2026-11-02T20:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[뉴욕증시 마감시황] 필라델피아 반도체지수 3.4% 급락에도…SK하이닉스...",
-     "press": "moneystorm.kr",
-     "publishedAt": "2026-11-02T21:38:00.000Z",
-     "link": "https://www.moneystorm.kr/news/articleView.html?idxno=7986"
+     "title": "[뉴욕증시]선거 D-1 혼조 마감…유가 급락·기술주 매도세 영향",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-02T21:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005836992?sid=101"
     },
     {
-     "title": "美·이란 협상 기대에 유가 7%대 급락...AI주 약세에 증시는 혼조 [데일...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-02T21:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004678012?sid=104"
+     "title": "유가 7.4% 급락에도 기술주 ‘팔자’…나스닥 1.07%↓",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-02T21:48:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261103500008"
     },
     {
-     "title": "유가 급락 호재도 못 살렸다…뉴욕증시 기술주 매도 확산",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-02T21:36:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=500734"
+     "title": "AI·반도체주 약세…이란 협상에 유가 급락",
+     "press": "koreareport.co.kr",
+     "publishedAt": "2026-11-02T21:46:00.000Z",
+     "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=54226"
     }
    ]
   },
   {
-   "keyword": "1호기 탑승자 정보 유출",
+   "keyword": "김여정 바이낸스 사태",
    "sources": [
-    "signal.bz",
-    "nate"
+    "daum"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-02T20:18:00.000Z",
-   "exclusive": true,
+   "articles90": 18,
+   "recent20": 10,
+   "press": 18,
+   "firstArticleAt": "2026-11-02T21:21:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "외교부, '1호기 탑승자 유출' \"엄중하게 인식...다각적 조사\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-02T21:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002427491?sid=100"
-    },
-    {
-     "title": "'공군 1호기' 탑승 명단 유출…대통령 부부 여권번호까지",
+     "title": "北 김여정, 바이낸스 해킹 배후 지목에 “美의 정치적 도발…예의주시...",
      "press": "etoday.co.kr",
-     "publishedAt": "2026-11-02T21:22:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2643235"
+     "publishedAt": "2026-11-02T21:50:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2643240"
     },
     {
-     "title": "“대통령 부부·장관·경호원까지”...공군1호기 탑승자 개인정보 유출",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-02T21:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000130322?sid=100"
+     "title": "[속보]김여정 \"바이낸스 사태, 우리 소행 아냐\" 부인..美의 정치적 도발",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-02T21:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005598356?sid=100"
+    },
+    {
+     "title": "[속보]北김여정, 바이낸스 사태에 “미국의 정치적 도발”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-02T21:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002717854?sid=100"
     }
    ]
   },
@@ -108,12 +107,45 @@
    ]
   },
   {
+   "keyword": "1호기 탑승자 정보 유출",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-02T20:32:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "외교부, '1호기 탑승자 유출' \"엄중하게 인식...다각적 조사\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-02T21:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002427491?sid=100"
+    },
+    {
+     "title": "'공군 1호기' 탑승 명단 유출…대통령 부부 여권번호까지",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-02T21:22:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2643235"
+    },
+    {
+     "title": "“대통령 부부·장관·경호원까지”...공군1호기 탑승자 개인정보 유출",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-02T21:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000130322?sid=100"
+    }
+   ]
+  },
+  {
    "keyword": "김원효 심진화에 평생 명품백 선물",
    "sources": [
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-02T20:41:00.000Z",
    "exclusive": false,
@@ -142,7 +174,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 194,
+  "flagged": 195,
   "matched": 74,
   "avgLeadMin": 238,
   "recent": [
