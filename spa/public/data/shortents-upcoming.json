@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T10:08:47.765Z",
+ "builtAt": "2026-11-02T10:18:51.154Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,10 +15,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 21,
+   "articles90": 16,
    "recent20": 1,
-   "press": 21,
-   "firstArticleAt": "2026-11-02T08:39:00.000Z",
+   "press": 16,
+   "firstArticleAt": "2026-11-02T08:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,14 +43,110 @@
    ]
   },
   {
+   "keyword": "애경산업 3분기 최대매출 적자",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 15,
+   "recent20": 2,
+   "press": 15,
+   "firstArticleAt": "2026-11-02T08:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "애경산업, 3분기 매출 1904억원 '역대 최대'…영업손실 33억원",
+     "press": "econonews.co.kr",
+     "publishedAt": "2026-11-02T10:18:00.000Z",
+     "link": "http://www.econonews.co.kr/news/articleView.html?idxno=446620"
+    },
+    {
+     "title": "애경산업, 3분기 매출 신기록에도 영업손실…브랜드 투자 확대에 비용 ...",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-02T10:10:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=845971"
+    },
+    {
+     "title": "애경산업, 3분기 매출 1904억 ‘역대 최대’…영업손실 33억",
+     "press": "fntimes.com",
+     "publishedAt": "2026-11-02T09:58:00.000Z",
+     "link": "https://www.fntimes.com/html/view.php?ud=202611021855467796b5b890e35c_18"
+    }
+   ]
+  },
+  {
+   "keyword": "대전 스토킹 살해 신상공개",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 15,
+   "recent20": 1,
+   "press": 15,
+   "firstArticleAt": "2026-11-02T08:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'대전 전 연인 살해' 40대, 신상 공개된다",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-02T10:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005435469?sid=102"
+    },
+    {
+     "title": "[속보]대전 ‘스토킹 신고’ 前연인 살해범 40대, 신상공개 최종 결정",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-02T09:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002717800?sid=102"
+    },
+    {
+     "title": "'대전 교제 살인' 40대 신상공개 결정…피의자 이의제기에 일시 유예",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-02T09:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009265662?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "현대 제네시스",
+   "sources": [
+    "google"
+   ],
+   "articles90": 14,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-02T08:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "현대차, 10월 글로벌 판매 32만9773대…전년 대비 6.3% 감소",
+     "press": "econonews.co.kr",
+     "publishedAt": "2026-11-02T10:08:00.000Z",
+     "link": "http://www.econonews.co.kr/news/articleView.html?idxno=446619"
+    },
+    {
+     "title": "기아, 현대차 제치고 내수 1위…완성차 5개사 10월 실적 희비",
+     "press": "digitalchosun.dizzo.com",
+     "publishedAt": "2026-11-02T09:44:00.000Z",
+     "link": "http://digitalchosun.dizzo.com/site/data/html_dir/2026/11/02/2026110280226.html"
+    },
+    {
+     "title": "현대차 울산 제네시스 생산라인 멈췄다…신차 투입 갈등",
+     "press": "iusm.co.kr",
+     "publishedAt": "2026-11-02T09:36:00.000Z",
+     "link": "https://www.iusm.co.kr/news/articleView.html?idxno=1069978"
+    }
+   ]
+  },
+  {
    "keyword": "코스피",
    "sources": [
     "google"
    ],
-   "articles90": 18,
-   "recent20": 4,
-   "press": 17,
-   "firstArticleAt": "2026-11-02T08:39:00.000Z",
+   "articles90": 13,
+   "recent20": 0,
+   "press": 12,
+   "firstArticleAt": "2026-11-02T08:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,142 +171,14 @@
    ]
   },
   {
-   "keyword": "대전 스토킹 살해 신상공개",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 16,
-   "recent20": 4,
-   "press": 16,
-   "firstArticleAt": "2026-11-02T08:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'대전 전 연인 살해' 40대, 신상 공개된다",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-02T10:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005435469?sid=102"
-    },
-    {
-     "title": "'대전 교제 살인' 40대 신상공개 결정…피의자 이의제기에 일시 유예",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-02T09:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009265662?sid=102"
-    },
-    {
-     "title": "대전 전 연인 살해 40대 신상공개 결정…이의제기로 9일 이후 공개(종합...",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-02T09:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205679?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "현대 제네시스",
-   "sources": [
-    "google"
-   ],
-   "articles90": 16,
-   "recent20": 0,
-   "press": 15,
-   "firstArticleAt": "2026-11-02T08:39:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "기아, 현대차 제치고 내수 1위…완성차 5개사 10월 실적 희비",
-     "press": "digitalchosun.dizzo.com",
-     "publishedAt": "2026-11-02T09:44:00.000Z",
-     "link": "http://digitalchosun.dizzo.com/site/data/html_dir/2026/11/02/2026110280226.html"
-    },
-    {
-     "title": "현대차 울산 제네시스 생산라인 멈췄다…신차 투입 갈등",
-     "press": "iusm.co.kr",
-     "publishedAt": "2026-11-02T09:36:00.000Z",
-     "link": "https://www.iusm.co.kr/news/articleView.html?idxno=1069978"
-    },
-    {
-     "title": "현대차, 10월 판매 6.3% 후퇴…SUV·제네시스 부진에 전동화 성장도 역부...",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-02T09:34:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=845970"
-    }
-   ]
-  },
-  {
-   "keyword": "애경산업 3분기 최대매출 적자",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 14,
-   "recent20": 1,
-   "press": 14,
-   "firstArticleAt": "2026-11-02T08:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "애경산업, 3분기 매출 1904억 ‘역대 최대’…영업손실 33억",
-     "press": "fntimes.com",
-     "publishedAt": "2026-11-02T09:58:00.000Z",
-     "link": "https://www.fntimes.com/html/view.php?ud=202611021855467796b5b890e35c_18"
-    },
-    {
-     "title": "애경산업, 3분기 역대 최대 매출에도 영업손실…수익성 악화",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-02T09:32:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=324800"
-    },
-    {
-     "title": "애경산업, 3분기 최대 매출에도 영업적자···브랜드 투자 확대",
-     "press": "finomy.com",
-     "publishedAt": "2026-11-02T09:22:00.000Z",
-     "link": "http://www.finomy.com/news/articleView.html?idxno=265377"
-    }
-   ]
-  },
-  {
-   "keyword": "서울중수청 하도급 대금 송치",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-02T08:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "중수청, 공소시효 임박한 '하도급 대금 부당감액' 사건 송치…공소청 약...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-02T09:51:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261102001600"
-    },
-    {
-     "title": "서울중수청, '하도급 대금 미지급' 법인 송치…공정거래 송치 1호",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-02T09:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009265652?sid=102"
-    },
-    {
-     "title": "서울중수청, 공정거래 첫 송치…‘하도급 대금 3억 미지급’",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-02T09:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003694988?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "박수현",
    "sources": [
     "google"
    ],
-   "articles90": 12,
+   "articles90": 11,
    "recent20": 2,
    "press": 9,
-   "firstArticleAt": "2026-11-02T08:48:00.000Z",
+   "firstArticleAt": "2026-11-02T08:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -231,38 +199,6 @@
      "press": "breaknews.com",
      "publishedAt": "2026-11-02T09:42:00.000Z",
      "link": "http://www.breaknews.com/1247676"
-    }
-   ]
-  },
-  {
-   "keyword": "샤이니 민호, 마라톤 논란",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-02T08:53:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "샤이니 민호, 풀코스 완주→반칙 논란→'실격 처리' 빗발…\"페이스메이...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-02T09:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001406873"
-    },
-    {
-     "title": "[DM왔어요] 샤이니 민호 마라톤 완주에 ‘반칙 논란’…\"뒤에서 누가 밀...",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-02T09:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922109?sid=102"
-    },
-    {
-     "title": "샤이니 민호, 마라톤 완주 후 '등 밀어주기' 논란…실격 요구까지 나온...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-02T09:44:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16266377"
     }
    ]
   },
@@ -299,15 +235,79 @@
    ]
   },
   {
+   "keyword": "샤이니 민호, 마라톤 논란",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-02T08:53:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "샤이니 민호, 풀코스 완주→반칙 논란→'실격 처리' 빗발…\"페이스메이...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-02T09:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001406873"
+    },
+    {
+     "title": "[DM왔어요] 샤이니 민호 마라톤 완주에 ‘반칙 논란’…\"뒤에서 누가 밀...",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-02T09:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922109?sid=102"
+    },
+    {
+     "title": "샤이니 민호, 마라톤 완주 후 '등 밀어주기' 논란…실격 요구까지 나온...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-02T09:44:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16266377"
+    }
+   ]
+  },
+  {
+   "keyword": "지방우대지수 개선 촉구",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-02T08:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "남양주시, 지방우대지수 개선 촉구",
+     "press": "sentv.co.kr",
+     "publishedAt": "2026-11-02T09:50:00.000Z",
+     "link": "https://www.sentv.co.kr/article/view/sentv202611020079"
+    },
+    {
+     "title": "남양주시, 지방우대지수 1권역 분류에 반발해 3권역 재지정 촉구",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-02T09:18:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2013369"
+    },
+    {
+     "title": "\"현실 모르는 지방우대지수…5극3특 정책과도 배치\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-02T09:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004205666?sid=102"
+    }
+   ]
+  },
+  {
    "keyword": "경찰 수사개혁위 권고안 발표",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-02T08:40:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-02T08:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -334,7 +334,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 145,
+  "flagged": 146,
   "matched": 34,
   "avgLeadMin": 65,
   "recent": [
