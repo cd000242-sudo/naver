@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T08:48:19.396Z",
+ "builtAt": "2026-11-02T08:58:22.965Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "삼성SDS 구미 데이터센터 착공",
@@ -16,93 +16,61 @@
     "signal.bz"
    ],
    "articles90": 46,
-   "recent20": 6,
-   "press": 44,
-   "firstArticleAt": "2026-11-02T07:22:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "CES서 맺은 투자협약 10달 만에 결실…삼성SDS 구미 데이터센터 첫 삽",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-02T08:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004677880?sid=102"
-    },
-    {
-     "title": "삼성SDS, 구미에 AI 데이터센터 짓는다",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-02T08:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005349334?sid=105"
-    },
-    {
-     "title": "삼성SDS, 구미에 AI 데이터센터 착공…영남권 피지컬 AI 거점 구축",
-     "press": "newsquest.co.kr",
-     "publishedAt": "2026-11-02T08:42:00.000Z",
-     "link": "https://www.newsquest.co.kr/news/articleView.html?idxno=304017"
-    }
-   ]
-  },
-  {
-   "keyword": "경기도 협치위원회 출범",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 42,
-   "recent20": 5,
-   "press": 35,
-   "firstArticleAt": "2026-11-02T07:23:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "경기도의회 45일간 정례회… 행정·예산 '민생 최우선' 송곳 검증",
-     "press": "joongboo.com",
-     "publishedAt": "2026-11-02T08:46:00.000Z",
-     "link": "https://www.joongboo.com/news/articleView.html?idxno=363741223"
-    },
-    {
-     "title": "경기도·경기도의회, 여야정협치위원회 출범",
-     "press": "news.skbroadband.com",
-     "publishedAt": "2026-11-02T08:44:00.000Z",
-     "link": "https://news.skbroadband.com/news/articleView.html?idxno=242032"
-    },
-    {
-     "title": "경기도·도의회 여야정협치위 출범… 내년 본예산부터 사전 협의",
-     "press": "thereport.co.kr",
-     "publishedAt": "2026-11-02T08:40:00.000Z",
-     "link": "https://www.thereport.co.kr/news/articleView.html?idxno=92973"
-    }
-   ]
-  },
-  {
-   "keyword": "싸이커스 민재 프로듀싱",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 37,
    "recent20": 8,
-   "press": 24,
+   "press": 43,
    "firstArticleAt": "2026-11-02T07:30:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "삼성SDS, 영남권 60兆 투자 '첫 결실'…구미 AI 데이터센터 착공",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-02T08:56:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=100465"
+    },
+    {
+     "title": "삼성SDS, 구미 AI 데이터센터 착공···최대 120MW 규모",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-02T08:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541227?sid=101"
+    },
+    {
+     "title": "삼성 ‘RX 전략 핵심’ 구미 AIDC 첫 삽…영남권 60조 투자 서막",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-02T08:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004677894?sid=105"
+    }
+   ]
+  },
+  {
+   "keyword": "美 중간선거",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 27,
+   "recent20": 9,
+   "press": 23,
+   "firstArticleAt": "2026-11-02T07:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘다이너마이트’ 터뜨린 싸이커스, 음악의 원점을 타격하다",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-02T08:40:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001302452"
+     "title": "[美중간선거 D-1]트럼프, 9시간 9회 화상유세…워싱턴서 피날레 연설",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-02T08:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014296209?sid=104"
     },
     {
-     "title": "\"무대 위에서 노래하는 게 가수의 일\" 싸이커스가 지키려는 '근본' [MD현...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-02T08:40:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004121103"
+     "title": "[코인시황] 비트코인 7만8000달러선 유지…해킹 여파·美 중간선거에 촉...",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-02T08:52:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=901679"
     },
     {
-     "title": "\"세상 뒤집을 타이밍\"…싸이커스, '다이너마이트'로 제대로 터트린다(종...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-02T08:40:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009265587"
+     "title": "\"美중간선거 후에도 정책 지원 계속\"..고려아연, 74억불 제련소 기대감...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-02T08:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005598189?sid=101"
     }
    ]
   },
@@ -112,12 +80,18 @@
     "google"
    ],
    "articles90": 11,
-   "recent20": 4,
+   "recent20": 3,
    "press": 10,
    "firstArticleAt": "2026-11-02T07:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "최대 110배 폭리…경찰, 매크로 암표 일당 24명 검거",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-02T08:50:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1542417"
+    },
     {
      "title": "프로야구 포스트시즌 입장권 4배 부풀려 판매한 암표상 검거",
      "press": "kookje.co.kr",
@@ -129,12 +103,70 @@
      "press": "chosun.com",
      "publishedAt": "2026-11-02T08:39:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/023/0004007324?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "조경태 이재명 대통령 악수",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-02T07:29:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'재판 재개' 고성에 40초간 중단…이 대통령 \"계속 방해\" 응수",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-02T08:42:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1318983&inflow=N"
     },
     {
-     "title": "韓총리 \"이제 암표로 돈 못 벌어…부당이익 끝까지 환수\"",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-02T08:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005349312?sid=100"
+     "title": "국회서 이재명 예산안 연설…여야, 박수와 침묵 속 '재판 재개' 외침",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-02T08:14:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=622440"
+    },
+    {
+     "title": "이 대통령, 시정연설 앞두고 나온 '돼지 비유' 발언 범야권 반발",
+     "press": "inews365.com",
+     "publishedAt": "2026-11-02T08:04:00.000Z",
+     "link": "https://www.inews365.com/news/article.html?no=941815"
+    }
+   ]
+  },
+  {
+   "keyword": "미래대응기금 공방",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-02T07:47:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국회도 '재정' 경고…불붙는 미래대응기금 '쌈짓돈' 논란",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-02T08:48:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1318969&inflow=N"
+    },
+    {
+     "title": "예산 심사 앞두고 미래대응기금 여야 공방‥\"안전판\"·\"반재정\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-02T08:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001532964?sid=100"
+    },
+    {
+     "title": "예산토론회서도 미래대응기금 충돌…與 \"재정 안전판\" 野 \"통제 우회수...",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-02T08:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005435416?sid=100"
     }
    ]
   },
@@ -143,10 +175,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 6,
    "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-02T07:25:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-02T07:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -157,16 +189,16 @@
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16266318"
     },
     {
-     "title": "미 상원도 '블루웨이브'?…폴리마켓 \"민주당 53석\" 전망",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-02T08:08:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2120965"
-    },
-    {
      "title": "민주당, 7개 경합주서 공화당 앞서…미시간서 최대 격차",
      "press": "mdtoday.co.kr",
      "publishedAt": "2026-11-02T08:08:00.000Z",
      "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=622439"
+    },
+    {
+     "title": "미 상원도 '블루웨이브'?…폴리마켓 \"민주당 53석\" 전망",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-02T08:08:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2120965"
     }
    ]
   },
@@ -175,12 +207,12 @@
    "sources": [
     "google"
    ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-02T07:22:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-02T08:18:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
      "title": "HD현대, 필리핀조선소 첫 선박 진수 성과…법인장·안전생산 임원 승진",
@@ -203,45 +235,12 @@
    ]
   },
   {
-   "keyword": "제트기",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 4,
-   "firstArticleAt": "2026-11-02T08:09:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "트럼프 떠난 1시간 뒤 플로리다에 제트기 추락에 9명 전원 사망...암살 ...",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-02T08:38:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=324762"
-    },
-    {
-     "title": "트럼프 저택 10분 거리서 제트기 추락해 9명 사망…트럼프는 사고 1시간...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-02T08:36:00.000Z",
-     "link": "https://www.ajunews.com/view/20261102170532231"
-    },
-    {
-     "title": "‘슈웅- 쾅!’ 블랙박스에 찍힌 美 제트기 추락 순간 [현장영상]",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-02T08:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012285554?sid=121"
-    }
-   ]
-  },
-  {
    "keyword": "이형일 부총리 현대차 방문",
    "sources": [
     "nate"
    ],
    "articles90": 16,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-02T07:32:00.000Z",
    "exclusive": false,
@@ -264,6 +263,39 @@
      "press": "newspim.com",
      "publishedAt": "2026-11-02T07:46:00.000Z",
      "link": "https://www.newspim.com/news/view/20261102001515"
+    }
+   ]
+  },
+  {
+   "keyword": "제트기",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-02T08:09:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프 떠난 1시간 뒤 플로리다에 제트기 추락에 9명 전원 사망...암살 ...",
+     "press": "thepublic.kr",
+     "publishedAt": "2026-11-02T08:38:00.000Z",
+     "link": "https://www.thepublic.kr/news/articleView.html?idxno=324762"
+    },
+    {
+     "title": "트럼프 자택 10분 거리서 제트기 추락해 9명 사망…트럼프는 사고 1시간...",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-02T08:36:00.000Z",
+     "link": "https://www.ajunews.com/view/20261102170532231"
+    },
+    {
+     "title": "‘슈웅- 쾅!’ 블랙박스에 찍힌 美 제트기 추락 순간 [현장영상]",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-02T08:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012285554?sid=121"
     }
    ]
   },
@@ -334,7 +366,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 116,
+  "flagged": 118,
   "matched": 30,
   "avgLeadMin": 69,
   "recent": [
