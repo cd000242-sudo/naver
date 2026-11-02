@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T09:28:33.507Z",
+ "builtAt": "2026-11-02T09:38:37.189Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,116 +8,59 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "10월 판매 감소",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 73,
+   "articles90": 51,
    "recent20": 7,
-   "press": 57,
-   "firstArticleAt": "2026-11-02T08:00:00.000Z",
+   "press": 43,
+   "firstArticleAt": "2026-11-02T08:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "KGM, 10월 6537대 판매…전년比 31.3%↓",
-     "press": "weekly.hankooki.com",
-     "publishedAt": "2026-11-02T09:24:00.000Z",
-     "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7191844"
+     "title": "현대차, 10월 판매 6.3% 후퇴…SUV·제네시스 부진에 전동화 성장도 역부...",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-02T09:34:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=845970"
     },
     {
-     "title": "르노코리아, 10월 5503대 판매…\"3달 연속 내수 성장\"",
-     "press": "weekly.hankooki.com",
-     "publishedAt": "2026-11-02T09:24:00.000Z",
-     "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7191841"
+     "title": "광주 백화점 판매 4.6% 늘었지만…대형마트는 8.6% 감소",
+     "press": "aitimes.com",
+     "publishedAt": "2026-11-02T09:30:00.000Z",
+     "link": "https://www.aitimes.com/news/articleView.html?idxno=216912"
     },
     {
-     "title": "한국GM, 10월 총 5만189대 판매… 전년比 26.6%↑",
-     "press": "weekly.hankooki.com",
-     "publishedAt": "2026-11-02T09:22:00.000Z",
-     "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7191847"
+     "title": "기아·한국GM이 살린 10월 … 완성차 5사 판매 68만대·1.7%↑",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-02T09:28:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/02/2026110200379.html"
     }
    ]
   },
   {
-   "keyword": "현대 제네시스",
+   "keyword": "애경산업 3분기 매출",
    "sources": [
-    "google"
-   ],
-   "articles90": 36,
-   "recent20": 2,
-   "press": 34,
-   "firstArticleAt": "2026-11-02T08:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "현대차, 10월 글로벌서 32만9773대대 판매…전년比 6.3%↓",
-     "press": "weekly.hankooki.com",
-     "publishedAt": "2026-11-02T09:20:00.000Z",
-     "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7191835"
-    },
-    {
-     "title": "현대차 울산공장, 노사갈등에 제네시스 생산 중단",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-02T09:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005598197?sid=102"
-    },
-    {
-     "title": "현대차 노사 '신차 시험차량 투입' 갈등에 제네시스 생산라인 멈춰",
-     "press": "kado.net",
-     "publishedAt": "2026-11-02T09:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000208907?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "삼성SDS 구미 AI 센터 착공",
-   "sources": [
-    "nate"
+    "daum"
    ],
    "articles90": 32,
-   "recent20": 3,
-   "press": 31,
-   "firstArticleAt": "2026-11-02T08:00:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "삼성SDS '구미 AI 데이터센터' 첫 삽… 최대 120㎿ 규모",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-02T09:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005598237?sid=105"
-    },
-    {
-     "title": "삼성, 영남 '60조 투자' 첫발…삼성SDS, 구미 AI데이터센터 착공",
-     "press": "weekly.hankooki.com",
-     "publishedAt": "2026-11-02T09:24:00.000Z",
-     "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7191784"
-    },
-    {
-     "title": "[포토뉴스] 삼성SDS 구미 AI 데이터센터 첫 삽",
-     "press": "yeongnam.com",
-     "publishedAt": "2026-11-02T09:18:00.000Z",
-     "link": "https://www.yeongnam.com/web/view.php?key=20261102020245521"
-    }
-   ]
-  },
-  {
-   "keyword": "애경산업 3분기 최대 매출 적자",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 25,
-   "recent20": 4,
-   "press": 25,
-   "firstArticleAt": "2026-11-02T08:02:00.000Z",
+   "recent20": 2,
+   "press": 32,
+   "firstArticleAt": "2026-11-02T08:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "애경산업, 3분기 역대 최대 매출에도 영업손실…수익성 악화",
+     "press": "thepublic.kr",
+     "publishedAt": "2026-11-02T09:32:00.000Z",
+     "link": "https://www.thepublic.kr/news/articleView.html?idxno=324800"
+    },
     {
      "title": "애경산업, 3분기 최대 매출에도 영업적자···브랜드 투자 확대",
      "press": "finomy.com",
@@ -129,44 +72,71 @@
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-02T09:18:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006402346?sid=101"
-    },
-    {
-     "title": "애경산업, 3Q 최대 매출에도 영업적자…브랜드 투자 확대",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-02T09:10:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026110218020143816"
     }
    ]
   },
   {
-   "keyword": "포스코홀딩스 영업익 증가",
+   "keyword": "삼성SDS AI 데이터센터",
    "sources": [
     "daum"
    ],
-   "articles90": 21,
+   "articles90": 33,
    "recent20": 4,
-   "press": 21,
-   "firstArticleAt": "2026-11-02T08:07:00.000Z",
+   "press": 31,
+   "firstArticleAt": "2026-11-02T08:12:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "AI데이터센터 활성화… 기업 \"국산 NPU 실증 기회 늘려달라\"",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-02T09:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005598273?sid=101"
+    },
+    {
+     "title": "'애니콜 신화' 현장에 AI 거점…삼성SDS, 구미 데이터센터 첫 삽",
+     "press": "kyongbuk.co.kr",
+     "publishedAt": "2026-11-02T09:30:00.000Z",
+     "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4089424"
+    },
+    {
+     "title": "삼성SDS '구미 AI 데이터센터' 첫 삽… 최대 120㎿ 규모",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-02T09:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005598237?sid=105"
+    }
+   ]
+  },
+  {
+   "keyword": "현대 제네시스",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 30,
+   "recent20": 3,
+   "press": 29,
+   "firstArticleAt": "2026-11-02T08:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "포스코그룹 영업익 42% 책임진 포스코인터…가스전이 실적 버팀목",
-     "press": "magazine.hankyung.com",
-     "publishedAt": "2026-11-02T09:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/050/0000112746?sid=101"
+     "title": "현대차 울산 제네시스 생산라인 멈췄다…신차 투입 갈등",
+     "press": "iusm.co.kr",
+     "publishedAt": "2026-11-02T09:36:00.000Z",
+     "link": "https://www.iusm.co.kr/news/articleView.html?idxno=1069978"
     },
     {
-     "title": "\"철강 살아났다\"…포스코홀딩스, 3분기 영업이익 45% 급증",
-     "press": "news2day.co.kr",
-     "publishedAt": "2026-11-02T09:26:00.000Z",
-     "link": "https://www.news2day.co.kr/article/20261102500169"
+     "title": "현대차, 10월 판매 6.3% 후퇴…SUV·제네시스 부진에 전동화 성장도 역부...",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-02T09:34:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=845970"
     },
     {
-     "title": "'철강이 주도' 포스코홀딩스, 3분기 영업익 47.9%↑",
-     "press": "newsprime.co.kr",
-     "publishedAt": "2026-11-02T09:26:00.000Z",
-     "link": "http://www.newsprime.co.kr/news/article.html?no=753368"
+     "title": "현대차, 10월 글로벌서 32만9773대대 판매…전년比 6.3%↓",
+     "press": "weekly.hankooki.com",
+     "publishedAt": "2026-11-02T09:20:00.000Z",
+     "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7191835"
     }
    ]
   },
@@ -175,30 +145,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 11,
+   "articles90": 12,
    "recent20": 3,
-   "press": 11,
+   "press": 12,
    "firstArticleAt": "2026-11-02T08:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "송미령 농식품부 장관, 충남 서산 벼 수확·쌀 수매현장 점검",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-02T09:36:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4116318"
+    },
+    {
+     "title": "송미령 장관, 서산 벼 수확·수매 현장 점검…쌀값 안정 강조",
+     "press": "livesnews.com",
+     "publishedAt": "2026-11-02T09:32:00.000Z",
+     "link": "https://www.livesnews.com/news/article.html?no=65576"
+    },
+    {
      "title": "송미령 농식품부 장관, 서산 RPC 통합에 \"농업인 소득 향상 기대\"",
      "press": "daejonilbo.com",
      "publishedAt": "2026-11-02T09:27:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/656/0000191273?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "대전 스토킹 살해 신상공개",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 11,
+   "recent20": 3,
+   "press": 11,
+   "firstArticleAt": "2026-11-02T08:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[속보]‘스토킹 신고’ 전 연인 살해한 대전 40대 신상공개 결정…9일 게...",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-02T09:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000366110?sid=102"
     },
     {
-     "title": "올해 쌀 6만6000톤 초과 생산 전망…정부, 수확기 가격 안정 나서",
-     "press": "newswhoplus.com",
-     "publishedAt": "2026-11-02T09:10:00.000Z",
-     "link": "https://www.newswhoplus.com/news/articleView.html?idxno=73302"
+     "title": "대전서 ‘스토킹 신고’ 전 연인 살해한 40대 신상 공개 결정",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-02T09:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000160151?sid=102"
     },
     {
-     "title": "올해 쌀 6만6천 톤 과잉 전망…농식품부 장관, 서산서 쌀값 안정 약속",
-     "press": "tjb.co.kr",
-     "publishedAt": "2026-11-02T09:10:00.000Z",
-     "link": "https://www.tjb.co.kr/news05/bodo/view/id/105589"
+     "title": "[속보] 대전 '스토킹 신고' 전 연인 살해범 40대 신상 공개 결정",
+     "press": "busan.com",
+     "publishedAt": "2026-11-02T09:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001405275?sid=102"
     }
    ]
   },
@@ -207,42 +209,107 @@
    "sources": [
     "google"
    ],
-   "articles90": 16,
-   "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-02T08:00:00.000Z",
+   "articles90": 13,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-02T08:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "박수현 충남지사, 국비 13조 사수·추가 확보 집중",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-02T09:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000191280?sid=102"
+    },
+    {
+     "title": "박수현 충남지사 “북미 순방 성과, 지역 성장으로 연결…국비 확보 총...",
+     "press": "sisanews24.co.kr",
+     "publishedAt": "2026-11-02T09:30:00.000Z",
+     "link": "http://www.sisanews24.co.kr/19800"
+    },
     {
      "title": "박수현 충남지사 \"2차 공공기관 이전, 민선 9기 핵심 성과…50개 기관 유...",
      "press": "newsprime.co.kr",
      "publishedAt": "2026-11-02T09:06:00.000Z",
      "link": "http://www.newsprime.co.kr/news/article.html?no=753367"
+    }
+   ]
+  },
+  {
+   "keyword": "안민석 10대 교육 해법",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 11,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-02T08:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "안민석표 경기교육 대전환… 50개 사업 덜어내고 핵심 정책에 8조 8,946억...",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-02T09:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002534384?sid=102"
     },
     {
-     "title": "박수현 충남지사 \"대구 치의학연구원 유치전, 의아하고 불쾌\"",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-02T09:00:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261102001575"
+     "title": "경기도교육청, 2027년 체험학습 재개 추진…과밀학급·교사 행정업무 개...",
+     "press": "gosiweek.com",
+     "publishedAt": "2026-11-02T09:12:00.000Z",
+     "link": "https://www.gosiweek.com/article/1065603917104668"
     },
     {
-     "title": "박수현 충남지사, 글로벌 기업 투자 '광속행정' 지원…국비 확보 총력",
-     "press": "newstnt.com",
+     "title": "안민석 경기도교육감, \"교복 담합 비리 발본색원할 것\"…10대 교육 해법...",
+     "press": "kihoilbo.co.kr",
+     "publishedAt": "2026-11-02T08:50:00.000Z",
+     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3039642"
+    }
+   ]
+  },
+  {
+   "keyword": "경찰 수사개혁위 권고안 발표",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-02T08:13:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "경찰 수개위 “국수본부장 외부임명 해야”…인력·예산 독립 권고",
+     "press": "segye.com",
+     "publishedAt": "2026-11-02T09:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004171810?sid=102"
+    },
+    {
+     "title": "수사개혁위 \"국수본부장에 실질적 인사·예산권 줘야\"… 경찰 수사 독립...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-02T09:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000963166?sid=102"
+    },
+    {
+     "title": "경찰 수사개혁위원회 '국가수사본부장의 외부 임명 활성화' 권고",
+     "press": "news.tvchosun.com",
      "publishedAt": "2026-11-02T09:00:00.000Z",
-     "link": "https://www.newstnt.com/news/articleView.html?idxno=726310"
+     "link": "https://n.news.naver.com/mnews/article/448/0000648495?sid=102"
     }
    ]
   },
   {
    "keyword": "낮과 밤은 서로에게",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 14,
-   "recent20": 5,
-   "press": 7,
-   "firstArticleAt": "2026-11-02T08:03:00.000Z",
+   "articles90": 12,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-02T08:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -259,42 +326,10 @@
      "link": "https://m.entertain.naver.com/article/408/0000326402"
     },
     {
-     "title": "[Y현장] '낮과 밤은 서로에게' 심은경 \"도전적인 작품, 감독님 응원으로...",
+     "title": "[Y현장] '낮과 밤은 서로에게' 김민하 \"꿈 같았던 기억, 모든 계절 같은...",
      "press": "star.ytn.co.kr",
      "publishedAt": "2026-11-02T09:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/052/0002427352"
-    }
-   ]
-  },
-  {
-   "keyword": "경찰 수사개혁위 권고안 발표",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-02T08:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수사개혁위 \"국수본부장에 실질적 인사·예산권 줘야\"… 경찰 수사 독립...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-02T09:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000963166?sid=102"
-    },
-    {
-     "title": "경찰 수사개혁위원회 '국가수사본부장의 외부 임명 활성화' 권고",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-02T09:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000648495?sid=102"
-    },
-    {
-     "title": "경찰 수사개혁위 \"국수본부장 외부서도 뽑아야…사이버수사국 복원\"(종...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-02T08:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014296208?sid=102"
+     "link": "https://m.entertain.naver.com/article/052/0002427353"
     }
    ]
   },
@@ -306,10 +341,16 @@
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-02T08:00:00.000Z",
+   "firstArticleAt": "2026-11-02T08:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "가덕도신공항 11월 우선 착공 불발...공사비 증액 '특별법'에 일정 또 지...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-02T09:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000963174?sid=101"
+    },
     {
      "title": "국힘 부산의원들 \"가덕도신공항, 정부가 공사비 증액 문제 해결해야\"",
      "press": "mbn.mk.co.kr",
@@ -321,44 +362,38 @@
      "press": "news.knn.co.kr",
      "publishedAt": "2026-11-02T08:18:00.000Z",
      "link": "https://news.knn.co.kr/news/article/193885"
-    },
-    {
-     "title": "가덕도는 여야가 힘 합치는데…TK정치권은 '동상이몽'",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-02T08:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001037889?sid=100"
     }
    ]
   },
   {
-   "keyword": "G마켓 개인정보 유출",
+   "keyword": "이형일 부총리 현대차 방문",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-02T08:12:00.000Z",
+   "firstArticleAt": "2026-11-02T08:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "G마켓, 개인정보 유출 피해 고객에 1만원 지급",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-02T09:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003150387?sid=101"
+     "title": "정의선 만난 이형일 부총리… \"전기차 세액공제 논의 적극 참여하겠다\"",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-02T09:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003056695?sid=101"
     },
     {
-     "title": "G마켓 “고객 개인정보 유출…당국 조사 중”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-02T08:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012285540?sid=101"
+     "title": "전기차 세액공제 확대 요구…이형일 부총리, 현대차·기아 찾아 업계 의...",
+     "press": "cwn.kr",
+     "publishedAt": "2026-11-02T08:36:00.000Z",
+     "link": "https://www.cwn.kr/news/articleView.html?idxno=60803"
     },
     {
-     "title": "G마켓, e쿠폰 정보 유출 고객 모두 보상...금전 피해 없어도 1만원",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-02T08:12:00.000Z",
-     "link": "https://www.insight.co.kr/news/580270"
+     "title": "이형일 “전기차 경쟁력 강화방안 이달 발표”⋯업계, 생산세액공제 지...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-02T08:14:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2643183"
     }
    ]
   },
@@ -397,10 +432,16 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 135,
-  "matched": 32,
+  "flagged": 140,
+  "matched": 33,
   "avgLeadMin": 66,
   "recent": [
+   {
+    "keyword": "암표",
+    "hitKeyword": "프로야구 티켓 암표 적발",
+    "hitAt": "2026-11-02T18:30:00+09:00",
+    "leadMin": 52
+   },
    {
     "keyword": "현대차 제네시스 생산 중단",
     "hitKeyword": "현대차 울산 생산라인 중단",
@@ -454,12 +495,6 @@
     "hitKeyword": "최원태 대니엘 맞대결",
     "hitAt": "2026-11-02T17:00:00+09:00",
     "leadMin": 94
-   },
-   {
-    "keyword": "심수봉 김다현 비판 사과",
-    "hitKeyword": "심수봉 재차 사과",
-    "hitAt": "2026-11-02T16:00:00+09:00",
-    "leadMin": 104
    }
   ]
  }
