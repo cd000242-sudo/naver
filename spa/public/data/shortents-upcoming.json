@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T06:46:19.277Z",
+ "builtAt": "2026-11-02T06:56:23.871Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "삼성SDS 구미 AI 센터 착공",
@@ -16,7 +16,7 @@
     "nate"
    ],
    "articles90": 60,
-   "recent20": 4,
+   "recent20": 2,
    "press": 60,
    "firstArticleAt": "2026-11-02T06:00:00.000Z",
    "exclusive": false,
@@ -47,30 +47,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 44,
+   "articles90": 43,
    "recent20": 7,
-   "press": 43,
-   "firstArticleAt": "2026-11-02T05:18:00.000Z",
+   "press": 42,
+   "firstArticleAt": "2026-11-02T05:28:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "대우건설, 체코 원전 시공계약 재협상 요청…\"산업부 중재 필요\"",
-     "press": "opinionnews.co.kr",
-     "publishedAt": "2026-11-02T06:40:00.000Z",
-     "link": "http://www.opinionnews.co.kr/news/articleView.html?idxno=146532"
+     "title": "대우건설 \"산업부가 체코 원전 시공계약 중재해달라...수백억원 정산없...",
+     "press": "livebiz.today",
+     "publishedAt": "2026-11-02T06:52:00.000Z",
+     "link": "https://www.livebiz.today/news/articleView.html?idxno=206127"
     },
     {
-     "title": "공사비 싸움에 멈춰선 체코 원전… 대우건설, 정부에 SOS",
-     "press": "the-biz.co.kr",
-     "publishedAt": "2026-11-02T06:40:00.000Z",
-     "link": "http://www.the-biz.co.kr/news/articleView.html?idxno=730488"
+     "title": "대우건설, 체코 원전 협상 종료에 유감…“산업부 중재로 재협상 요청”",
+     "press": "lawissue.co.kr",
+     "publishedAt": "2026-11-02T06:52:00.000Z",
+     "link": "https://www.lawissue.co.kr/view.php?ud=20261102154934127467191f6c6e_12"
     },
     {
-     "title": "체코 원전 시공사 교체 논란...대우건설 \"8년 협력·사업 연속성 고려해...",
-     "press": "beyondpost.co.kr",
-     "publishedAt": "2026-11-02T06:38:00.000Z",
-     "link": "http://www.beyondpost.co.kr/view.php?ud=202611021532103229205868f676_30"
+     "title": "대우건설, 체코 원전시공 재협상 결렬에 \"산업부 중재해달라\" 요청",
+     "press": "whitepaper.co.kr",
+     "publishedAt": "2026-11-02T06:50:00.000Z",
+     "link": "http://www.whitepaper.co.kr/news/articleView.html?idxno=268357"
     }
    ]
   },
@@ -79,13 +79,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 22,
-   "recent20": 3,
-   "press": 20,
-   "firstArticleAt": "2026-11-02T05:17:00.000Z",
+   "articles90": 18,
+   "recent20": 2,
+   "press": 17,
+   "firstArticleAt": "2026-11-02T05:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'신흥 명문' KT, '전통 강호' 삼성의 한국시리즈 첫 맞대결",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-02T06:54:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=878896"
+    },
     {
      "title": "'KBO 한국시리즈 1차전' KT 대니얼 vs 삼성 최원태 선발 맞대결 [뉴시스...",
      "press": "newsis.com",
@@ -97,12 +103,6 @@
      "press": "segye.com",
      "publishedAt": "2026-11-02T06:36:00.000Z",
      "link": "https://m.sports.naver.com/kbaseball/article/022/0004171730"
-    },
-    {
-     "title": "KT 대니엘 vs 삼성 최원태, KS 1차전 선발 격돌",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-02T06:30:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/016/0002717726"
     }
    ]
   },
@@ -111,13 +111,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 15,
+   "articles90": 16,
+   "recent20": 1,
+   "press": 16,
    "firstArticleAt": "2026-11-02T05:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "11월에 웬 황사?…서울서 6년 만에 관측, 내일 밤 또 몰려온다",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-02T06:52:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=778380"
+    },
     {
      "title": "서울 6년 만에 ‘11월 황사’…수도권·서해안 미세먼지 ‘나쁨’",
      "press": "sedaily.com",
@@ -129,44 +135,6 @@
      "press": "mbn.mk.co.kr",
      "publishedAt": "2026-11-02T06:29:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/057/0001976310?sid=102"
-    },
-    {
-     "title": "올해 11월 6년 만에 서울서 '가을 황사' 관측됐다 : 3일 화요일도 마스크...",
-     "press": "huffingtonpost.kr",
-     "publishedAt": "2026-11-02T06:26:00.000Z",
-     "link": "https://www.huffingtonpost.kr/article/261730"
-    }
-   ]
-  },
-  {
-   "keyword": "리센느 원이, 무대서 이탈했다",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 15,
-   "recent20": 1,
-   "press": 15,
-   "firstArticleAt": "2026-11-02T05:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "리센느 원이 \"깜짝 무대 이탈 이유? 갑작스러운 호흡 곤란 탓\"",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-02T06:29:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000326369"
-    },
-    {
-     "title": "리센느 원이, 공연 중 사색된 채 이탈 '왜'…\"줄어든 의상 때문에 숨 안...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-02T06:21:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009265135"
-    },
-    {
-     "title": "리센느 원이, 공연 중 무대 이탈 해명 “줄어든 의상에 호흡 어려워”",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-02T06:12:00.000Z",
-     "link": "http://www.breaknews.com/1247567"
     }
    ]
   },
@@ -175,30 +143,95 @@
    "sources": [
     "google"
    ],
-   "articles90": 14,
-   "recent20": 6,
+   "articles90": 16,
+   "recent20": 14,
    "press": 14,
-   "firstArticleAt": "2026-11-02T06:04:00.000Z",
+   "firstArticleAt": "2026-11-02T06:25:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "바이낸스 8조원 해킹 쇼크…금융위, 코인거래소 보안벽 높인다",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-02T06:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003481224?sid=101"
+     "title": "덕성여대 사이버보안전공, 포스코DX 현장 견학",
+     "press": "naeil.com",
+     "publishedAt": "2026-11-02T06:54:00.000Z",
+     "link": "https://www.naeil.com/news/read/607301?ref=naver"
     },
     {
-     "title": "[빗썸 보안 민낯③] 고객정보 수백 건 유출됐는데 피해자는 알고 있나…...",
-     "press": "news.ifm.kr",
-     "publishedAt": "2026-11-02T06:44:00.000Z",
-     "link": "https://news.ifm.kr/news/articleView.html?idxno=483242"
+     "title": "금융위, 가상자산 업계 긴급 소집…콜드월렛 비중 확대 등 '보안 강화' ...",
+     "press": "newsway.co.kr",
+     "publishedAt": "2026-11-02T06:52:00.000Z",
+     "link": "https://www.newsway.co.kr/news/view?ud=2026110215392768043"
     },
     {
-     "title": "바이낸스 8조 해킹에 국내 거래소도 비상…금융위, 자산 보관·출금 보안...",
-     "press": "techm.kr",
+     "title": "한전KDN, 한국철도공사와 협약…철도 전력설비 예지보전·AI 보안 실증 추...",
+     "press": "newsmaker.or.kr",
+     "publishedAt": "2026-11-02T06:52:00.000Z",
+     "link": "http://www.newsmaker.or.kr/news/articleView.html?idxno=185086"
+    }
+   ]
+  },
+  {
+   "keyword": "협박",
+   "sources": [
+    "google"
+   ],
+   "articles90": 15,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-02T05:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "신세경에 450회 ‘염산테러’ 협박·모욕…2심 징역 8개월 법정구속",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-02T06:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001882423?sid=102"
+    },
+    {
+     "title": "전자발찌 찬 50대 “청와대 흉기 난동” 협박 뒤 전원 꺼…경찰 긴급체...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-02T06:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002830286?sid=102"
+    },
+    {
+     "title": "‘100만달러 협박’ 피해기업 “북 해킹 가능성”…일 정부 “분석 중”",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-02T06:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002830283?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "정점식 국민의힘 원내대표",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 38,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-02T05:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국민의힘, 李 '821조 예산' 30조 삭감 예고…\"미래대응 아닌 총선대응기...",
+     "press": "dailian.co.kr",
      "publishedAt": "2026-11-02T06:42:00.000Z",
-     "link": "https://www.techm.kr/news/articleView.html?idxno=156789"
+     "link": "https://n.news.naver.com/mnews/article/119/0003150278?sid=100"
+    },
+    {
+     "title": "막 오른 예산 전쟁…민주당 \"821조 예산 사수\" vs 국민의힘 \"30조 삭감\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-02T06:32:00.000Z",
+     "link": "https://www.ajunews.com/view/20261102152219761"
+    },
+    {
+     "title": "[포토] 정점식 원내대표, 대통령 시정연설 관련 기자간담회",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-02T06:28:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3445200"
     }
    ]
   },
@@ -207,10 +240,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 1,
-   "press": 14,
-   "firstArticleAt": "2026-11-02T05:20:00.000Z",
+   "articles90": 12,
+   "recent20": 0,
+   "press": 12,
+   "firstArticleAt": "2026-11-02T05:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -235,67 +268,34 @@
    ]
   },
   {
-   "keyword": "정점식 국민의힘 원내대표",
+   "keyword": "리센느 원이, 무대서 이탈했다",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 38,
-   "recent20": 5,
-   "press": 13,
-   "firstArticleAt": "2026-11-02T05:42:00.000Z",
+   "articles90": 11,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-02T05:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국민의힘, 李 '821조 예산' 30조 삭감 예고…\"미래대응 아닌 총선대응기...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-02T06:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003150278?sid=100"
+     "title": "리센느 원이 \"깜짝 무대 이탈 이유? 갑작스러운 호흡 곤란 탓\"",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-02T06:29:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000326369"
     },
     {
-     "title": "막 오른 예산 전쟁…민주당 \"821조 예산 사수\" vs 국민의힘 \"30조 삭감\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-02T06:32:00.000Z",
-     "link": "https://www.ajunews.com/view/20261102152219761"
+     "title": "리센느 원이, 공연 중 사색된 채 이탈 '왜'…\"줄어든 의상 때문에 숨 안...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-02T06:21:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009265135"
     },
     {
-     "title": "[포토] 정점식, 시정연설 관련 기자간담회",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-02T06:28:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3445199"
-    }
-   ]
-  },
-  {
-   "keyword": "협박",
-   "sources": [
-    "google"
-   ],
-   "articles90": 14,
-   "recent20": 3,
-   "press": 12,
-   "firstArticleAt": "2026-11-02T05:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "전자발찌 끄고 ‘청와대 흉기난동’ 협박…50대 긴급체포",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-02T06:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002830286?sid=102"
-    },
-    {
-     "title": "‘100만달러 협박’ 피해기업 “북 해킹 가능성”…일 정부 “분석 중”",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-02T06:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002830283?sid=104"
-    },
-    {
-     "title": "염산 테러 협박부터 스토킹까지…\"징역 8개월\"·\"벌금 600만 원\" 악플러...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-02T06:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002075459"
+     "title": "리센느 원이, 공연 중 무대 이탈 해명 “줄어든 의상에 호흡 어려워”",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-02T06:12:00.000Z",
+     "link": "http://www.breaknews.com/1247567"
     }
    ]
   },
@@ -304,10 +304,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-02T05:24:00.000Z",
+   "articles90": 11,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-02T05:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -332,50 +332,23 @@
    ]
   },
   {
-   "keyword": "기술",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 9,
-   "recent20": 9,
-   "press": 9,
-   "firstArticleAt": "2026-11-02T06:39:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "'문워크' 휴머노이드에 로봇개까지…KAIST 첨단기술 국회 집결",
-     "press": "tjb.co.kr",
-     "publishedAt": "2026-11-02T06:44:00.000Z",
-     "link": "https://www.tjb.co.kr/news05/bodo/view/id/105575"
-    },
-    {
-     "title": "\"성남 의료기술, 몽골 진료실로 간다\"…3개 지방정부와 협력 물꼬",
-     "press": "weekly.hankooki.com",
-     "publishedAt": "2026-11-02T06:44:00.000Z",
-     "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7191727"
-    },
-    {
-     "title": "산업계 \"AI 데이터센터, 투자 불확실성 해소·국산 기술에 기회 줘야\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-02T06:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205560?sid=101"
-    }
-   ]
-  },
-  {
    "keyword": "가덕도 신공항 공사비 증액",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 8,
+   "articles90": 10,
+   "recent20": 1,
+   "press": 9,
    "firstArticleAt": "2026-11-02T05:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "국힘 부산 의원들 \"가덕도신 공항 공사비 증액, 정부가 나서야\"",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-02T06:46:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3739752"
+    },
     {
      "title": "\"가덕도신공항 '공사비 현실화'에 중대 기로…정부 책임져야\"",
      "press": "news.lghellovision.net",
@@ -387,12 +360,39 @@
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-02T06:07:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004205540?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "기술",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 6,
+   "press": 6,
+   "firstArticleAt": "2026-11-02T06:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "개교 35주년 맞은 한국기술교육대, 산업의과대학 설립 추진한다",
+     "press": "kyosu.net",
+     "publishedAt": "2026-11-02T06:54:00.000Z",
+     "link": "https://www.kyosu.net/news/articleView.html?idxno=211928"
     },
     {
-     "title": "국힘 부산 의원들 \"가덕도신공항 연내 착공 무산…정부 행정 방기가 원...",
-     "press": "daily.hankooki.com",
-     "publishedAt": "2026-11-02T06:00:00.000Z",
-     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1420788"
+     "title": "경북 농업 신기술 효과…양파 생산량 1.5배, 노동시간 57% 감소",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-02T06:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001037869?sid=102"
+    },
+    {
+     "title": "세종대 경영전문대학원, 내년도 ‘AI 기술경영 DBA’ 신설…7일 설명회",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-02T06:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002829659?sid=102"
     }
    ]
   },
@@ -402,10 +402,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-02T05:17:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-02T05:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -435,7 +435,7 @@
     "nate"
    ],
    "articles90": 8,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-02T05:27:00.000Z",
    "exclusive": false,
@@ -467,7 +467,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-02T06:05:00.000Z",
    "exclusive": false,
