@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T21:12:11.096Z",
+ "builtAt": "2026-11-02T21:22:17.032Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,134 +8,102 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 28,
  "candidates": [
   {
-   "keyword": "기온",
-   "sources": [
-    "google"
-   ],
-   "articles90": 18,
-   "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-02T20:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[날씨] 찬 공기 남하에 '뚝' 떨어진 기온…수요일 아침 출근길 쌀쌀",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-02T21:00:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=66918"
-    },
-    {
-     "title": "[오늘 날씨] 아침 기온 뚝 떨어져 '최저 0도'…일교차 주의",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-02T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005435539?sid=102"
-    },
-    {
-     "title": "[오늘 날씨] 아침 기온, 어제보다 5~8도 '뚝'…출근길 최저 0도",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-02T20:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000541267?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "이란 대통령 권한 부여",
+   "keyword": "이란 대통령 대화 권한 부여",
    "sources": [
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 4,
-   "press": 8,
+   "articles90": 20,
+   "recent20": 10,
+   "press": 14,
    "firstArticleAt": "2026-11-02T20:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "미·이란 협상 기대에 국제유가 7%대 급락…WTI 96달러선",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-02T21:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000541270?sid=104"
+     "title": "美·이란 협상 기대감에 국제유가 7% 넘게 급락…WTI 96달러대로",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-02T21:18:00.000Z",
+     "link": "https://www.ajunews.com/view/20261103061252774"
     },
     {
-     "title": "미·이란 종전 기대감에 국제유가 '뚝'...7%대 급락",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-02T21:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000120471?sid=104"
+     "title": "국제유가, 미-이란 회담 기대감에 급락..브렌트유 7.6%↓",
+     "press": "womennews.co.kr",
+     "publishedAt": "2026-11-02T21:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/310/0000141377?sid=104"
     },
     {
-     "title": "이란 \"조건 충족되면 이틀 내 호르무즈 개방\"",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-02T21:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533073?sid=104"
+     "title": "117달러까지 치솟았던 국제유가, 하루 새 7% 뚝...미·이란 대화 물꼬",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-02T21:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005757916?sid=100"
     }
    ]
   },
   {
-   "keyword": "이강철",
+   "keyword": "1호기 탑승자 정보 유출",
    "sources": [
-    "google"
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-02T20:18:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“대통령 부부·장관·경호원까지”...공군1호기 탑승자 개인정보 유출",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-02T21:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000130322?sid=100"
+    },
+    {
+     "title": "대통령 여권번호까지…'1호기 탑승자' 정보 노출",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-02T21:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400100?sid=100"
+    },
+    {
+     "title": "대통령 전용기 탑승 개인정보 유출‥\"수사 착수\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-02T21:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533077?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "홍석천 지연수 조언",
+   "sources": [
+    "daum"
    ],
    "articles90": 3,
    "recent20": 2,
    "press": 3,
-   "firstArticleAt": "2026-11-02T20:31:00.000Z",
+   "firstArticleAt": "2026-11-02T20:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"이강철 감독님 아니었으면 3할 쳤죠\" 30년 전 신인 유격수, KS MVP→사령...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-02T21:01:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/108/0003483944"
+     "title": "'이혼' 지연수 전성기 미모...\"男연예인들이 만나게 해달라 난리\" 홍석천...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-02T21:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004462323"
     },
     {
-     "title": "\"한국시리즈에서도 허리 많이 돌려보겠다\" 이강철 감독의 유쾌한 선언…...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-02T21:00:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/311/0002075623"
+     "title": "홍석천, ‘싱글맘’ 지연수 연애 만류…“게이랑 놀아, 문밖은 위험”",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-02T21:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001277422"
     },
     {
-     "title": "'1996 이강철-2006 박진만' 한국시리즈 MVP 출신 사령탑, 사상 최초로 시...",
-     "press": "thesportstimes.co.kr",
-     "publishedAt": "2026-11-02T20:31:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/472/0000042243"
-    }
-   ]
-  },
-  {
-   "keyword": "전한길 공소청 송치",
-   "sources": [
-    "signal.bz",
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T19:59:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "5·18 허위사실 유포 혐의 전한길 공소청 송치",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-02T20:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922225?sid=102"
-    },
-    {
-     "title": "‘5·18 北 개입설’ 유포 혐의 전한길 공소청 송치",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-02T20:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002829743?sid=102"
-    },
-    {
-     "title": "경찰, '5·18은 DJ 세력, 북한 주도 내란' 전한길, 허위사실로 공소청에...",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-02T19:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002463922?sid=102"
+     "title": "\"그냥 게이랑 놀아\"…홍석천, '일라이 이혼' 지연수에 조언",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-02T20:45:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005435536"
     }
    ]
   },
@@ -172,42 +140,41 @@
    ]
   },
   {
-   "keyword": "1호기 탑승자 정보 유출",
+   "keyword": "전한길 공소청 송치",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-02T19:52:00.000Z",
+   "firstArticleAt": "2026-11-02T19:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "대통령 포함 '1호기 탑승자' 정보 인터넷 노출",
+     "title": "5·18 허위사실 유포 혐의 전한길 공소청 송치",
      "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-02T20:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922225?sid=102"
+    },
+    {
+     "title": "‘5·18 北 개입설’ 유포 혐의 전한길 공소청 송치",
+     "press": "munhwa.com",
      "publishedAt": "2026-11-02T20:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922202?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/021/0002829743?sid=102"
     },
     {
-     "title": "李대통령 부부 여권번호까지…‘1호기 탑승자’ 168명 정보 유출",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-02T20:18:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611030002"
-    },
-    {
-     "title": "대통령 부부 여권번호까지 인터넷 노출…'공군 1호기' 탑승자 168명 정보...",
-     "press": "geconomy.co.kr",
-     "publishedAt": "2026-11-02T19:52:00.000Z",
-     "link": "https://www.geconomy.co.kr/news/article.html?no=325207"
+     "title": "경찰, '5·18은 DJ 세력, 북한 주도 내란' 전한길, 허위사실로 공소청에...",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-02T19:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002463922?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 187,
+  "flagged": 189,
   "matched": 59,
   "avgLeadMin": 121,
   "recent": [
