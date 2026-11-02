@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T05:05:44.274Z",
+ "builtAt": "2026-11-02T05:15:47.013Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 11,
+ "measured": 16,
  "candidates": [
   {
    "keyword": "이재명 대통령과 의원들",
    "sources": [
     "nate"
    ],
-   "articles90": 30,
-   "recent20": 7,
-   "press": 14,
-   "firstArticleAt": "2026-11-02T03:42:00.000Z",
+   "articles90": 28,
+   "recent20": 6,
+   "press": 15,
+   "firstArticleAt": "2026-11-02T03:49:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
+    {
+     "title": "이재명 대통령, 국민의힘 향해 손인사 [포토오늘]",
+     "press": "sisaon.co.kr",
+     "publishedAt": "2026-11-02T05:12:00.000Z",
+     "link": "https://www.sisaon.co.kr/news/articleView.html?idxno=205701"
+    },
     {
      "title": "이재명 대통령, 821조 ‘슈퍼예산’ 국회 시정연설 [한강로 사진관]",
      "press": "segye.com",
@@ -33,12 +39,70 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-02T05:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014295208?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "심수봉 김다현 비판 사과",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 12,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-02T04:07:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "심수봉, 17세 후배 김다현 공개 비판 재차 사과 \"반성과 회개의 시간 가...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-02T05:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/088/0001037815"
     },
     {
-     "title": "시정연설 마친 이재명 대통령",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-02T04:58:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3739551"
+     "title": "‘김다현 비판’ 논란 심수봉 “해서는 안 될 말”…첫 무대에서도 사과",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-02T04:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000366082?sid=102"
+    },
+    {
+     "title": "심수봉, 김다현 공개 비판 논란 재차 사과 \"반성의 시간 가져\"",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-02T04:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/018/0006402094"
+    }
+   ]
+  },
+  {
+   "keyword": "구로 미라화 시신 퇴원 사건",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 4,
+   "press": 7,
+   "firstArticleAt": "2026-11-02T04:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서울 구로 미라화 시신 유기 사건…사망 경위 수사",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-02T05:10:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1542368"
+    },
+    {
+     "title": "구로 미라화 시신 중국인, 사망 전 중환자실 입원…\"병원비 못 내 퇴원...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-02T05:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000963071?sid=102"
+    },
+    {
+     "title": "[속보] 구로 ‘미라 시신’ 50대 중국인, 병원비 못 내 퇴원",
+     "press": "segye.com",
+     "publishedAt": "2026-11-02T05:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004171711?sid=102"
     }
    ]
   },
@@ -48,13 +112,19 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 7,
+   "articles90": 8,
    "recent20": 3,
-   "press": 5,
+   "press": 6,
    "firstArticleAt": "2026-11-02T03:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "과태료 안물리고 처리 완료…택시 민원 조작한 인천 부평구 공무원 해임",
+     "press": "kgnews.co.kr",
+     "publishedAt": "2026-11-02T05:08:00.000Z",
+     "link": "https://www.kgnews.co.kr/news/article.html?no=917788"
+    },
     {
      "title": "인천 부평구 십정1동, 남인천신협의 지속적인 이웃사랑으로 동절기 생활...",
      "press": "kmaeil.com",
@@ -66,12 +136,38 @@
      "press": "kmaeil.com",
      "publishedAt": "2026-11-02T04:58:00.000Z",
      "link": "https://www.kmaeil.com/news/articleView.html?idxno=656636"
+    }
+   ]
+  },
+  {
+   "keyword": "가덕도 신공항 공사비 증액",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-02T04:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "가덕도신공항 '공사비 늪' 빠지나...국민의힘, 특별법 개정 앞서 정부 결...",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-02T05:10:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4116177"
     },
     {
-     "title": "부평구, ‘재개발·재건축 원스탑 지원센터’신설 추진",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-02T04:52:00.000Z",
-     "link": "http://www.breaknews.com/1247531"
+     "title": "공사비 문제로 표류 중인 가덕도신공항...책임있는 정부 조치 주문한 국...",
+     "press": "thepublic.kr",
+     "publishedAt": "2026-11-02T04:54:00.000Z",
+     "link": "https://www.thepublic.kr/news/articleView.html?idxno=324699"
+    },
+    {
+     "title": "국민의힘 이성권 부산시당위원장, 가덕도 신공항 공사비 문제 관련 회견",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-02T04:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016416058?sid=100"
     }
    ]
   },
@@ -81,10 +177,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-02T03:36:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-02T04:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -109,34 +205,34 @@
    ]
   },
   {
-   "keyword": "가덕도 신공항 공사비 증액",
+   "keyword": "SK하이닉스 외국인 기관 주가 상승",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 5,
-   "recent20": 1,
+   "articles90": 3,
+   "recent20": 2,
    "press": 3,
-   "firstArticleAt": "2026-11-02T04:08:00.000Z",
+   "firstArticleAt": "2026-11-02T03:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "공사비 문제로 표류 중인 가덕도신공항...책임있는 정부 조치 주문한 국...",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-02T04:54:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=324699"
+     "title": "기관 1.2조 '사자'에 코스피 2.6% 급등…'삼전·닉스' 일제히 반등",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-02T05:13:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000078815"
     },
     {
-     "title": "국민의힘 이성권 부산시당위원장, 가덕도 신공항 공사비 문제 관련 회견",
+     "title": "코스피, 장중 상승폭 확대해 2% 넘게 올라…삼전닉스 2∼4%대↑",
      "press": "yna.co.kr",
-     "publishedAt": "2026-11-02T04:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016416058?sid=100"
+     "publishedAt": "2026-11-02T05:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016416154?sid=101"
     },
     {
-     "title": "가덕도 신공항 공사비 증액 문제 관련해 기자회견 연 국민의힘",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-02T04:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016416051?sid=100"
+     "title": "영광 90% 급등·샘표 29%대…주식 상승률 상위권 강세",
+     "press": "kjdaily.com",
+     "publishedAt": "2026-11-02T03:52:00.000Z",
+     "link": "http://www.kjdaily.com/article.php?aid=1793591488690967276"
     }
    ]
   },
@@ -145,10 +241,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 19,
+   "articles90": 18,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-02T03:44:00.000Z",
+   "firstArticleAt": "2026-11-02T03:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -173,41 +269,41 @@
    ]
   },
   {
-   "keyword": "집단소송법 서명 기자회견",
+   "keyword": "재혼 황후",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 2,
-   "firstArticleAt": "2026-11-02T03:36:00.000Z",
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T03:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "시민단체, 해킹 피해 속출에 \"연내 집단소송법 제정해야\"…10만 서명 캠...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-02T04:47:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261102000888"
+     "title": "이세영, 신민아 남편 뺏고 “언니라고 불러도 돼요?”…‘재혼 황후’로...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-02T04:44:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003538621"
     },
     {
-     "title": "[포토]집단소송법 제정을 촉구하는 시민단체",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-02T04:12:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261102010000527"
+     "title": "이종석, 보랏빛 조명 아래 환한 미소…'재혼 황후' 앞두고 눈길",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-02T04:36:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16266109"
     },
     {
-     "title": "구호 외치는 집단소송법 제정연대",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-02T03:37:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261102000968"
+     "title": "이세영, 순수한 얼굴 뒤 숨겨진 욕망-'재혼 황후' 악역",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-02T03:50:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=94360"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 40,
+  "flagged": 44,
   "matched": 8,
   "avgLeadMin": 34,
   "recent": [
