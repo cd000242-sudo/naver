@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T07:47:58.122Z",
+ "builtAt": "2026-11-02T07:58:01.961Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "코스피 반등 마감",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 86,
-   "recent20": 13,
-   "press": 74,
-   "firstArticleAt": "2026-11-02T06:44:00.000Z",
+   "articles90": 88,
+   "recent20": 8,
+   "press": 76,
+   "firstArticleAt": "2026-11-02T06:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“이제 바닥 찍었나?”…삼전닉스 급반등에도 안심 못하는 이유 [머니+...",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-02T07:46:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261102026184226"
+     "title": "코스피, 인텔 급락 충격 딛고 2.24% 반등…기관 매수에 5850선 회복",
+     "press": "goodkyung.com",
+     "publishedAt": "2026-11-02T07:50:00.000Z",
+     "link": "https://www.goodkyung.com/news/articleView.html?idxno=293014"
     },
     {
-     "title": "[마감] 코스피 2% 상승… 기관 '사자'에 5800선 회복",
-     "press": "it.chosun.com",
-     "publishedAt": "2026-11-02T07:46:00.000Z",
-     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000000047"
+     "title": "[마감 시황] 美 반도체 충격 딛고 일어선 코스피… 기관 중심 매수세 유...",
+     "press": "businesskorea.co.kr",
+     "publishedAt": "2026-11-02T07:50:00.000Z",
+     "link": "https://www.businesskorea.co.kr/news/articleView.html?idxno=280247"
     },
     {
-     "title": "美반도체 급락에도 코스피 반등 성공…5800선 회복 마감",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-02T07:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000191252?sid=101"
+     "title": "코스피, 기관-SK하이닉스 자사주 매입으로 5,800선 회복",
+     "press": "viewsnnews.com",
+     "publishedAt": "2026-11-02T07:48:00.000Z",
+     "link": "https://www.viewsnnews.com/article?q=239424"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 60,
-   "recent20": 18,
-   "press": 57,
-   "firstArticleAt": "2026-11-02T06:23:00.000Z",
+   "articles90": 62,
+   "recent20": 19,
+   "press": 58,
+   "firstArticleAt": "2026-11-02T06:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "형보다 나은 아우…기아, 10월 내수서 현대차 제쳤다",
-     "press": "financialpost.co.kr",
-     "publishedAt": "2026-11-02T07:46:00.000Z",
-     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=284124"
+     "title": "10월 완성차 4사 판매 엇갈려…기아만 내수·해외 동반 증가",
+     "press": "ziksir.com",
+     "publishedAt": "2026-11-02T07:56:00.000Z",
+     "link": "https://www.ziksir.com/news/articleView.html?idxno=151731"
     },
     {
-     "title": "완성차 5사, 10월 판매 희비…현대차 울고 기아 웃었다 (종합)",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-02T07:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002246973?sid=101"
+     "title": "완성차 10월 판매 희비…기아·GM 달리고 현대차 '주춤'",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-02T07:54:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=901671"
     },
     {
-     "title": "“현대차·기아 시장 점유율 91%·양극화 심화”..완성차,10월 글로벌 시...",
-     "press": "dailycar.co.kr",
-     "publishedAt": "2026-11-02T07:46:00.000Z",
-     "link": "https://www.dailycar.co.kr/content/news.html?type=view&autoId=63038"
+     "title": "현대차·기아 희비 엇갈려…르노는 내수 회복세",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-02T07:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004205625?sid=103"
     }
    ]
   },
@@ -79,30 +79,94 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 48,
-   "recent20": 17,
-   "press": 47,
-   "firstArticleAt": "2026-11-02T06:19:00.000Z",
+   "articles90": 45,
+   "recent20": 10,
+   "press": 44,
+   "firstArticleAt": "2026-11-02T06:34:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "삼성SDS, 구미 AI 데이터센터 착공…60㎿급 2029년 가동 목표",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-02T07:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000963137?sid=102"
+     "title": "경북도, 60MW급 삼성SDS 구미 AI 데이터센터 기공식",
+     "press": "mhns.co.kr",
+     "publishedAt": "2026-11-02T07:52:00.000Z",
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=767134"
     },
     {
-     "title": "[전자·IT 레이더] 삼성전자·LG CNS·삼성SDS, AI 인프라 확충·글로벌 ...",
-     "press": "thevaluenews.co.kr",
-     "publishedAt": "2026-11-02T07:44:00.000Z",
-     "link": "http://www.thevaluenews.co.kr/news/view.php?idx=202884"
+     "title": "삼성SDS, 경북 구미에 60MW 규모 AI 전용 데이터센터 착공…28년 말 준공",
+     "press": "pointe.co.kr",
+     "publishedAt": "2026-11-02T07:50:00.000Z",
+     "link": "https://www.pointe.co.kr/news/articleView.html?idxno=87044"
     },
     {
-     "title": "삼성SDS 구미 AI 데이터센터 착공...2029년 3월 가동 목표",
-     "press": "srn.hcn.co.kr",
+     "title": "삼성SDS, 구미 AI 데이터센터 구축 착수...2028년 준공",
+     "press": "digitaltoday.co.kr",
+     "publishedAt": "2026-11-02T07:48:00.000Z",
+     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=711950"
+    }
+   ]
+  },
+  {
+   "keyword": "김정관 산업부 장관",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 15,
+   "recent20": 5,
+   "press": 14,
+   "firstArticleAt": "2026-11-02T06:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "산업부, 대우건설 중재 요청에 \"법적 권한 없다\" 선긋기",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-02T07:55:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261102001443"
+    },
+    {
+     "title": "대우건설 재협상 기대에도…산업부 \"중재 요청 받은 바 없어\"",
+     "press": "news.mtn.co.kr",
+     "publishedAt": "2026-11-02T07:50:00.000Z",
+     "link": "https://news.mtn.co.kr/article/2026110216393515646"
+    },
+    {
+     "title": "김정관 산업부 장관 “메가 프로젝트 반도체 공장 가동 시점 2년 이상 앞...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-02T07:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202038?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 시정연설 중단",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 15,
+   "recent20": 4,
+   "press": 12,
+   "firstArticleAt": "2026-11-02T06:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "시정연설에 혹평 쏟아낸 국힘…“나라 곳간 거덜 내겠다는 선전포고문...",
+     "press": "busan.com",
+     "publishedAt": "2026-11-02T07:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001405238?sid=100"
+    },
+    {
+     "title": "국힘, 대통령 시정연설에 \"미래팔아 나라곳간 거덜 선전포고문\" 비판",
+     "press": "kbsm.net",
+     "publishedAt": "2026-11-02T07:50:00.000Z",
+     "link": "https://www.kbsm.net/news/view.php?idx=540069"
+    },
+    {
+     "title": "국힘, 대통령 시정연설에 하고 싶은 말만 국민 인내심 테스트\"",
+     "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-02T07:44:00.000Z",
-     "link": "https://srn.hcn.co.kr/user/news/BD_newsView.do?news_category=02&story_id=NS2026110200091&story_seq=0&soCode=114&socttSn=NS2026110200091&socttSeq=0"
+     "link": "https://n.news.naver.com/mnews/article/422/0000922062?sid=100"
     }
    ]
   },
@@ -112,30 +176,62 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 24,
-   "recent20": 4,
-   "press": 15,
-   "firstArticleAt": "2026-11-02T06:18:00.000Z",
+   "articles90": 18,
+   "recent20": 3,
+   "press": 12,
+   "firstArticleAt": "2026-11-02T06:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "의총에서 발언하는 정점식 원내대표",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-02T07:54:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3739891"
+    },
+    {
+     "title": "발언하는 정점식 국민의힘 원내대표",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-02T07:54:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3739887"
+    },
     {
      "title": "국민의힘, 李 '821조 예산' 30조 삭감 예고…\"미래대응 아닌 총선대응기...",
      "press": "dailian.co.kr",
      "publishedAt": "2026-11-02T07:40:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/119/0003150322?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "이강철과 박진만 감독",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 13,
+   "recent20": 2,
+   "press": 12,
+   "firstArticleAt": "2026-11-02T06:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"한국시리즈 MVP는 원태인!\" 박진만 감독 파격 예언…선발+불펜 전천후...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-02T07:50:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/311/0002075512"
     },
     {
-     "title": "李대통령, 조희대에 \"잘 계시냐\"…정점식 \"참 무서운 사람\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-02T07:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005435373?sid=100"
+     "title": "30년 전엔 선수로, 지금은 감독으로 KS서 다시 만났다···KT 이강철 “...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-02T07:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003480138?sid=102"
     },
     {
-     "title": "최고위에서 발언하는 정점식 원내대표",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-02T07:34:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3739843"
+     "title": "이강철 kt 위즈 감독 \"수원시민과 함께 '팀 kt'로 통합우승 이뤄낼 것\"",
+     "press": "kihoilbo.co.kr",
+     "publishedAt": "2026-11-02T07:24:00.000Z",
+     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3039618"
     }
    ]
   },
@@ -144,10 +240,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 13,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-02T06:22:00.000Z",
+   "articles90": 11,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-02T06:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -172,78 +268,14 @@
    ]
   },
   {
-   "keyword": "김정관 산업부 장관",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-02T06:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "산업부 김정관 \"1600조 메가프로젝트…국가 성장 판 바꾼다\"",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-02T07:38:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5078759"
-    },
-    {
-     "title": "산업부, 대우건설 체코 원전 중재 요구에 선긋기 … \"법적 권한 없다\"",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-02T07:32:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/02/2026110200332.html"
-    },
-    {
-     "title": "산업부, 체코 원전 사업 비상관리체제 가동",
-     "press": "newsgn.com",
-     "publishedAt": "2026-11-02T07:30:00.000Z",
-     "link": "https://www.newsgn.com/news/articleView.html?idxno=582973"
-    }
-   ]
-  },
-  {
-   "keyword": "이강철과 박진만 감독",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-02T06:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "30년 전엔 선수로, 지금은 감독으로 KS서 다시 만났다···KT 이강철 “...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-02T07:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003480138?sid=102"
-    },
-    {
-     "title": "이강철 kt 위즈 감독 \"수원시민과 함께 '팀 kt'로 통합우승 이뤄낼 것\"",
-     "press": "kihoilbo.co.kr",
-     "publishedAt": "2026-11-02T07:24:00.000Z",
-     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3039618"
-    },
-    {
-     "title": "KS 미디어데이 이강철·박진만 감독, 외나무다리서 우승 자신",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-02T07:23:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/055/0001399991"
-    }
-   ]
-  },
-  {
    "keyword": "이형일 스틸 주한미국대사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 5,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-02T06:20:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-02T06:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -268,47 +300,15 @@
    ]
   },
   {
-   "keyword": "협박",
-   "sources": [
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-02T06:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "신세경에 과격·엽기적 협박한 악플러…징역 8개월에 법정 구속",
-     "press": "weekly.chosun.com",
-     "publishedAt": "2026-11-02T07:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/053/0000062783?sid=102"
-    },
-    {
-     "title": "신세경에 450회 ‘염산테러’ 협박·모욕…2심 징역 8개월 법정구속",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-02T06:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001882423?sid=102"
-    },
-    {
-     "title": "전자발찌 찬 50대 “청와대 흉기 난동” 협박 뒤 전원 꺼…경찰 긴급체...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-02T06:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002830286?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "제트기",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-02T06:18:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-02T06:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -365,14 +365,46 @@
    ]
   },
   {
-   "keyword": "선박",
+   "keyword": "협박",
    "sources": [
     "google"
    ],
    "articles90": 5,
    "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-02T06:22:00.000Z",
+   "firstArticleAt": "2026-11-02T06:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "신세경에 과격·엽기적 협박한 악플러…징역 8개월에 법정 구속",
+     "press": "weekly.chosun.com",
+     "publishedAt": "2026-11-02T07:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/053/0000062783?sid=102"
+    },
+    {
+     "title": "신세경에 450회 ‘염산테러’ 협박·모욕…2심 징역 8개월 법정구속",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-02T06:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001882423?sid=102"
+    },
+    {
+     "title": "전자발찌 찬 50대 “청와대 흉기 난동” 협박 뒤 전원 꺼…경찰 긴급체...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-02T06:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002830286?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "선박",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-02T06:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -383,16 +415,16 @@
      "link": "http://www.finomy.com/news/articleView.html?idxno=265229"
     },
     {
-     "title": "통영해경, 응급환자 이송·음주운항 선박 적발 등 해상 안전 대응",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-02T07:02:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5078830"
-    },
-    {
      "title": "선박 건조 이어 엔진까지 만드는 中···K엔진 특수 얼마나 갈까",
      "press": "sisajournal-e.com",
      "publishedAt": "2026-11-02T07:02:00.000Z",
      "link": "https://www.sisajournal-e.com/news/articleView.html?idxno=424744"
+    },
+    {
+     "title": "통영해경, 응급환자 이송·음주운항 선박 적발 등 해상 안전 대응",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-02T07:02:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5078830"
     }
    ]
   },
@@ -427,75 +459,11 @@
      "link": "https://m.sports.naver.com/kbaseball/article/144/0001147695"
     }
    ]
-  },
-  {
-   "keyword": "신천지 당원 가입 강요 공판",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T06:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'국힘 당원 가입' 신천지 이만희 첫 재판에서 혐의 부인",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-02T07:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002427295?sid=102"
-    },
-    {
-     "title": "'국힘 입당 강요' 신천지 이만희, 첫 재판서 혐의 부인",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-02T06:42:00.000Z",
-     "link": "https://www.insight.co.kr/news/580277"
-    },
-    {
-     "title": "'국힘 당원 가입 강요' 이만희 재판 장기화 조짐...\"내년 3월 증인신문\"",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-02T06:26:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4116201"
-    }
-   ]
-  },
-  {
-   "keyword": "주진우 의원 선관위 자료 전달",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 2,
-   "firstArticleAt": "2026-11-02T06:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "주진우, 선관위 특검 항의 방문 … 선관위 직원 구속수사 촉구",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-02T07:34:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/02/2026110200334.html"
-    },
-    {
-     "title": "특검에게 선관위 부정자료 추가 전달하는 주진우 의원",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-02T06:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014295680?sid=100"
-    },
-    {
-     "title": "선관위 부정자료 추가 전달하는 주진우 의원",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-02T06:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014295681?sid=100"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 99,
+  "flagged": 100,
   "matched": 23,
   "avgLeadMin": 61,
   "recent": [
