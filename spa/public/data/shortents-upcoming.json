@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T12:19:32.839Z",
+ "builtAt": "2026-11-02T12:29:36.643Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,18 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "브로드컴 과징금 확정",
    "sources": [
-    "signal.bz",
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 4,
-   "press": 15,
-   "firstArticleAt": "2026-11-02T10:54:00.000Z",
+   "articles90": 12,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-02T11:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -44,17 +43,81 @@
    ]
   },
   {
+   "keyword": "신현준, 김혜수에 아름다운 마음",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-02T11:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“조문객 신발 정리까지…” 신현준, 故 최불암 빈소 지킨 김혜수에 “...",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-02T12:19:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000759792"
+    },
+    {
+     "title": "“따뜻한 마음”… 신현준, 故 최불암 마지막 길 지킨 김혜수 향한 찬사",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-02T12:18:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001145775"
+    },
+    {
+     "title": "신현준, 故최불암 빈소 지킨 김혜수에 “마음 아름다운 배우…이런 동료...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-02T12:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/016/0002717816"
+    }
+   ]
+  },
+  {
+   "keyword": "이란 호르무즈 해협 개방 조건",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-02T11:17:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이란, \"미국이 요구 들어주면 이틀안에 해협개방·핵협상 실행\" 제안",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-02T12:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014296305?sid=104"
+    },
+    {
+     "title": "이란 “美 해상봉쇄 해제 등 ‘7단계 제안’ 수용 시 이틀 내 호르무즈...",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-02T12:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003562283?sid=104"
+    },
+    {
+     "title": "이란 \"美 '해상봉쇄 해제' 등 수용하면 이틀 내 호르무즈 개방\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-02T12:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005435481?sid=104"
+    }
+   ]
+  },
+  {
    "keyword": "연구",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-02T11:47:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-02T11:52:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
      "title": "산청농촌관광연구회, 농업체험한마당 개최",
@@ -73,70 +136,6 @@
      "press": "mydaily.co.kr",
      "publishedAt": "2026-11-02T12:07:00.000Z",
      "link": "https://m.entertain.naver.com/article/117/0004121135"
-    }
-   ]
-  },
-  {
-   "keyword": "이란 호르무즈 해협 개방 조건",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-02T10:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이란 “美 해상봉쇄 해제 등 ‘7단계 제안’ 수용 시 이틀 내 호르무즈...",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-02T12:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003562283?sid=104"
-    },
-    {
-     "title": "이란 \"美 '해상봉쇄 해제' 등 수용하면 이틀 내 호르무즈 개방\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-02T12:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005435481?sid=104"
-    },
-    {
-     "title": "이란 \"美 해상봉쇄 해제 등 수용 시 이틀 내 호르무즈 개방\"",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-02T11:38:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2643221"
-    }
-   ]
-  },
-  {
-   "keyword": "하남시",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-02T10:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "하남시 \"K-스타월드 민간공모 취소, 사업 백지화 아니다\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-02T11:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009265721?sid=102"
-    },
-    {
-     "title": "하남시, 한강 폐천부지 오염 정화 책임 행정소송 '승소'",
-     "press": "safetimes.co.kr",
-     "publishedAt": "2026-11-02T11:28:00.000Z",
-     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247112"
-    },
-    {
-     "title": "하남시 “K-스타월드 공모 취소, 백지화 아닌 정부 계획 연계 위한 것”",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-02T11:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001882501?sid=102"
     }
    ]
   },
@@ -171,11 +170,75 @@
      "link": "https://www.cbci.co.kr/news/articleView.html?idxno=622310"
     }
    ]
+  },
+  {
+   "keyword": "코스피 반등 마감",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T11:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "삼성전자·SK하이닉스 반등에도 거래대금 28.2% 감소",
+     "press": "kjdaily.com",
+     "publishedAt": "2026-11-02T12:22:00.000Z",
+     "link": "http://www.kjdaily.com/article.php?aid=1793622040691073276"
+    },
+    {
+     "title": "인텔발 뉴욕증시 악재에도 코스피 반등‥중간선거 등 변수 여전",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-02T11:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533008?sid=101"
+    },
+    {
+     "title": "'인텔 쇼크'에도 반등…기관 매수에 코스피 2%대↑",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-02T11:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922131?sid=161"
+    }
+   ]
+  },
+  {
+   "keyword": "크래프톤",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 2,
+   "firstArticleAt": "2026-11-02T11:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "크래프톤, K팝 팬덤 겨냥한 AI 챗 서비스 ‘키프’ 출시…피프티피프티...",
+     "press": "venturesquare.net",
+     "publishedAt": "2026-11-02T12:26:00.000Z",
+     "link": "https://www.venturesquare.net/1124990/"
+    },
+    {
+     "title": "크래프톤, K팝 AI 캐릭터 챗 '키프' 출시…AI 사업화 본격화",
+     "press": "webeconomy.co.kr",
+     "publishedAt": "2026-11-02T11:46:00.000Z",
+     "link": "https://www.webeconomy.co.kr/news/articleView.html?idxno=2357722"
+    },
+    {
+     "title": "\"사람과 협력\" 크래프톤 루도 로보틱스, 로봇 AI '루디 0.2' 공개",
+     "press": "webeconomy.co.kr",
+     "publishedAt": "2026-11-02T11:32:00.000Z",
+     "link": "https://www.webeconomy.co.kr/news/articleView.html?idxno=2357785"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 167,
+  "flagged": 169,
   "matched": 47,
   "avgLeadMin": 86,
   "recent": [
