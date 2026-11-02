@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T22:32:45.987Z",
+ "builtAt": "2026-11-02T22:42:49.320Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,66 +11,99 @@
  "measured": 22,
  "candidates": [
   {
-   "keyword": "김여정 바이낸스 사태",
+   "keyword": "김여정, 바이낸스 도발 주시",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 43,
-   "recent20": 8,
-   "press": 38,
+   "articles90": 50,
+   "recent20": 9,
+   "press": 44,
    "firstArticleAt": "2026-11-02T21:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김여정, 바이낸스 해킹 배후 지목에 반발…\"美 정치적 도발\"",
-     "press": "the-today.com",
-     "publishedAt": "2026-11-02T22:30:00.000Z",
-     "link": "https://www.the-today.com/news/articleView.html?idxno=92918"
+     "title": "北김여정, 바이낸스 사태에 “美 정치적 도발…예의주시”",
+     "press": "segye.com",
+     "publishedAt": "2026-11-02T22:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004171957?sid=100"
     },
     {
-     "title": "김여정 \"미 정치적 도발\"…'바이낸스 해킹' 배후 지목에 '반발'",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-02T22:26:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1319014&inflow=N"
+     "title": "김여정, 바이낸스 해킹 배후 지목에 반발…\"북미 관계 재고할 문제\"",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-02T22:38:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=242160"
     },
     {
-     "title": "북 김여정 \"바이낸스 사태, 미국의 정치적 도발\"",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-02T22:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001976396?sid=100"
+     "title": "'펄쩍' 北 김여정, 바이낸스 사태 \"美 정치적 도발\"",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-02T22:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541288?sid=104"
     }
    ]
   },
   {
-   "keyword": "애플 실적발표",
+   "keyword": "애플 주가",
    "sources": [
-    "daum"
+    "google"
    ],
-   "articles90": 18,
-   "recent20": 3,
+   "articles90": 19,
+   "recent20": 5,
    "press": 18,
-   "firstArticleAt": "2026-11-02T21:36:00.000Z",
+   "firstArticleAt": "2026-11-02T21:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "애플, 호실적에도 주가 출렁… 메모리 비용·中시장 부진 부담",
-     "press": "it.chosun.com",
-     "publishedAt": "2026-11-02T22:26:00.000Z",
-     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000000078"
+     "title": "[굿모닝 오늘의 증시] 이번엔 오라클·마벨 충격…터너스의 애플 '첫 성...",
+     "press": "mbnmoney.mbn.co.kr",
+     "publishedAt": "2026-11-02T22:34:00.000Z",
+     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005953355"
     },
     {
-     "title": "애플, 터너스 CEO 첫 실적 '합격점'…분기 매출 1144억 달러로 예상치 상...",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-02T22:18:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=202611030712004094e250e8e188_1"
+     "title": "애플, 7∼9월 분기 최고매출…\"제품 가격 올려 메모리대란 상쇄\"(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-02T22:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016417231?sid=104"
     },
     {
-     "title": "100년에 한 번 있을 법한 메모리 대란에도…애플, 시장전망치 상회…주...",
+     "title": "[마켓 브리핑] '반짝 반등' AI 관련주가, 수익성 우려에 하락 전환",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-02T22:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541286?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "팔란티어 주가",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-02T21:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "팔란티어, 분기 매출 3조 원 첫 돌파…美 민간 매출이 정부 첫 추월",
      "press": "hankookilbo.com",
-     "publishedAt": "2026-11-02T22:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000963232?sid=105"
+     "publishedAt": "2026-11-02T22:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000963233?sid=105"
+    },
+    {
+     "title": "팔란티어, 3분기 실적 예상 상회…美 상업 매출, 정부 부문 첫 추월",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-02T22:00:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4442621"
+    },
+    {
+     "title": "팔란티어 창사 첫 분기 매출 20억달러 돌파… 삼성SDS·더존비즈온 주가...",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-02T21:56:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=500744"
     }
    ]
   },
@@ -79,10 +112,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
+   "articles90": 7,
    "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-02T21:04:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-02T21:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,35 +140,34 @@
    ]
   },
   {
-   "keyword": "팔란티어 주가",
+   "keyword": "금융지주 회장 연임 강화",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-02T21:20:00.000Z",
+   "articles90": 4,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T21:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "팔란티어, 3분기 실적 예상 상회…美 상업 매출, 정부 부문 첫 추월",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-02T22:00:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4442621"
+     "title": "금융지주 회장 연임 문턱 높인다…3연임시 주주 75% 찬성",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-02T22:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003150451?sid=101"
     },
     {
-     "title": "팔란티어 창사 첫 분기 매출 20억달러 돌파… 삼성SDS·더존비즈온 주가...",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-02T21:56:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=500744"
+     "title": "금융지주 회장 연임 문턱 높인다…금융당국, 의결 요건 단계적 강화 추...",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-02T22:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003481333?sid=101"
     },
     {
-     "title": "AI 열풍에 팔란티어 매출 두 배로…민간 매출이 정부 매출 첫 추월",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-02T21:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006402451?sid=101"
+     "title": "금융지주 ‘셀프개혁’ 속도 내는데…지배구조 개선안은 ‘표류’",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-02T21:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003150435?sid=101"
     }
    ]
   },
@@ -170,142 +202,44 @@
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16266597"
     }
    ]
-  },
-  {
-   "keyword": "금융지주 회장 연임 강화",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T21:55:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "금융지주 회장 연임 문턱 높인다…금융당국, 의결 요건 단계적 강화 추...",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-02T22:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003481333?sid=101"
-    },
-    {
-     "title": "금융지주 ‘셀프개혁’ 속도 내는데…지배구조 개선안은 ‘표류’",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-02T21:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003150435?sid=101"
-    },
-    {
-     "title": "금융지주 회장 3연임 땐 주주 75% 찬성 의결..지배구조 개선안, 본격 당...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-02T21:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005598357?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "KT 대니엘 VS 삼성 최원태 KS 1차전",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T21:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'확률 73.8%를 누가 점할 것인가' kt 대니엘 vs 삼성 최원태, KS 1차전 선...",
-     "press": "thesportstimes.co.kr",
-     "publishedAt": "2026-11-02T22:20:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/472/0000042250"
-    },
-    {
-     "title": "‘신흥 강호’ kt vs ‘전통 명문’ 삼성…한국시리즈 왕좌 놓고 대격돌",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-02T22:02:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/056/0012285960"
-    },
-    {
-     "title": "'통합 우승' KT vs '12년 만에 정상' 삼성, 73.8% 확률 잡을 팀은[KS]",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-02T21:30:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/421/0009265867"
-    }
-   ]
-  },
-  {
-   "keyword": "2026년 11월 3일 운세",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T21:03:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘의 운세] 2026년 11월 3일 (화) 띠별운세 '여유를 가지자'",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-02T21:40:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103265"
-    },
-    {
-     "title": "[오늘의 운세] 3일 화요일 나의 운세는?",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-02T21:20:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1190363"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 3일 별자리 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-02T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006402438?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "트레이드",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-02T21:11:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "UBS \"AI 트레이드 견조…지금이 매수 기회\"",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-02T21:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000541282?sid=104"
-    },
-    {
-     "title": "BMO \"TIPS, AI 트레이드에 대한 완벽한 헤지\"",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-02T21:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000541281?sid=104"
-    },
-    {
-     "title": "'최악의 트레이드? 아직은 좋다!' 폴 조지, 보스턴 상승세 이끄는 중",
-     "press": null,
-     "publishedAt": "2026-11-02T21:46:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/065/0000303906"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 204,
-  "matched": 74,
-  "avgLeadMin": 238,
+  "flagged": 206,
+  "matched": 79,
+  "avgLeadMin": 262,
   "recent": [
+   {
+    "keyword": "기술",
+    "hitKeyword": "나스닥 기술주 급락",
+    "hitAt": "2026-11-03T07:30:00+09:00",
+    "leadMin": 974
+   },
+   {
+    "keyword": "미국 상원 경합주 여론조사",
+    "hitKeyword": "중간선거 여론조사",
+    "hitAt": "2026-11-03T07:30:00+09:00",
+    "leadMin": 862
+   },
+   {
+    "keyword": "김민재 차관 점검",
+    "hitKeyword": "김민재 이강인 더비",
+    "hitAt": "2026-11-03T07:30:00+09:00",
+    "leadMin": 661
+   },
+   {
+    "keyword": "김민재 차관, 대통령기록관 점검",
+    "hitKeyword": "김민재 이강인 더비",
+    "hitAt": "2026-11-03T07:30:00+09:00",
+    "leadMin": 621
+   },
+   {
+    "keyword": "KT 대니엘 VS 삼성 최원태 KS 1차전",
+    "hitKeyword": "삼성 KT 한국시리즈",
+    "hitAt": "2026-11-03T07:30:00+09:00",
+    "leadMin": 7
+   },
    {
     "keyword": "이재명 대통령 시정연설",
     "hitKeyword": "이란 대통령 대화 권한",
@@ -335,36 +269,6 @@
     "hitKeyword": "포스코 3분기 실적 개선",
     "hitAt": "2026-11-03T06:30:00+09:00",
     "leadMin": 914
-   },
-   {
-    "keyword": "포스코홀딩스 3분기 영업익 증가",
-    "hitKeyword": "포스코 3분기 실적 개선",
-    "hitAt": "2026-11-03T06:30:00+09:00",
-    "leadMin": 904
-   },
-   {
-    "keyword": "포스코홀딩스 3분기 영업익 9400억",
-    "hitKeyword": "포스코 3분기 실적 개선",
-    "hitAt": "2026-11-03T06:30:00+09:00",
-    "leadMin": 884
-   },
-   {
-    "keyword": "포스코홀딩스 3분기 영업익 48%↑",
-    "hitKeyword": "포스코 3분기 실적 개선",
-    "hitAt": "2026-11-03T06:30:00+09:00",
-    "leadMin": 864
-   },
-   {
-    "keyword": "조경태 이재명 대통령 악수",
-    "hitKeyword": "이란 대통령 대화 권한",
-    "hitAt": "2026-11-03T06:30:00+09:00",
-    "leadMin": 792
-   },
-   {
-    "keyword": "애경산업 3분기 최대 매출 적자",
-    "hitKeyword": "포스코 3분기 실적 개선",
-    "hitAt": "2026-11-03T06:30:00+09:00",
-    "leadMin": 721
    }
   ]
  }
