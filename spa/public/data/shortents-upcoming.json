@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T21:22:17.032Z",
+ "builtAt": "2026-11-02T21:32:21.135Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 20,
+   "articles90": 23,
    "recent20": 10,
-   "press": 14,
+   "press": 16,
    "firstArticleAt": "2026-11-02T20:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美·이란 협상 기대감에 국제유가 7% 넘게 급락…WTI 96달러대로",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-02T21:18:00.000Z",
-     "link": "https://www.ajunews.com/view/20261103061252774"
+     "title": "국제유가, 美·이란 협상 기대감에 7%대 급락",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-02T21:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001071589?sid=104"
     },
     {
-     "title": "국제유가, 미-이란 회담 기대감에 급락..브렌트유 7.6%↓",
-     "press": "womennews.co.kr",
-     "publishedAt": "2026-11-02T21:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/310/0000141377?sid=104"
+     "title": "이란 수뇌부, 정부 협상 일부 위임에…국제유가 7% 급락(종합)",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-02T21:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005836988?sid=101"
     },
     {
-     "title": "117달러까지 치솟았던 국제유가, 하루 새 7% 뚝...미·이란 대화 물꼬",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-02T21:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005757916?sid=100"
+     "title": "미·이란 협상 기대에 국제유가 7%대 급락…브렌트유 104달러",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-02T21:30:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1730183"
+    }
+   ]
+  },
+  {
+   "keyword": "해커 코인 2차 세탁",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 10,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-02T20:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“北 해커, 탈취 자금 2차 세탁 돌입 착수”...솔라나 거쳐 비트코인 교...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-02T21:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003695116?sid=104"
+    },
+    {
+     "title": "\"北해커, 바이낸스 탈취 자금 2차 세탁 착수\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-02T21:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922230?sid=101"
+    },
+    {
+     "title": "北해커, 탈취 코인 '2차 세탁' … 솔라나 거쳐 비트코인으로 교환 ['바이...",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-02T21:10:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/03/2026110300006.html"
     }
    ]
   },
@@ -48,13 +80,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 3,
-   "press": 6,
+   "articles90": 7,
+   "recent20": 4,
+   "press": 7,
    "firstArticleAt": "2026-11-02T20:18:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "'공군 1호기' 탑승 명단 유출…대통령 부부 여권번호까지",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-02T21:22:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2643235"
+    },
     {
      "title": "“대통령 부부·장관·경호원까지”...공군1호기 탑승자 개인정보 유출",
      "press": "kyeonggi.com",
@@ -66,76 +104,6 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-02T21:15:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001400100?sid=100"
-    },
-    {
-     "title": "대통령 전용기 탑승 개인정보 유출‥\"수사 착수\"",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-02T21:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533077?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "홍석천 지연수 조언",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T20:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'이혼' 지연수 전성기 미모...\"男연예인들이 만나게 해달라 난리\" 홍석천...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-02T21:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004462323"
-    },
-    {
-     "title": "홍석천, ‘싱글맘’ 지연수 연애 만류…“게이랑 놀아, 문밖은 위험”",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-02T21:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001277422"
-    },
-    {
-     "title": "\"그냥 게이랑 놀아\"…홍석천, '일라이 이혼' 지연수에 조언",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-02T20:45:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005435536"
-    }
-   ]
-  },
-  {
-   "keyword": "노시환",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T20:05:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“노시환 수비 약하다” ML 까다로운 잣대? 몸값에 영향 미치나…한화 ...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-02T21:10:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/117/0004121191"
-    },
-    {
-     "title": "\"노시환 영입전, 발등에 불이 떨어졌다\" 이런 관심이라고?…'즉전감' 평...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-02T20:37:00.000Z",
-     "link": "https://m.sports.naver.com/wbaseball/article/076/0004462315"
-    },
-    {
-     "title": "'美 도전' 노시환 향한 현지 혹평 \"KBO는 더블A 수준, 삼진율 폭증→3루...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-02T20:05:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/108/0003483935"
     }
    ]
   },
@@ -145,12 +113,18 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-02T19:59:00.000Z",
+   "firstArticleAt": "2026-11-02T20:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "퇴근길 버스 추락‥'5·18 북 개입설' 전한길 송치",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-02T21:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533079?sid=102"
+    },
     {
      "title": "5·18 허위사실 유포 혐의 전한길 공소청 송치",
      "press": "yonhapnewstv.co.kr",
@@ -162,19 +136,77 @@
      "press": "munhwa.com",
      "publishedAt": "2026-11-02T20:32:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/021/0002829743?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "김원효 심진화에 평생 명품백 선물",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T20:41:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김원효, 투자로 2억 잃고 이혼 위기…\"♥심진화와 신뢰 깨졌다\" ('말자쇼...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-02T21:29:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000782689"
     },
     {
-     "title": "경찰, '5·18은 DJ 세력, 북한 주도 내란' 전한길, 허위사실로 공소청에...",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-02T19:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002463922?sid=102"
+     "title": "김원효, ♥심진화에 1억 명품백 선물하고 “주식으로 2억 날려 이혼할 ...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-02T20:47:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001183750"
+    },
+    {
+     "title": "\"매년 심진화에 명품백 선물\"…김원효, 15년간 쓴 돈이 무려",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-02T20:41:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005435534"
+    }
+   ]
+  },
+  {
+   "keyword": "홍석천 지연수 질투",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T20:21:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "홍석천, ‘싱글맘’ 지연수 연애 만류…“게이랑 놀아, 문밖은 위험”",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-02T21:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001277422"
+    },
+    {
+     "title": "'이혼' 지연수 전성기 미모...\"男연예인들이 만나게 해달라 난리\" 홍석천...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-02T21:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004462323"
+    },
+    {
+     "title": "'일라이와 이혼' 지연수 얼마나 예뻤길래…\"男연예인들이 어떻게든 만나...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-02T20:21:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000782687"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 189,
+  "flagged": 192,
   "matched": 59,
   "avgLeadMin": 121,
   "recent": [
