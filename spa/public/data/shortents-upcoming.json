@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T02:49:31.832Z",
+ "builtAt": "2026-11-02T02:59:35.059Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 20,
  "candidates": [
   {
    "keyword": "특검 중앙선관위 압수수색",
@@ -16,13 +16,19 @@
     "nate",
     "daum"
    ],
-   "articles90": 46,
+   "articles90": 48,
    "recent20": 4,
-   "press": 37,
+   "press": 38,
    "firstArticleAt": "2026-11-02T01:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "예산 없어도 지급한 선관위 활동비…특검, 고위직 지시·공모 추적",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-02T02:54:00.000Z",
+     "link": "https://www.ajunews.com/view/20261102112341117"
+    },
     {
      "title": "특검, 중앙선관위원장실 등 압수수색…9억원대 ‘활동비 부당 지급’ 의...",
      "press": "kukinews.com",
@@ -30,16 +36,10 @@
      "link": "https://www.kukinews.com/article/view/kuk202611020085"
     },
     {
-     "title": "선관위 특검, '공추비 의혹' 압수수색…\"9억 대 국고 손실\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-02T02:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000921960?sid=102"
-    },
-    {
-     "title": "특검, 중앙선관위 등 압수수색…'공명선거추진비' 부정 지급 의혹",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-02T02:34:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1318883&inflow=N"
+     "title": "특검, 중앙선관위 압수수색...\"활동비 9억여 원 부당 지급\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-02T02:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002427126?sid=102"
     }
    ]
   },
@@ -48,30 +48,63 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 31,
+   "articles90": 30,
    "recent20": 6,
    "press": 30,
-   "firstArticleAt": "2026-11-02T01:21:00.000Z",
+   "firstArticleAt": "2026-11-02T01:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"헤이, 김치맨\" 박항서 감독, 태국 팬 조롱에 격분…관중과 충돌",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-02T02:46:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109662611825"
+     "title": "박항서 감독에 \"김치맨\" 조롱…태국 프로축구서 인종차별 논란",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-02T02:58:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/018/0006402030"
     },
     {
-     "title": "박항서 감독 향해 “김치맨”…태국 원정서 인종차별 조롱에 강력 대응",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-02T02:38:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/241/0003538606"
+     "title": "태국에서 충격적인 ‘韓 축구 인종차별’…박항서 감독에게 “김치맨”...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-02T02:58:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/477/0000636549"
     },
     {
-     "title": "\"X킹 김치맨\" 조롱에 박항서 격분… 태국 축구장서 무슨 일?",
-     "press": "busan.com",
-     "publishedAt": "2026-11-02T02:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001405142?sid=104"
+     "title": "박항서, “김치맨” “Fxxx” 등 관중 조롱에 격분",
+     "press": "donga.com",
+     "publishedAt": "2026-11-02T02:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003759366?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 대통령 시정연설",
+   "sources": [
+    "nate",
+    "daum"
+   ],
+   "articles90": 64,
+   "recent20": 64,
+   "press": 21,
+   "firstArticleAt": "2026-11-02T02:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이 대통령, 조희대 대법원장에 \"잘 계세요?\"…대법관 갈등 후 첫 대면",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-02T02:58:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1134343"
+    },
+    {
+     "title": "국회 본청 나서는 이재명 대통령",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-02T02:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016415833?sid=100"
+    },
+    {
+     "title": "국회 시정연설 마친 이재명 대통령",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-02T02:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003150131?sid=100"
     }
    ]
   },
@@ -80,24 +113,24 @@
    "sources": [
     "nate"
    ],
-   "articles90": 28,
-   "recent20": 5,
-   "press": 28,
-   "firstArticleAt": "2026-11-02T01:22:00.000Z",
+   "articles90": 21,
+   "recent20": 2,
+   "press": 21,
+   "firstArticleAt": "2026-11-02T01:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "LG CNS, 인니에 AI데이터센터 완공",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-02T02:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002717596?sid=105"
-    },
     {
      "title": "LG CNS, 인도네시아 30MW급 AI데이터센터 완공…해외 사업 확대",
      "press": "ziksir.com",
      "publishedAt": "2026-11-02T02:42:00.000Z",
      "link": "https://www.ziksir.com/news/articleView.html?idxno=151628"
+    },
+    {
+     "title": "LG CNS, 인니에 AI데이터센터 완공",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-02T02:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002717596?sid=105"
     },
     {
      "title": "LG CNS, 인니 30MW AI 데이터센터 완공…국내 기업 첫 해외 구축",
@@ -112,63 +145,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 25,
-   "recent20": 0,
-   "press": 25,
-   "firstArticleAt": "2026-11-02T01:22:00.000Z",
+   "articles90": 19,
+   "recent20": 2,
+   "press": 19,
+   "firstArticleAt": "2026-11-02T01:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "모바일 인터넷 시대 열었던 3G 통신 역사 속으로 사라지나 : SK텔레콤 이...",
+     "press": "huffingtonpost.kr",
+     "publishedAt": "2026-11-02T02:56:00.000Z",
+     "link": "https://www.huffingtonpost.kr/article/261718"
+    },
+    {
+     "title": "KT, 3G 신규가입 중단... 요금할인·기변 등 LTE·5G전환 지원",
+     "press": "meconomynews.com",
+     "publishedAt": "2026-11-02T02:56:00.000Z",
+     "link": "https://www.meconomynews.com/news/articleView.html?idxno=203159"
+    },
     {
      "title": "KT, 3G 서비스 종료 검토…신규가입 중단",
      "press": "newspost.kr",
      "publishedAt": "2026-11-02T02:24:00.000Z",
      "link": "https://www.newspost.kr/news/articleView.html?idxno=226930"
-    },
-    {
-     "title": "SKT 이어 KT도 3G 신규 가입 중단…고객 전환 부담 낮출 프로그램 마련",
-     "press": "epnc.co.kr",
-     "publishedAt": "2026-11-02T02:22:00.000Z",
-     "link": "https://www.epnc.co.kr/news/articleView.html?idxno=409094"
-    },
-    {
-     "title": "KT, 오늘부터 3G 서비스 신규가입 중단…\"LTE·5G 전환 지원\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-02T02:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205368?sid=101"
     }
    ]
   },
   {
-   "keyword": "이재명 대통령 시정연설",
+   "keyword": "영광",
    "sources": [
-    "nate",
-    "daum"
+    "google"
    ],
-   "articles90": 66,
-   "recent20": 66,
-   "press": 21,
-   "firstArticleAt": "2026-11-02T02:41:00.000Z",
+   "articles90": 11,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-02T01:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국민의힘 의원들의 항의성 발언 경청하는 이재명 대통령",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-02T02:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205409?sid=100"
+     "title": "영광군, 착한가격업소 이용 시 영광사랑카드 캐시백 5% 추가 지원",
+     "press": "cnbnews.com",
+     "publishedAt": "2026-11-02T02:56:00.000Z",
+     "link": "https://www.cnbnews.com/news/articleView.html?idxno=1021814"
     },
     {
-     "title": "장동혁 “이 대통령, 본인 하고 싶은 말만 하고 가”",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-02T02:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002830258?sid=100"
+     "title": "'조선·해양플랜트모듈' 영광, 상장 첫날 주가 공모가 대비 2배 올라 '따...",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-02T02:26:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=450869"
     },
     {
-     "title": "국민의힘 의원들 향해 인사하는 이재명 대통령",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-02T02:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205410?sid=100"
+     "title": "영광, 코스닥 상장 첫날 공모가 대비 90% 급등",
+     "press": "econonews.co.kr",
+     "publishedAt": "2026-11-02T02:20:00.000Z",
+     "link": "http://www.econonews.co.kr/news/articleView.html?idxno=446597"
     }
    ]
   },
@@ -178,10 +210,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 25,
+   "articles90": 11,
    "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-02T01:21:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-02T01:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -192,23 +224,55 @@
      "link": "https://www.newspim.com/news/view/20261102000714"
     },
     {
-     "title": "신천지 이만희 공판 출석",
+     "title": "법원 도착한 이만희",
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-02T01:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205329?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/079/0004205328?sid=102"
     },
     {
-     "title": "이만희 공판 출석",
+     "title": "신천지 이만희 휠체어 타고 공판 출석",
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-02T01:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205326?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/079/0004205330?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "계주",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T01:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"위험하다\" 학부모 민원에 운동회 계주 취소?…누리꾼 '와글'",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-02T02:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001976283?sid=102"
+    },
+    {
+     "title": "최민정, 쇼트트랙 2차 월드투어 1,000m 역전 우승…계주 은메달",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-02T01:44:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=560266"
+    },
+    {
+     "title": "“위험하잖아요!” 초등학교 운동회의 꽃, 계주 경기 취소",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-02T01:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002829505?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 8,
+  "flagged": 10,
   "matched": 0,
   "avgLeadMin": null,
   "recent": []
