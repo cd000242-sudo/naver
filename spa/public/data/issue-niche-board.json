@@ -1,10 +1,10 @@
 {
-  "publishedAt": "2026-11-01T21:34:52.355Z",
+  "publishedAt": "2026-11-02T03:57:30.544Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
-    "issues": 18,
-    "candidates": 240,
+    "issues": 17,
+    "candidates": 226,
     "niche": 1,
     "preemption": 3,
     "pending": 0
@@ -49,20 +49,20 @@
         ],
         "measuredAt": "2026-11-01T09:36:10.748Z"
       },
-      "documentCount": 15189,
+      "documentCount": 15200,
       "documentCountMeasured": true,
       "searchVolume": 1180,
       "searchVolumeLt10": false,
       "hasLiveDemand": true,
       "demandStatus": "stable",
-      "demandRatio": 1.2247859027082042,
+      "demandRatio": 1.3236856749230639,
       "issueStatus": "stable",
       "isHot": false,
       "frontalDocCount": 0,
       "freshFrontalCount": 0,
       "reasons": [
         "검색량 1,180",
-        "문서수 15,189",
+        "문서수 15,200",
         "데이터랩 실측 수요",
         "블로그탭 상위 10 정면글 0건 — 자리 있음"
       ],
@@ -77,7 +77,7 @@
         },
         {
           "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.2배"
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.3배"
         },
         {
           "code": "slot",
@@ -110,7 +110,7 @@
       "kinCount": 512,
       "kinTop": [],
       "monetize": null,
-      "measuredAt": "2026-11-01T21:34:17.807Z",
+      "measuredAt": "2026-11-02T03:55:11.671Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
       "kinMode": "date-views-v2"
@@ -209,39 +209,39 @@
       "keywordPool": null,
       "trend": {
         "series": [
-          45,
-          100,
-          15,
+          59,
+          9,
           0,
           0,
           0,
           0,
-          51,
-          100,
-          47,
+          30,
+          59,
+          28,
           0,
           0,
           0,
           0,
-          34,
-          83,
-          38,
-          0,
-          0,
-          0,
-          0,
+          20,
+          49,
           23,
-          100,
-          17,
           0,
           0,
           0,
           0,
-          60
+          14,
+          59,
+          10,
+          0,
+          0,
+          0,
+          0,
+          35,
+          100
         ],
-        "label": "📉 단발성",
-        "recommendation": "회피! 지난 며칠 폭발 후 급락 중. 글 써도 유입 없음",
-        "measuredAt": "2026-11-01T21:34:53.045Z"
+        "label": "🚀 떡상",
+        "recommendation": "지금 당장 작성! 3일 내 급증 포착 → 선점 시 상위 노출 확률 매우 높음",
+        "measuredAt": "2026-11-02T03:57:31.326Z"
       },
       "kinCount": 1,
       "kinTop": [],
@@ -347,7 +347,6 @@
       "trend": {
         "series": [
           18,
-          18,
           15,
           0,
           100,
@@ -374,9 +373,10 @@
           0,
           27,
           15,
-          67
+          67,
+          91
         ],
-        "measuredAt": "2026-11-01T21:34:53.045Z"
+        "measuredAt": "2026-11-02T03:57:31.326Z"
       },
       "kinCount": 77,
       "kinTop": [
@@ -488,37 +488,37 @@
       "keywordPool": null,
       "trend": {
         "series": [
-          29,
-          90,
+          83,
           0,
-          29,
+          26,
           0,
           0,
-          33,
-          95,
-          71,
-          62,
-          71,
-          38,
-          52,
-          43,
+          30,
+          87,
+          65,
           57,
-          100,
-          43,
-          33,
+          65,
+          35,
           48,
+          39,
           52,
-          24,
-          62,
-          81,
-          24,
-          29,
-          38,
+          91,
+          39,
+          30,
           43,
+          48,
+          22,
+          57,
+          74,
+          22,
+          26,
+          35,
+          39,
           0,
-          38
+          35,
+          100
         ],
-        "measuredAt": "2026-11-01T21:34:53.045Z"
+        "measuredAt": "2026-11-02T03:57:31.326Z"
       },
       "kinCount": 74,
       "kinTop": [],
@@ -619,7 +619,6 @@
       "keywordPool": null,
       "trend": {
         "series": [
-          0,
           5,
           3,
           0,
@@ -647,11 +646,12 @@
           15,
           7,
           0,
-          4
+          4,
+          26
         ],
         "label": "📉 단발성",
         "recommendation": "회피! 지난 며칠 폭발 후 급락 중. 글 써도 유입 없음",
-        "measuredAt": "2026-11-01T21:34:53.045Z"
+        "measuredAt": "2026-11-02T03:57:31.326Z"
       },
       "kinCount": 125,
       "kinTop": [],
@@ -664,6 +664,181 @@
     }
   ],
   "observations": [
+    {
+      "keyword": "오픈ai 닷츠 후기",
+      "issue": "오픈AI",
+      "topic": "오픈AI",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 161,
+      "documentCountMeasured": true,
+      "searchVolume": 30,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 30",
+        "문서수 161",
+        "선점 후보 — 경쟁 문서 161건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "구매 검토",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "오픈ai 닷츠 후기 경험담을 판단할 기준",
+          "frame": "review",
+          "basis": "검색 질문 '오픈ai 닷츠 후기' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+        },
+        "home": {
+          "text": "오픈ai 닷츠 후기 누구에게 맞는지 먼저 살펴보세요",
+          "frame": "review",
+          "basis": "검색 질문 '오픈ai 닷츠 후기' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": [
+        {
+          "title": "새로운 AI 에이전트 닷츠, 실제로 얼마나 효율적일까요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1122&docId=495387990&answerNo=0",
+          "views": 104,
+          "answers": null
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-11-02T03:55:11.671Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "딥브레인ai 리메모리",
+      "issue": "딥브레인AI",
+      "topic": "딥브레인AI",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 139,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 139",
+        "선점 후보 — 경쟁 문서 139건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-02T03:55:11.671Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "딥브레인ai 블라인드",
+      "issue": "딥브레인AI",
+      "topic": "딥브레인AI",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 182,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 182",
+        "선점 후보 — 경쟁 문서 182건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-02T03:55:11.671Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "앤트로픽 엔스로픽 차이",
       "issue": "앤트로픽",
@@ -729,78 +904,8 @@
       "monetize": null,
       "measuredAt": "2026-11-01T21:34:17.807Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "오픈ai 닷츠 후기",
-      "issue": "오픈AI",
-      "topic": "오픈AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 159,
-      "documentCountMeasured": true,
-      "searchVolume": 30,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 30",
-        "문서수 159",
-        "선점 후보 — 경쟁 문서 159건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "오픈ai 닷츠 후기 경험담을 판단할 기준",
-          "frame": "review",
-          "basis": "검색 질문 '오픈ai 닷츠 후기' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        },
-        "home": {
-          "text": "오픈ai 닷츠 후기 누구에게 맞는지 먼저 살펴보세요",
-          "frame": "review",
-          "basis": "검색 질문 '오픈ai 닷츠 후기' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": [
-        {
-          "title": "새로운 AI 에이전트 닷츠, 실제로 얼마나 효율적일까요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1122&docId=495387990&answerNo=0",
-          "views": 103,
-          "answers": null
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-11-01T21:34:17.807Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "최강창민의 5살 붕어빵",
@@ -852,7 +957,8 @@
       "monetize": null,
       "measuredAt": "2026-11-01T21:34:17.807Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "정석원 마약 바람",
@@ -1693,64 +1799,6 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "최불암 아들 최민식",
-      "issue": "최불암",
-      "topic": "최불암",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 167,
-      "documentCountMeasured": true,
-      "searchVolume": 30,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 30",
-        "문서수 167",
-        "선점 후보 — 경쟁 문서 167건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 22,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-30T21:37:24.147Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
@@ -1776,10 +1824,10 @@
           "link": "https://n.news.naver.com/mnews/article/028/0002829977?sid=105"
         },
         {
-          "title": "핀란드 경찰, 구글 데이터센터 부지 조성사업 수사 착수",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-29T15:40:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016410604?sid=104"
+          "title": "한화, 필리조선소서 첫 美 해군 함정 건조…현지 야드 '결실'",
+          "press": "fntimes.com",
+          "publishedAt": "2026-11-02T02:42:00.000Z",
+          "link": "https://www.fntimes.com/html/view.php?ud=202611021138502408fa6b69a559_18"
         }
       ],
       "concentrated": [
@@ -1799,12 +1847,12 @@
           "origin": "autocomplete"
         },
         {
-          "keyword": "핀란드 항공권",
+          "keyword": "핀란드 수도",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "핀란드 수도",
+          "keyword": "핀란드 항공권",
           "searchVolume": null,
           "origin": "autocomplete"
         },
@@ -1819,8 +1867,8 @@
           "origin": "autocomplete"
         },
         {
-          "keyword": "핀란드 레오",
-          "searchVolume": null,
+          "keyword": "핀란드 관광청",
+          "searchVolume": 1180,
           "origin": "autocomplete"
         }
       ],
@@ -2120,7 +2168,7 @@
       "carried": true
     }
   ],
-  "enrichedAt": "2026-11-01T21:35:15.170Z",
+  "enrichedAt": "2026-11-02T03:57:52.093Z",
   "enrichStats": {
     "enriched": 0,
     "subsAdded": 0,
