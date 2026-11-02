@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T20:41:59.253Z",
+ "builtAt": "2026-11-02T20:52:02.841Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,23 +16,23 @@
     "google"
    ],
    "articles90": 15,
-   "recent20": 5,
+   "recent20": 3,
    "press": 8,
    "firstArticleAt": "2026-11-02T20:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[제주도 날씨예보] 아침 기온 3~5도 하락…4일 밤부터 비",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-02T20:40:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=92798"
-    },
-    {
      "title": "[날씨] 출근길 기온 '뚝' 반짝 추위…큰 일교차 주의!",
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-02T20:40:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000922210?sid=103"
+    },
+    {
+     "title": "[제주도 날씨예보] 아침 기온 3~5도 하락…4일 밤부터 비",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-02T20:40:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=92798"
     },
     {
      "title": "[전남광주 날씨예보] 아침 기온 뚝…최저 3도, 일교차 15도 안팎",
@@ -49,7 +49,7 @@
     "nate"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-02T19:52:00.000Z",
    "exclusive": false,
