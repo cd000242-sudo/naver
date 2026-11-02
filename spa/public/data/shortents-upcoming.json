@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T22:22:38.253Z",
+ "builtAt": "2026-11-02T22:32:45.987Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 22,
  "candidates": [
   {
-   "keyword": "국제유가 급락",
+   "keyword": "김여정 바이낸스 사태",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 49,
-   "recent20": 11,
-   "press": 37,
-   "firstArticleAt": "2026-11-02T21:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국제유가, 미-이란 협상 가능성에 7% 넘게 급락...WTI, 7.4%↓96달러에 마...",
-     "press": "beyondpost.co.kr",
-     "publishedAt": "2026-11-02T22:20:00.000Z",
-     "link": "http://www.beyondpost.co.kr/view.php?ud=2026110307152550092aaae0046f_30"
-    },
-    {
-     "title": "유가 7% 급락에도 美증시 기술주 흔들 … 나스닥 1.1% 하락",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-02T22:20:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/03/2026110300017.html"
-    },
-    {
-     "title": "[뉴욕증시] 선거 D-1 혼조 마감…유가 급락·기술주 매도세, 나스닥 1.07...",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-02T22:12:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/323893/?sc=Naver"
-    }
-   ]
-  },
-  {
-   "keyword": "김여정, 바이낸스 사태 예의주시",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 31,
-   "recent20": 9,
-   "press": 30,
+   "articles90": 43,
+   "recent20": 8,
+   "press": 38,
    "firstArticleAt": "2026-11-02T21:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보]北김여정, 바이낸스 사태에 경고 \"美 정치적 도발...예의주시\"",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-02T22:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000120473?sid=104"
+     "title": "김여정, 바이낸스 해킹 배후 지목에 반발…\"美 정치적 도발\"",
+     "press": "the-today.com",
+     "publishedAt": "2026-11-02T22:30:00.000Z",
+     "link": "https://www.the-today.com/news/articleView.html?idxno=92918"
     },
     {
-     "title": "김여정, 8조원대 바이낸스 해킹 의혹에 \"美 정치적 도발\" 반발",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-02T22:19:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000078953"
+     "title": "김여정 \"미 정치적 도발\"…'바이낸스 해킹' 배후 지목에 '반발'",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-02T22:26:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1319014&inflow=N"
     },
     {
-     "title": "북한 김여정, 바이낸스 사태에 “미국 정치적 도발…예의주시”",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-02T22:14:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1171232"
+     "title": "북 김여정 \"바이낸스 사태, 미국의 정치적 도발\"",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-02T22:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001976396?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "애플 실적발표",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 18,
+   "recent20": 3,
+   "press": 18,
+   "firstArticleAt": "2026-11-02T21:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "애플, 호실적에도 주가 출렁… 메모리 비용·中시장 부진 부담",
+     "press": "it.chosun.com",
+     "publishedAt": "2026-11-02T22:26:00.000Z",
+     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000000078"
+    },
+    {
+     "title": "애플, 터너스 CEO 첫 실적 '합격점'…분기 매출 1144억 달러로 예상치 상...",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-02T22:18:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=202611030712004094e250e8e188_1"
+    },
+    {
+     "title": "100년에 한 번 있을 법한 메모리 대란에도…애플, 시장전망치 상회…주...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-02T22:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000963232?sid=105"
     }
    ]
   },
@@ -79,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
+   "articles90": 11,
    "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-02T21:00:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-02T21:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -109,6 +109,7 @@
   {
    "keyword": "팔란티어 주가",
    "sources": [
+    "signal.bz",
     "google"
    ],
    "articles90": 7,
@@ -139,66 +140,66 @@
    ]
   },
   {
-   "keyword": "2026년 11월 3일 운세",
+   "keyword": "임영웅",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-02T21:00:00.000Z",
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T21:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오늘의 운세] 2026년 11월 3일 (화) 띠별운세 '여유를 가지자'",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-02T21:40:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103265"
+     "title": "임영웅, 자작곡 ‘또또’로 또 트로피…TMA 가을 부문 수상",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-02T22:26:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001302497"
     },
     {
-     "title": "[오늘의 운세] 3일 화요일 나의 운세는?",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-02T21:20:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1190363"
+     "title": "임영웅 ‘2027 TMA’ 베스트뮤직 가을 부문 수상",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-02T22:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001147754"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 3일 별자리 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-02T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006402438?sid=103"
+     "title": "임영웅, '또또'로 2027 TMA 베스트뮤직 가을 부문 수상",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-02T21:58:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16266597"
     }
    ]
   },
   {
-   "keyword": "1호기 탑승자 정보 유출",
+   "keyword": "금융지주 회장 연임 강화",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-02T21:02:00.000Z",
-   "exclusive": true,
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T21:55:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "외교부, '1호기 탑승자 유출' \"엄중하게 인식...다각적 조사\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-02T21:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002427491?sid=100"
+     "title": "금융지주 회장 연임 문턱 높인다…금융당국, 의결 요건 단계적 강화 추...",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-02T22:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003481333?sid=101"
     },
     {
-     "title": "'공군 1호기' 탑승 명단 유출…대통령 부부 여권번호까지",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-02T21:22:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2643235"
+     "title": "금융지주 ‘셀프개혁’ 속도 내는데…지배구조 개선안은 ‘표류’",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-02T21:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003150435?sid=101"
     },
     {
-     "title": "“대통령 부부·장관·경호원까지”...공군1호기 탑승자 개인정보 유출",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-02T21:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000130322?sid=100"
+     "title": "금융지주 회장 3연임 땐 주주 75% 찬성 의결..지배구조 개선안, 본격 당...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-02T21:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005598357?sid=101"
     }
    ]
   },
@@ -207,10 +208,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-02T21:00:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-02T21:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -235,15 +236,46 @@
    ]
   },
   {
-   "keyword": "트레이드",
+   "keyword": "2026년 11월 3일 운세",
    "sources": [
-    "signal.bz",
-    "google"
+    "nate"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-02T21:00:00.000Z",
+   "firstArticleAt": "2026-11-02T21:03:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘의 운세] 2026년 11월 3일 (화) 띠별운세 '여유를 가지자'",
+     "press": "dailypop.kr",
+     "publishedAt": "2026-11-02T21:40:00.000Z",
+     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103265"
+    },
+    {
+     "title": "[오늘의 운세] 3일 화요일 나의 운세는?",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-02T21:20:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1190363"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 3일 별자리 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-02T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006402438?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "트레이드",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-02T21:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -270,7 +302,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 202,
+  "flagged": 204,
   "matched": 74,
   "avgLeadMin": 238,
   "recent": [
