@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-01T20:10:04.272Z",
+  "generatedAt": "2026-11-02T00:00:13.283Z",
   "rules": "2026-10-10-traffic",
   "model": "sonnet",
   "guides": [
@@ -115,43 +115,6 @@
       "provider": "claude"
     },
     {
-      "id": "be15dc2ef4d21caa",
-      "urls": [
-        "https://blog.naver.com/rcn0005/224455043681",
-        "https://blog.naver.com/car__together/224451064631",
-        "https://blog.naver.com/goodman933/224450633351",
-        "https://blog.naver.com/car__together/224447860297",
-        "https://blog.naver.com/car__together/224446656822"
-      ],
-      "guide": {
-        "direction": "자동완성에 가격·트림별 구체 검색어가 많아 검색 유입을 노린다. 벤치마크들은 EV3·EV9·카니발 등 타 모델 장기렌트/리스 가격표 포맷을 반복했지만 GLB 자체의 EQB 대비 충전속도·주행거리·2열공간 개선점을 숫자로 짚은 글은 비어 있다. 독자는 200·250+ 트림별 가격·제원 비교표를 저장해 EQB와 직접 대조할 근거를 얻어간다.",
-        "searchTargets": [
-          "벤츠 glb 전기차",
-          "벤츠 glb 전기차 가격",
-          "벤츠 glb 250",
-          "벤츠 glb 250 4matic"
-        ],
-        "mustInclude": [
-          "GLB 200·250+ 트림별 출시일·가격 비교표(확인 필요: 벤츠코리아 공식 발표)",
-          "EQB 대비 개선된 충전속도·주행거리·2열 레그룸 수치(확인 필요: 공식 스펙시트)",
-          "GLB 전기차 상세 제원표(배터리 용량, 모터 출력, 공차중량)(확인 필요: 공식 자료)",
-          "EQB vs GLB 전기차 항목별 비교표"
-        ],
-        "mustAvoid": [
-          "내연기관 GLB와 전기차 GLB를 혼동해 서술",
-          "미발표 가격·출시일을 확정 사실처럼 단정",
-          "EQB를 깎아내리는 과도한 비방성 비교"
-        ],
-        "checkBefore": [
-          "벤츠코리아 공식 보도자료에서 정확한 출시일·가격 확인",
-          "EQB 공식 제원과 GLB 전기차 공식 제원 수치 대조 확인"
-        ]
-      },
-      "at": "2026-10-27T00:45:35.383Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
       "id": "7bedf82a36304a1a",
       "urls": [
         "https://blog.naver.com/swifty_7/224455243983"
@@ -201,33 +164,6 @@
         ]
       },
       "at": "2026-10-27T19:06:55.353Z",
-      "rules": "2026-10-10-traffic",
-      "provider": "claude"
-    },
-    {
-      "id": "5f184c42278785c5",
-      "urls": [
-        "https://blog.naver.com/ehdwns3405/224456691717",
-        "https://blog.naver.com/1020eyey/224455734194"
-      ],
-      "guide": {
-        "direction": "자동완성 데이터가 없고 '세계 1위 출신이 예선부터'라는 낙차가 화제성인 소재라 홈판을 노린다. 벤치마크 제목들이 이미 '자존심 내려놓고 돌아온 이유'를 다뤘으므로, 시드전 구체 일정·장소·경쟁 구도를 채운 각도가 비어 있다. 독자는 시드전 참가 자격 변화와 복귀 배경을 정리한 내용을 공유 이유로 가져간다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "선수명 박성현 표기",
-          "LPGA 통산 7승·메이저 2회·세계랭킹 1위 기록",
-          "KLPGA 시드순위전 참가 일정·장소(확인 필요: KLPGA 공식 발표)",
-          "시드전 결과 또는 진행 상황(확인 필요: KLPGA 공식 또는 중계 기사)"
-        ],
-        "mustAvoid": [
-          "같은 시기 복귀를 시도한 다른 선수와 혼동"
-        ],
-        "checkBefore": [
-          "시드순위전 정확한 날짜·장소·참가 자격 기준(KLPGA 공식 공지)",
-          "박성현 현재 소속·후원 상태(공식 발표 또는 소속사 공지)"
-        ]
-      },
-      "at": "2026-10-28T10:00:13.189Z",
       "rules": "2026-10-10-traffic",
       "provider": "claude"
     },
