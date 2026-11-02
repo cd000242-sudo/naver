@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T04:45:38.141Z",
+ "builtAt": "2026-11-02T04:55:41.523Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "손흥민 미네소타에 1-3 패배",
@@ -17,7 +17,7 @@
     "nate"
    ],
    "articles90": 23,
-   "recent20": 3,
+   "recent20": 2,
    "press": 21,
    "firstArticleAt": "2026-11-02T03:42:00.000Z",
    "exclusive": false,
@@ -44,76 +44,12 @@
    ]
   },
   {
-   "keyword": "lafc",
-   "sources": [
-    "google"
-   ],
-   "articles90": 21,
-   "recent20": 3,
-   "press": 20,
-   "firstArticleAt": "2026-11-02T03:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'손흥민 풀타임' LAFC, 미네소타에 1-3 완패...PO 상위 시드 불발",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-02T04:40:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=778349"
-    },
-    {
-     "title": "손흥민 풀타임에도 LAFC 1-3 패배…PO 홈 이점 확보 실패",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-02T04:38:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=622376"
-    },
-    {
-     "title": "손흥민 3경기 연속 침묵, LAFC 미네소타에 1-3 완패…4위 무산",
-     "press": "dailysportshankook.co.kr",
-     "publishedAt": "2026-11-02T04:38:00.000Z",
-     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435072"
-    }
-   ]
-  },
-  {
-   "keyword": "구로 중환자실 시신",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 14,
-   "recent20": 6,
-   "press": 14,
-   "firstArticleAt": "2026-11-02T03:25:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "구로 ‘미라 시신’ 중국인, 3개월 전 중환자실비 못내 퇴원",
-     "press": "donga.com",
-     "publishedAt": "2026-11-02T04:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003759374?sid=102"
-    },
-    {
-     "title": "[속보] 구로 ‘미라화 시신’ 무슨 일이…“8월 중환자실 입원했다가 병...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-02T04:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003694811?sid=102"
-    },
-    {
-     "title": "구로 미라 시신의 사연…병원비 못 내고 중환자실 퇴원 후 숨져",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-02T04:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001882386?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "시정연설 후 인사하는 이재명 대통령",
    "sources": [
     "signal.bz"
    ],
    "articles90": 10,
-   "recent20": 4,
+   "recent20": 1,
    "press": 8,
    "firstArticleAt": "2026-11-02T03:27:00.000Z",
    "exclusive": false,
@@ -146,7 +82,7 @@
     "nate"
    ],
    "articles90": 5,
-   "recent20": 4,
+   "recent20": 2,
    "press": 5,
    "firstArticleAt": "2026-11-02T03:36:00.000Z",
    "exclusive": false,
@@ -177,13 +113,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 0,
+   "articles90": 8,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-02T03:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "시민단체, 해킹 피해 속출에 \"연내 집단소송법 제정해야\"…10만 서명 캠...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-02T04:47:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261102000888"
+    },
     {
      "title": "[포토]집단소송법 제정을 촉구하는 시민단체",
      "press": "asiatoday.co.kr",
@@ -195,44 +137,6 @@
      "press": "newspim.com",
      "publishedAt": "2026-11-02T03:37:00.000Z",
      "link": "https://www.newspim.com/news/view/20261102000967"
-    },
-    {
-     "title": "구호 외치는 집단소송법 제정연대",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-02T03:37:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261102000968"
-    }
-   ]
-  },
-  {
-   "keyword": "블랙스완 스리야, 몽환적 매력 발산",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T03:19:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[포토] 블랙스완 스리야, 매력 발산 화보 공개",
-     "press": "heraldmuse.com",
-     "publishedAt": "2026-11-02T03:55:00.000Z",
-     "link": "https://m.entertain.naver.com/article/112/0003811863"
-    },
-    {
-     "title": "[포토] 블랙스완 스리야, 개성 넘치는 화보 공개",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-02T03:24:00.000Z",
-     "link": "https://www.ajunews.com/view/20261102122020275"
-    },
-    {
-     "title": "블래스완 스리야, 환상적인 분위기[포토엔HD]",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-02T03:21:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001183566"
     }
    ]
   }
