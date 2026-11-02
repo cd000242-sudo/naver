@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T07:37:54.467Z",
+ "builtAt": "2026-11-02T07:47:58.122Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "코스피 반등 마감",
@@ -16,94 +16,93 @@
     "signal.bz"
    ],
    "articles90": 86,
-   "recent20": 25,
-   "press": 72,
-   "firstArticleAt": "2026-11-02T06:43:00.000Z",
+   "recent20": 13,
+   "press": 74,
+   "firstArticleAt": "2026-11-02T06:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'인텔 쇼크' 털어낸 코스피, 기관 매수세 힘입어 2.2% 반등",
-     "press": "ziksir.com",
-     "publishedAt": "2026-11-02T07:36:00.000Z",
-     "link": "https://www.ziksir.com/news/articleView.html?idxno=151723"
+     "title": "“이제 바닥 찍었나?”…삼전닉스 급반등에도 안심 못하는 이유 [머니+...",
+     "press": "ekn.kr",
+     "publishedAt": "2026-11-02T07:46:00.000Z",
+     "link": "https://www.ekn.kr/web/view.php?key=20261102026184226"
     },
     {
-     "title": "[속보]'인텔 공포' 넘었다…美·이란 외교적 해결 기대 코스피 2%대 상승",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-02T07:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000120441?sid=101"
+     "title": "[마감] 코스피 2% 상승… 기관 '사자'에 5800선 회복",
+     "press": "it.chosun.com",
+     "publishedAt": "2026-11-02T07:46:00.000Z",
+     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000000047"
     },
     {
-     "title": "코스피, 기관 1.2조 매수에 2.24% 상승…5850선 회복",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-02T07:34:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1134469"
+     "title": "美반도체 급락에도 코스피 반등 성공…5800선 회복 마감",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-02T07:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000191252?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "기아 10월 판매 증가",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 60,
+   "recent20": 18,
+   "press": 57,
+   "firstArticleAt": "2026-11-02T06:23:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "형보다 나은 아우…기아, 10월 내수서 현대차 제쳤다",
+     "press": "financialpost.co.kr",
+     "publishedAt": "2026-11-02T07:46:00.000Z",
+     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=284124"
+    },
+    {
+     "title": "완성차 5사, 10월 판매 희비…현대차 울고 기아 웃었다 (종합)",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-02T07:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002246973?sid=101"
+    },
+    {
+     "title": "“현대차·기아 시장 점유율 91%·양극화 심화”..완성차,10월 글로벌 시...",
+     "press": "dailycar.co.kr",
+     "publishedAt": "2026-11-02T07:46:00.000Z",
+     "link": "https://www.dailycar.co.kr/content/news.html?type=view&autoId=63038"
     }
    ]
   },
   {
    "keyword": "삼성SDS 구미 데이터센터 착공",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 41,
-   "recent20": 15,
-   "press": 40,
-   "firstArticleAt": "2026-11-02T06:08:00.000Z",
+   "articles90": 48,
+   "recent20": 17,
+   "press": 47,
+   "firstArticleAt": "2026-11-02T06:19:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "삼성SDS, ‘구미 AI 데이터센터’ 착공…“영남권 60조 투자 첫 발”",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-02T07:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002829682?sid=101"
+     "title": "삼성SDS, 구미 AI 데이터센터 착공…60㎿급 2029년 가동 목표",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-02T07:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000963137?sid=102"
     },
     {
-     "title": "삼성SDS, 구미 AIDC 착공…영남권 60조 투자계획 본격화",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-02T07:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009265416?sid=105"
+     "title": "[전자·IT 레이더] 삼성전자·LG CNS·삼성SDS, AI 인프라 확충·글로벌 ...",
+     "press": "thevaluenews.co.kr",
+     "publishedAt": "2026-11-02T07:44:00.000Z",
+     "link": "http://www.thevaluenews.co.kr/news/view.php?idx=202884"
     },
     {
-     "title": "이준희 삼성SDS 대표 \"구미 AI 데이터센터 착공…60조 영남권 투자 첫 결...",
-     "press": "financialpost.co.kr",
-     "publishedAt": "2026-11-02T07:36:00.000Z",
-     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=284133"
-    }
-   ]
-  },
-  {
-   "keyword": "포스코홀딩스 영업익 48% 증가",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 20,
-   "recent20": 6,
-   "press": 20,
-   "firstArticleAt": "2026-11-02T06:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "포스코홀딩스, 철강 회복에 3분기 영업익 9450억원… 전년비 48% 증가",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-02T07:36:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261102500619"
-    },
-    {
-     "title": "[종합] 철강이 메운 리튬 부진…포스코홀딩스, 영업익 48% 증가",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-02T07:32:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261102001461"
-    },
-    {
-     "title": "포스코홀딩스, 3Q 영업익 48%↑…\"철강값 추가 인상 협상\"(종합2보)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-02T07:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009265408?sid=101"
+     "title": "삼성SDS 구미 AI 데이터센터 착공...2029년 3월 가동 목표",
+     "press": "srn.hcn.co.kr",
+     "publishedAt": "2026-11-02T07:44:00.000Z",
+     "link": "https://srn.hcn.co.kr/user/news/BD_newsView.do?news_category=02&story_id=NS2026110200091&story_seq=0&soCode=114&socttSn=NS2026110200091&socttSeq=0"
     }
    ]
   },
@@ -113,18 +112,18 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 27,
-   "recent20": 5,
-   "press": 18,
-   "firstArticleAt": "2026-11-02T06:08:00.000Z",
+   "articles90": 24,
+   "recent20": 4,
+   "press": 15,
+   "firstArticleAt": "2026-11-02T06:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최고위에서 발언하는 정점식 원내대표",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-02T07:34:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3739843"
+     "title": "국민의힘, 李 '821조 예산' 30조 삭감 예고…\"미래대응 아닌 총선대응기...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-02T07:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003150322?sid=100"
     },
     {
      "title": "李대통령, 조희대에 \"잘 계시냐\"…정점식 \"참 무서운 사람\"",
@@ -133,42 +132,10 @@
      "link": "https://n.news.naver.com/mnews/article/008/0005435373?sid=100"
     },
     {
-     "title": "발언하는 정점식 원내대표",
+     "title": "최고위에서 발언하는 정점식 원내대표",
      "press": "gukjenews.com",
-     "publishedAt": "2026-11-02T07:32:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3739732"
-    }
-   ]
-  },
-  {
-   "keyword": "이형일 생산세액공제 논의",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 18,
-   "recent20": 3,
-   "press": 18,
-   "firstArticleAt": "2026-11-02T07:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이형일 부총리, 전기차 업계와 간담회…\"생산세액공제 지원 시급\"",
-     "press": "sejungilbo.com",
-     "publishedAt": "2026-11-02T07:32:00.000Z",
-     "link": "https://www.sejungilbo.com/news/articleView.html?idxno=60916"
-    },
-    {
-     "title": "이형일 “전기차 생산세액공제, 국회 논의에 적극 참여”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-02T07:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004677823?sid=101"
-    },
-    {
-     "title": "정부, 이달 전기차 경쟁력 강화방안 발표…생산세액공제 논의",
-     "press": "ziksir.com",
-     "publishedAt": "2026-11-02T07:22:00.000Z",
-     "link": "https://www.ziksir.com/news/articleView.html?idxno=151717"
+     "publishedAt": "2026-11-02T07:34:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3739843"
     }
    ]
   },
@@ -177,13 +144,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 15,
-   "recent20": 5,
-   "press": 15,
-   "firstArticleAt": "2026-11-02T06:10:00.000Z",
+   "articles90": 13,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-02T06:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "11월에 서울 찾아온 황사 '6년만'…내일까지 미먼 '나쁨'",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-02T07:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003150325?sid=103"
+    },
     {
      "title": "올가을 첫 황사 관측…내일 전국 출근길 추위",
      "press": "yonhapnewstv.co.kr",
@@ -195,28 +168,59 @@
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-02T07:26:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002427289?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "김정관 산업부 장관",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 11,
+   "recent20": 3,
+   "press": 11,
+   "firstArticleAt": "2026-11-02T06:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "산업부 김정관 \"1600조 메가프로젝트…국가 성장 판 바꾼다\"",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-02T07:38:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5078759"
     },
     {
-     "title": "서울에 6년 만의 '11월 황사'…미세먼지 농도 149㎍까지 치솟아",
-     "press": "ekoreanews.co.kr",
-     "publishedAt": "2026-11-02T07:20:00.000Z",
-     "link": "https://www.ekoreanews.co.kr/news/articleView.html?idxno=88968"
+     "title": "산업부, 대우건설 체코 원전 중재 요구에 선긋기 … \"법적 권한 없다\"",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-02T07:32:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/02/2026110200332.html"
+    },
+    {
+     "title": "산업부, 체코 원전 사업 비상관리체제 가동",
+     "press": "newsgn.com",
+     "publishedAt": "2026-11-02T07:30:00.000Z",
+     "link": "https://www.newsgn.com/news/articleView.html?idxno=582973"
     }
    ]
   },
   {
    "keyword": "이강철과 박진만 감독",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 3,
+   "articles90": 12,
+   "recent20": 1,
    "press": 11,
-   "firstArticleAt": "2026-11-02T06:08:00.000Z",
+   "firstArticleAt": "2026-11-02T06:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "30년 전엔 선수로, 지금은 감독으로 KS서 다시 만났다···KT 이강철 “...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-02T07:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003480138?sid=102"
+    },
     {
      "title": "이강철 kt 위즈 감독 \"수원시민과 함께 '팀 kt'로 통합우승 이뤄낼 것\"",
      "press": "kihoilbo.co.kr",
@@ -228,44 +232,38 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-02T07:23:00.000Z",
      "link": "https://m.sports.naver.com/kbaseball/article/055/0001399991"
-    },
-    {
-     "title": "감독이 바라는 MVP, 삼성 원태인 VS KT 박영현 [한국시리즈]",
-     "press": "newsq.co.kr",
-     "publishedAt": "2026-11-02T07:20:00.000Z",
-     "link": "https://www.newsq.co.kr/news/articleView.html?idxno=500694"
     }
    ]
   },
   {
-   "keyword": "김정관 장관 기조 발표",
+   "keyword": "이형일 스틸 주한미국대사",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-02T06:10:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-02T06:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "3대 메가프로젝트 공개포럼, 기조발표하는 김정관 장관",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-02T07:20:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261102001454"
+     "title": "한미 경제 갈등 속 이형일-스틸 회동…대미투자 숙제 논의",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-02T07:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541198?sid=101"
     },
     {
-     "title": "기조발표하는 김정관 산업통상부 장관",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-02T07:20:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261102001453"
+     "title": "이형일, 주한미국대사 접견 \"한미 경제협력 가교 돼 달라\"",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-02T07:22:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=171793"
     },
     {
-     "title": "3대 메가프로젝트 공개포럼 참석한 김정관 산업부 장관",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-02T07:20:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261102001455"
+     "title": "이형일 부총리, 스틸 주한미대사 접견…\"한미 경제협력 가교 역할 기대...",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-02T06:58:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=901654"
     }
    ]
   },
@@ -274,10 +272,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 10,
+   "articles90": 7,
    "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-02T06:09:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-02T06:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -335,12 +333,44 @@
    ]
   },
   {
+   "keyword": "가덕도 신공항 공사비 증액",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-02T06:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "부산 與野 공히 가덕도 공사비 증액 안간힘…TK는 토론만",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-02T07:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001037884?sid=100"
+    },
+    {
+     "title": "부산 국힘 의원들 \"가덕도신공항 공사비, 시행령 개정으로 해결하라\"",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-02T06:58:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=901636"
+    },
+    {
+     "title": "부산지역 국힘 의원들 긴급 기자회견 “李정부, 가덕도신공항 개항 의지...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-02T06:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002717743?sid=100"
+    }
+   ]
+  },
+  {
    "keyword": "선박",
    "sources": [
     "google"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-02T06:22:00.000Z",
    "exclusive": false,
@@ -353,53 +383,85 @@
      "link": "http://www.finomy.com/news/articleView.html?idxno=265229"
     },
     {
-     "title": "선박 건조 이어 엔진까지 만드는 中···K엔진 특수 얼마나 갈까",
-     "press": "sisajournal-e.com",
-     "publishedAt": "2026-11-02T07:02:00.000Z",
-     "link": "https://www.sisajournal-e.com/news/articleView.html?idxno=424744"
-    },
-    {
      "title": "통영해경, 응급환자 이송·음주운항 선박 적발 등 해상 안전 대응",
      "press": "shinailbo.co.kr",
      "publishedAt": "2026-11-02T07:02:00.000Z",
      "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5078830"
+    },
+    {
+     "title": "선박 건조 이어 엔진까지 만드는 中···K엔진 특수 얼마나 갈까",
+     "press": "sisajournal-e.com",
+     "publishedAt": "2026-11-02T07:02:00.000Z",
+     "link": "https://www.sisajournal-e.com/news/articleView.html?idxno=424744"
     }
    ]
   },
   {
-   "keyword": "가덕도 신공항 공사비 증액",
+   "keyword": "김도영",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-02T06:14:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T06:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "부산 국힘 의원들 \"가덕도신공항 공사비, 시행령 개정으로 해결하라\"",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-02T06:58:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=901636"
+     "title": "미국에서 바라본 김도영? \"20~25홈런 가능\"...원문 그대로 전해드립니다",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-02T07:43:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/437/0000518716"
     },
     {
-     "title": "부산지역 국힘 의원들 긴급 기자회견 “李정부, 가덕도신공항 개항 의지...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-02T06:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002717743?sid=100"
+     "title": "‘김도영 IN·최민석과 신영우 OUT’ APBC 대표팀, 엔트리 변동 본격 시...",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-02T07:23:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/382/0001302435"
     },
     {
-     "title": "국힘 부산 의원들 \"가덕도신 공항 공사비 증액, 정부가 나서야\"",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-02T06:46:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3739752"
+     "title": "하얗게 불태웠다…김도영과 KIA, 그리고 팬들의 가을야구 뒷풀이[스경x...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-02T06:52:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/144/0001147695"
     }
    ]
   },
   {
-   "keyword": "주진우 의원, 선관위 자료 전달",
+   "keyword": "신천지 당원 가입 강요 공판",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T06:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'국힘 당원 가입' 신천지 이만희 첫 재판에서 혐의 부인",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-02T07:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002427295?sid=102"
+    },
+    {
+     "title": "'국힘 입당 강요' 신천지 이만희, 첫 재판서 혐의 부인",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-02T06:42:00.000Z",
+     "link": "https://www.insight.co.kr/news/580277"
+    },
+    {
+     "title": "'국힘 당원 가입 강요' 이만희 재판 장기화 조짐...\"내년 3월 증인신문\"",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-02T06:26:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4116201"
+    }
+   ]
+  },
+  {
+   "keyword": "주진우 의원 선관위 자료 전달",
    "sources": [
     "nate"
    ],
@@ -433,7 +495,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 95,
+  "flagged": 99,
   "matched": 23,
   "avgLeadMin": 61,
   "recent": [
