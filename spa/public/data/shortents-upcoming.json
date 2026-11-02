@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T07:16:30.604Z",
+ "builtAt": "2026-11-02T07:27:46.939Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,82 +8,81 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 6,
  "candidates": [
   {
    "keyword": "삼성SDS 구미 AI 센터 착공",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 73,
-   "recent20": 13,
-   "press": 73,
+   "articles90": 79,
+   "recent20": 17,
+   "press": 79,
    "firstArticleAt": "2026-11-02T06:00:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "삼성SDS 60MW급 AI 데이터센터 구미서 착공",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-02T07:14:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=727626"
+     "title": "'영남권 60조 투자' 성과…삼성SDS, 구미 AIDC 착공",
+     "press": "newsprime.co.kr",
+     "publishedAt": "2026-11-02T07:26:00.000Z",
+     "link": "http://www.newsprime.co.kr/news/article.html?no=753323"
     },
     {
-     "title": "삼성SDS, 구미 AI 데이터센터 착공…영남권 60조 투자 첫걸음",
-     "press": "it-b.co.kr",
-     "publishedAt": "2026-11-02T07:14:00.000Z",
-     "link": "https://www.it-b.co.kr/news/articleView.html?idxno=90521"
+     "title": "삼성SDS, 구미 AI 데이터센터 착공…\"삼성 영남권 60조 투자 실행\"",
+     "press": "ftoday.co.kr",
+     "publishedAt": "2026-11-02T07:26:00.000Z",
+     "link": "http://www.ftoday.co.kr/news/articleView.html?idxno=368735"
     },
     {
-     "title": "삼성SDS, ‘구미 AI 데이터센터’ 착공⋯ “삼성 영남권 60조 투자 계획...",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-02T07:12:00.000Z",
-     "link": "https://www.viva100.com/article/20261102501221"
+     "title": "삼성, 영남권 60조 투자 첫 발…삼성SDS 구미 AI 데이터센터 착공",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-02T07:24:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261102010000400"
     }
    ]
   },
   {
-   "keyword": "바이낸스 해킹",
+   "keyword": "정점식 국민의힘 원내대표",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 59,
-   "recent20": 12,
-   "press": 40,
-   "firstArticleAt": "2026-11-02T05:52:00.000Z",
+   "articles90": 29,
+   "recent20": 3,
+   "press": 17,
+   "firstArticleAt": "2026-11-02T05:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“글로벌 바이낸스 8조원 해킹”…금융위, 국내 거래소 긴급 점검",
-     "press": "nspna.com",
-     "publishedAt": "2026-11-02T07:14:00.000Z",
-     "link": "https://www.nspna.com/news/?mode=view&newsid=834264"
+     "title": "국민의힘, 李 시정연설에 \"미래 약탈 선언…3일 야당안 공개\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-02T07:26:00.000Z",
+     "link": "https://www.ajunews.com/view/20261102160132988"
     },
     {
-     "title": "바이낸스 8조원 해킹에 금융당국 긴급 점검···보안 강화 주문",
-     "press": "seoulfn.com",
-     "publishedAt": "2026-11-02T07:13:00.000Z",
-     "link": "https://www.seoulfn.com/news/articleView.html?idxno=641674"
+     "title": "정점식 \"대통령 시정연설은 미래 약탈 선언…예산안 송곳 검증할 것\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-02T07:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000518709?sid=100"
     },
     {
-     "title": "[코인뉴스] 바이낸스 해킹 불똥…ETF 자금도 ‘줄탈출’",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-02T07:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003150297?sid=101"
+     "title": "국민의힘, 당무감사위원장에 양준모 교수 임명…최고위 만장일치",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-02T07:16:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261102500604"
     }
    ]
   },
   {
-   "keyword": "포스코홀딩스 3분기 영업익 48%↑",
+   "keyword": "포스코홀딩스 3분기 영업익 9400억",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 29,
+   "articles90": 9,
    "recent20": 2,
-   "press": 29,
-   "firstArticleAt": "2026-11-02T05:49:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-02T06:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -94,241 +93,16 @@
      "link": "https://www.newsinside.kr/news/articleView.html?idxno=5038980"
     },
     {
-     "title": "포스코홀딩스, 3분기 영업익 9450억ㆍ전년동기 比 48%↑…철강 회복에 실...",
-     "press": "dnews.co.kr",
+     "title": "[컨콜] 포스코홀딩스 \"미국 셰일가스 영업익 2028년 800억까지 확대\"",
+     "press": "financialpost.co.kr",
+     "publishedAt": "2026-11-02T07:10:00.000Z",
+     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=284120"
+    },
+    {
+     "title": "포스코홀딩스, 3분기 영업익 9400억원…철강 회복이 견인",
+     "press": "hansbiz.co.kr",
      "publishedAt": "2026-11-02T07:02:00.000Z",
-     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611021556339140240"
-    },
-    {
-     "title": "포스코홀딩스, 3분기 영업익 9450억원…전년비 48% 증가",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-02T06:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001162962?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "정점식 국민의힘 원내대표",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 39,
-   "recent20": 7,
-   "press": 17,
-   "firstArticleAt": "2026-11-02T05:47:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "대법원장에 아무렇지 않게 인사한 대통령...정점식 \"공감 능력 없는지 ...",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-02T07:06:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=324751"
-    },
-    {
-     "title": "대통령 시정연설 팩폭 꽂은 정점식 \"재정 중독 점철된 미래 약탈 선언\"",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-02T07:06:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=324745"
-    },
-    {
-     "title": "정점식 “821조 예산안은 미래 약탈 선언…국민의힘 합의 못 해”",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-02T07:04:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611020151"
-    }
-   ]
-  },
-  {
-   "keyword": "황사",
-   "sources": [
-    "google"
-   ],
-   "articles90": 14,
-   "recent20": 1,
-   "press": 14,
-   "firstArticleAt": "2026-11-02T05:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "사라진 푸른 하늘…서울, 6년 만의 '11월 황사'",
-     "press": "segyebiz.com",
-     "publishedAt": "2026-11-02T06:58:00.000Z",
-     "link": "http://www.segyebiz.com/newsView/20261102514117?OutUrl=naver"
-    },
-    {
-     "title": "11월에 웬 황사?…서울서 6년 만에 관측, 내일 밤 또 몰려온다",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-02T06:52:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=778380"
-    },
-    {
-     "title": "서울 6년 만에 ‘11월 황사’…수도권·서해안 미세먼지 ‘나쁨’",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-02T06:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004677799?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "제6차 금융 대전환 회의",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-02T05:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이억원 \"지방 금융공백 메운다\"…은행권, 3년간 4조5000억원 공급",
-     "press": "srtimes.kr",
-     "publishedAt": "2026-11-02T07:14:00.000Z",
-     "link": "http://www.srtimes.kr/news/articleView.html?idxno=216519"
-    },
-    {
-     "title": "“지방 중소기업에 4조5000억 푼다”…금융위, 은행권과 저금리 대출 추...",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-02T07:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002246968?sid=101"
-    },
-    {
-     "title": "금융위, 지방 중소·중견기업에 4조5000억 규머 저리 대출 공급 추진",
-     "press": "digitaltoday.co.kr",
-     "publishedAt": "2026-11-02T06:54:00.000Z",
-     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=711911"
-    }
-   ]
-  },
-  {
-   "keyword": "협박",
-   "sources": [
-    "google"
-   ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-02T05:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "신세경에 과격·엽기적 협박한 악플러…징역 8개월에 법정 구속",
-     "press": "weekly.chosun.com",
-     "publishedAt": "2026-11-02T07:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/053/0000062783?sid=102"
-    },
-    {
-     "title": "신세경에 450회 ‘염산테러’ 협박·모욕…2심 징역 8개월 법정구속",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-02T06:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001882423?sid=102"
-    },
-    {
-     "title": "전자발찌 찬 50대 “청와대 흉기 난동” 협박 뒤 전원 꺼…경찰 긴급체...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-02T06:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002830286?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "김정관 산업부 장관",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 21,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-02T05:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "체코 원전 '팀코리아' 균열에… 산업부 장관 \"한수원이 이견 조율하라\"",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-02T07:06:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=324740"
-    },
-    {
-     "title": "대우건설, ‘체코 원전 협상 결렬’ 유감…산업부에 재협상 중재 요청",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-02T06:56:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611020136"
-    },
-    {
-     "title": "대우건설 \"산업부가 체코 원전 시공계약 중재해달라...수백억원 정산없...",
-     "press": "livebiz.today",
-     "publishedAt": "2026-11-02T06:52:00.000Z",
-     "link": "https://www.livebiz.today/news/articleView.html?idxno=206127"
-    }
-   ]
-  },
-  {
-   "keyword": "태권도 북한 단독 등재 유력",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-02T05:50:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "엇갈린 남북 태권도… 北 유네스코 단독등재 유력, 韓은 ‘확장’ 길 찾...",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-02T06:59:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/396/0000759765"
-    },
-    {
-     "title": "북한 태권도, 유네스코 인류무형문화유산 단독 등재 유력…허민 \"매우 ...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-02T06:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009265269?sid=103"
-    },
-    {
-     "title": "태권도, 유네스코 유산 남북 ‘공동 등재’ 사실상 무산…북한 단독 유...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-02T06:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002830284?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "기술",
-   "sources": [
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 8,
-   "press": 8,
-   "firstArticleAt": "2026-11-02T07:10:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "에임즈미디어, 중기부 팁스(TIPS) 선정…AI 콘텐츠 제작 효율화 및 기술...",
-     "press": "itbiznews.com",
-     "publishedAt": "2026-11-02T07:14:00.000Z",
-     "link": "https://www.itbiznews.com/news/articleView.html?idxno=229958"
-    },
-    {
-     "title": "대학·기업 기술협력에 유학생 취업 연계까지…G-NEX 개막",
-     "press": "busan.com",
-     "publishedAt": "2026-11-02T07:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001405228?sid=102"
-    },
-    {
-     "title": "[재계 포커스] '기술 리더' 장인화 2년 7개월…포스코, 위기 속 반등의 ...",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-02T07:13:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=747468"
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=878932"
     }
    ]
   },
@@ -337,10 +111,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-02T05:48:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-02T06:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -365,87 +139,22 @@
    ]
   },
   {
-   "keyword": "이강철과 박진만 대결",
+   "keyword": "선박",
    "sources": [
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-02T05:53:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "KT는 기다렸고 삼성은 달려왔다…한국시리즈서 첫 맞대결",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-02T07:08:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/028/0002830292"
-    },
-    {
-     "title": "[KS] 이강철 vs 박진만…사상 첫 KS MVP 출신 감독 대결",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-02T06:56:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261102001405"
-    },
-    {
-     "title": "'신흥 명문' KT, '전통 강호' 삼성의 한국시리즈 첫 맞대결",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-02T06:54:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=878896"
-    }
-   ]
-  },
-  {
-   "keyword": "제트기",
-   "sources": [
-    "google"
+    "signal.bz"
    ],
    "articles90": 6,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-02T06:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "9명 탄 美 제트기, 플로리다 도로에 수직 추락… 전원 사망",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-02T07:14:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/323844/?sc=Naver"
-    },
-    {
-     "title": "미국 플로리다 주택가 인근 도로에 제트기 추락...탑승자 9명 전원 사망",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-02T06:50:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=560468"
-    },
-    {
-     "title": "美플로리다 주택가 도로에 제트기 추락…탑승자 9명 전원 사망",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-02T06:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000541175?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "선박",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 4,
+   "press": 5,
    "firstArticleAt": "2026-11-02T06:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "선박 건조 이어 엔진까지 만드는 中···K엔진 특수 얼마나 갈까",
-     "press": "sisajournal-e.com",
-     "publishedAt": "2026-11-02T07:02:00.000Z",
-     "link": "https://www.sisajournal-e.com/news/articleView.html?idxno=424744"
+     "title": "HD현대, 차세대 선박부터 美 생산거점까지···조선업 확장 나선다",
+     "press": "finomy.com",
+     "publishedAt": "2026-11-02T07:22:00.000Z",
+     "link": "http://www.finomy.com/news/articleView.html?idxno=265229"
     },
     {
      "title": "통영해경, 응급환자 이송·음주운항 선박 적발 등 해상 안전 대응",
@@ -454,106 +163,10 @@
      "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5078830"
     },
     {
-     "title": "국립한국해양대 \"자율운항선박 상황인지 시스템 표준개발 주도\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-02T06:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016416577?sid=105"
-    }
-   ]
-  },
-  {
-   "keyword": "조경태 이재명 악수",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T05:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이재명 대통령, '821조 슈퍼예산' 시정연설 [뉴스핌 줌인]",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-02T07:00:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261102001363"
-    },
-    {
-     "title": "[영상] 악수 안할려고 도망가는 국민의힘. 황당한 대통령..조경태만 홀...",
-     "press": "facttv.kr",
-     "publishedAt": "2026-11-02T06:46:00.000Z",
-     "link": "https://www.facttv.kr/news/articleView.html?idxno=50773"
-    },
-    {
-     "title": "시정연설 끝나자 집단 퇴장한 국민의힘…홀로 남은 조경태의 악수",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-02T05:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205523?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "김도영",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T06:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "하얗게 불태웠다…김도영과 KIA, 그리고 팬들의 가을야구 뒷풀이[스경x...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-02T06:52:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/144/0001147695"
-    },
-    {
-     "title": "'수비 요정' 최형우 vs '출루의 달인' 김도영...PO 씬스틸러 누구?",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-02T06:04:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/052/0002427237"
-    },
-    {
-     "title": "MLB 스카우트가 본 KBO 빅리그 후보… 김도영 \"20~25홈런\", 곽빈 \"4, 5 선...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-02T06:01:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/469/0000963086"
-    }
-   ]
-  },
-  {
-   "keyword": "배추",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T05:55:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "박지원 \"배추값 폭락 걱정\"…이 대통령 \"대책 적극 찾을 것\"",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-02T06:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005836832?sid=102"
-    },
-    {
-     "title": "김장철 배추·양념류 원산지 집중 단속",
-     "press": "cooknchefnews.com",
-     "publishedAt": "2026-11-02T06:06:00.000Z",
-     "link": "https://cooknchefnews.com/news/view/1065583496569018"
-    },
-    {
-     "title": "김장철 앞두고 배추 등 원산지 속이면 7년 이하 징역",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-02T05:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000160133?sid=101"
+     "title": "선박 건조 이어 엔진까지 만드는 中···K엔진 특수 얼마나 갈까",
+     "press": "sisajournal-e.com",
+     "publishedAt": "2026-11-02T07:02:00.000Z",
+     "link": "https://www.sisajournal-e.com/news/articleView.html?idxno=424744"
     }
    ]
   }
