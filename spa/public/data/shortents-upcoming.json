@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T20:11:50.686Z",
+ "builtAt": "2026-11-02T20:41:59.253Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -9,10 +9,76 @@
   "minPress": 2
  },
  "measured": 28,
- "candidates": [],
+ "candidates": [
+  {
+   "keyword": "기온",
+   "sources": [
+    "google"
+   ],
+   "articles90": 15,
+   "recent20": 5,
+   "press": 8,
+   "firstArticleAt": "2026-11-02T20:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[제주도 날씨예보] 아침 기온 3~5도 하락…4일 밤부터 비",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-02T20:40:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=92798"
+    },
+    {
+     "title": "[날씨] 출근길 기온 '뚝' 반짝 추위…큰 일교차 주의!",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-02T20:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922210?sid=103"
+    },
+    {
+     "title": "[전남광주 날씨예보] 아침 기온 뚝…최저 3도, 일교차 15도 안팎",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-02T20:36:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=92796"
+    }
+   ]
+  },
+  {
+   "keyword": "1호기 탑승자 정보 유출",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T19:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "대통령 포함 '1호기 탑승자' 정보 인터넷 노출",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-02T20:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922202?sid=100"
+    },
+    {
+     "title": "李대통령 부부 여권번호까지…‘1호기 탑승자’ 168명 정보 유출",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-02T20:18:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611030002"
+    },
+    {
+     "title": "대통령 부부 여권번호까지 인터넷 노출…'공군 1호기' 탑승자 168명 정보...",
+     "press": "geconomy.co.kr",
+     "publishedAt": "2026-11-02T19:52:00.000Z",
+     "link": "https://www.geconomy.co.kr/news/article.html?no=325207"
+    }
+   ]
+  }
+ ],
  "hitRate": {
   "days": 7,
-  "flagged": 182,
+  "flagged": 183,
   "matched": 59,
   "avgLeadMin": 121,
   "recent": [
