@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T11:39:18.822Z",
+ "builtAt": "2026-11-02T11:49:22.187Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -17,10 +17,10 @@
     "nate",
     "daum"
    ],
-   "articles90": 21,
-   "recent20": 4,
-   "press": 21,
-   "firstArticleAt": "2026-11-02T10:12:00.000Z",
+   "articles90": 20,
+   "recent20": 3,
+   "press": 20,
+   "firstArticleAt": "2026-11-02T10:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -45,14 +45,46 @@
    ]
   },
   {
+   "keyword": "연구",
+   "sources": [
+    "google"
+   ],
+   "articles90": 9,
+   "recent20": 4,
+   "press": 9,
+   "firstArticleAt": "2026-11-02T11:07:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "한승엽 한국섬유기계융합연구원 신임 원장 취임",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-02T11:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001037918?sid=101"
+    },
+    {
+     "title": "포어덱스, 한성대학교 블록체인연구소와 온체인 데이터 기술 공동 연구...",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-02T11:40:00.000Z",
+     "link": "https://www.tokenpost.kr/news/blockchain/431206"
+    },
+    {
+     "title": "엑스와이지, 광운대와 휴머노이드 교육 협력…’듀스’ 대학 연구·실습...",
+     "press": "venturesquare.net",
+     "publishedAt": "2026-11-02T11:37:00.000Z",
+     "link": "https://www.venturesquare.net/1124911/"
+    }
+   ]
+  },
+  {
    "keyword": "이란 호르무즈 해협 개방 조건",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
+   "articles90": 9,
    "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-02T10:15:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-02T10:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -77,44 +109,12 @@
    ]
   },
   {
-   "keyword": "연구",
-   "sources": [
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 5,
-   "press": 8,
-   "firstArticleAt": "2026-11-02T10:58:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "엑스와이지, 광운대와 휴머노이드 교육 협력…’듀스’ 대학 연구·실습...",
-     "press": "venturesquare.net",
-     "publishedAt": "2026-11-02T11:37:00.000Z",
-     "link": "https://www.venturesquare.net/1124911/"
-    },
-    {
-     "title": "충북교육연구정보원, 충북교육 중장기 발전방향 제시",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-02T11:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205687?sid=102"
-    },
-    {
-     "title": "신용보증기금, KDI와 데이터 공동연구…NH농협은행과는 비대면 금융 확...",
-     "press": "webeconomy.co.kr",
-     "publishedAt": "2026-11-02T11:28:00.000Z",
-     "link": "https://www.webeconomy.co.kr/news/articleView.html?idxno=2357807"
-    }
-   ]
-  },
-  {
    "keyword": "하남시",
    "sources": [
     "google"
    ],
    "articles90": 7,
-   "recent20": 4,
+   "recent20": 1,
    "press": 6,
    "firstArticleAt": "2026-11-02T10:49:00.000Z",
    "exclusive": false,
@@ -173,106 +173,9 @@
    ]
   },
   {
-   "keyword": "LX홀딩스 염민석 CFO 선임",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-02T10:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "LX홀딩스, 정기 임원인사…상무 승진 2명",
-     "press": "news2day.co.kr",
-     "publishedAt": "2026-11-02T10:52:00.000Z",
-     "link": "https://www.news2day.co.kr/article/20261102500335"
-    },
-    {
-     "title": "[인사] LX홀딩스, 염민석 신임 CFO 선임…재무 관리 체계 강화",
-     "press": "topdaily.kr",
-     "publishedAt": "2026-11-02T10:41:00.000Z",
-     "link": "https://www.topdaily.kr/articles/112652"
-    },
-    {
-     "title": "LX홀딩스, 정기 임원 인사… CFO에 염민석 상무",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-02T10:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202064?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "남겨서 뭐하게",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T11:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'남겨서 뭐하게' 서울 보문동 해신탕 맛집 위치는? \"메달리스트 우상혁...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-02T11:16:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16266425"
-    },
-    {
-     "title": "'남겨서 뭐하게' 서울 구로디지털단지 숯불꽃게찜 맛집 위치는? \"이영자...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-02T11:06:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16266424"
-    },
-    {
-     "title": "'남겨서 뭐하게' 보문동 해신탕·꽃게찜 맛집",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-02T11:02:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611020259"
-    }
-   ]
-  },
-  {
-   "keyword": "박지선",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T10:29:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "故박지선 6주기…KBS 22기 동기들 올해도 모였다 \"응원 많이 해줘\"",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-02T11:18:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000326405"
-    },
-    {
-     "title": "故 박지선 6주기, KBS 22기 동기들 모였다... \"잘 지켜봐 줘\"",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-02T10:36:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1190646"
-    },
-    {
-     "title": "“우리 다 잘하고 있어, 지선아” 故 박지선 6주기…올해도 모인 동기들",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-02T10:29:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003538701"
-    }
-   ]
-  },
-  {
    "keyword": "김민재 차관 점검",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 11,
    "recent20": 0,
@@ -285,27 +188,26 @@
      "title": "행안부, '대통령의 외교, 세계를 품다' 준비 현장을 점검",
      "press": "newsis.com",
      "publishedAt": "2026-11-02T11:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014296281?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/003/0014296280?sid=100"
     },
     {
-     "title": "김민재 행안부 차관, 대통령 외교 전시 현장 방문",
+     "title": "김민재 차관, 대통령 외교사 담은 전시 준비 상황 확인",
      "press": "news1.kr",
      "publishedAt": "2026-11-02T10:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009265706?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/421/0009265707?sid=102"
     },
     {
-     "title": "’대통령의 외교, 세계를 품다‘ 전시 점검하는 김민재 차관",
-     "press": "newsis.com",
+     "title": "대통령의 외교, 세계를 품다…전시 준비 현장 찾은 김민재 차관",
+     "press": "news1.kr",
      "publishedAt": "2026-11-02T10:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014296273?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/421/0009265704?sid=102"
     }
    ]
   },
   {
    "keyword": "낮과 밤, 서로에게",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 9,
    "recent20": 0,
