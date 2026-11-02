@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T21:32:21.135Z",
+ "builtAt": "2026-11-02T21:42:24.285Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "이란 대통령 대화 권한 부여",
+   "keyword": "국제유가 급락",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 23,
-   "recent20": 10,
-   "press": 16,
-   "firstArticleAt": "2026-11-02T20:08:00.000Z",
+   "articles90": 37,
+   "recent20": 13,
+   "press": 28,
+   "firstArticleAt": "2026-11-02T20:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국제유가, 美·이란 협상 기대감에 7%대 급락",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-02T21:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001071589?sid=104"
+     "title": "[뉴욕증시 마감시황] 필라델피아 반도체지수 3.4% 급락에도…SK하이닉스...",
+     "press": "moneystorm.kr",
+     "publishedAt": "2026-11-02T21:38:00.000Z",
+     "link": "https://www.moneystorm.kr/news/articleView.html?idxno=7986"
     },
     {
-     "title": "이란 수뇌부, 정부 협상 일부 위임에…국제유가 7% 급락(종합)",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-02T21:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005836988?sid=101"
+     "title": "美·이란 협상 기대에 유가 7%대 급락...AI주 약세에 증시는 혼조 [데일...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-02T21:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004678012?sid=104"
     },
     {
-     "title": "미·이란 협상 기대에 국제유가 7%대 급락…브렌트유 104달러",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-02T21:30:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1730183"
-    }
-   ]
-  },
-  {
-   "keyword": "해커 코인 2차 세탁",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-02T20:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“北 해커, 탈취 자금 2차 세탁 돌입 착수”...솔라나 거쳐 비트코인 교...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-02T21:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003695116?sid=104"
-    },
-    {
-     "title": "\"北해커, 바이낸스 탈취 자금 2차 세탁 착수\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-02T21:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922230?sid=101"
-    },
-    {
-     "title": "北해커, 탈취 코인 '2차 세탁' … 솔라나 거쳐 비트코인으로 교환 ['바이...",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-02T21:10:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/03/2026110300006.html"
+     "title": "유가 급락 호재도 못 살렸다…뉴욕증시 기술주 매도 확산",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-02T21:36:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=500734"
     }
    ]
   },
@@ -80,13 +48,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 4,
-   "press": 7,
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
    "firstArticleAt": "2026-11-02T20:18:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "외교부, '1호기 탑승자 유출' \"엄중하게 인식...다각적 조사\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-02T21:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002427491?sid=100"
+    },
     {
      "title": "'공군 1호기' 탑승 명단 유출…대통령 부부 여권번호까지",
      "press": "etoday.co.kr",
@@ -98,51 +72,45 @@
      "press": "kyeonggi.com",
      "publishedAt": "2026-11-02T21:20:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/666/0000130322?sid=100"
-    },
-    {
-     "title": "대통령 여권번호까지…'1호기 탑승자' 정보 노출",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-02T21:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400100?sid=100"
     }
    ]
   },
   {
-   "keyword": "전한길 공소청 송치",
+   "keyword": "2026년 11월 3일 운세",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 3,
+   "articles90": 10,
    "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T20:32:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-02T20:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "퇴근길 버스 추락‥'5·18 북 개입설' 전한길 송치",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-02T21:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533079?sid=102"
+     "title": "[오늘의 운세] 2026년 11월 3일 (화) 띠별운세 '여유를 가지자'",
+     "press": "dailypop.kr",
+     "publishedAt": "2026-11-02T21:40:00.000Z",
+     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103265"
     },
     {
-     "title": "5·18 허위사실 유포 혐의 전한길 공소청 송치",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-02T20:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922225?sid=102"
+     "title": "[오늘의 운세] 3일 화요일 나의 운세는?",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-02T21:20:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1190363"
     },
     {
-     "title": "‘5·18 北 개입설’ 유포 혐의 전한길 공소청 송치",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-02T20:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002829743?sid=102"
+     "title": "[오늘의 운세] 2026년 11월 3일 별자리 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-02T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006402438?sid=103"
     }
    ]
   },
   {
    "keyword": "김원효 심진화에 평생 명품백 선물",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 1,
@@ -170,105 +138,73 @@
      "link": "https://m.entertain.naver.com/article/008/0005435534"
     }
    ]
-  },
-  {
-   "keyword": "홍석천 지연수 질투",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T20:21:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "홍석천, ‘싱글맘’ 지연수 연애 만류…“게이랑 놀아, 문밖은 위험”",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-02T21:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001277422"
-    },
-    {
-     "title": "'이혼' 지연수 전성기 미모...\"男연예인들이 만나게 해달라 난리\" 홍석천...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-02T21:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004462323"
-    },
-    {
-     "title": "'일라이와 이혼' 지연수 얼마나 예뻤길래…\"男연예인들이 어떻게든 만나...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-02T20:21:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000782687"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 192,
-  "matched": 59,
-  "avgLeadMin": 121,
+  "flagged": 194,
+  "matched": 74,
+  "avgLeadMin": 238,
   "recent": [
    {
-    "keyword": "2026 푸드위크 코리아서 다양한 제품 공개",
-    "hitKeyword": "2026 한국시리즈 삼성 KT",
-    "hitAt": "2026-11-02T23:00:00+09:00",
-    "leadMin": 292
+    "keyword": "이재명 대통령 시정연설",
+    "hitKeyword": "이란 대통령 대화 권한",
+    "hitAt": "2026-11-03T06:30:00+09:00",
+    "leadMin": 1120
    },
    {
-    "keyword": "이란 호르무즈 해협 개방 조건",
-    "hitKeyword": "이란 호르무즈 해협 개방",
-    "hitAt": "2026-11-02T23:00:00+09:00",
-    "leadMin": 141
+    "keyword": "인사하는 이재명 대통령",
+    "hitKeyword": "이란 대통령 대화 권한",
+    "hitAt": "2026-11-03T06:30:00+09:00",
+    "leadMin": 1065
    },
    {
-    "keyword": "하이닉스 외국인 기관 순매수 증가",
-    "hitKeyword": "삼성 하이닉스 주주환원",
-    "hitAt": "2026-11-02T22:30:00+09:00",
-    "leadMin": 484
+    "keyword": "국회 이재명 대통령",
+    "hitKeyword": "이란 대통령 대화 권한",
+    "hitAt": "2026-11-03T06:30:00+09:00",
+    "leadMin": 1055
    },
    {
-    "keyword": "코스피",
-    "hitKeyword": "코스피 반등",
-    "hitAt": "2026-11-02T22:30:00+09:00",
-    "leadMin": 201
+    "keyword": "시정연설 후 인사하는 이재명 대통령",
+    "hitKeyword": "이란 대통령 대화 권한",
+    "hitAt": "2026-11-03T06:30:00+09:00",
+    "leadMin": 1014
    },
    {
-    "keyword": "코스피 반등 마감",
-    "hitKeyword": "코스피 반등",
-    "hitAt": "2026-11-02T22:30:00+09:00",
-    "leadMin": 181
+    "keyword": "포스코 홀딩스",
+    "hitKeyword": "포스코 3분기 실적 개선",
+    "hitAt": "2026-11-03T06:30:00+09:00",
+    "leadMin": 914
    },
    {
-    "keyword": "브로드컴 과징금 확정",
-    "hitKeyword": "브로드컴 과징금 확정",
-    "hitAt": "2026-11-02T22:30:00+09:00",
-    "leadMin": 171
+    "keyword": "포스코홀딩스 3분기 영업익 증가",
+    "hitKeyword": "포스코 3분기 실적 개선",
+    "hitAt": "2026-11-03T06:30:00+09:00",
+    "leadMin": 904
    },
    {
-    "keyword": "브로드컴 갑질 과징금 확정",
-    "hitKeyword": "브로드컴 과징금 확정",
-    "hitAt": "2026-11-02T22:30:00+09:00",
-    "leadMin": 131
+    "keyword": "포스코홀딩스 3분기 영업익 9400억",
+    "hitKeyword": "포스코 3분기 실적 개선",
+    "hitAt": "2026-11-03T06:30:00+09:00",
+    "leadMin": 884
    },
    {
-    "keyword": "삼성SDS 구미 AI 센터 착공",
-    "hitKeyword": "삼성SDS 구미 AI 데이터센터",
-    "hitAt": "2026-11-02T22:00:00+09:00",
-    "leadMin": 374
+    "keyword": "포스코홀딩스 3분기 영업익 48%↑",
+    "hitKeyword": "포스코 3분기 실적 개선",
+    "hitAt": "2026-11-03T06:30:00+09:00",
+    "leadMin": 864
    },
    {
-    "keyword": "제트기",
-    "hitKeyword": "플로리다 제트기 추락",
-    "hitAt": "2026-11-02T22:00:00+09:00",
-    "leadMin": 343
+    "keyword": "조경태 이재명 대통령 악수",
+    "hitKeyword": "이란 대통령 대화 권한",
+    "hitAt": "2026-11-03T06:30:00+09:00",
+    "leadMin": 792
    },
    {
-    "keyword": "삼성SDS 구미 데이터센터 착공",
-    "hitKeyword": "삼성SDS 구미 AI 데이터센터",
-    "hitAt": "2026-11-02T22:00:00+09:00",
-    "leadMin": 322
+    "keyword": "애경산업 3분기 최대 매출 적자",
+    "hitKeyword": "포스코 3분기 실적 개선",
+    "hitAt": "2026-11-03T06:30:00+09:00",
+    "leadMin": 721
    }
   ]
  }
