@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T11:09:08.624Z",
+ "builtAt": "2026-11-02T11:19:12.085Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,34 @@
  "measured": 24,
  "candidates": [
   {
-   "keyword": "브로드컴 과징금 확정",
+   "keyword": "브로드컴 갑질 과징금 확정",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 20,
-   "recent20": 3,
-   "press": 20,
-   "firstArticleAt": "2026-11-02T09:52:00.000Z",
+   "articles90": 14,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-02T09:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성에 장기계약 강요한 美 브로드컴, 과징금 186억 확정",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-02T10:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000191300?sid=102"
+     "title": "대법원, 삼성전자에 부품 구매 강요 '갑질' 브로드컴에 과징금 186억 확...",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-02T11:10:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=450970"
+    },
+    {
+     "title": "삼성에 부품 계약 갑질…美브로드컴, 186억 과징금 확정",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-02T11:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001271399?sid=102"
     },
     {
      "title": "'삼성전자 갑질' 美 브로드컴 186억 과징금 확정",
      "press": "m-i.kr",
      "publishedAt": "2026-11-02T10:58:00.000Z",
      "link": "https://www.m-i.kr/news/articleView.html?idxno=2013397"
-    },
-    {
-     "title": "대법, ‘삼성전자에 갑질’ 美 브로드컴 186억원 과징금 확정",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-02T10:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003695004?sid=102"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
    "firstArticleAt": "2026-11-02T09:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "인텔발 뉴욕증시 악재에도 코스피 반등‥중간선거 등 변수 여전",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-02T11:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533008?sid=101"
+    },
     {
      "title": "'인텔 쇼크'에도 반등…기관 매수에 코스피 2%대↑",
      "press": "yonhapnewstv.co.kr",
@@ -65,12 +71,6 @@
      "press": "news.jtbc.co.kr",
      "publishedAt": "2026-11-02T10:44:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/437/0000518763?sid=101"
-    },
-    {
-     "title": "[주식마감] '합병 결정' 샘표·샘표식품 상한가... 디티에스, HLB바이오스...",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-02T10:40:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1190590"
     }
    ]
   },
@@ -137,11 +137,43 @@
      "link": "https://m.sports.naver.com/general/article/003/0014296260"
     }
    ]
+  },
+  {
+   "keyword": "가덕도 신공항 공사비 증액",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-02T10:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국힘 “가덕 건설 의지 없는 정부…공사비 증액 확약해야”",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-02T10:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000160207?sid=100"
+    },
+    {
+     "title": "국민의힘 “가덕도신공항 공사비, 조속 해결 촉구”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-02T10:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012285685?sid=100"
+    },
+    {
+     "title": "[사설] 가덕도신공항 착공 늦춘 정부, 공사비 증액 확약하라",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-02T10:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000160188?sid=110"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 156,
+  "flagged": 157,
   "matched": 45,
   "avgLeadMin": 80,
   "recent": [
