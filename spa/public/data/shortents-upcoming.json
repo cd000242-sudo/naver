@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T16:30:43.526Z",
+ "builtAt": "2026-11-02T16:40:46.807Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "1호기 탑승자 정보 유출",
    "sources": [
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-02T15:03:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-02T15:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李대통령 부부 여권번호 유출…靑 “사전 인지 후 대응”",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-02T16:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003056711?sid=100"
+    },
     {
      "title": "대통령 부부까지 여권번호 노출…1호기 탑승자 정보 유출",
      "press": "wowtv.co.kr",
@@ -33,12 +39,6 @@
      "press": "chosun.com",
      "publishedAt": "2026-11-02T15:56:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/023/0004007427?sid=100"
-    },
-    {
-     "title": "대통령 부부 여권번호까지…'1호기 탑승자' 정보 노출",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-02T15:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400083?sid=100"
     }
    ]
   }
