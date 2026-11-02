@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T05:45:56.655Z",
+ "builtAt": "2026-11-02T05:56:00.547Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 20,
  "candidates": [
+  {
+   "keyword": "대우건설 체코 원전 재협상 요청",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 55,
+   "recent20": 11,
+   "press": 54,
+   "firstArticleAt": "2026-11-02T04:28:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"체코 원전 협상 일방적 종료\"…대우건설, 정부 중재 요청",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-02T05:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000141397?sid=101"
+    },
+    {
+     "title": "[전문] 대우건설, 산업통상부 중재 통한 체코 신규 원전 건설 계약 재협...",
+     "press": "newswhoplus.com",
+     "publishedAt": "2026-11-02T05:50:00.000Z",
+     "link": "https://www.newswhoplus.com/news/articleView.html?idxno=73284"
+    },
+    {
+     "title": "대우건설, 산업부에 체코 원전 재협상 중재 요청",
+     "press": "ikld.kr",
+     "publishedAt": "2026-11-02T05:48:00.000Z",
+     "link": "http://www.ikld.kr/news/articleView.html?idxno=343335"
+    }
+   ]
+  },
   {
    "keyword": "이재명 대통령 시정연설",
    "sources": [
     "nate"
    ],
-   "articles90": 74,
-   "recent20": 27,
-   "press": 43,
-   "firstArticleAt": "2026-11-02T04:53:00.000Z",
+   "articles90": 61,
+   "recent20": 29,
+   "press": 38,
+   "firstArticleAt": "2026-11-02T05:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이재명 대통령 시정연설 관련 기자간담회하는 정점식 국민의힘 원내대...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-02T05:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003150228?sid=100"
+     "title": "[속보]'성장' 36번 외친 李대통령...'3대 민생 프로젝트' 승부수로 대전...",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-02T05:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000120431?sid=100"
     },
     {
-     "title": "민주당, 李대통령 시정연설에 \"시한 내 처리 뒷받침... 국힘 야당 역할...",
-     "press": "lawissue.co.kr",
-     "publishedAt": "2026-11-02T05:44:00.000Z",
-     "link": "https://www.lawissue.co.kr/view.php?ud=202611021442395755b3279dfb36_12"
+     "title": "[포토] 이재명 대통령 시정연설",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-02T05:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003481189?sid=100"
     },
     {
-     "title": "정점식 원내대표, 李 대통령 시정연설 관련 기자간담회",
-     "press": "news1.kr",
+     "title": "李 대통령 시정연설 두고…與 \"미래 위한 예산\" vs 野 \"무모한 재정 폭주...",
+     "press": "wolyo.co.kr",
+     "publishedAt": "2026-11-02T05:54:00.000Z",
+     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=319914"
+    }
+   ]
+  },
+  {
+   "keyword": "농업",
+   "sources": [
+    "google"
+   ],
+   "articles90": 21,
+   "recent20": 5,
+   "press": 18,
+   "firstArticleAt": "2026-11-02T05:02:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "최병인 세종시 농업유통팀장 '청백봉사상'",
+     "press": "goodmorningcc.com",
+     "publishedAt": "2026-11-02T05:46:00.000Z",
+     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=455046"
+    },
+    {
+     "title": "대동, AI트랙터부터 농업로봇까지…245평 키엠스타 전시장 꾸린다",
+     "press": "economist.co.kr",
      "publishedAt": "2026-11-02T05:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009264973?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/243/0000105107?sid=101"
+    },
+    {
+     "title": "철원군, '제39회 철원군 농업인의 날' 행사 11일 개최",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-02T05:42:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2013229"
     }
    ]
   },
@@ -49,11 +113,17 @@
    ],
    "articles90": 25,
    "recent20": 1,
-   "press": 16,
-   "firstArticleAt": "2026-11-02T04:22:00.000Z",
-   "exclusive": true,
+   "press": 17,
+   "firstArticleAt": "2026-11-02T04:43:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'KBO 리그 레전드' 김태균·오승환, 2026 APBC 대표팀 인스트럭터로 합류",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-02T05:54:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1134406"
+    },
     {
      "title": "인터뷰하는 최원호 대표팀 감독",
      "press": "news1.kr",
@@ -65,12 +135,6 @@
      "press": "spochoo.com",
      "publishedAt": "2026-11-02T05:25:00.000Z",
      "link": "https://m.sports.naver.com/kbaseball/article/529/0000079140"
-    },
-    {
-     "title": "프로야구 레전드 오승환-김태균, APBC 대표팀 인스트럭터 맡아 투타 노하...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-02T05:23:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/081/0003694833"
     }
    ]
   },
@@ -79,30 +143,94 @@
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 1,
+   "articles90": 9,
+   "recent20": 2,
    "press": 7,
    "firstArticleAt": "2026-11-02T04:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "‘100일의 거짓말’ 코우리 유카, 김유정 돕는 엉뚱 조력자…‘감초 활...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-02T05:51:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001147661"
+    },
+    {
+     "title": "‘100일의 거짓말’ 이선, 시선이 자꾸 쏠린다",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-02T05:45:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001147659"
+    },
+    {
      "title": "‘100일의 거짓말’ 김유정, 진심을 얻고 전국 9.8% 뜀박질",
      "press": "sports.khan.co.kr",
      "publishedAt": "2026-11-02T05:36:00.000Z",
      "link": "https://m.entertain.naver.com/article/144/0001147657"
+    }
+   ]
+  },
+  {
+   "keyword": "가덕도 신공항 공사비 증액",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 10,
+   "recent20": 4,
+   "press": 6,
+   "firstArticleAt": "2026-11-02T04:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "부산 국민의힘 의원들 \"가덕도신공항 공사비부터 해결하라\"…정부 압박",
+     "press": "mhns.co.kr",
+     "publishedAt": "2026-11-02T05:48:00.000Z",
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=767137"
     },
     {
-     "title": "'100일의 거짓말' 김유정, 박진영에 전한 진심⋯깊어진 멜로 감정선",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-02T05:22:00.000Z",
-     "link": "http://www.joynews24.com/view/2021555"
+     "title": "국힘 부산의원들 \"호남 반도체식 속도전, 가덕도엔 왜 안 되나\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-02T05:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016416288?sid=100"
     },
     {
-     "title": "[★해시태그] 김유정 미담 또 터졌다, '100일의 거짓말' 아역에게 준 손...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-02T05:21:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002075426"
+     "title": "국힘 부산 의원들 \"가덕도신공항 공사비 증액, 정부가 책임져야\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-02T05:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009264935?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "영광",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-02T04:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "코스닥 새내기 영광, 공모가 웃돈 2만1950원…첫날 29.12% 상승",
+     "press": "job-post.co.kr",
+     "publishedAt": "2026-11-02T05:42:00.000Z",
+     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=235898"
+    },
+    {
+     "title": "영광YKMC \"상장 통해 반도체 설비 투자 확대…매출 100억 목표\"[IPO레이더...",
+     "press": "newsway.co.kr",
+     "publishedAt": "2026-11-02T05:30:00.000Z",
+     "link": "https://www.newsway.co.kr/news/view?ud=2026110213580312903"
+    },
+    {
+     "title": "[영광소식] 착한가격업소 이용 캐시백 5％ 추가 지원",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-02T05:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016416235?sid=101"
     }
    ]
   },
@@ -131,42 +259,10 @@
      "link": "https://m.sports.naver.com/kbaseball/article/117/0004120964"
     },
     {
-     "title": "대화하는 이강철 감독과 박진만 감독",
-     "press": "yna.co.kr",
+     "title": "대화 나누는 이강철 감독과 박진만 감독",
+     "press": "newsis.com",
      "publishedAt": "2026-11-02T05:09:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/001/0016416139"
-    }
-   ]
-  },
-  {
-   "keyword": "가덕도 신공항 공사비 증액",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
-   "recent20": 4,
-   "press": 5,
-   "firstArticleAt": "2026-11-02T04:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국힘 부산의원들 \"호남 반도체식 속도전, 가덕도엔 왜 안 되나\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-02T05:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016416288?sid=100"
-    },
-    {
-     "title": "국힘 부산 의원들 \"가덕도신공항 공사비 증액, 정부가 책임져야\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-02T05:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009264935?sid=102"
-    },
-    {
-     "title": "국힘 부산의원들 \"가덕도신공항 공사비 현실화 조속히 해결해야\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-02T05:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016416276?sid=100"
+     "link": "https://m.sports.naver.com/kbaseball/article/003/0014295259"
     }
    ]
   },
@@ -177,13 +273,19 @@
     "google",
     "daum"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-02T05:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "정년 후 연금까지 소득 절벽 3년…임시직 몰리는 고령층",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-02T05:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014295410?sid=102"
+    },
     {
      "title": "연금 65세·정년 60세 '소득공백 5년'…정년 연장 연내 이뤄질까",
      "press": "ntoday.co.kr",
@@ -195,12 +297,38 @@
      "press": "newsfc.co.kr",
      "publishedAt": "2026-11-02T05:10:00.000Z",
      "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82164"
+    }
+   ]
+  },
+  {
+   "keyword": "부평구",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-02T04:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "인천 부평구, 재개발·재건축 원스톱센터 신설·복지평가 ‘특별상’수...",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-02T05:32:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261102500322"
     },
     {
-     "title": "정년 60세인데 국민연금은 63세부터…. 70%는 허리띠 졸라매도 '적자'",
-     "press": "hankookilbo.com",
+     "title": "과태료 안물리고 처리 완료…택시 민원 조작한 인천 부평구 공무원 해임",
+     "press": "kgnews.co.kr",
+     "publishedAt": "2026-11-02T05:08:00.000Z",
+     "link": "https://www.kgnews.co.kr/news/article.html?no=917788"
+    },
+    {
+     "title": "인천 부평구 십정1동, 남인천신협의 지속적인 이웃사랑으로 동절기 생활...",
+     "press": "kmaeil.com",
      "publishedAt": "2026-11-02T05:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000963064?sid=102"
+     "link": "https://www.kmaeil.com/news/articleView.html?idxno=656638"
     }
    ]
   },
@@ -235,43 +363,11 @@
      "link": "https://www.thepowernews.co.kr/view.php?ud=202611021351089304de3f0aa1be_7"
     }
    ]
-  },
-  {
-   "keyword": "공소청 출범 한달",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 15,
-   "recent20": 4,
-   "press": 2,
-   "firstArticleAt": "2026-11-02T04:17:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "검찰청 폐지 한 달",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-02T05:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014295320?sid=102"
-    },
-    {
-     "title": "출범 한 달 맞은 공소청",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-02T05:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014295326?sid=102"
-    },
-    {
-     "title": "검찰청 역사 속으로…공소청 출범 한 달",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-02T05:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014295324?sid=102"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 51,
+  "flagged": 53,
   "matched": 12,
   "avgLeadMin": 48,
   "recent": [
