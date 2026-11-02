@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T05:35:53.630Z",
+ "builtAt": "2026-11-02T05:45:56.655Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,66 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "이재명 대통령과 의원들",
+   "keyword": "이재명 대통령 시정연설",
    "sources": [
     "nate"
    ],
-   "articles90": 28,
-   "recent20": 7,
-   "press": 13,
-   "firstArticleAt": "2026-11-02T04:14:00.000Z",
+   "articles90": 74,
+   "recent20": 27,
+   "press": 43,
+   "firstArticleAt": "2026-11-02T04:53:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "국힘 부산의원들 “李정부, 가덕신공항 적기개항 의지 있나”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-02T05:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002717684?sid=100"
+     "title": "이재명 대통령 시정연설 관련 기자간담회하는 정점식 국민의힘 원내대...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-02T05:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003150228?sid=100"
     },
     {
-     "title": "이재명 대통령, 해남 배추값 폭락 우려에 \"대책 강구\"",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-02T05:28:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2013216"
+     "title": "민주당, 李대통령 시정연설에 \"시한 내 처리 뒷받침... 국힘 야당 역할...",
+     "press": "lawissue.co.kr",
+     "publishedAt": "2026-11-02T05:44:00.000Z",
+     "link": "https://www.lawissue.co.kr/view.php?ud=202611021442395755b3279dfb36_12"
     },
     {
-     "title": "이재명 대통령, 2027년도 예산안 국회 시정연설",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-02T05:22:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3739591"
+     "title": "정점식 원내대표, 李 대통령 시정연설 관련 기자간담회",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-02T05:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009264973?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "APBC 대표팀 감독",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 25,
+   "recent20": 1,
+   "press": 16,
+   "firstArticleAt": "2026-11-02T04:22:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "인터뷰하는 최원호 대표팀 감독",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-02T05:35:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/421/0009264926"
+    },
+    {
+     "title": "'한화 레전드-삼성 레전드' 대표팀 후배들 위해 뭉쳤다! 김태균·오승환...",
+     "press": "spochoo.com",
+     "publishedAt": "2026-11-02T05:25:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/529/0000079140"
+    },
+    {
+     "title": "프로야구 레전드 오승환-김태균, APBC 대표팀 인스트럭터 맡아 투타 노하...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-02T05:23:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/081/0003694833"
     }
    ]
   },
@@ -47,13 +79,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
    "firstArticleAt": "2026-11-02T04:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘100일의 거짓말’ 김유정, 진심을 얻고 전국 9.8% 뜀박질",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-02T05:36:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001147657"
+    },
     {
      "title": "'100일의 거짓말' 김유정, 박진영에 전한 진심⋯깊어진 멜로 감정선",
      "press": "joynews24.com",
@@ -65,12 +103,38 @@
      "press": "xportsnews.com",
      "publishedAt": "2026-11-02T05:21:00.000Z",
      "link": "https://m.entertain.naver.com/article/311/0002075426"
+    }
+   ]
+  },
+  {
+   "keyword": "이강철·박진만 대화",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-02T04:59:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[ST포토] 대화 나누는 이강철 감독과 박진만 감독",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-02T05:18:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109667378144"
     },
     {
-     "title": "'100일의 거짓말' 김유정, 거짓말 대신 진심 택했다",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-02T05:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000326356"
+     "title": "[MD포토] 이강철-박진만, '즐거운 대화'",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-02T05:11:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/117/0004120964"
+    },
+    {
+     "title": "대화하는 이강철 감독과 박진만 감독",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-02T05:09:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/001/0016416139"
     }
    ]
   },
@@ -79,62 +143,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 1,
+   "articles90": 9,
+   "recent20": 4,
    "press": 5,
-   "firstArticleAt": "2026-11-02T04:08:00.000Z",
+   "firstArticleAt": "2026-11-02T04:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국힘 부산의원들 “李정부, 가덕신공항 적기개항 의지 있나”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-02T05:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002717684?sid=100"
+     "title": "국힘 부산의원들 \"호남 반도체식 속도전, 가덕도엔 왜 안 되나\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-02T05:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016416288?sid=100"
     },
     {
-     "title": "가덕도신공항 '공사비 늪' 빠지나...국민의힘, 특별법 개정 앞서 정부 결...",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-02T05:10:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4116177"
+     "title": "국힘 부산 의원들 \"가덕도신공항 공사비 증액, 정부가 책임져야\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-02T05:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009264935?sid=102"
     },
     {
-     "title": "공사비 문제로 표류 중인 가덕도신공항...책임있는 정부 조치 주문한 국...",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-02T04:54:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=324699"
-    }
-   ]
-  },
-  {
-   "keyword": "구룡마을 화재 합동감식",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-02T04:31:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"소방차보다 먼저 어르신들 옮겨\"…화재 속 타는 주민들, 방화 의심까지",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-02T05:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000518683?sid=102"
-    },
-    {
-     "title": "구룡마을 화재 추가 합동감식...\"대책 마련해야\"",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-02T04:44:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=560360"
-    },
-    {
-     "title": "강남 구룡마을 화재 원인 여전히 미궁…경찰·소방 추가 감식",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-02T04:39:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000078792"
+     "title": "국힘 부산의원들 \"가덕도신공항 공사비 현실화 조속히 해결해야\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-02T05:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016416276?sid=100"
     }
    ]
   },
@@ -145,19 +177,13 @@
     "google",
     "daum"
    ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
    "firstArticleAt": "2026-11-02T05:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "정년 후 연금 수령까지 3년간 ‘소득절벽’…재취업자 61%가 임시·일용...",
-     "press": "donga.com",
-     "publishedAt": "2026-11-02T05:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003759384?sid=101"
-    },
     {
      "title": "연금 65세·정년 60세 '소득공백 5년'…정년 연장 연내 이뤄질까",
      "press": "ntoday.co.kr",
@@ -169,6 +195,44 @@
      "press": "newsfc.co.kr",
      "publishedAt": "2026-11-02T05:10:00.000Z",
      "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82164"
+    },
+    {
+     "title": "정년 60세인데 국민연금은 63세부터…. 70%는 허리띠 졸라매도 '적자'",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-02T05:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000963064?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "SK하이닉스 주가 상승",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T04:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "SK하이닉스 148만원 돌파…밸류업 타고 '실적·주주환원' 두 토끼 잡았다",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-02T05:18:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=500578"
+    },
+    {
+     "title": "코스피, 장중 상승폭 확대해 2% 넘게 올라…삼전닉스 2∼4%대↑",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-02T05:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016416154?sid=101"
+    },
+    {
+     "title": "메모리 수출 248% 뛰었는데…반도체 주가 발목 잡는 'AI 투자 지속성'",
+     "press": "thepowernews.co.kr",
+     "publishedAt": "2026-11-02T04:54:00.000Z",
+     "link": "https://www.thepowernews.co.kr/view.php?ud=202611021351089304de3f0aa1be_7"
     }
    ]
   },
@@ -177,37 +241,37 @@
    "sources": [
     "nate"
    ],
-   "articles90": 21,
+   "articles90": 15,
    "recent20": 4,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T04:06:00.000Z",
+   "press": 2,
+   "firstArticleAt": "2026-11-02T04:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "출범 한 달 맞은 공소청",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-02T05:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014295323?sid=102"
-    },
-    {
      "title": "검찰청 폐지 한 달",
      "press": "newsis.com",
      "publishedAt": "2026-11-02T05:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014295319?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/003/0014295320?sid=102"
     },
     {
-     "title": "검찰청 폐지 한 달 맞은 공소청",
+     "title": "출범 한 달 맞은 공소청",
      "press": "newsis.com",
      "publishedAt": "2026-11-02T05:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014295331?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/003/0014295326?sid=102"
+    },
+    {
+     "title": "검찰청 역사 속으로…공소청 출범 한 달",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-02T05:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014295324?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 48,
+  "flagged": 51,
   "matched": 12,
   "avgLeadMin": 48,
   "recent": [
