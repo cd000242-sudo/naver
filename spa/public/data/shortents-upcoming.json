@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T11:49:22.187Z",
+ "builtAt": "2026-11-02T11:59:25.956Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -17,30 +17,30 @@
     "nate",
     "daum"
    ],
-   "articles90": 20,
-   "recent20": 3,
-   "press": 20,
-   "firstArticleAt": "2026-11-02T10:21:00.000Z",
+   "articles90": 17,
+   "recent20": 2,
+   "press": 17,
+   "firstArticleAt": "2026-11-02T10:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘삼성에 갑질’ 美 브로드컴…과징금 186억원 확정",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-02T11:58:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=20261102205342181438169980b3_1"
+    },
+    {
+     "title": "'삼성전자에 갑질' 브로드컴 190억 과징금 대법서 확정",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-02T11:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009265726?sid=102"
+    },
     {
      "title": "삼성전자에 '갑질 계약' 강요한 브로드컴…186억원 과징금 확정",
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-02T11:32:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004205686?sid=102"
-    },
-    {
-     "title": "'삼성에 부품 공급 중단 압박' 브로드컴…대법, 186억 과징금 최종 확정",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-02T11:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000518785?sid=101"
-    },
-    {
-     "title": "삼성전자에 3년 장기계약 강요 '브로드컴' 186억 과징금 확정",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-02T11:30:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5078901"
     }
    ]
   },
@@ -49,30 +49,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 9,
-   "recent20": 4,
-   "press": 9,
-   "firstArticleAt": "2026-11-02T11:07:00.000Z",
+   "articles90": 10,
+   "recent20": 5,
+   "press": 10,
+   "firstArticleAt": "2026-11-02T11:21:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "한승엽 한국섬유기계융합연구원 신임 원장 취임",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-02T11:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001037918?sid=101"
+     "title": "[K제약·바이오 미래] 신약 연구조직 새판 짠 제일약품",
+     "press": "00news.co.kr",
+     "publishedAt": "2026-11-02T11:52:00.000Z",
+     "link": "http://www.00news.co.kr/news/articleView.html?idxno=107667"
     },
     {
-     "title": "포어덱스, 한성대학교 블록체인연구소와 온체인 데이터 기술 공동 연구...",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-02T11:40:00.000Z",
-     "link": "https://www.tokenpost.kr/news/blockchain/431206"
+     "title": "\"연구하는 병원으로 가는 길\"…순천향대 중앙의료원, 학술대회 개최",
+     "press": "k-health.com",
+     "publishedAt": "2026-11-02T11:52:00.000Z",
+     "link": "https://www.k-health.com/news/articleView.html?idxno=101983"
     },
     {
-     "title": "엑스와이지, 광운대와 휴머노이드 교육 협력…’듀스’ 대학 연구·실습...",
-     "press": "venturesquare.net",
-     "publishedAt": "2026-11-02T11:37:00.000Z",
-     "link": "https://www.venturesquare.net/1124911/"
+     "title": "박수현 충남지사 \"국립치의학연구원 천안 유치 직접 나선다\"",
+     "press": "tjb.co.kr",
+     "publishedAt": "2026-11-02T11:50:00.000Z",
+     "link": "https://www.tjb.co.kr/news05/bodo/view/id/105600"
     }
    ]
   },
@@ -81,10 +81,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-02T10:21:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-02T10:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -114,7 +114,7 @@
     "google"
    ],
    "articles90": 7,
-   "recent20": 1,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-02T10:49:00.000Z",
    "exclusive": false,
@@ -145,10 +145,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-02T10:24:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-02T10:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -188,19 +188,19 @@
      "title": "행안부, '대통령의 외교, 세계를 품다' 준비 현장을 점검",
      "press": "newsis.com",
      "publishedAt": "2026-11-02T11:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014296280?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/003/0014296281?sid=100"
+    },
+    {
+     "title": "대통령 외교 기획전시 준비 현장 점검",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-02T10:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009265703?sid=102"
     },
     {
      "title": "김민재 차관, 대통령 외교사 담은 전시 준비 상황 확인",
      "press": "news1.kr",
      "publishedAt": "2026-11-02T10:47:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009265707?sid=102"
-    },
-    {
-     "title": "대통령의 외교, 세계를 품다…전시 준비 현장 찾은 김민재 차관",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-02T10:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009265704?sid=102"
     }
    ]
   },
