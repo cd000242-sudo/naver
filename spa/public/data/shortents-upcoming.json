@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T16:50:50.064Z",
+ "builtAt": "2026-11-02T17:00:53.871Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,40 +8,8 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
-  {
-   "keyword": "1호기 탑승자 정보 유출",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-02T15:27:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령 부부 여권번호 유출…靑 “사전 인지 후 대응”",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-02T16:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003056711?sid=100"
-    },
-    {
-     "title": "대통령 부부까지 여권번호 노출…1호기 탑승자 정보 유출",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-02T16:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001271413?sid=100"
-    },
-    {
-     "title": "대통령까지… ‘1호기’ 탑승자 168명 정보 유출",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-02T15:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004007427?sid=100"
-    }
-   ]
-  },
   {
    "keyword": "삼성SDS 구미 AI센터 착공",
    "sources": [
@@ -71,6 +39,38 @@
      "press": "kmib.co.kr",
      "publishedAt": "2026-11-02T15:44:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/005/0001882535?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "1호기 탑승자 정보 유출",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T15:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령 부부 여권번호 유출…靑 “사전 인지 후 대응”",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-02T16:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003056711?sid=100"
+    },
+    {
+     "title": "대통령 부부까지 여권번호 노출…1호기 탑승자 정보 유출",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-02T16:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001271413?sid=100"
+    },
+    {
+     "title": "대통령까지… ‘1호기’ 탑승자 168명 정보 유출",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-02T15:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004007427?sid=100"
     }
    ]
   }
