@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T05:15:47.013Z",
+ "builtAt": "2026-11-02T05:25:50.613Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,101 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 16,
+ "measured": 9,
  "candidates": [
+  {
+   "keyword": "김태균·오승환, APBC 합류",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 3,
+   "press": 13,
+   "firstArticleAt": "2026-11-02T04:06:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "프로야구 레전드 오승환-김태균, APBC 대표팀 인스트럭터 맡아 투타 노하...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-02T05:23:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/081/0003694833"
+    },
+    {
+     "title": "'레전드' 김태균·오승환, 후배 위해 나섰다... 야구 대표팀 훈련 지도",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-02T05:14:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=878825"
+    },
+    {
+     "title": "김태균·오승환, 대표팀 인스트럭터로 합류…11월 국내 훈련 지도",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-02T05:14:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=622385"
+    }
+   ]
+  },
   {
    "keyword": "이재명 대통령과 의원들",
    "sources": [
     "nate"
    ],
-   "articles90": 28,
+   "articles90": 30,
    "recent20": 6,
-   "press": 15,
-   "firstArticleAt": "2026-11-02T03:49:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-02T04:04:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "이재명 대통령, 국민의힘 향해 손인사 [포토오늘]",
-     "press": "sisaon.co.kr",
-     "publishedAt": "2026-11-02T05:12:00.000Z",
-     "link": "https://www.sisaon.co.kr/news/articleView.html?idxno=205701"
+     "title": "2027년도 예산안 시정연설하는 이재명 대통령",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-02T05:22:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3739596"
     },
     {
-     "title": "이재명 대통령, 821조 ‘슈퍼예산’ 국회 시정연설 [한강로 사진관]",
-     "press": "segye.com",
-     "publishedAt": "2026-11-02T05:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004171709?sid=100"
+     "title": "이재명 대통령, 2027년도 예산안 국회 시정연설",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-02T05:22:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3739591"
     },
     {
-     "title": "이재명 대통령 2027년 예산안 시정연설… 여야의 상반된 반응 [뉴시스Pi...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-02T05:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014295208?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "심수봉 김다현 비판 사과",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-02T04:07:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "심수봉, 17세 후배 김다현 공개 비판 재차 사과 \"반성과 회개의 시간 가...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-02T05:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/088/0001037815"
-    },
-    {
-     "title": "‘김다현 비판’ 논란 심수봉 “해서는 안 될 말”…첫 무대에서도 사과",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-02T04:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000366082?sid=102"
-    },
-    {
-     "title": "심수봉, 김다현 공개 비판 논란 재차 사과 \"반성의 시간 가져\"",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-02T04:40:00.000Z",
-     "link": "https://m.entertain.naver.com/article/018/0006402094"
-    }
-   ]
-  },
-  {
-   "keyword": "구로 미라화 시신 퇴원 사건",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 4,
-   "press": 7,
-   "firstArticleAt": "2026-11-02T04:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "서울 구로 미라화 시신 유기 사건…사망 경위 수사",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-02T05:10:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1542368"
-    },
-    {
-     "title": "구로 미라화 시신 중국인, 사망 전 중환자실 입원…\"병원비 못 내 퇴원...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-02T05:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000963071?sid=102"
-    },
-    {
-     "title": "[속보] 구로 ‘미라 시신’ 50대 중국인, 병원비 못 내 퇴원",
-     "press": "segye.com",
-     "publishedAt": "2026-11-02T05:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004171711?sid=102"
+     "title": "의원들과 셀카 찍는 이재명 대통령",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-02T05:20:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3739588"
     }
    ]
   },
@@ -112,10 +80,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 8,
-   "recent20": 3,
-   "press": 6,
-   "firstArticleAt": "2026-11-02T03:54:00.000Z",
+   "articles90": 7,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-02T04:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -205,34 +173,34 @@
    ]
   },
   {
-   "keyword": "SK하이닉스 외국인 기관 주가 상승",
+   "keyword": "하이닉스 외국인 기관 순매수 증가",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-02T03:52:00.000Z",
+   "firstArticleAt": "2026-11-02T04:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "기관 1.2조 '사자'에 코스피 2.6% 급등…'삼전·닉스' 일제히 반등",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-02T05:13:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000078815"
+     "title": "빅테크 쇼크에 코스피 3.48% 급락… iM증권 \"외국인 매도 압력∙삼전닉...",
+     "press": "asiatime.co.kr",
+     "publishedAt": "2026-11-02T05:24:00.000Z",
+     "link": "https://www.asiatime.co.kr/article/20261102500337"
     },
     {
-     "title": "코스피, 장중 상승폭 확대해 2% 넘게 올라…삼전닉스 2∼4%대↑",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-02T05:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016416154?sid=101"
+     "title": "코스피, 기관 1조원대 '사자'에 3% 상승 전환",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-02T04:45:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261102001038"
     },
     {
-     "title": "영광 90% 급등·샘표 29%대…주식 상승률 상위권 강세",
-     "press": "kjdaily.com",
-     "publishedAt": "2026-11-02T03:52:00.000Z",
-     "link": "http://www.kjdaily.com/article.php?aid=1793591488690967276"
+     "title": "코스피, 하락 출발 뒤 2%대 상승 전환…기관 1조원 순매수",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-02T04:10:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2642989"
     }
    ]
   },
@@ -241,10 +209,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 18,
+   "articles90": 17,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T03:46:00.000Z",
+   "press": 2,
+   "firstArticleAt": "2026-11-02T04:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -267,43 +235,11 @@
      "link": "https://n.news.naver.com/mnews/article/421/0009264732?sid=102"
     }
    ]
-  },
-  {
-   "keyword": "재혼 황후",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T03:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이세영, 신민아 남편 뺏고 “언니라고 불러도 돼요?”…‘재혼 황후’로...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-02T04:44:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003538621"
-    },
-    {
-     "title": "이종석, 보랏빛 조명 아래 환한 미소…'재혼 황후' 앞두고 눈길",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-02T04:36:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16266109"
-    },
-    {
-     "title": "이세영, 순수한 얼굴 뒤 숨겨진 욕망-'재혼 황후' 악역",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-02T03:50:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=94360"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 44,
+  "flagged": 46,
   "matched": 8,
   "avgLeadMin": 34,
   "recent": [
