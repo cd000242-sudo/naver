@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T06:16:07.497Z",
+ "builtAt": "2026-11-02T06:26:11.354Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,31 +8,31 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "포스코 홀딩스",
+   "keyword": "포스코홀딩스 3분기 영업익 증가",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 93,
-   "recent20": 39,
-   "press": 71,
-   "firstArticleAt": "2026-11-02T05:12:00.000Z",
+   "articles90": 62,
+   "recent20": 8,
+   "press": 55,
+   "firstArticleAt": "2026-11-02T05:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "포스코홀딩스, 3분기 영업이익 9450억원…전년 比 48%↑",
-     "press": "sentv.co.kr",
-     "publishedAt": "2026-11-02T06:14:00.000Z",
-     "link": "https://www.sentv.co.kr/article/view/sentv202611020182"
+     "title": "철강 살아난 포스코홀딩스…3분기 영업익 48% 늘었다",
+     "press": "economist.co.kr",
+     "publishedAt": "2026-11-02T06:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/243/0000105109?sid=101"
     },
     {
-     "title": "포스코홀딩스, 3분기 영업익 9450억원…전년 동기 대비 48% 'Up'",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-02T06:14:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=755702"
+     "title": "포스코홀딩스, 3분기 영업익 9450억원… 전년비 48%↑",
+     "press": "cnbizm.com",
+     "publishedAt": "2026-11-02T06:18:00.000Z",
+     "link": "https://www.cnbizm.com/news/articleView.html?idxno=320070"
     },
     {
      "title": "포스코홀딩스, 영업익 48%↑…철강 수익성 회복",
@@ -47,94 +47,94 @@
    "sources": [
     "nate"
    ],
-   "articles90": 56,
+   "articles90": 51,
    "recent20": 7,
-   "press": 54,
-   "firstArticleAt": "2026-11-02T04:47:00.000Z",
+   "press": 49,
+   "firstArticleAt": "2026-11-02T04:58:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "대우건설, 체코 원전 일방적 협상 종료에 반발 … \"산업부 중재 나서야...",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-02T06:12:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/02/2026110200244.html"
+     "title": "대우건설 체코 원전 중재 요청… 사업 지연 국익 훼손 우려",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-02T06:22:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3081044"
     },
     {
-     "title": "대우건설, 체코 원전 시공협상 종료에 반발…산업부에 재협상 중재 요청",
-     "press": "widedaily.com",
-     "publishedAt": "2026-11-02T06:10:00.000Z",
-     "link": "https://www.widedaily.com/news/articleView.html?idxno=302619"
+     "title": "대우건설 \"체코 원전 시공계약 재협상 요청…산업부에 중재 촉구\"",
+     "press": "delighti.co.kr",
+     "publishedAt": "2026-11-02T06:20:00.000Z",
+     "link": "https://www.delighti.co.kr/news/articleView.html?idxno=124232"
     },
     {
-     "title": "대우건설, 체코 원전 시공 재협상 요구…\"추가 공사비 부담 조정해야\"",
-     "press": "kdfnews.com",
-     "publishedAt": "2026-11-02T06:08:00.000Z",
-     "link": "http://www.kdfnews.com/news/articleView.html?idxno=190290"
+     "title": "현대건설 원전 기대감 넘치지만 수주는 '아직', 이한우 '팀 코리아 균열...",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-02T06:16:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=450909"
     }
    ]
   },
   {
-   "keyword": "이재명 예산 시정연설",
+   "keyword": "이재명 대통령 시정연설",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 67,
-   "recent20": 16,
-   "press": 52,
-   "firstArticleAt": "2026-11-02T04:50:00.000Z",
+   "articles90": 63,
+   "recent20": 23,
+   "press": 36,
+   "firstArticleAt": "2026-11-02T05:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김민석 \"李대통령 시정연설...지금부터 불평등과 양극화 극복 전력 다해...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-02T06:13:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261102001248"
+     "title": "국회 나서는 이재명 대통령",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-02T06:24:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3739726"
     },
     {
-     "title": "‘박수 30번’ vs ‘침묵 팻말’… 둘로 갈린 李 시정연설",
-     "press": "asiatime.co.kr",
-     "publishedAt": "2026-11-02T06:12:00.000Z",
-     "link": "https://www.asiatime.co.kr/article/20261102500368"
+     "title": "[포토] 시정연설 관련 기자간담회하는 정점식 원내대표",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-02T06:24:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3445196"
     },
     {
-     "title": "정점식, 李대통령 예산연설에 \"총선대응기금이냐…송곳 검증\"",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-02T06:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005836808?sid=100"
+     "title": "시정연설 마친 이재명 대통령",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-02T06:24:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3739720"
     }
    ]
   },
   {
-   "keyword": "리센느 원이 무대 이탈",
+   "keyword": "대니엘 최원태 선발 맞대결",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 23,
-   "recent20": 3,
-   "press": 21,
-   "firstArticleAt": "2026-11-02T04:53:00.000Z",
+   "articles90": 21,
+   "recent20": 6,
+   "press": 18,
+   "firstArticleAt": "2026-11-02T05:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "리센느 원이, 공연 중 무대 이탈 해명 “줄어든 의상에 호흡 어려워”",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-02T06:12:00.000Z",
-     "link": "http://www.breaknews.com/1247567"
+     "title": "[뉴스1 PICK] 한국시리즈 D-1, KT·삼성 맞대결…우승트로피 주인공은?",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-02T06:23:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/421/0009265139"
     },
     {
-     "title": "리센느 원이, 무대 이탈한 이유는 의상 문제 \"옷 줄어들어 숨 안 쉬어져...",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-02T06:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/079/0004205538"
+     "title": "kt 대니엘 vs 삼성 최원태 '맞대결'…한국시리즈 1차전 선발 예고",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-02T06:22:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/323837/?sc=Naver"
     },
     {
-     "title": "리센느 원이, 갑작스러운 무대 이탈 해명…“숨이 안 쉬어졌다” [MK★이...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-02T05:57:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001145752"
+     "title": "KT·삼성, 한국시리즈 1차전 선발 맞대결…대니엘 vs 최원태",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-02T06:14:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=622401"
     }
    ]
   },
@@ -143,13 +143,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 18,
-   "recent20": 4,
-   "press": 18,
-   "firstArticleAt": "2026-11-02T04:48:00.000Z",
+   "articles90": 17,
+   "recent20": 3,
+   "press": 17,
+   "firstArticleAt": "2026-11-02T05:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"경찰청 흉기난동\" 예고 후 전자발찌 껐다…도심 활보하던 50대 체포",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-02T06:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000648458?sid=102"
+    },
     {
      "title": "[속보]“청와대서 칼부림 하겠다” 선언 후 전자발찌 끈 50대男",
      "press": "munhwa.com",
@@ -161,12 +167,38 @@
      "press": "mbn.mk.co.kr",
      "publishedAt": "2026-11-02T06:12:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/057/0001976305?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "리센느 원이, 무대서 이탈했다",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 19,
+   "recent20": 2,
+   "press": 17,
+   "firstArticleAt": "2026-11-02T05:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "리센느 원이, 공연 중 사색된 채 이탈 '왜'…\"줄어든 의상 때문에 숨 안...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-02T06:21:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009265135"
     },
     {
-     "title": "[속보] “청와대서 칼부림하겠다” 예고후 전자발찌 끈 50대…경찰, 긴급...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-02T06:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003694856?sid=102"
+     "title": "리센느 원이, 공연 중 무대 이탈 해명 “줄어든 의상에 호흡 어려워”",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-02T06:12:00.000Z",
+     "link": "http://www.breaknews.com/1247567"
+    },
+    {
+     "title": "리센느 원이, 무대 이탈한 이유는 의상 문제 \"옷 줄어들어 숨 안 쉬어져...",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-02T06:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/079/0004205538"
     }
    ]
   },
@@ -176,10 +208,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 23,
+   "articles90": 21,
    "recent20": 0,
-   "press": 16,
-   "firstArticleAt": "2026-11-02T04:54:00.000Z",
+   "press": 14,
+   "firstArticleAt": "2026-11-02T04:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -210,61 +242,93 @@
     "google"
    ],
    "articles90": 14,
-   "recent20": 6,
+   "recent20": 5,
    "press": 13,
-   "firstArticleAt": "2026-11-02T05:31:00.000Z",
+   "firstArticleAt": "2026-11-02T05:40:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "시큐아이, AI 기반 위협 인텔리전스 '스틱' 출시…이미지·자연어로 보안...",
-     "press": "widedaily.com",
-     "publishedAt": "2026-11-02T06:14:00.000Z",
-     "link": "https://www.widedaily.com/news/articleView.html?idxno=302622"
+     "title": "금융당국, 글로벌 거래소 해킹에 국내 긴급점검⋯보안 강화 조치 논의",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-02T06:22:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2643095"
     },
     {
-     "title": "AI발 보안 위협에…보안 ‘빅3’ 매출 나란히 20% 이상↑",
-     "press": "donga.com",
-     "publishedAt": "2026-11-02T06:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003759402?sid=105"
+     "title": "금융위, 바이낸스 해킹 긴급점검…국내 거래소 보안 강화",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-02T06:20:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1730145"
     },
     {
-     "title": "주금공, 부산시·국정원과 사이버보안 콘퍼런스 개최",
-     "press": "cnbnews.com",
-     "publishedAt": "2026-11-02T06:06:00.000Z",
-     "link": "https://www.cnbnews.com/news/articleView.html?idxno=1021913"
+     "title": "[더존비즈온 사태] 한국공항보안, 개인정보 유출 가능성…배우자 정보도...",
+     "press": "boannews.com",
+     "publishedAt": "2026-11-02T06:16:00.000Z",
+     "link": "https://www.boannews.com/news/articleView.html?idxno=146937"
     }
    ]
   },
   {
-   "keyword": "기술",
+   "keyword": "서울 11월 황사",
    "sources": [
-    "google"
+    "daum"
    ],
-   "articles90": 12,
-   "recent20": 12,
-   "press": 12,
-   "firstArticleAt": "2026-11-02T06:10:00.000Z",
+   "articles90": 13,
+   "recent20": 4,
+   "press": 13,
+   "firstArticleAt": "2026-11-02T05:15:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "대경권 대학 창업팀 발굴 나선다…포항연합기술지주 IR 챔피언십 13일 마...",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-02T06:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002463859?sid=102"
+     "title": "11월 황사에 미세먼지 '나쁨'…서울·수도권·제주 영향",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-02T06:22:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=248903"
     },
     {
-     "title": "“기술개발부터 시장 확산까지”…클라비, 지식재산 경영으로 과기부 장...",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-02T06:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002246949?sid=105"
+     "title": "“한동안 안 와서 좋아했더니”…6년 만에 ‘11월 황사’ 뒤짚어쓴 서울",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-02T06:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005757622?sid=103"
     },
     {
-     "title": "현대차, 고성능 전기차 기술 검증 'N 페스티벌' 마무리...누적 7만명 관...",
-     "press": "getnews.co.kr",
+     "title": "서울에 올 가을 첫 황사 관측… 서해안·제주 미세먼지 '나쁨'",
+     "press": "hankookilbo.com",
      "publishedAt": "2026-11-02T06:14:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=885660"
+     "link": "https://n.news.naver.com/mnews/article/469/0000963095?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "정점식 국민의힘 원내대표",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 34,
+   "recent20": 7,
+   "press": 12,
+   "firstArticleAt": "2026-11-02T04:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[포토] 시정연설 관련 기자간담회하는 정점식 원내대표",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-02T06:24:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3445196"
+    },
+    {
+     "title": "[포토] 시정연설 관련 기자간담회하는 정점식",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-02T06:24:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3445194"
+    },
+    {
+     "title": "[포토] 회견 갖는 정점식 국민의힘 원내대표",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-02T06:20:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/02/2026110200298.html"
     }
    ]
   },
@@ -273,10 +337,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-02T04:54:00.000Z",
+   "articles90": 10,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-02T05:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -301,77 +365,44 @@
    ]
   },
   {
-   "keyword": "서울 11월 황사 관측",
+   "keyword": "기술",
    "sources": [
-    "daum"
+    "google"
    ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-02T05:15:00.000Z",
+   "articles90": 7,
+   "recent20": 7,
+   "press": 7,
+   "firstArticleAt": "2026-11-02T06:21:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "서울에 올 가을 첫 황사 관측… 서해안·제주 미세먼지 '나쁨'",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-02T06:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000963095?sid=103"
+     "title": "위버스브레인, NE능률에 AI 튜터 기술 공급",
+     "press": "lawissue.co.kr",
+     "publishedAt": "2026-11-02T06:24:00.000Z",
+     "link": "https://www.lawissue.co.kr/view.php?ud=202611021522516310f4ab64559d_12"
     },
     {
-     "title": "서울에 6년 만의 '11월 황사'‥내일 밤 추가 유입",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-02T06:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001532930?sid=102"
+     "title": "경남정보대 글로벌K뷰티학과, 네일아트전공 재학생 전원 기술강사 자격...",
+     "press": "pennmike.com",
+     "publishedAt": "2026-11-02T06:24:00.000Z",
+     "link": "https://www.pennmike.com/news/articleView.html?idxno=130781"
     },
     {
-     "title": "서울, 6년 만에 11월 황사...수도권·서해안 미세먼지 '나쁨'",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-02T05:50:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=560412"
-    }
-   ]
-  },
-  {
-   "keyword": "100일의 거짓말",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-02T04:55:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "우직한 카리스마 속 순정…‘100일의 거짓말’ 이선의 존재감",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-02T05:59:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001302412"
-    },
-    {
-     "title": "‘100일의 거짓말’ 코우리 유카, 김유정 돕는 엉뚱 조력자…‘감초 활...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-02T05:51:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001147661"
-    },
-    {
-     "title": "‘100일의 거짓말’ 이선, 시선이 자꾸 쏠린다",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-02T05:45:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001147659"
+     "title": "공주대 연구팀, 수계 아연전지 수명 늘리는 '레이저 패터닝 기술' 개발",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-02T06:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005435292?sid=102"
     }
    ]
   },
   {
    "keyword": "정년 연장",
    "sources": [
-    "google",
-    "daum"
+    "google"
    ],
    "articles90": 7,
-   "recent20": 3,
+   "recent20": 1,
    "press": 7,
    "firstArticleAt": "2026-11-02T05:00:00.000Z",
    "exclusive": false,
@@ -422,10 +453,10 @@
      "link": "https://m.sports.naver.com/kbaseball/article/117/0004120964"
     },
     {
-     "title": "대화하는 이강철 감독과 박진만 감독",
-     "press": "yna.co.kr",
+     "title": "대화 나누는 이강철 감독과 박진만 감독",
+     "press": "newsis.com",
      "publishedAt": "2026-11-02T05:09:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/001/0016416139"
+     "link": "https://m.sports.naver.com/kbaseball/article/003/0014295258"
     }
    ]
   },
@@ -435,10 +466,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-02T04:54:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-02T05:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -461,11 +492,43 @@
      "link": "https://n.news.naver.com/mnews/article/001/0016416154?sid=101"
     }
    ]
+  },
+  {
+   "keyword": "제6차 대전환 회의",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T05:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "제6차 생산적금융 대전환 회의서 발언하는 이억원 위원장",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-02T05:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009265000?sid=101"
+    },
+    {
+     "title": "6차 생산적금융 대전환 회의서 모두 발언하는 이억원 위원장",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-02T05:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009265002?sid=101"
+    },
+    {
+     "title": "제6차 생산적 금융 대전환 회의 주재하는 이억원 금융위원장",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-02T05:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014295433?sid=100"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 62,
+  "flagged": 68,
   "matched": 14,
   "avgLeadMin": 57,
   "recent": [
