@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T03:19:41.596Z",
+ "builtAt": "2026-11-02T03:45:21.062Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,138 +11,170 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "선관위 특검 압수수색",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 39,
-   "recent20": 2,
-   "press": 35,
-   "firstArticleAt": "2026-11-02T01:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "예산 삭감에도 9억원대 수당 지급 의혹…특검, 중앙선관위 압수수색",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-02T03:04:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=727525"
-    },
-    {
-     "title": "9억 쌈짓돈처럼 받았나…선관위 특검 “공추비 지급은 국고 등 손실” ...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-02T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002717630?sid=102"
-    },
-    {
-     "title": "예산 없어도 지급한 선관위 활동비…특검, 고위직 지시·공모 추적",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-02T02:54:00.000Z",
-     "link": "https://www.ajunews.com/view/20261102112341117"
-    }
-   ]
-  },
-  {
    "keyword": "철원 육군 하사 사망",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 31,
-   "recent20": 1,
-   "press": 29,
-   "firstArticleAt": "2026-11-02T02:06:00.000Z",
+   "articles90": 28,
+   "recent20": 4,
+   "press": 26,
+   "firstArticleAt": "2026-11-02T02:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 철원 육군 전방부대서 20대 하사 외상 입고 사망",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-02T03:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003694797?sid=102"
+     "title": "[속보] “강원도 철원서 육군 하사 1명 외상 입고 사망”",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-02T03:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/024/0000109326?sid=102"
     },
     {
-     "title": "강원 철원 전방 부대서 육군 하사 숨진 채 발견… 군·경 경위 조사",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-02T02:56:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3739408"
+     "title": "강원 철원 전방부대에서 군 간부 1명 사망",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-02T03:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002534312?sid=102"
     },
     {
-     "title": "육군 \"철원 전방부대서 하사 1명 외상 입고 사망…군·경 조사\"",
-     "press": "ppss.kr",
-     "publishedAt": "2026-11-02T02:52:00.000Z",
-     "link": "https://www.ppss.kr/news/articleView.html?idxno=318532"
+     "title": "강원 철원 전방부대서 육군 하사 숨진 채 발견…군·민간 수사 착수",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-02T03:30:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=171771"
     }
    ]
   },
   {
-   "keyword": "이재명 대통령 시정연설",
+   "keyword": "특검 중앙선관위 압수수색",
    "sources": [
     "signal.bz",
-    "daum"
+    "nate"
    ],
-   "articles90": 70,
-   "recent20": 70,
+   "articles90": 24,
+   "recent20": 2,
    "press": 23,
-   "firstArticleAt": "2026-11-02T03:02:00.000Z",
+   "firstArticleAt": "2026-11-02T02:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"이 대통령이 거울 보고 하는 이야기인 줄 알았다\"",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-02T03:18:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1171054"
+     "title": "특검, 중앙선관위 압수수색…\"활동비 9억 원 부당지급\"",
+     "press": "lawtimes.co.kr",
+     "publishedAt": "2026-11-02T03:36:00.000Z",
+     "link": "https://www.lawtimes.co.kr/news/articleView.html?idxno=228699"
     },
     {
-     "title": "사전환담 발언하는 이재명 대통령",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-02T03:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205437?sid=100"
+     "title": "수당 9억원 부당 지급 의혹…특검, 중앙선관위 위원장실 등 압색",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-02T03:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001976297?sid=102"
     },
     {
-     "title": "[이재명 대통령 시정연설] 기립박수와 피켓시위… 두 쪽 난 본회의장",
-     "press": "sisaweek.com",
-     "publishedAt": "2026-11-02T03:18:00.000Z",
-     "link": "https://www.sisaweek.com/news/articleView.html?idxno=238733"
+     "title": "선관위 수당 9억원 부당 지급 의혹…특검, 위원장실·사무총장실 압수수...",
+     "press": "ppss.kr",
+     "publishedAt": "2026-11-02T03:21:00.000Z",
+     "link": "https://www.ppss.kr/news/articleView.html?idxno=318543"
     }
    ]
   },
   {
-   "keyword": "이만희 총회장 법원 출석",
+   "keyword": "결제주기 단축 발표",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 25,
+   "recent20": 1,
+   "press": 23,
+   "firstArticleAt": "2026-11-02T02:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[Q&A] 주식 팔면 하루 빨리 돈 받는다…결제주기 단축, 뭐가 달라지나(종...",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-02T03:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016415981?sid=101"
+    },
+    {
+     "title": "\"거래 다음 날 매도대금 수령\"…2028년까지 'T+1 전환' 로드맵 발표",
+     "press": "the-biz.co.kr",
+     "publishedAt": "2026-11-02T03:22:00.000Z",
+     "link": "http://www.the-biz.co.kr/news/articleView.html?idxno=730455"
+    },
+    {
+     "title": "주식 팔면 다음 날 돈 받나‥결제주기 단축 로드맵",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-02T03:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001532908?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "인사하는 이재명 대통령",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 70,
+   "recent20": 23,
+   "press": 20,
+   "firstArticleAt": "2026-11-02T02:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'박수 30번' 나온 李대통령 시정연설…국힘은 \"재판 재개하라\" [현장]",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-02T03:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001071357?sid=100"
+    },
+    {
+     "title": "「M포토」 국회 찾은 이재명 대통령...민주당 지도부와 인사",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-02T03:42:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=72446"
+    },
+    {
+     "title": "李 대통령, 여야 대표에 \"경쟁은 좋지만 합리적으로 해야\"",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-02T03:42:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=171772"
+    }
+   ]
+  },
+  {
+   "keyword": "LG CNS 인니 AI센터 구축",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 1,
+   "articles90": 4,
+   "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-02T01:50:00.000Z",
+   "firstArticleAt": "2026-11-02T02:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘국힘 입당 강요’ 이만희 1심, 내년 3월에야 본궤도…장기화 불가피",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-02T03:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006402045?sid=102"
+     "title": "LG CNS, 인니 하이퍼스케일 AI 데이터센터로 해외시장 진출 '신호탄'",
+     "press": "cwn.kr",
+     "publishedAt": "2026-11-02T03:06:00.000Z",
+     "link": "https://www.cwn.kr/news/articleView.html?idxno=60734"
     },
     {
-     "title": "'국힘 당원 가입 강요' 이만희 등 신천지 간부, 첫 공판서 혐의 부인…...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-02T02:41:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261102000714"
+     "title": "LG CNS, 인니에 AI데이터센터 완공",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-02T02:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002717596?sid=105"
     },
     {
-     "title": "법원 도착한 이만희",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-02T01:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205328?sid=102"
+     "title": "LG CNS, 인니 30MW AI 데이터센터 완공…국내 기업 첫 해외 구축",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-02T02:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000547782?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 15,
+  "flagged": 18,
   "matched": 1,
   "avgLeadMin": 21,
   "recent": [
