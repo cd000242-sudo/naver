@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T21:02:07.467Z",
+ "builtAt": "2026-11-02T21:12:11.096Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -47,62 +47,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 6,
+   "articles90": 12,
+   "recent20": 4,
+   "press": 8,
    "firstArticleAt": "2026-11-02T20:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[국제유가] 미-이란 협상 기대감에 7% 넘게 폭락",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-02T21:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005598345?sid=101"
-    },
-    {
-     "title": "[금/유가] 미·이란 종전 협상 기대에 국제유가 7% 급락...금값 2% 반등",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-02T20:37:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261103000018"
-    },
-    {
-     "title": "이란 대통령 \"최고지도자, 정부에 평화 협상 권한 부여\"",
+     "title": "미·이란 협상 기대에 국제유가 7%대 급락…WTI 96달러선",
      "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-02T20:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000541262?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "관광객",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 4,
-   "press": 5,
-   "firstArticleAt": "2026-11-02T20:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "서울 외국인 관광객 소비 8.8조…9개월 만에 작년 연간 실적 돌파",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-02T21:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004677984?sid=102"
+     "publishedAt": "2026-11-02T21:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541270?sid=104"
     },
     {
-     "title": "서울 1~9월 외국 관광객 카드 소비 지난해 연간 실적 넘어",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-02T21:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205712?sid=102"
+     "title": "미·이란 종전 기대감에 국제유가 '뚝'...7%대 급락",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-02T21:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000120471?sid=104"
     },
     {
-     "title": "서울 외국인 관광객 1314만명…카드 소비액은 8조8400억",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-02T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000548051?sid=102"
+     "title": "이란 \"조건 충족되면 이틀 내 호르무즈 개방\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-02T21:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533073?sid=104"
     }
    ]
   },
@@ -172,6 +140,38 @@
    ]
   },
   {
+   "keyword": "노시환",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T20:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“노시환 수비 약하다” ML 까다로운 잣대? 몸값에 영향 미치나…한화 ...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-02T21:10:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/117/0004121191"
+    },
+    {
+     "title": "\"노시환 영입전, 발등에 불이 떨어졌다\" 이런 관심이라고?…'즉전감' 평...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-02T20:37:00.000Z",
+     "link": "https://m.sports.naver.com/wbaseball/article/076/0004462315"
+    },
+    {
+     "title": "'美 도전' 노시환 향한 현지 혹평 \"KBO는 더블A 수준, 삼진율 폭증→3루...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-02T20:05:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/108/0003483935"
+    }
+   ]
+  },
+  {
    "keyword": "1호기 탑승자 정보 유출",
    "sources": [
     "signal.bz",
@@ -207,7 +207,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 186,
+  "flagged": 187,
   "matched": 59,
   "avgLeadMin": 121,
   "recent": [
