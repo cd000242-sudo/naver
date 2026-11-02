@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T09:48:40.646Z",
+ "builtAt": "2026-11-02T09:58:44.719Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "10월 판매 감소",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 40,
-   "recent20": 3,
-   "press": 34,
-   "firstArticleAt": "2026-11-02T08:20:00.000Z",
+   "articles90": 34,
+   "recent20": 1,
+   "press": 29,
+   "firstArticleAt": "2026-11-02T08:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,15 +43,48 @@
    ]
   },
   {
+   "keyword": "삼성SDS 구미 AI 센터 착공",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 23,
+   "recent20": 5,
+   "press": 22,
+   "firstArticleAt": "2026-11-02T08:29:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "자체 GPU부터 고객사 장비까지…삼성SDS, 구미 AI 데이터센터 착공",
+     "press": "popcornnews.net",
+     "publishedAt": "2026-11-02T09:54:00.000Z",
+     "link": "http://www.popcornnews.net/news/articleView.html?idxno=138407"
+    },
+    {
+     "title": "삼성, 구미 AI 데이터센터 착공…영남권 AI투자 본격화",
+     "press": "dongponews.net",
+     "publishedAt": "2026-11-02T09:54:00.000Z",
+     "link": "https://www.dongponews.net/news/articleView.html?idxno=61415"
+    },
+    {
+     "title": "'삼성 영남권 60조 투자' 본격화...삼성SDS, 구미 AI 데이터센터 착공",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-02T09:54:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=778423"
+    }
+   ]
+  },
+  {
    "keyword": "현대 제네시스",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 26,
-   "recent20": 3,
-   "press": 25,
-   "firstArticleAt": "2026-11-02T08:22:00.000Z",
+   "articles90": 23,
+   "recent20": 1,
+   "press": 22,
+   "firstArticleAt": "2026-11-02T08:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -76,35 +109,34 @@
    ]
   },
   {
-   "keyword": "삼성SDS 구미 AI 센터 착공",
+   "keyword": "LX홀딩스 임원인사",
    "sources": [
-    "signal.bz",
-    "nate"
+    "daum"
    ],
-   "articles90": 23,
-   "recent20": 3,
-   "press": 22,
-   "firstArticleAt": "2026-11-02T08:22:00.000Z",
+   "articles90": 18,
+   "recent20": 4,
+   "press": 16,
+   "firstArticleAt": "2026-11-02T09:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성SDS 60MW급 AI 데이터센터 구미서 착공…2029년 3월 가동 목표",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-02T09:40:00.000Z",
-     "link": "http://www.breaknews.com/1247734"
+     "title": "LX홀딩스, 염민석 CFO 선임…정기 임원인사 단행",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-02T09:58:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1420941"
     },
     {
-     "title": "경북도·구미시·삼성SDS, 구미 국가1산단에 AI 데이터센터 조성 나선다",
-     "press": "eroun.net",
-     "publishedAt": "2026-11-02T09:40:00.000Z",
-     "link": "https://www.eroun.net/news/articleView.html?idxno=94155"
+     "title": "LX홀딩스, 2027년 정기 임원 인사…재무·기획 인재 중용",
+     "press": "fetv.co.kr",
+     "publishedAt": "2026-11-02T09:52:00.000Z",
+     "link": "https://www.fetv.co.kr/news/articleView.html?idxno=312940"
     },
     {
-     "title": "'애니콜 신화' 현장에 AI 거점…삼성SDS, 구미 데이터센터 첫 삽",
-     "press": "kyongbuk.co.kr",
-     "publishedAt": "2026-11-02T09:30:00.000Z",
-     "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4089424"
+     "title": "LX홀딩스, 2027년 정기 임원 인사…CFO에 염민석 상무",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-02T09:44:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2013389"
     }
    ]
   },
@@ -113,30 +145,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 12,
+   "articles90": 15,
+   "recent20": 4,
+   "press": 15,
    "firstArticleAt": "2026-11-02T08:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "대전 '스토킹 신고' 전 연인 살해범 40대 신상공개 결정",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-02T09:42:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=778421"
+     "title": "[속보]대전 ‘스토킹 신고’ 前연인 살해범 40대, 신상공개 최종 결정",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-02T09:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002717800?sid=102"
     },
     {
-     "title": "[속보]‘스토킹 신고’ 전 연인 살해한 대전 40대 신상공개 결정…9일 이...",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-02T09:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000366110?sid=102"
+     "title": "'대전 교제 살인' 40대 신상공개 결정…피의자 이의제기에 일시 유예",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-02T09:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009265662?sid=102"
     },
     {
-     "title": "대전서 ‘스토킹 신고’ 전 연인 살해한 40대 신상 공개 결정",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-02T09:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000160151?sid=102"
+     "title": "대전 전 연인 살해 40대 신상공개 결정…이의제기로 9일 이후 공개(종합...",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-02T09:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004205679?sid=102"
     }
    ]
   },
@@ -146,7 +178,7 @@
     "nate"
    ],
    "articles90": 12,
-   "recent20": 2,
+   "recent20": 0,
    "press": 12,
    "firstArticleAt": "2026-11-02T08:30:00.000Z",
    "exclusive": false,
@@ -177,24 +209,24 @@
    "sources": [
     "google"
    ],
-   "articles90": 14,
-   "recent20": 4,
-   "press": 10,
-   "firstArticleAt": "2026-11-02T08:24:00.000Z",
+   "articles90": 13,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-02T08:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "박수현 지사, 논산서 ‘충남통행’ 국방산단·AI 방산혁신클러스터 조성...",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-02T09:42:00.000Z",
-     "link": "http://www.breaknews.com/1247676"
-    },
     {
      "title": "박수현 충남지사 “글로벌 기업 투자, 3력혁신·광속행정으로 뒷받침”",
      "press": "breaknews.com",
      "publishedAt": "2026-11-02T09:42:00.000Z",
      "link": "http://www.breaknews.com/1247664"
+    },
+    {
+     "title": "박수현 지사, 논산서 ‘충남통행’ 국방산단·AI 방산혁신클러스터 조성...",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-02T09:42:00.000Z",
+     "link": "http://www.breaknews.com/1247676"
     },
     {
      "title": "박수현 충남지사, 국비 13조 사수·추가 확보 집중",
@@ -210,13 +242,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 11,
-   "recent20": 1,
+   "articles90": 10,
+   "recent20": 2,
    "press": 6,
-   "firstArticleAt": "2026-11-02T08:24:00.000Z",
+   "firstArticleAt": "2026-11-02T08:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "좋은데 지루하고, 지루한 게 또 좋다…‘낮과 밤은 서로에게’ [한현정...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-02T09:54:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005757870"
+    },
     {
      "title": "'낮과 밤은 서로에게' 심은경 \"김종관 감독 차분함에 용기 가져\"",
      "press": "yna.co.kr",
@@ -228,12 +266,6 @@
      "press": "enews.imbc.com",
      "publishedAt": "2026-11-02T09:19:00.000Z",
      "link": "https://m.entertain.naver.com/article/408/0000326403"
-    },
-    {
-     "title": "[영상] 심은경, 이희준과 커플 호흡? \"우린 하나도 안 맞는게 매력\"(낮과...",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-02T09:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000326402"
     }
    ]
   },
@@ -243,7 +275,7 @@
     "nate"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-02T08:30:00.000Z",
    "exclusive": false,
@@ -268,43 +300,11 @@
      "link": "https://n.news.naver.com/mnews/article/448/0000648495?sid=102"
     }
    ]
-  },
-  {
-   "keyword": "김민수 윤도영 김예건 합류",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T08:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'한국축구 미래' 김민수·윤도영·김예건 뭉쳤다…김은중호 '황금세대'...",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-02T08:55:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/629/0000548022"
-    },
-    {
-     "title": "레인저스 김민수, 이번에는 김은중호 합류... 멕시코 2연전 참가",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-02T08:20:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=878986"
-    },
-    {
-     "title": "김민수·윤도영·김예건 발탁…김은중호, 멕시코 2연전 명단 26명 확정",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-02T08:20:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2643188"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 141,
+  "flagged": 142,
   "matched": 33,
   "avgLeadMin": 66,
   "recent": [
