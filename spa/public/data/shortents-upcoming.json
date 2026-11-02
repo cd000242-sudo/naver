@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T15:30:20.347Z",
+ "builtAt": "2026-11-02T15:40:24.077Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -10,6 +10,70 @@
  },
  "measured": 27,
  "candidates": [
+  {
+   "keyword": "우리들의 발라드2 박예승",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-02T14:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "비비, 박대희에 \"소속사 있나?\" 러브콜→박예승, 만점자의 충격 탈락 ('...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-02T15:17:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001406915"
+    },
+    {
+     "title": "‘만점’ 박예승, 탈락 이변…한로이 91표로 3라운드 진출 (‘우발라2’...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-02T15:10:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1793632184530231010"
+    },
+    {
+     "title": "파워 보컬 데스메치, 한로이 91표로 승리...박예승, 3라운드 진출 실패 ...",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-02T15:06:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=778449"
+    }
+   ]
+  },
+  {
+   "keyword": "코스피 반등 마감",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T14:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘검은 월요일’ 없었다… 코스피, 예상 뒤집고 반등",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-02T15:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004007358?sid=101"
+    },
+    {
+     "title": "美나스닥 반등·유가 6% 급락…코스피 2.24% 상승에도 외국인 '삼전닉스...",
+     "press": "greened.kr",
+     "publishedAt": "2026-11-02T15:03:00.000Z",
+     "link": "https://www.greened.kr/news/articleView.html?idxno=353679"
+    },
+    {
+     "title": "[저PBR주 강세 마감] 현대제철 11%·롯데쇼핑 9% 급등…낮은 밸류에이션...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-02T14:40:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=622294"
+    }
+   ]
+  },
   {
    "keyword": "대한민국",
    "sources": [
