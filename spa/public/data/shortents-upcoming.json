@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T11:19:12.085Z",
+ "builtAt": "2026-11-02T11:29:15.644Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,17 +11,24 @@
  "measured": 24,
  "candidates": [
   {
-   "keyword": "브로드컴 갑질 과징금 확정",
+   "keyword": "브로드컴 과징금 확정",
    "sources": [
-    "nate"
+    "nate",
+    "daum"
    ],
-   "articles90": 14,
+   "articles90": 21,
    "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-02T09:58:00.000Z",
+   "press": 21,
+   "firstArticleAt": "2026-11-02T10:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "삼성전자도 못 피한 부품 갑질… 브로드컴 186억 원 과징금 확정",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-02T11:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000963185?sid=102"
+    },
     {
      "title": "대법원, 삼성전자에 부품 구매 강요 '갑질' 브로드컴에 과징금 186억 확...",
      "press": "businesspost.co.kr",
@@ -33,12 +40,70 @@
      "press": "wowtv.co.kr",
      "publishedAt": "2026-11-02T11:08:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/215/0001271399?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "하남시",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 4,
+   "press": 6,
+   "firstArticleAt": "2026-11-02T10:49:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "하남시, 한강 폐천부지 오염 정화 책임 행정소송 '승소'",
+     "press": "safetimes.co.kr",
+     "publishedAt": "2026-11-02T11:28:00.000Z",
+     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247112"
     },
     {
-     "title": "'삼성전자 갑질' 美 브로드컴 186억 과징금 확정",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-02T10:58:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2013397"
+     "title": "하남시 “K-스타월드 공모 취소, 백지화 아닌 정부 계획 연계 위한 것”",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-02T11:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001882501?sid=102"
+    },
+    {
+     "title": "[패트롤] 광명시-부천시-안산시-안양시-하남시",
+     "press": "ekn.kr",
+     "publishedAt": "2026-11-02T11:22:00.000Z",
+     "link": "https://www.ekn.kr/web/view.php?key=20261102020584342"
+    }
+   ]
+  },
+  {
+   "keyword": "재정",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-02T10:17:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "경기도-도의회 여야정 협치 시동…재정위기·세제개편 공동 대응",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-02T11:24:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=72474"
+    },
+    {
+     "title": "투자심사 땐 재정 여력 '뻥튀기'.. 전주시 사업 '줄줄이 제동'",
+     "press": "jmbc.co.kr",
+     "publishedAt": "2026-11-02T11:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/659/0000048353?sid=102"
+    },
+    {
+     "title": "[인사] 재정경제부 外",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-02T10:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001882499?sid=102"
     }
    ]
   },
@@ -47,10 +112,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-02T09:56:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-02T10:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,14 +140,78 @@
    ]
   },
   {
+   "keyword": "LX홀딩스 염민석 CFO 선임",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-02T10:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "LX홀딩스, 정기 임원인사…상무 승진 2명",
+     "press": "news2day.co.kr",
+     "publishedAt": "2026-11-02T10:52:00.000Z",
+     "link": "https://www.news2day.co.kr/article/20261102500335"
+    },
+    {
+     "title": "[인사] LX홀딩스, 염민석 신임 CFO 선임…재무 관리 체계 강화",
+     "press": "topdaily.kr",
+     "publishedAt": "2026-11-02T10:41:00.000Z",
+     "link": "https://www.topdaily.kr/articles/112652"
+    },
+    {
+     "title": "LX홀딩스, 정기 임원 인사… CFO에 염민석 상무",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-02T10:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202064?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "김민재 차관 점검",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T10:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "행안부, '대통령의 외교, 세계를 품다' 준비 현장을 점검",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-02T11:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014296281?sid=100"
+    },
+    {
+     "title": "김민재 행안부 차관, 대통령 외교 전시 현장 방문",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-02T10:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009265706?sid=102"
+    },
+    {
+     "title": "대통령 외교 기획전시 준비 현장 점검",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-02T10:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009265703?sid=102"
+    }
+   ]
+  },
+  {
    "keyword": "낮과 밤은 서로에게",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T09:54:00.000Z",
+   "articles90": 9,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-02T10:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -103,38 +232,6 @@
      "press": "ajunews.com",
      "publishedAt": "2026-11-02T10:36:00.000Z",
      "link": "https://www.ajunews.com/view/20261102193401557"
-    }
-   ]
-  },
-  {
-   "keyword": "박상준 통산 소백장사",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T10:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'팀 동료와 치열한 접전 끝에 정상!' 박상준, 황찬섭 꺾고 개인 통산 두...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-02T11:02:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/117/0004121126"
-    },
-    {
-     "title": "박상준, 의성장사씨름대회 소백장사 등극…개인 통산 두 번째 꽃가마",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-02T10:42:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/421/0009265697"
-    },
-    {
-     "title": "정읍시청 박상준, 의성마늘씨름대회서 통산 2번째 소백장사",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-02T10:10:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/003/0014296260"
     }
    ]
   },
@@ -173,7 +270,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 157,
+  "flagged": 160,
   "matched": 45,
   "avgLeadMin": 80,
   "recent": [
