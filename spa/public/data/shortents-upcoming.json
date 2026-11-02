@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T04:55:41.523Z",
+ "builtAt": "2026-11-02T05:05:44.274Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,70 +8,70 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 11,
  "candidates": [
   {
-   "keyword": "손흥민 미네소타에 1-3 패배",
+   "keyword": "이재명 대통령과 의원들",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 23,
-   "recent20": 2,
-   "press": 21,
+   "articles90": 30,
+   "recent20": 7,
+   "press": 14,
    "firstArticleAt": "2026-11-02T03:42:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "'손흥민 풀타임' LAFC, 미네소타에 1-3 완패...PO 상위 시드 불발",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-02T04:40:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=778349"
+     "title": "이재명 대통령, 821조 ‘슈퍼예산’ 국회 시정연설 [한강로 사진관]",
+     "press": "segye.com",
+     "publishedAt": "2026-11-02T05:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004171709?sid=100"
     },
     {
-     "title": "손흥민 풀타임에도 LAFC 1-3 패배…PO 홈 이점 확보 실패",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-02T04:38:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=622376"
+     "title": "이재명 대통령 2027년 예산안 시정연설… 여야의 상반된 반응 [뉴시스Pi...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-02T05:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014295208?sid=100"
     },
     {
-     "title": "손흥민, 3경기 연속 침묵에도 평점 7.2…팀 내에서 두 번째로 높아",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-02T04:34:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109664751219"
+     "title": "시정연설 마친 이재명 대통령",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-02T04:58:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3739551"
     }
    ]
   },
   {
-   "keyword": "시정연설 후 인사하는 이재명 대통령",
+   "keyword": "부평구",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-02T03:27:00.000Z",
+   "articles90": 7,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-02T03:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "「M포토」 시정연설 후 조경태 국민의힘 의원과 인사하는 이재명 대통령",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-02T04:44:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=72451"
+     "title": "인천 부평구 십정1동, 남인천신협의 지속적인 이웃사랑으로 동절기 생활...",
+     "press": "kmaeil.com",
+     "publishedAt": "2026-11-02T05:00:00.000Z",
+     "link": "https://www.kmaeil.com/news/articleView.html?idxno=656638"
     },
     {
-     "title": "이 대통령 시정연설서 국힘 “재판 재개”...이 대통령 “계속해도 될까...",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-02T04:30:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1134353"
+     "title": "인천 부평구, 재개발·재건축 원스탑 지원센터 출범 앞두고 주민 간담회...",
+     "press": "kmaeil.com",
+     "publishedAt": "2026-11-02T04:58:00.000Z",
+     "link": "https://www.kmaeil.com/news/articleView.html?idxno=656636"
     },
     {
-     "title": "이재명 대통령 시정연설, ‘성장’ 36번 언급 속 3대 민생과제 부각…전...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-02T04:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005757539?sid=100"
+     "title": "부평구, ‘재개발·재건축 원스탑 지원센터’신설 추진",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-02T04:52:00.000Z",
+     "link": "http://www.breaknews.com/1247531"
     }
    ]
   },
@@ -82,7 +82,7 @@
     "nate"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-02T03:36:00.000Z",
    "exclusive": false,
@@ -109,14 +109,78 @@
    ]
   },
   {
-   "keyword": "집단소송법 서명 캠페인 기자회견",
+   "keyword": "가덕도 신공항 공사비 증액",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T04:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "공사비 문제로 표류 중인 가덕도신공항...책임있는 정부 조치 주문한 국...",
+     "press": "thepublic.kr",
+     "publishedAt": "2026-11-02T04:54:00.000Z",
+     "link": "https://www.thepublic.kr/news/articleView.html?idxno=324699"
+    },
+    {
+     "title": "국민의힘 이성권 부산시당위원장, 가덕도 신공항 공사비 문제 관련 회견",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-02T04:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016416058?sid=100"
+    },
+    {
+     "title": "가덕도 신공항 공사비 증액 문제 관련해 기자회견 연 국민의힘",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-02T04:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016416051?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "공소청 출범 한달",
    "sources": [
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 1,
+   "articles90": 19,
+   "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-02T03:31:00.000Z",
+   "firstArticleAt": "2026-11-02T03:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "공소청 출범 한달",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-02T04:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009264735?sid=102"
+    },
+    {
+     "title": "검찰 폐지, 공소청 출범 한달",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-02T04:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009264734?sid=102"
+    },
+    {
+     "title": "출범 한달 맞이한 공소청",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-02T04:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009264732?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "집단소송법 서명 기자회견",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 2,
+   "firstArticleAt": "2026-11-02T03:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -133,20 +197,38 @@
      "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261102010000527"
     },
     {
-     "title": "광화문 광장에서 열린 집단소송법 제정 위한 10만 서명 캠페인 기자회견",
+     "title": "구호 외치는 집단소송법 제정연대",
      "press": "newspim.com",
      "publishedAt": "2026-11-02T03:37:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261102000967"
+     "link": "https://www.newspim.com/news/view/20261102000968"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 35,
-  "matched": 5,
-  "avgLeadMin": 36,
+  "flagged": 40,
+  "matched": 8,
+  "avgLeadMin": 34,
   "recent": [
+   {
+    "keyword": "lafc",
+    "hitKeyword": "LAFC 손흥민 고군분투",
+    "hitAt": "2026-11-02T14:00:00+09:00",
+    "leadMin": 45
+   },
+   {
+    "keyword": "손흥민 미네소타에 1-3 패배",
+    "hitKeyword": "LAFC 손흥민 고군분투",
+    "hitAt": "2026-11-02T14:00:00+09:00",
+    "leadMin": 24
+   },
+   {
+    "keyword": "북한 해커 비트코인 탈취",
+    "hitKeyword": "북한 해커 비트코인",
+    "hitAt": "2026-11-02T14:00:00+09:00",
+    "leadMin": 24
+   },
    {
     "keyword": "철원 육군 하사 사망",
     "hitKeyword": "철원 육군 하사 사망",
