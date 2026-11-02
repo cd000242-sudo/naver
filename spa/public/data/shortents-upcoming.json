@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T09:58:44.719Z",
+ "builtAt": "2026-11-02T10:08:47.765Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "10월 판매 감소",
+   "keyword": "기아 10월 판매 증가",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 34,
+   "articles90": 21,
    "recent20": 1,
-   "press": 29,
-   "firstArticleAt": "2026-11-02T08:29:00.000Z",
+   "press": 21,
+   "firstArticleAt": "2026-11-02T08:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "국산차 10월 판매, 68만대 돌파…기아·GM 선전에 1.5% 증가",
+     "press": "autotimes.co.kr",
+     "publishedAt": "2026-11-02T10:06:00.000Z",
+     "link": "http://autotimes.co.kr/detail.php?number=689798&thread=27"
+    },
     {
      "title": "기아, 현대차 제치고 내수 1위…완성차 5개사 10월 실적 희비",
      "press": "digitalchosun.dizzo.com",
@@ -29,62 +35,86 @@
      "link": "http://digitalchosun.dizzo.com/site/data/html_dir/2026/11/02/2026110280226.html"
     },
     {
-     "title": "현대차, 10월 판매 6.3% 후퇴…SUV·제네시스 부진에 전동화 성장도 역부...",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-02T09:34:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=845970"
-    },
-    {
-     "title": "광주 백화점 판매 4.6% 늘었지만…대형마트는 8.6% 감소",
-     "press": "aitimes.com",
-     "publishedAt": "2026-11-02T09:30:00.000Z",
-     "link": "https://www.aitimes.com/news/articleView.html?idxno=216912"
+     "title": "기아·한국GM이 살린 10월 … 완성차 5사 판매 68만대·1.7%↑",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-02T09:28:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/02/2026110200379.html"
     }
    ]
   },
   {
-   "keyword": "삼성SDS 구미 AI 센터 착공",
+   "keyword": "코스피",
    "sources": [
-    "signal.bz",
-    "nate"
+    "google"
    ],
-   "articles90": 23,
-   "recent20": 5,
-   "press": 22,
-   "firstArticleAt": "2026-11-02T08:29:00.000Z",
+   "articles90": 18,
+   "recent20": 4,
+   "press": 17,
+   "firstArticleAt": "2026-11-02T08:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "자체 GPU부터 고객사 장비까지…삼성SDS, 구미 AI 데이터센터 착공",
-     "press": "popcornnews.net",
+     "title": "코스피, '블랙먼데이' 우려 딛고 2%대 상승…5800선 회복",
+     "press": "paxetv.com",
      "publishedAt": "2026-11-02T09:54:00.000Z",
-     "link": "http://www.popcornnews.net/news/articleView.html?idxno=138407"
+     "link": "http://www.paxetv.com/news/articleView.html?idxno=285888"
     },
     {
-     "title": "삼성, 구미 AI 데이터센터 착공…영남권 AI투자 본격화",
-     "press": "dongponews.net",
-     "publishedAt": "2026-11-02T09:54:00.000Z",
-     "link": "https://www.dongponews.net/news/articleView.html?idxno=61415"
+     "title": "[집중진단] 코스피 구원투수된 '연기금·하이닉스'…코스피 공포 딛고 ...",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-02T09:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541244?sid=101"
     },
     {
-     "title": "'삼성 영남권 60조 투자' 본격화...삼성SDS, 구미 AI 데이터센터 착공",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-02T09:54:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=778423"
+     "title": "[밸류업시그널③] \"저PBR 낙인 시작\"… 코스피 '유통사' 0.15~0.17배 수준",
+     "press": "economytalk.kr",
+     "publishedAt": "2026-11-02T09:50:00.000Z",
+     "link": "http://www.economytalk.kr/news/articleView.html?idxno=425029"
+    }
+   ]
+  },
+  {
+   "keyword": "대전 스토킹 살해 신상공개",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 16,
+   "recent20": 4,
+   "press": 16,
+   "firstArticleAt": "2026-11-02T08:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'대전 전 연인 살해' 40대, 신상 공개된다",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-02T10:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005435469?sid=102"
+    },
+    {
+     "title": "'대전 교제 살인' 40대 신상공개 결정…피의자 이의제기에 일시 유예",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-02T09:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009265662?sid=102"
+    },
+    {
+     "title": "대전 전 연인 살해 40대 신상공개 결정…이의제기로 9일 이후 공개(종합...",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-02T09:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004205679?sid=102"
     }
    ]
   },
   {
    "keyword": "현대 제네시스",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 23,
-   "recent20": 1,
-   "press": 22,
-   "firstArticleAt": "2026-11-02T08:30:00.000Z",
+   "articles90": 16,
+   "recent20": 0,
+   "press": 15,
+   "firstArticleAt": "2026-11-02T08:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -109,78 +139,142 @@
    ]
   },
   {
-   "keyword": "LX홀딩스 임원인사",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 18,
-   "recent20": 4,
-   "press": 16,
-   "firstArticleAt": "2026-11-02T09:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "LX홀딩스, 염민석 CFO 선임…정기 임원인사 단행",
-     "press": "daily.hankooki.com",
-     "publishedAt": "2026-11-02T09:58:00.000Z",
-     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1420941"
-    },
-    {
-     "title": "LX홀딩스, 2027년 정기 임원 인사…재무·기획 인재 중용",
-     "press": "fetv.co.kr",
-     "publishedAt": "2026-11-02T09:52:00.000Z",
-     "link": "https://www.fetv.co.kr/news/articleView.html?idxno=312940"
-    },
-    {
-     "title": "LX홀딩스, 2027년 정기 임원 인사…CFO에 염민석 상무",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-02T09:44:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2013389"
-    }
-   ]
-  },
-  {
-   "keyword": "대전 스토킹 살해 신상공개",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 15,
-   "recent20": 4,
-   "press": 15,
-   "firstArticleAt": "2026-11-02T08:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[속보]대전 ‘스토킹 신고’ 前연인 살해범 40대, 신상공개 최종 결정",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-02T09:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002717800?sid=102"
-    },
-    {
-     "title": "'대전 교제 살인' 40대 신상공개 결정…피의자 이의제기에 일시 유예",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-02T09:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009265662?sid=102"
-    },
-    {
-     "title": "대전 전 연인 살해 40대 신상공개 결정…이의제기로 9일 이후 공개(종합...",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-02T09:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205679?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "송미령 장관, 벼 수확 참여",
+   "keyword": "애경산업 3분기 최대매출 적자",
    "sources": [
     "nate"
    ],
+   "articles90": 14,
+   "recent20": 1,
+   "press": 14,
+   "firstArticleAt": "2026-11-02T08:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "애경산업, 3분기 매출 1904억 ‘역대 최대’…영업손실 33억",
+     "press": "fntimes.com",
+     "publishedAt": "2026-11-02T09:58:00.000Z",
+     "link": "https://www.fntimes.com/html/view.php?ud=202611021855467796b5b890e35c_18"
+    },
+    {
+     "title": "애경산업, 3분기 역대 최대 매출에도 영업손실…수익성 악화",
+     "press": "thepublic.kr",
+     "publishedAt": "2026-11-02T09:32:00.000Z",
+     "link": "https://www.thepublic.kr/news/articleView.html?idxno=324800"
+    },
+    {
+     "title": "애경산업, 3분기 최대 매출에도 영업적자···브랜드 투자 확대",
+     "press": "finomy.com",
+     "publishedAt": "2026-11-02T09:22:00.000Z",
+     "link": "http://www.finomy.com/news/articleView.html?idxno=265377"
+    }
+   ]
+  },
+  {
+   "keyword": "서울중수청 하도급 대금 송치",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 11,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-02T08:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "중수청, 공소시효 임박한 '하도급 대금 부당감액' 사건 송치…공소청 약...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-02T09:51:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261102001600"
+    },
+    {
+     "title": "서울중수청, '하도급 대금 미지급' 법인 송치…공정거래 송치 1호",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-02T09:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009265652?sid=102"
+    },
+    {
+     "title": "서울중수청, 공정거래 첫 송치…‘하도급 대금 3억 미지급’",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-02T09:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003694988?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "박수현",
+   "sources": [
+    "google"
+   ],
    "articles90": 12,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-02T08:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "박수현 지사 \"내년도 국비 2382억 추가 확보 총력\"",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-02T10:06:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1190594"
+    },
+    {
+     "title": "박수현 지사, 미국 출장 성과·내년 예산 확보 전략 발표",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-02T10:04:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3740051"
+    },
+    {
+     "title": "박수현 지사, 논산서 ‘충남통행’ 국방산단·AI 방산혁신클러스터 조성...",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-02T09:42:00.000Z",
+     "link": "http://www.breaknews.com/1247676"
+    }
+   ]
+  },
+  {
+   "keyword": "샤이니 민호, 마라톤 논란",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-02T08:53:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "샤이니 민호, 풀코스 완주→반칙 논란→'실격 처리' 빗발…\"페이스메이...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-02T09:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001406873"
+    },
+    {
+     "title": "[DM왔어요] 샤이니 민호 마라톤 완주에 ‘반칙 논란’…\"뒤에서 누가 밀...",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-02T09:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922109?sid=102"
+    },
+    {
+     "title": "샤이니 민호, 마라톤 완주 후 '등 밀어주기' 논란…실격 요구까지 나온...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-02T09:44:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16266377"
+    }
+   ]
+  },
+  {
+   "keyword": "송미령 장관 벼 수확",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
    "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-02T08:30:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-02T08:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -205,79 +299,15 @@
    ]
   },
   {
-   "keyword": "박수현",
-   "sources": [
-    "google"
-   ],
-   "articles90": 13,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-02T08:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "박수현 충남지사 “글로벌 기업 투자, 3력혁신·광속행정으로 뒷받침”",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-02T09:42:00.000Z",
-     "link": "http://www.breaknews.com/1247664"
-    },
-    {
-     "title": "박수현 지사, 논산서 ‘충남통행’ 국방산단·AI 방산혁신클러스터 조성...",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-02T09:42:00.000Z",
-     "link": "http://www.breaknews.com/1247676"
-    },
-    {
-     "title": "박수현 충남지사, 국비 13조 사수·추가 확보 집중",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-02T09:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000191280?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "낮과 밤은 서로에게",
+   "keyword": "경찰 수사개혁위 권고안 발표",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-02T08:39:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "좋은데 지루하고, 지루한 게 또 좋다…‘낮과 밤은 서로에게’ [한현정...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-02T09:54:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005757870"
-    },
-    {
-     "title": "'낮과 밤은 서로에게' 심은경 \"김종관 감독 차분함에 용기 가져\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-02T09:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/001/0016417022"
-    },
-    {
-     "title": "[영상] 장률-한선화, \"눈빛의 앙상블 잊지 못해\"(낮과 밤은 서로에게)",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-02T09:19:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000326403"
-    }
-   ]
-  },
-  {
-   "keyword": "경찰 수사개혁위 권고안 발표",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-02T08:30:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-02T08:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -304,10 +334,16 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 142,
-  "matched": 33,
-  "avgLeadMin": 66,
+  "flagged": 145,
+  "matched": 34,
+  "avgLeadMin": 65,
   "recent": [
+   {
+    "keyword": "이형일 부총리 현대차 방문",
+    "hitKeyword": "현대차 울산 생산라인 중단",
+    "hitAt": "2026-11-02T19:00:00+09:00",
+    "leadMin": 21
+   },
    {
     "keyword": "암표",
     "hitKeyword": "프로야구 티켓 암표 적발",
@@ -361,12 +397,6 @@
     "hitKeyword": "코스피 인텔 충격 극복",
     "hitAt": "2026-11-02T17:30:00+09:00",
     "leadMin": 22
-   },
-   {
-    "keyword": "대니엘 최원태 선발 맞대결",
-    "hitKeyword": "최원태 대니엘 맞대결",
-    "hitAt": "2026-11-02T17:00:00+09:00",
-    "leadMin": 94
    }
   ]
  }
