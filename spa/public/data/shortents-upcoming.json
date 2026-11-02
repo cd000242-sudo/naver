@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T16:10:35.415Z",
+ "builtAt": "2026-11-02T16:20:39.064Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,34 @@
  "measured": 28,
  "candidates": [
   {
-   "keyword": "삼성SDS 구미 데이터센터 착공",
+   "keyword": "1호기 탑승자 정보 유출",
    "sources": [
     "nate"
    ],
    "articles90": 5,
-   "recent20": 0,
+   "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-02T14:51:00.000Z",
+   "firstArticleAt": "2026-11-02T15:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성SDS, 구미 AI 데이터센터 착공… 영남권 60조 투자 첫발",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-02T15:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001882535?sid=101"
+     "title": "대통령 부부까지 여권번호 노출…1호기 탑승자 정보 유출",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-02T16:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001271413?sid=100"
     },
     {
-     "title": "삼성·LG, 데이터센터 사업에 속도",
+     "title": "대통령까지… ‘1호기’ 탑승자 168명 정보 유출",
      "press": "chosun.com",
-     "publishedAt": "2026-11-02T15:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004007370?sid=105"
+     "publishedAt": "2026-11-02T15:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004007427?sid=100"
     },
     {
-     "title": "AI 데이터센터로 무대 넓히는 SI… ‘두뇌’ 빌려주고 전기-냉각 제공",
-     "press": "donga.com",
-     "publishedAt": "2026-11-02T15:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003759526?sid=101"
+     "title": "대통령 부부 여권번호까지…'1호기 탑승자' 정보 노출",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-02T15:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400083?sid=100"
     }
    ]
   },
@@ -77,7 +77,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 180,
+  "flagged": 181,
   "matched": 59,
   "avgLeadMin": 121,
   "recent": [
