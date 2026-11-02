@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T16:00:31.451Z",
+ "builtAt": "2026-11-02T16:10:35.415Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 28,
  "candidates": [
   {
-   "keyword": "코스피 반등 마감",
+   "keyword": "삼성SDS 구미 데이터센터 착공",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 4,
+   "articles90": 5,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-02T14:40:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-02T14:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘검은 월요일’ 없었다… 코스피, 예상 뒤집고 반등",
+     "title": "삼성SDS, 구미 AI 데이터센터 착공… 영남권 60조 투자 첫발",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-02T15:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001882535?sid=101"
+    },
+    {
+     "title": "삼성·LG, 데이터센터 사업에 속도",
      "press": "chosun.com",
-     "publishedAt": "2026-11-02T15:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004007358?sid=101"
+     "publishedAt": "2026-11-02T15:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004007370?sid=105"
     },
     {
-     "title": "'인텔 쇼크' 떨었는데 2% 반등‥상승세 이어가나",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-02T15:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533054?sid=101"
-    },
-    {
-     "title": "美나스닥 반등·유가 6% 급락…코스피 2.24% 상승에도 외국인 '삼전닉스...",
-     "press": "greened.kr",
-     "publishedAt": "2026-11-02T15:03:00.000Z",
-     "link": "https://www.greened.kr/news/articleView.html?idxno=353679"
+     "title": "AI 데이터센터로 무대 넓히는 SI… ‘두뇌’ 빌려주고 전기-냉각 제공",
+     "press": "donga.com",
+     "publishedAt": "2026-11-02T15:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003759526?sid=101"
     }
    ]
   },
@@ -52,7 +52,7 @@
    "press": 4,
    "firstArticleAt": "2026-11-02T14:54:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
      "title": "자유 대한민국의 초석 이승만… 교과서에선 ‘反통일세력’처럼 묘사",
@@ -77,7 +77,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 179,
+  "flagged": 180,
   "matched": 59,
   "avgLeadMin": 121,
   "recent": [
