@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T11:59:25.956Z",
+ "builtAt": "2026-11-02T12:09:29.456Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,71 +8,71 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "브로드컴 과징금 확정",
    "sources": [
     "signal.bz",
-    "nate",
     "daum"
    ],
    "articles90": 17,
-   "recent20": 2,
+   "recent20": 5,
    "press": 17,
-   "firstArticleAt": "2026-11-02T10:34:00.000Z",
+   "firstArticleAt": "2026-11-02T10:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘삼성에 갑질’ 美 브로드컴…과징금 186억원 확정",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-02T11:58:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=20261102205342181438169980b3_1"
+     "title": "삼성전자에 장기계약 강요한 美 브로드컴⋯186억 과징금 확정",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-02T12:02:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2643223"
     },
     {
-     "title": "'삼성전자에 갑질' 브로드컴 190억 과징금 대법서 확정",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-02T11:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009265726?sid=102"
+     "title": "‘삼성전자에 갑질’ 美브로드컴... 대법원, 과징금 186억원 확정",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-02T12:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202066?sid=102"
     },
     {
-     "title": "삼성전자에 '갑질 계약' 강요한 브로드컴…186억원 과징금 확정",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-02T11:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205686?sid=102"
+     "title": "'삼성전자에 갑질' 美 브로드컴, 186억원 과징금 대법서 확정",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-02T12:00:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3445304"
     }
    ]
   },
   {
    "keyword": "연구",
    "sources": [
+    "signal.bz",
     "google"
    ],
    "articles90": 10,
    "recent20": 5,
    "press": 10,
-   "firstArticleAt": "2026-11-02T11:21:00.000Z",
+   "firstArticleAt": "2026-11-02T11:28:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "[K제약·바이오 미래] 신약 연구조직 새판 짠 제일약품",
-     "press": "00news.co.kr",
-     "publishedAt": "2026-11-02T11:52:00.000Z",
-     "link": "http://www.00news.co.kr/news/articleView.html?idxno=107667"
+     "title": "충남, 또 \"국방연구원 등 논산 집적\"…경기도와 대조",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-02T12:08:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1542478"
+    },
+    {
+     "title": "'장사의 신' 은현장, 구속된 김세의 방송석 차지…\"가로세로 장사 연구...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-02T12:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004121135"
     },
     {
      "title": "\"연구하는 병원으로 가는 길\"…순천향대 중앙의료원, 학술대회 개최",
      "press": "k-health.com",
      "publishedAt": "2026-11-02T11:52:00.000Z",
      "link": "https://www.k-health.com/news/articleView.html?idxno=101983"
-    },
-    {
-     "title": "박수현 충남지사 \"국립치의학연구원 천안 유치 직접 나선다\"",
-     "press": "tjb.co.kr",
-     "publishedAt": "2026-11-02T11:50:00.000Z",
-     "link": "https://www.tjb.co.kr/news05/bodo/view/id/105600"
     }
    ]
   },
@@ -82,12 +82,18 @@
     "signal.bz"
    ],
    "articles90": 7,
-   "recent20": 0,
+   "recent20": 1,
    "press": 7,
-   "firstArticleAt": "2026-11-02T10:32:00.000Z",
+   "firstArticleAt": "2026-11-02T10:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이란 \"美 '해상봉쇄 해제' 등 수용하면 이틀 내 호르무즈 개방\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-02T12:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005435481?sid=104"
+    },
     {
      "title": "이란 \"美 해상봉쇄 해제 등 수용 시 이틀 내 호르무즈 개방\"",
      "press": "etoday.co.kr",
@@ -99,44 +105,6 @@
      "press": "sedaily.com",
      "publishedAt": "2026-11-02T11:17:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/011/0004677944?sid=104"
-    },
-    {
-     "title": "이란 \"美 '7단계 제안' 수용시 이틀내 호르무즈 개방\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-02T10:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922125?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "하남시",
-   "sources": [
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-02T10:49:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "하남시 \"K-스타월드 민간공모 취소, 사업 백지화 아니다\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-02T11:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009265721?sid=102"
-    },
-    {
-     "title": "하남시, 한강 폐천부지 오염 정화 책임 행정소송 '승소'",
-     "press": "safetimes.co.kr",
-     "publishedAt": "2026-11-02T11:28:00.000Z",
-     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247112"
-    },
-    {
-     "title": "하남시 “K-스타월드 공모 취소, 백지화 아닌 정부 계획 연계 위한 것”",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-02T11:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001882501?sid=102"
     }
    ]
   },
@@ -173,9 +141,10 @@
    ]
   },
   {
-   "keyword": "김민재 차관 점검",
+   "keyword": "김민재 차관, 대통령기록관 점검",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
    "articles90": 11,
    "recent20": 0,
@@ -191,90 +160,38 @@
      "link": "https://n.news.naver.com/mnews/article/003/0014296281?sid=100"
     },
     {
-     "title": "대통령 외교 기획전시 준비 현장 점검",
+     "title": "김민재 행안부 차관, 대통령 외교 전시 현장 방문",
      "press": "news1.kr",
      "publishedAt": "2026-11-02T10:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009265703?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/421/0009265706?sid=102"
     },
     {
-     "title": "김민재 차관, 대통령 외교사 담은 전시 준비 상황 확인",
+     "title": "대통령의 외교, 세계를 품다…전시 준비 현장 찾은 김민재 차관",
      "press": "news1.kr",
      "publishedAt": "2026-11-02T10:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009265707?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "낮과 밤, 서로에게",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-02T10:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[포토] 달달한 분위기의 멜로 영화 <낮과 밤은 서로에게> 언론시사회",
-     "press": "ilyosisa.co.kr",
-     "publishedAt": "2026-11-02T11:00:00.000Z",
-     "link": "https://www.ilyosisa.co.kr/news/article.html?no=258707"
-    },
-    {
-     "title": "[포토] 인사말 하는 전소영 (낮과 밤은 서로에게)",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-02T10:38:00.000Z",
-     "link": "https://www.ajunews.com/view/20261102193559558"
-    },
-    {
-     "title": "[포토] 인사말 하는 주종혁 (낮과 밤은 서로에게)",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-02T10:36:00.000Z",
-     "link": "https://www.ajunews.com/view/20261102193401557"
-    }
-   ]
-  },
-  {
-   "keyword": "가덕도 신공항 공사비 증액",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-02T10:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국힘 “가덕 건설 의지 없는 정부…공사비 증액 확약해야”",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-02T10:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000160207?sid=100"
-    },
-    {
-     "title": "국민의힘 “가덕도신공항 공사비, 조속 해결 촉구”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-02T10:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012285685?sid=100"
-    },
-    {
-     "title": "[사설] 가덕도신공항 착공 늦춘 정부, 공사비 증액 확약하라",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-02T10:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000160188?sid=110"
+     "link": "https://n.news.naver.com/mnews/article/421/0009265704?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 165,
-  "matched": 45,
-  "avgLeadMin": 80,
+  "flagged": 166,
+  "matched": 47,
+  "avgLeadMin": 86,
   "recent": [
+   {
+    "keyword": "바이낸스 해킹",
+    "hitKeyword": "북한 바이낸스 해킹",
+    "hitAt": "2026-11-02T21:00:00+09:00",
+    "leadMin": 283
+   },
+   {
+    "keyword": "G마켓 개인정보 유출",
+    "hitKeyword": "G마켓 개인정보 유출",
+    "hitAt": "2026-11-02T21:00:00+09:00",
+    "leadMin": 172
+   },
    {
     "keyword": "샤이니 민호, 마라톤 논란",
     "hitKeyword": "샤이니 민호 마라톤 논란",
@@ -322,18 +239,6 @@
     "hitKeyword": "미국 중간선거",
     "hitAt": "2026-11-02T19:30:00+09:00",
     "leadMin": 122
-   },
-   {
-    "keyword": "하이브 개인정보 유출",
-    "hitKeyword": "하이브 정보 유출",
-    "hitAt": "2026-11-02T19:30:00+09:00",
-    "leadMin": 112
-   },
-   {
-    "keyword": "美 중간선거",
-    "hitKeyword": "미국 중간선거",
-    "hitAt": "2026-11-02T19:30:00+09:00",
-    "leadMin": 92
    }
   ]
  }
