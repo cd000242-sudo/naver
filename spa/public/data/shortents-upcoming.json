@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T05:25:50.613Z",
+ "builtAt": "2026-11-02T05:35:53.630Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,102 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 9,
+ "measured": 10,
  "candidates": [
-  {
-   "keyword": "김태균·오승환, APBC 합류",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 13,
-   "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-02T04:06:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "프로야구 레전드 오승환-김태균, APBC 대표팀 인스트럭터 맡아 투타 노하...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-02T05:23:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/081/0003694833"
-    },
-    {
-     "title": "'레전드' 김태균·오승환, 후배 위해 나섰다... 야구 대표팀 훈련 지도",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-02T05:14:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=878825"
-    },
-    {
-     "title": "김태균·오승환, 대표팀 인스트럭터로 합류…11월 국내 훈련 지도",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-02T05:14:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=622385"
-    }
-   ]
-  },
   {
    "keyword": "이재명 대통령과 의원들",
    "sources": [
     "nate"
    ],
-   "articles90": 30,
-   "recent20": 6,
-   "press": 12,
-   "firstArticleAt": "2026-11-02T04:04:00.000Z",
+   "articles90": 28,
+   "recent20": 7,
+   "press": 13,
+   "firstArticleAt": "2026-11-02T04:14:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "2027년도 예산안 시정연설하는 이재명 대통령",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-02T05:22:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3739596"
+     "title": "국힘 부산의원들 “李정부, 가덕신공항 적기개항 의지 있나”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-02T05:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002717684?sid=100"
+    },
+    {
+     "title": "이재명 대통령, 해남 배추값 폭락 우려에 \"대책 강구\"",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-02T05:28:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2013216"
     },
     {
      "title": "이재명 대통령, 2027년도 예산안 국회 시정연설",
      "press": "gukjenews.com",
      "publishedAt": "2026-11-02T05:22:00.000Z",
      "link": "https://www.gukjenews.com/news/articleView.html?idxno=3739591"
-    },
-    {
-     "title": "의원들과 셀카 찍는 이재명 대통령",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-02T05:20:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3739588"
     }
    ]
   },
   {
-   "keyword": "부평구",
+   "keyword": "100일의 거짓말",
    "sources": [
-    "signal.bz",
-    "google"
+    "nate"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-02T04:00:00.000Z",
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-02T04:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "과태료 안물리고 처리 완료…택시 민원 조작한 인천 부평구 공무원 해임",
-     "press": "kgnews.co.kr",
-     "publishedAt": "2026-11-02T05:08:00.000Z",
-     "link": "https://www.kgnews.co.kr/news/article.html?no=917788"
+     "title": "'100일의 거짓말' 김유정, 박진영에 전한 진심⋯깊어진 멜로 감정선",
+     "press": "joynews24.com",
+     "publishedAt": "2026-11-02T05:22:00.000Z",
+     "link": "http://www.joynews24.com/view/2021555"
     },
     {
-     "title": "인천 부평구 십정1동, 남인천신협의 지속적인 이웃사랑으로 동절기 생활...",
-     "press": "kmaeil.com",
-     "publishedAt": "2026-11-02T05:00:00.000Z",
-     "link": "https://www.kmaeil.com/news/articleView.html?idxno=656638"
+     "title": "[★해시태그] 김유정 미담 또 터졌다, '100일의 거짓말' 아역에게 준 손...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-02T05:21:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002075426"
     },
     {
-     "title": "인천 부평구, 재개발·재건축 원스탑 지원센터 출범 앞두고 주민 간담회...",
-     "press": "kmaeil.com",
-     "publishedAt": "2026-11-02T04:58:00.000Z",
-     "link": "https://www.kmaeil.com/news/articleView.html?idxno=656636"
+     "title": "'100일의 거짓말' 김유정, 거짓말 대신 진심 택했다",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-02T05:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000326356"
     }
    ]
   },
@@ -112,13 +79,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 7,
    "recent20": 1,
-   "press": 4,
+   "press": 5,
    "firstArticleAt": "2026-11-02T04:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "국힘 부산의원들 “李정부, 가덕신공항 적기개항 의지 있나”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-02T05:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002717684?sid=100"
+    },
     {
      "title": "가덕도신공항 '공사비 늪' 빠지나...국민의힘, 특별법 개정 앞서 정부 결...",
      "press": "news.bbsi.co.kr",
@@ -130,28 +103,27 @@
      "press": "thepublic.kr",
      "publishedAt": "2026-11-02T04:54:00.000Z",
      "link": "https://www.thepublic.kr/news/articleView.html?idxno=324699"
-    },
-    {
-     "title": "국민의힘 이성권 부산시당위원장, 가덕도 신공항 공사비 문제 관련 회견",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-02T04:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016416058?sid=100"
     }
    ]
   },
   {
    "keyword": "구룡마을 화재 합동감식",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
    "firstArticleAt": "2026-11-02T04:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"소방차보다 먼저 어르신들 옮겨\"…화재 속 타는 주민들, 방화 의심까지",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-02T05:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000518683?sid=102"
+    },
     {
      "title": "구룡마을 화재 추가 합동감식...\"대책 마련해야\"",
      "press": "joongangenews.com",
@@ -163,44 +135,40 @@
      "press": "jnilbo.com",
      "publishedAt": "2026-11-02T04:39:00.000Z",
      "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000078792"
-    },
-    {
-     "title": "까맣게 불 탄 '구룡마을 화재'…경찰·소방 막바지 합동감식",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-02T04:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006402088?sid=102"
     }
    ]
   },
   {
-   "keyword": "하이닉스 외국인 기관 순매수 증가",
+   "keyword": "정년 연장",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "google",
+    "daum"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T04:10:00.000Z",
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-02T05:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "빅테크 쇼크에 코스피 3.48% 급락… iM증권 \"외국인 매도 압력∙삼전닉...",
-     "press": "asiatime.co.kr",
-     "publishedAt": "2026-11-02T05:24:00.000Z",
-     "link": "https://www.asiatime.co.kr/article/20261102500337"
+     "title": "정년 후 연금 수령까지 3년간 ‘소득절벽’…재취업자 61%가 임시·일용...",
+     "press": "donga.com",
+     "publishedAt": "2026-11-02T05:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003759384?sid=101"
     },
     {
-     "title": "코스피, 기관 1조원대 '사자'에 3% 상승 전환",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-02T04:45:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261102001038"
+     "title": "연금 65세·정년 60세 '소득공백 5년'…정년 연장 연내 이뤄질까",
+     "press": "ntoday.co.kr",
+     "publishedAt": "2026-11-02T05:20:00.000Z",
+     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=130541"
     },
     {
-     "title": "코스피, 하락 출발 뒤 2%대 상승 전환…기관 1조원 순매수",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-02T04:10:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2642989"
+     "title": "정년 후 3년 '소득 절벽'에 소득급감 가구 70%이상 적자",
+     "press": "newsfc.co.kr",
+     "publishedAt": "2026-11-02T05:10:00.000Z",
+     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82164"
     }
    ]
   },
@@ -209,40 +177,64 @@
    "sources": [
     "nate"
    ],
-   "articles90": 17,
-   "recent20": 0,
-   "press": 2,
+   "articles90": 21,
+   "recent20": 4,
+   "press": 3,
    "firstArticleAt": "2026-11-02T04:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "공소청 출범 한달",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-02T04:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009264735?sid=102"
+     "title": "출범 한 달 맞은 공소청",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-02T05:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014295323?sid=102"
     },
     {
-     "title": "검찰 폐지, 공소청 출범 한달",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-02T04:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009264734?sid=102"
+     "title": "검찰청 폐지 한 달",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-02T05:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014295319?sid=102"
     },
     {
-     "title": "출범 한달 맞이한 공소청",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-02T04:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009264732?sid=102"
+     "title": "검찰청 폐지 한 달 맞은 공소청",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-02T05:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014295331?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 46,
-  "matched": 8,
-  "avgLeadMin": 34,
+  "flagged": 48,
+  "matched": 12,
+  "avgLeadMin": 48,
   "recent": [
+   {
+    "keyword": "결제주기 단축 시행",
+    "hitKeyword": "주식 결제주기 T+1 단축",
+    "hitAt": "2026-11-02T14:30:00+09:00",
+    "leadMin": 140
+   },
+   {
+    "keyword": "결제주기 단축 발표",
+    "hitKeyword": "주식 결제주기 T+1 단축",
+    "hitAt": "2026-11-02T14:30:00+09:00",
+    "leadMin": 105
+   },
+   {
+    "keyword": "구로 중환자실 시신",
+    "hitKeyword": "구로 미라화 시신 퇴원",
+    "hitAt": "2026-11-02T14:30:00+09:00",
+    "leadMin": 44
+   },
+   {
+    "keyword": "구로 미라화 시신 퇴원 사건",
+    "hitKeyword": "구로 미라화 시신 퇴원",
+    "hitAt": "2026-11-02T14:30:00+09:00",
+    "leadMin": 14
+   },
    {
     "keyword": "lafc",
     "hitKeyword": "LAFC 손흥민 고군분투",
@@ -278,18 +270,6 @@
     "hitKeyword": "학부모 민원 계주 취소",
     "hitAt": "2026-11-02T13:00:00+09:00",
     "leadMin": 60
-   },
-   {
-    "keyword": "티아라",
-    "hitKeyword": "티아라 소연 임신",
-    "hitAt": "2026-11-02T13:00:00+09:00",
-    "leadMin": 5
-   },
-   {
-    "keyword": "박항서 감독 인종차별",
-    "hitKeyword": "박항서 인종차별 분노",
-    "hitAt": "2026-11-02T12:00:00+09:00",
-    "leadMin": 21
    }
   ]
  }
