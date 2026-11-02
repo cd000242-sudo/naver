@@ -21,7 +21,7 @@ concurrency:
 jobs:
   refresh:
     name: Collect and commit snapshots
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04 # 2026-11-02: ubuntu-latest 가 26.04 로 바뀌어 Playwright 1.60 이 chromium 의존성을 못 깔아 갱신이 멈췄다(10-24부터)
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
