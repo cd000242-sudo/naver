@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T02:39:24.961Z",
+ "builtAt": "2026-11-02T02:49:31.832Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,75 +16,106 @@
     "nate",
     "daum"
    ],
-   "articles90": 44,
-   "recent20": 12,
-   "press": 36,
+   "articles90": 46,
+   "recent20": 4,
+   "press": 37,
    "firstArticleAt": "2026-11-02T01:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "특검, 중앙선관위원장실 등 압수수색…9억원대 ‘활동비 부당 지급’ 의...",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-02T02:48:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611020085"
+    },
+    {
+     "title": "선관위 특검, '공추비 의혹' 압수수색…\"9억 대 국고 손실\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-02T02:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000921960?sid=102"
+    },
+    {
      "title": "특검, 중앙선관위 등 압수수색…'공명선거추진비' 부정 지급 의혹",
      "press": "newstomato.com",
      "publishedAt": "2026-11-02T02:34:00.000Z",
      "link": "http://www.newstomato.com/ReadNews.aspx?no=1318883&inflow=N"
-    },
-    {
-     "title": "특검, '활동비 부당지급' 중앙선관위 위원장실 등 압수수색",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-02T02:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205373?sid=102"
-    },
-    {
-     "title": "특검, 중앙선관위 '공추비' 의혹 겨냥…위원장실 등 압수수색(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-02T02:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014294664?sid=102"
     }
    ]
   },
   {
-   "keyword": "LG CNS 해외 AI센터 구축",
+   "keyword": "박항서 감독 인종차별",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 33,
-   "recent20": 4,
-   "press": 33,
-   "firstArticleAt": "2026-11-02T01:10:00.000Z",
+   "articles90": 31,
+   "recent20": 6,
+   "press": 30,
+   "firstArticleAt": "2026-11-02T01:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "LG CNS, 인니 자카르타에 30MW급 AI데이터센터 구축 완료",
-     "press": "itdaily.kr",
-     "publishedAt": "2026-11-02T02:34:00.000Z",
-     "link": "https://www.itdaily.kr/news/articleView.html?idxno=242605"
+     "title": "\"헤이, 김치맨\" 박항서 감독, 태국 팬 조롱에 격분…관중과 충돌",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-02T02:46:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109662611825"
     },
     {
-     "title": "LG CNS, 인도네시아에 30MW AI 데이터센터 완공…해외 사업 확대",
-     "press": "theviewers.co.kr",
-     "publishedAt": "2026-11-02T02:34:00.000Z",
-     "link": "https://theviewers.co.kr/View.aspx?No=4292938"
+     "title": "박항서 감독 향해 “김치맨”…태국 원정서 인종차별 조롱에 강력 대응",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-02T02:38:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/241/0003538606"
     },
     {
-     "title": "LG CNS, 국내 기업 최초 해외 AI데이터센터 구축",
-     "press": "megaeconomy.co.kr",
-     "publishedAt": "2026-11-02T02:28:00.000Z",
-     "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065579908053234"
+     "title": "\"X킹 김치맨\" 조롱에 박항서 격분… 태국 축구장서 무슨 일?",
+     "press": "busan.com",
+     "publishedAt": "2026-11-02T02:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001405142?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "LG CNS 해외 구축",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 28,
+   "recent20": 5,
+   "press": 28,
+   "firstArticleAt": "2026-11-02T01:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "LG CNS, 인니에 AI데이터센터 완공",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-02T02:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002717596?sid=105"
+    },
+    {
+     "title": "LG CNS, 인도네시아 30MW급 AI데이터센터 완공…해외 사업 확대",
+     "press": "ziksir.com",
+     "publishedAt": "2026-11-02T02:42:00.000Z",
+     "link": "https://www.ziksir.com/news/articleView.html?idxno=151628"
+    },
+    {
+     "title": "LG CNS, 인니 30MW AI 데이터센터 완공…국내 기업 첫 해외 구축",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-02T02:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000547782?sid=101"
     }
    ]
   },
   {
    "keyword": "KT, 3G 가입 중단",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 32,
-   "recent20": 3,
-   "press": 32,
-   "firstArticleAt": "2026-11-02T01:10:00.000Z",
+   "articles90": 25,
+   "recent20": 0,
+   "press": 25,
+   "firstArticleAt": "2026-11-02T01:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -109,67 +140,35 @@
    ]
   },
   {
-   "keyword": "박항서 감독 인종차별",
+   "keyword": "이재명 대통령 시정연설",
    "sources": [
-    "signal.bz"
+    "nate",
+    "daum"
    ],
-   "articles90": 32,
-   "recent20": 9,
-   "press": 31,
-   "firstArticleAt": "2026-11-02T01:10:00.000Z",
+   "articles90": 66,
+   "recent20": 66,
+   "press": 21,
+   "firstArticleAt": "2026-11-02T02:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "박항서 감독 향해 “김치맨”…태국 원정서 인종차별 조롱에 강력 대응",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-02T02:38:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/241/0003538606"
+     "title": "국민의힘 의원들의 항의성 발언 경청하는 이재명 대통령",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-02T02:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004205409?sid=100"
     },
     {
-     "title": "\"X킹 김치맨\" 조롱에 박항서 격분… 태국 축구장서 무슨 일?",
-     "press": "busan.com",
-     "publishedAt": "2026-11-02T02:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001405142?sid=104"
+     "title": "장동혁 “이 대통령, 본인 하고 싶은 말만 하고 가”",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-02T02:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002830258?sid=100"
     },
     {
-     "title": "박항서의 깐짜나부리 무승부 속 인종차별 논란 파타야 관중 \"헤이, 김치...",
-     "press": "ftimes.kr",
-     "publishedAt": "2026-11-02T02:36:00.000Z",
-     "link": "https://www.ftimes.kr/news/articleView.html?idxno=40810"
-    }
-   ]
-  },
-  {
-   "keyword": "국회 시정연설 이재명",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 53,
-   "recent20": 53,
-   "press": 9,
-   "firstArticleAt": "2026-11-02T02:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "예산안 시정연설 마치고 국회 나서는 이재명 대통령",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-02T02:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016415687?sid=100"
-    },
-    {
-     "title": "李 대통령 \"더 나은 세상을 위한 합리적 경쟁\"… 趙 의장 \"국회도 책임감...",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-02T02:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000191222?sid=100"
-    },
-    {
-     "title": "시정연설 마친 뒤 이동하는 이재명 대통령",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-02T02:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016415668?sid=100"
+     "title": "국민의힘 의원들 향해 인사하는 이재명 대통령",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-02T02:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004205410?sid=100"
     }
    ]
   },
@@ -179,37 +178,37 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 30,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-02T01:11:00.000Z",
+   "articles90": 25,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-02T01:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "법원 도착한 이만희",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-02T01:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205328?sid=102"
+     "title": "'국힘 당원 가입 강요' 이만희 등 신천지 간부, 첫 공판서 혐의 부인…...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-02T02:41:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261102000714"
     },
     {
-     "title": "신천지 이만희 휠체어 타고 공판 출석",
+     "title": "신천지 이만희 공판 출석",
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-02T01:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205330?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/079/0004205329?sid=102"
     },
     {
-     "title": "이만희 신천지 총회장 공판 출석",
+     "title": "이만희 공판 출석",
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-02T01:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205325?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/079/0004205326?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 6,
+  "flagged": 8,
   "matched": 0,
   "avgLeadMin": null,
   "recent": []
