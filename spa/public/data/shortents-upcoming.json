@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T04:15:28.991Z",
+ "builtAt": "2026-11-02T04:25:32.929Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,70 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 6,
  "candidates": [
   {
    "keyword": "인사하는 이재명 대통령",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 71,
-   "recent20": 4,
-   "press": 26,
-   "firstArticleAt": "2026-11-02T03:00:00.000Z",
+   "recent20": 8,
+   "press": 27,
+   "firstArticleAt": "2026-11-02T03:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[종합] 李대통령 \"불평등 'K자 성장' 한계 극복...성장·분배 낡은 논쟁...",
-     "press": "joseilbo.com",
+     "title": "李대통령 \"모두의 성장으로 대전환...관건은 실행과 속도\" [전문]",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-02T04:20:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=560349"
+    },
+    {
+     "title": "국민의힘 향해 인사하는 이재명 대통령",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-02T04:15:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261102001018"
+    },
+    {
+     "title": "연설 마치고 인사 나누는 이재명 대통령",
+     "press": "newspim.com",
      "publishedAt": "2026-11-02T04:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002393107?sid=100"
-    },
-    {
-     "title": "[시정연설] 피켓 든 野 의원들 사이로 들어선 李대통령…조희대엔 \"잘 ...",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-02T04:08:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=747439"
-    },
-    {
-     "title": "“대통령 아들부터 본인 살 집 직접 구하라고 하라”",
-     "press": "naeil.com",
-     "publishedAt": "2026-11-02T04:04:00.000Z",
-     "link": "https://www.naeil.com/news/read/607219?ref=naver"
-    }
-   ]
-  },
-  {
-   "keyword": "lafc",
-   "sources": [
-    "google"
-   ],
-   "articles90": 17,
-   "recent20": 10,
-   "press": 16,
-   "firstArticleAt": "2026-11-02T03:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'손흥민 3경기 연속 침묵' LAFC, 미네소타에 1-3 완패…4위 달성 무산",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-02T04:12:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109664269031"
-    },
-    {
-     "title": "미네소타 수비에 꽁꽁묶인 손흥민...LAFC도 1-3 완패",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-02T04:09:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/410/0001145728"
-    },
-    {
-     "title": "손흥민 3경기째 침묵, LAFC도 웃지 못했다…PO 상위 시드 불발",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-02T04:08:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/025/0003562165"
+     "link": "https://www.newspim.com/news/view/20261102001003"
     }
    ]
   },
@@ -80,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 4,
-   "press": 15,
-   "firstArticleAt": "2026-11-02T02:48:00.000Z",
+   "articles90": 13,
+   "recent20": 3,
+   "press": 13,
+   "firstArticleAt": "2026-11-02T02:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "강원 철원 전방부대서 ‘육군 하사’ 외상 입고 숨져",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-02T04:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002830267?sid=100"
+    },
     {
      "title": "강원 철원 육군 부대서 20대 하사 숨진 채 발견…군·경찰 조사",
      "press": "slist.kr",
@@ -94,29 +67,22 @@
      "link": "https://www.slist.kr/news/articleView.html?idxno=778332"
     },
     {
-     "title": "[속보] 강원 철원 전방 부대서 부사관 숨진 채 발견",
+     "title": "[속보] 강원 철원 전방 부대서 20대 하사 숨진 채 발견",
      "press": "kyeonggi.com",
      "publishedAt": "2026-11-02T04:06:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/666/0000130180?sid=102"
-    },
-    {
-     "title": "육군 전방 부대서 부사관 총상 사망·공군 KT-1 훈련기 공중 접촉 비상 ...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-02T04:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005597976?sid=100"
     }
    ]
   },
   {
    "keyword": "특검 중앙선관위 압수수색",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-02T02:48:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-02T03:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -141,111 +107,14 @@
    ]
   },
   {
-   "keyword": "저pbr 기업 151 명단",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 8,
-   "recent20": 3,
-   "press": 8,
-   "firstArticleAt": "2026-11-02T02:47:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "11월 증시, 미국발 빅 이벤트보다 김현정 쇼크...기업가치 제고 법적 의...",
-     "press": "financialpost.co.kr",
-     "publishedAt": "2026-11-02T04:08:00.000Z",
-     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=283993"
-    },
-    {
-     "title": "‘저PBR’ 상장사 151곳 첫 공개…평균 PBR 0.25배",
-     "press": "naeil.com",
-     "publishedAt": "2026-11-02T04:02:00.000Z",
-     "link": "https://www.naeil.com/news/read/607203?ref=naver"
-    },
-    {
-     "title": "[특징주] 저PBR 기업 첫 공개에 관련株 '강세'",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-02T04:00:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261102000693"
-    }
-   ]
-  },
-  {
-   "keyword": "조경태 악수",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-02T02:46:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "연설끝나고 악수하는 李 대통령과 조경태 의원",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-02T03:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001882376?sid=100"
-    },
-    {
-     "title": "[단독]李와 홀로 악수…국힘 조경태 \"정치인의 기본 덕목\"",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-02T03:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006402064?sid=100"
-    },
-    {
-     "title": "홀로 남아 이재명 대통령과 인사하는 조경태 국민의힘 의원",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-02T03:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003150153?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "mls",
-   "sources": [
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-02T03:13:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[MLS REVIEW] '손흥민 3경기째 침묵하자 LAFC도 와르르'…하위권 미네소...",
-     "press": "interfootball.co.kr",
-     "publishedAt": "2026-11-02T04:05:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/413/0000226028"
-    },
-    {
-     "title": "[MLS REVIEW] '손흥민 3경기 연속 침묵→LAFC 대참사!' 하위권 미네소타에...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-02T03:53:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/477/0000636559"
-    },
-    {
-     "title": "[MLS 리뷰] '초비상!' 손흥민, 결국 고배 삼켰다...LAFC, 미네소타전 1-3...",
-     "press": "sportalkorea.com",
-     "publishedAt": "2026-11-02T03:44:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/139/0002255410"
-    }
-   ]
-  },
-  {
    "keyword": "구룡마을 화재 감식",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 19,
+   "articles90": 6,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-02T02:50:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-02T02:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -266,38 +135,6 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-02T03:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016415908?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "U-17 월드컵 우간다 첫 경기",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-02T02:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김현준호, U-17 월드컵 최종명단 21명 확정…19일 우간다와 첫 경기",
-     "press": "dailysportshankook.co.kr",
-     "publishedAt": "2026-11-02T03:44:00.000Z",
-     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435068"
-    },
-    {
-     "title": "FIFA U-17 월드컵 최종명단 21명 확정… 19일 우간다와 첫 경기",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-02T03:28:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3445082"
-    },
-    {
-     "title": "[오피셜] 韓 U-17 대표팀 월드컵 21인 최종 명단 발표… '유일 2010년생'...",
-     "press": "besteleven.com",
-     "publishedAt": "2026-11-02T03:06:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/343/0000148651"
     }
    ]
   }
