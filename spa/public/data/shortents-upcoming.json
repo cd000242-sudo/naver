@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T23:02:56.381Z",
+ "builtAt": "2026-11-02T23:12:59.509Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "김여정, 바이낸스 도발 주시",
+   "keyword": "이란 협상 기대 유가 급락",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 45,
-   "recent20": 7,
-   "press": 42,
-   "firstArticleAt": "2026-11-02T21:34:00.000Z",
+   "articles90": 61,
+   "recent20": 13,
+   "press": 49,
+   "firstArticleAt": "2026-11-02T21:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김여정 \"싸이버사기가 우리 소행? 황당무계한 낭설\"",
-     "press": "viewsnnews.com",
-     "publishedAt": "2026-11-02T23:02:00.000Z",
-     "link": "https://www.viewsnnews.com/article?q=239426"
+     "title": "국제유가, 중둥 외교적 협상 가능성 부각 등 영향 7%대 급락-WTI 배럴당...",
+     "press": "econonews.co.kr",
+     "publishedAt": "2026-11-02T23:12:00.000Z",
+     "link": "http://www.econonews.co.kr/news/articleView.html?idxno=446631"
     },
     {
-     "title": "김여정, 바이낸스 해킹 배후 지목에 반발…\"미국 정치적 도발…예의주시...",
-     "press": "kado.net",
-     "publishedAt": "2026-11-02T22:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000209023?sid=100"
+     "title": "뉴욕 증시, 유가 하락에도 기술주 매도에 혼조 마감... 나스닥도 하락",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-02T23:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002393164?sid=101"
     },
     {
-     "title": "北김여정 “바이낸스 해킹 美주장 황당무계 낭설…정치적 도발”",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-02T22:52:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611030006"
+     "title": "유럽증시, 미국과 이란간 협상 기대감 등 영향 일제히 올라⋯독일 0.63%...",
+     "press": "econonews.co.kr",
+     "publishedAt": "2026-11-02T23:08:00.000Z",
+     "link": "http://www.econonews.co.kr/news/articleView.html?idxno=446630"
     }
    ]
   },
@@ -48,29 +48,29 @@
     "google"
    ],
    "articles90": 27,
-   "recent20": 8,
+   "recent20": 4,
    "press": 26,
-   "firstArticleAt": "2026-11-02T21:36:00.000Z",
+   "firstArticleAt": "2026-11-02T21:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "애플, 中 매출 이어 가이던스도 실망…시간외 주가 3%대 급락(종합)",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-02T23:10:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4442638"
+    },
+    {
+     "title": "애플 \"메모리값 전례 없는 수준\"…호실적에도 시간외 4% 급락",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-02T23:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005349488?sid=105"
+    },
     {
      "title": "애플, 메모리 대란에도 7∼9월 분기 최대 매출…\"가격 인상·원가절감으...",
      "press": "newsroad.co.kr",
      "publishedAt": "2026-11-02T23:02:00.000Z",
      "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=66938"
-    },
-    {
-     "title": "가격 올린 애플, 결국 웃었다...분기 역대 최고매출 달성",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-02T22:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001271429?sid=105"
-    },
-    {
-     "title": "\"역대 4분기 최고 실적\" 쓴 애플…'아이폰·맥' 견인 속 부품난 돌파",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-02T22:52:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000078968"
     }
    ]
   },
@@ -79,10 +79,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 15,
-   "recent20": 4,
-   "press": 14,
-   "firstArticleAt": "2026-11-02T21:40:00.000Z",
+   "articles90": 14,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-02T21:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,14 +107,46 @@
    ]
   },
   {
+   "keyword": "트럼프 중간선거 마지막 유세",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 12,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-02T21:47:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프, 중간선거 앞두고 20개 주 이상 순회…워싱턴 링컨기념관서 마지...",
+     "press": "fntoday.co.kr",
+     "publishedAt": "2026-11-02T23:08:00.000Z",
+     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=396853"
+    },
+    {
+     "title": "트럼프, 선거 전날 ‘연못 공사’ 자랑 20분 뒤에야 “생애 가장 중요한...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-02T22:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002830391?sid=104"
+    },
+    {
+     "title": "'텃밭' 흔들리자 워싱턴 택했다…마지막까지 '지지층 결집' 호소",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-02T22:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000518803?sid=104"
+    }
+   ]
+  },
+  {
    "keyword": "북한 해커 비트코인 탈취",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 4,
-   "press": 8,
-   "firstArticleAt": "2026-11-02T21:34:00.000Z",
+   "articles90": 7,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-02T21:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -173,10 +205,34 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 207,
-  "matched": 79,
-  "avgLeadMin": 262,
+  "flagged": 209,
+  "matched": 83,
+  "avgLeadMin": 252,
   "recent": [
+   {
+    "keyword": "김여정 바이낸스 사태",
+    "hitKeyword": "바이낸스 해킹 자금흐름",
+    "hitAt": "2026-11-03T08:00:00+09:00",
+    "leadMin": 68
+   },
+   {
+    "keyword": "김여정, 바이낸스 사태 예의주시",
+    "hitKeyword": "바이낸스 해킹 자금흐름",
+    "hitAt": "2026-11-03T08:00:00+09:00",
+    "leadMin": 37
+   },
+   {
+    "keyword": "팔란티어 주가",
+    "hitKeyword": "팔란티어 실적 상회",
+    "hitAt": "2026-11-03T08:00:00+09:00",
+    "leadMin": 37
+   },
+   {
+    "keyword": "김여정, 바이낸스 도발 주시",
+    "hitKeyword": "바이낸스 해킹 자금흐름",
+    "hitAt": "2026-11-03T08:00:00+09:00",
+    "leadMin": 17
+   },
    {
     "keyword": "기술",
     "hitKeyword": "나스닥 기술주 급락",
@@ -212,30 +268,6 @@
     "hitKeyword": "이란 대통령 대화 권한",
     "hitAt": "2026-11-03T06:30:00+09:00",
     "leadMin": 1120
-   },
-   {
-    "keyword": "인사하는 이재명 대통령",
-    "hitKeyword": "이란 대통령 대화 권한",
-    "hitAt": "2026-11-03T06:30:00+09:00",
-    "leadMin": 1065
-   },
-   {
-    "keyword": "국회 이재명 대통령",
-    "hitKeyword": "이란 대통령 대화 권한",
-    "hitAt": "2026-11-03T06:30:00+09:00",
-    "leadMin": 1055
-   },
-   {
-    "keyword": "시정연설 후 인사하는 이재명 대통령",
-    "hitKeyword": "이란 대통령 대화 권한",
-    "hitAt": "2026-11-03T06:30:00+09:00",
-    "leadMin": 1014
-   },
-   {
-    "keyword": "포스코 홀딩스",
-    "hitKeyword": "포스코 3분기 실적 개선",
-    "hitAt": "2026-11-03T06:30:00+09:00",
-    "leadMin": 914
    }
   ]
  }
