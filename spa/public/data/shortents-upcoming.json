@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T22:52:52.514Z",
+ "builtAt": "2026-11-02T23:02:56.381Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "김여정, 바이낸스 도발 주시",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 52,
-   "recent20": 10,
-   "press": 47,
-   "firstArticleAt": "2026-11-02T21:23:00.000Z",
+   "articles90": 45,
+   "recent20": 7,
+   "press": 42,
+   "firstArticleAt": "2026-11-02T21:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김여정 \"싸이버사기가 우리 소행? 황당무계한 낭설\"",
+     "press": "viewsnnews.com",
+     "publishedAt": "2026-11-02T23:02:00.000Z",
+     "link": "https://www.viewsnnews.com/article?q=239426"
+    },
+    {
+     "title": "김여정, 바이낸스 해킹 배후 지목에 반발…\"미국 정치적 도발…예의주시...",
+     "press": "kado.net",
+     "publishedAt": "2026-11-02T22:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000209023?sid=100"
+    },
     {
      "title": "北김여정 “바이낸스 해킹 美주장 황당무계 낭설…정치적 도발”",
      "press": "kukinews.com",
      "publishedAt": "2026-11-02T22:52:00.000Z",
      "link": "https://www.kukinews.com/article/view/kuk202611030006"
-    },
-    {
-     "title": "北김여정, 美 바이낸스 사태 배후 지목에 \"여러 측면에서 재고해 볼 정...",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-02T22:50:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/03/2026110300024.html"
-    },
-    {
-     "title": "8조원대 해킹 배후 지목에 발끈한 김여정…북미 관계 재검토 경고",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-02T22:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205724?sid=100"
     }
    ]
   },
@@ -47,30 +47,62 @@
    "sources": [
     "google"
    ],
-   "articles90": 24,
-   "recent20": 7,
-   "press": 23,
+   "articles90": 27,
+   "recent20": 8,
+   "press": 26,
    "firstArticleAt": "2026-11-02T21:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "애플, 가격으로 실적 방어했지만…아이폰·서비스 성장 둔화 우려",
-     "press": "mk.co.kr",
+     "title": "애플, 메모리 대란에도 7∼9월 분기 최대 매출…\"가격 인상·원가절감으...",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-02T23:02:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=66938"
+    },
+    {
+     "title": "가격 올린 애플, 결국 웃었다...분기 역대 최고매출 달성",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-02T22:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001271429?sid=105"
+    },
+    {
+     "title": "\"역대 4분기 최고 실적\" 쓴 애플…'아이폰·맥' 견인 속 부품난 돌파",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-02T22:52:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000078968"
+    }
+   ]
+  },
+  {
+   "keyword": "대통령 부부 여권번호 노출",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 15,
+   "recent20": 4,
+   "press": 14,
+   "firstArticleAt": "2026-11-02T21:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이재명 대통령 여권번호 유출… \"경호 참사로 이어질 수 있었다\"",
+     "press": "mediatoday.co.kr",
+     "publishedAt": "2026-11-02T23:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/006/0000138534?sid=102"
+    },
+    {
+     "title": "대통령 부부 여권번호까지 털렸다…청와대 “사전 인지 후 대응 조치”...",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-02T22:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000366175?sid=100"
+    },
+    {
+     "title": "[손병관의 뉴스프레소] 대통령 전용기 탑승자 개인정보, 5개월간 유료사...",
+     "press": "ohmynews.com",
      "publishedAt": "2026-11-02T22:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005757933?sid=105"
-    },
-    {
-     "title": "애플, 7∼9월 분기 최고매출…\"제품 가격 올려 메모리대란 상쇄\"",
-     "press": "tfmedia.co.kr",
-     "publishedAt": "2026-11-02T22:48:00.000Z",
-     "link": "https://www.tfmedia.co.kr/news/article.html?no=208592"
-    },
-    {
-     "title": "‘최고매출’ 애플 “가격 올려 메모리대란 상쇄…듀오 반품은 극히 적...",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-02T22:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001882586?sid=101"
+     "link": "https://n.news.naver.com/mnews/article/047/0002534402?sid=102"
     }
    ]
   },
@@ -79,13 +111,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
+   "articles90": 9,
    "recent20": 4,
-   "press": 10,
-   "firstArticleAt": "2026-11-02T21:24:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-02T21:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "솔라나 거쳐 비트코인으로⋯북한 해커, 자금세탁 추적망 교란",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-02T23:02:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2643258"
+    },
     {
      "title": "北 해커, 바이낸스 탈취 자금 2차 세탁⋯비트코인으로 전환",
      "press": "inews24.com",
@@ -97,45 +135,6 @@
      "press": "biz.heraldcorp.com",
      "publishedAt": "2026-11-02T22:48:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/016/0002717883?sid=104"
-    },
-    {
-     "title": "바이낸스 해킹 탈취 자산, 美FBI 미공개 지갑 100곳으로도 흘러갔다",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-02T22:48:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2643252"
-    }
-   ]
-  },
-  {
-   "keyword": "팔란티어 주가",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-02T21:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "팔란티어, 3분기 실적 예상치 상회...시간 외 주가는 4%↓",
-     "press": "opinionnews.co.kr",
-     "publishedAt": "2026-11-02T22:50:00.000Z",
-     "link": "http://www.opinionnews.co.kr/news/articleView.html?idxno=146561"
-    },
-    {
-     "title": "팔란티어, 분기 매출 96% 급증에도 주가 약세",
-     "press": "it.chosun.com",
-     "publishedAt": "2026-11-02T22:42:00.000Z",
-     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000000079"
-    },
-    {
-     "title": "팔란티어, 분기 매출 3조 원 첫 돌파…美 민간 매출이 정부 첫 추월",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-02T22:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000963233?sid=105"
     }
    ]
   },
@@ -144,37 +143,37 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 3,
+   "articles90": 6,
+   "recent20": 2,
+   "press": 5,
    "firstArticleAt": "2026-11-02T21:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "금융지주 회장 연임 문턱 높인다…3연임 시 주총 75% 찬성 의무화 추진",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-02T23:02:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2643273"
+    },
+    {
+     "title": "금융지주 회장 3연임, 주총 찬성 75%·지분 50% 넘겨야 가능",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-02T22:58:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=66935"
+    },
+    {
      "title": "금융지주 회장 연임 문턱 높인다…3연임시 주주 75% 찬성",
      "press": "dailian.co.kr",
      "publishedAt": "2026-11-02T22:36:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/119/0003150451?sid=101"
-    },
-    {
-     "title": "금융지주 회장 연임 문턱 높인다…금융당국, 의결 요건 단계적 강화 추...",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-02T22:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003481333?sid=101"
-    },
-    {
-     "title": "금융지주 ‘셀프개혁’ 속도 내는데…지배구조 개선안은 ‘표류’",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-02T21:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003150435?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 206,
+  "flagged": 207,
   "matched": 79,
   "avgLeadMin": 262,
   "recent": [
