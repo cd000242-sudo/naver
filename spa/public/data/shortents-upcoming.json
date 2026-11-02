@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T17:00:53.871Z",
+ "builtAt": "2026-11-02T17:10:57.159Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -10,38 +10,6 @@
  },
  "measured": 26,
  "candidates": [
-  {
-   "keyword": "삼성SDS 구미 AI센터 착공",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T15:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"60조 영남권 투자 첫 결실\"… 삼성SDS, 구미에 최대 120MW AI 데이터센터...",
-     "press": "woodkorea.co.kr",
-     "publishedAt": "2026-11-02T16:44:00.000Z",
-     "link": "https://www.woodkorea.co.kr/news/articleView.html?idxno=92300"
-    },
-    {
-     "title": "삼성SDS 구미 AI 데이터센터 첫 삽…경북도-구미시, AI 산업 본격화",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-02T16:18:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3740283"
-    },
-    {
-     "title": "삼성SDS, 구미 AI 데이터센터 착공… 영남권 60조 투자 첫발",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-02T15:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001882535?sid=101"
-    }
-   ]
-  },
   {
    "keyword": "1호기 탑승자 정보 유출",
    "sources": [
@@ -71,6 +39,38 @@
      "press": "chosun.com",
      "publishedAt": "2026-11-02T15:56:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/023/0004007427?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "삼성SDS 구미 AI센터 착공",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T15:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"60조 영남권 투자 첫 결실\"… 삼성SDS, 구미에 최대 120MW AI 데이터센터...",
+     "press": "woodkorea.co.kr",
+     "publishedAt": "2026-11-02T16:44:00.000Z",
+     "link": "https://www.woodkorea.co.kr/news/articleView.html?idxno=92300"
+    },
+    {
+     "title": "삼성SDS 구미 AI 데이터센터 첫 삽…경북도-구미시, AI 산업 본격화",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-02T16:18:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3740283"
+    },
+    {
+     "title": "삼성SDS, 구미 AI 데이터센터 착공… 영남권 60조 투자 첫발",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-02T15:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001882535?sid=101"
     }
    ]
   }
