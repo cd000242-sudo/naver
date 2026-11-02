@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T23:33:06.420Z",
+ "builtAt": "2026-11-02T23:43:09.468Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,146 +11,151 @@
  "measured": 24,
  "candidates": [
   {
-   "keyword": "10월 소비자물가 2.8%",
+   "keyword": "10월 물가 2.8% 상승",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 61,
-   "recent20": 24,
-   "press": 45,
+   "articles90": 77,
+   "recent20": 26,
+   "press": 51,
    "firstArticleAt": "2026-11-02T23:00:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "부산 10월 소비자물가 2.8% 상승…석유류가 끌어올려",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-02T23:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205733?sid=102"
+     "title": "10월 소비자물가 2.8% 상승… 석유류 14.9% 급등",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-02T23:42:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3445368"
     },
     {
-     "title": "물가 2.8%로 둔화…가공식품·외식비 더 올랐다",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-02T23:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003056735?sid=101"
+     "title": "10월 소비자물가 2.8% 상승…가공식품·석유류 가격 오름세 지속",
+     "press": "sentv.co.kr",
+     "publishedAt": "2026-11-02T23:42:00.000Z",
+     "link": "https://www.sentv.co.kr/article/view/sentv202611030014"
     },
     {
-     "title": "10월 소비자물가 2.8% 상승…가공식품·석유류가 끌어올려",
-     "press": "mbnmoney.mbn.co.kr",
-     "publishedAt": "2026-11-02T23:30:00.000Z",
-     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005953378"
+     "title": "정부 “체감물가 여전히 높아…물가 관리에 모든 역량 집중할 것”",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-02T23:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003150468?sid=101"
     }
    ]
   },
   {
-   "keyword": "한양증권 해킹",
+   "keyword": "한양증권 해킹 유출",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 52,
-   "recent20": 25,
-   "press": 44,
+   "articles90": 59,
+   "recent20": 22,
+   "press": 51,
    "firstArticleAt": "2026-11-02T22:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한양증권도 털렸다…고객·임직원 개인정보 유출",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-02T23:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001976422?sid=102"
+     "title": "한양증권 해킹 피해…고객·임직원 정보 유출",
+     "press": "sentv.co.kr",
+     "publishedAt": "2026-11-02T23:42:00.000Z",
+     "link": "https://www.sentv.co.kr/article/view/sentv202611030018"
     },
     {
-     "title": "한양증권서 해킹 사고…고객·임직원 등 개인정보 31건 유출",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-02T23:32:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=100488"
+     "title": "한양증권, 해킹으로 개인정보 31건 유출···주민번호도 포함",
+     "press": "seoulfn.com",
+     "publishedAt": "2026-11-02T23:38:00.000Z",
+     "link": "https://www.seoulfn.com/news/articleView.html?idxno=641717"
     },
     {
-     "title": "대신증권 이어 한양증권도 뚫렸다…증권가 보안 '비상'",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-02T23:30:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1730200"
+     "title": "한양증권도 해킹 피해…고객 계좌·주민번호 등 개인정보 유출",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-02T23:38:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611030008"
     }
    ]
   },
   {
    "keyword": "뉴욕증시 혼조 마감.",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 33,
-   "recent20": 4,
-   "press": 32,
-   "firstArticleAt": "2026-11-02T22:05:00.000Z",
+   "articles90": 31,
+   "recent20": 5,
+   "press": 31,
+   "firstArticleAt": "2026-11-02T22:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[뉴욕증시] AI 투자 부담⋯나스닥 1.07% ↓",
-     "press": "segyebiz.com",
-     "publishedAt": "2026-11-02T23:24:00.000Z",
-     "link": "http://www.segyebiz.com/newsView/20261103503115?OutUrl=naver"
+     "title": "뉴욕증시 혼조…나스닥100 조정장 진입·AI 기술주 급락",
+     "press": "kjdaily.com",
+     "publishedAt": "2026-11-02T23:42:00.000Z",
+     "link": "http://www.kjdaily.com/article.php?aid=1793662756691085276"
     },
     {
-     "title": "뉴욕증시 혼조 마감…AI 투자 부담에 나스닥 1.07% 하락",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-02T23:24:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=94415"
+     "title": "뉴욕증시 혼조…유가 급락에도 기술주 이탈에 나스닥 1.07%↓",
+     "press": "sentv.co.kr",
+     "publishedAt": "2026-11-02T23:40:00.000Z",
+     "link": "https://www.sentv.co.kr/article/view/sentv202611030013"
     },
     {
-     "title": "[굿모닝! 글로벌 뉴욕증시] 대규모 AI 투자 수익성에 대한 우려 지속 속...",
-     "press": "newsquest.co.kr",
-     "publishedAt": "2026-11-02T23:16:00.000Z",
-     "link": "https://www.newsquest.co.kr/news/articleView.html?idxno=304044"
+     "title": "[해외시황] 뉴욕증시, 국제유가 하락에도 AI 투자 부담에 '혼조'…나스닥...",
+     "press": "newsprime.co.kr",
+     "publishedAt": "2026-11-02T23:34:00.000Z",
+     "link": "http://www.newsprime.co.kr/news/article.html?no=753387"
     }
    ]
   },
   {
-   "keyword": "미국 중간선거",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 47,
-   "recent20": 17,
-   "press": 24,
-   "firstArticleAt": "2026-11-02T22:52:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "트럼프 \"서두를 것 없다\"... 중간선거 후 對이란 공격 재개 질문에",
-     "press": "getnews.co.kr",
-     "publishedAt": "2026-11-02T23:32:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=885757"
-    },
-    {
-     "title": "미국 의회 권력 재편, 한국 경제안보의 새로운 시험대",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-02T23:32:00.000Z",
-     "link": "http://www.breaknews.com/1247804"
-    },
-    {
-     "title": "[최석원 칼럼] 미국 중간선거, 이번에도 증시 상승으로 이어질까",
-     "press": "opinionnews.co.kr",
-     "publishedAt": "2026-11-02T23:30:00.000Z",
-     "link": "http://www.opinionnews.co.kr/news/articleView.html?idxno=146537"
-    }
-   ]
-  },
-  {
-   "keyword": "대통령 여권번호 노출됐다",
+   "keyword": "애플 분기 매출 증가",
    "sources": [
     "nate"
    ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-02T22:23:00.000Z",
+   "articles90": 18,
+   "recent20": 7,
+   "press": 16,
+   "firstArticleAt": "2026-11-02T22:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"메모리 가격 전례 없다\"...최대 실적 애플, 연말 이익률엔 '경고등'",
+     "press": "techm.kr",
+     "publishedAt": "2026-11-02T23:42:00.000Z",
+     "link": "https://www.techm.kr/news/articleView.html?idxno=156794"
+    },
+    {
+     "title": "애플, 영업익 10% 늘었지만…\"메모리값 전례 없는 수준\"",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-02T23:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001071600?sid=105"
+    },
+    {
+     "title": "애플, 4분기 매출 154조원 돌파…아이폰 판매 역대 최대",
+     "press": "digitaltoday.co.kr",
+     "publishedAt": "2026-11-02T23:38:00.000Z",
+     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=712033"
+    }
+   ]
+  },
+  {
+   "keyword": "대통령 부부 여권번호 노출",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 16,
+   "recent20": 3,
+   "press": 15,
+   "firstArticleAt": "2026-11-02T22:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령 여권번호까지 고스란히…1호기 탑승자 168명 개인정보 유출",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-02T23:42:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5078946"
+    },
     {
      "title": "李대통령 부부 등 168명 정보 유출. 靑 5개월동안 몰라",
      "press": "viewsnnews.com",
@@ -162,95 +167,29 @@
      "press": "jasm.co.kr",
      "publishedAt": "2026-11-02T23:24:00.000Z",
      "link": "https://www.jasm.co.kr/news/view/323910/?sc=Naver"
-    },
-    {
-     "title": "이재명 대통령 여권번호 유출… \"경호 참사로 이어질 수 있었다\"",
-     "press": "mediatoday.co.kr",
-     "publishedAt": "2026-11-02T23:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/006/0000138534?sid=102"
     }
    ]
   },
   {
-   "keyword": "아이폰 듀오",
+   "keyword": "양홍원, 결혼사진 삭제",
    "sources": [
-    "google"
-   ],
-   "articles90": 16,
-   "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-02T22:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "아이폰값 올려도 버겁다…애플 덮친 메모리값 급등(종합)",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-02T23:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006402494?sid=101"
-    },
-    {
-     "title": "아이폰 듀오 흔들리자 갤폴드8 웃었다…판매 20% 증가",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-02T23:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006402489?sid=105"
-    },
-    {
-     "title": "애플, '아이폰 효과' 분기 매출 1145억달러…예상치 상회[뉴스새벽배송...",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-02T23:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006402482?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "애플 매출 증가",
-   "sources": [
-    "signal.bz",
     "nate"
    ],
    "articles90": 14,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-02T22:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "애플 3분기 매출 12% 증가한 154조원…분기 기준 최대치",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-02T23:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003056734?sid=105"
-    },
-    {
-     "title": "애플, 매출 가이던스 시장 예상 웃돌았지만…주가는 3%대 하락",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-02T23:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005435576?sid=101"
-    },
-    {
-     "title": "애플, 中 매출 이어 가이던스도 실망…시간외 주가 3%대 급락(종합)",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-02T23:10:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4442638"
-    }
-   ]
-  },
-  {
-   "keyword": "양홍원 아내 사진 삭제",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 12,
    "recent20": 3,
-   "press": 11,
+   "press": 12,
    "firstArticleAt": "2026-11-02T22:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "양홍원, 아내 언팔로우·결혼식 사진 모두 지웠다",
+     "title": "'불륜 의혹' 양홍원, 아내 인스타 언팔했다…결혼식 겨우 2주 됐는데",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-02T23:35:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000782711"
+    },
+    {
+     "title": "'불륜 의혹' 양홍원, 아내 언팔로우·결혼식 사진 모두 지웠다",
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-02T23:32:00.000Z",
      "link": "https://m.entertain.naver.com/article/469/0000963244"
@@ -260,12 +199,38 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-02T23:25:00.000Z",
      "link": "https://m.entertain.naver.com/article/421/0009265963"
+    }
+   ]
+  },
+  {
+   "keyword": "아이폰 듀오",
+   "sources": [
+    "google"
+   ],
+   "articles90": 13,
+   "recent20": 4,
+   "press": 10,
+   "firstArticleAt": "2026-11-02T22:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "애플, 4분기 매출 154조원 돌파…아이폰 판매 역대 최대",
+     "press": "digitaltoday.co.kr",
+     "publishedAt": "2026-11-02T23:38:00.000Z",
+     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=712033"
     },
     {
-     "title": "‘모텔 논란’ 양홍원, 아내·결혼 사진 ‘전부 삭제’…‘불륜 폭로’...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-02T23:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/016/0002717899"
+     "title": "애플, '아이폰 18' 판매 호조에 역대 분기 최대 매출 기록",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-02T23:38:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=500789"
+    },
+    {
+     "title": "아이폰값 올려도 버겁다…애플 덮친 메모리값 급등(종합)",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-02T23:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006402494?sid=101"
     }
    ]
   },
@@ -275,29 +240,61 @@
     "google"
    ],
    "articles90": 8,
-   "recent20": 1,
+   "recent20": 3,
    "press": 8,
-   "firstArticleAt": "2026-11-02T22:06:00.000Z",
+   "firstArticleAt": "2026-11-02T22:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "뉴욕증시 혼조…나스닥100 조정장 진입·AI 기술주 급락",
+     "press": "kjdaily.com",
+     "publishedAt": "2026-11-02T23:42:00.000Z",
+     "link": "http://www.kjdaily.com/article.php?aid=1793662756691085276"
+    },
+    {
+     "title": "[해외시황] 뉴욕증시, 국제유가 하락에도 AI 투자 부담에 '혼조'…나스닥...",
+     "press": "newsprime.co.kr",
+     "publishedAt": "2026-11-02T23:34:00.000Z",
+     "link": "http://www.newsprime.co.kr/news/article.html?no=753387"
+    },
     {
      "title": "뉴욕증시 혼조 마감…AI 투자 부담에 나스닥 1.07% 하락",
      "press": "mediafine.co.kr",
      "publishedAt": "2026-11-02T23:24:00.000Z",
      "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=94415"
+    }
+   ]
+  },
+  {
+   "keyword": "9경기 무승 캐릭 감독",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-02T22:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“미쳤다고 생각하겠지만.. 로마전 기다려져”…‘9경기 무승’ 맨유, ...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-02T23:24:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/144/0001147765"
     },
     {
-     "title": "뉴욕증시 혼조 마감…AI 투자 부담에 나스닥 1.07%↓",
-     "press": "issuenbiz.com",
-     "publishedAt": "2026-11-02T23:08:00.000Z",
-     "link": "http://www.issuenbiz.com/news/articleView.html?idxno=81143"
+     "title": "\"맨유 강등? 충분히 가능한 일\"… 친정팀 추락 지켜본 텐 하흐 감독의 섬...",
+     "press": "besteleven.com",
+     "publishedAt": "2026-11-02T23:16:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/343/0000148674"
     },
     {
-     "title": "뉴욕증시,유가 급락에도 기술주 매도…나스닥 1.07%↓",
-     "press": "the-today.com",
-     "publishedAt": "2026-11-02T23:06:00.000Z",
-     "link": "https://www.the-today.com/news/articleView.html?idxno=92923"
+     "title": "이게 맞아? '38년만의 9경기 연속 무승' 맨유, 그래도 감독 안짜른다......",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-02T23:12:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/076/0004462343"
     }
    ]
   },
@@ -307,7 +304,7 @@
     "signal.bz"
    ],
    "articles90": 8,
-   "recent20": 3,
+   "recent20": 0,
    "press": 7,
    "firstArticleAt": "2026-11-02T22:42:00.000Z",
    "exclusive": false,
@@ -334,55 +331,23 @@
    ]
   },
   {
-   "keyword": "재혼 황후",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 6,
-   "recent20": 3,
-   "press": 6,
-   "firstArticleAt": "2026-11-02T22:23:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이종석, 디즈니+ '재혼 황후' 앞두고 '살롱드립'·'유튜브하지영' 연속 ...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-02T23:24:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16266660"
-    },
-    {
-     "title": "주지훈, '재혼 황후' 의상 얼마나 파격적이길래…신민아 \"너무 웃어서 N...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-02T23:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002075637"
-    },
-    {
-     "title": "‘재혼황후’ 이종석, ‘살롱드립’ 출격",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-02T23:14:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611030074"
-    }
-   ]
-  },
-  {
    "keyword": "연애박사",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
    "firstArticleAt": "2026-11-02T22:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'연애박사' 추영우X김소현, 이별 후 재회했지만 이대로 끝?...자체 최고...",
-     "press": "ize.co.kr",
-     "publishedAt": "2026-11-02T23:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/465/0000020731"
+     "title": "'연애박사' 추영우♥김소현, 결별 이유는 폐 종양⋯시청률 3.2% 돌파",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-02T23:42:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2643303"
     },
     {
      "title": "'연애박사' 김소현, 뒤늦게 알게 된 추영우 '결별 선언' 이유⋯시청률 ...",
@@ -391,20 +356,70 @@
      "link": "http://www.joynews24.com/view/2021813"
     },
     {
-     "title": "추영우 ‘폐 종양’ 충격…김소현과 결별 이유였다 (연애박사)",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-02T22:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001302510"
+     "title": "'연애박사' 추영우X김소현, 이별 후 재회했지만 이대로 끝?...자체 최고...",
+     "press": "ize.co.kr",
+     "publishedAt": "2026-11-02T23:06:00.000Z",
+     "link": "https://m.entertain.naver.com/article/465/0000020731"
+    }
+   ]
+  },
+  {
+   "keyword": "호반그룹",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-02T22:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한진칼 지분 매입 경쟁 나선 호반그룹, 대한항공 경영권도 넘볼까",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-02T23:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005349497?sid=101"
+    },
+    {
+     "title": "호시탐탐 노리는 호반그룹에 조원태 회장은 한진칼을 지킬 수 있을까?",
+     "press": "ilemonde.com",
+     "publishedAt": "2026-11-02T23:18:00.000Z",
+     "link": "https://www.ilemonde.com/news/articleView.html?idxno=30919"
+    },
+    {
+     "title": "호반그룹 한진칼 지분 확대에…조원태, 370억원 추가 매입",
+     "press": "sentv.co.kr",
+     "publishedAt": "2026-11-02T22:48:00.000Z",
+     "link": "https://www.sentv.co.kr/article/view/sentv202611030003"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 221,
-  "matched": 83,
-  "avgLeadMin": 252,
+  "flagged": 226,
+  "matched": 86,
+  "avgLeadMin": 244,
   "recent": [
+   {
+    "keyword": "미·이란 협상에 유가 급락",
+    "hitKeyword": "미 이란 협상 유가",
+    "hitAt": "2026-11-03T08:30:00+09:00",
+    "leadMin": 87
+   },
+   {
+    "keyword": "이란 협상 기대 유가 급락",
+    "hitKeyword": "미 이란 협상 유가",
+    "hitAt": "2026-11-03T08:30:00+09:00",
+    "leadMin": 17
+   },
+   {
+    "keyword": "트럼프 중간선거 마지막 유세",
+    "hitKeyword": "미국 중간선거 투표",
+    "hitAt": "2026-11-03T08:30:00+09:00",
+    "leadMin": 17
+   },
    {
     "keyword": "김여정 바이낸스 사태",
     "hitKeyword": "바이낸스 해킹 자금흐름",
@@ -446,24 +461,6 @@
     "hitKeyword": "김민재 이강인 더비",
     "hitAt": "2026-11-03T07:30:00+09:00",
     "leadMin": 661
-   },
-   {
-    "keyword": "김민재 차관, 대통령기록관 점검",
-    "hitKeyword": "김민재 이강인 더비",
-    "hitAt": "2026-11-03T07:30:00+09:00",
-    "leadMin": 621
-   },
-   {
-    "keyword": "KT 대니엘 VS 삼성 최원태 KS 1차전",
-    "hitKeyword": "삼성 KT 한국시리즈",
-    "hitAt": "2026-11-03T07:30:00+09:00",
-    "leadMin": 7
-   },
-   {
-    "keyword": "이재명 대통령 시정연설",
-    "hitKeyword": "이란 대통령 대화 권한",
-    "hitAt": "2026-11-03T06:30:00+09:00",
-    "leadMin": 1120
    }
   ]
  }
