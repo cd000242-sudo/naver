@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T03:55:23.449Z",
+ "builtAt": "2026-11-02T04:05:26.230Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,31 +8,32 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 11,
  "candidates": [
   {
-   "keyword": "국회 이재명 대통령",
+   "keyword": "인사하는 이재명 대통령",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 71,
-   "recent20": 38,
-   "press": 22,
-   "firstArticleAt": "2026-11-02T03:29:00.000Z",
+   "articles90": 69,
+   "recent20": 9,
+   "press": 24,
+   "firstArticleAt": "2026-11-02T03:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "「M포토」 2027년도 예산안 등에 대한 시정연설하는 이재명 대통령",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-02T03:54:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=72448"
+     "title": "“대통령 아들부터 본인 살 집 직접 구하라고 하라”",
+     "press": "naeil.com",
+     "publishedAt": "2026-11-02T04:04:00.000Z",
+     "link": "https://www.naeil.com/news/read/607219?ref=naver"
     },
     {
-     "title": "[포토] 물 마시는 이재명 대통령",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-02T03:52:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3445122"
+     "title": "“재판 재개하라” vs “이재명 파이팅”…시정연설 여야 온도차 ‘뚜렷...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-02T04:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005757533?sid=100"
     },
     {
      "title": "\"나라 빚 외면\" 국힘 구호에 이 대통령이 내놓은 답변",
@@ -47,30 +48,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 23,
-   "recent20": 2,
-   "press": 22,
-   "firstArticleAt": "2026-11-02T02:26:00.000Z",
+   "articles90": 19,
+   "recent20": 3,
+   "press": 18,
+   "firstArticleAt": "2026-11-02T02:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "육군 전방 부대서 부사관 총상 사망·공군 KT-1 훈련기 공중 접촉 비상 ...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-02T04:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005597976?sid=100"
+    },
+    {
+     "title": "철원 전방 소초서 20대 하사 숨져",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-02T04:01:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261102000995"
+    },
     {
      "title": "철원 전방부대서 하사 사망…군 당국, 부대 내 사고 원인 조사 착수",
      "press": "jemin.com",
      "publishedAt": "2026-11-02T03:54:00.000Z",
      "link": "https://www.jemin.com/news/articleView.html?idxno=845915"
-    },
-    {
-     "title": "[속보] “강원도 철원서 육군 하사 1명 외상 입고 사망”",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-02T03:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/024/0000109326?sid=102"
-    },
-    {
-     "title": "강원 철원 전방부대에서 군 간부 1명 사망",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-02T03:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002534312?sid=102"
     }
    ]
   },
@@ -80,13 +81,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 16,
+   "articles90": 11,
    "recent20": 2,
-   "press": 16,
-   "firstArticleAt": "2026-11-02T02:26:00.000Z",
+   "press": 11,
+   "firstArticleAt": "2026-11-02T02:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "특검, 중앙선관위 위원장실 등 압수수색…공명선거 활동비 부당지급 혐...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-02T03:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003150164?sid=102"
+    },
     {
      "title": "특검, 선관위원장실 등 압수수색…활동비 부당 지급 의혹",
      "press": "jasm.co.kr",
@@ -98,44 +105,39 @@
      "press": "lawtimes.co.kr",
      "publishedAt": "2026-11-02T03:36:00.000Z",
      "link": "https://www.lawtimes.co.kr/news/articleView.html?idxno=228699"
-    },
-    {
-     "title": "수당 9억원 부당 지급 의혹…특검, 중앙선관위 위원장실 등 압색",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-02T03:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001976297?sid=102"
     }
    ]
   },
   {
-   "keyword": "티아라",
+   "keyword": "구룡마을 화재 감식",
    "sources": [
-    "google"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 6,
+   "articles90": 21,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-02T02:40:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-02T02:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "티아라, 소연 임신 발표에 불화설 종료 \"너무너무 축하해\"[SC이슈]",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-02T03:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004462151"
+     "title": "구룡마을 화재 재차 감식…야속한 주민들은 방화 의심도 내놔",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-02T03:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016415984?sid=102"
     },
     {
-     "title": "“언니 너무 축하해” 함은정, 소연 임신에 축하 댓글…티아라 불화설 ...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-02T03:20:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003538610"
+     "title": "오늘 구룡마을 화재 추가 합동감식…원인 규명 주력",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-02T03:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012285365?sid=102"
     },
     {
-     "title": "'티아라' 소연, 임신 발표…\"결혼 4년만에, 찾아온 선물\"",
-     "press": "dispatch.co.kr",
-     "publishedAt": "2026-11-02T03:09:00.000Z",
-     "link": "https://m.entertain.naver.com/article/433/0000131925"
+     "title": "구룡마을 화재 합동감식",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-02T03:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016415908?sid=102"
     }
    ]
   },
@@ -145,7 +147,7 @@
     "nate"
    ],
    "articles90": 11,
-   "recent20": 5,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-02T02:39:00.000Z",
    "exclusive": false,
@@ -172,44 +174,56 @@
    ]
   },
   {
-   "keyword": "LG CNS 인니 AI센터 구축",
+   "keyword": "U-17 월드컵 우간다 첫 경기",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 4,
    "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-02T02:34:00.000Z",
+   "firstArticleAt": "2026-11-02T02:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "LG CNS, 인니 하이퍼스케일 AI 데이터센터로 해외시장 진출 '신호탄'",
-     "press": "cwn.kr",
+     "title": "김현준호, U-17 월드컵 최종명단 21명 확정…19일 우간다와 첫 경기",
+     "press": "dailysportshankook.co.kr",
+     "publishedAt": "2026-11-02T03:44:00.000Z",
+     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435068"
+    },
+    {
+     "title": "FIFA U-17 월드컵 최종명단 21명 확정… 19일 우간다와 첫 경기",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-02T03:28:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3445082"
+    },
+    {
+     "title": "[오피셜] 韓 U-17 대표팀 월드컵 21인 최종 명단 발표… '유일 2010년생'...",
+     "press": "besteleven.com",
      "publishedAt": "2026-11-02T03:06:00.000Z",
-     "link": "https://www.cwn.kr/news/articleView.html?idxno=60734"
-    },
-    {
-     "title": "LG CNS, 인니에 AI데이터센터 완공",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-02T02:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002717596?sid=105"
-    },
-    {
-     "title": "LG CNS, 인니 30MW AI 데이터센터 완공…국내 기업 첫 해외 구축",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-02T02:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000547782?sid=101"
+     "link": "https://m.sports.naver.com/kfootball/article/343/0000148651"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 21,
-  "matched": 1,
-  "avgLeadMin": 21,
+  "flagged": 23,
+  "matched": 3,
+  "avgLeadMin": 29,
   "recent": [
+   {
+    "keyword": "계주",
+    "hitKeyword": "학부모 민원 계주 취소",
+    "hitAt": "2026-11-02T13:00:00+09:00",
+    "leadMin": 60
+   },
+   {
+    "keyword": "티아라",
+    "hitKeyword": "티아라 소연 임신",
+    "hitAt": "2026-11-02T13:00:00+09:00",
+    "leadMin": 5
+   },
    {
     "keyword": "박항서 감독 인종차별",
     "hitKeyword": "박항서 인종차별 분노",
