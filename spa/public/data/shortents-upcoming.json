@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T08:38:15.466Z",
+ "builtAt": "2026-11-02T08:48:19.396Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,70 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "삼성SDS 구미 데이터센터 착공",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 53,
-   "recent20": 5,
-   "press": 51,
-   "firstArticleAt": "2026-11-02T07:10:00.000Z",
+   "articles90": 46,
+   "recent20": 6,
+   "press": 44,
+   "firstArticleAt": "2026-11-02T07:22:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "삼성SDS 구미 AI 데이터센터 착공…2029년 3월 가동 목표",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-02T08:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006402323?sid=100"
+     "title": "CES서 맺은 투자협약 10달 만에 결실…삼성SDS 구미 데이터센터 첫 삽",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-02T08:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004677880?sid=102"
     },
     {
-     "title": "삼성SDS, '구미 AI 데이터센터' 착공…60MW 시작해 최대 120MW로 확장",
-     "press": "epnc.co.kr",
-     "publishedAt": "2026-11-02T08:36:00.000Z",
-     "link": "https://www.epnc.co.kr/news/articleView.html?idxno=409130"
+     "title": "삼성SDS, 구미에 AI 데이터센터 짓는다",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-02T08:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005349334?sid=105"
     },
     {
-     "title": "[유미's 픽] \"이재용이 콕 찍은 구미\"…삼성 60조 투자 시동, 다음은 오...",
-     "press": "zdnet.co.kr",
-     "publishedAt": "2026-11-02T08:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/092/0002443496?sid=105"
+     "title": "삼성SDS, 구미에 AI 데이터센터 착공…영남권 피지컬 AI 거점 구축",
+     "press": "newsquest.co.kr",
+     "publishedAt": "2026-11-02T08:42:00.000Z",
+     "link": "https://www.newsquest.co.kr/news/articleView.html?idxno=304017"
     }
    ]
   },
   {
-   "keyword": "하이브 개인정보 유출",
+   "keyword": "경기도 협치위원회 출범",
    "sources": [
     "daum"
    ],
-   "articles90": 23,
-   "recent20": 2,
-   "press": 23,
-   "firstArticleAt": "2026-11-02T07:12:00.000Z",
-   "exclusive": false,
+   "articles90": 42,
+   "recent20": 5,
+   "press": 35,
+   "firstArticleAt": "2026-11-02T07:23:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "하이브, 전·현직 임직원과 협력사 관계자 개인정보 털려",
-     "press": "newsfc.co.kr",
-     "publishedAt": "2026-11-02T08:24:00.000Z",
-     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82176"
+     "title": "경기도의회 45일간 정례회… 행정·예산 '민생 최우선' 송곳 검증",
+     "press": "joongboo.com",
+     "publishedAt": "2026-11-02T08:46:00.000Z",
+     "link": "https://www.joongboo.com/news/articleView.html?idxno=363741223"
     },
     {
-     "title": "하이브 개인정보 유출 사고 뒤늦게 알려져, 협력사 관계자·전현직 직원...",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-02T08:22:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=450963"
+     "title": "경기도·경기도의회, 여야정협치위원회 출범",
+     "press": "news.skbroadband.com",
+     "publishedAt": "2026-11-02T08:44:00.000Z",
+     "link": "https://news.skbroadband.com/news/articleView.html?idxno=242032"
     },
     {
-     "title": "여권·카드번호까지 털린 하이브…개인정보 유출에 “깊이 사과”",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-02T08:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001882455?sid=102"
+     "title": "경기도·도의회 여야정협치위 출범… 내년 본예산부터 사전 협의",
+     "press": "thereport.co.kr",
+     "publishedAt": "2026-11-02T08:40:00.000Z",
+     "link": "https://www.thereport.co.kr/news/articleView.html?idxno=92973"
     }
    ]
   },
@@ -80,94 +79,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 32,
+   "articles90": 37,
    "recent20": 8,
-   "press": 20,
+   "press": 24,
    "firstArticleAt": "2026-11-02T07:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "싸이커스, 오늘 미니 8집 발매…리더 민재 첫 타이틀곡 프로듀싱",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-02T08:36:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014296181"
+     "title": "‘다이너마이트’ 터뜨린 싸이커스, 음악의 원점을 타격하다",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-02T08:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001302452"
     },
     {
-     "title": "싸이커스 \"음악 근본 담은 '다이너마이트', 에이티즈 응원 속 죽기 살기...",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-02T08:32:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60586"
+     "title": "\"무대 위에서 노래하는 게 가수의 일\" 싸이커스가 지키려는 '근본' [MD현...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-02T08:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004121103"
     },
     {
-     "title": "록 입은 싸이커스의 근본 찾기 \"무대마다 죽기 살기로\" [종합]",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-02T08:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/015/0005349304"
-    }
-   ]
-  },
-  {
-   "keyword": "경기도 여야정 협치위 출범",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 16,
-   "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-02T07:18:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "추미애 \"어려운 때일수록 여야와 경기도가 손잡고 민생 지켜야\"…여·야...",
-     "press": "econonews.co.kr",
-     "publishedAt": "2026-11-02T08:26:00.000Z",
-     "link": "http://www.econonews.co.kr/news/articleView.html?idxno=446618"
-    },
-    {
-     "title": "경기도 여야정, 민생 해법 찾기 한배 탔다… 추미애 \"신뢰가 먼저\"",
-     "press": "joongboo.com",
-     "publishedAt": "2026-11-02T08:24:00.000Z",
-     "link": "https://www.joongboo.com/news/articleView.html?idxno=363741234"
-    },
-    {
-     "title": "경기도 \"여야정협치위 절실했다\"",
-     "press": "news.ifm.kr",
-     "publishedAt": "2026-11-02T08:18:00.000Z",
-     "link": "https://news.ifm.kr/news/articleView.html?idxno=483273"
-    }
-   ]
-  },
-  {
-   "keyword": "조경태 이재명 대통령 악수",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-02T07:13:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국회서 이재명 예산안 연설…여야, 박수와 침묵 속 '재판 재개' 외침",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-02T08:14:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=622440"
-    },
-    {
-     "title": "이 대통령, 시정연설 앞두고 나온 '돼지 비유' 발언 범야권 반발",
-     "press": "inews365.com",
-     "publishedAt": "2026-11-02T08:04:00.000Z",
-     "link": "https://www.inews365.com/news/article.html?no=941815"
-    },
-    {
-     "title": "시정연설 중 국민의힘 “재판 재개하라” 이재명 대통령 “방해하는 얘...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-02T08:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003480148?sid=100"
+     "title": "\"세상 뒤집을 타이밍\"…싸이커스, '다이너마이트'로 제대로 터트린다(종...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-02T08:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009265587"
     }
    ]
   },
@@ -176,30 +111,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 9,
+   "articles90": 11,
    "recent20": 4,
-   "press": 8,
+   "press": 10,
    "firstArticleAt": "2026-11-02T07:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "프로야구 포스트시즌 입장권 4배 부풀려 판매한 암표상 검거",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-02T08:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000160145?sid=102"
+    },
+    {
+     "title": "3만6000원 야구표를 18만원에…‘가을야구’ 암표상 적발",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-02T08:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004007324?sid=102"
+    },
+    {
      "title": "韓총리 \"이제 암표로 돈 못 벌어…부당이익 끝까지 환수\"",
      "press": "hankyung.com",
      "publishedAt": "2026-11-02T08:35:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/015/0005349312?sid=100"
-    },
-    {
-     "title": "프로야구 입장권 4배 부풀려 판 암표상 검거",
-     "press": "usmbc.co.kr",
-     "publishedAt": "2026-11-02T08:34:00.000Z",
-     "link": "https://www.usmbc.co.kr/NewsArticle/870915"
-    },
-    {
-     "title": "경찰, 부산불꽃축제 암표매매 등 집중 단속",
-     "press": "news.knn.co.kr",
-     "publishedAt": "2026-11-02T08:20:00.000Z",
-     "link": "https://news.knn.co.kr/news/article/193892"
     }
    ]
   },
@@ -209,7 +144,7 @@
     "signal.bz"
    ],
    "articles90": 8,
-   "recent20": 1,
+   "recent20": 0,
    "press": 8,
    "firstArticleAt": "2026-11-02T07:25:00.000Z",
    "exclusive": false,
@@ -222,48 +157,16 @@
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16266318"
     },
     {
-     "title": "민주당, 7개 경합주서 공화당 앞서…미시간서 최대 격차",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-02T08:08:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=622439"
-    },
-    {
      "title": "미 상원도 '블루웨이브'?…폴리마켓 \"민주당 53석\" 전망",
      "press": "4th.kr",
      "publishedAt": "2026-11-02T08:08:00.000Z",
      "link": "http://www.4th.kr/news/articleView.html?idxno=2120965"
-    }
-   ]
-  },
-  {
-   "keyword": "미국 중간선거 일정",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-02T07:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "중간선거 앞둔 미국…한국 시장 향방 가를 3대 지표는",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-02T08:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005349283?sid=101"
     },
     {
-     "title": "[뉴스워치] 美 중간선거 D-1…트럼프 2년 성적표는?",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-02T08:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922073?sid=104"
-    },
-    {
-     "title": "최윤범의 74억달러 승부수···美 중간선거 넘어 성장동력 되나",
-     "press": "seoulfn.com",
-     "publishedAt": "2026-11-02T08:10:00.000Z",
-     "link": "https://www.seoulfn.com/news/articleView.html?idxno=641693"
+     "title": "민주당, 7개 경합주서 공화당 앞서…미시간서 최대 격차",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-02T08:08:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=622439"
     }
    ]
   },
@@ -272,13 +175,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 5,
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
    "firstArticleAt": "2026-11-02T07:22:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
+    {
+     "title": "HD현대, 필리핀조선소 첫 선박 진수 성과…법인장·안전생산 임원 승진",
+     "press": "fetv.co.kr",
+     "publishedAt": "2026-11-02T08:40:00.000Z",
+     "link": "https://www.fetv.co.kr/news/articleView.html?idxno=312927"
+    },
     {
      "title": "HD현대마린엔진, 윈지디와 선박용 추진엔진 라이선스 계약",
      "press": "biztribune.co.kr",
@@ -290,44 +199,6 @@
      "press": "inthenews.co.kr",
      "publishedAt": "2026-11-02T08:22:00.000Z",
      "link": "https://www.inthenews.co.kr/news/article.html?no=93900"
-    },
-    {
-     "title": "음주 운항하다 정박 선박 충돌..30대 선원 입건",
-     "press": "news.knn.co.kr",
-     "publishedAt": "2026-11-02T08:20:00.000Z",
-     "link": "https://news.knn.co.kr/news/article/193891"
-    }
-   ]
-  },
-  {
-   "keyword": "112의 날 기념식",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-02T07:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "전남경찰, 112의 날 기념식…10개월간 신고 47만 건",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-02T08:18:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4116301"
-    },
-    {
-     "title": "대전경찰청, 112의 날 기념식 개최…신속·정확한 신고 대응 다짐",
-     "press": "chungnamilbo.co.kr",
-     "publishedAt": "2026-11-02T07:56:00.000Z",
-     "link": "http://www.chungnamilbo.co.kr/news/articleView.html?idxno=918245"
-    },
-    {
-     "title": "전남경찰청, '제69주년 112의 날' 기념 행사",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-02T07:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205600?sid=102"
     }
    ]
   },
@@ -338,12 +209,18 @@
     "google"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 3,
    "press": 4,
-   "firstArticleAt": "2026-11-02T07:14:00.000Z",
+   "firstArticleAt": "2026-11-02T08:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "트럼프 떠난 1시간 뒤 플로리다에 제트기 추락에 9명 전원 사망...암살 ...",
+     "press": "thepublic.kr",
+     "publishedAt": "2026-11-02T08:38:00.000Z",
+     "link": "https://www.thepublic.kr/news/articleView.html?idxno=324762"
+    },
     {
      "title": "트럼프 저택 10분 거리서 제트기 추락해 9명 사망…트럼프는 사고 1시간...",
      "press": "ajunews.com",
@@ -355,32 +232,58 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-02T08:31:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012285554?sid=121"
-    },
-    {
-     "title": "미 플로리다서 제트기 추락…9명 전원 사망",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-02T08:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012285542?sid=104"
     }
    ]
   },
   {
-   "keyword": "주진우 의원, 선관위 자료 전달",
+   "keyword": "이형일 부총리 현대차 방문",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 0,
+   "articles90": 16,
+   "recent20": 1,
    "press": 4,
+   "firstArticleAt": "2026-11-02T07:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "전기차 세액공제 확대 요구…이형일 부총리, 현대차·기아 찾아 업계 의...",
+     "press": "cwn.kr",
+     "publishedAt": "2026-11-02T08:36:00.000Z",
+     "link": "https://www.cwn.kr/news/articleView.html?idxno=60803"
+    },
+    {
+     "title": "이형일 “전기차 경쟁력 강화방안 이달 발표”⋯업계, 생산세액공제 지...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-02T08:14:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2643183"
+    },
+    {
+     "title": "전기차 산업경쟁력 강화를 위한 업계 간담회, 발언하는 이형일 부총리",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-02T07:46:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261102001515"
+    }
+   ]
+  },
+  {
+   "keyword": "주진우 의원 선관위 특검 방문",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
    "firstArticleAt": "2026-11-02T07:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[포토] 주진우 의원, 선관위 부정자료 추가 전달 앞두고 기자회견",
-     "press": "sisafocus.co.kr",
-     "publishedAt": "2026-11-02T08:18:00.000Z",
-     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367095"
+     "title": "[현장] 주진우, 선관위 특검에 총선 개표자료 제출… 수사 지연 강력 비...",
+     "press": "mediawatch.kr",
+     "publishedAt": "2026-11-02T08:42:00.000Z",
+     "link": "https://www.mediawatch.kr/news/article.html?no=261591"
     },
     {
      "title": "선관위 특검, 이의제기 투표지 정밀감정 추진…선관위 비리 수사 속도",
@@ -389,43 +292,10 @@
      "link": "https://www.newspim.com/news/view/20261102001542"
     },
     {
-     "title": "[일요서울TV] 주진우, '선관위 부정자료' 이태한 특검에 직접 전달",
-     "press": "ilyoseoul.co.kr",
-     "publishedAt": "2026-11-02T08:06:00.000Z",
-     "link": "https://www.ilyoseoul.co.kr/news/articleView.html?idxno=524490"
-    }
-   ]
-  },
-  {
-   "keyword": "기아 10월 판매 29만대 증가",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T07:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "현대차·기아 희비 엇갈려…르노는 내수 회복세",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-02T07:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205625?sid=103"
-    },
-    {
-     "title": "기아 10월 글로벌 판매 29만대 돌파... 국내서 27.5% 늘며 8개월 연속 성...",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-02T07:40:00.000Z",
-     "link": "https://www.insight.co.kr/news/580294"
-    },
-    {
-     "title": "기아, 10월 글로벌 판매 29만대…전년比 10.3% 증가",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-02T07:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001071496?sid=103"
+     "title": "주진우, 선관위 특검 항의 방문 … 선관위 직원 구속수사 촉구",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-02T07:34:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/02/2026110200334.html"
     }
    ]
   },
@@ -464,7 +334,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 114,
+  "flagged": 116,
   "matched": 30,
   "avgLeadMin": 69,
   "recent": [
