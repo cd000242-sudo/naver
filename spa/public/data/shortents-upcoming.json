@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T12:29:36.643Z",
+ "builtAt": "2026-11-02T15:00:08.972Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,299 +8,170 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 28,
  "candidates": [
   {
-   "keyword": "브로드컴 과징금 확정",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-02T11:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "브로드컴, 과징금 186억 대법서 확정…\"삼성전자에 구매계약 강요\"",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-02T12:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005836963?sid=101"
-    },
-    {
-     "title": "삼성전자에 장기계약 강요한 美 브로드컴⋯186억 과징금 확정",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-02T12:02:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2643223"
-    },
-    {
-     "title": "‘삼성전자에 갑질’ 美브로드컴... 대법원, 과징금 186억원 확정",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-02T12:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202066?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "신현준, 김혜수에 아름다운 마음",
+   "keyword": "1호기 탑승자 개인정보 유출",
    "sources": [
     "nate"
    ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-02T11:10:00.000Z",
-   "exclusive": false,
+   "articles90": 16,
+   "recent20": 0,
+   "press": 15,
+   "firstArticleAt": "2026-11-02T13:31:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "“조문객 신발 정리까지…” 신현준, 故 최불암 빈소 지킨 김혜수에 “...",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-02T12:19:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000759792"
+     "title": "李대통령 부부 여권번호까지 털렸다…‘1호기 탑승자’ 168명 정보유출",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-02T14:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002829731?sid=100"
     },
     {
-     "title": "“따뜻한 마음”… 신현준, 故 최불암 마지막 길 지킨 김혜수 향한 찬사",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-02T12:18:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001145775"
-    },
-    {
-     "title": "신현준, 故최불암 빈소 지킨 김혜수에 “마음 아름다운 배우…이런 동료...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-02T12:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/016/0002717816"
-    }
-   ]
-  },
-  {
-   "keyword": "이란 호르무즈 해협 개방 조건",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-02T11:17:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이란, \"미국이 요구 들어주면 이틀안에 해협개방·핵협상 실행\" 제안",
+     "title": "외교부 \"대통령 순방 전용기 탑승자 개인정보 노출 엄중 인식…다각적 ...",
      "press": "newsis.com",
-     "publishedAt": "2026-11-02T12:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014296305?sid=104"
+     "publishedAt": "2026-11-02T14:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014296326?sid=100"
     },
     {
-     "title": "이란 “美 해상봉쇄 해제 등 ‘7단계 제안’ 수용 시 이틀 내 호르무즈...",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-02T12:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003562283?sid=104"
-    },
-    {
-     "title": "이란 \"美 '해상봉쇄 해제' 등 수용하면 이틀 내 호르무즈 개방\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-02T12:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005435481?sid=104"
+     "title": "[사설] 공군 1호기 개인정보 노출, 국가·지자체 보안망 전면 재점검 계...",
+     "press": "suwonilbo.kr",
+     "publishedAt": "2026-11-02T14:18:00.000Z",
+     "link": "https://www.suwonilbo.kr/view.html?id=L261102231038a462"
     }
    ]
   },
   {
-   "keyword": "연구",
+   "keyword": "전한길 공소청 송치",
    "sources": [
-    "signal.bz",
-    "google"
+    "daum"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-02T11:52:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-02T13:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "산청농촌관광연구회, 농업체험한마당 개최",
-     "press": "gnmaeil.com",
-     "publishedAt": "2026-11-02T12:14:00.000Z",
-     "link": "http://www.gnmaeil.com/news/articleView.html?idxno=597835"
-    },
-    {
-     "title": "충남, 또 \"국방연구원 등 논산 집적\"…경기도와 대조",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-02T12:08:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1542478"
-    },
-    {
-     "title": "'장사의 신' 은현장, 구속된 김세의 방송석 차지…\"가로세로 장사 연구...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-02T12:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004121135"
-    }
-   ]
-  },
-  {
-   "keyword": "하이브",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 3,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T12:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"전기차 올인 전략 수정\" GM, 하이브리드까지 전동화 라인업 확대",
-     "press": "gpkorea.com",
-     "publishedAt": "2026-11-02T12:16:00.000Z",
-     "link": "https://www.gpkorea.com/news/articleView.html?idxno=148207"
-    },
-    {
-     "title": "하이브, 전자결재·비용처리시스템 해킹…주민번호·의료정보 등 개인정...",
-     "press": "dailysecu.com",
-     "publishedAt": "2026-11-02T12:12:00.000Z",
-     "link": "https://www.dailysecu.com/news/articleView.html?idxno=209268"
-    },
-    {
-     "title": "[개인정보 유출] 하이브, 전·현직 임직원 및 협력사 개인정보 유출…주...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-02T12:10:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=622310"
-    }
-   ]
-  },
-  {
-   "keyword": "코스피 반등 마감",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T11:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "삼성전자·SK하이닉스 반등에도 거래대금 28.2% 감소",
-     "press": "kjdaily.com",
-     "publishedAt": "2026-11-02T12:22:00.000Z",
-     "link": "http://www.kjdaily.com/article.php?aid=1793622040691073276"
-    },
-    {
-     "title": "인텔발 뉴욕증시 악재에도 코스피 반등‥중간선거 등 변수 여전",
+     "title": "\"5·18은 DJ·북한이 주도한 내란\" 주장 전한길 공소청 송치",
      "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-02T11:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533008?sid=101"
+     "publishedAt": "2026-11-02T14:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533045?sid=102"
     },
     {
-     "title": "'인텔 쇼크'에도 반등…기관 매수에 코스피 2%대↑",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-02T11:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922131?sid=161"
+     "title": "\"5·18 북한개입\" 전한길씨 허위사실유포 혐의로 공소청 송치",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-02T14:07:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000078945"
+    },
+    {
+     "title": "“5·18은 북한이 주도한 내란”…전한길, ‘허위사실 유포 혐의’에 공...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-02T14:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005757907?sid=102"
     }
    ]
   },
   {
-   "keyword": "크래프톤",
+   "keyword": "우리들의 발라드2 한로이",
    "sources": [
-    "google"
+    "daum"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 2,
-   "firstArticleAt": "2026-11-02T11:32:00.000Z",
+   "firstArticleAt": "2026-11-02T14:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "크래프톤, K팝 팬덤 겨냥한 AI 챗 서비스 ‘키프’ 출시…피프티피프티...",
-     "press": "venturesquare.net",
-     "publishedAt": "2026-11-02T12:26:00.000Z",
-     "link": "https://www.venturesquare.net/1124990/"
+     "title": "'1라운드 혹평' 한로이 \"취객이 시비 걸기도…나이 안 맞는 모습 인지\"(...",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-02T14:52:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109676767390"
     },
     {
-     "title": "크래프톤, K팝 AI 캐릭터 챗 '키프' 출시…AI 사업화 본격화",
-     "press": "webeconomy.co.kr",
-     "publishedAt": "2026-11-02T11:46:00.000Z",
-     "link": "https://www.webeconomy.co.kr/news/articleView.html?idxno=2357722"
+     "title": "한로이, 엄마의 최애곡 '널 보고 있으면' 노래...진심 가득한 목소리에...",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-02T14:36:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=778444"
     },
     {
-     "title": "\"사람과 협력\" 크래프톤 루도 로보틱스, 로봇 AI '루디 0.2' 공개",
-     "press": "webeconomy.co.kr",
-     "publishedAt": "2026-11-02T11:32:00.000Z",
-     "link": "https://www.webeconomy.co.kr/news/articleView.html?idxno=2357785"
+     "title": "죽음의 정면대결 박예승VS한로이에 경악...박예승, 지목권으로 한로이 ...",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-02T14:26:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=778443"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 169,
-  "matched": 47,
-  "avgLeadMin": 86,
+  "flagged": 172,
+  "matched": 59,
+  "avgLeadMin": 121,
   "recent": [
    {
-    "keyword": "바이낸스 해킹",
-    "hitKeyword": "북한 바이낸스 해킹",
-    "hitAt": "2026-11-02T21:00:00+09:00",
-    "leadMin": 283
+    "keyword": "2026 푸드위크 코리아서 다양한 제품 공개",
+    "hitKeyword": "2026 한국시리즈 삼성 KT",
+    "hitAt": "2026-11-02T23:00:00+09:00",
+    "leadMin": 292
    },
    {
-    "keyword": "G마켓 개인정보 유출",
-    "hitKeyword": "G마켓 개인정보 유출",
-    "hitAt": "2026-11-02T21:00:00+09:00",
-    "leadMin": 172
+    "keyword": "이란 호르무즈 해협 개방 조건",
+    "hitKeyword": "이란 호르무즈 해협 개방",
+    "hitAt": "2026-11-02T23:00:00+09:00",
+    "leadMin": 141
    },
    {
-    "keyword": "샤이니 민호, 마라톤 논란",
-    "hitKeyword": "샤이니 민호 마라톤 논란",
-    "hitAt": "2026-11-02T20:00:00+09:00",
-    "leadMin": 51
+    "keyword": "하이닉스 외국인 기관 순매수 증가",
+    "hitKeyword": "삼성 하이닉스 주주환원",
+    "hitAt": "2026-11-02T22:30:00+09:00",
+    "leadMin": 484
    },
    {
-    "keyword": "샤이니 민호 마라톤 조력 논란",
-    "hitKeyword": "샤이니 민호 마라톤 논란",
-    "hitAt": "2026-11-02T20:00:00+09:00",
-    "leadMin": 31
+    "keyword": "코스피",
+    "hitKeyword": "코스피 반등",
+    "hitAt": "2026-11-02T22:30:00+09:00",
+    "leadMin": 201
    },
    {
-    "keyword": "박항서 감독 인종차별",
-    "hitKeyword": "박항서 인종차별 피해",
-    "hitAt": "2026-11-02T20:00:00+09:00",
-    "leadMin": 21
+    "keyword": "코스피 반등 마감",
+    "hitKeyword": "코스피 반등",
+    "hitAt": "2026-11-02T22:30:00+09:00",
+    "leadMin": 181
    },
    {
-    "keyword": "이강철·박진만 대화",
-    "hitKeyword": "이강철 박진만 감독 대결",
-    "hitAt": "2026-11-02T19:30:00+09:00",
-    "leadMin": 284
+    "keyword": "브로드컴 과징금 확정",
+    "hitKeyword": "브로드컴 과징금 확정",
+    "hitAt": "2026-11-02T22:30:00+09:00",
+    "leadMin": 171
    },
    {
-    "keyword": "이강철 박진만 대화",
-    "hitKeyword": "이강철 박진만 감독 대결",
-    "hitAt": "2026-11-02T19:30:00+09:00",
-    "leadMin": 234
+    "keyword": "브로드컴 갑질 과징금 확정",
+    "hitKeyword": "브로드컴 과징금 확정",
+    "hitAt": "2026-11-02T22:30:00+09:00",
+    "leadMin": 131
    },
    {
-    "keyword": "이강철과 박진만 대결",
-    "hitKeyword": "이강철 박진만 감독 대결",
-    "hitAt": "2026-11-02T19:30:00+09:00",
-    "leadMin": 204
+    "keyword": "삼성SDS 구미 AI 센터 착공",
+    "hitKeyword": "삼성SDS 구미 AI 데이터센터",
+    "hitAt": "2026-11-02T22:00:00+09:00",
+    "leadMin": 374
    },
    {
-    "keyword": "이강철과 박진만 감독",
-    "hitKeyword": "이강철 박진만 감독 대결",
-    "hitAt": "2026-11-02T19:30:00+09:00",
-    "leadMin": 172
+    "keyword": "제트기",
+    "hitKeyword": "플로리다 제트기 추락",
+    "hitAt": "2026-11-02T22:00:00+09:00",
+    "leadMin": 343
    },
    {
-    "keyword": "미국 중간선거 일정",
-    "hitKeyword": "미국 중간선거",
-    "hitAt": "2026-11-02T19:30:00+09:00",
-    "leadMin": 122
+    "keyword": "삼성SDS 구미 데이터센터 착공",
+    "hitKeyword": "삼성SDS 구미 AI 데이터센터",
+    "hitAt": "2026-11-02T22:00:00+09:00",
+    "leadMin": 322
    }
   ]
  }
