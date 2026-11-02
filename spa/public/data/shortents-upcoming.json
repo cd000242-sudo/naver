@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T05:56:00.547Z",
+ "builtAt": "2026-11-02T06:06:03.803Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "대우건설 체코 원전 재협상 요청",
    "sources": [
     "nate"
    ],
-   "articles90": 55,
+   "articles90": 58,
    "recent20": 11,
-   "press": 54,
-   "firstArticleAt": "2026-11-02T04:28:00.000Z",
+   "press": 56,
+   "firstArticleAt": "2026-11-02T04:37:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "\"체코 원전 협상 일방적 종료\"…대우건설, 정부 중재 요청",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-02T05:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000141397?sid=101"
+     "title": "대우건설 “수정안 제출 30분 만에 결렬”…산업부에 재협상 중재 요청",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-02T06:04:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2643080"
     },
     {
-     "title": "[전문] 대우건설, 산업통상부 중재 통한 체코 신규 원전 건설 계약 재협...",
-     "press": "newswhoplus.com",
-     "publishedAt": "2026-11-02T05:50:00.000Z",
-     "link": "https://www.newswhoplus.com/news/articleView.html?idxno=73284"
+     "title": "“수천억 손실 감수했는데” 대우건설 산업부에 체코 원전 재협상 중재...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-02T06:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004677785?sid=101"
     },
     {
-     "title": "대우건설, 산업부에 체코 원전 재협상 중재 요청",
-     "press": "ikld.kr",
-     "publishedAt": "2026-11-02T05:48:00.000Z",
-     "link": "http://www.ikld.kr/news/articleView.html?idxno=343335"
+     "title": "대우건설, 체코 원전 시공 협상 결렬에 반발...\"수백억 선투입했는데...",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-02T06:02:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=622389"
     }
    ]
   },
   {
-   "keyword": "이재명 대통령 시정연설",
+   "keyword": "이재명 예산 시정연설",
    "sources": [
     "nate"
    ],
-   "articles90": 61,
-   "recent20": 29,
-   "press": 38,
-   "firstArticleAt": "2026-11-02T05:14:00.000Z",
+   "articles90": 68,
+   "recent20": 8,
+   "press": 52,
+   "firstArticleAt": "2026-11-02T04:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보]'성장' 36번 외친 李대통령...'3대 민생 프로젝트' 승부수로 대전...",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-02T05:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000120431?sid=100"
+     "title": "이 대통령이 밝힌 '예산안 의미'…\"경제 성장만으로 불충분, 국민 삶의...",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-02T06:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002393126?sid=100"
     },
     {
-     "title": "[포토] 이재명 대통령 시정연설",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-02T05:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003481189?sid=100"
+     "title": "김민석, 李대통령 시정연설에 \"세계 선도 원대한 꿈 함께 나눠\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-02T06:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009265069?sid=100"
     },
     {
-     "title": "李 대통령 시정연설 두고…與 \"미래 위한 예산\" vs 野 \"무모한 재정 폭주...",
-     "press": "wolyo.co.kr",
-     "publishedAt": "2026-11-02T05:54:00.000Z",
-     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=319914"
+     "title": "李대통령 시정연설…김민석 \"성장의 과실이 확산되는 모두의 성장으로...",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-02T06:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005435278?sid=100"
     }
    ]
   },
@@ -79,36 +79,134 @@
    "sources": [
     "google"
    ],
-   "articles90": 21,
-   "recent20": 5,
-   "press": 18,
-   "firstArticleAt": "2026-11-02T05:02:00.000Z",
+   "articles90": 23,
+   "recent20": 6,
+   "press": 21,
+   "firstArticleAt": "2026-11-02T05:16:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "최병인 세종시 농업유통팀장 '청백봉사상'",
-     "press": "goodmorningcc.com",
-     "publishedAt": "2026-11-02T05:46:00.000Z",
-     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=455046"
+     "title": "김포시, '제32회 농업인의 날 기념 김포농업 대축제' 개최",
+     "press": "kmaeil.com",
+     "publishedAt": "2026-11-02T06:04:00.000Z",
+     "link": "https://www.kmaeil.com/news/articleView.html?idxno=656673"
     },
     {
-     "title": "대동, AI트랙터부터 농업로봇까지…245평 키엠스타 전시장 꾸린다",
-     "press": "economist.co.kr",
-     "publishedAt": "2026-11-02T05:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/243/0000105107?sid=101"
+     "title": "경북농업기술원, 양파 기계화 재배로 생산량 1.5배 늘려",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-02T06:02:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261102500475"
     },
     {
-     "title": "철원군, '제39회 철원군 농업인의 날' 행사 11일 개최",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-02T05:42:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2013229"
+     "title": "〔기고〕 농업기술센터 조직개편, 미래 농업과 농민 편의가 최우선이다",
+     "press": "idaegu.com",
+     "publishedAt": "2026-11-02T06:00:00.000Z",
+     "link": "https://www.idaegu.com/news/articleView.html?idxno=666678"
+    }
+   ]
+  },
+  {
+   "keyword": "리센느 원이 무대 이탈",
+   "sources": [
+    "nate",
+    "daum"
+   ],
+   "articles90": 23,
+   "recent20": 5,
+   "press": 21,
+   "firstArticleAt": "2026-11-02T04:39:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "리센느 원이, 무대 이탈한 이유는 의상 문제 \"옷 줄어들어 숨 안 쉬어져...",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-02T06:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/079/0004205538"
+    },
+    {
+     "title": "리센느 원이, 갑작스러운 무대 이탈 해명…“숨이 안 쉬어졌다” [MK★이...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-02T05:57:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001145752"
+    },
+    {
+     "title": "리센느 원이, 의상 문제로 돌발 무대 이탈 \"숨 안쉬어져\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-02T05:55:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000518691"
+    }
+   ]
+  },
+  {
+   "keyword": "대니엘 최원태 1차전 선발",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 21,
+   "recent20": 4,
+   "press": 19,
+   "firstArticleAt": "2026-11-02T05:11:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "KT 위즈, 한국시리즈 미디어데이서 통합우승 의지 밝혀...1차전 선발투수...",
+     "press": "joongboo.com",
+     "publishedAt": "2026-11-02T05:56:00.000Z",
+     "link": "https://www.joongboo.com/news/articleView.html?idxno=363741191"
+    },
+    {
+     "title": "kt 대니엘 VS 삼성 최원태, KS '1차전' 출격한다",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-02T05:52:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/02/2026110200277.html"
+    },
+    {
+     "title": "kt 대니엘 vs 삼성 최원태, 한국시리즈 1차전 출격",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-02T05:52:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/666/0000130202"
+    }
+   ]
+  },
+  {
+   "keyword": "전자발찌 청와대 칼부림 예고",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 17,
+   "recent20": 5,
+   "press": 17,
+   "firstArticleAt": "2026-11-02T04:42:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[속보] “청와대서 칼부림하겠다” 예고후 전자발찌 끈 50대…경찰, 긴급...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-02T06:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003694856?sid=102"
+    },
+    {
+     "title": "전자발찌 끄고 청와대·경찰청에 칼부림 예고 50대男 긴급체포",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-02T05:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004205527?sid=102"
+    },
+    {
+     "title": "전자발찌 전원 끄고 ‘청와대 흉기 난동’ 예고한 50대 남성",
+     "press": "donga.com",
+     "publishedAt": "2026-11-02T05:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003759399?sid=102"
     }
    ]
   },
   {
    "keyword": "APBC 대표팀 감독",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 25,
@@ -139,17 +237,88 @@
    ]
   },
   {
+   "keyword": "보안",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 19,
+   "recent20": 6,
+   "press": 16,
+   "firstArticleAt": "2026-11-02T05:14:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "금융위, 코인 거래소 비상 점검…바이낸스 해킹에 보안 강화 주문",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-02T06:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000547893?sid=101"
+    },
+    {
+     "title": "안랩 11만8300원 강보합…보안 수요와 투자손익 점검",
+     "press": "job-post.co.kr",
+     "publishedAt": "2026-11-02T06:02:00.000Z",
+     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=235940"
+    },
+    {
+     "title": "은행권, 지원 끝난 DB 교체 나선다…보안·장애 위험 선제 대응",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-02T06:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003481196?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "가덕도 신공항 공사비 증액",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 12,
+   "recent20": 3,
+   "press": 8,
+   "firstArticleAt": "2026-11-02T04:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국힘 부산 의원들 \"가덕도신공항 연내 착공 무산…정부 행정 방기가 원...",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-02T06:00:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1420788"
+    },
+    {
+     "title": "가덕도신공항 착공 또 지연 위기… 부산 국힘 \"정부 책임 떠넘기기 중단...",
+     "press": "pk.newdaily.co.kr",
+     "publishedAt": "2026-11-02T05:56:00.000Z",
+     "link": "https://pk.newdaily.co.kr/site/data/html/2026/11/02/2026110200268.html"
+    },
+    {
+     "title": "부산 국민의힘 의원들 \"가덕도신공항 공사비부터 해결하라\"…정부 압박",
+     "press": "mhns.co.kr",
+     "publishedAt": "2026-11-02T05:48:00.000Z",
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=767137"
+    }
+   ]
+  },
+  {
    "keyword": "100일의 거짓말",
    "sources": [
     "nate"
    ],
-   "articles90": 9,
+   "articles90": 10,
    "recent20": 2,
-   "press": 7,
+   "press": 8,
    "firstArticleAt": "2026-11-02T04:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "우직한 카리스마 속 순정…‘100일의 거짓말’ 이선의 존재감",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-02T05:59:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001302412"
+    },
     {
      "title": "‘100일의 거짓말’ 코우리 유카, 김유정 돕는 엉뚱 조력자…‘감초 활...",
      "press": "sports.khan.co.kr",
@@ -161,83 +330,45 @@
      "press": "sports.khan.co.kr",
      "publishedAt": "2026-11-02T05:45:00.000Z",
      "link": "https://m.entertain.naver.com/article/144/0001147659"
-    },
-    {
-     "title": "‘100일의 거짓말’ 김유정, 진심을 얻고 전국 9.8% 뜀박질",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-02T05:36:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001147657"
     }
    ]
   },
   {
-   "keyword": "가덕도 신공항 공사비 증액",
+   "keyword": "정년 연장",
    "sources": [
-    "signal.bz"
-   ],
-   "articles90": 10,
-   "recent20": 4,
-   "press": 6,
-   "firstArticleAt": "2026-11-02T04:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "부산 국민의힘 의원들 \"가덕도신공항 공사비부터 해결하라\"…정부 압박",
-     "press": "mhns.co.kr",
-     "publishedAt": "2026-11-02T05:48:00.000Z",
-     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=767137"
-    },
-    {
-     "title": "국힘 부산의원들 \"호남 반도체식 속도전, 가덕도엔 왜 안 되나\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-02T05:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016416288?sid=100"
-    },
-    {
-     "title": "국힘 부산 의원들 \"가덕도신공항 공사비 증액, 정부가 책임져야\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-02T05:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009264935?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "영광",
-   "sources": [
-    "daum"
+    "google"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 2,
    "press": 6,
-   "firstArticleAt": "2026-11-02T04:52:00.000Z",
+   "firstArticleAt": "2026-11-02T05:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "코스닥 새내기 영광, 공모가 웃돈 2만1950원…첫날 29.12% 상승",
-     "press": "job-post.co.kr",
-     "publishedAt": "2026-11-02T05:42:00.000Z",
-     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=235898"
+     "title": "정년 후 연금까지 3년 '소득 절벽'…재취업 60% 임시·일용직",
+     "press": "kbsm.net",
+     "publishedAt": "2026-11-02T06:04:00.000Z",
+     "link": "https://www.kbsm.net/news/view.php?idx=539948"
     },
     {
-     "title": "영광YKMC \"상장 통해 반도체 설비 투자 확대…매출 100억 목표\"[IPO레이더...",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-02T05:30:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026110213580312903"
+     "title": "정년 후 연금까지 3년 버텨야…'소득공백' 메우려다 불안정 일자리로",
+     "press": "smarttimes.co.kr",
+     "publishedAt": "2026-11-02T06:02:00.000Z",
+     "link": "http://www.smarttimes.co.kr/news/articleView.html?idxno=50242"
     },
     {
-     "title": "[영광소식] 착한가격업소 이용 캐시백 5％ 추가 지원",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-02T05:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016416235?sid=101"
+     "title": "정년 후 연금까지 소득 절벽 3년…임시직 몰리는 고령층",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-02T05:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014295410?sid=102"
     }
    ]
   },
   {
    "keyword": "이강철·박진만 대화",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 7,
    "recent20": 0,
@@ -259,82 +390,50 @@
      "link": "https://m.sports.naver.com/kbaseball/article/117/0004120964"
     },
     {
-     "title": "대화 나누는 이강철 감독과 박진만 감독",
-     "press": "newsis.com",
+     "title": "대화하는 이강철 감독과 박진만 감독",
+     "press": "yna.co.kr",
      "publishedAt": "2026-11-02T05:09:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/003/0014295259"
+     "link": "https://m.sports.naver.com/kbaseball/article/001/0016416139"
     }
    ]
   },
   {
-   "keyword": "정년 연장",
+   "keyword": "조경태",
    "sources": [
     "signal.bz",
-    "google",
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-02T05:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정년 후 연금까지 소득 절벽 3년…임시직 몰리는 고령층",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-02T05:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014295410?sid=102"
-    },
-    {
-     "title": "연금 65세·정년 60세 '소득공백 5년'…정년 연장 연내 이뤄질까",
-     "press": "ntoday.co.kr",
-     "publishedAt": "2026-11-02T05:20:00.000Z",
-     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=130541"
-    },
-    {
-     "title": "정년 후 3년 '소득 절벽'에 소득급감 가구 70%이상 적자",
-     "press": "newsfc.co.kr",
-     "publishedAt": "2026-11-02T05:10:00.000Z",
-     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82164"
-    }
-   ]
-  },
-  {
-   "keyword": "부평구",
-   "sources": [
     "google"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-02T04:52:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T04:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "인천 부평구, 재개발·재건축 원스톱센터 신설·복지평가 ‘특별상’수...",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-02T05:32:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261102500322"
+     "title": "시정연설 끝나자 집단 퇴장한 국민의힘…홀로 남은 조경태의 악수",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-02T05:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004205523?sid=100"
     },
     {
-     "title": "과태료 안물리고 처리 완료…택시 민원 조작한 인천 부평구 공무원 해임",
-     "press": "kgnews.co.kr",
-     "publishedAt": "2026-11-02T05:08:00.000Z",
-     "link": "https://www.kgnews.co.kr/news/article.html?no=917788"
+     "title": "국힘 조경태 의원과 인사하는 이재명 대통령",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-02T04:56:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3739543"
     },
     {
-     "title": "인천 부평구 십정1동, 남인천신협의 지속적인 이웃사랑으로 동절기 생활...",
-     "press": "kmaeil.com",
-     "publishedAt": "2026-11-02T05:00:00.000Z",
-     "link": "https://www.kmaeil.com/news/articleView.html?idxno=656638"
+     "title": "「M포토」 시정연설 후 조경태 국민의힘 의원과 인사하는 이재명 대통령",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-02T04:44:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=72451"
     }
    ]
   },
   {
    "keyword": "SK하이닉스 주가 상승",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 3,
@@ -367,10 +466,22 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 53,
-  "matched": 12,
-  "avgLeadMin": 48,
+  "flagged": 59,
+  "matched": 14,
+  "avgLeadMin": 57,
   "recent": [
+   {
+    "keyword": "박위, KTX 감사",
+    "hitKeyword": "원샷한솔 KTX",
+    "hitAt": "2026-11-02T15:00:00+09:00",
+    "leadMin": 170
+   },
+   {
+    "keyword": "재혼 황후",
+    "hitKeyword": "재혼 황후 이세영",
+    "hitAt": "2026-11-02T15:00:00+09:00",
+    "leadMin": 44
+   },
    {
     "keyword": "결제주기 단축 시행",
     "hitKeyword": "주식 결제주기 T+1 단축",
@@ -418,18 +529,6 @@
     "hitKeyword": "철원 육군 하사 사망",
     "hitAt": "2026-11-02T13:30:00+09:00",
     "leadMin": 80
-   },
-   {
-    "keyword": "저pbr 기업 151 명단",
-    "hitKeyword": "저PBR 151곳 공개",
-    "hitAt": "2026-11-02T13:30:00+09:00",
-    "leadMin": 15
-   },
-   {
-    "keyword": "계주",
-    "hitKeyword": "학부모 민원 계주 취소",
-    "hitAt": "2026-11-02T13:00:00+09:00",
-    "leadMin": 60
    }
   ]
  }
