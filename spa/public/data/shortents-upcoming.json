@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T15:10:12.697Z",
+ "builtAt": "2026-11-02T15:20:16.115Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "1호기 탑승자 168명 정보 유출",
    "sources": [
     "nate"
    ],
-   "articles90": 13,
+   "articles90": 12,
    "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-02T13:41:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-02T13:52:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -43,66 +43,34 @@
    ]
   },
   {
-   "keyword": "대한민국",
+   "keyword": "우리들의 발라드2 박예승",
    "sources": [
-    "google"
+    "daum"
    ],
-   "articles90": 3,
-   "recent20": 3,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T14:54:00.000Z",
+   "articles90": 6,
+   "recent20": 4,
+   "press": 4,
+   "firstArticleAt": "2026-11-02T14:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "117홀 갖춘 화천, 대한민국 파크골프 본고장 입지 굳힌다",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-02T15:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001228046?sid=102"
+     "title": "비비, 박대희에 \"소속사 있나?\" 러브콜→박예승, 만점자의 충격 탈락 ('...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-02T15:17:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001406915"
     },
     {
-     "title": "대한민국 최초 軍 통신위성 ‘아나시스 1호’ 임무 성공적 완수 후 명예...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-02T14:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002829735?sid=100"
+     "title": "‘만점’ 박예승, 탈락 이변…한로이 91표로 3라운드 진출 (‘우발라2’...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-02T15:10:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1793632184530231010"
     },
     {
-     "title": "\"700만 디아스포라, 대한민국의 미래 성장동력으로\"",
-     "press": "dongponews.net",
-     "publishedAt": "2026-11-02T14:54:00.000Z",
-     "link": "https://www.dongponews.net/news/articleView.html?idxno=61427"
-    }
-   ]
-  },
-  {
-   "keyword": "금융지주 회장 연임 강화",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T13:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[DB증권 인사 전망] 30억 사고 놓친 2022년 감사… 곽봉석 연임·감사위...",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-02T15:00:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3081066"
-    },
-    {
-     "title": "금융당국, 지주회장 3연임 문턱 높인다",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-02T14:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005757908?sid=101"
-    },
-    {
-     "title": "금융지주 회장, 3연임 시 주주총회 75% 찬성 의무화한다",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-02T13:54:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2013412"
+     "title": "파워 보컬 데스메치, 한로이 91표로 승리...박예승, 3라운드 진출 실패 ...",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-02T15:06:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=778449"
     }
    ]
   },
@@ -139,6 +107,38 @@
    ]
   },
   {
+   "keyword": "대한민국",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T14:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "117홀 갖춘 화천, 대한민국 파크골프 본고장 입지 굳힌다",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-02T15:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001228046?sid=102"
+    },
+    {
+     "title": "대한민국 최초 軍 통신위성 ‘아나시스 1호’ 임무 성공적 완수 후 명예...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-02T14:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002829735?sid=100"
+    },
+    {
+     "title": "\"700만 디아스포라, 대한민국의 미래 성장동력으로\"",
+     "press": "dongponews.net",
+     "publishedAt": "2026-11-02T14:54:00.000Z",
+     "link": "https://www.dongponews.net/news/articleView.html?idxno=61427"
+    }
+   ]
+  },
+  {
    "keyword": "5·18 내란 공소청 송치",
    "sources": [
     "signal.bz",
@@ -168,6 +168,38 @@
      "press": "mk.co.kr",
      "publishedAt": "2026-11-02T14:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/009/0005757907?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "금융지주 회장 연임 강화",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T13:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[DB증권 인사 전망] 30억 사고 놓친 2022년 감사… 곽봉석 연임·감사위...",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-02T15:00:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3081066"
+    },
+    {
+     "title": "금융당국, 지주회장 3연임 문턱 높인다",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-02T14:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005757908?sid=101"
+    },
+    {
+     "title": "금융지주 회장, 3연임 시 주주총회 75% 찬성 의무화한다",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-02T13:54:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2013412"
     }
    ]
   },
@@ -206,7 +238,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 178,
+  "flagged": 179,
   "matched": 59,
   "avgLeadMin": 121,
   "recent": [
