@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T04:24:59.516Z",
+ "builtAt": "2026-11-03T04:35:03.643Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "감기약 필로폰 일당 검거",
+   "keyword": "SKT AI 에이전트 경연",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 24,
-   "recent20": 2,
-   "press": 20,
-   "firstArticleAt": "2026-11-03T03:00:00.000Z",
+   "articles90": 29,
+   "recent20": 6,
+   "press": 26,
+   "firstArticleAt": "2026-11-03T04:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한국판 '브레이킹 배드' 일당 검거···\"대량의 감기약으로 마약 제조\"",
-     "press": "ngonews.kr",
-     "publishedAt": "2026-11-03T04:08:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=242215"
+     "title": "SKT 직원들, AI 비서 5000개 만들었다… 사내 ‘왕중왕전’ 개최도",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-03T04:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004007496?sid=105"
     },
     {
-     "title": "[속보]아파트에 비밀 마약공장이…감기약으로 필로폰 제조 일당 구속",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-03T04:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000120492?sid=102"
+     "title": "SKT, 사내 AI 에이전트 경연대회 실시",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T04:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009266963?sid=105"
     },
     {
-     "title": "감기약 성분으로 필로폰 제조…13명 검거",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-03T04:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922380?sid=102"
+     "title": "SKT, 사내 AI 경연대회 'AX 스파크' 개최",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T04:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009266967?sid=105"
     }
    ]
   },
@@ -48,30 +48,63 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 74,
-   "recent20": 10,
+   "articles90": 72,
+   "recent20": 12,
    "press": 19,
-   "firstArticleAt": "2026-11-03T03:09:00.000Z",
+   "firstArticleAt": "2026-11-03T03:15:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "국민의힘 2027년도 예산안 심사 방향 설명하는 장동혁 대표",
+     "title": "인사말하는 장동혁 국민의힘 대표",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T04:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014297848?sid=100"
+    },
+    {
+     "title": "기자회견장 들어오는 장동혁 대표",
      "press": "gukjenews.com",
-     "publishedAt": "2026-11-03T04:24:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3740780"
+     "publishedAt": "2026-11-03T04:32:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3740788"
     },
     {
-     "title": "국민의힘 조정훈 의원과 대화하는 장동혁 대표",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T04:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016418387?sid=100"
+     "title": "[포토] 세운4구역 관련 정책토론회 몰린 국민의힘",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-03T04:30:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3445470"
+    }
+   ]
+  },
+  {
+   "keyword": "감기약으로 필로폰 제조 일당 검거",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-03T03:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "아파트서 감기약으로 필로폰 만들어 유통하려던 조직 검거",
+     "press": "kado.net",
+     "publishedAt": "2026-11-03T04:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000209068?sid=102"
     },
     {
-     "title": "축사하는 국민의힘 장동혁 대표",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T04:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016418389?sid=100"
+     "title": "[속보]아파트에 비밀 마약공장이…감기약으로 필로폰 제조 일당 구속",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-03T04:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000120492?sid=102"
+    },
+    {
+     "title": "한국판 '브레이킹 배드' 일당 검거···\"대량의 감기약으로 마약 제조\"",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-03T04:08:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=242215"
     }
    ]
   },
@@ -80,10 +113,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 4,
-   "press": 13,
-   "firstArticleAt": "2026-11-03T02:59:00.000Z",
+   "articles90": 10,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-03T03:10:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -108,34 +141,35 @@
    ]
   },
   {
-   "keyword": "1호기 정보 유출",
+   "keyword": "재혼 황후 이종석 비주얼 부담",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 13,
+   "articles90": 9,
    "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-03T02:55:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-03T03:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[미디어 이슈] 쿠팡엔 “뒷문 열렸다”던 정부… ‘1호기’ 168명 정보유...",
-     "press": "mediawatch.kr",
-     "publishedAt": "2026-11-03T04:14:00.000Z",
-     "link": "https://www.mediawatch.kr/news/article.html?no=261595"
+     "title": "‘재혼 황후’, “판타지 마음껏 즐겨주었으면” [종합]",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-03T04:25:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001302641"
     },
     {
-     "title": "李 대통령 부부 여권 다시 만든다…외교부 \"1호기 정보유출 조사 진행 ...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-03T03:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001038015?sid=100"
+     "title": "신민아, '재혼 황후' 서양풍 드레스·헤어 변신에 부담…\"다시는 못 만날...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-03T03:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002075754"
     },
     {
-     "title": "[포토]공군 1호기 탑승자 개인정보 유출 관련 브리핑하는 박두순 대변인",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-03T03:38:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261103010001005"
+     "title": "[현장] 실사화 된 '재혼황후', 원작 뛰어넘을까…신민아X주지훈X이종석...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-03T03:46:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16266924"
     }
    ]
   },
@@ -144,10 +178,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-03T02:56:00.000Z",
+   "articles90": 9,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-03T03:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -177,17 +211,17 @@
     "google"
    ],
    "articles90": 9,
-   "recent20": 2,
+   "recent20": 1,
    "press": 8,
-   "firstArticleAt": "2026-11-03T02:56:00.000Z",
+   "firstArticleAt": "2026-11-03T03:34:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "반도체 투자 확대에 용인 아파트 공급 잇따라…올해 1777가구 분양",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-03T04:12:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=755844"
+     "title": "방송 출연 명성 악용 125억 가로챈 부동산 유튜버 구속",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-03T04:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002534478?sid=102"
     },
     {
      "title": "'확정 수익 20%' 미끼로 125억 편취…부동산 유튜버 구속",
@@ -196,74 +230,42 @@
      "link": "https://www.kgnews.co.kr/news/article.html?no=917877"
     },
     {
-     "title": "120억 원대 투자사기를 저지른 유명 부동산 유튜버 구속",
-     "press": "kihoilbo.co.kr",
-     "publishedAt": "2026-11-03T04:04:00.000Z",
-     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3039703"
+     "title": "반도체 투자 확대에 용인 아파트 공급 잇따라…올해 1777가구 분양",
+     "press": "econovill.com",
+     "publishedAt": "2026-11-03T04:12:00.000Z",
+     "link": "https://www.econovill.com/news/articleView.html?idxno=755844"
     }
    ]
   },
   {
-   "keyword": "재혼 황후 이종석 왕자 비주얼 부담",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-03T03:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "신민아, '재혼 황후' 서양풍 드레스·헤어 변신에 부담…\"다시는 못 만날...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-03T03:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002075754"
-    },
-    {
-     "title": "[현장] 실사화 된 '재혼황후', 원작 뛰어넘을까…신민아X주지훈X이종석...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-03T03:46:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16266924"
-    },
-    {
-     "title": "\"세계관 즐겨주길\" 공개일 앞당긴 '재혼황후'의 자신감…K로판 새 장 열...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-03T03:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000636721"
-    }
-   ]
-  },
-  {
-   "keyword": "칸터, 프로농구 1라운드 MVP",
+   "keyword": "1호기 정보 유출",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-03T03:00:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-03T03:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "케렘 칸터, 삼성의 시즌 초반 돌풍 주역으로 우뚝…프로농구 첫 라운드...",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-03T04:00:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=846008"
+     "title": "대통령·장관 여권번호 유출, 어떻게 가능했나…5개월 ‘깜깜이’",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-03T04:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003562469?sid=102"
     },
     {
-     "title": "[농구] 칸터, 1라운드 MVP… 삼성 선수 9시즌 만에 수상",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-03T03:54:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3445454"
+     "title": "[미디어 이슈] 쿠팡엔 “뒷문 열렸다”던 정부… ‘1호기’ 168명 정보유...",
+     "press": "mediawatch.kr",
+     "publishedAt": "2026-11-03T04:14:00.000Z",
+     "link": "https://www.mediawatch.kr/news/article.html?no=261595"
     },
     {
-     "title": "칸터, 프로농구 1라운드 MVP 선정…삼성 선수로는 9시즌 만",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-03T03:40:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/028/0002830441"
+     "title": "李 대통령 부부 여권 다시 만든다…외교부 \"1호기 정보유출 조사 진행 ...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-03T03:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001038015?sid=100"
     }
    ]
   },
@@ -272,13 +274,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
    "firstArticleAt": "2026-11-03T03:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "서울-양평 고속도로 원점 재검토…내년 하반기까지 최적 노선안 마련",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-03T04:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400228?sid=101"
+    },
     {
      "title": "서울~양평 고속도로 3년 만에 재추진…원점 재검토",
      "press": "newsworks.co.kr",
@@ -290,12 +298,6 @@
      "press": "ekn.kr",
      "publishedAt": "2026-11-03T03:54:00.000Z",
      "link": "https://www.ekn.kr/web/view.php?key=20261103021474746"
-    },
-    {
-     "title": "‘ 종점 변경 특혜 의혹’ 서울~양평 고속도로 타당성조사 착수",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-03T03:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005758151?sid=103"
     }
    ]
   },
@@ -304,10 +306,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-03T02:55:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-03T03:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -334,15 +336,22 @@
   {
    "keyword": "신장식 취임 100일 간담회",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 9,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-03T03:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "신장식 “결혼 혼자 하나…민주당 신뢰 회복·사과가 먼저”",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-03T04:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202209?sid=100"
+    },
     {
      "title": "신장식, 민주당 합당론에 선 긋기…\"국면 전환용 카드 안 받아\"",
      "press": "iminju.net",
@@ -354,54 +363,78 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-03T03:48:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014297766?sid=100"
-    },
-    {
-     "title": "취임 100일 기자간담회 참석하는 신장식 대표",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T03:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009266908?sid=100"
     }
    ]
   },
   {
-   "keyword": "최종면접 김재원 민낯",
+   "keyword": "예세민 검찰총장 후보 물망",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T02:56:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-03T04:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'최종면접' 김재원 \"첫 영화 위해 6kg 감량, 민낯 촬영까지 했다\"[인터뷰...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-03T03:25:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000636719"
+     "title": "검찰총장 후보 '이정현·박철우·예세민' 물망",
+     "press": "kbsm.net",
+     "publishedAt": "2026-11-03T04:16:00.000Z",
+     "link": "https://www.kbsm.net/news/view.php?idx=540130"
     },
     {
-     "title": "'최종면접' 김재원, 암환자 연기에 다 내려놨다…\"6kg 감량·민낯 촬영도...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-03T02:59:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002075733"
+     "title": "검찰총장 후보군 다음주 중 윤곽",
+     "press": "naeil.com",
+     "publishedAt": "2026-11-03T04:06:00.000Z",
+     "link": "https://www.naeil.com/news/read/607434?ref=naver"
     },
     {
-     "title": "'최종면접' 김재원, 첫 스크린 도전 열정 \"6kg 감량에 민낯 촬영까지\"[인...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-03T02:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003484065"
+     "title": "검찰총장 후보에 이정현·박철우·예세민 물망",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-03T04:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922382?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 345,
-  "matched": 123,
-  "avgLeadMin": 251,
+  "flagged": 347,
+  "matched": 128,
+  "avgLeadMin": 244,
   "recent": [
+   {
+    "keyword": "리센느 컴백",
+    "hitKeyword": "리센느 컴백",
+    "hitAt": "2026-11-03T13:30:00+09:00",
+    "leadMin": 186
+   },
+   {
+    "keyword": "재혼 황후 공개일 변경",
+    "hitKeyword": "재혼황후 공개",
+    "hitAt": "2026-11-03T13:30:00+09:00",
+    "leadMin": 65
+   },
+   {
+    "keyword": "울산 에릭 K리그1 MVP",
+    "hitKeyword": "칸터 라운드 MVP",
+    "hitAt": "2026-11-03T13:30:00+09:00",
+    "leadMin": 55
+   },
+   {
+    "keyword": "칸터, 1라운드 MVP 수상",
+    "hitKeyword": "칸터 라운드 MVP",
+    "hitAt": "2026-11-03T13:30:00+09:00",
+    "leadMin": 25
+   },
+   {
+    "keyword": "칸터, 프로농구 1라운드 MVP",
+    "hitKeyword": "칸터 라운드 MVP",
+    "hitAt": "2026-11-03T13:30:00+09:00",
+    "leadMin": 5
+   },
    {
     "keyword": "박항서 인종차별",
     "hitKeyword": "박항서 인종차별 조롱",
@@ -431,36 +464,6 @@
     "hitKeyword": "역삼동 연쇄방화 이명수",
     "hitAt": "2026-11-03T12:00:00+09:00",
     "leadMin": 56
-   },
-   {
-    "keyword": "울산 에릭, K리그1 MVP 선정",
-    "hitKeyword": "오타니 MLB MVP 경쟁",
-    "hitAt": "2026-11-03T12:00:00+09:00",
-    "leadMin": 56
-   },
-   {
-    "keyword": "울산 에릭 K리그1 MVP",
-    "hitKeyword": "오타니 MLB MVP 경쟁",
-    "hitAt": "2026-11-03T12:00:00+09:00",
-    "leadMin": 36
-   },
-   {
-    "keyword": "집단소송법 서명 캠페인 기자회견",
-    "hitKeyword": "뮌헨 케인 기자회견",
-    "hitAt": "2026-11-03T11:30:00+09:00",
-    "leadMin": 1355
-   },
-   {
-    "keyword": "집단소송법 10만 서명 기자회견",
-    "hitKeyword": "뮌헨 케인 기자회견",
-    "hitAt": "2026-11-03T11:30:00+09:00",
-    "leadMin": 1314
-   },
-   {
-    "keyword": "집단소송법 서명 기자회견",
-    "hitKeyword": "뮌헨 케인 기자회견",
-    "hitAt": "2026-11-03T11:30:00+09:00",
-    "leadMin": 1284
    }
   ]
  }
