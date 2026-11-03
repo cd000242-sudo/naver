@@ -3,7 +3,8 @@
 //
 // Failover contract (deliberately narrow — a wide one wastes quota and misdiagnoses):
 //   401 / 403 / 404 → auth is blocked for THIS key set → retry once with the other mode
-//   429             → the other key hits the same wall → no retry
+//   429             → retry once with the other mode (HUB and the developer-center key are separate apps
+//                     with separate quotas — 2026-11-03 owner live: HUB 429 on every search, legacy never tried)
 //   network/timeout → not a key problem → no retry
 //   one mode only   → nowhere to toss to → return the prescription instead
 // A success memoises the winning mode for the rest of the PROCESS only; persisting it
@@ -186,8 +187,12 @@ async function callWithFailover<T>(
 
     if (AUTH_BLOCKED.has(res.status)) {
       next = nextCandidate(ordered, used);          // auth wall → try the other mode
-    } else if (res.status === 429 && options.rotateOnQuota) {
-      next = nextSameModeCandidate(ordered, used, cred.mode); // quota → another app, same mode
+    } else if (res.status === 429) {
+      // quota → another app of the same mode (opt-in), else the other mode once.
+      // [2026-11-03] HUB and the developer-center key are separate apps: the owner's HUB key answered 429 to every
+      //   search (11/1 the same key worked; the site's 15-min jobs share it) and the legacy key was never tried.
+      next = (options.rotateOnQuota ? nextSameModeCandidate(ordered, used, cred.mode) : undefined)
+        ?? ordered.find((c) => c.mode !== cred.mode && !used.includes(c));
     } else {
       break;                                        // network/5xx → another key changes nothing
     }

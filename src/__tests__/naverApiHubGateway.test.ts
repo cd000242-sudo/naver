@@ -200,11 +200,29 @@ describe('자동 토스(failover)', () => {
     expect(r.attempts).toBe(2);
   });
 
-  it('429 는 토스하지 않는다 — 다른 키도 같은 벽이다', async () => {
+  // [2026-11-03] 계약 변경: HUB 와 기존 키는 서로 다른 앱(한도 별개)이다. 사장님 실사용에서 HUB 가 모든 검색에 429 를
+  //   냈는데(11/1 은 같은 키로 정상), "같은 벽" 가정 때문에 기존 키는 시도조차 안 했다 → 429 도 반대 모드로 한 번 토스.
+  it('429 는 반대 모드로 한 번 토스한다 — HUB 와 기존 키는 한도가 별개다', async () => {
     const { impl, calls } = fakeFetch([429, 200]);
     const r = await callNaverSearch('blog', { query: 'a' }, { credentials: [HUB, LEGACY], fetchImpl: impl });
-    expect(calls).toHaveLength(1);
+    expect(calls).toHaveLength(2);
+    expect(r.ok).toBe(true);
+    expect(r.mode).toBe('legacy');
+    expect(calls[1].headers['X-Naver-Client-Id']).toBeDefined();
+  });
+
+  it('둘 다 429 면 두 번만 시도하고 429 를 그대로 알린다', async () => {
+    const { impl, calls } = fakeFetch([429, 429, 200]);
+    const r = await callNaverSearch('news', { query: 'a' }, { credentials: [HUB, LEGACY], fetchImpl: impl });
+    expect(calls).toHaveLength(2);
     expect(r.ok).toBe(false);
+    expect(r.status).toBe(429);
+  });
+
+  it('키가 한 벌뿐이면 429 에도 다시 부르지 않는다', async () => {
+    const { impl, calls } = fakeFetch([429, 200]);
+    const r = await callNaverSearch('blog', { query: 'a' }, { credentials: [HUB], fetchImpl: impl });
+    expect(calls).toHaveLength(1);
     expect(r.status).toBe(429);
   });
 
