@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T21:20:54.424Z",
+ "builtAt": "2026-11-03T21:30:57.402Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,14 +8,46 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 21,
  "candidates": [
+  {
+   "keyword": "외환보유액 증가",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 27,
+   "recent20": 0,
+   "press": 27,
+   "firstArticleAt": "2026-11-03T21:00:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "외환보유액 26억달러 늘어 4431억달러…운용수익·외화예수금 증가 영향",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-03T21:04:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261103518174?OutUrl=naver"
+    },
+    {
+     "title": "한 달 만에 다시 불어난 외환보유액…10월 26억달러↑",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-03T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006403237?sid=101"
+    },
+    {
+     "title": "외환보유액 4431억6000만달러…한 달 새 26억달러 증가",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-03T21:02:00.000Z",
+     "link": "https://www.ajunews.com/view/20261103183606234"
+    }
+   ]
+  },
   {
    "keyword": "KT 1차전 승리",
    "sources": [
     "nate"
    ],
-   "articles90": 9,
+   "articles90": 11,
    "recent20": 4,
    "press": 8,
    "firstArticleAt": "2026-11-03T20:05:00.000Z",
@@ -23,22 +55,54 @@
    "capped": false,
    "samples": [
     {
+     "title": "'좌타 표적' 로건·오원석 카드 실패…이겼지만 씁쓸한 KT, 변화 예고[KS...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T21:30:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/421/0009268715"
+    },
+    {
+     "title": "[KS1] '이적 우승청부사'의 엇갈린 명암…KT 김현수 웃고, 삼성 최형우 ...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-03T21:18:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261103001422"
+    },
+    {
      "title": "'가을야구 데뷔전부터 펄펄' 안현민, KT 우승 도전의 새 해결사[KS]",
      "press": "news1.kr",
      "publishedAt": "2026-11-03T21:15:00.000Z",
      "link": "https://m.sports.naver.com/kbaseball/article/421/0009268703"
+    }
+   ]
+  },
+  {
+   "keyword": "연금",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-03T20:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "건보료 부과 사각지대 손본다…일용직·금융·연금소득 확대 검토",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-03T21:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541533?sid=101"
     },
     {
-     "title": "KT, 한국시리즈 1차전 승리…삼성에 8-7 진땀승",
-     "press": "bntnews.co.kr",
+     "title": "[김수철의 곡물연금술] ⑤ 카놀라, 독을 지운 연금술사",
+     "press": "dnews.co.kr",
+     "publishedAt": "2026-11-03T21:20:00.000Z",
+     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611021349366780189"
+    },
+    {
+     "title": "[박근종 칼럼] 10년 낸 국민연금이 그냥 받는 기초연금보다 적어, 노후 ...",
+     "press": "mhns.co.kr",
      "publishedAt": "2026-11-03T21:12:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611040005"
-    },
-    {
-     "title": "'퇴출 위기, 스윙 궤적 수정으로 극복' kt 힐리어드, 한국시리스 1차전 ...",
-     "press": "thesportstimes.co.kr",
-     "publishedAt": "2026-11-03T21:07:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/472/0000042267"
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=767419"
     }
    ]
   },
@@ -48,13 +112,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-03T20:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "유럽 하늘길 불안…여객기 7대 폭파 위협 신고",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-03T21:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012286765?sid=104"
+    },
     {
      "title": "유럽 하늘길도 러 파괴공작? 여객기 7대 폭파 위협 신고",
      "press": "chosun.com",
@@ -66,19 +136,45 @@
      "press": "news.tvchosun.com",
      "publishedAt": "2026-11-03T20:36:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/448/0000648804?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "러시아 우크라 구호센터 폭격",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T20:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "러, 우크라 구호센터 폭격해 최소 33명 사망…종전협상 주도권 노리나",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-03T21:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012286764?sid=104"
     },
     {
-     "title": "유럽 여객기 7대, 폭파 위협 신고…폭발물 없어",
+     "title": "러, 우크라 구호센터에 3t 폭탄 9발 투하... 최소 33명 사망",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-03T21:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004007658?sid=104"
+    },
+    {
+     "title": "러, 우크라 구호센터 폭격…최소 33명 숨져",
      "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-03T20:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922626?sid=104"
+     "publishedAt": "2026-11-03T20:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922623?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 462,
+  "flagged": 465,
   "matched": 181,
   "avgLeadMin": 247,
   "recent": [
