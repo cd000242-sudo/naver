@@ -50,7 +50,7 @@ function getAccountSessionDir(accountId: string): string {
 /**
  * 쿠키 파일 경로
  */
-function getCookieFilePath(accountId: string): string {
+export function getCookieFilePath(accountId: string): string {
   return path.join(getAccountSessionDir(accountId), 'cookies.json');
 }
 

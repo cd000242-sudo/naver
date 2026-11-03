@@ -2,6 +2,7 @@ import { blogMismatchStopMessage, resolveExpectedBlog, type ExpectedBlog } from 
 import { getAccountExecutionGuard } from '../automation/accountExecutionGuard.js';
 import { getPublicationCommitJournal } from '../automation/publicationCommitJournal.js';
 import { recheckNetworkWaitStop } from './networkWaitRecheck.js';
+import { connectionCheck, getConnection, readSavedLogin, watchLoginForConnect, type ConnectWatchDeps } from './accountConnection.js';
 import { LOGIN_AUTO_RESUME_CODES, isWatchingLoginForAutoResume, watchLoginForAutoResume, type LoginWindowPeek } from './loginAutoResume.js';
 
 export const ACCOUNT_SAFETY_LABELS: Record<string, string> = {
@@ -11,7 +12,7 @@ export const ACCOUNT_SAFETY_LABELS: Record<string, string> = {
 };
 /** 'account' = a registered account id (account panels); 'naver-id' = the Naver ID typed/saved on the main publish screen. */
 export type SafetyLookup = 'account' | 'naver-id';
-export type SafetyAction = 'status' | 'open' | 'open-posts' | 'resume' | 'confirm' | 'reset-journal' | 'auto-recheck';
+export type SafetyAction = 'status' | 'open' | 'open-posts' | 'resume' | 'confirm' | 'reset-journal' | 'auto-recheck' | 'check';
 type Account = { id: string; naverId?: string; blogId: string };
 type Verdict = { status: string; reason?: string; identityMismatch?: boolean; blogId?: string; observedBlogId?: string; expectedBlogId?: string };
 type Sessions = {
@@ -118,6 +119,24 @@ export function createAccountSafetyController(accounts: () => Account[], session
       log: message => console.warn(message),
     });
   };
+  /** Deps for the connection check/watch: only reads the guard (it can never pause or resume), and uses the same browser calls as above. */
+  const connectDeps = (): ConnectWatchDeps => ({
+    status: x => guard.getStatus(x),
+    ensureSession: x => sessions.ensureSessionForUser(x),
+    verify: (x, options) => sessions.verifyAccountForUser(x, options),
+    openWindow: x => sessions.openForUser(x),
+    peek: async x => sessions.peekLoginWindowForUser ? sessions.peekLoginWindowForUser(x) : { open: false, onLoginPage: false, fingerprint: '' },
+    log: message => console.warn(message),
+  });
+  /** After the person-initiated [로그인 창 열기]: notice the login finishing (peek only; an auto-resume stop is left to maybeWatchLogin). */
+  const maybeWatchConnect = (id: string): void => {
+    if (sessions.peekLoginWindowForUser && sessions.isWindowOpenForUser?.(id)) watchLoginForConnect(id, connectDeps());
+  };
+  /** status plus the last connection check of this app run and whether login cookies are saved (expiry only, never a value). */
+  const view = async (key: string, lookup: SafetyLookup) => {
+    const { id } = resolve(key, lookup);
+    return { ...status(key, lookup), connection: getConnection(id), savedLogin: await readSavedLogin(id) };
+  };
   /** PUBLISH_OUTCOME_UNKNOWN with nothing left to confirm (already confirmed, or the record was reset). */
   const outcomeSettled = (id: string, code?: string) => code === 'PUBLISH_OUTCOME_UNKNOWN' && !journal.isUnreadable(id) && !journal.hasUnconfirmed(id);
   /** The check needs a browser to look at; open it first. It must happen before guard.resume*, which holds the account busy. */
@@ -125,7 +144,7 @@ export function createAccountSafetyController(accounts: () => Account[], session
   async function act(key: string, action: SafetyAction, expectedVersion?: number,
     outcome?: 'published' | 'not-published', pendingToken?: string, lookup: SafetyLookup = 'account') {
     const { id, blogId } = resolve(key, lookup);
-    if (action === 'status') { status(key, lookup); maybeWatchLogin(id); return { success: true, state: status(key, lookup) }; }
+    if (action === 'status') { status(key, lookup); maybeWatchLogin(id); return { success: true, state: await view(key, lookup) }; }
     if (action === 'auto-recheck') {   // [2026-10-09] 무인 작업 전용 — NETWORK_WAIT 멈춤만 읽기 전용으로 다시 확인(networkWaitRecheck)
       status(key, lookup); // 미확정 발행 기록이 있으면 먼저 PUBLISH_OUTCOME_UNKNOWN 으로 멈춰 둔다.
       let attempted = false; // 예약 cron 이 매분 부르므로, 실제로 확인한 때(와 상태가 바뀐 때)만 기록한다.
@@ -142,9 +161,13 @@ export function createAccountSafetyController(accounts: () => Account[], session
     }
     const before = status(key, lookup);
     if (before.busy) return { success: false, state: before, message: '이 계정의 작업이 끝난 뒤 다시 확인해주세요.' };
-    const readOnly = action === 'open' || action === 'open-posts';
+    const readOnly = action === 'open' || action === 'open-posts' || action === 'check';
     if (!readOnly && expectedVersion !== before.version) return { success: false, state: before, message: '계정 상태가 변경되었습니다. 확인 후 다시 눌러주세요.' };
-    if (action === 'open') { await sessions.openForUser(id); maybeWatchLogin(id); return { success: true, state: status(key, lookup), message: '열린 네이버 창에서 직접 로그인·본인확인을 완료해주세요.' }; }
+    if (action === 'check') {   // Read-only for the stop state: it records what it saw but never pauses or resumes the account.
+      const reply = await connectionCheck(id, connectDeps());
+      return { success: reply.success, state: await view(key, lookup), message: reply.message };
+    }
+    if (action === 'open') { await sessions.openForUser(id); maybeWatchLogin(id); maybeWatchConnect(id); return { success: true, state: await view(key, lookup), message: '열린 네이버 창에서 직접 로그인·본인확인을 완료해주세요.' }; }
     if (action === 'open-posts') {
       try { await sessions.openPostListForUser(id, blogId); } catch { return { success: false, state: status(key, lookup), message: OPEN_FAILED }; }
       return { success: true, state: status(key, lookup), message: '네이버 글 목록을 열었습니다. 방금 글이 올라갔는지(예약 발행이면 예약 목록도) 확인한 뒤 알려주세요.' };

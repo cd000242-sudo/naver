@@ -583,6 +583,7 @@ try {
     'openaiImageGuard.js',
     'pipelineConfig.js',  // [Phase 7.1] 발행 파이프라인 설정 단일 해석처 (publishingHandlers/continuousPublishing/multiAccountManager보다 먼저 로드)
     'accountPauseModal.js',  // [2026-10-09] 메인 화면 발행 중 계정 멈춤 안내 패널 (continuousPublishing/fullAutoFlow 가 import)
+    'accountConnectPanel.js',  // [2026-11-03] 🔗 네이버 계정 연결 칸 (accountManageWindow 가 import — 먼저 로드, 메인 화면 #naver-connect-slot 에도 스스로 붙음)
     'accountManageForm.js',  // [2026-10-09] ⚙️ 계정 관리 창의 수정 폼 (accountManageWindow 가 import — 먼저 로드)
     'blogPerformancePanel.js',  // [2026-10-21] 📊 블로그 성과 칸 (blogProfileForm 이 import — 먼저 로드)
     'blogProfileForm.js',  // [2026-10-21] 🧭 블로그 설정 폼 (accountManageWindow 가 import — 먼저 로드)

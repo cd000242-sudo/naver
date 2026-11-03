@@ -9,6 +9,7 @@
 
 import { accountManageBlogIdOf, accountManageBuildForm } from './accountManageForm.js';
 import type { AccountManageAccount, AccountManageSaved } from './accountManageForm.js';
+import { accountConnectBuild } from './accountConnectPanel.js';
 import { showAccountPauseModal } from './accountPauseModal.js';
 import { blogProfileBuildForm } from './blogProfileForm.js';
 
@@ -113,6 +114,8 @@ function accountManageBuildRow(account: AccountManageAccount, handlers: { edit: 
   const blog = accountManageBlogIdOf(account.blogId);
   const detail = (text: string) => accountManageElement('div', 'font-size:0.82rem;line-height:1.6;color:var(--text-muted,#cbd5e1);word-break:break-all;', text);
   info.append(head, detail(`네이버 아이디: ${account.naverId?.trim() || '미입력'}`), detail(`블로그 주소: ${blog ? `blog.naver.com/${blog}` : '첫 발행 때 자동 확인'}`));
+  // 네이버 계정 연결 줄(2026-11-03): reads the status only; Chrome starts when its own buttons are pressed.
+  if (account.naverId?.trim()) info.append(accountConnectBuild({ lookup: 'account', getKey: () => account.id }).element);
   const actions = accountManageElement('div', 'display:flex;gap:0.4rem;flex-wrap:wrap;');
   const edit = accountManageActionButton('edit', '수정', 'edit'); const remove = accountManageActionButton('delete', '삭제', 'delete');
   edit.addEventListener('click', handlers.edit); remove.addEventListener('click', () => handlers.remove(row));
