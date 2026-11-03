@@ -108,7 +108,8 @@ describe('every regenerate entry point uses the one routing rule (source guards)
   it('grid 🔄 and prompt card 🔄 call the routed helper, never a NAVER search or a fixed engine', () => {
     for (const name of ['regenerateImageFromGrid', 'regenerateSingleImageWithPromptItem']) {
       const fn = body(grid, name);
-      expect(fn).toMatch(/regenerateWithSelectedEngine\(heading, prompt\)/);
+      // 2026-11-04: the stored image rides along so the request matches the first generation (imageRegenerateSameRequest.test.ts).
+      expect(fn).toMatch(/regenerateWithSelectedEngine\(heading, prompt, storedImageForRegenerate\(heading\)\)/);
       expect(fn).not.toMatch(/searchNaverImage\(|generateNanoBananaProImage\(|provider: 'stability'|provider: 'falai'/);
     }
   });

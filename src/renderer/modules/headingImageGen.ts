@@ -65,6 +65,7 @@ declare function clearManualEnglishPromptOverrideForHeading(heading: string): vo
 declare function generateImagesWithCostSafety(options: any): Promise<any>;
 declare function readSelectedImageSource(): string;
 declare function resolveImageRegenerateRoute(source: unknown): { kind: 'generate'; provider: string } | { kind: 'blocked'; message: string };
+declare function buildImageRegenerateRequest(heading: string, prompt: string, stored?: any): { items: any[]; postTitle: string; isFullAuto: true; thumbnailTextInclude?: boolean; missingEnglishPrompt: boolean };
 declare function takeThumbnailDirectorMeta(heading: string, imageUrl: string): Record<string, unknown>;
 declare function readRawPipelineSettings(): { headingImageMode: string | null; thumbnailTextInclude: string | null; textOnlyPublish: string | null; imageStyle: string | null; imageRatio: string | null; thumbnailImageRatio: string | null; subheadingImageRatio: string | null; fullAutoImageSource: string | null; globalImageSource: string | null; imageFallbackPolicy: string | null; openaiImageModel: string | null };
 declare function generateNanoBananaProImage(prompt: string): Promise<string>;
@@ -4476,9 +4477,13 @@ async function regenerateSingleImage(headingTitle: string, prompt: string): Prom
     // rule (nano-banana-pro only) is enforced. Direct window.api.generateImages
     // calls bypass costAndAutoGen's isShoppingConnect auto-injection and let
     // ImageFX/DALL-E execute in shopping mode.
+    // [2026-11-04] Same request as the first generation (English scene, no-text rule, reference, post title) — imageDisplayGrid.
+    const storedImage = (() => { try { return ImageManager.getImage(resolvedHeadingKey); } catch { return undefined; } })();
+    const { missingEnglishPrompt, ...regenerateRequest } = buildImageRegenerateRequest(resolvedHeadingTitle, safePrompt, storedImage);
+    if (missingEnglishPrompt) appendLog(`⚠️ "${resolvedHeadingTitle}" 의 영어 장면 프롬프트가 없어 소제목으로 만듭니다 — 처음 생성과 그림이 달라질 수 있습니다.`, 'images-log-output');
     const result = await generateImagesWithCostSafety({
       provider,
-      items: [{ heading: resolvedHeadingTitle, prompt: safePrompt }],
+      ...regenerateRequest,
       regenerate: true,
       postId: currentPostId || undefined,
     });

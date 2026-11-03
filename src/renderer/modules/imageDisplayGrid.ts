@@ -798,15 +798,64 @@ export function readSelectedImageSource(): string {
   return String(button?.dataset?.source || button?.getAttribute?.('data-source') || '').trim();
 }
 
+// An English image scene (the LLM-built prompt), not a Korean heading. Korean words inside quotes are allowed.
+const looksLikeEnglishScene = (value: unknown): value is string => {
+  const text = String(value || '').trim();
+  const latin = (text.match(/[A-Za-z]/g) || []).length;
+  const hangul = (text.match(/[가-힣]/g) || []).length;
+  return latin >= 12 && latin > hangul * 2;
+};
+
+/** The English scene the first generation used for this heading: the given prompt, the stored image, or the heading list. */
+function regenerateEnglishScene(heading: string, prompt: string, stored: any): string {
+  const titles = (globalThis as any).window?._headingTitles;
+  const prompts = (globalThis as any).window?._headingPrompts;
+  const at = Array.isArray(titles) ? titles.findIndex((t: unknown) => String(t || '').trim() === heading) : -1;
+  const candidates = [prompt, stored?.englishPrompt, stored?.prompt, at >= 0 && Array.isArray(prompts) ? prompts[at] : ''];
+  return String(candidates.find(looksLikeEnglishScene) || '').trim();
+}
+
+/**
+ * [2026-11-04] 사장님 "재생성 버튼 … 프롬프트가 다른 것 같은데": regenerate used to send only { heading, prompt }.
+ * Build the same request the first generation sends (headingImageGen generateOne / dedicated thumbnail): English scene as
+ * englishPrompt (main otherwise re-sanitizes or re-translates), isThumbnail / allowText, reference image, post title, isFullAuto.
+ */
+export function buildImageRegenerateRequest(heading: string, prompt: string, stored?: any): {
+  items: any[]; postTitle: string; isFullAuto: true; thumbnailTextInclude?: boolean; missingEnglishPrompt: boolean;
+} {
+  const doc = (globalThis as any).document;
+  const value = (id: string) => String(doc?.getElementById?.(id)?.value || '').trim();
+  const postTitle = value('unified-generated-title') || value('unified-title') || value('image-title');
+  const key = String(heading || '').trim();
+  const isThumbnail = stored?.isThumbnail === true || key === '🖼️ 썸네일' || key === '썸네일' || key === '📌 썸네일';
+  const thumbnailTextInclude = doc?.getElementById?.('thumbnail-text-option')?.checked === true;
+  const scene = regenerateEnglishScene(key, prompt, stored);
+  let reference = {};
+  if (!isThumbnail) { try { reference = resolveReferenceImageForHeading(key) || {}; } catch { reference = {}; } }
+  const item = {
+    heading: isThumbnail ? (postTitle || key) : key,
+    prompt: scene || String(prompt || '').trim() || key,
+    ...(scene ? { englishPrompt: scene } : {}),
+    isThumbnail,
+    allowText: isThumbnail ? thumbnailTextInclude : false,
+    ...reference,
+  };
+  return { items: [item], postTitle, isFullAuto: true, ...(isThumbnail ? { thumbnailTextInclude } : {}), missingEnglishPrompt: !scene };
+}
+
+/** The image stored for this heading (its prompt / thumbnail flag), or undefined. */
+function storedImageForRegenerate(heading: string): any {
+  try { return ImageManager.getImage(heading); } catch { return undefined; }
+}
+
 /** One call with the picked engine. The result keeps the provider that made it and its own text state. */
-export async function regenerateWithSelectedEngine(heading: string, prompt: string): Promise<{ url: string; image: any }> {
+export async function regenerateWithSelectedEngine(heading: string, prompt: string, stored?: any): Promise<{ url: string; image: any }> {
   const route = resolveImageRegenerateRoute(readSelectedImageSource());
   if (route.kind === 'blocked') throw new Error(route.message);
-  const result = await generateImagesWithCostSafety({
-    provider: route.provider,
-    items: [{ heading, prompt }],
-    regenerate: true,
-  });
+  const request = buildImageRegenerateRequest(heading, prompt, stored);
+  if (request.missingEnglishPrompt && typeof appendLog === 'function') appendLog(`⚠️ "${heading}" 의 영어 장면 프롬프트가 없어 소제목으로 만듭니다 — 처음 생성과 그림이 달라질 수 있습니다.`, 'images-log-output');
+  const { missingEnglishPrompt: _missing, ...options } = request;
+  const result = await generateImagesWithCostSafety({ provider: route.provider, ...options, regenerate: true });
   const image = result?.success ? result.images?.[0] : null;
   const url = image ? String(image.previewDataUrl || image.filePath || image.url || '') : '';
   if (!url) throw new Error(result?.message || `${route.provider} 이미지 재생성 실패`);
@@ -828,7 +877,7 @@ async function regenerateImageFromGrid(imageIndex: number, prompt: string, headi
 
   try {
     appendLog(`🔄 "${heading}" 이미지 재생성 중... (${readSelectedImageSource() || '엔진 미선택'})`, 'images-log-output');
-    const regenerated = await regenerateWithSelectedEngine(heading, prompt);
+    const regenerated = await regenerateWithSelectedEngine(heading, prompt, storedImageForRegenerate(heading));
     const newImageUrl = regenerated.url;
 
     // 그리드 미리보기 업데이트
@@ -925,7 +974,7 @@ async function regenerateSingleImageWithPromptItem(imageIndex: number, prompt: s
 
   try {
     appendLog(`🔄 "${heading}" 이미지 재생성 중 (${readSelectedImageSource() || '엔진 미선택'})...`, 'images-log-output');
-    const regenerated = await regenerateWithSelectedEngine(heading, prompt);
+    const regenerated = await regenerateWithSelectedEngine(heading, prompt, storedImageForRegenerate(heading));
     const newImageUrl = regenerated.url;
 
     // 새 이미지로 업데이트
