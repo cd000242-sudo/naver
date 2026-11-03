@@ -3,6 +3,8 @@ import fs from 'fs/promises';
 import path from 'path';
 import crypto from 'crypto';
 import { resolveAuthenticationFailureMessage } from './auth/authFailureMessagePolicy.js';
+import { createDailyEntitlementGate, dailyLicenseIdentity, parseServerDailyEntitlement,
+  type DailyPublishingEntitlement, type DailyEntitlementVerdict } from './licenseDailyEntitlement.js';
 
 /**
  * 영어 에러 메시지를 한글로 변환하는 유틸리티 함수
@@ -121,6 +123,7 @@ export interface LicenseInfo {
   verifiedAt: string;
   expiresAt?: string;
   isValid: boolean;
+  entitlements?: DailyPublishingEntitlement;
   licenseType?: 'trial' | 'standard' | 'premium' | 'external-inflow' | 'free'; // 외부 유입 라이선스 추가
   maxDevices?: number;
   authMethod?: 'code' | 'credentials'; // 인증 방식
@@ -136,6 +139,11 @@ const LICENSE_FILE = 'license.json';
 let licenseDir: string | null = null;
 let licensePath: string | null = null;
 let cachedLicense: LicenseInfo | null = null;
+let _entitlementResponseSequence = 0;
+let _authRequestSequence = 0;
+let _licenseStateSequence = 0;
+let _licenseWriteQueue: Promise<unknown> = Promise.resolve();
+const dailyEntitlementGate = createDailyEntitlementGate(loadLicense);
 const LICENSE_APP_ID = 'com.betterlife.naver';
 const LICENSE_PLATFORM = 'NAVER';
 
@@ -320,15 +328,21 @@ export async function getDeviceId(): Promise<string> {
 }
 
 export async function loadLicense(): Promise<LicenseInfo | null> {
+  const authSequence = _authRequestSequence;
+  const stateSequence = _licenseStateSequence;
+  const current = () => authSequence === _authRequestSequence && stateSequence === _licenseStateSequence;
   const filePath = await ensureLicenseDir();
+  if (!current()) return null;
   const licenseFile = path.join(filePath, LICENSE_FILE);
 
   console.log(`[LicenseManager] loadLicense: 파일 경로 = ${licenseFile}`);
 
   // 최대 2회 시도 (일시적 I/O 오류 대비)
   for (let attempt = 0; attempt < 2; attempt++) {
+    if (!current()) return null;
     try {
       const raw = await fs.readFile(licenseFile, 'utf-8');
+      if (!current()) return null;
       console.log(`[LicenseManager] loadLicense: 파일 읽기 성공, 내용 길이 = ${raw.length}`);
       const license = JSON.parse(raw) as LicenseInfo;
       console.log(`[LicenseManager] loadLicense: 파싱 성공 - isValid: ${license.isValid}, licenseType: ${license.licenseType}, expiresAt: ${license.expiresAt}`);
@@ -340,6 +354,7 @@ export async function loadLicense(): Promise<LicenseInfo | null> {
       cachedLicense = license;
       return license;
     } catch (error) {
+      if (!current()) return null;
       const errCode = (error as NodeJS.ErrnoException).code;
       console.error(`[LicenseManager] loadLicense 시도 ${attempt + 1}/2 실패 (code: ${errCode}):`, (error as Error).message);
 
@@ -352,6 +367,7 @@ export async function loadLicense(): Promise<LicenseInfo | null> {
   }
 
   // 파일 읽기 완전 실패 — 캐시된 라이선스가 있으면 반환 (일시적 I/O 오류 대비)
+  if (!current()) return null;
   if (cachedLicense) {
     console.warn('[LicenseManager] ⚠️ 파일 읽기 실패했지만 캐시된 라이선스 사용:', {
       isValid: cachedLicense.isValid,
@@ -365,25 +381,46 @@ export async function loadLicense(): Promise<LicenseInfo | null> {
   return null;
 }
 
-export async function saveLicense(license: LicenseInfo): Promise<void> {
-  const filePath = await ensureLicenseDir();
-  const licenseFile = path.join(filePath, LICENSE_FILE);
+function queueLicenseMutation<T>(action: () => Promise<T>): Promise<T> {
+  const pending = _licenseWriteQueue.then(action, action);
+  _licenseWriteQueue = pending.catch(() => undefined);
+  return pending;
+}
 
-  cachedLicense = license;
-  await fs.writeFile(licenseFile, JSON.stringify(license, null, 2), 'utf-8');
+async function writeLicense(license: LicenseInfo, authRequest?: number): Promise<boolean> {
+  _licenseStateSequence++;
+  _entitlementResponseSequence++;
+  dailyEntitlementGate.invalidate();
+  const current = () => authRequest === undefined || authRequest === _authRequestSequence;
+  return queueLicenseMutation(async () => {
+    if (!current()) return false;
+    const filePath = await ensureLicenseDir();
+    if (!current()) return false;
+    await fs.writeFile(path.join(filePath, LICENSE_FILE), JSON.stringify(license, null, 2), 'utf-8');
+    _licenseStateSequence++;
+    if (!current()) return false;
+    cachedLicense = license;
+    return true;
+  });
+}
+
+export async function saveLicense(license: LicenseInfo): Promise<void> {
+  await writeLicense(license);
 }
 
 export async function clearLicense(): Promise<void> {
-  const filePath = await ensureLicenseDir();
-  const licenseFile = path.join(filePath, LICENSE_FILE);
-
-  try {
-    await fs.unlink(licenseFile);
-  } catch {
-    // 파일이 없어도 무시
-  }
-
-  cachedLicense = null;
+  _authRequestSequence++;
+  _licenseStateSequence++;
+  _entitlementResponseSequence++;
+  dailyEntitlementGate.invalidate();
+  currentSessionId = null;
+  stopSessionValidation();
+  await queueLicenseMutation(async () => {
+    const filePath = await ensureLicenseDir();
+    try { await fs.unlink(path.join(filePath, LICENSE_FILE)); } catch { /* The file may already be absent. */ }
+    _licenseStateSequence++;
+    cachedLicense = null;
+  });
 
   // 라이선스 만료 시 자동 로그인 설정도 초기화
   try {
@@ -401,6 +438,39 @@ export async function clearLicense(): Promise<void> {
 
 export function getCachedLicense(): LicenseInfo | null {
   return cachedLicense;
+}
+
+/** A slow disk write must not restore authority superseded by a newer server response. */
+async function saveServerVerifiedLicense(license: LicenseInfo, response: unknown, authRequest?: number): Promise<boolean> {
+  const expectedSequence = _entitlementResponseSequence + 1;
+  if (!await writeLicense(license, authRequest)) return false;
+  const current = await loadLicense();
+  if (expectedSequence === _entitlementResponseSequence && current &&
+      dailyLicenseIdentity(current) === dailyLicenseIdentity(license)) dailyEntitlementGate.observe(license, response);
+  return authRequest === undefined || authRequest === _authRequestSequence;
+}
+
+/** Main-only paid feature check. Generic login/offline grace and local entitlement flags never grant it. */
+export async function checkDailyPublishingEntitlement(
+  options: { forceFresh?: boolean; serverUrl?: string } = {},
+): Promise<DailyEntitlementVerdict> {
+  return dailyEntitlementGate.check(async license => {
+    _entitlementResponseSequence++;
+    const serverUrl = options.serverUrl || process.env.LICENSE_SERVER_URL;
+    if (!serverUrl) throw new Error('ENTITLEMENT_SERVER_REQUIRED');
+    const credentialSession = Boolean(license.userId && license.sessionToken);
+    if (!credentialSession && !license.licenseCode) throw new Error('ENTITLEMENT_AUTH_REQUIRED');
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 10_000);
+    try {
+      const response = await fetch(serverUrl, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ ...getLicenseAppPayload(), deviceId: license.deviceId,
+          ...(credentialSession ? { action: 'validate-session', userId: license.userId, sessionToken: license.sessionToken }
+            : { action: 'daily-entitlement', code: license.licenseCode }) }), signal: controller.signal });
+      if (!response.ok) throw new Error('ENTITLEMENT_SERVER_UNAVAILABLE');
+      return await response.json();
+    } finally { clearTimeout(timer); }
+  }, options.forceFresh === true);
 }
 
 /**
@@ -522,20 +592,21 @@ export async function registerLicense(
   serverUrl?: string,
 ): Promise<{ valid: boolean; license?: LicenseInfo; message?: string; debugInfo?: any }> {
   // 기본 검증만 수행 (빈 값 체크)
-  if (!licenseCode || !userId || !password || !email) {
+  if ([licenseCode, userId, password, email, deviceId].some(value => typeof value !== 'string' || !value.trim())) {
     return {
       valid: false,
       message: '모든 필드를 입력해주세요.',
     };
   }
 
+  const authRequest = ++_authRequestSequence;
   // 라이선스 코드를 그대로 사용 (정규화 안 함, 한글/특수문자 허용)
   const normalizedCode = licenseCode.trim();
 
   // 서버 검증 (서버 URL이 제공된 경우)
   if (serverUrl) {
     try {
-      console.log('[LicenseManager] 라이선스 등록 시도:', serverUrl);
+      console.log('[LicenseManager] 라이선스 등록 요청');
 
       const requestBody = {
         action: 'register',
@@ -548,7 +619,7 @@ export async function registerLicense(
         appVersion: app.getVersion(),
       };
 
-      console.log('[LicenseManager] 요청 전송: action=' + requestBody.action + ', userId=' + userId.trim());
+      console.log('[LicenseManager] 등록 요청 전송');
 
       // ✅ [v2.10.15] 일시적 GAS 오류 자동 재시도 — 사용자 보고 '일시적으로 뜨는 오류'
       //   원인: Google Apps Script 동시 실행 제한(30/사용자) 또는 일시 네트워크 끊김
@@ -560,6 +631,7 @@ export async function registerLicense(
       let lastError: Error | null = null;
 
       for (let attempt = 0; attempt < RETRY_BACKOFF_MS.length; attempt++) {
+        if (authRequest !== _authRequestSequence) return { valid: false, message: '다른 로그인 요청 또는 로그아웃으로 취소되었습니다.' };
         if (RETRY_BACKOFF_MS[attempt] > 0) {
           console.log(`[LicenseManager] ⏳ ${RETRY_BACKOFF_MS[attempt] / 1000}초 대기 후 재시도 (${attempt + 1}/${RETRY_BACKOFF_MS.length})`);
           await new Promise(r => setTimeout(r, RETRY_BACKOFF_MS[attempt]));
@@ -574,8 +646,9 @@ export async function registerLicense(
             signal: controller.signal,
           });
           clearTimeout(timeoutId);
-          console.log(`[LicenseManager] 서버 응답 (시도 ${attempt + 1}):`, response.status, response.statusText);
+          console.log(`[LicenseManager] 서버 응답 (시도 ${attempt + 1}):`, response.status);
           responseText = await response.text();
+          if (authRequest !== _authRequestSequence) return { valid: false, message: '다른 로그인 요청 또는 로그아웃으로 취소되었습니다.' };
 
           if (response.ok) {
             // 200 OK — 정상 응답 (사용 가능 여부는 별도 검증)
@@ -593,7 +666,7 @@ export async function registerLicense(
           clearTimeout(timeoutId);
           // 네트워크 에러/타임아웃 → 재시도 가치 있음
           lastError = fetchErr;
-          console.warn(`[LicenseManager] 네트워크 오류 (시도 ${attempt + 1}): ${fetchErr?.message?.slice(0, 100)}`);
+          console.warn(`[LicenseManager] 네트워크 오류 (시도 ${attempt + 1})`);
           if (attempt < RETRY_BACKOFF_MS.length - 1) continue;
           // 마지막 시도 실패 → 그대로 throw
           throw fetchErr;
@@ -607,7 +680,7 @@ export async function registerLicense(
         };
       }
 
-      console.log('[LicenseManager] 서버 응답 본문 (텍스트):', responseText);
+      console.log('[LicenseManager] 등록 응답 수신');
 
       if (!response.ok) {
         return {
@@ -621,7 +694,7 @@ export async function registerLicense(
       let debugInfo: any = null;
       try {
         result = JSON.parse(responseText);
-        console.log('[LicenseManager] 서버 응답 데이터 (JSON):', JSON.stringify(result, null, 2));
+        console.log('[LicenseManager] 등록 응답 파싱 완료');
 
         // 디버그 정보 수집 (renderer로 전달하기 위해)
         debugInfo = {
@@ -637,19 +710,9 @@ export async function registerLicense(
         };
 
         // 디버그 정보 로깅 (메인 프로세스 콘솔)
-        console.log('🔍 [licenseManager] ========================================');
-        console.log('🔍 [licenseManager] 서버 디버그 정보 (register):');
-        console.log('🔍 [licenseManager] - usedValue:', debugInfo.usedValue);
-        console.log('🔍 [licenseManager] - usedCheck:', debugInfo.usedCheck);
-        console.log('🔍 [licenseManager] - used:', debugInfo.used);
-        console.log('🔍 [licenseManager] - isUsed:', debugInfo.isUsed);
-        console.log('🔍 [licenseManager] - action:', debugInfo.action);
-        console.log('🔍 [licenseManager] - licenseCode:', debugInfo.licenseCode);
-        console.log('🔍 [licenseManager] - 전체 응답:', JSON.stringify(result, null, 2));
-        console.log('🔍 [licenseManager] ========================================');
+        console.log('[LicenseManager] 등록 응답 검증 시작');
       } catch (parseError) {
-        console.error('[LicenseManager] JSON 파싱 실패:', parseError);
-        console.error('[LicenseManager] 원본 응답:', responseText);
+        console.error('[LicenseManager] 등록 응답 JSON 파싱 실패');
 
         // ✅ [2026-02-27] 폴백: 등록은 서버에서 성공했을 가능성이 높음
         // GAS register 액션의 쓰기 작업이 느려 HTML 리디렉트 응답이 올 수 있음
@@ -658,6 +721,7 @@ export async function registerLicense(
         try {
           // GAS flush 완료 대기 (서버 쓰기 완료 보장)
           await new Promise(r => setTimeout(r, 2000));
+          if (authRequest !== _authRequestSequence) return { valid: false, message: '다른 로그인 요청 또는 로그아웃으로 취소되었습니다.' };
           const verifyResult = await verifyLicenseWithCredentials(
             userId.trim(),
             password.trim(),
@@ -681,9 +745,9 @@ export async function registerLicense(
               },
             };
           }
-          console.warn('[LicenseManager] ⚠️ 폴백 verify도 실패:', verifyResult?.message);
+          console.warn('[LicenseManager] 폴백 인증 실패');
         } catch (verifyError) {
-          console.error('[LicenseManager] 폴백 verify 오류:', verifyError);
+          console.error('[LicenseManager] 폴백 인증 요청 오류');
         }
 
         // 폴백도 실패한 경우에만 에러 반환
@@ -709,7 +773,7 @@ export async function registerLicense(
 
       // [2026-09-12] 등록 경로도 기본 응답이면 성공으로 세지 않는다.
       if (isServerPlaceholderResponse(result)) {
-        console.error('[LicenseManager] 🚨 판정 불가 응답(등록) — 성공으로 세지 않는다:', JSON.stringify(result).slice(0, 200));
+        console.error('[LicenseManager] 판정 불가 등록 응답');
         return { valid: false, message: TRANSIENT_AUTH_MESSAGE };
       }
 
@@ -717,8 +781,7 @@ export async function registerLicense(
       if ((result.ok === false || result.valid === false) && !isExpiresAtMissing) {
         const errorMsg = resolveAuthenticationFailureMessage(result, '라이선스 등록에 실패했습니다. 입력 정보를 확인해주세요.');
         const translatedMsg = translateErrorMessage(typeof errorMsg === 'string' ? errorMsg : JSON.stringify(errorMsg));
-        console.error('[LicenseManager] 서버 오류:', errorMsg);
-        console.error('[LicenseManager] 서버 응답 전체:', JSON.stringify(result, null, 2));
+        console.error('[LicenseManager] 라이선스 등록 거부');
         return {
           valid: false,
           message: translatedMsg,
@@ -743,6 +806,7 @@ export async function registerLicense(
         licenseCode: normalizedCode,
         deviceId,
         verifiedAt: new Date().toISOString(),
+        entitlements: parseServerDailyEntitlement(result),
         expiresAt: expiresAt, // undefined 허용 (초기 등록 시 서버에서 나중에 계산)
         isValid: true,
         licenseType,
@@ -751,14 +815,9 @@ export async function registerLicense(
         userId: userId,
       };
 
-      console.log('[LicenseManager] 라이선스 등록 성공:', {
-        licenseCode: normalizedCode,
-        expiresAt: expiresAt || '없음 (서버에서 계산 예정)',
-        licenseType,
-        isExpiresAtMissing: isExpiresAtMissing ? '초기 등록 (만료일 서버 계산 예정)' : '정상'
-      });
+      console.log('[LicenseManager] 등록 응답 인증 완료');
 
-      await saveLicense(license);
+      if (!await saveServerVerifiedLicense(license, result, authRequest) || authRequest !== _authRequestSequence) return { valid: false, message: '다른 로그인 요청 또는 로그아웃으로 취소되었습니다.' };
 
       // ✅ [2026-02-13] verify 이중 호출 제거
       // register 액션이 서버에서 사용 기록을 직접 남기므로 별도 verify 불필요
@@ -773,7 +832,7 @@ export async function registerLicense(
         },
       };
     } catch (error) {
-      console.error('[LicenseManager] 서버 연결 오류:', error);
+      console.error('[LicenseManager] 등록 서버 연결 오류');
       const err = error as Error;
       if (err.name === 'AbortError') {
         return {
@@ -827,6 +886,7 @@ export async function verifyLicenseWithCredentials(
   if (takeoverSession && (typeof deviceId !== 'string' || !deviceId.trim())) {
     return { valid: false, message: '현재 기기 정보를 확인하지 못했습니다. 앱을 다시 실행해주세요.' };
   }
+  const authRequest = ++_authRequestSequence;
 
   // 서버 검증 (서버 URL이 제공된 경우)
   if (serverUrl) {
@@ -857,10 +917,11 @@ export async function verifyLicenseWithCredentials(
         signal: controller.signal,
       });
 
-      console.log('[LicenseManager] 서버 응답:', response.status, response.statusText);
+      console.log('[LicenseManager] 서버 응답:', response.status);
 
       // 응답 본문을 텍스트로 먼저 확인
       const responseText = await response.text();
+      if (authRequest !== _authRequestSequence) return { valid: false, code: 'AUTH_REQUEST_SUPERSEDED', message: '다른 로그인 요청 또는 로그아웃으로 취소되었습니다.' };
 
       if (!response.ok) {
         return {
@@ -915,7 +976,6 @@ export async function verifyLicenseWithCredentials(
 
       // 서버에서 발급한 세션 토큰 사용 (중복 로그인 방지)
       const sessionToken = result.sessionToken || '';
-      currentSessionId = sessionToken;
 
       if (result.previousSessionTerminated) {
         console.log('[LicenseManager] ⚠️ 기존 세션 종료됨 (다른 기기에서 로그인 중이었음)');
@@ -926,6 +986,7 @@ export async function verifyLicenseWithCredentials(
       const license: LicenseInfo = {
         deviceId,
         verifiedAt: new Date().toISOString(),
+        entitlements: parseServerDailyEntitlement(result),
         expiresAt: result.expiresAt || undefined, // 서버에서 반환한 만료일 사용
         isValid: true,
         licenseType: result.licenseType || 'premium',
@@ -936,7 +997,8 @@ export async function verifyLicenseWithCredentials(
         phoneVerified: result.phoneVerified === true,
       };
 
-      await saveLicense(license);
+      if (!await saveServerVerifiedLicense(license, result, authRequest) || authRequest !== _authRequestSequence) return { valid: false, code: 'AUTH_REQUEST_SUPERSEDED', message: '다른 로그인 요청 또는 로그아웃으로 취소되었습니다.' };
+      currentSessionId = sessionToken;
 
       // 세션 검증 타이머 시작 (중복 로그인 방지 — 5분마다 서버 확인)
       startSessionValidation(serverUrl, () => {
@@ -1099,13 +1161,14 @@ export async function verifyLicense(
   email?: string,
 ): Promise<{ valid: boolean; license?: LicenseInfo; message?: string }> {
   // 기본 검증만 수행 (빈 값 체크)
-  if (!licenseCode) {
+  if (typeof licenseCode !== 'string' || !licenseCode.trim()) {
     return {
       valid: false,
       message: '라이선스 코드를 입력해주세요.',
     };
   }
 
+  const authRequest = ++_authRequestSequence;
   // 라이선스 코드를 그대로 사용 (정규화 안 함, 한글/특수문자 허용)
   const normalizedCode = licenseCode.trim();
 
@@ -1113,15 +1176,7 @@ export async function verifyLicense(
   // admin-panel의 Google Apps Script 서버와 연동
   if (serverUrl) {
     try {
-      console.log('[LicenseManager] 라이선스 서버 검증 시도:', serverUrl);
-      console.log('[LicenseManager] 요청 데이터:', {
-        action: 'verify',
-        ...getLicenseAppPayload(),
-        code: normalizedCode,
-        deviceId,
-        appVersion: app.getVersion(),
-        email: email || undefined,
-      });
+      console.log('[LicenseManager] 라이선스 코드 인증 요청');
 
       // 타임아웃 추가 (30초) - GAS 서버 응답 지연 대응 (verify-credentials와 동일)
       const controller = new AbortController();
@@ -1146,7 +1201,7 @@ export async function verifyLicense(
 
       clearTimeout(timeoutId);
 
-      console.log('[LicenseManager] 서버 응답:', response.status, response.statusText);
+      console.log('[LicenseManager] 서버 응답:', response.status);
 
       if (!response.ok) {
         return {
@@ -1157,15 +1212,15 @@ export async function verifyLicense(
 
       // ✅ 응답 본문을 텍스트로 먼저 확인 후 JSON 파싱
       const responseText = await response.text();
-      console.log('[LicenseManager] 서버 응답 본문:', responseText.substring(0, 200));
+      if (authRequest !== _authRequestSequence) return { valid: false, message: '다른 로그인 요청 또는 로그아웃으로 취소되었습니다.' };
+      console.log('[LicenseManager] 코드 인증 응답 수신');
 
       let result;
       try {
         result = JSON.parse(responseText);
-        console.log('[LicenseManager] 서버 응답 데이터:', result);
+        console.log('[LicenseManager] 코드 인증 응답 파싱 완료');
       } catch (parseError) {
-        console.error('[LicenseManager] JSON 파싱 실패:', parseError);
-        console.error('[LicenseManager] 원본 응답:', responseText);
+        console.error('[LicenseManager] 코드 인증 응답 JSON 파싱 실패');
 
         // ✅ HTML 응답 감지 (서버 점검/리다이렉트 등)
         let detailedMessage = '서버 연결에 일시적인 문제가 발생했습니다.';
@@ -1177,24 +1232,16 @@ export async function verifyLicense(
 
         return {
           valid: false,
-          message: `${detailedMessage} 관리자에게 문의하세요. (응답: "${responseText.substring(0, 50)}...")`,
+          message: `${detailedMessage} 관리자에게 문의하세요.`,
         };
       }
 
       // 디버그 정보 로깅 (패널에서 사용 기록 확인용)
-      console.log('🔍 [licenseManager] ========================================');
-      console.log('🔍 [licenseManager] 서버 디버그 정보 (verify):');
-      console.log('🔍 [licenseManager] - usedValue:', result.usedValue !== undefined ? result.usedValue : '없음');
-      console.log('🔍 [licenseManager] - usedCheck:', result.usedCheck !== undefined ? result.usedCheck : '없음');
-      console.log('🔍 [licenseManager] - used:', result.used !== undefined ? result.used : '없음');
-      console.log('🔍 [licenseManager] - isUsed:', result.isUsed !== undefined ? result.isUsed : '없음');
-      console.log('🔍 [licenseManager] - action:', 'verify');
-      console.log('🔍 [licenseManager] - code:', normalizedCode);
-      console.log('🔍 [licenseManager] ========================================');
+      console.log('[LicenseManager] 코드 인증 응답 검증 시작');
 
       // [2026-09-12] 같은 구멍이 코드 인증 경로에도 있었다.
       if (isServerPlaceholderResponse(result) || (result.ok !== false && result.valid !== false && !hasPositiveAuthSignal(result))) {
-        console.error('[LicenseManager] 🚨 판정 불가 응답(코드 인증) — 성공으로 세지 않는다:', JSON.stringify(result).slice(0, 200));
+        console.error('[LicenseManager] 판정 불가 코드 인증 응답');
         return { valid: false, message: TRANSIENT_AUTH_MESSAGE };
       }
 
@@ -1218,6 +1265,7 @@ export async function verifyLicense(
         licenseCode: normalizedCode,
         deviceId,
         verifiedAt: new Date().toISOString(),
+        entitlements: parseServerDailyEntitlement(result),
         expiresAt: expiresAt,
         isValid: true,
         licenseType,
@@ -1226,10 +1274,10 @@ export async function verifyLicense(
         userId: result.userId || email, // 이메일 저장
       };
 
-      await saveLicense(license);
+      if (!await saveServerVerifiedLicense(license, result, authRequest) || authRequest !== _authRequestSequence) return { valid: false, message: '다른 로그인 요청 또는 로그아웃으로 취소되었습니다.' };
       return { valid: true, license };
     } catch (error) {
-      console.error('[LicenseManager] 서버 연결 오류:', error);
+      console.error('[LicenseManager] 코드 인증 서버 연결 오류');
       const err = error as Error;
       if (err.name === 'AbortError') {
         return {
@@ -1411,6 +1459,7 @@ export async function revalidateLicense(serverUrl?: string): Promise<boolean> {
     // Record fetch start time for write-guard comparison
     const fetchStartTime = Date.now();
     const syncSequence = ++_revalidateSyncSequence;
+    const entitlementSequence = ++_entitlementResponseSequence;
 
     // [v2.10.226] 3s timeout — Apps Script 응답 지연이 15s+ IPC 점유 (사용자 보고: "초반 응답없음").
     // 재검증은 보조 검증이고 실패 시 로컬 라이선스 유지하므로 timeout 후 false 반환 안전.
@@ -1439,6 +1488,10 @@ export async function revalidateLicense(serverUrl?: string): Promise<boolean> {
       const result = await response.json();
       clearTimeout(_timer);
 
+      const latestLicense = await loadLicense();
+      if (entitlementSequence !== _entitlementResponseSequence || !latestLicense ||
+          dailyLicenseIdentity(latestLicense) !== dailyLicenseIdentity(license)) return true;
+
       // ✅ [v2.10.274] write-guard: skip stale write if a newer sync completed while waiting
       // Date.now() can collide within the same millisecond, so sequence numbers are the primary guard.
       if (_lastAppliedRevalidateSyncSequence > syncSequence || _lastSyncAt > fetchStartTime) {
@@ -1463,6 +1516,7 @@ export async function revalidateLicense(serverUrl?: string): Promise<boolean> {
         let updatedLicense: LicenseInfo = {
           ...license,
           verifiedAt: new Date().toISOString(),
+          entitlements: parseServerDailyEntitlement(result),
         };
         if (result.expiresAt || result.expires) {
           updatedLicense = {
@@ -1485,7 +1539,7 @@ export async function revalidateLicense(serverUrl?: string): Promise<boolean> {
         }
         _lastAppliedRevalidateSyncSequence = syncSequence;
         _lastSyncAt = Date.now();
-        await saveLicense(updatedLicense);
+        await saveServerVerifiedLicense(updatedLicense, result);
       }
     } catch {
       // 서버 연결 실패 또는 timeout 시 로컬 라이선스 유지
@@ -1554,6 +1608,7 @@ export async function validateSession(serverUrl?: string): Promise<SessionValida
 
   // 서버에서 세션 유효성 검증
   if (serverUrl && license.userId) {
+    const entitlementSequence = ++_entitlementResponseSequence;
     try {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 10000);
@@ -1577,6 +1632,10 @@ export async function validateSession(serverUrl?: string): Promise<SessionValida
 
       // 서버 응답 처리 (GAS는 항상 200 OK + JSON 반환)
       const result = await response.json();
+
+      const latestLicense = await loadLicense();
+      if (entitlementSequence !== _entitlementResponseSequence || !latestLicense ||
+          dailyLicenseIdentity(latestLicense) !== dailyLicenseIdentity(license)) return { valid: true };
 
       // 세션이 무효화됨 (다른 기기에서 로그인)
       // 서버 응답: { ok: false, valid: false, code: 'SESSION_EXPIRED_BY_OTHER_LOGIN' }
@@ -1612,6 +1671,11 @@ export async function validateSession(serverUrl?: string): Promise<SessionValida
         };
       }
 
+      if (result.valid === true) {
+        const updatedLicense: LicenseInfo = { ...latestLicense, entitlements: parseServerDailyEntitlement(result),
+          ...(Object.prototype.hasOwnProperty.call(result, 'expiresAt') ? { expiresAt: result.expiresAt || undefined } : {}) };
+        await saveServerVerifiedLicense(updatedLicense, result);
+      }
       return { valid: true };
     } catch (error) {
       console.warn('[LicenseManager] 세션 검증 오류 (무시):', error);

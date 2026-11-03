@@ -142,7 +142,8 @@ try {
     // Renderer settings/prompt modules import text-model helpers directly.
     // CommonJS imports are stripped below, so the registry must exist first.
     'geminiTextModelNormalization.js',
-    'imageProviderMigration.js',
+    'imageStudioPreferences.js',
+  'imageProviderMigration.js',
   ];
   let runtimeSource = '';
   for (const runtimeFile of runtimeModules) {
@@ -547,6 +548,7 @@ try {
     'ldbDestinationSelection.js', // Actual account/category renderer selection
     'ldbDraftImport.js', // Draft and heading image receiver for the extension bridge
     'ldbHandoffPresentation.js', // Navigate to the completed article/image handoff
+    'ldbAutoDraftSave.js', // Opt-in LDB auto draft save through the semi-auto handler
     'postManager.js',              // 5B-5: 포스트 CRUD (renderer.ts에서 삭제된 함수들)
     'contentPreviewAndLibrary.js', // 5B-7: 이미지 라이브러리 + 탭 + 템플릿
     // ✅ [2026-02-26] renderer.ts에서 import하는 모든 모듈 완전 포함
@@ -560,7 +562,8 @@ try {
     'priceInfoModal.js',
     'agentQuotaBadge.js',          // [2026-08-26] 에이전트 구독 잔여 배찌
     'noticeAdmin.js',
-    'imageManagementTab.js',
+    'imageAiDisclosureSetting.js',
+  'imageManagementTab.js',
     'guideModals.js',
     'dashboardUI.js',
     'tailUIUtils.js',
@@ -576,10 +579,14 @@ try {
     'pipelineConfig.js',  // [Phase 7.1] 발행 파이프라인 설정 단일 해석처 (publishingHandlers/continuousPublishing/multiAccountManager보다 먼저 로드)
     'accountPauseModal.js',  // [2026-10-09] 메인 화면 발행 중 계정 멈춤 안내 패널 (continuousPublishing/fullAutoFlow 가 import)
     'accountManageForm.js',  // [2026-10-09] ⚙️ 계정 관리 창의 수정 폼 (accountManageWindow 가 import — 먼저 로드)
+    'blogPerformancePanel.js',  // [2026-10-21] 📊 블로그 성과 칸 (blogProfileForm 이 import — 먼저 로드)
+    'blogProfileForm.js',  // [2026-10-21] 🧭 블로그 설정 폼 (accountManageWindow 가 import — 먼저 로드)
     'accountManageWindow.js',  // [2026-10-09] ⚙️ 계정 관리 창 (accountPauseModal 의 [풀기] 패널을 쓰므로 그 뒤에 로드)
+    'dailyPublishingPanel.js',
     'continuousPublishModeHelpers.js',  // ✅ 연속발행 publishMode 해석 헬퍼 (continuousPublishing보다 먼저 로드)
     'continuousPublishing.js',
-    'thumbnailGenerator.js',
+    'thumbnailStudioCore.js',
+  'thumbnailGenerator.js',
     'intervalJitter.js',  // ✅ [2026-05-23 A5] 발행 간격 jitter 유틸 (multiAccountManager보다 먼저 로드 필수)
     'featureLockModal.js',  // ✅ [2026-05-25 v2.10.353] Pro 기능 잠금 모달 (continuousPublishing/multiAccountManager보다 먼저 로드 필수 — window 글로벌 등록)
     'accountSafetyControls.js',

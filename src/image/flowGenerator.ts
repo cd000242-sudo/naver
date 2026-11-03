@@ -1825,6 +1825,10 @@ async function waitForNewImage(page: Page, prevCount: number, timeoutMs: number 
                     // 쿼터 소진(무료 한도) — "도구 에이전트 할당량 한도에 도달... 내일 다시/업그레이드".
                     //   재시도로 회복 불가 → 즉시 명확 안내. (라이브 실측 메시지)
                     const isQuota = /할당량 한도에 도달|한도에 도달했|업그레이드하여 더 많이|내일 다시 시도|quota|reached your limit|upgrade to (chat|generate) more|daily limit/i.test(bodyText);
+                    // [2026-10-29 실측] 연속 생성 뒤 Google 이 "비정상적인 활동이 감지되었습니다. 페이지를 수정하는 브라우저
+                    //   확장 프로그램으로 인해…" 카드를 띄운다. 감시가 이 문구를 몰라 장마다 240초×2 를 헛기다렸다.
+                    const isBlocked = /비정상적인 활동이 감지|unusual activity|browser extension.{0,60}modif/i.test(bodyText);
+                    if (isBlocked) return { hasError: false, isQuota: false, isBlocked: true, clicked: false, errorText: bodyText.replace(/\s+/g, ' ').slice(0, 300) };
                     const hasError = /문제가 발생했습니다|다시 시도해 주세요|Something went wrong|An error occurred/i.test(bodyText);
                     if (!isQuota && !hasError) return { hasError: false, isQuota: false, clicked: false, errorText: '' };
                     // 진단: 오류/쿼터 카드 주변 텍스트 일부를 캡처 (실제 트리거 원인 분석용)
@@ -1842,6 +1846,13 @@ async function waitForNewImage(page: Page, prevCount: number, timeoutMs: number 
                     }
                     return { hasError, isQuota, clicked, errorText };
                 });
+                // 차단 카드에서 [다시 시도]를 누르면 의심만 키운다 → 누르지 않고 즉시 중단해 다음 엔진에 넘긴다.
+                if ('isBlocked' in state && state.isBlocked && !watchdogStopped) {
+                    flowError(`[Flow][3/3] ⛔ 비정상 활동 차단 감지: ${state.errorText}`);
+                    sendImageLog('⛔ [Flow] Google 이 "비정상적인 활동"으로 막았습니다 — 기다리지 않고 바로 중단합니다.');
+                    reject(new Error('FLOW_BOT_BLOCKED:Flow 화면에 "비정상적인 활동이 감지되었습니다"가 떴습니다. 짧은 시간에 많이 만들면 Google 이 막습니다. 해결: 1) 30분~몇 시간 뒤 다시 2) 다른 무료 이미지 엔진 사용'));
+                    return;
+                }
                 // 쿼터 소진은 재시도 무의미 → 즉시 명확 에러(무료 한도/업그레이드/다른 엔진).
                 if (state.isQuota && !watchdogStopped) {
                     flowError(`[Flow][3/3] ⛔ 쿼터 소진 감지: ${state.errorText}`);
@@ -1912,7 +1923,7 @@ async function waitForNewImage(page: Page, prevCount: number, timeoutMs: number 
         flowError('[Flow][3/3] ❌ 타임아웃 — 현재 DOM img 목록 ↓', allImgsDump);
         sendImageLog(`❌ [Flow] 이미지 감지 타임아웃 — DOM img ${allImgsDump.length}개 덤프`);
         // Quota/error cards keep their actionable code instead of being hidden as a timeout.
-        if (err instanceof Error && /^(FLOW_GENERATION_ERROR|FLOW_QUOTA_EXCEEDED)/.test(err.message)) throw err;
+        if (err instanceof Error && /^(FLOW_GENERATION_ERROR|FLOW_QUOTA_EXCEEDED|FLOW_BOT_BLOCKED)/.test(err.message)) throw err;
         throw new Error(`FLOW_IMAGE_TIMEOUT:Flow 이미지 생성이 ${timeoutMs / 1000}초 안에 끝나지 않았습니다. 프롬프트를 단순화하거나 5분 후 다시 시도해주세요.`);
     } finally {
         watchdogStopped = true;
@@ -2129,6 +2140,8 @@ export async function generateSingleImageWithFlow(
             flowWarn(`[Flow] 시도 ${attempt}/${MAX_RETRIES} 실패: ${msg}`);
             sendImageLog(`⚠️ [Flow] 시도 ${attempt} 실패: ${msg.substring(0, 150)}`);
             lastError = err as Error;
+            // 차단·한도는 같은 계정으로 다시 보내 봐야 회복되지 않고 의심만 키운다 — 이 장의 재시도 없이 올려 보낸다.
+            if (/^(FLOW_BOT_BLOCKED|FLOW_QUOTA_EXCEEDED)/.test(msg)) throw err;
 
             // ✅ 생성 오류(서버 거부) — 같은 프롬프트 재시도는 무의미. 프롬프트 단순화 + 새 프로젝트 + 대기 후
             //   재시도(일반 retry 예산 미소진). 정책·숫자·민감어를 단계적으로 제거해 결정적 실패를 회복한다.

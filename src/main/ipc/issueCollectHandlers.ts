@@ -15,6 +15,24 @@ export { resolveIssueVisionKey };
 import { resolveIssueTextGenerator, type IssuePlanCaller } from '../../crawler/issueHarness/textRoute.js';
 import { resolveSelectedEngineRoute } from './paraphraseAnalysisHandlers.js';
 
+/**
+ * The search-plan text engine and the image check the collector uses — both on the engine the owner chose.
+ * Paid (API key) vision runs only when this run asked for it; subscription routes cost nothing and stay on.
+ */
+export function resolveIssueCollectRoutes(config: Awaited<ReturnType<typeof loadConfig>>, paidVisionCheck: boolean): {
+  planCaller?: IssuePlanCaller; planEngineLabel?: string; visionRoute: IssueVisionRoute | null; paidVisionDeclined: boolean;
+} {
+  const generator = resolveIssueTextGenerator(config);
+  const textRoute = generator ? resolveSelectedEngineRoute(generator, config as unknown as Record<string, unknown>) : null;
+  // 구독 CLI는 API 호출보다 훨씬 느리다 — 기다릴 수 있다고 알려 준다.
+  const planCaller: IssuePlanCaller | undefined = textRoute
+    ? (prompt: string) => textRoute.callModel(prompt, { maxTokens: 4096, timeoutMs: textRoute.subscription ? 300_000 : undefined })
+    : undefined;
+  const resolved = resolveIssueVisionRoute(config);
+  const paidVisionDeclined = Boolean(resolved && !resolved.free && !paidVisionCheck);
+  return { planCaller, planEngineLabel: textRoute?.engine, visionRoute: paidVisionDeclined ? null : resolved, paidVisionDeclined };
+}
+
 export function registerIssueCollectHandlers(): void {
   ipcMain.handle('issue:collectImages', async (_event, payload: unknown) => {
     try {
@@ -36,30 +54,14 @@ export function registerIssueCollectHandlers(): void {
          * 검색어 플랜(텍스트)도 고른 엔진으로 간다 — 예전엔 Gemini 로 박혀 있었다.
          * 에이전트를 골랐으면 구독 CLI라 추가 과금이 없다. 고른 엔진을 쓸 수 없으면
          * 휴리스틱 플랜(무료)으로 내려간다.
-         */
-        const generator = resolveIssueTextGenerator(config);
-        const textRoute = generator ? resolveSelectedEngineRoute(generator, config as unknown as Record<string, unknown>) : null;
-        if (textRoute) {
-          planEngineLabel = textRoute.engine;
-          // 구독 CLI는 API 호출보다 훨씬 느리다 — 기다릴 수 있다고 알려 준다.
-          const timeoutMs = textRoute.subscription ? 300_000 : undefined;
-          planCaller = (prompt: string) => textRoute.callModel(prompt, { maxTokens: 4096, timeoutMs });
-        }
-        /*
          * [2026-09-15 사장님] "지피티면 지피티, 클로드면 클로드, 에이전트면 에이전트로
          * 비전이 돌아가게 해줘야 정상이잖아." 고른 글생성 엔진이 비전 벤더를 정한다.
          * 고른 엔진으로 비전을 못 하면 다른 벤더로 몰래 청구하지 않고 무료 게이트로 간다.
-         */
-        visionRoute = resolveIssueVisionRoute(config);
-        /*
          * [2026-09-17 사장님] "수집하는데 돈이 들면 생성하고 말지 누가 쓰니."
          * 유료(API 키) 비전 검사는 사용자가 이번 수집에서 켰을 때만 돈다. 구독(에이전트) 경로는 과금 0이라
          * 그대로. 안 켰으면 무료 캡션 판정 — 워터마크·구도는 못 보지만 한 푼도 들지 않는다.
          */
-        if (visionRoute && !visionRoute.free && v.value.paidVisionCheck !== true) {
-          paidVisionDeclined = true;
-          visionRoute = null;
-        }
+        ({ planCaller, planEngineLabel, visionRoute, paidVisionDeclined } = resolveIssueCollectRoutes(config, v.value.paidVisionCheck === true));
       } catch (e) {
         console.error('[Main] issue:collectImages - 설정 동기화 실패:', e);
       }

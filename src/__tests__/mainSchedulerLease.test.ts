@@ -44,7 +44,7 @@ describe('main-process scheduler serialization', () => {
 
   it('holds the same main-process lease for the entire multi-account batch', () => {
     const block = sliceBetween(
-      "ipcMain.handle('multiAccount:publish'",
+      'const handleMultiAccountPublish = async',
       "ipcMain.handle('multiAccount:cancel'",
     );
 
@@ -52,5 +52,6 @@ describe('main-process scheduler serialization', () => {
     expect(block).toContain('multi-account:');
     expect(block).toContain('finally');
     expect(block).toContain('multiAccountLease.release()');
+    expect(block).toMatch(/finally\s*\{\s*try\s*\{\s*await releaseDailyCancellation\(\);\s*\}[\s\S]*?finally\s*\{\s*multiAccountLease\.release\(\);\s*\}/);
   });
 });

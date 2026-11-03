@@ -23,7 +23,7 @@ const classifierBindings = { classifyPublishFailure, describeAccountStop, extrac
 // Execute the real loop tails without loading Electron or initializing the renderer.
 async function runMain(code: string, throws = false, extra: Record<string, unknown> = {}) {
   const source = readFileSync('src/main.ts', 'utf8').replace(/\r\n/g, '\n');
-  const start = source.indexOf('        let result = await executeWithContentPolicyManualReview(payload as any, {', source.indexOf("ipcMain.handle('multiAccount:publish'"));
+  const start = source.indexOf('        let result = await executeWithContentPolicyManualReview(payload as any, {', source.indexOf('const handleMultiAccountPublish = async'));
   const end = source.indexOf('    const successCount = results.filter', start);
   expect(start).toBeGreaterThan(-1); expect(end).toBeGreaterThan(start);
   const execute = vi.fn(async () => {
@@ -35,7 +35,7 @@ async function runMain(code: string, throws = false, extra: Record<string, unkno
     const account = { name: accountId }; const payload = {}; const accountQuotaLease = { rollback, commit() {} };
     const contentQualityV3PublishOwnerKey = accountId;
     try { ${source.slice(start, end)} return results;`;
-  const results = await compile(run, { ...classifierBindings, publicationCompletion, executeWithContentPolicyManualReview: execute,
+  const results = await compile(run, { ...classifierBindings, dailyContext: undefined, publicationCompletion, executeWithContentPolicyManualReview: execute,
     AutomationService: { executePostCycle() {} }, confirmContentPolicyManualReview() {}, assertImmediatePublishResultUrl() {},
     sendLog() {}, rollback, contentQualityV3PublishHandoffStore: { releaseOwner } });
   return { results, execute, rollback, releaseOwner };

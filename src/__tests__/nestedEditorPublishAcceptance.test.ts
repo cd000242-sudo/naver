@@ -55,7 +55,7 @@ function harness(mode: 'success' | 'no-dom-image' | 'upload-error' | 'partial-up
     isBlogWriteLoginRedirect, resolveBlogWriteFrameSwitchSurface, isLoginChallengeUrl,
     findReadyEditorFrame, EditorFrameProtectionError,
     getAccountExecutionGuard: () => guard,
-    beginMainProcessEditorCommitCandidate: vi.fn(), bindMainProcessEditorCommitCandidate: vi.fn(),
+    beginMainProcessEditorCommitCandidate: vi.fn(), bindMainProcessEditorCommitCandidate: vi.fn(), assertDailyNativeReservationReady: vi.fn(),
     browserSessionManager: { ensureServerSession: vi.fn(async () => true), markPublishing: vi.fn(), keepLoginAfterRun: vi.fn(async () => undefined) },
     throwPostContentAppliedPublishError: (error: Error) => { throw error; },
     throwPostTailIncompleteError: (error: Error) => { throw error; },

@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import ts from 'typescript';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { parseServerDailyEntitlement } from '../licenseDailyEntitlement.js';
 
 const source = readFileSync(resolve(__dirname, '../licenseManager.ts'), 'utf8');
 const ast = ts.createSourceFile('licenseManager.ts', source, ts.ScriptTarget.Latest, true);
@@ -21,8 +22,9 @@ function runtime(response: any) {
     getServerErrorMessage: (value: any, fallback: string) => value.error || fallback,
     translateErrorMessage: (value: string) => value,
     startSessionValidation: vi.fn(), LICENSE_REQUEST_TIMEOUT_MS: 20000, TRANSIENT_AUTH_MESSAGE: '일시적인 인증 오류',
+    parseServerDailyEntitlement, saveServerVerifiedLicense: async (license: unknown) => { await saveLicense(license); return true; },
   };
-  const verify = new Function(...Object.keys(deps), `let currentSessionId = ''; ${javascript}; return verifyLicenseWithCredentials;`)(...Object.values(deps));
+  const verify = new Function(...Object.keys(deps), `let currentSessionId = ''; let _authRequestSequence = 0; ${javascript}; return verifyLicenseWithCredentials;`)(...Object.values(deps));
   return { verify, fetch, saveLicense, logs, body: () => JSON.parse(fetch.mock.calls[0][1].body) };
 }
 

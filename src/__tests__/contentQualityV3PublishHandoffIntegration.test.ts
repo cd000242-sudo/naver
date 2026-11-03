@@ -141,7 +141,7 @@ describe('Content Quality V3 publish handoff production wiring', () => {
   it('creates one account-specific handoff per generated multi-account post', () => {
     const multi = between(
       main,
-      "ipcMain.handle('multiAccount:publish'",
+      'const handleMultiAccountPublish = async',
       "'automation:generateStructuredContent'",
     );
     expect(multi).toMatch(/multiAccountHandoffRunId/);
@@ -161,7 +161,7 @@ describe('Content Quality V3 publish handoff production wiring', () => {
 
     const multi = between(
       main,
-      "ipcMain.handle('multiAccount:publish'",
+      'const handleMultiAccountPublish = async',
       "ipcMain.handle('multiAccount:cancel'",
     );
     expect(multi).toMatch(

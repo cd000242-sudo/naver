@@ -25,8 +25,11 @@ import { resolveNpmInvocation } from './npmInvocation.js';
 import { AgentCliError, type AgentCliStatus, type AgentProvider } from './types.js';
 import { requireAgentProvider } from './validation.js';
 import { sanitizeUserVisibleError } from '../runtime/userVisibleError.js';
+import { agentSetupPlatform } from './setupPlatform.js';
+import { getAgentGlobalPrefix } from './agentRuntime.js';
+import { join } from 'node:path';
 
-/** Verified global npm package names (npm ls -g, 2026-06). */
+/** Reviewed npm metadata. gemini is retained for compatibility only; its active runner is agy. */
 export const AGENT_NPM_PACKAGES: Readonly<Record<AgentProvider, string>> = Object.freeze({
   codex: '@openai/codex',
   claude: '@anthropic-ai/claude-code',
@@ -136,15 +139,53 @@ function buildAgentCommandEnv(provider: AgentProvider): NodeJS.ProcessEnv {
  * Install the CLI globally via npm and confirm it became reachable.
  * @throws AgentCliError on npm failure or if the binary is still missing afterwards.
  */
-export async function installAgent(provider: AgentProvider): Promise<{ version?: string }> {
+export interface AgentInstallProgress {
+  readonly provider: AgentProvider;
+  readonly phase: 'queued' | 'preparing' | 'installing' | 'verifying' | 'complete';
+  readonly message: string;
+}
+export interface AgentInstallHooks { readonly onProgress?: (progress: AgentInstallProgress) => void }
+interface AgentInstallResult { readonly version?: string; readonly installed: true; readonly loginRequired: boolean }
+const installs = new Map<AgentProvider, { promise: Promise<AgentInstallResult>; listeners: Set<AgentInstallHooks['onProgress']> }>();
+let installTail: Promise<unknown> = Promise.resolve();
+
+/** Coalesce repeated clicks and serialize writes into the shared user-scoped npm prefix. */
+export function installAgent(provider: AgentProvider, hooks: AgentInstallHooks = {}): Promise<AgentInstallResult> {
   provider = requireAgentProvider(provider);
+  const existing = installs.get(provider);
+  if (existing) { if (hooks.onProgress) existing.listeners.add(hooks.onProgress); return existing.promise; }
+  const listeners = new Set<AgentInstallHooks['onProgress']>(hooks.onProgress ? [hooks.onProgress] : []);
+  const emit = (phase: AgentInstallProgress['phase'], message: string) => {
+    for (const listener of listeners) try { listener?.(Object.freeze({ provider, phase, message })); } catch { /* UI observer only. */ }
+  };
+  emit('queued', '설치 순서를 확인하고 있습니다.');
+  const promise = installTail.then(() => performInstall(provider, emit)).finally(() => installs.delete(provider));
+  installs.set(provider, { promise, listeners }); installTail = promise.catch(() => undefined);
+  return promise;
+}
+async function performInstall(provider: AgentProvider, emit: (phase: AgentInstallProgress['phase'], message: string) => void): Promise<AgentInstallResult> {
+  try { agentSetupPlatform(); }
+  catch (error) { throw new AgentCliError('not_installed', provider, (error as Error).message); }
+  emit('preparing', '사용자 전용 설치 도구를 준비합니다. 관리자 권한은 요청하지 않습니다.');
+  if (provider === 'gemini') {
+    emit('installing', '이 앱의 Google 구독 엔진인 Antigravity CLI(agy)를 설치합니다. Gemini CLI로 대체하지 않습니다.');
+    try {
+      const { installAgyBinary } = await import('./agyInstaller.js');
+      await installAgyBinary({ root: process.platform === 'win32' ? getAgentGlobalPrefix() : join(getAgentGlobalPrefix(), 'bin'),
+        onProgress: message => emit('installing', message) });
+    } catch (error) {
+      throw new AgentCliError('not_installed', provider, 'Antigravity 공식 설치에 실패했습니다. 인터넷·방화벽과 사용자 폴더 쓰기 권한을 확인한 뒤 다시 시도해주세요.', sanitizeUserVisibleError(error));
+    }
+    return verifyInstalledAgent(provider, emit);
+  }
   const pkg = AGENT_NPM_PACKAGES[provider];
   const packageSpec = `${pkg}@${AGENT_NPM_PACKAGE_VERSIONS[provider]}`;
 
   // [v2.11.144] The user's Node.js is no longer required: the app drives a bootstrapped npm
   // on Electron's own Node runtime. Previously a PC without npm on PATH — stale logon env,
   // nvm/fnm shell-only PATH, portable Node — failed before npm ever ran.
-  const npm = await resolveNpmInvocation();
+  const npm = await resolveNpmInvocation(message => emit('preparing', message));
+  if (!npm.prefix) throw new AgentCliError('not_installed', provider, '사용자 전용 설치 폴더를 준비하지 못했습니다. 관리형 PC의 폴더 권한을 확인해주세요.');
   const installArgs = { prefix: npm.prefix, cache: npm.cache };
   // Support needs this in the log to tell "did not update" apart from "bootstrap blocked".
   console.log(`[AgentInstaller] npm 실행 경로=${npm.source}${npm.bootstrapError ? ` (부트스트랩 실패: ${npm.bootstrapError})` : ''}`);
@@ -163,6 +204,7 @@ export async function installAgent(provider: AgentProvider): Promise<{ version?:
     }
   };
 
+  emit('installing', '공식 npm 패키지를 사용자 전용 폴더에 설치합니다. 최초 설치에는 인터넷 연결이 필요합니다.');
   let res = await runNpm(buildNpmInstallArgs(provider, installArgs));
 
   // [v2.11.138] 핀한 버전이 npm에서 내려가면(ETARGET/404) @latest로 1회 폴백.
@@ -170,6 +212,7 @@ export async function installAgent(provider: AgentProvider): Promise<{ version?:
   const combinedOut = `${res.stderr || ''}\n${res.stdout || ''}`;
   const isVersionNotFound = /ETARGET|No matching version|E404|notarget/i.test(combinedOut);
   if (res.code !== 0 && isVersionNotFound) {
+    emit('installing', '고정된 버전이 배포처에서 없어 같은 공식 패키지의 최신 안정 버전을 확인합니다.');
     console.warn(`[AgentInstaller] ${packageSpec} 버전 없음(ETARGET) → @latest로 폴백 설치 시도`);
     res = await runNpm(buildNpmInstallArgs(provider, { ...installArgs, versionOverride: 'latest' }));
   }
@@ -200,17 +243,22 @@ export async function installAgent(provider: AgentProvider): Promise<{ version?:
     );
   }
 
+  return verifyInstalledAgent(provider, emit);
+}
+async function verifyInstalledAgent(provider: AgentProvider, emit: (phase: AgentInstallProgress['phase'], message: string) => void): Promise<AgentInstallResult> {
+  emit('verifying', '현재 앱 프로세스에서 실제 CLI 버전과 로그인 상태를 다시 확인합니다.');
   const { clearAgentDetectionCache, detectAgent } = await import('./detect.js');
   clearAgentDetectionCache(provider);
-  const status = await detectAgent(provider);
+  const status = await detectAgent(provider, { forceRefresh: true });
   if (!status.installed) {
     throw new AgentCliError(
       'not_installed',
       provider,
-      '설치는 끝났지만 CLI를 아직 찾지 못했습니다. 앱(또는 터미널)을 재시작한 뒤 다시 시도해주세요.',
+      '설치 파일을 준비했지만 CLI 실행을 확인하지 못했습니다. 보안 프로그램·지원 운영체제·폴더 권한을 확인한 뒤 다시 시도해주세요.',
     );
   }
-  return { version: status.version };
+  emit('complete', status.loggedIn ? '설치와 기존 로그인 상태를 확인했습니다.' : '설치 완료. 구독 계정 로그인은 직접 완료해주세요.');
+  return Object.freeze({ version: status.version, installed: true as const, loginRequired: !status.loggedIn });
 }
 
 /**

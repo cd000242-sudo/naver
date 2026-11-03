@@ -49,6 +49,12 @@ declare function readUnifiedCtasFromUi(): any[];
 declare function getScheduleDateFromInput(inputId: string): string | undefined;
 declare function isShoppingConnectModeActive(): boolean;
 
+/** [2026-10-21] 발행 화면에서 고른 블로그 계정(account.id) — 그 블로그의 설정 · 성과를 생성에 쓰게 한다. 직접 입력이면 없음. */
+function contentGenerationSelectedAccountId(): string | undefined {
+  const value = (document.getElementById('main-account-selector') as HTMLSelectElement | null)?.value?.trim();
+  return value && /^[\w-]{1,120}$/.test(value) ? value : undefined;
+}
+
 // ✅ [v1.4.24] business 모드 — businessInfo 수집 + 사전 검증 (helper)
 // ✅ [v1.4.28] window._businessInfo (글로벌 모달 저장값) 우선, 없으면 4-panel 폴백
 function collectBusinessInfo(contentMode: string): any {
@@ -767,6 +773,7 @@ export async function generateContentFromUrl(
 
   const payload = {
     assembly: {
+      accountId: contentGenerationSelectedAccountId(),
       generator: generator as 'gemini' | 'openai' | 'claude' | 'perplexity',
       rssUrl: url,
       keywords: keywordList,
@@ -1403,6 +1410,7 @@ export async function generateContentFromKeywords(
 
   const payload = {
     assembly: {
+      accountId: contentGenerationSelectedAccountId(),
       generator: generator as 'gemini' | 'openai' | 'claude' | 'perplexity',
       keywords: keywordList,
       targetAge: targetAge as '20s' | '30s' | '40s' | '50s' | 'all',

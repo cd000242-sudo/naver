@@ -57,11 +57,11 @@ function withoutUserPrefixConfig(env: NodeJS.ProcessEnv): NodeJS.ProcessEnv {
   );
 }
 
-export async function resolveNpmInvocation(): Promise<NpmInvocation> {
+export async function resolveNpmInvocation(onProgress?: (message: string) => void): Promise<NpmInvocation> {
   const { prefix, cache } = resolveManagedPaths();
 
   try {
-    const npmCli = await ensureBootstrappedNpm();
+    const npmCli = await ensureBootstrappedNpm(onProgress);
     const shimDir = ensureNodeShim();
     const nodeExe = getAgentNodeExecutable();
     const env = withPathEntries(

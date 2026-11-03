@@ -144,6 +144,10 @@ This project uses the Everything Claude Code (ECC) agent system:
 - Test before commit
 
 
+## Desktop Daily Publishing Handoff
+
+See `docs/daily-homefeed-annual-211366.md`, section `2026년 10월 21일 앱 직접 실행 연결`, for the current app-owned scheduler and UI implementation. Claude Code is a writing engine; Electron owns NAVER browser automation. Do not replace this with a Codex-only chat workflow or claim live reservation success from fixture tests. Official-source capture requires an explicitly reviewed per-job plan, documented in `docs/daily-official-capture-producer.md`. Current source version 2.11.368 is older than the separate 2.11.370 release record: reconcile the release baseline before packaging or replacing an installed app.
+
 <!-- AUTOPUS:BEGIN -->
 # Autopus-ADK Harness
 

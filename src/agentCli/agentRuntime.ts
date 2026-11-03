@@ -14,7 +14,7 @@
  *   agent-runtime/npm-cache/
  */
 import { app } from 'electron';
-import { mkdirSync, writeFileSync } from 'fs';
+import { chmodSync, mkdirSync, writeFileSync } from 'fs';
 import { delimiter, isAbsolute, join } from 'path';
 
 /** Carries the runtime executable path through the environment block, never through a file. */
@@ -33,6 +33,8 @@ export const AGENT_NODE_SHIM_CMD = [
   `"%${AGENT_RUNTIME_NODE_ENV_KEY}%" %*`,
   '',
 ].join('\r\n');
+
+export const AGENT_NODE_SHIM_POSIX = '#!/bin/sh\n: "${AGENT_RUNTIME_NODE:?App runtime is missing}"\nexport ELECTRON_RUN_AS_NODE=1\nexec "$AGENT_RUNTIME_NODE" "$@"\n';
 
 export function getAgentRuntimeDir(): string {
   return join(app.getPath('userData'), 'agent-runtime');
@@ -64,7 +66,9 @@ export function getAgentNodeExecutable(): string {
 export function ensureNodeShim(): string {
   const shimDir = getAgentShimDir();
   mkdirSync(shimDir, { recursive: true });
-  writeFileSync(join(shimDir, 'node.cmd'), AGENT_NODE_SHIM_CMD, 'utf8');
+  const file = join(shimDir, process.platform === 'win32' ? 'node.cmd' : 'node');
+  writeFileSync(file, process.platform === 'win32' ? AGENT_NODE_SHIM_CMD : AGENT_NODE_SHIM_POSIX, 'utf8');
+  if (process.platform !== 'win32') chmodSync(file, 0o700);
   return shimDir;
 }
 
@@ -78,11 +82,11 @@ export function ensureNodeShim(): string {
  * installed". Naming the known directory here lets the app find agy the moment it is installed,
  * with no logout or app restart.
  *
- * Windows only: the POSIX installer's target has not been verified, and R5 forbids encoding
- * unmeasured paths. On other platforms the inherited PATH remains the only source.
+ * Official installer documentation also specifies ~/.local/bin/agy on macOS/Linux:
+ * https://antigravity.google/docs/cli/install/ (checked 2026-10-21).
  */
 export function getAgyInstallDirs(): readonly string[] {
-  if (process.platform !== 'win32') return [];
+  if (process.platform !== 'win32') return getClaudeInstallDirs();
   const localAppData = process.env.LOCALAPPDATA;
   return localAppData ? [join(localAppData, 'agy', 'bin')] : [];
 }
@@ -105,14 +109,16 @@ export function getClaudeInstallDirs(): readonly string[] {
 }
 
 /**
- * Codex CLI install directory — npm's default global prefix.
+ * Codex CLI install directories — npm's global prefix and the official standalone layout.
  * Measured on this machine: %APPDATA%\npm\codex.cmd. Same stale-PATH exposure as above when
  * npm's prefix was added to the User PATH after the app (or Explorer) started.
+ * Standalone Windows layout: https://learn.chatgpt.com/docs/enterprise/windows-deployment
  */
 export function getCodexInstallDirs(): readonly string[] {
-  if (process.platform !== 'win32') return [];
+  if (process.platform !== 'win32') return getClaudeInstallDirs();
   const appData = process.env.APPDATA;
-  return appData ? [join(appData, 'npm')] : [];
+  const local = process.env.LOCALAPPDATA;
+  return [...(appData ? [join(appData, 'npm')] : []), ...(local ? [join(local, 'Programs', 'OpenAI', 'Codex', 'bin')] : [])];
 }
 
 function pathKeyOf(env: NodeJS.ProcessEnv): string {
@@ -153,7 +159,12 @@ export function withPathEntries(
  */
 export function withAgentRuntimePath(env: NodeJS.ProcessEnv): NodeJS.ProcessEnv {
   try {
-    return withPathEntries(env, [getAgentGlobalPrefix()]);
+    const prefix = getAgentGlobalPrefix();
+    // Windows npm launchers are resolved directly to their .js/.exe by spawnHelper.
+    if (process.platform === 'win32') return withPathEntries(env, [prefix]);
+    const shim = ensureNodeShim();
+    return withPathEntries({ ...env, ELECTRON_RUN_AS_NODE: '1', [AGENT_RUNTIME_NODE_ENV_KEY]: getAgentNodeExecutable() },
+      [join(prefix, 'bin'), prefix, shim]);
   } catch {
     // userData is unavailable (no Electron app object) — inherited PATH is still valid.
     return env;

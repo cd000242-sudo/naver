@@ -55,12 +55,13 @@ describe('renderer wiring for the thumbnail director', () => {
     expect(wrapper).toMatch(/if \(image\.directorNotice\) \{[\s\S]{0,120}appendLog\(`💡 \$\{String\(image\.directorNotice\)\}`, 'images-log-output'\)/);
   });
 
-  it('the image management tab has the 고품질 썸네일 checkbox, saved as thumbnailQualityMode', () => {
+  it('removed high-quality toggle cannot leave hidden multi-generation enabled', () => {
     const html = read('../public/index.html');
     const tab = read('renderer/modules/imageManagementTab.ts');
-    expect(html).toMatch(/id="image-thumbnail-quality-high"/);
-    expect(tab).toMatch(/saveConfig\?\.\(\{ thumbnailQualityMode: thumbnailQualityCheckbox\.checked \? 'high' : 'standard' \}\)/);
-    expect(tab).toMatch(/cfg\?\.thumbnailQualityMode === 'high'/);
+    const preferences = read('runtime/imageStudioPreferences.ts');
+    expect(html).not.toMatch(/id="image-thumbnail-quality-high"/);
+    expect(tab).not.toContain('thumbnailQualityCheckbox');
+    expect(preferences).toContain("thumbnailQualityMode: 'standard'");
   });
 
   it('the image tab merges the flags at its single return and carries them through normalization', () => {

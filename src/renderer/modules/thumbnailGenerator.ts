@@ -1,3 +1,5 @@
+import { resolveImageStudioSource } from '../../runtime/imageStudioPreferences.js';
+import { ThumbnailStudioHistory, thumbnailStudioFitText, thumbnailStudioLayoutText, thumbnailStudioPresetNames } from './thumbnailStudioCore.js';
 // ============================================
 // 썸네일 생성기 모듈 (Thumbnail Generator)
 // modules/thumbnailGenerator.ts
@@ -102,6 +104,13 @@ export class ThumbnailGenerator {
   private bgPos = { x: 0, y: 0 };
   private bgScale = 1.0;
   private lastMousePos = { x: 0, y: 0 };
+  private studioTemplate = 'modern';
+  private studioEditGroup = '';
+  private studioTextBounds = { x: 40, y: 80, width: 680, height: 240 };
+  private studioSafeArea = true;
+  private studioHistory = new ThumbnailStudioHistory<ReturnType<ThumbnailGenerator['captureStudioState']>>(32,
+    (a, b) => a.backgroundImage === b.backgroundImage
+      && JSON.stringify({ ...a, backgroundImage: undefined }) === JSON.stringify({ ...b, backgroundImage: undefined }));
 
   // 설정값들
   private settings = {
@@ -119,7 +128,7 @@ export class ThumbnailGenerator {
     outlineWidth: 2,
     highlightColor: '#ffff00',
     highlightOpacity: 50,
-    bgColor: '#1a1a2e',
+    bgColor: '#172033',
     overlayEnabled: false,  // ✅ 기본 비활성화 (배경 어두워지지 않음)
     overlayColor: '#000000',
     overlayOpacity: 0,  // ✅ 기본 투명도 0
@@ -199,6 +208,8 @@ export class ThumbnailGenerator {
 
     this.ctx = this.canvas.getContext('2d');
     this.setupEventListeners();
+    this.updateCanvasSize();
+    this.updateUI();
     this.render();
   }
 
@@ -210,6 +221,10 @@ export class ThumbnailGenerator {
     if (ThumbnailGenerator.listenersBound) return;
     ThumbnailGenerator.listenersBound = true;
     const gen = (): ThumbnailGenerator => ThumbnailGenerator.current ?? this;
+    document.addEventListener('input', event => {
+      const target = event.target as HTMLElement;
+      if (target.id?.startsWith('thumb-')) gen().studioEditGroup = target.id;
+    }, true);
     // 텍스트 입력
     const mainTextInput = document.getElementById('thumb-main-text') as HTMLTextAreaElement;
     const subTextInput = document.getElementById('thumb-sub-text') as HTMLInputElement;
@@ -312,12 +327,12 @@ export class ThumbnailGenerator {
           (b as HTMLElement).style.borderColor = 'var(--border-medium)';
           b.classList.remove('selected');
         });
-        (e.target as HTMLElement).style.background = 'var(--primary)';
-        (e.target as HTMLElement).style.color = 'white';
-        (e.target as HTMLElement).style.borderColor = 'var(--primary)';
-        (e.target as HTMLElement).classList.add('selected');
+        (e.currentTarget as HTMLElement).style.background = 'var(--primary)';
+        (e.currentTarget as HTMLElement).style.color = 'white';
+        (e.currentTarget as HTMLElement).style.borderColor = 'var(--primary)';
+        (e.currentTarget as HTMLElement).classList.add('selected');
 
-        gen().settings.textPosition = (e.target as HTMLElement).dataset.position || 'center';
+        gen().settings.textPosition = (e.currentTarget as HTMLElement).dataset.position || 'center';
         gen().updateTextPosition();
         gen().render();
       });
@@ -356,7 +371,7 @@ export class ThumbnailGenerator {
     const bgStorageBtn = document.getElementById('thumb-bg-storage-btn') as HTMLButtonElement;
     bgStorageBtn?.addEventListener('click', () => gen().openStorageModal());
 
-    // ✅ AI 배경 이미지 생성 (나노 바나나 프로 + NEVER TEXT 고정)
+    // 선택한 이미지 엔진으로 문자가 없는 배경 생성
     const bgAiBtn = document.getElementById('thumb-bg-ai-btn') as HTMLButtonElement;
     const bgAiPrompt = document.getElementById('thumb-bg-ai-prompt') as HTMLInputElement;
     bgAiBtn?.addEventListener('click', async () => {
@@ -364,13 +379,16 @@ export class ThumbnailGenerator {
       // ✅ NEVER TEXT 프롬프트 고정 (텍스트 없는 깔끔한 배경)
       const prompt = `High quality background image: ${userPrompt}. CRITICAL: Do NOT include any text, words, letters, numbers, watermarks, or logos. Clean background only. No typography.`;
 
+      const originalLabel = bgAiBtn.textContent || '생성';
+      const sourceSelect = document.getElementById('image-source-select') as HTMLSelectElement | null;
+      const availableSources = sourceSelect ? Array.from(sourceSelect.options, option => option.value) : ['openai-image'];
+      const provider = resolveImageStudioSource(localStorage.getItem('globalImageSource'), localStorage.getItem('fullAutoImageSource'), availableSources);
       try {
         bgAiBtn.disabled = true;
-        bgAiBtn.innerHTML = '<span>🔄</span> 나노바나나2로 생성중...';
+        bgAiBtn.textContent = '생성 중…';
 
-        // ✅ [2026-10-10] 나노바나나2 (Gemini 3.1 Flash Image) 사용 — 나노바나나는 한 종류만 남겼다
         const result = await generateImagesWithCostSafety({
-          provider: 'nano-banana-2',
+          provider,
           // ✅ [2026-03-01 FIX] 썸네일 전용 모델(nanoBananaMainModel)을 타도록 isThumbnail 명시
           items: [{ heading: 'thumbnail-bg', prompt: prompt, isThumbnail: true }],
           styleHint: 'background',
@@ -384,8 +402,9 @@ export class ThumbnailGenerator {
             img.crossOrigin = 'anonymous';
             img.onload = () => {
               gen().backgroundImage = img;
+              gen().ensureBackgroundContrast();
               gen().render();
-              toastManager.success('✅ 나노바나나2로 배경 생성 완료!');
+              toastManager.success('배경 이미지 생성 완료');
             };
             img.onerror = () => {
               toastManager.error('❌ 이미지 로드에 실패했습니다.');
@@ -402,7 +421,7 @@ export class ThumbnailGenerator {
         toastManager.error('❌ AI 배경 생성 실패: ' + (error as Error).message);
       } finally {
         bgAiBtn.disabled = false;
-        bgAiBtn.innerHTML = '<span>🍌</span> AI 생성 (나노 바나나)';
+        bgAiBtn.textContent = originalLabel;
       }
     });
 
@@ -472,7 +491,7 @@ export class ThumbnailGenerator {
     // 스티커 버튼들
     document.querySelectorAll('.thumb-sticker-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
-        const emoji = (e.target as HTMLElement).dataset.sticker || '⭐';
+        const emoji = (e.currentTarget as HTMLElement).dataset.sticker || '⭐';
         gen().addSticker(emoji);
       });
     });
@@ -480,9 +499,17 @@ export class ThumbnailGenerator {
     // 프리셋 버튼들
     document.querySelectorAll('.thumb-preset-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
-        const preset = (e.target as HTMLElement).dataset.preset || 'modern';
+        const preset = (e.currentTarget as HTMLElement).dataset.preset || 'modern';
         gen().applyPreset(preset);
       });
+    });
+
+    document.getElementById('thumb-undo')?.addEventListener('click', () => gen().restoreStudioHistory('undo'));
+    document.getElementById('thumb-redo')?.addEventListener('click', () => gen().restoreStudioHistory('redo'));
+    document.getElementById('thumb-fit-text')?.addEventListener('click', () => gen().fitStudioText());
+    document.getElementById('thumb-safe-area')?.addEventListener('change', event => {
+      gen().studioSafeArea = (event.target as HTMLInputElement).checked;
+      gen().render(false);
     });
 
     // 액션 버튼들
@@ -510,8 +537,9 @@ export class ThumbnailGenerator {
     if (this.settings.aspectRatio === '1:1') {
       this.canvas.width = 760;
       this.canvas.height = 760;
-      this.canvas.style.width = '400px';  // ✅ 정사각형은 더 작게 표시
-      this.canvas.style.height = '400px';
+      this.canvas.style.width = '100%';
+      this.canvas.style.height = 'auto';
+      this.canvas.style.maxWidth = '520px';
       if (sizeTextEl) sizeTextEl.textContent = '760×760';
       console.log('[ThumbnailGen] 캔버스 크기 변경: 1:1 (760x760)');
     } else {
@@ -723,82 +751,135 @@ export class ThumbnailGenerator {
   }
 
   private applyPreset(preset: string): void {
-    // ✅ [v2.11.139] 프리셋을 "배경색 스위처"가 아닌 완성형 템플릿으로 승격.
-    //    폰트·크기·글자색·위치·그림자·외곽선까지 통째로 세팅해 5종이 실제로
-    //    달라 보이게 한다. 형광펜은 항상 끄고, 외곽선은 템플릿별로 명시한다.
     const T: Record<string, Partial<typeof this.settings>> = {
-      // 모던: 고딕 A1 · 중앙 · 얇은 그림자 · 보라 그라데이션
-      modern: {
-        fontFamily: "'Gothic A1', sans-serif", fontSize: 50, textColor: '#ffffff',
-        textAlign: 'center', textPosition: 'center', textShadow: true, textOutline: false,
-        bgColor: '#1a1a2e', overlayEnabled: true, overlayColor: '#667eea', overlayOpacity: 35, overlayType: 'gradient-v',
-      },
-      // 미니멀: 명조 · 하단 · 무그림자 · 밝은 배경 · 오버레이 없음
-      minimal: {
-        fontFamily: "'Nanum Myeongjo', serif", fontSize: 46, textColor: '#222222',
-        textAlign: 'center', textPosition: 'bottom', textShadow: false, textOutline: false,
-        bgColor: '#f5f5f5', overlayEnabled: false, overlayOpacity: 0,
-      },
-      // 바이브런트: 검은고딕 큰 글씨 · 중앙 · 그림자+검정 외곽선 · 빨강 그라데이션
-      vibrant: {
-        fontFamily: "'Black Han Sans', sans-serif", fontSize: 60, textColor: '#ffffff',
-        textAlign: 'center', textPosition: 'center', textShadow: true, textOutline: true,
-        outlineColor: '#000000', outlineWidth: 3,
-        bgColor: '#ff416c', overlayEnabled: true, overlayColor: '#ff4b2b', overlayOpacity: 45, overlayType: 'gradient-h',
-      },
-      // 네이처: 주아(둥근) · 하단 · 그림자 · 청록+초록 그라데이션
-      nature: {
-        fontFamily: "'Jua', sans-serif", fontSize: 50, textColor: '#ffffff',
-        textAlign: 'center', textPosition: 'bottom', textShadow: true, textOutline: false,
-        bgColor: '#11998e', overlayEnabled: true, overlayColor: '#38ef7d', overlayOpacity: 40, overlayType: 'gradient-v',
-      },
-      // 다크 임팩트: 도현 · 상단 · 그림자+검정 외곽선 · 짙은 그라데이션
-      dark: {
-        fontFamily: "'Do Hyeon', sans-serif", fontSize: 58, textColor: '#ffffff',
-        textAlign: 'center', textPosition: 'top', textShadow: true, textOutline: true,
-        outlineColor: '#000000', outlineWidth: 3,
-        bgColor: '#232526', overlayEnabled: true, overlayColor: '#414345', overlayOpacity: 60, overlayType: 'gradient-v',
-      },
+      modern: { fontSize: 50, textAlign: 'left', textPosition: 'center', bgColor: '#172033',
+        textColor: '#f8fafc', overlayEnabled: true, overlayColor: '#64748b', overlayOpacity: 24, overlayType: 'gradient-v' },
+      minimal: { fontSize: 48, textAlign: 'left', textPosition: 'center', bgColor: '#f3efe7',
+        textColor: '#22252b', overlayEnabled: false, overlayOpacity: 0 },
+      vibrant: { fontSize: 58, textAlign: 'center', textPosition: 'center', bgColor: '#5146d8',
+        textColor: '#ffffff', overlayEnabled: true, overlayColor: '#b9a8ff', overlayOpacity: 24, overlayType: 'gradient-h' },
+      nature: { fontSize: 48, textAlign: 'left', textPosition: 'bottom', bgColor: '#e1e8df',
+        textColor: '#273b32', overlayEnabled: false, overlayOpacity: 0 },
+      dark: { fontSize: 56, textAlign: 'left', textPosition: 'bottom', bgColor: '#101419',
+        textColor: '#f8fafc', overlayEnabled: true, overlayColor: '#000000', overlayOpacity: 32, overlayType: 'gradient-v' },
     };
-    const tpl = T[preset];
-    if (tpl) {
-      this.settings = { ...this.settings, ...tpl, textHighlight: false };
-      this.updateTextPosition();
+    if (!T[preset]) return;
+    this.settings = { ...this.settings, fontFamily: "'Noto Sans KR', sans-serif", textShadow: false,
+      textOutline: false, textHighlight: false, ...T[preset] };
+    this.studioTemplate = preset;
+    if (this.backgroundImage) {
+      this.settings = { ...this.settings, textColor: '#ffffff' };
+      this.ensureBackgroundContrast();
     }
-    this.render();
-    this.updateUI();
+    this.textPosition = { x: this.canvas!.width / 2, y: this.canvas!.height / 2 };
+    this.updateTextPosition();
+    this.fitStudioText();
   }
 
   private updateUI(): void {
-    // UI 요소들을 현재 설정값으로 업데이트
-    (document.getElementById('thumb-bg-color') as HTMLInputElement).value = this.settings.bgColor;
-    (document.getElementById('thumb-text-color') as HTMLInputElement).value = this.settings.textColor;
-    (document.getElementById('thumb-overlay-enable') as HTMLInputElement).checked = this.settings.overlayEnabled;
-    (document.getElementById('thumb-overlay-color') as HTMLInputElement).value = this.settings.overlayColor;
-    (document.getElementById('thumb-overlay-opacity') as HTMLInputElement).value = String(this.settings.overlayOpacity);
-    (document.getElementById('thumb-overlay-opacity-value') as HTMLSpanElement).textContent = String(this.settings.overlayOpacity);
-    (document.getElementById('thumb-overlay-type') as HTMLSelectElement).value = this.settings.overlayType;
-    (document.getElementById('thumb-text-shadow') as HTMLInputElement).checked = this.settings.textShadow;
+    const fields: Record<string, string | number | boolean> = {
+      'main-text': this.settings.mainText, 'sub-text': this.settings.subText,
+      'font-family': this.settings.fontFamily, 'font-size': this.settings.fontSize,
+      'text-color': this.settings.textColor, 'text-align': this.settings.textAlign,
+      'text-shadow': this.settings.textShadow, 'text-outline': this.settings.textOutline,
+      'text-highlight': this.settings.textHighlight, 'outline-color': this.settings.outlineColor,
+      'outline-width': this.settings.outlineWidth, 'highlight-color': this.settings.highlightColor,
+      'highlight-opacity': this.settings.highlightOpacity, 'bg-color': this.settings.bgColor,
+      'overlay-enable': this.settings.overlayEnabled, 'overlay-color': this.settings.overlayColor,
+      'overlay-opacity': this.settings.overlayOpacity, 'overlay-type': this.settings.overlayType,
+      'bg-blur': this.settings.bgBlur, 'bg-brightness': this.settings.bgBrightness,
+      'aspect-ratio': this.settings.aspectRatio, 'bg-mode': this.settings.bgMode,
+    };
+    for (const [key, value] of Object.entries(fields)) {
+      const el = document.getElementById('thumb-' + key) as HTMLInputElement | null;
+      if (!el) continue;
+      if (typeof value === 'boolean') el.checked = value; else el.value = String(value);
+    }
+    for (const [id, value] of Object.entries({ 'font-size-value': this.settings.fontSize + 'px',
+      'overlay-opacity-value': this.settings.overlayOpacity, 'blur-value': this.settings.bgBlur,
+      'brightness-value': this.settings.bgBrightness })) {
+      const el = document.getElementById('thumb-' + id);
+      if (el) el.textContent = String(value);
+    }
+    for (const [id, enabled] of Object.entries({ 'outline-settings': this.settings.textOutline,
+      'highlight-settings': this.settings.textHighlight, 'overlay-settings': this.settings.overlayEnabled })) {
+      const el = document.getElementById('thumb-' + id);
+      if (el) el.style.display = enabled ? 'block' : 'none';
+    }
+    document.querySelectorAll<HTMLElement>('.thumb-position-btn').forEach(button => {
+      button.classList.toggle('selected', button.dataset.position === this.settings.textPosition);
+    });
+  }
 
-    // ✅ [v2.11.139] 프리셋 템플릿이 바꾸는 폰트/크기/정렬/외곽선까지 컨트롤에 반영
-    const fontFamilyEl = document.getElementById('thumb-font-family') as HTMLSelectElement | null;
-    if (fontFamilyEl) fontFamilyEl.value = this.settings.fontFamily;
-    const fontSizeEl = document.getElementById('thumb-font-size') as HTMLInputElement | null;
-    if (fontSizeEl) fontSizeEl.value = String(this.settings.fontSize);
-    const fontSizeValueEl = document.getElementById('thumb-font-size-value') as HTMLSpanElement | null;
-    if (fontSizeValueEl) fontSizeValueEl.textContent = `${this.settings.fontSize}px`;
-    const textAlignEl = document.getElementById('thumb-text-align') as HTMLSelectElement | null;
-    if (textAlignEl) textAlignEl.value = this.settings.textAlign;
-    const textOutlineEl = document.getElementById('thumb-text-outline') as HTMLInputElement | null;
-    if (textOutlineEl) textOutlineEl.checked = this.settings.textOutline;
-    const outlineSettingsEl = document.getElementById('thumb-outline-settings') as HTMLDivElement | null;
-    if (outlineSettingsEl) outlineSettingsEl.style.display = this.settings.textOutline ? 'block' : 'none';
-    const outlineColorEl = document.getElementById('thumb-outline-color') as HTMLInputElement | null;
-    if (outlineColorEl) outlineColorEl.value = this.settings.outlineColor;
-    const outlineWidthEl = document.getElementById('thumb-outline-width') as HTMLInputElement | null;
-    if (outlineWidthEl) outlineWidthEl.value = String(this.settings.outlineWidth);
+  private captureStudioState() {
+    return { settings: { ...this.settings }, textPosition: { ...this.textPosition }, bgPos: { ...this.bgPos },
+      bgScale: this.bgScale, backgroundImage: this.backgroundImage,
+      stickers: this.stickers.map(sticker => ({ ...sticker })), template: this.studioTemplate };
+  }
 
-    // 배경 줌 활성화 상태 업데이트
+  private restoreStudioHistory(direction: 'undo' | 'redo'): void {
+    const state = this.studioHistory[direction]();
+    if (!state) return;
+    this.settings = { ...state.settings };
+    this.updateCanvasSize();
+    this.textPosition = { ...state.textPosition };
+    this.bgPos = { ...state.bgPos };
+    this.bgScale = state.bgScale;
+    this.backgroundImage = state.backgroundImage;
+    this.stickers = state.stickers.map(sticker => ({ ...sticker }));
+    this.studioTemplate = state.template;
+    this.updateUI();
+    this.render(false);
+  }
+
+  private studioTextOptions() {
+    return { mainText: this.settings.mainText, subText: this.settings.subText,
+      width: this.canvas!.width - 80, height: this.canvas!.height - 80, fontSize: this.settings.fontSize,
+      measure: (text: string, size: number) => {
+        this.ctx!.font = 'bold ' + size + 'px ' + this.settings.fontFamily;
+        return this.ctx!.measureText(text).width;
+      } };
+  }
+
+  private fitStudioText(): void {
+    if (!this.ctx || !this.canvas) return;
+    const layout = thumbnailStudioFitText(this.studioTextOptions());
+    this.settings = { ...this.settings, fontSize: layout.fontSize };
+    this.textPosition = { x: this.canvas.width / 2, y: this.textPosition.y };
+    this.updateUI();
+    this.render();
+  }
+
+  private updateStudioControls(fits: boolean): void {
+    const undo = document.getElementById('thumb-undo') as HTMLButtonElement | null;
+    const redo = document.getElementById('thumb-redo') as HTMLButtonElement | null;
+    if (undo) undo.disabled = !this.studioHistory.canUndo;
+    if (redo) redo.disabled = !this.studioHistory.canRedo;
+    const status = document.getElementById('thumb-studio-status');
+    if (status) {
+      status.textContent = fits ? '편집 내용이 미리보기에 반영되었습니다.' : '문구가 안전영역을 넘습니다. 문구 맞춤을 누르거나 내용을 줄여 주세요.';
+      status.dataset.state = fits ? 'ready' : 'overflow';
+    }
+    const template = document.getElementById('thumb-template-name');
+    if (template) template.textContent = thumbnailStudioPresetNames[this.studioTemplate] || '직접 편집';
+    document.querySelectorAll<HTMLElement>('.thumb-preset-btn').forEach(button => {
+      const selected = button.dataset.preset === this.studioTemplate;
+      button.setAttribute('aria-pressed', String(selected));
+      button.classList.toggle('selected', selected);
+    });
+    // The safe-area guide is a DOM overlay, never drawn into the exported canvas.
+    const guide = document.getElementById('thumb-safe-guide');
+    if (guide) {
+      guide.hidden = !this.studioSafeArea;
+      if (this.canvas) {
+        const vertical = (40 / this.canvas.height * 100) + '%';
+        const horizontal = (40 / this.canvas.width * 100) + '%';
+        guide.style.top = vertical;
+        guide.style.bottom = vertical;
+        guide.style.left = horizontal;
+        guide.style.right = horizontal;
+      }
+    }
   }
 
   private reset(): void {
@@ -817,7 +898,7 @@ export class ThumbnailGenerator {
       outlineWidth: 2,
       highlightColor: '#ffff00',
       highlightOpacity: 50,
-      bgColor: '#1a1a2e',
+      bgColor: '#172033',
       overlayEnabled: true,
       overlayColor: '#000000',
       overlayOpacity: 40,
@@ -831,6 +912,10 @@ export class ThumbnailGenerator {
     this.backgroundImage = null;
     this.stickers = [];
     this.textPosition = { x: 380, y: 200 };
+    this.bgPos = { x: 0, y: 0 };
+    this.bgScale = 1;
+    this.studioTemplate = 'modern';
+    this.updateCanvasSize();
 
     // UI 초기화
     (document.getElementById('thumb-main-text') as HTMLInputElement).value = this.settings.mainText;
@@ -1046,7 +1131,8 @@ export class ThumbnailGenerator {
     }
 
     // 텍스트 영역 클릭 체크
-    if (Math.abs(x - this.textPosition.x) < 200 && Math.abs(y - this.textPosition.y) < 50) {
+    const bounds = this.studioTextBounds;
+    if (x >= bounds.x && x <= bounds.x + bounds.width && y >= bounds.y && y <= bounds.y + bounds.height) {
       this.isDragging = true;
       this.dragTarget = 'text';
       return;
@@ -1072,8 +1158,7 @@ export class ThumbnailGenerator {
     const dy = y - this.lastMousePos.y;
 
     if (this.dragTarget === 'text') {
-      this.textPosition.x = x;
-      this.textPosition.y = y;
+      this.textPosition = { x: this.textPosition.x + dx, y: this.textPosition.y + dy };
     } else if (this.dragTarget === 'sticker' && this.dragIndex >= 0) {
       this.stickers[this.dragIndex].x = x;
       this.stickers[this.dragIndex].y = y;
@@ -1090,14 +1175,18 @@ export class ThumbnailGenerator {
     this.isDragging = false;
     this.dragTarget = null;
     this.dragIndex = -1;
+    this.render();
   }
 
 
-  render(): void {
+  render(recordHistory = true): void {
     if (!this.ctx || !this.canvas) return;
 
     const ctx = this.ctx;
     const canvas = this.canvas;
+
+    ctx.fillStyle = this.settings.bgColor;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // 1. 배경 그리기
     if (this.backgroundImage) {
@@ -1105,9 +1194,7 @@ export class ThumbnailGenerator {
       ctx.save();
 
       // 밝기 필터
-      if (this.settings.bgBrightness !== 0) {
-        ctx.filter = `brightness(${100 + this.settings.bgBrightness}%)`;
-      }
+      ctx.filter = `brightness(${100 + this.settings.bgBrightness}%) blur(${this.settings.bgBlur}px)`;
 
       const imgWidth = this.backgroundImage.width;
       const imgHeight = this.backgroundImage.height;
@@ -1187,17 +1274,25 @@ export class ThumbnailGenerator {
     ctx.font = `bold ${this.settings.fontSize}px ${this.settings.fontFamily}`;
 
     let textX = this.textPosition.x;
-    if (this.settings.textAlign === 'left') textX = 40;
-    else if (this.settings.textAlign === 'right') textX = canvas.width - 40;
+    const horizontalOffset = this.textPosition.x - canvas.width / 2;
+    if (this.settings.textAlign === 'left') textX = 40 + horizontalOffset;
+    else if (this.settings.textAlign === 'right') textX = canvas.width - 40 + horizontalOffset;
 
-    // ✅ 줄바꿈 처리 — 사용자 개행(\n) + 캔버스 폭 초과 시 자동 줄바꿈 (긴 제목 잘림 방지)
-    const maxTextWidth = canvas.width - 80; // 좌우 40px 여백
-    const lines = this.settings.mainText
-      .split('\n')
-      .flatMap((line) => this.wrapTextToWidth(ctx, line, maxTextWidth));
-    const lineHeight = this.settings.fontSize * 1.3; // 줄 간격
-    const totalHeight = lines.length * lineHeight;
-    const startY = this.textPosition.y - (totalHeight / 2) + (lineHeight / 2);
+    const layout = thumbnailStudioLayoutText(this.studioTextOptions());
+    const lines = layout.mainLines;
+    const lineHeight = layout.lineHeight;
+    const totalHeight = layout.height;
+    const centerY = totalHeight > canvas.height - 80 ? canvas.height / 2
+      : Math.max(40 + totalHeight / 2, Math.min(canvas.height - 40 - totalHeight / 2, this.textPosition.y));
+    this.textPosition = { ...this.textPosition, y: centerY };
+    const measure = this.studioTextOptions().measure;
+    const textWidth = Math.max(1, ...layout.mainLines.map(line => measure(line, layout.fontSize)),
+      ...layout.subLines.map(line => measure(line, layout.subSize)));
+    const textLeft = this.settings.textAlign === 'left' ? textX
+      : this.settings.textAlign === 'right' ? textX - textWidth : textX - textWidth / 2;
+    this.studioTextBounds = { x: textLeft, y: centerY - totalHeight / 2, width: textWidth, height: totalHeight };
+    const startY = centerY - totalHeight / 2 + lineHeight / 2;
+    ctx.font = 'bold ' + this.settings.fontSize + 'px ' + this.settings.fontFamily;
 
     // 형광펜 효과 (각 줄별로)
     if (this.settings.textHighlight && this.settings.mainText) {
@@ -1245,9 +1340,9 @@ export class ThumbnailGenerator {
     // 서브 텍스트
     if (this.settings.subText) {
       ctx.shadowBlur = 5;
-      ctx.font = `${Math.round(this.settings.fontSize * 0.5)}px ${this.settings.fontFamily}`;
-      const subY = startY + (lines.length * lineHeight) + this.settings.fontSize * 0.3;
-      ctx.fillText(this.settings.subText, textX, subY);
+      ctx.font = `${layout.subSize}px ${this.settings.fontFamily}`;
+      const subY = centerY - totalHeight / 2 + lines.length * lineHeight + layout.subGap + layout.subLineHeight / 2;
+      layout.subLines.forEach((line, i) => ctx.fillText(line, textX, subY + i * layout.subLineHeight));
     }
 
     ctx.restore();
@@ -1259,6 +1354,11 @@ export class ThumbnailGenerator {
       ctx.textBaseline = 'middle';
       ctx.fillText(sticker.emoji, sticker.x, sticker.y);
     });
+    if (recordHistory && !this.isDragging) {
+      this.studioHistory.push(this.captureStudioState(), this.studioEditGroup);
+    }
+    this.studioEditGroup = '';
+    this.updateStudioControls(layout.fits);
   }
 }
 

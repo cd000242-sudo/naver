@@ -49,6 +49,7 @@ import { generateContentFromUrl, normalizeKeywordsForGeneration, generateContent
 import { initArticleTableComposer } from './modules/articleTableComposer.js';
 import { initContentPolicyDashboard } from './modules/contentPolicyDashboard.js';
 import { initRevenueOperationsDashboard } from './modules/revenueOperationsDashboard.js';
+import { initDailyPublishingPanel } from './modules/dailyPublishingPanel.js';
 import { undoLastImageChange } from './modules/undoImageChange.js';
 import { collectFormData } from './modules/formAndAutomation.js';
 import { resolveFirstHeadingTitleForThumbnail, initThumbnailGenerator, updateThumbnailPreview } from './modules/thumbnailPreview.js';
@@ -64,7 +65,7 @@ import { HeadingImageMode, getHeadingImageMode, setHeadingImageMode, openHeading
 import './components/PromptEditModal.js';
 // ✅ [2026-01-25 모듈화] 초기화 가드 및 UI 락 시스템
 import { InitializationGuard, clearImageGenerationLocks, runUiActionLocked } from './utils/stabilityUtils.js';
-import { tryAcquirePipelineRun, releasePipelineRun } from './utils/pipelineRunCoordinator.js';
+import { tryAcquirePipelineRun, releasePipelineRun, getActivePipelineRun } from './utils/pipelineRunCoordinator.js';
 (window as any).__pipelineRunCoordinator = Object.freeze({
   tryAcquirePipelineRun,
   releasePipelineRun,
@@ -169,7 +170,8 @@ import {
 } from './modules/postManager.js';
 import { createLdbDraftReceiver, createLdbDraftUiReadyGate } from './modules/ldbDraftImport.js';
 const ldbDraftUiReady = createLdbDraftUiReadyGate();
-import { revealLdbDraft } from './modules/ldbHandoffPresentation.js';
+import { revealLdbDraft, selectLdbDraftPublishMode } from './modules/ldbHandoffPresentation.js';
+import { blockLdbAutoDraftDialog, runLdbAutoDraftSave } from './modules/ldbAutoDraftSave.js';
 // ✅ [2026-01-25 모듈화] 오류 처리 시스템
 import {
   ErrorType,
@@ -873,7 +875,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ✅ [LDB] 확장프로그램이 보낸 완성 원고를 반자동 편집의 제목·본문·해시태그 칸에 바로 채운다.
-  //    기존 fillSemiAutoFields() 를 그대로 쓴다. 발행·예약은 하지 않는다.
+  //    기존 fillSemiAutoFields() 를 그대로 쓴다. 발행·예약은 하지 않는다. 발행 방식은 임시저장으로 고정한다.
   //    탭을 열지 않아도 받도록 시작 시점에 등록한다.
   // preload 는 'api' 와 'electronAPI' 두 객체를 노출한다. 수신기가 있는 쪽을 쓴다.
   const ldbApi = (window as any).electronAPI?.onLdbPosts ? (window as any).electronAPI : (window as any).api;
@@ -905,10 +907,41 @@ document.addEventListener('DOMContentLoaded', () => {
         displayGeneratedImages(images);
         updatePromptItemsWithImages(images);
         refreshGeneratedPostsList();
+        selectLdbDraftPublishMode(document);
         revealLdbDraft(post, document);
         appendLog('📥 LDB 원고와 이미지 ' + images.length + '개를 반자동 편집에 연결했습니다: ' + post.title);
       },
     }));
+  }
+  // [2026-10-21] 확장이 autoSave:'draft'로 보낸 글만 — 메인이 ACK 뒤 요청하면 반자동 버튼과 같은 처리 함수로 임시저장한다.
+  if (ldbApi?.onLdbAutoDraftSave && !(window as any).__ldbAutoDraftBound) {
+    (window as any).__ldbAutoDraftBound = true;
+    ldbApi.onLdbAutoDraftSave(async (request: { postId: string; accountId: string; categoryId: string }) => {
+      const outcome = await runLdbAutoDraftSave(request, {
+        doc: document,
+        isBusy: () => automationRunning || Boolean(getActivePipelineRun()),
+        currentPostId: () => (window as any).currentStructuredContent?._postId,
+        lastFailure: () => (window as any)._lastPublishFailure,
+        publish: async () => {
+          const semiAutoPublishBtn = document.getElementById('semi-auto-publish-btn') as HTMLButtonElement | null;
+          (window as any).stopFullAutoPublish = false;
+          appendLog('📝 LDB 자동 임시저장을 시작합니다: ' + request.postId);
+          initializePublishProgress();
+          showStopButton();
+          if (semiAutoPublishBtn) semiAutoPublishBtn.disabled = true;
+          automationRunning = true;
+          try {
+            return await handleSemiAutoPublish({ ldbAutoDraft: true });
+          } finally {
+            hideStopButton();
+            enableSemiAutoPublishButton();
+            automationRunning = false;
+          }
+        },
+      });
+      appendLog(`${outcome.status === 'saved' ? '✅' : '⚠️'} LDB 자동 임시저장 결과: ${outcome.message}`);
+      return outcome;
+    });
   }
   initCategorySelectionListener(); // ✅ 카테고리 모달 이벤트 리스너
   initHeadingImageButton();
@@ -970,6 +1003,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSerpHistoryPanel();
   initContentPolicyDashboard();
   initRevenueOperationsDashboard();
+  initDailyPublishingPanel();
 
   // ✅ [2026-01-25] 환경설정 저장 버튼 이벤트 리스너 (CSP 우회)
   const saveBtn = document.getElementById('save-settings-btn');
@@ -9520,6 +9554,12 @@ async function celebrityPublishGate(formData: any): Promise<boolean> {
     if (isContinuousMode) {
       appendLog(`⚠️ [법적위험] 연속발행 항목에서 실존인물 미확인 단정 의심 — ${(risk.samples || []).slice(0, 2).join(' / ')}`);
       return true; // 무인 루프: confirm이 큐를 얼리므로 로그만 (하드정책은 별도)
+    }
+    // LDB 자동 임시저장(무인)은 확인창을 띄우지 않고 이유를 남긴 채 멈춘다.
+    if (blockLdbAutoDraftDialog('실존인물 관련 위험 문장이 감지되어 자동 임시저장을 멈췄습니다. 앱에서 문장을 확인한 뒤 직접 저장해 주세요.')) {
+      appendLog('🛑 [법적위험] LDB 자동 임시저장을 멈췄습니다 (실존인물 미확인 단정 감지).');
+      (window as any)._publishGateCancelled = true;
+      return false;
     }
     const sampleLine = (risk.samples || []).slice(0, 3).map((s) => `· ${s}`).join('\n');
     const proceed = window.confirm(

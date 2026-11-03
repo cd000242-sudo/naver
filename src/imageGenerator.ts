@@ -451,6 +451,12 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     console.log(`[ImageGenerator] 🔁 ${normalizedProvider} → nano-banana-2 (나노바나나 단일화)`);
     normalizedProvider = 'nano-banana-2';
   }
+  // [2026-10-29 실측] 구글이 ImageFX 를 닫았다 — labs.google/fx/tools/image-fx 는 flow.google.com 으로 308,
+  //   인증 창구 /fx/api/auth/session 은 410 "deprecated and disabled". 옛 저장값·큐는 같은 구글 무료 엔진 Flow 로 보낸다.
+  if (normalizedProvider === 'imagefx') {
+    console.log('[ImageGenerator] 🔁 imagefx → flow (구글 ImageFX 종료, Flow 로 이전)');
+    normalizedProvider = 'flow';
+  }
   const requestedProvider = normalizedProvider;
   const fallbackPolicy = normalizeImageFallbackPolicy(options.imageFallbackPolicy);
   console.log(`[이미지생성] 🧭 엔진 실패 시 동작: ${fallbackPolicy}`);

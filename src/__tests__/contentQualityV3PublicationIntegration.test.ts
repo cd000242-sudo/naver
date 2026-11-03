@@ -26,7 +26,7 @@ describe('Content Quality V3 publication-boundary main wiring', () => {
     expect(smartScheduler).toMatch(/enforceContentQualityV3PublicationBoundary\([\s\S]*?return \{/);
 
     const multiAccount = between(
-      "ipcMain.handle('multiAccount:publish'",
+      'const handleMultiAccountPublish = async',
       "'automation:generateStructuredContent'",
     );
     expect(multiAccount).toMatch(/generateStructuredContentWithProductPolicy\([\s\S]*?beginContentQualityV3Publication\(generated\)/);
@@ -36,7 +36,8 @@ describe('Content Quality V3 publication-boundary main wiring', () => {
       "'automation:generateStructuredContent'",
       'registerConfigHandlers({',
     );
-    expect(primary).toMatch(/let content = await withRetry\([\s\S]*?beginContentQualityV3Publication\(content\)/);
+    // 2026-10-21: generation (withRetry) is wrapped by generateWithHomefeedReview; capture must still follow its result directly.
+    expect(primary).toMatch(/const generateOnce = \(source: any\) => withRetry\([\s\S]*?generateWithHomefeedReview\([\s\S]*?let content = manualReviewed\.article;\s*const contentQualityV3PublicationTicket = beginContentQualityV3Publication\(content\)/);
     expect(primary).toMatch(/collectedImages[\s\S]*?enforceContentQualityV3PublicationBoundary\(\s*content,[\s\S]*?return \{ success: true, content, imageCount \}/);
   });
 

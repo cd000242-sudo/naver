@@ -1,6 +1,8 @@
 import { fetchNaverPreviousPostCandidates, resolveNaverPreviousPostCategoryId } from './naverPreviousPostLookup.js';
 import { enforcePreviousPostScope, publicationCompletion, snapshotScheduledPublication, resolveDuePreviousPost } from './previousPostBoundary.js';
 import { resolveExpectedBlog } from '../../automation/expectedBlogIdentity.js';
+import { forwardDailyNativeReservation, hasDailyNativeReservation, assertDailyNativeReservationScope } from '../../automation/dailyNativeReservation.js';
+import { normalizeScheduleDateForRunOptions } from '../../automation/runOptionsPolicy.js';
 import { getBlogIdentityStore } from '../../automation/blogIdentityStore.js';
 // src/main/services/BlogExecutor.ts
 // 블로그 발행 비즈니스 로직 - executePostCycle의 실제 구현체
@@ -98,6 +100,13 @@ function assertImmediatePublishResultUrl(result: any, payload: PostCyclePayload)
     if (!isConcreteNaverBlogPostUrl(publishedUrl)) {
         throw new Error('PUBLISH_UNCONFIRMED:자동화가 성공을 반환했지만 실제 네이버 게시글 URL을 확인하지 못했습니다. 작성중/임시저장/블로그홈 상태를 발행 완료로 처리하지 않습니다.');
     }
+}
+
+function assertDailyNativePayloadScope(payload: PostCyclePayload): void {
+    if (!hasDailyNativeReservation(payload)) return;
+    assertDailyNativeReservationScope(payload, { mode: payload.publishMode || 'publish',
+        title: payload.structuredContent?.selectedTitle || payload.title, blogId: payload.blogId, categoryId: payload.categoryId,
+        scheduleDate: normalizeScheduleDateForRunOptions(payload), scheduleType: payload.scheduleType });
 }
 
 /**
@@ -683,6 +692,8 @@ export async function executePublishing(
             previousPostUrl: payload.previousPostUrl,
             isFullAuto: payload.isFullAuto,
         };
+        forwardDailyNativeReservation(payload, runOptions);
+        assertDailyNativePayloadScope(runOptions);
         if (beforePublishCommit) {
             attachMainProcessBeforePublishCommit(runOptions, beforePublishCommit, {
                 requiresVisibleSnapshot: true,
@@ -862,6 +873,10 @@ export async function runFullPostCycle(
         AutomationService.startRunning();
         AutomationService.updateLastRunTime();
         AutomationService.resetCancelFlag();
+        if (context.abortSignal?.aborted) {
+            AutomationService.requestCancel(false);
+            throw new Error('DAILY_CANCELLED');
+        }
 
         sendLog('🚀 발행 사이클 시작');
 
@@ -1022,6 +1037,9 @@ export async function runFullPostCycle(
             assertMainProcessEditorCommitTextOnly(effectivePayload);
         }
 
+        // Restore the private request after every policy/previous-post copy, then validate before any browser or queue.
+        forwardDailyNativeReservation(payload, effectivePayload);
+        assertDailyNativePayloadScope(effectivePayload);
         if (effectivePayload.publishMode === 'schedule' && effectivePayload.scheduleType === 'app-schedule') {
             const schedulePolicy = preparedPolicy;
             const scheduledPost = createAppScheduledPost({
@@ -1111,6 +1129,7 @@ export async function runFullPostCycle(
         finalResult = {
             success: result.success,
             url: result.url,
+            ...(result.scheduledPublication ? { scheduledPublication: result.scheduledPublication } : {}),
             ...publicationCompletion(result, effectivePayload),
             message: result.message,
             failureCode: result.failureCode,

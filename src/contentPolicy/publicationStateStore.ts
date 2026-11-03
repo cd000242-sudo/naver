@@ -5,6 +5,7 @@ import { withFileOperationLock } from './fileOperationQueue.js';
 import type { PublicationHistoryEntry, PublicationState } from './types.js';
 
 const STATE_FILE_NAME = 'content-policy-publication-state.json';
+const RECOVERABLE_RECORD_PAUSE = 'POLICY_POST_PUBLISH_RECORD_FAILED:RECENT_POST_RECORD_INCOMPLETE';
 
 const LEGACY_AUTOMATIC_PAUSE_REASONS: ReadonlySet<string> = new Set([
   'EXPOSURE_TARGET_METADATA_UNAVAILABLE',
@@ -51,10 +52,34 @@ export class PublicationStateStore {
   }
 
   async load(): Promise<PublicationState> {
-    return this.loadUnlocked();
+    return withFileOperationLock(this.filePath, () => this.loadUnlocked());
   }
 
   private async loadUnlocked(): Promise<PublicationState> {
+    const loaded = await this.readStateUnlocked();
+    if (loaded.status !== 'PAUSED'
+      || loaded.pause_origin !== 'integrity'
+      || loaded.pause_reason !== RECOVERABLE_RECORD_PAUSE) return loaded;
+
+    // The publication ledger was already saved; only the optional recent-post
+    // cache rejected an incomplete record. Keep its history and all unrelated
+    // evidence, without recording a human resume approval that never happened.
+    const recovered: PublicationState = {
+      ...loaded,
+      status: 'ACTIVE',
+      pause_reason: undefined,
+      paused_at: undefined,
+      pause_origin: undefined,
+      last_advisory_reason: `RECOVERED_NONCRITICAL_RECORD_PAUSE:${loaded.pause_reason}`,
+      last_advisory_at: new Date().toISOString(),
+    };
+    // Persist under the same lock as explicit pauses. A failed migration must
+    // propagate, never enter the read/parse recovery that rebuilds the ledger.
+    await this.saveUnlocked(recovered);
+    return recovered;
+  }
+
+  private async readStateUnlocked(): Promise<PublicationState> {
     try {
       const parsed = JSON.parse(await fs.readFile(this.filePath, 'utf8')) as Partial<PublicationState>;
       const loaded: PublicationState = {

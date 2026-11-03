@@ -33,6 +33,7 @@ const DEFAULT_MAX_OUTPUT_TOKENS = 2048;
 
 export interface AnalysisCallOptions {
   readonly maxTokens?: number;
+  readonly signal?: AbortSignal;
   /** Subscription CLIs are far slower than an API call; a caller that can wait says so. */
   readonly timeoutMs?: number;
 }
@@ -65,7 +66,7 @@ async function callOpenAi(prompt: string, apiKey: string, options?: AnalysisCall
       // max_completion_tokens: 최신 모델은 max_tokens 를 거부한다 (2026-07 교훈).
       max_completion_tokens: resolveMaxTokens(options),
     }),
-    signal: AbortSignal.timeout(ANALYSIS_TIMEOUT_MS),
+    signal: options?.signal,
   });
   if (!response.ok) throw new Error(`OpenAI ${response.status}`);
   const data = (await response.json()) as { choices?: Array<{ message?: { content?: string } }> };
@@ -85,7 +86,7 @@ async function callClaude(prompt: string, apiKey: string, options?: AnalysisCall
       max_tokens: resolveMaxTokens(options),
       messages: [{ role: 'user', content: prompt }],
     }),
-    signal: AbortSignal.timeout(ANALYSIS_TIMEOUT_MS),
+    signal: options?.signal,
   });
   if (!response.ok) throw new Error(`Claude ${response.status}`);
   const data = (await response.json()) as { content?: Array<{ text?: string }> };
@@ -94,12 +95,14 @@ async function callClaude(prompt: string, apiKey: string, options?: AnalysisCall
 
 async function callGemini(prompt: string, apiKey: string, model: string, options?: AnalysisCallOptions): Promise<string> {
   const { GoogleGenerativeAI } = await import('@google/generative-ai');
+  options?.signal?.throwIfAborted();
   const client = new GoogleGenerativeAI(apiKey);
   const generative = client.getGenerativeModel({
     model,
     generationConfig: { temperature: 0.2, maxOutputTokens: resolveMaxTokens(options) },
   });
-  const result = await generative.generateContent(prompt);
+  const result = await generative.generateContent(prompt, { signal: options?.signal, timeout: resolveTimeout(options) });
+  options?.signal?.throwIfAborted();
   return result.response.text();
 }
 
@@ -118,10 +121,12 @@ async function callAgent(provider: 'codex' | 'claude' | 'gemini', prompt: string
 async function callAgentText(provider: 'codex' | 'claude' | 'gemini', prompt: string, options?: AnalysisCallOptions): Promise<string> {
   const { generateWithAgent } = await import('../../agentCli/index.js');
   const { createAgentProductPolicyContext } = await import('../../agentCli/productPolicy.js');
+  options?.signal?.throwIfAborted();
   const result = await generateWithAgent(
-    { provider, prompt, timeoutMs: resolveTimeout(options) },
+    { provider, prompt, timeoutMs: resolveTimeout(options), signal: options?.signal },
     createAgentProductPolicyContext({ allowClaudeSubscription: true }),
   );
+  options?.signal?.throwIfAborted();
   return result.text;
 }
 
@@ -130,7 +135,7 @@ async function callPerplexity(prompt: string, apiKey: string, model: string, opt
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
     body: JSON.stringify({ model, messages: [{ role: 'user', content: prompt }], max_tokens: resolveMaxTokens(options) }),
-    signal: AbortSignal.timeout(ANALYSIS_TIMEOUT_MS),
+    signal: options?.signal,
   });
   if (!response.ok) throw new Error(`Perplexity ${response.status}`);
   const data = (await response.json()) as { choices?: Array<{ message?: { content?: string } }> };
@@ -189,6 +194,33 @@ export function resolveRoute(generator: string, config: Record<string, unknown>)
  * 키와 그 벤더의 저비용 모델. 원래 소제목 보정기가 OpenAI gpt-4.1-mini 로 박혀 있던 것을 고친 자리.
  */
 export function resolveSelectedEngineRoute(
+  generator: string, config: Record<string, unknown>, routeOptions: RouteOptions = {},
+): AnalysisRoute | null {
+  const route = resolveEngineRoute(generator, config, routeOptions);
+  if (!route) return null;
+  return { ...route, async callModel(prompt, options) {
+    options?.signal?.throwIfAborted();
+    const controller = new AbortController();
+    let rejectCancelled: (reason: unknown) => void = () => {};
+    const cancelled = new Promise<never>((_, reject) => { rejectCancelled = reject; });
+    const stop = (reason: unknown) => { controller.abort(reason); rejectCancelled(reason); };
+    const abort = () => stop(options?.signal?.reason ?? Error('ANALYSIS_CANCELLED'));
+    options?.signal?.addEventListener('abort', abort, { once: true });
+    const timer = setTimeout(() => stop(Error('ANALYSIS_TIMEOUT')), resolveTimeout(options));
+    try {
+      const result = await Promise.race([Promise.resolve().then(() => {
+        controller.signal.throwIfAborted();
+        return route.callModel(prompt, { ...options, signal: controller.signal });
+      }), cancelled]);
+      controller.signal.throwIfAborted();
+      return result;
+    } finally {
+      clearTimeout(timer); options?.signal?.removeEventListener('abort', abort);
+    }
+  } };
+}
+
+function resolveEngineRoute(
   generator: string,
   config: Record<string, unknown>,
   routeOptions: RouteOptions = {},

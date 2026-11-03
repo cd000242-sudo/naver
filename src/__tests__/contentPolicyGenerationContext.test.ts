@@ -244,9 +244,9 @@ describe('generation policy context', () => {
 
   it('places the multi-account operational gate before content and image generation', async () => {
     const source = await fs.readFile(path.resolve(process.cwd(), 'src/main.ts'), 'utf8');
-    const handlerStart = source.indexOf("ipcMain.handle('multiAccount:publish'");
+    const handlerStart = source.indexOf('const handleMultiAccountPublish = async');
     const gate = source.indexOf('evaluatePublicationAvailability({', handlerStart);
-    const contentGeneration = source.indexOf('generateStructuredContentWithProductPolicy(source as any', handlerStart);
+    const contentGeneration = source.indexOf('generateStructuredContentWithProductPolicy(generationSource', handlerStart);
     const imageGeneration = source.indexOf('generateImages({', handlerStart);
 
     expect(handlerStart).toBeGreaterThan(-1);

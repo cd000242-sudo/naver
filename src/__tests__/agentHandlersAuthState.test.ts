@@ -117,7 +117,7 @@ describe('agent authentication IPC state handoff', () => {
     }
 
     expect(detectAgentMock).toHaveBeenCalledWith('claude', { forceRefresh: false });
-    expect(installAgentMock).toHaveBeenCalledWith('claude');
+    expect(installAgentMock).toHaveBeenCalledWith('claude', { onProgress: expect.any(Function) });
     expect(loginAgentMock).toHaveBeenCalledWith('claude', expect.any(Object));
     expect(logoutAgentMock).toHaveBeenCalledWith('claude');
     expect(generateWithAgentMock).toHaveBeenCalledWith(

@@ -144,6 +144,8 @@ import {
 import { waitForDraftSaveSignal } from './automation/draftSaveConfirmation.js';
 import { revealBrowserWindow, type WindowCdp } from './automation/browserWindowReveal.js';
 import { resolveNaverRunOptions } from './automation/runOptionsPolicy.js';
+import { assertDailyNativeReservationReady, assertDailyNativeReservationCommit, hasDailyNativeReservation,
+  verifyDailyNativeReservation, type NativeReservationProof } from './automation/dailyNativeReservation.js';
 import {
   beginMainProcessEditorCommitCandidate,
   bindMainProcessEditorVisibleSnapshot,
@@ -493,6 +495,7 @@ export class NaverBlogAutomation {
   private browser: Browser | null = null;
   private mainFrame: Frame | null = null;
   private cancelRequested = false;
+  private scheduledPublication?: NativeReservationProof;
   private immediatePublishCommitAttempted = false;
   /** A native or DOM draft-resume prompt was seen and must be resolved safely. */
   private pendingDraftConflictDialog = false;
@@ -2719,12 +2722,18 @@ export class NaverBlogAutomation {
     scheduleMethod: 'datetime-local' | 'individual-inputs' = 'datetime-local',
     runOptions?: object,
   ): Promise<void> {
+    const nativeDaily = hasDailyNativeReservation(runOptions);
+    if (nativeDaily && runOptions) {
+      assertDailyNativeReservationReady(runOptions);
+      if (mode !== 'schedule') throw new Error('DAILY_NATIVE_RESERVATION_SCOPE');
+      (this as any).__strictCategoryForPreviousPost = true;
+    }
     if (mode === 'publish') this.immediatePublishCommitAttempted = false;
     const beforeIrreversibleCommit = async (): Promise<void> => {
       this.ensureNotCancelled();
       if (runOptions) {
       let validatedSnapshot: Awaited<ReturnType<typeof collectEditorVisibleSnapshot>> | undefined;
-      if (requiresMainProcessEditorVisibleSnapshot(runOptions)) {
+      if (requiresMainProcessEditorVisibleSnapshot(runOptions) || nativeDaily) {
         const snapshotFrame = await this.getAttachedFrame();
         validatedSnapshot = await collectEditorVisibleSnapshot(snapshotFrame);
         bindMainProcessEditorVisibleSnapshot(runOptions, validatedSnapshot);
@@ -2735,6 +2744,9 @@ export class NaverBlogAutomation {
         const finalSnapshot = await collectEditorVisibleSnapshot(finalSnapshotFrame);
         assertEditorVisibleSnapshotUnchanged(validatedSnapshot, finalSnapshot);
       }
+      if (nativeDaily) assertDailyNativeReservationCommit(runOptions, { mode, scheduleDate,
+        title: validatedSnapshot?.title, blogId: (this as any).__publicationBlogId,
+        categoryId: (this as any).__verifiedPublicationCategoryId });
       }
       this.ensureNotCancelled();
       if (mode !== 'draft') {
@@ -2745,6 +2757,7 @@ export class NaverBlogAutomation {
           this.log(`⚠️ 발행 직전 세션 확인 결과가 불명확합니다(${sessionVerdict.status}/${sessionVerdict.reason}) — 차단할 증거가 없어 진입 시 확인된 세션으로 계속합니다.`);
         }
         this.ensureNotCancelled();
+        if (nativeDaily && runOptions) assertDailyNativeReservationReady(runOptions, new Date(), true);
         if (!this.accountWorkId) throw new AccountExecutionGuardError('PUBLISH_OUTCOME_UNKNOWN');
         getPublicationCommitJournal().markSubmitting(this.options.naverId, this.accountWorkId);
       }
@@ -3724,7 +3737,7 @@ export class NaverBlogAutomation {
         }
 
         // ✅ [2026-03-21 FIX] 예약발행 재시도 (최대 3회, 임시저장 폴백 제거)
-        const MAX_SCHEDULE_RETRIES = 2;
+        const MAX_SCHEDULE_RETRIES = nativeDaily ? 1 : 2;
         let scheduleSuccess = false;
         let lastScheduleError: Error | null = null;
 
@@ -3756,11 +3769,12 @@ export class NaverBlogAutomation {
               }
             }
             await this.publishScheduled(scheduleDate, beforeIrreversibleCommit);
+            if (nativeDaily && runOptions) this.scheduledPublication = await verifyDailyNativeReservation(runOptions, this.ensurePage());
             scheduleSuccess = true;
             break; // 성공 시 루프 탈출
           } catch (scheduleError) {
             lastScheduleError = scheduleError as Error;
-            if (isSchedulePublishOutcomeUnknown(scheduleError)) {
+            if (nativeDaily || isSchedulePublishOutcomeUnknown(scheduleError)) {
               this.log('예약 확인 버튼 이후 결과가 미확정되어 자동 재시도를 중단합니다.');
               throw scheduleError;
             }
@@ -3784,7 +3798,7 @@ export class NaverBlogAutomation {
         // The reservation was verified by waitForScheduleConfirmation: record it before anything else can fail.
         this.confirmPublicationInJournal();
       }
-    }, 2, '블로그 발행');
+    }, nativeDaily ? 1 : 2, '블로그 발행');
   }
 
   private async applyPlainContent(resolved: ResolvedRunOptions): Promise<void> {
@@ -6086,6 +6100,8 @@ export class NaverBlogAutomation {
 
   private async runPostOnlyInternal(runOptions: RunOptions = {}, keepBrowserOpen: boolean = true): Promise<void> {
     this.cancelRequested = false;
+    this.scheduledPublication = undefined;
+    assertDailyNativeReservationReady(runOptions);
     let resolvedOptions = this.resolveRunOptions(runOptions);
     (this as any).__verifiedPublicationCategoryId = undefined;
     (this as any).__publicationBlogId = undefined;
@@ -6468,7 +6484,7 @@ export class NaverBlogAutomation {
     }
   }
 
-  async run(runOptions: RunOptions = {}): Promise<{ success: boolean; url?: string; publicationDestination?: { blogId: string; categoryId: string } }> {
+  async run(runOptions: RunOptions = {}): Promise<{ success: boolean; url?: string; scheduledPublication?: NativeReservationProof; publicationDestination?: { blogId: string; categoryId: string } }> {
     // [2026-10-08 사장님] A semi-auto publish the user pressed re-checks a stale stop itself (automation/userRunResume).
     if (runOptions.resumeOnUserRun !== true) return this.withAccountExecution(() => this.runAccountInternal(runOptions));
     const deps = this.userRunResumeDeps();
@@ -6574,7 +6590,7 @@ export class NaverBlogAutomation {
     await this.activateEditorForEditing();
   }
 
-  private async runAccountInternal(runOptions: RunOptions = {}): Promise<{ success: boolean; url?: string; publicationDestination?: { blogId: string; categoryId: string } }> {
+  private async runAccountInternal(runOptions: RunOptions = {}): Promise<{ success: boolean; url?: string; scheduledPublication?: NativeReservationProof; publicationDestination?: { blogId: string; categoryId: string } }> {
     // ✅ [v2.7.27] Adaptive Limiter — Puppeteer 부하 시 발행 동시성 자동 다운
     const { globalLimiter } = await import('./runtime/adaptiveLimiter.js');
     const release = await globalLimiter.acquire('publish');
@@ -6589,6 +6605,8 @@ export class NaverBlogAutomation {
     try {
     this.cancelRequested = false;
     this.publishedUrl = null; // ✅ 초기화
+    this.scheduledPublication = undefined;
+    assertDailyNativeReservationReady(runOptions);
     this.log('🚀 네이버 블로그 자동화를 시작합니다...');
 
     this.ensureNotCancelled();
@@ -6797,6 +6815,7 @@ export class NaverBlogAutomation {
       const verifiedCategory = (this as any).__verifiedPublicationCategoryId as string | undefined;
       const verifiedBlog = (this as any).__publicationBlogId as string | undefined;
       return { success: true, url: this.publishedUrl || undefined,
+        ...(this.scheduledPublication ? { scheduledPublication: this.scheduledPublication } : {}),
         ...(verifiedBlog && verifiedCategory ? { publicationDestination: { blogId: verifiedBlog, categoryId: verifiedCategory } } : {}),
       };
     } catch (error) {

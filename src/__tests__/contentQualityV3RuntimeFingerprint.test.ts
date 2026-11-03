@@ -329,6 +329,8 @@ function collectProductionPromptResources(workspaceRoot: string): readonly strin
 }
 
 const SUPPLEMENTAL_RUNTIME_CLOSURE_ROOTS = Object.freeze([
+  'src/main/ipc/agentHandlers.ts',
+  'src/agentCli/installer.ts',
   'src/main/accountSafetyController.ts',
   'src/main/ldb-bridge.ts',
   'src/main/ldb-images.ts',
@@ -357,6 +359,13 @@ const SUPPLEMENTAL_RUNTIME_CLOSURE_ROOTS = Object.freeze([
   'src/contentPolicy/types.ts',
   'src/main/ipc/blogHandlers.ts',
   'src/main/services/BlogExecutor.ts',
+  'src/main/services/dailyEditorialCaller.ts',
+  'src/main/services/dailyEditorialPipeline.ts',
+  'src/main/services/dailyEditorialPublication.ts',
+  'src/main/services/dailyOfficialCapture.ts',
+  'src/main/services/dailyPublishingDiscovery.ts',
+  'src/main/services/dailyPublishingRuntime.ts',
+  'src/main/services/dailyPublishingTitleReview.ts',
   'src/main/workers/base64Worker.ts',
   'src/preload.ts',
   'src/rag/embedder.ts',
@@ -975,6 +984,16 @@ describe('Content Quality V3 candidate runtime fingerprint', () => {
 
   it('covers the transitive runtime closure of every V3 module and production source path', () => {
     const workspaceRoot = resolve(__dirname, '..', '..');
+    const mainImports = collectRelativeRuntimeImports(resolve(workspaceRoot, 'src/main.ts'));
+    expect(mainImports).toEqual(expect.arrayContaining([
+      './main/services/dailyEditorialCaller.js',
+      './main/services/dailyEditorialPipeline.js',
+      './main/services/dailyEditorialPublication.js',
+      './main/services/dailyOfficialCaptureProducer.js',
+      './main/services/dailyPublishingDiscovery.js',
+      './main/services/dailyPublishingRuntime.js',
+      './main/services/dailyPublishingTitleReview.js',
+    ]));
     const sourceSet = new Set(CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS);
     const rendererAssembly = collectProductionRendererAssemblyInputs(workspaceRoot);
     const promptResources = collectProductionPromptResources(workspaceRoot);

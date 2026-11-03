@@ -9,6 +9,8 @@ import { toastManager } from '../utils/uiManagers.js';
 import { readRawPipelineSettings } from './pipelineConfig.js';
 import { bindAllStaticDropshotLoginUis } from './dropshotLoginUi.js';
 import { gsBindAllStaticUis } from './gensparkLoginUi.js';
+import { bindImageAiDisclosureSetting } from './imageAiDisclosureSetting.js';
+import { resolveImageStudioSource } from '../../runtime/imageStudioPreferences.js';
 // ✅ [v2.10.288] subImageMode import 제거 — esbuild 회귀 차단. window 통해 호출.
 type SubImageMode = 'ai' | 'collected';
 function setSubImageMode(mode: SubImageMode): void {
@@ -111,6 +113,15 @@ function ensureImageFxSwitchButton(imageSourceSelect: HTMLSelectElement, show: b
 }
 
 export async function initImageManagementTab(): Promise<void> {
+  bindImageAiDisclosureSetting(
+    document.getElementById('image-ai-mark-all') as HTMLInputElement | null,
+    document.getElementById('image-ai-mark-status'),
+    (window as any).api,
+    (message, kind) => {
+      appendLog(message, 'images-log-output');
+      if (kind === 'error') toastManager.error(message);
+    },
+  );
   // [2026-07-31] 드롭샷/Flow 로그인 버튼 배선 — 이 호출이 없어 클릭이 무반응이었다.
   try { gsBindAllStaticUis(); } catch (e) { console.warn('[ImageManagementTab] 젠스파크 UI 배선 실패:', e); }
   try { bindAllStaticDropshotLoginUis(); } catch (e) { console.warn('[ImageManagementTab] 로그인 UI 배선 실패:', e); }
@@ -371,12 +382,14 @@ export async function initImageManagementTab(): Promise<void> {
     // getImageSource()가 이 드롭다운을 localStorage보다 먼저 읽으므로, 시작 시 저장된
     // 선택(globalImageSource/fullAutoImageSource)으로 복원해야 설정이 유지된다.
     try {
-      const storedSource = localStorage.getItem('globalImageSource')
-        || localStorage.getItem('fullAutoImageSource');
-      if (storedSource && imageSourceSelect.querySelector(`option[value="${storedSource}"]`)) {
-        imageSourceSelect.value = storedSource;
-        console.log(`[ImageSource] 저장된 엔진으로 드롭다운 복원: ${storedSource}`);
-      }
+      const storedSource = resolveImageStudioSource(
+        localStorage.getItem('globalImageSource'),
+        localStorage.getItem('fullAutoImageSource'),
+        Array.from(imageSourceSelect.options, option => option.value),
+      );
+      imageSourceSelect.value = storedSource;
+      (window as any).globalImageSource = storedSource;
+      console.log(`[ImageSource] 저장된 엔진으로 드롭다운 복원: ${storedSource}`);
     } catch (e) {
       console.warn('[ImageSource] 드롭다운 복원 실패 (무시):', e);
     }
@@ -434,12 +447,12 @@ export async function initImageManagementTab(): Promise<void> {
             appendLog(`✅ 📂 내 폴더가 선택되었습니다: ${folderPath}`);
           } else {
             appendLog('⚠️ 폴더 선택이 취소되었습니다. AI 이미지가 사용됩니다.');
-            imageSourceSelect.value = localStorage.getItem('fullAutoImageSource') || 'dropshot';
+            imageSourceSelect.value = localStorage.getItem('fullAutoImageSource') || 'openai-image';
             return;
           }
         } catch (e: any) {
           appendLog(`❌ 폴더 선택 오류: ${e.message}`);
-          imageSourceSelect.value = localStorage.getItem('fullAutoImageSource') || 'dropshot';
+          imageSourceSelect.value = localStorage.getItem('fullAutoImageSource') || 'openai-image';
           return;
         }
       }
@@ -470,7 +483,7 @@ export async function initImageManagementTab(): Promise<void> {
         }
       } else {
         // ✅ [2026-03-10 CLEANUP] imageSourceMode dead write 제거 — getItem 없음
-        console.log(`[Renderer] 📁 저장된 이미지 모드 활성화 (AI 엔진 설정 유지: "${localStorage.getItem('globalImageSource') || 'dropshot'}")`);
+        console.log(`[Renderer] 📁 저장된 이미지 모드 활성화 (AI 엔진 설정 유지: "${localStorage.getItem('globalImageSource') || 'openai-image'}")`);
       }
 
       // Stability AI 모델 선택 UI 표시/숨김
@@ -567,7 +580,7 @@ export async function initImageManagementTab(): Promise<void> {
 
     // 초기화: 저장된 설정 복원 (풀오토 설정 우선)
     // ✅ [2026-03-02 FIX] fullAutoImageSource 우선 읽기 → 풀오토 이미지 설정이 이미지 관리 탭에도 반영
-    let savedSource = localStorage.getItem('fullAutoImageSource') || localStorage.getItem('globalImageSource');
+    const savedSource = imageSourceSelect.value;
     // [Stage 5] nano-banana-2 is now an independent engine — no migration needed
     if (savedSource && imageSourceSelect.querySelector(`option[value="${savedSource}"]`)) {
       imageSourceSelect.value = savedSource;
@@ -635,84 +648,6 @@ export async function initImageManagementTab(): Promise<void> {
           : '🔕 AI 이미지 관련성 검증 OFF — 키워드 기반 수집만 사용');
       } catch (e: any) {
         console.warn('[ImageRelevance] 설정 저장 실패:', e);
-      }
-    });
-  }
-
-  // [2026-09-22 사장님] "AI 활용 체크하기" — 켜면 발행 루프(naverBlogAutomation Step 4)가
-  //   provider 판정과 무관하게 모든 이미지의 네이버 AI 활용 마크를 켠다. config 양방향 sync.
-  const aiMarkAllCheckbox = document.getElementById('image-ai-mark-all') as HTMLInputElement | null;
-  if (aiMarkAllCheckbox) {
-    try {
-      const cfg = await (window as any).api?.getConfig?.();
-      aiMarkAllCheckbox.checked = cfg?.aiMarkAllImages === true;
-    } catch { /* 무시 */ }
-    aiMarkAllCheckbox.addEventListener('change', async () => {
-      try {
-        await (window as any).api?.saveConfig?.({ aiMarkAllImages: aiMarkAllCheckbox.checked });
-        appendLog(aiMarkAllCheckbox.checked
-          ? '🤖 AI 활용 체크 ON — 발행 시 모든 이미지에 네이버 AI 활용 마크를 켭니다'
-          : '🔕 AI 활용 체크 OFF — AI 생성 엔진 이미지만 자동 판정합니다');
-      } catch (e: any) {
-        console.warn('[AiMarkAll] 설정 저장 실패:', e);
-      }
-    });
-  }
-
-  // [SPEC-NAVER-IMAGE-2026] "고품질 썸네일" — 켜면 썸네일 후보 2~3장 + 자동 심사 1회(main: thumbnailDirectorGate).
-  //   기본은 1장·심사 없음(NAVER IMAGE PIPELINE V1 §10·§27). config 양방향 sync.
-  const thumbnailQualityCheckbox = document.getElementById('image-thumbnail-quality-high') as HTMLInputElement | null;
-  if (thumbnailQualityCheckbox) {
-    try {
-      const cfg = await (window as any).api?.getConfig?.();
-      thumbnailQualityCheckbox.checked = cfg?.thumbnailQualityMode === 'high';
-    } catch { /* 무시 */ }
-    thumbnailQualityCheckbox.addEventListener('change', async () => {
-      try {
-        await (window as any).api?.saveConfig?.({ thumbnailQualityMode: thumbnailQualityCheckbox.checked ? 'high' : 'standard' });
-        appendLog(thumbnailQualityCheckbox.checked
-          ? '🏆 고품질 썸네일 ON — 후보 2~3장 중 자동 심사로 1장을 고릅니다'
-          : '🖼️ 고품질 썸네일 OFF — 썸네일 1장, 심사 호출 없음');
-      } catch (e: any) {
-        console.warn('[ThumbnailQuality] 설정 저장 실패:', e);
-      }
-    });
-  }
-
-  // [2026-10-08] "소제목 이미지에 소제목 글자 넣기" — main 의 generateImages 가 config 로 읽는다(모든 발행 경로 공통).
-  const headingTextCheckbox = document.getElementById('image-heading-text-include') as HTMLInputElement | null;
-  if (headingTextCheckbox) {
-    try {
-      const cfg = await (window as any).api?.getConfig?.();
-      headingTextCheckbox.checked = cfg?.headingImageTextInclude === true;
-    } catch { /* 무시 */ }
-    headingTextCheckbox.addEventListener('change', async () => {
-      try {
-        await (window as any).api?.saveConfig?.({ headingImageTextInclude: headingTextCheckbox.checked });
-        appendLog(headingTextCheckbox.checked
-          ? '🔤 소제목 글자 ON — 한글을 그리는 엔진이 소제목 문장을 그대로 이미지에 넣습니다'
-          : '🔤 소제목 글자 OFF — 소제목 이미지는 글자 없이 만듭니다');
-      } catch (e: any) {
-        console.warn('[HeadingImageText] 설정 저장 실패:', e);
-      }
-    });
-  }
-
-  // [2026-10-20 사장님] 이미지 분위기 — 기본 스톡 사진(Orbit), 체크 시 기사 삽화. main 의 generateImages·썸네일 디렉터가 config 로 읽는다.
-  const imageLookCheckbox = document.getElementById('image-look-editorial') as HTMLInputElement | null;
-  if (imageLookCheckbox) {
-    try {
-      const cfg = await (window as any).api?.getConfig?.();
-      imageLookCheckbox.checked = cfg?.imageLook === 'editorial';
-    } catch { /* 무시 */ }
-    imageLookCheckbox.addEventListener('change', async () => {
-      try {
-        await (window as any).api?.saveConfig?.({ imageLook: imageLookCheckbox.checked ? 'editorial' : 'stock' });
-        appendLog(imageLookCheckbox.checked
-          ? '📰 이미지 분위기: 기사 삽화 — 사람을 줄이고 상황을 그대로 보여 줍니다'
-          : '📸 이미지 분위기: 스톡 사진(기본) — 깔끔하고 밝은 사진 느낌으로 만듭니다');
-      } catch (e: any) {
-        console.warn('[ImageLook] 설정 저장 실패:', e);
       }
     });
   }

@@ -142,6 +142,8 @@ test('real HTTP selection, article, heading images and repeat delivery cross pre
   expect(articleAck.selection).toEqual(destination);
   await expect(page.locator('#unified-generated-title')).toHaveValue(article.title);
   await expect(page.locator('#unified-generated-content')).toHaveValue(content);
+  // 확장 원고는 임시저장 전용 — 반자동 발행 기본값(즉시)으로 남으면 공개 발행된다(2026-10-21).
+  await expect(page.locator('#unified-publish-mode')).toHaveValue('draft');
   await expect(page.locator('.tab-button[data-tab="unified"]')).toHaveClass(/active/);
   await expect(page.locator('.pub-mode-tab[data-pubmode="single"]')).toHaveClass(/active/);
   await expect(page.locator('#unified-semi-auto-section')).toBeInViewport();

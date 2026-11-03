@@ -55,12 +55,17 @@ function bestPosition(post: PublishedPost): number {
 export function buildExposureWinnersBlock(
   mode: string,
   userDataPath: string = resolveUserDataPath(),
+  blogId?: string,
 ): string {
   if (!isFeatureEnabled('feedback_loop')) return '';
   if (!userDataPath || !mode) return '';
 
   try {
-    const posts = loadPublishedPosts(userDataPath).filter((p) => p.mode === mode);
+    // [2026-10-21] 그 블로그의 성공 제목만 — 블로그를 모르면 여러 블로그 기록을 섞지 않는다.
+    const byMode = loadPublishedPosts(userDataPath).filter((p) => p.mode === mode);
+    const wanted = String(blogId || '').trim().toLowerCase();
+    if (!wanted && new Set(byMode.map((p) => p.blogId)).size > 1) return '';
+    const posts = wanted ? byMode.filter((p) => String(p.blogId || '').toLowerCase() === wanted) : byMode;
     const { exposed } = splitExposureGroups(posts);
     if (exposed.length < MIN_WINNERS) return ''; // too few samples — lock empty
 

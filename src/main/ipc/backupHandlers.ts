@@ -30,6 +30,8 @@ export async function performDataBackup(
             'config.json',
             'blog-accounts.json',
             'scheduled-posts.json',
+            'blog-profiles.json',          // [2026-10-21] 블로그별 초기 설정
+            'blog-performance-v1.json',    // [2026-10-21] 블로그 글 성과 관측
         ];
         let copiedCount = 0;
         for (const f of targetFiles) {

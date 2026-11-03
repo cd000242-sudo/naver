@@ -41,6 +41,9 @@ vi.mock('../agentCli/detect', () => ({
 }));
 // The real resolver bootstraps npm over the network; unit tests assert the wiring only.
 const resolveNpmInvocationMock = vi.fn();
+const installAgyBinaryMock = vi.hoisted(() => vi.fn());
+vi.mock('../agentCli/agyInstaller', () => ({ installAgyBinary: (...args: unknown[]) => installAgyBinaryMock(...args) }));
+vi.mock('../agentCli/agentRuntime', async importOriginal => ({ ...(await importOriginal<typeof import('../agentCli/agentRuntime')>()), getAgentGlobalPrefix: () => 'C:\\userData\\agent-runtime\\global' }));
 vi.mock('../agentCli/npmInvocation', () => ({
   resolveNpmInvocation: (...args: unknown[]) => resolveNpmInvocationMock(...args),
 }));
@@ -74,9 +77,10 @@ beforeEach(() => {
   detectAgentMock.mockReset();
   clearAgentDetectionCacheMock.mockReset();
   resolveNpmInvocationMock.mockReset();
+  installAgyBinaryMock.mockReset(); installAgyBinaryMock.mockResolvedValue({ executable: 'C:\\managed\\agy.exe', version: '1.4.3' });
   resolveNpmInvocationMock.mockResolvedValue(BUNDLED_INVOCATION);
   resolveWindowsSpawnTargetMock.mockReset();
-  resolveWindowsSpawnTargetMock.mockReturnValue({ command: 'C:\agy\bin\agy.exe', args: [] });
+  resolveWindowsSpawnTargetMock.mockReturnValue({ command: 'C:\\agy\\bin\\agy.exe', prefixArgs: [] });
   childSpawnMock.mockClear();
   childExecFileMock.mockClear();
   // Default: success with a version-like stdout (used by post-install detect()).
@@ -164,12 +168,10 @@ describe('installAgent', () => {
     ]);
   });
 
-  it('uses the gemini package for gemini', async () => {
+  it('installs the actual agy runner for the gemini provider without replacing it with Gemini CLI', async () => {
     await installAgent('gemini');
-    expect(spawnMock.mock.calls[0][0].args).toEqual([
-      BUNDLED_NPM_CLI,
-      ...expectedNpmArgs('@google/gemini-cli@0.51.0', 'google'),
-    ]);
+    expect(installAgyBinaryMock).toHaveBeenCalledOnce();
+    expect(resolveNpmInvocationMock).not.toHaveBeenCalled(); expect(spawnMock).not.toHaveBeenCalled();
   });
 
   it('falls back to the system npm when the runtime bootstrap fails', async () => {
@@ -195,6 +197,7 @@ describe('installAgent', () => {
       env: {},
       source: 'system',
       bootstrapError: 'fetch failed: ENOTFOUND registry.npmjs.org',
+      prefix: MANAGED_PREFIX,
     });
     const { AgentCliError } = await import('../agentCli/types');
     spawnMock.mockRejectedValue(
@@ -230,20 +233,20 @@ describe('installAgent', () => {
   // [v2.11.138] 핀 버전이 npm에서 내려가면(ETARGET) @latest로 폴백 후 성공.
   it('falls back to @latest when the pinned version is unpublished (ETARGET)', async () => {
     spawnMock
-      .mockResolvedValueOnce({ code: 1, stdout: '', stderr: 'npm error code ETARGET\nNo matching version found for @google/gemini-cli@0.51.0' })
-      .mockResolvedValueOnce({ code: 0, stdout: 'gemini 0.52.0', stderr: '' });
-    detectAgentMock.mockResolvedValueOnce({ provider: 'gemini', installed: true, version: '0.52.0', loggedIn: false, available: false });
+      .mockResolvedValueOnce({ code: 1, stdout: '', stderr: 'npm error code ETARGET\nNo matching version found for @openai/codex@0.144.1' })
+      .mockResolvedValueOnce({ code: 0, stdout: 'codex 0.145.0', stderr: '' });
+    detectAgentMock.mockResolvedValueOnce({ provider: 'codex', installed: true, version: '0.145.0', loggedIn: false, available: false });
 
-    await expect(installAgent('gemini')).resolves.toMatchObject({ version: '0.52.0' });
+    await expect(installAgent('codex')).resolves.toMatchObject({ version: '0.145.0' });
     // 2번째 호출은 @latest 스펙이어야 한다.
-    expect(spawnMock.mock.calls[1][0].args).toContain('@google/gemini-cli@latest');
+    expect(spawnMock.mock.calls[1][0].args).toContain('@openai/codex@latest');
   });
 
   it('version-not-found 실패 메시지는 권한 오류로 오도하지 않는다', async () => {
     // 폴백까지 실패(계속 ETARGET) → 최종 에러 메시지가 "권한"을 단정하지 않아야
     spawnMock.mockResolvedValue({ code: 1, stdout: '', stderr: 'npm error code ETARGET No matching version' });
-    await expect(installAgent('gemini')).rejects.toMatchObject({ name: 'AgentCliError' });
-    const err = await installAgent('gemini').catch((e) => e);
+    await expect(installAgent('codex')).rejects.toMatchObject({ name: 'AgentCliError' });
+    const err = await installAgent('codex').catch((e) => e);
     expect(String(err.message)).not.toContain('관리자 권한이 필요');
   });
 
@@ -260,6 +263,36 @@ describe('installAgent', () => {
       name: 'AgentCliError',
       code: 'not_installed',
     });
+  });
+
+  it('re-probes fresh process paths after installing and reports login separately', async () => {
+    detectAgentMock.mockResolvedValueOnce({ provider: 'codex', installed: true, version: '0.144.1', loggedIn: false, available: false });
+    const phases: string[] = [];
+    const result = await installAgent('codex', { onProgress: progress => phases.push(progress.phase) });
+    expect(detectAgentMock).toHaveBeenCalledWith('codex', { forceRefresh: true });
+    expect(result).toMatchObject({ installed: true, loginRequired: true });
+    expect(phases).toEqual(expect.arrayContaining(['preparing', 'installing', 'verifying', 'complete']));
+    expect(startSessionMock).not.toHaveBeenCalled();
+  });
+
+  it('coalesces repeated clicks and releases its lock after a failed install', async () => {
+    let finish: (value: unknown) => void = () => {};
+    spawnMock.mockImplementationOnce(() => new Promise(resolve => { finish = resolve; }));
+    const first = installAgent('codex'), second = installAgent('codex');
+    await new Promise(resolve => setTimeout(resolve, 0)); expect(spawnMock).toHaveBeenCalledTimes(1);
+    finish({ code: 1, stdout: '', stderr: 'EPERM managed PC' });
+    await expect(first).rejects.toThrow(); await expect(second).rejects.toThrow();
+    spawnMock.mockResolvedValue({ code: 0, stdout: '', stderr: '' });
+    await expect(installAgent('codex')).resolves.toHaveProperty('installed', true);
+  });
+  it('serializes different provider installs sharing the same user prefix', async () => {
+    let finish: (value: unknown) => void = () => {};
+    spawnMock.mockImplementationOnce(() => new Promise(resolve => { finish = resolve; }));
+    const first = installAgent('codex'), second = installAgent('claude');
+    await new Promise(resolve => setTimeout(resolve, 0)); expect(spawnMock).toHaveBeenCalledTimes(1);
+    finish({ code: 0, stdout: '', stderr: '' }); await Promise.all([first, second]);
+    expect(spawnMock).toHaveBeenCalledTimes(2);
+    expect(spawnMock.mock.calls[0][0].provider).toBe('codex'); expect(spawnMock.mock.calls[1][0].provider).toBe('claude');
   });
 });
 
@@ -369,8 +402,8 @@ describe('loginAgent', () => {
     expect(sessionWriteLineMock).not.toHaveBeenCalled();
 
     // 실행 대상은 해석된 agy 실행 파일이며, 은퇴한 gemini 바이너리가 아니다.
-    expect(childSpawnMock).toHaveBeenCalledOnce();
-    const spawnArgs = JSON.stringify(childSpawnMock.mock.calls[0]);
+    expect(spawnMock).toHaveBeenCalledOnce();
+    const spawnArgs = JSON.stringify(spawnMock.mock.calls[0]);
     expect(spawnArgs).toContain('agy');
     expect(spawnArgs).not.toContain('gemini-cli');
     expect(resolveWindowsSpawnTargetMock).toHaveBeenCalled();

@@ -3,6 +3,7 @@ import { createHash } from 'crypto';
 import { link, mkdir, mkdtemp, readFile, readdir, rm, stat, symlink, utimes, writeFile } from 'fs/promises';
 import { tmpdir } from 'os';
 import path from 'path';
+import sharp from 'sharp';
 import { materializeLdbImages } from '../main/ldb-images.js';
 import { createLdbBridge } from '../main/ldb-bridge.js';
 
@@ -184,8 +185,8 @@ describe('downloaded LDB image imports', () => {
     expect(await readdir(output)).toEqual([]);
   });
 
-  it.each([['image/jpeg', 'jpg', Buffer.from([0xff, 0xd8, 0xff, 0xe0])],
-    ['image/webp', 'webp', Buffer.from('RIFF1234WEBP')]] as const)('imports a saved %s image', async (mime, suffix, bytes) => {
+  it.each([['image/jpeg', 'jpg', 'jpeg'], ['image/webp', 'webp', 'webp']] as const)('imports a saved %s image', async (mime, suffix, format) => {
+    const bytes = await sharp({ create: { width: 10, height: 10, channels: 3, background: '#abcdef' } }).toFormat(format).toBuffer();
     const relative = relativePath.replace(/png$/u, suffix);
     await writeFile(path.join(downloads, relative), bytes);
     const [result] = await materializeLdbImages([post(reference(bytes, { relativePath: relative, mime }))], output, downloads) as any[];

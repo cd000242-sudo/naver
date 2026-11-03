@@ -25,6 +25,20 @@ describe('flow generation detection guards', () => {
     expect(code).toMatch(/FLOW_GENERATION_ERROR/);
   });
 
+  // 2026-10-29 live: after ~20 images Google showed "비정상적인 활동이 감지되었습니다" with a [다시 시도] button.
+  // The watchdog did not know the card, so every image waited 240s twice before timing out.
+  it('stops at once on the unusual-activity block without clicking retry, and never retries that image', () => {
+    expect(code).toMatch(/비정상적인 활동이 감지/);
+    const blocked = code.indexOf("'isBlocked' in state && state.isBlocked");
+    const quota = code.indexOf('if (state.isQuota && !watchdogStopped)');
+    expect(blocked).toBeGreaterThan(0);
+    expect(blocked).toBeLessThan(quota);
+    expect(code.slice(blocked, quota)).toMatch(/reject\(new Error\('FLOW_BOT_BLOCKED:/);
+    expect(code.slice(blocked, quota)).not.toMatch(/click\(\)/);
+    expect(code).toMatch(/FLOW_GENERATION_ERROR\|FLOW_QUOTA_EXCEEDED\|FLOW_BOT_BLOCKED\)\/\.test\(err\.message\)\) throw err/);
+    expect(code).toMatch(/if \(\/\^\(FLOW_BOT_BLOCKED\|FLOW_QUOTA_EXCEEDED\)\/\.test\(msg\)\) throw err;/);
+  });
+
   it('detects new images by media UUID unseen at wait start (no count-only detection)', () => {
     expect(code).toMatch(/extractFlowImageId/);
     expect(code).toMatch(/getMediaUrlRedirect\\\?name=/);

@@ -3,6 +3,35 @@ function optionalPrompt(value: unknown): string | undefined {
   if (typeof value !== 'string' || value.length > 12000) throw new Error('이미지 프롬프트 형식을 확인해주세요.');
   return value.trim();
 }
+/** Preserve attribution without promoting an untrusted caller's ownership/official claims. */
+function ldbImageAttribution(image: any): Record<string, unknown> {
+  const result: Record<string, unknown> = {};
+  if (image?.caption !== undefined) {
+    if (typeof image.caption !== 'string' || image.caption.length > 200 || /[\p{Cc}]/u.test(image.caption)) throw new Error('사진 설명 형식을 확인해주세요.');
+    result.caption = image.caption.trim();
+  }
+  if (image?.captionTouched === true) result.captionTouched = true;
+  if (image?.sourceUrl !== undefined) {
+    if (typeof image.sourceUrl !== 'string' || image.sourceUrl.length > 2048 || /[\p{Cc}]/u.test(image.sourceUrl)) throw new Error('이미지 출처 주소를 확인해주세요.');
+    const url = new URL(image.sourceUrl);
+    if (!['https:', 'http:'].includes(url.protocol) || url.username || url.password) throw new Error('이미지 출처 주소를 확인해주세요.');
+    result.sourceUrl = url.toString();
+  }
+  if (image?.isCollected === true || ['collected', 'collected-image'].includes(image?.provider)) {
+    if (image?.provider && !['collected', 'collected-image', 'ldb-image-ultra'].includes(image.provider)) throw new Error('이미지 생성 방식과 수집 출처가 일치하지 않습니다.');
+    if (!result.sourceUrl) throw new Error('수집 이미지의 원본 출처 주소가 필요합니다.');
+    Object.assign(result, { provider: 'collected', isCollected: true, disableTextOverlay: true });
+  } else if (image?.disableTextOverlay === true) result.disableTextOverlay = true;
+  if (image?.sha256 !== undefined) {
+    if (typeof image.sha256 !== 'string' || !/^[a-f0-9]{64}$/u.test(image.sha256)) throw new Error('이미지 해시 형식을 확인해주세요.');
+    result.sha256 = image.sha256;
+  }
+  for (const key of ['width', 'height', 'byteSize']) if (image?.[key] !== undefined) {
+    if (!Number.isSafeInteger(image[key]) || image[key] < 1) throw new Error('이미지 크기 형식을 확인해주세요.');
+    result[key] = image[key];
+  }
+  return result;
+}
 
 /** Normalize and upsert extension drafts without invoking generation or publication. */
 export function prepareLdbDrafts(incoming: any[], existing: any[] = []): { posts: any[]; drafts: any[] } {
@@ -22,7 +51,9 @@ export function prepareLdbDrafts(incoming: any[], existing: any[] = []): { posts
       throw new Error('소제목이 비어 있거나 중복됩니다. 소제목을 구분한 뒤 다시 보내주세요.');
     }
     if (post.images !== undefined && !Array.isArray(post.images)) throw new Error('이미지 목록이 올바르지 않습니다.');
+    const collectedHashes = new Set<string>();
     const images = (post.images || []).map((image: any) => {
+      const attribution = ldbImageAttribution(image);
       const prompt = optionalPrompt(image?.prompt);
       const source = image?.previewDataUrl || image?.filePath;
       if (typeof source !== 'string' || !/^data:image\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/]+={0,2}$/u.test(source)) {
@@ -31,11 +62,17 @@ export function prepareLdbDrafts(incoming: any[], existing: any[] = []): { posts
       const isThumbnail = image.isThumbnail === true || ['썸네일', '🖼️ 썸네일', 'thumbnail'].includes(image.heading);
       const headingIndex = headings.findIndex((heading: any) => heading.title === image.heading);
       if (!isThumbnail && headingIndex < 0) throw new Error('이미지에 맞는 소제목을 찾지 못했습니다.');
+      if (attribution.isCollected) {
+        const identity = String(attribution.sha256 || source);
+        if (collectedHashes.has(identity)) throw new Error('수집 이미지가 중복되었습니다. 서로 다른 장면을 사용해주세요.');
+        collectedHashes.add(identity);
+      }
       return {
         heading: isThumbnail ? '🖼️ 썸네일' : headings[headingIndex].title,
         ...(isThumbnail ? { isThumbnail: true } : { headingIndex }),
         filePath: image.savedToLocal === true ? image.filePath : source, previewDataUrl: source, url: source,
-        provider: 'ldb-image-ultra', savedToLocal: image.savedToLocal === true,
+        provider: 'ldb-image-ultra', ...attribution, _ldbPostId: post.id,
+        savedToLocal: image.savedToLocal === true ? image.filePath : false,
         ...(prompt !== undefined ? { prompt } : {}),
       };
     });

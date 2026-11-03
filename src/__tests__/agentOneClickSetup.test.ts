@@ -38,8 +38,11 @@ describe('감지·설치·세션 배선 (기존 유지 확인)', () => {
     expect(detect).not.toContain('oauth_creds.json');
   });
 
-  it('gemini 자동 설치는 공식 npm 패키지를 쓴다', () => {
+  it('Google 구독 경로는 실행 계약과 같은 agy 공식 바이너리를 설치한다', () => {
     const installer = read('agentCli/installer.ts');
-    expect(installer).toMatch(/gemini: '@google\/gemini-cli'/);
+    const start = installer.indexOf("if (provider === 'gemini') {", installer.indexOf('async function performInstall'));
+    const branch = installer.slice(start, installer.indexOf('const pkg =', start));
+    expect(branch).toContain('installAgyBinary(');
+    expect(branch).not.toContain('resolveNpmInvocation');
   });
 });

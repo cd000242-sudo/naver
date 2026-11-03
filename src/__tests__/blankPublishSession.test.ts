@@ -38,7 +38,7 @@ function harness(name: string, initial: string, existingBrowser = true) {
   });
   const run = loadMethod(name, {
     browserSessionManager: { ensureServerSession: verify, markPublishing: vi.fn(), keepLoginAfterRun: vi.fn(async () => undefined) },
-    beginMainProcessEditorCommitCandidate: vi.fn(), resetImageProvenanceLedger: vi.fn(),
+    beginMainProcessEditorCommitCandidate: vi.fn(), resetImageProvenanceLedger: vi.fn(), assertDailyNativeReservationReady: vi.fn(),
     getAccountExecutionGuard: () => ({ getStatus: () => ({ paused: false }) }),
     AccountExecutionGuardError: GuardError,
     PUBLISH_PIPELINE_LOG_MESSAGES: {}, formatPipelineUrlLog: () => '',

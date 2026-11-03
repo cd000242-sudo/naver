@@ -89,6 +89,13 @@ describe('Naver API HUB credentials survive a version upgrade', () => {
     expect(read(root)).toMatchObject({ naverHubClientId: 'new-id', naverHubClientSecret: 'enc:v1:new-secret' });
   });
 
+  it('keeps the chosen writing engine but resets the model id', async () => {
+    write(root, { defaultAiProvider: 'openai', primaryGeminiTextModel: 'openai-gpt41' });
+    await upgradeHarness(root).wipe('2.11.365', '2.11.368');
+    expect(read(root)).toMatchObject({ defaultAiProvider: 'openai' });
+    expect(read(root)).not.toHaveProperty('primaryGeminiTextModel');
+  });
+
   it('leaves first-launch settings untouched', async () => {
     const settings = { naverHubClientId: 'fixture-id', primaryGeminiTextModel: 'existing-model' };
     write(root, settings);

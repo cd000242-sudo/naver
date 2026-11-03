@@ -100,8 +100,9 @@ describe('배선(소스 가드)', () => {
     const cfg = readFileSync(resolve('src/configManager.ts'), 'utf8');
     expect(cfg).toContain("imageLook?: 'stock' | 'editorial';");
     const html = readFileSync(resolve('public/index.html'), 'utf8');
-    expect(html).toContain('id="image-look-editorial"');
+    expect(html).not.toContain('id="image-look-editorial"');
     const tab = readFileSync(resolve('src/renderer/modules/imageManagementTab.ts'), 'utf8');
-    expect(tab).toContain("imageLook: imageLookCheckbox.checked ? 'editorial' : 'stock'");
+    expect(tab).not.toContain('imageLookCheckbox');
+    expect(readFileSync(resolve('src/runtime/imageStudioPreferences.ts'), 'utf8')).toContain("imageLook: 'stock'");
   });
 });

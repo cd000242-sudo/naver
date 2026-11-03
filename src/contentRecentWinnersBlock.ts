@@ -8,6 +8,8 @@ import { buildExposureWinnersBlock } from './content/exposureWinnersBlock.js';
 interface RecentWinnersBlockSource {
   __previousTitleMap?: Record<string, string>;
   contentMode?: string;
+  /** [2026-10-21] 이 글을 쓰는 블로그 — attachBlogProfile 이 넣는다. 없으면 여러 블로그 기록을 섞지 않는다. */
+  profileBlogId?: string;
 }
 
 /**
@@ -24,7 +26,7 @@ export function buildRecentWinnersBlock(source: unknown): string {
   if (!isFeatureEnabled('feedback_loop')) return '';
 
   const src = source as RecentWinnersBlockSource | null;
-  const exposureBlock = buildExposureWinnersBlock(src?.contentMode || '');
+  const exposureBlock = buildExposureWinnersBlock(src?.contentMode || '', undefined, src?.profileBlogId);
 
   let viewBlock = '';
   try {

@@ -246,7 +246,10 @@ export function registerAgentHandlers(options: RegisterAgentHandlerOptions): voi
       assertAgentProviderAllowed(validatedProvider, productPolicyContext);
       const result = await runExclusiveAuthAction(validatedProvider, async () => {
         const { installAgent } = await import('../../agentCli/installer.js');
-        return installAgent(validatedProvider);
+        return installAgent(validatedProvider, { onProgress: progress => {
+          if (event.sender.isDestroyed?.()) return;
+          try { event.sender.send('agent:install-progress', progress); } catch { /* Renderer closed. */ }
+        } });
       });
       return { success: true, ...result };
     } catch (err) {

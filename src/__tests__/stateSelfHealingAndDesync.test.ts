@@ -80,9 +80,20 @@ describe('A-3 자기치유: 발행 원장 손상 → 격리 + 재생성', () => 
 });
 
 describe('A-3 유사도 저장 실패 advisory 강등 (소스 잠금)', () => {
-  it('policyService가 repository.record 실패를 try/catch로 advisory 강등한다', () => {
+  it.each(['recordContentPolicyPublication', 'recordContentPolicyReservation'])('%s keeps the core ledger outside the cache-only catch and returns its advisory', name => {
     const code = read('contentPolicy/policyService.ts');
-    expect(code).toMatch(/try \{\s*await repository\.record\(recentPost\);\s*\} catch/);
-    expect(code).toMatch(/recordAdvisory\('POLICY_RECENT_POSTS_WRITE_FAILED'\)/);
+    const start = code.indexOf(`export async function ${name}(`);
+    const next = code.indexOf('export async function ', start + 1);
+    const method = code.slice(start, next < 0 ? undefined : next);
+    const ledgerWrite = method.indexOf('await stateStore.recordPublication(');
+    // Accept both repository newline formats without weakening ledger-first ordering.
+    const normalized = method.replace(/\r\n/g, '\n');
+    const normalizedCacheTry = normalized.indexOf('try {\n    await repository.record(recentPost);');
+    expect(ledgerWrite).toBeGreaterThan(-1);
+    expect(normalizedCacheTry).toBeGreaterThan(normalized.indexOf('await stateStore.recordPublication('));
+    expect(method).toMatch(/try \{\s*await repository\.record\(recentPost\);\s*\} catch/);
+    expect(method).toContain("advisoryReasons.push('POLICY_RECENT_POSTS_WRITE_FAILED')");
+    expect(method).toContain('await persistPolicyRecordAdvisories(stateStore, uniqueAdvisories)');
+    expect(method).toContain('return { advisoryReasons: uniqueAdvisories }');
   });
 });

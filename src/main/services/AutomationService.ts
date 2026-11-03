@@ -141,10 +141,10 @@ class AutomationServiceImpl {
     /**
      * 취소 요청
      */
-    requestCancel(): void {
+    requestCancel(cancelCurrentInstance = true): void {
         this.cancelRequested = true;
         // 현재 인스턴스에도 취소 요청 전달
-        if (this.currentInstance) {
+        if (cancelCurrentInstance && this.currentInstance) {
             this.currentInstance.cancel().catch(() => { });
         }
         // Content/image generation has operation-scoped cancellation. Internal
@@ -520,6 +520,8 @@ export interface PostCyclePayload {
  * 실행 컨텍스트
  */
 export interface PostCycleContext {
+    /** Trusted main-process cancellation; never read from serialized publish options. */
+    abortSignal?: AbortSignal;
     // 계정 정보 (다중계정 발행 시 사용)
     accountId?: string;
     naverId?: string;
@@ -546,6 +548,7 @@ export interface PostCycleResult {
     postId?: string;
     publishMode?: 'draft' | 'publish' | 'schedule';
     publicationDestination?: import('./previousPostBoundary.js').PublicationDestination;
+    scheduledPublication?: import('../../automation/dailyNativeReservation.js').NativeReservationProof;
     success: boolean;
     message?: string;
     url?: string;

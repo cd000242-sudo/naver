@@ -1,7 +1,7 @@
 import { publicationCompletion, snapshotScheduledPublication, resolveDuePreviousPost } from './main/services/previousPostBoundary.js';
 import { getBlogIdentityStore } from './automation/blogIdentityStore.js';
 import { findAccountsNamingBlog, resolveExpectedBlog } from './automation/expectedBlogIdentity.js';
-import { app, BrowserWindow, dialog, ipcMain, nativeImage, NativeImage, shell, Notification, Tray, Menu } from 'electron';
+import { app, BrowserWindow, dialog, ipcMain, nativeImage, NativeImage, shell, Notification, Tray, Menu, powerSaveBlocker } from 'electron';
 import './runtime/e2eUserDataBootstrap.js';
 // ✅ [v2.7.28] IPC 이중 등록 가드 — 다른 IPC 등록 이전에 반드시 첫 import
 import './main/ipc/registerOnce.js';
@@ -2519,7 +2519,7 @@ async function createWindow(): Promise<void> {
     });
 
     // ✅ [2026-04-03] 최소화(-) 버튼 = 일반 최소화 (작업표시줄에 남음)
-    // 트레이 숨기기는 별도 IPC 'app:minimize-to-tray'로 처리
+    // 기존 최소화 IPC도 같은 일반 최소화 동작을 사용한다.
     (mainWindow as any).on('minimize', () => {
       console.log('[Main] 일반 최소화 (작업표시줄에 남음)');
     });
@@ -2557,10 +2557,8 @@ async function createWindow(): Promise<void> {
         const { setSessionValidationActive } = require('./licenseManager.js');
         setSessionValidationActive(false);
       } catch { /* ignore */ }
-      // ✅ [v2.7.47] 게임 친화: minimize 시 작업표시줄에서 완전 격리
-      //   효과: fullscreen 게임이 작업표시줄을 그릴 때 본 앱 항목이 깜빡임 유발 안 함
-      //   복귀: Tray 아이콘 클릭으로 다시 띄우기 가능
-      try { mainWindow?.setSkipTaskbar(true); } catch { /* ignore */ }
+      // 최소화해도 작업표시줄에서 다시 창을 열 수 있어야 한다.
+      try { mainWindow?.setSkipTaskbar(false); } catch { /* ignore */ }
     });
     mainWindow.on('restore', () => {
       try {
@@ -4805,15 +4803,12 @@ try { ipcMain.handle('openExternalUrl', async (_e: any, url: string) => {
   const { shell } = require('electron');
   await shell.openExternal(url);
 }); } catch { /* 이미 등록됨 */ }
-// ✅ [2026-04-03] 트레이 아이콘화 — 렌더러에서 버튼 클릭 시 호출
+// 기존 IPC 이름은 호환용으로 유지하되 일반 최소화로 처리한다.
 try { ipcMain.handle('app:minimize-to-tray', async () => {
   if (mainWindow && !mainWindow.isDestroyed()) {
-    mainWindow.hide();
-    console.log('[Main] 트레이로 숨김');
-    if (tray && !(globalThis as any).trayNotified) {
-      tray.displayBalloon({ title: 'Leaders Pro', content: '트레이로 최소화되었습니다. 아이콘 클릭으로 복원합니다.' });
-      (globalThis as any).trayNotified = true;
-    }
+    mainWindow.setSkipTaskbar(false);
+    mainWindow.minimize();
+    console.log('[Main] 일반 최소화 (작업표시줄에 남음)');
   }
 }); } catch { /* 이미 등록됨 */ }
 registerQuotaHandlers(_earlyCtx);
@@ -4945,10 +4940,35 @@ import { startLdbBridge } from './main/ldb-bridge.js';
 import { createAccountSafetyController } from './main/accountSafetyController.js';
 import { isLdbConnectUrl, LDB_CONNECT_SCHEME, createSerializedRefresh } from './main/ldb-launch.js';
 import { deliverLdbPostsToWindow } from './main/ldb-delivery.js';
+import { createLdbAutoDraftRunner, createLdbAutoDraftStatusStore, requestLdbAutoDraftSave } from './main/ldb-auto-draft.js';
 import { materializeLdbImages } from './main/ldb-images.js';
 import { createLdbDestinations, type LdbResolvedDestination } from './main/ldb-destinations.js';
+import { createDailyPublishingRuntime } from './main/services/dailyPublishingRuntime.js';
+import { createDailyPublishingIpc } from './main/ipc/dailyPublishingHandlers.js';
+import { discoverDailySources, expandDailyKeywords } from './main/services/dailyPublishingDiscovery.js';
+import { createDailyEditorialCaller } from './main/services/dailyEditorialCaller.js';
+import { reviewDailyHomefeedMaterial } from './main/services/dailyHomefeedEditorial.js';
+import { generateReviewedDailyHomefeedArticle } from './main/services/dailyEditorialPipeline.js';
+import { sealDailyEditorialPublication } from './main/services/dailyEditorialPublication.js';
+import { reviewDailyPublishingTitle, validateDailyPublishingTitle } from './main/services/dailyPublishingTitleReview.js';
+import { isDailySourceUsed, writeDailyEditorialAudit } from './main/services/dailyPublishingStore.js';
+// 블로그별 초기 설정(2026-10-21) — 소재 선정 · 제목 심사 · 본문 작성에 같은 블로그 설정을 넣는다
+import { attachBlogPerformance, attachBlogProfile, findProfileAccount, snapshotBlogProfile } from './account/blogProfileGeneration.js';
+import { blogPerformanceStoreAt, blogProfileStoreAt } from './account/blogProfileRuntime.js';
+import { resolveRunContentSource } from './account/runContentSource.js';
+import { generateWithHomefeedReview, titleReviewGrounding } from './content/homefeedTitleReview.js';
+import { dailySourceFingerprints } from './main/services/dailyPublishingExecutor.js';
+import { checkDailyPublishingEntitlement } from './licenseManager.js';
 import { resolveThumbnailOverlayText } from './image/director/thumbnailText.js';
 import { selectItemsForHeadingImageMode } from './image/headingImageSelection.js';
+import { getDailyPublishingContext, assertDailyPublishingImages, bindDailyPublishingCancellation, assertDailyScheduleDeadline } from './main/services/dailyPublishingExecutor.js';
+import { completeDailyImages } from './main/services/dailyImageRefill.js';
+import { collectDailyImages, createDailyCollectDeps } from './main/services/dailyImageCollect.js';
+import { attachDailyNativeReservation, assertDailyNativeReservationAdapterReady, assertDailyNativeReservationReady } from './automation/dailyNativeReservation.js';
+import { createDailyNativeReservationAdapter } from './automation/dailyNativeReservationAdapter.js';
+import { ensureDailyOfficialCaptureBatch } from './main/services/dailyOfficialCaptureProducer.js';
+import { buildFullAutoDirectorRequest, fullAutoFinalHeadingTitles } from './image/fullAuto/fullAutoImageRequest.js';
+import { resolveFullAutoImagePolicy } from './image/fullAuto/fullAutoImagePolicy.js';
 
 /*
  * LDB 확장 수신 브리지. 환경설정에서 켠 사용자만 포트가 열린다.
@@ -4958,8 +4978,48 @@ import { selectItemsForHeadingImageMode } from './image/headingImageSelection.js
  * 켜 둔 사용자도 앱을 껐다 켤 때마다 포트가 안 열린다(2026-09-17 실측).
  */
 let ldbBridge: ReturnType<typeof startLdbBridge> = null;
+let dailyPublishingRuntime: ReturnType<typeof createDailyPublishingRuntime> | undefined;
+let dailyKeepAwakeId: number | undefined;
+/** Idle sleep only (screen may still turn off); a closed laptop lid still sleeps. */
+const keepAwakeForDailyPublishing = (on: boolean): void => {
+  if (on && dailyKeepAwakeId === undefined) dailyKeepAwakeId = powerSaveBlocker.start('prevent-app-suspension');
+  else if (!on && dailyKeepAwakeId !== undefined) { powerSaveBlocker.stop(dailyKeepAwakeId); dailyKeepAwakeId = undefined; }
+};
+/**
+ * Blocks saving a daily plan only on a clear logged-out answer. A slow or undecided check passes, and the
+ * free-engine refill still covers the post. Dropshot's check reads only this session's cache, so it is not asked.
+ */
+const dailyImageEngineReady = async (provider: string): Promise<boolean> => {
+  const within = <T,>(check: Promise<T>): Promise<T | undefined> =>
+    Promise.race([check, new Promise<undefined>(resolve => setTimeout(() => resolve(undefined), 60_000))]);
+  if (provider === 'flow' || provider === 'imagefx') {
+    const { checkFlowLogin } = await import('./image/flowGenerator.js');
+    const status = await within(checkFlowLogin()).catch(() => undefined);
+    // checkFlowLogin also returns loggedIn:false for "could not tell"; only its explicit logged-out message counts.
+    return !(status && !status.loggedIn && status.message.startsWith('Flow 로그인이 필요합니다'));
+  }
+  if (provider === 'genspark') {
+    const { checkGensparkLogin } = await import('./image/genspark/gensparkLogin.js');
+    const status = await within(checkGensparkLogin()).catch(() => undefined);
+    return status?.state !== 'logged-out';
+  }
+  return true;
+};
+const dailyNativeReservationAdapter = createDailyNativeReservationAdapter();
 let ldbConnectPending = process.argv.some(isLdbConnectUrl);
 let ldbLaunchUpdateCheckedAt = 0;
+async function assertDailyPublishingAccess(forceFresh = true): Promise<void> {
+  if (!isLicenseValid) throw new Error('DAILY_ANNUAL_PLAN_REQUIRED: 앱에 로그인한 뒤 1년 이상 이용권을 확인해 주세요.');
+  const permission = await checkDailyPublishingEntitlement({ forceFresh });
+  if (!permission.allowed) throw new Error('DAILY_ANNUAL_PLAN_REQUIRED: 매일 자동 발행은 유효한 1년 이상 이용권이 필요합니다. 앱에서 이용권을 다시 확인해 주세요.');
+}
+async function dailyEditorialCaller(generator: string, config: Record<string, unknown>, signal?: AbortSignal) {
+  const caller = await createDailyEditorialCaller(generator, config, signal);
+  return { ...caller, complete: async (prompt: string, options?: Parameters<typeof caller.complete>[1]) => {
+    await assertDailyPublishingAccess(false);
+    return caller.complete(prompt, options);
+  } };
+}
 const startLdbBridgeIfEnabled = createSerializedRefresh(async () => {
     try {
       const config = await loadConfig();
@@ -4968,7 +5028,6 @@ const startLdbBridgeIfEnabled = createSerializedRefresh(async () => {
           const stopping = ldbBridge; ldbBridge = null;
           await new Promise<void>(resolve => stopping.server.close(() => resolve()));
         }
-        return;
       }
       if (ldbBridge) return;
       const deliver = async (posts: unknown[], destination?: LdbResolvedDestination) => {
@@ -4987,17 +5046,89 @@ const startLdbBridgeIfEnabled = createSerializedRefresh(async () => {
         accounts: () => blogAccountManager.getAllAccounts(), active: () => blogAccountManager.getActiveAccount(),
         fetchCategories: fetchLdbBlogCategories, deliver,
       });
+      const dailyAvailability = async () => {
+        const ready = Boolean(isLicenseValid && mainWindow && !mainWindow.isDestroyed() && !mainWindow.webContents.isLoading() && !isUpdating());
+        const paid = ready && (await checkDailyPublishingEntitlement()).allowed;
+        return { ready, paid, label: !ready ? '앱 로그인과 화면 준비를 확인해 주세요.' : paid ? '1년 이상 이용권 확인됨 · 매일 자동 발행 사용 가능' : '매일 자동 발행은 유효한 1년 이상 이용권 전용입니다. 이용권을 다시 확인해 주세요.' };
+      };
+      dailyPublishingRuntime ??= createDailyPublishingRuntime({
+        storagePath: () => app.getPath('userData'),
+        availability: dailyAvailability,
+        nativeReservationReady: () => Boolean(dailyNativeReservationAdapter),
+        keepAwake: keepAwakeForDailyPublishing,
+        imageEngineReady: dailyImageEngineReady,
+        expandKeywords: async keyword => {
+          const { getNaverAutocomplete } = await import('./naverSearchApi.js');
+          return expandDailyKeywords(keyword, getNaverAutocomplete);
+        },
+        notify: (title, body) => { try { if (Notification.isSupported()) new Notification({ title, body }).show(); } catch { /* 알림은 선택 사항 */ } },
+        busy: () => Boolean(automationRunning || AutomationService.isRunning() || getExecutionLock()),
+        safety: accountId => accountSafety.status(accountId),
+        readConfig: loadConfig,
+        discoverSources: async (topic, account, job) => {
+          const currentConfig = await loadConfig();
+          const mode = account.settings?.contentMode || 'homefeed';
+          const generator = job.generator && job.generator !== 'app-settings' ? job.generator : currentConfig.defaultAiProvider;
+          const caller = mode === 'homefeed' ? await dailyEditorialCaller(String(generator || ''), currentConfig as any, job.signal) : undefined;
+          const profiled = await blogProfileStoreAt(app.getPath('userData')).resolve(account).catch(() => ({ profile: null }));
+          const measured = await attachBlogPerformance({ store: blogPerformanceStoreAt(app.getPath('userData')), account, source: {} });
+          // 소재를 고를 때 쓴 설정을 그대로 작성 단계까지 — 사이에 설정을 바꿔도 이 글은 이 버전(2026-10-21)
+          const snapshot = profiled.profile ? snapshotBlogProfile(profiled.profile) : undefined;
+          const found = await discoverDailySources(topic, currentConfig, {
+            contentMode: mode, complete: caller?.complete, timeoutMs: caller?.timeoutMs, signal: job.signal,
+            blogProfile: snapshot?.editorial,
+            blogPerformance: measured.digest,
+            isUsed: source => isDailySourceUsed(path.join(app.getPath('userData'), 'daily-source-claims-v1.json'), account.id, dailySourceFingerprints(source)),
+          });
+          return snapshot ? found.map(source => ({ ...source, blogProfileSnapshot: snapshot })) : found;
+        },
+        readAccount: id => blogAccountManager.getAllAccounts().find(account => account.id === id),
+        resolveCategory: async (accountId, categoryId) => {
+          const list = await destinations.categories(accountId);
+          const category = list.categories.find(item => item.id === categoryId);
+          if (!category) throw new Error('DAILY_CATEGORY_INVALID');
+          return { categoryName: category.name };
+        },
+        assertAllowed: async () => { const status = await dailyAvailability(); if (!status.ready) throw new Error('DAILY_UNAVAILABLE'); await assertDailyPublishingAccess(); },
+        publish: async (accountIds, options) => {
+          const contents = mainWindow?.webContents;
+          if (!contents || contents.isDestroyed()) throw new Error('DAILY_APP_UNAVAILABLE');
+          return handleMultiAccountPublish({ sender: contents, senderFrame: contents.mainFrame } as Electron.IpcMainInvokeEvent, accountIds, options);
+        },
+      });
+      // The desktop scheduler does not require an extension, an open chat, or the HTTP bridge.
+      dailyPublishingRuntime.start();
+      if (!config.ldbBridgeEnabled) return;
       ldbBridge = startLdbBridge(app.getPath('userData'), deliver, destinations, () => ({
         version: app.getVersion(), auth: isLicenseValid ? 'ready' : 'login-required',
         ready: Boolean(isLicenseValid && mainWindow && !mainWindow.isDestroyed() && !mainWindow.webContents.isLoading() && !isUpdating()),
         update: getLdbUpdateStatus(),
-      }), true);
+      }), true, dailyPublishingRuntime.api, createLdbAutoDraftRunner({
+        store: createLdbAutoDraftStatusStore(),
+        busy: () => Boolean(automationRunning || AutomationService.isRunning() || getExecutionLock()),
+        run: request => requestLdbAutoDraftSave(mainWindow?.webContents, ipcMain, request),
+        blogIdFor: accountId => blogAccountManager.getAllAccounts().find(account => account.id === accountId)?.blogId,
+      }));
       const startedBridge = ldbBridge;
       startedBridge?.server.once('error', () => { if (ldbBridge === startedBridge) ldbBridge = null; });
     } catch (error) {
       console.error('[LDB 브리지] 설정을 읽지 못해 시작하지 않았습니다:', error);
     }
 });
+
+ipcMain.handle('dailyPublishing:request', createDailyPublishingIpc({
+  trusted: (value) => {
+    const event = value as Electron.IpcMainInvokeEvent;
+    if (!mainWindow || mainWindow.isDestroyed() || event.sender !== mainWindow.webContents
+      || event.senderFrame !== event.sender.mainFrame) return false;
+    try {
+      const url = new URL(event.senderFrame.url);
+      return url.protocol === 'file:' && path.resolve(fileURLToPath(url)).toLowerCase() === path.resolve(publicPath, 'index.html').toLowerCase();
+    } catch { return false; }
+  },
+  ensure: async () => { await startLdbBridgeIfEnabled(); return dailyPublishingRuntime?.api; },
+}));
+app.on('will-quit', () => dailyPublishingRuntime?.dispose());
 
 /** Fixed URI only opens the existing app/settings; never enables the bridge or publishes. */
 const resumeLdbConnect = async (): Promise<void> => {
@@ -5306,7 +5437,11 @@ async function fetchLdbBlogCategories(arg: string | { naverId?: string; blogId?:
 // ✅ 다중계정 동시발행 (병렬 처리)
 
 //  다중계정 동시발행 (executePostCycle 기반)
-ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], options: any) => {
+const handleMultiAccountPublish = async (_event: Electron.IpcMainInvokeEvent, accountIds: string[], options: any) => {
+  const dailyContext = getDailyPublishingContext(options);
+  assertDailyScheduleDeadline(dailyContext);
+  // Adapter availability is checked before paid work; each real reservation is verified after writing.
+  if (dailyContext?.mode === 'schedule') assertDailyNativeReservationAdapterReady(dailyNativeReservationAdapter);
   const multiAccountHandoffRunId = randomUUID();
   const multiAccountRendererOwnerKey = createContentQualityV3RendererOwnerKey(_event);
   const preGeneratedForHandoff = options?.preGeneratedContent || options?.structuredContent;
@@ -5403,6 +5538,9 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
     };
   }
 
+  const dailyLeaseSnapshot = directAutomationLeaseCoordinator.snapshot();
+  let releaseDailyCancellation = async (): Promise<void> => {};
+  let dailyExecutionAccountKey = '';
   try {
     // ✅ [2026-05-25 FIX] Stale cancelRequested 자동 리셋 (v2.6.4 HOTFIX 동일 패턴, multiAccount:publish 누락분)
     //   원인: 이전 발행 중지 → AutomationService.cancelRequested = true 잔류
@@ -5418,6 +5556,17 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
     AutomationService.setMultiAccountAbort(false);
     // ✅ [2026-03-11] 즉시 취소용 AbortController 생성
     const abortController = AutomationService.createAbortController();
+
+    releaseDailyCancellation = bindDailyPublishingCancellation(dailyContext, {
+      owns: () => directAutomationLeaseCoordinator.snapshot() === dailyLeaseSnapshot,
+      cancel: async () => {
+        AutomationService.setMultiAccountAbort(true);
+        // The global current pointer may still belong to an idle manual session.
+        AutomationService.requestCancel(false);
+        AutomationService.abortCurrentOperation();
+        if (dailyExecutionAccountKey) await AutomationService.get(dailyExecutionAccountKey)?.cancel();
+      },
+    });
 
     sendLog(`🚀 다중계정 동시발행 시작: ${accountIds.length}개 계정`);
 
@@ -5545,10 +5694,12 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
         }
 
         //  콘텐츠 소스 가져오기
-        const contentSource = blogAccountManager.getNextContentSource(accountId);
+        // 2026-10-21: 이번 실행에만 쓸 글감(options.contentSources[accountId])이 있으면 계정 키워드 순번을 건드리지 않고 그것을 쓴다
+        const contentSource = dailyContext?.source || resolveRunContentSource(options, accountId) || blogAccountManager.getNextContentSource(accountId);
 
         // ✅ [2026-01-19 BUG FIX] 콘텐츠 생성 로직 추가 (이전: 폴백 값 "제목 테스트" 사용 버그)
         let structuredContent: any = null;
+        let dailyEditorialPublicationGuard: ((payload: unknown) => void) | undefined;
         let contentQualityV3PublicationTicket: ContentQualityV3PublicationTicket | undefined;
         let contentQualityV3PublishTicket: ContentQualityV3PublicationTicket | undefined;
         let contentQualityV3PostId: string | undefined;
@@ -5717,14 +5868,53 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
               sendLog('   🛡️ 최근 글 비교는 발행 직전 사용자 검수로 확인합니다.');
             }
             source.contentPolicyPrompt = multiPolicy.prompt;
+            // 블로그별 초기 설정(2026-10-21) — 생성 시작에 한 번 읽어 고정. 없거나 블로그가 바뀌었으면 계정 기본값 그대로.
+            const blogProfile = await attachBlogProfile({ store: blogProfileStoreAt(app.getPath('userData')), account, source,
+              snapshot: (dailyContext?.source as { blogProfileSnapshot?: any } | undefined)?.blogProfileSnapshot });
+            if (blogProfile.profileVersion) sendLog(`   🧭 블로그 설정 v${blogProfile.profileVersion}을 반영합니다.`);
+            if (blogProfile.currentVersion && blogProfile.currentVersion !== blogProfile.profileVersion) {
+              sendLog(`   ℹ️ 소재를 고른 뒤 블로그 설정이 v${blogProfile.currentVersion}로 바뀌었습니다 — 이 글은 고를 때의 v${blogProfile.profileVersion}로 씁니다.`);
+            }
+            else if (blogProfile.warning) sendLog(`   ⚠️ 블로그 설정을 쓰지 않았습니다(${blogProfile.warning}) — 계정 기본값으로 작성합니다.`);
+            const blogPerformance = await attachBlogPerformance({ store: blogPerformanceStoreAt(app.getPath('userData')), account, source });
+            if (blogPerformance.digest) sendLog(`   📊 이 블로그 성과 관측 ${blogPerformance.digest.windows.reduce((n, w) => n + w.measured, 0)}건을 참고합니다(관측 비교 · 인과 아님).`);
 
-            const generated = await withAbortCheck(
-              generateStructuredContentWithProductPolicy(source as any, {
-                provider: multiAccountProvider,
-                minChars: multiMinChars,
-              }),
-              abortController.signal
-            );
+            const generate = async (generationSource: any) => {
+              assertDailyScheduleDeadline(dailyContext);
+              if (dailyContext) await assertDailyPublishingAccess();
+              return withAbortCheck(generateStructuredContentWithProductPolicy(generationSource, {
+                provider: multiAccountProvider, minChars: multiMinChars, signal: abortController.signal,
+              }), abortController.signal);
+            };
+            let generated;
+            // 2026-10-21: 홈판 모드는 데일리가 아니어도(다중계정 · 임시저장) 제목 후보 캐기 · 토너먼트 · 비평 · 최종 약속 검수를 거친다.
+            // 소재 각도 심사(원문 앵커)는 수집 URL 원문이 있는 데일리에서만. 검수 실패는 발행 · 저장 전에 멈춘다.
+            if (multiContentMode === 'homefeed') {
+              const reviewSignal = dailyContext?.signal || abortController.signal;
+              // 이용권 확인은 매일 자동 발행만(dailyEditorialCaller). 일반 다중계정은 [글 생성]과 같이 선택 엔진 그대로.
+              const caller = dailyContext
+                ? await dailyEditorialCaller(multiAccountProvider, currentConfig as any, reviewSignal)
+                : await createDailyEditorialCaller(multiAccountProvider, currentConfig as any, reviewSignal);
+              const editorial = dailyContext ? (dailyContext.source.editorial || (await reviewDailyHomefeedMaterial({
+                source: dailyContext.source, title: String(source.title || ''), body: source.rawText,
+              }, { topic: String(options?.topic || ''), complete: caller.complete, timeoutMs: caller.timeoutMs, signal: dailyContext.signal, blogProfile: blogProfile.editorial, blogPerformance: blogPerformance.digest })).editorial) : undefined;
+              const titleInput = (article: { selectedTitle: string; bodyPlain: string }) => ({
+                title: article.selectedTitle, body: article.bodyPlain, sourceGrounding: titleReviewGrounding(source.rawText), sourceVerification: String(source.rawText),
+                editorialAngle: editorial, blogProfile: blogProfile.editorial, signal: reviewSignal,
+              });
+              const auditJobId = dailyContext?.jobId || `multi|${accountId}|${new Date().toISOString()}`;
+              generated = await generateReviewedDailyHomefeedArticle({ source, editorial, signal: reviewSignal }, {
+                generate,
+                review: article => reviewDailyPublishingTitle(titleInput(article), { callText: caller.complete, timeoutMs: caller.timeoutMs, tournament: true }),
+                validate: article => validateDailyPublishingTitle(titleInput(article), { callText: caller.complete, timeoutMs: caller.timeoutMs }),
+                audit: audit => writeDailyEditorialAudit(path.join(app.getPath('userData'), 'daily-editorial-reviews'), auditJobId, {
+                  ...audit, sourceUrl: dailyContext?.source.value || String(contentSource.value || ''), editorial, accountId,
+                  blogProfileVersion: blogProfile.profileVersion ?? null,
+                }),
+              });
+              if (dailyContext) dailyEditorialPublicationGuard = sealDailyEditorialPublication(generated);
+              sendLog(dailyContext ? '   ✅ 소재 심층 선별·제목 후보 비교·본문 보상 검수를 통과했습니다.' : '   ✅ 제목 후보 캐기·토너먼트·비평·본문 약속 검수를 통과했습니다.');
+            } else generated = await generate(source);
             contentQualityV3PublicationTicket = beginContentQualityV3Publication(generated);
             contentQualityV3PublishTicket = forkContentQualityV3PublicationTicket(
               contentQualityV3PublicationTicket,
@@ -5788,7 +5978,26 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
         // 기존 문제: headings 없으면 이미지 전체 스킵, 전용 썸네일 미생성, AI 프롬프트 추론 없음
         // ✅ [v1.4.63] skipImages 체크 추가 — "이미지 없이 글만 발행" 선택 시 ImageFX 창 뜨는 버그 수정
         let generatedThumbnailPath: string | undefined;
-        if (!options?.skipImages && options?.useAiImage !== false && generatedImages.length === 0) {
+        if (dailyContext?.imageMode === 'official-capture') {
+          assertDailyScheduleDeadline(dailyContext);
+          await assertDailyPublishingAccess();
+          if (dailyContext.signal?.aborted) throw new Error('DAILY_CANCELLED');
+          if (!dailyContext.captureCategory || dailyContext.source.type !== 'url') throw new Error('DAILY_CAPTURE_REVIEW_REQUIRED: 공식 캡처의 분야와 원문 URL을 확인해 주세요.');
+          const captures = await ensureDailyOfficialCaptureBatch({
+            userDataDir: app.getPath('userData'), jobId: dailyContext.jobId, accountId,
+            blogId: account.blogId, categoryId: String(options.categoryId || ''),
+            captureCategory: dailyContext.captureCategory, sourceUrl: dailyContext.source.value,
+            title: String(title || ''), headings: fullAutoFinalHeadingTitles(structuredContent),
+          }, { signal: dailyContext.signal });
+          generatedImages = [...captures];
+          generatedThumbnailPath = captures.find(image => image.isThumbnail)?.filePath;
+          assertDailyPublishingImages(structuredContent || {}, generatedImages);
+          sendLog(`   ✅ 공식 원문 캡처 ${captures.length}장 검수 완료 · AI 대체 없음`);
+        }
+        // 매일 발행 '실제 사진 먼저' 계획은 아래 매일 이미지 채우기 단계가 사진 → AI 순서로 만든다.
+        if (!options?.skipImages && options?.useAiImage !== false && generatedImages.length === 0 && dailyContext?.imageMode !== 'collect-first') {
+          assertDailyScheduleDeadline(dailyContext);
+          if (dailyContext) await assertDailyPublishingAccess();
           try {
             const imageProvider = options?.imageSource || 'nano-banana-2';
             const headingImageMode = options?.headingImageMode || 'all';
@@ -5821,8 +6030,9 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
               };
 
               // ═══ Phase 1: 전용 썸네일 별도 생성 (headings 유무 무관) ═══
+              // 매일 발행은 아래 매일 이미지 채우기 단계가 썸네일을 따로 만든다(수집 사진 합성 · 카드 약속 · 대표 장면).
               let dedicatedThumbnail: any = null;
-              try {
+              if (!dailyContext) try {
                 // ✅ AI 추론 프롬프트: 블로그 제목 기반 영어 프롬프트 생성
                 let thumbnailPrompt: string;
                 try {
@@ -5962,7 +6172,8 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
                     throw subErr; // abort는 상위로 전파
                   }
                   sendLog(`   ⚠️ 소제목 이미지 생성 실패: ${(subErr as Error).message}`);
-                  throw subErr;
+                  // 매일 발행은 빈 자리를 아래에서 무료 엔진으로 채운다 — 엔진 한 번 실패로 글 전체를 잃지 않게
+                  if (!dailyContext) throw subErr;
                 }
               }
 
@@ -5971,10 +6182,10 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
                 ...(dedicatedThumbnail ? [dedicatedThumbnail] : []),
                 ...subheadingImages,
               ];
-
               if (generatedImages.length > 0) {
                 sendLog(`   ✅ AI 이미지 총 ${generatedImages.length}개 준비 완료! (썸네일 ${dedicatedThumbnail ? '포함' : '미포함'})`);
-              } else {
+              } else if (!dailyContext) {
+                // 매일 발행은 빈 자리를 아래 매일 이미지 채우기 단계가 채운다.
                 sendLog(`   ⚠️ AI 이미지 생성 결과 없음 (발행 중단)`);
                 throw new Error('AI 이미지 생성 결과가 비어있습니다.');
               }
@@ -5989,6 +6200,74 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
             sendLog(`   ⚠️ AI 이미지 생성 실패 (발행 중단): ${(imgError as Error).message}`);
             console.error(`[다중계정] 이미지 생성 오류:`, imgError);
             results.push({ accountId, success: false, message: `이미지 생성 실패: ${(imgError as Error).message}` });
+            continue;
+          }
+        }
+
+        // 매일 발행: 계획의 순서(실제 사진 ↔ 고른 AI 엔진)로 빈 자리를 채우고, 끝으로 무료 엔진(Flow·젠스파크·리더스 나노바나나)으로 채운다.
+        //   엔진 하나가 막혀도 글 전체를 잃지 않게 — 실제 사진은 계획에 저작권 자기책임 동의가 있을 때만 쓴다.
+        const dailyImageMode = dailyContext?.imageMode;
+        if (dailyContext && dailyImageMode && dailyImageMode !== 'official-capture' && !options?.skipImages) {
+          assertDailyScheduleDeadline(dailyContext);
+          await assertDailyPublishingAccess();
+          try {
+            const dailyConfig = await loadConfig();
+            const dailyApiKeys = {
+              geminiApiKey: dailyConfig.geminiApiKey,
+              deepinfraApiKey: (dailyConfig as any).deepinfraApiKey,
+              openaiApiKey: (dailyConfig as any).openaiApiKey,
+              openaiImageApiKey: (dailyConfig as any).openaiImageApiKey,
+              leonardoaiApiKey: (dailyConfig as any).leonardoaiApiKey,
+              prodiaApiKey: (dailyConfig as any).prodiaApiKey || (dailyConfig as any).prodiaToken,
+            };
+            const dailyHeadings = fullAutoFinalHeadingTitles(structuredContent);
+            const dailyTitle = String(title || '');
+            const dailyRatio = options?.subheadingImageRatio || options?.imageRatio || '1:1';
+            generatedImages = await completeDailyImages({
+              mode: dailyImageMode, title: dailyTitle, headings: dailyHeadings, images: generatedImages,
+              primaryProvider: String(options?.imageSource || ''), imageRatio: dailyRatio, imageStyle: options?.imageStyle, log: sendLog,
+              generate: (provider, items) => withAbortCheck(generateImages({
+                provider, items, postTitle: title, isFullAuto: true, articleSectionImages: true,
+                imageStyle: options?.imageStyle, imageRatio: dailyRatio,
+                collectedImages: options?.collectedImages || structuredContent?.collectedImages || [],
+                imageFallbackPolicy: 'engine-only',
+              } as any, dailyApiKeys), abortController.signal),
+              makeThumbnail: async (provider, photos) => {
+                // 홈판 전체 자동(full-auto)과 같은 썸네일 요청: AUTO 문구 · 짧은 문구 합성 허용 · 카드 약속 · 동의한 수집 사진 1~2장.
+                const editorial = dailyContext.source.editorial;
+                const cardPromise = String(structuredContent?.preWritingAnalysis?.clickReason || structuredContent?.cardPromise
+                  || editorial?.expectationGap || '').trim();
+                const scene = String(editorial?.visualHook || '').trim();
+                let englishPrompt = '';
+                try { englishPrompt = await generateEnglishPromptMain(scene || dailyTitle, options?.imageStyle); } catch { englishPrompt = scene || dailyTitle; }
+                const made = await withAbortCheck(generateImagesWithThumbnailDirector({
+                  provider, postTitle: title, isFullAuto: true, imageStyle: options?.imageStyle, imageRatio: '1:1',
+                  imageFallbackPolicy: 'engine-only', category: options?.categoryName,
+                  items: [{ heading: dailyTitle, prompt: englishPrompt, englishPrompt, isThumbnail: true, imageStyle: options?.imageStyle,
+                    imageRatio: '1:1', ...(scene ? { sectionContent: `대표 장면: ${scene}` } : {}) }],
+                  thumbnailDirector: buildFullAutoDirectorRequest(resolveFullAutoImagePolicy({ strategy: 'naver-homefeed', headingScope: 'all' }), {
+                    cardPromise,
+                    realImages: photos.map(photo => ({ filePath: String(photo.filePath || ''), provider: 'collected', source: 'issue-endgame',
+                      isCollected: true, heading: String(photo.heading || '') })),
+                  }),
+                } as any, dailyApiKeys, undefined, { config: dailyConfig, generate: generateImages, applyTitleOverlay: applyKoreanTextOverlayIfNeeded }),
+                abortController.signal);
+                return made?.[0] || null;
+              },
+              collect: missing => collectDailyImages({
+                title: dailyTitle, headings: dailyHeadings, slots: missing,
+                intro: String(structuredContent?.introduction || '').slice(0, 1200) || undefined,
+                mainKeyword: dailyContext.source.type === 'keyword' ? dailyContext.source.value : undefined,
+              }, createDailyCollectDeps({ title: dailyTitle, postId: String(options?.postId || ''), log: sendLog, signal: abortController.signal })) as Promise<any[]>,
+            });
+          } catch (dailyImageError) {
+            if ((dailyImageError as Error).name === 'AbortError' || (dailyImageError as Error).message === 'PUBLISH_CANCELLED') {
+              sendLog(`   ⏹️ [${account.name}] 이미지 준비 중 즉시 중지됨`);
+              results.push({ accountId, success: false, message: '사용자에 의해 즉시 중지됨' });
+              break;
+            }
+            sendLog(`   ⚠️ 매일 발행 이미지 채우기 실패 (발행 중단): ${(dailyImageError as Error).message}`);
+            results.push({ accountId, success: false, message: `이미지 준비 실패: ${(dailyImageError as Error).message}` });
             continue;
           }
         }
@@ -6123,9 +6402,27 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
           continue;
         }
 
-        //  새 엔진 호출
+        // Daily requests recheck final slots after any content-policy edit and before opening the editor.
         let result = await executeWithContentPolicyManualReview(payload as any, {
-          execute: (approvedPayload) => AutomationService.executePostCycle(approvedPayload as any),
+          execute: async (approvedPayload) => {
+            assertDailyScheduleDeadline(dailyContext);
+            if (dailyContext?.mode === 'schedule') {
+              attachDailyNativeReservation(approvedPayload, {
+                blogId: account.blogId!, categoryId: String(options.categoryId || ''),
+                title: String(approvedPayload.title || ''), scheduledFor: dailyContext.scheduledFor!,
+              }, { adapter: dailyNativeReservationAdapter, signal: dailyContext.signal });
+              assertDailyNativeReservationReady(approvedPayload);
+            }
+            if (dailyContext?.signal?.aborted) throw new Error('DAILY_CANCELLED');
+            if (dailyContext) await assertDailyPublishingAccess();
+            if (dailyContext && payload.contentMode === 'homefeed') {
+              if (!dailyEditorialPublicationGuard) throw new Error('DAILY_EDITORIAL_REQUIRED');
+              dailyEditorialPublicationGuard(approvedPayload);
+            }
+            if (dailyContext) assertDailyPublishingImages(approvedPayload.structuredContent || {}, approvedPayload.generatedImages || []);
+            if (dailyContext) dailyExecutionAccountKey = String(approvedPayload.naverId || '').trim().toLowerCase();
+            return AutomationService.executePostCycle(approvedPayload as any, { abortSignal: dailyContext?.signal });
+          },
           confirm: confirmContentPolicyManualReview,
         });
         try {
@@ -6147,6 +6444,9 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
           message: result.message,
           url: result.url,
           ...publicationCompletion(result, payload),
+          ...(dailyContext && result.success && payload.publishMode === 'draft' ? { draftSaved: true } : {}),
+          ...(dailyContext?.mode === 'schedule' && result.success && result.scheduledPublication
+            ? { scheduledPublication: result.scheduledPublication } : {}),
           failureCode,
           // The guard refused the job before any browser opened: the caller must not read it as an unknown outcome.
           ...((result as any).refusedBeforeStart === true ? { refusedBeforeStart: true } : {}),
@@ -6203,9 +6503,12 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
     sendLog(`❌ 다중계정 발행 오류: ${errorMsg}`);
     return { success: false, message: `다중계정 발행 실패: ${errorMsg}` };
   } finally {
-    multiAccountLease.release();
+    try { await releaseDailyCancellation(); }
+    catch (cancelError) { console.warn('[DailyPublishing] 취소 정리 실패:', sanitizeUserVisibleError(cancelError)); }
+    finally { multiAccountLease.release(); }
   }
-});
+};
+ipcMain.handle('multiAccount:publish', handleMultiAccountPublish);
 
 
 // ✅ 다중계정 발행 즉시 중지 핸들러
@@ -6691,6 +6994,22 @@ ipcMain.handle(
         throw new Error(`[CONTENT_POLICY_BLOCKED] Generation stopped: ${reasonText}`);
       }
       source.contentPolicyPrompt = generationPolicy.prompt;
+      // 블로그별 초기 설정(2026-10-21) — 화면이 고른 계정(account.id · 로그인 아이디), 없으면 저장된 네이버 아이디와
+      // 정확히 한 계정이 맞을 때만. 애매하면 설정 없이 지금까지처럼 쓴다.
+      let manualProfileEditorial: unknown;
+      let manualProfileAccountId: string | undefined;
+      {
+        const profileHint = String((payload.assembly as any).accountId || '').trim()
+          || String(((await loadConfig().catch(() => null)) as any)?.savedNaverId || '').trim();
+        const profileAccount = findProfileAccount(blogAccountManager.getAllAccounts(), profileHint);
+        manualProfileAccountId = profileAccount?.id;
+        const manualProfile = await attachBlogProfile({ store: blogProfileStoreAt(app.getPath('userData')), account: profileAccount, source: source as any });
+        manualProfileEditorial = manualProfile.editorial;
+        if (manualProfile.profileVersion) console.log(`[BlogProfile] ${profileAccount?.id} 설정 v${manualProfile.profileVersion} 반영`);
+        else if (manualProfile.warning) console.warn(`[BlogProfile] 설정 미사용: ${manualProfile.warning}`);
+        const manualPerformance = await attachBlogPerformance({ store: blogPerformanceStoreAt(app.getPath('userData')), account: profileAccount, source: source as any });
+        if (manualPerformance.digest) console.log(`[BlogProfile] ${profileAccount?.id} 성과 관측 반영`);
+      }
       if (generationPolicy.manualReviewRequired) {
         console.warn(`[ContentPolicy] Generation continues with ${generationPolicy.input.recent_posts?.length || 0} recent posts; publish review is pending.`);
       } else {
@@ -6735,7 +7054,9 @@ ipcMain.handle(
       const genSignal = generationOperation.controller.signal;
 
       // ✅ [Phase 3B] 네트워크/타임아웃 에러 시 자동 재시도 (최대 2회, exponential backoff)
-      let content = await withRetry(
+      // 2026-10-21: 홈판 모드는 이 생성(재시도 포함)을 제목 후보 캐기 · 토너먼트 · 비평 · 최종 약속 검수로 감싼다(generateWithHomefeedReview).
+      // 매개변수 이름 source 유지: 검수 단계가 넘기는 값도 위 사실 검사를 거친 source 를 펼친 것(제목 지시만 덧붙음) — 배선 잠금 테스트 계약.
+      const generateOnce = (source: any) => withRetry(
         () => {
           // ✅ [2026-04-03] 매 시도마다 abort 체크
           if (genSignal.aborted) throw new Error('사용자가 작업을 취소했습니다.');
@@ -6754,6 +7075,17 @@ ipcMain.handle(
           },
         }
       );
+      const manualReviewed = await generateWithHomefeedReview({
+        contentMode: String(contentMode || ''), source: source as any, generate: generateOnce, signal: genSignal,
+        blogProfile: manualProfileEditorial,
+        createCaller: async () => {
+          try { return await createDailyEditorialCaller(String(provider || ''), (await loadConfig()) as any, genSignal); } catch { return null; }
+        },
+        audit: record => writeDailyEditorialAudit(path.join(app.getPath('userData'), 'daily-editorial-reviews'),
+          `manual|${manualProfileAccountId || 'unbound'}|${new Date().toISOString()}`, { ...record, accountId: manualProfileAccountId ?? null }),
+        log: message => { console.log(`[TitleReview] ${message}`); if (message.startsWith('⚠️')) warnings.push(message); },
+      });
+      let content = manualReviewed.article;
       const contentQualityV3PublicationTicket = beginContentQualityV3Publication(content);
       const contentQualityV3PublishTicket = forkContentQualityV3PublicationTicket(
         contentQualityV3PublicationTicket,
@@ -9051,6 +9383,10 @@ const PRESERVE_FIELDS = [
   'externalApiCostConsent', 'externalApiCostConsentAt',
   // ===== 플랜/예산 정보 =====
   'geminiPlanType', 'geminiCreditBudget',
+  // ===== 사용자가 고른 작성 엔진 =====
+  // [2026-10-21 실측] 빠지면 다중계정 생성이 'gemini' 로 넘어가 키 없는 계정에서 DAILY_EDITORIAL_ENGINE_REQUIRED.
+  // 모델 ID(primaryGeminiTextModel)는 위 이유로 빼 두고, 엔진만 남기면 그 엔진의 기본 모델로 돈다.
+  'defaultAiProvider',
   // ===== 사용자 표시 정보 =====
   'userDisplayName', 'userEmail', 'userTimezone', 'authorName',
 ] as const;

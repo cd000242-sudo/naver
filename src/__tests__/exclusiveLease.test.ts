@@ -8,6 +8,8 @@ describe('ExclusiveLeaseCoordinator', () => {
     const first = coordinator.tryAcquire('manual');
 
     expect(first).not.toBeNull();
+    expect(coordinator.snapshot()).toBe(first);
+    expect(coordinator.snapshot()).toBe(coordinator.snapshot());
     expect(coordinator.tryAcquire('scheduler')).toBeNull();
     expect(coordinator.release({ ...first!, token: 'foreign-token' })).toBe(false);
     expect(coordinator.snapshot()?.owner).toBe('manual');
@@ -23,7 +25,7 @@ describe('ExclusiveLeaseCoordinator', () => {
 
     const second = coordinator.tryAcquire('second')!;
     expect(coordinator.release(first)).toBe(false);
-    expect(coordinator.snapshot()).toEqual(second);
+    expect(coordinator.snapshot()).toBe(second);
   });
 });
 

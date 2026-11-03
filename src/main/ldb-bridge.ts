@@ -8,6 +8,7 @@
  *   - 토큰 필수. 실행할 때마다 파일에서 읽고, 없으면 만들어 저장한다.
  *   - Origin 허용목록 — 확장(chrome-extension://) 만. 일반 웹사이트는 403.
  *   - **발행하지 않는다** — 받은 글을 목록에 넣기만 한다. 임시저장/예약/발행은 사용자가 직접 누른다.
+ *     예외: 글에 `autoSave: 'draft'`를 명시한 1편은 ACK 뒤 기존 반자동 경로로 임시저장만 한다(ldb-auto-draft.ts).
  *   - 자격증명을 받지도 저장하지도 않는다.
  *
  * 순수 Node http. Electron 의존은 주입으로 받아 테스트에서 분리한다.
@@ -19,6 +20,9 @@ import { readFileSync, writeFileSync } from 'fs';
 import path from 'path';
 import type { createLdbDestinations } from './ldb-destinations.js';
 import { LdbDownloadImageError } from './ldb-download-images.js';
+import { handleDailyPublishingHttp } from './ldb-daily-http.js';
+import type { DailyPublishingApi } from './ldb-daily-publishing.js';
+import { LDB_POST_ID_PATTERN, parseLdbAutoSaveRequest, type LdbAutoDraftApi } from './ldb-auto-draft.js';
 
 export const LDB_BRIDGE_PORT = 47630;
 const MAX_BODY_BYTES = 4 * 1024 * 1024;
@@ -32,6 +36,9 @@ export interface LdbBridgeDeps {
   destinations?: ReturnType<typeof createLdbDestinations>;
   /** True only when the receiving app reads verified files from its own OS Downloads directory. */
   downloadImageFiles?: boolean;
+  dailyPublishing?: DailyPublishingApi;
+  /** `autoSave: 'draft'` 글을 ACK 뒤 기존 반자동 임시저장 경로로 저장한다. 연결된 경우에만 기능을 알린다. */
+  autoDraft?: LdbAutoDraftApi;
 }
 
 /** 확장만 허용한다. 일반 웹페이지는 이 브리지를 부를 수 없다. */
@@ -65,6 +72,7 @@ export function validatePosts(payload: unknown): { posts: unknown[] } | { error:
     if (value.isPublished === true || value.publishMode === 'publish') {
       return { error: '발행 상태로 표시된 글은 받지 않습니다. 임시저장으로만 받습니다.' };
     }
+    if (value.autoSave !== undefined && value.autoSave !== 'draft') return { error: '자동 저장은 임시저장(draft)만 지원합니다.' };
   }
   return { posts };
 }
@@ -90,15 +98,32 @@ export function createLdbBridge(deps: LdbBridgeDeps): http.Server {
 
     const url = new URL(req.url || '/', `http://127.0.0.1:${LDB_BRIDGE_PORT}`);
     if (req.method === 'GET' && url.pathname === '/v1/status') {
-      send(res, 200, { ok: true, app: 'naver-automation', ...(deps.status?.() || {}), accepts: 'draft-only', capabilities: ['renderer-ack', 'heading-images', 'draft-upsert', ...(deps.destinations ? ['account-categories'] : []), ...(deps.downloadImageFiles ? ['download-image-files'] : [])] }, origin);
+      send(res, 200, { ok: true, app: 'naver-automation', ...(deps.status?.() || {}), accepts: 'draft-only', capabilities: ['renderer-ack', 'heading-images', 'draft-upsert', ...(deps.destinations ? ['account-categories'] : []), ...(deps.downloadImageFiles ? ['download-image-files'] : []), ...(deps.dailyPublishing ? ['daily-publishing', 'daily-publishing-annual-entitlement-v1'] : []), ...(deps.autoDraft ? ['auto-draft-save'] : [])] }, origin);
       return;
     }
-    if (!['/v1/posts', '/v1/accounts', '/v1/categories', '/v1/selection'].includes(url.pathname)) {
+    if (!['/v1/posts', '/v1/posts/status', '/v1/accounts', '/v1/categories', '/v1/selection', '/v1/automations/status', '/v1/automations/plan', '/v1/automations/stop'].includes(url.pathname)) {
       send(res, 404, { ok: false, error: '지원하지 않는 경로입니다.' }, origin);
       return;
     }
     if (req.headers.authorization !== `Bearer ${deps.token}`) {
       send(res, 401, { ok: false, error: '브리지 토큰이 맞지 않습니다.' }, origin);
+      return;
+    }
+
+    // A signed-in renderer is not required to stop a previously enabled plan.
+    if (url.pathname.startsWith('/v1/automations/')) {
+      handleDailyPublishingHttp(req, res, url.pathname, deps.dailyPublishing, (status, body) => send(res, status, body, origin));
+      return;
+    }
+
+    // 저장 결과 조회는 앱 화면 준비와 무관하게 읽을 수 있다.
+    if (url.pathname === '/v1/posts/status') {
+      if (req.method !== 'GET' || !deps.autoDraft) { send(res, 404, { ok: false, error: '지원하지 않는 경로입니다.' }, origin); return; }
+      const id = url.searchParams.get('id') || '';
+      if (!LDB_POST_ID_PATTERN.test(id)) { send(res, 400, { ok: false, error: '글 id가 올바르지 않습니다.' }, origin); return; }
+      const record = deps.autoDraft.get(id);
+      if (!record) { send(res, 404, { ok: false, error: '이 글의 자동 임시저장 기록이 없습니다.' }, origin); return; }
+      send(res, 200, { ok: true, record }, origin);
       return;
     }
 
@@ -134,11 +159,16 @@ export function createLdbBridge(deps: LdbBridgeDeps): http.Server {
       }
       const checked = validatePosts(payload);
       if ('error' in checked) { send(res, 400, { ok: false, error: checked.error }, origin); return; }
+      const autoSave = parseLdbAutoSaveRequest(payload, checked.posts);
+      if ('error' in autoSave) { send(res, 400, { ok: false, error: autoSave.error }, origin); return; }
+      if (autoSave.request && !deps.autoDraft) { send(res, 409, { ok: false, error: '이 앱은 자동 임시저장을 지원하지 않습니다. 앱을 업데이트해주세요.' }, origin); return; }
       try {
         const destination = (payload as Record<string, unknown>).destination;
         if (destination !== undefined && !deps.destinations) { send(res, 409, { ok: false, error: '앱을 업데이트해주세요.' }, origin); return; }
         const result = deps.destinations ? await deps.destinations.send(checked.posts, destination) : { imported: await deps.deliver(checked.posts) };
-        send(res, 200, { ok: true, ...result }, origin);
+        // 렌더러 ACK가 끝난 뒤에만 저장을 예약한다. 응답은 기다리지 않는다.
+        const queued = autoSave.request && deps.autoDraft ? deps.autoDraft.start(autoSave.request) : undefined;
+        send(res, 200, { ok: true, ...result, ...(queued ? { autoSave: { id: queued.id, status: queued.status } } : {}) }, origin);
       } catch (error) {
         if (error instanceof LdbDownloadImageError) {
           send(res, 409, { ok: false, code: error.code, error: error.message }, origin); return;
@@ -150,10 +180,10 @@ export function createLdbBridge(deps: LdbBridgeDeps): http.Server {
 }
 
 /** 앱 시작 때 한 번 호출한다. 실패해도 앱 기능에는 영향을 주지 않는다. */
-export function startLdbBridge(userDataPath: string, deliver: (posts: unknown[]) => Promise<number>, destinations?: LdbBridgeDeps['destinations'], status?: LdbBridgeDeps['status'], downloadImageFiles = false): { token: string; server: http.Server } | null {
+export function startLdbBridge(userDataPath: string, deliver: (posts: unknown[]) => Promise<number>, destinations?: LdbBridgeDeps['destinations'], status?: LdbBridgeDeps['status'], downloadImageFiles = false, dailyPublishing?: DailyPublishingApi, autoDraft?: LdbAutoDraftApi): { token: string; server: http.Server } | null {
   try {
     const token = loadBridgeToken(path.join(userDataPath, 'ldb-bridge-token'));
-    const server = createLdbBridge({ deliver, token, destinations, status, downloadImageFiles });
+    const server = createLdbBridge({ deliver, token, destinations, status, downloadImageFiles, dailyPublishing, autoDraft });
     server.on('error', (error) => { console.error('[LDB 브리지] 시작 실패:', error); });
     server.listen(LDB_BRIDGE_PORT, '127.0.0.1', () => {
       console.log(`[LDB 브리지] http://127.0.0.1:${LDB_BRIDGE_PORT} · 연결 준비 완료`);

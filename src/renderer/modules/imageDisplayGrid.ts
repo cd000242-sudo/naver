@@ -50,7 +50,9 @@ export function displayGeneratedImages(images: any[]): void {
     : ((imagesFromManager && imagesFromManager.length > 0) ? imagesFromManager : []);
 
   // ✅ null/undefined 이미지 필터링
-  const validImages = (sourceImages || []).filter((img: any) => img !== null && img !== undefined);
+  const bridgePostId = currentStructuredContent?._source === 'ldb-bridge' ? String(currentStructuredContent._postId || '') : '';
+  const validImages = (sourceImages || []).filter((img: any) => img !== null && img !== undefined
+    && (!bridgePostId || !img._ldbPostId || img._ldbPostId === bridgePostId));
 
   // ✅ 디버그: 이미지 배열 내용 출력
   console.log('[DEBUG] displayGeneratedImages 호출됨, validImages:', validImages.length);
@@ -103,7 +105,7 @@ export function displayGeneratedImages(images: any[]): void {
       // ✅ prompt가 없으면 heading을 기본값으로 사용 (폴더에서 불러온 이미지, 백업 등)
       const prompt = escapeHtml(image.prompt || image.heading || `이미지 ${index + 1}`);
       const imageRaw = image.url || image.filePath || image.previewDataUrl || '';
-      const imageUrl = toFileUrlMaybe(String(imageRaw || '').trim());
+      const imageUrl = escapeHtml(toFileUrlMaybe(String(imageRaw || '').trim()));
       // ✅ 이 소제목에 영상이 세팅되어 있는지 확인 (캐시 기반)
       const getFromCache3 = (window as any).getHeadingVideoPreviewFromCache || getHeadingVideoPreviewFromCache;
       const videoEntry = getFromCache3(String(headingRaw || ''));
@@ -147,7 +149,7 @@ export function displayGeneratedImages(images: any[]): void {
           <div style="position: relative; width: 100%; aspect-ratio: 1/1; overflow: hidden;">
             ${gifDeleteButtonHtml}
             <img src="${imageUrl}" alt="${heading}" 
-                 style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;"
+                 style="width: 100%; height: 100%; object-fit: ${image.isCollected === true ? 'contain' : 'cover'}; transition: transform 0.3s ease;"
                  onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect width=%22100%22 height=%22100%22 fill=%22%232d2d2d%22/%3E%3Ctext x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23666%22 font-size=%228%22%3E이미지 로드 실패%3C/text%3E%3C/svg%3E';">
             <!-- 호버 오버레이 (6개 버튼) -->
             <div class="image-item-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(0,0,0,0.85), rgba(0,0,0,0.75)); display: none; flex-direction: column; align-items: center; justify-content: center; gap: 5px; padding: 8px; box-sizing: border-box;">

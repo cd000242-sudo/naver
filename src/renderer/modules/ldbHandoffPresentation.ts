@@ -25,3 +25,15 @@ export function revealLdbDraft(post: LdbDisplayedDraft, doc: Document): void {
   target.scrollIntoView({ behavior: 'instant', block: 'start' });
   target.focus({ preventScroll: true });
 }
+
+/**
+ * 확장에서 온 원고는 임시저장 전용이다(2026-10-21). 반자동 발행 버튼의 기본값은 '즉시'라서,
+ * 그대로 누르면 확장이 draft 로 보낸 글이 공개 발행됐다. 기존 '📝 임시' 버튼 경로로 바꾸고 확인한다.
+ */
+export function selectLdbDraftPublishMode(doc: Document): void {
+  const draft = doc.querySelector<HTMLElement>('.publish-mode-btn[data-mode="draft"]');
+  const hidden = doc.getElementById('unified-publish-mode') as HTMLInputElement | null;
+  if (!draft || !hidden) throw new Error('임시저장 발행 방식을 찾지 못했습니다. 앱을 다시 열어주세요.');
+  draft.click();
+  if (hidden.value !== 'draft') throw new Error('발행 방식을 임시저장으로 바꾸지 못했습니다. 앱을 다시 열어주세요.');
+}

@@ -3,7 +3,7 @@ import path from 'path';
 import { describe, expect, it } from 'vitest';
 
 const mainSource = fs.readFileSync(path.resolve(__dirname, '..', 'main.ts'), 'utf8');
-const start = mainSource.indexOf("ipcMain.handle('multiAccount:publish'");
+const start = mainSource.indexOf('const handleMultiAccountPublish = async');
 const end = mainSource.indexOf("ipcMain.handle('multiAccount:cancel'", start);
 const handlerSource = mainSource.slice(start, end);
 

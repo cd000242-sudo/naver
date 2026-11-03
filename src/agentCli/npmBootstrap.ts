@@ -62,12 +62,23 @@ async function downloadNpmTarball(): Promise<Buffer> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), DOWNLOAD_TIMEOUT_MS);
   try {
-    const response = await fetch(NPM_TARBALL_URL, { signal: controller.signal });
+    const limit = 10 * 1024 * 1024;
+    const response = await fetch(NPM_TARBALL_URL, { signal: controller.signal, redirect: 'error', credentials: 'omit', cache: 'no-store' });
     if (!response.ok) {
       throw new Error(`npm 다운로드 실패 (HTTP ${response.status})`);
     }
-    return Buffer.from(await response.arrayBuffer());
+    if (!response.body || Number(response.headers.get('content-length')) > limit) throw Error('npm 설치 도구의 허용 크기를 초과했습니다.');
+    const reader = response.body.getReader(), chunks: Uint8Array[] = []; let size = 0;
+    try {
+      while (true) {
+        const { value, done } = await reader.read(); if (done) break;
+        size += value.byteLength; if (size > limit) { await reader.cancel(); throw Error('npm 설치 도구의 허용 크기를 초과했습니다.'); }
+        chunks.push(value);
+      }
+    } finally { reader.releaseLock(); }
+    return Buffer.concat(chunks);
   } finally {
+    controller.abort();
     clearTimeout(timer);
   }
 }

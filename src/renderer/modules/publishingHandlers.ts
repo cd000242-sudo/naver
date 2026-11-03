@@ -2247,8 +2247,10 @@ function _reSyncHeadingsContentLegacy(headings: any[], editedBody: string): any[
   });
 }
 
-export async function handleSemiAutoPublish(): Promise<any> {
+// [2026-10-21] options.ldbAutoDraft: LDB 자동 임시저장(무인). 확인창·알림 대신 오류로 멈추고, 임시저장 외 모드는 거부한다.
+export async function handleSemiAutoPublish(options: { ldbAutoDraft?: boolean } = {}): Promise<any> {
   const { title, content, ready } = readSemiAutoEditorDraft();
+  if (!ready && options.ldbAutoDraft) throw new Error('제목과 본문이 비어 있어 자동 임시저장을 하지 않았습니다.');
   if (!ready) {
     (window as any).updatePublishButtonVisibility?.();
     alert('제목과 본문을 모두 입력해주세요.');
@@ -2342,6 +2344,9 @@ export async function handleSemiAutoPublish(): Promise<any> {
 
   // 이미지를 만들어 뒀는데 넣을 자리가 하나도 없으면 조용히 텍스트만 내보내지 않는다.
   // 사용자가 이미 비용과 시간을 쓴 결과물이 사라지는 경우라, 발행 여부는 사용자가 정한다.
+  if (resolvedSemiAutoHeadings.length === 0 && bodySlotImageCount > 0 && options.ldbAutoDraft) {
+    throw new Error(`이미지 ${bodySlotImageCount}개를 넣을 소제목을 찾지 못해 자동 임시저장을 멈췄습니다. 앱에서 확인 후 직접 저장해 주세요.`);
+  }
   if (resolvedSemiAutoHeadings.length === 0 && bodySlotImageCount > 0) {
     const proceed = window.confirm(
       `⚠️ 이미지 ${bodySlotImageCount}개가 준비돼 있는데, 본문에서 넣을 자리(소제목)를 찾지 못했습니다.\n\n`
@@ -2510,6 +2515,8 @@ export async function handleSemiAutoPublish(): Promise<any> {
   const skipCta = skipCtaCheckbox?.checked || false; // ✅ CTA 없이 발행 체크박스
   const publishMode = (document.getElementById('unified-publish-mode') as HTMLInputElement)?.value || 'publish';
   console.log('[PublishingHandlers] 🔍 발행 모드 읽기 (semiAuto):', publishMode);
+  // 자동 임시저장은 실행 직전에도 임시저장 모드여야 한다(fail closed).
+  if (options.ldbAutoDraft && publishMode !== 'draft') throw new Error('발행 방식이 임시저장이 아니어서 자동 저장을 멈췄습니다.');
   const scheduleDate = publishMode === 'schedule' ? getScheduleDateFromInput('unified-schedule-date') : undefined;
   // ✅ [2026-03-17 FIX] scheduleTime 명시적 추출 (datetime-local에서 시간 부분)
   let scheduleTime: string | undefined;

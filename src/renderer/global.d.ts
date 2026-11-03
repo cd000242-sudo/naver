@@ -265,6 +265,12 @@ interface AgentLoginActionResult {
   readonly state?: 'opening' | 'opened' | 'retryable';
 }
 
+type AgentInstallProgress = Readonly<{
+  provider: AgentProvider;
+  phase: 'queued' | 'preparing' | 'installing' | 'verifying' | 'complete';
+  message: string;
+}>;
+
 interface AutomationAPI {
   // ✅ [2026-03-18] Gemini API 할당량 확인 (정확한 공식 데이터 기반)
   checkGeminiQuota: (apiKey: string) => Promise<{ success: boolean; message?: string; data?: { keyValid: boolean; userPlanType: string; planLabel: string; totalModels: number; flashModels: string[]; proModels: string[]; limits: { rpm: number | string; rpd: number | string; tpm: string }; pricing: { flash_input: string; flash_output: string; pro_input: string; pro_output: string; note: string }; testCallResult: { promptTokens?: number; outputTokens?: number; totalTokens?: number; error?: string } | null; usageTracker?: { totalInputTokens: number; totalOutputTokens: number; totalCalls: number; estimatedCostUSD: number; lastUpdated?: string; firstTracked?: string }; creditBudget?: number } }>;
@@ -299,6 +305,7 @@ interface AutomationAPI {
   agentStatus: (provider: AgentProvider, options?: { forceRefresh?: boolean }) => Promise<{ success: boolean; status?: AgentCliStatus; code?: string; message?: string }>;
   agentGenerate: (payload: { provider: AgentProvider; prompt: string; schema?: Record<string, unknown>; model?: string; timeoutMs?: number }) => Promise<{ success: boolean; provider?: AgentProvider; text?: string; json?: unknown; durationMs?: number; code?: string; message?: string }>;
   agentInstall: (provider: AgentProvider) => Promise<{ success: boolean; version?: string; code?: string; message?: string }>;
+  onAgentInstallProgress?: (listener: (progress: AgentInstallProgress) => void) => () => void;
   agentLogin: (provider: AgentProvider) => Promise<{ success: boolean; status?: AgentCliStatus; authState?: 'already_authenticated' | 'authenticated'; code?: string; message?: string }>;
   onAgentLoginProgress: (listener: (progress: AgentLoginProgress) => void) => () => void;
   agentLoginOpenBrowser: (provider: AgentProvider, sessionId: string) => Promise<AgentLoginActionResult>;
@@ -778,6 +785,17 @@ interface AutomationAPI {
   setActiveBlogAccount: (accountId: string) => Promise<{ success: boolean; message?: string }>;
   getActiveBlogAccount: () => Promise<{ success: boolean; account?: BlogAccount; message?: string }>;
   getAllBlogAccounts: () => Promise<{ success: boolean; accounts?: BlogAccount[]; message?: string }>;
+  dailyPublishingRequest: (method: 'GET' | 'POST', path: string, body?: unknown) => Promise<{ status: number; body: Record<string, any> }>;
+  // 블로그별 초기 설정(2026-10-21)
+  getBlogProfile: (accountId: string) => Promise<{ success: boolean; profile?: any; warning?: string; account?: { id: string; name: string; blogId: string }; code?: string; message?: string }>;
+  saveBlogProfile: (accountId: string, input: unknown, expectedVersion: number) => Promise<{ success: boolean; profile?: any; code?: string; message?: string }>;
+  exportBlogProfile: (accountId: string) => Promise<{ success: boolean; json?: string; code?: string; message?: string }>;
+  deleteBlogProfile: (accountId: string) => Promise<{ success: boolean; code?: string; message?: string }>;
+  importBlogPerformance: (accountId: string, fileName: string, csv: string) => Promise<{ success: boolean; imported?: number; added?: number; replaced?: number; rejected?: Record<string, number>; code?: string; message?: string }>;
+  getBlogPerformanceSummary: (accountId: string) => Promise<{ success: boolean; total?: number; digest?: any; code?: string; message?: string }>;
+  getBlogPerformancePending: (accountId: string) => Promise<{ success: boolean; pending?: Array<{ postId: string; url: string; title: string; publishedAt: string; missing: string[] }>; code?: string; message?: string }>;
+  addBlogPerformanceManual: (accountId: string, input: unknown) => Promise<{ success: boolean; code?: string; message?: string }>;
+  suggestBlogProfile: (accountId: string) => Promise<{ success: boolean; profile?: any; evidence?: string[]; titleCount?: number; engine?: string; code?: string; message?: string }>;
   getNextBlogAccount: () => Promise<{ success: boolean; account?: BlogAccount; message?: string }>;
   getBlogAccountStats: (accountId: string) => Promise<{ success: boolean; stats?: BlogAccountStats; message?: string }>;
   getTotalBlogStats: () => Promise<{ success: boolean; stats?: TotalBlogStats; message?: string }>;

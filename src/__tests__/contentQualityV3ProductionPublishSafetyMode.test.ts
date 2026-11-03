@@ -57,7 +57,7 @@ describe('Content Quality V3 production publish safety mode', () => {
 
   it('keeps the multi-account preflight advisory unless strict verification is explicitly enabled', () => {
     const mainSource = readFileSync(resolve(process.cwd(), 'src/main.ts'), 'utf8');
-    const handlerStart = mainSource.indexOf("ipcMain.handle('multiAccount:publish'");
+    const handlerStart = mainSource.indexOf('const handleMultiAccountPublish = async');
     const handlerEnd = mainSource.indexOf("ipcMain.handle('multiAccount:cancel'", handlerStart);
     const handler = mainSource.slice(handlerStart, handlerEnd);
 

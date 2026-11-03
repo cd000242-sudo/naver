@@ -1,3 +1,4 @@
+import { normalizeImageStudioPreferences } from './runtime/imageStudioPreferences.js';
 import { app } from 'electron';
 import {
   CLEAR_INTENT_FIELD,
@@ -166,6 +167,8 @@ export interface AppConfig {
   // [SPEC-NAVER-IMAGE-2026] 이미지 관리 탭 "고품질 썸네일" — 'high' 면 썸네일 후보 2~3장 + 자동 심사 1회.
   //   기본(미설정·'standard')은 썸네일 1장, 심사 호출 없음 (NAVER IMAGE PIPELINE V1 §10·§27).
   thumbnailQualityMode?: 'standard' | 'high';
+  /** One-time retirement of removed image studio switches. */
+  imageStudioPreferencesVersion?: number;
   // [2026-10-08] 이미지 관리 탭 "소제목 이미지에 소제목 글자 넣기" — true 면 한글을 직접 그리는 엔진
   //   (koreanTextEngines)이 소제목 이미지에 소제목 문장을 그대로 그린다. 기본 OFF.
   headingImageTextInclude?: boolean;
@@ -487,6 +490,8 @@ export async function loadConfig(): Promise<AppConfig> {
         console.log('[Config] API 키 표시/스키마 오염값 자동 정리 완료');
       }
     }
+
+    parsed = normalizeImageStudioPreferences(parsed);
 
     // ✅ [v2.10.8] 계정별 파일을 로드할 때 마스터 settings.json의 PRESERVE_FIELDS를 메모리에 머지
     //   문제: settings_xxx.json에 키 누락된 채 saveConfig 호출되면 메모리의 빈 cachedConfig가
@@ -1095,7 +1100,8 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
   //   - failure는 silent fallback 금지 (feedback_no_fallback) → console.error.
   {
     const { config: persistedConfig, report } = migrateConfigToEncrypted(
-      configToPersist as unknown as Record<string, unknown>,
+      // The in-memory config has been decrypted even when its disk marker is true.
+      { ...configToPersist, configEncrypted: false } as unknown as Record<string, unknown>,
     );
     if (report.failures.length > 0) {
       console.error(`[Config] ❌ safeStorage 암호화 실패 ${report.failures.length}건 (평문 그대로 저장):`);
@@ -1164,7 +1170,7 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
         if (changed) {
           // SPEC-MIGRATION-2026 M1 P3: 백싱크 디스크 쓰기도 동일 암호화 통과 (master plain 회귀 차단).
           const { config: persistedDefault } = migrateConfigToEncrypted(
-            defaultConfig as Record<string, unknown>,
+            { ...defaultConfig, configEncrypted: false } as Record<string, unknown>,
           );
           await fs.writeFile(defaultPath, JSON.stringify(persistedDefault, null, 2), 'utf-8');
           console.log('[Config] ✅ 기본 설정 파일에 API 키 백싱크 완료 (safeStorage 암호화)');

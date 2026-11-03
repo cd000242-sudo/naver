@@ -3,6 +3,7 @@ import { EventEmitter } from 'events';
 import { mkdtemp, readFile, readdir, rm } from 'fs/promises';
 import { tmpdir } from 'os';
 import path from 'path';
+import sharp from 'sharp';
 import { prepareLdbDrafts, createLdbDraftReceiver, createLdbDraftUiReadyGate } from '../renderer/modules/ldbDraftImport.js';
 import { deliverLdbPosts } from '../main/ldb-delivery.js';
 import { createLdbBridge } from '../main/ldb-bridge.js';
@@ -160,11 +161,8 @@ describe('LDB draft and image delivery', () => {
   it('accepts supported raster signatures and preserves optional empty directions without using title paths', async () => {
     const directory = await mkdtemp(path.join(tmpdir(), 'ldb-raster-boundary-'));
     try {
-      const headers = [
-        ['jpeg', Buffer.from([0xff, 0xd8, 0xff, 0xe0])], ['gif', Buffer.from('GIF89a')],
-        ['webp', Buffer.from('RIFF1234WEBP')],
-      ] as const;
-      for (const [mime, bytes] of headers) {
+      for (const mime of ['jpeg', 'gif', 'webp'] as const) {
+        const bytes = await sharp({ create: { width: 10, height: 10, channels: 3, background: '#abcdef' } }).toFormat(mime).toBuffer();
         const input = { ...draft(), title: '... ', images: [{ heading: '썸네일', prompt: '', previewDataUrl: `data:image/${mime};base64,${bytes.toString('base64')}` }] };
         const [result] = await materializeLdbImages([input], directory) as any[];
         expect(await readFile(result.images[0].filePath)).toEqual(bytes);

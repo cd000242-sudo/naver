@@ -7,9 +7,10 @@
 // that codex/claude use cannot drive it: the app opens a terminal window instead and waits for
 // the credential to appear.
 
-import { spawn } from 'child_process';
+import { accessSync, constants, realpathSync, statSync } from 'node:fs';
+import { delimiter, dirname, isAbsolute, join } from 'node:path';
 import { agentCommandName } from './commandName.js';
-import { resolveWindowsSpawnTarget } from './spawnHelper.js';
+import { resolveWindowsSpawnTarget, spawnCollect } from './spawnHelper.js';
 import { buildGeminiSubscriptionEnv } from './subscriptionEnv.js';
 import { AgentCliError } from './types.js';
 
@@ -75,49 +76,51 @@ async function closeAgyLoginConsole(pids: readonly number[]): Promise<void> {
 }
 
 function resolveAgyExecutable(env: NodeJS.ProcessEnv): string {
-  const target = resolveWindowsSpawnTarget(agentCommandName('gemini'), env);
-  if (!target) {
-    throw new AgentCliError(
+  if (process.platform !== 'win32') {
+    for (const directory of String(env.PATH || '').split(delimiter)) {
+      if (!isAbsolute(directory)) continue;
+      try {
+        const candidate = join(directory, agentCommandName('gemini'));
+        accessSync(candidate, constants.X_OK); if (statSync(candidate).isFile()) return realpathSync(candidate);
+      } catch { /* Try the next explicit PATH directory. */ }
+    }
+  } else {
+    const target = resolveWindowsSpawnTarget(agentCommandName('gemini'), env);
+    if (target && isAbsolute(target.command) && !target.prefixArgs.length) return target.command;
+  }
+  throw new AgentCliError(
       'not_installed',
       'gemini',
       'Antigravity CLI(agy)를 찾지 못했습니다. 먼저 설치를 완료해주세요.',
-    );
-  }
-  return target.command;
+  );
 }
 
 /** Open a console window running agy so its sign-in UI has the terminal it requires. */
-function openAgyTerminal(env: NodeJS.ProcessEnv): void {
+export async function openAgyLoginTerminal(env: NodeJS.ProcessEnv): Promise<void> {
   const executable = resolveAgyExecutable(env);
 
   if (process.platform === 'win32') {
-    const comspec = process.env.COMSPEC || 'C:\\Windows\\System32\\cmd.exe';
-    // `start` gives the child a brand-new console with real std handles. Inheriting Electron's
-    // handles (or 'ignore') leaves agy on a non-TTY, which is exactly the silent hang above.
-    const child = spawn(comspec, ['/c', 'start', 'Antigravity 로그인', executable], {
-      detached: true,
-      windowsHide: false,
-      stdio: 'ignore',
-      env,
-    });
-    child.unref();
+    const configured = process.env.SystemRoot || process.env.SYSTEMROOT || 'C:\\Windows';
+    const systemRoot = isAbsolute(configured) ? configured : 'C:\\Windows';
+    // Fixed local script. User/profile path metacharacters are environment data, never code.
+    // Start-Process creates the real interactive console; the helper itself stays hidden.
+    const result = await spawnCollect({ command: join(systemRoot, 'System32', 'WindowsPowerShell', 'v1.0', 'powershell.exe'),
+      args: ['-NoLogo', '-NoProfile', '-NonInteractive', '-Command', "$ErrorActionPreference='Stop'; Start-Process -FilePath $env:LDB_AGY_LOGIN_EXECUTABLE -WorkingDirectory $env:LDB_AGY_LOGIN_DIRECTORY"],
+      provider: 'gemini', timeoutMs: 15_000, env: { ...env, LDB_AGY_LOGIN_EXECUTABLE: executable, LDB_AGY_LOGIN_DIRECTORY: dirname(executable) } });
+    if (result.code !== 0) throw new AgentCliError('spawn_failed', 'gemini', 'Antigravity 로그인 콘솔을 열지 못했습니다. 보안 정책과 터미널 실행 권한을 확인해주세요.');
     return;
   }
 
   if (process.platform === 'darwin') {
-    const child = spawn('/usr/bin/open', ['-a', 'Terminal', executable], {
-      detached: true,
-      stdio: 'ignore',
-      env,
-    });
-    child.unref();
+    const result = await spawnCollect({ command: '/usr/bin/open', args: ['-a', 'Terminal', executable], provider: 'gemini', timeoutMs: 15_000, env });
+    if (result.code !== 0) throw new AgentCliError('spawn_failed', 'gemini', 'macOS Terminal을 열지 못했습니다. 터미널 실행 권한을 확인해주세요.');
     return;
   }
 
   throw new AgentCliError(
     'spawn_failed',
     'gemini',
-    '이 운영체제에서는 앱이 터미널을 열 수 없습니다. 터미널에서 agy 를 실행해 구글 로그인을 완료해주세요.',
+    `이 운영체제에서는 앱이 터미널을 열 수 없습니다. 터미널에서 다음 실제 실행 파일을 열어 구글 로그인을 완료해주세요: ${executable}`,
   );
 }
 
@@ -130,7 +133,7 @@ export async function loginAgyInInteractiveTerminal(timeoutMs: number): Promise<
   const { clearAgentDetectionCache, detectAgent } = await import('./detect.js');
 
   const pidsBefore = await listAgyPids();
-  openAgyTerminal(buildGeminiSubscriptionEnv());
+  await openAgyLoginTerminal(buildGeminiSubscriptionEnv());
   // [2026-08-23] agy has no login-only subcommand (verified on 1.1.19: install/update/models/
   //   mcp/plugin only), so signing in necessarily lands the user in its chat TUI and the window
   //   stays open. Users read that as "it just opened a terminal and stopped". Once the app has

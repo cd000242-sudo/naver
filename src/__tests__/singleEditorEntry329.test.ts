@@ -36,8 +36,8 @@ describe('one editor entry per post on the shipped (329+) engine', () => {
   });
 
   it('publish repairs once on the same page; scheduling repairs once at most', () => {
-    expect(engine).toContain("}, 2, '블로그 발행');");
-    expect(engine).toContain('const MAX_SCHEDULE_RETRIES = 2;');
+    expect(engine).toContain("}, nativeDaily ? 1 : 2, '블로그 발행');");
+    expect(engine).toContain('const MAX_SCHEDULE_RETRIES = nativeDaily ? 1 : 2;');
   });
 
   it('the renderer reruns the publish only after the browser itself died', () => {

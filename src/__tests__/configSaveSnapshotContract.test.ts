@@ -23,7 +23,7 @@ describe('저장 본체는 병합본을 스냅샷으로 붙든다', () => {
   });
 
   it('암호화 마이그레이션은 공유 캐시가 아니라 스냅샷을 받는다', () => {
-    expect(src).toMatch(/const \{ config: persistedConfig, report \} = migrateConfigToEncrypted\(\s*configToPersist as unknown/u);
+    expect(src).toMatch(/const \{ config: persistedConfig, report \} = migrateConfigToEncrypted\([\s\S]{0,200}\{ \.\.\.configToPersist, configEncrypted: false \} as unknown/u);
     // 되돌린 흔적 — 주 저장 migrate 호출이 cachedConfig 를 직접 받으면 안 된다
     expect(src).not.toMatch(/const \{ config: persistedConfig, report \} = migrateConfigToEncrypted\(\s*cachedConfig as unknown/u);
   });

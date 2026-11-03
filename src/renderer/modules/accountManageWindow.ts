@@ -10,6 +10,7 @@
 import { accountManageBlogIdOf, accountManageBuildForm } from './accountManageForm.js';
 import type { AccountManageAccount, AccountManageSaved } from './accountManageForm.js';
 import { showAccountPauseModal } from './accountPauseModal.js';
+import { blogProfileBuildForm } from './blogProfileForm.js';
 
 type AccountManageState = { paused: boolean; busy: boolean; version: number; code?: string; label?: string; journalUnreadable?: boolean; storageError?: boolean };
 type AccountManageSafetyReply = { success: boolean; state?: AccountManageState; message?: string };
@@ -29,6 +30,7 @@ const ACCOUNT_MANAGE_STOP_CODES = new Set(['LOGIN_REQUIRED', 'LOGIN_CHALLENGE', 
 const ACCOUNT_MANAGE_BUTTON_IDS = ['main-manage-accounts-btn', 'ma-manage-accounts-inline'];
 const ACCOUNT_MANAGE_TONES = { ok: 'color:#6ee7b7;background:rgba(16,185,129,0.15);', stop: 'color:#fcd34d;background:rgba(245,158,11,0.18);', unknown: 'color:#cbd5e1;background:rgba(148,163,184,0.18);' };
 const ACCOUNT_MANAGE_FOCUSABLE = 'button:not([disabled]), input:not([disabled]), a[href]';
+const ACCOUNT_MANAGE_INTRO = '저장된 발행 계정의 별명, 블로그 주소, 네이버 아이디, 비밀번호를 고치거나 계정을 삭제합니다.';
 
 let accountManageCloseCurrent: (() => void) | null = null;
 
@@ -101,7 +103,7 @@ function accountManageWhenPauseClosed(callback: () => void): void {
   observer.observe(document.body, { childList: true });
 }
 
-function accountManageBuildRow(account: AccountManageAccount, handlers: { edit: () => void; remove: (row: HTMLElement) => void; resolve: (code: string) => void }) {
+function accountManageBuildRow(account: AccountManageAccount, handlers: { edit: () => void; profile: () => void; remove: (row: HTMLElement) => void; resolve: (code: string) => void }) {
   const row = accountManageElement('li', 'display:flex;flex-wrap:wrap;align-items:center;gap:0.6rem 1rem;padding:0.8rem 0.9rem;margin-bottom:0.6rem;border:1px solid rgba(148,163,184,0.25);border-radius:10px;background:rgba(15,23,42,0.45);');
   row.dataset.accountId = account.id;
   const info = accountManageElement('div', 'flex:1 1 240px;min-width:0;');
@@ -114,7 +116,9 @@ function accountManageBuildRow(account: AccountManageAccount, handlers: { edit: 
   const actions = accountManageElement('div', 'display:flex;gap:0.4rem;flex-wrap:wrap;');
   const edit = accountManageActionButton('edit', '수정', 'edit'); const remove = accountManageActionButton('delete', '삭제', 'delete');
   edit.addEventListener('click', handlers.edit); remove.addEventListener('click', () => handlers.remove(row));
-  actions.append(edit, remove); row.append(info, actions);
+  // 블로그별 초기 설정(2026-10-21) — 독자 · 주제 · 방향 · 말투
+  const profile = accountManageActionButton('profile', '블로그 설정', 'edit'); profile.addEventListener('click', handlers.profile);
+  actions.append(edit, profile, remove); row.append(info, actions);
 
   /** Show the status in the badge; a stop the pause panel can resolve also gets a [풀기] button. */
   const showStatus = (status: AccountManageStatus, hint = '') => {
@@ -143,7 +147,7 @@ export async function accountManageOpen(): Promise<void> {
   const closeButton = accountManageElement('button', 'width:2rem;height:2rem;border-radius:8px;border:1px solid rgba(148,163,184,0.4);background:transparent;color:inherit;font-size:1.2rem;line-height:1;cursor:pointer;', '×');
   closeButton.type = 'button'; closeButton.dataset.action = 'close'; closeButton.setAttribute('aria-label', '닫기');
   header.append(title, closeButton);
-  const intro = accountManageElement('div', 'font-size:0.84rem;line-height:1.6;color:var(--text-muted,#cbd5e1);margin-bottom:0.7rem;', '저장된 발행 계정의 별명, 블로그 주소, 네이버 아이디, 비밀번호를 고치거나 계정을 삭제합니다.');
+  const intro = accountManageElement('div', 'font-size:0.84rem;line-height:1.6;color:var(--text-muted,#cbd5e1);margin-bottom:0.7rem;', ACCOUNT_MANAGE_INTRO);
   const notice = accountManageElement('div', 'font-size:0.85rem;line-height:1.5;min-height:1.2rem;margin-bottom:0.6rem;color:#93c5fd;'); notice.id = 'account-manage-notice'; notice.setAttribute('role', 'status');
   const body = accountManageElement('div', '');
   panel.append(focusStyle, header, intro, notice, body); overlay.append(panel);
@@ -163,7 +167,7 @@ export async function accountManageOpen(): Promise<void> {
   };
   const showList = async () => {
     const mine = ++serial; rows = [];
-    title.textContent = '⚙️ 계정 관리'; body.replaceChildren(note('저장된 계정을 불러오는 중입니다…'));
+    title.textContent = '⚙️ 계정 관리'; intro.textContent = ACCOUNT_MANAGE_INTRO; body.replaceChildren(note('저장된 계정을 불러오는 중입니다…'));
     let accounts: AccountManageAccount[] = [];
     try {
       const reply = await accountManageGlobals().api?.getAllBlogAccounts?.();
@@ -178,13 +182,20 @@ export async function accountManageOpen(): Promise<void> {
     const list = accountManageElement('ul', 'list-style:none;margin:0;padding:0;'); list.setAttribute('role', 'list');
     rows = accounts.map(account => {
       const built = accountManageBuildRow(account, {
-        edit: () => showForm(account), remove: row => void removeAccount(account, row),
+        edit: () => showForm(account), profile: () => void showProfile(account), remove: row => void removeAccount(account, row),
         resolve: code => void resolveStop(account, code),
       });
       list.append(built.row); return { account, showStatus: built.showStatus };
     });
     body.replaceChildren(list); focusFirst();
     await readStatuses(mine);
+  };
+  const showProfile = async (account: AccountManageAccount) => {
+    const mine = ++serial; say(''); title.textContent = `🧭 블로그 설정 — ${account.name || ''}`;
+    intro.textContent = '이 블로그의 독자 · 주제 · 글 방향 · 말투를 저장하면 다음 글부터 반영됩니다. 다른 블로그 계정과 섞이지 않습니다.';
+    body.replaceChildren(note('블로그 설정을 불러오는 중입니다…'));
+    const form = await blogProfileBuildForm(account, { onClose: () => void showList(), say });
+    if (overlay.isConnected && mine === serial) { body.replaceChildren(form); focusFirst(); }
   };
   const showForm = (account: AccountManageAccount) => {
     ++serial; say(''); title.textContent = `⚙️ 계정 수정 — ${account.name || ''}`;

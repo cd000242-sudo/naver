@@ -7,6 +7,7 @@ import { createAccountSafetyController, type SafetyAction, type SafetyLookup } f
 import { browserSessionManager } from '../../browserSessionManager.js';
 import { IpcContext } from '../types';
 import { BlogAccountManager } from '../../account/blogAccountManager.js';
+import { registerBlogProfileHandlers } from './blogProfileHandlers.js';
 
 /**
  * 계정 핸들러 의존성
@@ -22,6 +23,8 @@ export interface AccountHandlerDeps {
 export function registerAccountHandlers(ctx: IpcContext, deps: AccountHandlerDeps): void {
     const { blogAccountManager, reportUserActivity } = deps;
     const safety = createAccountSafetyController(() => blogAccountManager.getAllAccounts(), browserSessionManager);
+    // 블로그별 초기 설정(2026-10-21)
+    registerBlogProfileHandlers(ctx, blogAccountManager);
     ipcMain.handle('account:safety', async (event, accountId: string, action: string, version?: number, outcome?: string, token?: string, lookup?: string) => {
         const window = ctx.getMainWindow();
         if (!window || window.isDestroyed() || event.sender !== window.webContents || event.senderFrame !== window.webContents.mainFrame) return { success: false, message: '앱의 계정 관리 화면에서 실행해주세요.' };

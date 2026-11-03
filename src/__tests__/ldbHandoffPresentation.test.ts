@@ -2,7 +2,7 @@
 import { EventEmitter } from 'events';
 import { describe, expect, it, vi } from 'vitest';
 import { deliverLdbPostsToWindow } from '../main/ldb-delivery.js';
-import { revealLdbDraft } from '../renderer/modules/ldbHandoffPresentation.js';
+import { revealLdbDraft, selectLdbDraftPublishMode } from '../renderer/modules/ldbHandoffPresentation.js';
 
 function desktop() {
   const ipc = new EventEmitter();
@@ -90,5 +90,19 @@ describe('LDB handoff presentation', () => {
   it('does not report successful navigation when the app UI is unavailable', () => {
     screen(); document.querySelector('.tab-button[data-tab="unified"]')!.remove();
     expect(() => revealLdbDraft({ images: [] }, document)).toThrow(/화면/);
+  });
+  it('locks an extension draft to the 임시 publish mode through the existing mode button (2026-10-21)', () => {
+    document.body.innerHTML = `<button class="publish-mode-btn selected" data-mode="publish"></button>
+      <button class="publish-mode-btn" data-mode="draft"></button><input type="hidden" id="unified-publish-mode" value="publish">`;
+    const hidden = document.getElementById('unified-publish-mode') as HTMLInputElement;
+    for (const btn of document.querySelectorAll<HTMLElement>('.publish-mode-btn')) btn.addEventListener('click', () => { hidden.value = btn.dataset.mode || 'publish'; });
+    selectLdbDraftPublishMode(document);
+    expect(hidden.value).toBe('draft');
+    document.querySelector<HTMLElement>('.publish-mode-btn[data-mode="draft"]')!.replaceWith(document.createElement('span'));
+    expect(() => selectLdbDraftPublishMode(document)).toThrow(/임시저장/);
+  });
+  it('fails closed when the mode button does not actually switch to draft', () => {
+    document.body.innerHTML = `<button class="publish-mode-btn" data-mode="draft"></button><input type="hidden" id="unified-publish-mode" value="publish">`;
+    expect(() => selectLdbDraftPublishMode(document)).toThrow(/임시저장으로 바꾸지 못했습니다/);
   });
 });

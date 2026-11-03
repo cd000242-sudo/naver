@@ -89,10 +89,23 @@ function bindAgentAction(
     const actionLease = agentStatusRefreshCoordinator.beginAction(provider);
     const orig = btn.textContent;
     btn.disabled = true;
-    btn.textContent = action === 'install' ? '\u23F3 \uC124\uCE58 \uC911... (\uCD5C\uB300 2\uBD84)' : '\u23F3 \uB85C\uADF8\uC778 \uC900\uBE44 \uC911...';
-    statusEl.textContent = action === 'install' ? '\u23F3 npm \uC804\uC5ED \uC124\uCE58 \uC911...' : '\u23F3 \uB85C\uADF8\uC778 \uC8FC\uC18C \uC900\uBE44 \uC911...';
+    btn.textContent = action === 'install' ? '⏳ 설치 준비 중...' : '\u23F3 \uB85C\uADF8\uC778 \uC900\uBE44 \uC911...';
+    statusEl.textContent = action === 'install' ? '공식 설치 파일을 준비합니다. 연결 속도에 따라 시간이 걸릴 수 있습니다.' : '\u23F3 \uB85C\uADF8\uC778 \uC8FC\uC18C \uC900\uBE44 \uC911...';
     statusEl.style.color = '#6b7280';
+    let installProgressActive = action === 'install';
+    let removeInstallProgress: (() => void) | undefined;
+    const detachInstallProgress = (): void => {
+      installProgressActive = false;
+      const remove = removeInstallProgress; removeInstallProgress = undefined;
+      try { remove?.(); } catch { /* Renderer/event source may already be closed. */ }
+    };
     try {
+      if (action === 'install' && typeof api.onAgentInstallProgress === 'function') {
+        removeInstallProgress = api.onAgentInstallProgress(progress => {
+          if (!installProgressActive || progress.provider !== provider) return;
+          statusEl.textContent = progress.message;
+        });
+      }
       const res = action === 'login'
         ? await runAgentLoginWithCodeFallback({
           provider,
@@ -102,6 +115,7 @@ function bindAgentAction(
           startLogin: () => api.agentLogin(provider),
         })
         : await fn(provider);
+      detachInstallProgress();
       if (res?.success) {
         const loginStatus = action === 'login' && 'status' in res ? res.status : undefined;
         if (action === 'login' && loginStatus?.available !== true) {
@@ -145,6 +159,7 @@ function bindAgentAction(
     } catch (err) {
       toastManager.error(`\u274C \uC624\uB958: ${(err as Error).message}`);
     } finally {
+      detachInstallProgress();
       if (agentStatusRefreshCoordinator.endAction(actionLease)) {
         btn.disabled = false;
         btn.textContent = orig;

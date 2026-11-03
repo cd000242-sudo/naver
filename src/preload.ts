@@ -25,6 +25,12 @@ type AgentLoginActionResult = {
   state?: 'opening' | 'opened' | 'retryable';
 };
 
+type AgentInstallProgress = Readonly<{
+  provider: AgentProvider;
+  phase: 'queued' | 'preparing' | 'installing' | 'verifying' | 'complete';
+  message: string;
+}>;
+
 type AutomationPayload = {
   naverId: string;
   naverPassword: string;
@@ -213,6 +219,20 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('agent:generate', payload),
   agentInstall: (provider: AgentProvider): Promise<{ success: boolean; version?: string; code?: string; message?: string }> =>
     ipcRenderer.invoke('agent:install', provider),
+  onAgentInstallProgress: (listener: (progress: AgentInstallProgress) => void): (() => void) => {
+    let active = true;
+    const handler = (_event: Electron.IpcRendererEvent, value: unknown): void => {
+      if (!active || !value || typeof value !== 'object' || Array.isArray(value)) return;
+      const progress = value as Partial<AgentInstallProgress>;
+      if (typeof progress.provider !== 'string' || !['codex', 'claude', 'gemini'].includes(progress.provider)
+        || typeof progress.phase !== 'string' || !['queued', 'preparing', 'installing', 'verifying', 'complete'].includes(progress.phase)
+        || typeof progress.message !== 'string' || !progress.message.trim() || progress.message.length > 300
+        || /[\x00-\x1f\x7f]/u.test(progress.message)) return;
+      listener(Object.freeze({ provider: progress.provider!, phase: progress.phase!, message: progress.message }));
+    };
+    ipcRenderer.on('agent:install-progress', handler);
+    return () => { if (!active) return; active = false; ipcRenderer.removeListener('agent:install-progress', handler); };
+  },
   agentLogin: (provider: AgentProvider): Promise<{ success: boolean; status?: AgentCliStatus; authState?: 'already_authenticated' | 'authenticated'; code?: string; message?: string }> =>
     ipcRenderer.invoke('agent:login', provider),
   onAgentLoginProgress: (listener: (progress: AgentLoginProgress) => void): (() => void) => {
@@ -269,6 +289,19 @@ contextBridge.exposeInMainWorld('api', {
     };
     ipcRenderer.on('ldb:import-posts', handler);
     return () => { ipcRenderer.removeListener('ldb:import-posts', handler); };
+  },
+  // ✅ [LDB 2026-10-21] autoSave:'draft' 글만 — 메인이 ACK 뒤 요청하는 자동 임시저장(발행·예약 아님)
+  onLdbAutoDraftSave: (callback: (request: { postId: string; accountId: string; categoryId: string }) => Promise<unknown>) => {
+    const handler = async (_event: any, request: { postId: string; accountId: string; categoryId: string }, requestId: string) => {
+      try {
+        const outcome = await callback(request);
+        ipcRenderer.send('ldb:auto-draft-save-result', { ...(outcome && typeof outcome === 'object' ? outcome : {}), requestId });
+      } catch (error) {
+        ipcRenderer.send('ldb:auto-draft-save-result', { requestId, status: 'failed', message: error instanceof Error ? error.message : '임시저장을 실행하지 못했습니다.' });
+      }
+    };
+    ipcRenderer.on('ldb:auto-draft-save', handler);
+    return () => { ipcRenderer.removeListener('ldb:auto-draft-save', handler); };
   },
   // ✅ [2026-02-12] 소제목별 이미지 자동 검색 (네이버 → 구글 폴백)
   searchImagesForHeadings: (payload: { headings: string[]; mainKeyword: string; sourceUrl?: string }): Promise<{ success: boolean; images: Record<string, string[]>; message?: string }> =>
@@ -1101,6 +1134,18 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('account:safety', accountId, action, version, outcome, token, lookup),
   getAllBlogAccounts: (): Promise<{ success: boolean; accounts?: any[]; message?: string }> =>
     ipcRenderer.invoke('account:getAll'),
+  dailyPublishingRequest: (method: 'GET' | 'POST', path: string, body?: unknown): Promise<{ status: number; body: Record<string, any> }> =>
+    ipcRenderer.invoke('dailyPublishing:request', method, path, body),
+  // 블로그별 초기 설정(2026-10-21)
+  getBlogProfile: (accountId: string) => ipcRenderer.invoke('blogProfile:get', accountId),
+  saveBlogProfile: (accountId: string, input: unknown, expectedVersion: number) => ipcRenderer.invoke('blogProfile:save', accountId, input, expectedVersion),
+  exportBlogProfile: (accountId: string) => ipcRenderer.invoke('blogProfile:export', accountId),
+  deleteBlogProfile: (accountId: string) => ipcRenderer.invoke('blogProfile:delete', accountId),
+  importBlogPerformance: (accountId: string, fileName: string, csv: string) => ipcRenderer.invoke('blogPerformance:import', accountId, fileName, csv),
+  getBlogPerformanceSummary: (accountId: string) => ipcRenderer.invoke('blogPerformance:summary', accountId),
+  getBlogPerformancePending: (accountId: string) => ipcRenderer.invoke('blogPerformance:pending', accountId),
+  addBlogPerformanceManual: (accountId: string, input: unknown) => ipcRenderer.invoke('blogPerformance:addManual', accountId, input),
+  suggestBlogProfile: (accountId: string) => ipcRenderer.invoke('blogProfile:suggest', accountId),
   getNextBlogAccount: (): Promise<{ success: boolean; account?: any; message?: string }> =>
     ipcRenderer.invoke('account:getNext'),
   getBlogAccountStats: (accountId: string): Promise<{ success: boolean; stats?: any; message?: string }> =>

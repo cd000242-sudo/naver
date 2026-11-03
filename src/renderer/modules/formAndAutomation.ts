@@ -309,6 +309,11 @@ export function collectFormData(skipImages: boolean = false): RendererAutomation
           // [2026-10-01] 이미지 관리 탭 출처 입력칸 → 네이버 "사진 설명".
           //   이 화이트리스트에서 빠지면 입력은 저장되는데 발행에는 안 들어간다.
           caption: img.caption,
+          sourceUrl: img.sourceUrl,
+          isCollected: img.isCollected === true,
+          disableTextOverlay: img.disableTextOverlay === true,
+          _ldbPostId: img._ldbPostId,
+          sha256: img.sha256,
           // [2026-10-01] "링크 일괄 적용"이 심는 개별 링크. imageHelpers.ts:1558 이
           //   이미 읽고 있었는데 여기서 탈락해 2026-07-30 부터 죽어 있었다.
           link: img.link,

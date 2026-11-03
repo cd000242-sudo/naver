@@ -58,13 +58,19 @@ function normalizeImageSyncPublishImage(image: any): any {
   return {
     ...image,
     filePath,
-    savedToLocal: image?.savedToLocal || filePath,
+    savedToLocal: typeof image?.savedToLocal === 'string' && image.savedToLocal ? image.savedToLocal : filePath,
     url: image?.url || filePath,
     previewDataUrl: image?.previewDataUrl || (/^(data:|blob:|file:|https?:)/i.test(filePath) ? filePath : image?.previewDataUrl),
   };
 }
 
 function hydrateImageManagerFromImages(structuredContent: any, images: any[]): void {
+  const bridgePostId = structuredContent?._source === 'ldb-bridge' ? String(structuredContent._postId || '') : '';
+  if (bridgePostId) {
+    generatedImages = [];
+    (window as any).generatedImages = [];
+    (window as any).imageManagementGeneratedImages = [];
+  }
   try {
     ImageManager.imageMap.clear();
     ImageManager.unsetHeadings.clear();
@@ -91,6 +97,7 @@ function hydrateImageManagerFromImages(structuredContent: any, images: any[]): v
 
   const byHeading = new Map<string, any[]>();
   (Array.isArray(images) ? images : []).forEach((img: any, idx: number) => {
+    if (bridgePostId && img?._ldbPostId && img._ldbPostId !== bridgePostId) return;
     let heading = String(img?.heading || '').trim();
 
     // ✅ [FIX] Register the thumbnail under a dedicated thumbnail key — never a
@@ -117,6 +124,7 @@ function hydrateImageManagerFromImages(structuredContent: any, images: any[]): v
     const list = byHeading.get(heading) || [];
     list.push({
       ...img,
+      ...(bridgePostId ? { _ldbPostId: bridgePostId } : {}),
       heading,
       // ✅ [2026-04-18 FIX] 썸네일 마커 명시적 보존 — heading을 첫 번째 소제목으로 덮어쓸 때
       //    isThumbnail 플래그가 없으면 editorHelpers의 introImages 필터가 매칭 실패 → 썸네일 누락
@@ -152,7 +160,9 @@ function syncGlobalImagesFromImageManager(): void {
     console.warn('[renderer] catch ignored:', e);
   }
 
-  const managerAllImages = ImageManager.getAllImages();
+  const bridgePostId = (currentStructuredContent as any)?._source === 'ldb-bridge' ? String((currentStructuredContent as any)._postId || '') : '';
+  const samePost = (image: any) => !bridgePostId || !image?._ldbPostId || image._ldbPostId === bridgePostId;
+  const managerAllImages = ImageManager.getAllImages().filter(samePost);
   const existingAllImages = (window as any).imageManagementGeneratedImages;
 
   const getKey = (img: any): string => {
@@ -183,6 +193,7 @@ function syncGlobalImagesFromImageManager(): void {
       const isGeneratedThumbnail = (img: any): boolean =>
         !!img && typeof img === 'object' && img.provider === 'thumbnail-generator';
       existingList.forEach((img: any) => {
+        if (!samePost(img)) return;
         const k = getKey(img);
         if (!k) return;
         if (seen.has(k)) return;
@@ -222,6 +233,9 @@ function syncGlobalImagesFromImageManager(): void {
 }
 
 function filterImagesForPublish(structuredContent: any, images: any[]): any[] {
+  const bridgePostId = structuredContent?._source === 'ldb-bridge' ? String(structuredContent._postId || '') : '';
+  const samePost = (image: any) => !bridgePostId || !image?._ldbPostId || image._ldbPostId === bridgePostId;
+  const scopedImages = (images || []).filter(samePost);
   const headings = Array.isArray(structuredContent?.headings) ? structuredContent.headings : [];
   const byNorm = new Map<string, { title: string; index: number }>();
   const byTitle = new Map<string, { title: string; index: number }>();
@@ -241,7 +255,7 @@ function filterImagesForPublish(structuredContent: any, images: any[]): any[] {
   // ✅ [2026-02-24 FIX] 썸네일 이미지를 분리하여 보존
   // structuredContent.headings에는 썸네일이 포함되어 있지 않으므로
   // 아래 heading 매칭 루프에서 누락됨 → 미리 추출하여 결과 맨 앞에 배치
-  const thumbnailImages = (images || []).filter((img: any) => {
+  const thumbnailImages = scopedImages.filter((img: any) => {
     if (img?.isThumbnail === true) return true;
     const h = String(img?.heading || '').trim().toLowerCase();
     return h.includes('썸네일') || h.includes('thumbnail');
@@ -258,7 +272,7 @@ function filterImagesForPublish(structuredContent: any, images: any[]): any[] {
   });
 
   const fallbackFromInput = new Map<string, any[]>();
-  (images || []).forEach((img: any) => {
+  scopedImages.forEach((img: any) => {
     // ✅ [2026-02-24 FIX] 썸네일 이미지는 heading 매칭에서 제외 (중복 방지)
     const imgPath = getImageSyncPathLike(img);
     if (imgPath && thumbnailPathSet.has(imgPath)) return;
@@ -305,7 +319,7 @@ function filterImagesForPublish(structuredContent: any, images: any[]): any[] {
       // (기존: gif-from-video만 포함 → 수정: 모든 이미지 포함)
       let headingImages: any[] = [];
       try {
-        headingImages = ImageManager.getImages(title) || [];
+        headingImages = (ImageManager.getImages(title) || []).filter(samePost);
       } catch {
         headingImages = [];
       }
@@ -333,7 +347,7 @@ function filterImagesForPublish(structuredContent: any, images: any[]): any[] {
     let headingImages: any[] = [];
     let primary: any = null;
     try {
-      headingImages = ImageManager.getImages(title) || [];
+      headingImages = (ImageManager.getImages(title) || []).filter(samePost);
       primary = ImageManager.getImage(title);
     } catch {
       headingImages = [];

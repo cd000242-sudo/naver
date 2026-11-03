@@ -557,7 +557,8 @@ export async function getNaverAutocomplete(keyword: string): Promise<string[]> {
 
     try {
         const encodedKeyword = encodeURIComponent(keyword.trim());
-        const url = `https://ac.search.naver.com/nx/ac?q=${encodedKeyword}&con=1&frm=nv&ans=2&r_format=json&r_enc=UTF-8&r_unicode=0&t_koreng=1&run=2&rev=4&q_enc=UTF-8`;
+        // [2026-10-29 실측] st=100 이 없으면 200 응답에 items 가 빈 배열로 온다(검색창의 자동완성 요청과 같은 값).
+        const url = `https://ac.search.naver.com/nx/ac?q=${encodedKeyword}&con=1&frm=nv&ans=2&r_format=json&r_enc=UTF-8&r_unicode=0&t_koreng=1&run=2&rev=4&q_enc=UTF-8&st=100`;
 
         const response = await fetch(url, {
             method: 'GET',
