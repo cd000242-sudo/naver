@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T00:03:16.758Z",
+ "builtAt": "2026-11-03T00:13:20.072Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,29 +16,61 @@
     "nate"
    ],
    "articles90": 89,
-   "recent20": 17,
-   "press": 57,
+   "recent20": 12,
+   "press": 59,
    "firstArticleAt": "2026-11-02T23:00:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "\"누적된 물가 부담·상방 리스크 여전\"…정부, 물가 관리에 모든 역량 집...",
-     "press": "foodnews.co.kr",
-     "publishedAt": "2026-11-03T00:02:00.000Z",
-     "link": "http://www.foodnews.co.kr/news/articleView.html?idxno=120792"
+     "title": "가공식품·외식비 상승에 10월 물가 2.8%↑…반년째 3% 안팎",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-03T00:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400152?sid=101"
     },
     {
-     "title": "[종합] 10월 물가 2.8%↑…채소값 내렸지만 가공식품·석유류 '고공행진...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-03T00:01:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261103000181"
+     "title": "10월 소비자물가 2.8%…가공식품 11개월 만에 최고, 석유류 넉 달째 15% ...",
+     "press": "theopiniontimes.news",
+     "publishedAt": "2026-11-03T00:09:00.000Z",
+     "link": "https://theopiniontimes.news/10%ec%9b%94-%ec%86%8c%eb%b9%84%ec%9e%90%eb%ac%bc%ea%b0%80-2-8%ea%b0%80%ea%b3%b5%ec%8b%9d%ed%92%88-11%ea%b0%9c%ec%9b%94-%eb%a7%8c%ec%97%90-%ec%b5%9c%ea%b3%a0-%ec%84%9d%ec%9c%a0%eb%a5%98/"
     },
     {
-     "title": "[원자재 시황] 유가 급락하고 금·구리 상승",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-03T00:00:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1730207"
+     "title": "10월 물가 2.8%↑···가공식품 오름세·외식 물가도 9개월만 최고치",
+     "press": "whitepaper.co.kr",
+     "publishedAt": "2026-11-03T00:06:00.000Z",
+     "link": "http://www.whitepaper.co.kr/news/articleView.html?idxno=268363"
+    }
+   ]
+  },
+  {
+   "keyword": "뉴욕증시 혼조 마감",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 24,
+   "recent20": 4,
+   "press": 24,
+   "firstArticleAt": "2026-11-02T22:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "뉴욕증시, 유가 하락에도 기술주 매도세 지속…나스닥 1.1%↓",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-03T00:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541314?sid=104"
+    },
+    {
+     "title": "[뉴욕증시포커스] 기술주 매도에 혼조…나스닥 1.07% 하락",
+     "press": "goodkyung.com",
+     "publishedAt": "2026-11-03T00:08:00.000Z",
+     "link": "https://www.goodkyung.com/news/articleView.html?idxno=293028"
+    },
+    {
+     "title": "국제유가 7% 떨어졌지만 기술주 ‘뚝’…나스닥 1.07%↓ [뉴욕증시]",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-03T00:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/024/0000109346?sid=101"
     }
    ]
   },
@@ -47,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 32,
-   "recent20": 6,
-   "press": 29,
-   "firstArticleAt": "2026-11-02T22:35:00.000Z",
+   "articles90": 26,
+   "recent20": 3,
+   "press": 24,
+   "firstArticleAt": "2026-11-02T22:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,49 +107,23 @@
    ]
   },
   {
-   "keyword": "뉴욕증시 혼조 마감",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 27,
-   "recent20": 2,
-   "press": 27,
-   "firstArticleAt": "2026-11-02T22:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[뉴욕마켓워치] 유가 급락에도 美 선거 경계 팽배…주식·채권 혼조·달...",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-02T23:58:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4442659"
-    },
-    {
-     "title": "AI 투자 불안 지속에 뉴욕증시 혼조…나스닥 1% 하락",
-     "press": "newstopkorea.com",
-     "publishedAt": "2026-11-02T23:50:00.000Z",
-     "link": "https://www.newstopkorea.com/news/articleView.html?idxno=48703"
-    },
-    {
-     "title": "뉴욕증시 혼조…나스닥100 조정장 진입·AI 기술주 급락",
-     "press": "kjdaily.com",
-     "publishedAt": "2026-11-02T23:42:00.000Z",
-     "link": "http://www.kjdaily.com/article.php?aid=1793662756691085276"
-    }
-   ]
-  },
-  {
    "keyword": "애플 4분기 매출 증가 예상",
    "sources": [
     "nate"
    ],
    "articles90": 16,
-   "recent20": 2,
+   "recent20": 1,
    "press": 16,
-   "firstArticleAt": "2026-11-02T22:34:00.000Z",
+   "firstArticleAt": "2026-11-02T22:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "애플, 아이폰 매출 17% 뛰며 분기 신기록…메모리 가격 상승은 수익성 ...",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-03T00:06:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=845988"
+    },
     {
      "title": "애플, 아이폰 분기 매출 17% 급증…글로벌서 77조 팔았다",
      "press": "edaily.co.kr",
@@ -129,12 +135,6 @@
      "press": "zdnet.co.kr",
      "publishedAt": "2026-11-02T23:44:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/092/0002443538?sid=105"
-    },
-    {
-     "title": "\"메모리 가격 전례 없다\"...최대 실적 애플, 연말 이익률엔 '경고등'",
-     "press": "techm.kr",
-     "publishedAt": "2026-11-02T23:42:00.000Z",
-     "link": "https://www.techm.kr/news/articleView.html?idxno=156794"
     }
    ]
   },
@@ -143,10 +143,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 6,
-   "press": 13,
-   "firstArticleAt": "2026-11-02T22:40:00.000Z",
+   "articles90": 12,
+   "recent20": 4,
+   "press": 12,
+   "firstArticleAt": "2026-11-02T22:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -175,13 +175,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 10,
-   "recent20": 0,
-   "press": 9,
+   "articles90": 11,
+   "recent20": 1,
+   "press": 10,
    "firstArticleAt": "2026-11-02T23:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘47세 출산’ 한다감, 생후 26일 아들 최초 공개…“하늘의 축복”",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-03T00:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005757966"
+    },
     {
      "title": "한다감, 생후 26일 子 최초 공개...'오똑 콧날' 붕어빵 비주얼",
      "press": "sportschosun.com",
@@ -193,12 +199,6 @@
      "press": "newsen.com",
      "publishedAt": "2026-11-02T23:30:00.000Z",
      "link": "https://m.entertain.naver.com/article/609/0001183797"
-    },
-    {
-     "title": "47세 초보 엄마 한다감, 생후 26일 아들 방송 최초 공개 (슈돌)",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-02T23:26:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001147767"
     }
    ]
   },
@@ -208,7 +208,7 @@
     "signal.bz"
    ],
    "articles90": 7,
-   "recent20": 2,
+   "recent20": 1,
    "press": 7,
    "firstArticleAt": "2026-11-02T22:50:00.000Z",
    "exclusive": false,
@@ -242,10 +242,16 @@
    "articles90": 8,
    "recent20": 2,
    "press": 6,
-   "firstArticleAt": "2026-11-02T22:40:00.000Z",
+   "firstArticleAt": "2026-11-02T22:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "위기의 캐릭 맨유 감독 \"내가 미쳤다고 생각할지 모르겠지만\"",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-03T00:08:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/03/2026110300058.html"
+    },
     {
      "title": "'38년 만의 9G 무승' 맨유 캐릭 감독 \"미쳤다 하겠지만, 로마전 기다려져...",
      "press": "jnilbo.com",
@@ -257,12 +263,6 @@
      "press": "sports.khan.co.kr",
      "publishedAt": "2026-11-02T23:49:00.000Z",
      "link": "https://m.sports.naver.com/wfootball/article/144/0001147780"
-    },
-    {
-     "title": "“미쳤다고 생각하겠지만.. 로마전 기다려져”…‘9경기 무승’ 맨유, ...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-02T23:24:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/144/0001147765"
     }
    ]
   }
