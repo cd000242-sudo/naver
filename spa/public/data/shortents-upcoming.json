@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T21:41:01.220Z",
+ "builtAt": "2026-11-03T21:51:04.779Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,34 @@
  "measured": 21,
  "candidates": [
   {
-   "keyword": "쿠팡Inc 영업손실",
+   "keyword": "쿠팡 영업손실",
    "sources": [
     "daum"
    ],
-   "articles90": 38,
-   "recent20": 20,
-   "press": 30,
+   "articles90": 58,
+   "recent20": 24,
+   "press": 39,
    "firstArticleAt": "2026-11-03T21:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "쿠팡 3분기 영업손실 6423억원…3개분기 연속 적자",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-03T21:40:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2121048"
+     "title": "쿠팡, 인천 물류센터 화재에 3분기 6423억 적자…누적 손실 1.8조",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-03T21:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006403250?sid=101"
     },
     {
-     "title": "[1보] 쿠팡Inc, 3분기 영업손실 6423억원…전년 동기 대비 적자 전환",
-     "press": "dnews.co.kr",
-     "publishedAt": "2026-11-03T21:40:00.000Z",
-     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611040620368990511"
+     "title": "[속보] 쿠팡Inc, 3분기 매출 14.2조원…영업손실 6423억원 '적자전환'",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-03T21:50:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1421414"
     },
     {
-     "title": "매출 14조 달성에도…쿠팡Inc, 3분기 영업손실 6423억(2보)",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-03T21:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000548461?sid=101"
+     "title": "쿠팡Inc, 3분기 영업손실 6천423억…화재비용만 3천500억원 추산(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-03T21:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016420122?sid=101"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 41,
-   "recent20": 24,
-   "press": 29,
+   "articles90": 47,
+   "recent20": 20,
+   "press": 32,
    "firstArticleAt": "2026-11-03T21:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "쿠팡 3분기 영업손실 6423억원…3개분기 연속 적자",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-03T21:40:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2121048"
+     "title": "[속보] 쿠팡Inc, 3분기 매출 14.2조원…영업손실 6423억원 '적자전환'",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-03T21:50:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1421414"
     },
     {
-     "title": "[1보] 쿠팡Inc, 3분기 영업손실 6423억원…전년 동기 대비 적자 전환",
-     "press": "dnews.co.kr",
-     "publishedAt": "2026-11-03T21:40:00.000Z",
-     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611040620368990511"
+     "title": "쿠팡, 인천 물류센터 화재에 3분기 6423억 적자…누적 손실 1.8조",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-03T21:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006403250?sid=101"
     },
     {
-     "title": "매출 14조 달성에도…쿠팡Inc, 3분기 영업손실 6423억(2보)",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-03T21:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000548461?sid=101"
+     "title": "쿠팡 9개월 영업적자 1조8318억원…3년간 영업이익의 96.5%",
+     "press": "segye.com",
+     "publishedAt": "2026-11-03T21:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004172345?sid=101"
     }
    ]
   },
@@ -79,13 +79,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 4,
-   "press": 12,
+   "articles90": 13,
+   "recent20": 2,
+   "press": 13,
    "firstArticleAt": "2026-11-03T20:42:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "SK하이닉스 솔리다임 뉴욕 낸드 팹 검토, 美 상무부 다롄 규제에 걸림돌",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-03T21:46:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=202611040643527092fbbec65dfb_1"
+    },
     {
      "title": "미국, SK하이닉스 다롄 반도체 공장 증설 불허…뉴욕 투자도 변수",
      "press": "jnilbo.com",
@@ -97,12 +103,6 @@
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-03T21:30:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006403245?sid=101"
-    },
-    {
-     "title": "美, SK하닉 中공장 장비 반입 제동...“뉴욕 공장 투자도 차질”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-03T21:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004678444?sid=104"
     }
    ]
   },
@@ -112,7 +112,7 @@
     "signal.bz"
    ],
    "articles90": 13,
-   "recent20": 4,
+   "recent20": 2,
    "press": 9,
    "firstArticleAt": "2026-11-03T20:59:00.000Z",
    "exclusive": false,
@@ -131,42 +131,75 @@
      "link": "https://m.sports.naver.com/kbaseball/article/022/0004172344"
     },
     {
-     "title": "[스타inKS1] '신기록에 홈런까지' 베테랑 김현수가 KT에 심는 우승 DNA",
-     "press": "newspim.com",
+     "title": "'좌타 표적' 로건·오원석 카드 실패…이겼지만 씁쓸한 KT, 변화 예고[KS...",
+     "press": "news1.kr",
      "publishedAt": "2026-11-03T21:30:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261103001412"
+     "link": "https://m.sports.naver.com/kbaseball/article/421/0009268715"
     }
    ]
   },
   {
-   "keyword": "한국시리즈",
+   "keyword": "amd 실적 발표",
    "sources": [
     "daum"
    ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-03T21:06:00.000Z",
+   "articles90": 10,
+   "recent20": 6,
+   "press": 7,
+   "firstArticleAt": "2026-11-03T20:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "오늘 'kt vs 삼성' 한국시리즈 2차전…중계 어디서?",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-03T21:36:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2643727"
+     "title": "AMD, 데이터센터 매출 두 배 가까이 급증…시간외 주가 7%↑",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-03T21:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005758602?sid=105"
     },
     {
-     "title": "삼성, 한국시리즈다운 ‘鬪魂’ 보였다…명문 구단 ‘자존심’ 지켜 [김...",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-03T21:31:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/629/0000548460"
+     "title": "[미국 특징주] AMD, 4분기 전망 호조에 시간외 8%↑",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-03T21:41:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261104000031"
     },
     {
-     "title": "KT, 한국시리즈 1차전 승리…삼성에 8-7 진땀승",
+     "title": "AMD 데이터센터 매출 85억5000만달러, 전년비 97% 증가",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-03T21:38:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/432228"
+    }
+   ]
+  },
+  {
+   "keyword": "32기 영수, 몰카 논란 사과",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T20:51:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘나는솔로’ 32기 영수, 몰카 사과",
      "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-03T21:12:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611040005"
+     "publishedAt": "2026-11-03T21:48:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611040014"
+    },
+    {
+     "title": "'나솔' 32기 영수, 국화 몰카 사과-개 같은 전쟁은 어디?",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-03T21:14:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=94495"
+    },
+    {
+     "title": "[전문] 이틀간 ‘몰카’ 찍고 “민감하시네요”…32기 영수, “깜짝 선...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-03T20:51:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001147947"
     }
    ]
   },
@@ -205,7 +238,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 469,
+  "flagged": 472,
   "matched": 182,
   "avgLeadMin": 246,
   "recent": [
