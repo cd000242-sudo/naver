@@ -83,7 +83,8 @@ describe('when every keyword was used', () => {
         readAccount: async id => ({ id, blogId: 'myblog', settings: { contentMode: 'seo' } }), resolveCategory: async () => ({ categoryName: 'x' }),
         discoverSources: async () => [], assertAllowed: async () => {}, publish: vi.fn() });
       runtime.start();
-      await vi.waitFor(() => expect(runtime.scheduler.getState().runs[0]?.reason).toBe('keywords_exhausted'));
+      // Real file I/O + scheduler tick: the 1s default budget flaked under the full parallel suite (2026-11-03).
+      await vi.waitFor(() => expect(runtime.scheduler.getState().runs[0]?.reason).toBe('keywords_exhausted'), { timeout: 10_000 });
       expect(runtime.scheduler.getState().plans[0].enabled).toBe(false);
       expect(notify).toHaveBeenCalledWith('매일 자동발행이 멈췄습니다', expect.stringContaining('키워드를 모두 썼습니다'));
       runtime.dispose();

@@ -24,6 +24,9 @@
 .daily-panel-table-wrap { overflow-x: auto; }
 .daily-panel-history table { width: 100%; border-collapse: collapse; font-size: 13px; text-align: left; }
 .daily-panel-history th, .daily-panel-history td { padding: 10px 8px; border-bottom: 1px solid var(--border-color, #62646b); overflow-wrap: anywhere; }
+/* [2026-11-03] The label rule above sets display:flex, which beats the UA [hidden] rule: rows toggled with
+   .hidden (topic-row when LEWORD supplies keywords, collect-consent-row outside collect modes) stayed visible. */
+.daily-publishing-dialog [hidden] { display: none !important; }
 .daily-panel-topics { display: grid; grid-template-columns: repeat(auto-fill, minmax(124px, 1fr)); gap: 6px 12px; margin-top: 8px; }
 .daily-publishing-dialog .daily-panel-topics label { flex-direction: row; align-items: center; gap: 6px; font-size: 13px; }
 .daily-panel-topics input { width: 16px; height: 16px; flex-shrink: 0; }
