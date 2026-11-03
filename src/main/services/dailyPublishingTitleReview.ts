@@ -26,7 +26,9 @@ const evidenceSubmission = `제출 직전 후보마다 자체 대조한다. 제�
 70세 제목이면 선택한 원문 앵커와 본문 앵커 각각에 70세가 있어야 한다. 본문에 없는 92세를 원문에만 있다는 이유로 제목에 쓰지 않는다.
 앵커를 짧게 줄이다 제목 숫자를 빼먹지 말고, 필요한 실제 문장을 1~6개씩 충분히 선택한다. 자료에 없는 앵커를 새로 만들지 않는다.
 기존 제목이라도 이 검증을 못 하면 후보에서 제외하거나 확인 가능한 표현으로 바꾼다. 원제목 보존은 근거 검사보다 우선하지 않는다.
-commonNumericLiterals는 원문과 본문에 공통 등장하는 숫자 값의 참고 목록이다. 목록은 증거가 아니다. 값·단위·대상 관계와 후보별 실제 양쪽 앵커를 별도로 대조한다.`;
+commonNumericLiterals는 원문과 본문에 공통 등장하는 숫자 값의 참고 목록이다. 목록은 증거가 아니다. 값·단위·대상 관계와 후보별 실제 앵커를 별도로 대조한다.`;
+/** 2026-11-04: the agent harmony envelope injects these two criteria texts verbatim (same wording as the outer review). */
+export { policy as DAILY_TITLE_POLICY, evidenceSubmission as DAILY_TITLE_EVIDENCE_SUBMISSION };
 function inputData(input: DailyTitleInput): string {
   if (typeof input.title !== 'string' || !input.title.trim() || input.title.length > 200) failTitle('DAILY_TITLE_INPUT', '기존 제목을 확인해 주세요.');
   if (typeof input.sourceGrounding !== 'string' || !input.sourceGrounding.trim()) failTitle('DAILY_TITLE_INPUT', '제목 사실을 확인할 수 있는 수집 원문이 필요합니다.');

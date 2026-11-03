@@ -4894,6 +4894,7 @@ import { attachBlogPerformance, attachBlogProfile, findProfileAccount, snapshotB
 import { blogPerformanceStoreAt, blogProfileStoreAt } from './account/blogProfileRuntime.js';
 import { resolveRunContentSource } from './account/runContentSource.js';
 import { generateWithHomefeedReview, titleReviewGrounding } from './content/homefeedTitleReview.js';
+import { resolveAgentHarmonyFlag } from './content/agentHarmony/harmonyRuntime.js';
 import { dailySourceFingerprints } from './main/services/dailyPublishingExecutor.js';
 import { checkDailyPublishingEntitlement } from './licenseManager.js';
 import { resolveThumbnailOverlayText } from './image/director/thumbnailText.js';
@@ -7075,6 +7076,12 @@ ipcMain.handle(
           },
         }
       );
+      // 2026-11-04 Release C1: observe-mode agent harmony session — default OFF (config.agentHarmonyMode / env AGENT_HARMONY=1|0).
+      // Only this person-run [글 생성] handler sets it; the unattended daily and multi-account paths never do.
+      if (resolveAgentHarmonyFlag((await loadConfig().catch(() => null)) as any, process.env)) {
+        (source as any).agentHarmony = true;
+        console.log('[AgentHarmony] 조화 모드 켜짐(관찰 전용) — 에이전트 홈피드 글 생성이 한 세션 안에서 패킷도 함께 보고합니다.');
+      }
       const manualReviewed = await generateWithHomefeedReview({
         contentMode: String(contentMode || ''), source: source as any, generate: generateOnce, signal: genSignal,
         blogProfile: manualProfileEditorial,

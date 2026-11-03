@@ -211,6 +211,13 @@ export interface AppConfig {
    */
   naverQualityLoop?: boolean;
 
+  /**
+   * [2026-11-04 Release C1] Agent harmony session (agent-claude / agent-codex homefeed, observe mode). **Default OFF**, no UI.
+   * true runs the person-run [글 생성] as one harmony session that also reports its own packet; the packet is only
+   * measured (log + run artifact + ledger), the article and every gate stay as they are. Env AGENT_HARMONY=1/0 wins.
+   */
+  agentHarmonyMode?: boolean;
+
   // ✅ Gemini 텍스트 생성 주 모델 선택
   primaryGeminiTextModel?: 'gemini-3.8-flash' | 'gemini-3.6-flash' | 'gemini-3.5-flash-lite' | string;
 
@@ -505,7 +512,7 @@ export async function loadConfig(): Promise<AppConfig> {
           'userDisplayName', 'userEmail',
           'geminiModel', 'primaryGeminiTextModel', 'defaultAiProvider',
           'agentCodexModel', 'agentClaudeModel', 'agentGeminiModel',
-          'expandedRetrieval', 'humanizerIntensity', 'naverQualityLoop',
+          'expandedRetrieval', 'humanizerIntensity', 'naverQualityLoop', 'agentHarmonyMode',
           'perplexityModel', 'geminiPlanType', 'geminiUseFreeQuotaBeforePaid',
           'customImageSavePath',
           'openaiImageModel', 'openaiImageQuality', 'usdToKrwRate',
@@ -1098,7 +1105,7 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
           'naverAdApiKey', 'naverAdSecretKey', 'naverAdCustomerId',
           'geminiModel', 'primaryGeminiTextModel', 'defaultAiProvider',
           'agentCodexModel', 'agentClaudeModel', 'agentGeminiModel',
-          'expandedRetrieval', 'humanizerIntensity', 'naverQualityLoop',
+          'expandedRetrieval', 'humanizerIntensity', 'naverQualityLoop', 'agentHarmonyMode',
           'perplexityModel', 'geminiPlanType', 'geminiUseFreeQuotaBeforePaid',
         ];
         let changed = false;

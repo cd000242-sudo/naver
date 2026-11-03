@@ -67,6 +67,8 @@ import { resolveHomefeedIssueHint } from './content/homefeedIssueHint.js';
 import { computeHomefeedTitleQuoteIssues } from './content/homefeedTitleQuoteUse.js';
 import { computeHomefeedTitleGateIssues, judgeTitleReplacement } from './content/homefeedTitleGate.js';
 import { llmTitlePatchSkipLog, shouldRunLlmTitlePatch } from './content/agentRepairPolicy.js';
+import type { AgentHarmonyContext } from './agentCli/agentHarmonyEnvelope.js';
+import { handleAgentHarmonyResponse, resolveAgentHarmonyRequest, restoreAgentHarmony } from './content/agentHarmony/harmonyRuntime.js';
 import { isReviewAvailable, isReviewGuardEnabled, buildReviewGuardBlock } from './content/reviewGuard.js';
 import { isGeneralContentGuardEnabled, hasGroundingSource, buildGeneralContentGuardBlock } from './content/generalContentGuard.js';
 import { isCelebrityFactGuardEnabled, isCelebrityContext, buildCelebrityFactGuardBlock, detectCelebrityAssertionRisk } from './content/celebrityAssertionSanitizer.js';
@@ -2403,6 +2405,8 @@ export interface ContentSource {
   /** Fail-closed originality policy context injected before the model call. */
   contentPolicyPrompt?: string;
   manualTitleOverride?: string; // User-entered title that must not be rewritten by AI/SEO title logic
+  /** [2026-11-04 Release C1] Observe-mode agent harmony session (agent-claude/agent-codex homefeed only). Set by the person-run [글 생성] handler; default OFF. */
+  agentHarmony?: boolean;
   useKeywordAsTitle?: boolean; // ✅ [2026-02-24] 키워드를 제목으로 그대로 사용 (제목 생성/평가 건너뛰기)
   keywordForTitle?: string; // ✅ [2026-02-24] useKeywordAsTitle=true 일 때 사용할 키워드 원문
   aiTabFriendly?: boolean; // [v2.10.235 Phase 3-A] AI 탭 친화 모드 — 6,000~8,000자 + bullet/리스트 강제
@@ -5057,6 +5061,8 @@ interface CallAgentOptions {
   agentProductPolicyContext?: AgentProductPolicyContext;
   /** 'light' = short helper call (title, judge); default 'main' = long generation. */
   tier?: 'main' | 'light';
+  /** [2026-11-04 Release C1] When set, wrap the prompt as a harmony session instead of the plain agentic envelope. */
+  harmony?: AgentHarmonyContext;
 }
 
 async function callAgent(
@@ -5072,9 +5078,11 @@ async function callAgent(
     agenticEnvelope,
     agentProductPolicyContext,
     tier,
+    harmony,
   } = opts;
   const { generateWithAgent } = await import('./agentCli/index.js');
-  const { wrapAsAgenticTask, AGENTIC_TIMEOUT_MS } = await import('./agentCli/agenticEnvelope.js');
+  const { AGENTIC_TIMEOUT_MS } = await import('./agentCli/agenticEnvelope.js');
+  const { selectAgentTaskPrompt } = await import('./agentCli/agentHarmonyEnvelope.js');
   const { agentTextProviderToCli } = await import('./runtime/modelRegistry.js');
   const cliProvider = agentTextProviderToCli(provider);
   /*
@@ -5094,9 +5102,11 @@ async function callAgent(
   // instead of a one-shot pass. Iteration runs inside one subscription call (plan usage applies).
   // Judge/eval calls (raw) skip the writing envelope — they are not content generation.
   const shouldWrapAgenticEnvelope = !raw && agenticEnvelope !== false;
-  const agenticPrompt = shouldWrapAgenticEnvelope ? wrapAsAgenticTask(prompt, mode) : prompt;
+  // [2026-11-04 Release C1] Without `harmony` selectAgentTaskPrompt IS wrapAsAgenticTask(prompt, mode) — flag OFF sends today's prompt.
+  const agenticPrompt = selectAgentTaskPrompt(prompt, { mode, raw, agenticEnvelope, harmony });
   const modeTag = raw ? 'raw' : (mode || 'generic');
-  console.log(`[Agent] 🤖 ${cliProvider} 구독 CLI로 콘텐츠 생성 시작 (자율 반복 모드: ${modeTag}, 프롬프트 ${agenticPrompt.length}자, 제한 ${Math.round(AGENTIC_TIMEOUT_MS / 1000)}초, 별도 API 키 불필요 · 플랜 한도 적용)`);
+  const harmonyActive = shouldWrapAgenticEnvelope && !!harmony;
+  console.log(`[Agent] 🤖 ${cliProvider} 구독 CLI로 콘텐츠 생성 시작 (${harmonyActive ? `조화 모드: ${harmony!.mode}` : `자율 반복 모드: ${modeTag}`}, 프롬프트 ${agenticPrompt.length}자, 제한 ${Math.round(AGENTIC_TIMEOUT_MS / 1000)}초, 별도 API 키 불필요 · 플랜 한도 적용)`);
   let result;
   try {
     result = await generateWithAgent(
@@ -6808,6 +6818,8 @@ async function generateStructuredContentInternal(
       // ✅ 다양성 극대화를 위해 temperature 높임 (매번 다른 글 생성)
       // ✅ 모드별 프롬프트 및 온도 설정 가져오기
       const mode = (source.contentMode || 'seo') as PromptMode;
+      // [2026-11-04 Release C1] Observe-mode harmony session: flag + agent-claude/agent-codex + homefeed + legacy prompt only.
+      const agentHarmonyRequest = resolveAgentHarmonyRequest({ flag: source.agentHarmony, provider: String(provider), isV3Prompt, mode });
       let systemPrompt = isV3Prompt
         ? buildContentQualityV3Prompt(createContentQualityV3InitialPromptOptions({
             mode,
@@ -6970,6 +6982,8 @@ async function generateStructuredContentInternal(
             agenticEnvelope: !isV3Prompt,
             schema: isV3Prompt ? CONTENT_QUALITY_V3_OUTPUT_SCHEMA : undefined,
             agentProductPolicyContext: options.agentProductPolicyContext,
+            // [2026-11-04 Release C1] Flag OFF: no `harmony` key at all — the options object is exactly what it was.
+            ...(agentHarmonyRequest ? { harmony: agentHarmonyRequest } : {}),
           }));
         } else if (provider === 'openai') {
           rawResponse = await withAbortRace(callOpenAI(systemPrompt, temperature, adjustedMinChars, signal, {
@@ -7092,6 +7106,21 @@ async function generateStructuredContentInternal(
       try {
         parsed = safeParseJson<StructuredContent>(raw);
         console.log(`[ContentGenerator] 시도 ${attempt + 1}/${MAX_ATTEMPTS + 1}: JSON 파싱 성공`);
+        // [2026-11-04 Release C1] Harmony session: strip harmonyPacket/complementReport from the article FIRST (they must never
+        //   reach bodyPlain or the publish payload), then verify against the real material, attach `_agentHarmony`, log, write
+        //   H-agent-harmony.json and the ledger. Observe only — never throws, never edits the article. Flag OFF: skipped entirely.
+        if (agentHarmonyRequest) {
+          const harmonyRun = withActiveRun((run) => run) ?? null;
+          handleAgentHarmonyResponse(parsed, {
+            rawText: String(source.rawText || ''),
+            systemPrompt,
+            engine: String(provider),
+            model: harmonyRun?.meta.actualModelsUsed.find((m) => m.stage === 'body')?.model || harmonyRun?.meta.selectedModel || '',
+            mode: String(mode),
+            runId: harmonyRun?.runId || '',
+            run: harmonyRun,
+          });
+        }
         // [2026-09-22 audit P0 item 19] Required-field contract: a title-only or heading-less object is
         //   PARTIAL_RESPONSE, not success. It is treated like a parse failure (retry budget applies).
         if (!isV3Prompt) {
@@ -9374,6 +9403,8 @@ export async function generateStructuredContent(
       config: loopConfig,
       resolveRoute: (stage) => resolveSideTaskRoute(source, stage, 'quality'),
     });
+    // [2026-11-04 Release C1] Post-processing may have cloned the article; put the harmony record back (no-op when flag OFF).
+    restoreAgentHarmony(looped.content, run);
     return attachGenerationIntegrity(looped.content, run, { sourceBased, selectedProvider, pipeline, qualityLoop: looped.summary });
   } catch (error) {
     run.finish({ publishDecision: 'GENERATION_FAILED', extra: { ...(run.meta.extra || {}), error: String((error as Error)?.message || error).slice(0, 500) } });

@@ -37,7 +37,8 @@ export interface DailyTitleCritique {
   bodyAnchors: string[];
 }
 export const reviewFlags = ['eligible', 'concreteSubject', 'specificCuriosity', 'realScene', 'faithful', 'payoff', 'notRoutineAnnouncement', 'distinctQuestion'] as const;
-const candidateKeys = ['id', 'title', 'readerQuestion', 'expectedBelief', 'surprisingFact', 'clickReason', 'sourceAnchors', 'bodyAnchors'];
+export const titleCandidateKeys: readonly string[] = ['id', 'title', 'readerQuestion', 'expectedBelief', 'surprisingFact', 'clickReason', 'sourceAnchors', 'bodyAnchors'];
+const candidateKeys = titleCandidateKeys;
 const reviewKeys = ['id', ...reviewFlags, 'reason', 'sourceAnchors', 'bodyAnchors'];
 export function failTitle(code: string, message: string, details: Record<string, unknown> = {}): never {
   throw Object.assign(new Error(`${code}: ${message}`), { ...details, code });
@@ -93,19 +94,28 @@ export function assertTitleGrounding(title: string, sourceAnchors: readonly stri
     if (normalizeTitleEvidence(title).includes(basis) && (!source.includes(basis) || !body.includes(basis))) failTitle('DAILY_TITLE_PRICE_BASIS', '금액의 단위·가격 기준을 바꾸는 제목은 사용할 수 없습니다.');
   }
 }
+/** Shared duplicate-detection state across the candidates of one response. */
+export interface TitleCandidateState { ids: Set<string>; questions: Set<string>; titles: Set<string> }
+export function newTitleCandidateState(): TitleCandidateState { return { ids: new Set(), questions: new Set(), titles: new Set() }; }
+/**
+ * Validate ONE candidate object exactly as parseTitleCandidates always did (2026-11-04: extracted so the agent harmony
+ * packet can run the same contract per candidate). Throws the same DAILY_TITLE_* errors; behaviour is unchanged.
+ */
+export function verifyTitleCandidate(value: unknown, input: Pick<DailyTitleInput, 'sourceGrounding' | 'sourceVerification' | 'body'>,
+  state: TitleCandidateState = newTitleCandidateState()): DailyTitleCandidate {
+  const entry = object(value, candidateKeys), id = text(entry.id, 30), title = text(entry.title, 100), readerQuestion = text(entry.readerQuestion);
+  if (!/^[a-z\d_-]+$/iu.test(id) || state.ids.has(id) || state.titles.has(normalizeTitleEvidence(title))) failTitle('DAILY_TITLE_CONTRACT', '제목 후보 식별자 또는 제목이 중복됐습니다.');
+  if (state.questions.has(normalizeTitleEvidence(readerQuestion))) failTitle('DAILY_TITLE_DIVERSITY', '단어만 바꾼 제목 대신 서로 다른 독자 질문·관점이 필요합니다.');
+  state.ids.add(id); state.questions.add(normalizeTitleEvidence(readerQuestion)); state.titles.add(normalizeTitleEvidence(title));
+  const sourceAnchors = anchors(entry.sourceAnchors, input.sourceVerification || input.sourceGrounding), bodyAnchors = anchors(entry.bodyAnchors, input.body);
+  assertTitleGrounding(title, sourceAnchors, bodyAnchors);
+  return { id, title, readerQuestion, expectedBelief: text(entry.expectedBelief), surprisingFact: text(entry.surprisingFact), clickReason: text(entry.clickReason), sourceAnchors, bodyAnchors };
+}
 export function parseTitleCandidates(raw: string, input: DailyTitleInput): DailyTitleCandidate[] {
   const packet = object(readTitleJson(raw), ['candidates']);
   if (!Array.isArray(packet.candidates) || packet.candidates.length < 3 || packet.candidates.length > 5) failTitle('DAILY_TITLE_CONTRACT', '서로 다른 관점의 제목 후보 3~5개가 필요합니다.');
-  const seen = new Set<string>(), questions = new Set<string>(), titles = new Set<string>();
-  return packet.candidates.map(value => {
-    const entry = object(value, candidateKeys), id = text(entry.id, 30), title = text(entry.title, 100), readerQuestion = text(entry.readerQuestion);
-    if (!/^[a-z\d_-]+$/iu.test(id) || seen.has(id) || titles.has(normalizeTitleEvidence(title))) failTitle('DAILY_TITLE_CONTRACT', '제목 후보 식별자 또는 제목이 중복됐습니다.');
-    if (questions.has(normalizeTitleEvidence(readerQuestion))) failTitle('DAILY_TITLE_DIVERSITY', '단어만 바꾼 제목 대신 서로 다른 독자 질문·관점이 필요합니다.');
-    seen.add(id); questions.add(normalizeTitleEvidence(readerQuestion)); titles.add(normalizeTitleEvidence(title));
-    const sourceAnchors = anchors(entry.sourceAnchors, input.sourceVerification || input.sourceGrounding), bodyAnchors = anchors(entry.bodyAnchors, input.body);
-    assertTitleGrounding(title, sourceAnchors, bodyAnchors);
-    return { id, title, readerQuestion, expectedBelief: text(entry.expectedBelief), surprisingFact: text(entry.surprisingFact), clickReason: text(entry.clickReason), sourceAnchors, bodyAnchors };
-  });
+  const state = newTitleCandidateState();
+  return packet.candidates.map(value => verifyTitleCandidate(value, input, state));
 }
 export function parseTitleCritique(raw: string, ids: readonly string[], input: DailyTitleInput): { selectedId: string; reviews: DailyTitleCritique[] } {
   const packet = object(readTitleJson(raw), ['selectedId', 'reviews'], '제목 별도 검수 응답 형식을 확인하지 못했습니다.');
