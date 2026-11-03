@@ -31,19 +31,24 @@ export function missingNaverCredentials() {
     return missing;
 }
 
-/** 검색 API 자격증명 — API HUB 를 먼저, 막히면 legacy 로 넘어간다. */
+/**
+ * 검색 API 자격증명 — 개발자센터 키를 먼저, 막히면 API HUB 로 넘어간다.
+ * [2026-11-03] 순서를 뒤집었다. 앱(Better Life Naver)이 HUB 를 먼저 쓰는데 이 크론(매시간 160개 문서수 · 유튜브 빈자리)도
+ * HUB 를 먼저 써서 같은 HUB 하루 한도를 함께 깎았다 — 사장님 앱에서 모든 검색이 429(같은 키가 11/1 엔 정상).
+ * 크론은 개발자센터 한도를, 앱은 HUB 한도를 먼저 쓰게 나눈다.
+ */
 function searchCredentials() {
     const creds = [];
-    if (HUB_CLIENT_ID && HUB_CLIENT_SECRET) {
-        creds.push({
-            url: (type, qs) => `https://naverapihub.apigw.ntruss.com/search/v1/${type}?${qs}`,
-            headers: { 'X-NCP-APIGW-API-KEY-ID': HUB_CLIENT_ID, 'X-NCP-APIGW-API-KEY': HUB_CLIENT_SECRET },
-        });
-    }
     if (SEARCH_CLIENT_ID && SEARCH_CLIENT_SECRET) {
         creds.push({
             url: (type, qs) => `https://openapi.naver.com/v1/search/${type}.json?${qs}`,
             headers: { 'X-Naver-Client-Id': SEARCH_CLIENT_ID, 'X-Naver-Client-Secret': SEARCH_CLIENT_SECRET },
+        });
+    }
+    if (HUB_CLIENT_ID && HUB_CLIENT_SECRET) {
+        creds.push({
+            url: (type, qs) => `https://naverapihub.apigw.ntruss.com/search/v1/${type}?${qs}`,
+            headers: { 'X-NCP-APIGW-API-KEY-ID': HUB_CLIENT_ID, 'X-NCP-APIGW-API-KEY': HUB_CLIENT_SECRET },
         });
     }
     return creds;
@@ -124,8 +129,8 @@ export async function fetchDocumentCount(keyword) {
         try {
             const response = await fetch(creds[index].url('blog', qs), { headers: creds[index].headers });
             if (!response.ok) {
-                // 인증 실패만 다음 키로 넘긴다. 한도(429)는 키를 바꿔도 같다.
-                if ([401, 403, 404].includes(response.status) && index < creds.length - 1) continue;
+                // 인증 실패와 한도(429)는 다음 키로 넘긴다 — 개발자센터와 HUB 는 앱이 달라 한도가 따로다(2026-11-03).
+                if ([401, 403, 404, 429].includes(response.status) && index < creds.length - 1) continue;
                 return null;
             }
             const data = await response.json();
