@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T16:39:30.576Z",
+ "builtAt": "2026-11-03T16:49:34.232Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -9,104 +9,7 @@
   "minPress": 2
  },
  "measured": 24,
- "candidates": [
-  {
-   "keyword": "김민석 신천지 사과하라",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-03T15:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[사설] 신천지 집단 입당 의혹 어물쩍 넘어가려는 민주당",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-03T16:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001882831?sid=110"
-    },
-    {
-     "title": "金 “신천지 전대 개입 증거 못 찾아” 사과… 鄭 “사고친 사람이 책임...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-03T15:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004007630?sid=100"
-    },
-    {
-     "title": "[시사천국] 김성태 \"김민석 치명상\" vs 김형주 \"없는 걸 침소봉대\"…신...",
-     "press": "news.cpbc.co.kr",
-     "publishedAt": "2026-11-03T15:44:00.000Z",
-     "link": "https://news.cpbc.co.kr/article/1176808?division=NAVER"
-    }
-   ]
-  },
-  {
-   "keyword": "이종석 재혼 황후",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T15:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이종석, 임영웅 콘서트서 영감 얻었다…'재혼황후' 의상 직접 제작한 이...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-03T16:28:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267546"
-    },
-    {
-     "title": "이종석 \"임영웅 콘서트 보고 '재혼황후' 의상 제작\"",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-03T16:09:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000326589"
-    },
-    {
-     "title": "이종석 \"'재혼황후' 처음엔 고사…진짜 잘생긴 사람이 해야\"",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-03T16:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000326588"
-    }
-   ]
-  },
-  {
-   "keyword": "돌싱 n 모솔",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-03T15:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[종합] \"이렇게 생겨서 모솔이면 어떡해\"…'돌싱N모솔2' 첫 인상에 엇갈...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-03T15:24:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267533"
-    },
-    {
-     "title": "김우빈 닮은 모솔남 등장에 넉살 \"앞에 분들은 뭐가 됩니까?\" ('돌싱N모...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-03T15:20:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000486226"
-    },
-    {
-     "title": "\"나 너 좋아하냐\"…'돌싱N모솔2' 선착순 첫인상 투표에 흔들린 삼각 신...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-03T15:12:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267531"
-    }
-   ]
-  }
- ],
+ "candidates": [],
  "hitRate": {
   "days": 7,
   "flagged": 455,
