@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T09:07:18.076Z",
+ "builtAt": "2026-11-03T09:17:27.154Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "김민석 신천지 사과",
@@ -17,60 +17,28 @@
    ],
    "articles90": 92,
    "recent20": 17,
-   "press": 77,
-   "firstArticleAt": "2026-11-03T07:46:00.000Z",
+   "press": 76,
+   "firstArticleAt": "2026-11-03T07:51:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "김민석 '신천지 연합 의혹' 사과…친청계 \"거짓 주장 책임져야\" 반발(종...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-03T09:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014298916?sid=100"
+     "title": "\"비밀 연합 증거 없었어\" 고개 숙인 김민석…'신천지 의혹' 결국 덮는다",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-03T09:16:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261104010001257"
     },
     {
-     "title": "김민석 직격한 정청래 “숨어서 사과 말고 공개 사과하라…어떻게 책임...",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-03T09:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000366255?sid=100"
+     "title": "[속보] 김민석 \"신천지 3자 연합 증거 없었다\" 사과… 정청래 \"숨어서 사...",
+     "press": "cjb.co.kr",
+     "publishedAt": "2026-11-03T09:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/655/0000033431?sid=100"
     },
     {
-     "title": "김민석, '신천지 의혹 제기' 사과…\"증거 없었다\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-03T09:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000648770?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "교육혁신선도지역 선정",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 67,
-   "recent20": 9,
-   "press": 55,
-   "firstArticleAt": "2026-11-03T07:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "횡성군, 교육혁신 선도지역 최종 선정…5년간 130억 투입",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-03T09:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001228322?sid=102"
-    },
-    {
-     "title": "동해시·삼척시·태백시, 교육부 '교육혁신선도지역' 선정",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-03T09:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004206141?sid=102"
-    },
-    {
-     "title": "'학령인구 감소' 대응…43개 지역 교육혁신선도지역 지정",
-     "press": "sisunnews.co.kr",
-     "publishedAt": "2026-11-03T08:58:00.000Z",
-     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249019"
+     "title": "신천지 보고 못한 채 결국 '사과'…거세지는 '김민석 책임론'",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-03T09:14:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1319158&inflow=N"
     }
    ]
   },
@@ -82,29 +50,29 @@
     "daum"
    ],
    "articles90": 48,
-   "recent20": 8,
-   "press": 42,
-   "firstArticleAt": "2026-11-03T07:42:00.000Z",
+   "recent20": 10,
+   "press": 44,
+   "firstArticleAt": "2026-11-03T08:01:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "'천정궁 외출' 통일교 한학자 총재 보석 취소…법원 \"보석 조건 위반\"",
-     "press": "busan.com",
-     "publishedAt": "2026-11-03T09:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001405483?sid=102"
+     "title": "법원, ‘천정궁 외출’ 통일교 한학자 총재 보석 취소",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-03T09:16:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1319148&inflow=N"
     },
     {
-     "title": "한학자 통일교 총재 보석 취소…보증금 2억 원 국고 귀속",
-     "press": "donga.com",
-     "publishedAt": "2026-11-03T09:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003759790?sid=102"
+     "title": "‘천정궁 외출’ 한학자 총재 보석 취소…“증거인멸 우려·보석 조건 ...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-03T09:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002830531?sid=102"
     },
     {
-     "title": "'천정궁 외출' 한학자 보석 취소…보증금 2억도 국고귀속",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-03T09:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004206142?sid=102"
+     "title": "[속보] 병원 벗어나 천정궁 오간 한학자…법원, 보석 취소·보증금 2억 ...",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-03T09:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000120509?sid=102"
     }
    ]
   },
@@ -114,30 +82,30 @@
     "signal.bz",
     "daum"
    ],
-   "articles90": 47,
-   "recent20": 15,
+   "articles90": 48,
+   "recent20": 10,
    "press": 40,
-   "firstArticleAt": "2026-11-03T07:42:00.000Z",
+   "firstArticleAt": "2026-11-03T07:49:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "與, 조작기소 특검법 5일 본회의 처리 추진",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-03T09:06:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000079340"
+     "title": "민주, 조작기소 특검법 당론 채택… 조희대 국조는 의견 더 모으기로",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-03T09:16:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261104010001256"
     },
     {
-     "title": "민주 '조작기소 특검' 당론에…정점식 \"모든 법안 필버\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-03T09:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001976526?sid=100"
+     "title": "민주, '조작기소특검법' 당론채택...5일 본회의 상정 추진",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-03T09:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002427893?sid=100"
     },
     {
-     "title": "여, 조작기소특검법 당론 채택…내일 법사위 상정",
-     "press": "kyeongin.com",
-     "publishedAt": "2026-11-03T09:04:00.000Z",
-     "link": "https://www.kyeongin.com/article/1773998"
+     "title": "국힘, 조작기소 특검법 올라오면 모든 법안 다 필버 건다",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-03T09:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400343?sid=100"
     }
    ]
   },
@@ -146,30 +114,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 47,
-   "recent20": 6,
-   "press": 33,
-   "firstArticleAt": "2026-11-03T07:45:00.000Z",
-   "exclusive": false,
+   "articles90": 45,
+   "recent20": 12,
+   "press": 29,
+   "firstArticleAt": "2026-11-03T07:57:00.000Z",
+   "exclusive": true,
    "capped": true,
    "samples": [
     {
-     "title": "미 중간선거 결과 놓고 증시도 긴장…‘AI 규제 강화 우려’에 투자심리...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-03T09:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002830526?sid=101"
+     "title": "美중간선거 후 '증시 상승 공식' 통할까…AI 수익성이 변수",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-03T09:16:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=100551"
     },
     {
-     "title": "외인·기관 2조 투매 덮친 美 중간선거 D-데이…'AI·배터리' 추락 속 '조...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-03T09:02:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2643636"
+     "title": "美중간선거가 코스피 살릴까… S&P500은 ‘17전 17승’",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-03T09:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005598850?sid=101"
     },
     {
-     "title": "[美중간선거]투표소 혼란? 트럼프 또 불복?…6대 관전 포인트",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T09:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009267961?sid=104"
+     "title": "美 중간선거 곧 시작…AI 의구심은 해소될까",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-03T09:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541500?sid=101"
     }
    ]
   },
@@ -178,13 +146,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 27,
-   "recent20": 4,
-   "press": 26,
-   "firstArticleAt": "2026-11-03T07:39:00.000Z",
+   "articles90": 25,
+   "recent20": 3,
+   "press": 24,
+   "firstArticleAt": "2026-11-03T07:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "아시안컵, 결국 내년 12월로 연기…모레노 거취도 안갯속",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-03T09:12:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/005/0001882725"
+    },
     {
      "title": "아시안컵 내년 12월로 연기…‘임시 체제’ 한국, 시간 벌었다 [이런뉴...",
      "press": "news.kbs.co.kr",
@@ -196,12 +170,70 @@
      "press": "stnsports.co.kr",
      "publishedAt": "2026-11-03T09:00:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/450/0000155270"
+    }
+   ]
+  },
+  {
+   "keyword": "삼성",
+   "sources": [
+    "google"
+   ],
+   "articles90": 21,
+   "recent20": 21,
+   "press": 18,
+   "firstArticleAt": "2026-11-03T09:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "삼성바이오에피스, 테바와 바이오시밀러 2종 美 판매 계약",
+     "press": "medical-tribune.co.kr",
+     "publishedAt": "2026-11-03T09:16:00.000Z",
+     "link": "http://www.medical-tribune.co.kr/news/articleView.html?idxno=215737"
     },
     {
-     "title": "2027 아시안컵 1년 연기…모레노 감독 거취·차기 사령탑 선임 모두 '안...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-03T08:52:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267241"
+     "title": "70세 前 삼성전자 사장과 깜짝 결혼한 25세 연하 모델, 김자연 MIT 출신 ...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-03T09:16:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001184149"
+    },
+    {
+     "title": "삼성-KT 한국시리즈 중계, 1차전 선발·방송사 채널은?",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-03T09:16:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1171483"
+    }
+   ]
+  },
+  {
+   "keyword": "제네시스 생산라인 재가동",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 15,
+   "recent20": 5,
+   "press": 15,
+   "firstArticleAt": "2026-11-03T07:51:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "현대차 제네시스 생산라인 24시간 만에 정상화…노사, 신차 투입 갈등 ...",
+     "press": "industrynews.co.kr",
+     "publishedAt": "2026-11-03T09:06:00.000Z",
+     "link": "https://www.industrynews.co.kr/news/articleView.html?idxno=88839"
+    },
+    {
+     "title": "현대차 제네시스 울산 공장, 하루 넘게 멈췄다 재가동…맨아워 협의 나...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-03T09:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005598823?sid=101"
+    },
+    {
+     "title": "현대차 제네시스 생산라인 재가동…노사, 맨아워 협의 재개",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-03T08:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002247132?sid=101"
     }
    ]
   },
@@ -210,10 +242,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 21,
+   "articles90": 18,
    "recent20": 0,
-   "press": 16,
-   "firstArticleAt": "2026-11-03T07:41:00.000Z",
+   "press": 15,
+   "firstArticleAt": "2026-11-03T07:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -224,48 +256,16 @@
      "link": "https://n.news.naver.com/mnews/article/079/0004206131?sid=102"
     },
     {
-     "title": "[르포] 대구 도심 달리는 자율주행 DRT 타보니",
-     "press": "kyongbuk.co.kr",
-     "publishedAt": "2026-11-03T08:40:00.000Z",
-     "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4089526"
-    },
-    {
      "title": "추경호 대구광역시장, 동성로 자율주행 셔틀 시승...7일부터 본격 운행",
      "press": "gukjenews.com",
      "publishedAt": "2026-11-03T08:40:00.000Z",
      "link": "https://www.gukjenews.com/news/articleView.html?idxno=3741203"
-    }
-   ]
-  },
-  {
-   "keyword": "삼성",
-   "sources": [
-    "google"
-   ],
-   "articles90": 17,
-   "recent20": 17,
-   "press": 14,
-   "firstArticleAt": "2026-11-03T08:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "삼성바이오에피스, 테바와 시밀러 2종 美판매 계약 체결",
-     "press": "dealsite.co.kr",
-     "publishedAt": "2026-11-03T09:04:00.000Z",
-     "link": "https://dealsite.co.kr/articles/171997"
     },
     {
-     "title": "마벨, '154조' 세기의 베팅…삼성전자 조용히 웃는 까닭",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-03T09:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001271537?sid=101"
-    },
-    {
-     "title": "‘25세 연상♥’ 김자연, 삼성전자 前 사장 손영권과 결혼",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-03T09:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001302713"
+     "title": "[르포] 대구 도심 달리는 자율주행 DRT 타보니",
+     "press": "kyongbuk.co.kr",
+     "publishedAt": "2026-11-03T08:40:00.000Z",
+     "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4089526"
     }
    ]
   },
@@ -274,10 +274,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-03T07:38:00.000Z",
+   "articles90": 8,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-03T08:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -302,34 +302,34 @@
    ]
   },
   {
-   "keyword": "어린이",
+   "keyword": "지예은",
    "sources": [
     "google"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-03T08:22:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-03T07:49:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "\"여기는 빨갛고 저기는 아니고\"…어린이보호구역·승하차구역 부분 노면...",
-     "press": "joongboo.com",
-     "publishedAt": "2026-11-03T09:06:00.000Z",
-     "link": "https://www.joongboo.com/news/articleView.html?idxno=363741383"
+     "title": "“유령신부 아냐?” 유재석 놀란 지예은♥바타 청첩장 공개…오는 12월...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-03T09:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001184141"
     },
     {
-     "title": "고령군 어린이집연합회, 영어 체험 축제",
-     "press": "dkilbo.com",
-     "publishedAt": "2026-11-03T08:56:00.000Z",
-     "link": "https://www.dkilbo.com/news/articleView.html?idxno=559536"
-    },
-    {
-     "title": "'노래로 전하는 크리스마스 사랑'…컴패션, 어린이 결연 잇는 콘서트 개...",
-     "press": "ngonews.kr",
+     "title": "“같은 날 지인도 결혼하지만…” 유재석, 지예은 결혼식 사회 의리",
+     "press": "mk.co.kr",
      "publishedAt": "2026-11-03T08:52:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=242181"
+     "link": "https://m.entertain.naver.com/article/009/0005758512"
+    },
+    {
+     "title": "유재석, 지예은 결혼식날 일정 겹쳤는데…'의리 있는 결정' 내렸다",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-03T08:36:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1171258"
     }
    ]
   },
@@ -339,10 +339,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-03T07:42:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-03T07:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -365,75 +365,11 @@
      "link": "https://n.news.naver.com/mnews/article/052/0002427847?sid=101"
     }
    ]
-  },
-  {
-   "keyword": "지예은",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-03T07:49:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“같은 날 지인도 결혼하지만…” 유재석, 지예은 결혼식 사회 의리",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-03T08:52:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005758512"
-    },
-    {
-     "title": "유재석, 지예은 결혼식날 일정 겹쳤는데…'의리 있는 결정' 내렸다",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-03T08:36:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1171258"
-    },
-    {
-     "title": "[이슈 60초] \"축가는 '검은 고양이 네로'?\" 지예은♥바타 '손그림 청첩장...",
-     "press": "youthdaily.co.kr",
-     "publishedAt": "2026-11-03T08:00:00.000Z",
-     "link": "https://www.youthdaily.co.kr/news/article.html?no=229308"
-    }
-   ]
-  },
-  {
-   "keyword": "제주 실종 허위 종결",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T07:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "제주 실종 허위 종결 전직 경찰관…추가 범행 10건",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-03T08:56:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1542531"
-    },
-    {
-     "title": "제주경찰, 부 경장 허위종결 25건 추가 송치",
-     "press": "jejumaeil.net",
-     "publishedAt": "2026-11-03T07:58:00.000Z",
-     "link": "https://www.jejumaeil.net/news/articleView.html?idxno=406326"
-    },
-    {
-     "title": "제주 경찰관, 실종신고 25건 추가 허위처리…검찰 송치",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-03T07:44:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=846035"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 418,
+  "flagged": 419,
   "matched": 155,
   "avgLeadMin": 223,
   "recent": [
