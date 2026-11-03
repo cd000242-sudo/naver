@@ -37,6 +37,30 @@ describe('checkTitleAnswer', () => {
     expect(describeTitleAnswer({ checked: false } as never)).toBe('');
   });
 
+  // 2026-11-04 owner log (agent-claude SEO): "재가동됐고" was searched verbatim, the body said "재가동됐습니다" → 33%,
+  //   below the 0.6 floor → a full 202 s regeneration. A verb-ending on a noun stem is matched by the stem.
+  it('matches a noun + 되/하 verb ending by its stem ("재가동됐고" ↔ "재가동됐습니다")', () => {
+    const result = checkTitleAnswer({
+      title: '제네시스 생산 중단, 11월 3일 재가동됐고 G80 하이브리드는 변수',
+      primaryKeyword: '제네시스 생산 중단',
+      introduction: '제네시스 생산 라인이 멈췄다가 11월 3일 재가동됐습니다.',
+      body: '울산 공장은 11월 3일 오전부터 재가동됐습니다. G80 하이브리드는 출시 일정이 변수로 남았습니다.',
+    });
+    expect(result.promised).toEqual(['재가동됐고', '하이브리드', '변수']);
+    expect(result.answerRate).toBe(1);
+    expect(result.echoedOnly).toHaveLength(0);
+  });
+
+  it('a stem that the body never mentions is still a miss', () => {
+    const result = checkTitleAnswer({
+      title: '제네시스 생산 중단, 11월 3일 재가동됐고 G80 하이브리드는 변수',
+      primaryKeyword: '제네시스 생산 중단',
+      introduction: '11월 3일 재가동됐습니다.',
+      body: 'G80 하이브리드 출시 일정은 아직 변수입니다.',
+    });
+    expect(result.answerRate).toBeCloseTo(2 / 3);
+  });
+
   it('never throws on malformed input', () => {
     expect(() => checkTitleAnswer(undefined as never)).not.toThrow();
     expect(checkTitleAnswer(undefined as never).checked).toBe(false);

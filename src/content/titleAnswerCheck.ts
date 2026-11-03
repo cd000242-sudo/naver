@@ -57,6 +57,18 @@ const EMPTY: TitleAnswerResult = {
   message: '',
 };
 
+/*
+ * [2026-11-04] A noun stem carrying a 되/하 verb ending ("재가동됐고", "발표했다") is answered by the same stem with any
+ * ending. Measured: the title's "재가동됐고" was searched verbatim, the body said "재가동됐습니다" → 33% → a 202 s regeneration.
+ */
+const VERB_ENDING = /(됐고|됐다|됐던|됐지만|됐는데|됐으며|됐을|되고|되며|되는|되자|됐|했고|했다|했던|했지만|했는데|했으며|하고|하며|하는|하자|했)$/u;
+
+function coveredBy(text: string, token: string): boolean {
+  if (text.includes(token)) return true;
+  const stem = token.replace(VERB_ENDING, '');
+  return stem !== token && stem.length >= 2 && text.includes(stem);
+}
+
 export function checkTitleAnswer(input: TitleAnswerInput): TitleAnswerResult {
   try {
     const title = String(input?.title || '').trim();
@@ -67,8 +79,8 @@ export function checkTitleAnswer(input: TitleAnswerInput): TitleAnswerResult {
     const promised = extractTitlePromise(title, input?.primaryKeyword);
     if (promised.length < MIN_PROMISE_TOKENS) return EMPTY;
 
-    const answered = promised.filter((token) => body.includes(token));
-    const echoedOnly = promised.filter((token) => intro.includes(token) && !body.includes(token));
+    const answered = promised.filter((token) => coveredBy(body, token));
+    const echoedOnly = promised.filter((token) => coveredBy(intro, token) && !coveredBy(body, token));
     const answerRate = answered.length / promised.length;
 
     return {
