@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T04:14:54.072Z",
+ "builtAt": "2026-11-03T04:24:59.516Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,32 +8,31 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "감기약 필로폰 일당 검거",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 24,
-   "recent20": 3,
+   "recent20": 2,
    "press": 20,
    "firstArticleAt": "2026-11-03T03:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보]아파트에 비밀 마약공장이…감기약으로 필로폰 제조 일당 구속",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-03T04:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000120492?sid=102"
-    },
-    {
      "title": "한국판 '브레이킹 배드' 일당 검거···\"대량의 감기약으로 마약 제조\"",
      "press": "ngonews.kr",
      "publishedAt": "2026-11-03T04:08:00.000Z",
      "link": "https://www.ngonews.kr/news/articleView.html?idxno=242215"
+    },
+    {
+     "title": "[속보]아파트에 비밀 마약공장이…감기약으로 필로폰 제조 일당 구속",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-03T04:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000120492?sid=102"
     },
     {
      "title": "감기약 성분으로 필로폰 제조…13명 검거",
@@ -49,30 +48,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 67,
-   "recent20": 6,
-   "press": 16,
-   "firstArticleAt": "2026-11-03T03:08:00.000Z",
-   "exclusive": false,
+   "articles90": 74,
+   "recent20": 10,
+   "press": 19,
+   "firstArticleAt": "2026-11-03T03:09:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[국힘 당권 레이스 점화] ‘민생 예산’ 앞세워 연임 노리는 장동혁",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-03T04:08:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261103023114741"
+     "title": "국민의힘 2027년도 예산안 심사 방향 설명하는 장동혁 대표",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-03T04:24:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3740780"
     },
     {
-     "title": "장동혁·오세훈 악수, 한동훈은 공천개혁…국회서 각각 공개 행보",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-03T04:08:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=171850"
+     "title": "국민의힘 조정훈 의원과 대화하는 장동혁 대표",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-03T04:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016418387?sid=100"
     },
     {
-     "title": "대통령-국민의힘 연일 ‘충돌’ … 정치 설 자리가 없어진다",
-     "press": "naeil.com",
-     "publishedAt": "2026-11-03T04:02:00.000Z",
-     "link": "https://www.naeil.com/news/read/607361?ref=naver"
+     "title": "축사하는 국민의힘 장동혁 대표",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-03T04:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016418389?sid=100"
     }
    ]
   },
@@ -81,13 +80,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 22,
-   "recent20": 5,
-   "press": 16,
-   "firstArticleAt": "2026-11-03T02:47:00.000Z",
+   "articles90": 14,
+   "recent20": 4,
+   "press": 13,
+   "firstArticleAt": "2026-11-03T02:59:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "가공식품·외식비 상승에 10월 물가 2.8%↑",
+     "press": "kbsm.net",
+     "publishedAt": "2026-11-03T04:18:00.000Z",
+     "link": "https://www.kbsm.net/news/view.php?idx=540133"
+    },
     {
      "title": "10월 소비자물가 2.8% 상승... 석유류 급등에 체감 부담 '여전'",
      "press": "chungnamilbo.co.kr",
@@ -99,12 +104,70 @@
      "press": "etoday.co.kr",
      "publishedAt": "2026-11-03T04:08:00.000Z",
      "link": "https://www.etoday.co.kr/news/view/2643485"
+    }
+   ]
+  },
+  {
+   "keyword": "1호기 정보 유출",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-03T02:55:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[미디어 이슈] 쿠팡엔 “뒷문 열렸다”던 정부… ‘1호기’ 168명 정보유...",
+     "press": "mediawatch.kr",
+     "publishedAt": "2026-11-03T04:14:00.000Z",
+     "link": "https://www.mediawatch.kr/news/article.html?no=261595"
     },
     {
-     "title": "10월 소비자물가 2.8% 상승",
+     "title": "李 대통령 부부 여권 다시 만든다…외교부 \"1호기 정보유출 조사 진행 ...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-03T03:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001038015?sid=100"
+    },
+    {
+     "title": "[포토]공군 1호기 탑승자 개인정보 유출 관련 브리핑하는 박두순 대변인",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-03T03:38:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261103010001005"
+    }
+   ]
+  },
+  {
+   "keyword": "여권 재발급",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-03T02:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이재명 대통령 여권 재발급 … 청, 비서실장 주재 긴급회의",
      "press": "naeil.com",
      "publishedAt": "2026-11-03T04:06:00.000Z",
-     "link": "https://www.naeil.com/news/read/607440?ref=naver"
+     "link": "https://www.naeil.com/news/read/607410?ref=naver"
+    },
+    {
+     "title": "李 대통령 부부 여권 다시 만든다…외교부 \"1호기 정보유출 조사 진행 ...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-03T03:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001038015?sid=100"
+    },
+    {
+     "title": "李대통령 개인정보 '해킹' 아닌 '유출'…여권 재발급 조치 시행",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-03T03:36:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5079082"
     }
    ]
   },
@@ -113,24 +176,24 @@
    "sources": [
     "google"
    ],
-   "articles90": 10,
-   "recent20": 6,
-   "press": 9,
-   "firstArticleAt": "2026-11-03T02:46:00.000Z",
+   "articles90": 9,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-03T02:56:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
-    {
-     "title": "'확정 수익 20%' 미끼로 125억 편취…부동산 유튜버 구속",
-     "press": "kgnews.co.kr",
-     "publishedAt": "2026-11-03T04:12:00.000Z",
-     "link": "https://www.kgnews.co.kr/news/article.html?no=917877"
-    },
     {
      "title": "반도체 투자 확대에 용인 아파트 공급 잇따라…올해 1777가구 분양",
      "press": "econovill.com",
      "publishedAt": "2026-11-03T04:12:00.000Z",
      "link": "https://www.econovill.com/news/articleView.html?idxno=755844"
+    },
+    {
+     "title": "'확정 수익 20%' 미끼로 125억 편취…부동산 유튜버 구속",
+     "press": "kgnews.co.kr",
+     "publishedAt": "2026-11-03T04:12:00.000Z",
+     "link": "https://www.kgnews.co.kr/news/article.html?no=917877"
     },
     {
      "title": "120억 원대 투자사기를 저지른 유명 부동산 유튜버 구속",
@@ -141,47 +204,14 @@
    ]
   },
   {
-   "keyword": "민주당-한국노총 고위급정책협의회",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 32,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-03T03:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김민석 \"초광역특구 조성, 함께 대화\"…한국노총 \"연대, 당연히 주어지...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-03T04:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014297777?sid=100"
-    },
-    {
-     "title": "[포토] 민주당-한국노총 고위급정책협의회",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-03T04:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005837338?sid=100"
-    },
-    {
-     "title": "민주당-한국노총 고위급정책협의회",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-03T03:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005758155?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "재혼 황후 이종석 왕자 비주얼 부담",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 9,
+   "articles90": 8,
    "recent20": 0,
    "press": 8,
-   "firstArticleAt": "2026-11-03T02:48:00.000Z",
+   "firstArticleAt": "2026-11-03T03:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -206,98 +236,34 @@
    ]
   },
   {
-   "keyword": "김재원 스크린 도전",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-03T02:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'대세 연하남' 김재원 \"친누나 빼곤 다 사랑 받아…차기작선 박은빈과 ...",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-03T03:45:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000326475"
-    },
-    {
-     "title": "[뮤:터뷰①]‘최종면접’ 김재원, 순록이로 사랑받고 첫 스크린 데뷔 “...",
-     "press": "heraldmuse.com",
-     "publishedAt": "2026-11-03T03:40:00.000Z",
-     "link": "https://m.entertain.naver.com/article/112/0003811984"
-    },
-    {
-     "title": "김재원 \"'뮤직뱅크' MC 만족도 높아…춤 느는 내가 뿌듯\" [N인터뷰]",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T03:34:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009266860"
-    }
-   ]
-  },
-  {
-   "keyword": "jtbc",
-   "sources": [
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-03T02:51:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"나눠준 빵 오늘까지?\" JTBC 마라톤 재고처리 논란 '시끌'",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-03T04:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000648681?sid=102"
-    },
-    {
-     "title": "'기업회생' JTBC, 법원에 매각공고 허가 신청…내주 초 공고 예정",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-03T03:56:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/323951/?sc=Naver"
-    },
-    {
-     "title": "JTBC, '새 주인' 찾기 속도 낸다…법원에 매각공고 허가 신청",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-03T03:36:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000486111"
-    }
-   ]
-  },
-  {
-   "keyword": "미래대응기금 공청회",
+   "keyword": "칸터, 프로농구 1라운드 MVP",
    "sources": [
     "nate"
    ],
    "articles90": 7,
    "recent20": 0,
    "press": 7,
-   "firstArticleAt": "2026-11-03T02:52:00.000Z",
+   "firstArticleAt": "2026-11-03T03:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "미래대응기금 신설 놓고 찬반 격론…\"재정 안전장치\" vs \"지방재정 침해...",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-03T03:32:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=727738"
+     "title": "케렘 칸터, 삼성의 시즌 초반 돌풍 주역으로 우뚝…프로농구 첫 라운드...",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-03T04:00:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=846008"
     },
     {
-     "title": "여야, 미래대응기금 설치 놓고 충돌...“재정 안전장치” vs “지방재정...",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-03T03:16:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=72513"
+     "title": "[농구] 칸터, 1라운드 MVP… 삼성 선수 9시즌 만에 수상",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-03T03:54:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3445454"
     },
     {
-     "title": "'미래 선제 투자'냐 '국가 채무 부담'이냐…재경위, 미래대응기금 공방",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-03T03:12:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=879278"
+     "title": "칸터, 프로농구 1라운드 MVP 선정…삼성 선수로는 9시즌 만",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-03T03:40:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/028/0002830441"
     }
    ]
   },
@@ -307,7 +273,7 @@
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-03T03:06:00.000Z",
    "exclusive": false,
@@ -334,46 +300,46 @@
    ]
   },
   {
-   "keyword": "예세민 검찰총장 후보 물망",
+   "keyword": "jtbc",
    "sources": [
-    "daum"
+    "google"
    ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-03T02:52:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-03T02:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "검찰총장 후보군 다음주 중 윤곽",
-     "press": "naeil.com",
-     "publishedAt": "2026-11-03T04:06:00.000Z",
-     "link": "https://www.naeil.com/news/read/607434?ref=naver"
-    },
-    {
-     "title": "검찰총장 후보에 이정현·박철우·예세민 물망",
-     "press": "yonhapnewstv.co.kr",
+     "title": "\"나눠준 빵 오늘까지?\" JTBC 마라톤 재고처리 논란 '시끌'",
+     "press": "news.tvchosun.com",
      "publishedAt": "2026-11-03T04:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922382?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/448/0000648681?sid=102"
     },
     {
-     "title": "초대 공소청 수장 후보, 이르면 9일 3명으로 압축",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-03T04:00:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3445419"
+     "title": "'기업회생' JTBC, 법원에 매각공고 허가 신청…내주 초 공고 예정",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-03T03:56:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/323951/?sc=Naver"
+    },
+    {
+     "title": "JTBC, '새 주인' 찾기 속도 낸다…법원에 매각공고 허가 신청",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-03T03:36:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000486111"
     }
    ]
   },
   {
-   "keyword": "신장식 대표 취임 100일 간담회",
+   "keyword": "신장식 취임 100일 간담회",
    "sources": [
     "nate"
    ],
-   "articles90": 18,
+   "articles90": 8,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-03T02:47:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-03T03:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -390,113 +356,49 @@
      "link": "https://n.news.naver.com/mnews/article/003/0014297766?sid=100"
     },
     {
-     "title": "신장식 대표, 취임 100일 기자간담회",
+     "title": "취임 100일 기자간담회 참석하는 신장식 대표",
      "press": "news1.kr",
      "publishedAt": "2026-11-03T03:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009266904?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/421/0009266908?sid=100"
     }
    ]
   },
   {
-   "keyword": "lg디스플레이",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-03T02:47:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국립생태원·LG디스플레이, 생물다양성 보전 맞손···ESG 협력 확대",
-     "press": "enewstoday.co.kr",
-     "publishedAt": "2026-11-03T04:00:00.000Z",
-     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2487758"
-    },
-    {
-     "title": "LG디스플레이, 국립생태원과 생물다양성 보전 협력…DMZ 생태계 복원 추...",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-03T03:26:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=94461"
-    },
-    {
-     "title": "LG디스플레이, 국립생태원과 파주사업장 주변 생태계 보전 추진",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T02:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016418123?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "칸터, 1라운드 MVP 수상",
+   "keyword": "최종면접 김재원 민낯",
    "sources": [
     "nate"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-03T03:02:00.000Z",
+   "firstArticleAt": "2026-11-03T02:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "케렘 칸터, 삼성의 시즌 초반 돌풍 주역으로 우뚝…프로농구 첫 라운드...",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-03T04:00:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=846008"
+     "title": "'최종면접' 김재원 \"첫 영화 위해 6kg 감량, 민낯 촬영까지 했다\"[인터뷰...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-03T03:25:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000636719"
     },
     {
-     "title": "[농구] 칸터, 1라운드 MVP… 삼성 선수 9시즌 만에 수상",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-03T03:54:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3445454"
+     "title": "'최종면접' 김재원, 암환자 연기에 다 내려놨다…\"6kg 감량·민낯 촬영도...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-03T02:59:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002075733"
     },
     {
-     "title": "'KBL 새역사 일등공신' 칸터, 압도적 라운드 MVP 선정... 상금 200만원 [공...",
+     "title": "'최종면접' 김재원, 첫 스크린 도전 열정 \"6kg 감량에 민낯 촬영까지\"[인...",
      "press": "starnewskorea.com",
-     "publishedAt": "2026-11-03T03:02:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/108/0003484070"
-    }
-   ]
-  },
-  {
-   "keyword": "박주민 의원 경찰 출석",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T02:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘오세훈 고발’ 박주민… 고발인 신분 경찰 출석",
-     "press": "m.skyedaily.com",
-     "publishedAt": "2026-11-03T04:04:00.000Z",
-     "link": "https://m.skyedaily.com/news_view.html?ID=314013"
-    },
-    {
-     "title": "오세훈 고발한 박주민 \"한강버스 허위사실 공소시효 한 달 남아\"",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-03T03:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002534467?sid=100"
-    },
-    {
-     "title": "박주민, '한강버스 허위사실 공표' 고발인 조사 출석 … 오세훈 수사 촉...",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-03T02:54:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/03/2026110300187.html"
+     "publishedAt": "2026-11-03T02:56:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003484065"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 340,
+  "flagged": 345,
   "matched": 123,
   "avgLeadMin": 251,
   "recent": [
