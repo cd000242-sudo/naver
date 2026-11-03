@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T02:14:05.878Z",
+ "builtAt": "2026-11-03T02:24:11.413Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,141 +15,147 @@
    "sources": [
     "nate"
    ],
-   "articles90": 46,
-   "recent20": 3,
-   "press": 46,
-   "firstArticleAt": "2026-11-03T00:45:00.000Z",
+   "articles90": 38,
+   "recent20": 5,
+   "press": 38,
+   "firstArticleAt": "2026-11-03T00:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "가상자산 과세 또 미뤄지나…與, 2년 유예 건의에 과세 형평성 논란",
-     "press": "ppss.kr",
-     "publishedAt": "2026-11-03T02:11:00.000Z",
-     "link": "https://www.ppss.kr/news/articleView.html?idxno=318740"
+     "title": "\"코인 과세 또 미룬다\"…與 재경위, '2년 추가 유예' 지도부 건의하기로",
+     "press": "idaegu.co.kr",
+     "publishedAt": "2026-11-03T02:22:00.000Z",
+     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=564209"
     },
     {
-     "title": "與재경위, 가상자산 과세 추가 유예 거론…지도부 건의키로",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-03T02:04:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=100504"
+     "title": "가상자산 과세 또 다시 유예되나…與 재경위 유예 의견 당 지도부 전달",
+     "press": "tfmedia.co.kr",
+     "publishedAt": "2026-11-03T02:20:00.000Z",
+     "link": "https://www.tfmedia.co.kr/news/article.html?no=208601"
     },
     {
-     "title": "민주당 재경위, 당 지도부에 가상자산 과세유예 건의키로…“2년 유예 ...",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-03T01:58:00.000Z",
-     "link": "https://www.viva100.com/article/20261103500515"
+     "title": "與재경위 \"지도부에 가상자산 과세 유예 건의…대부분 의견 2년 유예\"",
+     "press": "goodkyung.com",
+     "publishedAt": "2026-11-03T02:16:00.000Z",
+     "link": "https://www.goodkyung.com/news/articleView.html?idxno=293043"
     }
    ]
   },
   {
-   "keyword": "순방단 개인정보 유출 긴급회의",
+   "keyword": "시장 공략 강화",
    "sources": [
     "nate"
    ],
-   "articles90": 38,
-   "recent20": 6,
-   "press": 37,
-   "firstArticleAt": "2026-11-03T00:46:00.000Z",
+   "articles90": 44,
+   "recent20": 11,
+   "press": 35,
+   "firstArticleAt": "2026-11-03T01:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "KCC실리콘, 동남아 뷰티 시장 정조준…고기능 실리콘 소재 경쟁력 알린...",
+     "press": "worktoday.co.kr",
+     "publishedAt": "2026-11-03T02:18:00.000Z",
+     "link": "http://www.worktoday.co.kr/news/articleView.html?idxno=91396"
+    },
+    {
+     "title": "효성굿스프링스, 고효율 냉각 펌프로 AI 데이터센터 시장 공략",
+     "press": "popcornnews.net",
+     "publishedAt": "2026-11-03T02:18:00.000Z",
+     "link": "http://www.popcornnews.net/news/articleView.html?idxno=138498"
+    },
+    {
+     "title": "티플리스, GraphDB 기반 생성형 AI로 AICC 시장 공략",
+     "press": "newsprime.co.kr",
+     "publishedAt": "2026-11-03T02:18:00.000Z",
+     "link": "http://www.newsprime.co.kr/news/article.html?no=753449"
+    }
+   ]
+  },
+  {
+   "keyword": "순방단 개인정보 유출 조사",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 35,
+   "recent20": 7,
+   "press": 33,
+   "firstArticleAt": "2026-11-03T00:56:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "'대통령 순방단 개인정보 유출'...청와대, 비서실장 주재 긴급회의",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-03T02:12:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1134606"
+     "title": "대통령 내외 포함 순방단 168명 개인정보 유출.. 청와대 긴급회의",
+     "press": "jibs.co.kr",
+     "publishedAt": "2026-11-03T02:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/661/0000085998?sid=100"
     },
     {
-     "title": "李 대통령 부부 등 168명 개인정보 유출…靑 긴급회의",
-     "press": "sisafocus.co.kr",
-     "publishedAt": "2026-11-03T02:08:00.000Z",
-     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367117"
+     "title": "李대통령 개인정보 담긴 '1호기' 명단, 해킹 아닌 '유출'(종합)",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-03T02:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006402691?sid=100"
     },
     {
-     "title": "대통령 순방단 168명 개인정보 유출 일파만파… 靑, 긴급회의 소집 \"책임...",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-03T02:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002247052?sid=105"
+     "title": "靑, \"대통령 순방단 개인정보 유출 \"철저히 조사\"",
+     "press": "seouleconews.com",
+     "publishedAt": "2026-11-03T02:18:00.000Z",
+     "link": "http://www.seouleconews.com/news/articleView.html?idxno=94748"
     }
    ]
   },
   {
-   "keyword": "발언하는 이재명 대통령",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 58,
-   "recent20": 22,
-   "press": 33,
-   "firstArticleAt": "2026-11-03T01:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[속보] 이 대통령 \"합리적 근거 없는 약자 혜택, 혐오 선동 세력에 빌미...",
-     "press": "mediatoday.co.kr",
-     "publishedAt": "2026-11-03T02:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/006/0000138539?sid=100"
-    },
-    {
-     "title": "이 대통령 \"사회 너무 극단화…가짜뉴스 강력 대응 필요\"",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-03T02:11:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000079110"
-    },
-    {
-     "title": "이 대통령 \"약자에 대한 지원책, 공정성과 합리성 원칙 함께 고려돼야\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-03T02:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400198?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "LG엔솔 3분기 영업익",
+   "keyword": "트럼프 공화당",
    "sources": [
     "daum"
    ],
-   "articles90": 32,
-   "recent20": 10,
-   "press": 31,
+   "articles90": 27,
+   "recent20": 9,
+   "press": 24,
    "firstArticleAt": "2026-11-03T00:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "LG엔솔, 3분기 영업익 7560억원···전년비 25.7% 증가",
-     "press": "smartbizn.com",
-     "publishedAt": "2026-11-03T02:08:00.000Z",
-     "link": "https://www.smartbizn.com/news/articleView.html?idxno=158283"
+     "title": "美 중간선거 하루 전 트럼프 지지율 32%… 임기 최저치 근접",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-03T02:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202190?sid=104"
     },
     {
-     "title": "LG엔솔 3분기 매출 9조6434억 ‘분기 최대’…ESS 급증에 영업익 7560억",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-03T02:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003480313?sid=101"
+     "title": "[오늘 트럼프는] \"이란, 가능한 한 빨리 합의 원해…공격 고려 안해\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T02:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009266681?sid=104"
     },
     {
-     "title": "LG엔솔, 3Q 영업익 7560억…ESS·EV 배터리 호조에 567% '껑충'",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-03T02:08:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=100508"
+     "title": "미 중간선거 하루 전 트럼프 지지율 32%… 역대 최저 수준",
+     "press": "kado.net",
+     "publishedAt": "2026-11-03T02:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000209054?sid=104"
     }
    ]
   },
   {
    "keyword": "이화영 대북송금 재심 청구",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 31,
-   "recent20": 4,
-   "press": 24,
-   "firstArticleAt": "2026-11-03T00:50:00.000Z",
+   "articles90": 28,
+   "recent20": 3,
+   "press": 21,
+   "firstArticleAt": "2026-11-03T00:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "쌍방울 대북송금 사건 이화영, 징역 7년 8개월 확정 후 재심 추진",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-03T02:16:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=622636"
+    },
     {
      "title": "이화영 '쌍방울 대북송금' 재심 청구…\"무죄 입증할 새 증거\" 주장",
      "press": "nocutnews.co.kr",
@@ -161,59 +167,27 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-03T02:05:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009266601?sid=102"
-    },
-    {
-     "title": "이화영 측, 대북송금 사건 재심 청구…\"무죄 뒷받침할 새 증거 발견\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-03T02:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000648645?sid=102"
     }
    ]
   },
   {
-   "keyword": "트럼프 공화당",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 26,
-   "recent20": 8,
-   "press": 23,
-   "firstArticleAt": "2026-11-03T00:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "선거 하루전인데…트럼프 지지율 임기 최저수준",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-03T02:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000541359?sid=104"
-    },
-    {
-     "title": "트럼프 \"중간 선거서 민주당 의회 장악 땐 참모·측근 선제 사면\"",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-03T02:10:00.000Z",
-     "link": "https://www.insight.co.kr/news/580385"
-    },
-    {
-     "title": "미국 중간선거 돌입…트럼프 지지율 32%, 의회 권력 교체 주목",
-     "press": "newsworker.co.kr",
-     "publishedAt": "2026-11-03T02:08:00.000Z",
-     "link": "https://www.newsworker.co.kr/news/articleView.html?idxno=511972"
-    }
-   ]
-  },
-  {
-   "keyword": "울산 에릭, K리그1 MVP 선정",
+   "keyword": "울산 에릭 K리그1 MVP",
    "sources": [
     "nate"
    ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 15,
+   "articles90": 16,
+   "recent20": 3,
+   "press": 16,
    "firstArticleAt": "2026-11-03T01:04:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "[공식발표] '멀티골 폭발→극적인 역전승 견인' 울산 에릭, K리그1 34라운...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-03T02:19:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/117/0004121270"
+    },
     {
      "title": "울산 에릭, K리그1 34라운드 MVP…강원전 멀티골 활약",
      "press": "yonhapnewstv.co.kr",
@@ -225,12 +199,70 @@
      "press": "newspim.com",
      "publishedAt": "2026-11-03T02:08:00.000Z",
      "link": "https://www.newspim.com/news/view/20261103000471"
+    }
+   ]
+  },
+  {
+   "keyword": "美 게슘섬 타격",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 12,
+   "recent20": 0,
+   "press": 12,
+   "firstArticleAt": "2026-11-03T00:59:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美, 중간선거 직전 이란 게슘섬 타격…\"선박 공격에 방어적 조치\"",
+     "press": "getnews.co.kr",
+     "publishedAt": "2026-11-03T02:02:00.000Z",
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=885792"
     },
     {
-     "title": "[공식발표] 이동경·야고만 있는 게 아니다…강원전 멀티골 에릭, K리그...",
-     "press": "mhnse.com",
+     "title": "美, 선거전날 이란 게슘섬 타격…\"선박 공격에 방어적 조치\"",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-03T01:46:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4116399"
+    },
+    {
+     "title": "[속보] WSJ “美, 중간선거 전날 호르무즈 요충지 게슘섬 공격”…이란...",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-03T01:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003056783?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "미국 이란 케슘섬 공습",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 12,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-03T01:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美, 이란 케슘섬 공습…혁명수비대는 美 드론 격추 주장(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T02:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014297386?sid=104"
+    },
+    {
+     "title": "선거 코앞 이란 공격한 美…“케슘섬 공격, 수주간 이어져”",
+     "press": "sedaily.com",
      "publishedAt": "2026-11-03T01:52:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/445/0000486059"
+     "link": "https://n.news.naver.com/mnews/article/011/0004678125?sid=104"
+    },
+    {
+     "title": "[美중간선거]이란 \"美, 우리 조건 무조건 받아야\"…선거 전 대화 무산된...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T01:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014297148?sid=104"
     }
    ]
   },
@@ -239,10 +271,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
+   "articles90": 9,
    "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-03T00:48:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-03T00:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -267,34 +299,66 @@
    ]
   },
   {
-   "keyword": "미국 이란 케슘섬 공습",
+   "keyword": "리센느 컴백",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-03T01:00:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-03T00:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "선거 코앞 이란 공격한 美…“케슘섬 공격, 수주간 이어져”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-03T01:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004678125?sid=104"
+     "title": "'창사 이래 최초 모델' 리센느 컴백에... 할리스, 초특급 오프라인 팬미...",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-03T02:22:00.000Z",
+     "link": "https://www.insight.co.kr/news/580395"
     },
     {
-     "title": "[美중간선거]이란 \"美, 우리 조건 무조건 받아야\"…선거 전 대화 무산된...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-03T01:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014297148?sid=104"
+     "title": "리센느, 미니 4집 컴백…‘국민 걸그룹’ 방점 찍는다 [DA투데이]",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-03T02:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001302581"
     },
     {
-     "title": "美, 이란 호르무즈 요충지 케슘섬 공습…WSJ \"제한적 공격 지속\"",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-03T01:38:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=901719"
+     "title": "리센느, 미니 4집 ‘PULSE’로 컴백...A2O LITE 독주 막을까",
+     "press": "raonnews.com",
+     "publishedAt": "2026-11-03T01:48:00.000Z",
+     "link": "https://www.raonnews.com/news/article.html?no=62432"
+    }
+   ]
+  },
+  {
+   "keyword": "양주시",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-03T00:57:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "양주시, LH에 택지개발 현안 16건 건의…교통·주거환경 개선 요청",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-03T02:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005435746?sid=102"
+    },
+    {
+     "title": "양주시 꿈드림,'털뭉치들의 대반란'…학교 밖 청소년 성장발표회 개최",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-03T02:14:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3740639"
+    },
+    {
+     "title": "양주시 '사랑 싣고 달린 교외선' 미혼남녀 18명 중 2쌍 커플 탄생",
+     "press": "mhj21.com",
+     "publishedAt": "2026-11-03T01:36:00.000Z",
+     "link": "https://www.mhj21.com/news/articleView.html?idxno=254635"
     }
    ]
   },
@@ -305,10 +369,10 @@
     "google",
     "daum"
    ],
-   "articles90": 8,
+   "articles90": 5,
    "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-03T00:50:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-03T00:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -333,99 +397,66 @@
    ]
   },
   {
-   "keyword": "리센느 컴백",
+   "keyword": "미래대응기금 설치 공청회",
    "sources": [
-    "google",
-    "daum"
+    "nate"
    ],
-   "articles90": 5,
+   "articles90": 12,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-03T00:56:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-03T01:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "리센느, 미니 4집 컴백…‘국민 걸그룹’ 방점 찍는다 [DA투데이]",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-03T02:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001302581"
+     "title": "\"미래대응기금, '빚내 적립' 우려\"…국회 통제·지방 자율성도 쟁점",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T02:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009266642?sid=101"
     },
     {
-     "title": "리센느, 미니 4집 ‘PULSE’로 컴백...A2O LITE 독주 막을까",
-     "press": "raonnews.com",
-     "publishedAt": "2026-11-03T01:48:00.000Z",
-     "link": "https://www.raonnews.com/news/article.html?no=62432"
+     "title": "「M포토」 ‘미래대응기금’ 관련 공청회에서 인사 나누는 조승래 위원...",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-03T02:00:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=72500"
     },
     {
-     "title": "리센느, 오늘 ‘펄스’ 컴백…‘위드’로 상승세 잇는다",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-03T01:32:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1134590"
+     "title": "공청회 발언하는 김정훈 재정정책연구원장",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T01:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014297199?sid=100"
     }
    ]
   },
   {
-   "keyword": "양주시",
+   "keyword": "띠별 운세",
    "sources": [
     "google"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-03T00:47:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "양주시 '사랑 싣고 달린 교외선' 미혼남녀 18명 중 2쌍 커플 탄생",
-     "press": "mhj21.com",
-     "publishedAt": "2026-11-03T01:36:00.000Z",
-     "link": "https://www.mhj21.com/news/articleView.html?idxno=254635"
-    },
-    {
-     "title": "양주시, 한국토지주택공사(LH)에 택지개발 현안 건의",
-     "press": "dnews.co.kr",
-     "publishedAt": "2026-11-03T01:22:00.000Z",
-     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611031000005910336"
-    },
-    {
-     "title": "농협 양주시지부·농가주부모임 양주시연합회 일손돕기",
-     "press": "nongmin.com",
-     "publishedAt": "2026-11-03T00:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/662/0000107533?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "계약결혼",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-03T00:58:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-03T01:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "몰카 찍고 일기장 훔쳐보고…범죄 방조한 ‘계약결혼’에 “제작진 사과...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-03T02:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001147817"
+     "title": "[오늘의 띠별 운세] 2026년 11월 3일 화요일",
+     "press": "ppss.kr",
+     "publishedAt": "2026-11-03T02:16:00.000Z",
+     "link": "https://www.ppss.kr/news/articleView.html?idxno=318657"
     },
     {
-     "title": "계약결혼 '몰카' 논란 터졌다... 32기 영수, 가상 아내 몰래 카메라 설치...",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-03T01:36:00.000Z",
-     "link": "https://www.insight.co.kr/news/580380"
+     "title": "[오늘의 운세] 11월 3일 띠별 점심메뉴…일반·채식 추천",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-03T01:18:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=399729"
     },
     {
-     "title": "'계약결혼' 두 부부의 예상치 못한 위기...무사히 해결할까",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-03T01:22:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2643402"
+     "title": "[오늘의운세] 11월3일 화요일, 재미로 보는 오늘의 띠별운세",
+     "press": "job-post.co.kr",
+     "publishedAt": "2026-11-03T01:14:00.000Z",
+     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=236096"
     }
    ]
   },
@@ -435,10 +466,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 10,
+   "articles90": 9,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T00:48:00.000Z",
+   "press": 2,
+   "firstArticleAt": "2026-11-03T00:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -465,7 +496,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 292,
+  "flagged": 297,
   "matched": 110,
   "avgLeadMin": 240,
   "recent": [
