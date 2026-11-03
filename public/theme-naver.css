@@ -1,0 +1,248 @@
+/* ============================================================================
+   theme-naver.css — white page + NAVER green (applied 2026-11-03, phase 1).
+   Linked LAST in public/index.html (after styles.css, floating-buttons.css,
+   thumbnail-studio.css, daily-publishing.css) so it overrides them; the
+   temporary theme-naver-transitional.css follows it. "html " prefixes beat the
+   <style> blocks inside <body>.
+   Rule of thumb: solid green fill (--nv-fill) = an action; green tint or green
+   outline = "selected". --nv-green (#03C75A) is decoration only (underline,
+   hairline, checkbox): white text on it is 2.25:1, so never put text on it.
+   ========================================================================== */
+
+/* 1. Tokens ---------------------------------------------------------------- */
+:root {
+  color-scheme: light;
+  --nv-green: #03C75A; --nv-green-hover: #02B350;   /* brand green: decoration only */
+  --nv-fill: #00873C;         /* solid action fill, white text 4.63:1 */
+  --nv-fill-hover: #00702F;   /* one step darker, white text 6.4:1 */
+  --nv-green-text: #007A37;   /* green AS TEXT: 5.47:1 on #FFF, 4.98:1 on the tint (#03C75A text is 2.25:1) */
+  --nv-green-soft: #E8F8EF; --nv-green-line: #B5E8CB;
+  --nv-ink: #1E1E23;          /* 16.6:1 on #FFF */
+  --nv-ink-2: #404048;        /* 10.3:1 */
+  --nv-ink-3: #6B6B70;        /* 4.90:1 on #F5F6F7 (#767678 is 4.19:1 there) */
+  --nv-ink-4: #767678;        /* 4.53:1 on #FFF only: hints and placeholders on white */
+  --nv-page: #F5F6F7; --nv-card: #FFFFFF; --nv-sunken: #F7F8FA;
+  --nv-line: #E3E5E8; --nv-line-strong: #D1D4D9;
+  --nv-red: #D92D20; --nv-red-soft: #FFF1F0; --nv-amber: #B45309; --nv-amber-soft: #FFF8EB;
+  --nv-blue: #1D63D6; --nv-pink: #BE185D;
+  --nv-font: 'Pretendard', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  --nv-none: 0 0 0 0 transparent;
+
+  /* Legacy names (683 var() uses) re-pointed to the light palette. */
+  --primary: var(--nv-fill); --primary-hover: var(--nv-fill-hover);
+  --primary-light: var(--nv-green-soft); --primary-dark: var(--nv-green-text);
+  --secondary: var(--nv-green-text); --secondary-hover: var(--nv-fill-hover);
+  --accent: var(--nv-fill); --accent-hover: var(--nv-fill-hover); --accent-dark: var(--nv-green-text);
+  --accent-primary: var(--nv-fill);
+  --text-strong: var(--nv-ink); --text-gold: var(--nv-ink); --text-gold-dark: var(--nv-green-text);
+  --text-medium: var(--nv-ink-2); --text-muted: var(--nv-ink-3); --text-light: var(--nv-ink-4);
+  --text-secondary: var(--nv-ink-2); --text-primary: var(--nv-ink); --text-white: #FFFFFF;
+  --bg-primary: var(--nv-card); --bg-secondary: var(--nv-page); --bg-tertiary: var(--nv-sunken);
+  --bg-card: var(--nv-card); --bg-input: var(--nv-card); --bg-glass: rgba(255, 255, 255, 0.97);
+  --bg-hover: rgba(3, 199, 90, 0.06);
+  --border-light: var(--nv-line); --border-medium: var(--nv-line-strong); --border-strong: #C5C9CF;
+  --border-gold: var(--nv-green-line); --border-glass: var(--nv-line); --border-color: var(--nv-line);
+  --shadow-sm: 0 1px 2px rgba(20, 24, 31, 0.04); --shadow-md: 0 1px 3px rgba(20, 24, 31, 0.06);
+  --shadow-lg: 0 4px 14px rgba(20, 24, 31, 0.07); --shadow-xl: 0 12px 32px rgba(20, 24, 31, 0.12);
+  --shadow-gold: var(--nv-none); --shadow-gold-glow: var(--nv-none);
+  --radius-sm: 6px; --radius-md: 8px; --radius-lg: 8px; --radius-xl: 8px;
+}
+/* Scoped dark tokens elsewhere: thumbnail studio and the settings modal (styles.css:3715). */
+html #tab-image-tools, html #image-source-studio, html #settings-modal {
+  color-scheme: light;
+  --studio-surface: var(--nv-card); --studio-surface-raised: var(--nv-sunken); --studio-input: var(--nv-card);
+  --studio-border: var(--nv-line); --studio-text: var(--nv-ink); --studio-muted: var(--nv-ink-3);
+  --studio-accent: var(--nv-green-text); --primary: var(--nv-fill); --primary-hover: var(--nv-fill-hover);
+  --accent-primary: var(--nv-fill); --bg-primary: var(--nv-card); --bg-secondary: var(--nv-page);
+  --bg-tertiary: var(--nv-sunken); --bg-input: var(--nv-card); --text-strong: var(--nv-ink);
+  --text-gold: var(--nv-ink); --text-gold-dark: var(--nv-green-text); --text-muted: var(--nv-ink-3);
+  --text-medium: var(--nv-ink-2); --border-light: var(--nv-line); --border-medium: var(--nv-line-strong);
+  --border-gold: var(--nv-green-line);
+}
+html #settings-modal .settings-content, html #settings-modal .modal-content { color: var(--nv-ink-2); }
+
+/* 2. Base ------------------------------------------------------------------ */
+html, body, .app-container { background: var(--nv-page); color: var(--nv-ink); font-family: var(--nv-font); }
+body { letter-spacing: -0.01em; }
+button, input, select, textarea { font-family: inherit; }
+/* Neon removal: no glow text, no gradient-clipped text, no shimmer loops. */
+html *, html *::before, html *::after { text-shadow: none !important; -webkit-text-fill-color: currentColor !important; }
+::selection { background: #C6EFD7; color: var(--nv-ink); }
+::placeholder { color: var(--nv-ink-4) !important; opacity: 1; }
+::-webkit-scrollbar-thumb { background: #D1D4D9 !important; border-radius: 8px; }
+::-webkit-scrollbar-track { background: transparent !important; }
+input[type="checkbox"], input[type="radio"], input[type="range"], progress { accent-color: var(--nv-green) !important; }
+:focus-visible { outline: 2px solid var(--nv-fill) !important; outline-offset: 2px; }
+
+/* 3. Header, tabs, segmented controls ------------------------------------- */
+html .app-header { background: var(--nv-card); backdrop-filter: none; box-shadow: none; border-bottom: 1px solid var(--nv-line); }
+html .app-title { background: none; color: var(--nv-ink); font-weight: 800; letter-spacing: -0.02em; }
+html .tabs-header { background: var(--nv-card); backdrop-filter: none; box-shadow: none; border-bottom: 1px solid var(--nv-line); padding-top: 0; padding-bottom: 0; }
+html .tab-button { color: var(--nv-ink-3); text-transform: none; letter-spacing: 0; font-weight: 600; border-radius: 0; padding: 16px 18px; }
+html .tab-button::before { background: var(--nv-green); height: 3px; }
+html .tab-button:hover { color: var(--nv-ink); background: transparent; }
+html .tab-button:hover::before { width: 0; }
+html .tab-button.active { color: var(--nv-ink); font-weight: 800; }
+html .tab-button.active::before { width: 100%; }
+html .tab-button.active::after { display: none; }
+html .pub-mode-tab, html .account-tab:not(.active) { background: var(--nv-card) !important; color: var(--nv-ink-2) !important; border: 1px solid var(--nv-line-strong); border-radius: 8px; }
+html .pub-mode-tab:hover { color: var(--nv-ink); border-color: #C5C9CF; }
+html .pub-mode-tab.active, html .account-tab.active, html .source-toggle-btn--active {
+  background: var(--nv-green-soft) !important; color: var(--nv-green-text) !important; border: 1px solid var(--nv-green) !important; box-shadow: none !important;
+}
+html #images-subtab-manage, html #images-subtab-generate { color: var(--nv-ink-3) !important; }
+html #images-subtab-manage[style*="accent-primary"], html #images-subtab-generate[style*="accent-primary"] {
+  background: var(--nv-card) !important; color: var(--nv-green-text) !important; box-shadow: var(--shadow-md) !important; font-weight: 700;
+}
+html .common-login-section { background: var(--nv-card); backdrop-filter: none; box-shadow: none; }
+
+/* 4. Cards and panels ------------------------------------------------------ */
+html .form-section, html .summary-bar, html .summary-bar-fixed, html .dashboard-card, html .log-section,
+html .progress-container, html .clock-container, html .calendar-container, html .daily-stats,
+html .quick-action-btn, html .stat-item, html .execute-section, html .recent-activities {
+  background: var(--nv-card); border: 1px solid var(--nv-line); border-radius: 8px; box-shadow: var(--shadow-sm);
+}
+html .form-section::before, html .summary-bar::before, html .summary-bar-fixed::before,
+html .dashboard-card::before, html .clock-container::before, html .calendar-container::before { display: none; }
+html .form-section:hover, html .dashboard-card:hover, html .clock-container:hover, html .calendar-container:hover,
+html .quick-action-btn:hover, html .stat-item:hover, html .summary-card:hover {
+  border-color: var(--nv-line-strong); box-shadow: var(--shadow-md); transform: none; background: var(--nv-card);
+}
+html .summary-card { background: var(--nv-sunken); border: 1px solid var(--nv-line); }
+html .current-time, html #current-time, html .calendar-month, html .dashboard-card-value, html .stat-value, html .stat-number {
+  background: none; color: var(--nv-ink) !important; letter-spacing: -0.02em;
+}
+html .calendar-day.today { background: var(--nv-fill); color: #FFFFFF; box-shadow: none; }
+html .calendar-day:hover { background: var(--nv-green-soft); color: var(--nv-ink); }
+html .log-output, html .execute-log { background: var(--nv-sunken); color: var(--nv-ink-2); border: 1px solid var(--nv-line); }
+
+/* 5. Fields ---------------------------------------------------------------- */
+html .field label, html .common-login-section label, html .control-label { color: var(--nv-ink-2); font-weight: 700; letter-spacing: 0; }
+html input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]), html select, html textarea { color: var(--nv-ink); border-radius: 8px; }
+html .field input, html .field select, html .field textarea, html .common-login-section input {
+  background: var(--nv-card); border: 1px solid var(--nv-line-strong); color: var(--nv-ink);
+}
+html input:focus, html select:focus, html textarea:focus {
+  outline: none; border-color: var(--nv-fill) !important; box-shadow: 0 0 0 3px rgba(0, 135, 60, 0.16) !important; transform: none;
+}
+html input::-webkit-calendar-picker-indicator { filter: none !important; }
+
+/* 6. Buttons --------------------------------------------------------------- */
+html button:not(:disabled):hover, html .button:not(:disabled):hover { transform: none; box-shadow: none; }
+html .primary { background: var(--nv-fill); color: #FFFFFF; border: 1px solid var(--nv-fill); box-shadow: none; font-weight: 700; }
+html .primary::before { display: none; }
+html .primary:hover:not(:disabled) { background: var(--nv-fill-hover); border-color: var(--nv-fill-hover); box-shadow: none; }
+html .secondary { background: var(--nv-card); color: var(--nv-ink-2); border: 1px solid var(--nv-line-strong); }
+html .secondary:hover:not(:disabled) { background: var(--nv-sunken); color: var(--nv-ink); border-color: #C5C9CF; box-shadow: none; transform: none; }
+html .secondary.highlight { background: var(--nv-green-soft); color: var(--nv-green-text); border: 1px solid var(--nv-green-line); }
+/* Header utilities and the right tool rail: one quiet outline style. */
+html .license-button-fixed, html .settings-button-fixed, html .external-links-button-fixed, html .customer-service-btn,
+html #image-shortcut-btn, html #reopen-price-info-btn, html #right-toolbar-toggle,
+html #right-floating-buttons > .floating-btn:not(#launch-leword-btn) {
+  background: var(--nv-card) !important; color: var(--nv-ink-2) !important; border: 1px solid var(--nv-line-strong) !important;
+  box-shadow: var(--shadow-sm) !important; backdrop-filter: none; animation: none !important;
+}
+html #right-floating-buttons > .floating-btn:not(#launch-leword-btn) :not(.gold-badge) { color: inherit !important; }
+html #right-floating-buttons > #global-refresh-btn.floating-btn { color: var(--nv-red) !important; }
+html #launch-leword-btn { background: var(--nv-green-soft) !important; color: var(--nv-green-text) !important; border: 1px solid var(--nv-green-line) !important; box-shadow: var(--shadow-sm) !important; animation: none !important; }
+html #launch-leword-btn .gold-badge { background: var(--nv-red) !important; color: #FFFFFF !important; box-shadow: none !important; animation: none !important; }
+html #admin-gear-btn { background: var(--nv-card) !important; color: var(--nv-ink-3) !important; border-color: var(--nv-line-strong) !important; }
+html #publish-shortcut-btn, html #heading-image-setting-btn { background: var(--nv-fill) !important; color: #FFFFFF !important; border: none !important; box-shadow: var(--shadow-lg) !important; animation: none !important; }
+html #publish-shortcut-btn:hover, html #heading-image-setting-btn:hover { background: var(--nv-fill-hover) !important; filter: none; transform: none !important; }
+html .floating-btn:hover { transform: none; box-shadow: var(--shadow-md) !important; }
+html #member-badge { background: var(--nv-card) !important; border: 1px solid var(--nv-line) !important; color: var(--nv-ink-2) !important; box-shadow: var(--shadow-sm) !important; }
+html #member-badge-icon { background: var(--nv-green-soft) !important; border-color: var(--nv-green-line) !important; color: var(--nv-green-text) !important; }
+html #logout-btn { background: var(--nv-card) !important; border-color: var(--nv-line-strong) !important; color: var(--nv-red) !important; }
+html #license-badge-text { color: var(--nv-green-text) !important; }
+/* Leadernam AI floating button. */
+html .ai-assistant-floating { background: var(--nv-card); border: 1px solid var(--nv-line-strong); box-shadow: var(--shadow-lg); animation: none; }
+html .ai-assistant-floating::before, html .ai-btn-glow, html .ai-btn-shine { display: none; }
+html .ai-btn-title { background: none; color: var(--nv-ink); animation: none; }
+html .ai-btn-subtitle { color: var(--nv-ink-3); }
+html .ai-btn-icon { background: var(--nv-green-soft); }
+html .ai-btn-drag-handle { color: var(--nv-ink-4); }
+
+/* 6b. Class-based screens that kept literal dark colors beside their own tokens. */
+/* Image studio (thumbnail-studio.css). The template sample cards stay as drawn: they preview real thumbnail designs. */
+html #tab-image-tools .thumbnail-studio-shell { background: var(--nv-card); border-color: var(--nv-line); border-radius: 8px; }
+html #tab-image-tools .studio-heading-mark { color: var(--nv-green-text); }
+html #tab-image-tools .studio-live-dot { background: var(--nv-green); }
+html #tab-image-tools .thumb-preset-btn:hover { border-color: var(--nv-green-line); background: var(--nv-sunken); }
+html #tab-image-tools .thumb-preview-stage { background-color: var(--nv-sunken); background-image: radial-gradient(#D1D4D9 1px, transparent 1px); }
+html #tab-image-tools #thumb-canvas-wrap { box-shadow: var(--shadow-lg); }
+html #tab-image-tools .thumb-canvas-hint, html #tab-image-tools .studio-optional,
+html #image-source-studio #image-source-info-badge, html #image-source-studio .image-ai-disclosure-footer { color: var(--nv-ink-3); }
+html #tab-image-tools .studio-field label, html #tab-image-tools .thumb-control-section > label, html #tab-image-tools .studio-control-label,
+html #image-source-studio label, html #tab-image-tools .studio-check, html #image-source-studio #image-ai-mark-status { color: var(--nv-ink-2); }
+html #tab-image-tools #subtab-thumbnail button:not(.thumb-preset-btn), html #image-source-studio button { background: var(--nv-card); color: var(--nv-ink-2); }
+html #tab-image-tools #subtab-thumbnail button:not(.thumb-preset-btn):hover:not(:disabled), html #image-source-studio button:hover:not(:disabled) { border-color: var(--nv-green-line); background: var(--nv-sunken); }
+html #tab-image-tools #subtab-thumbnail button.studio-primary-button:not(.thumb-preset-btn) { background: var(--nv-fill); border-color: var(--nv-fill); color: #FFFFFF; }
+html #tab-image-tools #subtab-thumbnail button.studio-primary-button:not(.thumb-preset-btn):hover:not(:disabled) { background: var(--nv-fill-hover); border-color: var(--nv-fill-hover); }
+html #tab-image-tools .studio-segmented { background: var(--nv-sunken); border-color: var(--nv-line); }
+html #tab-image-tools #subtab-thumbnail .studio-segmented button { color: var(--nv-ink-3) !important; }
+html #tab-image-tools #subtab-thumbnail .studio-segmented button.selected { background: var(--nv-green-soft) !important; color: var(--nv-green-text) !important; }
+html #image-source-studio .image-ai-disclosure { background: var(--nv-sunken); }
+html #image-source-studio .studio-switch-track { background: #C5C9CF; }
+html #image-source-studio .studio-switch-track::before { background: #FFFFFF; box-shadow: var(--shadow-sm); }
+html #image-source-studio #image-ai-mark-all:checked + .studio-switch-track { background: var(--nv-fill); }
+/* Generated post library (styles.css). */
+html #unified-only-posts-list.posts-library-shell { background: var(--nv-card) !important; border-color: var(--nv-line) !important; border-radius: 8px !important; box-shadow: var(--shadow-sm); }
+html #unified-only-posts-list .posts-library-header { background: var(--nv-sunken) !important; border-bottom-color: var(--nv-line) !important; border-radius: 8px 8px 0 0; }
+html .posts-library-status, html #generated-posts-list .posts-progressive-status { color: var(--nv-ink-3); }
+html .posts-library-toolbar { background: var(--nv-sunken); border-color: var(--nv-line); }
+html .posts-library-toolbar input, html .posts-library-toolbar select, html .posts-library-toolbar button { background: var(--nv-card) !important; color: var(--nv-ink) !important; border-color: var(--nv-line-strong) !important; }
+html .posts-library-toolbar button:hover { background: var(--nv-sunken) !important; transform: none; }
+html .posts-library-toolbar #posts-batch-delete-btn, html #generated-posts-list .delete-post-btn { background: var(--nv-red-soft) !important; color: var(--nv-red) !important; border-color: #F7C9C5 !important; }
+html #generated-posts-list.posts-library-list { background: var(--nv-sunken) !important; border-color: var(--nv-line) !important; }
+html #generated-posts-list .posts-account-header { background: var(--nv-green-soft) !important; border-color: var(--nv-green-line) !important; }
+html #generated-posts-list .post-item, html #generated-posts-list .post-item-gallery { background: var(--nv-card) !important; border-color: var(--nv-line) !important; box-shadow: var(--shadow-sm) !important; }
+html #generated-posts-list .post-item:hover, html #generated-posts-list .post-item-gallery:hover { border-color: var(--nv-green-line) !important; box-shadow: var(--shadow-md) !important; }
+html #generated-posts-list .load-post-btn { background: var(--nv-fill) !important; color: #FFFFFF !important; box-shadow: none; }
+/* Status chips drawn by accountConnectPanel / accountManageWindow carry data-tone (their inline colors were tuned for black). */
+html [data-role="connect-chip"][data-tone="ok"], html [data-role="status"][data-tone="ok"] { color: var(--nv-green-text) !important; background: var(--nv-green-soft) !important; }
+html [data-role="connect-chip"][data-tone="warn"], html [data-role="status"][data-tone="stop"] { color: var(--nv-amber) !important; background: var(--nv-amber-soft) !important; }
+html [data-role="connect-chip"][data-tone="unknown"], html [data-role="status"][data-tone="unknown"] { color: var(--nv-ink-3) !important; background: var(--nv-sunken) !important; }
+/* Leadernam AI header buttons (white glyphs on a translucent white chip; the gold header became a tint). */
+html #ai-assistant-panel #ai-clear-chat, html #ai-assistant-panel #ai-assistant-close { background: var(--nv-card) !important; color: var(--nv-ink-2) !important; border: 1px solid var(--nv-line-strong) !important; }
+
+/* 7. Modals ---------------------------------------------------------------- */
+html .modal-backdrop { background: rgba(30, 30, 35, 0.42) !important; backdrop-filter: none !important; }
+html .modal-panel { backdrop-filter: none !important; background: var(--nv-card) !important; border: 1px solid var(--nv-line) !important; border-radius: 8px !important; box-shadow: var(--shadow-xl) !important; color: var(--nv-ink); }
+html .modal-panel h2 { background: none; color: var(--nv-ink); letter-spacing: -0.02em; }
+html .modal-close { background: transparent; color: var(--nv-ink-3); }
+html .modal-close:hover { background: var(--nv-sunken); color: var(--nv-ink); transform: none; }
+html .modal-actions { border-top-color: var(--nv-line); }
+html #settings-nav-buttons > button { background: var(--nv-card) !important; border: 1px solid var(--nv-line) !important; border-radius: 8px !important; box-shadow: none !important; }
+html #settings-nav-buttons > button:hover { border-color: var(--nv-green) !important; background: var(--nv-sunken) !important; }
+html #settings-nav-buttons > button div[style*="font-weight: 700"] { color: var(--nv-ink) !important; }
+html #settings-nav-buttons .nav-arrow { color: var(--nv-ink-4) !important; }
+html .daily-publishing-dialog { border: 1px solid var(--nv-line); box-shadow: var(--shadow-xl); background: var(--nv-card); color: var(--nv-ink); }
+html .daily-publishing-dialog::backdrop { background: rgba(30, 30, 35, 0.42); }
+html .daily-publishing-dialog input, html .daily-publishing-dialog select, html .daily-publishing-dialog textarea,
+html .daily-publishing-dialog button { background: var(--nv-card); border-color: var(--nv-line-strong); border-radius: 8px; }
+html .daily-publishing-dialog .daily-panel-primary { background: var(--nv-fill); border-color: var(--nv-fill); color: #FFFFFF; }
+html .daily-publishing-dialog .daily-panel-primary:hover:not(:disabled) { background: var(--nv-fill-hover); border-color: var(--nv-fill-hover); }
+html .daily-panel-status[data-error=true], html .daily-panel-block { color: var(--nv-amber); }
+html .toast { background: var(--nv-ink); color: #FFFFFF; border-radius: 8px; box-shadow: var(--shadow-lg); }
+html .loading-overlay { background: rgba(255, 255, 255, 0.85); }
+html .loading-content { background: var(--nv-card); color: var(--nv-ink); border: 1px solid var(--nv-line); }
+html .toast.toast { background: var(--nv-ink) !important; color: #FFFFFF !important; border-left: 4px solid var(--nv-green) !important; box-shadow: var(--shadow-lg) !important; }
+html .toast.toast.error { border-left-color: #FF6B5E !important; }
+html .toast.toast.warning { border-left-color: #F5B544 !important; }
+html .card-header { background: transparent; border-bottom-color: var(--nv-line); }
+html .publish-flow-card { background: var(--nv-card); border: 1px solid var(--nv-line-strong); border-radius: 8px; }
+html .publish-flow-card:hover { border-color: var(--nv-green-line); }
+html .publish-flow-card.active { border-color: var(--nv-green); box-shadow: 0 0 0 3px rgba(3, 199, 90, 0.12); }
+html .publish-flow-card.active .publish-flow-tag { background: var(--nv-green-soft); color: var(--nv-green-text); }
+/* Startup engine gate (startupEngineGate.ts inline styles; JS re-serialises them as rgb()). */
+html #startup-engine-gate { background: rgba(30, 30, 35, 0.42) !important; backdrop-filter: none !important; }
+html #startup-engine-gate > div { border-radius: 8px !important; box-shadow: var(--shadow-xl) !important; }
+html #startup-engine-gate [data-engine-option] { border-width: 1px !important; border-radius: 8px !important; }
+html #startup-engine-gate [data-engine-option]:is([style*="#4f46e5"], [style*="79, 70, 229"]) { border-color: var(--nv-green) !important; background: var(--nv-green-soft) !important; }
+html #startup-engine-gate [style*="#e0e7ff"] { background: var(--nv-green-soft) !important; color: var(--nv-green-text) !important; }
+html #startup-engine-gate-confirm { background: var(--nv-fill) !important; border-radius: 8px !important; }
+html #startup-engine-gate-confirm:disabled { background: #C5C9CF !important; }
+
+/* Layout: the fixed member badge (#left-status-badges, top 64px, about 43px tall) covered the start of the header
+   notes (measured 2026-11-03: note top 69px). Start the notes below the badge. */
+html .app-header > .summary-note[data-risk-warning] { margin-top: 60px; }

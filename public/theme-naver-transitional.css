@@ -1,0 +1,117 @@
+/* ============================================================================
+   theme-naver-transitional.css — TEMPORARY. Linked right after theme-naver.css.
+   Phases 2 and 3 shrink this sheet: as inline colors in index.html (phase 2) and
+   in renderer .ts cssText (phase 3) are replaced by classes, delete the matching
+   rules here. Do NOT add new rules to this file; new UI uses classes in
+   theme-naver.css. When nothing is left, delete the file and its <link>.
+   Variables it relies on (--nv-fill, --nv-green-soft, ...) live in theme-naver.css.
+   ========================================================================== */
+
+/* 8. Inline hard-coded colors -----------------------------------------------
+   index.html carries ~3,900 style="" attributes (plus runtime HTML from
+   src/renderer). These attribute selectors repaint the frequent ones until the
+   colors move to classes.
+   Gradient families resolve per element type: buttons, links and badges keep a
+   solid fill; blocks (div, section, p, label) fall back to a tint. */
+* { --nv-b-bg: var(--nv-green-soft); --nv-b-fg: var(--nv-ink); --nv-b-line: var(--nv-green-line);
+    --nv-d-bg: var(--nv-red-soft); --nv-d-fg: var(--nv-ink); --nv-d-line: #F7C9C5;
+    --nv-i-bg: var(--nv-sunken); --nv-i-fg: var(--nv-ink); --nv-i-line: var(--nv-line); }
+button, a, span, input { --nv-b-bg: var(--nv-fill); --nv-b-fg: #FFFFFF; --nv-b-line: var(--nv-fill);
+    --nv-d-bg: var(--nv-red); --nv-d-fg: #FFFFFF; --nv-d-line: var(--nv-red);
+    --nv-i-bg: var(--nv-card); --nv-i-fg: var(--nv-ink-2); --nv-i-line: var(--nv-line-strong); }
+
+/* 8a. Dark surfaces -> light sunken surface. */
+:is([style*="background: #1a1a2e" i], [style*="background:#1a1a2e" i], [style*="background: #1a1a1a" i], [style*="background:#1a1a1a" i],
+  [style*="background: #1f2937" i], [style*="background: #111827" i], [style*="background: #0f0f0f" i], [style*="background: #374151" i],
+  [style*="background: #475569" i], [style*="background: rgba(0,0,0,0."], [style*="background: rgba(0, 0, 0, 0."], [style*="background: rgb(26, 26, 26)"],
+  [style*="background: rgba(30, 30, 30"], [style*="background: rgba(15, 15, 15"], [style*="background: rgba(26, 26, 26"],
+  [style*="background: linear-gradient(160deg, #111827" i], [style*="background: linear-gradient(145deg, #1" i]) {
+  background: var(--nv-sunken) !important; color: var(--nv-ink) !important;
+}
+:is([style*="background: linear-gradient(135deg, var(--bg-"], [style*="background: linear-gradient(135deg, rgba("],
+  [style*="background: linear-gradient(180deg, rgba("], [style*="background: linear-gradient(135deg, rgba(212"]) { background: var(--nv-sunken) !important; }
+
+/* 8b. Brand families (purple / indigo / gold / green). */
+:is([style*="#8b5cf6, #7c3aed" i], [style*="#8b5cf6 0%, #7c3aed" i], [style*="#7c3aed, #6d28d9" i], [style*="#6366f1, #4f46e5" i],
+  [style*="#6366f1, #8b5cf6" i], [style*="#a855f7, #7c3aed" i], [style*="#8b5cf6, #6366f1" i], [style*="#a855f7, #8b5cf6" i],
+  [style*="#d4af37, #ffd700" i], [style*="#d4af37, #b8860b" i], [style*="#d4af37 0%" i], [style*="#10b981, #059669" i],
+  [style*="#10b981 0%, #059669" i], [style*="#22c55e, #16a34a" i], [style*="#059669, #047857" i], [style*="#047857, #10b981" i],
+  [style*="background: #8b5cf6" i], [style*="background: #7c3aed" i], [style*="background:#8b5cf6" i], [style*="background: #10b981" i],
+  [style*="background: #22c55e" i], [style*="rgb(139, 92, 246), rgb(124, 58, 237)"], [style*="rgb(99, 102, 241), rgb(79, 70, 229)"],
+  [style*="rgb(16, 185, 129), rgb(5, 150, 105)"], [style*="rgb(212, 175, 55)"][style*="gradient"],
+  [style*="background: rgb(139, 92, 246)"], [style*="background: rgb(124, 58, 237)"], [style*="background: rgb(79, 70, 229)"]) {
+  background: var(--nv-b-bg) !important; color: var(--nv-b-fg) !important; border-color: var(--nv-b-line) !important; box-shadow: none !important;
+}
+/* 8c. Info (blue / cyan / pink / teal) and danger (red) families; warn (amber) is always a tint. */
+:is([style*="#3b82f6, #2563eb" i], [style*="#3b82f6 0%, #2563eb" i], [style*="#3b82f6, #1d4ed8" i], [style*="#2563eb, #1d4ed8" i],
+  [style*="#0ea5e9, #0284c7" i], [style*="#06b6d4, #0891b2" i], [style*="#ec4899, #db2777" i], [style*="#14b8a6, #0d9488" i],
+  [style*="background: #3b82f6" i], [style*="background: #14b8a6" i], [style*="background: #f59e0b" i], [style*="background: #6b7280" i],
+  [style*="rgb(59, 130, 246), rgb(37, 99, 235)"]) {
+  background: var(--nv-i-bg) !important; color: var(--nv-i-fg) !important; border: 1px solid var(--nv-i-line) !important; box-shadow: none !important;
+}
+:is([style*="#ef4444, #dc2626" i], [style*="#dc2626, #b91c1c" i], [style*="background: #ef4444" i], [style*="rgb(239, 68, 68), rgb(220, 38, 38)"]) {
+  background: var(--nv-d-bg) !important; color: var(--nv-d-fg) !important; border-color: var(--nv-d-line) !important; box-shadow: none !important;
+}
+:is([style*="#f59e0b, #d97706" i], [style*="#f97316, #ea580c" i], [style*="#fbbf24, #f59e0b" i]) {
+  background: var(--nv-amber-soft) !important; color: var(--nv-amber) !important; border: 1px solid #F5D9A8 !important; box-shadow: none !important;
+}
+/* 8d. Translucent purple / gold tints -> green tint; dark-theme hairlines -> light lines. */
+:is([style*="background: rgba(139, 92, 246"], [style*="background: rgba(124, 58, 237"], [style*="background: rgba(168, 85, 247"],
+  [style*="background: rgba(99, 102, 241"], [style*="background: rgba(212, 175, 55"], [style*="background: rgba(212,175,55"],
+  [style*="background: rgba(139,92,246"], [style*="background: rgba(124,58,237"], [style*="background: rgba(168,85,247"], [style*="background: rgba(99,102,241"]) {
+  background: var(--nv-green-soft) !important; color: var(--nv-ink) !important;
+}
+:is([style*="solid rgba(139, 92, 246"], [style*="solid rgba(168, 85, 247"], [style*="solid rgba(99, 102, 241"], [style*="solid rgba(212, 175, 55"],
+  [style*="solid rgba(212,175,55"], [style*="solid rgba(139,92,246"], [style*="solid rgba(168,85,247"], [style*="solid rgba(99,102,241"], [style*="solid rgba(124,58,237"], [style*="solid #8b5cf6" i], [style*="solid #7c3aed" i], [style*="solid #d4af37" i]) { border-color: var(--nv-green-line) !important; }
+:is([style*="rgba(255,255,255,0.0"], [style*="rgba(255,255,255,0.1"], [style*="rgba(255, 255, 255, 0.1"], [style*="rgba(255,255,255,0.2"],
+  [style*="solid #374151" i], [style*="solid #1a1a1a" i], [style*="solid rgb(26, 26, 26)"]) { border-color: var(--nv-line) !important; }
+[style*="box-shadow: 0 "] { box-shadow: var(--shadow-sm) !important; }
+:is([style*="border: 2px solid"], [style*="border: 3px solid"], [style*="border:2px solid"]) { border-width: 1px !important; }
+/* Corner "?" help badges (blue / teal / amber / indigo at 0.9 alpha) -> one neutral marker, white 5.3:1. */
+button[style*="top: -6px; right: -6px"] { background: var(--nv-ink-3) !important; color: #FFFFFF !important; border: 2px solid #FFFFFF !important; }
+
+/* 8e. White text that sat on black now sits on white. Excludes text inside buttons and badges. */
+:is([style*="color: white"], [style*="color:white"], [style*="color: #fff" i], [style*="color:#fff" i], [style*="color: rgb(255, 255, 255)"]):is(
+  :not([style*="background"]), [style*="background: var(--bg-"], [style*="background:var(--bg-"], [style*="background: transparent"]):not(button *):not([class*="badge"] *) {
+  color: var(--nv-ink) !important;
+}
+/* 8f. Text colors tuned for black -> accessible on white (each >= 4.5:1). */
+:is([style*="color: #4ade80" i], [style*="color: #34d399" i], [style*="color: #10b981" i], [style*="color: #22c55e" i], [style*="color: #059669" i],
+  [style*="color:#10b981" i], [style*="color:#4ade80" i], [style*="color: #86efac" i], [style*="color: #a78bfa" i], [style*="color: #c4b5fd" i],
+  [style*="color: #c084fc" i], [style*="color: #8b5cf6" i], [style*="color: #7c3aed" i], [style*="color: #a855f7" i], [style*="color: #6366f1" i],
+  [style*="color: #d4af37" i], [style*="color: #16a34a" i], [style*="color: var(--primary)"], [style*="color: rgb(34, 197, 94)"],
+  [style*="color: rgb(16, 185, 129)"], [style*="color: rgb(74, 222, 128)"], [style*="color: rgb(139, 92, 246)"],
+  [style*="color: rgb(52, 211, 153)"], [style*="color: rgb(167, 139, 250)"]) { color: var(--nv-green-text) !important; }
+:is([style*="color: #fbbf24" i], [style*="color: #f59e0b" i], [style*="color: #fde68a" i], [style*="color: #fcd34d" i], [style*="color: #d97706" i],
+  [style*="color: #eab308" i], [style*="color:#fbbf24" i], [style*="color: #f97316" i], [style*="color: rgb(245, 158, 11)"],
+  [style*="color: rgb(251, 191, 36)"]) { color: var(--nv-amber) !important; }
+:is([style*="color: #fca5a5" i], [style*="color: #f87171" i], [style*="color: #ef4444" i], [style*="color:#ef4444" i], [style*="color:#ff6b6b" i],
+  [style*="color: rgb(239, 68, 68)"], [style*="color: rgb(248, 113, 113)"], [style*="color: rgb(252, 165, 165)"]) { color: var(--nv-red) !important; }
+:is([style*="color: #60a5fa" i], [style*="color: #93c5fd" i], [style*="color: #3b82f6" i], [style*="color: rgb(96, 165, 250)"], [style*="color: rgb(147, 197, 253)"]) { color: var(--nv-blue) !important; }
+:is([style*="color: #f472b6" i], [style*="color: #fbcfe8" i], [style*="color: #ec4899" i]) { color: var(--nv-pink) !important; }
+:is([style*="color: #a1a1aa" i], [style*="color: rgb(161, 161, 170)"], [style*="color: #94a3b8" i], [style*="color: #9ca3af" i], [style*="color: #cbd5e1" i], [style*="color: #d1d5db" i], [style*="color: #e5e7eb" i],
+  [style*="color: #e2e8f0" i], [style*="color: #b0bec5" i], [style*="color: #6b7280" i], [style*="color: #888" i], [style*="color: #aaa" i],
+  [style*="color: rgba(255,255,255,0."], [style*="color: rgba(255, 255, 255, 0."], [style*="color: rgb(203, 213, 225)"],
+  [style*="color: rgb(229, 231, 235)"], [style*="color: rgb(148, 163, 184)"]) { color: var(--nv-ink-3) !important; }
+
+/* 9. Windows built by renderer .ts with inline styles (phase 3 turns each into classes, then delete its rules). */
+/* 9a. Account manage window rows (accountManageWindow.ts). */
+html #account-manage-window li[data-account-id] { background: var(--nv-sunken) !important; border-color: var(--nv-line) !important; }
+html #account-manage-window li[data-account-id] button[data-action] { background: var(--nv-card) !important; border-color: var(--nv-line-strong) !important; }
+/* 9b. Main full-auto image setting window (HeadingImageSettings.ts: black + gold panel, own <style> block). */
+html #heading-image-modal { background: rgba(30, 30, 35, 0.42) !important; backdrop-filter: none !important; }
+html #heading-image-modal > div { background: var(--nv-card) !important; border: 1px solid var(--nv-line) !important; border-radius: 8px !important; box-shadow: var(--shadow-xl) !important; }
+html #heading-image-modal > div > div { background: var(--nv-card) !important; border-bottom-color: var(--nv-line) !important; }
+html #heading-image-modal h3 { color: var(--nv-ink) !important; text-shadow: none !important; }
+html #heading-image-modal p { color: var(--nv-ink-3) !important; }
+html #heading-image-close-btn { background: var(--nv-card) !important; border: 1px solid var(--nv-line-strong) !important; color: var(--nv-ink-2) !important; }
+html #heading-image-modal .premium-setting-btn, html #heading-image-modal .premium-checkbox { background: var(--nv-card); border: 1px solid var(--nv-line); box-shadow: none; transform: none; }
+html #heading-image-modal .premium-setting-btn:hover, html #heading-image-modal .premium-checkbox:hover { background: var(--nv-sunken); border-color: var(--nv-green); box-shadow: none; transform: none; }
+html #heading-image-modal .premium-setting-btn .btn-icon { background: var(--nv-green-soft) !important; box-shadow: none !important; }
+html #heading-image-modal .premium-setting-btn .btn-text, html #heading-image-modal .premium-checkbox .checkbox-label { color: var(--nv-ink); }
+html #heading-image-modal .premium-setting-btn .btn-value { color: var(--nv-green-text); }
+html #heading-image-modal .premium-setting-btn .arrow { color: var(--nv-ink-4); }
+html #heading-image-modal .premium-checkbox .checkbox-desc { color: var(--nv-ink-3); }
+html #heading-image-modal .shopping-connect-section { background: var(--nv-amber-soft); border-color: #F5D9A8; }
+html #heading-image-modal :is(select, textarea, input:not([type="checkbox"]):not([type="radio"])) { background: var(--nv-card) !important; color: var(--nv-ink) !important; border: 1px solid var(--nv-line-strong) !important; }
+html #heading-image-modal :is(label, span, div, small):not([class*="badge"]):not(button *) { color: var(--nv-ink-2); }

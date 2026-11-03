@@ -203,7 +203,7 @@ body.right-tools-collapsed #ai-assistant-btn {
   background: #3c3320;
 }
 
-/* [2026-11-03] 매일 예약발행 — 접기 토글 바로 왼쪽, 네이버 초록. body 바로 아래에 있어 fixed 가 화면에 붙는다. */
+/* [2026-11-03] 매일 예약발행 — 접기 토글 바로 왼쪽, 테마 채움 초록(--nv-fill, theme-naver.css). body 바로 아래에 있어 fixed 가 화면에 붙는다. */
 #open-daily-publishing {
   position: fixed;
   top: 56px;
@@ -214,7 +214,7 @@ body.right-tools-collapsed #ai-assistant-btn {
   padding: 0 14px;
   border: none;
   border-radius: 999px;
-  background: #03C75A;
+  background: var(--nv-fill, #00873C);
   color: #fff;
   font-family: inherit;
   font-size: 0.78rem;
@@ -224,7 +224,7 @@ body.right-tools-collapsed #ai-assistant-btn {
 }
 
 #open-daily-publishing:hover {
-  background: #02B350;
+  background: var(--nv-fill-hover, #00702F);
 }
 
 #open-daily-publishing:focus-visible {

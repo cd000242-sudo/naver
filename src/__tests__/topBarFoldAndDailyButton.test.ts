@@ -3,7 +3,7 @@
  * [2026-11-03] 메인 화면 맨 위 정리.
  *  - "AI 탐지 · 법적 위험 · 품질 점수 · 일일 권장" 카드 줄과 "에이전트 잔여" 배지는 기본 접힘(토글 + localStorage 기억).
  *    접혀 있어도 갱신 코드는 그대로 동작해야 하므로 DOM 에서 지우지 않고 숨기기만 한다.
- *  - [매일 예약발행] 버튼은 오른쪽 위 "도구 접기" 토글 바로 왼쪽의 네이버 초록 버튼.
+ *  - [매일 예약발행] 버튼은 오른쪽 위 "도구 접기" 토글 바로 왼쪽의 테마 채움 초록 버튼.
  */
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -150,13 +150,15 @@ describe('[매일 예약발행] 버튼 위치', () => {
     expect(dailyRule).toMatch(/right:\s*calc\(16px \+ var\(--right-toggle-width\) \+ 8px\)/);
   });
 
-  it('네이버 초록 #03C75A, hover #02B350, 흰 글자, 둥근 모서리', () => {
+  // [2026-11-03 theme phase 1] The brand green #03C75A is 2.25:1 under white text, so the button follows the
+  // theme's AA fill (--nv-fill #00873C, hover --nv-fill-hover) instead of a hard-coded color.
+  it('테마 채움 초록(--nv-fill, hover --nv-fill-hover), 흰 글자, 둥근 모서리', () => {
     const dailyRule = floatingCss.match(/#open-daily-publishing\s*\{[^}]*\}/)![0];
     const hoverRule = floatingCss.match(/#open-daily-publishing:hover\s*\{[^}]*\}/)![0];
-    expect(dailyRule).toMatch(/background:\s*#03C75A/i);
+    expect(dailyRule).toMatch(/background:\s*var\(--nv-fill,\s*#00873C\)/i);
     expect(dailyRule).toMatch(/color:\s*#fff/i);
     expect(dailyRule).toMatch(/border-radius:\s*\d+(px|rem)/);
-    expect(hoverRule).toMatch(/background:\s*#02B350/i);
+    expect(hoverRule).toMatch(/background:\s*var\(--nv-fill-hover,/i);
   });
 
   it('daily-publishing.css 의 공통 회색 버튼 규칙이 이 버튼을 더는 덮지 않는다', () => {
