@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T06:25:52.266Z",
+ "builtAt": "2026-11-03T06:35:56.356Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,165 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
+ "measured": 28,
  "candidates": [
   {
-   "keyword": "리센느 컴백",
+   "keyword": "금융권 해킹 CEO 책임",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 99,
-   "recent20": 41,
-   "press": 36,
-   "firstArticleAt": "2026-11-03T05:42:00.000Z",
+   "articles90": 56,
+   "recent20": 13,
+   "press": 54,
+   "firstArticleAt": "2026-11-03T05:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[HD포토] 리센느 메이, '이예빈 키 3메다' (PULSE 쇼케이스)",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-03T06:24:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267074"
+     "title": "이찬진 금감원장 \"해킹 사고 발생 시 CEO 책임…매출 3% 과징금 추진\"",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-03T06:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000548336?sid=101"
     },
     {
-     "title": "리센느 '남다른 컴백 무대'[★포토]",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-03T06:23:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003484154"
+     "title": "이찬진, 금융사 '해킹' CEO 책임 강조⋯'매출 3%' 과징금 추진",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-03T06:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001071806?sid=101"
     },
     {
-     "title": "리센느 '힘 넘치는 컴백 무대'[★포토]",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-03T06:22:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003484153"
+     "title": "이찬진 \"해킹 금융사 CEO 책임 묻는다\"…매출액 3% 과징금 추진",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-03T06:32:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=879371"
+    }
+   ]
+  },
+  {
+   "keyword": "미국 중간선거",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 53,
+   "recent20": 14,
+   "press": 40,
+   "firstArticleAt": "2026-11-03T05:10:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "美 법무부, 중간선거 전날 선거범죄 63명 기소 사례 공개",
+     "press": "news2day.co.kr",
+     "publishedAt": "2026-11-03T06:34:00.000Z",
+     "link": "https://www.news2day.co.kr/article/20261103500233"
+    },
+    {
+     "title": "백악관 벌써 중간선거 패색…트럼프 국정 '의회 패싱' 몰두",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-03T06:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016419005?sid=104"
+    },
+    {
+     "title": "조지아·노스캐롤라이나서 '블루웨이브' 단서…美 중간선거 결과 언제쯤",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-03T06:30:00.000Z",
+     "link": "https://www.ajunews.com/view/20261103151253361"
+    }
+   ]
+  },
+  {
+   "keyword": "카카오페이 영업익 증가",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 35,
+   "recent20": 2,
+   "press": 33,
+   "firstArticleAt": "2026-11-03T05:11:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "카카오페이, 3분기 영업익 325억…전년比 105% 늘어",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T06:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009267479?sid=105"
+    },
+    {
+     "title": "카카오페이, 3분기 매출 3021억원…영업익 105% 증가",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-03T06:16:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5079206"
+    },
+    {
+     "title": "카카오페이, 결제·보험 성장에 3분기 영업익 전년비 105% 증가",
+     "press": "newspost.kr",
+     "publishedAt": "2026-11-03T06:08:00.000Z",
+     "link": "https://www.newspost.kr/news/articleView.html?idxno=227006"
+    }
+   ]
+  },
+  {
+   "keyword": "교육혁신선도지역 지정",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 57,
+   "recent20": 13,
+   "press": 28,
+   "firstArticleAt": "2026-11-03T05:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"연 최대 40억 국비 푼다\"…교육부, '교육혁신선도지역' 43곳 확정",
+     "press": "youthdaily.co.kr",
+     "publishedAt": "2026-11-03T06:32:00.000Z",
+     "link": "https://www.youthdaily.co.kr/news/article.html?no=229299"
+    },
+    {
+     "title": "경북 6곳·대구 교육혁신선도지역 선정…작은 학교 살린다",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-03T06:32:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261103500611"
+    },
+    {
+     "title": "전남광주 교육혁신 선도지역 8곳 선정 '전국 최다'",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-03T06:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016419001?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "대통령 순방단 개인정보 유출",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 29,
+   "recent20": 9,
+   "press": 26,
+   "firstArticleAt": "2026-11-03T05:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "靑, 대통령 순방단 개인정보 유출에 긴급회의..\"중대 사안\"",
+     "press": "enewstoday.co.kr",
+     "publishedAt": "2026-11-03T06:34:00.000Z",
+     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2487855"
+    },
+    {
+     "title": "[이슈체크] '공군 1호기' 탑승자 개인정보 유출 파문… 5개월 방치된 '경...",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-03T06:34:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=248984"
+    },
+    {
+     "title": "이 대통령, '사이버 보안 차르' 검토 지시…공군 1호기 168명 개인정보 ...",
+     "press": "dailysecu.com",
+     "publishedAt": "2026-11-03T06:32:00.000Z",
+     "link": "https://www.dailysecu.com/news/articleView.html?idxno=209298"
     }
    ]
   },
@@ -48,94 +176,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 40,
-   "recent20": 7,
-   "press": 28,
-   "firstArticleAt": "2026-11-03T04:56:00.000Z",
+   "articles90": 37,
+   "recent20": 4,
+   "press": 26,
+   "firstArticleAt": "2026-11-03T05:07:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "가공식품·기름값 상승에 10월 물가 2.8% 상승…김장물가도 변수",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-03T06:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003562498?sid=101"
+    },
+    {
+     "title": "10월 소비자물가 2.8% 상승…생활물가는 오름폭 확대",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-03T06:28:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=399889"
+    },
     {
      "title": "전남광주 농축수산물 가격 하락…공업제품 영향에 물가 2.8%↑",
      "press": "aitimes.com",
      "publishedAt": "2026-11-03T06:24:00.000Z",
      "link": "https://www.aitimes.com/news/articleView.html?idxno=216950"
-    },
-    {
-     "title": "[이로운체크] 물가 둔화에도 외식비는 껑충…정부, 김장철 640억 푼다",
-     "press": "eroun.net",
-     "publishedAt": "2026-11-03T06:22:00.000Z",
-     "link": "https://www.eroun.net/news/articleView.html?idxno=94261"
-    },
-    {
-     "title": "물가 둔화에도 '11월 금리인상' 전망…긴축 고삐 못 푸는 한은",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-03T06:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006402880?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "배나라 한재아 결혼",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 29,
-   "recent20": 4,
-   "press": 23,
-   "firstArticleAt": "2026-11-03T04:58:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "배나라♥한재아, 7년 교제 끝 결혼..“평생 함께 걷고 싶은 사람” [종합...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-03T06:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005633550"
-    },
-    {
-     "title": "배나라·한재아, 14일 성당서 결혼…뮤지컬계 부부 탄생 [종합]",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-03T06:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000326520"
-    },
-    {
-     "title": "[공식] 배나라♥한재아 14일 결혼 “인생 함께하기로 약속”",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-03T06:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001302673"
-    }
-   ]
-  },
-  {
-   "keyword": "교육혁신선도지역 결과 발표",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 44,
-   "recent20": 2,
-   "press": 17,
-   "firstArticleAt": "2026-11-03T05:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "강원 8개 시·군 '교육혁신선도지역' 선정…전국 최다",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-03T06:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004206020?sid=102"
-    },
-    {
-     "title": "'교육혁신 선도지역' 제주 탈락",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-03T06:10:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=846023"
-    },
-    {
-     "title": "전북 5개 시군, 교육부 '교육혁신선도지역' 선정",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-03T06:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004206006?sid=102"
     }
    ]
   },
@@ -144,126 +208,95 @@
    "sources": [
     "google"
    ],
-   "articles90": 8,
-   "recent20": 8,
-   "press": 8,
-   "firstArticleAt": "2026-11-03T06:06:00.000Z",
+   "articles90": 9,
+   "recent20": 9,
+   "press": 9,
+   "firstArticleAt": "2026-11-03T06:24:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "김영기 전 전남대 교수, 제7대 글로벌광주방송 사장 취임…“글로벌 미...",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-03T06:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003481650?sid=102"
+     "title": "세종충남대병원 최규태 교수, 진단검사 업무자동화 공모전 최우수상",
+     "press": "ccreview.co.kr",
+     "publishedAt": "2026-11-03T06:34:00.000Z",
+     "link": "https://www.ccreview.co.kr/news/articleView.html?idxno=361618"
     },
     {
-     "title": "지웅배 세종대 교수, 외계 문명의 과학 발전 조건 연구",
-     "press": "asiatime.co.kr",
-     "publishedAt": "2026-11-03T06:24:00.000Z",
-     "link": "https://www.asiatime.co.kr/article/20261103500350"
+     "title": "고대안암 장기모 교수팀 우수연제상",
+     "press": "medical-tribune.co.kr",
+     "publishedAt": "2026-11-03T06:32:00.000Z",
+     "link": "http://www.medical-tribune.co.kr/news/articleView.html?idxno=215734"
     },
     {
-     "title": "전북대학교 김정길 교수팀, 섬유형 이차전지 전극 소재 연속생산 기술 ...",
-     "press": "lecturernews.com",
-     "publishedAt": "2026-11-03T06:16:00.000Z",
-     "link": "https://www.lecturernews.com/news/articleView.html?idxno=212943"
+     "title": "에너지경제연구원장에 '공공성 강화' 주창 송재도 전남대 교수",
+     "press": "e2news.com",
+     "publishedAt": "2026-11-03T06:32:00.000Z",
+     "link": "http://www.e2news.com/news/articleView.html?idxno=335734"
     }
    ]
   },
   {
-   "keyword": "토론회 참석한 장동혁 대표",
+   "keyword": "장동혁 대표, 청년 간담회 참석",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 8,
+   "articles90": 11,
    "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-03T05:18:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-03T05:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "같은 시간 국회 토론회 개최한 吳·韓…의원 수십명 몰렸다",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-03T06:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001882679?sid=100"
-    },
-    {
-     "title": "장동혁 \"갈등 키우는 보수 통합, 본질에 어긋나…당원 뜻 물을 것\"",
+     "title": "장동혁 \"부동산, 말 아닌 공급해야…규제로 해결하니 문제\"",
      "press": "news1.kr",
-     "publishedAt": "2026-11-03T06:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009267460?sid=100"
+     "publishedAt": "2026-11-03T06:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009267484?sid=100"
     },
     {
-     "title": "[토론회] 韓 \"공천권, 당권 쥔 세력의 전유물 아냐\"…김기현·윤상현과...",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-03T06:04:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=747575"
+     "title": "청년 주거 현장 간담회, 모두발언하는 장동혁 대표",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-03T06:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004206030?sid=100"
+    },
+    {
+     "title": "청년 원룸 찾은 장동혁 \"부동산은 말 아닌 공급으로 해결해야\"",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-03T06:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005837448?sid=100"
     }
    ]
   },
   {
-   "keyword": "가상자산 과세 유예 논의",
+   "keyword": "예세민 검찰총장 후보 물망",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-03T04:56:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "與 재경위, 가상자산 과세 또 미루나…'2년 유예' 거론",
-     "press": "press9.kr",
-     "publishedAt": "2026-11-03T05:54:00.000Z",
-     "link": "http://www.press9.kr/news/articleView.html?idxno=85501"
-    },
-    {
-     "title": "與 재경위원들 \"가상자산 과세 유예 당 지도부에 건의\"",
-     "press": "seouleconews.com",
-     "publishedAt": "2026-11-03T05:14:00.000Z",
-     "link": "http://www.seouleconews.com/news/articleView.html?idxno=94755"
-    },
-    {
-     "title": "가상자산 과세 유예, 민주당 재경위도 공식화…\"내년 바로 과세보다 준...",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-03T05:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000518874?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "서울양평 고속도로 재추진",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-03T04:57:00.000Z",
+   "articles90": 3,
+   "recent20": 3,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T06:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "멈췄던 서울~양평 고속도로 재시동…노선 원점서 다시 짠다",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-03T06:08:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=500950"
+     "title": "이르면 9일 초대 공소청 수장 후보 3명 압축",
+     "press": "busan.com",
+     "publishedAt": "2026-11-03T06:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001405409?sid=102"
     },
     {
-     "title": "서울-양평 고속도로 신규 타당성조사 착수… 원점서 최적 경로 도출",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-03T05:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000130390?sid=101"
+     "title": "초대 공소청 수장 후보에 이정현·예세민·박철우 3인 물망...후보추천위...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-03T06:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000963354?sid=102"
     },
     {
-     "title": "서울-양평고속도로 사업 재개…신규 타당성조사 착수",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-03T05:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012286257?sid=101"
+     "title": "공소청 이끌 검찰총장 후보에 이정현·박철우·예세민 물망… 공석 1년...",
+     "press": "lawissue.co.kr",
+     "publishedAt": "2026-11-03T06:20:00.000Z",
+     "link": "https://www.lawissue.co.kr/view.php?ud=20261103151706526b3279dfb36_12"
     }
    ]
   },
@@ -273,7 +306,7 @@
     "nate"
    ],
    "articles90": 17,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-03T05:40:00.000Z",
    "exclusive": false,
@@ -292,20 +325,59 @@
      "link": "https://n.news.naver.com/mnews/article/003/0014298303?sid=102"
     },
     {
-     "title": "정미년 달력 제작으로 분주",
+     "title": "인쇄되는 2027년 정미년 달력",
      "press": "newsis.com",
      "publishedAt": "2026-11-03T05:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014298285?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/003/0014298284?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "이창호 2000승 달성",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 12,
+   "recent20": 1,
+   "press": 2,
+   "firstArticleAt": "2026-11-03T05:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[포토타임] 40년 바둑 인생에 새긴 세계 최초 기록…‘돌부처’ 이창호...",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-03T06:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003562495?sid=102"
+    },
+    {
+     "title": "프로 통산 2000승 대기록 작성한 이창호 9단",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T05:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009267288?sid=102"
+    },
+    {
+     "title": "'돌부처' 이창호, 세계 바둑 첫 2000승 '쾌거'",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T05:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009267287?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 372,
-  "matched": 137,
-  "avgLeadMin": 233,
+  "flagged": 378,
+  "matched": 138,
+  "avgLeadMin": 232,
   "recent": [
+   {
+    "keyword": "배나라 한재아 결혼",
+    "hitKeyword": "배나라 한재아 결혼",
+    "hitAt": "2026-11-03T15:30:00+09:00",
+    "leadMin": 24
+   },
    {
     "keyword": "LG엔솔 3분기 영업익",
     "hitKeyword": "LG에너지솔루션 3분기 호조",
@@ -359,12 +431,6 @@
     "hitKeyword": "감기약 마약 제조",
     "hitAt": "2026-11-03T14:00:00+09:00",
     "leadMin": 55
-   },
-   {
-    "keyword": "리센느 컴백",
-    "hitKeyword": "리센느 컴백",
-    "hitAt": "2026-11-03T13:30:00+09:00",
-    "leadMin": 186
    }
   ]
  }
