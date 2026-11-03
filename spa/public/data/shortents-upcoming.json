@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T06:45:59.719Z",
+ "builtAt": "2026-11-03T06:56:05.043Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,29 +16,61 @@
     "signal.bz"
    ],
    "articles90": 61,
-   "recent20": 13,
+   "recent20": 7,
    "press": 59,
-   "firstArticleAt": "2026-11-03T05:16:00.000Z",
+   "firstArticleAt": "2026-11-03T05:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이찬진 “대형 금융사 해킹 사고, CEO까지 책임 묻겠다”",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-03T06:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003480380?sid=101"
+     "title": "이찬진 금감원장, 금융권 해킹 사고에 경영진 책임 강화 지시",
+     "press": "digitaltoday.co.kr",
+     "publishedAt": "2026-11-03T06:52:00.000Z",
+     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=712131"
     },
     {
-     "title": "이찬진 \"해킹사고 '매출액 3%' 과징금 추진…CEO 책임 묻는다\"",
-     "press": "dealsite.co.kr",
-     "publishedAt": "2026-11-03T06:42:00.000Z",
-     "link": "https://dealsite.co.kr/articles/171968"
+     "title": "금감원, 금융권 해킹 대응 강화…CEO 책임 묻고 과징금 3% 추진",
+     "press": "srtimes.kr",
+     "publishedAt": "2026-11-03T06:46:00.000Z",
+     "link": "http://www.srtimes.kr/news/articleView.html?idxno=216624"
     },
     {
-     "title": "이찬진 금감원장 \"종투사·보험사도 해킹사고 발생시 CEO 책임 물을 것\"",
-     "press": "taxtimes.co.kr",
-     "publishedAt": "2026-11-03T06:40:00.000Z",
-     "link": "https://www.taxtimes.co.kr/news/article.html?no=277590"
+     "title": "해킹사고 나면 연임 불가?…대규모 인사 앞둔 금융권 '긴장'",
+     "press": "peoplewatch.co.kr",
+     "publishedAt": "2026-11-03T06:46:00.000Z",
+     "link": "https://www.peoplewatch.co.kr/article/view/ppw202611030011"
+    }
+   ]
+  },
+  {
+   "keyword": "미국 중간선거",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 48,
+   "recent20": 16,
+   "press": 35,
+   "firstArticleAt": "2026-11-03T05:42:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "미 중간선거, 미·중 ‘전략적 안정’ 시험대…“트럼프, 관계 안정 추구...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-03T06:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002830487?sid=104"
+    },
+    {
+     "title": "美중간선거, 코스피 방향 바꿀까…증권가 \"AI 수요·외국인 수급 관건\"",
+     "press": "newsquest.co.kr",
+     "publishedAt": "2026-11-03T06:54:00.000Z",
+     "link": "https://www.newsquest.co.kr/news/articleView.html?idxno=304117"
+    },
+    {
+     "title": "중간선거 앞두고 등 돌린 美 보수층?…폭스뉴스, 10월 시청률 급락",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-03T06:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005435946?sid=104"
     }
    ]
   },
@@ -48,30 +80,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 38,
-   "recent20": 12,
-   "press": 28,
-   "firstArticleAt": "2026-11-03T05:16:00.000Z",
+   "articles90": 32,
+   "recent20": 9,
+   "press": 25,
+   "firstArticleAt": "2026-11-03T05:27:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "충청 생활물가 '고공행진'… 석유류 급등에 서민 부담 가중",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-03T06:54:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1190866"
+    },
+    {
+     "title": "물가 두 달째 둔화에도 근원물가 '그대로'…한은 금리 인상 판단 변수로",
+     "press": "businessplus.kr",
+     "publishedAt": "2026-11-03T06:52:00.000Z",
+     "link": "https://www.businessplus.kr/news/articleView.html?idxno=119191"
+    },
     {
      "title": "가공식품 물가 2.9% 상승…먹거리 부담 지속",
      "press": "news1.kr",
      "publishedAt": "2026-11-03T06:43:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009267535?sid=101"
-    },
-    {
-     "title": "즉석식품 12.4% 상승…가공식품 물가 오름세",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T06:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009267534?sid=101"
-    },
-    {
-     "title": "즉석식품 가격 12.4% 상승…가공식품 물가 오름세",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T06:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009267537?sid=101"
     }
    ]
   },
@@ -80,13 +112,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 49,
-   "recent20": 5,
-   "press": 22,
-   "firstArticleAt": "2026-11-03T05:17:00.000Z",
+   "articles90": 40,
+   "recent20": 1,
+   "press": 21,
+   "firstArticleAt": "2026-11-03T05:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "전북 5개 시군, 교육혁신선도지역 선정",
+     "press": "kfenews.co.kr",
+     "publishedAt": "2026-11-03T06:52:00.000Z",
+     "link": "https://www.kfenews.co.kr/news/articleView.html?idxno=667456"
+    },
     {
      "title": "'교육전용선' 띄우고 고학년은 거점 합반…'교육혁신선도지역' 43곳 시동",
      "press": "ajunews.com",
@@ -98,44 +136,38 @@
      "press": "youthdaily.co.kr",
      "publishedAt": "2026-11-03T06:32:00.000Z",
      "link": "https://www.youthdaily.co.kr/news/article.html?no=229299"
-    },
-    {
-     "title": "경북 6곳·대구 교육혁신선도지역 선정…작은 학교 살린다",
-     "press": "kbmaeil.com",
-     "publishedAt": "2026-11-03T06:32:00.000Z",
-     "link": "https://www.kbmaeil.com/article/20261103500611"
     }
    ]
   },
   {
-   "keyword": "교수",
+   "keyword": "질산 누출",
    "sources": [
-    "google"
+    "daum"
    ],
    "articles90": 14,
-   "recent20": 14,
+   "recent20": 7,
    "press": 12,
    "firstArticleAt": "2026-11-03T06:28:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "글로벌광주방송 제7대 사장에 김영기 전 전남대 교수 취임",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-03T06:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002464072?sid=102"
+     "title": "안산시 원시동 질산 누출 사고…\"창문 닫고 우회 운행 당부\"",
+     "press": "news.skbroadband.com",
+     "publishedAt": "2026-11-03T06:54:00.000Z",
+     "link": "https://news.skbroadband.com/news/articleView.html?idxno=242188"
     },
     {
-     "title": "한남대 건설환경공학과 권성준·김민경 교수, 한국건설순환자원학회 논...",
-     "press": "jeonmae.co.kr",
-     "publishedAt": "2026-11-03T06:42:00.000Z",
-     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1308140"
+     "title": "[속보] 안산 '질산 누출'로 원시역 2번 출구 폐쇄…열차는 정상 운행",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T06:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009267589?sid=102"
     },
     {
-     "title": "“AI가 내린 결정, 이해 못 해도 따라야 하나” 정재승 교수의 경고",
-     "press": "futurechosun.com",
-     "publishedAt": "2026-11-03T06:40:00.000Z",
-     "link": "https://futurechosun.com/?p=165368"
+     "title": "안산 서해선 원시역 인근 공장서 질산 누출…2번출구 인근 통제",
+     "press": "joongboo.com",
+     "publishedAt": "2026-11-03T06:52:00.000Z",
+     "link": "https://www.joongboo.com/news/articleView.html?idxno=363741331"
     }
    ]
   },
@@ -145,7 +177,7 @@
     "signal.bz"
    ],
    "articles90": 11,
-   "recent20": 2,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-03T05:41:00.000Z",
    "exclusive": false,
@@ -172,14 +204,46 @@
    ]
   },
   {
+   "keyword": "손영권",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 4,
+   "press": 5,
+   "firstArticleAt": "2026-11-03T05:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘MIT 선후배’ 슈퍼모델 김자연·전 삼성전자 사장 손영권 결혼…25살 ...",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-03T06:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000759897"
+    },
+    {
+     "title": "'25살 차'…슈퍼모델 김자연·손영권 삼성전자 고문 스위스서 결혼",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T06:45:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014298481"
+    },
+    {
+     "title": "슈퍼모델 출신 45세 김자연, 70세 삼성전자 전 사장 손영권과 스위스서...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-03T06:38:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1171453"
+    }
+   ]
+  },
+  {
    "keyword": "신세계그룹",
    "sources": [
     "google"
    ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-03T05:26:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T06:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -200,70 +264,6 @@
      "press": "meconomynews.com",
      "publishedAt": "2026-11-03T06:20:00.000Z",
      "link": "https://www.meconomynews.com/news/articleView.html?idxno=203208"
-    }
-   ]
-  },
-  {
-   "keyword": "손영권",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T05:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "슈퍼모델 출신 45세 김자연, 70세 삼성전자 전 사장 손영권과 스위스서...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-03T06:38:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1171453"
-    },
-    {
-     "title": "25살 차이 극복…슈퍼모델 김자연, 전 삼성전자 사장 손영권과 결혼 [자...",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-03T06:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000366239?sid=101"
-    },
-    {
-     "title": "45살 '슈퍼모델' 김자연, 70살 삼성전자 전 사장 손영권과 스위스서 로맨...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-03T05:46:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004121400"
-    }
-   ]
-  },
-  {
-   "keyword": "예세민 검찰총장 후보 물망",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T06:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이르면 9일 초대 공소청 수장 후보 3명 압축",
-     "press": "busan.com",
-     "publishedAt": "2026-11-03T06:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001405409?sid=102"
-    },
-    {
-     "title": "초대 공소청 수장 후보에 이정현·예세민·박철우 3인 물망...후보추천위...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-03T06:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000963354?sid=102"
-    },
-    {
-     "title": "공소청 이끌 검찰총장 후보에 이정현·박철우·예세민 물망… 공석 1년...",
-     "press": "lawissue.co.kr",
-     "publishedAt": "2026-11-03T06:20:00.000Z",
-     "link": "https://www.lawissue.co.kr/view.php?ud=20261103151706526b3279dfb36_12"
     }
    ]
   },
@@ -292,42 +292,42 @@
      "link": "https://n.news.naver.com/mnews/article/003/0014298303?sid=102"
     },
     {
-     "title": "인쇄되는 2027년 정미년 달력",
+     "title": "정미년 달력 제작으로 분주",
      "press": "newsis.com",
      "publishedAt": "2026-11-03T05:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014298284?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/003/0014298285?sid=102"
     }
    ]
   },
   {
-   "keyword": "서울 외국인 8.8조 소비",
+   "keyword": "2026 미래경제포럼 축사하는",
    "sources": [
     "nate"
    ],
-   "articles90": 3,
+   "articles90": 19,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T05:21:00.000Z",
+   "press": 2,
+   "firstArticleAt": "2026-11-03T05:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "서울 찾은 외국인, 9개월 만에 8.8조 썼다…작년 연간 실적 이미 넘어",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-03T06:18:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2013662"
+     "title": "[미래경제포럼] 이재정 문체위원장 \"AI세계규범 창조에 韓日 앞장섰으면...",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-03T06:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016418984?sid=100"
     },
     {
-     "title": "서울 찾은 외국인 관광객·소비액 ‘역대 최고’…9개월간 8.8조 썼다",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-03T05:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202227?sid=102"
+     "title": "축사하는 다케다 료타 일한의원연맹 회장",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-03T06:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016418925?sid=105"
     },
     {
-     "title": "서울 방문 외국인, 9개월간 8.8조 소비",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T05:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009267166?sid=102"
+     "title": "축사하는 구자열 한일경제협회장",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-03T06:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016418917?sid=105"
     }
    ]
   },
@@ -337,7 +337,7 @@
     "signal.bz"
    ],
    "articles90": 12,
-   "recent20": 1,
+   "recent20": 0,
    "press": 2,
    "firstArticleAt": "2026-11-03T05:38:00.000Z",
    "exclusive": false,
@@ -362,43 +362,11 @@
      "link": "https://n.news.naver.com/mnews/article/421/0009267288?sid=102"
     }
    ]
-  },
-  {
-   "keyword": "2026 미래경제포럼 축사하는",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 21,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-03T05:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[미래경제포럼] 이재정 문체위원장 \"AI세계규범 창조에 韓日 앞장섰으면...",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T06:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016418984?sid=100"
-    },
-    {
-     "title": "축사하는 다케다 료타 일한의원연맹 회장",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T06:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016418925?sid=105"
-    },
-    {
-     "title": "축사하는 구자열 한일경제협회장",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T06:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016418917?sid=105"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 382,
+  "flagged": 383,
   "matched": 138,
   "avgLeadMin": 232,
   "recent": [
