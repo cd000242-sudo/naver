@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T03:44:42.555Z",
+ "builtAt": "2026-11-03T03:54:46.027Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,30 +16,62 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 54,
-   "recent20": 11,
-   "press": 33,
-   "firstArticleAt": "2026-11-03T02:15:00.000Z",
+   "articles90": 46,
+   "recent20": 9,
+   "press": 32,
+   "firstArticleAt": "2026-11-03T02:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김지용 중수청장 국무회의 세 번 연속 참석…이 대통령은 \"오셨죠?\"",
+     "title": "이주민 단체, 이 대통령의 '이주노동자·다문화가정' 발언 규탄[노컷네...",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-03T03:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004205922?sid=102"
+    },
+    {
+     "title": "이재명 대통령 “‘사이버보안 차르’ 구성 검토하라…범정부 기구 필요...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-03T03:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005758154?sid=100"
+    },
+    {
+     "title": "이 대통령 “약자 지원책 세심하게 마련하되, 공정성 고려해야”",
+     "press": "vop.co.kr",
+     "publishedAt": "2026-11-03T03:44:00.000Z",
+     "link": "https://vop.co.kr/A00001697441.html"
+    }
+   ]
+  },
+  {
+   "keyword": "재혼 황후 이종석 왕자 역할 부담",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 29,
+   "recent20": 6,
+   "press": 23,
+   "firstArticleAt": "2026-11-03T02:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'재혼 황후', 공개일 앞당긴 승부수…K-로판 대작 출발(종합)",
      "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-03T03:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000548223?sid=102"
+     "publishedAt": "2026-11-03T03:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/629/0000548226"
     },
     {
-     "title": "李대통령 \"서울 아파트 매물 늘고 거래량 줄어…정확한 데이터 알려야\"",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-03T03:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005598583?sid=100"
+     "title": "신민아·주지훈·이종석·이세영, '재혼 황후'로 K-로맨스 판타지 새 장...",
+     "press": "starnewsk.com",
+     "publishedAt": "2026-11-03T03:46:00.000Z",
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60621"
     },
     {
-     "title": "李대통령 \"다문화가정 일률적 우선권 맞나\"…우대 기준 재검토 지시",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-03T03:38:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=747562"
+     "title": "\"세계관 즐겨주길\" 공개일 앞당긴 '재혼황후'의 자신감…K로판 새 장 열...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-03T03:39:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000636721"
     }
    ]
   },
@@ -48,13 +80,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 29,
+   "articles90": 22,
    "recent20": 1,
-   "press": 26,
-   "firstArticleAt": "2026-11-03T02:16:00.000Z",
+   "press": 21,
+   "firstArticleAt": "2026-11-03T02:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "LG엔솔, 북미 ESS 2028년까지 일감 찼다…수익성은 숙제",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-03T03:50:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1421180"
+    },
     {
      "title": "LG엔솔, 3분기 영업익 7560억 달성… 전년 대비 25.7%↑",
      "press": "newsdream.kr",
@@ -66,44 +104,6 @@
      "press": "inews24.com",
      "publishedAt": "2026-11-03T03:23:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/031/0001071715?sid=101"
-    },
-    {
-     "title": "LG엔솔, ESS 호조에 수년치 일감 확보…수익성 개선에 집중(종합)",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-03T03:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003150661?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "재혼 황후 이종석 왕자 역할 부담",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 27,
-   "recent20": 6,
-   "press": 22,
-   "firstArticleAt": "2026-11-03T02:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"세계관 즐겨주길\" 공개일 앞당긴 '재혼황후'의 자신감…K로판 새 장 열...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-03T03:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000636721"
-    },
-    {
-     "title": "“낯설다고? 재미 자신”...신민아 이종석 ‘재혼황후’ 오늘 본다 [현장...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-03T03:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005758153"
-    },
-    {
-     "title": "기품 넘치는 황후 신민아→ 분노 유발 황제 주지훈… 29억뷰 신화 '재혼...",
-     "press": "sports.hankooki.com",
-     "publishedAt": "2026-11-03T03:36:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6942745"
     }
    ]
   },
@@ -144,10 +144,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 22,
-   "recent20": 1,
-   "press": 16,
-   "firstArticleAt": "2026-11-03T02:22:00.000Z",
+   "articles90": 21,
+   "recent20": 0,
+   "press": 15,
+   "firstArticleAt": "2026-11-03T02:30:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -176,30 +176,94 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 58,
-   "recent20": 20,
-   "press": 9,
-   "firstArticleAt": "2026-11-03T03:05:00.000Z",
+   "articles90": 64,
+   "recent20": 29,
+   "press": 11,
+   "firstArticleAt": "2026-11-03T03:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "오세훈 시장 옆에서 축사하는 장동혁 대표",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T03:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009266881?sid=100"
+     "title": "장동혁 ‘민생’·오세훈 ‘통합’·한동훈 ‘공천개혁’…보수 주도권...",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-03T03:52:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261103500348"
     },
     {
-     "title": "축사하는 장동혁 대표",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T03:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009266882?sid=100"
+     "title": "당 중진들과 인사 나누는 오세훈 시장과 장동혁 대표",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-03T03:50:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3740741"
     },
     {
-     "title": "나란히 앉은 오세훈 시장과 장동혁 대표",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T03:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009266879?sid=100"
+     "title": "서울시 주최 토론회에서 기념촬영하는 국민의힘",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-03T03:50:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3740736"
+    }
+   ]
+  },
+  {
+   "keyword": "서울양평 고속도로 재추진",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-03T02:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "3년 넘게 멈춘 서울~양평고속도로 재추진…국토부, 신규 타당성조사 착...",
+     "press": "ekn.kr",
+     "publishedAt": "2026-11-03T03:54:00.000Z",
+     "link": "https://www.ekn.kr/web/view.php?key=20261103021474746"
+    },
+    {
+     "title": "‘ 종점 변경 특혜 의혹’ 서울~양평 고속도로 타당성조사 착수",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-03T03:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005758151?sid=103"
+    },
+    {
+     "title": "서울-양평 고속도로 사업 재추진…신규 타당성 조사 착수",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-03T03:16:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=72510"
+    }
+   ]
+  },
+  {
+   "keyword": "jtbc",
+   "sources": [
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-03T02:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "JTBC, '새 주인' 찾기 속도 낸다…법원에 매각공고 허가 신청",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-03T03:36:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000486111"
+    },
+    {
+     "title": "JTBC, 매각 절차 속도···법원에 매각공고안 허가 신청",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-03T03:12:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=242209"
+    },
+    {
+     "title": "‘기업회생’ JTBC, 새 주인 찾기 속도... 법원에 매각공고 허가 신청",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-03T03:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003538835"
     }
    ]
   },
@@ -208,10 +272,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 16,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-03T02:19:00.000Z",
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-03T02:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -236,78 +300,14 @@
    ]
   },
   {
-   "keyword": "서울양평 고속도로 재추진",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-03T02:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘ 종점 변경 특혜 의혹’ 서울~양평 고속도로 타당성조사 착수",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-03T03:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005758151?sid=103"
-    },
-    {
-     "title": "서울-양평 고속도로 사업 재추진…신규 타당성 조사 착수",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-03T03:16:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=72510"
-    },
-    {
-     "title": "서울-양평고속도로 사업 재개…신규 타당성조사 착수",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-03T03:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012286208?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "박항서 인종차별",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-03T02:15:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "베트남 축구의 영웅 박항서가 어쩌다 이런 수모를…태국축구협회 결국...",
-     "press": "interfootball.co.kr",
-     "publishedAt": "2026-11-03T03:05:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/413/0000226071"
-    },
-    {
-     "title": "\"김치맨\" 조롱당한 박항서 감독…태국축구협회 '인종차별' 조사 착수",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-03T02:52:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109680871185"
-    },
-    {
-     "title": "대충격! \"김치맨\" 인종차별에 분노한 박항서...결국 태국축구협회까지 ...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-03T02:50:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/076/0004462415"
-    }
-   ]
-  },
-  {
    "keyword": "부동산 투자",
    "sources": [
     "google"
    ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-03T02:15:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-03T02:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -328,38 +328,6 @@
      "press": "biz.heraldcorp.com",
      "publishedAt": "2026-11-03T02:56:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/016/0002718177?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "lg디스플레이",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-03T02:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "LG디스플레이, 국립생태원과 생물다양성 보전 협력…DMZ 생태계 복원 추...",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-03T03:26:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=94461"
-    },
-    {
-     "title": "LG디스플레이, 국립생태원과 파주사업장 주변 생태계 보전 추진",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T02:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016418123?sid=102"
-    },
-    {
-     "title": "LG디스플레이, 파주사업장 인근 생태계 보전·복원 나선다",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-03T02:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205898?sid=101"
     }
    ]
   },
@@ -394,11 +362,43 @@
      "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261103010001003"
     }
    ]
+  },
+  {
+   "keyword": "lg디스플레이",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T02:47:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "LG디스플레이, 국립생태원과 생물다양성 보전 협력…DMZ 생태계 복원 추...",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-03T03:26:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=94461"
+    },
+    {
+     "title": "LG디스플레이, 국립생태원과 파주사업장 주변 생태계 보전 추진",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-03T02:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016418123?sid=102"
+    },
+    {
+     "title": "LG디스플레이, 파주사업장 인근 생태계 보전·복원 나선다",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-03T02:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004205898?sid=101"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 330,
+  "flagged": 331,
   "matched": 122,
   "avgLeadMin": 253,
   "recent": [
