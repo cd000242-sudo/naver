@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T05:55:39.742Z",
+ "builtAt": "2026-11-03T06:05:44.862Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,133 +8,133 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 28,
  "candidates": [
   {
-   "keyword": "10월 물가 2.8% 상승",
+   "keyword": "배나라 한재아 결혼",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 35,
+   "recent20": 4,
+   "press": 26,
+   "firstArticleAt": "2026-11-03T04:42:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "배우 배나라·한재아 결혼…14일 옥수동성당서 화촉",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-03T05:57:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000079245"
+    },
+    {
+     "title": "배나라·한재아, 11월 14일 옥수동 성당서 결혼",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-03T05:51:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000518881"
+    },
+    {
+     "title": "배우 배나라·한재아 14일 결혼…\"서로 의지하는 삶 살아가기로\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-03T05:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016418743?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "10월 물가 2.8%↑",
    "sources": [
     "nate"
    ],
-   "articles90": 31,
-   "recent20": 4,
-   "press": 21,
+   "articles90": 35,
+   "recent20": 6,
+   "press": 24,
    "firstArticleAt": "2026-11-03T04:48:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "농축수산물 가격 내려 물가 2.8%…한은 \"당분간 2%대 후반\"",
-     "press": "srtimes.kr",
-     "publishedAt": "2026-11-03T05:52:00.000Z",
-     "link": "http://www.srtimes.kr/news/articleView.html?idxno=216610"
+     "title": "2026년 10월 인천광역시 소비자물가 동향",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-03T06:04:00.000Z",
+     "link": "http://www.breaknews.com/1247948"
     },
     {
-     "title": "정부, '김장 물가' 잡는다…역대 최대 640억원 투입",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-03T05:50:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1730289"
+     "title": "iM증권, 소비자물가 둔화에도 이달 기준금리 인상 전망⋯ 근원물가 경계",
+     "press": "asiatime.co.kr",
+     "publishedAt": "2026-11-03T06:04:00.000Z",
+     "link": "https://www.asiatime.co.kr/article/20261103500316"
     },
     {
-     "title": "10월 소비자물가 2.8% 상승… 농축수산물 하락에 오름폭 축소",
-     "press": "mtnews.net",
-     "publishedAt": "2026-11-03T05:50:00.000Z",
-     "link": "https://www.mtnews.net/news/articleView.html?idxno=26430"
+     "title": "한은 \"11월 소비자물가도 2%대 후반 전망\"…고물가 경계 지속",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-03T06:00:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2013671"
     }
    ]
   },
   {
-   "keyword": "장동혁 국민의힘 대표",
+   "keyword": "교육혁신선도지역 지정 결과",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 52,
-   "recent20": 39,
-   "press": 18,
-   "firstArticleAt": "2026-11-03T05:14:00.000Z",
+   "articles90": 45,
+   "recent20": 5,
+   "press": 19,
+   "firstArticleAt": "2026-11-03T05:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'90주연속 상승세'인데 李 \"집값폭락 걱정\"...장동혁 \"떨어진 건 주가·...",
-     "press": "pennmike.com",
-     "publishedAt": "2026-11-03T05:54:00.000Z",
-     "link": "https://www.pennmike.com/news/articleView.html?idxno=130892"
+     "title": "교육부, 43개 지자체 '교육혁신선도지역' 선정…연 최대 40억 지원",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-03T06:04:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261103500326"
     },
     {
-     "title": "청년안심주택 공실 살펴보는 장동혁 대표",
+     "title": "교육부, 교육혁신선도지역 지정 결과 발표",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-03T05:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003695283?sid=102"
+    },
+    {
+     "title": "정부, 43개 교육혁신선도지역 발표",
      "press": "news1.kr",
-     "publishedAt": "2026-11-03T05:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009267365?sid=100"
-    },
-    {
-     "title": "장동혁 \"李, 쿠팡 정보 유출엔 회사 망할 생각 들게 해야 한다더니\" … ...",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-03T05:54:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/03/2026110300240.html"
+     "publishedAt": "2026-11-03T05:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009267338?sid=102"
     }
    ]
   },
   {
-   "keyword": "서울 외국인 최대",
+   "keyword": "신민아 재혼 황후 이야기",
    "sources": [
     "nate"
    ],
-   "articles90": 16,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-03T04:31:00.000Z",
+   "articles90": 18,
+   "recent20": 6,
+   "press": 15,
+   "firstArticleAt": "2026-11-03T04:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "서울관광재단이 추천한 가을 정취 짙은 '전통시장' 5곳 ... \"때밀이 타올...",
-     "press": "ttlnews.com",
-     "publishedAt": "2026-11-03T05:54:00.000Z",
-     "link": "http://www.ttlnews.com/news/articleView.html?idxno=3158330"
+     "title": "[종합] 원작 29억뷰 '재혼 황후', 4인의 이혼 앤 재혼 스토리…K-로판 역...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-03T06:01:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000782780"
     },
     {
-     "title": "관악구, 관악산과 샤로수길 하나의 관광 동선으로 연결한 외국인 로컬투...",
-     "press": "cnbizm.com",
-     "publishedAt": "2026-11-03T05:46:00.000Z",
-     "link": "https://www.cnbizm.com/news/articleView.html?idxno=320203"
+     "title": "‘재혼 황후’ 이세영 “순수 악을 드러내려고 노력했다”",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-03T05:58:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611030240"
     },
     {
-     "title": "[N포커스] 외국인 지출 8조8435억 어디로 향했나…골목상권도 활기",
-     "press": "nc.press",
-     "publishedAt": "2026-11-03T05:29:00.000Z",
-     "link": "https://www.nc.press/news/articleView.html?idxno=630117"
-    }
-   ]
-  },
-  {
-   "keyword": "국정원 2100 기관 보안점검",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-03T04:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국정원, 금융권 해킹 확산에 2100여개 기관 긴급 보안점검...핵심시설 직...",
-     "press": "wikileaks-kr.org",
+     "title": "하루 앞당긴 ‘재혼 황후’…29억뷰 K-로판, 글로벌 통할까 (종합)",
+     "press": "mediapen.com",
      "publishedAt": "2026-11-03T05:52:00.000Z",
-     "link": "https://www.wikileaks-kr.org/news/articleView.html?idxno=194143"
-    },
-    {
-     "title": "금융권 해킹 보안 비상… 국정원, 2100곳 공공기관 긴급 보안점검",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-03T05:36:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3445522"
-    },
-    {
-     "title": "국정원, 공공기관 2100여곳 긴급 보안점검 요청…핵심시설 직접 조사",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-03T05:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003481574?sid=105"
+     "link": "https://www.mediapen.com/news/view/1134764"
     }
    ]
   },
@@ -146,27 +146,124 @@
    "articles90": 7,
    "recent20": 7,
    "press": 7,
-   "firstArticleAt": "2026-11-03T05:36:00.000Z",
+   "firstArticleAt": "2026-11-03T05:48:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "[기고 - 서울사이버대학교 대학원 사회복지학과 김윤나 교수]청소년정책...",
-     "press": "naeil.com",
-     "publishedAt": "2026-11-03T05:50:00.000Z",
-     "link": "https://www.naeil.com/news/read/607450?ref=naver"
+     "title": "중앙대광명 윤수미 교수 '우수구연상'",
+     "press": "medical-tribune.co.kr",
+     "publishedAt": "2026-11-03T06:04:00.000Z",
+     "link": "http://www.medical-tribune.co.kr/news/articleView.html?idxno=215728"
     },
     {
-     "title": "글로벌광주방송 사장에 김영기 전 전남대 교수 취임",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-03T05:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014298208?sid=102"
+     "title": "성균관대 백정민 교수팀 배터리 없이 작동하는 마찰전기 직류 발전기 개...",
+     "press": "veritas-a.com",
+     "publishedAt": "2026-11-03T06:02:00.000Z",
+     "link": "https://www.veritas-a.com/news/articleView.html?idxno=635011"
     },
     {
-     "title": "이재홍 전 아산병원 교수, 젬백스 CMO로 합류… 신경 퇴행성 질환 신약...",
-     "press": "health.chosun.com",
-     "publishedAt": "2026-11-03T05:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/346/0000118302?sid=103"
+     "title": "항생제 선택 돕는 프로그램 개발한 세종충남대병원 최규태 교수",
+     "press": "dtnews24.com",
+     "publishedAt": "2026-11-03T06:02:00.000Z",
+     "link": "http://www.dtnews24.com/news/articleView.html?idxno=816762"
+    }
+   ]
+  },
+  {
+   "keyword": "해커",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-03T04:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"사람 속이던 해커, 이젠 AI도 속인다\"…MS 연구진 경고",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T06:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009267393?sid=105"
+    },
+    {
+     "title": "[자막뉴스] \"추적 피하려고? 이번엔 비트코인\"…북 해커들, '2차 세탁' 시...",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-03T05:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400258?sid=104"
+    },
+    {
+     "title": "“리모컨 누른 순간 해커가 접속”…中 TV 셋톱박스의 비밀 적발",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-03T05:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000366227?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "토론회 참석한 장동혁 대표",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-03T04:37:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "보수 연대론에 '동상이몽'…장동혁 '당심'·오세훈 '통합'·한동훈 '명분...",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-03T06:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001976489?sid=100"
+    },
+    {
+     "title": "“보수 대통합 가능한가?” 장동혁에게 물었더니 “당원이 결정할 문제...",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-03T05:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000366225?sid=100"
+    },
+    {
+     "title": "같은 날 나란히 토론회 행사...당권 선거까지 '훈훈연대' 유지될까? [이...",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-03T05:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002427751?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "가상자산 과세 유예 논의",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-03T04:42:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "與 재경위, 가상자산 과세 또 미루나…'2년 유예' 거론",
+     "press": "press9.kr",
+     "publishedAt": "2026-11-03T05:54:00.000Z",
+     "link": "http://www.press9.kr/news/articleView.html?idxno=85501"
+    },
+    {
+     "title": "與 재경위원들 \"가상자산 과세 유예 당 지도부에 건의\"",
+     "press": "seouleconews.com",
+     "publishedAt": "2026-11-03T05:14:00.000Z",
+     "link": "http://www.seouleconews.com/news/articleView.html?idxno=94755"
+    },
+    {
+     "title": "與, 가상자산 과세 2년 유예 추진···2029년 거론",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-03T05:02:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=879315"
     }
    ]
   },
@@ -175,10 +272,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 5,
    "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-03T04:30:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-03T04:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -203,140 +300,50 @@
    ]
   },
   {
-   "keyword": "가상자산 과세 유예 논의",
+   "keyword": "서울 외국인 최대 방문",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-03T04:26:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "與 재경위, 가상자산 과세 또 미루나…'2년 유예' 거론",
-     "press": "press9.kr",
-     "publishedAt": "2026-11-03T05:54:00.000Z",
-     "link": "http://www.press9.kr/news/articleView.html?idxno=85501"
-    },
-    {
-     "title": "與 재경위원들 \"가상자산 과세 유예 당 지도부에 건의\"",
-     "press": "seouleconews.com",
-     "publishedAt": "2026-11-03T05:14:00.000Z",
-     "link": "http://www.seouleconews.com/news/articleView.html?idxno=94755"
-    },
-    {
-     "title": "가상자산 과세 유예, 민주당 재경위도 공식화…\"내년 바로 과세보다 준...",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-03T05:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000518874?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "신민아 재혼 황후 기대와 우려",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-03T04:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "망사 주지훈♥신민아→새 이종석..'재혼황후', 얼마나 자신있길래 공개...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-03T05:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005633522"
-    },
-    {
-     "title": "‘재혼 황후’, 우려를 잠재운 첫인상…감정선은 물음표 [OOTD]",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-03T05:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001302664"
-    },
-    {
-     "title": "29억뷰 웹툰 '재혼 황후'…신민아·주지훈 실사로 만난다",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-03T05:13:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000079217"
-    }
-   ]
-  },
-  {
-   "keyword": "해커",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
+   "articles90": 9,
+   "recent20": 0,
+   "press": 4,
    "firstArticleAt": "2026-11-03T04:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[자막뉴스] \"추적 피하려고? 이번엔 비트코인\"…북 해커들, '2차 세탁' 시...",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-03T05:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400258?sid=104"
+     "title": "[N포커스] 외국인 지출 8조8435억 어디로 향했나…골목상권도 활기",
+     "press": "nc.press",
+     "publishedAt": "2026-11-03T05:29:00.000Z",
+     "link": "https://www.nc.press/news/articleView.html?idxno=630117"
     },
     {
-     "title": "“리모컨 누른 순간 해커가 접속”…中 TV 셋톱박스의 비밀 적발",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-03T05:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000366227?sid=104"
-    },
-    {
-     "title": "\"리모컨 누르는 순간 해커도 접속\"…中 TV 셋톱박스의 위험한 비밀",
-     "press": "newsis.com",
+     "title": "서울 찾은 외국인 관광객·소비액 ‘역대 최고’…9개월간 8.8조 썼다",
+     "press": "biz.chosun.com",
      "publishedAt": "2026-11-03T05:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014298039?sid=105"
-    }
-   ]
-  },
-  {
-   "keyword": "오타니 MVP 최종 후보",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T04:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "오타니, NL MVP 최종 후보 진입…5번째 수상 두고 크로암스트롱과 경쟁",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-03T05:35:00.000Z",
-     "link": "https://m.sports.naver.com/wbaseball/article/448/0000648700"
+     "link": "https://n.news.naver.com/mnews/article/366/0001202227?sid=102"
     },
     {
-     "title": "오타니, NL MVP 최종 후보 선정…40-40 크로암스트롱과 격돌",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-03T04:48:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=560709"
-    },
-    {
-     "title": "3년 연속 MVP 오타니, 또 최종후보 올랐지만…올핸 팔방미인 ‘PCA’가 ...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-03T04:45:00.000Z",
-     "link": "https://m.sports.naver.com/wbaseball/article/011/0004678184"
+     "title": "서울 방문 외국인 역대 최대",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T05:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009267165?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 363,
-  "matched": 136,
+  "flagged": 368,
+  "matched": 137,
   "avgLeadMin": 233,
   "recent": [
+   {
+    "keyword": "LG엔솔 3분기 영업익",
+    "hitKeyword": "LG에너지솔루션 3분기 호조",
+    "hitAt": "2026-11-03T15:00:00+09:00",
+    "leadMin": 246
+   },
    {
     "keyword": "김빅토리아노 최불암 추모",
     "hitKeyword": "최불암 추도",
@@ -390,12 +397,6 @@
     "hitKeyword": "리센느 컴백",
     "hitAt": "2026-11-03T13:30:00+09:00",
     "leadMin": 186
-   },
-   {
-    "keyword": "재혼 황후 공개일 변경",
-    "hitKeyword": "재혼황후 공개",
-    "hitAt": "2026-11-03T13:30:00+09:00",
-    "leadMin": 65
    }
   ]
  }
