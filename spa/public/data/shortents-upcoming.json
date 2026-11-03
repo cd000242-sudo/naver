@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T15:39:08.071Z",
+ "builtAt": "2026-11-03T15:49:11.917Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,77 +8,45 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "김민석 신천지 의혹 사과",
+   "keyword": "김민석 신천지 사과 요구",
    "sources": [
-    "daum"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-03T14:15:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-03T14:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "[사설] 신천지 의혹 말 바꾼 여당 대표, ‘아니면 말고’로 끝낼 일인가",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-03T15:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003562651?sid=110"
-    },
-    {
-     "title": "울먹이며 사과한 김민석에 한동훈 “울 일 아니고 책임져야”",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-03T15:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002830070?sid=100"
-    },
     {
      "title": "김문수 \"순천 신천지 당원 자진탈당하라\"",
      "press": "imaeil.com",
      "publishedAt": "2026-11-03T15:12:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/088/0001038182?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "이강철 로건 투입 실수",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-03T14:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "안타→안타→'끝내 5실점' 빌미, 실패로 돌아간 KT 히든카드…이강철 감...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-03T15:30:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/311/0002076265"
     },
     {
-     "title": "이강철 KT 감독 \"로건 기용 실수…계투 운용 정리됐다\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-03T15:04:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/055/0001400399"
+     "title": "김민석 “신천지 의혹 죄송” 울컥…정청래 “김 유죄, 책임져라”",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-03T15:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003562598?sid=100"
     },
     {
-     "title": "[파워인터뷰] KT 이강철 감독 \"로건 투입, 내 실수 인정한다\"",
-     "press": "stnsports.co.kr",
-     "publishedAt": "2026-11-03T15:03:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/450/0000155277"
+     "title": "'신천지 3자 연합' 헛발질 논란…김민석, 리더십 타격 불가피",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-03T15:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000548450?sid=100"
     }
    ]
   },
   {
    "keyword": "한·튀르키예 정상 회담",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 4,
    "recent20": 1,
@@ -104,38 +72,6 @@
      "press": "newsworks.co.kr",
      "publishedAt": "2026-11-03T14:38:00.000Z",
      "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=901810"
-    }
-   ]
-  },
-  {
-   "keyword": "돌싱 n 모솔",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T14:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[종합] \"이렇게 생겨서 모솔이면 어떡해\"…'돌싱N모솔2' 첫 인상에 엇갈...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-03T15:24:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267533"
-    },
-    {
-     "title": "김우빈 닮은 모솔남 등장에 넉살 \"앞에 분들은 뭐가 됩니까?\" ('돌싱N모...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-03T15:20:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000486226"
-    },
-    {
-     "title": "\"나 너 좋아하냐\"…'돌싱N모솔2' 선착순 첫인상 투표에 흔들린 삼각 신...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-03T15:12:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267531"
     }
    ]
   },
@@ -172,6 +108,38 @@
    ]
   },
   {
+   "keyword": "돌싱 n 모솔",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T14:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[종합] \"이렇게 생겨서 모솔이면 어떡해\"…'돌싱N모솔2' 첫 인상에 엇갈...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-03T15:24:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267533"
+    },
+    {
+     "title": "김우빈 닮은 모솔남 등장에 넉살 \"앞에 분들은 뭐가 됩니까?\" ('돌싱N모...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-03T15:20:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000486226"
+    },
+    {
+     "title": "\"나 너 좋아하냐\"…'돌싱N모솔2' 선착순 첫인상 투표에 흔들린 삼각 신...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-03T15:12:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267531"
+    }
+   ]
+  },
+  {
    "keyword": "kbo",
    "sources": [
     "google"
@@ -202,43 +170,11 @@
      "link": "https://n.news.naver.com/mnews/article/001/0016420036?sid=104"
     }
    ]
-  },
-  {
-   "keyword": "양세종 발목 골절",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T15:03:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "양세종, 체중 관리 철저히 하는 이유 \"하중 못 버티고 골절\" (틈만나면)",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-03T15:09:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002076262"
-    },
-    {
-     "title": "양세종, 발목 골절 후 체중 집착..\"앞자리 사수\" [틈만나면][별별TV]",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-03T15:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003484384"
-    },
-    {
-     "title": "35세 양세종, ‘피로골절’로 발목 부러져..“앞자리 안 바뀌려고 노력...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-03T15:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005634138"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 451,
+  "flagged": 452,
   "matched": 179,
   "avgLeadMin": 241,
   "recent": [
