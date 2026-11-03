@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T01:33:51.517Z",
+ "builtAt": "2026-11-03T01:43:54.680Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,71 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "10월 물가 2.8% 상승",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 94,
-   "recent20": 21,
-   "press": 68,
-   "firstArticleAt": "2026-11-03T00:15:00.000Z",
+   "articles90": 95,
+   "recent20": 16,
+   "press": 70,
+   "firstArticleAt": "2026-11-03T00:19:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "10월 물가 2.8% 상승…가공식품·석유류 오름세",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-03T01:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922319?sid=101"
+     "title": "10월 소비자물가 2.8% 상승…가공식품·외식 오름 폭 확대",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-03T01:40:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5079019"
     },
     {
-     "title": "10월 물가 상승률 2.8%…정부, 김장철 할인에 640억 투입",
-     "press": "donga.com",
-     "publishedAt": "2026-11-03T01:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003759662?sid=101"
+     "title": "정부 “체감 물가 여전히 높아…640억원 역대급 김장 대책 마련”",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-03T01:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003562424?sid=100"
     },
     {
-     "title": "농축수산물 하락에 10월 물가 2.8%…\"연말 불확실성 커\"(종합2보)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-03T01:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014297068?sid=101"
+     "title": "10월 소비자물가 상승률 2.8%...11월에도 2%대 후반 전망",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-03T01:38:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=622620"
     }
    ]
   },
   {
-   "keyword": "순방단 개인정보 유출 책임 규명",
+   "keyword": "순방단 개인정보 유출 조사",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 57,
-   "recent20": 9,
-   "press": 51,
-   "firstArticleAt": "2026-11-03T00:04:00.000Z",
-   "exclusive": false,
+   "articles90": 63,
+   "recent20": 8,
+   "press": 56,
+   "firstArticleAt": "2026-11-03T00:16:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "靑, '1호기 개인정보 유출' 긴급회의 개최",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-03T01:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922321?sid=100"
+     "title": "靑 \"대통령 순방단 개인정보 유출 경위 철저히 조사\"",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-03T01:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002463955?sid=100"
     },
     {
-     "title": "靑, 대통령 순방단 개인정보 유출 긴급회의…임광현 실장 \"중대 사안, 보...",
-     "press": "suwonilbo.kr",
-     "publishedAt": "2026-11-03T01:32:00.000Z",
-     "link": "https://www.suwonilbo.kr/view.html?id=L261103102658ae4b"
+     "title": "청와대, ‘대통령 순방단 개인정보 유출’ 긴급회의...“중대한 사안”",
+     "press": "vop.co.kr",
+     "publishedAt": "2026-11-03T01:40:00.000Z",
+     "link": "https://vop.co.kr/A00001697436.html"
     },
     {
-     "title": "'공군 1호기' 명단 유출에 경찰 내사…대통령 부부 여권정보도 노출",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-03T01:28:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261103000341"
+     "title": "[단독] 유출된 1호기 순방 명단, 靑 작성 문건 아냐…정부 아닌 외부 유...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-03T01:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003695186?sid=100"
     }
    ]
   },
@@ -81,62 +79,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 37,
-   "recent20": 7,
-   "press": 37,
-   "firstArticleAt": "2026-11-03T00:09:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "대한항공 미국행, 4일부터 '에볼라 서약서' 의무…괌·하와이 포함",
-     "press": "newsinside.kr",
-     "publishedAt": "2026-11-03T01:32:00.000Z",
-     "link": "https://www.newsinside.kr/news/articleView.html?idxno=5039390"
-    },
-    {
-     "title": "대한항공, 미국행 승객 에볼라 서약서 제출 의무화",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-03T01:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922320?sid=101"
-    },
-    {
-     "title": "대한항공, 미국행 승객 에볼라 서약서 의무화",
-     "press": "fetv.co.kr",
-     "publishedAt": "2026-11-03T01:30:00.000Z",
-     "link": "https://www.fetv.co.kr/news/articleView.html?idxno=312967"
-    }
-   ]
-  },
-  {
-   "keyword": "與 재경위 과세 유예 건의",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 33,
-   "recent20": 7,
-   "press": 28,
+   "articles90": 34,
+   "recent20": 8,
+   "press": 34,
    "firstArticleAt": "2026-11-03T00:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "與 재경위 \"당지도부에 '가상자산 과세 유예' 건의\"…2년 유예 거론(종합...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T01:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009266408?sid=100"
+     "title": "미국행 항공기 타려면 당분간 '에볼라 서약서' 써야 한다 : 아프리카 '분...",
+     "press": "huffingtonpost.kr",
+     "publishedAt": "2026-11-03T01:40:00.000Z",
+     "link": "https://www.huffingtonpost.kr/article/261749"
     },
     {
-     "title": "與 재경위원 \"가상자산 과세 유예 의견 당 지도부에 전달\"",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-03T01:24:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261103500106"
+     "title": "대한항공, 4일부터 미국행 승객 '에볼라 서약서' 제출 의무화",
+     "press": "paxetv.com",
+     "publishedAt": "2026-11-03T01:36:00.000Z",
+     "link": "http://www.paxetv.com/news/articleView.html?idxno=285934"
     },
     {
-     "title": "與 재경위, 가상자산 과세 유예 건의키로…'2년 연기' 가닥",
-     "press": "financialpost.co.kr",
-     "publishedAt": "2026-11-03T01:22:00.000Z",
-     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=284255"
+     "title": "대한항공, 4일부터 미국행 승객 에볼라 서약서 제출 의무화",
+     "press": "kihoilbo.co.kr",
+     "publishedAt": "2026-11-03T01:34:00.000Z",
+     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3039677"
     }
    ]
   },
@@ -147,94 +113,94 @@
     "google",
     "daum"
    ],
-   "articles90": 16,
-   "recent20": 0,
-   "press": 15,
-   "firstArticleAt": "2026-11-03T00:06:00.000Z",
+   "articles90": 15,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-03T00:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "래블업, 코스닥 상장 첫날 장초반 30∼40%대 상승",
+     "press": "newsfc.co.kr",
+     "publishedAt": "2026-11-03T01:40:00.000Z",
+     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82186"
+    },
+    {
+     "title": "'AI 소프트웨어' 래블업 주가 코스닥 상장 첫날 장중 공모가보다 13%대 ...",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-03T01:34:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=450999"
+    },
     {
      "title": "래블업, 코스닥 상장 첫날 강세...장중 한때 49% 급등",
      "press": "techm.kr",
      "publishedAt": "2026-11-03T01:02:00.000Z",
      "link": "https://www.techm.kr/news/articleView.html?idxno=156795"
-    },
-    {
-     "title": "'AI 인프라 소프트웨어' 래블업, 코스닥 상장 첫날 15%대 상승",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-03T00:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001037958?sid=101"
-    },
-    {
-     "title": "[특징주] 래블업, 코스닥 입성 첫날 '상승'",
-     "press": "cstimes.com",
-     "publishedAt": "2026-11-03T00:52:00.000Z",
-     "link": "https://www.cstimes.com/news/articleView.html?idxno=726400"
     }
    ]
   },
   {
-   "keyword": "김민",
+   "keyword": "미국 게슘섬 타격",
    "sources": [
-    "google"
+    "daum"
    ],
-   "articles90": 13,
-   "recent20": 4,
-   "press": 9,
-   "firstArticleAt": "2026-11-03T00:10:00.000Z",
+   "articles90": 14,
+   "recent20": 7,
+   "press": 12,
+   "firstArticleAt": "2026-11-03T00:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김민, 가족 공개 \"돌아가신 부친 피라미드 논리가 힘\"",
-     "press": "mediafine.co.kr",
+     "title": "트럼프, 공격 안한다고 하더니…선거전날 이란 게슘섬 타격",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-03T01:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541346?sid=104"
+    },
+    {
+     "title": "美, 선거전날 이란 게슘섬 타격…\"선박 공격에 방어적 조치\"",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-03T01:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005598509?sid=104"
+    },
+    {
+     "title": "미국, 중간선거 하루 앞두고 이란 게슘섬 타격…\"선박 공격에 방어적 조...",
+     "press": "slist.kr",
      "publishedAt": "2026-11-03T01:32:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=94437"
-    },
-    {
-     "title": "김민, ‘나혼산’ 야생 생활 비결은 돌아가신 아버지…“어깨너머로 배...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-03T01:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001147809"
-    },
-    {
-     "title": "'나혼산' 구세주 김민, 이번엔 35년 전통 '아침마당' 출격…우쿨렐레로...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-03T01:23:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001406937"
+     "link": "https://www.slist.kr/news/articleView.html?idxno=778544"
     }
    ]
   },
   {
-   "keyword": "김종국 아내 귀요미♥ 1주년",
+   "keyword": "이재명 대통령 국무회의 참석",
    "sources": [
     "nate"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-03T00:07:00.000Z",
+   "articles90": 16,
+   "recent20": 6,
+   "press": 12,
+   "firstArticleAt": "2026-11-03T00:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김종국, 아내 '귀요미♥'로 저장…'삼식이' 해명 \"집밥은 해주셔야 먹는...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T01:29:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009266424"
+     "title": "김지용, 또 국무회의 참석…李 \"정치목적 허위사실유포 강력 대응하라\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-03T01:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004205818?sid=102"
     },
     {
-     "title": "\"삼시세끼 아내 집밥?\"…김종국, 결국 입 열었다 \"어떻게 요구하나, 먼저...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-03T01:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000782729"
+     "title": "중수청장 3주째 국무회의 배석…대통령 \"강도높은 역할\" 당부",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-03T01:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016417860?sid=102"
     },
     {
-     "title": "김종국, 결혼 1주년 깜짝 이벤트→최수종도 인정한 사랑꾼…\"애칭은 귀...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-03T00:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001406931"
+     "title": "김지용 중수청장, 3번 연속 국무회의 참석…이 대통령 “사정역할 엄정...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-03T01:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002830413?sid=102"
     }
    ]
   },
@@ -271,15 +237,78 @@
    ]
   },
   {
+   "keyword": "김민 가족사진 공개",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 5,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-03T00:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘동두천 자연인’ 김민 “‘노가다 각오하면 못 할 일 없다’ 父 유훈...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-03T01:38:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001277506"
+    },
+    {
+     "title": "김민, 가족 공개 \"돌아가신 부친 피라미드 논리가 힘\"",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-03T01:32:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=94437"
+    },
+    {
+     "title": "김민, ‘나혼산’ 야생 생활 비결은 돌아가신 아버지…“어깨너머로 배...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-03T01:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001147809"
+    }
+   ]
+  },
+  {
+   "keyword": "양주시",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-03T00:47:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "양주시 '사랑 싣고 달린 교외선' 미혼남녀 18명 중 2쌍 커플 탄생",
+     "press": "mhj21.com",
+     "publishedAt": "2026-11-03T01:36:00.000Z",
+     "link": "https://www.mhj21.com/news/articleView.html?idxno=254635"
+    },
+    {
+     "title": "양주시, 한국토지주택공사(LH)에 택지개발 현안 건의",
+     "press": "dnews.co.kr",
+     "publishedAt": "2026-11-03T01:22:00.000Z",
+     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611031000005910336"
+    },
+    {
+     "title": "농협 양주시지부·농가주부모임 양주시연합회 일손돕기",
+     "press": "nongmin.com",
+     "publishedAt": "2026-11-03T00:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/662/0000107533?sid=102"
+    }
+   ]
+  },
+  {
    "keyword": "47세 한다감 아들 첫 공개",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-03T00:05:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-03T00:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -304,99 +333,34 @@
    ]
   },
   {
-   "keyword": "이정현 검찰총장 후보 물망",
+   "keyword": "웰컴저축은행, 에스와이 제압 2연승",
    "sources": [
-    "daum"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-03T00:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "검찰총장추천위 9일 열려‥이정현·박철우·예세민 등 물망",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-03T01:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004678104?sid=102"
-    },
-    {
-     "title": "초대 공소청 이끌 검찰총장 후보, 이정현·박철우·예세민 물망",
-     "press": "lawtv.kr",
-     "publishedAt": "2026-11-03T01:00:00.000Z",
-     "link": "https://www.lawtv.kr/news/articleView.html?idxno=61316"
-    },
-    {
-     "title": "검찰총장 후보에 이정현·박철우·예세민 거론… 이정현에 무게 실려",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-03T00:48:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=560637"
-    }
-   ]
-  },
-  {
-   "keyword": "국정감사 국민보고 대회",
-   "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-03T00:08:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T00:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국민의힘 \"국정감사, 이재명 정부 추악한 실상 드러나\"",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-03T01:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002463946?sid=100"
+     "title": "'전력 보강 효과 나오나' 웰컴저축은행, PBA 팀 리그 4R 반전의 2연승",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-03T01:40:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/079/0004205817"
     },
     {
-     "title": "정점식 원내대표, 국정감사 국민보고 대회",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-03T00:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003695153?sid=100"
+     "title": "PBA '전력 보강' 웰컴저축은행, 에스와이 꺾고 2연승",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-03T00:23:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/055/0001400157"
     },
     {
-     "title": "「M포토」 국정감사 국민보고 대회 발언하는 임이자 정책위의장",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-03T00:34:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=72492"
-    }
-   ]
-  },
-  {
-   "keyword": "나나 생일카페 동반 방문",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-03T00:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "탑♥나나, 열애 인정 한 달 만에 생일카페 동반 방문…팬 반응 엇갈려",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-03T01:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001277493"
-    },
-    {
-     "title": "탑♥나나, 열애 인정 후 생일 카페 동행",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-03T01:02:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611030149"
-    },
-    {
-     "title": "탑♥나나, 공개 열애 후 첫 데이트 포착…팬들 만든 생일 카페 동반 방...",
-     "press": "ent.sbs.co.kr",
-     "publishedAt": "2026-11-03T00:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/416/0000327809"
+     "title": "'웰컴저축은행이 옳았다' 유일 추가선발, 강유진 승-T.응우옌 승... 2연승...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-03T00:18:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/108/0003483995"
     }
    ]
   },
@@ -406,7 +370,7 @@
     "nate"
    ],
    "articles90": 12,
-   "recent20": 2,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-03T00:15:00.000Z",
    "exclusive": false,
@@ -433,41 +397,74 @@
    ]
   },
   {
-   "keyword": "웰컴저축은행 에스와이 2연승",
+   "keyword": "국정감사 국민보고 대회",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T00:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국민의힘 \"국정감사, 이재명 정부 추악한 실상 드러나\"",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-03T01:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002463946?sid=100"
+    },
+    {
+     "title": "정점식 원내대표, 국정감사 국민보고 대회",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-03T00:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003695153?sid=100"
+    },
+    {
+     "title": "「M포토」 국정감사 국민보고 대회 발언하는 임이자 정책위의장",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-03T00:34:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=72492"
+    }
+   ]
+  },
+  {
+   "keyword": "김빅토리아노 최불암 추모",
    "sources": [
     "nate"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-03T00:11:00.000Z",
+   "firstArticleAt": "2026-11-03T00:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "PBA '전력 보강' 웰컴저축은행, 에스와이 꺾고 2연승",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-03T00:23:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/055/0001400157"
+     "title": "김빅토리아노, 무연고 故 최불암 추모 \"내레이션 50번 돌려 봐\"",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-03T01:22:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=94433"
     },
     {
-     "title": "'웰컴저축은행이 옳았다' 유일 추가선발, 강유진 승-T.응우옌 승... 2연승...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-03T00:18:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/108/0003483995"
+     "title": "“검정 넥타이로 바꿔” 아나운서 김빅토리아노, 일면식 없는 故 최불암...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-03T01:20:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001183834"
     },
     {
-     "title": "'새 얼굴 효과 제대로 봤다!' 웰컴저축은행, 에스와이 꺾고 2연승 질주…...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-03T00:11:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/117/0004121228"
+     "title": "아나운서 김빅토리아노, 일면식 없는 故최불암에 \"최소 50번 돌려봤다…...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-03T00:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000782726"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 275,
+  "flagged": 282,
   "matched": 102,
   "avgLeadMin": 223,
   "recent": [
