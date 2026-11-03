@@ -113,19 +113,6 @@ export const FLOW: ImageEngineSpec = {
   freeTierNote: 'Google Labs/AI Pro 계정 상태와 지역/세션에 따라 사용 가능 여부가 달라질 수 있습니다. 앱은 순차 생성과 안정화 대기를 적용합니다.',
 };
 
-/** Prodia — API based low-cost image generation provider. */
-export const PRODIA: ImageEngineSpec = {
-  value: 'prodia',
-  label: 'Prodia',
-  tagline: 'Prodia API · 빠른 저비용 이미지 생성 · API 키 필요',
-  model: 'prodia/sdxl',
-  forceModelKey: null,
-  costKrw: 14,
-  koreanText: false,
-  icon: '⚡',
-  freeTierNote: 'Prodia API 키가 필요하며 사용량 기준으로 과금될 수 있습니다. 정확한 요금과 제한은 Prodia 계정 대시보드에서 확인하세요.',
-};
-
 export const DROPSHOT: ImageEngineSpec = {
   value: 'dropshot',
   label: '🍌 리더스 나노바나나 무제한',
@@ -157,7 +144,6 @@ export const IMAGE_ENGINE_CATALOG: ImageEngineSpec[] = [
   NANO_BANANA_2,
   DUCK_TAPE,
   FLOW,
-  PRODIA,
   DROPSHOT,
   GENSPARK,
 ];

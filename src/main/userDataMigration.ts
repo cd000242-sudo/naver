@@ -102,8 +102,7 @@ const TARGET_FILES_EXTRA = [
 // ✅ [v2.8.1] 보존 가치 있는 모든 필드 — API 키 + 계정 + 라이선스 자격증명 + 사용자 프로필
 const PRESERVE_FIELDS = [
     'geminiApiKey', 'geminiApiKeys', 'openaiApiKey', 'claudeApiKey',
-    'perplexityApiKey', 'pexelsApiKey', 'unsplashApiKey', 'pixabayApiKey',
-    'deepinfraApiKey', 'openaiImageApiKey', 'leonardoaiApiKey',
+    'perplexityApiKey', 'openaiImageApiKey',
     'naverDatalabClientId', 'naverDatalabClientSecret',
     'naverClientId', 'naverClientSecret',
     'naverHubClientId', 'naverHubClientSecret',

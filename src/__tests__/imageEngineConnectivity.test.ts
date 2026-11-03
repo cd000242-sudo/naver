@@ -28,7 +28,7 @@ const ROOT = path.resolve(__dirname, '..');
 const read = (rel: string): string => fs.readFileSync(path.join(ROOT, rel), 'utf-8');
 
 /** 사용자가 그리드/드롭다운에서 고를 수 있는 AI 생성엔진 — [2026-10-10] 나노바나나는 나노바나나2 한 종류만 노출 */
-const ENGINE_VALUES = ['nano-banana-2', 'openai-image', 'flow', 'prodia'];
+const ENGINE_VALUES = ['nano-banana-2', 'openai-image', 'flow'];
 /** 화면에서 내려갔지만 백엔드 라우팅은 남겨 둔 옛 나노바나나 값 */
 const RETIRED_NANO_VALUES = ['nano-banana-pro', 'nano-banana'];
 /** 백엔드가 아는 나노바나나 3종 (스펙 상수는 카탈로그 목록과 별개로 유지) */
@@ -40,7 +40,9 @@ const NANO_SPECS: Record<string, typeof NANO_BANANA_2> = {
 };
 
 describe('Stage 4 — 카탈로그 무결성', () => {
-  it('카탈로그는 노출 엔진 4종 + dropshot·genspark(UI 자동화) = 6개 엔진을 가진다', () => {
+  it('카탈로그는 노출 엔진 3종 + dropshot·genspark(UI 자동화) = 5개 엔진을 가지며 지원 종료 엔진은 없다', () => {
+    const values = IMAGE_ENGINE_CATALOG.map((e) => e.value);
+    for (const retired of ['prodia', 'leonardoai', 'deepinfra']) expect(values).not.toContain(retired);
     expect(IMAGE_ENGINE_CATALOG.map((e) => e.value).sort()).toEqual([...ENGINE_VALUES, 'dropshot', 'genspark'].sort());
   });
 
@@ -52,7 +54,7 @@ describe('Stage 4 — 카탈로그 무결성', () => {
 
   it('모든 엔진의 model ID는 VERIFIED_IMAGE_MODELS에 속한다 (가짜 ID 차단)', () => {
     for (const engine of IMAGE_ENGINE_CATALOG) {
-      if (engine.value === 'dropshot' || engine.value === 'genspark' || engine.value === 'flow' || engine.value === 'prodia') continue; // UI/legacy engines do not use VERIFIED_IMAGE_MODELS IDs
+      if (engine.value === 'dropshot' || engine.value === 'genspark' || engine.value === 'flow') continue; // UI/legacy engines do not use VERIFIED_IMAGE_MODELS IDs
       expect(isVerifiedImageModel(engine.model), `${engine.value} → ${engine.model}`).toBe(true);
     }
   });

@@ -5,6 +5,7 @@ import { applyPreviousPostPolicy, normalizePreviousPostCategoryId } from '../../
 import { awaitNetworkWaitRecheck, classifyPublishFailure, describeAccountStop, extractAccountStopCode, findPausedQueueAccounts, readAccountPause, stopsAllAccounts } from '../../automation/publishFailureClassifier.js';
 import { installAccountSafetyControls } from './accountSafetyControls.js';
 import { normalizeRetiredNanoEngine } from '../../runtime/imageProviderMigration.js';
+import { assertNoRetiredImageEnginePending } from '../../runtime/retiredImageEngines.js';
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => installAccountSafetyControls(), { once: true });
 else installAccountSafetyControls();
 
@@ -461,6 +462,8 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
         console.log('[generateImagesForAutomation] 📂 provider="local-folder" → AI 생성 불필요, 빈 배열 반환');
         return [];
     }
+    // [2026-11-03] 지원이 끝난 엔진을 쓰던 사용자가 새 엔진을 고르기 전에는 AI 생성을 시작하지 않는다 (다른 유료 엔진으로 자동 전환 금지).
+    if (provider !== 'naver') assertNoRetiredImageEnginePending();
     const INVALID_PROVIDERS = ['saved', '', 'null', 'undefined'];
     if (!provider || INVALID_PROVIDERS.includes(provider.trim())) {
         // [Phase 7.2 / R13] Caller-resolved fallback first; the localStorage

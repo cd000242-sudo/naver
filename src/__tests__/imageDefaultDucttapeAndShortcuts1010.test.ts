@@ -45,7 +45,7 @@ describe('A. 이미지 엔진 기본값 = 덕트테이프(openai-image)', () => 
     expect(getGlobalImageSource()).toBe('openai-image');
   });
 
-  it.each(['dropshot', 'nano-banana-2', 'flow', 'prodia', 'openai-image'])(
+  it.each(['dropshot', 'nano-banana-2', 'flow', 'openai-image'])(
     '사용자가 저장한 엔진 %s 는 그대로 읽힌다',
     (engine) => {
       localStorage.setItem('globalImageSource', engine);

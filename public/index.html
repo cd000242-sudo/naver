@@ -3614,14 +3614,10 @@
                 <div class="field image-source-studio" id="image-source-studio"><div class="studio-section-heading"><h3>이미지 만들기</h3><span>생성 엔진과 이미지 파일을 한곳에서</span></div>
                     <div class="image-source-toolbar"><div class="image-engine-field"><label for="image-source-select">생성 엔진</label><select id="image-source-select" aria-describedby="image-source-help">
                             <option value="nano-banana-2" data-icon="🍌" data-price="Gemini 3.1 Flash Image | ₩97/장 | 한글 가능">나노바나나 2</option>
-                            <option value="deepinfra" data-icon="⚡" data-price="$0.01/장 | FLUX-2">DeepInfra</option>
                             <option value="openai-image" data-icon="🦆" data-price="gpt-image-2.5 Sunburst(기본)/Flare | $0.006~$0.21 | 한글 최강" selected>덕테이프 · OpenAI</option>
                             <!-- v2.10.295: DALL-E 3 옵션 완전 삭제 — OpenAI 2026-05-12 폐기 + 사용자 요청 -->
 
-                            <option value="leonardoai" data-icon="🦁" data-price="Phoenix 1.0 | $0.01~$0.02">Leonardo AI</option>
-                            <!-- 2026-06-14: Flow/Prodia 복구 (기존 사용자 선택권 유지). ImageFX만 비노출 유지. -->
                             <option value="flow" data-icon="🍌" data-price="Google Flow | UI 자동화 · 로그인 필요">Google Flow</option>
-                            <option value="prodia" data-icon="⚡" data-price="Prodia API | $0.0025~$0.01/장">Prodia</option>
                             <!-- ✅ [SPEC-DROPSHOT-2026] 리더스 나노바나나 무제한 (UI 자동화 · 로그인 필요) -->
                             <option value="dropshot" data-icon="🍌" data-price="Pro 구독자 무제한 · 추가비용 0원 | UI 자동화 · 로그인 필요">리더스 나노바나나 무제한</option>
                             <option value="genspark" data-icon="✨" data-price="로그인 필요 · 모델 선택 · UI 자동화">젠스파크</option>
@@ -3658,23 +3654,6 @@
                             <button type="button" id="mgmt-flow-check-btn" style="padding:0.45rem 0.9rem; background:var(--bg-tertiary); color:var(--text-strong); border:1px solid var(--border-medium); border-radius:6px; font-weight:600; font-size:0.8rem; cursor:pointer;">✅ 로그인 확인</button>
                             <span id="mgmt-flow-status" style="font-size:0.78rem; color:var(--text-muted);"></span>
                         </div>
-                    </div>
-
-                    <!-- ✅ [2026-02-22] Leonardo AI 상세 모델 선택 (Leonardo AI 선택 시에만 표시) -->
-                    <div id="leonardoai-model-selection-container"
-                        style="display: none; margin-bottom: 1rem; padding: 1rem; background: rgba(251, 146, 60, 0.05); border-radius: 8px; border: 1px solid rgba(251, 146, 60, 0.2);">
-                        <label
-                            style="display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-strong); margin-bottom: 0.5rem;">🦁
-                            Leonardo AI 모델 선택</label>
-                        <select id="leonardoai-model-select"
-                            style="width: 100%; padding: 0.6rem; border-radius: 6px; border: 1px solid var(--border-medium); background: var(--bg-primary); color: var(--text-strong); font-size: 0.9rem;">
-                            <option value="seedream-4.5" selected>🌟 SeeDream 4.5 ($0.04/장, 가성비 최강 추천)</option>
-                            <option value="phoenix-1.0">🔥 Phoenix 1.0 (토큰 차감, 구독 토큰 활용)</option>
-                            <option value="ideogram-3.0">✍️ Ideogram 3.0 ($0.11/장, 텍스트 렌더링 특화)</option>
-                            <option value="nano-banana-pro">🍌 Nano Banana Pro ($0.21/장, 한글 텍스트 최강)</option>
-                        </select>
-                        <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.4rem;">💡 SeeDream 4.5는
-                            이미지당 $0.04로 가성비 최강! Ideogram 3.0은 텍스트 렌더링에 강하고, Nano Banana Pro는 한글 텍스트 정확도 1위입니다.</p>
                     </div>
 
                     <!-- ✅ OpenAI 덕트테이프 모델·품질 선택 (openai-image 선택 시에만 표시) -->
@@ -3778,7 +3757,7 @@
                             placeholder="예: https://www.coupang.com/vp/products/123456 또는 https://coupa.ng/abc123"
                             style="width: 100%; padding: 0.875rem; background: var(--bg-secondary); border: 1px solid var(--border-medium); border-radius: var(--radius-md); color: var(--text-strong); font-size: 0.95rem;">
                         <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem;">
-                            비워두면 기본 이미지 소스(덕트테이프/Pexels)만 사용합니다.
+                            비워두면 기본 이미지 소스(덕트테이프)만 사용합니다.
                         </p>
 
                         <button type="button" id="shopping-collect-save-btn"
@@ -4541,7 +4520,7 @@
                                         <div style="font-weight: 700; color: #8b5cf6; font-size: 0.95rem;">API 키 통합 설정
                                         </div>
                                         <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.15rem;">
-                                            Gemini, Stability, Fal.AI 등</div>
+                                            Gemini · OpenAI · Claude · Perplexity · 네이버 등</div>
                                     </div>
                                 </div>
                                 <span style="font-size: 1.2rem; color: #8b5cf6; transition: transform 0.2s;"
@@ -4959,20 +4938,6 @@
                                     </button>
                                 </div>
 
-                                <!-- API Key 입력 -->
-                                <div style="margin-bottom: 1rem;">
-                                    <div style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.4rem; font-weight: 600;">🔑 API Key (선택사항)</div>
-                                    <div style="display: flex; gap: 0.5rem;">
-                                        <input type="password" id="adspower-api-key-input" placeholder="API Key를 입력하세요 (없으면 비워두세요)"
-                                            style="flex: 1; padding: 0.55rem 0.75rem; border-radius: 8px; border: 1px solid rgba(249, 115, 22, 0.25); background: var(--bg-primary, #161625); color: var(--text-strong); font-size: 0.8rem; font-family: monospace;">
-                                        <button type="button" id="adspower-save-apikey-btn"
-                                            style="padding: 0.55rem 0.85rem; background: linear-gradient(135deg, #f97316, #ea580c); border: none; border-radius: 8px; color: white; cursor: pointer; font-size: 0.75rem; font-weight: 700; white-space: nowrap;">
-                                            💾 저장
-                                        </button>
-                                    </div>
-                                    <div id="adspower-apikey-status" style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.3rem; opacity: 0.7;"></div>
-                                </div>
-
                                 <!-- 연결 상태 표시 -->
                                 <div id="adspower-status" style="padding: 0.6rem 0.85rem; min-height: 1.4em; font-size: 0.78rem; color: var(--text-muted); background: rgba(0,0,0,0.15); border-radius: 10px; text-align: center; margin-bottom: 1.25rem;">
                                     AdsPower 연결 상태를 확인하려면 연결 테스트를 눌러주세요.
@@ -5126,18 +5091,18 @@
 
                         <!-- ✅ API 키 설정 섹션 (토글 가능) -->
                         <div id="settings-section-api-keys" style="display: none;">
-                            <!-- ✅ Gemini API 키만 필수 (간소화) -->
+                            <!-- Gemini API 키: 사진으로 글쓰기(사진 분석) · 나노바나나 이미지에 사용 (글 생성은 구독 에이전트가 기본) -->
                             <div
                                 style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(255, 215, 0, 0.1)); padding: 1.5rem; border-radius: 12px; border: 2px solid var(--border-gold); margin-bottom: 2rem;">
                                 <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
                                     <span style="font-size: 2.5rem;">🔑</span>
                                     <div>
                                         <h3 style="color: var(--text-gold); margin: 0; font-size: 1.2rem;">Gemini API 키
-                                            (필수)
+                                            (사진으로 글쓰기 · 나노바나나 이미지에 사용)
                                         </h3>
                                         <p style="color: var(--text-muted); margin: 0.25rem 0 0 0; font-size: 0.85rem;">
-                                            글 생성
-                                            + 이미지 생성 모두 이 키 하나로 가능!</p>
+                                            사진 분석과 나노바나나 이미지를 쓸 때 필요합니다.
+                                            글 생성은 구독 에이전트가 기본이며, Gemini 글생성을 고른 경우에도 이 키를 씁니다.</p>
                                     </div>
                                 </div>
                                 <!-- Gemini 무료 한도 기준 안내 -->
@@ -5237,37 +5202,6 @@
 
                             <!-- ✅ [2026-01-27] 통합 API 키 카드 - 모든 API 키를 하나의 카드에 -->
                             <!-- ═══════════════════════════════════════════════════════════════ -->
-                            <!-- 🦁 Leonardo AI API 키 -->
-                            <div
-                                style="border-top: 2px dashed rgba(234, 179, 8, 0.3); margin: 1rem 0 0 0; padding-top: 1.5rem;">
-                                <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
-                                    <span style="font-size: 1.5rem;">🦁</span>
-                                    <div>
-                                        <h4 style="color: #eab308; margin: 0; font-size: 1rem; font-weight: 700;">
-                                            Leonardo AI
-                                            API 키</h4>
-                                        <p style="color: var(--text-muted); margin: 0.15rem 0 0 0; font-size: 0.75rem;">
-                                            Phoenix, FLUX Kontext 등 다양한 모델로 이미지 생성</p>
-                                    </div>
-                                </div>
-                                <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
-                                    <div style="position: relative; flex: 1; min-width: 200px;">
-                                        <input type="password" id="leonardoai-api-key" placeholder="Leonardo AI API 키"
-                                            style="width: 100%; background: var(--bg-secondary); border: 2px solid #eab308; color: var(--text-strong); padding: 0.65rem; padding-right: 2.5rem; border-radius: 6px; font-size: 0.9rem; box-sizing: border-box;">
-                                        <button type="button" id="leonardoai-api-key-toggle"
-                                            style="position: absolute; right: 6px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 1.1rem; padding: 0.15rem 0.3rem; border-radius: 4px; color: #9ca3af; transition: all 0.2s; line-height: 1;"
-                                            title="API 키 표시/숨기기">👁</button>
-                                    </div>
-                                    <button type="button" class="api-guide-btn" data-api="leonardoai"
-                                        onclick="window.api.openExternalUrl('https://app.leonardo.ai/api-access'); return false;"
-                                        style="padding: 0.65rem 1rem; background: linear-gradient(135deg, #eab308, #ca8a04); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.8rem;">🔑
-                                        발급</button>
-                                    <button type="button" id="leonardoai-validate-btn"
-                                        style="padding: 0.65rem 0.85rem; background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.8rem; white-space: nowrap;">✅ 키 확인</button>
-                                </div>
-                                <div id="leonardoai-validate-result" style="display: none; margin-top: 0.5rem; padding: 0.6rem 0.85rem; background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.25); border-radius: 8px; font-size: 0.78rem; color: var(--text-strong); line-height: 1.5;"></div>
-                            </div>
-
                             <!-- ═══════════════════════════════════════════════════════════════ -->
                             <!-- 🔮 Perplexity API (하단 구분선) -->
                             <div
@@ -5378,36 +5312,6 @@
                             </div>
 
                             <!-- ═══════════════════════════════════════════════════════════════ -->
-                            <!-- ⚡ DeepInfra API (하단 구분선) -->
-                            <div
-                                style="border-top: 2px dashed rgba(251, 146, 60, 0.3); margin: 1rem 0 0 0; padding-top: 1.5rem;">
-                                <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
-                                    <span style="font-size: 1.5rem;">⚡</span>
-                                    <div>
-                                        <h4 style="color: #fb923c; margin: 0; font-size: 1rem; font-weight: 700;">
-                                            DeepInfra API 키 (FLUX-2 이미지)</h4>
-                                        <p style="color: var(--text-muted); margin: 0.15rem 0 0 0; font-size: 0.75rem;">
-                                            FLUX-2 모델로 고품질 이미지 생성 ($0.01/장)</p>
-                                    </div>
-                                </div>
-                                <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
-                                    <div style="position: relative; flex: 1; min-width: 200px;">
-                                        <input type="password" id="deepinfra-api-key" placeholder="DeepInfra API 키"
-                                            style="width: 100%; background: var(--bg-secondary); border: 2px solid #fb923c; color: var(--text-strong); padding: 0.65rem; padding-right: 2.5rem; border-radius: 6px; font-size: 0.9rem; box-sizing: border-box;">
-                                        <button type="button" id="deepinfra-api-key-toggle"
-                                            style="position: absolute; right: 6px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 1.1rem; padding: 0.15rem 0.3rem; border-radius: 4px; color: #9ca3af; transition: all 0.2s; line-height: 1;"
-                                            title="API 키 표시/숨기기">👁</button>
-                                    </div>
-                                    <button type="button" class="api-guide-btn" data-api="deepinfra"
-                                        style="padding: 0.65rem 1rem; background: linear-gradient(135deg, #fb923c, #f97316); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.8rem;">🔑
-                                        발급 가이드</button>
-                                    <button type="button" id="deepinfra-validate-btn"
-                                        style="padding: 0.65rem 0.85rem; background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.8rem; white-space: nowrap;">✅ 키 확인</button>
-                                </div>
-                                <div id="deepinfra-validate-result" style="display: none; margin-top: 0.5rem; padding: 0.6rem 0.85rem; background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.25); border-radius: 8px; font-size: 0.78rem; color: var(--text-strong); line-height: 1.5;"></div>
-                            </div>
-
-
                             <!-- ═══════════════════════════════════════════════════════════════ -->
                             <!-- 🔍📊 네이버 API (검색 + 광고) - 병렬 레이아웃 -->
                             <div
@@ -5941,7 +5845,7 @@
                                 style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.75rem; line-height: 1.6;">
                                 ✅ <strong>정책/계정 설정에 따라 무료 티어 또는 과금</strong> | 할당량은 각 AI 정책에 따름<br>
                                 ✅ <strong>글 생성</strong>: Gemini 3.1/3.5 · GPT-5.6 · Claude Haiku 4.5/Sonnet 5/Fable 5 (3단계 선택)<br>
-                                ✅ <strong>이미지 생성</strong>: 나노바나나2 (Gemini 3.1 Flash · 유료) / Flow (AI Pro/Ultra 무료) / ImageFX (Imagen 3.5 · 무료) / Leonardo · DeepInfra (FLUX) / 공공자료
+                                ✅ <strong>이미지 생성</strong>: 나노바나나2 (Gemini 3.1 Flash · 유료) / Flow (AI Pro/Ultra 무료) / ImageFX (Imagen 3.5 · 무료) / 공공자료
                             </p>
 
                             <!-- ✅ [2026-01-27] AI 텍스트 엔진 저장 버튼 — [v2.10.168] var(--primary-gold) 미정의 fix -->
@@ -6045,36 +5949,12 @@
                                 </div>
                             </div>
 
-                            <!-- 🔥 DeepInfra (FLUX) -->
-                            <div style="background: rgba(239, 68, 68, 0.08); padding: 0.875rem; border-radius: 10px; border-left: 4px solid #ef4444;">
-                                <div style="font-weight: 700; color: #dc2626; margin-bottom: 0.35rem; font-size: 0.95rem;">🔥 DeepInfra (FLUX 계열)</div>
-                                <div style="font-size: 0.8rem; color: #1f2937; line-height: 1.7;">
-                                    • FLUX-2 dev: <strong>₩35/장</strong> (최신, 고품질)<br>
-                                    • FLUX-1 dev: <strong>₩35/장</strong> (기본)<br>
-                                    • FLUX Schnell: <strong>₩0/장</strong> (무료, 빠름)
-                                </div>
-                            </div>
-
-                            <!-- 🦁 Leonardo AI -->
-                            <div style="background: rgba(234, 88, 12, 0.08); padding: 0.875rem; border-radius: 10px; border-left: 4px solid #ea580c;">
-                                <div style="font-weight: 700; color: #c2410c; margin-bottom: 0.35rem; font-size: 0.95rem;">🦁 Leonardo AI</div>
-                                <div style="font-size: 0.8rem; color: #1f2937; line-height: 1.7;">
-                                    • SeeDream 4.5: <strong>₩56/장</strong> (★ 가성비 최강)<br>
-                                    • Phoenix 1.0: <strong>₩84/장</strong> (고품질)<br>
-                                    • Ideogram 3.0: <strong>₩154/장</strong> (텍스트 특화)<br>
-                                    • Nano Banana Pro: <strong>₩294/장</strong> (한글 최강)
-                                </div>
-                            </div>
-
                             <!-- 💡 7장 한 편당 비용 요약 -->
                             <div style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.05)); padding: 0.875rem; border-radius: 10px; border: 1px dashed rgba(99, 102, 241, 0.4); margin-top: 0.5rem;">
                                 <div style="font-weight: 700; color: #6366f1; margin-bottom: 0.5rem; font-size: 0.9rem;">💡 한 편(7장) 기준 예상 비용</div>
                                 <div style="font-size: 0.78rem; color: #1f2937; line-height: 1.75; display: grid; grid-template-columns: 1fr 1fr; gap: 4px 12px;">
                                     <span>🍌 Flow</span><strong style="color: #10b981;">₩0</strong>
                                     <span>✨ ImageFX</span><strong style="color: #10b981;">₩0</strong>
-                                    <span>🔥 FLUX Schnell</span><strong style="color: #10b981;">₩0</strong>
-                                    <span>🔥 FLUX-2 dev</span><strong>₩245</strong>
-                                    <span>🦁 SeeDream 4.5</span><strong>₩392</strong>
                                     <span>🦆 덕트테이프 (Med)</span><strong>₩126</strong>
                                     <span>🍌 Gemini 3.1 Flash</span><strong>₩679</strong>
                                     <span>🦆 덕트테이프 (High)</span><strong style="color: #dc2626;">₩518</strong>
@@ -6155,25 +6035,6 @@
                             </div>
                         </div>
 
-                        <!-- ✅ [2026-01-28] Prodia AI 모델 선택 -->
-                        <div
-                            style="background: rgba(139, 92, 246, 0.05); padding: 1rem; border-radius: 10px; border: 1px solid rgba(139, 92, 246, 0.2);">
-                            <label for="prodia-model-select"
-                                style="display: block; font-weight: 600; color: #a78bfa; margin-bottom: 0.5rem; font-size: 0.9rem;">
-                                ⚡ Prodia AI 모델
-                            </label>
-                            <select id="prodia-model-select"
-                                style="width: 100%; padding: 0.75rem; background: var(--bg-secondary); border: 2px solid rgba(139, 92, 246, 0.3); border-radius: 8px; color: var(--text-strong); font-size: 0.9rem; cursor: pointer;">
-                                <option value="flux">🚀 FLUX - ₩4 (고품질, 추천)</option>
-                                <option value="sdxl">🎨 SDXL - ₩4 (균형)</option>
-                                <option value="sd15">💰 SD 1.5 - ₩4 (경제적)</option>
-                                <option value="sd3">✨ SD 3 - ₩4 (최신)</option>
-                            </select>
-                            <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem;">
-                                ℹ️ FLUX 모델은 빠르고 고품질 이미지를 생성합니다. | 토큰 소진 후 $0.0025/장
-                            </p>
-                        </div>
-
                         <!-- Pollinations 모델 선택 -->
                         <div
                             style="background: rgba(156, 163, 175, 0.05); padding: 1rem; border-radius: 10px; border: 1px solid rgba(156, 163, 175, 0.2);">
@@ -6204,52 +6065,6 @@
 
 
 
-
-                <h3
-                    style="color: var(--text-gold); border-bottom: 2px solid var(--border-gold); padding-bottom: 0.5rem; margin-top: 2rem;">
-
-                    ⚡ Prodia AI 설정 (가성비 이미지)</h3>
-                <div class="field"
-                    style="background: rgba(139, 92, 246, 0.08); padding: 1rem; border-radius: var(--radius-md); border: 1px solid rgba(139, 92, 246, 0.25); margin-bottom: 1rem;">
-                    <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
-                        <span style="font-size: 1.5rem;">⚡</span>
-                        <div>
-                            <div style="font-weight: 700; color: #a78bfa; margin-bottom: 0.5rem;">Prodia
-                                Token이란?</div>
-                            <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0; line-height: 1.6;">
-                                Prodia는 빠르고 가성비 좋은 이미지 생성 API입니다.<br>
-                                사용량/과금은 Prodia 대시보드에서 확인할 수 있습니다.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="field">
-                    <label for="prodia-token"
-                        style="color: var(--text-gold); display: flex; align-items: center; justify-content: space-between;">
-                        <span>Prodia API Token</span>
-                        <button type="button" class="api-guide-btn" data-api="prodia"
-                            style="padding: 0.25rem 0.75rem; background: rgba(139, 92, 246, 0.2); color: #a78bfa; border: 1px solid rgba(167, 139, 250, 0.8); border-radius: 4px; font-size: 0.75rem; cursor: pointer; font-weight: 600;">📖
-                            가이드</button>
-                    </label>
-                    <input type="password" id="prodia-token" placeholder="Prodia에서 발급받은 Token (Bearer)"
-                        style="background: var(--bg-secondary); border: 1px solid var(--border-medium); color: var(--text-strong);">
-                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.75rem; line-height: 1.6;">
-                        ✅ 1,000회 이후부터 $0.0025 수준(약 1회당 4원 내외)로 부담이 적습니다. (정확한 과금은 Prodia 정책/계정 설정에 따름)
-                    </p>
-                    <div style="margin-top: 0.75rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                        <button type="button" class="external-link-btn" data-url="https://app.prodia.com/api"
-                            style="flex: 1; min-width: 160px; display: inline-block; text-align: center; padding: 0.6rem 1rem; background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; border-radius: 6px; font-size: 0.85rem; font-weight: 700; border: none; cursor: pointer;">🔑
-                            Token 발급/관리</button>
-                        <button type="button" class="external-link-btn"
-                            data-url="https://docs.prodia.com/guides/generating-images/"
-                            style="flex: 1; min-width: 160px; display: inline-block; text-align: center; padding: 0.6rem 1rem; background: rgba(139, 92, 246, 0.2); color: #a78bfa; border: 1px solid rgba(167, 139, 250, 0.8); border-radius: 6px; font-size: 0.85rem; font-weight: 700; cursor: pointer;">📖
-                            이미지 가이드</button>
-                        <button type="button" class="external-link-btn"
-                            data-url="https://docs.prodia.com/guides/generating-videos/"
-                            style="flex: 1; min-width: 160px; display: inline-block; text-align: center; padding: 0.6rem 1rem; background: rgba(139, 92, 246, 0.2); color: #a78bfa; border: 1px solid rgba(167, 139, 250, 0.8); border-radius: 6px; font-size: 0.85rem; font-weight: 700; cursor: pointer;">🎞
-                            영상 가이드</button>
-                    </div>
-                </div>
 
                 <!-- ✅ [2026-01-27] 이미지 모델 저장 버튼 -->
                 <div style="margin-top: 1.5rem; border-top: 2px solid var(--border-gold); padding-top: 1.25rem;">
@@ -8543,9 +8358,8 @@
                         <div style="font-weight: 700; color: #10b981; margin-bottom: 0.75rem; font-size: 1.1rem;">
                             🔑
                             1. Gemini API 키 설정</div>
-                        <p style="font-size: 0.9rem; line-height: 1.6;">환경설정에서 Gemini API 키만 입력하세요. 글 생성과 이미지 생성
-                            모두
-                            무료로 가능합니다!</p>
+                        <p style="font-size: 0.9rem; line-height: 1.6;">사진으로 글쓰기와 나노바나나 이미지를 쓰려면 환경설정에서 Gemini API 키를 입력하세요.
+                            글 생성은 구독 에이전트로도 가능합니다.</p>
                     </div>
                     <div
                         style="padding: 1.25rem; background: var(--bg-primary); border-radius: 12px; border-left: 4px solid #3b82f6;">
@@ -8603,7 +8417,7 @@
                             <strong>ImageFX (Imagen 3.5)</strong>와 <strong>Flow (Nano Banana 2)</strong>는 Google 계정 로그인만으로 사용 가능한 <em>완전 무료</em> 엔진입니다.
                             <strong>ImageFX</strong>는 500~1,000장/일(15 RPM), <strong>Flow</strong>는 무료 50 크레딧/일 또는 AI Pro·Ultra 구독 시 확장됩니다.
                             <strong>Nano Banana Pro (Gemini 3 Pro Image · 직접 API)</strong>는 유료이며 4K 해상도까지 지원합니다.
-                            <strong>Leonardo AI</strong>·<strong>DeepInfra (FLUX)</strong>·<strong>덕트테이프 (OpenAI gpt-image-2.5)</strong>는 각 API 정책에 따라 과금됩니다.
+                            <strong>덕트테이프 (OpenAI gpt-image-2.5)</strong>는 OpenAI API 정책에 따라 과금됩니다.
                         </div>
                     </details>
                     <details
@@ -12618,12 +12432,6 @@
                             <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩97</td>
                             <td style="padding: 0.7rem; text-align: right; color: #4ade80;">가능 ✓</td>
                         </tr>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                            <td style="padding: 0.7rem; font-weight: bold; color: #60a5fa;">⚡ DeepInfra (FLUX-2)</td>
-                            <td style="padding: 0.7rem; color: #e2e8f0;">FLUX-2 · 빠른 저비용 · API 키 필요</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩17</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #a1a1aa;">깨짐 ✗</td>
-                        </tr>
                         <!-- 덕테이프 (gpt-image-2.5, 품질 5단계 중 3단계 표기) -->
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
                             <td style="padding: 0.7rem; font-weight: bold; color: #a78bfa;">🦆 덕테이프 (low)</td>
@@ -12643,24 +12451,12 @@
                             <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩74</td>
                             <td style="padding: 0.7rem; text-align: right; color: #4ade80;">가능 ✓</td>
                         </tr>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                            <td style="padding: 0.7rem; font-weight: bold; color: #a78bfa;">🦁 Leonardo AI</td>
-                            <td style="padding: 0.7rem; color: #e2e8f0;">Phoenix / Ideogram · API 키 필요</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩14~28</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #a1a1aa;">약함 ✗</td>
-                        </tr>
                         <!-- 무료/구독 -->
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); background: rgba(34, 197, 94, 0.08);">
                             <td style="padding: 0.7rem; font-weight: bold; color: #4ade80;">🍌 Flow <span style="font-size: 0.7rem; color: #fbbf24;">(Google Labs)</span></td>
                             <td style="padding: 0.7rem; color: #e2e8f0;">Nano Banana Pro · UI 자동화 · 로그인 필요</td>
                             <td style="padding: 0.7rem; text-align: right; color: #4ade80; font-weight: bold;">₩0 (쿼터 내)</td>
                             <td style="padding: 0.7rem; text-align: right; color: #4ade80;">최강 ✓</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                            <td style="padding: 0.7rem; font-weight: bold; color: #60a5fa;">⚡ Prodia</td>
-                            <td style="padding: 0.7rem; color: #e2e8f0;">SDXL · 빠른 저비용 · API 키 필요</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩14</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #a1a1aa;">깨짐 ✗</td>
                         </tr>
                         <tr style="background: rgba(34, 197, 94, 0.08);">
                             <td style="padding: 0.7rem; font-weight: bold; color: #4ade80;">🍌 리더스 나노바나나 무제한 <span style="font-size: 0.7rem; color: #fbbf24;">(Dropshot 구독)</span></td>
@@ -12699,13 +12495,6 @@
                             <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩679</td>
                         </tr>
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                            <td style="padding: 0.6rem; color: #60a5fa; font-weight: bold;">⚡ DeepInfra (FLUX-2)</td>
-                            <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩17</td>
-                            <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩17</td>
-                            <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩68</td>
-                            <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩119</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
                             <td style="padding: 0.6rem; color: #a78bfa; font-weight: bold;">🦆 덕테이프 medium (gpt-image-2.5)</td>
                             <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩18</td>
                             <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩18</td>
@@ -12718,20 +12507,6 @@
                             <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩74</td>
                             <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩296</td>
                             <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩518</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                            <td style="padding: 0.6rem; color: #a78bfa; font-weight: bold;">🦁 Leonardo AI</td>
-                            <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩14~28</td>
-                            <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩28</td>
-                            <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩112</td>
-                            <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩196</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                            <td style="padding: 0.6rem; color: #60a5fa; font-weight: bold;">⚡ Prodia</td>
-                            <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩14</td>
-                            <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩14</td>
-                            <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩56</td>
-                            <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩98</td>
                         </tr>
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); background: rgba(34,197,94,0.08);">
                             <td style="padding: 0.6rem; color: #4ade80; font-weight: bold;">🍌 Flow (Google Labs 쿼터 내)</td>
@@ -12760,7 +12535,7 @@
                     3️⃣ 무료/구독 이미지 엔진 할당량 (Flow · Dropshot)
                 </h4>
                 <p style="margin: 0 0 1rem 0; font-size: 0.8rem; color: #b0bec5;">
-                    ※ Flow는 <b>크레딧 + 일일 한도</b>로 제한, Dropshot은 <b>Pro 구독 시 무제한</b>. 종량제 엔진(나노바나나·덕테이프·Prodia)은 위 표 참고.
+                    ※ Flow는 <b>크레딧 + 일일 한도</b>로 제한, Dropshot은 <b>Pro 구독 시 무제한</b>. 종량제 엔진(나노바나나·덕테이프)은 위 표 참고.
                 </p>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-bottom: 1.25rem;">
                     <!-- Flow 카드 -->
@@ -12784,8 +12559,7 @@
                         <div style="margin-top: 0.6rem; padding: 0.6rem 0.7rem; background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 6px; font-size: 0.76rem; color: #fecaca; line-height: 1.6;">
                             ⚠️ <b>Flow가 안 되나요?</b><br>
                             ① 먼저 <b>제미나이(Google AI) 구독이 Plus(Pro) 이상</b>인지 확인하세요. 무료 계정은 막히기 쉽습니다.<br>
-                            ② 가장 저렴한 대안은 <b>DeepInfra</b> 또는 <b>Prodia</b>(장당 수원~수십원)입니다.<br>
-                            ③ <b>Leonardo</b>는 토큰으로 이미지 생성이 가능합니다 — <b>1:1 카톡문의</b> 주시면 자세히 안내해 드립니다.
+                            ② 다른 엔진(덕트테이프·나노바나나2·Dropshot)으로 직접 바꿔서 쓰세요. 앱이 알아서 엔진을 바꾸지는 않습니다.
                         </div>
                     </div>
 
@@ -12812,7 +12586,6 @@
                     <ul style="margin: 0; padding-left: 1.2rem; color: #e5e7eb; font-size: 0.82rem; line-height: 1.7;">
                         <li><strong style="color: #4ade80;">대량·무료</strong> → Flow(쿼터 내) 또는 Dropshot 구독(무제한)</li>
                         <li><strong style="color: #fbbf24;">한글 썸네일</strong> → 나노바나나2(₩97) / 덕테이프(₩18~74)</li>
-                        <li><strong style="color: #fca5a5;">최저 종량제</strong> → Prodia(₩14, 한글 깨짐)</li>
                         <li><strong style="color: #f472b6;">쇼핑커넥트 모드</strong> → 수집 이미지 자동 사용 (AI 엔진 우회 = ₩0)</li>
                     </ul>
                 </div>
@@ -12848,7 +12621,7 @@
                         </h5>
                         <ul style="margin: 0; padding-left: 1.2rem; color: #e5e7eb; font-size: 0.85rem; line-height: 1.7;">
                             <li><strong>글생성:</strong> <strong>Gemini 3.1 Flash-Lite</strong> (★기본 추천 · ₩17 · 절약 ₩13) — 더 단단한 문장이 필요하면 <strong>GPT-5.6 Terra</strong>(₩168 · 절약 ₩130)</li>
-                            <li><strong>이미지:</strong> <strong>Prodia</strong>(₩14) · <strong>DeepInfra FLUX-2</strong>(₩17) — 한글 텍스트가 필요하면 <strong>나노바나나2</strong>(₩97)</li>
+                            <li><strong>이미지:</strong> 덕트테이프(Low ₩8~) · 나노바나나2(₩97, 한글 텍스트 가능)</li>
                             <li style="margin-top: 0.5rem; color: #f472b6; font-weight: bold; background: rgba(244, 114, 182, 0.15); padding: 0.25rem 0.5rem; border-radius: 4px; display: inline-block;">
                                 구독 없이 쓴 만큼만 — 한도 막힘 없음</li>
                         </ul>
@@ -12884,7 +12657,7 @@
                         <li>입력 10K 토큰 / 출력 4K 토큰 기준. 실제 블로그 글은 ±30% 편차 가능.</li>
                         <li><strong>캐시 적중</strong>: 시스템 프롬프트 재사용 시 자동 적용 (Claude 5분 TTL / Gemini 1시간 TTL).</li>
                         <li><strong>Deprecated 모델</strong>: GPT-4o(2026-03-31 은퇴), DALL-E 3(2026-05-12 제거), gpt-image-1·1.5·2(덕트테이프 gpt-image-2.5로 자동 교체: 2는 Sunburst, 1·1.5는 Flare) — 앱에서 자동 회피.</li>
-                        <li><strong>Flow 쿼터 초과 시</strong>: ImageFX → DeepInfra FLUX schnell 순으로 자동 폴백 (유료 엔진 전환 전 확인 필요).</li>
+                        <li><strong>Flow 쿼터 초과 시</strong>: 다른 엔진으로 직접 바꿔 주세요 (유료 엔진은 자동으로 바뀌지 않습니다).</li>
                         <li>품질 점수는 한국어 블로그 10점 만점 벤치마크 (6축 가중평균).</li>
                     </ul>
                 </div>

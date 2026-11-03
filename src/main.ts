@@ -3918,16 +3918,9 @@ ipcMain.handle(
 
       const apiKeys = {
         openaiApiKey: config.openaiApiKey,
-        pexelsApiKey: config.pexelsApiKey,
-        unsplashApiKey: config.unsplashApiKey,
-        pixabayApiKey: config.pixabayApiKey,
         geminiApiKey: config.geminiApiKey,
-        deepinfraApiKey: (config as any).deepinfraApiKey,
         // ✅ [2026-02-22] 새 이미지 프로바이더 API 키
         openaiImageApiKey: (config as any).openaiImageApiKey,
-        leonardoaiApiKey: (config as any).leonardoaiApiKey,
-        prodiaApiKey: (config as any).prodiaApiKey || (config as any).prodiaToken,
-
       };
 
       // 쇼핑 AI: 수집 이미지는 결과물이 아니라 대표 상품 레퍼런스로만 사용한다.
@@ -4442,8 +4435,6 @@ ipcMain.handle('apiKey:validate', async (_event, provider: string, apiKey: strin
     // 대시보드 URL 매핑
     const dashboardUrls: Record<string, string> = {
       openai: 'https://platform.openai.com/settings/organization/billing/overview',
-      leonardoai: 'https://app.leonardo.ai/api-access',
-      deepinfra: 'https://deepinfra.com/dash/billing',
       claude: 'https://console.anthropic.com/settings/billing',
       perplexity: 'https://www.perplexity.ai/settings/api',
     };
@@ -4462,34 +4453,6 @@ ipcMain.handle('apiKey:validate', async (_event, provider: string, apiKey: strin
     });
 
     switch (provider) {
-      case 'leonardoai': {
-        try {
-          const resp = await axios.get('https://cloud.leonardo.ai/api/rest/v1/me', {
-            headers: { 'Authorization': `Bearer ${key}`, 'Accept': 'application/json' },
-            timeout: 10000,
-          });
-          const user = resp.data?.user_details?.[0] || resp.data;
-          const paidTokens = user?.apiPaidTokens ?? user?.apiCredit ?? null;
-          const subTokens = user?.apiSubscriptionTokens ?? null;
-          const totalCredits = (paidTokens !== null && subTokens !== null) ? (paidTokens + subTokens) : (paidTokens ?? subTokens ?? null);
-
-          return {
-            success: true,
-            details: `사용자: ${user?.username || '확인됨'}`,
-            balance: makeBalanceObj({
-              remaining: totalCredits !== null ? `${totalCredits.toLocaleString()} 크레딧` : '대시보드 확인',
-              total: paidTokens !== null ? `유료: ${paidTokens.toLocaleString()}` : '',
-            }),
-          };
-        } catch (err: any) {
-          const status = err?.response?.status;
-          if (status === 401 || status === 403) {
-            return { success: false, message: 'API 키가 유효하지 않습니다. 키를 확인해주세요.' };
-          }
-          return { success: false, message: `Leonardo AI 연결 실패: ${err?.message || '알 수 없는 오류'}` };
-        }
-      }
-
       case 'perplexity': {
         try {
           const resp = await axios.post('https://api.perplexity.ai/chat/completions', {
@@ -4582,51 +4545,6 @@ ipcMain.handle('apiKey:validate', async (_event, provider: string, apiKey: strin
             return { success: true, details: 'API 키 유효 (현재 요청 한도 초과)', balance: makeBalanceObj({ remaining: '대시보드 확인' }) };
           }
           return { success: false, message: `Claude 연결 실패: ${err?.message || '알 수 없는 오류'}` };
-        }
-      }
-
-      case 'deepinfra': {
-        try {
-          const resp = await axios.get('https://api.deepinfra.com/v1/openai/models', {
-            headers: { 'Authorization': `Bearer ${key}` },
-            timeout: 10000,
-          });
-          const models = resp.data?.data || [];
-
-          // ✅ [2026-03-20] DeepInfra 잔액 조회 — 다양한 응답 필드 탐색
-          const creditInfo = { remaining: '', total: '' };
-          try {
-            const billingResp = await axios.get('https://api.deepinfra.com/v1/api_token/me', {
-              headers: { 'Authorization': `Bearer ${key}` },
-              timeout: 8000,
-            });
-            const d = billingResp.data || {};
-            console.log('[DeepInfra] /v1/api_token/me 응답 필드:', Object.keys(d));
-            // 다양한 필드명 탐색 (공식 미문서화)
-            const remaining = d.credits ?? d.balance ?? d.remaining_credits ?? d.credit_balance;
-            const total = d.max_credits ?? d.total_credits ?? d.topped_up_credits;
-            if (remaining !== undefined && remaining !== null) {
-              creditInfo.remaining = `$${Number(remaining).toFixed(2)}`;
-            }
-            if (total !== undefined && total !== null) {
-              creditInfo.total = `$${Number(total).toFixed(2)}`;
-            }
-          } catch (billingErr: any) {
-            console.log('[DeepInfra] 잔액 API 조회 실패:', billingErr?.response?.status || billingErr?.message);
-            // 폴백 없음 — 앱 내 누적 사용량만 표시
-          }
-
-          return {
-            success: true,
-            details: `DeepInfra 연결 성공 | 모델 ${models.length}개`,
-            balance: makeBalanceObj(creditInfo),
-          };
-        } catch (err: any) {
-          const status = err?.response?.status;
-          if (status === 401 || status === 403) {
-            return { success: false, message: 'API 키가 유효하지 않습니다. 키를 확인해주세요.' };
-          }
-          return { success: false, message: `DeepInfra 연결 실패: ${err?.message || '알 수 없는 오류'}` };
         }
       }
 
@@ -7346,9 +7264,6 @@ async function initializeImageLibrary(): Promise<void> {
     // 확장 이미지 라이브러리 초기화
     extendedImageLibrary = new ExtendedImageLibrary({
       storageDir,
-      unsplashApiKey: config.unsplashApiKey,
-      pexelsApiKey: config.pexelsApiKey,
-      pixabayApiKey: config.pixabayApiKey,
       autoDownload: true,
     });
 
@@ -8062,35 +7977,8 @@ ipcMain.handle('library:collectByKeywords', async (_event, title: string): Promi
     
     console.log(`[Main] 총 ${allImageUrls.length}개의 이미지 URL 수집됨 (네이버 크롤링)`);
     
-    // 네이버에서 이미지를 찾지 못했거나 부족하면 Pexels API 사용
     let collectedItems: any[] = [];
-    
-    if (allImageUrls.length < 10) {
-      console.log(`[Main] 네이버 이미지가 부족합니다 (${allImageUrls.length}개). Pexels API로 추가 수집...`);
-      
-      const pexelsApiKey = config.pexelsApiKey?.trim();
-      if (pexelsApiKey && pexelsApiKey.length > 0) {
-        try {
-          const { collectImagesByKeywords } = await import('./imageLibrary.js');
-          console.log(`[Main] Pexels API로 키워드 기반 이미지 수집: ${keywords.join(', ')}`);
-          
-          const pexelsImages = await collectImagesByKeywords(
-            keywords,
-            pexelsApiKey,
-            20, // 키워드당 최대 20개
-            personNames
-          );
-          
-          console.log(`[Main] Pexels에서 ${pexelsImages.length}개 이미지 수집 완료`);
-          collectedItems = [...collectedItems, ...pexelsImages];
-        } catch (pexelsError) {
-          console.warn(`[Main] Pexels API 사용 실패:`, (pexelsError as Error).message);
-        }
-      } else {
-        console.warn(`[Main] Pexels API 키가 설정되지 않았습니다. 환경 설정에서 Pexels API 키를 입력하세요.`);
-      }
-    }
-    
+
     // 네이버 크롤링 이미지가 있으면 다운로드
     if (allImageUrls.length > 0) {
       // 카테고리는 첫 번째 핵심 키워드 사용 (주요 주제를 대표)
@@ -8114,12 +8002,11 @@ ipcMain.handle('library:collectByKeywords', async (_event, title: string): Promi
       errorMessage += `네이버 크롤링: ${allImageUrls.length}개 URL 발견\n`;
       errorMessage += `저장된 이미지: 0개\n\n`;
       errorMessage += `가능한 원인:\n`;
-      errorMessage += `1. 네이버/Pexels 서버에서 접근이 차단되었을 수 있습니다.\n`;
-      errorMessage += `2. Pexels API 키가 설정되지 않았거나 유효하지 않습니다.\n`;
-      errorMessage += `3. 네트워크 연결 문제가 있을 수 있습니다.\n\n`;
+      errorMessage += `1. 네이버 서버에서 접근이 차단되었을 수 있습니다.\n`;
+      errorMessage += `2. 네트워크 연결 문제가 있을 수 있습니다.\n\n`;
       errorMessage += `해결 방법:\n`;
-      errorMessage += `- 환경 설정에서 Pexels API 키를 입력하세요 (https://www.pexels.com/api/)\n`;
-      errorMessage += `- 터미널 콘솔에서 "[이미지 수집]" 또는 "[Pexels]" 로그를 확인하세요.`;
+      errorMessage += `- 잠시 뒤 다시 시도하거나 다른 키워드로 수집해 보세요.\n`;
+      errorMessage += `- 터미널 콘솔에서 "[이미지 수집]" 로그를 확인하세요.`;
       
       return {
         success: false,
@@ -8129,15 +8016,10 @@ ipcMain.handle('library:collectByKeywords', async (_event, title: string): Promi
     }
     
     const naverCount = allImageUrls.length > 0 ? collectedItems.filter((item: any) => item.sourceUrl === 'naver-crawl').length : 0;
-    const pexelsCount = collectedItems.length - naverCount;
     
     let successMessage = `총 ${collectedItems.length}개의 이미지를 수집했습니다.`;
-    if (naverCount > 0 && pexelsCount > 0) {
-      successMessage += `\n- 네이버: ${naverCount}개\n- Pexels: ${pexelsCount}개`;
-    } else if (naverCount > 0) {
+    if (naverCount > 0) {
       successMessage += `\n- 네이버에서 ${naverCount}개`;
-    } else if (pexelsCount > 0) {
-      successMessage += `\n- Pexels에서 ${pexelsCount}개`;
     }
     
     return {
@@ -9362,12 +9244,7 @@ const PRESERVE_FIELDS = [
   'openaiApiKey', 'openai-api-key',
   'claudeApiKey', 'claude-api-key',
   'perplexityApiKey', 'perplexity-api-key',
-  'openaiImageApiKey', 'leonardoaiApiKey', 'leonardoaiModel',
-  'prodiaApiKey', 'prodia-api-key', 'prodiaToken', 'prodia-token', 'prodiaModel', 'prodia-model',
-  'deepinfraApiKey', 'deepinfra-api-key',
-  'falaiApiKey', 'falai-api-key', 'falaiModel',
-  'pexelsApiKey', 'unsplashApiKey', 'pixabayApiKey',
-  'stabilityApiKey', 'stability-api-key', 'stabilityModel',
+  'openaiImageApiKey',
   // ===== 네이버 API =====
   'naverClientId', 'naver-client-id',
   'naverClientSecret', 'naver-client-secret',

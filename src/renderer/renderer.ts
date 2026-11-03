@@ -365,6 +365,8 @@ import { initPublishFlowChooser } from './modules/publishFlowChooser.js';
 import { initImageTabTitleMirror } from './modules/contentGeneration.js';
 import { resetPhotoModeForNextPost } from './modules/photoModeReset.js';
 import { initStartupEngineGate } from './modules/startupEngineGate.js';
+import { markRetiredImageEngines } from '../runtime/retiredImageEngines.js';
+import { initRetiredImageEngineGate } from './modules/retiredImageEngineGate.js';
 // ✅ [SPEC-DROPSHOT-2026] 이미지 관리 → 🎨 이미지 생성 서브탭 (멀티엔진 대량 생성 스튜디오)
 import { initImageGenStudio } from './modules/imageGenStudio.js';
 // ✅ [SPEC-DROPSHOT-2026 2단계] dropshot 로그인/확인 UI (엔진 선택 시 노출)
@@ -980,6 +982,12 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (error) {
       console.warn("[Startup] 엔진 선택 게이트 실패:", error);
     }
+    // [2026-11-03] 옛 이미지 엔진(Leonardo AI · DeepInfra · Prodia)을 쓰던 사용자에게만 한 번 뜬다.
+    try {
+      await initRetiredImageEngineGate();
+    } catch (error) {
+      console.warn("[Startup] 이미지 엔진 재선택 안내 실패:", error);
+    }
   })();
   initExposedStructureRef(); // [2026-08-19] 노출 글 구조 참고 입력칸
 
@@ -1202,7 +1210,7 @@ async function autoLoadApiKeys() {
 
     // 저장된 API 키들 확인
     const apiKeyFields = [
-      'openai-image-api-key', 'leonardoai-api-key',
+      'openai-image-api-key',
       'perplexity-api-key', // ✅ [2026-01-25] Perplexity API 키 추가
       'naver-client-id', 'naver-client-secret', // ✅ [2026-01-25] 네이버 검색 API 키 추가
       'naver-ad-api-key', 'naver-ad-secret-key', 'naver-ad-customer-id', // ✅ [2026-01-25] 네이버 광고 API 키 추가
@@ -3307,6 +3315,8 @@ async function initializeApplication(): Promise<void> {
     // [2026-10-10] 나노바나나 프로·2.5 저장값과 슬롯 모델을 나노바나나2로 이관 (멱등)
     migrateNanoBananaSingleEngine();
     migrateOpenaiImageTwoModels(); // [2026-10-10] 덕트테이프 옛 모델 값 → 기본값 Sunburst
+    // [2026-11-03] 지원이 끝난 이미지 엔진 선택값은 지우지 않고 보류한다 — 기동 뒤 안내에서 사용자가 직접 새 엔진을 고른다.
+    markRetiredImageEngines();
   } catch (e) {
     console.warn('[Init] 이미지 provider 마이그레이션 스킵:', e);
   }
@@ -8987,95 +8997,6 @@ function initUnifiedImageSourceSelection(): void {
       });
     });
   }
-}
-
-// ✅ [2026-01-26] DeepInfra FLUX-2 이미지 소스 버튼 동적 삽입
-function injectDeepInfraImageSourceOption(): void {
-  // 기존 이미지 소스 버튼 컨테이너 찾기
-  const existingBtns = document.querySelectorAll('.unified-img-source-btn');
-  if (existingBtns.length === 0) {
-    console.log('[DeepInfra] 이미지 소스 버튼 영역을 찾지 못함 - 나중에 다시 시도');
-    return;
-  }
-
-  // 이미 DeepInfra 버튼이 있는지 확인
-  const existingDeepinfra = document.querySelector('.unified-img-source-btn[data-source="deepinfra"]');
-  if (existingDeepinfra) {
-    console.log('[DeepInfra] 이미 버튼이 존재함');
-    return;
-  }
-
-  // 참조할 버튼 (마지막 버튼 뒤에 추가)
-  const lastBtn = existingBtns[existingBtns.length - 1] as HTMLElement;
-  const parentContainer = lastBtn.parentElement;
-
-  if (!parentContainer) {
-    console.log('[DeepInfra] 부모 컨테이너를 찾지 못함');
-    return;
-  }
-
-  // DeepInfra 버튼 생성 (기존 스타일 복사)
-  const deepinfraBtn = document.createElement('button');
-  deepinfraBtn.type = 'button';
-  deepinfraBtn.className = 'unified-img-source-btn';
-  deepinfraBtn.dataset.source = 'deepinfra';
-  deepinfraBtn.style.cssText = lastBtn.style.cssText || `
-    position: relative;
-    padding: 0.75rem;
-    border-radius: 12px;
-    border: 2px solid transparent;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-    cursor: pointer;
-    transition: all 0.3s;
-    min-width: 100px;
-    text-align: center;
-    opacity: 0.7;
-  `;
-  deepinfraBtn.innerHTML = `
-    <div style="font-size: 1.5rem; margin-bottom: 0.25rem;">🚀</div>
-    <div style="font-size: 0.7rem; font-weight: 600; color: var(--text-strong);">FLUX-2</div>
-    <div style="font-size: 0.6rem; color: var(--text-muted);">DeepInfra</div>
-    <div style="font-size: 0.55rem; color: #10b981; font-weight: 500;">$0.01/장</div>
-    <div style="position: absolute; top: 0.4rem; right: 0.4rem; width: 18px; height: 18px; border-radius: 50%; background: var(--primary); display: none; align-items: center; justify-content: center;">
-      <span style="color: white; font-size: 0.7rem;">✓</span>
-    </div>
-  `;
-
-  // 버튼 클릭 이벤트 (기존 로직 재사용)
-  deepinfraBtn.addEventListener('click', () => {
-    // 모든 버튼 선택 해제
-    document.querySelectorAll('.unified-img-source-btn').forEach(b => {
-      b.classList.remove('selected');
-      (b as HTMLElement).style.boxShadow = 'none';
-      (b as HTMLElement).style.borderColor = 'transparent';
-      (b as HTMLElement).style.opacity = '0.7';
-      const check = b.querySelector('div[style*="top: 0.4rem"]');
-      if (check) (check as HTMLElement).style.display = 'none';
-    });
-
-    // DeepInfra 버튼 선택
-    deepinfraBtn.classList.add('selected');
-    deepinfraBtn.style.opacity = '1';
-    deepinfraBtn.style.boxShadow = '0 0 0 3px var(--primary-light), 0 4px 12px rgba(0,0,0,0.2)';
-    deepinfraBtn.style.borderColor = 'var(--primary)';
-    const check = deepinfraBtn.querySelector('div[style*="top: 0.4rem"]');
-    if (check) (check as HTMLElement).style.display = 'flex';
-
-    // ✅ [2026-02-02] 풀오토 전용 이미지 소스 저장
-    localStorage.setItem('fullAutoImageSource', 'deepinfra');
-    console.log('[FullAuto] 풀오토 전용 이미지 소스 저장: deepinfra');
-
-    // 드롭다운 동기화
-    const imgSourceSelect = document.getElementById('unified-image-source') as HTMLSelectElement;
-    if (imgSourceSelect) {
-      imgSourceSelect.value = 'deepinfra';
-      console.log('[Sync] DeepInfra 버튼 -> 셀렉트 동기화: deepinfra');
-    }
-  });
-
-  // 버튼 삽입
-  parentContainer.appendChild(deepinfraBtn);
-  console.log('[DeepInfra] ✅ 이미지 소스 버튼 추가됨');
 }
 
 // ✅ 썸네일 텍스트 옵션 UI 동적 추가 (풀오토/반자동 발행)

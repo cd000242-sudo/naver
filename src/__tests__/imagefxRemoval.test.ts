@@ -10,26 +10,26 @@ function readRoot(rel: string): string {
 }
 
 describe('image engine selection surface', () => {
-  it('keeps ImageFX hidden while restoring Flow and Prodia in the main dropdown', () => {
+  it('keeps ImageFX and the retired engines hidden while keeping Flow in the main dropdown', () => {
     const html = readRoot('public/index.html');
 
     expect(html).not.toMatch(/<option value="imagefx"/);
     expect(html).toMatch(/<option value="flow"/);
-    expect(html).toMatch(/<option value="prodia"/);
+    expect(html).not.toMatch(/<option value="(prodia|deepinfra|leonardoai)"/);
     // [2026-10-10] 기본 선택값 = 덕트테이프(openai-image)
     expect(html).toMatch(/<option value="openai-image"[^>]*selected/);
     expect(html).not.toMatch(/<option value="dropshot"[^>]*selected/);
   });
 
-  it('keeps ImageFX hidden while restoring Flow and Prodia in heading image settings', () => {
+  it('keeps ImageFX and the retired engines hidden while keeping Flow in heading image settings', () => {
     const code = read('renderer/components/HeadingImageSettings.ts');
 
     expect(code).not.toMatch(/<option value="imagefx"/);
     expect(code).not.toMatch(/data-value="imagefx"/);
     expect(code).toMatch(/<option value="flow"/);
     expect(code).toMatch(/data-value="flow"/);
-    expect(code).toMatch(/<option value="prodia"/);
-    expect(code).toMatch(/data-value="prodia"/);
+    expect(code).not.toMatch(/<option value="(prodia|deepinfra|leonardoai)"/);
+    expect(code).not.toMatch(/data-value="(prodia|deepinfra|leonardoai)"/);
   });
 
   it('migrates only stale ImageFX selections to Dropshot at startup', () => {

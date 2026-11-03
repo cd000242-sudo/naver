@@ -1179,16 +1179,6 @@ console.log('[Renderer] ✅ 수동 썸네일 설정 함수 등록 완료');
 
 console.log('[Renderer] ✅ 환경설정 저장/닫기 함수 등록 완료');
 
-setTimeout(() => {
-  try {
-    if (typeof (window as any).injectDeepInfraImageSourceOption === 'function') {
-      (window as any).injectDeepInfraImageSourceOption();
-    }
-  } catch (e) {
-    console.warn('[DeepInfra] 버튼 삽입 실패:', e);
-  }
-}, 1000);
-
 // ✅ [2026-01-27] 모든 모달을 body 직속으로 자동 이동 (position:fixed 정상 작동을 위해)
 // - 부모 요소에 transform/filter 속성이 있으면 position:fixed가 깨지는 문제 해결
 // - 동적으로 생성되는 모달(풀오토 다중계정, 연속발행 등)도 자동 처리

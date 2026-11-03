@@ -344,7 +344,7 @@ export function setGlobalImageSource(source: GlobalImageSource): void {
   // ✅ [v2.10.302] dall-e-3 제거 — UI 완전 폐기 (v2.10.295 UI option 삭제 + v2.10.302 write 차단)
   //   기존 위험: 사용자가 서브 모달에서 dall-e-3 카드 클릭 시 VALID_AI_SOURCES 통과해 localStorage 저장 →
   //              imageGenerator.ts:335 마이그레이션 분기 진입. 폐기 표시인데 실질 진입 경로 잔존.
-  const VALID_AI_SOURCES: GlobalImageSource[] = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'prodia', 'dropshot', 'genspark', 'local-folder'];
+  const VALID_AI_SOURCES: GlobalImageSource[] = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'openai-image', 'imagefx', 'flow', 'dropshot', 'genspark', 'local-folder'];
   if (VALID_AI_SOURCES.includes(normalized)) {
     safeLocalStorageSet('fullAutoImageSource', normalized);
     console.log(`[HeadingImageSettings] 글로벌 + 풀오토 이미지 소스 동기화: ${normalized}`);
@@ -373,7 +373,7 @@ export function getFullAutoImageSource(): GlobalImageSource {
   // ✅ [v2.10.302] dall-e-3 제거 (UI 완전 폐기) + falai/prodia/stability/pollinations는 UI 미노출이나
   //   기존 사용자 localStorage 호환성을 위해 read VALID에는 유지 — write VALID_AI_SOURCES만 제거.
   // ✅ [v2.11.7] 'dropshot' 추가 — 리더스 나노바나나 무제한
-  const VALID_SOURCES: GlobalImageSource[] = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'falai', 'prodia', 'stability', 'pollinations', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'dropshot', 'genspark', 'local-folder'];
+  const VALID_SOURCES: GlobalImageSource[] = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'falai', 'stability', 'pollinations', 'openai-image', 'imagefx', 'flow', 'dropshot', 'genspark', 'local-folder'];
 
   // 정규화 read (별칭이 저장돼있으면 정식 키로 변환)
   const fullAutoSaved = normalizeImageSource(safeLocalStorageGet('fullAutoImageSource'));
@@ -866,11 +866,8 @@ export function createHeadingImageModal(): void {
               <div style="font-size: 11px; color: #a5b4fc; margin-bottom: 6px; font-weight: 600;">🎨 부족분 생성에 사용할 AI 엔진</div>
               <select id="local-folder-fallback-engine" style="width: 100%; padding: 8px 10px; border-radius: 6px; background: #1e1e2e; color: #e2e8f0; border: 1px solid rgba(99,102,241,0.3); font-size: 12px; cursor: pointer;">
                 <option value="nano-banana-2" selected>나노바나나2 (₩97/장, Nano Banana 2.1)</option>
-                <option value="deepinfra">FLUX-2 (DeepInfra)</option>
                 <option value="openai-image">덕트테이프 (gpt-image-2.5 Flare / Sunburst)</option>
-                <option value="leonardoai">Leonardo AI</option>
                 <option value="flow">Flow (Google Labs)</option>
-                <option value="prodia">Prodia</option>
               </select>
             </div>
           </div>
@@ -968,31 +965,15 @@ export function createHeadingImageModal(): void {
             <div style="font-size: 12px; font-weight: 600; color: #92400e;">나노바나나2 ★</div>
             <div style="font-size: 10px; color: #a16207;">Gemini 3.1 Flash | ₩97/장 | 한글 가능</div>
           </label>
-          <label class="source-option" data-value="deepinfra" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #d1fae5, #6ee7b7); text-align: center; transition: all 0.2s;">
-            <div style="font-size: 1.5rem;">🚀</div>
-            <div style="font-size: 12px; font-weight: 600; color: #047857;">FLUX-2</div>
-            <div style="font-size: 10px; color: #059669;">DeepInfra</div>
-          </label>
           <label class="source-option" data-value="openai-image" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #ede9fe, #c4b5fd); text-align: center; transition: all 0.2s;">
             <div style="font-size: 1.5rem;">🦆</div>
             <div style="font-size: 12px; font-weight: 600; color: #5b21b6;">OpenAI Image</div>
             <div style="font-size: 10px; color: #7c3aed;">gpt-image-2.5 Flare / Sunburst | 계정에 따라 Org 인증 필요할 수 있음</div>
           </label>
-          <label class="source-option" data-value="leonardoai" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #ffedd5, #fdba74); text-align: center; transition: all 0.2s;">
-            <div style="font-size: 1.5rem;">🦁</div>
-            <div style="font-size: 12px; font-weight: 600; color: #9a3412;">Leonardo AI</div>
-            <div style="font-size: 10px; color: #ea580c;">API 키 필요</div>
-          </label>
-          <!-- 2026-06-14: Flow/Prodia cards restored. ImageFX remains hidden. -->
           <label class="source-option" data-value="flow" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #dcfce7, #86efac); text-align: center; transition: all 0.2s;">
             <div style="font-size: 1.5rem;">🍌</div>
             <div style="font-size: 12px; font-weight: 600; color: #166534;">Flow</div>
             <div style="font-size: 10px; color: #15803d;">Google Labs UI 자동화</div>
-          </label>
-          <label class="source-option" data-value="prodia" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #f3e8ff, #d8b4fe); text-align: center; transition: all 0.2s;">
-            <div style="font-size: 1.5rem;">⚡</div>
-            <div style="font-size: 12px; font-weight: 600; color: #6b21a8;">Prodia</div>
-            <div style="font-size: 10px; color: #7e22ce;">API 키 필요</div>
           </label>
           <!-- ✅ [SPEC-DROPSHOT-2026] 리더스 나노바나나 무제한 (UI 자동화 · 로그인 필요) -->
           <label class="source-option" data-value="dropshot" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #f59e0b; background: linear-gradient(135deg, #fef3c7, #fde68a); text-align: center; transition: all 0.2s; box-shadow: 0 2px 8px rgba(245, 158, 11, 0.25); position: relative;">
@@ -1293,9 +1274,7 @@ export function createHeadingImageModal(): void {
               <select id="test-engine-select" style="width: 100%; padding: 10px 12px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 13px; color: #374151; background: white; cursor: pointer; transition: border-color 0.2s;" onfocus="this.style.borderColor='#6366f1'" onblur="this.style.borderColor='#e5e7eb'">
                 <option value="">📌 현재 저장된 엔진 사용</option>
                 <option value="nano-banana-2">🍌 나노바나나2 (Gemini 3.1 Flash, ₩97/장, 한글 가능) ★추천</option>
-                <option value="deepinfra">⚡ FLUX-2 (DeepInfra)</option>
                 <option value="openai-image">🦆 덕트테이프 (gpt-image-2.5 Flare / Sunburst)</option>
-                <option value="leonardoai">🦁 Leonardo AI</option>
               </select>
             </div>
             
@@ -2419,17 +2398,6 @@ export function createHeadingImageModal(): void {
           </div>
 
           
-          <!-- 🔥 DeepInfra (FLUX) -->
-          <div style="background: rgba(239, 68, 68, 0.1); padding: 14px; border-radius: 12px; border: 1px solid rgba(239, 68, 68, 0.3);">
-            <label style="display: block; font-weight: 600; color: #ef4444; margin-bottom: 8px; font-size: 13px;">🔥 DeepInfra (FLUX)</label>
-            <select id="submodal-deepinfra-model" style="width: 100%; padding: 10px; background: #1a1a2e; border: 2px solid rgba(239, 68, 68, 0.4); border-radius: 8px; color: white; font-size: 13px; cursor: pointer;">
-              <option value="flux-2-dev">👑 FLUX.2-dev - ₩35 (최신, 고품질)</option>
-              <option value="flux-dev">🏆 FLUX.1-dev - ₩35 (고품질)</option>
-              <option value="flux-schnell">⚡ FLUX.1-schnell - ₩0 (무료, 빠름)</option>
-            </select>
-            <p style="margin: 6px 0 0; font-size: 11px; color: #9ca3af;">ℹ️ DeepInfra 계정 필요</p>
-          </div>
-
           <!-- 🦆 OpenAI Image (gpt-image-2.5 Flare / Sunburst) -->
           <div style="background: rgba(124, 58, 237, 0.1); padding: 14px; border-radius: 12px; border: 1px solid rgba(124, 58, 237, 0.3);">
             <label style="display: block; font-weight: 600; color: #a78bfa; margin-bottom: 8px; font-size: 13px;">🦆 OpenAI Image</label>
@@ -2445,18 +2413,6 @@ export function createHeadingImageModal(): void {
               <option value="max">max (최고가)</option>
             </select>
             <p style="margin: 6px 0 0; font-size: 11px; color: #9ca3af;">ℹ️ 계정에 따라 OpenAI Organization 인증이 필요할 수 있음 (403 발생 시 platform.openai.com 인증 확인)</p>
-          </div>
-
-          <!-- 🦁 Leonardo AI -->
-          <div style="background: rgba(234, 88, 12, 0.1); padding: 14px; border-radius: 12px; border: 1px solid rgba(234, 88, 12, 0.3);">
-            <label style="display: block; font-weight: 600; color: #ea580c; margin-bottom: 8px; font-size: 13px;">🦁 Leonardo AI</label>
-            <select id="submodal-leonardoai-model" style="width: 100%; padding: 10px; background: #1a1a2e; border: 2px solid rgba(234, 88, 12, 0.4); border-radius: 8px; color: white; font-size: 13px; cursor: pointer;">
-              <option value="seedream-4.5">🏆 SeeDream 4.5 - $0.04 (가성비 최강, 추천)</option>
-              <option value="phoenix-1.0">🔥 Phoenix 1.0 - 고품질</option>
-              <option value="ideogram-3.0">✍️ Ideogram 3.0 - $0.11 (텍스트 렌더링)</option>
-              <option value="nano-banana-pro">🍌 Nano Banana Pro - $0.21 (한글 최강)</option>
-            </select>
-            <p style="margin: 6px 0 0; font-size: 11px; color: #9ca3af;">ℹ️ Leonardo AI API 키 필요 (환경설정에서 입력)</p>
           </div>
         </div>
         
@@ -2484,8 +2440,6 @@ export function createHeadingImageModal(): void {
     // 현재 설정값 로드
     const nanoMainSelect = subModal.querySelector('#submodal-nano-main-model') as HTMLSelectElement;
     const nanoSubSelect = subModal.querySelector('#submodal-nano-sub-model') as HTMLSelectElement;
-    const deepinfraSelect = subModal.querySelector('#submodal-deepinfra-model') as HTMLSelectElement;
-    const leonardoaiSelect = subModal.querySelector('#submodal-leonardoai-model') as HTMLSelectElement;
     // [2026-05-27] OpenAI Image (gpt-image-1 / 1.5 / 2) - 사용자 명시 요청
     const openaiImageModelSelect = subModal.querySelector('#submodal-openai-image-model') as HTMLSelectElement;
     const openaiImageQualitySelect = subModal.querySelector('#submodal-openai-image-quality') as HTMLSelectElement;
@@ -2512,8 +2466,6 @@ export function createHeadingImageModal(): void {
     })();
     if (nanoMainSelect) nanoMainSelect.value = migratedMain;
     if (nanoSubSelect) nanoSubSelect.value = migratedSub;
-    if (deepinfraSelect) deepinfraSelect.value = localStorage.getItem('deepinfraModel') || 'flux-2-dev';
-    if (leonardoaiSelect) leonardoaiSelect.value = localStorage.getItem('leonardoaiModel') || 'seedream-4.5';
     // [2026-05-27] OpenAI Image 모델/품질 복원 (config.json 우선, localStorage 폴백, 둘 다 없으면 Sunburst/medium)
     if (openaiImageModelSelect) {
       const cfg = await safeIpcInvoke<any>('config:get');
@@ -2556,8 +2508,6 @@ export function createHeadingImageModal(): void {
     subModal.querySelector('#preset-budget-submodal')?.addEventListener('click', () => {
       if (nanoMainSelect) nanoMainSelect.value = 'gemini-3-1-flash';
       if (nanoSubSelect) nanoSubSelect.value = 'gemini-3-1-flash';
-      if (deepinfraSelect) deepinfraSelect.value = 'flux-schnell';
-      if (leonardoaiSelect) leonardoaiSelect.value = 'seedream-4.5';
       if ((window as any).toastManager) (window as any).toastManager.success('💰 가성비 조합 적용됨');
     });
 
@@ -2565,8 +2515,6 @@ export function createHeadingImageModal(): void {
     subModal.querySelector('#preset-premium-submodal')?.addEventListener('click', () => {
       if (nanoMainSelect) nanoMainSelect.value = 'gemini-3-1-flash';
       if (nanoSubSelect) nanoSubSelect.value = 'gemini-3-1-flash';
-      if (deepinfraSelect) deepinfraSelect.value = 'flux-2-dev';
-      if (leonardoaiSelect) leonardoaiSelect.value = 'phoenix-1.0';
       if ((window as any).toastManager) (window as any).toastManager.success('🏆 고퀄리티 조합 적용됨');
     });
 
@@ -2574,8 +2522,6 @@ export function createHeadingImageModal(): void {
     subModal.querySelector('#preset-balanced-submodal')?.addEventListener('click', () => {
       if (nanoMainSelect) nanoMainSelect.value = 'gemini-3-1-flash';
       if (nanoSubSelect) nanoSubSelect.value = 'gemini-3-1-flash';
-      if (deepinfraSelect) deepinfraSelect.value = 'flux-2-dev';
-      if (leonardoaiSelect) leonardoaiSelect.value = 'seedream-4.5';
       if ((window as any).toastManager) (window as any).toastManager.success('⚖️ 균형 조합 적용됨');
     });
 
@@ -2589,8 +2535,6 @@ export function createHeadingImageModal(): void {
       if (nanoSubSelect) {
         localStorage.setItem('nanoBananaSubModel', nanoSubSelect.value);
       }
-      if (deepinfraSelect) localStorage.setItem('deepinfraModel', deepinfraSelect.value);
-      if (leonardoaiSelect) localStorage.setItem('leonardoaiModel', leonardoaiSelect.value);
       // [2026-05-27] OpenAI Image 저장
       if (openaiImageModelSelect) localStorage.setItem('openaiImageModel', openaiImageModelSelect.value);
       if (openaiImageQualitySelect) localStorage.setItem('openaiImageQuality', openaiImageQualitySelect.value);
@@ -2607,8 +2551,6 @@ export function createHeadingImageModal(): void {
         if (nanoSubSelect) {
           currentConfig.nanoBananaSubModel = nanoSubSelect.value;
         }
-        if (deepinfraSelect) currentConfig.deepinfraModel = deepinfraSelect.value;
-        if (leonardoaiSelect) currentConfig.leonardoaiModel = leonardoaiSelect.value;
         // [2026-05-27] OpenAI Image 모델/품질 → main 프로세스 (openaiImageGenerator.ts:24 DEFAULT_OPENAI_IMAGE_MODEL 대체)
         if (openaiImageModelSelect) currentConfig.openaiImageModel = openaiImageModelSelect.value;
         if (openaiImageQualitySelect) currentConfig.openaiImageQuality = openaiImageQualitySelect.value;
@@ -2618,8 +2560,6 @@ export function createHeadingImageModal(): void {
         console.log('[HeadingImageSettings] ✅ config.json에 모델 설정 저장됨:', {
           nanoBananaMainModel: currentConfig.nanoBananaMainModel,
           nanoBananaSubModel: currentConfig.nanoBananaSubModel,
-          deepinfraModel: currentConfig.deepinfraModel,
-          leonardoaiModel: currentConfig.leonardoaiModel
         });
       }
 
@@ -2696,7 +2636,6 @@ function showOpenAiTierWarningModal(reason: 'precheck' | 'rate-limit-hit' = 'pre
         <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.78rem; color: #d1fae5; line-height: 1.7;">
           <li><b>Nano Banana 2</b> (Gemini 3.1 Flash) — ₩97/장, Tier 한도 없음, 한글 네이티브</li>
           <li><b>ImageFX</b> — Google Labs 실험 엔진 (계정/IP 제한 가능)</li>
-          <li><b>DeepInfra FLUX-2</b> — ₩35/장, 빠름</li>
         </ul>
       </div>
       <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
@@ -2955,23 +2894,17 @@ export async function openImageQuotaDashboard(): Promise<void> {
     `;
 
     // 병렬 로드
-    const [geminiResult, leonardoResult] = await Promise.allSettled([
+    const [geminiResult] = await Promise.allSettled([
       (window as any).api?.getImageApiUsage?.() || { success: false },
-      (window as any).api?.getLeonardoCredits?.() || { success: false },
     ]);
 
     const gemini = geminiResult.status === 'fulfilled' ? geminiResult.value : { success: false };
-    const leonardo = leonardoResult.status === 'fulfilled' ? leonardoResult.value : { success: false };
 
     // Gemini 카드
     const geminiCostKrw = gemini.todayCostKrw || 0;
     const geminiCalls = gemini.todayCalls || 0;
     const geminiPercent = Math.min(100, Math.round((geminiCostKrw / GEMINI_TOTAL_LIMIT_KRW) * 100));
     const geminiBarColor = geminiPercent > 80 ? '#ef4444' : geminiPercent > 50 ? '#f59e0b' : '#22c55e';
-
-    // Leonardo 카드
-    const leonardoHasKey = leonardo.success || (leonardo.message !== 'API 키 미설정');
-    const leonardoCredits = leonardo.credits || 0;
 
     grid.innerHTML = `
       <!-- Gemini Card -->
@@ -2990,39 +2923,6 @@ export async function openImageQuotaDashboard(): Promise<void> {
             transition:width 0.5s;"></div>
         </div>
         <div style="font-size:12px;color:#888;">오늘 ${geminiCalls}회 사용 (추정)</div>
-      </div>
-
-      <!-- Leonardo AI Card -->
-      <div style="background:rgba(255,255,255,0.05);border-radius:14px;padding:20px;
-        border:1px solid rgba(255,255,255,0.08);transition:transform 0.2s;">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
-          <span style="font-size:22px;">${leonardoHasKey ? '🟢' : '⚫'}</span>
-          <span style="font-weight:600;color:#fff;font-size:15px;">Leonardo AI</span>
-        </div>
-        ${leonardoHasKey && leonardo.success ? `
-          <div style="font-size:24px;font-weight:700;color:#fff;margin-bottom:4px;">
-            $${typeof leonardoCredits === 'number' ? leonardoCredits.toFixed(2) : leonardoCredits}
-            <span style="font-size:14px;color:#888;font-weight:400;">남음</span>
-          </div>
-        ` : `
-          <div style="font-size:14px;color:${leonardoHasKey ? '#ef4444' : '#666'};margin-top:8px;">
-            ${leonardoHasKey ? `❌ ${leonardo.message || '조회 실패'}` : 'API키: ❌ 미설정'}
-          </div>
-        `}
-        <div style="font-size:12px;color:#888;margin-top:8px;">실시간 크레딧 조회</div>
-      </div>
-
-      <!-- DeepInfra Card -->
-      <div style="background:rgba(255,255,255,0.05);border-radius:14px;padding:20px;
-        border:1px solid rgba(255,255,255,0.08);transition:transform 0.2s;">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
-          <span style="font-size:22px;">🟡</span>
-          <span style="font-weight:600;color:#fff;font-size:15px;">DeepInfra</span>
-        </div>
-        <div style="font-size:14px;color:#888;margin-top:8px;">
-          로컬 추적만 가능<br>
-          <span style="font-size:11px;">(잔액 조회 API 없음)</span>
-        </div>
       </div>
     `;
   }

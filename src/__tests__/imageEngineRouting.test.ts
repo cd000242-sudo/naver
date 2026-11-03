@@ -59,9 +59,12 @@ describe('v1.4.80 — 이미지 엔진 라우팅 매트릭스', () => {
         const combined = activeDecl + globalDecl;
         expect(combined).toMatch(new RegExp(`'${engine.replace(/[-/]/g, '\\$&')}'`));
       });
-      it(`'${engine}' VALID_SOURCES 배열에 포함`, () => {
+      it(`'${engine}' VALID_SOURCES 배열 — 지원 종료 엔진은 빠지고 나머지는 포함`, () => {
         const block = code.match(/VALID_SOURCES:\s*GlobalImageSource\[\]\s*=\s*\[[\s\S]{0,500}?\]/)?.[0] || '';
-        expect(block).toMatch(new RegExp(`'${engine.replace(/[-/]/g, '\\$&')}'`));
+        const retired = ['deepinfra', 'leonardoai', 'prodia'].includes(engine);
+        const matcher = new RegExp(`'${engine.replace(/[-/]/g, '\$&')}'`);
+        if (retired) expect(block).not.toMatch(matcher);
+        else expect(block).toMatch(matcher);
       });
     }
 

@@ -531,11 +531,9 @@ export async function initPriceInfoModal(): Promise<void> {
     }
   }
   setupApiKeyToggle('gemini-api-key', 'gemini-api-key-toggle');
-  setupApiKeyToggle('leonardoai-api-key', 'leonardoai-api-key-toggle');
   setupApiKeyToggle('perplexity-api-key', 'perplexity-api-key-toggle');
   setupApiKeyToggle('openai-api-key', 'openai-api-key-toggle');
   setupApiKeyToggle('claude-api-key', 'claude-api-key-toggle');
-  setupApiKeyToggle('deepinfra-api-key', 'deepinfra-api-key-toggle');
 
   // ✅ [2026-03-18] 범용 API 키 유효성 검증 헬퍼
   function setupApiKeyValidation(
@@ -653,11 +651,9 @@ export async function initPriceInfoModal(): Promise<void> {
     });
   }
 
-  setupApiKeyValidation('leonardoai', 'leonardoai-api-key', 'leonardoai-validate-btn', 'leonardoai-validate-result', 'Leonardo AI');
   setupApiKeyValidation('perplexity', 'perplexity-api-key', 'perplexity-validate-btn', 'perplexity-validate-result', 'Perplexity');
   setupApiKeyValidation('openai', 'openai-api-key', 'openai-validate-btn', 'openai-validate-result', 'OpenAI');
   setupApiKeyValidation('claude', 'claude-api-key', 'claude-validate-btn', 'claude-validate-result', 'Claude');
-  setupApiKeyValidation('deepinfra', 'deepinfra-api-key', 'deepinfra-validate-btn', 'deepinfra-validate-result', 'DeepInfra');
 
   // ✅ [v2.10.218] 덕테이프 인증 버튼 — OpenAI Organization 인증 페이지 열기
   const ducttapeVerifyBtn = document.getElementById('openai-org-verify-btn') as HTMLButtonElement | null;
@@ -807,10 +803,6 @@ export async function initPriceInfoModal(): Promise<void> {
   const geminiApiKey = document.getElementById('gemini-api-key') as HTMLInputElement;
   const geminiExtraApiKeys = document.getElementById('gemini-extra-api-keys') as HTMLTextAreaElement | null;
   const geminiFreeQuotaFirst = document.getElementById('gemini-free-quota-first') as HTMLInputElement | null;
-  const unsplashApiKey = document.getElementById('unsplash-api-key') as HTMLInputElement;
-  const pixabayApiKey = document.getElementById('pixabay-api-key') as HTMLInputElement;
-  const prodiaTokenInput = document.getElementById('prodia-token') as HTMLInputElement | null;
-  const prodiaModelSelect = document.getElementById('prodia-model-select') as HTMLSelectElement | null;
   const naverClientId = document.getElementById('naver-client-id') as HTMLInputElement; // ✅ 네이버 API
   const naverClientSecret = document.getElementById('naver-client-secret') as HTMLInputElement; // ✅ 네이버 API
   const dailyPostLimit = document.getElementById('daily-post-limit') as HTMLInputElement;
@@ -924,26 +916,6 @@ export async function initPriceInfoModal(): Promise<void> {
     }
 
     // ✅ [2026-02-23] OpenAI Image API 키는 OpenAI API 키와 통합됨 (별도 입력 필드 제거)
-
-    // ✅ [2026-02-22] Leonardo AI API 키 로드
-    const leonardoaiApiKeyInput = document.getElementById('leonardoai-api-key') as HTMLInputElement;
-    if (leonardoaiApiKeyInput) {
-      leonardoaiApiKeyInput.value = (config as any).leonardoaiApiKey || '';
-      if ((config as any).leonardoaiApiKey) {
-        console.log('[Settings] Leonardo AI API 키 로드됨:', (config as any).leonardoaiApiKey ? '✅' : '❌');
-      }
-    }
-
-
-
-    // ✅ [2026-01-26] DeepInfra API 키 로드
-    const deepinfraApiKeyInput = document.getElementById('deepinfra-api-key') as HTMLInputElement;
-    if (deepinfraApiKeyInput) {
-      deepinfraApiKeyInput.value = config.deepinfraApiKey || '';
-      if (config.deepinfraApiKey) {
-        console.log('[Settings] DeepInfra API 키 로드됨:', config.deepinfraApiKey ? '✅' : '❌');
-      }
-    }
 
     // ✅ [2026-02-22] OpenAI API 키 로드
     const openaiApiKeyInput = document.getElementById('openai-api-key') as HTMLInputElement;
@@ -1064,14 +1036,6 @@ export async function initPriceInfoModal(): Promise<void> {
       }
     } catch (e) {
       console.warn('[priceInfoModal] catch ignored:', e);
-    }
-    if (unsplashApiKey) unsplashApiKey.value = config.unsplashApiKey || '';
-    if (pixabayApiKey) pixabayApiKey.value = config.pixabayApiKey || '';
-    if (prodiaTokenInput) {
-      prodiaTokenInput.value = (config as any).prodiaApiKey || (config as any).prodiaToken || (config as any)['prodia-token'] || '';
-    }
-    if (prodiaModelSelect) {
-      prodiaModelSelect.value = (config as any).prodiaModel || (config as any)['prodia-model'] || 'sdxl';
     }
     // [2026-09-09] HUB 키 복원 — 저장은 되는데 화면에 안 채워지면 사용자는 "또 지워졌다" 로 본다.
     const naverHubClientIdEl = document.getElementById('naver-hub-client-id') as HTMLInputElement | null;
@@ -1420,8 +1384,6 @@ export async function initPriceInfoModal(): Promise<void> {
         console.log('[Settings] 네이버 Client Secret 입력값:', naverClientSecretInput?.value ? '***' : '없음');
         console.log('[Settings] 네이버 광고 API Key 입력값:', naverAdApiKeyInput?.value ? '✅' : '❌');
 
-        // ✅ [2026-06-14] Prodia 복구: prodiaApiKey/prodiaToken 별칭 모두 유지
-        const prodiaApiKeyValue = readSecretInputValue('prodia-token', currentConfig?.prodiaApiKey || currentConfig?.prodiaToken);
         const stabilityApiKeyInput = undefined; // deprecated
 
         const parsedGeminiExtraKeys = (geminiExtraApiKeys?.value || '')
@@ -1433,8 +1395,6 @@ export async function initPriceInfoModal(): Promise<void> {
         const openaiApiKeyValue = readSecretInputValue('openai-api-key', currentConfig?.openaiApiKey || currentConfig?.openaiImageApiKey);
         const claudeApiKeyValue = readSecretInputValue('claude-api-key', currentConfig?.claudeApiKey);
         const perplexityApiKeyValue = readSecretInputValue('perplexity-api-key', currentConfig?.perplexityApiKey);
-        const unsplashApiKeyValue = readSecretInputValue('unsplash-api-key', currentConfig?.unsplashApiKey);
-        const pixabayApiKeyValue = readSecretInputValue('pixabay-api-key', currentConfig?.pixabayApiKey);
         const naverClientSecretValue = readSecretInputValue('naver-client-secret', currentConfig?.naverClientSecret || currentConfig?.naverDatalabClientSecret);
         /*
          * [2026-09-09 사장님 실측] "네이버 API HUB는 저장을 계속하는데도 업데이트만 하면 초기화되네."
@@ -1463,8 +1423,6 @@ export async function initPriceInfoModal(): Promise<void> {
         const agentGeminiModelValue = agentModelValue('agent-gemini-model');
         const naverAdApiKeyValue = readSecretInputValue('naver-ad-api-key', currentConfig?.naverAdApiKey);
         const naverAdSecretKeyValue = readSecretInputValue('naver-ad-secret-key', currentConfig?.naverAdSecretKey);
-        const leonardoaiApiKeyValue = readSecretInputValue('leonardoai-api-key', currentConfig?.leonardoaiApiKey);
-        const deepinfraApiKeyValue = readSecretInputValue('deepinfra-api-key', currentConfig?.deepinfraApiKey);
         // [2026-08-06] 업데이트로 라디오 목록이 바뀌어 저장된 모델이 어느 라디오와도
         // 매칭되지 않으면 :checked 가 null 이다. 이때 기본값으로 대체하면 사용자
         // 선택이 조용히 바뀐다("업데이트하면 엔진이 바뀐다" 실사용 불만) —
@@ -1489,8 +1447,6 @@ export async function initPriceInfoModal(): Promise<void> {
           geminiApiKey: geminiApiKeyValue,
           geminiApiKeys: parsedGeminiExtraKeys,
           geminiUseFreeQuotaBeforePaid: geminiFreeQuotaFirst?.checked !== false,
-          unsplashApiKey: unsplashApiKeyValue,
-          pixabayApiKey: pixabayApiKeyValue,
           naverClientId: naverClientIdInput?.value.trim() || undefined, // ✅ 네이버 검색 API 호환용
           naverClientSecret: naverClientSecretValue, // ✅ 네이버 검색 API 호환용
           naverDatalabClientId: naverClientIdInput?.value.trim() || undefined, // ✅ 네이버 검색 API
@@ -1500,13 +1456,6 @@ export async function initPriceInfoModal(): Promise<void> {
           naverAdCustomerId: naverAdCustomerIdInput?.value.trim() || undefined, // ✅ 네이버 광고 API
           // ✅ [2026-02-22] 새 이미지 프로바이더 API 키
           openaiImageApiKey: openaiApiKeyValue, // ✅ [2026-02-23] OpenAI API 키와 통합
-          leonardoaiApiKey: leonardoaiApiKeyValue,
-          prodiaApiKey: prodiaApiKeyValue,
-          prodiaToken: prodiaApiKeyValue,
-          prodiaModel: (document.getElementById('prodia-model-select') as HTMLSelectElement | null)?.value || currentConfig?.prodiaModel || 'sdxl',
-
-          leonardoaiModel: (document.getElementById('leonardoai-model-select') as HTMLSelectElement)?.value || 'seedream-4.5',
-          deepinfraApiKey: deepinfraApiKeyValue, // ✅ [2026-01-26] DeepInfra API
           customImageSavePath: customImageSavePathInput?.value.trim() || undefined,
           // ✅ [v2.10.58] 비용 절감 토글 4종 저장 (silent 폴백 0, 사용자 명시)
           costSaverMode: (document.getElementById('cost-saver-mode') as HTMLInputElement | null)?.checked || false,
@@ -2048,8 +1997,6 @@ const PROVIDER_META: Record<string, { label: string; icon: string; color: string
   'openai-image': { label: 'OpenAI (이미지)', icon: '🎨', color: '#10a37f', type: 'image' },
   claude:        { label: 'Claude',        icon: '🧠', color: '#d97706', type: 'text' },
   perplexity:    { label: 'Perplexity',    icon: '🔮', color: '#7c3aed', type: 'text' },
-  deepinfra:     { label: 'DeepInfra',     icon: '⚡', color: '#ef4444', type: 'image' },
-  leonardoai:    { label: 'Leonardo AI',   icon: '🖌️', color: '#ec4899', type: 'image' },
 };
 
 const DASHBOARD_CONTAINER_ID = 'api-cost-dashboard-container';

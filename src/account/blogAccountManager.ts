@@ -2,6 +2,7 @@
 // 여러 네이버 계정을 동시에 관리
 
 import { normalizeBlogId } from '../automation/expectedBlogIdentity.js';
+import { isRetiredImageEngine } from '../runtime/retiredImageEngines.js';
 
 export type BlogAccount = {
   id: string;
@@ -63,11 +64,29 @@ export class BlogAccountManager {
       if (fs.existsSync(dataPath)) {
         const data = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
         this.accounts = new Map(Object.entries(data.accounts || {}));
+        this.dropRetiredImageEngines();
         this.activeAccountId = data.activeAccountId || null;
         this.rotationIndex = data.rotationIndex || 0;
       }
     } catch (error) {
       console.log('[BlogAccountManager] 저장된 데이터 없음');
+    }
+  }
+
+  // [2026-11-03] An account-level image engine that was removed from the product is cleared once.
+  // The account then follows the app-wide engine, which the user re-picks in the startup dialog.
+  private dropRetiredImageEngines(): void {
+    let cleared = 0;
+    for (const account of this.accounts.values()) {
+      const settings = account?.settings as { imageSource?: unknown } | undefined;
+      if (settings && isRetiredImageEngine(settings.imageSource)) {
+        delete settings.imageSource;
+        cleared++;
+      }
+    }
+    if (cleared > 0) {
+      this.saveToStorage();
+      console.log(`[BlogAccountManager] 지원이 끝난 이미지 엔진 지정 ${cleared}건을 비웠습니다.`);
     }
   }
 

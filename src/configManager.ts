@@ -18,6 +18,7 @@ import {
   normalizeSecretConfig,
   stripSecretSchemaArtifacts,
 } from './security/secretValueUtils.js';
+import { dropRemovedConfigKeysOnce } from './security/removedConfigKeys.js';
 import {
   normalizeGeminiPrepaidTextModelId,
 } from './runtime/geminiTextModelNormalization.js';
@@ -31,25 +32,16 @@ export interface AppConfig {
   geminiUseFreeQuotaBeforePaid?: boolean;
   geminiModel?: 'gemini-3.1-flash-lite' | 'gemini-3.6-flash' | 'gemini-3.5-flash' | string;
   openaiApiKey?: string;
-  pexelsApiKey?: string;
-  unsplashApiKey?: string;
-  pixabayApiKey?: string;
   claudeApiKey?: string;
   perplexityApiKey?: string; // ✅ [2026-01-25] Perplexity API 키 추가
   // ✅ [2026-02-22] OpenAI Image (DALL-E gpt-image-1) API Key
   openaiImageApiKey?: string;
-  // ✅ [2026-02-22] Leonardo AI API Key
-  leonardoaiApiKey?: string;
-  prodiaApiKey?: string;
-  prodiaToken?: string;
-  prodiaModel?: string;
 
   // v2.7.18 (Phase 2): "100점 모드" 토글 — 5 Opus 합의
   // ON 시 제목 검증 루프(최대 3회 재생성) + LLM Judge(별도 모델) 활성화
   // OFF 기본값 — 회귀 0 보장
   premiumTitleMode?: boolean;
 
-  naverDatalabApiKey?: string;
   naverDatalabClientId?: string;
   naverDatalabClientSecret?: string;
   // ✅ 네이버 검색 API (블로그/카페/뉴스 검색) — 기존 개발자센터 키
@@ -189,12 +181,6 @@ export interface AppConfig {
   geminiImageDailyCount?: number;
   geminiImageLastReset?: string;
 
-  // ✅ [2026-02-23] Leonardo AI 모델 선택
-  leonardoaiModel?: 'seedream-4.5' | 'phoenix-1.0' | 'ideogram-3.0' | 'nano-banana-pro';
-
-  // ✅ DeepInfra API (FLUX-2-dev 고품질 저가)
-  deepinfraApiKey?: string;
-
   /**
    * [2026-09-10] 에이전트(구독 CLI) 안에서 쓸 모델 이름.
    * 앱이 모델 목록을 가지지 않는다 — 사용자가 CLI 에서 쓰는 이름을 그대로 적는다.
@@ -245,8 +231,6 @@ export interface AppConfig {
   otherImagesModel?: 'gemini-2.5-flash' | 'gemini-2.0-flash-exp' | 'gemini-3-pro' | 'gemini-3-pro-4k';
   lockThumbnailTo4K?: boolean; // 기본값 true: 썸네일은 항상 4K 품질
 
-  // ✅ [2026-02-08] 이미지 엔진 모델 설정 (DeepInfra만 유지)
-  deepinfraModel?: string;
   // ✅ OpenAI 이미지 모델·품질 선택 ([2026-10-10] Sunburst = 기본·품질형, Flare = 속도형 두 가지만),
   //    gpt-image-2.5-flare/sunburst = 2026-09 신모델 — xhigh/max 는 2.5 계열에서만 유효)
   openaiImageModel?: 'gpt-image-2.5-flare' | 'gpt-image-2.5-sunburst';
@@ -441,14 +425,6 @@ function getRuntimeSecretFallbacks(): Record<string, unknown> {
     openaiImageApiKey: process.env.OPENAI_IMAGE_API_KEY || process.env.OPENAI_API_KEY,
     claudeApiKey: process.env.CLAUDE_API_KEY,
     perplexityApiKey: process.env.PERPLEXITY_API_KEY,
-    leonardoaiApiKey: process.env.LEONARDOAI_API_KEY,
-    prodiaApiKey: process.env.PRODIA_API_KEY || process.env.PRODIA_TOKEN,
-    prodiaToken: process.env.PRODIA_API_KEY || process.env.PRODIA_TOKEN,
-    prodiaModel: process.env.PRODIA_MODEL,
-    deepinfraApiKey: process.env.DEEPINFRA_API_KEY,
-    pexelsApiKey: process.env.PEXELS_API_KEY,
-    unsplashApiKey: process.env.UNSPLASH_API_KEY,
-    pixabayApiKey: process.env.PIXABAY_API_KEY,
     naverClientSecret: process.env.NAVER_CLIENT_SECRET || process.env.NAVER_CLIENT_SECRET_SEARCH,
     naverHubClientId: process.env.NAVER_HUB_CLIENT_ID,
     naverHubClientSecret: process.env.NAVER_HUB_CLIENT_SECRET,
@@ -466,6 +442,9 @@ export async function loadConfig(): Promise<AppConfig> {
   try {
     const raw = await fs.readFile(filePath, 'utf-8');
     let parsed = JSON.parse(raw) as any;
+
+    // [2026-11-03] Keys of removed providers are dropped once; the cleaned file is written back.
+    parsed = await dropRemovedConfigKeysOnce(filePath, parsed);
 
     // SPEC-MIGRATION-2026 M1 P3: at-rest 암호화 필드 복호화 (enc:v1: 접두사 있는 항목만).
     //   - decrypt 실패는 silent fallback 금지 (feedback_no_fallback) → console.error + 키 입력 유도.
@@ -513,9 +492,7 @@ export async function loadConfig(): Promise<AppConfig> {
         }
         const PRESERVE = [
           'geminiApiKey', 'geminiApiKeys', 'openaiApiKey', 'claudeApiKey',
-          'perplexityApiKey', 'pexelsApiKey', 'unsplashApiKey', 'pixabayApiKey',
-          'deepinfraApiKey', 'openaiImageApiKey', 'leonardoaiApiKey', 'leonardoaiModel',
-          'prodiaApiKey', 'prodiaToken', 'prodiaModel',
+          'perplexityApiKey', 'openaiImageApiKey',
           'naverDatalabClientId', 'naverDatalabClientSecret',
           'naverClientId', 'naverClientSecret',
           'naverHubClientId', 'naverHubClientSecret',
@@ -641,13 +618,6 @@ export async function loadConfig(): Promise<AppConfig> {
       geminiApiKey: parsed.geminiApiKey || parsed['gemini-api-key'] || undefined,
       openaiApiKey: parsed.openaiApiKey || parsed['openai-api-key'] || undefined,
       claudeApiKey: parsed.claudeApiKey || parsed['claude-api-key'] || undefined,
-      pexelsApiKey: parsed.pexelsApiKey || parsed['pexels-api-key'] || undefined,
-      prodiaApiKey: parsed.prodiaApiKey || parsed.prodiaToken || parsed['prodia-api-key'] || parsed['prodia-token'] || undefined,
-      prodiaToken: parsed.prodiaToken || parsed.prodiaApiKey || parsed['prodia-token'] || parsed['prodia-api-key'] || undefined,
-      prodiaModel: parsed.prodiaModel || parsed['prodia-model'] || undefined,
-      unsplashApiKey: parsed.unsplashApiKey || parsed['unsplash-api-key'] || undefined,
-      pixabayApiKey: parsed.pixabayApiKey || parsed['pixabay-api-key'] || undefined,
-      stabilityApiKey: undefined, // deprecated - removed
       naverDatalabClientId: parsed.naverDatalabClientId || parsed['naver-datalab-client-id'] || undefined,
       naverDatalabClientSecret: parsed.naverDatalabClientSecret || parsed['naver-datalab-client-secret'] || undefined,
       // ✅ [2026-01-25] 네이버 검색 API 키 추가
@@ -663,15 +633,8 @@ export async function loadConfig(): Promise<AppConfig> {
       naverAdCustomerId: parsed.naverAdCustomerId || undefined,
       // ✅ [2026-02-22] 새 이미지 프로바이더 API 키
       openaiImageApiKey: parsed.openaiImageApiKey || parsed['openai-image-api-key'] || parsed.openaiApiKey || parsed['openai-api-key'] || undefined,
-      leonardoaiApiKey: parsed.leonardoaiApiKey || parsed.leonardoApiKey || parsed['leonardoai-api-key'] || parsed['leonardo-api-key'] || undefined,
-
-      leonardoaiModel: parsed.leonardoaiModel || undefined,
       // ✅ [2026-01-25] Perplexity API 키 추가
       perplexityApiKey: parsed.perplexityApiKey || parsed['perplexity-api-key'] || undefined,
-      // ✅ [2026-01-26] DeepInfra API 키 추가
-      deepinfraApiKey: parsed.deepinfraApiKey || parsed['deepinfra-api-key'] || undefined,
-      // ✅ [2026-02-08] 이미지 엔진 모델 설정 명시적 파싱
-      deepinfraModel: parsed.deepinfraModel || undefined,
       // ✅ OpenAI 이미지 모델·품질·환율 — 기본값 보장 (기본: gpt-image-2.5-sunburst + medium).
       //    Anything other than the explicit high-cost model falls back to the cheap default,
       //    so a missing/corrupt config can never silently select the expensive option.
@@ -709,7 +672,7 @@ export async function loadConfig(): Promise<AppConfig> {
     });
 
     // 하이픈 형식 키가 있었고 카멜케이스로 변환했다면, 설정 파일을 업데이트 (한 번만)
-    const hasHyphenKeys = parsed['gemini-api-key'] || parsed['openai-api-key'] || parsed['openai-image-api-key'] || parsed['claude-api-key'] || parsed['pexels-api-key'] || parsed['leonardoai-api-key'] || parsed['leonardo-api-key'];
+    const hasHyphenKeys = parsed['gemini-api-key'] || parsed['openai-api-key'] || parsed['openai-image-api-key'] || parsed['claude-api-key'];
     if (hasHyphenKeys && !isPackaged) {
       // 개발 모드에서만 자동 마이그레이션 (한 번만)
       try {
@@ -719,11 +682,6 @@ export async function loadConfig(): Promise<AppConfig> {
         delete migratedConfig['openai-api-key'];
         delete migratedConfig['openai-image-api-key'];
         delete migratedConfig['claude-api-key'];
-        delete migratedConfig['pexels-api-key'];
-        delete migratedConfig['unsplash-api-key'];
-        delete migratedConfig['pixabay-api-key'];
-        delete migratedConfig['leonardoai-api-key'];
-        delete migratedConfig['leonardo-api-key'];
         delete migratedConfig['naver-datalab-client-id'];
         delete migratedConfig['naver-datalab-client-secret'];
 
@@ -744,9 +702,6 @@ export async function loadConfig(): Promise<AppConfig> {
       'openai-api-key': normalizedConfig.openaiApiKey,
       'openai-image-api-key': normalizedConfig.openaiImageApiKey,
       'claude-api-key': normalizedConfig.claudeApiKey,
-      'pexels-api-key': normalizedConfig.pexelsApiKey,
-      // (deprecated keys removed: stability, prodia, falai)
-      'unsplash-api-key': normalizedConfig.unsplashApiKey,
       // ✅ [2026-01-25] 네이버 검색 API 키 호환성
       'naver-client-id': normalizedConfig.naverClientId || normalizedConfig.naverDatalabClientId,
       'naver-client-secret': normalizedConfig.naverClientSecret || normalizedConfig.naverDatalabClientSecret,
@@ -760,12 +715,6 @@ export async function loadConfig(): Promise<AppConfig> {
       'naver-ad-api-key': normalizedConfig.naverAdApiKey,
       'naver-ad-secret-key': normalizedConfig.naverAdSecretKey,
       'naver-ad-customer-id': normalizedConfig.naverAdCustomerId,
-      // ✅ [2026-01-26] DeepInfra API 키 호환성
-      'deepinfra-api-key': (normalizedConfig as any).deepinfraApiKey,
-      'leonardoai-api-key': (normalizedConfig as any).leonardoaiApiKey,
-      'prodia-api-key': (normalizedConfig as any).prodiaApiKey || (normalizedConfig as any).prodiaToken,
-      'prodia-token': (normalizedConfig as any).prodiaToken || (normalizedConfig as any).prodiaApiKey,
-      'prodia-model': (normalizedConfig as any).prodiaModel,
     };
 
     cachedConfig = compatibleConfig;
@@ -779,9 +728,6 @@ export async function loadConfig(): Promise<AppConfig> {
     }
     if (compatibleConfig.claudeApiKey) {
       console.log('[Config] Claude API 키 존재: ✅');
-    }
-    if (compatibleConfig.pexelsApiKey) {
-      console.log('[Config] Pexels API 키 존재: ✅');
     }
 
     // 네이버 아이디/비밀번호 저장 상태 확인
@@ -804,9 +750,6 @@ export async function loadConfig(): Promise<AppConfig> {
           geminiApiKey: '',
           openaiApiKey: '',
           claudeApiKey: '',
-          pexelsApiKey: '',
-          unsplashApiKey: '',
-          pixabayApiKey: '',
 
           naverDatalabClientId: '',
           naverDatalabClientSecret: '',
@@ -1022,8 +965,7 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
       //   수정: customImageSavePath + 사용자 환경설정 필드들 PRESERVE에 추가
       const PRESERVE_KEYS = [
         'geminiApiKey', 'openaiApiKey', 'claudeApiKey', 'perplexityApiKey',
-        'pexelsApiKey', 'deepinfraApiKey', 'openaiImageApiKey', 'leonardoaiApiKey',
-        'prodiaApiKey', 'prodiaToken', 'prodiaModel',
+        'openaiImageApiKey',
         'naverDatalabClientId', 'naverDatalabClientSecret',
         'naverClientId', 'naverClientSecret',
         'naverHubClientId', 'naverHubClientSecret',
@@ -1034,7 +976,7 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
         'customImageSavePath',
         'primaryGeminiTextModel', 'defaultAiProvider', 'geminiPlanType',
         'geminiApiKeys', 'geminiUseFreeQuotaBeforePaid',
-        'perplexityModel', 'geminiModel', 'leonardoaiModel',
+        'perplexityModel', 'geminiModel',
         // ✅ OpenAI 이미지 모델·품질·환율 — 부분 saveConfig로 인한 silent 손실 차단
         'openaiImageModel', 'openaiImageQuality', 'usdToKrwRate',
         'gensparkImageModel', // [2026-10-10] 부분 저장 시 젠스파크 모델 선택 보존
@@ -1145,9 +1087,7 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
         // API 키와 모델 설정만 백싱크 (민감한 계정 정보는 제외)
         const API_KEY_FIELDS = [
           'geminiApiKey', 'geminiApiKeys', 'openaiApiKey', 'claudeApiKey',
-          'pexelsApiKey', 'unsplashApiKey', 'pixabayApiKey', 'perplexityApiKey',
-          'deepinfraApiKey', 'openaiImageApiKey', 'leonardoaiApiKey',
-          'prodiaApiKey', 'prodiaToken', 'prodiaModel',
+          'perplexityApiKey', 'openaiImageApiKey',
           'naverDatalabClientId', 'naverDatalabClientSecret',
           'naverClientId', 'naverClientSecret',
           'naverHubClientId', 'naverHubClientSecret',
@@ -1216,16 +1156,6 @@ export function applyConfigToEnv(config: AppConfig): void {
     }
   }
 
-  const prodiaKey = (config as any).prodiaApiKey?.trim() || (config as any).prodiaToken?.trim();
-  if (prodiaKey) {
-    process.env.PRODIA_API_KEY = prodiaKey;
-    process.env.PRODIA_TOKEN = prodiaKey;
-    console.log('[Config] PRODIA_API_KEY 설정됨 ✅');
-  }
-  if ((config as any).prodiaModel && String((config as any).prodiaModel).trim()) {
-    process.env.PRODIA_MODEL = String((config as any).prodiaModel).trim();
-  }
-
   // ✅ [2026-03-18 FIX] Gemini 모델 설정 — 비-Gemini 모델명 오염 방지
   // primaryGeminiTextModel은 'claude-haiku', 'openai-gpt4o', 'perplexity-sonar' 등
   // 비-Gemini 값을 가질 수 있으므로, gemini- 접두사가 있는 값만 GEMINI_MODEL에 설정
@@ -1258,15 +1188,9 @@ export function applyConfigToEnv(config: AppConfig): void {
     applySecretEnv('OPENAI_API_KEY', config.openaiApiKey, 'OpenAI');
   }
 
-  if (config.pexelsApiKey && config.pexelsApiKey.trim()) {
-    process.env.PEXELS_API_KEY = config.pexelsApiKey.trim();
-  }
-
   if (config.claudeApiKey && config.claudeApiKey.trim()) {
     applySecretEnv('CLAUDE_API_KEY', config.claudeApiKey, 'Claude');
   }
-
-  // (removed stabilityApiKey env injection - deprecated)
 
   // ✅ [2026-01-25] Perplexity API 키 설정
   if (config.perplexityApiKey && config.perplexityApiKey.trim()) {
@@ -1371,19 +1295,6 @@ export function applyConfigToEnv(config: AppConfig): void {
     console.log('[Config] OPENAI_IMAGE_API_KEY 설정됨: ✅');
   }
 
-  // ✅ [2026-02-22] Leonardo AI API 키 설정
-  if ((config as any).leonardoaiApiKey && (config as any).leonardoaiApiKey.trim()) {
-    process.env.LEONARDOAI_API_KEY = (config as any).leonardoaiApiKey.trim();
-    console.log('[Config] LEONARDOAI_API_KEY 설정됨: ✅');
-  }
-
-
-
-  // ✅ [2026-01-30] DeepInfra API 키 설정
-  if (config.deepinfraApiKey && config.deepinfraApiKey.trim()) {
-    process.env.DEEPINFRA_API_KEY = config.deepinfraApiKey.trim();
-    console.log('[Config] DEEPINFRA_API_KEY 설정됨: ✅');
-  }
 }
 
 export function validateApiKeyFormat(apiKey: string | undefined, type: 'gemini' | 'openai' | 'pexels' | 'claude'): { valid: boolean; message?: string } {
@@ -1420,8 +1331,6 @@ export async function resetConfigForDistribution(): Promise<void> {
       geminiApiKey: '',
       geminiApiKeys: [],
       geminiUseFreeQuotaBeforePaid: true,
-      unsplashApiKey: '',
-      pixabayApiKey: '',
       naverDatalabClientId: '',
       naverDatalabClientSecret: '',
 

@@ -144,6 +144,8 @@ try {
     'geminiTextModelNormalization.js',
     'imageProviderMigration.js',
     'imageStudioPreferences.js',
+    // [2026-11-03] 지원이 끝난 이미지 엔진 선택값 보류/재선택 (renderer.ts · multiAccountManager · retiredImageEngineGate 가 사용)
+    'retiredImageEngines.js',
   ];
   let runtimeSource = '';
   for (const runtimeFile of runtimeModules) {
@@ -628,6 +630,8 @@ try {
     'imageNarrativeQuickMode.js',
     // [2026-09-10] 매 실행 글생성 엔진 선택 게이트 (renderer.ts 시작 시 호출)
     'startupEngineGate.js',
+    // [2026-11-03] 지원이 끝난 이미지 엔진을 쓰던 사용자에게 한 번 뜨는 재선택 안내 (renderer.ts 시작 시 호출)
+    'retiredImageEngineGate.js',
     // ✅ [v2.11.206] 장소(지도) 미리 확정 UI — 사진 모드 장소 블록
     'placePicker.js',
     'lewordBoardPicker.js',

@@ -84,9 +84,9 @@ describe('화면 — 프로·2.5 옵션이 내려갔다', () => {
     }
   });
 
-  it('Leonardo 하위 모델(nano-banana-pro)은 그대로 남아 있다', () => {
-    expect(html).toContain('<option value="nano-banana-pro">🍌 Nano Banana Pro ($0.21/장');
-    expect(settings).toContain('<option value="nano-banana-pro">🍌 Nano Banana Pro - $0.21');
+  it('Leonardo 하위 모델 select 는 화면에서 사라졌다 (Leonardo AI 지원 종료)', () => {
+    expect(html).not.toContain('leonardoai-model-select');
+    expect(settings).not.toContain('submodal-leonardoai-model');
   });
 });
 

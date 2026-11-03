@@ -30,11 +30,6 @@ const SENSITIVE_CONFIG_FIELDS = [
   'openaiImageApiKey',
   'claudeApiKey',
   'perplexityApiKey',
-  'leonardoaiApiKey',
-  'deepinfraApiKey',
-  'pexelsApiKey',
-  'unsplashApiKey',
-  'pixabayApiKey',
   'naverClientId',
   'naverClientSecret',
   'naverHubClientId',
@@ -59,11 +54,6 @@ const KEBAB_SECRET_ALIASES = [
   'openai-image-api-key',
   'claude-api-key',
   'perplexity-api-key',
-  'leonardoai-api-key',
-  'deepinfra-api-key',
-  'pexels-api-key',
-  'unsplash-api-key',
-  'pixabay-api-key',
   'naver-client-id',
   'naver-client-secret',
   'naver-hub-client-id',
@@ -75,7 +65,41 @@ const KEBAB_SECRET_ALIASES = [
   'naver-ad-customer-id',
 ];
 
-module.exports = { SENSITIVE_CONFIG_FIELDS, KEBAB_SECRET_ALIASES };
+/**
+ * 2026-11-03 에 제품에서 빠진 서비스의 키. 앱은 설정을 읽을 때 이 키를 한 번 지운다
+ * (src/security/removedConfigKeys.ts 의 REMOVED_SECRET_CONFIG_KEYS 와 같은 집합 — 테스트가 강제).
+ * 빌드 머신의 옛 설정에 값이 남아 있을 수 있어 패키징 때도 빈 값이 아니라 키째로 지운다.
+ */
+const REMOVED_SECRET_CONFIG_FIELDS = [
+  'leonardoaiApiKey',
+  'leonardoApiKey',
+  'deepinfraApiKey',
+  'prodiaApiKey',
+  'prodiaToken',
+  'pexelsApiKey',
+  'unsplashApiKey',
+  'pixabayApiKey',
+  'naverDatalabApiKey',
+  'naverSearchClientId',
+  'naverSearchClientSecret',
+  'stabilityApiKey',
+  'falaiApiKey',
+  'leonardoai-api-key',
+  'leonardo-api-key',
+  'deepinfra-api-key',
+  'prodia-api-key',
+  'prodia-token',
+  'pexels-api-key',
+  'unsplash-api-key',
+  'pixabay-api-key',
+  'naver-datalab-api-key',
+  'naver-search-client-id',
+  'naver-search-client-secret',
+  'stability-api-key',
+  'falai-api-key',
+];
+
+module.exports = { SENSITIVE_CONFIG_FIELDS, KEBAB_SECRET_ALIASES, REMOVED_SECRET_CONFIG_FIELDS };
 
 // 부작용 방지: 이 파일을 require 하면 목록만 내주고 아무것도 지우지 않는다.
 // (테스트가 목록을 읽는다 — 그때 본문이 돌면 빌드 머신의 설정과 renderer.ts 를 건드린다.)
@@ -117,8 +141,7 @@ try {
         console.log('  - 기존 API 키 존재:', {
           gemini: !!existingConfig.geminiApiKey,
           openai: !!existingConfig.openaiApiKey,
-          claude: !!existingConfig.claudeApiKey,
-          pexels: !!existingConfig.pexelsApiKey
+          claude: !!existingConfig.claudeApiKey
         });
 
         // API 키·자격증명 초기화 (민감 정보)
@@ -130,6 +153,8 @@ try {
         SENSITIVE_CONFIG_FIELDS.forEach((field) => { existingConfig[field] = ''; });
         // 카멜/케밥 두 형태로 저장되므로 케밥 별칭도 함께 지운다.
         KEBAB_SECRET_ALIASES.forEach((field) => { existingConfig[field] = ''; });
+        // 지원이 끝난 서비스의 키는 빈 값이 아니라 키째로 지운다.
+        REMOVED_SECRET_CONFIG_FIELDS.forEach((field) => { delete existingConfig[field]; });
 
         // 자격증명 기억 플래그
         existingConfig.rememberCredentials = false;
@@ -168,9 +193,6 @@ try {
     geminiApiKey: '',
     openaiApiKey: '',
     claudeApiKey: '',
-    pexelsApiKey: '',
-    unsplashApiKey: '',
-    pixabayApiKey: '',
     naverDatalabClientId: '',
     naverDatalabClientSecret: '',
 

@@ -42,8 +42,6 @@ const SENSITIVE_FIELDS: readonly string[] = [
   'openaiImageApiKey',
   'claudeApiKey',
   'perplexityApiKey',
-  'leonardoaiApiKey',
-  'deepinfraApiKey',
   'naverClientId',
   'naverClientSecret',
   'naverHubClientId',

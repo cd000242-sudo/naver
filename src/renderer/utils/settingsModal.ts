@@ -25,8 +25,6 @@ interface SettingsModalElements {
     openaiApiKeyInput: HTMLInputElement | null;
     claudeApiKeyInput: HTMLInputElement | null;
     perplexityApiKeyInput: HTMLInputElement | null;
-    leonardoaiApiKeyInput: HTMLInputElement | null;
-    deepinfraApiKeyInput: HTMLInputElement | null; // ✅ [2026-01-26] DeepInfra API 키 추가
     naverClientIdInput: HTMLInputElement | null;
     naverClientSecretInput: HTMLInputElement | null;
     // ✅ [2026-08] NAVER API HUB 키 (네이버클라우드) — 기존 키와 병행 보관
@@ -175,8 +173,6 @@ function getElements(): SettingsModalElements {
         openaiApiKeyInput: getInputByIds('settings-openai-api-key', 'openai-api-key'),
         claudeApiKeyInput: getInputByIds('settings-claude-api-key', 'claude-api-key'),
         perplexityApiKeyInput: getInputByIds('settings-perplexity-api-key', 'perplexity-api-key'),
-        leonardoaiApiKeyInput: getInputByIds('settings-leonardoai-api-key', 'leonardoai-api-key'),
-        deepinfraApiKeyInput: getInputByIds('settings-deepinfra-api-key', 'deepinfra-api-key'),
         naverClientIdInput: getInputByIds('settings-naver-client-id', 'naver-client-id'),
         naverClientSecretInput: getInputByIds('settings-naver-client-secret', 'naver-client-secret'),
         naverHubClientIdInput: getInputByIds('settings-naver-hub-client-id', 'naver-hub-client-id'),
@@ -332,7 +328,6 @@ async function loadCurrentSettings(): Promise<void> {
         setApiInputValue(els.openaiApiKeyInput, config.openaiImageApiKey || config.openaiApiKey);
         setApiInputValue(els.claudeApiKeyInput, config.claudeApiKey);
         setApiInputValue(els.perplexityApiKeyInput, config.perplexityApiKey);
-        setApiInputValue(els.leonardoaiApiKeyInput, config.leonardoaiApiKey);
         if (els.naverClientIdInput && config.naverClientId) {
             els.naverClientIdInput.value = config.naverClientId;
         }
@@ -341,8 +336,6 @@ async function loadCurrentSettings(): Promise<void> {
             els.naverHubClientIdInput.value = config.naverHubClientId;
         }
         setApiInputValue(els.naverHubClientSecretInput, config.naverHubClientSecret);
-        // ✅ [2026-01-26] DeepInfra API 키 로드
-        setApiInputValue(els.deepinfraApiKeyInput, config.deepinfraApiKey);
 
         // [2026-08-19] 저장된 텍스트 모델 선택을 라디오에 되살린다.
         //   HTML 라디오에는 checked 가 하나도 없고 복원 코드도 없었다. 그래서 앱을 껐다 켜면
@@ -431,9 +424,6 @@ async function saveSettings(): Promise<void> {
         const openaiKey = readApiInput(els.openaiApiKeyInput, currentConfig.openaiImageApiKey || currentConfig.openaiApiKey);
         const claudeKey = readApiInput(els.claudeApiKeyInput, currentConfig.claudeApiKey);
         const perplexityKey = readApiInput(els.perplexityApiKeyInput, currentConfig.perplexityApiKey);
-        const leonardoaiKey = readApiInput(els.leonardoaiApiKeyInput, currentConfig.leonardoaiApiKey);
-        // ✅ [2026-01-26] DeepInfra API 키 수집
-        const deepinfraKey = readApiInput(els.deepinfraApiKeyInput, currentConfig.deepinfraApiKey);
         const naverClientId = els.naverClientIdInput?.value || '';
         const naverClientSecret = readApiInput(els.naverClientSecretInput, currentConfig.naverClientSecret);
         const naverHubClientId = els.naverHubClientIdInput?.value || '';
@@ -455,8 +445,6 @@ async function saveSettings(): Promise<void> {
             openaiImageApiKey: openaiKey,
             claudeApiKey: claudeKey,
             perplexityApiKey: perplexityKey,
-            leonardoaiApiKey: leonardoaiKey,
-            deepinfraApiKey: deepinfraKey, // ✅ [2026-01-26] DeepInfra 저장
             naverClientId: naverClientId,
             naverClientSecret: naverClientSecret,
             naverHubClientId: naverHubClientId,
@@ -548,8 +536,6 @@ export function initSettingsModal(): void {
             els.openaiApiKeyInput,
             els.claudeApiKeyInput,
             els.perplexityApiKeyInput,
-            els.leonardoaiApiKeyInput,
-            els.deepinfraApiKeyInput,
             els.naverClientSecretInput,
             els.naverHubClientSecretInput,
         ];
@@ -1135,33 +1121,12 @@ function setupAdsPowerSettings(): void {
         }
     });
 
-    // ── API Key 저장/로드 ──
-    const apiKeyInput = document.getElementById('adspower-api-key-input') as HTMLInputElement;
-    const apiKeyStatus = document.getElementById('adspower-apikey-status');
-    
-    // localStorage에서 기존 키 로드
-    const savedKey = localStorage.getItem('adspower_api_key') || '';
-    if (apiKeyInput && savedKey) {
-        apiKeyInput.value = savedKey;
-        // main process에 키 전달
-        (window as any).api.adsPowerSetApiKey(savedKey).catch(() => {});
-        if (apiKeyStatus) apiKeyStatus.textContent = '✅ 저장된 API Key 로드됨';
+    // [2026-11-03] The AdsPower API key field was removed. Drop the old stored key once and clear
+    // the main-process copy so a stale key is not sent with later requests.
+    if (localStorage.getItem('adspower_api_key') !== null) {
+        localStorage.removeItem('adspower_api_key');
+        (window as any).api?.adsPowerSetApiKey?.('')?.catch?.(() => {});
     }
-
-    document.getElementById('adspower-save-apikey-btn')?.addEventListener('click', async () => {
-        const key = apiKeyInput?.value?.trim() || '';
-        localStorage.setItem('adspower_api_key', key);
-        try {
-            await (window as any).api.adsPowerSetApiKey(key);
-            if (apiKeyStatus) {
-                apiKeyStatus.innerHTML = key 
-                    ? '✅ <span style="color:#22c55e;">API Key 저장 완료!</span>'
-                    : '✅ <span style="color:#9ca3af;">API Key 해제됨 (인증 없이 사용)</span>';
-            }
-        } catch (e) {
-            if (apiKeyStatus) apiKeyStatus.innerHTML = '❌ <span style="color:#ef4444;">저장 실패</span>';
-        }
-    });
 
     // ── 연결 테스트 ──
     document.getElementById('adspower-test-btn')?.addEventListener('click', async () => {

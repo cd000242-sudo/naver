@@ -36,18 +36,17 @@ function logTest(step: string, success: boolean, message: string, details?: any)
 
 const TEST_CONFIG: Partial<AppConfig> = {
     openaiImageApiKey: 'test-openai-key',
-    leonardoaiApiKey: 'test-leonardo-key',
-    leonardoaiModel: 'phoenix-1.0',
+    openaiImageModel: 'gpt-image-2.5-flare',
     imagePreset: 'premium',
 };
 
 const BUDGET_PRESET: Partial<AppConfig> = {
-    leonardoaiModel: 'phoenix-1.0',
+    openaiImageModel: 'gpt-image-2.5-sunburst',
     imagePreset: 'budget',
 };
 
 const PREMIUM_PRESET: Partial<AppConfig> = {
-    leonardoaiModel: 'phoenix-1.0',
+    openaiImageModel: 'gpt-image-2.5-flare',
     imagePreset: 'premium',
 };
 
@@ -71,8 +70,7 @@ async function testConfigSaveAndLoad(): Promise<boolean> {
         // 각 필드 검증
         const checks = [
             { field: 'openaiImageApiKey', expected: TEST_CONFIG.openaiImageApiKey, actual: loadedConfig.openaiImageApiKey },
-            { field: 'leonardoaiApiKey', expected: TEST_CONFIG.leonardoaiApiKey, actual: loadedConfig.leonardoaiApiKey },
-            { field: 'leonardoaiModel', expected: TEST_CONFIG.leonardoaiModel, actual: loadedConfig.leonardoaiModel },
+            { field: 'openaiImageModel', expected: TEST_CONFIG.openaiImageModel, actual: loadedConfig.openaiImageModel },
             { field: 'imagePreset', expected: TEST_CONFIG.imagePreset, actual: loadedConfig.imagePreset },
         ];
 
@@ -111,9 +109,7 @@ async function testDefaultValues(): Promise<boolean> {
         const loaded = await loadConfig();
 
         const hasNoImageFields =
-            !loaded.openaiImageApiKey &&
-            !loaded.leonardoaiApiKey &&
-            !loaded.leonardoaiModel;
+            !loaded.openaiImageApiKey;
 
         if (hasNoImageFields) {
             logTest(step, true, '이미지 API 키 필드가 삭제됨 (생성기에서 기본값 적용됨)');
@@ -142,7 +138,7 @@ async function testPresetBudget(): Promise<boolean> {
         const loaded = await loadConfig();
 
         const checks = [
-            { field: 'leonardoaiModel', expected: BUDGET_PRESET.leonardoaiModel, actual: loaded.leonardoaiModel },
+            { field: 'openaiImageModel', expected: BUDGET_PRESET.openaiImageModel, actual: loaded.openaiImageModel },
             { field: 'imagePreset', expected: 'budget', actual: loaded.imagePreset },
         ];
 
@@ -175,7 +171,7 @@ async function testPresetPremium(): Promise<boolean> {
         const loaded = await loadConfig();
 
         const checks = [
-            { field: 'leonardoaiModel', expected: PREMIUM_PRESET.leonardoaiModel, actual: loaded.leonardoaiModel },
+            { field: 'openaiImageModel', expected: PREMIUM_PRESET.openaiImageModel, actual: loaded.openaiImageModel },
             { field: 'imagePreset', expected: 'premium', actual: loaded.imagePreset },
         ];
 
@@ -235,11 +231,11 @@ async function testGeneratorUsesConfig(): Promise<boolean> {
 
         // 설정 저장
         await saveConfig({
-            leonardoaiModel: 'phoenix-1.0',
+            openaiImageModel: 'gpt-image-2.5-flare',
         } as AppConfig);
 
         const loaded = await loadConfig();
-        const hasLeonardoSetting = loaded.leonardoaiModel === 'phoenix-1.0';
+        const hasLeonardoSetting = loaded.openaiImageModel === 'gpt-image-2.5-flare';
 
         if (hasOpenAI && hasLeonardo && hasLeonardoSetting) {
             logTest(step, true, '모든 생성기 모듈 임포트 및 설정 확인됨');
