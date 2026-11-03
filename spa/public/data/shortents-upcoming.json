@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T21:00:46.918Z",
+ "builtAt": "2026-11-03T21:10:51.039Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,8 +8,72 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 23,
  "candidates": [
+  {
+   "keyword": "KT 1차전 승리",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 6,
+   "press": 6,
+   "firstArticleAt": "2026-11-03T20:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'퇴출 위기, 스윙 궤적 수정으로 극복' kt 힐리어드, 한국시리스 1차전 ...",
+     "press": "thesportstimes.co.kr",
+     "publishedAt": "2026-11-03T21:07:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/472/0000042267"
+    },
+    {
+     "title": "박진만표 '독한 야구', KS 1차전에선 없었다…3주 쉰 KT 타격감만 살린 ...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-03T21:07:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/241/0003539085"
+    },
+    {
+     "title": "KT 복덩이 외인투수가 '73.8%' 우승확률 가져왔다! 1차전 선발승→\"불펜...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-03T21:00:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/311/0002076288"
+    }
+   ]
+  },
+  {
+   "keyword": "장동혁·오세훈·한동훈 보수 경쟁",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T20:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "보수통합 '동상이몽'…張 \"당원이 결정\", 吳韓 \"누구라도\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009268671?sid=100"
+    },
+    {
+     "title": "오세훈·한동훈 같은 날 세 대결… 국힘 의원들 치열한 수싸움",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-03T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003695453?sid=100"
+    },
+    {
+     "title": "국회 들썩인 보수 세 대결…吳·張·韓 '3강 구도' 본격화",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-03T20:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004206203?sid=100"
+    }
+   ]
+  },
   {
    "keyword": "유럽 여객기 폭파 위협",
    "sources": [
@@ -17,7 +81,7 @@
     "nate"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-03T20:32:00.000Z",
    "exclusive": false,
@@ -42,78 +106,26 @@
      "link": "https://n.news.naver.com/mnews/article/422/0000922626?sid=104"
     }
    ]
-  },
-  {
-   "keyword": "기소",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T19:34:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'조작기소 특검법안' 통과되면…12건 중 8건이 李대통령 관련",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T20:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016420072?sid=102"
-    },
-    {
-     "title": "與, '조작기소 특검법' 오늘 법사위 상정…野 \"악마의 발톱 드러내\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-03T20:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014299525?sid=100"
-    },
-    {
-     "title": "[단독]‘메로나 사건’ 같은 기소유예, 통계도 없다",
-     "press": "donga.com",
-     "publishedAt": "2026-11-03T19:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003759936?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "장동혁·오세훈·한동훈 보수 경쟁",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T19:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "오세훈·한동훈 같은 날 세 대결… 국힘 의원들 치열한 수싸움",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-03T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003695453?sid=100"
-    },
-    {
-     "title": "국회 들썩인 보수 세 대결…吳·張·韓 '3강 구도' 본격화",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-03T20:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004206203?sid=100"
-    },
-    {
-     "title": "오세훈-한동훈 30분 간격 토론회, 각각 의원 38명-19명 참석",
-     "press": "donga.com",
-     "publishedAt": "2026-11-03T19:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003759854?sid=100"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 461,
-  "matched": 179,
-  "avgLeadMin": 241,
+  "flagged": 462,
+  "matched": 181,
+  "avgLeadMin": 247,
   "recent": [
+   {
+    "keyword": "김민",
+    "hitKeyword": "이강인 김민재 코리안더비",
+    "hitAt": "2026-11-04T06:00:00+09:00",
+    "leadMin": 1216
+   },
+   {
+    "keyword": "한학자 보석 취소",
+    "hitKeyword": "한학자 보석 취소",
+    "hitAt": "2026-11-04T06:00:00+09:00",
+    "leadMin": 331
+   },
    {
     "keyword": "애플 매출 증가",
     "hitKeyword": "애플 글로벌 매출",
@@ -161,18 +173,6 @@
     "hitKeyword": "오타니 대기록",
     "hitAt": "2026-11-03T21:00:00+09:00",
     "leadMin": 385
-   },
-   {
-    "keyword": "김도영",
-    "hitKeyword": "김도영 박재현",
-    "hitAt": "2026-11-03T20:00:00+09:00",
-    "leadMin": 1674
-   },
-   {
-    "keyword": "제네시스 생산라인 재가동",
-    "hitKeyword": "제네시스 생산 중단",
-    "hitAt": "2026-11-03T20:00:00+09:00",
-    "leadMin": 103
    }
   ]
  }
