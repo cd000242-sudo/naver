@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T03:24:34.166Z",
+ "builtAt": "2026-11-03T03:34:38.563Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "발언하는 이재명 대통령",
@@ -16,94 +16,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 61,
-   "recent20": 5,
-   "press": 41,
-   "firstArticleAt": "2026-11-03T02:00:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "이 대통령 \"해킹 공격 잇따라, '사이버 보안 차르' 적극 검토\"",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-03T03:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002534465?sid=100"
-    },
-    {
-     "title": "이주인권단체 “대통령이 다문화 가족을 좁은 잣대로 평가 부적절” 비...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-03T03:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002830440?sid=102"
-    },
-    {
-     "title": "정동영 \"'北에 딸 있다' 가짜뉴스 피해\"…李대통령 \"사회 근간 뒤흔드는...",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-03T03:08:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4442747"
-    }
-   ]
-  },
-  {
-   "keyword": "미국 중간선거",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 51,
-   "recent20": 6,
-   "press": 33,
-   "firstArticleAt": "2026-11-03T02:00:00.000Z",
-   "exclusive": true,
-   "capped": true,
-   "samples": [
-    {
-     "title": "[T나는 증시] 美중간선거 이후 '코스피' 어떻게 될까...\"선거 영향은 제...",
-     "press": "tjb.co.kr",
-     "publishedAt": "2026-11-03T03:20:00.000Z",
-     "link": "https://www.tjb.co.kr/news05/bodo/view/id/105631"
-    },
-    {
-     "title": "BNP파리바 \"美 중간선거 결과 어떻든 재정적자 더 늘어날 위험\"",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-03T03:18:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4442749"
-    },
-    {
-     "title": "현대차 포함 미국 자동차협회 의회에 중국차 수입 금지 법안 통과 촉구...",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-03T03:18:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=451020"
-    }
-   ]
-  },
-  {
-   "keyword": "서울양평 고속도로 재추진",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 23,
+   "articles90": 60,
    "recent20": 4,
-   "press": 23,
-   "firstArticleAt": "2026-11-03T02:00:00.000Z",
+   "press": 37,
+   "firstArticleAt": "2026-11-03T02:06:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "‘ 종점 변경 특혜 의혹’ 서울~양평 고속도로 타당성조사 착수",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-03T03:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005758151?sid=103"
+     "title": "이주민 노동·인권 단체 '이 대통령 발언 규탄' 기자회견",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-03T03:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004205913?sid=102"
     },
     {
-     "title": "서울-양평 고속도로 사업 재추진…신규 타당성 조사 착수",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-03T03:16:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=72510"
+     "title": "'이 대통령의 이주민 차별 혐오 발언 규탄한다'",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-03T03:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004205911?sid=102"
     },
     {
-     "title": "서울-양평고속도로 사업 재개…신규 타당성조사 착수",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-03T03:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012286208?sid=101"
+     "title": "이주민 노동·인권단체, 이 대통령의 이주민 차별 혐오 발언 규탄",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-03T03:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004205912?sid=102"
     }
    ]
   },
@@ -112,13 +48,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 28,
-   "recent20": 4,
-   "press": 21,
-   "firstArticleAt": "2026-11-03T01:56:00.000Z",
+   "articles90": 26,
+   "recent20": 2,
+   "press": 19,
+   "firstArticleAt": "2026-11-03T02:09:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "10월, 소비자물가지수 2.8% ‘껑충’…가공식품 11개월·외식 8개월 만에...",
+     "press": "swtvnews.com",
+     "publishedAt": "2026-11-03T03:26:00.000Z",
+     "link": "https://www.swtvnews.com/news/newsview.php?ncode=1065577102505627"
+    },
     {
      "title": "물가 2.8% 상승… 석유류·외식 동반 급등",
      "press": "theopiniontimes.news",
@@ -130,12 +72,38 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-03T03:11:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001400212?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "국정원 긴급 점검 실시",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 3,
+   "press": 13,
+   "firstArticleAt": "2026-11-03T02:11:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국정원, 전국 2천100여 기관에 '사이버 보안' 총력...주요 기반시설 긴급...",
+     "press": "cwn.kr",
+     "publishedAt": "2026-11-03T03:30:00.000Z",
+     "link": "https://www.cwn.kr/news/articleView.html?idxno=60866"
     },
     {
-     "title": "10월 물가 2.8% 상승…가공식품·외식 오름폭 확대",
-     "press": "koreareport.co.kr",
-     "publishedAt": "2026-11-03T03:10:00.000Z",
-     "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=54242"
+     "title": "국정원, 중앙부처·지자체 2100여곳 긴급 보안점검",
+     "press": "byline.network",
+     "publishedAt": "2026-11-03T03:22:00.000Z",
+     "link": "https://byline.network/?p=9004111222625818"
+    },
+    {
+     "title": "국정원, 2100여 핵심 기관 긴급 보안점검 착수",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-03T03:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000160243?sid=102"
     }
    ]
   },
@@ -144,10 +112,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 18,
-   "recent20": 4,
-   "press": 18,
-   "firstArticleAt": "2026-11-03T01:56:00.000Z",
+   "articles90": 13,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-03T02:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -172,98 +140,67 @@
    ]
   },
   {
-   "keyword": "국정원 긴급 점검 실시",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 16,
-   "recent20": 3,
-   "press": 16,
-   "firstArticleAt": "2026-11-03T01:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국정원, 2100여 핵심 기관 긴급 보안점검 착수",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-03T03:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000160243?sid=102"
-    },
-    {
-     "title": "국정원, 중앙부처·지자체 2100여곳 긴급 보안점검",
-     "press": "byline.network",
-     "publishedAt": "2026-11-03T03:22:00.000Z",
-     "link": "https://byline.network/?p=9004111222625818"
-    },
-    {
-     "title": "국정원, 중앙부처·지자체 등 긴급 보안 점검",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-03T03:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533186?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "국민의힘 장동혁 대표",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 47,
-   "recent20": 36,
-   "press": 13,
+   "articles90": 49,
+   "recent20": 26,
+   "press": 12,
    "firstArticleAt": "2026-11-03T02:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[포토] '2027년도 예산안 심사 방향' 설명하는 국힘 장동혁 대표",
+     "title": "[포토] '국민의힘 2027년도 예산안 심사 방향' 설명하는 장동혁 대표",
      "press": "newscj.com",
+     "publishedAt": "2026-11-03T03:24:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3445441"
+    },
+    {
+     "title": "인사말하는 장동혁 국민의힘 대표",
+     "press": "newsis.com",
      "publishedAt": "2026-11-03T03:22:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3445440"
+     "link": "https://n.news.naver.com/mnews/article/003/0014297733?sid=100"
     },
     {
-     "title": "[포토] 국민의힘 장동혁 대표, 2027년도 예산안 심사 방향 설명",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-03T03:20:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3445438"
-    },
-    {
-     "title": "[포토] 장동혁, 2027년도 예산안 심사 방향 설명",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-03T03:20:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3445439"
+     "title": "인사 나누는 오세훈 서울시장과 장동혁 국힘 대표",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T03:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014297732?sid=100"
     }
    ]
   },
   {
-   "keyword": "가상자산 과세 유예 건의",
+   "keyword": "서울양평 고속도로 재추진",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-03T01:58:00.000Z",
+   "articles90": 10,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-03T02:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[정책 해설] 가상자산 과세 유예 건의…2년 안팎 거론, 확정은 아직",
-     "press": "coinreaders.com",
+     "title": "‘ 종점 변경 특혜 의혹’ 서울~양평 고속도로 타당성조사 착수",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-03T03:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005758151?sid=103"
+    },
+    {
+     "title": "서울-양평 고속도로 사업 재추진…신규 타당성 조사 착수",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-03T03:16:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=72510"
+    },
+    {
+     "title": "서울-양평고속도로 사업 재개…신규 타당성조사 착수",
+     "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-03T03:12:00.000Z",
-     "link": "http://coinreaders.com/267085"
-    },
-    {
-     "title": "與 ‘가상자산 과세’ 2년 추가유예 가닥",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-03T02:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002718160?sid=100"
-    },
-    {
-     "title": "가상자산 과세 2년 유예 가닥…與野는 ‘821조 예산전쟁’ 돌입 [이런정...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-03T02:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002718137?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/056/0012286208?sid=101"
     }
    ]
   },
@@ -273,7 +210,7 @@
     "daum"
    ],
    "articles90": 12,
-   "recent20": 2,
+   "recent20": 1,
    "press": 10,
    "firstArticleAt": "2026-11-03T02:24:00.000Z",
    "exclusive": true,
@@ -300,46 +237,14 @@
    ]
   },
   {
-   "keyword": "이화영 대북송금 재심 청구",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-03T02:03:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이화영 측 '쌍방울 대북 송금' 재심 청구‥\"새 증거\"",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-03T03:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533191?sid=102"
-    },
-    {
-     "title": "이화영 측 “새로운 증거 발견”…재심 청구",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-03T03:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012286209?sid=102"
-    },
-    {
-     "title": "성탄절 석방 원하는 이화영…‘대북송금’ 재심 청구",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-03T03:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002829938?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "박주민 의원 경찰 출석",
    "sources": [
     "nate"
    ],
-   "articles90": 11,
+   "articles90": 10,
    "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-03T01:58:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-03T02:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -368,10 +273,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 16,
-   "recent20": 7,
-   "press": 8,
-   "firstArticleAt": "2026-11-03T02:03:00.000Z",
+   "articles90": 14,
+   "recent20": 6,
+   "press": 7,
+   "firstArticleAt": "2026-11-03T02:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -396,49 +301,23 @@
    ]
   },
   {
-   "keyword": "lg디스플레이",
-   "sources": [
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-03T01:59:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "LG디스플레이, 국립생태원과 파주사업장 주변 생태계 보전 추진",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T02:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016418123?sid=102"
-    },
-    {
-     "title": "LG디스플레이, 파주사업장 인근 생태계 보전·복원 나선다",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-03T02:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205898?sid=101"
-    },
-    {
-     "title": "LG디스플레이, 파주사업장 인근 멸종위기종 복원 노력",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-03T02:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002718119?sid=101"
-    }
-   ]
-  },
-  {
    "keyword": "미래대응기금 설치 공청회",
    "sources": [
     "nate"
    ],
    "articles90": 18,
    "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-03T02:00:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-03T02:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "미래대응기금 신설 놓고 찬반 격론…\"재정 안전장치\" vs \"지방재정 침해...",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-03T03:32:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=727738"
+    },
     {
      "title": "여야, 미래대응기금 설치 놓고 충돌...“재정 안전장치” vs “지방재정...",
      "press": "m-economynews.com",
@@ -450,12 +329,6 @@
      "press": "hansbiz.co.kr",
      "publishedAt": "2026-11-03T03:12:00.000Z",
      "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=879278"
-    },
-    {
-     "title": "시도지사협의회 \"미래대응기금, 지방 재정 권한 국가가 가져가\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T03:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009266822?sid=101"
     }
    ]
   },
@@ -465,12 +338,18 @@
     "nate"
    ],
    "articles90": 21,
-   "recent20": 1,
+   "recent20": 2,
    "press": 6,
-   "firstArticleAt": "2026-11-03T02:04:00.000Z",
+   "firstArticleAt": "2026-11-03T02:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "신장식 \"결혼은 혼자 하나…합당 말보다 與 집안싸움부터 해결하라\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T03:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009266854?sid=100"
+    },
     {
      "title": "신장식 \"총선서 수도권 '반개혁 지역구'에 당 지도부 출마\"(종합)",
      "press": "newsis.com",
@@ -482,22 +361,49 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-03T02:54:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014297580?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "lg디스플레이",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-03T02:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "LG디스플레이, 국립생태원과 생물다양성 보전 협력…DMZ 생태계 복원 추...",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-03T03:26:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=94461"
     },
     {
-     "title": "취임 100일 기자간담회 갖는 신장식 조국혁신당 대표",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-03T02:49:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261103000604"
+     "title": "LG디스플레이, 국립생태원과 파주사업장 주변 생태계 보전 추진",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-03T02:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016418123?sid=102"
+    },
+    {
+     "title": "LG디스플레이, 파주사업장 인근 생태계 보전·복원 나선다",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-03T02:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004205898?sid=101"
     }
    ]
   },
   {
    "keyword": "이종석 왕자 역할 부담 컸다",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 1,
    "press": 5,
    "firstArticleAt": "2026-11-03T02:52:00.000Z",
    "exclusive": false,
@@ -531,10 +437,16 @@
    "articles90": 5,
    "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-03T02:00:00.000Z",
+   "firstArticleAt": "2026-11-03T02:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'신천지 공개' 김민석, '100일 경고장' 정청래…불붙은 석청 갈등",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-03T03:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000141477?sid=100"
+    },
     {
      "title": "결론 나오는 ‘민주 신천지 의혹’ … 명·청 갈등 최고조",
      "press": "munhwa.com",
@@ -546,22 +458,61 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-03T03:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009266816?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "울산 에릭 K리그1 MVP",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-03T02:08:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘34R MVP’ 울산 에릭 “기나긴 부상·슬럼프에 날 믿어준 구단에 감사...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-03T02:53:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/468/0001277532"
     },
     {
-     "title": "'821조 예산안' 기 싸움 본격화...민주, 오늘 '신천지' 보고",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-03T02:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002427650?sid=100"
+     "title": "[공식발표] '멀티골 폭발→극적인 역전승 견인' 울산 에릭, K리그1 34라운...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-03T02:19:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/117/0004121270"
+    },
+    {
+     "title": "울산 에릭, K리그1 34라운드 MVP…강원전 멀티골 활약",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-03T02:10:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/422/0000922342"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 322,
-  "matched": 120,
-  "avgLeadMin": 256,
+  "flagged": 323,
+  "matched": 122,
+  "avgLeadMin": 253,
   "recent": [
+   {
+    "keyword": "트럼프 공화당",
+    "hitKeyword": "트럼프 중간선거 지지율",
+    "hitAt": "2026-11-03T12:30:00+09:00",
+    "leadMin": 76
+   },
+   {
+    "keyword": "미국 중간선거",
+    "hitKeyword": "트럼프 중간선거 지지율",
+    "hitAt": "2026-11-03T12:30:00+09:00",
+    "leadMin": 26
+   },
    {
     "keyword": "연애박사",
     "hitKeyword": "연애박사 추영우",
@@ -609,18 +560,6 @@
     "hitKeyword": "미국 이란 게슘섬 타격",
     "hitAt": "2026-11-03T11:30:00+09:00",
     "leadMin": 46
-   },
-   {
-    "keyword": "미국 이란 케슘섬 공습",
-    "hitKeyword": "미국 이란 게슘섬 타격",
-    "hitAt": "2026-11-03T11:30:00+09:00",
-    "leadMin": 26
-   },
-   {
-    "keyword": "美 게슘섬 타격",
-    "hitKeyword": "미국 이란 게슘섬 타격",
-    "hitAt": "2026-11-03T11:30:00+09:00",
-    "leadMin": 6
    }
   ]
  }
