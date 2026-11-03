@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T10:07:51.086Z",
+ "builtAt": "2026-11-03T10:17:55.986Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,79 +11,78 @@
  "measured": 22,
  "candidates": [
   {
+   "keyword": "튀르키예 원전 방산 협력",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 52,
+   "recent20": 9,
+   "press": 41,
+   "firstArticleAt": "2026-11-03T08:49:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령, 튀르키예 대통령과 정상회담…\"원전·방산 등 전략 분야 협력...",
+     "press": "goodkyung.com",
+     "publishedAt": "2026-11-03T10:12:00.000Z",
+     "link": "https://www.goodkyung.com/news/articleView.html?idxno=293069"
+    },
+    {
+     "title": "한·튀르키예, 원전 금융협력 MOU…한국 기업 신규 원전 참여 지원",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-03T10:12:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611030205"
+    },
+    {
+     "title": "한국, 튀르키예 신규 원전 선제적 지원... '전략적 동반관계' 심화",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-03T10:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002534552?sid=100"
+    }
+   ]
+  },
+  {
    "keyword": "김민석 신천지 사과",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 53,
-   "recent20": 9,
-   "press": 44,
-   "firstArticleAt": "2026-11-03T08:39:00.000Z",
+   "articles90": 50,
+   "recent20": 8,
+   "press": 41,
+   "firstArticleAt": "2026-11-03T08:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김민석 \"신천지 의혹 근거 없었다\" 사과...정청래 \"책임져라\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-03T10:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002427920?sid=100"
+     "title": "김민석 '울컥 사과'…\"3자 비밀연합 증거 없었다\"",
+     "press": "ilyoseoul.co.kr",
+     "publishedAt": "2026-11-03T10:10:00.000Z",
+     "link": "https://www.ilyoseoul.co.kr/news/articleView.html?idxno=524549"
     },
     {
-     "title": "김민석, ‘신천지 의혹’ 결국 사과",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-03T10:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000366261?sid=115"
+     "title": "황당한 집권당… 두 달간 박터지더니 ‘신천지 논란’ 없던일로",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-03T10:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001882760?sid=100"
     },
     {
-     "title": "'신천지 연합 의혹' 증거 못 찾았다… '진퇴양난'에 빠진 김민석",
-     "press": "sisaweek.com",
-     "publishedAt": "2026-11-03T10:00:00.000Z",
-     "link": "https://www.sisaweek.com/news/articleView.html?idxno=238771"
+     "title": "신천지 당원 가입 의혹 결과 발표 놓고 민주당 계파 간 갈등 고조",
+     "press": "joongboo.com",
+     "publishedAt": "2026-11-03T10:10:00.000Z",
+     "link": "https://www.joongboo.com/news/articleView.html?idxno=363741375"
     }
    ]
   },
   {
-   "keyword": "발언하는 이재명 대통령",
+   "keyword": "민주당 조작기소 특검법",
    "sources": [
-    "nate"
-   ],
-   "articles90": 44,
-   "recent20": 3,
-   "press": 38,
-   "firstArticleAt": "2026-11-03T08:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이 대통령, 튀르키예 대통령과 정상회담…원전·방산·인프라 협력 내실...",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-03T10:02:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1134901"
-    },
-    {
-     "title": "청, 이주인권단체 간담회서 “이 대통령 발언, 혐오표현 아냐” 해명",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-03T10:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002830554?sid=102"
-    },
-    {
-     "title": "李대통령 “시놉 원전 건설 협력 순조롭게 진행”…한·튀르키예 정상회...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-03T09:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003695410?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "조작기소 특검법 당론 채택",
-   "sources": [
-    "signal.bz",
     "daum"
    ],
-   "articles90": 39,
-   "recent20": 6,
-   "press": 31,
-   "firstArticleAt": "2026-11-03T08:44:00.000Z",
+   "articles90": 42,
+   "recent20": 4,
+   "press": 34,
+   "firstArticleAt": "2026-11-03T08:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -100,10 +99,42 @@
      "link": "https://n.news.naver.com/mnews/article/023/0004007551?sid=100"
     },
     {
-     "title": "민주당 '조작기소 특검법' 당론…국힘 \"필리버스터 검토\"",
-     "press": "inews24.com",
+     "title": "與, 조작기소 특검 당론 추진…野 \"악마 발톱 드러내\"",
+     "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-03T09:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001071918?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/422/0000922524?sid=161"
+    }
+   ]
+  },
+  {
+   "keyword": "발언하는 이재명 대통령",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 37,
+   "recent20": 3,
+   "press": 31,
+   "firstArticleAt": "2026-11-03T08:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이주인권단체, 이 대통령 발언 규탄…청와대 \"경청하겠다\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-03T10:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004206167?sid=100"
+    },
+    {
+     "title": "이 대통령, 튀르키예 대통령과 정상회담…원전·방산·인프라 협력 내실...",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-03T10:02:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1134901"
+    },
+    {
+     "title": "청, 이주인권단체 간담회서 “이 대통령 발언, 혐오표현 아냐” 해명",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-03T10:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002830554?sid=102"
     }
    ]
   },
@@ -111,15 +142,22 @@
    "keyword": "한학자 보석 취소",
    "sources": [
     "signal.bz",
-    "nate"
+    "nate",
+    "daum"
    ],
-   "articles90": 31,
+   "articles90": 20,
    "recent20": 2,
-   "press": 30,
-   "firstArticleAt": "2026-11-03T08:38:00.000Z",
+   "press": 19,
+   "firstArticleAt": "2026-11-03T08:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘천정궁 외출’ 통일교 한학자 보석 취소…보석금도 회수",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-03T10:16:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611030202"
+    },
     {
      "title": "법원, 통일교 한학자 총재 보석 취소",
      "press": "kmib.co.kr",
@@ -131,12 +169,6 @@
      "press": "weekly.khan.co.kr",
      "publishedAt": "2026-11-03T09:54:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/033/0000053127?sid=102"
-    },
-    {
-     "title": "[뉴스룸 오프닝] 미국 중간선거 곧 시작 / '천정궁' 드나든 한학자 / 5·...",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-03T09:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000518931?sid=100"
     }
    ]
   },
@@ -145,13 +177,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 21,
+   "articles90": 17,
    "recent20": 1,
-   "press": 21,
-   "firstArticleAt": "2026-11-03T08:38:00.000Z",
+   "press": 17,
+   "firstArticleAt": "2026-11-03T08:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "삼성바이오에피스, 테바와 5632억 계약…美면역질환 시장 공략",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-03T10:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006403046?sid=101"
+    },
     {
      "title": "삼성바이오에피스, 테바와 5600억 규모 시밀러 2종 판매 계약",
      "press": "news.bizwatch.co.kr",
@@ -163,44 +201,6 @@
      "press": "hitnews.co.kr",
      "publishedAt": "2026-11-03T09:38:00.000Z",
      "link": "https://www.hitnews.co.kr/news/articleView.html?idxno=80480"
-    },
-    {
-     "title": "삼성바이오에피스, 테바와 최대 5632억원 규모 미국 판매 계약",
-     "press": "lawissue.co.kr",
-     "publishedAt": "2026-11-03T09:32:00.000Z",
-     "link": "https://www.lawissue.co.kr/view.php?ud=202611031830058243f4ab64559d_12"
-    }
-   ]
-  },
-  {
-   "keyword": "李 튀르키예 원전 방산 협력",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 17,
-   "recent20": 3,
-   "press": 14,
-   "firstArticleAt": "2026-11-03T08:53:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "튀르키예, '형제의 나라'에서 '원전 파트너'로…李대통령 \"피로 맺은 우...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-03T10:03:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261103001348"
-    },
-    {
-     "title": "李대통령 “튀르키예 신규 원전 지원”…방산 공동생산·기술협력 확대",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-03T10:00:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2643654"
-    },
-    {
-     "title": "李대통령 “시놉 원전 건설 협력 순조롭게 진행”…한·튀르키예 정상회...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-03T09:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003695410?sid=100"
     }
    ]
   },
@@ -209,10 +209,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
+   "articles90": 9,
    "recent20": 1,
-   "press": 14,
-   "firstArticleAt": "2026-11-03T08:38:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-03T08:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -269,38 +269,6 @@
    ]
   },
   {
-   "keyword": "힐리어드 슈퍼캐치",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T09:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[ST포토] 힐리어드, 실점 삭제하는 슈퍼캐치",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-03T10:06:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109697321836"
-    },
-    {
-     "title": "[포토] 힐리어드, 기선제압 슈퍼캐치",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-03T09:51:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/108/0003484250"
-    },
-    {
-     "title": "3주 쉰 거 맞아? 44홈런 효자 외인 미쳤다! 삼성 좌절시킨 슈퍼캐치→2타...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-03T09:46:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/109/0005633723"
-    }
-   ]
-  },
-  {
    "keyword": "헤수스 데 미겔",
    "sources": [
     "signal.bz",
@@ -336,7 +304,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 438,
+  "flagged": 439,
   "matched": 168,
   "avgLeadMin": 213,
   "recent": [
