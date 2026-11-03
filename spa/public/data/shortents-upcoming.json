@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T07:46:37.438Z",
+ "builtAt": "2026-11-03T07:56:41.050Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "코스피 3.59% 하락",
    "sources": [
     "daum"
    ],
-   "articles90": 84,
-   "recent20": 11,
-   "press": 64,
-   "firstArticleAt": "2026-11-03T06:56:00.000Z",
+   "articles90": 82,
+   "recent20": 12,
+   "press": 66,
+   "firstArticleAt": "2026-11-03T06:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "코스피 3% 급락 마감⋯외인·기관 2조 '매도 공세'",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-03T07:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001071865?sid=101"
+     "title": "외국인 1조5000억원 넘게 팔자에 코스피 3.59% 급락…5600대 후퇴",
+     "press": "pointdaily.co.kr",
+     "publishedAt": "2026-11-03T07:54:00.000Z",
+     "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=324661"
     },
     {
-     "title": "美 ‘AI 거품론’에 코스피 3.59% 하락…삼성전자·SK하이닉스 동반 휘청",
-     "press": "donga.com",
-     "publishedAt": "2026-11-03T07:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003759770?sid=101"
+     "title": "AI 빚잔치·美중간선거에 코스피 또 ‘털썩’…3.6% 급락 [투자360]",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-03T07:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002718313?sid=101"
     },
     {
-     "title": "코스피, AI 투자 우려에 3%대 하락 마감…외인·기관 '팔자'",
-     "press": "sentv.co.kr",
-     "publishedAt": "2026-11-03T07:42:00.000Z",
-     "link": "https://www.sentv.co.kr/article/view/sentv202611030197"
+     "title": "반도체 반등 하루 만에 풀썩…코스피, 5640대 마감",
+     "press": "financialpost.co.kr",
+     "publishedAt": "2026-11-03T07:54:00.000Z",
+     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=284406"
     }
    ]
   },
@@ -48,29 +48,61 @@
     "nate"
    ],
    "articles90": 49,
-   "recent20": 7,
+   "recent20": 5,
    "press": 44,
-   "firstArticleAt": "2026-11-03T06:18:00.000Z",
+   "firstArticleAt": "2026-11-03T06:27:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "중동 정세 불안에…사우디 아시안컵, 내년 1월→12월 연기",
+     "press": "donga.com",
+     "publishedAt": "2026-11-03T07:53:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/020/0003759776"
+    },
+    {
+     "title": "중동 정세 불안에 결국 아시안컵 연기…2027년 12월 개막",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-03T07:51:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/018/0006402973"
+    },
     {
      "title": "2027 아시안컵, 결국 12월로... 손흥민 라스트댄스도 연기?",
      "press": "hansbiz.co.kr",
      "publishedAt": "2026-11-03T07:44:00.000Z",
      "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=879437"
-    },
+    }
+   ]
+  },
+  {
+   "keyword": "미국 중간선거",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 39,
+   "recent20": 15,
+   "press": 31,
+   "firstArticleAt": "2026-11-03T07:08:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
     {
-     "title": "아시안컵 1년 연기... 한국 축구 셈법 복잡해졌다",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-03T07:41:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/047/0002534522"
-    },
-    {
-     "title": "아시안컵, 내년 12월로 전격 연기…모레노 감독 거취는?",
+     "title": "AI 빚잔치·美중간선거에 코스피 또 ‘털썩’…3.6% 급락 [투자360]",
      "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-03T07:39:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/016/0002718302"
+     "publishedAt": "2026-11-03T07:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002718313?sid=101"
+    },
+    {
+     "title": "[美중간선거]\"트럼프, 패배하면 나토 압박?…대외 강경노선 우려\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T07:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014298718?sid=104"
+    },
+    {
+     "title": "원·달러 환율, 美 중간선거 앞두고 1340원대 등락…2.8원 하락",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-03T07:52:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1730320"
     }
    ]
   },
@@ -80,30 +112,30 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 30,
-   "recent20": 30,
-   "press": 26,
-   "firstArticleAt": "2026-11-03T07:32:00.000Z",
+   "articles90": 27,
+   "recent20": 27,
+   "press": 23,
+   "firstArticleAt": "2026-11-03T07:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"좌완 없다고? 로건도 있고 오원석도 있고...\" 좌타천국 삼성 상대 KT, 보...",
-     "press": "spochoo.com",
-     "publishedAt": "2026-11-03T07:45:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/529/0000079154"
+     "title": "삼성·LG전자, '코리아 그랜드 페스티벌' 대규모 할인",
+     "press": "zdnet.co.kr",
+     "publishedAt": "2026-11-03T07:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/092/0002443679?sid=105"
     },
     {
-     "title": "삼성증권, 발행어음형 CMA 고객 대상 이벤트 진행",
-     "press": "thefirstmedia.net",
-     "publishedAt": "2026-11-03T07:44:00.000Z",
-     "link": "http://www.thefirstmedia.net/news/articleView.html?idxno=212649"
+     "title": "신한은행, 삼성자산운용과 퇴직연금 협력…ETF 거래 넘어 투자정보 강화",
+     "press": "todayeconomic.com",
+     "publishedAt": "2026-11-03T07:54:00.000Z",
+     "link": "https://www.todayeconomic.com/news/article.html?no=32718"
     },
     {
-     "title": "신한은행, 삼성자산운용과 맞손…퇴직연금 자산관리 서비스 강화",
-     "press": "job-post.co.kr",
-     "publishedAt": "2026-11-03T07:44:00.000Z",
-     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=236222"
+     "title": "삼성이 요청한 ‘안전한 용수 계획’···광주 반도체 용수망 구축",
+     "press": "mdilbo.com",
+     "publishedAt": "2026-11-03T07:54:00.000Z",
+     "link": "http://www.mdilbo.com/detail/0kIA7d/760236"
     }
    ]
   },
@@ -112,30 +144,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 27,
+   "articles90": 25,
    "recent20": 9,
-   "press": 23,
-   "firstArticleAt": "2026-11-03T06:17:00.000Z",
+   "press": 21,
+   "firstArticleAt": "2026-11-03T06:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "전북도교육청, 교육부 교육혁신 선도지역 선정…최대 100억 지원",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-03T07:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000548380?sid=102"
+     "title": "교육혁신 선도지역 43곳 선정에 전국서 기대·아쉬움 교차",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-03T07:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016419328?sid=102"
     },
     {
-     "title": "2027년도 교육혁신선도지역에 경남 4개 시군 선정",
-     "press": "idomin.com",
-     "publishedAt": "2026-11-03T07:42:00.000Z",
-     "link": "https://www.idomin.com/news/articleView.html?idxno=2018629"
+     "title": "\"신도시·농촌 교육격차 좁힌다\" 양주시, '교육혁신선도지역' 선정",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-03T07:52:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1171499"
     },
     {
-     "title": "부산시, 교육혁신선도지역 선정…5개 자치구 교육격차 해소 나선다",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T07:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009267785?sid=102"
+     "title": "논산시, '2027 교육혁신선도지역' 지정…교육혁신에 100억원 투입",
+     "press": "newsprime.co.kr",
+     "publishedAt": "2026-11-03T07:46:00.000Z",
+     "link": "http://www.newsprime.co.kr/news/article.html?no=753525"
     }
    ]
   },
@@ -144,10 +176,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 20,
-   "recent20": 3,
-   "press": 20,
-   "firstArticleAt": "2026-11-03T06:18:00.000Z",
+   "articles90": 14,
+   "recent20": 1,
+   "press": 14,
+   "firstArticleAt": "2026-11-03T06:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -176,13 +208,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 3,
-   "press": 12,
+   "articles90": 13,
+   "recent20": 1,
+   "press": 13,
    "firstArticleAt": "2026-11-03T06:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"키 큰 나를 귀여워해\"…45세 슈퍼모델 김자연, 70세 전 삼성전자 사장...",
+     "press": "ent.sbs.co.kr",
+     "publishedAt": "2026-11-03T07:47:00.000Z",
+     "link": "https://m.entertain.naver.com/article/416/0000327832"
+    },
     {
      "title": "슈퍼모델 김자연, '70세' 前삼성전자 사장과 결혼..스위스서 '럭셔리 웨...",
      "press": "osen.co.kr",
@@ -194,12 +232,6 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-03T07:32:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009267755?sid=102"
-    },
-    {
-     "title": "45세 슈퍼모델 김자연, 70세 前 삼성전자 사장과 결혼 \"MIT 선후배\"[스타...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-03T07:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003484203"
     }
    ]
   },
@@ -208,18 +240,18 @@
    "sources": [
     "nate"
    ],
-   "articles90": 15,
+   "articles90": 12,
    "recent20": 3,
    "press": 9,
-   "firstArticleAt": "2026-11-03T06:18:00.000Z",
+   "firstArticleAt": "2026-11-03T06:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[포토] 위용 드러낸 3천600t금 잠수함 '서희함'",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-03T07:44:00.000Z",
-     "link": "https://www.ajunews.com/view/20261103164249767"
+     "title": "3600톤급 잠수함 '서희함' 진수…조정식 국회의장 주빈 참석",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-03T07:56:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1319120&inflow=N"
     },
     {
      "title": "조정식, 해군 '서희함' 진수식 찾아 \"K-방산 세계 최고 수준\"",
@@ -228,10 +260,43 @@
      "link": "https://n.news.naver.com/mnews/article/421/0009267801?sid=100"
     },
     {
-     "title": "3600톤급 잠수함 '서희함' 진수···시운전 거쳐 2028년 실전 배치",
-     "press": "seoulfn.com",
-     "publishedAt": "2026-11-03T07:28:00.000Z",
-     "link": "https://www.seoulfn.com/news/articleView.html?idxno=641810"
+     "title": "[포토] 위용 드러낸 3천600t금 잠수함 '서희함'",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-03T07:44:00.000Z",
+     "link": "https://www.ajunews.com/view/20261103164249767"
+    }
+   ]
+  },
+  {
+   "keyword": "청년 주거 간담회 장동혁",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-03T06:29:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국힘, 청년주택 방문...\"민주당이 얘기한 '폐버스'보다 훨씬 작아\"",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-03T07:54:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1134862"
+    },
+    {
+     "title": "장동혁 \"청년들이 살고 싶은 지역에, 원하는 형태의 맞춤형 주거 공급해...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-03T07:42:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261103001195"
+    },
+    {
+     "title": "청년 주거 간담회 개최한 장동혁 \"부동산 문제 해결 말 아닌 공급\"",
+     "press": "thepublic.kr",
+     "publishedAt": "2026-11-03T07:42:00.000Z",
+     "link": "https://www.thepublic.kr/news/articleView.html?idxno=324924"
     }
    ]
   },
@@ -241,24 +306,24 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 8,
-   "firstArticleAt": "2026-11-03T07:08:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-03T07:18:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
+    {
+     "title": "수유재래시장, 7일 '어린이 장보기 체험' 행사···가족 200명 참여",
+     "press": "ziksir.com",
+     "publishedAt": "2026-11-03T07:54:00.000Z",
+     "link": "https://www.ziksir.com/news/articleView.html?idxno=151904"
+    },
     {
      "title": "대전서부소방서, 2026년 어린이 불조심 포스터 공모전 개최",
      "press": "fpn119.co.kr",
      "publishedAt": "2026-11-03T07:32:00.000Z",
      "link": "http://fpn119.co.kr/258859"
-    },
-    {
-     "title": "美뉴욕주, 30년 만에 홍역 어린이 사망자 발생…\"백신정책 후퇴 탓\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T07:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009267745?sid=104"
     },
     {
      "title": "삼성복지재단, 전국 어린이집·유치원 원장 대상 문화·교육 행사 열어",
@@ -269,35 +334,34 @@
    ]
   },
   {
-   "keyword": "청년 주거 간담회 장동혁",
+   "keyword": "이효리",
    "sources": [
-    "signal.bz",
-    "nate"
+    "google"
    ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-03T06:18:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T06:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "청년 주거 간담회 개최한 장동혁 \"부동산 문제 해결 말 아닌 공급\"",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-03T07:42:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=324924"
+     "title": "이효리, 음주·폭력 행동 보인 연인에 쓴소리…\"관계보다 치료가 먼저\"",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-03T07:52:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=846036"
     },
     {
-     "title": "장동혁 \"청년들이 살고 싶은 지역에, 원하는 형태의 맞춤형 주거 공급해...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-03T07:42:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261103001195"
+     "title": "이효리 \"나도 정신과 다닌다\"… 술 문제 커플에 치료 권유",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-03T06:57:00.000Z",
+     "link": "https://m.entertain.naver.com/article/469/0000963372"
     },
     {
-     "title": "장동혁 \"청년들이 살고 싶은 형태 주거 공급해야\" [뉴시스Pic]",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-03T07:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014298570?sid=100"
+     "title": "이효리도 기함…커플 싸움 목격 후 \"막장 드라마에 나올 일\"",
+     "press": "atstar1.com",
+     "publishedAt": "2026-11-03T06:37:00.000Z",
+     "link": "https://m.entertain.naver.com/article/415/0000053395"
     }
    ]
   },
@@ -307,7 +371,7 @@
     "nate"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 0,
    "press": 2,
    "firstArticleAt": "2026-11-03T07:08:00.000Z",
    "exclusive": true,
@@ -329,14 +393,14 @@
      "title": "태권도 공연 관람하는 한ㆍ튀르키예 정상",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-03T07:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016419219?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/001/0016419218?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 400,
+  "flagged": 401,
   "matched": 142,
   "avgLeadMin": 230,
   "recent": [
