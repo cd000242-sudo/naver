@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T05:05:16.211Z",
+ "builtAt": "2026-11-03T05:15:19.890Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,94 @@
    "sources": [
     "daum"
    ],
-   "articles90": 51,
-   "recent20": 15,
-   "press": 41,
-   "firstArticleAt": "2026-11-03T03:42:00.000Z",
+   "articles90": 57,
+   "recent20": 19,
+   "press": 46,
+   "firstArticleAt": "2026-11-03T03:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "미국 중간선거 이후 증시 오를까... 삼성전자·SK하이닉스 주가 전망은...",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-03T05:04:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1190814"
+     "title": "美 중간선거•가계대출 변수…한은, 금리 인상 ‘최종 저울질‘",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-03T05:14:00.000Z",
+     "link": "https://www.viva100.com/article/20261103500772"
     },
     {
-     "title": "트럼프, 중간선거 전날 밤까지 이란 전쟁 정당성 강조",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-03T05:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202219?sid=104"
+     "title": "미국 언론, 중간선거 판세 분석 \"민주당, 하원 탈환 유력..상원도 우세\"",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-03T05:10:00.000Z",
+     "link": "http://www.breaknews.com/1247914"
     },
     {
-     "title": "트럼프 운명 가를 美 중간선거…민주당, 상·하원 탈환 노린다",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-03T05:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/024/0000109355?sid=101"
+     "title": "트럼프 \"전쟁 비용은 푼돈\"…중간선거 전야에 이란전 정당성 강조",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-03T05:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400242?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "청소년 SNS 제한 논의",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 24,
+   "recent20": 7,
+   "press": 23,
+   "firstArticleAt": "2026-11-03T03:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李 대통령 \"청소년 SNS 제한 신속 논의하라\"...언론 '따옴표 보도' 관행...",
+     "press": "starnewsk.com",
+     "publishedAt": "2026-11-03T05:14:00.000Z",
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60628"
+    },
+    {
+     "title": "이 대통령 \"저연령자 SNS 폐해 생각보다 커…사용 제한 신속히 논의\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T05:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014297996?sid=100"
+    },
+    {
+     "title": "셧다운제 전철 안 밟는다…청소년 SNS 제한 정책, 내년 상반기 윤곽",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T05:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014297994?sid=105"
+    }
+   ]
+  },
+  {
+   "keyword": "배나라 한재아 결혼",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 27,
+   "recent20": 11,
+   "press": 22,
+   "firstArticleAt": "2026-11-03T03:47:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'결혼' 배나라 \"♥한재아와 새로운 시작\" 웨딩 화보·손편지 공개 [전문...",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-03T05:13:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000051123"
+    },
+    {
+     "title": "공개 열애 10개월만…마침내 자필 편지로 14일 결혼 알린 '배우 부부'",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-03T05:12:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1171403"
+    },
+    {
+     "title": "배나라, 뮤지컬 배우 한재아와 11월 14일 백년가약…직접 전한 결혼 소식...",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-03T05:12:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=846013"
     }
    ]
   },
@@ -48,18 +112,18 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 63,
+   "articles90": 44,
    "recent20": 4,
-   "press": 23,
-   "firstArticleAt": "2026-11-03T03:38:00.000Z",
+   "press": 22,
+   "firstArticleAt": "2026-11-03T03:48:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "장동혁 “李, 대한민국 빚덩이에”…5대 민생 예산 제안",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-03T05:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001271484?sid=100"
+     "title": "국민의힘, 821조 정부 예산안에 “초팽창 퍼주기”…11.6조 ‘민생 예산...",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-03T05:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003056827?sid=100"
     },
     {
      "title": "장동혁 \"떨어지고 있는 건 집값이 아닌 주가와 대통령 지지율\"",
@@ -68,42 +132,10 @@
      "link": "https://n.news.naver.com/mnews/article/008/0005435834?sid=100"
     },
     {
-     "title": "李대통령 \"집값 떨어지고 있다\" vs 장동혁 \"통계 잡으려는 모양\"",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-03T04:58:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=901754"
-    }
-   ]
-  },
-  {
-   "keyword": "배나라 한재아 결혼",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 22,
-   "recent20": 14,
-   "press": 18,
-   "firstArticleAt": "2026-11-03T03:47:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "배나라, 자필 편지로 전한 결혼 소감…\"서로의 묵묵한 버팀목\"",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-03T05:04:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109682121103"
-    },
-    {
-     "title": "뮤지컬 배우 배나라·한재아, 14일 옥수동 성당서 결혼",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-03T05:04:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=94484"
-    },
-    {
-     "title": "배나라, 14일 ‘나혼산’ 끝낸다‥♥한재아와 성당서 결혼식[공식입장]",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-03T05:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001183954"
+     "title": "장동혁 “李, 대한민국 빚덩이에”…5대 민생 예산 제안",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-03T05:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001271484?sid=100"
     }
    ]
   },
@@ -112,62 +144,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 14,
-   "recent20": 6,
-   "press": 12,
+   "articles90": 22,
+   "recent20": 14,
+   "press": 15,
    "firstArticleAt": "2026-11-03T03:56:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "10월 물가 2.8%, 2개월 연속 2%대 후반…농산물 빼고 상승세 여전",
-     "press": "sports.hankooki.com",
-     "publishedAt": "2026-11-03T05:04:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6942747"
-    },
-    {
-     "title": "[포토] 소비자물가 2.8% 상승",
+     "title": "[포토] 10월 소비자물가 전년 동월 대비 2.8% 상승",
      "press": "newscj.com",
-     "publishedAt": "2026-11-03T04:58:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3445495"
+     "publishedAt": "2026-11-03T05:14:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3445513"
     },
     {
-     "title": "10월 소비자물가, 전년 동월 대비 2.8% 상승",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-03T04:58:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=314505"
-    }
-   ]
-  },
-  {
-   "keyword": "부동산 투자",
-   "sources": [
-    "google"
-   ],
-   "articles90": 13,
-   "recent20": 3,
-   "press": 12,
-   "firstArticleAt": "2026-11-03T03:36:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "유명 부동산 유튜버 ‘125억 원대 폰지 사기 혐의’ 구속 송치",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-03T04:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000366219?sid=102"
+     "title": "[포토] 10월 물가 전년대비 2.8% 상승",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-03T05:12:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3445511"
     },
     {
-     "title": "삼성 투자 따라 움직이는 주거수요…동탄 집값 경기 평균 2배 상승",
-     "press": "lawissue.co.kr",
-     "publishedAt": "2026-11-03T04:54:00.000Z",
-     "link": "https://www.lawissue.co.kr/view.php?ud=20261103135247178867191f6c6e_12"
-    },
-    {
-     "title": "[다올투자증권 인사 전망] 141조 채권 위반 당시 본부장·준법실장 승진...",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-03T04:46:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3081107"
+     "title": "[포토] '농산물 가격은 하락했지만' 물가 2.8% 상승",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-03T05:10:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3445507"
     }
    ]
   },
@@ -176,13 +176,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 22,
-   "recent20": 5,
+   "articles90": 15,
+   "recent20": 3,
    "press": 10,
-   "firstArticleAt": "2026-11-03T03:38:00.000Z",
+   "firstArticleAt": "2026-11-03T03:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김민석 \"정년연장 함께 대화\"…한국노총 \"민주당 신뢰 무너져\"",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-03T05:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001271485?sid=100"
+    },
     {
      "title": "김동명 위원장, “민주당에 대한 신뢰 무너지고 있어… 약속 아닌 행동...",
      "press": "news.inochong.org",
@@ -194,12 +200,6 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-03T04:58:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012286248?sid=100"
-    },
-    {
-     "title": "김민석 \"초광역특구 조성, 함께 대화\"…한국노총 \"연대, 당연히 주어지...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-03T04:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014297933?sid=100"
     }
    ]
   },
@@ -210,12 +210,18 @@
     "nate"
    ],
    "articles90": 10,
-   "recent20": 4,
+   "recent20": 3,
    "press": 9,
-   "firstArticleAt": "2026-11-03T03:37:00.000Z",
+   "firstArticleAt": "2026-11-03T04:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“감기약 성분으로 필로폰 제조”…한약사 등 13명 검거",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-03T05:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012286258?sid=102"
+    },
     {
      "title": "감기약 성분으로 42억원어치 필로폰 제조… 조직범행 13명 검거",
      "press": "seoul.co.kr",
@@ -227,12 +233,38 @@
      "press": "kpanews.co.kr",
      "publishedAt": "2026-11-03T04:56:00.000Z",
      "link": "https://www.kpanews.co.kr/news/articleView.html?idxno=547985"
+    }
+   ]
+  },
+  {
+   "keyword": "서울양평 고속도로 재추진",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-03T03:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서울-양평고속도로 사업 재개…신규 타당성조사 착수",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-03T05:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012286257?sid=101"
     },
     {
-     "title": "감기약으로 필로폰 4만명분 제조…한약사 등 일당 13명 검거",
-     "press": "kpanews.co.kr",
-     "publishedAt": "2026-11-03T04:48:00.000Z",
-     "link": "https://www.kpanews.co.kr/news/articleView.html?idxno=547984"
+     "title": "서울-양평 고속도로 3년만에 재추진…내년 하반기 노선안 마련",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-03T04:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001271481?sid=101"
+    },
+    {
+     "title": "특혜 의혹에 멈췄던 서울-양평고속도로, 신규 타당성조사 착수",
+     "press": "tjb.co.kr",
+     "publishedAt": "2026-11-03T04:44:00.000Z",
+     "link": "https://www.tjb.co.kr/news05/bodo/view/id/105632"
     }
    ]
   },
@@ -242,7 +274,7 @@
     "signal.bz"
    ],
    "articles90": 7,
-   "recent20": 2,
+   "recent20": 1,
    "press": 7,
    "firstArticleAt": "2026-11-03T04:01:00.000Z",
    "exclusive": false,
@@ -265,70 +297,6 @@
      "press": "news.tf.co.kr",
      "publishedAt": "2026-11-03T04:45:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/629/0000548246?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "서울양평 고속도로 재추진",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-03T03:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "서울-양평 고속도로 3년만에 재추진…내년 하반기 노선안 마련",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-03T04:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001271481?sid=101"
-    },
-    {
-     "title": "특혜 의혹에 멈췄던 서울-양평고속도로, 신규 타당성조사 착수",
-     "press": "tjb.co.kr",
-     "publishedAt": "2026-11-03T04:44:00.000Z",
-     "link": "https://www.tjb.co.kr/news05/bodo/view/id/105632"
-    },
-    {
-     "title": "‘김건희 특혜 의혹’ 서울~양평고속도, 3년 만에 재추진…내년 새 노선...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-03T04:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003480340?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "재혼 황후 이종석 왕자 부담 컸다",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-03T03:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "신민아·주지훈·이종석·이세영...흥행 배우들 총출동 '재혼황후'",
-     "press": "raonnews.com",
-     "publishedAt": "2026-11-03T04:08:00.000Z",
-     "link": "https://www.raonnews.com/news/article.html?no=62437"
-    },
-    {
-     "title": "\"화보집 아니냐\" 외모 극찬…'재혼황후' 신민아, 황후 변신에 \"부담이었...",
-     "press": "ent.sbs.co.kr",
-     "publishedAt": "2026-11-03T04:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/416/0000327821"
-    },
-    {
-     "title": "\"세계관 즐겨주길\" 공개일 앞당긴 '재혼황후'의 자신감…K로판 새 장 열...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-03T03:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000636721"
     }
    ]
   },
@@ -365,81 +333,23 @@
    ]
   },
   {
-   "keyword": "예세민 검찰총장 후보 물망",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-03T04:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "검찰총장 후보군 이정현·박철우·예세민 물망…초대 공소청 수장은 누...",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-03T04:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000120493?sid=100"
-    },
-    {
-     "title": "검찰총장 후보 '이정현·박철우·예세민' 물망",
-     "press": "kbsm.net",
-     "publishedAt": "2026-11-03T04:16:00.000Z",
-     "link": "https://www.kbsm.net/news/view.php?idx=540130"
-    },
-    {
-     "title": "검찰총장 후보군 다음주 중 윤곽",
-     "press": "naeil.com",
-     "publishedAt": "2026-11-03T04:06:00.000Z",
-     "link": "https://www.naeil.com/news/read/607434?ref=naver"
-    }
-   ]
-  },
-  {
-   "keyword": "jtbc",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-03T03:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "JTBC, 법원에 매각 공고안 허가 신청...매각 절차 본격화",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-03T04:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002427693?sid=103"
-    },
-    {
-     "title": "\"나눠준 빵 오늘까지?\" JTBC 마라톤 재고처리 논란 '시끌'",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-03T04:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000648681?sid=102"
-    },
-    {
-     "title": "'기업회생' JTBC, 법원에 매각공고 허가 신청…내주 초 공고 예정",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-03T03:56:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/323951/?sc=Naver"
-    }
-   ]
-  },
-  {
    "keyword": "신장식 대표 취임 기자간담회",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 0,
+   "articles90": 3,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-03T03:45:00.000Z",
+   "firstArticleAt": "2026-11-03T03:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'취임 100일' 신장식 \"총선서 반개혁 인사 지역구 출마…민주당, 개혁정...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-03T05:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003150704?sid=100"
+    },
     {
      "title": "신장식 “결혼 혼자 하나…민주당 신뢰 회복·사과가 먼저”",
      "press": "biz.chosun.com",
@@ -451,19 +361,13 @@
      "press": "iminju.net",
      "publishedAt": "2026-11-03T03:52:00.000Z",
      "link": "http://www.iminju.net/news/articleView.html?idxno=171848"
-    },
-    {
-     "title": "취임 100일 기자간담회 참석하는 신장식 대표",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T03:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009266909?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 354,
+  "flagged": 355,
   "matched": 129,
   "avgLeadMin": 242,
   "recent": [
