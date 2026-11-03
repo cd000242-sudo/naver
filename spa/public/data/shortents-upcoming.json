@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T23:21:40.298Z",
+ "builtAt": "2026-11-03T23:31:49.613Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,133 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 21,
  "candidates": [
-  {
-   "keyword": "혼조 마감 나스닥 0.83%↑",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 41,
-   "recent20": 6,
-   "press": 40,
-   "firstArticleAt": "2026-11-03T21:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[굿모닝! 글로벌 뉴욕증시] 반도체 저가 매수에 유입 나스닥, S&P500 강세...",
-     "press": "newsquest.co.kr",
-     "publishedAt": "2026-11-03T23:18:00.000Z",
-     "link": "https://www.newsquest.co.kr/news/articleView.html?idxno=304152"
-    },
-    {
-     "title": "미·이란 협상 기대에 반도체주 반등... 나스닥 0.83%↑ [뉴욕증시]",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-03T23:16:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2014055"
-    },
-    {
-     "title": "뉴욕증시, 중간선거 경계 혼조 마감…'반도체주 반등'에 나스닥 상승",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-03T23:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002393267?sid=101"
-    }
-   ]
-  },
   {
    "keyword": "김여정 바이낸스 사태",
    "sources": [
     "daum"
    ],
-   "articles90": 35,
-   "recent20": 3,
-   "press": 34,
-   "firstArticleAt": "2026-11-03T21:56:00.000Z",
+   "articles90": 36,
+   "recent20": 4,
+   "press": 35,
+   "firstArticleAt": "2026-11-03T22:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김여정, 바이낸스 사태에 사흘 새 두 차례 담화…\"美와 마주 앉지 않을...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-03T23:12:00.000Z",
-     "link": "https://www.ajunews.com/view/20261104071026641"
+     "title": "北김여정, 바이낸스 해킹 배후지목에 재반발...\"선택지에 대화도\"",
+     "press": "tjb.co.kr",
+     "publishedAt": "2026-11-03T23:30:00.000Z",
+     "link": "https://www.tjb.co.kr/news05/bodo/view/id/105670"
     },
     {
-     "title": "[IT큐레이션] 바이낸스가 가짜 면접 하나에 8조원 뚫린 '썰' 들어보니",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-03T23:06:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=755932"
+     "title": "바이낸스 빌미 북미대화 가능성…김여정 이틀 만에 담화",
+     "press": "koreareport.co.kr",
+     "publishedAt": "2026-11-03T23:24:00.000Z",
+     "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=54274"
     },
     {
-     "title": "김여정, 바이낸스사태에 \"선택지에 대화 있지만 국익과 동일시 아냐\"",
-     "press": "kado.net",
-     "publishedAt": "2026-11-03T23:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000209285?sid=100"
+     "title": "북한, 바이낸스 해킹 배후 지목에 강력 반발…미국과의 대화 가능성은?",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-03T23:22:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=883917"
+    }
+   ]
+  },
+  {
+   "keyword": "혼조 마감 나스닥 0.83%↑",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 34,
+   "recent20": 5,
+   "press": 34,
+   "firstArticleAt": "2026-11-03T22:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[굿모닝 마켓] 뉴욕증시, 중간선거 당일 혼조···반도체주 반등",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-03T23:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541562?sid=101"
+    },
+    {
+     "title": "뉴욕증시 혼조 마감…엔비디아 2.29%·마이크론 2.58% 반등",
+     "press": "kjdaily.com",
+     "publishedAt": "2026-11-03T23:28:00.000Z",
+     "link": "http://www.kjdaily.com/article.php?aid=1793748398691205276"
+    },
+    {
+     "title": "[굿모닝! 글로벌 뉴욕증시] 반도체 저가 매수에 유입 나스닥, S&P500 강세...",
+     "press": "newsquest.co.kr",
+     "publishedAt": "2026-11-03T23:18:00.000Z",
+     "link": "https://www.newsquest.co.kr/news/articleView.html?idxno=304152"
+    }
+   ]
+  },
+  {
+   "keyword": "필라델피아 반도체 지수",
+   "sources": [
+    "google"
+   ],
+   "articles90": 22,
+   "recent20": 12,
+   "press": 20,
+   "firstArticleAt": "2026-11-03T22:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美 반도체주 반등 훈풍…삼전·SK하닉, 프리마켓 3%대 강세 [마켓시그널...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-03T23:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004678482?sid=101"
+    },
+    {
+     "title": "[굿모닝 마켓] 뉴욕증시, 중간선거 당일 혼조···반도체주 반등",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-03T23:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541562?sid=101"
+    },
+    {
+     "title": "[오늘 증시]美 반도체주 반등…코스피 5700선 회복할까",
+     "press": "kjdaily.com",
+     "publishedAt": "2026-11-03T23:26:00.000Z",
+     "link": "http://www.kjdaily.com/article.php?aid=1793748180691204276"
+    }
+   ]
+  },
+  {
+   "keyword": "해커",
+   "sources": [
+    "google"
+   ],
+   "articles90": 11,
+   "recent20": 4,
+   "press": 11,
+   "firstArticleAt": "2026-11-03T22:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[로드픽] 북한 해커, 가짜 채용으로 바이낸스 침투…63억 달러 털었다",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-03T23:30:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=67023"
+    },
+    {
+     "title": "北 해커, 바이낸스 직원 가짜 면접해 컴퓨터에 악성코드 심어",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-03T23:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000366324?sid=100"
+    },
+    {
+     "title": "북한 해커의 정교한 공격, 바이낸스 가상화폐 대량 탈취 사건의 전말",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-03T23:22:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=883918"
     }
    ]
   },
@@ -82,10 +146,16 @@
    "articles90": 11,
    "recent20": 1,
    "press": 11,
-   "firstArticleAt": "2026-11-03T21:57:00.000Z",
+   "firstArticleAt": "2026-11-03T22:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "뉴욕마라톤서도 20대 여성 사망…사인은 횡문근융해증",
+     "press": "radiokorea.com",
+     "publishedAt": "2026-11-03T23:30:00.000Z",
+     "link": "https://www.radiokorea.com/news/article.php?uid=508604"
+    },
     {
      "title": "결승선 3.6㎞ 남기고 쓰러져…뉴욕마라톤서도 20대 여성 사망",
      "press": "kado.net",
@@ -97,44 +167,6 @@
      "press": "munhwa.com",
      "publishedAt": "2026-11-03T22:57:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/021/0002830115?sid=104"
-    },
-    {
-     "title": "뉴욕시마라톤서 24세 참가자 숨져...사인 횡문근융해증",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-03T22:52:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=778742"
-    }
-   ]
-  },
-  {
-   "keyword": "해커",
-   "sources": [
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-03T22:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "北해커, 바이낸스 직원 가짜면접해 컴퓨터에 악성코드 심었다",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-03T23:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003481848?sid=105"
-    },
-    {
-     "title": "북한 해커, 바이낸스 5개월간 사이버 공격…가짜 면접으로 직원 속여 침...",
-     "press": "voakorea.com",
-     "publishedAt": "2026-11-03T22:58:00.000Z",
-     "link": "https://www.voakorea.com/a/8218525.html"
-    },
-    {
-     "title": "\"북 해커, 바이낸스 다섯 달 다단계 공격\"...가짜 채용에 SNS까지 동원",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-03T22:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002428070?sid=104"
     }
    ]
   },
@@ -171,49 +203,23 @@
    ]
   },
   {
-   "keyword": "러시아 우크라 구호센터 폭격",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-03T21:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "러시아, 우크라 구호센터에 폭탄 9발…33명 사망",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-03T22:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001882878?sid=104"
-    },
-    {
-     "title": "[이 시각 세계] 러, 우크라 구호센터 폭격‥33명 사망",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-03T22:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533374?sid=104"
-    },
-    {
-     "title": "종전 협상 앞두고 러, 우크라 대공습…젤렌스키 \"유럽, 협상테이블 앉아...",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-03T22:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005837634?sid=104"
-    }
-   ]
-  },
-  {
    "keyword": "32기 영수 몰카 사과",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-03T22:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“X같은 전쟁 시작” 32기 영수, ‘몰카’ 논란에 비난 폭발…결국 고개...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-03T23:25:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001277899"
+    },
     {
      "title": "“몰카 찍고 선물?” 32기 영수, 사과문인가 해명문인가…반응 ‘싸늘’",
      "press": "sportsseoul.com",
@@ -225,84 +231,13 @@
      "press": "ajunews.com",
      "publishedAt": "2026-11-03T22:26:00.000Z",
      "link": "https://www.ajunews.com/view/20261104071904646"
-    },
-    {
-     "title": "‘계약결혼’ 32기 영수, 방송 중 당당한 몰카 촬영 “기념 영상 선물하...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-03T22:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001184271"
-    }
-   ]
-  },
-  {
-   "keyword": "김자연과 결혼",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T22:19:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "슈퍼모델 출신 김자연, ‘25살 연상’ 손영권 전 삼성전자 사장과 결혼",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-03T23:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/016/0002718459"
-    },
-    {
-     "title": "김자연, 25세 연상 前삼성전자 사장 손영권 결혼…MIT 선후배 인연",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-03T23:00:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=778747"
-    },
-    {
-     "title": "70세 前삼성전자 사장, 25살 연하 슈퍼모델 김자연과 화촉…MIT 선후배에...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-03T22:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004172352?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "대기업",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T22:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"고졸·대졸 초봉 똑같이 258만원\"…'시총 8조' 대기업의 '학력 파괴' 채...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-03T23:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005599023?sid=104"
-    },
-    {
-     "title": "국내 대기업의 선택은 미국…해외 계열사 비중 중국 23.1%→10.7%",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-03T22:36:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=501057"
-    },
-    {
-     "title": "10년 새 미국 계열사 3배로…대기업 해외 거점, 중국서 미국으로",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-03T22:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003480530?sid=101"
     }
    ]
   },
   {
    "keyword": "젝스키스",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 0,
@@ -330,11 +265,75 @@
      "link": "https://m.entertain.naver.com/article/214/0001533369"
     }
    ]
+  },
+  {
+   "keyword": "러시아 우크라 구호센터 폭격",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T22:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "러시아, 우크라 구호센터에 폭탄 9발…33명 사망",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-03T22:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001882878?sid=104"
+    },
+    {
+     "title": "[이 시각 세계] 러, 우크라 구호센터 폭격‥33명 사망",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-03T22:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533374?sid=104"
+    },
+    {
+     "title": "종전 협상 앞두고 러, 우크라 대공습…젤렌스키 \"유럽, 협상테이블 앉아...",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-03T22:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005837634?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "김자연과 결혼",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T22:19:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "슈퍼모델 출신 김자연, ‘25살 연상’ 손영권 전 삼성전자 사장과 결혼",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-03T23:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/016/0002718459"
+    },
+    {
+     "title": "김자연, 25세 연상 前삼성전자 사장 손영권 결혼…MIT 선후배 인연",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-03T23:00:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=778747"
+    },
+    {
+     "title": "70세 前삼성전자 사장, 25살 연하 슈퍼모델 김자연과 화촉…MIT 선후배에...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-03T22:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004172352?sid=103"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 495,
+  "flagged": 496,
   "matched": 205,
   "avgLeadMin": 284,
   "recent": [
