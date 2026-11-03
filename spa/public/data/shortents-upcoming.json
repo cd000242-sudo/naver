@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T04:45:07.303Z",
+ "builtAt": "2026-11-03T04:55:11.110Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,30 +16,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 69,
-   "recent20": 15,
+   "articles90": 60,
+   "recent20": 8,
    "press": 21,
-   "firstArticleAt": "2026-11-03T03:16:00.000Z",
+   "firstArticleAt": "2026-11-03T03:38:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[포토] 정책토론회 참석하는 장동혁-오세훈-나경원",
+     "title": "반값 등록금부터 24시간 돌봄까지…장동혁, '국민 삶 해결 예산' 공개",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-03T04:50:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261103500208"
+    },
+    {
+     "title": "한동훈 \"당이 아닌 당권 가진 사람이 이기는 공천\"‥장동혁 비판",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-03T04:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533203?sid=100"
+    },
+    {
+     "title": "[포토] 정책토론회 참석한 장동혁-오세훈-나경원",
      "press": "newscj.com",
      "publishedAt": "2026-11-03T04:44:00.000Z",
      "link": "https://www.newscj.com/news/articleView.html?idxno=3445483"
-    },
-    {
-     "title": "‘국민의 삶 해결 예산’ 꺼낸 장동혁 “사립대 반값 등록금 추진, 외국...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-03T04:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002718211?sid=100"
-    },
-    {
-     "title": "이재명 \"집값 놀라울 정도로 떨어져\"…장동혁 \"떨어진 건 지지율\"",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-03T04:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000518867?sid=100"
     }
    ]
   },
@@ -48,30 +48,94 @@
    "sources": [
     "google"
    ],
-   "articles90": 11,
+   "articles90": 13,
    "recent20": 3,
-   "press": 10,
+   "press": 12,
    "firstArticleAt": "2026-11-03T03:34:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
+     "title": "삼성 투자 따라 움직이는 주거수요…동탄 집값 경기 평균 2배 상승",
+     "press": "lawissue.co.kr",
+     "publishedAt": "2026-11-03T04:54:00.000Z",
+     "link": "https://www.lawissue.co.kr/view.php?ud=20261103135247178867191f6c6e_12"
+    },
+    {
+     "title": "[다올투자증권 인사 전망] 141조 채권 위반 당시 본부장·준법실장 승진...",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-03T04:46:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3081107"
+    },
+    {
      "title": "삼성 113조원 투자에 아산 부동산 가치 재조명… '아산자이 그랜드파크...",
      "press": "ikld.kr",
      "publishedAt": "2026-11-03T04:44:00.000Z",
      "link": "http://www.ikld.kr/news/articleView.html?idxno=343432"
+    }
+   ]
+  },
+  {
+   "keyword": "민주당-한국노총 고위급정책협의회",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 24,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-03T03:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "민주당-한국노총, 고위급 정책협의회 [포토]",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-03T04:54:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2643511"
     },
     {
-     "title": "'125억원대 폰지사기' 유명 부동산 유튜버 구속 송치",
-     "press": "news1.kr",
+     "title": "김민석 만난 한국노총 “민주당에 대한 신뢰 무너지고 있다”",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-03T04:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202215?sid=100"
+    },
+    {
+     "title": "김민석 “한국노총과 연대 강화”...한노총 “행동으로 답하라”",
+     "press": "mediapen.com",
      "publishedAt": "2026-11-03T04:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009266987?sid=102"
+     "link": "https://www.mediapen.com/news/view/1134713"
+    }
+   ]
+  },
+  {
+   "keyword": "감기약으로 필로폰 제조 일당 검거",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 3,
+   "press": 8,
+   "firstArticleAt": "2026-11-03T03:37:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "감기약으로 필로폰 4만명분 제조…한약사 등 일당 13명 검거",
+     "press": "kpanews.co.kr",
+     "publishedAt": "2026-11-03T04:48:00.000Z",
+     "link": "https://www.kpanews.co.kr/news/articleView.html?idxno=547984"
     },
     {
-     "title": "방송 출연 명성 악용 125억 가로챈 부동산 유튜버 구속",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-03T04:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002534478?sid=102"
+     "title": "“감기약으로 필로폰을?”…한약사 동원해 42억원어치 마약 제조한 조직...",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-03T04:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003056823?sid=102"
+    },
+    {
+     "title": "‘논문 참고해서’ 감기약 1만 통으로 42억 원치 필로폰 만든 일당",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-03T04:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000160249?sid=102"
     }
    ]
   },
@@ -80,10 +144,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 10,
+   "articles90": 7,
    "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-03T03:17:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-03T03:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -108,46 +172,14 @@
    ]
   },
   {
-   "keyword": "민주당-한국노총 고위급정책협의회",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 34,
-   "recent20": 6,
-   "press": 9,
-   "firstArticleAt": "2026-11-03T03:23:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김민석 “한국노총과 연대 강화”...한노총 “행동으로 답하라”",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-03T04:34:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1134713"
-    },
-    {
-     "title": "민주당·한국노총 고위급정책협의회",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T04:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009266957?sid=100"
-    },
-    {
-     "title": "고위급정책협의회 발언하는 김민석 대표",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T04:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009266953?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "서울양평 고속도로 재추진",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 4,
-   "press": 8,
-   "firstArticleAt": "2026-11-03T03:16:00.000Z",
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-03T03:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -158,7 +190,7 @@
      "link": "https://www.tjb.co.kr/news05/bodo/view/id/105632"
     },
     {
-     "title": "‘김건희 특혜 의혹’ 서울-양평고속도로, 3년 만에 재추진…내년 새 노...",
+     "title": "‘김건희 특혜 의혹’ 서울~양평고속도, 3년 만에 재추진…내년 새 노선...",
      "press": "khan.co.kr",
      "publishedAt": "2026-11-03T04:42:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/032/0003480340?sid=101"
@@ -172,46 +204,14 @@
    ]
   },
   {
-   "keyword": "감기약으로 필로폰 제조 일당 검거",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-03T03:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘논문 참고해서’ 감기약으로 42억 원치 필로폰 만든 일당",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-03T04:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000160249?sid=102"
-    },
-    {
-     "title": "아파트서 감기약으로 필로폰 만들어 유통하려던 조직 검거",
-     "press": "kado.net",
-     "publishedAt": "2026-11-03T04:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000209068?sid=102"
-    },
-    {
-     "title": "[속보]아파트에 비밀 마약공장이…감기약으로 필로폰 제조 일당 구속",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-03T04:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000120492?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "10월 소비자물가 2.8%",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 7,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-03T03:18:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-03T03:26:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -232,38 +232,6 @@
      "press": "etoday.co.kr",
      "publishedAt": "2026-11-03T04:08:00.000Z",
      "link": "https://www.etoday.co.kr/news/view/2643485"
-    }
-   ]
-  },
-  {
-   "keyword": "신장식 취임 100일 간담회",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-03T03:19:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "신장식 “결혼 혼자 하나…민주당 신뢰 회복·사과가 먼저”",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-03T04:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202209?sid=100"
-    },
-    {
-     "title": "신장식, 민주당 합당론에 선 긋기…\"국면 전환용 카드 안 받아\"",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-03T03:52:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=171848"
-    },
-    {
-     "title": "신장식 \"국면전환용 합당 카드 안 받아…1월 합당론, 식장 잡고 신부 구...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-03T03:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014297766?sid=100"
     }
    ]
   },
@@ -296,6 +264,38 @@
      "press": "jasm.co.kr",
      "publishedAt": "2026-11-03T03:56:00.000Z",
      "link": "https://www.jasm.co.kr/news/view/323951/?sc=Naver"
+    }
+   ]
+  },
+  {
+   "keyword": "신장식 취임 100일 간담회",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-03T03:45:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "신장식 “결혼 혼자 하나…민주당 신뢰 회복·사과가 먼저”",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-03T04:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202209?sid=100"
+    },
+    {
+     "title": "신장식, 민주당 합당론에 선 긋기…\"국면 전환용 카드 안 받아\"",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-03T03:52:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=171848"
+    },
+    {
+     "title": "신장식 \"국면전환용 합당 카드 안 받아…1월 합당론, 식장 잡고 신부 구...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T03:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014297766?sid=100"
     }
    ]
   },
