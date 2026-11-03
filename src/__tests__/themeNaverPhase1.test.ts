@@ -37,8 +37,9 @@ describe('theme-naver link order', () => {
   const sheets = [...html.matchAll(/<link\s+rel="stylesheet"\s+href="([^"]+)"/g)].map((m) => m[1]);
   const local = sheets.filter((href) => !/^https?:/.test(href));
 
-  it('theme-naver.css, theme-naver-components.css, then theme-naver-transitional.css are the last three stylesheets', () => {
-    expect(local.slice(-3)).toEqual(['theme-naver.css', 'theme-naver-components.css', 'theme-naver-transitional.css']);
+  // 2026-11-03: the optional dark sheet (scoped to html[data-theme="dark"]) follows them (themeDarkMode1103.test.ts).
+  it('theme-naver.css, theme-naver-components.css, theme-naver-transitional.css, then theme-naver-dark.css are the last four stylesheets', () => {
+    expect(local.slice(-4)).toEqual(['theme-naver.css', 'theme-naver-components.css', 'theme-naver-transitional.css', 'theme-naver-dark.css']);
   });
 
   it('every older sheet is linked before the theme', () => {
@@ -53,7 +54,7 @@ describe('theme-naver link order', () => {
     expect(head).toContain('href="theme-naver.css"');
     expect(head).toContain('href="theme-naver-components.css"');
     expect(head).toContain('href="theme-naver-transitional.css"');
-    expect(html.match(/theme-naver/g)).toHaveLength(3);
+    expect(html.match(/theme-naver/g)).toHaveLength(4);
   });
 });
 

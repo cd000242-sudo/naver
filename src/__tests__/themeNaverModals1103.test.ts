@@ -14,10 +14,11 @@ describe('1. modal classes live in the components sheet, tokens only', () => {
     expect(modalCss).not.toMatch(/rgba?\(/);
   });
 
-  it('theme-naver.css and the link order did not change shape (no new sheet, still 3 theme links)', () => {
+  // 2026-11-03: the 4th link is the optional dark sheet (themeDarkMode1103.test.ts); no other sheet was added.
+  it('theme-naver.css and the link order did not change shape (no new sheet beyond the dark one, 4 theme links)', () => {
     expect(theme.split('\n').length).toBeLessThanOrEqual(300);
     const html = read('public/index.html');
-    expect(html.match(/theme-naver/g)).toHaveLength(3);
+    expect(html.match(/theme-naver/g)).toHaveLength(4);
   });
 
   it('the transitional sheet got no new rule (39 before this step)', () => {

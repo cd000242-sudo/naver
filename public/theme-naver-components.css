@@ -140,3 +140,9 @@ html .nv-viewer-img { max-width: 94vw; max-height: 86vh; object-fit: contain; bo
 html .nv-tile--done { background: var(--nv-green-soft); border-color: var(--nv-fill); }
 html .nv-badge-index--lead { background: var(--nv-select-ink); border-color: var(--nv-select-ink); color: var(--text-white); }
 html .nv-tile__label { position: absolute; bottom: 0; left: 0; right: 0; padding: 5px 4px; overflow: hidden; background: var(--nv-card); color: var(--nv-ink); border-top: 1px solid var(--nv-line); font-size: 8px; font-weight: 700; text-align: center; text-overflow: ellipsis; white-space: nowrap; }
+/* Light / dark switch next to the title (index.html #theme-mode-switch). Chosen = green fill like a chosen tab. */
+html .app-title { display: inline-block; vertical-align: middle; margin-right: 14px; }
+html .nv-theme-switch { display: inline-flex; vertical-align: middle; gap: 2px; padding: 3px; margin-bottom: var(--spacing-md, 12px); background: var(--nv-sunken); border: 1px solid var(--nv-line-strong); border-radius: 999px; }
+html .nv-theme-switch button { padding: 5px 14px; background: transparent; color: var(--nv-ink-3); border: none; border-radius: 999px; font-size: 0.82rem; font-weight: 700; cursor: pointer; box-shadow: none; }
+html .nv-theme-switch button[aria-pressed="true"] { background: var(--nv-fill); color: var(--text-white); }
+html .nv-theme-switch button:not([aria-pressed="true"]):hover { background: var(--nv-hover-bg); color: var(--nv-ink); }

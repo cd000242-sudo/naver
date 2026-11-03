@@ -1,0 +1,62 @@
+/* ============================================================================
+   theme-naver-dark.css — optional dark mode (2026-11-03, owner: "기존 다크모드도 선택가능하도록").
+   Linked LAST in public/index.html. Everything here is scoped to :root[data-theme="dark"]; the light theme is
+   untouched when the attribute is absent. The switch (#theme-mode-switch, top-left next to the title) sets the
+   attribute and remembers it in localStorage "nv-theme"; an inline <head> script applies it before first paint.
+   Approach: re-point the --nv-* tokens of theme-naver.css to the old black surfaces (#0F0F0F / #1A1A1A / #1E1E1E of
+   styles.css) and keep the green action fill (white text 4.63:1). The few light literals in the theme sheets and the
+   common light inline colors in index.html are repainted below.
+   ========================================================================== */
+
+/* 1. Tokens ---------------------------------------------------------------- */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --nv-green: #03C75A; --nv-green-hover: #19D46B;
+  --nv-fill: #00873C; --nv-fill-hover: #009A45;
+  --nv-green-text: #3DDC84;
+  --nv-green-soft: #12301F; --nv-green-line: #1F5A38;
+  --nv-ink: #F1F1F3; --nv-ink-2: #D0D0D6; --nv-ink-3: #A6A6AE; --nv-ink-4: #8E8E96;
+  --nv-page: #0F0F0F; --nv-card: #1E1E1E; --nv-sunken: #161616;
+  --nv-line: #3A3A40; --nv-line-strong: #46464E; --nv-line-soft: #2A2A2F; --nv-line-hover: #62626B;
+  --nv-select-bg: #241D42; --nv-select-border: #9B87FF; --nv-select-ink: #D4CBFF; --nv-select-tag-bg: #352B66;
+  --nv-hover-bg: #2A2A2F;
+  --nv-red-line: #6B2A25; --nv-amber-line: #6B4A1A; --nv-scrim: rgba(0, 0, 0, 0.62); --nv-scrim-light: rgba(15, 15, 15, 0.94); --nv-select-line: #4A3D8F;
+  --nv-red: #E5484D; --nv-red-soft: #3A1715; --nv-amber: #E9A23B; --nv-amber-soft: #33270F;
+  --nv-blue: #6EA8FE; --nv-pink: #F472B6;
+  --bg-glass: rgba(30, 30, 30, 0.97); --bg-hover: rgba(3, 199, 90, 0.10); --bg-elev: var(--nv-card);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.45); --shadow-md: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 4px 14px rgba(0, 0, 0, 0.55); --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.6);
+}
+/* Scoped blocks that pinned color-scheme: light (theme-naver.css section 1). */
+:root[data-theme="dark"] #tab-image-tools, :root[data-theme="dark"] #image-source-studio, :root[data-theme="dark"] #settings-modal { color-scheme: dark; }
+
+/* 2. Light literals inside the theme sheets -------------------------------- */
+:root[data-theme="dark"] ::selection { background: #1F5A38; color: var(--nv-ink); }
+:root[data-theme="dark"] ::-webkit-scrollbar-thumb { background: #46464E !important; }
+:root[data-theme="dark"] .toast, :root[data-theme="dark"] .toast.toast { background: #2A2A2F !important; color: var(--nv-ink) !important; border: 1px solid var(--nv-line); }
+:root[data-theme="dark"] .loading-overlay { background: rgba(15, 15, 15, 0.85); }
+:root[data-theme="dark"] .modal-backdrop, :root[data-theme="dark"] #heading-image-modal, :root[data-theme="dark"] #startup-engine-gate { background: var(--nv-scrim) !important; }
+:root[data-theme="dark"] .daily-publishing-dialog::backdrop { background: var(--nv-scrim); }
+:root[data-theme="dark"] #startup-engine-gate-confirm:disabled { background: #46464E !important; }
+:root[data-theme="dark"] #tab-image-tools .thumb-preview-stage { background-image: radial-gradient(#3A3A40 1px, transparent 1px); }
+:root[data-theme="dark"] #image-source-studio .studio-switch-track { background: #46464E; }
+:root[data-theme="dark"] .posts-library-toolbar #posts-batch-delete-btn, :root[data-theme="dark"] #generated-posts-list .delete-post-btn { border-color: var(--nv-red-line) !important; }
+:root[data-theme="dark"] #heading-image-modal .shopping-connect-section { border-color: var(--nv-amber-line); }
+:root[data-theme="dark"] * { --nv-d-line: var(--nv-red-line); }
+:root[data-theme="dark"] :is(button, a, span, input) { --nv-d-line: var(--nv-red); }
+:root[data-theme="dark"] :is([style*="#f59e0b, #d97706" i], [style*="#f97316, #ea580c" i], [style*="#fbbf24, #f59e0b" i]) { border-color: var(--nv-amber-line) !important; }
+/* Corner "?" help badges: gray chip with white text needs a dark gray in dark mode. */
+:root[data-theme="dark"] button[style*="top: -6px; right: -6px"] { background: var(--nv-line-hover) !important; border-color: var(--nv-card) !important; }
+
+/* 3. Light inline colors in index.html and renderer HTML ------------------- */
+:root[data-theme="dark"] :is([style*="background: #fff" i], [style*="background:#fff" i], [style*="background: white" i], [style*="background: rgb(255, 255, 255)"],
+  [style*="background: rgba(255,255,255,0.8"], [style*="background: rgba(255, 255, 255, 0.9"], [style*="background-color: #fff" i], [style*="background-color: white" i],
+  [style*="background: #f3f4f6" i], [style*="background: #f8f9fa" i], [style*="background: #f9fafb" i]) {
+  background: var(--nv-card) !important; color: var(--nv-ink) !important;
+}
+:root[data-theme="dark"] :is([style*="background: #ffedd5" i], [style*="background: #fffbeb" i], [style*="background: #fef3c7" i]) { background: var(--nv-amber-soft) !important; color: var(--nv-ink) !important; }
+:root[data-theme="dark"] :is([style*="background: #f3e8ff" i], [style*="background: #ede9fe" i]) { background: var(--nv-select-bg) !important; color: var(--nv-ink) !important; }
+:root[data-theme="dark"] [style*="background: #e0f2fe" i] { background: #10263A !important; color: var(--nv-ink) !important; }
+:root[data-theme="dark"] :is([style*="color: #1f2937" i], [style*="color: #1a1a1a" i], [style*="color:#1a1a1a" i], [style*="color: #111827" i], [style*="color: #000" i],
+  [style*="color: #333" i], [style*="color: #222" i], [style*="color: black" i]):not([style*="background: #fbbf24" i]):not([style*="background:#fbbf24" i]) { color: var(--nv-ink) !important; }
+:root[data-theme="dark"] :is([style*="color: #4b5563" i], [style*="color: #374151" i], [style*="color: #555" i], [style*="color: #666" i]) { color: var(--nv-ink-3) !important; }

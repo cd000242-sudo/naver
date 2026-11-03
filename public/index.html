@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="theme-naver.css">
     <link rel="stylesheet" href="theme-naver-components.css">
     <link rel="stylesheet" href="theme-naver-transitional.css">
+    <!-- [2026-11-03] Optional dark mode: tokens scoped to html[data-theme="dark"]; applied before first paint. -->
+    <link rel="stylesheet" href="theme-naver-dark.css">
+    <script>try { if (localStorage.getItem('nv-theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) { /* storage blocked: light */ }</script>
 </head>
 
 <body>
@@ -32,6 +35,32 @@
         <header class="app-header">
             <h1 class="app-title">Better Life naver <span id="app-version-badge"
                     style="font-size: 0.6em; opacity: 0.6; font-weight: 400; vertical-align: middle;">v...</span></h1>
+            <!-- [2026-11-03] Light / dark switch, top-left next to the title. Remembered per PC (localStorage "nv-theme"). -->
+            <div id="theme-mode-switch" class="nv-theme-switch" role="group" aria-label="화면 밝기 선택">
+                <button type="button" data-theme-choice="light" aria-pressed="true">☀️ 라이트</button>
+                <button type="button" data-theme-choice="dark" aria-pressed="false">🌙 다크</button>
+            </div>
+            <script>
+                (function () {
+                    var root = document.documentElement, box = document.getElementById('theme-mode-switch');
+                    if (!box) return;
+                    function paint() {
+                        var dark = root.getAttribute('data-theme') === 'dark';
+                        box.querySelectorAll('[data-theme-choice]').forEach(function (b) {
+                            b.setAttribute('aria-pressed', String((b.getAttribute('data-theme-choice') === 'dark') === dark));
+                        });
+                    }
+                    box.addEventListener('click', function (event) {
+                        var b = event.target.closest('[data-theme-choice]');
+                        if (!b) return;
+                        var choice = b.getAttribute('data-theme-choice') === 'dark' ? 'dark' : 'light';
+                        if (choice === 'dark') root.setAttribute('data-theme', 'dark'); else root.removeAttribute('data-theme');
+                        try { localStorage.setItem('nv-theme', choice); } catch (e) { /* storage blocked: this session only */ }
+                        paint();
+                    });
+                    paint();
+                })();
+            </script>
 
             <div id="left-status-badges"
                 style="position: fixed; top: 64px; left: 20px; z-index: 10002; display: flex; flex-direction: column; gap: 0.6rem; align-items: flex-start; max-width: 240px;">
