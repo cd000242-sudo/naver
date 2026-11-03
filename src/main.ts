@@ -2378,58 +2378,9 @@ async function createWindow(): Promise<void> {
       }
     });
 
-    const htmlPath = path.join(publicPath, 'index.html');
-    console.log('[Main] Loading HTML from:', htmlPath);
-    debugLog(`[Main] Loading HTML from: ${htmlPath}`);
-    // [v2.10.240 BUG FIX] ERR_FAILED (-2) 회피 — 한글 경로 file:// 인코딩 강제
-    //   원인 후보: 한글 경로(C:\Users\박성현\...)가 file:// URL 변환 시 인코딩 누락 → Chromium loadFile 거부.
-    //   조치: loadFile 실패 시 url.pathToFileURL로 percent-encoded URL 만들어 loadURL fallback.
-    //   진단 로그도 강화 — 실패 시 정확한 에러 정보 debug.log에 기록.
-    try {
-      await mainWindow.loadFile(htmlPath);
-      console.log('[Main] HTML loaded successfully');
-      debugLog('[Main] HTML loaded successfully (loadFile)');
-    } catch (loadErr: any) {
-      const errMsg = (loadErr as Error)?.message || String(loadErr);
-      debugLog(`[Main] loadFile 실패 — fallback 시도. 원인: ${errMsg}`);
-      console.error('[Main] loadFile 실패:', errMsg);
-      // [v2.11.3 FIX] 라이선스 인증창 X 닫기 race 가드 — mainWindow destroy 후 fallback이
-      //   destroyed object에 호출되어 "Object has been destroyed" 다이얼로그가 뜨는 케이스 차단.
-      //   원인: 한글 경로 ERR_FAILED 발생 후 catch 진입 사이 사용자가 인증창을 닫아 app 종료 절차가
-      //         시작되면 mainWindow가 destroy. fallback loadURL이 destroyed window에 호출되어 throw.
-      //   조치: fallback 직전 + 직후 isDestroyed() 가드. destroy됐으면 사용자 종료 의도로 보고 silent return.
-      if (!mainWindow || mainWindow.isDestroyed()) {
-        debugLog('[Main] mainWindow가 fallback 시점에 destroy됨 — 사용자 종료로 간주, silent return');
-        return;
-      }
-      try {
-        const { pathToFileURL } = await import('url');
-        const fileUrl = pathToFileURL(htmlPath).toString();
-        debugLog(`[Main] loadURL fallback: ${fileUrl}`);
-        await mainWindow.loadURL(fileUrl);
-        debugLog('[Main] HTML loaded successfully (loadURL fallback)');
-      } catch (fallbackErr: any) {
-        const fbMsg = (fallbackErr as Error)?.message || String(fallbackErr);
-        debugLog(`[Main] loadURL fallback도 실패: ${fbMsg}`);
-        if (!mainWindow || mainWindow.isDestroyed()) {
-          debugLog('[Main] fallback 중 mainWindow destroy — silent return');
-          return;
-        }
-        throw new Error(`HTML 로드 실패 (loadFile: ${errMsg} / fallback loadURL: ${fbMsg})`);
-      }
-    }
-
-    // ✅ [리팩토링] ipcHelpers에 mainWindow 참조 설정
-    setMainWindowRef(mainWindow);
-
-    // ✅ [2026-02-22] console 로그 포워더 설치 (콘텐츠 생성 로그 → 렌더러 전달)
-    installConsoleForwarder();
-
-    // ✅ [2026-02-04] 자동 업데이터 초기화 (설치형 앱에서만 동작)
-    if (app.isPackaged) {
-      initAutoUpdater(mainWindow);
-    }
-
+    // [2026-11-03] Wired before loadFile: a close that arrives while index.html is still loading (release-gate E2E
+    //   closes at DOMContentLoaded; a user can press X during a slow start) used to find no handler — the window closed
+    //   without the confirmation and the aborted load surfaced as '앱 초기화 오류 · HTML 로드 실패 · Object has been destroyed'.
     // ✅ [100점 수정] 닫기(X) 버튼 = 앱 완전 종료
     // event.preventDefault()로 기본 동작을 막고, 비동기 정리 완료 후 명시적으로 종료
     // ✅ [2026-03-13] 종료 확인 다이얼로그 중복 생성 방지 플래그
@@ -2514,6 +2465,58 @@ async function createWindow(): Promise<void> {
         isConfirmDialogOpen = false;
       });
     });
+
+    const htmlPath = path.join(publicPath, 'index.html');
+    console.log('[Main] Loading HTML from:', htmlPath);
+    debugLog(`[Main] Loading HTML from: ${htmlPath}`);
+    // [v2.10.240 BUG FIX] ERR_FAILED (-2) 회피 — 한글 경로 file:// 인코딩 강제
+    //   원인 후보: 한글 경로(C:\Users\박성현\...)가 file:// URL 변환 시 인코딩 누락 → Chromium loadFile 거부.
+    //   조치: loadFile 실패 시 url.pathToFileURL로 percent-encoded URL 만들어 loadURL fallback.
+    //   진단 로그도 강화 — 실패 시 정확한 에러 정보 debug.log에 기록.
+    try {
+      await mainWindow.loadFile(htmlPath);
+      console.log('[Main] HTML loaded successfully');
+      debugLog('[Main] HTML loaded successfully (loadFile)');
+    } catch (loadErr: any) {
+      const errMsg = (loadErr as Error)?.message || String(loadErr);
+      debugLog(`[Main] loadFile 실패 — fallback 시도. 원인: ${errMsg}`);
+      console.error('[Main] loadFile 실패:', errMsg);
+      // [v2.11.3 FIX] 라이선스 인증창 X 닫기 race 가드 — mainWindow destroy 후 fallback이
+      //   destroyed object에 호출되어 "Object has been destroyed" 다이얼로그가 뜨는 케이스 차단.
+      //   원인: 한글 경로 ERR_FAILED 발생 후 catch 진입 사이 사용자가 인증창을 닫아 app 종료 절차가
+      //         시작되면 mainWindow가 destroy. fallback loadURL이 destroyed window에 호출되어 throw.
+      //   조치: fallback 직전 + 직후 isDestroyed() 가드. destroy됐으면 사용자 종료 의도로 보고 silent return.
+      if (!mainWindow || mainWindow.isDestroyed()) {
+        debugLog('[Main] mainWindow가 fallback 시점에 destroy됨 — 사용자 종료로 간주, silent return');
+        return;
+      }
+      try {
+        const { pathToFileURL } = await import('url');
+        const fileUrl = pathToFileURL(htmlPath).toString();
+        debugLog(`[Main] loadURL fallback: ${fileUrl}`);
+        await mainWindow.loadURL(fileUrl);
+        debugLog('[Main] HTML loaded successfully (loadURL fallback)');
+      } catch (fallbackErr: any) {
+        const fbMsg = (fallbackErr as Error)?.message || String(fallbackErr);
+        debugLog(`[Main] loadURL fallback도 실패: ${fbMsg}`);
+        if (!mainWindow || mainWindow.isDestroyed()) {
+          debugLog('[Main] fallback 중 mainWindow destroy — silent return');
+          return;
+        }
+        throw new Error(`HTML 로드 실패 (loadFile: ${errMsg} / fallback loadURL: ${fbMsg})`);
+      }
+    }
+
+    // ✅ [리팩토링] ipcHelpers에 mainWindow 참조 설정
+    setMainWindowRef(mainWindow);
+
+    // ✅ [2026-02-22] console 로그 포워더 설치 (콘텐츠 생성 로그 → 렌더러 전달)
+    installConsoleForwarder();
+
+    // ✅ [2026-02-04] 자동 업데이터 초기화 (설치형 앱에서만 동작)
+    if (app.isPackaged) {
+      initAutoUpdater(mainWindow);
+    }
 
     // ✅ [2026-04-03] 최소화(-) 버튼 = 일반 최소화 (작업표시줄에 남음)
     // 기존 최소화 IPC도 같은 일반 최소화 동작을 사용한다.
