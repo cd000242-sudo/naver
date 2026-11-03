@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T05:15:19.890Z",
+ "builtAt": "2026-11-03T05:25:24.695Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,95 @@
    "sources": [
     "daum"
    ],
-   "articles90": 57,
-   "recent20": 19,
-   "press": 46,
-   "firstArticleAt": "2026-11-03T03:48:00.000Z",
+   "articles90": 58,
+   "recent20": 11,
+   "press": 45,
+   "firstArticleAt": "2026-11-03T03:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美 중간선거•가계대출 변수…한은, 금리 인상 ‘최종 저울질‘",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-03T05:14:00.000Z",
-     "link": "https://www.viva100.com/article/20261103500772"
+     "title": "미국, 이란 케슘 섬 공격…\"방어적 작전\"",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-03T05:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006402776?sid=104"
     },
     {
-     "title": "미국 언론, 중간선거 판세 분석 \"민주당, 하원 탈환 유력..상원도 우세\"",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-03T05:10:00.000Z",
-     "link": "http://www.breaknews.com/1247914"
+     "title": "“이란 전쟁비용은 푼돈”…트럼프, 중간선거 전날 전쟁 정당성 강조[1...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-03T05:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002718229?sid=104"
     },
     {
-     "title": "트럼프 \"전쟁 비용은 푼돈\"…중간선거 전야에 이란전 정당성 강조",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-03T05:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400242?sid=104"
+     "title": "미국 좌파의 약진, 돈으로 짓누르려는 억만장자들 그들은 누구인가",
+     "press": "vop.co.kr",
+     "publishedAt": "2026-11-03T05:20:00.000Z",
+     "link": "https://vop.co.kr/A00001697415.html"
+    }
+   ]
+  },
+  {
+   "keyword": "배나라 한재아 결혼",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 30,
+   "recent20": 8,
+   "press": 24,
+   "firstArticleAt": "2026-11-03T04:19:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[전문] 배나라, ♥한재아와 결혼 소감…“이제 한 가정의 가장”",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-03T05:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004462498"
+    },
+    {
+     "title": "'11월 14일 결혼' 배나라♥한재아, 자필로 전한 결혼 소감[셀럽톡]",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-03T05:22:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1793681827530268005"
+    },
+    {
+     "title": "뮤지컬 배우 배나라-한재아 14일 결혼…“동료에서 연인으로”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-03T05:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003759715?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "장동혁 국민의힘 대표",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 40,
+   "recent20": 6,
+   "press": 22,
+   "firstArticleAt": "2026-11-03T03:59:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "오세훈·한동훈, 보수 연대에 공감대…장동혁 “오히려 갈등 커져”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-03T05:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002718232?sid=100"
+    },
+    {
+     "title": "국민의힘 서울시당-서울시 공동 주최 토론회서 만난 오세훈-장동혁",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-03T05:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003695271?sid=100"
+    },
+    {
+     "title": "장동혁, ‘국민의 삶 해결 예산’ 발표",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-03T05:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003695272?sid=100"
     }
    ]
   },
@@ -47,10 +112,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 24,
-   "recent20": 7,
-   "press": 23,
-   "firstArticleAt": "2026-11-03T03:48:00.000Z",
+   "articles90": 23,
+   "recent20": 4,
+   "press": 22,
+   "firstArticleAt": "2026-11-03T03:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,131 +140,34 @@
    ]
   },
   {
-   "keyword": "배나라 한재아 결혼",
+   "keyword": "10월 소비자물가 2.8%",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 27,
-   "recent20": 11,
-   "press": 22,
-   "firstArticleAt": "2026-11-03T03:47:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'결혼' 배나라 \"♥한재아와 새로운 시작\" 웨딩 화보·손편지 공개 [전문...",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-03T05:13:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000051123"
-    },
-    {
-     "title": "공개 열애 10개월만…마침내 자필 편지로 14일 결혼 알린 '배우 부부'",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-03T05:12:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1171403"
-    },
-    {
-     "title": "배나라, 뮤지컬 배우 한재아와 11월 14일 백년가약…직접 전한 결혼 소식...",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-03T05:12:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=846013"
-    }
-   ]
-  },
-  {
-   "keyword": "장동혁 국민의힘 대표",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 44,
-   "recent20": 4,
-   "press": 22,
-   "firstArticleAt": "2026-11-03T03:48:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국민의힘, 821조 정부 예산안에 “초팽창 퍼주기”…11.6조 ‘민생 예산...",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-03T05:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003056827?sid=100"
-    },
-    {
-     "title": "장동혁 \"떨어지고 있는 건 집값이 아닌 주가와 대통령 지지율\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-03T05:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005435834?sid=100"
-    },
-    {
-     "title": "장동혁 “李, 대한민국 빚덩이에”…5대 민생 예산 제안",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-03T05:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001271484?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "10월 물가 2.8%↑",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 22,
-   "recent20": 14,
-   "press": 15,
+   "articles90": 21,
+   "recent20": 13,
+   "press": 12,
    "firstArticleAt": "2026-11-03T03:56:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[포토] 10월 소비자물가 전년 동월 대비 2.8% 상승",
+     "title": "[포토] 10월 소비자물가 전년비 2.8% 상승",
      "press": "newscj.com",
-     "publishedAt": "2026-11-03T05:14:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3445513"
+     "publishedAt": "2026-11-03T05:18:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3445514"
     },
     {
-     "title": "[포토] 10월 물가 전년대비 2.8% 상승",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-03T05:12:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3445511"
+     "title": "가공식품 상승에 10월 물가 2.8%↑",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-03T05:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016418562?sid=101"
     },
     {
-     "title": "[포토] '농산물 가격은 하락했지만' 물가 2.8% 상승",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-03T05:10:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3445507"
-    }
-   ]
-  },
-  {
-   "keyword": "민주당-한국노총 고위급정책협의회",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 15,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-03T03:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김민석 \"정년연장 함께 대화\"…한국노총 \"민주당 신뢰 무너져\"",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-03T05:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001271485?sid=100"
-    },
-    {
-     "title": "김동명 위원장, “민주당에 대한 신뢰 무너지고 있어… 약속 아닌 행동...",
-     "press": "news.inochong.org",
-     "publishedAt": "2026-11-03T05:02:00.000Z",
-     "link": "http://news.inochong.org/detail.php?number=6666&thread=22r03"
-    },
-    {
-     "title": "김민석 “정년 연장·초광역특구 대화”…한국노총 “신뢰 무너져, 행동...",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-03T04:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012286248?sid=100"
+     "title": "가공식품·외식비 상승에 10월 물가 2.8%↑",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-03T05:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016418572?sid=101"
     }
    ]
   },
@@ -209,13 +177,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 9,
+   "articles90": 11,
+   "recent20": 2,
+   "press": 10,
    "firstArticleAt": "2026-11-03T04:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "감기약으로 4만 명 투약분 필로폰 제조… 총책·한약사 등 13명 검거",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-03T05:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000366222?sid=102"
+    },
     {
      "title": "“감기약 성분으로 필로폰 제조”…한약사 등 13명 검거",
      "press": "news.kbs.co.kr",
@@ -227,12 +201,102 @@
      "press": "seoul.co.kr",
      "publishedAt": "2026-11-03T04:58:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/081/0003695254?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "민주당-한국노총 고위급정책협의회",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 14,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-03T04:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김민석 만난 한국노총 위원장 “민주당에 대한 신뢰 자체가 무너져”",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-03T05:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004007502?sid=100"
     },
     {
-     "title": "필로폰 제조 알면서 감기약 63만정 판매\"…한약사 일탈에 약계 분노",
-     "press": "kpanews.co.kr",
-     "publishedAt": "2026-11-03T04:56:00.000Z",
-     "link": "https://www.kpanews.co.kr/news/articleView.html?idxno=547985"
+     "title": "김민석 \"정년연장 함께 대화\"…한국노총 \"민주당 신뢰 무너져\"",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-03T05:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001271485?sid=100"
+    },
+    {
+     "title": "김동명 위원장, “민주당에 대한 신뢰 무너지고 있어… 약속 아닌 행동...",
+     "press": "news.inochong.org",
+     "publishedAt": "2026-11-03T05:02:00.000Z",
+     "link": "http://news.inochong.org/detail.php?number=6666&thread=22r03"
+    }
+   ]
+  },
+  {
+   "keyword": "신민아 재혼 황후 기대와 우려",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-03T03:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "29억뷰 웹툰 '재혼 황후'…신민아·주지훈 실사로 만난다",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-03T05:13:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000079217"
+    },
+    {
+     "title": "\"낯설지만 새로워\"…서양 황실로 간 신민아→이종석, '재혼 황후' 비주...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-03T05:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/119/0003150695"
+    },
+    {
+     "title": "신민아·주지훈 \"익숙함에 새로움 더해…판타지 즐겨주길\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-03T05:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016418466?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "미국 이란 케슘섬 공습",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-03T04:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "미국, 이란 케슘 섬 공격…\"방어적 작전\"",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-03T05:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006402776?sid=104"
+    },
+    {
+     "title": "트럼프 \"합의 없으면 이란 '곡괭이산' 공격해야 할 수도 있어\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T04:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009267035?sid=104"
+    },
+    {
+     "title": "미국 중간선거 D-1...호르무즈 핵심 요충지서 이란과 교전",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-03T04:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005435821?sid=104"
     }
    ]
   },
@@ -241,10 +305,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-03T03:54:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-03T03:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -269,105 +333,73 @@
    ]
   },
   {
-   "keyword": "미국 이란 케슘섬 공습",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-03T04:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "트럼프 \"합의 없으면 이란 '곡괭이산' 공격해야 할 수도 있어\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T04:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009267035?sid=104"
-    },
-    {
-     "title": "미국 중간선거 D-1...호르무즈 핵심 요충지서 이란과 교전",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-03T04:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005435821?sid=104"
-    },
-    {
-     "title": "WSJ \"미국, 중간선거 앞두고 이란 케슘섬 비공개 공습\"",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-03T04:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000548246?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "GTX-A 삼성역 내년 상반기 가능",
+   "keyword": "서울 외국인 소비 8.8조",
    "sources": [
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 2,
+   "articles90": 8,
+   "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-03T04:08:00.000Z",
+   "firstArticleAt": "2026-11-03T04:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘철근 누락’ GTX 삼성역, 보강·재시공 결론 연내 나온다",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-03T05:02:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261103500224"
+     "title": "서울 방문 외국인, 9개월간 8.8조 소비",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T05:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009267166?sid=102"
     },
     {
-     "title": "GTX-A 삼성역 무정차 통과 내년 상반기로 연기",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-03T04:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001271482?sid=101"
+     "title": "서울 방문 외국인 9개월간 8.8조원 소비…지난해 연간 실적 넘어",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T04:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009267032?sid=102"
     },
     {
-     "title": "'철근 누락' GTX-A 삼성역 연내 무정차 통과 무산..재시공도 검토",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-03T04:42:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2121016"
+     "title": "서울 찾은 외국인 관광객 소비액 8.8조원 돌파",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T04:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009267030?sid=102"
     }
    ]
   },
   {
-   "keyword": "신장식 대표 취임 기자간담회",
+   "keyword": "교수",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T03:52:00.000Z",
+   "articles90": 4,
+   "recent20": 4,
+   "press": 4,
+   "firstArticleAt": "2026-11-03T05:10:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "'취임 100일' 신장식 \"총선서 반개혁 인사 지역구 출마…민주당, 개혁정...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-03T05:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003150704?sid=100"
+     "title": "서울대병원 최규성 교수, 의료영상 AI 연구로 젊은의학자상·의학한림원...",
+     "press": "kormedi.com",
+     "publishedAt": "2026-11-03T05:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/296/0000106829?sid=102"
     },
     {
-     "title": "신장식 “결혼 혼자 하나…민주당 신뢰 회복·사과가 먼저”",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-03T04:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202209?sid=100"
+     "title": "[피플N이슈] 안광섭 교수 \"AI가 먼저 말 거는 시대…빅테크는 당신의 일...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-03T05:21:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261102001081"
     },
     {
-     "title": "신장식, 민주당 합당론에 선 긋기…\"국면 전환용 카드 안 받아\"",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-03T03:52:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=171848"
+     "title": "[포토뉴스] 대전성모병원 양영준 교수, 호스피스 날 복지부장관상 수상",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-03T05:20:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1421213"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 355,
+  "flagged": 358,
   "matched": 129,
   "avgLeadMin": 242,
   "recent": [
