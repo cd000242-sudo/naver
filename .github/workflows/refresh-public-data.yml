@@ -106,6 +106,9 @@ jobs:
             timeout 240 node scripts/refresh-golden-briefing.mjs || echo "황금보드 갱신 실패/시간초과 — 기존 파일 유지"
             # 지식인 황금질문(실시간·급상승·숨은) — 급상승은 직전 스냅샷 대비라 15분 주기가 곧 눈금이다.
             timeout 300 node scripts/kin-golden.mjs || echo "지식인 황금질문 수집 실패/시간초과 — 기존 파일 유지"
+            # 주제별 지금 측정(LDB 확장 '주제별 지금 쓰기 좋은 키워드') — 32주제 × 5개를 지금 다시 잰다(검색량·문서수·데이터랩 14일).
+            # 1시간에 한 번만 돌고(스크립트가 스스로 건너뜀), 데이터랩은 하루 900회에서 멈춘다. 실패해도 기존 파일 유지.
+            timeout 240 node scripts/topic-now.mjs || echo "주제별 지금 측정 실패/시간초과 — 기존 파일 유지"
             # 유튜브 급상승 → 네이버 빈자리. YOUTUBE_API_KEY 가 없으면 스스로 건너뛴다.
             # 스크립트 자체 예산(8분)이 먼저 걸려 여기까지 오면 이미 저장된 뒤다.
             timeout 540 node scripts/youtube-gap.mjs || echo "유튜브 빈자리 수집 실패/시간초과 — 기존 파일 유지"
