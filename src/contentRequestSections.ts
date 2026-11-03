@@ -98,8 +98,21 @@ const CUSTOM_PROMPT_REMINDER_LIMIT = 2000;
  * 수천 자 원본 · 규칙 앞에 묻힌 채 끝났다 — 고객 "개인 프롬프트를 넣고 글을 생성해도 적용이 안 된다".
  * 원문을 프롬프트 끝(근거 계약 바로 앞)에 한 번 더 보인다. 구독 에이전트는 다시 쓰기가 없어 첫 출력에서 지켜야 한다.
  */
+/**
+ * Start of the app's own homefeed editorial instruction that dailyEditorialPipeline appends to customPrompt (2026-11-04).
+ * The model still reads it; only the user's part (before it) is judged for adherence or repeated as the user's prompt.
+ */
+export const DAILY_EDITORIAL_MARKER = '[DAILY HOMEFEED EDITORIAL]';
+
+/** What the user wrote: customPrompt up to the app's internal editorial block. */
+export function userAuthoredPrompt(prompt: string | undefined): string {
+  const text = String(prompt || '');
+  const at = text.indexOf(DAILY_EDITORIAL_MARKER);
+  return (at >= 0 ? text.slice(0, at) : text).trim();
+}
+
 export function buildCustomPromptReminderBlock(prompt: string | undefined): string {
-  const text = String(prompt || '').trim();
+  const text = userAuthoredPrompt(prompt);
   if (!text) return '';
   const shown = text.length > CUSTOM_PROMPT_REMINDER_LIMIT
     ? `${text.slice(0, CUSTOM_PROMPT_REMINDER_LIMIT)}\n…(이하 생략 — 위 [사용자 추가 지시사항] 전문을 그대로 따른다)`

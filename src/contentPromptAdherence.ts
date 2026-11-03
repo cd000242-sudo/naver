@@ -1,4 +1,4 @@
-import { parseRequestSections, positiveRequestText, type RequestSections } from './contentRequestSections.js';
+import { parseRequestSections, positiveRequestText, userAuthoredPrompt, type RequestSections } from './contentRequestSections.js';
 
 export type PromptAdherenceReport = {
   checked: boolean;
@@ -389,7 +389,8 @@ export function assessCustomPromptAdherence(
   content: PromptAdherenceContent,
   source: PromptAdherenceSource,
 ): PromptAdherenceReport {
-  const customPrompt = String(source.customPrompt || '').trim();
+  // Only the user's own words are judged; the homefeed editorial block after DAILY_EDITORIAL_MARKER is the app's (2026-11-04).
+  const customPrompt = userAuthoredPrompt(source.customPrompt);
   if (!customPrompt) {
     return {
       checked: false,

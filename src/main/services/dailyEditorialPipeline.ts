@@ -1,4 +1,5 @@
 import type { DailyEditorialAngle } from './dailyHomefeedEditorialContract.js';
+import { DAILY_EDITORIAL_MARKER } from '../../contentRequestSections.js';
 
 interface Source {
   readonly rawText: string;
@@ -30,7 +31,7 @@ function assertEditorialAnchors(source: Source, editorial?: DailyEditorialAngle)
   }
 }
 function instruction(source: Source, editorial?: DailyEditorialAngle): string {
-  return `${source.customPrompt || ''}\n[DAILY HOMEFEED EDITORIAL]\n`
+  return `${source.customPrompt || ''}\n${DAILY_EDITORIAL_MARKER}\n`
     + '실제 자료에서 가장 의외인 행동·관계·선택을 선명하게 보여주고 그 이유를 궁금하게 만드는 제목을 쓴다. '
     + '독자가 아는 모습과 다른 실제 장면을 구체적으로 연결한다. 원문에 없는 반응·폭로·대사·경험을 만들지 않는다. '
     + '말줄임표나 그 이유라는 말만 붙인 제목은 거부한다. 제목의 질문에 도입에서 첫 답을 주고 뒤에 새로운 장면·근거를 더한다. '
