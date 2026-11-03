@@ -664,24 +664,24 @@ export class ThumbnailGenerator {
     // 모달 생성
     const modal = document.createElement('div');
     modal.className = 'modal-overlay';
-    modal.style.cssText = 'display:flex;align-items:center;justify-content:center;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:9999;';
+    modal.style.cssText = 'display:flex;align-items:center;justify-content:center;position:fixed;inset:0;background: var(--nv-scrim);z-index:9999;';
 
     modal.innerHTML = `
-      <div style="background:var(--bg-secondary);border-radius:16px;max-width:800px;width:90%;max-height:80vh;overflow:hidden;display:flex;flex-direction:column;">
+      <div style="background: var(--bg-secondary);border-radius:16px;max-width:800px;width:90%;max-height:80vh;overflow:hidden;display:flex;flex-direction:column;">
         <div style="padding:20px;border-bottom:1px solid var(--border-light);display:flex;justify-content:space-between;align-items:center;">
-          <h3 style="margin:0;color:var(--text-strong);font-size:18px;">🖼️ 배경 이미지 선택</h3>
-          <button id="thumb-storage-close" style="background:none;border:none;color:var(--text-muted);font-size:24px;cursor:pointer;">&times;</button>
+          <h3 style="margin:0;color: var(--text-strong);font-size:18px;">🖼️ 배경 이미지 선택</h3>
+          <button id="thumb-storage-close" style="background: none;border:none;color: var(--text-muted);font-size:24px;cursor:pointer;">&times;</button>
         </div>
         <div style="padding:20px;overflow-y:auto;flex:1;">
           <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px;">
             ${allImages.map((img, idx) => `
               <div class="thumb-storage-item" data-idx="${idx}" style="cursor:pointer;border-radius:12px;overflow:hidden;border:2px solid transparent;transition:all 0.2s;">
-                <div style="position:relative;padding-bottom:75%;background:#1a1a2e;">
+                <div style="position:relative;padding-bottom:75%;background: var(--nv-card);">
                   <img src="${img.src}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'" />
                 </div>
-                <div style="padding:8px;background:var(--bg-tertiary);">
-                  <div style="font-size:12px;color:var(--text-strong);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${img.label}</div>
-                  <div style="font-size:10px;color:var(--text-muted);">${img.source}</div>
+                <div style="padding:8px;background: var(--bg-tertiary);">
+                  <div style="font-size:12px;color: var(--text-strong);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${img.label}</div>
+                  <div style="font-size:10px;color: var(--text-muted);">${img.source}</div>
                 </div>
               </div>
             `).join('')}
@@ -1720,24 +1720,24 @@ class ImageConverter {
     // 모달 생성
     const modal = document.createElement('div');
     modal.className = 'modal-overlay';
-    modal.style.cssText = 'display:flex;align-items:center;justify-content:center;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:9999;';
+    modal.style.cssText = 'display:flex;align-items:center;justify-content:center;position:fixed;inset:0;background: var(--nv-scrim);z-index:9999;';
 
     modal.innerHTML = `
-      <div style="background:var(--bg-secondary);border-radius:16px;max-width:800px;width:90%;max-height:80vh;overflow:hidden;display:flex;flex-direction:column;">
+      <div style="background: var(--bg-secondary);border-radius:16px;max-width:800px;width:90%;max-height:80vh;overflow:hidden;display:flex;flex-direction:column;">
         <div style="padding:20px;border-bottom:1px solid var(--border-light);display:flex;justify-content:space-between;align-items:center;">
-          <h3 style="margin:0;color:var(--text-strong);font-size:18px;">🖼️ 이미지 선택</h3>
-          <button id="converter-storage-close" style="background:none;border:none;color:var(--text-muted);font-size:24px;cursor:pointer;">&times;</button>
+          <h3 style="margin:0;color: var(--text-strong);font-size:18px;">🖼️ 이미지 선택</h3>
+          <button id="converter-storage-close" style="background: none;border:none;color: var(--text-muted);font-size:24px;cursor:pointer;">&times;</button>
         </div>
         <div style="padding:20px;overflow-y:auto;flex:1;">
           <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px;">
             ${allImages.map((img, idx) => `
               <div class="converter-storage-item" data-idx="${idx}" style="cursor:pointer;border-radius:12px;overflow:hidden;border:2px solid transparent;transition:all 0.2s;">
-                <div style="position:relative;padding-bottom:75%;background:#1a1a2e;">
+                <div style="position:relative;padding-bottom:75%;background: var(--nv-card);">
                   <img src="${img.src}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'" />
                 </div>
-                <div style="padding:8px;background:var(--bg-tertiary);">
-                  <div style="font-size:12px;color:var(--text-strong);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${img.label}</div>
-                  <div style="font-size:10px;color:var(--text-muted);">${img.source}</div>
+                <div style="padding:8px;background: var(--bg-tertiary);">
+                  <div style="font-size:12px;color: var(--text-strong);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${img.label}</div>
+                  <div style="font-size:10px;color: var(--text-muted);">${img.source}</div>
                 </div>
               </div>
             `).join('')}
@@ -2283,7 +2283,7 @@ class ImageConverter {
     const modal = document.createElement('div');
     modal.style.cssText = `
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.8); z-index: 100000; display: flex;
+      background: var(--nv-scrim); z-index: 100000; display: flex;
       align-items: center; justify-content: center; padding: 2rem;
     `;
 
@@ -2305,7 +2305,7 @@ class ImageConverter {
     }).join('')}
         </div>
         <div style="display: flex; gap: 0.5rem;">
-          <button type="button" class="apply-btn" style="flex: 1; padding: 0.75rem; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">1번 소제목에 적용 (썸네일)</button>
+          <button type="button" class="apply-btn" style="flex: 1; padding: 0.75rem; background: var(--primary); color: var(--nv-ink); border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">1번 소제목에 적용 (썸네일)</button>
           <button type="button" class="cancel-btn" style="padding: 0.75rem 1.5rem; background: var(--bg-tertiary); color: var(--text-strong); border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer;">취소</button>
         </div>
       </div>

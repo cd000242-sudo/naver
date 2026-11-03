@@ -55,30 +55,27 @@ function buildOverlay(): HTMLDivElement {
   const overlay = document.createElement('div');
   overlay.setAttribute('role', 'dialog');
   overlay.setAttribute('aria-modal', 'true');
-  overlay.style.cssText =
-    'position:fixed; inset:0; z-index: 1000000; background: rgba(0,0,0,0.65); ' +
-    'display:flex; align-items:center; justify-content:center; padding: 1rem;';
+  // Colors come from the theme classes (theme-naver-components.css section 2); only the stacking order stays inline.
+  overlay.className = 'nv-scrim';
+  overlay.style.zIndex = '1000000';
   return overlay;
 }
 
 function buildModal(code: BlockingModalCode, options: ModalOptions): HTMLDivElement {
   const modal = document.createElement('div');
-  modal.style.cssText =
-    'width: min(560px, 95vw); max-height: 85vh; overflow:auto; ' +
-    'background: var(--bg-primary, #fff); color: var(--text-strong, #111); ' +
-    'border: 1px solid var(--border-light, #e0e0e0); border-radius: 14px; ' +
-    'box-shadow: 0 20px 60px rgba(0,0,0,0.35); padding: 1.25rem;';
+  modal.className = 'nv-modal';
+  modal.style.maxWidth = '560px';
 
   const title = options.title || DEFAULT_TITLES[code];
   // ux-validator 권고: 에러 배지 대비 강화 (WCAG AA 준수)
   const errorCodeBadge = options.errorCode
-    ? `<span style="font-family: ui-monospace, monospace; font-size: 0.75rem; padding: 0.15rem 0.45rem; border-radius: 6px; background: #fee2e2; color: #991b1b; font-weight: 600;">${escapeHtml(options.errorCode)}</span>`
+    ? `<span class="nv-badge-err">${escapeHtml(options.errorCode)}</span>`
     : '';
 
   const linksHtml = (options.resourceLinks ?? [])
     .map(
       (link) =>
-        `<a href="${escapeHtml(link.url)}" target="_blank" rel="noreferrer" style="color: #2563eb; text-decoration: underline; word-break: break-all;">${escapeHtml(link.label)}</a>`,
+        `<a href="${escapeHtml(link.url)}" target="_blank" rel="noreferrer" class="nv-link">${escapeHtml(link.label)}</a>`,
     )
     .join('<br/>');
 
@@ -87,9 +84,9 @@ function buildModal(code: BlockingModalCode, options: ModalOptions): HTMLDivElem
       <div style="font-weight: 800; font-size: 1.05rem; flex: 1;">${escapeHtml(title)}</div>
       ${errorCodeBadge}
     </div>
-    <div style="font-size: 0.92rem; line-height: 1.6; color: var(--text-strong, #111); white-space: pre-wrap;">${escapeHtml(options.message)}</div>
+    <div class="nv-modal__text" style="margin-bottom: 0; white-space: pre-wrap;">${escapeHtml(options.message)}</div>
     ${linksHtml ? `<div style="margin-top: 0.75rem; font-size: 0.85rem; line-height: 1.7;">${linksHtml}</div>` : ''}
-    <div data-recovery-modal-actions style="margin-top: 1rem; display:flex; gap: 0.5rem; justify-content: flex-end; flex-wrap: wrap;"></div>
+    <div data-recovery-modal-actions class="nv-modal__actions" style="margin-top: 1rem;"></div>
   `;
   return modal;
 }
@@ -102,14 +99,8 @@ function buildButton(option: { id: string; label: string; variant?: 'primary' | 
   const labelWithSymbol = option.variant === 'destructive' ? `⚠ ${option.label}` : option.label;
   btn.textContent = labelWithSymbol;
   const variant = option.variant ?? 'secondary';
-  const palette = {
-    primary: 'background:#2563eb; color:#fff;',
-    destructive: 'background:#b91c1c; color:#fff;',
-    secondary: 'background: rgba(0,0,0,0.06); color: var(--text-strong, #111);',
-  } as const;
-  btn.style.cssText =
-    'border:none; border-radius: 10px; padding: 0.55rem 1rem; cursor: pointer; ' +
-    'font-weight: 600; font-size: 0.9rem; ' + palette[variant];
+  const variantClass = { primary: 'nv-btn--primary', destructive: 'nv-btn--danger', secondary: '' } as const;
+  btn.className = `nv-btn ${variantClass[variant]}`.trim();
   return btn;
 }
 

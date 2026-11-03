@@ -38,6 +38,22 @@ export const AGENT_TIER_PROFILES: Readonly<Record<AgentDefaultModelProvider, Rea
   }),
 });
 
+/**
+ * [2026-11-03] The 'image' purpose: the Codex subscription image engine ('codex-image'). The model only hands the
+ * prompt to the image_gen tool — the picture itself is the tool's — so the small fast model at low effort is enough
+ * (measured on Codex CLI 0.166.0: gpt-6-luna 35s per image against 51-52s for terra/astra, same output quality).
+ * A model the caller names still wins.
+ */
+export const AGENT_IMAGE_PROFILES: Readonly<Record<'codex', AgentTierProfile>> = Object.freeze({
+  codex: Object.freeze({ model: 'gpt-6-luna', effort: 'low' as const }),
+});
+
+export function resolveAgentImageProfile(provider: 'codex', named?: string | null): AgentTierProfile {
+  const profile = AGENT_IMAGE_PROFILES[provider];
+  const model = typeof named === 'string' ? named.trim() : '';
+  return model ? { ...profile, model } : profile;
+}
+
 /** Main-tier model ids (what the settings card calls "기본 모델"). */
 export const AGENT_DEFAULT_MODELS: Readonly<Record<AgentDefaultModelProvider, string>> = Object.freeze({
   claude: AGENT_TIER_PROFILES.claude.main.model,

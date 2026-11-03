@@ -4,6 +4,7 @@ import { assertProvider as assertProviderFn, normalizeImageFallbackPolicy } from
 import { NANO_PROVIDER_TO_MODEL_KEY } from './runtime/imageEngineCatalog.js';
 import { isRetiredImageEngine, retiredImageEngineLabel } from './runtime/retiredImageEngines.js';
 import { isCollectPhotosEngine } from './runtime/collectPhotosPolicy.js';
+import { isCodexImageEngine } from './runtime/codexImagePolicy.js';
 import {
   generateWithNanoBananaPro,
   abortImageGeneration as abortNanoBananaImageGeneration,
@@ -476,6 +477,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     'flow': 'Flow (Nano Banana 2, AI Pro 무료)', // ✅ [v1.5.4]
     'dropshot': '🍌 리더스 나노바나나 무제한 (구독자 무제한 · 추가비용 0원)', // ✅ [v2.11.7]
     'genspark': '젠스파크', // [2026-10-10]
+    'codex-image': 'Codex 구독 이미지 (GPT 이미지 · 별도 비용 없음)', // [2026-11-03]
     'naver': '네이버 이미지 검색',
     'local-folder': '내 폴더',
   };
@@ -514,7 +516,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     }
   }
   // [2026-10-10] 젠스파크는 렌더러가 실어 보내는 OpenAI 모델(options.imageModel)을 쓰지 않는다 — 표시도 생략
-  const modelSuffix = options.imageModel && normalizedProvider !== 'genspark' ? ` · 모델 ${options.imageModel}` : '';
+  const modelSuffix = options.imageModel && normalizedProvider !== 'genspark' && normalizedProvider !== 'codex-image' ? ` · 모델 ${options.imageModel}` : '';
   console.log(`[이미지생성] 🎨 선택된 AI 이미지 생성 엔진: ${displayName}${modelSuffix}`);
 
   assertProviderFn(normalizedProvider as ImageProvider);
@@ -956,6 +958,36 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
       const rawMsg = (gensparkError as Error).message || '';
       console.warn(`[ImageGenerator] ⚠️ 젠스파크 실패:`, rawMsg);
       throw new Error(`[젠스파크] 이미지 생성 실패: ${rawMsg}`);
+    }
+  }
+
+  // [2026-11-03] Codex 구독 이미지 (codex-image) — 사용자 명시 선택 시만. ChatGPT 구독의 이미지 생성 도구를 쓰므로 API 과금이 없다.
+  //   auto/폴백 체인 제외. 실패한 칸은 다른 엔진으로 채우지 않고 명시 실패로 멈춘다. 렌더러가 실어 보내는 imageModel(OpenAI 모델)은 쓰지 않는다.
+  if (isCodexImageEngine(normalizedProvider)) {
+    try {
+      const { generateWithCodexImage } = await import('./image/codex/codexImageGenerator.js');
+      const codexImages = await generateWithCodexImage(
+        items,
+        options.postTitle,
+        options.postId,
+        options.stopCheck,
+        onImageGenerated,
+        { allowPartial: options.allowPartialResults === true },
+      );
+      if (codexImages.length === 0) {
+        if (options.stopCheck?.()) return [];
+        throw new Error('Codex 구독 이미지 0건 반환 — Codex 연결/구독 한도 확인 필요');
+      }
+      console.log(`[이미지생성] ✅ Codex 구독 이미지로 ${codexImages.length}개 이미지 생성 완료!`);
+      return finalizeImages(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(codexImages, {
+        requestedProvider,
+        actualProvider: 'codex-image',
+        policy: fallbackPolicy,
+      }), 'codex-image', options.postTitle, options.thumbnailTextInclude, items));
+    } catch (codexError) {
+      const rawMsg = (codexError as Error).message || '';
+      console.warn(`[ImageGenerator] ⚠️ Codex 구독 이미지 실패:`, rawMsg);
+      throw new Error(`[Codex 구독 이미지] 이미지 생성 실패: ${rawMsg}`);
     }
   }
 

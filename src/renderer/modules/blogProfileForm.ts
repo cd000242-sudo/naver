@@ -26,7 +26,7 @@ type BlogProfileApi = {
 const BLOG_PROFILE_INTENTS: Array<[BlogProfileData['intent'], string]> = [
   ['search', '검색형 — 검색 질문에 바로 답하는 글'], ['homefeed', '홈판형 — 지금 읽을 계기와 장면이 있는 글'], ['mixed', '혼합'],
 ];
-const BLOG_PROFILE_FIELD_CSS = 'width:100%;box-sizing:border-box;padding:0.5rem 0.6rem;border-radius:8px;border:1px solid rgba(148,163,184,0.4);background:rgba(15,23,42,0.6);color:inherit;font-size:0.86rem;';
+const BLOG_PROFILE_FIELD_CSS = 'width:100%;box-sizing:border-box;padding:0.5rem 0.6rem;border-radius:8px;border:1px solid var(--nv-line-strong);background:var(--nv-card);color:inherit;font-size:0.86rem;';
 
 function blogProfileApi(): BlogProfileApi { return ((window as unknown as { api?: BlogProfileApi }).api) || {}; }
 function blogProfileEl<K extends keyof HTMLElementTagNameMap>(tag: K, css: string, text?: string): HTMLElementTagNameMap[K] {

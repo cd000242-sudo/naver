@@ -977,26 +977,26 @@ function showAdbGuideModal(): void {
     modal.style.cssText = `
         position: fixed; inset: 0; z-index: 30000;
         display: flex; align-items: center; justify-content: center;
-        background: rgba(0,0,0,0.6); backdrop-filter: blur(6px);
+        background: var(--nv-scrim); backdrop-filter: blur(6px);
     `;
 
     modal.innerHTML = `
         <div style="
-            background: var(--bg-primary, #161625);
-            border: 1px solid rgba(16, 185, 129, 0.3);
+            background: var(--nv-card);
+            border: 1px solid var(--nv-green-line);
             border-radius: 20px;
             max-width: 520px; width: 92%;
             max-height: 82vh; overflow-y: auto;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            box-shadow: var(--shadow-xl);
             padding: 1.75rem;
             position: relative;
         ">
             <button type="button" id="adb-guide-close"
-                style="position: absolute; top: 0.75rem; right: 0.75rem; background: rgba(255,255,255,0.08); border: none; color: var(--text-muted); font-size: 1.2rem; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;"
+                style="position: absolute; top: 0.75rem; right: 0.75rem; background: var(--nv-sunken); border: none; color: var(--text-muted); font-size: 1.2rem; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;"
             >×</button>
 
             <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem;">
-                <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                <div style="width: 40px; height: 40px; background: var(--nv-fill); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
                     <span style="font-size: 1.3rem;">📱</span>
                 </div>
                 <div>
@@ -1282,82 +1282,82 @@ function showAdsPowerGuideModal(): void {
 
     const modal = document.createElement('div');
     modal.id = 'adspower-guide-modal';
-    modal.style.cssText = 'position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:99999; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(4px);';
+    modal.style.cssText = 'position:fixed; inset:0; background: var(--nv-scrim); z-index:99999; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(4px);';
     modal.innerHTML = `
-        <div style="background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 20px; border: 2px solid rgba(249, 115, 22, 0.3); max-width: 500px; width: 92%; max-height: 85vh; overflow-y: auto; padding: 2rem; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+        <div style="background: var(--nv-card); border-radius: 20px; border: 2px solid var(--nv-amber-line); max-width: 500px; width: 92%; max-height: 85vh; overflow-y: auto; padding: 2rem; box-shadow: var(--shadow-xl);">
             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
-                <h3 style="color: #f97316; margin: 0; font-size: 1.2rem; font-weight: 800;">📖 AdsPower 사용방법</h3>
+                <h3 style="color: var(--nv-amber); margin: 0; font-size: 1.2rem; font-weight: 800;">📖 AdsPower 사용방법</h3>
                 <button type="button" id="adspower-guide-close" style="background: none; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer;">×</button>
             </div>
 
             <!-- Step 1 -->
-            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 1rem; margin-bottom: 0.75rem;">
+            <div style="background: var(--nv-sunken); border: 1px solid var(--nv-line); border-radius: 12px; padding: 1rem; margin-bottom: 0.75rem;">
                 <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem;">
-                    <span style="background: #f97316; color: white; min-width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem;">1</span>
-                    <div style="font-weight: 700; color: var(--text-strong, #fff); font-size: 0.95rem;">AdsPower 다운로드 & 설치</div>
+                    <span style="background: var(--nv-amber); color: var(--text-white); min-width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem;">1</span>
+                    <div style="font-weight: 700; color: var(--nv-ink); font-size: 0.95rem;">AdsPower 다운로드 & 설치</div>
                 </div>
-                <div style="color: #d1d5db; font-size: 0.82rem; line-height: 1.6; padding-left: 2.4rem;">
-                    위의 <strong style="color: #f97316;">📥 AdsPower 다운로드</strong> 버튼을 클릭하세요.<br>
+                <div style="color: var(--nv-ink-3); font-size: 0.82rem; line-height: 1.6; padding-left: 2.4rem;">
+                    위의 <strong style="color: var(--nv-amber);">📥 AdsPower 다운로드</strong> 버튼을 클릭하세요.<br>
                     → 공식 사이트에서 Windows 버전을 다운로드합니다.<br>
                     → 설치 파일 실행 후 기본 설정으로 설치하세요.
                 </div>
             </div>
 
             <!-- Step 2 -->
-            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 1rem; margin-bottom: 0.75rem;">
+            <div style="background: var(--nv-sunken); border: 1px solid var(--nv-line); border-radius: 12px; padding: 1rem; margin-bottom: 0.75rem;">
                 <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem;">
-                    <span style="background: #f97316; color: white; min-width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem;">2</span>
-                    <div style="font-weight: 700; color: var(--text-strong, #fff); font-size: 0.95rem;">무료 계정 가입</div>
+                    <span style="background: var(--nv-amber); color: var(--text-white); min-width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem;">2</span>
+                    <div style="font-weight: 700; color: var(--nv-ink); font-size: 0.95rem;">무료 계정 가입</div>
                 </div>
-                <div style="color: #d1d5db; font-size: 0.82rem; line-height: 1.6; padding-left: 2.4rem;">
+                <div style="color: var(--nv-ink-3); font-size: 0.82rem; line-height: 1.6; padding-left: 2.4rem;">
                     AdsPower를 실행하면 로그인 화면이 나옵니다.<br>
                     → <strong>Sign Up</strong> 버튼을 클릭합니다.<br>
-                    → 이메일만 있으면 <strong style="color: #22c55e;">무료 가입 가능</strong>합니다.<br>
+                    → 이메일만 있으면 <strong style="color: var(--nv-green-text);">무료 가입 가능</strong>합니다.<br>
                     → 무료 플랜으로 <strong>프로필 2개</strong>까지 영구 무료!
                 </div>
             </div>
 
             <!-- Step 3 -->
-            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 1rem; margin-bottom: 0.75rem;">
+            <div style="background: var(--nv-sunken); border: 1px solid var(--nv-line); border-radius: 12px; padding: 1rem; margin-bottom: 0.75rem;">
                 <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem;">
-                    <span style="background: #f97316; color: white; min-width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem;">3</span>
-                    <div style="font-weight: 700; color: var(--text-strong, #fff); font-size: 0.95rem;">프로필 만들기</div>
+                    <span style="background: var(--nv-amber); color: var(--text-white); min-width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem;">3</span>
+                    <div style="font-weight: 700; color: var(--nv-ink); font-size: 0.95rem;">프로필 만들기</div>
                 </div>
-                <div style="color: #d1d5db; font-size: 0.82rem; line-height: 1.6; padding-left: 2.4rem;">
+                <div style="color: var(--nv-ink-3); font-size: 0.82rem; line-height: 1.6; padding-left: 2.4rem;">
                     로그인 후 메인 화면에서:<br>
-                    → <strong style="color: #f97316;">+ New Profile</strong> 버튼 클릭<br>
+                    → <strong style="color: var(--nv-amber);">+ New Profile</strong> 버튼 클릭<br>
                     → 이름을 입력하고 <strong>Create</strong> 버튼 클릭<br>
                     → 프로필이 목록에 나타납니다.
                 </div>
             </div>
 
             <!-- Step 4 -->
-            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 1rem; margin-bottom: 1rem;">
+            <div style="background: var(--nv-sunken); border: 1px solid var(--nv-line); border-radius: 12px; padding: 1rem; margin-bottom: 1rem;">
                 <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem;">
-                    <span style="background: #f97316; color: white; min-width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem;">4</span>
-                    <div style="font-weight: 700; color: var(--text-strong, #fff); font-size: 0.95rem;">여기서 프로필 생성 (자동!)</div>
+                    <span style="background: var(--nv-amber); color: var(--text-white); min-width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem;">4</span>
+                    <div style="font-weight: 700; color: var(--nv-ink); font-size: 0.95rem;">여기서 프로필 생성 (자동!)</div>
                 </div>
-                <div style="color: #d1d5db; font-size: 0.82rem; line-height: 1.6; padding-left: 2.4rem;">
-                    위의 <strong style="color: #f97316;">➕ 프로필 추가</strong> 버튼을 클릭합니다.<br>
-                    → 프로필 이름만 입력하면 <strong style="color: #22c55e;">AdsPower에서 자동 생성</strong>됩니다!<br>
+                <div style="color: var(--nv-ink-3); font-size: 0.82rem; line-height: 1.6; padding-left: 2.4rem;">
+                    위의 <strong style="color: var(--nv-amber);">➕ 프로필 추가</strong> 버튼을 클릭합니다.<br>
+                    → 프로필 이름만 입력하면 <strong style="color: var(--nv-green-text);">AdsPower에서 자동 생성</strong>됩니다!<br>
                     → ID 복사할 필요 없이 바로 사용 가능합니다.
                 </div>
             </div>
 
             <!-- 비용 안내 -->
-            <div style="background: rgba(34, 197, 94, 0.06); border: 1px solid rgba(34, 197, 94, 0.15); border-radius: 12px; padding: 1rem; margin-bottom: 0.75rem;">
-                <div style="font-weight: 700; color: #22c55e; font-size: 0.88rem; margin-bottom: 0.5rem;">💰 요금 안내</div>
-                <div style="color: #d1d5db; font-size: 0.82rem; line-height: 1.8;">
-                    • <strong style="color: #22c55e;">무료</strong>: 프로필 <strong>2개</strong> (영구 무료)<br>
+            <div style="background: var(--nv-green-soft); border: 1px solid var(--nv-green-line); border-radius: 12px; padding: 1rem; margin-bottom: 0.75rem;">
+                <div style="font-weight: 700; color: var(--nv-green-text); font-size: 0.88rem; margin-bottom: 0.5rem;">💰 요금 안내</div>
+                <div style="color: var(--nv-ink-3); font-size: 0.82rem; line-height: 1.8;">
+                    • <strong style="color: var(--nv-green-text);">무료</strong>: 프로필 <strong>2개</strong> (영구 무료)<br>
                     • <strong>유료</strong>: 10개 ~ 월 $7.2 / 50개 ~ 월 $20+<br>
                     • 크롤링 횟수 제한 <strong>없음</strong> (무료도 무제한)
                 </div>
             </div>
 
             <!-- API 일일 한도 안내 -->
-            <div style="background: rgba(251, 191, 36, 0.06); border: 1px solid rgba(251, 191, 36, 0.15); border-radius: 12px; padding: 1rem; margin-bottom: 1.25rem;">
-                <div style="font-weight: 700; color: #fbbf24; font-size: 0.88rem; margin-bottom: 0.5rem;">⚠️ Local API 일일 한도</div>
-                <div style="color: #d1d5db; font-size: 0.82rem; line-height: 1.8;">
+            <div style="background: var(--nv-amber-soft); border: 1px solid var(--nv-amber-line); border-radius: 12px; padding: 1rem; margin-bottom: 1.25rem;">
+                <div style="font-weight: 700; color: var(--nv-amber); font-size: 0.88rem; margin-bottom: 0.5rem;">⚠️ Local API 일일 한도</div>
+                <div style="color: var(--nv-ink-3); font-size: 0.82rem; line-height: 1.8;">
                     • 브라우저 열기 일일 한도 = <strong style="color: #fbbf24;">프로필 수 × 10</strong><br>
                     <span style="font-size: 0.76rem; opacity: 0.7; padding-left: 0.6rem;">→ 무료 2개 = 하루 20회 / 10개 = 하루 100회</span><br>
                     • API 속도 제한: <strong>120회/분</strong> (최소 1초/1요청)<br>

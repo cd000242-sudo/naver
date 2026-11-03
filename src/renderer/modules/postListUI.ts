@@ -705,14 +705,14 @@ export function showImageModal(imageUrl: string): void {
   const modal = document.createElement('div');
   modal.style.cssText = `
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.9); z-index: 10001; display: flex;
+    background: var(--nv-scrim-light); z-index: 10001; display: flex;
     align-items: center; justify-content: center; padding: 2rem;
     cursor: pointer;
   `;
 
   modal.innerHTML = `
-    <div style="position: relative; width: min(1100px, 92vw); height: min(78vh, 720px); overflow: hidden; border-radius: 8px; background: rgba(0,0,0,0.2);">
-      <button type="button" class="close-image-modal-btn" style="position: absolute; top: -2rem; right: 0; background: rgba(255,255,255,0.2); border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; font-size: 1.5rem; color: white; display: flex; align-items: center; justify-content: center;">×</button>
+    <div style="position: relative; width: min(1100px, 92vw); height: min(78vh, 720px); overflow: hidden; border-radius: 8px; background: var(--nv-sunken);">
+      <button type="button" class="close-image-modal-btn" style="position: absolute; top: -2rem; right: 0; background: var(--nv-sunken); border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; font-size: 1.5rem; color: var(--nv-ink); display: flex; align-items: center; justify-content: center;">×</button>
       <img src="${imageUrl}" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Ctext x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23999%22%3E이미지 로드 실패%3C/text%3E%3C/svg%3E';">
     </div>
   `;
@@ -791,7 +791,7 @@ export function showHeadingImagesModal(encodedHeadingTitle: string, initialImage
   const modal = document.createElement('div');
   modal.style.cssText = `
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.92); z-index: 10001; display: flex;
+    background: var(--nv-scrim-light); z-index: 10001; display: flex;
     align-items: center; justify-content: center; padding: 2rem;
   `;
 
@@ -809,19 +809,19 @@ export function showHeadingImagesModal(encodedHeadingTitle: string, initialImage
     const counterText = `${currentIndex + 1} / ${images.length}`;
 
     modal.innerHTML = `
-      <div style="position: relative; width: min(1100px, 92vw); height: min(78vh, 720px); display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 10px; background: rgba(0,0,0,0.2);">
-        <button type="button" class="heading-image-modal-close" style="position: absolute; top: -2.2rem; right: 0; background: rgba(255,255,255,0.2); border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; font-size: 1.5rem; color: white; display: flex; align-items: center; justify-content: center;">×</button>
-        <div style="position: absolute; top: -2.1rem; left: 0; color: rgba(255,255,255,0.92); font-weight: 700; font-size: 0.95rem; max-width: 70vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${titleText}</div>
-        <div style="position: absolute; bottom: -2.1rem; left: 0; color: rgba(255,255,255,0.85); font-size: 0.9rem; font-weight: 700;">${counterText}</div>
+      <div style="position: relative; width: min(1100px, 92vw); height: min(78vh, 720px); display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 10px; background: var(--nv-sunken);">
+        <button type="button" class="heading-image-modal-close" style="position: absolute; top: -2.2rem; right: 0; background: var(--nv-sunken); border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; font-size: 1.5rem; color: var(--nv-ink); display: flex; align-items: center; justify-content: center;">×</button>
+        <div style="position: absolute; top: -2.1rem; left: 0; color: var(--nv-ink); font-weight: 700; font-size: 0.95rem; max-width: 70vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${titleText}</div>
+        <div style="position: absolute; bottom: -2.1rem; left: 0; color: var(--nv-ink-2); font-size: 0.9rem; font-weight: 700;">${counterText}</div>
 
-        <button type="button" class="heading-image-modal-prev" style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); z-index: 30; background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.25); border-radius: 12px; padding: 0.75rem 0.9rem; cursor: pointer; font-weight: 900;">◀</button>
-        <button type="button" class="heading-image-modal-next" style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); z-index: 30; background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.25); border-radius: 12px; padding: 0.75rem 0.9rem; cursor: pointer; font-weight: 900;">▶</button>
+        <button type="button" class="heading-image-modal-prev" style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); z-index: 30; background: var(--nv-sunken); color: var(--nv-ink); border: 1px solid var(--nv-line); border-radius: 12px; padding: 0.75rem 0.9rem; cursor: pointer; font-weight: 900;">◀</button>
+        <button type="button" class="heading-image-modal-next" style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); z-index: 30; background: var(--nv-sunken); color: var(--nv-ink); border: 1px solid var(--nv-line); border-radius: 12px; padding: 0.75rem 0.9rem; cursor: pointer; font-weight: 900;">▶</button>
 
         <img class="heading-image-modal-img" src="${escapeHtml(url)}" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Ctext x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23999%22%3E이미지 로드 실패%3C/text%3E%3C/svg%3E';" />
 
         <div style="position: absolute; bottom: 1rem; right: 1rem; display: flex; gap: 0.5rem; z-index: 40;">
-          <button type="button" class="heading-image-modal-delete" style="background: rgba(239,68,68,0.18); color: #ef4444; border: 1px solid rgba(239,68,68,0.35); border-radius: 10px; padding: 0.65rem 0.9rem; cursor: pointer; font-weight: 900;">삭제</button>
-          <button type="button" class="heading-image-modal-close2" style="background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.25); border-radius: 10px; padding: 0.65rem 0.9rem; cursor: pointer; font-weight: 800;">닫기</button>
+          <button type="button" class="heading-image-modal-delete" style="background: var(--nv-red-soft); color: var(--nv-red); border: 1px solid var(--nv-red-line); border-radius: 10px; padding: 0.65rem 0.9rem; cursor: pointer; font-weight: 900;">삭제</button>
+          <button type="button" class="heading-image-modal-close2" style="background: var(--nv-sunken); color: var(--nv-ink); border: 1px solid var(--nv-line); border-radius: 10px; padding: 0.65rem 0.9rem; cursor: pointer; font-weight: 800;">닫기</button>
         </div>
       </div>
     `;
@@ -935,29 +935,29 @@ export function showPostsStatsDashboard(): void {
   const modal = document.createElement('div');
   modal.style.cssText = `
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.7); z-index: 10000; display: flex;
+    background: var(--nv-scrim-light); z-index: 10000; display: flex;
     align-items: center; justify-content: center; padding: 2rem;
   `;
 
   modal.innerHTML = `
-    <div style="background: var(--bg-primary); border-radius: 12px; padding: 2rem; max-width: 800px; max-height: 90vh; overflow-y: auto; box-shadow: 0 8px 32px rgba(0,0,0,0.3); position: relative;">
+    <div style="background: var(--bg-primary); border-radius: 12px; padding: 2rem; max-width: 800px; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-xl); position: relative;">
       <button type="button" class="close-stats-modal-btn" style="position: absolute; top: 1rem; right: 1rem; background: var(--bg-tertiary); border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; font-size: 1.25rem; display: flex; align-items: center; justify-content: center;">×</button>
       <h2 style="margin: 0 0 1.5rem 0; color: var(--text-strong); font-size: 1.5rem;">📊 글 통계 대시보드</h2>
       
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
-        <div style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); padding: 1.5rem; border-radius: 8px; color: white;">
+        <div style="background: var(--nv-fill); padding: 1.5rem; border-radius: 8px; color: var(--text-white);">
           <div style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">${totalCount}</div>
           <div style="font-size: 0.875rem; opacity: 0.9;">총 글 수</div>
         </div>
-        <div style="background: linear-gradient(135deg, #10b981, #059669); padding: 1.5rem; border-radius: 8px; color: white;">
+        <div style="background: var(--nv-fill); padding: 1.5rem; border-radius: 8px; color: var(--text-white);">
           <div style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">${publishedCount}</div>
           <div style="font-size: 0.875rem; opacity: 0.9;">발행된 글</div>
         </div>
-        <div style="background: linear-gradient(135deg, #f59e0b, #d97706); padding: 1.5rem; border-radius: 8px; color: white;">
+        <div style="background: var(--nv-amber); padding: 1.5rem; border-radius: 8px; color: var(--text-white);">
           <div style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">${totalImages}</div>
           <div style="font-size: 0.875rem; opacity: 0.9;">총 이미지</div>
         </div>
-        <div style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); padding: 1.5rem; border-radius: 8px; color: white;">
+        <div style="background: var(--nv-fill); padding: 1.5rem; border-radius: 8px; color: var(--text-white);">
           <div style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">${favoritesCount}</div>
           <div style="font-size: 0.875rem; opacity: 0.9;">즐겨찾기</div>
         </div>

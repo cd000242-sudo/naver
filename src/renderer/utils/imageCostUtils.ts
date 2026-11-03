@@ -24,6 +24,7 @@ export function getCostRiskProviderLabel(provider: string): string {
     if (p === 'nano-banana-pro') return '나노바나나 프로 (Gemini 3 Pro Image, ₩185/장)';
     if (p === 'openai-image') return 'OpenAI 덕트테이프 (gpt-image-2.5 Flare / Sunburst)';
     if (p === 'dall-e-3') return 'OpenAI GPT 이미지 시리즈 (레거시 설정)';
+    if (p === 'codex-image') return 'Codex 구독 이미지 (GPT 이미지 · 별도 비용 없음)';
     return p || 'AI 이미지';
 }
 

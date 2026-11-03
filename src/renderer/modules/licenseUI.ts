@@ -82,9 +82,9 @@ export async function initLicenseBadge(): Promise<void> {
             memberBadge.style.backdropFilter = 'blur(10px)';
             memberBadge.innerHTML =
                 '<span style="display:inline-flex;align-items:center;gap:0.6rem;justify-content:center;">' +
-                '<span id="member-badge-icon" style="width:22px;height:22px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;background:rgba(212,175,55,0.20);border:1px solid rgba(212,175,55,0.55);font-size:12px;color:#22c55e;">👤</span>' +
+                '<span id="member-badge-icon" style="width:22px;height:22px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;background: var(--nv-amber-soft);border: 1px solid var(--nv-amber-line);font-size:12px;color: var(--nv-green-text);">👤</span>' +
                 '<span id="member-badge-text">회원</span>' +
-                '<button id="logout-btn" style="margin-left:0.5rem;padding:2px 8px;font-size:0.7rem;font-weight:600;border:1px solid rgba(255,100,100,0.4);border-radius:8px;background:rgba(255,100,100,0.12);color:#ff6b6b;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background=\'rgba(255,100,100,0.25)\'" onmouseout="this.style.background=\'rgba(255,100,100,0.12)\'">로그아웃</button>' +
+                '<button id="logout-btn" style="margin-left:0.5rem;padding:2px 8px;font-size:0.7rem;font-weight:600;border: 1px solid var(--nv-red-line);border-radius:8px;background: var(--nv-red-soft);color: var(--nv-red);cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background=\'rgba(255,100,100,0.25)\'" onmouseout="this.style.background=\'rgba(255,100,100,0.12)\'">로그아웃</button>' +
                 '</span>';
             leftStatusContainer.appendChild(memberBadge);
 
@@ -152,7 +152,7 @@ export async function initLicenseBadge(): Promise<void> {
             if (!counter) return;
             if (typeof (window as any).api?.getQuotaStatus !== 'function') {
                 counter.style.display = 'block';
-                counter.innerHTML = '<div style="font-size:12px;color:red;">API Error</div>';
+                counter.innerHTML = '<div style="font-size:12px;color: red;">API Error</div>';
                 return;
             }
             const status = await (window as any).api.getQuotaStatus();
@@ -160,7 +160,7 @@ export async function initLicenseBadge(): Promise<void> {
             // 디버깅: 상태가 올바르지 않으면 에러 표시
             if (!status?.success) {
                 counter.style.display = 'block';
-                counter.innerHTML = `<div style="font-size:11px;color:red;line-height:1.2;">Error: ${status?.message || 'Unknown'}</div>`;
+                counter.innerHTML = `<div style="font-size:11px;color: red;line-height:1.2;">Error: ${status?.message || 'Unknown'}</div>`;
                 return;
             }
             if (!status?.isFree) {
@@ -172,7 +172,7 @@ export async function initLicenseBadge(): Promise<void> {
             const q = status.quota;
             if (!q || !q.usage) {
                 counter.style.display = 'block';
-                counter.innerHTML = `<div style="font-size:11px;color:red;">No Quota Data</div>`;
+                counter.innerHTML = `<div style="font-size:11px;color: red;">No Quota Data</div>`;
                 return;
             }
 
@@ -199,13 +199,13 @@ export async function initLicenseBadge(): Promise<void> {
                     const expiryLabel = new Date(trialExpiresAt).toLocaleDateString('ko-KR', { month: 'numeric', day: 'numeric' });
                     const trialColor = daysLeft <= 3 ? '#ef4444' : daysLeft <= 7 ? '#f59e0b' : 'rgba(255,255,255,0.72)';
                     trialLine = daysLeft <= 0
-                        ? `<div style="font-size:0.72rem;font-weight:800;color:#ef4444;margin-top:4px;">체험 만료</div>`
+                        ? `<div style="font-size:0.72rem;font-weight:800;color: var(--nv-red);margin-top:4px;">체험 만료</div>`
                         : `<div style="font-size:0.72rem;font-weight:800;color:${trialColor};margin-top:4px;">체험 D-${daysLeft} · ${expiryLabel}까지</div>`;
                 }
             }
 
             counter.innerHTML =
-                `<div style="font-size:0.85rem;font-weight:900;letter-spacing:0.2px;color:rgba(255,255,255,0.92);margin-bottom:4px;">오늘 발행</div>` +
+                `<div style="font-size:0.85rem;font-weight:900;letter-spacing:0.2px;color: var(--nv-ink);margin-bottom:4px;">오늘 발행</div>` +
                 `<div style="font-size:1.45rem;font-weight:1000;color:${color};letter-spacing:0.2px;">${text}</div>` +
                 trialLine;
             counter.style.display = 'block';
@@ -213,7 +213,7 @@ export async function initLicenseBadge(): Promise<void> {
             const counter = ensureFreeQuotaCounter();
             if (counter) {
                 counter.style.display = 'block';
-                counter.innerHTML = `<div style="font-size:11px;color:red;">Exec Error: ${(e as Error).message}</div>`;
+                counter.innerHTML = `<div style="font-size:11px;color: red;">Exec Error: ${(e as Error).message}</div>`;
             }
         }
     };
@@ -785,20 +785,20 @@ export function showErrorAlertModal(title: string, message: string): void {
     modal.id = 'error-alert-modal';
     modal.style.cssText = `
     position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0, 0, 0, 0.7); display: flex; align-items: center;
+    background: var(--nv-scrim); display: flex; align-items: center;
     justify-content: center; z-index: 10000; backdrop-filter: blur(4px);
   `;
 
     modal.innerHTML = `
-    <div style="background: var(--bg-secondary); border-radius: 16px; padding: 2rem; max-width: 500px; width: 90%; border: 2px solid #ef4444; box-shadow: 0 20px 60px rgba(239, 68, 68, 0.3);">
+    <div style="background: var(--bg-secondary); border-radius: 16px; padding: 2rem; max-width: 500px; width: 90%; border: 2px solid var(--nv-red-line); box-shadow: var(--shadow-xl);">
       <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-        <div style="width: 48px; height: 48px; background: rgba(239, 68, 68, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">⚠️</div>
-        <h3 style="margin: 0; color: #ef4444; font-size: 1.3rem;">${title}</h3>
+        <div style="width: 48px; height: 48px; background: var(--nv-red-soft); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">⚠️</div>
+        <h3 style="margin: 0; color: var(--nv-red); font-size: 1.3rem;">${title}</h3>
       </div>
-      <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem;">
+      <div style="background: var(--nv-red-soft); border: 1px solid var(--nv-red-line); border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem;">
         <p style="margin: 0; color: var(--text-strong); line-height: 1.6; white-space: pre-wrap;">${message}</p>
       </div>
-      <div style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem;">
+      <div style="background: var(--nv-select-bg); border: 1px solid var(--nv-select-line); border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem;">
         <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">
           💡 <strong>해결 방법:</strong><br>
           1. 스케줄 관리 탭에서 실패한 항목을 확인하세요.<br>
@@ -806,7 +806,7 @@ export function showErrorAlertModal(title: string, message: string): void {
           3. 캡차가 필요하면 브라우저에서 직접 해결해주세요.
         </p>
       </div>
-      <button type="button" id="error-alert-close-btn" style="width: 100%; padding: 1rem; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 1rem; cursor: pointer;">
+      <button type="button" id="error-alert-close-btn" style="width: 100%; padding: 1rem; background: var(--nv-fill); color: var(--text-white); border: none; border-radius: 8px; font-weight: 600; font-size: 1rem; cursor: pointer;">
         확인
       </button>
     </div>

@@ -1554,6 +1554,8 @@ async function confirmContentPolicyManualReview(
     cancelId: 1,
     noLink: true,
   };
+  // [2026-11-03] A window parked in the tray would leave this question unseen (and the publish lane blocked): bring it back first.
+  if (mainWindow && !mainWindow.isDestroyed() && !mainWindow.isVisible()) trayResidency.showWindow();
   const response = mainWindow && !mainWindow.isDestroyed()
     ? await dialog.showMessageBox(mainWindow, options)
     : await dialog.showMessageBox(options);
@@ -2457,9 +2459,11 @@ async function createWindow(): Promise<void> {
       isConfirmDialogOpen = true;
 
       const dialogPreloadPath = path.join(__dirname, 'preloadDialog.js');
+      // [2026-11-03] While a daily plan is on (and a tray icon exists) the dialog also offers "keep running in the tray".
+      const offerTray = trayResidency.offerTray();
       const confirmWindow = new BrowserWindow({
         width: 440,
-        height: 330,
+        height: offerTray ? 440 : 330,
         parent: mainWindow!,
         modal: true,
         frame: false,
@@ -2482,32 +2486,26 @@ async function createWindow(): Promise<void> {
       });
 
       const confirmHtmlPath = path.join(publicPath, 'quit-confirm.html');
-      confirmWindow.loadFile(confirmHtmlPath);
+      confirmWindow.loadFile(confirmHtmlPath, offerTray ? { query: { tray: '1' } } : undefined);
       confirmWindow.once('ready-to-show', () => confirmWindow.show());
 
-      const handleResponse = async (_event: any, shouldQuit: boolean) => {
+      // The answer is 'tray' | true | false (the old dialog sent a plain boolean).
+      const handleResponse = async (_event: any, response: unknown) => {
         ipcMain.removeListener('quit-confirm-response', handleResponse);
+        const choice = parseQuitChoice(response, offerTray);
 
-        if (!shouldQuit) {
-          console.log('[Main] 사용자가 종료를 취소했습니다');
+        if (choice !== 'quit') {
+          console.log(choice === 'tray' ? '[Main] 창을 숨기고 트레이에서 계속 실행합니다' : '[Main] 사용자가 종료를 취소했습니다');
           isConfirmDialogOpen = false;
           if (!confirmWindow.isDestroyed()) confirmWindow.destroy();
+          if (choice === 'tray') trayResidency.hideToTray();
           return;
         }
 
         (globalThis as any).isQuitting = true;
-        console.log('[Main] 종료 절차 시작...');
         // Destroy confirm window after setting isQuitting to avoid re-triggering close handler
         if (!confirmWindow.isDestroyed()) confirmWindow.destroy();
-        if (automationRunning || AutomationService.isRunning()) {
-          AutomationService.requestCancel();
-          await AutomationService.closeAllSessions().catch(() => { });
-          automationRunning = false;
-          automation = null;
-        }
-        if (tray) { tray.destroy(); tray = null; }
-        app.quit();
-        setTimeout(() => process.exit(0), 25000);
+        await quitAppConfirmed();
       };
 
       ipcMain.on('quit-confirm-response', handleResponse);
@@ -2666,7 +2664,7 @@ function createTray(): void {
 
   try {
     tray = new Tray(iconPath);
-    tray.setToolTip('Leaders Pro - 네이버 블로그 자동화');
+    tray.setToolTip(trayResidency.tooltip());
 
     // 트레이 아이콘 클릭 시 창 표시
     tray.on('click', () => {
@@ -2680,26 +2678,17 @@ function createTray(): void {
       }
     });
 
-    // 우클릭 컨텍스트 메뉴
-    const contextMenu = Menu.buildFromTemplate([
-      {
-        label: '📺 창 열기',
-        click: () => {
-          mainWindow?.show();
-          mainWindow?.focus();
-        }
-      },
-      { type: 'separator' },
-      {
-        label: '❌ 앱 종료',
-        click: () => {
-          (app as any).isQuitting = true;
-          app.quit();
-        }
-      }
-    ]);
-
-    tray.setContextMenu(contextMenu);
+    // [2026-11-03] Menu: daily-publishing status line (disabled), open window, full quit without a confirmation window.
+    // Rebuilt every 30 s and just before the menu opens so the "next publish" time stays current.
+    const refreshTray = () => {
+      if (!tray || tray.isDestroyed()) return;
+      tray.setToolTip(trayResidency.tooltip());
+      tray.setContextMenu(Menu.buildFromTemplate(trayResidency.menuTemplate()));
+    };
+    refreshTray();
+    tray.on('right-click', refreshTray);
+    const trayRefreshTimer = setInterval(refreshTray, 30_000);
+    trayRefreshTimer.unref?.();
     console.log('[Main] ✅ 시스템 트레이 생성 완료');
   } catch (error) {
     console.warn('[Main] ⚠️ 트레이 생성 실패 (아이콘 없음?):', error);
@@ -3631,7 +3620,25 @@ ipcMain.handle('search-images-for-headings', async (_event, payload: unknown) =>
 });
 
 
-ipcMain.handle('automation:run', async (_event, payload: AutomationRequest) => {
+// [2026-11-03] Manual single/continuous publishing shares the one publish lane with the daily publisher: instead of
+// being refused ("이미 자동화가 실행 중입니다") while a daily post is being written or published, the post waits for
+// its turn (up to 45 min; the owner's [중지] cancels only this wait). Local app reservations never touch the browser.
+ipcMain.handle('automation:run', async (event, payload: AutomationRequest) => {
+  const savesLocalReservation = payload?.publishMode === 'schedule' && payload?.scheduleType === 'app-schedule';
+  const turn = savesLocalReservation ? undefined : await publishLane.enterAsUser({ label: 'automation:run', notify: sendLog });
+  if (turn && !turn.ok) {
+    const cancelled = turn.code === 'cancelled';
+    sendStatus({ success: false, cancelled, message: turn.message, ...(cancelled ? { failureCode: 'USER_CANCELLED' } : {}) });
+    return { success: false, cancelled, message: turn.message };
+  }
+  try {
+    return await runAutomationNow(event, payload);
+  } finally {
+    if (turn?.ok) turn.release();
+  }
+});
+
+const runAutomationNow = async (_event: Electron.IpcMainInvokeEvent, payload: AutomationRequest) => {
   const contentQualityV3OwnerKey = createContentQualityV3RendererOwnerKey(_event);
   const nestedHandoff = payload?.structuredContent
     && typeof payload.structuredContent === 'object'
@@ -3811,7 +3818,7 @@ ipcMain.handle('automation:run', async (_event, payload: AutomationRequest) => {
   } finally {
     setExecutionLock(null);
   }
-});
+};
 
 
 ipcMain.handle('automation:cancel', async (_event, metadata?: unknown) => {
@@ -3832,6 +3839,14 @@ ipcMain.handle('automation:cancel', async (_event, metadata?: unknown) => {
   const abortedGenerations = contentRequestId
     ? Number(contentGenerationAbortRegistry.abort(contentRequestId, `${cancelSource}: ${cancelReason}`))
     : 0;
+  // [2026-11-03] While the daily publisher owns the lane, the owner's [중지] ends only the owner's own waiting job (and the
+  // request-scoped generation aborted above). The global cancel flag, the image abort and stopRunning() below would stop
+  // — or unlock the lane under — the daily post that is being written or published; that is stopped from the daily screen.
+  const laneCancel = publishLane.cancelForUser();
+  if (laneCancel.isolated) {
+    console.warn(`[CancelTrace] scope=automation source=${cancelSource} isolatedFromDaily=true waitersCancelled=${laneCancel.cancelledWaiters}`);
+    return true;
+  }
   await abortImageGeneration().catch(() => undefined);
   console.warn(`[CancelTrace] scope=automation source=${cancelSource} generationAborts=${abortedGenerations} reason=${cancelReason}`);
   AutomationService.requestCancel();
@@ -4881,10 +4896,14 @@ import { checkDailyPublishingEntitlement } from './licenseManager.js';
 import { resolveThumbnailOverlayText } from './image/director/thumbnailText.js';
 import { selectItemsForHeadingImageMode } from './image/headingImageSelection.js';
 import { getDailyPublishingContext, assertDailyPublishingImages, bindDailyPublishingCancellation, assertDailyScheduleDeadline } from './main/services/dailyPublishingExecutor.js';
+import { createPublishLane, dailyLeaseOwner } from './main/services/publishLane.js';
+import { createNoticeFlag, createTrayResidency, parseQuitChoice } from './main/dailyTrayResidency.js';
 import { completeDailyImages } from './main/services/dailyImageRefill.js';
 import { collectDailyImages, createDailyCollectDeps } from './main/services/dailyImageCollect.js';
 import { setCollectPhotosLogSink } from './main/services/collectPhotosEngine.js';
 setCollectPhotosLogSink(sendLog); // 관련 사진 찾기 진행 문구를 렌더러 진행 로그로 보낸다
+import { setCodexImageLogSink } from './image/codex/codexImageGenerator.js';
+setCodexImageLogSink(sendLog); // Codex 구독 이미지 진행 문구("N번 이미지를 받지 못함" 포함)도 같은 진행 로그로 보낸다
 import { attachDailyNativeReservation, assertDailyNativeReservationAdapterReady, assertDailyNativeReservationReady } from './automation/dailyNativeReservation.js';
 import { createDailyNativeReservationAdapter } from './automation/dailyNativeReservationAdapter.js';
 import { ensureDailyOfficialCaptureBatch } from './main/services/dailyOfficialCaptureProducer.js';
@@ -4908,6 +4927,44 @@ const keepAwakeForDailyPublishing = (on: boolean): void => {
   if (on && dailyKeepAwakeId === undefined) dailyKeepAwakeId = powerSaveBlocker.start('prevent-app-suspension');
   else if (!on && dailyKeepAwakeId !== undefined) { powerSaveBlocker.stop(dailyKeepAwakeId); dailyKeepAwakeId = undefined; }
 };
+/**
+ * [2026-11-03] One publish lane for the daily publisher and the owner's own publishing (see publishLane.ts).
+ * A manual job that meets a daily post waits for it instead of failing; [중지] during a daily post only ends the waiting job.
+ */
+const publishLane = createPublishLane({
+  snapshot: () => ({
+    leaseOwner: directAutomationLeaseCoordinator.snapshot()?.owner ?? null,
+    busy: Boolean(automationRunning || AutomationService.isRunning() || getExecutionLock()),
+    dailyExecuting: dailyPublishingRuntime?.isExecuting() === true,
+    dailyDue: dailyPublishingRuntime?.hasDuePending() === true,
+  }),
+});
+/** Same cleanup as the confirmed [종료] button; the tray's "앱 완전 종료" uses it too, so no second confirmation. */
+async function quitAppConfirmed(): Promise<void> {
+  (globalThis as any).isQuitting = true;
+  console.log('[Main] 종료 절차 시작...');
+  if (automationRunning || AutomationService.isRunning()) {
+    AutomationService.requestCancel();
+    await AutomationService.closeAllSessions().catch(() => { });
+    automationRunning = false;
+    automation = null;
+  }
+  if (tray) { tray.destroy(); tray = null; }
+  app.quit();
+  setTimeout(() => process.exit(0), 25000);
+}
+const trayResidency = createTrayResidency({
+  planEnabled: () => dailyPublishingRuntime?.hasEnabledPlan() === true,
+  executing: () => dailyPublishingRuntime?.isExecuting() === true,
+  nextPublishAt: () => dailyPublishingRuntime?.nextPublishAt() ?? null,
+  trayReady: () => Boolean(tray && !tray.isDestroyed()),
+  window: () => mainWindow,
+  notify: (title, body) => { try { if (Notification.isSupported()) new Notification({ title, body }).show(); } catch { /* 알림은 선택 사항 */ } },
+  // Resolved on use: the user-data folder can still be redirected while the app boots.
+  noticeSeen: () => createNoticeFlag(app.getPath('userData')).seen(),
+  markNoticeSeen: () => createNoticeFlag(app.getPath('userData')).mark(),
+  quitApp: quitAppConfirmed,
+});
 /**
  * Blocks saving a daily plan only on a clear logged-out answer. A slow or undecided check passes, and the
  * free-engine refill still covers the post. Dropshot's check reads only this session's cache, so it is not asked.
@@ -4986,7 +5043,8 @@ const startLdbBridgeIfEnabled = createSerializedRefresh(async () => {
         },
         lewordKeywords: request => dailyLewordSource.keywords(request),
         notify: (title, body) => { try { if (Notification.isSupported()) new Notification({ title, body }).show(); } catch { /* 알림은 선택 사항 */ } },
-        busy: () => Boolean(automationRunning || AutomationService.isRunning() || getExecutionLock()),
+        // A manual job that already won the lane (publishLane claim) counts as busy before its run locks are set.
+        busy: () => Boolean(automationRunning || AutomationService.isRunning() || getExecutionLock() || publishLane.isUserClaimed()),
         safety: accountId => accountSafety.status(accountId),
         readConfig: loadConfig,
         discoverSources: async (topic, account, job) => {
@@ -5459,9 +5517,16 @@ const handleMultiAccountPublish = async (_event: Electron.IpcMainInvokeEvent, ac
     return publishCheck.response;
   }
 
+  // [2026-11-03] A manual multi-account run queues behind a daily post instead of being refused; the daily run's own
+  // lease is named daily:<job> so the lane can tell whose turn it is. The wait ends right before the (synchronous) lease grab.
+  let manualTurn: Awaited<ReturnType<typeof publishLane.enterAsUser>> | undefined;
+  if (!dailyContext) {
+    manualTurn = await publishLane.enterAsUser({ label: 'multi-account', notify: sendLog });
+    if (!manualTurn.ok) return { success: false, cancelled: manualTurn.code === 'cancelled', message: manualTurn.message };
+  }
   const multiAccountLease = await acquireDirectAutomationLease(
-    `multi-account:${Date.now()}`,
-  );
+    dailyContext ? dailyLeaseOwner(dailyContext.jobId) : `multi-account:${Date.now()}`,
+  ).finally(() => { if (manualTurn?.ok) manualTurn.release(); }); // the lease itself marks the lane busy from here on
   if (!multiAccountLease) {
     return {
       success: false,
@@ -6438,6 +6503,13 @@ ipcMain.handle('multiAccount:publish', handleMultiAccountPublish);
 
 // ✅ 다중계정 발행 즉시 중지 핸들러
 ipcMain.handle('multiAccount:cancel', async () => {
+  // [2026-11-03] Same separation as automation:cancel: a daily post in progress is not the owner's multi-account run.
+  const laneCancel = publishLane.cancelForUser();
+  if (laneCancel.isolated) {
+    const message = '대기 중이던 다중계정 발행을 취소했습니다. 진행 중인 매일 자동발행은 계속됩니다.';
+    sendLog(`🛑 ${message}`);
+    return { success: true, message };
+  }
   sendLog('🛑 다중계정 발행 즉시 중지 요청');
 
   // ✅ [2026-03-11 FIX] 모든 취소 플래그를 동시에 설정하여 즉시 중지
@@ -9140,12 +9212,8 @@ if (!gotTheLock) {
 
     for (const argument of commandLine) handleLdbConnectUrl(argument);
 
-    // 메인 창이 있으면 포커스
-    if (mainWindow) {
-      if (mainWindow.isMinimized()) mainWindow.restore();
-      mainWindow.focus();
-      mainWindow.show();
-    }
+    // 메인 창이 있으면 포커스 — 트레이에 숨겨진 창도 show() 후 focus() 순서로 다시 띄운다
+    trayResidency.showWindow();
 
     // 로그인 창이 있으면 포커스 (✅ [2026-03-11 FIX] 업데이트 중에는 표시 차단)
     if (loginWindow && !loginWindow.isDestroyed() && !isUpdating()) {

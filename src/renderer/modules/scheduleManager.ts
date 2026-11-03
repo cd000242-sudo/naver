@@ -37,14 +37,14 @@ export function showRescheduleModal(postId: string, title: string, onConfirm: (n
     modal.id = 'reschedule-modal';
     modal.style.cssText = `
     position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0, 0, 0, 0.7); display: flex; align-items: center;
+    background: var(--nv-scrim); display: flex; align-items: center;
     justify-content: center; z-index: 10000; backdrop-filter: blur(4px);
   `;
 
     modal.innerHTML = `
-    <div style="background: var(--bg-secondary); border-radius: 16px; padding: 2rem; max-width: 450px; width: 90%; border: 1px solid var(--border-light); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);">
+    <div style="background: var(--bg-secondary); border-radius: 16px; padding: 2rem; max-width: 450px; width: 90%; border: 1px solid var(--border-light); box-shadow: var(--shadow-xl);">
       <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-        <div style="width: 48px; height: 48px; background: rgba(245, 158, 11, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">📅</div>
+        <div style="width: 48px; height: 48px; background: var(--nv-amber-soft); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">📅</div>
         <div>
           <h3 style="margin: 0; color: var(--text-strong); font-size: 1.2rem;">예약 시간 변경</h3>
           <p style="margin: 0.25rem 0 0 0; color: var(--text-muted); font-size: 0.85rem;">${escapeHtml(title)}</p>
@@ -55,7 +55,7 @@ export function showRescheduleModal(postId: string, title: string, onConfirm: (n
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
           <div>
             <label style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">📅 날짜</label>
-            <input type="date" id="reschedule-date" value="${defaultDateOnly}" style="width: 100%; padding: 0.75rem; background: var(--bg-primary); border: 1px solid var(--border-light); border-radius: 8px; color: var(--text-strong); font-size: 0.9rem; color-scheme: dark;">
+            <input type="date" id="reschedule-date" value="${defaultDateOnly}" style="width: 100%; padding: 0.75rem; background: var(--bg-primary); border: 1px solid var(--border-light); border-radius: 8px; color: var(--text-strong); font-size: 0.9rem; color-scheme: light;">
           </div>
           <div>
             <label style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">🕐 시간</label>
@@ -68,7 +68,7 @@ export function showRescheduleModal(postId: string, title: string, onConfirm: (n
         <button type="button" id="reschedule-cancel-btn" style="flex: 1; padding: 0.75rem; background: var(--bg-tertiary); color: var(--text-muted); border: 1px solid var(--border-light); border-radius: 8px; font-weight: 600; cursor: pointer;">
           취소
         </button>
-        <button type="button" id="reschedule-confirm-btn" style="flex: 1; padding: 0.75rem; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+        <button type="button" id="reschedule-confirm-btn" style="flex: 1; padding: 0.75rem; background: var(--nv-amber); color: var(--text-white); border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
           시간 변경
         </button>
       </div>
@@ -144,7 +144,7 @@ export async function initScheduleManagement(): Promise<void> {
             if (!window.api) {
                 console.error('[ScheduleManager] window.api가 정의되지 않았습니다!');
                 scheduledPostsList.innerHTML = `
-          <div style="text-align: center; padding: 3rem; color: #ef4444;">
+          <div style="text-align: center; padding: 3rem; color: var(--nv-red);">
             <div style="font-size: 3rem; margin-bottom: 1rem;">⚠️</div>
             <p style="font-size: 1.1rem;">API가 초기화되지 않았습니다</p>
             <p style="font-size: 0.9rem; margin-top: 0.5rem;">앱을 재시작해주세요</p>
@@ -156,7 +156,7 @@ export async function initScheduleManagement(): Promise<void> {
             if (typeof window.api.getScheduledPosts !== 'function') {
                 console.error('[ScheduleManager] window.api.getScheduledPosts 함수가 없습니다!');
                 scheduledPostsList.innerHTML = `
-          <div style="text-align: center; padding: 3rem; color: #ef4444;">
+          <div style="text-align: center; padding: 3rem; color: var(--nv-red);">
             <div style="font-size: 3rem; margin-bottom: 1rem;">⚠️</div>
             <p style="font-size: 1.1rem;">스케줄 API가 없습니다</p>
             <p style="font-size: 0.9rem; margin-top: 0.5rem;">앱 버전을 확인해주세요</p>
@@ -447,17 +447,17 @@ export function showSchedulePreviewModal(postData: any): void {
 
     let formattedHashtags = '';
     if (postData.hashtags && postData.hashtags.length > 0) {
-        formattedHashtags = postData.hashtags.map((tag: string) => `<span style="display: inline-block; background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(16, 185, 129, 0.05)); color: var(--primary); padding: 0.25rem 0.75rem; border-radius: 6px; margin-right: 0.5rem; margin-bottom: 0.5rem; font-size: 0.9rem;">#${tag}</span>`).join('');
+        formattedHashtags = postData.hashtags.map((tag: string) => `<span style="display: inline-block; background: var(--nv-fill); color: var(--primary); padding: 0.25rem 0.75rem; border-radius: 6px; margin-right: 0.5rem; margin-bottom: 0.5rem; font-size: 0.9rem;">#${tag}</span>`).join('');
     }
 
     const modalHtml = `
-    <div id="schedule-preview-modal" class="modal-backdrop" style="display: flex; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 10000; align-items: center; justify-content: center; backdrop-filter: blur(5px);">
-      <div class="modal-panel" style="background: var(--bg-primary); border: 3px solid var(--border-gold); border-radius: 20px; max-width: 900px; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.3); position: relative; padding: 2rem;">
-        <button type="button" class="close-modal-btn" style="position: absolute; top: 1rem; right: 1rem; background: #ef4444; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 1.5rem; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center;">×</button>
+    <div id="schedule-preview-modal" class="modal-backdrop" style="display: flex; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--nv-scrim); z-index: 10000; align-items: center; justify-content: center; backdrop-filter: blur(5px);">
+      <div class="modal-panel" style="background: var(--bg-primary); border: 3px solid var(--border-gold); border-radius: 20px; max-width: 900px; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-xl); position: relative; padding: 2rem;">
+        <button type="button" class="close-modal-btn" style="position: absolute; top: 1rem; right: 1rem; background: var(--nv-red); color: var(--text-white); border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 1.5rem; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center;">×</button>
         
         <h2 style="font-size: 1.8rem; font-weight: 700; color: var(--text-strong); margin-bottom: 2rem; padding-right: 3rem;">📄 글 미리보기</h2>
         
-        <div style="margin-bottom: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(16, 185, 129, 0.05)); border-radius: 12px; border: 2px solid rgba(59, 130, 246, 0.3);">
+        <div style="margin-bottom: 2rem; padding: 1.5rem; background: var(--nv-fill); border-radius: 12px; border: 2px solid var(--nv-select-line);">
           <h3 style="font-size: 0.9rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.75rem;">📌 제목</h3>
           <p style="font-size: 1.3rem; font-weight: 600; color: var(--text-strong); line-height: 1.6; margin: 0;">${postData.title || '제목 없음'}</p>
         </div>
@@ -477,7 +477,7 @@ export function showSchedulePreviewModal(postData: any): void {
         ` : ''}
 
         <div style="display: flex; justify-content: center; margin-top: 2rem;">
-          <button type="button" class="close-modal-btn" style="padding: 0.875rem 2.5rem; background: linear-gradient(135deg, #6366f1, #4f46e5); color: white; border: none; border-radius: 12px; font-weight: 600; font-size: 1rem; cursor: pointer;">
+          <button type="button" class="close-modal-btn" style="padding: 0.875rem 2.5rem; background: var(--nv-fill); color: var(--text-white); border: none; border-radius: 12px; font-weight: 600; font-size: 1rem; cursor: pointer;">
             닫기
           </button>
         </div>

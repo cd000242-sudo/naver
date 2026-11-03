@@ -849,7 +849,7 @@ export function showScheduleHelpModal(): void {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.8);
+    background: var(--nv-scrim);
     z-index: 99999;
     display: flex;
     align-items: center;
@@ -859,30 +859,30 @@ export function showScheduleHelpModal(): void {
 
   const modal = document.createElement('div');
   modal.style.cssText = `
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    background: var(--nv-card);
     border-radius: 16px;
     padding: 28px;
     max-width: 600px;
     width: 90%;
     max-height: 80vh;
     overflow-y: auto;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #fff;
+    box-shadow: var(--shadow-xl);
+    border: 1px solid var(--nv-line);
+    color: var(--nv-ink);
   `;
 
   modal.innerHTML = `
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-      <h2 style="margin: 0; font-size: 22px; color: #4ade80;">📅 순차 예약 발행 가이드</h2>
-      <button id="close-schedule-help" style="background: none; border: none; color: #fff; font-size: 24px; cursor: pointer; padding: 5px;">&times;</button>
+      <h2 style="margin: 0; font-size: 22px; color: var(--nv-green-text);">📅 순차 예약 발행 가이드</h2>
+      <button id="close-schedule-help" style="background: none; border: none; color: var(--nv-ink); font-size: 24px; cursor: pointer; padding: 5px;">&times;</button>
     </div>
 
-    <div style="background: rgba(74, 222, 128, 0.1); border-left: 4px solid #4ade80; padding: 12px; margin-bottom: 20px; border-radius: 0 8px 8px 0;">
+    <div style="background: var(--nv-green-soft); border-left: 4px solid var(--nv-green-line); padding: 12px; margin-bottom: 20px; border-radius: 0 8px 8px 0;">
       <strong>💡 TIP:</strong> 먼저 발행할 글을 대기열에 추가한 후 예약 설정을 진행하세요!
     </div>
 
     <div style="margin-bottom: 24px;">
-      <h3 style="color: #60a5fa; margin-bottom: 12px; font-size: 16px;">📋 설정 순서</h3>
+      <h3 style="color: var(--nv-blue); margin-bottom: 12px; font-size: 16px;">📋 설정 순서</h3>
       <ol style="margin: 0; padding-left: 20px; line-height: 1.8;">
         <li><strong>발행 큐 세팅</strong> - 발행할 글들을 대기열에 추가</li>
         <li><strong>예약 설정 탭</strong>으로 이동</li>
@@ -891,37 +891,37 @@ export function showScheduleHelpModal(): void {
     </div>
 
     <div style="margin-bottom: 24px;">
-      <h3 style="color: #60a5fa; margin-bottom: 12px; font-size: 16px;">⚙️ 옵션 설명</h3>
+      <h3 style="color: var(--nv-blue); margin-bottom: 12px; font-size: 16px;">⚙️ 옵션 설명</h3>
       
-      <div style="background: rgba(255, 255, 255, 0.05); border-radius: 8px; padding: 14px; margin-bottom: 12px;">
-        <strong style="color: #fbbf24;">📅 예약 시작 일시</strong>
-        <p style="margin: 8px 0 0; color: #d1d5db; font-size: 14px;">
+      <div style="background: var(--nv-sunken); border-radius: 8px; padding: 14px; margin-bottom: 12px;">
+        <strong style="color: var(--nv-amber);">📅 예약 시작 일시</strong>
+        <p style="margin: 8px 0 0; color: var(--nv-ink-3); font-size: 14px;">
           첫 번째 글의 발행 시간.<br>
-          <span style="color: #4ade80;">비워두면 → 현재 시간부터 자동 시작!</span>
+          <span style="color: var(--nv-green-text);">비워두면 → 현재 시간부터 자동 시작!</span>
         </p>
       </div>
 
-      <div style="background: rgba(255, 255, 255, 0.05); border-radius: 8px; padding: 14px; margin-bottom: 12px;">
-        <strong style="color: #fbbf24;">⏱️ 항목별 발행 간격</strong>
-        <p style="margin: 8px 0 0; color: #d1d5db; font-size: 14px;">
+      <div style="background: var(--nv-sunken); border-radius: 8px; padding: 14px; margin-bottom: 12px;">
+        <strong style="color: var(--nv-amber);">⏱️ 항목별 발행 간격</strong>
+        <p style="margin: 8px 0 0; color: var(--nv-ink-3); font-size: 14px;">
           각 글 사이의 시간 간격 설정.<br>
-          예: <code style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">2시간</code> 선택 시 → 10:00, 12:00, 14:00 ...
+          예: <code style="background: var(--nv-sunken); padding: 2px 6px; border-radius: 4px;">2시간</code> 선택 시 → 10:00, 12:00, 14:00 ...
         </p>
       </div>
 
-      <div style="background: rgba(255, 255, 255, 0.05); border-radius: 8px; padding: 14px;">
-        <strong style="color: #fbbf24;">🎲 랜덤 시간 편차 적용</strong>
-        <p style="margin: 8px 0 0; color: #d1d5db; font-size: 14px;">
+      <div style="background: var(--nv-sunken); border-radius: 8px; padding: 14px;">
+        <strong style="color: var(--nv-amber);">🎲 랜덤 시간 편차 적용</strong>
+        <p style="margin: 8px 0 0; color: var(--nv-ink-3); font-size: 14px;">
           체크 시 각 발행에 <strong>±15분</strong> 랜덤 편차 추가.<br>
-          <span style="color: #4ade80;">✓ 봇 감지 방지 효과!</span><br>
+          <span style="color: var(--nv-green-text);">✓ 봇 감지 방지 효과!</span><br>
           예: 2시간 간격 → 실제로 1:45 ~ 2:15 사이로 분산됨
         </p>
       </div>
     </div>
 
-    <div style="background: rgba(96, 165, 250, 0.1); border-left: 4px solid #60a5fa; padding: 12px; border-radius: 0 8px 8px 0;">
+    <div style="background: var(--nv-select-bg); border-left: 4px solid var(--nv-select-line); padding: 12px; border-radius: 0 8px 8px 0;">
       <strong>📊 예시 (5개 글, 2시간 간격, 랜덤 ON)</strong>
-      <div style="font-family: monospace; font-size: 13px; margin-top: 8px; color: #d1d5db;">
+      <div style="font-family: monospace; font-size: 13px; margin-top: 8px; color: var(--nv-ink-3);">
         1번 글: 10:08 (+8분 랜덤)<br>
         2번 글: 11:55 (-5분 랜덤)<br>
         3번 글: 14:12 (+12분 랜덤)<br>
@@ -984,12 +984,12 @@ export function injectScheduleHelpButton(container: Element): void {
       padding: 4px 10px;
       border: none;
       border-radius: 50%;
-      background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
-      color: white;
+      background: var(--nv-fill);
+      color: var(--text-white);
       cursor: pointer;
       font-size: 14px;
       transition: all 0.2s ease;
-      box-shadow: 0 2px 8px rgba(74, 222, 128, 0.3);
+      box-shadow: var(--shadow-md);
     `;
     helpBtn.onmouseover = () => {
       helpBtn.style.transform = 'scale(1.1)';

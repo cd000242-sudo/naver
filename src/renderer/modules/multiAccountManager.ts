@@ -1251,46 +1251,46 @@ async function initMultiAccountPublishModal() {
         const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
         const overlay = document.createElement('div');
         overlay.id = 'ma-random-schedule-modal-overlay';
-        overlay.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 50000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(6px);';
+        overlay.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--nv-scrim); z-index: 50000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(6px);';
         overlay.innerHTML = `
-      <div style="background: var(--bg-primary, #1a1a2e); border: 2px solid rgba(59, 130, 246, 0.4); border-radius: 16px; padding: 1.5rem; max-width: 480px; width: 92%; box-shadow: 0 25px 50px rgba(0,0,0,0.5); max-height: 85vh; overflow-y: auto;">
+      <div style="background: var(--nv-card); border: 2px solid var(--nv-select-line); border-radius: 16px; padding: 1.5rem; max-width: 480px; width: 92%; box-shadow: var(--shadow-xl); max-height: 85vh; overflow-y: auto;">
         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-          <h3 style="margin: 0; color: #60a5fa; font-size: 1.1rem; font-weight: 700;">🎲 랜덤 예약 배분</h3>
-          <button type="button" id="ma-rnd-schedule-close" style="background: none; border: none; color: var(--text-muted, #999); font-size: 1.5rem; cursor: pointer; line-height: 1;">&times;</button>
+          <h3 style="margin: 0; color: var(--nv-blue); font-size: 1.1rem; font-weight: 700;">🎲 랜덤 예약 배분</h3>
+          <button type="button" id="ma-rnd-schedule-close" style="background: none; border: none; color: var(--nv-ink-3); font-size: 1.5rem; cursor: pointer; line-height: 1;">&times;</button>
         </div>
 
         <p style="margin: 0 0 1rem 0; font-size: 0.8rem; color: var(--text-muted); line-height: 1.5;">
-          시작~마감 시간 범위 내에서 대기열 항목들에 <strong style="color: #10b981;">랜덤 예약 시간</strong>을 자동 배분합니다.
+          시작~마감 시간 범위 내에서 대기열 항목들에 <strong style="color: var(--nv-green-text);">랜덤 예약 시간</strong>을 자동 배분합니다.
         </p>
 
         <!-- 시작 시간 -->
         <div style="margin-bottom: 1rem;">
-          <label style="color: #10b981; font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.5rem;">🟢 시작 시간</label>
+          <label style="color: var(--nv-green-text); font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.5rem;">🟢 시작 시간</label>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
             <div>
               <label style="font-size: 0.7rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">날짜 (비워두면 오늘)</label>
               <input type="date" id="ma-rnd-start-date" value=""
-                style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.4); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.85rem; color-scheme: dark;">
+                style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid var(--nv-green-line); background: var(--nv-sunken); color: var(--nv-ink); font-size: 0.85rem; color-scheme: light;">
             </div>
             <div>
               <label style="font-size: 0.7rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">시간</label>
-              ${(0, time24Select_1.createTime24Select)({ id: 'ma-rnd-start-time', defaultValue: '09:00', step: 10, style: 'width: 100%;', selectStyle: 'padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.4); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.85rem; color-scheme: dark; cursor: pointer; flex: 1;' })}
+              ${(0, time24Select_1.createTime24Select)({ id: 'ma-rnd-start-time', defaultValue: '09:00', step: 10, style: 'width: 100%;', selectStyle: 'padding: 0.6rem; border-radius: 8px; border: 1px solid var(--nv-green-line); background: var(--nv-sunken); color: var(--nv-ink); font-size: 0.85rem; color-scheme: light; cursor: pointer; flex: 1;' })}
             </div>
           </div>
         </div>
 
         <!-- 마감 시간 -->
         <div style="margin-bottom: 1rem;">
-          <label style="color: #ef4444; font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.5rem;">🔴 마감 시간</label>
+          <label style="color: var(--nv-red); font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.5rem;">🔴 마감 시간</label>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
             <div>
               <label style="font-size: 0.7rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">날짜 (비워두면 시작일과 동일)</label>
               <input type="date" id="ma-rnd-end-date" value=""
-                style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.4); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.85rem; color-scheme: dark;">
+                style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid var(--nv-red-line); background: var(--nv-sunken); color: var(--nv-ink); font-size: 0.85rem; color-scheme: light;">
             </div>
             <div>
               <label style="font-size: 0.7rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">시간</label>
-              ${(0, time24Select_1.createTime24Select)({ id: 'ma-rnd-end-time', defaultValue: '18:00', step: 10, style: 'width: 100%;', selectStyle: 'padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.4); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.85rem; color-scheme: dark; cursor: pointer; flex: 1;' })}
+              ${(0, time24Select_1.createTime24Select)({ id: 'ma-rnd-end-time', defaultValue: '18:00', step: 10, style: 'width: 100%;', selectStyle: 'padding: 0.6rem; border-radius: 8px; border: 1px solid var(--nv-red-line); background: var(--nv-sunken); color: var(--nv-ink); font-size: 0.85rem; color-scheme: light; cursor: pointer; flex: 1;' })}
             </div>
           </div>
         </div>
@@ -1299,22 +1299,22 @@ async function initMultiAccountPublishModal() {
         <div style="margin-bottom: 1rem;">
           <label style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600; display: block; margin-bottom: 0.5rem;">⚡ 빠른 시간대 설정</label>
           <div style="display: flex; gap: 0.35rem; flex-wrap: wrap;">
-            <button type="button" class="ma-rnd-preset" data-start="09:00" data-end="18:00" style="padding: 0.4rem 0.6rem; background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 6px; color: #60a5fa; cursor: pointer; font-size: 0.75rem; font-weight: 600;">🌅 9-18시</button>
-            <button type="button" class="ma-rnd-preset" data-start="08:00" data-end="22:00" style="padding: 0.4rem 0.6rem; background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 6px; color: #a78bfa; cursor: pointer; font-size: 0.75rem; font-weight: 600;">📅 8-22시</button>
-            <button type="button" class="ma-rnd-preset" data-start="10:00" data-end="14:00" style="padding: 0.4rem 0.6rem; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 6px; color: #f59e0b; cursor: pointer; font-size: 0.75rem; font-weight: 600;">☀️ 10-14시</button>
-            <button type="button" class="ma-rnd-preset" data-start="18:00" data-end="23:00" style="padding: 0.4rem 0.6rem; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 6px; color: #10b981; cursor: pointer; font-size: 0.75rem; font-weight: 600;">🌙 18-23시</button>
+            <button type="button" class="ma-rnd-preset" data-start="09:00" data-end="18:00" style="padding: 0.4rem 0.6rem; background: var(--nv-select-bg); border: 1px solid var(--nv-select-line); border-radius: 6px; color: var(--nv-blue); cursor: pointer; font-size: 0.75rem; font-weight: 600;">🌅 9-18시</button>
+            <button type="button" class="ma-rnd-preset" data-start="08:00" data-end="22:00" style="padding: 0.4rem 0.6rem; background: var(--nv-select-bg); border: 1px solid var(--nv-select-line); border-radius: 6px; color: var(--nv-select-ink); cursor: pointer; font-size: 0.75rem; font-weight: 600;">📅 8-22시</button>
+            <button type="button" class="ma-rnd-preset" data-start="10:00" data-end="14:00" style="padding: 0.4rem 0.6rem; background: var(--nv-amber-soft); border: 1px solid var(--nv-amber-line); border-radius: 6px; color: var(--nv-amber); cursor: pointer; font-size: 0.75rem; font-weight: 600;">☀️ 10-14시</button>
+            <button type="button" class="ma-rnd-preset" data-start="18:00" data-end="23:00" style="padding: 0.4rem 0.6rem; background: var(--nv-green-soft); border: 1px solid var(--nv-green-line); border-radius: 6px; color: var(--nv-green-text); cursor: pointer; font-size: 0.75rem; font-weight: 600;">🌙 18-23시</button>
           </div>
         </div>
 
         <!-- 미리보기 영역 -->
-        <div id="ma-rnd-schedule-preview" style="display: none; margin-bottom: 1rem; padding: 0.75rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; max-height: 150px; overflow-y: auto;">
+        <div id="ma-rnd-schedule-preview" style="display: none; margin-bottom: 1rem; padding: 0.75rem; background: var(--nv-sunken); border: 1px solid var(--nv-line); border-radius: 8px; max-height: 150px; overflow-y: auto;">
           <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 600;">📊 배분 미리보기</div>
           <div id="ma-rnd-schedule-preview-content" style="font-size: 0.75rem; color: var(--text-strong); line-height: 1.6; font-family: monospace;"></div>
         </div>
 
         <div style="display: flex; gap: 0.5rem;">
-          <button type="button" id="ma-rnd-schedule-cancel" style="flex: 1; padding: 0.7rem; background: var(--bg-tertiary, #333); color: var(--text-muted, #999); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.85rem;">취소</button>
-          <button type="button" id="ma-rnd-schedule-apply" style="flex: 2; padding: 0.7rem; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.85rem; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);">🎲 랜덤 예약 적용</button>
+          <button type="button" id="ma-rnd-schedule-cancel" style="flex: 1; padding: 0.7rem; background: var(--nv-sunken); color: var(--nv-ink-3); border: 1px solid var(--nv-line); border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.85rem;">취소</button>
+          <button type="button" id="ma-rnd-schedule-apply" style="flex: 2; padding: 0.7rem; background: var(--nv-fill); color: var(--text-white); border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.85rem; box-shadow: var(--shadow-md);">🎲 랜덤 예약 적용</button>
         </div>
       </div>
     `;
@@ -1376,8 +1376,8 @@ async function initMultiAccountPublishModal() {
                 previewEl.style.display = 'block';
                 previewContent.innerHTML = publishQueue.map((item, i) => {
                     return `<div style="display: flex; gap: 0.5rem; padding: 2px 0;">
-            <span style="color: #60a5fa; min-width: 25px;">#${i + 1}</span>
-            <span style="color: #10b981; font-weight: 600;">${item.scheduleDate} ${item.scheduleTime}</span>
+            <span style="color: var(--nv-blue); min-width: 25px;">#${i + 1}</span>
+            <span style="color: var(--nv-green-text); font-weight: 600;">${item.scheduleDate} ${item.scheduleTime}</span>
             <span style="color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${(item.accountName || item.sourceUrl || item.sourceKeyword || '').substring(0, 20)}...</span>
           </div>`;
                 }).join('');
@@ -1402,7 +1402,7 @@ async function initMultiAccountPublishModal() {
         }
         const overlay = document.createElement('div');
         overlay.id = 'ma-individual-schedule-modal-overlay';
-        overlay.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 50000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(6px);';
+        overlay.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--nv-scrim); z-index: 50000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(6px);';
         const itemRows = publishQueue.map((item, i) => {
             const curDate = item.scheduleDate || '';
             const curTime = item.scheduleTime || '09:00';
@@ -1410,37 +1410,37 @@ async function initMultiAccountPublishModal() {
             const label = item.accountName + (item.sourceUrl ? ` — ${item.sourceUrl}` : item.sourceKeyword ? ` — ${item.sourceKeyword}` : '');
             const shortLabel = label.length > 22 ? label.substring(0, 22) + '...' : label;
             return `
-        <div style="display: grid; grid-template-columns: 30px 1fr auto auto; gap: 0.5rem; align-items: center; padding: 0.5rem 0.6rem; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px;" data-idx="${i}">
-          <input type="checkbox" class="ma-indv-check" data-idx="${i}" ${isScheduled ? 'checked' : ''} style="width: 18px; height: 18px; accent-color: #10b981; cursor: pointer;">
-          <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.8rem; color: var(--text-strong, #fff);" title="${label}">${shortLabel}</div>
-          <input type="date" class="ma-indv-date" data-idx="${i}" value="${curDate}" style="padding: 0.35rem; border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.3); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.8rem; color-scheme: dark; width: 130px;">
-          ${(0, time24Select_1.createTime24Select)({ className: 'ma-indv-time', dataIdx: i, defaultValue: curTime, step: 10, style: 'width: 100px;', selectStyle: 'padding: 0.35rem; border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.3); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.75rem; color-scheme: dark; cursor: pointer;' })}
+        <div style="display: grid; grid-template-columns: 30px 1fr auto auto; gap: 0.5rem; align-items: center; padding: 0.5rem 0.6rem; background: var(--nv-sunken); border: 1px solid var(--nv-line); border-radius: 8px;" data-idx="${i}">
+          <input type="checkbox" class="ma-indv-check" data-idx="${i}" ${isScheduled ? 'checked' : ''} style="width: 18px; height: 18px; accent-color: var(--nv-fill); cursor: pointer;">
+          <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.8rem; color: var(--nv-ink);" title="${label}">${shortLabel}</div>
+          <input type="date" class="ma-indv-date" data-idx="${i}" value="${curDate}" style="padding: 0.35rem; border-radius: 6px; border: 1px solid var(--nv-select-line); background: var(--nv-sunken); color: var(--nv-ink); font-size: 0.8rem; color-scheme: light; width: 130px;">
+          ${(0, time24Select_1.createTime24Select)({ className: 'ma-indv-time', dataIdx: i, defaultValue: curTime, step: 10, style: 'width: 100px;', selectStyle: 'padding: 0.35rem; border-radius: 6px; border: 1px solid var(--nv-select-line); background: var(--nv-sunken); color: var(--nv-ink); font-size: 0.75rem; color-scheme: light; cursor: pointer;' })}
         </div>`;
         }).join('');
         overlay.innerHTML = `
-      <div style="background: var(--bg-primary, #1a1a2e); border: 2px solid rgba(16, 185, 129, 0.4); border-radius: 16px; max-width: 620px; width: 95%; box-shadow: 0 25px 50px rgba(0,0,0,0.5); max-height: 85vh; display: flex; flex-direction: column; overflow: hidden;">
+      <div style="background: var(--nv-card); border: 2px solid var(--nv-green-line); border-radius: 16px; max-width: 620px; width: 95%; box-shadow: var(--shadow-xl); max-height: 85vh; display: flex; flex-direction: column; overflow: hidden;">
         <!-- 헤더 -->
-        <div style="padding: 1rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: space-between;">
-          <h3 style="margin: 0; color: #34d399; font-size: 1.1rem; font-weight: 700;">📋 개별 예약 설정</h3>
-          <button type="button" id="ma-indv-schedule-close" style="background: none; border: none; color: var(--text-muted, #999); font-size: 1.5rem; cursor: pointer; line-height: 1;">&times;</button>
+        <div style="padding: 1rem 1.5rem; border-bottom: 1px solid var(--nv-line); display: flex; align-items: center; justify-content: space-between;">
+          <h3 style="margin: 0; color: var(--nv-green-text); font-size: 1.1rem; font-weight: 700;">📋 개별 예약 설정</h3>
+          <button type="button" id="ma-indv-schedule-close" style="background: none; border: none; color: var(--nv-ink-3); font-size: 1.5rem; cursor: pointer; line-height: 1;">&times;</button>
         </div>
 
         <!-- 전체 선택/해제 + 일괄 설정 -->
-        <div style="padding: 0.75rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+        <div style="padding: 0.75rem 1.5rem; border-bottom: 1px solid var(--nv-line); display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
           <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer; font-size: 0.8rem; color: var(--text-muted);">
-            <input type="checkbox" id="ma-indv-select-all" style="width: 16px; height: 16px; accent-color: #10b981;">
+            <input type="checkbox" id="ma-indv-select-all" style="width: 16px; height: 16px; accent-color: var(--nv-fill);">
             <span>전체 선택</span>
           </label>
           <div style="margin-left: auto; display: flex; align-items: center; gap: 0.4rem;">
             <span style="font-size: 0.75rem; color: var(--text-muted);">선택 항목 일괄:</span>
-            <input type="date" id="ma-indv-bulk-date" style="padding: 0.3rem; border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.3); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.75rem; color-scheme: dark;">
-            ${(0, time24Select_1.createTime24Select)({ id: 'ma-indv-bulk-time', defaultValue: '09:00', step: 10, selectStyle: 'padding: 0.3rem; border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.3); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.7rem; color-scheme: dark; cursor: pointer;' })}
-            <button type="button" id="ma-indv-bulk-apply" style="padding: 0.3rem 0.6rem; background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.4); border-radius: 6px; color: #60a5fa; cursor: pointer; font-size: 0.75rem; font-weight: 600;">적용</button>
+            <input type="date" id="ma-indv-bulk-date" style="padding: 0.3rem; border-radius: 6px; border: 1px solid var(--nv-select-line); background: var(--nv-sunken); color: var(--nv-ink); font-size: 0.75rem; color-scheme: light;">
+            ${(0, time24Select_1.createTime24Select)({ id: 'ma-indv-bulk-time', defaultValue: '09:00', step: 10, selectStyle: 'padding: 0.3rem; border-radius: 6px; border: 1px solid var(--nv-select-line); background: var(--nv-sunken); color: var(--nv-ink); font-size: 0.7rem; color-scheme: light; cursor: pointer;' })}
+            <button type="button" id="ma-indv-bulk-apply" style="padding: 0.3rem 0.6rem; background: var(--nv-select-bg); border: 1px solid var(--nv-select-line); border-radius: 6px; color: var(--nv-blue); cursor: pointer; font-size: 0.75rem; font-weight: 600;">적용</button>
           </div>
         </div>
 
         <!-- 헤더 라벨 -->
-        <div style="padding: 0.4rem 1.5rem; display: grid; grid-template-columns: 30px 1fr auto auto; gap: 0.5rem; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05);">
+        <div style="padding: 0.4rem 1.5rem; display: grid; grid-template-columns: 30px 1fr auto auto; gap: 0.5rem; align-items: center; border-bottom: 1px solid var(--nv-line);">
           <span></span>
           <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 600;">대기열 항목</span>
           <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 600; width: 130px; text-align: center;">날짜</span>
@@ -1453,9 +1453,9 @@ async function initMultiAccountPublishModal() {
         </div>
 
         <!-- 푸터 -->
-        <div style="padding: 0.75rem 1.5rem; border-top: 1px solid rgba(255,255,255,0.08); display: flex; gap: 0.5rem;">
-          <button type="button" id="ma-indv-schedule-cancel" style="flex: 1; padding: 0.7rem; background: var(--bg-tertiary, #333); color: var(--text-muted, #999); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.85rem;">취소</button>
-          <button type="button" id="ma-indv-schedule-save" style="flex: 2; padding: 0.7rem; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.85rem; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">💾 예약 저장</button>
+        <div style="padding: 0.75rem 1.5rem; border-top: 1px solid var(--nv-line); display: flex; gap: 0.5rem;">
+          <button type="button" id="ma-indv-schedule-cancel" style="flex: 1; padding: 0.7rem; background: var(--nv-sunken); color: var(--nv-ink-3); border: 1px solid var(--nv-line); border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.85rem;">취소</button>
+          <button type="button" id="ma-indv-schedule-save" style="flex: 2; padding: 0.7rem; background: var(--nv-fill); color: var(--text-white); border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.85rem; box-shadow: var(--shadow-md);">💾 예약 저장</button>
         </div>
       </div>
     `;
@@ -2423,7 +2423,7 @@ async function initMultiAccountPublishModal() {
         try {
             const modal = document.createElement('div');
             modal.className = 'unified-modal-overlay';
-            modal.style.cssText = `position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 20000; display: flex; align-items: center; justify-content: center;`;
+            modal.style.cssText = `position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--nv-scrim); z-index: 20000; display: flex; align-items: center; justify-content: center;`;
             modal.innerHTML = `
         <div style="background: var(--bg-primary); border-radius: 12px; padding: 1.5rem; max-width: 600px; width: 95%; max-height: 80vh; overflow-y: auto;">
           <h3 style="margin: 0 0 1rem 0; color: var(--text-strong);">🔗 이전 글에서 CTA 데이터 가져오기</h3>
@@ -2853,11 +2853,11 @@ async function initMultiAccountPublishModal() {
             if (!src)
                 return;
             const item = document.createElement('div');
-            item.style.cssText = 'position: relative; aspect-ratio: 1; border-radius: 6px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.3);';
+            item.style.cssText = 'position: relative; aspect-ratio: 1; border-radius: 6px; overflow: hidden; border: 1px solid var(--nv-line); background: var(--nv-sunken);';
             const headingAttr = String(img.heading || '').replace(/"/g, '&quot;');
             item.innerHTML = `
         <img src="${src}" alt="${headingAttr}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" />
-        <div style="position: absolute; top: 0; right: 0; padding: 1px 4px; background: rgba(0,0,0,0.6); font-size: 0.55rem; color: white; border-bottom-left-radius: 4px;">${idx + 1}</div>
+        <div style="position: absolute; top: 0; right: 0; padding: 1px 4px; background: var(--nv-card); font-size: 0.55rem; color: var(--nv-ink); border-bottom-left-radius: 4px;">${idx + 1}</div>
       `;
             grid.appendChild(item);
         });
@@ -2919,10 +2919,10 @@ async function initMultiAccountPublishModal() {
             bar.id = 'ma-floating-progress-bar';
             bar.style.cssText = `
         position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
-        background: linear-gradient(135deg, #1e293b, #0f172a);
-        border-top: 2px solid rgba(59, 130, 246, 0.5);
+        background: var(--nv-card);
+        border-top: 2px solid var(--nv-select-line);
         padding: 10px 20px; cursor: pointer;
-        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+        box-shadow: var(--shadow-md);
         transition: opacity 0.3s, transform 0.3s;
       `;
             bar.innerHTML = `
@@ -2930,14 +2930,14 @@ async function initMultiAccountPublishModal() {
           <div style="font-size: 1.2rem; animation: spin 1s linear infinite;">🔄</div>
           <div style="flex: 1; min-width: 0;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-              <span id="ma-float-text" style="color: #e2e8f0; font-size: 0.85rem; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">다중계정 발행 중...</span>
-              <span id="ma-float-percent" style="color: #60a5fa; font-weight: 700; font-size: 0.9rem; margin-left: 8px; flex-shrink: 0;">0%</span>
+              <span id="ma-float-text" style="color: var(--nv-ink-2); font-size: 0.85rem; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">다중계정 발행 중...</span>
+              <span id="ma-float-percent" style="color: var(--nv-blue); font-weight: 700; font-size: 0.9rem; margin-left: 8px; flex-shrink: 0;">0%</span>
             </div>
-            <div style="height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden;">
-              <div id="ma-float-bar-fill" style="height: 100%; width: 0%; background: linear-gradient(90deg, #3b82f6, #60a5fa); border-radius: 2px; transition: width 0.3s ease;"></div>
+            <div style="height: 4px; background: var(--nv-sunken); border-radius: 2px; overflow: hidden;">
+              <div id="ma-float-bar-fill" style="height: 100%; width: 0%; background: var(--nv-fill); border-radius: 2px; transition: width 0.3s ease;"></div>
             </div>
           </div>
-          <div style="color: #94a3b8; font-size: 0.7rem; flex-shrink: 0; padding: 4px 8px; background: rgba(255,255,255,0.05); border-radius: 4px;">👆 상세보기</div>
+          <div style="color: var(--nv-ink); font-size: 0.7rem; flex-shrink: 0; padding: 4px 8px; background: var(--nv-sunken); border-radius: 4px;">👆 상세보기</div>
         </div>
       `;
             bar.addEventListener('click', () => {
@@ -4569,7 +4569,7 @@ window.openAddAccountModalDirect = function () {
     left: 0 !important;
     width: 100% !important;
     height: 100% !important;
-    background: rgba(0, 0, 0, 0.5) !important;
+    background: var(--nv-scrim);
     z-index: 99999 !important;
     align-items: center !important;
     justify-content: center !important;

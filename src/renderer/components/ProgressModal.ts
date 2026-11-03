@@ -986,7 +986,7 @@ export class ProgressModal {
         targetItem.appendChild(imgEl);
 
         const badge = document.createElement('div');
-        badge.style.cssText = 'position:absolute; top:6px; left:6px; background:rgba(15,23,42,0.82); color:white; font-size:10px; font-weight:800; padding:2px 7px; border-radius:6px; line-height:1.4;';
+        badge.className = 'nv-badge-index';
         badge.textContent = String(index + 1);
 
         const label = document.createElement('div');
@@ -1153,7 +1153,7 @@ export class ProgressModal {
                 mainPreview.style.cursor = 'default';
                 mainPreview.title = '';
                 mainPreview.innerHTML = `
-                    <div style="color: #60a5fa; text-align: center;">
+                    <div class="nv-tone--sel" style="text-align: center;">
                         <div style="font-size: 2.5rem; animation: pulse 1.5s infinite;">⏳</div>
                         <div style="font-size: 0.8rem; margin-top: 6px; opacity: 0.8;">${heading || '이미지 생성 중...'}</div>
                     </div>
@@ -1217,16 +1217,14 @@ export class ProgressModal {
 
             const wrapper = document.createElement('div');
             // ✅ [2026-02-26] 그리드 아이템 fadeIn 애니메이션
-            wrapper.className = 'grid-item-fade-in';
+            // Colors are theme classes (waiting tile = lavender, chosen = purple border); the inline block keeps layout only.
+            wrapper.className = isPlaceholder ? 'grid-item-fade-in nv-tile nv-tile--pending' : 'grid-item-fade-in nv-tile';
             wrapper.style.cssText = `
                 position: relative;
                 aspect-ratio: 1;
                 border-radius: 8px;
                 overflow: hidden;
-                border: 2px solid ${isPlaceholder ? '#3b82f6' : 'var(--border-light)'};
-                background: ${isPlaceholder ? 'linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%)' : 'var(--bg-tertiary)'};
                 cursor: pointer;
-                transition: all 0.2s;
                 animation-delay: ${idx * 0.08}s;
                 opacity: 0;
             `;
@@ -1237,28 +1235,16 @@ export class ProgressModal {
                 if (!isPlaceholder) {
                     updateMainPreview(toFileUrlSafe(src), img.heading || `이미지 ${idx + 1}`, false, idx);
                     // 선택된 그리드 아이템 하이라이트
-                    grid.querySelectorAll('div').forEach(d => {
-                        if ((d as HTMLElement).style.borderColor === 'rgb(59, 130, 246)' && d !== wrapper) {
-                            (d as HTMLElement).style.borderColor = 'var(--border-light)';
-                        }
-                    });
-                    wrapper.style.borderColor = '#3b82f6';
+                    grid.querySelectorAll('.nv-tile--chosen').forEach(d => d.classList.remove('nv-tile--chosen'));
+                    wrapper.classList.add('nv-tile--chosen');
                 }
             };
 
-            // 호버 효과
-            wrapper.onmouseenter = () => {
-                wrapper.style.transform = 'scale(1.05)';
-                wrapper.style.boxShadow = '0 4px 12px rgba(59, 130, 246, 0.3)';
-            };
-            wrapper.onmouseleave = () => {
-                wrapper.style.transform = 'scale(1)';
-                wrapper.style.boxShadow = 'none';
-            };
+            // 호버 효과는 .nv-tile:hover (theme-naver-components.css)
 
             if (isPlaceholder) {
                 wrapper.innerHTML = `
-                    <div style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #60a5fa; gap: 4px;">
+                    <div style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;" class="nv-tone--sel">
                         <div style="font-size: 1.2rem; animation: pulse 1.5s infinite;">⏳</div>
                         <div style="font-size: 0.6rem; opacity: 0.7; text-align: center; padding: 0 4px;">${(img.heading || '').substring(0, 8)}</div>
                     </div>
@@ -1500,45 +1486,28 @@ export class ProgressModal {
 
     private renderProgressStatusTile(targetItem: HTMLElement, heading: string, index: number, selected: boolean = false): void {
         targetItem.innerHTML = '';
-        targetItem.style.background = selected
-            ? 'linear-gradient(135deg, rgba(16,185,129,0.24), rgba(59,130,246,0.18))'
-            : 'linear-gradient(135deg, rgba(15,23,42,0.96), rgba(30,41,59,0.88))';
+        // Colors are theme classes (waiting = lavender, selected = green tint), never inline.
+        targetItem.classList.add('nv-tile');
+        targetItem.classList.toggle('nv-tile--done', selected);
+        targetItem.classList.toggle('nv-tile--pending', !selected);
 
         const badge = document.createElement('div');
-        badge.style.cssText = `
-            position: absolute; top: 5px; left: 5px;
-            background: ${index === 0 ? '#3b82f6' : 'rgba(0, 0, 0, 0.65)'};
-            color: white; font-size: 9px; font-weight: 800;
-            padding: 1px 6px; border-radius: 4px; line-height: 1.5;
-        `;
+        badge.className = index === 0 ? 'nv-badge-index nv-badge-index--lead' : 'nv-badge-index';
+        badge.style.cssText = 'top: 5px; left: 5px; font-size: 9px;';
         badge.textContent = index === 0 ? '대표' : `${index}`;
 
         const check = document.createElement('div');
-        check.style.cssText = `
-            position: absolute; right: 5px; top: 5px;
-            width: 18px; height: 18px; border-radius: 999px;
-            display: flex; align-items: center; justify-content: center;
-            background: #10b981; color: white; font-size: 12px; font-weight: 900;
-            box-shadow: 0 2px 8px rgba(16,185,129,0.35);
-        `;
+        check.className = 'nv-slot__check';
+        check.style.cssText = 'right: 5px; top: 5px; bottom: auto; width: 18px; height: 18px; font-size: 12px; font-weight: 900;';
         check.textContent = '✓';
 
         const icon = document.createElement('div');
-        icon.style.cssText = `
-            position: absolute; inset: 0 0 24px 0;
-            display: flex; align-items: center; justify-content: center;
-            color: #93c5fd; font-size: 1.35rem; opacity: 0.95;
-        `;
+        icon.className = 'nv-tone--sel';
+        icon.style.cssText = 'position: absolute; inset: 0 0 24px 0; display: flex; align-items: center; justify-content: center; font-size: 1.35rem;';
         icon.textContent = '🖼️';
 
         const label = document.createElement('div');
-        label.style.cssText = `
-            position: absolute; bottom: 0; left: 0; right: 0;
-            color: white; font-size: 8px; font-weight: 700;
-            padding: 5px 4px; text-align: center;
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-            background: rgba(0,0,0,0.45);
-        `;
+        label.className = 'nv-tile__label';
         label.textContent = heading.substring(0, 14);
 
         targetItem.appendChild(badge);
@@ -1567,7 +1536,7 @@ export class ProgressModal {
             </div>
         `;
         mainPreview.style.position = 'relative';
-        mainPreview.style.borderColor = '#10b981';
+        mainPreview.style.borderColor = 'var(--nv-fill)';
         mainPreview.style.cursor = 'zoom-in';
         mainPreview.title = '클릭하면 크게 볼 수 있습니다';
         mainPreview.onclick = () => {

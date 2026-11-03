@@ -29,7 +29,7 @@ const RETIRED_IMAGE_ENGINE_LABELS: Readonly<Record<string, string>> = {
 const RETIRED_ENGINE_PENDING_KEY = 'retiredImageEnginePending';
 
 /** 사용자가 새로 고를 수 있는 엔진 (#image-source-select 에 남은 값과 같다) */
-const RETIRED_ENGINE_CHOICES: readonly string[] = ['nano-banana-2', 'openai-image', 'flow', 'dropshot', 'genspark'];
+const RETIRED_ENGINE_CHOICES: readonly string[] = ['nano-banana-2', 'openai-image', 'flow', 'dropshot', 'genspark', 'codex-image'];
 
 /** 엔진을 고르면 함께 맞춰 저장하는 메인 키 */
 const RETIRED_ENGINE_MAIN_KEYS: readonly string[] = ['fullAutoImageSource', 'globalImageSource', 'scAIImageEngine'];

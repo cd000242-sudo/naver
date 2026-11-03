@@ -17,7 +17,7 @@ interface Dependencies {
 }
 const writers = ['gemini', 'openai', 'claude', 'perplexity', 'agent-codex', 'agent-claude', 'agent-gemini'];
 export const DAILY_WRITERS = writers;
-export const DAILY_IMAGE_PROVIDERS = ['imagefx', 'genspark', 'flow', 'dropshot', 'openai-image', 'nano-banana-2', 'nano-banana-pro', 'gemini', 'imagen', 'pexels', 'unsplash'];
+export const DAILY_IMAGE_PROVIDERS = ['imagefx', 'genspark', 'flow', 'dropshot', 'codex-image', 'openai-image', 'nano-banana-2', 'nano-banana-pro', 'gemini', 'imagen', 'pexels', 'unsplash'];
 /**
  * What the setup screen offers: free engines first, then the paid engines the generator actually routes.
  * Older ids stay valid so saved plans still load, but are not offered — ImageFX was closed by Google
@@ -28,6 +28,7 @@ const DAILY_IMAGE_CHOICES = [
   { id: 'flow', label: 'Flow (구글 무료 · 추천)' },
   { id: 'genspark', label: '젠스파크 (구독 무료 할당량)' },
   { id: 'dropshot', label: '리더스 나노바나나 무제한 (구독자 0원)' },
+  { id: 'codex-image', label: 'Codex 구독 이미지 (GPT 이미지 · 별도 비용 없음)' },
   { id: 'nano-banana-2', label: '나노바나나2 (API 키 · 유료)' },
   { id: 'openai-image', label: 'OpenAI 이미지 (API 키 · 유료)' },
 ];

@@ -79,7 +79,7 @@ function ensureLockModalDom(): HTMLElement {
     'position: fixed',
     'inset: 0',
     'z-index: 10020',
-    'background: rgba(0,0,0,0.65)',
+    'background: var(--nv-scrim)',
     'backdrop-filter: blur(6px)',
     '-webkit-backdrop-filter: blur(6px)',
     'align-items: center',
@@ -89,20 +89,20 @@ function ensureLockModalDom(): HTMLElement {
 
   modal.innerHTML = `
     <div id="feature-lock-card"
-      style="position: relative; max-width: 500px; width: 100%; background: linear-gradient(155deg, #0f172a 0%, #1e293b 60%, #1e1b4b 100%); border: 1px solid rgba(255,215,0,0.25); border-radius: 20px; box-shadow: 0 30px 80px rgba(0,0,0,0.7), 0 0 60px rgba(255,215,0,0.08); overflow: hidden;">
+      style="position: relative; max-width: 500px; width: 100%; background: var(--nv-card); border: 1px solid rgba(255,215,0,0.25); border-radius: 20px; box-shadow: var(--shadow-xl); overflow: hidden;">
 
       <!-- 닫기 (작게, 강제 아님) -->
       <button id="feature-lock-close"
-        style="position: absolute; top: 14px; right: 14px; z-index: 2; width: 32px; height: 32px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 50%; color: rgba(255,255,255,0.7); font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;" title="닫기">✕</button>
+        style="position: absolute; top: 14px; right: 14px; z-index: 2; width: 32px; height: 32px; background: var(--nv-sunken); border: 1px solid var(--nv-line); border-radius: 50%; color: var(--nv-ink-2); font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;" title="닫기">✕</button>
 
       <!-- 헤더: 잠금 아이콘 + Pro 뱃지 -->
       <div style="padding: 32px 32px 16px 32px; text-align: center;">
-        <div style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; background: rgba(255,215,0,0.12); border: 1px solid rgba(255,215,0,0.35); border-radius: 50px; font-size: 12px; font-weight: 700; color: #ffd700; margin-bottom: 18px; letter-spacing: 1px;">
+        <div style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; background: var(--nv-sunken); border: 1px solid rgba(255,215,0,0.35); border-radius: 50px; font-size: 12px; font-weight: 700; color: #ffd700; margin-bottom: 18px; letter-spacing: 1px;">
           <span>🔒</span><span>PRO 전용 기능</span>
         </div>
         <h2 id="feature-lock-title"
-          style="margin: 0 0 6px 0; font-size: 24px; font-weight: 900; color: #f1f5f9; line-height: 1.3;">기능 잠금</h2>
-        <p style="margin: 0; font-size: 13px; color: #94a3b8;">현재 무료 체험판에서는 잠시 사용할 수 없어요</p>
+          style="margin: 0 0 6px 0; font-size: 24px; font-weight: 900; color: var(--nv-ink); line-height: 1.3;">기능 잠금</h2>
+        <p style="margin: 0; font-size: 13px; color: var(--nv-ink);">현재 무료 체험판에서는 잠시 사용할 수 없어요</p>
       </div>
 
       <!-- 가치 포인트 -->
@@ -114,23 +114,23 @@ function ensureLockModalDom(): HTMLElement {
       <!-- 사회적 증명 -->
       <div style="padding: 0 32px 22px 32px;">
         <div id="feature-lock-proof"
-          style="padding: 12px 16px; background: linear-gradient(135deg, rgba(102,126,234,0.12), rgba(118,75,162,0.10)); border: 1px solid rgba(102,126,234,0.25); border-radius: 10px; font-size: 13px; color: #cbd5e1; text-align: center; font-weight: 500;"></div>
+          style="padding: 12px 16px; background: var(--nv-fill); border: 1px solid var(--nv-select-line); border-radius: 10px; font-size: 13px; color: var(--nv-ink-2); text-align: center; font-weight: 500;"></div>
       </div>
 
       <!-- CTA 영역 -->
       <div style="padding: 0 32px 24px 32px; display: flex; flex-direction: column; gap: 12px;">
         <a id="feature-lock-cta-main" href="${PRICING_URL}" target="_blank" rel="noopener"
-          style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 16px; background: linear-gradient(135deg, #ffd700 0%, #ffb700 100%); color: #000; font-size: 15px; font-weight: 800; text-decoration: none; border-radius: 12px; transition: all 0.2s; box-shadow: 0 8px 24px rgba(255,215,0,0.25);">
+          style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 16px; background: var(--nv-sunken); color: var(--nv-ink); font-size: 15px; font-weight: 800; text-decoration: none; border-radius: 12px; transition: all 0.2s; box-shadow: var(--shadow-md);">
           <span>Pro 구독하고 잠금 해제</span><span style="font-size: 18px;">→</span>
         </a>
         <a id="feature-lock-cta-kakao" href="${KAKAO_URL}" target="_blank" rel="noopener"
-          style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px; color: rgba(255,255,255,0.65); font-size: 12px; text-decoration: none; transition: color 0.2s;">
+          style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px; color: var(--nv-ink-2); font-size: 12px; text-decoration: none; transition: color 0.2s;">
           <span>💬</span><span>먼저 카카오톡으로 문의하기</span>
         </a>
       </div>
 
       <!-- 소프트 안내 -->
-      <div style="padding: 14px 32px; background: rgba(0,0,0,0.25); border-top: 1px solid rgba(255,255,255,0.05); font-size: 11px; color: #64748b; text-align: center; line-height: 1.5;">
+      <div style="padding: 14px 32px; background: var(--nv-sunken); border-top: 1px solid var(--nv-line); font-size: 11px; color: var(--nv-ink); text-align: center; line-height: 1.5;">
         💡 무료 체험판은 단일 발행과 반자동 다중계정 발행을 매일 3회까지 사용할 수 있어요
       </div>
     </div>
@@ -192,10 +192,10 @@ function ensureLockModalDom(): HTMLElement {
 
   const kakaoCta = document.getElementById('feature-lock-cta-kakao');
   kakaoCta?.addEventListener('mouseenter', () => {
-    if (kakaoCta) kakaoCta.style.color = 'rgba(255,255,255,0.9)';
+    if (kakaoCta) kakaoCta.style.color = 'var(--nv-ink)';
   });
   kakaoCta?.addEventListener('mouseleave', () => {
-    if (kakaoCta) kakaoCta.style.color = 'rgba(255,255,255,0.65)';
+    if (kakaoCta) kakaoCta.style.color = 'var(--nv-ink-3)';
   });
 
   return modal;
@@ -212,7 +212,7 @@ function showLockModal(featureKey: LockFeatureKey): void {
   const pointsEl = document.getElementById('feature-lock-points');
   if (pointsEl) {
     pointsEl.innerHTML = copy.valuePoints.map(p => `
-      <li style="display: flex; align-items: start; gap: 10px; padding: 10px 14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; font-size: 13.5px; color: #e2e8f0; line-height: 1.5;">
+      <li style="display: flex; align-items: start; gap: 10px; padding: 10px 14px; background: var(--nv-sunken); border: 1px solid var(--nv-line); border-radius: 10px; font-size: 13.5px; color: var(--nv-ink-2); line-height: 1.5;">
         <span style="flex-shrink: 0; color: #ffd700; margin-top: 1px;">✓</span>
         <span>${escapeHtml(p)}</span>
       </li>

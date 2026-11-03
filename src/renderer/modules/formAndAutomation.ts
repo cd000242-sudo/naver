@@ -439,34 +439,32 @@ const aiProgressModal = {
     if (document.getElementById('ai-progress-modal')) return;
 
     const modalHtml = `
-      <div id="ai-progress-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 9999999; justify-content: center; align-items: center; flex-direction: column; backdrop-filter: blur(5px);">
-        <div style="background: linear-gradient(145deg, #1e1e24, #2a2a35); padding: 2.5rem; border-radius: 20px; width: 90%; max-width: 500px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.1); text-align: center; position: relative;">
-          
-          <div style="position: absolute; top: 15px; right: 15px; display: flex; gap: 8px; align-items: center;">
-            <button id="ai-progress-minimize" style="background: transparent; border: none; color: rgba(255,255,255,0.5); font-size: 1.2rem; cursor: pointer; transition: color 0.2s; padding: 0 4px;" title="최소화">⬇</button>
-            <button id="ai-progress-close-x" style="background: transparent; border: none; color: rgba(255,255,255,0.5); font-size: 1.5rem; cursor: pointer; transition: color 0.2s;">✕</button>
+      <div id="ai-progress-modal" class="nv-scrim" style="display: none; z-index: 9999999;">
+        <div class="nv-modal nv-modal--center">
+
+          <div class="nv-modal__corner">
+            <button id="ai-progress-minimize" class="nv-icon-btn" title="최소화">⬇</button>
+            <button id="ai-progress-close-x" class="nv-icon-btn">✕</button>
           </div>
-          
+
           <div style="font-size: 3rem; margin-bottom: 1rem; animation: float 3s ease-in-out infinite;" id="ai-progress-icon">🤖</div>
-          
-          <h3 id="ai-progress-title" style="color: #fff; font-size: 1.5rem; margin: 0 0 1rem 0; font-weight: 700;">AI 글 생성 중...</h3>
-          
-          <div style="width: 100%; height: 8px; background: rgba(255, 255, 255, 0.1); border-radius: 4px; overflow: hidden; margin-bottom: 1.5rem; position: relative;">
-            <div id="ai-progress-bar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #3b82f6, #8b5cf6); border-radius: 4px; transition: width 0.3s ease; box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);"></div>
+
+          <h3 id="ai-progress-title" class="nv-modal__title" style="font-size: 1.5rem; margin-bottom: 1rem;">AI 글 생성 중...</h3>
+
+          <div class="nv-progress" style="margin-bottom: 1.5rem;">
+            <div id="ai-progress-bar" class="nv-progress__bar"></div>
           </div>
-          
-          <div style="display: flex; justify-content: space-between; color: #a1a1aa; font-size: 0.85rem; margin-bottom: 1.5rem;">
+
+          <div class="nv-meta">
             <span id="ai-progress-step">준비 중...</span>
             <span id="ai-progress-percent">0%</span>
           </div>
-          
-          <div id="ai-progress-log" style="background: rgba(0, 0, 0, 0.45); border-radius: 12px; padding: 1rem; height: 250px; overflow-y: auto; text-align: left; font-family: 'Courier New', 'Consolas', monospace; font-size: 0.78rem; color: #d4d4d8; margin-bottom: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.08); scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.15) transparent;">
-            <div style="color: #6b7280;">⏳ 터미널 로그 대기 중...</div>
+
+          <div id="ai-progress-log" class="nv-log" style="height: 250px; text-align: left; font-size: 0.78rem; margin-bottom: 1.5rem;">
+            <div class="nv-log__line">⏳ 터미널 로그 대기 중...</div>
           </div>
-          
-          <button id="ai-progress-cancel" style="background: rgba(255, 255, 255, 0.1); border: none; color: #fff; padding: 0.75rem 1.5rem; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-size: 0.9rem; font-weight: 500;">
-            🚫 취소하기
-          </button>
+
+          <button id="ai-progress-cancel" class="nv-btn">🚫 취소하기</button>
         </div>
       </div>
     `;
@@ -563,10 +561,6 @@ const aiProgressModal = {
       }
     });
 
-    // Hover effect for close button
-    closeXBtn?.addEventListener('mouseenter', () => { closeXBtn.style.color = '#fff'; });
-    closeXBtn?.addEventListener('mouseleave', () => { closeXBtn.style.color = 'rgba(255,255,255,0.5)'; });
-
     // ✅ [2026-03-09] 최소화 버튼
     const minimizeBtn = document.getElementById('ai-progress-minimize');
     if (minimizeBtn && !minimizeBtn.hasAttribute('data-listener-added')) {
@@ -576,8 +570,6 @@ const aiProgressModal = {
         this.showFab();
         console.log('[aiProgressModal] ⬇ 최소화 → FAB 표시');
       });
-      minimizeBtn.addEventListener('mouseenter', () => { minimizeBtn.style.color = '#fff'; });
-      minimizeBtn.addEventListener('mouseleave', () => { minimizeBtn.style.color = 'rgba(255,255,255,0.5)'; });
     }
   },
 
@@ -748,20 +740,19 @@ const aiProgressModal = {
       // ✅ [2026-03-07] 터미널 스타일 로그: 타임스탬프 + 컬러 코딩 + 엔트리 제한
       const timestamp = new Date().toLocaleTimeString('ko-KR', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
 
-      // 컬러 코딩
-      let color = '#d4d4d8';
-      if (message.includes('✅') || message.includes('완료')) color = '#10b981';
-      else if (message.includes('❌') || message.includes('실패') || message.includes('오류')) color = '#ef4444';
-      else if (message.includes('⚠️') || message.includes('건너뛰기')) color = '#f59e0b';
-      else if (message.includes('🤖') || message.includes('AI') || message.includes('Gemini')) color = '#8b5cf6';
-      else if (message.includes('🚀') || message.includes('시작')) color = '#3b82f6';
-      else if (message.includes('🖼️') || message.includes('이미지')) color = '#60a5fa';
+      // 컬러 코딩 — tone is a theme class (theme-naver-components.css), not an inline color
+      let tone = '';
+      if (message.includes('✅') || message.includes('완료')) tone = 'ok';
+      else if (message.includes('❌') || message.includes('실패') || message.includes('오류')) tone = 'err';
+      else if (message.includes('⚠️') || message.includes('건너뛰기')) tone = 'warn';
+      else if (message.includes('🤖') || message.includes('AI') || message.includes('Gemini')) tone = 'ai';
+      else if (message.includes('🚀') || message.includes('시작') || message.includes('🖼️') || message.includes('이미지')) tone = 'info';
 
       const logItem = document.createElement('div');
-      logItem.style.cssText = `margin-top: 3px; line-height: 1.5; border-bottom: 1px solid rgba(255,255,255,0.03); padding-bottom: 2px;`;
+      logItem.className = tone ? `nv-log__line nv-log__line--${tone}` : 'nv-log__line';
       // HTML 이스케이프 (XSS 방지)
       const safe = message.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-      logItem.innerHTML = `<span style="color: rgba(255,255,255,0.3); font-size: 0.7rem; margin-right: 6px;">[${timestamp}]</span><span style="color: ${color}">${safe}</span>`;
+      logItem.innerHTML = `<span class="nv-log__time">[${timestamp}]</span><span>${safe}</span>`;
 
       this.progressLog.appendChild(logItem);
 

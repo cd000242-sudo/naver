@@ -9,28 +9,28 @@ declare const toastManager: any;
 
 // 네이버 카테고리 매핑 (플랫폼 전환 시 카테고리 변경)
 const NAVER_CATEGORY_OPTIONS = `
-  <option value="all" style="background:#1a1a2e;">🔥 전체 인기상품</option>
-  <option value="fashion" style="background:#1a1a2e;">👗 패션의류</option>
-  <option value="beauty" style="background:#1a1a2e;">💄 화장품/미용</option>
-  <option value="digital" style="background:#1a1a2e;">📱 디지털/가전</option>
-  <option value="food" style="background:#1a1a2e;">🍔 식품</option>
-  <option value="living" style="background:#1a1a2e;">🏠 생활/건강</option>
-  <option value="baby" style="background:#1a1a2e;">👶 출산/육아</option>
-  <option value="sports" style="background:#1a1a2e;">⚽ 스포츠/레저</option>
+  <option value="all" style="background: var(--nv-card);">🔥 전체 인기상품</option>
+  <option value="fashion" style="background: var(--nv-card);">👗 패션의류</option>
+  <option value="beauty" style="background: var(--nv-card);">💄 화장품/미용</option>
+  <option value="digital" style="background: var(--nv-card);">📱 디지털/가전</option>
+  <option value="food" style="background: var(--nv-card);">🍔 식품</option>
+  <option value="living" style="background: var(--nv-card);">🏠 생활/건강</option>
+  <option value="baby" style="background: var(--nv-card);">👶 출산/육아</option>
+  <option value="sports" style="background: var(--nv-card);">⚽ 스포츠/레저</option>
 `;
 
 const COUPANG_CATEGORY_OPTIONS = `
-  <option value="all" style="background:#1a1a2e;">🏆 전체 베스트</option>
-  <option value="electronics" style="background:#1a1a2e;">📱 가전·디지털</option>
-  <option value="fashion" style="background:#1a1a2e;">👗 패션의류</option>
-  <option value="beauty" style="background:#1a1a2e;">💄 뷰티</option>
-  <option value="food" style="background:#1a1a2e;">🍔 식품</option>
-  <option value="home" style="background:#1a1a2e;">🏠 홈·인테리어</option>
-  <option value="sports" style="background:#1a1a2e;">⚽ 스포츠·레저</option>
-  <option value="baby" style="background:#1a1a2e;">👶 출산·유아동</option>
-  <option value="pet" style="background:#1a1a2e;">🐕 반려동물</option>
-  <option value="kitchen" style="background:#1a1a2e;">🍳 주방용품</option>
-  <option value="health" style="background:#1a1a2e;">💊 건강·의료</option>
+  <option value="all" style="background: var(--nv-card);">🏆 전체 베스트</option>
+  <option value="electronics" style="background: var(--nv-card);">📱 가전·디지털</option>
+  <option value="fashion" style="background: var(--nv-card);">👗 패션의류</option>
+  <option value="beauty" style="background: var(--nv-card);">💄 뷰티</option>
+  <option value="food" style="background: var(--nv-card);">🍔 식품</option>
+  <option value="home" style="background: var(--nv-card);">🏠 홈·인테리어</option>
+  <option value="sports" style="background: var(--nv-card);">⚽ 스포츠·레저</option>
+  <option value="baby" style="background: var(--nv-card);">👶 출산·유아동</option>
+  <option value="pet" style="background: var(--nv-card);">🐕 반려동물</option>
+  <option value="kitchen" style="background: var(--nv-card);">🍳 주방용품</option>
+  <option value="health" style="background: var(--nv-card);">💊 건강·의료</option>
 `;
 
 export function initBestProductModal(): void {
@@ -224,7 +224,7 @@ function renderProducts(products: any[], categoryName: string, platform: string)
       <div class="bp-summary-item">📦 <strong>${products.length}</strong>개 수집</div>
       <div class="bp-summary-item">⏰ ${timeStr} 기준</div>
       <div class="bp-summary-item" style="margin-left:auto;">
-        <span style="font-size:0.7rem;color:rgba(255,255,255,0.3);">💡 상품 클릭 → URL 자동 입력 → 바로 글 생성</span>
+        <span style="font-size:0.7rem;color: var(--nv-ink-3);">💡 상품 클릭 → URL 자동 입력 → 바로 글 생성</span>
       </div>
     </div>
   `;
@@ -244,7 +244,7 @@ function renderProducts(products: any[], categoryName: string, platform: string)
         <div class="bp-card-rank ${rankClass}">${index + 1}위</div>
         ${imgSrc 
           ? `<img class="bp-card-img" src="${escapeHtml(imgSrc)}" alt="${name}" loading="lazy" onerror="this.style.display='none';">`
-          : `<div class="bp-card-img" style="display:flex;align-items:center;justify-content:center;font-size:2rem;color:rgba(255,255,255,0.2);">🛒</div>`
+          : `<div class="bp-card-img" style="display:flex;align-items:center;justify-content:center;font-size:2rem;color: var(--nv-ink-3);">🛒</div>`
         }
         <div class="bp-card-body">
           <div class="bp-card-name">${name}</div>

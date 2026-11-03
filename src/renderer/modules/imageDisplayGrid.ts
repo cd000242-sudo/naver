@@ -642,13 +642,13 @@ function showHeadingSelectionModal(image: any, imageIndex: number, headings: any
   const modal = document.createElement('div');
   modal.style.cssText = `
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.7); z-index: 10000; display: flex;
+    background: var(--nv-scrim); z-index: 10000; display: flex;
     align-items: center; justify-content: center; padding: 2rem;
   `;
 
   modal.innerHTML = `
-    <div style="background: var(--bg-primary); border-radius: 12px; padding: 2rem; max-width: 600px; max-height: 90vh; overflow-y: auto; box-shadow: 0 8px 32px rgba(0,0,0,0.3); position: relative;">
-      <button type="button" class="close-heading-modal-btn" style="position: absolute; top: 1rem; right: 1rem; background: rgba(239, 68, 68, 0.9); color: white; border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.3); transition: all 0.2s;" onmouseover="this.style.background='rgba(220, 38, 38, 1)'; this.style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(239, 68, 68, 0.9)'; this.style.transform='scale(1)';">✕</button>
+    <div style="background: var(--bg-primary); border-radius: 12px; padding: 2rem; max-width: 600px; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-xl); position: relative;">
+      <button type="button" class="close-heading-modal-btn" style="position: absolute; top: 1rem; right: 1rem; background: var(--nv-red); color: var(--text-white); border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: var(--shadow-md); transition: all 0.2s;" onmouseover="this.style.background='rgba(220, 38, 38, 1)'; this.style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(239, 68, 68, 0.9)'; this.style.transform='scale(1)';">✕</button>
       <h2 style="margin: 0 0 1rem 0; color: var(--text-strong); font-size: 1.5rem;">📝 소제목 선택</h2>
       <div style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1.5rem;">
         이 이미지를 사용할 소제목을 선택해주세요.
@@ -683,7 +683,7 @@ function showHeadingSelectionModal(image: any, imageIndex: number, headings: any
       </div>
       
       <div style="display: flex; gap: 0.5rem;">
-        <button type="button" class="confirm-heading-selection-btn" style="flex: 1; padding: 0.75rem; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">✅ 선택 완료</button>
+        <button type="button" class="confirm-heading-selection-btn" style="flex: 1; padding: 0.75rem; background: var(--primary); color: var(--nv-ink); border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">✅ 선택 완료</button>
         <button type="button" class="close-heading-modal-btn" style="flex: 1; padding: 0.75rem; background: var(--bg-tertiary); color: var(--text-strong); border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer; font-weight: 600;">취소</button>
       </div>
     </div>
@@ -771,7 +771,7 @@ async function applyImageToHeading(image: any, headingTitle: string, headingInde
 //   (Before: nano-banana-2 / nano-banana / flow / imagefx / dropshot fell through to a NAVER search.)
 const IMAGE_REGENERATE_ENGINES = new Set([
   'nano-banana-2', 'nano-banana-pro', 'nano-banana', 'flow', 'imagefx', 'dropshot', 'genspark',
-  'openai-image', 'naver', 'collect-photos',
+  'openai-image', 'naver', 'collect-photos', 'codex-image',
 ]);
 
 export type ImageRegenerateRoute =

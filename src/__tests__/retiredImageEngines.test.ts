@@ -128,8 +128,8 @@ describe('resolveRetiredImageEngineChoice — 사용자가 고르면 그때 저�
     expect(none.getItem('localFolderFallbackEngine')).toBeNull();
   });
 
-  it('고를 수 있는 엔진은 화면에 남은 5종과 같다', () => {
-    expect([...retiredImageEngineChoices()].sort()).toEqual(['dropshot', 'flow', 'genspark', 'nano-banana-2', 'openai-image']);
+  it('고를 수 있는 엔진은 화면에 남은 6종과 같다 (2026-11-03 Codex 구독 이미지 추가)', () => {
+    expect([...retiredImageEngineChoices()].sort()).toEqual(['codex-image', 'dropshot', 'flow', 'genspark', 'nano-banana-2', 'openai-image']);
   });
 });
 

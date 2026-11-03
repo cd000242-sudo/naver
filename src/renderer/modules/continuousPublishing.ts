@@ -887,7 +887,7 @@ export function toggleContinuousModeModal(): void {
       left: 0 !important;
       width: 100vw !important;
       height: 100vh !important;
-      background: rgba(0, 0, 0, 0.85) !important;
+      background: var(--nv-scrim);
       z-index: 10006 !important;
       justify-content: center !important;
       align-items: center !important;
@@ -940,7 +940,7 @@ export function toggleContinuousModeModal(): void {
             left: 0 !important;
             width: 100vw !important;
             height: 100vh !important;
-            background: rgba(0, 0, 0, 0.9) !important;
+            background: var(--nv-scrim);
             z-index: 10007 !important;
             justify-content: center !important;
             align-items: center !important;
@@ -1765,7 +1765,7 @@ export function initContinuousPublishingV2(): void {
           defaultValue: '09:00',
           step: 10,
           style: 'width: 100%;',
-          selectStyle: 'width: 48%; padding: 0.5rem; border-radius: 6px; border: 1px solid var(--border-medium); background: var(--bg-secondary); color: var(--text-strong); font-size: 0.85rem; color-scheme: dark; cursor: pointer;',
+          selectStyle: 'width: 48%; padding: 0.5rem; border-radius: 6px; border: 1px solid var(--border-medium); background: var(--bg-secondary); color: var(--text-strong); font-size: 0.85rem; color-scheme: light; cursor: pointer;',
         });
         bindTime24Events(timeWrap);
       }
@@ -2736,7 +2736,7 @@ async function showContinuousPrevPostModal(): Promise<void> {
   try {
     const modal = document.createElement('div');
     modal.className = 'unified-modal-overlay';
-    modal.style.cssText = `position: fixed; top: 0; left: 0; width: 100 %; height: 100 %; background: rgba(0, 0, 0, 0.7); z - index: 20000; display: flex; align - items: center; justify - content: center; `;
+    modal.style.cssText = `position: fixed; top: 0; left: 0; width: 100 %; height: 100 %; background: var(--nv-scrim); z - index: 20000; display: flex; align - items: center; justify - content: center; `;
 
     modal.innerHTML = `
                 < div style = "background: var(--bg-primary); border-radius: 12px; padding: 1.5rem; max-width: 600px; width: 95%; max-height: 80vh; overflow-y: auto;" >
@@ -2774,7 +2774,7 @@ async function showContinuousPrevPostModal(): Promise<void> {
         listContainer.innerHTML = '<div style="color: var(--text-muted);">저장된 글이 없습니다. 먼저 글을 생성해주세요.</div>';
         return;
       }
-      listContainer.innerHTML = '<div style="color: #f59e0b;">⚠️ 발행된 글이 없습니다. 아래에서 생성된 글을 선택하세요.</div>';
+      listContainer.innerHTML = '<div style="color: var(--nv-amber);">⚠️ 발행된 글이 없습니다. 아래에서 생성된 글을 선택하세요.</div>';
     }
 
     // 발행된 글 우선, 없으면 전체 글 표시
@@ -3233,6 +3233,7 @@ const imageSourceNames: Record<string, string> = {
   'flow': '🍌 Flow (Nano Banana 2)', // ✅ [v1.4.80]
   'local-folder': '📂 내 폴더',
   'collect-photos': '📷 관련 사진 찾기 (뉴스·기사 사진 · 무료)',
+  'codex-image': '🐙 Codex 구독 이미지 (GPT 이미지 · 별도 비용 없음)',
   'skip': '🚫 없음'
 };
 
@@ -3252,7 +3253,7 @@ function showImageGridModal(images: any[], sourceLabel: string): void {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.85);
+    background: var(--nv-scrim);
     z-index: 10000;
     display: flex;
     align-items: center;
@@ -3265,15 +3266,15 @@ function showImageGridModal(images: any[], sourceLabel: string): void {
   const validImages = images.filter((img: any) => img && (img.previewDataUrl || img.filePath || img.url));
 
   modal.innerHTML = `
-    <div style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border-radius: 16px; max-width: 900px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 24px; box-shadow: 0 25px 50px rgba(0,0,0,0.5);">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+    <div style="background: var(--nv-card); border-radius: 16px; max-width: 900px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 24px; box-shadow: var(--shadow-md);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--nv-line);">
         <div>
-          <h2 style="margin: 0; font-size: 1.5rem; color: #fff;">🎨 이미지 생성 완료</h2>
-          <p style="margin: 8px 0 0 0; font-size: 0.9rem; color: rgba(255,255,255,0.6);">
+          <h2 style="margin: 0; font-size: 1.5rem; color: var(--nv-ink);">🎨 이미지 생성 완료</h2>
+          <p style="margin: 8px 0 0 0; font-size: 0.9rem; color: var(--nv-ink-2);">
             ${sourceLabel}으로 ${validImages.length}개 이미지 생성됨
           </p>
         </div>
-        <button id="close-image-grid-modal" style="background: rgba(255,255,255,0.1); border: none; width: 40px; height: 40px; border-radius: 10px; cursor: pointer; font-size: 1.5rem; color: #fff; transition: all 0.2s;">×</button>
+        <button id="close-image-grid-modal" style="background: var(--nv-sunken); border: none; width: 40px; height: 40px; border-radius: 10px; cursor: pointer; font-size: 1.5rem; color: var(--nv-ink); transition: all 0.2s;">×</button>
       </div>
       
       <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px;">
@@ -3281,17 +3282,17 @@ function showImageGridModal(images: any[], sourceLabel: string): void {
     const imgUrl = img.previewDataUrl || img.filePath || img.url || '';
     const heading = img.heading || `이미지 ${idx + 1}`;
     return `
-            <div style="background: rgba(255,255,255,0.05); border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); transition: all 0.2s;">
-              <div style="position: relative; padding-top: 100%; background: #0a0a0a;">
+            <div style="background: var(--nv-sunken); border-radius: 12px; overflow: hidden; border: 1px solid var(--nv-line); transition: all 0.2s;">
+              <div style="position: relative; padding-top: 100%; background: var(--nv-card);">
                 <img src="${imgUrl}" alt="${heading}" 
                      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;"
                      onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%23333%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2255%22 text-anchor=%22middle%22 fill=%22%23666%22 font-size=%2212%22>로드 실패</text></svg>'">
-                <div style="position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,0.7); color: #fff; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;">
+                <div style="position: absolute; top: 8px; left: 8px; background: var(--nv-card); color: var(--nv-ink); padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;">
                   #${idx + 1}
                 </div>
               </div>
               <div style="padding: 12px;">
-                <p style="margin: 0; font-size: 0.85rem; color: #fff; line-height: 1.4; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${heading}">
+                <p style="margin: 0; font-size: 0.85rem; color: var(--nv-ink); line-height: 1.4; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${heading}">
                   ${heading.length > 25 ? heading.substring(0, 25) + '...' : heading}
                 </p>
               </div>
@@ -3301,7 +3302,7 @@ function showImageGridModal(images: any[], sourceLabel: string): void {
       </div>
       
       <div style="margin-top: 20px; text-align: center;">
-        <button id="confirm-image-grid-modal" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); border: none; padding: 12px 32px; border-radius: 10px; color: white; font-weight: 600; cursor: pointer; font-size: 1rem; transition: all 0.2s;">
+        <button id="confirm-image-grid-modal" style="background: var(--nv-fill); border: none; padding: 12px 32px; border-radius: 10px; color: var(--text-white); font-weight: 600; cursor: pointer; font-size: 1rem; transition: all 0.2s;">
           ✅ 확인
         </button>
       </div>
@@ -3602,24 +3603,24 @@ function showOpenAIOrgVerifyModal(): void {
   const overlay = document.createElement('div');
   overlay.id = 'openai-org-verify-modal';
   overlay.style.cssText = `
-    position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px);
+    position: fixed; inset: 0; background: var(--nv-scrim); backdrop-filter: blur(8px);
     z-index: 60000; display: flex; align-items: center; justify-content: center; padding: 20px;
   `;
   overlay.innerHTML = `
-    <div style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 2px solid rgba(168, 85, 247, 0.45); border-radius: 18px; max-width: 560px; width: 100%; padding: 24px; box-shadow: 0 25px 60px rgba(0,0,0,0.55);">
+    <div style="background: var(--nv-card); border: 2px solid var(--nv-select-line); border-radius: 18px; max-width: 560px; width: 100%; padding: 24px; box-shadow: var(--shadow-md);">
       <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px;">
         <div style="font-size: 2rem;">🔒</div>
         <div style="flex: 1;">
-          <h2 style="margin: 0 0 4px; font-size: 1.2rem; color: #fff;">덕트테이프 사용 — OpenAI 인증 필요</h2>
-          <p style="margin: 0; font-size: 0.85rem; color: rgba(255,255,255,0.65); line-height: 1.5;">
-            <strong style="color:#a78bfa;">덕트테이프(gpt-image-2.5)</strong>는 계정에 따라 OpenAI Organization 인증이 필요할 수 있습니다(403 시). 인증은 5~15분 정도 걸리고, 한 번만 하면 영구입니다.
+          <h2 style="margin: 0 0 4px; font-size: 1.2rem; color: var(--nv-ink);">덕트테이프 사용 — OpenAI 인증 필요</h2>
+          <p style="margin: 0; font-size: 0.85rem; color: var(--nv-ink-2); line-height: 1.5;">
+            <strong style="color: var(--nv-select-ink);">덕트테이프(gpt-image-2.5)</strong>는 계정에 따라 OpenAI Organization 인증이 필요할 수 있습니다(403 시). 인증은 5~15분 정도 걸리고, 한 번만 하면 영구입니다.
           </p>
         </div>
       </div>
 
-      <div style="background: rgba(168, 85, 247, 0.08); border: 1px solid rgba(168, 85, 247, 0.25); border-radius: 12px; padding: 14px; margin-bottom: 16px;">
+      <div style="background: var(--nv-select-bg); border: 1px solid var(--nv-select-line); border-radius: 12px; padding: 14px; margin-bottom: 16px;">
         <div style="font-size: 0.8rem; font-weight: 700; color: #c4b5fd; margin-bottom: 8px;">📋 인증 절차 (한 번만)</div>
-        <ol style="margin: 0; padding-left: 18px; color: rgba(255,255,255,0.78); font-size: 0.82rem; line-height: 1.7;">
+        <ol style="margin: 0; padding-left: 18px; color: var(--nv-ink-2); font-size: 0.82rem; line-height: 1.7;">
           <li>아래 [OpenAI 인증 페이지 열기] 클릭</li>
           <li><strong>Verify Organization</strong> 버튼 클릭</li>
           <li>신분증(여권/운전면허) 사진 + 셀카 업로드</li>
@@ -3629,14 +3630,14 @@ function showOpenAIOrgVerifyModal(): void {
         </ol>
       </div>
 
-      <div style="background: rgba(34, 197, 94, 0.08); border: 1px solid rgba(34, 197, 94, 0.25); border-radius: 12px; padding: 12px; margin-bottom: 16px;">
-        <div style="font-size: 0.8rem; color: rgba(255,255,255,0.78); line-height: 1.6;">
-          💡 <strong style="color:#86efac;">참고</strong> — 인증 대기 중에는 다른 이미지 엔진(나노바나나/Flow/ImageFX)으로 임시 전환해 발행을 계속할 수 있습니다.
+      <div style="background: var(--nv-green-soft); border: 1px solid var(--nv-green-line); border-radius: 12px; padding: 12px; margin-bottom: 16px;">
+        <div style="font-size: 0.8rem; color: var(--nv-ink-2); line-height: 1.6;">
+          💡 <strong style="color: #86efac;">참고</strong> — 인증 대기 중에는 다른 이미지 엔진(나노바나나/Flow/ImageFX)으로 임시 전환해 발행을 계속할 수 있습니다.
         </div>
       </div>
 
       <div style="display: flex; gap: 10px; justify-content: flex-end;">
-        <button type="button" id="openai-verify-modal-close" style="padding: 10px 18px; background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.78); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; cursor: pointer; font-size: 0.85rem; font-weight: 600;">나중에</button>
+        <button type="button" id="openai-verify-modal-close" style="padding: 10px 18px; background: var(--nv-sunken); color: var(--nv-ink-2); border: 1px solid var(--nv-line); border-radius: 10px; cursor: pointer; font-size: 0.85rem; font-weight: 600;">나중에</button>
         <button type="button" id="openai-verify-modal-open" style="padding: 10px 22px; background: linear-gradient(135deg, #a855f7, #7c3aed); color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: 700; font-size: 0.9rem; box-shadow: 0 6px 18px rgba(168, 85, 247, 0.35);">🚀 OpenAI 인증 페이지 열기</button>
       </div>
     </div>
@@ -3677,42 +3678,42 @@ function showItemScheduleModal(item: any): void {
 
   const overlay = document.createElement('div');
   overlay.id = 'item-schedule-modal-overlay';
-  overlay.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 50000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(6px);';
+  overlay.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--nv-scrim); z-index: 50000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(6px);';
 
   overlay.innerHTML = `
-    <div style="background: var(--bg-primary, #1a1a2e); border: 2px solid rgba(59, 130, 246, 0.4); border-radius: 16px; padding: 1.5rem; max-width: 420px; width: 90%; box-shadow: 0 25px 50px rgba(0,0,0,0.5);">
+    <div style="background: var(--nv-card); border: 2px solid var(--nv-select-line); border-radius: 16px; padding: 1.5rem; max-width: 420px; width: 90%; box-shadow: var(--shadow-md);">
       <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-        <h3 style="margin: 0; color: #60a5fa; font-size: 1.1rem; font-weight: 700;">⏰ 예약 시간 설정</h3>
-        <button type="button" id="item-schedule-close" style="background: none; border: none; color: var(--text-muted, #999); font-size: 1.5rem; cursor: pointer; line-height: 1;">&times;</button>
+        <h3 style="margin: 0; color: var(--nv-blue); font-size: 1.1rem; font-weight: 700;">⏰ 예약 시간 설정</h3>
+        <button type="button" id="item-schedule-close" style="background: none; border: none; color: var(--nv-ink-3); font-size: 1.5rem; cursor: pointer; line-height: 1;">&times;</button>
       </div>
       
-      <div style="margin-bottom: 1rem; padding: 0.6rem; background: rgba(255,255,255,0.03); border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
-        <div style="font-size: 0.75rem; color: var(--text-muted, #999); margin-bottom: 0.25rem;">📄 대상 항목</div>
-        <div style="font-size: 0.85rem; color: var(--text-strong, #fff); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${item.value}</div>
+      <div style="margin-bottom: 1rem; padding: 0.6rem; background: var(--nv-sunken); border-radius: 8px; border: 1px solid var(--nv-line);">
+        <div style="font-size: 0.75rem; color: var(--nv-ink-3); margin-bottom: 0.25rem;">📄 대상 항목</div>
+        <div style="font-size: 0.85rem; color: var(--nv-ink); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${item.value}</div>
       </div>
 
-      <div style="margin-bottom: 0.5rem; padding: 0.5rem; background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.2); border-radius: 6px;">
-        <span style="font-size: 0.7rem; color: #f59e0b;">⚠️ 현재 시간 기준 15분 이후부터 예약 가능합니다</span>
+      <div style="margin-bottom: 0.5rem; padding: 0.5rem; background: var(--nv-amber-soft); border: 1px solid var(--nv-amber-line); border-radius: 6px;">
+        <span style="font-size: 0.7rem; color: var(--nv-amber);">⚠️ 현재 시간 기준 15분 이후부터 예약 가능합니다</span>
       </div>
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1rem;">
         <div>
-          <label style="font-size: 0.75rem; color: var(--text-muted, #999); display: block; margin-bottom: 0.25rem;">📅 날짜</label>
+          <label style="font-size: 0.75rem; color: var(--nv-ink-3); display: block; margin-bottom: 0.25rem;">📅 날짜</label>
           <input type="date" id="item-schedule-date" value="${currentDate}" min="${new Date().toISOString().split('T')[0]}"
-            style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(59, 130, 246, 0.4); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.85rem; color-scheme: dark;">
+            style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid var(--nv-select-line); background: var(--nv-sunken); color: var(--nv-ink); font-size: 0.85rem; color-scheme: light;">
         </div>
         <div>
-          <label style="font-size: 0.75rem; color: var(--text-muted, #999); display: block; margin-bottom: 0.25rem;">🕐 시간</label>
-          ${createTime24Select({ id: 'item-schedule-time', defaultValue: currentTime || '09:00', step: 10, style: 'width: 100%;', selectStyle: 'padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(59, 130, 246, 0.4); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.85rem; color-scheme: dark; cursor: pointer; flex: 1;' })}
+          <label style="font-size: 0.75rem; color: var(--nv-ink-3); display: block; margin-bottom: 0.25rem;">🕐 시간</label>
+          ${createTime24Select({ id: 'item-schedule-time', defaultValue: currentTime || '09:00', step: 10, style: 'width: 100%;', selectStyle: 'padding: 0.6rem; border-radius: 8px; border: 1px solid var(--nv-select-line); background: var(--nv-sunken); color: var(--nv-ink); font-size: 0.85rem; color-scheme: light; cursor: pointer; flex: 1;' })}
         </div>
       </div>
 
       ${currentDate ? `<div style="margin-bottom: 1rem; text-align: center;">
-        <button type="button" id="item-schedule-clear" style="padding: 0.5rem 1rem; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; color: #ef4444; cursor: pointer; font-size: 0.8rem; font-weight: 600;">🗑️ 예약 해제 (즉시 발행으로 변경)</button>
+        <button type="button" id="item-schedule-clear" style="padding: 0.5rem 1rem; background: var(--nv-red-soft); border: 1px solid var(--nv-red-line); border-radius: 8px; color: var(--nv-red); cursor: pointer; font-size: 0.8rem; font-weight: 600;">🗑️ 예약 해제 (즉시 발행으로 변경)</button>
       </div>` : ''}
 
       <div style="display: flex; gap: 0.5rem;">
-        <button type="button" id="item-schedule-cancel" style="flex: 1; padding: 0.7rem; background: var(--bg-tertiary, #333); color: var(--text-muted, #999); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.85rem;">취소</button>
-        <button type="button" id="item-schedule-save" style="flex: 2; padding: 0.7rem; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.85rem; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);">📅 예약 설정</button>
+        <button type="button" id="item-schedule-cancel" style="flex: 1; padding: 0.7rem; background: var(--nv-sunken); color: var(--nv-ink-3); border: 1px solid var(--nv-line); border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.85rem;">취소</button>
+        <button type="button" id="item-schedule-save" style="flex: 2; padding: 0.7rem; background: var(--nv-fill); color: var(--text-white); border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.85rem; box-shadow: var(--shadow-md);">📅 예약 설정</button>
       </div>
     </div>
   `;
@@ -3824,47 +3825,47 @@ function showRandomScheduleModal(): void {
 
   const overlay = document.createElement('div');
   overlay.id = 'random-schedule-modal-overlay';
-  overlay.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 50000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(6px);';
+  overlay.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--nv-scrim); z-index: 50000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(6px);';
 
   overlay.innerHTML = `
-    <div style="background: var(--bg-primary, #1a1a2e); border: 2px solid rgba(59, 130, 246, 0.4); border-radius: 16px; padding: 1.5rem; max-width: 480px; width: 92%; box-shadow: 0 25px 50px rgba(0,0,0,0.5); max-height: 85vh; overflow-y: auto;">
+    <div style="background: var(--nv-card); border: 2px solid var(--nv-select-line); border-radius: 16px; padding: 1.5rem; max-width: 480px; width: 92%; box-shadow: var(--shadow-md); max-height: 85vh; overflow-y: auto;">
       <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-        <h3 style="margin: 0; color: #60a5fa; font-size: 1.1rem; font-weight: 700;">🎲 랜덤 예약 배분</h3>
-        <button type="button" id="random-schedule-close" style="background: none; border: none; color: var(--text-muted, #999); font-size: 1.5rem; cursor: pointer; line-height: 1;">&times;</button>
+        <h3 style="margin: 0; color: var(--nv-blue); font-size: 1.1rem; font-weight: 700;">🎲 랜덤 예약 배분</h3>
+        <button type="button" id="random-schedule-close" style="background: none; border: none; color: var(--nv-ink-3); font-size: 1.5rem; cursor: pointer; line-height: 1;">&times;</button>
       </div>
 
       <p style="margin: 0 0 1rem 0; font-size: 0.8rem; color: var(--text-muted); line-height: 1.5;">
-        시작~마감 시간 범위 내에서 대기열 항목들에 <strong style="color: #10b981;">랜덤 예약 시간</strong>을 자동 배분합니다.
+        시작~마감 시간 범위 내에서 대기열 항목들에 <strong style="color: var(--nv-green-text);">랜덤 예약 시간</strong>을 자동 배분합니다.
       </p>
 
       <!-- 시작 시간 -->
       <div style="margin-bottom: 1rem;">
-        <label style="color: #10b981; font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.5rem;">🟢 시작 시간</label>
+        <label style="color: var(--nv-green-text); font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.5rem;">🟢 시작 시간</label>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
           <div>
             <label style="font-size: 0.7rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">날짜 (비워두면 오늘)</label>
             <input type="date" id="rnd-schedule-start-date" value="${todayStr}"
-              style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.4); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.85rem; color-scheme: dark;">
+              style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid var(--nv-green-line); background: var(--nv-sunken); color: var(--nv-ink); font-size: 0.85rem; color-scheme: light;">
           </div>
           <div>
             <label style="font-size: 0.7rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">시간</label>
-            ${createTime24Select({ id: 'rnd-schedule-start-time', defaultValue: defaultStartTime, step: 10, style: 'width: 100%;', selectStyle: 'padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.4); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.85rem; color-scheme: dark; cursor: pointer; flex: 1;' })}
+            ${createTime24Select({ id: 'rnd-schedule-start-time', defaultValue: defaultStartTime, step: 10, style: 'width: 100%;', selectStyle: 'padding: 0.6rem; border-radius: 8px; border: 1px solid var(--nv-green-line); background: var(--nv-sunken); color: var(--nv-ink); font-size: 0.85rem; color-scheme: light; cursor: pointer; flex: 1;' })}
           </div>
         </div>
       </div>
 
       <!-- 마감 시간 -->
       <div style="margin-bottom: 1rem;">
-        <label style="color: #ef4444; font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.5rem;">🔴 마감 시간</label>
+        <label style="color: var(--nv-red); font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.5rem;">🔴 마감 시간</label>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
           <div>
             <label style="font-size: 0.7rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">날짜 (비워두면 시작일과 동일)</label>
             <input type="date" id="rnd-schedule-end-date" value="${endDateStr2}"
-              style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.4); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.85rem; color-scheme: dark;">
+              style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid var(--nv-red-line); background: var(--nv-sunken); color: var(--nv-ink); font-size: 0.85rem; color-scheme: light;">
           </div>
           <div>
             <label style="font-size: 0.7rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">시간</label>
-            ${createTime24Select({ id: 'rnd-schedule-end-time', defaultValue: defaultEndTime, step: 10, style: 'width: 100%;', selectStyle: 'padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.4); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.85rem; color-scheme: dark; cursor: pointer; flex: 1;' })}
+            ${createTime24Select({ id: 'rnd-schedule-end-time', defaultValue: defaultEndTime, step: 10, style: 'width: 100%;', selectStyle: 'padding: 0.6rem; border-radius: 8px; border: 1px solid var(--nv-red-line); background: var(--nv-sunken); color: var(--nv-ink); font-size: 0.85rem; color-scheme: light; cursor: pointer; flex: 1;' })}
           </div>
         </div>
       </div>
@@ -3873,22 +3874,22 @@ function showRandomScheduleModal(): void {
       <div style="margin-bottom: 1rem;">
         <label style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600; display: block; margin-bottom: 0.5rem;">⚡ 빠른 시간대 설정</label>
         <div style="display: flex; gap: 0.35rem; flex-wrap: wrap;">
-          <button type="button" class="rnd-preset" data-start="09:00" data-end="18:00" style="padding: 0.4rem 0.6rem; background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 6px; color: #60a5fa; cursor: pointer; font-size: 0.75rem; font-weight: 600;">🌅 9-18시</button>
-          <button type="button" class="rnd-preset" data-start="08:00" data-end="22:00" style="padding: 0.4rem 0.6rem; background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 6px; color: #a78bfa; cursor: pointer; font-size: 0.75rem; font-weight: 600;">📅 8-22시</button>
-          <button type="button" class="rnd-preset" data-start="10:00" data-end="14:00" style="padding: 0.4rem 0.6rem; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 6px; color: #f59e0b; cursor: pointer; font-size: 0.75rem; font-weight: 600;">☀️ 10-14시</button>
-          <button type="button" class="rnd-preset" data-start="18:00" data-end="23:00" style="padding: 0.4rem 0.6rem; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 6px; color: #10b981; cursor: pointer; font-size: 0.75rem; font-weight: 600;">🌙 18-23시</button>
+          <button type="button" class="rnd-preset" data-start="09:00" data-end="18:00" style="padding: 0.4rem 0.6rem; background: var(--nv-select-bg); border: 1px solid var(--nv-select-line); border-radius: 6px; color: var(--nv-blue); cursor: pointer; font-size: 0.75rem; font-weight: 600;">🌅 9-18시</button>
+          <button type="button" class="rnd-preset" data-start="08:00" data-end="22:00" style="padding: 0.4rem 0.6rem; background: var(--nv-select-bg); border: 1px solid var(--nv-select-line); border-radius: 6px; color: var(--nv-select-ink); cursor: pointer; font-size: 0.75rem; font-weight: 600;">📅 8-22시</button>
+          <button type="button" class="rnd-preset" data-start="10:00" data-end="14:00" style="padding: 0.4rem 0.6rem; background: var(--nv-amber-soft); border: 1px solid var(--nv-amber-line); border-radius: 6px; color: var(--nv-amber); cursor: pointer; font-size: 0.75rem; font-weight: 600;">☀️ 10-14시</button>
+          <button type="button" class="rnd-preset" data-start="18:00" data-end="23:00" style="padding: 0.4rem 0.6rem; background: var(--nv-green-soft); border: 1px solid var(--nv-green-line); border-radius: 6px; color: var(--nv-green-text); cursor: pointer; font-size: 0.75rem; font-weight: 600;">🌙 18-23시</button>
         </div>
       </div>
 
       <!-- 미리보기 영역 -->
-      <div id="rnd-schedule-preview" style="display: none; margin-bottom: 1rem; padding: 0.75rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; max-height: 150px; overflow-y: auto;">
+      <div id="rnd-schedule-preview" style="display: none; margin-bottom: 1rem; padding: 0.75rem; background: var(--nv-sunken); border: 1px solid var(--nv-line); border-radius: 8px; max-height: 150px; overflow-y: auto;">
         <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 600;">📊 배분 미리보기</div>
         <div id="rnd-schedule-preview-content" style="font-size: 0.75rem; color: var(--text-strong); line-height: 1.6; font-family: monospace;"></div>
       </div>
 
       <div style="display: flex; gap: 0.5rem;">
-        <button type="button" id="rnd-schedule-cancel" style="flex: 1; padding: 0.7rem; background: var(--bg-tertiary, #333); color: var(--text-muted, #999); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.85rem;">취소</button>
-        <button type="button" id="rnd-schedule-apply" style="flex: 2; padding: 0.7rem; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.85rem; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);">🎲 랜덤 예약 적용</button>
+        <button type="button" id="rnd-schedule-cancel" style="flex: 1; padding: 0.7rem; background: var(--nv-sunken); color: var(--nv-ink-3); border: 1px solid var(--nv-line); border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.85rem;">취소</button>
+        <button type="button" id="rnd-schedule-apply" style="flex: 2; padding: 0.7rem; background: var(--nv-fill); color: var(--text-white); border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.85rem; box-shadow: var(--shadow-md);">🎲 랜덤 예약 적용</button>
       </div>
     </div>
   `;
@@ -4013,7 +4014,7 @@ function showIndividualScheduleModal(): void {
 
   const overlay = document.createElement('div');
   overlay.id = 'individual-schedule-modal-overlay';
-  overlay.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 50000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(6px);';
+  overlay.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--nv-scrim); z-index: 50000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(6px);';
 
   const itemRows = continuousQueueV2.map((item: any, i: number) => {
     let curDate = '';
@@ -4027,38 +4028,38 @@ function showIndividualScheduleModal(): void {
     const shortLabel = label.length > 22 ? label.substring(0, 22) + '...' : label;
 
     return `
-      <div style="display: grid; grid-template-columns: 30px 1fr auto auto; gap: 0.5rem; align-items: center; padding: 0.5rem 0.6rem; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px;" data-idx="${i}">
-        <input type="checkbox" class="indv-check" data-idx="${i}" ${isScheduled ? 'checked' : ''} style="width: 18px; height: 18px; accent-color: #10b981; cursor: pointer;">
-        <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.8rem; color: var(--text-strong, #fff);" title="${label}">${shortLabel}</div>
-        <input type="date" class="indv-date" data-idx="${i}" value="${curDate}" style="padding: 0.35rem; border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.3); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.8rem; color-scheme: dark; width: 130px;">
-        ${createTime24Select({ className: 'indv-time', dataIdx: i, defaultValue: curTime || '09:00', step: 10, style: 'width: 100px;', selectStyle: 'padding: 0.35rem; border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.3); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.75rem; color-scheme: dark; cursor: pointer;' })}
+      <div style="display: grid; grid-template-columns: 30px 1fr auto auto; gap: 0.5rem; align-items: center; padding: 0.5rem 0.6rem; background: var(--nv-sunken); border: 1px solid var(--nv-line); border-radius: 8px;" data-idx="${i}">
+        <input type="checkbox" class="indv-check" data-idx="${i}" ${isScheduled ? 'checked' : ''} style="width: 18px; height: 18px; accent-color: var(--nv-fill); cursor: pointer;">
+        <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.8rem; color: var(--nv-ink);" title="${label}">${shortLabel}</div>
+        <input type="date" class="indv-date" data-idx="${i}" value="${curDate}" style="padding: 0.35rem; border-radius: 6px; border: 1px solid var(--nv-select-line); background: var(--nv-sunken); color: var(--nv-ink); font-size: 0.8rem; color-scheme: light; width: 130px;">
+        ${createTime24Select({ className: 'indv-time', dataIdx: i, defaultValue: curTime || '09:00', step: 10, style: 'width: 100px;', selectStyle: 'padding: 0.35rem; border-radius: 6px; border: 1px solid var(--nv-select-line); background: var(--nv-sunken); color: var(--nv-ink); font-size: 0.75rem; color-scheme: light; cursor: pointer;' })}
       </div>`;
   }).join('');
 
   overlay.innerHTML = `
-    <div style="background: var(--bg-primary, #1a1a2e); border: 2px solid rgba(16, 185, 129, 0.4); border-radius: 16px; max-width: 620px; width: 95%; box-shadow: 0 25px 50px rgba(0,0,0,0.5); max-height: 85vh; display: flex; flex-direction: column; overflow: hidden;">
+    <div style="background: var(--nv-card); border: 2px solid var(--nv-green-line); border-radius: 16px; max-width: 620px; width: 95%; box-shadow: var(--shadow-md); max-height: 85vh; display: flex; flex-direction: column; overflow: hidden;">
       <!-- 헤더 -->
-      <div style="padding: 1rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: space-between;">
-        <h3 style="margin: 0; color: #34d399; font-size: 1.1rem; font-weight: 700;">📋 개별 예약 설정</h3>
-        <button type="button" id="indv-schedule-close" style="background: none; border: none; color: var(--text-muted, #999); font-size: 1.5rem; cursor: pointer; line-height: 1;">&times;</button>
+      <div style="padding: 1rem 1.5rem; border-bottom: 1px solid var(--nv-line); display: flex; align-items: center; justify-content: space-between;">
+        <h3 style="margin: 0; color: var(--nv-green-text); font-size: 1.1rem; font-weight: 700;">📋 개별 예약 설정</h3>
+        <button type="button" id="indv-schedule-close" style="background: none; border: none; color: var(--nv-ink-3); font-size: 1.5rem; cursor: pointer; line-height: 1;">&times;</button>
       </div>
 
       <!-- 전체 선택/해제 + 일괄 설정 -->
-      <div style="padding: 0.75rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+      <div style="padding: 0.75rem 1.5rem; border-bottom: 1px solid var(--nv-line); display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
         <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer; font-size: 0.8rem; color: var(--text-muted);">
-          <input type="checkbox" id="indv-select-all" style="width: 16px; height: 16px; accent-color: #10b981;">
+          <input type="checkbox" id="indv-select-all" style="width: 16px; height: 16px; accent-color: var(--nv-fill);">
           <span>전체 선택</span>
         </label>
         <div style="margin-left: auto; display: flex; align-items: center; gap: 0.4rem;">
           <span style="font-size: 0.75rem; color: var(--text-muted);">선택 항목 일괄:</span>
-          <input type="date" id="indv-bulk-date" style="padding: 0.3rem; border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.3); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.75rem; color-scheme: dark;">
-          ${createTime24Select({ id: 'indv-bulk-time', defaultValue: '09:00', step: 10, selectStyle: 'padding: 0.3rem; border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.3); background: var(--bg-secondary, #222); color: var(--text-strong, #fff); font-size: 0.7rem; color-scheme: dark; cursor: pointer;' })}
-          <button type="button" id="indv-bulk-apply" style="padding: 0.3rem 0.6rem; background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.4); border-radius: 6px; color: #60a5fa; cursor: pointer; font-size: 0.75rem; font-weight: 600;">적용</button>
+          <input type="date" id="indv-bulk-date" style="padding: 0.3rem; border-radius: 6px; border: 1px solid var(--nv-select-line); background: var(--nv-sunken); color: var(--nv-ink); font-size: 0.75rem; color-scheme: light;">
+          ${createTime24Select({ id: 'indv-bulk-time', defaultValue: '09:00', step: 10, selectStyle: 'padding: 0.3rem; border-radius: 6px; border: 1px solid var(--nv-select-line); background: var(--nv-sunken); color: var(--nv-ink); font-size: 0.7rem; color-scheme: light; cursor: pointer;' })}
+          <button type="button" id="indv-bulk-apply" style="padding: 0.3rem 0.6rem; background: var(--nv-select-bg); border: 1px solid var(--nv-select-line); border-radius: 6px; color: var(--nv-blue); cursor: pointer; font-size: 0.75rem; font-weight: 600;">적용</button>
         </div>
       </div>
 
       <!-- 헤더 라벨 -->
-      <div style="padding: 0.4rem 1.5rem; display: grid; grid-template-columns: 30px 1fr auto auto; gap: 0.5rem; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05);">
+      <div style="padding: 0.4rem 1.5rem; display: grid; grid-template-columns: 30px 1fr auto auto; gap: 0.5rem; align-items: center; border-bottom: 1px solid var(--nv-line);">
         <span></span>
         <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 600;">대기열 항목</span>
         <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: 600; width: 130px; text-align: center;">날짜</span>
@@ -4071,9 +4072,9 @@ function showIndividualScheduleModal(): void {
       </div>
 
       <!-- 푸터 -->
-      <div style="padding: 0.75rem 1.5rem; border-top: 1px solid rgba(255,255,255,0.08); display: flex; gap: 0.5rem;">
-        <button type="button" id="indv-schedule-cancel" style="flex: 1; padding: 0.7rem; background: var(--bg-tertiary, #333); color: var(--text-muted, #999); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.85rem;">취소</button>
-        <button type="button" id="indv-schedule-save" style="flex: 2; padding: 0.7rem; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.85rem; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">💾 예약 저장</button>
+      <div style="padding: 0.75rem 1.5rem; border-top: 1px solid var(--nv-line); display: flex; gap: 0.5rem;">
+        <button type="button" id="indv-schedule-cancel" style="flex: 1; padding: 0.7rem; background: var(--nv-sunken); color: var(--nv-ink-3); border: 1px solid var(--nv-line); border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.85rem;">취소</button>
+        <button type="button" id="indv-schedule-save" style="flex: 2; padding: 0.7rem; background: var(--nv-fill); color: var(--text-white); border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.85rem; box-shadow: var(--shadow-md);">💾 예약 저장</button>
       </div>
     </div>
   `;

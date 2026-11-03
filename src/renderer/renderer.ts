@@ -3943,7 +3943,7 @@ function initCategoryModal(): void {
     }
     currentMode = mode;
     // setAttribute를 사용해서 스타일을 강제로 설정 (!important 포함)
-    const modalStyle = 'display: flex !important; position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; background: rgba(0, 0, 0, 0.8) !important; z-index: 999999 !important; align-items: center !important; justify-content: center !important;';
+    const modalStyle = 'display: flex !important; position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; background: var(--nv-scrim) !important; z-index: 999999 !important; align-items: center !important; justify-content: center !important;';
     modal.setAttribute('style', modalStyle);
     console.log('[CategoryModal] Style attribute set:', modal.getAttribute('style'));
 
@@ -9971,7 +9971,7 @@ async function showHeadingSelectionModalV2(image: any, currentIndex: number): Pr
   // 모달 생성
   const modal = document.createElement('div');
   modal.id = 'heading-selection-modal';
-  modal.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 10000;';
+  modal.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--nv-scrim); display: flex; align-items: center; justify-content: center; z-index: 10000;';
 
   let headingsHtml = '';
   promptItems.forEach((item, idx) => {
@@ -9990,7 +9990,7 @@ async function showHeadingSelectionModalV2(image: any, currentIndex: number): Pr
         <h3 style="margin: 0; color: var(--text-strong);">📍 이미지를 배치할 소제목 선택</h3>
         <button type="button" id="close-heading-modal" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);">×</button>
           </div>
-      <div style="margin-bottom: 1rem; padding: 0.75rem; background: rgba(59, 130, 246, 0.1); border-radius: 8px;">
+      <div style="margin-bottom: 1rem; padding: 0.75rem; background: var(--nv-select-bg); border-radius: 8px;">
         <img src="${toFileUrlMaybe(image.url || image.filePath || image.previewDataUrl || '')}" style="width: 100%; max-height: 150px; object-fit: contain; border-radius: 8px;">
         </div>
       <div style="display: flex; flex-direction: column; gap: 0.75rem;">
@@ -10142,7 +10142,7 @@ async function showLocalImagePickerForReplace(folderName: string, slot: ImageSlo
     const modal = document.createElement('div');
     modal.style.cssText = `
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.75); z-index: 10000; display: flex;
+      background: var(--nv-scrim); z-index: 10000; display: flex;
       align-items: center; justify-content: center; padding: 2rem;
     `;
 
@@ -10172,7 +10172,7 @@ async function showLocalImagePickerForReplace(folderName: string, slot: ImageSlo
           </div>
           <div style="display:flex; gap: 0.5rem; align-items:center;">
             <button type="button" class="back-to-folder-select" style="padding: 0.6rem 0.9rem; background: var(--bg-tertiary); color: var(--text-strong); border: 1px solid var(--border-light); border-radius: 10px; cursor: pointer; font-weight: 800;">← 폴더</button>
-            <button type="button" class="close-modal-btn" style="padding: 0.6rem 0.9rem; background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 10px; cursor: pointer; font-weight: 900;">닫기</button>
+            <button type="button" class="close-modal-btn" style="padding: 0.6rem 0.9rem; background: var(--nv-red-soft); color: var(--nv-red); border: 1px solid var(--nv-red-line); border-radius: 10px; cursor: pointer; font-weight: 900;">닫기</button>
           </div>
         </div>
         <div style="flex: 1; overflow-y: auto; padding: 0.25rem;">
@@ -10855,7 +10855,7 @@ function showVideoModal(videoUrl: string, title?: string): void {
   const modal = document.createElement('div');
   modal.style.cssText = `
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.9); z-index: 10002; display: flex;
+    background: var(--nv-scrim); z-index: 10002; display: flex;
     align-items: center; justify-content: center; padding: 2rem;
     cursor: pointer;
   `;
@@ -10863,9 +10863,9 @@ function showVideoModal(videoUrl: string, title?: string): void {
   const safeTitle = escapeHtml(String(title || ''));
   modal.innerHTML = `
     <div style="position: relative; max-width: 92vw; width: min(720px, 92vw);">
-      <button type="button" class="close-video-modal-btn" style="position: absolute; top: -2rem; right: 0; background: rgba(255,255,255,0.2); border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; font-size: 1.5rem; color: white; display: flex; align-items: center; justify-content: center;">×</button>
-      ${safeTitle ? `<div style="color: rgba(255,255,255,0.85); font-weight: 700; margin-bottom: 0.5rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${safeTitle}</div>` : ''}
-      <video src="${videoUrl}" controls autoplay loop muted playsinline style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover; max-height: 78vh; border-radius: 10px; background: #000;"></video>
+      <button type="button" class="close-video-modal-btn" style="position: absolute; top: -2rem; right: 0; background: var(--nv-sunken); border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; font-size: 1.5rem; color: var(--nv-ink); display: flex; align-items: center; justify-content: center;">×</button>
+      ${safeTitle ? `<div style="color: var(--nv-ink-2); font-weight: 700; margin-bottom: 0.5rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${safeTitle}</div>` : ''}
+      <video src="${videoUrl}" controls autoplay loop muted playsinline style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover; max-height: 78vh; border-radius: 10px; background: var(--nv-card);"></video>
     </div>
   `;
 

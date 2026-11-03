@@ -30,6 +30,7 @@ const AI_PROVIDER_PATTERNS = [
   'leonardoai',
   'dropshot',
   'genspark', // [2026-10-10] 젠스파크 AI 생성 이미지
+  'codex-image', // [2026-11-03] Codex 구독 이미지 (ChatGPT 구독 이미지 생성 도구)
   'img2img',
   'ai-generated',
 ] as const;

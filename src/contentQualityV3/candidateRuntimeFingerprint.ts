@@ -568,6 +568,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/main/services/dailyEditorialPublication.ts',
   'src/main/services/dailyHomefeedEditorial.ts',
   'src/main/services/dailyHomefeedEditorialContract.ts',
+  'src/main/services/dailyMissedNotice.ts',
   'src/main/services/dailyOfficialCapture.ts',
   'src/main/services/dailyPublishingDiscovery.ts',
   'src/main/services/dailyPublishingExecutor.ts',

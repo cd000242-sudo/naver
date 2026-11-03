@@ -33,7 +33,7 @@ function showPriceImageModal(): void {
         priceModal.style.top = '0';
         priceModal.style.right = '0';
         priceModal.style.bottom = '0';
-        priceModal.style.background = 'rgba(0,0,0,0.9)';
+        priceModal.style.background = 'var(--nv-scrim)';
         priceModal.style.zIndex = '100020';
         priceModal.style.display = 'none';
         priceModal.style.alignItems = 'center';
@@ -88,7 +88,7 @@ function ensurePaywallDom(): {
         overlay.style.top = '0';
         overlay.style.right = '0';
         overlay.style.bottom = '0';
-        overlay.style.background = 'rgba(0,0,0,0.55)';
+        overlay.style.background = 'var(--nv-scrim)';
         overlay.style.backdropFilter = 'blur(2px)';
         overlay.style.zIndex = '99990';
         overlay.style.display = 'none';
@@ -108,13 +108,13 @@ function ensurePaywallDom(): {
         payButton.style.zIndex = '100000';
         payButton.style.padding = '12px 22px';
         payButton.style.borderRadius = '12px';
-        payButton.style.border = '2px solid rgba(212, 175, 55, 0.8)';
-        payButton.style.background = 'linear-gradient(135deg, #D4AF37 0%, #FFD700 50%, #F4D03F 100%)';
-        payButton.style.color = '#0F0F0F';
+        payButton.style.border = '2px solid var(--nv-fill)';
+        payButton.style.background = 'var(--nv-fill)';
+        payButton.style.color = 'var(--text-white)';
         payButton.style.fontWeight = '800';
         payButton.style.fontSize = '14px';
         payButton.style.cursor = 'pointer';
-        payButton.style.boxShadow = '0 10px 40px rgba(0,0,0,0.55), 0 0 20px rgba(212, 175, 55, 0.3)';
+        payButton.style.boxShadow = 'var(--shadow-lg)';
         payButton.style.display = 'none';
         payButton.style.transition = 'all 0.3s ease';
         payButton.onmouseover = () => { payButton!.style.transform = 'translateX(-50%) scale(1.05)'; };
@@ -135,7 +135,7 @@ function ensurePaywallDom(): {
         modalBackdrop.style.top = '0';
         modalBackdrop.style.right = '0';
         modalBackdrop.style.bottom = '0';
-        modalBackdrop.style.background = 'rgba(0,0,0,0.92)';
+        modalBackdrop.style.background = 'var(--nv-scrim)';
         modalBackdrop.style.zIndex = '100010';
         modalBackdrop.style.display = 'none';
         modalBackdrop.style.alignItems = 'center';
@@ -148,10 +148,10 @@ function ensurePaywallDom(): {
         modal.style.width = 'min(520px, 95vw)';
         modal.style.maxHeight = '92vh';
         modal.style.overflow = 'auto';
-        modal.style.background = 'linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%)';
-        modal.style.border = '2px solid rgba(212, 175, 55, 0.4)';
+        modal.style.background = 'var(--nv-card)';
+        modal.style.border = '2px solid var(--nv-amber-line)';
         modal.style.borderRadius = '24px';
-        modal.style.boxShadow = '0 30px 80px rgba(0,0,0,0.8), 0 0 80px rgba(212, 175, 55, 0.1)';
+        modal.style.boxShadow = 'var(--shadow-xl)';
         modal.style.padding = '36px 32px';
         modal.style.textAlign = 'center';
         modal.style.position = 'relative';
@@ -161,10 +161,10 @@ function ensurePaywallDom(): {
         badge.innerHTML = '🔥 오늘만 특별 혜택';
         badge.style.cssText = `
             position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white; font-size: 12px; font-weight: 800;
+            background: var(--nv-red);
+            color: var(--text-white); font-size: 12px; font-weight: 800;
             padding: 6px 20px; border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.5);
+            box-shadow: var(--shadow-md);
             animation: badgePulse 2s ease-in-out infinite;
             letter-spacing: 0.5px;
         `;
@@ -195,32 +195,32 @@ function ensurePaywallDom(): {
         const progressWrapper = document.createElement('div');
         progressWrapper.style.cssText = `
             margin: 16px 0 24px; padding: 16px 20px;
-            background: rgba(239, 68, 68, 0.08);
-            border: 1px solid rgba(239, 68, 68, 0.2);
+            background: var(--nv-red-soft);
+            border: 1px solid var(--nv-red-line);
             border-radius: 14px;
         `;
 
         const progressLabel = document.createElement('div');
         progressLabel.style.cssText = `
             display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 10px; font-size: 14px; color: rgba(255,255,255,0.8);
+            margin-bottom: 10px; font-size: 14px; color: var(--nv-ink-2);
         `;
         progressLabel.innerHTML = `
             <span>오늘 사용량</span>
-            <span style="color: #ef4444; font-weight: 800; font-size: 16px;">2 / 2 사용 완료</span>
+            <span style="color: var(--nv-red); font-weight: 800; font-size: 16px;">2 / 2 사용 완료</span>
         `;
 
         const progressBar = document.createElement('div');
         progressBar.style.cssText = `
             width: 100%; height: 10px;
-            background: rgba(255,255,255,0.1);
+            background: var(--nv-sunken);
             border-radius: 5px; overflow: hidden;
         `;
 
         const progressFill = document.createElement('div');
         progressFill.style.cssText = `
             width: 100%; height: 100%;
-            background: linear-gradient(90deg, #ef4444, #dc2626);
+            background: var(--nv-red);
             border-radius: 5px;
             animation: progressGlow 2s ease-in-out infinite;
         `;
@@ -234,41 +234,41 @@ function ensurePaywallDom(): {
         quotaText.id = 'global-paywall-quota-text';
         quotaText.style.cssText = `
             padding: 20px; margin-bottom: 24px;
-            background: rgba(34, 197, 94, 0.06);
-            border: 1px solid rgba(34, 197, 94, 0.15);
+            background: var(--nv-green-soft);
+            border: 1px solid var(--nv-green-line);
             border-radius: 14px;
-            color: rgba(255,255,255,0.95);
+            color: var(--nv-ink);
             font-size: 15px; line-height: 1.8;
             text-align: left;
         `;
         quotaText.innerHTML = `
-            <div style="font-size:16px;font-weight:700;color:#22c55e;margin-bottom:14px;text-align:center;">
+            <div style="font-size:16px;font-weight:700;color: var(--nv-green-text);margin-bottom:14px;text-align:center;">
               ✨ Pro 사용자는 이런 혜택을 누리고 있습니다
             </div>
             <div style="display:flex;flex-direction:column;gap:10px;">
               <div style="display:flex;align-items:center;gap:10px;">
                 <span style="font-size:20px;">♾️</span>
-                <span><b style="color:#fff;">무제한 발행</b> — 하루에 몇 편이든 자유롭게</span>
+                <span><b style="color: var(--nv-ink);">무제한 발행</b> — 하루에 몇 편이든 자유롭게</span>
               </div>
               <div style="display:flex;align-items:center;gap:10px;">
                 <span style="font-size:20px;">🎨</span>
-                <span><b style="color:#fff;">AI 이미지 무제한</b> — 고퀄리티 이미지 자동 생성</span>
+                <span><b style="color: var(--nv-ink);">AI 이미지 무제한</b> — 고퀄리티 이미지 자동 생성</span>
               </div>
               <div style="display:flex;align-items:center;gap:10px;">
                 <span style="font-size:20px;">📅</span>
-                <span><b style="color:#fff;">예약발행 + 연속발행</b> — 자동으로 매일 발행</span>
+                <span><b style="color: var(--nv-ink);">예약발행 + 연속발행</b> — 자동으로 매일 발행</span>
               </div>
               <div style="display:flex;align-items:center;gap:10px;">
                 <span style="font-size:20px;">🚀</span>
-                <span><b style="color:#fff;">다계정 동시 발행</b> — 여러 블로그 한 번에 관리</span>
+                <span><b style="color: var(--nv-ink);">다계정 동시 발행</b> — 여러 블로그 한 번에 관리</span>
               </div>
               <div style="display:flex;align-items:center;gap:10px;">
                 <span style="font-size:20px;">👥</span>
-                <span><b style="color:#fff;">유료 커뮤니티</b> — Pro 사용자 전용 단톡방 입장</span>
+                <span><b style="color: var(--nv-ink);">유료 커뮤니티</b> — Pro 사용자 전용 단톡방 입장</span>
               </div>
             </div>
-            <div style="margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.08);text-align:center;">
-              <span style="color:#fbbf24;font-weight:700;font-size:15px;">
+            <div style="margin-top:16px;padding-top:14px;border-top: 1px solid var(--nv-line);text-align:center;">
+              <span style="color: var(--nv-amber);font-weight:700;font-size:15px;">
                 💡 지금 문의하시면 특별 할인을 안내해 드립니다!
               </span>
             </div>
@@ -299,10 +299,10 @@ function ensurePaywallDom(): {
         openLink.style.cssText = `
             display: block; padding: 18px 20px; text-align: center;
             border-radius: 16px;
-            background: linear-gradient(135deg, #FEE500 0%, #F5D100 100%);
+            background: var(--nv-sunken);
             color: #3C1E1E; font-weight: 900; font-size: 18px;
             text-decoration: none;
-            box-shadow: 0 8px 30px rgba(254, 229, 0, 0.3), 0 0 20px rgba(254, 229, 0, 0.15);
+            box-shadow: var(--shadow-xl);
             transition: all 0.2s ease;
             border: 2px solid rgba(254, 229, 0, 0.6);
         `;
@@ -344,12 +344,12 @@ function ensurePaywallDom(): {
         groupChatBtn.style.cssText = `
             display: block; padding: 14px 16px; text-align: center;
             border-radius: 14px;
-            background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%);
-            color: #fff; font-weight: 700; font-size: 15px;
+            background: var(--nv-fill);
+            color: var(--text-white); font-weight: 700; font-size: 15px;
             text-decoration: none;
-            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.3);
+            box-shadow: var(--shadow-md);
             transition: all 0.2s ease;
-            border: 1px solid rgba(124, 58, 237, 0.5);
+            border: 1px solid var(--nv-select-line);
         `;
         groupChatBtn.onmouseover = () => {
             groupChatBtn.style.transform = 'translateY(-2px)';
@@ -377,19 +377,19 @@ function ensurePaywallDom(): {
         priceBtn.innerHTML = '💰 가격표 확인하기';
         priceBtn.style.cssText = `
             padding: 14px; border-radius: 12px;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.15);
-            color: rgba(255,255,255,0.8); font-size: 15px;
+            background: var(--nv-sunken);
+            border: 1px solid var(--nv-line);
+            color: var(--nv-ink-2); font-size: 15px;
             font-weight: 600; cursor: pointer;
             transition: all 0.2s;
         `;
         priceBtn.onmouseover = () => {
-            priceBtn.style.background = 'rgba(255,255,255,0.1)';
-            priceBtn.style.color = '#fff';
+            priceBtn.style.background = 'var(--nv-hover-bg)';
+            priceBtn.style.color = 'var(--nv-ink)';
         };
         priceBtn.onmouseout = () => {
-            priceBtn.style.background = 'rgba(255,255,255,0.06)';
-            priceBtn.style.color = 'rgba(255,255,255,0.8)';
+            priceBtn.style.background = 'var(--nv-sunken)';
+            priceBtn.style.color = 'var(--nv-ink-2)';
         };
         priceBtn.addEventListener('click', () => {
             showPriceImageModal();
@@ -401,12 +401,12 @@ function ensurePaywallDom(): {
         closeBtn.style.cssText = `
             padding: 10px; border-radius: 8px;
             background: transparent; border: none;
-            color: rgba(255,255,255,0.2); font-size: 12px;
+            color: var(--nv-ink-3); font-size: 12px;
             font-weight: 400; cursor: pointer;
             transition: all 0.2s; margin-top: 4px;
         `;
-        closeBtn.onmouseover = () => { closeBtn.style.color = 'rgba(255,255,255,0.35)'; };
-        closeBtn.onmouseout = () => { closeBtn.style.color = 'rgba(255,255,255,0.2)'; };
+        closeBtn.onmouseover = () => { closeBtn.style.color = 'var(--nv-ink)'; };
+        closeBtn.onmouseout = () => { closeBtn.style.color = 'var(--nv-ink-3)'; };
 
         btnContainer.appendChild(openLink);
         btnContainer.appendChild(groupChatBtn);

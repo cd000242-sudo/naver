@@ -199,28 +199,28 @@ export async function showLocalImageManagementModal(): Promise<void> {
     const modal = document.createElement('div');
     modal.style.cssText = `
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.8); z-index: 10000; display: flex;
+      background: var(--nv-scrim); z-index: 10000; display: flex;
       align-items: center; justify-content: center; padding: 2rem;
     `;
 
     modal.innerHTML = `
-      <div style="background: var(--bg-primary); border: 3px solid var(--primary); border-radius: 16px; padding: 2rem; max-width: 600px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.5);">
+      <div style="background: var(--bg-primary); border: 3px solid var(--primary); border-radius: 16px; padding: 2rem; max-width: 600px; width: 100%; box-shadow: var(--shadow-xl);">
         <h2 style="color: var(--text-gold); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
           <span style="font-size: 2rem;">💾</span>
           <span>저장된 이미지 관리</span>
         </h2>
         
-        <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.05)); border: 2px solid rgba(59, 130, 246, 0.3); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
+        <div style="background: var(--nv-fill); border: 2px solid var(--nv-select-line); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
           <p style="color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6;">
             이미지를 저장하거나 불러올 수 있습니다.
           </p>
           <div style="display: flex; flex-direction: column; gap: 1rem;">
-            <button type="button" id="open-folder-btn" style="padding: 1rem; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+            <button type="button" id="open-folder-btn" style="padding: 1rem; background: var(--nv-fill); color: var(--text-white); border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
               <span style="font-size: 1.25rem;">📂</span>
               <span>이미지 저장하러 가기 (새 폴더 생성)</span>
             </button>
             
-            <button type="button" id="open-existing-folder-btn" style="padding: 1rem; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+            <button type="button" id="open-existing-folder-btn" style="padding: 1rem; background: var(--nv-amber); color: var(--text-white); border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
               <span style="font-size: 1.25rem;">💾</span>
               <span>기존 폴더에 저장하기</span>
             </button>
@@ -232,7 +232,7 @@ export async function showLocalImageManagementModal(): Promise<void> {
           </div>
           
           ${!hasHeadings ? `
-            <div style="margin-top: 1rem; padding: 1rem; background: rgba(239, 68, 68, 0.1); border: 2px solid rgba(239, 68, 68, 0.3); border-radius: 8px; color: var(--text-muted); font-size: 0.875rem;">
+            <div style="margin-top: 1rem; padding: 1rem; background: var(--nv-red-soft); border: 2px solid var(--nv-red-line); border-radius: 8px; color: var(--text-muted); font-size: 0.875rem;">
               ⚠️ 이미지를 불러오려면 먼저 소제목 분석을 완료해주세요.
             </div>
           ` : ''}
@@ -415,13 +415,13 @@ export async function showFolderSelectionModal(options?: { onFolderSelected?: (f
     const modal = document.createElement('div');
     modal.style.cssText = `
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.8); z-index: 10000; display: flex;
+      background: var(--nv-scrim); z-index: 10000; display: flex;
       align-items: center; justify-content: center; padding: 2rem;
     `;
 
     modal.innerHTML = `
-      <div style="background: var(--bg-primary); border-radius: 16px; padding: 2rem; max-width: 900px; width: 90%; max-height: 85vh; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.5); position: relative; display: flex; flex-direction: column;">
-        <button type="button" class="close-modal-btn" style="position: absolute; top: 1rem; right: 1rem; background: rgba(239, 68, 68, 0.9); color: white; border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.3); transition: all 0.2s; z-index: 1;">✕</button>
+      <div style="background: var(--bg-primary); border-radius: 16px; padding: 2rem; max-width: 900px; width: 90%; max-height: 85vh; overflow: hidden; box-shadow: var(--shadow-xl); position: relative; display: flex; flex-direction: column;">
+        <button type="button" class="close-modal-btn" style="position: absolute; top: 1rem; right: 1rem; background: var(--nv-red); color: var(--text-white); border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: var(--shadow-md); transition: all 0.2s; z-index: 1;">✕</button>
         <h2 style="margin: 0 0 1rem 0; color: var(--text-gold); font-size: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
           <span style="font-size: 1.75rem;">📁</span>
           <span>폴더 선택</span>
@@ -450,8 +450,8 @@ export async function showFolderSelectionModal(options?: { onFolderSelected?: (f
     } catch (error) {
       const msg = (error as Error).message || '환경설정에서 이미지 저장 폴더를 먼저 선택해주세요.';
       modal.innerHTML = `
-        <div style="background: var(--bg-primary); border-radius: 16px; padding: 2rem; max-width: 900px; width: 90%; max-height: 85vh; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.5); position: relative; display: flex; flex-direction: column;">
-          <button type="button" class="close-modal-btn" style="position: absolute; top: 1rem; right: 1rem; background: rgba(239, 68, 68, 0.9); color: white; border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.3); transition: all 0.2s; z-index: 1;">✕</button>
+        <div style="background: var(--bg-primary); border-radius: 16px; padding: 2rem; max-width: 900px; width: 90%; max-height: 85vh; overflow: hidden; box-shadow: var(--shadow-xl); position: relative; display: flex; flex-direction: column;">
+          <button type="button" class="close-modal-btn" style="position: absolute; top: 1rem; right: 1rem; background: var(--nv-red); color: var(--text-white); border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: var(--shadow-md); transition: all 0.2s; z-index: 1;">✕</button>
           <h2 style="margin: 0 0 1rem 0; color: var(--text-gold); font-size: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
             <span style="font-size: 1.75rem;">📁</span>
             <span>폴더 선택</span>
@@ -476,8 +476,8 @@ export async function showFolderSelectionModal(options?: { onFolderSelected?: (f
     const basePathExists = await window.api.checkFileExists(basePath);
     if (!basePathExists) {
       modal.innerHTML = `
-        <div style="background: var(--bg-primary); border-radius: 16px; padding: 2rem; max-width: 900px; width: 90%; max-height: 85vh; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.5); position: relative; display: flex; flex-direction: column;">
-          <button type="button" class="close-modal-btn" style="position: absolute; top: 1rem; right: 1rem; background: rgba(239, 68, 68, 0.9); color: white; border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.3); transition: all 0.2s; z-index: 1;">✕</button>
+        <div style="background: var(--bg-primary); border-radius: 16px; padding: 2rem; max-width: 900px; width: 90%; max-height: 85vh; overflow: hidden; box-shadow: var(--shadow-xl); position: relative; display: flex; flex-direction: column;">
+          <button type="button" class="close-modal-btn" style="position: absolute; top: 1rem; right: 1rem; background: var(--nv-red); color: var(--text-white); border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: var(--shadow-md); transition: all 0.2s; z-index: 1;">✕</button>
           <h2 style="margin: 0 0 1rem 0; color: var(--text-gold); font-size: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
             <span style="font-size: 1.75rem;">📁</span>
             <span>폴더 선택</span>
@@ -525,8 +525,8 @@ export async function showFolderSelectionModal(options?: { onFolderSelected?: (f
 
     if (folderList.length === 0) {
       modal.innerHTML = `
-        <div style="background: var(--bg-primary); border-radius: 16px; padding: 2rem; max-width: 900px; width: 90%; max-height: 85vh; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.5); position: relative; display: flex; flex-direction: column;">
-          <button type="button" class="close-modal-btn" style="position: absolute; top: 1rem; right: 1rem; background: rgba(239, 68, 68, 0.9); color: white; border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.3); transition: all 0.2s; z-index: 1;">✕</button>
+        <div style="background: var(--bg-primary); border-radius: 16px; padding: 2rem; max-width: 900px; width: 90%; max-height: 85vh; overflow: hidden; box-shadow: var(--shadow-xl); position: relative; display: flex; flex-direction: column;">
+          <button type="button" class="close-modal-btn" style="position: absolute; top: 1rem; right: 1rem; background: var(--nv-red); color: var(--text-white); border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: var(--shadow-md); transition: all 0.2s; z-index: 1;">✕</button>
           <h2 style="margin: 0 0 1rem 0; color: var(--text-gold); font-size: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
             <span style="font-size: 1.75rem;">📁</span>
             <span>폴더 선택</span>
@@ -790,25 +790,25 @@ export async function showLocalImageSelectionModal(folderName?: string): Promise
     modal.setAttribute('data-modal-type', 'local-image-selection');
     modal.style.cssText = `
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.7); z-index: 10000; display: flex;
+      background: var(--nv-scrim); z-index: 10000; display: flex;
       align-items: center; justify-content: center; padding: 2rem;
     `;
 
     modal.innerHTML = `
-      <div style="background: var(--bg-primary); border-radius: 12px; padding: 2rem; max-width: 1200px; max-height: 90vh; overflow-y: auto; box-shadow: 0 8px 32px rgba(0,0,0,0.3); position: relative;">
-        <button type="button" class="close-modal-btn" style="position: absolute; top: 1rem; right: 1rem; background: rgba(239, 68, 68, 0.9); color: white; border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.3); transition: all 0.2s;" onmouseover="this.style.background='rgba(220, 38, 38, 1)'; this.style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(239, 68, 68, 0.9)'; this.style.transform='scale(1)';">✕</button>
+      <div style="background: var(--bg-primary); border-radius: 12px; padding: 2rem; max-width: 1200px; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-xl); position: relative;">
+        <button type="button" class="close-modal-btn" style="position: absolute; top: 1rem; right: 1rem; background: var(--nv-red); color: var(--text-white); border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: var(--shadow-md); transition: all 0.2s;" onmouseover="this.style.background='rgba(220, 38, 38, 1)'; this.style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(239, 68, 68, 0.9)'; this.style.transform='scale(1)';">✕</button>
         <h2 style="margin: 0 0 1rem 0; color: var(--text-strong); font-size: 1.5rem;">💾 저장된 이미지 선택</h2>
         <div style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1.5rem;">
           폴더: ${safeTitleFolder} (${imageFiles.length}개 이미지)
         </div>
         
         <!-- 모드 전환 버튼 -->
-        <div style="margin-bottom: 1.5rem; padding: 1rem; background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.05)); border: 2px solid rgba(16, 185, 129, 0.3); border-radius: 12px;">
+        <div style="margin-bottom: 1.5rem; padding: 1rem; background: var(--nv-fill); border: 2px solid var(--nv-green-line); border-radius: 12px;">
           <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 0.75rem;">
             <div style="flex: 1;">
               <div id="mode-status-text" style="font-size: 0.9rem; color: var(--text-muted); font-weight: 500;">일반 모드 - 이미지를 클릭하고 소제목을 선택하세요</div>
             </div>
-            <button type="button" id="mode-toggle-btn" style="padding: 0.75rem 1.5rem; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; white-space: nowrap; transition: all 0.2s;">
+            <button type="button" id="mode-toggle-btn" style="padding: 0.75rem 1.5rem; background: var(--nv-fill); color: var(--text-white); border: none; border-radius: 8px; cursor: pointer; font-weight: 600; white-space: nowrap; transition: all 0.2s;">
               🚀 순서대로 배치 모드
             </button>
           </div>
@@ -1309,13 +1309,13 @@ export async function showLoadImagesFromFoldersModal(): Promise<void> {
     const modal = document.createElement('div');
     modal.style.cssText = `
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.8); z-index: 10000; display: flex;
+      background: var(--nv-scrim); z-index: 10000; display: flex;
       align-items: center; justify-content: center; padding: 1rem;
     `;
 
     modal.innerHTML = `
-      <div style="background: var(--bg-primary); border-radius: 16px; padding: 1.5rem; max-width: 800px; width: 95%; max-height: 90vh; display: flex; flex-direction: column; box-shadow: 0 8px 32px rgba(0,0,0,0.4); position: relative;">
-        <button type="button" class="close-modal-btn" style="position: absolute; top: 1rem; right: 1rem; background: rgba(239, 68, 68, 0.9); color: white; border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.3); transition: all 0.2s; z-index: 10;" onmouseover="this.style.background='rgba(220, 38, 38, 1)'; this.style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(239, 68, 68, 0.9)'; this.style.transform='scale(1)';">✕</button>
+      <div style="background: var(--bg-primary); border-radius: 16px; padding: 1.5rem; max-width: 800px; width: 95%; max-height: 90vh; display: flex; flex-direction: column; box-shadow: var(--shadow-xl); position: relative;">
+        <button type="button" class="close-modal-btn" style="position: absolute; top: 1rem; right: 1rem; background: var(--nv-red); color: var(--text-white); border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: var(--shadow-md); transition: all 0.2s; z-index: 10;" onmouseover="this.style.background='rgba(220, 38, 38, 1)'; this.style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(239, 68, 68, 0.9)'; this.style.transform='scale(1)';">✕</button>
         
         <h2 style="margin: 0 0 0.5rem 0; color: var(--text-strong); font-size: 1.3rem; display: flex; align-items: center; gap: 0.5rem;">
           📁 폴더 선택
@@ -1330,14 +1330,14 @@ export async function showLoadImagesFromFoldersModal(): Promise<void> {
             <input type="text" id="folder-search-input" placeholder="🔍 폴더 제목 검색..." style="width: 100%; padding: 0.75rem 1rem 0.75rem 2.5rem; background: var(--bg-secondary); border: 2px solid var(--border-light); border-radius: 10px; color: var(--text-strong); font-size: 0.9rem; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border-light)'">
             <span style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); font-size: 1rem;">🔍</span>
           </div>
-          <button type="button" id="change-folder-path-btn" style="padding: 0.75rem 1rem; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 0.85rem; white-space: nowrap; display: flex; align-items: center; gap: 0.4rem;">📂 경로 변경</button>
+          <button type="button" id="change-folder-path-btn" style="padding: 0.75rem 1rem; background: var(--nv-amber); color: var(--text-white); border: none; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 0.85rem; white-space: nowrap; display: flex; align-items: center; gap: 0.4rem;">📂 경로 변경</button>
         </div>
         
         <!-- 폴더 목록 (날짜별 그룹) -->
         <div id="folders-container" style="flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 1.5rem;">
           ${sortedDateKeys.map(dateKey => `
             <div class="date-group" data-date="${dateKey}">
-              <div style="font-weight: 700; color: var(--primary); font-size: 0.9rem; margin-bottom: 0.75rem; padding: 0.5rem 0.75rem; background: rgba(59, 130, 246, 0.1); border-radius: 8px; display: inline-block;">
+              <div style="font-weight: 700; color: var(--primary); font-size: 0.9rem; margin-bottom: 0.75rem; padding: 0.5rem 0.75rem; background: var(--nv-select-bg); border-radius: 8px; display: inline-block;">
                 📅 ${dateKey === '기타' ? '기타' : dateKey}
                 <span style="font-weight: 400; color: var(--text-muted); margin-left: 0.5rem;">(${groupedByDate[dateKey].length}개)</span>
               </div>
@@ -1502,7 +1502,7 @@ export async function showImagePlacementModal(folderImages: any[]): Promise<void
   modal.id = 'image-placement-modal';
   modal.style.cssText = `
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.85); z-index: 10001; display: flex;
+    background: var(--nv-scrim-light); z-index: 10001; display: flex;
     align-items: center; justify-content: center; padding: 1rem;
   `;
 
@@ -1535,7 +1535,7 @@ export async function showImagePlacementModal(folderImages: any[]): Promise<void
             <div style="font-size: 0.85rem; font-weight: 600; color: var(--text-strong); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${idx + 1}. ${displayTitle}</div>
             <div style="font-size: 0.75rem; color: ${hasImage ? '#10b981' : 'var(--text-muted)'};">${hasImage ? '✅ 배치됨 (클릭하여 취소)' : '⏳ 대기 중'}</div>
           </div>
-          ${hasImage ? `<span style="font-size: 1.2rem; color: #ef4444; cursor: pointer;" title="배치 취소">❌</span>` : ''}
+          ${hasImage ? `<span style="font-size: 1.2rem; color: var(--nv-red); cursor: pointer;" title="배치 취소">❌</span>` : ''}
         </div>
       `;
     }).join('');
@@ -1592,8 +1592,8 @@ export async function showImagePlacementModal(folderImages: any[]): Promise<void
   };
 
   modal.innerHTML = `
-    <div style="background: var(--bg-primary); border-radius: 16px; padding: 1.5rem; max-width: 1000px; width: 95%; max-height: 90vh; display: flex; flex-direction: column; box-shadow: 0 8px 32px rgba(0,0,0,0.4); position: relative;">
-      <button type="button" class="close-modal-btn" style="position: absolute; top: 1rem; right: 1rem; background: rgba(239, 68, 68, 0.9); color: white; border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; font-weight: bold; z-index: 10;">✕</button>
+    <div style="background: var(--bg-primary); border-radius: 16px; padding: 1.5rem; max-width: 1000px; width: 95%; max-height: 90vh; display: flex; flex-direction: column; box-shadow: var(--shadow-xl); position: relative;">
+      <button type="button" class="close-modal-btn" style="position: absolute; top: 1rem; right: 1rem; background: var(--nv-red); color: var(--text-white); border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; font-weight: bold; z-index: 10;">✕</button>
       
       <h2 style="margin: 0 0 0.5rem 0; color: var(--text-strong); font-size: 1.3rem;">
         🖼️ 이미지를 클릭하여 소제목에 배치
@@ -1610,7 +1610,7 @@ export async function showImagePlacementModal(folderImages: any[]): Promise<void
     return `
           <div class="placement-image" data-img-idx="${idx}" style="width: 100%; height: 100px; border-radius: 8px; overflow: hidden; cursor: pointer; border: 2px solid var(--border-light); transition: all 0.2s; opacity: 0.85; position: relative;">
             <img src="${imageUrl}" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.style.display='none';">
-            <div class="placement-badge" style="display: none; position: absolute; top: 4px; right: 4px; width: 24px; height: 24px; background: #10b981; color: white; border-radius: 50%; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700;"></div>
+            <div class="placement-badge" style="display: none; position: absolute; top: 4px; right: 4px; width: 24px; height: 24px; background: var(--nv-fill); color: var(--text-white); border-radius: 50%; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700;"></div>
           </div>
         `;
   }).join('')}
@@ -1626,8 +1626,8 @@ export async function showImagePlacementModal(folderImages: any[]): Promise<void
       
       <!-- 버튼 -->
       <div style="display: flex; gap: 0.75rem; justify-content: flex-end;">
-        <button type="button" class="reset-placement-btn" style="padding: 0.75rem 1.5rem; background: #ef4444; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">🔄 초기화</button>
-        <button type="button" class="apply-placement-btn" style="padding: 0.75rem 1.5rem; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">✅ 적용하기</button>
+        <button type="button" class="reset-placement-btn" style="padding: 0.75rem 1.5rem; background: var(--nv-red); color: var(--text-white); border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">🔄 초기화</button>
+        <button type="button" class="apply-placement-btn" style="padding: 0.75rem 1.5rem; background: var(--nv-fill); color: var(--text-white); border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">✅ 적용하기</button>
       </div>
     </div>
   `;

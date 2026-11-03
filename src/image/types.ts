@@ -6,7 +6,8 @@
 // [2026-10-10] 'genspark' 추가 — 젠스파크 UI 자동화 엔진
 // ✅ [v2.11.7] 'dropshot' 추가 — 리더스 나노바나나 무제한 (UI 자동화 엔진)
 // [2026-11-03] 'collect-photos' 추가 — 관련 사진 찾기 (생성 아님: 뉴스·기사 실사진 수집, 저작권 동의 필요)
-export type ImageProvider = 'naver' | 'loremflickr' | 'picsum' | 'placeholder' | 'nano-banana' | 'nano-banana-2' | 'nano-banana-pro' | 'nano-banana-pro-fallback' | 'imagen-4-fallback' | 'gemini-2.5-flash-fallback' | 'gemini-3.1-flash-lite-image-fallback' | 'gemini-3.1-flash-image-fallback' | 'gemini-3-pro-image-fallback' | 'gemini-3.1-flash-image-preview-fallback' | 'gemini-3-pro-image-preview-fallback' | 'imagen-4.0-generate-001-fallback' | 'gemini-2.5-flash-image-fallback' | 'openai-image' | 'dall-e-3' | 'collected-image' | 'collected-image-with-text' | 'imagefx' | 'flow' | 'dropshot' | 'genspark' | 'local-folder' | 'collect-photos';
+// [2026-11-03] 'codex-image' 추가 — Codex 구독 이미지 (ChatGPT 구독의 이미지 생성 도구, API 과금 없음)
+export type ImageProvider = 'naver' | 'loremflickr' | 'picsum' | 'placeholder' | 'nano-banana' | 'nano-banana-2' | 'nano-banana-pro' | 'nano-banana-pro-fallback' | 'imagen-4-fallback' | 'gemini-2.5-flash-fallback' | 'gemini-3.1-flash-lite-image-fallback' | 'gemini-3.1-flash-image-fallback' | 'gemini-3-pro-image-fallback' | 'gemini-3.1-flash-image-preview-fallback' | 'gemini-3-pro-image-preview-fallback' | 'imagen-4.0-generate-001-fallback' | 'gemini-2.5-flash-image-fallback' | 'openai-image' | 'dall-e-3' | 'collected-image' | 'collected-image-with-text' | 'imagefx' | 'flow' | 'dropshot' | 'genspark' | 'local-folder' | 'collect-photos' | 'codex-image';
 
 export type ImageFallbackPolicy = 'engine-only' | 'ask' | 'guarantee';
 
@@ -222,7 +223,7 @@ export interface GeneratedImage {
 // ✅ [v2.8.2] 'dall-e-3' 추가 — UI 옵션은 v2.7.15부터 있었지만 ALLOWED_PROVIDER에서 누락되어 assertProvider 실패 후 폴백되던 회귀 차단
 // ✅ [v2.10.335] 'nano-banana'·'nano-banana-2' 추가 — 나노바나나 3종 분리 (각각 별개 모델 라우팅)
 // ✅ [v2.11.7] 'dropshot' 추가 — assertProvider 통과 허용 (리더스 나노바나나 무제한 엔진)
-export const ALLOWED_PROVIDER: ImageProvider[] = ['naver', 'loremflickr', 'picsum', 'placeholder', 'nano-banana', 'nano-banana-2', 'nano-banana-pro', 'nano-banana-pro-fallback', 'imagen-4-fallback', 'gemini-2.5-flash-fallback', 'gemini-3.1-flash-lite-image-fallback', 'gemini-3.1-flash-image-fallback', 'gemini-3-pro-image-fallback', 'gemini-3.1-flash-image-preview-fallback', 'gemini-3-pro-image-preview-fallback', 'imagen-4.0-generate-001-fallback', 'gemini-2.5-flash-image-fallback', 'openai-image', 'dall-e-3', 'collected-image', 'collected-image-with-text', 'imagefx', 'flow', 'dropshot', 'genspark', 'local-folder', 'collect-photos'];
+export const ALLOWED_PROVIDER: ImageProvider[] = ['naver', 'loremflickr', 'picsum', 'placeholder', 'nano-banana', 'nano-banana-2', 'nano-banana-pro', 'nano-banana-pro-fallback', 'imagen-4-fallback', 'gemini-2.5-flash-fallback', 'gemini-3.1-flash-lite-image-fallback', 'gemini-3.1-flash-image-fallback', 'gemini-3-pro-image-fallback', 'gemini-3.1-flash-image-preview-fallback', 'gemini-3-pro-image-preview-fallback', 'imagen-4.0-generate-001-fallback', 'gemini-2.5-flash-image-fallback', 'openai-image', 'dall-e-3', 'collected-image', 'collected-image-with-text', 'imagefx', 'flow', 'dropshot', 'genspark', 'local-folder', 'collect-photos', 'codex-image'];
 
 export function assertProvider(provider: string): asserts provider is ImageProvider {
   if (!ALLOWED_PROVIDER.includes(provider as ImageProvider)) {

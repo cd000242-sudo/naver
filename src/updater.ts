@@ -200,7 +200,7 @@ function createProgressWindow(version: string): void {
             maximizable: false,
             alwaysOnTop: true,
             frame: false,
-            backgroundColor: '#1a1a2e', // transparent 대신 배경색 지정 (더 안정적)
+            backgroundColor: '#F5F6F7', // transparent 대신 배경색 지정 (더 안정적) — theme page color
             webPreferences: {
                 nodeIntegration: false,
                 contextIsolation: true
@@ -214,6 +214,9 @@ function createProgressWindow(version: string): void {
     <head>
         <meta charset="UTF-8">
         <style>
+            /* This window cannot load the page theme sheets; these values mirror theme-naver.css tokens. */
+            :root { --nv-card: #FFFFFF; --nv-line: #C6CBD1; --nv-line-soft: #E3E5E8; --nv-ink: #1E1E23; --nv-ink-3: #6B6B70;
+                    --nv-fill: #00873C; --nv-green-text: #007A37; --nv-red: #D92D20; }
             * { margin: 0; padding: 0; box-sizing: border-box; }
             body {
                 font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -225,14 +228,14 @@ function createProgressWindow(version: string): void {
                 -webkit-app-region: drag;
             }
             .container {
-                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-                border-radius: 16px;
+                background: var(--nv-card);
+                border: 1px solid var(--nv-line);
+                border-radius: 8px;
                 padding: 28px 32px;
-                box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1);
                 width: 380px;
             }
             .title {
-                color: #fff;
+                color: var(--nv-ink);
                 font-size: 16px;
                 font-weight: 600;
                 margin-bottom: 8px;
@@ -241,32 +244,32 @@ function createProgressWindow(version: string): void {
                 gap: 10px;
             }
             .version {
-                color: #6ee7b7;
+                color: var(--nv-green-text);
                 font-size: 13px;
                 margin-bottom: 18px;
             }
             .progress-bar {
-                background: rgba(255,255,255,0.1);
+                background: var(--nv-line-soft);
                 border-radius: 8px;
                 height: 12px;
                 overflow: hidden;
             }
             .progress-fill {
-                background: linear-gradient(90deg, #6ee7b7 0%, #3b82f6 100%);
+                background: var(--nv-fill);
                 height: 100%;
                 width: 0%;
                 border-radius: 8px;
                 transition: width 0.3s ease;
             }
             .status {
-                color: rgba(255,255,255,0.7);
+                color: var(--nv-ink-3);
                 font-size: 12px;
                 margin-top: 12px;
                 display: flex;
                 justify-content: space-between;
             }
-            .percent { color: #6ee7b7; font-weight: 600; }
-            .speed { color: rgba(255,255,255,0.5); }
+            .percent { color: var(--nv-green-text); font-weight: 600; }
+            .speed { color: var(--nv-ink-3); }
         </style>
     </head>
     <body>
@@ -737,11 +740,11 @@ export function initAutoUpdaterEarly(): void {
 
             progressWindow.webContents.executeJavaScript(`
                 document.querySelector('.title').innerHTML = '❌ 업데이트 실패';
-                document.querySelector('.title').style.color = '#ef4444';
+                document.querySelector('.title').style.color = 'var(--nv-red)';
                 document.querySelector('.version').innerHTML = '오류: ${safeErrorMsg}';
-                document.querySelector('.version').style.color = '#fca5a5';
+                document.querySelector('.version').style.color = 'var(--nv-ink-3)';
                 document.querySelector('.progress-bar').style.display = 'none';
-                document.querySelector('.status').innerHTML = '<span style="color:#fff;font-weight:600;">클릭하여 닫기</span>';
+                document.querySelector('.status').innerHTML = '<span style="color:var(--nv-ink);font-weight:600;">클릭하여 닫기</span>';
                 // 전체 body를 클릭 가능하게 변경
                 document.body.style.cssText = '-webkit-app-region:no-drag;cursor:pointer;';
                 document.body.onclick = function() { window.close(); };

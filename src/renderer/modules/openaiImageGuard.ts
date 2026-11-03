@@ -67,16 +67,16 @@ function showModal(opts: {
     return new Promise((resolve) => {
         const overlay = document.createElement('div');
         overlay.style.cssText = `
-            position: fixed; inset: 0; background: rgba(0,0,0,0.65);
+            position: fixed; inset: 0; background: var(--nv-scrim);
             display: flex; align-items: center; justify-content: center;
             z-index: 99999; backdrop-filter: blur(4px);
         `;
         const modal = document.createElement('div');
         modal.style.cssText = `
-            background: #1a1a2e; color: #e0e0e0;
+            background: var(--nv-card); color: var(--nv-ink-3);
             border: 1px solid #4a4a6a; border-radius: 12px;
             max-width: 560px; width: 92%;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            box-shadow: var(--shadow-xl);
             font-family: -apple-system, 'Segoe UI', system-ui, sans-serif;
         `;
         const safeBtnLabel = (s: string) => s.replace(/[<>&"']/g, '');
@@ -88,10 +88,10 @@ function showModal(opts: {
             <div style="padding: 0 1.75rem 1.25rem; font-size: 0.95rem; line-height: 1.6;">
                 ${opts.bodyHtml}
             </div>
-            <div style="display: flex; gap: 0.5rem; padding: 1rem 1.5rem 1.25rem; justify-content: flex-end; border-top: 1px solid #2a2a44;">
+            <div style="display: flex; gap: 0.5rem; padding: 1rem 1.5rem 1.25rem; justify-content: flex-end; border-top: 1px solid var(--nv-line);">
                 ${opts.extraButton ? `<button id="__guard_extra" style="padding: 0.55rem 1rem; background: transparent; color: #8b9dc3; border: 1px solid #4a4a6a; border-radius: 6px; cursor: pointer; font-size: 0.85rem;">${safeBtnLabel(opts.extraButton.label)}</button>` : ''}
-                ${opts.secondary ? `<button id="__guard_secondary" style="padding: 0.55rem 1rem; background: transparent; color: #aaa; border: 1px solid #4a4a6a; border-radius: 6px; cursor: pointer; font-size: 0.9rem;">${safeBtnLabel(opts.secondary.label)}</button>` : ''}
-                <button id="__guard_primary" style="padding: 0.55rem 1.25rem; background: ${opts.primary.danger ? '#dc3545' : '#5b8def'}; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 700; font-size: 0.9rem;">${safeBtnLabel(opts.primary.label)}</button>
+                ${opts.secondary ? `<button id="__guard_secondary" style="padding: 0.55rem 1rem; background: transparent; color: var(--nv-ink-3); border: 1px solid #4a4a6a; border-radius: 6px; cursor: pointer; font-size: 0.9rem;">${safeBtnLabel(opts.secondary.label)}</button>` : ''}
+                <button id="__guard_primary" style="padding: 0.55rem 1.25rem; background: ${opts.primary.danger ? '#dc3545' : '#5b8def'}; color: var(--nv-ink); border: none; border-radius: 6px; cursor: pointer; font-weight: 700; font-size: 0.9rem;">${safeBtnLabel(opts.primary.label)}</button>
             </div>
         `;
         overlay.appendChild(modal);
@@ -129,14 +129,14 @@ export async function checkDallE3Deadline(imageSource: string): Promise<GuardRes
         title: '기존 OpenAI 이미지 옵션 전환 필요',
         bodyHtml: `
             <p style="margin: 0 0 0.75rem;">기존 OpenAI 이미지 설정은 현재 <strong>GPT 이미지 시리즈</strong>로 전환해서 사용해야 합니다.</p>
-            <p style="margin: 0 0 0.75rem; color: #f8b400;">⚠️ 다른 이미지 엔진을 선택해주세요.</p>
-            <ul style="margin: 0.5rem 0 0; padding-left: 1.2rem; color: #b8b8d4; font-size: 0.88rem;">
+            <p style="margin: 0 0 0.75rem; color: var(--nv-amber);">⚠️ 다른 이미지 엔진을 선택해주세요.</p>
+            <ul style="margin: 0.5rem 0 0; padding-left: 1.2rem; color: var(--nv-select-ink); font-size: 0.88rem;">
                 <li><strong>덕트테이프(gpt-image-2.5)</strong> — OpenAI 계정 상태에 따라 Org 인증 필요, 한글 최강</li>
                 <li><strong>나노바나나 프로</strong> — Gemini API, 한글 강</li>
                 <li><strong>Flow</strong> — Google AI Pro 무료 쿼터</li>
                 <li><strong>ImageFX</strong> — Google Labs 실험적 무료, 계정/IP 접근 제한 가능</li>
             </ul>
-            <p style="margin: 0.75rem 0 0; color: #b8b8d4; font-size: 0.8rem;">참고: 5/12 이후 OpenAI 이미지 라인은 덕트테이프(gpt-image-2.5)만 남습니다.</p>
+            <p style="margin: 0.75rem 0 0; color: var(--nv-select-ink); font-size: 0.8rem;">참고: 5/12 이후 OpenAI 이미지 라인은 덕트테이프(gpt-image-2.5)만 남습니다.</p>
         `,
         primary: { label: '확인 (다른 엔진 선택)', danger: true },
     });
@@ -158,14 +158,14 @@ export async function checkOpenAIVerification(imageSource: string): Promise<Guar
         title: '덕트테이프 — Org 인증 확인',
         bodyHtml: `
             <p style="margin: 0 0 0.75rem;">OpenAI 덕트테이프 모델(<strong>gpt-image-2.5</strong>)은 계정에 따라 <strong>Organization Verification</strong>이 완료돼야 호출될 수 있습니다.</p>
-            <p style="margin: 0 0 0.5rem; font-weight: 600; color: #f8b400;">인증 절차</p>
-            <ol style="margin: 0 0 0.75rem; padding-left: 1.2rem; color: #b8b8d4; font-size: 0.88rem; line-height: 1.7;">
+            <p style="margin: 0 0 0.5rem; font-weight: 600; color: var(--nv-amber);">인증 절차</p>
+            <ol style="margin: 0 0 0.75rem; padding-left: 1.2rem; color: var(--nv-select-ink); font-size: 0.88rem; line-height: 1.7;">
                 <li>OpenAI Platform 로그인 → Settings → Organization → General</li>
                 <li>"Verify Organization" 클릭 → 신분증 + 결제수단 + 사용 사례 제출</li>
                 <li>심사 1~수일 (영업일 기준)</li>
                 <li>승인 메일 수신 후 덕트테이프 호출 가능</li>
             </ol>
-            <p style="margin: 0; color: #ff6b6b; font-size: 0.85rem;">⚠️ 인증이 필요한 계정에서 인증 없이 호출하면 OpenAI 측에서 403 에러 반환 → 발행 실패</p>
+            <p style="margin: 0; color: var(--nv-red); font-size: 0.85rem;">⚠️ 인증이 필요한 계정에서 인증 없이 호출하면 OpenAI 측에서 403 에러 반환 → 발행 실패</p>
         `,
         primary: { label: '인증 완료 — 진행' },
         secondary: { label: '아직 안 함 — 중단' },
@@ -204,7 +204,7 @@ export async function checkImageFxGenerationReady(imageSource: string): Promise<
             bodyHtml: `
                 <p style="margin: 0 0 0.75rem;">로그인 확인만으로는 부족해서, 발행 전에 ImageFX 테스트 이미지 1장을 실제 생성해봤습니다.</p>
                 <p style="margin: 0 0 0.75rem; color: #ffb4b4; font-weight: 700;">${escapeGuardHtml(message)}</p>
-                <p style="margin: 0; color: #b8b8d4; font-size: 0.88rem;">현재 계정/IP/지역 조합에서는 대량 발행 중 실패할 가능성이 높습니다. Flow, 리더스 나노바나나프로, OpenAI Image처럼 실제 테스트가 통과한 엔진으로 바꾼 뒤 다시 시작해주세요.</p>
+                <p style="margin: 0; color: var(--nv-select-ink); font-size: 0.88rem;">현재 계정/IP/지역 조합에서는 대량 발행 중 실패할 가능성이 높습니다. Flow, 리더스 나노바나나프로, OpenAI Image처럼 실제 테스트가 통과한 엔진으로 바꾼 뒤 다시 시작해주세요.</p>
             `,
             primary: { label: '다른 엔진 선택 후 다시 시작', danger: true },
         });
@@ -246,7 +246,7 @@ export async function checkFlowSubscription(imageSource: string): Promise<GuardR
         title: 'Flow는 제미나이 웹 구독이 필요합니다',
         bodyHtml: `
             <p style="margin: 0 0 0.75rem;">flow를 무료로 사용하기 위해선 <strong>제미나이 웹 구독 플랜</strong>이 결제되어 있어야 합니다.</p>
-            <p style="margin: 0; color: #b8b8d4; font-size: 0.88rem;">이미 구독 중이라면 이미지 설정 모달의 <strong>🔗 Google 계정 연동</strong>으로 labs.google 로그인을 먼저 완료해주세요. 로그인이 확인되면 이 안내는 다시 뜨지 않습니다.</p>
+            <p style="margin: 0; color: var(--nv-select-ink); font-size: 0.88rem;">이미 구독 중이라면 이미지 설정 모달의 <strong>🔗 Google 계정 연동</strong>으로 labs.google 로그인을 먼저 완료해주세요. 로그인이 확인되면 이 안내는 다시 뜨지 않습니다.</p>
         `,
         primary: { label: '다른 엔진 사용하기', danger: true },
         extraButton: { label: '7,500원 웹구독하러가기', href: 'https://gemini.google.com/subscriptions' },

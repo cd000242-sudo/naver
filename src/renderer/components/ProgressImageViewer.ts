@@ -18,9 +18,8 @@ function makeProgressViewerButton(label: string, ariaLabel: string, extraCss: st
   button.type = 'button';
   button.setAttribute('aria-label', ariaLabel);
   button.textContent = label;
-  button.style.cssText = 'position:fixed; z-index:2147483647; border:1px solid rgba(255,255,255,0.35); border-radius:10px; '
-    + 'background:rgba(15,23,42,0.85); color:white; font-size:26px; line-height:1; cursor:pointer; '
-    + 'display:flex; align-items:center; justify-content:center; user-select:none; ' + extraCss;
+  button.className = 'nv-viewer-btn';
+  button.style.cssText = extraCss;
   return button;
 }
 
@@ -33,18 +32,18 @@ export function openProgressImageViewer(images: readonly ProgressViewerImage[], 
   let current = Math.min(Math.max(0, Math.floor(startIndex || 0)), total - 1);
 
   const overlay = document.createElement('div');
-  overlay.className = PROGRESS_VIEWER_OVERLAY_CLASS;
   overlay.tabIndex = -1;
-  overlay.style.cssText = 'position:fixed; inset:0; z-index:2147483647; display:flex; align-items:center; justify-content:center; '
-    + 'padding:2rem; background:rgba(0,0,0,0.94); cursor:zoom-out; isolation:isolate; pointer-events:auto;';
+  // Pale scrim + white-framed image (theme-naver-components.css section 2); the inline block keeps stacking and cursor only.
+  overlay.className = `${PROGRESS_VIEWER_OVERLAY_CLASS} nv-scrim nv-scrim--light`;
+  overlay.style.cssText = 'z-index:2147483647; padding:2rem; cursor:zoom-out; isolation:isolate; pointer-events:auto;';
 
   const imageEl = document.createElement('img');
-  imageEl.style.cssText = 'max-width:94vw; max-height:86vh; object-fit:contain; border-radius:8px; box-shadow:0 20px 70px rgba(0,0,0,0.65); cursor:default;';
+  imageEl.className = 'nv-viewer-img';
 
   const caption = document.createElement('div');
-  caption.style.cssText = 'position:fixed; left:50%; bottom:18px; transform:translateX(-50%); z-index:2147483647; color:white; '
-    + 'font-size:13px; font-weight:700; background:rgba(15,23,42,0.85); padding:6px 12px; border-radius:8px; max-width:80vw; '
-    + 'white-space:nowrap; overflow:hidden; text-overflow:ellipsis;';
+  caption.className = 'nv-chip';
+  caption.style.cssText = 'position:fixed; left:50%; bottom:18px; transform:translateX(-50%); z-index:2147483647; '
+    + 'max-width:80vw; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;';
 
   const closeButton = makeProgressViewerButton('X', 'Close preview', 'top:18px; right:18px; width:48px; height:48px; font-size:20px;');
   const prevButton = makeProgressViewerButton('‹', 'Previous image', 'left:18px; top:50%; transform:translateY(-50%); width:52px; height:64px;');

@@ -4,7 +4,8 @@ import { createDailyPublishingStore, createDailySourceClaims } from './dailyPubl
 import { createDailyPublishingExecutor, dailyStopsAccount, type DailyPublishingExecutorDeps } from './dailyPublishingExecutor.js';
 import { stopsAllAccounts } from '../../automation/publishFailureClassifier.js';
 import type { DailyPublishingPlan } from '../../scheduler/dailyPublishingTypes.js';
-import { resolveDailyCaptureCategory, resolveDailyImageMode, usesDailyAiImages } from '../../scheduler/dailyPublishingModel.js';
+import { nextDailyRunAt, nextDailyScheduledFor, resolveDailyCaptureCategory, resolveDailyImageMode, usesDailyAiImages } from '../../scheduler/dailyPublishingModel.js';
+import { collectNewMissedJobs, markMissedJobsSeen, missedNoticeText } from './dailyMissedNotice.js';
 import path from 'node:path';
 
 interface Dependencies extends Omit<DailyPublishingExecutorDeps, 'reserveSource'> {
@@ -34,13 +35,18 @@ export function createDailyPublishingRuntime(deps: Dependencies) {
   } });
   let sourceClaims: ReturnType<typeof createDailySourceClaims> | undefined;
   const store = () => createDailyPublishingStore(path.join(deps.storagePath(), 'daily-publishing-v1.json'));
+  /** Accounts whose waiting post cannot start for a reason other than a busy lane (paused, logged out, not paid). */
+  const blocked = new Set<string>();
   const available = async (plan: DailyPublishingPlan) => {
     const status = await deps.availability();
-    if (!running || !status.ready || !status.paid || deps.busy()) return { available: false };
+    const unavailable = () => { blocked.add(plan.accountId); return { available: false }; };
+    if (!running || !status.ready || !status.paid) return unavailable();
     const account = await deps.readAccount(plan.accountId);
-    if (!account) return { available: false };
+    if (!account) return unavailable();
     const safety = deps.safety(plan.accountId);
-    return { available: !safety.paused && !safety.busy };
+    if (safety.paused || safety.busy) return unavailable();
+    blocked.delete(plan.accountId);
+    return { available: !deps.busy() };
   };
   const scheduler = new DailyPublishingScheduler({ load: () => store().load(), save: state => store().save(state),
     now: deps.now || (() => new Date()), checkAvailable: available,
@@ -89,17 +95,57 @@ export function createDailyPublishingRuntime(deps: Dependencies) {
     onPlanChanged: accountId => active.get(accountId)?.abort() });
   let timer: ReturnType<typeof setInterval> | undefined;
   let lastFailure = false;
+  const clock = () => (deps.now || (() => new Date()))();
+  const readState = () => { try { return scheduler.getState(); } catch { return undefined; } };
+  // A missed slot is announced once; slots already missed before this run started are not replayed.
+  const missedSeen = new Set<string>();
+  let missedSeeded = false;
+  let sawBusy = false;
+  const announceMissed = () => {
+    const state = readState();
+    if (!state) return;
+    const fresh = collectNewMissedJobs(state.runs, missedSeen);
+    if (!fresh.length) return;
+    const text = missedNoticeText(fresh, sawBusy);
+    sawBusy = false;
+    deps.notify?.(text.title, text.body);
+  };
   const tick = () => void scheduler.initialize().then(async () => {
     if (running) deps.keepAwake?.(scheduler.getState().plans.some(plan => plan.enabled));
+    if (!missedSeeded) { markMissedJobsSeen(scheduler.getState().runs, missedSeen); missedSeeded = true; }
     // Startup/loading and other app work are temporary; they must not disable saved plans.
     const status = await deps.availability();
+    if (deps.busy() || active.size > 0) sawBusy = true;
     if (!running || !status.ready || deps.busy()) return;
     await scheduler.tick();
+    announceMissed();
   }).then(() => { lastFailure = false; }).catch(() => {
     if (!lastFailure) console.warn('[DailyPublishing] 상태 확인이 필요합니다. 자동 실행을 시작하지 않았습니다.');
     lastFailure = true;
   });
   return { api, scheduler,
+    /** True when at least one saved plan is switched on (decides whether closing the window keeps running in the tray). */
+    hasEnabledPlan: () => readState()?.plans.some(plan => plan.enabled) === true,
+    /** A daily post is claimed or being written/published right now. */
+    isExecuting: () => active.size > 0 || readState()?.runs.some(run => run.status === 'inflight') === true,
+    /** A post is waiting and the daily publisher would start it on its next tick (not held back by a paused account etc.). */
+    hasDuePending(): boolean {
+      const state = readState();
+      if (!state) return false;
+      const nowMs = clock().getTime();
+      return state.runs.some(run => run.status === 'pending' && !blocked.has(run.accountId)
+        && state.plans.some(plan => plan.accountId === run.accountId && plan.enabled)
+        && (!run.prepareAt || Date.parse(run.prepareAt) <= nowMs) && (!run.scheduledFor || nowMs < Date.parse(run.scheduledFor)));
+    },
+    /** ISO time of the next publication (the reservation time for schedule plans), or null when no plan is on. */
+    nextPublishAt(): string | null {
+      const state = readState();
+      if (!state) return null;
+      const now = clock();
+      const times = state.plans.filter(plan => plan.enabled).map(plan => plan.mode === 'schedule'
+        ? nextDailyScheduledFor(plan, now, state.runs) : nextDailyRunAt(plan, now, state.runs)).filter((value): value is string => Boolean(value));
+      return times.sort()[0] ?? null;
+    },
     start() { if (timer) return; running = true; tick(); timer = setInterval(tick, 15_000); timer.unref?.(); },
     dispose() { running = false; deps.keepAwake?.(false); for (const controller of active.values()) controller.abort(); if (timer) clearInterval(timer); timer = undefined; },
   };

@@ -87,6 +87,7 @@ const SLOW_IMAGE_PROVIDERS = new Set([
   'nano-banana-pro',
   'nano-banana-2',
   'openai-image',
+  'codex-image', // [2026-11-03] one image takes 35s+ through the Codex CLI
 ]);
 let imageGenerationQueue: Promise<void> = Promise.resolve();
 let lastImageGenerationFinishedAt = 0;
@@ -616,11 +617,11 @@ function openCpImageLightbox(src: string): void {
   if (!box) {
     box = document.createElement('div');
     box.id = 'cp-image-lightbox';
-    box.style.cssText = 'position: fixed; inset: 0; z-index: 40000; background: rgba(0, 0, 0, 0.88); display: none; align-items: center; justify-content: center; cursor: zoom-out;';
+    box.style.cssText = 'position: fixed; inset: 0; z-index: 40000; background: var(--nv-scrim-light); display: none; align-items: center; justify-content: center; cursor: zoom-out;';
     box.addEventListener('click', () => { (box as HTMLElement).style.display = 'none'; });
     const img = document.createElement('img');
     img.id = 'cp-image-lightbox-img';
-    img.style.cssText = 'max-width: 92vw; max-height: 92vh; object-fit: contain; border-radius: 12px; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);';
+    img.style.cssText = 'max-width: 92vw; max-height: 92vh; object-fit: contain; border-radius: 12px; box-shadow: var(--shadow-xl);';
     box.appendChild(img);
     document.body.appendChild(box);
   }
@@ -1161,24 +1162,24 @@ async function generateImagesWithCostSafetyInternal(options: any): Promise<any> 
                   // 1) 그리드 아이템 업데이트 — 플레이스홀더를 실제 이미지로 교체
                   const gridItem = livePanel.querySelector(`.live-grid-item[data-index="${index}"]`) as HTMLElement;
                   if (gridItem && liveSrc) {
-                    gridItem.style.border = '2px solid #22c55e';
+                    gridItem.className = 'live-grid-item nv-slot nv-slot--completed';
                     gridItem.innerHTML = `
-                      <img src="${liveSrc}" style="width: 100%; height: 100%; object-fit: cover;">
-                      <span style="position: absolute; bottom: 2px; right: 2px; background: #22c55e; color: white; border-radius: 50%; width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; font-size: 0.6rem;">✓</span>
+                      <img src="${liveSrc}" class="nv-slot__img">
+                      <span class="nv-slot__check">✓</span>
                     `;
                   }
                   // 2) 첫 번째 완료 이미지 → 메인 미리보기 자동 표시
                   if (liveSrc && index === 0) {
                     const mainContainer = document.getElementById('live-main-preview-container');
                     if (mainContainer) {
-                      mainContainer.innerHTML = `<img src="${liveSrc}" alt="${image.heading || ''}" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px;">`;
+                      mainContainer.innerHTML = `<img src="${liveSrc}" alt="${image.heading || ''}">`;
                     }
                   }
                   // 3) 로그 추가
                   const logArea = livePanel.querySelector('#live-preview-log');
                   if (logArea) {
                     const logEntry = document.createElement('div');
-                    logEntry.style.marginBottom = '4px';
+                    logEntry.className = 'nv-log__line nv-log__line--ok';
                     logEntry.textContent = `✅ [${index + 1}/${total}] ${String(image.heading || '').substring(0, 25)}... 완료`;
                     logArea.appendChild(logEntry);
                     logArea.scrollTop = logArea.scrollHeight;

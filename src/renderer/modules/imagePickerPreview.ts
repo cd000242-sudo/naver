@@ -32,21 +32,21 @@ function openImagePickerPreview(options: ImagePickerPreviewOptions, returnFocus:
   let zoom = 1;
   const overlay = document.createElement('div');
   overlay.dataset.imagePickerPreview = '';
-  overlay.style.cssText = 'position:fixed; inset:0; z-index:2147483000; background:rgba(2,6,23,.92); display:flex; align-items:center; justify-content:center; padding:12px; box-sizing:border-box;';
+  overlay.style.cssText = 'position:fixed; inset:0; z-index:2147483000; background: var(--nv-scrim); display:flex; align-items:center; justify-content:center; padding:12px; box-sizing:border-box;';
   overlay.innerHTML = `
     <section role="dialog" aria-modal="true" aria-labelledby="image-picker-preview-title" aria-describedby="image-picker-preview-help"
-      style="width:min(1400px,100%);height:calc(100vh - 24px);max-height:100%;box-sizing:border-box;display:flex;flex-direction:column;gap:12px;padding:16px;background:#0f172a;color:#fff;border:1px solid #64748b;border-radius:16px;">
+      style="width:min(1400px,100%);height:calc(100vh - 24px);max-height:100%;box-sizing:border-box;display:flex;flex-direction:column;gap:12px;padding:16px;background: var(--nv-card);color: var(--nv-ink);border: 1px solid var(--nv-line);border-radius:16px;">
       <header style="display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0;">
         <h2 id="image-picker-preview-title" data-preview-title style="margin:0;font-size:20px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></h2>
         <button type="button" data-preview-action="close" style="${previewButtonStyle}flex-shrink:0;">✕ 닫기</button>
       </header>
-      <p id="image-picker-preview-help" style="margin:0;font-size:17px;line-height:1.5;color:#cbd5e1;">크게 보고 확인하세요. 확대하면 스크롤로 구석까지 볼 수 있습니다.</p>
-      <div data-preview-viewport role="region" aria-label="이미지 확대 영역 · 방향키로 이동" tabindex="0" style="flex:1;min-height:0;overflow:auto;background:#020617;border-radius:10px;">
+      <p id="image-picker-preview-help" style="margin:0;font-size:17px;line-height:1.5;color: var(--nv-ink-2);">크게 보고 확인하세요. 확대하면 스크롤로 구석까지 볼 수 있습니다.</p>
+      <div data-preview-viewport role="region" aria-label="이미지 확대 영역 · 방향키로 이동" tabindex="0" style="flex:1;min-height:0;overflow:auto;background: var(--nv-card);border-radius:10px;">
         <div data-preview-canvas style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;">
           <img alt="" style="display:block;width:100%;height:100%;object-fit:contain;">
         </div>
       </div>
-      <p role="status" aria-live="polite" hidden style="margin:0;font-size:18px;color:#fecaca;"></p>
+      <p role="status" aria-live="polite" hidden style="margin:0;font-size:18px;color: #fecaca;"></p>
       <footer style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;">
         <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;">
           <button type="button" data-preview-action="zoom-out" style="${previewButtonStyle}">− 축소</button>
@@ -54,7 +54,7 @@ function openImagePickerPreview(options: ImagePickerPreviewOptions, returnFocus:
           <button type="button" data-preview-action="zoom-in" style="${previewButtonStyle}">＋ 확대</button>
           <button type="button" data-preview-action="fit" style="${previewButtonStyle}">화면에 맞춤</button>
         </div>
-        <button type="button" data-preview-action="select" style="${previewButtonStyle}background:#15803d;border-color:#4ade80;">이 이미지 선택</button>
+        <button type="button" data-preview-action="select" style="${previewButtonStyle}background: var(--nv-sunken);border-color: var(--nv-green-line);">이 이미지 선택</button>
       </footer>
     </section>`;
   const control = (action: string) => overlay.querySelector<HTMLButtonElement>(`[data-preview-action="${action}"]`)!;

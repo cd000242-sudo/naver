@@ -39,7 +39,7 @@ export function showVeoProgressOverlay(title: string): void {
     overlay.style.cssText = `
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.72);
+    background: var(--nv-scrim);
     z-index: 10005;
     display: flex;
     align-items: center;
@@ -50,12 +50,12 @@ export function showVeoProgressOverlay(title: string): void {
     const box = document.createElement('div');
     box.style.cssText = `
     width: min(560px, 92vw);
-    background: rgba(15, 23, 42, 0.96);
-    border: 1px solid rgba(255,255,255,0.12);
+    background: var(--nv-card);
+    border: 1px solid var(--nv-line);
     border-radius: 14px;
-    box-shadow: 0 24px 70px rgba(0,0,0,0.45);
+    box-shadow: var(--shadow-xl);
     padding: 1.05rem 1.1rem;
-    color: rgba(255,255,255,0.92);
+    color: var(--nv-ink);
   `;
 
     const header = document.createElement('div');
@@ -70,7 +70,7 @@ export function showVeoProgressOverlay(title: string): void {
     titleEl.style.cssText = 'font-weight:900; letter-spacing:-0.2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;';
     titleEl.textContent = `AI 영상 생성 중: ${title}`;
     const messageEl = document.createElement('div');
-    messageEl.style.cssText = 'margin-top:0.25rem; color: rgba(255,255,255,0.75); font-size: 0.9rem; line-height: 1.35;';
+    messageEl.style.cssText = 'margin-top:0.25rem; color: var(--nv-ink-2); font-size: 0.9rem; line-height: 1.35;';
     messageEl.textContent = '준비 중...';
     titleWrap.appendChild(titleEl);
     titleWrap.appendChild(messageEl);
@@ -83,7 +83,7 @@ export function showVeoProgressOverlay(title: string): void {
     const closeBtn = document.createElement('button');
     closeBtn.type = 'button';
     closeBtn.textContent = '✕';
-    closeBtn.style.cssText = 'border:none; background:transparent; color:rgba(255,255,255,0.7); cursor:pointer; font-size:1rem; padding:0.15rem 0.4rem; border-radius:999px;';
+    closeBtn.style.cssText = 'border:none; background: transparent; color: var(--nv-ink-2); cursor:pointer; font-size:1rem; padding:0.15rem 0.4rem; border-radius:999px;';
     closeBtn.onmouseenter = () => {
         closeBtn.style.backgroundColor = 'rgba(148,163,184,0.25)';
         closeBtn.style.color = 'rgba(255,255,255,0.9)';
@@ -104,20 +104,20 @@ export function showVeoProgressOverlay(title: string): void {
     progressRow.style.cssText = 'display:flex; align-items:center; gap:0.6rem; margin-top: 0.9rem;';
 
     const progressOuter = document.createElement('div');
-    progressOuter.style.cssText = 'flex:1; height: 10px; background: rgba(255,255,255,0.10); border-radius: 999px; overflow:hidden;';
+    progressOuter.style.cssText = 'flex:1; height: 10px; background: var(--nv-sunken); border-radius: 999px; overflow:hidden;';
     const barEl = document.createElement('div');
-    barEl.style.cssText = 'height:100%; width: 0%; background: linear-gradient(90deg, #22c55e, #60a5fa); border-radius: 999px; transition: width 260ms ease;';
+    barEl.style.cssText = 'height:100%; width: 0%; background: var(--nv-fill); border-radius: 999px; transition: width 260ms ease;';
     progressOuter.appendChild(barEl);
 
     const percentEl = document.createElement('div');
-    percentEl.style.cssText = 'min-width: 48px; text-align:right; font-weight: 800; color: rgba(255,255,255,0.85);';
+    percentEl.style.cssText = 'min-width: 48px; text-align:right; font-weight: 800; color: var(--nv-ink-2);';
     percentEl.textContent = '0%';
 
     progressRow.appendChild(progressOuter);
     progressRow.appendChild(percentEl);
 
     const hint = document.createElement('div');
-    hint.style.cssText = 'margin-top: 0.75rem; font-size: 0.82rem; color: rgba(255,255,255,0.55);';
+    hint.style.cssText = 'margin-top: 0.75rem; font-size: 0.82rem; color: var(--nv-ink-3);';
     hint.textContent = '이 창을 닫아도 AI 영상 생성은 계속 진행됩니다. 완료되면 AI 영상 목록에 자동으로 추가됩니다.';
 
     box.appendChild(header);

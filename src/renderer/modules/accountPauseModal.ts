@@ -120,9 +120,11 @@ async function accountPauseModalTitleFor(id: string, token: string): Promise<str
 
 let accountPauseModalClose: (() => void) | null = null;
 
-function accountPauseModalElement<K extends keyof HTMLElementTagNameMap>(tag: K, css: string, text?: string): HTMLElementTagNameMap[K] {
+// Colors come from the theme classes (theme-naver-components.css section 2); `layout` carries stacking / sizing only.
+function accountPauseModalElement<K extends keyof HTMLElementTagNameMap>(tag: K, className: string, text?: string, layout = ''): HTMLElementTagNameMap[K] {
   const element = document.createElement(tag);
-  element.style.cssText = css;
+  element.className = className;
+  if (layout) element.style.cssText = layout;
   if (text !== undefined) element.textContent = text;
   return element;
 }
@@ -138,18 +140,18 @@ export async function showAccountPauseModal(input: unknown, context: { naverId?:
   accountPauseModalClose?.();
 
   let code = reported; let state: AccountPauseModalState | undefined; let resolved = false; let serial = 0; let title = '';
-  const overlay = accountPauseModalElement('div', 'position:fixed;inset:0;z-index:100002;background:rgba(0,0,0,0.65);display:flex;align-items:center;justify-content:center;');
+  const overlay = accountPauseModalElement('div', 'nv-scrim', undefined, 'z-index:100002;');
   overlay.id = ACCOUNT_PAUSE_MODAL_ID; overlay.dataset.naverId = naverId; overlay.dataset.code = code;
   overlay.setAttribute('role', 'dialog'); overlay.setAttribute('aria-modal', 'true'); overlay.setAttribute('aria-labelledby', 'account-pause-modal-heading');
-  const panel = accountPauseModalElement('div', 'max-width:520px;width:92%;background:var(--bg-card,#1e293b);color:var(--text-strong,#f1f5f9);border:1px solid rgba(245,158,11,0.55);border-radius:14px;padding:1.4rem;box-shadow:0 20px 60px rgba(0,0,0,0.5);');
-  const heading = accountPauseModalElement('div', 'font-size:1.05rem;font-weight:700;margin-bottom:0.6rem;');
+  const panel = accountPauseModalElement('div', 'nv-modal nv-modal--warn', undefined, 'max-width:520px;');
+  const heading = accountPauseModalElement('div', 'nv-modal__title');
   heading.id = 'account-pause-modal-heading';
-  const reason = accountPauseModalElement('div', 'font-size:0.88rem;line-height:1.6;color:var(--text-muted,#cbd5e1);margin-bottom:0.7rem;');
-  const hint = accountPauseModalElement('div', 'font-size:0.88rem;font-weight:600;line-height:1.55;margin-bottom:0.7rem;color:#86efac;');
-  const question = accountPauseModalElement('div', 'font-size:0.95rem;font-weight:700;line-height:1.5;margin-bottom:0.7rem;color:#fbbf24;');
-  const statusLine = accountPauseModalElement('div', 'font-size:0.85rem;line-height:1.5;min-height:1.2rem;margin-bottom:0.8rem;color:#93c5fd;', '계정 상태를 확인하는 중입니다…');
+  const reason = accountPauseModalElement('div', 'nv-modal__text');
+  const hint = accountPauseModalElement('div', 'nv-modal__text nv-tone--ok', undefined, 'font-weight:600;');
+  const question = accountPauseModalElement('div', 'nv-modal__text nv-tone--warn', undefined, 'font-size:0.95rem;font-weight:700;');
+  const statusLine = accountPauseModalElement('div', 'nv-modal__note nv-tone--info', '계정 상태를 확인하는 중입니다…', 'min-height:1.2rem;margin-bottom:0.8rem;');
   statusLine.setAttribute('role', 'status');
-  const actions = accountPauseModalElement('div', 'display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:flex-end;');
+  const actions = accountPauseModalElement('div', 'nv-modal__actions');
   panel.append(heading, reason, hint, question, statusLine, actions); overlay.append(panel);
 
   const draw = () => {
@@ -171,9 +173,9 @@ export async function showAccountPauseModal(input: unknown, context: { naverId?:
     actions.textContent = '';
     for (const name of [...names, 'close']) {
       const secondary = name === 'close' || (windowOpen && name === 'open');
-      const button = accountPauseModalElement('button', secondary
-        ? 'padding:0.5rem 1rem;border-radius:8px;border:1px solid rgba(148,163,184,0.4);background:transparent;color:inherit;cursor:pointer;'
-        : `padding:0.5rem 1rem;border-radius:8px;border:none;background:${name === 'confirm-not-published' ? '#b45309' : '#16834a'};color:#fff;font-weight:600;cursor:pointer;${windowOpen && name === 'resume' ? 'font-weight:800;box-shadow:0 0 0 3px rgba(74,222,128,0.45);' : ''}`,
+      const buttonClass = secondary ? 'nv-btn'
+        : `nv-btn ${name === 'confirm-not-published' ? 'nv-btn--warn' : 'nv-btn--primary'}${windowOpen && name === 'resume' ? ' nv-btn--emph' : ''}`;
+      const button = accountPauseModalElement('button', buttonClass,
       name === 'close' ? '닫기' : windowOpen && name === 'open' ? '네이버 창 보기' : ACCOUNT_PAUSE_MODAL_LABELS[name]);
       button.type = 'button'; button.dataset.action = name;
       button.addEventListener('click', () => {

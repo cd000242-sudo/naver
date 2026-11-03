@@ -44,12 +44,12 @@ export function collectRetiredEngineGateOptions(root: ParentNode = document): Re
 
 function retiredEngineGateCard(option: RetiredEngineGateOption): string {
   const price = option.price
-    ? `<div style="font-size:0.8rem;color:#4b5563;margin-top:0.2rem;">${retiredEngineGateEscape(option.price)}</div>`
+    ? `<div class="nv-modal__note" style="margin-top:0.2rem;">${retiredEngineGateEscape(option.price)}</div>`
     : '';
   return `
-    <label data-engine-option="${retiredEngineGateEscape(option.value)}" style="display:flex;gap:0.75rem;align-items:flex-start;border:2px solid #e5e7eb;border-radius:12px;padding:0.75rem 0.9rem;cursor:pointer;background:#fff;">
-      <input type="radio" name="retired-engine-choice" value="${retiredEngineGateEscape(option.value)}" style="margin-top:3px;width:18px;height:18px;accent-color:#4f46e5;cursor:pointer;">
-      <div style="flex:1;min-width:0;"><div style="font-weight:800;color:#111827;font-size:0.95rem;">${retiredEngineGateEscape(option.title)}</div>${price}</div>
+    <label data-engine-option="${retiredEngineGateEscape(option.value)}" style="display:flex;gap:0.75rem;align-items:flex-start;padding:0.75rem 0.9rem;cursor:pointer;">
+      <input type="radio" name="retired-engine-choice" value="${retiredEngineGateEscape(option.value)}" style="margin-top:3px;width:18px;height:18px;cursor:pointer;">
+      <div style="flex:1;min-width:0;"><div style="font-weight:800;font-size:0.95rem;">${retiredEngineGateEscape(option.title)}</div>${price}</div>
     </label>`;
 }
 
@@ -58,18 +58,20 @@ function retiredEngineGateRender(options: readonly RetiredEngineGateOption[], la
   overlay.id = RETIRED_ENGINE_GATE_ID;
   overlay.setAttribute('role', 'dialog');
   overlay.setAttribute('aria-modal', 'true');
-  overlay.style.cssText = 'position:fixed;inset:0;z-index:10000001;background:rgba(15,23,42,0.82);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:1rem;';
+  // Colors come from the theme classes (theme-naver-components.css section 2); only the stacking order stays inline.
+  overlay.className = 'nv-scrim';
+  overlay.style.zIndex = '10000001';
   overlay.innerHTML = `
-    <div style="background:#fff;border-radius:18px;width:min(560px,100%);max-height:92vh;display:flex;flex-direction:column;box-shadow:0 30px 60px -20px rgba(0,0,0,0.6);overflow:hidden;">
+    <div class="nv-modal nv-modal--sections" style="max-width:560px;">
       <div style="padding:1.25rem 1.5rem 0.5rem;">
-        <div style="font-size:1.2rem;font-weight:900;color:#111827;">🎨 이미지 엔진을 다시 골라 주세요</div>
-        <div style="font-size:0.9rem;color:#4b5563;margin-top:0.4rem;line-height:1.5;">선택하셨던 <b>${retiredEngineGateEscape(labels)}</b> 이미지 엔진은 지원이 끝났습니다. 앱이 대신 다른 유료 엔진을 고르지 않으니, 사용할 엔진을 직접 골라 주세요. 고르기 전에는 이미지 생성이 시작되지 않습니다.</div>
-        <div style="font-size:0.78rem;color:#6b7280;margin-top:0.4rem;">Flow · 리더스 나노바나나 · 젠스파크는 이미지 탭에서 로그인이 필요합니다.</div>
+        <div class="nv-modal__title" style="font-size:1.2rem;font-weight:900;margin-bottom:0;">🎨 이미지 엔진을 다시 골라 주세요</div>
+        <div class="nv-modal__text" style="margin:0.4rem 0 0;">선택하셨던 <b>${retiredEngineGateEscape(labels)}</b> 이미지 엔진은 지원이 끝났습니다. 앱이 대신 다른 유료 엔진을 고르지 않으니, 사용할 엔진을 직접 골라 주세요. 고르기 전에는 이미지 생성이 시작되지 않습니다.</div>
+        <div class="nv-modal__note" style="margin-top:0.4rem;">Flow · 리더스 나노바나나 · 젠스파크는 이미지 탭에서 로그인이 필요합니다.</div>
       </div>
       <div style="padding:0.5rem 1.5rem;display:flex;flex-direction:column;gap:0.5rem;overflow-y:auto;">${options.map(retiredEngineGateCard).join('')}</div>
-      <div style="padding:0.9rem 1.5rem 1.25rem;border-top:1px solid #e5e7eb;display:flex;justify-content:flex-end;align-items:center;gap:0.75rem;">
-        <span id="${RETIRED_ENGINE_GATE_ID}-hint" style="font-size:0.82rem;color:#6b7280;flex:1;">엔진을 하나 고르면 확인 버튼이 켜집니다.</span>
-        <button id="${RETIRED_ENGINE_GATE_ID}-confirm" type="button" disabled style="background:#4f46e5;color:#fff;border:none;border-radius:10px;padding:0.7rem 1.4rem;font-weight:800;font-size:0.95rem;cursor:pointer;">이 엔진으로 저장</button>
+      <div class="nv-modal__foot" style="padding:0.9rem 1.5rem 1.25rem;">
+        <span id="${RETIRED_ENGINE_GATE_ID}-hint" class="nv-modal__note">엔진을 하나 고르면 확인 버튼이 켜집니다.</span>
+        <button id="${RETIRED_ENGINE_GATE_ID}-confirm" type="button" disabled class="nv-btn nv-btn--primary" style="padding:0.7rem 1.4rem;font-size:0.95rem;">이 엔진으로 저장</button>
       </div>
     </div>`;
   return overlay;
@@ -100,9 +102,8 @@ export function showRetiredImageEngineGate(labels: string): Promise<string | nul
     overlay.addEventListener('change', () => {
       const picked = overlay.querySelector<HTMLInputElement>('input[name="retired-engine-choice"]:checked');
       overlay.querySelectorAll<HTMLElement>('[data-engine-option]').forEach((card) => {
-        const active = card.dataset.engineOption === picked?.value;
-        card.style.borderColor = active ? '#4f46e5' : '#e5e7eb';
-        card.style.background = active ? '#eef2ff' : '#fff';
+        // The chosen look comes from the theme (checked radio -> lavender card), not from inline colors.
+        card.classList.toggle('is-chosen', card.dataset.engineOption === picked?.value);
       });
       confirmBtn.disabled = !picked;
       hint.textContent = '';

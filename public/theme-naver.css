@@ -28,6 +28,8 @@
   /* "Pick one" cards: lavender fill + purple border when chosen. Tabs use --nv-fill instead; never mix the two. */
   --nv-select-bg: #F3EFFF; --nv-select-border: #7B61FF; --nv-select-ink: #3F2D9E; --nv-select-tag-bg: #E3DAFF;
   --nv-hover-bg: #F2F3F5;
+  /* Modal parts (theme-naver-components.css section 2): dim scrim, pale scrim for lightboxes, soft lavender slot border. */
+  --nv-red-line: #F7C9C5; --nv-amber-line: #F5D9A8; --nv-scrim: rgba(30, 30, 35, 0.42); --nv-scrim-light: rgba(245, 246, 247, 0.94); --nv-select-line: #CFC2FF;
   --nv-red: #D92D20; --nv-red-soft: #FFF1F0; --nv-amber: #B45309; --nv-amber-soft: #FFF8EB;
   --nv-blue: #1D63D6; --nv-pink: #BE185D;
   --nv-font: 'Pretendard', 'Noto Sans KR', 'Malgun Gothic', sans-serif;

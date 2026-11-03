@@ -597,6 +597,7 @@ export function initHeadingImageGeneration(): void {
     'openai-image': 'OpenAI DALL-E',
     'local-folder': '내 폴더',
     'collect-photos': '관련 사진 찾기',
+    'codex-image': 'Codex 구독 이미지',
   };
 
   // ✅ [2026-02-02] 실시간 이미지 미리보기 패널 (Live Preview)
@@ -626,75 +627,68 @@ export function initHeadingImageGeneration(): void {
 
       const panel = document.createElement('div');
       panel.id = 'live-image-preview-panel';
-      panel.style.cssText = `
-        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-        background: rgba(0,0,0,0.85); z-index: 99999;
-        display: flex; flex-direction: column; padding: 20px;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      `;
+      // Colors come from the theme classes (theme-naver-components.css section 2); only layout stays inline.
+      panel.className = 'nv-scrim';
+      panel.style.zIndex = '99999';
 
       panel.innerHTML = `
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-          <h2 id="live-preview-title" style="color: white; margin: 0; font-size: 1.3rem;">
+        <div class="nv-modal nv-modal--wide">
+        <div class="nv-modal__head">
+          <h2 id="live-preview-title" class="nv-modal__title">
             🎨 이미지 생성 중... (0/${this.items.length})
           </h2>
-          <button id="live-preview-close" style="background: #ef4444; color: white; border: none; border-radius: 8px; padding: 8px 16px; cursor: pointer; font-weight: bold;">
-            ✕ 닫기
-          </button>
+          <button id="live-preview-close" class="nv-btn nv-btn--danger">✕ 닫기</button>
         </div>
-        <div style="color: #a1a1aa; margin-bottom: 16px; font-size: 0.9rem;">
-          ${sourceLabel}로 생성 중
-        </div>
-        
+        <div class="nv-modal__sub">${sourceLabel}로 생성 중</div>
+
         <!-- ✅ [2026-02-02] 좌우 배치: 왼쪽 큰 이미지, 오른쪽 그리드+로그 -->
         <div style="flex: 1; display: flex; gap: 20px; overflow: hidden; min-height: 0;">
-          
+
           <!-- 왼쪽: 메인 미리보기 영역 -->
           <div style="flex: 0 0 350px; display: flex; flex-direction: column;">
-            <div id="live-main-preview-container" style="width: 350px; height: 350px; background: #27272a; border-radius: 12px; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 2px solid #3f3f46;">
-              <div style="color: #71717a; text-align: center;">
-                <div style="font-size: 3rem; margin-bottom: 8px;">🖼️</div>
+            <div id="live-main-preview-container" class="nv-stage nv-stage--square">
+              <div>
+                <div class="nv-stage__glyph">🖼️</div>
                 <div>이미지 생성 대기 중...</div>
               </div>
             </div>
-            <div style="margin-top: 12px; padding: 10px; background: #27272a; border-radius: 8px; text-align: center;">
-              <button id="btn-open-images-folder" style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; border-radius: 8px; padding: 10px 20px; cursor: pointer; font-weight: bold; width: 100%; transition: all 0.2s;">
-                📂 생성된 이미지 폴더 열기
-              </button>
+            <div class="nv-panel" style="margin-top: 12px;">
+              <button id="btn-open-images-folder" class="nv-btn nv-btn--primary nv-btn--block">📂 생성된 이미지 폴더 열기</button>
             </div>
           </div>
-          
+
           <!-- 오른쪽: 그리드 + 로그 영역 -->
           <div style="flex: 1; display: flex; flex-direction: column; gap: 12px; min-height: 0;">
-            
+
             <!-- 그리드 미리보기 영역 -->
             <div style="flex: 0 0 auto;">
-              <div style="color: #a1a1aa; font-size: 0.85rem; margin-bottom: 8px;">📸 이미지 미리보기 (클릭하여 크게 보기)</div>
-              <div id="live-image-grid" style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; max-height: 120px; overflow-y: auto; padding: 8px; background: #18181b; border-radius: 8px;">
+              <div class="nv-label">📸 이미지 미리보기 (클릭하여 크게 보기)</div>
+              <div id="live-image-grid" class="nv-slot-grid">
                 ${this.items.map((item, i) => `
-                  <div class="live-grid-item" data-index="${i}" style="aspect-ratio: 1; background: #27272a; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 2px solid #3f3f46; position: relative; overflow: hidden;">
-                    <span style="color: #71717a; font-size: 1.2rem;">⏳</span>
+                  <div class="live-grid-item nv-slot nv-slot--pending" data-index="${i}">
+                    <span class="nv-slot__glyph">⏳</span>
                   </div>
                 `).join('')}
               </div>
             </div>
-            
+
             <!-- ✅ 텍스트 포함 체크박스 -->
-            <div style="flex: 0 0 auto; padding: 10px; background: #27272a; border-radius: 8px;">
-              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; color: white;">
-                <input type="checkbox" id="live-text-overlay-checkbox" style="width: 18px; height: 18px; cursor: pointer;">
+            <div class="nv-panel" style="flex: 0 0 auto;">
+              <label class="nv-check">
+                <input type="checkbox" id="live-text-overlay-checkbox">
                 <span>🔤 <strong>썸네일 텍스트 포함</strong></span>
               </label>
             </div>
-            
+
             <!-- 로그 영역 (더 넓게) -->
             <div style="flex: 1; min-height: 150px; overflow: hidden; display: flex; flex-direction: column;">
-              <div style="color: #a1a1aa; font-size: 0.85rem; margin-bottom: 8px;">📋 진행 로그</div>
-              <div id="live-preview-log" style="flex: 1; background: #18181b; border-radius: 8px; padding: 12px; overflow-y: auto; font-family: monospace; font-size: 0.85rem; color: #d4d4d8; line-height: 1.5;">
-                <div>⏳ 이미지 생성을 시작합니다...</div>
+              <div class="nv-label">📋 진행 로그</div>
+              <div id="live-preview-log" class="nv-log" style="flex: 1;">
+                <div class="nv-log__line">⏳ 이미지 생성을 시작합니다...</div>
               </div>
             </div>
           </div>
+        </div>
         </div>
       `;
 
@@ -787,9 +781,7 @@ export function initHeadingImageGeneration(): void {
     setMainPreview(url: string, heading: string) {
       const container = document.getElementById('live-main-preview-container');
       if (container) {
-        container.innerHTML = `
-          <img src="${url}" alt="${heading}" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px;">
-        `;
+        container.innerHTML = `<img src="${url}" alt="${heading}">`;
       }
     },
 
@@ -803,14 +795,14 @@ export function initHeadingImageGeneration(): void {
       const gridItem = this.grid?.querySelector(`[data-index="${index}"]`) as HTMLElement;
       if (!gridItem) return;
 
+      // The slot's look is its state class (waiting / generating / completed / failed), never an inline color.
+      if (status !== 'completed' || url) gridItem.className = `live-grid-item nv-slot nv-slot--${status}`;
       if (status === 'generating') {
-        gridItem.style.border = '2px solid #3b82f6';
-        gridItem.innerHTML = `<span style="color: #3b82f6; font-size: 1.2rem;" class="spin-animation">⚡</span>`;
+        gridItem.innerHTML = `<span class="nv-slot__glyph spin-animation">⚡</span>`;
       } else if (status === 'completed' && url) {
-        gridItem.style.border = '2px solid #22c55e';
         gridItem.innerHTML = `
-          <img src="${url}" style="width: 100%; height: 100%; object-fit: cover;">
-          <span style="position: absolute; bottom: 2px; right: 2px; background: #22c55e; color: white; border-radius: 50%; width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; font-size: 0.6rem;">✓</span>
+          <img src="${url}" class="nv-slot__img">
+          <span class="nv-slot__check">✓</span>
         `;
         // 첫 번째 완료된 이미지를 자동으로 메인 미리보기에 표시
         const completedCount = this.items.filter(i => i.status === 'completed').length;
@@ -818,8 +810,7 @@ export function initHeadingImageGeneration(): void {
           this.setMainPreview(url, this.items[index].heading);
         }
       } else if (status === 'failed') {
-        gridItem.style.border = '2px solid #ef4444';
-        gridItem.innerHTML = `<span style="color: #ef4444; font-size: 1.2rem;">✕</span>`;
+        gridItem.innerHTML = `<span class="nv-slot__glyph">✕</span>`;
       }
 
       // 진행률 업데이트
@@ -829,12 +820,20 @@ export function initHeadingImageGeneration(): void {
       }
     },
 
+    // Tone class suffix for a log line: success green, warning amber, error red, otherwise plain.
+    logTone(message: string): string {
+      if (/❌|⛔|실패|오류|에러/.test(message)) return ' nv-log__line--err';
+      if (/⚠️|경고|건너뛰|재시도/.test(message)) return ' nv-log__line--warn';
+      if (/✅|🎉|완료|성공/.test(message)) return ' nv-log__line--ok';
+      return '';
+    },
+
     // 로그 추가
     addLog(message: string) {
       if (this.logArea) {
         const logEntry = document.createElement('div');
         logEntry.textContent = message;
-        logEntry.style.marginBottom = '4px';
+        logEntry.className = `nv-log__line${this.logTone(message)}`;
         this.logArea.appendChild(logEntry);
         this.logArea.scrollTop = this.logArea.scrollHeight;
       }
@@ -1510,7 +1509,7 @@ export function initHeadingImageGeneration(): void {
               } else {
                 throw new Error(imageResult.message || 'Flow 이미지 생성 실패. Google 로그인 + AI Pro 쿼터 확인 필요.');
               }
-            } else if (imageSource === 'dropshot' || imageSource === 'genspark' || imageSource === 'nano-banana-2' || imageSource === 'nano-banana') {
+            } else if (imageSource === 'dropshot' || imageSource === 'genspark' || imageSource === 'codex-image' || imageSource === 'nano-banana-2' || imageSource === 'nano-banana') {
               // [2026-08-04] 누락 분기 3종 추가. dropshot(무료 구독·UI 기본 선택값),
               // nano-banana-2(₩97), nano-banana(₩54)가 분기 없이 최종 else로 떨어져
               // 최고가 nano-banana-pro(₩185)로 대체 과금되던 경로를 끊는다.
@@ -4648,7 +4647,7 @@ async function showFolderSelectionForHeading(
   modal.id = 'folder-selection-modal';
   modal.style.cssText = `
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.8); z-index: 10001;
+    background: var(--nv-scrim); z-index: 10001;
     display: flex; align-items: center; justify-content: center;
   `;
 
@@ -4670,7 +4669,7 @@ async function showFolderSelectionForHeading(
         <span style="font-size: 1.5rem; line-height: 1;">📂</span>
         <div style="min-width:0; flex: 1;">
           <div style="display:flex; align-items:center; gap: 0.5rem;">
-            ${dateLabel ? `<span style="background: rgba(99, 102, 241, 0.2); color: var(--primary); padding: 2px 6px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; white-space: nowrap;">${dateLabel}</span>` : ''}
+            ${dateLabel ? `<span style="background: var(--nv-select-bg); color: var(--primary); padding: 2px 6px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; white-space: nowrap;">${dateLabel}</span>` : ''}
             <span style="color: var(--text-strong); font-weight: 800; font-size: 0.95rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${escapeHtml(titleLabel)}</span>
           </div>
           <div style="margin-top: 0.25rem; color: var(--text-muted); font-size: 0.78rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${escapeHtml(name)}</div>
@@ -4681,8 +4680,8 @@ async function showFolderSelectionForHeading(
   };
 
   modal.innerHTML = `
-    <div style="background: var(--bg-primary); border-radius: 16px; padding: 2rem; max-width: 900px; width: 90%; max-height: 85vh; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.5); position: relative; display: flex; flex-direction: column;">
-      <button id="close-folder-modal" style="position: absolute; top: 1rem; right: 1rem; background: rgba(239, 68, 68, 0.9); color: white; border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.3); transition: all 0.2s; z-index: 1;" onmouseover="this.style.background='rgba(220, 38, 38, 1)'; this.style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(239, 68, 68, 0.9)'; this.style.transform='scale(1)';">✕</button>
+    <div style="background: var(--bg-primary); border-radius: 16px; padding: 2rem; max-width: 900px; width: 90%; max-height: 85vh; overflow: hidden; box-shadow: var(--shadow-xl); position: relative; display: flex; flex-direction: column;">
+      <button id="close-folder-modal" style="position: absolute; top: 1rem; right: 1rem; background: var(--nv-red); color: var(--text-white); border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: var(--shadow-md); transition: all 0.2s; z-index: 1;" onmouseover="this.style.background='rgba(220, 38, 38, 1)'; this.style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(239, 68, 68, 0.9)'; this.style.transform='scale(1)';">✕</button>
       <h2 style="margin: 0 0 1rem 0; color: var(--text-gold); font-size: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
         <span style="font-size: 1.75rem;">📁</span>
         <span>"${safeHeadingTitle}" 소제목에 배치할 이미지 폴더 선택</span>
@@ -4694,7 +4693,7 @@ async function showFolderSelectionForHeading(
           <input type="text" id="heading-folder-search-input" placeholder="폴더명 검색 (예: 바디프랜드, 2025-12-05)" style="width: 100%; padding: 0.6rem 0.75rem 0.6rem 2.25rem; background: var(--bg-tertiary); border: 2px solid var(--border-light); border-radius: 8px; color: var(--text-strong); font-size: 0.9rem;"/>
           <span style="position: absolute; left: 0.6rem; top: 50%; transform: translateY(-50%); font-size: 1rem;">🔍</span>
         </div>
-        <button id="heading-folder-refresh-btn" type="button" title="방금 수집한 폴더가 안 보이면 새로고침" style="padding: 0.5rem 0.85rem; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: 700; white-space: nowrap;">🔄 새로고침</button>
+        <button id="heading-folder-refresh-btn" type="button" title="방금 수집한 폴더가 안 보이면 새로고침" style="padding: 0.5rem 0.85rem; background: var(--nv-fill); color: var(--text-white); border: none; border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: 700; white-space: nowrap;">🔄 새로고침</button>
         <span id="heading-folder-count-label" style="color: var(--text-muted); font-size: 0.8rem; white-space: nowrap;">${sortedFolders.length}개</span>
       </div>
 
@@ -4901,7 +4900,7 @@ function showImageSelectionForHeading(headingIndex: number, headingTitle: string
   modal.id = 'image-selection-modal';
   modal.style.cssText = `
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.8); z-index: 10002;
+    background: var(--nv-scrim); z-index: 10002;
     display: flex; align-items: center; justify-content: center;
   `;
 
@@ -4911,7 +4910,7 @@ function showImageSelectionForHeading(headingIndex: number, headingTitle: string
   const selectedImages: Set<string> = new Set();
 
   modal.innerHTML = `
-    <div style="background: var(--bg-primary); border-radius: 16px; padding: 2rem; max-width: 900px; width: 90%; max-height: 85vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.5);">
+    <div style="background: var(--bg-primary); border-radius: 16px; padding: 2rem; max-width: 900px; width: 90%; max-height: 85vh; overflow-y: auto; box-shadow: var(--shadow-xl);">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
         <h2 style="margin: 0; color: var(--text-strong);">
           🖼️ "${safeHeadingTitle}" 소제목에 추가할 이미지 선택
@@ -4925,7 +4924,7 @@ function showImageSelectionForHeading(headingIndex: number, headingTitle: string
           <div class="image-picker-tile" style="min-width:0;">
           <button type="button" class="img-item" aria-label="${i + 1}번 이미지 선택" aria-pressed="false" data-img-path="${escapeHtml(img.filePath)}" style="
             position: relative;
-            width:100%; padding:0; display:block; background:var(--bg-tertiary);
+            width:100%; padding:0; display:block; background: var(--bg-tertiary);
             aspect-ratio: 1;
             border-radius: 8px;
             overflow: hidden;
@@ -4935,7 +4934,7 @@ function showImageSelectionForHeading(headingIndex: number, headingTitle: string
           ">
             <img src="${escapeHtml(img.previewDataUrl || toFileUrlMaybe(img.filePath))}" alt="${i + 1}번 이미지" style="width: 100%; height: 100%; object-fit: cover;"
                  onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect fill=%22%23333%22 width=%22100%22 height=%22100%22/%3E%3C/svg%3E'">
-            <div class="check-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(59, 130, 246, 0.5); display: none; align-items: center; justify-content: center;">
+            <div class="check-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--nv-select-bg); display: none; align-items: center; justify-content: center;">
               <span style="font-size: 2rem;">✅</span>
             </div>
           </button>
@@ -4947,7 +4946,7 @@ function showImageSelectionForHeading(headingIndex: number, headingTitle: string
         <span id="selected-count" style="color: var(--text-muted);">0개 선택됨</span>
         <div style="display: flex; gap: 0.75rem;">
           <button id="cancel-img-modal" style="padding: 0.75rem 1.5rem; background: var(--bg-tertiary); color: var(--text-strong); border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer;">취소</button>
-          <button id="confirm-img-modal" style="padding: 0.75rem 1.5rem; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">선택 완료</button>
+          <button id="confirm-img-modal" style="padding: 0.75rem 1.5rem; background: var(--nv-fill); color: var(--text-white); border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">선택 완료</button>
         </div>
       </div>
     </div>
@@ -5049,7 +5048,7 @@ function applyImageToHeadingFromFolder(headingIndex: number, headingTitle: strin
       imgItem.style.cssText = 'position: relative; aspect-ratio: 1; border-radius: 6px; overflow: hidden;';
       imgItem.innerHTML = `
         <img src="file:///${filePath.replace(/\\/g, '/')}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect fill=%22%23333%22 width=%22100%22 height=%22100%22/%3E%3C/svg%3E'">
-        <button type="button" class="remove-single-grid-image-btn" data-heading-index="${headingIndex}" data-image-index="${existingImages}" data-heading-title="${safeTitle}" data-image-key="${escapeHtml(String(imageKey || ''))}" style="position: absolute; top: 4px; right: 4px; background: rgba(239,68,68,0.9); color: white; border: none; border-radius: 50%; width: 24px; height: 24px; cursor: pointer; font-size: 0.8rem;">✕</button>
+        <button type="button" class="remove-single-grid-image-btn" data-heading-index="${headingIndex}" data-image-index="${existingImages}" data-heading-title="${safeTitle}" data-image-key="${escapeHtml(String(imageKey || ''))}" style="position: absolute; top: 4px; right: 4px; background: var(--nv-red); color: var(--text-white); border: none; border-radius: 50%; width: 24px; height: 24px; cursor: pointer; font-size: 0.8rem;">✕</button>
       `;
       grid.appendChild(imgItem);
     }
@@ -5241,7 +5240,7 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
       } else {
         throw new Error(imageResult.message || 'Flow 이미지 생성 실패. Google 로그인 상태를 확인해주세요.');
       }
-    } else if (imageSource === 'dropshot' || imageSource === 'genspark' || imageSource === 'nano-banana-2' || imageSource === 'nano-banana') {
+    } else if (imageSource === 'dropshot' || imageSource === 'genspark' || imageSource === 'codex-image' || imageSource === 'nano-banana-2' || imageSource === 'nano-banana') {
       // [2026-08-04] 일괄 생성과 동일한 누락 분기 3종 — 개별 재생성에서도
       // 선택 엔진이 최고가 nano-banana-pro로 대체되던 경로를 끊는다.
       console.log(`[ImageGen] 선택 엔진으로 개별 재생성: ${imageSource}`);
@@ -5408,7 +5407,7 @@ function showMultipleImageSelectionModal(headingIndex: number, headingTitle: str
   modal.id = 'multiple-image-selection-modal';
   modal.style.cssText = `
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.8); z-index: 10001;
+    background: var(--nv-scrim); z-index: 10001;
     display: flex; align-items: center; justify-content: center;
   `;
 
@@ -5426,7 +5425,7 @@ function showMultipleImageSelectionModal(headingIndex: number, headingTitle: str
         <span id="selected-count" style="color: var(--text-muted);">0개 선택됨</span>
         <div style="display: flex; gap: 0.75rem;">
           <button id="cancel-multi-img" style="padding: 0.75rem 1.5rem; background: var(--bg-tertiary); color: var(--text-strong); border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer;">취소</button>
-          <button id="confirm-multi-img" style="padding: 0.75rem 1.5rem; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">선택 완료</button>
+          <button id="confirm-multi-img" style="padding: 0.75rem 1.5rem; background: var(--nv-fill); color: var(--text-white); border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">선택 완료</button>
         </div>
         </div>
       </div>
@@ -5481,11 +5480,11 @@ function showMultipleImageSelectionModal(headingIndex: number, headingTitle: str
       item.setAttribute('aria-label', `${i + 1}번 이미지 선택`);
       item.setAttribute('aria-pressed', 'false');
       item.setAttribute('data-img-path', img);
-      item.style.cssText = 'width:100%; padding:0; display:block; background:var(--bg-tertiary); position: relative; aspect-ratio: 1; border-radius: 8px; overflow: hidden; border: 3px solid transparent; cursor: pointer; transition: all 0.2s;';
+      item.style.cssText = 'width:100%; padding:0; display:block; background: var(--bg-tertiary); position: relative; aspect-ratio: 1; border-radius: 8px; overflow: hidden; border: 3px solid transparent; cursor: pointer; transition: all 0.2s;';
       const src = toFileUrlMaybe(img);
       item.innerHTML = `
         <img src="${escapeHtml(src)}" alt="${i + 1}번 이미지" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='${safeFallback}'">
-        <div class="check-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(59, 130, 246, 0.5); display: none; align-items: center; justify-content: center;">
+        <div class="check-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--nv-select-bg); display: none; align-items: center; justify-content: center;">
           <span style="font-size: 2rem;">✅</span>
         </div>
       `;

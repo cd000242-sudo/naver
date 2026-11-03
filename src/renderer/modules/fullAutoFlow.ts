@@ -2901,6 +2901,7 @@ async function generateAIImagesForHeadings(headings, formData, structuredContent
         'dropshot': '리더스 나노바나나 무제한',
         'genspark': '젠스파크',
         'collect-photos': '관련 사진 찾기',
+        'codex-image': 'Codex 구독 이미지',
         'nano-banana': '나노바나나',
         'nano-banana-2': '나노바나나2',
         'openai-image': 'OpenAI DALL-E',
@@ -3295,6 +3296,9 @@ async function generateAIImagesForHeadings(headings, formData, structuredContent
     return finalImagesWithThumbnail;
 }
 const PUBLISH_AUTOMATION_TIMEOUT_MS = 1500000;
+// The main process may hold a post in line while a daily post uses the publish lane (publishLane LANE_WAIT_LIMIT_MS,
+// 45 minutes). That wait must not eat the publish limit, or the screen gives up while the post still runs.
+const PUBLISH_LANE_WAIT_ALLOWANCE_MS = 45 * 60_000;
 // Automatic login was removed (the user logs in on the Naver window). The only rerun left is one after the browser
 // itself died or detached (shouldCloseBrowserBeforePublishRetry) — that is a second editor entry, bounded to one.
 const PUBLISH_SESSION_RECOVERY_RETRY_DELAY_MS = 10000;
@@ -3455,7 +3459,7 @@ async function retryRunAutomationAfterRecoverablePublishFailure(apiClient, paylo
     const retryResponse = await apiClient.call('runAutomation', [retryPayload], {
         retryCount: 0,
         retryDelay: 5000,
-        timeout: PUBLISH_AUTOMATION_TIMEOUT_MS,
+        timeout: PUBLISH_AUTOMATION_TIMEOUT_MS + PUBLISH_LANE_WAIT_ALLOWANCE_MS,
     });
     if (retryResponse.success && retryResponse.data?.success) {
         appendLog('✅ 브라우저 세션 복구 후 발행 재시도에 성공했습니다.');
@@ -3902,7 +3906,7 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
     const apiResponse = await apiClient.call('runAutomation', [payload], {
         retryCount: 0,
         retryDelay: 5000,
-        timeout: PUBLISH_AUTOMATION_TIMEOUT_MS
+        timeout: PUBLISH_AUTOMATION_TIMEOUT_MS + PUBLISH_LANE_WAIT_ALLOWANCE_MS
     });
     if (!apiResponse.success) {
         const errorMsg = apiResponse.error || '블로그 발행 실패';

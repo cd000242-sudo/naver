@@ -10,6 +10,8 @@
  */
 import { GEMINI_IMAGE_MODELS, OPENAI_IMAGE_MODELS } from './modelRegistry.js';
 import { COLLECT_PHOTOS_ENGINE, COLLECT_PHOTOS_ENGINE_LABEL } from './collectPhotosPolicy.js';
+import { CODEX_IMAGE_ENGINE, CODEX_IMAGE_ENGINE_LABEL } from './codexImagePolicy.js';
+import { AGENT_IMAGE_PROFILES } from '../agentCli/agentModelDefaults.js';
 
 export interface ImageEngineSpec {
   /** UI provider 값 — localStorage 저장 + generateImages 디스패치 공통 키 */
@@ -155,6 +157,22 @@ export const COLLECT_PHOTOS: ImageEngineSpec = {
   freeTierNote: '이미지 생성이 아니라 웹에 공개된 뉴스·기사 사진을 수집합니다. 비용은 들지 않으며, 사진 사용에 대한 책임은 사용자에게 있습니다.',
 };
 
+/**
+ * Codex 구독 이미지 — ChatGPT 구독(Codex CLI)의 이미지 생성 도구로 그린다. API 과금 없음, 구독 한도를 쓴다.
+ * 생성 모델 ID·비용 시험이 고정한 IMAGE_ENGINE_CATALOG 에는 넣지 않는다(collect-photos 와 같은 이유: API 모델이 아니다).
+ */
+export const CODEX_IMAGE: ImageEngineSpec = {
+  value: CODEX_IMAGE_ENGINE,
+  label: CODEX_IMAGE_ENGINE_LABEL,
+  tagline: 'ChatGPT 구독의 GPT 이미지 · 한글 문구 정확 · Codex 연결 필요 · 장당 약 35초',
+  model: `codex/${AGENT_IMAGE_PROFILES.codex.model}`,
+  forceModelKey: null,
+  costKrw: 0,
+  koreanText: true,
+  icon: '🐙',
+  freeTierNote: 'API 비용은 들지 않지만 ChatGPT 구독의 사용 한도를 씁니다. 한도가 소진되면 리셋 시각을 안내하고 멈추며 다른 엔진으로 바꾸지 않습니다.',
+};
+
 /** AI 생성엔진 카탈로그 — 그리드/드롭다운 노출 순서 */
 // [2026-10-10] 사용자에게 보이는 목록에서 나노바나나 프로·2.5는 뺐다 (스펙 상수와 NANO_PROVIDER_TO_MODEL_KEY는 옛 값 호환용으로 유지).
 export const IMAGE_ENGINE_CATALOG: ImageEngineSpec[] = [
@@ -167,7 +185,7 @@ export const IMAGE_ENGINE_CATALOG: ImageEngineSpec[] = [
 
 /** provider 값 → 엔진 스펙 조회 */
 export function getImageEngineSpec(value: string): ImageEngineSpec | undefined {
-  return IMAGE_ENGINE_CATALOG.find((e) => e.value === value) ?? (value === COLLECT_PHOTOS.value ? COLLECT_PHOTOS : undefined);
+  return IMAGE_ENGINE_CATALOG.find((e) => e.value === value) ?? (value === COLLECT_PHOTOS.value ? COLLECT_PHOTOS : value === CODEX_IMAGE.value ? CODEX_IMAGE : undefined);
 }
 
 /** 나노바나나 3종 provider 값 → nanoBananaProGenerator forceModelKey */

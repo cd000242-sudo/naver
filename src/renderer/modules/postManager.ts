@@ -1055,12 +1055,12 @@ export function previewGeneratedPost(postId: string): void {
   const modal = document.createElement('div');
   modal.style.cssText = `
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.7); z-index: 10000; display: flex;
+    background: var(--nv-scrim); z-index: 10000; display: flex;
     align-items: center; justify-content: center; padding: 2rem;
   `;
 
   modal.innerHTML = `
-    <div style="background: var(--bg-primary); border-radius: 12px; padding: 2rem; max-width: 800px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: 0 8px 32px rgba(0,0,0,0.3); position: relative;">
+    <div style="background: var(--bg-primary); border-radius: 12px; padding: 2rem; max-width: 800px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-xl); position: relative;">
       <button type="button" class="close-preview-btn" style="position: absolute; top: 1rem; right: 1rem; background: var(--bg-tertiary); border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; font-size: 1.25rem; display: flex; align-items: center; justify-content: center;">×</button>
 
       <!-- 제목 -->
@@ -1085,8 +1085,8 @@ export function previewGeneratedPost(postId: string): void {
 
       <!-- 버튼 -->
       <div style="display: flex; gap: 0.5rem; margin-top: 1.5rem;">
-        <button type="button" class="load-from-preview-btn" data-post-id="${escapeGeneratedPostAttribute(postId)}" style="flex: 1; padding: 0.75rem; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">📂 불러오기</button>
-        ${sanitizeGeneratedPostExternalUrl(post.publishedUrl) ? `<button type="button" class="open-published-btn" data-url="${escapeGeneratedPostAttribute(sanitizeGeneratedPostExternalUrl(post.publishedUrl))}" style="padding: 0.75rem 1.5rem; background: #10b981; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">🔗 발행글 보기</button>` : ''}
+        <button type="button" class="load-from-preview-btn" data-post-id="${escapeGeneratedPostAttribute(postId)}" style="flex: 1; padding: 0.75rem; background: var(--primary); color: var(--nv-ink); border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">📂 불러오기</button>
+        ${sanitizeGeneratedPostExternalUrl(post.publishedUrl) ? `<button type="button" class="open-published-btn" data-url="${escapeGeneratedPostAttribute(sanitizeGeneratedPostExternalUrl(post.publishedUrl))}" style="padding: 0.75rem 1.5rem; background: var(--nv-fill); color: var(--text-white); border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">🔗 발행글 보기</button>` : ''}
         <button type="button" class="close-preview-btn" style="padding: 0.75rem 1.5rem; background: var(--bg-tertiary); color: var(--text-strong); border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer;">닫기</button>
       </div>
     </div>
@@ -1258,12 +1258,12 @@ function showImportPostsSelectionModal(importedPosts: GeneratedPost[]): void {
   const modal = document.createElement('div');
   modal.style.cssText = `
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.7); z-index: 10000; display: flex;
+    background: var(--nv-scrim); z-index: 10000; display: flex;
     align-items: center; justify-content: center; padding: 2rem;
   `;
 
   modal.innerHTML = `
-    <div style="background: var(--bg-primary); border-radius: 12px; padding: 2rem; max-width: 800px; max-height: 90vh; overflow-y: auto; box-shadow: 0 8px 32px rgba(0,0,0,0.3); position: relative;">
+    <div style="background: var(--bg-primary); border-radius: 12px; padding: 2rem; max-width: 800px; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-xl); position: relative;">
       <button type="button" class="close-import-modal-btn" style="position: absolute; top: 1rem; right: 1rem; background: var(--bg-tertiary); border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; font-size: 1.25rem; display: flex; align-items: center; justify-content: center;">×</button>
       <h2 style="margin: 0 0 1rem 0; color: var(--text-strong); font-size: 1.5rem;">📤 가져올 글 선택</h2>
       <div style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1.5rem;">
@@ -1289,7 +1289,7 @@ function showImportPostsSelectionModal(importedPosts: GeneratedPost[]): void {
         `).join('')}
       </div>
       <div style="display: flex; gap: 0.5rem;">
-        <button type="button" class="confirm-import-btn" style="flex: 1; padding: 0.75rem; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">가져오기</button>
+        <button type="button" class="confirm-import-btn" style="flex: 1; padding: 0.75rem; background: var(--primary); color: var(--nv-ink); border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">가져오기</button>
         <button type="button" class="close-import-modal-btn" style="flex: 1; padding: 0.75rem; background: var(--bg-tertiary); color: var(--text-strong); border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer; font-weight: 600;">취소</button>
       </div>
     </div>
@@ -1391,7 +1391,7 @@ export function showPostSelectionModal(
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: var(--nv-scrim);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1407,7 +1407,7 @@ export function showPostSelectionModal(
     max-width: 600px;
     max-height: 80vh;
     overflow-y: auto;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    box-shadow: var(--shadow-xl);
   `;
 
   const normalizeKey = (v: unknown): string => {
@@ -1459,8 +1459,8 @@ export function showPostSelectionModal(
       </select>
     </div>
     <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
-      <span id="post-selection-published-badge" style="padding: 0.25rem 0.5rem; background: rgba(16, 185, 129, 0.15); color: #10b981; border-radius: 4px; font-size: 0.8rem; font-weight: 600;">✅ 발행됨 ${initial.published.length}개</span>
-      <span id="post-selection-unpublished-badge" style="padding: 0.25rem 0.5rem; background: rgba(156, 163, 175, 0.15); color: var(--text-muted); border-radius: 4px; font-size: 0.8rem;">⏳ 미발행 ${initial.unpublished.length}개</span>
+      <span id="post-selection-published-badge" style="padding: 0.25rem 0.5rem; background: var(--nv-green-soft); color: var(--nv-green-text); border-radius: 4px; font-size: 0.8rem; font-weight: 600;">✅ 발행됨 ${initial.published.length}개</span>
+      <span id="post-selection-unpublished-badge" style="padding: 0.25rem 0.5rem; background: var(--nv-sunken); color: var(--text-muted); border-radius: 4px; font-size: 0.8rem;">⏳ 미발행 ${initial.unpublished.length}개</span>
     </div>
     <div id="post-list" style="display: flex; flex-direction: column; gap: 0.5rem;">
       ${initial.sorted.map((post, idx) => `
@@ -1474,15 +1474,15 @@ export function showPostSelectionModal(
                 ${post.publishedAt ? ' • 발행: ' + new Date(post.publishedAt).toLocaleDateString('ko-KR') : ''}
               </div>
               <div style="display:flex; gap: 0.4rem; align-items:center; margin-bottom: 0.35rem; flex-wrap: wrap;">
-                <span style="font-size: 0.75rem; padding: 0.2rem 0.5rem; border-radius: 999px; background: rgba(59,130,246,0.15); color: var(--text-strong); font-weight: 800;">${escapeHtml(getGeneratedPostCategoryLabel(normalizeKey((post as any)?.category)))}</span>
-                <span style="font-size: 0.75rem; padding: 0.2rem 0.5rem; border-radius: 999px; background: rgba(148,163,184,0.15); color: var(--text-muted); font-weight: 800;">🖼️ ${(post.images?.length || 0)}개</span>
+                <span style="font-size: 0.75rem; padding: 0.2rem 0.5rem; border-radius: 999px; background: var(--nv-select-bg); color: var(--text-strong); font-weight: 800;">${escapeHtml(getGeneratedPostCategoryLabel(normalizeKey((post as any)?.category)))}</span>
+                <span style="font-size: 0.75rem; padding: 0.2rem 0.5rem; border-radius: 999px; background: var(--nv-sunken); color: var(--text-muted); font-weight: 800;">🖼️ ${(post.images?.length || 0)}개</span>
               </div>
               ${post.publishedUrl ? `
-                <div style="font-size: 0.75rem; color: #10b981; background: rgba(16, 185, 129, 0.1); padding: 0.25rem 0.5rem; border-radius: 4px; display: inline-block;">
+                <div style="font-size: 0.75rem; color: var(--nv-green-text); background: var(--nv-green-soft); padding: 0.25rem 0.5rem; border-radius: 4px; display: inline-block;">
                   🔗 ${escapeHtml(post.publishedUrl.length > 50 ? post.publishedUrl.substring(0, 50) + '...' : post.publishedUrl)}
                 </div>
               ` : `
-                <div style="font-size: 0.75rem; color: #f59e0b; background: rgba(245, 158, 11, 0.1); padding: 0.25rem 0.5rem; border-radius: 4px; display: inline-block;">
+                <div style="font-size: 0.75rem; color: var(--nv-amber); background: var(--nv-amber-soft); padding: 0.25rem 0.5rem; border-radius: 4px; display: inline-block;">
                   ⚠️ 미발행 - URL 없음
                 </div>
               `}

@@ -29,3 +29,102 @@ html .source-option[style*="102, 126, 234"], html .style-option:has(input:checke
 html .publish-flow-card.active .publish-flow-tag { background: var(--nv-select-tag-bg); color: var(--nv-select-ink); }
 html [data-engine-option] input[type="radio"], html [data-image-engine-option] input[type="radio"],
 html .style-option input[type="radio"] { accent-color: var(--nv-select-border) !important; }
+
+/* 2. Modal parts ------------------------------------------------------------ */
+/* Every renderer modal (image / text progress, consents, gates, lightbox) is built from these classes: white card with a
+   clear border, green action, lavender emphasis, pale gray secondary panel. The .ts files carry no inline colors. */
+html .nv-scrim { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; background: var(--nv-scrim); }
+html .nv-scrim--light { background: var(--nv-scrim-light); }
+html .nv-modal {
+  box-sizing: border-box; width: 100%; max-width: 480px; max-height: 92vh; overflow-y: auto; padding: 24px; font-family: var(--nv-font);
+  background: var(--nv-card); color: var(--nv-ink); border: 1px solid var(--nv-line); border-radius: 8px; box-shadow: var(--shadow-xl);
+}
+html .nv-modal--wide { max-width: 1100px; height: 100%; max-height: 820px; display: flex; flex-direction: column; padding: 20px; overflow: hidden; }
+html .nv-modal--center { position: relative; max-width: 500px; padding: 32px; text-align: center; }
+html .nv-modal--warn { border-top: 4px solid var(--nv-amber); }
+html .nv-modal--info { border-top: 4px solid var(--nv-select-border); }
+html .nv-modal__head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; }
+html .nv-modal__title { margin: 0 0 10px; background: none; color: var(--nv-ink); font-size: 1.15rem; font-weight: 800; letter-spacing: -0.02em; }
+html .nv-modal__head .nv-modal__title { margin: 0; font-size: 1.3rem; }
+html .nv-modal__sub { margin: 0 0 14px; color: var(--nv-ink-3); font-size: 0.9rem; }
+html .nv-modal__text { margin-bottom: 16px; color: var(--nv-ink-2); font-size: 0.88rem; line-height: 1.6; }
+html .nv-modal__text b, html .nv-modal__text strong { color: var(--nv-ink); }
+html .nv-modal__actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; margin-top: 4px; }
+html .nv-modal__corner { position: absolute; top: 12px; right: 12px; display: flex; gap: 4px; align-items: center; }
+html .nv-modal__note { color: var(--nv-ink-3); font-size: 0.82rem; line-height: 1.5; }
+html .nv-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 8px 16px; cursor: pointer;
+  background: var(--nv-card); color: var(--nv-ink-2); border: 1px solid var(--nv-line-strong); border-radius: 8px;
+  font-size: 0.9rem; font-weight: 600; transition: background-color 0.12s, border-color 0.12s;
+}
+html .nv-btn:hover:not(:disabled) { background: var(--nv-hover-bg); border-color: var(--nv-line-hover); color: var(--nv-ink); }
+html .nv-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+html .nv-btn--primary { background: var(--nv-fill); border-color: var(--nv-fill); color: var(--text-white); font-weight: 700; }
+html .nv-btn--primary:hover:not(:disabled) { background: var(--nv-fill-hover); border-color: var(--nv-fill-hover); color: var(--text-white); }
+html .nv-btn--danger { background: var(--nv-red); border-color: var(--nv-red); color: var(--text-white); font-weight: 700; }
+html .nv-btn--danger:hover:not(:disabled) { background: var(--nv-red); border-color: var(--nv-red); color: var(--text-white); filter: brightness(0.92); }
+html .nv-btn--block { width: 100%; }
+html .nv-icon-btn { padding: 2px 8px; background: transparent; border: none; border-radius: 6px; color: var(--nv-ink-3); font-size: 1.2rem; line-height: 1; cursor: pointer; }
+html .nv-icon-btn:hover { background: var(--nv-hover-bg); color: var(--nv-ink); }
+html .nv-panel { padding: 10px; background: var(--nv-sunken); border: 1px solid var(--nv-line); border-radius: 8px; }
+html .nv-label { margin-bottom: 8px; color: var(--nv-ink-3); font-size: 0.85rem; font-weight: 600; }
+html .nv-check { display: flex; align-items: center; gap: 8px; cursor: pointer; color: var(--nv-ink); font-size: 0.9rem; }
+html .nv-check--top { align-items: flex-start; margin-bottom: 16px; font-size: 0.85rem; }
+html .nv-check input[type="checkbox"] { width: 18px; height: 18px; flex-shrink: 0; cursor: pointer; }
+html .nv-progress { width: 100%; height: 8px; overflow: hidden; background: var(--nv-line-soft); border-radius: 4px; }
+html .nv-progress__bar { width: 0; height: 100%; background: var(--nv-fill); border-radius: 4px; transition: width 0.3s ease; }
+html .nv-meta { display: flex; justify-content: space-between; margin-bottom: 20px; color: var(--nv-ink-3); font-size: 0.85rem; }
+html .nv-chip { display: inline-block; padding: 6px 12px; background: var(--nv-card); color: var(--nv-ink-2); border: 1px solid var(--nv-line); border-radius: 8px; font-size: 0.85rem; font-weight: 700; }
+/* Log box: pale ground, dark text; a line's tone is its class (ok green, warn amber, err red, ai lavender ink, info blue). */
+html .nv-log {
+  padding: 12px; overflow-y: auto; background: var(--nv-sunken); color: var(--nv-ink-2); border: 1px solid var(--nv-line); border-radius: 8px;
+  font-family: ui-monospace, 'Consolas', 'Courier New', monospace; font-size: 0.85rem; line-height: 1.5;
+}
+html .nv-log__line { margin-bottom: 4px; }
+html .nv-log__line--ok { color: var(--nv-green-text); }
+html .nv-log__line--warn { color: var(--nv-amber); }
+html .nv-log__line--err { color: var(--nv-red); }
+html .nv-log__line--ai { color: var(--nv-select-ink); }
+html .nv-log__line--info { color: var(--nv-blue); }
+html .nv-log__time { margin-right: 6px; color: var(--nv-ink-3); font-size: 0.7rem; }
+/* Image preview slots: waiting = lavender fill + soft lavender border; generating = purple border + ring; done = green; failed = red. */
+html .nv-slot-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; max-height: 120px; overflow-y: auto; padding: 8px; background: var(--nv-sunken); border: 1px solid var(--nv-line); border-radius: 8px; }
+html .nv-slot {
+  position: relative; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; overflow: hidden; cursor: pointer;
+  background: var(--nv-select-bg); color: var(--nv-select-ink); border: 2px solid var(--nv-select-line); border-radius: 8px;
+}
+html .nv-slot--generating { border-color: var(--nv-select-border); box-shadow: 0 0 0 3px var(--nv-select-tag-bg); }
+html .nv-slot--completed { background: var(--nv-card); border-color: var(--nv-fill); }
+html .nv-slot--failed { background: var(--nv-card); color: var(--nv-red); border-color: var(--nv-red); }
+html .nv-slot__glyph { font-size: 1.2rem; }
+html .nv-slot__img { width: 100%; height: 100%; object-fit: cover; }
+html .nv-slot__check { position: absolute; bottom: 2px; right: 2px; display: flex; align-items: center; justify-content: center; width: 16px; height: 16px; background: var(--nv-fill); color: var(--text-white); border-radius: 50%; font-size: 0.6rem; }
+html .nv-stage { display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--nv-sunken); color: var(--nv-ink-3); border: 2px solid var(--nv-line-strong); border-radius: 8px; text-align: center; }
+html .nv-stage--square { width: 350px; height: 350px; }
+html .nv-stage img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 6px; }
+html .nv-stage__glyph { margin-bottom: 8px; font-size: 3rem; }
+html .nv-btn--warn { background: var(--nv-amber); border-color: var(--nv-amber); color: var(--text-white); font-weight: 700; }
+html .nv-btn--warn:hover:not(:disabled) { background: var(--nv-amber); border-color: var(--nv-amber); color: var(--text-white); filter: brightness(0.92); }
+html .nv-btn--emph { box-shadow: 0 0 0 3px var(--nv-select-tag-bg); font-weight: 800; }
+html .nv-tone--ok { color: var(--nv-green-text); }
+html .nv-tone--warn { color: var(--nv-amber); }
+html .nv-tone--err { color: var(--nv-red); }
+html .nv-tone--info { color: var(--nv-blue); }
+html .nv-modal--sections { padding: 0; display: flex; flex-direction: column; overflow: hidden; }
+html .nv-modal__foot { display: flex; justify-content: flex-end; align-items: center; gap: 12px; border-top: 1px solid var(--nv-line-soft); }
+html .nv-modal__foot .nv-modal__note { flex: 1; }
+html .nv-tag { padding: 2px 8px; border-radius: 999px; background: var(--nv-select-tag-bg); color: var(--nv-select-ink); font-size: 0.72rem; font-weight: 700; white-space: nowrap; }
+html .nv-badge-err { padding: 2px 8px; background: var(--nv-card); color: var(--nv-red); border: 1px solid var(--nv-red); border-radius: 6px; font-family: ui-monospace, monospace; font-size: 0.75rem; font-weight: 600; }
+html .nv-link { color: var(--nv-blue); text-decoration: underline; word-break: break-all; }
+html .nv-tile { border: 2px solid var(--nv-line); background: var(--nv-sunken); transition: transform 0.2s, box-shadow 0.2s; }
+html .nv-tile:hover { transform: scale(1.05); box-shadow: 0 0 0 3px var(--nv-select-tag-bg); }
+html .nv-tile--pending { border-color: var(--nv-select-line); background: var(--nv-select-bg); color: var(--nv-select-ink); }
+html .nv-tile--chosen { border-color: var(--nv-select-border); }
+html .nv-tone--sel { color: var(--nv-select-ink); }
+html .nv-badge-index { position: absolute; top: 6px; left: 6px; padding: 2px 7px; background: var(--nv-card); color: var(--nv-ink); border: 1px solid var(--nv-line); border-radius: 6px; font-size: 10px; font-weight: 800; line-height: 1.4; }
+html .nv-viewer-btn { position: fixed; z-index: 2147483647; display: flex; align-items: center; justify-content: center; background: var(--nv-card); color: var(--nv-ink); border: 1px solid var(--nv-line-strong); border-radius: 10px; font-size: 26px; line-height: 1; cursor: pointer; user-select: none; }
+html .nv-viewer-btn:hover { background: var(--nv-hover-bg); }
+html .nv-viewer-img { max-width: 94vw; max-height: 86vh; object-fit: contain; border-radius: 8px; border: 1px solid var(--nv-line); background: var(--nv-card); box-shadow: var(--shadow-xl); cursor: default; }
+html .nv-tile--done { background: var(--nv-green-soft); border-color: var(--nv-fill); }
+html .nv-badge-index--lead { background: var(--nv-select-ink); border-color: var(--nv-select-ink); color: var(--text-white); }
+html .nv-tile__label { position: absolute; bottom: 0; left: 0; right: 0; padding: 5px 4px; overflow: hidden; background: var(--nv-card); color: var(--nv-ink); border-top: 1px solid var(--nv-line); font-size: 8px; font-weight: 700; text-align: center; text-overflow: ellipsis; white-space: nowrap; }
