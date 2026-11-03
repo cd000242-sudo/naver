@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T20:50:43.764Z",
+ "builtAt": "2026-11-03T21:00:46.918Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,14 +11,47 @@
  "measured": 22,
  "candidates": [
   {
+   "keyword": "유럽 여객기 폭파 위협",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T20:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "유럽 하늘길도 러 파괴공작? 여객기 7대 폭파 위협 신고",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-03T20:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004007654?sid=104"
+    },
+    {
+     "title": "유럽 상공 여객기 7대에 동시다발 폭파 위협…전투기 출격·비상착륙",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-03T20:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000648804?sid=104"
+    },
+    {
+     "title": "유럽 여객기 7대, 폭파 위협 신고…폭발물 없어",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-03T20:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922626?sid=104"
+    }
+   ]
+  },
+  {
    "keyword": "기소",
    "sources": [
     "google"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-03T19:29:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-03T19:34:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -41,11 +74,43 @@
      "link": "https://n.news.naver.com/mnews/article/020/0003759936?sid=102"
     }
    ]
+  },
+  {
+   "keyword": "장동혁·오세훈·한동훈 보수 경쟁",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T19:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "오세훈·한동훈 같은 날 세 대결… 국힘 의원들 치열한 수싸움",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-03T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003695453?sid=100"
+    },
+    {
+     "title": "국회 들썩인 보수 세 대결…吳·張·韓 '3강 구도' 본격화",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-03T20:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004206203?sid=100"
+    },
+    {
+     "title": "오세훈-한동훈 30분 간격 토론회, 각각 의원 38명-19명 참석",
+     "press": "donga.com",
+     "publishedAt": "2026-11-03T19:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003759854?sid=100"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 460,
+  "flagged": 461,
   "matched": 179,
   "avgLeadMin": 241,
   "recent": [
