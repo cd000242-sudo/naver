@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T08:06:45.405Z",
+ "builtAt": "2026-11-03T08:16:50.098Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,94 +15,62 @@
    "sources": [
     "daum"
    ],
-   "articles90": 43,
-   "recent20": 22,
-   "press": 38,
+   "articles90": 62,
+   "recent20": 29,
+   "press": 53,
    "firstArticleAt": "2026-11-03T07:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김민석 \"신천지 의혹으로 피해 입은 분들 죄송\" 사과",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-03T08:04:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5079380"
+     "title": "김민석 '신천지 3자 연합 근거 없었다' 인정…정청래 '해당 행위, 책임져...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-03T08:16:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267203"
     },
     {
-     "title": "김민석 “반명·분열주의·신천지 3자 연합 근거 없다”…정청래 “책임...",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-03T08:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000160272?sid=100"
+     "title": "[속보] \"김민석, 울컥 민주당 신천지 증거없다 사과\" 민주당 의총 파문",
+     "press": "mediatoday.co.kr",
+     "publishedAt": "2026-11-03T08:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/006/0000138548?sid=100"
     },
     {
-     "title": "김민석 “반명·신천지 연합 근거 없었다”…정청래 “당원에 공개 사과...",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-03T08:02:00.000Z",
-     "link": "https://www.viva100.com/article/20261103501219"
+     "title": "“3자 비밀연합 증거 없어”…김민석, 의총서 신천지 의혹 제기 사과",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-03T08:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003695369?sid=100"
     }
    ]
   },
   {
-   "keyword": "아시안컵 중동 연기",
+   "keyword": "아시안컵",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 40,
-   "recent20": 5,
-   "press": 35,
-   "firstArticleAt": "2026-11-03T06:37:00.000Z",
+   "articles90": 34,
+   "recent20": 6,
+   "press": 32,
+   "firstArticleAt": "2026-11-03T06:52:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "협회장도 없고, 이제 모레노 감독도? 뒤로 밀린 아시안컵 후폭풍",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-03T08:14:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/437/0000518911"
+    },
+    {
+     "title": "아시안컵, 사우디 정세 악화로 11개월 연기…2027년 12월 개최",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-03T08:09:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/417/0001163102"
+    },
     {
      "title": "중동 정세 불안에 아시안컵 11개월 연기…2027년 12월 개최",
      "press": "kwnews.co.kr",
      "publishedAt": "2026-11-03T08:03:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/087/0001228295"
-    },
-    {
-     "title": "'中 축구, 11월 연기는 악재다' 사우디 아시아컵 1월→12월 연기 확정, ...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-03T08:01:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/076/0004462590"
-    },
-    {
-     "title": "日 모리야스 감독 우승 도전 물거품…아시안컵 연기에 혼돈, 12월 일본서...",
-     "press": "fourfourtwo.co.kr",
-     "publishedAt": "2026-11-03T08:01:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/411/0000089458"
-    }
-   ]
-  },
-  {
-   "keyword": "삼성",
-   "sources": [
-    "google"
-   ],
-   "articles90": 27,
-   "recent20": 27,
-   "press": 25,
-   "firstArticleAt": "2026-11-03T07:48:00.000Z",
-   "exclusive": true,
-   "capped": true,
-   "samples": [
-    {
-     "title": "어쩌다 이런 일이…삼성전 한 번도 안 던진 KT 투수, KS 1차전 '중책' 맡...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-03T08:06:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1171478"
-    },
-    {
-     "title": "美 마벨, 차세대 AI 인프라 고도화 ‘속도전’…‘HBM 투톱’ 삼성·SK, ...",
-     "press": "ceoscoredaily.com",
-     "publishedAt": "2026-11-03T08:04:00.000Z",
-     "link": "https://www.ceoscoredaily.com/page/view/2026110315585465988"
-    },
-    {
-     "title": "“누가 먼저 돈 벌까”…삼성·LG·현대차 휴머노이드 사업화 경쟁",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-03T08:02:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2643619"
     }
    ]
   },
@@ -111,30 +79,94 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 26,
-   "recent20": 7,
-   "press": 24,
+   "articles90": 28,
+   "recent20": 6,
+   "press": 26,
    "firstArticleAt": "2026-11-03T06:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "태백시, 교육부 '교육혁신선도지역' 선정…최대 150억 원 확보 기대",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-03T08:16:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5079334"
+    },
+    {
+     "title": "\"지역 간 교육격차 해소\" 교육혁신선도지역 43곳 선정",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-03T08:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922486?sid=102"
+    },
+    {
      "title": "충청권 7개 시·군, 교육혁신선도지역 선정…지역교육 활력 기대",
      "press": "cctoday.co.kr",
      "publishedAt": "2026-11-03T08:00:00.000Z",
      "link": "https://www.cctoday.co.kr/news/articleView.html?idxno=2239570"
+    }
+   ]
+  },
+  {
+   "keyword": "조작기소 특검법 당론 채택",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 25,
+   "recent20": 8,
+   "press": 24,
+   "firstArticleAt": "2026-11-03T07:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "민주당, '조작기소 특검법' 당론 확정…5일 본회의서 처리",
+     "press": "kado.net",
+     "publishedAt": "2026-11-03T08:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000209143?sid=100"
     },
     {
-     "title": "제주, '교육혁신 선도지역' 공모 탈락",
-     "press": "jibs.co.kr",
-     "publishedAt": "2026-11-03T07:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/661/0000086027?sid=102"
+     "title": "與, 조작기소특검법 처리 당론채택…조희대 국조 \"의견 더 수렴\"(종합)",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T08:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009267885?sid=100"
     },
     {
-     "title": "양주시·연천군, 경기북부 교육혁신 선도지역 선정",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-03T07:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002464111?sid=102"
+     "title": "與, 5일 '조작기소 특검법' 처리 추진…조희대 국조는 추가의견 수렴",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-03T08:12:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/324006/?sc=Naver"
+    }
+   ]
+  },
+  {
+   "keyword": "삼성",
+   "sources": [
+    "google"
+   ],
+   "articles90": 28,
+   "recent20": 28,
+   "press": 21,
+   "firstArticleAt": "2026-11-03T08:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "삼성바이오에피스, 美 테바와 5600억원 규모 바이오시밀러 판매 계약",
+     "press": "it.chosun.com",
+     "publishedAt": "2026-11-03T08:14:00.000Z",
+     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000000165"
+    },
+    {
+     "title": "삼성바이오에피스, 테바와 최대 5630억원 규모 상업화 파트너십 체결",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-03T08:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005349760?sid=105"
+    },
+    {
+     "title": "슈퍼모델 출신 김자연, 70세 손영권 삼성전자 前 사장과 화촉",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-03T08:14:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/03/2026110300334.html"
     }
    ]
   },
@@ -143,63 +175,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 21,
-   "recent20": 2,
-   "press": 21,
-   "firstArticleAt": "2026-11-03T06:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "모델 김자연, 70세 손영권 삼성전자 고문과 결혼…25세 차 극복",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-03T07:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005436008?sid=102"
-    },
-    {
-     "title": "\"키 큰 나를 귀여워해\"…45세 슈퍼모델 김자연, 70세 전 삼성전자 사장...",
-     "press": "ent.sbs.co.kr",
-     "publishedAt": "2026-11-03T07:47:00.000Z",
-     "link": "https://m.entertain.naver.com/article/416/0000327832"
-    },
-    {
-     "title": "‘前 슈퍼모델’ 김자연, ‘25세 연상’ ♥︎손영권과 결혼 “각자의 세...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-03T07:45:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001277668"
-    }
-   ]
-  },
-  {
-   "keyword": "조작기소 특검법 당론 채택",
-   "sources": [
-    "signal.bz",
-    "daum"
-   ],
-   "articles90": 20,
-   "recent20": 8,
+   "articles90": 22,
+   "recent20": 3,
    "press": 20,
-   "firstArticleAt": "2026-11-03T07:27:00.000Z",
+   "firstArticleAt": "2026-11-03T06:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "민주당, '조작기소특검법' 당론 확정. 극한충돌 예고",
-     "press": "viewsnnews.com",
-     "publishedAt": "2026-11-03T08:02:00.000Z",
-     "link": "https://www.viewsnnews.com/article?q=239455"
+     "title": "‘45세 슈퍼모델’ 김자연, 25세 연상 삼성전자 前 사장과 결혼…스위스...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-03T08:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005758402?sid=103"
     },
     {
-     "title": "[속보]與, 조작기소 특검법안 당론 채택…5일 본회의 처리 목표",
-     "press": "donga.com",
-     "publishedAt": "2026-11-03T07:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003759777?sid=100"
+     "title": "슈퍼모델 출신 김자연, 70세 손영권 삼성전자 前 사장과 화촉",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-03T08:14:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/03/2026110300334.html"
     },
     {
-     "title": "민주, '조작기소 특검법' 당론 채택…5일 본회의 상정 추진",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-03T07:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005837530?sid=100"
+     "title": "김자연, '70세' 前 삼성전자 사장과 결혼 발표 후..\"각자의 때 있어\"[스...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-03T08:09:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003484210"
     }
    ]
   },
@@ -208,10 +207,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
+   "articles90": 11,
    "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-03T06:44:00.000Z",
+   "press": 11,
+   "firstArticleAt": "2026-11-03T06:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -241,29 +240,29 @@
     "google"
    ],
    "articles90": 10,
-   "recent20": 7,
-   "press": 9,
-   "firstArticleAt": "2026-11-03T07:28:00.000Z",
+   "recent20": 8,
+   "press": 10,
+   "firstArticleAt": "2026-11-03T07:54:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "양양문화재단, 어린이 사물인형극 '토끼로 사는 아홉 가지 어려움' 공연",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-03T08:04:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5079322"
+     "title": "구리문화재단, 어린이 참여형 음악극 '도서관의 앨리스' 성황리 마무리",
+     "press": "kmaeil.com",
+     "publishedAt": "2026-11-03T08:08:00.000Z",
+     "link": "https://www.kmaeil.com/news/articleView.html?idxno=656900"
     },
     {
-     "title": "계양소방서, ‘우리동네 119체험관’ 어린이 소방안전 체험교육",
-     "press": "fpn119.co.kr",
-     "publishedAt": "2026-11-03T08:02:00.000Z",
-     "link": "http://fpn119.co.kr/258863"
+     "title": "장성군, 14일 어린이 공연 '더 매직 서커스' 개최",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-03T08:08:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=560862"
     },
     {
-     "title": "홍지연 재활의학과 전문의, 푸르메재단 넥슨어린이재활병원 제5대 병원...",
-     "press": "health.chosun.com",
-     "publishedAt": "2026-11-03T08:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/346/0000118312?sid=004"
+     "title": "동대문구, 전통시장·어린이집에 ‘똑똑한 소화기’ 놓는다[서울25]",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-03T08:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003480411?sid=102"
     }
    ]
   },
@@ -274,11 +273,17 @@
    ],
    "articles90": 7,
    "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-03T06:43:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-03T06:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "장동혁 \"떨어진 건 집값 아니라 대통령 지지율...공급 흉내만\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-03T08:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002427852?sid=100"
+    },
     {
      "title": "장동혁 \"부동산 문제, 말 아닌 실물 공급으로 풀어야\"",
      "press": "edaily.co.kr",
@@ -290,12 +295,6 @@
      "press": "mediapen.com",
      "publishedAt": "2026-11-03T07:54:00.000Z",
      "link": "https://www.mediapen.com/news/view/1134862"
-    },
-    {
-     "title": "청년 주거 간담회 개최한 장동혁 \"부동산 문제 해결 말 아닌 공급\"",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-03T07:42:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=324924"
     }
    ]
   },
@@ -305,7 +304,7 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-03T07:12:00.000Z",
    "exclusive": false,
@@ -330,43 +329,11 @@
      "link": "https://n.news.naver.com/mnews/article/422/0000922458?sid=101"
     }
    ]
-  },
-  {
-   "keyword": "이효리",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T06:37:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이효리, 음주·폭력 행동 보인 연인에 쓴소리…\"관계보다 치료가 먼저\"",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-03T07:52:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=846036"
-    },
-    {
-     "title": "이효리 \"나도 정신과 다닌다\"… 술 문제 커플에 치료 권유",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-03T06:57:00.000Z",
-     "link": "https://m.entertain.naver.com/article/469/0000963372"
-    },
-    {
-     "title": "이효리도 기함…커플 싸움 목격 후 \"막장 드라마에 나올 일\"",
-     "press": "atstar1.com",
-     "publishedAt": "2026-11-03T06:37:00.000Z",
-     "link": "https://m.entertain.naver.com/article/415/0000053395"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 404,
+  "flagged": 405,
   "matched": 145,
   "avgLeadMin": 226,
   "recent": [
