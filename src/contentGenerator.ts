@@ -67,6 +67,7 @@ import { resolveHomefeedIssueHint } from './content/homefeedIssueHint.js';
 import { computeHomefeedTitleQuoteIssues } from './content/homefeedTitleQuoteUse.js';
 import { computeHomefeedTitleGateIssues, judgeTitleReplacement } from './content/homefeedTitleGate.js';
 import { HARMONY_NO_PACKET_LOG, createHarmonyRepairGate, harmonyPreservesTitlePromise, llmTitlePatchSkipLog, shouldRunLlmTitlePatch } from './content/agentRepairPolicy.js';
+import { shouldRestoreKeptDraft } from './content/regenerationRestorePolicy.js';
 import type { AgentHarmonyContext } from './agentCli/agentHarmonyEnvelope.js';
 import { createHarmonySwapGuard, handleAgentHarmonyResponse, readAgentHarmony, recallAgentHarmony, resolveAgentHarmonyRequest, restoreAgentHarmony } from './content/agentHarmony/harmonyRuntime.js';
 import { isReviewAvailable, isReviewGuardEnabled, buildReviewGuardBlock } from './content/reviewGuard.js';
@@ -6680,12 +6681,13 @@ async function generateStructuredContentInternal(
    * 재생성이 타임아웃·공급자 오류·파싱 실패 등으로 죽어도 사용자가 글을 잃지 않게 하기 위함이다.
    * 판정을 바꾸지 않는다 — 여기 담긴 quality/publishDecision 을 그대로 되돌려준다.
    */
-  let lastSuccessfulArtifact: { content: StructuredContent; attempt: number; trigger: string } | null = null;
-  const keepArtifactBeforeRegeneration = (content: StructuredContent, at: number, trigger: string): void => {
-    lastSuccessfulArtifact = { content, attempt: at, trigger };
-    console.log(`[Regeneration] 직전 성공본 보존 (attempt=${at}, 사유="${trigger}")`);
+  // 2026-11-04: passedGate = the kept draft had passed QualityGate90 — a rewrite that then misses it restores this draft.
+  let lastSuccessfulArtifact: { content: StructuredContent; attempt: number; trigger: string; passedGate: boolean } | null = null;
+  const keepArtifactBeforeRegeneration = (content: StructuredContent, at: number, trigger: string, passedGate = false): void => {
+    lastSuccessfulArtifact = { content, attempt: at, trigger, passedGate };
+    console.log(`[Regeneration] 직전 성공본 보존 (attempt=${at}, 사유="${trigger}"${passedGate ? ', 품질 기준 통과본' : ''})`);
   };
-  const getKeptArtifact = (): { content: StructuredContent; attempt: number; trigger: string } | null => lastSuccessfulArtifact;
+  const getKeptArtifact = (): { content: StructuredContent; attempt: number; trigger: string; passedGate: boolean } | null => lastSuccessfulArtifact;
   /**
    * 재생성이 실패했을 때 직전 성공본을 돌려준다. 돌려주지 않는 경우는 둘뿐이다 —
    * 보존된 결과가 없거나(최초 생성부터 실패), 사용자가 직접 중지한 경우.
@@ -8557,7 +8559,7 @@ async function generateStructuredContentInternal(
               const _unpaid = _ta.promised.filter((word) => !_bodyForUnpaid.includes(word));
               console.warn(`[TitleAnswer] 🔁 제목 약속 미이행 — 재생성 1회 (응답 ${Math.round(_ta.answerRate * 100)}%, 미상환: ${_unpaid.join(', ') || _ta.echoedOnly.join(', ')})`);
               extraInstruction = `${buildTitleAnswerRetryInstruction(_taTitle, _ta, _unpaid.length > 0 ? _unpaid : _ta.echoedOnly)}\n${extraInstruction}`;
-              keepArtifactBeforeRegeneration(optimized, attempt, 'TitleAnswer 제목 약속 미이행');
+              keepArtifactBeforeRegeneration(optimized, attempt, 'TitleAnswer 제목 약속 미이행', Boolean(_quality90Assessment) && !_quality90Assessment?.miss);
               continue; // 같은 attempt 카운트 보존 — Fidelity 재시도와 같은 규칙
             }
           } catch (_e) { console.warn('[TitleAnswer] 검사 실패 (정상 흐름 유지):', (_e as Error)?.message || _e); }
@@ -8792,6 +8794,13 @@ async function generateStructuredContentInternal(
         }
 
         if (_quality90Assessment?.miss) {
+          // 2026-11-04: a repair rewrite that misses the gate while the kept draft had passed it → return the kept draft (own verdict).
+          if (shouldRestoreKeptDraft(getKeptArtifact(), true)) {
+            const keptBefore = getKeptArtifact();
+            console.warn(`[Regeneration] 다시 쓴 글이 품질 기준에 못 미쳐(${_quality90Assessment.blockingReasons.join(', ')}) 직전 성공본(attempt=${keptBefore?.attempt}, 사유="${keptBefore?.trigger}")으로 되돌립니다 — 판정은 그대로`);
+            const restoredBetter = recoverLastSuccessfulArtifact(new Error(`REGENERATION_WORSE: ${_quality90Assessment.blockingReasons.join(', ')}`), attempt);
+            if (restoredBetter) return restoredBetter;
+          }
           if (optimized.quality) {
             optimized.quality = {
               ...optimized.quality,
