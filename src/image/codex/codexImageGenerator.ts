@@ -14,6 +14,7 @@ import { resolveAgentImageProfile } from '../../agentCli/agentModelDefaults.js';
 import { CODEX_IMAGE_ENGINE } from '../../runtime/codexImagePolicy.js';
 import { assertCodexImageReady } from './codexImageReadiness.js';
 import { runCodexImageSession, type CodexImageSessionOptions, type CodexImageSessionResult } from './codexImageSession.js';
+import { withCodexAspectRatio } from './codexImageInstruction.js';
 
 export const CODEX_IMAGE_MAX_PER_SESSION = 4;
 const POLL_MS = 1000;
@@ -125,7 +126,8 @@ export async function generateWithCodexImage(
   try {
     await Promise.all(splitIntoSessions(items.length).map(async (group) => {
       try {
-        const session = await runtime.runSession(group.map((index) => items[index].prompt), {
+        const prompts = group.map((index) => withCodexAspectRatio(items[index].prompt, (items[index] as { imageRatio?: unknown }).imageRatio));
+        const session = await runtime.runSession(prompts, {
           signal: abort.signal, timeoutMs: sessionTimeoutMs(group.length),
         });
         if (session.files.length > group.length) {

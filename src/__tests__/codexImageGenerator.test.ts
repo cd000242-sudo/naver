@@ -52,12 +52,28 @@ describe('generateWithCodexImage', () => {
     const { runtime, sessions, log } = makeRuntime(async (p, c) => filesFor(p, c));
     const seen: Array<[string, number, number]> = [];
     const images = await generateWithCodexImage(items(3), '글 제목', 'post-1', undefined, (img, i, total) => seen.push([img.heading, i, total]), {}, runtime);
-    expect(sessions).toEqual([['exact english prompt 1', 'exact english prompt 2', 'exact english prompt 3']]);
+    // The app's prompt goes first, unchanged; only the frame line is appended (no ratio on the item = square).
+    const square = '\nASPECT RATIO: square 1:1 (1024x1024). Compose for this frame; keep every subject and all text inside it.';
+    expect(sessions).toEqual([[1, 2, 3].map((n) => `exact english prompt ${n}${square}`)]);
     expect(images.map(i => i.heading)).toEqual(['소제목 1', '소제목 2', '소제목 3']);
     expect(images.map(i => i.filePath)).toEqual(['C:/codex/0-0.png', 'C:/codex/0-1.png', 'C:/codex/0-2.png']);
     expect(images.every(i => i.provider === 'codex-image')).toBe(true);
     expect(seen).toEqual([['소제목 1', 0, 3], ['소제목 2', 1, 3], ['소제목 3', 2, 3]]);
     expect(log.mock.calls.map(c => String(c[0])).join('\n')).toContain('🎨 Codex 구독 이미지 3장 생성 중 (gpt-6-luna)');
+  });
+
+  it('항목의 비율(썸네일·소제목 설정)을 프롬프트 끝 한 줄로 넘긴다 — 이미지 도구에 크기 인자가 없다', async () => {
+    const { runtime, sessions } = makeRuntime(async (p, c) => filesFor(p, c));
+    const ratioItems = [
+      item(1, { isThumbnail: true, imageRatio: '1:1' } as Partial<ImageRequestItem>),
+      item(2, { imageRatio: '16:9' } as Partial<ImageRequestItem>),
+      item(3, { imageRatio: 'weird' } as Partial<ImageRequestItem>),
+    ];
+    await generateWithCodexImage(ratioItems, '글 제목', undefined, undefined, undefined, {}, runtime);
+    const [first, second, third] = sessions[0];
+    expect(first).toMatch(/^exact english prompt 1\nASPECT RATIO: square 1:1 \(1024x1024\)\./);
+    expect(second).toMatch(/^exact english prompt 2\nASPECT RATIO: wide landscape 16:9\./);
+    expect(third).toContain('ASPECT RATIO: square 1:1 (1024x1024).');
   });
 
   it('썸네일은 엔진이 한글 문구를 직접 그리므로 앱 오버레이를 끈다', async () => {

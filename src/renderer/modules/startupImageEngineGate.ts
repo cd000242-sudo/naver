@@ -92,10 +92,10 @@ function startupImageCard(option: StartupImageOption, checked: boolean): string 
 export function startupImageGateHtml(plan: StartupImagePlan): string {
   if (plan.options.length === 0) return '';
   return `
-      <div id="${STARTUP_IMAGE_SECTION_ID}" style="padding:0.5rem 1.5rem 0.5rem;flex:0 1 auto;overflow-y:auto;max-height:36vh;">
-        <div style="font-size:1.05rem;font-weight:900;color:#111827;">🎨 이미지 엔진도 선택하세요</div>
+      <div id="${STARTUP_IMAGE_SECTION_ID}" class="nv-gate-col">
+        <div class="nv-gate-col__head">🎨 이미지 엔진</div>
         <div style="font-size:0.82rem;color:#6b7280;margin:0.2rem 0 0.6rem;">이미지 탭의 생성 엔진과 같은 설정입니다. Flow · 리더스 나노바나나 · 젠스파크는 이미지 탭에서 로그인이 필요합니다.</div>
-        <div style="display:flex;flex-direction:column;gap:0.45rem;">${plan.options.map((option) => startupImageCard(option, option.value === plan.checked)).join('')}</div>
+        <div class="nv-gate-col__list" style="display:flex;flex-direction:column;gap:0.45rem;">${plan.options.map((option) => startupImageCard(option, option.value === plan.checked)).join('')}</div>
       </div>`;
 }
 

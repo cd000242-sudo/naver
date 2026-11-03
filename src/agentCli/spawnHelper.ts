@@ -10,6 +10,7 @@ import { spawn, type ChildProcess } from 'child_process';
 import { existsSync, readFileSync, realpathSync } from 'fs';
 import { delimiter, dirname, extname, isAbsolute, relative, resolve } from 'path';
 import { AgentCliError, type AgentProvider } from './types.js';
+import { resolveCodexNativeTarget } from './codexNativeTarget.js';
 
 export interface SpawnResult {
   code: number | null;
@@ -177,7 +178,14 @@ function resolveVariableNpmShim(source: string, baseDir: string): SpawnTarget | 
   return undefined;
 }
 
+/** A Codex npm launcher resolves to its native codex.exe, so no console window opens (codexNativeTarget.ts). */
 function resolveNpmCmdShim(shimPath: string): SpawnTarget | undefined {
+  const target = resolveNpmCmdShimTarget(shimPath);
+  const script = target?.prefixArgs[0];
+  return (script && resolveCodexNativeTarget(script)) || target;
+}
+
+function resolveNpmCmdShimTarget(shimPath: string): SpawnTarget | undefined {
   try {
     const source = readFileSync(shimPath, 'utf8');
     const baseDir = dirname(shimPath);

@@ -71,17 +71,24 @@ export function startupGateViewRender(
   // Colors come from the theme classes (theme-naver-components.css section 2); only the stacking order stays inline.
   overlay.className = 'nv-scrim';
   overlay.style.zIndex = '10000000';
+  // With an image section the two lists sit side by side (text left, image right), each scrolling on its own.
+  const twoCols = Boolean(plan.imageHtml);
   overlay.innerHTML = `
-    <div class="nv-modal nv-modal--sections" style="max-width:640px;">
+    <div class="nv-modal nv-modal--sections${twoCols ? ' nv-gate--two' : ''}" style="max-width:${twoCols ? '1120px' : '640px'};">
       <div style="padding:1.25rem 1.5rem 0.75rem;">
-        <div class="nv-modal__title" style="font-size:1.25rem;font-weight:900;margin-bottom:0;">✍️ 글생성 엔진을 먼저 선택하세요</div>
+        <div class="nv-modal__title" style="font-size:1.25rem;font-weight:900;margin-bottom:0;">${twoCols ? '✍️ 글생성 · 🎨 이미지 엔진을 선택하세요' : '✍️ 글생성 엔진을 먼저 선택하세요'}</div>
         <div class="nv-modal__sub" style="margin:0.3rem 0 0;">앱을 켤 때마다 확인합니다. 선택한 엔진으로만 글이 생성되고 과금됩니다.</div>
       </div>
-      <div style="padding:0 1.5rem;">${startupGateViewSavedLine(plan)}</div>
-      <div id="${gateId}-list" style="padding:0 1.5rem 0.5rem;display:flex;flex-direction:column;gap:0.55rem;overflow-y:auto;">
-        ${options.map((option) => startupGateViewOption(option, option.value === plan.checked)).join('')}
+      <div class="nv-gate-cols">
+        <div class="nv-gate-col">
+          ${twoCols ? '<div class="nv-gate-col__head">✍️ 글생성 엔진</div>' : ''}
+          ${startupGateViewSavedLine(plan)}
+          <div id="${gateId}-list" class="nv-gate-col__list" style="display:flex;flex-direction:column;gap:0.55rem;">
+            ${options.map((option) => startupGateViewOption(option, option.value === plan.checked)).join('')}
+          </div>
+        </div>
+        ${plan.imageHtml}
       </div>
-      ${plan.imageHtml}
       <div style="padding:0 1.5rem 0.5rem;">
         <div id="${gateId}-connect-log" role="status" aria-live="polite" style="display:none;font-size:0.85rem;line-height:1.45;word-break:keep-all;"></div>
         <div id="${gateId}-connect-mount"></div>

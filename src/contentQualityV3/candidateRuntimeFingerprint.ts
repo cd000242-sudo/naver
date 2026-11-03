@@ -29,6 +29,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/agentCli/agyLogin.ts',
   'src/agentCli/agyLogout.ts',
   'src/agentCli/claudeRunner.ts',
+  'src/agentCli/codexNativeTarget.ts',
   'src/agentCli/codexRunner.ts',
   'src/agentCli/commandName.ts',
   'src/agentCli/detect.ts',

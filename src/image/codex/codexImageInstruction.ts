@@ -5,6 +5,22 @@
 
 const SINGLE_HEAD = '이미지 생성 도구(image_gen.imagegen)에 아래 프롬프트를 한 글자도 바꾸지 말고 그대로 넘겨 이미지 1장만 만드세요. 다른 작업이나 설명은 하지 마세요. 프롬프트: ';
 
+// The image_gen tool takes no size argument (prompt / transparent_background / references only), so it picks the frame
+// from the prompt — a section prompt without a ratio came back 16:9. The item's ratio (thumbnail / heading setting,
+// default 1:1) is appended as one line; measured 2026-11-03: the square line gave 1254x1254.
+const CODEX_ASPECT_FRAMES: Readonly<Record<string, string>> = Object.freeze({
+  '1:1': 'square 1:1 (1024x1024)',
+  '16:9': 'wide landscape 16:9',
+  '9:16': 'tall portrait 9:16',
+  '4:3': 'landscape 4:3',
+  '3:4': 'portrait 3:4',
+});
+
+export function withCodexAspectRatio(prompt: string, ratio: unknown): string {
+  const frame = CODEX_ASPECT_FRAMES[String(ratio || '')] ?? CODEX_ASPECT_FRAMES['1:1'];
+  return `${String(prompt ?? '').trim()}\nASPECT RATIO: ${frame}. Compose for this frame; keep every subject and all text inside it.`;
+}
+
 export function buildCodexImageInstruction(prompts: readonly string[]): string {
   const clean = prompts.map((prompt) => String(prompt ?? '').trim());
   if (clean.length === 0 || clean.some((prompt) => prompt.length === 0)) {
