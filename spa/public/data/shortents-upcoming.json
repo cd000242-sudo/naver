@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T16:09:19.353Z",
+ "builtAt": "2026-11-03T16:19:23.102Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -43,38 +43,6 @@
    ]
   },
   {
-   "keyword": "돌싱 n 모솔",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T14:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[종합] \"이렇게 생겨서 모솔이면 어떡해\"…'돌싱N모솔2' 첫 인상에 엇갈...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-03T15:24:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267533"
-    },
-    {
-     "title": "김우빈 닮은 모솔남 등장에 넉살 \"앞에 분들은 뭐가 됩니까?\" ('돌싱N모...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-03T15:20:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000486226"
-    },
-    {
-     "title": "\"나 너 좋아하냐\"…'돌싱N모솔2' 선착순 첫인상 투표에 흔들린 삼각 신...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-03T15:12:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267531"
-    }
-   ]
-  },
-  {
    "keyword": "김민석 신천지 사과 요구",
    "sources": [
     "signal.bz",
@@ -108,66 +76,68 @@
    ]
   },
   {
-   "keyword": "kbo",
+   "keyword": "한학자 보석 취소",
    "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T14:40:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "\"아시아 갈 거야\" 설마 KBO행인가, SF 선수 17명 정리했는데…이정후 동...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-03T15:09:00.000Z",
-     "link": "https://m.sports.naver.com/wbaseball/article/109/0005634141"
-    },
-    {
-     "title": "498SV 전설 내보내고, SSG 출신에 134억 베팅…DET 왜 'KBO 역수출 갓성비...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-03T15:07:00.000Z",
-     "link": "https://m.sports.naver.com/wbaseball/article/076/0004462907"
-    },
-    {
-     "title": "American slugger Hilliard delivers key plays with bat, glove in 1st KBO p...",
-     "press": "en.yna.co.kr",
-     "publishedAt": "2026-11-03T14:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016420036?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "이동휘 유재석 감기 사태",
-   "sources": [
+    "signal.bz",
+    "nate",
     "daum"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-03T14:49:00.000Z",
+   "firstArticleAt": "2026-11-03T15:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "유재석 애착 동생인데…이동휘 전화 안 한 이유 “감기 사태 후 조심”...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-03T15:26:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001184249"
+     "title": "'천정궁 외출' 한학자, 다시 구치소로…JTBC 보도 하루 만에 보석 취소",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-03T15:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000518992?sid=102"
     },
     {
-     "title": "'유재석 애착 동생' 이동휘 \"건강 괜찮나\" 뼈 있는 안부...녹화 취소 사...",
+     "title": "천정궁 오간 한학자‥보름 만에 구치소로",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-03T15:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533330?sid=102"
+    },
+    {
+     "title": "'천정궁' 다녀온 한학자 총재, 法 보석 취소",
+     "press": "getnews.co.kr",
+     "publishedAt": "2026-11-03T15:04:00.000Z",
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=885899"
+    }
+   ]
+  },
+  {
+   "keyword": "돌싱 n 모솔",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-03T15:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[종합] \"이렇게 생겨서 모솔이면 어떡해\"…'돌싱N모솔2' 첫 인상에 엇갈...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-03T15:24:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267533"
+    },
+    {
+     "title": "김우빈 닮은 모솔남 등장에 넉살 \"앞에 분들은 뭐가 됩니까?\" ('돌싱N모...",
      "press": "mhnse.com",
-     "publishedAt": "2026-11-03T15:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000486224"
+     "publishedAt": "2026-11-03T15:20:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000486226"
     },
     {
-     "title": "이동휘, 유재석 건강 이상 언급…\"감기 사태 이후 조심\" (틈만나면) [TV나...",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-03T14:49:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000051273"
+     "title": "\"나 너 좋아하냐\"…'돌싱N모솔2' 선착순 첫인상 투표에 흔들린 삼각 신...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-03T15:12:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267531"
     }
    ]
   }
