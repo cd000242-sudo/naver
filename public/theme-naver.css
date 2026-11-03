@@ -32,6 +32,7 @@
   --nv-red-line: #F7C9C5; --nv-amber-line: #F5D9A8; --nv-scrim: rgba(30, 30, 35, 0.42); --nv-scrim-light: rgba(245, 246, 247, 0.94); --nv-select-line: #CFC2FF;
   --nv-red: #D92D20; --nv-red-soft: #FFF1F0; --nv-amber: #B45309; --nv-amber-soft: #FFF8EB;
   --nv-blue: #1D63D6; --nv-pink: #BE185D;
+  --nv-log-ink: var(--nv-green-text);   /* log text: green here, the old yellow in theme-naver-dark.css (owner 2026-11-03) */
   --nv-font: 'Pretendard', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
   --nv-none: 0 0 0 0 transparent;
 
@@ -123,6 +124,13 @@ html .current-time, html #current-time, html .calendar-month, html .dashboard-ca
 html .calendar-day.today { background: var(--nv-fill); color: #FFFFFF; box-shadow: none; }
 html .calendar-day:hover { background: var(--nv-green-soft); color: var(--nv-ink); }
 html .log-output, html .execute-log { background: var(--nv-sunken); color: var(--nv-ink-2); border: 1px solid var(--nv-line); }
+/* Log text (owner 2026-11-03): light = green, dark = yellow via --nv-log-ink. The main log paints each line with inline
+   #F4D03F (rendererUtils.ts), so these win with !important. Error red, warning amber and success green lines keep their tone. */
+html :is(.log-output, .execute-log, #progress-log, #ma-live-log, #cp-detail-log, #continuous-progress-log, .nv-log) { color: var(--nv-log-ink) !important; }
+html .log-entry, html .nv-log__line:not([class*="--"]), html .nv-log__line--info, html .nv-log__line--ai { color: var(--nv-log-ink) !important; border-bottom-color: var(--nv-line-soft) !important; }
+html :is(.log-output, .execute-log, #progress-log, #ma-live-log, #cp-detail-log, #continuous-progress-log) :is([style*="color: #cbd5e1" i], [style*="color: #94a3b8" i],
+  [style*="color: #a5b4fc" i], [style*="color: #e2e8f0" i], [style*="color: #3b82f6" i], [style*="color: #60a5fa" i], [style*="color: #8b5cf6" i],
+  [style*="color: rgba(255,255,255,0."], [style*="color: rgba(255, 255, 255, 0."], [style*="color: white"], [style*="color: var(--text-muted)"]) { color: var(--nv-log-ink) !important; }
 
 /* 5. Fields ---------------------------------------------------------------- */
 html .field label, html .common-login-section label, html .control-label { color: var(--nv-ink-2); font-weight: 700; letter-spacing: 0; }

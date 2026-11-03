@@ -101,6 +101,36 @@ describe('dark tokens', () => {
   });
 });
 
+// [2026-11-03] Owner: "라이트모드는 로그 텍스트 색상을 녹색으로 바꿔주고 검은색은 그대로 노란색으로 유지해줘".
+// The main log writes every line with inline color #F4D03F (rendererUtils.ts), which was yellow on white in light mode.
+describe('log text color', () => {
+  const LOG_BOXES = ['.log-output', '.execute-log', '#progress-log', '#ma-live-log', '#cp-detail-log', '#continuous-progress-log', '.nv-log'];
+
+  it('light = the green text token, dark = the old yellow #F4D03F', () => {
+    expect(block(light, ':root')).toContain('--nv-log-ink: var(--nv-green-text);');
+    expect(block(dark, ':root[data-theme="dark"]')).toContain('--nv-log-ink: #F4D03F;');
+    expect(contrast('#007A37', '#F7F8FA')).toBeGreaterThanOrEqual(4.5);
+    expect(contrast('#F4D03F', hex(block(dark, ':root[data-theme="dark"]'), 'nv-sunken'))).toBeGreaterThanOrEqual(7);
+  });
+
+  it('every log box and each plain log line uses it, beating the inline yellow', () => {
+    const css = stripComments(light);
+    const boxRule = css.match(/html :is\(([^)]*)\) \{ color: var\(--nv-log-ink\) !important; \}/);
+    expect(boxRule).not.toBeNull();
+    for (const box of LOG_BOXES) expect(boxRule![1].split(',').map((s) => s.trim())).toContain(box);
+    expect(css).toMatch(/html \.log-entry, html \.nv-log__line:not\(\[class\*="--"\]\)[^{]*\{ color: var\(--nv-log-ink\) !important;/);
+  });
+
+  it('neutral inline line colors inside log boxes follow it; error red and warning amber are left alone', () => {
+    const css = stripComments(light);
+    expect(css).toMatch(/\[style\*="color: #cbd5e1" i\][\s\S]*?\{ color: var\(--nv-log-ink\) !important; \}/);
+    const logRules = css.split('\n').filter((line) => line.includes('--nv-log-ink') || line.includes('#cp-detail-log'));
+    for (const line of logRules) {
+      expect(line).not.toMatch(/#ef4444|#f87171|#f59e0b|#fbbf24|#10b981/i);
+    }
+  });
+});
+
 describe('top-left switch', () => {
   const markupStart = html.indexOf('<div id="theme-mode-switch"');
   const markup = html.slice(markupStart, html.indexOf('</script>', markupStart) + '</script>'.length);

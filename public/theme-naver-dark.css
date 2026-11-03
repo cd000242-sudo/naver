@@ -23,6 +23,7 @@
   --nv-red-line: #6B2A25; --nv-amber-line: #6B4A1A; --nv-scrim: rgba(0, 0, 0, 0.62); --nv-scrim-light: rgba(15, 15, 15, 0.94); --nv-select-line: #4A3D8F;
   --nv-red: #E5484D; --nv-red-soft: #3A1715; --nv-amber: #E9A23B; --nv-amber-soft: #33270F;
   --nv-blue: #6EA8FE; --nv-pink: #F472B6;
+  --nv-log-ink: #F4D03F;   /* log text stays the old yellow in dark mode (owner 2026-11-03) */
   --bg-glass: rgba(30, 30, 30, 0.97); --bg-hover: rgba(3, 199, 90, 0.10); --bg-elev: var(--nv-card);
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.45); --shadow-md: 0 1px 3px rgba(0, 0, 0, 0.5);
   --shadow-lg: 0 4px 14px rgba(0, 0, 0, 0.55); --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.6);
