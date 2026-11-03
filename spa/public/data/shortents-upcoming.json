@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T06:05:44.862Z",
+ "builtAt": "2026-11-03T06:15:48.528Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,66 +11,98 @@
  "measured": 28,
  "candidates": [
   {
-   "keyword": "배나라 한재아 결혼",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 35,
-   "recent20": 4,
-   "press": 26,
-   "firstArticleAt": "2026-11-03T04:42:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "배우 배나라·한재아 결혼…14일 옥수동성당서 화촉",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-03T05:57:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000079245"
-    },
-    {
-     "title": "배나라·한재아, 11월 14일 옥수동 성당서 결혼",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-03T05:51:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000518881"
-    },
-    {
-     "title": "배우 배나라·한재아 14일 결혼…\"서로 의지하는 삶 살아가기로\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T05:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016418743?sid=103"
-    }
-   ]
-  },
-  {
    "keyword": "10월 물가 2.8%↑",
    "sources": [
     "nate"
    ],
-   "articles90": 35,
-   "recent20": 6,
-   "press": 24,
+   "articles90": 40,
+   "recent20": 8,
+   "press": 28,
    "firstArticleAt": "2026-11-03T04:48:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "2026년 10월 인천광역시 소비자물가 동향",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-03T06:04:00.000Z",
-     "link": "http://www.breaknews.com/1247948"
+     "title": "물가 둔화에도 '11월 금리인상' 전망…긴축 고삐 못 푸는 한은",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-03T06:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006402880?sid=101"
     },
     {
-     "title": "iM증권, 소비자물가 둔화에도 이달 기준금리 인상 전망⋯ 근원물가 경계",
-     "press": "asiatime.co.kr",
-     "publishedAt": "2026-11-03T06:04:00.000Z",
-     "link": "https://www.asiatime.co.kr/article/20261103500316"
+     "title": "가공식품·외식비 상승에 10월 물가 2.8%↑…석유류 14.9%↑",
+     "press": "mbnmoney.mbn.co.kr",
+     "publishedAt": "2026-11-03T06:10:00.000Z",
+     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005953893"
     },
     {
-     "title": "한은 \"11월 소비자물가도 2%대 후반 전망\"…고물가 경계 지속",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-03T06:00:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2013671"
+     "title": "정부 \"체감 물가 여전히 높아…역대 최대 김장 대책 마련\"",
+     "press": "mbnmoney.mbn.co.kr",
+     "publishedAt": "2026-11-03T06:10:00.000Z",
+     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005953897"
+    }
+   ]
+  },
+  {
+   "keyword": "배나라 한재아 결혼",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 36,
+   "recent20": 4,
+   "press": 28,
+   "firstArticleAt": "2026-11-03T04:46:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "배나라·한재아, 14일 성당서 결혼…뮤지컬계 부부 탄생 [종합]",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-03T06:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000326520"
+    },
+    {
+     "title": "[공식] 배나라♥한재아 14일 결혼 “인생 함께하기로 약속”",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-03T06:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001302673"
+    },
+    {
+     "title": "배나라♥한재아, 14일 옥수동 성당서 비공개 결혼…SNS로 직접 전한 소감",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-03T06:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000759891"
+    }
+   ]
+  },
+  {
+   "keyword": "공군 1호기 정보 유출 수사",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 35,
+   "recent20": 7,
+   "press": 27,
+   "firstArticleAt": "2026-11-03T04:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령 부부 등 168명 개인정보 유출에…경찰, 정식 수사 착수",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-03T06:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202247?sid=102"
+    },
+    {
+     "title": "대통령 내외 등 '정보 유출' 내사하던 경찰, 정식 수사로 전환",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-03T06:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001976491?sid=102"
+    },
+    {
+     "title": "개인정보위, 李대통령 등 공군 1호기 탑승자 개인정보유출 신고 접수",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-03T06:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202245?sid=105"
     }
    ]
   },
@@ -81,28 +113,28 @@
    ],
    "articles90": 45,
    "recent20": 5,
-   "press": 19,
-   "firstArticleAt": "2026-11-03T05:01:00.000Z",
+   "press": 20,
+   "firstArticleAt": "2026-11-03T05:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "교육부, 43개 지자체 '교육혁신선도지역' 선정…연 최대 40억 지원",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-03T06:04:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261103500326"
+     "title": "소규모 학교 교육격차 줄인다…교육혁신선도지역 43곳 선정",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-03T06:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004678216?sid=102"
     },
     {
-     "title": "교육부, 교육혁신선도지역 지정 결과 발표",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-03T05:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003695283?sid=102"
+     "title": "강원 8개 시·군 '교육혁신선도지역' 선정…전국 최다",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-03T06:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004206020?sid=102"
     },
     {
-     "title": "정부, 43개 교육혁신선도지역 발표",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T05:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009267338?sid=102"
+     "title": "'교육혁신 선도지역' 제주 탈락",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-03T06:10:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=846023"
     }
    ]
   },
@@ -111,13 +143,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 18,
-   "recent20": 6,
-   "press": 15,
-   "firstArticleAt": "2026-11-03T04:36:00.000Z",
+   "articles90": 17,
+   "recent20": 3,
+   "press": 14,
+   "firstArticleAt": "2026-11-03T05:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“삿대질도 좋다”…29억뷰 로판 ’재혼 황후‘, 신민아·주지훈·이종석...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-03T06:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002718257?sid=103"
+    },
     {
      "title": "[종합] 원작 29억뷰 '재혼 황후', 4인의 이혼 앤 재혼 스토리…K-로판 역...",
      "press": "tenasia.co.kr",
@@ -129,12 +167,6 @@
      "press": "bntnews.co.kr",
      "publishedAt": "2026-11-03T05:58:00.000Z",
      "link": "https://www.bntnews.co.kr/article/view/bnt202611030240"
-    },
-    {
-     "title": "하루 앞당긴 ‘재혼 황후’…29억뷰 K-로판, 글로벌 통할까 (종합)",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-03T05:52:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1134764"
     }
    ]
   },
@@ -143,62 +175,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 7,
-   "recent20": 7,
-   "press": 7,
-   "firstArticleAt": "2026-11-03T05:48:00.000Z",
+   "articles90": 11,
+   "recent20": 11,
+   "press": 9,
+   "firstArticleAt": "2026-11-03T05:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "중앙대광명 윤수미 교수 '우수구연상'",
-     "press": "medical-tribune.co.kr",
-     "publishedAt": "2026-11-03T06:04:00.000Z",
-     "link": "http://www.medical-tribune.co.kr/news/articleView.html?idxno=215728"
+     "title": "고려대세종캠 안준성 교수팀, AI로 읽는 유연센서 개발",
+     "press": "ccreview.co.kr",
+     "publishedAt": "2026-11-03T06:14:00.000Z",
+     "link": "https://www.ccreview.co.kr/news/articleView.html?idxno=361644"
     },
     {
-     "title": "성균관대 백정민 교수팀 배터리 없이 작동하는 마찰전기 직류 발전기 개...",
-     "press": "veritas-a.com",
-     "publishedAt": "2026-11-03T06:02:00.000Z",
-     "link": "https://www.veritas-a.com/news/articleView.html?idxno=635011"
+     "title": "서울대병원 최규성 교수, 영상의학·의료인공지능 분야 학술상 수상",
+     "press": "medisobizanews.com",
+     "publishedAt": "2026-11-03T06:12:00.000Z",
+     "link": "http://www.medisobizanews.com/news/articleView.html?idxno=143919"
     },
     {
-     "title": "항생제 선택 돕는 프로그램 개발한 세종충남대병원 최규태 교수",
-     "press": "dtnews24.com",
-     "publishedAt": "2026-11-03T06:02:00.000Z",
-     "link": "http://www.dtnews24.com/news/articleView.html?idxno=816762"
-    }
-   ]
-  },
-  {
-   "keyword": "해커",
-   "sources": [
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-03T04:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"사람 속이던 해커, 이젠 AI도 속인다\"…MS 연구진 경고",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T06:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009267393?sid=105"
-    },
-    {
-     "title": "[자막뉴스] \"추적 피하려고? 이번엔 비트코인\"…북 해커들, '2차 세탁' 시...",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-03T05:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400258?sid=104"
-    },
-    {
-     "title": "“리모컨 누른 순간 해커가 접속”…中 TV 셋톱박스의 비밀 적발",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-03T05:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000366227?sid=104"
+     "title": "한림대동탄성심병원 이은소 교수, 국제피부과학연맹 공로상",
+     "press": "medicaltimes.com",
+     "publishedAt": "2026-11-03T06:10:00.000Z",
+     "link": "https://www.medicaltimes.com/Main/News/InformView.html?ID=11428&ref=naverpc"
     }
    ]
   },
@@ -207,13 +207,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 1,
+   "articles90": 6,
+   "recent20": 2,
    "press": 6,
-   "firstArticleAt": "2026-11-03T04:37:00.000Z",
+   "firstArticleAt": "2026-11-03T05:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[토론회] 韓 \"공천권, 당권 쥔 세력의 전유물 아냐\"…김기현·윤상현과...",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-03T06:04:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=747575"
+    },
     {
      "title": "보수 연대론에 '동상이몽'…장동혁 '당심'·오세훈 '통합'·한동훈 '명분...",
      "press": "mbn.mk.co.kr",
@@ -225,12 +231,6 @@
      "press": "ichannela.com",
      "publishedAt": "2026-11-03T05:35:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/449/0000366225?sid=100"
-    },
-    {
-     "title": "같은 날 나란히 토론회 행사...당권 선거까지 '훈훈연대' 유지될까? [이...",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-03T05:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002427751?sid=100"
     }
    ]
   },
@@ -240,10 +240,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-03T04:42:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-03T04:56:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -260,42 +260,10 @@
      "link": "http://www.seouleconews.com/news/articleView.html?idxno=94755"
     },
     {
-     "title": "與, 가상자산 과세 2년 유예 추진···2029년 거론",
-     "press": "hansbiz.co.kr",
+     "title": "가상자산 과세 유예, 민주당 재경위도 공식화…\"내년 바로 과세보다 준...",
+     "press": "news.jtbc.co.kr",
      "publishedAt": "2026-11-03T05:02:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=879315"
-    }
-   ]
-  },
-  {
-   "keyword": "서울양평 고속도로 재추진",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-03T04:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "서울-양평 고속도로 신규 타당성조사 착수… 원점서 최적 경로 도출",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-03T05:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000130390?sid=101"
-    },
-    {
-     "title": "서울-양평고속도로 사업 재개…신규 타당성조사 착수",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-03T05:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012286257?sid=101"
-    },
-    {
-     "title": "서울-양평 고속도로 3년만에 재추진…내년 하반기 노선안 마련",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-03T04:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001271481?sid=101"
+     "link": "https://n.news.naver.com/mnews/article/437/0000518874?sid=100"
     }
    ]
   },
@@ -305,12 +273,18 @@
     "nate"
    ],
    "articles90": 9,
-   "recent20": 0,
+   "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-03T04:36:00.000Z",
+   "firstArticleAt": "2026-11-03T04:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "외국인 관광객 서울서 월 1조 썼다...역대 최대",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-03T06:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005598694?sid=102"
+    },
     {
      "title": "[N포커스] 외국인 지출 8조8435억 어디로 향했나…골목상권도 활기",
      "press": "nc.press",
@@ -322,19 +296,45 @@
      "press": "biz.chosun.com",
      "publishedAt": "2026-11-03T05:26:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/366/0001202227?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "서울양평 고속도로 재추진",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-03T04:57:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "멈췄던 서울~양평 고속도로 재시동…노선 원점서 다시 짠다",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-03T06:08:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=500950"
     },
     {
-     "title": "서울 방문 외국인 역대 최대",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T05:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009267165?sid=102"
+     "title": "서울-양평 고속도로 신규 타당성조사 착수… 원점서 최적 경로 도출",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-03T05:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000130390?sid=101"
+    },
+    {
+     "title": "서울-양평고속도로 사업 재개…신규 타당성조사 착수",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-03T05:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012286257?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 368,
+  "flagged": 369,
   "matched": 137,
   "avgLeadMin": 233,
   "recent": [
