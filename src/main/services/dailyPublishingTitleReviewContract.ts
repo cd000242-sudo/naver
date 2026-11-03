@@ -39,8 +39,8 @@ export interface DailyTitleCritique {
 export const reviewFlags = ['eligible', 'concreteSubject', 'specificCuriosity', 'realScene', 'faithful', 'payoff', 'notRoutineAnnouncement', 'distinctQuestion'] as const;
 const candidateKeys = ['id', 'title', 'readerQuestion', 'expectedBelief', 'surprisingFact', 'clickReason', 'sourceAnchors', 'bodyAnchors'];
 const reviewKeys = ['id', ...reviewFlags, 'reason', 'sourceAnchors', 'bodyAnchors'];
-export function failTitle(code: string, message: string): never {
-  throw Object.assign(new Error(`${code}: ${message}`), { code });
+export function failTitle(code: string, message: string, details: Record<string, unknown> = {}): never {
+  throw Object.assign(new Error(`${code}: ${message}`), { ...details, code });
 }
 export function normalizeTitleEvidence(text: string): string { return text.normalize('NFKC').replace(/\s+/gu, '').toLocaleLowerCase('ko-KR'); }
 function object(value: unknown, keys: readonly string[], message = '제목 응답 형식을 확인하지 못했습니다.'): Record<string, unknown> {
@@ -118,8 +118,10 @@ export function parseTitleCritique(raw: string, ids: readonly string[], input: D
     seen.add(id);
     return { id, ...Object.fromEntries(reviewFlags.map(key => [key, entry[key]])), reason: text(entry.reason), sourceAnchors: anchors(entry.sourceAnchors, input.sourceVerification || input.sourceGrounding), bodyAnchors: anchors(entry.bodyAnchors, input.body) } as DailyTitleCritique;
   });
-  if (packet.selectedId === null) failTitle('DAILY_TITLE_QUALITY', '읽을 이유와 실제 장면을 확인할 제목이 없어 글을 보류했습니다. 다른 소재를 선택해 주세요.');
+  // The critic's own reasons ride on the error (2026-11-03) so an attended run can say why the title was judged weak.
+  const reasons = reviews.map(review => review.reason);
+  if (packet.selectedId === null) failTitle('DAILY_TITLE_QUALITY', '읽을 이유와 실제 장면을 확인할 제목이 없어 글을 보류했습니다. 다른 소재를 선택해 주세요.', { reasons });
   const selected = reviews.find(review => review.id === packet.selectedId);
-  if (!selected || reviewFlags.some(key => selected[key] !== true)) failTitle('DAILY_TITLE_QUALITY', '선정 제목의 구체적인 궁금증·사실·본문 보상 검수를 통과하지 못했습니다.');
+  if (!selected || reviewFlags.some(key => selected[key] !== true)) failTitle('DAILY_TITLE_QUALITY', '선정 제목의 구체적인 궁금증·사실·본문 보상 검수를 통과하지 못했습니다.', { reasons: selected ? [selected.reason] : reasons });
   return { selectedId: packet.selectedId, reviews };
 }

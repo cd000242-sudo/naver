@@ -74,6 +74,9 @@ describe('daily title review', () => {
     const c = { selectedId: null, reviews: ['c1', 'c2', 'c3'].map(id => verdict(id, false)) }, qualityCall = caller(packet(), c);
     await expect(reviewDailyPublishingTitle(input, { callText: qualityCall })).rejects.toThrow('DAILY_TITLE_QUALITY');
     expect(qualityCall.mock.calls.map(call => call[1].stage)).toEqual(['candidates', 'review']);
+    // 2026-11-03: the hold carries the critic's own reasons so the attended [글 생성] warning can say why.
+    await expect(reviewDailyPublishingTitle(input, { callText: caller(packet(), c) }))
+      .rejects.toMatchObject({ code: 'DAILY_TITLE_QUALITY', reasons: ['직접 찾아온 행동과 실제 본문 설명이 연결된다', '직접 찾아온 행동과 실제 본문 설명이 연결된다', '직접 찾아온 행동과 실제 본문 설명이 연결된다'] });
     const controller = new AbortController(), bad = packet(); bad.candidates[0].title = '92세 강신일과 설경구의 인연';
     const cancelled = vi.fn(async () => { controller.abort(); return JSON.stringify(bad); });
     await expect(reviewDailyPublishingTitle({ ...input, signal: controller.signal }, { callText: cancelled })).rejects.toThrow('DAILY_TITLE_CANCELLED');

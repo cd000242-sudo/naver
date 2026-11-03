@@ -1,7 +1,8 @@
 /**
  * 홈판 제목 검수 공통 감싸개(2026-10-21) — 발행 화면 [글 생성] · 화면 다중계정 큐 · main 다중계정이 같은 순서를 쓴다.
  *   홈판 모드: 생성 → 제목 후보 캐기 · 토너먼트 · 비평(tournament) → (다른 제목이 이기면 그 제목으로 다시 생성) → 최종 약속 검수.
- *   검수 실패는 그대로 던진다(검수 안 된 초안으로 몰래 돌아가지 않음).
+ *   2026-11-03: 사람이 보는 이 경로는 검수 실패(판정 · 검수 엔진 문제)로 글을 버리지 않는다 — 판정을 그대로 기록하고
+ *   ⚠️ 경고로 알린다(몰래 통과시키지 않음). 취소 · 그 밖의 오류는 그대로 던진다. 무인 매일 발행은 main.ts 가 보류한다.
  *   엔진에 검수 경로가 없거나 원문이 없어 사실 대조를 못 하면 그렇다고 기록 · 안내하고 생성만 한다(titleReview 로 구분).
  * 홈판이 아닌 모드는 지금까지처럼 한 번 생성한다.
  */
@@ -14,7 +15,7 @@ import type { DailyTitleCaller, DailyTitleInput } from '../main/services/dailyPu
 type Article = { readonly selectedTitle: string; readonly bodyPlain: string };
 type Source = { readonly rawText: string; readonly [key: string]: unknown };
 type Caller = { complete: DailyTitleCaller['callText']; timeoutMs?: number };
-export type TitleReviewStatus = 'reviewed' | 'not-homefeed' | 'unsupported-engine' | 'no-source';
+export type TitleReviewStatus = 'reviewed' | 'review-warning' | 'not-homefeed' | 'unsupported-engine' | 'no-source';
 
 const MAX_GROUNDING = 48_000;
 
@@ -60,12 +61,49 @@ export async function generateWithHomefeedReview<T extends Article>(args: {
     editorialAngle: args.editorial, blogProfile: args.blogProfile, signal: args.signal,
   });
   const deps = { callText: caller.complete, timeoutMs: caller.timeoutMs };
+  // 2026-11-03: a title-review failure here keeps the article and warns (the verdict is logged and audited as it came back).
+  let reviewFailed = false, warned = false;
+  const warn = (stage: string, error: unknown) => { warned = true; args.log?.(titleReviewWarning(stage, error)); return failure(error); };
   const article = await generateReviewedDailyHomefeedArticle({ source: args.source, editorial: args.editorial, signal: args.signal }, {
     generate: args.generate,
-    review: a => review(titleInput(a), { ...deps, tournament: true }),
-    validate: a => validate(titleInput(a), deps),
+    review: async a => {
+      try { return await review(titleInput(a), { ...deps, tournament: true }); }
+      catch (error) { if (!isSoftTitleFailure(error)) throw error; reviewFailed = true; return { title: a.selectedTitle, ...warn('candidates', error) }; }
+    },
+    validate: async a => {
+      if (reviewFailed) return { skipped: 'candidate-review-failed' };
+      try { return await validate(titleInput(a), deps); }
+      catch (error) { if (!isSoftTitleFailure(error)) throw error; return warn('final', error); }
+    },
     audit: args.audit,
   });
+  if (warned) return { article, titleReview: 'review-warning' };
   args.log?.('✅ 제목 후보 캐기 · 토너먼트 · 비평 · 본문 약속 검수를 통과했습니다.');
   return { article, titleReview: 'reviewed' };
+}
+
+function failure(error: unknown): { failed: string; message: string } {
+  return { failed: titleErrorCode(error), message: String((error as Error)?.message || error).slice(0, 300) };
+}
+function titleErrorCode(error: unknown): string {
+  const code = (error as { code?: unknown })?.code;
+  if (typeof code === 'string') return code;
+  return /^(DAILY_TITLE_[A-Z_]+)/u.exec(String((error as Error)?.message || ''))?.[1] || '';
+}
+/** Review verdicts and review-engine trouble are soft for a person-run [글 생성]; cancellation and other errors are not. */
+function isSoftTitleFailure(error: unknown): boolean {
+  const code = titleErrorCode(error);
+  return code.startsWith('DAILY_TITLE_') && code !== 'DAILY_TITLE_CANCELLED';
+}
+function titleReviewWarning(stage: 'candidates' | 'final' | string, error: unknown): string {
+  const code = titleErrorCode(error);
+  const keep = stage === 'candidates' ? '처음 제목 그대로 글을 두었습니다' : '글은 그대로 두었습니다';
+  if (code === 'DAILY_TITLE_QUALITY') {
+    const reason = String(((error as { reasons?: unknown[] })?.reasons || [])[0] || '').trim().slice(0, 160);
+    return `⚠️ 제목 검수: 읽을 이유 · 실제 장면이 약하다는 판정이 나왔습니다 — ${keep}. 발행 전에 제목을 확인하거나 바꿔 주세요.${reason ? ` (검수 의견: ${reason})` : ''}`;
+  }
+  if (['DAILY_TITLE_NUMBER', 'DAILY_TITLE_QUOTE', 'DAILY_TITLE_EVIDENCE', 'DAILY_TITLE_PRICE_BASIS'].includes(code)) {
+    return `⚠️ 제목 검수: 제목의 숫자 · 인용을 원문과 끝까지 대조하지 못했습니다 — ${keep}. 발행 전에 제목의 숫자 · 인용을 직접 확인해 주세요.`;
+  }
+  return `⚠️ 제목 검수를 끝내지 못했습니다(${code}) — ${keep}. 발행 전에 제목을 직접 확인해 주세요.`;
 }
