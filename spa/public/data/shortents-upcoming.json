@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T06:15:48.528Z",
+ "builtAt": "2026-11-03T06:25:52.266Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,70 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 29,
  "candidates": [
   {
-   "keyword": "10월 물가 2.8%↑",
+   "keyword": "리센느 컴백",
    "sources": [
+    "daum"
+   ],
+   "articles90": 99,
+   "recent20": 41,
+   "press": 36,
+   "firstArticleAt": "2026-11-03T05:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[HD포토] 리센느 메이, '이예빈 키 3메다' (PULSE 쇼케이스)",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-03T06:24:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267074"
+    },
+    {
+     "title": "리센느 '남다른 컴백 무대'[★포토]",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-03T06:23:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003484154"
+    },
+    {
+     "title": "리센느 '힘 넘치는 컴백 무대'[★포토]",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-03T06:22:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003484153"
+    }
+   ]
+  },
+  {
+   "keyword": "10월 물가 2.8% 상승",
+   "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 40,
-   "recent20": 8,
+   "recent20": 7,
    "press": 28,
-   "firstArticleAt": "2026-11-03T04:48:00.000Z",
+   "firstArticleAt": "2026-11-03T04:56:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "전남광주 농축수산물 가격 하락…공업제품 영향에 물가 2.8%↑",
+     "press": "aitimes.com",
+     "publishedAt": "2026-11-03T06:24:00.000Z",
+     "link": "https://www.aitimes.com/news/articleView.html?idxno=216950"
+    },
+    {
+     "title": "[이로운체크] 물가 둔화에도 외식비는 껑충…정부, 김장철 640억 푼다",
+     "press": "eroun.net",
+     "publishedAt": "2026-11-03T06:22:00.000Z",
+     "link": "https://www.eroun.net/news/articleView.html?idxno=94261"
+    },
     {
      "title": "물가 둔화에도 '11월 금리인상' 전망…긴축 고삐 못 푸는 한은",
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-03T06:11:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006402880?sid=101"
-    },
-    {
-     "title": "가공식품·외식비 상승에 10월 물가 2.8%↑…석유류 14.9%↑",
-     "press": "mbnmoney.mbn.co.kr",
-     "publishedAt": "2026-11-03T06:10:00.000Z",
-     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005953893"
-    },
-    {
-     "title": "정부 \"체감 물가 여전히 높아…역대 최대 김장 대책 마련\"",
-     "press": "mbnmoney.mbn.co.kr",
-     "publishedAt": "2026-11-03T06:10:00.000Z",
-     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005953897"
     }
    ]
   },
@@ -47,13 +80,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 36,
+   "articles90": 29,
    "recent20": 4,
-   "press": 28,
-   "firstArticleAt": "2026-11-03T04:46:00.000Z",
+   "press": 23,
+   "firstArticleAt": "2026-11-03T04:58:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "배나라♥한재아, 7년 교제 끝 결혼..“평생 함께 걷고 싶은 사람” [종합...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-03T06:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005633550"
+    },
     {
      "title": "배나라·한재아, 14일 성당서 결혼…뮤지컬계 부부 탄생 [종합]",
      "press": "enews.imbc.com",
@@ -65,65 +104,21 @@
      "press": "sports.donga.com",
      "publishedAt": "2026-11-03T06:11:00.000Z",
      "link": "https://m.entertain.naver.com/article/382/0001302673"
-    },
-    {
-     "title": "배나라♥한재아, 14일 옥수동 성당서 비공개 결혼…SNS로 직접 전한 소감",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-03T06:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000759891"
     }
    ]
   },
   {
-   "keyword": "공군 1호기 정보 유출 수사",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 35,
-   "recent20": 7,
-   "press": 27,
-   "firstArticleAt": "2026-11-03T04:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령 부부 등 168명 개인정보 유출에…경찰, 정식 수사 착수",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-03T06:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202247?sid=102"
-    },
-    {
-     "title": "대통령 내외 등 '정보 유출' 내사하던 경찰, 정식 수사로 전환",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-03T06:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001976491?sid=102"
-    },
-    {
-     "title": "개인정보위, 李대통령 등 공군 1호기 탑승자 개인정보유출 신고 접수",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-03T06:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202245?sid=105"
-    }
-   ]
-  },
-  {
-   "keyword": "교육혁신선도지역 지정 결과",
+   "keyword": "교육혁신선도지역 결과 발표",
    "sources": [
     "nate"
    ],
-   "articles90": 45,
-   "recent20": 5,
-   "press": 20,
-   "firstArticleAt": "2026-11-03T05:04:00.000Z",
+   "articles90": 44,
+   "recent20": 2,
+   "press": 17,
+   "firstArticleAt": "2026-11-03T05:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "소규모 학교 교육격차 줄인다…교육혁신선도지역 43곳 선정",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-03T06:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004678216?sid=102"
-    },
     {
      "title": "강원 8개 시·군 '교육혁신선도지역' 선정…전국 최다",
      "press": "nocutnews.co.kr",
@@ -135,38 +130,12 @@
      "press": "jemin.com",
      "publishedAt": "2026-11-03T06:10:00.000Z",
      "link": "https://www.jemin.com/news/articleView.html?idxno=846023"
-    }
-   ]
-  },
-  {
-   "keyword": "신민아 재혼 황후 이야기",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 17,
-   "recent20": 3,
-   "press": 14,
-   "firstArticleAt": "2026-11-03T05:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“삿대질도 좋다”…29억뷰 로판 ’재혼 황후‘, 신민아·주지훈·이종석...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-03T06:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002718257?sid=103"
     },
     {
-     "title": "[종합] 원작 29억뷰 '재혼 황후', 4인의 이혼 앤 재혼 스토리…K-로판 역...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-03T06:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000782780"
-    },
-    {
-     "title": "‘재혼 황후’ 이세영 “순수 악을 드러내려고 노력했다”",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-03T05:58:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611030240"
+     "title": "전북 5개 시군, 교육부 '교육혁신선도지역' 선정",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-03T06:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004206006?sid=102"
     }
    ]
   },
@@ -175,30 +144,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 11,
-   "recent20": 11,
-   "press": 9,
-   "firstArticleAt": "2026-11-03T05:56:00.000Z",
+   "articles90": 8,
+   "recent20": 8,
+   "press": 8,
+   "firstArticleAt": "2026-11-03T06:06:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "고려대세종캠 안준성 교수팀, AI로 읽는 유연센서 개발",
-     "press": "ccreview.co.kr",
-     "publishedAt": "2026-11-03T06:14:00.000Z",
-     "link": "https://www.ccreview.co.kr/news/articleView.html?idxno=361644"
+     "title": "김영기 전 전남대 교수, 제7대 글로벌광주방송 사장 취임…“글로벌 미...",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-03T06:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003481650?sid=102"
     },
     {
-     "title": "서울대병원 최규성 교수, 영상의학·의료인공지능 분야 학술상 수상",
-     "press": "medisobizanews.com",
-     "publishedAt": "2026-11-03T06:12:00.000Z",
-     "link": "http://www.medisobizanews.com/news/articleView.html?idxno=143919"
+     "title": "지웅배 세종대 교수, 외계 문명의 과학 발전 조건 연구",
+     "press": "asiatime.co.kr",
+     "publishedAt": "2026-11-03T06:24:00.000Z",
+     "link": "https://www.asiatime.co.kr/article/20261103500350"
     },
     {
-     "title": "한림대동탄성심병원 이은소 교수, 국제피부과학연맹 공로상",
-     "press": "medicaltimes.com",
-     "publishedAt": "2026-11-03T06:10:00.000Z",
-     "link": "https://www.medicaltimes.com/Main/News/InformView.html?ID=11428&ref=naverpc"
+     "title": "전북대학교 김정길 교수팀, 섬유형 이차전지 전극 소재 연속생산 기술 ...",
+     "press": "lecturernews.com",
+     "publishedAt": "2026-11-03T06:16:00.000Z",
+     "link": "https://www.lecturernews.com/news/articleView.html?idxno=212943"
     }
    ]
   },
@@ -207,38 +176,37 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 8,
    "recent20": 2,
-   "press": 6,
+   "press": 8,
    "firstArticleAt": "2026-11-03T05:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "같은 시간 국회 토론회 개최한 吳·韓…의원 수십명 몰렸다",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-03T06:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001882679?sid=100"
+    },
+    {
+     "title": "장동혁 \"갈등 키우는 보수 통합, 본질에 어긋나…당원 뜻 물을 것\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T06:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009267460?sid=100"
+    },
+    {
      "title": "[토론회] 韓 \"공천권, 당권 쥔 세력의 전유물 아냐\"…김기현·윤상현과...",
      "press": "polinews.co.kr",
      "publishedAt": "2026-11-03T06:04:00.000Z",
      "link": "https://www.polinews.co.kr/news/articleView.html?idxno=747575"
-    },
-    {
-     "title": "보수 연대론에 '동상이몽'…장동혁 '당심'·오세훈 '통합'·한동훈 '명분...",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-03T06:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001976489?sid=100"
-    },
-    {
-     "title": "“보수 대통합 가능한가?” 장동혁에게 물었더니 “당원이 결정할 문제...",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-03T05:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000366225?sid=100"
     }
    ]
   },
   {
    "keyword": "가상자산 과세 유예 논의",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 5,
    "recent20": 0,
@@ -264,38 +232,6 @@
      "press": "news.jtbc.co.kr",
      "publishedAt": "2026-11-03T05:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/437/0000518874?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "서울 외국인 최대 방문",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-03T04:55:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "외국인 관광객 서울서 월 1조 썼다...역대 최대",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-03T06:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005598694?sid=102"
-    },
-    {
-     "title": "[N포커스] 외국인 지출 8조8435억 어디로 향했나…골목상권도 활기",
-     "press": "nc.press",
-     "publishedAt": "2026-11-03T05:29:00.000Z",
-     "link": "https://www.nc.press/news/articleView.html?idxno=630117"
-    },
-    {
-     "title": "서울 찾은 외국인 관광객·소비액 ‘역대 최고’…9개월간 8.8조 썼다",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-03T05:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202227?sid=102"
     }
    ]
   },
@@ -330,11 +266,43 @@
      "link": "https://n.news.naver.com/mnews/article/056/0012286257?sid=101"
     }
    ]
+  },
+  {
+   "keyword": "2027년 정미년 달력",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 17,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T05:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "달력 제작으로 분주한 인쇄소",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-03T06:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016418847?sid=102"
+    },
+    {
+     "title": "2027년 정미년 달력 인쇄",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T06:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014298303?sid=102"
+    },
+    {
+     "title": "정미년 달력 제작으로 분주",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T05:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014298285?sid=102"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 369,
+  "flagged": 372,
   "matched": 137,
   "avgLeadMin": 233,
   "recent": [
