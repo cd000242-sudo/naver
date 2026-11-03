@@ -10,8 +10,26 @@
 // so the list of engines has exactly one source of truth. Persisting goes through the same
 // fields settingsModal.saveSettings writes (primaryGeminiTextModel + defaultAiProvider).
 
+// [2026-11-03] Agent-first: agent-* cards are listed on top and pre-selected when nothing was
+// saved; an agent that is not ready is connected (install -> login -> real answer) inside this
+// window. A failed connection keeps the window open: no silent engine swap.
+
+import type { AgentProvider } from '../../agentCli/types.js';
 import { resolveTextModelSelection } from '../utils/agentProductPolicyUi.js';
 import { restoreTextModelRadio } from '../utils/settingsModal.js';
+import { agentConnectRun, agentConnectWriteLog } from './agentConnectFlow.js';
+import type { AgentConnectResult } from './agentConnectFlow.js';
+import {
+  agentConnectChipHtml,
+  agentConnectGateChoice,
+  agentConnectGateLock,
+  agentConnectGateNeedsConnect,
+  agentConnectIsAgentValue,
+  agentConnectOrderGateOptions,
+  agentConnectProviderFromValue,
+  agentConnectStartChips,
+} from './agentConnectGate.js';
+import type { AgentConnectChipController } from './agentConnectGate.js';
 
 export const STARTUP_ENGINE_GATE_ID = 'startup-engine-gate';
 
@@ -52,9 +70,12 @@ function escapeHtml(value: string): string {
 }
 
 function renderOption(option: EngineGateOption, checked: boolean): string {
-  const badge = option.badge
+  const planBadge = option.badge
     ? `<span style="font-size:0.72rem;padding:2px 8px;border-radius:999px;background:#e0e7ff;color:#3730a3;font-weight:700;white-space:nowrap;">${escapeHtml(option.badge)}</span>`
     : '';
+  const badge = agentConnectIsAgentValue(option.value)
+    ? `<span style="display:flex;gap:0.35rem;align-items:center;">${planBadge}${agentConnectChipHtml(escapeHtml(option.value))}</span>`
+    : planBadge;
   return `
     <label data-engine-option="${escapeHtml(option.value)}" style="display:flex;gap:0.75rem;align-items:flex-start;border:2px solid ${checked ? '#4f46e5' : '#e5e7eb'};border-radius:12px;padding:0.8rem 0.9rem;cursor:pointer;background:${checked ? '#eef2ff' : '#fff'};">
       <input type="radio" name="startup-engine-choice" value="${escapeHtml(option.value)}" ${checked ? 'checked' : ''} style="margin-top:3px;width:18px;height:18px;accent-color:#4f46e5;cursor:pointer;">
@@ -67,15 +88,29 @@ function renderOption(option: EngineGateOption, checked: boolean): string {
     </label>`;
 }
 
-function renderGate(options: EngineGateOption[], savedModel: string): HTMLElement {
+interface GateRenderPlan {
+  readonly checked: string; // radio checked at first paint ('' = none)
+  readonly saved: string; // valid saved engine ('' = none)
+  readonly agentDefault: boolean; // first agent pre-selected because nothing valid was saved
+}
+
+function startupGateSavedLine(plan: GateRenderPlan): string {
+  if (plan.saved) {
+    return `<div style="font-size:0.85rem;color:#4b5563;margin-bottom:0.75rem;">이전에 선택한 엔진: <b>${escapeHtml(plan.saved)}</b> — 그대로 쓰려면 확인을 누르세요.</div>`;
+  }
+  if (plan.agentDefault) {
+    return `<div style="font-size:0.85rem;color:#4b5563;margin-bottom:0.75rem;">저장된 엔진이 없어 구독 에이전트를 먼저 골라 두었습니다. 설치·로그인이 안 된 에이전트는 확인을 누르면 이 창에서 바로 연결합니다.</div>`;
+  }
+  return `<div style="font-size:0.85rem;color:#b45309;margin-bottom:0.75rem;">저장된 엔진이 없습니다. 글을 만들기 전에 엔진을 골라 주세요.</div>`;
+}
+
+function renderGate(options: EngineGateOption[], plan: GateRenderPlan): HTMLElement {
   const overlay = document.createElement('div');
   overlay.id = STARTUP_ENGINE_GATE_ID;
   overlay.setAttribute('role', 'dialog');
   overlay.setAttribute('aria-modal', 'true');
   overlay.style.cssText = 'position:fixed;inset:0;z-index:10000000;background:rgba(15,23,42,0.82);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:1rem;';
-  const savedLine = savedModel
-    ? `<div style="font-size:0.85rem;color:#4b5563;margin-bottom:0.75rem;">이전에 선택한 엔진: <b>${escapeHtml(savedModel)}</b> — 그대로 쓰려면 확인을 누르세요.</div>`
-    : `<div style="font-size:0.85rem;color:#b45309;margin-bottom:0.75rem;">저장된 엔진이 없습니다. 글을 만들기 전에 엔진을 골라 주세요.</div>`;
+  const savedLine = startupGateSavedLine(plan);
   overlay.innerHTML = `
     <div style="background:#fff;border-radius:18px;width:min(640px,100%);max-height:92vh;display:flex;flex-direction:column;box-shadow:0 30px 60px -20px rgba(0,0,0,0.6);overflow:hidden;">
       <div style="padding:1.25rem 1.5rem 0.75rem;">
@@ -84,11 +119,15 @@ function renderGate(options: EngineGateOption[], savedModel: string): HTMLElemen
       </div>
       <div style="padding:0 1.5rem;">${savedLine}</div>
       <div id="${STARTUP_ENGINE_GATE_ID}-list" style="padding:0 1.5rem 0.5rem;display:flex;flex-direction:column;gap:0.55rem;overflow-y:auto;">
-        ${options.map((option) => renderOption(option, option.value === savedModel)).join('')}
+        ${options.map((option) => renderOption(option, option.value === plan.checked)).join('')}
+      </div>
+      <div style="padding:0 1.5rem 0.5rem;">
+        <div id="${STARTUP_ENGINE_GATE_ID}-connect-log" role="status" aria-live="polite" style="display:none;font-size:0.85rem;line-height:1.45;word-break:keep-all;"></div>
+        <div id="${STARTUP_ENGINE_GATE_ID}-connect-mount"></div>
       </div>
       <div style="padding:0.9rem 1.5rem 1.25rem;border-top:1px solid #e5e7eb;display:flex;justify-content:flex-end;align-items:center;gap:0.75rem;">
-        <span id="${STARTUP_ENGINE_GATE_ID}-hint" style="font-size:0.82rem;color:#6b7280;flex:1;">${savedModel ? '' : '엔진을 하나 고르면 확인 버튼이 켜집니다.'}</span>
-        <button id="${STARTUP_ENGINE_GATE_ID}-confirm" type="button" ${savedModel ? '' : 'disabled'} style="background:#4f46e5;color:#fff;border:none;border-radius:10px;padding:0.7rem 1.4rem;font-weight:800;font-size:0.95rem;cursor:pointer;">이 엔진으로 시작</button>
+        <span id="${STARTUP_ENGINE_GATE_ID}-hint" style="font-size:0.82rem;color:#6b7280;flex:1;">${plan.checked ? '' : '엔진을 하나 고르면 확인 버튼이 켜집니다.'}</span>
+        <button id="${STARTUP_ENGINE_GATE_ID}-confirm" type="button" ${plan.checked ? '' : 'disabled'} style="background:#4f46e5;color:#fff;border:none;border-radius:10px;padding:0.7rem 1.4rem;font-weight:800;font-size:0.95rem;cursor:pointer;">이 엔진으로 시작</button>
       </div>
     </div>`;
   return overlay;
@@ -120,49 +159,120 @@ export async function applyEngineGateSelection(model: string, title: string): Pr
   console.log(`[StartupEngineGate] 글생성 엔진 확정: ${selection.model} (provider=${selection.provider})`);
 }
 
+interface GateState {
+  userTouched: boolean; // the user clicked a radio: the automatic agent default stops
+  busy: boolean; // a connection / save is running: radios and button stay locked
+}
+
+interface GateContext {
+  readonly overlay: HTMLElement;
+  readonly options: readonly EngineGateOption[];
+  readonly chips: AgentConnectChipController;
+  readonly confirmBtn: HTMLButtonElement;
+  readonly hint: HTMLElement;
+  readonly resolve: (value: string) => void;
+  readonly state: GateState;
+}
+
+function startupGateSelect(overlay: HTMLElement, confirmBtn: HTMLButtonElement, state: GateState, value: string): void {
+  const radio = overlay.querySelector<HTMLInputElement>(`input[name="startup-engine-choice"][value="${value}"]`);
+  if (!radio) return;
+  radio.checked = true;
+  highlightChoice(overlay, value);
+  confirmBtn.disabled = state.busy;
+}
+
+/** Runs the shared connection flow inside the gate: log line + login prompt mount live here. */
+function startupGateConnect(overlay: HTMLElement, provider: AgentProvider): Promise<AgentConnectResult> {
+  const log = overlay.querySelector<HTMLElement>(`#${STARTUP_ENGINE_GATE_ID}-connect-log`) as HTMLElement;
+  const mount = overlay.querySelector<HTMLElement>(`#${STARTUP_ENGINE_GATE_ID}-connect-mount`) as HTMLElement;
+  return agentConnectRun({
+    provider,
+    api: (window as any).api,
+    mountElement: mount,
+    statusElement: log,
+    report: (line, tone) => agentConnectWriteLog(log, line, tone),
+  });
+}
+
+async function startupGateConfirm(ctx: GateContext): Promise<void> {
+  const value = agentConnectGateChoice(ctx.overlay);
+  if (!value || ctx.state.busy) return;
+  ctx.state.busy = true;
+  agentConnectGateLock(ctx.overlay, true);
+  ctx.confirmBtn.disabled = true;
+  const title = ctx.options.find((option) => option.value === value)?.title || value;
+  try {
+    const provider = agentConnectProviderFromValue(value);
+    if (provider && agentConnectGateNeedsConnect(await ctx.chips.settle(value))) {
+      ctx.confirmBtn.textContent = '연결 중...';
+      const result = await startupGateConnect(ctx.overlay, provider);
+      if (!result.ok) {
+        void ctx.chips.refresh(value);
+        ctx.hint.textContent = '위 사유를 해결한 뒤 다시 누르거나, 다른 엔진을 고를 수 있습니다.';
+        return;
+      }
+    }
+    ctx.confirmBtn.textContent = '저장 중...';
+    await applyEngineGateSelection(value, title);
+    ctx.overlay.remove();
+    ctx.resolve(value);
+  } catch (error) {
+    console.error('[StartupEngineGate] 엔진 저장 실패:', error);
+    ctx.hint.textContent = `저장 실패: ${(error as Error)?.message || error}. 다시 시도해 주세요.`;
+  } finally {
+    ctx.state.busy = false;
+    if (ctx.overlay.isConnected) {
+      agentConnectGateLock(ctx.overlay, false);
+      ctx.confirmBtn.disabled = !agentConnectGateChoice(ctx.overlay);
+      ctx.confirmBtn.textContent = '이 엔진으로 시작';
+    }
+  }
+}
+
+function startupGateBind(
+  overlay: HTMLElement,
+  options: readonly EngineGateOption[],
+  agentValues: readonly string[],
+  agentDefault: boolean,
+  resolve: (value: string) => void,
+): void {
+  const confirmBtn = overlay.querySelector<HTMLButtonElement>(`#${STARTUP_ENGINE_GATE_ID}-confirm`);
+  const hint = overlay.querySelector<HTMLElement>(`#${STARTUP_ENGINE_GATE_ID}-hint`);
+  if (!confirmBtn || !hint) return;
+  const state: GateState = { userTouched: false, busy: false };
+  const chips = agentConnectStartChips(overlay, agentValues, (window as any).api, {
+    autoSelect: () => agentDefault && !state.userTouched,
+    select: (value) => startupGateSelect(overlay, confirmBtn, state, value),
+  });
+  const ctx: GateContext = { overlay, options, chips, confirmBtn, hint, resolve, state };
+
+  overlay.addEventListener('change', (event) => {
+    if ((event.target as HTMLInputElement | null)?.name !== 'startup-engine-choice') return;
+    state.userTouched = true;
+    const value = agentConnectGateChoice(overlay);
+    highlightChoice(overlay, value);
+    confirmBtn.disabled = !value || state.busy;
+    hint.textContent = '';
+  });
+  confirmBtn.addEventListener('click', () => { void startupGateConfirm(ctx); });
+}
+
 /** Resolves once the user confirms an engine. The overlay has no close or skip path. */
 export function showStartupEngineGate(savedModel: string): Promise<string | null> {
-  const options = collectEngineGateOptions();
+  const options = agentConnectOrderGateOptions(collectEngineGateOptions());
   if (options.length === 0) {
     console.warn('[StartupEngineGate] 엔진 카드가 없어 게이트를 건너뜁니다.');
     return Promise.resolve(null);
   }
   document.getElementById(STARTUP_ENGINE_GATE_ID)?.remove();
-  const preselected = options.some((option) => option.value === savedModel) ? savedModel : '';
-  const overlay = renderGate(options, preselected);
+  const saved = options.some((option) => option.value === savedModel) ? savedModel : '';
+  const agentValues = options.map((option) => option.value).filter(agentConnectIsAgentValue);
+  const agentDefault = !saved && agentValues.length > 0;
+  const checked = saved || (agentDefault ? agentValues[0] : '');
+  const overlay = renderGate(options, { checked, saved, agentDefault });
   document.body.appendChild(overlay);
-
-  return new Promise((resolve) => {
-    const confirmBtn = overlay.querySelector<HTMLButtonElement>(`#${STARTUP_ENGINE_GATE_ID}-confirm`);
-    const hint = overlay.querySelector<HTMLElement>(`#${STARTUP_ENGINE_GATE_ID}-hint`);
-    const selectedValue = () =>
-      overlay.querySelector<HTMLInputElement>('input[name="startup-engine-choice"]:checked')?.value || '';
-
-    overlay.addEventListener('change', () => {
-      const value = selectedValue();
-      highlightChoice(overlay, value);
-      if (confirmBtn) confirmBtn.disabled = !value;
-      if (hint) hint.textContent = '';
-    });
-
-    confirmBtn?.addEventListener('click', async () => {
-      const value = selectedValue();
-      if (!value || !confirmBtn) return;
-      confirmBtn.disabled = true;
-      confirmBtn.textContent = '저장 중...';
-      const title = options.find((option) => option.value === value)?.title || value;
-      try {
-        await applyEngineGateSelection(value, title);
-        overlay.remove();
-        resolve(value);
-      } catch (error) {
-        console.error('[StartupEngineGate] 엔진 저장 실패:', error);
-        confirmBtn.disabled = false;
-        confirmBtn.textContent = '이 엔진으로 시작';
-        if (hint) hint.textContent = `저장 실패: ${(error as Error)?.message || error}. 다시 시도해 주세요.`;
-      }
-    });
-  });
+  return new Promise((resolve) => startupGateBind(overlay, options, agentValues, agentDefault, resolve));
 }
 
 /**

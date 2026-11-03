@@ -195,13 +195,23 @@ describe('배선 소스 핀', () => {
     expect(modal).not.toMatch(/if \(!config\.primaryGeminiTextModel\)\s*\{[\s\S]{0,400}openSettingsModal/);
   });
 
-  it('copy-static 인라인 목록 + 지문 클로저에 두 모듈이 등록됨', () => {
+  it('copy-static 인라인 목록 + 지문 클로저에 게이트·연결 모듈이 등록됨', () => {
     const copyStatic = read('scripts/copy-static.mjs');
     const fingerprint = read('src/contentQualityV3/candidateRuntimeFingerprint.ts');
-    for (const name of ['startupEngineGate', 'visionInferCancel']) {
+    for (const name of ['startupEngineGate', 'visionInferCancel', 'agentConnectFlow', 'agentConnectGate']) {
       expect(copyStatic).toContain(`'${name}.js'`);
       expect(fingerprint).toContain(`src/renderer/modules/${name}.ts`);
     }
+  });
+
+  it('연결 모듈은 로그인 helper 뒤, 그것을 쓰는 priceInfoModal·startupEngineGate 앞에 인라인된다', () => {
+    const copyStatic = read('scripts/copy-static.mjs');
+    const at = (name: string) => copyStatic.indexOf(`'${name}.js'`);
+    expect(at('agentLoginCodePrompt')).toBeGreaterThan(0);
+    expect(at('agentConnectFlow')).toBeGreaterThan(at('agentLoginCodePrompt'));
+    expect(at('agentConnectGate')).toBeGreaterThan(at('agentConnectFlow'));
+    expect(at('priceInfoModal')).toBeGreaterThan(at('agentConnectFlow'));
+    expect(at('startupEngineGate')).toBeGreaterThan(at('agentConnectGate'));
   });
 
   it('systemHandlers app:getInfo 가 e2eTest 플래그를 돌려준다', () => {

@@ -558,6 +558,10 @@ try {
     'charCountDisplay.js',
     'tutorialsTab.js',
     'apiGuideModals.js',
+    // [2026-11-03] 에이전트 원버튼 연결 흐름 + 기동 게이트 칩/정렬 — priceInfoModal·startupEngineGate 가 쓰므로 먼저 로드
+    //   (agentLoginCodePrompt 는 utils 블록에서 이미 앞에 있다). 식별자는 agentConnect 접두사로 유일.
+    'agentConnectFlow.js',
+    'agentConnectGate.js',
     'priceInfoModal.js',
     'agentQuotaBadge.js',          // [2026-08-26] 에이전트 구독 잔여 배찌
     'noticeAdmin.js',

@@ -14,6 +14,12 @@ import {
   type AgentStatusProvider,
 } from '../utils/agentStatusRefreshCoordinator.js';
 import { runAgentLoginWithCodeFallback } from '../utils/agentLoginCodePrompt.js';
+import {
+  agentConnectEnsureLog,
+  agentConnectProviderLabel,
+  agentConnectRun,
+  agentConnectWriteLog,
+} from './agentConnectFlow.js';
 import { initAgentModelSelects, syncAgentModelSelects } from './agentModelSelect.js';
 import {
   formatAgentVersionLabel,
@@ -70,13 +76,13 @@ function enableClaudeSubscriptionSelector(): void {
 }
 
 /**
- * \uC124\uCE58/\uB85C\uADF8\uC778 \uBC84\uD2BC\uC5D0 \uD074\uB9AD \uD578\uB4E4\uB7EC \uBC14\uC778\uB529 (\uD480\uC790\uB3D9 \u2014 \uC571\uC5D0\uC11C npm \uC124\uCE58/OAuth \uB85C\uADF8\uC778 \uC2E4\uD589).
- * onclick \uB300\uC785\uC774\uB77C \uBC18\uBCF5 \uD638\uCD9C\uB3FC\uB3C4 \uB204\uC801\uB418\uC9C0 \uC54A\uB294\uB2E4. \uC644\uB8CC \uD6C4 \uC0C1\uD0DC\uB97C \uC7AC\uC870\uD68C\uD574 \uBC43\uC9C0/\uBC84\uD2BC\uC744 \uAC31\uC2E0\uD55C\uB2E4.
+ * 미설치(⚡)·미로그인(🔑) 버튼 하나로 설치 → 로그인 → 실제 답 확인까지 이어서 연결한다.
+ * 진행·실패 사유는 상태 줄과 별도의 "연결 기록 줄"에 남겨, 상태 재조회가 상태 줄을 다시 써도 사라지지 않는다.
+ * 끝나면 상태를 다시 조회해 배지·버튼을 갱신한다(연결 기록 줄은 그대로).
  */
-function bindAgentAction(
+function bindAgentConnect(
   btn: HTMLButtonElement | null,
   provider: AgentStatusProvider,
-  action: 'install' | 'login',
   statusEl: HTMLElement,
 ): void {
   if (!btn) return;
@@ -84,82 +90,30 @@ function bindAgentAction(
     e.preventDefault();
     e.stopPropagation();
     const api = window.api;
-    const fn = action === 'install' ? api?.agentInstall : api?.agentLogin;
-    if (typeof fn !== 'function') return;
+    if (typeof api?.agentStatus !== 'function') return;
     const actionLease = agentStatusRefreshCoordinator.beginAction(provider);
     const orig = btn.textContent;
+    const log = agentConnectEnsureLog(statusEl, provider);
     btn.disabled = true;
-    btn.textContent = action === 'install' ? '⏳ 설치 준비 중...' : '\u23F3 \uB85C\uADF8\uC778 \uC900\uBE44 \uC911...';
-    statusEl.textContent = action === 'install' ? '공식 설치 파일을 준비합니다. 연결 속도에 따라 시간이 걸릴 수 있습니다.' : '\u23F3 \uB85C\uADF8\uC778 \uC8FC\uC18C \uC900\uBE44 \uC911...';
-    statusEl.style.color = '#6b7280';
-    let installProgressActive = action === 'install';
-    let removeInstallProgress: (() => void) | undefined;
-    const detachInstallProgress = (): void => {
-      installProgressActive = false;
-      const remove = removeInstallProgress; removeInstallProgress = undefined;
-      try { remove?.(); } catch { /* Renderer/event source may already be closed. */ }
-    };
+    btn.textContent = '⏳ 연결 중...';
     try {
-      if (action === 'install' && typeof api.onAgentInstallProgress === 'function') {
-        removeInstallProgress = api.onAgentInstallProgress(progress => {
-          if (!installProgressActive || progress.provider !== provider) return;
-          statusEl.textContent = progress.message;
-        });
-      }
-      const res = action === 'login'
-        ? await runAgentLoginWithCodeFallback({
-          provider,
-          mountElement: btn.parentElement ?? statusEl,
-          statusElement: statusEl,
-          api,
-          startLogin: () => api.agentLogin(provider),
-        })
-        : await fn(provider);
-      detachInstallProgress();
-      if (res?.success) {
-        const loginStatus = action === 'login' && 'status' in res ? res.status : undefined;
-        if (action === 'login' && loginStatus?.available !== true) {
-          toastManager.warning(`\u26A0\uFE0F \uB85C\uADF8\uC778\uC740 \uD655\uC778\uB410\uC9C0\uB9CC \uD604\uC7AC \uC0AC\uC6A9\uD560 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4: ${loginStatus?.detail || '\uAD6C\uB3C5 \uC0C1\uD0DC\uB97C \uD655\uC778\uD574\uC8FC\uC138\uC694'}`);
-        } else if (
-          action === 'login'
-          && 'authState' in res
-          && res.authState === 'already_authenticated'
-        ) {
-          announcedAgentLoginTargets.add(statusEl);
-          toastManager.success(`\u2705 ${provider === 'codex' ? 'Codex' : provider === 'gemini' ? 'Gemini CLI' : 'Claude Code'} \uB85C\uADF8\uC778\uC774 \uC774\uBBF8 \uC790\uB3D9 \uC778\uC2DD\uB418\uC5B4 \uC788\uC2B5\uB2C8\uB2E4.`);
-        } else {
-          if (action === 'login') announcedAgentLoginTargets.add(statusEl);
-          toastManager.success(action === 'install' ? '\u2705 CLI \uC124\uCE58 \uC644\uB8CC' : '\u2705 \uB85C\uADF8\uC778 \uC644\uB8CC');
-        }
-        // [v2.11.135] \uC6D0\uD074\uB9AD \uC790\uB3D9 \uC124\uC815 \u2014 \uC124\uCE58 \uC131\uACF5 \uC9C1\uD6C4 \uB85C\uADF8\uC778\uC774 \uC544\uC9C1\uC774\uBA74
-        // \uBC14\uB85C \uB85C\uADF8\uC778 \uD50C\uB85C\uC6B0\uB85C \uC774\uC5B4 \uC0AC\uC6A9\uC790\uAC00 \uBC84\uD2BC\uC744 \uB450 \uBC88 \uB204\uB974\uC9C0 \uC54A\uAC8C \uD55C\uB2E4.
-        if (action === 'install') {
-          const postInstall = await api.agentStatus?.(provider, { forceRefresh: true }).catch(() => null);
-          if (postInstall?.success && postInstall.status?.installed && !postInstall.status.loggedIn) {
-            statusEl.textContent = '\u2705 \uC124\uCE58 \uC644\uB8CC \u2014 \uACE7\uBC14\uB85C \uB85C\uADF8\uC778\uC744 \uC9C4\uD589\uD569\uB2C8\uB2E4...';
-            statusEl.style.color = '#6b7280';
-            const login = await runAgentLoginWithCodeFallback({
-              provider,
-              mountElement: btn.parentElement ?? statusEl,
-              statusElement: statusEl,
-              api,
-              startLogin: () => api.agentLogin(provider),
-            }).catch((err) => ({ success: false, message: (err as Error).message }));
-            if (login?.success && (login as { status?: { available?: boolean } }).status?.available !== false) {
-              announcedAgentLoginTargets.add(statusEl);
-              toastManager.success('\u2705 \uC790\uB3D9 \uC124\uC815 \uC644\uB8CC (\uC124\uCE58 + \uB85C\uADF8\uC778)');
-            } else if (!login?.success) {
-              toastManager.warning('\u26A0\uFE0F \uC124\uCE58\uB294 \uB410\uC9C0\uB9CC \uB85C\uADF8\uC778\uC740 \uBBF8\uC644\uB8CC \u2014 \uB85C\uADF8\uC778 \uBC84\uD2BC\uC744 \uB2E4\uC2DC \uB20C\uB7EC\uC8FC\uC138\uC694.');
-            }
-          }
-        }
+      const result = await agentConnectRun({
+        provider,
+        api,
+        mountElement: btn.parentElement ?? statusEl,
+        statusElement: log,
+        report: (line, tone) => agentConnectWriteLog(log, line, tone),
+      });
+      const label = agentConnectProviderLabel(provider);
+      if (result.ok) {
+        announcedAgentLoginTargets.add(statusEl);
+        toastManager.success(`✅ ${label} 연결 완료 — 실제 답 확인됨`);
       } else {
-        toastManager.error(`\u274C ${action === 'install' ? '\uC124\uCE58' : '\uB85C\uADF8\uC778'} \uC2E4\uD328: ${res?.message || '\uC54C \uC218 \uC5C6\uB294 \uC624\uB958'}`);
+        toastManager.error(`❌ ${label} 연결 실패: ${result.message}`);
       }
     } catch (err) {
-      toastManager.error(`\u274C \uC624\uB958: ${(err as Error).message}`);
+      toastManager.error(`❌ 오류: ${(err as Error).message}`);
     } finally {
-      detachInstallProgress();
       if (agentStatusRefreshCoordinator.endAction(actionLease)) {
         btn.disabled = false;
         btn.textContent = orig;
@@ -285,8 +239,8 @@ export async function refreshAgentStatusBadges(
         el.style.color = '#b91c1c';
         setShown(actions, true, 'flex');
         setShown(installBtn, true);
-        if (installBtn) installBtn.textContent = '\u26A1 \uC790\uB3D9 \uC124\uC815 (\uC124\uCE58 + \uB85C\uADF8\uC778)';
-        bindAgentAction(installBtn, t.provider, 'install', el);
+        if (installBtn) installBtn.textContent = '⚡ 연결하기 (설치 → 로그인 → 확인)';
+        bindAgentConnect(installBtn, t.provider, el);
         return;
       }
       if (!s.loggedIn) {
@@ -294,7 +248,8 @@ export async function refreshAgentStatusBadges(
         el.style.color = '#b45309';
         setShown(actions, true, 'flex');
         setShown(loginBtn, true);
-        bindAgentAction(loginBtn, t.provider, 'login', el);
+        if (loginBtn) loginBtn.textContent = '🔑 연결하기 (로그인 → 확인)';
+        bindAgentConnect(loginBtn, t.provider, el);
         return;
       }
       if (s.available !== true) {

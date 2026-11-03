@@ -29,6 +29,9 @@ interface FakeElement {
   disabled: boolean;
   onclick: ((event: { preventDefault(): void; stopPropagation(): void }) => Promise<void>) | null;
   style: { display: string; color: string };
+  id?: string;
+  setAttribute?: (name: string, value: string) => void;
+  insertAdjacentElement?: (position: string, element: FakeElement) => FakeElement;
 }
 
 function deferred<T>(): Deferred<T> {
@@ -55,8 +58,14 @@ function installFakeDom(agentStatus: ReturnType<typeof vi.fn>): Map<string, Fake
     ['agent-codex-switch-btn', fakeElement()],
   ]);
 
+  // The connect flow adds its own log line below the status line (createElement + insertAdjacentElement).
+  for (const element of elements.values()) {
+    element.setAttribute = () => undefined;
+    element.insertAdjacentElement = (_position, child) => { elements.set(child.id ?? '', child); return child; };
+  }
   vi.stubGlobal('document', {
     getElementById: (id: string) => elements.get(id) ?? null,
+    createElement: () => ({ ...fakeElement(), setAttribute: () => undefined }),
   });
   vi.stubGlobal('window', { api: { agentStatus } });
   return elements;
@@ -297,7 +306,14 @@ describe('agent status badge refresh ordering', () => {
     expect(toastSuccess).toHaveBeenCalledTimes(1);
   });
 
-  it('uses the verified post-login cache and reports authenticated-but-unavailable honestly', async () => {
+  it('keeps the connect failure in its own log line when login works but the account is unusable', async () => {
+    const notLoggedIn = {
+      installed: true,
+      version: '0.141.0',
+      loggedIn: false,
+      available: false,
+      errorCode: 'not_logged_in',
+    };
     const unavailableStatus = {
       installed: true,
       version: '0.141.0',
@@ -307,30 +323,32 @@ describe('agent status badge refresh ordering', () => {
       detail: '5-hour usage limit reached',
     };
     const agentStatus = vi.fn()
-      .mockResolvedValueOnce({
-        success: true,
-        status: {
-          installed: true,
-          version: '0.141.0',
-          loggedIn: false,
-          available: false,
-          errorCode: 'not_logged_in',
-        },
-      })
-      .mockResolvedValueOnce({ success: true, status: unavailableStatus });
+      .mockResolvedValueOnce({ success: true, status: notLoggedIn }) // badge
+      .mockResolvedValueOnce({ success: true, status: notLoggedIn }) // connect step 1/4
+      .mockResolvedValueOnce({ success: true, status: unavailableStatus }); // badge after the flow
     const agentLogin = vi.fn().mockResolvedValue({ success: true, status: unavailableStatus });
+    const agentGenerate = vi.fn();
     const elements = installFakeDom(agentStatus);
     (window as any).api.agentLogin = agentLogin;
+    (window as any).api.agentGenerate = agentGenerate;
 
     await refreshAgentStatusBadges({ providers: ['codex'] });
     const loginButton = elements.get('agent-codex-login-btn')!;
+    expect(loginButton.textContent).toBe('🔑 연결하기 (로그인 → 확인)');
 
     await loginButton.onclick!({ preventDefault: vi.fn(), stopPropagation: vi.fn() });
 
     expect(agentLogin).toHaveBeenCalledWith('codex');
-    expect(agentStatus).toHaveBeenNthCalledWith(2, 'codex', { forceRefresh: false });
+    expect(agentStatus).toHaveBeenNthCalledWith(2, 'codex', { forceRefresh: true });
+    expect(agentStatus).toHaveBeenNthCalledWith(3, 'codex', { forceRefresh: false });
+    expect(agentGenerate).not.toHaveBeenCalled();
     expect(toastSuccess).not.toHaveBeenCalled();
-    expect(toastWarning).toHaveBeenCalledOnce();
+    expect(toastError).toHaveBeenCalledOnce();
+    // The status refresh rewrote the status line, but the failure reason stays in its own line.
+    expect(elements.get('agent-codex-status')!.textContent).toContain('구독 사용 한도');
+    const log = elements.get('agent-codex-connect-log')!;
+    expect(log.textContent).toContain('❌ [3/4 로그인]에서 멈춤:');
+    expect(log.textContent).toContain('한도');
     expect(loginButton.style.display).toBe('none');
   });
 });

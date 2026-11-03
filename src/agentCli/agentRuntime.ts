@@ -14,7 +14,7 @@
  *   agent-runtime/npm-cache/
  */
 import { app } from 'electron';
-import { chmodSync, mkdirSync, writeFileSync } from 'fs';
+import { chmodSync, mkdirSync, readdirSync, statSync, writeFileSync } from 'fs';
 import { delimiter, isAbsolute, join } from 'path';
 
 /** Carries the runtime executable path through the environment block, never through a file. */
@@ -113,12 +113,47 @@ export function getClaudeInstallDirs(): readonly string[] {
  * Measured on this machine: %APPDATA%\npm\codex.cmd. Same stale-PATH exposure as above when
  * npm's prefix was added to the User PATH after the app (or Explorer) started.
  * Standalone Windows layout: https://learn.chatgpt.com/docs/enterprise/windows-deployment
+ * The official installer's own layout (hash folders under OpenAI\Codex\bin) is listed last so a
+ * working npm install keeps its current priority.
  */
 export function getCodexInstallDirs(): readonly string[] {
   if (process.platform !== 'win32') return getClaudeInstallDirs();
   const appData = process.env.APPDATA;
   const local = process.env.LOCALAPPDATA;
-  return [...(appData ? [join(appData, 'npm')] : []), ...(local ? [join(local, 'Programs', 'OpenAI', 'Codex', 'bin')] : [])];
+  return [
+    ...(appData ? [join(appData, 'npm')] : []),
+    ...(local ? [join(local, 'Programs', 'OpenAI', 'Codex', 'bin')] : []),
+    ...(local ? listCodexOfficialBinDirs(join(local, 'OpenAI', 'Codex', 'bin')) : []),
+  ];
+}
+
+/**
+ * Official Windows layout (measured on this PC, 2026-11-03):
+ * %LOCALAPPDATA%\OpenAI\Codex\bin\<hash folder>\codex.exe — two hash folders existed and only one
+ * held codex.exe. Only folders that really contain codex.exe qualify, newest codex.exe first, so a
+ * leftover empty hash folder can never shadow the live one. Read errors are ignored.
+ */
+function listCodexOfficialBinDirs(binRoot: string): string[] {
+  try {
+    return readdirSync(binRoot, { withFileTypes: true })
+      .filter((entry) => entry.isDirectory())
+      .map((entry) => join(binRoot, entry.name))
+      .map((dir) => ({ dir, modifiedMs: codexExecutableModifiedMs(dir) }))
+      .filter((candidate): candidate is { dir: string; modifiedMs: number } => candidate.modifiedMs !== undefined)
+      .sort((a, b) => b.modifiedMs - a.modifiedMs)
+      .map((candidate) => candidate.dir);
+  } catch {
+    return [];
+  }
+}
+
+function codexExecutableModifiedMs(dir: string): number | undefined {
+  try {
+    const stats = statSync(join(dir, 'codex.exe'));
+    return stats.isFile() ? stats.mtimeMs : undefined;
+  } catch {
+    return undefined;
+  }
 }
 
 function pathKeyOf(env: NodeJS.ProcessEnv): string {

@@ -112,9 +112,11 @@ function describeNpmLaunchFailure(
   );
 }
 
-// npm install can take a minute or two; the OAuth browser flow can take several.
-const INSTALL_TIMEOUT_MS = 300_000;
-const LOGIN_TIMEOUT_MS = 300_000;
+// [2026-11-03] Install limit 15 min and login limit 10 min, so slow PCs/networks and the OAuth
+// browser flow (2FA, device-code entry) are not cut off. No shorter limit exists on the renderer
+// or IPC side of these two paths (checked: agentLoginCodePrompt.ts, agentHandlers.ts).
+const INSTALL_TIMEOUT_MS = 900_000;
+const LOGIN_TIMEOUT_MS = 600_000;
 
 export interface AgentLoginHooks {
   /** Main-process-only URL handoff. Never log it or send it to the renderer. */

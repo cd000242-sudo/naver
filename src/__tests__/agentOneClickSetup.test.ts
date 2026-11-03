@@ -14,17 +14,26 @@ const read = (rel: string): string => fs.readFileSync(path.join(ROOT, rel), 'utf
 
 describe('원클릭 자동 설정', () => {
   const ui = read('renderer/modules/priceInfoModal.ts');
+  const flow = read('renderer/modules/agentConnectFlow.ts');
 
-  // 이 파일은 한글을 \uXXXX 이스케이프로 저장하므로 소스락은 식별자 기준.
-  it('설치 성공 직후 미로그인이면 로그인 플로우로 자동 연쇄한다', () => {
-    expect(ui).toMatch(/action === 'install'[\s\S]{0,400}postInstall/);
-    expect(ui).toMatch(/postInstall\.status\?\.installed && !postInstall\.status\.loggedIn/);
-    expect(ui).toMatch(/runAgentLoginWithCodeFallback\(\{[\s\S]{0,200}startLogin: \(\) => api\.agentLogin\(provider\)/);
+  // [2026-11-03] 설치 → 로그인 → 실제 답 확인은 agentConnectFlow 한 곳이 맡고, 화면 버튼은 그 흐름만 호출한다.
+  it('미설치·미로그인 버튼이 같은 연결 흐름을 호출한다 (옛 bindAgentAction 은 없다)', () => {
+    expect(ui).toMatch(/bindAgentConnect\(installBtn, t\.provider, el\)/);
+    expect(ui).toMatch(/bindAgentConnect\(loginBtn, t\.provider, el\)/);
+    expect(ui).toMatch(/await agentConnectRun\(\{/);
+    expect(ui).not.toContain('bindAgentAction');
   });
 
-  it('미설치 카드가 원클릭 자동 설정 버튼을 노출한다 (설치+로그인 연쇄 라벨)', () => {
-    // '⚡ 자동 설정 (설치 + 로그인)' → ⚡ 자동 설정 ...
-    expect(ui).toMatch(/installBtn\.textContent = '\\u26A1 \\uC790\\uB3D9 \\uC124\\uC815/);
+  it('연결 흐름은 설치 뒤 미로그인이면 로그인으로 이어 가고 마지막에 실제 답을 확인한다', () => {
+    expect(flow).toMatch(/runAgentLoginWithCodeFallback\(\{[\s\S]{0,260}startLogin: \(\) => ctx\.api\.agentLogin\(ctx\.provider\)/);
+    expect(flow).toMatch(/agentConnectClassify\(current\.status\) === 'install'[\s\S]{0,200}agentConnectInstall\(ctx\)/);
+    expect(flow).toMatch(/kind === 'login'[\s\S]{0,200}agentConnectLogin\(ctx\)/);
+    expect(flow).toMatch(/mark\(4\);[\s\S]{0,60}agentConnectVerify\(ctx\)/);
+  });
+
+  it('버튼 문구가 연결하기(설치 → 로그인 → 확인) / 연결하기(로그인 → 확인) 이다', () => {
+    expect(ui).toContain("installBtn.textContent = '⚡ 연결하기 (설치 → 로그인 → 확인)'");
+    expect(ui).toContain("loginBtn.textContent = '🔑 연결하기 (로그인 → 확인)'");
   });
 });
 
@@ -36,6 +45,12 @@ describe('감지·설치·세션 배선 (기존 유지 확인)', () => {
     expect(detect).toMatch(/args: \['--version'\]/);
     expect(detect).toMatch(/args: \['models'\]/);
     expect(detect).not.toContain('oauth_creds.json');
+  });
+
+  it('설치 제한 시간은 15분, 로그인 제한 시간은 10분이다', () => {
+    const installer = read('agentCli/installer.ts');
+    expect(installer).toMatch(/const INSTALL_TIMEOUT_MS = 900_000;/);
+    expect(installer).toMatch(/const LOGIN_TIMEOUT_MS = 600_000;/);
   });
 
   it('Google 구독 경로는 실행 계약과 같은 agy 공식 바이너리를 설치한다', () => {

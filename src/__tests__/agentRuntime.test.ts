@@ -7,8 +7,10 @@
  *     OEM code page (949), so under C:\Users\박성현\... claude-code's postinstall died with
  *     "지정된 경로를 찾을 수 없습니다" and claude.exe was never produced.
  */
-import { describe, it, expect } from 'vitest';
-import { delimiter } from 'path';
+import { afterEach, describe, it, expect, vi } from 'vitest';
+import { delimiter, join } from 'path';
+import { tmpdir } from 'os';
+import { mkdirSync, mkdtempSync, rmSync, utimesSync, writeFileSync } from 'fs';
 import {
   AGENT_NODE_SHIM_CMD,
   AGENT_RUNTIME_NODE_ENV_KEY,
@@ -59,6 +61,70 @@ describe('CLI 설치 경로 명시 (stale PATH 대응)', () => {
     expect(src).toMatch(/buildCodexSubscriptionEnv[\s\S]{0,400}getCodexInstallDirs\(\)/);
     // agy 경로는 기존대로 유지
     expect(src).toMatch(/getAgyInstallDirs\(\)/);
+  });
+});
+
+/**
+ * [2026-11-03] Codex 공식 설치 위치: %LOCALAPPDATA%\OpenAI\Codex\bin\<해시 폴더>\codex.exe
+ * (이 PC 실측: bin 아래 해시 폴더 2개, 그중 하나에만 codex.exe). 설치기가 User PATH 레지스트리에만 쓰면
+ * 이미 떠 있는 앱은 못 찾으므로, codex.exe 가 실제로 있는 하위 폴더만 후보로 낸다.
+ */
+describe.skipIf(process.platform !== 'win32')('Codex 공식 설치 위치 (해시 폴더)', () => {
+  const roots: string[] = [];
+  afterEach(() => {
+    vi.unstubAllEnvs();
+    for (const dir of roots.splice(0)) rmSync(dir, { recursive: true, force: true });
+  });
+
+  function fakeLocalAppData(): { local: string; bin: string } {
+    const local = mkdtempSync(join(tmpdir(), 'bln-codex-'));
+    roots.push(local);
+    const bin = join(local, 'OpenAI', 'Codex', 'bin');
+    mkdirSync(bin, { recursive: true });
+    vi.stubEnv('LOCALAPPDATA', local);
+    vi.stubEnv('APPDATA', join(local, 'Roaming'));
+    return { local, bin };
+  }
+
+  function installCodex(bin: string, hash: string, mtimeSeconds: number): string {
+    const dir = join(bin, hash);
+    mkdirSync(dir, { recursive: true });
+    const exe = join(dir, 'codex.exe');
+    writeFileSync(exe, 'MZ');
+    utimesSync(exe, mtimeSeconds, mtimeSeconds);
+    return dir;
+  }
+
+  it('codex.exe 가 있는 하위 폴더만, 수정 시각 최신 순으로 낸다', () => {
+    const { bin } = fakeLocalAppData();
+    const older = installCodex(bin, '4f1a9c', 1_700_000_000);
+    const newer = installCodex(bin, '8b2e77', 1_800_000_000);
+    mkdirSync(join(bin, 'c0ffee'), { recursive: true }); // 해시 폴더지만 codex.exe 없음
+    writeFileSync(join(bin, 'stray.txt'), 'x'); // 폴더가 아닌 항목
+    const dirs = getCodexInstallDirs();
+    expect(dirs).toContain(newer);
+    expect(dirs).toContain(older);
+    expect(dirs.indexOf(newer)).toBeLessThan(dirs.indexOf(older));
+    expect(dirs.some((d) => d.endsWith('c0ffee'))).toBe(false);
+  });
+
+  it('기존 후보(%APPDATA%\\npm, Programs\\OpenAI\\Codex\\bin)를 그대로 유지한다', () => {
+    const { local, bin } = fakeLocalAppData();
+    installCodex(bin, 'abc123', 1_700_000_000);
+    const dirs = getCodexInstallDirs();
+    expect(dirs).toContain(join(local, 'Roaming', 'npm'));
+    expect(dirs).toContain(join(local, 'Programs', 'OpenAI', 'Codex', 'bin'));
+  });
+
+  it('bin 폴더가 없거나 읽을 수 없어도 던지지 않고 기존 후보만 낸다', () => {
+    const { local, bin } = fakeLocalAppData();
+    rmSync(join(local, 'OpenAI'), { recursive: true, force: true });
+    expect(() => getCodexInstallDirs()).not.toThrow();
+    expect(getCodexInstallDirs()).toEqual([
+      join(local, 'Roaming', 'npm'),
+      join(local, 'Programs', 'OpenAI', 'Codex', 'bin'),
+    ]);
+    expect(bin).toContain('OpenAI');
   });
 });
 
