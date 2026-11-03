@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T01:13:42.768Z",
+ "builtAt": "2026-11-03T01:23:46.662Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,62 +15,63 @@
    "sources": [
     "daum"
    ],
-   "articles90": 88,
-   "recent20": 8,
-   "press": 72,
-   "firstArticleAt": "2026-11-02T23:51:00.000Z",
+   "articles90": 90,
+   "recent20": 13,
+   "press": 69,
+   "firstArticleAt": "2026-11-02T23:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "대통령 여권번호까지 뚫렸다...전용기 탑승자 정보 대거 유출",
-     "press": "newspost.kr",
-     "publishedAt": "2026-11-03T01:10:00.000Z",
-     "link": "https://www.newspost.kr/news/articleView.html?idxno=226987"
+     "title": "경찰, 李 대통령 등 '1호기 탑승자' 개인정보 유출 내사 착수",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-03T01:22:00.000Z",
+     "link": "https://www.ajunews.com/view/20261103093514284"
     },
     {
-     "title": "청와대, 대통령 포함 개인정보 무더기 유출 긴급 회의…임광현 \"중대 사...",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-03T01:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000518835?sid=100"
+     "title": "靑, 개인정보 유출에 보안체계 전면 점검...유출 경위 철저 조사",
+     "press": "straightnews.co.kr",
+     "publishedAt": "2026-11-03T01:22:00.000Z",
+     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=314495"
     },
     {
-     "title": "靑 '공군 1호기 탑승자 개인정보 유출 사태' 긴급회의",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-03T01:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000160230?sid=100"
+     "title": "청와대, '대통령 순방단 개인정보 유출' 긴급회의…\"철저 조사\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-03T01:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400182?sid=102"
     }
    ]
   },
   {
    "keyword": "10월 물가 2.8% 상승",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 94,
-   "recent20": 29,
+   "articles90": 96,
+   "recent20": 22,
    "press": 68,
-   "firstArticleAt": "2026-11-02T23:44:00.000Z",
+   "firstArticleAt": "2026-11-02T23:55:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "정부, 김장철 물가잡기 640억원 투입…재료 최대 50% 할인",
-     "press": "newsfc.co.kr",
-     "publishedAt": "2026-11-03T01:12:00.000Z",
-     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82178"
+     "title": "[위클리오늘] 10월 물가 2.8% 상승…농산물 내렸지만 석유류 14.9% 급등",
+     "press": "weeklytoday.com",
+     "publishedAt": "2026-11-03T01:22:00.000Z",
+     "link": "http://www.weeklytoday.com/news/articleView.html?idxno=800740"
     },
     {
-     "title": "10월 소비자물가 2.8% 상승…석유류 14.9% 급등, 가공식품도 오름세",
-     "press": "tfmedia.co.kr",
-     "publishedAt": "2026-11-03T01:12:00.000Z",
-     "link": "https://www.tfmedia.co.kr/news/article.html?no=208598"
+     "title": "10월 소비자물가 2.8% 상승…채소값 내렸지만 석유·외식·가공식품 부담...",
+     "press": "queen.co.kr",
+     "publishedAt": "2026-11-03T01:20:00.000Z",
+     "link": "http://www.queen.co.kr/news/articleView.html?idxno=465689"
     },
     {
-     "title": "외식 물가 껑충…정부, 김장철 앞두고 640억 푼다 [종합]",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-03T01:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005349560?sid=101"
+     "title": "한국은행 \"11월 물가도 2%대 후반 유지… 근원물가 오름세 여전\"",
+     "press": "fntoday.co.kr",
+     "publishedAt": "2026-11-03T01:20:00.000Z",
+     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=396885"
     }
    ]
   },
@@ -79,15 +80,21 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 61,
-   "recent20": 7,
-   "press": 54,
+   "articles90": 62,
+   "recent20": 3,
+   "press": 55,
    "firstArticleAt": "2026-11-02T23:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'26명 부상' 역삼 빌딩 2곳 방화범 신상공개…77세 이명수",
+     "title": "역삼 연쇄방화 피의자 신상 공개…77세 이명수",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-03T01:16:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1542495"
+    },
+    {
+     "title": "'26명 부상' 역삼 빌딩 방화범은 77세 이명수…신상공개 과정 보니",
      "press": "ajunews.com",
      "publishedAt": "2026-11-03T01:04:00.000Z",
      "link": "https://www.ajunews.com/view/20261103095208346"
@@ -97,44 +104,6 @@
      "press": "shinailbo.co.kr",
      "publishedAt": "2026-11-03T01:04:00.000Z",
      "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5078990"
-    },
-    {
-     "title": "'26명 부상' 역삼동 연쇄방화 피의자는 77세 이명수…머그샷 공개",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-03T00:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000120483?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "코스피 3% 급락",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 49,
-   "recent20": 8,
-   "press": 47,
-   "firstArticleAt": "2026-11-03T00:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[포토] 전날 2% 급등하더니 하루 만에 급락…코스피 3% 넘게 빠져",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-03T01:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005837179?sid=101"
-    },
-    {
-     "title": "[포토] AI 수익성 우려에 또 흔들리는 코스피…3%대 급락",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-03T01:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005837180?sid=101"
-    },
-    {
-     "title": "코스피, 美 기술주 약세에 3% 급락…SK하이닉스 5%↓",
-     "press": "news2day.co.kr",
-     "publishedAt": "2026-11-03T01:04:00.000Z",
-     "link": "https://www.news2day.co.kr/article/20261103500055"
     }
    ]
   },
@@ -143,30 +112,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 43,
-   "recent20": 6,
-   "press": 43,
-   "firstArticleAt": "2026-11-02T23:44:00.000Z",
+   "articles90": 39,
+   "recent20": 4,
+   "press": 39,
+   "firstArticleAt": "2026-11-02T23:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "미국행 승객 서약서 제출 의무화···대한항공 '에볼라 유입 차단' 전면...",
+     "press": "enewstoday.co.kr",
+     "publishedAt": "2026-11-03T01:17:00.000Z",
+     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2487656"
+    },
+    {
+     "title": "대한항공, 4일부터 미국행 승객 에볼라 관련 서약서 제출 의무화",
+     "press": "inthenews.co.kr",
+     "publishedAt": "2026-11-03T01:16:00.000Z",
+     "link": "https://www.inthenews.co.kr/news/article.html?no=93918"
+    },
     {
      "title": "대한항공, 美행 승객 에볼라 서약서 의무화…4일부터 적용",
      "press": "sentv.co.kr",
      "publishedAt": "2026-11-03T01:06:00.000Z",
      "link": "https://www.sentv.co.kr/article/view/sentv202611030076"
+    }
+   ]
+  },
+  {
+   "keyword": "북한 순항미사일 집속탄두 시험",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 18,
+   "recent20": 4,
+   "press": 18,
+   "firstArticleAt": "2026-11-02T23:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "북, 이번엔 순항미사일 '집속탄' 시험…수직 타격 첫 공개",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-03T01:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001163039?sid=100"
     },
     {
-     "title": "대한항공, 4일부터 미국행 승객 '에볼라 서약서' 제출 의무화…미제출 ...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-03T01:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003150549?sid=101"
+     "title": "北, 순항미사일 집속탄두 시험…\"수직타격 능력 완성\" 주장",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-03T01:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005837189?sid=100"
     },
     {
-     "title": "[항공 Pick] 대한항공, DRC 체류자 미국행 항공편 탑승 제한…트리니티...",
-     "press": "lcnews.co.kr",
-     "publishedAt": "2026-11-03T01:00:00.000Z",
-     "link": "https://www.lcnews.co.kr/news/articleView.html?idxno=210748"
+     "title": "북, 전략순항미사일 집속탄두 위력·수직타격 시험...'5~6 헥타르 초토화...",
+     "press": "tongilnews.com",
+     "publishedAt": "2026-11-03T01:08:00.000Z",
+     "link": "http://www.tongilnews.com/news/articleView.html?idxno=218041"
     }
    ]
   },
@@ -176,14 +177,14 @@
     "nate"
    ],
    "articles90": 21,
-   "recent20": 3,
+   "recent20": 1,
    "press": 18,
    "firstArticleAt": "2026-11-03T00:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'26명 부상' 역삼 빌딩 2곳 방화범 신상공개…77세 이명수",
+     "title": "'26명 부상' 역삼 빌딩 방화범은 77세 이명수…신상공개 과정 보니",
      "press": "ajunews.com",
      "publishedAt": "2026-11-03T01:04:00.000Z",
      "link": "https://www.ajunews.com/view/20261103095208346"
@@ -203,45 +204,13 @@
    ]
   },
   {
-   "keyword": "북한 순항미사일 집속탄두 시험",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 17,
-   "recent20": 4,
-   "press": 17,
-   "firstArticleAt": "2026-11-02T23:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "북, 전략순항미사일 집속탄두 위력·수직타격 시험...'5~6 헥타르 초토화...",
-     "press": "tongilnews.com",
-     "publishedAt": "2026-11-03T01:08:00.000Z",
-     "link": "http://www.tongilnews.com/news/articleView.html?idxno=218041"
-    },
-    {
-     "title": "北, 고위력·집속탄 탑재 ‘화살 순항미사일’ 수직 다이브 시험 첫 공...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-03T01:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002829840?sid=100"
-    },
-    {
-     "title": "북 \"어제 순항미사일 집속탄두 위력·수직타격 시험\"",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-03T00:58:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1542485"
-    }
-   ]
-  },
-  {
    "keyword": "래블업",
    "sources": [
     "google",
     "daum"
    ],
    "articles90": 17,
-   "recent20": 2,
+   "recent20": 0,
    "press": 16,
    "firstArticleAt": "2026-11-03T00:02:00.000Z",
    "exclusive": false,
@@ -268,47 +237,15 @@
    ]
   },
   {
-   "keyword": "김종국 아내 귀요미",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-02T23:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"삼시세끼 아내 집밥?\"…김종국, 결국 입 열었다 \"어떻게 요구하나, 먼저...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-03T01:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000782729"
-    },
-    {
-     "title": "김종국, 결혼 1주년 깜짝 이벤트→최수종도 인정한 사랑꾼…\"애칭은 귀...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-03T00:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001406931"
-    },
-    {
-     "title": "‘결혼 1년 차’ 김종국 “아내 핸드폰 저장명, ‘귀요미♥︎’”(‘옥...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-03T00:20:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001277474"
-    }
-   ]
-  },
-  {
    "keyword": "국정감사 국민보고 대회",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 20,
+   "articles90": 17,
    "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-02T23:47:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-02T23:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -333,34 +270,34 @@
    ]
   },
   {
-   "keyword": "종신보험",
+   "keyword": "김종국 아내 귀요미♥ 1주년",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-03T00:06:00.000Z",
+   "articles90": 8,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-03T00:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "ABL생명, 노후 생활자금 활용 '스테이블종신보험' 선봬",
-     "press": "newscape.co.kr",
-     "publishedAt": "2026-11-03T01:10:00.000Z",
-     "link": "http://www.newscape.co.kr/news/articleView.html?idxno=125526"
+     "title": "\"삼시세끼 아내 집밥?\"…김종국, 결국 입 열었다 \"어떻게 요구하나, 먼저...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-03T01:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000782729"
     },
     {
-     "title": "동양생명 종신보험 출시…암·뇌심 질환 시 보험료 면제",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T01:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016417673?sid=101"
+     "title": "김종국, 결혼 1주년 깜짝 이벤트→최수종도 인정한 사랑꾼…\"애칭은 귀...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-03T00:39:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001406931"
     },
     {
-     "title": "처브라이프, 종신보험에 입원·수술·3대질병 보장 강화",
-     "press": "fins.co.kr",
-     "publishedAt": "2026-11-03T00:58:00.000Z",
-     "link": "http://www.fins.co.kr/news/articleView.html?idxno=110386"
+     "title": "‘결혼 1년 차’ 김종국 “아내 핸드폰 저장명, ‘귀요미♥︎’”(‘옥...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-03T00:20:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001277474"
     }
    ]
   },
@@ -369,13 +306,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 15,
-   "recent20": 2,
+   "articles90": 14,
+   "recent20": 1,
    "press": 7,
-   "firstArticleAt": "2026-11-02T23:44:00.000Z",
+   "firstArticleAt": "2026-11-02T23:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김민, 맨손으로 아나콘다 잡았다더니…\"미역이었다\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T01:18:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014296991"
+    },
     {
      "title": "김민 ‘나혼산’ 살리고 본업 컴백 “강동원 김고은과 함께 촬영중”(아...",
      "press": "newsen.com",
@@ -387,12 +330,70 @@
      "press": "topstarnews.net",
      "publishedAt": "2026-11-03T00:58:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16266771"
+    }
+   ]
+  },
+  {
+   "keyword": "탑 나나 생일카페 동행",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-03T00:13:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "탑♥나나, 열애 인정 한 달 만에 생일카페 동반 방문…팬 반응 엇갈려",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-03T01:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001277493"
     },
     {
-     "title": "'동두천 스타' 김민, 타고 다니던 오토바이는 父 유품…\"떠나신지 10년\"...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-03T00:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004121245"
+     "title": "탑♥나나, 열애 인정 후 생일 카페 동행",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-03T01:02:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611030149"
+    },
+    {
+     "title": "탑♥나나, 열애 인정 한 달 만에 공개 데이트...생일카페 동행",
+     "press": "starnewsk.com",
+     "publishedAt": "2026-11-03T00:54:00.000Z",
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60597"
+    }
+   ]
+  },
+  {
+   "keyword": "리센느 컴백",
+   "sources": [
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-02T23:57:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "리센느, 역주행 신화 다음은 '펄스'…오늘(3일) 컴백",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-03T00:56:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000518831"
+    },
+    {
+     "title": "'대세' 리센느, 오늘(3일) 'PULSE'로 컴백",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-03T00:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000326432"
+    },
+    {
+     "title": "'新 역주행 아이콘' 리센느, 오늘 새 앨범 '펄스' 발매",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-03T00:39:00.000Z",
+     "link": "https://m.entertain.naver.com/article/018/0006402572"
     }
    ]
   },
@@ -402,7 +403,7 @@
     "nate"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-03T00:05:00.000Z",
    "exclusive": false,
@@ -459,11 +460,43 @@
      "link": "https://m.sports.naver.com/general/article/117/0004121228"
     }
    ]
+  },
+  {
+   "keyword": "출근하는 조희대 대법원장",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 12,
+   "recent20": 4,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T00:15:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[포토] 대법 향하는 조희대 대법원장",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-03T01:20:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3445386"
+    },
+    {
+     "title": "[포토] 대법으로 향하는 조희대 대법원장",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-03T01:18:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3445381"
+    },
+    {
+     "title": "출근하는 조희대 대법원장",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T01:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009266320?sid=102"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 268,
+  "flagged": 271,
   "matched": 97,
   "avgLeadMin": 233,
   "recent": [
