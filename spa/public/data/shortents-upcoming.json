@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T16:29:26.564Z",
+ "builtAt": "2026-11-03T16:49:34.232Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,139 +8,8 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
- "candidates": [
-  {
-   "keyword": "김민석 신천지 사과하라",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-03T15:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[사설] 신천지 집단 입당 의혹 어물쩍 넘어가려는 민주당",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-03T16:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001882831?sid=110"
-    },
-    {
-     "title": "金 “신천지 전대 개입 증거 못 찾아” 사과… 鄭 “사고친 사람이 책임...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-03T15:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004007630?sid=100"
-    },
-    {
-     "title": "[시사천국] 김성태 \"김민석 치명상\" vs 김형주 \"없는 걸 침소봉대\"…신...",
-     "press": "news.cpbc.co.kr",
-     "publishedAt": "2026-11-03T15:44:00.000Z",
-     "link": "https://news.cpbc.co.kr/article/1176808?division=NAVER"
-    }
-   ]
-  },
-  {
-   "keyword": "이종석 재혼 황후",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-03T15:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이종석, 임영웅 콘서트서 영감 얻었다…'재혼황후' 의상 직접 제작한 이...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-03T16:28:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267546"
-    },
-    {
-     "title": "이종석 \"임영웅 콘서트 보고 '재혼황후' 의상 제작\"",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-03T16:09:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000326589"
-    },
-    {
-     "title": "이종석 \"'재혼황후' 처음엔 고사…진짜 잘생긴 사람이 해야\"",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-03T16:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000326588"
-    }
-   ]
-  },
-  {
-   "keyword": "10월 소비자물가 2.8%",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-03T15:02:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[사설] 소비자물가 6개월째 3% 안팎…주름살 깊어지는 서민경제",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-03T16:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005349944?sid=110"
-    },
-    {
-     "title": "10월 물가 2.8% 상승… 석유류 14.9%-가공식품 2.9% 뜀박질",
-     "press": "donga.com",
-     "publishedAt": "2026-11-03T15:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003759843?sid=101"
-    },
-    {
-     "title": "울산 소비자물가 넉달만에 3%대 재진입",
-     "press": "ksilbo.co.kr",
-     "publishedAt": "2026-11-03T15:04:00.000Z",
-     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1071531"
-    }
-   ]
-  },
-  {
-   "keyword": "한학자 보석 취소",
-   "sources": [
-    "signal.bz",
-    "nate",
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T15:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'천정궁 외출' 한학자, 다시 구치소로…JTBC 보도 하루 만에 보석 취소",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-03T15:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000518992?sid=102"
-    },
-    {
-     "title": "천정궁 오간 한학자‥보름 만에 구치소로",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-03T15:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533330?sid=102"
-    },
-    {
-     "title": "'천정궁' 다녀온 한학자 총재, 法 보석 취소",
-     "press": "getnews.co.kr",
-     "publishedAt": "2026-11-03T15:04:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=885899"
-    }
-   ]
-  }
- ],
+ "measured": 24,
+ "candidates": [],
  "hitRate": {
   "days": 7,
   "flagged": 455,
