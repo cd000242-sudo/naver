@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T07:26:28.737Z",
+ "builtAt": "2026-11-03T07:36:32.762Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,166 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "코스피 3.59% 하락",
    "sources": [
     "daum"
    ],
-   "articles90": 83,
-   "recent20": 31,
-   "press": 57,
+   "articles90": 82,
+   "recent20": 14,
+   "press": 59,
    "firstArticleAt": "2026-11-03T06:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "코스피 포인트보다 더 하락한 '삼전닉스'...언제 반등할까?",
-     "press": "newsfc.co.kr",
-     "publishedAt": "2026-11-03T07:24:00.000Z",
-     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82203"
+     "title": "코스피, 외국인 1.5조 매도에 3.59% 급락…5650선 붕괴",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-03T07:32:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1134843"
     },
     {
-     "title": "'검은 월요일' 피했지만 코스피 3% 넘게 급락…5600선 턱걸이",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-03T07:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004206079?sid=101"
+     "title": "코스피 3.59% 급락, 코스닥 4%대 하락",
+     "press": "thereport.co.kr",
+     "publishedAt": "2026-11-03T07:32:00.000Z",
+     "link": "https://www.thereport.co.kr/news/articleView.html?idxno=93008"
     },
     {
-     "title": "코스피, 美 기술주 약세·AI 투자 부담에 3.59% 급락···5640선 마감",
-     "press": "seoulfn.com",
-     "publishedAt": "2026-11-03T07:22:00.000Z",
-     "link": "https://www.seoulfn.com/news/articleView.html?idxno=641795"
+     "title": "코스피, 외국인 1.5조 '팔자'에 3.6% 급락…5600선으로 밀려",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-03T07:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001271515?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "미국 중간선거",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 40,
+   "recent20": 13,
+   "press": 32,
+   "firstArticleAt": "2026-11-03T06:51:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "[OBS뉴스 오늘2] 미 중간선거, 경제 영향은?…수출 신기록 다음은?",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-03T07:34:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1542511"
+    },
+    {
+     "title": "[美중간선거] 트럼프·시진핑 도출한 '전략적 안정' 합의 시험대",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T07:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009267764?sid=104"
+    },
+    {
+     "title": "美법무부, 중간선거 전날 선거범죄 63명 기소…부정선거 '밑밥'?",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-03T07:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005598765?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "삼성",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 31,
+   "recent20": 31,
+   "press": 29,
+   "firstArticleAt": "2026-11-03T07:22:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "슈퍼모델 김자연, '70세' 前삼성전자 사장과 결혼..스위스서 '럭셔리 웨...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-03T07:35:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005633586"
+    },
+    {
+     "title": "삼성 라이온즈 한국시리즈 진출…이재용 회장 관전 여부 관심",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-03T07:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001071858?sid=101"
+    },
+    {
+     "title": "‘만년 꼴찌’ 삼성의 반란, KCC·소노는 부진… KBL 이변 속출",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-03T07:34:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/005/0001882699"
+    }
+   ]
+  },
+  {
+   "keyword": "금감원 퇴직연금 캠페인 출범",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 27,
+   "recent20": 9,
+   "press": 25,
+   "firstArticleAt": "2026-11-03T07:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "퇴직연금 558조원 시대…금감원 \"장기·분산투자 교육 강화\"",
+     "press": "weekly.hankooki.com",
+     "publishedAt": "2026-11-03T07:32:00.000Z",
+     "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7192046"
+    },
+    {
+     "title": "금감원, 퇴직연금 장기투자 유도…매년 두 차례 계좌 점검 지원",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-03T07:32:00.000Z",
+     "link": "https://www.viva100.com/article/20261103501168"
+    },
+    {
+     "title": "퇴직연금 558조 시대…제1회 퇴직연금 오래오래 캠페인 열려",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-03T07:30:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261103516033?OutUrl=naver"
+    }
+   ]
+  },
+  {
+   "keyword": "제주 실종 허위 종결",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 20,
+   "recent20": 3,
+   "press": 20,
+   "firstArticleAt": "2026-11-03T06:11:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "제주 실종사건 허위종결 전직 경찰관 25건 추가 확인…공소청 송치",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-03T07:30:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4116532"
+    },
+    {
+     "title": "“미성년자·노인 실종기록도 지웠다”… 허위종결 제주 경찰관 여죄 2...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-03T07:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003695342?sid=102"
+    },
+    {
+     "title": "[자막뉴스] \"미성년자에 노인까지\" 허위 종결…'허위 사망' 기록 삭제 더...",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-03T07:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400291?sid=102"
     }
    ]
   },
@@ -47,10 +176,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 27,
-   "recent20": 2,
-   "press": 21,
-   "firstArticleAt": "2026-11-03T06:00:00.000Z",
+   "articles90": 23,
+   "recent20": 0,
+   "press": 17,
+   "firstArticleAt": "2026-11-03T06:08:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -75,140 +204,79 @@
    ]
   },
   {
-   "keyword": "삼성",
+   "keyword": "교육혁신선도지역 결과 발표",
    "sources": [
-    "google"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 22,
-   "recent20": 22,
-   "press": 20,
-   "firstArticleAt": "2026-11-03T07:12:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "라이온즈야, KT ‘비트배트’의 맛을 알아? 안현민 “삼성 응원 문화 예...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-03T07:24:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/468/0001277656"
-    },
-    {
-     "title": "[사설] 삼성 구미 투자 'AI 신화' 쓰는 출발점 되길",
-     "press": "kyongbuk.co.kr",
-     "publishedAt": "2026-11-03T07:24:00.000Z",
-     "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4089476"
-    },
-    {
-     "title": "[똑똑한패션] 삼성물산 패션 구호, 노스페이스, 영원무역그룹, K2",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-03T07:24:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261103021074924"
-    }
-   ]
-  },
-  {
-   "keyword": "교육혁신선도지역 지정 결과",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 24,
-   "recent20": 4,
-   "press": 19,
-   "firstArticleAt": "2026-11-03T06:04:00.000Z",
+   "articles90": 18,
+   "recent20": 5,
+   "press": 16,
+   "firstArticleAt": "2026-11-03T06:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "춘천시, 강원도내 유일 2유형 교육혁신선도지역 선정",
-     "press": "kado.net",
-     "publishedAt": "2026-11-03T07:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000209125?sid=102"
+     "title": "전북 5개 시·군, 교육부 '교육혁신선도지역' 선정",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-03T07:32:00.000Z",
+     "link": "https://www.ajunews.com/view/20261103162650684"
     },
     {
-     "title": "태백시, '2027 교육혁신선도지역' 선정…최대 150억 '지원확보'",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-03T07:22:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3741061"
+     "title": "부산, '교육혁신선도지역' 최종 선정…인구감소(관심)지역에서 교육 '새...",
+     "press": "news.lghellovision.net",
+     "publishedAt": "2026-11-03T07:28:00.000Z",
+     "link": "http://news.lghellovision.net/news/articleView.html?idxno=560866"
     },
     {
-     "title": "춘천·삼척·횡성·강릉·고성·태백·철원·동해시, '교육혁신선도지역...",
-     "press": "gw.newdaily.co.kr",
-     "publishedAt": "2026-11-03T07:18:00.000Z",
-     "link": "https://gw.newdaily.co.kr/site/data/html/2026/11/03/2026110300290.html"
+     "title": "제천·보은·음성, 교육혁신선도지역 지정…충북 3곳 연 최대 20억원 지...",
+     "press": "jbnews.com",
+     "publishedAt": "2026-11-03T07:26:00.000Z",
+     "link": "https://www.jbnews.com/news/articleView.html?idxno=1515023"
     }
    ]
   },
   {
-   "keyword": "김자연 손영권 결혼",
+   "keyword": "45세 슈퍼모델 김자연과 결혼",
    "sources": [
-    "daum"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 13,
-   "recent20": 5,
+   "articles90": 12,
+   "recent20": 6,
    "press": 12,
    "firstArticleAt": "2026-11-03T06:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "슈퍼모델 출신 45세 김자연, 70세 삼성전자 전 사장과 결혼",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-03T07:22:00.000Z",
-     "link": "https://www.insight.co.kr/news/580491"
+     "title": "슈퍼모델 김자연, '70세' 前삼성전자 사장과 결혼..스위스서 '럭셔리 웨...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-03T07:35:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005633586"
     },
     {
-     "title": "슈퍼모델 김자연, ‘70세’ 前 삼성전자 사장과 결혼",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-03T07:22:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001147894"
+     "title": "45세 슈퍼모델 김자연, 70세 '삼성전자 전 사장' 손영권과 결혼",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T07:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009267755?sid=102"
     },
     {
-     "title": "'45세' 모델 김자연, '70세' 前삼성전자 사장과 결혼..\"키 큰 날 귀여워...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-03T07:20:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004462580"
-    }
-   ]
-  },
-  {
-   "keyword": "어린이",
-   "sources": [
-    "google"
-   ],
-   "articles90": 12,
-   "recent20": 6,
-   "press": 11,
-   "firstArticleAt": "2026-11-03T06:54:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "초록우산, 고 최불암 초록우산 전국후원회장 영면…“어린이에 대한 사...",
-     "press": "segyebiz.com",
-     "publishedAt": "2026-11-03T07:20:00.000Z",
-     "link": "http://www.segyebiz.com/newsView/20261103515737?OutUrl=naver"
-    },
-    {
-     "title": "강동문화재단, 8개월간 발레 배운 어린이 40명의 특별한 도전⋯꿈의 무...",
-     "press": "cnbizm.com",
-     "publishedAt": "2026-11-03T07:18:00.000Z",
-     "link": "https://www.cnbizm.com/news/articleView.html?idxno=320232"
-    },
-    {
-     "title": "초록우산, 故 최불암 전국후원회장 추모…\"어린이에 대한 사랑과 헌신의...",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-03T07:10:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=883874"
+     "title": "45세 슈퍼모델 김자연, 70세 前 삼성전자 사장과 결혼 \"MIT 선후배\"[스타...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-03T07:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003484203"
     }
    ]
   },
   {
    "keyword": "아시안컵 중동 여파로 연기",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 13,
-   "recent20": 1,
+   "recent20": 0,
    "press": 11,
    "firstArticleAt": "2026-11-03T06:07:00.000Z",
    "exclusive": true,
@@ -235,40 +303,74 @@
    ]
   },
   {
-   "keyword": "45세 슈퍼모델 김자연과 결혼",
+   "keyword": "어린이",
    "sources": [
-    "nate"
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 11,
+   "recent20": 5,
+   "press": 10,
+   "firstArticleAt": "2026-11-03T07:02:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "대전서부소방서, 2026년 어린이 불조심 포스터 공모전 개최",
+     "press": "fpn119.co.kr",
+     "publishedAt": "2026-11-03T07:32:00.000Z",
+     "link": "http://fpn119.co.kr/258859"
+    },
+    {
+     "title": "美뉴욕주, 30년 만에 홍역 어린이 사망자 발생…\"백신정책 후퇴 탓\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T07:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009267745?sid=104"
+    },
+    {
+     "title": "삼성복지재단, 전국 어린이집·유치원 원장 대상 문화·교육 행사 열어",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-03T07:28:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2013908"
+    }
+   ]
+  },
+  {
+   "keyword": "이화영 재심 청구",
+   "sources": [
+    "daum"
    ],
    "articles90": 9,
-   "recent20": 4,
+   "recent20": 1,
    "press": 9,
-   "firstArticleAt": "2026-11-03T06:36:00.000Z",
+   "firstArticleAt": "2026-11-03T06:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "슈퍼모델 출신 45세 김자연, 70세 삼성전자 전 사장과 결혼",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-03T07:22:00.000Z",
-     "link": "https://www.insight.co.kr/news/580491"
+     "title": "이화영 대북송금 추가 기소 사건…법원, 공소장 적법성 심리",
+     "press": "kgnews.co.kr",
+     "publishedAt": "2026-11-03T07:24:00.000Z",
+     "link": "https://www.kgnews.co.kr/news/article.html?no=917985"
     },
     {
-     "title": "슈퍼모델 김자연, ‘70세’ 前 삼성전자 사장과 결혼",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-03T07:22:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001147894"
+     "title": "이화영 ‘쌍방울 대북송금’ 재심 청구…국정원 문건이 유죄 뒤집을 수...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-03T06:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003480377?sid=102"
     },
     {
-     "title": "'45세' 모델 김자연, '70세' 前삼성전자 사장과 결혼..\"키 큰 날 귀여워...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-03T07:20:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004462580"
+     "title": "이화영, '대북송금' 재심 청구…\"새 증거 발견\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-03T06:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922443?sid=102"
     }
    ]
   },
   {
    "keyword": "청년 주거 간담회 장동혁",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 22,
@@ -299,44 +401,88 @@
    ]
   },
   {
-   "keyword": "2027년 정미년 달력",
+   "keyword": "손영권",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-03T05:57:00.000Z",
+   "articles90": 7,
+   "recent20": 4,
+   "press": 7,
+   "firstArticleAt": "2026-11-03T06:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "달력 제작으로 분주한 인쇄소",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T06:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016418847?sid=102"
+     "title": "‘25세 차’ 김자연♥손영권, 스위스서 결혼…“마흔 넘어 만난 한 사람...",
+     "press": "donga.com",
+     "publishedAt": "2026-11-03T07:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003759767?sid=103"
     },
     {
-     "title": "2027년 정미년 달력 인쇄",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-03T06:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014298303?sid=102"
+     "title": "45세 슈퍼모델 김자연, 70세 '삼성전자 전 사장' 손영권과 결혼",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T07:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009267755?sid=102"
     },
     {
-     "title": "정미년 달력 제작으로 분주",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-03T05:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014298285?sid=102"
+     "title": "25살 차이 부부 탄생했다…'70세' 삼성전자 고문 손영권, ♥슈퍼모델 김...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-03T07:31:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000782816"
+    }
+   ]
+  },
+  {
+   "keyword": "예세민 검찰총장 후보 물망",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-03T06:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "검찰총창 후보에 이정현·박철우·예세민 등, 9일 추천위 유력…12월 중...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-03T07:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003695346?sid=102"
+    },
+    {
+     "title": "이르면 9일 초대 공소청 수장 후보 3명 압축",
+     "press": "busan.com",
+     "publishedAt": "2026-11-03T06:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001405409?sid=102"
+    },
+    {
+     "title": "초대 공소청 수장 후보에 이정현·예세민·박철우 3인 물망... 후보추천...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-03T06:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000963354?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 393,
-  "matched": 140,
-  "avgLeadMin": 229,
+  "flagged": 397,
+  "matched": 142,
+  "avgLeadMin": 230,
   "recent": [
+   {
+    "keyword": "2026년 11월 3일 운세",
+    "hitKeyword": "배나라 11월 14일 결혼",
+    "hitAt": "2026-11-03T16:30:00+09:00",
+    "leadMin": 588
+   },
+   {
+    "keyword": "김자연 손영권 결혼",
+    "hitKeyword": "김자연 결혼",
+    "hitAt": "2026-11-03T16:30:00+09:00",
+    "leadMin": 14
+   },
    {
     "keyword": "리센느 컴백",
     "hitKeyword": "리센느 PULSE 컴백",
@@ -382,18 +528,6 @@
    {
     "keyword": "배나라 한재아 결혼",
     "hitKeyword": "배나라 한재아 결혼",
-    "hitAt": "2026-11-03T14:30:00+09:00",
-    "leadMin": 25
-   },
-   {
-    "keyword": "필로폰 제조 일당 검거",
-    "hitKeyword": "감기약 필로폰 제조 검거",
-    "hitAt": "2026-11-03T14:30:00+09:00",
-    "leadMin": 25
-   },
-   {
-    "keyword": "미국 이란 케슘섬 공습",
-    "hitKeyword": "미국 이란 공습",
     "hitAt": "2026-11-03T14:30:00+09:00",
     "leadMin": 25
    }
