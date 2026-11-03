@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-03T12:11:13.612Z",
+  "generatedAt": "2026-11-03T12:19:29.391Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -90986,6 +90986,585 @@
           "askedAt": "2021.01.22"
         }
       ]
+    },
+    {
+      "id": "8b2bea92bcaa8a5e",
+      "urls": [
+        "https://www.keetip.com/3730",
+        "https://felixkim.tistory.com/entry/%EC%97%91%EC%85%80-%ED%91%9C-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EC%88%98%EC%8B%9D%EC%9D%B4-%EB%94%B0%EB%9D%BC%EC%98%A4%EB%8A%94-%EB%B2%95"
+      ],
+      "guide": {
+        "direction": "①‘표 만들기’ 질문들을 보면 데이터를 다 채워 넣고도 계산이 안 되고 수식이 그대로 보여 헤매는 경우가 많다. ②고수 글은 표 디자인·차트 꾸미기에 집중해 수식이 텍스트로 보이는 근본 원인(서식·토글·병합)은 다루지 않는다. ③이 글은 셀서식·Ctrl+`·어포스트로피·병합 네 원인을 순서대로 체크해 끝까지 해결하게 한다.",
+        "searchTargets": [
+          "엑셀 만들기 잘하는법"
+        ],
+        "mustInclude": [
+          "Ctrl+` (물결표) 눌러 '수식표시' 모드가 켜져 있으면 다시 눌러 끄기",
+          "표 만들 때 셀 병합 상태에서는 수식 자동채우기가 깨짐 → 병합 해제 후 작성",
+          "데이터베이스용 표는 모든 칸에 값이 있어야 수식·필터가 정상 작동(지식인 인용)"
+        ],
+        "mustAvoid": [
+          "차트 색상·디자인 꾸미기 같은 부차적 내용으로 흘러가지 말 것",
+          "표 서식 문제와 수식표시 문제를 섞어 설명하면 독자가 원인을 못 찾음, 원인별로 분리해 순서대로 제시"
+        ],
+        "checkBefore": [
+          "Ctrl+` 동작과 수식표시 옵션 위치가 엑셀 버전(2016/2021/365)별로 같은지 (확인 필요: 마이크로소프트 공식 지원 문서)"
+        ],
+        "solves": [
+          "수식 입력했는데 결과 대신 수식 그대로 보이는 문제 → 원인별(서식/토글/어포스트로피) 해결 순서 제공",
+          "표 만들다 병합 때문에 수식이 안 따라가는 문제 → 병합 해제 후 만드는 순서로 해결"
+        ],
+        "actionTitles": [
+          "엑셀 수식이 그대로 보일 때 원인별 해결 순서 총정리",
+          "엑셀 만들기 잘하는법, 수식 안 될 때 바로 고치는 법",
+          "엑셀 표 만들기, 수식이 안 따라갈 때 체크할 순서"
+        ]
+      },
+      "at": "2026-11-03T12:17:24.193Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "엑셀 표 만들기",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=102020101&docId=467540661&answerNo=1&qb=7JeR7IWA66eM65Ok6riw",
+          "views": 617,
+          "answers": 1,
+          "askedAt": "2024.04.06"
+        },
+        {
+          "title": "엑셀 표 만들기 질문",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=102020101&docId=441745233&answerNo=1&qb=7JeR7IWA66eM65Ok6riw",
+          "views": 336,
+          "answers": 1,
+          "askedAt": "2023.03.17"
+        },
+        {
+          "title": "엑셀 표만들기",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=102020101&docId=439107820&answerNo=1&qb=7JeR7IWA66eM65Ok6riw",
+          "views": 324,
+          "answers": 1,
+          "askedAt": "2023.02.10"
+        }
+      ]
+    },
+    {
+      "id": "681c602786e01017",
+      "urls": [
+        "https://law-sense.com/child-support-enforcement-process",
+        "https://jwlaw.tistory.com/entry/%EC%96%91%EC%9C%A1%EB%B9%84%EC%9D%B4%ED%96%89%EB%AA%85%EB%A0%B9-%EB%AF%B8%EC%A7%80%EA%B8%89%EC%96%91%EC%9C%A1%EB%B9%84-%EC%9D%B4%ED%96%89%EB%AA%85%EB%A0%B9%EC%8B%A0%EC%B2%AD"
+      ],
+      "guide": {
+        "direction": "①심문기일 통지서를 받은 사람들은 답변서를 어떻게 써야 불복기한 2주 안에 제재를 피할 수 있는지부터 막힌다. ②고수 글은 '신청 절차'에만 초점을 둬 이미 이행명령을 받은 뒤 감치명령까지 가는 다음 단계는 설명하지 않는다. ③이 글은 결정문 수령부터 심문기일 대응, 3기 이상 미지급 시 감치 신청까지 단계별 체크리스트로 끝낸다.",
+        "searchTargets": [
+          "양육비 이행명령 신청 방법",
+          "양육비 이행명령 서류",
+          "양육비 이행명령 결정문",
+          "양육비 이행명령 불이행"
+        ],
+        "mustInclude": [
+          "이행명령 결정문 송달 후 불복(즉시항고) 기한은 2주(지식인 인용)",
+          "정기 양육비를 3기 이상 미지급 시 감치명령 신청 가능(지식인 사례 인용)",
+          "이행명령 신청 시 필요 서류: 결정문 원본, 송달증명·확정증명서 등(지식인 인용)",
+          "심문기일에는 답변서 제출이 필요하며 경제적 사정만으로는 면책되지 않음(지식인 인용)",
+          "신청·답변서 제출 기관은 사건을 담당한 가정법원(확인 필요: 대한법률구조공단 또는 법원 공식 안내)"
+        ],
+        "mustAvoid": [
+          "지식인에 나온 특정 금액(8천만원 채무, 월 200만원 등)을 일반 기준처럼 제시하지 말 것, 개별 사건일 뿐",
+          "'이행명령/감치명령'과 '직접 강제집행'을 같은 절차처럼 섞어 설명하지 말 것",
+          "이혼·양육권 분쟁의 감정적 서사로 흐르지 말고 절차·서식 중심 유지"
+        ],
+        "checkBefore": [
+          "즉시항고 기한 2주가 송달 방식에 따라 달라지는지 (확인: 대한법률구조공단 또는 법원 공식 안내)",
+          "감치명령 전환 요건인 '3기 이상 미지급' 기준이 최신 가사소송법 조문과 일치하는지 (확인: 법제처 국가법령정보센터)"
+        ],
+        "solves": [
+          "이행명령 결정문 받고 뭘 해야 할지 모를 때 → 심문기일·답변서·불복기한 2주 체크리스트 제공",
+          "양육비 계속 안 줄 때 다음 단계가 뭔지 모를 때 → 감치명령 신청 조건·절차 정리",
+          "이행명령 신청에 필요한 서류를 모를 때 → 서류 목록과 신청 순서 제공"
+        ],
+        "actionTitles": [
+          "양육비 이행명령 신청 방법, 서류부터 절차까지 정리"
+        ]
+      },
+      "at": "2026-11-03T12:17:24.193Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "양육비 이행명령 서류 송달 후 대응 방법은?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60215&docId=494797271&answerNo=1&qb=7JaR7Jyh67mEIOydtO2WieuqheuguSDspp3ruZnsnpDro4w=",
+          "views": 136,
+          "answers": 1,
+          "askedAt": "2026.08.19"
+        },
+        {
+          "title": "양육비 이행청구서 대응과 개인회생 준비 방....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60215&docId=494300193&answerNo=1&qb=7JaR7Jyh67mEIOydtO2WieuqheuguSDspp3ruZnsnpDro4w=",
+          "views": 75,
+          "answers": 1,
+          "askedAt": "2026.07.14"
+        },
+        {
+          "title": "양육비이행명령 후 미지급 시 감치 처분을 받....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60215&docId=495516191&answerNo=1&qb=7JaR7Jyh67mEIOydtO2WieuqheuguSDspp3ruZnsnpDro4w=",
+          "views": 52,
+          "answers": 1,
+          "askedAt": "2026.10.12"
+        }
+      ]
+    },
+    {
+      "id": "b079c8a4eed334f5",
+      "urls": [
+        "https://on.sano.co.kr/%eb%a1%9c%ec%97%a0%ea%b1%b8%ec%a6%88-%ed%8c%a8%eb%94%a9-%ec%98%a4%eb%a1%9c%eb%9d%bc-%ec%9b%b0%eb%a1%a0-%ec%a0%90%ed%8d%bc-%ec%8b%a4%eb%ac%bc-%ed%9b%84%ea%b8%b0%ec%99%80-%ec%82%ac%ec%9d%b4%ec%a6%88/"
+      ],
+      "guide": {
+        "direction": "①자동완성에 120·130·140 사이즈가 나란히 뜰 만큼 아이 키에 맞는 치수를 못 골라 헤매는 검색자가 많다. ②고수 글의 '실물 후기와 사이즈 팁'은 느낀 점 위주라 사이즈별 실측 비교나 패딩조끼와의 핏 차이는 짚지 않는다. ③이 글은 120/130/140 실측 비교표와 조끼·부츠 매칭까지 넣어 사이즈 선택을 한 번에 끝내준다.",
+        "searchTargets": [
+          "로엠걸즈 패딩 130",
+          "로엠걸즈 패딩 120",
+          "로엠걸즈 패딩 140",
+          "로엠걸즈 패딩 블랙"
+        ],
+        "mustInclude": [
+          "120/130/140 사이즈별 실측(총장·어깨너비·소매길이) 비교표(확인 필요: 로엠걸즈 공식몰 사이즈 가이드)",
+          "블랙 색상 웰론 소재의 실물 광택감·보온성 설명",
+          "패딩조끼 130과 패딩 130의 핏 차이 및 같이 입을 때 매칭 여부(확인 필요: 제품 상세페이지)",
+          "패딩부츠와 색상 매칭 코디 예시"
+        ],
+        "mustAvoid": [
+          "성인 로엠(ROEM) 라인과 아동용 로엠걸즈를 혼동해서 설명하지 말 것",
+          "실측 확인 안 된 사이즈 치수를 단정적으로 쓰지 말 것, 불확실하면 '확인 필요'로 표시"
+        ],
+        "checkBefore": [
+          "120/130/140 실측 치수 (확인: 로엠걸즈 공식몰 상품 상세페이지 사이즈표)",
+          "패딩조끼 130과 패딩 130이 같은 사이즈 기준인지 (확인: 공식몰 상품 상세)"
+        ],
+        "solves": [
+          "아이 키에 맞는 로엠걸즈 패딩 사이즈(120/130/140)를 모를 때 → 실측 비교표로 선택 기준 제공",
+          "패딩조끼도 같이 살지 고민될 때 → 패딩과 조끼 핏 비교",
+          "블랙 색상 실물이 사진과 다를까 걱정될 때 → 실물 색감·소재 설명"
+        ],
+        "actionTitles": [
+          "로엠걸즈 패딩 120 130 140 사이즈 비교 가이드",
+          "로엠걸즈 패딩 블랙 실물 후기와 사이즈 선택 체크포인트",
+          "로엠걸즈 패딩조끼 130, 패딩 130과 핏 차이 비교"
+        ]
+      },
+      "at": "2026-11-03T12:17:24.193Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "a2f5825cd0276daa",
+      "urls": [
+        "https://life.sano.co.kr/%eb%8b%a8%ea%b0%90-%eb%b3%80%eb%b9%84%ea%b0%80-%ea%b1%b1%ec%a0%95%eb%90%a0-%eb%95%8c-%ea%bc%ad-%ec%95%8c%ec%95%84%ec%95%bc-%ed%95%a0-%eb%a8%b9%eb%8a%94-%eb%b0%a9%eb%b2%95/"
+      ],
+      "guide": {
+        "direction": "지식인에는 '감 먹으면 변비 생기냐'는 질문이 반복되는데, 홍시와 단감을 혼동하거나 타닌이 어느 부위에 몰려있는지 몰라 막혀 있다. 고수 글은 '먹는 방법'을 제목으로 걸었지만 하루 몇 개·어느 부위를 잘라야 하는지 수치로 못 짚었다. 이 글은 타닌이 몰린 부위, 하루 권장 개수, 물·채소 병행법을 표로 정리해 끝낸다.",
+        "searchTargets": [
+          "단감 변비",
+          "단감 변비 유발",
+          "단감 변비 이유",
+          "단감 변비 예방"
+        ],
+        "mustInclude": [
+          "타닌 성분이 껍질과 심지(흰 부분)에 집중되어 있다는 부위별 차이",
+          "단감과 홍시의 타닌 함량·변비 유발 가능성 차이 비교",
+          "식후 1개 정도로 먹는 하루 권장 섭취 방식",
+          "물·채소·운동을 함께 챙기면 변비 부담이 줄어든다는 병행법",
+          "변비 증세가 있는 사람이 특히 주의할 점(떫은맛 남은 부위 제거)"
+        ],
+        "mustAvoid": [
+          "단감을 변비 '치료제'처럼 의학적 효능을 과장하는 서술",
+          "단감과 홍시를 같은 성분·같은 효과로 뭉뚱그려 설명"
+        ],
+        "checkBefore": [
+          "단감·홍시의 타닌 함량 차이는 식약처 식품영양성분DB 등 공신력 있는 자료로 확인",
+          "변비와 타닌의 작용 기전은 의료정보 사이트 등에서 재확인"
+        ],
+        "solves": [
+          "감을 먹으면 변비가 생기나요? → 타닌이 몰린 부위와 단감·홍시 차이로 설명",
+          "단감 하루에 몇 개 먹어야 변비 예방에 좋나요? → 권장 개수와 먹는 순서 제시",
+          "단감 먹을 때 주의할 점은? → 껍질·심지 제거법과 물 섭취 팁 정리"
+        ],
+        "actionTitles": [
+          "단감 변비 예방하는 먹는 순서와 주의할 점 확인하기"
+        ]
+      },
+      "at": "2026-11-03T12:17:24.193Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "감을 먹으면 변비가 생긴다는데?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020603&docId=490157820&answerNo=7&qb=64uo6rCQIOuzgOu5hCDslYzslYTslbwg66i564qU",
+          "views": 353,
+          "answers": 8,
+          "askedAt": "2025.11.14"
+        },
+        {
+          "title": "감을 먹으면 변비에 걸릴 수 있나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=708&docId=460882917&answerNo=1&qb=64uo6rCQIOuzgOu5hCDslYzslYTslbwg66i564qU",
+          "views": 214,
+          "answers": 1,
+          "askedAt": "2023.12.23"
+        },
+        {
+          "title": "단감, 하루에 몇 개 먹어야 변비 예방에 좋을....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=50502&docId=495526372&answerNo=1&qb=64uo6rCQIOuzgOu5hCDslYzslYTslbwg66i564qU",
+          "views": 108,
+          "answers": 3,
+          "askedAt": "2026.10.13"
+        }
+      ]
+    },
+    {
+      "id": "52a07b322c74996b",
+      "urls": [
+        "https://mingyu2100.tistory.com/633"
+      ],
+      "guide": {
+        "direction": "시청자들은 경기 다시보기 없이 '어느 팀이 8강을 뚫고 4강에 갔는지'를 바로 확인하고 싶어 검색하는데 결과가 바로 안 보여 막힌다. 고수 글 제목은 '4강 진출 4팀까지'라고 예고했지만 대진표·스코어·팀별 출연진을 한 번에 정리하지는 못했다. 이 글은 8강 대진표, 4강 진출 4팀 명단, 팀별 출연진을 표로 묶어 한 번에 보여준다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "8강 대진표와 경기 스코어(확인 필요: 방송사 공식 다시보기/공지)",
+          "4강 진출 4팀 명단(확인 필요: 방송사 공식 자료)",
+          "팀별 핵심 출연진 명단(확인 필요: 프로그램 공식 프로필)",
+          "4강 경기 방영 일정(확인 필요: 편성표)"
+        ],
+        "mustAvoid": [
+          "출연진 개인 사생활·부상 등을 추측성으로 언급",
+          "'뭉쳐야 찬다' 등 비슷한 축구 예능과 팀·출연진을 혼동"
+        ],
+        "checkBefore": [
+          "8강 결과·스코어는 방송사(SBS) 공식 홈페이지·공식 SNS에서 확인",
+          "4강 진출 팀과 출연진 명단은 프로그램 공식 계정 공지로 재확인"
+        ],
+        "solves": [
+          "8강 결과가 어떻게 됐나요? → 대진표·스코어를 표로 정리",
+          "어느 팀이 4강 갔나요? → 4강 진출 4팀 명단 명시",
+          "팀별 출연진이 누구죠? → 팀별 출연진 명단 정리"
+        ],
+        "actionTitles": [
+          "골때리는 그녀들 4강 진출 4팀 명단 확인하기"
+        ]
+      },
+      "at": "2026-11-03T12:17:24.193Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "a2dc8bb4738d7e86",
+      "urls": [
+        "https://on.sano.co.kr/%ec%a4%91%ed%95%99%ec%83%9d-%eb%a1%b1%ed%8c%a8%eb%94%a9-%eb%a7%a4%ec%9d%bc-%ec%9e%85%eb%8a%94-%ec%98%b7%ec%9d%b4%eb%9d%bc%eb%a9%b4-%ea%b8%b0%ec%9e%a5%ea%b3%bc-%eb%ac%b4%ea%b2%8c%eb%b6%80%ed%84%b0/"
+      ],
+      "guide": {
+        "direction": "지식인 질문들은 '중학생이 많이 입는 브랜드가 뭔지', '롱패딩이 나은지 숏패딩이 나은지'에서 멈춰 있고 가격 부담까지 겹쳐 있다. 고수 글은 '기장과 무게부터 보라'고 했지만 브랜드별 가격·무게 비교표까지는 제시하지 않았다. 이 글은 노스페이스·네파·디스커버리 등 브랜드별 가격·무게·기장 기준을 표로 비교해 선택을 끝내준다.",
+        "searchTargets": [
+          "중학생 롱패딩",
+          "중학생 롱패딩 브랜드",
+          "중학생 롱패딩 추천",
+          "중학생 롱패딩 노스페이스"
+        ],
+        "mustInclude": [
+          "교복 위에 입을 때 활동성을 해치지 않는 기장 기준(무릎 위~중간)",
+          "노스페이스·네파·디스커버리 등 브랜드별 무게·가격대 비교(확인 필요: 각 브랜드 공식몰)",
+          "롱패딩과 숏패딩을 추위 많이 타는지 기준으로 고르는 선택법"
+        ],
+        "mustAvoid": [
+          "특정 브랜드가 '국룰'인 것처럼 또래 유행을 단정적으로 과장",
+          "가격·사이즈 정보를 확인 없이 고정된 수치처럼 서술",
+          "아디다스·뉴발란스 등 스포츠 브랜드 롱패딩을 아웃도어 브랜드와 혼동"
+        ],
+        "checkBefore": [
+          "브랜드별 최신 가격·무게·사이즈는 각 브랜드 공식 온라인몰에서 확인"
+        ],
+        "solves": [
+          "중학생들 무슨 브랜드 많이 입나요? → 브랜드별 가격·무게 비교표로 정리",
+          "롱패딩이랑 숏패딩 중 뭐가 나을까요? → 추위·활동성 기준 선택법 제시",
+          "브랜드 롱패딩 가격이 부담되는데 → 가격대별 대안 비교"
+        ],
+        "actionTitles": [
+          "중학생 롱패딩 브랜드별 가격과 무게까지 비교해 추천",
+          "중학생 롱패딩 노스페이스 네파 디스커버리 가격 비교",
+          "중학생 롱패딩 고를 때 기장과 무게부터 꼭 체크리스트"
+        ]
+      },
+      "at": "2026-11-03T12:17:24.193Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "중학생 롱패딩 무슨브랜드 많이 입나요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=5040103&docId=313563731&answerNo=2&qb=7KSR7ZWZ7IOdIOuhse2MqOuUqSDrp6Tsnbwg7J6F64qUIOyYt+ydtOudvOuptA==",
+          "views": 965,
+          "answers": 2,
+          "askedAt": "2018.11.03"
+        },
+        {
+          "title": "제가 중학생인데 롱패딩도 없고 숏패딩",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=5040103&docId=311078960&answerNo=1&qb=7KSR7ZWZ7IOdIOuhse2MqOuUqSDrp6Tsnbwg7J6F64qUIOyYt+ydtOudvOuptA==",
+          "views": 792,
+          "answers": 1,
+          "askedAt": "2018.09.30"
+        },
+        {
+          "title": "중학생 브랜드 롱 패딩이요!!",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=5040103&docId=340698082&answerNo=1&qb=7KSR7ZWZ7IOdIOuhse2MqOuUqSDrp6Tsnbwg7J6F64qUIOyYt+ydtOudvOuptA==",
+          "views": 377,
+          "answers": 1,
+          "askedAt": "2019.11.18"
+        }
+      ]
+    },
+    {
+      "id": "d6e525cd92abdb25",
+      "urls": [
+        "https://spylab.tistory.com/746"
+      ],
+      "guide": {
+        "direction": "검색자는 'mlcc 관련주 대장주'로 삼성전기까지는 알지만, 3분기 영업이익 6910억이 주가·관련주 순위에 어떤 의미인지 못 찾아 '삼성전기 주가??' 질문(조회 17,536)을 남긴다. 기존 글은 실적 수치만 전하고 미국 MLCC 관련주나 순위표는 다루지 않는다. 이 글은 삼성전기 실적을 기준으로 국내·미국 MLCC 관련주 순위표를 정리해 끝낸다.",
+        "searchTargets": [
+          "mlcc 관련주 대장주",
+          "MLCC 관련주",
+          "mlcc 관련주 미국",
+          "mlcc 관련주 순위"
+        ],
+        "mustInclude": [
+          "삼성전기 3분기 영업이익 6910억원 수치",
+          "MLCC 관련주 순위·리스트 정리표",
+          "미국 MLCC 관련주 비교 항목"
+        ],
+        "mustAvoid": [
+          "전기차 대장주 등 다른 테마 종목과 혼동"
+        ],
+        "checkBefore": [
+          "삼성전기 3분기 실적 정확한 발표일·수치는 공시자료/원문기사에서 확인",
+          "MLCC 관련주 종목명은 증권사 리포트에서 확인"
+        ],
+        "solves": [
+          "mlcc 관련주 대장주가 어디인지 모름 → 삼성전기 중심 관련주 순위표 제공",
+          "mlcc 관련주 미국 종목이 뭔지 모름 → 국내·미국 비교 정리",
+          "영업이익 6910억이 주가에 어떤 의미인지 모름 → 실적 수치 해설"
+        ],
+        "actionTitles": [
+          "MLCC 관련주 순위 정리, 삼성전기 영업익 6910억 확인",
+          "MLCC 관련주 대장주 비교, 삼성전기 3분기 실적 확인"
+        ]
+      },
+      "at": "2026-11-03T12:17:24.193Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "mlcc 관련주 삼성전기 주가??",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1118&docId=347604598&answerNo=15&qb=bWxjYyDqtIDroKjso7wg64yA7J6l7KO8IOyCvOyEseyghOq4sCDsmIHsl4XsnbU=",
+          "views": 17536,
+          "answers": 17,
+          "askedAt": "2021.05.22"
+        },
+        {
+          "title": "전기차 대장주는 어느 종목인가요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=304721637&answerNo=1&qb=bWxjYyDqtIDroKjso7wg64yA7J6l7KO8IOyCvOyEseyghOq4sCDsmIHsl4XsnbU=",
+          "views": 12439,
+          "answers": 2,
+          "askedAt": "2018.07.02"
+        }
+      ]
+    },
+    {
+      "id": "fbff79438beed171",
+      "urls": [
+        "https://benefitscoop.tistory.com/entry/%EB%B9%85%ED%85%8C%ED%81%AC%EB%8A%94-%EC%99%9C-%EB%B9%9A%EC%9D%84-%EB%82%B4%EC%84%9C-AI%EC%97%90-%ED%88%AC%EC%9E%90%ED%95%A0%EA%B9%8C-%EC%98%A4%EB%9D%BC%ED%81%B4%C2%B7%EB%A9%94%ED%83%80%C2%B7%EC%95%8C%ED%8C%8C%EB%B2%B3-%ED%9A%8C%EC%82%AC%EC%B1%84-%EC%89%AC%EC%9A%B4-%EC%A0%95%EB%A6%AC"
+      ],
+      "guide": {
+        "direction": "검색자는 '코스피 갑자기 떨어지는 이유'를 찾다가 빅테크 AI투자 고평가 논란과 빚투 우려까지 만나지만, 오라클·메타·알파벳이 실제로 얼마를 회사채로 조달했는지는 못 찾는다. 기존 글은 '왜 빚을 내는지'만 설명하고 3사 회사채 규모·목적 비교표는 주지 않는다. 이 글은 3사 회사채 규모와 자금 용도를 표로 비교해 코스피 변동과의 연관성까지 정리해 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "오라클·메타·알파벳 각사 회사채 발행 규모·목적 비교표(확인 필요: 각사 공시)",
+          "AI 데이터센터 capex 자금 조달 방식(채권 vs 자기자본) 설명",
+          "국내 반도체주(하이닉스 등)와의 연관성 설명",
+          "신용등급·금리 수준(확인 필요: 신용평가사 자료)"
+        ],
+        "mustAvoid": [
+          "코스피 급락 원인을 환율·금리 등 다른 이슈와 섞어 혼동"
+        ],
+        "checkBefore": [
+          "오라클·메타·알파벳 회사채 발행 금액·날짜는 각사 공시/원문기사에서 확인",
+          "신용등급·금리는 무디스·S&P 등 신용평가사 자료에서 확인"
+        ],
+        "solves": [
+          "코스피가 갑자기 왜 떨어지는지 모름 → AI 고평가 논란과 회사채의 연관성 설명",
+          "빚투가 왜 위험한지 모름 → 기업 회사채와 개인 빚투를 구분해 설명",
+          "빅테크 AI투자가 언제까지 갈지 모름 → 3사 회사채 규모로 지속성 가늠"
+        ],
+        "actionTitles": [
+          "오라클·메타·알파벳 회사채 비교, 빅테크 빚투자 이유 확인",
+          "빅테크 AI투자 자금조달 확인, 회사채 규모 한눈에 비교",
+          "코스피 급락 이유 확인, 빅테크 회사채로 본 AI버블 논란"
+        ]
+      },
+      "at": "2026-11-03T12:17:24.193Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "코스피 갑자기 떨어지는 이유가 뭔가요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=494005207&answerNo=2&qb=67mF7YWM7YGsIOu5muydhCDrgrTshJwgYWkg7Yis7J6Q7ZWg6rmM",
+          "views": 2882,
+          "answers": 22,
+          "askedAt": "2026.06.23"
+        },
+        {
+          "title": "큰웃음을 주면 채택",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=11030301&docId=356565745&answerNo=3&qb=67mF7YWM7YGsIOu5muydhCDrgrTshJwgYWkg7Yis7J6Q7ZWg6rmM",
+          "views": 891,
+          "answers": 5,
+          "askedAt": "2020.05.15"
+        },
+        {
+          "title": "하이닉스 평단 227만원인데",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=494515164&answerNo=9&qb=67mF7YWM7YGsIOu5muydhCDrgrTshJwgYWkg7Yis7J6Q7ZWg6rmM",
+          "views": 587,
+          "answers": 11,
+          "askedAt": "2026.07.30"
+        }
+      ]
+    },
+    {
+      "id": "965b097f5ca29294",
+      "urls": [
+        "https://life.sano.co.kr/%ec%9a%b0%eb%a6%ac%eb%82%98%eb%9d%bc-%ec%a0%84%ed%86%b5%ec%9d%98%ec%83%81-%ec%a2%85%eb%a5%98-%ec%9d%b4%eb%a0%87%ea%b2%8c-%eb%a7%8e%ec%9d%80%ec%a7%80-%ec%95%8c%ea%b3%a0-%ea%b3%84%ec%85%a8%eb%82%98/"
+      ],
+      "guide": {
+        "direction": "검색자는 '우리나라 전통의상 종류'를 찾지만 지식인에는 혼례복·저고리·족두리·버선·노리개 같은 개별 품목만 흩어져 있어 전체 목록을 못 찾는다. 기존 글은 '이렇게 많은지'라는 제목으로 흥미만 끌고 구성품 목록표나 입는 순서는 주지 않는다. 이 글은 한복 구성품을 종류별 표로 정리하고 입는 순서까지 더해 끝낸다.",
+        "searchTargets": [
+          "우리나라 전통의상 종류"
+        ],
+        "mustInclude": [
+          "한복 구성품 목록표(저고리·치마/바지·두루마기·배자·버선·족두리·비녀·노리개·아얌 등)",
+          "혼례복 등 특수 의상 종류",
+          "한복 입는 순서(확인 필요: 문화재청·한복진흥센터 자료)",
+          "영어 표현 Hanbok 소개"
+        ],
+        "mustAvoid": [
+          "기모노·치파오·아오자이 등 다른 나라 전통의상과 혼동"
+        ],
+        "checkBefore": [
+          "한복 구성품 명칭과 입는 순서는 문화재청·한복진흥센터 공식 자료에서 확인"
+        ],
+        "solves": [
+          "우리나라 전통의상 종류가 뭐가 있는지 모름 → 저고리부터 노리개까지 종류별 정리표 제공",
+          "한복 입는 순서를 모름 → 단계별 착용 순서 안내",
+          "한복을 영어로 어떻게 쓰는지 모름 → Hanbok 표현과 설명 제공"
+        ],
+        "actionTitles": [
+          "우리나라 전통의상 종류 정리, 한복 입는 순서까지 확인",
+          "우리나라 전통의상 종류와 한복 영어표현 한번에 확인"
+        ]
+      },
+      "at": "2026-11-03T12:17:24.193Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "우리나라의 전통의상과 장신구",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6130203&docId=76182068&answerNo=1&qb=7Jqw66as64KY6528IOyghO2GteydmOyDgSDsnbTroIfqsowg66eO7J2A7KeAIOyVjOqzoA==",
+          "views": 4266,
+          "answers": 2,
+          "askedAt": "2009.11.13"
+        },
+        {
+          "title": "우리나라의 전통의상의 특징은 무엇무엇이 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6130203&docId=76158343&answerNo=1&qb=7Jqw66as64KY6528IOyghO2GteydmOyDgSDsnbTroIfqsowg66eO7J2A7KeAIOyVjOqzoA==",
+          "views": 967,
+          "answers": 1,
+          "askedAt": "2009.11.18"
+        },
+        {
+          "title": "한복은 우리나라 전통의상입니다. 어떻게 씁....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=11080304&docId=115557038&answerNo=2&qb=7Jqw66as64KY6528IOyghO2GteydmOyDgSDsnbTroIfqsowg66eO7J2A7KeAIOyVjOqzoA==",
+          "views": 874,
+          "answers": 2,
+          "askedAt": "2010.08.21"
+        }
+      ]
+    },
+    {
+      "id": "32ed185071b7207e",
+      "urls": [
+        "https://on.sano.co.kr/%ec%9e%90%eb%9d%bc-%ed%9b%84%eb%a6%ac%ec%8a%a4-%ed%82%a4%ec%a6%88-%ec%82%ac%ec%9d%b4%ec%a6%88-4%ec%84%b8-104-%ec%8b%a4%ec%b0%a9-%ed%9b%84%ea%b8%b0%eb%a1%9c-%ea%b3%a0%eb%af%bc-%ed%95%b4%ea%b2%b0/"
+      ],
+      "guide": {
+        "direction": "지식인에는 '자라 후리스 키즈 104 4살한테 맞나요', '102랑 104 중 뭘 사야 하나요' 같은 사이즈 고민이 반복된다. 고수 블로그 제목은 '실착 후기'만 걸어두고 실측치나 다른 사이즈와의 비교표를 주지 않는다. 이 글은 아이 키·몸무게 대비 104 실측 수치와 102·110 비교, 세탁 후 변형 여부까지 정리해 사이즈 고민을 끝낸다.",
+        "searchTargets": [
+          "자라 후리스 키즈",
+          "자라 후리스 키즈 사이즈",
+          "자라 후리스 베이비"
+        ],
+        "mustInclude": [
+          "실착한 아이의 키·몸무게 (확인 필요: 글 작성자 기준)",
+          "104 사이즈 가슴단면·총장·소매길이 실측치 (확인 필요: 자로 직접 측정)",
+          "102·110 사이즈와의 치수 비교표"
+        ],
+        "mustAvoid": [
+          "자라 후리스 여성·남성·베이비 사이즈 체계를 키즈 사이즈와 섞어 설명하기"
+        ],
+        "checkBefore": [
+          "자라 공식몰 키즈 사이즈 가이드(연령·cm 대조표)",
+          "실제 제품 라벨에 표기된 사이즈·소재 혼용률"
+        ],
+        "solves": [
+          "'104 사이즈 4살한테 맞나요' → 실측 키·몸무게와 치수로 바로 비교",
+          "'102랑 104 중 뭐 사야 하나' → 두 사이즈 실측 비교표로 결론 제시"
+        ],
+        "actionTitles": [
+          "자라 후리스 키즈 104 사이즈, 4살 아이 실측으로 확인하기",
+          "자라 후리스 키즈 104 실착 후기로 세탁 후 변형까지 확인"
+        ]
+      },
+      "at": "2026-11-03T12:17:24.193Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "e512f9a6d53cfded",
+      "urls": [
+        "https://youngwoo.kr/commercial-lease-deposit-pledge-loan/"
+      ],
+      "guide": {
+        "direction": "지식인에는 '상가 보증금 질권설정 할 때 건물주가 승낙 안 해주면 대출 안 되나요', '환산보증금 계산법 모르겠어요' 같은 질문이 올라온다. 고수 블로그 제목은 '필수일까'라는 질문만 던지고 금융사별 승낙서 요건이나 계산 예시는 주지 않는다. 이 글은 환산보증금 계산식과 1·2금융권 한도·금리 비교표, 승낙서 없을 때 대안까지 담아 글 하나로 결론을 낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "금융사별 질권설정 시 건물주 승낙서 요구 여부 (확인 필요: 각 금융사 공시)",
+          "환산보증금 계산식과 예시 (확인 필요: 상가임대차보호법 기준)",
+          "1금융권 vs 2금융권 한도·금리 비교표",
+          "승낙서를 못 받았을 때의 대안(임대차계약서·확정일자 등)",
+          "지역별 환산보증금 상한액 기준표"
+        ],
+        "mustAvoid": [
+          "환산보증금과 전월세 전환율(월세↔보증금 환산)을 같은 개념처럼 섞어 쓰기",
+          "특정 건물주·임차인 사례를 각색해 사생활처럼 단정하기"
+        ],
+        "checkBefore": [
+          "2026년 11월 기준 지역별 환산보증금 상한액(소관 부처 공지)",
+          "실제 대출 취급 은행·캐피탈의 질권설정 승낙서 요구 조건(해당 금융사 영업점 공지)"
+        ],
+        "solves": [
+          "'건물주가 승낙 안 해주면 대출 못 받나요' → 금융사별 승낙서 필수 여부 정리",
+          "'환산보증금 계산법 모르겠어요' → 계산식과 예시로 바로 산출",
+          "'1금융 2금융 어디가 유리한가요' → 한도·금리 비교표로 결론"
+        ],
+        "actionTitles": [
+          "상가보증금 질권설정 대출, 건물주 승낙서 필요 여부 확인",
+          "환산보증금 계산법부터 2금융권 한도까지 한번에 비교",
+          "상가보증금 담보대출, 승낙서 없이 받는 법과 금리 비교"
+        ]
+      },
+      "at": "2026-11-03T12:17:24.193Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
     }
   ],
   "misses": [
