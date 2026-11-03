@@ -586,7 +586,7 @@ function friendlyErrorMessage(error) {
     }
     if (/IMAGEFX_BOT_DETECTED|FLOW_BOT_DETECTED|봇감지 의심/i.test(rawMessage)) {
         const body = rawMessage.replace(/^(IMAGEFX_BOT_DETECTED|FLOW_BOT_DETECTED):/, '').trim();
-        return body || '⚠️ Google 봇감지 의심입니다. 한도가 아닐 가능성이 큽니다. 다른 이미지 엔진(나노바나나/DeepInfra)으로 전환하거나 Google 계정을 변경해주세요.';
+        return body || '⚠️ Google 봇감지 의심입니다. 한도가 아닐 가능성이 큽니다. 다른 이미지 엔진(나노바나나)으로 전환하거나 Google 계정을 변경해주세요.';
     }
     if (/OPENAI_CREDIT_REQUIRED/i.test(rawMessage) || /\b402\b/.test(msg)) {
         return '💳 OpenAI 크레딧을 확인해주세요. platform.openai.com/billing 에서 크레딧·결제 상태를 확인할 수 있습니다.';
@@ -601,7 +601,7 @@ function friendlyErrorMessage(error) {
                 window.showOpenAiTierWarningModal?.('rate-limit-hit');
             }
             catch { }
-            return '🚨 OpenAI RPM 한도 도달 (Tier 시스템). 화면 모달의 안내 참고 또는 다른 엔진(Nano Banana 2/ImageFX/DeepInfra)으로 전환하세요.';
+            return '🚨 OpenAI RPM 한도 도달 (Tier 시스템). 화면 모달의 안내 참고 또는 다른 엔진(Nano Banana 2/ImageFX)으로 전환하세요.';
         }
         return '⚠️ AI 이미지 생성 할당량이 부족합니다. 잠시 후 다시 시도하거나, 설정에서 할당량을 확인해주세요.';
     }
@@ -952,11 +952,6 @@ async function executeFullAutoFlow(formData) {
             const _sourceNames = {
                 'pollinations': 'Pollinations (FLUX, 무료)',
                 'nano-banana-pro': '나노 바나나 프로 (Gemini Native)',
-                'prodia': 'Prodia',
-                'stability': 'Stability AI',
-                'deepinfra': 'DeepInfra FLUX-2',
-                'deepinfra-flux': 'DeepInfra FLUX-2',
-                'falai': 'Fal.ai FLUX',
                 'naver-search': '네이버 이미지 검색',
                 'naver': '네이버 이미지 검색',
             };
@@ -2744,10 +2739,6 @@ async function generateImagesForContent(structuredContent, formData) {
         'local-folder': '📂 내 폴더 (로컬 이미지)',
         'pollinations': 'Pollinations (FLUX, 무료)',
         'nano-banana-pro': '나노 바나나 프로 (Gemini API 키, 과금 가능)',
-        'stability': 'Stability AI',
-        'prodia': 'Prodia AI',
-        'deepinfra': 'FLUX-2 (DeepInfra)',
-        'falai': 'Fal.ai FLUX',
     };
     appendLog(`📸 이미지 소스: ${sourceDisplayNames[formData.imageSource] || formData.imageSource}`);
     const previewSection = document.getElementById('full-auto-preview-section');
@@ -2904,11 +2895,6 @@ async function generateAIImagesForHeadings(headings, formData, structuredContent
         'local-folder': '📂 내 폴더 (로컬)',
         'pollinations': 'Pollinations (FLUX, 무료)',
         'nano-banana-pro': '나노 바나나 프로 (Gemini Native)',
-        'prodia': 'Prodia (과금 가능)',
-        'stability': 'Stability AI',
-        'deepinfra': 'DeepInfra FLUX-2 (과금 가능)',
-        'deepinfra-flux': 'DeepInfra FLUX-2 (과금 가능)',
-        'falai': 'Fal.ai FLUX (과금 가능)',
         'naver-search': '네이버 이미지 검색',
         'naver': '네이버 이미지 검색',
         'imagefx': 'ImageFX (Google Labs, 제한 가능)',
@@ -2918,7 +2904,6 @@ async function generateAIImagesForHeadings(headings, formData, structuredContent
         'nano-banana': '나노바나나',
         'nano-banana-2': '나노바나나2',
         'openai-image': 'OpenAI DALL-E',
-        'leonardoai': 'Leonardo AI',
     };
     appendLog(`🎨 ${sourceNames[imageSource] || imageSource}로 ${headings.length}개 이미지 생성 시작...`);
     appendLog('🧵 안정성을 위해 이미지는 1개씩 순차 생성합니다.');

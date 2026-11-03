@@ -176,9 +176,6 @@ contextBridge.exposeInMainWorld('api', {
   // ✅ [2026-03-02] 이미지 API 일일 사용량 조회
   getImageApiUsage: (): Promise<{ success: boolean; todayCalls?: number; todayCostKrw?: number; date?: string }> =>
     ipcRenderer.invoke('quota:getImageUsage'),
-  // ✅ [2026-03-02] Leonardo AI 크레딧 조회
-  getLeonardoCredits: (): Promise<{ success: boolean; credits?: number; message?: string; raw?: any }> =>
-    ipcRenderer.invoke('quota:getLeonardoCredits'),
   // ✅ [2026-03-18] Gemini API 할당량 확인
   checkGeminiQuota: (apiKey: string): Promise<{ success: boolean; message?: string; data?: any }> =>
     ipcRenderer.invoke('gemini:checkQuota', apiKey),

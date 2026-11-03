@@ -11,7 +11,7 @@ function read(rel: string): string {
 }
 
 /**
- * Regression guards for the DeepInfra empty-prompt bug (2026-06-11 live run).
+ * Regression guards for the (former DeepInfra) empty-prompt bug (2026-06-11 live run).
  *
  * Symptom: keyword "거울 물때 청소법" produced unrelated images of random people.
  * Root cause chain observed in live logs:
@@ -49,17 +49,19 @@ describe('prompt safety helpers', () => {
   });
 });
 
-describe('deepinfraGenerator wiring', () => {
-  it('routes Korean-only prompts to AI-translation recovery instead of calling the API with an empty prompt', () => {
-    const code = read('image/deepinfraGenerator.ts');
-    expect(code).toContain('isPromptContentEmpty(');
-    expect(code).toContain('AI 번역 복구');
+describe('flowGenerator wiring (Korean prompts never reach the engine untranslated)', () => {
+  it('routes Korean-only prompts to AI translation instead of sending them as-is', () => {
+    const code = read('image/flowGenerator.ts');
+    expect(code).toContain('hasUsableEnglishPrompt(');
+    expect(code).toContain('translateKoreanToEnglishWithAI(');
+    expect(code).toContain('/[가-힣]/.test(source)');
+    // The translator lives in its own module now that the DeepInfra generator is gone.
+    expect(read('image/koreanPromptTranslator.ts')).toContain('export async function translateKoreanToEnglishWithAI');
   });
 
   it('does not let a Korean-laden englishPrompt bypass the translation fallback', () => {
-    const code = read('image/deepinfraGenerator.ts');
-    expect(code).toContain('hasUsableEnglishPrompt(');
-    // The old exemption that caused the bug:
+    const code = read('image/flowGenerator.ts');
+    expect(code).toContain('hasUsableEnglishPrompt(item.englishPrompt)');
     expect(code).not.toMatch(/shouldUseKoreanFallback = isCharacterOrArtStyle\s*\?\s*\(hasKoreanHeading && !item\.englishPrompt\)/);
   });
 });

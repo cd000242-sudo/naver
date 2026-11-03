@@ -73,7 +73,6 @@ export type RendererAutomationPayload = {
     collectedImages?: Array<{ id: string; url: string; thumbnailUrl: string; title: string; source: string; tags?: string[] }>;
     postId?: string;
     categoryName?: string;
-    stabilityModel?: string;
     convertToGif?: boolean;
     videoProvider?: string;
     useIntelligentImagePlacement?: boolean;

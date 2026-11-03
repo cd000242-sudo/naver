@@ -1,5 +1,5 @@
 /**
- * 제품에서 빠진 이미지 엔진(Leonardo AI · DeepInfra · Prodia)의 저장된 선택값 처리.
+ * 제품에서 빠진 이미지 엔진(Leonardo AI · DeepInfra · Prodia · Fal.ai · Stability AI)의 저장된 선택값 처리.
  * 렌더러 번들에 인라인되는 파일이라 다른 모듈을 import 하지 않는다.
  */
 
@@ -21,6 +21,8 @@ const RETIRED_IMAGE_ENGINE_LABELS: Readonly<Record<string, string>> = {
   'deepinfra-flux': 'DeepInfra',
   'deepinfra-flux-2': 'DeepInfra',
   prodia: 'Prodia',
+  falai: 'Fal.ai',
+  stability: 'Stability AI',
 };
 
 /** 보류 표식을 담는 localStorage 키 (사용자가 새 엔진을 고르면 지워진다) */

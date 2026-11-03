@@ -1246,22 +1246,16 @@ export async function initPriceInfoModal(): Promise<void> {
 
     // ✅ [2026-01-16] 이미지 모델 고급 설정 로드
     try {
-      const falaiModelSelect = document.getElementById('falai-model-select') as HTMLSelectElement;
-      const stabilityModelSelect = document.getElementById('stability-model-select') as HTMLSelectElement;
       const nanoBananaMainModel = document.getElementById('nano-banana-main-model') as HTMLSelectElement;
       const nanoBananaSubModel = document.getElementById('nano-banana-sub-model') as HTMLSelectElement;
       // nanoBananaThumbnailModel 제거됨 (대표 이미지와 통합)
       const pollinationsModelSelect = document.getElementById('pollinations-model-select') as HTMLSelectElement;
 
-      if (falaiModelSelect) falaiModelSelect.value = (config as any).falaiModel || 'flux-realism';
-      if (stabilityModelSelect) stabilityModelSelect.value = (config as any).stabilityModel || 'sd35-large-turbo';
       if (nanoBananaMainModel) nanoBananaMainModel.value = normalizeRetiredNanoSlotModel((config as any).nanoBananaMainModel || 'gemini-3-1-flash');  // ✅ [2026-03-11] 기본값 나노바나나2로 통일
       if (nanoBananaSubModel) nanoBananaSubModel.value = normalizeRetiredNanoSlotModel((config as any).nanoBananaSubModel || 'gemini-3-1-flash');  // ✅ [2026-03-11] 기본값 나노바나나2로 통일
       if (pollinationsModelSelect) pollinationsModelSelect.value = (config as any).pollinationsModel || 'default';
 
       console.log('[Settings] 이미지 모델 고급 설정 로드됨:', {
-        falaiModel: (config as any).falaiModel,
-        stabilityModel: (config as any).stabilityModel,
         nanoBananaMainModel: (config as any).nanoBananaMainModel,
         nanoBananaSubModel: (config as any).nanoBananaSubModel,
         nanoBananaThumbnailModel: (config as any).nanoBananaThumbnailModel
@@ -1282,8 +1276,6 @@ export async function initPriceInfoModal(): Promise<void> {
       const imagePresetInput = document.getElementById('image-preset-input') as HTMLInputElement;
       if (presetBudgetBtn) {
         presetBudgetBtn.onclick = () => {
-          if (falaiModelSelect) falaiModelSelect.value = 'flux-schnell';
-          if (stabilityModelSelect) stabilityModelSelect.value = 'sdxl-1.0';
           if (nanoBananaMainModel) nanoBananaMainModel.value = 'gemini-3-1-flash';  // ✅ [2026-03-11] 가성비 = 나노바나나2 (₩97/장)
           if (nanoBananaSubModel) nanoBananaSubModel.value = 'gemini-3-1-flash';
           if (imagePresetInput) imagePresetInput.value = 'budget';
@@ -1295,8 +1287,6 @@ export async function initPriceInfoModal(): Promise<void> {
       const presetPremiumBtn = document.getElementById('preset-premium-btn');
       if (presetPremiumBtn) {
         presetPremiumBtn.onclick = () => {
-          if (falaiModelSelect) falaiModelSelect.value = 'flux-1.1-pro';
-          if (stabilityModelSelect) stabilityModelSelect.value = 'stable-image-ultra';
           // ✅ [v2.7.24] gemini-3.x 프리뷰는 미존재 ID라 'gemini-3-1-flash'(=정식 GA)로 통합
           if (nanoBananaMainModel) nanoBananaMainModel.value = 'gemini-3-1-flash';
           if (nanoBananaSubModel) nanoBananaSubModel.value = 'gemini-3-1-flash';
@@ -1383,8 +1373,6 @@ export async function initPriceInfoModal(): Promise<void> {
         console.log('[Settings] 네이버 Client ID 입력값:', naverClientIdInput?.value ? '✅' : '❌');
         console.log('[Settings] 네이버 Client Secret 입력값:', naverClientSecretInput?.value ? '***' : '없음');
         console.log('[Settings] 네이버 광고 API Key 입력값:', naverAdApiKeyInput?.value ? '✅' : '❌');
-
-        const stabilityApiKeyInput = undefined; // deprecated
 
         const parsedGeminiExtraKeys = (geminiExtraApiKeys?.value || '')
           .split(/[\n,]+/)

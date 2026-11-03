@@ -75,7 +75,6 @@ export function collectFormData(skipImages: boolean = false): RendererAutomation
     skipImages,
     targetAge: (targetAgeSelect?.value as '20s' | '30s' | '40s' | '50s' | 'all') || 'all',
     // ✅ Stability AI 모델 및 GIF 변환 옵션 추가
-    stabilityModel: (document.getElementById('stability-model-select') as HTMLSelectElement)?.value || 'ultra',
     convertToGif: (document.getElementById('convert-to-gif-checkbox') as HTMLInputElement)?.checked || false,
     videoProvider: (document.getElementById('video-provider-select') as HTMLSelectElement)?.value || 'veo',
     keepBrowserOpen: true, // ✅ 항상 브라우저 세션 유지

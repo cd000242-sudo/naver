@@ -144,9 +144,7 @@ export function toBriefVisualRole(
 
 /**
  * Engines whose own camera/colour rotation is switched off when a role is planned. Only OpenAI sends
- * the brief (with the role lines) to the model. DeepInfra and Leonardo swap the brief for a short
- * English wrapper whenever the translated hint is usable (buildSafeEnglishProviderImagePrompt), which
- * drops the role — switching their rotation off too would leave no camera direction at all.
+ * the brief (with the role lines) to the model.
  */
 export function engineHonorsVisualRole(provider: string | undefined): boolean {
   return /openai|gpt-image/u.test(String(provider || '').trim().toLowerCase());

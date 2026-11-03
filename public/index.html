@@ -5196,7 +5196,7 @@
                                             💡 비용 절감 모드는 기본 ON입니다. 품질 보정은 로컬 보정과 fact-check 중심으로 유지하고, 추가 LLM 재호출은 필요한 경우에만 사용합니다.
                                         </p>
                                     </div>
-                                    <!-- ✅ [2026-01-27] Gemini 이미지/텍스트 플랜 섹션 끝 - settings-section-api-keys는 Fal.ai 뒤에서 닫힘 -->
+                                    <!-- ✅ [2026-01-27] Gemini 이미지/텍스트 플랜 섹션 끝 - settings-section-api-keys는 아래에서 닫힘 -->
                                 </div>
                             </div>
 
@@ -5421,7 +5421,7 @@
                         </div><!-- ✅ 통합 API 키 카드 닫힘 -->
 
                         <!-- ✅ AI 텍스트 엔진 선택 섹션 시작 (토글 가능) - [2026-01-27] 위치 수정됨 -->
-                        <!-- ✅ [2026-01-27 FIX] settings-section-api-keys는 여기서 닫지 않음 - Stability AI, Fal.ai 포함 후 닫힘 -->
+                        <!-- ✅ [2026-01-27 FIX] settings-section-api-keys는 여기서 닫지 않음 -->
 
                         <div id="settings-section-text-engine" style="display: none;">
                             <!-- ✅ Gemini 텍스트 엔진 선택 -->
@@ -5860,7 +5860,7 @@
                     </div>
                 </div><!-- ✅ [2026-01-27 FIX] settings-section-text-engine 닫힘 -->
 
-            </div><!-- ✅ settings-section-api-keys 닫힘 (통합 카드에 Gemini + Stability AI + Fal.ai 포함) -->
+            </div><!-- ✅ settings-section-api-keys 닫힘 (통합 카드에 Gemini 포함) -->
 
             <!-- ✅ 이미지 생성 모델 설정 섹션 (토글 가능) -->
             <div id="settings-section-image-model" style="display: none;">
@@ -5965,42 +5965,6 @@
 
                     <!-- 모델 선택 드롭다운들 -->
                     <div style="display: grid; gap: 1rem;">
-
-                        <!-- Fal.ai 모델 선택 -->
-                        <div
-                            style="background: rgba(236, 72, 153, 0.05); padding: 1rem; border-radius: 10px; border: 1px solid rgba(236, 72, 153, 0.2);">
-                            <label for="falai-model-select"
-                                style="display: block; font-weight: 600; color: #ec4899; margin-bottom: 0.5rem; font-size: 0.9rem;">
-                                🎨 Fal.ai 모델
-                            </label>
-                            <select id="falai-model-select"
-                                style="width: 100%; padding: 0.75rem; background: var(--bg-secondary); border: 2px solid rgba(236, 72, 153, 0.3); border-radius: 8px; color: var(--text-strong); font-size: 0.9rem; cursor: pointer;">
-                                <option value="flux-realism">📷 FLUX Realism - ₩29/초 (실사 추천)</option>
-                                <option value="flux-schnell">⚡ FLUX Schnell - ₩11/MP (초고속)</option>
-                                <option value="flux-dev">🔧 FLUX Dev - ₩35/MP (테스트용)</option>
-                                <option value="flux-1.1-pro">🏆 FLUX 1.1 Pro - ₩77/이미지 (최고품질)</option>
-                            </select>
-                        </div>
-
-                        <!-- Stability.AI 모델 선택 -->
-                        <div
-                            style="background: rgba(59, 130, 246, 0.05); padding: 1rem; border-radius: 10px; border: 1px solid rgba(59, 130, 246, 0.2);">
-                            <label for="stability-model-select"
-                                style="display: block; font-weight: 600; color: #3b82f6; margin-bottom: 0.5rem; font-size: 0.9rem;">
-                                🚀 Stability.AI 모델
-                            </label>
-                            <select id="stability-model-select"
-                                style="width: 100%; padding: 0.75rem; background: var(--bg-secondary); border: 2px solid rgba(59, 130, 246, 0.3); border-radius: 8px; color: var(--text-strong); font-size: 0.9rem; cursor: pointer;">
-                                <option value="sd35-large-turbo">🚀 SD 3.5 Large Turbo - ₩56 (고품질+빠름)
-                                </option>
-                                <option value="sdxl-1.0">💰 SDXL 1.0 - ₩13 (최저가)</option>
-                                <option value="sd35-flash">⚡ SD 3.5 Flash - ₩35 (빠른 속도)</option>
-                                <option value="sd35-medium">⚖️ SD 3.5 Medium - ₩49 (균형)</option>
-                                <option value="sd35-large">🎨 SD 3.5 Large - ₩91 (디테일)</option>
-                                <option value="stable-image-ultra">👑 Stable Image Ultra - ₩112 (최고품질)
-                                </option>
-                            </select>
-                        </div>
 
                         <!-- Nano Banana Pro 모델 선택 (2분류로 간소화) -->
                         <div

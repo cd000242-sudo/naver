@@ -5,7 +5,6 @@ import { ipcMain } from 'electron';
 import { IpcContext } from '../types';
 import * as AuthUtils from '../utils/authUtils.js';
 import { getStatus as getQuotaStatus } from '../../quotaManager.js';
-import { loadConfig } from '../../configManager.js';
 
 /**
  * 쿼터 핸들러 등록
@@ -47,31 +46,6 @@ export function registerQuotaHandlers(_ctx: IpcContext): void {
             return { success: true, ...status };
         } catch (error) {
             return { success: false, message: (error as Error).message };
-        }
-    });
-
-    // ✅ [2026-03-02] Leonardo AI 크레딧 잔액 조회
-    ipcMain.handle('quota:getLeonardoCredits', async () => {
-        try {
-            const config = await loadConfig();
-            const apiKey = (config as any).leonardoaiApiKey as string;
-            if (!apiKey) {
-                return { success: false, message: 'API 키 미설정' };
-            }
-            const axios = (await import('axios')).default;
-            const response = await axios.get('https://cloud.leonardo.ai/api/rest/v1/me', {
-                headers: { 'Authorization': `Bearer ${apiKey}` },
-                timeout: 10000,
-            });
-            const userData = response.data?.user_details?.[0] || response.data;
-            return {
-                success: true,
-                credits: userData.apiConcurrencySlots || userData.apiCredit || userData.tokenRenewalDate || 0,
-                apiPlanTokenRenewalDate: userData.apiPlanTokenRenewalDate || null,
-                raw: userData,
-            };
-        } catch (error: any) {
-            return { success: false, message: error?.response?.status === 401 ? 'API 키 인증 실패' : (error as Error).message };
         }
     });
 }

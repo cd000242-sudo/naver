@@ -1,6 +1,6 @@
 /**
  * 이미지 모델 설정 통합 테스트
- * - 새 이미지 제공자(OpenAI Image, Leonardo AI)의 설정 저장/불러오기 검증
+ * - 새 이미지 제공자(OpenAI Image)의 설정 저장/불러오기 검증
  * - configManager와 생성기 간 설정 일관성 확인
  */
 
@@ -100,8 +100,6 @@ async function testDefaultValues(): Promise<boolean> {
         const currentConfig = await loadConfig();
         const cleanConfig: any = { ...currentConfig };
         delete cleanConfig.openaiImageApiKey;
-        delete cleanConfig.leonardoaiApiKey;
-        delete cleanConfig.leonardoaiModel;
 
         await saveConfig(cleanConfig);
 
@@ -198,7 +196,7 @@ async function testInvalidModelName(): Promise<boolean> {
 
     try {
         await saveConfig({
-            leonardoaiModel: 'invalid-model-name' as any,
+            openaiImageModel: 'invalid-model-name' as any,
         } as AppConfig);
 
         const loaded = await loadConfig();
@@ -221,13 +219,10 @@ async function testGeneratorUsesConfig(): Promise<boolean> {
     try {
         // 새 생성기 모듈 가져오기 (존재 확인 용도)
         const openaiModule = await import('../image/openaiImageGenerator.js');
-        const leonardoModule = await import('../image/leonardoAIGenerator.js');
 
         // 함수 export 확인
         const hasOpenAI = typeof openaiModule.generateWithOpenAIImage === 'function' &&
             typeof openaiModule.generateSingleOpenAIImage === 'function';
-        const hasLeonardo = typeof leonardoModule.generateWithLeonardoAI === 'function' &&
-            typeof leonardoModule.generateSingleLeonardoAIImage === 'function';
 
         // 설정 저장
         await saveConfig({
@@ -235,14 +230,14 @@ async function testGeneratorUsesConfig(): Promise<boolean> {
         } as AppConfig);
 
         const loaded = await loadConfig();
-        const hasLeonardoSetting = loaded.openaiImageModel === 'gpt-image-2.5-flare';
+        const hasModelSetting = loaded.openaiImageModel === 'gpt-image-2.5-flare';
 
-        if (hasOpenAI && hasLeonardo && hasLeonardoSetting) {
+        if (hasOpenAI && hasModelSetting) {
             logTest(step, true, '모든 생성기 모듈 임포트 및 설정 확인됨');
             return true;
         } else {
             logTest(step, false, '생성기 모듈 또는 설정이 예상과 다름', {
-                hasOpenAI, hasLeonardo, hasLeonardoSetting
+                hasOpenAI, hasModelSetting
             });
             return false;
         }

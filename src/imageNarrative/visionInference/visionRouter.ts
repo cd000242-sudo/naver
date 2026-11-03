@@ -10,8 +10,8 @@
  * 4. Wrap the result in InferenceResponse with latency metadata.
  *
  * Only Gemini and OpenAI are implemented in Phase 1.
- * Claude / DeepInfra adapters are stubs that throw "not implemented" —
- * the router falls back to OpenAI for those providers.
+ * The Claude adapter is a stub that throws "not implemented" —
+ * the router falls back to OpenAI for that provider.
  */
 
 import { runGeminiVision } from './geminiVisionAdapter.js';
@@ -42,7 +42,6 @@ const PROVIDER_DEFAULT_MODEL: Record<VisionProvider, string> = {
   gemini: VISION_MODELS.GEMINI_FLASH,
   openai: VISION_MODELS.OPENAI_41,
   claude: VISION_MODELS.CLAUDE_SONNET,
-  deepinfra: 'llama-3.2-vision',
 };
 
 // ---------------------------------------------------------------------------
@@ -57,7 +56,6 @@ function resolveApiKey(provider: VisionProvider): string {
     // reading only ANTHROPIC_API_KEY made every claude-vendor photo inference fail
     // with "API key not set" even when the key was configured (live report).
     claude: process.env['ANTHROPIC_API_KEY'] ?? process.env['CLAUDE_API_KEY'] ?? '',
-    deepinfra: process.env['DEEPINFRA_API_KEY'] ?? '',
   };
   const key = envMap[provider];
   if (!key) {
@@ -81,9 +79,8 @@ const FALLBACK_CHAIN: Partial<Record<VisionProvider, VisionProvider>> = {
   gemini: 'openai',
   openai: 'gemini',
   // openai has no automatic fallback — callers must handle the error
-  // claude / deepinfra fall back to openai so the pipeline isn't stranded
+  // claude falls back to openai so the pipeline isn't stranded
   claude: 'openai',
-  deepinfra: 'openai',
 };
 
 // ---------------------------------------------------------------------------
@@ -103,8 +100,6 @@ async function callAdapter(
       return runOpenAIVision(context, options, apiKey);
     case 'claude':
       return runClaudeVision(context, options, apiKey);
-    case 'deepinfra':
-      throw new Error('DeepInfra Vision adapter is not implemented in Phase 1');
     default: {
       // TypeScript exhaustive check — this branch should never be reached
       const _exhaustive: never = provider;
@@ -149,7 +144,7 @@ export async function inferImage(
   const cached = getCachedInference(context.imageBase64, primaryProvider, mode);
   if (cached) {
     trackImageNarrativeUsage(
-      primaryProvider as 'gemini' | 'openai' | 'claude' | 'deepinfra',
+      primaryProvider as 'gemini' | 'openai' | 'claude',
       { model: PROVIDER_DEFAULT_MODEL[primaryProvider], images: 1 },
       true,
     );
@@ -178,7 +173,7 @@ export async function inferImage(
     };
     setCachedInference(context.imageBase64, primaryProvider, mode, response);
     trackImageNarrativeUsage(
-      primaryProvider as 'gemini' | 'openai' | 'claude' | 'deepinfra',
+      primaryProvider as 'gemini' | 'openai' | 'claude',
       { model: PROVIDER_DEFAULT_MODEL[primaryProvider] ?? PROVIDER_DEFAULT_MODEL.gemini, images: 1 },
     );
     return response;
@@ -240,7 +235,7 @@ export async function inferImage(
     };
     setCachedInference(context.imageBase64, fallbackProvider, mode, response);
     trackImageNarrativeUsage(
-      fallbackProvider as 'gemini' | 'openai' | 'claude' | 'deepinfra',
+      fallbackProvider as 'gemini' | 'openai' | 'claude',
       { model: PROVIDER_DEFAULT_MODEL[fallbackProvider], images: 1 },
     );
     return response;

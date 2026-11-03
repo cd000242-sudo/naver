@@ -55,15 +55,15 @@ describe('젠스파크 등록 지점', () => {
 describe('젠스파크 생성 분기(imageGenerator.ts)', () => {
   const code = read('imageGenerator.ts');
   const gStart = code.indexOf("if (normalizedProvider === 'genspark') {");
-  const branch = code.slice(gStart, code.indexOf("if (normalizedProvider === 'deepinfra') {"));
+  const branch = code.slice(gStart, code.indexOf("if (normalizedProvider === 'naver') {"));
 
   it('dropshot 분기 바로 뒤에 같은 모양의 genspark 분기가 있다', () => {
     const dropshotAt = code.indexOf("if (normalizedProvider === 'dropshot') {");
     const gensparkAt = code.indexOf("if (normalizedProvider === 'genspark') {");
-    const deepinfraAt = code.indexOf("if (normalizedProvider === 'deepinfra') {");
+    const naverAt = code.indexOf("if (normalizedProvider === 'naver') {");
     expect(dropshotAt).toBeGreaterThan(0);
     expect(gensparkAt).toBeGreaterThan(dropshotAt);
-    expect(deepinfraAt).toBeGreaterThan(gensparkAt);
+    expect(naverAt).toBeGreaterThan(gensparkAt);
   });
 
   it('결과 기록 → 한글 처리 → finalizeImages, 실패는 폴백 없이 [젠스파크] 오류로 throw', () => {
@@ -105,7 +105,7 @@ describe('한글 판정 — 모델 선택 인자', () => {
     for (const e of ['nano-banana-2', 'nano-banana-pro', 'flow', 'openai-image', 'dropshot']) {
       expect(drawsKoreanTextItself(e)).toBe(true);
     }
-    for (const e of ['nano-banana', 'prodia', 'imagefx']) expect(drawsKoreanTextItself(e)).toBe(false);
+    for (const e of ['nano-banana', 'naver', 'imagefx']) expect(drawsKoreanTextItself(e)).toBe(false);
   });
 
   it('genspark 는 모델의 drawsKorean 을 본다(빈 값=기본 모델, 모르는 값=false)', () => {
@@ -120,7 +120,7 @@ describe('한글 판정 — 모델 선택 인자', () => {
   });
 
   it('다른 엔진은 모델 인자를 무시한다', () => {
-    expect(drawsKoreanTextItself('prodia', 'gpt-image-2.5')).toBe(false);
+    expect(drawsKoreanTextItself('naver', 'gpt-image-2.5')).toBe(false);
     expect(drawsKoreanTextItself('dropshot', 'z-image-turbo')).toBe(true);
   });
 

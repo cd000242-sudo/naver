@@ -144,15 +144,9 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
     expect(content).not.toContain("openAIModels = ['gpt-4o-search-preview']");
   });
 
-  describe('이미지 기본 엔진 — schnell(저가) 고정', () => {
-    const content = read('image/deepinfraGenerator.ts');
-
-    it('DEFAULT_DEEPINFRA_MODEL은 FLUX-1-schnell', () => {
-      expect(content).toMatch(/DEFAULT_DEEPINFRA_MODEL\s*=\s*['"]black-forest-labs\/FLUX-1-schnell['"]/);
-    });
-
-    it('DEFAULT_DEEPINFRA_MODEL은 FLUX-2-dev가 아님 (회귀 방지)', () => {
-      expect(content).not.toMatch(/DEFAULT_DEEPINFRA_MODEL\s*=\s*['"]black-forest-labs\/FLUX-2-dev['"]/);
+  describe('지원 종료 이미지 엔진 — 생성기 파일이 남아 있지 않다', () => {
+    it.each(['deepinfraGenerator.ts', 'leonardoAIGenerator.ts', 'prodiaGenerator.ts'])('%s 는 삭제됐다', (file) => {
+      expect(() => read(`image/${file}`)).toThrow();
     });
   });
 

@@ -57,7 +57,7 @@ export const NAVER_WAIT_UNTIL = {
 };
 
 /**
- * 외부 사이트 (Flow / ImageFX / Leonardo / DeepInfra) 타임아웃.
+ * 외부 사이트 (Flow / ImageFX) 타임아웃.
  * 발행 path 아니지만 일관성을 위해 중앙화.
  */
 export const EXTERNAL_TIMEOUTS = {

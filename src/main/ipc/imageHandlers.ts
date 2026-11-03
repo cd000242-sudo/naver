@@ -10,7 +10,6 @@ import * as os from 'os';
 import { IpcContext } from '../types';
 import axios from 'axios';
 import { spawn } from 'child_process';
-import { generateSingleLeonardoAIImage } from '../../image/leonardoAIGenerator.js';
 // [SPEC-FREEZE-GUARD-001-P2 R2 / v2.10.261] Base64 디코딩 워커 분리 — 1MB+ Gemini/Veo inlineData
 import { decodeBase64Async } from '../utils/base64Async.js';
 import { sanitizeDropshotErrorMessage } from '../../image/dropshotBrowser.js';
@@ -412,57 +411,8 @@ export function registerImageHandlers(ctx: IpcContext): void {
             const saveDir = path.join(app.getPath('userData'), 'test-images');
             await fsp.mkdir(saveDir, { recursive: true });
 
-            // ✅ [2026-02-08] DeepInfra 모델 동적 매핑
-            const DEEPINFRA_MODEL_MAP: Record<string, string> = {
-                'flux-2-dev': 'black-forest-labs/FLUX-2-dev',
-                'flux-dev': 'black-forest-labs/FLUX-1-dev',
-                'flux-schnell': 'black-forest-labs/FLUX-1-schnell'
-            };
-
             // ✅ 엔진별 분기 처리
             switch (imageSource) {
-                case 'deepinfra':
-                case 'deepinfra-flux': {
-                    // ✅ [2026-02-08] 사용자 설정 모델 동적 선택
-                    const deepinfraApiKey = (config as any).deepinfraApiKey;
-                    if (!deepinfraApiKey) {
-                        return { success: false, error: 'DeepInfra API 키가 설정되지 않았습니다. 환경설정에서 입력해주세요.' };
-                    }
-
-                    const selectedModelKey = (config as any).deepinfraModel || 'flux-2-dev';
-                    const actualModel = DEEPINFRA_MODEL_MAP[selectedModelKey] || 'black-forest-labs/FLUX-2-dev';
-                    console.log(`[imageHandlers] 🔧 DeepInfra 모델: ${selectedModelKey} → ${actualModel}`);
-
-                    const response = await axios.post(
-                        'https://api.deepinfra.com/v1/openai/images/generations',
-                        {
-                            model: actualModel, // ✅ 동적 모델 선택!
-                            prompt: fullPrompt,
-                            n: 1,
-                            size: `${size.width}x${size.height}`
-                        },
-                        {
-                            headers: {
-                                'Authorization': `Bearer ${deepinfraApiKey}`,
-                                'Content-Type': 'application/json'
-                            },
-                            timeout: 60000
-                        }
-                    );
-
-                    if (response.data?.data?.[0]?.url) {
-                        const imageUrl = response.data.data[0].url;
-                        const imageResponse = await axios.get(imageUrl, { responseType: 'arraybuffer' });
-                        const buffer = Buffer.from(imageResponse.data);
-
-                        const fileName = `test-${style}-deepinfra-${Date.now()}.png`;
-                        const filePath = path.join(saveDir, fileName);
-                        await fsp.writeFile(filePath, buffer);
-                        result = { success: true, path: filePath };
-                    }
-                    break;
-                }
-
                 case 'nano-banana':
                 case 'nano-banana-2':
                 case 'nano-banana-pro': {
@@ -514,157 +464,6 @@ export function registerImageHandlers(ctx: IpcContext): void {
                                 break;
                             }
                         }
-                    }
-                    break;
-                }
-
-                case 'falai':
-                case 'fal-ai': {
-                    // Fal.ai (FLUX)
-                    const falApiKey = (config as any).falApiKey;
-                    if (!falApiKey) {
-                        return { success: false, error: 'Fal.ai API 키가 설정되지 않았습니다. 환경설정에서 입력해주세요.' };
-                    }
-
-                    const response = await axios.post(
-                        'https://fal.run/fal-ai/fast-sdxl',
-                        {
-                            prompt: fullPrompt,
-                            image_size: { width: size.width, height: size.height },
-                            num_images: 1
-                        },
-                        {
-                            headers: {
-                                'Authorization': `Key ${falApiKey}`,
-                                'Content-Type': 'application/json'
-                            },
-                            timeout: 60000
-                        }
-                    );
-
-                    if (response.data?.images?.[0]?.url) {
-                        const imageUrl = response.data.images[0].url;
-                        const imageResponse = await axios.get(imageUrl, { responseType: 'arraybuffer' });
-                        const buffer = Buffer.from(imageResponse.data);
-
-                        const fileName = `test-${style}-fal-${Date.now()}.png`;
-                        const filePath = path.join(saveDir, fileName);
-                        await fsp.writeFile(filePath, buffer);
-                        result = { success: true, path: filePath };
-                    }
-                    break;
-                }
-
-                case 'prodia': {
-                    // Prodia AI
-                    const prodiaApiKey = (config as any).prodiaApiKey || (config as any).prodiaToken;
-                    if (!prodiaApiKey) {
-                        return { success: false, error: 'Prodia API 키가 설정되지 않았습니다. 환경설정에서 입력해주세요.' };
-                    }
-
-                    const response = await axios.post(
-                        'https://api.prodia.com/v1/sd/generate',
-                        {
-                            prompt: fullPrompt,
-                            model: 'v1-5-pruned-emaonly.safetensors [d7049739]',
-                            width: Math.min(size.width, 768),
-                            height: Math.min(size.height, 768)
-                        },
-                        {
-                            headers: {
-                                'X-Prodia-Key': prodiaApiKey,
-                                'Content-Type': 'application/json'
-                            },
-                            timeout: 60000
-                        }
-                    );
-
-                    if (response.data?.job) {
-                        // 작업 완료 대기
-                        let jobResult = null;
-                        for (let i = 0; i < 30; i++) {
-                            await new Promise(r => setTimeout(r, 2000));
-                            const statusRes = await axios.get(`https://api.prodia.com/v1/job/${response.data.job}`, {
-                                headers: { 'X-Prodia-Key': prodiaApiKey }
-                            });
-                            if (statusRes.data?.status === 'succeeded' && statusRes.data?.imageUrl) {
-                                jobResult = statusRes.data.imageUrl;
-                                break;
-                            } else if (statusRes.data?.status === 'failed') {
-                                break;
-                            }
-                        }
-
-                        if (jobResult) {
-                            const imageResponse = await axios.get(jobResult, { responseType: 'arraybuffer' });
-                            const buffer = Buffer.from(imageResponse.data);
-
-                            const fileName = `test-${style}-prodia-${Date.now()}.png`;
-                            const filePath = path.join(saveDir, fileName);
-                            await fsp.writeFile(filePath, buffer);
-                            result = { success: true, path: filePath };
-                        }
-                    }
-                    break;
-                }
-
-                case 'stability': {
-                    // Stability AI
-                    const stabilityApiKey = (config as any).stabilityApiKey;
-                    if (!stabilityApiKey) {
-                        return { success: false, error: 'Stability AI API 키가 설정되지 않았습니다. 환경설정에서 입력해주세요.' };
-                    }
-
-                    const formData = new FormData();
-                    formData.append('prompt', fullPrompt);
-                    formData.append('output_format', 'png');
-
-                    const response = await axios.post(
-                        'https://api.stability.ai/v2beta/stable-image/generate/core',
-                        formData,
-                        {
-                            headers: {
-                                'Authorization': `Bearer ${stabilityApiKey}`,
-                                'Accept': 'image/*'
-                            },
-                            responseType: 'arraybuffer',
-                            timeout: 60000
-                        }
-                    );
-
-                    if (response.data) {
-                        const buffer = Buffer.from(response.data);
-                        const fileName = `test-${style}-stability-${Date.now()}.png`;
-                        const filePath = path.join(saveDir, fileName);
-                        await fsp.writeFile(filePath, buffer);
-                        result = { success: true, path: filePath };
-                    }
-                    break;
-                }
-
-                case 'leonardoai': {
-                    // ✅ [2026-02-23] Leonardo AI (Phoenix, SeeDream, Ideogram 등)
-                    const leonardoApiKey = (config as any).leonardoaiApiKey;
-                    if (!leonardoApiKey) {
-                        return { success: false, error: 'Leonardo AI API 키가 설정되지 않았습니다. 환경설정에서 입력해주세요.' };
-                    }
-
-                    const leonardoModel = (config as any).leonardoaiModel || 'seedream-4.5';
-                    console.log(`[imageHandlers] 🎨 Leonardo AI 테스트 이미지 생성 (모델: ${leonardoModel})`);
-
-                    const leonardoResult = await generateSingleLeonardoAIImage(
-                        { prompt: fullPrompt, size: `${size.width}x${size.height}`, model: leonardoModel },
-                        leonardoApiKey
-                    );
-
-                    if (leonardoResult.success && leonardoResult.localPath) {
-                        // 테스트 이미지 디렉토리로 복사
-                        const fileName = `test-${style}-leonardo-${Date.now()}.png`;
-                        const filePath = path.join(saveDir, fileName);
-                        await fsp.copyFile(leonardoResult.localPath, filePath);
-                        result = { success: true, path: filePath };
-                    } else {
-                        return { success: false, error: leonardoResult.error || 'Leonardo AI 생성 실패' };
                     }
                     break;
                 }
@@ -871,35 +670,7 @@ export function registerImageHandlers(ctx: IpcContext): void {
 
             let result: any = null;
 
-            // ✅ DeepInfra 모델 매핑 (generate-test-image와 동일)
-            const DEEPINFRA_MODEL_MAP: Record<string, string> = {
-                'flux-2-dev': 'black-forest-labs/FLUX-2-dev',
-                'flux-dev': 'black-forest-labs/FLUX-1-dev',
-                'flux-schnell': 'black-forest-labs/FLUX-1-schnell'
-            };
-
             switch (route.kind) {
-                case 'deepinfra': {
-                    const deepinfraApiKey = (config as any).deepinfraApiKey;
-                    if (!deepinfraApiKey) return { success: false, error: 'DeepInfra API 키가 설정되지 않았습니다.' };
-
-                    const selectedModelKey = (config as any).deepinfraModel || 'flux-2-dev';
-                    const actualModel = DEEPINFRA_MODEL_MAP[selectedModelKey] || 'black-forest-labs/FLUX-2-dev';
-
-                    const response = await axios.post(
-                        'https://api.deepinfra.com/v1/openai/images/generations',
-                        { model: actualModel, prompt: finalPrompt, n: 1, size: `${size.width}x${size.height}` },
-                        { headers: { 'Authorization': `Bearer ${deepinfraApiKey}`, 'Content-Type': 'application/json' }, timeout: 60000 }
-                    );
-
-                    if (response.data?.data?.[0]?.url) {
-                        const imageResponse = await axios.get(response.data.data[0].url, { responseType: 'arraybuffer' });
-                        await fsp.writeFile(cachePath, Buffer.from(imageResponse.data));
-                        result = { success: true, path: cachePath };
-                    }
-                    break;
-                }
-
                 case 'gemini': {
                     const geminiApiKey = (config as any).geminiApiKey;
                     if (!geminiApiKey) return { success: false, error: 'Gemini API 키가 설정되지 않았습니다.' };
@@ -931,48 +702,6 @@ export function registerImageHandlers(ctx: IpcContext): void {
                     const imageResponse = await axios.get(imageUrl, { responseType: 'arraybuffer', timeout: 60000 });
                     if (imageResponse.data) {
                         await fsp.writeFile(cachePath, Buffer.from(imageResponse.data));
-                        result = { success: true, path: cachePath };
-                    }
-                    break;
-                }
-
-                case 'leonardoai': {
-                    // ✅ [2026-02-23] Leonardo AI 스타일 미리보기 생성
-                    const leonardoApiKey = (config as any).leonardoaiApiKey;
-                    if (!leonardoApiKey) return { success: false, error: 'Leonardo AI API 키가 설정되지 않았습니다.' };
-
-                    const leonardoModel = (config as any).leonardoaiModel || 'seedream-4.5';
-                    console.log(`[imageHandlers] 🎨 Leonardo AI 스타일 프리뷰 생성 (모델: ${leonardoModel})`);
-
-                    const leonardoResult = await generateSingleLeonardoAIImage(
-                        { prompt: finalPrompt, size: `${size.width}x${size.height}`, model: leonardoModel },
-                        leonardoApiKey
-                    );
-
-                    if (leonardoResult.success && leonardoResult.localPath) {
-                        await fsp.copyFile(leonardoResult.localPath, cachePath);
-                        result = { success: true, path: cachePath };
-                    } else {
-                        return { success: false, error: leonardoResult.error || 'Leonardo AI 생성 실패' };
-                    }
-                    break;
-                }
-
-                case 'stability': {
-                    const stabilityApiKey = (config as any).stabilityApiKey;
-                    if (!stabilityApiKey) return { success: false, error: 'Stability AI API 키가 설정되지 않았습니다.' };
-
-                    const formData = new FormData();
-                    formData.append('prompt', finalPrompt);
-                    formData.append('output_format', 'png');
-
-                    const response = await axios.post(
-                        'https://api.stability.ai/v2beta/stable-image/generate/core',
-                        formData,
-                        { headers: { 'Authorization': `Bearer ${stabilityApiKey}`, 'Accept': 'image/*' }, responseType: 'arraybuffer', timeout: 60000 }
-                    );
-                    if (response.data) {
-                        await fsp.writeFile(cachePath, Buffer.from(response.data));
                         result = { success: true, path: cachePath };
                     }
                     break;

@@ -29,12 +29,12 @@ afterEach(() => {
 describe('resolveImageRegenerateRoute', () => {
   it.each([
     'nano-banana-2', 'flow', 'imagefx', 'dropshot', 'nano-banana-pro', 'nano-banana',
-    'openai-image', 'leonardoai', 'deepinfra', 'prodia', 'naver',
+    'openai-image', 'naver',
   ])('%s → regenerates with %s', (source) => {
     expect(resolveImageRegenerateRoute(source)).toEqual({ kind: 'generate', provider: source });
   });
 
-  it.each(['stability', 'falai', 'pollinations', 'saved', 'local-folder', 'unknown-engine'])(
+  it.each(['leonardoai', 'deepinfra', 'prodia', 'stability', 'falai', 'pollinations', 'saved', 'local-folder', 'unknown-engine'])(
     '%s → refused with a visible message, never silently switched', (source) => {
       const route = resolveImageRegenerateRoute(source);
       expect(route.kind).toBe('blocked');

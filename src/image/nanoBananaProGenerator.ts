@@ -1852,7 +1852,7 @@ async function generateSingleImageWithGemini(
 
       if (isLimitZero || isPaidOnly) {
         console.error(`[NanoBananaPro] 🚫 무료 할당량 0 또는 유료 전용 — 재시도 불가`);
-        sendImageLog(`🚫 나노바나나/Imagen은 Google이 무료 사용을 차단했습니다. 다른 이미지 엔진(Flow/DeepInfra 등)으로 변경하세요. 참고: 유료 전환(Pay-as-you-go) 시 Flash/Flash-Lite 텍스트 무료 할당량도 사라지므로 주의!`);
+        sendImageLog(`🚫 나노바나나/Imagen은 Google이 무료 사용을 차단했습니다. 다른 이미지 엔진(Flow 등)으로 변경하세요. 참고: 유료 전환(Pay-as-you-go) 시 Flash/Flash-Lite 텍스트 무료 할당량도 사라지므로 주의!`);
         recordNanoFailure('QUOTA_ZERO', errorMessage);
         return null; // 즉시 종료 — 재시도/폴백 모두 무의미
       }

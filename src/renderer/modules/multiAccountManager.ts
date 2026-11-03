@@ -42,7 +42,7 @@ const MULTI_ACCOUNT_SAFE_50_PLUS_INTERVAL_SEC = 600;
 const MULTI_ACCOUNT_UI_IMAGE_MIN_INTERVAL_SEC = 480;
 const MULTI_ACCOUNT_SLOW_IMAGE_MIN_INTERVAL_SEC = 420;
 const MULTI_ACCOUNT_UI_IMAGE_SOURCES = new Set(['dropshot', 'flow', 'imagefx', 'genspark']);
-const MULTI_ACCOUNT_SLOW_IMAGE_SOURCES = new Set(['nano-banana-pro', 'nano-banana-2', 'openai-image', 'leonardoai']);
+const MULTI_ACCOUNT_SLOW_IMAGE_SOURCES = new Set(['nano-banana-pro', 'nano-banana-2', 'openai-image']);
 const FLOW_AUTOMATION_IMAGE_ITEM_TIMEOUT_MS = 7 * 60 * 1000;
 const FLOW_AUTOMATION_BATCH_MAX_TIMEOUT_MS = 18 * 60 * 1000;
 function sanitizeMultiAccountExternalUrl(value) {
@@ -3785,9 +3785,7 @@ async function initMultiAccountPublishModal() {
                         else {
                             const _maSourceNames = {
                                 'pollinations': 'Pollinations', 'nano-banana-pro': '나노 바나나 프로',
-                                'prodia': 'Prodia', 'stability': 'Stability AI',
-                                'deepinfra': 'DeepInfra FLUX-2', 'deepinfra-flux': 'DeepInfra FLUX-2',
-                                'falai': 'Fal.ai FLUX', 'naver-search': '네이버 검색', 'naver': '네이버 검색',
+                                'naver-search': '네이버 검색', 'naver': '네이버 검색',
                             };
                             addMALog(`🎨 AI 이미지 생성 시작 (엔진: ${_maSourceNames[imageSource] || imageSource})`, 'info');
                             generatedImages = await generateImagesForAutomation(imageSource, headings, structuredContent.selectedTitle, {

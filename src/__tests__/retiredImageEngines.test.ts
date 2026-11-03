@@ -28,7 +28,7 @@ function fakeStore(initial: Record<string, string> = {}) {
 }
 
 describe('isRetiredImageEngine', () => {
-  it.each(['leonardoai', 'deepinfra', 'deepinfra-flux', 'prodia'])('%s 는 지원 종료', (v) => {
+  it.each(['leonardoai', 'deepinfra', 'deepinfra-flux', 'prodia', 'falai', 'stability'])('%s 는 지원 종료', (v) => {
     expect(isRetiredImageEngine(v)).toBe(true);
   });
   it.each(['nano-banana-2', 'openai-image', 'flow', 'dropshot', 'genspark', '', null, undefined])('%s 는 아니다', (v) => {
@@ -70,6 +70,16 @@ describe('markRetiredImageEngines — 지우고 끝내지 않고 보류한다', 
 });
 
 describe('보류 중에는 이미지 생성이 막힌다', () => {
+  it.each([['falai', 'Fal.ai'], ['stability', 'Stability AI']])('저장된 %s 값은 기본 엔진으로 가지 않고 %s 이름의 차단 안내가 된다', (value, label) => {
+    const store = fakeStore({ globalImageSource: value });
+    expect(() => assertNoRetiredImageEnginePending(store)).toThrow(new RegExp(`${label} 이미지 엔진은 지원이 끝났습니다`));
+    expect(store.getItem('globalImageSource')).toBeNull();
+  });
+  it('imageGenerator 는 지원 종료 엔진 값을 폴백 없이 던진다 (isRetiredImageEngine 가 falai·stability 도 잡는다)', () => {
+    const code = read('src/imageGenerator.ts');
+    expect(code).toMatch(/if \(isRetiredImageEngine\(normalizedProvider\)\) \{\s*throw new Error/);
+    expect(isRetiredImageEngine('falai') && isRetiredImageEngine('stability')).toBe(true);
+  });
   it('assertNoRetiredImageEnginePending 은 옛 엔진 이름을 담은 한국어 오류를 던진다', () => {
     const store = fakeStore({ fullAutoImageSource: 'leonardoai' });
     expect(() => assertNoRetiredImageEnginePending(store)).toThrow(/Leonardo AI 이미지 엔진은 지원이 끝났습니다.*다시 골라 주세요/);

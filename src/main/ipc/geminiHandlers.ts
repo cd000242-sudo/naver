@@ -131,7 +131,7 @@ export function registerGeminiHandlers(ctx: GeminiHandlerContext): void {
         imagePath?: string;
         image?: { imageBytes: string; mimeType: string };
         heading?: string;
-        videoProvider?: 'veo' | 'stability' | 'prodia' | 'kenburns';
+        videoProvider?: 'veo' | 'kenburns';
         convertToGif?: boolean;
     }) => {
         // ✅ [리팩토링] 통합 검증
@@ -163,12 +163,8 @@ export function registerGeminiHandlers(ctx: GeminiHandlerContext): void {
             let finalOutPath = '';
             let finalFileName = '';
 
-            // ✅ 1. Stability AI (SVD) 비디오 생성 — 제거됨 (deprecated provider)
-            if (videoProvider === 'stability') {
-                throw new Error('Stability AI 비디오 생성은 더 이상 지원되지 않습니다. Veo를 사용하세요.');
-            }
-            // ✅ 2. Veo (Gemini) 비디오 생성 (기존 로직 보전)
-            else if (videoProvider === 'veo') {
+            // ✅ Veo (Gemini) 비디오 생성 (그 밖의 값은 아래 else 에서 명시 오류)
+            if (videoProvider === 'veo') {
                 const apiKey = (process.env.GEMINI_API_KEY || '').trim();
                 if (!apiKey) throw new Error('Gemini API 키가 설정되지 않았습니다.');
                 if (!prompt?.trim()) throw new Error('프롬프트가 비어있습니다.');

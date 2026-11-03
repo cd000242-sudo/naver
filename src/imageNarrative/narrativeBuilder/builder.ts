@@ -231,7 +231,7 @@ async function callProvider(
       // silent 폴백 금지: 실패는 AgentCliError 그대로 throw.
       return callAgentProvider(provider, fullPrompt, signal, agentProductPolicyContext);
     default:
-      // deepinfra — fall back to gemini
+      // gemini (default branch)
       return callGeminiProvider(fullPrompt, signal);
   }
 }

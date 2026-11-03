@@ -80,8 +80,6 @@ describe('continuous and multi-account image generation safety', () => {
     const nanoCode = read('image/nanoBananaProGenerator.ts');
     const imageFxCode = read('image/imageFxGenerator.ts');
     const openAiImageCode = read('image/openaiImageGenerator.ts');
-    const deepInfraCode = read('image/deepinfraGenerator.ts');
-    const leonardoCode = read('image/leonardoAIGenerator.ts');
 
     expect(imageGeneratorCode).toMatch(/const shouldForceSequentialImages/);
     expect(imageGeneratorCode).toMatch(/options\.isFullAuto === true/);
@@ -105,9 +103,6 @@ describe('continuous and multi-account image generation safety', () => {
     expect(imageFxCode).toMatch(/for \(let i = 0; i < items\.length; i\+\+\)/);
     expect(openAiImageCode).toMatch(/for \(let i = 0; i < items\.length; i\+\+\)/);
     expect(openAiImageCode).toMatch(/n:\s*1/);
-    expect(deepInfraCode).toMatch(/for \(let i = 0; i < items\.length; i\+\+\)/);
-    expect(deepInfraCode).toMatch(/n:\s*1/);
-    expect(leonardoCode).toMatch(/for \(let i = 0; i < items\.length; i\+\+\)/);
   });
 
   it('streams generated images into the progress preview as each image finishes', () => {

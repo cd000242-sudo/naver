@@ -345,12 +345,12 @@ describe('resolvePipelineConfig — 기본값 동등성', () => {
     (globalThis as any).localStorage = makeStorage({
       scSubImageMode: 'ai',
       scAIImageEngine: 'nano-banana-pro',
-      fullAutoImageSource: 'deepinfra',
+      fullAutoImageSource: 'genspark',
     });
 
     const config = resolvePipelineConfig('full-auto');
-    expect(config.image.imageSource).toBe('deepinfra');
-    expect(config.shopping.aiImageEngine).toBe('deepinfra');
+    expect(config.image.imageSource).toBe('genspark');
+    expect(config.shopping.aiImageEngine).toBe('genspark');
     expect(config.image.fallbackPolicy).toBe('engine-only');
   });
 
@@ -373,7 +373,7 @@ describe('resolvePipelineConfig — 기본값 동등성', () => {
     expect(resolvePipelineConfig(flow).shopping.subImageMode).toBe('ai');
   });
 
-  it.each(['flow', 'prodia', 'imagefx'])('참조 이미지를 보장하지 못하는 저장 엔진 %s를 보존해 최종 가드가 정확히 차단한다', (engine) => {
+  it.each(['flow', 'genspark', 'imagefx'])('참조 이미지를 보장하지 못하는 저장 엔진 %s를 보존해 최종 가드가 정확히 차단한다', (engine) => {
     (globalThis as any).localStorage = makeStorage({
       scSubImageMode: 'ai',
       scAIImageEngine: engine,

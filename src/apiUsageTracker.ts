@@ -1,6 +1,6 @@
 /**
  * ✅ [2026-03-19] 통합 API 사용량 추적 모듈
- * - 모든 유료 API 제공자(Gemini, OpenAI, Claude, Perplexity, DeepInfra, Leonardo AI)의
+ * - 모든 유료 API 제공자(Gemini, OpenAI, Claude, Perplexity)의
  *   누적 비용을 실시간 추적
  * - Gemini의 기존 trackGeminiUsage 패턴을 전체 제공자로 확장
  * - 메모리 내 누적 → 디바운스 flush → config 영구 저장
@@ -10,10 +10,19 @@ import { loadConfig, saveConfig } from './configManager.js';
 
 // ==================== 타입 정의 ====================
 
-export type ApiProvider = 'gemini' | 'openai' | 'openai-image' | 'claude' | 'perplexity' | 'deepinfra' | 'leonardoai';
+export type ApiProvider = 'gemini' | 'openai' | 'openai-image' | 'claude' | 'perplexity';
 
 /** ✅ 모든 제공자 목록 (DRY - 단일 진실 소스) */
-export const ALL_PROVIDERS: ApiProvider[] = ['gemini', 'openai', 'openai-image', 'claude', 'perplexity', 'deepinfra', 'leonardoai'];
+export const ALL_PROVIDERS: ApiProvider[] = ['gemini', 'openai', 'openai-image', 'claude', 'perplexity'];
+
+/**
+ * Providers that left the product (2026-11-03). Nothing new is recorded for them, but totals saved in
+ * config.apiUsageTrackers by older versions stay readable under their original names.
+ */
+export const RETIRED_PROVIDERS: readonly string[] = ['deepinfra', 'leonardoai'];
+
+/** Every provider key that has (or may have) a saved total. */
+const READABLE_PROVIDERS: readonly string[] = [...ALL_PROVIDERS, ...RETIRED_PROVIDERS];
 
 export interface ProviderUsageData {
   totalCalls: number;
@@ -182,29 +191,6 @@ const PERPLEXITY_PRICING: Record<string, { input: number; output: number; search
   'default':              { input: 1.00, output: 1.00,  searchCostPerReq: 0.005 },
 };
 
-/** DeepInfra 이미지 모델 가격 ($/장, 1024×1024 = 1MP 기준) — source: deepinfra.com/pricing 2026-04 */
-const DEEPINFRA_PRICING: Record<string, number> = {
-  'FLUX-1-schnell':  0.003,
-  'FLUX-1-dev':      0.025,
-  'FLUX-2-dev':      0.012,   // ← 수정: 0.025 → 0.012 (공식 pay-per-MP 기준)
-  'FLUX-2-max':      0.07,    // ← 신규: 첫 MP $0.07 + 추가 $0.03/MP
-  'FLUX-1-Redux':    0.025,
-  'default':         0.025,
-};
-
-/** Leonardo AI 가격 ($/장) — source: leonardo.ai/pricing + Google Gemini 3 Pro Image API 2026-04
- *  Nano Banana Pro는 Google 공식 Gemini 3 Pro Image — 해상도별 차등 (Leonardo 경유 시 플랫폼 마진 추가)
- */
-const LEONARDOAI_PRICING: Record<string, number> = {
-  'seedream-4.5':          0.04,
-  'phoenix-1.0':           0.02,
-  'ideogram-3.0':          0.15,   // ← 수정: 0.06 → 0.15 (Balanced 기준, Quality 시 $0.23)
-  'nano-banana-pro':       0.134,  // ← 수정: 0.02 → 0.134 (2K 기준, 6.7배 과소 계상 버그)
-  'nano-banana-pro-1k':    0.039,  // ← 신규: 1024×1024
-  'nano-banana-pro-4k':    0.24,   // ← 신규: 4K
-  'default':               0.04,
-};
-
 // ==================== 가격 계산 헬퍼 ====================
 
 function matchPricingKey(model: string, table: Record<string, any>): string {
@@ -291,16 +277,6 @@ function calculateCost(provider: ApiProvider, input: TrackingInput): number {
       // ✅ [2026-03-19 FIX] 검색비용은 sonar 모델일 때만 가산 (비-sonar 호출 시 0)
       const searchCost = model.toLowerCase().includes('sonar') ? p.searchCostPerReq : 0;
       return tokenCost + searchCost;
-    }
-
-    case 'deepinfra': {
-      const key = matchPricingKey(model, DEEPINFRA_PRICING);
-      return DEEPINFRA_PRICING[key] * (input.images || 1);
-    }
-
-    case 'leonardoai': {
-      const key = matchPricingKey(model, LEONARDOAI_PRICING);
-      return LEONARDOAI_PRICING[key] * (input.images || 1);
     }
 
     default:
@@ -444,7 +420,7 @@ export async function getApiUsageSnapshot(provider?: ApiProvider): Promise<
   // 메모리 pending 합산
   const mergedTrackers: Record<string, ProviderUsageData> = {};
 
-  const allProviders = ALL_PROVIDERS;
+  const allProviders = READABLE_PROVIDERS;
 
   for (const prov of allProviders) {
     const saved = savedTrackers[prov] || {
@@ -452,7 +428,7 @@ export async function getApiUsageSnapshot(provider?: ApiProvider): Promise<
       totalImages: 0, estimatedCostUSD: 0,
       firstTracked: '', lastUpdated: '',
     };
-    const pending = _pendingByProvider.get(prov);
+    const pending = _pendingByProvider.get(prov as ApiProvider);
 
     mergedTrackers[prov] = {
       totalCalls: saved.totalCalls + (pending?.calls || 0),
@@ -496,7 +472,7 @@ export async function resetApiUsage(provider?: ApiProvider): Promise<void> {
     console.log(`[UsageTracker] 🔄 ${provider} 사용량 초기화 완료`);
   } else {
     // 전체 초기화
-    const allProviders = ALL_PROVIDERS;
+    const allProviders = READABLE_PROVIDERS;
     for (const p of allProviders) {
       trackers[p] = {
         totalCalls: 0, totalInputTokens: 0, totalOutputTokens: 0,
@@ -520,7 +496,7 @@ export async function resetApiUsage(provider?: ApiProvider): Promise<void> {
  * regular pricing applies.
  */
 export function trackImageNarrativeUsage(
-  provider: Extract<ApiProvider, 'gemini' | 'openai' | 'claude' | 'deepinfra'>,
+  provider: Extract<ApiProvider, 'gemini' | 'openai' | 'claude'>,
   input: TrackingInput,
   cacheHit: boolean = false,
 ): void {

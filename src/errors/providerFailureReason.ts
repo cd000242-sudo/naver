@@ -31,7 +31,6 @@ const VENDOR_LABEL: Record<string, string> = {
   gemini: 'Google Gemini',
   google: 'Google Gemini',
   perplexity: 'Perplexity',
-  deepinfra: 'DeepInfra',
 };
 
 /** 충전하러 갈 곳. 모르는 벤더는 안내하지 않는다(엉뚱한 링크가 더 나쁘다). */

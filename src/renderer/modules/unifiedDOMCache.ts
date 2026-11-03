@@ -141,7 +141,7 @@ const UnifiedDOMCache = {
     // ✅ [2026-02-02] 풀오토/연속/다중계정 발행 전용 이미지 소스
     // 이미지 관리 탭의 globalImageSource와 완전히 분리됨
     // ✅ [v1.4.80] 'flow' 추가 — Google Labs Flow 엔진이 풀오토/연속발행에서 nano-banana-pro로 폴백되던 버그 수정
-    // ✅ [v2.8.2] 'dall-e-3' + 'falai' + 'pollinations' 추가 — 사용자가 달리/덕트테이프 선택해도 nano-banana-pro로 폴백되던 회귀 차단
+    // ✅ [v2.8.2] 'dall-e-3' + 'pollinations' 추가 — 사용자가 달리/덕트테이프 선택해도 nano-banana-pro로 폴백되던 회귀 차단
     //   사용자 보고: "달리 분명히 달리로 이미지 생성되게 하라했는데 계속 나노바나나뜨는데 어떻게 된거야"
     //   원인: v2.7.15에 dall-e-3이 옵션으로 추가됐지만 VALID_AI_SOURCES 화이트리스트엔 누락 → fullAutoSource 거부 → 폴백 체인 → nano-banana-pro
     // ✅ [v2.10.335] 나노바나나 3종 분리 — nano-banana-2 통합 별칭 제거 (각각 별개 모델).
@@ -154,7 +154,7 @@ const UnifiedDOMCache = {
       'nano-banana': 'nano-banana-2',
     };
     // ✅ [v2.11.7] 'dropshot' 추가 — 리더스 나노바나나 무제한
-    const VALID_AI_SOURCES = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'prodia', 'dropshot', 'genspark', 'falai', 'pollinations', 'local-folder', 'saved'];
+    const VALID_AI_SOURCES = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'openai-image', 'imagefx', 'flow', 'dropshot', 'genspark', 'pollinations', 'local-folder', 'saved'];
 
     const normalizeSource = (raw: string | null): string | null => {
       if (!raw || raw === 'undefined' || raw === 'null') return null;

@@ -56,11 +56,13 @@ describe('continuous publishing image engine selection', () => {
 describe('progress modal engine name extraction', () => {
   it('does not report "fal" from the word "failed" in error messages', () => {
     const code = read('renderer/components/ProgressModal.ts');
-    expect(code).toMatch(/\\b\(nano-banana-pro\|deepinfra\|gemini\|fal\|flux\|dall-e\)\\b/);
+    expect(code).toMatch(/\\b\(nano-banana-pro\|gemini\|dall-e\)\\b/);
 
     // Functional lock: same pattern must not match inside "failed".
-    const pattern = /\b(nano-banana-pro|deepinfra|gemini|fal|flux|dall-e)\b/i;
+    const pattern = /\b(nano-banana-pro|gemini|dall-e)\b/i;
     expect('image generation failed: IMAGE_BATCH_INCOMPLETE'.match(pattern)).toBeNull();
-    expect('fal 엔진 오류'.match(pattern)?.[1]).toBe('fal');
+    expect('dall-e 엔진 오류'.match(pattern)?.[1]).toBe('dall-e');
+    // The removed engines' names must not be picked up as an engine either.
+    expect('fal 엔진 오류'.match(pattern)).toBeNull();
   });
 });

@@ -264,7 +264,8 @@ describe('Content Quality V3 evidence attestation', () => {
         // [2026-10-10 2차] 옛 gpt-image-2 → Sunburst 이관 규칙(normalizeOpenaiImageModel)으로 재계산
         // [2026-10-10 3차] 덕트테이프 기본 모델 Sunburst(옛 1/1.5/2·빈 값 → Sunburst, 명시 Flare 유지)로 재계산
         // [2026-10-20] 나노바나나2 = Nano Banana 2.1(gemini-nano-banana-2.1) + 직전 ID NANO_BANANA_2_PREV 로 재계산
-        'f9af23fd902283095d8a6cbef50f9618b33508f6206e55950f14a42398118de8',
+        // [2026-11-03] 지원 종료 엔진 정리 — modelRegistry.normalizeImageProvider 의 deepinfra 별칭 접기 제거로 재계산
+        '24ff98176f8aec1e7d113ddc7b129a8ea4aff69d4365167ee474b19d7110d273',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

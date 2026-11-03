@@ -231,8 +231,7 @@ export function isShoppingConnectAIEngine(engine: unknown): engine is ShoppingCo
  * 제품 정체성을 변형하지 않으므로 모두 통과시킨다.
  */
 const SHOPPING_CONNECT_BLOCKED_FAKE_AI = [
-    'imagefx', 'dall-e-3', 'leonardoai', 'deepinfra', 'deepinfra-flux',
-    'stability', 'falai', 'pollinations', 'flow', 'prodia',
+    'imagefx', 'dall-e-3', 'pollinations', 'flow',
     // [2026-10-10] 젠스파크는 쇼핑 참조 이미지 미지원
     'genspark',
 ];

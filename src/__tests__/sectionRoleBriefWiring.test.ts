@@ -61,20 +61,15 @@ describe('engines drop their own rotation only for a planned role (source guards
 
   it('only openai honors the role — the one engine that sends the brief itself', () => {
     expect(engineHonorsVisualRole('openai-image')).toBe(true);
-    // deepinfra / leonardo replace the brief with a short English wrapper (no role lines) whenever the
-    // translated hint is usable, so they keep their own camera rotation.
+    // Retired engines (deepinfra / leonardo) never honor a role either.
     expect(engineHonorsVisualRole('deepinfra')).toBe(false);
     expect(engineHonorsVisualRole('leonardoai')).toBe(false);
     expect(engineHonorsVisualRole('flow')).toBe(false);
     expect(engineHonorsVisualRole('nano-banana-pro')).toBe(false);
   });
 
-  it('openai branches on item.visualRole; deepinfra and leonardo keep their rotation', () => {
+  it('openai branches on item.visualRole', () => {
     expect(read('image/openaiImageGenerator.ts')).toMatch(/\(item as any\)\.visualRole\s*\?/);
-    for (const file of ['image/leonardoAIGenerator.ts', 'image/deepinfraGenerator.ts']) {
-      expect(read(file)).not.toMatch(/\(item as any\)\.visualRole/);
-      expect(read(file)).toMatch(/buildSafeEnglishProviderImagePrompt\(/);
-    }
   });
 
   it('imageGenerator plans roles and hands the camera to the role only for honoring engines', () => {

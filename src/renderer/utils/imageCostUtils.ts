@@ -10,7 +10,7 @@
 export function isCostRiskImageProvider(provider: string): boolean {
     const p = String(provider || '').trim();
     // ✅ [v2.10.335] 나노바나나 3종 모두 비용 발생 — nano-banana(plain) 누락 시 동의 모달 미출현 회귀
-    return p === 'nano-banana' || p === 'nano-banana-2' || p === 'nano-banana-pro' || p === 'prodia' || p === 'stability' || p === 'falai' || p === 'leonardoai' || p === 'openai-image' || p === 'dall-e-3';
+    return p === 'nano-banana' || p === 'nano-banana-2' || p === 'nano-banana-pro' || p === 'openai-image' || p === 'dall-e-3';
 }
 
 /**
@@ -22,10 +22,6 @@ export function getCostRiskProviderLabel(provider: string): string {
     if (p === 'nano-banana') return '나노바나나 (Gemini 2.5 Flash Image, ₩54/장)';
     if (p === 'nano-banana-2') return '나노바나나2 (Nano Banana 2.1, ₩97/장)';
     if (p === 'nano-banana-pro') return '나노바나나 프로 (Gemini 3 Pro Image, ₩185/장)';
-    if (p === 'falai') return 'Fal.ai';
-    if (p === 'prodia') return 'Prodia AI';
-    if (p === 'stability') return 'Stability AI';
-    if (p === 'leonardoai') return 'Leonardo AI';
     if (p === 'openai-image') return 'OpenAI 덕트테이프 (gpt-image-2.5 Flare / Sunburst)';
     if (p === 'dall-e-3') return 'OpenAI GPT 이미지 시리즈 (레거시 설정)';
     return p || 'AI 이미지';

@@ -11,8 +11,6 @@ const SUPPORTED_PROVIDERS = new Set([
   'nano-banana-2',
   'gpt-image-2',
   'openai-image',
-  'deepinfra',
-  'leonardoai',
 ]);
 
 const PROVIDER_TIMEOUT_MS = {
@@ -22,8 +20,6 @@ const PROVIDER_TIMEOUT_MS = {
   'nano-banana-2': 12 * 60 * 1000,
   'gpt-image-2': 12 * 60 * 1000,
   'openai-image': 12 * 60 * 1000,
-  deepinfra: 12 * 60 * 1000,
-  leonardoai: 18 * 60 * 1000,
 };
 
 function parseArgs(argv) {
@@ -110,8 +106,6 @@ function getApiKeys(config) {
     geminiApiKey: config.geminiApiKey,
     openaiApiKey: config.openaiApiKey,
     openaiImageApiKey: config.openaiImageApiKey || config.openaiApiKey,
-    deepinfraApiKey: config.deepinfraApiKey,
-    leonardoaiApiKey: config.leonardoaiApiKey,
   };
 }
 

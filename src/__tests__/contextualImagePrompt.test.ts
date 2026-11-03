@@ -176,11 +176,8 @@ describe('provider-agnostic contextual image prompt routing', () => {
     'nano-banana',
     'nano-banana-2',
     'nano-banana-pro',
-    'deepinfra',
     'openai-image',
     'dall-e-3',
-    'leonardoai',
-    'prodia',
     'imagefx',
     'flow',
     'dropshot',
@@ -260,14 +257,9 @@ describe('provider-agnostic contextual image prompt routing', () => {
   it('guards provider adapters from deleting the shared semantic brief', () => {
     const imageFx = readFileSync(fileURLToPath(new URL('../image/imageFxGenerator.ts', import.meta.url)), 'utf8');
     const flow = readFileSync(fileURLToPath(new URL('../image/flowGenerator.ts', import.meta.url)), 'utf8');
-    const deepInfra = readFileSync(fileURLToPath(new URL('../image/deepinfraGenerator.ts', import.meta.url)), 'utf8');
-    const leonardo = readFileSync(fileURLToPath(new URL('../image/leonardoAIGenerator.ts', import.meta.url)), 'utf8');
 
     expect(imageFx).toMatch(/isContextualImagePrompt\s*\(\s*prompt\s*\)[\s\S]{0,180}?1_800/);
     expect(flow).toMatch(/isContextualImagePrompt\s*\(\s*item\.prompt\s*\)[\s\S]{0,500}?sourceEnglishPrompt/);
-    expect(deepInfra).toMatch(/isContextualImagePrompt\s*\(\s*basePrompt\s*\)[\s\S]{0,500}?sourceEnglishPrompt/);
-    expect(deepInfra).toMatch(/!isContextualImagePrompt\s*\(\s*basePrompt\s*\)[\s\S]{0,200}?person\|people/);
-    expect(leonardo).toMatch(/isContextualImagePrompt\s*\(\s*prompt\s*\)[\s\S]{0,500}?sourceEnglishPrompt/);
   });
 });
 

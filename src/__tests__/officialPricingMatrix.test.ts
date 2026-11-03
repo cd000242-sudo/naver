@@ -7,8 +7,6 @@
  * - Gemini Flash: output $0.40 → $2.50 (6.25배 과소 계상)
  * - Gemini Flash-Lite: 4배 과소
  * - Gemini Pro output: $5 → $10 (2배 과소)
- * - DeepInfra FLUX-2-dev: $0.025 → $0.012 (절반)
- * - Leonardo Nano Banana Pro: $0.02 → $0.134 (6.7배 과소)
  *
  * 이 테스트는 모든 수정값이 공식 2026-04 기준과 일치함을 영구 고정한다.
  * 향후 누가 실수로 구 단가로 되돌리면 즉시 실패.
@@ -148,43 +146,16 @@ describe('v1.4.77 — 공식 가격 매트릭스 (2026-04)', () => {
     });
   });
 
-  describe('DeepInfra', () => {
-    it("FLUX-1-schnell은 $0.003/MP", () => {
-      expect(content).toMatch(/'FLUX-1-schnell':\s*0\.003/);
+  describe('지원 종료 이미지 엔진(DeepInfra · Leonardo AI)', () => {
+    it('새 기록 경로에는 가격표도 계산 분기도 없다', () => {
+      expect(content).not.toMatch(/DEEPINFRA_PRICING|LEONARDOAI_PRICING/);
+      expect(content).not.toMatch(/case 'deepinfra'|case 'leonardoai'/);
+      expect(content).not.toMatch(/export type ApiProvider = [^;]*(deepinfra|leonardoai)/);
     });
 
-    it("FLUX-2-dev는 $0.012 (이전 $0.025 수정 — 절반)", () => {
-      expect(content).toMatch(/'FLUX-2-dev':\s*0\.012/);
-    });
-
-    it("FLUX-2-max 신규 엔트리 존재 ($0.07)", () => {
-      expect(content).toMatch(/'FLUX-2-max':\s*0\.07/);
-    });
-
-    it("FLUX-2-dev가 다시 $0.025로 회귀되지 않음", () => {
-      expect(content).not.toMatch(/'FLUX-2-dev':\s*0\.025/);
-    });
-  });
-
-  describe('Leonardo AI', () => {
-    it("Nano Banana Pro (2K 기본)은 $0.134 (이전 $0.02 버그 수정 — 6.7배 과소)", () => {
-      expect(content).toMatch(/'nano-banana-pro':\s*0\.134/);
-    });
-
-    it("Nano Banana Pro 1K 신규 엔트리 존재 ($0.039)", () => {
-      expect(content).toMatch(/'nano-banana-pro-1k':\s*0\.039/);
-    });
-
-    it("Nano Banana Pro 4K 신규 엔트리 존재 ($0.24)", () => {
-      expect(content).toMatch(/'nano-banana-pro-4k':\s*0\.24/);
-    });
-
-    it("Ideogram 3.0은 $0.15 (이전 $0.06 수정 — Balanced 기준)", () => {
-      expect(content).toMatch(/'ideogram-3\.0':\s*0\.15/);
-    });
-
-    it("Nano Banana Pro가 다시 $0.02로 회귀되지 않음", () => {
-      expect(content).not.toMatch(/'nano-banana-pro':\s*0\.02\b/);
+    it('예전에 저장된 사용량 합계는 원래 이름 그대로 읽힌다', () => {
+      expect(content).toMatch(/RETIRED_PROVIDERS[^\n]*'deepinfra'[^\n]*'leonardoai'/);
+      expect(content).toMatch(/READABLE_PROVIDERS[^\n]*\.\.\.ALL_PROVIDERS[^\n]*\.\.\.RETIRED_PROVIDERS/);
     });
   });
 
@@ -218,9 +189,5 @@ describe('v1.4.77 — 공식 가격 매트릭스 (2026-04)', () => {
       expect(cost * KRW).toBeCloseTo(1126, 0);
     });
 
-    it("FLUX-2-dev 글 1개(6장) = ₩101 (이전 버그 ₩210과 절반)", () => {
-      const cost = 0.012 * 6;
-      expect(cost * KRW).toBeCloseTo(101, 0);
-    });
   });
 });

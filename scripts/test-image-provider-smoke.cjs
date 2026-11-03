@@ -18,18 +18,6 @@ const PROVIDERS = {
     envName: 'OPENAI_API_KEY',
     timeoutMs: 5 * 60 * 1000,
   },
-  deepinfra: {
-    label: 'DeepInfra',
-    keyName: 'deepinfraApiKey',
-    envName: 'DEEPINFRA_API_KEY',
-    timeoutMs: 5 * 60 * 1000,
-  },
-  leonardoai: {
-    label: 'Leonardo AI',
-    keyName: 'leonardoaiApiKey',
-    envName: 'LEONARDOAI_API_KEY',
-    timeoutMs: 8 * 60 * 1000,
-  },
 };
 
 function getUserDataDir() {
@@ -188,8 +176,6 @@ async function testProvider(provider, config, outDir) {
       const apiKeys = {
         geminiApiKey: provider === 'nano-banana-2' ? key : config.geminiApiKey,
         openaiImageApiKey: config.openaiImageApiKey || config.openaiApiKey,
-        deepinfraApiKey: provider === 'deepinfra' ? key : config.deepinfraApiKey,
-        leonardoaiApiKey: provider === 'leonardoai' ? key : config.leonardoaiApiKey,
       };
       const images = await runWithHardTimeout(spec.label, spec.timeoutMs, () =>
         generateImages(

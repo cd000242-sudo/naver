@@ -771,7 +771,7 @@ async function applyImageToHeading(image: any, headingTitle: string, headingInde
 //   (Before: nano-banana-2 / nano-banana / flow / imagefx / dropshot fell through to a NAVER search.)
 const IMAGE_REGENERATE_ENGINES = new Set([
   'nano-banana-2', 'nano-banana-pro', 'nano-banana', 'flow', 'imagefx', 'dropshot', 'genspark',
-  'openai-image', 'leonardoai', 'deepinfra', 'prodia', 'naver',
+  'openai-image', 'naver',
 ]);
 
 export type ImageRegenerateRoute =

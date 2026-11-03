@@ -2,11 +2,8 @@ import { GEMINI_IMAGE_MODELS } from '../runtime/modelRegistry.js';
 
 export type StylePreviewEngineKind =
   | 'flow'
-  | 'deepinfra'
   | 'gemini'
   | 'pollinations'
-  | 'leonardoai'
-  | 'stability'
   | 'imagefx';
 
 export interface StylePreviewEngineRoute {
@@ -18,9 +15,6 @@ export interface StylePreviewEngineRoute {
 
 const ROUTES: Readonly<Record<string, StylePreviewEngineRoute>> = Object.freeze({
   flow: { engine: 'flow', kind: 'flow', cacheKey: 'flow' },
-  deepinfra: { engine: 'deepinfra', kind: 'deepinfra', cacheKey: 'deepinfra' },
-  'deepinfra-flux': { engine: 'deepinfra', kind: 'deepinfra', cacheKey: 'deepinfra' },
-  'deepinfra-flux-2': { engine: 'deepinfra', kind: 'deepinfra', cacheKey: 'deepinfra' },
   gemini: {
     engine: 'gemini',
     kind: 'gemini',
@@ -46,8 +40,6 @@ const ROUTES: Readonly<Record<string, StylePreviewEngineRoute>> = Object.freeze(
     model: GEMINI_IMAGE_MODELS.NANO_BANANA_PRO,
   },
   pollinations: { engine: 'pollinations', kind: 'pollinations', cacheKey: 'pollinations' },
-  leonardoai: { engine: 'leonardoai', kind: 'leonardoai', cacheKey: 'leonardoai' },
-  stability: { engine: 'stability', kind: 'stability', cacheKey: 'stability' },
   imagefx: { engine: 'imagefx', kind: 'imagefx', cacheKey: 'imagefx' },
 });
 

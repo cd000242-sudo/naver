@@ -23,7 +23,7 @@ const SCAN_DIRS = [
 
 // Patterns that suggest engine/model auto-switching.
 const FORBIDDEN_PATTERNS = [
-  /imageSource\s*=\s*['"](?!gemini|deepinfra|nano-banana-pro|imagefx|flow|leonardo|pollinations)/i,
+  /imageSource\s*=\s*['"](?!gemini|nano-banana-pro|imagefx|flow|pollinations)/i,
   /subWorkProvider\s*=\s*['"]/,
   /silent.*fallback/i,
   /auto.*switch.*engine/i,

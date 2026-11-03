@@ -9,7 +9,6 @@
  * - Anthropic: platform.claude.com/docs/en/about-claude/models/overview
  * - Google: ai.google.dev/gemini-api/docs/models + /deprecations
  * - Perplexity: docs.perplexity.ai/docs/sonar/models
- * - DeepInfra: deepinfra.com/black-forest-labs
  */
 import { describe, it, expect } from 'vitest';
 import * as fs from 'fs';
@@ -83,7 +82,7 @@ it('never logs API key prefixes in content provider diagnostics', () => {
 it('never prints raw API key prefixes or suffixes in runtime and diagnostic logs', () => {
   const secretAwareFiles = [
     read('configManager.js'),
-    read('image/deepinfraGenerator.ts'),
+    read('image/koreanPromptTranslator.ts'),
     read('main/ipc/configHandlers.ts'),
     read('tests/test31flash.ts'),
     read('tests/testFullFlow.ts'),
@@ -154,7 +153,7 @@ describe('v1.4.77 — 실존 모델 ID 매트릭스 (2026-04)', () => {
       // src 디렉터리 내 그 어디에도 model: 'dall-e-3' 호출이 없어야 함
       const srcFiles = [
         'image/openaiImageGenerator.ts',
-        'image/deepinfraGenerator.ts',
+        'image/koreanPromptTranslator.ts',
         'main.ts',
       ];
       for (const f of srcFiles) {

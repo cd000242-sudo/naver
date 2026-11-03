@@ -20,6 +20,9 @@ const AI_PROVIDER_PATTERNS = [
   'openai-image',
   'gpt-image',
   'dall',
+  // Keep prodia / stability / falai / deepinfra / leonardoai even though those engines left the product
+  // (2026-11-03): posts saved earlier still carry images made by them, and re-publishing such a post must
+  // keep the AI-generated disclosure mark. Removing these patterns would silently drop the mark.
   'prodia',
   'stability',
   'falai',

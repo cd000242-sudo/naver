@@ -243,7 +243,7 @@ export function initHeadingImageGeneration(): void {
         appendLog(`🎨 ${headingsToGenerate.length}개 소제목의 이미지 생성 시작... (전체 ${selectedHeadings.length}개 중)`);
 
         const selectedBtn = (document.querySelector('.image-source-btn.selected') || document.querySelector('.unified-img-source-btn.selected')) as HTMLButtonElement;
-        const provider = (selectedBtn?.dataset.source || 'nano-banana-2') as 'nano-banana-2' | 'nano-banana-pro' | 'prodia' | 'stability' | 'deepinfra' | 'falai' | 'pollinations';
+        const provider = (selectedBtn?.dataset.source || 'nano-banana-2') as 'nano-banana-2' | 'nano-banana-pro' | 'pollinations';
 
         // ✅ [2026-03-03 FIX v2] 옵션 A+B 강화: imagePrompt 영문/한국어/없음 모두 처리
         // ✅ [v2.10.33] 무제한 Promise.all → batch=3 (외부 AI 번역 호출 동시성 제한)
@@ -288,7 +288,7 @@ export function initHeadingImageGeneration(): void {
           return {
             heading: h.title,
             prompt: aiPrompt,
-            englishPrompt: aiPrompt, // ✅ DeepInfra용
+            englishPrompt: aiPrompt,
             articleTitle,
             globalSubject,
             articleContext,
@@ -588,19 +588,12 @@ export function initHeadingImageGeneration(): void {
   const imageSourceNames: Record<string, string> = {
     'nano-banana-2': '나노바나나2 (Gemini 3.1 Flash)',
     'nano-banana-pro': '나노 바나나 프로 (Gemini)',
-    'deepinfra': 'DeepInfra (FLUX-2-dev)',
-    'deepinfra-flux': 'DeepInfra (FLUX-2-dev)',
-    'stability': 'Stability AI',
-    'prodia': 'Prodia',
-    'falai': 'Fal.ai',
-    'fal-ai': 'Fal.ai',
     'pollinations': 'Pollinations',
     'naver': '네이버 이미지 검색',
     'naver-search': '네이버 이미지 검색',
     'imagefx': 'ImageFX (Google Labs, 제한 가능)',
     'flow': 'Flow (Nano Banana Pro)', // ✅ [v1.4.80]
     'openai-image': 'OpenAI DALL-E',
-    'leonardoai': 'Leonardo AI',
     'local-folder': '내 폴더',
   };
 
@@ -1166,7 +1159,7 @@ export function initHeadingImageGeneration(): void {
         // ✅ [2026-06-06] 배치 요청 비활성화: 외부 엔진 에러/락 충돌 방지를 위해 항상 순차 처리
         // [2026-05-27 BUGFIX] cost-risk provider 전체로 확장 — provider별 lock(runUiActionLocked) 충돌 회피.
         //   기존: nano-banana-pro만 batch. nano-banana-2 등은 else로 빠져 개별 호출 → 첫 1개만 lock 획득, 나머지 4개 "이미 진행 중" reject.
-        //   현재: nano-banana(3종)/leonardoai/openai-image/dall-e-3 모두 batch single IPC → lock 1번만 사용.
+        //   현재: nano-banana(3종)/openai-image/dall-e-3 모두 batch single IPC → lock 1번만 사용.
         const useBatchImageGeneration = false;
         if (useBatchImageGeneration && (isCostRiskImageProvider(imageSource) || imageSource === 'pollinations')) {
           appendLog(`⚡ ${imageSource} 배치 병렬 처리 시작! (cost-risk lock 회피)`, 'images-log-output');
@@ -1322,17 +1315,7 @@ export function initHeadingImageGeneration(): void {
         // ✅ 비용/과금 위험 provider는 동시 요청을 막기 위해 순차 처리 (nano-banana-pro 제외)
         try {
           const providerForLock =
-            imageSource === 'prodia'
-              ? 'prodia'
-              : imageSource === 'stability'
-                ? 'stability'
-                : imageSource === 'deepinfra' || imageSource === 'deepinfra-flux'
-                  ? 'deepinfra'
-                  : imageSource === 'falai'
-                    ? 'falai'
-                    : imageSource === 'leonardoai'
-                      ? 'leonardoai'
-                      : imageSource === 'openai-image'
+            imageSource === 'openai-image'
                         ? 'openai-image'
                         : '';
           const sequential = providerForLock ? isCostRiskImageProvider(providerForLock) : false;
@@ -1348,17 +1331,7 @@ export function initHeadingImageGeneration(): void {
         const providerForLock =
           imageSource === 'pollinations' || imageSource === 'nano-banana-pro'
             ? 'nano-banana-pro'
-            : imageSource === 'prodia'
-              ? 'prodia'
-              : imageSource === 'stability'
-                ? 'stability'
-                : imageSource === 'deepinfra' || imageSource === 'deepinfra-flux'
-                  ? 'deepinfra'
-                  : imageSource === 'falai'
-                    ? 'falai'
-                    : imageSource === 'leonardoai'
-                      ? 'leonardoai'
-                      : imageSource === 'openai-image'
+            : imageSource === 'openai-image'
                         ? 'openai-image'
                         : '';
         void providerForLock;
@@ -1385,14 +1358,7 @@ export function initHeadingImageGeneration(): void {
               const _styleNames: Record<string, string> = { 'realistic': '📸 리얼리스틱', 'vintage': '🎞️ 빈티지', 'stickman': '🖌️ 스틱맨', 'roundy': '🫧 라운디', '2d': '✏️ 2D 웹툰' };
               const _ratio = _rawPipeline.imageRatio || _rawPipeline.subheadingImageRatio || '1:1';
               let _modelLabel = '';
-              if (imageSource === 'leonardoai') {
-                const _m = (document.getElementById('leonardoai-model-select') as HTMLSelectElement)?.value || 'seedream-4.5';
-                const _mNames: Record<string, string> = { 'seedream-4.5': 'Seedream 4.5', 'phoenix-1.0': 'Phoenix 1.0', 'signature': 'Signature', 'nano': 'Nano' };
-                _modelLabel = ` | 📦 모델: ${_mNames[_m] || _m}`;
-              } else if (imageSource === 'stability') {
-                const _m = (document.getElementById('stability-model-select') as HTMLSelectElement)?.value || 'ultra';
-                _modelLabel = ` | 📦 모델: ${_m}`;
-              } else if (imageSource === 'openai-image') {
+              if (imageSource === 'openai-image') {
                 { const _oiRaw = String(_rawPipeline.openaiImageModel || '').trim(); _modelLabel = ` | 📦 모델: ${_oiRaw === 'gpt-image-2.5-flare' ? 'gpt-image-2.5-flare' : 'gpt-image-2.5-sunburst'}`; } // [2026-10-10] 실제 선택 모델 표시(명시 Flare 외에는 기본 Sunburst)
               }
               appendLog(`  🖥️ 엔진: ${_srcLabel}${_modelLabel} | 🎨 스타일: ${_styleNames[_style] || _style} | 📐 ${_ratio}`, 'images-log-output');
@@ -1416,7 +1382,7 @@ export function initHeadingImageGeneration(): void {
             // Shopping-connect guard (v1.6.3 재설계):
             //   쇼핑 커넥트 모드일 때는 엔진 허용 여부와 무관하게 이 블록으로 일원화.
             //   - 허용 엔진(nano-banana-pro, openai-image): collectedImages를 img2img 참조로 주입
-            //   - 차단 엔진(imagefx, leonardo, deepinfra 등): provider는 유지하되 main guard에서 수집이미지로 전환
+            //   - 차단 엔진(imagefx 등): provider는 유지하되 main guard에서 수집이미지로 전환
             //   둘 다 isShoppingConnect: true + collectedImages 주입으로 통일.
             } else if (isShoppingConnectForCurrentPost()) {
               const isBlocked = shouldBlockEngineForShoppingConnect(imageSource);
@@ -1475,112 +1441,6 @@ export function initHeadingImageGeneration(): void {
                 imageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
               } else {
                 throw new Error(imageResult.message || '나노 바나나 프로 이미지 생성 실패');
-              }
-            } else if (imageSource === 'prodia') {
-              const ref = resolveReferenceImageForHeading(String(heading.title || '').trim());
-              const imageResult = await generateImagesWithCostSafety({
-                provider: 'prodia',
-                items: [{
-                  heading: headingForImage, // ✅ [2026-02-24] 썸네일=H1제목
-                  prompt: promptForImage,
-                  englishPrompt: promptForImage,  // ✅ [2026-02-27 FIX] sanitizeImagePrompt 바이패스
-                  isThumbnail: isThumbnailSection,
-                  allowText: allowText,
-                  ...ref,
-                }],
-                postTitle: blogTitle,
-                isFullAuto: true,
-              });
-              if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
-                imageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
-              } else {
-                throw new Error(imageResult.message || 'Prodia 이미지 생성 실패');
-              }
-            } else if (imageSource === 'stability') {
-              // ✅ Stability: 전용 파라미터(모델 등)와 함께 호출
-              const stabilityModel = (document.getElementById('stability-model-select') as HTMLSelectElement)?.value || 'ultra';
-              const ref = resolveReferenceImageForHeading(String(heading.title || '').trim());
-              const imageResult = await generateImagesWithCostSafety({
-                provider: 'stability',
-                items: [{
-                  heading: headingForImage, // ✅ [2026-02-24] 썸네일=H1제목
-                  prompt: promptForImage,
-                  englishPrompt: promptForImage,  // ✅ [2026-02-27 FIX] sanitizeImagePrompt 바이패스
-                  isThumbnail: isThumbnailSection,
-                  allowText: allowText,
-                  ...ref,
-                }],
-                postTitle: blogTitle,
-                isFullAuto: true,
-                model: stabilityModel
-              });
-              if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
-                imageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
-              } else {
-                throw new Error(imageResult.message || 'Stability AI 이미지 생성 실패');
-              }
-            } else if (imageSource === 'falai') {
-              // ✅ Fal.ai: 전용 파라미터와 함께 호출
-              const ref = resolveReferenceImageForHeading(String(heading.title || '').trim());
-              const imageResult = await generateImagesWithCostSafety({
-                provider: 'falai',
-                items: [{
-                  heading: headingForImage, // ✅ [2026-02-24] 썸네일=H1제목
-                  prompt: promptForImage,
-                  englishPrompt: promptForImage,  // ✅ [2026-02-27 FIX] sanitizeImagePrompt 바이패스
-                  isThumbnail: isThumbnailSection,
-                  allowText: allowText,
-                  ...ref,
-                }],
-                postTitle: blogTitle,
-                isFullAuto: true,
-              });
-              if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
-                imageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
-              } else {
-                throw new Error(imageResult.message || 'Fal.ai 이미지 생성 실패');
-              }
-            } else if (imageSource === 'deepinfra' || imageSource === 'deepinfra-flux') {
-              // ✅ [2026-02-02] DeepInfra FLUX-2: 가성비 좋은 이미지 생성
-              const ref = resolveReferenceImageForHeading(String(heading.title || '').trim());
-              const imageResult = await generateImagesWithCostSafety({
-                provider: 'deepinfra',
-                items: [{
-                  heading: headingForImage, // ✅ [2026-02-24] 썸네일=H1제목
-                  prompt: promptForImage,
-                  englishPrompt: promptForImage,  // ✅ [2026-02-27 FIX] sanitizeImagePrompt 바이패스
-                  isThumbnail: isThumbnailSection,
-                  allowText: allowText,
-                  ...ref,
-                }],
-                postTitle: blogTitle,
-                isFullAuto: true,
-              });
-              if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
-                imageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
-              } else {
-                throw new Error(imageResult.message || 'DeepInfra 이미지 생성 실패');
-              }
-            } else if (imageSource === 'leonardoai') {
-              // ✅ [2026-02-23] Leonardo AI: 전용 핸들러 (기존 else 폴백 방지)
-              const ref = resolveReferenceImageForHeading(String(heading.title || '').trim());
-              const imageResult = await generateImagesWithCostSafety({
-                provider: 'leonardoai',
-                items: [{
-                  heading: headingForImage, // ✅ [2026-02-24] 썸네일=H1제목
-                  prompt: promptForImage,
-                  englishPrompt: promptForImage,  // ✅ [2026-02-27 FIX] sanitizeImagePrompt 바이패스
-                  isThumbnail: isThumbnailSection,
-                  allowText: allowText,
-                  ...ref,
-                }],
-                postTitle: blogTitle,
-                isFullAuto: true,
-              });
-              if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
-                imageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
-              } else {
-                throw new Error(imageResult.message || 'Leonardo AI 이미지 생성 실패');
               }
             } else if (imageSource === 'openai-image') {
               // ✅ [2026-02-23] DALL-E (OpenAI): 전용 핸들러 (기존 else 폴백 방지)
@@ -1940,14 +1800,7 @@ export function initHeadingImageGeneration(): void {
             const _styleNames: Record<string, string> = { 'realistic': '📸 리얼리스틱', 'vintage': '🎞️ 빈티지', 'stickman': '🖌️ 스틱맨', 'roundy': '🫧 라운디', '2d': '✏️ 2D 웹툰' };
             const _ratio = _rawPipeline.imageRatio || _rawPipeline.subheadingImageRatio || '1:1';
             let _modelLabel = '';
-            if (imageSource === 'leonardoai') {
-              const _m = (document.getElementById('leonardoai-model-select') as HTMLSelectElement)?.value || 'seedream-4.5';
-              const _mNames: Record<string, string> = { 'seedream-4.5': 'Seedream 4.5', 'phoenix-1.0': 'Phoenix 1.0', 'signature': 'Signature', 'nano': 'Nano' };
-              _modelLabel = ` | 📦 모델: ${_mNames[_m] || _m}`;
-            } else if (imageSource === 'stability') {
-              const _m = (document.getElementById('stability-model-select') as HTMLSelectElement)?.value || 'ultra';
-              _modelLabel = ` | 📦 모델: ${_m}`;
-            } else if (imageSource === 'openai-image') {
+            if (imageSource === 'openai-image') {
               { const _oiRaw = String(_rawPipeline.openaiImageModel || '').trim(); _modelLabel = ` | 📦 모델: ${_oiRaw === 'gpt-image-2.5-flare' ? 'gpt-image-2.5-flare' : 'gpt-image-2.5-sunburst'}`; } // [2026-10-10] 실제 선택 모델 표시(명시 Flare 외에는 기본 Sunburst)
             }
             appendLog(`  🖥️ 엔진: ${_srcLabel}${_modelLabel} | 🎨 스타일: ${_styleNames[_style] || _style} | 📐 ${_ratio}`, 'images-log-output');
@@ -4619,7 +4472,7 @@ async function regenerateSingleImage(headingTitle: string, prompt: string): Prom
     // Route through the central choke point so the shopping-connect hard
     // rule (nano-banana-pro only) is enforced. Direct window.api.generateImages
     // calls bypass costAndAutoGen's isShoppingConnect auto-injection and let
-    // ImageFX/DALL-E/Leonardo execute in shopping mode.
+    // ImageFX/DALL-E execute in shopping mode.
     const result = await generateImagesWithCostSafety({
       provider,
       items: [{ heading: resolvedHeadingTitle, prompt: safePrompt }],
@@ -5342,58 +5195,6 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
       }
     } else if (imageSource === 'pollinations' || imageSource === 'nano-banana-pro') {
       imageUrl = await generateNanoBananaProImage(finalPrompt);
-    } else if (imageSource === 'prodia') {
-      const imageResult = await generateImagesWithCostSafety({
-        provider: 'prodia',
-        items: [{ heading: resolvedHeadingTitle, prompt: finalPrompt, ...imageContextFields }],
-        postTitle: blogTitle,
-        isFullAuto: true,
-      });
-      if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
-        imageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
-      } else {
-        throw new Error(imageResult.message || 'Prodia 이미지 생성 실패');
-      }
-    } else if (imageSource === 'stability') {
-      const stabilityModel = (document.getElementById('stability-model-select') as HTMLSelectElement)?.value || 'ultra';
-      const imageResult = await generateImagesWithCostSafety({
-        provider: 'stability',
-        items: [{ heading: resolvedHeadingTitle, prompt: finalPrompt, ...imageContextFields }],
-        postTitle: blogTitle,
-        isFullAuto: true,
-        model: stabilityModel
-      });
-      if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
-        imageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
-      } else {
-        throw new Error(imageResult.message || 'Stability AI 이미지 생성 실패');
-      }
-    } else if (imageSource === 'falai') {
-      // ✅ Fal.ai: 전용 파라미터와 함께 호출
-      const imageResult = await generateImagesWithCostSafety({
-        provider: 'falai',
-        items: [{ heading: resolvedHeadingTitle, prompt: finalPrompt, ...imageContextFields }],
-        postTitle: blogTitle,
-        isFullAuto: true,
-      });
-      if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
-        imageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
-      } else {
-        throw new Error(imageResult.message || 'Fal.ai 이미지 생성 실패');
-      }
-    } else if (imageSource === 'leonardoai') {
-      // ✅ [2026-02-23] Leonardo AI: 개별 재생성 핸들러 추가
-      const imageResult = await generateImagesWithCostSafety({
-        provider: 'leonardoai',
-        items: [{ heading: resolvedHeadingTitle, prompt: finalPrompt, isThumbnail: headingIndex === 0, allowText: allowTextForRegen, ...imageContextFields }],
-        postTitle: blogTitle,
-        isFullAuto: true,
-      });
-      if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
-        imageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
-      } else {
-        throw new Error(imageResult.message || 'Leonardo AI 이미지 생성 실패');
-      }
     } else if (imageSource === 'openai-image') {
       // ✅ [2026-02-23] OpenAI DALL-E: 개별 재생성 핸들러 추가
       const imageResult = await generateImagesWithCostSafety({
@@ -5434,20 +5235,6 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
         imageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
       } else {
         throw new Error(imageResult.message || 'Flow 이미지 생성 실패. Google 로그인 상태를 확인해주세요.');
-      }
-    } else if (imageSource === 'deepinfra') {
-      // ✅ [v1.4.80] DeepInfra (FLUX) 전용 분기
-      console.log(`[ImageGen] ⚡ DeepInfra FLUX 개별 재생성`);
-      const imageResult = await generateImagesWithCostSafety({
-        provider: 'deepinfra',
-        items: [{ heading: resolvedHeadingTitle, prompt: finalPrompt, isThumbnail: headingIndex === 0, allowText: allowTextForRegen, ...imageContextFields }],
-        postTitle: blogTitle,
-        isFullAuto: true,
-      });
-      if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
-        imageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
-      } else {
-        throw new Error(imageResult.message || 'DeepInfra 이미지 생성 실패');
       }
     } else if (imageSource === 'dropshot' || imageSource === 'genspark' || imageSource === 'nano-banana-2' || imageSource === 'nano-banana') {
       // [2026-08-04] 일괄 생성과 동일한 누락 분기 3종 — 개별 재생성에서도

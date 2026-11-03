@@ -1689,7 +1689,7 @@ const SEQUENTIAL_MULTI_ACCOUNT_SAFE_50_PLUS_INTERVAL_SEC = 600;
 const SEQUENTIAL_MULTI_ACCOUNT_UI_IMAGE_MIN_INTERVAL_SEC = 480;
 const SEQUENTIAL_MULTI_ACCOUNT_SLOW_IMAGE_MIN_INTERVAL_SEC = 420;
 const SEQUENTIAL_MULTI_ACCOUNT_UI_IMAGE_SOURCES = new Set(['dropshot', 'flow', 'imagefx', 'genspark']);
-const SEQUENTIAL_MULTI_ACCOUNT_SLOW_IMAGE_SOURCES = new Set(['nano-banana-pro', 'nano-banana-2', 'openai-image', 'leonardoai']);
+const SEQUENTIAL_MULTI_ACCOUNT_SLOW_IMAGE_SOURCES = new Set(['nano-banana-pro', 'nano-banana-2', 'openai-image']);
 
 function formatPublishInterval(seconds: number): string {
   const safe = Math.max(0, Math.floor(Number(seconds) || 0));
@@ -1772,14 +1772,10 @@ export async function handleMultiAccountPublish(): Promise<void> {
   const maPreloadedImages = ImageManager.getAllImages();
   const maHasPreloadedImages = maPreloadedImages && maPreloadedImages.length > 0;
 
-  if (!maHasPreloadedImages && (commonImageSource === 'openai-image' || commonImageSource === 'leonardoai')) {
+  if (!maHasPreloadedImages && commonImageSource === 'openai-image') {
     const config = await window.api.getConfig();
     if (commonImageSource === 'openai-image' && !((config as any)?.openaiImageApiKey || (config as any)?.openaiApiKey)) {
       alert('OpenAI Image API 키가 설정되지 않았습니다. 환경설정에서 API 키를 입력해주세요.');
-      return;
-    }
-    if (commonImageSource === 'leonardoai' && !(config as any)?.leonardoaiApiKey) {
-      alert('Leonardo AI API 키가 설정되지 않았습니다. 환경설정에서 API 키를 입력해주세요.');
       return;
     }
 
@@ -2665,12 +2661,6 @@ export async function handleSemiAutoPublish(options: { ldbAutoDraft?: boolean } 
       const config = await window.api.getConfig();
       if (!((config as any)?.openaiImageApiKey || (config as any)?.openaiApiKey)) {
         alert('OpenAI Image API 키가 설정되지 않았습니다. 환경설정에서 API 키를 입력해주세요.');
-        return;
-      }
-    } else if (currentImageSource === 'leonardoai') {
-      const config = await window.api.getConfig();
-      if (!(config as any)?.leonardoaiApiKey) {
-        alert('Leonardo AI API 키가 설정되지 않았습니다. 환경설정에서 API 키를 입력해주세요.');
         return;
       }
     }

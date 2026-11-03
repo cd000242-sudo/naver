@@ -80,7 +80,6 @@ import {
   resolveShoppingRepresentativeReference,
 } from './image/shoppingReferenceGeneration.js';
 import { generateEnglishPromptMain } from './main/utils/mainPromptInference.js';
-// (stabilityGenerator removed - deprecated provider)
 import { convertMp4ToGif } from './image/gifConverter.js'; // ✅ 추가
 import type { GenerateImagesOptions, GeneratedImage } from './imageGenerator.js';
 import { getDailyLimit, getTodayCount, incrementTodayCount, setDailyLimit } from './postLimitManager.js';
@@ -2167,8 +2166,8 @@ const LOG_FORWARD_PREFIXES = [
   '[SEO', '[Prompt', '[Title',
   // 이미지 생성 엔진
   '[이미지', '[Image', '[NanoBananaPro', '[Nano',
-  '[ImageGen', '[Imagen', '[RPM', '[DeepInfra',
-  '[Leonardo', '[OpenAI', '[DALL',
+  '[ImageGen', '[Imagen', '[RPM',
+  '[OpenAI', '[DALL',
   // 발행 & 자동화
   '[Main]', '[Blog', '[Automation', '[AutomationService',
   '[BlogExecutor', '[Publish', '[Execute',
@@ -3450,7 +3449,7 @@ ipcMain.handle('openImagesFolder', async () => {
 // ✅ [2026-04-03] app:getInfo → src/main/ipc/systemHandlers.ts로 이관
 
 // 라이선스 상태 확인
-// ✅ [2026-04-03] quota:getStatus, quota:getImageUsage, quota:getLeonardoCredits →
+// ✅ [2026-04-03] quota:getStatus, quota:getImageUsage →
 //    src/main/ipc/quotaHandlers.ts로 이동 완료
 
 ipcMain.handle('license:checkStatus', async () => {
@@ -5922,7 +5921,7 @@ const handleMultiAccountPublish = async (_event: Electron.IpcMainInvokeEvent, ac
             const isThumbnailOnly = options?.thumbnailOnly === true;
             const normalizedImageProvider = String(imageProvider || '').trim();
             const isUiAutomationImageProvider = ['dropshot', 'flow', 'imagefx', 'genspark'].includes(normalizedImageProvider);
-            const isSlowImageProvider = ['nano-banana-pro', 'nano-banana-2', 'openai-image', 'leonardoai'].includes(normalizedImageProvider);
+            const isSlowImageProvider = ['nano-banana-pro', 'nano-banana-2', 'openai-image'].includes(normalizedImageProvider);
             const imageEngineStabilizeDelayMs = isUiAutomationImageProvider ? 15_000 : isSlowImageProvider ? 8_000 : 3_000;
             const waitForImageEngineStabilization = async (phase: string) => {
               if (imageEngineStabilizeDelayMs <= 0) return;
@@ -5940,11 +5939,8 @@ const handleMultiAccountPublish = async (_event: Electron.IpcMainInvokeEvent, ac
               const imgConfig = await loadConfig();
               const imgApiKeys = {
                 geminiApiKey: imgConfig.geminiApiKey,
-                deepinfraApiKey: (imgConfig as any).deepinfraApiKey,
                 openaiApiKey: (imgConfig as any).openaiApiKey,
                 openaiImageApiKey: (imgConfig as any).openaiImageApiKey,
-                leonardoaiApiKey: (imgConfig as any).leonardoaiApiKey,
-                prodiaApiKey: (imgConfig as any).prodiaApiKey || (imgConfig as any).prodiaToken,
               };
 
               // ═══ Phase 1: 전용 썸네일 별도 생성 (headings 유무 무관) ═══
@@ -6132,11 +6128,8 @@ const handleMultiAccountPublish = async (_event: Electron.IpcMainInvokeEvent, ac
             const dailyConfig = await loadConfig();
             const dailyApiKeys = {
               geminiApiKey: dailyConfig.geminiApiKey,
-              deepinfraApiKey: (dailyConfig as any).deepinfraApiKey,
               openaiApiKey: (dailyConfig as any).openaiApiKey,
               openaiImageApiKey: (dailyConfig as any).openaiImageApiKey,
-              leonardoaiApiKey: (dailyConfig as any).leonardoaiApiKey,
-              prodiaApiKey: (dailyConfig as any).prodiaApiKey || (dailyConfig as any).prodiaToken,
             };
             const dailyHeadings = fullAutoFinalHeadingTitles(structuredContent);
             const dailyTitle = String(title || '');

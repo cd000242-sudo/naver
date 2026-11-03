@@ -13,7 +13,7 @@ export interface ProgressModalOptions {
 export interface ErrorDetail {
     errorType: string;     // "할당량 초과" | "API 오류" | "네트워크 오류" | "인증 실패" | "타임아웃"
     errorCode?: string;    // "429", "500", "QUOTA_EXCEEDED"
-    engine?: string;       // "nano-banana-pro", "deepinfra", "gemini"
+    engine?: string;       // "nano-banana-pro", "gemini"
     rawMessage?: string;   // 원본 에러 메시지
     suggestion?: string;   // "다른 이미지 엔진으로 변경해보세요"
 }
@@ -653,7 +653,7 @@ export class ProgressModal {
                     detail.suggestion =
                         '명시적 일일 한도가 아니라 Google이 사용 패턴을 보고 1시간 단위로 임시 차단합니다. ' +
                         '약 1시간 후 자동 해제됩니다. 기다리기 싫으면 환경설정 → "Google 계정 변경"으로 ' +
-                        '다른 계정 사용 또는 이미지 엔진을 DeepInfra/Pollinations로 전환하세요.';
+                        '다른 계정 사용 또는 이미지 엔진을 다른 엔진으로 전환하세요.';
                     break;
                 case 'BOT_DETECTED':
                     // ✅ [v2.10.299] 봇감지 의심 — 오늘 < 100장 성공인데 429 발생.
@@ -664,7 +664,7 @@ export class ProgressModal {
                         '오늘 생성량이 적은데 429가 발생한 케이스입니다. 진짜 시간당 한도일 가능성이 낮고, ' +
                         'Google이 자동화를 의심해 임시 차단한 것일 가능성이 큽니다. ' +
                         '1시간 기다려도 같은 증상이 반복될 수 있으니 즉시 다음을 시도하세요: ' +
-                        '① 다른 이미지 엔진(나노바나나2 ₩97/장, DeepInfra $0.01/장)으로 전환, ' +
+                        '① 다른 이미지 엔진(나노바나나2 ₩97/장)으로 전환, ' +
                         '② 환경설정 → ImageFX → "Google 계정 변경"으로 다른 계정 사용, ' +
                         '③ 10~30분 후 재시도 (긴 시간 기다리지 마세요).';
                     break;
@@ -688,7 +688,7 @@ export class ProgressModal {
                     detail.errorCode = 'SAFETY';
                     detail.suggestion =
                         'Google 안전 필터가 프롬프트를 차단했습니다. 정부지원/금융/의료/정치 키워드는 ' +
-                        '자주 막힙니다. 본문 키워드를 우회 표현으로 바꾸거나 DeepInfra/Pollinations로 전환하세요.';
+                        '자주 막힙니다. 본문 키워드를 우회 표현으로 바꾸거나 다른 이미지 엔진으로 전환하세요.';
                     break;
                 case 'SERVER_BUSY':
                 case 'SERVER_ERROR':
@@ -704,7 +704,7 @@ export class ProgressModal {
                     detail.suggestion =
                         '시간당 한도가 아닐 수 있습니다. 다음 순서로 확인하세요: ' +
                         '① 환경설정 → "Google 계정 변경"으로 재로그인(세션 만료 가능성), ' +
-                        '② 다른 이미지 엔진(DeepInfra/Pollinations)으로 전환, ' +
+                        '② 다른 이미지 엔진(나노바나나2/Flow)으로 전환, ' +
                         '③ F12 → Console의 [ImageFX] 로그에서 진짜 HTTP 코드 확인.';
                     break;
                 default:
@@ -784,8 +784,8 @@ export class ProgressModal {
             /(?:provider|엔진|engine)[:\s]*([a-zA-Z0-9-]+)/i,
             // [v2.11.133] word boundaries — bare /fal/ matched the "fal" inside
             // "failed" and error cards showed a bogus "엔진: fal".
-            /\b(nano-banana-pro|deepinfra|gemini|fal|flux|dall-e)\b/i,
-            /\b(NanoBananaPro|DeepInfra|Gemini|FAL|FLUX)\b/i,
+            /\b(nano-banana-pro|gemini|dall-e)\b/i,
+            /\b(NanoBananaPro|Gemini)\b/i,
         ];
         for (const pattern of enginePatterns) {
             const match = message.match(pattern);

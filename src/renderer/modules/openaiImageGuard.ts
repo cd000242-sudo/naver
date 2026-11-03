@@ -134,8 +134,6 @@ export async function checkDallE3Deadline(imageSource: string): Promise<GuardRes
                 <li><strong>덕트테이프(gpt-image-2.5)</strong> — OpenAI 계정 상태에 따라 Org 인증 필요, 한글 최강</li>
                 <li><strong>나노바나나 프로</strong> — Gemini API, 한글 강</li>
                 <li><strong>Flow</strong> — Google AI Pro 무료 쿼터</li>
-                <li><strong>DeepInfra FLUX-2</strong> — 가성비 ($0.01/장)</li>
-                <li><strong>Leonardo AI</strong> — 일러스트 강</li>
                 <li><strong>ImageFX</strong> — Google Labs 실험적 무료, 계정/IP 접근 제한 가능</li>
             </ul>
             <p style="margin: 0.75rem 0 0; color: #b8b8d4; font-size: 0.8rem;">참고: 5/12 이후 OpenAI 이미지 라인은 덕트테이프(gpt-image-2.5)만 남습니다.</p>
@@ -206,7 +204,7 @@ export async function checkImageFxGenerationReady(imageSource: string): Promise<
             bodyHtml: `
                 <p style="margin: 0 0 0.75rem;">로그인 확인만으로는 부족해서, 발행 전에 ImageFX 테스트 이미지 1장을 실제 생성해봤습니다.</p>
                 <p style="margin: 0 0 0.75rem; color: #ffb4b4; font-weight: 700;">${escapeGuardHtml(message)}</p>
-                <p style="margin: 0; color: #b8b8d4; font-size: 0.88rem;">현재 계정/IP/지역 조합에서는 대량 발행 중 실패할 가능성이 높습니다. Flow, 리더스 나노바나나프로, OpenAI Image, DeepInfra처럼 실제 테스트가 통과한 엔진으로 바꾼 뒤 다시 시작해주세요.</p>
+                <p style="margin: 0; color: #b8b8d4; font-size: 0.88rem;">현재 계정/IP/지역 조합에서는 대량 발행 중 실패할 가능성이 높습니다. Flow, 리더스 나노바나나프로, OpenAI Image처럼 실제 테스트가 통과한 엔진으로 바꾼 뒤 다시 시작해주세요.</p>
             `,
             primary: { label: '다른 엔진 선택 후 다시 시작', danger: true },
         });

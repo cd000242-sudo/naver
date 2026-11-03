@@ -380,10 +380,9 @@ export const VERIFIED_IMAGE_MODELS = [
 /**
  * 사용자 UI provider value → 백엔드 정규화
  *   나노바나나 3종(nano-banana / nano-banana-2 / nano-banana-pro)은 각각 별개 모델이므로
- *   더 이상 통합하지 않는다. deepinfra 계열 별칭만 정규화한다.
+ *   더 이상 통합하지 않는다. 값은 그대로 돌려준다 (옛 deepinfra 별칭은 retiredImageEngines 가 처리).
  */
 export function normalizeImageProvider(provider: string): string {
-  if (provider === 'deepinfra-flux' || provider === 'deepinfra-flux-2') return 'deepinfra';
   return provider;
 }
 

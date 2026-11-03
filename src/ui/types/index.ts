@@ -35,7 +35,7 @@ export interface GeneratedImage {
     url?: string;
     filePath?: string;
     prompt?: string;
-    source?: 'gemini' | 'naver' | 'pollinations' | 'prodia' | 'falai' | 'local';
+    source?: 'gemini' | 'naver' | 'pollinations' | 'local';
     isVideo?: boolean;
     videoUrl?: string;
 }

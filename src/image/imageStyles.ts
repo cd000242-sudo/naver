@@ -1,7 +1,6 @@
 /**
  * ✅ [2026-02-12] 공유 이미지 스타일 유틸리티
- * DeepInfra 100점 기준에서 추출한 공통 함수 및 상수
- * → Fal.ai, Stability, Prodia 모두에서 재사용
+ * 공통 함수 및 상수 (이미지 생성기들이 재사용)
  */
 
 // ═══════════════════════════════════════════════════════════════════
@@ -24,7 +23,7 @@ export const VARIATION_STYLES = [
 
 // ═══════════════════════════════════════════════════════════════════
 // ✅ [2026-03-01] 하드코딩 카테고리 스타일 제거
-// AI 추론 기반: 각 생성기(NanoBananaPro, DeepInfra)에서 getPersonRule()로
+// AI 추론 기반: 각 생성기(NanoBananaPro 등)에서 getPersonRule()로
 // 인물 포함/제외 + 한국인 하드코딩만 제공, 비주얼 스타일은 AI가 주제에서 추론
 // ═══════════════════════════════════════════════════════════════════
 
@@ -327,34 +326,3 @@ export function getImageSize(ratio: string): string {
     return SIZE_MAP[ratio] || '1024x1024';
 }
 
-// ═══════════════════════════════════════════════════════════════════
-// 🎨 Leonardo AI v1 전용: presetStyle API 파라미터 매핑
-// ═══════════════════════════════════════════════════════════════════
-export function getPresetStyleMapping(imageStyle: string): string {
-    const mapping: Record<string, string> = {
-        'realistic': 'PHOTOGRAPHY',
-        'stickman': 'ILLUSTRATION',
-        'roundy': 'ILLUSTRATION',
-        '2d': 'ANIME',
-        'vintage': 'SKETCH_COLOR',
-        'disney': 'RENDER_3D',
-        'infographic': 'ILLUSTRATION', // [v1.6.3] 인포그래픽 — Leonardo 일러스트 프리셋 매핑
-    };
-    return mapping[imageStyle] || 'DYNAMIC';
-}
-
-// ═══════════════════════════════════════════════════════════════════
-// 🚫 Leonardo AI v1 전용: 스타일별 네거티브 프롬프트
-// ═══════════════════════════════════════════════════════════════════
-export function getStyleNegativePrompt(imageStyle: string): string {
-    const base = 'text, words, letters, writing, watermark, signature, blurry, low quality';
-    const styleNegatives: Record<string, string> = {
-        'realistic': `${base}, cartoon, anime, illustration, drawing`,
-        'stickman': `${base}, photorealistic, photography, 3d render, human face`,
-        'roundy': `${base}, photorealistic, photography, sharp edges, realistic proportions`,
-        '2d': `${base}, photorealistic, 3d render, photography`,
-        'vintage': `${base}, modern, digital, neon, futuristic`,
-        'disney': `${base}, photorealistic, photography, 2d flat, sketch, dark horror`,
-    };
-    return styleNegatives[imageStyle] || base;
-}

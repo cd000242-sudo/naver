@@ -1856,8 +1856,8 @@ async function waitForNewImage(page: Page, prevCount: number, timeoutMs: number 
                 // 쿼터 소진은 재시도 무의미 → 즉시 명확 에러(무료 한도/업그레이드/다른 엔진).
                 if (state.isQuota && !watchdogStopped) {
                     flowError(`[Flow][3/3] ⛔ 쿼터 소진 감지: ${state.errorText}`);
-                    sendImageLog('⛔ [Flow] 무료 할당량 한도 도달 — 내일 리셋 / AI Pro 업그레이드 / 다른 엔진(나노바나나·DeepInfra)');
-                    reject(new Error('FLOW_QUOTA_EXCEEDED:Flow 무료 할당량(일일 한도)에 도달했습니다. Google 메시지: "도구 에이전트 할당량 한도에 도달". 해결: 1) 내일 리셋 대기 2) Google AI Pro/Ultra 업그레이드 3) 다른 이미지 엔진(나노바나나/DeepInfra) 사용'));
+                    sendImageLog('⛔ [Flow] 무료 할당량 한도 도달 — 내일 리셋 / AI Pro 업그레이드 / 다른 엔진(나노바나나)');
+                    reject(new Error('FLOW_QUOTA_EXCEEDED:Flow 무료 할당량(일일 한도)에 도달했습니다. Google 메시지: "도구 에이전트 할당량 한도에 도달". 해결: 1) 내일 리셋 대기 2) Google AI Pro/Ultra 업그레이드 3) 다른 이미지 엔진(나노바나나) 사용'));
                     return;
                 }
                 if (state.hasError && !watchdogStopped) {
@@ -2178,7 +2178,7 @@ export async function generateSingleImageWithFlow(
             if (/FLOW_GENERATION_ERROR/.test(msg)) {
                 flowError('[Flow] ⛔ 모든 우회 후에도 생성 거부 — BotGuard 차단 의심, 즉시 중단(fail-fast)');
                 sendImageLog('⛔ [Flow] 모든 우회 실패 — Google BotGuard 차단 의심. 다른 IP/계정/엔진 권장.');
-                throw new Error('FLOW_BOT_BLOCKED:Flow가 모든 우회(headful·인간형 입력·트리거 제거·새 프로젝트) 후에도 생성을 거부했습니다. Google BotGuard가 이 계정/IP의 자동화를 차단했을 가능성이 큽니다. 해결: 1) 휴대폰 핫스팟 등 다른 네트워크/계정으로 확인 2) 10~30분 후 재시도 3) 다른 이미지 엔진(나노바나나/DeepInfra) 사용');
+                throw new Error('FLOW_BOT_BLOCKED:Flow가 모든 우회(headful·인간형 입력·트리거 제거·새 프로젝트) 후에도 생성을 거부했습니다. Google BotGuard가 이 계정/IP의 자동화를 차단했을 가능성이 큽니다. 해결: 1) 휴대폰 핫스팟 등 다른 네트워크/계정으로 확인 2) 10~30분 후 재시도 3) 다른 이미지 엔진(나노바나나) 사용');
             }
 
             // Flow timeout은 같은 프로젝트에 pending 작업이 남는 경우가 많으므로 다음 시도 전 새 프로젝트로 격리한다.
@@ -2217,8 +2217,8 @@ const FLOW_FORCE_FRESH_PROJECT_ON_DUPLICATE = process.env.FLOW_STRICT_DIVERSITY 
 const FLOW_AHASH_THRESHOLD = 6;
 
 // 영어 보장: englishPrompt가 실사용 가능한 영어면 그대로, 한글이거나 없으면 AI 번역으로 영어 장면 확보.
-// deepinfra 경로엔 이미 있던 가드(hasUsableEnglishPrompt)를 Flow에도 적용 — 앱 정책상 Flow에도 영어 전송.
-// 번역기는 deepinfra에 있으므로 lazy dynamic import로 무거운 의존성 로드를 회피한다.
+// 영어 프롬프트 가드(hasUsableEnglishPrompt)를 Flow에도 적용 — 앱 정책상 Flow에도 영어 전송.
+// 번역기는 koreanPromptTranslator에 있으므로 lazy dynamic import로 무거운 의존성 로드를 회피한다.
 async function resolveEnglishBasePrompt(item: ImageRequestItem): Promise<string> {
     if (isContextualImagePrompt(item.prompt)) {
         const sourceEnglishPrompt = hasUsableEnglishPrompt(item.sourceEnglishPrompt)
@@ -2232,7 +2232,7 @@ async function resolveEnglishBasePrompt(item: ImageRequestItem): Promise<string>
     const source = String((item as any).prompt || (item as any).heading || '').trim();
     if (source && /[가-힣]/.test(source)) {
         try {
-            const { translateKoreanToEnglishWithAI } = await import('./deepinfraGenerator.js');
+            const { translateKoreanToEnglishWithAI } = await import('./koreanPromptTranslator.js');
             const en = await translateKoreanToEnglishWithAI(
                 source,
                 (item as any).category,
@@ -2771,18 +2771,18 @@ export async function generateWithFlow(
             const reason = classification === 'bot_detected'
                 ? `오늘 ${todayCount}장만 생성 — 진짜 한도 불가능`
                 : `오늘 ${todayCount}장 — 봇감지 가능성 큼`;
-            sendImageLog(`⚠️ [Flow] 봇감지 의심! (${reason}) — 한도 아님. 다른 엔진(나노바나나 ₩54/장 / DeepInfra) 즉시 사용 권장`);
+            sendImageLog(`⚠️ [Flow] 봇감지 의심! (${reason}) — 한도 아님. 다른 엔진(나노바나나 ₩54/장) 즉시 사용 권장`);
             throw new Error(
                 `FLOW_BOT_DETECTED:⚠️ Google 봇감지 의심 (오늘 Flow 성공 ${todayCount}장). ` +
                 `진짜 한도가 아닐 가능성 큼.\n\n` +
                 `즉시 해결:\n` +
-                `1. 다른 이미지 엔진으로 전환 (나노바나나 ₩54/장, DeepInfra $0.01/장)\n` +
+                `1. 다른 이미지 엔진으로 전환 (나노바나나 ₩54/장)\n` +
                 `2. 잠시 후(10~30분) 재시도 (1시간 기다리지 마세요)\n` +
                 `3. 환경설정 → "Google 계정 변경"으로 다른 계정 사용`
             );
         }
         // ✅ [v2.10.303] "덕트테이프" 내부 코드명 → 공개 명칭 "gpt-image-2" 로 교체
-        throw new Error(`FLOW_ALL_FAILED:Flow 이미지 생성이 모두 실패했습니다 (오늘 ${todayCount}장 성공 후 한도 도달 추정). 1) Google 로그인 상태 확인  2) Flow 쿼터 확인 (Pro 구독자는 더 많음)  3) 다른 이미지 엔진(나노바나나/gpt-image-2/DeepInfra) 선택`);
+        throw new Error(`FLOW_ALL_FAILED:Flow 이미지 생성이 모두 실패했습니다 (오늘 ${todayCount}장 성공 후 한도 도달 추정). 1) Google 로그인 상태 확인  2) Flow 쿼터 확인 (Pro 구독자는 더 많음)  3) 다른 이미지 엔진(나노바나나/gpt-image-2) 선택`);
     }
     return results;
 }

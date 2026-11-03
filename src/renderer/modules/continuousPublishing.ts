@@ -267,7 +267,7 @@ const SAFE_PUBLISH_MIN_INTERVAL_SEC = 300; // 🔒 절대 최소 5분 (장기 �
 const IMAGE_HEAVY_SAFE_PUBLISH_MIN_INTERVAL_SEC = 420;
 const UI_AUTOMATION_SAFE_PUBLISH_MIN_INTERVAL_SEC = 480;
 const UI_AUTOMATION_IMAGE_SOURCES = new Set(['dropshot', 'flow', 'imagefx', 'genspark']);
-const SLOW_IMAGE_SOURCES = new Set(['nano-banana-pro', 'nano-banana-2', 'openai-image', 'leonardoai']);
+const SLOW_IMAGE_SOURCES = new Set(['nano-banana-pro', 'nano-banana-2', 'openai-image']);
 let _continuousPublishCount = 0;           // 현재 세션 발행 횟수 (쿨다운 계산용)
 let _consecutiveFailCount = 0;             // ✅ [2026-03-21] 연속 실패 전용 카운터
 let _captchaFailCount = 0;                 // ✅ [2026-03-23] 캡차 관련 실패 전용 카운터
@@ -3224,13 +3224,7 @@ const imageSourceNames: Record<string, string> = {
   // [2026-10-10] 옛 큐에 남은 프로 값은 나노바나나2로 이관되어 실행된다
   'nano-banana-pro': '🍌 나노바나나2 (Nano Banana 2.1, ₩97/장) ★',
   'naver': '🔍 네이버 검색',
-  'prodia': '⚡ Prodia',
-  'stability': '🚀 Stability AI',
-  'deepinfra': '🚀 DeepInfra FLUX-2',
-  'deepinfra-flux': '🚀 DeepInfra FLUX-2',
-  'falai': '🎨 Fal.ai FLUX',
   'pollinations': '🌸 Pollinations (무료)',
-  'leonardoai': '🎨 Leonardo AI',
   'openai-image': '🦆 덕트테이프 (gpt-image-2.5)',
   'dall-e-3': '🦆 GPT 이미지 시리즈 (레거시 설정)',
   'imagefx': '✨ ImageFX (Google Labs, 제한 가능)',

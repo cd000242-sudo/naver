@@ -29,7 +29,7 @@ export type InferenceMode =
 /**
  * Which Vision API backend to call.
  */
-export type VisionProvider = 'gemini' | 'openai' | 'claude' | 'deepinfra';
+export type VisionProvider = 'gemini' | 'openai' | 'claude';
 
 // ---------------------------------------------------------------------------
 // Input types

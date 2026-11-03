@@ -20,19 +20,27 @@ describe('v1.4.80 — 이미지 엔진 라우팅 매트릭스', () => {
   // ✅ [v2.8.2] 'dall-e-3' 추가 — UI 옵션은 v2.7.15부터 있었으나 화이트리스트에 누락되어 폴백되던 회귀 차단
   // ✅ [v2.10.305] 'dall-e-3' 제거 — UI 폐기(v2.10.302) + VALID_AI_SOURCES 제거됨. ActiveImageSource 7개만.
   // ✅ [v2.10.335] 나노바나나 3종 분리 — 'nano-banana'·'nano-banana-2' 추가 (각각 별개 모델)
-  const ENGINES = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'prodia'];
+  const ENGINES = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'prodia', 'falai', 'stability'];
+  // 2026-11-03: these left the product. They must be ABSENT from every list below (a saved value is parked by
+  // retiredImageEngines and blocked at generation time instead of being silently routed).
+  const RETIRED_ENGINES = ['deepinfra', 'leonardoai', 'prodia', 'falai', 'stability'];
+  const expectEngine = (engine: string, text: string): void => {
+    const matcher = new RegExp(`'${engine.replace(/[-/]/g, '\$&')}'`);
+    if (RETIRED_ENGINES.includes(engine)) expect(text).not.toMatch(matcher);
+    else expect(text).toMatch(matcher);
+  };
 
   describe('P0-1: types.ts — ImageProvider / ALLOWED_PROVIDER', () => {
     const code = read('image/types.ts');
 
     for (const engine of ENGINES) {
       it(`'${engine}' ImageProvider 유니온에 포함`, () => {
-        expect(code).toMatch(new RegExp(`'${engine.replace(/[-/]/g, '\\$&')}'`));
+        expectEngine(engine, code);
       });
       it(`'${engine}' ALLOWED_PROVIDER 배열에 포함`, () => {
         // ALLOWED_PROVIDER 선언 후 배열 내 존재 확인
         const allowedBlock = code.match(/ALLOWED_PROVIDER[\s\S]{0,2000}?\];/)?.[0] || '';
-        expect(allowedBlock).toMatch(new RegExp(`'${engine.replace(/[-/]/g, '\\$&')}'`));
+        expectEngine(engine, allowedBlock);
       });
     }
   });
@@ -43,7 +51,7 @@ describe('v1.4.80 — 이미지 엔진 라우팅 매트릭스', () => {
     for (const engine of ENGINES) {
       it(`'${engine}' VALID_AI_SOURCES에 포함 (오염값 판정 방지)`, () => {
         const block = code.match(/VALID_AI_SOURCES\s*=\s*\[[\s\S]{0,500}?\]/)?.[0] || '';
-        expect(block).toMatch(new RegExp(`'${engine.replace(/[-/]/g, '\\$&')}'`));
+        expectEngine(engine, block);
       });
     }
   });
@@ -57,11 +65,11 @@ describe('v1.4.80 — 이미지 엔진 라우팅 매트릭스', () => {
         const activeDecl = code.match(/export type ActiveImageSource\s*=[\s\S]{0,500}?;/)?.[0] || '';
         const globalDecl = code.match(/export type GlobalImageSource\s*=[\s\S]{0,500}?;/)?.[0] || '';
         const combined = activeDecl + globalDecl;
-        expect(combined).toMatch(new RegExp(`'${engine.replace(/[-/]/g, '\\$&')}'`));
+        expectEngine(engine, combined);
       });
       it(`'${engine}' VALID_SOURCES 배열 — 지원 종료 엔진은 빠지고 나머지는 포함`, () => {
         const block = code.match(/VALID_SOURCES:\s*GlobalImageSource\[\]\s*=\s*\[[\s\S]{0,500}?\]/)?.[0] || '';
-        const retired = ['deepinfra', 'leonardoai', 'prodia'].includes(engine);
+        const retired = RETIRED_ENGINES.includes(engine);
         const matcher = new RegExp(`'${engine.replace(/[-/]/g, '\$&')}'`);
         if (retired) expect(block).not.toMatch(matcher);
         else expect(block).toMatch(matcher);
@@ -82,15 +90,15 @@ describe('v1.4.80 — 이미지 엔진 라우팅 매트릭스', () => {
     });
   });
 
-  describe('P0-5: headingImageGen.ts 개별 재생성 — flow/deepinfra 분기 존재', () => {
+  describe('P0-5: headingImageGen.ts 개별 재생성 — flow 분기 존재 / 지원 종료 엔진 분기 없음', () => {
     const code = read('renderer/modules/headingImageGen.ts');
 
     it("imageSource === 'flow' 분기 존재", () => {
       expect(code).toMatch(/imageSource === 'flow'[\s\S]{0,500}?provider:\s*'flow'/);
     });
 
-    it("imageSource === 'deepinfra' 분기 존재", () => {
-      expect(code).toMatch(/imageSource === 'deepinfra'[\s\S]{0,500}?provider:\s*'deepinfra'/);
+    it('지원 종료 엔진(deepinfra/leonardoai/prodia/falai/stability) 분기가 없다', () => {
+      expect(code).not.toMatch(/imageSource === '(deepinfra|leonardoai|prodia|falai|stability)'/);
     });
   });
 
@@ -160,12 +168,13 @@ describe('v1.4.80 — 이미지 엔진 라우팅 매트릭스', () => {
   describe('회귀 방지 — imageGenerator if 분기 독립성', () => {
     const code = read('imageGenerator.ts');
 
-    it("'flow' 분기가 imagefx 이후, deepinfra 이전에 존재", () => {
+    it("'flow' 분기가 imagefx 이후, naver 이전에 존재하고 지원 종료 엔진 분기는 없다", () => {
       const flowIdx = code.indexOf("normalizedProvider === 'flow'");
       const imagefxIdx = code.indexOf("normalizedProvider === 'imagefx'");
-      const deepinfraIdx = code.indexOf("normalizedProvider === 'deepinfra'");
+      const naverIdx = code.indexOf("normalizedProvider === 'naver'");
       expect(flowIdx).toBeGreaterThan(imagefxIdx);
-      expect(flowIdx).toBeLessThan(deepinfraIdx);
+      expect(flowIdx).toBeLessThan(naverIdx);
+      expect(code).not.toMatch(/normalizedProvider === '(deepinfra|leonardoai|prodia)'/);
     });
   });
 });

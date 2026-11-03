@@ -11,7 +11,7 @@
  *      caller falls back to the first body image or a crawled fallback.
  *
  * Why a separate adapter:
- * The generators (nano-banana-pro / openai-image / leonardo / imagefx) all
+ * The generators (nano-banana-pro / openai-image / imagefx) all
  * share the ImageRequestItem interface, but their batch semantics differ.
  * Dedicated thumbnail generation needs its own entry point so callers can
  * request "just the thumbnail" without triggering the full body-image batch.

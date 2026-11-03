@@ -87,7 +87,6 @@ const SLOW_IMAGE_PROVIDERS = new Set([
   'nano-banana-pro',
   'nano-banana-2',
   'openai-image',
-  'leonardoai',
 ]);
 let imageGenerationQueue: Promise<void> = Promise.resolve();
 let lastImageGenerationFinishedAt = 0;
@@ -786,7 +785,7 @@ async function ensureExternalApiCostConsent(provider: string): Promise<boolean> 
   //   사용자 보고: 연속발행 중 plan 모달이 반복 출현, '유료' 클릭해도 재출현.
   //   원인: getConfig 10s timeout이 연속발행 IPC 폭주 중 실제로 발생 → config={} → 모달 재진입.
   // ✅ [v2.10.335] 나노바나나 3종 모두 Gemini 플랜 선택 대상
-  if (provider === 'nano-banana' || provider === 'nano-banana-2' || provider === 'nano-banana-pro' || provider === 'falai') {
+  if (provider === 'nano-banana' || provider === 'nano-banana-2' || provider === 'nano-banana-pro') {
     const memoed = recallPlan();
     if (memoed) {
       console.log(`[CostConsent] ✅ memo hit (${memoed}) → modal 생략, IPC 우회`);
@@ -806,8 +805,8 @@ async function ensureExternalApiCostConsent(provider: string): Promise<boolean> 
     config = {};
   }
 
-  // ✅ 나노바나나 3종 / Fal.ai (FLUX) 전용 플랜 자동 처리
-  if (provider === 'nano-banana' || provider === 'nano-banana-2' || provider === 'nano-banana-pro' || provider === 'falai') {
+  // ✅ 나노바나나 3종 전용 플랜 자동 처리
+  if (provider === 'nano-banana' || provider === 'nano-banana-2' || provider === 'nano-banana-pro') {
     const diskPlan = config.geminiPlanType;
     let resolvedPlan: 'auto' | 'free' | 'paid' =
       diskPlan === 'auto' || diskPlan === 'free' || diskPlan === 'paid'
@@ -991,12 +990,12 @@ async function generateImagesWithCostSafetyInternal(options: any): Promise<any> 
     }
   }
 
-  // ✅ [2026-02-12] 카테고리 자동 주입 → DeepInfra 카테고리별 스타일 적용 (NO PEOPLE 등)
+  // ✅ [2026-02-12] 카테고리 자동 주입 → 카테고리별 스타일 적용 (NO PEOPLE 등)
   if (!options.category) {
     const cachedCategory = UnifiedDOMCache?.getRealCategory?.() || '';
     if (cachedCategory) {
       options.category = cachedCategory;
-      console.log(`[Renderer] 📂 카테고리 자동 주입: "${cachedCategory}" → DeepInfra 스타일 매칭에 사용`);
+      console.log(`[Renderer] 📂 카테고리 자동 주입: "${cachedCategory}" → 스타일 매칭에 사용`);
     }
   }
 

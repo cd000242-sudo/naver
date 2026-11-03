@@ -60,7 +60,10 @@ describe('subImageMode helper', () => {
     it('isAIEngineName whitelist recognises known engines', () => {
         expect(isAIEngineName('nano-banana-pro')).toBe(true);
         expect(isAIEngineName('openai-image')).toBe(true);
-        expect(isAIEngineName('deepinfra')).toBe(true);
+        expect(isAIEngineName('flow')).toBe(true);
+        expect(isAIEngineName('dropshot')).toBe(true);
+        // Removed engines are no longer recognised as AI engines (their saved values are parked at startup).
+        expect(isAIEngineName('deepinfra')).toBe(false);
         expect(isAIEngineName('collected')).toBe(false);
         expect(isAIEngineName('ai')).toBe(false);
         expect(isAIEngineName(null)).toBe(false);

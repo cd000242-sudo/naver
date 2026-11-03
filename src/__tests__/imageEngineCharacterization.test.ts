@@ -24,9 +24,9 @@ describe('Stage 0 — normalizeImageProvider 현재 동작 고정', () => {
     expect(normalizeImageProvider('nano-banana-pro')).toBe('nano-banana-pro');
   });
 
-  it("deepinfra 계열은 'deepinfra'로 정규화된다 (불변 — 변경 금지)", () => {
-    expect(normalizeImageProvider('deepinfra-flux')).toBe('deepinfra');
-    expect(normalizeImageProvider('deepinfra-flux-2')).toBe('deepinfra');
+  it('지원 종료된 deepinfra 별칭은 더 이상 접히지 않고 값 그대로 통과한다 (retiredImageEngines 가 보류·차단한다)', () => {
+    expect(normalizeImageProvider('deepinfra-flux')).toBe('deepinfra-flux');
+    expect(normalizeImageProvider('deepinfra-flux-2')).toBe('deepinfra-flux-2');
   });
 
   it('정규화 대상이 아닌 값은 그대로 통과한다 (불변 — 변경 금지)', () => {

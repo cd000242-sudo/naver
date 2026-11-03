@@ -1709,12 +1709,12 @@ export async function generateSingleImageWithImageFx(
           const reason = classification === 'bot_detected'
             ? `오늘 ${todayCount}장만 생성 — 진짜 한도 불가능`
             : `오늘 ${todayCount}장 — 봇감지 가능성 큼`;
-          sendImageLog(`⚠️ [ImageFX] 봇감지 의심! (${reason}) — 한도 아님. 다른 엔진(나노바나나 ₩54/장 / DeepInfra) 즉시 사용 권장`);
+          sendImageLog(`⚠️ [ImageFX] 봇감지 의심! (${reason}) — 한도 아님. 다른 엔진(나노바나나 ₩54/장) 즉시 사용 권장`);
           lastError = new Error(
             `IMAGEFX_BOT_DETECTED:⚠️ Google 봇감지 의심 (오늘 ${todayCount}장만 생성). ` +
             `진짜 시간당 한도가 아닐 가능성 큼. 1시간 기다려도 같은 증상 반복될 수 있음.\n\n` +
             `즉시 해결:\n` +
-            `1. 다른 이미지 엔진으로 전환 (나노바나나 ₩54/장, DeepInfra $0.01/장)\n` +
+            `1. 다른 이미지 엔진으로 전환 (나노바나나 ₩54/장)\n` +
             `2. 환경설정 → ImageFX → "Google 계정 변경" 으로 다른 계정 사용\n` +
             `3. 잠시 후(10~30분) 재시도 (긴 시간 기다리지 마세요)`
           );
@@ -1722,7 +1722,7 @@ export async function generateSingleImageWithImageFx(
           sendImageLog(`🚫 [ImageFX] 진짜 시간당 한도 도달 추정 (오늘 ${todayCount}장+) — 1시간 후 재시도`);
           lastError = new Error(
             `IMAGEFX_QUOTA_EXCEEDED:Google ImageFX 시간당 한도를 초과했습니다 (오늘 ${todayCount}장 성공). ` +
-            `약 1시간 후 다시 시도하거나, 다른 이미지 엔진(나노바나나/DeepInfra)으로 전환해주세요.`
+            `약 1시간 후 다시 시도하거나, 다른 이미지 엔진(나노바나나)으로 전환해주세요.`
           );
         }
         // ✅ [v2.10.299 FIX] return null → throw — 외부 catch가 lastClassifiedError로 저장하도록.
@@ -1763,7 +1763,7 @@ export async function generateSingleImageWithImageFx(
         lastError = new Error(
           `IMAGEFX_FORBIDDEN:Google ImageFX 접근이 거부되었습니다 (${errorCode}). ` +
           'Google Labs가 현재 계정/IP/지역 조합에서 생성 API를 허용하지 않는 상태입니다. ' +
-          '로그인은 성공해도 403으로 막힐 수 있습니다. 다른 Google 계정, 테더링/VPN/다른 네트워크, 또는 Flow/리더스 나노바나나프로/OpenAI Image/DeepInfra를 사용해주세요.'
+          '로그인은 성공해도 403으로 막힐 수 있습니다. 다른 Google 계정, 테더링/VPN/다른 네트워크, 또는 Flow/리더스 나노바나나프로/OpenAI Image를 사용해주세요.'
         );
         // [2026-05-27 작업 23] return null → throw — outer catch가 lastClassifiedError로 저장.
         throw lastError;
@@ -2563,7 +2563,7 @@ export function setImageFxCookie(cookie: string): void {
 /**
  * ✅ [2026-03-15] ImageFX 배치 이미지 생성 (Gemini API 키 불필요!)
  * 
- * generateWithNanoBananaPro/generateWithDeepInfra와 동일한 인터페이스.
+ * generateWithNanoBananaPro와 동일한 인터페이스.
  * Gemini가 안 되는 사용자를 위한 완전 독립 파이프라인.
  * AdsPower + Google 로그인만으로 무료 이미지 생성.
  */
@@ -2587,7 +2587,7 @@ export async function generateWithImageFx(
   // ✅ [v1.4.40] 마지막 분류된 에러 보존 — 0개 결과일 때 명확한 사유로 throw
   let lastClassifiedError: Error | null = null;
 
-  // ✅ [v2.10.65] 중복 이미지 검출 — FLOW/나노/Leonardo/DeepInfra와 동기화 (임계값 8)
+  // ✅ [v2.10.65] 중복 이미지 검출 — FLOW/나노와 동기화 (임계값 8)
   const usedImageHashes = new Set<string>();
   const usedImageAHashes: bigint[] = [];
   const IMAGEFX_AHASH_THRESHOLD = 8;
@@ -2776,7 +2776,7 @@ export async function generateWithImageFx(
           'IMAGEFX_UNKNOWN_FAILURE:Google ImageFX 3연속 실패.\n\n' +
           '시간당 한도가 아닐 수 있습니다 (오늘 처음 사용한 경우 특히):\n' +
           '1. 환경설정 → ImageFX → "Google 계정 변경" 으로 재로그인\n' +
-          '2. 다른 이미지 엔진(Pollinations/DeepInfra)으로 전환\n' +
+          '2. 다른 이미지 엔진(나노바나나/Flow)으로 전환\n' +
           '3. F12 → Console 탭의 [ImageFX] 로그 확인 (HTTP_401/HTTP_429/NO_IMAGES 등)'
         );
       }
@@ -2862,7 +2862,7 @@ export async function testImageFxConnection(): Promise<{
     if (msg.includes('IMAGEFX_FORBIDDEN') || msg.includes('HTTP_403') || msg.includes('HTTP_4')) {
       return {
         ok: false,
-        message: '⛔ ImageFX 실제 생성 테스트 실패 — Google Labs가 현재 계정/IP/지역에서 생성 API 접근을 거부했습니다. 앱 오류나 API 키 문제가 아니므로 다른 Google 계정, 다른 네트워크/IP, 또는 Flow/리더스 나노바나나프로/OpenAI Image/DeepInfra를 사용해주세요.',
+        message: '⛔ ImageFX 실제 생성 테스트 실패 — Google Labs가 현재 계정/IP/지역에서 생성 API 접근을 거부했습니다. 앱 오류나 API 키 문제가 아니므로 다른 Google 계정, 다른 네트워크/IP, 또는 Flow/리더스 나노바나나프로/OpenAI Image를 사용해주세요.',
       };
     }
     if (msg.includes('IMAGEFX_QUOTA_EXCEEDED')) {

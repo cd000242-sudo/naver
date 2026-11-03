@@ -2,18 +2,16 @@ import type { GenerateImagesOptions, GeneratedImage, ImageFallbackPolicy, ImageP
 import { assertProvider as assertProviderFn, normalizeImageFallbackPolicy } from './image/types.js';
 // ✅ [v2.10.335] 나노바나나 3종 → 모델 키 SSOT
 import { NANO_PROVIDER_TO_MODEL_KEY } from './runtime/imageEngineCatalog.js';
+import { isRetiredImageEngine, retiredImageEngineLabel } from './runtime/retiredImageEngines.js';
 import {
   generateWithNanoBananaPro,
   abortImageGeneration as abortNanoBananaImageGeneration,
   resetAllImageState,
 } from './image/nanoBananaProGenerator.js';
-import { generateWithDeepInfra } from './image/deepinfraGenerator.js';
 import { generateWithNaver } from './image/naverImageGenerator.js';
 import { generateWithOpenAIImage } from './image/openaiImageGenerator.js';
-import { generateWithLeonardoAI } from './image/leonardoAIGenerator.js';
 import { cleanupImageFxBrowser, generateWithImageFx } from './image/imageFxGenerator.js';
 import { generateWithFlow, resetFlowState } from './image/flowGenerator.js';
-import { generateWithProdia } from './image/prodiaGenerator.js';
 // ✅ [v2.11.7] 리더스 나노바나나 무제한 (dropshot)
 import { generateWithDropshot } from './image/dropshotGenerator.js';
 import {
@@ -420,10 +418,7 @@ export async function applyKoreanTextOverlayIfNeeded(
 export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
   openaiApiKey?: string;
   geminiApiKey?: string; // ✅ Gemini 키
-  deepinfraApiKey?: string; // ✅ DeepInfra 키
   openaiImageApiKey?: string; // ✅ OpenAI Image (DALL-E) 키
-  leonardoaiApiKey?: string; // ✅ Leonardo AI 키
-  prodiaApiKey?: string; // Prodia
 }, onImageGenerated?: (image: GeneratedImage, index: number, total: number) => void  // ✅ [2026-02-13 SPEED] 실시간 콜백
 ): Promise<GeneratedImage[]> {
   // ✅ [v2.7.27] Adaptive Limiter — 메인 스레드 lag 발생 시 자동으로 동시성 다운
@@ -440,10 +435,10 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
   if (!options.provider) {
     console.warn(`[ImageGenerator] ⚠️⚠️⚠️ options.provider가 비어있어 'nano-banana-2' 기본값 적용! 호출자 확인 필요!`);
   }
-  // deepinfra-flux, deepinfra-flux-2 등 → deepinfra
-  if (normalizedProvider.startsWith('deepinfra')) {
-    console.log(`[ImageGenerator] 📋 프로바이더 정규화: ${options.provider} → deepinfra`);
-    normalizedProvider = 'deepinfra';
+  // [2026-11-03] Leonardo AI / DeepInfra / Prodia left the product. A saved or queued value must fail loudly:
+  //   falling through to the unsupported-provider fallback below would silently bill another paid engine.
+  if (isRetiredImageEngine(normalizedProvider)) {
+    throw new Error(`선택하셨던 ${retiredImageEngineLabel(normalizedProvider)} 이미지 엔진은 지원이 끝났습니다. 이미지 엔진을 다시 골라 주세요.`);
   }
   // [2026-10-10] 나노바나나는 나노바나나2 한 종류만 노출 — 옛 저장값·큐가 pro/2.5 provider로 직접 들어와도
   //   고가 3 Pro(₩185)·2.5(한글 깨짐)를 부르지 않고 나노바나나2로 보낸다. 아래 pro/2.5 라우팅 자체는 백엔드 호환용으로 남긴다.
@@ -468,11 +463,8 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     'nano-banana': '나노바나나 (Gemini 2.5 Flash Image, ₩54/장)',
     'nano-banana-2': '나노바나나2 (Nano Banana 2.1, ₩97/장)',
     'nano-banana-pro': '나노바나나 프로 (Gemini 3 Pro Image, ₩185/장)',
-    'deepinfra': '딥인프라 FLUX-2',
     'openai-image': 'OpenAI 덕테이프',
     'dall-e-3': 'GPT 이미지 시리즈 (OpenAI, 기존 DALL-E 설정 자동 전환)',
-    'leonardoai': 'Leonardo AI',
-    'prodia': 'Prodia',
     'imagefx': 'ImageFX (Google Labs, 계정/IP 제한 가능)',
     'flow': 'Flow (Nano Banana 2, AI Pro 무료)', // ✅ [v1.5.4]
     'dropshot': '🍌 리더스 나노바나나 무제한 (구독자 무제한 · 추가비용 0원)', // ✅ [v2.11.7]
@@ -695,7 +687,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         globalSubject,
         articleContext,
         sectionContent: item.sectionContent,
-        diversityIndex: item.diversityIndex, // openai/leonardo rotate from this; it was dropped here before
+        diversityIndex: item.diversityIndex, // openai rotates from this; it was dropped here before
         visualRole: engineHonorsRole ? visualRole || undefined : undefined,
 
         isThumbnail: item.isThumbnail || false, // ✅ isThumbnail 플래그 전달
@@ -706,7 +698,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         allowText, // text is thumbnail-only in auto publish contexts, unless "소제목 글자 넣기" draws the heading
         englishPrompt: useContextualPrompt ? prompt : item.englishPrompt,
         sourceEnglishPrompt: item.sourceEnglishPrompt || item.englishPrompt,
-        category: item.category || options.category || '', // ✅ [2026-02-12] options.category 폴백 → DeepInfra 카테고리별 스타일 적용
+        category: item.category || options.category || '', // ✅ [2026-02-12] options.category 폴백 → 카테고리별 스타일 적용
         referenceImagePath: item.referenceImagePath || options.referenceImagePath, // ✅ 전역 참조 이미지 적용
         // ✅ [2026-01-28] 크롤링 이미지를 referenceImageUrl에 할당 (img2img 활성화)
         referenceImageUrl: normalizeReferenceImageUrl(item.referenceImageUrl)
@@ -821,33 +813,6 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     }
   }
 
-  // ✅ [2026-02-22] Leonardo AI 선택 시
-  if (normalizedProvider === 'leonardoai') {
-    try {
-      console.log(`[이미지생성] 🦁 Leonardo AI로 ${items.length}개 이미지 생성 시작...`);
-      const leonardoImages = await generateWithLeonardoAI(
-        items,
-        options.postTitle,
-        options.postId,
-        options.isFullAuto,
-        apiKeys?.leonardoaiApiKey,
-        options.isShoppingConnect || false,
-        onImageGenerated,  // ✅ [2026-02-27] 실시간 콜백 전달
-        orderedCollectedImages as string[]  // 대표 상품 이미지 후보 (중복 제거됨)
-      );
-      console.log(`[이미지생성] ✅ Leonardo AI로 ${leonardoImages.length}개 이미지 생성 완료!`);
-      return finalizeImages(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(leonardoImages, {
-        requestedProvider,
-        actualProvider: 'leonardoai',
-        policy: fallbackPolicy,
-      }), 'leonardoai', options.postTitle, options.thumbnailTextInclude, items));
-    } catch (leonardoError) {
-      console.warn(`[ImageGenerator] ⚠️ Leonardo AI 실패:`, (leonardoError as Error).message);
-      const userMsg = getImageErrorMessage(leonardoError);
-      throw new Error(`[Leonardo AI] ${userMsg}`);
-    }
-  }
-
   // ✅ [2026-03-15] ImageFX 선택 시 (Google Labs — Gemini API 키 불필요, 단 계정/IP 접근 제한 가능)
   if (normalizedProvider === 'imagefx') {
     try {
@@ -880,7 +845,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
           '해결 방법:\n' +
           '1. 환경설정 → ImageFX → Google 계정 변경으로 다른 Google 계정을 시도하세요.\n' +
           '2. 테더링, 다른 네트워크, VPN 등으로 IP를 바꾼 뒤 다시 시도하세요.\n' +
-          '3. 대량 발행은 Flow, 리더스 나노바나나프로, OpenAI Image, DeepInfra처럼 접근성이 확인된 엔진을 권장합니다.'
+          '3. 대량 발행은 Flow, 리더스 나노바나나프로, OpenAI Image처럼 접근성이 확인된 엔진을 권장합니다.'
         );
       }
       if (rawMsg.startsWith('IMAGEFX_')) {
@@ -925,31 +890,6 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         throw new Error(`[Flow] ${userMessage}`);
       }
       throw new Error(`[Flow] 이미지 생성 실패: ${rawMsg}\n\n💡 가능한 원인:\n1. 계정 쿼터 초과 (1시간 후 재시도)\n2. Google 세션 만료 (AdsPower 재로그인)\n3. 안전 필터 차단\n4. Flow 내부 API 구조 변경 (자동 재학습 시도됨)`);
-    }
-  }
-
-  if (normalizedProvider === 'prodia') {
-    try {
-      console.log(`[이미지생성] ⚡ Prodia로 ${items.length}개 이미지 생성 시작...`);
-      const prodiaImages = await generateWithProdia(
-        items,
-        options.postTitle,
-        options.postId,
-        options.isFullAuto,
-        apiKeys?.prodiaApiKey,
-        onImageGenerated,
-      );
-      if (prodiaImages.length === 0) {
-        throw new Error('Prodia가 0건을 반환했습니다. API 키, 크레딧, 모델 제한을 확인해주세요.');
-      }
-      return finalizeImages(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(prodiaImages, {
-        requestedProvider,
-        actualProvider: 'prodia',
-        policy: fallbackPolicy,
-      }), 'prodia', options.postTitle, options.thumbnailTextInclude, items));
-    } catch (prodiaError) {
-      const userMsg = getImageErrorMessage(prodiaError);
-      throw new Error(`[Prodia] ${userMsg}`);
     }
   }
 
@@ -1009,35 +949,6 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
       const rawMsg = (gensparkError as Error).message || '';
       console.warn(`[ImageGenerator] ⚠️ 젠스파크 실패:`, rawMsg);
       throw new Error(`[젠스파크] 이미지 생성 실패: ${rawMsg}`);
-    }
-  }
-
-  // ✅ DeepInfra 선택 시 (FLUX-2-dev, 고품질 저가)
-  // ✅ [2026-01-30 FIX] DeepInfra도 텍스트 오버레이 적용 (한글 텍스트 지원 안함)
-  if (normalizedProvider === 'deepinfra') {
-    try {
-      console.log(`[이미지생성] 🚀 딥인프라 FLUX-2로 ${items.length}개 이미지 생성 시작...`);
-      const deepinfraImages = await generateWithDeepInfra(
-        items,
-        options.postTitle,
-        options.postId,
-        options.isFullAuto,
-        apiKeys?.deepinfraApiKey,
-        options.isShoppingConnect || false, // ✅ [2026-02-12] 쇼핑커넥트 모드 전달
-        onImageGenerated,  // ✅ [2026-02-27] 실시간 콜백 전달
-        orderedCollectedImages as string[]  // 대표 상품 이미지 후보 (중복 제거됨)
-      );
-      console.log(`[이미지생성] ✅ 딥인프라 FLUX-2로 ${deepinfraImages.length}개 이미지 생성 완료!`);
-      // ✅ [2026-01-30 FIX] DeepInfra도 텍스트 오버레이 적용 (한글 텍스트 지원 안함)
-      return finalizeImages(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(deepinfraImages, {
-        requestedProvider,
-        actualProvider: 'deepinfra',
-        policy: fallbackPolicy,
-      }), 'deepinfra', options.postTitle, options.thumbnailTextInclude, items));
-    } catch (deepinfraError) {
-      console.warn(`[ImageGenerator] ⚠️ DeepInfra 실패:`, (deepinfraError as Error).message);
-      const userMsg = getImageErrorMessage(deepinfraError);
-      throw new Error(`[DeepInfra FLUX] ${userMsg}`);
     }
   }
 

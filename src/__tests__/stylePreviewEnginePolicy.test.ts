@@ -10,8 +10,11 @@ describe('style preview engine routing', () => {
     expect(resolveStylePreviewEngine(undefined)).toMatchObject({ engine: 'flow', kind: 'flow' });
     expect(resolveStylePreviewEngine('flow')).toMatchObject({ engine: 'flow', kind: 'flow' });
     expect(resolveStylePreviewEngine('imagefx')).toMatchObject({ engine: 'imagefx', kind: 'imagefx' });
-    expect(resolveStylePreviewEngine('deepinfra-flux')).toMatchObject({ engine: 'deepinfra', kind: 'deepinfra' });
     expect(resolveStylePreviewEngine('pollinations')).toMatchObject({ engine: 'pollinations', kind: 'pollinations' });
+  });
+
+  it.each(['deepinfra', 'deepinfra-flux', 'leonardoai', 'stability'])('removed engine %s resolves to null so the caller refuses instead of switching', (value) => {
+    expect(resolveStylePreviewEngine(value)).toBeNull();
   });
 
   it('maps each Nano Banana selector to its exact current model', () => {

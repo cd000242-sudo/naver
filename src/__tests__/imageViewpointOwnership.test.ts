@@ -65,11 +65,11 @@ describe('이미지 시점 단일 소유자 — main 브리프', () => {
     expect(prompt.length).toBeLessThanOrEqual(1_800);
   });
 
-  it('자체 회전 엔진(flow/openai/deepinfra/leonardo)은 건너뛰고 나머지는 브리프가 맡는다', () => {
-    for (const engine of ['flow', 'google-flow', 'openai-image', 'gpt-image-2', 'deepinfra', 'leonardo']) {
+  it('자체 회전 엔진(flow/openai)은 건너뛰고 나머지(지원 종료 엔진 포함)는 브리프가 맡는다', () => {
+    for (const engine of ['flow', 'google-flow', 'openai-image', 'gpt-image-2']) {
       expect(engineRotatesViewpoint(engine), engine).toBe(true);
     }
-    for (const engine of ['imagefx', 'nano-banana-pro', 'nano-banana', 'dropshot', '', undefined]) {
+    for (const engine of ['imagefx', 'nano-banana-pro', 'nano-banana', 'dropshot', 'deepinfra', 'leonardo', '', undefined]) {
       expect(engineRotatesViewpoint(engine), String(engine)).toBe(false);
     }
   });
@@ -100,9 +100,9 @@ describe('이미지 시점 배선 — 소스 잠금', () => {
     expect(multi).toMatch(/diversityIndex:\s*headingIdx/);
   });
 
-  it('leonardo 는 openai 처럼 item.diversityIndex 를 우선 쓴다', () => {
-    const code = read('image/leonardoAIGenerator.ts');
-    expect(code).toMatch(/item\.diversityIndex\s*\?\?/);
+  it('openai 는 item.diversityIndex 를 우선 쓴다', () => {
+    const code = read('image/openaiImageGenerator.ts');
+    expect(code).toMatch(/Number\.isFinite\(item\.diversityIndex as number\)/);
     // [2026-09-17] i 폴백만으로는 부족했다 — 한 장씩 넘어오면 i 가 늘 0 이라
     //   0번 힌트(bird-eye + golden hour)만 나왔다. 순번이 없으면 소제목 글자로 시드를 만든다.
     expect(code).toMatch(/resolveDiversitySeedFromText\(item\.heading\)/);

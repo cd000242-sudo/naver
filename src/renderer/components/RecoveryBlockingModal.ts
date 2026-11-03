@@ -162,7 +162,7 @@ export const RECOVERY_MODAL_PRESETS: Record<BlockingModalCode, (errorCode?: stri
     message:
       'Google Labs가 현재 계정, IP, 지역 조합에서 ImageFX 생성 API 접근을 거부했습니다.\n\n' +
       '로그인은 성공해도 생성 단계에서 403으로 막힐 수 있습니다. 앱 오류나 API 키 문제가 아니라 Google 측 접근 정책 문제입니다.\n\n' +
-      '대량 발행은 접근성이 확인된 Flow, 리더스 나노바나나프로, OpenAI Image, DeepInfra 사용을 권장합니다. 다른 엔진으로 자동 전환은 일어나지 않습니다.',
+      '대량 발행은 접근성이 확인된 Flow, 리더스 나노바나나프로, OpenAI Image 사용을 권장합니다. 다른 엔진으로 자동 전환은 일어나지 않습니다.',
     choices: [
       { id: 'open-proxy-settings', label: '네트워크/IP 변경 안내', variant: 'primary' },
       { id: 'switch-account', label: '다른 Google 계정 로그인', variant: 'secondary' },

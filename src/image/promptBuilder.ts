@@ -29,7 +29,7 @@ export interface PromptOptions {
     personRule?: string; // ✅ [2026-03-01] 인물 규칙 (한국인 하드코딩)
     isShoppingConnect?: boolean;
     hasCollectedImages?: boolean; // ✅ 추가: collectedImages가 있을 때 참조 이미지 모드 활성화
-    provider?: string; // ✅ [2026-01-30] 이미지 생성 provider: 'nano-banana-pro' | 'deepinfra' | 'fal' | 'stability'
+    provider?: string; // ✅ [2026-01-30] 이미지 생성 provider: 'nano-banana-pro' | 'flow' | 'openai-image'
     imageStyle?: string; // ✅ [2026-03-01] 적용할 이미지 스타일
     stylePrompt?: string; // ✅ [2026-03-01] 스타일 상세 프롬프트
 }

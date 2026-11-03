@@ -125,7 +125,7 @@ export async function initImageManagementTab(): Promise<void> {
   // [2026-07-31] 드롭샷/Flow 로그인 버튼 배선 — 이 호출이 없어 클릭이 무반응이었다.
   try { gsBindAllStaticUis(); } catch (e) { console.warn('[ImageManagementTab] 젠스파크 UI 배선 실패:', e); }
   try { bindAllStaticDropshotLoginUis(); } catch (e) { console.warn('[ImageManagementTab] 로그인 UI 배선 실패:', e); }
-  // 2026-06-14: Flow/Prodia are selectable again for existing users.
+  // 2026-06-14: Flow is selectable again for existing users.
   // ImageFX remains hidden; only stale ImageFX selections migrate to dropshot.
   try {
     const rawPipeline = readRawPipelineSettings();
@@ -271,9 +271,6 @@ export async function initImageManagementTab(): Promise<void> {
           btn.style.borderColor = '#eab308';
           btn.style.boxShadow = '0 4px 15px rgba(234, 179, 8, 0.4)';
 
-          const stabilityModelContainer = document.getElementById('stability-model-selection-container');
-          if (stabilityModelContainer) stabilityModelContainer.style.display = 'none';
-
           appendLog('✅ 나노 바나나 프로가 선택되었습니다. (Gemini API 사용)');
         });
 
@@ -340,9 +337,6 @@ export async function initImageManagementTab(): Promise<void> {
         btn.style.borderColor = '#ec4899';
         btn.style.boxShadow = '0 4px 15px rgba(236, 72, 153, 0.4)';
 
-        const stabilityModelContainer = document.getElementById('stability-model-selection-container');
-        if (stabilityModelContainer) stabilityModelContainer.style.display = 'none';
-
         appendLog('✅ Pollinations(FLUX, 무료)가 선택되었습니다.');
         return;
       }
@@ -360,15 +354,6 @@ export async function initImageManagementTab(): Promise<void> {
       btn.style.borderColor = '#8b5cf6';
       btn.style.boxShadow = '0 4px 15px rgba(139, 92, 246, 0.4)';
 
-      const stabilityModelContainer = document.getElementById('stability-model-selection-container');
-      if (stabilityModelContainer) {
-        if (btn.dataset.source === 'stability') {
-          stabilityModelContainer.style.display = 'block';
-          stabilityModelContainer.style.animation = 'fadeIn 0.3s ease-out';
-        } else {
-          stabilityModelContainer.style.display = 'none';
-        }
-      }
     });
   });
 
@@ -419,20 +404,10 @@ export async function initImageManagementTab(): Promise<void> {
         }
         await showLocalImageManagementModal();
         appendLog('✅ 저장된 이미지 모드가 선택되었습니다.');
-      } else if (selectedSource === 'deepinfra') {
-        appendLog('✅ DeepInfra(FLUX-2, $0.01/장)가 선택되었습니다.');
       } else if (selectedSource === 'pollinations') {
         appendLog('✅ Pollinations(FLUX, 무료)가 선택되었습니다.');
-      } else if (selectedSource === 'falai') {
-        appendLog('✅ Fal.ai(FLUX Schnell)가 선택되었습니다.');
-      } else if (selectedSource === 'prodia') {
-        appendLog('✅ Prodia($0.0025/장)가 선택되었습니다.');
-      } else if (selectedSource === 'stability') {
-        appendLog('✅ Stability AI(고품질)가 선택되었습니다.');
       } else if (selectedSource === 'openai-image') {
         appendLog('✅ 🦆 덕트테이프(OpenAI gpt-image-2.5 Sunburst/Flare, 기본 Sunburst)가 선택되었습니다. — OpenAI API 키 필요, 장당 ₩8~₩295 (기본 Sunburst·Medium 약 ₩18)');
-      } else if (selectedSource === 'leonardoai') {
-        appendLog('✅ Leonardo AI가 선택되었습니다. API 키가 필요합니다.');
       } else if (selectedSource === 'flow') {
         appendLog('✅ Flow가 선택되었습니다. Google 로그인 기반 UI 자동화로 순차 생성됩니다.');
       } else if (selectedSource === 'imagefx') {
@@ -486,28 +461,6 @@ export async function initImageManagementTab(): Promise<void> {
         console.log(`[Renderer] 📁 저장된 이미지 모드 활성화 (AI 엔진 설정 유지: "${localStorage.getItem('globalImageSource') || 'openai-image'}")`);
       }
 
-      // Stability AI 모델 선택 UI 표시/숨김
-      const stabilityModelContainer = document.getElementById('stability-model-selection-container');
-      if (stabilityModelContainer) {
-        if (selectedSource === 'stability') {
-          stabilityModelContainer.style.display = 'block';
-          stabilityModelContainer.style.animation = 'fadeIn 0.3s ease-out';
-        } else {
-          stabilityModelContainer.style.display = 'none';
-        }
-      }
-
-      // Leonardo AI 모델 선택 UI 표시/숨김
-      const leonardoModelContainer = document.getElementById('leonardoai-model-selection-container');
-      if (leonardoModelContainer) {
-        if (selectedSource === 'leonardoai') {
-          leonardoModelContainer.style.display = 'block';
-          leonardoModelContainer.style.animation = 'fadeIn 0.3s ease-out';
-        } else {
-          leonardoModelContainer.style.display = 'none';
-        }
-      }
-
       // ✅ OpenAI 이미지 모델·품질 선택 UI 표시/숨김
       const openaiModelContainer = document.getElementById('openai-image-model-selection-container');
       if (openaiModelContainer) {
@@ -518,13 +471,8 @@ export async function initImageManagementTab(): Promise<void> {
       if (imageSourceInfoBadge) {
         const colorMap: Record<string, string> = {
           'nano-banana-2': 'linear-gradient(135deg, #f59e0b, #d97706)',
-          'deepinfra': 'linear-gradient(135deg, #fb923c, #f97316)',
-          'falai': 'linear-gradient(135deg, #ec4899, #db2777)',
           'pollinations': 'linear-gradient(135deg, #f472b6, #ec4899)',
-          'prodia': 'linear-gradient(135deg, #a855f7, #8b5cf6)',
-          'stability': 'linear-gradient(135deg, #3b82f6, #2563eb)',
           'openai-image': 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
-          'leonardoai': 'linear-gradient(135deg, #ea580c, #dc2626)',
           'imagefx': 'linear-gradient(135deg, #10b981, #059669)',
           'flow': 'linear-gradient(135deg, #22c55e, #16a34a)',
           'genspark': 'linear-gradient(135deg, #8b5cf6, #6d28d9)',
@@ -585,18 +533,6 @@ export async function initImageManagementTab(): Promise<void> {
     if (savedSource && imageSourceSelect.querySelector(`option[value="${savedSource}"]`)) {
       imageSourceSelect.value = savedSource;
       (window as any).globalImageSource = savedSource;
-
-      // Stability 모델 선택 UI 초기 표시 여부
-      const stabilityModelContainer = document.getElementById('stability-model-selection-container');
-      if (stabilityModelContainer) {
-        stabilityModelContainer.style.display = savedSource === 'stability' ? 'block' : 'none';
-      }
-
-      // Leonardo AI 모델 선택 UI 초기 표시 여부
-      const leonardoModelContainer = document.getElementById('leonardoai-model-selection-container');
-      if (leonardoModelContainer) {
-        leonardoModelContainer.style.display = savedSource === 'leonardoai' ? 'block' : 'none';
-      }
 
       // OpenAI 모델 선택 UI 초기 표시 여부
       const openaiModelContainer = document.getElementById('openai-image-model-selection-container');

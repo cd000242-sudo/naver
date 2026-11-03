@@ -55,9 +55,7 @@ export type ActiveImageSource =
   | 'nano-banana'
   | 'nano-banana-2'
   | 'nano-banana-pro'
-  | 'deepinfra'
   | 'openai-image'
-  | 'leonardoai'
   | 'imagefx'
   | 'flow'
   | 'dropshot'
@@ -69,14 +67,11 @@ export type ActiveImageSource =
  *
  * @deprecated 신규 코드는 {@link ActiveImageSource}를 사용하세요.
  *   - 'dall-e-3': 2026-05-12 OpenAI API 폐기. v2.10.302에서 UI 클릭 차단 + write VALID_AI_SOURCES 제거.
- *   - 'falai' / 'stability' / 'pollinations': UI 옵션 사라짐. localStorage 잔존 호환만 유지.
+ *   - 'pollinations': UI 옵션 사라짐. localStorage 잔존 호환만 유지.
  */
 // ✅ [2026-02-08 FIX] 이미지 관리 탭 드롭다운 value와 완전 통일
 // ✅ [v1.4.80] 'flow' 추가 — Google Labs Flow (Nano Banana Pro 무료 쿼터)
 export type GlobalImageSource = ActiveImageSource
-  | 'falai'          // @deprecated UI 폐기
-  | 'prodia'
-  | 'stability'      // @deprecated UI 폐기
   | 'pollinations'   // @deprecated UI 폐기
   | 'dall-e-3';      // @deprecated 2026-05-12 OpenAI 폐기 — gpt-image-1 자동 마이그레이션
 
@@ -108,14 +103,9 @@ export const SOURCE_NAMES: Record<GlobalImageSource, string> = {
   'nano-banana': '나노바나나 (₩54/장, Gemini 2.5 Flash Image)',
   'nano-banana-2': '나노바나나2 (₩97/장, Nano Banana 2.1)',
   'nano-banana-pro': '나노바나나 프로 (₩185/장, Gemini 3 Pro Image)',
-  'falai': 'Fal.ai',
-  'prodia': 'Prodia',
-  'stability': 'Stability AI',
   'pollinations': 'Pollinations',
-  'deepinfra': 'FLUX-2 (DeepInfra)',
   'openai-image': 'OpenAI Image (gpt-image-2.5 Flare / Sunburst)',
   'dall-e-3': 'GPT 이미지 시리즈 (레거시 설정)',
-  'leonardoai': 'Leonardo AI',
   'imagefx': 'ImageFX (Google Labs, 제한 가능)',
   'flow': '🍌 Flow (Nano Banana 2)',
   'dropshot': '🍌 리더스 나노바나나 무제한 (구독자 무제한 · 추가비용 0원)',
@@ -315,7 +305,6 @@ export function setHeadingImageMode(mode: HeadingImageMode): void {
 // ✅ [v2.10.335] 나노바나나 3종 분리 — nano-banana-2 통합 별칭 제거 (각각 별개 모델).
 //   별칭 맵은 향후 확장 대비 빈 상태로 유지 (normalizeImageSource 시그니처 보존).
 // [2026-10-10] 나노바나나는 나노바나나2 한 종류만 노출 — 옛 프로·2.5 저장값은 읽기·쓰기 모두 나노바나나2로 이관.
-//   (Leonardo 하위 모델 값 'nano-banana-pro'는 leonardoaiModel 키에 따로 저장되어 이 맵을 거치지 않는다.)
 const IMAGE_SOURCE_ALIAS_MAP: Record<string, string> = {
   'nano-banana-pro': 'nano-banana-2',
   'nano-banana': 'nano-banana-2',
@@ -370,10 +359,10 @@ export function setGlobalImageSource(source: GlobalImageSource): void {
 //   기존: fullAutoImageSource가 오염된 기본값('nano-banana-pro')이어도 globalImageSource='flow'를 무시
 //   현재: globalImageSource가 유효하면 그걸 최우선으로 사용 + fullAutoImageSource도 덮어써서 동기화
 export function getFullAutoImageSource(): GlobalImageSource {
-  // ✅ [v2.10.302] dall-e-3 제거 (UI 완전 폐기) + falai/prodia/stability/pollinations는 UI 미노출이나
+  // ✅ [v2.10.302] dall-e-3 제거 (UI 완전 폐기) + pollinations는 UI 미노출이나
   //   기존 사용자 localStorage 호환성을 위해 read VALID에는 유지 — write VALID_AI_SOURCES만 제거.
   // ✅ [v2.11.7] 'dropshot' 추가 — 리더스 나노바나나 무제한
-  const VALID_SOURCES: GlobalImageSource[] = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'falai', 'stability', 'pollinations', 'openai-image', 'imagefx', 'flow', 'dropshot', 'genspark', 'local-folder'];
+  const VALID_SOURCES: GlobalImageSource[] = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'pollinations', 'openai-image', 'imagefx', 'flow', 'dropshot', 'genspark', 'local-folder'];
 
   // 정규화 read (별칭이 저장돼있으면 정식 키로 변환)
   const fullAutoSaved = normalizeImageSource(safeLocalStorageGet('fullAutoImageSource'));
@@ -1017,7 +1006,7 @@ export function createHeadingImageModal(): void {
         <button id="image-style-close" style="position: absolute; top: 16px; right: 16px; width: 36px; height: 36px; border: none; background: #ef4444; border-radius: 50%; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.2s; box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);" onmouseover="this.style.background='#dc2626'; this.style.transform='scale(1.1)'" onmouseout="this.style.background='#ef4444'; this.style.transform='scale(1)'">✕</button>
         
         <h4 style="margin: 0 0 8px 0; font-size: 20px; font-weight: 700; color: #166534;">✨ 이미지 스타일 선택</h4>
-        <p style="margin: 0 0 20px 0; font-size: 12px; color: #64748b;">FLUX-2, Fal.ai, 나노 바나나 프로 등 AI 엔진에 적용됩니다</p>
+        <p style="margin: 0 0 20px 0; font-size: 12px; color: #64748b;">나노 바나나 프로 등 AI 엔진에 적용됩니다</p>
         
         <!-- 좌우 레이아웃 (미리보기 우측 크게) -->
         <div style="display: grid; grid-template-columns: 1fr 420px; gap: 28px;">
