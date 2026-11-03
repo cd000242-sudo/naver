@@ -68,7 +68,7 @@ import { computeHomefeedTitleQuoteIssues } from './content/homefeedTitleQuoteUse
 import { computeHomefeedTitleGateIssues, judgeTitleReplacement } from './content/homefeedTitleGate.js';
 import { HARMONY_NO_PACKET_LOG, createHarmonyRepairGate, harmonyPreservesTitlePromise, llmTitlePatchSkipLog, shouldRunLlmTitlePatch } from './content/agentRepairPolicy.js';
 import type { AgentHarmonyContext } from './agentCli/agentHarmonyEnvelope.js';
-import { handleAgentHarmonyResponse, resolveAgentHarmonyRequest, restoreAgentHarmony } from './content/agentHarmony/harmonyRuntime.js';
+import { createHarmonySwapGuard, handleAgentHarmonyResponse, readAgentHarmony, recallAgentHarmony, resolveAgentHarmonyRequest, restoreAgentHarmony } from './content/agentHarmony/harmonyRuntime.js';
 import { isReviewAvailable, isReviewGuardEnabled, buildReviewGuardBlock } from './content/reviewGuard.js';
 import { isGeneralContentGuardEnabled, hasGroundingSource, buildGeneralContentGuardBlock } from './content/generalContentGuard.js';
 import { isCelebrityFactGuardEnabled, isCelebrityContext, buildCelebrityFactGuardBlock, detectCelebrityAssertionRisk } from './content/celebrityAssertionSanitizer.js';
@@ -2036,6 +2036,8 @@ export function finalizeStructuredContent(
         console.log(`[FinalQualityGate] 후보 제외 — 본문이 약속을 안 갚음(응답 ${Math.round(ta.answerRate * 100)}%, 미상환: ${ta.promised.filter((w) => !bodyForTitleSwap.includes(w)).join(', ')}): "${text}"`);
         return false;
       };
+      // [2026-11-04 Release D] Harmony session (packet present): the swap below may only land on a verified packet candidate.
+      const harmonySwap = createHarmonySwapGuard(readAgentHarmony(content) ?? recallAgentHarmony(withActiveRun((run) => run) ?? null));
       const finalCheck = evaluateTitleQuality(finalContent.selectedTitle, String(finalPK), finalMode, finalCategoryHint, source.articleType);
       if (finalCheck.score < 50) {
         console.warn(`[FinalQualityGate] ⚠️ 최종 제목 품질 미달 (${finalCheck.score}점): "${finalContent.selectedTitle}"`);
@@ -2086,7 +2088,7 @@ export function finalizeStructuredContent(
           .map((c: any) => (typeof c?.text === 'string' ? stripOptionCombo(c.text.trim()) : ''))
           .filter((t: string) => t.length > 0 && t !== finalContent.selectedTitle)
           .filter(bodyKeepsPromise);
-        const scoredCandidates = promiseKept ? [] : candidateTexts
+        const scoredCandidates = promiseKept ? [] : candidateTexts.filter(harmonySwap.allows)
           .map((text: string) => ({ text, score: evaluateTitleQuality(text, String(finalPK), finalMode, finalCategoryHint, source.articleType).score + serpLagPenalty(text) }))
           .sort((a: { score: number }, b: { score: number }) => b.score - a.score);
         const bestCandidate = scoredCandidates[0];
@@ -2095,6 +2097,8 @@ export function finalizeStructuredContent(
         } else if (bestCandidate && bestCandidate.score >= 50 && bestCandidate.score > finalCheck.score) {
           console.log(`[FinalQualityGate] 후보 중 최고점 선택: "${bestCandidate.text}" (${bestCandidate.score}점) — 고쳐 쓰기 대신`);
           finalContent.selectedTitle = bestCandidate.text;
+        } else if (harmonySwap.live) {
+          console.log(`[FinalQualityGate] 조화 세션 제목 유지 (${finalCheck.score}점) — 검증된 대체 후보 없음, 고쳐 쓰기 안 함: "${finalContent.selectedTitle}"`);
         } else
         if (shouldRunLegacySemanticPostDraftMutation(promptVariant, 'repair-title-after-quality-gate')) {
           // 접두사로 인한 훼손 → cleanup만 재적용하여 복구 시도

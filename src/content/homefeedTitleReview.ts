@@ -4,9 +4,13 @@
  *   2026-11-03: 사람이 보는 이 경로는 검수 실패(판정 · 검수 엔진 문제)로 글을 버리지 않는다 — 판정을 그대로 기록하고
  *   ⚠️ 경고로 알린다(몰래 통과시키지 않음). 취소 · 그 밖의 오류는 그대로 던진다. 무인 매일 발행은 main.ts 가 보류한다.
  *   엔진에 검수 경로가 없거나 원문이 없어 사실 대조를 못 하면 그렇다고 기록 · 안내하고 생성만 한다(titleReview 로 구분).
+ * 2026-11-04 Release D: 조화 세션 글(에이전트가 패킷을 낸 글)은 위 4회 검수 · 재생성 대신 패킷 최종 대조 + 독립 검수 1회(agentHarmony/harmonyReview).
+ *   패킷이 없으면(플래그 OFF · API 엔진 · 패킷 누락) 아래 기존 경로가 그대로 돈다.
  * 홈판이 아닌 모드는 지금까지처럼 한 번 생성한다.
  */
-import { generateReviewedDailyHomefeedArticle } from '../main/services/dailyEditorialPipeline.js';
+import { generateReviewedDailyHomefeedArticle, prepareEditorialSource } from '../main/services/dailyEditorialPipeline.js';
+import { reviewHarmonyArticle } from './agentHarmony/harmonyReview.js';
+import { readAgentHarmony } from './agentHarmony/harmonyRuntime.js';
 import { reviewDailyPublishingTitle, validateDailyPublishingTitle } from '../main/services/dailyPublishingTitleReview.js';
 import { windowSourceBody } from '../main/services/dailyHomefeedEditorial.js';
 import type { DailyEditorialAngle } from '../main/services/dailyHomefeedEditorialContract.js';
@@ -88,8 +92,27 @@ export async function generateWithHomefeedReview<T extends Article>(args: {
   // 2026-11-03: a title-review failure here keeps the article and warns (the verdict is logged and audited as it came back).
   let reviewFailed = false, warned = false;
   const warn = (stage: string, error: unknown) => { warned = true; args.log?.(titleReviewWarning(stage, error)); return failure(error); };
+  // 2026-11-04 Release D: generate first (same prepared source the pipeline uses). A harmony-session article (packet present)
+  // gets the independent check only; anything else hands this same first article to the existing pipeline below.
+  const prepared = prepareEditorialSource({ source: args.source, editorial: args.editorial, signal: args.signal });
+  const first = await args.generate(prepared);
+  const harmony = readAgentHarmony(first);
+  if (harmony?.packet) {
+    const check = await reviewHarmonyArticle({
+      article: first, record: harmony, rawText: String(args.source.rawText), locked: String(args.source.manualTitleOverride || '').trim(),
+      audit: args.audit, log: args.log, signal: args.signal,
+      validate: async a => {
+        try { return await validate(titleInput(a), deps); }
+        catch (error) { if (!isSoftTitleFailure(error)) throw error; return warn('final', error); }
+      },
+    });
+    if (warned || !check.ok) return { article: first, titleReview: 'review-warning' };
+    args.log?.('✅ 조화 세션 제목 · 본문 약속 독립 검수를 통과했습니다.');
+    return { article: first, titleReview: 'reviewed' };
+  }
+  let pending: T | undefined = first;
   const article = await generateReviewedDailyHomefeedArticle({ source: args.source, editorial: args.editorial, signal: args.signal }, {
-    generate: args.generate,
+    generate: async source => { if (pending) { const reuse = pending; pending = undefined; return reuse; } return args.generate(source); },
     review: async a => {
       try { return await review(titleInput(a), { ...deps, tournament: true }); }
       catch (error) { if (!isSoftTitleFailure(error)) throw error; reviewFailed = true; return { title: a.selectedTitle, ...warn('candidates', error) }; }

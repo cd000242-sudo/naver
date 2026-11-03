@@ -11,6 +11,7 @@
  */
 import { APP_VERSION } from '../../runtime/version.generated.js';
 import type { AgentHarmonyContext } from '../../agentCli/agentHarmonyEnvelope.js';
+import { normalizeTitleEvidence } from '../../main/services/dailyPublishingTitleReviewContract.js';
 import { appendHarmonyLedger } from './harmonyLedger.js';
 import { extractHarmonyPacket } from './harmonyPacketExtract.js';
 import { verifyHarmonyPacket } from './harmonyPacketVerify.js';
@@ -47,6 +48,32 @@ export function restoreAgentHarmony(content: unknown, run: object | null | undef
   if (!run || readAgentHarmony(content)) return;
   const record = recordsByRun.get(run);
   if (record) attachAgentHarmony(content, record);
+}
+
+/** The record remembered for this run (the last parsed attempt), for callers that only see a clone of the article. */
+export function recallAgentHarmony(run: object | null | undefined): AgentHarmonyRecord | undefined {
+  return run ? recordsByRun.get(run) : undefined;
+}
+
+/**
+ * Release D: under a harmony session (packet present) the [FinalQualityGate] may only swap the title to a candidate the
+ * session itself proposed AND whose anchors verified; anything else keeps the session's title. Without a packet
+ * (flag OFF, API engine, missing/malformed packet) `live` is false and every title is allowed — the gate runs as before.
+ */
+export function createHarmonySwapGuard(record: AgentHarmonyRecord | undefined, log: (message: string) => void = (m) => console.log(m)): { live: boolean; allows: (title: string) => boolean } {
+  const packet = record?.packet;
+  if (!packet) return { live: false, allows: () => true };
+  const key = (text: string) => normalizeTitleEvidence(text);
+  const verifiedIds = new Set((record?.verification?.candidates ?? []).filter(verdict => verdict.ok).map(verdict => verdict.id));
+  const verified = new Set(packet.titles.candidates.filter(candidate => verifiedIds.has(candidate.id)).map(candidate => key(candidate.title)));
+  return {
+    live: true,
+    allows: (title) => {
+      if (verified.has(key(title))) return true;
+      log(`[FinalQualityGate] 후보 제외 — 조화 세션이 앵커까지 검증한 후보가 아님: "${title}"`);
+      return false;
+    },
+  };
 }
 
 export interface HarmonyResponseContext {

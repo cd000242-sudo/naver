@@ -40,14 +40,22 @@ function instruction(source: Source, editorial?: DailyEditorialAngle): string {
     + JSON.stringify(editorial || {});
 }
 
+/**
+ * The source every homefeed generation starts from: cancellation + editorial anchor checks, then the editorial
+ * instruction appended to the custom prompt. Shared so the harmony branch prepares exactly what this pipeline does.
+ */
+export function prepareEditorialSource(input: { readonly source: Source; readonly editorial?: DailyEditorialAngle; readonly signal?: AbortSignal }): Source {
+  assertActive(input.signal);
+  assertEditorialAnchors(input.source, input.editorial);
+  return { ...input.source, customPrompt: instruction(input.source, input.editorial) };
+}
+
 /** Never edit an admitted V3 result; a different winner needs a fresh generation. */
 export async function generateReviewedDailyHomefeedArticle<T extends Article>(
   input: { readonly source: Source; readonly editorial?: DailyEditorialAngle; readonly signal?: AbortSignal },
   deps: Dependencies<T>,
 ): Promise<T> {
-  assertActive(input.signal);
-  assertEditorialAnchors(input.source, input.editorial);
-  const prepared: Source = { ...input.source, customPrompt: instruction(input.source, input.editorial) };
+  const prepared = prepareEditorialSource(input);
   const original = await deps.generate(prepared);
   assertActive(input.signal);
   const locked = String(input.source.manualTitleOverride || '').trim();
