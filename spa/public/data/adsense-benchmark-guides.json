@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-03T04:00:54.521Z",
+  "generatedAt": "2026-11-03T04:09:07.744Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -3894,79 +3894,6 @@
           "views": 445,
           "answers": 6,
           "askedAt": "2025.11.11"
-        }
-      ]
-    },
-    {
-      "id": "cb177f4f259bae38",
-      "urls": [
-        "https://verifyage-netflix.tistory.com/443",
-        "https://adaybook.com/dart-electronic-disclosure-filing-system/",
-        "https://gusle.kr/korea-drug-safety-website-guide/",
-        "https://efhdns.tistory.com/entry/%EC%B9%98%EA%B3%BC%EA%B8%B0%EA%B3%B5%EC%82%AC-%EB%A9%B4%ED%97%88%EC%8B%A0%EA%B3%A0-%ED%99%88%ED%8E%98%EC%9D%B4%EC%A7%80-%EB%B0%94%EB%A1%9C%EA%B0%80%EA%B8%B0-httpswwwkdtechorkr",
-        "https://adaybook.com/ksd-securities-transfer-agent/",
-        "https://xn--2i0bj7ghwb1vexzada718wmmz.kr/2308"
-      ],
-      "guide": {
-        "direction": "지식인에 실제로 묻는 것은 상실신고·국민연금 연계, EDI 로그인 오류, 유예해지 신고, 상실일자 재신고, 납부예외해지 일시납 등 구체적 실무 처리 문제다. 고수 블로그 제목들은 여러 EDI 바로가기를 나열만 하고 로그인 오류 원인이나 신고 시나리오별 처리 절차는 다루지 않는다. 독자는 로그인 경로 확인부터 상실신고·건강검진대상자 신고·유예해지·상실일자 재신고·납부예외해지까지 시나리오별 체크리스트로 한 번에 끝낼 수 있다.",
-        "searchTargets": [
-          "국민건강보험 EDI 서비스",
-          "국민건강보험edi 신고방법",
-          "국민건강보험 edi 로그인",
-          "국민건강보험 edi 신청방법"
-        ],
-        "mustInclude": [
-          "EDI 로그인 경로(edi.nhis.or.kr)와 사업장 가입자 신고 메뉴 구성",
-          "상실신고·건강검진대상자 신고·휴직자 유예해지·상실일자 재신고·납부예외해지 처리 순서",
-          "로그인 오류 시 브라우저 호환성 및 전송 규격 충돌 여부 점검 포인트",
-          "국민연금EDI와 연계신고 체크박스 선택 여부에 따른 처리 차이",
-          "(확인 필요: 신고 기한·제출서류는 국민건강보험공단 EDI 공지에서)"
-        ],
-        "mustAvoid": [
-          "특정 사업장의 가입자 개인정보·상실일자 등 민감정보를 예시로 노출",
-          "건강보험EDI와 국민연금EDI·고용보험EDI를 같은 절차로 혼동",
-          "공단 공식 안내와 다른 임의 추측성 처리방법을 사실처럼 제시"
-        ],
-        "checkBefore": [
-          "EDI 로그인 주소 및 신고 메뉴 구성(국민건강보험공단 EDI 공식 사이트)",
-          "상실신고·유예해지 처리기한 및 제출서류(공단 고객센터·공지사항)",
-          "유예기간 중 성과금·시간외수당의 보수총액 포함 기준(공단 안내자료)"
-        ],
-        "solves": [
-          "로그인 오류·전송 규격 충돌 → 브라우저 호환성 점검과 재접속 순서로 해결",
-          "건강보험EDI·국민연금EDI 동시 신고 혼란 → 연계 체크 여부에 따른 처리 흐름 정리",
-          "휴직자 유예해지·상실일자 재신고 시 보수 산정 기준 → 포함 항목 체크리스트 제공"
-        ],
-        "actionTitles": [
-          "국민건강보험 EDI 로그인 오류 원인과 바로 해결하는 법",
-          "국민건강보험EDI 신고방법 사업장 상실신고 순서 총정리",
-          "국민건강보험 EDI 신청방법부터 유예해지까지 한번에 끝내기"
-        ]
-      },
-      "at": "2026-10-29T14:07:22.731Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "4대보험 상실신고 건강보험EDI 국민연금EDI 고....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6080402&docId=490788281&answerNo=4&qb=6rWt66+86rG06rCV67O07ZeYZWRp",
-          "views": 2805,
-          "answers": 5,
-          "askedAt": "2026.08.26"
-        },
-        {
-          "title": "건강보험EDI 사업장 건강검진대상자 신고 관....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100401&docId=489869916&answerNo=3&qb=6rWt66+86rG06rCV67O07ZeYZWRp",
-          "views": 732,
-          "answers": 3,
-          "askedAt": "2026.07.27"
-        },
-        {
-          "title": "건강보험edi 휴직자(육아휴직자) 유예해지 신....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100401&docId=494989443&answerNo=4&qb=6rWt66+86rG06rCV67O07ZeYZWRp",
-          "views": 501,
-          "answers": 5,
-          "askedAt": "2026.09.06"
         }
       ]
     },
@@ -74950,6 +74877,1483 @@
       "at": "2026-11-03T03:33:12.601Z",
       "rules": "2026-10-20-solve",
       "provider": "claude"
+    },
+    {
+      "id": "37ee28efbf77903d",
+      "urls": [
+        "https://routeit.kr/%ec%8b%9d%ec%83%9d%ed%99%9c%ea%b5%90%ec%8b%a4-%ed%99%88%ed%8e%98%ec%9d%b4%ec%a7%80/",
+        "https://mexckorea.kr/traffic-safety-experience-education-center/",
+        "https://verifyage-netflix.tistory.com/446",
+        "https://rksleijsld.tistory.com/653",
+        "https://rksleijsld.tistory.com/652",
+        "https://xn--2i0bj7ghwb1vexzada718wmmz.kr/2310"
+      ],
+      "guide": {
+        "direction": "식생활교실 홈페이지를 검색하는 사람은 KOHI 같은 다른 법정의무교육 포털처럼 로그인·수강신청·수료증 조회 경로를 몰라서 막힌 경우가 많다. 고수 블로그들은 바로가기 링크만 나열하고 로그인 방법이나 신청 대상, 수료증 발급 절차는 다루지 않는다. 이 글은 홈페이지 접속부터 로그인, 수강신청 대상 확인, 수료증 조회·출력까지 순서대로 정리해 한 번에 끝내준다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "공식 주소 https://foodlife-edu.or.kr 명시",
+          "로그인·회원가입 절차(확인 필요: 사이트 내 안내)",
+          "수강신청 대상 및 신청 범위(확인 필요: 식생활교실 공식 소개)",
+          "수료증 조회·출력 메뉴 위치(확인 필요: 사이트 공지)"
+        ],
+        "mustAvoid": [
+          "세이듀·KOHI 등 다른 법정의무교육 포털과 혼동해 서술하지 않기",
+          "URL 오타나 유사 피싱 사이트와 구분 없이 안내하지 않기"
+        ],
+        "checkBefore": [
+          "foodlife-edu.or.kr 공식 홈페이지에서 교육대상·신청방법 확인",
+          "메인 화면 공지사항에서 현재 진행 중인 교육과정 확인"
+        ],
+        "solves": [
+          "식생활교실이 뭔지, 누가 들어야 하는지 몰라서 검색 → 교육대상·신청 범위 정리",
+          "로그인이 안 되거나 계정이 없어서 못 들어가는 문제 → 로그인·회원가입 절차 안내",
+          "수강 후 수료증을 어디서 받는지 몰라서 검색 → 수료증 조회·출력 경로 안내"
+        ],
+        "actionTitles": [
+          "식생활교실 홈페이지 바로가기와 로그인하는 방법 정리",
+          "식생활교실 수강신청 대상과 방법, 신청 절차 총정리",
+          "식생활교실 교육 수료증 조회하고 출력하는 방법 정리"
+        ]
+      },
+      "at": "2026-11-03T04:06:09.303Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "한국보건복지인재원(KOHI) 법정 의무교육, 요....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110102&docId=493311325&answerNo=3&qb=a29oaeuztOqxtOuzteyngOuwsOybgOyduA==",
+          "views": 1031,
+          "answers": 6,
+          "askedAt": "2026.09.08"
+        },
+        {
+          "title": "(급해요)사회복지회계와 세무실무 온라이교....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=61001&docId=439036398&answerNo=1&qb=a29oaeuztOqxtOuzteyngOuwsOybgOyduA==",
+          "views": 1006,
+          "answers": 2,
+          "askedAt": "2023.02.15"
+        },
+        {
+          "title": "kohi 로그인하려면?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110823&docId=488401121&answerNo=1&qb=a29oaeuztOqxtOuzteyngOuwsOybgOyduA==",
+          "views": 271,
+          "answers": 3,
+          "askedAt": "2025.08.29"
+        }
+      ]
+    },
+    {
+      "id": "acbf2acad621c180",
+      "urls": [
+        "https://kwinner.starkjk.com/160",
+        "https://lsy4857.tistory.com/211"
+      ],
+      "guide": {
+        "direction": "주거급여를 검색하는 사람은 신규 신청 자격보다 매입임대 입주, 재계약, 영구임대 임대료 인상처럼 받고 있던 급여가 계속 유지되는지를 몰라서 막힌다. 고수 블로그의 기준임대료 표는 급지별 금액만 보여주고 소득인정액 기준이나 상황별 유지 여부는 다루지 않는다. 이 글은 기준임대료와 실제임차료 비교 계산, 소득인정액 기준, 임대유형별 유지 여부 체크리스트로 자격 판단을 끝내준다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "기준임대료는 '최대 지급액'이며 실제임차료와 비교해 적은 금액 지급",
+          "기준임대료는 최저주거기준 기반, 지역별·가구원수별로 산정됨",
+          "2027년 급지별 기준임대료(서울 1인 38만1천원 등, 확인 필요: 국토교통부 고시)",
+          "매입임대·재계약·영구임대료 인상 시 자격 유지 여부 체크리스트",
+          "소득인정액 산정 기준(확인 필요: 복지로 공고)"
+        ],
+        "mustAvoid": [
+          "기초생활보장 생계급여와 혼동해 서술하지 않기(산정 기준이 다름)",
+          "매입임대·영구임대 등 임대유형별 조건을 하나로 뭉뚱그리지 않기",
+          "2026년과 2027년 기준임대료 수치를 섞어 쓰지 않기"
+        ],
+        "checkBefore": [
+          "2027년 급지별 기준임대료 정확한 금액(국토교통부 고시 또는 복지로 공식 발표)",
+          "소득인정액 산정기준(보건복지부·복지로 공고)",
+          "매입임대·영구임대 등 유형별 중복수급 규정(LH 또는 복지로 공지)"
+        ],
+        "solves": [
+          "매입임대 입주해도 주거급여 계속 받는지 몰라서 검색 → 임대유형별 유지 여부 체크리스트로 해결",
+          "기준임대료가 실제 받는 돈인지 헷갈려서 검색 → 기준임대료와 실제임차료 비교 계산법 제공",
+          "임대료 올랐는데 주거급여도 자동으로 오르는지 몰라서 검색 → 소득인정액·재산정 기준 설명"
+        ],
+        "actionTitles": [
+          "주거급여 신청 자격과 소득인정액 기준 확인하는 방법",
+          "주거급여 기준임대료 계산법과 급지별 표 확인하는 법",
+          "매입임대·재계약해도 주거급여 자격 유지되는지 확인하는 법"
+        ]
+      },
+      "at": "2026-11-03T04:06:09.303Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "26년 3차 신혼·신생아 매입임대 I 주거급여 받....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100101&docId=495247441&answerNo=9&qb=7KO86rGw6riJ7Jes6riw7KSA7J6E64yA66OM",
+          "views": 311,
+          "answers": 10,
+          "askedAt": "2026.11.02"
+        },
+        {
+          "title": "기초주거급여 기준임대료에 대해",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60103&docId=462399752&answerNo=1&qb=7KO86rGw6riJ7Jes6riw7KSA7J6E64yA66OM",
+          "views": 205,
+          "answers": 1,
+          "askedAt": "2024.01.17"
+        },
+        {
+          "title": "제가 지금 주거급여수급자 입니다 임대아파....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100101&docId=495538204&answerNo=5&qb=7KO86rGw6riJ7Jes6riw7KSA7J6E64yA66OM",
+          "views": 199,
+          "answers": 5,
+          "askedAt": "2026.10.20"
+        }
+      ]
+    },
+    {
+      "id": "6b1c56b4c48ee14f",
+      "urls": [
+        "https://servicenine.linkistat.com/121",
+        "https://lsy4857.tistory.com/217"
+      ],
+      "guide": {
+        "direction": "노인맞춤돌봄서비스를 검색하는 사람은 부모님이 대상에 해당하는지, 재가노인지원서비스와 뭐가 다른지 헷갈려서 막힌다. 고수 블로그는 독거노인 대상 범위와 생활지원사 방문 내용은 다루지만 비슷한 두 서비스의 차이는 짚지 않는다. 이 글은 대상자 조건표, 재가노인지원서비스와의 비교표, 생활지원사 방문 내용을 정리해 신청 여부 판단을 끝내준다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "신청대상: 독거·조손·고령부부 가구 등 돌봄이 필요한 노인",
+          "생활지원사가 정기 방문해 안부확인·정서지원 제공, 정부 전액 지원(무료)",
+          "재가노인지원서비스와의 차이 비교표(방문 주기·지원 내용 중심)",
+          "전담사회복지사의 역할: 가정방문, 서비스 연계",
+          "신청 접수처(확인 필요: 읍면동 주민센터 또는 독거노인종합지원센터 공식 안내)"
+        ],
+        "mustAvoid": [
+          "재가노인지원서비스·노인맞춤돌봄서비스·생활지원사 취업과정을 같은 제도로 섞어 쓰지 않기",
+          "생활지원사 '취업' 관련 내용과 어르신 '서비스 신청' 대상 조건을 혼동해 쓰지 않기"
+        ],
+        "checkBefore": [
+          "2026년 기준 신청대상 소득·연령 기준(보건복지부 사업안내 지침서 또는 독거노인종합지원센터 공식 공지)",
+          "읍면동 주민센터 신청 절차(복지로 또는 지자체 공고)"
+        ],
+        "solves": [
+          "재가노인지원서비스와 뭐가 다른지 몰라서 검색 → 두 서비스 비교표로 차이 정리",
+          "부모님이 대상이 되는지 몰라서 검색 → 독거·조손·고령부부 등 대상 조건표 제공",
+          "생활지원사가 뭘 해주는지 몰라서 검색 → 방문 안부확인·정서지원 내용 정리"
+        ],
+        "actionTitles": [
+          "노인맞춤돌봄서비스 신청 대상 조건 자세히 확인하는 법",
+          "노인맞춤돌봄서비스와 재가노인지원서비스 차이 비교 정리",
+          "노인맞춤돌봄서비스 생활지원사 방문 내용 확인하는 법"
+        ]
+      },
+      "at": "2026-11-03T04:06:09.303Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "재가노인지원서비스와 맞춤돌봄서비스의 차....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100103&docId=359300027&answerNo=5&qb=64W47J2466ee7Lak64+M67SE7ISc67mE7IqkIOuPheqxsOuFuOyduCDsg53tmZzsp4Dsm5Dsgqwg67Cp66y4IOuCtOyaqQ==",
+          "views": 5323,
+          "answers": 6,
+          "askedAt": "2025.06.10"
+        },
+        {
+          "title": "노인맞춤돌봄서비스 사회복지사",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100103&docId=460909577&answerNo=6&qb=64W47J2466ee7Lak64+M67SE7ISc67mE7IqkIOuPheqxsOuFuOyduCDsg53tmZzsp4Dsm5Dsgqwg67Cp66y4IOuCtOyaqQ==",
+          "views": 3123,
+          "answers": 7,
+          "askedAt": "2025.06.10"
+        },
+        {
+          "title": "노인맞춤돌봄서비스 전담사회복지사 하는 일",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100103&docId=481844783&answerNo=5&qb=64W47J2466ee7Lak64+M67SE7ISc67mE7IqkIOuPheqxsOuFuOyduCDsg53tmZzsp4Dsm5Dsgqwg67Cp66y4IOuCtOyaqQ==",
+          "views": 2714,
+          "answers": 7,
+          "askedAt": "2025.06.10"
+        }
+      ]
+    },
+    {
+      "id": "af5cb09ea4d74e80",
+      "urls": [
+        "https://hanoelswould.com/entry/10%EC%9B%94%EB%B6%80%ED%84%B0-11%EC%9B%94%EA%B9%8C%EC%A7%80-%EA%B0%95%EC%9B%90%EB%8F%84-%EA%B0%80%EC%9D%84-%EC%97%AC%ED%96%89%EC%A7%80-%EC%B6%94%EC%B2%9C",
+        "https://info-idea114.co.kr/entry/%EB%B6%80%EC%95%88-%EB%82%B4%EC%86%8C%EC%82%AC-%EB%8B%A8%ED%92%8D-%EC%8B%9C%EA%B8%B0%EC%99%80-%EC%A3%BC%EC%B0%A8-%EA%BF%80%ED%8C%81-%EC%A0%84%EB%B6%81-%EA%B0%80%EC%9D%84-%EC%97%AC%ED%96%89%EC%A7%80-%EA%B0%95%EB%A0%A5-%EC%B6%94%EC%B2%9C"
+      ],
+      "guide": {
+        "direction": "검색자는 내소사와 고창 선운사 중 어디를 갈지, 단풍 절정이 언제인지 몰라 헤맨다. 고수 글은 단풍 시기와 주차 꿀팁까지만 다뤄 전나무숲길 소요시간과 근처 맛집 선택은 비워뒀다. 이 글은 단풍 절정 시기표, 주차장 위치, 전나무숲길 소요시간, 근처 식당을 한 번에 정리해 동선까지 끝낸다.",
+        "searchTargets": [
+          "부안 내소사 단풍",
+          "부안 내소사 단풍 시기",
+          "부안 내소사 주차",
+          "부안 내소사 근처 맛집"
+        ],
+        "mustInclude": [
+          "내소사 단풍 절정 시기 10월 중순~11월 초 (확인 필요: 변산반도국립공원·부안군청 관광과)",
+          "전나무 숲길 왕복 소요시간·난이도 (확인 필요: 공식 안내)",
+          "내소사 주차장 위치·요금 (확인 필요: 부안군청 관광과)",
+          "내소사 근처 맛집·식당 리스트 (확인 필요: 현지 후기)",
+          "내소사는 백제 무왕 때 창건된 정면·측면 3칸 구조라는 특징"
+        ],
+        "mustAvoid": [
+          "고창 선운사와 내소사를 뭉뚱그려 둘 중 뭘 가야 할지 안 짚어주기",
+          "변산반도 채석강 등 근처 명소 정보와 내소사 핵심 정보를 섞어 초점 흐리기"
+        ],
+        "checkBefore": [
+          "올해 단풍 절정 예상일 (변산반도국립공원·부안군청 관광과 공지)",
+          "주차장 요금·운영시간 변경 여부 (부안군청 공식 발표)"
+        ],
+        "solves": [
+          "내소사·선운사 중 어디를 갈지 고민 → 둘의 차이와 지금 계절 선택 기준 제시",
+          "단풍 최적 관람 시기를 몰라 헛걸음 → 절정 시기표로 방문일 바로 정하기",
+          "전나무숲길·주차·맛집 정보가 흩어져 번거로움 → 한 글에서 동선까지 정리"
+        ],
+        "actionTitles": [
+          "부안 내소사 단풍 시기 확인하고 주차장 위치까지 한번에 보기",
+          "부안 내소사 vs 고창 선운사 가을 단풍 여행지 비교"
+        ]
+      },
+      "at": "2026-11-03T04:06:09.303Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "부안 내소사 고창 선운사 중에",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=51003&docId=403421540&answerNo=1&qb=67aA7JWI64K07IaM7IKs",
+          "views": 1315,
+          "answers": 1,
+          "askedAt": "2021.10.24"
+        },
+        {
+          "title": "부안 내소사 가을 단풍 여행, 최적의 관람 시....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=90105&docId=490001307&answerNo=1&qb=67aA7JWI64K07IaM7IKs",
+          "views": 281,
+          "answers": 1,
+          "askedAt": "2025.11.06"
+        },
+        {
+          "title": "부안 내소사 전나무 숲길, 최적의 방문 시기....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=90105&docId=490647577&answerNo=1&qb=67aA7JWI64K07IaM7IKs",
+          "views": 209,
+          "answers": 2,
+          "askedAt": "2025.12.08"
+        }
+      ]
+    },
+    {
+      "id": "fe42f76795207ad5",
+      "urls": [
+        "https://blogger00220.tistory.com/entry/%ED%88%AC%EC%9E%90%C2%B7ETF-%EC%A0%9C20%ED%8E%B8-%EC%9D%80%ED%87%B4%EC%9E%90%EB%A5%BC-%EC%9C%84%ED%95%9C-%EC%9B%94%EB%B0%B0%EB%8B%B9-ETF-%EC%98%A5%EC%84%9D-%EA%B0%80%EB%A6%AC%EA%B8%B0-%EB%B0%B0%EB%8B%B9%EC%84%B1%EC%9E%A5%ED%98%95-vs-%EC%BB%A4%EB%B2%84%EB%93%9C%EC%BD%9C-%EC%9B%90%EA%B8%88%EB%8F%84-%EC%9E%90%EB%9D%BC%EB%8A%94-%EC%A7%84%EC%A7%9C-%EC%9B%94%EB%B0%B0%EB%8B%B9-%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4-%EC%A1%B0%ED%95%A9-%EA%B3%B5%EC%8B%9D",
+        "https://johome.tistory.com/998"
+      ],
+      "guide": {
+        "direction": "검색자는 커버드콜 ETF가 왜 보유기간과세로 표시되는지, 분배금을 재투자 안 하면 수익률이 왜 낮아지는지, IRP에서 분배금만 받을 수 있는지를 몰라 막혀 있다. 고수 글은 배당성장형 vs 커버드콜 비교와 장단점까지만 다뤄 과세 기준별 차이와 연금계좌 수령 조건은 비워뒀다. 이 글은 국내상장 과세 기준표, 연금계좌 분배금 수령 조건, 재투자 유무별 수익률 차이를 정리해 선택을 끝낸다.",
+        "searchTargets": [
+          "tiger 배당 커버드콜 etf",
+          "국내 커버드콜 etf",
+          "미국 커버드콜 etf",
+          "코덱스 커버드콜 etf"
+        ],
+        "mustInclude": [
+          "국내 상장 커버드콜 ETF는 보유기간과세 대상이라는 과세 기준 (확인 필요: 운용사·세무 공지)",
+          "해외지수형 커버드콜 ETF는 과세 방식이 상품별로 다를 수 있다는 점 (확인 필요: 상품설명서)",
+          "분배금을 재투자하지 않으면 총수익률이 낮아지는 구조 설명",
+          "IRP·연금계좌는 분배금을 연금 수령한도 내에서만 받을 수 있다는 제한 (확인 필요: 연금계좌 운용사 공지)",
+          "타이거·코덱스 등 국내 커버드콜 ETF 종류별 비교표 (확인 필요: 각 운용사 상품 페이지)"
+        ],
+        "mustAvoid": [
+          "커버드콜 ETF를 일반 배당주 ETF와 같은 과세 구조로 설명해 혼동 주기",
+          "IRP와 일반 계좌의 분배금 수령 조건을 구분 없이 섞어 쓰기"
+        ],
+        "checkBefore": [
+          "해당 ETF가 국내상장 국내주식형인지 해외지수형인지 (운용사 상품설명서)",
+          "IRP 연금 수령한도 내 분배금 인출 가능 여부 (연금계좌 운용사·국세청 공지)"
+        ],
+        "solves": [
+          "보유기간과세로 표시되는 이유를 몰라 당황 → 국내상장 ETF 과세 기준으로 바로 설명",
+          "분배금 재투자 안 하면 수익률이 왜 떨어지는지 모름 → 재투자 유무별 수익률 차이로 정리",
+          "IRP에서 분배금만 받을 수 있는지 궁금 → 연금 수령한도 내 인출 조건으로 답"
+        ],
+        "actionTitles": [
+          "커버드콜 ETF 보유기간과세 이유와 분배금 수령 조건 확인",
+          "국내 커버드콜 ETF 타이거·코덱스 종류별 비교하고 고르기",
+          "IRP 연금계좌 커버드콜 분배금 수령 조건 확인하는 법"
+        ]
+      },
+      "at": "2026-11-03T04:06:09.303Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "Plus고배당주 위클리커버드콜ETF 관련",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40301&docId=476249080&answerNo=2&qb=7Luk67KE65Oc7L2cZXRm",
+          "views": 3665,
+          "answers": 2,
+          "askedAt": "2025.06.10"
+        },
+        {
+          "title": "주식 커버드콜 etf 수익률 문의",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=491222767&answerNo=4&qb=7Luk67KE65Oc7L2cZXRm",
+          "views": 1053,
+          "answers": 7,
+          "askedAt": "2026.01.08"
+        },
+        {
+          "title": "커버드콜 ETF 관련 문의",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=489526870&answerNo=1&qb=7Luk67KE65Oc7L2cZXRm",
+          "views": 666,
+          "answers": 3,
+          "askedAt": "2025.10.15"
+        }
+      ]
+    },
+    {
+      "id": "fcfc1868e15c91cf",
+      "urls": [
+        "https://life.sano.co.kr/%eb%8f%99%eb%b0%b1%ed%95%98%ec%a0%93%ec%9d%b4%eb%9e%80-%eb%ac%b4%ec%97%87%ec%9d%b4%ea%b3%a0-%ec%96%b8%ec%a0%9c-%ec%82%ac%ec%95%bc-%ed%95%a0%ea%b9%8c-%ea%b9%80%ec%9e%a5-%ec%83%9d%ec%83%88%ec%9a%b0/"
+      ],
+      "guide": {
+        "direction": "검색자는 동백하젓이 정확히 뭔지, 육젓과 뭐가 다른지, 시장에서 파는 생새우가 급냉인지 구분하는 법을 몰라 헤맨다. 고수 글은 무엇이고 언제 사야 할지까지만 짚어 급냉 여부 확인법과 보관법은 비워뒀다. 이 글은 동백하젓 정의·육젓과의 차이표, 구매 최적 시기, 급냉 여부 확인법을 정리해 선택을 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "동백하젓은 생새우에 소금을 뿌려 담근 젓 중 흰 잔새우로 담근 것이라는 정의",
+          "육젓과 동백하젓의 재료·용도 차이 비교",
+          "시장에서 파는 생새우(동백하)는 급냉일 수 있어 신선도 확인이 필요하다는 점",
+          "김장철 새우젓(동백하) 구매 최적 시기 (확인 필요: 수산시장·젓갈 전문점 공지)"
+        ],
+        "mustAvoid": [
+          "추젓·오젓 등 다른 새우젓 종류와 동백하젓을 뭉뚱그려 구분 안 하기",
+          "특정 지역 상인 발언을 일반화해 전체 시장 상황처럼 쓰기"
+        ],
+        "checkBefore": [
+          "동백하젓 vs 육젓 명칭·시기 구분 기준 (수산물 전문 자료·젓갈 전문점)",
+          "올해 생새우(동백하) 시세·구매 시기 (수산시장·젓갈 전문점 공지)"
+        ],
+        "solves": [
+          "새우젓 종류가 헷갈려 뭘 사야 할지 모름 → 동백하젓·육젓 차이표로 바로 구분",
+          "시장에서 파는 생새우가 급냉인지 모름 → 확인 방법으로 신선도 체크",
+          "김장용 새우젓을 언제 사야 할지 모름 → 구매 최적 시기로 답"
+        ],
+        "actionTitles": [
+          "동백하젓이 뭔지 육젓과 차이 비교하고 구매 시기 확인",
+          "김장용 생새우 동백하 급냉 여부 확인하는 법"
+        ]
+      },
+      "at": "2026-11-03T04:06:09.303Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "새우젖의 종류...",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80201&docId=29349816&answerNo=2&qb=64+Z67Cx7ZWY7KCTIOyCrOyVvCDtlaDquYwg6rmA7J6lIOyDneyDiOyasA==",
+          "views": 48567,
+          "answers": 2,
+          "askedAt": "2003.11.14"
+        },
+        {
+          "title": "김장할때새우젖종류",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020112&docId=31134852&answerNo=3&qb=64+Z67Cx7ZWY7KCTIOyCrOyVvCDtlaDquYwg6rmA7J6lIOyDneyDiOyasA==",
+          "views": 3839,
+          "answers": 3,
+          "askedAt": "2008.06.27"
+        },
+        {
+          "title": "새우젓의대한모든것",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110207&docId=36973281&answerNo=1&qb=64+Z67Cx7ZWY7KCTIOyCrOyVvCDtlaDquYwg6rmA7J6lIOyDneyDiOyasA==",
+          "views": 2811,
+          "answers": 2,
+          "askedAt": "2009.09.17"
+        }
+      ]
+    },
+    {
+      "id": "8654ed514e9c196b",
+      "urls": [
+        "https://ilpaclf.linkistat.com/132"
+      ],
+      "guide": {
+        "direction": "검색자는 현장과 사업주를 여러 번 옮긴 경우 근로일수가 합산되는지, 타업종으로 넘어가도 퇴직공제금을 받을 수 있는지, 아버지 사망 시 유족이 받을 수 있는지에서 막힌다. 고수 블로그는 신청 절차만 다루고 일수 합산 기준·타업종 이탈 판정 기준·유족 범위는 비워둔다. 이 글은 일수 확인방법부터 합산 기준, 타업종 전환·유족 신청 조건까지 순서대로 정리해 끝낸다.",
+        "searchTargets": [
+          "건설일용직 퇴직공제금 일수 확인방법",
+          "건설 일용직 퇴직금",
+          "건설 일용직 신고"
+        ],
+        "mustInclude": [
+          "근로일수 합산 기준: 현장·사업주가 바뀌어도 달력상 근무일은 합산된다는 기준",
+          "타업종 전환 판정: 위촉계약일 이후 건설현장 일용근로 내역 추가 여부가 핵심",
+          "유족 지급 기준: 공제부금 납부월수에 따른 유족 범위와 지급 기준",
+          "퇴직공제금 일수 조회 방법 (확인 필요: 건설근로자공제회 공식 앱/홈페이지)",
+          "공제 가입 대상 사업장 규모 기준 (확인 필요: 건설근로자공제회 공지)"
+        ],
+        "mustAvoid": [
+          "모든 건설 일용직이 퇴직공제금 대상이라고 단정 (일정 규모 이상 사업장만 해당)",
+          "타업종 전환 요건을 단순 '이직'으로 뭉뚱그려 설명 (위촉계약일 이후 근로내역 여부가 기준)"
+        ],
+        "checkBefore": [
+          "공제가입 대상 사업장 규모·업종 기준 (건설근로자공제회 공식 홈페이지)",
+          "일수 확인 앱/조회 화면 최신 절차 (공제회 공식 앱 또는 고객센터)",
+          "유족 지급 기준과 유족 범위 세부 규정 (공제회 공지)"
+        ],
+        "solves": [
+          "여러 현장·사업주를 옮기면 근로일수가 끊기는지 헷갈림 → 달력상 근무일 합산 기준 정리",
+          "타업종 전환 후에도 퇴직공제금을 받을 수 있는지 불확실 → 완전 이탈 판정 기준 제시",
+          "가족 사망 시 유족이 받을 수 있는지 모름 → 유족 지급 기준과 범위 정리"
+        ],
+        "actionTitles": [
+          "건설일용직 퇴직공제금 일수 확인방법, 앱 조회 순서",
+          "건설 일용직 퇴직금 신청, 타업종 전환 시 받는 법",
+          "건설 일용직 신고 후 퇴직공제금 합산 기준 확인하기"
+        ]
+      },
+      "at": "2026-11-03T04:06:09.303Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "건설근로자공제회 퇴직공제금은 일용직을 현....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6080401&docId=494813569&answerNo=2&qb=6rG07ISkIOydvOyaqeyngSDth7Tsp4Hqs7XsoJzquIg=",
+          "views": 355,
+          "answers": 2,
+          "askedAt": "2026.10.11"
+        },
+        {
+          "title": "일용직 근로자 건설퇴직공제회",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6080401&docId=492003025&answerNo=1&qb=6rG07ISkIOydvOyaqeyngSDth7Tsp4Hqs7XsoJzquIg=",
+          "views": 97,
+          "answers": 2,
+          "askedAt": "2026.02.16"
+        },
+        {
+          "title": "건설 일용직 퇴직공제금, 여러 현장을 옮겨 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60802&docId=495757596&answerNo=1&qb=6rG07ISkIOydvOyaqeyngSDth7Tsp4Hqs7XsoJzquIg=",
+          "views": 27,
+          "answers": 1,
+          "askedAt": "2026.10.30"
+        }
+      ]
+    },
+    {
+      "id": "139427886a645461",
+      "urls": [
+        "https://adipo.tistory.com/entry/%EC%9C%84%EB%B2%95%EC%84%B1%EB%A1%A0-%EC%B1%85%EC%9E%84%EB%A1%A0-%EC%95%94%EA%B8%B0%EB%85%B8%ED%8A%B8"
+      ],
+      "guide": {
+        "direction": "수험생은 구성요건·위법성·책임을 구분하지 못해 암기가 안 되는 지점에서 막히고, 단순히 '위법성론 & 책임론'이라는 제목의 고수 글은 이론 설명에 그쳐 기출 예시로 연결되지 않는다. 이 글은 3단계 구조를 표로 정리하고 경찰·공무원 기출 예시와 묶어 암기법까지 제공해 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "구성요건-위법성-책임 3단계 구조표",
+          "위법성조각사유·책임조각사유 구분 기준",
+          "경찰·공무원 시험 기출 예시와 연결한 암기 포인트"
+        ],
+        "mustAvoid": [
+          "판례를 단순 사실 암기로만 제시해 출제 의도 왜곡",
+          "경찰시험·공무원 마약수사직 시험 범위를 혼동해 서술"
+        ],
+        "checkBefore": [
+          "최신 형법 조문·판례 (국가법령정보센터)",
+          "경찰·공무원 시험 최신 출제 경향 (최신 기출문제집)"
+        ],
+        "solves": [
+          "구성요건·위법성·책임이 헷갈림 → 3단계 구조표로 정리",
+          "암기가 안 됨 → 기출 예시와 묶은 암기 포인트 제공"
+        ]
+      },
+      "at": "2026-11-03T04:06:09.303Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "국회에서 하는일 10가지",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=61401&docId=61239866&answerNo=13&qb=7JyE67KV7ISx66GgIOyxheyehOuhoCDslZTquLDrhbjtirg=",
+          "views": 10142,
+          "answers": 7,
+          "askedAt": "2008.03.13"
+        },
+        {
+          "title": "경찰시험 수험생 여러분 답변좀 부탁드려요~^....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60215&docId=61420605&answerNo=1&qb=7JyE67KV7ISx66GgIOyxheyehOuhoCDslZTquLDrhbjtirg=",
+          "views": 1516,
+          "answers": 1,
+          "askedAt": "2006.05.17"
+        },
+        {
+          "title": "공무원 마약수사직 인강 추천",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40601&docId=487265203&answerNo=1&qb=7JyE67KV7ISx66GgIOyxheyehOuhoCDslZTquLDrhbjtirg=",
+          "views": 677,
+          "answers": 3,
+          "askedAt": "2025.07.20"
+        }
+      ]
+    },
+    {
+      "id": "2352b98a80fe8a7d",
+      "urls": [
+        "https://bunny43.tistory.com/entry/%EC%9E%AC%EB%82%9C%EC%A0%81%EC%9D%98%EB%A3%8C%EB%B9%84-%EC%A7%80%EC%9B%90-2026%EF%BD%9C2%EC%9D%B8-%EA%B0%80%EA%B5%AC-%EA%B8%B0%EC%A4%80-%EA%B3%84%EC%82%B0"
+      ],
+      "guide": {
+        "direction": "검색자는 가구원수를 주민등록 동거가족으로 오해하거나 소득기준을 넘으면 무조건 탈락한다고 생각하는 지점에서 막힌다. '2인 가구 기준 계산'이라는 고수 글 제목은 재산 7억원 기준, 소득초과 예외, 요양병원비 제외 여부는 풀어주지 않는다. 이 글은 가구원수 산정 기준, 소득·재산 기준, 예외 조건까지 한 번에 계산해 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "가구원수 산정 기준: 건강보험 피부양자 기준 (주민등록 동거가족 아님)",
+          "소득 기준: 기준 중위소득 100% 이하 (확인 필요: 2026년 고시 수치)",
+          "재산 기준: 가구 재산 과표 7억원 이하",
+          "소득기준 초과 시 신청 가능 여부와 예외 조건",
+          "요양병원비는 지원 대상에서 제외된다는 점"
+        ],
+        "mustAvoid": [
+          "가구원수를 주민등록상 동거가족으로 오해하게 서술",
+          "소득기준 초과 시 무조건 탈락이라고 단정 (예외 있음)",
+          "긴급복지 의료지원 등 유사 제도와 혼동"
+        ],
+        "checkBefore": [
+          "2026년 기준 중위소득 고시 수치 (보건복지부 공고)",
+          "가구 재산 과표 7억원 기준의 최신 적용 여부 (국민건강보험공단 공지)",
+          "요양병원비 제외 등 지원 제외 항목 최신 공지 (공단 공식 안내)"
+        ],
+        "solves": [
+          "가구원수가 헷갈림 → 건강보험 피부양자 기준으로 정리",
+          "소득기준 초과해도 신청 가능한지 불확실 → 예외 조건 설명",
+          "요양병원비 포함 여부가 헷갈림 → 제외 항목 명시"
+        ],
+        "actionTitles": [
+          "재난적의료비 지원 2026 가구원수 계산법, 피부양자 기준",
+          "재난적의료비 지원 재산기준 7억원, 2인가구 확인법",
+          "재난적의료비 지원 소득기준 초과 시 신청 가능한가"
+        ]
+      },
+      "at": "2026-11-03T04:06:09.303Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "재난적의료비 지원 가구원수 헷갈립니다.",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100401&docId=491195662&answerNo=6&qb=7J6s64Kc7KCB7J2Y66OM67mEIOqwgOq1rA==",
+          "views": 3109,
+          "answers": 6,
+          "askedAt": "2026.10.30"
+        },
+        {
+          "title": "재난적의료비지원 문의~",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=709&docId=492710433&answerNo=6&qb=7J6s64Kc7KCB7J2Y66OM67mEIOqwgOq1rA==",
+          "views": 543,
+          "answers": 6,
+          "askedAt": "2026.10.29"
+        },
+        {
+          "title": "재난적의료비 지원이 될까요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70203&docId=495115121&answerNo=6&qb=7J6s64Kc7KCB7J2Y66OM67mEIOqwgOq1rA==",
+          "views": 185,
+          "answers": 8,
+          "askedAt": "2026.10.15"
+        }
+      ]
+    },
+    {
+      "id": "862358268db313ab",
+      "urls": [
+        "https://4050s.tistory.com/243"
+      ],
+      "guide": {
+        "direction": "뒷목 통증·두통으로 경동맥초음파를 권유받은 사람은 이게 뇌CT·뇌MRA와 뭐가 다른지, 결과가 정상이어도 뇌경색 위험이 없는지 몰라 지식인에 되묻는다. 고수 글은 비용과 내중막두께 판독 수치에 집중해 검사 선택 기준과 '정상 결과의 한계'는 다루지 않는다. 증상별 검사 선택 비교표와 1mm 기준 해석을 함께 주면 검색자가 추가 질문 없이 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "경동맥초음파 검사 비용 및 건강보험 적용 여부 (확인 필요: 병원·건강보험심사평가원)",
+          "내중막두께(IMT) 1mm 초과 판독 기준치의 근거 (확인 필요: 신경과 가이드라인)",
+          "경동맥초음파 vs 뇌CT vs 뇌MRA 범위·목적 비교표",
+          "경동맥초음파 정상이어도 뇌경색 가능한 이유(심장·다른 혈관 혈전)",
+          "전조증상 리스트 및 어느 과에서 어떤 검사를 먼저 받아야 하는지"
+        ],
+        "mustAvoid": [
+          "판독 수치만으로 특정 질환을 진단하듯 서술(의료행위 암시)",
+          "경동맥초음파 결과 정상=뇌졸중 안전으로 단정",
+          "뇌CT·뇌MRA·심장초음파를 같은 검사처럼 혼동"
+        ],
+        "checkBefore": [
+          "검사 비용과 급여 여부는 병원 또는 건강보험심사평가원 자료로 확인",
+          "내중막두께 1mm 기준은 대한신경과학회 등 공식 가이드라인으로 확인"
+        ],
+        "solves": [
+          "경동맥초음파 정상인데 뇌경색 가능한지 → 경동맥초음파가 보지 못하는 범위를 설명",
+          "뇌CT vs 경동맥초음파 뭘 해야 하는지 → 증상·목적별 비교표로 선택 기준 제시",
+          "뒷목 통증에 어떤 검사부터 해야 하는지 → 전조증상 체크리스트로 안내"
+        ],
+        "actionTitles": [
+          "경동맥초음파 비용과 판독법, 1mm 기준 확인하기",
+          "경동맥초음파 vs 뇌MRA 뭐가 다른지 비교로 알아보기",
+          "경동맥초음파 정상인데 뇌경색 가능한지 바로 확인하기"
+        ]
+      },
+      "at": "2026-11-03T04:06:09.303Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "경동맥 초음파 뇌 mra + mri",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70118&docId=392667292&answerNo=1&qb=66qp7J2EIOyngOuCmCDrh4ztmIjqtIAg6rK964+Z66elIOy0iOydjO2MjA==",
+          "views": 3015,
+          "answers": 2,
+          "askedAt": "2021.06.19"
+        },
+        {
+          "title": "뇌ct , 경동맥초음파",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70118&docId=476657872&answerNo=1&qb=66qp7J2EIOyngOuCmCDrh4ztmIjqtIAg6rK964+Z66elIOy0iOydjO2MjA==",
+          "views": 441,
+          "answers": 2,
+          "askedAt": "2024.10.15"
+        },
+        {
+          "title": "뇌혈류는 경동맥초음파랑 뇌mra보면",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=814&docId=403956514&answerNo=1&qb=66qp7J2EIOyngOuCmCDrh4ztmIjqtIAg6rK964+Z66elIOy0iOydjO2MjA==",
+          "views": 368,
+          "answers": 1,
+          "askedAt": "2021.10.31"
+        }
+      ]
+    },
+    {
+      "id": "c77a40d0ed96a924",
+      "urls": [
+        "https://on.sano.co.kr/%eb%8b%a4%ec%9d%b4%ec%86%8c-%ea%b9%80%ec%9e%a5%eb%b4%89%ed%88%ac-%ed%81%ac%ea%b8%b0%eb%b3%84-%ea%b0%80%ea%b2%a9%ea%b3%bc-%ec%8b%a4%ec%82%ac%ec%9a%a9-%ea%bf%80%ed%8c%81-%ea%b9%80%ec%9e%a5-%ec%a4%80/"
+      ],
+      "guide": {
+        "direction": "'다이소 김장봉투'를 검색하는 사람은 소형·중형·대형·특대형 중 뭘 사야 할지, 매장 어디에 있는지, 이사나 택배 포장에도 써도 되는지 궁금해한다. 고수 글이 크기별 가격은 정리했어도 택배로 보내면 수거거부될 수 있다는 지식인 실제 사례와 매장 내 위치는 비어 있다. 사이즈별 가격표에 매장 위치와 택배용 보강법을 더하면 독자가 바로 구매하러 갈 수 있다.",
+        "searchTargets": [
+          "다이소 김장봉투 크기",
+          "다이소 김장봉투 위치",
+          "다이소 김장봉투 이사",
+          "다이소 김장봉투 대형"
+        ],
+        "mustInclude": [
+          "소형·중형·대형·특대형별 용량(리터)과 가격 (확인 필요: 다이소 공식몰·매장)",
+          "매장 내 김장봉투 위치(주방용품/생활용품 코너) (확인 필요: 다이소 매장 안내)",
+          "끈 유무와 묶는 법, 이사용으로 쓸 때 적합한 사이즈",
+          "택배 포장용으로 쓸 때 수거거부 사례와 보강 방법(테이프 등)"
+        ],
+        "mustAvoid": [
+          "택배로 그냥 보내도 무조건 된다고 단정(수거거부 지식인 사례 존재)",
+          "종량제 쓰레기봉투와 김장봉투를 같은 용도로 혼동"
+        ],
+        "checkBefore": [
+          "사이즈별 가격·용량은 다이소 공식 온라인몰 또는 매장에서 최신 확인(지역·시기별 변동 가능)",
+          "택배 수거 가능 여부는 이용하는 택배사 포장 규정으로 확인"
+        ],
+        "solves": [
+          "다이소 김장비닐로 택배 보내도 되는지 → 수거거부 가능성과 보강 포장법 안내",
+          "생물봉투 대신 김장봉투로 분양택배 가능한지 → 대체 가능 여부와 주의점 정리",
+          "매장에서 김장봉투 위치를 못 찾는 문제 → 코너 위치 안내로 해결"
+        ],
+        "actionTitles": [
+          "다이소 김장봉투 크기별 가격 비교하고 사이즈 고르기",
+          "다이소 김장봉투 위치 확인하고 이사용으로 쓰는 법",
+          "다이소 김장봉투로 택배 포장해도 되는지 확인하기"
+        ]
+      },
+      "at": "2026-11-03T04:06:09.303Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "다이소 김장비닐로 편의점 택배 보내도 되나....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=511&docId=476796637&answerNo=1&qb=64uk7J207IaMIOq5gOyepeu0ie2IrCDtgazquLDrs4Qg7Iuk7IKs7JqpIOq5gOyepQ==",
+          "views": 344,
+          "answers": 2,
+          "askedAt": "2024.10.18"
+        },
+        {
+          "title": "생물봉투없어서 다이소 김장봉투 가능할까요....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=81302&docId=350813708&answerNo=0&qb=64uk7J207IaMIOq5gOyepeu0ie2IrCDtgazquLDrs4Qg7Iuk7IKs7JqpIOq5gOyepQ==",
+          "views": 19,
+          "answers": 0,
+          "askedAt": "2020.03.23"
+        }
+      ]
+    },
+    {
+      "id": "273004d972e75d5e",
+      "urls": [
+        "https://cogone.tistory.com/867"
+      ],
+      "guide": {
+        "direction": "레시피를 따라 하다 '한 꼬집'이나 '약간'이 정확히 몇 g인지 몰라 와플·빼빼로 레시피 질문에서도 반죽량을 못 맞춰 헷갈려한다. 고수 글은 '3가지 기준 총정리'라면서도 소금·후추·설탕처럼 재료마다 꼬집의 무게가 다르다는 점과 계량스푼 환산은 짚지 않는다. 손가락 개수별 꼬집 양을 계량스푼·그램으로 환산한 표를 주면 독자가 레시피를 바로 따라할 수 있다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "한 꼬집 = 그램 환산치(소금 기준) (확인 필요: 요리 계량 표준 자료)",
+          "'약간' vs '적당량' vs '한 꼬집' 3가지 기준 비교",
+          "소금·후추·설탕 등 재료 밀도에 따른 꼬집 무게 차이 (확인 필요: 재료별 계량 자료)"
+        ],
+        "mustAvoid": [
+          "재료 밀도 차이를 무시하고 모든 꼬집을 같은 그램으로 단정"
+        ],
+        "checkBefore": [
+          "꼬집의 표준 그램 환산치는 요리 계량 가이드나 식품 관련 공식 자료로 확인"
+        ],
+        "solves": [
+          "레시피의 한 꼬집이 정확히 얼마인지 모름 → 그램·계량스푼 환산표 제공",
+          "'약간'과 '적당량'이 뭐가 다른지 헷갈림 → 3가지 기준 비교로 명확화"
+        ],
+        "actionTitles": [
+          "한 꼬집 양 얼마인지 그램으로 환산해서 확인하기",
+          "약간 적당량 한 꼬집 차이 3가지 기준으로 비교하기",
+          "레시피 계량 헷갈릴 때 한 꼬집 기준표로 해결하기"
+        ]
+      },
+      "at": "2026-11-03T04:06:09.303Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "괜찮은 와플팬 추천 부탁드려요 !!",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=50503&docId=389743687&answerNo=15&qb=6rys7KeRIOyWvOuniOyduOyngCDslb3qsIQg7KCB64u565+J",
+          "views": 4472,
+          "answers": 20,
+          "askedAt": "2021.09.08"
+        },
+        {
+          "title": "와플기계추천해주세요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=50104&docId=388130066&answerNo=12&qb=6rys7KeRIOyWvOuniOyduOyngCDslb3qsIQg7KCB64u565+J",
+          "views": 1008,
+          "answers": 15,
+          "askedAt": "2021.09.08"
+        },
+        {
+          "title": "빼빼로~~",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020208&docId=138909301&answerNo=1&qb=6rys7KeRIOyWvOuniOyduOyngCDslb3qsIQg7KCB64u565+J",
+          "views": 671,
+          "answers": 1,
+          "askedAt": "2011.11.27"
+        }
+      ]
+    },
+    {
+      "id": "648ca1ccfcd7cad4",
+      "urls": [
+        "https://simplelifeguide.com/entry/%EA%B1%B4%EA%B0%95%EB%B3%B4%ED%97%98-%ED%94%BC%EB%B6%80%EC%96%91%EC%9E%90-%EC%86%8C%EB%93%9D%EC%9A%94%EA%B1%B4-%EA%B0%9C%ED%8E%B8-%EB%AF%B8%EC%B6%A9%EC%A1%B1-%EB%9C%BB%EA%B3%BC-%ED%83%88%EB%9D%BD-%EA%B8%B0%EC%A4%80%EA%B9%8C%EC%A7%80-%EC%B4%9D%EC%A0%95%EB%A6%AC"
+      ],
+      "guide": {
+        "direction": "검색자는 '미충족 뜻'보다 지금 당장 뭘 제출해야 하는지가 막힌 지점이다(해촉증명서, 소득 없음 입증서류). 고수 글 제목은 뜻과 탈락 기준까지만 다루고, 조정신청 시 '소득정산 부과동의서'를 내면 나중에 보험료가 역산 부과되는 함정은 비어 있다. 이 글은 개편 전후 소득기준표, 제출서류 체크리스트, 조정신청 순서까지 끝낸다.",
+        "searchTargets": [
+          "건강보험 피부양자 소득요건 미충족",
+          "건강보험 피부양자 등록 방법",
+          "건강보험 피부양자 조회",
+          "건강보험 피부양자 조건"
+        ],
+        "mustInclude": [
+          "소득요건 개편 전후 기준금액 비교표 (확인 필요: 국민건강보험공단 공고)",
+          "미충족 시 제출서류: 해촉증명서, 소득 없음 입증서류 목록",
+          "조정신청 시 '소득정산 부과동의서' 제출하면 추후 보험료가 역산 부과되는 함정 설명",
+          "피부양자 등록·자격 조회 경로 (확인 필요: 공단 홈페이지/모바일)",
+          "탈락 시 지역가입자 전환 보험료 비교"
+        ],
+        "mustAvoid": [
+          "개인 재산·가족관계별 자격 여부를 공단 확인 없이 단정",
+          "피부양자 자격 개편과 건강보험 재산기준 개편 등 다른 이슈 혼동",
+          "지역가입자 보험료 산정 공식과 피부양자 소득기준을 섞어 서술"
+        ],
+        "checkBefore": [
+          "소득요건 개편 시행일과 기준금액 - 국민건강보험공단 공식 공고 확인",
+          "조정신청·소득정산 부과동의서 절차 - 공단 민원 안내 확인"
+        ],
+        "solves": [
+          "미충족 뜻을 몰라 당황 → 기준표로 어떤 소득이 걸렸는지 바로 확인",
+          "조정신청 서류를 몰라 못 냄 → 해촉증명서 등 체크리스트 제공",
+          "조정신청 후 나중에 보험료가 더 나온다는 걸 모름 → 부과동의서 함정 미리 경고"
+        ],
+        "actionTitles": [
+          "건강보험 피부양자 소득요건 미충족, 조정신청 서류 체크리스트",
+          "건강보험 피부양자 등록 방법과 자격 조회 한 번에 끝내기",
+          "건강보험 피부양자 소득요건 개편, 탈락 기준 확인하는 법"
+        ]
+      },
+      "at": "2026-11-03T04:06:09.303Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "건강보험 피부양자 소득요건 미충족",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100401&docId=477959412&answerNo=1&qb=6rG06rCV67O07ZeYIO2UvOu2gOyWkeyekCDshozrk53smpTqsbQg6rCc7Y64IOuvuOy2qeyhsQ==",
+          "views": 5819,
+          "answers": 4,
+          "askedAt": "2024.11.16"
+        },
+        {
+          "title": "건강보험 피부양자 소득요건 미충족",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100401&docId=351013334&answerNo=1&qb=6rG06rCV67O07ZeYIO2UvOu2gOyWkeyekCDshozrk53smpTqsbQg6rCc7Y64IOuvuOy2qeyhsQ==",
+          "views": 1852,
+          "answers": 1,
+          "askedAt": "2020.03.25"
+        },
+        {
+          "title": "건강보험 피부양자 미충족 요건 소득요건 질....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100401&docId=478417224&answerNo=1&qb=6rG06rCV67O07ZeYIO2UvOu2gOyWkeyekCDshozrk53smpTqsbQg6rCc7Y64IOuvuOy2qeyhsQ==",
+          "views": 1040,
+          "answers": 1,
+          "askedAt": "2024.11.27"
+        }
+      ]
+    },
+    {
+      "id": "f526790f70814113",
+      "urls": [
+        "https://life.sano.co.kr/%eb%b2%84%eb%b2%84%eb%a6%ac-%ec%97%ac%ec%84%b1%ed%8c%a8%eb%94%a9-%ea%b2%a8%ec%9a%b8%ec%97%90-%ed%97%88%eb%a6%ac%ec%84%a0-%ec%82%b4%eb%a6%ac%eb%8a%94-%eb%b2%a8%ed%8a%b8-%eb%94%94%ec%9e%90%ec%9d%b8/"
+      ],
+      "guide": {
+        "direction": "검색자는 숏·롱·조끼·점퍼·자켓·코트 중 어떤 핏을 골라야 할지, 사이즈를 어떻게 잡아야 할지 막혀 있다. 고수 글 제목은 벨트 디자인의 인기 이유만 짚고 타입별 비교와 사이즈 선택 기준은 비어 있다. 이 글은 타입별 핏 비교표, 사이즈 선택 기준, 벨트가 허리선을 살리는 원리까지 정리해 끝낸다.",
+        "searchTargets": [
+          "버버리 여성 패딩 사이즈",
+          "버버리 여성 패딩 숏",
+          "버버리 여성 패딩 롱",
+          "버버리 여성 패딩 추천"
+        ],
+        "mustInclude": [
+          "숏/롱/조끼/점퍼/자켓/코트 타입별 핏 차이 비교표 (확인 필요: 공식 몰 제품 설명)",
+          "벨트 디자인이 허리선을 살리는 원리, 조임 위치 (확인 필요: 브랜드 설명·리뷰)",
+          "사이즈 선택 기준, 평소 치수 대비 조정폭 (확인 필요: 공식 사이즈 가이드)",
+          "체형(키·어깨)별 추천 타입 정리"
+        ],
+        "mustAvoid": [
+          "버버리와 비슷한 디자인의 타 브랜드 저가 제품과 혼동해서 소개"
+        ],
+        "checkBefore": [
+          "현재 판매 중인 타입별 정확한 명칭과 사이즈 가이드 - 버버리 공식 홈페이지 확인"
+        ],
+        "solves": [
+          "숏/롱/조끼 중 뭘 골라야 할지 모름 → 타입별 비교표로 바로 선택",
+          "사이즈를 어떻게 골라야 할지 모름 → 사이즈 가이드 기준 정리",
+          "벨트 디자인이 왜 인기인지 모호함 → 허리선 보정 원리로 설명"
+        ],
+        "actionTitles": [
+          "버버리 여성 패딩 숏·롱·조끼 타입별 핏 비교하는 법",
+          "버버리 여성 패딩 벨트 디자인, 허리선 살리는 이유 확인"
+        ]
+      },
+      "at": "2026-11-03T04:06:09.303Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "8b959b783eef77d6",
+      "urls": [
+        "https://youldad.tistory.com/576"
+      ],
+      "guide": {
+        "direction": "검색자는 금리 숫자보다 '내 돈을 얼마 넣을 때 금리가 내려가면 손해인지' 손익분기 계산과 예금자보호 여부를 헷갈린다(지식인: 100만원 예금·적금·파킹통장 선택, 파킹통장 예금자보호 오해). 고수 글은 2.4%·2.2%·0.5%p·7개월 예시로 손익분기 개념만 보여주고 소액 적용표와 예금자보호 여부는 비어 있다. 이 글은 예치금액별 손익분기 계산표와 예금자보호 비교까지 정리해 끝낸다.",
+        "searchTargets": [
+          "파킹통장 예금자보호",
+          "파킹통장 예금 비교",
+          "파킹통장 예금 금리비교",
+          "파킹통장 예금통장 차이"
+        ],
+        "mustInclude": [
+          "금리 2.4%(파킹) vs 2.2%(예금), 0.5%p 하락 시 7개월 내 예금이 유리해지는 손익분기 계산 과정",
+          "예치금액별(예: 100만원) 손익분기 적용 예시 (확인 필요: 실제 금리 변동 시나리오 출처)",
+          "파킹통장·예금 모두 예금자보호 5천만원 한도 적용 여부 (확인 필요: 예금보험공사 기준)",
+          "일반 파킹통장 vs 사업자용 MMDA 파킹통장 금리 차이 (확인 필요: 은행별 상품설명)"
+        ],
+        "mustAvoid": [
+          "파킹통장을 원금 손실 가능한 ETF 등 투자상품과 혼동해서 설명",
+          "확인 안 된 특정 은행 상품명·금리를 현재 판매 중인 것처럼 단정",
+          "손익분기 계산을 단일 예치금액 사례로만 제시해 다른 금액 독자에게 오해 주기"
+        ],
+        "checkBefore": [
+          "현재 파킹통장·예금 실제 금리와 변동 가능성 - 은행 공시·금융감독원 금리비교공시 확인",
+          "예금자보호 한도(원금+이자 5천만원) 최신 기준 - 예금보험공사 공식 확인"
+        ],
+        "solves": [
+          "100만원 같은 소액은 예금·적금·파킹통장 중 뭐가 나은지 모름 → 금액별 손익분기 계산으로 판단 기준 제공",
+          "파킹통장도 예금처럼 안전한지 헷갈림 → 예금자보호 적용 여부 정리",
+          "사업자용 MMDA 파킹통장과 일반 파킹통장을 같은 걸로 생각 → 차이 비교"
+        ],
+        "actionTitles": [
+          "파킹통장 예금 금리비교, 0.5%p 내리면 이기는 시점 계산",
+          "파킹통장 예금자보호 여부, 5천만원 한도 확인하는 법",
+          "파킹통장 예금통장 차이, 100만원 넣을 때 유리한 쪽 비교"
+        ]
+      },
+      "at": "2026-11-03T04:06:09.303Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "S&P 500 ETF, ISA,ETF가 무슨뜻인가요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=487556597&answerNo=32&qb=7YyM7YK57Ya17J6lIOyYiOq4iCDrs7Tri6Qg64aS7JWEIHDqsIA=",
+          "views": 19650,
+          "answers": 32,
+          "askedAt": "2026.09.04"
+        },
+        {
+          "title": "100만원 정기예금, 적금 또는 파킹통장?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40101&docId=486594584&answerNo=14&qb=7YyM7YK57Ya17J6lIOyYiOq4iCDrs7Tri6Qg64aS7JWEIHDqsIA=",
+          "views": 4319,
+          "answers": 15,
+          "askedAt": "2026.03.02"
+        },
+        {
+          "title": "기업은행 예금 적금 금리는 얼마인가요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=401&docId=484117053&answerNo=1&qb=7YyM7YK57Ya17J6lIOyYiOq4iCDrs7Tri6Qg64aS7JWEIHDqsIA=",
+          "views": 1598,
+          "answers": 4,
+          "askedAt": "2025.04.19"
+        }
+      ]
+    },
+    {
+      "id": "37528fc522224b50",
+      "urls": [
+        "https://dd.productinsight.kr/169"
+      ],
+      "guide": {
+        "direction": "재발급 신청 시 '분실 재발급'을 고르면 기존 카드가 즉시 정지되는데, 검색자는 어떤 사유를 골라야 하는지 몰라 막힌다. 고수 글 '신청방법'은 발급 단계만 다루고 모두의카드 앱 등록, 적립 반영 지연, 동백전 등 지역연계 환급은 빠져 있다. 재발급 사유 비교표와 등록 체크리스트, 지역연계 환급 신청 순서를 한 번에 정리해 끝낸다.",
+        "searchTargets": [
+          "k패스 교통카드 신청",
+          "k패스 교통카드 등록 방법",
+          "k패스 교통카드 환급",
+          "k패스 교통카드 발급"
+        ],
+        "mustInclude": [
+          "재발급 사유 '분실 재발급' vs '훼손/재발급' 선택 차이표(분실 선택시 기존 카드 즉시 정지)",
+          "발급 후 모두의카드 앱/홈페이지에서 후불교통 기능 선택해 등록해야 적립된다는 안내",
+          "적립내역 반영 지연 사례(예: 11~13일 후 반영)(확인 필요: 모두의카드 공지)",
+          "동백전 등 지역연계 환급은 K패스 신청과 별도 서비스 신청이 필요하다는 점(확인 필요: K패스 고객센터)",
+          "유심/휴대폰 변경 시 지원조건이 달라질 수 있다는 점"
+        ],
+        "mustAvoid": [
+          "동백전 등 다른 지자체 연계 패스와 K패스 자체 환급을 혼동해서 설명하지 않기",
+          "재발급 사유 선택 실수로 카드가 정지된다는 경고를 과장하거나 추측성 사유로 설명하지 않기",
+          "고객센터 전화번호 등 미확인 수치를 사실처럼 적지 않기(확인 필요 표시)"
+        ],
+        "checkBefore": [
+          "K패스 공식 홈페이지/모두의카드 앱 공지에서 재발급 사유별 처리 방식 확인",
+          "K패스 고객센터 및 지자체(동백전 등) 공식 공지에서 환급 신청 절차 확인"
+        ],
+        "solves": [
+          "재발급 신청시 사유를 뭘 골라야 카드가 안 정지되나 → '훼손/재발급' 선택 기준 안내",
+          "카드 받고 뭘 더 해야 적립되나 → 모두의카드 앱 등록·후불교통 설정 순서 안내",
+          "동백전 K패스 환급금은 어떻게 신청하나 → K패스와 별도인 지역서비스 신청 절차 안내"
+        ],
+        "actionTitles": [
+          "k패스 교통카드 재발급 신청, 사유 선택부터 확인하기",
+          "k패스 교통카드 등록 방법, 앱 가입부터 끝내는 순서",
+          "k패스 교통카드 환급 신청, 동백전 연계 절차까지 정리"
+        ]
+      },
+      "at": "2026-11-03T04:06:09.303Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "K패스 재발급시 모두의 카드",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40104&docId=495627402&answerNo=1&qb=a+2MqOyKpCDqtZDthrXsubTrk5wg7Iug7LKt67Cp67KV",
+          "views": 151,
+          "answers": 3,
+          "askedAt": "2026.10.20"
+        },
+        {
+          "title": "모바일 티머니앱에서 K패스 카드 변경 후 사....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40104&docId=495704357&answerNo=2&qb=a+2MqOyKpCDqtZDthrXsubTrk5wg7Iug7LKt67Cp67KV",
+          "views": 124,
+          "answers": 3,
+          "askedAt": "2026.10.27"
+        },
+        {
+          "title": "케이패스 카드",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1060115&docId=495762302&answerNo=1&qb=a+2MqOyKpCDqtZDthrXsubTrk5wg7Iug7LKt67Cp67KV",
+          "views": 99,
+          "answers": 1,
+          "askedAt": "2026.10.30"
+        }
+      ]
+    },
+    {
+      "id": "31d4b8a0858a2332",
+      "urls": [
+        "https://adipo.tistory.com/entry/%EB%B2%94%EC%A3%84-%EA%B8%B0%EB%B3%B8%EA%B0%9C%EB%85%90-%EA%B5%AC%EC%84%B1%EC%9A%94%EA%B1%B4%EB%A1%A0-%EC%95%94%EA%B8%B0%EB%85%B8%ED%8A%B8"
+      ],
+      "guide": {
+        "direction": "구성요건론을 찾는 수험생은 구성요건해당성·위법성·책임의 3단계 체계와 객관적·주관적 구성요건요소 구분에서 막힌다. 고수 글 '암기노트'는 제목만 있고 실제 비교표나 요소 분류는 다른 범죄유형 자료와 섞여 부정확할 수 있다. 3단계 체계표와 객관적/주관적 요소 비교표로 개념을 한 번에 정리해 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "구성요건해당성-위법성-책임 3단계 체계 비교표",
+          "객관적 구성요건요소(행위·결과·인과관계) vs 주관적 구성요건요소(고의·과실) 구분표",
+          "기본적 구성요건과 수정적 구성요건(미수·공범 등) 구분(확인 필요: 형법총론 교재)",
+          "기술적 구성요건요소 vs 규범적 구성요건요소 차이(확인 필요: 교재/판례)"
+        ],
+        "mustAvoid": [
+          "컴퓨터범죄, 특정범죄가중처벌법상 도주사고 등 다른 분야 자료와 구성요건론 개념을 혼동해 설명하지 않기"
+        ],
+        "checkBefore": [
+          "형법총론 교과서(이재상·오영근 등)에서 구성요건론 체계와 요소 분류 확인"
+        ],
+        "solves": [
+          "구성요건해당성과 위법성·책임이 뭐가 다른지 모르겠다 → 3단계 체계표로 구분",
+          "객관적 구성요건과 주관적 구성요건이 헷갈린다 → 요소별 비교표로 정리",
+          "형법 기본개념이 암기가 안 된다 → 도식형 암기노트로 정리"
+        ],
+        "actionTitles": [
+          "범죄 구성요건 객관적·주관적 요소 비교로 정리 끝내기"
+        ]
+      },
+      "at": "2026-11-03T04:06:09.303Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "사회 현상의 문제는 논술에서 어떻게 다루어....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110501&docId=101063542&answerNo=1&qb=67KU7KOEIOq4sOuzuOqwnOuFkCDqtazshLHsmpTqsbTroaAg7JWU6riw64W47Yq4",
+          "views": 43999,
+          "answers": 1,
+          "askedAt": "2009.12.18"
+        },
+        {
+          "title": "컴퓨터범죄",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=106&docId=50131748&answerNo=4&qb=67KU7KOEIOq4sOuzuOqwnOuFkCDqtazshLHsmpTqsbTroaAg7JWU6riw64W47Yq4",
+          "views": 21055,
+          "answers": 4,
+          "askedAt": "2007.11.28"
+        },
+        {
+          "title": "2011년에 유망자격증 도로교통사고감정사 따....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=201&docId=117967717&answerNo=9&qb=67KU7KOEIOq4sOuzuOqwnOuFkCDqtazshLHsmpTqsbTroaAg7JWU6riw64W47Yq4",
+          "views": 2074,
+          "answers": 4,
+          "askedAt": "2010.10.06"
+        }
+      ]
+    },
+    {
+      "id": "6fd135ce2a86f156",
+      "urls": [
+        "https://seedpipeline.tistory.com/entry/%EB%87%8C%EC%8B%AC%ED%98%88%EA%B4%80%EC%A7%88%ED%99%98-%EC%A0%84%EC%A1%B0%EC%A6%9D%EC%83%81-%EB%B0%8F-%EC%9D%91%EA%B8%89%EC%B2%98%EC%B9%98-%EC%A7%81%EC%9E%A5%EC%9D%B8-%EB%8F%8C%EC%97%B0%EC%82%AC-%EB%A7%89%EB%8A%94-%EA%B3%A8%EB%93%A0%ED%83%80%EC%9E%84-%EB%8C%80%EC%B2%98%EB%B2%95"
+      ],
+      "guide": {
+        "direction": "가족이나 본인에게 갑자기 증상이 나타났을 때 이게 뇌심혈관질환 전조증상인지, 바로 119를 불러야 하는지 판단 기준이 없어 검색자가 막힌다. 고수 글 '골든타임 대처법'은 제목은 포괄적이나 구체적 증상 체크리스트와 응급처치 순서가 빠져 있을 수 있다. 전조증상 체크리스트와 골든타임 시간 기준, 응급처치 순서를 표로 정리해 바로 판단하게 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "전조증상 체크리스트(편측마비·언어장애·시야장애·극심한 두통·흉통 등)(확인 필요: 질병관리청/뇌졸중학회)",
+          "골든타임 시간 기준(증상 발생 후 몇시간 내 병원 도착해야 하는지)(확인 필요: 대한뇌졸중학회)",
+          "응급처치 순서(119 신고→환자 안전한 자세→심정지시 CPR)(확인 필요: 대한심폐소생협회 가이드라인)",
+          "직장인 특화 위험요인(장시간 좌식·스트레스·흡연 등)(확인 필요: 관련 통계)"
+        ],
+        "mustAvoid": [
+          "특정 연예인·직장인의 돌연사 사례를 확인 없이 사실처럼 단정하지 않기",
+          "뇌졸중과 심장질환 응급처치 원칙을 뒤섞어 안내하지 않기(처치법이 다름)",
+          "바늘따기 등 비과학적 민간요법을 응급처치로 소개하지 않기"
+        ],
+        "checkBefore": [
+          "질병관리청·대한뇌졸중학회·대한심장학회 공식 자료에서 전조증상·골든타임 수치 확인",
+          "대한심폐소생협회(KACPR) 최신 가이드라인에서 응급처치 순서 확인"
+        ],
+        "solves": [
+          "가족이 갑자기 어지러워하는데 전조증상인지 모르겠다 → 체크리스트로 바로 판단하게 안내",
+          "병원에 몇시간 안에 가야 골든타임을 지키는지 모르겠다 → 시간 기준표로 안내",
+          "응급처치를 어떤 순서로 해야 할지 모르겠다 → 단계별 순서로 정리"
+        ],
+        "actionTitles": [
+          "뇌심혈관질환 전조증상 체크리스트와 응급처치 순서 정리",
+          "골든타임 지키는 뇌심혈관질환 응급처치법, 순서대로 확인",
+          "직장인 돌연사 전조증상 체크부터 응급처치 대처법까지"
+        ]
+      },
+      "at": "2026-11-03T04:06:09.303Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "0a9f341ad0f32e1b",
+      "urls": [
+        "https://everydaywell.tistory.com/entry/%EB%A7%88%ED%8A%B8%EC%97%90%EC%84%9C-%ED%8C%8C%EB%8A%94-%EB%B0%B0%EB%8A%94-%EC%99%9C-%EB%8C%80%EB%B6%80%EB%B6%84-%EC%8B%A0%EA%B3%A0%EC%9D%BC%EA%B9%8C-%EA%B5%AD%EC%82%B0-%EB%B0%B0-8%EA%B0%9C-%ED%92%88%EC%A2%85%EA%B3%BC-%EB%82%98%EC%A3%BC%EB%B0%B0%EC%9D%98-%EC%A7%84%EC%8B%A4"
+      ],
+      "guide": {
+        "direction": "검색자는 마트에서 사는 배가 다 신고배 같아 보여 실제 품종이 몇 가지인지, 나주배가 별도 품종인지 궁금해한다. 고수 블로그 제목은 '진실'이라 예고하지만 품종별 비교표 없이 뭉뚱그려 설명하는 경우가 많다. 이 글은 국산 배 8개 품종명·특징을 표로 정리하고 나주배는 산지명, 신고가 실제 품종임을 밝혀 궁금증을 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "국산 배 8개 품종명 전체 리스트 (확인 필요: 농촌진흥청 품종정보)",
+          "나주배는 산지명, 신고는 품종명이라는 관계 정리 (확인 필요: 나주시 공식 자료)",
+          "마트 매대에 신고 비중이 높은 이유 (확인 필요: 유통 통계)",
+          "품종별 수확시기·맛·용도 비교표"
+        ],
+        "mustAvoid": [
+          "특정 농가·마트를 비방하는 추측성 표현",
+          "국산 배 설명 중 수입 배와 혼동되는 서술"
+        ],
+        "checkBefore": [
+          "국산 배 8개 품종명·특징은 농촌진흥청 또는 농수산식품유통공사 자료로 확인",
+          "나주배가 지역 브랜드인지 품종인지 나주시 공식 자료로 확인"
+        ],
+        "solves": [
+          "마트에 파는 배는 다 같은 건가? → 국산 배 8개 품종 비교표로 신고 비중이 높은 이유 설명",
+          "나주배가 품종 이름인가? → 나주배는 산지명이고 실제 품종은 신고임을 정리"
+        ],
+        "actionTitles": [
+          "국산 배 품종 8가지 비교표로 신고배 나주배 정체 확인하기",
+          "마트 배 대부분 신고배인 이유, 품종 비교로 바로 확인"
+        ]
+      },
+      "at": "2026-11-03T04:06:09.303Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "토끼에 관해서 질문할게요~",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80505&docId=33050594&answerNo=11&qb=66eI7Yq4IO2MjOuKlCDrsLDripQg64yA67aA67aEIOq1reyCsA==",
+          "views": 1321,
+          "answers": 10,
+          "askedAt": "2009.07.01"
+        },
+        {
+          "title": "국내산과 수입산에 대한 우리나라에서 나타....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80201&docId=295383474&answerNo=1&qb=66eI7Yq4IO2MjOuKlCDrsLDripQg64yA67aA67aEIOq1reyCsA==",
+          "views": 456,
+          "answers": 1,
+          "askedAt": "2018.02.19"
+        },
+        {
+          "title": "무알콜맥주에 관한 질문이요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=13050403&docId=236069376&answerNo=1&qb=66eI7Yq4IO2MjOuKlCDrsLDripQg64yA67aA67aEIOq1reyCsA==",
+          "views": 358,
+          "answers": 1,
+          "askedAt": "2015.10.10"
+        }
+      ]
+    },
+    {
+      "id": "9cf910658f59eb4d",
+      "urls": [
+        "https://on.sano.co.kr/%ec%83%9d%ea%b5%b4-%ec%94%bb%eb%8a%94%eb%b2%95-%ec%9d%b4%ea%b2%83%eb%a7%8c-%ec%95%8c%eb%a9%b4-%eb%b9%84%eb%a6%b0%eb%82%b4-%ea%b1%b1%ec%a0%95-%ec%97%86%ec%9d%b4-%ec%8b%b1%ec%8b%b1%ed%95%98%ea%b2%8c/"
+      ],
+      "guide": {
+        "direction": "검색자는 생굴 비린내를 없애는 세척법을 찾는데 레몬, 밀가루, 식초 등 방법이 여러 개라 뭘 써야 할지 헷갈린다. 고수 글 제목은 '이것만 알면'이라 하지만 레몬·밀가루·식초 세 방법을 서로 비교해주지 않는다. 이 글은 세 가지 세척법의 순서와 비율을 표로 비교해 상황별로 뭘 고르면 되는지 알려주고 끝낸다.",
+        "searchTargets": [
+          "생굴 씻는법",
+          "생굴 씻는법 레몬",
+          "생굴 씻는법 밀가루"
+        ],
+        "mustInclude": [
+          "레몬즙으로 씻는 법과 비율 (확인 필요: 정확한 레몬즙 비율)",
+          "밀가루로 씻는 법과 헹굼 순서 (확인 필요: 밀가루·물 비율)",
+          "식초 1큰술+참기름 1큰술로 조물조물 버무리는 법 (지식인 답변 근거)",
+          "레몬·밀가루·식초 세 방법 비교표(소요시간·효과)"
+        ],
+        "mustAvoid": [
+          "김치 담그기 등 관련 없는 레시피로 글이 새는 것"
+        ],
+        "checkBefore": [
+          "레몬·밀가루 세척법의 정확한 비율과 시간은 요리 전문 자료로 재확인",
+          "식초·참기름 비율이 굴 크기와 상관없이 동일하게 적용되는지 확인"
+        ],
+        "solves": [
+          "굴 비린내 안 나게 씻는 법? → 식초+참기름으로 조물조물 버무리는 법 소개",
+          "레몬으로 씻으면 어떻게 하나? → 레몬즙 세척 비율과 순서 정리",
+          "밀가루로도 씻는다는데 맞나? → 밀가루 세척법과 주의점 설명"
+        ],
+        "actionTitles": [
+          "생굴 씻는법 레몬 밀가루 식초까지 비린내 제거법 비교",
+          "생굴 비린내 안나게 씻는법, 식초 참기름으로 해결하기",
+          "생굴 씻는법 레몬 vs 밀가루 뭐가 더 좋은지 확인하기"
+        ]
+      },
+      "at": "2026-11-03T04:06:09.303Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "김치의 종류,김치를 만드는 방법,김치의 유래....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=13050401&docId=174319013&answerNo=1&qb=7IOd6rW0IOyUu+uKlOuylSDsnbTqsoMg7JWM66m0IOu5hOumsOuCtA==",
+          "views": 111176,
+          "answers": 2,
+          "askedAt": "2013.06.10"
+        },
+        {
+          "title": "김치담그는 법..",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020112&docId=29772076&answerNo=1&qb=7IOd6rW0IOyUu+uKlOuylSDsnbTqsoMg7JWM66m0IOu5hOumsOuCtA==",
+          "views": 59650,
+          "answers": 6,
+          "askedAt": "2002.10.24"
+        },
+        {
+          "title": "굴 비린냄새 안나게 씻는법",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=8&docId=211694027&answerNo=1&qb=7IOd6rW0IOyUu+uKlOuylSDsnbTqsoMg7JWM66m0IOu5hOumsOuCtA==",
+          "views": 13160,
+          "answers": 1,
+          "askedAt": "2018.05.01"
+        }
+      ]
+    },
+    {
+      "id": "a6bb8536a0d4a3f5",
+      "urls": [
+        "https://apt-view.com/kb-%ea%b5%ad%eb%af%bc%ec%9d%80%ed%96%89-%ea%b0%9c%ec%9d%b8%ec%a0%95%eb%b3%b4-%ec%9c%a0%ec%b6%9c-%ec%a1%b0%ed%9a%8c-%eb%82%98%eb%8f%84-%eb%8c%80%ec%83%81%ec%9d%bc%ea%b9%8c-%ed%95%b4%ed%82%b9/"
+      ],
+      "guide": {
+        "direction": "검색자는 'KB국민은행 개인정보 유출' 문자나 소식을 보고 자신도 유출 대상인지 확인하는 방법을 찾는다. 고수 글 제목은 '해킹 확인 방법'을 예고하지만, 지식인 답변들은 이런 문자가 대부분 보안승급을 유도하는 피싱이라고 지적한다. 이 글은 공식 공지로 실제 유출 여부를 확인하는 절차와 피싱 문자 판별 체크리스트를 함께 제시해 혼란을 끝낸다.",
+        "searchTargets": [
+          "kb국민은행 개인정보"
+        ],
+        "mustInclude": [
+          "'보안승급' 문구가 포함된 문자·전화는 100% 피싱이라는 지식인 공통 답변 반영",
+          "실제 개인정보 유출 여부는 KB국민은행 공식 공지·고객센터로 확인하는 절차 (확인 필요: 공식 공지 링크)",
+          "피싱 문자 판별 체크리스트(보안승급 요구, 링크 클릭 유도 등)",
+          "유출 의심 시 신고처(금융감독원, 경찰청 등) (확인 필요: 정확한 신고 기관)"
+        ],
+        "mustAvoid": [
+          "실제 공식 공지 확인 없이 '유출됐다'고 단정하는 서술",
+          "영업시간·환전·적금 해지 등 무관한 KB 정보로 글이 새는 것"
+        ],
+        "checkBefore": [
+          "KB국민은행 공식 홈페이지·고객센터에 실제 개인정보 유출 공지가 있는지 반드시 확인",
+          "'보안승급' 문자가 실제 은행에서 보내는 공식 안내인지 KB 공식 계정 공지로 재확인"
+        ],
+        "solves": [
+          "개인정보 유출 문자 받았는데 진짜인가? → 지식인 공통 답변 기반 피싱 판별법 제시",
+          "나도 유출 대상인지 어떻게 확인? → 공식 공지·고객센터로 확인하는 절차 안내",
+          "보안승급 문자 눌러도 되나? → 100% 피싱이라는 근거와 대응법 정리"
+        ],
+        "actionTitles": [
+          "kb국민은행 개인정보 유출 문자 진짜인지 지금 확인하기",
+          "kb국민은행 보안승급 문자 피싱인지 바로 구분하는 법",
+          "kb국민은행 개인정보 유출 조회 전 꼭 확인할 체크리스트"
+        ]
+      },
+      "at": "2026-11-03T04:06:09.303Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "kb국민은행 개인정보 유출 사기문자 때문에요....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=11003&docId=158342740&answerNo=4&qb=a2Ig6rWt66+87J2A7ZaJIOqwnOyduOygleuztCDsnKDstpwg64KY64+E",
+          "views": 8931,
+          "answers": 3,
+          "askedAt": "2012.09.15"
+        },
+        {
+          "title": "kb국민은행 개인정보 유출 문자",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=11003&docId=155997092&answerNo=2&qb=a2Ig6rWt66+87J2A7ZaJIOqwnOyduOygleuztCDsnKDstpwg64KY64+E",
+          "views": 7376,
+          "answers": 2,
+          "askedAt": "2012.08.06"
+        },
+        {
+          "title": "국민카드 개인정보 보호 소홀",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40104&docId=33546045&answerNo=1&qb=a2Ig6rWt66+87J2A7ZaJIOqwnOyduOygleuztCDsnKDstpwg64KY64+E",
+          "views": 3023,
+          "answers": 1,
+          "askedAt": "2005.01.08"
+        }
+      ]
+    },
+    {
+      "id": "9d8dd270edfb7b73",
+      "urls": [
+        "https://moneyinftong.tistory.com/entry/%EB%8B%A4%EA%B0%80%EC%98%A4%EB%8A%94-%EB%B9%BC%EB%B9%BC%EB%A1%9C%EB%8D%B0%EC%9D%B4-KB-Pay-%EC%87%BC%ED%95%91-%EB%A7%A4%EC%9D%BC-10%EC%8B%9C%EC%97%90%EC%84%9C-%EC%A4%80%EB%B9%84%ED%95%9C-%EB%B9%BC%EB%B9%BC%EB%A1%9C-20%EA%B0%9C%EC%9E%85-%EC%9D%98-%EA%B0%80%EA%B2%A9%EC%9D%80-%EC%96%BC%EB%A7%88%EC%9D%BC%EA%B9%8C%EC%9A%94"
+      ],
+      "guide": {
+        "direction": "검색자는 KB Pay 쇼핑 '매일 10시' 빼빼로데이 특가에서 20개입 가격이 정확히 얼마인지, 품절 전에 어떻게 구매하는지를 궁금해한다. 고수 글 제목이 가격을 묻는 질문형으로 끝나 있어 정작 가격·구매 시간·수량 제한을 본문에서 바로 안 주는 경우가 많다. 가격, 10시 오픈 시점, 구매 절차, 수량 제한을 표로 정리해 10시 전에 그대로 따라 하게 하면 글 하나로 끝난다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "빼빼로 20개입 정확한 가격(확인 필요: KB Pay 앱 이벤트 페이지)",
+          "매일 10시 오픈 시간 및 마감 여부",
+          "KB Pay 쇼핑 진입·구매 경로(앱 내 위치)",
+          "1인 구매 수량 제한(확인 필요: KB Pay 공지)",
+          "빼빼로데이 날짜(11월 11일) 기준 이벤트 기간"
+        ],
+        "mustAvoid": [
+          "가격을 추측해 확정적으로 단정"
+        ],
+        "checkBefore": [
+          "KB Pay 앱 내 이벤트 공지에서 실제 판매가·시간·수량 제한 확인"
+        ],
+        "solves": [
+          "빼빼로 20개입 가격이 얼마인지 모름 → 정확한 가격과 할인 조건 정리",
+          "매일 10시에 어떻게 사는지 모름 → 진입 경로와 구매 순서 단계별 정리"
+        ],
+        "actionTitles": [
+          "KB Pay 빼빼로 20개입 가격, 매일 10시 구매 방법 확인하기",
+          "빼빼로데이 KB Pay 쇼핑 10시 특가 가격 미리 확인하는 법",
+          "KB Pay 빼빼로 20개입 가격과 구매 시간 한번에 확인"
+        ]
+      },
+      "at": "2026-11-03T04:06:09.303Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "91c31dae3dc13e6f",
+      "urls": [
+        "https://yjfreelifestyle.tistory.com/entry/100%EC%9D%BC%EC%9D%98-%EA%B1%B0%EC%A7%93%EB%A7%90-%EC%B6%9C%EC%83%9D%EC%9D%98-%EB%B9%84%EB%B0%80-%EC%9D%B8%EB%AC%BC%EA%B4%80%EA%B3%84-%EC%A0%95%EB%A6%AC-%EA%B0%80%EA%B2%BD%C2%B7%ED%83%9C%EC%9B%85%C2%B7%EC%8B%A0%EC%9D%B4%EC%B9%98%EB%8A%94-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%96%BD%ED%98%80-%EC%9E%88%EB%82%98-7%ED%9A%8C-%EA%B8%B0%EC%A4%80"
+      ],
+      "guide": {
+        "direction": "검색자는 7회까지 보고 가경·태웅·신이치가 누구의 자식이고 누가 거짓말을 숨기고 있는지 관계가 꼬여서 막혔다. 고수 글 제목은 '인물관계 정리'라 해놓고 실제로 어떤 거짓말이 누구를 속이고 있는지 회차별 흐름으로는 안 풀어준다. 가계도 형태 관계표와 7회까지 밝혀진 사실만 분리해 정리해 주면 재시청 없이 관계가 끝난다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "가경·태웅·신이치 삼각 관계 구도 요약",
+          "7회까지 밝혀진 출생의 비밀 핵심 사실(확인 필요: 방송 내용)",
+          "인물관계도(가계도) 표 또는 이미지"
+        ],
+        "mustAvoid": [
+          "실제 배우 사생활·실제 가족관계로 오해될 추측 서술",
+          "비슷한 '거짓말' 소재 다른 드라마와 혼동"
+        ],
+        "checkBefore": [
+          "방송사·OTT 공식 줄거리 및 인물 소개 페이지에서 가경·태웅·신이치 설정 확인",
+          "최신 회차 예고편에서 7회 이후 전개 방향 확인"
+        ],
+        "solves": [
+          "가경·태웅·신이치 관계가 헷갈림 → 7회 기준 관계도로 정리",
+          "출생의 비밀이 누구의 거짓말인지 모호함 → 거짓말 주체·대상을 표로 정리"
+        ],
+        "actionTitles": [
+          "가경 태웅 신이치 관계, 출생의 비밀로 바로 확인하는 법"
+        ]
+      },
+      "at": "2026-11-03T04:06:09.303Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "직지심체요절에 대한 얘기",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=111001&docId=60927985&answerNo=17&qb=6rGw7KeT66eQIOy2nOyDnSDruYTrsIAg7J2466y86rSA6rOEIOqwgOqyvQ==",
+          "views": 32113,
+          "answers": 19,
+          "askedAt": "2009.10.26"
+        },
+        {
+          "title": "직지를 찾기 위하여 우리가 할 수 있는 일에....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=12&docId=21273976&answerNo=3&qb=6rGw7KeT66eQIOy2nOyDnSDruYTrsIAg7J2466y86rSA6rOEIOqwgOqyvQ==",
+          "views": 16791,
+          "answers": 4,
+          "askedAt": "2009.10.15"
+        },
+        {
+          "title": "가톨릭의 오류 ( 가톨릭 신자들의 답을 들어....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60902&docId=49149535&answerNo=0&qb=6rGw7KeT66eQIOy2nOyDnSDruYTrsIAg7J2466y86rSA6rOEIOqwgOqyvQ==",
+          "views": 120,
+          "answers": 0,
+          "askedAt": "2009.05.21"
+        }
+      ]
+    },
+    {
+      "id": "e8f3dcad9aa398bb",
+      "urls": [
+        "https://life.sano.co.kr/%ed%99%a9%ec%84%9d%ec%96%b4-%ec%a0%93%ea%b0%88-%ea%b9%80%ec%b9%98%ec%97%90-%eb%84%a3%eb%8a%94%eb%b0%a9%eb%b2%95-%ea%b6%81%ea%b8%88%ed%95%98%eb%8b%a4%eb%a9%b4-%ec%a7%80%ea%b8%88-%ed%99%95%ec%9d%b8/"
+      ],
+      "guide": {
+        "direction": "검색자는 황석어젓갈을 생으로 넣을지 끓여서 넣을지, 넣는 시점과 양을 몰라 막혀 있다. 고수 글 제목은 '넣는방법'만 다뤄 끓이는법·다른 젓갈과의 배합비까지는 안 풀어준다. 끓이는 과정, 양념에 버무리는 시점, 새우젓·멸치액젓과의 배합비를 단계별로 정리하면 레시피 검색이 끝난다.",
+        "searchTargets": [
+          "황석어젓갈김치넣는방법",
+          "황석어젓갈 김치 양념",
+          "황석어젓갈 끓이는법",
+          "황석어젓갈 김치 담그기"
+        ],
+        "mustInclude": [
+          "황석어젓갈을 끓여서 식힌 후 넣는지 생으로 넣는지 구분",
+          "새우젓·멸치액젓·황석어젓 복합 사용 배합비(전라도식)",
+          "양념 버무릴 때 넣는 정확한 순서",
+          "젓갈 신선도 확인법과 잡내 방지 요령",
+          "김치 양 대비 황석어젓 넣는 양(확인 필요: 레시피 기준량)"
+        ],
+        "mustAvoid": [
+          "생젓갈을 끓이는 과정 없이 그대로 넣어 비린내 나는 문제 언급 생략",
+          "전라도식 복합 젓갈 비율과 단독 사용 레시피 혼동",
+          "양 조절 실패로 김치 속이 물러지는 경우 경고 생략"
+        ],
+        "checkBefore": [
+          "황석어젓 끓이는 전처리가 필수인지 선택인지 레시피 사이트에서 확인",
+          "젓갈별 표준 배합비(만개의레시피 등 신뢰 레시피) 확인"
+        ],
+        "solves": [
+          "황석어젓갈을 생으로 넣을지 끓여서 넣을지 모름 → 끓이는법과 생젓 사용법 비교 정리",
+          "다른 젓갈과 섞는 비율을 모름 → 새우젓·멸치액젓 배합비 정리",
+          "양념에 넣는 시점을 모름 → 버무리는 순서 단계별 정리"
+        ],
+        "actionTitles": [
+          "황석어젓갈 김치 담그기, 넣는 시점과 배합비 확인하는 법"
+        ]
+      },
+      "at": "2026-11-03T04:06:09.303Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "김장할 때 황석어젓, 갈치젓 사용법",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020112&docId=405153770&answerNo=3&qb=7Zmp7ISd7Ja0IOygk+qwiCDquYDsuZgg64Sj64qU67Cp67KVIOq2geq4iO2VmOuLpOuptA==",
+          "views": 7820,
+          "answers": 3,
+          "askedAt": "2021.12.01"
+        },
+        {
+          "title": "김장김치 양념에 꼭 필요한 기본 재료들은 무....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020112&docId=490254349&answerNo=1&qb=7Zmp7ISd7Ja0IOygk+qwiCDquYDsuZgg64Sj64qU67Cp67KVIOq2geq4iO2VmOuLpOuptA==",
+          "views": 1979,
+          "answers": 8,
+          "askedAt": "2025.11.18"
+        },
+        {
+          "title": "오이김치 양념에 꼭 필요한 재료는 무엇인가....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020112&docId=485451143&answerNo=4&qb=7Zmp7ISd7Ja0IOygk+qwiCDquYDsuZgg64Sj64qU67Cp67KVIOq2geq4iO2VmOuLpOuptA==",
+          "views": 827,
+          "answers": 5,
+          "askedAt": "2025.05.29"
+        }
+      ]
+    },
+    {
+      "id": "490580ea66f71c66",
+      "urls": [
+        "https://codingzero.tistory.com/entry/land-forest-register-online-issuance-guide"
+      ],
+      "guide": {
+        "direction": "검색자는 정부24에서 토지대장을 무료로 뗄 수 있는지, 지번을 넣었는데 임야대장인지 토지대장인지 헷갈려 막힌다. 고수 글 제목은 '무료 발급방법'만 짚고 지식인에 반복되는 1980년대 이전 구토지대장·등기부등본과 결과가 다를 때 대처법은 비어 있다. 지목 기준으로 토지/임야대장 구분표와 열람(무료)·발급(유료 여부) 기준을 정리해 한 번에 끝내준다.",
+        "searchTargets": [
+          "토지대장 인터넷 발급",
+          "토지대장 인터넷 열람"
+        ],
+        "mustInclude": [
+          "정부24에서 열람은 무료, 발급 시 수수료 발생 여부(확인 필요: 정부24 공지)",
+          "토지대장·임야대장 구분 기준(지목이 임야인지 여부)",
+          "지번 입력 후 조회 결과가 안 나올 때 구토지대장·폐쇄등기부 확인 경로",
+          "등기부등본과 토지대장의 항목 차이표(소유자·면적·지목 등)",
+          "1980년대 이전 토지는 구토지(임야)대장을 별도 발급해야 하는 경우"
+        ],
+        "mustAvoid": [
+          "토지대장과 등기부등본을 같은 서류로 혼동해 안내",
+          "정부24 외 유료 대행 사이트를 공식 발급처처럼 소개",
+          "임야대장도 '토지대장'으로만 통칭해 지목 구분 없이 설명"
+        ],
+        "checkBefore": [
+          "정부24에서 토지대장 열람·발급 각각 무료/유료 여부 현재 기준 확인",
+          "구토지대장·폐쇄등기부는 관할 등기소 방문 필요 여부 확인"
+        ],
+        "solves": [
+          "지번을 넣었는데 조회가 안 됨 → 구토지대장·분번 포함 지번 입력법 안내",
+          "건물 등기부등본인데 건물 하나만 나옴 → 지번별 건물 등기부 선택 방법 안내",
+          "토지대장과 등기부 내용이 다름 → 두 서류 항목 비교표로 불일치 원인 설명"
+        ],
+        "actionTitles": [
+          "토지대장 인터넷 발급 정부24 무료 조건 확인하기",
+          "지번으로 토지대장 조회 안될 때 구토지대장 확인법"
+        ]
+      },
+      "at": "2026-11-03T04:06:09.303Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "토지대장 열람 및 발급 방법은 어떻게 되나요....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60103&docId=477548341&answerNo=3&qb=7Yag7KeA64yA7J6lIOyduO2EsOuEtyDrsJzquInrsKnrspXsnoTslbzrjIDsnqUg7KeA67KIIOuTseq4sOu2gA==",
+          "views": 1572,
+          "answers": 18,
+          "askedAt": "2024.11.18"
+        },
+        {
+          "title": "건물등기부등본 건물 하나만 나오는데 발급....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60223&docId=494802883&answerNo=2&qb=7Yag7KeA64yA7J6lIOyduO2EsOuEtyDrsJzquInrsKnrspXsnoTslbzrjIDsnqUg7KeA67KIIOuTseq4sOu2gA==",
+          "views": 911,
+          "answers": 5,
+          "askedAt": "2026.08.19"
+        },
+        {
+          "title": "1980년대 이전 토지대장과 등기부등본 확인하....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60223&docId=410361672&answerNo=1&qb=7Yag7KeA64yA7J6lIOyduO2EsOuEtyDrsJzquInrsKnrspXsnoTslbzrjIDsnqUg7KeA67KIIOuTseq4sOu2gA==",
+          "views": 900,
+          "answers": 1,
+          "askedAt": "2022.01.23"
+        }
+      ]
     }
   ],
   "misses": [
