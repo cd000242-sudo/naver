@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T02:54:23.155Z",
+ "builtAt": "2026-11-03T03:04:27.327Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,62 +15,95 @@
    "sources": [
     "daum"
    ],
-   "articles90": 60,
-   "recent20": 11,
-   "press": 50,
+   "articles90": 66,
+   "recent20": 7,
+   "press": 56,
    "firstArticleAt": "2026-11-03T01:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "외교부 \"1호기 정보유출, 수사…대통령 내외 등 여권 재발급 조치\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-03T02:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922365?sid=100"
+     "title": "외교부 화들짝 \"李대통령 부부 등 168명 여권 재발급\"",
+     "press": "viewsnnews.com",
+     "publishedAt": "2026-11-03T03:02:00.000Z",
+     "link": "https://www.viewsnnews.com/article?q=239443"
     },
     {
-     "title": "李 대통령 여권번호도 '무방비 노출'…전용기 탑승자 168명 정보 유출",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-03T02:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000541377?sid=101"
+     "title": "외교부 \"해킹 아닌 유출, 경찰 등 수사·조사 진행중\"",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-03T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002534459?sid=100"
     },
     {
-     "title": "[재종합] 대통령 순방단 168명 개인정보 유출 파문…청와대·외교부·국...",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-03T02:42:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=100513"
+     "title": "[속보]외교부, 李대통령 부부·정부 주요 인사 등 168명 개인정보 유출...",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-03T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001228191?sid=100"
     }
    ]
   },
   {
    "keyword": "발언하는 이재명 대통령",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 62,
-   "recent20": 10,
+   "articles90": 59,
+   "recent20": 9,
    "press": 41,
-   "firstArticleAt": "2026-11-03T01:50:00.000Z",
+   "firstArticleAt": "2026-11-03T01:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“허위 사실 유포에 강력 대응”…이 대통령, 오늘 국무회의서 '작심 경...",
+     "title": "이 대통령 \"다문화 차별? 제 우려는 극우적 선동\"",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-03T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002534458?sid=100"
+    },
+    {
+     "title": "이 대통령 \"부동산 객관적 통계, 정부에서 제대로 설명하는 게 중요\"",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-03T02:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002393201?sid=100"
+    },
+    {
+     "title": "시민사회단체, 이 대통령 이주민 차별 발언 위헌 소지",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-03T02:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001882636?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "미국 중간선거",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 53,
+   "recent20": 6,
+   "press": 35,
+   "firstArticleAt": "2026-11-03T01:53:00.000Z",
+   "exclusive": true,
+   "capped": true,
+   "samples": [
+    {
+     "title": "트럼프 운명의 날… 美 중간선거 오늘, 상원 초접전",
+     "press": "mediawatch.kr",
+     "publishedAt": "2026-11-03T03:02:00.000Z",
+     "link": "https://www.mediawatch.kr/news/article.html?no=261593"
+    },
+    {
+     "title": "2026 미국 중간선거 날짜부터 한국시간 일정까지",
      "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-03T02:52:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1171345"
+     "publishedAt": "2026-11-03T03:00:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1171364"
     },
     {
-     "title": "하정우 \"HWP 정부 문서, AI가 못읽어\" 李대통령 \"어처구니 없어\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T02:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009266782?sid=100"
-    },
-    {
-     "title": "李대통령 \"약자 지원, 공정성·합리성 고려…혐오 세력 빌미 줄 수도\"",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-03T02:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000541382?sid=101"
+     "title": "[美중간선거]'제조업 보호' 내건 트럼프 관세, 선거 앞두고 역풍",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T02:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014297586?sid=104"
     }
    ]
   },
@@ -79,10 +112,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 39,
-   "recent20": 3,
-   "press": 38,
-   "firstArticleAt": "2026-11-03T01:26:00.000Z",
+   "articles90": 35,
+   "recent20": 0,
+   "press": 34,
+   "firstArticleAt": "2026-11-03T01:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,22 +140,54 @@
    ]
   },
   {
-   "keyword": "국정원 긴급 보안점검",
+   "keyword": "10월 소비자물가 2.8%",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 36,
+   "recent20": 12,
+   "press": 28,
+   "firstArticleAt": "2026-11-03T01:35:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "10월물가 2.8% 고공행진… 기름 더 붓는 ‘역대급 예산’",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-03T03:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002829942?sid=101"
+    },
+    {
+     "title": "채솟값 내려도 외식·가공식품 '껑충'···10월 물가 2.8% 상승",
+     "press": "enewstoday.co.kr",
+     "publishedAt": "2026-11-03T02:59:00.000Z",
+     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2487728"
+    },
+    {
+     "title": "10월 소비자물가 2.8%↑...'가공식품·석유류' 오름세",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-03T02:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002427654?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "국정원 2100기관 보안점검",
    "sources": [
     "nate"
    ],
-   "articles90": 42,
+   "articles90": 23,
    "recent20": 1,
-   "press": 38,
-   "firstArticleAt": "2026-11-03T01:26:00.000Z",
+   "press": 22,
+   "firstArticleAt": "2026-11-03T01:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "靑 보안망 긴급점검… 1호기 기밀유출 조사",
-     "press": "m.skyedaily.com",
-     "publishedAt": "2026-11-03T02:52:00.000Z",
-     "link": "https://m.skyedaily.com/news_view.html?ID=314004"
+     "title": "거센 해킹에 공공도 비상…국정원, 중앙부처·지자체 등 2100여곳 점검",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-03T02:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002247062?sid=105"
     },
     {
      "title": "정부, 2100여개 공공기관 긴급 보안점검...민간 170여곳도 대처",
@@ -135,70 +200,6 @@
      "press": "dailian.co.kr",
      "publishedAt": "2026-11-03T02:28:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/119/0003150632?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "시장 공략 확대",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 48,
-   "recent20": 5,
-   "press": 36,
-   "firstArticleAt": "2026-11-03T01:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "LG엔솔, ESS 호조에 실적 반등…북미 생산 확대",
-     "press": "it.chosun.com",
-     "publishedAt": "2026-11-03T02:48:00.000Z",
-     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000000114"
-    },
-    {
-     "title": "컴투스홀딩스, SOOP과 FMV 게임 시장 공략…글로벌 사업 협력",
-     "press": "pointe.co.kr",
-     "publishedAt": "2026-11-03T02:44:00.000Z",
-     "link": "https://www.pointe.co.kr/news/articleView.html?idxno=87076"
-    },
-    {
-     "title": "에이티에스인터내셔널, 자브라 앞세워 클라우드 기반 스마트워크 시장...",
-     "press": "newsprime.co.kr",
-     "publishedAt": "2026-11-03T02:44:00.000Z",
-     "link": "http://www.newsprime.co.kr/news/article.html?no=753459"
-    }
-   ]
-  },
-  {
-   "keyword": "10월 소비자물가 2.8%",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 37,
-   "recent20": 10,
-   "press": 28,
-   "firstArticleAt": "2026-11-03T01:28:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "상추 44%·오이 40% ‘뚝’…농산물값 하락에도 소비자물가 상승, 왜?",
-     "press": "nongmin.com",
-     "publishedAt": "2026-11-03T02:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/662/0000107542?sid=102"
-    },
-    {
-     "title": "10월 물가 2.8%로 둔화했지만…국고채 금리 짓누르는 '서비스 물가'",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-03T02:50:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1730259"
-    },
-    {
-     "title": "10월 소비자물가 2.8% 상승…석유류 14.9↑",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-03T02:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014297565?sid=101"
     }
    ]
   },
@@ -240,10 +241,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 21,
-   "recent20": 1,
-   "press": 20,
-   "firstArticleAt": "2026-11-03T01:25:00.000Z",
+   "articles90": 19,
+   "recent20": 0,
+   "press": 18,
+   "firstArticleAt": "2026-11-03T01:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -273,63 +274,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 17,
-   "recent20": 0,
+   "articles90": 18,
+   "recent20": 4,
    "press": 15,
-   "firstArticleAt": "2026-11-03T01:27:00.000Z",
+   "firstArticleAt": "2026-11-03T01:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "쌍방울 대북송금 사건 이화영, 징역 7년 8개월 확정 후 재심 추진",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-03T02:16:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=622636"
+     "title": "성탄절 석방 원하는 이화영…‘대북송금’ 재심 청구",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-03T03:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002829938?sid=102"
     },
     {
-     "title": "이화영 '쌍방울 대북송금' 재심 청구…\"무죄 입증할 새 증거\" 주장",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-03T02:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205855?sid=102"
+     "title": "3개 사건 재판 중인 이화영… 내달 ‘연어·술파티’ 위증 항소심 첫 공...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-03T03:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002829939?sid=102"
     },
     {
-     "title": "이화영, 대북송금 재심 청구…\"경기도 대납 아닌 쌍방울 사업\"(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T02:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009266601?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "울산 에릭 K리그1 MVP",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-03T01:26:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘34R MVP’ 울산 에릭 “기나긴 부상·슬럼프에 날 믿어준 구단에 감사...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-03T02:53:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/468/0001277532"
-    },
-    {
-     "title": "[공식발표] '멀티골 폭발→극적인 역전승 견인' 울산 에릭, K리그1 34라운...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-03T02:19:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/117/0004121270"
-    },
-    {
-     "title": "울산 에릭, K리그1 34라운드 MVP…강원전 멀티골 활약",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-03T02:10:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/422/0000922342"
+     "title": "이화영 ‘쌍방울 대북송금’ 재심 청구…국정원 문건·검사 통화 녹취 ...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-03T03:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004678158?sid=102"
     }
    ]
   },
@@ -338,13 +306,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 9,
-   "recent20": 4,
-   "press": 6,
+   "articles90": 10,
+   "recent20": 3,
+   "press": 7,
    "firstArticleAt": "2026-11-03T01:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "감사원 \"개정고시 전 단순실수 과태료 부과 면제\"…양주시 1억5000만원 경...",
+     "press": "intn.co.kr",
+     "publishedAt": "2026-11-03T03:02:00.000Z",
+     "link": "http://www.intn.co.kr/news/articleView.html?idxno=2054460"
+    },
     {
      "title": "양주시 택지개발 촉구 되풀이에도 LH ‘요지부동’",
      "press": "kyeongin.com",
@@ -356,12 +330,6 @@
      "press": "pressian.com",
      "publishedAt": "2026-11-03T02:46:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/002/0002463978?sid=102"
-    },
-    {
-     "title": "양주시, 안전한 통학로 조성사업 추진",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-03T02:39:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261103000425"
     }
    ]
   },
@@ -372,11 +340,17 @@
    ],
    "articles90": 23,
    "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-03T01:32:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-03T01:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "국힘, 미래대응기금에 \"빚내서 기금 적립\"…전문가 의견 엇갈려",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-03T03:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000548204?sid=100"
+    },
     {
      "title": "[포토] 미래대응기금 법률안 제정 공청회",
      "press": "newdaily.co.kr",
@@ -388,76 +362,70 @@
      "press": "m-economynews.com",
      "publishedAt": "2026-11-03T02:44:00.000Z",
      "link": "https://www.m-economynews.com/news/article.html?no=72509"
-    },
-    {
-     "title": "「M포토」 국회 재경위, ‘미래대응기금’ 관련 공청회",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-03T02:30:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=72508"
     }
    ]
   },
   {
-   "keyword": "리센느 컴백",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-03T01:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "우리은행+삼성전자, 식지 않는 리센느 신드롬 [뉴스Q]",
-     "press": "newsq.co.kr",
-     "publishedAt": "2026-11-03T02:40:00.000Z",
-     "link": "https://www.newsq.co.kr/news/articleView.html?idxno=500708"
-    },
-    {
-     "title": "'창사 이래 최초 모델' 리센느 컴백에... 할리스, 초특급 오프라인 팬미...",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-03T02:22:00.000Z",
-     "link": "https://www.insight.co.kr/news/580395"
-    },
-    {
-     "title": "리센느, 미니 4집 컴백…‘국민 걸그룹’ 방점 찍는다 [DA투데이]",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-03T02:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001302581"
-    }
-   ]
-  },
-  {
-   "keyword": "앤더블 초동 80만 장 돌파",
+   "keyword": "한동훈 의원 인사말",
    "sources": [
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-03T01:31:00.000Z",
+   "articles90": 19,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-03T01:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘호기심’보다 더 팔린 ‘끌림’···앤더블 초동 80만장",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-03T02:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001147818"
+     "title": "한동훈·김기현·윤상현 한자리에…‘공천 개혁’ 한목소리·‘보수 대...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-03T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012286199?sid=100"
     },
     {
-     "title": "앤더블, 신보 '시퀀스 투: 어트랙션' 초동 80만 장 돌파 '커리어 하이'",
-     "press": "swtvnews.com",
-     "publishedAt": "2026-11-03T02:00:00.000Z",
-     "link": "https://www.swtvnews.com/news/newsview.php?ncode=1065576172281121"
+     "title": "한동훈 \"서클처럼 정당 운영\" 양당 직격...윤상현 \"오동석장 연대\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-03T02:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002427646?sid=100"
     },
     {
-     "title": "앤더블, 초동 80만 장 돌파..자체 최고 기록 경신",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-03T01:59:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005633374"
+     "title": "김기현·윤상현 손잡은 한동훈…국힘 의원 20여 명 토론회 집결",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T02:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009266742?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "오세훈 시장 환영사",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-03T01:55:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "오세훈, 李대통령 ‘자산시장 정상화 주장’에 “회피해야 할 사안 아냐...",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-03T02:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006402700?sid=101"
+    },
+    {
+     "title": "환영사 하는 오세훈 시장",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T02:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009266728?sid=100"
+    },
+    {
+     "title": "토론회 환영사 하는 오세훈 시장",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T02:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009266726?sid=100"
     }
    ]
   },
@@ -466,10 +434,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-03T01:34:00.000Z",
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T01:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -496,10 +464,34 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 308,
-  "matched": 116,
-  "avgLeadMin": 262,
+  "flagged": 312,
+  "matched": 120,
+  "avgLeadMin": 256,
   "recent": [
+   {
+    "keyword": "연애박사",
+    "hitKeyword": "연애박사 추영우",
+    "hitAt": "2026-11-03T12:00:00+09:00",
+    "leadMin": 217
+   },
+   {
+    "keyword": "77세 이명수 연쇄방화 피의자",
+    "hitKeyword": "역삼동 연쇄방화 이명수",
+    "hitAt": "2026-11-03T12:00:00+09:00",
+    "leadMin": 56
+   },
+   {
+    "keyword": "울산 에릭, K리그1 MVP 선정",
+    "hitKeyword": "오타니 MLB MVP 경쟁",
+    "hitAt": "2026-11-03T12:00:00+09:00",
+    "leadMin": 56
+   },
+   {
+    "keyword": "울산 에릭 K리그1 MVP",
+    "hitKeyword": "오타니 MLB MVP 경쟁",
+    "hitAt": "2026-11-03T12:00:00+09:00",
+    "leadMin": 36
+   },
    {
     "keyword": "집단소송법 서명 캠페인 기자회견",
     "hitKeyword": "뮌헨 케인 기자회견",
@@ -535,30 +527,6 @@
     "hitKeyword": "미국 이란 게슘섬 타격",
     "hitAt": "2026-11-03T11:30:00+09:00",
     "leadMin": 6
-   },
-   {
-    "keyword": "기아 10월 판매 증가",
-    "hitKeyword": "10월 소비자물가 상승",
-    "hitAt": "2026-11-03T11:00:00+09:00",
-    "leadMin": 1092
-   },
-   {
-    "keyword": "기아 10월 판매 29만대 증가",
-    "hitKeyword": "10월 소비자물가 상승",
-    "hitAt": "2026-11-03T11:00:00+09:00",
-    "leadMin": 1042
-   },
-   {
-    "keyword": "10월 판매 감소",
-    "hitKeyword": "10월 소비자물가 상승",
-    "hitAt": "2026-11-03T11:00:00+09:00",
-    "leadMin": 991
-   },
-   {
-    "keyword": "10월 소비자물가 2.8%",
-    "hitKeyword": "10월 소비자물가 상승",
-    "hitAt": "2026-11-03T11:00:00+09:00",
-    "leadMin": 147
    }
   ]
  }
