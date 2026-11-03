@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T22:11:11.597Z",
+ "builtAt": "2026-11-03T22:21:15.279Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,98 @@
  "measured": 26,
  "candidates": [
   {
-   "keyword": "쿠팡 3분기 영업손실 6423억원",
+   "keyword": "쿠팡 영업손실",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 66,
-   "recent20": 19,
-   "press": 43,
-   "firstArticleAt": "2026-11-03T21:11:00.000Z",
+   "articles90": 83,
+   "recent20": 16,
+   "press": 52,
+   "firstArticleAt": "2026-11-03T21:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "쿠팡Inc, 3분기 매출 14조…3개 분기 연속 '적자' 영업손실 6423억원",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-03T22:10:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1319173&inflow=N"
+     "title": "쿠팡, 물류센터 화재에 3분기 영업손실 6423억…매출은 14조",
+     "press": "news.mtn.co.kr",
+     "publishedAt": "2026-11-03T22:16:00.000Z",
+     "link": "https://news.mtn.co.kr/article/2026110407152566412"
     },
     {
-     "title": "쿠팡Inc, 1～3분기 영업손실 1.8조…3년치 영업익 증발",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-03T22:10:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261104021005073"
+     "title": "\"화재 손실 빼도 적자\" 고객 돌아왔는데 이익은 반토막…쿠팡 3Q 수익성...",
+     "press": "techm.kr",
+     "publishedAt": "2026-11-03T22:16:00.000Z",
+     "link": "https://www.techm.kr/news/articleView.html?idxno=156875"
     },
     {
-     "title": "쿠팡, 3분기 영업손실 6423억원…인천 물류센터 화재 손실 반영",
-     "press": "daily.hankooki.com",
-     "publishedAt": "2026-11-03T22:10:00.000Z",
-     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1421415"
+     "title": "[종합] 쿠팡Inc, 3분기 매출 늘었지만 영업손실 6423억원… 화재손실 반...",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-03T22:16:00.000Z",
+     "link": "https://www.viva100.com/article/20261104500014"
+    }
+   ]
+  },
+  {
+   "keyword": "바이낸스 해킹 사건",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 35,
+   "recent20": 13,
+   "press": 32,
+   "firstArticleAt": "2026-11-03T20:55:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김여정, 바이낸스사태 배후 지목에 재차 반발 \"미국의 악의적 기도\"",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-03T22:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005349972?sid=100"
+    },
+    {
+     "title": "바이낸스 창업자 “AI 이용한 해킹 늘 것…은행도 위험”",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-03T22:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202366?sid=104"
+    },
+    {
+     "title": "‘대외관계 총괄’ 김여정, 바이낸스 사태에 “선택지에 대화 포함”",
+     "press": "weekly.khan.co.kr",
+     "publishedAt": "2026-11-03T22:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/033/0000053137?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "10월 외환보유액 26억↑",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 30,
+   "recent20": 1,
+   "press": 30,
+   "firstArticleAt": "2026-11-03T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "외환보유액 두 달 만에 반등…예치금 늘고 유가증권 줄어",
+     "press": "straightnews.co.kr",
+     "publishedAt": "2026-11-03T22:02:00.000Z",
+     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=314562"
+    },
+    {
+     "title": "10월 외환보유액 4,432억달러…2계단 상승한 9위",
+     "press": "mbnmoney.mbn.co.kr",
+     "publishedAt": "2026-11-03T21:46:00.000Z",
+     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005954440"
+    },
+    {
+     "title": "외환보유액 한 달 만에 반등…예치금 63.2억달러 증가",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-03T21:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002393255?sid=101"
     }
    ]
   },
@@ -48,7 +112,7 @@
     "signal.bz"
    ],
    "articles90": 19,
-   "recent20": 6,
+   "recent20": 2,
    "press": 19,
    "firstArticleAt": "2026-11-03T20:54:00.000Z",
    "exclusive": true,
@@ -79,30 +143,62 @@
    "sources": [
     "google"
    ],
-   "articles90": 17,
-   "recent20": 6,
-   "press": 16,
-   "firstArticleAt": "2026-11-03T20:50:00.000Z",
+   "articles90": 18,
+   "recent20": 5,
+   "press": 17,
+   "firstArticleAt": "2026-11-03T21:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "AI 특수 누린 AMD…3분기 최대 실적에 시간외 9% 급등",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-03T22:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541542?sid=101"
+    },
+    {
+     "title": "AMD, 3분기 매출 45%↑⋯시간외서 8%↑[마켓핫]",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-03T22:14:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2643739"
+    },
     {
      "title": "AMD, 3분기 데이터센터 매출 갑절 증가...\"AI 에이전트 CPU 수요 견인\"",
      "press": "ajunews.com",
      "publishedAt": "2026-11-03T22:06:00.000Z",
      "link": "https://www.ajunews.com/view/20261104070010633"
+    }
+   ]
+  },
+  {
+   "keyword": "보험",
+   "sources": [
+    "google"
+   ],
+   "articles90": 11,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-03T21:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국민건강보험공단 광주전라제주지역본부, 디지털 교육 격차 해소 위해 ...",
+     "press": "newsmaker.or.kr",
+     "publishedAt": "2026-11-03T22:20:00.000Z",
+     "link": "http://www.newsmaker.or.kr/news/articleView.html?idxno=185115"
     },
     {
-     "title": "AMD 어닝 서프라이즈…시간외 주가 8%대 급등",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-03T22:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005436200?sid=101"
+     "title": "연말 임기 끝날 보험협회장…차기 수장 '대관 역량' 주목",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-03T22:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003150945?sid=101"
     },
     {
-     "title": "데이터센터 매출 2배 껑충...AMD 주가 8% 급등[마켓무버]",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-03T22:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004678462?sid=104"
+     "title": "‘이 정도는 괜찮겠지’…일상 파고든 보험사기 [김앤장 금융·핀테크·...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-03T22:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005758606?sid=102"
     }
    ]
   },
@@ -111,13 +207,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 8,
+   "articles90": 9,
    "recent20": 1,
-   "press": 8,
+   "press": 9,
    "firstArticleAt": "2026-11-03T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[오늘 뉴스 4컷] 정부, 사이버보안 총괄 체계 정비…정치권, 조작기소 특...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-03T22:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004172350?sid=100"
+    },
     {
      "title": "[빗썸 보안 민낯⑥] 빗썸, 123억 보안투자 늘렸지만…IT 확대 속도 못 미...",
      "press": "news.ifm.kr",
@@ -129,12 +231,6 @@
      "press": "tokenpost.kr",
      "publishedAt": "2026-11-03T21:34:00.000Z",
      "link": "https://www.tokenpost.kr/news/ai/432222"
-    },
-    {
-     "title": "칼리닌그라드 국경 흔드는 파괴공작 위협…한화·로템 현지 수송로 보안...",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-03T21:28:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=202611040618256323fbbec65dfb_1"
     }
    ]
   },
@@ -144,7 +240,7 @@
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-03T21:12:00.000Z",
    "exclusive": false,
@@ -173,12 +269,13 @@
   {
    "keyword": "유럽 여객기 폭파 위협",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-03T20:50:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-03T21:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -189,16 +286,48 @@
      "link": "https://n.news.naver.com/mnews/article/029/0003056979?sid=104"
     },
     {
-     "title": "유럽 여객기 7대 폭파 위협 신고에 비상착륙...\"러 연관 조직 의심\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-03T21:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002428049?sid=104"
-    },
-    {
      "title": "유럽 항공기 또 폭파 위협…런던발 여객기 폴란드서 비상착륙",
      "press": "donga.com",
      "publishedAt": "2026-11-03T21:50:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/020/0003759937?sid=104"
+    },
+    {
+     "title": "유럽 여객기 7대 폭파 위협 신고에 비상착륙...\"러 연관 조직 의심\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-03T21:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002428049?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "띠별 운세",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-03T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘의 운세] 띠별 운세 11월 4일",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-03T22:02:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=400210"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 4일 (수) 띠별운세 '겨울 채비를 하자'",
+     "press": "dailypop.kr",
+     "publishedAt": "2026-11-03T21:40:00.000Z",
+     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103266"
+    },
+    {
+     "title": "[AI] 오늘의 띠별 운세...2026.11.4(수요일)",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-03T21:30:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=66989"
     }
    ]
   },
@@ -207,13 +336,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 1,
-   "press": 3,
+   "press": 4,
    "firstArticleAt": "2026-11-03T21:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "종전 협상 앞두고 러, 우크라 대공습…젤렌스키 \"유럽, 협상테이블 앉아...",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-03T22:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005837634?sid=104"
+    },
     {
      "title": "러, 우크라 구호센터에 폭탄 9발 투하…33명 사망·50명 실종",
      "press": "newsis.com",
@@ -225,12 +360,6 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-03T21:13:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012286764?sid=104"
-    },
-    {
-     "title": "러, 우크라 구호센터에 3t 폭탄 9발 투하... 최소 33명 사망",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-03T21:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004007658?sid=104"
     }
    ]
   },
@@ -240,12 +369,18 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-03T20:51:00.000Z",
+   "firstArticleAt": "2026-11-03T21:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘계약결혼’ 32기 영수, 방송 중 당당한 몰카 촬영 “기념 영상 선물하...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-03T22:17:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001184271"
+    },
     {
      "title": "‘나는솔로’ 32기 영수, 몰카 사과",
      "press": "bntnews.co.kr",
@@ -257,19 +392,13 @@
      "press": "mediafine.co.kr",
      "publishedAt": "2026-11-03T21:14:00.000Z",
      "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=94495"
-    },
-    {
-     "title": "[전문] 이틀간 ‘몰카’ 찍고 “민감하시네요”…32기 영수, “깜짝 선...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-03T20:51:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001147947"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 476,
+  "flagged": 479,
   "matched": 186,
   "avgLeadMin": 274,
   "recent": [
