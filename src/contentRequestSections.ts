@@ -90,6 +90,27 @@ export function buildRequestChecklistBlock(prompt: string | undefined): string {
   return lines.join('\n');
 }
 
+/** A personal prompt up to this length is repeated in full at the end; a longer one is cut here and points back. */
+const CUSTOM_PROMPT_REMINDER_LIMIT = 2000;
+
+/*
+ * [2026-11-03] 자유 문장 개인 프롬프트("친근한 말투로", "소제목 5개로" 같은 것)는 위 점검표가 항목을 하나도 못 뽑아
+ * 수천 자 원본 · 규칙 앞에 묻힌 채 끝났다 — 고객 "개인 프롬프트를 넣고 글을 생성해도 적용이 안 된다".
+ * 원문을 프롬프트 끝(근거 계약 바로 앞)에 한 번 더 보인다. 구독 에이전트는 다시 쓰기가 없어 첫 출력에서 지켜야 한다.
+ */
+export function buildCustomPromptReminderBlock(prompt: string | undefined): string {
+  const text = String(prompt || '').trim();
+  if (!text) return '';
+  const shown = text.length > CUSTOM_PROMPT_REMINDER_LIMIT
+    ? `${text.slice(0, CUSTOM_PROMPT_REMINDER_LIMIT)}\n…(이하 생략 — 위 [사용자 추가 지시사항] 전문을 그대로 따른다)`
+    : text;
+  return [
+    '[사용자 개인 프롬프트 재확인 — 출력 직전에 다시 읽고 그대로 따른다]',
+    '위 [사용자 추가 지시사항]과 같은 내용이다. 앱 기본 지침(말투 · 구조 · 분량 등)과 겹치면 이 지시를 따른다. 단, 근거 · 사실을 지키는 규칙은 예외다.',
+    shown,
+  ].join('\n');
+}
+
 /*
  * 개인 프롬프트(모드별 저장 · 연속발행 항목 값)와 이번 글 요청사항을 합친다.
  * 예전엔 둘 중 하나만 골라, 개인 프롬프트를 한 번이라도 저장한 모드에서는 요청사항이 경고 없이 버려졌다(2026-10-22 실측).

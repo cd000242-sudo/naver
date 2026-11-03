@@ -178,7 +178,7 @@ import {
   isTerminalContentGenerationError,
 } from './contentGenerationFailurePolicy.js';
 import { assessCustomPromptAdherence } from './contentPromptAdherence.js';
-import { buildRequestChecklistBlock } from './contentRequestSections.js';
+import { buildCustomPromptReminderBlock, buildRequestChecklistBlock } from './contentRequestSections.js';
 import {
   buildOpenAiGenerationFailureMessage,
   classifyOpenAiFailure,
@@ -3305,8 +3305,10 @@ export function buildModeBasedPrompt(
 
   // [2026-10-22] 구간형 요청사항 점검표 — 요청 원문은 수천 자 원본 앞에 묻히므로 끝에서 항목을 다시 보인다.
   const requestChecklist = buildRequestChecklistBlock(source.customPrompt);
+  // [2026-11-03] 자유 문장 개인 프롬프트는 점검표가 비어 끝에 다시 안 보였다 — 원문을 근거 계약 바로 앞에 한 번 더.
+  const customPromptReminder = buildCustomPromptReminderBlock(source.customPrompt);
   // This contract must be last so category and JSON-output rules cannot override evidence safety.
-  return `${systemPrompt}\n\n${jsonOutputFormat}\n\n${situationDepth}${situationTitle ? `\n\n${situationTitle}` : ''}${requestChecklist ? `\n\n${requestChecklist}` : ''}${finalContract ? `\n\n${finalContract}` : ''}`.trim();
+  return `${systemPrompt}\n\n${jsonOutputFormat}\n\n${situationDepth}${situationTitle ? `\n\n${situationTitle}` : ''}${requestChecklist ? `\n\n${requestChecklist}` : ''}${customPromptReminder ? `\n\n${customPromptReminder}` : ''}${finalContract ? `\n\n${finalContract}` : ''}`.trim();
 }
 
 // ✅ [2026-02-11] 데드코드 제거 완료
