@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T04:55:11.110Z",
+ "builtAt": "2026-11-03T05:05:16.211Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,38 +8,134 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 27,
  "candidates": [
+  {
+   "keyword": "미국 중간선거",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 51,
+   "recent20": 15,
+   "press": 41,
+   "firstArticleAt": "2026-11-03T03:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "미국 중간선거 이후 증시 오를까... 삼성전자·SK하이닉스 주가 전망은...",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-03T05:04:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1190814"
+    },
+    {
+     "title": "트럼프, 중간선거 전날 밤까지 이란 전쟁 정당성 강조",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-03T05:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202219?sid=104"
+    },
+    {
+     "title": "트럼프 운명 가를 美 중간선거…민주당, 상·하원 탈환 노린다",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-03T05:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/024/0000109355?sid=101"
+    }
+   ]
+  },
   {
    "keyword": "장동혁 국민의힘 대표",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 60,
-   "recent20": 8,
-   "press": 21,
+   "articles90": 63,
+   "recent20": 4,
+   "press": 23,
    "firstArticleAt": "2026-11-03T03:38:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "반값 등록금부터 24시간 돌봄까지…장동혁, '국민 삶 해결 예산' 공개",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-03T04:50:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261103500208"
+     "title": "장동혁 “李, 대한민국 빚덩이에”…5대 민생 예산 제안",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-03T05:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001271484?sid=100"
     },
     {
-     "title": "한동훈 \"당이 아닌 당권 가진 사람이 이기는 공천\"‥장동혁 비판",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-03T04:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533203?sid=100"
+     "title": "장동혁 \"떨어지고 있는 건 집값이 아닌 주가와 대통령 지지율\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-03T05:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005435834?sid=100"
     },
     {
-     "title": "[포토] 정책토론회 참석한 장동혁-오세훈-나경원",
+     "title": "李대통령 \"집값 떨어지고 있다\" vs 장동혁 \"통계 잡으려는 모양\"",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-03T04:58:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=901754"
+    }
+   ]
+  },
+  {
+   "keyword": "배나라 한재아 결혼",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 22,
+   "recent20": 14,
+   "press": 18,
+   "firstArticleAt": "2026-11-03T03:47:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "배나라, 자필 편지로 전한 결혼 소감…\"서로의 묵묵한 버팀목\"",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-03T05:04:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109682121103"
+    },
+    {
+     "title": "뮤지컬 배우 배나라·한재아, 14일 옥수동 성당서 결혼",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-03T05:04:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=94484"
+    },
+    {
+     "title": "배나라, 14일 ‘나혼산’ 끝낸다‥♥한재아와 성당서 결혼식[공식입장]",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-03T05:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001183954"
+    }
+   ]
+  },
+  {
+   "keyword": "10월 물가 2.8%↑",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 14,
+   "recent20": 6,
+   "press": 12,
+   "firstArticleAt": "2026-11-03T03:56:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "10월 물가 2.8%, 2개월 연속 2%대 후반…농산물 빼고 상승세 여전",
+     "press": "sports.hankooki.com",
+     "publishedAt": "2026-11-03T05:04:00.000Z",
+     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6942747"
+    },
+    {
+     "title": "[포토] 소비자물가 2.8% 상승",
      "press": "newscj.com",
-     "publishedAt": "2026-11-03T04:44:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3445483"
+     "publishedAt": "2026-11-03T04:58:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3445495"
+    },
+    {
+     "title": "10월 소비자물가, 전년 동월 대비 2.8% 상승",
+     "press": "straightnews.co.kr",
+     "publishedAt": "2026-11-03T04:58:00.000Z",
+     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=314505"
     }
    ]
   },
@@ -51,10 +147,16 @@
    "articles90": 13,
    "recent20": 3,
    "press": 12,
-   "firstArticleAt": "2026-11-03T03:34:00.000Z",
+   "firstArticleAt": "2026-11-03T03:36:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "유명 부동산 유튜버 ‘125억 원대 폰지 사기 혐의’ 구속 송치",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-03T04:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000366219?sid=102"
+    },
     {
      "title": "삼성 투자 따라 움직이는 주거수요…동탄 집값 경기 평균 2배 상승",
      "press": "lawissue.co.kr",
@@ -66,88 +168,147 @@
      "press": "newsclaim.co.kr",
      "publishedAt": "2026-11-03T04:46:00.000Z",
      "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3081107"
-    },
-    {
-     "title": "삼성 113조원 투자에 아산 부동산 가치 재조명… '아산자이 그랜드파크...",
-     "press": "ikld.kr",
-     "publishedAt": "2026-11-03T04:44:00.000Z",
-     "link": "http://www.ikld.kr/news/articleView.html?idxno=343432"
     }
    ]
   },
   {
    "keyword": "민주당-한국노총 고위급정책협의회",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 24,
-   "recent20": 2,
+   "articles90": 22,
+   "recent20": 5,
    "press": 10,
-   "firstArticleAt": "2026-11-03T03:32:00.000Z",
+   "firstArticleAt": "2026-11-03T03:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "민주당-한국노총, 고위급 정책협의회 [포토]",
-     "press": "etoday.co.kr",
+     "title": "김동명 위원장, “민주당에 대한 신뢰 무너지고 있어… 약속 아닌 행동...",
+     "press": "news.inochong.org",
+     "publishedAt": "2026-11-03T05:02:00.000Z",
+     "link": "http://news.inochong.org/detail.php?number=6666&thread=22r03"
+    },
+    {
+     "title": "김민석 “정년 연장·초광역특구 대화”…한국노총 “신뢰 무너져, 행동...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-03T04:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012286248?sid=100"
+    },
+    {
+     "title": "김민석 \"초광역특구 조성, 함께 대화\"…한국노총 \"연대, 당연히 주어지...",
+     "press": "newsis.com",
      "publishedAt": "2026-11-03T04:54:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2643511"
-    },
-    {
-     "title": "김민석 만난 한국노총 “민주당에 대한 신뢰 무너지고 있다”",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-03T04:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202215?sid=100"
-    },
-    {
-     "title": "김민석 “한국노총과 연대 강화”...한노총 “행동으로 답하라”",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-03T04:34:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1134713"
+     "link": "https://n.news.naver.com/mnews/article/003/0014297933?sid=100"
     }
    ]
   },
   {
-   "keyword": "감기약으로 필로폰 제조 일당 검거",
+   "keyword": "필로폰 제조 일당 검거",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 8,
-   "recent20": 3,
-   "press": 8,
+   "articles90": 10,
+   "recent20": 4,
+   "press": 9,
    "firstArticleAt": "2026-11-03T03:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "감기약 성분으로 42억원어치 필로폰 제조… 조직범행 13명 검거",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-03T04:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003695254?sid=102"
+    },
+    {
+     "title": "필로폰 제조 알면서 감기약 63만정 판매\"…한약사 일탈에 약계 분노",
+     "press": "kpanews.co.kr",
+     "publishedAt": "2026-11-03T04:56:00.000Z",
+     "link": "https://www.kpanews.co.kr/news/articleView.html?idxno=547985"
+    },
+    {
      "title": "감기약으로 필로폰 4만명분 제조…한약사 등 일당 13명 검거",
      "press": "kpanews.co.kr",
      "publishedAt": "2026-11-03T04:48:00.000Z",
      "link": "https://www.kpanews.co.kr/news/articleView.html?idxno=547984"
+    }
+   ]
+  },
+  {
+   "keyword": "미국 이란 케슘섬 공습",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-03T04:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프 \"합의 없으면 이란 '곡괭이산' 공격해야 할 수도 있어\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T04:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009267035?sid=104"
     },
     {
-     "title": "“감기약으로 필로폰을?”…한약사 동원해 42억원어치 마약 제조한 조직...",
-     "press": "dt.co.kr",
+     "title": "미국 중간선거 D-1...호르무즈 핵심 요충지서 이란과 교전",
+     "press": "mt.co.kr",
      "publishedAt": "2026-11-03T04:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003056823?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/008/0005435821?sid=104"
     },
     {
-     "title": "‘논문 참고해서’ 감기약 1만 통으로 42억 원치 필로폰 만든 일당",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-03T04:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000160249?sid=102"
+     "title": "WSJ \"미국, 중간선거 앞두고 이란 케슘섬 비공개 공습\"",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-03T04:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000548246?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "서울양평 고속도로 재추진",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-03T03:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서울-양평 고속도로 3년만에 재추진…내년 하반기 노선안 마련",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-03T04:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001271481?sid=101"
+    },
+    {
+     "title": "특혜 의혹에 멈췄던 서울-양평고속도로, 신규 타당성조사 착수",
+     "press": "tjb.co.kr",
+     "publishedAt": "2026-11-03T04:44:00.000Z",
+     "link": "https://www.tjb.co.kr/news05/bodo/view/id/105632"
+    },
+    {
+     "title": "‘김건희 특혜 의혹’ 서울~양평고속도, 3년 만에 재추진…내년 새 노선...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-03T04:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003480340?sid=101"
     }
    ]
   },
   {
    "keyword": "재혼 황후 이종석 왕자 부담 컸다",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-03T03:28:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-03T03:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -172,66 +333,66 @@
    ]
   },
   {
-   "keyword": "서울양평 고속도로 재추진",
+   "keyword": "GTX-A 삼성역 내년 상반기 가능",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-03T03:54:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-03T04:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "특혜 의혹에 멈췄던 서울-양평고속도로, 신규 타당성조사 착수",
-     "press": "tjb.co.kr",
-     "publishedAt": "2026-11-03T04:44:00.000Z",
-     "link": "https://www.tjb.co.kr/news05/bodo/view/id/105632"
+     "title": "‘철근 누락’ GTX 삼성역, 보강·재시공 결론 연내 나온다",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-03T05:02:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261103500224"
     },
     {
-     "title": "‘김건희 특혜 의혹’ 서울~양평고속도, 3년 만에 재추진…내년 새 노선...",
-     "press": "khan.co.kr",
+     "title": "GTX-A 삼성역 무정차 통과 내년 상반기로 연기",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-03T04:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001271482?sid=101"
+    },
+    {
+     "title": "'철근 누락' GTX-A 삼성역 연내 무정차 통과 무산..재시공도 검토",
+     "press": "4th.kr",
      "publishedAt": "2026-11-03T04:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003480340?sid=101"
-    },
-    {
-     "title": "서울-양평고속도로 사업 재개‥내년 하반기 최적 노선안 마련",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-03T04:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533201?sid=101"
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2121016"
     }
    ]
   },
   {
-   "keyword": "10월 소비자물가 2.8%",
+   "keyword": "예세민 검찰총장 후보 물망",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 7,
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-03T03:26:00.000Z",
-   "exclusive": true,
+   "press": 5,
+   "firstArticleAt": "2026-11-03T04:00:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "가공식품·외식비 상승에 10월 물가 2.8%↑",
+     "title": "검찰총장 후보군 이정현·박철우·예세민 물망…초대 공소청 수장은 누...",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-03T04:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000120493?sid=100"
+    },
+    {
+     "title": "검찰총장 후보 '이정현·박철우·예세민' 물망",
      "press": "kbsm.net",
-     "publishedAt": "2026-11-03T04:18:00.000Z",
-     "link": "https://www.kbsm.net/news/view.php?idx=540133"
+     "publishedAt": "2026-11-03T04:16:00.000Z",
+     "link": "https://www.kbsm.net/news/view.php?idx=540130"
     },
     {
-     "title": "10월 소비자물가 2.8% 상승... 석유류 급등에 체감 부담 '여전'",
-     "press": "chungnamilbo.co.kr",
-     "publishedAt": "2026-11-03T04:12:00.000Z",
-     "link": "http://www.chungnamilbo.co.kr/news/articleView.html?idxno=918525"
-    },
-    {
-     "title": "10월 소비자물가 2.8% 상승…가공식품·외식 11개월만 최고 [포토]",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-03T04:08:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2643485"
+     "title": "검찰총장 후보군 다음주 중 윤곽",
+     "press": "naeil.com",
+     "publishedAt": "2026-11-03T04:06:00.000Z",
+     "link": "https://www.naeil.com/news/read/607434?ref=naver"
     }
    ]
   },
@@ -241,7 +402,7 @@
     "google"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-03T03:36:00.000Z",
    "exclusive": false,
@@ -268,13 +429,13 @@
    ]
   },
   {
-   "keyword": "신장식 취임 100일 간담회",
+   "keyword": "신장식 대표 취임 기자간담회",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 0,
-   "press": 4,
+   "press": 3,
    "firstArticleAt": "2026-11-03T03:45:00.000Z",
    "exclusive": false,
    "capped": false,
@@ -292,52 +453,26 @@
      "link": "http://www.iminju.net/news/articleView.html?idxno=171848"
     },
     {
-     "title": "신장식 \"국면전환용 합당 카드 안 받아…1월 합당론, 식장 잡고 신부 구...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-03T03:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014297766?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "GTX-A 삼성역 내년 상반기 가능",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T04:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'철근 누락' GTX-A 삼성역 연내 무정차 통과 무산..재시공도 검토",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-03T04:42:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2121016"
-    },
-    {
-     "title": "GTX-A 삼성역 무정차 통과, 내년 상반기로…1년 가까이 지연",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-03T04:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400226?sid=101"
-    },
-    {
-     "title": "'철근 누락' GTX 삼성역, 재시공 여부 연내 결정…무정차 통과 1년 연장",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-03T04:08:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/323954/?sc=Naver"
+     "title": "취임 100일 기자간담회 참석하는 신장식 대표",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T03:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009266909?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 349,
-  "matched": 128,
-  "avgLeadMin": 244,
+  "flagged": 354,
+  "matched": 129,
+  "avgLeadMin": 242,
   "recent": [
+   {
+    "keyword": "감기약 필로폰 일당 검거",
+    "hitKeyword": "감기약 마약 제조",
+    "hitAt": "2026-11-03T14:00:00+09:00",
+    "leadMin": 55
+   },
    {
     "keyword": "리센느 컴백",
     "hitKeyword": "리센느 컴백",
@@ -391,12 +526,6 @@
     "hitKeyword": "연애박사 추영우",
     "hitAt": "2026-11-03T12:00:00+09:00",
     "leadMin": 217
-   },
-   {
-    "keyword": "77세 이명수 연쇄방화 피의자",
-    "hitKeyword": "역삼동 연쇄방화 이명수",
-    "hitAt": "2026-11-03T12:00:00+09:00",
-    "leadMin": 56
    }
   ]
  }
