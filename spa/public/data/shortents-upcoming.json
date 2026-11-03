@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T08:16:50.098Z",
+ "builtAt": "2026-11-03T08:26:53.969Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,133 +8,102 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "김민석 신천지 의혹 사과",
    "sources": [
     "daum"
    ],
-   "articles90": 62,
-   "recent20": 29,
-   "press": 53,
+   "articles90": 73,
+   "recent20": 28,
+   "press": 58,
    "firstArticleAt": "2026-11-03T07:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김민석 '신천지 3자 연합 근거 없었다' 인정…정청래 '해당 행위, 책임져...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-03T08:16:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267203"
+     "title": "金 “신천지 의혹 증거 없다” 사과하자 鄭 “책임져라”… 與 갈등 격...",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-03T08:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003056924?sid=100"
     },
     {
-     "title": "[속보] \"김민석, 울컥 민주당 신천지 증거없다 사과\" 민주당 의총 파문",
-     "press": "mediatoday.co.kr",
-     "publishedAt": "2026-11-03T08:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/006/0000138548?sid=100"
+     "title": "3개월 끈 민주당 신천지 의혹, 근거 없었다... 金, 리더십 최대 위기",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-03T08:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006402998?sid=100"
     },
     {
-     "title": "“3자 비밀연합 증거 없어”…김민석, 의총서 신천지 의혹 제기 사과",
+     "title": "김민석 “3자 비밀연합 증거없다”…정청래 “공개 사과·책임져야”",
      "press": "seoul.co.kr",
-     "publishedAt": "2026-11-03T08:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003695369?sid=100"
+     "publishedAt": "2026-11-03T08:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003695375?sid=100"
     }
    ]
   },
   {
-   "keyword": "아시안컵",
+   "keyword": "교육혁신선도지역 선정",
    "sources": [
-    "google"
+    "nate",
+    "daum"
    ],
-   "articles90": 34,
-   "recent20": 6,
-   "press": 32,
-   "firstArticleAt": "2026-11-03T06:52:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "협회장도 없고, 이제 모레노 감독도? 뒤로 밀린 아시안컵 후폭풍",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-03T08:14:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/437/0000518911"
-    },
-    {
-     "title": "아시안컵, 사우디 정세 악화로 11개월 연기…2027년 12월 개최",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-03T08:09:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/417/0001163102"
-    },
-    {
-     "title": "중동 정세 불안에 아시안컵 11개월 연기…2027년 12월 개최",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-03T08:03:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/087/0001228295"
-    }
-   ]
-  },
-  {
-   "keyword": "교육혁신선도지역 지정 결과",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 28,
-   "recent20": 6,
-   "press": 26,
-   "firstArticleAt": "2026-11-03T06:52:00.000Z",
+   "articles90": 71,
+   "recent20": 16,
+   "press": 54,
+   "firstArticleAt": "2026-11-03T06:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "태백시, 교육부 '교육혁신선도지역' 선정…최대 150억 원 확보 기대",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-03T08:16:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5079334"
+     "title": "부산시, 교육혁신선도지역 선정…'중·동·서·영도·금정구' 맞춤형 교...",
+     "press": "cnbnews.com",
+     "publishedAt": "2026-11-03T08:22:00.000Z",
+     "link": "https://www.cnbnews.com/news/articleView.html?idxno=1022158"
     },
     {
-     "title": "\"지역 간 교육격차 해소\" 교육혁신선도지역 43곳 선정",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-03T08:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922486?sid=102"
+     "title": "교육혁신 선도지역에 대전과 충남.충북 희비 엇갈려",
+     "press": "joongdo.co.kr",
+     "publishedAt": "2026-11-03T08:22:00.000Z",
+     "link": "https://www.joongdo.co.kr/web/view.php?key=20261103010000988"
     },
     {
-     "title": "충청권 7개 시·군, 교육혁신선도지역 선정…지역교육 활력 기대",
-     "press": "cctoday.co.kr",
-     "publishedAt": "2026-11-03T08:00:00.000Z",
-     "link": "https://www.cctoday.co.kr/news/articleView.html?idxno=2239570"
+     "title": "경남 4개 시*군, 교육혁신선도지역 선정",
+     "press": "news.knn.co.kr",
+     "publishedAt": "2026-11-03T08:22:00.000Z",
+     "link": "https://news.knn.co.kr/news/article/193955"
     }
    ]
   },
   {
-   "keyword": "조작기소 특검법 당론 채택",
+   "keyword": "조작기소 특검 채택",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 25,
+   "articles90": 40,
    "recent20": 8,
-   "press": 24,
+   "press": 34,
    "firstArticleAt": "2026-11-03T07:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "민주당, '조작기소 특검법' 당론 확정…5일 본회의서 처리",
-     "press": "kado.net",
-     "publishedAt": "2026-11-03T08:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000209143?sid=100"
+     "title": "민주, '조작기소 특검법' 5일 처리 추진…'조희대 국조'는 더 논의",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-03T08:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922496?sid=100"
     },
     {
-     "title": "與, 조작기소특검법 처리 당론채택…조희대 국조 \"의견 더 수렴\"(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T08:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009267885?sid=100"
+     "title": "與, 모레 ‘조작기소 특검법’ 처리…조희대 국조는 속도 조절",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-03T08:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001882713?sid=100"
     },
     {
-     "title": "與, 5일 '조작기소 특검법' 처리 추진…조희대 국조는 추가의견 수렴",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-03T08:12:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/324006/?sc=Naver"
+     "title": "與, 조작기소 특검법 당론 채택…조희대 국조는 \"의견 더 수렴\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-03T08:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004206110?sid=100"
     }
    ]
   },
@@ -143,45 +112,83 @@
    "sources": [
     "google"
    ],
-   "articles90": 28,
-   "recent20": 28,
-   "press": 21,
-   "firstArticleAt": "2026-11-03T08:00:00.000Z",
+   "articles90": 43,
+   "recent20": 43,
+   "press": 33,
+   "firstArticleAt": "2026-11-03T08:10:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "삼성바이오에피스, 美 테바와 5600억원 규모 바이오시밀러 판매 계약",
-     "press": "it.chosun.com",
-     "publishedAt": "2026-11-03T08:14:00.000Z",
-     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000000165"
+     "title": "삼성바이오에피스, 글로벌 제약사 테바와 5632억 규모 바이오시밀러 사...",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-03T08:26:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=451071"
     },
     {
-     "title": "삼성바이오에피스, 테바와 최대 5630억원 규모 상업화 파트너십 체결",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-03T08:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005349760?sid=105"
+     "title": "삼성증권, 발행어음 고객 유치 확대…전체 이익도 키울까",
+     "press": "srtimes.kr",
+     "publishedAt": "2026-11-03T08:26:00.000Z",
+     "link": "http://www.srtimes.kr/news/articleView.html?idxno=216645"
     },
     {
-     "title": "슈퍼모델 출신 김자연, 70세 손영권 삼성전자 前 사장과 화촉",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-03T08:14:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/03/2026110300334.html"
+     "title": "삼성바이오에피스, 테바와 최대 5632억원 계약…美 판매 협력↑",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-03T08:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003481740?sid=105"
     }
    ]
   },
   {
-   "keyword": "김자연 손영권 결혼",
+   "keyword": "아시안컵",
    "sources": [
-    "daum"
+    "google"
    ],
-   "articles90": 22,
-   "recent20": 3,
-   "press": 20,
-   "firstArticleAt": "2026-11-03T06:48:00.000Z",
+   "articles90": 35,
+   "recent20": 6,
+   "press": 33,
+   "firstArticleAt": "2026-11-03T07:00:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "손흥민의 마지막 아시안컵, 1년 연기 확정…모레노 임시 감독 거취는 '안...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-03T08:26:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/445/0000486184"
+    },
+    {
+     "title": "2027 아시안컵, 결국 내년 1월→12월 연기…임시감독 모레노호 향방 ‘촉...",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-03T08:20:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611030171"
+    },
+    {
+     "title": "[오피셜] '결국 미뤄졌다'… AFC 아시안컵, 내년 12월로 연기 확정→ 韓...",
+     "press": "besteleven.com",
+     "publishedAt": "2026-11-03T08:19:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/343/0000148688"
+    }
+   ]
+  },
+  {
+   "keyword": "슈퍼모델 김자연 결혼",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 23,
+   "recent20": 5,
+   "press": 19,
+   "firstArticleAt": "2026-11-03T07:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "25세 연하 슈퍼모델 여성과 백년가약…손영권 삼전 고문, 결혼한다",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-03T08:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005758407?sid=102"
+    },
     {
      "title": "‘45세 슈퍼모델’ 김자연, 25세 연상 삼성전자 前 사장과 결혼…스위스...",
      "press": "mk.co.kr",
@@ -189,16 +196,42 @@
      "link": "https://n.news.naver.com/mnews/article/009/0005758402?sid=103"
     },
     {
-     "title": "슈퍼모델 출신 김자연, 70세 손영권 삼성전자 前 사장과 화촉",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-03T08:14:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/03/2026110300334.html"
+     "title": "‘45세 슈퍼모델’ 김자연과 결혼한 손영권 누구?...삼성 ‘80억 달러 하...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-03T08:16:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001145897"
+    }
+   ]
+  },
+  {
+   "keyword": "어린이",
+   "sources": [
+    "google"
+   ],
+   "articles90": 13,
+   "recent20": 5,
+   "press": 13,
+   "firstArticleAt": "2026-11-03T07:54:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "온 세상이 하얗게 변한 미래...ACC재단, 어린이 인형극 '하얀 나라' 공연",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-03T08:22:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4116509"
     },
     {
-     "title": "김자연, '70세' 前 삼성전자 사장과 결혼 발표 후..\"각자의 때 있어\"[스...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-03T08:09:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003484210"
+     "title": "청주시의회, 지오숲어린이집 의회 체험활동 운영",
+     "press": "inews365.com",
+     "publishedAt": "2026-11-03T08:22:00.000Z",
+     "link": "https://www.inews365.com/news/article.html?no=942003"
+    },
+    {
+     "title": "부모 참여로 보육 신뢰 높인다…구미 열린어린이집 118곳으로 확대",
+     "press": "kyongbuk.co.kr",
+     "publishedAt": "2026-11-03T08:18:00.000Z",
+     "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4089500"
     }
    ]
   },
@@ -207,10 +240,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-03T06:53:00.000Z",
+   "articles90": 8,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-03T06:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -235,49 +268,23 @@
    ]
   },
   {
-   "keyword": "어린이",
-   "sources": [
-    "google"
-   ],
-   "articles90": 10,
-   "recent20": 8,
-   "press": 10,
-   "firstArticleAt": "2026-11-03T07:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "구리문화재단, 어린이 참여형 음악극 '도서관의 앨리스' 성황리 마무리",
-     "press": "kmaeil.com",
-     "publishedAt": "2026-11-03T08:08:00.000Z",
-     "link": "https://www.kmaeil.com/news/articleView.html?idxno=656900"
-    },
-    {
-     "title": "장성군, 14일 어린이 공연 '더 매직 서커스' 개최",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-03T08:08:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=560862"
-    },
-    {
-     "title": "동대문구, 전통시장·어린이집에 ‘똑똑한 소화기’ 놓는다[서울25]",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-03T08:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003480411?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "청년 주거 간담회 장동혁",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 8,
    "recent20": 2,
    "press": 7,
    "firstArticleAt": "2026-11-03T06:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李 집값 하락 발언에 장동혁 \"떨어진 건 주가와 대통령 지지율\"",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-03T08:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006402994?sid=100"
+    },
     {
      "title": "장동혁 \"떨어진 건 집값 아니라 대통령 지지율...공급 흉내만\"",
      "press": "ytn.co.kr",
@@ -289,12 +296,38 @@
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-03T08:06:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006402985?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "KT 이강철 감독, 한국시리즈 나선다.",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-03T07:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "KT·삼성, KS서 첫 가을 맞대결...‘미지’의 대니엘 vs ‘절치부심’ 최...",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-03T08:22:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/023/0004007541"
     },
     {
-     "title": "국힘, 청년주택 방문...\"민주당이 얘기한 '폐버스'보다 훨씬 작아\"",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-03T07:54:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1134862"
+     "title": "실전 공백 문제없다! 이강철 KT 감독 '호언장담' [한국시리즈]",
+     "press": "newsq.co.kr",
+     "publishedAt": "2026-11-03T08:18:00.000Z",
+     "link": "https://www.newsq.co.kr/news/articleView.html?idxno=500718"
+    },
+    {
+     "title": "KT, 최원태 공략할 선봉대 확정…대니엘 앞세워 한국시리즈 첫 승 정조...",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-03T08:04:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=846048"
     }
    ]
   },
@@ -304,7 +337,7 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-03T07:12:00.000Z",
    "exclusive": false,
@@ -329,11 +362,43 @@
      "link": "https://n.news.naver.com/mnews/article/422/0000922458?sid=101"
     }
    ]
+  },
+  {
+   "keyword": "한-튀르키예 정상 부부",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-03T07:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "박수치는 한-튀르키예 정상 부부",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T07:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014298670?sid=100"
+    },
+    {
+     "title": "기념 촬영하는 한-튀르키예 정상 부부",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T07:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014298637?sid=100"
+    },
+    {
+     "title": "태권도 시범공연 관람하는 한-튀르키예 정상",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T07:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009267682?sid=100"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 405,
+  "flagged": 410,
   "matched": 145,
   "avgLeadMin": 226,
   "recent": [
