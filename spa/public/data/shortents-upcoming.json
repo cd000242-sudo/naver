@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T15:08:54.938Z",
+ "builtAt": "2026-11-03T15:18:59.094Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,85 +8,27 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 24,
  "candidates": [
-  {
-   "keyword": "이강철 감독 로건 기용 실수",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-03T13:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이강철 KT 감독 \"로건 기용 실수…계투 운용 정리됐다\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-03T15:04:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/055/0001400399"
-    },
-    {
-     "title": "[파워인터뷰] KT 이강철 감독 \"로건 투입, 내 실수 인정한다\"",
-     "press": "stnsports.co.kr",
-     "publishedAt": "2026-11-03T15:03:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/450/0000155277"
-    },
-    {
-     "title": "가슴 쓸어내린 kt 이강철 감독… “약간의 방심도 안 된다”",
-     "press": "kyeongin.com",
-     "publishedAt": "2026-11-03T14:42:00.000Z",
-     "link": "https://www.kyeongin.com/article/1774050"
-    }
-   ]
-  },
-  {
-   "keyword": "하희라",
-   "sources": [
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 3,
-   "press": 6,
-   "firstArticleAt": "2026-11-03T13:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "최수종, 하희라 네 차례 유산 고백…\"최대한 다 해주려 해\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-03T15:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014299475"
-    },
-    {
-     "title": "사랑꾼 최수종 \"결혼하고 지금까지 하희라 손 잡고 자\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-03T15:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014299478"
-    },
-    {
-     "title": "[옥탑방의 문제아들] 이벤트의 신은 다르다…! 최수종, 하희라 위해 여...",
-     "press": "kstar.kbs.co.kr",
-     "publishedAt": "2026-11-03T14:52:00.000Z",
-     "link": "https://m.entertain.naver.com/article/438/0000082122"
-    }
-   ]
-  },
   {
    "keyword": "신천지 정청래 책임져야",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
+   "articles90": 6,
+   "recent20": 3,
+   "press": 6,
    "firstArticleAt": "2026-11-03T13:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김문수 \"순천 신천지 당원 자진탈당하라\"",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-03T15:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001038182?sid=100"
+    },
     {
      "title": "신천지 논란에 김민석 '비공개 사과'…鄭 반발 속 내홍 재점화",
      "press": "slist.kr",
@@ -98,12 +40,6 @@
      "press": "news.tf.co.kr",
      "publishedAt": "2026-11-03T15:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/629/0000548450?sid=100"
-    },
-    {
-     "title": "[커뮤니티 지형] 김민석 '신천지 연합' 증거 없었다…정청래 책임론, 민...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-03T14:20:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267518"
     }
    ]
   },
@@ -140,6 +76,70 @@
    ]
   },
   {
+   "keyword": "장동혁·오세훈 보수 경쟁",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T14:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국힘 당권 경쟁 본격화 강원 보수진영 선택은?",
+     "press": "kado.net",
+     "publishedAt": "2026-11-03T15:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000209269?sid=100"
+    },
+    {
+     "title": "총선 앞두고…거대 양당 내부 '주도권 경쟁'",
+     "press": "ksilbo.co.kr",
+     "publishedAt": "2026-11-03T15:04:00.000Z",
+     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1071516"
+    },
+    {
+     "title": "같은 날, 각기 모인 장-오-한…보수통합 주도권 경쟁 예열",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-03T14:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012286739?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "kbo",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T14:40:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "\"아시아 갈 거야\" 설마 KBO행인가, SF 선수 17명 정리했는데…이정후 동...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-03T15:09:00.000Z",
+     "link": "https://m.sports.naver.com/wbaseball/article/109/0005634141"
+    },
+    {
+     "title": "498SV 전설 내보내고, SSG 출신에 134억 베팅…DET 왜 'KBO 역수출 갓성비...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-03T15:07:00.000Z",
+     "link": "https://m.sports.naver.com/wbaseball/article/076/0004462907"
+    },
+    {
+     "title": "American slugger Hilliard delivers key plays with bat, glove in 1st KBO p...",
+     "press": "en.yna.co.kr",
+     "publishedAt": "2026-11-03T14:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016420036?sid=104"
+    }
+   ]
+  },
+  {
    "keyword": "김여정, 미국 도발 지목",
    "sources": [
     "signal.bz"
@@ -170,43 +170,11 @@
      "link": "https://n.news.naver.com/mnews/article/052/0002427982?sid=100"
     }
    ]
-  },
-  {
-   "keyword": "장동혁·오세훈 보수 경쟁",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T13:41:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "총선 앞두고…거대 양당 내부 '주도권 경쟁'",
-     "press": "ksilbo.co.kr",
-     "publishedAt": "2026-11-03T15:04:00.000Z",
-     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1071516"
-    },
-    {
-     "title": "같은 날, 각기 모인 장-오-한…보수통합 주도권 경쟁 예열",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-03T14:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012286739?sid=100"
-    },
-    {
-     "title": "[포커스] 신천지 의혹 제기 사과...오·장·한 '보수 삼국지'",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-03T13:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002427968?sid=100"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 445,
+  "flagged": 446,
   "matched": 179,
   "avgLeadMin": 241,
   "recent": [
