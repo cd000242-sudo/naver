@@ -88,6 +88,13 @@ test('edit 별명 + 블로그 주소, keep or clear the password, then delete �
 
 test('the multi-account tab has the same button, and × closes the window', async () => {
   await page.locator('#multi-account-tab').click();
+  // [2026-11-03] At the E2E window width the fixed right toolbar, the top shortcut row and the new 매일 예약발행
+  // button float over the tab header's right edge, where this button sits (only image-studio reserves room for the
+  // toolbar). Collapse the toolbar first, as a user would (same as image-studio.spec).
+  if (await page.locator('#right-floating-buttons').isVisible()) {
+    await page.locator('#right-toolbar-toggle').click();
+    await expect(page.locator('#right-floating-buttons')).toBeHidden();
+  }
   await page.locator('#ma-manage-accounts-inline').click();
   const dialog = page.locator('#account-manage-window');
   await expect(dialog).toBeVisible();
