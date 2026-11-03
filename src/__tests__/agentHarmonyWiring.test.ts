@@ -115,7 +115,7 @@ describe('handleAgentHarmonyResponse', () => {
     const text = contentTextOf(parsed as never);
     for (const needle of ['harmonyPacket', 'complementReport', '_agentHarmony', '관측 자료 없음', 'centralEvent']) expect(text).not.toContain(needle);
     expect(logs[0]).toMatch(/^\[AgentHarmony\] 패킷: 후보 3 · 선택 c1 · 앵커 원문 일치 3\/3 · 보상 문장 위치 \d+% · 보완보고 1건\(인용 확인 1\/1\)$/);
-    expect(logs.some(line => /^\[AgentHarmony\]   - conflict\/payoff /.test(line))).toBe(true);
+    expect(logs.some(line => /^\[AgentHarmony\] {3}- conflict\/payoff /.test(line))).toBe(true);
   });
 
   it('writes H-agent-harmony.json through the run artifact writer and the ledger line', () => {
