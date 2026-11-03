@@ -63,8 +63,8 @@ async function runTest() {
 
     // 현재 value → balanced → premium 모델 순서
     const candidates = [
-        'gemini-3.1-flash-lite',
-        'gemini-3.5-flash',
+        'gemini-3.5-flash-lite',
+        'gemini-3.8-flash',
         'gemini-3.1-pro-preview',
     ];
 

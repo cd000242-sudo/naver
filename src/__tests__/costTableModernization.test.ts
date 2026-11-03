@@ -24,8 +24,8 @@ describe('v1.4.81 — 비용표·환경설정 현대화', () => {
   const html = readPublic('index.html');
 
   describe('환경설정 AI 텍스트 엔진 라디오 버튼', () => {
-    it('Claude Haiku 4.5 라벨 존재 (3.5 폐기)', () => {
-      expect(html).toMatch(/Claude Haiku 4\.5/);
+    it('Claude Haiku 5.5 라벨 존재 (3.5 폐기)', () => {
+      expect(html).toMatch(/Claude Haiku 5\.5/);
       expect(html).not.toMatch(/<span>💜 Claude Haiku 3\.5<\/span>/);
     });
 
@@ -90,8 +90,8 @@ describe('v1.4.81 — 비용표·환경설정 현대화', () => {
       expect(html).not.toMatch(/무료 (?:100|250|1,000)\/일/);
     });
 
-    it('비용표 모달에서 Gemini 3.5 Flash가 무료가 아닌 선불 모델임을 안내한다', () => {
-      expect(html).toMatch(/Gemini 3\.5 Flash[\s\S]{0,300}?무료 없음 · 선불/);
+    it('비용표 모달에서 Gemini 3.8 Flash가 무료가 아닌 선불 모델임을 안내한다', () => {
+      expect(html).toMatch(/Gemini 3\.8 Flash[\s\S]{0,300}?무료 없음 · 선불/);
     });
   });
 

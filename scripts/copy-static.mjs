@@ -659,6 +659,8 @@ try {
     'gensparkLoginUi.js',
     // [2026-11-03] 관련 사진 찾기 엔진 저작권 동의 게이트 (renderer.ts 가 import)
     'imageCollectEngineConsent.js',
+    // [2026-11-03] 소제목 텍스트 포함하기 체크박스 (imageManagementTab·HeadingImageSettings 가 import). 식별자 headingTextSetting 접두사
+    'headingImageTextSetting.js',
       'articleTableComposer.js',
       'contentPolicyDashboard.js',
       'revenueOperationsDashboard.js',

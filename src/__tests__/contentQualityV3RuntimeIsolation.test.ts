@@ -314,7 +314,7 @@ describe('Content Quality V3 runtime isolation', () => {
     expect(appGetPathSpy).not.toHaveBeenCalled();
     expect(existsSyncSpy).not.toHaveBeenCalled();
     expect(readFileSyncSpy).not.toHaveBeenCalled();
-    expect(geminiModelNames).toEqual(['gemini-3.1-flash-lite']);
+    expect(geminiModelNames).toEqual(['gemini-3.5-flash-lite']);
     expect(geminiRequests).toHaveLength(1);
     expect(JSON.stringify(geminiRequests[0])).not.toContain('919191');
     expect(JSON.stringify(geminiRequests[0])).not.toContain('818181');
@@ -355,7 +355,7 @@ describe('Content Quality V3 runtime isolation', () => {
     expect(result.titleCandidates).toEqual([
       { text: '사용자 제목', score: 100, reasoning: '사용자 지정 제목' },
     ]);
-    expect(geminiModelNames).toEqual(['gemini-3.1-flash-lite']);
+    expect(geminiModelNames).toEqual(['gemini-3.5-flash-lite']);
     expect(geminiRequests).toHaveLength(1);
     expect(JSON.stringify(geminiRequests)).not.toContain('CONTENT_QUALITY_V3_RETRY');
     expect(loadConfigMock).toHaveBeenCalledTimes(1);
@@ -386,7 +386,7 @@ describe('Content Quality V3 runtime isolation', () => {
       v3Options(),
     );
 
-    expect(geminiModelNames).toEqual(['gemini-3.1-flash-lite']);
+    expect(geminiModelNames).toEqual(['gemini-3.5-flash-lite']);
     expect(geminiRequests).toHaveLength(1);
     expect(detectProductCategoryMock).not.toHaveBeenCalled();
     expect(JSON.stringify(geminiRequests)).not.toContain('PREPROMPT_DYNAMIC_CATEGORY_SENTINEL');
@@ -416,7 +416,7 @@ describe('Content Quality V3 runtime isolation', () => {
       v3Options(),
     )).rejects.toMatchObject({ issueCode: 'candidate_execution_failed' });
 
-    expect(geminiModelNames).toEqual(['gemini-3.1-flash-lite']);
+    expect(geminiModelNames).toEqual(['gemini-3.5-flash-lite']);
     expect(geminiRequests).toHaveLength(1);
     expect(resolvePromptCacheEligibilityMock).not.toHaveBeenCalled();
     expect(geminiCacheCreateMock).not.toHaveBeenCalled();

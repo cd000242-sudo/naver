@@ -15,19 +15,19 @@ function read(rel: string): string {
 describe('Gemini free tier quota policy', () => {
   it('keeps current model availability without inventing project-specific limits', () => {
     // [2026-08-11] 3.6 Flash 도입. 3.5 도 Stable 이라 표에 함께 남긴다.
+    expect(GEMINI_TEXT_FREE_TIER_LIMITS['gemini-3.8-flash']).toMatchObject({
+      rpm: null,
+      tpm: null,
+      rpd: null,
+      freeTierAvailable: false,
+    });
     expect(GEMINI_TEXT_FREE_TIER_LIMITS['gemini-3.6-flash']).toMatchObject({
       rpm: null,
       tpm: null,
       rpd: null,
       freeTierAvailable: false,
     });
-    expect(GEMINI_TEXT_FREE_TIER_LIMITS['gemini-3.5-flash']).toMatchObject({
-      rpm: null,
-      tpm: null,
-      rpd: null,
-      freeTierAvailable: false,
-    });
-    expect(GEMINI_TEXT_FREE_TIER_LIMITS['gemini-3.1-flash-lite']).toMatchObject({
+    expect(GEMINI_TEXT_FREE_TIER_LIMITS['gemini-3.5-flash-lite']).toMatchObject({
       rpm: null,
       tpm: null,
       rpd: null,

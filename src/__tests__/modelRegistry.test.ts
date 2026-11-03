@@ -32,64 +32,64 @@ describe('modelRegistry SSOT 회귀 가드', () => {
   it('uses the current official value, balanced, and premium API models', () => {
     // [2026-08-11] 공식 문서 확인: 3.6 Flash 는 Stable 이고 3.5 보다 출력이 싸다($7.50 vs $9.00).
     //   3.1 Pro 는 Preview 라 선불 티어에서 막혀 제품에서 뺐다 — PRO 키 자체가 사라졌다.
-    expect(GEMINI_TEXT_MODELS.FLASH_LITE).toBe('gemini-3.1-flash-lite');
-    expect(GEMINI_TEXT_MODELS.FLASH).toBe('gemini-3.6-flash');
-    expect(GEMINI_TEXT_MODELS.FLASH_SUSTAINED).toBe('gemini-3.5-flash');
+    expect(GEMINI_TEXT_MODELS.FLASH_LITE).toBe('gemini-3.5-flash-lite');
+    expect(GEMINI_TEXT_MODELS.FLASH).toBe('gemini-3.8-flash');
+    expect(GEMINI_TEXT_MODELS.FLASH_SUSTAINED).toBe('gemini-3.6-flash');
     expect((GEMINI_TEXT_MODELS as Record<string, string>).PRO).toBeUndefined();
 
-    expect(OPENAI_TEXT_MODELS.LUNA).toBe('gpt-5.6-luna');
-    expect(OPENAI_TEXT_MODELS.TERRA).toBe('gpt-5.6-terra');
-    expect(OPENAI_TEXT_MODELS.SOL).toBe('gpt-5.6-sol');
+    expect(OPENAI_TEXT_MODELS.LUNA).toBe('gpt-6-luna');
+    expect(OPENAI_TEXT_MODELS.TERRA).toBe('gpt-6.1-terra');
+    expect(OPENAI_TEXT_MODELS.SOL).toBe('gpt-6.1-sol');
 
-    expect(CLAUDE_MODELS.FABLE).toBe('claude-fable-5');
-    expect(CLAUDE_MODELS.OPUS).toBe('claude-fable-5');
-    expect(CLAUDE_MODELS.SONNET).toBe('claude-sonnet-5');
-    expect(CLAUDE_MODELS.HAIKU).toBe('claude-haiku-4-5-20251001');
+    expect(CLAUDE_MODELS.FABLE).toBe('claude-fable-5-1');
+    expect(CLAUDE_MODELS.OPUS).toBe('claude-fable-5-1');
+    expect(CLAUDE_MODELS.SONNET).toBe('claude-sonnet-5-5');
+    expect(CLAUDE_MODELS.HAIKU).toBe('claude-haiku-5-5');
   });
 
   it('maps every visible API selector to one current model and quality tier', () => {
-    expect(resolveTextModelProfile('gemini-3.1-flash-lite')).toMatchObject({
-      vendor: 'gemini', tier: 'value', model: 'gemini-3.1-flash-lite',
+    expect(resolveTextModelProfile('gemini-3.5-flash-lite')).toMatchObject({
+      vendor: 'gemini', tier: 'value', model: 'gemini-3.5-flash-lite',
     });
     // [2026-08-12] 제미나이 3티어. 이전에는 Lite 가 아니면 전부 balanced 였고
     //   표시 이름이 '3.5 Flash' 로 고정이라 3.6 을 골라도 3.5 로 보였다.
-    expect(resolveTextModelProfile('gemini-3.6-flash')).toMatchObject({
-      vendor: 'gemini', tier: 'balanced', model: 'gemini-3.6-flash', displayName: 'Gemini 3.6 Flash',
+    expect(resolveTextModelProfile('gemini-3.8-flash')).toMatchObject({
+      vendor: 'gemini', tier: 'balanced', model: 'gemini-3.8-flash', displayName: 'Gemini 3.8 Flash',
     });
-    expect(resolveTextModelProfile('gemini-3.5-flash')).toMatchObject({
-      vendor: 'gemini', tier: 'premium', model: 'gemini-3.5-flash', displayName: 'Gemini 3.5 Flash',
+    expect(resolveTextModelProfile('gemini-3.6-flash')).toMatchObject({
+      vendor: 'gemini', tier: 'premium', model: 'gemini-3.6-flash', displayName: 'Gemini 3.6 Flash',
     });
     expect(resolveTextModelProfile('gemini-3.1-pro-preview')).toMatchObject({
-      vendor: 'gemini', tier: 'value', model: 'gemini-3.1-flash-lite',
+      vendor: 'gemini', tier: 'value', model: 'gemini-3.5-flash-lite',
     });
     expect(resolveTextModelProfile('openai-gpt4o-mini')).toMatchObject({
-      vendor: 'openai', tier: 'value', model: 'gpt-5.6-luna', reasoningEffort: 'medium',
+      vendor: 'openai', tier: 'value', model: 'gpt-6-luna', reasoningEffort: 'medium',
     });
     expect(resolveTextModelProfile('openai-gpt41')).toMatchObject({
-      vendor: 'openai', tier: 'balanced', model: 'gpt-5.6-terra', reasoningEffort: 'medium',
+      vendor: 'openai', tier: 'balanced', model: 'gpt-6.1-terra', reasoningEffort: 'medium',
     });
     expect(resolveTextModelProfile('openai-gpt4o')).toMatchObject({
-      vendor: 'openai', tier: 'premium', model: 'gpt-5.6-sol', reasoningEffort: 'medium',
+      vendor: 'openai', tier: 'premium', model: 'gpt-6.1-sol', reasoningEffort: 'medium',
     });
     expect(resolveTextModelProfile('claude-haiku')).toMatchObject({
-      vendor: 'claude', tier: 'value', model: 'claude-haiku-4-5-20251001',
+      vendor: 'claude', tier: 'value', model: 'claude-haiku-5-5',
     });
     expect(resolveTextModelProfile('claude-sonnet')).toMatchObject({
-      vendor: 'claude', tier: 'balanced', model: 'claude-sonnet-5',
+      vendor: 'claude', tier: 'balanced', model: 'claude-sonnet-5-5',
     });
     expect(resolveTextModelProfile('claude-opus')).toMatchObject({
-      vendor: 'claude', tier: 'premium', model: 'claude-fable-5',
+      vendor: 'claude', tier: 'premium', model: 'claude-fable-5-1',
     });
   });
 
   it('migrates legacy Gemini selections to the supported prepaid matrix', () => {
-    expect(normalizeGeminiTextModelId('gemini-2.5-flash-lite')).toBe('gemini-3.1-flash-lite');
-    expect(normalizeGeminiTextModelId('gemini-2.5-flash')).toBe('gemini-3.6-flash');
+    expect(normalizeGeminiTextModelId('gemini-2.5-flash-lite')).toBe('gemini-3.5-flash-lite');
+    expect(normalizeGeminiTextModelId('gemini-2.5-flash')).toBe('gemini-3.8-flash');
     // 3.5 를 명시적으로 고른 사용자는 그대로 둔다 — Stable 이라 문제없다
-    expect(normalizeGeminiTextModelId('gemini-3.5-flash')).toBe('gemini-3.5-flash');
+    expect(normalizeGeminiTextModelId('gemini-3.5-flash')).toBe('gemini-3.6-flash');
     expect(normalizeGeminiTextModelId('gemini-3.6-flash')).toBe('gemini-3.6-flash');
-    expect(normalizeGeminiTextModelId('gemini-2.5-pro')).toBe('gemini-3.1-flash-lite');
-    expect(normalizeGeminiTextModelId('gemini-3.1-pro-preview')).toBe('gemini-3.1-flash-lite');
+    expect(normalizeGeminiTextModelId('gemini-2.5-pro')).toBe('gemini-3.5-flash-lite');
+    expect(normalizeGeminiTextModelId('gemini-3.1-pro-preview')).toBe('gemini-3.5-flash-lite');
     expect(normalizeGeminiTextModelId('gemini-future-explicit-model')).toBe('gemini-future-explicit-model');
   });
 
@@ -105,7 +105,7 @@ describe('modelRegistry SSOT 회귀 가드', () => {
       'openai-gpt41',
     )).toThrow('TEXT_MODEL_PROVIDER_MISMATCH');
     expect(resolveTextModelProfileForVendor('', 'claude', 'claude-sonnet')).toMatchObject({
-      vendor: 'claude', model: 'claude-sonnet-5',
+      vendor: 'claude', model: 'claude-sonnet-5-5',
     });
   });
 
@@ -128,14 +128,14 @@ describe('modelRegistry SSOT 회귀 가드', () => {
     });
   });
 
-  it('uses the current GPT-5.6 model for Responses web search', () => {
+  it('uses the current GPT-6.1 model for Responses web search', () => {
     expect(resolveTextModelProfile('openai-gpt4o-search')).toMatchObject({
       vendor: 'openai', model: OPENAI_TEXT_MODELS.TERRA,
     });
   });
 
   it('preserves explicit provider model IDs while UI selectors use the current matrix', () => {
-    expect(resolveTextModelProfile('gpt-4.1')).toMatchObject({ vendor: 'openai', model: 'gpt-4.1' });
+    expect(resolveTextModelProfile('gpt-4.1')).toMatchObject({ vendor: 'openai', model: 'gpt-6.1-terra' });
     expect(resolveTextModelProfile('gpt-4o')).toMatchObject({ vendor: 'openai', model: 'gpt-4o' });
     expect(resolveTextModelProfile('claude-sonnet-4-6')).toMatchObject({ vendor: 'claude', model: 'claude-sonnet-4-6' });
     expect(resolveTextModelProfile('claude-opus-4-8')).toMatchObject({ vendor: 'claude', model: 'claude-opus-4-8' });

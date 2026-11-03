@@ -55,7 +55,12 @@ export interface TrackingInput {
  *  API 유지: gpt-4.1 계열 (ChatGPT 2026-02-13 은퇴했지만 API는 유지)
  */
 const OPENAI_TEXT_PRICING: Record<string, { input: number; cachedInput: number; output: number }> = {
-  // Current GPT-5.6 value / balanced / premium tiers.
+  // [2026-11-03] GPT-6 generation value / balanced / premium tiers.
+  //   input/output from the research notes; cachedInput = 10% of input (same ratio as earlier tiers, UNCONFIRMED).
+  'gpt-6-luna':      { input: 0.10, cachedInput: 0.01, output: 0.50 },
+  'gpt-6.1-terra':   { input: 1.00, cachedInput: 0.10, output: 5.00 },
+  'gpt-6.1-sol':     { input: 2.00, cachedInput: 0.20, output: 10.00 },
+  // Retired GPT-5.6 prices retained for historical usage records.
   'gpt-5.6-luna':    { input: 1.00, cachedInput: 0.10, output: 6.00 },
   'gpt-5.6-terra':   { input: 2.50, cachedInput: 0.25, output: 15.00 },
   'gpt-5.6-sol':     { input: 5.00, cachedInput: 0.50, output: 30.00 },
@@ -154,7 +159,11 @@ const OPENAI_IMAGE_PRICING: Record<string, number> = {
  *  Opus 4.1 / 4.0은 레거시 단가($15/$75) 유지.
  */
 const CLAUDE_PRICING: Record<string, { input: number; output: number }> = {
-  // Current value / balanced / premium tiers.
+  // [2026-11-03] Claude 5.5 / 5.1 generation. Prices UNCONFIRMED - carried over from the previous model of the same tier.
+  'claude-fable-5-1':         { input: 10.00, output: 50.00 },
+  'claude-sonnet-5-5':        { input: 3.00,  output: 15.00 },
+  'claude-haiku-5-5':         { input: 1.00,  output: 5.00 },
+  // Retired tiers kept for historical usage records.
   'claude-fable-5':           { input: 10.00, output: 50.00 },
   'claude-sonnet-5':          { input: 3.00,  output: 15.00 },
   'claude-haiku-4-5-20251001': { input: 1.00, output: 5.00 },
@@ -193,6 +202,46 @@ const PERPLEXITY_PRICING: Record<string, { input: number; output: number; search
 
 // ==================== 가격 계산 헬퍼 ====================
 
+/**
+ * Gemini text price ($/1M tokens) by model-ID substring. Specific IDs come first:
+ * 'gemini-3.5-flash-lite' contains '3.5-flash' and must not be priced as 3.5 Flash.
+ * 200K 토큰 초과 시 Pro 계열은 2배 요금 (>200K 분기 적용).
+ */
+export function resolveGeminiTextPricing(model: string, totalTokens: number): { input: number; output: number } {
+  const lower = model.toLowerCase();
+  const isLongContext = totalTokens > 200_000;
+  let pInput: number, pOutput: number;
+  if (lower.includes('3.5-flash-lite')) {
+    // [2026-11-03] 3.5 Flash-Lite (research notes). Checked before '3.5-flash' on purpose.
+    pInput = 0.30;
+    pOutput = 2.50;
+  } else if (lower.includes('3.1-flash-lite')) {
+    pInput = 0.25;
+    pOutput = 1.50;
+  } else if (lower.includes('3.8-flash') || lower.includes('3.6-flash')) {
+    // 3.8 Flash price UNCONFIRMED - the 3.6 Flash price is applied.
+    pInput = 1.50;
+    pOutput = 7.50;
+  } else if (lower.includes('3.5-flash')) {
+    pInput = 1.50;
+    pOutput = 9.00;
+  } else if (lower.includes('3.1-pro')) {
+    pInput = isLongContext ? 4.00 : 2.00;
+    pOutput = isLongContext ? 18.00 : 12.00;
+  } else if (lower.includes('flash-lite') || lower.includes('flash_lite')) {
+    pInput = 0.10;   // ← 수정: 0.025 → 0.10 (4배 과소)
+    pOutput = 0.40;  // ← 수정: 0.10 → 0.40 (4배 과소)
+  } else if (lower.includes('pro')) {
+    pInput = isLongContext ? 2.50 : 1.25;
+    pOutput = isLongContext ? 15.00 : 10.00;  // ← 수정: 5 → 10 (2배 과소)
+  } else {
+    // Flash (기본)
+    pInput = 0.30;   // ← 수정: 0.10 → 0.30 (3배 과소)
+    pOutput = 2.50;  // ← 수정: 0.40 → 2.50 (6.25배 과소)
+  }
+  return { input: pInput, output: pOutput };
+}
+
 function matchPricingKey(model: string, table: Record<string, any>): string {
   const lower = model.toLowerCase();
   // ✅ Match longer (more specific) keys first. Otherwise a short substring key
@@ -220,30 +269,7 @@ function calculateCost(provider: ApiProvider, input: TrackingInput): number {
       // ✅ [v1.4.77] 공식 2026-04 단가로 전면 교정 (이전 구 2.0 시절 단가 → Flash output 6.25배 과소 계상 버그)
       // source: ai.google.dev/gemini-api/docs/pricing
       // 200K 토큰 초과 시 Pro 계열은 2배 요금 (>200K 분기 적용)
-      const lower = model.toLowerCase();
-      const totalTokens = inTok + outTok;
-      const isLongContext = totalTokens > 200_000;
-      let pInput: number, pOutput: number;
-      if (lower.includes('3.1-flash-lite')) {
-        pInput = 0.25;
-        pOutput = 1.50;
-      } else if (lower.includes('3.5-flash')) {
-        pInput = 1.50;
-        pOutput = 9.00;
-      } else if (lower.includes('3.1-pro')) {
-        pInput = isLongContext ? 4.00 : 2.00;
-        pOutput = isLongContext ? 18.00 : 12.00;
-      } else if (lower.includes('flash-lite') || lower.includes('flash_lite')) {
-        pInput = 0.10;   // ← 수정: 0.025 → 0.10 (4배 과소)
-        pOutput = 0.40;  // ← 수정: 0.10 → 0.40 (4배 과소)
-      } else if (lower.includes('pro')) {
-        pInput = isLongContext ? 2.50 : 1.25;
-        pOutput = isLongContext ? 15.00 : 10.00;  // ← 수정: 5 → 10 (2배 과소)
-      } else {
-        // Flash (기본)
-        pInput = 0.30;   // ← 수정: 0.10 → 0.30 (3배 과소)
-        pOutput = 2.50;  // ← 수정: 0.40 → 2.50 (6.25배 과소)
-      }
+      const { input: pInput, output: pOutput } = resolveGeminiTextPricing(model, inTok + outTok);
       return (inTok / 1_000_000) * pInput + (outTok / 1_000_000) * pOutput;
     }
 

@@ -114,7 +114,7 @@ async function main() {
     const start = Date.now();
     try {
       const res = await fetch(
-        'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent',
+        'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent',
         {
           method: 'POST',
           headers: {

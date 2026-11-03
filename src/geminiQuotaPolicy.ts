@@ -25,7 +25,7 @@ export const GEMINI_TEXT_FREE_TIER_LIMITS: Record<GeminiTextModelId, GeminiFreeT
     tpm: null,
     rpd: null,
     freeTierAvailable: true,
-    label: 'Gemini 3.1 Flash-Lite',
+    label: 'Gemini 3.5 Flash-Lite',
     recommendation: '가성비 및 대량 처리용. 현재 한도는 AI Studio에서 확인합니다.',
   }),
   [GEMINI_TEXT_MODELS.FLASH]: Object.freeze({
@@ -33,20 +33,20 @@ export const GEMINI_TEXT_FREE_TIER_LIMITS: Record<GeminiTextModelId, GeminiFreeT
     tpm: null,
     rpd: null,
     freeTierAvailable: false,
-    label: 'Gemini 3.6 Flash',
+    label: 'Gemini 3.8 Flash',
     recommendation: '선불 유료 고품질 모델(최신). 무료 사용은 Flash-Lite를 선택하세요.',
   }),
   /**
-   * [2026-08-11] 3.5 Flash — 3.6 도입 후에도 남긴다.
+   * [2026-11-03] 3.6 Flash — 3.8 도입 후에도 직전 세대로 남긴다.
    *   공식 문서상 "지속 추론(sustained frontier performance)" 강점이 있어 긴 글에 유리하고,
-   *   Stable 이라 티어 제한이 없다. 출력 단가는 3.6($7.50)보다 비싼 $9.00 이다.
+   *   Stable 이라 티어 제한이 없다. 출력 단가는 $7.50 이다(3.8 Flash 단가는 미확인).
    */
   [GEMINI_TEXT_MODELS.FLASH_SUSTAINED]: Object.freeze({
     rpm: null,
     tpm: null,
     rpd: null,
     freeTierAvailable: false,
-    label: 'Gemini 3.5 Flash',
+    label: 'Gemini 3.6 Flash',
     recommendation: '선불 유료. 긴 글·복잡한 주제에서 지속 추론이 필요할 때 쓰세요.',
   }),
 });
@@ -66,7 +66,7 @@ export function getGeminiFreeTierDailyLimit(modelName: string): number | null {
 export function formatGeminiFreeTierSummary(): string {
   return [
     'Flash-Lite의 활성 RPM·TPM·RPD는 Google AI Studio 프로젝트 화면에서 확인하세요.',
-    'Gemini 3.5 Flash는 선불 유료 모델이며 앱은 Pro Preview를 제공하지 않습니다.',
+    'Gemini 3.8 Flash·3.6 Flash는 선불 유료 모델이며 앱은 Pro Preview를 제공하지 않습니다.',
     '한도는 API 키가 아니라 프로젝트 단위이며 RPD는 태평양 시간 자정에 초기화됩니다.',
   ].join(' · ');
 }

@@ -1,4 +1,8 @@
-import { supportsClaudeTemperature } from './runtime/modelRegistry.js';
+import {
+  OPENAI_TEXT_MODELS,
+  migrateRetiredApiTextModelId,
+  supportsClaudeTemperature,
+} from './runtime/modelRegistry.js';
 
 /** 입력이 이 크기를 넘어가면 그 초과분만큼 시간을 더 준다. */
 const LARGE_PROMPT_BASELINE_CHARS = 20_000;
@@ -40,7 +44,7 @@ export function getContentProviderTimeoutMs(
 }
 
 /**
- * GPT-5.6 long-form calls need a wider single-request window than fast
+ * GPT-6.x long-form calls need a wider single-request window than fast
  * providers. This prevents a completed/billable Sol request from being cut off
  * at the former shared 90-second limit while staying below the renderer's
  * 360-second top-level budget.
@@ -51,8 +55,8 @@ export function getContentProviderTimeoutMs(
  * 성공했는데 창이 123.6초라 2차가 그대로 잘렸다. OpenAI 추론 모델이 이미 모델별 하한을 갖는 것과
  * 같은 방식으로 하한을 둔다 — 창만 넓히는 것이고, 재시도 횟수는 그대로다.
  *
- * 대상: claude-opus-5 / claude-sonnet-5 / claude-fable-5(-1) 등 supportsClaudeTemperature=false 모델.
- * 비대상(haiku 등)은 기존 창을 그대로 쓴다.
+ * 대상: claude-opus-5 / claude-sonnet-5(-5) / claude-fable-5(-1) / claude-haiku-5(-5) 등 supportsClaudeTemperature=false 모델.
+ * 비대상(haiku 4.x 등)은 기존 창을 그대로 쓴다.
  */
 export const CLAUDE_ADAPTIVE_MIN_TIMEOUT_MS = 240_000;
 
@@ -76,12 +80,13 @@ export function getOpenAiContentTimeoutMs(
 ): number {
   const baseTimeout = getContentProviderTimeoutMs(minChars, retryAttempt, promptChars);
   const normalizedMinChars = Math.max(0, Math.round(Number(minChars) || 0));
-  const model = String(modelName || '').trim().toLowerCase();
+  // Retired IDs (gpt-5.6-*, gpt-4.1*) resolve to the same tier so saved values keep the wide window.
+  const model = migrateRetiredApiTextModelId(String(modelName || '').trim().toLowerCase());
 
-  if (model === 'gpt-5.6-sol') {
+  if (model === OPENAI_TEXT_MODELS.SOL) {
     return Math.max(baseTimeout, normalizedMinChars < 1000 ? 120_000 : 240_000);
   }
-  if (model === 'gpt-5.6-terra') {
+  if (model === OPENAI_TEXT_MODELS.TERRA) {
     return Math.max(baseTimeout, normalizedMinChars < 1000 ? 120_000 : 180_000);
   }
   return baseTimeout;

@@ -4696,7 +4696,7 @@ async function callOpenAI(
   const useOpenAIGrounding = !customModel && uiSelectedModel === 'openai-gpt4o-search';
   if (!customModel && uiSelectedModel === 'openai-gpt4o-search') {
     openAIModels = [OPENAI_TEXT_MODELS.TERRA];
-    console.log('[OpenAI] 🔎 GPT-5.6 Terra Responses API — web_search ON');
+    console.log('[OpenAI] 🔎 GPT-6.1 Terra Responses API — web_search ON');
   } else {
     const activeProfile = selectedOpenAiProfile;
     openAIModels = [activeProfile.model];

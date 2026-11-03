@@ -21,14 +21,14 @@ function read(rel: string): string {
 
 it('keeps the live content-engine smoke test on the same current model matrix', () => {
   const smoke = read('../scripts/test-content-engines.mjs');
-  expect(smoke).toContain("value: 'gemini-3.1-flash-lite'");
-  expect(smoke).toContain("balanced: 'gemini-3.5-flash'");
+  expect(smoke).toContain("value: 'gemini-3.5-flash-lite'");
+  expect(smoke).toContain("balanced: 'gemini-3.8-flash'");
   expect(smoke).not.toContain("premium: 'gemini-3.1-pro-preview'");
-  expect(smoke).toContain("value: 'gpt-5.6-luna'");
-  expect(smoke).toContain("balanced: 'gpt-5.6-terra'");
-  expect(smoke).toContain("premium: 'gpt-5.6-sol'");
-  expect(smoke).toContain("balanced: 'claude-sonnet-5'");
-  expect(smoke).toContain("premium: 'claude-fable-5'");
+  expect(smoke).toContain("value: 'gpt-6-luna'");
+  expect(smoke).toContain("balanced: 'gpt-6.1-terra'");
+  expect(smoke).toContain("premium: 'gpt-6.1-sol'");
+  expect(smoke).toContain("balanced: 'claude-sonnet-5-5'");
+  expect(smoke).toContain("premium: 'claude-fable-5-1'");
   expect(smoke).toContain('reasoning_effort');
   expect(smoke).toContain("tools: [{ type: 'web_search' }]");
   expect(smoke).toContain('client.responses.create');
@@ -43,13 +43,13 @@ it('shows the current OpenAI search model name instead of the retired preview br
   const priceInfoModal = read('renderer/modules/priceInfoModal.ts');
   for (const code of [publicHtml, settingsModal, priceInfoModal]) {
     expect(code).not.toContain('GPT-4o Search');
-    expect(code).toContain('GPT-5.6 웹 검색');
+    expect(code).toContain('GPT-6.1 웹 검색');
   }
 });
 
 it('keeps shipped JavaScript and manual diagnostics on current models', () => {
   const shippedSearchApi = read('naverSearchApi.js');
-  expect(shippedSearchApi).toContain("model: 'gemini-3.1-flash-lite'");
+  expect(shippedSearchApi).toContain("model: 'gemini-3.5-flash-lite'");
   expect(shippedSearchApi).not.toContain("model: 'gemini-2.0-flash'");
 
   const imageDiagnostics = [

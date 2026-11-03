@@ -10,6 +10,7 @@ import { readRawPipelineSettings } from './pipelineConfig.js';
 import { bindAllStaticDropshotLoginUis } from './dropshotLoginUi.js';
 import { gsBindAllStaticUis } from './gensparkLoginUi.js';
 import { bindImageAiDisclosureSetting } from './imageAiDisclosureSetting.js';
+import { headingTextSettingInstall } from './headingImageTextSetting.js';
 import { resolveImageStudioSource } from '../../runtime/imageStudioPreferences.js';
 import { IMAGE_SETTINGS_CHANGED_EVENT, imgSyncNotify, imgSyncReadChange } from '../../runtime/imageSettingsSync.js';
 import { IMG_SYNC_PAINT_FLAG, imgSyncInstallListeners, imgSyncRefreshImageTab } from './imageSettingsSyncUi.js';
@@ -129,6 +130,11 @@ export async function initImageManagementTab(): Promise<void> {
       if (kind === 'error') toastManager.error(message);
     },
   );
+  // [2026-11-03] 소제목 텍스트 포함하기 — 이미지 탭·풀오토 이미지 설정 두 체크박스가 config.headingImageTextInclude 하나를 쓴다.
+  void headingTextSettingInstall((window as any).api, (message, kind) => {
+    appendLog(message, 'images-log-output');
+    if (kind === 'error') toastManager.error(message);
+  });
   // [2026-07-31] 드롭샷/Flow 로그인 버튼 배선 — 이 호출이 없어 클릭이 무반응이었다.
   try { gsBindAllStaticUis(); } catch (e) { console.warn('[ImageManagementTab] 젠스파크 UI 배선 실패:', e); }
   try { bindAllStaticDropshotLoginUis(); } catch (e) { console.warn('[ImageManagementTab] 로그인 UI 배선 실패:', e); }

@@ -11,7 +11,13 @@ import {
   buildParaphraseUpgradeBrief,
   type ParaphraseAnalysisInput,
 } from '../../content/paraphraseSourceAnalysis.js';
-import { resolveTextModelProfileForVendor } from '../../runtime/modelRegistry.js';
+import {
+  CLAUDE_MODELS,
+  GEMINI_TEXT_MODELS,
+  OPENAI_TEXT_MODELS,
+  resolveTextModelProfileForVendor,
+} from '../../runtime/modelRegistry.js';
+import { isOpenAiReasoningModel } from '../../runtime/openaiReasoningFamily.js';
 import { buildGeminiModelChain } from '../../contentGeminiModelPolicy.js';
 
 /**
@@ -23,9 +29,9 @@ import { buildGeminiModelChain } from '../../contentGeminiModelPolicy.js';
  * on mini/haiku/flash-lite and rewrote the body. Quality tier resolves the user's
  * own primary model for the selected vendor.
  */
-const OPENAI_ANALYSIS_MODEL = 'gpt-4.1-mini';
-const CLAUDE_ANALYSIS_MODEL = 'claude-haiku-4-5-20251001';
-const GEMINI_ANALYSIS_MODEL = 'gemini-3.1-flash-lite';
+const OPENAI_ANALYSIS_MODEL: string = OPENAI_TEXT_MODELS.GPT_41_MINI;
+const CLAUDE_ANALYSIS_MODEL: string = CLAUDE_MODELS.HAIKU;
+const GEMINI_ANALYSIS_MODEL: string = GEMINI_TEXT_MODELS.FLASH_LITE;
 const ANALYSIS_TIMEOUT_MS = 90_000;
 const MAX_INPUT_CHARS = 20_000;
 // Default output cap for side calls. Callers that need a longer structured answer (the 설계도) pass maxTokens.
@@ -65,6 +71,8 @@ async function callOpenAi(prompt: string, apiKey: string, options?: AnalysisCall
       messages: [{ role: 'user', content: prompt }],
       // max_completion_tokens: 최신 모델은 max_tokens 를 거부한다 (2026-07 교훈).
       max_completion_tokens: resolveMaxTokens(options),
+      // [2026-11-03] gpt-6-luna is a reasoning model: low effort keeps the budget for the answer (empty-reply guard).
+      ...(isOpenAiReasoningModel(model) ? { reasoning_effort: 'low' } : {}),
     }),
     signal: options?.signal,
   });
@@ -191,7 +199,7 @@ export function resolveRoute(generator: string, config: Record<string, unknown>)
  * [2026-09-03 사장님] 보조 호출(소제목 보정 등)은 사용자가 고른 엔진 *그대로* 간다.
  * resolveRoute 와 달리 키가 있는 다른 벤더로 건너가지 않는다 — 고른 엔진의 키가 없으면 null 이고
  * 호출 측은 그 단계를 건너뛴다(조용한 폴백 금지). 에이전트면 그 구독 CLI, API 키 모드면 그 벤더의
- * 키와 그 벤더의 저비용 모델. 원래 소제목 보정기가 OpenAI gpt-4.1-mini 로 박혀 있던 것을 고친 자리.
+ * 키와 그 벤더의 저비용 모델. 원래 소제목 보정기가 OpenAI 저비용 모델로 박혀 있던 것을 고친 자리.
  */
 export function resolveSelectedEngineRoute(
   generator: string, config: Record<string, unknown>, routeOptions: RouteOptions = {},

@@ -9,9 +9,9 @@ describe('보조 호출 경로 — 사용자가 고른 엔진 그대로', () => 
   const allKeys = { openaiApiKey: 'o', geminiApiKey: 'g', claudeApiKey: 'c', perplexityApiKey: 'p', geminiModel: 'gemini-3.5-flash', perplexityModel: 'sonar-pro' };
 
   it('고른 엔진의 키를 쓴다 — 다른 벤더 키가 있어도 건너가지 않는다', () => {
-    expect(resolveSelectedEngineRoute('openai', allKeys)?.engine).toBe('gpt-4.1-mini');
+    expect(resolveSelectedEngineRoute('openai', allKeys)?.engine).toBe('gpt-6-luna');
     expect(resolveSelectedEngineRoute('gemini', allKeys)?.engine).toBe('gemini-3.5-flash');
-    expect(resolveSelectedEngineRoute('claude', allKeys)?.engine).toBe('claude-haiku-4-5-20251001');
+    expect(resolveSelectedEngineRoute('claude', allKeys)?.engine).toBe('claude-haiku-5-5');
     expect(resolveSelectedEngineRoute('perplexity', allKeys)?.engine).toBe('sonar-pro');
     expect(resolveSelectedEngineRoute('gemini', { openaiApiKey: 'o' })).toBeNull();
     expect(resolveSelectedEngineRoute('openai', { geminiApiKey: 'g', claudeApiKey: 'c' })).toBeNull();

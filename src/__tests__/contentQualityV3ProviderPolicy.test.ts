@@ -36,9 +36,9 @@ describe('Content Quality V3 provider policy', () => {
     expect(Object.isFrozen(CONTENT_QUALITY_V3_NATIVE_SCHEMA_PROVIDERS)).toBe(true);
   });
 
-  it('pins explicit v3 generation to Gemini 3.1 Flash-Lite and fails closed otherwise', () => {
+  it('pins explicit v3 generation to Gemini 3.5 Flash-Lite and fails closed otherwise', () => {
     expect(CONTENT_QUALITY_V3_GEMINI_MODEL).toBe(GEMINI_TEXT_MODELS.FLASH_LITE);
-    expect(CONTENT_QUALITY_V3_GEMINI_MODEL).toBe('gemini-3.1-flash-lite');
+    expect(CONTENT_QUALITY_V3_GEMINI_MODEL).toBe('gemini-3.5-flash-lite');
     expect(resolveContentQualityV3GeminiModelOverride('v3')).toBe(GEMINI_TEXT_MODELS.FLASH_LITE);
     expect(resolveContentQualityV3GeminiModelOverride('legacy')).toBeUndefined();
     expect(resolveContentQualityV3GeminiModelOverride('V3')).toBeUndefined();

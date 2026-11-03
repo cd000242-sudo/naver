@@ -183,13 +183,13 @@ describe('attributionEvidence — Writer가 받은 출처 이름', () => {
 
 describe('선택 엔진 — 품질 단계는 사용자 모델, 유틸 단계만 저가 모델', () => {
   const config = { primaryGeminiTextModel: 'openai-gpt56-sol', openaiApiKey: 'sk-test-xxxxxxxxxxxxxxxxxxxx', claudeApiKey: 'sk-ant-test', geminiApiKey: 'AIza-test' };
-  it('quality tier resolves the selected primary model instead of gpt-4.1-mini', () => {
+  it('quality tier resolves the selected primary model instead of gpt-6-luna', () => {
     const quality = resolveSelectedEngineRoute('openai', config, { tier: 'quality' });
     const utility = resolveSelectedEngineRoute('openai', config);
     expect(quality?.tier).toBe('quality');
-    expect(quality?.engine).not.toBe('gpt-4.1-mini');
+    expect(quality?.engine).not.toBe('gpt-6-luna');
     expect(quality?.engine).toBe(resolveQualityTierModel('openai', config));
-    expect(utility?.engine).toBe('gpt-4.1-mini');
+    expect(utility?.engine).toBe('gpt-6-luna');
   });
   it('contentGenerator routes blueprint/judge/heading-repair/issue-discipline on the quality tier and keyword picking on utility', () => {
     const src = read('contentGenerator.ts');

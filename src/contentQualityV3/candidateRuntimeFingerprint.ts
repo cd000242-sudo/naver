@@ -797,6 +797,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/renderer/modules/headingControlPanel.ts',
   'src/renderer/modules/headingImageContext.ts',
   'src/renderer/modules/headingImageGen.ts',
+  'src/renderer/modules/headingImageTextSetting.ts',
   'src/renderer/modules/imageAiDisclosureSetting.ts',
   'src/renderer/modules/imageCollectEngineConsent.ts',
   'src/renderer/modules/imageDisplayGrid.ts',

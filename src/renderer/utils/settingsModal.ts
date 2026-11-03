@@ -8,7 +8,7 @@
 import {
     isMaskedSecretValue,
 } from '../../security/secretValueUtils.js';
-import { normalizeGeminiTextModelId } from '../../runtime/modelRegistry.js';
+import { GEMINI_TEXT_MODELS, normalizeGeminiTextModelId } from '../../runtime/modelRegistry.js';
 import {
     resolvePersistedTextModelConfig,
     resolveTextModelSelection,
@@ -305,7 +305,7 @@ async function loadCurrentSettings(): Promise<void> {
     try {
         const api = (window as any).api;
         const loadedConfig = await api.getConfig();
-        const rawLoadedTextModel = loadedConfig.primaryGeminiTextModel || 'gemini-3.6-flash';
+        const rawLoadedTextModel = loadedConfig.primaryGeminiTextModel || GEMINI_TEXT_MODELS.FLASH;
         const normalizedLoadedConfig = String(rawLoadedTextModel).startsWith('gemini-')
             ? { ...loadedConfig, primaryGeminiTextModel: normalizeGeminiTextModelId(rawLoadedTextModel) }
             : loadedConfig;
@@ -386,18 +386,21 @@ async function loadCurrentSettings(): Promise<void> {
         const navStatusEl = document.getElementById('nav-text-engine-status');
         if (navStatusEl) {
             const modelLabels: Record<string, string> = {
-                'gemini-3.1-flash-lite': '💰 Gemini 3.1 Flash-Lite (무료 · 선불 추천) ★ 기본',
-                // [2026-08-11] 3.6 Flash 는 3.5 보다 새로우면서 출력이 싸다 ($7.50 vs $9.00)
-                'gemini-3.6-flash': '⚖️ Gemini 3.6 Flash (선불 고품질 · 최신)',
-                'gemini-3.5-flash': '🧠 Gemini 3.5 Flash (선불 · 긴 글 지속 추론)',
+                'gemini-3.5-flash-lite': '💰 Gemini 3.5 Flash-Lite (무료 · 선불 추천) ★ 기본',
+                // [2026-11-03] 균형 = 3.8 Flash(최신), 프리미엄 = 3.6 Flash(직전 세대, 긴 글 지속 추론)
+                'gemini-3.8-flash': '⚖️ Gemini 3.8 Flash (선불 고품질 · 최신)',
+                'gemini-3.6-flash': '🧠 Gemini 3.6 Flash (선불 · 긴 글 지속 추론)',
+                // Retired IDs: a not-yet-migrated saved value still reads right.
+                'gemini-3.1-flash-lite': '💰 Gemini 3.5 Flash-Lite (무료 · 선불 추천) ★ 기본',
+                'gemini-3.5-flash': '🧠 Gemini 3.6 Flash (선불 · 긴 글 지속 추론)',
                 'perplexity-sonar': '🔮 Perplexity Sonar (~₩15/글)',
-                'openai-gpt4o-mini': '🧠 GPT-5.6 Luna (가성비)',
-                'openai-gpt41': '⚖️ GPT-5.6 Terra (균형)',
-                'openai-gpt4o': '🚀 GPT-5.6 Sol (프리미엄)',
-                'openai-gpt4o-search': '🔎 GPT-5.6 웹 검색 (Responses API)',
-                'claude-haiku': '🎭 Claude Haiku 4.5 (가성비)',
-                'claude-sonnet': '📜 Claude Sonnet 5 (균형)',
-                'claude-opus': '👑 Claude Fable 5 (프리미엄)',
+                'openai-gpt4o-mini': '🧠 GPT-6 Luna (가성비)',
+                'openai-gpt41': '⚖️ GPT-6.1 Terra (균형)',
+                'openai-gpt4o': '🚀 GPT-6.1 Sol (프리미엄)',
+                'openai-gpt4o-search': '🔎 GPT-6.1 웹 검색 (Responses API)',
+                'claude-haiku': '🎭 Claude Haiku 5.5 (가성비)',
+                'claude-sonnet': '📜 Claude Sonnet 5.5 (균형)',
+                'claude-opus': '👑 Claude Fable 5.1 (프리미엄)',
             };
             navStatusEl.textContent = `현재: ${modelLabels[savedTextModel] || savedTextModel}`;
         }
@@ -451,7 +454,7 @@ async function saveSettings(): Promise<void> {
             naverHubClientSecret: naverHubClientSecret,
             primaryGeminiTextModel: safeTextSelection.model,
             defaultAiProvider: safeTextSelection.provider,
-            geminiModel: els.geminiModelSelect?.value || 'gemini-3.6-flash',
+            geminiModel: els.geminiModelSelect?.value || GEMINI_TEXT_MODELS.FLASH,
             perplexityModel: els.perplexityModelSelect?.value || 'sonar',
         };
 
@@ -579,7 +582,7 @@ export function initSettingsModal(): void {
     }
 }
 
-// GPT-5.6 web search selection: one-time cost consent.
+// GPT-6.1 web search selection: one-time cost consent.
 //   동작: 라디오 change 이벤트에서 'openai-gpt4o-search' 선택 시 confirm 노출.
 //   1회 동의 후 sessionStorage 플래그로 동일 세션 내 재노출 방지.
 //   사용자가 취소하면 이전 모델로 자동 revert.
@@ -620,7 +623,7 @@ function setupOpenAISearchCostConsent(): void {
                 return;
             }
             const ok = window.confirm(
-                'GPT-5.6 웹 검색은 모델 토큰 비용과 웹 검색 비용이 함께 발생합니다.\n\n' +
+                'GPT-6.1 웹 검색은 모델 토큰 비용과 웹 검색 비용이 함께 발생합니다.\n\n' +
                 '요금은 OpenAI 정책과 사용량에 따라 달라질 수 있으므로 공식 가격표를 확인해 주세요.\n\n' +
                 '실시간 정보가 필요한 글에서만 권장합니다. 계속하시겠습니까?'
             );
@@ -632,7 +635,7 @@ function setupOpenAISearchCostConsent(): void {
                 // revert
                 const revertTo = previousValue && previousValue !== SEARCH_VALUE
                     ? previousValue
-                    : 'gemini-3.6-flash';
+                    : GEMINI_TEXT_MODELS.FLASH;
                 const target = document.querySelector<HTMLInputElement>(
                     `input[name="primaryGeminiTextModel"][value="${revertTo}"]`
                 );

@@ -60,6 +60,7 @@ export interface GenerateResult {
 // ==================== 상수 ====================
 
 // 신규/빈 설정은 API 무료 티어가 있는 Flash-Lite를 사용한다.
+// [2026-11-03] 이후 FLASH 슬롯은 3.8 Flash. 아래는 [2026-08-28] 당시(3.6 Flash) 실측 기록이다.
 // [2026-08-28] 기본 모델을 3.1 Flash-Lite → 3.6 Flash 로 올렸다.
 //   실측(같은 키워드·같은 재료 11,588자): Flash-Lite 는 849자에 제목 응답 20% 로,
 //   제목이 약속한 답을 본문이 다루지 않았다. 3.6 Flash 는 1,828자.
@@ -71,8 +72,8 @@ const DEFAULT_MODEL = process.env.GEMINI_MODEL || GEMINI_TEXT_MODELS.FLASH;
 // ✅ 사용 가능한 모델 목록 (환경설정에서 선택 가능)
 // [v1.4.49] 실측 기반 정확한 무료 할당량 표시
 export const AVAILABLE_MODELS = [
-  { id: GEMINI_TEXT_MODELS.FLASH_LITE, name: 'Gemini 3.1 Flash-Lite (무료 · 선불 가성비 추천)', tier: 'budget' },
-  { id: GEMINI_TEXT_MODELS.FLASH, name: 'Gemini 3.5 Flash (선불 고품질)', tier: 'standard' },
+  { id: GEMINI_TEXT_MODELS.FLASH_LITE, name: 'Gemini 3.5 Flash-Lite (무료 · 선불 가성비 추천)', tier: 'budget' },
+  { id: GEMINI_TEXT_MODELS.FLASH, name: 'Gemini 3.8 Flash (선불 고품질)', tier: 'standard' },
 ];
 
 const BASE_FALLBACK_MODELS = [

@@ -22,6 +22,7 @@ import {
 import {
   CLAUDE_MODELS,
   OPENAI_TEXT_MODELS,
+  migrateRetiredApiTextModelId,
 } from './textModelConstants.js';
 
 export {
@@ -31,6 +32,8 @@ export {
 export {
   CLAUDE_MODELS,
   OPENAI_TEXT_MODELS,
+  RETIRED_API_TEXT_MODEL_IDS,
+  migrateRetiredApiTextModelId,
 } from './textModelConstants.js';
 
 export const AGENT_TEXT_PROVIDERS = ['agent-codex', 'agent-claude', 'agent-gemini'] as const;
@@ -121,15 +124,18 @@ export interface TextModelProfile {
   reasoningEffort?: OpenAiReasoningEffort;
 }
 
-/** Claude models with adaptive thinking reject legacy sampling controls. */
+/**
+ * Claude models with adaptive thinking reject legacy sampling controls.
+ * [2026-11-03] Every Claude 5+ family (haiku and fable included) is treated as "no temperature":
+ * a wrongly-sent temperature fails the request, while an omitted one only skips a tuning knob.
+ */
 export function supportsClaudeTemperature(modelId: unknown): boolean {
   const model = String(modelId || '').trim().toLowerCase();
-  if (/^claude-(?:fable|sonnet)-5(?:-|$)/.test(model)) return false;
 
   const claude4 = model.match(/^claude-(?:opus|sonnet)-4-(\d+)(?:-|$)/);
   if (claude4 && Number(claude4[1]) >= 7) return false;
 
-  const laterMajor = model.match(/^claude-(?:opus|sonnet)-(\d+)(?:-|$)/);
+  const laterMajor = model.match(/^claude-(?:opus|sonnet|haiku|fable)-(\d+)(?:-|$)/);
   return !laterMajor || Number(laterMajor[1]) < 5;
 }
 
@@ -149,16 +155,23 @@ const profile = (
   ...(reasoningEffort ? { reasoningEffort } : {}),
 });
 
+/** Screen names for the Gemini text tiers (the model behind each tier is GEMINI_TEXT_MODELS). */
+const GEMINI_DISPLAY_NAMES: Readonly<Record<TextModelTier, string>> = {
+  value: 'Gemini 3.5 Flash-Lite',
+  balanced: 'Gemini 3.8 Flash',
+  premium: 'Gemini 3.6 Flash',
+};
+
 /** Resolve UI/config selectors to the one API model that is actually called. */
 export function resolveTextModelProfile(value: unknown): TextModelProfile {
   const selector = String(value || '').trim();
 
   if (!selector) {
-    return profile(selector, 'gemini', 'value', GEMINI_TEXT_MODELS.FLASH_LITE, 'Gemini 3.1 Flash-Lite');
+    return profile(selector, 'gemini', 'value', GEMINI_TEXT_MODELS.FLASH_LITE, GEMINI_DISPLAY_NAMES.value);
   }
 
   if (selector === GEMINI_TEXT_MODELS.FLASH_LITE || selector === 'gemini-2.5-flash-lite') {
-    return profile(selector, 'gemini', 'value', GEMINI_TEXT_MODELS.FLASH_LITE, 'Gemini 3.1 Flash-Lite');
+    return profile(selector, 'gemini', 'value', GEMINI_TEXT_MODELS.FLASH_LITE, GEMINI_DISPLAY_NAMES.value);
   }
   if (selector.startsWith('gemini-')) {
     // [2026-08-12] 제미나이도 다른 벤더처럼 3티어로 나눈다.
@@ -170,25 +183,23 @@ export function resolveTextModelProfile(value: unknown): TextModelProfile {
       : model === GEMINI_TEXT_MODELS.FLASH
         ? 'balanced'
         : 'value';
-    const displayName = tier === 'premium'
-      ? 'Gemini 3.5 Flash'
-      : tier === 'balanced'
-        ? 'Gemini 3.6 Flash'
-        : 'Gemini 3.1 Flash-Lite';
-    return profile(selector, 'gemini', tier, model, displayName);
+    return profile(selector, 'gemini', tier, model, GEMINI_DISPLAY_NAMES[tier]);
   }
 
-  if (selector === 'openai-gpt4o-mini' || selector === 'openai-gpt56-luna' || selector === OPENAI_TEXT_MODELS.LUNA) {
-    return profile(selector, 'openai', 'value', OPENAI_TEXT_MODELS.LUNA, 'GPT-5.6 Luna', 'medium');
+  // [2026-11-03] Retired explicit IDs (gpt-5.6-*, gpt-4.1*, claude-sonnet-5, ...) land on the same tier's new ID.
+  const key = migrateRetiredApiTextModelId(selector);
+
+  if (selector === 'openai-gpt4o-mini' || selector === 'openai-gpt56-luna' || key === OPENAI_TEXT_MODELS.LUNA) {
+    return profile(selector, 'openai', 'value', OPENAI_TEXT_MODELS.LUNA, 'GPT-6 Luna', 'medium');
   }
-  if (selector === 'openai-gpt41' || selector === 'openai-gpt56-terra' || selector === OPENAI_TEXT_MODELS.TERRA) {
-    return profile(selector, 'openai', 'balanced', OPENAI_TEXT_MODELS.TERRA, 'GPT-5.6 Terra', 'medium');
+  if (selector === 'openai-gpt41' || selector === 'openai-gpt56-terra' || key === OPENAI_TEXT_MODELS.TERRA) {
+    return profile(selector, 'openai', 'balanced', OPENAI_TEXT_MODELS.TERRA, 'GPT-6.1 Terra', 'medium');
   }
-  if (selector === 'openai-gpt4o' || selector === 'openai-gpt56-sol' || selector === OPENAI_TEXT_MODELS.SOL) {
-    return profile(selector, 'openai', 'premium', OPENAI_TEXT_MODELS.SOL, 'GPT-5.6 Sol', 'medium');
+  if (selector === 'openai-gpt4o' || selector === 'openai-gpt56-sol' || key === OPENAI_TEXT_MODELS.SOL) {
+    return profile(selector, 'openai', 'premium', OPENAI_TEXT_MODELS.SOL, 'GPT-6.1 Sol', 'medium');
   }
   if (selector === 'openai-gpt4o-search') {
-    return profile(selector, 'openai', 'balanced', OPENAI_TEXT_MODELS.TERRA, 'GPT-5.6 Terra + Web Search', 'medium');
+    return profile(selector, 'openai', 'balanced', OPENAI_TEXT_MODELS.TERRA, 'GPT-6.1 Terra + Web Search', 'medium');
   }
   if (selector.startsWith('gpt-')) {
     const explicitModel = selector;
@@ -199,14 +210,14 @@ export function resolveTextModelProfile(value: unknown): TextModelProfile {
     throw new Error(`UNSUPPORTED_TEXT_MODEL_SELECTOR: ${selector}`);
   }
 
-  if (selector === 'claude-haiku' || selector === CLAUDE_MODELS.HAIKU) {
-    return profile(selector, 'claude', 'value', CLAUDE_MODELS.HAIKU, 'Claude Haiku 4.5');
+  if (selector === 'claude-haiku' || key === CLAUDE_MODELS.HAIKU) {
+    return profile(selector, 'claude', 'value', CLAUDE_MODELS.HAIKU, 'Claude Haiku 5.5');
   }
-  if (selector === 'claude-opus' || selector === 'claude-fable' || selector === CLAUDE_MODELS.FABLE) {
-    return profile(selector, 'claude', 'premium', CLAUDE_MODELS.FABLE, 'Claude Fable 5');
+  if (selector === 'claude-opus' || selector === 'claude-fable' || key === CLAUDE_MODELS.FABLE) {
+    return profile(selector, 'claude', 'premium', CLAUDE_MODELS.FABLE, 'Claude Fable 5.1');
   }
-  if (selector === 'claude-sonnet' || selector === CLAUDE_MODELS.SONNET) {
-    return profile(selector, 'claude', 'balanced', CLAUDE_MODELS.SONNET, 'Claude Sonnet 5');
+  if (selector === 'claude-sonnet' || key === CLAUDE_MODELS.SONNET) {
+    return profile(selector, 'claude', 'balanced', CLAUDE_MODELS.SONNET, 'Claude Sonnet 5.5');
   }
   if (selector.startsWith('claude-')) {
     const tier: TextModelTier = /haiku/i.test(selector)
@@ -255,7 +266,7 @@ export function resolveTextModelProfileForVendor(
 export const VISION_MODELS = {
   GEMINI_FLASH_LITE: GEMINI_TEXT_MODELS.FLASH_LITE,
   GEMINI_FLASH: GEMINI_TEXT_MODELS.FLASH,
-  // [2026-08-11] 3.1 Pro Preview 제거 → Stable 인 3.5 Flash 가 그 자리를 맡는다
+  // [2026-08-11] 3.1 Pro Preview 제거 → Stable 인 직전 세대 Flash(FLASH_SUSTAINED)가 그 자리를 맡는다
   GEMINI_PRO: GEMINI_TEXT_MODELS.FLASH_SUSTAINED,
   CLAUDE_SONNET: CLAUDE_MODELS.SONNET,
   OPENAI_41: OPENAI_TEXT_MODELS.TERRA,
@@ -268,9 +279,11 @@ export const VISION_MODELS = {
  *   Perplexity는 vision 미지원 → Gemini Flash 폴백 (사용자 동의 필요)
  */
 export type TextGeneratorKey =
-  | 'gemini-3.1-flash-lite'
+  | 'gemini-3.5-flash-lite'
+  | 'gemini-3.8-flash'
   | 'gemini-3.6-flash'
-  | 'gemini-3.5-flash'
+  | 'gemini-3.1-flash-lite'  // retired - maps to the Flash-Lite slot
+  | 'gemini-3.5-flash'       // retired - maps to the premium slot
   | 'gemini-3.1-pro-preview'
   | 'gemini-2.5-flash-lite'
   | 'gemini-2.5-flash'
@@ -298,10 +311,13 @@ export interface VisionRouting {
 
 export function routeTextToVision(textKey: string): VisionRouting {
   switch (textKey) {
+    case GEMINI_TEXT_MODELS.FLASH_LITE:
     case 'gemini-3.1-flash-lite':
       return { provider: 'gemini-flash', model: VISION_MODELS.GEMINI_FLASH_LITE, vendor: 'gemini', fellBack: false };
     case 'gemini-2.5-flash-lite':
       return { provider: 'gemini-flash', model: VISION_MODELS.GEMINI_FLASH, vendor: 'gemini', fellBack: true, reason: 'Lite는 vision 없음 → Flash로 자동' };
+    case GEMINI_TEXT_MODELS.FLASH:
+    case GEMINI_TEXT_MODELS.FLASH_SUSTAINED:
     case 'gemini-3.5-flash':
     case 'gemini-2.5-flash':
       return { provider: 'gemini-flash', model: VISION_MODELS.GEMINI_FLASH, vendor: 'gemini', fellBack: false };

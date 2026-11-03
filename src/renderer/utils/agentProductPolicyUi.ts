@@ -26,7 +26,7 @@ const SAFE_CLAUDE_VERSION = new RegExp(`^Claude Code ${SAFE_SEMVER}$`, 'i');
 const SAFE_GEMINI_VERSION = new RegExp(`^Gemini CLI ${SAFE_SEMVER}$`, 'i');
 const SAFE_BARE_VERSION = new RegExp(`^v?${SAFE_SEMVER}$`, 'i');
 
-const DEFAULT_GEMINI_MODEL = 'gemini-3.1-flash-lite';
+const DEFAULT_GEMINI_MODEL = 'gemini-3.5-flash-lite';
 
 function modelToProvider(model: string): SelectableTextProvider {
   if (model === 'agent-codex' || model === 'agent-claude' || model === 'agent-gemini') return model;

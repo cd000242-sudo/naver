@@ -36,6 +36,10 @@ const UnifiedDOMCache = {
     const selectedModelTop = selectedTextModelRadio?.value;
     const AGENT_PROVIDERS = new Set(['agent-codex', 'agent-claude', 'agent-gemini']);
     const modelToProvider: Record<string, string> = {
+      'gemini-3.5-flash-lite': 'gemini',
+      'gemini-3.8-flash': 'gemini',
+      'gemini-3.6-flash': 'gemini',
+      // Retired Gemini IDs a not-yet-migrated saved value may still carry.
       'gemini-3.1-flash-lite': 'gemini',
       'gemini-3.5-flash': 'gemini',
       'perplexity-sonar': 'perplexity',

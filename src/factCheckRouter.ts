@@ -18,6 +18,8 @@
  */
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import type { SuspiciousItem } from './perplexityFactCheck.js';
+import { CLAUDE_MODELS, GEMINI_TEXT_MODELS, OPENAI_TEXT_MODELS } from './runtime/modelRegistry.js';
+import { isOpenAiReasoningModel } from './runtime/openaiReasoningFamily.js';
 
 export type FactCheckEngine =
   'off' | 'auto' | 'crawl' | 'naver' | 'gpt-claude' | 'perplexity' | 'gemini-grounding';
@@ -215,10 +217,13 @@ async function callOpenAiJson(prompt: string, apiKey: string): Promise<string> {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
     body: JSON.stringify({
-      model: 'gpt-4.1-mini',
+      model: OPENAI_TEXT_MODELS.GPT_41_MINI,
       messages: [{ role: 'user', content: prompt }],
       // max_completion_tokens: newer models reject max_tokens (2026-07 lesson).
       max_completion_tokens: 2048,
+      // [2026-11-03] gpt-4.1-mini → gpt-6-luna (a reasoning model): low effort keeps the budget for the answer
+      //   (same remedy as imageRelevanceScorer / visionJudges — otherwise the reply can come back empty).
+      ...(isOpenAiReasoningModel(OPENAI_TEXT_MODELS.GPT_41_MINI) ? { reasoning_effort: 'low' } : {}),
     }),
     signal: AbortSignal.timeout(90_000),
   });
@@ -236,7 +241,7 @@ async function callClaudeJson(prompt: string, apiKey: string): Promise<string> {
       'anthropic-version': '2023-06-01',
     },
     body: JSON.stringify({
-      model: 'claude-haiku-4-5-20251001',
+      model: CLAUDE_MODELS.HAIKU,
       max_tokens: 2048,
       messages: [{ role: 'user', content: prompt }],
     }),
@@ -287,17 +292,17 @@ async function callFactCheckModel(
   }
   const config = (input.config || {}) as Record<string, string | undefined>;
   if (config.openaiApiKey) {
-    const model = 'gpt-4.1-mini';
+    const model = OPENAI_TEXT_MODELS.GPT_41_MINI;
     notes.push(`[FactCheck] engine=openai:${model} (fallback chain)`);
     return { raw: await callOpenAiJson(prompt, config.openaiApiKey), model: `openai:${model}` };
   }
   if (config.geminiApiKey) {
-    const model = config.geminiModel || 'gemini-3.1-flash-lite';
+    const model = config.geminiModel || GEMINI_TEXT_MODELS.FLASH_LITE;
     notes.push(`[FactCheck] engine=gemini:${model} (fallback chain)`);
     return { raw: await callGeminiJson(prompt, config.geminiApiKey, model, false), model: `gemini:${model}` };
   }
   if (config.claudeApiKey) {
-    const model = 'claude-haiku-4-5-20251001';
+    const model = CLAUDE_MODELS.HAIKU;
     notes.push(`[FactCheck] engine=claude:${model} (fallback chain)`);
     return { raw: await callClaudeJson(prompt, config.claudeApiKey), model: `claude:${model}` };
   }
@@ -377,7 +382,7 @@ export async function runFactCheck(
         notes.push('Gemini API 키 없음 — 그라운딩 팩트체크 건너뜀');
         return passthrough('gemini-grounding');
       }
-      const model = config.geminiModel || 'gemini-3.1-flash-lite';
+      const model = config.geminiModel || GEMINI_TEXT_MODELS.FLASH_LITE;
       const raw = await callGeminiJson(buildPrompt(input.bodyPlain, input.topic, undefined), config.geminiApiKey, model, true);
       const issues = parseFactIssues(raw);
       return { corrected: input.bodyPlain, issues, engineUsed: 'gemini-grounding', model: `gemini:${model}`, notes };
@@ -392,13 +397,13 @@ export async function runFactCheck(
         raw = await input.caller.callText(prompt, 2048);
         model = input.caller.engine;
       } else if (config.openaiApiKey) {
-        notes.push('[FactCheck] engine=openai:gpt-4.1-mini (fallback chain)');
+        notes.push(`[FactCheck] engine=openai:${OPENAI_TEXT_MODELS.GPT_41_MINI} (fallback chain)`);
         raw = await callOpenAiJson(prompt, config.openaiApiKey);
-        model = 'openai:gpt-4.1-mini';
+        model = `openai:${OPENAI_TEXT_MODELS.GPT_41_MINI}`;
       } else if (config.claudeApiKey) {
-        notes.push('[FactCheck] engine=claude:claude-haiku-4-5-20251001 (fallback chain)');
+        notes.push(`[FactCheck] engine=claude:${CLAUDE_MODELS.HAIKU} (fallback chain)`);
         raw = await callClaudeJson(prompt, config.claudeApiKey);
-        model = 'claude:claude-haiku-4-5-20251001';
+        model = `claude:${CLAUDE_MODELS.HAIKU}`;
       } else {
         notes.push('GPT/Claude 키 없음 — 건너뜀');
         return passthrough('gpt-claude');

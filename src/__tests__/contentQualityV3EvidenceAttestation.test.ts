@@ -265,7 +265,8 @@ describe('Content Quality V3 evidence attestation', () => {
         // [2026-10-10 3차] 덕트테이프 기본 모델 Sunburst(옛 1/1.5/2·빈 값 → Sunburst, 명시 Flare 유지)로 재계산
         // [2026-10-20] 나노바나나2 = Nano Banana 2.1(gemini-nano-banana-2.1) + 직전 ID NANO_BANANA_2_PREV 로 재계산
         // [2026-11-03] 지원 종료 엔진 정리 — modelRegistry.normalizeImageProvider 의 deepinfra 별칭 접기 제거로 재계산
-        '24ff98176f8aec1e7d113ddc7b129a8ea4aff69d4365167ee474b19d7110d273',
+        // [2026-11-03] API 글 모델 최신화(gpt-6.x · Claude 5.5/5.1 · Gemini 3.8/3.5 Lite, modelRegistry 표시이름·해석) 로 재계산
+        '092b4ddaee0972e3391dc8514d8150604e1f3639d388b55277f2cb97eeedb086',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

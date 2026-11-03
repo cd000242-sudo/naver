@@ -92,17 +92,17 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
     const registry = read('runtime/modelRegistry.ts');
     const textModelConstants = read('runtime/textModelConstants.ts');
 
-    it("'openai-gpt41' maps to GPT-5.6 Terra", () => {
-      expect(textModelConstants).toMatch(/TERRA:\s*'gpt-5\.6-terra'/);
-      expect(registry).toMatch(/OPENAI_TEXT_MODELS,\s*\n\}\s*from '\.\/textModelConstants\.js';/);
+    it("'openai-gpt41' maps to GPT-6.1 Terra", () => {
+      expect(textModelConstants).toMatch(/TERRA:\s*'gpt-6\.1-terra'/);
+      expect(registry).toMatch(/OPENAI_TEXT_MODELS,[\s\S]{0,120}\}\s*from '\.\/textModelConstants\.js';/);
       expect(content).toMatch(/resolveTextModelProfileForVendor\(\s*uiSelectedModel/);
     });
 
-    it("'openai-gpt4o-mini' maps to GPT-5.6 Luna", () => {
+    it("'openai-gpt4o-mini' maps to GPT-6 Luna", () => {
       expect(registry).toMatch(/'openai-gpt4o-mini'[\s\S]{0,300}OPENAI_TEXT_MODELS\.LUNA/);
     });
 
-    it("'openai-gpt4o' maps to GPT-5.6 Sol", () => {
+    it("'openai-gpt4o' maps to GPT-6.1 Sol", () => {
       expect(registry).toMatch(/'openai-gpt4o'[\s\S]{0,300}OPENAI_TEXT_MODELS\.SOL/);
       expect(content).toMatch(/reasoning_effort/);
     });
@@ -282,8 +282,8 @@ describe('Live content engine diagnostics and secret safety', () => {
   it('content engine live smoke test runs providers sequentially with the current three-tier mappings', () => {
     expect(engineScript).not.toMatch(/Promise\.all\(runners/);
     expect(engineScript).toMatch(/for \(const \[index, \[provider, fn\]\] of enabledRunners\.entries\(\)\)/);
-    expect(engineScript).toMatch(/openai:[\s\S]{0,180}?value:\s*'gpt-5\.6-luna'[\s\S]{0,180}?balanced:\s*'gpt-5\.6-terra'[\s\S]{0,180}?premium:\s*'gpt-5\.6-sol'/);
-    expect(engineScript).toMatch(/claude:[\s\S]{0,220}?value:\s*'claude-haiku-4-5-20251001'[\s\S]{0,220}?balanced:\s*'claude-sonnet-5'[\s\S]{0,220}?premium:\s*'claude-fable-5'/);
+    expect(engineScript).toMatch(/openai:[\s\S]{0,180}?value:\s*'gpt-6-luna'[\s\S]{0,180}?balanced:\s*'gpt-6\.1-terra'[\s\S]{0,180}?premium:\s*'gpt-6\.1-sol'/);
+    expect(engineScript).toMatch(/claude:[\s\S]{0,220}?value:\s*'claude-haiku-5-5'[\s\S]{0,220}?balanced:\s*'claude-sonnet-5-5'[\s\S]{0,220}?premium:\s*'claude-fable-5-1'/);
     expect(engineScript).toMatch(/selected === 'openai-gpt4o-mini'[\s\S]{0,100}?CURRENT_MODELS\.openai\.value/);
     expect(engineScript).toMatch(/function\s+isMaskedSecretValue/);
   });

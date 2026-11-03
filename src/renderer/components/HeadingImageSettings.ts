@@ -11,6 +11,7 @@ import { bindDropshotLogin, refreshDropshotLoginStatus } from '../modules/dropsh
 import { gsRowHtml, gsApplyEngineToRow } from '../modules/gensparkLoginUi.js';
 // [2026-11-03] 관련 사진 찾기는 저작권 안내에 동의해야 저장된다
 import { collectEngineAllowPick } from '../modules/imageCollectEngineConsent.js';
+import { headingTextSettingPaint } from '../modules/headingImageTextSetting.js';
 
 /** 연동 상태 줄은 계정 이메일·서버 메시지를 그대로 넣으므로 이스케이프한다. */
 function escapeHtmlForStatus(value: string): string {
@@ -835,6 +836,13 @@ export function createHeadingImageModal(): void {
               </div>
             </div>
             <div class="premium-checkbox">
+              <input type="checkbox" id="heading-image-text-include" />
+              <div>
+                <div class="checkbox-label">🔤 소제목 텍스트 포함하기</div>
+                <div class="checkbox-desc">소제목 이미지에 소제목 글자를 그대로 넣습니다. 한글을 직접 그리는 엔진만(관련 사진 찾기·내 폴더 제외)</div>
+              </div>
+            </div>
+            <div class="premium-checkbox">
               <input type="checkbox" id="text-only-publish" />
               <div>
                 <div class="checkbox-label">📄 이미지 없이 글만 발행</div>
@@ -961,6 +969,23 @@ export function createHeadingImageModal(): void {
       <div style="max-width: 360px; width: 90%; padding: 20px; border-radius: 16px; background: white; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
         <h4 style="margin: 0 0 16px 0; font-size: 16px; font-weight: 700; color: #1a1a2e;">🎨 AI 이미지 생성 엔진</h4>
         <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;">
+          <!-- [2026-10-10] 젠스파크 (모델 선택 · 로그인 필요) -->
+          <label class="source-option" data-value="genspark" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #8b5cf6; background: linear-gradient(135deg, #ede9fe, #ddd6fe); text-align: center; transition: all 0.2s; position: relative;">
+            <div style="font-size: 1.5rem;">✨</div>
+            <div style="font-size: 12px; font-weight: 600; color: #5b21b6;">젠스파크</div>
+            <div style="font-size: 10px; color: #6d28d9;">모델 선택 · 로그인 필요</div>
+          </label>
+          <!-- [2026-11-03] Codex 구독 이미지: ChatGPT 구독의 이미지 생성 도구 (API 과금 없음, 구독 한도 사용) -->
+          <label class="source-option" data-value="codex-image" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #f3f4f6, #e5e7eb); text-align: center; transition: all 0.2s; position: relative;">
+            <div style="font-size: 1.5rem;">🐙</div>
+            <div style="font-size: 12px; font-weight: 600; color: #111827;">Codex 구독 이미지</div>
+            <div style="font-size: 10px; color: #4b5563;">GPT 이미지 · 별도 비용 없음</div>
+          </label>
+          <!-- [2026-11-03] 관련 사진 찾기: 생성이 아니라 뉴스·기사 실사진 수집. 고르면 저작권 안내 동의가 먼저 뜬다 -->
+          <label class="source-option" data-value="collect-photos" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #ecfdf5, #d1fae5); text-align: center; transition: all 0.2s; position: relative;">
+            <div style="font-size: 1.5rem;">📷</div>
+            <div style="font-size: 12px; font-weight: 600; color: #065f46;">관련 사진 찾기</div>
+            <div style="font-size: 10px; color: #047857;">뉴스·기사 사진 · 무료 · 없으면 빈 칸</div>
           <label class="source-option" data-value="nano-banana-2" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #fef3c7, #fde68a); text-align: center; transition: all 0.2s;">
             <div style="font-size: 1.5rem;">🍌</div>
             <div style="font-size: 12px; font-weight: 600; color: #92400e;">나노바나나2 ★</div>
@@ -983,23 +1008,6 @@ export function createHeadingImageModal(): void {
             <div style="font-size: 12px; font-weight: 600; color: #92400e;">리더스 나노바나나 무제한</div>
             <div style="font-size: 10px; color: #a16207;">구독자 무제한 · 추가비용 0원 · 로그인 필요</div>
           </label>
-          <!-- [2026-10-10] 젠스파크 (모델 선택 · 로그인 필요) -->
-          <label class="source-option" data-value="genspark" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #8b5cf6; background: linear-gradient(135deg, #ede9fe, #ddd6fe); text-align: center; transition: all 0.2s; position: relative;">
-            <div style="font-size: 1.5rem;">✨</div>
-            <div style="font-size: 12px; font-weight: 600; color: #5b21b6;">젠스파크</div>
-            <div style="font-size: 10px; color: #6d28d9;">모델 선택 · 로그인 필요</div>
-          </label>
-          <!-- [2026-11-03] Codex 구독 이미지: ChatGPT 구독의 이미지 생성 도구 (API 과금 없음, 구독 한도 사용) -->
-          <label class="source-option" data-value="codex-image" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #f3f4f6, #e5e7eb); text-align: center; transition: all 0.2s; position: relative;">
-            <div style="font-size: 1.5rem;">🐙</div>
-            <div style="font-size: 12px; font-weight: 600; color: #111827;">Codex 구독 이미지</div>
-            <div style="font-size: 10px; color: #4b5563;">GPT 이미지 · 별도 비용 없음</div>
-          </label>
-          <!-- [2026-11-03] 관련 사진 찾기: 생성이 아니라 뉴스·기사 실사진 수집. 고르면 저작권 안내 동의가 먼저 뜬다 -->
-          <label class="source-option" data-value="collect-photos" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #ecfdf5, #d1fae5); text-align: center; transition: all 0.2s; position: relative;">
-            <div style="font-size: 1.5rem;">📷</div>
-            <div style="font-size: 12px; font-weight: 600; color: #065f46;">관련 사진 찾기</div>
-            <div style="font-size: 10px; color: #047857;">뉴스·기사 사진 · 무료 · 없으면 빈 칸</div>
           </label>
           <label class="source-option" data-value="local-folder" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #e0e7ff, #c7d2fe); text-align: center; transition: all 0.2s; position: relative;">
             <div style="font-size: 1.5rem;">📂</div>
@@ -2701,6 +2709,8 @@ export function openHeadingImageModal(): void {
   const modal = document.getElementById('heading-image-modal');
   if (modal) {
     modal.style.display = 'flex';
+    // [2026-11-03] 소제목 텍스트 포함 — the modal is built on first open, so it is painted from the saved value here.
+    headingTextSettingPaint();
 
     // ✅ 버튼 표시 값 초기화 (통합 상수 사용)
     const currentMode = getHeadingImageMode();

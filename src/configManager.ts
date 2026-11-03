@@ -30,7 +30,7 @@ export interface AppConfig {
   geminiApiKey?: string;
   geminiApiKeys?: string[]; // ✅ [2026-02-13] 다중 Gemini API 키 (429 할당량 자동 로테이션)
   geminiUseFreeQuotaBeforePaid?: boolean;
-  geminiModel?: 'gemini-3.1-flash-lite' | 'gemini-3.6-flash' | 'gemini-3.5-flash' | string;
+  geminiModel?: 'gemini-3.5-flash-lite' | 'gemini-3.8-flash' | 'gemini-3.6-flash' | string;
   openaiApiKey?: string;
   claudeApiKey?: string;
   perplexityApiKey?: string; // ✅ [2026-01-25] Perplexity API 키 추가
@@ -212,7 +212,7 @@ export interface AppConfig {
   naverQualityLoop?: boolean;
 
   // ✅ Gemini 텍스트 생성 주 모델 선택
-  primaryGeminiTextModel?: 'gemini-3.6-flash' | 'gemini-3.5-flash' | 'gemini-3.1-flash-lite' | string;
+  primaryGeminiTextModel?: 'gemini-3.8-flash' | 'gemini-3.6-flash' | 'gemini-3.5-flash-lite' | string;
 
   // ✅ [v1.4.3] Google Search Grounding 옵션 (기본 OFF — 호출당 $0.035 추가 비용 방지)
   enableSearchGrounding?: boolean;

@@ -16,8 +16,9 @@ const genAI = new GoogleGenerativeAI(apiKey);
 
 // 테스트할 모델 목록 (사용자 우려 모델 집중 테스트)
 const candidateModels = [
-    'gemini-3.1-flash-lite',
-    'gemini-3.5-flash',
+    'gemini-3.5-flash-lite',
+    'gemini-3.8-flash',
+    'gemini-3.6-flash',
     'gemini-3.1-pro-preview',
 ];
 

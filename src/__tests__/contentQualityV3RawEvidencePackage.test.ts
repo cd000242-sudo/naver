@@ -20,7 +20,7 @@ function rawCall(
     reason: 'INITIAL',
     outcome: 'SUCCESS',
     provider: 'gemini',
-    model: 'gemini-3.1-flash-lite',
+    model: 'gemini-3.5-flash-lite',
     requestBytes: bytes(`request:${label}`),
     responseBytes: bytes(`response:${label}`),
     inputTokens: 100,

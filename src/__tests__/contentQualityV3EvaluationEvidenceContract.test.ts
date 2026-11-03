@@ -59,7 +59,7 @@ describe('Content Quality V3 evaluation evidence contract', () => {
 
     expect(Buffer.from(second).equals(Buffer.from(first))).toBe(true);
     expect(envelope).toMatchObject({
-      model: 'gemini-3.1-flash-lite',
+      model: 'gemini-3.5-flash-lite',
       useGrounding: false,
     });
     expect(JSON.stringify(envelope)).not.toContain('temperature');

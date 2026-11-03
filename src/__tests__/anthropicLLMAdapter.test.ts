@@ -38,13 +38,13 @@ describe('createAnthropicLLMAdapter — 정상 흐름', () => {
     const api = createMock(makeResponse('hello'));
     const adapter = createAnthropicLLMAdapter({ messagesAPI: api });
     expect(adapter.type).toBe('anthropic');
-    expect(adapter.defaultModel).toBe('claude-fable-5');
+    expect(adapter.defaultModel).toBe('claude-fable-5-1');
 
     const r = await adapter.complete('test prompt', { temperature: 0.7 });
     expect(r).toBe('hello');
     expect(api.createMock).toHaveBeenCalledTimes(1);
     const params = api.createMock.mock.calls[0][0];
-    expect(params.model).toBe('claude-fable-5');
+    expect(params.model).toBe('claude-fable-5-1');
     expect(params.thinking).toEqual({ type: 'adaptive' });
     // Fable 5 uses always-on adaptive thinking, so sampling is omitted.
     expect(params.temperature).toBeUndefined();

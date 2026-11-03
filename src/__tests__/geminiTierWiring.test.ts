@@ -50,10 +50,10 @@ describe('제미나이 3티어가 화면에서 선택 가능하다', () => {
 });
 
 describe('고른 모델이 그 이름 그대로 표시된다', () => {
-  it('3.6 을 고르면 3.6 으로 보인다 — 이 사고의 핵심', () => {
+  it('3.8 을 고르면 3.8 으로 보인다 — 이 사고의 핵심', () => {
     const profile = resolveTextModelProfile(GEMINI_TEXT_MODELS.FLASH);
-    expect(profile.model).toBe('gemini-3.6-flash');
-    expect(profile.displayName).toBe('Gemini 3.6 Flash');
+    expect(profile.model).toBe('gemini-3.8-flash');
+    expect(profile.displayName).toBe('Gemini 3.8 Flash');
     expect(profile.tier).toBe('balanced');
   });
 
@@ -86,12 +86,12 @@ describe('화면에 적힌 단가가 공식 가격표와 일치한다', () => {
     expect(modelCard('gemini-3.6-flash')).toContain('입력 $1.50 · 출력 $7.50');
   });
 
-  it('3.5 는 입력 $1.50 · 출력 $9.00 — 3.6 보다 비싸다', () => {
-    expect(modelCard('gemini-3.5-flash')).toContain('입력 $1.50 · 출력 $9.00');
+  it('3.8 은 입력 $1.50 · 출력 $7.50 (단가 미확인 — 3.6 단가를 그대로 표시)', () => {
+    expect(modelCard('gemini-3.8-flash')).toContain('입력 $1.50 · 출력 $7.50');
   });
 
-  it('가성비 모델이 가장 싸다', () => {
-    expect(modelCard('gemini-3.1-flash-lite')).toContain('입력 $0.25 · 출력 $1.50');
+  it('가성비 모델(3.5 Flash-Lite)은 입력 $0.30 · 출력 $2.50', () => {
+    expect(modelCard('gemini-3.5-flash-lite')).toContain('입력 $0.30 · 출력 $2.50');
   });
 
   it('폐기된 옛 단가 표기가 남아있지 않다', () => {

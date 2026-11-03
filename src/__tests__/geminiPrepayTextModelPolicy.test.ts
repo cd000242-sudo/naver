@@ -43,9 +43,9 @@ describe('Gemini prepaid/value text-model policy', () => {
     expect(html).not.toMatch(/value=["']gemini-3\.1-pro-preview["']/);
     // [2026-08-12] 3티어로 라벨이 바뀌었다. 문구가 아니라 값으로 검증한다 —
     //   문구를 박아두면 라벨만 다듬어도 회귀로 오인된다.
-    expect(html).toContain('value="gemini-3.1-flash-lite"');
+    expect(html).toContain('value="gemini-3.5-flash-lite"');
+    expect(html).toContain('value="gemini-3.8-flash"');
     expect(html).toContain('value="gemini-3.6-flash"');
-    expect(html).toContain('value="gemini-3.5-flash"');
   });
 
   it('reports the current prepaid Flash price and never labels it free', () => {

@@ -9,7 +9,7 @@ import { describeAgentModelLine } from '../../agentCli/agentModelDefaults.js';
 import { toastManager } from '../utils/uiManagers.js';
 import { normalizeRetiredNanoSlotModel } from '../../runtime/imageProviderMigration.js';
 import { rememberPlan } from '../utils/geminiPlanMemo.js';
-import { normalizeGeminiTextModelId } from '../../runtime/modelRegistry.js';
+import { GEMINI_TEXT_MODELS, normalizeGeminiTextModelId } from '../../runtime/modelRegistry.js';
 import {
   createAgentStatusRefreshCoordinator,
   type AgentStatusProvider,
@@ -860,7 +860,7 @@ export async function initPriceInfoModal(): Promise<void> {
       : true;
     console.log('[Settings] 배포 모드:', isPackaged);
 
-    const rawLoadedTextModel = config.primaryGeminiTextModel || 'gemini-3.1-flash-lite';
+    const rawLoadedTextModel = config.primaryGeminiTextModel || GEMINI_TEXT_MODELS.FLASH_LITE;
     const normalizedLoadedConfig = String(rawLoadedTextModel).startsWith('gemini-')
       ? { ...config, primaryGeminiTextModel: normalizeGeminiTextModelId(rawLoadedTextModel) }
       : config;
@@ -961,14 +961,14 @@ export async function initPriceInfoModal(): Promise<void> {
     // ✅ Gemini 모델 선택 로드
     const geminiModelSelect = document.getElementById('settings-gemini-model') as HTMLSelectElement;
     if (geminiModelSelect) {
-      geminiModelSelect.value = normalizeGeminiTextModelId(config.geminiModel || 'gemini-3.1-flash-lite');
+      geminiModelSelect.value = normalizeGeminiTextModelId(config.geminiModel || GEMINI_TEXT_MODELS.FLASH_LITE);
       console.log('[Settings] Gemini 모델 로드됨:', geminiModelSelect.value);
     }
 
     // ✅ Gemini 텍스트 주력 모델 라디오 버튼 로드
     // ✅ [v2.10.221] undefined여도 기본값 'gemini-2.5-flash'로 항상 라디오/라벨 복원
     {
-      const rawActiveTextModel = config.primaryGeminiTextModel || 'gemini-3.1-flash-lite';
+      const rawActiveTextModel = config.primaryGeminiTextModel || GEMINI_TEXT_MODELS.FLASH_LITE;
       const activeTextModel = String(rawActiveTextModel).startsWith('gemini-')
         ? normalizeGeminiTextModelId(rawActiveTextModel)
         : rawActiveTextModel;
@@ -992,17 +992,20 @@ export async function initPriceInfoModal(): Promise<void> {
       if (navStatusEl) {
         // [v1.4.32] 가격 표시 추가 — 사용자가 어떤 비용을 쓰는지 한눈에
         const modelNames: Record<string, string> = {
-          'gemini-3.1-flash-lite': '💰 Gemini 3.1 Flash-Lite (무료 · 선불 추천) ★ 기본',
-          // [2026-08-11] 3.6 Flash 는 3.5 보다 새로우면서 출력이 싸다 ($7.50 vs $9.00)
-          'gemini-3.6-flash': '⚖️ Gemini 3.6 Flash (선불 고품질 · 최신)',
-          'gemini-3.5-flash': '🧠 Gemini 3.5 Flash (선불 · 긴 글 지속 추론)',
+          'gemini-3.5-flash-lite': '💰 Gemini 3.5 Flash-Lite (무료 · 선불 추천) ★ 기본',
+          // [2026-11-03] 균형 = 3.8 Flash(최신), 프리미엄 = 3.6 Flash(직전 세대, 긴 글 지속 추론)
+          'gemini-3.8-flash': '⚖️ Gemini 3.8 Flash (선불 고품질 · 최신)',
+          'gemini-3.6-flash': '🧠 Gemini 3.6 Flash (선불 · 긴 글 지속 추론)',
+          // Retired IDs: a not-yet-migrated saved value still reads right.
+          'gemini-3.1-flash-lite': '💰 Gemini 3.5 Flash-Lite (무료 · 선불 추천) ★ 기본',
+          'gemini-3.5-flash': '🧠 Gemini 3.6 Flash (선불 · 긴 글 지속 추론)',
           'perplexity-sonar': '🔮 Perplexity Sonar (~₩32/글)',
-          'openai-gpt4o-mini': '🧠 GPT-5.6 Luna (가성비)',
-          'openai-gpt41': '⚖️ GPT-5.6 Terra (균형)',
-          'openai-gpt4o': '🚀 GPT-5.6 Sol (프리미엄)',
-          'openai-gpt4o-search': '🔎 GPT-5.6 웹 검색 (Responses API)',
-          'claude-sonnet': '📜 Claude Sonnet 5 (균형)',
-          'claude-opus': '👑 Claude Fable 5 (프리미엄)',
+          'openai-gpt4o-mini': '🧠 GPT-6 Luna (가성비)',
+          'openai-gpt41': '⚖️ GPT-6.1 Terra (균형)',
+          'openai-gpt4o': '🚀 GPT-6.1 Sol (프리미엄)',
+          'openai-gpt4o-search': '🔎 GPT-6.1 웹 검색 (Responses API)',
+          'claude-sonnet': '📜 Claude Sonnet 5.5 (균형)',
+          'claude-opus': '👑 Claude Fable 5.1 (프리미엄)',
           'agent-codex': '🤖 에이전트 (Codex · 별도 API 키 불필요)',
           'agent-claude': '🤖 에이전트 (Claude Code · 별도 API 키 불필요)',
           'agent-gemini': '🚀 Gemini 에이전트 (Antigravity · 별도 API 키 불필요)',
@@ -1033,7 +1036,7 @@ export async function initPriceInfoModal(): Promise<void> {
     try {
       const unifiedGeminiModel = document.getElementById('unified-gemini-model') as HTMLSelectElement | null;
       if (unifiedGeminiModel) {
-        unifiedGeminiModel.value = normalizeGeminiTextModelId(config.geminiModel || 'gemini-3.1-flash-lite');
+        unifiedGeminiModel.value = normalizeGeminiTextModelId(config.geminiModel || GEMINI_TEXT_MODELS.FLASH_LITE);
       }
     } catch (e) {
       console.warn('[priceInfoModal] catch ignored:', e);
@@ -1593,7 +1596,7 @@ export async function initPriceInfoModal(): Promise<void> {
           try {
             const unifiedGeminiModel = document.getElementById('unified-gemini-model') as HTMLSelectElement | null;
             if (unifiedGeminiModel) {
-              unifiedGeminiModel.value = normalizeGeminiTextModelId(config.geminiModel || 'gemini-3.1-flash-lite');
+              unifiedGeminiModel.value = normalizeGeminiTextModelId(config.geminiModel || GEMINI_TEXT_MODELS.FLASH_LITE);
             }
             // ✅ [2026-02-22 FIX] 저장 후 unified-generator 즉시 동기화
             const unifiedGeneratorEl = document.getElementById('unified-generator') as HTMLInputElement | null;
@@ -1605,15 +1608,17 @@ export async function initPriceInfoModal(): Promise<void> {
             const statusEl = document.getElementById('nav-text-engine-status');
             if (statusEl && config.primaryGeminiTextModel) {
               const names: Record<string, string> = {
+                'gemini-3.8-flash': 'Gemini 3.8 Flash',
                 'gemini-3.6-flash': 'Gemini 3.6 Flash',
-                'gemini-3.5-flash': 'Gemini 3.5 Flash',
-                'gemini-3.1-flash-lite': 'Gemini 3.1 Flash-Lite',
+                'gemini-3.5-flash-lite': 'Gemini 3.5 Flash-Lite',
+                'gemini-3.5-flash': 'Gemini 3.6 Flash',
+                'gemini-3.1-flash-lite': 'Gemini 3.5 Flash-Lite',
                 'perplexity-sonar': '🔮 Perplexity AI',
-                'openai-gpt4o-mini': '🧠 GPT-5.6 Luna',
-                'openai-gpt41': '⚖️ GPT-5.6 Terra',
-                'openai-gpt4o': '🚀 GPT-5.6 Sol',
-                'claude-sonnet': '📜 Claude Sonnet 5',
-                'claude-opus': '👑 Claude Fable 5',
+                'openai-gpt4o-mini': '🧠 GPT-6 Luna',
+                'openai-gpt41': '⚖️ GPT-6.1 Terra',
+                'openai-gpt4o': '🚀 GPT-6.1 Sol',
+                'claude-sonnet': '📜 Claude Sonnet 5.5',
+                'claude-opus': '👑 Claude Fable 5.1',
                 'agent-codex': '🤖 에이전트 (Codex 구독)',
                 'agent-claude': '🤖 에이전트 (Claude Code 구독)',
                 'agent-gemini': '🚀 Gemini 에이전트 (Antigravity 구독)',
