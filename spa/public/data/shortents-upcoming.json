@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T06:35:56.356Z",
+ "builtAt": "2026-11-03T06:45:59.719Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,116 +8,91 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "금융권 해킹 CEO 책임",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 56,
+   "articles90": 61,
    "recent20": 13,
-   "press": 54,
-   "firstArticleAt": "2026-11-03T05:10:00.000Z",
+   "press": 59,
+   "firstArticleAt": "2026-11-03T05:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이찬진 금감원장 \"해킹 사고 발생 시 CEO 책임…매출 3% 과징금 추진\"",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-03T06:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000548336?sid=101"
+     "title": "이찬진 “대형 금융사 해킹 사고, CEO까지 책임 묻겠다”",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-03T06:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003480380?sid=101"
     },
     {
-     "title": "이찬진, 금융사 '해킹' CEO 책임 강조⋯'매출 3%' 과징금 추진",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-03T06:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001071806?sid=101"
+     "title": "이찬진 \"해킹사고 '매출액 3%' 과징금 추진…CEO 책임 묻는다\"",
+     "press": "dealsite.co.kr",
+     "publishedAt": "2026-11-03T06:42:00.000Z",
+     "link": "https://dealsite.co.kr/articles/171968"
     },
     {
-     "title": "이찬진 \"해킹 금융사 CEO 책임 묻는다\"…매출액 3% 과징금 추진",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-03T06:32:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=879371"
+     "title": "이찬진 금감원장 \"종투사·보험사도 해킹사고 발생시 CEO 책임 물을 것\"",
+     "press": "taxtimes.co.kr",
+     "publishedAt": "2026-11-03T06:40:00.000Z",
+     "link": "https://www.taxtimes.co.kr/news/article.html?no=277590"
     }
    ]
   },
   {
-   "keyword": "미국 중간선거",
+   "keyword": "10월 물가 2.8% 상승",
    "sources": [
-    "daum"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 53,
-   "recent20": 14,
-   "press": 40,
-   "firstArticleAt": "2026-11-03T05:10:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "美 법무부, 중간선거 전날 선거범죄 63명 기소 사례 공개",
-     "press": "news2day.co.kr",
-     "publishedAt": "2026-11-03T06:34:00.000Z",
-     "link": "https://www.news2day.co.kr/article/20261103500233"
-    },
-    {
-     "title": "백악관 벌써 중간선거 패색…트럼프 국정 '의회 패싱' 몰두",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T06:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016419005?sid=104"
-    },
-    {
-     "title": "조지아·노스캐롤라이나서 '블루웨이브' 단서…美 중간선거 결과 언제쯤",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-03T06:30:00.000Z",
-     "link": "https://www.ajunews.com/view/20261103151253361"
-    }
-   ]
-  },
-  {
-   "keyword": "카카오페이 영업익 증가",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 35,
-   "recent20": 2,
-   "press": 33,
-   "firstArticleAt": "2026-11-03T05:11:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "카카오페이, 3분기 영업익 325억…전년比 105% 늘어",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T06:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009267479?sid=105"
-    },
-    {
-     "title": "카카오페이, 3분기 매출 3021억원…영업익 105% 증가",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-03T06:16:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5079206"
-    },
-    {
-     "title": "카카오페이, 결제·보험 성장에 3분기 영업익 전년비 105% 증가",
-     "press": "newspost.kr",
-     "publishedAt": "2026-11-03T06:08:00.000Z",
-     "link": "https://www.newspost.kr/news/articleView.html?idxno=227006"
-    }
-   ]
-  },
-  {
-   "keyword": "교육혁신선도지역 지정",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 57,
-   "recent20": 13,
+   "articles90": 38,
+   "recent20": 12,
    "press": 28,
-   "firstArticleAt": "2026-11-03T05:26:00.000Z",
+   "firstArticleAt": "2026-11-03T05:16:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "가공식품 물가 2.9% 상승…먹거리 부담 지속",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T06:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009267535?sid=101"
+    },
+    {
+     "title": "즉석식품 12.4% 상승…가공식품 물가 오름세",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T06:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009267534?sid=101"
+    },
+    {
+     "title": "즉석식품 가격 12.4% 상승…가공식품 물가 오름세",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T06:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009267537?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "교육혁신선도지역 지정 결과",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 49,
+   "recent20": 5,
+   "press": 22,
+   "firstArticleAt": "2026-11-03T05:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'교육전용선' 띄우고 고학년은 거점 합반…'교육혁신선도지역' 43곳 시동",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-03T06:36:00.000Z",
+     "link": "https://www.ajunews.com/view/20261103152943421"
+    },
     {
      "title": "\"연 최대 40억 국비 푼다\"…교육부, '교육혁신선도지역' 43곳 확정",
      "press": "youthdaily.co.kr",
@@ -129,77 +104,6 @@
      "press": "kbmaeil.com",
      "publishedAt": "2026-11-03T06:32:00.000Z",
      "link": "https://www.kbmaeil.com/article/20261103500611"
-    },
-    {
-     "title": "전남광주 교육혁신 선도지역 8곳 선정 '전국 최다'",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T06:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016419001?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "대통령 순방단 개인정보 유출",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 29,
-   "recent20": 9,
-   "press": 26,
-   "firstArticleAt": "2026-11-03T05:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "靑, 대통령 순방단 개인정보 유출에 긴급회의..\"중대 사안\"",
-     "press": "enewstoday.co.kr",
-     "publishedAt": "2026-11-03T06:34:00.000Z",
-     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2487855"
-    },
-    {
-     "title": "[이슈체크] '공군 1호기' 탑승자 개인정보 유출 파문… 5개월 방치된 '경...",
-     "press": "sisunnews.co.kr",
-     "publishedAt": "2026-11-03T06:34:00.000Z",
-     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=248984"
-    },
-    {
-     "title": "이 대통령, '사이버 보안 차르' 검토 지시…공군 1호기 168명 개인정보 ...",
-     "press": "dailysecu.com",
-     "publishedAt": "2026-11-03T06:32:00.000Z",
-     "link": "https://www.dailysecu.com/news/articleView.html?idxno=209298"
-    }
-   ]
-  },
-  {
-   "keyword": "10월 물가 2.8% 상승",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 37,
-   "recent20": 4,
-   "press": 26,
-   "firstArticleAt": "2026-11-03T05:07:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "가공식품·기름값 상승에 10월 물가 2.8% 상승…김장물가도 변수",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-03T06:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003562498?sid=101"
-    },
-    {
-     "title": "10월 소비자물가 2.8% 상승…생활물가는 오름폭 확대",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-03T06:28:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=399889"
-    },
-    {
-     "title": "전남광주 농축수산물 가격 하락…공업제품 영향에 물가 2.8%↑",
-     "press": "aitimes.com",
-     "publishedAt": "2026-11-03T06:24:00.000Z",
-     "link": "https://www.aitimes.com/news/articleView.html?idxno=216950"
     }
    ]
   },
@@ -208,38 +112,37 @@
    "sources": [
     "google"
    ],
-   "articles90": 9,
-   "recent20": 9,
-   "press": 9,
-   "firstArticleAt": "2026-11-03T06:24:00.000Z",
+   "articles90": 14,
+   "recent20": 14,
+   "press": 12,
+   "firstArticleAt": "2026-11-03T06:28:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "세종충남대병원 최규태 교수, 진단검사 업무자동화 공모전 최우수상",
-     "press": "ccreview.co.kr",
-     "publishedAt": "2026-11-03T06:34:00.000Z",
-     "link": "https://www.ccreview.co.kr/news/articleView.html?idxno=361618"
+     "title": "글로벌광주방송 제7대 사장에 김영기 전 전남대 교수 취임",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-03T06:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002464072?sid=102"
     },
     {
-     "title": "고대안암 장기모 교수팀 우수연제상",
-     "press": "medical-tribune.co.kr",
-     "publishedAt": "2026-11-03T06:32:00.000Z",
-     "link": "http://www.medical-tribune.co.kr/news/articleView.html?idxno=215734"
+     "title": "한남대 건설환경공학과 권성준·김민경 교수, 한국건설순환자원학회 논...",
+     "press": "jeonmae.co.kr",
+     "publishedAt": "2026-11-03T06:42:00.000Z",
+     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1308140"
     },
     {
-     "title": "에너지경제연구원장에 '공공성 강화' 주창 송재도 전남대 교수",
-     "press": "e2news.com",
-     "publishedAt": "2026-11-03T06:32:00.000Z",
-     "link": "http://www.e2news.com/news/articleView.html?idxno=335734"
+     "title": "“AI가 내린 결정, 이해 못 해도 따라야 하나” 정재승 교수의 경고",
+     "press": "futurechosun.com",
+     "publishedAt": "2026-11-03T06:40:00.000Z",
+     "link": "https://futurechosun.com/?p=165368"
     }
    ]
   },
   {
    "keyword": "장동혁 대표, 청년 간담회 참석",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 11,
    "recent20": 2,
@@ -269,12 +172,76 @@
    ]
   },
   {
+   "keyword": "신세계그룹",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-03T05:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "신세계그룹, 8일까지 쓱데이 막바지 할인…클리어런스 최대 92%",
+     "press": "todayeconomic.com",
+     "publishedAt": "2026-11-03T06:44:00.000Z",
+     "link": "https://www.todayeconomic.com/news/article.html?no=32714"
+    },
+    {
+     "title": "신세계그룹, ‘2026 쓱데이’ 막판 할인전…이마트·백화점 등 혜택 확대",
+     "press": "donga.com",
+     "publishedAt": "2026-11-03T06:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003759745?sid=101"
+    },
+    {
+     "title": "신세계그룹, '쓱데이' 막판 할인 총공세... 최대 92%",
+     "press": "meconomynews.com",
+     "publishedAt": "2026-11-03T06:20:00.000Z",
+     "link": "https://www.meconomynews.com/news/articleView.html?idxno=203208"
+    }
+   ]
+  },
+  {
+   "keyword": "손영권",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T05:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "슈퍼모델 출신 45세 김자연, 70세 삼성전자 전 사장 손영권과 스위스서...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-03T06:38:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1171453"
+    },
+    {
+     "title": "25살 차이 극복…슈퍼모델 김자연, 전 삼성전자 사장 손영권과 결혼 [자...",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-03T06:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000366239?sid=101"
+    },
+    {
+     "title": "45살 '슈퍼모델' 김자연, 70살 삼성전자 전 사장 손영권과 스위스서 로맨...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-03T05:46:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004121400"
+    }
+   ]
+  },
+  {
    "keyword": "예세민 검찰총장 후보 물망",
    "sources": [
     "daum"
    ],
    "articles90": 3,
-   "recent20": 3,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-03T06:20:00.000Z",
    "exclusive": false,
@@ -333,10 +300,41 @@
    ]
   },
   {
+   "keyword": "서울 외국인 8.8조 소비",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T05:21:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서울 찾은 외국인, 9개월 만에 8.8조 썼다…작년 연간 실적 이미 넘어",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-03T06:18:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2013662"
+    },
+    {
+     "title": "서울 찾은 외국인 관광객·소비액 ‘역대 최고’…9개월간 8.8조 썼다",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-03T05:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202227?sid=102"
+    },
+    {
+     "title": "서울 방문 외국인, 9개월간 8.8조 소비",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T05:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009267166?sid=102"
+    }
+   ]
+  },
+  {
    "keyword": "이창호 2000승 달성",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 12,
    "recent20": 1,
@@ -352,23 +350,55 @@
      "link": "https://n.news.naver.com/mnews/article/025/0003562495?sid=102"
     },
     {
-     "title": "프로 통산 2000승 대기록 작성한 이창호 9단",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T05:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009267288?sid=102"
-    },
-    {
      "title": "'돌부처' 이창호, 세계 바둑 첫 2000승 '쾌거'",
      "press": "news1.kr",
      "publishedAt": "2026-11-03T05:43:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009267287?sid=102"
+    },
+    {
+     "title": "프로 통산 2000승 대기록 작성한 이창호 9단",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T05:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009267288?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "2026 미래경제포럼 축사하는",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 21,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-03T05:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[미래경제포럼] 이재정 문체위원장 \"AI세계규범 창조에 韓日 앞장섰으면...",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-03T06:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016418984?sid=100"
+    },
+    {
+     "title": "축사하는 다케다 료타 일한의원연맹 회장",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-03T06:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016418925?sid=105"
+    },
+    {
+     "title": "축사하는 구자열 한일경제협회장",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-03T06:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016418917?sid=105"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 378,
+  "flagged": 382,
   "matched": 138,
   "avgLeadMin": 232,
   "recent": [
