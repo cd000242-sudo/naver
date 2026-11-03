@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T05:25:24.695Z",
+ "builtAt": "2026-11-03T05:35:29.028Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,134 +8,38 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 21,
  "candidates": [
-  {
-   "keyword": "미국 중간선거",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 58,
-   "recent20": 11,
-   "press": 45,
-   "firstArticleAt": "2026-11-03T03:57:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "미국, 이란 케슘 섬 공격…\"방어적 작전\"",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-03T05:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006402776?sid=104"
-    },
-    {
-     "title": "“이란 전쟁비용은 푼돈”…트럼프, 중간선거 전날 전쟁 정당성 강조[1...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-03T05:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002718229?sid=104"
-    },
-    {
-     "title": "미국 좌파의 약진, 돈으로 짓누르려는 억만장자들 그들은 누구인가",
-     "press": "vop.co.kr",
-     "publishedAt": "2026-11-03T05:20:00.000Z",
-     "link": "https://vop.co.kr/A00001697415.html"
-    }
-   ]
-  },
-  {
-   "keyword": "배나라 한재아 결혼",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 30,
-   "recent20": 8,
-   "press": 24,
-   "firstArticleAt": "2026-11-03T04:19:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[전문] 배나라, ♥한재아와 결혼 소감…“이제 한 가정의 가장”",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-03T05:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004462498"
-    },
-    {
-     "title": "'11월 14일 결혼' 배나라♥한재아, 자필로 전한 결혼 소감[셀럽톡]",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-03T05:22:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1793681827530268005"
-    },
-    {
-     "title": "뮤지컬 배우 배나라-한재아 14일 결혼…“동료에서 연인으로”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-03T05:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003759715?sid=103"
-    }
-   ]
-  },
   {
    "keyword": "장동혁 국민의힘 대표",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 40,
-   "recent20": 6,
-   "press": 22,
-   "firstArticleAt": "2026-11-03T03:59:00.000Z",
+   "articles90": 43,
+   "recent20": 11,
+   "press": 21,
+   "firstArticleAt": "2026-11-03T04:08:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "오세훈·한동훈, 보수 연대에 공감대…장동혁 “오히려 갈등 커져”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-03T05:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002718232?sid=100"
+     "title": "청년안심주택 방문한 국민의힘 장동혁 대표와 조정훈 청년주거TF 위원장",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-03T05:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016418659?sid=100"
     },
     {
-     "title": "국민의힘 서울시당-서울시 공동 주최 토론회서 만난 오세훈-장동혁",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-03T05:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003695271?sid=100"
+     "title": "청년안심주택 방문한 국민의힘 장동혁 대표",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-03T05:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016418657?sid=100"
     },
     {
-     "title": "장동혁, ‘국민의 삶 해결 예산’ 발표",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-03T05:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003695272?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "청소년 SNS 제한 논의",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 23,
-   "recent20": 4,
-   "press": 22,
-   "firstArticleAt": "2026-11-03T03:59:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李 대통령 \"청소년 SNS 제한 신속 논의하라\"...언론 '따옴표 보도' 관행...",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-03T05:14:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60628"
-    },
-    {
-     "title": "이 대통령 \"저연령자 SNS 폐해 생각보다 커…사용 제한 신속히 논의\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-03T05:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014297996?sid=100"
-    },
-    {
-     "title": "셧다운제 전철 안 밟는다…청소년 SNS 제한 정책, 내년 상반기 윤곽",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-03T05:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014297994?sid=105"
+     "title": "장동혁, '1호기 정보' 유출에 李 '쿠팡 발언' 소환…\"靑 망할 차례인가...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T05:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009267215?sid=100"
     }
    ]
   },
@@ -144,107 +48,43 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 21,
-   "recent20": 13,
-   "press": 12,
-   "firstArticleAt": "2026-11-03T03:56:00.000Z",
+   "articles90": 23,
+   "recent20": 9,
+   "press": 14,
+   "firstArticleAt": "2026-11-03T04:08:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[포토] 10월 소비자물가 전년비 2.8% 상승",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-03T05:18:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3445514"
+     "title": "10월 물가 2.8%로 둔화…한은 \"높은 근원물가에 11월도 2%대 후반 지속\"",
+     "press": "getnews.co.kr",
+     "publishedAt": "2026-11-03T05:34:00.000Z",
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=885825"
     },
     {
-     "title": "가공식품 상승에 10월 물가 2.8%↑",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T05:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016418562?sid=101"
+     "title": "‘10월 물가 2.8%↑’ 상승률 줄었지만… 정부 “체감 물가 높아”",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-03T05:28:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261103511823?OutUrl=naver"
     },
     {
-     "title": "가공식품·외식비 상승에 10월 물가 2.8%↑",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T05:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016418572?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "필로폰 제조 일당 검거",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-03T04:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "감기약으로 4만 명 투약분 필로폰 제조… 총책·한약사 등 13명 검거",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-03T05:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000366222?sid=102"
-    },
-    {
-     "title": "“감기약 성분으로 필로폰 제조”…한약사 등 13명 검거",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-03T05:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012286258?sid=102"
-    },
-    {
-     "title": "감기약 성분으로 42억원어치 필로폰 제조… 조직범행 13명 검거",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-03T04:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003695254?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "민주당-한국노총 고위급정책협의회",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 14,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-03T04:05:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김민석 만난 한국노총 위원장 “민주당에 대한 신뢰 자체가 무너져”",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-03T05:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004007502?sid=100"
-    },
-    {
-     "title": "김민석 \"정년연장 함께 대화\"…한국노총 \"민주당 신뢰 무너져\"",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-03T05:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001271485?sid=100"
-    },
-    {
-     "title": "김동명 위원장, “민주당에 대한 신뢰 무너지고 있어… 약속 아닌 행동...",
-     "press": "news.inochong.org",
-     "publishedAt": "2026-11-03T05:02:00.000Z",
-     "link": "http://news.inochong.org/detail.php?number=6666&thread=22r03"
+     "title": "10월 부산 소비자물가 2.8% ↑..신선식품지수 5.9%↓",
+     "press": "busanmbc.co.kr",
+     "publishedAt": "2026-11-03T05:26:00.000Z",
+     "link": "https://busanmbc.co.kr/01_new/new01_view.asp?idx=290664"
     }
    ]
   },
   {
    "keyword": "신민아 재혼 황후 기대와 우려",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-03T03:56:00.000Z",
+   "articles90": 8,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-03T04:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -269,34 +109,34 @@
    ]
   },
   {
-   "keyword": "미국 이란 케슘섬 공습",
+   "keyword": "서울 외국인 소비 8.8조",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-03T04:01:00.000Z",
+   "articles90": 9,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-03T04:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "미국, 이란 케슘 섬 공격…\"방어적 작전\"",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-03T05:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006402776?sid=104"
+     "title": "서울 찾은 외국인 관광객·소비액 ‘역대 최고’…9개월간 8.8조 썼다",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-03T05:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202227?sid=102"
     },
     {
-     "title": "트럼프 \"합의 없으면 이란 '곡괭이산' 공격해야 할 수도 있어\"",
+     "title": "서울 방문 외국인, 9개월간 8.8조 소비",
      "press": "news1.kr",
-     "publishedAt": "2026-11-03T04:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009267035?sid=104"
+     "publishedAt": "2026-11-03T05:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009267166?sid=102"
     },
     {
-     "title": "미국 중간선거 D-1...호르무즈 핵심 요충지서 이란과 교전",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-03T04:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005435821?sid=104"
+     "title": "서울 방문 외국인 9개월간 8.8조원 소비…지난해 연간 실적 넘어",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T04:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009267032?sid=102"
     }
    ]
   },
@@ -305,10 +145,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-03T03:56:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-03T04:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -333,76 +173,151 @@
    ]
   },
   {
-   "keyword": "서울 외국인 소비 8.8조",
+   "keyword": "교수",
    "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 6,
+   "press": 4,
+   "firstArticleAt": "2026-11-03T05:20:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "[포토뉴스] 충남대 김종훈 교수팀, 수소 연료전지 전압 신호 잡음 제거...",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-03T05:30:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1421207"
+    },
+    {
+     "title": "박동균 대구한의대 교수, 제10기 경북경찰청 인권위원장 위촉",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-03T05:30:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4116444"
+    },
+    {
+     "title": "[포토뉴스] 한남대 권성준·김민경 교수, 한국건설순환자원학회 논문상...",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-03T05:28:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1421191"
+    }
+   ]
+  },
+  {
+   "keyword": "오타니 MVP 최종 후보",
+   "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 5,
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T04:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "오타니, NL MVP 최종 후보 선정…40-40 크로암스트롱과 격돌",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-03T04:48:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=560709"
+    },
+    {
+     "title": "3년 연속 MVP 오타니, 또 최종후보 올랐지만…올핸 팔방미인 ‘PCA’가 ...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-03T04:45:00.000Z",
+     "link": "https://m.sports.naver.com/wbaseball/article/011/0004678184"
+    },
+    {
+     "title": "크로암스트롱, 오타니 독주 저지?…MLB MVP 후보 발표",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T04:18:00.000Z",
+     "link": "https://m.sports.naver.com/wbaseball/article/003/0014297790"
+    }
+   ]
+  },
+  {
+   "keyword": "예세민 검찰총장 후보 물망",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
    "firstArticleAt": "2026-11-03T04:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "서울 방문 외국인, 9개월간 8.8조 소비",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T05:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009267166?sid=102"
+     "title": "검찰총장 후보군 이정현·박철우·예세민 물망…초대 공소청 수장은 누...",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-03T04:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000120493?sid=100"
     },
     {
-     "title": "서울 방문 외국인 9개월간 8.8조원 소비…지난해 연간 실적 넘어",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T04:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009267032?sid=102"
+     "title": "검찰총장 후보 '이정현·박철우·예세민' 물망",
+     "press": "kbsm.net",
+     "publishedAt": "2026-11-03T04:16:00.000Z",
+     "link": "https://www.kbsm.net/news/view.php?idx=540130"
     },
     {
-     "title": "서울 찾은 외국인 관광객 소비액 8.8조원 돌파",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T04:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009267030?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "교수",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 4,
-   "press": 4,
-   "firstArticleAt": "2026-11-03T05:10:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "서울대병원 최규성 교수, 의료영상 AI 연구로 젊은의학자상·의학한림원...",
-     "press": "kormedi.com",
-     "publishedAt": "2026-11-03T05:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/296/0000106829?sid=102"
-    },
-    {
-     "title": "[피플N이슈] 안광섭 교수 \"AI가 먼저 말 거는 시대…빅테크는 당신의 일...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-03T05:21:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261102001081"
-    },
-    {
-     "title": "[포토뉴스] 대전성모병원 양영준 교수, 호스피스 날 복지부장관상 수상",
-     "press": "daily.hankooki.com",
-     "publishedAt": "2026-11-03T05:20:00.000Z",
-     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1421213"
+     "title": "검찰총장 후보군 다음주 중 윤곽",
+     "press": "naeil.com",
+     "publishedAt": "2026-11-03T04:06:00.000Z",
+     "link": "https://www.naeil.com/news/read/607434?ref=naver"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 358,
-  "matched": 129,
-  "avgLeadMin": 242,
+  "flagged": 359,
+  "matched": 136,
+  "avgLeadMin": 233,
   "recent": [
+   {
+    "keyword": "김빅토리아노 최불암 추모",
+    "hitKeyword": "최불암 추도",
+    "hitAt": "2026-11-03T14:30:00+09:00",
+    "leadMin": 226
+   },
+   {
+    "keyword": "감기약으로 필로폰 제조 일당 검거",
+    "hitKeyword": "감기약 필로폰 제조 검거",
+    "hitAt": "2026-11-03T14:30:00+09:00",
+    "leadMin": 105
+   },
+   {
+    "keyword": "미국 중간선거",
+    "hitKeyword": "미국 중간선거 여론조사",
+    "hitAt": "2026-11-03T14:30:00+09:00",
+    "leadMin": 25
+   },
+   {
+    "keyword": "배나라 한재아 결혼",
+    "hitKeyword": "배나라 한재아 결혼",
+    "hitAt": "2026-11-03T14:30:00+09:00",
+    "leadMin": 25
+   },
+   {
+    "keyword": "필로폰 제조 일당 검거",
+    "hitKeyword": "감기약 필로폰 제조 검거",
+    "hitAt": "2026-11-03T14:30:00+09:00",
+    "leadMin": 25
+   },
+   {
+    "keyword": "미국 이란 케슘섬 공습",
+    "hitKeyword": "미국 이란 공습",
+    "hitAt": "2026-11-03T14:30:00+09:00",
+    "leadMin": 25
+   },
+   {
+    "keyword": "청소년 SNS 제한 논의",
+    "hitKeyword": "양홍원 원현주 SNS",
+    "hitAt": "2026-11-03T14:30:00+09:00",
+    "leadMin": 15
+   },
    {
     "keyword": "감기약 필로폰 일당 검거",
     "hitKeyword": "감기약 마약 제조",
@@ -420,48 +335,6 @@
     "hitKeyword": "재혼황후 공개",
     "hitAt": "2026-11-03T13:30:00+09:00",
     "leadMin": 65
-   },
-   {
-    "keyword": "울산 에릭 K리그1 MVP",
-    "hitKeyword": "칸터 라운드 MVP",
-    "hitAt": "2026-11-03T13:30:00+09:00",
-    "leadMin": 55
-   },
-   {
-    "keyword": "칸터, 1라운드 MVP 수상",
-    "hitKeyword": "칸터 라운드 MVP",
-    "hitAt": "2026-11-03T13:30:00+09:00",
-    "leadMin": 25
-   },
-   {
-    "keyword": "칸터, 프로농구 1라운드 MVP",
-    "hitKeyword": "칸터 라운드 MVP",
-    "hitAt": "2026-11-03T13:30:00+09:00",
-    "leadMin": 5
-   },
-   {
-    "keyword": "박항서 인종차별",
-    "hitKeyword": "박항서 인종차별 조롱",
-    "hitAt": "2026-11-03T13:00:00+09:00",
-    "leadMin": 15
-   },
-   {
-    "keyword": "트럼프 공화당",
-    "hitKeyword": "트럼프 중간선거 지지율",
-    "hitAt": "2026-11-03T12:30:00+09:00",
-    "leadMin": 76
-   },
-   {
-    "keyword": "미국 중간선거",
-    "hitKeyword": "트럼프 중간선거 지지율",
-    "hitAt": "2026-11-03T12:30:00+09:00",
-    "leadMin": 26
-   },
-   {
-    "keyword": "연애박사",
-    "hitKeyword": "연애박사 추영우",
-    "hitAt": "2026-11-03T12:00:00+09:00",
-    "leadMin": 217
    }
   ]
  }
