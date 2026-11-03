@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T10:17:55.986Z",
+ "builtAt": "2026-11-03T15:08:54.938Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,365 +8,267 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 25,
  "candidates": [
   {
-   "keyword": "튀르키예 원전 방산 협력",
+   "keyword": "이강철 감독 로건 기용 실수",
    "sources": [
     "daum"
    ],
-   "articles90": 52,
-   "recent20": 9,
-   "press": 41,
-   "firstArticleAt": "2026-11-03T08:49:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령, 튀르키예 대통령과 정상회담…\"원전·방산 등 전략 분야 협력...",
-     "press": "goodkyung.com",
-     "publishedAt": "2026-11-03T10:12:00.000Z",
-     "link": "https://www.goodkyung.com/news/articleView.html?idxno=293069"
-    },
-    {
-     "title": "한·튀르키예, 원전 금융협력 MOU…한국 기업 신규 원전 참여 지원",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-03T10:12:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611030205"
-    },
-    {
-     "title": "한국, 튀르키예 신규 원전 선제적 지원... '전략적 동반관계' 심화",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-03T10:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002534552?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "김민석 신천지 사과",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 50,
-   "recent20": 8,
-   "press": 41,
-   "firstArticleAt": "2026-11-03T08:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김민석 '울컥 사과'…\"3자 비밀연합 증거 없었다\"",
-     "press": "ilyoseoul.co.kr",
-     "publishedAt": "2026-11-03T10:10:00.000Z",
-     "link": "https://www.ilyoseoul.co.kr/news/articleView.html?idxno=524549"
-    },
-    {
-     "title": "황당한 집권당… 두 달간 박터지더니 ‘신천지 논란’ 없던일로",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-03T10:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001882760?sid=100"
-    },
-    {
-     "title": "신천지 당원 가입 의혹 결과 발표 놓고 민주당 계파 간 갈등 고조",
-     "press": "joongboo.com",
-     "publishedAt": "2026-11-03T10:10:00.000Z",
-     "link": "https://www.joongboo.com/news/articleView.html?idxno=363741375"
-    }
-   ]
-  },
-  {
-   "keyword": "민주당 조작기소 특검법",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 42,
-   "recent20": 4,
-   "press": 34,
-   "firstArticleAt": "2026-11-03T08:49:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정점식 \"조작기소특검법 5일 본회의 상정시 모든 법안에 필리버스터\"",
-     "press": "busan.com",
-     "publishedAt": "2026-11-03T10:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001405508?sid=100"
-    },
-    {
-     "title": "정점식 “5일 조작기소 특검법 본회의 상정시 모든 법안 필버”",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-03T10:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004007551?sid=100"
-    },
-    {
-     "title": "與, 조작기소 특검 당론 추진…野 \"악마 발톱 드러내\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-03T09:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922524?sid=161"
-    }
-   ]
-  },
-  {
-   "keyword": "발언하는 이재명 대통령",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 37,
-   "recent20": 3,
-   "press": 31,
-   "firstArticleAt": "2026-11-03T08:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이주인권단체, 이 대통령 발언 규탄…청와대 \"경청하겠다\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-03T10:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004206167?sid=100"
-    },
-    {
-     "title": "이 대통령, 튀르키예 대통령과 정상회담…원전·방산·인프라 협력 내실...",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-03T10:02:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1134901"
-    },
-    {
-     "title": "청, 이주인권단체 간담회서 “이 대통령 발언, 혐오표현 아냐” 해명",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-03T10:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002830554?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "한학자 보석 취소",
-   "sources": [
-    "signal.bz",
-    "nate",
-    "daum"
-   ],
-   "articles90": 20,
+   "articles90": 11,
    "recent20": 2,
-   "press": 19,
-   "firstArticleAt": "2026-11-03T08:51:00.000Z",
+   "press": 11,
+   "firstArticleAt": "2026-11-03T13:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘천정궁 외출’ 통일교 한학자 보석 취소…보석금도 회수",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-03T10:16:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611030202"
+     "title": "이강철 KT 감독 \"로건 기용 실수…계투 운용 정리됐다\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-03T15:04:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/055/0001400399"
     },
     {
-     "title": "법원, 통일교 한학자 총재 보석 취소",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-03T09:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001882752?sid=102"
+     "title": "[파워인터뷰] KT 이강철 감독 \"로건 투입, 내 실수 인정한다\"",
+     "press": "stnsports.co.kr",
+     "publishedAt": "2026-11-03T15:03:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/450/0000155277"
     },
     {
-     "title": "거동 불편하다면서 하루 100㎞ 왕복, 한학자 통일교 총재 보석 취소",
-     "press": "weekly.khan.co.kr",
-     "publishedAt": "2026-11-03T09:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/033/0000053127?sid=102"
+     "title": "가슴 쓸어내린 kt 이강철 감독… “약간의 방심도 안 된다”",
+     "press": "kyeongin.com",
+     "publishedAt": "2026-11-03T14:42:00.000Z",
+     "link": "https://www.kyeongin.com/article/1774050"
     }
    ]
   },
   {
-   "keyword": "삼성바이오에피스, 테바와 바이오시밀러 계약",
+   "keyword": "하희라",
+   "sources": [
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-03T13:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "최수종, 하희라 네 차례 유산 고백…\"최대한 다 해주려 해\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T15:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014299475"
+    },
+    {
+     "title": "사랑꾼 최수종 \"결혼하고 지금까지 하희라 손 잡고 자\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T15:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014299478"
+    },
+    {
+     "title": "[옥탑방의 문제아들] 이벤트의 신은 다르다…! 최수종, 하희라 위해 여...",
+     "press": "kstar.kbs.co.kr",
+     "publishedAt": "2026-11-03T14:52:00.000Z",
+     "link": "https://m.entertain.naver.com/article/438/0000082122"
+    }
+   ]
+  },
+  {
+   "keyword": "신천지 정청래 책임져야",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-03T13:57:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "신천지 논란에 김민석 '비공개 사과'…鄭 반발 속 내홍 재점화",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-03T15:06:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=778695"
+    },
+    {
+     "title": "'신천지 3자 연합' 헛발질 논란…김민석, 리더십 타격 불가피",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-03T15:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000548450?sid=100"
+    },
+    {
+     "title": "[커뮤니티 지형] 김민석 '신천지 연합' 증거 없었다…정청래 책임론, 민...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-03T14:20:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267518"
+    }
+   ]
+  },
+  {
+   "keyword": "김현수 2점 홈런",
    "sources": [
     "nate"
    ],
-   "articles90": 17,
+   "articles90": 4,
    "recent20": 1,
-   "press": 17,
-   "firstArticleAt": "2026-11-03T08:48:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-03T13:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성바이오에피스, 테바와 5632억 계약…美면역질환 시장 공략",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-03T10:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006403046?sid=101"
+     "title": "안현민·한승택·김현수 홈런포…KT, 삼성에 진땀승 거두고 기선제압",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-03T14:59:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/055/0001400396"
     },
     {
-     "title": "삼성바이오에피스, 테바와 5600억 규모 시밀러 2종 판매 계약",
-     "press": "news.bizwatch.co.kr",
-     "publishedAt": "2026-11-03T09:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/648/0000052248?sid=101"
+     "title": "kt, 한국시리즈 1차전서 삼성에 8-7 진땀승...안현민·한승택·김현수 홈...",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-03T14:48:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=778690"
     },
     {
-     "title": "[HIT알공] 삼성바이오로직스는 위탁생산, 에피스는 시밀러 판매 계약",
-     "press": "hitnews.co.kr",
-     "publishedAt": "2026-11-03T09:38:00.000Z",
-     "link": "https://www.hitnews.co.kr/news/articleView.html?idxno=80480"
+     "title": "김현수 “손가락 아프지만 검진 안 받는다, 모르는 게 약”[KS1]",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-03T14:22:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/144/0001147940"
     }
    ]
   },
   {
-   "keyword": "제주항공 3분기 흑자전환",
+   "keyword": "김여정, 미국 도발 지목",
    "sources": [
     "signal.bz"
-   ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-03T08:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "제주항공, 3분기 영업익 549억원…여객 회복에 흑자 전환",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-03T10:02:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=314551"
-    },
-    {
-     "title": "제주항공, 3분기 영업익 549억원…전년比 흑자전환",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-03T09:26:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=755887"
-    },
-    {
-     "title": "제주항공 영업이익 549억…한 분기 만에 적자 탈출",
-     "press": "smedaily.co.kr",
-     "publishedAt": "2026-11-03T09:20:00.000Z",
-     "link": "http://www.smedaily.co.kr/news/articleView.html?idxno=365637"
-    }
-   ]
-  },
-  {
-   "keyword": "JTBC 매각 공고",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-03T08:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "속도 내는 JTBC 매각… 법원, 신청 당일 승인",
-     "press": "journalist.or.kr",
-     "publishedAt": "2026-11-03T09:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/127/0000040005?sid=102"
-    },
-    {
-     "title": "JTBC, 9일 매각공고...매각공고안 허가받아 본격절차 돌입",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-03T09:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002427912?sid=102"
-    },
-    {
-     "title": "JTBC 본격 매각 절차 돌입…9일 매각공고 게시",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-03T09:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002247136?sid=105"
-    }
-   ]
-  },
-  {
-   "keyword": "헤수스 데 미겔",
-   "sources": [
-    "signal.bz",
-    "google"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-03T08:50:00.000Z",
+   "firstArticleAt": "2026-11-03T14:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "스페인 축구계 비보...상대 GK에 가슴 가격당한 공격수 데 미겔, 끝내 사...",
-     "press": "interfootball.co.kr",
-     "publishedAt": "2026-11-03T10:00:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/413/0000226085"
+     "title": "'8조원 해킹'에 김여정이 나섰다...북미 대화의 암초 되나 [이우탁의 인...",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-03T15:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000548451?sid=100"
     },
     {
-     "title": "[속보] 스페인 축구 충격 비보 날아들었다...골키퍼와 충돌한 데 미겔, ...",
-     "press": "fourfourtwo.co.kr",
-     "publishedAt": "2026-11-03T09:36:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/411/0000089463"
+     "title": "김여정 “미국 정치적 도발…‘재고할 문제’ 있어”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-03T14:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012286730?sid=100"
     },
     {
-     "title": "'경기 중 골키퍼와 충돌해 심정지' 하루 만에 비보...데 미겔 끝내 사망...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-03T08:50:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/445/0000486188"
+     "title": "북, 바이낸스 해킹 즉각 부인...김여정 \"도발 예의주시\", 북미대화 염두...",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-03T14:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002427982?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "장동혁·오세훈 보수 경쟁",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T13:41:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "총선 앞두고…거대 양당 내부 '주도권 경쟁'",
+     "press": "ksilbo.co.kr",
+     "publishedAt": "2026-11-03T15:04:00.000Z",
+     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1071516"
+    },
+    {
+     "title": "같은 날, 각기 모인 장-오-한…보수통합 주도권 경쟁 예열",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-03T14:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012286739?sid=100"
+    },
+    {
+     "title": "[포커스] 신천지 의혹 제기 사과...오·장·한 '보수 삼국지'",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-03T13:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002427968?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 439,
-  "matched": 168,
-  "avgLeadMin": 213,
+  "flagged": 445,
+  "matched": 179,
+  "avgLeadMin": 241,
   "recent": [
    {
-    "keyword": "계약결혼",
-    "hitKeyword": "계약결혼 영수 카메라",
-    "hitAt": "2026-11-03T19:00:00+09:00",
-    "leadMin": 466
+    "keyword": "애플 매출 증가",
+    "hitKeyword": "애플 글로벌 매출",
+    "hitAt": "2026-11-04T00:00:00+09:00",
+    "leadMin": 937
    },
    {
-    "keyword": "삼성",
-    "hitKeyword": "한국시리즈 KT 삼성",
-    "hitAt": "2026-11-03T19:00:00+09:00",
-    "leadMin": 164
+    "keyword": "애플 분기 매출 증가",
+    "hitKeyword": "애플 글로벌 매출",
+    "hitAt": "2026-11-04T00:00:00+09:00",
+    "leadMin": 917
    },
    {
-    "keyword": "KT 이강철 감독, 한국시리즈 나선다.",
-    "hitKeyword": "한국시리즈 KT 삼성",
-    "hitAt": "2026-11-03T19:00:00+09:00",
-    "leadMin": 93
+    "keyword": "애플 4분기 매출 증가 예상",
+    "hitKeyword": "애플 글로벌 매출",
+    "hitAt": "2026-11-04T00:00:00+09:00",
+    "leadMin": 897
    },
    {
-    "keyword": "미국 중간선거",
-    "hitKeyword": "중간선거 고물가 표심",
-    "hitAt": "2026-11-03T19:00:00+09:00",
-    "leadMin": 53
+    "keyword": "영원한 아버지 최불암께",
+    "hitKeyword": "중학생 심폐소생술 아버지",
+    "hitAt": "2026-11-03T22:00:00+09:00",
+    "leadMin": 1571
    },
    {
-    "keyword": "KT 이강철 감독과 삼성 박진만 감독 대결",
-    "hitKeyword": "한국시리즈 KT 삼성",
-    "hitAt": "2026-11-03T19:00:00+09:00",
-    "leadMin": 32
+    "keyword": "제주 실종 허위 종결",
+    "hitKeyword": "제주 경찰관 허위 종결",
+    "hitAt": "2026-11-03T22:00:00+09:00",
+    "leadMin": 323
    },
    {
-    "keyword": "삼성 대 kt",
-    "hitKeyword": "한국시리즈 KT 삼성",
-    "hitAt": "2026-11-03T19:00:00+09:00",
-    "leadMin": 22
+    "keyword": "거제 반려견 비비탄 난사 3명 징역",
+    "hitKeyword": "반려견 비비탄 난사 징역",
+    "hitAt": "2026-11-03T22:00:00+09:00",
+    "leadMin": 192
    },
    {
-    "keyword": "한재아",
-    "hitKeyword": "배나라 한재아 결혼",
-    "hitAt": "2026-11-03T19:00:00+09:00",
-    "leadMin": 22
+    "keyword": "헤수스 데 미겔",
+    "hitKeyword": "헤수스 데 미겔 30세 사망",
+    "hitAt": "2026-11-03T22:00:00+09:00",
+    "leadMin": 172
    },
    {
-    "keyword": "삼성 박진만 감독, 한국시리즈 준비",
-    "hitKeyword": "한국시리즈 KT 삼성",
-    "hitAt": "2026-11-03T19:00:00+09:00",
-    "leadMin": 12
+    "keyword": "오타니 MVP 최종 후보",
+    "hitKeyword": "오타니 대기록",
+    "hitAt": "2026-11-03T21:00:00+09:00",
+    "leadMin": 385
    },
    {
-    "keyword": "사우디 아시안컵 연기",
-    "hitKeyword": "모레노호 아시안컵 변수",
-    "hitAt": "2026-11-03T18:30:00+09:00",
-    "leadMin": 134
+    "keyword": "김도영",
+    "hitKeyword": "김도영 박재현",
+    "hitAt": "2026-11-03T20:00:00+09:00",
+    "leadMin": 1674
    },
    {
-    "keyword": "아시안컵 중동 여파로 연기",
-    "hitKeyword": "모레노호 아시안컵 변수",
-    "hitAt": "2026-11-03T18:30:00+09:00",
-    "leadMin": 124
+    "keyword": "제네시스 생산라인 재가동",
+    "hitKeyword": "제네시스 생산 중단",
+    "hitAt": "2026-11-03T20:00:00+09:00",
+    "leadMin": 103
    }
   ]
  }
