@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T00:43:32.178Z",
+ "builtAt": "2026-11-03T00:53:35.716Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,130 +11,98 @@
  "measured": 25,
  "candidates": [
   {
-   "keyword": "10월 소비자물가 2.8% 상승",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 69,
-   "recent20": 15,
-   "press": 56,
-   "firstArticleAt": "2026-11-02T23:14:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한은 \"11월 소비자물가 상승률 2%대 후반 전망\"",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-03T00:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001071635?sid=101"
-    },
-    {
-     "title": "10월 소비자물가 2.8% 상승…두 달 연속 둔화",
-     "press": "ziksir.com",
-     "publishedAt": "2026-11-03T00:40:00.000Z",
-     "link": "https://www.ziksir.com/news/articleView.html?idxno=151782"
-    },
-    {
-     "title": "10월 물가 2.8%로 소폭 둔화…한은 “근원물가 오름세 여전”",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-03T00:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002393175?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "이명수 신상공개",
+   "keyword": "대통령 순방단 개인정보 유출",
    "sources": [
     "daum"
    ],
-   "articles90": 55,
-   "recent20": 17,
-   "press": 48,
-   "firstArticleAt": "2026-11-02T23:57:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "경찰, 역삼동 사무실 불 지른 70대 이명수 신상 공개",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-03T00:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001163030?sid=102"
-    },
-    {
-     "title": "경찰, '역삼 연쇄방화범' 피의자 77세 이명수 신상 공개",
-     "press": "sisunnews.co.kr",
-     "publishedAt": "2026-11-03T00:40:00.000Z",
-     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=248949"
-    },
-    {
-     "title": "[속보] ‘역삼동 연쇄 방화범’ 77세 이명수 얼굴 공개",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-03T00:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003695152?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "한양증권 해킹 피해",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 37,
-   "recent20": 8,
-   "press": 36,
-   "firstArticleAt": "2026-11-02T23:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한양증권 해킹에 고객 정보 15건 유출…주민번호·계좌까지 털렸다",
-     "press": "segye.com",
-     "publishedAt": "2026-11-03T00:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004171986?sid=101"
-    },
-    {
-     "title": "한양증권도 뚫렸다…금융권 전방위 연쇄 해킹 비상(종합)",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-03T00:38:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/323924/?sc=Naver"
-    },
-    {
-     "title": "한양증권도 해킹 피해…고객·임직원 정보 31건 유출 확인",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-03T00:38:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=879182"
-    }
-   ]
-  },
-  {
-   "keyword": "“개인정보 유출 긴급회의”",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 22,
-   "recent20": 7,
-   "press": 20,
+   "articles90": 85,
+   "recent20": 22,
+   "press": 65,
    "firstArticleAt": "2026-11-02T23:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "靑, 순방단 개인정보 유출 긴급회의…\"책임 철저 규명\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-03T00:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922289?sid=100"
+     "title": "靑, 순방단 개인 정보 유출 긴급회의…\"관리 책임 명확히 규명\"",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-03T00:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001071640?sid=100"
     },
     {
-     "title": "靑, 대통령 순방단 개인정보 유출 긴급회의…\"경위·피해 철저히 조사\"",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-03T00:35:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000079012"
+     "title": "경찰, 이재명 대통령 부부 등 168명 개인정보 유출 내사 착수",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-03T00:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012286111?sid=102"
     },
     {
-     "title": "靑, 순방단 개인정보 유출 긴급회의...\"관리 책임 규명\"",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-03T00:34:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=560620"
+     "title": "靑, 1호기 개인정보 유출 긴급회의 \"중대 사안…관리책임 규명\"",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-03T00:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000548097?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "10월 소비자물가 2.8% 상승",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 66,
+   "recent20": 12,
+   "press": 54,
+   "firstArticleAt": "2026-11-02T23:24:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한국은행 \"11월 물가상승률 2%대 후반 이어갈 것\"",
+     "press": "newsprime.co.kr",
+     "publishedAt": "2026-11-03T00:52:00.000Z",
+     "link": "http://www.newsprime.co.kr/news/article.html?no=753418"
+    },
+    {
+     "title": "10월 소비자물가 상승률 2.8%…\"최고가격제가 0.8%p 내려\"(종합)",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-03T00:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005435638?sid=101"
+    },
+    {
+     "title": "10월 소비자물가 2.8% 상승...가공식품·외식 오름폭 확대",
+     "press": "nextdaily.co.kr",
+     "publishedAt": "2026-11-03T00:48:00.000Z",
+     "link": "https://www.nextdaily.co.kr/news/articleView.html?idxno=254460"
+    }
+   ]
+  },
+  {
+   "keyword": "77세 이명수 연쇄방화 피의자 신상공개",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 40,
+   "recent20": 9,
+   "press": 38,
+   "firstArticleAt": "2026-11-02T23:57:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "역삼동 연쇄방화 피의자 77세 이명수 신상 공개",
+     "press": "womennews.co.kr",
+     "publishedAt": "2026-11-03T00:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/310/0000141384?sid=102"
+    },
+    {
+     "title": "'역삼 연쇄방화' 피의자 신상공개…77세 이명수",
+     "press": "busan.com",
+     "publishedAt": "2026-11-03T00:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001405329?sid=102"
+    },
+    {
+     "title": "[속보] '역삼동 연쇄방화' 피의자 77세 이명수 신상공개",
+     "press": "jmbc.co.kr",
+     "publishedAt": "2026-11-03T00:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/659/0000048358?sid=102"
     }
    ]
   },
@@ -143,30 +111,94 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 17,
-   "recent20": 3,
-   "press": 17,
+   "articles90": 20,
+   "recent20": 4,
+   "press": 20,
    "firstArticleAt": "2026-11-03T00:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "노동부, 청년 '공짜 야근' 감독…전국 100곳 점검",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-03T00:34:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000079007"
+     "title": "돈도 안 주면서 \"야근해라\"…결국 칼 뽑은 노동부",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-03T00:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400166?sid=101"
     },
     {
-     "title": "청년 노동자 ‘공짜 야근’ 뿌리 뽑는다…성수동 등 100개 사업장 감독",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-03T00:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003150511?sid=102"
+     "title": "고용노동부, 성수동 등 청년 밀집 사업장 100곳 장시간 노동 감독",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-03T00:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533149?sid=102"
     },
     {
-     "title": "청년들 갈아넣는 '공짜 야근' 없애자…성수동 등 100곳 기획감독",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-03T00:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005837127?sid=102"
+     "title": "노동부, 성수동 ‘공짜 야근’ 집중 점검…전국 100곳 기획감독",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-03T00:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012286107?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "북한 집속탄두 시험",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 15,
+   "recent20": 6,
+   "press": 15,
+   "firstArticleAt": "2026-11-02T23:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "北, 순항미사일 집속탄두 위력·수직타격 시험…“5∼6㏊ 초토화 확증”",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-03T00:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000160229?sid=100"
+    },
+    {
+     "title": "북한, '악마의 무기' 집속탄두 시험…순항미사일 발사, 축구장 7개 박살",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-03T00:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005435637?sid=100"
+    },
+    {
+     "title": "北, 순항미사일 집속탄두 위력·수직타격 시험",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-03T00:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922291?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "용인 AI 청미천 출입통제",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 12,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-02T23:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "용인시, 청미천서 고병원성 AI 검출…15일까지 출입 통제",
+     "press": "enewstoday.co.kr",
+     "publishedAt": "2026-11-03T00:50:00.000Z",
+     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2487631"
+    },
+    {
+     "title": "\"용인 청미천 낚시·출입 금지\"…용인시, 고병원성 AI 검출에 15일까지 ...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-03T00:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005598442?sid=102"
+    },
+    {
+     "title": "용인시, 조류인플루엔자 확산 방지 청미천 일대 출입 통제",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-03T00:24:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/323892/?sc=Naver"
     }
    ]
   },
@@ -175,10 +207,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 15,
+   "articles90": 11,
    "recent20": 1,
-   "press": 15,
-   "firstArticleAt": "2026-11-02T23:14:00.000Z",
+   "press": 11,
+   "firstArticleAt": "2026-11-02T23:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -199,166 +231,6 @@
      "press": "mk.co.kr",
      "publishedAt": "2026-11-03T00:17:00.000Z",
      "link": "https://m.entertain.naver.com/article/009/0005757968"
-    }
-   ]
-  },
-  {
-   "keyword": "용인 AI 청미천 출입통제",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 13,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-02T23:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"용인 청미천 낚시·출입 금지\"…용인시, 고병원성 AI 검출에 15일까지 ...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-03T00:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005598442?sid=102"
-    },
-    {
-     "title": "용인시, 조류인플루엔자 확산 방지 청미천 일대 출입 통제",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-03T00:24:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/323892/?sc=Naver"
-    },
-    {
-     "title": "용인 청미천 일원서 고병원성 AI 검출…15일까지 출입 통제",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-03T00:02:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=622595"
-    }
-   ]
-  },
-  {
-   "keyword": "한다감 아들 생후 26일 공개",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-02T23:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'47세 출산' 한다감, 조리원 떠나 본격 육아…\"아들 울면 온몸에 땀 나\"...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-03T00:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002075654"
-    },
-    {
-     "title": "'47세 산모' 한다감, 고령 출산 전혀 문제없었다…생후 26일 차 아들 방...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-03T00:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000782725"
-    },
-    {
-     "title": "'47세 초보 엄마' 한다감, 생후 26일 아들 최초 공개…\"울면 온몸에 땀 ...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T00:21:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009266159"
-    }
-   ]
-  },
-  {
-   "keyword": "북한 집속탄두 시험",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-02T23:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "北, 순항미사일 집속탄두 위력·수직타격 시험",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-03T00:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922291?sid=100"
-    },
-    {
-     "title": "北 순항미사일 집속탄두 위력평가시험… “표적구역 초토화”",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-03T00:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202143?sid=101"
-    },
-    {
-     "title": "北, 순항미사일 집속탄두 위력·수직타격 시험…\"5∼6㏊ 초토화\"",
-     "press": "getnews.co.kr",
-     "publishedAt": "2026-11-03T00:32:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=885767"
-    }
-   ]
-  },
-  {
-   "keyword": "팔란티어",
-   "sources": [
-    "google"
-   ],
-   "articles90": 11,
-   "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-02T23:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "팔란티어 CEO \"진짜 AI 위험은 불량 에이전트 아닌 개발사 욕망\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T00:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016417527?sid=104"
-    },
-    {
-     "title": "AI데이터 분석 '팔란티어' 분기매출 20억 달러 첫 돌파…전년 대비 2배",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-03T00:30:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/323925/?sc=Naver"
-    },
-    {
-     "title": "팔란티어, \"민간 매출이 더 컸다\"...3분기 매출 96% 급증",
-     "press": "epnc.co.kr",
-     "publishedAt": "2026-11-03T00:24:00.000Z",
-     "link": "https://www.epnc.co.kr/news/articleView.html?idxno=409171"
-    }
-   ]
-  },
-  {
-   "keyword": "웰컴저축은행 팀리그 2연승",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-02T23:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "PBA '전력 보강' 웰컴저축은행, 에스와이 꺾고 2연승",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-03T00:23:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/055/0001400157"
-    },
-    {
-     "title": "'웰컴저축은행이 옳았다' 유일 추가선발, 강유진 승-T.응우옌 승... 2연승...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-03T00:18:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/108/0003483995"
-    },
-    {
-     "title": "'새 얼굴 효과 제대로 봤다!' 웰컴저축은행, 에스와이 꺾고 2연승 질주…...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-03T00:11:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/117/0004121228"
     }
    ]
   },
@@ -395,11 +267,75 @@
    ]
   },
   {
+   "keyword": "한다감 아들 생후 26일 공개",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-02T23:25:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'47세 출산' 한다감, 조리원 떠나 본격 육아…\"아들 울면 온몸에 땀 나\"...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-03T00:35:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002075654"
+    },
+    {
+     "title": "'47세 산모' 한다감, 고령 출산 전혀 문제없었다…생후 26일 차 아들 방...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-03T00:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000782725"
+    },
+    {
+     "title": "'47세 초보 엄마' 한다감, 생후 26일 아들 최초 공개…\"울면 온몸에 땀 ...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T00:21:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009266159"
+    }
+   ]
+  },
+  {
+   "keyword": "웰컴저축은행 팀리그 2연승",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-02T23:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "PBA '전력 보강' 웰컴저축은행, 에스와이 꺾고 2연승",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-03T00:23:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/055/0001400157"
+    },
+    {
+     "title": "'웰컴저축은행이 옳았다' 유일 추가선발, 강유진 승-T.응우옌 승... 2연승...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-03T00:18:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/108/0003483995"
+    },
+    {
+     "title": "'새 얼굴 효과 제대로 봤다!' 웰컴저축은행, 에스와이 꺾고 2연승 질주…...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-03T00:11:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/117/0004121228"
+    }
+   ]
+  },
+  {
    "keyword": "김민",
    "sources": [
     "google"
    ],
-   "articles90": 11,
+   "articles90": 13,
    "recent20": 3,
    "press": 6,
    "firstArticleAt": "2026-11-02T23:44:00.000Z",
@@ -407,22 +343,22 @@
    "capped": false,
    "samples": [
     {
+     "title": "'동두천 스타' 김민, 타고 다니던 오토바이는 父 유품…\"떠나신지 10년\"...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-03T00:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004121245"
+    },
+    {
+     "title": "김민, '동두천 자연인' 일등공신은 父 \"10년전 돌아가셔\"..가족사진 공개...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-03T00:49:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005633349"
+    },
+    {
      "title": "'아침마당' 김민, \"父 평생 미장 일…돌아가신지 10년\" [TV캡처]",
      "press": "stoo.com",
      "publishedAt": "2026-11-03T00:40:00.000Z",
      "link": "http://www.stoo.com/article.php?aid=109678350067"
-    },
-    {
-     "title": "김민, 뉴진랜드서 아나콘다 잡았다더니 해명…\"알고보니 미역\" [아침마...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-03T00:25:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004121233"
-    },
-    {
-     "title": "'아침마당' 김민, 아나콘다 잡은 일화 해명 \"알고 보니 미역이었다\" [TV...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-03T00:24:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109678132432"
     }
    ]
   },
@@ -431,7 +367,7 @@
    "sources": [
     "google"
    ],
-   "articles90": 6,
+   "articles90": 7,
    "recent20": 3,
    "press": 6,
    "firstArticleAt": "2026-11-03T00:06:00.000Z",
@@ -439,55 +375,86 @@
    "capped": false,
    "samples": [
     {
+     "title": "처브라이프, 사망보장과 함께 입원·수술비도 보장하는 종신보험 출시",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T00:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009266259?sid=101"
+    },
+    {
+     "title": "동양생명, '우리WON하는건강플러스종신보험' 출시",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-03T00:44:00.000Z",
+     "link": "https://www.ajunews.com/view/20261103094022308"
+    },
+    {
      "title": "동양생명, 건강플러스종신보험 출시…종신 경쟁 가열 속 상품 강화",
      "press": "news2day.co.kr",
      "publishedAt": "2026-11-03T00:38:00.000Z",
      "link": "https://www.news2day.co.kr/article/20261103500052"
-    },
-    {
-     "title": "처브라이프, '처브 플러스 건강종신보험' 선봬",
-     "press": "enewstoday.co.kr",
-     "publishedAt": "2026-11-03T00:26:00.000Z",
-     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2487626"
-    },
-    {
-     "title": "하나은행, 종신보험 연계 신탁으로 장애인 자녀 재산관리 지원",
-     "press": "sports.hankooki.com",
-     "publishedAt": "2026-11-03T00:26:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6942730"
     }
    ]
   },
   {
-   "keyword": "지민",
+   "keyword": "김원효",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 6,
-   "recent20": 0,
+   "articles90": 5,
+   "recent20": 2,
    "press": 5,
-   "firstArticleAt": "2026-11-02T23:14:00.000Z",
+   "firstArticleAt": "2026-11-02T23:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "BTS 지민父 카페, 돌연 폐업 예고…“내년 영업 종료”",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-02T23:59:00.000Z",
-     "link": "https://m.entertain.naver.com/article/021/0002829811"
+     "title": "김원효 \"주식 투자로 2억 날렸다\"...심진화와 이혼 위기 고백",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-03T00:46:00.000Z",
+     "link": "https://www.insight.co.kr/news/580343"
     },
     {
-     "title": "BTS 지민 ‘애착 모자 쓰고’[포토엔HD]",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-02T23:45:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001183804"
+     "title": "김원효 \"주식 투자로 2억원 날려…심진화와 이혼 위기\"",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-03T00:45:00.000Z",
+     "link": "https://m.entertain.naver.com/article/015/0005349541"
     },
     {
-     "title": "BTS 지민 ‘남사친 비주얼 뽐내며’[포토엔HD]",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-02T23:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001183803"
+     "title": "김원효, 심진화와 이혼 위기 겪었다 \"투자 실패로 2억 날려…전 재산 홀...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T00:18:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009266154"
+    }
+   ]
+  },
+  {
+   "keyword": "탑 나나 생일카페 동행",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-02T23:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "탑·나나, 열애 인정 한 달 만에 생일카페 동행...공개 데이트?",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-03T00:46:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=778536"
+    },
+    {
+     "title": "[뮤즈이슈]탑, ♥나나와 팬 생일카페 동행 “팬들 향한 예의 아냐” 갑...",
+     "press": "heraldmuse.com",
+     "publishedAt": "2026-11-03T00:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/112/0003811937"
+    },
+    {
+     "title": "‘손절’ 20년 팬덤에 사과한 이유? 탑, ♥나나와 생일카페 공개 데이트...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-03T00:16:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001145796"
     }
    ]
   },
@@ -524,41 +491,42 @@
    ]
   },
   {
-   "keyword": "김원효",
+   "keyword": "지민",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-02T23:32:00.000Z",
+   "firstArticleAt": "2026-11-02T23:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김원효, 심진화와 이혼 위기 겪었다 \"투자 실패로 2억 날려…전 재산 홀...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T00:18:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009266154"
+     "title": "BTS 지민父 카페, 돌연 폐업 예고…“내년 영업 종료”",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-02T23:59:00.000Z",
+     "link": "https://m.entertain.naver.com/article/021/0002829811"
     },
     {
-     "title": "김원효, ♥심진화와 이혼 위기 고백 “투자 실패로 전 재산 날려..간실...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-03T00:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005633331"
+     "title": "BTS 지민 ‘애착 모자 쓰고’[포토엔HD]",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-02T23:45:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001183804"
     },
     {
-     "title": "김원효, 매년 ♥심진화에 명품백 선물…누적 1억 넘어 “혼인 서약 지키...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-02T23:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001147769"
+     "title": "BTS 지민 ‘남사친 비주얼 뽐내며’[포토엔HD]",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-02T23:43:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001183803"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 254,
+  "flagged": 257,
   "matched": 95,
   "avgLeadMin": 226,
   "recent": [
