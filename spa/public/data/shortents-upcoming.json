@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T16:29:26.564Z",
+ "builtAt": "2026-11-03T16:39:30.576Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "김민석 신천지 사과하라",
    "sources": [
     "nate"
    ],
-   "articles90": 10,
+   "articles90": 6,
    "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-03T15:01:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-03T15:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -47,10 +47,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 5,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-03T15:04:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-03T15:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,68 +75,34 @@
    ]
   },
   {
-   "keyword": "10월 소비자물가 2.8%",
+   "keyword": "돌싱 n 모솔",
    "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-03T15:02:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[사설] 소비자물가 6개월째 3% 안팎…주름살 깊어지는 서민경제",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-03T16:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005349944?sid=110"
-    },
-    {
-     "title": "10월 물가 2.8% 상승… 석유류 14.9%-가공식품 2.9% 뜀박질",
-     "press": "donga.com",
-     "publishedAt": "2026-11-03T15:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003759843?sid=101"
-    },
-    {
-     "title": "울산 소비자물가 넉달만에 3%대 재진입",
-     "press": "ksilbo.co.kr",
-     "publishedAt": "2026-11-03T15:04:00.000Z",
-     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1071531"
-    }
-   ]
-  },
-  {
-   "keyword": "한학자 보석 취소",
-   "sources": [
-    "signal.bz",
-    "nate",
     "daum"
    ],
    "articles90": 3,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T15:04:00.000Z",
+   "press": 2,
+   "firstArticleAt": "2026-11-03T15:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'천정궁 외출' 한학자, 다시 구치소로…JTBC 보도 하루 만에 보석 취소",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-03T15:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000518992?sid=102"
+     "title": "[종합] \"이렇게 생겨서 모솔이면 어떡해\"…'돌싱N모솔2' 첫 인상에 엇갈...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-03T15:24:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267533"
     },
     {
-     "title": "천정궁 오간 한학자‥보름 만에 구치소로",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-03T15:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533330?sid=102"
+     "title": "김우빈 닮은 모솔남 등장에 넉살 \"앞에 분들은 뭐가 됩니까?\" ('돌싱N모...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-03T15:20:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000486226"
     },
     {
-     "title": "'천정궁' 다녀온 한학자 총재, 法 보석 취소",
-     "press": "getnews.co.kr",
-     "publishedAt": "2026-11-03T15:04:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=885899"
+     "title": "\"나 너 좋아하냐\"…'돌싱N모솔2' 선착순 첫인상 투표에 흔들린 삼각 신...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-03T15:12:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267531"
     }
    ]
   }
