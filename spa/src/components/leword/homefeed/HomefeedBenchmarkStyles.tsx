@@ -17,7 +17,7 @@ export default function HomefeedBenchmarkStyles() {return <style>{`
 .hfb-src-body{display:flex;flex-direction:column;gap:6px;flex:1;padding:11px 12px 12px}
 .hfb-src-meta{font-size:12px;color:#8d9db4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .hfb-src-title{font-size:15px;font-weight:700;line-height:1.45;color:#f1f5f9;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.hfb-src-chips{display:flex;flex-wrap:wrap;gap:5px}.hfb-src-chips span{padding:1px 7px;border-radius:6px;background:rgba(148,163,184,.12);color:#b3c6de;font-size:12px;font-variant-numeric:tabular-nums}.hfb-src-chips .up{background:rgba(52,211,153,.14);color:#6ee7b7}
+.hfb-src-chips{display:flex;flex-wrap:wrap;gap:5px}.hfb-src-chips span{padding:1px 7px;border-radius:6px;background:rgba(148,163,184,.12);color:#b3c6de;font-size:12px;font-variant-numeric:tabular-nums}.hfb-src-chips .up{background:rgba(52,211,153,.14);color:#6ee7b7}.hfb-src-chips .hf{background:rgba(250,204,21,.16);color:#fde68a;font-weight:700}
 .hfb-src-open{margin-top:auto;display:flex;align-items:center;justify-content:center;gap:6px;min-height:44px;border-radius:9px;border:1px solid rgba(103,232,249,.38);background:rgba(103,232,249,.1);color:#a5f3fc;font-size:14px;font-weight:700}
 .hf-benchmark a.hfb-src-tile:hover .hfb-src-open{background:rgba(103,232,249,.2)}.hfb-src-open.off{border-style:dashed;border-color:var(--hfb-line);background:none;color:#8d9db4;font-weight:500}
 .hfb-src-more{display:block;width:100%;margin-top:12px;min-height:44px;border:1px solid var(--hfb-line);border-radius:9px;background:none;color:#cbd5e1;font-size:14px}

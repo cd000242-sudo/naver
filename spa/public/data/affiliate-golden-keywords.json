@@ -1,0 +1,303 @@
+{
+  "schemaVersion": 1,
+  "builtAt": "2026-11-02T01:47:36.479Z",
+  "source": "naver-searchad+blog-search",
+  "minVolume": 100,
+  "categories": {
+    "식품": {
+      "seeds": [
+        "한판",
+        "새우",
+        "파지",
+        "두리안",
+        "무라벨"
+      ],
+      "measured": 77,
+      "keywords": [
+        {
+          "keyword": "새우젖육젖",
+          "volume": 4070,
+          "docs": 429,
+          "docRatio": 0.1054,
+          "grade": "S",
+          "seed": "새우",
+          "measuredAt": "2026-11-02T01:47:36.479Z"
+        },
+        {
+          "keyword": "북새우젓",
+          "volume": 5560,
+          "docs": 875,
+          "docRatio": 0.1574,
+          "grade": "S",
+          "seed": "새우",
+          "measuredAt": "2026-11-02T01:47:36.479Z"
+        },
+        {
+          "keyword": "김장용생새우",
+          "volume": 9400,
+          "docs": 8243,
+          "docRatio": 0.8769,
+          "grade": "B",
+          "seed": "새우",
+          "measuredAt": "2026-11-02T01:47:36.479Z"
+        }
+      ]
+    },
+    "가전디지털": {
+      "seeds": [
+        "전기매트",
+        "가습기",
+        "탄소매트",
+        "청소기",
+        "무선 이어폰"
+      ],
+      "measured": 150,
+      "keywords": [
+        {
+          "keyword": "깃든탄소매트",
+          "volume": 4470,
+          "docs": 700,
+          "docRatio": 0.1566,
+          "grade": "S",
+          "seed": "탄소매트",
+          "measuredAt": "2026-11-02T01:47:36.479Z"
+        },
+        {
+          "keyword": "조지루시가습기",
+          "volume": 73500,
+          "docs": 12851,
+          "docRatio": 0.1748,
+          "grade": "S",
+          "seed": "가습기",
+          "measuredAt": "2026-11-02T01:47:36.479Z"
+        },
+        {
+          "keyword": "셀리온탄소매트",
+          "volume": 4120,
+          "docs": 870,
+          "docRatio": 0.2112,
+          "grade": "S",
+          "seed": "탄소매트",
+          "measuredAt": "2026-11-02T01:47:36.479Z"
+        },
+        {
+          "keyword": "루메나가습기",
+          "volume": 27440,
+          "docs": 8463,
+          "docRatio": 0.3084,
+          "grade": "A",
+          "seed": "가습기",
+          "measuredAt": "2026-11-02T01:47:36.479Z"
+        },
+        {
+          "keyword": "벤타가습기",
+          "volume": 24680,
+          "docs": 10312,
+          "docRatio": 0.4178,
+          "grade": "A",
+          "seed": "가습기",
+          "measuredAt": "2026-11-02T01:47:36.479Z"
+        },
+        {
+          "keyword": "아이닉가습기",
+          "volume": 5280,
+          "docs": 2365,
+          "docRatio": 0.4479,
+          "grade": "A",
+          "seed": "가습기",
+          "measuredAt": "2026-11-02T01:47:36.479Z"
+        },
+        {
+          "keyword": "신일가열식가습기",
+          "volume": 9340,
+          "docs": 4499,
+          "docRatio": 0.4817,
+          "grade": "A",
+          "seed": "가습기",
+          "measuredAt": "2026-11-02T01:47:36.479Z"
+        },
+        {
+          "keyword": "에어메이드가습기",
+          "volume": 38410,
+          "docs": 22752,
+          "docRatio": 0.5923,
+          "grade": "A",
+          "seed": "가습기",
+          "measuredAt": "2026-11-02T01:47:36.479Z"
+        },
+        {
+          "keyword": "보국전기매트",
+          "volume": 10140,
+          "docs": 6875,
+          "docRatio": 0.678,
+          "grade": "A",
+          "seed": "전기매트",
+          "measuredAt": "2026-11-02T01:47:36.479Z"
+        },
+        {
+          "keyword": "쿠쿠가열식가습기",
+          "volume": 3390,
+          "docs": 2749,
+          "docRatio": 0.8109,
+          "grade": "B",
+          "seed": "가습기",
+          "measuredAt": "2026-11-02T01:47:36.479Z"
+        },
+        {
+          "keyword": "일월전기매트",
+          "volume": 37670,
+          "docs": 31421,
+          "docRatio": 0.8341,
+          "grade": "B",
+          "seed": "전기매트",
+          "measuredAt": "2026-11-02T01:47:36.479Z"
+        }
+      ]
+    },
+    "주방용품": {
+      "seeds": [
+        "과도",
+        "냄비",
+        "위생수세미",
+        "양면도마",
+        "다이닝"
+      ],
+      "measured": 65,
+      "keywords": [
+        {
+          "keyword": "저압냄비",
+          "volume": 31140,
+          "docs": 6528,
+          "docRatio": 0.2096,
+          "grade": "S",
+          "seed": "냄비",
+          "measuredAt": "2026-11-02T01:47:36.479Z"
+        },
+        {
+          "keyword": "AMT냄비",
+          "volume": 17940,
+          "docs": 10646,
+          "docRatio": 0.5934,
+          "grade": "A",
+          "seed": "냄비",
+          "measuredAt": "2026-11-02T01:47:36.479Z"
+        },
+        {
+          "keyword": "핀일로냄비",
+          "volume": 2210,
+          "docs": 1849,
+          "docRatio": 0.8367,
+          "grade": "B",
+          "seed": "냄비",
+          "measuredAt": "2026-11-02T01:47:36.479Z"
+        }
+      ]
+    },
+    "뷰티": {
+      "seeds": [
+        "크림",
+        "샴푸",
+        "바디워시",
+        "토닉",
+        "샴푸바"
+      ],
+      "measured": 150,
+      "keywords": [
+        {
+          "keyword": "알페인샴푸",
+          "volume": 1020,
+          "docs": 112,
+          "docRatio": 0.1098,
+          "grade": "S",
+          "seed": "샴푸",
+          "measuredAt": "2026-11-02T01:47:36.479Z"
+        },
+        {
+          "keyword": "홍현희샴푸",
+          "volume": 5540,
+          "docs": 1573,
+          "docRatio": 0.2839,
+          "grade": "S",
+          "seed": "샴푸",
+          "measuredAt": "2026-11-02T01:47:36.479Z"
+        },
+        {
+          "keyword": "멜라논크림",
+          "volume": 36240,
+          "docs": 18122,
+          "docRatio": 0.5001,
+          "grade": "A",
+          "seed": "크림",
+          "measuredAt": "2026-11-02T01:47:36.479Z"
+        },
+        {
+          "keyword": "멜라토닝크림",
+          "volume": 27970,
+          "docs": 16857,
+          "docRatio": 0.6027,
+          "grade": "A",
+          "seed": "크림",
+          "measuredAt": "2026-11-02T01:47:36.479Z"
+        },
+        {
+          "keyword": "노네랄바디워시",
+          "volume": 2810,
+          "docs": 1846,
+          "docRatio": 0.6569,
+          "grade": "A",
+          "seed": "바디워시",
+          "measuredAt": "2026-11-02T01:47:36.479Z"
+        },
+        {
+          "keyword": "티르티르도자기크림",
+          "volume": 3100,
+          "docs": 2731,
+          "docRatio": 0.881,
+          "grade": "B",
+          "seed": "크림",
+          "measuredAt": "2026-11-02T01:47:36.479Z"
+        }
+      ]
+    },
+    "가구/인테리어": {
+      "seeds": [
+        "정리함",
+        "발매트",
+        "미니스툴",
+        "바스툴",
+        "수납선반"
+      ],
+      "measured": 62,
+      "keywords": [
+        {
+          "keyword": "보웰발매트",
+          "volume": 790,
+          "docs": 485,
+          "docRatio": 0.6139,
+          "grade": "A",
+          "seed": "발매트",
+          "measuredAt": "2026-11-02T01:47:36.479Z"
+        }
+      ]
+    },
+    "출산/육아": {
+      "seeds": [
+        "비누",
+        "야간모드",
+        "체온계"
+      ],
+      "measured": 110,
+      "keywords": [
+        {
+          "keyword": "브라운체온계6525",
+          "volume": 8880,
+          "docs": 4056,
+          "docRatio": 0.4568,
+          "grade": "A",
+          "seed": "체온계",
+          "measuredAt": "2026-11-02T01:47:36.479Z"
+        }
+      ]
+    }
+  }
+}

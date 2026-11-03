@@ -43,7 +43,7 @@ const ASSIST_OPEN_KEY = 'leword.assist.open';
 
 const TABS = [
     { id: 'golden', label: '리더남 전용 황금키워드', short: '황금키워드', icon: '◆' },
-    { id: 'issue', label: '실검 틈새키워드', short: '실검 틈새', icon: '⚡' },
+    { id: 'issue', label: '실검 틈새 및 숏텐츠', short: '실검·숏텐츠', icon: '⚡' },
     // 홈판 신호(사장님 명령서 STORY RADAR v2.0, 2026-09-16) — 실검 틈새 바로 옆. 이용권 탭(맛보기 목록에 넣지 않는다).
     { id: 'homefeed', label: '리더남 홈판 추천 소재 · 제목', short: '홈판 추천', icon: '◉' },
     // 애드센스 고수 벤치마크(2026-10-07 사장님 "홈판 아래에") — 엑셀 고수 블로그 786곳 최근 7일 소재. 이용권 탭.

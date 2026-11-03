@@ -77,9 +77,5 @@
 //   (불명확 증거는 진입 시 확인된 세션으로 계속). 블로그 주소를 붙여 넣은 계정 ID는 순수 ID로
 //   환원한다. 저널·가드의 상태 파일 교체는 EPERM/EBUSY/EACCES 에서 최대 5회(≤650ms) 재시도하고
 //   그래도 실패하면 종전처럼 멈춘다.
-// [2026-10-20] Reviewed v2.11.365 recurring publishing wiring and its complete runtime closure.
-// The nine new HTTP, discovery, executor, store and scheduler modules are now hashed.
-// Existing origin/token, license, account safety and publication confirmation boundaries remain enforced.
-// This updates source identity only; evidence approval and release activation remain unchanged.
 export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256 =
-  '33e3c017856b1058b6e17321d3d3d1ae3db491207e52fbb35fc55c931af93506' as const;
+  'de4d2272e87ff6c314eebcfbaae042103a124c6a57c24f327cdcc48e60cc258e' as const;

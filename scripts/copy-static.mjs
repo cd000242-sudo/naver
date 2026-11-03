@@ -142,8 +142,8 @@ try {
     // Renderer settings/prompt modules import text-model helpers directly.
     // CommonJS imports are stripped below, so the registry must exist first.
     'geminiTextModelNormalization.js',
+    'imageProviderMigration.js',
     'imageStudioPreferences.js',
-  'imageProviderMigration.js',
   ];
   let runtimeSource = '';
   for (const runtimeFile of runtimeModules) {
@@ -380,6 +380,11 @@ try {
       filePath: path.join(projectRoot, 'dist', 'content', 'keywordTitlePrefixPolicy.js'),
     },
     {
+      // [2026-10-22] 요청사항 합치기(mergeCustomPrompt) — contentGeneration · 연속발행 · 다중계정 · 풀오토가 값으로 가져온다.
+      label: 'contentRequestSections.js',
+      filePath: path.join(projectRoot, 'dist', 'contentRequestSections.js'),
+    },
+    {
       label: 'automation/publishFailureClassifier.js',
       filePath: path.join(projectRoot, 'dist', 'automation', 'publishFailureClassifier.js'),
     },
@@ -450,12 +455,6 @@ try {
       // [2026-09-03 가드] licenseUI 가 import — 번들에 정의가 없었다(FREE_TRIAL_DAILY_PUBLISH_LIMIT 호출만 존재).
       label: 'freeTrialPolicy.js',
       filePath: path.join(projectRoot, 'dist', 'freeTrialPolicy.js'),
-    },
-    {
-      // [2026-11-03 런타임 ReferenceError] contentGeneration·continuousPublishing·fullAutoFlow·multiAccountManager 가
-      //   mergeCustomPrompt 를 import 한다(3af1e5e97) — 등록 누락으로 번들에 호출만 있고 정의가 없었다.
-      label: 'contentRequestSections.js',
-      filePath: path.join(projectRoot, 'dist', 'contentRequestSections.js'),
     },
     {
       // [2026-09-03 가드] scheduleManager 가 import — 번들에 정의가 없었다(selectScheduledPostCandidate 호출만 존재).
@@ -563,7 +562,7 @@ try {
     'agentQuotaBadge.js',          // [2026-08-26] 에이전트 구독 잔여 배찌
     'noticeAdmin.js',
     'imageAiDisclosureSetting.js',
-  'imageManagementTab.js',
+    'imageManagementTab.js',
     'guideModals.js',
     'dashboardUI.js',
     'tailUIUtils.js',
@@ -586,7 +585,7 @@ try {
     'continuousPublishModeHelpers.js',  // ✅ 연속발행 publishMode 해석 헬퍼 (continuousPublishing보다 먼저 로드)
     'continuousPublishing.js',
     'thumbnailStudioCore.js',
-  'thumbnailGenerator.js',
+    'thumbnailGenerator.js',
     'intervalJitter.js',  // ✅ [2026-05-23 A5] 발행 간격 jitter 유틸 (multiAccountManager보다 먼저 로드 필수)
     'featureLockModal.js',  // ✅ [2026-05-25 v2.10.353] Pro 기능 잠금 모달 (continuousPublishing/multiAccountManager보다 먼저 로드 필수 — window 글로벌 등록)
     'accountSafetyControls.js',

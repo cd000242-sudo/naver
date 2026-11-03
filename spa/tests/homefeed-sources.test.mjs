@@ -35,3 +35,13 @@ test('카드 위쪽에 원문 타일 — 리퍼러 없이 썸네일 · 원문 �
   assert.match(tiles, /원문 열기/);
   assert.ok(card.indexOf('<BenchmarkSources') < card.indexOf('<TitleList'), '원문 타일이 제목 목록보다 위');
 });
+
+test('실측 신호를 화면에 — 출처 블로그 홈판 상위 횟수 배지 · 발행 시각 안내(2026-10-27)', () => {
+  const tiles = readFileSync(new URL('../src/components/leword/homefeed/BenchmarkSources.tsx', import.meta.url), 'utf8');
+  assert.match(tiles, /홈판 상위 \{tops\}회/);
+  const card = readFileSync(new URL('../src/components/leword/homefeed/HomefeedBenchmarkCard.tsx', import.meta.url), 'utf8');
+  assert.match(card, /label:'언제 올릴지'/);
+  const board = normalizeBenchmarkBoard({ schemaVersion: 1, generatedAt: '2026-10-22T00:00:00.000Z', sources: [], homefeedTopBlogs: { abc: 3, 'bad id!': 2, zero: 0 }, candidates: [{ id: 'c', keyword: 'k', title: 't', status: 'review-now', sources: [{ id: 's', name: 'n', url: 'https://blog.naver.com/a/1', title: '글', homefeedTops: 3 }] }] });
+  assert.deepEqual(board.homefeedTopBlogs, { abc: 3 });
+  assert.equal(board.candidates[0].sources[0].homefeedTops, 3);
+});

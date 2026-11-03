@@ -20,7 +20,7 @@ const BANDS = [
     {
         title: '오늘 쓸 키워드는 이미 재 놓았습니다',
         body: '검색량은 붙었는데 블로그 글은 적은 말을, 매일 검색결과를 직접 열어 확인하고 남깁니다. 지금 뜨는 이슈 가운데 아직 글이 적은 틈새도 따로 모읍니다.',
-        tabs: ['리더남 전용 황금키워드', '실검 틈새키워드', '오늘의 네이버 추천키워드'],
+        tabs: ['리더남 전용 황금키워드', '실검 틈새 및 숏텐츠', '오늘의 네이버 추천키워드'],
         shot: { src: '/images/leword/product/golden-board.webp', mobileSrc: '/images/leword/product/m/golden-board.webp', alt: 'LEWORD 리더남 전용 황금키워드 화면 — 오늘 확인 · 최근 7일 · 전체 보관', caption: '리더남 전용 황금키워드 · 실제 화면' },
     },
     {
