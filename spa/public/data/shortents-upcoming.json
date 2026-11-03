@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T03:54:46.027Z",
+ "builtAt": "2026-11-03T04:04:50.504Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,58 +8,25 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "발언하는 이재명 대통령",
+   "keyword": "이종석 새 연기",
    "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 46,
-   "recent20": 9,
-   "press": 32,
-   "firstArticleAt": "2026-11-03T02:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이주민 단체, 이 대통령의 '이주노동자·다문화가정' 발언 규탄[노컷네...",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-03T03:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205922?sid=102"
-    },
-    {
-     "title": "이재명 대통령 “‘사이버보안 차르’ 구성 검토하라…범정부 기구 필요...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-03T03:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005758154?sid=100"
-    },
-    {
-     "title": "이 대통령 “약자 지원책 세심하게 마련하되, 공정성 고려해야”",
-     "press": "vop.co.kr",
-     "publishedAt": "2026-11-03T03:44:00.000Z",
-     "link": "https://vop.co.kr/A00001697441.html"
-    }
-   ]
-  },
-  {
-   "keyword": "재혼 황후 이종석 왕자 역할 부담",
-   "sources": [
-    "nate"
+    "daum"
    ],
    "articles90": 29,
-   "recent20": 6,
-   "press": 23,
+   "recent20": 2,
+   "press": 24,
    "firstArticleAt": "2026-11-03T02:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'재혼 황후', 공개일 앞당긴 승부수…K-로판 대작 출발(종합)",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-03T03:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/629/0000548226"
+     "title": "'재혼황후' 이종석 \"왕자 역할 언제 해보겠나…외적 모습에 신경 많이 ...",
+     "press": "ent.sbs.co.kr",
+     "publishedAt": "2026-11-03T04:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/416/0000327822"
     },
     {
      "title": "신민아·주지훈·이종석·이세영, '재혼 황후'로 K-로맨스 판타지 새 장...",
@@ -68,57 +35,32 @@
      "link": "http://www.starnewsk.com/news/articleView.html?idxno=60621"
     },
     {
-     "title": "\"세계관 즐겨주길\" 공개일 앞당긴 '재혼황후'의 자신감…K로판 새 장 열...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-03T03:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000636721"
+     "title": "'재혼 황후' 이종석, 새 닮은꼴 인정 \"제가 좀 새상이긴 하다\"…부담감...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-03T03:43:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002075746"
     }
    ]
   },
   {
-   "keyword": "LG엔솔, ESS 생산 증가",
+   "keyword": "감기약 필로폰 일당 검거",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 22,
    "recent20": 1,
-   "press": 21,
-   "firstArticleAt": "2026-11-03T02:25:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "LG엔솔, 북미 ESS 2028년까지 일감 찼다…수익성은 숙제",
-     "press": "daily.hankooki.com",
-     "publishedAt": "2026-11-03T03:50:00.000Z",
-     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1421180"
-    },
-    {
-     "title": "LG엔솔, 3분기 영업익 7560억 달성… 전년 대비 25.7%↑",
-     "press": "newsdream.kr",
-     "publishedAt": "2026-11-03T03:26:00.000Z",
-     "link": "http://www.newsdream.kr/news/articleView.html?idxno=121379"
-    },
-    {
-     "title": "LG엔솔 \"북미 ESS 2028년 물량 대부분 확보⋯46시리즈 수주 확대\" [컨콜종...",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-03T03:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001071715?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "감기약으로 필로폰 제조 일당 검거",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 21,
-   "recent20": 1,
-   "press": 17,
+   "press": 18,
    "firstArticleAt": "2026-11-03T03:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "감기약 성분으로 필로폰 제조…13명 검거",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-03T04:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922380?sid=102"
+    },
     {
      "title": "경찰, 감기약으로 4만명 투약분 필로폰 제조한 일당 검거",
      "press": "joongang.co.kr",
@@ -130,12 +72,6 @@
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-03T03:23:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/214/0001533194?sid=102"
-    },
-    {
-     "title": "감기약으로 필로폰 4만 명분 제조한 일당 검거",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-03T03:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400214?sid=102"
     }
    ]
   },
@@ -145,93 +81,126 @@
     "signal.bz"
    ],
    "articles90": 21,
-   "recent20": 0,
+   "recent20": 2,
    "press": 15,
-   "firstArticleAt": "2026-11-03T02:30:00.000Z",
+   "firstArticleAt": "2026-11-03T02:41:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "10월 물가 안정세 진입했지만 잠재적 물가상승 압력 여전",
+     "press": "naeil.com",
+     "publishedAt": "2026-11-03T04:02:00.000Z",
+     "link": "https://www.naeil.com/news/read/607350?ref=naver"
+    },
+    {
+     "title": "[사설] 심상찮은 소비자물가 흐름, 한층 강해진 11월 금리인상 압박",
+     "press": "asiatime.co.kr",
+     "publishedAt": "2026-11-03T03:56:00.000Z",
+     "link": "https://www.asiatime.co.kr/article/20261103500205"
+    },
     {
      "title": "10월, 소비자물가지수 2.8% ‘껑충’…가공식품 11개월·외식 8개월 만에...",
      "press": "swtvnews.com",
      "publishedAt": "2026-11-03T03:26:00.000Z",
      "link": "https://www.swtvnews.com/news/newsview.php?ncode=1065577102505627"
-    },
-    {
-     "title": "물가 2.8% 상승… 석유류·외식 동반 급등",
-     "press": "theopiniontimes.news",
-     "publishedAt": "2026-11-03T03:18:00.000Z",
-     "link": "https://theopiniontimes.news/%eb%ac%bc%ea%b0%80-2-8-%ec%83%81%ec%8a%b9-%ec%84%9d%ec%9c%a0%eb%a5%98%c2%b7%ec%99%b8%ec%8b%9d-%eb%8f%99%eb%b0%98-%ea%b8%89%eb%93%b1/"
-    },
-    {
-     "title": "가공식품·외식 오름폭 커져…10월 소비자물가 2.8%↑",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-03T03:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400212?sid=101"
     }
    ]
   },
   {
-   "keyword": "국민의힘 장동혁 대표",
+   "keyword": "장동혁 국민의힘 대표",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 64,
-   "recent20": 29,
-   "press": 11,
+   "articles90": 66,
+   "recent20": 12,
+   "press": 13,
    "firstArticleAt": "2026-11-03T03:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "장동혁 ‘민생’·오세훈 ‘통합’·한동훈 ‘공천개혁’…보수 주도권...",
-     "press": "kbmaeil.com",
-     "publishedAt": "2026-11-03T03:52:00.000Z",
-     "link": "https://www.kbmaeil.com/article/20261103500348"
+     "title": "대통령-국민의힘 연일 ‘충돌’ … 정치 설 자리가 없어진다",
+     "press": "naeil.com",
+     "publishedAt": "2026-11-03T04:02:00.000Z",
+     "link": "https://www.naeil.com/news/read/607361?ref=naver"
     },
     {
-     "title": "당 중진들과 인사 나누는 오세훈 시장과 장동혁 대표",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-03T03:50:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3740741"
+     "title": "장동혁 \"李정부 '나쁜 예산' 줄이고 5대 민생 예산 11.6조 증액 추진\"",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-03T04:00:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4442753"
     },
     {
-     "title": "서울시 주최 토론회에서 기념촬영하는 국민의힘",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-03T03:50:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3740736"
+     "title": "장동혁 \"국민 삶 해결 예산 11.6조 증액…李정부 혈세 탕진 막겠다\"",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-03T03:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000548227?sid=100"
     }
    ]
   },
   {
-   "keyword": "서울양평 고속도로 재추진",
+   "keyword": "부동산 투자",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-03T02:26:00.000Z",
+   "articles90": 10,
+   "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-03T02:40:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "달라지는 부동산 개발 공식···'기업·일자리' 확보한 신도시 '부상'",
+     "press": "enewstoday.co.kr",
+     "publishedAt": "2026-11-03T04:03:00.000Z",
+     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2487615"
+    },
+    {
+     "title": "[분석] iM증권 3Q 견인한 부동산 PF…'한도 통합' 핵심",
+     "press": "tleaves.co.kr",
+     "publishedAt": "2026-11-03T04:02:00.000Z",
+     "link": "https://www.tleaves.co.kr/news/articleView.html?idxno=10084"
+    },
+    {
+     "title": "부동산 시장 '직주근접' 수요 들썩···지방서도 '인기'",
+     "press": "enewstoday.co.kr",
+     "publishedAt": "2026-11-03T03:58:00.000Z",
+     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2487607"
+    }
+   ]
+  },
+  {
+   "keyword": "민주당-한국노총 고위급정책협의회",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 30,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-03T03:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "3년 넘게 멈춘 서울~양평고속도로 재추진…국토부, 신규 타당성조사 착...",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-03T03:54:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261103021474746"
-    },
-    {
-     "title": "‘ 종점 변경 특혜 의혹’ 서울~양평 고속도로 타당성조사 착수",
+     "title": "민주당-한국노총 고위급정책협의회",
      "press": "mk.co.kr",
-     "publishedAt": "2026-11-03T03:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005758151?sid=103"
+     "publishedAt": "2026-11-03T03:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005758157?sid=100"
     },
     {
-     "title": "서울-양평 고속도로 사업 재추진…신규 타당성 조사 착수",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-03T03:16:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=72510"
+     "title": "민주당 대표와 한국노총 위원장",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-03T03:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005758156?sid=100"
+    },
+    {
+     "title": "김민석 대표, 한국노총 고위급정책협의회",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T03:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009266899?sid=100"
     }
    ]
   },
@@ -240,13 +209,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 8,
+   "articles90": 7,
    "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-03T02:28:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-03T02:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'기업회생' JTBC, 법원에 매각공고 허가 신청…내주 초 공고 예정",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-03T03:56:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/323951/?sc=Naver"
+    },
     {
      "title": "JTBC, '새 주인' 찾기 속도 낸다…법원에 매각공고 허가 신청",
      "press": "mhnse.com",
@@ -258,24 +233,146 @@
      "press": "ngonews.kr",
      "publishedAt": "2026-11-03T03:12:00.000Z",
      "link": "https://www.ngonews.kr/news/articleView.html?idxno=242209"
-    },
-    {
-     "title": "‘기업회생’ JTBC, 새 주인 찾기 속도... 법원에 매각공고 허가 신청",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-03T03:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003538835"
     }
    ]
   },
   {
-   "keyword": "박주민 의원",
+   "keyword": "미래대응기금 공청회",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 1,
+   "articles90": 8,
+   "recent20": 0,
    "press": 7,
-   "firstArticleAt": "2026-11-03T02:28:00.000Z",
+   "firstArticleAt": "2026-11-03T02:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "미래대응기금 신설 놓고 찬반 격론…\"재정 안전장치\" vs \"지방재정 침해...",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-03T03:32:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=727738"
+    },
+    {
+     "title": "여야, 미래대응기금 설치 놓고 충돌...“재정 안전장치” vs “지방재정...",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-03T03:16:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=72513"
+    },
+    {
+     "title": "'미래 선제 투자'냐 '국가 채무 부담'이냐…재경위, 미래대응기금 공방",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-03T03:12:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=879278"
+    }
+   ]
+  },
+  {
+   "keyword": "신장식 대표 취임 100일 간담회",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 19,
+   "recent20": 6,
+   "press": 6,
+   "firstArticleAt": "2026-11-03T02:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "신장식, 민주당 합당론에 선 긋기…\"국면 전환용 카드 안 받아\"",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-03T03:52:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=171848"
+    },
+    {
+     "title": "신장식 \"국면전환용 합당 카드 안 받아…1월 합당론, 식장 잡고 신부 구...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T03:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014297766?sid=100"
+    },
+    {
+     "title": "취임 100일 기자간담회 참석하는 신장식 대표",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T03:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009266908?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "서울양평 고속도로 재추진",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-03T03:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서울~양평 고속도로 3년 만에 재추진…원점 재검토",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-03T03:56:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=901744"
+    },
+    {
+     "title": "3년 넘게 멈춘 서울~양평고속도로 재추진…국토부, 신규 타당성조사 착...",
+     "press": "ekn.kr",
+     "publishedAt": "2026-11-03T03:54:00.000Z",
+     "link": "https://www.ekn.kr/web/view.php?key=20261103021474746"
+    },
+    {
+     "title": "‘ 종점 변경 특혜 의혹’ 서울~양평 고속도로 타당성조사 착수",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-03T03:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005758151?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "칸터, 1라운드 MVP 수상",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-03T02:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "케렘 칸터, 삼성의 시즌 초반 돌풍 주역으로 우뚝…프로농구 첫 라운드...",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-03T04:00:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=846008"
+    },
+    {
+     "title": "[농구] 칸터, 1라운드 MVP… 삼성 선수 9시즌 만에 수상",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-03T03:54:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3445454"
+    },
+    {
+     "title": "'KBL 새역사 일등공신' 칸터, 압도적 라운드 MVP 선정... 상금 200만원 [공...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-03T03:02:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/108/0003484070"
+    }
+   ]
+  },
+  {
+   "keyword": "박주민 의원 경찰 출석",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-03T02:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -286,80 +383,16 @@
      "link": "https://n.news.naver.com/mnews/article/047/0002534467?sid=100"
     },
     {
-     "title": "'吳 한강버스 논란' 수사 본격화…박주민 고발인 조사",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-03T03:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006402730?sid=102"
-    },
-    {
      "title": "박주민, '한강버스 허위사실 공표' 고발인 조사 출석 … 오세훈 수사 촉...",
      "press": "newdaily.co.kr",
      "publishedAt": "2026-11-03T02:54:00.000Z",
      "link": "https://www.newdaily.co.kr/site/data/html/2026/11/03/2026110300187.html"
-    }
-   ]
-  },
-  {
-   "keyword": "부동산 투자",
-   "sources": [
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-03T02:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'부동산 투자 수익 보장' 125억원 가로챈 경매학원 운영자 구속",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-03T03:36:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5079090"
     },
     {
-     "title": "마이크론, 반도체 공장 증설에 지역사회 투자 확대…주택·교통에 297억...",
-     "press": "impacton.net",
-     "publishedAt": "2026-11-03T03:34:00.000Z",
-     "link": "https://www.impacton.net/news/articleView.html?idxno=30511"
-    },
-    {
-     "title": "李대통령 “부동산, 놀랄 정도로 떨어져…정확한 데이터 알려야”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-03T02:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002718177?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "박두순 대변인 브리핑",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T02:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[포토]공군 1호기 탑승자 개인정보 유출 관련 브리핑하는 박두순 대변인",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-03T03:38:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261103010001005"
-    },
-    {
-     "title": "[포토]박두순 대변인 \"대통령 내외분 포함 모든 인사 여권 재발급\"",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-03T03:36:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261103010001004"
-    },
-    {
-     "title": "[포토]박두순 대변인 \"개인정보 유출 철저하게 조사할 방침\"",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-03T03:36:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261103010001003"
+     "title": "‘오세훈 한강버스 허위사실 공표’ 고발 박주민 의원 경찰 출석",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-03T02:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012286190?sid=102"
     }
    ]
   },
@@ -368,13 +401,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-03T02:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "국립생태원·LG디스플레이, 생물다양성 보전 맞손···ESG 협력 확대",
+     "press": "enewstoday.co.kr",
+     "publishedAt": "2026-11-03T04:00:00.000Z",
+     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2487758"
+    },
     {
      "title": "LG디스플레이, 국립생태원과 생물다양성 보전 협력…DMZ 생태계 복원 추...",
      "press": "mediafine.co.kr",
@@ -386,22 +425,22 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-03T02:48:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016418123?sid=102"
-    },
-    {
-     "title": "LG디스플레이, 파주사업장 인근 생태계 보전·복원 나선다",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-03T02:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205898?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 331,
-  "matched": 122,
-  "avgLeadMin": 253,
+  "flagged": 337,
+  "matched": 123,
+  "avgLeadMin": 251,
   "recent": [
+   {
+    "keyword": "박항서 인종차별",
+    "hitKeyword": "박항서 인종차별 조롱",
+    "hitAt": "2026-11-03T13:00:00+09:00",
+    "leadMin": 15
+   },
    {
     "keyword": "트럼프 공화당",
     "hitKeyword": "트럼프 중간선거 지지율",
@@ -455,12 +494,6 @@
     "hitKeyword": "뮌헨 케인 기자회견",
     "hitAt": "2026-11-03T11:30:00+09:00",
     "leadMin": 1284
-   },
-   {
-    "keyword": "미국 게슘섬 타격",
-    "hitKeyword": "미국 이란 게슘섬 타격",
-    "hitAt": "2026-11-03T11:30:00+09:00",
-    "leadMin": 46
    }
   ]
  }
