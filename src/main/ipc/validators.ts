@@ -55,6 +55,8 @@ export function validateIssueCollectPayload(payload: unknown): ValidationResult<
   intro?: string;
   /** [2026-09-17] 유료 AI 이미지 검사를 이번 수집에서 켰는가. 기본 false = 무료 캡션 판정. */
   paidVisionCheck?: boolean;
+  /** [2026-11-03] 'news' (default) = same scope as the 관련 사진 찾기 engine; 'wide' = every source as before. */
+  breadth?: 'news' | 'wide';
 }> {
   if (!payload || typeof payload !== 'object') return { ok: false, error: 'payload는 object여야 합니다' };
   const p = payload as Record<string, unknown>;
@@ -90,6 +92,7 @@ export function validateIssueCollectPayload(payload: unknown): ValidationResult<
       mainKeyword: (p.mainKeyword as string | undefined) ?? undefined,
       intro: (p.intro as string | undefined) ?? undefined,
       paidVisionCheck: p.paidVisionCheck === true,
+      breadth: p.breadth === 'wide' ? 'wide' : 'news',
     },
   };
 }

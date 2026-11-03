@@ -2097,8 +2097,7 @@ function collectFullAutoFormData() {
         }
     }
     const autoPublish = document.getElementById('auto-publish-after-generate')?.checked || false;
-    const includeThumbnailText = pipelineCfg.image.thumbnailTextInclude ||
-        document.getElementById('thumbnail-text-include')?.checked || false;
+    const includeThumbnailText = pipelineCfg.image.thumbnailTextInclude; // [2026-11-03] one key (thumbnailTextInclude), no checkbox OR
     const enablePreview = true;
     const autoOptimize = true;
     const enableBackup = true;

@@ -211,21 +211,6 @@ function readFullAutoImageSourceFromUi(): string {
   }
 }
 
-function readFullAutoImageModelFromUi(): string {
-  try {
-    if (typeof document === 'undefined') return '';
-    const selectedModel = document.querySelector(
-      'input[name="openai-image-model"]:checked',
-    ) as HTMLInputElement | null;
-    if (selectedModel?.value) return String(selectedModel.value).trim();
-
-    const submodalModel = document.getElementById?.('submodal-openai-image-model') as HTMLSelectElement | null;
-    return String(submodalModel?.value || '').trim();
-  } catch {
-    return '';
-  }
-}
-
 function normalizeShoppingConnectAIEngineCandidate(value: unknown): string {
   const raw = String(value || '').trim();
   if (!raw || raw === 'ai' || raw === 'collected') return '';
@@ -314,17 +299,18 @@ function normalizePositiveInt(value: string | null, fallback: number): number {
 export function resolvePipelineConfig(flow: PipelineFlow): PipelineConfig {
   const raw = readRawPipelineSettings();
   const currentShoppingSelection = readShoppingSelectionFromUi(flow);
+  // [2026-11-03] Storage is the base (globalImageSource, then the compat key); the screen is read only on a first
+  // run with nothing stored. The OpenAI model comes from storage/config too — no radio on screen overrides it.
+  // 'saved' (image vault) is a one-run choice that is never stored, so a selected button for it still counts.
+  const storedImageSource = normalizeCurrentImageSource(raw.globalImageSource)
+    || normalizeCurrentImageSource(raw.fullAutoImageSource);
+  const screenImageSource = flow === 'full-auto' ? readFullAutoImageSourceFromUi() : '';
   const currentFullAutoImageSource = flow === 'full-auto'
-    ? readFullAutoImageSourceFromUi()
-      || normalizeCurrentImageSource(raw.fullAutoImageSource)
-      || normalizeCurrentImageSource(raw.globalImageSource)
+    ? (screenImageSource === 'saved' ? 'saved' : storedImageSource || screenImageSource)
     : '';
-  const currentFullAutoImageModel = flow === 'full-auto'
-    ? readFullAutoImageModelFromUi()
-    : '';
+  const currentFullAutoImageModel = '';
   const resolvedImageSource = currentFullAutoImageSource
-    || raw.fullAutoImageSource
-    || raw.globalImageSource
+    || storedImageSource
     || 'openai-image'; // [2026-10-10] 저장값 없음 기본 = 덕트테이프
   const fullAutoShoppingEngine = flow === 'full-auto'
     ? currentFullAutoImageSource

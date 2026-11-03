@@ -5,6 +5,7 @@
  * - 상수 통합, 에러 핸들링 강화, 메모리 관리 개선
  */
 
+import { imgSyncNotify, imgSyncShoppingEngineFor } from '../../runtime/imageSettingsSync.js';
 import { bindDropshotLogin, refreshDropshotLoginStatus } from '../modules/dropshotLoginUi.js';
 // [2026-10-10] 젠스파크 로그인·모델 행
 import { gsRowHtml, gsApplyEngineToRow } from '../modules/gensparkLoginUi.js';
@@ -356,6 +357,11 @@ export function setGlobalImageSource(source: GlobalImageSource): void {
   } catch (e) {
     console.warn('[HeadingImageSettings] 드롭다운 미러 동기화 실패 (무시):', e);
   }
+  // [2026-11-03] 이미지 탭과 한몸 — 쇼핑 AI 엔진도 같이 쓰고, 다른 화면에 변경을 알린다.
+  const shoppingEngine = imgSyncShoppingEngineFor(normalized);
+  if (shoppingEngine) safeLocalStorageSet('scAIImageEngine', shoppingEngine);
+  if (typeof window !== 'undefined') (window as any).globalImageSource = normalized;
+  imgSyncNotify('globalImageSource', normalized, 'full-auto-window');
 }
 
 // ✅ [2026-02-02] 풀오토 전용 이미지 소스 설정 (이미지 관리 탭과 완전히 분리)
@@ -680,7 +686,7 @@ export function createHeadingImageModal(): void {
             <div>
               <h3 style="margin: 0; font-size: 20px; font-weight: 700; color: #D4AF37; display: flex; align-items: center; gap: 10px; text-shadow: 0 2px 8px rgba(212,175,55,0.3);">
                 <span style="font-size: 28px;">⚡</span>
-                메인 풀오토 이미지 설정
+                메인 풀오토 이미지 설정 · 이미지 관리 탭과 같은 설정
               </h3>
 
               <p style="margin: 6px 0 0 0; font-size: 13px; color: rgba(240,230,210,0.7);">전역 설정 - 모든 발행에 자동 적용</p>
@@ -1364,7 +1370,11 @@ export function createHeadingImageModal(): void {
     const thumbnailTextCheck = document.getElementById('thumbnail-text-include') as HTMLInputElement;
     const textOnlyCheck = document.getElementById('text-only-publish') as HTMLInputElement;
     const lifestyleCheck = document.getElementById('lifestyle-image-generate') as HTMLInputElement;
-    if (thumbnailTextCheck) localStorage.setItem('thumbnailTextInclude', String(thumbnailTextCheck.checked));
+    // Same rule as imgSyncWriteThumbnailText: unchecked = no stored value = thumbnail director "auto".
+    if (thumbnailTextCheck) {
+      if (thumbnailTextCheck.checked) localStorage.setItem('thumbnailTextInclude', 'true');
+      else localStorage.removeItem('thumbnailTextInclude');
+    }
     if (textOnlyCheck) {
       localStorage.setItem('textOnlyPublish', String(textOnlyCheck.checked));
       // ✅ [2026-04-18 FIX] 양쪽 UI 체크박스 동기화 — 이전: 모달만 체크해도 발행 탭 체크박스는 별개 → 혼란 + 과금 버그
@@ -1456,6 +1466,8 @@ export function createHeadingImageModal(): void {
       subModal.style.display = 'flex';
       // 현재 소스 선택 표시
       const currentSource = getGlobalImageSource();
+      // [2026-11-03] 열 때마다 저장된 엔진으로 다시 맞춘다 — 안 그러면 [확인]만 눌러도 처음 열었을 때 값으로 되돌아간다.
+      selectedSourceValue = currentSource;
       const options = document.querySelectorAll('.source-option');
       options.forEach(opt => {
         const value = opt.getAttribute('data-value');
@@ -1607,6 +1619,7 @@ export function createHeadingImageModal(): void {
       subModal.style.display = 'flex';
       // 현재 스타일 선택 표시
       const currentStyle = getImageStyle();
+      selectedStyleValue = currentStyle; // [2026-11-03] 열 때마다 저장값으로 다시 맞춤
       const radioBtn = document.querySelector(`input[name="sub-image-style"][value="${currentStyle}"]`) as HTMLInputElement;
       if (radioBtn) radioBtn.checked = true;
       // 카드 스타일 업데이트
@@ -2542,6 +2555,9 @@ export function createHeadingImageModal(): void {
       // [2026-05-27] OpenAI Image 저장
       if (openaiImageModelSelect) localStorage.setItem('openaiImageModel', openaiImageModelSelect.value);
       if (openaiImageQualitySelect) localStorage.setItem('openaiImageQuality', openaiImageQualitySelect.value);
+      // [2026-11-03] 이미지 관리 탭의 OpenAI 모델·품질 라디오도 같은 값으로 다시 그린다.
+      if (openaiImageModelSelect) imgSyncNotify('openaiImageModel', openaiImageModelSelect.value, 'full-auto-window');
+      if (openaiImageQualitySelect) imgSyncNotify('openaiImageQuality', openaiImageQualitySelect.value, 'full-auto-window');
 
       // ✅ [2026-01-27] config.json에도 저장 (메인 프로세스에서 읽을 수 있도록)
       // ✅ [2026-01-29] safeIpcInvoke 사용으로 에러 핸들링 강화
@@ -2829,6 +2845,8 @@ export function openHeadingImageModal(): void {
     if (fullAutoStrategySelect) fullAutoStrategySelect.value = localStorage.getItem('fullAutoImageStrategy') === 'user-settings' ? 'user-settings' : 'naver-homefeed';
     if (fullAutoRealFirstCheck) fullAutoRealFirstCheck.checked = localStorage.getItem('fullAutoRealAssetFirst') !== 'false';
     if (fullAutoRealPairCheck) fullAutoRealPairCheck.checked = localStorage.getItem('fullAutoRealPair') !== 'false';
+    // [2026-11-03] 비율 칸은 만들 때 한 번만 채워졌다 — 이미지 탭 등에서 바뀐 값을 열 때마다 다시 읽는다.
+    try { (window as any).imgSyncPaintRatios?.(); } catch { /* 비율 칸 갱신 실패는 무시 */ }
 
 
   }

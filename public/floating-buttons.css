@@ -173,13 +173,21 @@ body.right-tools-collapsed #ai-assistant-btn {
   display: none !important;
 }
 
+/* 접기 토글의 폭을 고정해 "도구 접기 ›" / "도구 펼치기 ‹" 로 글자가 바뀌어도 왼쪽 버튼 위치가 흔들리지 않게 한다. */
+:root {
+  --right-toggle-width: 6.5rem;
+}
+
 #right-toolbar-toggle {
   position: fixed;
   top: 56px;
   right: 16px;
   z-index: 999;
+  box-sizing: border-box;
+  width: var(--right-toggle-width);
   height: 28px;
   padding: 0 10px;
+  text-align: center;
   border: 1px solid #655735;
   border-radius: 999px;
   background: #282319;
@@ -193,6 +201,35 @@ body.right-tools-collapsed #ai-assistant-btn {
 
 #right-toolbar-toggle:hover {
   background: #3c3320;
+}
+
+/* [2026-11-03] 매일 예약발행 — 접기 토글 바로 왼쪽, 네이버 초록. body 바로 아래에 있어 fixed 가 화면에 붙는다. */
+#open-daily-publishing {
+  position: fixed;
+  top: 56px;
+  right: calc(16px + var(--right-toggle-width) + 8px);
+  z-index: 999;
+  box-sizing: border-box;
+  height: 28px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 999px;
+  background: #03C75A;
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+#open-daily-publishing:hover {
+  background: #02B350;
+}
+
+#open-daily-publishing:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
 }
 
 #right-toolbar-toggle:focus-visible {

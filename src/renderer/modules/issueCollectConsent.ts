@@ -84,6 +84,8 @@ export async function ensureIssueCopyrightConsent(): Promise<boolean> {
         });
         agreeBtn?.addEventListener('click', () => {
             try { localStorage.setItem(ISSUE_CONSENT_STORAGE_KEY, 'agreed'); } catch { /* ignore */ }
+            // [2026-11-03] Also record it in the main config so 관련 사진 찾기 / unattended flows do not ask again.
+            try { void (window as any).api?.saveConfig?.({ imageCollectConsent: { version: ISSUE_CONSENT_CONFIG_MIN_VERSION, agreedAt: new Date().toISOString() } }); } catch { /* ignore */ }
             overlay.remove();
             resolve(true);
         });

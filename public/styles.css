@@ -491,6 +491,28 @@ body {
   background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary));
 }
 
+.summary-bar[hidden] {
+  display: none;
+}
+
+/* [2026-11-03] 지표 줄 접기/펼치기 버튼 */
+.risk-summary-toggle {
+  margin: var(--spacing-sm, 0.5rem) 0;
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--border-light);
+  border-radius: 999px;
+  background: var(--bg-secondary);
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.risk-summary-toggle:hover {
+  color: var(--text-strong);
+}
+
 .summary-bar-fixed {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

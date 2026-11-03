@@ -3,6 +3,7 @@ import {
     type ShoppingReferenceImageEngine,
 } from '../../image/shoppingReferenceGeneration.js';
 import { resolveShoppingConnectAIEngineFromRaw } from '../modules/pipelineConfig.js';
+import { imgSyncNotify } from '../../runtime/imageSettingsSync.js';
 
 export type ShoppingConnectLinkKind =
     | 'shopping-connect'
@@ -269,6 +270,7 @@ export function setShoppingConnectAIEngine(engine: ShoppingConnectAIEngine, sync
             // 반자동 드롭다운도 같이 업데이트 (AI 엔진 범주 내 양방향 sync)
             localStorage.setItem('fullAutoImageSource', normalizedEngine);
             localStorage.setItem('globalImageSource', normalizedEngine);
+            imgSyncNotify('globalImageSource', normalizedEngine, 'shopping-engine');
             (window as any).globalImageSource = normalizedEngine;
             // 드롭다운 UI가 열려 있으면 값도 반영
             const sel = document.getElementById('image-source-select') as HTMLSelectElement | null;

@@ -144,6 +144,8 @@ try {
     'geminiTextModelNormalization.js',
     'imageProviderMigration.js',
     'imageStudioPreferences.js',
+    // [2026-11-03] 이미지 탭 ↔ 메인 풀오토 이미지 설정 한몸 — 엔진·썸네일 문구 저장 규칙 (순수 파일, 모든 렌더러 모듈보다 앞)
+    'imageSettingsSync.js',
     // [2026-11-03] 지원이 끝난 이미지 엔진 선택값 보류/재선택 (renderer.ts · multiAccountManager · retiredImageEngineGate 가 사용)
     'retiredImageEngines.js',
   ];
@@ -542,6 +544,7 @@ try {
     'imagePickerPreview.js', // Shared large preview for image replacement/addition grids.
     // ✅ [Phase 5B] renderer.ts에서 추출된 모듈 (의존성 순서: 유틸→DOM캐시→이미지→포스트→기능)
     'rendererUtils.js',            // 5B-1: 이벤트리스너, DOM캐시, 디바운스, 버튼, 로깅
+    'imageSettingsSyncUi.js',      // [2026-11-03] 이미지 설정 변경 알림 → 화면 다시 그리기 (imageSettingsSync 뒤, 쓰는 모듈 앞)
     'unifiedDOMCache.js',          // 5B-2: UnifiedDOMCache 객체
     'imageManagerCore.js',         // 5B-3: ImageManager + imageHistoryStack
     'imageSyncService.js',         // 5B-4: 이미지 동기화 서비스
@@ -629,6 +632,10 @@ try {
     'visionInferCancel.js',
     'imageNarrativeMode.js',
     'imageNarrativeQuickMode.js',
+    // [2026-11-03] 기동 게이트의 화면 마크업 + 이미지 엔진 칸 — startupEngineGate 가 쓰므로 먼저 로드
+    //   (이미지 칸이 쓰는 imageCollectEngineConsent 는 아래에서 로드되지만 호출 시점에만 참조한다)
+    'startupEngineGateView.js',
+    'startupImageEngineGate.js',
     // [2026-09-10] 매 실행 글생성 엔진 선택 게이트 (renderer.ts 시작 시 호출)
     'startupEngineGate.js',
     // [2026-11-03] 지원이 끝난 이미지 엔진을 쓰던 사용자에게 한 번 뜨는 재선택 안내 (renderer.ts 시작 시 호출)

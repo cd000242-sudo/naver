@@ -167,7 +167,6 @@ function readThumbDirectorRealImages(): any[] {
 /** Image tab text mode: checked → include · explicit "false" in settings → exclude · otherwise AUTO (V1 §9). */
 function readThumbDirectorTextMode(): string {
   try {
-    if ((document.getElementById('thumbnail-text-option') as HTMLInputElement | null)?.checked === true) return 'include';
     const raw = readRawPipelineSettings().thumbnailTextInclude;
     if (raw === 'true') return 'include';
     if (raw === 'false') return 'exclude';

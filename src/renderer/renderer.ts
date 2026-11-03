@@ -5897,10 +5897,7 @@ URL: ${firstUrl}
     const ctaPosition = (document.getElementById('unified-cta-position') as HTMLSelectElement)?.value || 'bottom';
     // ✅ [2026-01-28 FIX] HeadingImageSettings 모달의 localStorage 설정 최우선
     // ✅ [2026-03-10 CLEANUP] full-auto-thumbnail-text, semi-auto-thumbnail-text 유령 참조 제거 → localStorage 단일 소스
-    const includeThumbnailText =
-      localStorage.getItem('thumbnailTextInclude') === 'true' ||
-      (document.getElementById('thumbnail-text-include') as HTMLInputElement | null)?.checked ||
-      false;
+    const includeThumbnailText = localStorage.getItem('thumbnailTextInclude') === 'true'; // [2026-11-03] one key
 
     const formData = {
       mode: 'full-auto',
@@ -9304,12 +9301,7 @@ function collectUnifiedFormData(): any {
   const scheduleType = publishMode === 'schedule' ? ((document.getElementById('unified-schedule-type') as HTMLSelectElement)?.value as 'app-schedule' | 'naver-server' || 'naver-server') : undefined;
 
   // ✅ [2026-03-10 CLEANUP] full-auto/semi-auto-thumbnail-text 유령 참조 제거 → localStorage 단일 소스
-  const includeThumbnailText =
-    localStorage.getItem('thumbnailTextInclude') === 'true' ||
-    (document.getElementById('thumbnail-text-option') as HTMLInputElement)?.checked ||
-    (document.getElementById('thumbnail-text-include') as HTMLInputElement)?.checked ||
-    (document.getElementById('ma-setting-include-thumbnail-text') as HTMLInputElement)?.checked ||
-    false;
+  const includeThumbnailText = localStorage.getItem('thumbnailTextInclude') === 'true'; // [2026-11-03] one key
 
   // ✅ [2026-03-10 CLEANUP] full-auto/semi-auto-thumbnail-only 유령 참조 제거
   const thumbnailOnly =
@@ -9381,12 +9373,7 @@ function collectUnifiedFormDataForPublish(mode: 'full-auto' | 'semi-auto'): any 
   const scheduleType = publishMode === 'schedule' ? ((document.getElementById('unified-schedule-type') as HTMLSelectElement)?.value as 'app-schedule' | 'naver-server' || 'naver-server') : undefined;
 
   // ✅ [2026-03-10 CLEANUP] full-auto/semi-auto-thumbnail-text 유령 참조 제거 → localStorage 단일 소스
-  const includeThumbnailText =
-    localStorage.getItem('thumbnailTextInclude') === 'true' ||
-    (document.getElementById('thumbnail-text-option') as HTMLInputElement)?.checked ||
-    (document.getElementById('thumbnail-text-include') as HTMLInputElement)?.checked ||
-    (document.getElementById('ma-setting-include-thumbnail-text') as HTMLInputElement)?.checked ||
-    false;
+  const includeThumbnailText = localStorage.getItem('thumbnailTextInclude') === 'true'; // [2026-11-03] one key
 
   const baseData = {
     ...captureRendererPublicationScope({}),
@@ -9780,26 +9767,8 @@ function initDashboard() {
  * ✅ 썸네일 텍스트 옵션 체크박스 동기화
  */
 function initThumbnailTextSync(): void {
-  const syncGroup = [
-    'thumbnail-text-option', // 스마트 자동발행 탭
-    'continuous-include-thumbnail-text' // 연속 발행 탭
-  ];
-
-  syncGroup.forEach(id => {
-    const el = document.getElementById(id) as HTMLInputElement;
-    if (!el) return;
-
-    el.addEventListener('change', () => {
-      const isChecked = el.checked;
-      syncGroup.forEach(targetId => {
-        const targetEl = document.getElementById(targetId) as HTMLInputElement;
-        if (targetEl && targetEl !== el) {
-          targetEl.checked = isChecked;
-        }
-      });
-      console.log(`[ThumbnailSync] 옵션 변경: ${isChecked ? 'ON' : 'OFF'}`);
-    });
-  });
+  // [2026-11-03] The shared change handler (imageSettingsSyncUi) writes the one key and repaints every checkbox.
+  try { (window as any).imgSyncPaintThumbnailChecks?.(); } catch { /* checkbox paint is optional */ }
 }
 
 // 시계 업데이트
@@ -9930,6 +9899,7 @@ function initTabSwitching() {
       }
 
       // ✅ unified 탭 전용 섹션 토글 (캐시 사용)
+      if (targetTab === 'images') { try { (window as any).imgSyncRefreshImageTab?.(); } catch { /* 탭 갱신 실패는 무시 */ } }
       const showUnified = targetTab === 'unified';
       unifiedOnlySectionsCache.forEach(section => {
         if (excludedSections.has(section.id)) return;

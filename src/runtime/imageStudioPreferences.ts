@@ -1,12 +1,15 @@
 export const DEFAULT_IMAGE_STUDIO_SOURCE = 'openai-image';
 
-/** A saved choice outranks the HTML default; invalid legacy values do not. */
+/**
+ * A saved choice outranks the HTML default; invalid legacy values do not.
+ * [2026-11-03] `globalImageSource` is the base for every screen; `fullAutoImageSource` is only the compat fallback.
+ */
 export function resolveImageStudioSource(
   globalSource: string | null,
   fullAutoSource: string | null,
   availableSources: readonly string[],
 ): string {
-  return [fullAutoSource, globalSource].find(value => value && availableSources.includes(value))
+  return [globalSource, fullAutoSource].find(value => value && availableSources.includes(value))
     || DEFAULT_IMAGE_STUDIO_SOURCE;
 }
 

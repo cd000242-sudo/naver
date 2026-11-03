@@ -7,8 +7,9 @@ describe('image studio defaults and removed options', () => {
     expect(resolveImageStudioSource('undefined', 'removed-engine', ['dropshot', 'openai-image'])).toBe('openai-image');
   });
   it('preserves explicit current selections and falls through invalid stale values', () => {
-    expect(resolveImageStudioSource('flow', 'dropshot', ['flow', 'dropshot', 'openai-image'])).toBe('dropshot');
-    expect(resolveImageStudioSource('openai-image', 'flow', ['flow', 'openai-image'])).toBe('flow');
+    // [2026-11-03] globalImageSource is the base; the compat key only fills in when it is empty or invalid.
+    expect(resolveImageStudioSource('flow', 'dropshot', ['flow', 'dropshot', 'openai-image'])).toBe('flow');
+    expect(resolveImageStudioSource('openai-image', 'flow', ['flow', 'openai-image'])).toBe('openai-image');
     expect(resolveImageStudioSource('dropshot', 'removed', ['dropshot', 'openai-image'])).toBe('dropshot');
     expect(resolveImageStudioSource(null, 'dropshot', ['dropshot', 'openai-image'])).toBe('dropshot');
     expect(resolveImageStudioSource('removed', 'flow', ['flow', 'openai-image'])).toBe('flow');

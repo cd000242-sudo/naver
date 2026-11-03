@@ -11,6 +11,8 @@ import { bindAllStaticDropshotLoginUis } from './dropshotLoginUi.js';
 import { gsBindAllStaticUis } from './gensparkLoginUi.js';
 import { bindImageAiDisclosureSetting } from './imageAiDisclosureSetting.js';
 import { resolveImageStudioSource } from '../../runtime/imageStudioPreferences.js';
+import { IMAGE_SETTINGS_CHANGED_EVENT, imgSyncNotify, imgSyncReadChange } from '../../runtime/imageSettingsSync.js';
+import { IMG_SYNC_PAINT_FLAG, imgSyncInstallListeners, imgSyncRefreshImageTab } from './imageSettingsSyncUi.js';
 // ✅ [v2.10.288] subImageMode import 제거 — esbuild 회귀 차단. window 통해 호출.
 type SubImageMode = 'ai' | 'collected';
 function setSubImageMode(mode: SubImageMode): void {
@@ -113,6 +115,11 @@ function ensureImageFxSwitchButton(imageSourceSelect: HTMLSelectElement, show: b
 }
 
 export async function initImageManagementTab(): Promise<void> {
+  // [2026-11-03] 이미지 탭 ↔ 풀오토 이미지 설정 한몸: 변경 알림을 받아 다시 그리고, 처음에도 저장값으로 그린다.
+  try { imgSyncInstallListeners(); imgSyncRefreshImageTab(); } catch (e) { console.warn('[ImageManagementTab] 설정 동기화 연결 실패:', e); }
+  document.getElementById('image-settings-open-fullauto-btn')?.addEventListener('click', () => {
+    try { (window as any).openHeadingImageModal?.(); } catch (e) { console.warn('[ImageManagementTab] 풀오토 이미지 설정 열기 실패:', e); }
+  });
   bindImageAiDisclosureSetting(
     document.getElementById('image-ai-mark-all') as HTMLInputElement | null,
     document.getElementById('image-ai-mark-status'),
@@ -378,7 +385,9 @@ export async function initImageManagementTab(): Promise<void> {
     } catch (e) {
       console.warn('[ImageSource] 드롭다운 복원 실패 (무시):', e);
     }
-    imageSourceSelect.addEventListener('change', async () => {
+    imageSourceSelect.addEventListener('change', async (changeEvent) => {
+      // A repaint fired by imageSettingsSyncUi (another screen changed the engine): no dialogs, no writes.
+      if ((changeEvent as unknown as Record<string, unknown>)[IMG_SYNC_PAINT_FLAG]) return;
       const selectedSource = imageSourceSelect.value;
       const selectedOption = imageSourceSelect.options[imageSourceSelect.selectedIndex];
 
@@ -456,6 +465,7 @@ export async function initImageManagementTab(): Promise<void> {
           if (maRadio && !maRadio.checked) maRadio.checked = true;
           console.log(`[Renderer] 🛒 쇼핑커넥트 AI 엔진 sync: "${selectedSource}"`);
         }
+        imgSyncNotify('globalImageSource', normalizedSource, 'image-tab');
       } else {
         // ✅ [2026-03-10 CLEANUP] imageSourceMode dead write 제거 — getItem 없음
         console.log(`[Renderer] 📁 저장된 이미지 모드 활성화 (AI 엔진 설정 유지: "${localStorage.getItem('globalImageSource') || 'openai-image'}")`);
@@ -497,6 +507,7 @@ export async function initImageManagementTab(): Promise<void> {
             (window as any).globalImageSource = 'local-folder';
             localStorage.setItem('globalImageSource', 'local-folder');
             localStorage.setItem('fullAutoImageSource', 'local-folder');
+            imgSyncNotify('globalImageSource', 'local-folder', 'image-tab');
             appendLog(`✅ 📂 내 폴더가 선택되었습니다: ${folderPath}`);
           } else {
             appendLog('⚠️ 폴더 선택이 취소되었습니다.');
@@ -650,7 +661,7 @@ export async function initImageManagementTab(): Promise<void> {
         if (mr) mr.checked = true;
         if (qr) qr.checked = true;
         // 기존 사용자: config 에만 있던 값을 localStorage 로 끌어올린다.
-        try { localStorage.setItem('openaiImageModel', savedModel); } catch { /* 무시 */ }
+        try { localStorage.setItem('openaiImageModel', savedModel); localStorage.setItem('openaiImageQuality', savedQuality); } catch { /* 무시 */ }
       }
     } catch { /* config 미존재 — HTML 기본값 유지 */ }
     refreshOpenAICost();
@@ -670,12 +681,22 @@ export async function initImageManagementTab(): Promise<void> {
          * 쇼핑커넥트가 "gpt-image-2 를 선택해주세요"로 막는다(사용자 실측).
          * 읽는 쪽에 config 폴백을 뒀지만, 두 저장소를 함께 맞춰 두는 편이 안전하다.
          */
-        try { localStorage.setItem('openaiImageModel', model); } catch { /* 저장 실패는 무시 */ }
+        try {
+          localStorage.setItem('openaiImageModel', model);
+          localStorage.setItem('openaiImageQuality', quality);
+        } catch { /* 저장 실패는 무시 */ }
+        imgSyncNotify('openaiImageModel', model, 'image-tab');
+        imgSyncNotify('openaiImageQuality', quality, 'image-tab');
         appendLog(`🦆 OpenAI 이미지 설정 저장: ${model} / ${quality}`);
       } catch (e: any) {
         console.warn('[OpenAIImageSettings] 설정 저장 실패:', e);
       }
     };
+    // Another screen (the full-auto window) saved a model/quality: the radios were repainted, refresh the price line.
+    window.addEventListener(IMAGE_SETTINGS_CHANGED_EVENT, (event) => {
+      const change = imgSyncReadChange(event);
+      if (change && (change.key === 'openaiImageModel' || change.key === 'openaiImageQuality')) refreshOpenAICost();
+    });
     openaiModelRadios.forEach((r) => r.addEventListener('change', persistOpenAISelection));
     openaiQualityRadios.forEach((r) => r.addEventListener('change', persistOpenAISelection));
   }

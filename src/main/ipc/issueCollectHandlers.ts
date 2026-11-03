@@ -14,6 +14,8 @@ import { resolveIssueVisionRoute, resolveIssueVisionKey, type IssueVisionRoute }
 export { resolveIssueVisionKey };
 import { resolveIssueTextGenerator, type IssuePlanCaller } from '../../crawler/issueHarness/textRoute.js';
 import { resolveSelectedEngineRoute } from './paraphraseAnalysisHandlers.js';
+import { COLLECT_PHOTOS_SCOPE } from '../services/collectPhotosEngine.js';
+import { buildIssueCollectSources } from '../services/issueCollectSources.js';
 
 /**
  * The search-plan text engine and the image check the collector uses — both on the engine the owner chose.
@@ -97,7 +99,11 @@ export function registerIssueCollectHandlers(): void {
 
       console.log(`[Main] 🏆 issue:collectImages 시작: "${v.value.title}" (${v.value.headings.length}개 소제목)`);
       const { collectIssueImages } = await import('../../crawler/issueHarness/harness.js');
+      // [2026-11-03] Default = the 관련 사진 찾기 scope (news / official / press hosts); 'wide' keeps all nine sources.
+      const wide = v.value.breadth === 'wide';
+      console.log(`[Main] issue:collectImages — 범위: ${wide ? '넓게(전체 소스)' : '뉴스·공식 사진'}`);
       const result = await collectIssueImages(v.value, {
+        scope: wide ? undefined : COLLECT_PHOTOS_SCOPE,
         planCaller,
         planEngineLabel,
         visionRoute,
@@ -110,7 +116,9 @@ export function registerIssueCollectHandlers(): void {
       console.log(
         `[Main] ✅ issue:collectImages 완료: 후보 ${result.stats.totalCandidates} → 필터 ${result.stats.afterFilter}, 소스별 ${JSON.stringify(result.stats.perSource)}`,
       );
-      return { success: true, ...result };
+      // Publisher name + article page per placed photo (same source line as the 관련 사진 찾기 engine).
+      const sources = await buildIssueCollectSources(result.images, result.candidates).catch(() => ({}));
+      return { success: true, ...result, sources };
     } catch (error: any) {
       console.error('[Main] ❌ issue:collectImages 실패:', error);
       return { success: false, message: error?.message || 'unknown', images: {}, candidates: {} };

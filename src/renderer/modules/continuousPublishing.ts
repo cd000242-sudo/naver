@@ -4,6 +4,7 @@
 // ============================================
 
 import { applyPreviousPostPolicy } from '../../shared/previousPostPolicy.js';
+import { imgSyncNotify } from '../../runtime/imageSettingsSync.js';
 import { resolveRendererPublicationScope } from '../utils/previousPostScope.js';
 import { normalizeRetiredNanoEngine } from '../../runtime/imageProviderMigration.js';
 import { createTime24Select, bindTime24Events, setTime24Value, setTime24ValueByIdx } from '../utils/time24Select';
@@ -2116,7 +2117,7 @@ export function initContinuousPublishingV2(): void {
             scheduleTime,
             // ✅ [2026-01-28 FIX] localStorage 설정 우선 적용
             // [Phase 7.1-e] 단일 해석처 경유 (아이템 편집 시점 스냅샷)
-            includeThumbnailText: resolvePipelineConfig('continuous').image.thumbnailTextInclude || includeThumbnailTextCheck?.checked || false,
+            includeThumbnailText: resolvePipelineConfig('continuous').image.thumbnailTextInclude,
             useAiImage: useAiImageCheck?.checked ?? true,
             createProductThumbnail: createThumbnailCheck?.checked ?? false
           };
@@ -2506,6 +2507,7 @@ export function initContinuousPublishingV2(): void {
         localStorage.setItem('scAIImageEngine', normalizedValue);
         localStorage.setItem('fullAutoImageSource', normalizedValue);
         localStorage.setItem('globalImageSource', normalizedValue);
+        imgSyncNotify('globalImageSource', normalizedValue, 'shopping-subtab');
         (window as any).globalImageSource = normalizedValue;
         const mainSel = document.getElementById('image-source-select') as HTMLSelectElement | null;
         if (mainSel && mainSel.value !== value) mainSel.value = value;
@@ -3043,7 +3045,7 @@ function addItemToQueueV2Impl(): void {
       toneStyle: (document.getElementById('continuous-tone-style-select') as HTMLSelectElement)?.value || 'professional', // ✅ 글톤 추가
       realCategory,   // ✅ 실제 블로그 카테고리 추가
       realCategoryName, // ✅ 실제 블로그 카테고리 이름 추가
-      includeThumbnailText: (document.getElementById('continuous-modal-include-thumbnail-text') as HTMLInputElement)?.checked || false,
+      includeThumbnailText: resolvePipelineConfig('continuous').image.thumbnailTextInclude,
       // [v2.11.x] URL 이미지 자동 수집 기능 제거 — 항상 비활성 (UI 삭제, stale localStorage 무시)
       urlAutoCollect: false,
       fillGapWithAI: false,
@@ -4345,7 +4347,7 @@ function showEditQueueItemModal(item: ContinuousQueueItem, options?: { fromFullV
   if (ctaPositionEl) ctaPositionEl.value = item.ctaPosition || 'bottom';
 
   const thumbnailTextEl = document.getElementById('continuous-modal-include-thumbnail-text') as HTMLInputElement | null;
-  if (thumbnailTextEl) thumbnailTextEl.checked = !!item.includeThumbnailText;
+  if (thumbnailTextEl) thumbnailTextEl.checked = resolvePipelineConfig('continuous').image.thumbnailTextInclude; // [2026-11-03] one key, read on open
 
   // AI 이미지 생성 옵션 (신규)
   const useAiImageCheck = document.getElementById('continuous-modal-use-ai-image') as HTMLInputElement | null;
@@ -4613,8 +4615,7 @@ async function startContinuousPublishingV2(): Promise<void> {
   // [Phase 7.1-b] 플로우 시작 시 1회 해석 — 루프 내 per-item 스냅샷과 별도
   const startPipelineCfg = resolvePipelineConfig('continuous');
   const includeThumbnailTextEl = document.getElementById('continuous-include-thumbnail-text') as HTMLInputElement | null;
-  const includeThumbnailText = startPipelineCfg.image.thumbnailTextInclude ||
-    includeThumbnailTextEl?.checked || false;
+  const includeThumbnailText = startPipelineCfg.image.thumbnailTextInclude;
   console.log(`[Continuous] 🖼️ 썸네일 텍스트 포함: ${includeThumbnailText} (localStorage 또는 체크박스)`);
 
   // ✅ [2026-01-21] 배너 자동 생성 체크박스 읽기
@@ -5766,7 +5767,7 @@ export async function executeContinuousPublish(structuredContent: any, publishMo
 
   // ✅ 연속발행: 썸네일 텍스트 포함 옵션
   const includeThumbnailTextEl = document.getElementById('continuous-include-thumbnail-text') as HTMLInputElement | null;
-  const includeThumbnailText = includeThumbnailTextEl?.checked || false;
+  const includeThumbnailText = resolvePipelineConfig('continuous').image.thumbnailTextInclude; // [2026-11-03] one key
 
   console.log(`[Continuous] 이미지 소스: ${imageSource}, 이미지 건너뛰기: ${skipImages}, 썸네일 텍스트 포함: ${includeThumbnailText}`);
 

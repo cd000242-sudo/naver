@@ -21,10 +21,11 @@
 
 <body>
     <dialog id="daily-publishing-dialog" aria-label="매일 예약발행"></dialog>
+    <!-- [2026-11-03] 오른쪽 위 "도구 접기" 토글 바로 왼쪽(floating-buttons.css). 헤더의 필터 안에서는 fixed 가 화면이 아니라 헤더에 붙어서 body 바로 아래에 둔다. -->
+    <button type="button" id="open-daily-publishing">매일 예약발행</button>
     <div class="app-container">
         <!-- 헤더 -->
         <header class="app-header">
-            <button type="button" id="open-daily-publishing">매일 예약발행</button>
             <h1 class="app-title">Better Life naver <span id="app-version-badge"
                     style="font-size: 0.6em; opacity: 0.6; font-weight: 400; vertical-align: middle;">v...</span></h1>
 
@@ -32,8 +33,10 @@
                 style="position: fixed; top: 64px; left: 20px; z-index: 10002; display: flex; flex-direction: column; gap: 0.6rem; align-items: flex-start; max-width: 240px;">
             </div>
 
+            <!-- [2026-11-03] 지표 카드 줄 + 에이전트 잔여 배지: 기본 접힘, floating-scroll.js 가 토글하고 상태를 기억한다.
+                 접어도 DOM 은 그대로라 갱신 코드(data-risk-*, refreshAgentQuotaBadge)는 계속 동작한다. -->
             <!-- 고정 summary-bar -->
-            <div class="summary-bar" id="risk-summary-fixed">
+            <div class="summary-bar" id="risk-summary-fixed" hidden>
                 <div class="summary-card">
                     <span class="label">AI 탐지</span>
                     <span class="value" data-risk-ai>—</span>
@@ -64,6 +67,9 @@
             <p class="summary-note" id="ai-basic-law-notice" style="font-size: 0.78rem; opacity: 0.75; margin-top: 0.35rem;">
                 ⚠️ 이 앱의 글은 <strong>AI 생성물</strong>입니다 — 부정확할 수 있으니 발행 전 사실 확인이 필요합니다. 실존인물의 범죄·사생활을 단정하면 허위조작정보법(7·7) 위반 소지가 있습니다.
             </p>
+            <!-- [2026-11-03] Toggle sits below the notes: above the bar it was covered by the fixed member badge (#left-status-badges). -->
+            <button type="button" id="risk-summary-toggle" class="risk-summary-toggle" aria-controls="risk-summary-fixed"
+                aria-expanded="false">📊 지표 보기 ▾</button>
             <!-- ✅ [v2.10.185 Phase 3.5] SERP 실측 비교 버튼 -->
             <div id="serp-benchmark-bar" style="margin-top: 0.5rem; display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
                 <button type="button" id="serp-benchmark-btn"
@@ -3610,6 +3616,12 @@
                                 style="width: 16px; height: 16px; accent-color: #8b5cf6;">
                             <span style="font-size: 0.85rem; color: var(--text-strong);">🌐 실시간 정보로 수집하기</span>
                         </label>
+                        <label
+                            style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem; cursor: pointer; padding: 0.5rem 0.75rem; background: rgba(139, 92, 246, 0.06); border-radius: var(--radius-sm); border: 1px solid rgba(139, 92, 246, 0.15);">
+                            <input type="checkbox" id="issue-collect-wide-checkbox"
+                                style="width: 16px; height: 16px; accent-color: #8b5cf6;">
+                            <span style="font-size: 0.85rem; color: var(--text-strong);">넓게 찾기 (SNS·커뮤니티·해외 포함) <small style="color: var(--text-muted);">— 끄면 뉴스·공식 사진만</small></span>
+                        </label>
                     </div>
                 </div>
 
@@ -3625,8 +3637,10 @@
                             <option value="dropshot" data-icon="🍌" data-price="Pro 구독자 무제한 · 추가비용 0원 | UI 자동화 · 로그인 필요">리더스 나노바나나 무제한</option>
                             <option value="genspark" data-icon="✨" data-price="로그인 필요 · 모델 선택 · UI 자동화">젠스파크</option>
                             <option value="collect-photos" data-icon="📷" data-price="뉴스·기사 실사진 수집 | 무료 · 저작권 안내 동의 필요 | 맞는 사진 없으면 빈 칸">관련 사진 찾기 (뉴스·기사 사진 · 무료)</option>
+                            <option value="local-folder" data-icon="📂" data-display-only="true" data-price="내 폴더 사진을 순서대로 | 아래 '폴더에서 순서대로' 버튼으로 고릅니다">📂 내 폴더(순서대로)</option>
                         </select><span id="image-source-info-badge">선택됨</span></div><div class="image-file-actions"><button type="button" id="image-source-local-folder-btn" class="">폴더에서 순서대로</button><button type="button" id="image-source-saved-btn" class="">이미지 보관함</button></div></div>
                     <p id="image-source-help" class="studio-help">선택한 엔진으로 이미지를 만듭니다. 직접 준비한 사진은 폴더나 보관함에서 가져오세요.</p>
+                    <p id="image-settings-shared-note" class="studio-help">여기서 고른 설정은 풀오토·연속발행·다중계정에 그대로 쓰입니다 · <button type="button" id="image-settings-open-fullauto-btn" style="background:none;border:none;padding:0;color:var(--primary);text-decoration:underline;cursor:pointer;font:inherit;">소제목·비율·전략 세부 설정</button></p>
                     <div class="image-ai-disclosure"><label for="image-ai-mark-all" class="image-ai-toggle-label"><span><strong>AI 활용 표시</strong><small>발행할 때 모든 이미지에 네이버의 ‘AI 활용’ 표시를 켭니다.</small></span><input type="checkbox" id="image-ai-mark-all" aria-describedby="image-ai-mark-help image-ai-mark-status"><span class="studio-switch-track" aria-hidden="true"></span></label><div class="image-ai-disclosure-footer"><span id="image-ai-mark-help">끄면 AI로 생성한 이미지만 자동 판정합니다.</span><span id="image-ai-mark-status" role="status" aria-live="polite">설정 확인 중</span></div></div>
 
                     <!-- ✅ [SPEC-DROPSHOT-2026 2단계] dropshot 선택 시 로그인/확인 -->

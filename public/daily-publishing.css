@@ -8,7 +8,7 @@
 .daily-publishing-dialog fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
 .daily-publishing-dialog label { display: flex; flex-direction: column; gap: 7px; font-size: 14px; min-width: 0; }
 .daily-publishing-dialog input, .daily-publishing-dialog select, .daily-publishing-dialog textarea { width: 100%; box-sizing: border-box; background: var(--bg-secondary, #25282c); color: var(--text-strong, #f5f5f5); border: 1px solid var(--border-color, #62646b); border-radius: 5px; padding: 10px; font: inherit; min-width: 0; }
-.daily-publishing-dialog button, #open-daily-publishing { padding: 10px 14px; border: 1px solid var(--border-color, #62646b); border-radius: 5px; background: var(--bg-secondary, #25282c); color: var(--text-strong, #f5f5f5); font: inherit; cursor: pointer; }
+.daily-publishing-dialog button { padding: 10px 14px; border: 1px solid var(--border-color, #62646b); border-radius: 5px; background: var(--bg-secondary, #25282c); color: var(--text-strong, #f5f5f5); font: inherit; cursor: pointer; }
 .daily-publishing-dialog button:disabled { opacity: .45; cursor: not-allowed; }
 .daily-publishing-dialog .daily-panel-primary { color: white; background: #176c55; border-color: #249c7b; }
 .daily-panel-topic { margin-top: 16px; }

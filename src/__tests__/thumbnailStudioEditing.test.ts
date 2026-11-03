@@ -43,7 +43,8 @@ describe('thumbnail studio editing integration', () => {
     localStorage.setItem('fullAutoImageSource', 'leonardoai');
     document.getElementById('thumb-bg-ai-btn')!.click();
     await vi.waitFor(() => expect(generate).toHaveBeenCalled());
-    expect(generate.mock.calls[0][0].provider).toBe('leonardoai');
+    // [2026-11-03] globalImageSource is the base; the compat fullAutoImageSource only fills in when it is empty.
+    expect(generate.mock.calls[0][0].provider).toBe('openai-image');
     expect(document.getElementById('thumb-bg-ai-btn')!.textContent).toBe('생성');
   });
   it('applies a nested template click without losing the title and restores edits with undo/redo', () => {

@@ -44,6 +44,16 @@ export async function collectEngineAllowPick(engine: string): Promise<boolean> {
   return engine === COLLECT_ENGINE_VALUE ? ensureCollectEngineConsent() : true;
 }
 
+/**
+ * Fires a change event that is already consented: collectEngineWireSelect lets it through untouched, so listeners
+ * on the select (the image tab's save path) run synchronously. Callers must have called collectEngineAllowPick first.
+ */
+export function collectEngineDispatchApprovedChange(select: HTMLSelectElement): void {
+  const approved = new Event('change', { bubbles: true });
+  (approved as any)[COLLECT_ENGINE_PASSED_FLAG] = true;
+  select.dispatchEvent(approved);
+}
+
 /** Holds the change event of an engine select until the user agrees; declining restores the previous value. */
 export function collectEngineWireSelect(selectId: string): void {
   const select = document.getElementById(selectId) as HTMLSelectElement | null;
@@ -55,9 +65,7 @@ export function collectEngineWireSelect(selectId: string): void {
     event.stopImmediatePropagation();
     void ensureCollectEngineConsent().then((agreed) => {
       if (!agreed) { select.value = accepted; return; }
-      const again = new Event('change', { bubbles: true });
-      (again as any)[COLLECT_ENGINE_PASSED_FLAG] = true;
-      select.dispatchEvent(again);
+      collectEngineDispatchApprovedChange(select);
     });
   }, true);
 }

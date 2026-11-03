@@ -691,8 +691,7 @@ export async function handleFullAutoPublish(): Promise<void> {
     }
 
     // ✅ [2026-03-10 CLEANUP] full-auto-thumbnail-text 유령 참조 제거 → localStorage 단일 소스
-    const includeThumbnailText = pipelineCfg.image.thumbnailTextInclude ||
-      (document.getElementById('thumbnail-text-include') as HTMLInputElement)?.checked || false;
+    const includeThumbnailText = pipelineCfg.image.thumbnailTextInclude; // [2026-11-03] one key (thumbnailTextInclude), no checkbox OR
     console.log(`[FullAutoPublish] 썸네일 텍스트 포함: ${includeThumbnailText}`);
 
     const selectedShoppingSubImageMode = pipelineCfg.shopping.subImageMode;

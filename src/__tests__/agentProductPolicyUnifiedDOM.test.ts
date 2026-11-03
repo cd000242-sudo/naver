@@ -18,7 +18,7 @@ describe('UnifiedDOMCache agent product-policy defense', () => {
     UnifiedDOMCache.unifiedImageSource = null;
   });
 
-  it('uses the actual image management dropdown before stale stored engine settings', () => {
+  it('stored engine settings win over the image management dropdown and nothing is written back', () => {
     const writes = new Map<string, string>();
     Object.defineProperty(globalThis, 'document', {
       configurable: true,
@@ -32,19 +32,30 @@ describe('UnifiedDOMCache agent product-policy defense', () => {
     Object.defineProperty(globalThis, 'localStorage', {
       configurable: true,
       value: {
-        getItem: (key: string) => key === 'fullAutoImageSource' || key === 'globalImageSource'
-          ? 'nano-banana-pro'
-          : null,
+        getItem: (key: string) => key === 'globalImageSource' ? 'flow' : key === 'fullAutoImageSource' ? 'nano-banana-pro' : null,
         setItem: (key: string, value: string) => writes.set(key, value),
       },
     });
 
-    expect(UnifiedDOMCache.getImageSource()).toBe('openai-image');
-    expect(writes.get('fullAutoImageSource')).toBe('openai-image');
-    expect(writes.get('globalImageSource')).toBe('openai-image');
+    expect(UnifiedDOMCache.getImageSource()).toBe('flow');
+    expect(writes.size).toBe(0);
   });
 
-  it('uses a newly selected image source button before a stale dropdown', () => {
+  it('keeps local-folder from storage even though the dropdown only displays another engine', () => {
+    Object.defineProperty(globalThis, 'document', {
+      configurable: true,
+      value: { querySelector: () => null, getElementById: (id: string) => id === 'image-source-select' ? { value: 'openai-image' } : null },
+    });
+    Object.defineProperty(globalThis, 'localStorage', {
+      configurable: true,
+      value: { getItem: (key: string) => key === 'globalImageSource' ? 'local-folder' : null, setItem: () => undefined },
+    });
+
+    expect(UnifiedDOMCache.getImageSource()).toBe('local-folder');
+  });
+
+  it('reads the screen only when nothing is stored, and still never writes', () => {
+    const writes: string[] = [];
     Object.defineProperty(globalThis, 'document', {
       configurable: true,
       value: {
@@ -58,13 +69,29 @@ describe('UnifiedDOMCache agent product-policy defense', () => {
     });
     Object.defineProperty(globalThis, 'localStorage', {
       configurable: true,
-      value: {
-        getItem: () => 'nano-banana-pro',
-        setItem: () => undefined,
-      },
+      value: { getItem: () => null, setItem: (key: string) => writes.push(key) },
     });
 
     expect(UnifiedDOMCache.getImageSource()).toBe('openai-image');
+    expect(writes).toEqual([]);
+  });
+
+  it('a selected image-vault (saved) button is a one-run choice and beats the stored engine', () => {
+    Object.defineProperty(globalThis, 'document', {
+      configurable: true,
+      value: {
+        querySelector: (selector: string) => selector.includes('.image-source-btn.selected')
+          ? { getAttribute: () => 'saved' }
+          : null,
+        getElementById: () => null,
+      },
+    });
+    Object.defineProperty(globalThis, 'localStorage', {
+      configurable: true,
+      value: { getItem: () => 'flow', setItem: () => undefined },
+    });
+
+    expect(UnifiedDOMCache.getImageSource()).toBe('saved');
   });
 
   it('never routes a stale checked but disabled Claude subscription radio', () => {

@@ -174,10 +174,14 @@ describe('resolvePipelineConfig — 기본값 동등성', () => {
     }
   });
 
-  it('preserves an explicitly selected unsupported OpenAI model for the final shopping guard', () => {
+  it('OpenAI 모델은 저장값을 따르고 화면 라디오 값이 덮어쓰지 않는다 (2026-11-03 한몸)', () => {
+    (globalThis as any).localStorage = makeStorage({
+      globalImageSource: 'openai-image',
+      openaiImageModel: 'gpt-image-2.5-flare',
+    });
     (globalThis as any).document = {
       querySelector: (selector: string) => selector === 'input[name="openai-image-model"]:checked'
-        ? { value: 'gpt-image-1.5' }
+        ? { value: 'gpt-image-2.5-sunburst' }
         : null,
       getElementById: (id: string) => id === 'image-source-select'
         ? { value: 'openai-image' }
@@ -186,8 +190,8 @@ describe('resolvePipelineConfig — 기본값 동등성', () => {
 
     const config = resolvePipelineConfig('full-auto');
     expect(config.shopping.aiImageEngine).toBe('openai-image');
-    expect(config.shopping.aiImageModel).toBe('gpt-image-1.5');
-    expect(config.image.imageModel).toBe('gpt-image-1.5');
+    expect(config.shopping.aiImageModel).toBe('gpt-image-2.5-flare');
+    expect(config.image.imageModel).toBe('gpt-image-2.5-flare');
   });
 
   it.each(['openai-image', 'dropshot', 'nano-banana-pro'])(
@@ -248,19 +252,19 @@ describe('resolvePipelineConfig — 기본값 동등성', () => {
     expect(resolvePipelineConfig('full-auto').shopping.aiImageEngine).toBe('dropshot');
   });
 
-  it('풀오토의 현재 드롭다운 엔진이 오래된 쇼핑 엔진보다 우선한다', () => {
+  it('저장된 엔진(globalImageSource)이 화면 드롭다운 값보다 우선한다 — 드롭다운은 표시만', () => {
     (globalThis as any).localStorage = makeStorage({
       scSubImageMode: 'ai',
       scAIImageEngine: 'nano-banana-pro',
       fullAutoImageSource: 'nano-banana-pro',
-      globalImageSource: 'nano-banana-pro',
+      globalImageSource: 'openai-image',
     });
     (globalThis as any).document = {
       querySelector: (selector: string) => selector === 'input[name="sc-subimage-mode-inline-radio"]:checked'
         ? { value: 'ai' }
         : null,
       getElementById: (id: string) => id === 'image-source-select'
-        ? { value: 'openai-image' }
+        ? { value: 'nano-banana-pro' }
         : null,
     };
 
@@ -270,33 +274,27 @@ describe('resolvePipelineConfig — 기본값 동등성', () => {
     expect(config.image.fallbackPolicy).toBe('engine-only');
   });
 
-  it('풀오토의 현재 선택 버튼이 오래된 드롭다운 엔진보다 우선한다', () => {
+  it('저장된 엔진이 있으면 선택 버튼 화면값을 따르지 않고, 저장값이 없을 때만 화면값을 읽는다', () => {
+    const screen = {
+      querySelector: (selector: string) => {
+        if (selector === 'input[name="sc-subimage-mode-inline-radio"]:checked') return { value: 'ai' };
+        if (selector.includes('.image-source-btn.selected')) {
+          return { dataset: { source: 'openai-image' }, getAttribute: () => 'openai-image' };
+        }
+        return null;
+      },
+      getElementById: (id: string) => id === 'image-source-select' ? { value: 'nano-banana-pro' } : null,
+    };
+    (globalThis as any).document = screen;
     (globalThis as any).localStorage = makeStorage({
       scSubImageMode: 'ai',
       scAIImageEngine: 'nano-banana-pro',
       fullAutoImageSource: 'nano-banana-pro',
     });
-    (globalThis as any).document = {
-      querySelector: (selector: string) => {
-        if (selector === 'input[name="sc-subimage-mode-inline-radio"]:checked') {
-          return { value: 'ai' };
-        }
-        if (selector.includes('.image-source-btn.selected')) {
-          return {
-            dataset: { source: 'openai-image' },
-            getAttribute: () => 'openai-image',
-          };
-        }
-        return null;
-      },
-      getElementById: (id: string) => id === 'image-source-select'
-        ? { value: 'nano-banana-pro' }
-        : null,
-    };
+    expect(resolvePipelineConfig('full-auto').image.imageSource).toBe('nano-banana-pro');
 
-    const config = resolvePipelineConfig('full-auto');
-    expect(config.image.imageSource).toBe('openai-image');
-    expect(config.shopping.aiImageEngine).toBe('openai-image');
+    (globalThis as any).localStorage = makeStorage({ scSubImageMode: 'ai' });
+    expect(resolvePipelineConfig('full-auto').image.imageSource).toBe('openai-image');
   });
 
   it('풀오토에서는 선택된 버튼 경로가 오래된 드롭다운 값보다 우선한다', () => {

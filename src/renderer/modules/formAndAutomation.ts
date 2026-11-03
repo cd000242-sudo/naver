@@ -80,7 +80,7 @@ export function collectFormData(skipImages: boolean = false): RendererAutomation
     keepBrowserOpen: true, // ✅ 항상 브라우저 세션 유지
     useIntelligentImagePlacement: false, // ✅ 기본값 false (공통 발행 모드에서는 비활성화)
     // ✅ [2026-01-28 FIX] localStorage 설정 우선 적용
-    includeThumbnailText: localStorage.getItem('thumbnailTextInclude') === 'true' || (document.getElementById('thumbnail-text-option') as HTMLInputElement)?.checked || false,
+    includeThumbnailText: localStorage.getItem('thumbnailTextInclude') === 'true',
     useAiImage: (document.getElementById('unified-use-ai-image') as HTMLInputElement)?.checked ?? true,
     createProductThumbnail: (document.getElementById('unified-create-product-thumbnail') as HTMLInputElement)?.checked ?? false,
     // ✅ [2026-02-19] 쇼핑커넥트 배너 + 제휴링크 자동 감지 (URL 필드에서 자동 감지)

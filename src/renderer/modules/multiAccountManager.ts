@@ -2,6 +2,7 @@
 // Restored from dist/renderer/modules/multiAccountManager.js after source encoding damage; keep runtime parity with the last successful build.
 "use strict";
 import { applyPreviousPostPolicy, normalizePreviousPostCategoryId } from '../../shared/previousPostPolicy.js';
+import { imgSyncNotify } from '../../runtime/imageSettingsSync.js';
 import { awaitNetworkWaitRecheck, classifyPublishFailure, describeAccountStop, extractAccountStopCode, findPausedQueueAccounts, readAccountPause, stopsAllAccounts } from '../../automation/publishFailureClassifier.js';
 import { installAccountSafetyControls } from './accountSafetyControls.js';
 import { normalizeRetiredNanoEngine } from '../../runtime/imageProviderMigration.js';
@@ -2361,6 +2362,7 @@ async function initMultiAccountPublishModal() {
                 localStorage.setItem('scAIImageEngine', value);
                 localStorage.setItem('fullAutoImageSource', value);
                 localStorage.setItem('globalImageSource', value);
+                imgSyncNotify('globalImageSource', value, 'shopping-ma');
                 window.globalImageSource = value;
                 const mainSel = document.getElementById('image-source-select');
                 if (mainSel && mainSel.value !== value)

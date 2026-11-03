@@ -79,6 +79,9 @@ export async function runIssueEndgameCollect(
     appendLogFn: (msg: string) => void,
     opts?: { onlyEmptyHeadings?: boolean },
 ): Promise<number> {
+    // [2026-11-03] Default = news / official photos only (same scope as 관련 사진 찾기); the checkbox widens it.
+    const issueCollectWide = (document.getElementById('issue-collect-wide-checkbox') as HTMLInputElement | null)?.checked
+        ?? (localStorage.getItem('issueCollectWide') === 'true');
     const consent = await ensureIssueCopyrightConsent();
     if (!consent) {
         appendLogFn('⛔ 저작권 동의가 없어 이슈 수집을 중단했습니다.');
@@ -133,7 +136,7 @@ export async function runIssueEndgameCollect(
     try {
         progressModal?.show?.('🏆 이슈 끝판왕 이미지 수집', {
             icon: '🏆',
-            initialLog: `${headingTitles.length}개 소제목 · 9개 소스 추적 수집을 시작합니다. (1~3분)`,
+            initialLog: `${headingTitles.length}개 소제목 · ${issueCollectWide ? '9개 소스 추적' : '뉴스·공식 사진 위주'} 수집을 시작합니다. (1~3분)`,
         });
         progressModal?.update?.(2, '🚀 수집 파이프라인 시동 중...');
         unsubscribeProgress = (window as any).api?.onIssueCollectProgress?.((info: any) => {
@@ -154,6 +157,7 @@ export async function runIssueEndgameCollect(
             mainKeyword: searchKeyword,
             intro: introText,
             paidVisionCheck: visionChoice.paid,
+            breadth: issueCollectWide ? 'wide' : 'news',
         });
     } catch (ipcError: any) {
         // Thrown (not returned) failure — close the modal before rethrowing,
@@ -250,6 +254,8 @@ export async function runIssueEndgameCollect(
                 isCollected: true,
                 savedToLocal: saved.filePath,
                 source: 'issue-endgame',
+                // Publisher + article page from main (og:site_name, else host) — same source line as 관련 사진 찾기.
+                ...(result.sources?.[placedUrl] ? { sourceUrl: result.sources[placedUrl].sourceUrl, caption: result.sources[placedUrl].caption } : {}),
             };
             ImageManager?.addImage?.(heading, entry);
             if (idx === 0) placedForUI.push({ ...entry });

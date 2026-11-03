@@ -109,6 +109,39 @@ function ensureTopShortcutBar() {
   });
 })();
 
+// [2026-11-03] 맨 위 지표 카드 줄(AI 탐지 · 법적 위험 · 품질 · 일일 권장 + 에이전트 잔여 배지)은 기본 접힘.
+//   숨기기만 한다 — DOM 을 지우지 않으므로 renderer 의 data-risk-* / 배지 갱신 코드는 그대로 동작한다.
+(function initRiskSummaryCollapse() {
+  const bar = document.getElementById('risk-summary-fixed');
+  const toggle = document.getElementById('risk-summary-toggle');
+  if (!bar || !toggle || toggle.dataset.riskSummaryBound === 'true') return;
+  toggle.dataset.riskSummaryBound = 'true';
+  const storageKey = 'riskSummaryCollapsed';
+
+  function setCollapsed(collapsed) {
+    bar.hidden = collapsed;
+    toggle.setAttribute('aria-expanded', String(!collapsed));
+    toggle.textContent = collapsed ? '📊 지표 보기 ▾' : '📊 지표 접기 ▴';
+  }
+
+  let initiallyCollapsed = true; // only an explicit "false" (user expanded it) opens the row
+  try {
+    initiallyCollapsed = window.localStorage.getItem(storageKey) !== 'false';
+  } catch {
+    console.warn('[RiskSummary] 지표 줄 표시 설정을 불러오지 못했습니다.');
+  }
+  setCollapsed(initiallyCollapsed);
+
+  toggle.addEventListener('click', () => {
+    setCollapsed(!bar.hidden);
+    try {
+      window.localStorage.setItem(storageKey, String(bar.hidden));
+    } catch {
+      console.warn('[RiskSummary] 지표 줄 표시 설정을 저장하지 못했습니다.');
+    }
+  });
+})();
+
 // 플로팅 버튼 스크롤 따라다니기 스크립트
 (function() {
   let lastScrollTop = 0;

@@ -2,6 +2,7 @@
 // 소제목 이미지 생성 모듈 (Heading Image Generation)
 // modules/headingImageGen.ts
 // ============================================
+import { imgSyncBlockLocalFolderGeneration } from './imageSettingsSyncUi.js';
 import { resolveSectionContentForImage } from '../../image/contextualImagePrompt.js';
 import { buildHeadingImageContext, looksLikeUntranslatedPrompt } from './headingImageContext.js';
 import { createShoppingCollectedPublishImages } from '../../image/shoppingReferenceGeneration.js';
@@ -904,6 +905,7 @@ export function initHeadingImageGeneration(): void {
       // ✅ [2026-02-02 FIX] 드롭다운 값 우선 사용
       const dropdownSource = (document.getElementById('image-source-select') as HTMLSelectElement)?.value;
       const imageSource = dropdownSource || selectedSource?.dataset.source || 'openai-image'; // [2026-10-10] 저장값 없음 기본 = 덕트테이프
+      if (imgSyncBlockLocalFolderGeneration(imageSource, (message) => appendLog(message, 'images-log-output'))) return;
       console.log(`[ImageGeneration] 이미지 소스: ${imageSource} (드롭다운: ${dropdownSource || '없음'}, 버튼: ${selectedSource?.dataset.source || '없음'})`);
 
       try {
@@ -1765,6 +1767,7 @@ export function initHeadingImageGeneration(): void {
       // ✅ [2026-02-02 FIX] 드롭다운 값 우선 사용
       const dropdownSource = (document.getElementById('image-source-select') as HTMLSelectElement)?.value;
       const imageSource = dropdownSource || selectedSource?.dataset.source || 'openai-image'; // [2026-10-10] 저장값 없음 기본 = 덕트테이프
+      if (imgSyncBlockLocalFolderGeneration(imageSource, (message) => appendLog(message, 'images-log-output'))) return;
       console.log(`[ImageGeneration] 남은 이미지 소스: ${imageSource}`);
 
       try {
@@ -5080,6 +5083,7 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
     const selectedSource = document.querySelector('.image-source-btn.selected') as HTMLButtonElement;
     const dropdownSource = (document.getElementById('image-source-select') as HTMLSelectElement)?.value;
     const imageSource = dropdownSource || selectedSource?.dataset.source || 'openai-image'; // [2026-10-10] 저장값 없음 기본 = 덕트테이프
+    if (imgSyncBlockLocalFolderGeneration(imageSource, (message) => appendLog(message, 'images-log-output'))) return;
     console.log(`[ImageGeneration] 개별 이미지 소스: ${imageSource}`);
 
     // ✅ 블로그 제목 가져오기 (썸네일용)
