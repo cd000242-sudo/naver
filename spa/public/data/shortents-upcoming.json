@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T06:56:05.043Z",
+ "builtAt": "2026-11-03T07:06:18.786Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,85 +8,58 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 25,
  "candidates": [
   {
-   "keyword": "금융권 해킹 CEO 책임",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 61,
-   "recent20": 7,
-   "press": 59,
-   "firstArticleAt": "2026-11-03T05:27:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이찬진 금감원장, 금융권 해킹 사고에 경영진 책임 강화 지시",
-     "press": "digitaltoday.co.kr",
-     "publishedAt": "2026-11-03T06:52:00.000Z",
-     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=712131"
-    },
-    {
-     "title": "금감원, 금융권 해킹 대응 강화…CEO 책임 묻고 과징금 3% 추진",
-     "press": "srtimes.kr",
-     "publishedAt": "2026-11-03T06:46:00.000Z",
-     "link": "http://www.srtimes.kr/news/articleView.html?idxno=216624"
-    },
-    {
-     "title": "해킹사고 나면 연임 불가?…대규모 인사 앞둔 금융권 '긴장'",
-     "press": "peoplewatch.co.kr",
-     "publishedAt": "2026-11-03T06:46:00.000Z",
-     "link": "https://www.peoplewatch.co.kr/article/view/ppw202611030011"
-    }
-   ]
-  },
-  {
-   "keyword": "미국 중간선거",
+   "keyword": "교육혁신선도지역 지정",
    "sources": [
     "daum"
    ],
-   "articles90": 48,
-   "recent20": 16,
-   "press": 35,
-   "firstArticleAt": "2026-11-03T05:42:00.000Z",
+   "articles90": 38,
+   "recent20": 7,
+   "press": 28,
+   "firstArticleAt": "2026-11-03T05:38:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "미 중간선거, 미·중 ‘전략적 안정’ 시험대…“트럼프, 관계 안정 추구...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-03T06:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002830487?sid=104"
+     "title": "울산교육청, 교육혁신선도지역 탈락…\"이유 분석해 재도전\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-03T07:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016419164?sid=102"
     },
     {
-     "title": "美중간선거, 코스피 방향 바꿀까…증권가 \"AI 수요·외국인 수급 관건\"",
-     "press": "newsquest.co.kr",
-     "publishedAt": "2026-11-03T06:54:00.000Z",
-     "link": "https://www.newsquest.co.kr/news/articleView.html?idxno=304117"
+     "title": "전북, 5개 시군 '교육혁신 선도지역' 지정",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-03T07:02:00.000Z",
+     "link": "http://www.breaknews.com/1247978"
     },
     {
-     "title": "중간선거 앞두고 등 돌린 美 보수층?…폭스뉴스, 10월 시청률 급락",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-03T06:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005435946?sid=104"
+     "title": "[종합] 작은학교 살리고 교육격차 줄인다…'교육혁신선도지역' 43곳 선정",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-03T06:58:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261103001110"
     }
    ]
   },
   {
-   "keyword": "10월 물가 2.8% 상승",
+   "keyword": "10월 물가 2.8%↑",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 32,
-   "recent20": 9,
-   "press": 25,
-   "firstArticleAt": "2026-11-03T05:27:00.000Z",
+   "articles90": 28,
+   "recent20": 3,
+   "press": 23,
+   "firstArticleAt": "2026-11-03T05:40:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "10월 물가 3% 밑돌았으나 석유·가공식품·외식 뜀박질",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-03T07:04:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261103500403"
+    },
     {
      "title": "충청 생활물가 '고공행진'… 석유류 급등에 서민 부담 가중",
      "press": "ggilbo.com",
@@ -98,44 +71,38 @@
      "press": "businessplus.kr",
      "publishedAt": "2026-11-03T06:52:00.000Z",
      "link": "https://www.businessplus.kr/news/articleView.html?idxno=119191"
-    },
-    {
-     "title": "가공식품 물가 2.9% 상승…먹거리 부담 지속",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T06:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009267535?sid=101"
     }
    ]
   },
   {
-   "keyword": "교육혁신선도지역 지정 결과",
+   "keyword": "손예진 현빈 청룡 수상",
    "sources": [
     "nate"
    ],
-   "articles90": 40,
-   "recent20": 1,
-   "press": 21,
-   "firstArticleAt": "2026-11-03T05:27:00.000Z",
+   "articles90": 89,
+   "recent20": 15,
+   "press": 16,
+   "firstArticleAt": "2026-11-03T05:59:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "전북 5개 시군, 교육혁신선도지역 선정",
-     "press": "kfenews.co.kr",
-     "publishedAt": "2026-11-03T06:52:00.000Z",
-     "link": "https://www.kfenews.co.kr/news/articleView.html?idxno=667456"
+     "title": "[HD포토] 현빈-손예진, '기념비적인 투 샷' (제47회 청룡영화상 핸드프린...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-03T07:04:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267150"
     },
     {
-     "title": "'교육전용선' 띄우고 고학년은 거점 합반…'교육혁신선도지역' 43곳 시동",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-03T06:36:00.000Z",
-     "link": "https://www.ajunews.com/view/20261103152943421"
+     "title": "[HD포토] '핸드프린팅' 남긴 안보현 (제47회 청룡영화상 핸드프린팅)",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-03T07:02:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267143"
     },
     {
-     "title": "\"연 최대 40억 국비 푼다\"…교육부, '교육혁신선도지역' 43곳 확정",
-     "press": "youthdaily.co.kr",
-     "publishedAt": "2026-11-03T06:32:00.000Z",
-     "link": "https://www.youthdaily.co.kr/news/article.html?no=229299"
+     "title": "청룡영화상 46년 만에 겹경사 터졌다…현빈♥손예진 부부 최초→이성민...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-03T07:01:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000782803"
     }
    ]
   },
@@ -144,62 +111,94 @@
    "sources": [
     "daum"
    ],
-   "articles90": 14,
-   "recent20": 7,
-   "press": 12,
+   "articles90": 16,
+   "recent20": 6,
+   "press": 14,
    "firstArticleAt": "2026-11-03T06:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "안산시 원시동 질산 누출 사고…\"창문 닫고 우회 운행 당부\"",
-     "press": "news.skbroadband.com",
-     "publishedAt": "2026-11-03T06:54:00.000Z",
-     "link": "https://news.skbroadband.com/news/articleView.html?idxno=242188"
+     "title": "안산 반도체 부품 공장서 '질산' 누출…원시역 2번 출구 폐쇄(종합)",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T07:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009267641?sid=102"
+    },
+    {
+     "title": "[속보] 안산시 단원구 공장 질산 누출…안전 조치 중",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-03T06:58:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1542525"
     },
     {
      "title": "[속보] 안산 '질산 누출'로 원시역 2번 출구 폐쇄…열차는 정상 운행",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T06:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009267589?sid=102"
-    },
-    {
-     "title": "안산 서해선 원시역 인근 공장서 질산 누출…2번출구 인근 통제",
-     "press": "joongboo.com",
-     "publishedAt": "2026-11-03T06:52:00.000Z",
-     "link": "https://www.joongboo.com/news/articleView.html?idxno=363741331"
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-03T06:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005349705?sid=102"
     }
    ]
   },
   {
-   "keyword": "장동혁 대표, 청년 간담회 참석",
+   "keyword": "어린이",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 6,
+   "articles90": 14,
+   "recent20": 7,
+   "press": 12,
+   "firstArticleAt": "2026-11-03T06:30:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "충북어린이집연합회, 플리마켓 수익금 500만원 기탁",
+     "press": "ccreview.co.kr",
+     "publishedAt": "2026-11-03T07:02:00.000Z",
+     "link": "https://www.ccreview.co.kr/news/articleView.html?idxno=361712"
+    },
+    {
+     "title": "[ESG] 삼성복지재단, 어린이집·유치원 원장 3만명과 동행…영유아 발달...",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-03T07:00:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=560573"
+    },
+    {
+     "title": "스페인 전시회 참가한 플리스, 어린이 경제교육 콘텐츠 유럽 진출 타진",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-03T06:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006402928?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "청년 주거 간담회 장동혁",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 46,
+   "recent20": 1,
+   "press": 9,
    "firstArticleAt": "2026-11-03T05:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "청년주택 둘러본 장동혁 \"부동산은 실물…말로 해결하려니 문제\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-03T06:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005435949?sid=100"
+    },
+    {
+     "title": "장동혁 \"부동산, 말 아닌 공급으로 해결해야\"…청년 주거 현장 찾아",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T06:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014298479?sid=100"
+    },
+    {
      "title": "장동혁 \"부동산, 말 아닌 공급해야…규제로 해결하니 문제\"",
      "press": "news1.kr",
      "publishedAt": "2026-11-03T06:30:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009267484?sid=100"
-    },
-    {
-     "title": "청년 주거 현장 간담회, 모두발언하는 장동혁 대표",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-03T06:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004206030?sid=100"
-    },
-    {
-     "title": "청년 원룸 찾은 장동혁 \"부동산은 말 아닌 공급으로 해결해야\"",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-03T06:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005837448?sid=100"
     }
    ]
   },
@@ -209,7 +208,7 @@
     "google"
    ],
    "articles90": 5,
-   "recent20": 4,
+   "recent20": 1,
    "press": 5,
    "firstArticleAt": "2026-11-03T05:46:00.000Z",
    "exclusive": false,
@@ -236,66 +235,34 @@
    ]
   },
   {
-   "keyword": "신세계그룹",
+   "keyword": "안랩 주가",
    "sources": [
-    "google"
+    "daum"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 2,
    "press": 3,
-   "firstArticleAt": "2026-11-03T06:20:00.000Z",
+   "firstArticleAt": "2026-11-03T06:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "신세계그룹, 8일까지 쓱데이 막바지 할인…클리어런스 최대 92%",
-     "press": "todayeconomic.com",
-     "publishedAt": "2026-11-03T06:44:00.000Z",
-     "link": "https://www.todayeconomic.com/news/article.html?no=32714"
+     "title": "해킹 잇따르자 안랩 한때 50%↑…종가는 전일 대비 2.24% 하락",
+     "press": "newsfc.co.kr",
+     "publishedAt": "2026-11-03T07:02:00.000Z",
+     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82204"
     },
     {
-     "title": "신세계그룹, ‘2026 쓱데이’ 막판 할인전…이마트·백화점 등 혜택 확대",
-     "press": "donga.com",
-     "publishedAt": "2026-11-03T06:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003759745?sid=101"
+     "title": "안랩 장중 13만7300원 찍고 11만3600원 마감",
+     "press": "job-post.co.kr",
+     "publishedAt": "2026-11-03T06:52:00.000Z",
+     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=236185"
     },
     {
-     "title": "신세계그룹, '쓱데이' 막판 할인 총공세... 최대 92%",
-     "press": "meconomynews.com",
-     "publishedAt": "2026-11-03T06:20:00.000Z",
-     "link": "https://www.meconomynews.com/news/articleView.html?idxno=203208"
-    }
-   ]
-  },
-  {
-   "keyword": "2027년 정미년 달력",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 17,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T05:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "달력 제작으로 분주한 인쇄소",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T06:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016418847?sid=102"
-    },
-    {
-     "title": "2027년 정미년 달력 인쇄",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-03T06:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014298303?sid=102"
-    },
-    {
-     "title": "정미년 달력 제작으로 분주",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-03T05:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014298285?sid=102"
+     "title": "해킹 잇따르자 안랩 50%↑…41억원 베팅한 안철수 수익률은? [오늘, 이 종...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-03T06:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/024/0000109359?sid=101"
     }
    ]
   },
@@ -304,10 +271,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 19,
+   "articles90": 18,
    "recent20": 0,
    "press": 2,
-   "firstArticleAt": "2026-11-03T05:32:00.000Z",
+   "firstArticleAt": "2026-11-03T05:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -330,46 +297,26 @@
      "link": "https://n.news.naver.com/mnews/article/001/0016418917?sid=105"
     }
    ]
-  },
-  {
-   "keyword": "이창호 2000승 달성",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 12,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-03T05:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[포토타임] 40년 바둑 인생에 새긴 세계 최초 기록…‘돌부처’ 이창호...",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-03T06:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003562495?sid=102"
-    },
-    {
-     "title": "'돌부처' 이창호, 세계 바둑 첫 2000승 '쾌거'",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T05:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009267287?sid=102"
-    },
-    {
-     "title": "프로 통산 2000승 대기록 작성한 이창호 9단",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T05:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009267288?sid=102"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 383,
-  "matched": 138,
-  "avgLeadMin": 232,
+  "flagged": 387,
+  "matched": 140,
+  "avgLeadMin": 229,
   "recent": [
+   {
+    "keyword": "리센느 컴백",
+    "hitKeyword": "리센느 PULSE 컴백",
+    "hitAt": "2026-11-03T16:00:00+09:00",
+    "leadMin": 34
+   },
+   {
+    "keyword": "미국 중간선거",
+    "hitKeyword": "미국 중간선거 머스크",
+    "hitAt": "2026-11-03T16:00:00+09:00",
+    "leadMin": 24
+   },
    {
     "keyword": "배나라 한재아 결혼",
     "hitKeyword": "배나라 한재아 결혼",
@@ -417,18 +364,6 @@
     "hitKeyword": "미국 이란 공습",
     "hitAt": "2026-11-03T14:30:00+09:00",
     "leadMin": 25
-   },
-   {
-    "keyword": "청소년 SNS 제한 논의",
-    "hitKeyword": "양홍원 원현주 SNS",
-    "hitAt": "2026-11-03T14:30:00+09:00",
-    "leadMin": 15
-   },
-   {
-    "keyword": "감기약 필로폰 일당 검거",
-    "hitKeyword": "감기약 마약 제조",
-    "hitAt": "2026-11-03T14:00:00+09:00",
-    "leadMin": 55
    }
   ]
  }
