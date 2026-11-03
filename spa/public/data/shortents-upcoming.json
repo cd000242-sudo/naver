@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T01:23:46.662Z",
+ "builtAt": "2026-11-03T08:57:13.082Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,557 +8,396 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 24,
  "candidates": [
   {
-   "keyword": "청와대 개인정보 유출 회의",
+   "keyword": "교육혁신선도지역 선정",
    "sources": [
+    "nate",
     "daum"
    ],
-   "articles90": 90,
-   "recent20": 13,
-   "press": 69,
-   "firstArticleAt": "2026-11-02T23:55:00.000Z",
+   "articles90": 74,
+   "recent20": 14,
+   "press": 57,
+   "firstArticleAt": "2026-11-03T07:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "경찰, 李 대통령 등 '1호기 탑승자' 개인정보 유출 내사 착수",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-03T01:22:00.000Z",
-     "link": "https://www.ajunews.com/view/20261103093514284"
+     "title": "'교육혁신 선도지역'에 경북 5개 시군 선정…16곳은 탈락",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-03T08:56:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1421348"
     },
     {
-     "title": "靑, 개인정보 유출에 보안체계 전면 점검...유출 경위 철저 조사",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-03T01:22:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=314495"
+     "title": "통합특별시 등 전남광주 8곳, 교육혁신선도지역에 대거 낙점",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-03T08:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005837552?sid=102"
     },
     {
-     "title": "청와대, '대통령 순방단 개인정보 유출' 긴급회의…\"철저 조사\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-03T01:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400182?sid=102"
+     "title": "양주시, 교육부 ‘교육혁신선도지역’ 선정…5년간 140억 원 투입",
+     "press": "sentv.co.kr",
+     "publishedAt": "2026-11-03T08:52:00.000Z",
+     "link": "https://www.sentv.co.kr/article/view/sentv202611030216"
     }
    ]
   },
   {
-   "keyword": "10월 물가 2.8% 상승",
+   "keyword": "조작기소 특검법 당론 채택",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 96,
-   "recent20": 22,
-   "press": 68,
-   "firstArticleAt": "2026-11-02T23:55:00.000Z",
+   "articles90": 50,
+   "recent20": 11,
+   "press": 41,
+   "firstArticleAt": "2026-11-03T07:28:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[위클리오늘] 10월 물가 2.8% 상승…농산물 내렸지만 석유류 14.9% 급등",
-     "press": "weeklytoday.com",
-     "publishedAt": "2026-11-03T01:22:00.000Z",
-     "link": "http://www.weeklytoday.com/news/articleView.html?idxno=800740"
+     "title": "與 '조작기소 특검법' 당론…5일 본회의 상정 추진",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-03T08:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005349841?sid=100"
     },
     {
-     "title": "10월 소비자물가 2.8% 상승…채소값 내렸지만 석유·외식·가공식품 부담...",
-     "press": "queen.co.kr",
-     "publishedAt": "2026-11-03T01:20:00.000Z",
-     "link": "http://www.queen.co.kr/news/articleView.html?idxno=465689"
+     "title": "정점식 \"공소취소 특검법, 李재판 암장 시도…모든 법안 무제한토론 검...",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-03T08:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000648768?sid=100"
     },
     {
-     "title": "한국은행 \"11월 물가도 2%대 후반 유지… 근원물가 오름세 여전\"",
-     "press": "fntoday.co.kr",
-     "publishedAt": "2026-11-03T01:20:00.000Z",
-     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=396885"
+     "title": "국힘, 與 조작기소 특검법 추진에 \"李 재판 암장 시도…모든 법안 필버...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T08:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014298874?sid=100"
     }
    ]
   },
   {
-   "keyword": "역삼동 연쇄방화 신상공개",
+   "keyword": "삼성",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 62,
-   "recent20": 3,
-   "press": 55,
-   "firstArticleAt": "2026-11-02T23:57:00.000Z",
-   "exclusive": false,
-   "capped": false,
+   "articles90": 44,
+   "recent20": 41,
+   "press": 38,
+   "firstArticleAt": "2026-11-03T08:36:00.000Z",
+   "exclusive": true,
+   "capped": true,
    "samples": [
     {
-     "title": "역삼 연쇄방화 피의자 신상 공개…77세 이명수",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-03T01:16:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1542495"
+     "title": "삼성바이오에피스, 테바와 미국 상업화 계약 체결",
+     "press": "businesskorea.co.kr",
+     "publishedAt": "2026-11-03T08:56:00.000Z",
+     "link": "https://www.businesskorea.co.kr/news/articleView.html?idxno=280369"
     },
     {
-     "title": "'26명 부상' 역삼 빌딩 방화범은 77세 이명수…신상공개 과정 보니",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-03T01:04:00.000Z",
-     "link": "https://www.ajunews.com/view/20261103095208346"
+     "title": "'관리받는 연금투자' 확대…신한은행, 삼성자산운용과 손잡다",
+     "press": "newstnt.com",
+     "publishedAt": "2026-11-03T08:56:00.000Z",
+     "link": "https://www.newstnt.com/news/articleView.html?idxno=726513"
     },
     {
-     "title": "경찰, '역삼동 연쇄방화' 피의자 이명수 신상 공개",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-03T01:04:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5078990"
+     "title": "KT와 삼성의 대결, 컴프야 '한국시리즈 예측' 이벤트 연다",
+     "press": "gamemeca.com",
+     "publishedAt": "2026-11-03T08:56:00.000Z",
+     "link": "https://m.sports.naver.com/esports/article/356/0000087281"
     }
    ]
   },
   {
-   "keyword": "대한항공 에볼라 서약서",
+   "keyword": "한학자 보석 취소",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 39,
-   "recent20": 4,
-   "press": 39,
-   "firstArticleAt": "2026-11-02T23:54:00.000Z",
-   "exclusive": false,
+   "articles90": 41,
+   "recent20": 14,
+   "press": 36,
+   "firstArticleAt": "2026-11-03T07:42:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "미국행 승객 서약서 제출 의무화···대한항공 '에볼라 유입 차단' 전면...",
-     "press": "enewstoday.co.kr",
-     "publishedAt": "2026-11-03T01:17:00.000Z",
-     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2487656"
+     "title": "법원, '천정궁 외출' 한학자 통일교 총재 보석 취소… 2억 보석금도 몰...",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-03T08:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000191364?sid=102"
     },
     {
-     "title": "대한항공, 4일부터 미국행 승객 에볼라 관련 서약서 제출 의무화",
-     "press": "inthenews.co.kr",
-     "publishedAt": "2026-11-03T01:16:00.000Z",
-     "link": "https://www.inthenews.co.kr/news/article.html?no=93918"
+     "title": "병원 이탈해 천정궁 외출…통일교 한학자, 결국 보석 취소",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-03T08:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001976522?sid=102"
     },
     {
-     "title": "대한항공, 美행 승객 에볼라 서약서 의무화…4일부터 적용",
-     "press": "sentv.co.kr",
-     "publishedAt": "2026-11-03T01:06:00.000Z",
-     "link": "https://www.sentv.co.kr/article/view/sentv202611030076"
-    }
-   ]
-  },
-  {
-   "keyword": "북한 순항미사일 집속탄두 시험",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 18,
-   "recent20": 4,
-   "press": 18,
-   "firstArticleAt": "2026-11-02T23:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "북, 이번엔 순항미사일 '집속탄' 시험…수직 타격 첫 공개",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-03T01:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001163039?sid=100"
-    },
-    {
-     "title": "北, 순항미사일 집속탄두 시험…\"수직타격 능력 완성\" 주장",
+     "title": "법원, 한학자 통일교 총재 보석 취소…보증금 국고 귀속",
      "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-03T01:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005837189?sid=100"
-    },
-    {
-     "title": "북, 전략순항미사일 집속탄두 위력·수직타격 시험...'5~6 헥타르 초토화...",
-     "press": "tongilnews.com",
-     "publishedAt": "2026-11-03T01:08:00.000Z",
-     "link": "http://www.tongilnews.com/news/articleView.html?idxno=218041"
+     "publishedAt": "2026-11-03T08:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005837548?sid=102"
     }
    ]
   },
   {
-   "keyword": "역삼 방화범 이명수 77세",
+   "keyword": "아시안컵",
+   "sources": [
+    "google"
+   ],
+   "articles90": 29,
+   "recent20": 6,
+   "press": 27,
+   "firstArticleAt": "2026-11-03T07:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "2027 아시안컵 1년 연기…모레노 감독 거취·차기 사령탑 선임 모두 '안...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-03T08:52:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267241"
+    },
+    {
+     "title": "2027 사우디 아시안컵, 중동 정세 불안으로 개최 연기",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-03T08:50:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261103010001250"
+    },
+    {
+     "title": "\"중요한 것은 아시안컵 우승!\" 日 원대한 꿈, 날벼락 맞았다…AFC 대회 ...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-03T08:47:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/076/0004462609"
+    }
+   ]
+  },
+  {
+   "keyword": "LG생활건강 3분기 영업익 52% 증가",
    "sources": [
     "nate"
    ],
-   "articles90": 21,
-   "recent20": 1,
-   "press": 18,
-   "firstArticleAt": "2026-11-03T00:00:00.000Z",
+   "articles90": 14,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-03T07:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'26명 부상' 역삼 빌딩 방화범은 77세 이명수…신상공개 과정 보니",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-03T01:04:00.000Z",
-     "link": "https://www.ajunews.com/view/20261103095208346"
+     "title": "LG생활건강, 3분기 매출 제자리에도 영업익 52%↑",
+     "press": "news.dealsitetv.com",
+     "publishedAt": "2026-11-03T08:50:00.000Z",
+     "link": "https://news.dealsitetv.com/articles/177976"
     },
     {
-     "title": "[속보] ‘역삼동 연쇄방화범’ 77세 이명수 신상 공개…“잔인성 인정”",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-03T00:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003056759?sid=102"
+     "title": "LG생활건강, 3분기 영업익 52% 증가…뷰티사업 적자 축소",
+     "press": "smarttimes.co.kr",
+     "publishedAt": "2026-11-03T08:40:00.000Z",
+     "link": "http://www.smarttimes.co.kr/news/articleView.html?idxno=50296"
     },
     {
-     "title": "역삼동 연쇄방화범 신상공개…77세 이명수 머그샷",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-03T00:54:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2643404"
+     "title": "LG생활건강, 3분기 영업익 704억원·52%↑…뷰티 적자 축소",
+     "press": "newsinside.kr",
+     "publishedAt": "2026-11-03T08:14:00.000Z",
+     "link": "https://www.newsinside.kr/news/articleView.html?idxno=5039664"
     }
    ]
   },
   {
-   "keyword": "래블업",
+   "keyword": "어린이",
    "sources": [
-    "google",
-    "daum"
+    "google"
    ],
-   "articles90": 17,
-   "recent20": 0,
-   "press": 16,
-   "firstArticleAt": "2026-11-03T00:02:00.000Z",
+   "articles90": 10,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-03T08:18:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "래블업, 코스닥 상장 첫날 강세...장중 한때 49% 급등",
-     "press": "techm.kr",
-     "publishedAt": "2026-11-03T01:02:00.000Z",
-     "link": "https://www.techm.kr/news/articleView.html?idxno=156795"
+     "title": "고령군 어린이집연합회, 영어 체험 축제",
+     "press": "dkilbo.com",
+     "publishedAt": "2026-11-03T08:56:00.000Z",
+     "link": "https://www.dkilbo.com/news/articleView.html?idxno=559536"
     },
     {
-     "title": "'AI 인프라 소프트웨어' 래블업, 코스닥 상장 첫날 15%대 상승",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-03T00:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001037958?sid=101"
+     "title": "'노래로 전하는 크리스마스 사랑'…컴패션, 어린이 결연 잇는 콘서트 개...",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-03T08:52:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=242181"
     },
     {
-     "title": "[특징주] 래블업, 코스닥 입성 첫날 '상승'",
-     "press": "cstimes.com",
-     "publishedAt": "2026-11-03T00:52:00.000Z",
-     "link": "https://www.cstimes.com/news/articleView.html?idxno=726400"
+     "title": "전동킥보드·전기자전거 타는 어린이, 뇌 손상 위험 2배",
+     "press": "dongascience.com",
+     "publishedAt": "2026-11-03T08:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/584/0000039985?sid=103"
     }
    ]
   },
   {
-   "keyword": "국정감사 국민보고 대회",
+   "keyword": "코스피 3% 하락 마감",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 17,
+   "articles90": 10,
    "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-02T23:55:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-03T07:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국민의힘 \"국정감사, 이재명 정부 추악한 실상 드러나\"",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-03T01:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002463946?sid=100"
+     "title": "[오늘의 주목주] 삼성SDI 주가 9%대 내려, 코스피 'AI 수익성 우려'에 56...",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-03T08:52:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=451074"
     },
     {
-     "title": "정점식 원내대표, 국정감사 국민보고 대회",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-03T00:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003695153?sid=100"
+     "title": "코스피, AI 자금조달 우려에 3.59% 급락…외국인 매도에 5600선 후퇴",
+     "press": "goodkyung.com",
+     "publishedAt": "2026-11-03T08:00:00.000Z",
+     "link": "https://www.goodkyung.com/news/articleView.html?idxno=293060"
     },
     {
-     "title": "「M포토」 국정감사 국민보고 대회 발언하는 임이자 정책위의장",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-03T00:34:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=72492"
+     "title": "미 기술주 하락·중간선거 경계에 증시 하락 마감",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-03T07:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002427847?sid=101"
     }
    ]
   },
   {
-   "keyword": "김종국 아내 귀요미♥ 1주년",
+   "keyword": "제주 실종 허위 종결",
    "sources": [
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-03T00:07:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"삼시세끼 아내 집밥?\"…김종국, 결국 입 열었다 \"어떻게 요구하나, 먼저...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-03T01:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000782729"
-    },
-    {
-     "title": "김종국, 결혼 1주년 깜짝 이벤트→최수종도 인정한 사랑꾼…\"애칭은 귀...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-03T00:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001406931"
-    },
-    {
-     "title": "‘결혼 1년 차’ 김종국 “아내 핸드폰 저장명, ‘귀요미♥︎’”(‘옥...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-03T00:20:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001277474"
-    }
-   ]
-  },
-  {
-   "keyword": "김민",
-   "sources": [
-    "google"
-   ],
-   "articles90": 14,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-02T23:55:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김민, 맨손으로 아나콘다 잡았다더니…\"미역이었다\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-03T01:18:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014296991"
-    },
-    {
-     "title": "김민 ‘나혼산’ 살리고 본업 컴백 “강동원 김고은과 함께 촬영중”(아...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-03T00:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001183828"
-    },
-    {
-     "title": "'아침마당' 김민 \"맨손 아나콘다? 알고 보니 미역이었다\" 해명",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-03T00:58:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16266771"
-    }
-   ]
-  },
-  {
-   "keyword": "탑 나나 생일카페 동행",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-03T00:13:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "탑♥나나, 열애 인정 한 달 만에 생일카페 동반 방문…팬 반응 엇갈려",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-03T01:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001277493"
-    },
-    {
-     "title": "탑♥나나, 열애 인정 후 생일 카페 동행",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-03T01:02:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611030149"
-    },
-    {
-     "title": "탑♥나나, 열애 인정 한 달 만에 공개 데이트...생일카페 동행",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-03T00:54:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60597"
-    }
-   ]
-  },
-  {
-   "keyword": "리센느 컴백",
-   "sources": [
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-02T23:57:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "리센느, 역주행 신화 다음은 '펄스'…오늘(3일) 컴백",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-03T00:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000518831"
-    },
-    {
-     "title": "'대세' 리센느, 오늘(3일) 'PULSE'로 컴백",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-03T00:40:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000326432"
-    },
-    {
-     "title": "'新 역주행 아이콘' 리센느, 오늘 새 앨범 '펄스' 발매",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-03T00:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/018/0006402572"
-    }
-   ]
-  },
-  {
-   "keyword": "47세 한다감 아들 첫 공개",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-03T00:05:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'47세 출산' 한다감, 제왕절개로 낳은 생후 26일 子 최초 공개…엄마 판...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-03T00:54:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001406936"
-    },
-    {
-     "title": "'47세 출산' 한다감, 조리원 떠나 본격 육아…\"아들 울면 온몸에 땀 나\"...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-03T00:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002075654"
-    },
-    {
-     "title": "'47세 산모' 한다감, 고령 출산 전혀 문제없었다…생후 26일 차 아들 방...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-03T00:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000782725"
-    }
-   ]
-  },
-  {
-   "keyword": "웰컴저축은행 에스와이 2연승",
-   "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 0,
+   "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-03T00:00:00.000Z",
+   "firstArticleAt": "2026-11-03T07:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "PBA '전력 보강' 웰컴저축은행, 에스와이 꺾고 2연승",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-03T00:23:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/055/0001400157"
+     "title": "제주 실종 허위 종결 전직 경찰관…추가 범행 10건",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-03T08:56:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1542531"
     },
     {
-     "title": "'웰컴저축은행이 옳았다' 유일 추가선발, 강유진 승-T.응우옌 승... 2연승...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-03T00:18:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/108/0003483995"
+     "title": "제주경찰, 부 경장 허위종결 25건 추가 송치",
+     "press": "jejumaeil.net",
+     "publishedAt": "2026-11-03T07:58:00.000Z",
+     "link": "https://www.jejumaeil.net/news/articleView.html?idxno=406326"
     },
     {
-     "title": "'새 얼굴 효과 제대로 봤다!' 웰컴저축은행, 에스와이 꺾고 2연승 질주…...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-03T00:11:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/117/0004121228"
+     "title": "제주 경찰관, 실종신고 25건 추가 허위처리…검찰 송치",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-03T07:44:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=846035"
     }
    ]
   },
   {
-   "keyword": "출근하는 조희대 대법원장",
+   "keyword": "서울양평 고속도로 재추진",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 4,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T00:15:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-03T07:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[포토] 대법 향하는 조희대 대법원장",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-03T01:20:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3445386"
+     "title": "서울~양평 고속도로 타당성조사…\"사업 재개 가시화\"",
+     "press": "engdaily.com",
+     "publishedAt": "2026-11-03T08:48:00.000Z",
+     "link": "http://www.engdaily.com/news/articleView.html?idxno=23769"
     },
     {
-     "title": "[포토] 대법으로 향하는 조희대 대법원장",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-03T01:18:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3445381"
+     "title": "'특혜 논란' 서울~양평 고속道, 3년만에 재추진",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-03T08:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005349795?sid=101"
     },
     {
-     "title": "출근하는 조희대 대법원장",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T01:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009266320?sid=102"
+     "title": "국토부 종점 변경 특혜 의혹 서울-양평 고속도로 재추진, 신규 타당성 조...",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-03T08:00:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=451063"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 271,
-  "matched": 97,
-  "avgLeadMin": 233,
+  "flagged": 414,
+  "matched": 148,
+  "avgLeadMin": 222,
   "recent": [
    {
-    "keyword": "우리들의 발라드2 한로이",
-    "hitKeyword": "우리들의 발라드2 박예승",
-    "hitAt": "2026-11-03T10:00:00+09:00",
-    "leadMin": 600
+    "keyword": "손영권",
+    "hitKeyword": "김자연 손영권 결혼",
+    "hitAt": "2026-11-03T17:30:00+09:00",
+    "leadMin": 104
    },
    {
-    "keyword": "우리들의 발라드2 박예승",
-    "hitKeyword": "우리들의 발라드2 박예승",
-    "hitAt": "2026-11-03T10:00:00+09:00",
-    "leadMin": 580
+    "keyword": "김자연 손영권 결혼",
+    "hitKeyword": "김자연 손영권 결혼",
+    "hitAt": "2026-11-03T17:30:00+09:00",
+    "leadMin": 23
    },
    {
-    "keyword": "기온",
-    "hitKeyword": "출근길 기온 급락",
-    "hitAt": "2026-11-03T09:30:00+09:00",
-    "leadMin": 228
+    "keyword": "슈퍼모델 김자연 결혼",
+    "hitKeyword": "김자연 손영권 결혼",
+    "hitAt": "2026-11-03T17:30:00+09:00",
+    "leadMin": 3
    },
    {
-    "keyword": "10월 물가 2.8% 상승",
-    "hitKeyword": "물가 상승 외식 물가",
-    "hitAt": "2026-11-03T09:30:00+09:00",
-    "leadMin": 47
+    "keyword": "손예진 현빈 청룡 수상",
+    "hitKeyword": "손예진 현빈 출산 고충",
+    "hitAt": "2026-11-03T17:00:00+09:00",
+    "leadMin": 54
    },
    {
-    "keyword": "최불암 장지 식당 논란",
-    "hitKeyword": "최불암 마지막 길",
-    "hitAt": "2026-11-03T09:30:00+09:00",
-    "leadMin": 7
-   },
-   {
-    "keyword": "양홍원 아내 사진 삭제",
-    "hitKeyword": "양홍원 결혼 2주 변화",
-    "hitAt": "2026-11-03T09:00:00+09:00",
-    "leadMin": 37
-   },
-   {
-    "keyword": "한양증권 해킹",
-    "hitKeyword": "한양증권 해킹",
-    "hitAt": "2026-11-03T09:00:00+09:00",
-    "leadMin": 27
+    "keyword": "코스피 3.59% 하락",
+    "hitKeyword": "코스피 급락",
+    "hitAt": "2026-11-03T17:00:00+09:00",
+    "leadMin": 34
    },
    {
     "keyword": "미국 중간선거",
-    "hitKeyword": "미국 중간선거 투표",
-    "hitAt": "2026-11-03T09:00:00+09:00",
-    "leadMin": 27
+    "hitKeyword": "미국 중간선거 트럼프",
+    "hitAt": "2026-11-03T17:00:00+09:00",
+    "leadMin": 23
    },
    {
-    "keyword": "나스닥 100",
-    "hitKeyword": "나스닥 기술주 매도",
-    "hitAt": "2026-11-03T09:00:00+09:00",
-    "leadMin": 27
+    "keyword": "2026년 11월 3일 운세",
+    "hitKeyword": "배나라 11월 14일 결혼",
+    "hitAt": "2026-11-03T16:30:00+09:00",
+    "leadMin": 588
    },
    {
-    "keyword": "한양증권 해킹 유출",
-    "hitKeyword": "한양증권 해킹",
-    "hitAt": "2026-11-03T09:00:00+09:00",
-    "leadMin": 17
+    "keyword": "김자연 손영권 결혼",
+    "hitKeyword": "김자연 결혼",
+    "hitAt": "2026-11-03T16:30:00+09:00",
+    "leadMin": 14
+   },
+   {
+    "keyword": "리센느 컴백",
+    "hitKeyword": "리센느 PULSE 컴백",
+    "hitAt": "2026-11-03T16:00:00+09:00",
+    "leadMin": 34
+   },
+   {
+    "keyword": "미국 중간선거",
+    "hitKeyword": "미국 중간선거 머스크",
+    "hitAt": "2026-11-03T16:00:00+09:00",
+    "leadMin": 24
    }
   ]
  }
