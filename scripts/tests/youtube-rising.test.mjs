@@ -40,7 +40,7 @@ test('form: short = at most 180 s and a vertical player; long = longer or horizo
 });
 
 test('normalizeVideo keeps the title as is, caps text, and only accepts i.ytimg thumbnails and valid ids', () => {
-  const item = normalizeVideo(video('abcDEF123_-'), '엔터테인먼트');
+  const item = normalizeVideo(video('abcDEF123_-'));
   assert.equal(item.videoId, 'abcDEF123_-');
   assert.equal(item.url, 'https://www.youtube.com/shorts/abcDEF123_-');
   assert.equal(item.title, '제목 abcDEF123_-');
@@ -49,14 +49,27 @@ test('normalizeVideo keeps the title as is, caps text, and only accepts i.ytimg 
   assert.equal(item.categoryName, '엔터테인먼트');
   assert.equal(item.viewCount, 36000);
   assert.ok(item.description.length <= 300);
-  assert.equal(normalizeVideo(video('bad id!'), ''), null);
+  assert.equal(normalizeVideo(video('bad id!')), null);
   const offsite = video('abcDEF123_-');
   offsite.snippet.thumbnails.medium.url = 'https://evil.example/x.jpg';
-  assert.equal(normalizeVideo(offsite, '').thumbnail, '');
+  assert.equal(normalizeVideo(offsite).thumbnail, '');
   const long = video('abcDEF123_-', { contentDetails: { duration: 'PT12M' }, player: { embedWidth: '360', embedHeight: '203' } });
-  assert.equal(normalizeVideo(long, '').url, 'https://www.youtube.com/watch?v=abcDEF123_-');
+  assert.equal(normalizeVideo(long).url, 'https://www.youtube.com/watch?v=abcDEF123_-');
   const hidden = video('abcDEF123_-', { statistics: { viewCount: '500' } });
-  assert.equal(normalizeVideo(hidden, '').likeCount, null, 'hidden counts stay null, never 0');
+  assert.equal(normalizeVideo(hidden).likeCount, null, 'hidden counts stay null, never 0');
+});
+
+test('categoryName always follows the video\'s own categoryId, never the chart it was asked from', () => {
+  // 2026-11-03 first live board: the 26 (노하우·스타일) chart returned videos filed under 22, 15, 2 …, and the board
+  // labelled all of them 노하우·스타일 — the LDB filter then listed the same name many times.
+  const filedUnder22 = video('ddddddddddd');
+  filedUnder22.snippet.categoryId = '22';
+  assert.equal(normalizeVideo(filedUnder22).categoryName, '인물·일상');
+  assert.equal(normalizeVideo(filedUnder22).categoryId, '22');
+  assert.equal(normalizeVideo.length, 1, 'no chart-name argument to pass by mistake');
+  const unknown = video('eeeeeeeeeee');
+  unknown.snippet.categoryId = '99';
+  assert.equal(normalizeVideo(unknown).categoryName, '');
 });
 
 test('velocity: delta against the previous deploy, average since upload otherwise, never negative', () => {
@@ -65,9 +78,9 @@ test('velocity: delta against the previous deploy, average since upload otherwis
     { videoId: 'ccccccccccc', viewCount: 99999 },
   ] };
   const raw = [
-    normalizeVideo(video('aaaaaaaaaaa'), ''),
-    normalizeVideo(video('bbbbbbbbbbb'), ''),
-    normalizeVideo(video('ccccccccccc'), ''),
+    normalizeVideo(video('aaaaaaaaaaa')),
+    normalizeVideo(video('bbbbbbbbbbb')),
+    normalizeVideo(video('ccccccccccc')),
   ];
   const board = buildRisingBoard(raw, previous, NOW);
   assert.equal(board.schemaVersion, BOARD_SCHEMA_VERSION);
@@ -81,7 +94,7 @@ test('velocity: delta against the previous deploy, average since upload otherwis
 });
 
 test('duplicates across category calls collapse to one item; at most 200 items', () => {
-  const raw = Array.from({ length: 260 }, (_, n) => normalizeVideo(video(`v${String(n).padStart(10, '0')}`), ''));
+  const raw = Array.from({ length: 260 }, (_, n) => normalizeVideo(video(`v${String(n).padStart(10, '0')}`)));
   const board = buildRisingBoard([...raw, raw[0], raw[1]], null, NOW);
   assert.equal(board.items.length, 200);
   assert.equal(new Set(board.items.map((i) => i.videoId)).size, 200);

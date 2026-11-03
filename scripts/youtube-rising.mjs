@@ -10,7 +10,7 @@
  */
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
-import { CATEGORY_NAMES, buildRisingBoard, normalizeVideo, planRebuild, readPreviousBoard } from './lib/youtube-rising-core.mjs';
+import { buildRisingBoard, normalizeVideo, planRebuild, readPreviousBoard } from './lib/youtube-rising-core.mjs';
 
 const argValue = (name, fallback) => {
   const at = process.argv.indexOf(name);
@@ -49,7 +49,7 @@ async function fetchChart(categoryId) {
       log(`${label}: 받지 못함 (HTTP ${status}${reason ? ` · ${reason}` : ''})`);
       return [];
     }
-    return body.items.map((item) => normalizeVideo(item, CATEGORY_NAMES[categoryId || item?.snippet?.categoryId] || ''));
+    return body.items.map((item) => normalizeVideo(item));
   } catch (error) {
     log(`${label}: 요청 실패 (${String(error?.name || 'Error')})`);
     return [];

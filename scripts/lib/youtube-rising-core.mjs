@@ -20,7 +20,7 @@ const SHORT_MAX_SEC = 180;
 /** Korean names for the categories the board asks for (KR region). */
 export const CATEGORY_NAMES = {
   1: '영화·애니', 2: '자동차', 10: '음악', 15: '동물', 17: '스포츠', 19: '여행', 20: '게임', 22: '인물·일상',
-  23: '코미디', 24: '엔터테인먼트', 25: '뉴스·정치', 26: '노하우·스타일', 27: '교육', 28: '과학기술',
+  23: '코미디', 24: '엔터테인먼트', 25: '뉴스·정치', 26: '노하우·스타일', 27: '교육', 28: '과학기술', 29: '비영리·사회',
 };
 
 /** ISO 8601 duration (PT1H2M3S, P1DT1S, P0D) → seconds, or null when it cannot be read. */
@@ -54,8 +54,12 @@ function thumbnailOf(snippet) {
   return /^https:\/\/i\.ytimg\.com\/[^\s"'<>]+$/.test(url) ? url : '';
 }
 
-/** One API video resource → one board item, or null when the id is not a YouTube video id. */
-export function normalizeVideo(resource, categoryName) {
+/**
+ * One API video resource → one board item, or null when the id is not a YouTube video id.
+ * The category name comes from the video's own snippet.categoryId: a category chart (videoCategoryId=26) also
+ * returns videos filed elsewhere, so the requested chart is not the video's category (live board 2026-11-03).
+ */
+export function normalizeVideo(resource) {
   const videoId = String(resource?.id || '');
   if (!/^[A-Za-z0-9_-]{11}$/.test(videoId)) return null;
   const snippet = resource.snippet || {};
@@ -72,7 +76,7 @@ export function normalizeVideo(resource, categoryName) {
     durationSec,
     form,
     categoryId: text(snippet.categoryId, 4),
-    categoryName: text(categoryName || CATEGORY_NAMES[snippet.categoryId] || '', 20),
+    categoryName: text(CATEGORY_NAMES[snippet.categoryId] || '', 20),
     viewCount: count(resource.statistics?.viewCount),
     likeCount: count(resource.statistics?.likeCount),
     commentCount: count(resource.statistics?.commentCount),
