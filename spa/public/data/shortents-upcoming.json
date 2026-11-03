@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T15:29:02.658Z",
+ "builtAt": "2026-11-03T15:39:08.071Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 25,
  "candidates": [
   {
-   "keyword": "신천지 정청래 책임져야",
+   "keyword": "김민석 신천지 의혹 사과",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 6,
+   "articles90": 11,
    "recent20": 2,
-   "press": 6,
+   "press": 10,
    "firstArticleAt": "2026-11-03T14:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[사설] 신천지 의혹 말 바꾼 여당 대표, ‘아니면 말고’로 끝낼 일인가",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-03T15:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003562651?sid=110"
+    },
     {
      "title": "울먹이며 사과한 김민석에 한동훈 “울 일 아니고 책임져야”",
      "press": "munhwa.com",
@@ -33,27 +39,60 @@
      "press": "imaeil.com",
      "publishedAt": "2026-11-03T15:12:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/088/0001038182?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "이강철 로건 투입 실수",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-03T14:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "안타→안타→'끝내 5실점' 빌미, 실패로 돌아간 KT 히든카드…이강철 감...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-03T15:30:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/311/0002076265"
     },
     {
-     "title": "신천지 논란에 김민석 '비공개 사과'…鄭 반발 속 내홍 재점화",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-03T15:06:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=778695"
+     "title": "이강철 KT 감독 \"로건 기용 실수…계투 운용 정리됐다\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-03T15:04:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/055/0001400399"
+    },
+    {
+     "title": "[파워인터뷰] KT 이강철 감독 \"로건 투입, 내 실수 인정한다\"",
+     "press": "stnsports.co.kr",
+     "publishedAt": "2026-11-03T15:03:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/450/0000155277"
     }
    ]
   },
   {
    "keyword": "한·튀르키예 정상 회담",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 4,
-   "recent20": 0,
+   "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-03T14:06:00.000Z",
+   "firstArticleAt": "2026-11-03T14:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "한·튀르키예 전략관계 심화…\"신규 원전 참여 지원\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-03T15:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922601?sid=100"
+    },
     {
      "title": "이 대통령 “튀르키예 원전, 한국기업 선제 지원”",
      "press": "joongang.co.kr",
@@ -65,76 +104,70 @@
      "press": "newsworks.co.kr",
      "publishedAt": "2026-11-03T14:38:00.000Z",
      "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=901810"
-    },
-    {
-     "title": "한-튀르키예 정상회담…李대통령 \"원전·방산 등 협력 내실화\"",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-03T14:28:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5079418"
     }
    ]
   },
   {
-   "keyword": "김여정, 미국 도발 지목",
+   "keyword": "돌싱 n 모솔",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T14:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[종합] \"이렇게 생겨서 모솔이면 어떡해\"…'돌싱N모솔2' 첫 인상에 엇갈...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-03T15:24:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267533"
+    },
+    {
+     "title": "김우빈 닮은 모솔남 등장에 넉살 \"앞에 분들은 뭐가 됩니까?\" ('돌싱N모...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-03T15:20:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000486226"
+    },
+    {
+     "title": "\"나 너 좋아하냐\"…'돌싱N모솔2' 선착순 첫인상 투표에 흔들린 삼각 신...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-03T15:12:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267531"
+    }
+   ]
+  },
+  {
+   "keyword": "10월 소비자물가 2.8%",
    "sources": [
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-03T14:07:00.000Z",
-   "exclusive": false,
+   "firstArticleAt": "2026-11-03T15:02:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "'8조원 해킹'에 김여정이 나섰다...북미 대화의 암초 되나 [이우탁의 인...",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-03T15:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000548451?sid=100"
+     "title": "10월 물가 2.8% 상승… 석유류 14.9%-가공식품 2.9% 뜀박질",
+     "press": "donga.com",
+     "publishedAt": "2026-11-03T15:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003759843?sid=101"
     },
     {
-     "title": "김여정 “미국 정치적 도발…‘재고할 문제’ 있어”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-03T14:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012286730?sid=100"
-    },
-    {
-     "title": "북, 바이낸스 해킹 즉각 부인...김여정 \"도발 예의주시\", 북미대화 염두...",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-03T14:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002427982?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "한학자 보석 취소",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T14:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'천정궁' 다녀온 한학자 총재, 法 보석 취소",
-     "press": "getnews.co.kr",
+     "title": "울산 소비자물가 넉달만에 3%대 재진입",
+     "press": "ksilbo.co.kr",
      "publishedAt": "2026-11-03T15:04:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=885899"
+     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1071531"
     },
     {
-     "title": "법원, 한학자 총재 보석 취소 결정",
-     "press": "segye.com",
-     "publishedAt": "2026-11-03T14:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004172288?sid=102"
-    },
-    {
-     "title": "병원 밖 통일교 시설 오간 한학자 총재, '보석 취소' 결정",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-03T14:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400384?sid=102"
+     "title": "강원 소비자물가 고공행진…상승폭 전국 평균 넘어",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-03T15:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001228353?sid=101"
     }
    ]
   },
@@ -169,11 +202,43 @@
      "link": "https://n.news.naver.com/mnews/article/001/0016420036?sid=104"
     }
    ]
+  },
+  {
+   "keyword": "양세종 발목 골절",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T15:03:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "양세종, 체중 관리 철저히 하는 이유 \"하중 못 버티고 골절\" (틈만나면)",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-03T15:09:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002076262"
+    },
+    {
+     "title": "양세종, 발목 골절 후 체중 집착..\"앞자리 사수\" [틈만나면][별별TV]",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-03T15:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003484384"
+    },
+    {
+     "title": "35세 양세종, ‘피로골절’로 발목 부러져..“앞자리 안 바뀌려고 노력...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-03T15:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005634138"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 448,
+  "flagged": 451,
   "matched": 179,
   "avgLeadMin": 241,
   "recent": [
