@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T01:53:58.169Z",
+ "builtAt": "2026-11-03T02:04:01.982Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,84 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "10월 물가 2.8% 상승",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 95,
-   "recent20": 15,
-   "press": 73,
-   "firstArticleAt": "2026-11-03T00:28:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "10월 소비자물가 2.8% 상승…두달 연속 2%대",
-     "press": "asiatime.co.kr",
-     "publishedAt": "2026-11-03T01:52:00.000Z",
-     "link": "https://www.asiatime.co.kr/article/20261103500091"
-    },
-    {
-     "title": "물가 상승률 반년째 3% 안팎…먹거리·기름값 고공행진",
-     "press": "mediaus.co.kr",
-     "publishedAt": "2026-11-03T01:50:00.000Z",
-     "link": "https://www.mediaus.co.kr/news/articleView.html?idxno=318779"
-    },
-    {
-     "title": "10월 물가 2.8%…한은, 11월도 2%대 후반 전망",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-03T01:48:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026110309304191289"
-    }
-   ]
-  },
-  {
-   "keyword": "순방단 개인정보 유출 조사",
+   "keyword": "가상자산 과세 유예 건의",
    "sources": [
     "nate"
    ],
-   "articles90": 55,
-   "recent20": 6,
-   "press": 48,
-   "firstArticleAt": "2026-11-03T00:24:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "외교부 \"공군1호기 정보 유출, 경위 파악 조사 진행\"",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-03T01:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006402646?sid=100"
-    },
-    {
-     "title": "李대통령 여권번호까지 5개월 노출…靑, 순방단 168명 정보 유출 긴급조...",
-     "press": "daily.hankooki.com",
-     "publishedAt": "2026-11-03T01:46:00.000Z",
-     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1421135"
-    },
-    {
-     "title": "靑 \"대통령 순방단 개인정보 유출 경위 철저히 조사\"",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-03T01:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002463955?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "與 재경위 과세 유예 건의",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 36,
-   "recent20": 6,
-   "press": 33,
-   "firstArticleAt": "2026-11-03T00:28:00.000Z",
+   "articles90": 47,
+   "recent20": 4,
+   "press": 46,
+   "firstArticleAt": "2026-11-03T00:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "민주당 재경위, 당 지도부에 가상자산 과세유예 건의키로…“2년 유예 ...",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-03T01:58:00.000Z",
+     "link": "https://www.viva100.com/article/20261103500515"
+    },
     {
      "title": "與 재경위, 지도부에 '코인 과세 유예' 건의키로…\"2년 정도 거론\"",
      "press": "inews24.com",
@@ -97,44 +39,38 @@
      "press": "seoul.co.kr",
      "publishedAt": "2026-11-03T01:49:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/081/0003695190?sid=100"
-    },
-    {
-     "title": "與, 가상자산 과세 '2년 유예' 건의…내년 시행 제동",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-03T01:44:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000079080"
     }
    ]
   },
   {
-   "keyword": "대한항공 에볼라 서약서",
+   "keyword": "순방단 개인정보 유출 긴급회의",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 30,
-   "recent20": 4,
-   "press": 30,
-   "firstArticleAt": "2026-11-03T00:24:00.000Z",
-   "exclusive": false,
+   "articles90": 46,
+   "recent20": 7,
+   "press": 43,
+   "firstArticleAt": "2026-11-03T00:35:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "대한항공, 미국행 승객 에볼라 서약서 제출 의무화",
-     "press": "cnbnews.com",
-     "publishedAt": "2026-11-03T01:50:00.000Z",
-     "link": "https://www.cnbnews.com/news/articleView.html?idxno=1022067"
+     "title": "대통령 순방단 168명 개인정보 유출 일파만파… 靑, 긴급회의 소집 \"책임...",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-03T02:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002247052?sid=105"
     },
     {
-     "title": "미국행 항공기 타려면 당분간 '에볼라 서약서' 써야 한다 : 아프리카 '분...",
-     "press": "huffingtonpost.kr",
-     "publishedAt": "2026-11-03T01:40:00.000Z",
-     "link": "https://www.huffingtonpost.kr/article/261749"
+     "title": "대통령 여권번호까지 샜다…靑 긴급회의 “책임 규명·전면 점검”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-03T01:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002718066?sid=100"
     },
     {
-     "title": "대한항공, 4일부터 미국행 승객 '에볼라 서약서' 제출 의무화",
-     "press": "paxetv.com",
-     "publishedAt": "2026-11-03T01:36:00.000Z",
-     "link": "http://www.paxetv.com/news/articleView.html?idxno=285934"
+     "title": "靑, 대통령 순방단 개인정보 유출 긴급회의 … \"중대 사안, 관리 책임 명...",
+     "press": "queen.co.kr",
+     "publishedAt": "2026-11-03T01:56:00.000Z",
+     "link": "http://www.queen.co.kr/news/articleView.html?idxno=465680"
     }
    ]
   },
@@ -143,62 +79,190 @@
    "sources": [
     "daum"
    ],
-   "articles90": 26,
-   "recent20": 14,
-   "press": 26,
-   "firstArticleAt": "2026-11-03T00:24:00.000Z",
+   "articles90": 29,
+   "recent20": 10,
+   "press": 29,
+   "firstArticleAt": "2026-11-03T00:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "LG에너지솔루션, 3분기 영업익 7560억···ESS 호조",
-     "press": "cnbnews.com",
-     "publishedAt": "2026-11-03T01:50:00.000Z",
-     "link": "https://www.cnbnews.com/news/articleView.html?idxno=1022063"
+     "title": "LG엔솔, 3Q 매출·영업익 ‘동반 성장’…북미 ESS 생산 확대 속도낸다",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-03T02:02:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611030057"
     },
     {
-     "title": "LG엔솔, 3분기 영업익 7560억원, 6.6배 '껑충' ··· ESS 성장에 '점프'",
-     "press": "greenpostkorea.co.kr",
-     "publishedAt": "2026-11-03T01:50:00.000Z",
-     "link": "https://www.greenpostkorea.co.kr/news/articleView.html?idxno=307910"
+     "title": "LG엔솔 3분기 영업익 7,560억원…전년동기비 25.7% 증가",
+     "press": "itbiznews.com",
+     "publishedAt": "2026-11-03T02:00:00.000Z",
+     "link": "https://www.itbiznews.com/news/articleView.html?idxno=230079"
     },
     {
-     "title": "LG엔솔, 3분기 영업익 7560억 두 자릿수 성장…내년 북미 70GWh 확보",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-03T01:50:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=901717"
+     "title": "LG엔솔, 3Q 영업익 7560억…내년 북미 ESS 70GWh 확보",
+     "press": "fetv.co.kr",
+     "publishedAt": "2026-11-03T01:58:00.000Z",
+     "link": "https://www.fetv.co.kr/news/articleView.html?idxno=312978"
     }
    ]
   },
   {
-   "keyword": "이재명 대통령 국무회의 참석",
+   "keyword": "발언하는 이재명 대통령",
    "sources": [
     "nate"
    ],
-   "articles90": 21,
-   "recent20": 9,
-   "press": 14,
+   "articles90": 47,
+   "recent20": 22,
+   "press": 26,
+   "firstArticleAt": "2026-11-03T01:13:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이재명 대통령 \"다문화가족 정책, 불합리성 개선해야\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-03T02:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005435729?sid=102"
+    },
+    {
+     "title": "이 대통령 \"사회 너무 극단화되고 있어…배경은 가짜뉴스\"",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-03T02:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001976466?sid=100"
+    },
+    {
+     "title": "李대통령 “다문화가정 일률적 우선권 맞나…약자 지원도 공정성·합리...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-03T01:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202176?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "이화영 대북송금 재심 청구",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 29,
+   "recent20": 4,
+   "press": 22,
+   "firstArticleAt": "2026-11-03T00:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"무죄 인정 새 증거\"…이화영 측, 대북송금 유죄 재심 청구(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T01:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014297206?sid=102"
+    },
+    {
+     "title": "李대통령 기소된 쌍방울 대북송금 사건…이화영 재심 청구",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-03T01:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001882619?sid=102"
+    },
+    {
+     "title": "가석방 요구했던 이화영 ‘쌍방울 대북송금’ 재심 청구…“새로운 증...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-03T01:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002718058?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "77세 이명수 연쇄방화 피의자",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 18,
+   "recent20": 1,
+   "press": 17,
    "firstArticleAt": "2026-11-03T00:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령 “폭등도 폭락도 바람직하지 않다”…부동산 정확한 통계 주문",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-03T01:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003056785?sid=100"
+     "title": "역삼동 연쇄방화 피의자는 77세 이명수…경찰, 신상 공개",
+     "press": "tbs.seoul.kr",
+     "publishedAt": "2026-11-03T01:51:00.000Z",
+     "link": "http://tbs.seoul.kr/news/newsView.do?typ_800=6&idx_800=3538663&seq_800=20531564"
     },
     {
-     "title": "경청하는 이재명 대통령",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-03T01:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014297198?sid=100"
+     "title": "역삼동 사무실 연쇄 방화 혐의 77세 남성 신상 공개…피해자 26명 발생",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-03T01:38:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=845991"
     },
     {
-     "title": "대통령이 “꼭 필요하지 않으면 안 와도 된다” 했는데…중수청장, 또 ...",
-     "press": "donga.com",
+     "title": "'강남 연쇄 방화범' 77세 이명수 신상공개",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-03T01:34:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3445399"
+    }
+   ]
+  },
+  {
+   "keyword": "울산 에릭, K리그1 MVP 선정",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-03T01:04:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[공식발표] 이동경·야고만 있는 게 아니다…강원전 멀티골 에릭, K리그...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-03T01:52:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/445/0000486059"
+    },
+    {
+     "title": "[공식발표] '멀티골 역전극' 울산 에릭, 34라운드 MVP...베스트 팀은 안...",
+     "press": "fourfourtwo.co.kr",
      "publishedAt": "2026-11-03T01:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003759671?sid=100"
+     "link": "https://m.sports.naver.com/kfootball/article/411/0000089448"
+    },
+    {
+     "title": "'강원전 멀티골' 울산 에릭, K리그1 34라운드 MVP 선정",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T01:38:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/003/0014297126"
+    }
+   ]
+  },
+  {
+   "keyword": "미국 이란 케슘섬 공습",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 11,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-03T01:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "선거 코앞 이란 공격한 美…“케슘섬 공격, 수주간 이어져”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-03T01:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004678125?sid=104"
+    },
+    {
+     "title": "[美중간선거]이란 \"美, 우리 조건 무조건 받아야\"…선거 전 대화 무산된...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T01:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014297148?sid=104"
+    },
+    {
+     "title": "美, 이란 호르무즈 요충지 케슘섬 공습…WSJ \"제한적 공격 지속\"",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-03T01:38:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=901719"
     }
    ]
   },
@@ -208,10 +272,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 12,
-   "recent20": 3,
-   "press": 12,
-   "firstArticleAt": "2026-11-03T00:24:00.000Z",
+   "articles90": 10,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-03T00:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -240,13 +304,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-03T00:33:00.000Z",
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-03T00:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "리센느, 미니 4집 컴백…‘국민 걸그룹’ 방점 찍는다 [DA투데이]",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-03T02:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001302581"
+    },
     {
      "title": "리센느, 미니 4집 ‘PULSE’로 컴백...A2O LITE 독주 막을까",
      "press": "raonnews.com",
@@ -258,12 +328,6 @@
      "press": "mediapen.com",
      "publishedAt": "2026-11-03T01:32:00.000Z",
      "link": "https://www.mediapen.com/news/view/1134590"
-    },
-    {
-     "title": "유튜브로 '러브 어택' 1위 만든 리센느, 'With'으로 정주행 노린다→오늘...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-03T01:26:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16266780"
     }
    ]
   },
@@ -273,7 +337,7 @@
     "google"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-03T00:47:00.000Z",
    "exclusive": false,
@@ -302,6 +366,7 @@
   {
    "keyword": "출근하는 조희대 대법원장",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 10,
@@ -332,109 +397,92 @@
    ]
   },
   {
-   "keyword": "국정감사 국민보고 대회",
+   "keyword": "김민 아나콘다 일화 해명",
    "sources": [
-    "signal.bz",
-    "nate"
+    "daum"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-03T00:34:00.000Z",
+   "firstArticleAt": "2026-11-03T00:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국민의힘 \"국정감사, 이재명 정부 추악한 실상 드러나\"",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-03T01:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002463946?sid=100"
-    },
-    {
-     "title": "정점식 원내대표, 국정감사 국민보고 대회",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-03T00:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003695153?sid=100"
-    },
-    {
-     "title": "「M포토」 국정감사 국민보고 대회 발언하는 임이자 정책위의장",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-03T00:34:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=72492"
-    }
-   ]
-  },
-  {
-   "keyword": "47세 한다감 아들 첫 공개",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T00:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'47세 출산' 한다감, 제왕절개로 낳은 생후 26일 子 최초 공개…엄마 판...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-03T00:54:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001406936"
-    },
-    {
-     "title": "'47세 출산' 한다감, 조리원 떠나 본격 육아…\"아들 울면 온몸에 땀 나\"...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-03T00:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002075654"
-    },
-    {
-     "title": "'47세 산모' 한다감, 고령 출산 전혀 문제없었다…생후 26일 차 아들 방...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-03T00:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000782725"
-    }
-   ]
-  },
-  {
-   "keyword": "김빅토리아노 최불암 추모",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T00:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김빅토리아노, 무연고 故 최불암 추모 \"내레이션 50번 돌려 봐\"",
+     "title": "김민, 아나콘다 포획설 해명 \"뉴질랜드엔 뱀 없다\"",
      "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-03T01:22:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=94433"
+     "publishedAt": "2026-11-03T01:36:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=94440"
     },
     {
-     "title": "“검정 넥타이로 바꿔” 아나운서 김빅토리아노, 일면식 없는 故 최불암...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-03T01:20:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001183834"
+     "title": "김민, 맨손으로 아나콘다 잡았다더니…\"미역이었다\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T01:18:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014296991"
     },
     {
-     "title": "아나운서 김빅토리아노, 일면식 없는 故최불암에 \"최소 50번 돌려봤다…...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-03T00:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000782726"
+     "title": "'아침마당' 김민 \"맨손 아나콘다? 알고 보니 미역이었다\" 해명",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-03T00:58:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16266771"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 283,
-  "matched": 102,
-  "avgLeadMin": 223,
+  "flagged": 290,
+  "matched": 110,
+  "avgLeadMin": 240,
   "recent": [
+   {
+    "keyword": "기아 10월 판매 증가",
+    "hitKeyword": "10월 소비자물가 상승",
+    "hitAt": "2026-11-03T11:00:00+09:00",
+    "leadMin": 1092
+   },
+   {
+    "keyword": "기아 10월 판매 29만대 증가",
+    "hitKeyword": "10월 소비자물가 상승",
+    "hitAt": "2026-11-03T11:00:00+09:00",
+    "leadMin": 1042
+   },
+   {
+    "keyword": "10월 판매 감소",
+    "hitKeyword": "10월 소비자물가 상승",
+    "hitAt": "2026-11-03T11:00:00+09:00",
+    "leadMin": 991
+   },
+   {
+    "keyword": "10월 소비자물가 2.8%",
+    "hitKeyword": "10월 소비자물가 상승",
+    "hitAt": "2026-11-03T11:00:00+09:00",
+    "leadMin": 147
+   },
+   {
+    "keyword": "재혼 황후",
+    "hitKeyword": "신민아 재혼황후",
+    "hitAt": "2026-11-03T11:00:00+09:00",
+    "leadMin": 147
+   },
+   {
+    "keyword": "10월 소비자물가 2.8% 상승",
+    "hitKeyword": "10월 소비자물가 상승",
+    "hitAt": "2026-11-03T11:00:00+09:00",
+    "leadMin": 97
+   },
+   {
+    "keyword": "10월 물가 2.8% 상승",
+    "hitKeyword": "10월 소비자물가 상승",
+    "hitAt": "2026-11-03T11:00:00+09:00",
+    "leadMin": 56
+   },
+   {
+    "keyword": "이정현 검찰총장 후보 물망",
+    "hitKeyword": "검찰총장 추천위 심사",
+    "hitAt": "2026-11-03T11:00:00+09:00",
+    "leadMin": 26
+   },
    {
     "keyword": "이명수 신상공개",
     "hitKeyword": "역삼동 연쇄방화 이명수",
@@ -446,54 +494,6 @@
     "hitKeyword": "역삼동 연쇄방화 이명수",
     "hitAt": "2026-11-03T10:30:00+09:00",
     "leadMin": 36
-   },
-   {
-    "keyword": "역삼동 연쇄방화 신상공개",
-    "hitKeyword": "역삼동 연쇄방화 이명수",
-    "hitAt": "2026-11-03T10:30:00+09:00",
-    "leadMin": 26
-   },
-   {
-    "keyword": "코스피 3% 급락",
-    "hitKeyword": "코스피 약세",
-    "hitAt": "2026-11-03T10:30:00+09:00",
-    "leadMin": 26
-   },
-   {
-    "keyword": "역삼 방화범 이명수 77세",
-    "hitKeyword": "역삼동 연쇄방화 이명수",
-    "hitAt": "2026-11-03T10:30:00+09:00",
-    "leadMin": 26
-   },
-   {
-    "keyword": "우리들의 발라드2 한로이",
-    "hitKeyword": "우리들의 발라드2 박예승",
-    "hitAt": "2026-11-03T10:00:00+09:00",
-    "leadMin": 600
-   },
-   {
-    "keyword": "우리들의 발라드2 박예승",
-    "hitKeyword": "우리들의 발라드2 박예승",
-    "hitAt": "2026-11-03T10:00:00+09:00",
-    "leadMin": 580
-   },
-   {
-    "keyword": "기온",
-    "hitKeyword": "출근길 기온 급락",
-    "hitAt": "2026-11-03T09:30:00+09:00",
-    "leadMin": 228
-   },
-   {
-    "keyword": "10월 물가 2.8% 상승",
-    "hitKeyword": "물가 상승 외식 물가",
-    "hitAt": "2026-11-03T09:30:00+09:00",
-    "leadMin": 47
-   },
-   {
-    "keyword": "최불암 장지 식당 논란",
-    "hitKeyword": "최불암 마지막 길",
-    "hitAt": "2026-11-03T09:30:00+09:00",
-    "leadMin": 7
    }
   ]
  }
