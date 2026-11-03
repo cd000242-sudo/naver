@@ -159,10 +159,10 @@ async function judgeWithAgent(
 
     if (route.vendor === 'agent-codex') {
       const { runCodex } = await import('../../agentCli/codexRunner.js');
-      return await runCodex(withFiles, { imagePaths: paths, timeoutMs: AGENT_TIMEOUT_MS });
+      return await runCodex(withFiles, { imagePaths: paths, tier: 'light', timeoutMs: AGENT_TIMEOUT_MS });
     }
     const { runClaude } = await import('../../agentCli/claudeRunner.js');
-    return await runClaude(withFiles, { imagePaths: paths, timeoutMs: AGENT_TIMEOUT_MS });
+    return await runClaude(withFiles, { imagePaths: paths, tier: 'light', timeoutMs: AGENT_TIMEOUT_MS });
   } finally {
     await rm(dir, { recursive: true, force: true }).catch(() => { /* best-effort */ });
   }

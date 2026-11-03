@@ -303,7 +303,7 @@ interface AutomationAPI {
   generateContent: (prompt: string) => Promise<{ success: boolean; content?: string; message?: string }>;
   analyzeParaphraseSource: (payload: { title: string; body: string; hashtags?: string; generator: string }) => Promise<{ success: boolean; analysis?: any; brief?: string; engine?: string; durationMs?: number; reason?: string; message?: string }>;
   agentStatus: (provider: AgentProvider, options?: { forceRefresh?: boolean }) => Promise<{ success: boolean; status?: AgentCliStatus; code?: string; message?: string }>;
-  agentGenerate: (payload: { provider: AgentProvider; prompt: string; schema?: Record<string, unknown>; model?: string; timeoutMs?: number }) => Promise<{ success: boolean; provider?: AgentProvider; text?: string; json?: unknown; durationMs?: number; code?: string; message?: string }>;
+  agentGenerate: (payload: { provider: AgentProvider; prompt: string; schema?: Record<string, unknown>; model?: string; tier?: 'main' | 'light'; timeoutMs?: number }) => Promise<{ success: boolean; provider?: AgentProvider; text?: string; json?: unknown; durationMs?: number; code?: string; message?: string }>;
   agentInstall: (provider: AgentProvider) => Promise<{ success: boolean; version?: string; code?: string; message?: string }>;
   onAgentInstallProgress?: (listener: (progress: AgentInstallProgress) => void) => () => void;
   agentLogin: (provider: AgentProvider) => Promise<{ success: boolean; status?: AgentCliStatus; authState?: 'already_authenticated' | 'authenticated'; code?: string; message?: string }>;

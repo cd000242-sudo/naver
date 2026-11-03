@@ -49,6 +49,8 @@ export interface IssueQueryPlan {
   querySets: HeadingQuerySet[];
   /** true when Gemini produced the plan, false when heuristics fallback was used */
   aiGenerated: boolean;
+  /** Why the heading-text fallback ran (engine unusable / call failed); unset when the model answered. */
+  fallbackReason?: string;
 }
 
 /** One candidate image found by any source adapter. */
@@ -87,6 +89,8 @@ export interface IssueCollectPayload {
   mainKeyword?: string;
   /** 서론/도입부 — 사건 맥락이 가장 진하게 담긴 부분이라 별도로 전달한다. */
   intro?: string;
+  /** [2026-11-03] The whole article body - read by the plan model when the headings carry no paragraphs of their own. */
+  articleBody?: string;
 }
 
 /** Real-time progress event emitted while the harness runs. */
@@ -118,6 +122,8 @@ export interface IssueHarnessOptions {
   planCaller?: import('./textRoute.js').IssuePlanCaller;
   /** 플랜을 만든 엔진 이름 — 로그·화면 표기용. */
   planEngineLabel?: string;
+  /** [2026-11-03] Caller-visible notices (for example the plan-fallback warning) - display only. */
+  log?: (message: string) => void;
   /**
    * Vision 게이트 경로 — 사용자가 고른 글생성 엔진을 따라간다(visionRoute.ts).
    * null/미지정이면 Vision 을 아예 돌리지 않고 무료 캡션 게이트만 쓴다.
@@ -136,6 +142,8 @@ export interface IssueHarnessStats {
   aiPlanUsed: boolean;
   /** 플랜을 만든 엔진 이름. 휴리스틱이면 비어 있다. */
   planEngine?: string;
+  /** Why the search plan fell back to heading text (unset when the model's plan was used). */
+  planFallbackReason?: string;
   /** R3 funnel stats */
   visionUsed?: boolean;
   /** 실제로 판정한 벤더 라벨 — 어디로 청구됐는지 화면에 그대로 보여 준다. */

@@ -5559,6 +5559,9 @@ URL: ${firstUrl}
   let inlineSelectedAccountIds: string[] = [];
 
   function updateTabStyles() {
+    // [2026-11-03] The theme paints the chosen tab from the .active class, not from the inline gradients below.
+    singleAccountTab?.classList.toggle('active', currentAccountMode === 'single');
+    multiAccountTab?.classList.toggle('active', currentAccountMode === 'multi');
     if (currentAccountMode === 'single') {
       singleAccountTab.style.background = 'linear-gradient(135deg, #10b981, #059669)';
       singleAccountTab.style.color = 'white';

@@ -14,6 +14,7 @@ import { app } from 'electron';
 import { readFileSync, writeFileSync, mkdirSync } from 'fs';
 import { join, dirname } from 'path';
 import type { AgentProvider } from './types.js';
+import { parseAbsoluteResetAt } from './rateLimitReset.js';
 
 export const AGENT_USAGE_WINDOW_MS = 5 * 60 * 60 * 1000;
 const MAX_EVENTS_PER_PROVIDER = 500;
@@ -156,6 +157,10 @@ export function recordAgentCall(provider: AgentProvider, now: number = Date.now(
  */
 export function parseRateLimitReset(message: string, now: number = Date.now()): number | undefined {
   const text = String(message || '');
+
+  // Codex prints an absolute local time: "try again at Nov 4th, 2026 3:42 PM".
+  const absolute = parseAbsoluteResetAt(text);
+  if (absolute !== undefined) return absolute;
 
   // Optional-both groups let "again in ..." match with nothing captured, so
   // hours(+minutes) and minutes-only are matched by separate mandatory forms.

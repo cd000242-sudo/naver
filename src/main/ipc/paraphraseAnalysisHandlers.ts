@@ -118,12 +118,12 @@ async function callAgent(provider: 'codex' | 'claude' | 'gemini', prompt: string
 }
 
 /** 구독 에이전트로 자유 형식 텍스트 답을 받는다 — 스키마가 분석용이라 다른 보조 작업에는 맞지 않는다. */
-async function callAgentText(provider: 'codex' | 'claude' | 'gemini', prompt: string, options?: AnalysisCallOptions): Promise<string> {
+async function callAgentText(provider: 'codex' | 'claude' | 'gemini', prompt: string, options?: AnalysisCallOptions, agentTier: 'main' | 'light' = 'main'): Promise<string> {
   const { generateWithAgent } = await import('../../agentCli/index.js');
   const { createAgentProductPolicyContext } = await import('../../agentCli/productPolicy.js');
   options?.signal?.throwIfAborted();
   const result = await generateWithAgent(
-    { provider, prompt, timeoutMs: resolveTimeout(options), signal: options?.signal },
+    { provider, prompt, tier: agentTier, timeoutMs: resolveTimeout(options), signal: options?.signal },
     createAgentProductPolicyContext({ allowClaudeSubscription: true }),
   );
   options?.signal?.throwIfAborted();
@@ -228,9 +228,9 @@ function resolveEngineRoute(
   const key = (name: string): string => (typeof config[name] === 'string' ? (config[name] as string).trim() : '');
   const tier: SideCallTier = routeOptions.tier === 'quality' ? 'quality' : 'utility';
   const qualityModel = tier === 'quality' ? resolveQualityTierModel(generator, config) : null;
-  if (generator === 'agent-codex') return { engine: 'codex(구독)', subscription: true, tier, callModel: (p, o) => callAgentText('codex', p, o) };
-  if (generator === 'agent-claude') return { engine: 'claude(구독)', subscription: true, tier, callModel: (p, o) => callAgentText('claude', p, o) };
-  if (generator === 'agent-gemini') return { engine: 'gemini(구독)', subscription: true, tier, callModel: (p, o) => callAgentText('gemini', p, o) };
+  if (generator === 'agent-codex') return { engine: 'codex(구독)', subscription: true, tier, callModel: (p, o) => callAgentText('codex', p, o, tier === 'quality' ? 'main' : 'light') };
+  if (generator === 'agent-claude') return { engine: 'claude(구독)', subscription: true, tier, callModel: (p, o) => callAgentText('claude', p, o, tier === 'quality' ? 'main' : 'light') };
+  if (generator === 'agent-gemini') return { engine: 'gemini(구독)', subscription: true, tier, callModel: (p, o) => callAgentText('gemini', p, o, tier === 'quality' ? 'main' : 'light') };
   if (generator === 'openai') {
     const openaiKey = key('openaiApiKey');
     const model = qualityModel || OPENAI_ANALYSIS_MODEL;

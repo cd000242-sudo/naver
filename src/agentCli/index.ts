@@ -45,7 +45,7 @@ export async function generateWithAgent(
   const normalized = normalizeAgentGenerateOptions(
     opts as unknown as Record<string, unknown>,
   );
-  const { provider, prompt, schema, model, timeoutMs, signal } = normalized;
+  const { provider, prompt, schema, model, tier, timeoutMs, signal } = normalized;
 
   // Final execution boundary: a new call site cannot silently bypass packaged-app policy.
   assertResolvedContentGeneratorProviderAllowed(
@@ -65,6 +65,10 @@ export async function generateWithAgent(
       provider,
       status.detail ?? `${provider} 상태 확인이 지연돼 응답을 받지 못했습니다. 잠시 후 다시 시도해주세요.`,
     );
+  }
+  // An installed CLI below the minimum is "update needed", not "install needed" and not a logout.
+  if (status.errorCode === 'update_required') {
+    throw new AgentCliError('update_required', provider, status.detail ?? `${provider} CLI 업데이트가 필요합니다.`);
   }
   if (!status.installed) {
     throw new AgentCliError('not_installed', provider, `${provider} CLI가 설치되어 있지 않습니다.`);
@@ -97,10 +101,10 @@ export async function generateWithAgent(
   for (let attempt = 1; ; attempt++) {
     try {
       text = provider === 'codex'
-        ? await runCodex(prompt, { schema, model, timeoutMs, signal })
+        ? await runCodex(prompt, { schema, model, tier, timeoutMs, signal })
         : provider === 'gemini'
           ? await runGemini(prompt, { schema, model, timeoutMs, signal })
-          : await runClaude(prompt, { schema, model, timeoutMs, signal });
+          : await runClaude(prompt, { schema, model, tier, timeoutMs, signal });
 
       // Quota is consumed once the CLI answered, even if JSON parsing below
       // fails — record here, not after validation.

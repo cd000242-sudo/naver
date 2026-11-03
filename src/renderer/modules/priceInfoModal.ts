@@ -5,6 +5,7 @@
  * - 의존: appendLog (자체 정의), window.api, DOM
  */
 
+import { describeAgentModelLine } from '../../agentCli/agentModelDefaults.js';
 import { toastManager } from '../utils/uiManagers.js';
 import { normalizeRetiredNanoSlotModel } from '../../runtime/imageProviderMigration.js';
 import { rememberPlan } from '../utils/geminiPlanMemo.js';
@@ -234,6 +235,16 @@ export async function refreshAgentStatusBadges(
         el.style.color = '#b45309';
         return;
       }
+      if (s.errorCode === 'update_required') {
+        // Installed but older than the app's default model needs: "업데이트 필요", not "설치 필요".
+        el.textContent = `⬆️ 업데이트 필요 — ${s.detail || `${versionLabel} · 새 버전이 필요합니다`}`;
+        el.style.color = '#b45309';
+        setShown(actions, true, 'flex');
+        setShown(installBtn, true);
+        if (installBtn) installBtn.textContent = '⚡ 업데이트하기 (설치 → 로그인 → 확인)';
+        bindAgentConnect(installBtn, t.provider, el);
+        return;
+      }
       if (!s.installed) {
         el.textContent = '\u2B07\uFE0F \uBBF8\uC124\uCE58 \u2014 \uC544\uB798 \uBC84\uD2BC \uD55C \uBC88\uC73C\uB85C \uC124\uCE58+\uB85C\uADF8\uC778\uC774 \uC790\uB3D9 \uC9C4\uD589\uB429\uB2C8\uB2E4';
         el.style.color = '#b91c1c';
@@ -297,6 +308,9 @@ export async function refreshAgentStatusBadges(
           if (parts.length > 0) el.textContent += ` \u00B7 ${parts.join(' \u00B7 ')}`;
         }
       } catch { /* usage \uD45C\uAE30\uB294 \uC0C1\uD0DC \uD45C\uC2DC\uB97C \uAE68\uC9C0 \uC54A\uB294\uB2E4 */ }
+      // [2026-11-03] One status-line fragment for the model the app asks this agent for (no new field).
+      const agentModelLine = describeAgentModelLine(t.provider, (document.getElementById(`agent-${t.provider}-model`) as HTMLInputElement | null)?.value);
+      if (agentModelLine && agentStatusRefreshCoordinator.canApply(refreshLease)) el.textContent += ` · ${agentModelLine}`;
       if (!announcedAgentLoginTargets.has(el)) {
         announcedAgentLoginTargets.add(el);
         const providerLabel = t.provider === 'codex' ? 'Codex' : t.provider === 'gemini' ? 'Gemini CLI' : 'Claude Code';

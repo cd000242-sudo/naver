@@ -70,6 +70,7 @@ export function normalizeAgentGenerateOptions(
     ...(schema ? { schema } : {}),
     ...(model ? { model } : {}),
     ...(timeoutMs ? { timeoutMs } : {}),
+    ...(value?.tier === 'light' ? { tier: 'light' as const } : {}),
     ...(value?.signal instanceof AbortSignal ? { signal: value.signal } : {}),
   };
 }

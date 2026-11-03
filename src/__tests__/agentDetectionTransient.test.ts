@@ -10,7 +10,7 @@ import { clearAgentDetectionCache, detectAgent } from '../agentCli/detect';
 import { AgentCliError } from '../agentCli/types';
 
 function codexVersion() {
-  return { code: 0, stdout: 'codex-cli 0.142.2', stderr: '' };
+  return { code: 0, stdout: 'codex-cli 0.166.0', stderr: '' };
 }
 
 function codexLoggedIn() {

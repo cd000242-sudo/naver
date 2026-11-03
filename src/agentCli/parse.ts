@@ -144,6 +144,17 @@ export function classifyExit(
     return 'server_overloaded';
   }
 
+  // [2026-11-03] The CLI refuses a model this subscription cannot use (codex: "model is not supported when
+  // using Codex with a ChatGPT account"; claude: "issue with the selected model ... may not exist").
+  // Checked before the quota/auth words so a refusal is never read as a limit or a logout.
+  if (
+    /selected model|model_not_found|(?:unknown|invalid|unsupported) model|model\b[^\n]{0,80}\b(?:is not supported|not supported when|does not exist|may not exist|not found|is not available)|do(?:es)? not have access to (?:the )?model/.test(
+      hay,
+    )
+  ) {
+    return 'model_unavailable';
+  }
+
   if (
     /usage limit|rate limit|rate.limited|quota|too many requests|\b429\b|weekly limit|5-?hour|limit reached|out of (credits|tokens)|insufficient_quota|resource_exhausted/.test(
       hay,

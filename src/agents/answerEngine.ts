@@ -62,11 +62,11 @@ export async function answerWithAgentCli(
   try {
     if (kind === 'agent-claude') {
       const { runClaude } = await import('../agentCli/claudeRunner.js');
-      return (await runClaude(prompt, { timeoutMs: AGENT_ANSWER_TIMEOUT_MS })).trim() || null;
+      return (await runClaude(prompt, { tier: 'light', timeoutMs: AGENT_ANSWER_TIMEOUT_MS })).trim() || null;
     }
     if (kind === 'agent-codex') {
       const { runCodex } = await import('../agentCli/codexRunner.js');
-      return (await runCodex(prompt, { timeoutMs: AGENT_ANSWER_TIMEOUT_MS })).trim() || null;
+      return (await runCodex(prompt, { tier: 'light', timeoutMs: AGENT_ANSWER_TIMEOUT_MS })).trim() || null;
     }
     if (kind === 'agent-gemini') {
       const { runGemini } = await import('../agentCli/geminiRunner.js');

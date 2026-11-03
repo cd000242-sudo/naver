@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="daily-publishing.css">
     <!-- [2026-11-03] White page + NAVER green. Keep these LAST: they override the sheets above. -->
     <link rel="stylesheet" href="theme-naver.css">
+    <link rel="stylesheet" href="theme-naver-components.css">
     <link rel="stylesheet" href="theme-naver-transitional.css">
 </head>
 
@@ -1871,25 +1872,8 @@
                         <input type="text" id="unified-generated-hashtags" class="full-width" placeholder="#해시태그">
                     </div>
 
-                    <!-- 🎨 이미지 옵션
-                         [2026-09-17] 배선(formAndAutomation.ts:82 · fullAutoFlow.ts:3147)은 살아 있는데
-                         입력창이 101fa541 에서 사라져 있었다. 없으면 `?? true` 로 떨어져 항상 켜진 상태였고
-                         끌 방법이 없었다. CTA(이전글 연결)와 무관한 항목이라 그 블록 밖에 둔다. -->
-                    <div class="field"
-                        style="background: rgba(59, 130, 246, 0.06); padding: 1rem; border-radius: var(--radius-md); border: 1px solid rgba(59, 130, 246, 0.2); margin-top: 1rem;">
-                        <label
-                            style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer; user-select: none;">
-                            <input type="checkbox" id="unified-use-ai-image" checked
-                                style="width: 18px; height: 18px; cursor: pointer; accent-color: #3b82f6;">
-                            <div>
-                                <div id="unified-use-ai-image-label"
-                                    style="font-weight: 600; color: var(--text-strong);">🎨 AI 이미지 활용</div>
-                                <div id="unified-use-ai-image-hint"
-                                    style="font-size: 0.75rem; color: var(--text-muted);">해제하면 AI 이미지를 만들지 않고 수집한
-                                    사진만 사용합니다.</div>
-                            </div>
-                        </label>
-                    </div>
+                    <!-- [2026-11-03] 이미지 사용 체크박스는 없앴다: 이미지 엔진 선택(이미지 탭 · 풀오토 설정 · 기동 창이 한 설정)이 그 역할을 맡는다.
+                         읽는 코드는 요소가 없으면 '켜짐'(?? true)으로 읽는다. -->
 
                     <!-- ✅ CTA 버튼 설정 (통합) -->
                     <div class="field"
@@ -3461,18 +3445,17 @@
                 <div id="images-subpanel-manage" style="display: block;">
 
                 <!-- ✅ 초보자용 사용법 안내 (접을 수 있는 형태) -->
-                <div
+                <div id="images-usage-guide"
                     style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.15)); padding: 1.5rem; border-radius: var(--radius-lg); border: 2px solid rgba(16, 185, 129, 0.4); margin-bottom: 2rem;">
-                    <div style="display: flex; align-items: center; justify-content: space-between; cursor: pointer;"
-                        onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'; this.querySelector('.toggle-icon').textContent = this.nextElementSibling.style.display === 'none' ? '▼' : '▲';">
+                    <div id="images-usage-guide-head" role="button" tabindex="0" aria-expanded="false" style="display: flex; align-items: center; justify-content: space-between; cursor: pointer;">
                         <h3
                             style="margin: 0; color: var(--text-strong); font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
                             <span style="font-size: 1.5rem;">📖</span>
                             <span>이미지 관리 사용법</span>
                         </h3>
-                        <span class="toggle-icon" style="font-size: 1.2rem; color: var(--text-strong);">▲</span>
+                        <span class="toggle-icon" style="font-size: 1.2rem; color: var(--text-strong);">▼</span>
                     </div>
-                    <div style="margin-top: 1rem; line-height: 1.8; color: var(--text-strong);">
+                    <div id="images-usage-guide-body" style="display: none; margin-top: 1rem; line-height: 1.8; color: var(--text-strong);">
                         <div
                             style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
                             <!-- AI 자동 수집 강조 배너 -->
@@ -3564,7 +3547,7 @@
                     <div class="field">
                         <label for="image-title">📝 제목</label>
                         <input type="text" id="image-title" placeholder="블로그 글 제목을 입력하세요">
-                        <p class="field-hint">이미지를 생성할 콘텐츠의 제목을 입력하세요.</p>
+                        <p class="field-hint">이미지를 생성할 콘텐츠의 제목을 입력하세요. 본문과 소제목까지 넣으면 더 정확합니다 (글을 만든 뒤 수집하거나 통합 탭에 본문을 넣어 두면 함께 분석합니다).</p>
                     </div>
 
                     <!-- ✅ [v2.7.74] 콘텐츠 입력 영역 URL 수집 입력란 + 부족분 처리 옵션 -->
@@ -7548,23 +7531,7 @@
                             </div>
                         </div>
 
-                        <!-- ✅ AI 이미지 활용 체크박스
-                             [2026-09-17] continuousPublishing.ts:1983·4222 가 읽고 있는데 입력창이 없어
-                             항상 켜진 값(?? true)으로만 저장되고 있었다. -->
-                        <div
-                            style="margin-bottom: 1rem; padding: 0.75rem; background: rgba(59, 130, 246, 0.06); border-radius: 10px; border: 1px solid rgba(59, 130, 246, 0.2);">
-                            <label
-                                style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer; user-select: none;">
-                                <input type="checkbox" id="continuous-modal-use-ai-image" checked
-                                    style="width: 20px; height: 20px; cursor: pointer; accent-color: #3b82f6;">
-                                <div>
-                                    <div style="font-weight: 700; color: var(--text-strong); font-size: 0.9rem;">
-                                        🎨 AI 이미지 활용</div>
-                                    <div style="font-size: 0.75rem; color: var(--text-muted);">해제하면 AI 이미지를 만들지 않고
-                                        수집한 사진만 사용합니다</div>
-                                </div>
-                            </label>
-                        </div>
+                        <!-- [2026-11-03] 이미지 사용 체크박스 삭제 — 이미지 엔진 선택이 그 역할. 요소가 없으면 읽는 쪽이 '켜짐'으로 본다. -->
 
                         <!-- ✅ 썸네일 텍스트 포함 체크박스 (NEW) -->
                         <div
@@ -11752,6 +11719,32 @@
 
     <!-- v2.10.80 PERF: defer로 변경 → 11K줄 HTML 파싱이 JS 다운로드/컴파일을 기다리지 않음.
          저사양 노트북에서 첫 페인트가 즉시 발생 (이전엔 3MB renderer.js 컴파일 후에야 paint). -->
+    <script>
+        /* images-usage-guide-fold: the image-management usage guide starts collapsed; the choice is remembered (localStorage imagesUsageGuideOpen = '1' open, '0' closed). */
+        (function () {
+            var head = document.getElementById('images-usage-guide-head');
+            var body = document.getElementById('images-usage-guide-body');
+            if (!head || !body) return;
+            var icon = head.querySelector('.toggle-icon');
+            var open = false;
+            try { open = localStorage.getItem('imagesUsageGuideOpen') === '1'; } catch (e) { }
+            function apply() {
+                body.style.display = open ? 'block' : 'none';
+                if (icon) icon.textContent = open ? '▲' : '▼';
+                head.setAttribute('aria-expanded', open ? 'true' : 'false');
+            }
+            function toggle() {
+                open = !open;
+                apply();
+                try { localStorage.setItem('imagesUsageGuideOpen', open ? '1' : '0'); } catch (e) { }
+            }
+            head.addEventListener('click', toggle);
+            head.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+            });
+            apply();
+        })();
+    </script>
     <script defer src="renderer.js"></script>
     <script defer src="floating-scroll.js"></script>
     <!-- 연속 발행 큐 전체 보기 모달 -->

@@ -4,9 +4,10 @@
    thumbnail-studio.css, daily-publishing.css) so it overrides them; the
    temporary theme-naver-transitional.css follows it. "html " prefixes beat the
    <style> blocks inside <body>.
-   Rule of thumb: solid green fill (--nv-fill) = an action; green tint or green
-   outline = "selected". --nv-green (#03C75A) is decoration only (underline,
-   hairline, checkbox): white text on it is 2.25:1, so never put text on it.
+   Rule of thumb: solid green fill (--nv-fill) = an action or the chosen tab; a chosen
+   "pick one" card is lavender (--nv-select-*, in theme-naver-components.css). --nv-green
+   (#03C75A) is decoration only (underline, hairline, checkbox): white text on it is
+   2.25:1, so never put text on it.
    ========================================================================== */
 
 /* 1. Tokens ---------------------------------------------------------------- */
@@ -22,7 +23,11 @@
   --nv-ink-3: #6B6B70;        /* 4.90:1 on #F5F6F7 (#767678 is 4.19:1 there) */
   --nv-ink-4: #767678;        /* 4.53:1 on #FFF only: hints and placeholders on white */
   --nv-page: #F5F6F7; --nv-card: #FFFFFF; --nv-sunken: #F7F8FA;
-  --nv-line: #E3E5E8; --nv-line-strong: #D1D4D9;
+  /* Borders (sharpened 2026-11-03): panel/card, field/button/unselected tab, hairline inside a panel, hover. */
+  --nv-line: #C6CBD1; --nv-line-strong: #BFC4CA; --nv-line-soft: #E3E5E8; --nv-line-hover: #A5ABB3;
+  /* "Pick one" cards: lavender fill + purple border when chosen. Tabs use --nv-fill instead; never mix the two. */
+  --nv-select-bg: #F3EFFF; --nv-select-border: #7B61FF; --nv-select-ink: #3F2D9E; --nv-select-tag-bg: #E3DAFF;
+  --nv-hover-bg: #F2F3F5;
   --nv-red: #D92D20; --nv-red-soft: #FFF1F0; --nv-amber: #B45309; --nv-amber-soft: #FFF8EB;
   --nv-blue: #1D63D6; --nv-pink: #BE185D;
   --nv-font: 'Pretendard', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
@@ -40,7 +45,7 @@
   --bg-primary: var(--nv-card); --bg-secondary: var(--nv-page); --bg-tertiary: var(--nv-sunken);
   --bg-card: var(--nv-card); --bg-input: var(--nv-card); --bg-glass: rgba(255, 255, 255, 0.97);
   --bg-hover: rgba(3, 199, 90, 0.06);
-  --border-light: var(--nv-line); --border-medium: var(--nv-line-strong); --border-strong: #C5C9CF;
+  --border-light: var(--nv-line); --border-medium: var(--nv-line-strong); --border-strong: var(--nv-line-hover);
   --border-gold: var(--nv-green-line); --border-glass: var(--nv-line); --border-color: var(--nv-line);
   --shadow-sm: 0 1px 2px rgba(20, 24, 31, 0.04); --shadow-md: 0 1px 3px rgba(20, 24, 31, 0.06);
   --shadow-lg: 0 4px 14px rgba(20, 24, 31, 0.07); --shadow-xl: 0 12px 32px rgba(20, 24, 31, 0.12);
@@ -75,9 +80,9 @@ input[type="checkbox"], input[type="radio"], input[type="range"], progress { acc
 :focus-visible { outline: 2px solid var(--nv-fill) !important; outline-offset: 2px; }
 
 /* 3. Header, tabs, segmented controls ------------------------------------- */
-html .app-header { background: var(--nv-card); backdrop-filter: none; box-shadow: none; border-bottom: 1px solid var(--nv-line); }
+html .app-header { background: var(--nv-card); backdrop-filter: none; box-shadow: none; border-bottom: 1px solid var(--nv-line-soft); }
 html .app-title { background: none; color: var(--nv-ink); font-weight: 800; letter-spacing: -0.02em; }
-html .tabs-header { background: var(--nv-card); backdrop-filter: none; box-shadow: none; border-bottom: 1px solid var(--nv-line); padding-top: 0; padding-bottom: 0; }
+html .tabs-header { background: var(--nv-card); backdrop-filter: none; box-shadow: none; border-bottom: 1px solid var(--nv-line-soft); padding-top: 0; padding-bottom: 0; }
 html .tab-button { color: var(--nv-ink-3); text-transform: none; letter-spacing: 0; font-weight: 600; border-radius: 0; padding: 16px 18px; }
 html .tab-button::before { background: var(--nv-green); height: 3px; }
 html .tab-button:hover { color: var(--nv-ink); background: transparent; }
@@ -85,14 +90,15 @@ html .tab-button:hover::before { width: 0; }
 html .tab-button.active { color: var(--nv-ink); font-weight: 800; }
 html .tab-button.active::before { width: 100%; }
 html .tab-button.active::after { display: none; }
+/* Tabs: chosen = solid green fill + white text; not chosen = white + clear gray border + dark gray text. */
 html .pub-mode-tab, html .account-tab:not(.active) { background: var(--nv-card) !important; color: var(--nv-ink-2) !important; border: 1px solid var(--nv-line-strong); border-radius: 8px; }
-html .pub-mode-tab:hover { color: var(--nv-ink); border-color: #C5C9CF; }
+html .pub-mode-tab:not(.active):hover, html .account-tab:not(.active):hover { background: var(--nv-hover-bg) !important; color: var(--nv-ink) !important; border-color: var(--nv-line-hover); }
 html .pub-mode-tab.active, html .account-tab.active, html .source-toggle-btn--active {
-  background: var(--nv-green-soft) !important; color: var(--nv-green-text) !important; border: 1px solid var(--nv-green) !important; box-shadow: none !important;
+  background: var(--nv-fill) !important; color: #FFFFFF !important; border: 1px solid var(--nv-fill) !important; box-shadow: none !important; font-weight: 800;
 }
-html #images-subtab-manage, html #images-subtab-generate { color: var(--nv-ink-3) !important; }
+html #images-subtab-manage, html #images-subtab-generate { background: var(--nv-card) !important; color: var(--nv-ink-2) !important; border: 1px solid var(--nv-line-strong) !important; }
 html #images-subtab-manage[style*="accent-primary"], html #images-subtab-generate[style*="accent-primary"] {
-  background: var(--nv-card) !important; color: var(--nv-green-text) !important; box-shadow: var(--shadow-md) !important; font-weight: 700;
+  background: var(--nv-fill) !important; color: #FFFFFF !important; border-color: var(--nv-fill) !important; box-shadow: none !important; font-weight: 800;
 }
 html .common-login-section { background: var(--nv-card); backdrop-filter: none; box-shadow: none; }
 
@@ -133,7 +139,7 @@ html .primary { background: var(--nv-fill); color: #FFFFFF; border: 1px solid va
 html .primary::before { display: none; }
 html .primary:hover:not(:disabled) { background: var(--nv-fill-hover); border-color: var(--nv-fill-hover); box-shadow: none; }
 html .secondary { background: var(--nv-card); color: var(--nv-ink-2); border: 1px solid var(--nv-line-strong); }
-html .secondary:hover:not(:disabled) { background: var(--nv-sunken); color: var(--nv-ink); border-color: #C5C9CF; box-shadow: none; transform: none; }
+html .secondary:hover:not(:disabled) { background: var(--nv-sunken); color: var(--nv-ink); border-color: var(--nv-line-hover); box-shadow: none; transform: none; }
 html .secondary.highlight { background: var(--nv-green-soft); color: var(--nv-green-text); border: 1px solid var(--nv-green-line); }
 /* Header utilities and the right tool rail: one quiet outline style. */
 html .license-button-fixed, html .settings-button-fixed, html .external-links-button-fixed, html .customer-service-btn,
@@ -180,7 +186,7 @@ html #tab-image-tools #subtab-thumbnail button.studio-primary-button:not(.thumb-
 html #tab-image-tools #subtab-thumbnail button.studio-primary-button:not(.thumb-preset-btn):hover:not(:disabled) { background: var(--nv-fill-hover); border-color: var(--nv-fill-hover); }
 html #tab-image-tools .studio-segmented { background: var(--nv-sunken); border-color: var(--nv-line); }
 html #tab-image-tools #subtab-thumbnail .studio-segmented button { color: var(--nv-ink-3) !important; }
-html #tab-image-tools #subtab-thumbnail .studio-segmented button.selected { background: var(--nv-green-soft) !important; color: var(--nv-green-text) !important; }
+html #tab-image-tools #subtab-thumbnail .studio-segmented button.selected { background: var(--nv-fill) !important; color: #FFFFFF !important; }
 html #image-source-studio .image-ai-disclosure { background: var(--nv-sunken); }
 html #image-source-studio .studio-switch-track { background: #C5C9CF; }
 html #image-source-studio .studio-switch-track::before { background: #FFFFFF; box-shadow: var(--shadow-sm); }
@@ -211,7 +217,7 @@ html .modal-panel { backdrop-filter: none !important; background: var(--nv-card)
 html .modal-panel h2 { background: none; color: var(--nv-ink); letter-spacing: -0.02em; }
 html .modal-close { background: transparent; color: var(--nv-ink-3); }
 html .modal-close:hover { background: var(--nv-sunken); color: var(--nv-ink); transform: none; }
-html .modal-actions { border-top-color: var(--nv-line); }
+html .modal-actions { border-top-color: var(--nv-line-soft); }
 html #settings-nav-buttons > button { background: var(--nv-card) !important; border: 1px solid var(--nv-line) !important; border-radius: 8px !important; box-shadow: none !important; }
 html #settings-nav-buttons > button:hover { border-color: var(--nv-green) !important; background: var(--nv-sunken) !important; }
 html #settings-nav-buttons > button div[style*="font-weight: 700"] { color: var(--nv-ink) !important; }
@@ -229,16 +235,10 @@ html .loading-content { background: var(--nv-card); color: var(--nv-ink); border
 html .toast.toast { background: var(--nv-ink) !important; color: #FFFFFF !important; border-left: 4px solid var(--nv-green) !important; box-shadow: var(--shadow-lg) !important; }
 html .toast.toast.error { border-left-color: #FF6B5E !important; }
 html .toast.toast.warning { border-left-color: #F5B544 !important; }
-html .card-header { background: transparent; border-bottom-color: var(--nv-line); }
-html .publish-flow-card { background: var(--nv-card); border: 1px solid var(--nv-line-strong); border-radius: 8px; }
-html .publish-flow-card:hover { border-color: var(--nv-green-line); }
-html .publish-flow-card.active { border-color: var(--nv-green); box-shadow: 0 0 0 3px rgba(3, 199, 90, 0.12); }
-html .publish-flow-card.active .publish-flow-tag { background: var(--nv-green-soft); color: var(--nv-green-text); }
-/* Startup engine gate (startupEngineGate.ts inline styles; JS re-serialises them as rgb()). */
+html .card-header { background: transparent; border-bottom-color: var(--nv-line-soft); }
+/* Startup engine gate (startupEngineGate.ts inline styles; JS re-serialises them as rgb()). Its cards: theme-naver-components.css. */
 html #startup-engine-gate { background: rgba(30, 30, 35, 0.42) !important; backdrop-filter: none !important; }
 html #startup-engine-gate > div { border-radius: 8px !important; box-shadow: var(--shadow-xl) !important; }
-html #startup-engine-gate [data-engine-option] { border-width: 1px !important; border-radius: 8px !important; }
-html #startup-engine-gate [data-engine-option]:is([style*="#4f46e5"], [style*="79, 70, 229"]) { border-color: var(--nv-green) !important; background: var(--nv-green-soft) !important; }
 html #startup-engine-gate [style*="#e0e7ff"] { background: var(--nv-green-soft) !important; color: var(--nv-green-text) !important; }
 html #startup-engine-gate-confirm { background: var(--nv-fill) !important; border-radius: 8px !important; }
 html #startup-engine-gate-confirm:disabled { background: #C5C9CF !important; }

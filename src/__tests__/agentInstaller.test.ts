@@ -116,7 +116,7 @@ describe('AGENT_NPM_PACKAGES', () => {
     expect(AGENT_NPM_PACKAGES.claude).toBe('@anthropic-ai/claude-code');
     expect(AGENT_NPM_PACKAGES.gemini).toBe('@google/gemini-cli');
     expect(AGENT_NPM_PACKAGE_VERSIONS).toEqual({
-      codex: '0.144.1',
+      codex: '0.166.0',
       claude: '2.1.197',
       gemini: '0.51.0',
     });
@@ -149,7 +149,7 @@ describe('installAgent', () => {
     expect(first.command).toBe(APP_NODE);
     expect(first.args).toEqual([
       BUNDLED_NPM_CLI,
-      ...expectedNpmArgs('@openai/codex@0.144.1', 'openai'),
+      ...expectedNpmArgs('@openai/codex@0.166.0', 'openai'),
     ]);
     expect(first.env).toBe(BUNDLED_INVOCATION.env);
     expect(r.version).toBeTruthy(); // detect() ran via the mocked spawn
@@ -233,7 +233,7 @@ describe('installAgent', () => {
   // [v2.11.138] 핀 버전이 npm에서 내려가면(ETARGET) @latest로 폴백 후 성공.
   it('falls back to @latest when the pinned version is unpublished (ETARGET)', async () => {
     spawnMock
-      .mockResolvedValueOnce({ code: 1, stdout: '', stderr: 'npm error code ETARGET\nNo matching version found for @openai/codex@0.144.1' })
+      .mockResolvedValueOnce({ code: 1, stdout: '', stderr: 'npm error code ETARGET\nNo matching version found for @openai/codex@0.166.0' })
       .mockResolvedValueOnce({ code: 0, stdout: 'codex 0.145.0', stderr: '' });
     detectAgentMock.mockResolvedValueOnce({ provider: 'codex', installed: true, version: '0.145.0', loggedIn: false, available: false });
 
@@ -266,7 +266,7 @@ describe('installAgent', () => {
   });
 
   it('re-probes fresh process paths after installing and reports login separately', async () => {
-    detectAgentMock.mockResolvedValueOnce({ provider: 'codex', installed: true, version: '0.144.1', loggedIn: false, available: false });
+    detectAgentMock.mockResolvedValueOnce({ provider: 'codex', installed: true, version: '0.166.0', loggedIn: false, available: false });
     const phases: string[] = [];
     const result = await installAgent('codex', { onProgress: progress => phases.push(progress.phase) });
     expect(detectAgentMock).toHaveBeenCalledWith('codex', { forceRefresh: true });

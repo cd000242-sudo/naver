@@ -6,7 +6,7 @@
 //   Tier 3 (fragile): yandex, dcinside — last resort
 // R3 adds pHash/resolution/Vision funnel stages, R4 adds ranking.
 
-import { buildIssueQueryPlan } from './queryFanout.js';
+import { runPlanStage } from './planStage.js';
 import { filterIssueCandidates } from './urlPolicy.js';
 import { createPhashRegistry, passesScope, refineHeadingCandidates, scopeSteps, type FunnelOptions } from './funnel.js';
 import type { FetchedCandidate } from './candidateFetcher.js';
@@ -179,22 +179,7 @@ export async function collectIssueImages(
     try { options.onProgress?.({ percent: Math.min(100, Math.round(percent)), message }); } catch { /* UI only */ }
   };
 
-  emit(3, '🧠 AI가 제목·서론·본문 전체를 읽고 사건 맥락을 파악하는 중...');
-  const plan = await buildIssueQueryPlan(
-    payload.title,
-    payload.headings,
-    options.planCaller,
-    payload.intro,
-  );
-  emit(
-    8,
-    plan.aiGenerated
-      ? `🧠 사건 파악: ${plan.mainSubject}${plan.programName ? ` · ${plan.programName}` : ''}${plan.contextSummary ? ` — ${plan.contextSummary.slice(0, 60)}` : ''}`
-      : '🧠 휴리스틱 검색어 생성 완료 (고른 엔진으로 AI 플랜 불가 — 무료 경로)',
-  );
-  console.log(
-    `${LOG} 🚀 수집 시작: ${plan.querySets.length}개 소제목, AI플랜=${plan.aiGenerated}, 주체="${plan.mainSubject}"`,
-  );
+  const plan = await runPlanStage(payload, options, emit);
 
   const images: Record<string, string[]> = {};
   const candidates: Record<string, IssueCandidateImage[]> = {};
@@ -287,6 +272,7 @@ export async function collectIssueImages(
       afterFilter,
       perSource,
       aiPlanUsed: plan.aiGenerated,
+      planFallbackReason: plan.aiGenerated ? undefined : plan.fallbackReason,
       planEngine: plan.aiGenerated ? options.planEngineLabel : undefined,
       visionUsed: visionUsedAny,
       visionVendor: options.visionRoute?.label,

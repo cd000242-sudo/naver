@@ -36,11 +36,12 @@ export interface AgentConnectChipController {
  * guard (ensureAgentEngineReady) still checks before any request is sent.
  */
 export function agentConnectGateNeedsConnect(kind: AgentConnectChipKind | undefined): boolean {
-  return kind === 'install' || kind === 'login';
+  return kind === 'install' || kind === 'update' || kind === 'login';
 }
 
 const AGENT_CONNECT_STATUS_LIMIT_MS = 10_000;
 const AGENT_CONNECT_CHIP_LABELS: Readonly<Record<AgentConnectChipKind, string>> = Object.freeze({
+  update: '업데이트 필요',
   checking: '⏳ 확인 중',
   ready: '준비됨',
   install: '설치 필요',
@@ -49,6 +50,7 @@ const AGENT_CONNECT_CHIP_LABELS: Readonly<Record<AgentConnectChipKind, string>> 
   delayed: '확인 지연',
 });
 const AGENT_CONNECT_CHIP_COLORS: Readonly<Record<AgentConnectChipKind, readonly [string, string]>> = Object.freeze({
+  update: ['#fef3c7', '#92400e'],
   checking: ['#f3f4f6', '#4b5563'],
   ready: ['#d1fae5', '#047857'],
   install: ['#fef3c7', '#92400e'],

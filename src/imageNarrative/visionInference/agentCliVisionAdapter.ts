@@ -211,9 +211,10 @@ export async function aggregateInferencesViaAgentCli(
 
     console.log(`${LOG} 🖼️ ${options.provider}로 사진 ${images.length}장 일괄 추론 시작`);
     const text = options.provider === 'agent-claude'
-      ? await runClaude(prompt, { imagePaths: filePaths, timeoutMs, signal: options.signal })
+      ? await runClaude(prompt, { imagePaths: filePaths, tier: 'light', timeoutMs, signal: options.signal })
       : await runCodex(prompt, {
           imagePaths: filePaths,
+          tier: 'light',
           schema: buildAgentVisionSchema(images.length),
           timeoutMs,
           signal: options.signal,

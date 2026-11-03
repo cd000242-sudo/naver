@@ -8,9 +8,9 @@ import type { HeadingQuerySet, IssueHeadingInput, IssueQueryPlan,
   IssueSubjectType,
 } from './types.js';
 import type { IssuePlanCaller } from './textRoute.js';
+import { buildAnalysisBlocks } from './analysisInput.js';
 
 const LOG = '[IssueQueryFanout]';
-const BODY_EXCERPT_CHARS = 280;
 
 /**
  * [2026-08-18] 이미지 관리탭이 만드는 메타 소제목 — 글의 내용이 아니라 "자리"를 뜻한다.
@@ -81,15 +81,9 @@ export function buildFallbackQueryPlan(
   };
 }
 
-function buildPrompt(title: string, headings: IssueHeadingInput[], intro?: string): string {
-  const sections = headings
-    .map((h, i) => {
-      const body = String(h.body || '').replace(/\s+/g, ' ').trim().slice(0, BODY_EXCERPT_CHARS);
-      return `${i + 1}. 소제목: ${h.title}\n   본문: ${body || '(없음)'}`;
-    })
-    .join('\n');
-
-  const introBlock = String(intro || '').replace(/\s+/g, ' ').trim().slice(0, 600);
+/** Title + intro + every heading with its paragraph (+ the whole body when headings carry none), budgeted. */
+export function buildFanoutPrompt(title: string, headings: IssueHeadingInput[], intro?: string, articleBody?: string): string {
+  const { introBlock, sectionsBlock: sections, articleBlock } = buildAnalysisBlocks({ headings, intro, articleBody });
 
   return `당신은 연예/스포츠/이슈 이미지 검색 전문가입니다. 글 전체를 읽고 "무슨 사건인지" 먼저 파악한 뒤, 그 사건에 맞는 이미지 검색어를 만드세요.
 
@@ -98,7 +92,7 @@ ${title}
 ${introBlock ? `\n# 서론(사건 맥락)\n${introBlock}\n` : ''}
 # 소제목별 본문
 ${sections}
-
+${articleBlock ? `\n# 본문 전체(발췌)\n${articleBlock}\n` : ''}
 # 1단계: 사건 파악 (가장 중요)
 - mainSubject: 핵심 인물/팀 한글명 (동명이인은 본문 문맥으로 구분)
 - romanizedSubject: 그 로마자 표기
@@ -149,15 +143,16 @@ export async function buildIssueQueryPlan(
   headings: IssueHeadingInput[],
   planCaller?: IssuePlanCaller,
   intro?: string,
+  articleBody?: string,
 ): Promise<IssueQueryPlan> {
   const fallback = buildFallbackQueryPlan(title, headings);
   if (!planCaller) {
     console.log(`${LOG} 고른 엔진으로 플랜을 만들 수 없음 → 휴리스틱 플랜 사용(무료)`);
-    return fallback;
+    return { ...fallback, fallbackReason: '고른 글생성 엔진을 쓸 수 없음' };
   }
 
   try {
-    const text = String(await planCaller(buildPrompt(title, headings, intro)) || '').trim();
+    const text = String(await planCaller(buildFanoutPrompt(title, headings, intro, articleBody)) || '').trim();
 
     const cleaned = text.replace(/```(?:json)?/gi, '').trim();
     const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
@@ -223,7 +218,8 @@ export async function buildIssueQueryPlan(
       aiGenerated: true,
     };
   } catch (error) {
-    console.warn(`${LOG} ⚠️ AI 팬아웃 실패, 휴리스틱 폴백: ${(error as Error).message}`);
-    return fallback;
+    const reason = (error as Error)?.message || String(error);
+    console.warn(`${LOG} ⚠️ AI 팬아웃 실패, 휴리스틱 폴백: ${reason}`);
+    return { ...fallback, fallbackReason: reason };
   }
 }

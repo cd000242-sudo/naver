@@ -5,6 +5,7 @@
 // Inline bundle = single scope → all top-level identifiers prefixed issueCollect*.
 
 import { ensureIssueCopyrightConsent, ensureIssueVisionChoice } from './issueCollectConsent.js';
+import { ISSUE_COLLECT_TITLE_ONLY_HINT, issueCollectReadArticleBody, issueCollectReadIntro } from './issueCollectArticle.js';
 
 // Globals provided by other inlined modules (single-scope bundle).
 declare function getCurrentImageHeadings(): any[];
@@ -59,17 +60,6 @@ function issueCollectBuildHeadingInputs(headingTitles: string[]): Array<{ title:
     });
 }
 
-/** 사건 맥락이 가장 진한 서론(+마무리 일부)을 별도로 넘긴다. */
-function issueCollectReadIntro(): string | undefined {
-    const sc = (window as any).currentStructuredContent;
-    const intro = String(sc?.introduction || sc?.intro || '').trim();
-    if (intro) return intro.slice(0, 2000);
-    // 서론이 비면 반자동 편집 본문 앞부분으로 대체 (사용자가 수정한 최신 텍스트)
-    const bodyEl = document.getElementById('unified-generated-content') as HTMLTextAreaElement | null;
-    const text = String(bodyEl?.value || '').trim();
-    return text ? text.slice(0, 2000) : undefined;
-}
-
 /**
  * Run the issue endgame collection and place/save results.
  * Returns the number of placed images.
@@ -122,12 +112,13 @@ export async function runIssueEndgameCollect(
 
     const headingInputs = issueCollectBuildHeadingInputs(headingTitles);
     const introText = issueCollectReadIntro();
+    const articleBody = issueCollectReadArticleBody();
     const bodiesFound = headingInputs.filter((h) => h.body).length;
     appendLogFn(`🏆 이슈 끝판왕 수집 시작: ${headingTitles.length}개 소제목 (본문 확보 ${bodiesFound}개, 서론 ${introText ? '확보' : '없음'})`);
-    if (bodiesFound === 0 && !introText) {
-        appendLogFn('⚠️ 본문·서론을 못 읽었습니다 — 소제목 문구만으로는 정확한 이미지를 찾기 어렵습니다. 글 생성/불러오기 후 다시 시도하세요.');
+    if (bodiesFound === 0 && !introText && !articleBody) {
+        appendLogFn(`⚠️ 본문·서론을 못 읽었습니다 — ${ISSUE_COLLECT_TITLE_ONLY_HINT}`);
     }
-    appendLogFn('🧠 AI가 사건 맥락(인물·프로그램·상황)을 파악 → 맥락 기반 검색 → Vision 관련성 검증 중... (1~3분)');
+    appendLogFn('🧠 고른 AI 엔진이 제목·서론·본문 전체와 소제목을 읽고 사건 맥락을 파악 → 맥락 기반 검색 → 관련성 검증 중... (1~3분)');
 
     // [2026-08-16] 중앙 진행 모달 + 메인 프로세스 실시간 진행 이벤트 (사용자 요청:
     // "수집할 때 작업하는 화면이라도 띄우면 좋겠다"). 모달 실패는 수집에 영향 없음.
@@ -156,6 +147,7 @@ export async function runIssueEndgameCollect(
             headings: headingInputs,
             mainKeyword: searchKeyword,
             intro: introText,
+            articleBody,
             paidVisionCheck: visionChoice.paid,
             breadth: issueCollectWide ? 'wide' : 'news',
         });
@@ -190,6 +182,7 @@ export async function runIssueEndgameCollect(
     const candidateMap: Record<string, any[]> = result.candidates || {};
     const stats = result.stats || {};
     appendLogFn(`📊 후보 ${stats.totalCandidates ?? '?'}장 → 필터 ${stats.afterFilter ?? '?'}장 → 클린 ${stats.cleanTotal ?? '?'}장 (AI플랜: ${stats.aiPlanUsed ? 'ON' : '휴리스틱'})`);
+    if (!stats.aiPlanUsed) appendLogFn(`⚠️ 본문 분석 실패 — 소제목 글자로 검색했습니다${stats.planFallbackReason ? ` (${stats.planFallbackReason})` : ''}`);
     if (stats.visionUsed) {
         const engine = stats.visionVendor ? ` · ${stats.visionVendor}${stats.visionFree ? ' (구독, 추가 과금 0)' : ''}` : '';
         appendLogFn(`👁️ Vision 게이트${engine}: ${stats.visionInspected ?? 0}장 검사, 지각 중복 ${stats.perceptualDuplicates ?? 0}장 통합`);

@@ -212,7 +212,7 @@ contextBridge.exposeInMainWorld('api', {
   // [2026-08-26] 배찌에서 입력한 플랜 한도 저장 (5시간 창당 글 수).
   agentSetUsageLimit: (provider: AgentProvider, limit: number): Promise<{ success: boolean; message?: string; usage?: Record<string, unknown> }> =>
     ipcRenderer.invoke('agent:set-usage-limit', provider, limit),
-  agentGenerate: (payload: { provider: AgentProvider; prompt: string; schema?: Record<string, unknown>; model?: string; timeoutMs?: number }): Promise<{ success: boolean; provider?: AgentProvider; text?: string; json?: unknown; durationMs?: number; code?: string; message?: string }> =>
+  agentGenerate: (payload: { provider: AgentProvider; prompt: string; schema?: Record<string, unknown>; model?: string; tier?: 'main' | 'light'; timeoutMs?: number }): Promise<{ success: boolean; provider?: AgentProvider; text?: string; json?: unknown; durationMs?: number; code?: string; message?: string }> =>
     ipcRenderer.invoke('agent:generate', payload),
   agentInstall: (provider: AgentProvider): Promise<{ success: boolean; version?: string; code?: string; message?: string }> =>
     ipcRenderer.invoke('agent:install', provider),

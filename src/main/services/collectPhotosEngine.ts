@@ -82,6 +82,10 @@ export async function generateCollectedPhotos(
   const headings = slots.filter(slot => !slot.isThumbnail).map(slot => slot.heading);
   const title = String(options.articleTitle || options.postTitle || slots.find(slot => slot.isThumbnail)?.heading || headings[0] || '').trim();
   if (!title) throw new Error('글 제목이 없어 관련 사진을 찾을 수 없어요.');
+  // Each section image item carries its paragraph (sectionContent); the search plan reads it with the title and intro.
+  const headingBodies = Object.fromEntries(options.items
+    .filter(item => !item.isThumbnail && String(item.sectionContent || '').trim())
+    .map(item => [item.heading, String(item.sectionContent).trim()]));
   const abort = new AbortController();
   const watcher = setInterval(() => { if (options.stopCheck?.()) abort.abort(); }, 1000);
   try {
@@ -89,6 +93,7 @@ export async function generateCollectedPhotos(
     const photos = await runtime.collect({
       title, headings, slots, scope: { ownHeadingOnly: true },
       ...(options.articleContext ? { intro: options.articleContext.slice(0, 1200) } : {}),
+      ...(Object.keys(headingBodies).length ? { headingBodies } : {}),
     }, deps);
     const empty = slots.filter(slot => !photos.some(photo => photo.heading === slot.heading && photo.isThumbnail === slot.isThumbnail));
     runtime.log(`[이미지생성] 📷 관련 사진 찾기: ${slots.length}칸 중 ${photos.length}칸 채움${empty.length ? ` · ${empty.length}칸은 맞는 사진을 못 찾아 비워 둠 (${empty.map(slot => slot.heading).join(', ')})` : ''}`);

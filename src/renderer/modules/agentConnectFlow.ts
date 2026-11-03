@@ -11,7 +11,7 @@ import type { AgentCliStatus, AgentProvider } from '../../agentCli/types.js';
 import { runAgentLoginWithCodeFallback } from '../utils/agentLoginCodePrompt.js';
 
 export type AgentConnectStep = 1 | 2 | 3 | 4;
-export type AgentConnectKind = 'ready' | 'install' | 'login' | 'unavailable' | 'delayed';
+export type AgentConnectKind = 'ready' | 'install' | 'update' | 'login' | 'unavailable' | 'delayed';
 export type AgentConnectTone = 'info' | 'error' | 'success';
 export type AgentConnectStatusLike = Partial<
   Pick<AgentCliStatus, 'installed' | 'loggedIn' | 'available' | 'errorCode' | 'detail'>
@@ -101,6 +101,7 @@ export function agentConnectReplyHasMarker(text: string | undefined, marker: str
 export function agentConnectClassify(status?: AgentConnectStatusLike | null): AgentConnectKind {
   if (!status) return 'delayed';
   if (status.errorCode && AGENT_CONNECT_TRANSIENT_CODES.includes(status.errorCode)) return 'delayed';
+  if (status.errorCode === 'update_required') return 'update';
   if (!status.installed) return 'install';
   if (!status.loggedIn) return 'login';
   return status.available === true ? 'ready' : 'unavailable';
@@ -130,8 +131,10 @@ async function agentConnectProbe(ctx: AgentConnectContext, step: AgentConnectSte
   return { ok: true, status: res.status };
 }
 
-async function agentConnectInstall(ctx: AgentConnectContext): Promise<AgentConnectOutcome> {
-  ctx.say(2, ctx.provider === 'gemini'
+async function agentConnectInstall(ctx: AgentConnectContext, updating = false): Promise<AgentConnectOutcome> {
+  ctx.say(2, updating
+    ? `${agentConnectProviderLabel(ctx.provider)} 버전이 낮아 앱 전용 폴더에 고정 버전을 설치해 업데이트합니다…`
+    : ctx.provider === 'gemini'
     ? '공식 설치 파일을 내려받아 설치합니다…'
     : '공식 npm 패키지를 설치합니다…');
   let removeProgress: (() => void) | undefined;
@@ -147,6 +150,9 @@ async function agentConnectInstall(ctx: AgentConnectContext): Promise<AgentConne
     try { removeProgress?.(); } catch { /* The event source may already be closed. */ }
   }
   const probed = await agentConnectProbe(ctx, 2);
+  if (probed.ok && agentConnectClassify(probed.status) === 'update') {
+    return agentConnectStop(2, '설치는 끝났지만 실행되는 버전이 아직 낮습니다. 다른 위치의 낮은 버전이 먼저 실행되고 있지 않은지 확인해 주세요.');
+  }
   if (probed.ok && agentConnectClassify(probed.status) === 'install') {
     return agentConnectStop(2, '설치는 끝났지만 실행 파일을 찾지 못했습니다. 보안 프로그램과 폴더 권한을 확인해 주세요.');
   }
@@ -176,6 +182,7 @@ async function agentConnectVerify(ctx: AgentConnectContext): Promise<AgentConnec
   const res = await ctx.api.agentGenerate({
     provider: ctx.provider,
     prompt: agentConnectBuildPrompt(marker),
+    tier: 'light',
     timeoutMs: AGENT_CONNECT_VERIFY_TIMEOUT_MS,
   });
   if (!res?.success) return agentConnectStop(4, res?.message || '답을 받지 못했습니다.');
@@ -193,7 +200,12 @@ async function agentConnectExecute(
   ctx.say(1, `${agentConnectProviderLabel(ctx.provider)} 설치·로그인 상태를 확인합니다…`);
   let current = await agentConnectProbe(ctx, 1);
   if (!current.ok) return current;
-  if (agentConnectClassify(current.status) === 'install') {
+  if (agentConnectClassify(current.status) === 'update') {
+    // Installed but older than the minimum: install the pinned version into the app folder (step 2/4).
+    mark(2);
+    current = await agentConnectInstall(ctx, true);
+    if (!current.ok) return current;
+  } else if (agentConnectClassify(current.status) === 'install') {
     mark(2);
     current = await agentConnectInstall(ctx);
     if (!current.ok) return current;

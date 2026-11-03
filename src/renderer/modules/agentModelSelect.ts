@@ -10,6 +10,7 @@
 // "직접 입력" 을 남겨 둔다. 저장되는 값은 언제나 모델 이름 문자열 하나다.
 
 import { AGENT_MODEL_PRESETS, AGENT_MODEL_CUSTOM } from '../../runtime/agentModelPolicy.js';
+import { describeAgentModelLine } from '../../agentCli/agentModelDefaults.js';
 
 const AGENT_MODEL_FIELDS = [
   { provider: 'agent-codex', selectId: 'agent-codex-model-select', inputId: 'agent-codex-model' },
@@ -30,8 +31,9 @@ function fillAgentModelSelect(selectId: string, inputId: string, provider: strin
   const presets = AGENT_MODEL_PRESETS[provider] ?? [];
   const saved = input.value.trim();
 
+  const defaultLine = describeAgentModelLine(provider.replace(/^agent-/, ''), '');
   select.innerHTML = [
-    '<option value="">CLI 기본 모델 (선택 안 함)</option>',
+    `<option value="">${defaultLine ? `앱 ${defaultLine} (선택 안 함)` : 'CLI 기본 모델 (선택 안 함)'}</option>`,
     ...presets.map((m) => `<option value="${m.value}">${m.label}</option>`),
     `<option value="${AGENT_MODEL_CUSTOM}">✏️ 직접 입력…</option>`,
   ].join('');

@@ -1,0 +1,31 @@
+/* ============================================================================
+   theme-naver-components.css — component rules split out of theme-naver.css (300-line limit).
+   Linked right after theme-naver.css and before the transitional sheet. Tokens live in theme-naver.css :root.
+   Chosen "pick one" CARD = lavender fill + purple border (--nv-select-*). Chosen TAB = solid green fill
+   (theme-naver.css section 3). The two roles never share colors.
+   ========================================================================== */
+
+/* 1. Selectable cards ------------------------------------------------------- */
+/* Cards: publish flow chooser, startup engine gate (text + image engines), retired-engine gate,
+   image engine modal (.source-option), image style modal (.style-option). Width is 2px in every state so nothing jumps. */
+html .publish-flow-card, html [data-engine-option], html [data-image-engine-option], html .source-option, html .style-option {
+  background: var(--nv-card) !important; border: 2px solid var(--nv-line-strong) !important; border-radius: 8px !important;
+  color: var(--nv-ink); box-shadow: none !important; transform: none !important; transition: background-color 0.12s, border-color 0.12s;
+}
+/* Per-engine inline text colors were tuned for pastel gradients; the cards are white or lavender now. */
+html .source-option > div, html .style-option > div { color: var(--nv-ink) !important; }
+/* Hover, not chosen: pale gray. */
+html .publish-flow-card:not(.active):hover, html [data-engine-option]:not(:has(input:checked)):hover,
+html [data-image-engine-option]:not(:has(input:checked)):hover, html .source-option:not([style*="102, 126, 234"]):hover,
+html .style-option:not(:has(input:checked)):hover {
+  background: var(--nv-hover-bg) !important; border-color: var(--nv-line-hover) !important;
+}
+/* Chosen. The gates mark the pick with a checked radio; HeadingImageSettings paints a chosen .source-option with
+   border-color #667eea (serialised as rgb(102, 126, 234)); publishFlowChooser toggles .active. */
+html .publish-flow-card.active, html [data-engine-option]:has(input:checked), html [data-image-engine-option]:has(input:checked),
+html .source-option[style*="102, 126, 234"], html .style-option:has(input:checked) {
+  background: var(--nv-select-bg) !important; border-color: var(--nv-select-border) !important; color: var(--nv-ink);
+}
+html .publish-flow-card.active .publish-flow-tag { background: var(--nv-select-tag-bg); color: var(--nv-select-ink); }
+html [data-engine-option] input[type="radio"], html [data-image-engine-option] input[type="radio"],
+html .style-option input[type="radio"] { accent-color: var(--nv-select-border) !important; }

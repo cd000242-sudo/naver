@@ -31,12 +31,16 @@ import {
 } from './subscriptionEnv.js';
 import { stageImagesInDir } from './imageStaging.js';
 import { AgentCliError } from './types.js';
-import { buildAgentFailureMessage } from './failureMessage.js';
+import { buildAgentFailureMessage, buildModelUnavailableMessage } from './failureMessage.js';
+import { resolveAgentRunProfile, type AgentTier } from './agentModelDefaults.js';
 
 export interface ClaudeRunOptions {
   /** Provided for API symmetry with codex; claude has no --output-schema, so it is unused here. */
   schema?: Record<string, unknown>;
+  /** A named model wins; without one the app default (agentModelDefaults) is used. */
   model?: string;
+  /** Both tiers use the same Sonnet model today; accepted so callers can say what the call is. */
+  tier?: AgentTier;
   timeoutMs?: number;
   signal?: AbortSignal;
   /**
@@ -51,9 +55,11 @@ export interface ClaudeRunOptions {
 /**
  * Run `claude -p` for a single prompt and return the final message text.
  * Throws AgentCliError on failure (install / login / rate-limit / timeout / bad output).
+ * A model the subscription refuses surfaces as 'model_unavailable' — another model is never tried.
  */
 export async function runClaude(prompt: string, opts: ClaudeRunOptions = {}): Promise<string> {
-  const { model, timeoutMs, signal, imagePaths } = opts;
+  const { timeoutMs, signal, imagePaths } = opts;
+  const { model } = resolveAgentRunProfile('claude', { model: opts.model, tier: opts.tier });
   const dir = await mkdtemp(join(tmpdir(), 'agentcli-claude-'));
 
   try {
@@ -89,13 +95,23 @@ export async function runClaude(prompt: string, opts: ClaudeRunOptions = {}): Pr
       throw new AgentCliError(
         code,
         'claude',
-        buildAgentFailureMessage('claude', code, detail),
+        code === 'model_unavailable'
+          ? buildModelUnavailableMessage('claude', model, detail)
+          : buildAgentFailureMessage('claude', code, detail),
         detail.slice(0, 800),
       );
     }
 
     // claude prints the JSON envelope on stdout even on success.
-    return parseClaudeEnvelope(res.stdout);
+    try {
+      return parseClaudeEnvelope(res.stdout);
+    } catch (error) {
+      // An exit-0 envelope can still carry the refusal (is_error:true).
+      if (error instanceof AgentCliError && error.code === 'model_unavailable') {
+        throw new AgentCliError('model_unavailable', 'claude', buildModelUnavailableMessage('claude', model, error.message), error.message.slice(0, 800));
+      }
+      throw error;
+    }
   } finally {
     await rm(dir, { recursive: true, force: true }).catch(() => { /* best-effort cleanup */ });
   }

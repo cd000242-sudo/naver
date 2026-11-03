@@ -20,6 +20,8 @@ export type AgentErrorCode =
   | 'spawn_failed'     // process failed to start for another reason
   | 'server_overloaded' // upstream API answered 529/overloaded — transient, retried once
   | 'nonzero_exit'     // CLI exited with an unclassified non-zero code
+  | 'model_unavailable' // the model asked for is not usable on this subscription - never swapped for another
+  | 'update_required'  // CLI is older than the minimum the app's default models need (agentMinVersion)
   | 'empty_output'     // CLI returned an empty final message
   | 'bad_json';        // schema requested but output was not valid JSON
 
@@ -50,8 +52,10 @@ export interface AgentGenerateOptions {
   prompt: string;
   /** JSON Schema forcing structured output. codex uses --output-schema; claude relies on prompt instruction. */
   schema?: Record<string, unknown>;
-  /** Optional model override. Omit to use the subscription default. */
+  /** Optional model override. Omit to use the app default for the tier (agentModelDefaults). */
   model?: string;
+  /** 'main' (default) = long generation, 'light' = short helper call; picks the Codex reasoning effort. */
+  tier?: 'main' | 'light';
   /** Hard deadline in milliseconds (default 180000). */
   timeoutMs?: number;
   /** Cancellation signal. */

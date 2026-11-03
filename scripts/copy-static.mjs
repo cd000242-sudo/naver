@@ -419,6 +419,11 @@ try {
       filePath: path.join(projectRoot, 'dist', 'agentCli', 'usageBadge.js'),
     },
     {
+      // [2026-11-03] Default agent model + the card's status-line text - agentQuotaBadge / agentModelSelect / priceInfoModal import it.
+      label: 'agentCli/agentModelDefaults.js',
+      filePath: path.join(projectRoot, 'dist', 'agentCli', 'agentModelDefaults.js'),
+    },
+    {
       label: 'runtime/textModelConstants.js',
       filePath: path.join(projectRoot, 'dist', 'runtime', 'textModelConstants.js'),
     },
@@ -602,6 +607,7 @@ try {
     'multiAccountManager.js',
     // ✅ [이슈 끝판왕 수집] 저작권 동의 모달 + 수집 모드 (headingImageGen보다 먼저 로드 — declare 참조)
     'issueCollectConsent.js',
+    'issueCollectArticle.js',   // [2026-11-03] intro + whole article body for the plan model (before issueCollectMode)
     'issueCollectMode.js',
     // ✅ [공식문서 캡처] 경제·지원금 글 공식 페이지 캡처 모드
     'docCaptureMode.js',

@@ -29,6 +29,8 @@ export interface DailyCollectDeps {
 export interface DailyCollectScope { ownHeadingOnly?: boolean }
 export interface DailyCollectInput {
   title: string; headings: readonly string[]; intro?: string; mainKeyword?: string; slots: readonly DailyRefillItem[]; scope?: DailyCollectScope;
+  /** Each heading's own paragraph (heading to text) so the search plan reads the body, not just the heading text. */
+  headingBodies?: Readonly<Record<string, string>>;
 }
 
 /** Near-identical photos (resized or re-encoded copies) differ by only a few dHash bits. */
@@ -60,7 +62,7 @@ export function createDailyCollectDeps(context: { title: string; postId?: string
       const config = await loadConfig();
       applyConfigToEnv(config);
       const { planCaller, planEngineLabel, visionRoute } = resolveIssueCollectRoutes(config, false);
-      return collectIssueImages(payload, { planCaller, planEngineLabel, visionRoute, ...(context.scope ? { scope: context.scope } : {}) });
+      return collectIssueImages(payload, { planCaller, planEngineLabel, visionRoute, log: context.log, ...(context.scope ? { scope: context.scope } : {}) });
     },
     async fetch(candidate) {
       const { fetchAndValidateCandidate } = await import('../../crawler/issueHarness/candidateFetcher.js');
@@ -84,7 +86,7 @@ export async function collectDailyImages(input: DailyCollectInput, deps: DailyCo
   const searched = wantsThumbnail ? [input.title, ...input.headings] : [...input.headings];
   const ownOnly = input.scope?.ownHeadingOnly === true;
   const result = await deps.collect({
-    title: input.title, headings: searched.map(title => ({ title })),
+    title: input.title, headings: searched.map(title => ({ title, ...(input.headingBodies?.[title] ? { body: input.headingBodies[title] } : {}) })),
     ...(input.intro ? { intro: input.intro } : {}), ...(input.mainKeyword ? { mainKeyword: input.mainKeyword } : {}),
   });
   const byHeading = new Map(searched.map(heading => {

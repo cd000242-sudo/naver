@@ -1,5 +1,6 @@
 // Install and authentication detection for subscription-backed agents.
 // Status checks are deliberately metadata-only: they must never spend a model turn.
+import { agentUpdateRequiredDetail, isAgentVersionBelowMinimum } from './agentMinVersion.js';
 import {
   classifyExit,
   isSubscriptionInactiveMessage,
@@ -377,6 +378,19 @@ export async function detectAgent(
       loggedIn: false,
       available: false,
       errorCode: 'not_installed',
+    }, detectionRevision);
+  }
+
+  // The app's default model needs a newer CLI (agentMinVersion): report "update needed" before any login probe.
+  if (isAgentVersionBelowMinimum(provider, version)) {
+    return cacheStatus({
+      provider,
+      installed: true,
+      version,
+      loggedIn: false,
+      available: false,
+      errorCode: 'update_required',
+      detail: agentUpdateRequiredDetail(provider, version),
     }, detectionRevision);
   }
 

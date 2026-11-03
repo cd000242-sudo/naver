@@ -9,6 +9,7 @@
 // 카드를 하나 더 보여줄 이유가 없다.
 
 import { buildAgentUsageBadge, type AgentUsageBadgeTone } from '../../agentCli/usageBadge.js';
+import { describeAgentModelLine } from '../../agentCli/agentModelDefaults.js';
 
 const TONE_COLORS: Readonly<Record<AgentUsageBadgeTone, string>> = Object.freeze({
   idle: '#9ca3af',
@@ -73,7 +74,9 @@ export async function refreshAgentQuotaBadge(): Promise<void> {
       const cfg = await (window as any).api?.getConfig?.();
       const key = provider === 'codex' ? 'agentCodexModel' : provider === 'claude' ? 'agentClaudeModel' : 'agentGeminiModel';
       const model = String(cfg?.[key] ?? '').trim();
-      modelSuffix = model ? ` · 모델 ${model}` : ' · 모델 CLI 기본';
+      // Codex/Claude fall back to the app default model (agentModelDefaults), not the CLI's own.
+      const modelLine = describeAgentModelLine(provider, model);
+      modelSuffix = modelLine ? ` · ${modelLine}` : ' · 모델 CLI 기본';
     } catch {
       // 모델 표시는 부가 정보다 — 못 읽어도 사용량 배찌는 그대로 뜬다.
     }

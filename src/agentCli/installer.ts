@@ -44,7 +44,7 @@ export const AGENT_NPM_PACKAGES: Readonly<Record<AgentProvider, string>> = Objec
  * to @latest when the pinned version 404s (see installAgent).
  */
 export const AGENT_NPM_PACKAGE_VERSIONS: Readonly<Record<AgentProvider, string>> = Object.freeze({
-  codex: '0.144.1',
+  codex: '0.166.0',
   claude: '2.1.197',
   gemini: '0.51.0',
 });
@@ -258,6 +258,10 @@ async function verifyInstalledAgent(provider: AgentProvider, emit: (phase: Agent
       provider,
       '설치 파일을 준비했지만 CLI 실행을 확인하지 못했습니다. 보안 프로그램·지원 운영체제·폴더 권한을 확인한 뒤 다시 시도해주세요.',
     );
+  }
+  if (status.errorCode === 'update_required') {
+    // Another, older copy is still the one that runs; the app never deletes or overwrites the user's own install.
+    throw new AgentCliError('update_required', provider, `${status.detail ?? '실행되는 CLI 버전이 낮습니다.'} 설치는 끝났지만 다른 위치의 낮은 버전이 먼저 실행되고 있습니다.`);
   }
   emit('complete', status.loggedIn ? '설치와 기존 로그인 상태를 확인했습니다.' : '설치 완료. 구독 계정 로그인은 직접 완료해주세요.');
   return Object.freeze({ version: status.version, installed: true as const, loginRequired: !status.loggedIn });

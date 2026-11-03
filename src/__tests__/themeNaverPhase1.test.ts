@@ -37,8 +37,8 @@ describe('theme-naver link order', () => {
   const sheets = [...html.matchAll(/<link\s+rel="stylesheet"\s+href="([^"]+)"/g)].map((m) => m[1]);
   const local = sheets.filter((href) => !/^https?:/.test(href));
 
-  it('theme-naver.css then theme-naver-transitional.css are the last two stylesheets', () => {
-    expect(local.slice(-2)).toEqual(['theme-naver.css', 'theme-naver-transitional.css']);
+  it('theme-naver.css, theme-naver-components.css, then theme-naver-transitional.css are the last three stylesheets', () => {
+    expect(local.slice(-3)).toEqual(['theme-naver.css', 'theme-naver-components.css', 'theme-naver-transitional.css']);
   });
 
   it('every older sheet is linked before the theme', () => {
@@ -48,11 +48,12 @@ describe('theme-naver link order', () => {
     }
   });
 
-  it('both theme sheets are linked from <head> only', () => {
+  it('all three theme sheets are linked from <head> only', () => {
     const head = html.slice(html.indexOf('<head>'), html.indexOf('</head>'));
     expect(head).toContain('href="theme-naver.css"');
+    expect(head).toContain('href="theme-naver-components.css"');
     expect(head).toContain('href="theme-naver-transitional.css"');
-    expect(html.match(/theme-naver/g)).toHaveLength(2);
+    expect(html.match(/theme-naver/g)).toHaveLength(3);
   });
 });
 

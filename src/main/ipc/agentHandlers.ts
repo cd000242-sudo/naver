@@ -24,6 +24,7 @@ interface AgentGeneratePayload {
   prompt: string;
   schema?: Record<string, unknown>;
   model?: string;
+  tier?: unknown;
   timeoutMs?: number;
 }
 

@@ -1244,7 +1244,7 @@ JSON:
       } else {
         // 기본 'same': 본문과 동일 모델
         if (provider === 'agent-codex' || provider === 'agent-claude' || provider === 'agent-gemini') {
-          raw = await callAgent(provider, titlePromptFull, { mode, agentProductPolicyContext });
+          raw = await callAgent(provider, titlePromptFull, { mode, agentProductPolicyContext, tier: 'light' });
         } else if (provider === 'perplexity') {
           raw = await callPerplexity(titlePromptFull, titleTemp, 650);
         } else if (provider === 'openai') {
@@ -5052,6 +5052,8 @@ interface CallAgentOptions {
   agenticEnvelope?: boolean;
   /** Opaque main-process product-policy context for the final CLI boundary. */
   agentProductPolicyContext?: AgentProductPolicyContext;
+  /** 'light' = short helper call (title, judge); default 'main' = long generation. */
+  tier?: 'main' | 'light';
 }
 
 async function callAgent(
@@ -5066,6 +5068,7 @@ async function callAgent(
     schema,
     agenticEnvelope,
     agentProductPolicyContext,
+    tier,
   } = opts;
   const { generateWithAgent } = await import('./agentCli/index.js');
   const { wrapAsAgenticTask, AGENTIC_TIMEOUT_MS } = await import('./agentCli/agenticEnvelope.js');
@@ -5099,6 +5102,7 @@ async function callAgent(
         prompt: agenticPrompt,
         schema,
         model: agentModel,
+        tier,
         timeoutMs: AGENTIC_TIMEOUT_MS,
         signal,
       },
@@ -7961,6 +7965,7 @@ async function generateStructuredContentInternal(
             return callAgent(provider, jp, {
               signal,
               raw: true,
+              tier: 'light',
               agentProductPolicyContext: options.agentProductPolicyContext,
             });
           }
