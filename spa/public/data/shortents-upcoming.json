@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T07:16:25.079Z",
+ "builtAt": "2026-11-03T07:26:28.737Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,46 +11,46 @@
  "measured": 25,
  "candidates": [
   {
-   "keyword": "사우디 아시안컵 연기",
+   "keyword": "코스피 3.59% 하락",
    "sources": [
     "daum"
    ],
-   "articles90": 50,
-   "recent20": 13,
-   "press": 41,
-   "firstArticleAt": "2026-11-03T06:07:00.000Z",
-   "exclusive": true,
+   "articles90": 83,
+   "recent20": 31,
+   "press": 57,
+   "firstArticleAt": "2026-11-03T06:54:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오피셜] \"예외적인 상황 발생\"…2027 아시안컵 연기됐다! 중동 정세 악...",
-     "press": "interfootball.co.kr",
-     "publishedAt": "2026-11-03T07:15:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/413/0000226078"
+     "title": "코스피 포인트보다 더 하락한 '삼전닉스'...언제 반등할까?",
+     "press": "newsfc.co.kr",
+     "publishedAt": "2026-11-03T07:24:00.000Z",
+     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82203"
     },
     {
-     "title": "[오피셜]'92vs96' 상처만 남은 모레노호, 결국 11월로 끝? 亞컵 연기 '초...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-03T07:14:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/076/0004462576"
+     "title": "'검은 월요일' 피했지만 코스피 3% 넘게 급락…5600선 턱걸이",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-03T07:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004206079?sid=101"
     },
     {
-     "title": "2027 아시안컵, 내년 12월로 연기…모레노 임시감독 거취 주목(종합)",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-03T07:12:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109687655935"
+     "title": "코스피, 美 기술주 약세·AI 투자 부담에 3.59% 급락···5640선 마감",
+     "press": "seoulfn.com",
+     "publishedAt": "2026-11-03T07:22:00.000Z",
+     "link": "https://www.seoulfn.com/news/articleView.html?idxno=641795"
     }
    ]
   },
   {
-   "keyword": "10월 물가 2.8%↑",
+   "keyword": "10월 물가 2.8% 상승",
    "sources": [
     "nate"
    ],
-   "articles90": 29,
-   "recent20": 3,
-   "press": 24,
-   "firstArticleAt": "2026-11-03T05:50:00.000Z",
+   "articles90": 27,
+   "recent20": 2,
+   "press": 21,
+   "firstArticleAt": "2026-11-03T06:00:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -75,130 +75,66 @@
    ]
   },
   {
-   "keyword": "교육혁신선도지역 지정 결과",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 25,
-   "recent20": 4,
-   "press": 19,
-   "firstArticleAt": "2026-11-03T05:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "금산·논산·부여·아산 교육혁신선도지역 지정…연간 19억원 최대 5년 ...",
-     "press": "tjb.co.kr",
-     "publishedAt": "2026-11-03T07:10:00.000Z",
-     "link": "https://www.tjb.co.kr/news05/bodo/view/id/105638"
-    },
-    {
-     "title": "울산교육청, 교육혁신선도지역 탈락…\"이유 분석해 재도전\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T07:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016419164?sid=102"
-    },
-    {
-     "title": "전북, 5개 시군 '교육혁신 선도지역' 지정",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-03T07:02:00.000Z",
-     "link": "http://www.breaknews.com/1247978"
-    }
-   ]
-  },
-  {
    "keyword": "삼성",
    "sources": [
     "google"
    ],
-   "articles90": 17,
-   "recent20": 17,
-   "press": 16,
-   "firstArticleAt": "2026-11-03T07:02:00.000Z",
+   "articles90": 22,
+   "recent20": 22,
+   "press": 20,
+   "firstArticleAt": "2026-11-03T07:12:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "라이온즈야, KT ‘비트배트’의 맛을 알아? 안현민 “삼성 응원 문화 예...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-03T07:24:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/468/0001277656"
+    },
+    {
+     "title": "[사설] 삼성 구미 투자 'AI 신화' 쓰는 출발점 되길",
+     "press": "kyongbuk.co.kr",
+     "publishedAt": "2026-11-03T07:24:00.000Z",
+     "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4089476"
+    },
+    {
+     "title": "[똑똑한패션] 삼성물산 패션 구호, 노스페이스, 영원무역그룹, K2",
+     "press": "ekn.kr",
+     "publishedAt": "2026-11-03T07:24:00.000Z",
+     "link": "https://www.ekn.kr/web/view.php?key=20261103021074924"
+    }
+   ]
+  },
+  {
+   "keyword": "교육혁신선도지역 지정 결과",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 24,
+   "recent20": 4,
+   "press": 19,
+   "firstArticleAt": "2026-11-03T06:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[금융 이모저모] 신한은행, 삼성자산운용과 손잡고 퇴직연금 자산관리 ...",
-     "press": "goodkyung.com",
-     "publishedAt": "2026-11-03T07:14:00.000Z",
-     "link": "https://www.goodkyung.com/news/articleView.html?idxno=293049"
+     "title": "춘천시, 강원도내 유일 2유형 교육혁신선도지역 선정",
+     "press": "kado.net",
+     "publishedAt": "2026-11-03T07:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000209125?sid=102"
     },
     {
-     "title": "삼성E&A 6만1600원 마감…수주 목표 상향에도 2.53% 조정",
-     "press": "job-post.co.kr",
-     "publishedAt": "2026-11-03T07:14:00.000Z",
-     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=236207"
+     "title": "태백시, '2027 교육혁신선도지역' 선정…최대 150억 '지원확보'",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-03T07:22:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3741061"
     },
     {
-     "title": "[그래픽] GTX-A 삼성역 무정차 통과 지연",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T07:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016419197?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "손예진 현빈 청룡 수상",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 89,
-   "recent20": 12,
-   "press": 16,
-   "firstArticleAt": "2026-11-03T06:00:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "\"부부싸움 다큐 찍고파\" 현빈♥손예진, '현실 부부'라 가능한 티키타카",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-03T07:12:00.000Z",
-     "link": "http://www.joynews24.com/view/2022158"
-    },
-    {
-     "title": "[HD포토] 현빈-손예진, '기념비적인 투 샷' (제47회 청룡영화상 핸드프린...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-03T07:04:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267150"
-    },
-    {
-     "title": "[HD포토] '핸드프린팅' 남긴 안보현 (제47회 청룡영화상 핸드프린팅)",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-03T07:02:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267143"
-    }
-   ]
-  },
-  {
-   "keyword": "어린이",
-   "sources": [
-    "google"
-   ],
-   "articles90": 15,
-   "recent20": 8,
-   "press": 14,
-   "firstArticleAt": "2026-11-03T06:40:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "초록우산, 故 최불암 전국후원회장 마지막 길 배웅...“어린이 향한 사...",
-     "press": "beyondpost.co.kr",
-     "publishedAt": "2026-11-03T07:10:00.000Z",
-     "link": "http://www.beyondpost.co.kr/view.php?ud=2026110316052887289aeda69934_30"
-    },
-    {
-     "title": "초록우산, 故 최불암 전국후원회장 추모…\"어린이에 대한 사랑과 헌신의...",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-03T07:10:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=883874"
-    },
-    {
-     "title": "배우 최불암, 45년 어린이 사랑 남기고 '영면'…초록우산, 나눔의 뜻 잇...",
-     "press": "ngonews.kr",
-     "publishedAt": "2026-11-03T07:08:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=242211"
+     "title": "춘천·삼척·횡성·강릉·고성·태백·철원·동해시, '교육혁신선도지역...",
+     "press": "gw.newdaily.co.kr",
+     "publishedAt": "2026-11-03T07:18:00.000Z",
+     "link": "https://gw.newdaily.co.kr/site/data/html/2026/11/03/2026110300290.html"
     }
    ]
   },
@@ -207,30 +143,126 @@
    "sources": [
     "daum"
    ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 8,
+   "articles90": 13,
+   "recent20": 5,
+   "press": 12,
    "firstArticleAt": "2026-11-03T06:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'25살 차♥' 부부 탄생…김자연, '70세' 삼성 前 사장과 스위스서 깜짝 ...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-03T07:09:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001406971"
+     "title": "슈퍼모델 출신 45세 김자연, 70세 삼성전자 전 사장과 결혼",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-03T07:22:00.000Z",
+     "link": "https://www.insight.co.kr/news/580491"
     },
     {
-     "title": "25살 차 극복…‘45세’ 슈퍼모델 김자연, ‘70세’ 전 삼성전자 사장과...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-03T07:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005758321"
+     "title": "슈퍼모델 김자연, ‘70세’ 前 삼성전자 사장과 결혼",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-03T07:22:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001147894"
     },
     {
-     "title": "'45세' 김자연, 70세 S전자 전 사장과 ♥스위스 웨딩 \"마흔 넘어 만난 인...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-03T07:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002075882"
+     "title": "'45세' 모델 김자연, '70세' 前삼성전자 사장과 결혼..\"키 큰 날 귀여워...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-03T07:20:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004462580"
+    }
+   ]
+  },
+  {
+   "keyword": "어린이",
+   "sources": [
+    "google"
+   ],
+   "articles90": 12,
+   "recent20": 6,
+   "press": 11,
+   "firstArticleAt": "2026-11-03T06:54:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "초록우산, 고 최불암 초록우산 전국후원회장 영면…“어린이에 대한 사...",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-03T07:20:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261103515737?OutUrl=naver"
+    },
+    {
+     "title": "강동문화재단, 8개월간 발레 배운 어린이 40명의 특별한 도전⋯꿈의 무...",
+     "press": "cnbizm.com",
+     "publishedAt": "2026-11-03T07:18:00.000Z",
+     "link": "https://www.cnbizm.com/news/articleView.html?idxno=320232"
+    },
+    {
+     "title": "초록우산, 故 최불암 전국후원회장 추모…\"어린이에 대한 사랑과 헌신의...",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-03T07:10:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=883874"
+    }
+   ]
+  },
+  {
+   "keyword": "아시안컵 중동 여파로 연기",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-03T06:07:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오피셜] \"예외적인 상황 발생\"…2027 아시안컵 연기됐다! 중동 정세 악...",
+     "press": "interfootball.co.kr",
+     "publishedAt": "2026-11-03T07:15:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/413/0000226078"
+    },
+    {
+     "title": "아시안컵, 중동 불안에 1년 연기…모레노 감독 거취도 영향(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T06:52:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/003/0014298504"
+    },
+    {
+     "title": "중동 정세 악화로 아시안컵 연기… 韓 모레노 임시 감독 거취 '안개속'",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-03T06:46:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3741025"
+    }
+   ]
+  },
+  {
+   "keyword": "45세 슈퍼모델 김자연과 결혼",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 4,
+   "press": 9,
+   "firstArticleAt": "2026-11-03T06:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "슈퍼모델 출신 45세 김자연, 70세 삼성전자 전 사장과 결혼",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-03T07:22:00.000Z",
+     "link": "https://www.insight.co.kr/news/580491"
+    },
+    {
+     "title": "슈퍼모델 김자연, ‘70세’ 前 삼성전자 사장과 결혼",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-03T07:22:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001147894"
+    },
+    {
+     "title": "'45세' 모델 김자연, '70세' 前삼성전자 사장과 결혼..\"키 큰 날 귀여워...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-03T07:20:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004462580"
     }
    ]
   },
@@ -240,7 +272,7 @@
     "nate"
    ],
    "articles90": 22,
-   "recent20": 2,
+   "recent20": 0,
    "press": 8,
    "firstArticleAt": "2026-11-03T06:07:00.000Z",
    "exclusive": false,
@@ -267,105 +299,41 @@
    ]
   },
   {
-   "keyword": "서울양평 고속도로 재추진",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T05:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'특혜 의혹' 서울~양평 고속도로 사업 재추진",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-03T07:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922458?sid=101"
-    },
-    {
-     "title": "멈췄던 서울~양평 고속도로 재시동…노선 원점서 다시 짠다",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-03T06:08:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=500950"
-    },
-    {
-     "title": "서울-양평 고속도로 신규 타당성조사 착수… 원점서 최적 경로 도출",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-03T05:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000130390?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "안랩 주가",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T06:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "해킹 잇따르자 안랩 한때 50%↑…종가는 전일 대비 2.24% 하락",
-     "press": "newsfc.co.kr",
-     "publishedAt": "2026-11-03T07:02:00.000Z",
-     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82204"
-    },
-    {
-     "title": "안랩 장중 13만7300원 찍고 11만3600원 마감",
-     "press": "job-post.co.kr",
-     "publishedAt": "2026-11-03T06:52:00.000Z",
-     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=236185"
-    },
-    {
-     "title": "해킹 잇따르자 안랩 50%↑…41억원 베팅한 안철수 수익률은? [오늘, 이 종...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-03T06:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/024/0000109359?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "2026 미래경제포럼 축사하는",
+   "keyword": "2027년 정미년 달력",
    "sources": [
     "nate"
    ],
-   "articles90": 17,
-   "recent20": 1,
+   "articles90": 4,
+   "recent20": 0,
    "press": 2,
-   "firstArticleAt": "2026-11-03T05:48:00.000Z",
+   "firstArticleAt": "2026-11-03T05:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[미래경제포럼] 최태원 \"AI·반도체 협력…한일경제연대로 1조달러 시너...",
+     "title": "달력 제작으로 분주한 인쇄소",
      "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T07:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016419200?sid=101"
+     "publishedAt": "2026-11-03T06:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016418847?sid=102"
     },
     {
-     "title": "[미래경제포럼] 이재정 문체위원장 \"AI세계규범 창조에 韓日 앞장섰으면...",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T06:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016418984?sid=100"
+     "title": "2027년 정미년 달력 인쇄",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T06:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014298303?sid=102"
     },
     {
-     "title": "축사하는 다케다 료타 일한의원연맹 회장",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T06:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016418925?sid=105"
+     "title": "정미년 달력 제작으로 분주",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T05:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014298285?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 390,
+  "flagged": 393,
   "matched": 140,
   "avgLeadMin": 229,
   "recent": [
