@@ -4,10 +4,13 @@ import { createCoupangDeeplink, fetchAffiliateBoard, type AffiliateProduct } fro
 import { type LaneId } from './affiliateLanes';
 import { affiliateTitle, recommendationReason } from '../../lib/recommendationView.mjs';
 import { assessAffiliateRecommendation, compareAffiliateRecommendations } from '../../lib/affiliateRecommendation.mjs';
-import RecommendationFilter, { type RecommendationStatus } from './RecommendationFilter';
 import AffiliateTitles from './AffiliateTitles';
 import { assessCoupangDiscovery, compareCoupangDiscovery, coupangProductUrl } from '../../lib/coupangDiscovery.mjs';
 import CoupangDiscoveryBrief from './CoupangDiscoveryBrief';
+import { affiliateCategory, compareGolden, goldenOf, summarizeCategories } from '../../lib/affiliateGolden.mjs';
+import { enrichKey, loadKeywordEnrich, type KeywordEnrich } from '../../lib/keywordEnrich.mjs';
+import { AffiliateGoldenAids, CategoryChips, CategoryGoldenKeywords, GoldenRatioBadge, NonGoldenList } from './AffiliateGoldenParts';
+import { loadCategoryGolden, mergeCategorySummary, type CategoryGolden } from '../../lib/affiliateCategoryGolden.mjs';
 
 /**
  * 쿠팡 상품 보드 — 상품에서 출발한다.
@@ -21,8 +24,13 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
     const nowMs = useEvidenceClock();
     const [state, setState] = useState<'idle' | 'loading' | 'ready' | 'needs-keys' | 'error'>('idle');
     const [message, setMessage] = useState('');
-    const [recommendationView, setRecommendationView] = useState<RecommendationStatus>('ready');
-    const [route, setRoute] = useState<'discovery' | 'search'>('discovery');
+    // 첫 화면은 황금비 순 '검색 유입 공략'(2026-10-29 사장님 "문서수가 낮고 검색량이 높은 순") — 발견 보기는 판매 목록 위치순이라 반대로 보였다.
+    const [route, setRoute] = useState<'discovery' | 'search'>('search');
+    const [category, setCategory] = useState('전체');
+    // 카테고리 황금 검색어(앱 affiliate-golden-keywords.cjs, 매일) — 상품명 말보다 넓게 잰 연관어 중 문서 < 검색인 것.
+    const [catGolden, setCatGolden] = useState<CategoryGolden>(() => ({ builtAt: '', byCategory: new Map() }));
+    useEffect(() => { let alive = true; void loadCategoryGolden().then((data) => { if (alive) setCatGolden(data); }); return () => { alive = false; }; }, []);
+    const [enrich, setEnrich] = useState<Map<string, KeywordEnrich>>(() => new Map());
     const [discoveryView, setDiscoveryView] = useState<'all' | 'candidate'>('all');
     const discoveryMode = route === 'discovery';
     // 제휴링크 버튼의 행별 상태. 링크는 방문자 본인 키로 만들어지는 본인 수익 링크다.
@@ -67,6 +75,7 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
     };
 
     useEffect(() => { void load(); }, []);
+    useEffect(() => { let alive = true; void loadKeywordEnrich().then((map) => { if (alive) setEnrich(map); }); return () => { alive = false; }; }, []);
 
     if (state === 'loading') return <div className="lw-note">쿠팡 상품을 받아 수요·경쟁을 재는 중입니다…</div>;
     if (state === 'needs-keys') {
@@ -94,25 +103,32 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
             documentCount: row.documentCount, serpTop: row.serpTop,
             measuredAt: row.measuredAt, source: 'naver-searchad+blog-search',
         }] };
-        return { row: item, recommendation: assessAffiliateRecommendation(item, { now: nowMs, collectedAt: row.measuredAt }),
-            discovery: assessCoupangDiscovery(row, { now: nowMs }) };
+        const recommendation = assessAffiliateRecommendation(item, { now: nowMs, collectedAt: row.measuredAt });
+        return { row: item, recommendation, discovery: assessCoupangDiscovery(row, { now: nowMs }),
+            golden: goldenOf(item, recommendation), category: affiliateCategory(row) };
     }).sort(discoveryMode ? compareCoupangDiscovery : compareAffiliateRecommendations);
-    const counts = { ready: 0, research: 0, excluded: 0 };
-    for (const entry of all) counts[entry.recommendation.status] += 1;
     const candidateCount = all.filter(entry => entry.discovery.status === 'candidate').length;
-    const visible = all.filter(entry => discoveryMode
+    const inView = all.filter(entry => discoveryMode
         ? discoveryView === 'all' || entry.discovery.status === 'candidate'
-        : entry.recommendation.status === recommendationView);
+        // 검색 유입 공략 = 황금(문서수 < 검색량, 검색 100+)이면서 추천 제외가 아닌 것만(2026-10-29 "문서비율이 높구요 반대가 되어야").
+        : entry.golden.golden && entry.recommendation.status !== 'excluded');
+    const nonGolden = discoveryMode ? [] : all.filter(entry => !inView.includes(entry)).sort((a, b) => compareGolden(a.golden, b.golden));
+    const categorySummary = discoveryMode ? summarizeCategories(inView) : mergeCategorySummary(summarizeCategories(inView), catGolden.byCategory);
+    const activeCategory = category === '전체' || categorySummary.some((s) => s.category === category) ? category : '전체';
+    // 검색 유입 공략은 문서÷검색 낮은 순. 발견 보기는 원래 순서(실용 단서 → 목록 위치)를 지킨다.
+    const filtered = inView.filter(entry => activeCategory === '전체' || entry.category === activeCategory);
+    const visible = discoveryMode ? filtered : [...filtered].sort((a, b) => compareGolden(a.golden, b.golden));
 
-    const renderRow = ({ row, recommendation: assessment, discovery }: typeof all[number], rank: number) => {
+    const renderRow = ({ row, recommendation: assessment, discovery, golden }: typeof all[number], rank: number) => {
                 const forged = affiliateTitle(row);
                 const productUrl = coupangProductUrl(row.url);
                 return (
                     <li key={row.url} className="lw-product">
-                        <span className="lw-product-rank">{!discoveryMode && recommendationView === 'ready' ? rank : '·'}</span>
+                        <span className="lw-product-rank">{!discoveryMode ? rank : '·'}</span>
                         <img src={row.image || 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="72" height="72"%3E%3C/svg%3E'} alt="" loading="lazy" />
                         <div className="lw-product-body">
                             <div className="lw-product-tags">
+                                {!discoveryMode && <GoldenRatioBadge golden={golden} />}
                                 {!discoveryMode && row.serpTop && row.serpTop.sampled > 0 && (() => {
                                     const exact = row.serpTop!.exact;
                                     const verdict = exact <= 2
@@ -232,6 +248,7 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
                                 </a>
                             )}
                         </div>
+                        {!discoveryMode && <AffiliateGoldenAids golden={golden} enrich={enrich.get(enrichKey(golden.query))} facing={row.serpTop?.sampled ? row.serpTop.exact : null} coupang={lane === 'coupang'} />}
                         {/* 세 레인이 같은 부품을 쓴다 — 제목 교리를 갈라 놓지 않는다. */}
                         {!discoveryMode && <AffiliateTitles
                             keyword={row.keyword}
@@ -263,12 +280,15 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
                 제목이 이 검색어를 그대로 다룬 글이 몇 개인지 실제로 센 숫자입니다.
                 {' '}다른 표현으로 같은 질문에 답한 글이 있을 수 있으므로, 이 숫자만으로 노출 가능성을 확정하지 않습니다.
             </p>
-            <RecommendationFilter value={recommendationView} onChange={setRecommendationView} counts={counts} searchOnly />
+            {inView.length === 0 && <p role="status" className="lw-note">지금 쿠팡 상품 {all.length}개 중 문서수가 검색량보다 적은 검색어를 가진 상품이 없습니다. 문서가 더 많은 상품을 황금으로 내보이지 않습니다 — 아래 접힌 칸에서 숫자를 볼 수 있습니다.</p>}
             </>}
+            <CategoryChips summary={categorySummary} value={activeCategory} total={inView.length} onChange={setCategory} />
             {/* 그룹 헤더는 뺐다(사장님: 정면 설명 빼고 다 없애). 판정은 카드 배지가 이미 말한다. */}
+            {!discoveryMode && <CategoryGoldenKeywords category={activeCategory} byCategory={catGolden.byCategory} builtAt={catGolden.builtAt} onAnalyze={onAnalyze} productNames={all.map((e) => e.row.name)} />}
             <ol className="lw-product-list">
                 {visible.map((entry, index) => renderRow(entry, index + 1))}
             </ol>
+            <NonGoldenList rows={nonGolden.map(({ row, golden }) => ({ key: row.url, name: row.name, golden }))} />
         </>
     );
 }

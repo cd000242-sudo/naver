@@ -28,7 +28,7 @@ const TIMING_LABEL = { NOW: '지금 작성', NEXT: '일정 전 작성', ALWAYS: 
 const kst = (iso: string) => Number.isFinite(Date.parse(iso)) ? new Date(iso).toLocaleString('ko-KR', { timeZone: 'Asia/Seoul', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : '시간 확인 필요';
 const kstDay = (iso: string) => new Date(iso).toLocaleDateString('en-CA', { timeZone: 'Asia/Seoul' });
 
-/** 제목 후보 한 줄 복사(2026-10-11 사장님 "얘네들 제목들도 복사 버튼") — 라벨 안이라 누를 때 라디오 선택은 안 바꾼다. */
+/** 대표 제목과 제목 후보 복사 — 후보 라벨 안에서 눌러도 라디오 선택은 바꾸지 않는다. */
 function CopyTitle({ text }: { text: string }) {
     const [done, setDone] = useState('');
     const copy = async (event: { preventDefault(): void; stopPropagation(): void }) => {
@@ -57,7 +57,7 @@ export function BriefCard({ brief, featured = false, onAnalyze, enrich }: { brie
     const terms = [...new Set([...brief.guide.relatedTerms, ...brief.related.map(item => item.keyword)])];
     return <article className={`tb-card ${featured ? 'tb-card-featured' : ''} ${brief.recommended ? 'tb-card-recommended' : ''}`}>
         <div className="tb-card-top"><span className={`tb-timing tb-timing-${brief.timing}`}>{TIMING_LABEL[brief.timing]}</span>{brief.recommended && <span className="tb-recommended-badge"><span aria-hidden="true">★</span> 추천 글감</span>}<span className="tb-category">{brief.field}</span><span className="tb-state">{brief.status === 'supported' ? '근거 검토 완료' : '추가 확인 필요'}</span></div>
-        <h3>{brief.title}</h3>
+        <div className="tb-card-heading"><h3>{brief.title}</h3><CopyTitle text={brief.title} /></div>
         <div className="tb-metrics"><a className="tb-keyword" href={naverSearchUrl(brief.core.keyword)} target="_blank" rel="noreferrer">{brief.core.keyword}</a><span title={briefVolumeDetail(brief.core)}>월 검색량 <b>{briefVolumeLabel(brief.core)}</b></span><span title={brief.core.documentCountMeasuredAt ? `문서량 측정 ${kst(brief.core.documentCountMeasuredAt)}` : undefined}>블로그 문서량 <b>{searchVolumeLabel(brief.core.documentCount)}</b></span><span className={`tb-fit tb-fit-${brief.core.fit}`}>상위노출 가능성 <b>{brief.core.fit === '미측정' ? '판단 보류' : `경쟁 여유 ${brief.core.fit}`}</b></span>{brief.alternative && <a className="tb-alternative" href={naverSearchUrl(brief.alternative.keyword)} target="_blank" rel="noreferrer">대안 · {brief.alternative.keyword}</a>}</div>
         <p className="tb-volume-note">{briefVolumeDetail(brief.core)}</p>
         <p className="tb-measurement-note">{brief.core.serpFacing === null ? '상위 검색 결과 미측정' : `상위 10개 중 핵심어를 포함한 제목 ${brief.core.serpFacing}개`} · 노출 보장 아님{!brief.alternative && ' · 대안 키워드 미확보'}</p>

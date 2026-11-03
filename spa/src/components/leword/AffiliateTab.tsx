@@ -7,9 +7,12 @@ import { AFFILIATE_LANES, type LaneId } from './affiliateLanes';
 import { affiliateTitle, recommendationReason } from '../../lib/recommendationView.mjs';
 import { assessAffiliateRecommendation, compareAffiliateRecommendations } from '../../lib/affiliateRecommendation.mjs';
 import { useEvidenceClock } from './useEvidenceClock';
-import RecommendationFilter, { type RecommendationStatus } from './RecommendationFilter';
 import { loadUserKeys } from '../../lib/userKeys';
 import { campaignFreshness } from '../../lib/affiliateFreshness.mjs';
+import { affiliateCategory, compareGolden, goldenOf, summarizeCategories } from '../../lib/affiliateGolden.mjs';
+import { enrichKey, loadKeywordEnrich, type KeywordEnrich } from '../../lib/keywordEnrich.mjs';
+import { AffiliateGoldenAids, CategoryChips, CategoryGoldenKeywords, GoldenRatioBadge, NonGoldenList } from './AffiliateGoldenParts';
+import { loadCategoryGolden, mergeCategorySummary, type CategoryGolden } from '../../lib/affiliateCategoryGolden.mjs';
 
 /**
  * 제휴 황금키워드 — 플랫폼별 서브탭.
@@ -94,20 +97,6 @@ type CampaignSnapshot = {
     sites: Record<string, { label: string; items: CampaignItem[]; collectedAt?: string | null; checkedAt?: string; status?: string }>;
 };
 
-/**
- * 노출 판정 — 니즈 검색어로 1페이지에 갈 수 있나.
- *
- * 사장님 지적(2026-08-20): "노출이 돼야 뭐가 팔리든 말든 하니까."
- * 예전엔 니즈 **검색량**만 보고 줄을 세웠다. 그래서 실측 결과
- * 드리미 로봇청소기(검색 24,700 / 문서 44,383)가 1등이었다 — 검색량보다
- * 글이 1.8배 많아 지수 낮은 사람은 근처도 못 가는 자리다.
- * 이제 비율이 순서를 정하고, 화면도 그걸 그대로 말한다.
- */
-function exposureVerdict(ratio: number | null | undefined) {
-    if (typeof ratio !== 'number') return null;
-    return { label: `검색량÷문서수 ${ratio.toFixed(2)} · 참고값`, color: '#aebccc', bg: 'rgba(174,188,204,.12)' };
-}
-
 /** 진짜 자리 실측 → 배지. 열림/반열림만 초록·주황, 나머지는 회색으로 사실만 적는다. */
 function seatBadge(item: CampaignItem) {
     const seat = item.seat;
@@ -128,24 +117,11 @@ function seatBadge(item: CampaignItem) {
     return { label: '자리 자료 부족', color: '#aebccc', bg: 'rgba(174,188,204,.12)' };
 }
 
-/**
- * 줄 세우기 — 수요가 먼저다.
- *
- * 예전에는 자리 판정만 봤다. 그래서 아무도 찾지 않는 말이 '열림'이라는 이유로 맨 위를 차지했다
- * (사장님 2026-09-16 "제휴 황금제품키워드는 아무리봐도 이건아냐" — 실측하니 상단 12개 중 8개가
- * 검색량 미측정이었고, 1위는 문서 12개짜리 상품명이었다).
- * 자리는 '쓰면 보인다', 수요는 '보이면 사람이 온다'는 뜻이다. 둘 다 있어야 성과가 난다.
+/*
+ * 줄 세우기는 lib/affiliateGolden.mjs 의 compareGolden — 검색량 하한(월 100) 통과 → 검색량÷문서수 높은 순.
+ * 사장님 2026-10-29 "또 반대로했네 문서수가 낮고 검색량이 높은 순이라니까" — 예전 compareSeat 는
+ * 수요 → 자리 → 정면 → 수요 순이라 비율이 순서에 전혀 안 들어갔다.
  */
-function compareSeat(a: CampaignItem, b: CampaignItem) {
-    const rank = (s: CampaignItem['seat']) => (!s ? 9 : s.verdict === '열림' ? 0 : s.verdict === '반열림' ? 1 : s.verdict === '자료없음' ? 2 : 3);
-    const demand = (item: CampaignItem) => (typeof item.needVolume === 'number' ? item.needVolume : 0);
-    /** 수요를 잰 적이 있고 월 100 이상인 것이 먼저. 안 잰 것은 자리가 좋아도 뒤로 보낸다. */
-    const demandRank = (item: CampaignItem) => (demand(item) >= 100 ? 0 : 1);
-    return demandRank(a) - demandRank(b)
-        || rank(a.seat) - rank(b.seat)
-        || ((a.seat?.facing ?? 99) - (b.seat?.facing ?? 99))
-        || demand(b) - demand(a);
-}
 
 /** 정면 실측 → 카드 배지. 쿠팡 레인과 같은 기준이라야 같은 뜻으로 읽힌다. */
 function verdictBadge(item: CampaignItem) {
@@ -163,7 +139,12 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const nowMs = useEvidenceClock();
     /** 방금 복사한 상품 — 눌렀는데 아무 반응이 없으면 됐는지 알 수가 없다. */
     const [copied, setCopied] = useState('');
-    const [recommendationView, setRecommendationView] = useState<RecommendationStatus>('ready');
+    const [category, setCategory] = useState('전체');
+    // 카테고리 황금 검색어(앱 affiliate-golden-keywords.cjs, 매일) — 상품명 말보다 넓게 잰 연관어 중 문서 < 검색인 것.
+    const [catGolden, setCatGolden] = useState<CategoryGolden>(() => ({ builtAt: '', byCategory: new Map() }));
+    useEffect(() => { let alive = true; void loadCategoryGolden().then((data) => { if (alive) setCatGolden(data); }); return () => { alive = false; }; }, []);
+    const [enrich, setEnrich] = useState<Map<string, KeywordEnrich>>(() => new Map());
+    useEffect(() => { let alive = true; void loadKeywordEnrich().then((map) => { if (alive) setEnrich(map); }); return () => { alive = false; }; }, []);
 
     /*
      * 토스·브랜드커넥트는 공개 API 가 없어 캠페인 목록이 로그인 뒤에 있다.
@@ -228,14 +209,21 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const assessed = (campaigns?.items || []).map(item => {
         const recommendation = assessAffiliateRecommendation(item, { now: nowMs, collectedAt: freshness.collectedAt });
         if (freshness.failed && recommendation.status === 'ready') {
-            return { item, recommendation: { ...recommendation, status: 'research' as const, reasons: [...recommendation.reasons, 'collection-failed'] } };
+            const failed = { ...recommendation, status: 'research' as const, reasons: [...recommendation.reasons, 'collection-failed'] };
+            return { item, recommendation: failed, golden: goldenOf(item, failed), category: affiliateCategory(item) };
         }
-        return { item, recommendation };
+        return { item, recommendation, golden: goldenOf(item, recommendation), category: affiliateCategory(item) };
     }).sort(compareAffiliateRecommendations);
-    const counts = { ready: 0, research: 0, excluded: 0 };
-    for (const entry of assessed) counts[entry.recommendation.status] += 1;
-    // 같은 추천 상태 안에서는 진짜 자리 실측(열림 → 반열림 → 나머지)이 순서를 정한다 — "작성하면 노출될 확률"이 먼저다.
-    const displayed = assessed.filter(entry => entry.recommendation.status === recommendationView).sort((a, b) => compareSeat(a.item, b.item));
+    /*
+     * 목록 = 황금(문서수 < 검색량, 검색 100+)이면서 추천 제외(상품과 다른 말 · 포화)가 아닌 상품만, 문서÷검색 낮은 순.
+     * 사장님 2026-10-29 "여전히 검색비율이 낮네요 문서비율이 높구요" — 줄만 바꾸고 문서가 더 많은 상품을 다 보여 준 것이 잘못이었다.
+     * 나머지는 맨 아래 접힌 칸에 이름과 숫자만. 근거 통과 / 추가 조사 상태는 카드 배지가 말한다.
+     */
+    const inView = assessed.filter(entry => entry.golden.golden && entry.recommendation.status !== 'excluded');
+    const nonGolden = assessed.filter(entry => !inView.includes(entry)).sort((a, b) => compareGolden(a.golden, b.golden));
+    const categorySummary = mergeCategorySummary(summarizeCategories(inView), catGolden.byCategory);
+    const activeCategory = category === '전체' || categorySummary.some((s) => s.category === category) ? category : '전체';
+    const displayed = inView.filter(entry => activeCategory === '전체' || entry.category === activeCategory).sort((a, b) => compareGolden(a.golden, b.golden));
     const collectedLabel = freshness.collectedAt && Number.isFinite(Date.parse(freshness.collectedAt))
         ? new Date(freshness.collectedAt).toLocaleString('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })
         : '';
@@ -279,7 +267,7 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                         role="tab"
                         aria-selected={lane === item.id}
                         className={lane === item.id ? 'on' : ''}
-                        onClick={() => { setLane(item.id); setRecommendationView('ready'); }}
+                        onClick={() => { setLane(item.id); setCategory('전체'); }}
                     >{item.label}</button>
                 ))}
             </div>
@@ -301,22 +289,29 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                             {' '}위 수집 시각의 마지막 확인 목록입니다. 판매 여부와 수수료는 제휴 콘솔에서 다시 확인해주세요.
                         </p>
                     )}
-                    <RecommendationFilter value={recommendationView} onChange={setRecommendationView} counts={counts} />
+                    {inView.length === 0 && (
+                        <p role="status" className="lw-note">
+                            지금 목록 {assessed.length}개 중 문서수가 검색량보다 적은 검색어를 가진 상품이 없습니다. 문서가 더 많은 상품을 황금으로 내보이지 않습니다 — 아래 접힌 칸에서 숫자를 볼 수 있습니다.
+                        </p>
+                    )}
+                    <CategoryChips summary={categorySummary} value={activeCategory} total={inView.length} onChange={setCategory} />
+                    <CategoryGoldenKeywords category={activeCategory} byCategory={catGolden.byCategory} builtAt={catGolden.builtAt} onAnalyze={onAnalyze} productNames={(campaigns?.items || []).map((i) => i.name)} />
                     <ol className="lw-product-list">
-                        {displayed.map(({ item, recommendation }, index) => {
+                        {displayed.map(({ item, recommendation, golden }, index) => {
                             // 분석·검색은 니즈 검색어가 우선 — 상품명 검색어는 수요가 없다(실측 0~140).
-                            const query = recommendation.demand.status === 'verified' ? recommendation.query : item.keyword || item.name;
+                            const query = golden.golden ? golden.query : recommendation.demand.status === 'verified' ? recommendation.query : item.keyword || item.name;
                             const badge = { label: recommendation.status === 'ready' ? '근거 통과 · 성과 보장 아님' : recommendation.status === 'excluded' ? '추천 제외 · 보관' : '추가 조사 필요', color: recommendation.status === 'ready' ? '#2ecc71' : '#f5a623', bg: 'rgba(245,166,35,.14)' };
                             // 글 제목 1줄 — AI 추론 제목(스냅샷) 우선, 없으면 규칙 조립 폴백.
                             const titleLine = affiliateTitle(item);
                             return (
                                 <li key={item.url || item.name} className="lw-product">
-                                    <span className="lw-product-rank">{recommendationView === 'ready' ? index + 1 : '·'}</span>
+                                    <span className="lw-product-rank">{index + 1}</span>
                                     {item.image
                                         ? <img src={item.image} alt="" loading="lazy" />
                                         : <span />}
                                     <div className="lw-product-body">
                                         <div className="lw-product-tags">
+                                            <GoldenRatioBadge golden={golden} />
                                             {badge && (
                                                 <span style={{
                                                     color: badge.color, background: badge.bg,
@@ -391,15 +386,6 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                         <div className="lw-product-metrics">
                                             {typeof item.price === 'number' && item.price > 0 && (
                                                 <span className="lw-product-price"><strong>{item.price.toLocaleString('ko-KR')}원</strong></span>
-                                            )}
-                                            {exposureVerdict(item.needRatio) && (
-                                                <span
-                                                    className="lw-metric lw-metric-verdict"
-                                                    style={{
-                                                        color: exposureVerdict(item.needRatio)?.color,
-                                                        background: exposureVerdict(item.needRatio)?.bg,
-                                                    }}
-                                                >{exposureVerdict(item.needRatio)?.label}</span>
                                             )}
                                             {item.needKeyword && item.needVolume ? (
                                                 <span className="lw-product-need" title="관련 검색어의 관측값입니다. 이 상품이나 작성 제목의 수요를 뜻하지는 않습니다.">
@@ -520,11 +506,13 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             </dl>
                                         </div>
                                     )}
+                                    <AffiliateGoldenAids golden={golden} enrich={enrich.get(enrichKey(golden.query))} facing={item.seat && item.seat.keyword === golden.query ? item.seat.facing : recommendation.competition.serpTop?.exact ?? null} />
                                     <AffiliateTitles keyword={query} product={item.name} item={item} assessment={recommendation} onAnalyze={onAnalyze} />
                                 </li>
                             );
                         })}
                     </ol>
+                    <NonGoldenList rows={nonGolden.map(({ item, golden }) => ({ key: item.url || item.name, name: item.name, golden }))} />
                 </>
             )}
 

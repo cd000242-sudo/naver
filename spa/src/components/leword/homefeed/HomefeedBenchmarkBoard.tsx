@@ -12,6 +12,7 @@ import HomefeedBenchmarkCard from './HomefeedBenchmarkCard';
 import HomefeedBenchmarkStyles from './HomefeedBenchmarkStyles';
 import HomefeedTrendsPanel from './HomefeedTrendsPanel';
 import UpcomingTopicsPanel from './UpcomingTopicsPanel';
+import HomefeedSpeedPanel from './HomefeedSpeedPanel';
 // 그래프 · 활용 순서(2026-10-22) — 검색어 덧붙이기(/data/keyword-enrich.json)를 카드에 넘기고, 판 맨 위에 성과로 바꾸는 순서
 import { enrichKey, loadKeywordEnrich, type KeywordEnrich } from '../../../lib/keywordEnrich.mjs';
 import { BenchmarkHowTo } from '../shared/BenchmarkPlaybook';
@@ -121,6 +122,8 @@ export default function HomefeedBenchmarkBoard() {
   <div className="hfb-meta"><span>{view ? (livePending ? `정기 수집 ${benchmarkTime(view.generatedAt)} KST 판을 먼저 보여 드립니다 · 실시간 수집 중…` : liveAt && !liveFailed ? `실시간 수집 ${benchmarkTime(liveAt)} KST · 5분마다 다시 긁습니다` : `정기 수집 ${benchmarkTime(view.generatedAt)} KST · 실시간 수집에 실패해 마지막 정기 판을 보여 드립니다`) : '벤치마크 자료 연결 중'}</span><button type="button" onClick={()=>{void load(); loadAdvisor();}} disabled={loading || livePending}>{loading || livePending?'새로 긁는 중…':'지금 새로 긁기'}</button></div>
   {/* 미리 써 둘 소재(2026-10-11) — 경기 · 방송 일정의 '처음' 주목 인물. 판이 없으면 칸을 그리지 않는다 */}
   <UpcomingTopicsPanel />
+  {/* 속도 실측(2026-11-02) — 앱 공개본의 newsBuckets · lead · 성적표. 새 필드가 없으면 칸을 그리지 않는다 */}
+  <HomefeedSpeedPanel />
   <BenchmarkHowTo kind="homefeed" />
   {error && <div className="hfb-alert" role="alert">{error}{view && ' 마지막으로 읽은 자료를 보여드립니다.'}</div>}
   {view?.stale && <div className="hfb-alert" role="status">최근 36시간 안에 확인된 자료가 아닙니다. 우선 추천 별을 내리고 시점 재검토로 표시했습니다.</div>}
