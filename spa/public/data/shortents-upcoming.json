@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T09:47:40.970Z",
+ "builtAt": "2026-11-03T09:57:45.836Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,94 +16,63 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 69,
-   "recent20": 7,
-   "press": 58,
-   "firstArticleAt": "2026-11-03T08:18:00.000Z",
+   "articles90": 61,
+   "recent20": 8,
+   "press": 53,
+   "firstArticleAt": "2026-11-03T08:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최민희, 김민석 사과 직후 \"당원들에게도 공개 사과하라\" 직격",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-03T09:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000141520?sid=100"
+     "title": "김민석 \"3자 비밀연합 증거 없어\"…정청래, 공개 사과 요구",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-03T09:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001163126?sid=100"
     },
     {
-     "title": "김민석 '전격 사과'로 갈등 봉합·국면전환…친청 반발로 리더십 위기",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T09:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009268072?sid=100"
+     "title": "'신천지 개입설' 사과하며 울먹인 김민석… 의총선 박수, 친청계 반발",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-03T09:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000963438?sid=100"
     },
     {
-     "title": "김민석, '신천지 의혹' 사과했다…정청래 \"공개사과 하길\" [뉴스와이드...",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-03T09:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001976530?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "교육혁신선도지역 선정",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 51,
-   "recent20": 6,
-   "press": 40,
-   "firstArticleAt": "2026-11-03T08:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "교육혁신선도지역 '43곳 지정'…충청권 7곳 포함",
-     "press": "bzeronews.com",
-     "publishedAt": "2026-11-03T09:46:00.000Z",
-     "link": "https://www.bzeronews.com/news/articleView.html?idxno=824765"
-    },
-    {
-     "title": "충남북 7곳, 교육혁신선도지역으로 선정",
-     "press": "ccdn.co.kr",
-     "publishedAt": "2026-11-03T09:42:00.000Z",
-     "link": "https://www.ccdn.co.kr/news/articleView.html?idxno=1108772"
-    },
-    {
-     "title": "이양수 의원, 고성군 교육혁신선도지역 선정...5년간 최대 100억원 지원",
-     "press": "kado.net",
-     "publishedAt": "2026-11-03T09:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000209160?sid=100"
+     "title": "정청래 성토 \"김민석은 유죄 정청래는 무죄, 어떻게 책임질거냐\"",
+     "press": "mediatoday.co.kr",
+     "publishedAt": "2026-11-03T09:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/006/0000138552?sid=100"
     }
    ]
   },
   {
    "keyword": "조작기소 특검법 당론 채택",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "daum"
    ],
-   "articles90": 45,
+   "articles90": 43,
    "recent20": 5,
-   "press": 36,
-   "firstArticleAt": "2026-11-03T08:18:00.000Z",
+   "press": 35,
+   "firstArticleAt": "2026-11-03T08:28:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "장동혁 \"조작기소 특검? 이재명 공소 취소용…스스로 무덤 파는 민주당...",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-03T09:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000141521?sid=100"
+     "title": "민주당 '조작기소 특검법' 당론 채택…5일 본회의 처리 추진",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-03T09:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001071915?sid=102"
     },
     {
-     "title": "與, '조작기소 특검법' 처리 당론 채택… 조희대 국정조사는 속도조절",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-03T09:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000963436?sid=100"
+     "title": "與, 조작기소 특검법 이르면 5일 본회의 처리",
+     "press": "segye.com",
+     "publishedAt": "2026-11-03T09:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004172208?sid=100"
     },
     {
-     "title": "민주 \"조작기소특검법 5일 본회의 처리\"…국힘 \"李재판 암장\" 반발(종합...",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-03T09:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006403032?sid=100"
+     "title": "與, 조작기소 특검법 당론 채택… 이르면 5일 본회의서 강행처리",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-03T09:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001882740?sid=100"
     }
    ]
   },
@@ -113,30 +82,62 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 37,
-   "recent20": 3,
-   "press": 36,
-   "firstArticleAt": "2026-11-03T08:18:00.000Z",
+   "articles90": 35,
+   "recent20": 4,
+   "press": 34,
+   "firstArticleAt": "2026-11-03T08:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "거동 불편하다더니, 하루 100㎞ 왕복한 한학자 통일교 총재 보석 취소",
+     "press": "weekly.khan.co.kr",
+     "publishedAt": "2026-11-03T09:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/033/0000053127?sid=102"
+    },
+    {
+     "title": "[뉴스룸 오프닝] 미국 중간선거 곧 시작 / '천정궁' 드나든 한학자 / 5·...",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-03T09:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000518931?sid=100"
+    },
     {
      "title": "법원, '병원 이탈' 한학자 통일교 총재 보석 취소…재구속",
      "press": "breaknews.com",
      "publishedAt": "2026-11-03T09:46:00.000Z",
      "link": "http://www.breaknews.com/1248113"
+    }
+   ]
+  },
+  {
+   "keyword": "한-튀르키예 원전 금융협력",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 44,
+   "recent20": 11,
+   "press": 33,
+   "firstArticleAt": "2026-11-03T08:55:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李 \"튀르키예 신규 원전, 韓기업 선제 지원…방산 제3국 공동 진출\"",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-03T09:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001071916?sid=100"
     },
     {
-     "title": "병원 간다더니 천정궁 갔다…법원, 통일교 한학자 보석 취소",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-03T09:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005758527?sid=102"
+     "title": "李대통령 “시놉 원전 건설 협력 순조롭게 진행”…한·튀르키예 정상회...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-03T09:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003695410?sid=100"
     },
     {
-     "title": "[오늘 한 컷] '병보석'이라더니 '궁전 출근'?",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-03T09:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000518928?sid=100"
+     "title": "韓-튀르키예, 원전·핵심광물 협력 강화 MOU…AI·바이오 등도 체결",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-03T09:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541512?sid=101"
     }
    ]
   },
@@ -145,30 +146,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 43,
-   "recent20": 6,
+   "articles90": 44,
+   "recent20": 9,
    "press": 29,
-   "firstArticleAt": "2026-11-03T08:19:00.000Z",
+   "firstArticleAt": "2026-11-03T08:28:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "비트코인 아직 바닥 아니다? 해킹·미국 중간선거 겹치며 추가 폭락 우...",
-     "press": "coinreaders.com",
-     "publishedAt": "2026-11-03T09:44:00.000Z",
-     "link": "http://coinreaders.com/267176"
+     "title": "트럼프의 패배 예감?… “현직 대통령은 중간선거 못 이겨”",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-03T09:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001882747?sid=104"
     },
     {
-     "title": "칼시·폴리마켓, 미국 민주당 상하원 동시 장악 베팅 폭주",
+     "title": "미국 중간선거에 비트코인 또 폭락하나? 과거 50% 급락 뒤 나타난 반전",
      "press": "coinreaders.com",
-     "publishedAt": "2026-11-03T09:42:00.000Z",
-     "link": "http://coinreaders.com/267175"
+     "publishedAt": "2026-11-03T09:54:00.000Z",
+     "link": "http://coinreaders.com/267180"
     },
     {
-     "title": "미국 덮친 '블루 쓰나미'…美 중간선거 막판 요동",
-     "press": "newsgn.com",
-     "publishedAt": "2026-11-03T09:32:00.000Z",
-     "link": "https://www.newsgn.com/news/articleView.html?idxno=583326"
+     "title": "[뉴스잇] '트럼프 운명의 날' 미 중간선거 시작…막판 판세와 변수는",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-03T09:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922520?sid=104"
     }
    ]
   },
@@ -177,10 +178,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 24,
+   "articles90": 20,
    "recent20": 0,
-   "press": 24,
-   "firstArticleAt": "2026-11-03T08:20:00.000Z",
+   "press": 20,
+   "firstArticleAt": "2026-11-03T08:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -209,10 +210,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 21,
+   "articles90": 15,
    "recent20": 1,
-   "press": 20,
-   "firstArticleAt": "2026-11-03T08:18:00.000Z",
+   "press": 14,
+   "firstArticleAt": "2026-11-03T08:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -241,10 +242,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 16,
-   "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-03T08:21:00.000Z",
+   "articles90": 14,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-03T08:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -269,34 +270,34 @@
    ]
   },
   {
-   "keyword": "대구 자율주행 셔틀",
+   "keyword": "박경수 코치",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-03T08:18:00.000Z",
+   "articles90": 29,
+   "recent20": 13,
+   "press": 11,
+   "firstArticleAt": "2026-11-03T08:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "대구 동성로 자율주행 셔틀 7일부터 운행…연말까지 무료 이용",
-     "press": "nspna.com",
-     "publishedAt": "2026-11-03T09:46:00.000Z",
-     "link": "https://www.nspna.com/news/?mode=view&newsid=834497"
+     "title": "[MD포토] 박경수, '시구는 강력하게'",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-03T09:55:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/117/0004121547"
     },
     {
-     "title": "대구 동성로 자율주행 셔틀, 7일부터 무료 운행",
-     "press": "sentv.co.kr",
-     "publishedAt": "2026-11-03T09:32:00.000Z",
-     "link": "https://www.sentv.co.kr/article/view/sentv202611030227"
+     "title": "[MD포토] 팬들에 인사하는 박경수",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-03T09:55:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/117/0004121548"
     },
     {
-     "title": "[르포]대구 동성로 자율주행 셔틀 '로이' 본 운영 시작…직접 타보니",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-03T08:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004206131?sid=102"
+     "title": "[MD포토] 시구하는 박경수",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-03T09:54:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/117/0004121546"
     }
    ]
   },
@@ -333,34 +334,34 @@
    ]
   },
   {
-   "keyword": "한·튀르키예 정상 악수",
+   "keyword": "대구 자율주행 셔틀",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 6,
-   "firstArticleAt": "2026-11-03T09:16:00.000Z",
+   "articles90": 9,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-03T08:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[한-튀르키예 정상회담] 李대통령 \"신규 원전 사업 참여 지원\"…방산 공...",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-03T09:38:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=747604"
+     "title": "[포토] 대구 도심 달릴 자율주행셔틀…7일부터 시민 맞는다",
+     "press": "kyongbuk.co.kr",
+     "publishedAt": "2026-11-03T09:52:00.000Z",
+     "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4089569"
     },
     {
-     "title": "李, 튀르키예 신규 원전사업 선제 지원…방산·핵심광물 협력 확대",
-     "press": "daily.hankooki.com",
+     "title": "대구 동성로 자율주행 셔틀 7일부터 운행…연말까지 무료 이용",
+     "press": "nspna.com",
+     "publishedAt": "2026-11-03T09:46:00.000Z",
+     "link": "https://www.nspna.com/news/?mode=view&newsid=834497"
+    },
+    {
+     "title": "대구 동성로 자율주행 셔틀, 7일부터 무료 운행",
+     "press": "sentv.co.kr",
      "publishedAt": "2026-11-03T09:32:00.000Z",
-     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1421342"
-    },
-    {
-     "title": "공동언론 발표한 뒤 악수하는 한ㆍ 튀르키예 정상",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T09:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016419561?sid=100"
+     "link": "https://www.sentv.co.kr/article/view/sentv202611030227"
     }
    ]
   },
@@ -463,7 +464,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 431,
+  "flagged": 433,
   "matched": 160,
   "avgLeadMin": 219,
   "recent": [
