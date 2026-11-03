@@ -242,10 +242,14 @@ export function readGensparkPageSignals(): GensparkPageSignals {
     if (hit(text, challengeWords)) challenge = true;
     if (hit(text, rateWords)) rateLimited = true;
     if (hit(text, failWords)) failed = true;
-    if (loginWords.some((w) => lower(text) === lower(w)) && parent.closest('a, button, [role="button"]')) loginButton = true;
+    const control = parent.closest('a, button, [role="button"]');
+    const shown = control ? (control as HTMLElement).getBoundingClientRect() : null;
+    if (loginWords.some((w) => lower(text) === lower(w)) && shown && shown.width > 0 && shown.height > 0) loginButton = true;
   }
   const urlLogin = /\/(login|signin|sign-in|auth)(\/|\?|$)/i.test(url);
-  return { url, hasComposer, loginRequired: !hasComposer && (loginButton || urlLogin), challenge, rateLimited, failed };
+  // [2026-11-03 실측] 로그아웃 상태에서도 입력창이 보이고 머리에 [로그인][가입하기]가 뜬다 — 입력창이 있다고
+  //   로그인 필요를 지우면 로그아웃을 "로그인됨"으로 판정했다. 보이는 [로그인] 버튼이 있으면 입력창과 상관없이 로그인 필요.
+  return { url, hasComposer, loginRequired: loginButton || urlLogin, challenge, rateLimited, failed };
 }
 
 /**

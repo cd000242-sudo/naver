@@ -223,15 +223,27 @@ describe('readGensparkPageSignals', () => {
     if (settings) settings.disableIframePageLoading = true;
   });
 
-  it('입력창이 있으면 로그인 필요 아님', () => {
-    document.body.innerHTML = '<textarea class="search-input"></textarea><a>로그인</a>';
+  // [2026-11-03 실측 — 새 빈 프로필] 로그아웃 상태의 /ai_image 는 입력창이 보이고 머리에 [로그인][가입하기]가 뜬다.
+  //   예전 단언("입력창이 있으면 로그인 필요 아님")이 이 버그를 정답으로 고정해 로그아웃을 "로그인됨"으로 보였다.
+  it('입력창이 있어도 보이는 [로그인] 버튼이 있으면 로그인 필요 (실제 로그아웃 화면)', () => {
+    document.body.innerHTML = '<textarea class="search-input"></textarea><a id="lg">로그인</a><a id="sg">가입하기</a>';
+    (document.getElementById('lg') as HTMLElement).getBoundingClientRect = rect(1200, 20, 60, 32);
+    const s = readGensparkPageSignals();
+    expect(s.hasComposer).toBe(true);
+    expect(s.loginRequired).toBe(true);
+  });
+
+  it('입력창만 있고 보이는 [로그인] 버튼이 없으면 로그인 필요 아님', () => {
+    document.body.innerHTML = '<textarea class="search-input"></textarea><a id="lg">로그인</a>';
+    (document.getElementById('lg') as HTMLElement).getBoundingClientRect = rect(0, 0, 0, 0);
     const s = readGensparkPageSignals();
     expect(s.hasComposer).toBe(true);
     expect(s.loginRequired).toBe(false);
   });
 
-  it('입력창 없고 로그인 버튼이 있으면 로그인 필요', () => {
-    document.body.innerHTML = '<button>Sign in</button>';
+  it('입력창 없고 보이는 로그인 버튼이 있으면 로그인 필요', () => {
+    document.body.innerHTML = '<button id="si">Sign in</button>';
+    (document.getElementById('si') as HTMLElement).getBoundingClientRect = rect(10, 10, 80, 30);
     expect(readGensparkPageSignals().loginRequired).toBe(true);
   });
 
