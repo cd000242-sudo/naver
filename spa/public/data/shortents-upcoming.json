@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T00:33:28.720Z",
+ "builtAt": "2026-11-03T00:43:32.178Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,163 +11,130 @@
  "measured": 25,
  "candidates": [
   {
-   "keyword": "한양증권 해킹 정보 유출",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 79,
-   "recent20": 14,
-   "press": 74,
-   "firstArticleAt": "2026-11-02T23:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'또 뚫렸다' 한양증권도 해킹 피해…고객정보 등 31건 유출",
-     "press": "newsprime.co.kr",
-     "publishedAt": "2026-11-03T00:32:00.000Z",
-     "link": "http://www.newsprime.co.kr/news/article.html?no=753406"
-    },
-    {
-     "title": "[특징주] 금융권 이어 증권업권에서도 연이어 해킹…보안주 上",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-03T00:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202141?sid=101"
-    },
-    {
-     "title": "한양증권도 해킹 피해…외부 그룹웨어서 개인정보 31건 유출",
-     "press": "ngetnews.com",
-     "publishedAt": "2026-11-03T00:30:00.000Z",
-     "link": "https://www.ngetnews.com/news/articleView.html?idxno=555451"
-    }
-   ]
-  },
-  {
    "keyword": "10월 소비자물가 2.8% 상승",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 72,
+   "articles90": 69,
    "recent20": 15,
    "press": 56,
-   "firstArticleAt": "2026-11-02T23:06:00.000Z",
+   "firstArticleAt": "2026-11-02T23:14:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "10월 소비자물가 2.8%↑…석유류 급등·외식물가 상승",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-03T00:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002717965?sid=101"
+     "title": "한은 \"11월 소비자물가 상승률 2%대 후반 전망\"",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-03T00:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001071635?sid=101"
     },
     {
-     "title": "10월 물가 2.8% 상승…채솟값 '뚝↓'·기름값 '쑥↑'",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-03T00:32:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1319021&inflow=N"
+     "title": "10월 소비자물가 2.8% 상승…두 달 연속 둔화",
+     "press": "ziksir.com",
+     "publishedAt": "2026-11-03T00:40:00.000Z",
+     "link": "https://www.ziksir.com/news/articleView.html?idxno=151782"
     },
     {
-     "title": "'채소값 떨어졌는데 밥값은 왜 오르나'…10월 소비자물가 2.8% 상승",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-03T00:28:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026110309265005958"
+     "title": "10월 물가 2.8%로 소폭 둔화…한은 “근원물가 오름세 여전”",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-03T00:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002393175?sid=101"
     }
    ]
   },
   {
-   "keyword": "정부 김장재료 할인",
+   "keyword": "이명수 신상공개",
    "sources": [
     "daum"
    ],
-   "articles90": 43,
-   "recent20": 5,
-   "press": 39,
-   "firstArticleAt": "2026-11-02T23:09:00.000Z",
+   "articles90": 55,
+   "recent20": 17,
+   "press": 48,
+   "firstArticleAt": "2026-11-02T23:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정부 \"물가 비교적 안정적\"…\"체감물가는 여전히 높아\"",
-     "press": "weekly.chosun.com",
-     "publishedAt": "2026-11-03T00:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/053/0000062800?sid=101"
+     "title": "경찰, 역삼동 사무실 불 지른 70대 이명수 신상 공개",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-03T00:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001163030?sid=102"
     },
     {
-     "title": "10월 물가 2.8% 상승···정부, 김장철 농수산물 할인에 640억원 투입",
-     "press": "smartbizn.com",
-     "publishedAt": "2026-11-03T00:26:00.000Z",
-     "link": "https://www.smartbizn.com/news/articleView.html?idxno=158262"
+     "title": "경찰, '역삼 연쇄방화범' 피의자 77세 이명수 신상 공개",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-03T00:40:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=248949"
     },
     {
-     "title": "김장 물가 잡는다...정부, 역대 최대 640억원 투입",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-03T00:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004678068?sid=101"
+     "title": "[속보] ‘역삼동 연쇄 방화범’ 77세 이명수 얼굴 공개",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-03T00:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003695152?sid=102"
     }
    ]
   },
   {
-   "keyword": "김민석 정청래 합당론",
+   "keyword": "한양증권 해킹 피해",
    "sources": [
     "daum"
    ],
-   "articles90": 30,
-   "recent20": 3,
-   "press": 30,
-   "firstArticleAt": "2026-11-02T23:17:00.000Z",
+   "articles90": 37,
+   "recent20": 8,
+   "press": 36,
+   "firstArticleAt": "2026-11-02T23:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김민석 \"혁신당 합당·시기 전제할 수 없어…鄭 절차 존중해야\"",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-03T00:26:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2013507"
+     "title": "한양증권 해킹에 고객 정보 15건 유출…주민번호·계좌까지 털렸다",
+     "press": "segye.com",
+     "publishedAt": "2026-11-03T00:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004171986?sid=101"
     },
     {
-     "title": "조경태 응원한 김민석 “李와 악수, 기본은 지키겠다는 표현”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-03T00:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003759648?sid=100"
+     "title": "한양증권도 뚫렸다…금융권 전방위 연쇄 해킹 비상(종합)",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-03T00:38:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/323924/?sc=Naver"
     },
     {
-     "title": "석청대전, 진흙탕 싸움 조짐 … 김민석 \"조국당 통합, 당내 투쟁 수단 변...",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-03T00:16:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/03/2026110300057.html"
+     "title": "한양증권도 해킹 피해…고객·임직원 정보 31건 유출 확인",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-03T00:38:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=879182"
     }
    ]
   },
   {
-   "keyword": "김종국 아내 저장명",
+   "keyword": "“개인정보 유출 긴급회의”",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 18,
-   "recent20": 2,
-   "press": 17,
-   "firstArticleAt": "2026-11-02T23:04:00.000Z",
+   "articles90": 22,
+   "recent20": 7,
+   "press": 20,
+   "firstArticleAt": "2026-11-02T23:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘결혼 1년 차’ 김종국 “아내 핸드폰 저장명, ‘귀요미♥︎’”(‘옥...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-03T00:20:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001277474"
+     "title": "靑, 순방단 개인정보 유출 긴급회의…\"책임 철저 규명\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-03T00:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922289?sid=100"
     },
     {
-     "title": "김종국, 아내 저장명 공개…“귀요미♥”(‘옥문아’)",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-03T00:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005757968"
+     "title": "靑, 대통령 순방단 개인정보 유출 긴급회의…\"경위·피해 철저히 조사\"",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-03T00:35:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000079012"
     },
     {
-     "title": "김종국, 아내 휴대폰 저장명은 '귀요미♥'…결혼 1주년 신혼 생활 공개...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-03T00:09:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000636652"
+     "title": "靑, 순방단 개인정보 유출 긴급회의...\"관리 책임 규명\"",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-03T00:34:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=560620"
     }
    ]
   },
@@ -176,13 +143,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 16,
-   "recent20": 5,
-   "press": 16,
+   "articles90": 17,
+   "recent20": 3,
+   "press": 17,
    "firstArticleAt": "2026-11-03T00:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "노동부, 청년 '공짜 야근' 감독…전국 100곳 점검",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-03T00:34:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000079007"
+    },
     {
      "title": "청년 노동자 ‘공짜 야근’ 뿌리 뽑는다…성수동 등 100개 사업장 감독",
      "press": "dailian.co.kr",
@@ -194,44 +167,38 @@
      "press": "view.asiae.co.kr",
      "publishedAt": "2026-11-03T00:27:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/277/0005837127?sid=102"
-    },
-    {
-     "title": "성수동 청년 ‘공짜 야근’ 정조준…노동부, 전국 100곳 기획감독",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-03T00:22:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611030014"
     }
    ]
   },
   {
-   "keyword": "한다감 아들 최초 공개",
+   "keyword": "김종국 아내 귀요미",
    "sources": [
     "nate"
    ],
-   "articles90": 13,
-   "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-02T23:07:00.000Z",
+   "articles90": 15,
+   "recent20": 1,
+   "press": 15,
+   "firstArticleAt": "2026-11-02T23:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'47세 산모' 한다감, 고령 출산 전혀 문제없었다…생후 26일 차 아들 방...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-03T00:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000782725"
+     "title": "김종국, 결혼 1주년 깜짝 이벤트→최수종도 인정한 사랑꾼…\"애칭은 귀...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-03T00:39:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001406931"
     },
     {
-     "title": "'47세 초보 엄마' 한다감, 생후 26일 아들 최초 공개…\"울면 온몸에 땀 ...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T00:21:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009266159"
+     "title": "‘결혼 1년 차’ 김종국 “아내 핸드폰 저장명, ‘귀요미♥︎’”(‘옥...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-03T00:20:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001277474"
     },
     {
-     "title": "‘47세 출산’ 한다감, 생후 26일 아들 최초 공개…“하늘의 축복”",
+     "title": "김종국, 아내 저장명 공개…“귀요미♥”(‘옥문아’)",
      "press": "mk.co.kr",
-     "publishedAt": "2026-11-03T00:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005757966"
+     "publishedAt": "2026-11-03T00:17:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005757968"
     }
    ]
   },
@@ -240,13 +207,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 12,
+   "articles90": 13,
+   "recent20": 2,
+   "press": 13,
    "firstArticleAt": "2026-11-02T23:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"용인 청미천 낚시·출입 금지\"…용인시, 고병원성 AI 검출에 15일까지 ...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-03T00:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005598442?sid=102"
+    },
     {
      "title": "용인시, 조류인플루엔자 확산 방지 청미천 일대 출입 통제",
      "press": "jasm.co.kr",
@@ -258,44 +231,230 @@
      "press": "mdtoday.co.kr",
      "publishedAt": "2026-11-03T00:02:00.000Z",
      "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=622595"
-    },
-    {
-     "title": "\"야생조류 배설물서 바이러스 검출\"…용인시, 청미천 일대 출입 전면 통...",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-02T23:58:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3740418"
     }
    ]
   },
   {
-   "keyword": "9경기 무승 캐릭 감독",
+   "keyword": "한다감 아들 생후 26일 공개",
    "sources": [
     "nate"
    ],
-   "articles90": 8,
+   "articles90": 12,
    "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-02T23:12:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-02T23:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "9경기 무승 늪 빠진 맨유 캐릭 감독 '미쳤다 해도 진심으로 로마전 기대...",
-     "press": "dailysportshankook.co.kr",
-     "publishedAt": "2026-11-03T00:26:00.000Z",
-     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435092"
+     "title": "'47세 출산' 한다감, 조리원 떠나 본격 육아…\"아들 울면 온몸에 땀 나\"...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-03T00:35:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002075654"
     },
     {
-     "title": "9G 무승인데 “경기가 정말 기다려진다”…캐릭, 로마전 앞두고 왜 이렇...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-03T00:19:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/241/0003538768"
+     "title": "'47세 산모' 한다감, 고령 출산 전혀 문제없었다…생후 26일 차 아들 방...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-03T00:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000782725"
     },
     {
-     "title": "위기의 캐릭 맨유 감독 \"내가 미쳤다고 생각할지 모르겠지만\"",
-     "press": "newdaily.co.kr",
+     "title": "'47세 초보 엄마' 한다감, 생후 26일 아들 최초 공개…\"울면 온몸에 땀 ...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T00:21:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009266159"
+    }
+   ]
+  },
+  {
+   "keyword": "북한 집속탄두 시험",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 11,
+   "recent20": 3,
+   "press": 11,
+   "firstArticleAt": "2026-11-02T23:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "北, 순항미사일 집속탄두 위력·수직타격 시험",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-03T00:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922291?sid=100"
+    },
+    {
+     "title": "北 순항미사일 집속탄두 위력평가시험… “표적구역 초토화”",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-03T00:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202143?sid=101"
+    },
+    {
+     "title": "北, 순항미사일 집속탄두 위력·수직타격 시험…\"5∼6㏊ 초토화\"",
+     "press": "getnews.co.kr",
+     "publishedAt": "2026-11-03T00:32:00.000Z",
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=885767"
+    }
+   ]
+  },
+  {
+   "keyword": "팔란티어",
+   "sources": [
+    "google"
+   ],
+   "articles90": 11,
+   "recent20": 3,
+   "press": 11,
+   "firstArticleAt": "2026-11-02T23:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "팔란티어 CEO \"진짜 AI 위험은 불량 에이전트 아닌 개발사 욕망\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-03T00:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016417527?sid=104"
+    },
+    {
+     "title": "AI데이터 분석 '팔란티어' 분기매출 20억 달러 첫 돌파…전년 대비 2배",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-03T00:30:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/323925/?sc=Naver"
+    },
+    {
+     "title": "팔란티어, \"민간 매출이 더 컸다\"...3분기 매출 96% 급증",
+     "press": "epnc.co.kr",
+     "publishedAt": "2026-11-03T00:24:00.000Z",
+     "link": "https://www.epnc.co.kr/news/articleView.html?idxno=409171"
+    }
+   ]
+  },
+  {
+   "keyword": "웰컴저축은행 팀리그 2연승",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 11,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-02T23:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "PBA '전력 보강' 웰컴저축은행, 에스와이 꺾고 2연승",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-03T00:23:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/055/0001400157"
+    },
+    {
+     "title": "'웰컴저축은행이 옳았다' 유일 추가선발, 강유진 승-T.응우옌 승... 2연승...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-03T00:18:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/108/0003483995"
+    },
+    {
+     "title": "'새 얼굴 효과 제대로 봤다!' 웰컴저축은행, 에스와이 꺾고 2연승 질주…...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-03T00:11:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/117/0004121228"
+    }
+   ]
+  },
+  {
+   "keyword": "국정감사 국민보고 대회",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 19,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-02T23:47:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정점식 원내대표, 국정감사 국민보고 대회",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-03T00:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003695153?sid=100"
+    },
+    {
+     "title": "「M포토」 국정감사 국민보고 대회 발언하는 임이자 정책위의장",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-03T00:34:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=72492"
+    },
+    {
+     "title": "국민의힘 국정감사 국민보고 대회에서 발언하는 임이자 정책위의장",
+     "press": "yna.co.kr",
      "publishedAt": "2026-11-03T00:08:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/03/2026110300058.html"
+     "link": "https://n.news.naver.com/mnews/article/001/0016417394?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "김민",
+   "sources": [
+    "google"
+   ],
+   "articles90": 11,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-02T23:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'아침마당' 김민, \"父 평생 미장 일…돌아가신지 10년\" [TV캡처]",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-03T00:40:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109678350067"
+    },
+    {
+     "title": "김민, 뉴진랜드서 아나콘다 잡았다더니 해명…\"알고보니 미역\" [아침마...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-03T00:25:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004121233"
+    },
+    {
+     "title": "'아침마당' 김민, 아나콘다 잡은 일화 해명 \"알고 보니 미역이었다\" [TV...",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-03T00:24:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109678132432"
+    }
+   ]
+  },
+  {
+   "keyword": "종신보험",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-03T00:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "동양생명, 건강플러스종신보험 출시…종신 경쟁 가열 속 상품 강화",
+     "press": "news2day.co.kr",
+     "publishedAt": "2026-11-03T00:38:00.000Z",
+     "link": "https://www.news2day.co.kr/article/20261103500052"
+    },
+    {
+     "title": "처브라이프, '처브 플러스 건강종신보험' 선봬",
+     "press": "enewstoday.co.kr",
+     "publishedAt": "2026-11-03T00:26:00.000Z",
+     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2487626"
+    },
+    {
+     "title": "하나은행, 종신보험 연계 신탁으로 장애인 자녀 재산관리 지원",
+     "press": "sports.hankooki.com",
+     "publishedAt": "2026-11-03T00:26:00.000Z",
+     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6942730"
     }
    ]
   },
@@ -305,10 +464,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-02T23:08:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-02T23:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -333,74 +492,9 @@
    ]
   },
   {
-   "keyword": "종신보험",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-03T00:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "처브라이프, '처브 플러스 건강종신보험' 선봬",
-     "press": "enewstoday.co.kr",
-     "publishedAt": "2026-11-03T00:26:00.000Z",
-     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2487626"
-    },
-    {
-     "title": "하나은행, 종신보험 연계 신탁으로 장애인 자녀 재산관리 지원",
-     "press": "sports.hankooki.com",
-     "publishedAt": "2026-11-03T00:26:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6942730"
-    },
-    {
-     "title": "동양생명, 암·뇌출혈 진단 시 보험료 면제…치료비 보장하는 종신보험...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T00:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009266153?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "김민 아나콘다 일화 해명",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-02T23:55:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김민, 뉴진랜드서 아나콘다 잡았다더니 해명…\"알고보니 미역\" [아침마...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-03T00:25:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004121233"
-    },
-    {
-     "title": "'아침마당' 김민, 아나콘다 잡은 일화 해명 \"알고 보니 미역이었다\" [TV...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-03T00:24:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109678132432"
-    },
-    {
-     "title": "김민, 아나콘다 잡았다는 일화 해명…\"사실 뉴질랜드엔 뱀 없다\" 뭐였길...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-02T23:55:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002075646"
-    }
-   ]
-  },
-  {
    "keyword": "조희대 고발인 조사",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 14,
    "recent20": 0,
@@ -428,11 +522,43 @@
      "link": "https://n.news.naver.com/mnews/article/003/0014296668?sid=102"
     }
    ]
+  },
+  {
+   "keyword": "김원효",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T23:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김원효, 심진화와 이혼 위기 겪었다 \"투자 실패로 2억 날려…전 재산 홀...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T00:18:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009266154"
+    },
+    {
+     "title": "김원효, ♥심진화와 이혼 위기 고백 “투자 실패로 전 재산 날려..간실...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-03T00:06:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005633331"
+    },
+    {
+     "title": "김원효, 매년 ♥심진화에 명품백 선물…누적 1억 넘어 “혼인 서약 지키...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-02T23:32:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001147769"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 243,
+  "flagged": 254,
   "matched": 95,
   "avgLeadMin": 226,
   "recent": [
