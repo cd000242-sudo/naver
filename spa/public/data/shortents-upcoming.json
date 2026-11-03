@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T01:43:54.680Z",
+ "builtAt": "2026-11-03T01:53:58.169Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,29 +16,29 @@
     "signal.bz"
    ],
    "articles90": 95,
-   "recent20": 16,
-   "press": 70,
-   "firstArticleAt": "2026-11-03T00:19:00.000Z",
+   "recent20": 15,
+   "press": 73,
+   "firstArticleAt": "2026-11-03T00:28:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "10월 소비자물가 2.8% 상승…가공식품·외식 오름 폭 확대",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-03T01:40:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5079019"
+     "title": "10월 소비자물가 2.8% 상승…두달 연속 2%대",
+     "press": "asiatime.co.kr",
+     "publishedAt": "2026-11-03T01:52:00.000Z",
+     "link": "https://www.asiatime.co.kr/article/20261103500091"
     },
     {
-     "title": "정부 “체감 물가 여전히 높아…640억원 역대급 김장 대책 마련”",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-03T01:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003562424?sid=100"
+     "title": "물가 상승률 반년째 3% 안팎…먹거리·기름값 고공행진",
+     "press": "mediaus.co.kr",
+     "publishedAt": "2026-11-03T01:50:00.000Z",
+     "link": "https://www.mediaus.co.kr/news/articleView.html?idxno=318779"
     },
     {
-     "title": "10월 소비자물가 상승률 2.8%...11월에도 2%대 후반 전망",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-03T01:38:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=622620"
+     "title": "10월 물가 2.8%…한은, 11월도 2%대 후반 전망",
+     "press": "newsway.co.kr",
+     "publishedAt": "2026-11-03T01:48:00.000Z",
+     "link": "https://www.newsway.co.kr/news/view?ud=2026110309304191289"
     }
    ]
   },
@@ -47,30 +47,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 63,
-   "recent20": 8,
-   "press": 56,
-   "firstArticleAt": "2026-11-03T00:16:00.000Z",
+   "articles90": 55,
+   "recent20": 6,
+   "press": 48,
+   "firstArticleAt": "2026-11-03T00:24:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "외교부 \"공군1호기 정보 유출, 경위 파악 조사 진행\"",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-03T01:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006402646?sid=100"
+    },
+    {
+     "title": "李대통령 여권번호까지 5개월 노출…靑, 순방단 168명 정보 유출 긴급조...",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-03T01:46:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1421135"
+    },
     {
      "title": "靑 \"대통령 순방단 개인정보 유출 경위 철저히 조사\"",
      "press": "pressian.com",
      "publishedAt": "2026-11-03T01:42:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/002/0002463955?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "與 재경위 과세 유예 건의",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 36,
+   "recent20": 6,
+   "press": 33,
+   "firstArticleAt": "2026-11-03T00:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "與 재경위, 지도부에 '코인 과세 유예' 건의키로…\"2년 정도 거론\"",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-03T01:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001071674?sid=100"
     },
     {
-     "title": "청와대, ‘대통령 순방단 개인정보 유출’ 긴급회의...“중대한 사안”",
-     "press": "vop.co.kr",
-     "publishedAt": "2026-11-03T01:40:00.000Z",
-     "link": "https://vop.co.kr/A00001697436.html"
-    },
-    {
-     "title": "[단독] 유출된 1호기 순방 명단, 靑 작성 문건 아냐…정부 아닌 외부 유...",
+     "title": "與 재경위 “가상자산 과세 유예 의견, 당 지도부에 건의”",
      "press": "seoul.co.kr",
-     "publishedAt": "2026-11-03T01:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003695186?sid=100"
+     "publishedAt": "2026-11-03T01:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003695190?sid=100"
+    },
+    {
+     "title": "與, 가상자산 과세 '2년 유예' 건의…내년 시행 제동",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-03T01:44:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000079080"
     }
    ]
   },
@@ -79,13 +111,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 34,
-   "recent20": 8,
-   "press": 34,
-   "firstArticleAt": "2026-11-03T00:14:00.000Z",
+   "articles90": 30,
+   "recent20": 4,
+   "press": 30,
+   "firstArticleAt": "2026-11-03T00:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "대한항공, 미국행 승객 에볼라 서약서 제출 의무화",
+     "press": "cnbnews.com",
+     "publishedAt": "2026-11-03T01:50:00.000Z",
+     "link": "https://www.cnbnews.com/news/articleView.html?idxno=1022067"
+    },
     {
      "title": "미국행 항공기 타려면 당분간 '에볼라 서약서' 써야 한다 : 아프리카 '분...",
      "press": "huffingtonpost.kr",
@@ -97,12 +135,70 @@
      "press": "paxetv.com",
      "publishedAt": "2026-11-03T01:36:00.000Z",
      "link": "http://www.paxetv.com/news/articleView.html?idxno=285934"
+    }
+   ]
+  },
+  {
+   "keyword": "LG엔솔 3분기 영업익",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 26,
+   "recent20": 14,
+   "press": 26,
+   "firstArticleAt": "2026-11-03T00:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "LG에너지솔루션, 3분기 영업익 7560억···ESS 호조",
+     "press": "cnbnews.com",
+     "publishedAt": "2026-11-03T01:50:00.000Z",
+     "link": "https://www.cnbnews.com/news/articleView.html?idxno=1022063"
     },
     {
-     "title": "대한항공, 4일부터 미국행 승객 에볼라 서약서 제출 의무화",
-     "press": "kihoilbo.co.kr",
-     "publishedAt": "2026-11-03T01:34:00.000Z",
-     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3039677"
+     "title": "LG엔솔, 3분기 영업익 7560억원, 6.6배 '껑충' ··· ESS 성장에 '점프'",
+     "press": "greenpostkorea.co.kr",
+     "publishedAt": "2026-11-03T01:50:00.000Z",
+     "link": "https://www.greenpostkorea.co.kr/news/articleView.html?idxno=307910"
+    },
+    {
+     "title": "LG엔솔, 3분기 영업익 7560억 두 자릿수 성장…내년 북미 70GWh 확보",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-03T01:50:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=901717"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 대통령 국무회의 참석",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 21,
+   "recent20": 9,
+   "press": 14,
+   "firstArticleAt": "2026-11-03T00:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령 “폭등도 폭락도 바람직하지 않다”…부동산 정확한 통계 주문",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-03T01:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003056785?sid=100"
+    },
+    {
+     "title": "경청하는 이재명 대통령",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T01:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014297198?sid=100"
+    },
+    {
+     "title": "대통령이 “꼭 필요하지 않으면 안 와도 된다” 했는데…중수청장, 또 ...",
+     "press": "donga.com",
+     "publishedAt": "2026-11-03T01:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003759671?sid=100"
     }
    ]
   },
@@ -110,16 +206,21 @@
    "keyword": "래블업",
    "sources": [
     "signal.bz",
-    "google",
-    "daum"
+    "google"
    ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-03T00:14:00.000Z",
+   "articles90": 12,
+   "recent20": 3,
+   "press": 12,
+   "firstArticleAt": "2026-11-03T00:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[특징주] AI 소프트웨어 '래블업', 코스닥 상장 첫날 '강세'",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-03T01:44:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=2026110310311811844093b5d4e_1"
+    },
     {
      "title": "래블업, 코스닥 상장 첫날 장초반 30∼40%대 상승",
      "press": "newsfc.co.kr",
@@ -131,76 +232,6 @@
      "press": "businesspost.co.kr",
      "publishedAt": "2026-11-03T01:34:00.000Z",
      "link": "https://www.businesspost.co.kr/BP?command=article_view&num=450999"
-    },
-    {
-     "title": "래블업, 코스닥 상장 첫날 강세...장중 한때 49% 급등",
-     "press": "techm.kr",
-     "publishedAt": "2026-11-03T01:02:00.000Z",
-     "link": "https://www.techm.kr/news/articleView.html?idxno=156795"
-    }
-   ]
-  },
-  {
-   "keyword": "미국 게슘섬 타격",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 14,
-   "recent20": 7,
-   "press": 12,
-   "firstArticleAt": "2026-11-03T00:53:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "트럼프, 공격 안한다고 하더니…선거전날 이란 게슘섬 타격",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-03T01:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000541346?sid=104"
-    },
-    {
-     "title": "美, 선거전날 이란 게슘섬 타격…\"선박 공격에 방어적 조치\"",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-03T01:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005598509?sid=104"
-    },
-    {
-     "title": "미국, 중간선거 하루 앞두고 이란 게슘섬 타격…\"선박 공격에 방어적 조...",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-03T01:32:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=778544"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명 대통령 국무회의 참석",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 16,
-   "recent20": 6,
-   "press": 12,
-   "firstArticleAt": "2026-11-03T00:17:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김지용, 또 국무회의 참석…李 \"정치목적 허위사실유포 강력 대응하라\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-03T01:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205818?sid=102"
-    },
-    {
-     "title": "중수청장 3주째 국무회의 배석…대통령 \"강도높은 역할\" 당부",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T01:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016417860?sid=102"
-    },
-    {
-     "title": "김지용 중수청장, 3번 연속 국무회의 참석…이 대통령 “사정역할 엄정...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-03T01:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002830413?sid=102"
     }
    ]
   },
@@ -210,12 +241,18 @@
     "google"
    ],
    "articles90": 8,
-   "recent20": 2,
+   "recent20": 1,
    "press": 8,
-   "firstArticleAt": "2026-11-03T00:15:00.000Z",
+   "firstArticleAt": "2026-11-03T00:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "리센느, 미니 4집 ‘PULSE’로 컴백...A2O LITE 독주 막을까",
+     "press": "raonnews.com",
+     "publishedAt": "2026-11-03T01:48:00.000Z",
+     "link": "https://www.raonnews.com/news/article.html?no=62432"
+    },
     {
      "title": "리센느, 오늘 ‘펄스’ 컴백…‘위드’로 상승세 잇는다",
      "press": "mediapen.com",
@@ -227,44 +264,6 @@
      "press": "topstarnews.net",
      "publishedAt": "2026-11-03T01:26:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16266780"
-    },
-    {
-     "title": "리센느, 역주행 신화 다음은 '펄스'…오늘(3일) 컴백",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-03T00:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000518831"
-    }
-   ]
-  },
-  {
-   "keyword": "김민 가족사진 공개",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-03T00:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘동두천 자연인’ 김민 “‘노가다 각오하면 못 할 일 없다’ 父 유훈...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-03T01:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001277506"
-    },
-    {
-     "title": "김민, 가족 공개 \"돌아가신 부친 피라미드 논리가 힘\"",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-03T01:32:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=94437"
-    },
-    {
-     "title": "김민, ‘나혼산’ 야생 생활 비결은 돌아가신 아버지…“어깨너머로 배...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-03T01:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001147809"
     }
    ]
   },
@@ -301,78 +300,14 @@
    ]
   },
   {
-   "keyword": "47세 한다감 아들 첫 공개",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-03T00:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'47세 출산' 한다감, 제왕절개로 낳은 생후 26일 子 최초 공개…엄마 판...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-03T00:54:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001406936"
-    },
-    {
-     "title": "'47세 출산' 한다감, 조리원 떠나 본격 육아…\"아들 울면 온몸에 땀 나\"...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-03T00:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002075654"
-    },
-    {
-     "title": "'47세 산모' 한다감, 고령 출산 전혀 문제없었다…생후 26일 차 아들 방...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-03T00:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000782725"
-    }
-   ]
-  },
-  {
-   "keyword": "웰컴저축은행, 에스와이 제압 2연승",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T00:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'전력 보강 효과 나오나' 웰컴저축은행, PBA 팀 리그 4R 반전의 2연승",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-03T01:40:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/079/0004205817"
-    },
-    {
-     "title": "PBA '전력 보강' 웰컴저축은행, 에스와이 꺾고 2연승",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-03T00:23:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/055/0001400157"
-    },
-    {
-     "title": "'웰컴저축은행이 옳았다' 유일 추가선발, 강유진 승-T.응우옌 승... 2연승...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-03T00:18:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/108/0003483995"
-    }
-   ]
-  },
-  {
    "keyword": "출근하는 조희대 대법원장",
    "sources": [
     "nate"
    ],
-   "articles90": 12,
+   "articles90": 10,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-03T00:15:00.000Z",
+   "firstArticleAt": "2026-11-03T00:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -430,6 +365,38 @@
    ]
   },
   {
+   "keyword": "47세 한다감 아들 첫 공개",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T00:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'47세 출산' 한다감, 제왕절개로 낳은 생후 26일 子 최초 공개…엄마 판...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-03T00:54:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001406936"
+    },
+    {
+     "title": "'47세 출산' 한다감, 조리원 떠나 본격 육아…\"아들 울면 온몸에 땀 나\"...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-03T00:35:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002075654"
+    },
+    {
+     "title": "'47세 산모' 한다감, 고령 출산 전혀 문제없었다…생후 26일 차 아들 방...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-03T00:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000782725"
+    }
+   ]
+  },
+  {
    "keyword": "김빅토리아노 최불암 추모",
    "sources": [
     "nate"
@@ -464,7 +431,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 282,
+  "flagged": 283,
   "matched": 102,
   "avgLeadMin": 223,
   "recent": [
