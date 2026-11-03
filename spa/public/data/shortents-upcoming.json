@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T19:30:19.537Z",
+ "builtAt": "2026-11-03T20:10:29.876Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,11 +8,44 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
- "candidates": [],
+ "measured": 23,
+ "candidates": [
+  {
+   "keyword": "유럽 여객기 폭파 위협",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T18:41:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "유럽 하늘길도 혼란…여객기 7대 폭파 위협 신고 '유럽 불안=러시아의 ...",
+     "press": "kdfnews.com",
+     "publishedAt": "2026-11-03T19:20:00.000Z",
+     "link": "http://www.kdfnews.com/news/articleView.html?idxno=190386"
+    },
+    {
+     "title": "유럽 하늘길 불안…여객기 폭파 위협 신고 잇따라",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-03T19:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012286752?sid=104"
+    },
+    {
+     "title": "유럽 오가는 여객기 7대에 폭파 위협 신고…전투기 출격 소동",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-03T18:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400431?sid=104"
+    }
+   ]
+  }
+ ],
  "hitRate": {
   "days": 7,
-  "flagged": 457,
+  "flagged": 458,
   "matched": 179,
   "avgLeadMin": 241,
   "recent": [
