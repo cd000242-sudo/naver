@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T22:21:15.279Z",
+ "builtAt": "2026-11-03T22:31:18.718Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,34 @@
  "measured": 26,
  "candidates": [
   {
-   "keyword": "쿠팡 영업손실",
+   "keyword": "쿠팡 3분기 영업손실 6423억",
    "sources": [
-    "daum"
+    "nate"
    ],
    "articles90": 83,
-   "recent20": 16,
+   "recent20": 15,
    "press": 52,
-   "firstArticleAt": "2026-11-03T21:10:00.000Z",
+   "firstArticleAt": "2026-11-03T21:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "쿠팡, 물류센터 화재에 3분기 영업손실 6423억…매출은 14조",
-     "press": "news.mtn.co.kr",
-     "publishedAt": "2026-11-03T22:16:00.000Z",
-     "link": "https://news.mtn.co.kr/article/2026110407152566412"
+     "title": "쿠팡, 3분기 6423억원 영업손실…3년간 번 돈 사실상 날렸다",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-03T22:29:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000079358"
     },
     {
-     "title": "\"화재 손실 빼도 적자\" 고객 돌아왔는데 이익은 반토막…쿠팡 3Q 수익성...",
-     "press": "techm.kr",
-     "publishedAt": "2026-11-03T22:16:00.000Z",
-     "link": "https://www.techm.kr/news/articleView.html?idxno=156875"
+     "title": "쿠팡, 매출 14조원에도 적자 지속… 올해 영업손실 1조8318억원",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-03T22:28:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=100565"
     },
     {
-     "title": "[종합] 쿠팡Inc, 3분기 매출 늘었지만 영업손실 6423억원… 화재손실 반...",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-03T22:16:00.000Z",
-     "link": "https://www.viva100.com/article/20261104500014"
+     "title": "쿠팡, 3분기 만에 사상 최대 영업적자…3년간 번 이익 반납(종합)",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-03T22:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005837637?sid=101"
     }
    ]
   },
@@ -47,30 +47,94 @@
    "sources": [
     "nate"
    ],
-   "articles90": 35,
-   "recent20": 13,
-   "press": 32,
-   "firstArticleAt": "2026-11-03T20:55:00.000Z",
+   "articles90": 36,
+   "recent20": 11,
+   "press": 33,
+   "firstArticleAt": "2026-11-03T21:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김여정, 바이낸스사태 배후 지목에 재차 반발 \"미국의 악의적 기도\"",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-03T22:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005349972?sid=100"
+     "title": "김여정, 바이낸스 해킹 북한 배후설 재차 반발 “미국의 악의적 기도”",
+     "press": "vop.co.kr",
+     "publishedAt": "2026-11-03T22:28:00.000Z",
+     "link": "https://vop.co.kr/A00001697450.html"
     },
     {
-     "title": "바이낸스 창업자 “AI 이용한 해킹 늘 것…은행도 위험”",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-03T22:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202366?sid=104"
+     "title": "김여정, 바이낸스 사태에 \"선택지에 대화 있지만 국익 동일시 아냐\"",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-03T22:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000963482?sid=100"
     },
     {
-     "title": "‘대외관계 총괄’ 김여정, 바이낸스 사태에 “선택지에 대화 포함”",
-     "press": "weekly.khan.co.kr",
-     "publishedAt": "2026-11-03T22:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/033/0000053137?sid=100"
+     "title": "바이낸스, 5개월 걸친 北해킹 경로 공개…가짜 면접으로 직원 정보 획득",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-03T22:28:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=778723"
+    }
+   ]
+  },
+  {
+   "keyword": "amd 주가",
+   "sources": [
+    "google"
+   ],
+   "articles90": 22,
+   "recent20": 5,
+   "press": 21,
+   "firstArticleAt": "2026-11-03T21:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[속보] 뉴욕증시, 오라클 5.85%·AMD 3.65% 급등…엔비디아·마이크론 강...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-03T22:30:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=622866"
+    },
+    {
+     "title": "마이크론 855달러·AMD 483달러…반도체 대형주 일제히 '환호성'",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-03T22:30:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=501055"
+    },
+    {
+     "title": "AMD, 실적·전망 기대 웃돌아… 시간외 8% 급등",
+     "press": "it.chosun.com",
+     "publishedAt": "2026-11-03T22:24:00.000Z",
+     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000000183"
+    }
+   ]
+  },
+  {
+   "keyword": "SK하이닉스 장비 반입 보류",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 18,
+   "recent20": 1,
+   "press": 17,
+   "firstArticleAt": "2026-11-03T21:02:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“美 정부, SK하이닉스 ‘중국 공장’ 장비반입 제동”",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-03T22:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001882877?sid=101"
+    },
+    {
+     "title": "SK하이닉스, 뉴욕 반도체 공장 건설 차질⋯美, 다롄공장 장비 반입 불허",
+     "press": "autodaily.co.kr",
+     "publishedAt": "2026-11-03T22:10:00.000Z",
+     "link": "https://www.autodaily.co.kr/news/articleView.html?idxno=601750"
+    },
+    {
+     "title": "“美, SK하이닉스 中공장 장비반입 제동…뉴욕 공장투자도 차질” <로이...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-03T22:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002718429?sid=104"
     }
    ]
   },
@@ -79,13 +143,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 30,
+   "articles90": 15,
    "recent20": 1,
-   "press": 30,
-   "firstArticleAt": "2026-11-03T21:00:00.000Z",
+   "press": 15,
+   "firstArticleAt": "2026-11-03T21:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "10월 외환보유액 4431억6000만달러…두 달 만에 반등, 세계 9위 복귀",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-03T22:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003481839?sid=101"
+    },
     {
      "title": "외환보유액 두 달 만에 반등…예치금 늘고 유가증권 줄어",
      "press": "straightnews.co.kr",
@@ -97,76 +167,38 @@
      "press": "mbnmoney.mbn.co.kr",
      "publishedAt": "2026-11-03T21:46:00.000Z",
      "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005954440"
-    },
-    {
-     "title": "외환보유액 한 달 만에 반등…예치금 63.2억달러 증가",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-03T21:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002393255?sid=101"
     }
    ]
   },
   {
-   "keyword": "SK하이닉스 장비 반입 보류",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 19,
-   "recent20": 2,
-   "press": 19,
-   "firstArticleAt": "2026-11-03T20:54:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“美, SK하이닉스 中공장 장비반입 제동…뉴욕 공장투자도 차질” <로이...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-03T22:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002718429?sid=104"
-    },
-    {
-     "title": "SK하이닉스, 뉴욕 반도체 공장 건설 차질⋯美, 다롄공장 장비 반입 불허",
-     "press": "autodaily.co.kr",
-     "publishedAt": "2026-11-03T22:10:00.000Z",
-     "link": "https://www.autodaily.co.kr/news/articleView.html?idxno=601750"
-    },
-    {
-     "title": "로이터 “美, SK하이닉스 中 공장 증설 장비 반입 보류”",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-03T21:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202364?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "amd 주가",
+   "keyword": "보안",
    "sources": [
     "google"
    ],
-   "articles90": 18,
-   "recent20": 5,
-   "press": 17,
-   "firstArticleAt": "2026-11-03T21:20:00.000Z",
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-03T21:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "AI 특수 누린 AMD…3분기 최대 실적에 시간외 9% 급등",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-03T22:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000541542?sid=101"
+     "title": "스노우플레이크, 알아서 일하는 AI 에이전트 공개…보안·통제 강화",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-03T22:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005436205?sid=105"
     },
     {
-     "title": "AMD, 3분기 매출 45%↑⋯시간외서 8%↑[마켓핫]",
-     "press": "etoday.co.kr",
+     "title": "[오늘 뉴스 4컷] 정부, 사이버보안 총괄 체계 정비…정치권, 조작기소 특...",
+     "press": "segye.com",
      "publishedAt": "2026-11-03T22:14:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2643739"
+     "link": "https://n.news.naver.com/mnews/article/022/0004172350?sid=100"
     },
     {
-     "title": "AMD, 3분기 데이터센터 매출 갑절 증가...\"AI 에이전트 CPU 수요 견인\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-03T22:06:00.000Z",
-     "link": "https://www.ajunews.com/view/20261104070010633"
+     "title": "[빗썸 보안 민낯⑥] 빗썸, 123억 보안투자 늘렸지만…IT 확대 속도 못 미...",
+     "press": "news.ifm.kr",
+     "publishedAt": "2026-11-03T22:00:00.000Z",
+     "link": "https://news.ifm.kr/news/articleView.html?idxno=483322"
     }
    ]
   },
@@ -175,10 +207,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-03T21:01:00.000Z",
+   "articles90": 10,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-03T21:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -199,38 +231,6 @@
      "press": "mk.co.kr",
      "publishedAt": "2026-11-03T22:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/009/0005758606?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "보안",
-   "sources": [
-    "google"
-   ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-03T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘 뉴스 4컷] 정부, 사이버보안 총괄 체계 정비…정치권, 조작기소 특...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-03T22:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004172350?sid=100"
-    },
-    {
-     "title": "[빗썸 보안 민낯⑥] 빗썸, 123억 보안투자 늘렸지만…IT 확대 속도 못 미...",
-     "press": "news.ifm.kr",
-     "publishedAt": "2026-11-03T22:00:00.000Z",
-     "link": "https://news.ifm.kr/news/articleView.html?idxno=483322"
-    },
-    {
-     "title": "챗GPT 출시 전부터 오픈AI 직원들 보안 우려 제기",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-03T21:34:00.000Z",
-     "link": "https://www.tokenpost.kr/news/ai/432222"
     }
    ]
   },
@@ -273,7 +273,7 @@
     "nate"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-03T21:15:00.000Z",
    "exclusive": false,
@@ -300,34 +300,34 @@
    ]
   },
   {
-   "keyword": "띠별 운세",
+   "keyword": "32기 영수, 몰카 논란 사과",
    "sources": [
-    "google"
+    "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-03T21:00:00.000Z",
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-03T21:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오늘의 운세] 띠별 운세 11월 4일",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-03T22:02:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=400210"
+     "title": "\"변명 여지 없이 제 잘못\"…'나는 솔로' 32 영수, 몰카 논란 사과",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-03T22:26:00.000Z",
+     "link": "https://www.ajunews.com/view/20261104071904646"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 4일 (수) 띠별운세 '겨울 채비를 하자'",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-03T21:40:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103266"
+     "title": "‘계약결혼’ 32기 영수, 방송 중 당당한 몰카 촬영 “기념 영상 선물하...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-03T22:17:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001184271"
     },
     {
-     "title": "[AI] 오늘의 띠별 운세...2026.11.4(수요일)",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-03T21:30:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=66989"
+     "title": "‘나는솔로’ 32기 영수, 몰카 사과",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-03T21:48:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611040014"
     }
    ]
   },
@@ -364,41 +364,73 @@
    ]
   },
   {
-   "keyword": "32기 영수, 몰카 논란 사과",
+   "keyword": "띠별 운세",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T21:14:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-03T21:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘계약결혼’ 32기 영수, 방송 중 당당한 몰카 촬영 “기념 영상 선물하...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-03T22:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001184271"
+     "title": "[오늘의 운세] 11월 4일 양띠 인연 닿고 호랑이띠 일 술술 풀려",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-03T22:20:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3081290"
     },
     {
-     "title": "‘나는솔로’ 32기 영수, 몰카 사과",
+     "title": "[오늘의 운세] 띠별 운세 11월 4일",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-03T22:02:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=400210"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 4일 (수) 띠별운세 '겨울 채비를 하자'",
+     "press": "dailypop.kr",
+     "publishedAt": "2026-11-03T21:40:00.000Z",
+     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103266"
+    }
+   ]
+  },
+  {
+   "keyword": "재혼 황후",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T21:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘재혼황후’ 3일 OTT 공개",
      "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-03T21:48:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611040014"
+     "publishedAt": "2026-11-03T22:10:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611040020"
     },
     {
-     "title": "'나솔' 32기 영수, 국화 몰카 사과-개 같은 전쟁은 어디?",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-03T21:14:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=94495"
+     "title": "[주말에 몰아보기] 신민아→이종석 '재혼 황후', 막장에 왕관 씌운 제법...",
+     "press": "ize.co.kr",
+     "publishedAt": "2026-11-03T22:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/465/0000020751"
+    },
+    {
+     "title": "[잇슈 컬처] 신민아·주지훈·이종석 ‘재혼 황후’ 첫 공개",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-03T21:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012286786?sid=103"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 479,
+  "flagged": 481,
   "matched": 186,
   "avgLeadMin": 274,
   "recent": [
