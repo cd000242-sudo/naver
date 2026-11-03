@@ -3,6 +3,7 @@ import { assertProvider as assertProviderFn, normalizeImageFallbackPolicy } from
 // ✅ [v2.10.335] 나노바나나 3종 → 모델 키 SSOT
 import { NANO_PROVIDER_TO_MODEL_KEY } from './runtime/imageEngineCatalog.js';
 import { isRetiredImageEngine, retiredImageEngineLabel } from './runtime/retiredImageEngines.js';
+import { isCollectPhotosEngine } from './runtime/collectPhotosPolicy.js';
 import {
   generateWithNanoBananaPro,
   abortImageGeneration as abortNanoBananaImageGeneration,
@@ -439,6 +440,12 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
   //   falling through to the unsupported-provider fallback below would silently bill another paid engine.
   if (isRetiredImageEngine(normalizedProvider)) {
     throw new Error(`선택하셨던 ${retiredImageEngineLabel(normalizedProvider)} 이미지 엔진은 지원이 끝났습니다. 이미지 엔진을 다시 골라 주세요.`);
+  }
+  // [2026-11-03] "관련 사진 찾기" collects real photos instead of generating, so none of the prompt/engine plumbing below applies.
+  //   Empty headings stay empty: no other engine is asked (no silent fallback).
+  if (isCollectPhotosEngine(normalizedProvider)) {
+    const { generateCollectedPhotos } = await import('./main/services/collectPhotosEngine.js');
+    return await generateCollectedPhotos(options, onImageGenerated);
   }
   // [2026-10-10] 나노바나나는 나노바나나2 한 종류만 노출 — 옛 저장값·큐가 pro/2.5 provider로 직접 들어와도
   //   고가 3 Pro(₩185)·2.5(한글 깨짐)를 부르지 않고 나노바나나2로 보낸다. 아래 pro/2.5 라우팅 자체는 백엔드 호환용으로 남긴다.

@@ -1,4 +1,4 @@
-import type { IssueCandidateImage, IssueCollectPayload } from '../../crawler/issueHarness/types.js';
+import type { IssueCandidateImage, IssueCollectPayload, IssueHarnessScope } from '../../crawler/issueHarness/types.js';
 import { hammingDistance } from '../../crawler/issueHarness/candidateFetcher.js';
 import { dailyImageSourceTier } from './dailyImageSourcePolicy.js';
 import type { DailyRefillItem } from './dailyImageRefill.js';
@@ -17,10 +17,19 @@ export interface DailyCollectDeps {
   /** Downloads and decodes; null when the photo cannot be used (dead link, too small, not an image). */
   fetch(candidate: IssueCandidateImage): Promise<{ buffer: Buffer; dhash: bigint } | null>;
   save(buffer: Buffer, slot: DailyRefillItem): Promise<string>;
+  /** Optional publisher name for the source line (og:site_name); the page host is used when it returns nothing. */
+  describeSource?(candidate: IssueCandidateImage): Promise<string | undefined>;
   log?(message: string): void;
   signal?: AbortSignal;
 }
-export interface DailyCollectInput { title: string; headings: readonly string[]; intro?: string; mainKeyword?: string; slots: readonly DailyRefillItem[] }
+/**
+ * Narrowing used by the "관련 사진 찾기" engine only; the daily post passes none. `ownHeadingOnly` leaves a slot empty
+ * when its own heading found nothing (no borrowing from other headings).
+ */
+export interface DailyCollectScope { ownHeadingOnly?: boolean }
+export interface DailyCollectInput {
+  title: string; headings: readonly string[]; intro?: string; mainKeyword?: string; slots: readonly DailyRefillItem[]; scope?: DailyCollectScope;
+}
 
 /** Near-identical photos (resized or re-encoded copies) differ by only a few dHash bits. */
 const SAME_PHOTO_BITS = 8;
@@ -41,7 +50,7 @@ function hostOf(url: string | undefined): string {
  * run cannot ask, and collecting must not cost the owner money. Photos are re-encoded as JPEG because the
  * Naver editor rejects some formats the web serves (.avif was refused in the 10-24 diagnostic report).
  */
-export function createDailyCollectDeps(context: { title: string; postId?: string; log?: (message: string) => void; signal?: AbortSignal }): DailyCollectDeps {
+export function createDailyCollectDeps(context: { title: string; postId?: string; log?: (message: string) => void; signal?: AbortSignal; scope?: IssueHarnessScope }): DailyCollectDeps {
   return {
     log: context.log, signal: context.signal,
     async collect(payload) {
@@ -51,7 +60,7 @@ export function createDailyCollectDeps(context: { title: string; postId?: string
       const config = await loadConfig();
       applyConfigToEnv(config);
       const { planCaller, planEngineLabel, visionRoute } = resolveIssueCollectRoutes(config, false);
-      return collectIssueImages(payload, { planCaller, planEngineLabel, visionRoute });
+      return collectIssueImages(payload, { planCaller, planEngineLabel, visionRoute, ...(context.scope ? { scope: context.scope } : {}) });
     },
     async fetch(candidate) {
       const { fetchAndValidateCandidate } = await import('../../crawler/issueHarness/candidateFetcher.js');
@@ -73,6 +82,7 @@ export async function collectDailyImages(input: DailyCollectInput, deps: DailyCo
   //   with N photos for N+1 slots and the thumbnail stayed empty. The title gets its own search.
   const wantsThumbnail = input.slots.some(slot => slot.isThumbnail) && !input.headings.includes(input.title);
   const searched = wantsThumbnail ? [input.title, ...input.headings] : [...input.headings];
+  const ownOnly = input.scope?.ownHeadingOnly === true;
   const result = await deps.collect({
     title: input.title, headings: searched.map(title => ({ title })),
     ...(input.intro ? { intro: input.intro } : {}), ...(input.mainKeyword ? { mainKeyword: input.mainKeyword } : {}),
@@ -83,13 +93,16 @@ export async function collectDailyImages(input: DailyCollectInput, deps: DailyCo
     const placed = (result.images?.[heading] || []).map(url => pool.find(c => c.url === url) || { url, sourceName: 'collected', query: heading });
     return [heading, ordered([...placed, ...pool])];
   }));
-  const everything = ordered(searched.flatMap(heading => byHeading.get(heading) || []));
+  const everything = ownOnly ? [] : ordered(searched.flatMap(heading => byHeading.get(heading) || []));
   const triedUrls = new Set<string>();
   const usedHashes: bigint[] = [];
   const filled: DailyCollectedImage[] = [];
   for (const slot of input.slots) {
     if (deps.signal?.aborted) throw new Error('PUBLISH_CANCELLED');
-    const own = byHeading.get(slot.isThumbnail ? searched[0] : slot.heading) || [];
+    const cover = byHeading.get(searched[0]) || [];
+    // A scoped run has no catch-all pool, so its cover may also take the first heading's photo.
+    const own = !slot.isThumbnail ? byHeading.get(slot.heading) || []
+      : ownOnly ? [...cover, ...(byHeading.get(input.headings[0]) || [])] : cover;
     let tries = 0;
     for (const candidate of [...own, ...everything]) {
       if (tries >= TRIES_PER_SLOT) break;
@@ -102,8 +115,9 @@ export async function collectDailyImages(input: DailyCollectInput, deps: DailyCo
       if (!filePath) continue;
       usedHashes.push(fetched.dhash);
       const source = candidate.pageUrl || candidate.url;
+      const siteName = await Promise.resolve(deps.describeSource?.(candidate)).catch(() => undefined);
       filled.push({ filePath, heading: slot.heading, isThumbnail: slot.isThumbnail, provider: 'collected',
-        sourceUrl: source, caption: `출처: ${hostOf(source) || candidate.sourceName}` });
+        sourceUrl: source, caption: `출처: ${siteName || hostOf(source) || candidate.sourceName}` });
       break;
     }
   }

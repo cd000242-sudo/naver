@@ -15,6 +15,21 @@ export function hasIssueCopyrightConsent(): boolean {
     }
 }
 
+/**
+ * [2026-11-03] The "관련 사진 찾기" engine stores its agreement (same notice text) in the main config. Honour it here so
+ * the URL / issue collection paths do not ask a second time. Version 1 = the notice below; a newer notice raises it.
+ */
+const ISSUE_CONSENT_CONFIG_MIN_VERSION = 1;
+async function issueConsentRecordedInConfig(): Promise<boolean> {
+    try {
+        const record = (await (window as any).api?.getConfig?.())?.imageCollectConsent;
+        return !!record && typeof record.version === 'number' && record.version >= ISSUE_CONSENT_CONFIG_MIN_VERSION
+            && typeof record.agreedAt === 'string' && record.agreedAt.length > 0;
+    } catch {
+        return false;
+    }
+}
+
 function issueConsentBuildOverlay(): HTMLDivElement {
     const overlay = document.createElement('div');
     overlay.id = ISSUE_CONSENT_OVERLAY_ID;
@@ -51,8 +66,8 @@ function issueConsentBuildOverlay(): HTMLDivElement {
  * Resolve true only after explicit agreement (checkbox + button).
  * Already-agreed users pass through instantly.
  */
-export function ensureIssueCopyrightConsent(): Promise<boolean> {
-    if (hasIssueCopyrightConsent()) return Promise.resolve(true);
+export async function ensureIssueCopyrightConsent(): Promise<boolean> {
+    if (hasIssueCopyrightConsent() || await issueConsentRecordedInConfig()) return true;
     if (document.getElementById(ISSUE_CONSENT_OVERLAY_ID)) return Promise.resolve(false);
 
     return new Promise<boolean>((resolve) => {

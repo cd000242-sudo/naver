@@ -97,6 +97,15 @@ export interface IssueProgressInfo {
   message: string;
 }
 
+/**
+ * Narrows one collection run (2026-11-03 "관련 사진 찾기"): only the named source adapters run and a candidate must
+ * pass `candidateFilter` before it enters the funnel. Without a scope every source runs, as before.
+ */
+export interface IssueHarnessScope {
+  allowedSources?: readonly string[];
+  candidateFilter?: (candidate: IssueCandidateImage) => boolean;
+}
+
 export interface IssueHarnessOptions {
   /** How many images to place per heading (default 1) */
   perHeadingTarget?: number;
@@ -116,6 +125,8 @@ export interface IssueHarnessOptions {
   visionRoute?: import('./visionRoute.js').IssueVisionRoute | null;
   /** Called at each pipeline stage — wired to the renderer progress modal. */
   onProgress?: (info: IssueProgressInfo) => void;
+  /** Optional narrowing of sources and candidates; the daily post and the issue tab leave it out. */
+  scope?: IssueHarnessScope;
 }
 
 export interface IssueHarnessStats {

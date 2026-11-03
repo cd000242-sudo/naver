@@ -684,6 +684,7 @@ function isEmptyImageSuccessAllowed(options: any, result: any): boolean {
     options?.headingImageMode === 'none' ||
     provider === 'skip' ||
     provider === 'local-folder' ||
+    provider === 'collect-photos' || // 관련 사진 찾기: 맞는 사진이 없는 칸은 비워 두는 것이 정상
     message.includes('thumbnailOnly') ||
     message.includes('이미지 없이') ||
     message.includes('textOnlyPublish');

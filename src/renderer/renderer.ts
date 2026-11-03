@@ -373,6 +373,8 @@ import { initImageGenStudio } from './modules/imageGenStudio.js';
 import { wireSelectDropshotRow, wireSelectFlowRow } from './modules/dropshotLoginUi.js';
 // [2026-10-10] 젠스파크 로그인·모델 행
 import { gsWireSelectRow, gsLoadModelFromConfig } from './modules/gensparkLoginUi.js';
+// [2026-11-03] 관련 사진 찾기 엔진: 고르는 순간 저작권 안내 동의
+import { collectEngineWireSelect } from './modules/imageCollectEngineConsent.js';
 import { initImageLibrary, loadLibraryImages, useLibraryImage, switchToTab, generateFavoritesContent, generateTemplatesContent, getEnhancedTemplates } from './modules/contentPreviewAndLibrary.js';
 declare let thumbnailBackgroundImage: string | null;
 declare let thumbnailBackgroundDataUrl: string | null;
@@ -10953,6 +10955,7 @@ wireSelectDropshotRow({
 });
 // [2026-10-10] 이미지 관리 탭 엔진 셀렉터 — 젠스파크 선택 시 로그인·모델 행 노출
 gsWireSelectRow({ selectId: 'image-source-select', prefix: 'mgmt' });
+collectEngineWireSelect('image-source-select');
 void gsLoadModelFromConfig();
 wireSelectFlowRow({
   selectId: 'image-source-select',

@@ -192,6 +192,7 @@ const NON_GENERATIVE_IMAGE_PROVIDERS = new Set([
   'local-folder',
   'collected-image',
   'collected-image-with-text',
+  'collect-photos', // [2026-11-03] real photos are collected, never drawn: no brief, no thumbnail director
   'loremflickr',
   'picsum',
   'placeholder',

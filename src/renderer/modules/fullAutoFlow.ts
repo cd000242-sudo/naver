@@ -2901,6 +2901,7 @@ async function generateAIImagesForHeadings(headings, formData, structuredContent
         'flow': 'Flow (Nano Banana Pro, AI Pro 무료)',
         'dropshot': '리더스 나노바나나 무제한',
         'genspark': '젠스파크',
+        'collect-photos': '관련 사진 찾기',
         'nano-banana': '나노바나나',
         'nano-banana-2': '나노바나나2',
         'openai-image': 'OpenAI DALL-E',

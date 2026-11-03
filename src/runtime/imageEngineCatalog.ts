@@ -9,6 +9,7 @@
  *    따라 가변적이며 유료 전용일 수 있다. 검증 불가한 고정 수치 대신 정직한 안내를 노출한다.
  */
 import { GEMINI_IMAGE_MODELS, OPENAI_IMAGE_MODELS } from './modelRegistry.js';
+import { COLLECT_PHOTOS_ENGINE, COLLECT_PHOTOS_ENGINE_LABEL } from './collectPhotosPolicy.js';
 
 export interface ImageEngineSpec {
   /** UI provider 값 — localStorage 저장 + generateImages 디스패치 공통 키 */
@@ -138,6 +139,22 @@ export const GENSPARK: ImageEngineSpec = {
   freeTierNote: '젠스파크 무제한(No credit cost) 모델은 이미지당 추가비용 0원이며 크레딧 차감 모델은 설정에서 따로 고른 경우에만 쓰입니다. 로그인 세션이 필요합니다.',
 };
 
+/**
+ * 관련 사진 찾기 — 생성이 아니라 뉴스·기사 실사진 수집. 쇼핑커넥트 상품 이미지에는 쓰지 않는다.
+ * AI 생성엔진 목록(IMAGE_ENGINE_CATALOG)에는 넣지 않는다: 그 목록은 생성 모델 ID·비용 시험이 고정하고 있고 이 엔진은 모델이 없다.
+ */
+export const COLLECT_PHOTOS: ImageEngineSpec = {
+  value: COLLECT_PHOTOS_ENGINE,
+  label: COLLECT_PHOTOS_ENGINE_LABEL,
+  tagline: '소제목에 맞는 뉴스·기사 사진을 찾아 넣음 · 없으면 빈 칸 · 비용 0원 · 저작권 안내 동의 필요',
+  model: 'collector/news-photos',
+  forceModelKey: null,
+  costKrw: 0,
+  koreanText: false,
+  icon: '📷',
+  freeTierNote: '이미지 생성이 아니라 웹에 공개된 뉴스·기사 사진을 수집합니다. 비용은 들지 않으며, 사진 사용에 대한 책임은 사용자에게 있습니다.',
+};
+
 /** AI 생성엔진 카탈로그 — 그리드/드롭다운 노출 순서 */
 // [2026-10-10] 사용자에게 보이는 목록에서 나노바나나 프로·2.5는 뺐다 (스펙 상수와 NANO_PROVIDER_TO_MODEL_KEY는 옛 값 호환용으로 유지).
 export const IMAGE_ENGINE_CATALOG: ImageEngineSpec[] = [
@@ -150,7 +167,7 @@ export const IMAGE_ENGINE_CATALOG: ImageEngineSpec[] = [
 
 /** provider 값 → 엔진 스펙 조회 */
 export function getImageEngineSpec(value: string): ImageEngineSpec | undefined {
-  return IMAGE_ENGINE_CATALOG.find((e) => e.value === value);
+  return IMAGE_ENGINE_CATALOG.find((e) => e.value === value) ?? (value === COLLECT_PHOTOS.value ? COLLECT_PHOTOS : undefined);
 }
 
 /** 나노바나나 3종 provider 값 → nanoBananaProGenerator forceModelKey */

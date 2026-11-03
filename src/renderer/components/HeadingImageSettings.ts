@@ -8,6 +8,8 @@
 import { bindDropshotLogin, refreshDropshotLoginStatus } from '../modules/dropshotLoginUi.js';
 // [2026-10-10] 젠스파크 로그인·모델 행
 import { gsRowHtml, gsApplyEngineToRow } from '../modules/gensparkLoginUi.js';
+// [2026-11-03] 관련 사진 찾기는 저작권 안내에 동의해야 저장된다
+import { collectEngineAllowPick } from '../modules/imageCollectEngineConsent.js';
 
 /** 연동 상태 줄은 계정 이메일·서버 메시지를 그대로 넣으므로 이스케이프한다. */
 function escapeHtmlForStatus(value: string): string {
@@ -60,6 +62,7 @@ export type ActiveImageSource =
   | 'flow'
   | 'dropshot'
   | 'genspark'
+  | 'collect-photos'
   | 'local-folder';
 
 /**
@@ -110,6 +113,7 @@ export const SOURCE_NAMES: Record<GlobalImageSource, string> = {
   'flow': '🍌 Flow (Nano Banana 2)',
   'dropshot': '🍌 리더스 나노바나나 무제한 (구독자 무제한 · 추가비용 0원)',
   'genspark': '✨ 젠스파크 (모델 선택 · 로그인 필요)',
+  'collect-photos': '📷 관련 사진 찾기 (뉴스·기사 사진 · 무료)',
   'local-folder': '📂 내 폴더'
 };
 
@@ -333,7 +337,7 @@ export function setGlobalImageSource(source: GlobalImageSource): void {
   // ✅ [v2.10.302] dall-e-3 제거 — UI 완전 폐기 (v2.10.295 UI option 삭제 + v2.10.302 write 차단)
   //   기존 위험: 사용자가 서브 모달에서 dall-e-3 카드 클릭 시 VALID_AI_SOURCES 통과해 localStorage 저장 →
   //              imageGenerator.ts:335 마이그레이션 분기 진입. 폐기 표시인데 실질 진입 경로 잔존.
-  const VALID_AI_SOURCES: GlobalImageSource[] = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'openai-image', 'imagefx', 'flow', 'dropshot', 'genspark', 'local-folder'];
+  const VALID_AI_SOURCES: GlobalImageSource[] = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'openai-image', 'imagefx', 'flow', 'dropshot', 'genspark', 'collect-photos', 'local-folder'];
   if (VALID_AI_SOURCES.includes(normalized)) {
     safeLocalStorageSet('fullAutoImageSource', normalized);
     console.log(`[HeadingImageSettings] 글로벌 + 풀오토 이미지 소스 동기화: ${normalized}`);
@@ -362,7 +366,7 @@ export function getFullAutoImageSource(): GlobalImageSource {
   // ✅ [v2.10.302] dall-e-3 제거 (UI 완전 폐기) + pollinations는 UI 미노출이나
   //   기존 사용자 localStorage 호환성을 위해 read VALID에는 유지 — write VALID_AI_SOURCES만 제거.
   // ✅ [v2.11.7] 'dropshot' 추가 — 리더스 나노바나나 무제한
-  const VALID_SOURCES: GlobalImageSource[] = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'pollinations', 'openai-image', 'imagefx', 'flow', 'dropshot', 'genspark', 'local-folder'];
+  const VALID_SOURCES: GlobalImageSource[] = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'pollinations', 'openai-image', 'imagefx', 'flow', 'dropshot', 'genspark', 'collect-photos', 'local-folder'];
 
   // 정규화 read (별칭이 저장돼있으면 정식 키로 변환)
   const fullAutoSaved = normalizeImageSource(safeLocalStorageGet('fullAutoImageSource'));
@@ -977,6 +981,12 @@ export function createHeadingImageModal(): void {
             <div style="font-size: 12px; font-weight: 600; color: #5b21b6;">젠스파크</div>
             <div style="font-size: 10px; color: #6d28d9;">모델 선택 · 로그인 필요</div>
           </label>
+          <!-- [2026-11-03] 관련 사진 찾기: 생성이 아니라 뉴스·기사 실사진 수집. 고르면 저작권 안내 동의가 먼저 뜬다 -->
+          <label class="source-option" data-value="collect-photos" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #ecfdf5, #d1fae5); text-align: center; transition: all 0.2s; position: relative;">
+            <div style="font-size: 1.5rem;">📷</div>
+            <div style="font-size: 12px; font-weight: 600; color: #065f46;">관련 사진 찾기</div>
+            <div style="font-size: 10px; color: #047857;">뉴스·기사 사진 · 무료 · 없으면 빈 칸</div>
+          </label>
           <label class="source-option" data-value="local-folder" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #e0e7ff, #c7d2fe); text-align: center; transition: all 0.2s; position: relative;">
             <div style="font-size: 1.5rem;">📂</div>
             <div style="font-size: 12px; font-weight: 600; color: #4338ca;">내 폴더</div>
@@ -1498,6 +1508,11 @@ export function createHeadingImageModal(): void {
 
   // ✅ AI 엔진 서브 모달 확인 버튼
   document.getElementById('image-source-confirm')?.addEventListener('click', async () => {
+    // [2026-11-03] 관련 사진 찾기: 동의 안내를 거친 뒤에만 저장한다. 거절하면 아무것도 저장하지 않고 이전 선택을 그대로 둔다.
+    if (!(await collectEngineAllowPick(selectedSourceValue))) {
+      (window as any).toastManager?.warning?.('📷 저작권 안내에 동의하지 않으면 관련 사진 찾기를 쓸 수 없어요. 이전 선택을 그대로 둡니다.');
+      return; // 모달을 닫지 않는다 — 다른 엔진을 고를 수 있다
+    }
     // ✅ [2026-03-22] local-folder 선택 시 폴더 선택 다이얼로그
     if (selectedSourceValue === 'local-folder') {
       try {

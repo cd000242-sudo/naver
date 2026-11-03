@@ -644,6 +644,8 @@ try {
     'dropshotLoginUi.js',
     // [2026-10-10] 젠스파크 로그인·모델 행
     'gensparkLoginUi.js',
+    // [2026-11-03] 관련 사진 찾기 엔진 저작권 동의 게이트 (renderer.ts 가 import)
+    'imageCollectEngineConsent.js',
       'articleTableComposer.js',
       'contentPolicyDashboard.js',
       'revenueOperationsDashboard.js',

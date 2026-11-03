@@ -595,6 +595,7 @@ export function initHeadingImageGeneration(): void {
     'flow': 'Flow (Nano Banana Pro)', // ✅ [v1.4.80]
     'openai-image': 'OpenAI DALL-E',
     'local-folder': '내 폴더',
+    'collect-photos': '관련 사진 찾기',
   };
 
   // ✅ [2026-02-02] 실시간 이미지 미리보기 패널 (Live Preview)

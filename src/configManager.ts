@@ -237,6 +237,8 @@ export interface AppConfig {
   openaiImageQuality?: 'low' | 'medium' | 'high' | 'xhigh' | 'max' | 'auto';
   // [2026-10-10] 젠스파크 이미지 모델 id(gensparkModels 의 id). 모르는 값도 그대로 두고 생성기가 GENSPARK_MODEL_NOT_FOUND 로 멈춘다.
   gensparkImageModel?: string;
+  // [2026-11-03] Copyright agreement for the "관련 사진 찾기" image engine (runtime/collectPhotosPolicy). Main reads it, so unattended flows can check it.
+  imageCollectConsent?: { version: number; agreedAt: string };
   // ✅ USD→KRW 환율 (이미지 비용 원화 표시용, 기본 1400)
   usdToKrwRate?: number;
   // 이미지 설정 프리셋
@@ -507,7 +509,7 @@ export async function loadConfig(): Promise<AppConfig> {
           'perplexityModel', 'geminiPlanType', 'geminiUseFreeQuotaBeforePaid',
           'customImageSavePath',
           'openaiImageModel', 'openaiImageQuality', 'usdToKrwRate',
-          'gensparkImageModel',
+          'gensparkImageModel', 'imageCollectConsent',
         ];
         let mergedCount = 0;
         /*
@@ -980,6 +982,7 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
         // ✅ OpenAI 이미지 모델·품질·환율 — 부분 saveConfig로 인한 silent 손실 차단
         'openaiImageModel', 'openaiImageQuality', 'usdToKrwRate',
         'gensparkImageModel', // [2026-10-10] 부분 저장 시 젠스파크 모델 선택 보존
+        'imageCollectConsent', // [2026-11-03] 관련 사진 찾기 저작권 동의 — 부분 저장으로 사라지면 무인 발행이 멈춘다
         'userDisplayName', 'userEmail',
         // ✅ [v2.10.58] 비용 절감 토글 4종 보존
         'costSaverMode', 'useCompressedPrompt', 'useCrawlSummary', 'subWorkProvider',

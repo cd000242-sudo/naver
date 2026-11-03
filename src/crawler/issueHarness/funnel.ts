@@ -13,7 +13,7 @@ import { runVisionGate, type VisionGateBudget, type VisionSubjectContext } from 
 import { detectWatermark } from './watermarkCheck.js';
 import { isPressAgencyHost } from './pressHosts.js';
 import type { IssueVisionRoute } from './visionRoute.js';
-import type { IssueCandidateImage } from './types.js';
+import type { IssueCandidateImage, IssueHarnessScope } from './types.js';
 
 const LOG = '[IssueFunnel]';
 const MAX_FETCHES_PER_HEADING = 30;
@@ -219,4 +219,14 @@ export async function refineHeadingCandidates(
   }
 
   return { clean: rankCleanCandidates(clean), fetched, duplicates, visionUsed, watermarkRejected, attemptedUrls };
+}
+
+/** The tier steps whose adapter the scope allows (all steps when there is no allow-list). */
+export function scopeSteps<T extends { adapter: { name: string } }>(steps: readonly T[], scope?: IssueHarnessScope): T[] {
+  const allowed = scope?.allowedSources;
+  return allowed ? steps.filter((step) => allowed.includes(step.adapter.name)) : [...steps];
+}
+
+export function passesScope(candidate: IssueCandidateImage, scope?: IssueHarnessScope): boolean {
+  return !scope?.candidateFilter || scope.candidateFilter(candidate);
 }

@@ -116,6 +116,7 @@ const PRESERVE_FIELDS = [
     // ✅ OpenAI 이미지 모델·품질·환율 — 계정 이전·미러 복원 후 사용자 선택 유지
     'openaiImageModel', 'openaiImageQuality', 'usdToKrwRate',
     'gensparkImageModel', // [2026-10-10] 젠스파크 모델 선택 유지
+    'imageCollectConsent', // [2026-11-03] 관련 사진 찾기 저작권 동의 유지
 ];
 
 /**

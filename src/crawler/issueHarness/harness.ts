@@ -8,7 +8,7 @@
 
 import { buildIssueQueryPlan } from './queryFanout.js';
 import { filterIssueCandidates } from './urlPolicy.js';
-import { createPhashRegistry, refineHeadingCandidates, type FunnelOptions } from './funnel.js';
+import { createPhashRegistry, passesScope, refineHeadingCandidates, scopeSteps, type FunnelOptions } from './funnel.js';
 import type { FetchedCandidate } from './candidateFetcher.js';
 import { filterByCaptionEvidence } from './captionRelevanceGate.js';
 import { createVisionBudget } from './visionGate.js';
@@ -26,7 +26,7 @@ import type {
   IssueCandidateImage,
   IssueCollectPayload,
   IssueHarnessOptions,
-  IssueHarnessResult,
+  IssueHarnessResult, IssueHarnessScope,
   IssueSourceAdapter,
 } from './types.js';
 
@@ -109,7 +109,7 @@ async function collectCleanForHeading(
   qs: HeadingQuerySet,
   cap: number,
   target: number,
-  funnelOptions: Omit<FunnelOptions, 'cleanTarget'>,
+  funnelOptions: Omit<FunnelOptions, 'cleanTarget'>, scope?: IssueHarnessScope,
 ): Promise<{ clean: FetchedCandidate[]; poolSize: number; duplicates: number; visionUsed: boolean; watermarkRejected: number }> {
   const seenQueries = new Set<string>();
   const attempted = new Set<string>();
@@ -120,14 +120,14 @@ async function collectCleanForHeading(
   let visionUsed = false;
 
   const tiers: Array<{ label: string; steps: SourceStep[] }> = [
-    { label: '티어1(네이버·뉴스·DDG·유튜브·레딧)', steps: TIER1 },
-    { label: '티어2(구글·다음)', steps: TIER2 },
-    { label: '티어3(얀덱스·DC)', steps: TIER3 },
+    { label: '티어1(네이버·뉴스·DDG·유튜브·레딧)', steps: scopeSteps(TIER1, scope) },
+    { label: '티어2(구글·다음)', steps: scopeSteps(TIER2, scope) },
+    { label: '티어3(얀덱스·DC)', steps: scopeSteps(TIER3, scope) },
   ];
 
   for (const tier of tiers) {
     pool.push(...(await runTier(tier.steps, qs, seenQueries)));
-    const fresh = filterIssueCandidates(pool, cap).filter((c) => !attempted.has(c.url));
+    const fresh = filterIssueCandidates(pool, cap).filter((c) => !attempted.has(c.url) && passesScope(c, scope));
     console.log(`${LOG} "${qs.heading}" ${tier.label}: 신규 후보 ${fresh.length}장 → 깔때기 투입`);
     if (fresh.length > 0) {
       const refined = await refineHeadingCandidates(fresh, {
@@ -148,7 +148,7 @@ async function collectCleanForHeading(
   // 들어가지 않도록 엄격 캡션 게이트(주제어+장면 근거)를 통과한 것만 올린다(Vision 모드 포함).
   if (clean.length === 0 && qs.broaderQuery) {
     const found = filterIssueCandidates(await naverApiSource.search(qs.broaderQuery, 30), cap)
-      .filter((c) => !attempted.has(c.url));
+      .filter((c) => !attempted.has(c.url) && passesScope(c, scope));
     const wide = filterByCaptionEvidence(found, funnelOptions.subjectContext, funnelOptions.sceneTerms);
     if (wide.length > 0) {
       const refined = await refineHeadingCandidates(wide, { ...funnelOptions, cleanTarget: target });
@@ -238,7 +238,7 @@ export async function collectIssueImages(
         subjectType: plan.subjectType,
         headingBody: payload.headings[hi]?.body,
       },
-    });
+    }, options.scope);
     emit(
       base + slice * 0.6,
       `📥 [${hi + 1}/${totalHeadings}] 후보 ${refined.poolSize}장 검토 → 검증 통과 ${refined.clean.length}장`,

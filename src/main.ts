@@ -4131,7 +4131,8 @@ ipcMain.handle(
         originalRequestedImageCount > 0 &&
         headingImageMode !== 'none' &&
         providerForEmptyCheck !== 'skip' &&
-        providerForEmptyCheck !== 'local-folder';
+        providerForEmptyCheck !== 'local-folder' &&
+        providerForEmptyCheck !== 'collect-photos'; // 관련 사진 찾기: 맞는 사진이 없으면 칸을 비워 두는 것이 정상 결과
       if (shouldRequireImages && generatedImageCount === 0) {
         const providerLabel = String(options.provider || imageOptions.provider || 'unknown');
         const message = `[${providerLabel}] 이미지 생성 결과가 비어있습니다. 화면 결과 감지, 로그인 세션, 구독/쿼터, 또는 엔진 UI 변경을 확인해야 합니다.`;
@@ -4881,6 +4882,8 @@ import { selectItemsForHeadingImageMode } from './image/headingImageSelection.js
 import { getDailyPublishingContext, assertDailyPublishingImages, bindDailyPublishingCancellation, assertDailyScheduleDeadline } from './main/services/dailyPublishingExecutor.js';
 import { completeDailyImages } from './main/services/dailyImageRefill.js';
 import { collectDailyImages, createDailyCollectDeps } from './main/services/dailyImageCollect.js';
+import { setCollectPhotosLogSink } from './main/services/collectPhotosEngine.js';
+setCollectPhotosLogSink(sendLog); // 관련 사진 찾기 진행 문구를 렌더러 진행 로그로 보낸다
 import { attachDailyNativeReservation, assertDailyNativeReservationAdapterReady, assertDailyNativeReservationReady } from './automation/dailyNativeReservation.js';
 import { createDailyNativeReservationAdapter } from './automation/dailyNativeReservationAdapter.js';
 import { ensureDailyOfficialCaptureBatch } from './main/services/dailyOfficialCaptureProducer.js';

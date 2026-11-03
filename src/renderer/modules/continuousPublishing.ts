@@ -3230,6 +3230,7 @@ const imageSourceNames: Record<string, string> = {
   'imagefx': '✨ ImageFX (Google Labs, 제한 가능)',
   'flow': '🍌 Flow (Nano Banana 2)', // ✅ [v1.4.80]
   'local-folder': '📂 내 폴더',
+  'collect-photos': '📷 관련 사진 찾기 (뉴스·기사 사진 · 무료)',
   'skip': '🚫 없음'
 };
 
