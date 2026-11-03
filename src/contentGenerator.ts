@@ -66,7 +66,7 @@ import { buildSystemPromptFromHint, buildFullPrompt, loadShoppingPrompt, getGeoO
 import { resolveHomefeedIssueHint } from './content/homefeedIssueHint.js';
 import { computeHomefeedTitleQuoteIssues } from './content/homefeedTitleQuoteUse.js';
 import { computeHomefeedTitleGateIssues, judgeTitleReplacement } from './content/homefeedTitleGate.js';
-import { llmTitlePatchSkipLog, shouldRunLlmTitlePatch } from './content/agentRepairPolicy.js';
+import { HARMONY_NO_PACKET_LOG, createHarmonyRepairGate, harmonyPreservesTitlePromise, llmTitlePatchSkipLog, shouldRunLlmTitlePatch } from './content/agentRepairPolicy.js';
 import type { AgentHarmonyContext } from './agentCli/agentHarmonyEnvelope.js';
 import { handleAgentHarmonyResponse, resolveAgentHarmonyRequest, restoreAgentHarmony } from './content/agentHarmony/harmonyRuntime.js';
 import { isReviewAvailable, isReviewGuardEnabled, buildReviewGuardBlock } from './content/reviewGuard.js';
@@ -6820,6 +6820,13 @@ async function generateStructuredContentInternal(
       const mode = (source.contentMode || 'seo') as PromptMode;
       // [2026-11-04 Release C1] Observe-mode harmony session: flag + agent-claude/agent-codex + homefeed + legacy prompt only.
       const agentHarmonyRequest = resolveAgentHarmonyRequest({ flag: source.agentHarmony, provider: String(provider), isV3Prompt, mode });
+      // [2026-11-04 Release C2] Under a live harmony session the outer LLM repairs below are warn-only (one log line each);
+      //   fact-type regeneration and the JSON completeness retry never ask this gate. Flag OFF: always false, no extra work.
+      //   "Live" = requested AND this attempt's response carried a packet that extracted (an agent that ignored the envelope,
+      //   or a retry without a packet, runs every repair as today). Evaluated lazily at each skip decision, after the parse.
+      let harmonyPacketSeen = false;
+      const harmonyLive = () => Boolean(agentHarmonyRequest) && harmonyPacketSeen;
+      const harmonySkips = createHarmonyRepairGate(harmonyLive).skips;
       let systemPrompt = isV3Prompt
         ? buildContentQualityV3Prompt(createContentQualityV3InitialPromptOptions({
             mode,
@@ -7111,7 +7118,7 @@ async function generateStructuredContentInternal(
         //   H-agent-harmony.json and the ledger. Observe only — never throws, never edits the article. Flag OFF: skipped entirely.
         if (agentHarmonyRequest) {
           const harmonyRun = withActiveRun((run) => run) ?? null;
-          handleAgentHarmonyResponse(parsed, {
+          const harmonyRecord = handleAgentHarmonyResponse(parsed, {
             rawText: String(source.rawText || ''),
             systemPrompt,
             engine: String(provider),
@@ -7120,6 +7127,9 @@ async function generateStructuredContentInternal(
             runId: harmonyRun?.runId || '',
             run: harmonyRun,
           });
+          // [2026-11-04 Release C2] Only a response whose packet extracted counts as a harmony session for the outer repairs.
+          harmonyPacketSeen = Boolean(harmonyRecord.packet);
+          if (!harmonyPacketSeen) console.log(HARMONY_NO_PACKET_LOG);
         }
         // [2026-09-22 audit P0 item 19] Required-field contract: a title-only or heading-less object is
         //   PARTIAL_RESPONSE, not success. It is treated like a parse failure (retry budget applies).
@@ -7203,7 +7213,8 @@ async function generateStructuredContentInternal(
               candidates: parsed.titleCandidates,
               keyword: titleKeyword,
               mode: mode as never, // 길이 계약(모드별 상한)을 함께 본다
-              preservePromise: mode === 'affiliate',
+              // [2026-11-04 Release C2] The harmony session already compared the candidates against the material: only echo / length may swap.
+              preservePromise: mode === 'affiliate' || harmonyPreservesTitlePromise(harmonyLive()),
               scoreTitle: (t) => evaluateTitleQuality(
                 t,
                 titleKeyword,
@@ -7671,7 +7682,9 @@ async function generateStructuredContentInternal(
         const introIssues = computeHomefeedIntroCriticalIssues(parsed.introduction);
         // [2026-09-04] 도입부 패치는 짧은 호출이라 재생성 예산(attempt 상한)에 묶지 않는다 — 1차에서 고친 도입부가
         //   Faithfulness 재생성으로 날아가고, 2차에서는 attempt 상한에 막혀 다시 못 고치던 구멍.
-        if (allowPaidPostGenerationRepair && allowLegacyPostDraftLlm && introIssues.length > 0 && costPolicy.allowLlmIntroPatch) {
+        //   [2026-11-04 Release C2] Under a harmony session the issues stay in the log only (the session self-checked the intro).
+        if (allowPaidPostGenerationRepair && allowLegacyPostDraftLlm && introIssues.length > 0 && costPolicy.allowLlmIntroPatch
+          && !harmonySkips('intro-patch', () => introIssues.join(' / '))) {
           const patch = await generateHomefeedIntroOnlyPatch(
             source,
             parsed,
@@ -7707,7 +7720,10 @@ async function generateStructuredContentInternal(
       if (allowPaidPostGenerationRepair && blueprintRoute && blueprintQuoteItems.length > 0 && Array.isArray(parsed.headings) && parsed.headings.length > 0) {
         const { countDirectQuotes } = await import('./content/quoteCoverage.js');
         const bodyForQuotes = [parsed.introduction, ...parsed.headings.map((h: any) => h.content), parsed.conclusion].filter(Boolean).join('\n');
-        if (countDirectQuotes(bodyForQuotes) === 0) {
+        // [2026-11-04 Release C2] Warn-only under a harmony session (the verified quotes were already handed to the session): the log line is the record.
+        if (countDirectQuotes(bodyForQuotes) === 0 && harmonySkips('quote-insertion-patch', () => `직접 인용 0건 (검증된 발언 ${blueprintQuoteItems.length}개)`)) {
+          // skipped — no insertion call
+        } else if (countDirectQuotes(bodyForQuotes) === 0) {
           const { runQuoteInsertionPatch } = await import('./content/blueprint/quoteInsertionPatch.js');
           const patched = await runQuoteInsertionPatch(
             {
@@ -7869,7 +7885,9 @@ async function generateStructuredContentInternal(
           missingFeatures: customPromptAdherence.missingFeatures,
         };
 
-        if (allowPaidPostGenerationRepair && !customPromptAdherence.passed && attempt < QUALITY_ATTEMPT_LIMIT) {
+        // [2026-11-04 Release C2] Under a harmony session a miss is warn-only: the final-warning branch below keeps it in quality.warnings.
+        if (allowPaidPostGenerationRepair && !customPromptAdherence.passed && attempt < QUALITY_ATTEMPT_LIMIT
+          && !harmonySkips('prompt-adherence-regenerate', () => customPromptAdherence.issues.join(' / '))) {
           lastFailReason = `사용자 프롬프트 미준수: ${customPromptAdherence.issues.join(' / ')}`;
           console.warn(`[PromptAdherence] 🔁 자동 보정 재시도: ${lastFailReason}`);
           extraInstruction = `${customPromptAdherence.retryInstruction}\n${extraInstruction}`;
@@ -8018,7 +8036,8 @@ async function generateStructuredContentInternal(
         const verdict = await judgeSectionDistinctness(parsed, judgeCaller);
         if (verdict.judged && !verdict.distinct) {
           console.warn(`[DistinctnessJudge] 🔁 섹션 중복 감지: ${verdict.reason}`);
-          if (allowPaidPostGenerationRepair && attempt < QUALITY_ATTEMPT_LIMIT) {
+          // [2026-11-04 Release C2] Warn-only under a harmony session: falls to the terminal warning below (aiDetectionRisk high).
+          if (allowPaidPostGenerationRepair && attempt < QUALITY_ATTEMPT_LIMIT && !harmonySkips('distinctness-regenerate', verdict.reason)) {
             lastFailReason = `섹션 중복(시맨틱): ${verdict.reason}`;
             extraInstruction = prependSectionDistinctnessRetryInstruction(extraInstruction);
             continue;
@@ -8525,7 +8544,10 @@ async function generateStructuredContentInternal(
               ].filter(Boolean).join('\n'),
             });
             console.log(`[TitleAnswer] 검사: ${_ta.checked ? `응답 ${Math.round(_ta.answerRate * 100)}% (약속 ${_ta.promised.length}: ${_ta.promised.join(', ')})` : '판정 재료 부족(약속 2개 미만 또는 본문 없음)'} · 제목 "${_taTitle.slice(0, 60)}"`);
-            if (shouldRetryForTitleAnswer(_ta)) {
+            // [2026-11-04 Release C2] Warn-only under a harmony session: the [TitleAnswer] 검사 line above already shows the miss.
+            if (shouldRetryForTitleAnswer(_ta) && harmonySkips('title-answer-regenerate', () => `응답 ${Math.round(_ta.answerRate * 100)}%`)) {
+              // skipped — no regeneration
+            } else if (shouldRetryForTitleAnswer(_ta)) {
               _titleAnswerRetryUsed = true;
               const _bodyForUnpaid = [String((optimized as any)?.introduction || ''), ..._taHeadings.map((h: any) => `${h?.title || ''} ${h?.content || ''}`), String((optimized as any)?.conclusion || '')].join(' ');
               const _unpaid = _ta.promised.filter((word) => !_bodyForUnpaid.includes(word));
@@ -8593,6 +8615,10 @@ async function generateStructuredContentInternal(
           && (_gateResult.decision === 'regenerate' || _quality90Assessment?.miss)
           && !_qualityGateRetryUsed
           && attempt < QUALITY_ATTEMPT_LIMIT
+          // [2026-11-04 Release C2] Warn-only under a harmony session; a 90-point miss ends in the "경고 후 계속" warning below.
+          && !harmonySkips('quality-gate-regenerate', () => (_quality90Assessment?.miss
+            ? String(_quality90Assessment?.reasons.join(', '))
+            : `decision=${_gateResult.decision} final=${_gateResult.finalScore}`))
         ) {
           _qualityGateRetryUsed = true;
           const _gateDirective = _quality90Assessment?.miss
@@ -8633,6 +8659,18 @@ async function generateStructuredContentInternal(
         ].filter(Boolean).join(' · ');
         // [2026-09-06] Shopping enters this patch only for a throughline miss or a voice violation; every other reason still needs the full repair flag.
         const _allowGatePatch = allowPaidPostGenerationRepair || (allowThroughlineRepair && (_throughlinePatch || _reviewVoicePatch));
+        // [2026-11-04 Release C2] Under a harmony session the gate-only selfCritique rewrite is warn-only (the session self-critiqued with
+        //   the same criteria). A throughline / shopping-voice patch is a different step and still runs. Same eligibility as the `if` below.
+        const _harmonyGatePatchSkip = !_throughlinePatch && !_reviewVoicePatch
+          && _allowGatePatch
+          && allowLegacyPostDraftLlm
+          && Boolean(_gateResult)
+          && Boolean(optimized.bodyPlain)
+          && (_gateResult.decision === 'patch' || _humanFloorMiss || _quality90HardMiss)
+          && (costPolicy.allowQualityGateSelfCritique || _quality90HardMiss)
+          && harmonySkips('quality-gate-patch', () => (_quality90HardMiss
+            ? String(_quality90Assessment?.reasons.join(', '))
+            : (_humanFloorMiss ? `human=${_gateResult.humanlikeScore.score}<55` : `final=${_gateResult.finalScore}`)));
         if (
           _allowGatePatch
           && allowLegacyPostDraftLlm
@@ -8640,6 +8678,7 @@ async function generateStructuredContentInternal(
           && optimized.bodyPlain
           && (_gateResult.decision === 'patch' || _humanFloorMiss || _quality90HardMiss || _throughlinePatch || _reviewVoicePatch)
           && (costPolicy.allowQualityGateSelfCritique || _quality90HardMiss)
+          && !_harmonyGatePatchSkip
         ) {
           try {
             const _patchPersona = buildPersonaCard(detectCategory(source.toneStyle || 'general'));
@@ -8719,9 +8758,9 @@ async function generateStructuredContentInternal(
         } else if (allowLegacyPostDraftLlm && _gateResult && optimized.quality && (_gateResult.decision === 'patch' || _humanFloorMiss)) {
           optimized.quality.warnings = [
             ...(optimized.quality.warnings || []),
-            `QualityGate LLM patch skipped by cost saver (${_humanFloorMiss ? `human=${_gateResult.humanlikeScore.score}` : `final=${_gateResult.finalScore}`})`,
+            `QualityGate LLM patch skipped by ${_harmonyGatePatchSkip ? 'harmony session' : 'cost saver'} (${_humanFloorMiss ? `human=${_gateResult.humanlikeScore.score}` : `final=${_gateResult.finalScore}`})`,
           ];
-          console.log('[QualityGate] costSaver ON — LLM selfCritique 생략, 로컬 휴머나이즈 결과 유지');
+          if (!_harmonyGatePatchSkip) console.log('[QualityGate] costSaver ON — LLM selfCritique 생략, 로컬 휴머나이즈 결과 유지');
         }
 
         if (
@@ -8729,6 +8768,7 @@ async function generateStructuredContentInternal(
           && _quality90Assessment?.miss
           && !_quality90FollowupRetryUsed
           && attempt < QUALITY_ATTEMPT_LIMIT
+          && !harmonySkips('quality-gate-regenerate', () => String(_quality90Assessment?.reasons.join(', ')))
         ) {
           _quality90FollowupRetryUsed = true;
           console.warn(`[QualityGate90] 🔁 patch 후에도 90점 미달 — 추가 전체 재시도 (${_quality90Assessment.reasons.join(', ')})`);
@@ -8738,10 +8778,13 @@ async function generateStructuredContentInternal(
         }
 
         if (allowPaidPostGenerationRepair && _quality90Assessment?.miss && attempt < QUALITY_ATTEMPT_LIMIT) {
-          console.warn(`[QualityGate90] 🔁 90점 미달 결과를 반환하지 않고 남은 동일 엔진 시도를 사용합니다 (${attempt + 1}/${MAX_ATTEMPTS + 1})`);
-          extraInstruction = `${_quality90Assessment.directive}\n${extraInstruction}`;
-          keepArtifactBeforeRegeneration(optimized, attempt, `QualityGate90 90점 미달 (${_quality90Assessment.reasons.join(', ')})`);
-          continue;
+          // [2026-11-04 Release C2] Warn-only under a harmony session: falls through to the "경고 후 계속" warning below.
+          if (!harmonySkips('quality-gate-regenerate', () => String(_quality90Assessment?.reasons.join(', ')))) {
+            console.warn(`[QualityGate90] 🔁 90점 미달 결과를 반환하지 않고 남은 동일 엔진 시도를 사용합니다 (${attempt + 1}/${MAX_ATTEMPTS + 1})`);
+            extraInstruction = `${_quality90Assessment.directive}\n${extraInstruction}`;
+            keepArtifactBeforeRegeneration(optimized, attempt, `QualityGate90 90점 미달 (${_quality90Assessment.reasons.join(', ')})`);
+            continue;
+          }
         }
 
         if (_quality90Assessment?.miss) {
