@@ -1,6 +1,7 @@
 import type { DailyPublishingScheduler } from '../scheduler/dailyPublishing.js';
 import { nextDailyRunAt, nextDailyScheduledFor, validateDailyPlans } from '../scheduler/dailyPublishingModel.js';
 import type { DailyPublishingPlan } from '../scheduler/dailyPublishingTypes.js';
+import { DAILY_LEWORD_TOPICS } from '../scheduler/dailyLewordTopics.js';
 
 export interface DailyPublishingAvailability { ready: boolean; paid: boolean; label: string }
 export interface DailyPublishingApi {
@@ -56,6 +57,7 @@ export function createDailyPublishingApi(deps: Dependencies): DailyPublishingApi
       imageProviders: DAILY_IMAGE_CHOICES.map(choice => ({ ...choice })),
       imageModes: DAILY_IMAGE_MODES.map(mode => ({ ...mode })),
       captureCategories: DAILY_CAPTURE_CATEGORIES.map(category => ({ ...category })),
+      lewordTopics: [...DAILY_LEWORD_TOPICS],
       imageCapabilities: { officialCaptureReady: false, officialCaptureReason: '공식 자료 캡처는 글별 출처·장면·사용 권한 검토가 필요하여 무인 반복 시작을 지원하지 않습니다.' },
       scheduling: { mode: 'schedule', leadMinutes: 60, timeMeaning: 'publication', nativeReservationReady: deps.nativeReservationReady?.() === true },
       runtime: { timezone: 'Asia/Seoul', label: '예약발행 시각은 공개 예정 시각이며 1시간 전에 준비합니다. 기존 임시저장·즉시 발행 계획은 작업 시작 시각을 유지합니다.' } };

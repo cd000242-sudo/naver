@@ -1,4 +1,5 @@
-import type { DailyCaptureCategory, DailyImageMode, DailyPublishingJob, DailyPublishingPlan } from './dailyPublishingTypes.js';
+import type { DailyCaptureCategory, DailyContentMode, DailyImageMode, DailyKeywordSource, DailyPublishingJob, DailyPublishingPlan } from './dailyPublishingTypes.js';
+import { DAILY_LEWORD_MAX_TOPICS, DAILY_LEWORD_TOPICS } from './dailyLewordTopics.js';
 
 const ID = /^[A-Za-z0-9_.@-]{1,100}$/;
 const TIME = /^(?:[01]\d|2[0-3]):[0-5]\d$/;
@@ -26,6 +27,19 @@ export function resolveDailyCaptureCategory(value: unknown, imageMode: DailyImag
   }
   return value === 'issue' || value === 'sports' || value === 'auto' ? value : invalid();
 }
+/** Absent for legacy plans; otherwise 1-3 distinct, known LEWORD topic names and nothing else. */
+export function resolveDailyKeywordSource(value: unknown): DailyKeywordSource | undefined {
+  if (value === undefined) return undefined;
+  const source = dailyObject(value, ['type', 'topics']);
+  const topics = source.topics;
+  if (source.type !== 'leword-today-picks' || !Array.isArray(topics) || topics.length < 1 || topics.length > DAILY_LEWORD_MAX_TOPICS
+    || topics.some(topic => typeof topic !== 'string' || !DAILY_LEWORD_TOPICS.includes(topic)) || new Set(topics).size !== topics.length) return invalid();
+  return { type: 'leword-today-picks', topics: [...topics as string[]] };
+}
+export function resolveDailyContentMode(value: unknown): DailyContentMode | undefined {
+  if (value === undefined) return undefined;
+  return value === 'seo' || value === 'homefeed' ? value : invalid();
+}
 export function dailyObject(value: unknown, fields: string[]): Record<string, unknown> {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return invalid();
   if (Object.keys(value).some((key) => !fields.includes(key))) return invalid();
@@ -43,7 +57,10 @@ export function validateDailyPlans(value: unknown): DailyPublishingPlan[] {
   if (!Array.isArray(value) || value.length > 100) return invalid();
   const accounts = new Set<string>();
   return value.map((input) => {
-    const p = dailyObject(input, ['accountId', 'categoryId', 'enabled', 'mode', 'leadMinutes', 'slots', 'generator', 'imageSource', 'imageMode', 'captureCategory', 'imageCollectConsent', 'keywordExhaustion', 'topic']);
+    const p = dailyObject(input, ['accountId', 'categoryId', 'enabled', 'mode', 'leadMinutes', 'slots', 'generator', 'imageSource', 'imageMode', 'captureCategory', 'imageCollectConsent', 'keywordExhaustion', 'keywordSource', 'contentMode', 'topic']);
+    const keywordSource = resolveDailyKeywordSource(p.keywordSource);
+    const contentMode = resolveDailyContentMode(p.contentMode);
+    const topic = p.topic === undefined && keywordSource ? '' : p.topic;
     const imageMode = resolveDailyImageMode(p.imageMode);
     const captureCategory = resolveDailyCaptureCategory(p.captureCategory, imageMode, p.enabled === true);
     const imageCollectConsent = resolveDailyCollectConsent(p.imageCollectConsent, imageMode, p.enabled === true);
@@ -53,7 +70,7 @@ export function validateDailyPlans(value: unknown): DailyPublishingPlan[] {
     accounts.add(accountId);
     if (typeof p.enabled !== 'boolean' || !['draft', 'publish', 'schedule'].includes(p.mode as string)) return invalid();
     if (p.mode === 'schedule' ? p.leadMinutes !== 60 : p.leadMinutes !== undefined) return invalid();
-    if (typeof p.topic !== 'string' || p.topic.length > 2000 || /[\x00-\x08\x0b-\x1f\x7f]/.test(p.topic)) return invalid();
+    if (typeof topic !== 'string' || topic.length > 2000 || /[\x00-\x08\x0b-\x1f\x7f]/.test(topic)) return invalid();
     if (!Array.isArray(p.slots) || p.slots.length < 1 || p.slots.length > 20) return invalid();
     const times = new Set<string>();
     const slots = p.slots.map((inputSlot) => {
@@ -72,7 +89,9 @@ export function validateDailyPlans(value: unknown): DailyPublishingPlan[] {
       ...(captureCategory ? { captureCategory } : {}),
       ...(imageCollectConsent ? { imageCollectConsent } : {}),
       ...(p.keywordExhaustion ? { keywordExhaustion: p.keywordExhaustion as 'expand' | 'stop' } : {}),
-      ...(!p.imageSource ? {} : { imageSource: p.imageSource as string }), topic: p.topic };
+      ...(keywordSource ? { keywordSource } : {}),
+      ...(contentMode ? { contentMode } : {}),
+      ...(!p.imageSource ? {} : { imageSource: p.imageSource as string }), topic };
   });
 }
 export function dailyKst(now: Date): { date: string; time: string } {

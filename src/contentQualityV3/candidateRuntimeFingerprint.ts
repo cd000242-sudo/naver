@@ -926,6 +926,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/runtime/zombieRecovery.ts',
   'src/scheduledPostsManager.ts',
   'src/scheduler/appScheduleQueue.ts',
+  'src/scheduler/dailyLewordTopics.ts',
   'src/scheduler/dailyPublishing.ts',
   'src/scheduler/dailyPublishingModel.ts',
   'src/scheduler/dailyPublishingState.ts',

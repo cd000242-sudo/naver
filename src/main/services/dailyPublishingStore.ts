@@ -37,6 +37,15 @@ export async function isDailySourceUsed(file: string, accountId: string, fingerp
   if (stored.version !== 1 || !stored.claims || typeof stored.claims !== 'object' || Array.isArray(stored.claims)) throw Error('DAILY_SOURCE_UNREADABLE');
   return fingerprints.some(fp => Object.prototype.hasOwnProperty.call(stored.claims, `${accountId}:${fp}`));
 }
+/** Read-only: every fingerprint this account already claimed. Preview and candidate ranking use it; it never writes. */
+export async function listDailyClaimedFingerprints(file: string, accountId: string): Promise<Set<string>> {
+  if (!/^[\w-]{1,120}$/.test(accountId)) throw Error('DAILY_SOURCE_INVALID');
+  const stored = await read(file) as { version: number; claims: Record<string, unknown> } | null;
+  if (!stored) return new Set();
+  if (stored.version !== 1 || !stored.claims || typeof stored.claims !== 'object' || Array.isArray(stored.claims)) throw Error('DAILY_SOURCE_UNREADABLE');
+  const prefix = `${accountId}:`;
+  return new Set(Object.keys(stored.claims).filter(key => key.startsWith(prefix)).map(key => key.slice(prefix.length)));
+}
 /** A reserved source is never silently recycled after a crash or an uncertain publication. */
 export function createDailySourceClaims(file: string) {
   let tail: Promise<unknown> = Promise.resolve();

@@ -5,7 +5,8 @@ type Snapshot = { revision: number; plans: Array<DailyPublishingPlan & { nextAt?
   runs: Array<{ accountId: string; status: string; time: string; date: string; ordinal: number; reason?: string; updatedAt?: string }>;
   availability?: { ready: boolean; paid: boolean; label: string };
   scheduling?: { nativeReservationReady?: boolean }; imageCapabilities?: { officialCaptureReady?: boolean; officialCaptureReason?: string };
-  imageProviders?: Array<{ id: string; label: string }> };
+  imageProviders?: Array<{ id: string; label: string }>; lewordTopics?: string[] };
+type LewordCandidate = { keyword: string; topic: string; searchVolume: number; documentCount: number; ratio: number };
 export interface DailyPanelApi {
   dailyPublishingRequest(method: 'GET' | 'POST', path: string, body?: unknown): Promise<{ status: number; body: any }>;
   getAllBlogAccounts(): Promise<{ success: boolean; accounts?: Account[]; message?: string }>;
@@ -32,7 +33,11 @@ export function mountDailyPublishingPanel(root: HTMLDialogElement, api: DailyPan
     <label>이미지 엔진<select data-daily="image-source" aria-label="이미지 엔진"></select></label>
     <label>공식 자료 분야<select data-daily="capture-category" aria-label="공식 자료 분야"><option value="">선택</option><option value="issue">이슈</option><option value="sports">스포츠</option><option value="auto">자동차</option></select></label>
     </div><label class="daily-panel-consent" data-daily="collect-consent-row"><input type="checkbox" data-daily="collect-consent"><span>[실제 사진 수집 저작권 안내] 웹에 공개된 사진을 검색·수집합니다. 워터마크가 없는 사진이라도 저작권이 있을 수 있으며, <b>수집한 사진 사용에 대한 모든 법적 책임은 사용자 본인에게 있습니다.</b> 이 기능은 사용 권한을 주지 않습니다. 위 내용을 확인했고 책임이 본인에게 있음에 동의합니다.</span></label>
-    <label class="daily-panel-topic">주제·키워드 또는 소재 URL<textarea data-daily="topic" aria-label="주제·키워드 또는 소재 URL" rows="3" maxlength="8000"></textarea></label>
+    <label>키워드 공급<select data-daily="keyword-source" aria-label="키워드 공급"><option value="manual">직접 입력</option><option value="leword-today-picks">LEWORD 오늘의 추천</option></select></label>
+    <fieldset data-daily="leword-box" hidden><legend>추천을 받을 주제 (최대 3개)</legend><div data-daily="leword-topics" class="daily-panel-topics"></div>
+    <label>글쓰기 방식<select data-daily="content-mode" aria-label="글쓰기 방식"><option value="seo">검색형 (키워드 그대로)</option><option value="homefeed">홈판형 (최근 뉴스 소재)</option></select></label>
+    <button type="button" data-daily="leword-preview">다음 후보 5개 보기</button><p data-daily="leword-note"></p><ol data-daily="leword-list"></ol></fieldset>
+    <label class="daily-panel-topic" data-daily="topic-row">주제·키워드 또는 소재 URL<textarea data-daily="topic" aria-label="주제·키워드 또는 소재 URL" rows="3" maxlength="2000"></textarea></label>
     <label>키워드를 다 쓰면 (검색용·메이트 글)<select data-daily="keyword-exhaustion" aria-label="키워드를 다 쓰면"><option value="expand">연관 검색어로 넓혀 계속 쓰기</option><option value="stop">멈추고 알리기</option></select></label>
     <h3 data-daily="slot-heading">공개 시각 · 한국 시간</h3><div data-daily="slots" class="daily-panel-slots"></div>
     <button type="button" data-daily="add-slot">시각 추가</button><p data-daily="timing"></p>
@@ -43,7 +48,7 @@ export function mountDailyPublishingPanel(root: HTMLDialogElement, api: DailyPan
     <div class="daily-panel-table-wrap"><table><thead><tr><th>공개 날짜·시각</th><th>번호</th><th>상태</th><th>사유</th><th>기록 시각</th></tr></thead><tbody data-daily="history"></tbody></table></div></section>`;
   const el = <T extends HTMLElement = HTMLInputElement>(name: string) => root.querySelector(`[data-daily="${name}"]`) as T;
   const value = (name: string) => el<HTMLInputElement>(name).value;
-  let state: Snapshot | undefined, accounts: Account[] = [], busy = false, refreshing = false, disposed = false, revision = 0, generation = 0;
+  let state: Snapshot | undefined, accounts: Account[] = [], busy = false, refreshing = false, previewing = false, disposed = false, revision = 0, generation = 0;
   let timer: ReturnType<typeof setInterval> | undefined;
   const message = (text: string, error = false) => { el('status').textContent = text; el('status').dataset.error = String(error); };
   const selectedPlan = () => state?.plans.find(plan => plan.accountId === value('account'));
@@ -51,6 +56,15 @@ export function mountDailyPublishingPanel(root: HTMLDialogElement, api: DailyPan
     const select = el<HTMLSelectElement>(name); select.replaceChildren();
     for (const choice of choices) { const option = document.createElement('option'); option.value = choice.id; option.textContent = choice.label; select.append(option); }
     select.value = choices.some(choice => choice.id === selected) ? selected : choices[0]?.id || '';
+  }
+  const usesLeword = () => value('keyword-source') === 'leword-today-picks';
+  const lewordTopics = () => [...el('leword-topics').querySelectorAll('input:checked')].map(box => (box as HTMLInputElement).value);
+  function drawLewordTopics(selected: string[] = []) {
+    el('leword-topics').replaceChildren();
+    for (const topic of state?.lewordTopics || []) {
+      const label = document.createElement('label'), box = document.createElement('input');
+      box.type = 'checkbox'; box.value = topic; box.checked = selected.includes(topic); label.append(box, ` ${topic}`); el('leword-topics').append(label);
+    }
   }
   const usesAi = () => value('image-mode') !== 'official-capture';
   const collects = () => value('image-mode') === 'ai-first' || value('image-mode') === 'collect-first';
@@ -63,7 +77,7 @@ export function mountDailyPublishingPanel(root: HTMLDialogElement, api: DailyPan
     if (value('image-mode') === 'official-capture' && state.imageCapabilities?.officialCaptureReady !== true)
       return state.imageCapabilities?.officialCaptureReason || '공식 출처 승인과 캡처 묶음 준비가 필요합니다. 현재 자동 수집 연결은 준비되지 않았습니다.';
     if (!/^[1-9]\d{0,15}$/.test(value('category'))) return '실제 블로그 카테고리를 선택해 주세요.';
-    if (!value('topic').trim()) return '주제·키워드 또는 소재 URL을 입력해 주세요.';
+    if (usesLeword() ? !lewordTopics().length : !value('topic').trim()) return usesLeword() ? 'LEWORD 추천을 받을 주제를 1~3개 골라 주세요.' : '주제·키워드 또는 소재 URL을 입력해 주세요.';
     if (usesAi() && !value('image-source')) return '이미지 엔진을 직접 선택해 주세요.';
     if (collects() && !el('collect-consent').checked) return '실제 사진 수집 저작권 안내를 읽고 동의해 주세요.';
     if (value('image-mode') === 'official-capture' && !value('capture-category')) return '공식 자료 분야를 선택해 주세요.';
@@ -77,6 +91,10 @@ export function mountDailyPublishingPanel(root: HTMLDialogElement, api: DailyPan
     el('start').disabled = busy || refreshing || Boolean(reason); el('save').disabled = busy || refreshing || !state || !value('account');
     el('stop').disabled = busy || refreshing || !selectedPlan()?.enabled; el('reload').disabled = busy || refreshing;
     el('image-source').disabled = !usesAi(); el('collect-consent-row').hidden = !collects(); el('capture-category').disabled = value('image-mode') !== 'official-capture';
+    el('leword-box').hidden = !usesLeword(); el('topic-row').hidden = usesLeword();
+    const picked = lewordTopics().length;
+    for (const box of el('leword-topics').querySelectorAll('input')) (box as HTMLInputElement).disabled = !(box as HTMLInputElement).checked && picked >= 3;
+    el('leword-preview').disabled = busy || refreshing || previewing || !picked || !value('account');
     el('add-slot').disabled = busy || el('slots').children.length >= 20;
     for (const button of el('slots').querySelectorAll('button')) button.disabled = el('slots').children.length === 1;
   }
@@ -129,6 +147,8 @@ export function mountDailyPublishingPanel(root: HTMLDialogElement, api: DailyPan
     el('writer').value = plan?.generator || 'app-settings'; el('mode').value = plan?.mode || 'schedule';
     (el<HTMLSelectElement>('mode').querySelector('[value=publish]') as HTMLOptionElement).disabled = plan?.mode !== 'publish';
     el('image-mode').value = plan?.imageMode || 'ai-first'; el('collect-consent').checked = plan?.imageCollectConsent === true; el('capture-category').value = plan?.captureCategory || '';
+    el('keyword-source').value = plan?.keywordSource ? plan.keywordSource.type : 'manual'; drawLewordTopics(plan?.keywordSource?.topics);
+    el('content-mode').value = plan?.contentMode || 'seo'; el('leword-list').replaceChildren(); el('leword-note').textContent = '';
     el('topic').value = plan?.topic || ''; el('keyword-exhaustion').value = plan?.keywordExhaustion || 'expand'; el('consent').checked = false;
     setOptions('image-source', [{ id: '', label: '이미지 엔진 선택' }, ...(state?.imageProviders || [])], plan?.imageSource);
     drawSlots(plan?.slots || [{ time: '', count: 1 }]); drawHistory();
@@ -171,7 +191,8 @@ export function mountDailyPublishingPanel(root: HTMLDialogElement, api: DailyPan
     if (busy || refreshing || !state || (enabled && blockReason())) return;
     try {
       const plan: DailyPublishingPlan = { accountId: value('account'), categoryId: value('category'), enabled,
-        mode: value('mode') as DailyPublishingPlan['mode'], generator: value('writer'), topic: value('topic').trim(),
+        mode: value('mode') as DailyPublishingPlan['mode'], generator: value('writer'), topic: usesLeword() ? '' : value('topic').trim(),
+        ...(usesLeword() ? { keywordSource: { type: 'leword-today-picks' as const, topics: lewordTopics() }, contentMode: value('content-mode') as 'seo' | 'homefeed' } : {}),
         imageMode: value('image-mode') as DailyPublishingPlan['imageMode'], slots: readSlots(),
         ...(value('mode') === 'schedule' ? { leadMinutes: 60 as const } : {}),
         ...(usesAi() ? { imageSource: value('image-source') || undefined } : { captureCategory: value('capture-category') as DailyPublishingPlan['captureCategory'] || undefined }),
@@ -204,6 +225,24 @@ export function mountDailyPublishingPanel(root: HTMLDialogElement, api: DailyPan
     if (slots.length < 20) drawSlots([...slots, { time: '', count: 1 }]);
   });
   el('reload').addEventListener('click', () => void refresh(true));
+  // Preview only: the app reserves nothing, so these keywords are still free when the real post is prepared.
+  el('leword-preview').addEventListener('click', async () => {
+    if (previewing || busy || refreshing) return;
+    previewing = true; controls(); el('leword-list').replaceChildren(); el('leword-note').textContent = '추천을 불러오는 중입니다.';
+    try {
+      const reply = await api.dailyPublishingRequest('POST', '/v1/automations/leword-preview', { accountId: value('account'), topics: lewordTopics() });
+      if (disposed) return;
+      if (reply.status >= 400 || reply.body?.ok !== true || !Array.isArray(reply.body.candidates)) throw Error(reply.body?.error || 'LEWORD 추천을 가져오지 못했습니다.');
+      el('leword-note').textContent = reply.body.candidates.length
+        ? `LEWORD 기준 ${timestamp(reply.body.builtAt)}${reply.body.stale ? ' · 사이트에 연결하지 못해 마지막 저장본입니다' : ''} · 이 글들은 아직 예약되지 않았습니다.`
+        : '이 주제에는 아직 쓰지 않은 추천 키워드가 없습니다.';
+      for (const item of reply.body.candidates as LewordCandidate[]) {
+        const line = document.createElement('li');
+        line.textContent = `${item.keyword} (${item.topic}) · 검색 ${item.searchVolume} · 문서 ${item.documentCount} · 비율 ${item.ratio}`; el('leword-list').append(line);
+      }
+    } catch (error) { if (!disposed) { el('leword-note').textContent = ''; message((error as Error).message, true); } }
+    finally { previewing = false; controls(); }
+  });
   const close = () => { if (timer) clearInterval(timer); timer = undefined; root.close?.(); root.removeAttribute('open'); };
   el('close').addEventListener('click', close); root.addEventListener('cancel', close);
   controls();

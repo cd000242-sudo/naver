@@ -24,4 +24,7 @@
 .daily-panel-table-wrap { overflow-x: auto; }
 .daily-panel-history table { width: 100%; border-collapse: collapse; font-size: 13px; text-align: left; }
 .daily-panel-history th, .daily-panel-history td { padding: 10px 8px; border-bottom: 1px solid var(--border-color, #62646b); overflow-wrap: anywhere; }
+.daily-panel-topics { display: grid; grid-template-columns: repeat(auto-fill, minmax(124px, 1fr)); gap: 6px 12px; margin-top: 8px; }
+.daily-publishing-dialog .daily-panel-topics label { flex-direction: row; align-items: center; gap: 6px; font-size: 13px; }
+.daily-panel-topics input { width: 16px; height: 16px; flex-shrink: 0; }
 @media (max-width: 600px) { .daily-publishing-dialog { padding: 16px; } .daily-panel-grid { grid-template-columns: 1fr; } .daily-panel-actions button { flex: 1 1 130px; } }

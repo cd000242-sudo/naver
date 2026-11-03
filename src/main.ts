@@ -4864,6 +4864,7 @@ import { createLdbDestinations, type LdbResolvedDestination } from './main/ldb-d
 import { createDailyPublishingRuntime } from './main/services/dailyPublishingRuntime.js';
 import { createDailyPublishingIpc } from './main/ipc/dailyPublishingHandlers.js';
 import { discoverDailySources, expandDailyKeywords } from './main/services/dailyPublishingDiscovery.js';
+import { createUserDataLewordSource } from './main/services/dailyLewordSource.js';
 import { createDailyEditorialCaller } from './main/services/dailyEditorialCaller.js';
 import { reviewDailyHomefeedMaterial } from './main/services/dailyHomefeedEditorial.js';
 import { generateReviewedDailyHomefeedArticle } from './main/services/dailyEditorialPipeline.js';
@@ -4899,6 +4900,8 @@ import { resolveFullAutoImagePolicy } from './image/fullAuto/fullAutoImagePolicy
  */
 let ldbBridge: ReturnType<typeof startLdbBridge> = null;
 let dailyPublishingRuntime: ReturnType<typeof createDailyPublishingRuntime> | undefined;
+// LEWORD 오늘의 추천 키워드 공급기 — 공개 JSON을 받고 userData에 마지막 성공본을 캐시한다(매일 예약발행 전용)
+const dailyLewordSource = createUserDataLewordSource(() => app.getPath('userData'));
 let dailyKeepAwakeId: number | undefined;
 /** Idle sleep only (screen may still turn off); a closed laptop lid still sleeps. */
 const keepAwakeForDailyPublishing = (on: boolean): void => {
@@ -4981,13 +4984,14 @@ const startLdbBridgeIfEnabled = createSerializedRefresh(async () => {
           const { getNaverAutocomplete } = await import('./naverSearchApi.js');
           return expandDailyKeywords(keyword, getNaverAutocomplete);
         },
+        lewordKeywords: request => dailyLewordSource.keywords(request),
         notify: (title, body) => { try { if (Notification.isSupported()) new Notification({ title, body }).show(); } catch { /* 알림은 선택 사항 */ } },
         busy: () => Boolean(automationRunning || AutomationService.isRunning() || getExecutionLock()),
         safety: accountId => accountSafety.status(accountId),
         readConfig: loadConfig,
         discoverSources: async (topic, account, job) => {
           const currentConfig = await loadConfig();
-          const mode = account.settings?.contentMode || 'homefeed';
+          const mode = job.contentMode ?? (account.settings?.contentMode || 'homefeed');
           const generator = job.generator && job.generator !== 'app-settings' ? job.generator : currentConfig.defaultAiProvider;
           const caller = mode === 'homefeed' ? await dailyEditorialCaller(String(generator || ''), currentConfig as any, job.signal) : undefined;
           const profiled = await blogProfileStoreAt(app.getPath('userData')).resolve(account).catch(() => ({ profile: null }));
@@ -5047,6 +5051,13 @@ ipcMain.handle('dailyPublishing:request', createDailyPublishingIpc({
     } catch { return false; }
   },
   ensure: async () => { await startLdbBridgeIfEnabled(); return dailyPublishingRuntime?.api; },
+  // 미리보기는 예약·기록을 하지 않고, 매일 예약발행과 같은 1년 이상 이용권 확인 안에서만 열린다
+  previewLeword: async request => {
+    await startLdbBridgeIfEnabled();
+    const status = await dailyPublishingRuntime?.api.request('GET', '/v1/automations/status');
+    if (status?.body?.availability?.paid !== true) throw new Error('ANNUAL_PLAN_REQUIRED');
+    return { ...await dailyLewordSource.preview(request) };
+  },
 }));
 app.on('will-quit', () => dailyPublishingRuntime?.dispose());
 

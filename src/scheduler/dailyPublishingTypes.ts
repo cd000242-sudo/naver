@@ -5,6 +5,10 @@ export interface DailyPublishingSlot { time: string; count: number }
  */
 export type DailyImageMode = 'official-capture' | 'ai-generated' | 'ai-first' | 'collect-first';
 export type DailyCaptureCategory = 'issue' | 'sports' | 'auto';
+/** seo: write about the keyword itself (search/mate path). homefeed: write about recent news material. */
+export type DailyContentMode = 'seo' | 'homefeed';
+/** Take one recommended keyword per post from LEWORD's published "today picks" for these Naver topics (1-3). */
+export interface DailyKeywordSource { type: 'leword-today-picks'; topics: string[] }
 export interface DailyPublishingPlan {
   accountId: string;
   categoryId: string;
@@ -20,6 +24,10 @@ export interface DailyPublishingPlan {
   imageCollectConsent?: true;
   /** Search/mate plans, once every keyword was used: expand with related searches (default) or stop and notify. */
   keywordExhaustion?: 'expand' | 'stop';
+  /** Optional; with it the free-text topic is ignored. Plans without it behave exactly as before. */
+  keywordSource?: DailyKeywordSource;
+  /** Optional; overrides the account's content mode for this plan only. */
+  contentMode?: DailyContentMode;
   topic: string;
 }
 export type DailyRunStatus = 'pending' | 'inflight' | 'confirmed' | 'needs_review' | 'cancelled';

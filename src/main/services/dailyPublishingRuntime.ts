@@ -55,7 +55,9 @@ export function createDailyPublishingRuntime(deps: Dependencies) {
         if (dailyStopsAccount(error) || stopsAllAccounts(error)) return { confirmed: false, stopAccount: true, stopAll: stopsAllAccounts(error) };
         // Every keyword of a search/mate plan (and, unless it says stop, every related search) was used: nothing left to write.
         if (error instanceof Error && error.message === 'KEYWORDS_EXHAUSTED') {
-          deps.notify?.('매일 자동발행이 멈췄습니다', '이 계정의 키워드를 모두 썼습니다. 매일 발행 화면에서 키워드를 추가한 뒤 다시 시작해 주세요.');
+          deps.notify?.('매일 자동발행이 멈췄습니다', plan.keywordSource
+            ? 'LEWORD 오늘의 추천 키워드를 모두 썼습니다. 새 추천이 올라온 뒤 매일 발행 화면에서 다시 시작해 주세요.'
+            : '이 계정의 키워드를 모두 썼습니다. 매일 발행 화면에서 키워드를 추가한 뒤 다시 시작해 주세요.');
           return { confirmed: false, stopAccount: true, code: 'KEYWORDS_EXHAUSTED' };
         }
         throw error;
@@ -72,7 +74,7 @@ export function createDailyPublishingRuntime(deps: Dependencies) {
       const config = await deps.readConfig();
       const generator = plan.generator === 'app-settings' ? config.defaultAiProvider : plan.generator;
       if (!generator || !DAILY_WRITERS.includes(generator)) throw Error('DAILY_WRITER_REQUIRED');
-      if (!plan.topic.trim() && !account.settings?.keywords?.some(v => v.trim()) && !account.settings?.urls?.some(v => v.trim())) throw Error('DAILY_SOURCE_REQUIRED');
+      if (!plan.keywordSource && !plan.topic.trim() && !account.settings?.keywords?.some(v => v.trim()) && !account.settings?.urls?.some(v => v.trim())) throw Error('DAILY_SOURCE_REQUIRED');
       if (usesDailyAiImages(resolveDailyImageMode(plan.imageMode))) {
         const imageSource = plan.imageSource || account.settings?.imageSource || config.imageSource;
         if (!imageSource || !DAILY_IMAGE_PROVIDERS.includes(imageSource)) throw Error('DAILY_IMAGE_PROVIDER_REQUIRED');

@@ -9,7 +9,7 @@ import { buildFullAutoImageSlots, reconcileFullAutoSlotsWithImages } from '../..
 import { fullAutoFinalHeadingTitles, type FullAutoArticleLike } from '../../image/fullAuto/fullAutoImageRequest.js';
 import { evaluateFullAutoImageReadiness, verifyFullAutoHeadingMapping } from '../../image/fullAuto/fullAutoPublishDecision.js';
 import type { DailyEditorialAngle } from './dailyHomefeedEditorialContract.js';
-import type { DailyCaptureCategory, DailyImageMode, DailyPublishingPlan } from '../../scheduler/dailyPublishingTypes.js';
+import type { DailyCaptureCategory, DailyContentMode, DailyImageMode, DailyKeywordSource, DailyPublishingPlan } from '../../scheduler/dailyPublishingTypes.js';
 import { dailyKst, resolveDailyCaptureCategory, resolveDailyImageMode, usesDailyAiImages } from '../../scheduler/dailyPublishingModel.js';
 
 export interface DailySource { type: 'keyword' | 'url'; value: string; identity?: string; readonly editorial?: Readonly<DailyEditorialAngle>;
@@ -29,6 +29,8 @@ export interface DailyPublishingJob {
   topic?: string;
   source?: DailySource;
   keywordExhaustion?: DailyPublishingPlan['keywordExhaustion'];
+  keywordSource?: DailyKeywordSource;
+  contentMode?: DailyContentMode;
   signal?: AbortSignal;
 }
 export interface DailyAccount {
@@ -45,6 +47,8 @@ export interface DailyPublishingExecutorDeps {
   discoverSources?(topic: string, account: DailyAccount, job: DailyPublishingJob): Promise<DailySource[]>;
   /** Related searches people actually type (search/mate plans, once every listed keyword was used). */
   expandKeywords?(keyword: string): Promise<string[]>;
+  /** Plans with a keywordSource: ranked, unclaimed LEWORD keywords for the plan's topics (used ones too when includeUsed). */
+  lewordKeywords?(request: { topics: string[]; accountId: string; limit: number; includeUsed?: boolean }): Promise<string[]>;
   publish(accountIds: string[], options: Record<string, unknown>): Promise<unknown>;
   assertAllowed?(): Promise<void>;
   now?(): Date;
@@ -134,6 +138,18 @@ function sourceCandidates(job: DailyPublishingJob, account: DailyAccount): Daily
     ...(account.settings?.urls || []).map(value => ({ type: 'url' as const, value: value.trim() })),
   ].filter(source => source.value);
 }
+/**
+ * A LEWORD plan takes its keywords, best first, from the supplier (the topic text is ignored); every other plan keeps
+ * reading topic lines / account settings. `includeUsed` asks for seeds of related searches once all picks were claimed.
+ * Home-feed posts look up news per keyword, so they try fewer keywords than search posts.
+ */
+async function seedSources(deps: Pick<DailyPublishingExecutorDeps, 'lewordKeywords'>, job: DailyPublishingJob, account: DailyAccount, searchMode: boolean, includeUsed: boolean): Promise<DailySource[]> {
+  if (!job.keywordSource || job.source) return sourceCandidates(job, account);
+  if (!deps.lewordKeywords) throw new Error('LEWORD_SOURCE_UNAVAILABLE');
+  const limit = includeUsed ? 3 : searchMode ? 20 : 5;
+  const keywords = await deps.lewordKeywords({ topics: job.keywordSource.topics, accountId: job.accountId, limit, includeUsed });
+  return keywords.map(value => ({ type: 'keyword' as const, value }));
+}
 function record(value: unknown): Record<string, unknown> {
   return value !== null && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : {};
 }
@@ -159,8 +175,11 @@ export function createDailyPublishingExecutor(deps: DailyPublishingExecutorDeps)
     if (usesDailyAiImages(imageMode) && (!imageSource || ['skip', 'none'].includes(imageSource))) throw new Error('IMAGE_PROVIDER_REQUIRED');
     const category = await deps.resolveCategory(job.accountId, job.categoryId);
     if (!category.categoryName?.trim()) throw new Error('DAILY_CATEGORY_INVALID');
+    // The plan's content mode wins over the account's; plans without one behave as before.
+    const contentMode = job.contentMode ?? (account.settings?.contentMode || 'homefeed');
+    const searchMode = contentMode !== 'homefeed';
     let source: DailySource | undefined;
-    for (const seed of sourceCandidates(job, account)) {
+    for (const seed of await seedSources(deps, job, account, searchMode, false)) {
       abortIfNeeded(job.signal);
       const candidates = seed.type === 'keyword' && deps.discoverSources
         ? await deps.discoverSources(seed.value, account, job) : [seed];
@@ -176,9 +195,8 @@ export function createDailyPublishingExecutor(deps: DailyPublishingExecutorDeps)
       if (source) break;
     }
     // Search/mate: every listed keyword was used — unless the plan says stop, try related searches of each, in order.
-    const searchMode = (account.settings?.contentMode || 'homefeed') !== 'homefeed';
     if (!source && searchMode && !job.source && job.keywordExhaustion !== 'stop' && deps.expandKeywords) {
-      for (const seed of sourceCandidates(job, account).filter(candidate => candidate.type === 'keyword')) {
+      for (const seed of (await seedSources(deps, job, account, searchMode, true)).filter(candidate => candidate.type === 'keyword')) {
         abortIfNeeded(job.signal);
         for (const value of await deps.expandKeywords(seed.value).catch(() => [] as string[])) {
           const candidate: DailySource = { type: 'keyword', value };
@@ -201,7 +219,7 @@ export function createDailyPublishingExecutor(deps: DailyPublishingExecutorDeps)
       generator, imageSource, publishMode: job.mode, scheduleDate: target?.date, scheduleTime: target?.time,
       ...(target ? { scheduleType: 'naver-server' } : {}),
       categoryId: job.categoryId, categoryName: category.categoryName,
-      contentMode: account.settings?.contentMode || 'homefeed', toneStyle: account.settings?.toneStyle,
+      contentMode, toneStyle: account.settings?.toneStyle,
       postId: job.id, dailyImageMode: imageMode, dailyCaptureCategory: captureCategory,
       skipImages: false, useAiImage: usesDailyAiImages(imageMode), headingImageMode: 'all', thumbnailOnly: false,
       thumbnailImageRatio: '1:1', subheadingImageRatio: '1:1', imageFallbackPolicy: 'engine-only',
