@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T00:13:20.072Z",
+ "builtAt": "2026-11-03T00:23:23.306Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "10월 물가 2.8% 상승",
+   "keyword": "10월 소비자물가 2.8% 상승",
    "sources": [
     "nate"
    ],
-   "articles90": 89,
-   "recent20": 12,
-   "press": 59,
-   "firstArticleAt": "2026-11-02T23:00:00.000Z",
+   "articles90": 74,
+   "recent20": 10,
+   "press": 54,
+   "firstArticleAt": "2026-11-02T23:01:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "가공식품·외식비 상승에 10월 물가 2.8%↑…반년째 3% 안팎",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-03T00:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400152?sid=101"
+     "title": "10월 경북 소비자물가 3.1% 상승…7개월 연속 3%대",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T00:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014296763?sid=102"
     },
     {
-     "title": "10월 소비자물가 2.8%…가공식품 11개월 만에 최고, 석유류 넉 달째 15% ...",
-     "press": "theopiniontimes.news",
-     "publishedAt": "2026-11-03T00:09:00.000Z",
-     "link": "https://theopiniontimes.news/10%ec%9b%94-%ec%86%8c%eb%b9%84%ec%9e%90%eb%ac%bc%ea%b0%80-2-8%ea%b0%80%ea%b3%b5%ec%8b%9d%ed%92%88-11%ea%b0%9c%ec%9b%94-%eb%a7%8c%ec%97%90-%ec%b5%9c%ea%b3%a0-%ec%84%9d%ec%9c%a0%eb%a5%98/"
+     "title": "10월 소비자물가 2.8%↑, 정부 \"640억 규모 역대 최대 김장대책\"",
+     "press": "busan.com",
+     "publishedAt": "2026-11-03T00:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001405323?sid=101"
     },
     {
-     "title": "10월 물가 2.8%↑···가공식품 오름세·외식 물가도 9개월만 최고치",
-     "press": "whitepaper.co.kr",
-     "publishedAt": "2026-11-03T00:06:00.000Z",
-     "link": "http://www.whitepaper.co.kr/news/articleView.html?idxno=268363"
+     "title": "가공식품·외식비 상승에 10월 물가 2.8%↑‥반년째 3% 안팎",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-03T00:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533135?sid=101"
     }
    ]
   },
   {
-   "keyword": "뉴욕증시 혼조 마감",
+   "keyword": "김민석 정청래 합당론",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 24,
-   "recent20": 4,
-   "press": 24,
-   "firstArticleAt": "2026-11-02T22:46:00.000Z",
+   "articles90": 28,
+   "recent20": 6,
+   "press": 28,
+   "firstArticleAt": "2026-11-02T23:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "뉴욕증시, 유가 하락에도 기술주 매도세 지속…나스닥 1.1%↓",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-03T00:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000541314?sid=104"
+     "title": "석청대전, 진흙탕 싸움 조짐 … 김민석 \"조국당 통합, 당내 투쟁 수단 변...",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-03T00:16:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/03/2026110300057.html"
     },
     {
-     "title": "[뉴욕증시포커스] 기술주 매도에 혼조…나스닥 1.07% 하락",
-     "press": "goodkyung.com",
-     "publishedAt": "2026-11-03T00:08:00.000Z",
-     "link": "https://www.goodkyung.com/news/articleView.html?idxno=293028"
+     "title": "김민석, 정청래 '1월 합당론'에 \"당내 투쟁 수단처럼 제기돼\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-03T00:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004205749?sid=100"
     },
     {
-     "title": "국제유가 7% 떨어졌지만 기술주 ‘뚝’…나스닥 1.07%↓ [뉴욕증시]",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-03T00:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/024/0000109346?sid=101"
+     "title": "김민석, 정청래에 “조국혁신당 합당, 당내 투쟁 수단으로”",
+     "press": "weekly.khan.co.kr",
+     "publishedAt": "2026-11-03T00:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/033/0000053117?sid=100"
     }
    ]
   },
@@ -79,13 +79,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 26,
-   "recent20": 3,
-   "press": 24,
-   "firstArticleAt": "2026-11-02T22:44:00.000Z",
+   "articles90": 21,
+   "recent20": 1,
+   "press": 21,
+   "firstArticleAt": "2026-11-02T23:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "북한, 8.5조원 바이낸스 해킹 배후설 부인…김여정 \"터무니없는 수사\"",
+     "press": "digitaltoday.co.kr",
+     "publishedAt": "2026-11-03T00:16:00.000Z",
+     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=712057"
+    },
     {
      "title": "北, 바이낸스 8조원 해킹 자금 세탁 본격화···김여정은 美 배후설 반...",
      "press": "smartbizn.com",
@@ -97,44 +103,70 @@
      "press": "news.bbsi.co.kr",
      "publishedAt": "2026-11-02T23:58:00.000Z",
      "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4116355"
-    },
-    {
-     "title": "김여정, 바이낸스 해킹 부인…\"美 정치적 도발\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-02T23:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922268?sid=100"
     }
    ]
   },
   {
-   "keyword": "애플 4분기 매출 증가 예상",
+   "keyword": "뉴욕증시 혼조 마감",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 16,
-   "recent20": 1,
-   "press": 16,
-   "firstArticleAt": "2026-11-02T22:47:00.000Z",
+   "articles90": 17,
+   "recent20": 3,
+   "press": 17,
+   "firstArticleAt": "2026-11-02T22:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "애플, 아이폰 매출 17% 뛰며 분기 신기록…메모리 가격 상승은 수익성 ...",
-     "press": "jemin.com",
+     "title": "[뉴욕증시포커스] 기술주 매도에 혼조…나스닥 1.07% 하락",
+     "press": "goodkyung.com",
+     "publishedAt": "2026-11-03T00:08:00.000Z",
+     "link": "https://www.goodkyung.com/news/articleView.html?idxno=293028"
+    },
+    {
+     "title": "뉴욕증시, 유가 하락에도 기술주 매도세 지속…나스닥 1.1%↓",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-03T00:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541314?sid=104"
+    },
+    {
+     "title": "국제유가 7% 떨어졌지만 기술주 ‘뚝’…나스닥 1.07%↓ [뉴욕증시]",
+     "press": "mk.co.kr",
      "publishedAt": "2026-11-03T00:06:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=845988"
+     "link": "https://n.news.naver.com/mnews/article/024/0000109346?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "한다감 아들 최초 공개",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 12,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-02T23:07:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'47세 초보 엄마' 한다감, 생후 26일 아들 최초 공개…\"울면 온몸에 땀 ...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T00:21:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009266159"
     },
     {
-     "title": "애플, 아이폰 분기 매출 17% 급증…글로벌서 77조 팔았다",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-02T23:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006402516?sid=105"
+     "title": "‘47세 출산’ 한다감, 생후 26일 아들 최초 공개…“하늘의 축복”",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-03T00:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005757966"
     },
     {
-     "title": "애플, 역대 최대 매출 잔치…주가 왜 떨어졌나",
-     "press": "zdnet.co.kr",
-     "publishedAt": "2026-11-02T23:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/092/0002443538?sid=105"
+     "title": "한다감, 생후 26일 子 최초 공개...'오똑 콧날' 붕어빵 비주얼",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-02T23:42:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004462355"
     }
    ]
   },
@@ -143,10 +175,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 4,
-   "press": 12,
-   "firstArticleAt": "2026-11-02T22:50:00.000Z",
+   "articles90": 11,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-02T23:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -171,34 +203,67 @@
    ]
   },
   {
-   "keyword": "한다감 아들 최초 공개",
+   "keyword": "지민",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-02T23:07:00.000Z",
+   "articles90": 9,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-02T22:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘47세 출산’ 한다감, 생후 26일 아들 최초 공개…“하늘의 축복”",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-03T00:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005757966"
+     "title": "BTS 지민父 카페, 돌연 폐업 예고…“내년 영업 종료”",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-02T23:59:00.000Z",
+     "link": "https://m.entertain.naver.com/article/021/0002829811"
     },
     {
-     "title": "한다감, 생후 26일 子 최초 공개...'오똑 콧날' 붕어빵 비주얼",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-02T23:42:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004462355"
-    },
-    {
-     "title": "한다감, 47세에 얻은 아들 최초 공개…생후 26일 현실 육아에 진땀 (슈돌...",
+     "title": "BTS 지민 ‘애착 모자 쓰고’[포토엔HD]",
      "press": "newsen.com",
-     "publishedAt": "2026-11-02T23:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001183797"
+     "publishedAt": "2026-11-02T23:45:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001183804"
+    },
+    {
+     "title": "BTS 지민 ‘남사친 비주얼 뽐내며’[포토엔HD]",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-02T23:43:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001183803"
+    }
+   ]
+  },
+  {
+   "keyword": "9경기 무승 캐릭 감독",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-02T23:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "9G 무승인데 “경기가 정말 기다려진다”…캐릭, 로마전 앞두고 왜 이렇...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-03T00:19:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/241/0003538768"
+    },
+    {
+     "title": "위기의 캐릭 맨유 감독 \"내가 미쳤다고 생각할지 모르겠지만\"",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-03T00:08:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/03/2026110300058.html"
+    },
+    {
+     "title": "'38년 만의 9G 무승' 맨유 캐릭 감독 \"미쳤다 하겠지만, 로마전 기다려져...",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-02T23:59:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000078983"
     }
    ]
   },
@@ -207,10 +272,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-02T22:50:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-02T22:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -235,41 +300,105 @@
    ]
   },
   {
-   "keyword": "9경기 무승 캐릭 감독",
+   "keyword": "판례",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 8,
+   "articles90": 3,
    "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-02T22:49:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-02T23:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "위기의 캐릭 맨유 감독 \"내가 미쳤다고 생각할지 모르겠지만\"",
+     "title": "민사 판사 80% 'AI 가짜 판례' 겪었다... 대법, 과태료 입법 추진",
+     "press": "lawtv.kr",
+     "publishedAt": "2026-11-03T00:10:00.000Z",
+     "link": "https://www.lawtv.kr/news/articleView.html?idxno=61312"
+    },
+    {
+     "title": "[예규·판례] “통관 대행이 빼먹었는데”…엔진 3대 세금 떠안은 화주",
+     "press": "tfmedia.co.kr",
+     "publishedAt": "2026-11-03T00:04:00.000Z",
+     "link": "https://www.tfmedia.co.kr/news/article.html?no=208594"
+    },
+    {
+     "title": "AI가 지어낸 '가짜 판례' 법정까지…판사 80% \"허위 인용 경험\"",
+     "press": "pennmike.com",
+     "publishedAt": "2026-11-02T23:08:00.000Z",
+     "link": "https://www.pennmike.com/news/articleView.html?idxno=130840"
+    }
+   ]
+  },
+  {
+   "keyword": "조희대 고발인 조사",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 14,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T23:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "경찰, '조희대 업추비 허위 기재 의혹' 고발인 조사",
      "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-03T00:08:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/03/2026110300058.html"
+     "publishedAt": "2026-11-03T00:12:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/03/2026110300056.html"
     },
     {
-     "title": "'38년 만의 9G 무승' 맨유 캐릭 감독 \"미쳤다 하겠지만, 로마전 기다려져...",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-02T23:59:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000078983"
+     "title": "경찰, '조희대 업추비 의혹' 수사 착수…시민단체 대표 등 고발인 조사",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T00:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009266099?sid=102"
     },
     {
-     "title": "“맨유 강등, 가능한 일” 전 감독 텐하흐의 경고···“강한 선수단 갖...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-02T23:49:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/144/0001147780"
+     "title": "경찰, '조희대 업무추진비 의혹' 수사 착수…고발인 조사",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-02T23:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014296668?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "최불암 장지 식당 논란",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-02T23:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"최불암 장지 5분 거리…소맥 무료, 많이 오세요\" 홍보한 식당",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-03T00:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000518823?sid=102"
+    },
+    {
+     "title": "\"故최불암 장지서 5분\" 홍보한 식당…누리꾼 '뭇매'",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-02T23:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001976427?sid=102"
+    },
+    {
+     "title": "\"故 최불암 영면한 곳서 5분\"…소맥 무료 내건 파주 식당 '홍보 논란'",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-02T23:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005837051?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 231,
+  "flagged": 237,
   "matched": 92,
   "avgLeadMin": 230,
   "recent": [
