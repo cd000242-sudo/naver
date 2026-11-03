@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T20:30:36.670Z",
+ "builtAt": "2026-11-03T20:40:40.241Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,41 +11,41 @@
  "measured": 22,
  "candidates": [
   {
-   "keyword": "장동혁 오세훈 한동훈 보수 경쟁",
+   "keyword": "기소",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T19:32:00.000Z",
-   "exclusive": false,
+   "articles90": 5,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-03T19:29:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "오세훈·한동훈 같은 날 세 대결… 국힘 의원들 치열한 수싸움",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-03T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003695453?sid=100"
+     "title": "'조작기소 특검법안' 통과되면…12건 중 8건이 李대통령 관련",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-03T20:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016420072?sid=102"
     },
     {
-     "title": "국회 들썩인 보수 세 대결…吳·張·韓 '3강 구도' 본격화",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-03T20:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004206203?sid=100"
+     "title": "與, '조작기소 특검법' 오늘 법사위 상정…野 \"악마의 발톱 드러내\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T20:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014299525?sid=100"
     },
     {
-     "title": "오세훈-한동훈 30분 간격 토론회, 각각 의원 38명-19명 참석",
+     "title": "[단독]‘메로나 사건’ 같은 기소유예, 통계도 없다",
      "press": "donga.com",
-     "publishedAt": "2026-11-03T19:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003759854?sid=100"
+     "publishedAt": "2026-11-03T19:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003759936?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 459,
+  "flagged": 460,
   "matched": 179,
   "avgLeadMin": 241,
   "recent": [
