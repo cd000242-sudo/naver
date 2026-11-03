@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T09:27:31.391Z",
+ "builtAt": "2026-11-03T09:37:36.252Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,32 +13,65 @@
   {
    "keyword": "김민석 신천지 사과",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 90,
-   "recent20": 12,
-   "press": 77,
-   "firstArticleAt": "2026-11-03T07:58:00.000Z",
+   "articles90": 82,
+   "recent20": 9,
+   "press": 68,
+   "firstArticleAt": "2026-11-03T08:08:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "'신천지' 발표 대신 사과 택한 김민석, '가해자' 공세 나선 정청래",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-03T09:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002534547?sid=100"
+     "title": "金 사과에도 신천지 내홍 폭발 “상응한 책임 져야”vs“존재 확인됐어...",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-03T09:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006403036?sid=100"
     },
     {
-     "title": "“신천지 의혹‘ 백기 든 김민석…정청래 “해당 행위, 공개 사과” 반...",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-03T09:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003562562?sid=100"
+     "title": "‘신천지 의혹’ 증거 없었다…김민석 사과에도 거세지는 책임론",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-03T09:34:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611030194"
     },
     {
-     "title": "신천지 논란에 김민석 '울컥 사과'…정청래 반발 속 내홍 재점화",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T09:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016419539?sid=100"
+     "title": "김민석, 의원총회서 사과...\"신천지 비밀연합 증거 없어\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-03T09:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002427911?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "교육혁신선도지역 선정",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 58,
+   "recent20": 8,
+   "press": 45,
+   "firstArticleAt": "2026-11-03T08:11:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이양수 의원, 고성군 교육혁신선도지역 선정...5년간 최대 100억원 지원",
+     "press": "kado.net",
+     "publishedAt": "2026-11-03T09:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000209160?sid=100"
+    },
+    {
+     "title": "전북 5개 시군, 교육부‘교육혁신 선도지역’선정",
+     "press": "sjbnews.com",
+     "publishedAt": "2026-11-03T09:28:00.000Z",
+     "link": "https://sjbnews.com/news/news.php?number=891679"
+    },
+    {
+     "title": "유상범 의원 \"횡성군, 교육부 '교육혁신 선도지역' 선정…연 최대 20억 ...",
+     "press": "kado.net",
+     "publishedAt": "2026-11-03T09:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000209158?sid=100"
     }
    ]
   },
@@ -49,11 +82,11 @@
     "nate",
     "daum"
    ],
-   "articles90": 49,
-   "recent20": 5,
-   "press": 45,
-   "firstArticleAt": "2026-11-03T08:01:00.000Z",
-   "exclusive": true,
+   "articles90": 47,
+   "recent20": 1,
+   "press": 44,
+   "firstArticleAt": "2026-11-03T08:09:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
@@ -77,34 +110,34 @@
    ]
   },
   {
-   "keyword": "조작기소 특검법 당론 채택",
+   "keyword": "민주당 조작기소 특검법",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 47,
-   "recent20": 11,
-   "press": 39,
-   "firstArticleAt": "2026-11-03T08:02:00.000Z",
+   "articles90": 53,
+   "recent20": 9,
+   "press": 43,
+   "firstArticleAt": "2026-11-03T08:10:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "정점식 “5일 조작기소 특검법안 본회의 상정시 모든 법안 필버”",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-03T09:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000160281?sid=100"
+     "title": "민주 \"조작기소특검법 5일 본회의 처리\"…국힘 \"李재판 암장\" 반발(종합...",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-03T09:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006403032?sid=100"
     },
     {
-     "title": "국힘, 민주당 '조작기소 특검법' 강행에 필리버스터 검토",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-03T09:22:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4116568"
+     "title": "민주당, 조작기소 특검법 당론 채택…5일 본회의 처리 추진",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-03T09:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000518927?sid=100"
     },
     {
-     "title": "민주당, “민생이 첫째”라더니 조작기소특검법 당론 채택·5일 본회의...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-03T09:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003480431?sid=100"
+     "title": "정점식 \"조작기소 특검법 상정 시 필리버스터 검토\"",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-03T09:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005837567?sid=100"
     }
    ]
   },
@@ -113,94 +146,127 @@
    "sources": [
     "daum"
    ],
-   "articles90": 45,
-   "recent20": 10,
-   "press": 31,
-   "firstArticleAt": "2026-11-03T07:59:00.000Z",
+   "articles90": 42,
+   "recent20": 7,
+   "press": 29,
+   "firstArticleAt": "2026-11-03T08:12:00.000Z",
    "exclusive": true,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "美 중간선거 D데이…트럼프 지지율 32% ‘최저치 근접’",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-03T09:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002393248?sid=104"
+     "title": "미국 덮친 '블루 쓰나미'…美 중간선거 막판 요동",
+     "press": "newsgn.com",
+     "publishedAt": "2026-11-03T09:32:00.000Z",
+     "link": "https://www.newsgn.com/news/articleView.html?idxno=583326"
     },
     {
-     "title": "美백악관 벌써 중간선거 패색…탄핵 우려 속 트럼프 국정 '의회 패싱'",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-03T09:20:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=778670"
+     "title": "트럼프 운명의 날…\"5000弗 줄것\" 공언 [美 중간선거 '운명의 날']",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-03T09:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005598903?sid=104"
     },
     {
-     "title": "美중간선거 후 '증시 상승 공식' 통할까…AI 수익성이 변수",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-03T09:16:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=100551"
+     "title": "백악관 벌써 중간선거 패색…트럼프 국정 '의회 패싱' 몰두",
+     "press": "tfmedia.co.kr",
+     "publishedAt": "2026-11-03T09:30:00.000Z",
+     "link": "https://www.tfmedia.co.kr/news/article.html?no=208611"
     }
    ]
   },
   {
    "keyword": "LG생활건강 3분기 영업익 증가",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 23,
-   "recent20": 2,
-   "press": 23,
-   "firstArticleAt": "2026-11-03T07:58:00.000Z",
+   "articles90": 19,
+   "recent20": 5,
+   "press": 19,
+   "firstArticleAt": "2026-11-03T08:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "LG생활건강, 3분기 영업익 52%↑… 뷰티 적자폭 줄였다",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-03T09:22:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3445609"
+     "title": "LG생활건강, 뷰티 적자 축소에 3분기 영업익 52.4% 증가",
+     "press": "swtvnews.com",
+     "publishedAt": "2026-11-03T09:36:00.000Z",
+     "link": "https://www.swtvnews.com/news/newsview.php?ncode=1065603072700881"
     },
     {
-     "title": "LG생활건강, 3분기 영업익 704억원…뷰티 적자 지속",
-     "press": "segye.com",
-     "publishedAt": "2026-11-03T09:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004172196?sid=101"
+     "title": "LG생활건강, 3Q 영업익 52.4% ↑···\"뷰티 사업 적자 축소\"",
+     "press": "todaykorea.co.kr",
+     "publishedAt": "2026-11-03T09:36:00.000Z",
+     "link": "https://www.todaykorea.co.kr/news/articleView.html?idxno=408047"
     },
     {
-     "title": "LG생활건강, 화장품 적자 폭 축소로 3분기 영업익 전년比 52.4% 증가",
-     "press": "wikileaks-kr.org",
-     "publishedAt": "2026-11-03T09:02:00.000Z",
-     "link": "https://www.wikileaks-kr.org/news/articleView.html?idxno=194152"
+     "title": "LG생활건강, 3분기 영업익 52.4%↑…뷰티 적자 축소·음료 부진",
+     "press": "sisafocus.co.kr",
+     "publishedAt": "2026-11-03T09:36:00.000Z",
+     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367157"
     }
    ]
   },
   {
-   "keyword": "아시안컵",
+   "keyword": "제네시스 생산라인 재가동",
    "sources": [
-    "google"
+    "daum"
    ],
-   "articles90": 23,
-   "recent20": 2,
-   "press": 22,
-   "firstArticleAt": "2026-11-03T07:59:00.000Z",
+   "articles90": 16,
+   "recent20": 4,
+   "press": 16,
+   "firstArticleAt": "2026-11-03T08:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "중동 정세 불안에 아시안컵 축구 결국 연기… 2027년 12월 개최",
-     "press": "kado.net",
-     "publishedAt": "2026-11-03T09:25:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/654/0000209152"
+     "title": "현대차 제네시스 라인 재가동…신차 인력협의 재개",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-03T09:32:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2121040"
     },
     {
-     "title": "아시안컵, 결국 내년 12월로 연기…모레노 거취도 안갯속",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-03T09:12:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/005/0001882725"
+     "title": "현대차 울산공장 제네시스 생산라인 이틀만에 재가동",
+     "press": "iusm.co.kr",
+     "publishedAt": "2026-11-03T09:30:00.000Z",
+     "link": "https://www.iusm.co.kr/news/articleView.html?idxno=1070039"
     },
     {
-     "title": "아시안컵 내년 12월로 연기…‘임시 체제’ 한국, 시간 벌었다 [이런뉴...",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-03T09:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012286408?sid=121"
+     "title": "제네시스 울산 생산라인, 24시간 만에 재가동…노사 맨아워 협의",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-03T09:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003150903?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "MBK CEO CFO 지명권",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 14,
+   "recent20": 0,
+   "press": 14,
+   "firstArticleAt": "2026-11-03T08:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "영풍, 고려아연 CEO·CFO 지명권 MBK에 부여…의결권 행사도 MBK 의사 따...",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-03T08:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002247130?sid=101"
+    },
+    {
+     "title": "영풍, 고려아연 경영 주도권 MBK에 넘겼나",
+     "press": "news.bizwatch.co.kr",
+     "publishedAt": "2026-11-03T08:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/648/0000052246?sid=101"
+    },
+    {
+     "title": "콜옵션 거래 전부터 의결권은 MBK 뜻대로…영풍과 맺은 고려아연 계약 ...",
+     "press": "newslock.co.kr",
+     "publishedAt": "2026-11-03T08:34:00.000Z",
+     "link": "http://www.newslock.co.kr/news/articleView.html?idxno=139223"
     }
    ]
   },
@@ -209,24 +275,24 @@
    "sources": [
     "nate"
    ],
-   "articles90": 16,
-   "recent20": 0,
-   "press": 14,
-   "firstArticleAt": "2026-11-03T07:58:00.000Z",
+   "articles90": 13,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-03T08:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "대구 동성로 자율주행 셔틀, 7일부터 무료 운행",
+     "press": "sentv.co.kr",
+     "publishedAt": "2026-11-03T09:32:00.000Z",
+     "link": "https://www.sentv.co.kr/article/view/sentv202611030227"
+    },
     {
      "title": "[르포]대구 동성로 자율주행 셔틀 '로이' 본 운영 시작…직접 타보니",
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-03T08:41:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004206131?sid=102"
-    },
-    {
-     "title": "[르포] 대구 도심 달리는 자율주행 DRT 타보니",
-     "press": "kyongbuk.co.kr",
-     "publishedAt": "2026-11-03T08:40:00.000Z",
-     "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4089526"
     },
     {
      "title": "추경호 대구광역시장, 동성로 자율주행 셔틀 시승...7일부터 본격 운행",
@@ -237,14 +303,46 @@
    ]
   },
   {
-   "keyword": "KT 이강철 감독과 삼성 박진만 감독 대결",
+   "keyword": "서울양평 고속도로 재추진",
    "sources": [
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 2,
    "press": 5,
-   "firstArticleAt": "2026-11-03T08:06:00.000Z",
+   "firstArticleAt": "2026-11-03T08:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서울~양평 고속도로 3년 만에 재시동, 노선 원점 재검토",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-03T09:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002534548?sid=100"
+    },
+    {
+     "title": "서울-양평고속도로 사업 재개…신규 타당성조사 착수",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-03T09:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012286426?sid=101"
+    },
+    {
+     "title": "'김건희 의혹' 서울~양평고속道 중단 3년만에 재추진 … 신규 타당성 조...",
+     "press": "queen.co.kr",
+     "publishedAt": "2026-11-03T09:16:00.000Z",
+     "link": "http://www.queen.co.kr/news/articleView.html?idxno=465744"
+    }
+   ]
+  },
+  {
+   "keyword": "삼성 대 kt",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T08:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -255,48 +353,48 @@
      "link": "https://www.bntnews.co.kr/article/view/bnt202611030259"
     },
     {
-     "title": "잠시 뒤 한국시리즈 1차전...kt 대니엘·삼성 최원태 선발 대결",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-03T09:05:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/052/0002427885"
+     "title": "[포토] KT 위즈, 한국시리즈 트로피 잠시만~",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-03T09:00:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/108/0003484231"
     },
     {
-     "title": "이강철 “도망갈 곳이 없다'\" VS 박진만 “우리 팀 기세가 좋다”",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-03T08:41:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/018/0006403008"
+     "title": "[포토] KT 우승 트로피 위용",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-03T08:57:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/108/0003484220"
     }
    ]
   },
   {
-   "keyword": "코스피 3% 하락 마감",
+   "keyword": "한재아",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-03T07:59:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-03T08:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "코스피·코스닥 3%대 급락…AI 투자 수익성 우려에 반도체주 '휘청'",
-     "press": "paxetv.com",
+     "title": "배나라♥한재아, 11월14일 결혼 \"평생 함께 하고픈 소중한 사람\"",
+     "press": "joynews24.com",
      "publishedAt": "2026-11-03T09:18:00.000Z",
-     "link": "http://www.paxetv.com/news/articleView.html?idxno=285985"
+     "link": "http://www.joynews24.com/view/2022242"
     },
     {
-     "title": "[오늘의 주목주] 삼성SDI 주가 9%대 내려, 코스피 'AI 수익성 우려'에 56...",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-03T08:52:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=451074"
+     "title": "배나라♥한재아, 뮤지컬 ‘그리스’ 인연이 ‘부부’의 결실로…“평생...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-03T08:45:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001277703"
     },
     {
-     "title": "코스피, AI 자금조달 우려에 3.59% 급락…외국인 매도에 5600선 후퇴",
-     "press": "goodkyung.com",
-     "publishedAt": "2026-11-03T08:00:00.000Z",
-     "link": "https://www.goodkyung.com/news/articleView.html?idxno=293060"
+     "title": "배우 배나라-한재아 부부된다…공개열애 열 달 만에 깜짝 결혼",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-03T08:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/079/0004206106"
     }
    ]
   },
@@ -305,10 +403,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-03T08:00:00.000Z",
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T08:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -331,78 +429,44 @@
      "link": "https://www.wikitree.co.kr/articles/1171258"
     }
    ]
-  },
-  {
-   "keyword": "제주 실종 허위 종결",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T07:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "제주 전직 경찰, 실종신고 10건 '허위' 종결",
-     "press": "safetimes.co.kr",
-     "publishedAt": "2026-11-03T09:20:00.000Z",
-     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247150"
-    },
-    {
-     "title": "제주 실종 허위 종결 전직 경찰관…추가 범행 10건",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-03T08:56:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1542531"
-    },
-    {
-     "title": "제주경찰, 부 경장 허위종결 25건 추가 송치",
-     "press": "jejumaeil.net",
-     "publishedAt": "2026-11-03T07:58:00.000Z",
-     "link": "https://www.jejumaeil.net/news/articleView.html?idxno=406326"
-    }
-   ]
-  },
-  {
-   "keyword": "자동차 산업",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T08:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"전국 AI 팩토리 키우자\" … 산업부, 6500억원 투입",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-03T08:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005758475?sid=101"
-    },
-    {
-     "title": "獨자동차 부품 기업 셰플러, 구조조정 돌입",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-03T08:26:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3741169"
-    },
-    {
-     "title": "김영록 경남도의원, \"이륜자동차 주차 인프라 확충 촉구\"",
-     "press": "newsgn.com",
-     "publishedAt": "2026-11-03T08:10:00.000Z",
-     "link": "https://www.newsgn.com/news/articleView.html?idxno=583267"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 422,
-  "matched": 155,
-  "avgLeadMin": 223,
+  "flagged": 426,
+  "matched": 160,
+  "avgLeadMin": 219,
   "recent": [
+   {
+    "keyword": "사우디 아시안컵 연기",
+    "hitKeyword": "모레노호 아시안컵 변수",
+    "hitAt": "2026-11-03T18:30:00+09:00",
+    "leadMin": 134
+   },
+   {
+    "keyword": "아시안컵 중동 여파로 연기",
+    "hitKeyword": "모레노호 아시안컵 변수",
+    "hitAt": "2026-11-03T18:30:00+09:00",
+    "leadMin": 124
+   },
+   {
+    "keyword": "아시안컵 중동 연기",
+    "hitKeyword": "모레노호 아시안컵 변수",
+    "hitAt": "2026-11-03T18:30:00+09:00",
+    "leadMin": 103
+   },
+   {
+    "keyword": "아시안컵",
+    "hitKeyword": "모레노호 아시안컵 변수",
+    "hitAt": "2026-11-03T18:30:00+09:00",
+    "leadMin": 73
+   },
+   {
+    "keyword": "코스피 3% 하락 마감",
+    "hitKeyword": "코스피 5600선 마감",
+    "hitAt": "2026-11-03T18:30:00+09:00",
+    "leadMin": 53
+   },
    {
     "keyword": "재혼 황후 이종석 왕자 역할 부담",
     "hitKeyword": "재혼 황후 드라마 공개",
@@ -432,36 +496,6 @@
     "hitKeyword": "재혼 황후 드라마 공개",
     "hitAt": "2026-11-03T18:00:00+09:00",
     "leadMin": 215
-   },
-   {
-    "keyword": "신민아 재혼 황후 이야기",
-    "hitKeyword": "재혼 황후 드라마 공개",
-    "hitAt": "2026-11-03T18:00:00+09:00",
-    "leadMin": 174
-   },
-   {
-    "keyword": "45세 슈퍼모델 김자연과 결혼",
-    "hitKeyword": "슈퍼모델 김자연 결혼",
-    "hitAt": "2026-11-03T18:00:00+09:00",
-    "leadMin": 94
-   },
-   {
-    "keyword": "손영권",
-    "hitKeyword": "김자연 손영권 결혼",
-    "hitAt": "2026-11-03T17:30:00+09:00",
-    "leadMin": 104
-   },
-   {
-    "keyword": "김자연 손영권 결혼",
-    "hitKeyword": "김자연 손영권 결혼",
-    "hitAt": "2026-11-03T17:30:00+09:00",
-    "leadMin": 23
-   },
-   {
-    "keyword": "슈퍼모델 김자연 결혼",
-    "hitKeyword": "김자연 손영권 결혼",
-    "hitAt": "2026-11-03T17:30:00+09:00",
-    "leadMin": 3
    }
   ]
  }
