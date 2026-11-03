@@ -451,6 +451,12 @@ try {
       filePath: path.join(projectRoot, 'dist', 'freeTrialPolicy.js'),
     },
     {
+      // [2026-11-03 런타임 ReferenceError] contentGeneration·continuousPublishing·fullAutoFlow·multiAccountManager 가
+      //   mergeCustomPrompt 를 import 한다(3af1e5e97) — 등록 누락으로 번들에 호출만 있고 정의가 없었다.
+      label: 'contentRequestSections.js',
+      filePath: path.join(projectRoot, 'dist', 'contentRequestSections.js'),
+    },
+    {
       // [2026-09-03 가드] scheduleManager 가 import — 번들에 정의가 없었다(selectScheduledPostCandidate 호출만 존재).
       label: 'scheduler/scheduledPostLookupPolicy.js',
       filePath: path.join(projectRoot, 'dist', 'scheduler', 'scheduledPostLookupPolicy.js'),
