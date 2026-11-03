@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T22:51:27.030Z",
+ "builtAt": "2026-11-03T23:01:30.157Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,101 +8,166 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 22,
  "candidates": [
   {
-   "keyword": "쿠팡Inc 영업손실",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 64,
-   "recent20": 12,
-   "press": 54,
-   "firstArticleAt": "2026-11-03T21:25:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "쿠팡, 3분기 영업손실 6천423억원...매출 증가에도 3분기 연속 적자",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-03T22:50:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=72549"
-    },
-    {
-     "title": "쿠팡, 3분기 6423억원 영업손실…3개 분기 연속 적자",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-03T22:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000518999?sid=101"
-    },
-    {
-     "title": "쿠팡 3분기 영업손실 6천423억원…올해 적자만 2조원 육박",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-03T22:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000130500?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "김민재 뮌헨 2-0 승리",
+   "keyword": "김민재 뮌헨 2-0 승리!",
    "sources": [
     "nate"
    ],
-   "articles90": 25,
-   "recent20": 4,
-   "press": 23,
+   "articles90": 29,
+   "recent20": 6,
+   "press": 25,
    "firstArticleAt": "2026-11-03T21:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김민재 vs 이강인…UCL 맞대결 승자는 뮌헨",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-03T22:50:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/011/0004678475"
+     "title": "ATM 꺾고 팬들에게 인사하는 뮌헨 선수들",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T22:59:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/003/0014299662"
     },
     {
-     "title": "이강인·김민재 짧은 코리안더비… 뮌헨이 AT 마드리드 2-0 격파",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-03T22:44:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/396/0000759954"
+     "title": "추가 골 환호하는 뮌헨 선수들",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T22:59:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/003/0014299658"
     },
     {
-     "title": "'김민재 vs 이강인' 코리안 더비 성사! 나란히 벤치 출발→후반 교체 투...",
-     "press": "sportalkorea.com",
-     "publishedAt": "2026-11-03T22:41:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/139/0002255518"
+     "title": "김민재의 뮌헨, 이강인의 아틀레티코와 UCL 대결 2대 0 완승",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-03T22:57:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/055/0001400481"
     }
    ]
   },
   {
-   "keyword": "김여정, 국익 동일시 아냐",
+   "keyword": "오늘 오후부터 결과",
    "sources": [
     "nate"
    ],
-   "articles90": 16,
-   "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-03T21:25:00.000Z",
+   "articles90": 23,
+   "recent20": 8,
+   "press": 17,
+   "firstArticleAt": "2026-11-03T21:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김여정, 美에 \"선택지에 대화 있지만 국익과 동일시되는 것 아냐\"",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-03T22:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000541550?sid=101"
+     "title": "[오늘의 띠별 운세] 2026년 11월 4일 수요일",
+     "press": "mhns.co.kr",
+     "publishedAt": "2026-11-03T22:56:00.000Z",
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=767413"
     },
     {
-     "title": "김여정, 바이낸스 사태에 \"선택지 대화 있지만 국익 동일시 아냐\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-03T22:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400469?sid=100"
+     "title": "미국 중간선거 오늘 윤곽…결과에 따라 달라지는 트럼프의 입지",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-03T22:54:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1171585"
     },
     {
-     "title": "김여정, 바이낸스사태에 “선택지 대화 있지만 국익 동일시 아냐”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-03T22:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012286793?sid=100"
+     "title": "국힘 397억원 반환하나...오늘 尹 2심 선고 '생중계'",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-03T22:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001271575?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "셀트리온",
+   "sources": [
+    "google"
+   ],
+   "articles90": 9,
+   "recent20": 7,
+   "press": 9,
+   "firstArticleAt": "2026-11-03T22:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "셀트리온, 세계 최초 4중 작용 비만치료제 비임상 결과 공개…내년 IND ...",
+     "press": "theguru.co.kr",
+     "publishedAt": "2026-11-03T22:56:00.000Z",
+     "link": "https://www.theguru.co.kr/news/article.html?no=109216"
+    },
+    {
+     "title": "셀트리온, 세계 첫 '4중작용' 비만약 결과 공개…\"내년 글로벌 임상 돌...",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-03T22:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005436211?sid=101"
+    },
+    {
+     "title": "셀트리온, 체중 감량에 근손실 억제까지..4중 작용 비만약 비임상 성과",
+     "press": "kpenews.com",
+     "publishedAt": "2026-11-03T22:54:00.000Z",
+     "link": "https://kpenews.com/View.aspx?No=4296238"
+    }
+   ]
+  },
+  {
+   "keyword": "유럽 여객기 폭파 위협",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 7,
+   "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-03T21:43:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "유럽 10여개 항공편 폭파 위협으로 긴급 착륙 등 소동",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-03T22:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005599017?sid=104"
+    },
+    {
+     "title": "유럽서 여객기 7대에 폭발물 위협…전투기 출격하고 공항 폐쇄",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-03T22:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202370?sid=104"
+    },
+    {
+     "title": "유럽 여객기 7대 폭파 위협⋯전투기 출격하고 비상착륙",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-03T22:50:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2643749"
+    }
+   ]
+  },
+  {
+   "keyword": "띠별 운세",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-03T21:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "2026년 11월 04일, 오늘의 띠별 운세 [인포그래픽]",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-03T23:00:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=248734"
+    },
+    {
+     "title": "[오늘의 띠별 운세] 2026년 11월 4일 수요일",
+     "press": "mhns.co.kr",
+     "publishedAt": "2026-11-03T22:56:00.000Z",
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=767413"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 4일 띠별 운세",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-03T22:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003481840?sid=103"
     }
    ]
   },
@@ -111,13 +176,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 6,
+   "articles90": 7,
    "recent20": 1,
-   "press": 5,
+   "press": 6,
    "firstArticleAt": "2026-11-03T21:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "동양생명, '(무)우리WON하는건강플러스종신보험' 출시",
+     "press": "bizwnews.com",
+     "publishedAt": "2026-11-03T22:52:00.000Z",
+     "link": "http://www.bizwnews.com/news/articleView.html?idxno=150808"
+    },
     {
      "title": "삼성 보험계열사, 비계열사 지분 문제 다시 수면 위",
      "press": "fins.co.kr",
@@ -129,109 +200,6 @@
      "press": "newsmaker.or.kr",
      "publishedAt": "2026-11-03T22:20:00.000Z",
      "link": "http://www.newsmaker.or.kr/news/articleView.html?idxno=185115"
-    },
-    {
-     "title": "연말 임기 끝날 보험협회장…차기 수장 '대관 역량' 주목",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-03T22:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003150945?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "유럽 여객기 폭파 위협",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-03T21:43:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "유럽 여객기 7대 폭파 위협⋯전투기 출격하고 비상착륙",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-03T22:50:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2643749"
-    },
-    {
-     "title": "유럽 항공기 폭파 위협 수두룩…비상착륙·전투기 출격 ‘긴장’",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-03T22:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003056979?sid=104"
-    },
-    {
-     "title": "유럽 여객기 7대 폭파 위협 신고에 비상착륙...\"러 연관 조직 의심\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-03T21:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002428049?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "띠별 운세",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-03T21:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘의 운세] 2026년 11월 4일 띠별 운세",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-03T22:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003481840?sid=103"
-    },
-    {
-     "title": "[오늘의 운세] 11월 4일 양띠 인연 닿고 호랑이띠 일 술술 풀려",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-03T22:20:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3081290"
-    },
-    {
-     "title": "[오늘의 운세] 띠별 운세 11월 4일",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-03T22:02:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=400210"
-    }
-   ]
-  },
-  {
-   "keyword": "셀트리온",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 3,
-   "press": 4,
-   "firstArticleAt": "2026-11-03T22:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "셀트리온, 4중 작용 비만치료제 첫 공개…\"근손실 줄인 감량\"",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-03T22:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005837640?sid=101"
-    },
-    {
-     "title": "셀트리온, 4중작용 비만약 비임상 공개…\"내년 임상 진입\"",
-     "press": "medisobizanews.com",
-     "publishedAt": "2026-11-03T22:44:00.000Z",
-     "link": "http://www.medisobizanews.com/news/articleView.html?idxno=143929"
-    },
-    {
-     "title": "\"체중 감량 넘어 근손실까지 잡는다\"…셀트리온, 4중 표적 비만치료제 ...",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-03T22:40:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=92960"
     }
    ]
   },
@@ -241,7 +209,7 @@
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-03T21:56:00.000Z",
    "exclusive": false,
@@ -302,8 +270,7 @@
   {
    "keyword": "32기 영수 몰카 사과",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 0,
@@ -331,43 +298,11 @@
      "link": "https://www.bntnews.co.kr/article/view/bnt202611040014"
     }
    ]
-  },
-  {
-   "keyword": "김자연과 결혼",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T21:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "70세 前삼성전자 사장, 25살 연하 슈퍼모델 김자연과 화촉…MIT 선후배에...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-03T22:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004172352?sid=103"
-    },
-    {
-     "title": "김자연, 25세 연상 前삼성전자 사장과 결혼",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-03T21:38:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611040013"
-    },
-    {
-     "title": "45살 김자연, 70살 손영권과 결혼-이목 집중",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-03T21:30:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=94499"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 488,
+  "flagged": 490,
   "matched": 196,
   "avgLeadMin": 274,
   "recent": [
