@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T23:11:37.175Z",
+ "builtAt": "2026-11-03T23:21:40.298Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,19 +11,57 @@
  "measured": 20,
  "candidates": [
   {
-   "keyword": "김여정 바이낸스 사태",
+   "keyword": "혼조 마감 나스닥 0.83%↑",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 38,
-   "recent20": 5,
-   "press": 35,
-   "firstArticleAt": "2026-11-03T21:46:00.000Z",
+   "articles90": 41,
+   "recent20": 6,
+   "press": 40,
+   "firstArticleAt": "2026-11-03T21:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[IT큐레이션] 바이낸스가 가짜 면접 하나에 8조원 뚫린 '썰' 풀어보니",
+     "title": "[굿모닝! 글로벌 뉴욕증시] 반도체 저가 매수에 유입 나스닥, S&P500 강세...",
+     "press": "newsquest.co.kr",
+     "publishedAt": "2026-11-03T23:18:00.000Z",
+     "link": "https://www.newsquest.co.kr/news/articleView.html?idxno=304152"
+    },
+    {
+     "title": "미·이란 협상 기대에 반도체주 반등... 나스닥 0.83%↑ [뉴욕증시]",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-03T23:16:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2014055"
+    },
+    {
+     "title": "뉴욕증시, 중간선거 경계 혼조 마감…'반도체주 반등'에 나스닥 상승",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-03T23:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002393267?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "김여정 바이낸스 사태",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 35,
+   "recent20": 3,
+   "press": 34,
+   "firstArticleAt": "2026-11-03T21:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김여정, 바이낸스 사태에 사흘 새 두 차례 담화…\"美와 마주 앉지 않을...",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-03T23:12:00.000Z",
+     "link": "https://www.ajunews.com/view/20261104071026641"
+    },
+    {
+     "title": "[IT큐레이션] 바이낸스가 가짜 면접 하나에 8조원 뚫린 '썰' 들어보니",
      "press": "econovill.com",
      "publishedAt": "2026-11-03T23:06:00.000Z",
      "link": "https://www.econovill.com/news/articleView.html?idxno=755932"
@@ -33,44 +71,38 @@
      "press": "kado.net",
      "publishedAt": "2026-11-03T23:05:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/654/0000209285?sid=100"
-    },
-    {
-     "title": "北 김여정, 美바이낸스 사태 배후 지목에 \"美와 마주 앉을 필요 없어”",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-03T23:00:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/04/2026110400029.html"
     }
    ]
   },
   {
-   "keyword": "오늘 오후부터 결과",
+   "keyword": "뉴욕 마라톤 결승선 사망",
    "sources": [
     "nate"
    ],
-   "articles90": 22,
-   "recent20": 2,
-   "press": 16,
-   "firstArticleAt": "2026-11-03T21:47:00.000Z",
+   "articles90": 11,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-03T21:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오늘의 띠별 운세] 2026년 11월 4일 수요일",
-     "press": "mhns.co.kr",
-     "publishedAt": "2026-11-03T22:56:00.000Z",
-     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=767413"
+     "title": "결승선 3.6㎞ 남기고 쓰러져…뉴욕마라톤서도 20대 여성 사망",
+     "press": "kado.net",
+     "publishedAt": "2026-11-03T23:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000209286?sid=104"
     },
     {
-     "title": "미국 중간선거 오늘 윤곽…결과에 따라 달라지는 트럼프의 입지",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-03T22:54:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1171585"
+     "title": "미국서도 20대 여성 마라톤 도중 사망…전 대학 하키선수",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-03T22:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002830115?sid=104"
     },
     {
-     "title": "국힘 397억원 반환하나...오늘 尹 2심 선고 '생중계'",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-03T22:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001271575?sid=102"
+     "title": "뉴욕시마라톤서 24세 참가자 숨져...사인 횡문근융해증",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-03T22:52:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=778742"
     }
    ]
   },
@@ -79,30 +111,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 9,
+   "articles90": 8,
    "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-03T21:49:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-03T22:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "北해커, 바이낸스 직원 가짜면접해 컴퓨터에 악성코드 심었다",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-03T23:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003481848?sid=105"
+    },
+    {
+     "title": "북한 해커, 바이낸스 5개월간 사이버 공격…가짜 면접으로 직원 속여 침...",
+     "press": "voakorea.com",
+     "publishedAt": "2026-11-03T22:58:00.000Z",
+     "link": "https://www.voakorea.com/a/8218525.html"
+    },
     {
      "title": "\"북 해커, 바이낸스 다섯 달 다단계 공격\"...가짜 채용에 SNS까지 동원",
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-03T22:58:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002428070?sid=104"
-    },
-    {
-     "title": "北 해커, 바이낸스 직원 가짜 면접해 컴퓨터에 악성코드 심었다",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-03T22:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000648820?sid=100"
-    },
-    {
-     "title": "면접관도 CEO도 가짜였다···북한 해커들 ‘위장 채용’으로 엔지니어...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-03T22:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003480533?sid=100"
     }
    ]
   },
@@ -111,13 +143,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-03T21:43:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-03T22:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "유럽 여객기 7대에 폭파 위협 신고… 전투기도 출격",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-03T23:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000963485?sid=104"
+    },
     {
      "title": "유럽 10여개 항공편 폭파 위협으로 긴급 착륙 등 소동",
      "press": "fnnews.com",
@@ -129,44 +167,6 @@
      "press": "biz.chosun.com",
      "publishedAt": "2026-11-03T22:55:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/366/0001202370?sid=104"
-    },
-    {
-     "title": "유럽 여객기 7대 폭파 위협⋯전투기 출격하고 비상착륙",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-03T22:50:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2643749"
-    }
-   ]
-  },
-  {
-   "keyword": "32기 영수 몰카 사과",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-03T21:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“몰카 찍고 선물?” 32기 영수, 사과문인가 해명문인가…반응 ‘싸늘’",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-03T23:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001277894"
-    },
-    {
-     "title": "\"변명 여지 없이 제 잘못\"…'나는 솔로' 32 영수, 몰카 논란 사과",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-03T22:26:00.000Z",
-     "link": "https://www.ajunews.com/view/20261104071904646"
-    },
-    {
-     "title": "‘계약결혼’ 32기 영수, 방송 중 당당한 몰카 촬영 “기념 영상 선물하...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-03T22:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001184271"
     }
    ]
   },
@@ -203,12 +203,44 @@
    ]
   },
   {
+   "keyword": "32기 영수 몰카 사과",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T22:17:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“몰카 찍고 선물?” 32기 영수, 사과문인가 해명문인가…반응 ‘싸늘’",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-03T23:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001277894"
+    },
+    {
+     "title": "\"변명 여지 없이 제 잘못\"…'나는 솔로' 32 영수, 몰카 논란 사과",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-03T22:26:00.000Z",
+     "link": "https://www.ajunews.com/view/20261104071904646"
+    },
+    {
+     "title": "‘계약결혼’ 32기 영수, 방송 중 당당한 몰카 촬영 “기념 영상 선물하...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-03T22:17:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001184271"
+    }
+   ]
+  },
+  {
    "keyword": "김자연과 결혼",
    "sources": [
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-03T22:19:00.000Z",
    "exclusive": false,
@@ -302,7 +334,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 493,
+  "flagged": 495,
   "matched": 205,
   "avgLeadMin": 284,
   "recent": [
