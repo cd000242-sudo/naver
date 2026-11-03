@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T22:31:18.718Z",
+ "builtAt": "2026-11-03T22:41:23.020Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 22,
  "candidates": [
   {
-   "keyword": "쿠팡 3분기 영업손실 6423억",
+   "keyword": "뉴욕증시 혼조",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 83,
-   "recent20": 15,
-   "press": 52,
-   "firstArticleAt": "2026-11-03T21:11:00.000Z",
+   "articles90": 42,
+   "recent20": 7,
+   "press": 37,
+   "firstArticleAt": "2026-11-03T21:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "쿠팡, 3분기 6423억원 영업손실…3년간 번 돈 사실상 날렸다",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-03T22:29:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000079358"
+     "title": "뉴욕증시, 중간선거 결과 기다리며 혼조 마감",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-03T22:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202367?sid=104"
     },
     {
-     "title": "쿠팡, 매출 14조원에도 적자 지속… 올해 영업손실 1조8318억원",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-03T22:28:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=100565"
+     "title": "뉴욕증시, 반도체주 반등에 나스닥 0.83% 상승...중간선거 경계 속 혼조...",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-03T22:34:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=72546"
     },
     {
-     "title": "쿠팡, 3분기 만에 사상 최대 영업적자…3년간 번 이익 반납(종합)",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-03T22:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005837637?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "바이낸스 해킹 사건",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 36,
-   "recent20": 11,
-   "press": 33,
-   "firstArticleAt": "2026-11-03T21:09:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김여정, 바이낸스 해킹 북한 배후설 재차 반발 “미국의 악의적 기도”",
-     "press": "vop.co.kr",
-     "publishedAt": "2026-11-03T22:28:00.000Z",
-     "link": "https://vop.co.kr/A00001697450.html"
-    },
-    {
-     "title": "김여정, 바이낸스 사태에 \"선택지에 대화 있지만 국익 동일시 아냐\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-03T22:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000963482?sid=100"
-    },
-    {
-     "title": "바이낸스, 5개월 걸친 北해킹 경로 공개…가짜 면접으로 직원 정보 획득",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-03T22:28:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=778723"
+     "title": "뉴욕증시, 美중간선거 경계 속 혼조…반도체 반등에 나스닥 0.83%↑",
+     "press": "the-today.com",
+     "publishedAt": "2026-11-03T22:34:00.000Z",
+     "link": "https://www.the-today.com/news/articleView.html?idxno=92991"
     }
    ]
   },
@@ -80,23 +48,23 @@
     "google"
    ],
    "articles90": 22,
-   "recent20": 5,
+   "recent20": 3,
    "press": 21,
    "firstArticleAt": "2026-11-03T21:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 뉴욕증시, 오라클 5.85%·AMD 3.65% 급등…엔비디아·마이크론 강...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-03T22:30:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=622866"
-    },
-    {
      "title": "마이크론 855달러·AMD 483달러…반도체 대형주 일제히 '환호성'",
      "press": "pinpointnews.co.kr",
      "publishedAt": "2026-11-03T22:30:00.000Z",
      "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=501055"
+    },
+    {
+     "title": "[속보] 뉴욕증시, 오라클 5.85%·AMD 3.65% 급등…엔비디아·마이크론 강...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-03T22:30:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=622866"
     },
     {
      "title": "AMD, 실적·전망 기대 웃돌아… 시간외 8% 급등",
@@ -107,98 +75,66 @@
    ]
   },
   {
-   "keyword": "SK하이닉스 장비 반입 보류",
+   "keyword": "김민재 뮌헨 2-0 승리",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 18,
-   "recent20": 1,
-   "press": 17,
-   "firstArticleAt": "2026-11-03T21:02:00.000Z",
-   "exclusive": true,
+   "articles90": 22,
+   "recent20": 2,
+   "press": 20,
+   "firstArticleAt": "2026-11-03T21:53:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“美 정부, SK하이닉스 ‘중국 공장’ 장비반입 제동”",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-03T22:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001882877?sid=101"
+     "title": "후반 펼쳐진 '코리안 더비'…뮌헨 김민재, AT 마드리드 이강인에 판정승",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-03T22:39:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/079/0004206221"
     },
     {
-     "title": "SK하이닉스, 뉴욕 반도체 공장 건설 차질⋯美, 다롄공장 장비 반입 불허",
-     "press": "autodaily.co.kr",
-     "publishedAt": "2026-11-03T22:10:00.000Z",
-     "link": "https://www.autodaily.co.kr/news/articleView.html?idxno=601750"
+     "title": "김민재, 모레노 앞에서 이강인에 판정승…뮌헨, ATM에 2-0 승리",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T22:22:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/421/0009268762"
     },
     {
-     "title": "“美, SK하이닉스 中공장 장비반입 제동…뉴욕 공장투자도 차질” <로이...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-03T22:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002718429?sid=104"
+     "title": "[UCL] '코리안 더비' 후반 성사...뮌헨 김민재 웃고, ATM 이강인 울어",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-03T22:20:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261104000039"
     }
    ]
   },
   {
-   "keyword": "10월 외환보유액 26억↑",
+   "keyword": "김여정, 국익 동일시 아냐",
    "sources": [
     "nate"
    ],
    "articles90": 15,
-   "recent20": 1,
-   "press": 15,
-   "firstArticleAt": "2026-11-03T21:02:00.000Z",
+   "recent20": 4,
+   "press": 14,
+   "firstArticleAt": "2026-11-03T21:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "10월 외환보유액 4431억6000만달러…두 달 만에 반등, 세계 9위 복귀",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-03T22:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003481839?sid=101"
+     "title": "김여정, 바이낸스 사태에 \"선택지 대화 있지만 국익 동일시 아냐\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-03T22:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400469?sid=100"
     },
     {
-     "title": "외환보유액 두 달 만에 반등…예치금 늘고 유가증권 줄어",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-03T22:02:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=314562"
+     "title": "김여정, 바이낸스사태에 “선택지 대화 있지만 국익 동일시 아냐”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-03T22:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012286793?sid=100"
     },
     {
-     "title": "10월 외환보유액 4,432억달러…2계단 상승한 9위",
-     "press": "mbnmoney.mbn.co.kr",
-     "publishedAt": "2026-11-03T21:46:00.000Z",
-     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005954440"
-    }
-   ]
-  },
-  {
-   "keyword": "보안",
-   "sources": [
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-03T21:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "스노우플레이크, 알아서 일하는 AI 에이전트 공개…보안·통제 강화",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-03T22:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005436205?sid=105"
-    },
-    {
-     "title": "[오늘 뉴스 4컷] 정부, 사이버보안 총괄 체계 정비…정치권, 조작기소 특...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-03T22:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004172350?sid=100"
-    },
-    {
-     "title": "[빗썸 보안 민낯⑥] 빗썸, 123억 보안투자 늘렸지만…IT 확대 속도 못 미...",
-     "press": "news.ifm.kr",
-     "publishedAt": "2026-11-03T22:00:00.000Z",
-     "link": "https://news.ifm.kr/news/articleView.html?idxno=483322"
+     "title": "北 김여정 \"선택지에 美 대화 있지만 국익과 동일시 아냐\"",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-03T22:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000548465?sid=100"
     }
    ]
   },
@@ -209,11 +145,17 @@
    ],
    "articles90": 10,
    "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-03T21:03:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-03T21:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "자사주 소각에 흔들리는 삼성 보험계열사 지분",
+     "press": "fins.co.kr",
+     "publishedAt": "2026-11-03T22:40:00.000Z",
+     "link": "http://www.fins.co.kr/news/articleView.html?idxno=110408"
+    },
     {
      "title": "국민건강보험공단 광주전라제주지역본부, 디지털 교육 격차 해소 위해 ...",
      "press": "newsmaker.or.kr",
@@ -225,52 +167,46 @@
      "press": "dailian.co.kr",
      "publishedAt": "2026-11-03T22:05:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/119/0003150945?sid=101"
-    },
-    {
-     "title": "‘이 정도는 괜찮겠지’…일상 파고든 보험사기 [김앤장 금융·핀테크·...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-03T22:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005758606?sid=102"
     }
    ]
   },
   {
-   "keyword": "KT 박영현 1차전 승리",
+   "keyword": "띠별 운세",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-03T21:12:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-03T21:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'4세이브' 첫걸음 뗀 KT 박영현 \"2차전 더 좋은 컨디션으로\"",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-03T22:00:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=879563"
+     "title": "[오늘의 운세] 2026년 11월 4일 띠별 운세",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-03T22:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003481840?sid=103"
     },
     {
-     "title": "‘8점 내고, 7점 쫓고’…첫 판부터 명승부 승자는 kt",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-03T21:51:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/056/0012286791"
+     "title": "[오늘의 운세] 11월 4일 양띠 인연 닿고 호랑이띠 일 술술 풀려",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-03T22:20:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3081290"
     },
     {
-     "title": "오늘 'kt vs 삼성' 한국시리즈 2차전…중계 어디서?",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-03T21:36:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2643727"
+     "title": "[오늘의 운세] 띠별 운세 11월 4일",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-03T22:02:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=400210"
     }
    ]
   },
   {
    "keyword": "유럽 여객기 폭파 위협",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 5,
    "recent20": 0,
@@ -300,12 +236,45 @@
    ]
   },
   {
-   "keyword": "32기 영수, 몰카 논란 사과",
+   "keyword": "보안",
    "sources": [
-    "signal.bz"
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-03T21:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "스노우플레이크, 알아서 일하는 AI 에이전트 공개…보안·통제 강화",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-03T22:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005436205?sid=105"
+    },
+    {
+     "title": "[오늘 뉴스 4컷] 정부, 사이버보안 총괄 체계 정비…정치권, 조작기소 특...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-03T22:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004172350?sid=100"
+    },
+    {
+     "title": "[빗썸 보안 민낯⑥] 빗썸, 123억 보안투자 늘렸지만…IT 확대 속도 못 미...",
+     "press": "news.ifm.kr",
+     "publishedAt": "2026-11-03T22:00:00.000Z",
+     "link": "https://news.ifm.kr/news/articleView.html?idxno=483322"
+    }
+   ]
+  },
+  {
+   "keyword": "32기 영수 몰카 사과",
+   "sources": [
+    "signal.bz",
+    "nate"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-03T21:14:00.000Z",
    "exclusive": false,
@@ -339,10 +308,16 @@
    "articles90": 4,
    "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-03T21:06:00.000Z",
+   "firstArticleAt": "2026-11-03T21:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "러시아, 우크라 구호센터에 폭탄 9발…33명 사망",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-03T22:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001882878?sid=104"
+    },
     {
      "title": "종전 협상 앞두고 러, 우크라 대공습…젤렌스키 \"유럽, 협상테이블 앉아...",
      "press": "view.asiae.co.kr",
@@ -354,145 +329,107 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-03T21:56:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014299622?sid=104"
-    },
-    {
-     "title": "러, 우크라 구호센터 폭격해 최소 33명 사망…종전협상 주도권 노리나",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-03T21:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012286764?sid=104"
     }
    ]
   },
   {
-   "keyword": "띠별 운세",
+   "keyword": "김자연과 결혼",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
    "firstArticleAt": "2026-11-03T21:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오늘의 운세] 11월 4일 양띠 인연 닿고 호랑이띠 일 술술 풀려",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-03T22:20:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3081290"
+     "title": "70세 前삼성전자 사장, 25살 연하 슈퍼모델 김자연과 화촉…MIT 선후배에...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-03T22:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004172352?sid=103"
     },
     {
-     "title": "[오늘의 운세] 띠별 운세 11월 4일",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-03T22:02:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=400210"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 4일 (수) 띠별운세 '겨울 채비를 하자'",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-03T21:40:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103266"
-    }
-   ]
-  },
-  {
-   "keyword": "재혼 황후",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T21:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘재혼황후’ 3일 OTT 공개",
+     "title": "김자연, 25세 연상 前삼성전자 사장과 결혼",
      "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-03T22:10:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611040020"
+     "publishedAt": "2026-11-03T21:38:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611040013"
     },
     {
-     "title": "[주말에 몰아보기] 신민아→이종석 '재혼 황후', 막장에 왕관 씌운 제법...",
-     "press": "ize.co.kr",
-     "publishedAt": "2026-11-03T22:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/465/0000020751"
-    },
-    {
-     "title": "[잇슈 컬처] 신민아·주지훈·이종석 ‘재혼 황후’ 첫 공개",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-03T21:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012286786?sid=103"
+     "title": "45살 김자연, 70살 손영권과 결혼-이목 집중",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-03T21:30:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=94499"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 481,
-  "matched": 186,
+  "flagged": 486,
+  "matched": 196,
   "avgLeadMin": 274,
   "recent": [
    {
-    "keyword": "U-17 월드컵 우간다 첫 경기",
-    "hitKeyword": "월드컵 불법도박조직 적발",
-    "hitAt": "2026-11-04T07:00:00+09:00",
-    "leadMin": 2515
+    "keyword": "LG생활건강 3분기 영업익 52% 증가",
+    "hitKeyword": "쿠팡 3분기 적자",
+    "hitAt": "2026-11-04T07:30:00+09:00",
+    "leadMin": 823
    },
    {
-    "keyword": "북한 해커 비트코인 탈취",
-    "hitKeyword": "북한 해커 자금세탁",
-    "hitAt": "2026-11-04T07:00:00+09:00",
-    "leadMin": 1437
+    "keyword": "LG생활건강 3분기 영업익 증가",
+    "hitKeyword": "쿠팡 3분기 적자",
+    "hitAt": "2026-11-04T07:30:00+09:00",
+    "leadMin": 782
    },
    {
-    "keyword": "아이폰 듀오",
-    "hitKeyword": "아이폰 듀오 갤폴드8",
-    "hitAt": "2026-11-04T07:00:00+09:00",
-    "leadMin": 1347
+    "keyword": "제주항공 3분기 흑자전환",
+    "hitKeyword": "쿠팡 3분기 적자",
+    "hitAt": "2026-11-04T07:30:00+09:00",
+    "leadMin": 762
    },
    {
-    "keyword": "해커",
-    "hitKeyword": "북한 해커 자금세탁",
-    "hitAt": "2026-11-04T07:00:00+09:00",
-    "leadMin": 974
+    "keyword": "KT 1차전 승리",
+    "hitKeyword": "한국시리즈 1차전 KT",
+    "hitAt": "2026-11-04T07:30:00+09:00",
+    "leadMin": 79
    },
    {
-    "keyword": "유럽 여객기 폭파 위협",
-    "hitKeyword": "유럽 여객기 폭파 위협",
-    "hitAt": "2026-11-04T06:30:00+09:00",
-    "leadMin": 80
+    "keyword": "연금",
+    "hitKeyword": "국민연금 기초연금 역전",
+    "hitAt": "2026-11-04T07:30:00+09:00",
+    "leadMin": 59
    },
    {
-    "keyword": "김민",
-    "hitKeyword": "이강인 김민재 코리안더비",
-    "hitAt": "2026-11-04T06:00:00+09:00",
-    "leadMin": 1216
+    "keyword": "쿠팡 3분기 적자 6423억",
+    "hitKeyword": "쿠팡 3분기 적자",
+    "hitAt": "2026-11-04T07:30:00+09:00",
+    "leadMin": 49
    },
    {
-    "keyword": "한학자 보석 취소",
-    "hitKeyword": "한학자 보석 취소",
-    "hitAt": "2026-11-04T06:00:00+09:00",
-    "leadMin": 331
+    "keyword": "SK하이닉스 장비 반입 보류",
+    "hitKeyword": "SK하이닉스 목표주가",
+    "hitAt": "2026-11-04T07:30:00+09:00",
+    "leadMin": 49
    },
    {
-    "keyword": "애플 매출 증가",
-    "hitKeyword": "애플 글로벌 매출",
-    "hitAt": "2026-11-04T00:00:00+09:00",
-    "leadMin": 937
+    "keyword": "한국시리즈",
+    "hitKeyword": "한국시리즈 1차전 KT",
+    "hitAt": "2026-11-04T07:30:00+09:00",
+    "leadMin": 49
    },
    {
-    "keyword": "애플 분기 매출 증가",
-    "hitKeyword": "애플 글로벌 매출",
-    "hitAt": "2026-11-04T00:00:00+09:00",
-    "leadMin": 917
+    "keyword": "쿠팡 3분기 영업손실 6423억원",
+    "hitKeyword": "쿠팡 3분기 적자",
+    "hitAt": "2026-11-04T07:30:00+09:00",
+    "leadMin": 29
    },
    {
-    "keyword": "애플 4분기 매출 증가 예상",
-    "hitKeyword": "애플 글로벌 매출",
-    "hitAt": "2026-11-04T00:00:00+09:00",
-    "leadMin": 897
+    "keyword": "KT 박영현 1차전 승리",
+    "hitKeyword": "한국시리즈 1차전 KT",
+    "hitAt": "2026-11-04T07:30:00+09:00",
+    "leadMin": 19
    }
   ]
  }
