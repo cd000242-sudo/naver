@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T02:04:01.982Z",
+ "builtAt": "2026-11-03T02:14:05.878Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 47,
-   "recent20": 4,
+   "articles90": 46,
+   "recent20": 3,
    "press": 46,
-   "firstArticleAt": "2026-11-03T00:36:00.000Z",
+   "firstArticleAt": "2026-11-03T00:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "가상자산 과세 또 미뤄지나…與, 2년 유예 건의에 과세 형평성 논란",
+     "press": "ppss.kr",
+     "publishedAt": "2026-11-03T02:11:00.000Z",
+     "link": "https://www.ppss.kr/news/articleView.html?idxno=318740"
+    },
+    {
+     "title": "與재경위, 가상자산 과세 추가 유예 거론…지도부 건의키로",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-03T02:04:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=100504"
+    },
     {
      "title": "민주당 재경위, 당 지도부에 가상자산 과세유예 건의키로…“2년 유예 ...",
      "press": "viva100.com",
      "publishedAt": "2026-11-03T01:58:00.000Z",
      "link": "https://www.viva100.com/article/20261103500515"
-    },
-    {
-     "title": "與 재경위, 지도부에 '코인 과세 유예' 건의키로…\"2년 정도 거론\"",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-03T01:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001071674?sid=100"
-    },
-    {
-     "title": "與 재경위 “가상자산 과세 유예 의견, 당 지도부에 건의”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-03T01:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003695190?sid=100"
     }
    ]
   },
@@ -47,62 +47,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 46,
-   "recent20": 7,
-   "press": 43,
-   "firstArticleAt": "2026-11-03T00:35:00.000Z",
+   "articles90": 38,
+   "recent20": 6,
+   "press": 37,
+   "firstArticleAt": "2026-11-03T00:46:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "'대통령 순방단 개인정보 유출'...청와대, 비서실장 주재 긴급회의",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-03T02:12:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1134606"
+    },
+    {
+     "title": "李 대통령 부부 등 168명 개인정보 유출…靑 긴급회의",
+     "press": "sisafocus.co.kr",
+     "publishedAt": "2026-11-03T02:08:00.000Z",
+     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367117"
+    },
     {
      "title": "대통령 순방단 168명 개인정보 유출 일파만파… 靑, 긴급회의 소집 \"책임...",
      "press": "ddaily.co.kr",
      "publishedAt": "2026-11-03T02:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/138/0002247052?sid=105"
-    },
-    {
-     "title": "대통령 여권번호까지 샜다…靑 긴급회의 “책임 규명·전면 점검”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-03T01:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002718066?sid=100"
-    },
-    {
-     "title": "靑, 대통령 순방단 개인정보 유출 긴급회의 … \"중대 사안, 관리 책임 명...",
-     "press": "queen.co.kr",
-     "publishedAt": "2026-11-03T01:56:00.000Z",
-     "link": "http://www.queen.co.kr/news/articleView.html?idxno=465680"
-    }
-   ]
-  },
-  {
-   "keyword": "LG엔솔 3분기 영업익",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 29,
-   "recent20": 10,
-   "press": 29,
-   "firstArticleAt": "2026-11-03T00:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "LG엔솔, 3Q 매출·영업익 ‘동반 성장’…북미 ESS 생산 확대 속도낸다",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-03T02:02:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611030057"
-    },
-    {
-     "title": "LG엔솔 3분기 영업익 7,560억원…전년동기비 25.7% 증가",
-     "press": "itbiznews.com",
-     "publishedAt": "2026-11-03T02:00:00.000Z",
-     "link": "https://www.itbiznews.com/news/articleView.html?idxno=230079"
-    },
-    {
-     "title": "LG엔솔, 3Q 영업익 7560억…내년 북미 ESS 70GWh 확보",
-     "press": "fetv.co.kr",
-     "publishedAt": "2026-11-03T01:58:00.000Z",
-     "link": "https://www.fetv.co.kr/news/articleView.html?idxno=312978"
     }
    ]
   },
@@ -111,30 +79,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 47,
+   "articles90": 58,
    "recent20": 22,
-   "press": 26,
-   "firstArticleAt": "2026-11-03T01:13:00.000Z",
+   "press": 33,
+   "firstArticleAt": "2026-11-03T01:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이재명 대통령 \"다문화가족 정책, 불합리성 개선해야\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-03T02:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005435729?sid=102"
+     "title": "[속보] 이 대통령 \"합리적 근거 없는 약자 혜택, 혐오 선동 세력에 빌미...",
+     "press": "mediatoday.co.kr",
+     "publishedAt": "2026-11-03T02:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/006/0000138539?sid=100"
     },
     {
-     "title": "이 대통령 \"사회 너무 극단화되고 있어…배경은 가짜뉴스\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-03T02:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001976466?sid=100"
+     "title": "이 대통령 \"사회 너무 극단화…가짜뉴스 강력 대응 필요\"",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-03T02:11:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000079110"
     },
     {
-     "title": "李대통령 “다문화가정 일률적 우선권 맞나…약자 지원도 공정성·합리...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-03T01:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202176?sid=100"
+     "title": "이 대통령 \"약자에 대한 지원책, 공정성과 합리성 원칙 함께 고려돼야\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-03T02:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400198?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "LG엔솔 3분기 영업익",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 32,
+   "recent20": 10,
+   "press": 31,
+   "firstArticleAt": "2026-11-03T00:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "LG엔솔, 3분기 영업익 7560억원···전년비 25.7% 증가",
+     "press": "smartbizn.com",
+     "publishedAt": "2026-11-03T02:08:00.000Z",
+     "link": "https://www.smartbizn.com/news/articleView.html?idxno=158283"
+    },
+    {
+     "title": "LG엔솔 3분기 매출 9조6434억 ‘분기 최대’…ESS 급증에 영업익 7560억",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-03T02:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003480313?sid=101"
+    },
+    {
+     "title": "LG엔솔, 3Q 영업익 7560억…ESS·EV 배터리 호조에 567% '껑충'",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-03T02:08:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=100508"
     }
    ]
   },
@@ -143,30 +143,94 @@
    "sources": [
     "daum"
    ],
-   "articles90": 29,
+   "articles90": 31,
    "recent20": 4,
-   "press": 22,
-   "firstArticleAt": "2026-11-03T00:35:00.000Z",
+   "press": 24,
+   "firstArticleAt": "2026-11-03T00:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"무죄 인정 새 증거\"…이화영 측, 대북송금 유죄 재심 청구(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-03T01:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014297206?sid=102"
+     "title": "이화영 '쌍방울 대북송금' 재심 청구…\"무죄 입증할 새 증거\" 주장",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-03T02:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004205855?sid=102"
     },
     {
-     "title": "李대통령 기소된 쌍방울 대북송금 사건…이화영 재심 청구",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-03T01:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001882619?sid=102"
+     "title": "이화영, 대북송금 재심 청구…\"경기도 대납 아닌 쌍방울 사업\"(종합)",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T02:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009266601?sid=102"
     },
     {
-     "title": "가석방 요구했던 이화영 ‘쌍방울 대북송금’ 재심 청구…“새로운 증...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-03T01:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002718058?sid=102"
+     "title": "이화영 측, 대북송금 사건 재심 청구…\"무죄 뒷받침할 새 증거 발견\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-03T02:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000648645?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "트럼프 공화당",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 26,
+   "recent20": 8,
+   "press": 23,
+   "firstArticleAt": "2026-11-03T00:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "선거 하루전인데…트럼프 지지율 임기 최저수준",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-03T02:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541359?sid=104"
+    },
+    {
+     "title": "트럼프 \"중간 선거서 민주당 의회 장악 땐 참모·측근 선제 사면\"",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-03T02:10:00.000Z",
+     "link": "https://www.insight.co.kr/news/580385"
+    },
+    {
+     "title": "미국 중간선거 돌입…트럼프 지지율 32%, 의회 권력 교체 주목",
+     "press": "newsworker.co.kr",
+     "publishedAt": "2026-11-03T02:08:00.000Z",
+     "link": "https://www.newsworker.co.kr/news/articleView.html?idxno=511972"
+    }
+   ]
+  },
+  {
+   "keyword": "울산 에릭, K리그1 MVP 선정",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 15,
+   "recent20": 2,
+   "press": 15,
+   "firstArticleAt": "2026-11-03T01:04:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "울산 에릭, K리그1 34라운드 MVP…강원전 멀티골 활약",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-03T02:10:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/422/0000922342"
+    },
+    {
+     "title": "[프로축구] 멀티골로 울산 역전승 이끈 에릭, K리그1 34R MVP",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-03T02:08:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261103000471"
+    },
+    {
+     "title": "[공식발표] 이동경·야고만 있는 게 아니다…강원전 멀티골 에릭, K리그...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-03T01:52:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/445/0000486059"
     }
    ]
   },
@@ -175,10 +239,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 18,
-   "recent20": 1,
-   "press": 17,
-   "firstArticleAt": "2026-11-03T00:36:00.000Z",
+   "articles90": 13,
+   "recent20": 0,
+   "press": 12,
+   "firstArticleAt": "2026-11-03T00:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -203,44 +267,12 @@
    ]
   },
   {
-   "keyword": "울산 에릭, K리그1 MVP 선정",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 13,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-03T01:04:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[공식발표] 이동경·야고만 있는 게 아니다…강원전 멀티골 에릭, K리그...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-03T01:52:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/445/0000486059"
-    },
-    {
-     "title": "[공식발표] '멀티골 역전극' 울산 에릭, 34라운드 MVP...베스트 팀은 안...",
-     "press": "fourfourtwo.co.kr",
-     "publishedAt": "2026-11-03T01:49:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/411/0000089448"
-    },
-    {
-     "title": "'강원전 멀티골' 울산 에릭, K리그1 34라운드 MVP 선정",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-03T01:38:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/003/0014297126"
-    }
-   ]
-  },
-  {
    "keyword": "미국 이란 케슘섬 공습",
    "sources": [
     "signal.bz"
    ],
    "articles90": 11,
-   "recent20": 1,
+   "recent20": 0,
    "press": 10,
    "firstArticleAt": "2026-11-03T01:00:00.000Z",
    "exclusive": false,
@@ -270,12 +302,13 @@
    "keyword": "래블업",
    "sources": [
     "signal.bz",
-    "google"
+    "google",
+    "daum"
    ],
-   "articles90": 10,
+   "articles90": 8,
    "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-03T00:36:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-03T00:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -302,12 +335,13 @@
   {
    "keyword": "리센느 컴백",
    "sources": [
-    "google"
+    "google",
+    "daum"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-03T00:39:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-03T00:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -364,6 +398,38 @@
    ]
   },
   {
+   "keyword": "계약결혼",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-03T00:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "몰카 찍고 일기장 훔쳐보고…범죄 방조한 ‘계약결혼’에 “제작진 사과...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-03T02:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001147817"
+    },
+    {
+     "title": "계약결혼 '몰카' 논란 터졌다... 32기 영수, 가상 아내 몰래 카메라 설치...",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-03T01:36:00.000Z",
+     "link": "https://www.insight.co.kr/news/580380"
+    },
+    {
+     "title": "'계약결혼' 두 부부의 예상치 못한 위기...무사히 해결할까",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-03T01:22:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2643402"
+    }
+   ]
+  },
+  {
    "keyword": "출근하는 조희대 대법원장",
    "sources": [
     "signal.bz",
@@ -395,43 +461,11 @@
      "link": "https://n.news.naver.com/mnews/article/421/0009266320?sid=102"
     }
    ]
-  },
-  {
-   "keyword": "김민 아나콘다 일화 해명",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T00:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김민, 아나콘다 포획설 해명 \"뉴질랜드엔 뱀 없다\"",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-03T01:36:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=94440"
-    },
-    {
-     "title": "김민, 맨손으로 아나콘다 잡았다더니…\"미역이었다\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-03T01:18:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014296991"
-    },
-    {
-     "title": "'아침마당' 김민 \"맨손 아나콘다? 알고 보니 미역이었다\" 해명",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-03T00:58:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16266771"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 290,
+  "flagged": 292,
   "matched": 110,
   "avgLeadMin": 240,
   "recent": [
