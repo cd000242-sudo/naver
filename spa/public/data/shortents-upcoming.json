@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T22:41:23.020Z",
+ "builtAt": "2026-11-03T22:51:27.030Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 23,
  "candidates": [
   {
-   "keyword": "뉴욕증시 혼조",
+   "keyword": "쿠팡Inc 영업손실",
    "sources": [
     "daum"
    ],
-   "articles90": 42,
-   "recent20": 7,
-   "press": 37,
-   "firstArticleAt": "2026-11-03T21:12:00.000Z",
+   "articles90": 64,
+   "recent20": 12,
+   "press": 54,
+   "firstArticleAt": "2026-11-03T21:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "뉴욕증시, 중간선거 결과 기다리며 혼조 마감",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-03T22:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202367?sid=104"
-    },
-    {
-     "title": "뉴욕증시, 반도체주 반등에 나스닥 0.83% 상승...중간선거 경계 속 혼조...",
+     "title": "쿠팡, 3분기 영업손실 6천423억원...매출 증가에도 3분기 연속 적자",
      "press": "m-economynews.com",
-     "publishedAt": "2026-11-03T22:34:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=72546"
+     "publishedAt": "2026-11-03T22:50:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=72549"
     },
     {
-     "title": "뉴욕증시, 美중간선거 경계 속 혼조…반도체 반등에 나스닥 0.83%↑",
-     "press": "the-today.com",
-     "publishedAt": "2026-11-03T22:34:00.000Z",
-     "link": "https://www.the-today.com/news/articleView.html?idxno=92991"
-    }
-   ]
-  },
-  {
-   "keyword": "amd 주가",
-   "sources": [
-    "google"
-   ],
-   "articles90": 22,
-   "recent20": 3,
-   "press": 21,
-   "firstArticleAt": "2026-11-03T21:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "마이크론 855달러·AMD 483달러…반도체 대형주 일제히 '환호성'",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-03T22:30:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=501055"
+     "title": "쿠팡, 3분기 6423억원 영업손실…3개 분기 연속 적자",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-03T22:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000518999?sid=101"
     },
     {
-     "title": "[속보] 뉴욕증시, 오라클 5.85%·AMD 3.65% 급등…엔비디아·마이크론 강...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-03T22:30:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=622866"
-    },
-    {
-     "title": "AMD, 실적·전망 기대 웃돌아… 시간외 8% 급등",
-     "press": "it.chosun.com",
-     "publishedAt": "2026-11-03T22:24:00.000Z",
-     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000000183"
+     "title": "쿠팡 3분기 영업손실 6천423억원…올해 적자만 2조원 육박",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-03T22:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000130500?sid=101"
     }
    ]
   },
@@ -79,30 +47,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 22,
-   "recent20": 2,
-   "press": 20,
+   "articles90": 25,
+   "recent20": 4,
+   "press": 23,
    "firstArticleAt": "2026-11-03T21:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "후반 펼쳐진 '코리안 더비'…뮌헨 김민재, AT 마드리드 이강인에 판정승",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-03T22:39:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/079/0004206221"
+     "title": "김민재 vs 이강인…UCL 맞대결 승자는 뮌헨",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-03T22:50:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/011/0004678475"
     },
     {
-     "title": "김민재, 모레노 앞에서 이강인에 판정승…뮌헨, ATM에 2-0 승리",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T22:22:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/421/0009268762"
+     "title": "이강인·김민재 짧은 코리안더비… 뮌헨이 AT 마드리드 2-0 격파",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-03T22:44:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/396/0000759954"
     },
     {
-     "title": "[UCL] '코리안 더비' 후반 성사...뮌헨 김민재 웃고, ATM 이강인 울어",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-03T22:20:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261104000039"
+     "title": "'김민재 vs 이강인' 코리안 더비 성사! 나란히 벤치 출발→후반 교체 투...",
+     "press": "sportalkorea.com",
+     "publishedAt": "2026-11-03T22:41:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/139/0002255518"
     }
    ]
   },
@@ -111,13 +79,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 15,
-   "recent20": 4,
-   "press": 14,
+   "articles90": 16,
+   "recent20": 2,
+   "press": 15,
    "firstArticleAt": "2026-11-03T21:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김여정, 美에 \"선택지에 대화 있지만 국익과 동일시되는 것 아냐\"",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-03T22:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541550?sid=101"
+    },
     {
      "title": "김여정, 바이낸스 사태에 \"선택지 대화 있지만 국익 동일시 아냐\"",
      "press": "news.sbs.co.kr",
@@ -129,12 +103,6 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-03T22:31:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012286793?sid=100"
-    },
-    {
-     "title": "北 김여정 \"선택지에 美 대화 있지만 국익과 동일시 아냐\"",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-03T22:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000548465?sid=100"
     }
    ]
   },
@@ -143,15 +111,15 @@
    "sources": [
     "google"
    ],
-   "articles90": 10,
+   "articles90": 6,
    "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-03T21:14:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-03T21:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "자사주 소각에 흔들리는 삼성 보험계열사 지분",
+     "title": "삼성 보험계열사, 비계열사 지분 문제 다시 수면 위",
      "press": "fins.co.kr",
      "publishedAt": "2026-11-03T22:40:00.000Z",
      "link": "http://www.fins.co.kr/news/articleView.html?idxno=110408"
@@ -167,6 +135,38 @@
      "press": "dailian.co.kr",
      "publishedAt": "2026-11-03T22:05:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/119/0003150945?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "유럽 여객기 폭파 위협",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-03T21:43:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "유럽 여객기 7대 폭파 위협⋯전투기 출격하고 비상착륙",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-03T22:50:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2643749"
+    },
+    {
+     "title": "유럽 항공기 폭파 위협 수두룩…비상착륙·전투기 출격 ‘긴장’",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-03T22:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003056979?sid=104"
+    },
+    {
+     "title": "유럽 여객기 7대 폭파 위협 신고에 비상착륙...\"러 연관 조직 의심\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-03T21:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002428049?sid=104"
     }
    ]
   },
@@ -204,66 +204,98 @@
    ]
   },
   {
-   "keyword": "유럽 여객기 폭파 위협",
+   "keyword": "셀트리온",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-03T21:15:00.000Z",
+   "articles90": 4,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-03T22:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "유럽 항공기 폭파 위협 수두룩…비상착륙·전투기 출격 ‘긴장’",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-03T22:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003056979?sid=104"
+     "title": "셀트리온, 4중 작용 비만치료제 첫 공개…\"근손실 줄인 감량\"",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-03T22:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005837640?sid=101"
     },
     {
-     "title": "유럽 항공기 또 폭파 위협…런던발 여객기 폴란드서 비상착륙",
-     "press": "donga.com",
-     "publishedAt": "2026-11-03T21:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003759937?sid=104"
+     "title": "셀트리온, 4중작용 비만약 비임상 공개…\"내년 임상 진입\"",
+     "press": "medisobizanews.com",
+     "publishedAt": "2026-11-03T22:44:00.000Z",
+     "link": "http://www.medisobizanews.com/news/articleView.html?idxno=143929"
     },
     {
-     "title": "유럽 여객기 7대 폭파 위협 신고에 비상착륙...\"러 연관 조직 의심\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-03T21:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002428049?sid=104"
+     "title": "\"체중 감량 넘어 근손실까지 잡는다\"…셀트리온, 4중 표적 비만치료제 ...",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-03T22:40:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=92960"
     }
    ]
   },
   {
-   "keyword": "보안",
+   "keyword": "러시아 우크라 구호센터 폭격",
    "sources": [
-    "google"
+    "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-03T21:28:00.000Z",
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-03T21:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "스노우플레이크, 알아서 일하는 AI 에이전트 공개…보안·통제 강화",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-03T22:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005436205?sid=105"
+     "title": "러시아, 우크라 구호센터에 폭탄 9발…33명 사망",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-03T22:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001882878?sid=104"
     },
     {
-     "title": "[오늘 뉴스 4컷] 정부, 사이버보안 총괄 체계 정비…정치권, 조작기소 특...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-03T22:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004172350?sid=100"
+     "title": "[이 시각 세계] 러, 우크라 구호센터 폭격‥33명 사망",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-03T22:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533374?sid=104"
     },
     {
-     "title": "[빗썸 보안 민낯⑥] 빗썸, 123억 보안투자 늘렸지만…IT 확대 속도 못 미...",
-     "press": "news.ifm.kr",
-     "publishedAt": "2026-11-03T22:00:00.000Z",
-     "link": "https://news.ifm.kr/news/articleView.html?idxno=483322"
+     "title": "종전 협상 앞두고 러, 우크라 대공습…젤렌스키 \"유럽, 협상테이블 앉아...",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-03T22:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005837634?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "젝스키스",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T22:23:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "대놓고 \"Shup up\"…고지용, 젝스키스 합류 반대 성명 하루만 내놓은 SNS[...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-03T22:42:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004462948"
+    },
+    {
+     "title": "고지용, 이혼·젝스키스 팬 반발 속 23년 만에 프로필 촬영…\"오랜만\"",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-03T22:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004121730"
+    },
+    {
+     "title": "[문화연예 플러스] 젝스키스 공연 티켓이 89만 원?‥고가 논란에 해명",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-03T22:23:00.000Z",
+     "link": "https://m.entertain.naver.com/article/214/0001533369"
     }
    ]
   },
@@ -273,10 +305,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-03T21:14:00.000Z",
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T21:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -297,38 +329,6 @@
      "press": "bntnews.co.kr",
      "publishedAt": "2026-11-03T21:48:00.000Z",
      "link": "https://www.bntnews.co.kr/article/view/bnt202611040014"
-    }
-   ]
-  },
-  {
-   "keyword": "러시아 우크라 구호센터 폭격",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-03T21:13:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "러시아, 우크라 구호센터에 폭탄 9발…33명 사망",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-03T22:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001882878?sid=104"
-    },
-    {
-     "title": "종전 협상 앞두고 러, 우크라 대공습…젤렌스키 \"유럽, 협상테이블 앉아...",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-03T22:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005837634?sid=104"
-    },
-    {
-     "title": "러, 우크라 구호센터에 폭탄 9발 투하…33명 사망·50명 실종",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-03T21:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014299622?sid=104"
     }
    ]
   },
@@ -367,7 +367,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 486,
+  "flagged": 488,
   "matched": 196,
   "avgLeadMin": 274,
   "recent": [
