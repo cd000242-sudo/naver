@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-02T23:53:13.027Z",
+ "builtAt": "2026-11-03T00:03:16.758Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,81 +11,87 @@
  "measured": 24,
  "candidates": [
   {
-   "keyword": "한양증권 해킹 유출",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 68,
-   "recent20": 15,
-   "press": 57,
-   "firstArticleAt": "2026-11-02T22:49:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한양증권도 해킹 사고…고객 이름·계좌·주민번호 등 유출",
-     "press": "news.mtn.co.kr",
-     "publishedAt": "2026-11-02T23:52:00.000Z",
-     "link": "https://news.mtn.co.kr/article/2026110308510388740"
-    },
-    {
-     "title": "한양증권도 해킹 피해…고객·임직원 일부 정보 유출 확인",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-02T23:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004205735?sid=101"
-    },
-    {
-     "title": "'금융계 빨간불'…대신·미래 이어 한양증권도 해킹",
-     "press": "magazine.hankyung.com",
-     "publishedAt": "2026-11-02T23:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/050/0000112753?sid=101"
-    }
-   ]
-  },
-  {
    "keyword": "10월 물가 2.8% 상승",
    "sources": [
     "nate"
    ],
-   "articles90": 87,
-   "recent20": 20,
-   "press": 55,
+   "articles90": 89,
+   "recent20": 17,
+   "press": 57,
    "firstArticleAt": "2026-11-02T23:00:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "내린 건 채소값, 오른 건 생활비…10월 소비자물가 2.8% 상승",
-     "press": "kizmom.com",
-     "publishedAt": "2026-11-02T23:52:00.000Z",
-     "link": "https://www.kizmom.com/news/articleView.html?idxno=113713"
+     "title": "\"누적된 물가 부담·상방 리스크 여전\"…정부, 물가 관리에 모든 역량 집...",
+     "press": "foodnews.co.kr",
+     "publishedAt": "2026-11-03T00:02:00.000Z",
+     "link": "http://www.foodnews.co.kr/news/articleView.html?idxno=120792"
     },
     {
-     "title": "10월 소비자물가 2.8% 상승…두 달 연속 2% 후반대",
-     "press": "kfenews.co.kr",
-     "publishedAt": "2026-11-02T23:52:00.000Z",
-     "link": "https://www.kfenews.co.kr/news/articleView.html?idxno=667426"
+     "title": "[종합] 10월 물가 2.8%↑…채소값 내렸지만 가공식품·석유류 '고공행진...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-03T00:01:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261103000181"
     },
     {
-     "title": "권대영 “물가, 통계 아닌 장바구니로 평가…가격안정 끝까지 챙길 것”",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-02T23:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006402519?sid=101"
+     "title": "[원자재 시황] 유가 급락하고 금·구리 상승",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-03T00:00:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1730207"
     }
    ]
   },
   {
-   "keyword": "뉴욕증시 혼조 마감.",
+   "keyword": "김여정, 바이낸스 정치적 도발",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 31,
-   "recent20": 4,
-   "press": 31,
-   "firstArticleAt": "2026-11-02T22:24:00.000Z",
+   "articles90": 32,
+   "recent20": 6,
+   "press": 29,
+   "firstArticleAt": "2026-11-02T22:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "北, 바이낸스 8조원 해킹 자금 세탁 본격화···김여정은 美 배후설 반...",
+     "press": "smartbizn.com",
+     "publishedAt": "2026-11-03T00:00:00.000Z",
+     "link": "https://www.smartbizn.com/news/articleView.html?idxno=158255"
+    },
+    {
+     "title": "北김여정, 바이낸스 사태에 \"美 정치적 도발…예의주시\"",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-02T23:58:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4116355"
+    },
+    {
+     "title": "김여정, 바이낸스 해킹 부인…\"美 정치적 도발\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-02T23:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922268?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "뉴욕증시 혼조 마감",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 27,
+   "recent20": 2,
+   "press": 27,
+   "firstArticleAt": "2026-11-02T22:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[뉴욕마켓워치] 유가 급락에도 美 선거 경계 팽배…주식·채권 혼조·달...",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-02T23:58:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4442659"
+    },
     {
      "title": "AI 투자 불안 지속에 뉴욕증시 혼조…나스닥 1% 하락",
      "press": "newstopkorea.com",
@@ -97,23 +103,17 @@
      "press": "kjdaily.com",
      "publishedAt": "2026-11-02T23:42:00.000Z",
      "link": "http://www.kjdaily.com/article.php?aid=1793662756691085276"
-    },
-    {
-     "title": "뉴욕증시 혼조…유가 급락에도 기술주 이탈에 나스닥 1.07%↓",
-     "press": "sentv.co.kr",
-     "publishedAt": "2026-11-02T23:40:00.000Z",
-     "link": "https://www.sentv.co.kr/article/view/sentv202611030013"
     }
    ]
   },
   {
-   "keyword": "애플 분기 매출 증가",
+   "keyword": "애플 4분기 매출 증가 예상",
    "sources": [
     "nate"
    ],
-   "articles90": 18,
-   "recent20": 8,
-   "press": 18,
+   "articles90": 16,
+   "recent20": 2,
+   "press": 16,
    "firstArticleAt": "2026-11-02T22:34:00.000Z",
    "exclusive": false,
    "capped": false,
@@ -139,146 +139,87 @@
    ]
   },
   {
-   "keyword": "양홍원, 결혼사진 삭제",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 14,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-02T22:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'불륜 반박' 양홍원 \"쉽게 끝낼관계 아냐\"라더니..결혼 2주만 웨딩사진...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-02T23:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005633324"
-    },
-    {
-     "title": "'불륜 의혹' 양홍원, 아내 인스타 언팔했다…결혼식 겨우 2주 됐는데",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-02T23:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000782711"
-    },
-    {
-     "title": "'불륜 의혹' 양홍원, 아내 언팔로우·결혼식 사진 모두 지웠다",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-02T23:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/469/0000963244"
-    }
-   ]
-  },
-  {
-   "keyword": "대통령 부부 여권번호 노출",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 14,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-02T22:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령 여권번호까지 고스란히…1호기 탑승자 168명 개인정보 유출",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-02T23:42:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5078946"
-    },
-    {
-     "title": "李대통령 부부 등 168명 정보 유출. 靑 5개월동안 몰라",
-     "press": "viewsnnews.com",
-     "publishedAt": "2026-11-02T23:32:00.000Z",
-     "link": "https://www.viewsnnews.com/article?q=239428"
-    },
-    {
-     "title": "대통령 부부 여권번호까지···‘1호기 탑승자’ 168명 개인정보 노출",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-02T23:24:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/323910/?sc=Naver"
-    }
-   ]
-  },
-  {
-   "keyword": "아이폰 듀오",
-   "sources": [
-    "google"
-   ],
-   "articles90": 14,
-   "recent20": 4,
-   "press": 10,
-   "firstArticleAt": "2026-11-02T22:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "아이폰 호조에 웃은 애플, 메모리값 급등에 수익성 부담",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-02T23:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003695130?sid=101"
-    },
-    {
-     "title": "애플, 아이폰 분기 매출 17% 급증…글로벌서 77조 팔았다",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-02T23:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006402516?sid=105"
-    },
-    {
-     "title": "애플, 4분기 매출 154조원 돌파…아이폰 판매 역대 최대",
-     "press": "digitaltoday.co.kr",
-     "publishedAt": "2026-11-02T23:38:00.000Z",
-     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=712033"
-    }
-   ]
-  },
-  {
-   "keyword": "북한 해커 비트코인 탈취",
+   "keyword": "용인 AI 청미천 출입통제",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-02T22:42:00.000Z",
+   "articles90": 13,
+   "recent20": 6,
+   "press": 13,
+   "firstArticleAt": "2026-11-02T22:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "北연계 해커, 바이낸스 탈취 자금 세탁 가속...솔라나서 비트코인으로",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-02T23:52:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=560591"
+     "title": "용인 청미천 일원서 고병원성 AI 검출…15일까지 출입 통제",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-03T00:02:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=622595"
     },
     {
-     "title": "北 해커, '8조 원' 탈취 가상자산 2차 세탁… 솔라나 거쳐 비트코인 환전",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-02T23:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000963241?sid=104"
+     "title": "\"야생조류 배설물서 바이러스 검출\"…용인시, 청미천 일대 출입 전면 통...",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-02T23:58:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3740418"
     },
     {
-     "title": "북 해커, 바이낸스 탈취 자금 '2차 세탁' 돌입",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-02T23:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001976418?sid=104"
+     "title": "용인시, 청미천 일대 출입 통제…AI 차단총력",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-02T23:56:00.000Z",
+     "link": "https://www.viva100.com/article/20261103500099"
+    }
+   ]
+  },
+  {
+   "keyword": "한다감 아들 최초 공개",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-02T23:07:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한다감, 생후 26일 子 최초 공개...'오똑 콧날' 붕어빵 비주얼",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-02T23:42:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004462355"
+    },
+    {
+     "title": "한다감, 47세에 얻은 아들 최초 공개…생후 26일 현실 육아에 진땀 (슈돌...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-02T23:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001183797"
+    },
+    {
+     "title": "47세 초보 엄마 한다감, 생후 26일 아들 방송 최초 공개 (슈돌)",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-02T23:26:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001147767"
     }
    ]
   },
   {
    "keyword": "연애박사",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 7,
    "recent20": 2,
-   "press": 6,
+   "press": 7,
    "firstArticleAt": "2026-11-02T22:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'연애박사' 추영우·김소현, 1년 만의 재회에 최고 시청률 경신",
+     "press": "newsinside.kr",
+     "publishedAt": "2026-11-02T23:54:00.000Z",
+     "link": "https://www.newsinside.kr/news/articleView.html?idxno=5039369"
+    },
     {
      "title": "추영우, 김소현과 이별한 충격적 이유…‘연애박사’ 시청률 3% 눈앞 [차...",
      "press": "isplus.com",
@@ -290,27 +231,27 @@
      "press": "etoday.co.kr",
      "publishedAt": "2026-11-02T23:42:00.000Z",
      "link": "https://www.etoday.co.kr/news/view/2643303"
-    },
-    {
-     "title": "'연애박사' 추영우X김소현, 이별 후 재회했지만 이대로 끝?...자체 최고...",
-     "press": "ize.co.kr",
-     "publishedAt": "2026-11-02T23:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/465/0000020731"
     }
    ]
   },
   {
    "keyword": "9경기 무승 캐릭 감독",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 8,
-   "recent20": 1,
+   "recent20": 2,
    "press": 6,
-   "firstArticleAt": "2026-11-02T22:24:00.000Z",
+   "firstArticleAt": "2026-11-02T22:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'38년 만의 9G 무승' 맨유 캐릭 감독 \"미쳤다 하겠지만, 로마전 기다려져...",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-02T23:59:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000078983"
+    },
     {
      "title": "“맨유 강등, 가능한 일” 전 감독 텐하흐의 경고···“강한 선수단 갖...",
      "press": "sports.khan.co.kr",
@@ -322,22 +263,52 @@
      "press": "sports.khan.co.kr",
      "publishedAt": "2026-11-02T23:24:00.000Z",
      "link": "https://m.sports.naver.com/wfootball/article/144/0001147765"
-    },
-    {
-     "title": "\"맨유 강등? 충분히 가능한 일\"… 친정팀 추락 지켜본 텐 하흐 감독의 섬...",
-     "press": "besteleven.com",
-     "publishedAt": "2026-11-02T23:16:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/343/0000148674"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 226,
-  "matched": 86,
-  "avgLeadMin": 244,
+  "flagged": 231,
+  "matched": 92,
+  "avgLeadMin": 230,
   "recent": [
+   {
+    "keyword": "양홍원 아내 사진 삭제",
+    "hitKeyword": "양홍원 결혼 2주 변화",
+    "hitAt": "2026-11-03T09:00:00+09:00",
+    "leadMin": 37
+   },
+   {
+    "keyword": "한양증권 해킹",
+    "hitKeyword": "한양증권 해킹",
+    "hitAt": "2026-11-03T09:00:00+09:00",
+    "leadMin": 27
+   },
+   {
+    "keyword": "미국 중간선거",
+    "hitKeyword": "미국 중간선거 투표",
+    "hitAt": "2026-11-03T09:00:00+09:00",
+    "leadMin": 27
+   },
+   {
+    "keyword": "나스닥 100",
+    "hitKeyword": "나스닥 기술주 매도",
+    "hitAt": "2026-11-03T09:00:00+09:00",
+    "leadMin": 27
+   },
+   {
+    "keyword": "한양증권 해킹 유출",
+    "hitKeyword": "한양증권 해킹",
+    "hitAt": "2026-11-03T09:00:00+09:00",
+    "leadMin": 17
+   },
+   {
+    "keyword": "양홍원, 결혼사진 삭제",
+    "hitKeyword": "양홍원 결혼 2주 변화",
+    "hitAt": "2026-11-03T09:00:00+09:00",
+    "leadMin": 17
+   },
    {
     "keyword": "미·이란 협상에 유가 급락",
     "hitKeyword": "미 이란 협상 유가",
@@ -361,42 +332,6 @@
     "hitKeyword": "바이낸스 해킹 자금흐름",
     "hitAt": "2026-11-03T08:00:00+09:00",
     "leadMin": 68
-   },
-   {
-    "keyword": "김여정, 바이낸스 사태 예의주시",
-    "hitKeyword": "바이낸스 해킹 자금흐름",
-    "hitAt": "2026-11-03T08:00:00+09:00",
-    "leadMin": 37
-   },
-   {
-    "keyword": "팔란티어 주가",
-    "hitKeyword": "팔란티어 실적 상회",
-    "hitAt": "2026-11-03T08:00:00+09:00",
-    "leadMin": 37
-   },
-   {
-    "keyword": "김여정, 바이낸스 도발 주시",
-    "hitKeyword": "바이낸스 해킹 자금흐름",
-    "hitAt": "2026-11-03T08:00:00+09:00",
-    "leadMin": 17
-   },
-   {
-    "keyword": "기술",
-    "hitKeyword": "나스닥 기술주 급락",
-    "hitAt": "2026-11-03T07:30:00+09:00",
-    "leadMin": 974
-   },
-   {
-    "keyword": "미국 상원 경합주 여론조사",
-    "hitKeyword": "중간선거 여론조사",
-    "hitAt": "2026-11-03T07:30:00+09:00",
-    "leadMin": 862
-   },
-   {
-    "keyword": "김민재 차관 점검",
-    "hitKeyword": "김민재 이강인 더비",
-    "hitAt": "2026-11-03T07:30:00+09:00",
-    "leadMin": 661
    }
   ]
  }
