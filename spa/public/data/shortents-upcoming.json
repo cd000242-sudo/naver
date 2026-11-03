@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T15:18:59.094Z",
+ "builtAt": "2026-11-03T15:29:02.658Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,21 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "신천지 정청래 책임져야",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 3,
+   "recent20": 2,
    "press": 6,
-   "firstArticleAt": "2026-11-03T13:57:00.000Z",
+   "firstArticleAt": "2026-11-03T14:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "울먹이며 사과한 김민석에 한동훈 “울 일 아니고 책임져야”",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-03T15:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002830070?sid=100"
+    },
     {
      "title": "김문수 \"순천 신천지 당원 자진탈당하라\"",
      "press": "imaeil.com",
@@ -34,108 +39,38 @@
      "press": "slist.kr",
      "publishedAt": "2026-11-03T15:06:00.000Z",
      "link": "https://www.slist.kr/news/articleView.html?idxno=778695"
-    },
-    {
-     "title": "'신천지 3자 연합' 헛발질 논란…김민석, 리더십 타격 불가피",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-03T15:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000548450?sid=100"
     }
    ]
   },
   {
-   "keyword": "김현수 2점 홈런",
+   "keyword": "한·튀르키예 정상 회담",
    "sources": [
     "nate"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-03T13:59:00.000Z",
+   "firstArticleAt": "2026-11-03T14:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "안현민·한승택·김현수 홈런포…KT, 삼성에 진땀승 거두고 기선제압",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-03T14:59:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/055/0001400396"
+     "title": "이 대통령 “튀르키예 원전, 한국기업 선제 지원”",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-03T15:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003562605?sid=100"
     },
     {
-     "title": "kt, 한국시리즈 1차전서 삼성에 8-7 진땀승...안현민·한승택·김현수 홈...",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-03T14:48:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=778690"
+     "title": "李대통령 \"튀르키예 신규 원전사업 참여 선제 지원\"…방산 공동생산 확...",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-03T14:38:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=901810"
     },
     {
-     "title": "김현수 “손가락 아프지만 검진 안 받는다, 모르는 게 약”[KS1]",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-03T14:22:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/144/0001147940"
-    }
-   ]
-  },
-  {
-   "keyword": "장동혁·오세훈 보수 경쟁",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T14:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국힘 당권 경쟁 본격화 강원 보수진영 선택은?",
-     "press": "kado.net",
-     "publishedAt": "2026-11-03T15:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000209269?sid=100"
-    },
-    {
-     "title": "총선 앞두고…거대 양당 내부 '주도권 경쟁'",
-     "press": "ksilbo.co.kr",
-     "publishedAt": "2026-11-03T15:04:00.000Z",
-     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1071516"
-    },
-    {
-     "title": "같은 날, 각기 모인 장-오-한…보수통합 주도권 경쟁 예열",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-03T14:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012286739?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "kbo",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T14:40:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "\"아시아 갈 거야\" 설마 KBO행인가, SF 선수 17명 정리했는데…이정후 동...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-03T15:09:00.000Z",
-     "link": "https://m.sports.naver.com/wbaseball/article/109/0005634141"
-    },
-    {
-     "title": "498SV 전설 내보내고, SSG 출신에 134억 베팅…DET 왜 'KBO 역수출 갓성비...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-03T15:07:00.000Z",
-     "link": "https://m.sports.naver.com/wbaseball/article/076/0004462907"
-    },
-    {
-     "title": "American slugger Hilliard delivers key plays with bat, glove in 1st KBO p...",
-     "press": "en.yna.co.kr",
-     "publishedAt": "2026-11-03T14:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016420036?sid=104"
+     "title": "한-튀르키예 정상회담…李대통령 \"원전·방산 등 협력 내실화\"",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-03T14:28:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5079418"
     }
    ]
   },
@@ -145,7 +80,7 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-03T14:07:00.000Z",
    "exclusive": false,
@@ -170,11 +105,75 @@
      "link": "https://n.news.naver.com/mnews/article/052/0002427982?sid=100"
     }
    ]
+  },
+  {
+   "keyword": "한학자 보석 취소",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T14:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'천정궁' 다녀온 한학자 총재, 法 보석 취소",
+     "press": "getnews.co.kr",
+     "publishedAt": "2026-11-03T15:04:00.000Z",
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=885899"
+    },
+    {
+     "title": "법원, 한학자 총재 보석 취소 결정",
+     "press": "segye.com",
+     "publishedAt": "2026-11-03T14:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004172288?sid=102"
+    },
+    {
+     "title": "병원 밖 통일교 시설 오간 한학자 총재, '보석 취소' 결정",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-03T14:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400384?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "kbo",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T14:40:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "\"아시아 갈 거야\" 설마 KBO행인가, SF 선수 17명 정리했는데…이정후 동...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-03T15:09:00.000Z",
+     "link": "https://m.sports.naver.com/wbaseball/article/109/0005634141"
+    },
+    {
+     "title": "498SV 전설 내보내고, SSG 출신에 134억 베팅…DET 왜 'KBO 역수출 갓성비...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-03T15:07:00.000Z",
+     "link": "https://m.sports.naver.com/wbaseball/article/076/0004462907"
+    },
+    {
+     "title": "American slugger Hilliard delivers key plays with bat, glove in 1st KBO p...",
+     "press": "en.yna.co.kr",
+     "publishedAt": "2026-11-03T14:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016420036?sid=104"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 446,
+  "flagged": 448,
   "matched": 179,
   "avgLeadMin": 241,
   "recent": [
