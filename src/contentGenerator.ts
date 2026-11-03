@@ -66,6 +66,7 @@ import { buildSystemPromptFromHint, buildFullPrompt, loadShoppingPrompt, getGeoO
 import { resolveHomefeedIssueHint } from './content/homefeedIssueHint.js';
 import { computeHomefeedTitleQuoteIssues } from './content/homefeedTitleQuoteUse.js';
 import { computeHomefeedTitleGateIssues, judgeTitleReplacement } from './content/homefeedTitleGate.js';
+import { llmTitlePatchSkipLog, shouldRunLlmTitlePatch } from './content/agentRepairPolicy.js';
 import { isReviewAvailable, isReviewGuardEnabled, buildReviewGuardBlock } from './content/reviewGuard.js';
 import { isGeneralContentGuardEnabled, hasGroundingSource, buildGeneralContentGuardBlock } from './content/generalContentGuard.js';
 import { isCelebrityFactGuardEnabled, isCelebrityContext, buildCelebrityFactGuardBlock, detectCelebrityAssertionRisk } from './content/celebrityAssertionSanitizer.js';
@@ -7511,7 +7512,9 @@ async function generateStructuredContentInternal(
         const seoKeyword = getPrimaryKeywordFromSource(source);
         const issues = computeSeoTitleCriticalIssues(parsed.selectedTitle, seoKeyword);
         if (issues.length > 0 && attempt < QUALITY_ATTEMPT_LIMIT) {
-          if (costPolicy.allowLlmTitlePatch) {
+          // [2026-11-04 Release B] A confirmed (locked / keyword) title or an agent engine never pays for this rewrite.
+          const seoTitlePatchContext = { isAgent: isAgentTextProvider(provider), confirmedTitle: confirmedTitleForBody, mode: 'seo' };
+          if (costPolicy.allowLlmTitlePatch && shouldRunLlmTitlePatch(seoTitlePatchContext)) {
             try {
               const patch = await generateTitleOnlyPatch(
                 source,
@@ -7541,6 +7544,8 @@ async function generateStructuredContentInternal(
               ];
             } catch {
             }
+          } else if (costPolicy.allowLlmTitlePatch) {
+            console.log(llmTitlePatchSkipLog('TitlePatch', seoTitlePatchContext, issues.join(', ')));
           } else {
             console.log(`[TitlePatch] costSaver ON — SEO 제목 LLM 패치 생략, 로컬 보정 적용: ${issues.join(', ')}`);
           }
@@ -7581,7 +7586,10 @@ async function generateStructuredContentInternal(
           + ` · attempt=${attempt}/${QUALITY_ATTEMPT_LIMIT} · llmPatch=${costPolicy.allowLlmTitlePatch}`,
         );
         if (titleIssues.length > 0 && attempt < QUALITY_ATTEMPT_LIMIT) {
-          if (costPolicy.allowLlmTitlePatch) {
+          // [2026-11-04 Release B] The 66 s rewrite on the LOCKED-title regeneration was thrown away by applyManualTitleOverride;
+          //   agent engines choose the title inside the same session call. The gate issues above are still computed and logged.
+          const hfTitlePatchContext = { isAgent: isAgentTextProvider(provider), confirmedTitle: confirmedTitleForBody, mode: 'homefeed' };
+          if (costPolicy.allowLlmTitlePatch && shouldRunLlmTitlePatch(hfTitlePatchContext)) {
             try {
               const patch = await generateTitleOnlyPatch(
                 source,
@@ -7620,6 +7628,8 @@ async function generateStructuredContentInternal(
               ];
             } catch {
             }
+          } else if (costPolicy.allowLlmTitlePatch) {
+            console.log(llmTitlePatchSkipLog('TitleGate', hfTitlePatchContext, titleIssues.join(' / ')));
           } else {
             console.log(`[TitlePatch] costSaver ON — 홈판 제목 LLM 패치 생략, 로컬 보정 적용: ${titleIssues.join(', ')}`);
           }
@@ -8007,7 +8017,8 @@ async function generateStructuredContentInternal(
       // ✅ [2026-02-04 FIX] isShoppingConnectMode도 체크하여 URL 기반 쇼핑커넥트에서도 제목 패치 작동
       if (allowPaidPostGenerationRepair && allowLegacyPostDraftLlm && !_useKwTitle && (isShoppingConnectMode || mode === 'affiliate')) {
         const titleIssues = computeAffiliateTitleCriticalIssues(parsed.selectedTitle, source);
-        if (titleIssues.length > 0 && costPolicy.allowLlmTitlePatch) {
+        const affiliateTitlePatchContext = { isAgent: isAgentTextProvider(provider), confirmedTitle: confirmedTitleForBody, mode: 'affiliate' };
+        if (titleIssues.length > 0 && costPolicy.allowLlmTitlePatch && shouldRunLlmTitlePatch(affiliateTitlePatchContext)) {
           try {
             console.log(`[ContentGenerator] 🛒 쇼핑커넥트 제목 이슈 감지: ${titleIssues.join(', ')}`);
             const patch = await generateTitleOnlyPatch(
@@ -8041,6 +8052,8 @@ async function generateStructuredContentInternal(
             ];
           } catch {
           }
+        } else if (titleIssues.length > 0 && costPolicy.allowLlmTitlePatch) {
+          console.log(llmTitlePatchSkipLog('TitlePatch', affiliateTitlePatchContext, titleIssues.join(', ')));
         } else if (titleIssues.length > 0) {
           console.log(`[TitlePatch] costSaver ON — 쇼핑커넥트 제목 LLM 패치 생략: ${titleIssues.join(', ')}`);
         }

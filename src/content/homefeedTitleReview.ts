@@ -27,6 +27,30 @@ export function titleReviewGrounding(rawText: unknown): string {
   return windowSourceBody(String(rawText || ''), MAX_GROUNDING);
 }
 
+/**
+ * 2026-11-04: log how long every title-review engine call took ("stage=<stage> <seconds>s"). The ~3 min 40 s review
+ * (mining -> tournament -> candidates -> review) used to leave no line at all; the caller's log sink adds the
+ * "[TitleReview] " prefix (main.ts). A call the review aborted (timeout / cancel) is logged once at the abort
+ * moment even if the engine never settles. Pure observation: the answer and the thrown error pass through untouched.
+ */
+function withStageTiming(complete: Caller['complete'], log?: (message: string) => void, now: () => number = () => Date.now()): Caller['complete'] {
+  if (!log) return complete;
+  return async (prompt, options) => {
+    const startedAt = now();
+    let logged = false;
+    const finish = (mark: string) => {
+      if (logged) return;
+      logged = true;
+      try { log(`stage=${options.stage} ${((now() - startedAt) / 1000).toFixed(1)}s${mark}`); } catch { /* a log sink must never change the review */ }
+    };
+    const onAbort = () => finish(' 중단');
+    options.signal.addEventListener('abort', onAbort, { once: true });
+    try { const answer = await complete(prompt, options); finish(''); return answer; }
+    catch (error) { finish(' 실패'); throw error; }
+    finally { options.signal.removeEventListener('abort', onAbort); }
+  };
+}
+
 export async function generateWithHomefeedReview<T extends Article>(args: {
   contentMode: string;
   source: Source;
@@ -60,7 +84,7 @@ export async function generateWithHomefeedReview<T extends Article>(args: {
     title: article.selectedTitle, body: article.bodyPlain, sourceGrounding: grounding, sourceVerification: String(args.source.rawText),
     editorialAngle: args.editorial, blogProfile: args.blogProfile, signal: args.signal,
   });
-  const deps = { callText: caller.complete, timeoutMs: caller.timeoutMs };
+  const deps = { callText: withStageTiming(caller.complete, args.log), timeoutMs: caller.timeoutMs };
   // 2026-11-03: a title-review failure here keeps the article and warns (the verdict is logged and audited as it came back).
   let reviewFailed = false, warned = false;
   const warn = (stage: string, error: unknown) => { warned = true; args.log?.(titleReviewWarning(stage, error)); return failure(error); };

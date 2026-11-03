@@ -171,6 +171,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/content/affiliateConversionStructure.ts',
   'src/content/affiliateReviewDepth.ts',
   'src/content/affiliateTitleShape.ts',
+  'src/content/agentRepairPolicy.ts',
   'src/content/aiConclusionOpener.ts',
   'src/content/attributionEvidence.ts',
   'src/content/attributionGuard.ts',

@@ -105,4 +105,88 @@ ${tail}` };
     expect(noSource.titleReview).toBe('no-source');
     expect(log.mock.calls.map(c => c[0]).join(' ')).toMatch(/제목 검수를 하지 못했습니다/);
   });
+
+  // 2026-11-04 Release B Phase 1: the ~3 min 40 s title review left no log line at all (call() only logs failures).
+  //   The caller's log sink prefixes "[TitleReview] " (main.ts), so the wrapper logs "stage=<stage> <seconds>s".
+  describe('per-stage timing log', () => {
+    const stageLines = (log: ReturnType<typeof vi.fn>) => log.mock.calls.map(c => String(c[0])).filter(m => m.startsWith('stage='));
+    const callStage = (deps: { callText: (p: string, o: { signal: AbortSignal; stage: any }) => Promise<string> }, stage: string) =>
+      deps.callText('prompt', { signal: new AbortController().signal, stage });
+
+    it('logs one stage=<stage> <seconds>s line per engine call, in call order, and passes the answer through unchanged', async () => {
+      const log = vi.fn();
+      const complete = vi.fn(async () => '응답');
+      const answers: string[] = [];
+      const review = async (_input: unknown, deps: any) => {
+        for (const stage of ['mining', 'tournament', 'candidates', 'review']) answers.push(await callStage(deps, stage));
+        return { title: '원래 제목' };
+      };
+      const validate = async (_input: unknown, deps: any) => { answers.push(await callStage(deps, 'locked-review')); return {}; };
+      const r = await generateWithHomefeedReview({ contentMode: 'homefeed', source, generate: async () => article('원래 제목'), log,
+        createCaller: async () => ({ complete, timeoutMs: 1000 }), review, validate });
+      expect(r.titleReview).toBe('reviewed');
+      expect(answers).toEqual(['응답', '응답', '응답', '응답', '응답']);
+      expect(complete).toHaveBeenCalledTimes(5);
+      const lines = stageLines(log);
+      expect(lines.map(l => /^stage=([\w-]+) \d+(\.\d)?s$/.exec(l)?.[1])).toEqual(['mining', 'tournament', 'candidates', 'review', 'locked-review']);
+    });
+
+    it('measures the elapsed engine time in seconds with one decimal', async () => {
+      vi.useFakeTimers();
+      try {
+        const log = vi.fn();
+        const complete = () => new Promise<string>(resolve => setTimeout(() => resolve('늦은 응답'), 37_400));
+        const review = async (_input: unknown, deps: any) => { await callStage(deps, 'candidates'); return { title: '원래 제목' }; };
+        const pending = generateWithHomefeedReview({ contentMode: 'homefeed', source, generate: async () => article('원래 제목'), log,
+          createCaller: async () => ({ complete, timeoutMs: 1000 }), review, validate: async () => ({}) });
+        await vi.advanceTimersByTimeAsync(37_400);
+        await pending;
+        expect(stageLines(log)).toEqual(['stage=candidates 37.4s']);
+      } finally { vi.useRealTimers(); }
+    });
+
+    it('logs a failed call too (marked), and the original error still becomes the v2.11.374 warning with the article kept', async () => {
+      const log = vi.fn();
+      const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+      try {
+        const complete = vi.fn(async () => { throw new Error('codex 세션 종료'); });
+        // Real review: the engine error is wrapped into DAILY_TITLE_ENGINE_FAILED by call(), exactly as in production.
+        const r = await generateWithHomefeedReview({ contentMode: 'homefeed', source, generate: async () => article('원래 제목'), log,
+          createCaller: async () => ({ complete, timeoutMs: 1000 }) });
+        expect(r.titleReview).toBe('review-warning');
+        expect(r.article.selectedTitle).toBe('원래 제목');
+        expect(log.mock.calls.map(c => String(c[0])).find(m => m.startsWith('⚠️'))).toMatch(/제목 검수를 끝내지 못했습니다\(DAILY_TITLE_ENGINE_FAILED\)/);
+        expect(stageLines(log)).toHaveLength(1);
+        expect(stageLines(log)[0]).toMatch(/^stage=mining \d+(\.\d)?s 실패$/);
+      } finally { warn.mockRestore(); }
+    });
+
+    it('does not turn a stage-log problem into a review failure (a throwing log sink is ignored)', async () => {
+      const log = vi.fn((m: string) => { if (m.startsWith('stage=')) throw new Error('log sink broke'); });
+      const review = async (_input: unknown, deps: any) => { await callStage(deps, 'review'); return { title: '원래 제목' }; };
+      const r = await generateWithHomefeedReview({ contentMode: 'homefeed', source, generate: async () => article('원래 제목'), log,
+        createCaller: async () => ({ complete: async () => '응답', timeoutMs: 1000 }), review, validate: async () => ({}) });
+      expect(r.titleReview).toBe('reviewed');
+      expect(log.mock.calls.some(c => String(c[0]).startsWith('stage='))).toBe(true);
+    });
+
+    it('logs a call the review aborted (timeout / cancel) once, even if the engine never settles', async () => {
+      vi.useFakeTimers();
+      try {
+        const log = vi.fn();
+        const complete = () => new Promise<string>(() => {}); // an engine that ignores the abort signal
+        const review = async (_input: unknown, deps: any) => {
+          const controller = new AbortController();
+          setTimeout(() => controller.abort(), 66_000);
+          await Promise.race([deps.callText('prompt', { signal: controller.signal, stage: 'review' }), new Promise(resolve => setTimeout(resolve, 66_100))]);
+          return { title: '원래 제목' };
+        };
+        const pending = generateWithHomefeedReview({ contentMode: 'homefeed', source, generate: async () => article('원래 제목'), log,
+          createCaller: async () => ({ complete, timeoutMs: 1000 }), review, validate: async () => ({}) });
+        await vi.advanceTimersByTimeAsync(66_100);
+        await pending;
+        expect(stageLines(log)).toEqual(['stage=review 66.0s 중단']);
+      } finally { vi.useRealTimers(); }
+    });
+  });
 });
