@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T15:59:15.380Z",
+ "builtAt": "2026-11-03T16:19:23.102Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,34 @@
  "measured": 26,
  "candidates": [
   {
-   "keyword": "한·튀르키예 정상 회담",
+   "keyword": "10월 소비자물가 2.8%",
    "sources": [
     "signal.bz"
    ],
    "articles90": 4,
    "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-03T14:38:00.000Z",
-   "exclusive": false,
+   "firstArticleAt": "2026-11-03T15:02:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "韓·튀르키예 정상회담… “원전·AI·자원 협력 강화”",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-03T15:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004007635?sid=100"
+     "title": "[사설] 소비자물가 6개월째 3% 안팎…주름살 깊어지는 서민경제",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-03T16:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005349944?sid=110"
     },
     {
-     "title": "한·튀르키예 전략관계 심화…\"신규 원전 참여 지원\"",
-     "press": "yonhapnewstv.co.kr",
+     "title": "10월 물가 2.8% 상승… 석유류 14.9%-가공식품 2.9% 뜀박질",
+     "press": "donga.com",
      "publishedAt": "2026-11-03T15:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922601?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/020/0003759843?sid=101"
     },
     {
-     "title": "이 대통령 “튀르키예 원전, 한국기업 선제 지원”",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-03T15:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003562605?sid=100"
+     "title": "울산 소비자물가 넉달만에 3%대 재진입",
+     "press": "ksilbo.co.kr",
+     "publishedAt": "2026-11-03T15:04:00.000Z",
+     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1071531"
     }
    ]
   },
@@ -48,10 +48,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-03T14:32:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-03T15:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -76,34 +76,36 @@
    ]
   },
   {
-   "keyword": "이동휘 유재석 감기 사태",
+   "keyword": "한학자 보석 취소",
    "sources": [
+    "signal.bz",
+    "nate",
     "daum"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-03T14:35:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-03T15:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "유재석 애착 동생인데…이동휘 전화 안 한 이유 “감기 사태 후 조심”...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-03T15:26:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001184249"
+     "title": "'천정궁 외출' 한학자, 다시 구치소로…JTBC 보도 하루 만에 보석 취소",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-03T15:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000518992?sid=102"
     },
     {
-     "title": "'유재석 애착 동생' 이동휘 \"건강 괜찮나\" 뼈 있는 안부...녹화 취소 사...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-03T15:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000486224"
+     "title": "천정궁 오간 한학자‥보름 만에 구치소로",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-03T15:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533330?sid=102"
     },
     {
-     "title": "이동휘, 유재석 건강 이상 언급…\"감기 사태 이후 조심\" (틈만나면) [TV나...",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-03T14:49:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000051273"
+     "title": "'천정궁' 다녀온 한학자 총재, 法 보석 취소",
+     "press": "getnews.co.kr",
+     "publishedAt": "2026-11-03T15:04:00.000Z",
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=885899"
     }
    ]
   },
@@ -112,10 +114,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T14:42:00.000Z",
+   "press": 2,
+   "firstArticleAt": "2026-11-03T15:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -136,70 +138,6 @@
      "press": "topstarnews.net",
      "publishedAt": "2026-11-03T15:12:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267531"
-    }
-   ]
-  },
-  {
-   "keyword": "10월 소비자물가 2.8%",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T15:02:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "10월 물가 2.8% 상승… 석유류 14.9%-가공식품 2.9% 뜀박질",
-     "press": "donga.com",
-     "publishedAt": "2026-11-03T15:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003759843?sid=101"
-    },
-    {
-     "title": "울산 소비자물가 넉달만에 3%대 재진입",
-     "press": "ksilbo.co.kr",
-     "publishedAt": "2026-11-03T15:04:00.000Z",
-     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1071531"
-    },
-    {
-     "title": "강원 소비자물가 고공행진…상승폭 전국 평균 넘어",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-03T15:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001228353?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "kbo",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T14:40:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "\"아시아 갈 거야\" 설마 KBO행인가, SF 선수 17명 정리했는데…이정후 동...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-03T15:09:00.000Z",
-     "link": "https://m.sports.naver.com/wbaseball/article/109/0005634141"
-    },
-    {
-     "title": "498SV 전설 내보내고, SSG 출신에 134억 베팅…DET 왜 'KBO 역수출 갓성비...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-03T15:07:00.000Z",
-     "link": "https://m.sports.naver.com/wbaseball/article/076/0004462907"
-    },
-    {
-     "title": "American slugger Hilliard delivers key plays with bat, glove in 1st KBO p...",
-     "press": "en.yna.co.kr",
-     "publishedAt": "2026-11-03T14:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016420036?sid=104"
     }
    ]
   }
