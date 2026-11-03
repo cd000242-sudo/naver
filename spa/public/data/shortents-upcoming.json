@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T08:47:09.390Z",
+ "builtAt": "2026-11-03T08:57:13.082Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,38 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "교육혁신선도지역 선정",
    "sources": [
-    "nate"
+    "nate",
+    "daum"
    ],
-   "articles90": 76,
+   "articles90": 74,
    "recent20": 14,
-   "press": 58,
-   "firstArticleAt": "2026-11-03T07:18:00.000Z",
+   "press": 57,
+   "firstArticleAt": "2026-11-03T07:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "경상북도영주교육지원청·영주시, 교육혁신선도지역 선정…5년간 최대 ...",
-     "press": "ttlnews.com",
-     "publishedAt": "2026-11-03T08:46:00.000Z",
-     "link": "http://www.ttlnews.com/news/articleView.html?idxno=3158358"
+     "title": "'교육혁신 선도지역'에 경북 5개 시군 선정…16곳은 탈락",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-03T08:56:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1421348"
     },
     {
-     "title": "강원 8개 시·군 교육혁신선도지역 선정.. 20억 지원",
-     "press": "chmbc.co.kr",
-     "publishedAt": "2026-11-03T08:46:00.000Z",
-     "link": "https://chmbc.co.kr/article/14123744"
+     "title": "통합특별시 등 전남광주 8곳, 교육혁신선도지역에 대거 낙점",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-03T08:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005837552?sid=102"
     },
     {
-     "title": "전남광주교육청, 교육혁신선도지역 전국 최다 8곳 선정…900억 확보",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-03T08:44:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=560878"
+     "title": "양주시, 교육부 ‘교육혁신선도지역’ 선정…5년간 140억 원 투입",
+     "press": "sentv.co.kr",
+     "publishedAt": "2026-11-03T08:52:00.000Z",
+     "link": "https://www.sentv.co.kr/article/view/sentv202611030216"
     }
    ]
   },
@@ -47,30 +48,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 43,
-   "recent20": 9,
-   "press": 38,
-   "firstArticleAt": "2026-11-03T07:27:00.000Z",
+   "articles90": 50,
+   "recent20": 11,
+   "press": 41,
+   "firstArticleAt": "2026-11-03T07:28:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "與 \"조작기소특검법 당론 채택…조희대 국정조사는 의견 수렴\"",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-03T08:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006403010?sid=100"
+     "title": "與 '조작기소 특검법' 당론…5일 본회의 상정 추진",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-03T08:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005349841?sid=100"
     },
     {
-     "title": "與, '조작기소 특검법' 당론 채택…5일 본회의 상정",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-03T08:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000191362?sid=100"
+     "title": "정점식 \"공소취소 특검법, 李재판 암장 시도…모든 법안 무제한토론 검...",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-03T08:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000648768?sid=100"
     },
     {
-     "title": "민주당, 조작기소 특검법 당론 채택 결정…5일 본회의 상정 예고",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-03T08:35:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261103001294"
+     "title": "국힘, 與 조작기소 특검법 추진에 \"李 재판 암장 시도…모든 법안 필버...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-03T08:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014298874?sid=100"
     }
    ]
   },
@@ -79,30 +80,62 @@
    "sources": [
     "google"
    ],
-   "articles90": 43,
-   "recent20": 43,
-   "press": 35,
-   "firstArticleAt": "2026-11-03T08:28:00.000Z",
+   "articles90": 44,
+   "recent20": 41,
+   "press": 38,
+   "firstArticleAt": "2026-11-03T08:36:00.000Z",
    "exclusive": true,
    "capped": true,
    "samples": [
     {
-     "title": "삼성바이오에피스, 테바와 美 판매 계약…최대 5632억 규모",
-     "press": "medipana.com",
-     "publishedAt": "2026-11-03T08:46:00.000Z",
-     "link": "https://www.medipana.com/news/articleView.html?idxno=420840"
+     "title": "삼성바이오에피스, 테바와 미국 상업화 계약 체결",
+     "press": "businesskorea.co.kr",
+     "publishedAt": "2026-11-03T08:56:00.000Z",
+     "link": "https://www.businesskorea.co.kr/news/articleView.html?idxno=280369"
     },
     {
-     "title": "반도체가 바꾼 부동산 지도···삼성·SK 투자 따라 주거 재편",
-     "press": "smartbizn.com",
-     "publishedAt": "2026-11-03T08:46:00.000Z",
-     "link": "https://www.smartbizn.com/news/articleView.html?idxno=158368"
+     "title": "'관리받는 연금투자' 확대…신한은행, 삼성자산운용과 손잡다",
+     "press": "newstnt.com",
+     "publishedAt": "2026-11-03T08:56:00.000Z",
+     "link": "https://www.newstnt.com/news/articleView.html?idxno=726513"
     },
     {
-     "title": "박진만 삼성 감독 \"기세는 우리가 좋아…1·2차전 1승 1패 목표\"[KS1]",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T08:45:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/421/0009267928"
+     "title": "KT와 삼성의 대결, 컴프야 '한국시리즈 예측' 이벤트 연다",
+     "press": "gamemeca.com",
+     "publishedAt": "2026-11-03T08:56:00.000Z",
+     "link": "https://m.sports.naver.com/esports/article/356/0000087281"
+    }
+   ]
+  },
+  {
+   "keyword": "한학자 보석 취소",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 41,
+   "recent20": 14,
+   "press": 36,
+   "firstArticleAt": "2026-11-03T07:42:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "법원, '천정궁 외출' 한학자 통일교 총재 보석 취소… 2억 보석금도 몰...",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-03T08:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000191364?sid=102"
+    },
+    {
+     "title": "병원 이탈해 천정궁 외출…통일교 한학자, 결국 보석 취소",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-03T08:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001976522?sid=102"
+    },
+    {
+     "title": "법원, 한학자 통일교 총재 보석 취소…보증금 국고 귀속",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-03T08:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005837548?sid=102"
     }
    ]
   },
@@ -111,30 +144,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 28,
-   "recent20": 5,
+   "articles90": 29,
+   "recent20": 6,
    "press": 27,
-   "firstArticleAt": "2026-11-03T07:26:00.000Z",
-   "exclusive": true,
+   "firstArticleAt": "2026-11-03T07:30:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "아시안컵, 중동 정세 여파로 11개월 연기…2027년 12월 사우디에서 새 일...",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-03T08:44:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=846056"
+     "title": "2027 아시안컵 1년 연기…모레노 감독 거취·차기 사령탑 선임 모두 '안...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-03T08:52:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267241"
     },
     {
-     "title": "2027 사우디 아시안컵, 중동 정세 불안에 11개월 연기…내년 12월 개막",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-03T08:44:00.000Z",
-     "link": "https://www.ajunews.com/view/20261103174116034"
+     "title": "2027 사우디 아시안컵, 중동 정세 불안으로 개최 연기",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-03T08:50:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261103010001250"
     },
     {
-     "title": "아시안컵 전격 연기, 중동 정세 불안으로 내년 1월→12월 개막",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-03T08:44:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1134893"
+     "title": "\"중요한 것은 아시안컵 우승!\" 日 원대한 꿈, 날벼락 맞았다…AFC 대회 ...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-03T08:47:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/076/0004462609"
     }
    ]
   },
@@ -143,13 +176,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 17,
-   "recent20": 1,
-   "press": 17,
-   "firstArticleAt": "2026-11-03T07:22:00.000Z",
+   "articles90": 14,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-03T07:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "LG생활건강, 3분기 매출 제자리에도 영업익 52%↑",
+     "press": "news.dealsitetv.com",
+     "publishedAt": "2026-11-03T08:50:00.000Z",
+     "link": "https://news.dealsitetv.com/articles/177976"
+    },
     {
      "title": "LG생활건강, 3분기 영업익 52% 증가…뷰티사업 적자 축소",
      "press": "smarttimes.co.kr",
@@ -161,12 +200,6 @@
      "press": "newsinside.kr",
      "publishedAt": "2026-11-03T08:14:00.000Z",
      "link": "https://www.newsinside.kr/news/articleView.html?idxno=5039664"
-    },
-    {
-     "title": "LG생활건강, 3분기 영업익 52% 껑충… '선택과 집중' 포트폴리오 재편 통...",
-     "press": "maxmovie.com",
-     "publishedAt": "2026-11-03T08:12:00.000Z",
-     "link": "https://www.maxmovie.com/news/articleView.html?idxno=502751"
     }
    ]
   },
@@ -175,30 +208,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 11,
-   "recent20": 5,
-   "press": 11,
-   "firstArticleAt": "2026-11-03T08:06:00.000Z",
+   "articles90": 10,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-03T08:18:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
+    {
+     "title": "고령군 어린이집연합회, 영어 체험 축제",
+     "press": "dkilbo.com",
+     "publishedAt": "2026-11-03T08:56:00.000Z",
+     "link": "https://www.dkilbo.com/news/articleView.html?idxno=559536"
+    },
+    {
+     "title": "'노래로 전하는 크리스마스 사랑'…컴패션, 어린이 결연 잇는 콘서트 개...",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-03T08:52:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=242181"
+    },
     {
      "title": "전동킥보드·전기자전거 타는 어린이, 뇌 손상 위험 2배",
      "press": "dongascience.com",
      "publishedAt": "2026-11-03T08:46:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/584/0000039985?sid=103"
-    },
-    {
-     "title": "남구구립밝은어린이집, 장터 수익금 기탁",
-     "press": "jndn.com",
-     "publishedAt": "2026-11-03T08:36:00.000Z",
-     "link": "http://www.jndn.com/article.php?aid=1793694803442372011"
-    },
-    {
-     "title": "어린이들의 특별한 도전…꿈의 무용단 강동 ‘꿈별’ 첫 무대",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-03T08:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003695382?sid=102"
     }
    ]
   },
@@ -208,13 +241,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-03T07:18:00.000Z",
+   "articles90": 10,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-03T07:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[오늘의 주목주] 삼성SDI 주가 9%대 내려, 코스피 'AI 수익성 우려'에 56...",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-03T08:52:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=451074"
+    },
     {
      "title": "코스피, AI 자금조달 우려에 3.59% 급락…외국인 매도에 5600선 후퇴",
      "press": "goodkyung.com",
@@ -226,12 +265,6 @@
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-03T07:59:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002427847?sid=101"
-    },
-    {
-     "title": "AI 빚잔치·美중간선거에 코스피 또 ‘털썩’…3.6% 급락 [투자360]",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-03T07:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002718313?sid=101"
     }
    ]
   },
@@ -241,12 +274,18 @@
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 0,
+   "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-03T07:24:00.000Z",
+   "firstArticleAt": "2026-11-03T07:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "제주 실종 허위 종결 전직 경찰관…추가 범행 10건",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-03T08:56:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1542531"
+    },
     {
      "title": "제주경찰, 부 경장 허위종결 25건 추가 송치",
      "press": "jejumaeil.net",
@@ -258,12 +297,6 @@
      "press": "jemin.com",
      "publishedAt": "2026-11-03T07:44:00.000Z",
      "link": "https://www.jemin.com/news/articleView.html?idxno=846035"
-    },
-    {
-     "title": "제주 실종사건 허위종결 전직 경찰관 25건 추가 확인…공소청 송치",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-03T07:30:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4116532"
     }
    ]
   },
@@ -272,13 +305,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 1,
-   "press": 3,
+   "press": 4,
    "firstArticleAt": "2026-11-03T07:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "서울~양평 고속도로 타당성조사…\"사업 재개 가시화\"",
+     "press": "engdaily.com",
+     "publishedAt": "2026-11-03T08:48:00.000Z",
+     "link": "http://www.engdaily.com/news/articleView.html?idxno=23769"
+    },
     {
      "title": "'특혜 논란' 서울~양평 고속道, 3년만에 재추진",
      "press": "hankyung.com",
@@ -290,51 +329,13 @@
      "press": "businesspost.co.kr",
      "publishedAt": "2026-11-03T08:00:00.000Z",
      "link": "https://www.businesspost.co.kr/BP?command=article_view&num=451063"
-    },
-    {
-     "title": "지난 정부 때 큰 파장, 서울~양평고속도로 타당성, 원점에서 새로 조사",
-     "press": "busan.com",
-     "publishedAt": "2026-11-03T07:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001405451?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "한-튀르키예 정상 부부",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 2,
-   "firstArticleAt": "2026-11-03T07:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "육군 태권도 시범대 특별 공연보는 한-튀르키예 정상 부부",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-03T08:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014298849?sid=100"
-    },
-    {
-     "title": "박수치는 한-튀르키예 정상 부부",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-03T08:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014298850?sid=100"
-    },
-    {
-     "title": "기념 촬영하는 한-튀르키예 정상 부부",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-03T07:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014298637?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 413,
+  "flagged": 414,
   "matched": 148,
   "avgLeadMin": 222,
   "recent": [
