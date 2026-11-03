@@ -53,7 +53,8 @@ describe('generateWithCodexImage', () => {
     const seen: Array<[string, number, number]> = [];
     const images = await generateWithCodexImage(items(3), '글 제목', 'post-1', undefined, (img, i, total) => seen.push([img.heading, i, total]), {}, runtime);
     // The app's prompt goes first, unchanged; only the frame line is appended (no ratio on the item = square).
-    const square = '\nASPECT RATIO: square 1:1 (1024x1024). Compose for this frame; keep every subject and all text inside it.';
+    // 2026-11-04: the square line also asks for the central square (the saved file is centre-cropped — codexImageFrame.test.ts).
+    const square = '\nASPECT RATIO: square 1:1 (1024x1024). Keep the main subject and all text inside the central square. Compose for this frame; keep every subject and all text inside it.';
     expect(sessions).toEqual([[1, 2, 3].map((n) => `exact english prompt ${n}${square}`)]);
     expect(images.map(i => i.heading)).toEqual(['소제목 1', '소제목 2', '소제목 3']);
     expect(images.map(i => i.filePath)).toEqual(['C:/codex/0-0.png', 'C:/codex/0-1.png', 'C:/codex/0-2.png']);

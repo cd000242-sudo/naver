@@ -81,7 +81,11 @@ function defaultRuntime(): CodexImageRuntime {
         import('fs/promises'), import('path'), import('../imageUtils.js'),
       ]);
       const ext = extname(filePath).slice(1).toLowerCase();
-      const saved = await writeImageFile(await readFile(filePath), ext === 'jpeg' || !ext ? 'jpg' : ext, item.heading, postTitle, postId);
+      // 2026-11-04: Codex ignores the ratio line most of the time — fit the file to the requested frame (default 1:1).
+      const { fitCodexImageToRatio } = await import('./codexImageFrame.js');
+      const fitted = await fitCodexImageToRatio(await readFile(filePath), (item as { imageRatio?: unknown }).imageRatio);
+      if (fitted.cropped) emitCodexImageLog(`📐 "${item.heading}" ${fitted.from} → ${fitted.to} (${fitted.target}, 가운데 기준 자르기)`);
+      const saved = await writeImageFile(fitted.buffer, ext === 'jpeg' || !ext ? 'jpg' : ext, item.heading, postTitle, postId);
       return {
         heading: item.heading,
         filePath: saved.savedToLocal || saved.filePath,

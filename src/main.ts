@@ -7080,7 +7080,11 @@ ipcMain.handle(
       // Only this person-run [글 생성] handler sets it; the unattended daily and multi-account paths never do.
       if (resolveAgentHarmonyFlag((await loadConfig().catch(() => null)) as any, process.env)) {
         (source as any).agentHarmony = true;
-        console.log('[AgentHarmony] 조화 모드 켜짐(관찰 전용) — 에이전트 홈피드 글 생성이 한 세션 안에서 패킷도 함께 보고합니다.');
+        // 2026-11-04: say whether THIS article uses it — the session only runs for agent engines in homefeed mode (an SEO run logged "켜짐" and confused the owner).
+        const harmonyApplies = String(contentMode || '') === 'homefeed' && (String(provider || '') === 'agent-claude' || String(provider || '') === 'agent-codex');
+        console.log(harmonyApplies
+          ? '[AgentHarmony] 조화 모드 켜짐 — 이번 홈판 글은 에이전트가 한 세션 안에서 제목 비교 · 자기점검 · 보완 보고까지 합니다.'
+          : `[AgentHarmony] 조화 모드 설정은 켜져 있지만 이번 글에는 적용하지 않습니다(모드 ${String(contentMode || '-')} · 엔진 ${String(provider || '-')} — 홈판 + Claude Code/Codex 에서만).`);
       }
       const manualReviewed = await generateWithHomefeedReview({
         contentMode: String(contentMode || ''), source: source as any, generate: generateOnce, signal: genSignal,

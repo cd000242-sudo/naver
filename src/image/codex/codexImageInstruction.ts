@@ -9,7 +9,9 @@ const SINGLE_HEAD = '이미지 생성 도구(image_gen.imagegen)에 아래 프�
 // from the prompt — a section prompt without a ratio came back 16:9. The item's ratio (thumbnail / heading setting,
 // default 1:1) is appended as one line; measured 2026-11-03: the square line gave 1254x1254.
 const CODEX_ASPECT_FRAMES: Readonly<Record<string, string>> = Object.freeze({
-  '1:1': 'square 1:1 (1024x1024)',
+  // 2026-11-04: Codex still returned 16:9 for most square requests, so the app centre-crops (codexImageFrame.ts);
+  //   keeping the subject and every letter inside the central square is what makes that crop safe.
+  '1:1': 'square 1:1 (1024x1024). Keep the main subject and all text inside the central square',
   '16:9': 'wide landscape 16:9',
   '9:16': 'tall portrait 9:16',
   '4:3': 'landscape 4:3',
