@@ -16,6 +16,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   EXIT_WATCHDOG_TIMEOUT_MS,
   armExitWatchdog,
+  buildExitWatchdogLauncher,
   buildExitWatchdogScript,
   resetExitWatchdogForTests,
 } from '../runtime/exitWatchdog';
@@ -49,20 +50,32 @@ describe('exit watchdog script', () => {
 describe('armExitWatchdog', () => {
   beforeEach(() => resetExitWatchdogForTests());
 
-  it('spawns one detached, hidden, unref-ed PowerShell child through cmd.exe on win32', () => {
+  // [2026-11-03] 사장님 "파워쉘이 갑자기 뜨길래": cmd.exe(detached, 콘솔 없음) → PowerShell 이 새 콘솔을 받아
+  //   Windows Terminal 창이 종료마다 떴다. 이제 GUI 프로그램(Electron as node)이 PowerShell 을 창 없이 띄운다(실측 창 0).
+  it('spawns one detached, hidden, unref-ed Electron-as-node launcher that starts PowerShell hidden (no cmd.exe)', () => {
     const { spawnFn, spawnMock, unref } = makeSpawn();
-    const armed = armExitWatchdog({ pid: 777, timeoutMs: 5000, platform: 'win32', spawnFn });
+    const armed = armExitWatchdog({ pid: 777, timeoutMs: 5000, platform: 'win32', spawnFn, execPath: 'C:\\App\\app.exe', env: { PATH: 'x' } });
     expect(armed).toBe(true);
     expect(spawnMock).toHaveBeenCalledTimes(1);
-    const [command, args, options] = spawnMock.mock.calls[0] as unknown as [string, string[], Record<string, unknown>];
-    expect(command).toBe('powershell.exe');
-    expect(args).toContain('-NoProfile');
-    expect(args).toContain('-NonInteractive');
-    // The script travels through cmd.exe, so it is one double-quoted argument.
-    expect(args[args.length - 1]).toMatch(/^"[\s\S]*WaitForExit\(5000\)[\s\S]*"$/);
-    // Measured: direct detached powershell never runs; non-detached dies with the parent.
-    expect(options).toMatchObject({ detached: true, stdio: 'ignore', windowsHide: true, shell: true });
+    const [command, args, options] = spawnMock.mock.calls[0] as unknown as [string, string[], Record<string, any>];
+    expect(command).toBe('C:\\App\\app.exe');
+    expect(args[0]).toBe('-e');
+    const launcher = args[1];
+    expect(launcher).toContain("spawn('powershell.exe'");
+    expect(launcher).toContain("'-NoProfile','-NonInteractive'");
+    expect(launcher).toContain('WaitForExit(5000)');
+    expect(launcher).toContain("windowsHide:true");
+    expect(launcher).toContain("c.on('exit',()=>process.exit(0))");
+    expect(options).toMatchObject({ detached: true, stdio: 'ignore', windowsHide: true });
+    expect(options.shell).toBeUndefined();
+    expect(options.env).toMatchObject({ PATH: 'x', ELECTRON_RUN_AS_NODE: '1' });
     expect(unref).toHaveBeenCalledTimes(1);
+  });
+
+  it('the launcher is valid JavaScript and carries the exact handle-based PowerShell script', () => {
+    const launcher = buildExitWatchdogLauncher(4321, 8000);
+    expect(() => new Function(launcher)).not.toThrow();
+    expect(launcher).toContain(JSON.stringify(buildExitWatchdogScript(4321, 8000)));
   });
 
   it('arms only once per process', () => {

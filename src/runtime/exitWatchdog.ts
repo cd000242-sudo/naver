@@ -12,6 +12,13 @@
  * child holds a handle to our process (so the PID cannot be recycled underneath it),
  * waits up to `timeoutMs`, and terminates us only if we are still alive by then.
  * A process that exits normally makes the child a no-op.
+ *
+ * [2026-11-03] The PowerShell used to go through cmd.exe started with `detached` (no console),
+ * so PowerShell got a brand-new console — with Windows Terminal as the default terminal that is a
+ * visible window on every quit (owner: "파워쉘이 갑자기 뜨길래", 55 times during the release E2E).
+ * Now a detached Electron-as-node launcher (GUI subsystem: no console at all) starts the same
+ * PowerShell with windowsHide (CREATE_NO_WINDOW → hidden console, no terminal hand-off) and
+ * waits for it. Measured: quit → no-op, hang → killed after the timeout, zero console windows.
  */
 import { spawn as nodeSpawn } from 'child_process';
 
@@ -22,6 +29,9 @@ export interface ExitWatchdogOptions {
   timeoutMs?: number;
   platform?: NodeJS.Platform;
   spawnFn?: typeof nodeSpawn;
+  /** The Electron binary that runs the launcher as plain Node (ELECTRON_RUN_AS_NODE). */
+  execPath?: string;
+  env?: NodeJS.ProcessEnv;
 }
 
 let armed = false;
@@ -43,6 +53,22 @@ export function buildExitWatchdogScript(pid: number, timeoutMs: number): string 
 }
 
 /**
+ * Node one-liner run by the detached Electron-as-node launcher: starts the PowerShell watchdog hidden
+ * and stays alive until it ends (a non-detached child lives in our job, so the launcher must outlive it).
+ * The extra 15 s cap only ends the launcher itself if PowerShell never reports back.
+ */
+export function buildExitWatchdogLauncher(pid: number, timeoutMs: number): string {
+  const script = buildExitWatchdogScript(pid, timeoutMs);
+  return [
+    "const c=require('child_process').spawn('powershell.exe',",
+    `['-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-Command',${JSON.stringify(script)}],`,
+    "{stdio:'ignore',windowsHide:true});",
+    "c.on('exit',()=>process.exit(0));c.on('error',()=>process.exit(0));",
+    `setTimeout(()=>process.exit(0),${timeoutMs + 15_000}).unref();`,
+  ].join('');
+}
+
+/**
  * Spawns the watchdog once per process. Returns false when it was already armed,
  * when the platform is not Windows, or when spawning failed — never throws, because
  * this runs inside the quit path.
@@ -53,25 +79,20 @@ export function armExitWatchdog(options: ExitWatchdogOptions = {}): boolean {
     timeoutMs = EXIT_WATCHDOG_TIMEOUT_MS,
     platform = process.platform,
     spawnFn = nodeSpawn,
+    execPath = process.execPath,
+    env = process.env,
   } = options;
 
   if (armed || platform !== 'win32') return false;
 
   try {
-    // Measured 2026-09-30: powershell.exe spawned directly with `detached: true` never
-    // runs the script (no console to attach to), while `detached: false` puts it in
-    // libuv's kill-on-close job and it dies with us. Going through cmd.exe
-    // (`shell: true`) gives PowerShell a hidden console and keeps it alive after we
-    // exit; the hidden console has no window (MainWindowHandle 0).
+    // Measured 2026-09-30: a detached PowerShell never runs (no console) and a non-detached one dies with us.
+    // Measured 2026-11-03: cmd.exe → PowerShell opened a Windows Terminal window. A GUI-subsystem launcher
+    // (Electron as node) is detached from our job and has no console; its hidden PowerShell child has no window.
     const child = spawnFn(
-      'powershell.exe',
-      [
-        '-NoProfile',
-        '-NonInteractive',
-        '-ExecutionPolicy', 'Bypass',
-        '-Command', `"${buildExitWatchdogScript(pid, timeoutMs)}"`,
-      ],
-      { detached: true, stdio: 'ignore', windowsHide: true, shell: true },
+      execPath,
+      ['-e', buildExitWatchdogLauncher(pid, timeoutMs)],
+      { detached: true, stdio: 'ignore', windowsHide: true, env: { ...env, ELECTRON_RUN_AS_NODE: '1' } },
     );
     child.unref();
     armed = true;
