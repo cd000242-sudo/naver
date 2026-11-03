@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T17:49:48.821Z",
+ "builtAt": "2026-11-03T17:59:52.554Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -48,12 +48,18 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 2,
-   "firstArticleAt": "2026-11-03T16:20:00.000Z",
+   "firstArticleAt": "2026-11-03T16:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "Trump’s 2018 Midterms Gave Democrats House Control and Added Two GOP Se...",
+     "press": "econotimes.com",
+     "publishedAt": "2026-11-03T17:50:00.000Z",
+     "link": "https://econotimes.com/Trump-s-2018-Midterms-Gave-Democrats-House-Control-and-Added-Two-GOP-Senate-Seats-1770162"
+    },
     {
      "title": "USA ELECTIONS",
      "press": null,
@@ -65,12 +71,6 @@
      "press": "nytimes.com",
      "publishedAt": "2026-11-03T16:36:00.000Z",
      "link": "https://www.nytimes.com/2026/11/03/us/trump-midterms-voters-election-day.html?partner=naver"
-    },
-    {
-     "title": "Jiri Lehecka leads US search list after Swiss Indoors defeat",
-     "press": "econotimes.com",
-     "publishedAt": "2026-11-03T16:20:00.000Z",
-     "link": "https://econotimes.com/Jiri-Lehecka-leads-US-search-list-after-Swiss-Indoors-defeat-1770077"
     }
    ]
   }
