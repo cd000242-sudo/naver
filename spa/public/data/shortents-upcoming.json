@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T03:04:27.327Z",
+ "builtAt": "2026-11-03T03:14:30.640Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,31 +8,31 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "외교부 여권 재발급",
+   "keyword": "공군 1호기 정보 유출",
    "sources": [
     "daum"
    ],
-   "articles90": 66,
-   "recent20": 7,
-   "press": 56,
-   "firstArticleAt": "2026-11-03T01:41:00.000Z",
-   "exclusive": false,
+   "articles90": 79,
+   "recent20": 6,
+   "press": 65,
+   "firstArticleAt": "2026-11-03T01:53:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "외교부 화들짝 \"李대통령 부부 등 168명 여권 재발급\"",
-     "press": "viewsnnews.com",
-     "publishedAt": "2026-11-03T03:02:00.000Z",
-     "link": "https://www.viewsnnews.com/article?q=239443"
+     "title": "대통령 부부 여권번호까지 '탈탈'…순방단 168명 정보 5개월간 무방비 ...",
+     "press": "theopiniontimes.news",
+     "publishedAt": "2026-11-03T03:09:00.000Z",
+     "link": "https://theopiniontimes.news/%eb%8c%80%ed%86%b5%eb%a0%b9-%eb%b6%80%eb%b6%80-%ec%97%ac%ea%b6%8c%eb%b2%88%ed%98%b8%ea%b9%8c%ec%a7%80-%ed%83%88%ed%83%88%ec%88%9c%eb%b0%a9%eb%8b%a8-168%eb%aa%85-%ec%a0%95%eb%b3%b4-5/"
     },
     {
-     "title": "외교부 \"해킹 아닌 유출, 경찰 등 수사·조사 진행중\"",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-03T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002534459?sid=100"
+     "title": "이 대통령 부부 개인정보까지‥\"조사 진행 중\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-03T03:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533183?sid=100"
     },
     {
      "title": "[속보]외교부, 李대통령 부부·정부 주요 인사 등 168명 개인정보 유출...",
@@ -43,35 +43,34 @@
    ]
   },
   {
-   "keyword": "발언하는 이재명 대통령",
+   "keyword": "대통령 내외 여권 재발급",
    "sources": [
-    "signal.bz",
-    "nate"
+    "daum"
    ],
-   "articles90": 59,
-   "recent20": 9,
-   "press": 41,
-   "firstArticleAt": "2026-11-03T01:54:00.000Z",
+   "articles90": 54,
+   "recent20": 6,
+   "press": 49,
+   "firstArticleAt": "2026-11-03T01:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이 대통령 \"다문화 차별? 제 우려는 극우적 선동\"",
-     "press": "ohmynews.com",
+     "title": "대통령 부부 여권번호까지 '탈탈'…순방단 168명 정보 5개월간 무방비 ...",
+     "press": "theopiniontimes.news",
+     "publishedAt": "2026-11-03T03:09:00.000Z",
+     "link": "https://theopiniontimes.news/%eb%8c%80%ed%86%b5%eb%a0%b9-%eb%b6%80%eb%b6%80-%ec%97%ac%ea%b6%8c%eb%b2%88%ed%98%b8%ea%b9%8c%ec%a7%80-%ed%83%88%ed%83%88%ec%88%9c%eb%b0%a9%eb%8b%a8-168%eb%aa%85-%ec%a0%95%eb%b3%b4-5/"
+    },
+    {
+     "title": "외교부 화들짝 \"李대통령 부부 등 168명 여권 재발급\"",
+     "press": "viewsnnews.com",
+     "publishedAt": "2026-11-03T03:02:00.000Z",
+     "link": "https://www.viewsnnews.com/article?q=239443"
+    },
+    {
+     "title": "[속보]외교부, 李대통령 부부·정부 주요 인사 등 168명 개인정보 유출...",
+     "press": "kwnews.co.kr",
      "publishedAt": "2026-11-03T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002534458?sid=100"
-    },
-    {
-     "title": "이 대통령 \"부동산 객관적 통계, 정부에서 제대로 설명하는 게 중요\"",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-03T02:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002393201?sid=100"
-    },
-    {
-     "title": "시민사회단체, 이 대통령 이주민 차별 발언 위헌 소지",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-03T02:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001882636?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/087/0001228191?sid=100"
     }
    ]
   },
@@ -80,13 +79,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 53,
-   "recent20": 6,
-   "press": 35,
-   "firstArticleAt": "2026-11-03T01:53:00.000Z",
+   "articles90": 51,
+   "recent20": 5,
+   "press": 34,
+   "firstArticleAt": "2026-11-03T01:54:00.000Z",
    "exclusive": true,
    "capped": true,
    "samples": [
+    {
+     "title": "MUFG \"美 중간선거, 분열 의회가 시장에 최선…민주당 석권 땐 주식 부담...",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-03T03:08:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4442746"
+    },
     {
      "title": "트럼프 운명의 날… 美 중간선거 오늘, 상원 초접전",
      "press": "mediawatch.kr",
@@ -98,44 +103,6 @@
      "press": "wikitree.co.kr",
      "publishedAt": "2026-11-03T03:00:00.000Z",
      "link": "https://www.wikitree.co.kr/articles/1171364"
-    },
-    {
-     "title": "[美중간선거]'제조업 보호' 내건 트럼프 관세, 선거 앞두고 역풍",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-03T02:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014297586?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "LG엔솔 3분기 영업익",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 35,
-   "recent20": 0,
-   "press": 34,
-   "firstArticleAt": "2026-11-03T01:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "LG엔솔 \"4분기 매출 10%↑…북미 ESS 2028년 물량 대부분 확정\"(종합2보)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T02:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016418094?sid=101"
-    },
-    {
-     "title": "LG엔솔, ESS 수주 넘치는데…수익성 개선 언제쯤",
-     "press": "bloter.net",
-     "publishedAt": "2026-11-03T02:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/293/0000092598?sid=101"
-    },
-    {
-     "title": "LG엔솔, ESS 호조에 3분기 영업익 7560억원",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-03T02:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001163051?sid=101"
     }
    ]
   },
@@ -144,30 +111,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 36,
-   "recent20": 12,
-   "press": 28,
-   "firstArticleAt": "2026-11-03T01:35:00.000Z",
+   "articles90": 34,
+   "recent20": 6,
+   "press": 27,
+   "firstArticleAt": "2026-11-03T01:46:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "10월물가 2.8% 고공행진… 기름 더 붓는 ‘역대급 예산’",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-03T03:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002829942?sid=101"
+     "title": "가공식품·외식 오름폭 커져…10월 소비자물가 2.8%↑",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-03T03:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400212?sid=101"
     },
     {
-     "title": "채솟값 내려도 외식·가공식품 '껑충'···10월 물가 2.8% 상승",
-     "press": "enewstoday.co.kr",
-     "publishedAt": "2026-11-03T02:59:00.000Z",
-     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2487728"
+     "title": "10월 물가 2.8% 상승…가공식품·외식 오름폭 확대",
+     "press": "koreareport.co.kr",
+     "publishedAt": "2026-11-03T03:10:00.000Z",
+     "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=54242"
     },
     {
-     "title": "10월 소비자물가 2.8%↑...'가공식품·석유류' 오름세",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-03T02:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002427654?sid=101"
+     "title": "한은 \"10월 물가상승률 2.8%로 둔화…당분간 2%대 후반\"",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-03T03:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003150657?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "서울-양평고속도로 재추진",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 23,
+   "recent20": 1,
+   "press": 23,
+   "firstArticleAt": "2026-11-03T02:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "멈춰 선 서울~양평 고속도로 재추진 … 노선 재평가로 공정성 논란 넘을...",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-03T03:06:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/03/2026110300141.html"
+    },
+    {
+     "title": "‘김건희 특혜 의혹’ 양평고속도로 재추진…타당성 조사 착수",
+     "press": "donga.com",
+     "publishedAt": "2026-11-03T02:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003759688?sid=101"
+    },
+    {
+     "title": "국토교통부, 서울~양평 고속도로 사업 재추진…신규 타당성 조사 착수",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-03T02:30:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=622643"
     }
    ]
   },
@@ -176,10 +175,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 23,
+   "articles90": 20,
    "recent20": 1,
-   "press": 22,
-   "firstArticleAt": "2026-11-03T01:37:00.000Z",
+   "press": 20,
+   "firstArticleAt": "2026-11-03T01:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -204,50 +203,24 @@
    ]
   },
   {
-   "keyword": "서울-양평고속도로 재추진",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 22,
-   "recent20": 0,
-   "press": 22,
-   "firstArticleAt": "2026-11-03T02:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘김건희 특혜 의혹’ 양평고속도로 재추진…타당성 조사 착수",
-     "press": "donga.com",
-     "publishedAt": "2026-11-03T02:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003759688?sid=101"
-    },
-    {
-     "title": "국토교통부, 서울~양평 고속도로 사업 재추진…신규 타당성 조사 착수",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-03T02:30:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=622643"
-    },
-    {
-     "title": "서울-양평 고속도로 3년 만에 재추진…내년 하반기 최적 노선 확정",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-03T02:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003481502?sid=101"
-    }
-   ]
-  },
-  {
    "keyword": "가상자산 과세 유예 건의",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 19,
-   "recent20": 0,
-   "press": 18,
-   "firstArticleAt": "2026-11-03T01:36:00.000Z",
+   "articles90": 15,
+   "recent20": 1,
+   "press": 14,
+   "firstArticleAt": "2026-11-03T01:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[정책 해설] 가상자산 과세 유예 건의…2년 안팎 거론, 확정은 아직",
+     "press": "coinreaders.com",
+     "publishedAt": "2026-11-03T03:12:00.000Z",
+     "link": "http://coinreaders.com/267085"
+    },
     {
      "title": "與 ‘가상자산 과세’ 2년 추가유예 가닥",
      "press": "biz.heraldcorp.com",
@@ -259,12 +232,6 @@
      "press": "biz.heraldcorp.com",
      "publishedAt": "2026-11-03T02:30:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/016/0002718137?sid=100"
-    },
-    {
-     "title": "與재경위, 가상자산 과세유예 당 지도부 건의키로…\"대부분 2년 유예 거...",
-     "press": "whitepaper.co.kr",
-     "publishedAt": "2026-11-03T02:24:00.000Z",
-     "link": "http://www.whitepaper.co.kr/news/articleView.html?idxno=268381"
     }
    ]
   },
@@ -274,10 +241,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 18,
+   "articles90": 13,
    "recent20": 4,
-   "press": 15,
-   "firstArticleAt": "2026-11-03T01:35:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-03T01:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -302,66 +269,34 @@
    ]
   },
   {
-   "keyword": "양주시",
-   "sources": [
-    "google"
-   ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-03T01:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "감사원 \"개정고시 전 단순실수 과태료 부과 면제\"…양주시 1억5000만원 경...",
-     "press": "intn.co.kr",
-     "publishedAt": "2026-11-03T03:02:00.000Z",
-     "link": "http://www.intn.co.kr/news/articleView.html?idxno=2054460"
-    },
-    {
-     "title": "양주시 택지개발 촉구 되풀이에도 LH ‘요지부동’",
-     "press": "kyeongin.com",
-     "publishedAt": "2026-11-03T02:48:00.000Z",
-     "link": "https://www.kyeongin.com/article/1773971"
-    },
-    {
-     "title": "양주시, ‘별산’과 함께한 교외선 관광MT 마무리…2쌍 매칭",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-03T02:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002463978?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "미래대응기금 설치 공청회",
    "sources": [
     "nate"
    ],
-   "articles90": 23,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-03T01:41:00.000Z",
+   "articles90": 20,
+   "recent20": 3,
+   "press": 8,
+   "firstArticleAt": "2026-11-03T01:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'미래 선제 투자'냐 '국가 채무 부담'이냐…재경위, 미래대응기금 공방",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-03T03:12:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=879278"
+    },
+    {
+     "title": "시도지사협의회 \"미래대응기금, 지방 재정 권한 국가가 가져가\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T03:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009266822?sid=101"
+    },
     {
      "title": "국힘, 미래대응기금에 \"빚내서 기금 적립\"…전문가 의견 엇갈려",
      "press": "news.tf.co.kr",
      "publishedAt": "2026-11-03T03:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/629/0000548204?sid=100"
-    },
-    {
-     "title": "[포토] 미래대응기금 법률안 제정 공청회",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-03T02:52:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/03/2026110300189.html"
-    },
-    {
-     "title": "「M포토」 공청회에서 발언하는 김정훈 재정정책연구원장",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-03T02:44:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=72509"
     }
    ]
   },
@@ -370,13 +305,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 19,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-03T01:43:00.000Z",
+   "articles90": 12,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-03T01:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "오·한, 30분 간격 국회 토론회… 국힘 의원, 각각 30여명·10여명 눈도장",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-03T03:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002829954?sid=100"
+    },
     {
      "title": "한동훈·김기현·윤상현 한자리에…‘공천 개혁’ 한목소리·‘보수 대...",
      "press": "news.kbs.co.kr",
@@ -388,12 +329,70 @@
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-03T02:43:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002427646?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "양주시",
+   "sources": [
+    "google"
+   ],
+   "articles90": 10,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-03T02:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "양주시, '대규모 통계조사 업무유공'으로 재정경제부 장관 기관표창",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-03T03:08:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2013680"
     },
     {
-     "title": "김기현·윤상현 손잡은 한동훈…국힘 의원 20여 명 토론회 집결",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T02:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009266742?sid=100"
+     "title": "감사원 \"개정고시 전 단순실수 과태료 부과 면제\"…양주시 1억5000만원 경...",
+     "press": "intn.co.kr",
+     "publishedAt": "2026-11-03T03:02:00.000Z",
+     "link": "http://www.intn.co.kr/news/articleView.html?idxno=2054460"
+    },
+    {
+     "title": "양주시 택지개발 촉구 되풀이에도 LH ‘요지부동’",
+     "press": "kyeongin.com",
+     "publishedAt": "2026-11-03T02:48:00.000Z",
+     "link": "https://www.kyeongin.com/article/1773971"
+    }
+   ]
+  },
+  {
+   "keyword": "lg디스플레이",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-03T01:59:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "LG디스플레이, 국립생태원과 파주사업장 주변 생태계 보전 추진",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-03T02:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016418123?sid=102"
+    },
+    {
+     "title": "LG디스플레이, 파주사업장 인근 생태계 보전·복원 나선다",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-03T02:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004205898?sid=101"
+    },
+    {
+     "title": "LG디스플레이, 파주사업장 인근 멸종위기종 복원 노력",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-03T02:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002718119?sid=101"
     }
    ]
   },
@@ -416,55 +415,23 @@
      "link": "https://n.news.naver.com/mnews/article/018/0006402700?sid=101"
     },
     {
-     "title": "환영사 하는 오세훈 시장",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-03T02:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009266728?sid=100"
-    },
-    {
      "title": "토론회 환영사 하는 오세훈 시장",
      "press": "news1.kr",
      "publishedAt": "2026-11-03T02:28:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009266726?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "래블업",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T01:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[특징주] 래블업, 코스닥 입성 첫날 '상승'",
-     "press": "jeonmae.co.kr",
-     "publishedAt": "2026-11-03T02:38:00.000Z",
-     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1307933"
     },
     {
-     "title": "[특징주] AI 소프트웨어 '래블업', 코스닥 상장 첫날 '강세'",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-03T01:44:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=2026110310311811844093b5d4e_1"
-    },
-    {
-     "title": "래블업, 코스닥 상장 첫날 장초반 30∼40%대 상승",
-     "press": "newsfc.co.kr",
-     "publishedAt": "2026-11-03T01:40:00.000Z",
-     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82186"
+     "title": "환영사 하는 오세훈 시장",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-03T02:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009266728?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 312,
+  "flagged": 313,
   "matched": 120,
   "avgLeadMin": 256,
   "recent": [
