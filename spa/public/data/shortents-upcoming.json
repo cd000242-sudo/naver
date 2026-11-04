@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T07:55:14.758Z",
+ "builtAt": "2026-11-04T08:05:22.536Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "홍콩 ELS 과징금",
@@ -16,29 +16,29 @@
     "signal.bz"
    ],
    "articles90": 98,
-   "recent20": 29,
-   "press": 88,
-   "firstArticleAt": "2026-11-04T06:57:00.000Z",
+   "recent20": 22,
+   "press": 92,
+   "firstArticleAt": "2026-11-04T07:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "3년간 끌었던 홍콩ELS 사태...금융사에 3712억 과징금",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-04T07:54:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261104026345464"
+     "title": "금융위, 홍콩 ELS 과징금 3712억원 확정…역대 최대",
+     "press": "paxetv.com",
+     "publishedAt": "2026-11-04T08:04:00.000Z",
+     "link": "http://www.paxetv.com/news/articleView.html?idxno=286070"
     },
     {
-     "title": "금융위, 홍콩ELS 판매 은행 7곳에 과징금 3620억…3년 만에 제재 결론",
-     "press": "getnews.co.kr",
-     "publishedAt": "2026-11-04T07:54:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=886012"
+     "title": "금융당국, 홍콩 ELS 불완전판매 13개 금융사에 3746억 제재",
+     "press": "ziksir.com",
+     "publishedAt": "2026-11-04T08:04:00.000Z",
+     "link": "https://www.ziksir.com/news/articleView.html?idxno=152092"
     },
     {
-     "title": "금융위, 홍콩ELS 불완전판매 증권사 6곳에 과징금 93억 부과...대폭 감경",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-04T07:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005758968?sid=101"
+     "title": "1.4조→6000억→3620억…은행 ELS 과징금 결국 '반의 반토막'",
+     "press": "news.bizwatch.co.kr",
+     "publishedAt": "2026-11-04T08:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/648/0000052292?sid=101"
     }
    ]
   },
@@ -47,190 +47,95 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 70,
+   "articles90": 74,
    "recent20": 9,
-   "press": 64,
-   "firstArticleAt": "2026-11-04T06:35:00.000Z",
+   "press": 66,
+   "firstArticleAt": "2026-11-04T06:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "코스피, 美 중간선거에 내내 출렁이다 0.62% 상승",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-04T07:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000160380?sid=101"
+     "title": "미국 중간선거에 장 내내 출렁...코스피 강보합 마감",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-04T08:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002428303?sid=101"
     },
     {
-     "title": "美 중간선거 후폭풍, 코스피 하루 7%p 출렁…2.5조 외국인 순매도",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-04T07:46:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2644192"
+     "title": "코스피 '블루웨이브'에 롤러코스터…급락 딛고 0.62% 상승",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-04T08:02:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1319283&inflow=N"
     },
     {
-     "title": "美 중간선거에 코스피 ‘롤러코스터’…4% 급락 딛고 상승 마감 [투자36...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-04T07:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002718919?sid=101"
+     "title": "코스피 급등락 속 인버스 ETF 거래 급증…KODEX 인버스 97%↑",
+     "press": "kjdaily.com",
+     "publishedAt": "2026-11-04T07:56:00.000Z",
+     "link": "http://www.kjdaily.com/article.php?aid=1793778845691240276"
     }
    ]
   },
   {
    "keyword": "유튜브 대통령 Y 소통 방송",
    "sources": [
-    "nate"
-   ],
-   "articles90": 65,
-   "recent20": 8,
-   "press": 61,
-   "firstArticleAt": "2026-11-04T06:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령, 유튜브 '대통령의 Y' 개시…온라인 소통 강화",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-04T07:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004206524?sid=100"
-    },
-    {
-     "title": "이 대통령, 5일 유튜브 대담 프로그램 '대통령의 Y' 첫선",
-     "press": "inews365.com",
-     "publishedAt": "2026-11-04T07:48:00.000Z",
-     "link": "https://www.inews365.com/news/article.html?no=942229"
-    },
-    {
-     "title": "SNS 이어 유튜브 등판…李, 유튜브 ‘대통령의 Y’ 선보인다",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-04T07:48:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611040169"
-    }
-   ]
-  },
-  {
-   "keyword": "윤석열 선거법 항소심",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 52,
-   "recent20": 9,
-   "press": 40,
-   "firstArticleAt": "2026-11-04T06:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "尹 선거법 2심도 '징역형 집유'...국힘 397억 운명은",
-     "press": "00news.co.kr",
-     "publishedAt": "2026-11-04T07:54:00.000Z",
-     "link": "http://www.00news.co.kr/news/articleView.html?idxno=107730"
-    },
-    {
-     "title": "국힘 총재산 1384억, 현금은 190억…尹 선거법 확정 땐 397억 반환",
-     "press": "ilyoseoul.co.kr",
-     "publishedAt": "2026-11-04T07:52:00.000Z",
-     "link": "https://www.ilyoseoul.co.kr/news/articleView.html?idxno=524620"
-    },
-    {
-     "title": "윤석열 전 대통령, 선거법 위반 2심도 ‘징역형 집유’…확정시 국힘 3...",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-04T07:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001228562?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "미국 중간선거 영향",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 53,
-   "recent20": 28,
-   "press": 39,
-   "firstArticleAt": "2026-11-04T07:14:00.000Z",
-   "exclusive": true,
-   "capped": true,
-   "samples": [
-    {
-     "title": "미 ‘블루웨이브’가 한국 경제에 미칠 영향···“셧다운 나면 금융시...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-04T07:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003480674?sid=101"
-    },
-    {
-     "title": "이란 \"미국인들은 선거에서 전쟁 반대 선택\"…트럼프에 공개 경고",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-04T07:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004206523?sid=104"
-    },
-    {
-     "title": "[美중간선거]6천억 쏜 머스크, 민주 승리에 \"우주 레이저 안통했네\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T07:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009270388?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "안세영 16강 진출!",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 17,
-   "recent20": 5,
-   "press": 16,
-   "firstArticleAt": "2026-11-04T06:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "안세영, 고심 끝에 코리아오픈 배드민턴 출전…39분 만에 1회전 승리",
-     "press": "swtvnews.com",
-     "publishedAt": "2026-11-04T07:54:00.000Z",
-     "link": "https://swtvnews.com/news/newsview.php?ncode=1065598919230349"
-    },
-    {
-     "title": "안세영, 한국 팬들 앞에서 ‘강력 스매시’... 코리아 오픈 16강 진출",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-04T07:49:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/023/0004007762"
-    },
-    {
-     "title": "'안방에서도 펄펄' 안세영, 코리아오픈 32강 39분 만에 완승",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T07:44:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/421/0009270368"
-    }
-   ]
-  },
-  {
-   "keyword": "현대백화점 3분기 영업익 30%↑",
-   "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 1,
-   "press": 15,
-   "firstArticleAt": "2026-11-04T06:26:00.000Z",
+   "articles90": 63,
+   "recent20": 8,
+   "press": 60,
+   "firstArticleAt": "2026-11-04T06:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "현대백화점, 3분기 영업익 946억원…백화점·면세점 성장에 30.1%↑",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-04T07:46:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026110416405511595"
+     "title": "李 대통령 유튜브 시작한다...'대통령의 Y' 내일 첫선",
+     "press": "kgnews.co.kr",
+     "publishedAt": "2026-11-04T08:04:00.000Z",
+     "link": "https://www.kgnews.co.kr/news/article.html?no=918230"
     },
     {
-     "title": "현대백화점, 외국인 소비 늘며 실적 개선…3분기 영업익 30%↑",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-04T07:08:00.000Z",
-     "link": "https://www.ajunews.com/view/20261104155012558"
+     "title": "‘X’ 이어 ‘대통령의 Y’까지…유튜브 시작하는 이 대통령",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-04T08:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012287206?sid=100"
     },
     {
-     "title": "외국인이 끌고 면세점이 밀었다…현대백화점 영업익 30%↑",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-04T07:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005436590?sid=101"
+     "title": "X에서 하나 더 늘렸다, 대통령 유튜브로 '직접 소통' 강화",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-04T08:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002534659?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "윤석열 선거법 집행유예",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 44,
+   "recent20": 6,
+   "press": 36,
+   "firstArticleAt": "2026-11-04T06:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "범여권 \"尹 선거법 2심 유죄는 당연한 판단…국힘, 397억 반환하라\"",
+     "press": "busan.com",
+     "publishedAt": "2026-11-04T08:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001405664?sid=100"
+    },
+    {
+     "title": "윤석열 2심 유죄에, 조국 \"박수칠 때 아니다\"... 왜?",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-04T08:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002534658?sid=100"
+    },
+    {
+     "title": "선거법 2심도 유죄‥확정시 국힘 397억 반환",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-04T07:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533509?sid=102"
     }
    ]
   },
@@ -239,13 +144,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 11,
+   "articles90": 10,
    "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-04T06:31:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-04T06:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "경찰, 식당 개·폐업 반복 임금체불하고 도주한 남성 검거",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-04T07:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002428298?sid=102"
+    },
     {
      "title": "수익률∙절세∙배당정보…금융권, 개인 자산관리 접점 넓힌다",
      "press": "kdfnews.com",
@@ -257,12 +168,6 @@
      "press": "kgnews.co.kr",
      "publishedAt": "2026-11-04T07:26:00.000Z",
      "link": "https://www.kgnews.co.kr/news/article.html?no=918201"
-    },
-    {
-     "title": "전공노 화성시지부 \"무차별 정보공개 청구 폭탄에 행정 마비\"…'담당자...",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-04T07:16:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=561162"
     }
    ]
   },
@@ -271,30 +176,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 4,
+   "articles90": 9,
+   "recent20": 3,
    "press": 7,
-   "firstArticleAt": "2026-11-04T06:31:00.000Z",
+   "firstArticleAt": "2026-11-04T06:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "민주당, 공화 상원 7석 탈환…텍사스·캔자스 아성 붕괴, 미시간 첫 무슬...",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-04T08:04:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261104010001722"
+    },
+    {
+     "title": "美 중간선거 '블루 쓰나미'…민주, 상·하원 동시 탈환",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-04T08:02:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261104500565"
+    },
     {
      "title": "[美중간선거]캔자스 텍사스 미시간마저…공화, 상원 6개 경합주 완패",
      "press": "newsis.com",
      "publishedAt": "2026-11-04T07:46:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014301757?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "약국",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 4,
+   "press": 6,
+   "firstArticleAt": "2026-11-04T07:24:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "DRxS '내손안의약국', 공식 홈페이지 전격 개편… 일반 사용자 UX 대폭 강...",
+     "press": "bokuennews.com",
+     "publishedAt": "2026-11-04T08:04:00.000Z",
+     "link": "http://www.bokuennews.com/news/article.html?no=286647"
     },
     {
-     "title": "[美 중간선거] 美 민주, 상·하원 동시 탈환…트럼프 국정운영 '급제동...",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-04T07:38:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2014511"
+     "title": "토니모리, 홍대 뷰티온누리약국 입점…약국 유통채널 확대",
+     "press": "newslock.co.kr",
+     "publishedAt": "2026-11-04T08:04:00.000Z",
+     "link": "http://www.newslock.co.kr/news/articleView.html?idxno=139330"
     },
     {
-     "title": "“싹쓸이란 이런 것” 美 민주, 경합주 7곳 중 6곳 승리…알래스카만 초...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-04T07:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002718913?sid=104"
+     "title": "메가팩토리약국, \"5일부터 고함량 슈도에페드린 감기약 판매 중단\"",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-04T07:58:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249107"
     }
    ]
   },
@@ -307,10 +244,16 @@
    "articles90": 6,
    "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-04T06:35:00.000Z",
+   "firstArticleAt": "2026-11-04T06:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "故 최불암 이어…채시라, 故 정하연 별세에 \"또 한 분의 거장 가셔\"",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-04T07:58:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109727248158"
+    },
     {
      "title": "채시라, ‘사극대가’ 故 정하연 작가 추모…“또 한분의 거장이 가셨다...",
      "press": "mk.co.kr",
@@ -322,118 +265,136 @@
      "press": "mt.co.kr",
      "publishedAt": "2026-11-04T07:28:00.000Z",
      "link": "https://m.entertain.naver.com/article/008/0005436609"
-    },
-    {
-     "title": "채시라, 故 최불암 이어 정하연 작가 비보에 \"며칠새 또..충격과 후회\"",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-04T06:55:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003484544"
     }
    ]
   },
   {
-   "keyword": "특수고용 플랫폼 노동자",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 23,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-04T06:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "청와대 앞으로 모인 배달 노동자들",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-04T07:23:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261104001206"
-    },
-    {
-     "title": "구호 외치는 특수고용 노동자들",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-04T07:23:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261104001205"
-    },
-    {
-     "title": "청와대 인근에서 열린 특수 고용 플랫폼 노동자 결의대회",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-04T07:22:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261104001203"
-    }
-   ]
-  },
-  {
-   "keyword": "오세훈 숙박 화재 점검",
+   "keyword": "이강철 감독 미소",
    "sources": [
     "nate"
    ],
    "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-04T06:41:00.000Z",
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-04T07:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "오세훈, 캡슐형 숙박시설 찾아 안전 점검…\"관광객 안전 환경 조성\"",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-04T07:53:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261104001270"
+     "title": "[ST포토] 이강철 감독, 여유 있는 미소",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-04T07:28:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109726483881"
     },
     {
-     "title": "서울 캡슐호텔 등 27곳 화재안전 중점관리..오세훈, 현장점검",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-04T07:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005599418?sid=102"
+     "title": "[MD포토] 이강철 감독, '미소를 숨길수 없어'",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-04T07:25:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/117/0004121943"
     },
     {
-     "title": "오세훈, 캡슐형 숙박시설 점검…\"관광객 숙박 안전, 법령 개선 요청\"",
-     "press": "news.cpbc.co.kr",
-     "publishedAt": "2026-11-04T06:54:00.000Z",
-     "link": "https://news.cpbc.co.kr/article/1176829?division=NAVER"
+     "title": "[KS2] “대타도 힘들어…” 김상수 부상 악재, 이강철 감독의 선택은 ‘...",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-04T07:23:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/396/0000760016"
     }
    ]
   },
   {
-   "keyword": "약국",
+   "keyword": "백승엽 판사",
    "sources": [
-    "google"
+    "daum"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-04T06:34:00.000Z",
+   "firstArticleAt": "2026-11-04T06:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "토니모리, 뷰티 특화 약국 진출…고기능성 화장품 유통망 확대",
-     "press": "dailysmart.co.kr",
-     "publishedAt": "2026-11-04T07:40:00.000Z",
-     "link": "http://www.dailysmart.co.kr/news/articleView.html?idxno=131998"
+     "title": "\"손바닥 王자\" 콕 짚은 판사‥\"검사였던 尹\" 유죄 부메랑 [현장영상]",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-04T07:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533507?sid=102"
     },
     {
-     "title": "K-뷰티 약국 유통망 넓히는 토니모리... 무신사 뷰티 '온누리약국 홍대...",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-04T07:24:00.000Z",
-     "link": "https://www.insight.co.kr/news/580626"
+     "title": "윤석열 2심도 '당선무효형'…백승엽 고법판사는 누구?",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-04T07:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001976678?sid=102"
     },
     {
-     "title": "토니모리, 온누리약국 홍대점 입점",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-04T06:34:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=879806"
+     "title": "尹, '허위사실 공표' 2심도 징역형…선고되자 한동안 판사 주시(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-04T06:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014301487?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "테니스",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T06:44:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'윈터 테니스 셋업 제안' 세르지오 타키니, 2026 서울오픈 챌린저 공식 ...",
+     "press": "tennis.co.kr",
+     "publishedAt": "2026-11-04T07:37:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/481/0000014659"
+    },
+    {
+     "title": "세르지오 타키니, 탄생 60주년 맞아 서울오픈 테니스대회 후원",
+     "press": "ktnews.com",
+     "publishedAt": "2026-11-04T06:44:00.000Z",
+     "link": "http://www.ktnews.com/news/articleView.html?idxno=149921"
+    },
+    {
+     "title": "한국스포츠레저, ‘휠체어테니스 銀’ 임호원에 아시안패러게임 포상금...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-04T06:44:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/468/0001278030"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 660,
-  "matched": 272,
-  "avgLeadMin": 283,
+  "flagged": 663,
+  "matched": 276,
+  "avgLeadMin": 280,
   "recent": [
+   {
+    "keyword": "미국 중간선거",
+    "hitKeyword": "트럼프 중간선거 결과 수용",
+    "hitAt": "2026-11-04T17:00:00+09:00",
+    "leadMin": 55
+   },
+   {
+    "keyword": "현대백화점 3분기 영업익 30%↑",
+    "hitKeyword": "쿠팡 3분기 연속 적자",
+    "hitAt": "2026-11-04T17:00:00+09:00",
+    "leadMin": 25
+   },
+   {
+    "keyword": "미국 중간선거 영향",
+    "hitKeyword": "트럼프 중간선거 결과 수용",
+    "hitAt": "2026-11-04T17:00:00+09:00",
+    "leadMin": 15
+   },
+   {
+    "keyword": "안세영 16강 진출!",
+    "hitKeyword": "야마구치 코리아오픈 16강",
+    "hitAt": "2026-11-04T17:00:00+09:00",
+    "leadMin": 15
+   },
    {
     "keyword": "차예련 소속사 허위사실 강력대응",
     "hitKeyword": "차예련 학폭 의혹",
@@ -469,30 +430,6 @@
     "hitKeyword": "전지윤 결혼",
     "hitAt": "2026-11-04T16:30:00+09:00",
     "leadMin": 25
-   },
-   {
-    "keyword": "트럼프 선거 결과 수용",
-    "hitKeyword": "트럼프 반감 표심",
-    "hitAt": "2026-11-04T16:30:00+09:00",
-    "leadMin": 5
-   },
-   {
-    "keyword": "정하연 작가 별세",
-    "hitKeyword": "정하연 작가 별세",
-    "hitAt": "2026-11-04T16:00:00+09:00",
-    "leadMin": 126
-   },
-   {
-    "keyword": "정하연 별세 애도",
-    "hitKeyword": "정하연 작가 별세",
-    "hitAt": "2026-11-04T16:00:00+09:00",
-    "leadMin": 15
-   },
-   {
-    "keyword": "지역의대 신설 확정",
-    "hitKeyword": "경국대 의대 신설 확정",
-    "hitAt": "2026-11-04T15:30:00+09:00",
-    "leadMin": 227
    }
   ]
  }
