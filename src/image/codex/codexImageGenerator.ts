@@ -3,21 +3,31 @@
 // through the Codex CLI — no API billing, it spends the subscription's usage window.
 //
 // - The prompts are the ones imageGenerator already built for the item (same prompt builder as every engine).
-// - One `codex exec` session draws up to 4 images in order; more than 4 split into two parallel sessions (never more
-//   than two at once). The files of a session map to its items by drawing time.
+// - One `codex exec` session draws exactly ONE image, and up to CODEX_IMAGE_CONCURRENCY sessions run at the same time.
+//   A session's file comes from its own generated_images/<thread id>/ folder, so a result belongs to its item by
+//   construction — it never depends on the order in which sessions finish or on file times across sessions.
 // - A slot that gets no image is an explicit failure ("N번 이미지를 받지 못함"). No other engine fills it, nothing is
 //   retried silently (no automatic fallback) — the subscription limit is the user's, a retry would spend it again.
+// - A subscription-level failure (limit reached, logged out, CLI missing, plan inactive...) is the same for every
+//   session: no further session is started, the sessions already running finish, and the unstarted slots fail with it.
 
 import type { GeneratedImage, ImageProvider, ImageRequestItem } from '../types.js';
-import { AgentCliError } from '../../agentCli/types.js';
+import { AgentCliError, type AgentErrorCode } from '../../agentCli/types.js';
 import { resolveAgentImageProfile } from '../../agentCli/agentModelDefaults.js';
 import { CODEX_IMAGE_ENGINE } from '../../runtime/codexImagePolicy.js';
 import { assertCodexImageReady } from './codexImageReadiness.js';
 import { runCodexImageSession, type CodexImageSessionOptions, type CodexImageSessionResult } from './codexImageSession.js';
 import { withCodexAspectRatio } from './codexImageInstruction.js';
 
-export const CODEX_IMAGE_MAX_PER_SESSION = 4;
+/** How many single-image sessions run at the same time. */
+export const CODEX_IMAGE_CONCURRENCY = 4;
 const POLL_MS = 1000;
+// Measured 35-56s for one image; this leaves a wide margin for four sessions sharing the subscription.
+const SESSION_TIMEOUT_MS = 210_000;
+// Failures that repeat for every session of this account — starting more sessions only burns time.
+const ACCOUNT_LEVEL_CODES: ReadonlySet<AgentErrorCode> = new Set<AgentErrorCode>([
+  'rate_limited', 'not_logged_in', 'not_installed', 'subscription_inactive', 'provider_disabled', 'update_required', 'model_unavailable',
+]);
 
 export interface CodexImageRuntime {
   /** Throws a typed, Korean-worded error when Codex is missing, outdated, logged out or out of quota. */
@@ -41,20 +51,6 @@ export function setCodexImageLogSink(sink: ((message: string) => void) | null): 
 export function emitCodexImageLog(message: string): void {
   console.log(message);
   try { codexImageLogSink?.(message); } catch { /* the progress log is display only */ }
-}
-
-/** Contiguous index groups: one session up to 4 images, otherwise two sessions (first gets the larger half). */
-export function splitIntoSessions(count: number): number[][] {
-  if (!Number.isFinite(count) || count <= 0) return [];
-  const indexes = Array.from({ length: count }, (_, i) => i);
-  if (count <= CODEX_IMAGE_MAX_PER_SESSION) return [indexes];
-  const firstSize = Math.ceil(count / 2);
-  return [indexes.slice(0, firstSize), indexes.slice(firstSize)];
-}
-
-// Measured 35s for one image and ~18s for each further one in the same session; this leaves a wide margin.
-function sessionTimeoutMs(imageCount: number): number {
-  return Math.min(600_000, 150_000 + 60_000 * imageCount);
 }
 
 function defaultRuntime(): CodexImageRuntime {
@@ -109,6 +105,8 @@ function describeError(error: unknown): string {
   return error instanceof Error ? error.message : String(error);
 }
 
+const seconds = (fromMs: number): number => Math.max(0, Math.round((Date.now() - fromMs) / 1000));
+
 export async function generateWithCodexImage(
   items: ImageRequestItem[],
   postTitle?: string,
@@ -120,55 +118,83 @@ export async function generateWithCodexImage(
 ): Promise<GeneratedImage[]> {
   if (items.length === 0 || stopCheck?.()) return [];
   await runtime.assertReady();
-  runtime.log(`🎨 Codex 구독 이미지 ${items.length}장 생성 중 (${resolveAgentImageProfile('codex').model})`);
+  const concurrency = Math.min(CODEX_IMAGE_CONCURRENCY, items.length);
+  runtime.log(`🎨 Codex 구독 이미지 ${items.length}장 생성 중 (${resolveAgentImageProfile('codex').model}) · 동시 ${concurrency}개`);
 
+  const startedAt = Date.now();
   const abort = new AbortController();
   const watcher = setInterval(() => { if (stopCheck?.()) abort.abort(); }, options.pollMs ?? POLL_MS);
   const images = new Map<number, GeneratedImage>();
   const reasons = new Map<number, string>();
   let fatal: unknown;
-  try {
-    await Promise.all(splitIntoSessions(items.length).map(async (group) => {
-      try {
-        const prompts = group.map((index) => withCodexAspectRatio(items[index].prompt, (items[index] as { imageRatio?: unknown }).imageRatio));
-        const session = await runtime.runSession(prompts, {
-          signal: abort.signal, timeoutMs: sessionTimeoutMs(group.length),
-        });
-        if (session.files.length > group.length) {
-          runtime.log(`⚠️ Codex 구독 이미지: ${group.length}장을 부탁했는데 ${session.files.length}장이 만들어져 앞의 ${group.length}장만 씁니다`);
-        }
-        for (let slot = 0; slot < group.length; slot++) {
-          const index = group[slot];
-          const file = session.files[slot];
-          if (!file) { reasons.set(index, ''); continue; }
-          try {
-            const item = items[index];
-            const saved = await runtime.save(file, item, postTitle, postId);
-            // The engine draws the Korean copy itself: the app never overlays text on its thumbnail.
-            const image: GeneratedImage = {
-              ...saved,
-              provider: CODEX_IMAGE_ENGINE as ImageProvider,
-              ...(item.isThumbnail === true ? { isThumbnail: true, disableTextOverlay: true } : {}),
-              ...((item as { originalIndex?: number }).originalIndex !== undefined
-                ? { originalIndex: (item as { originalIndex?: number }).originalIndex } : {}),
-            };
-            images.set(index, image);
-            onImageGenerated?.(image, index, items.length);
-          } catch (saveError) {
-            reasons.set(index, describeError(saveError));
-          }
-        }
-      } catch (error) {
-        const stopped = abort.signal.aborted || (error instanceof AgentCliError && error.code === 'aborted');
-        if (stopped) return;
-        fatal ??= error;
-        for (const index of group) reasons.set(index, describeError(error));
+  let stopLaunching: unknown; // the account-level error that ended the launching of new sessions
+  let nextIndex = 0;
+
+  // Saves run one at a time: the local copy is named <heading>-<millisecond>, two parallel saves could collide.
+  let saveQueue: Promise<unknown> = Promise.resolve();
+  const saveInTurn = (file: string, item: ImageRequestItem): Promise<GeneratedImage> => {
+    const turn = saveQueue.then(() => runtime.save(file, item, postTitle, postId));
+    saveQueue = turn.catch(() => undefined);
+    return turn;
+  };
+
+  const drawOne = async (index: number): Promise<void> => {
+    const item = items[index];
+    const sessionStartedAt = Date.now();
+    try {
+      const prompt = withCodexAspectRatio(item.prompt, (item as { imageRatio?: unknown }).imageRatio);
+      const session = await runtime.runSession([prompt], { signal: abort.signal, timeoutMs: SESSION_TIMEOUT_MS });
+      if (session.files.length > 1) {
+        runtime.log(`⚠️ Codex 구독 이미지: ${index + 1}번에 1장을 부탁했는데 ${session.files.length}장이 만들어져 첫 장만 씁니다`);
       }
-    }));
+      const file = session.files[0];
+      if (!file) { reasons.set(index, ''); return; }
+      try {
+        const saved = await saveInTurn(file, item);
+        // The engine draws the Korean copy itself: the app never overlays text on its thumbnail.
+        const image: GeneratedImage = {
+          ...saved,
+          provider: CODEX_IMAGE_ENGINE as ImageProvider,
+          ...(item.isThumbnail === true ? { isThumbnail: true, disableTextOverlay: true } : {}),
+          ...((item as { originalIndex?: number }).originalIndex !== undefined
+            ? { originalIndex: (item as { originalIndex?: number }).originalIndex } : {}),
+        };
+        images.set(index, image);
+        runtime.log(`✅ Codex 구독 이미지 ${index + 1}/${items.length} "${String(item.heading ?? '').slice(0, 30)}" — ${seconds(sessionStartedAt)}초`);
+        onImageGenerated?.(image, index, items.length);
+      } catch (saveError) {
+        reasons.set(index, describeError(saveError));
+      }
+    } catch (error) {
+      const stopped = abort.signal.aborted || (error instanceof AgentCliError && error.code === 'aborted');
+      if (stopped) return;
+      fatal ??= error;
+      reasons.set(index, describeError(error));
+      if (error instanceof AgentCliError && ACCOUNT_LEVEL_CODES.has(error.code)) stopLaunching ??= error;
+    }
+  };
+
+  // A fixed number of workers each take the next unstarted item, so the limit holds without a separate scheduler.
+  const worker = async (): Promise<void> => {
+    while (!stopLaunching && !abort.signal.aborted && nextIndex < items.length) {
+      const index = nextIndex++;
+      await drawOne(index);
+    }
+  };
+  try {
+    await Promise.all(Array.from({ length: concurrency }, worker));
   } finally {
     clearInterval(watcher);
   }
 
+  // Items that never started because the account stopped them fail with that reason (no other engine takes over).
+  if (stopLaunching && !abort.signal.aborted) {
+    for (let index = nextIndex; index < items.length; index++) reasons.set(index, describeError(stopLaunching));
+  }
+
+  if (images.size > 0) {
+    runtime.log(`Codex 구독 이미지: ${images.size}장 동시 ${concurrency}개 · 총 ${seconds(startedAt)}초`);
+  }
   const ordered = [...images.entries()].sort((a, b) => a[0] - b[0]).map(([, image]) => image);
   if (abort.signal.aborted) {
     runtime.log('⛔ 중지 요청으로 Codex 구독 이미지 생성을 멈췄습니다.');
@@ -183,5 +209,6 @@ export async function generateWithCodexImage(
     runtime.log(`⚠️ Codex 구독 이미지: ${index + 1}번 이미지를 받지 못함${reason ? ` (${reason.slice(0, 160)})` : ''} — 다른 엔진으로 채우지 않았습니다`);
   }
   if (options.allowPartial && ordered.length > 0) return ordered;
-  throw new Error(`${fatal ? `${describeError(fatal)} ` : ''}${phrases.join(', ')}`);
+  const lead = stopLaunching ?? fatal; // the account-level reason explains the unstarted slots best
+  throw new Error(`${lead ? `${describeError(lead)} ` : ''}${phrases.join(', ')}`);
 }

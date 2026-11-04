@@ -37,7 +37,8 @@ describe('generateImagesForAutomation — 젠스파크 미리 한꺼번에', () 
     const flow = read('renderer/modules/fullAutoFlow.ts');
     const fn = flow.slice(flow.indexOf('async function generateAIImagesForHeadings'), flow.indexOf('const PUBLISH_AUTOMATION_TIMEOUT_MS'));
     expect(fn).toMatch(/const buildBodyImageItem = async \(heading, i\) => \{/);
-    expect(fn).toMatch(/if \(imageSource === 'genspark' && headings\.length >= 2 && !isFullAutoStopRequested\(\)\) \{/);
+    // [2026-11-04] The engine test is gsPrefetchBatchProvider (genspark + codex-image) — codexImagePrefetchWiring.test.ts.
+    expect(fn).toMatch(/if \(gsPrefetchBatchProvider\(imageSource\) && headings\.length >= 2 && !isFullAutoStopRequested\(\)\) \{/);
     expect(fn).toMatch(/items: prebuiltItems,[\s\S]*?allowPartialResults: true,/);
     expect(fn).toMatch(/gsSemiPrefetched = gsPrefetchMatchImages\(prebuiltItems,/);
     // 받은 칸은 생성 호출 전에 돌려준다.
@@ -51,7 +52,7 @@ describe('generateImagesForAutomation — 젠스파크 미리 한꺼번에', () 
 
   it('이미지 관리 탭 AI 이미지 생성: 쇼핑이 아니면 한 번에 요청, 받은 칸은 엔진 분기보다 먼저 쓴다', () => {
     const tab = read('renderer/modules/headingImageGen.ts');
-    expect(tab).toMatch(/if \(imageSource === 'genspark' && filteredHeadings\.length >= 2 && !isShoppingConnectForCurrentPost\(\)\) \{/);
+    expect(tab).toMatch(/if \(gsPrefetchBatchProvider\(imageSource\) && filteredHeadings\.length >= 2 && !isShoppingConnectForCurrentPost\(\)\) \{/);
     expect(tab).toMatch(/items: gsTabItems,[\s\S]*?allowPartialResults: true,/);
     expect(tab).toMatch(/gsTabPrefetched = gsPrefetchMatchImages\(gsTabItems,/);
     expect(tab).toMatch(/const gsTabReady = gsTabPrefetched\.get\(i\);\s*if \(gsTabReady\) \{[\s\S]*?\} else if \(isShoppingConnectForCurrentPost\(\)\) \{/);

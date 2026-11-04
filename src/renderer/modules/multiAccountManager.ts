@@ -26,7 +26,7 @@ import { normalizePublishImageSequence } from '../../image/publishImageSequence.
 import { resolveSectionContentForImage } from '../../image/contextualImagePrompt.js';
 import { FULL_AUTO_THUMBNAIL_SLOT_KEY, describeFullAutoImageStage, fullAutoItemsForScope, fullAutoSectionSlotKey } from '../../image/fullAuto/fullAutoImageSlots.js';
 import { buildFullAutoDirectorRequest, buildFullAutoImageCallOptions } from '../../image/fullAuto/fullAutoImageRequest.js';
-import { gsPrefetchBodyIndexes, gsPrefetchMatchImages, gsPrefetchTimeoutMs } from '../../image/fullAuto/gensparkBodyPrefetch.js';
+import { gsPrefetchBodyIndexes, gsPrefetchLabel, gsPrefetchMatchImages, gsPrefetchTimeoutMs } from '../../image/fullAuto/gensparkBodyPrefetch.js';
 import { describeFullAutoImagePolicy } from '../../image/fullAuto/fullAutoImagePolicy.js';
 import { describeFullAutoImageReview } from '../../image/fullAuto/fullAutoPublishDecision.js';
 import { recheckFullAutoDecisionBeforePublish, runFullAutoImages } from '../../image/fullAuto/fullAutoImageRunner.js';
@@ -762,13 +762,13 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
         onProgress?.(`✅ [run #${runId}] 대표 원본 1장 + AI 소제목 ${actualBodyCount}장 확인 완료`);
         return safeBatch.images;
     }
-    // [2026-10-10] 젠스파크: 본문 소제목 이미지를 먼저 한 번에 요청한다(엔진이 4장씩 동시 생성). 받은 칸은 아래 루프에서
+    // [2026-10-10] 젠스파크·Codex 구독 이미지(2026-11-04): 본문 소제목 이미지를 먼저 한 번에 요청한다(4장씩 동시 생성). 받은 칸은 아래 루프에서
     //   그대로 쓰고, 못 받은 칸만 지금처럼 1장씩 다시 만든다. 썸네일은 연출(director) 때문에 루프에서 따로 만든다.
     let gsPrefetched = new Map();
     const gsPrefetchIndexes = gsPrefetchBodyIndexes(provider, itemsForGeneration);
     if (gsPrefetchIndexes.length > 0 && !(stopCheck && stopCheck())) {
         const gsPrefetchItems = gsPrefetchIndexes.map((index) => itemsForGeneration[index]);
-        onProgress?.(`🚀 [run #${runId}] 젠스파크: 소제목 이미지 ${gsPrefetchItems.length}장을 한 번에 요청합니다 (최대 4장 동시).`);
+        onProgress?.(`🚀 [run #${runId}] ${gsPrefetchLabel(provider)}: 소제목 이미지 ${gsPrefetchItems.length}장을 한 번에 요청합니다 (최대 4장 동시).`);
         try {
             const gsPrefetchResult = await generateImagesWithCostSafety({
                 provider: provider,
@@ -789,11 +789,11 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
             });
             gsPrefetched = gsPrefetchMatchImages(itemsForGeneration, gsPrefetchIndexes, Array.isArray(gsPrefetchResult?.images) ? gsPrefetchResult.images : []);
             const gsMissing = gsPrefetchIndexes.length - gsPrefetched.size;
-            onProgress?.(`✅ [run #${runId}] 젠스파크: ${gsPrefetched.size}/${gsPrefetchIndexes.length}장 받음${gsMissing > 0 ? ` — 못 받은 ${gsMissing}칸은 1장씩 다시 만듭니다` : ''}${gsPrefetched.size === 0 && gsPrefetchResult?.message ? ` (${String(gsPrefetchResult.message).substring(0, 160)})` : ''}`);
+            onProgress?.(`✅ [run #${runId}] ${gsPrefetchLabel(provider)}: ${gsPrefetched.size}/${gsPrefetchIndexes.length}장 받음${gsMissing > 0 ? ` — 못 받은 ${gsMissing}칸은 1장씩 다시 만듭니다` : ''}${gsPrefetched.size === 0 && gsPrefetchResult?.message ? ` (${String(gsPrefetchResult.message).substring(0, 160)})` : ''}`);
         }
         catch (gsPrefetchError) {
             // 로그인·모델·보안 확인 오류는 1장씩 해도 같으므로 아래 루프가 같은 오류를 만나 지금처럼 멈춘다.
-            onProgress?.(`⚠️ [run #${runId}] 젠스파크 한꺼번에 요청 실패 — 1장씩 만듭니다: ${String(gsPrefetchError?.message || gsPrefetchError).substring(0, 160)}`);
+            onProgress?.(`⚠️ [run #${runId}] ${gsPrefetchLabel(provider)} 한꺼번에 요청 실패 — 1장씩 만듭니다: ${String(gsPrefetchError?.message || gsPrefetchError).substring(0, 160)}`);
         }
         if (stopCheck && stopCheck())
             return sequentialImages;
