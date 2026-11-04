@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T13:28:28.127Z",
+ "builtAt": "2026-11-04T13:38:31.640Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "조작기소 특검법 법사위 통과",
@@ -17,24 +17,24 @@
     "nate",
     "daum"
    ],
-   "articles90": 47,
-   "recent20": 7,
+   "articles90": 46,
+   "recent20": 2,
    "press": 35,
-   "firstArticleAt": "2026-11-04T12:07:00.000Z",
+   "firstArticleAt": "2026-11-04T12:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "국힘 \"조작기소 특검법은 이재명 특별법…즉각 철회하라\"",
+     "press": "sisafocus.co.kr",
+     "publishedAt": "2026-11-04T13:36:00.000Z",
+     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367207"
+    },
     {
      "title": "조작기소 특검법안, 공소취소 삭제…일각 “형소법 근거로 가능”",
      "press": "biz.heraldcorp.com",
      "publishedAt": "2026-11-04T13:24:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/016/0002718993?sid=100"
-    },
-    {
-     "title": "조작기소 특검법 법사위 통과…\"공소취소 삭제\" 대 \"이재명 봐주기\"(종...",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-04T13:18:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1319349&inflow=N"
     },
     {
      "title": "‘조작기소 특검법’ 법사위 통과…‘공소취소’ 빼고 문 정부 사건 추...",
@@ -45,78 +45,79 @@
    ]
   },
   {
-   "keyword": "페덱 7이닝 1실점 호투",
+   "keyword": "미국 중간선거",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 13,
-   "recent20": 0,
-   "press": 13,
-   "firstArticleAt": "2026-11-04T12:03:00.000Z",
+   "articles90": 31,
+   "recent20": 2,
+   "press": 20,
+   "firstArticleAt": "2026-11-04T12:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "kt 고영표 7이닝 1실점·삼성 페덱 7이닝 1실점…KS 2차전 명품 투수전",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-04T12:22:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16268540"
+     "title": "[시사천국] 美 중간선거 민주당 압승…트럼프 '백약이 무효'",
+     "press": "news.cpbc.co.kr",
+     "publishedAt": "2026-11-04T13:34:00.000Z",
+     "link": "https://news.cpbc.co.kr/article/1176836?division=NAVER"
     },
     {
-     "title": "'삼성 구하나' 페덱, 7이닝 1실점 마무리…이제 남은 건 타자들의 몫[KS...",
-     "press": "sports.hankooki.com",
-     "publishedAt": "2026-11-04T12:12:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6942914"
+     "title": "미 중간선거 민주당 압승… 미 언론, 트럼프 심판론 주목",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-04T13:30:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3446020"
     },
     {
-     "title": "[KS2] ‘나흘 휴식 무색’ 크리스 페덱, 위기마다 빛난 에이스… 7이닝 ...",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-04T12:11:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/396/0000760041"
+     "title": "강창일 \"美 중간선거 공화당 패배, 북미회담 가속화 계기 될 수도\"",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-04T13:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005599598?sid=104"
     }
    ]
   },
   {
-   "keyword": "이강철",
+   "keyword": "김성윤",
    "sources": [
     "google"
    ],
-   "articles90": 32,
-   "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-04T12:03:00.000Z",
+   "articles90": 23,
+   "recent20": 13,
+   "press": 9,
+   "firstArticleAt": "2026-11-04T12:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[MD포토] 이강철 감독, '긴장 풀어야해'",
+     "title": "[포토] 김성윤 '마지막 기회인가'",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-04T13:36:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/108/0003484743"
+    },
+    {
+     "title": "도루 성공한 김성윤",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-04T13:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009271025?sid=102"
+    },
+    {
+     "title": "[MD포토] 김성윤, '기분 좋은 안타'",
      "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-04T13:03:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/117/0004122125"
-    },
-    {
-     "title": "[포토]위기 상황 마운드 방문한 KT 이강철 감독",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-04T12:29:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278261"
-    },
-    {
-     "title": "[포토]박영현과 한승택 격려하는 KT 이강철 감독",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-04T12:29:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278260"
+     "publishedAt": "2026-11-04T13:23:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/117/0004122137"
     }
    ]
   },
   {
    "keyword": "이승민",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 25,
+   "articles90": 19,
    "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-04T12:05:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-04T12:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -141,67 +142,34 @@
    ]
   },
   {
-   "keyword": "김성윤",
+   "keyword": "류지혁",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 22,
-   "recent20": 21,
-   "press": 8,
-   "firstArticleAt": "2026-11-04T12:47:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[MD포토] 김성윤, '기분 좋은 안타'",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-04T13:23:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/117/0004122137"
-    },
-    {
-     "title": "도루 성공한 김성윤",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T13:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009271025?sid=102"
-    },
-    {
-     "title": "[MD포토] 김성윤, '잘 맞았다!'",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-04T13:22:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/117/0004122135"
-    }
-   ]
-  },
-  {
-   "keyword": "한다감 출산 몸매",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 8,
+   "articles90": 13,
    "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-04T12:07:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-04T12:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'47세' 한다감, 생후 26일 아들 공개…\"1억 준대도 안 끊던 父, 손자 보고...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-04T13:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001407167"
-    },
-    {
-     "title": "한다감, 출산 26일 만에 리즈 시절 몸매 복귀…'아기만 쏙 빠져나왔나\"...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-04T13:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000486494"
-    },
-    {
-     "title": "'47세 득남' 한다감, 출산 후에도 '완벽 몸매' 그대로…생후 26일 아들도...",
+     "title": "류지혁 ‘사라진 득점천스’[포토]",
      "press": "xportsnews.com",
-     "publishedAt": "2026-11-04T13:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002076796"
+     "publishedAt": "2026-11-04T12:25:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/311/0002076742"
+    },
+    {
+     "title": "[포토] 류지혁, 반격의 9회",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-04T12:23:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/108/0003484705"
+    },
+    {
+     "title": "[포토] 류지혁, 9회 재역전 노리는 안타",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-04T12:21:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278256"
     }
    ]
   },
@@ -243,7 +211,7 @@
     "google"
    ],
    "articles90": 9,
-   "recent20": 3,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-04T12:09:00.000Z",
    "exclusive": false,
@@ -256,48 +224,113 @@
      "link": "https://m.sports.naver.com/kbaseball/article/421/0009271009"
     },
     {
-     "title": "[포토] 안현민, 10회 행운의 내야안타",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-04T13:10:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278294"
-    },
-    {
      "title": "[포토] 안현민 ‘이런 행운이’",
      "press": "sportsseoul.com",
      "publishedAt": "2026-11-04T13:10:00.000Z",
      "link": "https://m.sports.naver.com/kbaseball/article/468/0001278295"
+    },
+    {
+     "title": "[포토] 안현민, 10회 행운의 내야안타",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-04T13:10:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278294"
     }
    ]
   },
   {
-   "keyword": "배성재 김다영 유산 고백",
+   "keyword": "구자욱",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T11:59:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-04T12:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김다영, 과거 계류유산 고백… \"적막한 크리스마스 보내\"",
-     "press": "ggilbo.com",
+     "title": "[포토] 구자욱, 자동 고의4구로 출루",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-04T13:19:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/108/0003484735"
+    },
+    {
+     "title": "구자욱 '승리가 눈앞'",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-04T13:03:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/001/0016422686"
+    },
+    {
+     "title": "기뻐하는 구자욱",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-04T12:57:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/003/0014302239"
+    }
+   ]
+  },
+  {
+   "keyword": "강혁 감독 우동현 칭찬",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 9,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-04T12:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"우동현과 김준일, 너무 예쁘게 잘했다\" 짜릿한 승리 거둔 강혁 감독의...",
+     "press": null,
      "publishedAt": "2026-11-04T13:06:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1191241"
+     "link": "https://m.sports.naver.com/basketball/article/065/0000304058"
     },
     {
-     "title": "“7주 차에 심장소리 안 들려”…배성재·김다영, 지난해 계류유산 고백",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-04T12:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005759168?sid=103"
+     "title": "‘3쿼터 깜짝 활약’, SK 원정 7연패 탈출 원동력 된 우동현의 3점슛 3방",
+     "press": null,
+     "publishedAt": "2026-11-04T13:05:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/065/0000304055"
     },
     {
-     "title": "'배성재♥' 김다영, 지난해 계류유산 고백⋯\"임신 이번 처음 아냐\"",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-04T12:16:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2644272"
+     "title": "“오늘 내 수비 90점”…김낙현 묶고 3점슛 3개 터뜨린 우동현 [쿠키 현...",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-04T13:04:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611040256"
+    }
+   ]
+  },
+  {
+   "keyword": "강호동 구속영장 신청",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-04T12:23:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "경찰 ‘합천 출신’ 강호동 농협중앙회장 구속영장 신청",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-04T13:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012287543?sid=102"
+    },
+    {
+     "title": "경찰, 강호동 농협중앙회장 구속영장 신청…금품수수 등 혐의",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-04T12:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004678836?sid=102"
+    },
+    {
+     "title": "강호동 농협회장 구속 위기···공소청, 영장 청구할까",
+     "press": "enewstoday.co.kr",
+     "publishedAt": "2026-11-04T12:23:00.000Z",
+     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2488591"
     }
    ]
   },
@@ -307,7 +340,7 @@
     "nate"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-04T12:37:00.000Z",
    "exclusive": false,
@@ -332,73 +365,105 @@
      "link": "https://sports.hankooki.com/news/articleView.html?idxno=6942895"
     }
    ]
+  },
+  {
+   "keyword": "서장훈의 이웃집 백만장자",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 3,
+   "press": 2,
+   "firstArticleAt": "2026-11-04T12:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[종합] \"향후 10년간은 못 먹을 맛\"… '이웃집 백만장자' 정민서, 4대째...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-04T13:32:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16268576"
+    },
+    {
+     "title": "\"황태 많이 들어가야 구수하고 아삭해진다\"… '이웃집 백만장자' 정민서...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-04T13:24:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16268575"
+    },
+    {
+     "title": "\"부도난 폐공장을 7,000평 김치공장으로\"… '이웃집 백만장자' 최연소 김...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-04T13:24:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16268571"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 751,
-  "matched": 315,
-  "avgLeadMin": 276,
+  "flagged": 756,
+  "matched": 325,
+  "avgLeadMin": 289,
   "recent": [
    {
-    "keyword": "고영표",
-    "hitKeyword": "KT 고영표 한국시리즈",
-    "hitAt": "2026-11-04T22:00:00+09:00",
-    "leadMin": 173
+    "keyword": "한다감 아들 최초 공개",
+    "hitKeyword": "한다감 득남",
+    "hitAt": "2026-11-04T22:30:00+09:00",
+    "leadMin": 2247
    },
    {
-    "keyword": "KT 고영표 역투",
-    "hitKeyword": "KT 고영표 한국시리즈",
-    "hitAt": "2026-11-04T22:00:00+09:00",
-    "leadMin": 93
+    "keyword": "한다감 아들 생후 26일 공개",
+    "hitKeyword": "한다감 득남",
+    "hitAt": "2026-11-04T22:30:00+09:00",
+    "leadMin": 2206
    },
    {
-    "keyword": "고영표 선발 역투",
-    "hitKeyword": "KT 고영표 한국시리즈",
-    "hitAt": "2026-11-04T22:00:00+09:00",
-    "leadMin": 52
+    "keyword": "47세 한다감 아들 첫 공개",
+    "hitKeyword": "한다감 득남",
+    "hitAt": "2026-11-04T22:30:00+09:00",
+    "leadMin": 2186
    },
    {
-    "keyword": "고영표 7이닝 1실점",
-    "hitKeyword": "KT 고영표 한국시리즈",
-    "hitAt": "2026-11-04T22:00:00+09:00",
+    "keyword": "김지찬",
+    "hitKeyword": "스기모토 김지찬 사과",
+    "hitAt": "2026-11-04T22:30:00+09:00",
+    "leadMin": 123
+   },
+   {
+    "keyword": "한다감 아들 공개",
+    "hitKeyword": "한다감 득남",
+    "hitAt": "2026-11-04T22:30:00+09:00",
+    "leadMin": 72
+   },
+   {
+    "keyword": "7이닝 1실점 호투",
+    "hitKeyword": "고영표 7이닝 1실점",
+    "hitAt": "2026-11-04T22:30:00+09:00",
+    "leadMin": 62
+   },
+   {
+    "keyword": "페덱 7이닝 1실점",
+    "hitKeyword": "고영표 7이닝 1실점",
+    "hitAt": "2026-11-04T22:30:00+09:00",
     "leadMin": 42
    },
    {
-    "keyword": "교수",
-    "hitKeyword": "세브란스 교수 흉기 피습",
-    "hitAt": "2026-11-04T21:30:00+09:00",
-    "leadMin": 1865
+    "keyword": "한다감 출산 몸매",
+    "hitKeyword": "한다감 득남",
+    "hitAt": "2026-11-04T22:30:00+09:00",
+    "leadMin": 32
    },
    {
-    "keyword": "배성재 김다영 계류유산 고백",
-    "hitKeyword": "배성재 김다영 계류유산",
-    "hitAt": "2026-11-04T21:30:00+09:00",
+    "keyword": "페덱 7이닝 1실점 호투",
+    "hitKeyword": "고영표 7이닝 1실점",
+    "hitAt": "2026-11-04T22:30:00+09:00",
     "leadMin": 22
    },
    {
-    "keyword": "농협",
-    "hitKeyword": "강호동 농협회장 구속영장",
-    "hitAt": "2026-11-04T21:00:00+09:00",
-    "leadMin": 2277
-   },
-   {
-    "keyword": "코스피 하락 전환",
-    "hitKeyword": "코스피 롤러코스터",
-    "hitAt": "2026-11-04T21:00:00+09:00",
-    "leadMin": 113
-   },
-   {
-    "keyword": "강호동 구속영장 신청",
-    "hitKeyword": "강호동 농협회장 구속영장",
-    "hitAt": "2026-11-04T21:00:00+09:00",
-    "leadMin": 93
-   },
-   {
-    "keyword": "강호동 구속영장",
-    "hitKeyword": "강호동 농협회장 구속영장",
-    "hitAt": "2026-11-04T21:00:00+09:00",
-    "leadMin": 83
+    "keyword": "역투하는 박영현",
+    "hitKeyword": "KT 박영현 연속 등판",
+    "hitAt": "2026-11-04T22:30:00+09:00",
+    "leadMin": 22
    }
   ]
  }
