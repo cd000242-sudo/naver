@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T04:23:41.224Z",
+ "builtAt": "2026-11-04T04:33:44.951Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,101 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 26,
  "candidates": [
-  {
-   "keyword": "트럼프 공화당",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 48,
-   "recent20": 23,
-   "press": 34,
-   "firstArticleAt": "2026-11-04T03:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美 민주당, 상·하원 장악 전망...트럼프 \"중간선거 결과 수용…민주당...",
-     "press": "eroun.net",
-     "publishedAt": "2026-11-04T04:22:00.000Z",
-     "link": "https://www.eroun.net/news/articleView.html?idxno=94351"
-    },
-    {
-     "title": "트럼프 \"중간선거 결과 받아들일 것… 민주당과 협력하겠다\"",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-04T04:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000191432?sid=104"
-    },
-    {
-     "title": "트럼프 \"중간선거 결과 수용…민주당과 협력 준비돼 있어\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-04T04:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014300872?sid=104"
-    }
-   ]
-  },
   {
    "keyword": "미국 중간선거",
    "sources": [
     "daum"
    ],
-   "articles90": 60,
-   "recent20": 40,
-   "press": 32,
-   "firstArticleAt": "2026-11-04T03:54:00.000Z",
+   "articles90": 53,
+   "recent20": 50,
+   "press": 31,
+   "firstArticleAt": "2026-11-04T04:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[美중간선거] '제주 고씨' 댄 고, 매사추세츠 하원의원 당선",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-04T04:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005599269?sid=104"
+     "title": "[美중간선거] '비열 광고' 공화 라마스와미, 오하이오 주지사 선거 패배",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-04T04:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016421267?sid=104"
     },
     {
-     "title": "美 민주당, 상·하원 장악 전망...트럼프 \"중간선거 결과 수용…민주당...",
-     "press": "eroun.net",
-     "publishedAt": "2026-11-04T04:22:00.000Z",
-     "link": "https://www.eroun.net/news/articleView.html?idxno=94351"
+     "title": "[美중간선거] AMD보다 강한 위험회피...코스피, 외인 1조 순매도에 하락...",
+     "press": "financialpost.co.kr",
+     "publishedAt": "2026-11-04T04:32:00.000Z",
+     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=284638"
     },
     {
-     "title": "美 중간선거발 데이터센터 규제 우려…코스피 5500↓·코스닥 700↓",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-04T04:22:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2643998"
-    }
-   ]
-  },
-  {
-   "keyword": "김민석 민주당 대표",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 47,
-   "recent20": 2,
-   "press": 29,
-   "firstArticleAt": "2026-11-04T02:54:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정청래, 김민석 겨냥 \"사과는 가해자 의무, 용서는 피해자 권리…쉴드치...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-04T04:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001038304?sid=100"
-    },
-    {
-     "title": "김민석, '신천지 3자 연합' 의혹 사과했지만…친청계 \"공개 사과·책임져...",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-04T04:16:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=325095"
-    },
-    {
-     "title": "신천지 갈등 확산…김민석 리더십 시험대",
-     "press": "naeil.com",
-     "publishedAt": "2026-11-04T04:02:00.000Z",
-     "link": "https://www.naeil.com/news/read/607556?ref=naver"
+     "title": "[美 중간선거] 고물가·전쟁 피로에 성난 민심, 의회 권력 뒤집었다",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-04T04:31:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261104000025"
     }
    ]
   },
@@ -112,62 +48,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 34,
+   "articles90": 27,
    "recent20": 4,
-   "press": 27,
-   "firstArticleAt": "2026-11-04T02:54:00.000Z",
+   "press": 21,
+   "firstArticleAt": "2026-11-04T03:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "국민의힘, 與 '조작기소 특검법'에 \"공소취소 명분 쌓기\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-04T04:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004206387?sid=100"
+    },
+    {
+     "title": "조작기소 특검법, 與 주도로 법사위 상정…5일 본회의 처리할 듯",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-04T04:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003695652?sid=100"
+    },
     {
      "title": "범여권 주도 공소취소특검법 상정…국힘 \"법 죽이는 법사위\"",
      "press": "sisafocus.co.kr",
      "publishedAt": "2026-11-04T04:20:00.000Z",
      "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367181"
-    },
-    {
-     "title": "'조작기소 특검법' 놓고 충돌…\"이 대통령 재판 없애려\"vs\"공소 취소 내...",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-04T04:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400572?sid=100"
-    },
-    {
-     "title": "조작기소 특검법, 與주도 법사위 상정…5일 본회의 처리 추진",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-04T04:05:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000079517"
-    }
-   ]
-  },
-  {
-   "keyword": "관계성 범죄 전수점검",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 18,
-   "recent20": 0,
-   "press": 17,
-   "firstArticleAt": "2026-11-04T03:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "관계성 범죄 4만여 건 전수점검…가해자 구속 2배로",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-04T04:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922780?sid=102"
-    },
-    {
-     "title": "\"접근금지에도 흉기 들고\"…수사 중 관계성범죄 3건 중 1건 '고위험'",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-04T03:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005837960?sid=102"
-    },
-    {
-     "title": "관계성 범죄 전수점검...수사 사건 32%가 '고위험'",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-04T03:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002428183?sid=102"
     }
    ]
   },
@@ -176,42 +80,107 @@
    "sources": [
     "nate"
    ],
-   "articles90": 20,
-   "recent20": 1,
-   "press": 16,
-   "firstArticleAt": "2026-11-04T02:58:00.000Z",
+   "articles90": 22,
+   "recent20": 5,
+   "press": 18,
+   "firstArticleAt": "2026-11-04T03:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "NS홈쇼핑, '2026 푸드위크 코리아' 참가…협력사 전시 비용 전액 지원",
-     "press": "newsdream.kr",
-     "publishedAt": "2026-11-04T04:18:00.000Z",
-     "link": "http://www.newsdream.kr/news/articleView.html?idxno=121471"
+     "title": "팔도, 잘파세대 인기 왕뚜껑 국물라볶이 '2026 푸드위크 코리아' 참가",
+     "press": "sisacast.kr",
+     "publishedAt": "2026-11-04T04:32:00.000Z",
+     "link": "http://www.sisacast.kr/news/articleView.html?idxno=101598"
     },
     {
-     "title": "제철 식품과 컵라면을 함께 선보인 ‘2026 푸드위크 코리아’",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-04T04:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005758798?sid=103"
+     "title": "코엑스 '푸드위크 코리아' 개막…식품∙푸드테크 한자리에",
+     "press": "kdfnews.com",
+     "publishedAt": "2026-11-04T04:32:00.000Z",
+     "link": "http://www.kdfnews.com/news/articleView.html?idxno=190431"
     },
     {
-     "title": "'푸드위크 코리아' 개막…46개국 바이어 집결",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-04T04:02:00.000Z",
-     "link": "https://www.ajunews.com/view/20261104084901910"
+     "title": "[2026 푸드위크] 정식품, '그린비아'로 일상 속 영양 관리 제안",
+     "press": "foodnews.co.kr",
+     "publishedAt": "2026-11-04T04:32:00.000Z",
+     "link": "http://www.foodnews.co.kr/news/articleView.html?idxno=120825"
+    }
+   ]
+  },
+  {
+   "keyword": "김민석 신천지 사과",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 19,
+   "recent20": 4,
+   "press": 18,
+   "firstArticleAt": "2026-11-04T03:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김민석 사과에도 최민희 최고위 불참…신천지 내홍 점입가경",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-04T04:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003057073?sid=100"
+    },
+    {
+     "title": "[이슈] 민주당 신천지 내홍 폭발…친청계 최민희 \"김민석, 신천지 발언...",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-04T04:24:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=747664"
+    },
+    {
+     "title": "정청래, 김민석·친명계 겨냥 \"사과는 가해자 의무, 용서는 피해자 권리...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-04T04:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001038304?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "노스캐롤라이나 상원 민주 승리",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 20,
+   "recent20": 5,
+   "press": 17,
+   "firstArticleAt": "2026-11-04T03:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'공화 텃밭' 캔자스서도 민주 상원 승리 예측…94년만",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-04T04:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006403533?sid=104"
+    },
+    {
+     "title": "美 중간선거, 트럼프 반대 표심 결집…민주당 중간선거 약진",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-04T04:26:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000079529"
+    },
+    {
+     "title": "민주, 상원 '두 의석' 탈환…하원 경합지 '민주당 압승' 가능성",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-04T04:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000519061?sid=104"
     }
    ]
   },
   {
    "keyword": "항의하는 국민의힘",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 30,
+   "articles90": 18,
    "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-04T02:54:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-04T03:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -236,14 +205,46 @@
    ]
   },
   {
+   "keyword": "쿠팡 누적 영업손실",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-04T03:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "쿠팡Inc, 3분기 영업손실 6423억…3개 분기 연속 적자",
+     "press": "newslock.co.kr",
+     "publishedAt": "2026-11-04T04:08:00.000Z",
+     "link": "http://www.newslock.co.kr/news/articleView.html?idxno=139276"
+    },
+    {
+     "title": "쿠팡, 3분기까지 1조8318억원 적자",
+     "press": "naeil.com",
+     "publishedAt": "2026-11-04T04:04:00.000Z",
+     "link": "https://www.naeil.com/news/read/607525?ref=naver"
+    },
+    {
+     "title": "쿠팡, 3분기 연속 적자…누적 영업손실 2조 육박",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-04T03:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922777?sid=101"
+    }
+   ]
+  },
+  {
    "keyword": "특검, 투표록 사후 위변조",
    "sources": [
     "nate"
    ],
-   "articles90": 11,
+   "articles90": 6,
    "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-04T02:54:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-04T03:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -268,34 +269,67 @@
    ]
   },
   {
-   "keyword": "댄고 하원의원 당선",
+   "keyword": "재난",
    "sources": [
-    "daum"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-04T03:31:00.000Z",
+   "articles90": 6,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-04T03:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'제주 고씨' 댄고, 美민주당 연방 하원의원 당선",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-04T04:22:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/324113/?sc=Naver"
+     "title": "충북도, 겨울철 자연재난 대응 계획 추진",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-04T04:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000191438?sid=102"
     },
     {
-     "title": "‘제주 고씨’ 댄고, 美 하원 당선",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-04T03:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003695646?sid=104"
+     "title": "안전체험부터 마술·버블쇼까지 …증평군 재난안전 체험마당 운영",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-04T04:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000191435?sid=102"
     },
     {
-     "title": "[속보] '제주 고씨' 댄고, 미 민주당 연방 하원의원 당선",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-04T03:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533464?sid=104"
+     "title": "생수·라면부터 방독면까지…400만원 ‘재난가방’ 챙기는 사람들, 왜?",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-04T03:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005758796?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "시험",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-04T03:40:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "화성시장학관 고시생 특례입사자, 외교관 후보자 시험 첫 합격",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-04T04:32:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261104010001479"
+    },
+    {
+     "title": "시흥도시공사, 월곶역세권 개발 첫 시험대…1,641억 원 입찰",
+     "press": "sentv.co.kr",
+     "publishedAt": "2026-11-04T04:20:00.000Z",
+     "link": "https://www.sentv.co.kr/article/view/sentv202611040076"
+    },
+    {
+     "title": "KTC, 전력기자재 시험·인증 역량 선봬",
+     "press": "naeil.com",
+     "publishedAt": "2026-11-04T04:06:00.000Z",
+     "link": "https://www.naeil.com/news/read/607519?ref=naver"
     }
    ]
   },
@@ -305,7 +339,7 @@
     "nate"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-04T03:05:00.000Z",
    "exclusive": false,
@@ -332,76 +366,87 @@
    ]
   },
   {
-   "keyword": "ap",
+   "keyword": "박진영",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 10,
-   "recent20": 4,
+   "articles90": 3,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-04T03:44:00.000Z",
+   "firstArticleAt": "2026-11-04T03:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "APTOPIX Election 2026 Michigan",
-     "press": null,
-     "publishedAt": "2026-11-04T04:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/077/0007226506?sid=104"
+     "title": "박진영 \"이단·사이비라 핍박받기 시작…\" '첫열매들' 논란에 입 열어",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-04T04:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005599274?sid=103"
     },
     {
-     "title": "APTOPIX Election 2026 Texas Governor",
-     "press": null,
-     "publishedAt": "2026-11-04T04:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/077/0007226502?sid=104"
-    },
-    {
-     "title": "APTOPIX Election 2026 Texas Senate",
-     "press": null,
-     "publishedAt": "2026-11-04T04:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/077/0007226489?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "시험",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T03:40:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "시흥도시공사, 월곶역세권 개발 첫 시험대…1,641억 원 입찰",
-     "press": "sentv.co.kr",
-     "publishedAt": "2026-11-04T04:20:00.000Z",
-     "link": "https://www.sentv.co.kr/article/view/sentv202611040076"
-    },
-    {
-     "title": "KTC, 전력기자재 시험·인증 역량 선봬",
-     "press": "naeil.com",
-     "publishedAt": "2026-11-04T04:06:00.000Z",
-     "link": "https://www.naeil.com/news/read/607519?ref=naver"
-    },
-    {
-     "title": "신천지 갈등 확산…김민석 리더십 시험대",
-     "press": "naeil.com",
+     "title": "박진영 “이단 의혹은 핍박, 해결은 하나님이”…성경 스터디에서 사단...",
+     "press": "biz.heraldcorp.com",
      "publishedAt": "2026-11-04T04:02:00.000Z",
-     "link": "https://www.naeil.com/news/read/607556?ref=naver"
+     "link": "https://n.news.naver.com/mnews/article/016/0002718776?sid=103"
+    },
+    {
+     "title": "박진영, 종교모임 향한 이단·사이비 논란에 \"핍박받기 시작\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-04T03:10:00.000Z",
+     "link": "https://www.ajunews.com/view/20261104115841794"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 590,
-  "matched": 246,
-  "avgLeadMin": 290,
+  "flagged": 594,
+  "matched": 253,
+  "avgLeadMin": 299,
   "recent": [
+   {
+    "keyword": "민주당 신천지 보고",
+    "hitKeyword": "텍사스 민주당 돌풍",
+    "hitAt": "2026-11-04T13:30:00+09:00",
+    "leadMin": 1505
+   },
+   {
+    "keyword": "민주당-한국노총 고위급정책협의회",
+    "hitKeyword": "텍사스 민주당 돌풍",
+    "hitAt": "2026-11-04T13:30:00+09:00",
+    "leadMin": 1465
+   },
+   {
+    "keyword": "민주당 조작기소 특검법",
+    "hitKeyword": "텍사스 민주당 돌풍",
+    "hitAt": "2026-11-04T13:30:00+09:00",
+    "leadMin": 1132
+   },
+   {
+    "keyword": "코스피·코스닥 상승 출발",
+    "hitKeyword": "코스피 전망",
+    "hitAt": "2026-11-04T13:30:00+09:00",
+    "leadMin": 177
+   },
+   {
+    "keyword": "코스피 하락 전환",
+    "hitKeyword": "코스피 전망",
+    "hitAt": "2026-11-04T13:30:00+09:00",
+    "leadMin": 117
+   },
+   {
+    "keyword": "트럼프 공화당",
+    "hitKeyword": "트럼프 낙점 후보",
+    "hitAt": "2026-11-04T13:30:00+09:00",
+    "leadMin": 26
+   },
+   {
+    "keyword": "김민석 민주당 대표",
+    "hitKeyword": "텍사스 민주당 돌풍",
+    "hitAt": "2026-11-04T13:30:00+09:00",
+    "leadMin": 6
+   },
    {
     "keyword": "32기 영수, 몰카 논란 사과",
     "hitKeyword": "영수 촬영 논란 사과",
@@ -419,48 +464,6 @@
     "hitKeyword": "최동원 스포츠영웅 선정",
     "hitAt": "2026-11-04T13:00:00+09:00",
     "leadMin": 117
-   },
-   {
-    "keyword": "대한민국 스포츠영웅 선정",
-    "hitKeyword": "최동원 스포츠영웅 선정",
-    "hitAt": "2026-11-04T13:00:00+09:00",
-    "leadMin": 97
-   },
-   {
-    "keyword": "SKT, 3분기 영업익 5523억 증가",
-    "hitKeyword": "쿠팡 3분기 연속 적자",
-    "hitAt": "2026-11-04T13:00:00+09:00",
-    "leadMin": 77
-   },
-   {
-    "keyword": "최동원, 2026 스포츠영웅 선정",
-    "hitKeyword": "최동원 스포츠영웅 선정",
-    "hitAt": "2026-11-04T13:00:00+09:00",
-    "leadMin": 27
-   },
-   {
-    "keyword": "이종석 왕자 역할 부담 컸다",
-    "hitKeyword": "신민아 이종석 재혼황후",
-    "hitAt": "2026-11-04T12:30:00+09:00",
-    "leadMin": 1445
-   },
-   {
-    "keyword": "부동산 투자",
-    "hitKeyword": "김동현 부동산",
-    "hitAt": "2026-11-04T12:30:00+09:00",
-    "leadMin": 1425
-   },
-   {
-    "keyword": "이종석 새 연기",
-    "hitKeyword": "신민아 이종석 재혼황후",
-    "hitAt": "2026-11-04T12:30:00+09:00",
-    "leadMin": 1405
-   },
-   {
-    "keyword": "김현수 2점 홈런",
-    "hitKeyword": "김현수 투런포",
-    "hitAt": "2026-11-04T12:30:00+09:00",
-    "leadMin": 741
    }
   ]
  }
