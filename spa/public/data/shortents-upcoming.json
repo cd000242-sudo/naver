@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T12:17:56.981Z",
+ "builtAt": "2026-11-04T12:28:02.110Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,66 +11,98 @@
  "measured": 22,
  "candidates": [
   {
-   "keyword": "고영표 7이닝 1실점",
+   "keyword": "7이닝 1실점 호투",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 22,
+   "articles90": 24,
    "recent20": 5,
    "press": 15,
-   "firstArticleAt": "2026-11-04T11:19:00.000Z",
+   "firstArticleAt": "2026-11-04T11:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "kt 고영표 7이닝 1실점·삼성 페덱 7이닝 1실점…KS 2차전 명품 투수전",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-04T12:22:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16268540"
+    },
+    {
+     "title": "'삼성 구하나' 페덱, 7이닝 1실점 마무리…이제 남은 건 타자들의 몫[KS...",
+     "press": "sports.hankooki.com",
+     "publishedAt": "2026-11-04T12:12:00.000Z",
+     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6942914"
+    },
+    {
+     "title": "[KS2] ‘나흘 휴식 무색’ 크리스 페덱, 위기마다 빛난 에이스… 7이닝 ...",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-04T12:11:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/396/0000760041"
+    }
+   ]
+  },
+  {
+   "keyword": "고영표 선발 역투",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 14,
+   "recent20": 3,
+   "press": 11,
+   "firstArticleAt": "2026-11-04T11:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "kt 고영표 7이닝 1실점·삼성 페덱 7이닝 1실점…KS 2차전 명품 투수전",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-04T12:22:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16268540"
+    },
+    {
+     "title": "'이게 한국시리즈지' 고영표·페덱 7이닝 1실점 숨 막히는 명품 투수전",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-04T12:21:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/079/0004206610"
+    },
     {
      "title": "'4일 휴식' 삼성 페덱, 102구 역투…KT 타선 7이닝 1실점 봉쇄[KS2]",
      "press": "news1.kr",
      "publishedAt": "2026-11-04T12:10:00.000Z",
      "link": "https://m.sports.naver.com/kbaseball/article/421/0009270889"
-    },
-    {
-     "title": "KT 고영표 vs 삼성 페덱, 한국시리즈 수놓은 명품 투수전",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-04T12:08:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=879966"
-    },
-    {
-     "title": "'삼성 천적' 고영표 vs '투혼' 페덱…KS 수놓은 명품 투수전",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-04T12:08:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/001/0016422554"
     }
    ]
   },
   {
-   "keyword": "세브란스병원서 정신과교수에 체포",
+   "keyword": "삼성바이오 2차 파업",
    "sources": [
     "nate"
    ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-04T11:03:00.000Z",
+   "articles90": 11,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-04T11:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "신촌 세브란스병원서 정신과 의사 흉기로 찌른 50대 여성 체포",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-04T12:16:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=779021"
+     "title": "삼성바이오 노조, 오는 6일부터 2차 파업 예고…대화 의지는 계속",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-04T12:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922937?sid=101"
     },
     {
-     "title": "신촌 세브란스병원서 정신과 교수 흉기 피습…50대 여성 체포",
-     "press": "medipana.com",
-     "publishedAt": "2026-11-04T12:04:00.000Z",
-     "link": "https://www.medipana.com/news/articleView.html?idxno=420970"
+     "title": "삼성바이오 노사, 재교섭도 불발… 노조는 6일 부터 2차 파업 예고",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-04T11:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202649?sid=101"
     },
     {
-     "title": "신촌 세브란스병원서 정신과 교수 흉기 피습…50대 여성 검거(종합2보)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-04T11:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014302136?sid=102"
+     "title": "삼성바이오 노조, 6일 2차 파업 예고…“회사가 교섭 불응”",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-04T11:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001883062?sid=101"
     }
    ]
   },
@@ -79,10 +111,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 3,
-   "press": 8,
-   "firstArticleAt": "2026-11-04T10:54:00.000Z",
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-04T11:08:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -107,34 +139,34 @@
    ]
   },
   {
-   "keyword": "1-1 동점타 허경민",
+   "keyword": "배성재 김다영 계류유산 고백",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 21,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-04T10:48:00.000Z",
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-04T11:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[포토] '4회말 동점타 터트린' 허경민",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-04T11:05:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/108/0003484657"
+     "title": "“7주 차에 심장소리 안 들려”…배성재·김다영, 지난해 계류유산 고백",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-04T12:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005759168?sid=103"
     },
     {
-     "title": "1-1 동점타 기뻐하는 KT 허경민",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-04T10:58:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/003/0014302057"
+     "title": "'배성재♥' 김다영, 지난해 계류유산 고백⋯\"임신 이번 처음 아냐\"",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-04T12:16:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2644272"
     },
     {
-     "title": "1-1 동점타 뽑아내는 KT 허경민",
+     "title": "'12월 출산' 김다영, 지난해 계류유산 고백 \"자책 말라는 말에 위로\"",
      "press": "newsis.com",
-     "publishedAt": "2026-11-04T10:58:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/003/0014302053"
+     "publishedAt": "2026-11-04T11:59:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014302152"
     }
    ]
   },
@@ -144,7 +176,7 @@
     "daum"
    ],
    "articles90": 6,
-   "recent20": 3,
+   "recent20": 1,
    "press": 6,
    "firstArticleAt": "2026-11-04T11:20:00.000Z",
    "exclusive": false,
@@ -171,46 +203,14 @@
    ]
   },
   {
-   "keyword": "배성재 김다영 계류유산 고백",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-04T11:13:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'배성재♥' 김다영, 지난해 계류유산 고백⋯\"임신 이번 처음 아냐\"",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-04T12:16:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2644272"
-    },
-    {
-     "title": "'12월 출산' 김다영, 지난해 계류유산 고백 \"자책 말라는 말에 위로\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-04T11:59:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014302152"
-    },
-    {
-     "title": "'배성재♥' 김다영, 계류유산 고백…\"남편 많이 속상했을 것\" [마데핫리...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-04T11:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004122085"
-    }
-   ]
-  },
-  {
    "keyword": "난파선",
    "sources": [
     "google"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T10:48:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-04T11:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -233,43 +233,11 @@
      "link": "https://www.insight.co.kr/news/580644"
     }
    ]
-  },
-  {
-   "keyword": "최원준 선두타자 2루타",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T10:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'1회→2회→4회' 선두타자 계속 출루 KT, 마침내 승부 원점으로!…힐리...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-04T11:02:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/311/0002076648"
-    },
-    {
-     "title": "1위팀, 드디어 페덱에 첫 득점! 힐리어드 2루타→허경민 적시타 터졌다...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-04T10:56:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/109/0005634661"
-    },
-    {
-     "title": "KT, 4회말 힐리어드 2루타+허경민 좌전 적시타로 반격 시작…1-1 동점",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-04T10:50:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109733533901"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 732,
+  "flagged": 733,
   "matched": 309,
   "avgLeadMin": 274,
   "recent": [
