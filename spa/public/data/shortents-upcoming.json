@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T16:20:02.773Z",
+ "builtAt": "2026-11-04T16:30:07.248Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "삼성 라이온즈",
+   "keyword": "kt",
    "sources": [
     "google"
    ],
-   "articles90": 24,
+   "articles90": 9,
    "recent20": 0,
-   "press": 18,
-   "firstArticleAt": "2026-11-04T14:55:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-04T15:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "사자 뒷심에 마법 풀린 KT",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-04T16:05:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/005/0001883108"
+    },
     {
      "title": "삼성, 연장 12회 혈투 끝 kt에 3-2 승리…한국시리즈 1승 1패 '원점'",
      "press": "jasm.co.kr",
@@ -29,16 +35,10 @@
      "link": "https://www.jasm.co.kr/news/view/324192/?sc=Naver"
     },
     {
-     "title": "'낭만 투혼' 삼성 페덱, 놀란 라이언 소환한 까닭 [한국시리즈]",
-     "press": "newsq.co.kr",
-     "publishedAt": "2026-11-04T15:40:00.000Z",
-     "link": "https://www.newsq.co.kr/news/articleView.html?idxno=500743"
-    },
-    {
-     "title": "이제 원태인이 빠진다! → 최원태가 필승조? 삼성 지키는 운영 가능한가",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-04T15:34:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/076/0004463374"
+     "title": "SKT 3분기 영업익 5523억… LG유플러스도 2976억",
+     "press": "donga.com",
+     "publishedAt": "2026-11-04T15:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003760147?sid=101"
     }
    ]
   },
@@ -81,7 +81,7 @@
     "daum"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-04T15:22:00.000Z",
    "exclusive": false,
@@ -104,6 +104,38 @@
      "press": "starnewskorea.com",
      "publishedAt": "2026-11-04T15:33:00.000Z",
      "link": "https://m.entertain.naver.com/article/108/0003484793"
+    }
+   ]
+  },
+  {
+   "keyword": "블루 쓰나미의 영향",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-04T15:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[미 중간선거] 민주당, 상·하원 동시 장악…트럼프 2기 '블루 쓰나미' ...",
+     "press": "econovill.com",
+     "publishedAt": "2026-11-04T16:18:00.000Z",
+     "link": "https://www.econovill.com/news/articleView.html?idxno=756065"
+    },
+    {
+     "title": "'블루 쓰나미' 일으킨 여성·히스패닉·무당층…트럼프 텃밭 20%p 이동",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-04T15:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009271145?sid=104"
+    },
+    {
+     "title": "[속보]뉴욕증시, '블루 쓰나미'에 다우 2.9% 폭등…미국 중간선거 민주...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-04T15:04:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=623316"
     }
    ]
   },
@@ -171,76 +203,11 @@
      "link": "https://n.news.naver.com/mnews/article/005/0001883091?sid=102"
     }
    ]
-  },
-  {
-   "keyword": "사기",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T15:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "대출 미끼로 휴대전화 1천여 대 개통..사기 일당 검거",
-     "press": "mpmbc.co.kr",
-     "publishedAt": "2026-11-04T15:14:00.000Z",
-     "link": "https://mpmbc.co.kr/NewsArticle/1544175"
-    },
-    {
-     "title": "피싱 피해금 돌려 달랬더니 또 사기친 60대 실형",
-     "press": "kado.net",
-     "publishedAt": "2026-11-04T15:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000209477?sid=102"
-    },
-    {
-     "title": "이지혜 \"사기 치기 좋은 세상\"…무슨 일?",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-04T15:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014302362"
-    }
-   ]
-  },
-  {
-   "keyword": "kbo",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T14:51:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오피셜] \"KBO리그 선택지\"…최고 158km! 이정후 동료가 아시아행 결심!...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-04T15:56:00.000Z",
-     "link": "https://m.sports.naver.com/wbaseball/article/477/0000637297"
-    },
-    {
-     "title": "“김도영 타격 KBO 수준 넘어섰다, 더 무서운 건…” 김태균 韓 슈퍼스...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-04T15:53:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/117/0004122166"
-    },
-    {
-     "title": "\"이런 경기는 처음\" KBO 152승·KS MVP 레전드 사령탑도 혀 내두른 4시간...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-04T14:51:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/241/0003539253"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 783,
+  "flagged": 784,
   "matched": 329,
   "avgLeadMin": 288,
   "recent": [
