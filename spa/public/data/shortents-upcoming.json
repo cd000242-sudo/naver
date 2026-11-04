@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T22:52:26.816Z",
+ "builtAt": "2026-11-04T23:02:30.711Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,108 +8,110 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 24,
  "candidates": [
   {
-   "keyword": "민주당 압승에 급등!",
+   "keyword": "국제유가 급락",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 31,
-   "recent20": 4,
-   "press": 30,
-   "firstArticleAt": "2026-11-04T21:28:00.000Z",
+   "articles90": 38,
+   "recent20": 6,
+   "press": 33,
+   "firstArticleAt": "2026-11-04T21:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[美증시] 선거 불확실성 해소·유가 폭락에 3대 지수 급등…빅테크 주도",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-04T22:40:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1135284"
+     "title": "美 선거 끝나자 국제유가 급락... 다우지수 19개월 만에 최대폭 상승",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-04T23:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000963723?sid=104"
     },
     {
-     "title": "美 민주당 의회 장악에 뉴욕증시 일제히 급등...다우 3%↑",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-04T22:38:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=72601"
+     "title": "국제유가 8%대 급락…美 민주당 양원 장악에 이란戰 종식 기대",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-04T23:00:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=779093"
     },
     {
-     "title": "[글로벌 마켓시황] 중간선거 민주당 압승…증시 '상승세'",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-04T22:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400768?sid=101"
+     "title": "미국 중간선거에 월가 '환호'···다우 3% 급등·국제유가 8% 폭락",
+     "press": "smartbizn.com",
+     "publishedAt": "2026-11-04T22:58:00.000Z",
+     "link": "https://www.smartbizn.com/news/articleView.html?idxno=158491"
     }
    ]
   },
   {
    "keyword": "날씨",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 15,
-   "recent20": 3,
-   "press": 14,
-   "firstArticleAt": "2026-11-04T21:30:00.000Z",
+   "articles90": 20,
+   "recent20": 8,
+   "press": 18,
+   "firstArticleAt": "2026-11-04T21:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오늘 전국 날씨예보] 기상청 날씨누리, \"5일, 오늘 전국 비, 내일과 모...",
-     "press": "lecturernews.com",
-     "publishedAt": "2026-11-04T22:48:00.000Z",
-     "link": "https://www.lecturernews.com/news/articleView.html?idxno=213228"
+     "title": "11월 05일 목요일, 오늘의 날씨와 미세먼지 농도 [인포그래픽]",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-04T23:00:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249081"
     },
     {
-     "title": "오늘 전국 곳곳 비 쏟아진다…그런데 비 그친 뒤 날씨가 심상찮다",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-04T22:42:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1171940"
+     "title": "[모닝와이드 날씨]-오늘 오후까지 비..내일 낮부터 기온 떨어져",
+     "press": "news.knn.co.kr",
+     "publishedAt": "2026-11-04T22:58:00.000Z",
+     "link": "https://news.knn.co.kr/news/article/194058"
     },
     {
-     "title": "[날씨] 전국 비, 오후에 대부분 그쳐…내일부터 기온 '뚝'",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-04T22:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000923022?sid=103"
+     "title": "[오늘 날씨] 전국 대부분 비…경남·제주 10~40mm 강수, 내일부터 기온 ...",
+     "press": "mhns.co.kr",
+     "publishedAt": "2026-11-04T22:58:00.000Z",
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=767608"
     }
    ]
   },
   {
-   "keyword": "2026년 11월 5일 운세",
+   "keyword": "MLS 유니폼 판매량",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 3,
+   "articles90": 7,
    "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T21:36:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-04T21:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오늘의 운세] 2026년 11월 5일 띠별 운세",
-     "press": "etnews.com",
+     "title": "손흥민, MLS 유니폼 판매 2년 연속 2위…1위는 메시",
+     "press": "kado.net",
+     "publishedAt": "2026-11-04T22:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000209533?sid=104"
+    },
+    {
+     "title": "[MLS] 손흥민, 메시에 이어 유니폼 판매량 '2년 연속 2위'",
+     "press": "newspim.com",
      "publishedAt": "2026-11-04T22:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003482336?sid=103"
+     "link": "https://www.newspim.com/news/view/20261105000045"
     },
     {
-     "title": "[오늘의 운세] 5일 목요일 나의 운세는?",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-04T21:36:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1190366"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 5일 (목) 띠별운세 '입동을 앞두고 채비하자...",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-04T21:36:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103971"
+     "title": "손흥민, 메시에 이어 MLS 유니폼 판매량 2년 연속 2위",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-04T22:26:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/052/0002428500"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 810,
+  "flagged": 811,
   "matched": 359,
   "avgLeadMin": 328,
   "recent": [
