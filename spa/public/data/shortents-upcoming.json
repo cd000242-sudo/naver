@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T00:01:59.699Z",
+ "builtAt": "2026-11-04T00:12:03.213Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,70 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
+ "measured": 20,
  "candidates": [
   {
-   "keyword": "HLB 간암 신약 FDA",
+   "keyword": "나스닥 지수",
    "sources": [
-    "daum"
+    "google"
    ],
-   "articles90": 25,
-   "recent20": 6,
-   "press": 24,
-   "firstArticleAt": "2026-11-03T23:00:00.000Z",
+   "articles90": 19,
+   "recent20": 4,
+   "press": 19,
+   "firstArticleAt": "2026-11-03T22:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "HLB 간암 신약, FDA 본심사 재개…내년 4월 9일 허가 여부 판가름",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-04T00:00:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2643801"
+     "title": "뉴욕증시, 중간선거 경계 혼조…나스닥 0.8% ↑",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-04T00:10:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1542613"
     },
     {
-     "title": "[핫타임]간암 신약, 美 허가 지연…HLB·HLB 제약 동반 20% 이상 '급락'",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-03T23:56:00.000Z",
-     "link": "https://www.ajunews.com/view/20261104085050913"
+     "title": "[뉴욕증시포커스] 중간선거 속 반도체 반등…나스닥 0.83%↑·다우 0.38%↓",
+     "press": "goodkyung.com",
+     "publishedAt": "2026-11-04T00:10:00.000Z",
+     "link": "https://www.goodkyung.com/news/articleView.html?idxno=293073"
     },
     {
-     "title": "HLB, 간암 신약 ‘리보세라닙’ FDA 본심사 재개",
-     "press": "fntimes.com",
-     "publishedAt": "2026-11-03T23:54:00.000Z",
-     "link": "https://www.fntimes.com/html/view.php?ud=2026110408510173537fd637f543_18"
+     "title": "AMD 실적 호조에 나스닥 선물 0.21%↑…美중간선거 개표 주시",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-04T00:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009268954?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "김민재 뮌헨 2-0 승리",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 21,
+   "recent20": 3,
+   "press": 18,
+   "firstArticleAt": "2026-11-03T22:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김민재 날카로운 드리블 후 아까운 어시스트 미수! 이강인은 태클 성공...",
+     "press": "footballist.co.kr",
+     "publishedAt": "2026-11-04T00:07:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/436/0000114625"
+    },
+    {
+     "title": "김민재·이강인, 챔피언스리그 4차전서 맞대결…뮌헨 2-0 승리",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-04T00:04:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=622841"
+    },
+    {
+     "title": "김민재, 모레노 앞에서 이강인에 판정승…맨유, 9경기 무승 탈출(종합)",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-04T00:02:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/421/0009268935"
     }
    ]
   },
@@ -47,94 +80,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 14,
-   "recent20": 1,
+   "articles90": 13,
+   "recent20": 3,
    "press": 13,
-   "firstArticleAt": "2026-11-03T22:36:00.000Z",
+   "firstArticleAt": "2026-11-03T22:45:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "서예지, 6년 만 스크린 복귀…영화 '금월도' 캐스팅",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-03T23:45:00.000Z",
-     "link": "https://m.entertain.naver.com/article/018/0006403323"
+     "title": "서예지, 영화 ‘금월도’ 캐스팅…6년 만 스크린 복귀 예고",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-04T00:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005758640"
     },
     {
-     "title": "서예지, '사생활 논란' 딛고 5년 만 스크린 복귀…뱀파이어 영화 주연",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-03T23:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004462970"
+     "title": "서예지, 영화 '금월도' 캐스팅…한국형 오컬트 호러 도전",
+     "press": "ent.sbs.co.kr",
+     "publishedAt": "2026-11-04T00:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/416/0000327841"
     },
     {
-     "title": "무려 6년 만에 복귀한다… 톱 여배우 출연으로 벌써 난리 난 '한국 영화...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-03T23:32:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1171608"
+     "title": "서예지 '금월도'로 6년 만에 스크린 복귀…김지후 역 맡아",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-04T00:08:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=622845"
     }
    ]
   },
   {
-   "keyword": "리센느 음원차트 1위 싹쓸이",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-03T22:39:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "리센느 일냈다…컴백하자마자 음원차트 1위 올킬",
-     "press": "ize.co.kr",
-     "publishedAt": "2026-11-03T23:55:00.000Z",
-     "link": "https://m.entertain.naver.com/article/465/0000020757"
-    },
-    {
-     "title": "리센느 'With', 멜론 톱10 싹쓸이…'소셜 로컬힙→음원 대세힙' 진화",
-     "press": "nc.press",
-     "publishedAt": "2026-11-03T23:53:00.000Z",
-     "link": "https://www.nc.press/news/articleView.html?idxno=630164"
-    },
-    {
-     "title": "리센느, '초동' 첫날부터 터졌다⋯음원 차트 1위 싹쓸이",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-03T23:30:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2643790"
-    }
-   ]
-  },
-  {
-   "keyword": "윤석열 선거법 2심 선고",
+   "keyword": "SK하이닉스 장비 반입 보류",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-03T22:42:00.000Z",
+   "articles90": 10,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-03T22:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"100만원 이상 땐 397억 환수\"…尹 선거법 2심 오늘 판가름",
-     "press": "youthdaily.co.kr",
-     "publishedAt": "2026-11-03T23:50:00.000Z",
-     "link": "https://www.youthdaily.co.kr/news/article.html?no=229325"
+     "title": "“美 상무부, SK하닉 中공장 장비반입 제동…뉴욕공장 투자 차질”",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-03T23:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003056998?sid=101"
     },
     {
-     "title": "'국힘 397억' 걸린 尹 선거법 사건 2심 선고…1심 당선무효형",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-03T23:36:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5079429"
+     "title": "\"美 상무부, SK하이닉스 中공장 장비반입 제동...뉴욕 공장투자도 차질...",
+     "press": "livebiz.today",
+     "publishedAt": "2026-11-03T23:54:00.000Z",
+     "link": "https://www.livebiz.today/news/articleView.html?idxno=206185"
     },
     {
-     "title": "尹 선거법 2심 오늘 선고... '국힘 397억 반환' 갈림길",
-     "press": "lawtv.kr",
-     "publishedAt": "2026-11-03T23:34:00.000Z",
-     "link": "https://www.lawtv.kr/news/articleView.html?idxno=61323"
+     "title": "“中 막히자 美도 흔들” SK하이닉스의 딜레마",
+     "press": "magazine.hankyung.com",
+     "publishedAt": "2026-11-03T23:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/050/0000112797?sid=101"
     }
    ]
   },
@@ -144,7 +145,7 @@
     "nate"
    ],
    "articles90": 17,
-   "recent20": 3,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-03T23:08:00.000Z",
    "exclusive": false,
@@ -171,44 +172,50 @@
    ]
   },
   {
-   "keyword": "러시아 우크라 구호센터 폭격",
+   "keyword": "election",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T22:32:00.000Z",
+   "articles90": 22,
+   "recent20": 6,
+   "press": 2,
+   "firstArticleAt": "2026-11-03T22:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“최소 33명 사망했다”…우크라 구호센터에 폭탄 9발 투하한 러시아",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-03T23:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005758624?sid=104"
+     "title": "Election 2026",
+     "press": null,
+     "publishedAt": "2026-11-04T00:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/077/0007226116?sid=104"
     },
     {
-     "title": "러시아, 우크라 구호센터에 폭탄 9발…33명 사망",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-03T22:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001882878?sid=104"
+     "title": "APTOPIX Election 2026 America Votes Washington",
+     "press": null,
+     "publishedAt": "2026-11-04T00:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/077/0007226115?sid=104"
     },
     {
-     "title": "[이 시각 세계] 러, 우크라 구호센터 폭격‥33명 사망",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-03T22:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533374?sid=104"
+     "title": "Seoul shares open sharply higher on tech gains ahead of U.S. election res...",
+     "press": "en.yna.co.kr",
+     "publishedAt": "2026-11-04T00:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016420295?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 504,
-  "matched": 211,
-  "avgLeadMin": 283,
+  "flagged": 508,
+  "matched": 212,
+  "avgLeadMin": 282,
   "recent": [
+   {
+    "keyword": "HLB 간암 신약 본심사 재개",
+    "hitKeyword": "hlb",
+    "hitAt": "2026-11-04T09:00:00+09:00",
+    "leadMin": 18
+   },
    {
     "keyword": "김여정, 바이낸스 정치적 도발",
     "hitKeyword": "북한 해커 바이낸스 침투",
@@ -262,12 +269,6 @@
     "hitKeyword": "이강철 감독 투수 운영",
     "hitAt": "2026-11-04T08:00:00+09:00",
     "leadMin": 471
-   },
-   {
-    "keyword": "이강철 로건 투입 실수",
-    "hitKeyword": "이강철 감독 투수 운영",
-    "hitAt": "2026-11-04T08:00:00+09:00",
-    "leadMin": 441
    }
   ]
  }
