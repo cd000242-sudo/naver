@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T02:22:51.382Z",
+ "builtAt": "2026-11-04T02:32:55.342Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,133 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 20,
  "candidates": [
+  {
+   "keyword": "순천대 의대 신설",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 92,
+   "recent20": 17,
+   "press": 69,
+   "firstArticleAt": "2026-11-04T01:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "순천시 \"국립순천대 의대 설립 확정 환영\"...동부권 의료발전 기대",
+     "press": "hg-times.com",
+     "publishedAt": "2026-11-04T02:32:00.000Z",
+     "link": "https://www.hg-times.com/news/articleView.html?idxno=306719"
+    },
+    {
+     "title": "순천대·국립경국대에 의대 생긴다",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-04T02:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005758777?sid=102"
+    },
+    {
+     "title": "전남권 국립의대 순천대 최종 선정…2030년 개교 추진(종합)",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-04T02:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004206348?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "김민석 과세 유예 제안",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 63,
+   "recent20": 10,
+   "press": 55,
+   "firstArticleAt": "2026-11-04T01:04:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "민주당, 정부에 ‘가상자산 과세 유예’ 공식 제안…“적응기간 필요”",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-04T02:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003480578?sid=100"
+    },
+    {
+     "title": "민주당, 가상자산 과세 유예 공식 제안…정부에 입장 전달",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-04T02:30:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=622910"
+    },
+    {
+     "title": "김민석 \"가상자산 과세 유예 정부에 공식 제안\" [TF사진관]",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-04T02:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000548620?sid=100"
+    }
+   ]
+  },
   {
    "keyword": "선관위 특검 압수수색",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 41,
-   "recent20": 10,
-   "press": 39,
-   "firstArticleAt": "2026-11-04T00:53:00.000Z",
+   "articles90": 33,
+   "recent20": 6,
+   "press": 33,
+   "firstArticleAt": "2026-11-04T01:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "선관위, '수백억대 사전투표지 발급기 사업' 특혜 의혹…특검 압수수색",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-04T02:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002464182?sid=102"
+    },
+    {
+     "title": "특검, 459억 대 사전투표지 발급기 사업 특혜 포착…선관위 압수수색",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-04T02:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400547?sid=102"
+    },
     {
      "title": "특검, 459억대 사전투표지 발급기 사업 특혜 의혹 선관위 압수수색",
      "press": "newscj.com",
      "publishedAt": "2026-11-04T02:18:00.000Z",
      "link": "https://www.newscj.com/news/articleView.html?idxno=3445785"
+    }
+   ]
+  },
+  {
+   "keyword": "코스피 하락 전환",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 31,
+   "recent20": 6,
+   "press": 29,
+   "firstArticleAt": "2026-11-04T01:07:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美 중간선거 '블루웨이브' 공포에 코스피 급락 반전 … 반도체·바이오...",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-04T02:32:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/04/2026110400170.html"
     },
     {
-     "title": "선관위 특검, 459억 규모 ‘사전투표용지 발급기 특혜 의혹’ 중앙선관...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-04T02:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003695626?sid=102"
+     "title": "美 중간선거 개표에 '롤러코스피'···3% 급등 출발 뒤 1%대 하락 전환",
+     "press": "seoulfn.com",
+     "publishedAt": "2026-11-04T02:31:00.000Z",
+     "link": "https://www.seoulfn.com/news/articleView.html?idxno=641869"
     },
     {
-     "title": "선관위 특검, '사전투표용지 발급기 특혜 의혹' 중앙선관위 압수수색",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-04T02:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922741?sid=102"
+     "title": "[시황] 코스피, 외국인 1조원대 매도에 하락 전환…5,550선",
+     "press": "namdonews.com",
+     "publishedAt": "2026-11-04T02:28:00.000Z",
+     "link": "https://www.namdonews.com/news/articleView.html?idxno=928134"
     }
    ]
   },
@@ -47,13 +143,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 24,
-   "recent20": 3,
-   "press": 24,
+   "articles90": 25,
+   "recent20": 2,
+   "press": 25,
    "firstArticleAt": "2026-11-04T01:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "故 최동원, 야구 선수 첫 대한민국 스포츠영웅 선정",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-04T02:25:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/214/0001533439"
+    },
     {
      "title": "한국시리즈 4승의 전설… 故 최동원, 2026 대한민국 스포츠영웅 선정",
      "press": "mookas.com",
@@ -65,44 +167,6 @@
      "press": "donga.com",
      "publishedAt": "2026-11-04T02:10:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/020/0003759966?sid=102"
-    },
-    {
-     "title": "'KS 4승' 전설의 귀환…故 최동원, 韓 스포츠영웅으로 우뚝",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-04T02:06:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/079/0004206307"
-    }
-   ]
-  },
-  {
-   "keyword": "김민석 최고위 참석",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 26,
-   "recent20": 8,
-   "press": 21,
-   "firstArticleAt": "2026-11-04T00:55:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "최민희 “김민석이 ‘신천지 발언’ 말라고 압박”…반격 나선 친청계",
-     "press": "segye.com",
-     "publishedAt": "2026-11-04T02:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004172422?sid=100"
-    },
-    {
-     "title": "사과에도 ‘신천지 논란’ 계속...김민석 “자정 노력과 제도 개선 절차...",
-     "press": "vop.co.kr",
-     "publishedAt": "2026-11-04T02:20:00.000Z",
-     "link": "https://vop.co.kr/A00001697455.html"
-    },
-    {
-     "title": "친정청래계 \"김민석, '정당법 위반' 조사해야\"",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-04T02:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001072049?sid=100"
     }
    ]
   },
@@ -111,10 +175,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 20,
-   "recent20": 3,
-   "press": 16,
-   "firstArticleAt": "2026-11-04T00:56:00.000Z",
+   "articles90": 18,
+   "recent20": 1,
+   "press": 14,
+   "firstArticleAt": "2026-11-04T01:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -143,43 +207,42 @@
    "sources": [
     "google"
    ],
-   "articles90": 13,
-   "recent20": 5,
-   "press": 13,
-   "firstArticleAt": "2026-11-04T00:54:00.000Z",
-   "exclusive": true,
+   "articles90": 11,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-04T01:16:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "포스코DX, 장애인 유튜브 공모전 개최",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-04T02:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002718720?sid=105"
+    },
+    {
+     "title": "현장 직원 아이디어, 포스코 설비관리 혁신…코크스 차량·유량밸브 이...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-04T02:26:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2643961"
+    },
     {
      "title": "장인화 포스코 회장, 금속·재료상 수상",
      "press": "biz.heraldcorp.com",
      "publishedAt": "2026-11-04T02:16:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/016/0002718677?sid=101"
-    },
-    {
-     "title": "포스코 포항제철소, 데이터로 설비 이상 포착…예지정비 체계 고도화",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-04T02:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001882918?sid=102"
-    },
-    {
-     "title": "농협사료·포스코인터내셔널, 사료원료 협력 재체결... 5년간 180만톤 공...",
-     "press": "newskr.kr",
-     "publishedAt": "2026-11-04T02:10:00.000Z",
-     "link": "http://www.newskr.kr/news/articleView.html?idxno=107684"
     }
    ]
   },
   {
    "keyword": "송중기",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 11,
+   "articles90": 10,
    "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-04T01:00:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-04T01:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -190,60 +253,29 @@
      "link": "https://www.bntnews.co.kr/article/view/bnt202611040203"
     },
     {
+     "title": "송중기♥케이티, 두 자녀와 가족 나들이 목격담 보니..\"가정적인 아빠\"",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-04T02:21:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003484491"
+    },
+    {
      "title": "\"가정적인 아빠\"…송중기·케이티, 두 자녀와 산책 목격담",
      "press": "stoo.com",
      "publishedAt": "2026-11-04T02:10:00.000Z",
      "link": "http://www.stoo.com/article.php?aid=109721546740"
-    },
-    {
-     "title": "송중기♥케이티, 3살 '붕어빵' 子 이렇게 컸나…유모차 끌고 '한강 나들...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-04T02:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000637039"
-    }
-   ]
-  },
-  {
-   "keyword": "전북 로봇 대토론회",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 11,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-04T00:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "기념촬영하는 한병도 원내대표와 전북지역 시도지사들",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-04T02:16:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3741916"
-    },
-    {
-     "title": "정부 건의문 채택한 전북 국회의원…\"피지컬 AI 내년 예산 '1조3000억원'...",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-04T02:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002464175?sid=102"
-    },
-    {
-     "title": "민주당 전북도당, '피지컬 AI 글로벌 중심지' 조성 총력…1조3000억원 국...",
-     "press": "eroun.net",
-     "publishedAt": "2026-11-04T02:08:00.000Z",
-     "link": "https://www.eroun.net/news/articleView.html?idxno=94336"
     }
    ]
   },
   {
    "keyword": "북한, 동해 발사체 발사",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T00:55:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-04T01:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -268,40 +300,9 @@
    ]
   },
   {
-   "keyword": "버거킹",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T00:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "버거킹 ‘쯔란로제 크리스퍼’ 2종 출시",
-     "press": "beyondpost.co.kr",
-     "publishedAt": "2026-11-04T01:08:00.000Z",
-     "link": "http://www.beyondpost.co.kr/view.php?ud=20261104100540492618ef25b590_30"
-    },
-    {
-     "title": "[똑똑한외식] 버거킹, 파파존스, 파리바게뜨, 교촌, bhc, 스타벅스, 더본...",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-04T01:00:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261104025065171"
-    },
-    {
-     "title": "버거킹, 쯔란과 로제 소스 조합한 ‘쯔란로제 크리스퍼’ 2종 출시",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-04T00:54:00.000Z",
-     "link": "https://www.viva100.com/article/20261104500329"
-    }
-   ]
-  },
-  {
    "keyword": "더 뉴 BMW 7시리즈 상륙",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 4,
@@ -312,16 +313,16 @@
    "capped": false,
    "samples": [
     {
+     "title": "더 뉴 BMW 7시리즈, 한국 시장 상륙",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-04T01:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016420664?sid=101"
+    },
+    {
      "title": "한국 상륙한 더 뉴 BMW 7시리즈",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-04T01:33:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016420675?sid=101"
-    },
-    {
-     "title": "더 뉴 BMW 7시리즈, 한국 시장 상륙",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-04T01:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016420666?sid=101"
     },
     {
      "title": "한국 시장 상륙, 더 뉴 BMW 7시리즈",
@@ -334,7 +335,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 556,
+  "flagged": 558,
   "matched": 227,
   "avgLeadMin": 279,
   "recent": [
