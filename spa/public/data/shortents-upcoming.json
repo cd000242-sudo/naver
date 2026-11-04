@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T20:51:43.557Z",
+ "builtAt": "2026-11-04T21:01:47.410Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 29,
  "candidates": [
   {
    "keyword": "삼성, 연장 12회 승리",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 7,
    "recent20": 1,
    "press": 5,
    "firstArticleAt": "2026-11-04T19:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[KS 포커스] 못 뛰는 구자욱·못 치는 강민호...이겨도 웃지 못한 삼성의...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-04T20:54:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261104001413"
+    },
     {
      "title": "[KS 포커스] 디테일이 좌우한 2차전 경기 흐름, 연장 승부 끝에 웃은 삼...",
      "press": "newspim.com",
@@ -33,12 +39,38 @@
      "press": "newspim.com",
      "publishedAt": "2026-11-04T20:29:00.000Z",
      "link": "https://www.newspim.com/news/view/20261104001409"
+    }
+   ]
+  },
+  {
+   "keyword": "주가",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-04T19:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "HP 새 CEO에 에마 웜즐리 전 GSK 대표 선임…주가 6% 급등",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-04T20:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016422880?sid=104"
     },
     {
-     "title": "삼성, 연장 접전 끝 KT 꺾어…승부는 원점으로",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-04T20:10:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/422/0000922989"
+     "title": "팔란티어, 분기 매출 96% 급증에도 주가 약세…AI 성장 기대와 실적 검증...",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-04T20:30:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=846201"
+    },
+    {
+     "title": "[우보세]AI 주가를 흔드는 숨은 변수 '서버 수명'",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-04T20:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005436816?sid=110"
     }
    ]
   },
@@ -78,7 +110,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 789,
+  "flagged": 790,
   "matched": 329,
   "avgLeadMin": 288,
   "recent": [
