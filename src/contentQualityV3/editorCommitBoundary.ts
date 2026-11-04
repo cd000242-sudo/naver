@@ -146,7 +146,17 @@ function assertExactVisibleArticle(
     ...hashtagSegments,
   ].filter(Boolean).join('\n'));
   const visible = normalizeVisibleExactText(bodyText);
-  if (!expected || visible !== expected) fail('visible_body_mismatch');
+  if (!expected) fail('visible_body_mismatch');
+  if (visible === expected) return;
+  // [2026-11-04] The writer now moves the trailing hashtag line into NAVER's publish-dialog tag field and deletes it
+  // from the body before the final click. The DOM snapshot cannot see that field, so a body without ANY hashtag
+  // segment is accepted too; a partial hashtag line or any other difference is still a mismatch.
+  const withoutHashtags = normalizeVisibleExactText([
+    ...requiredPrefixSegments,
+    ...articleSegments,
+  ].filter(Boolean).join('\n'));
+  if (hashtagSegments.length > 0 && withoutHashtags && visible === withoutHashtags) return;
+  fail('visible_body_mismatch');
 }
 
 function readVisibleSnapshot(candidate: EditorCommitCandidate): Readonly<{

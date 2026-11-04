@@ -1,13 +1,18 @@
 type MutableStructuredContent = Record<string, any>;
 
-const HASHTAG_TOKEN_RE = /#[\p{L}\p{N}_-]{1,40}/gu;
+export const HASHTAG_TOKEN_RE = /#[\p{L}\p{N}_-]{1,40}/gu;
 const HASHTAG_LABEL_RE = /^(?:해시\s*태그|태그|hashtags?)\s*[:：]/i;
 
 function countHashtags(value: string): number {
   return Array.from(value.matchAll(HASHTAG_TOKEN_RE)).length;
 }
 
-function hasOnlyHashtagPayload(value: string): boolean {
+/** Hashtag names (without '#') found in a text, in order, using the same token rule as the body cleanup. */
+export function extractHashtagNames(value: string): string[] {
+  return Array.from(value.matchAll(HASHTAG_TOKEN_RE), (match) => match[0].slice(1));
+}
+
+export function hasOnlyHashtagPayload(value: string): boolean {
   const trimmed = value.trim();
   if (!trimmed) return false;
 

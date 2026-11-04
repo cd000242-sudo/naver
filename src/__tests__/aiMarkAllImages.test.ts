@@ -77,7 +77,9 @@ describe('AI mark 발행 루프 — source regression', () => {
     expect(loop).toContain('const aiMarkResult = await markAiImageWithRetries({');
     expect(loop).toContain('component: imageComponents[i],');
     expect(loop).toMatch(/selectImage: async \(\) => \{[\s\S]*?scrollIntoView[\s\S]*?page\.mouse\.click\(iframeOff\.x \+ compCoords\.x/);
-    expect(loop).toMatch(/clickButton: async \(control\) => \{[\s\S]*?page\.mouse\.click\(iframeOff\.x \+ aiBtnCoords\.x/);
+    // Live 2026-11-04: the toggle sits below the image, off screen → scroll the toggle itself, click where topmost,
+    //   otherwise a direct click (coordinates computed after scrolling only the image missed it).
+    expect(loop).toMatch(/clickButton: async \(control\) => \{[\s\S]*?btn\.scrollIntoView\(\{ block: 'center'[\s\S]*?document\.elementFromPoint\(x, y\)[\s\S]*?if \(point\.topmost\) \{[\s\S]*?page\.mouse\.click\(iframeOff\.x \+ point\.x, iframeOff\.y \+ point\.y\);[\s\S]*?\} else \{[\s\S]*?\.click\(\)\)/);
     expect(loop).toContain('aiMarkResults.push(aiMarkResult);');
     expect(loop).toContain('this.log(`   ${summarizeAiMarkResults(aiMarkResults)}`);');
     // The old blind spots stay gone.

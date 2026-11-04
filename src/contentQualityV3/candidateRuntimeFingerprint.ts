@@ -139,6 +139,8 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/automation/publishOutcomeResolver.ts',
   'src/automation/publishPipelineLogPolicy.ts',
   'src/automation/publishSaveButtonPolicy.ts',
+  'src/automation/publishTagField.ts',
+  'src/automation/publishTagFieldDom.ts',
   'src/automation/publishedPostPageConfirmation.ts',
   'src/automation/richTextPaste.ts',
   'src/automation/runOptionsPolicy.ts',

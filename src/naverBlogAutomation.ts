@@ -143,6 +143,8 @@ import {
   SAVE_BUTTON_TEXT_CANDIDATES,
 } from './automation/publishSaveButtonPolicy.js';
 import { waitForDraftSaveSignal } from './automation/draftSaveConfirmation.js';
+import { moveBodyHashtagsToTagField } from './automation/publishTagField.js';
+import { createPublishTagFieldDeps } from './automation/publishTagFieldDom.js';
 import { revealBrowserWindow, type WindowCdp } from './automation/browserWindowReveal.js';
 import { resolveNaverRunOptions } from './automation/runOptionsPolicy.js';
 import { assertDailyNativeReservationReady, assertDailyNativeReservationCommit, hasDailyNativeReservation,
@@ -498,6 +500,11 @@ export class NaverBlogAutomation {
   private cancelRequested = false;
   private scheduledPublication?: NativeReservationProof;
   private immediatePublishCommitAttempted = false;
+  /**
+   * [2026-11-04] The PrePublish expectations object whose body hashtag line was already moved into the publish
+   * dialog's tag field and deleted. A retry pass must not demand (or re-type) those hashtags in the body.
+   */
+  private tagFieldMovedFor: object | null = null;
   /** A native or DOM draft-resume prompt was seen and must be resolved safely. */
   private pendingDraftConflictDialog = false;
   /** Do not write again until the editor has been proven to be a fresh post. */
@@ -2611,6 +2618,32 @@ export class NaverBlogAutomation {
     }
   }
 
+  /**
+   * [2026-11-04] Owner decision: hashtags end up in NAVER's publish-dialog tag field, not as text in the post body.
+   * The body keeps its trailing "#tag" line until here; opening the dialog makes NAVER register it into the tag field,
+   * then the line is deleted and the field is checked again (publishTagField.ts). Fail-soft: anything that goes wrong
+   * leaves the hashtags in the body (the previous behaviour) and publishing continues. Never presses the final button.
+   */
+  private async moveHashtagsToPublishTagField(): Promise<void> {
+    try {
+      const result = await moveBodyHashtagsToTagField(createPublishTagFieldDeps({
+        page: this.ensurePage(),
+        getFrame: () => this.getAttachedFrame(),
+        delay: (ms) => this.delay(ms),
+        log: (message) => this.log(message),
+      }));
+      // Once a body line is gone the hashtags are no longer in the body, whatever else is left to report.
+      if (result.deletedParagraphs > 0) this.tagFieldMovedFor = (this as any).__prePublishExpectations ?? null;
+      this.log(`[태그칸] 결과: ${result.status} · 등록 확인 ${result.tagsBefore.length}개 → ${result.tagsAfter.length}개 · 본문 줄 삭제 ${result.deletedParagraphs} · 직접 입력 ${result.typedFallback}`);
+      if (result.status === 'incomplete' || result.status === 'reopen-failed') {
+        this.log('⚠️ [태그칸] 해시태그 일부를 태그 칸에서 확인하지 못했습니다 — 발행 후 글의 태그를 확인해 주세요.');
+      }
+    } catch (error) {
+      if (this.cancelRequested || error instanceof AccountExecutionGuardError) throw error;
+      this.log(`⚠️ [태그칸] 해시태그 이동 중 오류 (발행은 계속): ${(error as Error).message}`);
+    }
+  }
+
   private emitTailDebugSnapshot(
     stage: string,
     expectations: PrePublishExpectations,
@@ -2783,7 +2816,11 @@ export class NaverBlogAutomation {
       // Compares what the editor actually contains with what the flow planned;
       // logs only, never blocks. R6 upgrades failures to a hard block.
       try {
-        const expectations = (this as any).__prePublishExpectations;
+        const plannedExpectations = (this as any).__prePublishExpectations;
+        // Retry pass: the hashtag line was already moved into the publish dialog's tag field and deleted from the body.
+        const expectations = plannedExpectations && this.tagFieldMovedFor === plannedExpectations
+          ? { ...plannedExpectations, expectedHashtags: [] }
+          : plannedExpectations;
         if (expectations) {
           let stats = await collectPrePublishStats(frame);
           if (isEditorBodyUnreadable(stats)) {
@@ -2885,6 +2922,13 @@ export class NaverBlogAutomation {
 
       // ✅ 발행 직전 모든 이미지에 문서 너비 적용
       await imageHelpers.applyDocumentWidthToAllImagesBeforePublish(this, frame);
+
+      // [2026-11-04] Last body edit of the publish pass: every body check/repair above is done, nothing below types body
+      // hashtags again. Draft saves keep the body as it is. Details: moveHashtagsToPublishTagField.
+      if (mode === 'publish' || mode === 'schedule') {
+        await this.moveHashtagsToPublishTagField();
+        frame = await this.getAttachedFrame().catch(() => frame);
+      }
 
       if (mode === 'draft') {
         this.log('🔄 블로그 글 임시저장 중...');
@@ -3135,13 +3179,25 @@ export class NaverBlogAutomation {
                       await page.mouse.click(iframeOff.x + compCoords.x, iframeOff.y + compCoords.y);
                       return true;
                     },
+                    // [2026-11-04 live] The toggle (20×12 px) sits below the image, often off screen: a coordinate click
+                    //   computed after scrolling only the image hit something else (elementFromPoint ≠ toggle), so the
+                    //   mark never changed. Scroll the toggle itself into view; click it where it is the topmost element,
+                    //   otherwise click it directly (both flip se-is-selected on the toggle — measured).
                     clickButton: async (control) => {
-                      const aiBtnCoords = await control.button.evaluate((btn: Element) => {
+                      const point = await control.button.evaluate((btn: Element) => {
+                        btn.scrollIntoView({ block: 'center', behavior: 'instant' as ScrollBehavior });
                         const rect = btn.getBoundingClientRect();
-                        return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
-                      }).catch(() => ({ x: 0, y: 0 }));
-                      const iframeOff = await readIframeOffset();
-                      await page.mouse.click(iframeOff.x + aiBtnCoords.x, iframeOff.y + aiBtnCoords.y);
+                        const x = rect.left + rect.width / 2;
+                        const y = rect.top + rect.height / 2;
+                        const top = document.elementFromPoint(x, y);
+                        return { x, y, topmost: !!top && (top === btn || btn.contains(top)) };
+                      }).catch(() => ({ x: 0, y: 0, topmost: false }));
+                      if (point.topmost) {
+                        const iframeOff = await readIframeOffset();
+                        await page.mouse.click(iframeOff.x + point.x, iframeOff.y + point.y);
+                      } else {
+                        await control.button.evaluate((btn: Element) => (btn as HTMLElement).click()).catch(() => undefined);
+                      }
                     },
                     onRetry: (attempt, last) => this.log(`   🔁 [AI 마크] ${i + 1}번째 이미지 다시 시도 ${attempt}/3 (${last === 'button-missing' ? '버튼이 늦게 뜸' : '켜짐 미확인'})`),
                   });

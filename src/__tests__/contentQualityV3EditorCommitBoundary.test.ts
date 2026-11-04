@@ -435,6 +435,73 @@ describe('Content Quality V3 actual editor commit boundary', () => {
     )).resolves.toBeUndefined();
   });
 
+  // [2026-11-04] Hashtags now end up in the publish dialog's tag field and the body hashtag line is deleted before the
+  // final click. The visible body may therefore lack the hashtag segments (all of them), but never carry half of them.
+  describe('hashtags moved into the publish-dialog tag field', () => {
+    const withHashtags = { hashtags: ['공식자료', '확인가이드'] };
+    const visible = (initial: StructuredContent, bodyText: string) => Object.freeze({
+      title: initial.selectedTitle,
+      bodyText,
+      linkCards: Object.freeze([]),
+      bareUrls: Object.freeze([]),
+      externalAnchorUrls: Object.freeze([]),
+      opaqueVisualCount: 0,
+    });
+
+    it('accepts the final DOM body without the hashtag line', async () => {
+      const prepared = await prepare({}, withHashtags);
+      const candidate = makeCandidate(prepared.initial, {}, [], [], [], visible(
+        prepared.initial,
+        makeVisibleBody({ ...prepared.initial, hashtags: [] }),
+      ));
+
+      await expect(enforceContentQualityV3EditorCommit(
+        prepared.store,
+        prepared.payload,
+        candidate,
+      )).resolves.toBeUndefined();
+    });
+
+    it('still accepts the body that keeps the hashtag line (the move did not happen)', async () => {
+      const prepared = await prepare({}, withHashtags);
+      const candidate = makeCandidate(prepared.initial);
+
+      await expect(enforceContentQualityV3EditorCommit(
+        prepared.store,
+        prepared.payload,
+        candidate,
+      )).resolves.toBeUndefined();
+    });
+
+    it('rejects a body that keeps only some of the hashtags', async () => {
+      const prepared = await prepare({}, withHashtags);
+      const candidate = makeCandidate(prepared.initial, {}, [], [], [], visible(
+        prepared.initial,
+        `${makeVisibleBody({ ...prepared.initial, hashtags: [] })}\n#공식자료`,
+      ));
+
+      await expect(enforceContentQualityV3EditorCommit(
+        prepared.store,
+        prepared.payload,
+        candidate,
+      )).rejects.toThrow('[content-quality-v3-publish-commit] visible_body_mismatch');
+    });
+
+    it('rejects changed prose even when the hashtag line is absent', async () => {
+      const prepared = await prepare({}, withHashtags);
+      const candidate = makeCandidate(prepared.initial, {}, [], [], [], visible(
+        prepared.initial,
+        `${makeVisibleBody({ ...prepared.initial, hashtags: [] })}\n끼워 넣은 문장입니다.`,
+      ));
+
+      await expect(enforceContentQualityV3EditorCommit(
+        prepared.store,
+        prepared.payload,
+        candidate,
+      )).rejects.toThrow('[content-quality-v3-publish-commit] visible_body_mismatch');
+    });
+  });
+
   it('rejects a punctuation-changed custom FTC supplement before the final click', async () => {
     const prepared = await prepare();
     const customFtc = '이 글에는 사용자 지정 광고 고지 문구가 포함됩니다.';
