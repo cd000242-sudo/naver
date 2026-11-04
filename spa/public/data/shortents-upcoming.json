@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T18:10:42.137Z",
+ "builtAt": "2026-11-04T18:20:50.920Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,44 +8,44 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "美 민주당 압승",
+   "keyword": "삼성, 12회 연장 승리",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T17:12:00.000Z",
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T17:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[美 중간선거] 美 민주당 압승에 ‘한국 3500억달러 투자’ 협상 여지 확...",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-04T18:00:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=2026110500024485569a1f309431_1"
+     "title": "첫판엔 5실점, 이번엔 7이닝 1실점... 삼성 살린 '우승청부사' 페덱 MVP",
+     "press": "stnsports.co.kr",
+     "publishedAt": "2026-11-04T17:57:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/450/0000155309"
     },
     {
-     "title": "美 민주당 의회 장악에도 기업들 신중론…무역정책 변화 '미지수'",
-     "press": "bloter.net",
-     "publishedAt": "2026-11-04T17:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/293/0000092731?sid=101"
-    },
-    {
-     "title": "국제유가 급락, 브렌트 9%대↓…美 민주 중간선거 압승에 종전 기대",
-     "press": "newspim.com",
+     "title": "'살다 살다 이런 실책 시리즈는 처음'…삼성과 KT, 우승하려면 어이없는...",
+     "press": "maniareport.com",
      "publishedAt": "2026-11-04T17:16:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261105000015"
+     "link": "https://m.sports.naver.com/kbaseball/article/425/0000213918"
+    },
+    {
+     "title": "“배찬승이 많이 컸다” 박진만 감독, 연장 12회 혈투 버틴 불펜에 엄지...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-04T17:11:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/109/0005634982"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 785,
+  "flagged": 786,
   "matched": 329,
   "avgLeadMin": 288,
   "recent": [
