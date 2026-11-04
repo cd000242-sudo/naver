@@ -2,7 +2,7 @@
  * Agent harmony runtime glue (Release C1, 2026-11-04) — the small, testable seam contentGenerator calls.
  *
  *   resolveAgentHarmonyFlag     config.agentHarmonyMode / env AGENT_HARMONY (default OFF, env wins)
- *   resolveAgentHarmonyRequest  should THIS generation run as a harmony session? (flag + agent engine + homefeed + not V3)
+ *   resolveAgentHarmonyRequest  should THIS generation run as a harmony session? (flag + agent engine + text mode + not V3)
  *   handleAgentHarmonyResponse  right after JSON parse: strip, verify, attach, log, write artifact + ledger
  *   attachAgentHarmony          non-enumerable `_agentHarmony` on the article (never in JSON / IPC / publish payload)
  *   restoreAgentHarmony         re-attach after post-processing that cloned the article
@@ -13,6 +13,7 @@ import { APP_VERSION } from '../../runtime/version.generated.js';
 import type { AgentHarmonyContext } from '../../agentCli/agentHarmonyEnvelope.js';
 import { normalizeTitleEvidence } from '../../main/services/dailyPublishingTitleReviewContract.js';
 import { appendHarmonyLedger } from './harmonyLedger.js';
+import { isHarmonyMode } from './harmonyModes.js';
 import { extractHarmonyPacket } from './harmonyPacketExtract.js';
 import { verifyHarmonyPacket } from './harmonyPacketVerify.js';
 import type { AgentHarmonyRecord, HarmonyVerification } from './harmonyPacketTypes.js';
@@ -25,10 +26,15 @@ export function resolveAgentHarmonyFlag(config: { readonly agentHarmonyMode?: un
   return config?.agentHarmonyMode === true;
 }
 
-/** The harmony session needs an agent CLI engine, the homefeed mode and the legacy (non-V3) prompt path. */
+/** Flag-free: a text mode with a harmony session AND a subscription agent engine (agent-claude / agent-codex). */
+export function agentHarmonyApplies(mode: unknown, provider: unknown): boolean {
+  return isHarmonyMode(mode) && (provider === 'agent-claude' || provider === 'agent-codex');
+}
+
+/** The harmony session needs the flag, an agent CLI engine, a text mode (photo excluded) and the legacy (non-V3) prompt path. */
 export function resolveAgentHarmonyRequest(args: { flag: unknown; provider: string; isV3Prompt: boolean; mode: string }): AgentHarmonyContext | undefined {
-  if (args.flag !== true || args.isV3Prompt || args.mode !== 'homefeed') return undefined;
-  return args.provider === 'agent-claude' || args.provider === 'agent-codex' ? { mode: 'homefeed' } : undefined;
+  if (args.flag !== true || args.isV3Prompt || !isHarmonyMode(args.mode)) return undefined;
+  return agentHarmonyApplies(args.mode, args.provider) ? { mode: args.mode } : undefined;
 }
 
 /** Non-enumerable: survives in-process hand-offs, but JSON.stringify / structured clone (IPC) / spreads never carry it. */
@@ -140,7 +146,7 @@ export function handleAgentHarmonyResponse(parsed: unknown, ctx: HarmonyResponse
     const extraction = extractHarmonyPacket(parsed);
     const title = typeof (parsed as { selectedTitle?: unknown })?.selectedTitle === 'string' ? (parsed as { selectedTitle: string }).selectedTitle : '';
     const verification = extraction.packet || extraction.report
-      ? verifyHarmonyPacket(extraction, { rawText: ctx.rawText, body: draftBodyOf(parsed), title, systemPrompt: ctx.systemPrompt })
+      ? verifyHarmonyPacket(extraction, { rawText: ctx.rawText, body: draftBodyOf(parsed), title, systemPrompt: ctx.systemPrompt, mode: ctx.mode })
       : null;
     const issues = [...(extraction.present ? [] : ['no harmony fields in the response']), ...extraction.issues, ...(verification?.issues ?? [])];
     record = { active: true, packet: extraction.packet, report: verification?.report ?? [], issues, verification };

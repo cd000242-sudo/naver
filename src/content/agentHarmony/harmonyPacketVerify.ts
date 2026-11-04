@@ -27,6 +27,8 @@ export interface HarmonyVerifyContext {
   readonly title: string;
   /** The task prompt the quotes must come from (the base prompt, without the harmony envelope). */
   readonly systemPrompt: string;
+  /** Content mode. The answer-position windows are homefeed-specific: any other mode records the position only. Missing = homefeed. */
+  readonly mode?: string;
 }
 
 const MIN_ANCHOR_CHARS = 4;
@@ -94,6 +96,8 @@ function verifyChosen(packet: HarmonyPacket, ctx: HarmonyVerifyContext, issues: 
 function verifyPayoff(packet: HarmonyPacket, ctx: HarmonyVerifyContext, issues: string[]): NonNullable<HarmonyVerification['payoff']> {
   const positionPct = measureAnswerPosition(ctx.body, packet.payoff.answerSentence);
   if (positionPct === null) { issues.push('answer sentence is not in the body'); return { found: false, positionPct: null, inHiddenSubjectWindow: false, inStandardWindow: false }; }
+  // The windows were measured on homefeed articles only: elsewhere the position is data, not a verdict (both flags stay false).
+  if (ctx.mode !== undefined && ctx.mode !== 'homefeed') return { found: true, positionPct, inHiddenSubjectWindow: false, inStandardWindow: false };
   const windows = payoffWindows(positionPct);
   if (positionPct > PAYOFF_WINDOW_STANDARD.max) issues.push(`answer sentence comes late (${positionPct}% > ${PAYOFF_WINDOW_STANDARD.max}%)`);
   return { found: true, positionPct, ...windows };
@@ -118,7 +122,7 @@ export function verifyHarmonyPacket(
   ctx: HarmonyVerifyContext,
 ): HarmonyVerification {
   const issues: string[] = [];
-  const safe = { rawText: String(ctx?.rawText ?? ''), body: String(ctx?.body ?? ''), title: String(ctx?.title ?? ''), systemPrompt: String(ctx?.systemPrompt ?? '') };
+  const safe = { rawText: String(ctx?.rawText ?? ''), body: String(ctx?.body ?? ''), title: String(ctx?.title ?? ''), systemPrompt: String(ctx?.systemPrompt ?? ''), mode: typeof ctx?.mode === 'string' ? ctx.mode : undefined };
   const empty: HarmonyVerification = { candidates: [], sourceAnchors: { matched: 0, total: 0 }, bodyAnchors: { matched: 0, total: 0 }, chosen: null, payoff: null, report: [], droppedEffectPromises: 0, issues };
   try {
     const { kept, dropped } = verifyReport(extraction?.report ?? null, safe.systemPrompt, issues);

@@ -4894,7 +4894,8 @@ import { attachBlogPerformance, attachBlogProfile, findProfileAccount, snapshotB
 import { blogPerformanceStoreAt, blogProfileStoreAt } from './account/blogProfileRuntime.js';
 import { resolveRunContentSource } from './account/runContentSource.js';
 import { generateWithHomefeedReview, titleReviewGrounding } from './content/homefeedTitleReview.js';
-import { resolveAgentHarmonyFlag } from './content/agentHarmony/harmonyRuntime.js';
+import { agentHarmonyApplies, resolveAgentHarmonyFlag } from './content/agentHarmony/harmonyRuntime.js';
+import { harmonyModeLabel } from './content/agentHarmony/harmonyModes.js';
 import { dailySourceFingerprints } from './main/services/dailyPublishingExecutor.js';
 import { checkDailyPublishingEntitlement } from './licenseManager.js';
 import { resolveThumbnailOverlayText } from './image/director/thumbnailText.js';
@@ -7080,11 +7081,11 @@ ipcMain.handle(
       // Only this person-run [글 생성] handler sets it; the unattended daily and multi-account paths never do.
       if (resolveAgentHarmonyFlag((await loadConfig().catch(() => null)) as any, process.env)) {
         (source as any).agentHarmony = true;
-        // 2026-11-04: say whether THIS article uses it — the session only runs for agent engines in homefeed mode (an SEO run logged "켜짐" and confused the owner).
-        const harmonyApplies = String(contentMode || '') === 'homefeed' && (String(provider || '') === 'agent-claude' || String(provider || '') === 'agent-codex');
+        // 2026-11-04: say whether THIS article uses it — the session runs for agent engines in any text mode (photo excluded; an SEO run once logged "켜짐" while homefeed-only and confused the owner).
+        const harmonyApplies = agentHarmonyApplies(String(contentMode || ''), String(provider || ''));
         console.log(harmonyApplies
-          ? '[AgentHarmony] 조화 모드 켜짐 — 이번 홈판 글은 에이전트가 한 세션 안에서 제목 비교 · 자기점검 · 보완 보고까지 합니다.'
-          : `[AgentHarmony] 조화 모드 설정은 켜져 있지만 이번 글에는 적용하지 않습니다(모드 ${String(contentMode || '-')} · 엔진 ${String(provider || '-')} — 홈판 + Claude Code/Codex 에서만).`);
+          ? `[AgentHarmony] 조화 모드 켜짐 — 이번 ${harmonyModeLabel(String(contentMode || ''))} 글은 에이전트가 한 세션 안에서 제목 비교 · 자기점검 · 보완 보고까지 합니다.`
+          : `[AgentHarmony] 조화 모드 설정은 켜져 있지만 이번 글에는 적용하지 않습니다(모드 ${String(contentMode || '-')} · 엔진 ${String(provider || '-')} — 사진 모드를 뺀 글쓰기 모드 + Claude Code/Codex 에서만).`);
       }
       const manualReviewed = await generateWithHomefeedReview({
         contentMode: String(contentMode || ''), source: source as any, generate: generateOnce, signal: genSignal,

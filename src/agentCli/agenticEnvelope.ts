@@ -71,6 +71,15 @@ function resolveModeKey(mode?: string): string | undefined {
   return undefined;
 }
 
+/**
+ * The mode's self-critique focus text exactly as wrapAsAgenticTask shows it, or undefined when the mode has none.
+ * The harmony envelope reuses this instead of retyping it (2026-11-04).
+ */
+export function getAgenticModeFocus(mode?: string): string | undefined {
+  const key = resolveModeKey(mode);
+  return key ? MODE_FOCUS[key] : undefined;
+}
+
 function buildHeader(modeKey?: string): string {
   const focusBlock = modeKey
     ? `\n[이 모드에서 특히 끌어올릴 것]\n${MODE_FOCUS[modeKey]}\n`

@@ -91,8 +91,16 @@ describe('wrapAsHarmonyTask', () => {
     expect(EFFECT_PROMISE_PATTERN.test(envelope)).toBe(false);
   });
 
-  it('falls back to the plain agentic envelope for any mode other than homefeed', () => {
-    expect(wrapAsHarmonyTask(BASE, { mode: 'seo' as never })).toBe(wrapAsAgenticTask(BASE, 'seo'));
+  it('falls back to the plain agentic envelope for a mode that has no harmony session (photo, unknown, missing)', () => {
+    for (const mode of ['image-narrative', 'photo', 'unknown-mode', '', undefined]) {
+      expect(wrapAsHarmonyTask(BASE, { mode: mode as never })).toBe(wrapAsAgenticTask(BASE, mode as never));
+    }
+    expect(wrapAsHarmonyTask(BASE, undefined as never)).toBe(wrapAsAgenticTask(BASE, undefined));
+  });
+
+  it('homefeed envelope is byte-for-byte the text captured before the all-modes extension', () => {
+    const golden = readFileSync(new URL('./fixtures/agentHarmonyHomefeedEnvelope.txt', import.meta.url), 'utf8').replace(/\r\n/g, '\n');
+    expect(wrapAsHarmonyTask('[BASE-SENTINEL]', { mode: 'homefeed' })).toBe(`${golden}[BASE-SENTINEL]`);
   });
 });
 

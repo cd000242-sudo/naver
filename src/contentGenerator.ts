@@ -2410,7 +2410,7 @@ export interface ContentSource {
   /** Fail-closed originality policy context injected before the model call. */
   contentPolicyPrompt?: string;
   manualTitleOverride?: string; // User-entered title that must not be rewritten by AI/SEO title logic
-  /** [2026-11-04 Release C1] Observe-mode agent harmony session (agent-claude/agent-codex homefeed only). Set by the person-run [글 생성] handler; default OFF. */
+  /** [2026-11-04 Release C1] Observe-mode agent harmony session (agent-claude/agent-codex, every text mode except photo). Set by the person-run [글 생성] handler; default OFF. */
   agentHarmony?: boolean;
   useKeywordAsTitle?: boolean; // ✅ [2026-02-24] 키워드를 제목으로 그대로 사용 (제목 생성/평가 건너뛰기)
   keywordForTitle?: string; // ✅ [2026-02-24] useKeywordAsTitle=true 일 때 사용할 키워드 원문
@@ -6824,7 +6824,7 @@ async function generateStructuredContentInternal(
       // ✅ 다양성 극대화를 위해 temperature 높임 (매번 다른 글 생성)
       // ✅ 모드별 프롬프트 및 온도 설정 가져오기
       const mode = (source.contentMode || 'seo') as PromptMode;
-      // [2026-11-04 Release C1] Observe-mode harmony session: flag + agent-claude/agent-codex + homefeed + legacy prompt only.
+      // [2026-11-04 Release C1] Observe-mode harmony session: flag + agent-claude/agent-codex + a text mode (photo returns earlier) + legacy prompt only.
       const agentHarmonyRequest = resolveAgentHarmonyRequest({ flag: source.agentHarmony, provider: String(provider), isV3Prompt, mode });
       // [2026-11-04 Release C2] Under a live harmony session the outer LLM repairs below are warn-only (one log line each);
       //   fact-type regeneration and the JSON completeness retry never ask this gate. Flag OFF: always false, no extra work.

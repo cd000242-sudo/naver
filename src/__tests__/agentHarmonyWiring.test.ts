@@ -83,11 +83,12 @@ describe('flag and request resolution', () => {
     expect(resolveAgentHarmonyFlag({ agentHarmonyMode: true }, { AGENT_HARMONY: 'off' })).toBe(false);
   });
 
-  it('requires the flag, an agent-claude/agent-codex engine, homefeed and the legacy (non-V3) prompt', () => {
+  it('requires the flag, an agent-claude/agent-codex engine, a text mode and the legacy (non-V3) prompt', () => {
     const base = { flag: true, provider: 'agent-claude', isV3Prompt: false, mode: 'homefeed' };
     expect(resolveAgentHarmonyRequest(base)).toEqual({ mode: 'homefeed' });
     expect(resolveAgentHarmonyRequest({ ...base, provider: 'agent-codex' })).toEqual({ mode: 'homefeed' });
-    for (const off of [{ flag: undefined }, { flag: false }, { flag: 'true' }, { provider: 'agent-gemini' }, { provider: 'gemini' }, { provider: 'claude' }, { isV3Prompt: true }, { mode: 'seo' }, { mode: 'affiliate' }]) {
+    expect(resolveAgentHarmonyRequest({ ...base, mode: 'seo' })).toEqual({ mode: 'seo' });
+    for (const off of [{ flag: undefined }, { flag: false }, { flag: 'true' }, { provider: 'agent-gemini' }, { provider: 'gemini' }, { provider: 'claude' }, { isV3Prompt: true }, { mode: 'image-narrative' }]) {
       expect(resolveAgentHarmonyRequest({ ...base, ...off })).toBeUndefined();
     }
   });
