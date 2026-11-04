@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T01:22:29.527Z",
+ "builtAt": "2026-11-04T01:32:33.195Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,67 @@
  "measured": 23,
  "candidates": [
   {
-   "keyword": "코스피 상승 출발",
+   "keyword": "코스피·코스닥 상승 출발",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 86,
-   "recent20": 7,
-   "press": 63,
+   "articles90": 88,
+   "recent20": 5,
+   "press": 61,
    "firstArticleAt": "2026-11-04T00:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "코스피 장 초반 2.87% 급반등… 외국인 951억 순매수",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-04T01:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003695582?sid=101"
+     "title": "[속보] 상승 출발했던 코스피·코스닥 하락전환…1%대 하락",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-04T01:29:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000079438"
     },
     {
-     "title": "코스피, 반발 매수에 5,700선 회복…삼전·하이닉스 동반 상승",
-     "press": "news2day.co.kr",
-     "publishedAt": "2026-11-04T01:16:00.000Z",
-     "link": "https://www.news2day.co.kr/article/20261104500088"
+     "title": "코스피 장초반 1%대 상승 못 지키고 하락 전환, 코스닥은 700선도 붕괴",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-04T01:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005599162?sid=101"
     },
     {
-     "title": "코스피, 반도체주 강세에 5800선 돌파…2%대 급등 출발",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-04T01:12:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3741785"
+     "title": "코스피 2%대 상승 출발…장중 상승분 반납",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-04T01:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922715?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "순천대 경국대 의대 신설",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 69,
+   "recent20": 20,
+   "press": 52,
+   "firstArticleAt": "2026-11-04T01:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "순천시 “36년 숙원 풀었다”… 국립순천대 의대 정원 60명 최종 확정",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-04T01:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/382/0001302835?sid=102"
+    },
+    {
+     "title": "전남광주 국립의대 신설 '순천대' 최종 선정",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-04T01:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002534599?sid=102"
+    },
+    {
+     "title": "'경국대 의대 반갑지만' 신청보다 10명 줄어…'동국대 의대' 고려?",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-04T01:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009269203?sid=102"
     }
    ]
   },
@@ -47,30 +80,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 48,
-   "recent20": 6,
-   "press": 48,
-   "firstArticleAt": "2026-11-03T23:54:00.000Z",
+   "articles90": 44,
+   "recent20": 8,
+   "press": 44,
+   "firstArticleAt": "2026-11-04T00:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[재계는 지금] 삼성전자, 갤럭시 버즈 ‘청력 체크’·‘청력 케어’ 기...",
-     "press": "dealsite.co.kr",
-     "publishedAt": "2026-11-04T01:18:00.000Z",
-     "link": "https://dealsite.co.kr/articles/172029"
+     "title": "삼성전자, 갤럭시 버즈 청력 관리 기능 국내 도입…의료기기 허가",
+     "press": "newsquest.co.kr",
+     "publishedAt": "2026-11-04T01:28:00.000Z",
+     "link": "https://www.newsquest.co.kr/news/articleView.html?idxno=304186"
     },
     {
-     "title": "갤럭시 버즈가 청력 검사·보조까지…삼성전자, 식약처 의료기기 허가",
-     "press": "ezyeconomy.com",
-     "publishedAt": "2026-11-04T01:18:00.000Z",
-     "link": "https://www.ezyeconomy.com/news/articleView.html?idxno=241514"
+     "title": "삼성전자, 갤럭시 버즈 '청력 체크·케어' 기능 식약처 허가 획득",
+     "press": "techholic.co.kr",
+     "publishedAt": "2026-11-04T01:28:00.000Z",
+     "link": "http://www.techholic.co.kr/news/articleView.html?idxno=223517"
     },
     {
-     "title": "갤럭시 버즈, 청력 검사부터 케어까지…식약처 의료기기 허가",
-     "press": "bizwork.co.kr",
-     "publishedAt": "2026-11-04T01:14:00.000Z",
-     "link": "https://www.bizwork.co.kr/news/articleView.html?idxno=420516"
+     "title": "삼성전자, 갤럭시 버즈 청력 체크·케어 기능 식약처 허가 획득",
+     "press": "koit.co.kr",
+     "publishedAt": "2026-11-04T01:28:00.000Z",
+     "link": "https://www.koit.co.kr/news/articleView.html?idxno=209774"
+    }
+   ]
+  },
+  {
+   "keyword": "지역의대 신설 확정",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 54,
+   "recent20": 14,
+   "press": 43,
+   "firstArticleAt": "2026-11-04T00:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "경북 최대 숙원 ‘국립 경국대 의대’ 신설 확정…의료 격차 해소에 기...",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-04T01:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001882908?sid=102"
+    },
+    {
+     "title": "순천시 “36년 숙원 풀었다”… 국립순천대 의대 정원 60명 최종 확정",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-04T01:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/382/0001302835?sid=102"
+    },
+    {
+     "title": "전남광주 국립의대 신설 '순천대' 최종 선정",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-04T01:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002534599?sid=102"
     }
    ]
   },
@@ -79,13 +144,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 34,
-   "recent20": 20,
-   "press": 32,
+   "articles90": 36,
+   "recent20": 11,
+   "press": 34,
    "firstArticleAt": "2026-11-04T00:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "합참 \"북한 동해상으로 미상 발사체 쐈다\"…탄도미사일 여부 분석 중",
+     "press": "pointe.co.kr",
+     "publishedAt": "2026-11-04T01:30:00.000Z",
+     "link": "https://www.pointe.co.kr/news/articleView.html?idxno=87144"
+    },
     {
      "title": "[속보] 軍 \"북한, 동해상 미상발사체 발사\" 격일마다 무력도발",
      "press": "pennmike.com",
@@ -97,12 +168,70 @@
      "press": "iminju.net",
      "publishedAt": "2026-11-04T01:20:00.000Z",
      "link": "http://www.iminju.net/news/articleView.html?idxno=171898"
+    }
+   ]
+  },
+  {
+   "keyword": "크래프톤",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 21,
+   "recent20": 6,
+   "press": 21,
+   "firstArticleAt": "2026-11-04T00:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "크래프톤 주가, 급등세... 이유는?",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-04T01:30:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1190981"
     },
     {
-     "title": "북한 나흘만에 또 동해상으로 미사일 발사",
-     "press": "viewsnnews.com",
-     "publishedAt": "2026-11-04T01:18:00.000Z",
-     "link": "https://www.viewsnnews.com/article?q=239471"
+     "title": "크래프톤, 장 초반 11%대 급등…3000억원 자사주 매입·소각",
+     "press": "econonews.co.kr",
+     "publishedAt": "2026-11-04T01:28:00.000Z",
+     "link": "http://www.econonews.co.kr/news/articleView.html?idxno=446703"
+    },
+    {
+     "title": "크래프톤 PUBG 부스에 아이브 저택 뜬다…이용자 인증하면 음료·쿠키 제...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-04T01:26:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1171682"
+    }
+   ]
+  },
+  {
+   "keyword": "이에스티",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 17,
+   "recent20": 2,
+   "press": 16,
+   "firstArticleAt": "2026-11-04T00:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[특징주] 이에스티, 코스닥 상장 첫날 공모가 대비 16%대↑",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-04T01:30:00.000Z",
+     "link": "https://www.ajunews.com/view/20261104102142446"
+    },
+    {
+     "title": "[특징주] 이에스티, 코스닥 상장 첫날 28%대 '강세'",
+     "press": "finomy.com",
+     "publishedAt": "2026-11-04T01:26:00.000Z",
+     "link": "http://www.finomy.com/news/articleView.html?idxno=265562"
+    },
+    {
+     "title": "이에스티, 코스닥 시장 입성",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-04T01:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003481943?sid=105"
     }
    ]
   },
@@ -111,10 +240,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-03T23:58:00.000Z",
+   "articles90": 9,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-04T00:03:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -141,15 +270,22 @@
   {
    "keyword": "로봇 최강국 전북",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 13,
-   "recent20": 3,
+   "articles90": 9,
+   "recent20": 2,
    "press": 7,
-   "firstArticleAt": "2026-11-03T23:54:00.000Z",
+   "firstArticleAt": "2026-11-04T00:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"새만금을 피지컬AI·로봇 산업 거점으로\"…국회서 대토론회",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-04T01:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016420621?sid=102"
+    },
     {
      "title": "전북도, 1조3000억원 규모 피지컬AI·로봇 국가거점 청사진",
      "press": "asiatoday.co.kr",
@@ -161,12 +297,6 @@
      "press": "pressian.com",
      "publishedAt": "2026-11-04T01:10:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/002/0002464162?sid=102"
-    },
-    {
-     "title": "'피지컬AIㆍ로봇 국가거점 조성' 시동",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-04T01:08:00.000Z",
-     "link": "http://www.breaknews.com/1248170"
     }
    ]
   },
@@ -176,12 +306,18 @@
     "google"
    ],
    "articles90": 7,
-   "recent20": 2,
+   "recent20": 1,
    "press": 7,
-   "firstArticleAt": "2026-11-04T00:02:00.000Z",
+   "firstArticleAt": "2026-11-04T00:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "삼성물산 패션, SSF샵에서 \"최대 80% 할인\" '블랙프라이데이' 개최",
+     "press": "whitepaper.co.kr",
+     "publishedAt": "2026-11-04T01:22:00.000Z",
+     "link": "http://www.whitepaper.co.kr/news/articleView.html?idxno=268414"
+    },
     {
      "title": "삼성물산 SSF샵, 2200개 브랜드 참여 '블랙프라이데이' 개최",
      "press": "m-i.kr",
@@ -193,32 +329,60 @@
      "press": "ktnews.com",
      "publishedAt": "2026-11-04T01:04:00.000Z",
      "link": "http://www.ktnews.com/news/articleView.html?idxno=149888"
-    },
-    {
-     "title": "2200개 브랜드 총출동 SSF샵, 16일까지 ‘블랙프라이데이’ 진행",
-     "press": "fashionbiz.co.kr",
-     "publishedAt": "2026-11-04T01:00:00.000Z",
-     "link": "https://www.fashionbiz.co.kr/article/230818"
     }
    ]
   },
   {
-   "keyword": "서예지 금월도 캐스팅 스크린 복귀",
+   "keyword": "골프존카운티",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-04T00:11:00.000Z",
-   "exclusive": true,
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-04T00:16:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'사생활 논란' 서예지, 5년 만에 스크린 꿰찼다…차기작 뱀파이어 영화...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-04T00:55:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001407062"
+     "title": "골프존홀딩스 \"MBK, 계약 하루 전 협상 중단\" 골프존카운티 매각 공방",
+     "press": "asiaa.co.kr",
+     "publishedAt": "2026-11-04T01:20:00.000Z",
+     "link": "https://www.asiaa.co.kr/news/articleView.html?idxno=269239"
+    },
+    {
+     "title": "\"MBK, 골프존카운티 계약 전날 협상 중단\"...법적대응 예고한 골프존홀...",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-04T01:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005436301?sid=101"
+    },
+    {
+     "title": "골프존홀딩스 “MBK, 계약 전날 협상 중단”…골프존카운티 매각 갈등 ...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-04T00:33:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/016/0002718537"
+    }
+   ]
+  },
+  {
+   "keyword": "서예지, 6년 만에 스크린 복귀",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-04T00:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서예지, '금월도'로 스크린 컴백…한국형 오컬트 도전",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-04T01:09:00.000Z",
+     "link": "https://m.entertain.naver.com/article/629/0000548527"
     },
     {
      "title": "사생활 논란 6년만…서예지, 뱀파이어물 ‘금월도’로 스크린 복귀 [공...",
@@ -227,25 +391,32 @@
      "link": "https://m.entertain.naver.com/article/468/0001277924"
     },
     {
-     "title": "조용하던 서예지 스크린 컴백…뱀파이어 장르 '금월도' 캐스팅",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-04T00:27:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000519020"
+     "title": "서예지, 사생활 논란 딛고 6년 만에 스크린으로…뱀파이어 장르물로 복...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-04T00:23:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000486288"
     }
    ]
   },
   {
    "keyword": "김민석 대표의 생각 중",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 1,
+   "articles90": 5,
+   "recent20": 2,
    "press": 3,
    "firstArticleAt": "2026-11-04T00:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "하헌기 \"친청계, 김민석 몰아붙여도 정청래 우호여론 형성 안 돼\"[뉴스연...",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-04T01:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004206276?sid=100"
+    },
     {
      "title": "박지원 \"김민석 사과, 소통부터 했어야…정청래는 과유불급\"",
      "press": "nocutnews.co.kr",
@@ -257,12 +428,39 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-04T01:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001400518?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "코리안 더비 뮌헨 승리",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T00:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘코리안 더비’ 김민재의 뮌헨, 이강인의 아틀레티코에 2대 0 완승",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-04T01:26:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/056/0012286895"
     },
     {
-     "title": "[시선집중] 한민수 “김민석 사과, 박수로 추인? 아니다. 공개 사과하고...",
-     "press": null,
-     "publishedAt": "2026-11-04T00:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533405?sid=100"
+     "title": "‘20분 코리안 더비’서 김민재 웃었다...뮌헨, 아틀레티코 원정 승리",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-04T00:41:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/018/0006403371"
+    },
+    {
+     "title": "김민재·이강인, UCL 코리안 더비 성사…뮌헨, 아틀레티코 2-0 완파",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-04T00:32:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109718975984"
     }
    ]
   },
@@ -272,14 +470,14 @@
     "daum"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-04T00:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "글렌체크 김준원 아내, 소속사 본부장 성희롱 피해 주장 \"큰 충격…사과...",
+     "title": "\"비키니 사진에 성적 댓글\"…글렌체크 김준원 아내, 소속사 성희롱 폭로",
      "press": "news1.kr",
      "publishedAt": "2026-11-04T01:12:00.000Z",
      "link": "https://m.entertain.naver.com/article/421/0009269146"
@@ -301,7 +499,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 533,
+  "flagged": 539,
   "matched": 219,
   "avgLeadMin": 284,
   "recent": [
