@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T03:33:19.803Z",
+ "builtAt": "2026-11-04T03:43:23.087Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,50 +11,88 @@
  "measured": 24,
  "candidates": [
   {
+   "keyword": "발언하는 김민석 대표",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 52,
+   "recent20": 3,
+   "press": 43,
+   "firstArticleAt": "2026-11-04T02:15:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[데스크칼럼] 집권여당 대표 말의 무게",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-04T03:36:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2014273"
+    },
+    {
+     "title": "코너 몰린 김민석…\"'신천지 의혹' 공표, 정당법 위반까지 조사하라\"",
+     "press": "mediaus.co.kr",
+     "publishedAt": "2026-11-04T03:30:00.000Z",
+     "link": "https://www.mediaus.co.kr/news/articleView.html?idxno=318809"
+    },
+    {
+     "title": "“눈물로 넘어갈 문제 아냐. 사퇴하고 정계 은퇴해야” 김민석 저격 나...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-04T03:30:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1171735"
+    }
+   ]
+  },
+  {
    "keyword": "조작기소 특검법 상정",
    "sources": [
+    "nate",
     "daum"
    ],
-   "articles90": 45,
-   "recent20": 7,
-   "press": 35,
-   "firstArticleAt": "2026-11-04T02:10:00.000Z",
+   "articles90": 49,
+   "recent20": 9,
+   "press": 38,
+   "firstArticleAt": "2026-11-04T02:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "법사위, '조작기소특검법' 여당 주도 상정…국민의힘 퇴장",
-     "press": "natv.go.kr",
-     "publishedAt": "2026-11-04T03:30:00.000Z",
-     "link": "https://www.natv.go.kr/natv/news/newsView.do?newsId=514480"
+     "title": "'조작기소 특검법' 법사위 상정... 국민의힘 반발하며 퇴장",
+     "press": "lawtv.kr",
+     "publishedAt": "2026-11-04T03:40:00.000Z",
+     "link": "https://www.lawtv.kr/news/articleView.html?idxno=61329"
     },
     {
-     "title": "'조작기소 특검법' 법사위 상정...퇴장한 국민의힘",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-04T03:29:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261104000709"
+     "title": "조작기소 특검법안 與주도로 법사위 상정…국힘 반발·퇴장(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-04T03:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016421183?sid=100"
     },
     {
-     "title": "'조작기소 특검법' 법사위 상정에 반발해 퇴장한 국민의힘",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-04T03:29:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261104000708"
+     "title": "'조작기소 특검법' 두고 시작부터 파행…국힘, 10분만 퇴장",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-04T03:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400560?sid=100"
     }
    ]
   },
   {
    "keyword": "가상자산 과세 유예 제안",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 24,
+   "articles90": 19,
    "recent20": 2,
-   "press": 24,
-   "firstArticleAt": "2026-11-04T02:04:00.000Z",
+   "press": 19,
+   "firstArticleAt": "2026-11-04T02:14:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "김민석, 정부에 '가상자산 과세유예' 공식 제안",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-04T03:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400562?sid=102"
+    },
     {
      "title": "김민석 대표, 가상자산 과세 유예 제안",
      "press": "natv.go.kr",
@@ -66,45 +104,38 @@
      "press": "sisaweek.com",
      "publishedAt": "2026-11-04T03:16:00.000Z",
      "link": "https://www.sisaweek.com/news/articleView.html?idxno=238777"
-    },
-    {
-     "title": "[정책 해설] 가상자산 과세 재차 유예 제안…기본법 제정·적응기간 쟁...",
-     "press": "coinreaders.com",
-     "publishedAt": "2026-11-04T03:12:00.000Z",
-     "link": "http://coinreaders.com/267383"
     }
    ]
   },
   {
-   "keyword": "김민석 최고위 참석",
+   "keyword": "최동원, 2026 스포츠영웅 선정",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 20,
-   "recent20": 2,
-   "press": 20,
-   "firstArticleAt": "2026-11-04T02:04:00.000Z",
+   "articles90": 12,
+   "recent20": 3,
+   "press": 12,
+   "firstArticleAt": "2026-11-04T02:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최고위 불참한 최민희 \"김민석, 신천지 발언 말라 압박해\"",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-04T03:22:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3445825"
+     "title": "박주봉도 황영조도 아니었다…2026 대한민국 스포츠영웅은 바로 '이 사람...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-04T03:32:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1171731"
     },
     {
-     "title": "[포토] 최고위 참석하는 김민석·한병도",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-04T03:18:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/04/2026110400200.html"
+     "title": "‘무쇠팔’ 최동원, ‘2026 대한민국 스포츠 영웅’ 선정…야구선수 최...",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-04T03:32:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/025/0003562748"
     },
     {
-     "title": "「M포토」 최고위 참석하는 김민석 민주당 대표",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-04T02:52:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=72568"
+     "title": "'한국 야구의 불멸의 상징' 故 최동원, 2026 대한민국 스포츠영웅 선정...",
+     "press": "ftimes.kr",
+     "publishedAt": "2026-11-04T03:30:00.000Z",
+     "link": "https://www.ftimes.kr/news/articleView.html?idxno=40867"
     }
    ]
   },
@@ -113,10 +144,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 16,
+   "articles90": 12,
    "recent20": 0,
-   "press": 16,
-   "firstArticleAt": "2026-11-04T02:06:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-04T02:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -141,67 +172,34 @@
    ]
   },
   {
-   "keyword": "최동원, 2026 스포츠영웅 선정",
+   "keyword": "북한 미상 발사체 발사",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 13,
-   "recent20": 4,
-   "press": 13,
-   "firstArticleAt": "2026-11-04T02:06:00.000Z",
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-04T02:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "박주봉도 황영조도 아니었다…2026 대한민국 스포츠영웅은 바로 '이 사람...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-04T03:32:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1171731"
+     "title": "합참 \"북, 동해상으로 미상 발사체 발사\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-04T03:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400561?sid=100"
     },
     {
-     "title": "'한국 야구의 불멸의 상징' 故 최동원, 2026 대한민국 스포츠영웅 선정...",
-     "press": "ftimes.kr",
-     "publishedAt": "2026-11-04T03:30:00.000Z",
-     "link": "https://www.ftimes.kr/news/articleView.html?idxno=40867"
+     "title": "북한, 동해상으로 미상 발사체 발사",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-04T03:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012287036?sid=100"
     },
     {
-     "title": "故 최동원, 야구 선수 첫 대한민국 스포츠영웅 선정",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-04T03:22:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3445764"
-    }
-   ]
-  },
-  {
-   "keyword": "투표록 사후 위변조",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 13,
-   "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-04T02:51:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "특검, 중앙선관위 압수수색…\"'투표록 사후 기재' 지시 정황 포착\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-04T03:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014300785?sid=102"
-    },
-    {
-     "title": "특검 \"투표지 부족 투표소, 중앙선관위 지시로 투표록 사후 위변조\"",
-     "press": "getnews.co.kr",
-     "publishedAt": "2026-11-04T03:18:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=885960"
-    },
-    {
-     "title": "선관위 특검, 선관위 압수수색…'투표록 사후 위변조' 의혹",
-     "press": "sisafocus.co.kr",
-     "publishedAt": "2026-11-04T03:16:00.000Z",
-     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367178"
+     "title": "합참, \"북, 동해상 미상 발사체 발사\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-04T03:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009269503?sid=100"
     }
    ]
   },
@@ -210,10 +208,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 14,
+   "articles90": 10,
    "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-04T02:08:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-04T02:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -238,113 +236,23 @@
    ]
   },
   {
-   "keyword": "북한 미상 발사체 발사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 13,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-04T02:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "북한, 동해상으로 미상 발사체 발사",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-04T03:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012287036?sid=100"
-    },
-    {
-     "title": "합참, \"북, 동해상 미상 발사체 발사\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T03:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009269503?sid=100"
-    },
-    {
-     "title": "[속보]합참 \"북한, 동해상으로 미상 발사체 발사\"",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-04T03:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001163203?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "SKT, 3분기 영업익 5523억 증가",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-04T02:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "통신사들, AI 날개달고 3분기 실적 ‘껑충’",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-04T02:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002830254?sid=101"
-    },
-    {
-     "title": "SKT, 해킹 충격 털고 실적 반등…통신·AI 쌍끌이 성장",
-     "press": "segyebiz.com",
-     "publishedAt": "2026-11-04T02:34:00.000Z",
-     "link": "http://www.segyebiz.com/newsView/20261104508798?OutUrl=naver"
-    },
-    {
-     "title": "SKT, 3분기 영업익 5523억…해킹 덮쳤던 전년보다 11배 넘게↑",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-04T02:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004206343?sid=105"
-    }
-   ]
-  },
-  {
-   "keyword": "위험성평가 미실시 과태료",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-04T03:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "위험성평가 미실시땐 과태료 최대 1000만원…노동부, 지침 개정",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-04T03:02:00.000Z",
-     "link": "https://www.ajunews.com/view/20261104095002295"
-    },
-    {
-     "title": "사업장 위험성평가 미실시땐...최대 1000만원 과태료",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-04T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005758789?sid=101"
-    },
-    {
-     "title": "위험성평가 안한 사장님 과태료 1000만원⋯노동자 참여 의무화",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-04T03:00:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2643766"
-    }
-   ]
-  },
-  {
    "keyword": "미국 대선",
    "sources": [
     "google"
    ],
-   "articles90": 5,
+   "articles90": 6,
    "recent20": 2,
-   "press": 5,
+   "press": 6,
    "firstArticleAt": "2026-11-04T03:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[미국 중간선거 2026] 미국 하원 상원 차이, 뜻, 비교… 한눈에 총정리",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-04T03:36:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1171736"
+    },
     {
      "title": "미국 중간선거 출구조사…트럼프 반대 43% VS 지지 16%",
      "press": "cbci.co.kr",
@@ -356,44 +264,6 @@
      "press": "hankyung.com",
      "publishedAt": "2026-11-04T03:22:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/015/0005350121?sid=104"
-    },
-    {
-     "title": "미국 중간선거 개표 초반…민주, 노스캐롤라이나 상원 탈환·조지아 수...",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-04T03:08:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261104010001508"
-    }
-   ]
-  },
-  {
-   "keyword": "티메프 피해 中企 상환 연장",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-04T03:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘티메프’ 피해 中企 상환 부담 던다…정책자금 특별 만기연장",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-04T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202484?sid=101"
-    },
-    {
-     "title": "티메프 피해 中企, 정책자금 상환 1년 유예…가산금리도 면제",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T03:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009269506?sid=101"
-    },
-    {
-     "title": "티메프 피해 中企, 대출 원금상환 1년 유예…연체기업도 지원",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-04T03:00:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2014061"
     }
    ]
   },
@@ -403,7 +273,7 @@
     "google"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 1,
    "press": 2,
    "firstArticleAt": "2026-11-04T02:30:00.000Z",
    "exclusive": false,
@@ -430,7 +300,7 @@
    ]
   },
   {
-   "keyword": "예결위 인사말하는 한성숙",
+   "keyword": "예결위에서 인사하는 한성숙",
    "sources": [
     "nate"
    ],
@@ -442,16 +312,16 @@
    "capped": false,
    "samples": [
     {
-     "title": "예결위 종합정책질의, 인사말하는 한성숙 총리",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-04T02:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004206355?sid=100"
-    },
-    {
      "title": "국회 예결위, 인사말하는 한성숙 국무총리",
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-04T02:30:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004206353?sid=100"
+    },
+    {
+     "title": "예결위 종합정책질의, 인사말하는 한성숙 총리",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-04T02:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004206355?sid=100"
     },
     {
      "title": "국회 예결위 인사말하는 한성숙 총리",
@@ -464,7 +334,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 574,
+  "flagged": 576,
   "matched": 240,
   "avgLeadMin": 293,
   "recent": [
