@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T17:00:18.091Z",
+ "builtAt": "2026-11-04T17:10:21.831Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,50 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "유병권 김수미",
+   "keyword": "조작기소 특검법 통과",
    "sources": [
-    "daum"
+    "nate"
    ],
    "articles90": 4,
    "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-04T15:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "유병권, 양악 수술에 5천만 원 썼는데 \"얼굴이 부었어?\"…릴리는 알람에...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-04T16:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000486504"
-    },
-    {
-     "title": "유병권, 故 김수미 발탁으로 방송 시작...\"출연료 협상도 직접 해주셔\" ...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-04T16:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002076889"
-    },
-    {
-     "title": "'라디오스타' 유병권, 故 김수미 성대모사로 맺은 15년 인연⋯\"김치 공...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-04T15:38:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2644278"
-    }
-   ]
-  },
-  {
-   "keyword": "조작기소 특검법 법사위 통과",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T15:34:00.000Z",
+   "firstArticleAt": "2026-11-04T15:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -62,48 +29,16 @@
      "link": "https://n.news.naver.com/mnews/article/029/0003057238?sid=100"
     },
     {
-     "title": "조작기소 특검법 밀어붙인 與… 文정부때 사건까지 끼워넣기",
-     "press": "chosun.com",
+     "title": "[사설] 국민 우려에도 조작기소 특검법 강행하는 민주당",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-04T16:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001883119?sid=110"
+    },
+    {
+     "title": "한동훈 “조작기소 특검, 李대통령 본인이 해라”",
+     "press": "munhwa.com",
      "publishedAt": "2026-11-04T15:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004007870?sid=100"
-    },
-    {
-     "title": "법사위 끝내 이재명 조작기소 특검법 강행처리 \"대통령 구하기\"",
-     "press": "mediatoday.co.kr",
-     "publishedAt": "2026-11-04T15:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/006/0000138575?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "한진칼 최대주주 호반건설로 변경",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T15:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한진칼 최대주주 호반건설 외 3인…지분 20.69%",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-04T16:54:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=400631"
-    },
-    {
-     "title": "[오늘의 경제뉴스] 한진칼 노리는 '최대주주' 호반의 창…조원태 방패 ...",
-     "press": "newsverse.kr",
-     "publishedAt": "2026-11-04T16:30:00.000Z",
-     "link": "https://www.newsverse.kr/news/articleView.html?idxno=11846"
-    },
-    {
-     "title": "한진칼 최대주주, 조원태 회장서 호반건설로 변경",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-04T15:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922976?sid=101"
+     "link": "https://n.news.naver.com/mnews/article/021/0002830394?sid=100"
     }
    ]
   }
