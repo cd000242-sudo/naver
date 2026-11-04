@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T20:41:39.631Z",
+ "builtAt": "2026-11-04T20:51:43.557Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 6,
    "recent20": 1,
    "press": 5,
    "firstArticleAt": "2026-11-04T19:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[KS 포커스] 디테일이 좌우한 2차전 경기 흐름, 연장 승부 끝에 웃은 삼...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-04T20:41:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261104001403"
+    },
     {
      "title": "[스타inKS2] 삼성 원태인, 끝내기 위기 막은 32구...불펜 투혼 마치고 선...",
      "press": "newspim.com",
@@ -33,12 +39,6 @@
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-04T20:10:00.000Z",
      "link": "https://m.sports.naver.com/general/article/422/0000922989"
-    },
-    {
-     "title": "10일 동안 295개 던진 페덱…삼성의 가을야구에 파란 물들이다[김대호의...",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-04T19:45:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/629/0000548884"
     }
    ]
   },
