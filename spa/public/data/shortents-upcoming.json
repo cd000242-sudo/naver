@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T18:00:38.848Z",
+ "builtAt": "2026-11-04T18:10:42.137Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,12 +16,18 @@
     "nate"
    ],
    "articles90": 4,
-   "recent20": 0,
+   "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-04T16:33:00.000Z",
+   "firstArticleAt": "2026-11-04T17:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[美 중간선거] 美 민주당 압승에 ‘한국 3500억달러 투자’ 협상 여지 확...",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-04T18:00:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=2026110500024485569a1f309431_1"
+    },
     {
      "title": "美 민주당 의회 장악에도 기업들 신중론…무역정책 변화 '미지수'",
      "press": "bloter.net",
@@ -33,12 +39,6 @@
      "press": "newspim.com",
      "publishedAt": "2026-11-04T17:16:00.000Z",
      "link": "https://www.newspim.com/news/view/20261105000015"
-    },
-    {
-     "title": "美 국채가, 전반적 강세…민주당 압승 프라이싱",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-04T17:12:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443082"
     }
    ]
   }
