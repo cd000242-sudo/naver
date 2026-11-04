@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T09:46:06.987Z",
+ "builtAt": "2026-11-04T09:56:14.904Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,54 +8,22 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 8,
  "candidates": [
-  {
-   "keyword": "한진칼 최대주주 변경",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 55,
-   "recent20": 28,
-   "press": 46,
-   "firstArticleAt": "2026-11-04T08:24:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "호반건설, 한진칼 최대주주로…\"조원태 회장 주식 매입 시 재변경 가능...",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-04T09:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000548861?sid=101"
-    },
-    {
-     "title": "호반그룹, 한진칼 최대주주됐다…조원태 회장 측 제쳐",
-     "press": "busan.com",
-     "publishedAt": "2026-11-04T09:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001405712?sid=101"
-    },
-    {
-     "title": "호반건설, 한진칼 최대주주 등극…조원태 회장 측과 0.11%p 차이",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-04T09:40:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611040237"
-    }
-   ]
-  },
   {
    "keyword": "신촌 세브란스 흉기 난동",
    "sources": [
     "signal.bz"
    ],
    "articles90": 44,
-   "recent20": 5,
+   "recent20": 2,
    "press": 39,
    "firstArticleAt": "2026-11-04T08:27:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "신촌 세브란스병원서 50대 여성 흉기난동…정신과 의사 1명 부상",
+     "title": "신촌 세브란스병원서 50대 여성 흉기난동…정신과 교수 찔렀다",
      "press": "mt.co.kr",
      "publishedAt": "2026-11-04T09:42:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/008/0005436734?sid=102"
@@ -75,79 +43,14 @@
    ]
   },
   {
-   "keyword": "공공재개발 이재명 대통령",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 40,
-   "recent20": 4,
-   "press": 34,
-   "firstArticleAt": "2026-11-04T08:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이재명 대통령 \"재개발 기간 너무 길어\"…용적률·금융 지원 확대 주문",
-     "press": "megaeconomy.co.kr",
-     "publishedAt": "2026-11-04T09:40:00.000Z",
-     "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065605658015015"
-    },
-    {
-     "title": "공공재개발 홍보 나선 李... \"인센티브 있어 속도에 도움\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-04T09:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000963672?sid=100"
-    },
-    {
-     "title": "장위동 재개발 현장 찾은 이 대통령 “부패 없고 신속한 공공 재개발로...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-04T09:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003480698?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "美 민주당 압승",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 27,
-   "recent20": 2,
-   "press": 24,
-   "firstArticleAt": "2026-11-04T08:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美 민주당, 중간선거 압승…상·하원 장악에 트럼프 레임덕 위기",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-04T09:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002393349?sid=104"
-    },
-    {
-     "title": "美 중간선거 민주당 승리에 금값 2%대 급등… 온스당 4000弗 돌파",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-04T09:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005599556?sid=101"
-    },
-    {
-     "title": "美 민주당 중간선거 압승…한미동맹 미칠 영향은?",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-04T09:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001038447?sid=104"
-    }
-   ]
-  },
-  {
    "keyword": "고려아연 자사주 소각 추진",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 23,
-   "recent20": 3,
-   "press": 22,
-   "firstArticleAt": "2026-11-04T08:22:00.000Z",
+   "articles90": 20,
+   "recent20": 2,
+   "press": 19,
+   "firstArticleAt": "2026-11-04T08:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -172,22 +75,22 @@
    ]
   },
   {
-   "keyword": "조작기소 특검법 논란",
+   "keyword": "조작기소 특검법 규탄",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 22,
-   "recent20": 7,
-   "press": 19,
-   "firstArticleAt": "2026-11-04T08:21:00.000Z",
-   "exclusive": true,
+   "articles90": 20,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-04T08:41:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘조작기소 특검법’ 법사위 문턱 넘어… 野 “李 죄 없애기 법” 반발",
-     "press": "segye.com",
-     "publishedAt": "2026-11-04T09:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004172538?sid=100"
+     "title": "국힘, 與 '조작기소 특검법' 강행에 \"목표는 李 공소취소\"…필버 대응 예...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-04T09:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014301960?sid=100"
     },
     {
      "title": "특검법서 삭제해도 형소법엔 있어… ‘李 재판 공소취소’ 논란 불씨 여...",
@@ -196,26 +99,31 @@
      "link": "https://n.news.naver.com/mnews/article/022/0004172537?sid=102"
     },
     {
-     "title": "조작기소 특검법 급물살…벌써부터 \"누가 가겠나\" 검사 확보 '난망'",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T09:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009270607?sid=102"
+     "title": "‘조작기소 특검법’ 與野 충돌 끝에 법사위 안건조정위 회부",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-04T09:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202643?sid=100"
     }
    ]
   },
   {
    "keyword": "홍콩 ELS 과징금 3700억 확정",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 9,
+   "articles90": 7,
    "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-04T08:17:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-04T08:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "홍콩 ELS 제재 3년 만에 결론…과징금 ‘4조→3700억’ 확정",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-04T09:46:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611040235"
+    },
     {
      "title": "홍콩 ELS 과징금 3746억 역대최대",
      "press": "fnnews.com",
@@ -227,76 +135,6 @@
      "press": "asiatoday.co.kr",
      "publishedAt": "2026-11-04T09:02:00.000Z",
      "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261104010001721"
-    },
-    {
-     "title": "'홍콩 ELS' 3746억원 제재…은행 과징금 대폭 감경",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-04T08:56:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2121146"
-    }
-   ]
-  },
-  {
-   "keyword": "할인",
-   "sources": [
-    "google"
-   ],
-   "articles90": 12,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-04T08:36:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "충북농협, 농협유통 청주점서 오이 할인 판매",
-     "press": "nongmin.com",
-     "publishedAt": "2026-11-04T09:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/662/0000107695?sid=102"
-    },
-    {
-     "title": "한진 훗타운, 블프 맞아 해외직구 배송비 최대 50% 할인",
-     "press": "zdnet.co.kr",
-     "publishedAt": "2026-11-04T09:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/092/0002443898?sid=103"
-    },
-    {
-     "title": "충북농협, 농림축산식품부와 손잡고 오이 소비촉진 할인 행사 진행",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-04T09:12:00.000Z",
-     "link": "http://www.breaknews.com/1248483"
-    }
-   ]
-  },
-  {
-   "keyword": "민호 마라톤 기록 반납",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-04T08:18:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘밀어주기 논란’ 민호, 마라톤 기록 반납…공식 기록서 삭제",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-04T09:13:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003539222"
-    },
-    {
-     "title": "샤이니 민호 마라톤 논란 어디까지…기록 반납 이어 대한체육회 민원 접...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-04T09:08:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16268383"
-    },
-    {
-     "title": "샤이니 민호, '밀어주기 논란' 결국⋯마라톤 기록 자진 반납",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-04T09:02:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2644244"
     }
    ]
   }
