@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T09:25:57.462Z",
+ "builtAt": "2026-11-04T09:36:01.359Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
+ "measured": 28,
  "candidates": [
   {
-   "keyword": "고려아연 자사주 소각 추진",
+   "keyword": "신촌 세브란스 흉기 난동",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 39,
+   "articles90": 42,
    "recent20": 5,
-   "press": 39,
-   "firstArticleAt": "2026-11-04T07:56:00.000Z",
+   "press": 37,
+   "firstArticleAt": "2026-11-04T08:27:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[속보]신촌 세브란스병원서 50대女 흉기난동…정신과교수에 흉기 휘둘러...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-04T09:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002830358?sid=102"
+    },
+    {
+     "title": "신촌 세브란스병원서 흉기 난동…정신건강의학과 교수 부상",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-04T09:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541759?sid=101"
+    },
+    {
+     "title": "신촌 세브란스 병원서 흉기 난동...정신과 교수 1명 부상",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-04T09:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005759143?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "홍콩 ELS 과징금 확정",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 35,
+   "recent20": 2,
+   "press": 34,
+   "firstArticleAt": "2026-11-04T08:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "고려아연 3Q 영업익 전년 동기 대비 '반토막'난 1천417억원",
-     "press": "livebiz.today",
-     "publishedAt": "2026-11-04T09:22:00.000Z",
-     "link": "https://www.livebiz.today/news/articleView.html?idxno=206219"
+     "title": "홍콩 ELS 과징금 3746억 역대최대",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-04T09:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005599559?sid=101"
     },
     {
-     "title": "고려아연, 3분기 매출 6조 돌파했지만 영업익 48% 감소",
-     "press": "mk.co.kr",
+     "title": "홍콩 ELS 과징금 최초 산정 '4조원'의 10분의 1로",
+     "press": "biz.sbs.co.kr",
      "publishedAt": "2026-11-04T09:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005759140?sid=101"
+     "link": "https://n.news.naver.com/mnews/article/374/0000541741?sid=101"
     },
     {
-     "title": "고려아연, 3분기 영업이익 1417억원…107분기 연속 흑자",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-04T09:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003057204?sid=101"
+     "title": "3년 만에 내놓은 홍콩 ELS 제재 금액, 10분의 1 토막… 왜?",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-04T09:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002534681?sid=101"
     }
    ]
   },
@@ -47,13 +79,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 41,
-   "recent20": 8,
+   "articles90": 39,
+   "recent20": 3,
    "press": 32,
-   "firstArticleAt": "2026-11-04T07:59:00.000Z",
+   "firstArticleAt": "2026-11-04T08:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "장위9구역 찾은 李대통령 \"공공 쪽으로 중심 옮기는 게 필요\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-04T09:30:00.000Z",
+     "link": "https://www.ajunews.com/view/20261104182728271"
+    },
     {
      "title": "李, 유튜브로 직접 소통…'대통령의 Y' 시작",
      "press": "fnnews.com",
@@ -65,12 +103,71 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-04T09:19:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014301947?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "조작기소 특검법 통과",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 34,
+   "recent20": 9,
+   "press": 30,
+   "firstArticleAt": "2026-11-04T08:07:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘조작기소 특검법’ 與野 충돌 끝에 법사위 안건조정위 회부",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-04T09:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202643?sid=100"
     },
     {
-     "title": "‘장위9구역’ 찾은 李 “공공재개발 조기 진행시, 용적률 등 인센티브...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-04T09:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202638?sid=100"
+     "title": "조작기소 특검법, 與 주도로 법사위 소위 통과",
+     "press": "wolyo.co.kr",
+     "publishedAt": "2026-11-04T09:34:00.000Z",
+     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=320061"
+    },
+    {
+     "title": "\"대통령 특혜 vs 조작수사 규명\"…특검법 놓고 여야 충돌",
+     "press": "iusm.co.kr",
+     "publishedAt": "2026-11-04T09:30:00.000Z",
+     "link": "https://www.iusm.co.kr/news/articleView.html?idxno=1070107"
+    }
+   ]
+  },
+  {
+   "keyword": "고려아연 자사주 소각 추진",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 29,
+   "recent20": 5,
+   "press": 28,
+   "firstArticleAt": "2026-11-04T08:07:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "고려아연, 자사주 절반 소각·액면분할 재추진…주주 달래기 나섰다",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-04T09:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005759145?sid=101"
+    },
+    {
+     "title": "고려아연, 3분기 영업익 1417억…전년比 48%↓",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-04T09:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002247331?sid=101"
+    },
+    {
+     "title": "고려아연 3Q 영업익 전년 동기 대비 '반토막'난 1천417억원",
+     "press": "livebiz.today",
+     "publishedAt": "2026-11-04T09:22:00.000Z",
+     "link": "https://www.livebiz.today/news/articleView.html?idxno=206219"
     }
    ]
   },
@@ -80,61 +177,29 @@
     "daum"
    ],
    "articles90": 33,
-   "recent20": 3,
-   "press": 25,
-   "firstArticleAt": "2026-11-04T07:56:00.000Z",
+   "recent20": 4,
+   "press": 26,
+   "firstArticleAt": "2026-11-04T08:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[사설]‘블루 쓰나미’ 미 중간선거, 안보·경제 파장 면밀히 대비해야",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-04T09:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003480697?sid=110"
-    },
-    {
-     "title": "[美중간선거]트럼프, '블루 쓰나미' 맞았지만…한미 현안 '급선회'는 없...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T09:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009270561?sid=100"
-    },
-    {
-     "title": "美 덮친 '블루 쓰나미'…트럼프 조기 레임덕 가시화 전망",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-04T09:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000541728?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "대통령의 유튜브 소통",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 22,
-   "recent20": 6,
-   "press": 22,
-   "firstArticleAt": "2026-11-04T08:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'X' 다음은 'Y'…이 대통령, 이번엔 유튜브로 국민 만난다",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-04T09:24:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60680"
-    },
-    {
-     "title": "李, 유튜브로 직접 소통…'대통령의 Y' 시작",
+     "title": "美 '블루 쓰나미'… 트럼프, 상하원 모두 놓쳤다 [美 중간선거]",
      "press": "fnnews.com",
-     "publishedAt": "2026-11-04T09:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005599506?sid=100"
+     "publishedAt": "2026-11-04T09:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005599558?sid=104"
     },
     {
-     "title": "李 대통령, ‘X’ 넘어 유튜브서 대국민 소통… 5일 첫 방송",
-     "press": "segye.com",
-     "publishedAt": "2026-11-04T09:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004172532?sid=100"
+     "title": "\"블루 웨이브 넘어 블루 쓰나미\"…중간선거서 권력 바뀌면 한미 관계 영...",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-04T09:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001976707?sid=100"
+    },
+    {
+     "title": "美 중간선거 '블루 쓰나미'…선물은 급락 후 반등",
+     "press": "fortunekorea.co.kr",
+     "publishedAt": "2026-11-04T09:30:00.000Z",
+     "link": "https://www.fortunekorea.co.kr/news/articleView.html?idxno=54635"
     }
    ]
   },
@@ -143,42 +208,42 @@
    "sources": [
     "nate"
    ],
-   "articles90": 26,
-   "recent20": 7,
-   "press": 20,
+   "articles90": 28,
+   "recent20": 4,
+   "press": 22,
    "firstArticleAt": "2026-11-04T08:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "신촌 세브란스병원에서 흉기 휘둘러...의사 1명 부상",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-04T09:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002428341?sid=102"
+    },
+    {
+     "title": "신촌 세브란스병원서 흉기 사건… 의사 1명 부상",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-04T09:26:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3445990"
+    },
+    {
      "title": "신촌 세브란스서 50대 여성이 흉기 휘둘러…의사 부상",
      "press": "mbn.mk.co.kr",
      "publishedAt": "2026-11-04T09:23:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/057/0001976706?sid=102"
-    },
-    {
-     "title": "신촌 세브란스 병원서 환자가 흉기 휘둘러...1명 부상",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-04T09:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002428338?sid=102"
-    },
-    {
-     "title": "세브란스 병원서 50대 여성, 흉기 난동...의사1명 부상",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-04T09:16:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4116776"
     }
    ]
   },
   {
-   "keyword": "윤석열 선거법 2심 선고",
+   "keyword": "윤석열 선거법 당선무효형",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 22,
-   "recent20": 6,
-   "press": 19,
-   "firstArticleAt": "2026-11-04T07:58:00.000Z",
+   "articles90": 21,
+   "recent20": 3,
+   "press": 20,
+   "firstArticleAt": "2026-11-04T08:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -195,88 +260,22 @@
      "link": "https://n.news.naver.com/mnews/article/014/0005599505?sid=100"
     },
     {
-     "title": "尹 2심 유죄에 여야 공방…민주 “사과하라” vs 국힘 “李 파기환송 잊...",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-04T09:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003057207?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "코스피 하락 전환",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 16,
-   "recent20": 2,
-   "press": 16,
-   "firstArticleAt": "2026-11-04T07:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美 중간선거 불확실성 걷혔다…코스피 반등의 조건은",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-04T09:18:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611040221"
-    },
-    {
-     "title": "코스피 막판 뒤집기…'블루 웨이브' 수혜주 폭등",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-04T09:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000541734?sid=101"
-    },
-    {
-     "title": "美 '민주당 돌풍'에 코스피 요동…등락 끝 0.62% 상승 마감",
-     "press": "delighti.co.kr",
-     "publishedAt": "2026-11-04T09:04:00.000Z",
-     "link": "https://www.delighti.co.kr/news/articleView.html?idxno=124388"
-    }
-   ]
-  },
-  {
-   "keyword": "홍콩 ELS 과징금 3700억 확정",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 15,
-   "recent20": 0,
-   "press": 15,
-   "firstArticleAt": "2026-11-04T07:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "홍콩 ELS 부담 덜었다…과징금 대폭 감경에 은행권 환입 효과 기대",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-04T09:02:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261104010001721"
-    },
-    {
-     "title": "'홍콩 ELS' 3746억원 제재…은행 과징금 대폭 감경",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-04T08:56:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2121146"
-    },
-    {
-     "title": "금융위, 홍콩 ELS 불완전판매 7개 은행·6개 증권사에 3736억 '역대 최대...",
-     "press": "intn.co.kr",
-     "publishedAt": "2026-11-04T08:40:00.000Z",
-     "link": "http://www.intn.co.kr/news/articleView.html?idxno=2054509"
+     "title": "윤 선거법 '변수 없이' 2심도 유죄…대법원 최종 판단만 남았다",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-04T09:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000519137?sid=100"
     }
    ]
   },
   {
    "keyword": "할인",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 13,
-   "recent20": 4,
-   "press": 10,
-   "firstArticleAt": "2026-11-04T08:26:00.000Z",
+   "articles90": 12,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-04T08:36:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
@@ -301,14 +300,46 @@
    ]
   },
   {
+   "keyword": "딸은 메타, 아들은 엔비디아",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-04T08:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김보연 “딸 메타·아들 엔비디아 다녀…1년 용돈 만불” (찐여배우들)",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-04T09:28:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003539223"
+    },
+    {
+     "title": "\"딸은 메타·아들은 엔비디아\"…'이혼' 김보연, 두 자녀 근황 공개 [소셜...",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-04T08:54:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000326701"
+    },
+    {
+     "title": "\"딸은 메타·아들은 엔비디아…1년에 만불 용돈\" 김보연 자식농사 '대박...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-04T08:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014301881"
+    }
+   ]
+  },
+  {
    "keyword": "민호 마라톤 기록 반납",
    "sources": [
     "nate"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-04T07:56:00.000Z",
+   "articles90": 8,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-04T08:15:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -333,76 +364,62 @@
    ]
   },
   {
-   "keyword": "딸은 메타, 아들은 엔비디아",
+   "keyword": "국힘 397억 반환 위기",
    "sources": [
-    "nate"
+    "daum"
    ],
    "articles90": 7,
-   "recent20": 0,
+   "recent20": 3,
    "press": 7,
-   "firstArticleAt": "2026-11-04T08:08:00.000Z",
+   "firstArticleAt": "2026-11-04T08:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"딸은 메타·아들은 엔비디아\"…'이혼' 김보연, 두 자녀 근황 공개 [소셜...",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-04T08:54:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000326701"
+     "title": "尹 '선거법' 2심도 징역형… 국힘 397억 토해내나",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-04T09:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005599505?sid=100"
     },
     {
-     "title": "\"딸은 메타·아들은 엔비디아…1년에 만불 용돈\" 김보연 자식농사 '대박...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-04T08:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014301881"
-    },
-    {
-     "title": "“딸은 메타·아들은 엔비디아 다녀”…김보연, 자식농사 대박났다",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-04T08:26:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005759021"
-    }
-   ]
-  },
-  {
-   "keyword": "조작기소 특검법 규탄",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 19,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-04T08:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "野, 민주당 특검법 강행 규탄 … \"이재명 사법리스크 덮기 위한 사법 파...",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-04T09:12:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/04/2026110400378.html"
-    },
-    {
-     "title": "국힘 \"조작기소 특검은 기획떴다방\"…규탄대회하며 필버 채비(종합)",
+     "title": "'尹 거짓말' 2심도 당선 무효형…국힘 397억원 반환 위기(종합2보)",
      "press": "yna.co.kr",
-     "publishedAt": "2026-11-04T09:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016422225?sid=100"
+     "publishedAt": "2026-11-04T09:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016422239?sid=102"
     },
     {
-     "title": "국민의힘 \"조작 기소 특검법 막아 달라\" 호소",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-04T08:58:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3742463"
+     "title": "尹 2심 유죄에 여야 공방…민주 “사과하라” vs 국힘 “李 파기환송 잊...",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-04T09:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003057207?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 682,
-  "matched": 282,
-  "avgLeadMin": 286,
+  "flagged": 684,
+  "matched": 285,
+  "avgLeadMin": 284,
   "recent": [
+   {
+    "keyword": "코스피 하락 전환",
+    "hitKeyword": "코스피 요동 마감",
+    "hitAt": "2026-11-04T18:30:00+09:00",
+    "leadMin": 206
+   },
+   {
+    "keyword": "코스피 코스닥 상승 마감",
+    "hitKeyword": "코스피 요동 마감",
+    "hitAt": "2026-11-04T18:30:00+09:00",
+    "leadMin": 75
+   },
+   {
+    "keyword": "코스피 코스닥 상승",
+    "hitKeyword": "코스피 요동 마감",
+    "hitAt": "2026-11-04T18:30:00+09:00",
+    "leadMin": 44
+   },
    {
     "keyword": "2026 미래경제포럼 축사하는",
     "hitKeyword": "최동원 2026 영웅 선정",
@@ -444,24 +461,6 @@
     "hitKeyword": "트럼프 중간선거 결과 수용",
     "hitAt": "2026-11-04T17:00:00+09:00",
     "leadMin": 55
-   },
-   {
-    "keyword": "현대백화점 3분기 영업익 30%↑",
-    "hitKeyword": "쿠팡 3분기 연속 적자",
-    "hitAt": "2026-11-04T17:00:00+09:00",
-    "leadMin": 25
-   },
-   {
-    "keyword": "미국 중간선거 영향",
-    "hitKeyword": "트럼프 중간선거 결과 수용",
-    "hitAt": "2026-11-04T17:00:00+09:00",
-    "leadMin": 15
-   },
-   {
-    "keyword": "안세영 16강 진출!",
-    "hitKeyword": "야마구치 코리아오픈 16강",
-    "hitAt": "2026-11-04T17:00:00+09:00",
-    "leadMin": 15
    }
   ]
  }
