@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T23:12:33.908Z",
+ "builtAt": "2026-11-04T23:22:36.952Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,62 +15,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 44,
-   "recent20": 9,
-   "press": 41,
-   "firstArticleAt": "2026-11-04T21:44:00.000Z",
+   "articles90": 38,
+   "recent20": 6,
+   "press": 36,
+   "firstArticleAt": "2026-11-04T21:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "美민주당 압승에 다우 3% 급등 … 이란전 종식 기대·AI주는 희비",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-04T23:18:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/05/2026110500028.html"
+    },
+    {
+     "title": "美 민주당 '블루웨이브'에 다우 3.03% 급등... 반도체는 약세 [뉴욕증시...",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-04T23:16:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2014634"
+    },
     {
      "title": "뉴욕증시, 일제히 상승…다우 3% 급등, 19개월 만에 최대폭",
      "press": "issuenbiz.com",
      "publishedAt": "2026-11-04T23:10:00.000Z",
      "link": "http://www.issuenbiz.com/news/articleView.html?idxno=81242"
-    },
-    {
-     "title": "美선거 끝나자 뉴욕증시 급등…다우 3% 올라 5만3000선 회복",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-04T23:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002393365?sid=101"
-    },
-    {
-     "title": "美 민주당 '블루웨이브'에 뉴욕증시 급등…다우 3.03%↑",
-     "press": "kjdaily.com",
-     "publishedAt": "2026-11-04T23:06:00.000Z",
-     "link": "http://www.kjdaily.com/article.php?aid=1793833389691339276"
-    }
-   ]
-  },
-  {
-   "keyword": "국제유가 급락",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 36,
-   "recent20": 8,
-   "press": 32,
-   "firstArticleAt": "2026-11-04T21:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이란전 끝나나…美 민주당 압승에 국제유가 8%대 급락",
-     "press": "issuenbiz.com",
-     "publishedAt": "2026-11-04T23:10:00.000Z",
-     "link": "http://www.issuenbiz.com/news/articleView.html?idxno=81243"
-    },
-    {
-     "title": "증시 '급등' 속 트럼프 테마주 '폭락'...국제유가 8% 넘게 '급락'",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-04T23:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002428513?sid=104"
-    },
-    {
-     "title": "[증시전망대] 반도체 급락 속 美 증시 급등…\"한국 증시, 결국 반도체가...",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-04T23:06:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=67113"
     }
    ]
   },
@@ -80,63 +48,158 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 21,
-   "recent20": 9,
-   "press": 19,
-   "firstArticleAt": "2026-11-04T21:44:00.000Z",
+   "articles90": 22,
+   "recent20": 7,
+   "press": 21,
+   "firstArticleAt": "2026-11-04T21:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "쌀쌀한 날씨엔 경량 패딩으로… 켈러웨이 어패럴, 가을·겨울 라운드 스...",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-04T23:11:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/396/0000760066"
+     "title": "[날씨] 오늘 전국에 가을비…내일부터 기온 '뚝'",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-04T23:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001976781?sid=102"
     },
     {
-     "title": "[날씨] 출근길 전국 비…비 그치고 찬바람",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-04T23:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000923031?sid=103"
+     "title": "[날씨-전남광주] 5일 오후까지 최대 30㎜ 비와 6일부터 강풍·기온 급강...",
+     "press": "newsfreezone.co.kr",
+     "publishedAt": "2026-11-04T23:16:00.000Z",
+     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=717745"
     },
     {
-     "title": "[오늘날씨] \"추위는 덜한데 비가\"⋯전국 빗방울 떨어지고 제주도는 천둥...",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-04T23:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001072357?sid=103"
+     "title": "[날씨]전국 흐리고 비…낮 최고기온 19도",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-04T23:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005838253?sid=103"
     }
    ]
   },
   {
-   "keyword": "MLS 유니폼 판매량",
+   "keyword": "손흥민, 유니폼 판매 2위",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
+   "articles90": 10,
+   "recent20": 3,
+   "press": 10,
    "firstArticleAt": "2026-11-04T21:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "손흥민, MLS 유니폼 판매 2년 연속 2위…1위는 메시",
-     "press": "kado.net",
-     "publishedAt": "2026-11-04T22:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000209533?sid=104"
+     "title": "손흥민, MLS 유니폼 판매 2년 연속 2위…1위 메시는 4년 연속",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-04T23:22:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/396/0000760069"
     },
     {
-     "title": "[MLS] 손흥민, 메시에 이어 유니폼 판매량 '2년 연속 2위'",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-04T22:35:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261105000045"
+     "title": "올해도 ‘메시 다음은 손흥민!’…MLS 유니폼 판매 순위서 2위!",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-04T23:14:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/144/0001148162"
     },
     {
-     "title": "손흥민, 메시에 이어 MLS 유니폼 판매량 2년 연속 2위",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-04T22:26:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/052/0002428500"
+     "title": "손흥민, MLS 유니폼 판매량 ‘2년 연속 2위’…1위는?",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-04T23:12:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/119/0003151484"
+    }
+   ]
+  },
+  {
+   "keyword": "미국 중간선거와 유가 변동",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 4,
+   "press": 8,
+   "firstArticleAt": "2026-11-04T22:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[마켓 프리뷰] 美증시 급등에도 코스피 변동성 전망…반도체 수급 주목",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-04T23:16:00.000Z",
+     "link": "https://www.ajunews.com/view/20261105080449698"
+    },
+    {
+     "title": "[오늘 증시] 삼성전자·SK하이닉스 변동성 커지나",
+     "press": "kjdaily.com",
+     "publishedAt": "2026-11-04T23:12:00.000Z",
+     "link": "http://www.kjdaily.com/article.php?aid=1793833897691340276"
+    },
+    {
+     "title": "이란전 끝나나…美 민주당 압승에 국제유가 8%대 급락",
+     "press": "issuenbiz.com",
+     "publishedAt": "2026-11-04T23:10:00.000Z",
+     "link": "http://www.issuenbiz.com/news/articleView.html?idxno=81243"
+    }
+   ]
+  },
+  {
+   "keyword": "한지 태권도 北 단독 등재",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-04T22:10:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한지, 유네스코 인류무형유산 ‘등재 권고’…北 태권도 단독 등재 유력",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-04T23:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006403940?sid=103"
+    },
+    {
+     "title": "‘태권도가 북한 전통 무술?’… 인류무형유산 北 단독 등재 확실",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-04T23:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001883154?sid=103"
+    },
+    {
+     "title": "한지 vs 서예…유네스코 무형유산서 펼쳐지는 韓日 문화외교 [도쿄나우...",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-04T22:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005350499?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "대한항공 난동 트라우마",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-04T22:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“PTSD 생겼다”…‘기내 난동’ 바비킴, 11년째 대한항공 안 타는 이유",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-04T22:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005759209?sid=103"
+    },
+    {
+     "title": "바비킴, 기내 난동 논란 언급 “좌석 트라우마 생겨...아직 대한항공 안...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-04T22:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003539278"
+    },
+    {
+     "title": "“어디서든 의자 확인” 바비킴, 기내 난동 11년 만에 털어놓은 트라우...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-04T22:23:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001278371"
     }
    ]
   },
@@ -147,7 +210,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-04T22:51:00.000Z",
    "exclusive": false,
@@ -172,11 +235,43 @@
      "link": "https://m.sports.naver.com/wfootball/article/003/0014302535"
     }
    ]
+  },
+  {
+   "keyword": "전기 요금",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T21:55:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "부산 소상공인 에너지지원금 20만 원…수도·택시요금도 쓴다",
+     "press": "mhns.co.kr",
+     "publishedAt": "2026-11-04T23:08:00.000Z",
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=767634"
+    },
+    {
+     "title": "“전기료 덜 내려고”…9억 원대 ‘전기 도둑들’ 덜미",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-04T22:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012287656?sid=102"
+    },
+    {
+     "title": "계량기선 잘라 전기 절도‥9억 5천만 원 피해",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-04T21:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533591?sid=102"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 813,
+  "flagged": 818,
   "matched": 366,
   "avgLeadMin": 351,
   "recent": [
