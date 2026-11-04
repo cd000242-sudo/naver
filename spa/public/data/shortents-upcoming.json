@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T21:42:02.046Z",
+ "builtAt": "2026-11-04T21:52:05.454Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,66 +11,34 @@
  "measured": 27,
  "candidates": [
   {
-   "keyword": "이란",
-   "sources": [
-    "google"
-   ],
-   "articles90": 40,
-   "recent20": 11,
-   "press": 27,
-   "firstArticleAt": "2026-11-04T20:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "베선트 美 재무장관 \"이란 지원 세력 육·해·공 막론 제재\"",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-04T21:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000541793?sid=104"
-    },
-    {
-     "title": "트럼프 \"이란전 탓 선거 패배 … 다시 해야한다면 할 것\"",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-04T21:40:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/05/2026110500009.html"
-    },
-    {
-     "title": "밴스 “이란 전쟁 때문에 공화당 졌다”⋯국제유가 8%대 급락 [상보]",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-04T21:38:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2644290"
-    }
-   ]
-  },
-  {
    "keyword": "미국 중간선거 영향",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 31,
+   "articles90": 33,
    "recent20": 9,
-   "press": 27,
-   "firstArticleAt": "2026-11-04T20:17:00.000Z",
-   "exclusive": false,
+   "press": 29,
+   "firstArticleAt": "2026-11-04T20:24:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "뉴욕증시, 민주당 중간선거 압승에 급등…다우 3.03%↑",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-04T21:38:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=100635"
+     "title": "미 중간선거 '트럼프 참패'...한미관계 영향은? [뉴스특보]",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-04T21:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002428493?sid=104"
     },
     {
-     "title": "뉴욕증시, 미 중간선거 불확실성 해소에 일제히 급등",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-04T21:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012287622?sid=104"
+     "title": "[미 중간선거] \"트럼프의 참패 속에서 모색하는 보수 진영의 희망\" 폭스...",
+     "press": "wikileaks-kr.org",
+     "publishedAt": "2026-11-04T21:44:00.000Z",
+     "link": "https://www.wikileaks-kr.org/news/articleView.html?idxno=194215"
     },
     {
-     "title": "미국 증시, 민주당 의회 장악에 급등…빅테크 웃고 AI 데이터센터주 울...",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-04T21:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002247343?sid=105"
+     "title": "[뉴욕증시] 중간선거가 가른 잔인한 희비…다우 1,569p 폭등 vs 엔비디아...",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-04T21:44:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=202611050638147878e250e8e188_1"
     }
    ]
   },
@@ -79,30 +47,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 26,
-   "recent20": 7,
+   "articles90": 27,
+   "recent20": 8,
    "press": 22,
-   "firstArticleAt": "2026-11-04T20:14:00.000Z",
+   "firstArticleAt": "2026-11-04T20:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美민주당 압승에 국제유가 8% 급락…WTI, 90달러 아래로",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-04T21:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014302485?sid=104"
+     "title": "뉴욕증시 급등 마감…다우 1,569포인트 상승·국제유가 8%대 급락",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-04T21:50:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=93088"
     },
     {
-     "title": "밴스 “이란 전쟁 때문에 공화당 졌다”⋯국제유가 8%대 급락 [상보]",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-04T21:38:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2644290"
+     "title": "美민주 압승에 ‘이란전 종식’ 기대감…국제유가 2개월만 최저치로 폭...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-04T21:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002719027?sid=104"
     },
     {
-     "title": "[뉴욕증시] 중간선거 불확실성 사라지며 급등…'속슬' 8.8% 급락",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-04T21:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005599640?sid=101"
+     "title": "[속보]‘전쟁 끝나겠네’…국제유가 8% 폭락, 다우 3% 급등",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-04T21:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002830407?sid=101"
     }
    ]
   },
@@ -112,30 +80,62 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 7,
+   "articles90": 10,
+   "recent20": 3,
+   "press": 9,
    "firstArticleAt": "2026-11-04T20:30:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
+    {
+     "title": "\"조용히 진로 바꿀 것\"…젊은 의사 흔들어 놓은 소아응급실 압수수색",
+     "press": "docdocdoc.co.kr",
+     "publishedAt": "2026-11-04T21:48:00.000Z",
+     "link": "http://www.docdocdoc.co.kr/news/articleView.html?idxno=3044282"
+    },
+    {
+     "title": "서울 신촌 세브란스병원서 ‘흉기 난동’…의사 1명 부상",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-04T21:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012287627?sid=102"
+    },
     {
      "title": "6조 호남반도체 심의하는 자리에 카페 대표·정형외과 의사",
      "press": "news.tvchosun.com",
      "publishedAt": "2026-11-04T21:35:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/448/0000649062?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "삼성, 12회 연장 승리",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 10,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-04T20:29:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'수비 빼면 만점 활약' 삼성 디아즈, 방망이와 발로 승리 기여...경기 후...",
+     "press": "thesportstimes.co.kr",
+     "publishedAt": "2026-11-04T21:43:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/472/0000042287"
     },
     {
-     "title": "은퇴한 시니어 의사가 지방 병원을 다시 찾은 이유",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-04T21:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000923016?sid=102"
+     "title": "“심장 내려앉는 줄…10년 늙은 기분” 155km 강속구로 1점 차 승리 지킨...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-04T21:41:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/109/0005634994"
     },
     {
-     "title": "2회 연속 의사 출신 건보공단 이사장·심평원장",
-     "press": "dailymedi.com",
-     "publishedAt": "2026-11-04T21:12:00.000Z",
-     "link": "https://www.dailymedi.com/news/news_view.php?wr_id=941453"
+     "title": "'무릎에 사구 → 견제 → 홈으로 폭풍질주' 삼성의 돌격대장 \"그래 어디...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-04T21:31:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/076/0004463407"
     }
    ]
   },
@@ -147,10 +147,16 @@
    "articles90": 7,
    "recent20": 1,
    "press": 7,
-   "firstArticleAt": "2026-11-04T20:17:00.000Z",
+   "firstArticleAt": "2026-11-04T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "與, 오늘 본회의서 조작기소 특검법 처리 시도…野 필리버스터 맞불",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-04T21:42:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=100636"
+    },
     {
      "title": "‘조작 기소 특검법’ 여야 정면 충돌…여 ‘속도전’에 야 “필리버스...",
      "press": "news.kbs.co.kr",
@@ -162,44 +168,6 @@
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-04T21:18:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/214/0001533578?sid=100"
-    },
-    {
-     "title": "민주당, 오늘 '조작기소 특검법' 처리 추진…국힘 필리버스터 예고",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-04T21:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000649060?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "삼성, 12회 연장 승리",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 6,
-   "firstArticleAt": "2026-11-04T20:29:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“심장 내려앉는 줄…10년 늙은 기분” 155km 강속구로 1점 차 승리 지킨...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-04T21:41:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/109/0005634994"
-    },
-    {
-     "title": "'무릎에 사구 → 견제 → 홈으로 폭풍질주' 삼성의 돌격대장 \"그래 어디...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-04T21:31:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/076/0004463407"
-    },
-    {
-     "title": "박진만 감독, 연장 12회 승리에 안도",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-04T21:30:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611050009"
     }
    ]
   },
@@ -216,16 +184,16 @@
    "capped": false,
    "samples": [
     {
-     "title": "[오늘의 운세] 2026년 11월 5일 (목) 띠별운세 '입동을 앞두고 채비하자...",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-04T21:36:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103971"
-    },
-    {
      "title": "[오늘의 운세] 5일 목요일 나의 운세는?",
      "press": "ggilbo.com",
      "publishedAt": "2026-11-04T21:36:00.000Z",
      "link": "https://www.ggilbo.com/news/articleView.html?idxno=1190366"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 5일 (목) 띠별운세 '입동을 앞두고 채비하자...",
+     "press": "dailypop.kr",
+     "publishedAt": "2026-11-04T21:36:00.000Z",
+     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103971"
     },
     {
      "title": "[오늘의 운세] 2026년 11월 5일 별자리 운세",
@@ -236,12 +204,76 @@
    ]
   },
   {
+   "keyword": "롯데마트",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-04T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"고수온 여파로 굴 가격 30% '껑충'\"… 롯데마트, 사전 확보 물량 푼다",
+     "press": "popcornnews.net",
+     "publishedAt": "2026-11-04T21:48:00.000Z",
+     "link": "http://www.popcornnews.net/news/articleView.html?idxno=138776"
+    },
+    {
+     "title": "롯데마트, 햇굴 물량 1.5배 확보…11일까지 최대 35% 할인",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-04T21:00:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2644153"
+    },
+    {
+     "title": "롯데마트, 햇굴 물량 전년 대비 1.5배 확보…최대 35% 할인",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-04T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016422898?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "서인영 재혼",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-04T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘1억 꽃장식’ 잊은 서인영, 12월 26일 교회서 재혼…“가전 협찬 받아...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-04T21:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001278364"
+    },
+    {
+     "title": "서인영, 12월 26일 결혼 발표",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-04T21:32:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2644288"
+    },
+    {
+     "title": "서인영, 12월 26일 재혼 \"교회서 스몰 웨딩…축가·꽃 장식 다 뺐다\"('개...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-04T21:32:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1793827800530365010"
+    }
+   ]
+  },
+  {
    "keyword": "최지훈 대표와 결혼식",
    "sources": [
     "nate"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-04T21:00:00.000Z",
    "exclusive": false,
@@ -302,7 +334,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 800,
+  "flagged": 802,
   "matched": 350,
   "avgLeadMin": 315,
   "recent": [
