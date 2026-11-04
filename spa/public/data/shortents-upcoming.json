@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T16:40:10.927Z",
+ "builtAt": "2026-11-04T16:50:14.342Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "유병권 김수미",
@@ -43,67 +43,34 @@
    ]
   },
   {
-   "keyword": "한진칼 최대주주 호반건설로 변경",
+   "keyword": "서인영 12월 26일 재혼",
    "sources": [
-    "signal.bz",
     "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T15:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘의 경제뉴스] 한진칼 노리는 '최대주주' 호반의 창…조원태 방패 ...",
-     "press": "newsverse.kr",
-     "publishedAt": "2026-11-04T16:30:00.000Z",
-     "link": "https://www.newsverse.kr/news/articleView.html?idxno=11846"
-    },
-    {
-     "title": "한진칼 최대주주, 조원태 회장서 호반건설로 변경",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-04T15:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922976?sid=101"
-    },
-    {
-     "title": "한진칼 최대주주 호반건설로 변경… 조원태 회장 측, 지분 추가 매입 계...",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-04T15:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001883097?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "수사",
-   "sources": [
-    "google"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-04T15:16:00.000Z",
+   "firstArticleAt": "2026-11-04T15:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "봉제공장 화재, 방화 가능성 수사...\"경제적 어려움\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-04T16:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002428458?sid=102"
+     "title": "서인영, 12월 26일 재혼 발표 \"축가·꽃 장식 배제\"",
+     "press": "enter.etoday.co.kr",
+     "publishedAt": "2026-11-04T16:20:00.000Z",
+     "link": "https://enter.etoday.co.kr/news/view/304766"
     },
     {
-     "title": "강원경찰 과학수사의 날 맞아 유공자 포상⋯수사 역량 강화 다짐",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-04T15:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001228717?sid=102"
+     "title": "서인영, 12월 26일 재혼…“축가·꽃·안 좋은 기억 다 뺐다”",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-04T16:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003562967?sid=102"
     },
     {
-     "title": "'한동훈 딸 의혹' 쥔 중수청, 1호 사건 부담에 이첩도 수사도 멈췄다",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-04T15:16:00.000Z",
-     "link": "https://www.insight.co.kr/news/580698"
+     "title": "가수 서인영, 12월 26일 재혼 발표…교회서 소규모 진행",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-04T15:26:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=623059"
     }
    ]
   }
