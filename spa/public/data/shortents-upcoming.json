@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T23:32:40.731Z",
+ "builtAt": "2026-11-04T23:42:44.310Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,62 @@
    "sources": [
     "daum"
    ],
-   "articles90": 52,
-   "recent20": 16,
-   "press": 46,
+   "articles90": 58,
+   "recent20": 12,
+   "press": 52,
    "firstArticleAt": "2026-11-04T23:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "반도체 수출 폭발에 9월 경상흑자 첫 600억 달러 돌파…연간 4500억 달러...",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-04T23:30:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=67115"
+     "title": "반도체 수출 호조에 9월 경상흑자 614억달러…\"역대 최대\"",
+     "press": "youthdaily.co.kr",
+     "publishedAt": "2026-11-04T23:40:00.000Z",
+     "link": "https://www.youthdaily.co.kr/news/article.html?no=229380"
     },
     {
-     "title": "9월 경상수지 흑자 615억달러…반도체 수출 260% 급증",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-04T23:30:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=756072"
+     "title": "반도체 '폭풍 성장' 9월 경상흑자 사상 첫 600억 달러 돌파",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-04T23:40:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=202611050825389081bb91c46fcd_1"
     },
     {
-     "title": "9월 경상수지 614억달러 흑자, 사상 최대…반도체 수출 260% 급증",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-04T23:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000649088?sid=101"
+     "title": "9월 경상수지 흑자 600억달러 사상 첫 돌파…반도체 수출 260%↑",
+     "press": "tfmedia.co.kr",
+     "publishedAt": "2026-11-04T23:40:00.000Z",
+     "link": "https://www.tfmedia.co.kr/news/article.html?no=208646"
+    }
+   ]
+  },
+  {
+   "keyword": "뉴욕증시 급등",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 48,
+   "recent20": 5,
+   "press": 42,
+   "firstArticleAt": "2026-11-04T22:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[해외시황] 뉴욕증시, 美 선거 민주당 압승·이란 전쟁 종식 기대에 '급...",
+     "press": "newsprime.co.kr",
+     "publishedAt": "2026-11-04T23:40:00.000Z",
+     "link": "http://www.newsprime.co.kr/news/article.html?no=753778"
+    },
+    {
+     "title": "[뉴욕증시] 중간선거 ‘블루웨이브’…다우 3%↑",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-04T23:36:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261105503441?OutUrl=naver"
+    },
+    {
+     "title": "'민주당 탈환'에 뉴욕증시 급등…'빚테크' 과열 걷힐까 기대",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-04T23:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005436856?sid=101"
     }
    ]
   },
@@ -47,13 +79,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 35,
-   "recent20": 2,
-   "press": 34,
-   "firstArticleAt": "2026-11-04T22:04:00.000Z",
+   "articles90": 31,
+   "recent20": 1,
+   "press": 30,
+   "firstArticleAt": "2026-11-04T22:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[뉴욕증시] 중간선거 ‘블루웨이브’…다우 3%↑",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-04T23:36:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261105503441?OutUrl=naver"
+    },
     {
      "title": "美민주당 압승에 다우 3% 급등 … 이란전 종식 기대·AI주는 희비",
      "press": "newdaily.co.kr",
@@ -65,25 +103,115 @@
      "press": "m-i.kr",
      "publishedAt": "2026-11-04T23:16:00.000Z",
      "link": "https://www.m-i.kr/news/articleView.html?idxno=2014634"
+    }
+   ]
+  },
+  {
+   "keyword": "황인범, 2분만에 도움",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 17,
+   "recent20": 5,
+   "press": 16,
+   "firstArticleAt": "2026-11-04T22:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "포르투 황인범, 모레노 감독 앞에서 챔스리그 쐐기골 도움",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-04T23:38:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/011/0004678916"
     },
     {
-     "title": "뉴욕증시, 일제히 상승…다우 3% 급등, 19개월 만에 최대폭",
-     "press": "issuenbiz.com",
-     "publishedAt": "2026-11-04T23:10:00.000Z",
-     "link": "http://www.issuenbiz.com/news/articleView.html?idxno=81242"
+     "title": "포르투 황인범, 챔피언스리그 교체투입 2분 만에 도움‥팀은 대승",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-04T23:37:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/214/0001533618"
+    },
+    {
+     "title": "'대표팀 은퇴 논란' 황인범, 교체 투입 2분 만에 '시즌 2호 도움' 작렬!...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-04T23:35:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/117/0004122215"
+    }
+   ]
+  },
+  {
+   "keyword": "카카오 3분기 실적 증가",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 15,
+   "recent20": 7,
+   "press": 15,
+   "firstArticleAt": "2026-11-04T22:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"3분기 영업이익 2403억원 7% 증가\" 카카오 톡이 실적 끌고 AI가 다음 성...",
+     "press": "econovill.com",
+     "publishedAt": "2026-11-04T23:40:00.000Z",
+     "link": "https://www.econovill.com/news/articleView.html?idxno=756079"
+    },
+    {
+     "title": "카카오, 톡비즈 · 모빌리티 성장 힘입어 매출 6% · 영익 7% 증가",
+     "press": "worktoday.co.kr",
+     "publishedAt": "2026-11-04T23:38:00.000Z",
+     "link": "http://www.worktoday.co.kr/news/articleView.html?idxno=91488"
+    },
+    {
+     "title": "카톡 광고 늘고 선물하기 거래액 최대…카카오, 3Q 실적 성장",
+     "press": "sentv.co.kr",
+     "publishedAt": "2026-11-04T23:36:00.000Z",
+     "link": "https://www.sentv.co.kr/article/view/sentv202611050015"
+    }
+   ]
+  },
+  {
+   "keyword": "한지 태권도 北 단독 등재",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 4,
+   "press": 9,
+   "firstArticleAt": "2026-11-04T22:30:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "北태권도 유네스코 등재 눈앞…한국은 단독·확장 모두 난항 전망",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-04T23:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005599685?sid=103"
+    },
+    {
+     "title": "한국 ‘한지’, 北 ‘태권도’ 각각에 ‘등재 권고’ 나왔다",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-04T23:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004678917?sid=103"
+    },
+    {
+     "title": "韓 한지 유네스코 인류무형유산 등재 '청신호'…北 태권도도 '등재 권고...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-04T23:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009271355?sid=103"
     }
    ]
   },
   {
    "keyword": "손흥민, 유니폼 판매 2위",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-04T22:04:00.000Z",
+   "articles90": 8,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-04T22:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -108,47 +236,14 @@
    ]
   },
   {
-   "keyword": "미국 상원 하원 차이",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-04T22:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美알래스카 상원 선거 초박빙…'선호투표제'로 최종 승자 가린다",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T23:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009271345?sid=104"
-    },
-    {
-     "title": "미 민주, 상·하원 20년 만에 동시 탈환…상원 최소 54석·주지사 과반,...",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-04T23:04:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261105010001832"
-    },
-    {
-     "title": "[美 중간선거] 美 중간선거 민주당 상원 54석 확보…마지막 2석 초접전",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-04T23:04:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=2026110507594880459a1f309431_1"
-    }
-   ]
-  },
-  {
    "keyword": "미국 중간선거와 유가 변동",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-04T22:06:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-04T22:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -173,46 +268,110 @@
    ]
   },
   {
-   "keyword": "한지 태권도 北 단독 등재",
+   "keyword": "보이스 피싱",
    "sources": [
     "signal.bz",
-    "nate"
+    "google"
    ],
-   "articles90": 8,
-   "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-04T22:10:00.000Z",
-   "exclusive": true,
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T22:46:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "韓 한지 유네스코 인류무형유산 등재 '청신호'…北 태권도도 '등재 권고...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T23:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009271355?sid=103"
+     "title": "성남시, 기관·단체 대상 찾아가는 보이스피싱 예방교육 신청 접수",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-04T23:32:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2014626"
     },
     {
-     "title": "24번째로 유네스코 등재되는 '한지'…태권도는 결국 北에 내줘",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-04T23:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005436853?sid=103"
+     "title": "성남시, ‘찾아가는 보이스피싱 예방교육’ 운영… 20일까지 접수",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-04T23:32:00.000Z",
+     "link": "http://www.breaknews.com/1248555"
     },
     {
-     "title": "한지, 유네스코 인류무형유산 ‘등재 권고’…北 태권도 단독 등재 유력",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-04T23:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006403940?sid=103"
+     "title": "성남시, 고용우수기업 14곳 선정…보이스피싱 예방교육도 운영",
+     "press": "beyondpost.co.kr",
+     "publishedAt": "2026-11-04T22:46:00.000Z",
+     "link": "http://www.beyondpost.co.kr/view.php?ud=2026110507365536684c878f8fa1_30"
     }
    ]
   },
   {
-   "keyword": "대한항공 난동 트라우마",
+   "keyword": "최지훈 대표",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T22:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“재혼에는 1억 꽃장식 없다” 서인영, ♥NP 최지훈 대표와 12월 26일 결...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-04T23:34:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001184632"
+    },
+    {
+     "title": "서인영, 12월 26일 최지훈 대표와 재혼…교회서 스몰웨딩",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-04T23:27:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261105000095"
+    },
+    {
+     "title": "서인영, 최지훈 대표와 12월 26일 재혼 1억 꽃장식 빼고 사회는 이재율...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-04T22:46:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001146243"
+    }
+   ]
+  },
+  {
+   "keyword": "전기 요금",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T22:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“수도요금에 택시비까지 20만원 지원”…부산 소상공인 에너지바우처...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-04T23:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002830446?sid=102"
+    },
+    {
+     "title": "부산 소상공인 에너지지원금 20만 원…수도·택시요금도 쓴다",
+     "press": "mhns.co.kr",
+     "publishedAt": "2026-11-04T23:08:00.000Z",
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=767634"
+    },
+    {
+     "title": "“전기료 덜 내려고”…9억 원대 ‘전기 도둑들’ 덜미",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-04T22:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012287656?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "대한항공 안 타 바비킴 난동",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
+   "press": 3,
    "firstArticleAt": "2026-11-04T22:16:00.000Z",
    "exclusive": false,
    "capped": false,
@@ -230,52 +389,32 @@
      "link": "https://m.entertain.naver.com/article/241/0003539278"
     },
     {
-     "title": "“어디서든 의자 확인” 바비킴, 기내 난동 11년 만에 털어놓은 트라우...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-04T22:23:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001278371"
-    }
-   ]
-  },
-  {
-   "keyword": "유병권 성형수술",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T22:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "유병권 \"성형비만 5천만 원…물가 반영하면 억대\" 솔직 고백",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-04T23:16:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=623088"
-    },
-    {
-     "title": "'5000만원 성형' 유병권 과거 사진 공개...\"병원서 엄마 우셨다\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-04T23:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005436847"
-    },
-    {
-     "title": "유병권 \"눈·코·안면윤곽 등 성형수술…억대로 썼다\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-04T22:12:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014302511"
+     "title": "바비킴, 11년 전 기내 난동 논란 후유증 고백…“아직 그 항공사 안 타\"",
+     "press": "segye.com",
+     "publishedAt": "2026-11-04T22:16:00.000Z",
+     "link": "https://m.entertain.naver.com/article/022/0004172663"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 821,
-  "matched": 366,
-  "avgLeadMin": 351,
+  "flagged": 827,
+  "matched": 368,
+  "avgLeadMin": 349,
   "recent": [
+   {
+    "keyword": "의사",
+    "hitKeyword": "세브란스 정신과 의사 피습",
+    "hitAt": "2026-11-05T08:30:00+09:00",
+    "leadMin": 118
+   },
+   {
+    "keyword": "코모",
+    "hitKeyword": "코모 랑스 9-1 대승",
+    "hitAt": "2026-11-05T08:30:00+09:00",
+    "leadMin": 17
+   },
    {
     "keyword": "서울 외국인 소비 8.8조",
     "hitKeyword": "외국인 매도 코스피",
@@ -323,18 +462,6 @@
     "hitKeyword": "뉴욕증시 중간선거 급등",
     "hitAt": "2026-11-05T07:30:00+09:00",
     "leadMin": 2827
-   },
-   {
-    "keyword": "뉴욕증시 혼조 마감",
-    "hitKeyword": "뉴욕증시 중간선거 급등",
-    "hitAt": "2026-11-05T07:30:00+09:00",
-    "leadMin": 2787
-   },
-   {
-    "keyword": "뉴욕증시 혼조",
-    "hitKeyword": "뉴욕증시 중간선거 급등",
-    "hitAt": "2026-11-05T07:30:00+09:00",
-    "leadMin": 1429
    }
   ]
  }
