@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T19:01:04.454Z",
+ "builtAt": "2026-11-04T19:11:07.738Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,12 +11,12 @@
  "measured": 28,
  "candidates": [
   {
-   "keyword": "삼성, 12회 연장 승리",
+   "keyword": "삼성, 연장 12회 승리",
    "sources": [
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 2,
    "firstArticleAt": "2026-11-04T17:57:00.000Z",
    "exclusive": false,
@@ -45,7 +45,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 786,
+  "flagged": 787,
   "matched": 329,
   "avgLeadMin": 288,
   "recent": [
