@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T10:26:48.294Z",
+ "builtAt": "2026-11-04T10:36:52.465Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 22,
  "candidates": [
   {
-   "keyword": "한진칼 최대주주 변경",
+   "keyword": "강호동 구속영장",
    "sources": [
-    "daum"
-   ],
-   "articles90": 74,
-   "recent20": 9,
-   "press": 60,
-   "firstArticleAt": "2026-11-04T09:02:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[속보] 한진칼 최대주주, 조원태에서 호반그룹으로…지분 0.11%p 차이 '역...",
-     "press": "wolyo.co.kr",
-     "publishedAt": "2026-11-04T10:24:00.000Z",
-     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=320064"
-    },
-    {
-     "title": "호반, 한진칼 최대주주 등극…조원태 회장과 지분 경쟁 재점화",
-     "press": "press9.kr",
-     "publishedAt": "2026-11-04T10:22:00.000Z",
-     "link": "http://www.press9.kr/news/articleView.html?idxno=85608"
-    },
-    {
-     "title": "호반그룹, 한진칼 최대주주 등극. 칼자루는 산은에게?",
-     "press": "viewsnnews.com",
-     "publishedAt": "2026-11-04T10:18:00.000Z",
-     "link": "https://www.viewsnnews.com/article?q=239499"
-    }
-   ]
-  },
-  {
-   "keyword": "강호동 구속영장 신청",
-   "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 42,
-   "recent20": 3,
+   "recent20": 2,
    "press": 37,
-   "firstArticleAt": "2026-11-04T09:02:00.000Z",
-   "exclusive": true,
+   "firstArticleAt": "2026-11-04T09:14:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "경찰, 농협 강호동 회장 구속영장 신청…뇌물·공금 유용 혐의",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-04T10:28:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5079917"
+    },
+    {
      "title": "경찰, 강호동 농협중앙회장 구속영장 신청…금품수수 등 혐의",
-     "press": "busan.com",
+     "press": "seouleconews.com",
      "publishedAt": "2026-11-04T10:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001405714?sid=102"
+     "link": "http://www.seouleconews.com/news/articleView.html?idxno=94798"
     },
     {
      "title": "경찰, 강호동 농협중앙회장 구속영장 신청",
      "press": "foodnews.co.kr",
      "publishedAt": "2026-11-04T10:14:00.000Z",
      "link": "http://www.foodnews.co.kr/news/articleView.html?idxno=120837"
-    },
-    {
-     "title": "경찰, 강호동 농협중앙회장 구속영장 신청…1억원 뇌물수수 혐의",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-04T10:12:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261104001358"
     }
    ]
   },
@@ -79,10 +47,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 27,
-   "recent20": 1,
-   "press": 26,
-   "firstArticleAt": "2026-11-04T08:57:00.000Z",
+   "articles90": 18,
+   "recent20": 0,
+   "press": 18,
+   "firstArticleAt": "2026-11-04T09:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,17 +75,88 @@
    ]
   },
   {
+   "keyword": "윤석열 재판",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 18,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-04T09:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "부메랑 되어 돌아온 대선 당시 발언...법원이 다시 짚은 '윤석열의 거짓...",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-04T10:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002428364?sid=102"
+    },
+    {
+     "title": "尹 선거법 판결 엇갈린 여야…\"당장 반환\" vs \"李 재판 재개\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-04T10:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922908?sid=161"
+    },
+    {
+     "title": "與 조작기소특검법 처리 강행…野 \"李 재판취소 조작특검\"",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-04T10:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000963679?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "한국시리즈 2차전 시구",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 45,
+   "recent20": 4,
+   "press": 13,
+   "firstArticleAt": "2026-11-04T09:07:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[포토]KS 2차전 시구-시포 맡은 조범현-이만수 전 감독",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-04T10:20:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278142"
+    },
+    {
+     "title": "[포토]조범현 전 감독, KS 2차전 시구",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-04T10:20:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278140"
+    },
+    {
+     "title": "[포토]힘차게 시구하는 조범현 전 감독",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-04T10:20:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278139"
+    }
+   ]
+  },
+  {
    "keyword": "SK에코플랜트 완전 자회사 추진",
    "sources": [
     "nate"
    ],
-   "articles90": 24,
-   "recent20": 0,
-   "press": 23,
-   "firstArticleAt": "2026-11-04T08:58:00.000Z",
+   "articles90": 14,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-04T09:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "SK㈜, SK에코플랜트 상장 대신 완전자회사 편입 결정…주식 공개매수",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-04T10:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004206601?sid=101"
+    },
     {
      "title": "SK, SK에코플랜트 상장 대신 완전 자회사화 추진",
      "press": "thelec.kr",
@@ -129,76 +168,38 @@
      "press": "betanews.net",
      "publishedAt": "2026-11-04T09:46:00.000Z",
      "link": "https://www.betanews.net/article/view/beta202611040160"
-    },
-    {
-     "title": "SK에코플랜트, 상장 대신 SK 품으로",
-     "press": "asiatime.co.kr",
-     "publishedAt": "2026-11-04T09:42:00.000Z",
-     "link": "https://www.asiatime.co.kr/article/20261104500416"
     }
    ]
   },
   {
-   "keyword": "조작기소 특검법 논란",
+   "keyword": "조작기소 특검법 규탄대회",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 19,
+   "articles90": 10,
    "recent20": 2,
-   "press": 17,
-   "firstArticleAt": "2026-11-04T09:00:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'조작기소 특검법' 법사위 소위 통과…野 반발에 안건조정위 회부",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-04T10:14:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=728051"
-    },
-    {
-     "title": "\"공소취소용\" \"억지\"…조작기소 특검, 檢수사권·추천권 논란 [이정우의...",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-04T10:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005350420?sid=100"
-    },
-    {
-     "title": "조작기소 특검법, 與 주도 법사소위 통과… 국힘 \"李 위해 부역\"",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-04T10:00:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3445986"
-    }
-   ]
-  },
-  {
-   "keyword": "고영표",
-   "sources": [
-    "google"
-   ],
-   "articles90": 35,
-   "recent20": 21,
-   "press": 12,
-   "firstArticleAt": "2026-11-04T09:45:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-04T09:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[포토S] 고영표, '온 힘을 다해'",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-04T10:26:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/477/0000637157"
+     "title": "조작기소특검법, 법사위 안건조정위로...국힘 “본회의 상정 시 모든 법...",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-04T10:28:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1135250"
     },
     {
-     "title": "고영표의 미소[포토]",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-04T10:26:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/311/0002076602"
-    },
-    {
-     "title": "KBO 한국시리즈 2차전 선발에 고영표 등판",
-     "press": "joongboo.com",
+     "title": "국힘, 與 '조작기소 특검법' 추진에 맞서 필리버스터 예고",
+     "press": "wolyo.co.kr",
      "publishedAt": "2026-11-04T10:24:00.000Z",
-     "link": "https://www.joongboo.com/news/articleView.html?idxno=363741541"
+     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=320063"
+    },
+    {
+     "title": "野, '조작 기소 특검법' 저지 총력전…본회의 앞두고 필리버스터 예고",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-04T10:04:00.000Z",
+     "link": "https://www.ajunews.com/view/20261104185103302"
     }
    ]
   },
@@ -207,15 +208,21 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-04T08:58:00.000Z",
+   "articles90": 7,
+   "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-04T09:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "급등과 폭락 반복한 코스피…무엇이 흔들었나 [Visual]",
+     "title": "코스피, 400포인트 넘는 롤러코스터 장세…개인·기관 매수세에 상승 마...",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-04T10:32:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=846192"
+    },
+    {
+     "title": "급등과 급락 반복한 코스피…무엇이 흔들었나 [Visual]",
      "press": "mk.co.kr",
      "publishedAt": "2026-11-04T10:22:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/009/0005759149?sid=101"
@@ -225,97 +232,60 @@
      "press": "wowtv.co.kr",
      "publishedAt": "2026-11-04T10:20:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/215/0001271681?sid=101"
-    },
-    {
-     "title": "코스피, 美 중간선거에 '널뛰기'…4% 급락 후 반등",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-04T09:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922891?sid=101"
     }
    ]
   },
   {
    "keyword": "영평상 시상식 참석",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 1,
+   "articles90": 7,
+   "recent20": 2,
    "press": 6,
-   "firstArticleAt": "2026-11-04T08:58:00.000Z",
+   "firstArticleAt": "2026-11-04T09:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "서수빈, 신인여우상 영광…\"최선 다해 실수하고 배울 것\" [46회 영평상]",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-04T10:27:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009270712"
+    },
+    {
+     "title": "[46회 영평상] 박지훈 신인남우상…평론가 \"소년과 범의 눈 함께 연기\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-04T10:27:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000519148"
+    },
     {
      "title": "전도연·조인성, 제46회 영평상 주연상 주인공",
      "press": "sports.hankooki.com",
      "publishedAt": "2026-11-04T10:16:00.000Z",
      "link": "https://sports.hankooki.com/news/articleView.html?idxno=6942896"
-    },
-    {
-     "title": "[포토] 신혜선 ‘영평상 수상하러 왔어요’",
-     "press": "heraldmuse.com",
-     "publishedAt": "2026-11-04T10:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/112/0003812174"
-    },
-    {
-     "title": "[사진]홍경표 촬영감독,'영평상 시상식 참석'",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-04T09:54:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005634537"
-    }
-   ]
-  },
-  {
-   "keyword": "대학 총장",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-04T09:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국립창원대, 폴란드 3개 대학과 국제공동연구 협력 확대",
-     "press": "mhns.co.kr",
-     "publishedAt": "2026-11-04T10:14:00.000Z",
-     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=767588"
-    },
-    {
-     "title": "충북대, QS 아시아 대학 평가 211위",
-     "press": "ccdn.co.kr",
-     "publishedAt": "2026-11-04T09:56:00.000Z",
-     "link": "https://www.ccdn.co.kr/news/articleView.html?idxno=1109070"
-    },
-    {
-     "title": "군장대학교, 케냐 외국인 유학생 간담회...안정적인 대학생활 지원",
-     "press": "sjbnews.com",
-     "publishedAt": "2026-11-04T09:26:00.000Z",
-     "link": "https://sjbnews.com/news/news.php?number=891798"
     }
    ]
   },
   {
    "keyword": "한우",
    "sources": [
+    "signal.bz",
     "google"
    ],
    "articles90": 6,
-   "recent20": 0,
+   "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-04T09:04:00.000Z",
+   "firstArticleAt": "2026-11-04T09:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[인터뷰] 제29회 전국한우능력평가대회 대통령상 수상 '술뫼농장' 이병...",
-     "press": "farminsight.net",
-     "publishedAt": "2026-11-04T09:54:00.000Z",
-     "link": "https://www.farminsight.net/news/articleView.html?idxno=17169"
+     "title": "목포무안신안축협, 전국한우경진대회서 경쟁력 입증",
+     "press": "kjdaily.com",
+     "publishedAt": "2026-11-04T10:36:00.000Z",
+     "link": "http://www.kjdaily.com/article.php?aid=1793788288691287074"
     },
     {
      "title": "[현장] 9864만 원 '역대 최고가' 갈아치운 슈퍼 한우 탄생",
@@ -324,10 +294,10 @@
      "link": "https://www.farminsight.net/news/articleView.html?idxno=17168"
     },
     {
-     "title": "대한한돈협회 고창지부·전국한우협회 고창군지부, 장학금 1천만원 기탁",
-     "press": "sjbnews.com",
-     "publishedAt": "2026-11-04T09:25:00.000Z",
-     "link": "https://sjbnews.com/news/news.php?number=891734"
+     "title": "[인터뷰] 제29회 전국한우능력평가대회 대통령상 수상 '술뫼농장' 이병...",
+     "press": "farminsight.net",
+     "publishedAt": "2026-11-04T09:54:00.000Z",
+     "link": "https://www.farminsight.net/news/articleView.html?idxno=17169"
     }
    ]
   },
@@ -337,7 +307,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-04T09:38:00.000Z",
    "exclusive": false,
@@ -362,78 +332,32 @@
      "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443062"
     }
    ]
-  },
-  {
-   "keyword": "홍콩 ELS 과징금 3700억 확정",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T09:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "홍콩 ELS 제재 3년 만에 결론…과징금 ‘4조→3700억’ 확정",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-04T09:46:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611040235"
-    },
-    {
-     "title": "홍콩 ELS 과징금 3746억 역대최대",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-04T09:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005599559?sid=101"
-    },
-    {
-     "title": "홍콩 ELS 부담 덜었다…과징금 대폭 감경에 은행권 환입 효과 기대",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-04T09:02:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261104010001721"
-    }
-   ]
-  },
-  {
-   "keyword": "블루 쓰나미 미국 정치 변화",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T09:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[뉴스잇] 美중간선거 '블루 쓰나미' 전망…민주, 양원 모두 탈환할듯",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-04T09:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922890?sid=104"
-    },
-    {
-     "title": "[사설]‘블루 쓰나미’ 미 중간선거, 안보·경제 파장 면밀히 대비해야",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-04T09:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003480697?sid=110"
-    },
-    {
-     "title": "美 ‘블루 쓰나미’에도 K방산 선방…수주·실적 따라 희비",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-04T09:02:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2644163"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 700,
-  "matched": 287,
-  "avgLeadMin": 282,
+  "flagged": 703,
+  "matched": 290,
+  "avgLeadMin": 281,
   "recent": [
+   {
+    "keyword": "노스캐롤라이나 상원 민주 승리",
+    "hitKeyword": "민주당 상원 경합지 승리",
+    "hitAt": "2026-11-04T19:30:00+09:00",
+    "leadMin": 356
+   },
+   {
+    "keyword": "SK SK에코플랜트 공개매수",
+    "hitKeyword": "호반 한진칼 공개매수",
+    "hitAt": "2026-11-04T19:30:00+09:00",
+    "leadMin": 84
+   },
+   {
+    "keyword": "한진칼 최대주주 변경",
+    "hitKeyword": "호반 한진칼 공개매수",
+    "hitAt": "2026-11-04T19:30:00+09:00",
+    "leadMin": 44
+   },
    {
     "keyword": "민호 마라톤 기록 반납",
     "hitKeyword": "샤이니 민호 마라톤",
@@ -475,24 +399,6 @@
     "hitKeyword": "돌싱N모솔 2기",
     "hitAt": "2026-11-04T18:00:00+09:00",
     "leadMin": 1041
-   },
-   {
-    "keyword": "민주당 상하원 탈환",
-    "hitKeyword": "미국 중간선거 민주당",
-    "hitAt": "2026-11-04T18:00:00+09:00",
-    "leadMin": 24
-   },
-   {
-    "keyword": "글렌체크 김준원 아내 소속사",
-    "hitKeyword": "차예련 소속사 입장",
-    "hitAt": "2026-11-04T17:30:00+09:00",
-    "leadMin": 428
-   },
-   {
-    "keyword": "2026 푸드위크 코리아",
-    "hitKeyword": "코리아 오픈 안세영",
-    "hitAt": "2026-11-04T17:30:00+09:00",
-    "leadMin": 246
    }
   ]
  }
