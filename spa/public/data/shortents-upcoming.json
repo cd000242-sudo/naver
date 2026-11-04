@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T04:13:36.835Z",
+ "builtAt": "2026-11-04T04:23:41.224Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 28,
  "candidates": [
-  {
-   "keyword": "미국 중간선거",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 54,
-   "recent20": 35,
-   "press": 33,
-   "firstArticleAt": "2026-11-04T03:37:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "트럼프 “난 투표용지에 없었다, 있었다면 압승”…중간선거 부진에 선...",
-     "press": "donga.com",
-     "publishedAt": "2026-11-04T04:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003759986?sid=104"
-    },
-    {
-     "title": "[경제읽기] 상승 출발했던 코스피 하락 전환…美중간선거 주목",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-04T04:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922786?sid=101"
-    },
-    {
-     "title": "[중간선거] MUFG \"민주당 양원 장악 시 亞 통화 강세 전망\"",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-04T04:10:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4442975"
-    }
-   ]
-  },
   {
    "keyword": "트럼프 공화당",
    "sources": [
     "daum"
    ],
-   "articles90": 42,
-   "recent20": 19,
-   "press": 31,
-   "firstArticleAt": "2026-11-04T03:12:00.000Z",
+   "articles90": 48,
+   "recent20": 23,
+   "press": 34,
+   "firstArticleAt": "2026-11-04T03:32:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "트럼프 “난 투표용지에 없었다, 있었다면 압승”…중간선거 부진에 선...",
-     "press": "donga.com",
-     "publishedAt": "2026-11-04T04:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003759986?sid=104"
+     "title": "美 민주당, 상·하원 장악 전망...트럼프 \"중간선거 결과 수용…민주당...",
+     "press": "eroun.net",
+     "publishedAt": "2026-11-04T04:22:00.000Z",
+     "link": "https://www.eroun.net/news/articleView.html?idxno=94351"
     },
     {
-     "title": "[미 중간선거] 공화당 참패에 트럼프 \"내 이름 없어서 졌다…나왔으면 ...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-04T04:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003151210?sid=104"
+     "title": "트럼프 \"중간선거 결과 받아들일 것… 민주당과 협력하겠다\"",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-04T04:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000191432?sid=104"
     },
     {
-     "title": "[속보]텍사스 상원서도 민주당 승리 예측···공화당 30년 아성 무너뜨...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-04T04:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003480597?sid=104"
+     "title": "트럼프 \"중간선거 결과 수용…민주당과 협력 준비돼 있어\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-04T04:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014300872?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "미국 중간선거",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 60,
+   "recent20": 40,
+   "press": 32,
+   "firstArticleAt": "2026-11-04T03:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[美중간선거] '제주 고씨' 댄 고, 매사추세츠 하원의원 당선",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-04T04:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005599269?sid=104"
+    },
+    {
+     "title": "美 민주당, 상·하원 장악 전망...트럼프 \"중간선거 결과 수용…민주당...",
+     "press": "eroun.net",
+     "publishedAt": "2026-11-04T04:22:00.000Z",
+     "link": "https://www.eroun.net/news/articleView.html?idxno=94351"
+    },
+    {
+     "title": "美 중간선거발 데이터센터 규제 우려…코스피 5500↓·코스닥 700↓",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-04T04:22:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2643998"
+    }
+   ]
+  },
+  {
+   "keyword": "김민석 민주당 대표",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 47,
+   "recent20": 2,
+   "press": 29,
+   "firstArticleAt": "2026-11-04T02:54:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정청래, 김민석 겨냥 \"사과는 가해자 의무, 용서는 피해자 권리…쉴드치...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-04T04:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001038304?sid=100"
+    },
+    {
+     "title": "김민석, '신천지 3자 연합' 의혹 사과했지만…친청계 \"공개 사과·책임져...",
+     "press": "thepublic.kr",
+     "publishedAt": "2026-11-04T04:16:00.000Z",
+     "link": "https://www.thepublic.kr/news/articleView.html?idxno=325095"
+    },
+    {
+     "title": "신천지 갈등 확산…김민석 리더십 시험대",
+     "press": "naeil.com",
+     "publishedAt": "2026-11-04T04:02:00.000Z",
+     "link": "https://www.naeil.com/news/read/607556?ref=naver"
     }
    ]
   },
@@ -80,73 +112,40 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 35,
-   "recent20": 3,
-   "press": 28,
-   "firstArticleAt": "2026-11-04T02:44:00.000Z",
+   "articles90": 34,
+   "recent20": 4,
+   "press": 27,
+   "firstArticleAt": "2026-11-04T02:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "범여권 주도 공소취소특검법 상정…국힘 \"법 죽이는 법사위\"",
+     "press": "sisafocus.co.kr",
+     "publishedAt": "2026-11-04T04:20:00.000Z",
+     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367181"
+    },
+    {
+     "title": "'조작기소 특검법' 놓고 충돌…\"이 대통령 재판 없애려\"vs\"공소 취소 내...",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-04T04:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400572?sid=100"
+    },
     {
      "title": "조작기소 특검법, 與주도 법사위 상정…5일 본회의 처리 추진",
      "press": "jnilbo.com",
      "publishedAt": "2026-11-04T04:05:00.000Z",
      "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000079517"
-    },
-    {
-     "title": "조작기소 특검법 앞두고 여야 대치 격화",
-     "press": "naeil.com",
-     "publishedAt": "2026-11-04T04:04:00.000Z",
-     "link": "https://www.naeil.com/news/read/607557?ref=naver"
-    },
-    {
-     "title": "'조작 기소 특검법' 상정 앞두고 법사위 퇴장한 국민의힘",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T03:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009269609?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "발언하는 김민석 대표",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 20,
-   "recent20": 0,
-   "press": 19,
-   "firstArticleAt": "2026-11-04T02:44:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김민석 \"신천지, 대단히 죄송\" 울컥...친청계 \"당대표 사퇴\" 요구도 [시...",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-04T03:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002428203?sid=100"
-    },
-    {
-     "title": "김민석 “당 통합·민생 매진”...‘신천지 의혹’ 공개 사과 요구에 당...",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-04T03:48:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=72576"
-    },
-    {
-     "title": "한민수 민주당 최고위원 “김민석 대표, 공개사과-상응책임” 요구",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-04T03:44:00.000Z",
-     "link": "http://www.breaknews.com/1248269"
     }
    ]
   },
   {
    "keyword": "관계성 범죄 전수점검",
    "sources": [
-    "signal.bz",
-    "daum"
+    "signal.bz"
    ],
    "articles90": 18,
-   "recent20": 1,
+   "recent20": 0,
    "press": 17,
    "firstArticleAt": "2026-11-04T03:00:00.000Z",
    "exclusive": false,
@@ -173,14 +172,78 @@
    ]
   },
   {
-   "keyword": "특검 투표록 위변조",
+   "keyword": "2026 푸드위크 코리아",
    "sources": [
     "nate"
    ],
-   "articles90": 16,
+   "articles90": 20,
    "recent20": 1,
-   "press": 15,
-   "firstArticleAt": "2026-11-04T02:51:00.000Z",
+   "press": 16,
+   "firstArticleAt": "2026-11-04T02:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "NS홈쇼핑, '2026 푸드위크 코리아' 참가…협력사 전시 비용 전액 지원",
+     "press": "newsdream.kr",
+     "publishedAt": "2026-11-04T04:18:00.000Z",
+     "link": "http://www.newsdream.kr/news/articleView.html?idxno=121471"
+    },
+    {
+     "title": "제철 식품과 컵라면을 함께 선보인 ‘2026 푸드위크 코리아’",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-04T04:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005758798?sid=103"
+    },
+    {
+     "title": "'푸드위크 코리아' 개막…46개국 바이어 집결",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-04T04:02:00.000Z",
+     "link": "https://www.ajunews.com/view/20261104084901910"
+    }
+   ]
+  },
+  {
+   "keyword": "항의하는 국민의힘",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 30,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-04T02:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "「M포토」 서영교 위원장에 항의하는 박형수 법사위 야당 간사",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-04T04:02:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=72577"
+    },
+    {
+     "title": "법사위원장에게 항의하는 국민의힘 간사",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-04T03:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009269611?sid=100"
+    },
+    {
+     "title": "[포토]국민의힘 의원들, 법사위 회의 진행 항의하며 퇴장",
+     "press": "sisafocus.co.kr",
+     "publishedAt": "2026-11-04T03:54:00.000Z",
+     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367183"
+    }
+   ]
+  },
+  {
+   "keyword": "특검, 투표록 사후 위변조",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 11,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-04T02:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -205,71 +268,39 @@
    ]
   },
   {
-   "keyword": "항의하는 국민의힘",
+   "keyword": "댄고 하원의원 당선",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 35,
-   "recent20": 4,
-   "press": 13,
-   "firstArticleAt": "2026-11-04T02:47:00.000Z",
+   "articles90": 9,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-04T03:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "「M포토」 서영교 위원장에 항의하는 박형수 법사위 야당 간사",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-04T04:02:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=72577"
+     "title": "'제주 고씨' 댄고, 美민주당 연방 하원의원 당선",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-04T04:22:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/324113/?sc=Naver"
     },
     {
-     "title": "법사위원장에게 항의하는 국민의힘 간사",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T03:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009269611?sid=100"
+     "title": "‘제주 고씨’ 댄고, 美 하원 당선",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-04T03:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003695646?sid=104"
     },
     {
-     "title": "'조작 기소 특검법' 상정 앞두고 법사위 퇴장한 국민의힘",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T03:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009269609?sid=100"
+     "title": "[속보] '제주 고씨' 댄고, 미 민주당 연방 하원의원 당선",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-04T03:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533464?sid=104"
     }
    ]
   },
   {
-   "keyword": "ap",
-   "sources": [
-    "google"
-   ],
-   "articles90": 13,
-   "recent20": 6,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T03:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "APTOPIX Election 2026 Michigan",
-     "press": null,
-     "publishedAt": "2026-11-04T04:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/077/0007226506?sid=104"
-    },
-    {
-     "title": "APTOPIX Election 2026 Texas Governor",
-     "press": null,
-     "publishedAt": "2026-11-04T04:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/077/0007226502?sid=104"
-    },
-    {
-     "title": "APTOPIX Election 2026 Texas Senate",
-     "press": null,
-     "publishedAt": "2026-11-04T04:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/077/0007226489?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "원혁, 장인 덕에 오열",
+   "keyword": "원혁, 장인 덕 오열",
    "sources": [
     "nate"
    ],
@@ -301,41 +332,73 @@
    ]
   },
   {
-   "keyword": "프로농구 드래프트 순위 추첨 9일 개최",
+   "keyword": "ap",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 3,
-   "recent20": 0,
+   "articles90": 10,
+   "recent20": 4,
    "press": 3,
-   "firstArticleAt": "2026-11-04T02:47:00.000Z",
+   "firstArticleAt": "2026-11-04T03:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'20%의 행운을 잡아라' 2026 KBL 신인 드래프트 순위 추첨식 9일 개최",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-04T03:30:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/241/0003539166"
+     "title": "APTOPIX Election 2026 Michigan",
+     "press": null,
+     "publishedAt": "2026-11-04T04:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/077/0007226506?sid=104"
     },
     {
-     "title": "프로농구 신인 드래프트 순위 추첨식 9일 개최",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-04T03:03:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/055/0001400556"
+     "title": "APTOPIX Election 2026 Texas Governor",
+     "press": null,
+     "publishedAt": "2026-11-04T04:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/077/0007226502?sid=104"
     },
     {
-     "title": "프로농구 신인선수 드래프트 순위 추첨 9일 개최",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T02:47:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/421/0009269438"
+     "title": "APTOPIX Election 2026 Texas Senate",
+     "press": null,
+     "publishedAt": "2026-11-04T04:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/077/0007226489?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "시험",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T03:40:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "시흥도시공사, 월곶역세권 개발 첫 시험대…1,641억 원 입찰",
+     "press": "sentv.co.kr",
+     "publishedAt": "2026-11-04T04:20:00.000Z",
+     "link": "https://www.sentv.co.kr/article/view/sentv202611040076"
+    },
+    {
+     "title": "KTC, 전력기자재 시험·인증 역량 선봬",
+     "press": "naeil.com",
+     "publishedAt": "2026-11-04T04:06:00.000Z",
+     "link": "https://www.naeil.com/news/read/607519?ref=naver"
+    },
+    {
+     "title": "신천지 갈등 확산…김민석 리더십 시험대",
+     "press": "naeil.com",
+     "publishedAt": "2026-11-04T04:02:00.000Z",
+     "link": "https://www.naeil.com/news/read/607556?ref=naver"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 584,
+  "flagged": 590,
   "matched": 246,
   "avgLeadMin": 290,
   "recent": [
