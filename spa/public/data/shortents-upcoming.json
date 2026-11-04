@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T23:02:30.711Z",
+ "builtAt": "2026-11-04T23:12:33.908Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,66 @@
  "measured": 24,
  "candidates": [
   {
-   "keyword": "국제유가 급락",
+   "keyword": "다우 존스 산업평균지수",
    "sources": [
-    "daum"
+    "google"
    ],
-   "articles90": 38,
-   "recent20": 6,
-   "press": 33,
-   "firstArticleAt": "2026-11-04T21:34:00.000Z",
+   "articles90": 44,
+   "recent20": 9,
+   "press": 41,
+   "firstArticleAt": "2026-11-04T21:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美 선거 끝나자 국제유가 급락... 다우지수 19개월 만에 최대폭 상승",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-04T23:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000963723?sid=104"
+     "title": "뉴욕증시, 일제히 상승…다우 3% 급등, 19개월 만에 최대폭",
+     "press": "issuenbiz.com",
+     "publishedAt": "2026-11-04T23:10:00.000Z",
+     "link": "http://www.issuenbiz.com/news/articleView.html?idxno=81242"
     },
     {
-     "title": "국제유가 8%대 급락…美 민주당 양원 장악에 이란戰 종식 기대",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-04T23:00:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=779093"
+     "title": "美선거 끝나자 뉴욕증시 급등…다우 3% 올라 5만3000선 회복",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-04T23:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002393365?sid=101"
     },
     {
-     "title": "미국 중간선거에 월가 '환호'···다우 3% 급등·국제유가 8% 폭락",
-     "press": "smartbizn.com",
-     "publishedAt": "2026-11-04T22:58:00.000Z",
-     "link": "https://www.smartbizn.com/news/articleView.html?idxno=158491"
+     "title": "美 민주당 '블루웨이브'에 뉴욕증시 급등…다우 3.03%↑",
+     "press": "kjdaily.com",
+     "publishedAt": "2026-11-04T23:06:00.000Z",
+     "link": "http://www.kjdaily.com/article.php?aid=1793833389691339276"
+    }
+   ]
+  },
+  {
+   "keyword": "국제유가 급락",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 36,
+   "recent20": 8,
+   "press": 32,
+   "firstArticleAt": "2026-11-04T21:45:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이란전 끝나나…美 민주당 압승에 국제유가 8%대 급락",
+     "press": "issuenbiz.com",
+     "publishedAt": "2026-11-04T23:10:00.000Z",
+     "link": "http://www.issuenbiz.com/news/articleView.html?idxno=81243"
+    },
+    {
+     "title": "증시 '급등' 속 트럼프 테마주 '폭락'...국제유가 8% 넘게 '급락'",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-04T23:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002428513?sid=104"
+    },
+    {
+     "title": "[증시전망대] 반도체 급락 속 美 증시 급등…\"한국 증시, 결국 반도체가...",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-04T23:06:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=67113"
     }
    ]
   },
@@ -48,30 +80,30 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 20,
-   "recent20": 8,
-   "press": 18,
-   "firstArticleAt": "2026-11-04T21:35:00.000Z",
+   "articles90": 21,
+   "recent20": 9,
+   "press": 19,
+   "firstArticleAt": "2026-11-04T21:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "11월 05일 목요일, 오늘의 날씨와 미세먼지 농도 [인포그래픽]",
-     "press": "sisunnews.co.kr",
-     "publishedAt": "2026-11-04T23:00:00.000Z",
-     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249081"
+     "title": "쌀쌀한 날씨엔 경량 패딩으로… 켈러웨이 어패럴, 가을·겨울 라운드 스...",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-04T23:11:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/396/0000760066"
     },
     {
-     "title": "[모닝와이드 날씨]-오늘 오후까지 비..내일 낮부터 기온 떨어져",
-     "press": "news.knn.co.kr",
-     "publishedAt": "2026-11-04T22:58:00.000Z",
-     "link": "https://news.knn.co.kr/news/article/194058"
+     "title": "[날씨] 출근길 전국 비…비 그치고 찬바람",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-04T23:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000923031?sid=103"
     },
     {
-     "title": "[오늘 날씨] 전국 대부분 비…경남·제주 10~40mm 강수, 내일부터 기온 ...",
-     "press": "mhns.co.kr",
-     "publishedAt": "2026-11-04T22:58:00.000Z",
-     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=767608"
+     "title": "[오늘날씨] \"추위는 덜한데 비가\"⋯전국 빗방울 떨어지고 제주도는 천둥...",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-04T23:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001072357?sid=103"
     }
    ]
   },
@@ -107,14 +139,89 @@
      "link": "https://m.sports.naver.com/wfootball/article/052/0002428500"
     }
    ]
+  },
+  {
+   "keyword": "코모",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T22:51:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "'9골 폭발' 첫 출전에 챔피언스리그 역사 쓴 伊 코모",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-04T23:09:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/079/0004206656"
+    },
+    {
+     "title": "그야말로 '미친 화력'… 무자비한 파브레가스의 코모, 랑스 원정서 9-1 ...",
+     "press": "besteleven.com",
+     "publishedAt": "2026-11-04T22:58:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/343/0000148728"
+    },
+    {
+     "title": "아스널·맨시티 UCL서 나란히 승리…코모는 랑스 9-1 대파",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-04T22:51:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/003/0014302535"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 811,
-  "matched": 359,
-  "avgLeadMin": 328,
+  "flagged": 813,
+  "matched": 366,
+  "avgLeadMin": 351,
   "recent": [
+   {
+    "keyword": "서울 외국인 소비 8.8조",
+    "hitKeyword": "외국인 매도 코스피",
+    "hitAt": "2026-11-05T08:00:00+09:00",
+    "leadMin": 2495
+   },
+   {
+    "keyword": "서울 외국인 최대",
+    "hitKeyword": "외국인 매도 코스피",
+    "hitAt": "2026-11-05T08:00:00+09:00",
+    "leadMin": 2474
+   },
+   {
+    "keyword": "서울 외국인 최대 방문",
+    "hitKeyword": "외국인 매도 코스피",
+    "hitAt": "2026-11-05T08:00:00+09:00",
+    "leadMin": 2454
+   },
+   {
+    "keyword": "서울 외국인 8.8조 소비",
+    "hitKeyword": "외국인 매도 코스피",
+    "hitAt": "2026-11-05T08:00:00+09:00",
+    "leadMin": 2414
+   },
+   {
+    "keyword": "kt",
+    "hitKeyword": "삼성 KT 한국시리즈",
+    "hitAt": "2026-11-05T08:00:00+09:00",
+    "leadMin": 470
+   },
+   {
+    "keyword": "삼성 KT 제압",
+    "hitKeyword": "삼성 KT 한국시리즈",
+    "hitAt": "2026-11-05T08:00:00+09:00",
+    "leadMin": 430
+   },
+   {
+    "keyword": "민주당 압승에 급등!",
+    "hitKeyword": "중간선거 민주당 의회 장악",
+    "hitAt": "2026-11-05T08:00:00+09:00",
+    "leadMin": 38
+   },
    {
     "keyword": "뉴욕증시 혼조 마감.",
     "hitKeyword": "뉴욕증시 중간선거 급등",
@@ -132,48 +239,6 @@
     "hitKeyword": "뉴욕증시 중간선거 급등",
     "hitAt": "2026-11-05T07:30:00+09:00",
     "leadMin": 1429
-   },
-   {
-    "keyword": "미국 중간선거 영향",
-    "hitKeyword": "뉴욕증시 중간선거 급등",
-    "hitAt": "2026-11-05T07:30:00+09:00",
-    "leadMin": 48
-   },
-   {
-    "keyword": "삼성, 12회 연장 승리",
-    "hitKeyword": "삼성 한국시리즈 2차전 승리",
-    "hitAt": "2026-11-05T07:30:00+09:00",
-    "leadMin": 48
-   },
-   {
-    "keyword": "뉴욕증시 급등",
-    "hitKeyword": "뉴욕증시 중간선거 급등",
-    "hitAt": "2026-11-05T07:30:00+09:00",
-    "leadMin": 28
-   },
-   {
-    "keyword": "삼성, 연장 혈투 3-2 승리",
-    "hitKeyword": "삼성 한국시리즈 2차전 승리",
-    "hitAt": "2026-11-05T07:30:00+09:00",
-    "leadMin": 18
-   },
-   {
-    "keyword": "주가",
-    "hitKeyword": "삼전닉스 주가 폭락",
-    "hitAt": "2026-11-05T07:00:00+09:00",
-    "leadMin": 58
-   },
-   {
-    "keyword": "서인영 재혼",
-    "hitKeyword": "서인영 12월 결혼",
-    "hitAt": "2026-11-05T07:00:00+09:00",
-    "leadMin": 8
-   },
-   {
-    "keyword": "호반그룹",
-    "hitKeyword": "호반그룹 한진칼 최대주주",
-    "hitAt": "2026-11-05T06:30:00+09:00",
-    "leadMin": 2767
    }
   ]
  }
