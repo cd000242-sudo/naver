@@ -69,13 +69,18 @@ describe('AI mark 발행 루프 — source regression', () => {
     return automation.slice(start, end);
   }
 
-  it('component-scoped 버튼 조회를 유지한다', () => {
-    expect(automation).toMatch(/imageComponents\[i\]\.\$\(['"]button\.se-set-ai-mark-button-toggle['"]\)/);
+  // [2026-11-04] 고객 제보 "AI 활용 체크를 켜도 안 된다": 400ms 한 번 조회 · 확인 없음 · 무조건 "완료" 였다.
+  //   이미지 칸 먼저 · 프레임 다음 조회는 aiImageMark.findVisibleAiMarkButton 이 맡는다(aiImageMarkActivation1104.test).
+  it('버튼은 기다려 찾고(이미지 칸 범위), 누른 뒤 켜짐을 확인하고, 요약은 결과대로 쓴다', () => {
     const loop = step4Block();
-    const componentIdx = loop.indexOf("imageComponents[i].$('button.se-set-ai-mark-button-toggle')");
-    const frameFallbackIdx = loop.indexOf("frame.$('button.se-set-ai-mark-button-toggle')");
-    expect(componentIdx).toBeGreaterThan(-1);
-    if (frameFallbackIdx !== -1) expect(frameFallbackIdx).toBeGreaterThan(componentIdx);
+    expect(loop).toContain('const aiControl = await waitForAiMarkButton(imageComponents[i], frame, (ms) => this.delay(ms));');
+    expect(loop).toContain('const aiMarkOn = await confirmAiMarkActive(imageComponents[i], frame, (ms) => this.delay(ms));');
+    expect(loop).toContain("aiMarkResults.push('button-missing');");
+    expect(loop).toContain('this.log(`   ${summarizeAiMarkResults(aiMarkResults)}`);');
+    // The old blind spots stay gone.
+    expect(loop).not.toMatch(/await this\.delay\(400\);\s*\n\s*\/\/ Prefer component-scoped button/);
+    expect(loop).not.toMatch(/개 이미지에 AI 활용 마크 활성화 완료/);
+    expect(loop).not.toMatch(/aiMarkCount\+\+/);
   });
 
   it('판정은 data-img-ai 1차 + provider 허용목록(isAiGeneratedImage) 2차다', () => {

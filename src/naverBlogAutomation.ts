@@ -1,5 +1,6 @@
 import { fetchNaverPreviousPostCandidates, resolveNaverPreviousPostCategoryId } from './main/services/naverPreviousPostLookup.js';
 import { refreshRuntimePreviousPost, readEditorBlogId } from './automation/previousPostRuntimePolicy.js';
+import { confirmAiMarkActive, summarizeAiMarkResults, waitForAiMarkButton, type AiImageMarkResult } from './automation/aiImageMark.js';
 import type { PreviousPostCandidate } from './shared/previousPostPolicy.js';
 // ✅ puppeteer-extra + stealth plugin 적용 (봇 감지 완벽 우회)
 import { randomUUID } from 'node:crypto';
@@ -3072,14 +3073,16 @@ export class NaverBlogAutomation {
                   try {
                     const { loadConfig } = await import('./configManager.js');
                     return (await loadConfig()).aiMarkAllImages === true;
-                  } catch {
+                  } catch (configError) {
+                    // [2026-11-04] Said out loud: a failed read used to look exactly like the option being off.
+                    this.log(`   ⚠️ [AI 마크] 설정을 읽지 못해 "AI 활용 체크하기"를 꺼진 것으로 봅니다: ${(configError as Error)?.message || configError}`);
                     return false;
                   }
                 })();
                 this.log(aiMarkAllImages
                   ? '🤖 [AI 마크] "AI 활용 체크하기" ON — 모든 이미지 마크 활성화 중...'
                   : '🤖 [AI 마크] AI 생성 이미지 마크 일괄 활성화 중...');
-                let aiMarkCount = 0;
+                const aiMarkResults: AiImageMarkResult[] = [];
                 for (let i = 0; i < imageComponents.length; i++) {
                   const compImg = await imageComponents[i].$('img');
                   if (!compImg) continue;
@@ -3123,29 +3126,30 @@ export class NaverBlogAutomation {
                   }).catch(() => ({ x: 0, y: 0 }));
 
                   await page.mouse.click(iframeOff.x + compCoords.x, iframeOff.y + compCoords.y);
-                  await this.delay(400);
 
-                  // Prefer component-scoped button; fall back to frame-level toolbar
-                  let aiBtn = await imageComponents[i].$('button.se-set-ai-mark-button-toggle').catch(() => null);
-                  if (!aiBtn) aiBtn = await frame.$('button.se-set-ai-mark-button-toggle').catch(() => null);
-                  if (aiBtn) {
-                    const isAiActive = await aiBtn.evaluate((btn: HTMLButtonElement) =>
-                      btn.classList.contains('se-is-selected') ||
-                      btn.getAttribute('aria-pressed') === 'true'
-                    ).catch(() => false);
-
-                    if (!isAiActive) {
-                      const aiBtnCoords = await aiBtn.evaluate((btn: HTMLButtonElement) => {
-                        const rect = btn.getBoundingClientRect();
-                        return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
-                      }).catch(() => ({ x: 0, y: 0 }));
-                      await page.mouse.click(iframeOff.x + aiBtnCoords.x, iframeOff.y + aiBtnCoords.y);
-                      await this.delay(300);
-                      aiMarkCount++;
-                    }
+                  // [2026-11-04] 고객 제보 "AI 활용 체크를 켜도 체크가 안 된다". 400ms 뒤 한 번만 찾고 못 찾으면 조용히
+                  //   넘어갔고, 누른 뒤 확인 없이 "완료"를 찍었다. 버튼은 최대 2초 기다리고(보이는 것만, 이미지 칸 먼저),
+                  //   누른 뒤 켜짐을 다시 읽어 확인한다(aiImageMark.ts). 누르는 방식(좌표 클릭)은 그대로.
+                  const aiControl = await waitForAiMarkButton(imageComponents[i], frame, (ms) => this.delay(ms));
+                  if (!aiControl) {
+                    aiMarkResults.push('button-missing');
+                    this.log(`   ⚠️ [AI 마크] ${i + 1}번째 이미지: 2초 안에 AI 활용 버튼을 찾지 못했습니다`);
+                    continue;
                   }
+                  if (aiControl.state.active) {
+                    aiMarkResults.push('already-enabled');
+                    continue;
+                  }
+                  const aiBtnCoords = await aiControl.button.evaluate((btn: Element) => {
+                    const rect = btn.getBoundingClientRect();
+                    return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+                  }).catch(() => ({ x: 0, y: 0 }));
+                  await page.mouse.click(iframeOff.x + aiBtnCoords.x, iframeOff.y + aiBtnCoords.y);
+                  const aiMarkOn = await confirmAiMarkActive(imageComponents[i], frame, (ms) => this.delay(ms));
+                  aiMarkResults.push(aiMarkOn ? 'enabled' : 'unconfirmed');
+                  if (!aiMarkOn) this.log(`   ⚠️ [AI 마크] ${i + 1}번째 이미지: 눌렀지만 켜짐이 확인되지 않았습니다`);
                 }
-                this.log(`   ✅ [AI 마크] ${aiMarkCount}개 이미지에 AI 활용 마크 활성화 완료`);
+                this.log(`   ${summarizeAiMarkResults(aiMarkResults)}`);
               } catch (aiMarkError) {
                 this.log(`   ⚠️ [AI 마크] AI 마크 활성화 오류 (무시): ${(aiMarkError as Error).message}`);
               }
