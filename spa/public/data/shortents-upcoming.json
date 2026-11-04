@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T12:07:53.696Z",
+ "builtAt": "2026-11-04T12:17:56.981Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,34 @@
  "measured": 22,
  "candidates": [
   {
-   "keyword": "고영표 선발 역투",
+   "keyword": "고영표 7이닝 1실점",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 11,
+   "articles90": 22,
    "recent20": 5,
-   "press": 9,
-   "firstArticleAt": "2026-11-04T10:54:00.000Z",
+   "press": 15,
+   "firstArticleAt": "2026-11-04T11:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[KS2] KT 고영표 7이닝 1실점 역투...7피안타에도 위기 관리 능력 과시",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-04T12:03:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261104001379"
+     "title": "'4일 휴식' 삼성 페덱, 102구 역투…KT 타선 7이닝 1실점 봉쇄[KS2]",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-04T12:10:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/421/0009270889"
     },
     {
-     "title": "7이닝 1실점 호투 펼친 고영표",
+     "title": "KT 고영표 vs 삼성 페덱, 한국시리즈 수놓은 명품 투수전",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-04T12:08:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=879966"
+    },
+    {
+     "title": "'삼성 천적' 고영표 vs '투혼' 페덱…KS 수놓은 명품 투수전",
      "press": "yna.co.kr",
-     "publishedAt": "2026-11-04T11:56:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/001/0016422521"
-    },
-    {
-     "title": "[사진]고영표 이어 마운드 오른 손동현",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-04T11:56:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/109/0005634738"
+     "publishedAt": "2026-11-04T12:08:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/001/0016422554"
     }
    ]
   },
@@ -48,12 +48,18 @@
     "nate"
    ],
    "articles90": 9,
-   "recent20": 4,
+   "recent20": 2,
    "press": 9,
    "firstArticleAt": "2026-11-04T11:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "신촌 세브란스병원서 정신과 의사 흉기로 찌른 50대 여성 체포",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-04T12:16:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=779021"
+    },
     {
      "title": "신촌 세브란스병원서 정신과 교수 흉기 피습…50대 여성 체포",
      "press": "medipana.com",
@@ -65,12 +71,6 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-04T11:57:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014302136?sid=102"
-    },
-    {
-     "title": "[속보]신촌 세브란스병원서 정신과 의사 흉기로 찌른 50대 여성 체포",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-04T11:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000160445?sid=102"
     }
    ]
   },
@@ -82,10 +82,16 @@
    "articles90": 8,
    "recent20": 3,
    "press": 8,
-   "firstArticleAt": "2026-11-04T10:41:00.000Z",
+   "firstArticleAt": "2026-11-04T10:54:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "중앙선관위 지시로 투표록 사후 위·변조 의혹…특검, 강제수사 착수",
+     "press": "ksmnews.co.kr",
+     "publishedAt": "2026-11-04T12:10:00.000Z",
+     "link": "https://www.ksmnews.co.kr/news/view.php?idx=628528"
+    },
     {
      "title": "선관위 특검, 투표록 위·변조 정황 포착… 중앙선관위 사흘째 압수수색",
      "press": "biztribune.co.kr",
@@ -97,44 +103,6 @@
      "press": "khan.co.kr",
      "publishedAt": "2026-11-04T11:59:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/032/0003480758?sid=102"
-    },
-    {
-     "title": "[자유통일당 대변인 논평] 선관위의 459억 원 특혜 의혹, 특검은 한 점 ...",
-     "press": "christiantoday.co.kr",
-     "publishedAt": "2026-11-04T11:50:00.000Z",
-     "link": "https://www.christiantoday.co.kr/news/378387"
-    }
-   ]
-  },
-  {
-   "keyword": "배성재 김다영 계류유산 고백",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-04T10:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'12월 출산' 김다영, 지난해 계류유산 고백 \"자책 말라는 말에 위로\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-04T11:59:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014302152"
-    },
-    {
-     "title": "'배성재♥' 김다영, 계류유산 고백…\"남편 많이 속상했을 것\" [마데핫리...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-04T11:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004122085"
-    },
-    {
-     "title": "배성재·김다영 \"지난해 계류유산\"…7주차에 수술→아픔 뒤늦게 고백 [R...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-04T11:26:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001407158"
     }
    ]
   },
@@ -160,13 +128,77 @@
      "title": "1-1 동점타 기뻐하는 KT 허경민",
      "press": "newsis.com",
      "publishedAt": "2026-11-04T10:58:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/003/0014302044"
+     "link": "https://m.sports.naver.com/kbaseball/article/003/0014302057"
     },
     {
-     "title": "[포토]동점타 친 KT 허경민",
-     "press": "sportsseoul.com",
+     "title": "1-1 동점타 뽑아내는 KT 허경민",
+     "press": "newsis.com",
      "publishedAt": "2026-11-04T10:58:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278197"
+     "link": "https://m.sports.naver.com/kbaseball/article/003/0014302053"
+    }
+   ]
+  },
+  {
+   "keyword": "한다감 아들 공개",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 6,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-04T11:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'46세' 한다감, 출산 26일만 되찾은 미모..子 주원도 '완성형 비주얼' [슈...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-04T12:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003484695"
+    },
+    {
+     "title": "'47세' 한다감, 출산 26일 만 몸매 완벽 복구..똑닮은 신생아 子도 자랑...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-04T12:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004463285"
+    },
+    {
+     "title": "\"벌써 이목구비 완성\"…'슈돌' 다감, 47세 최고령 출산 후 아들 전격 공...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-04T12:04:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16268521"
+    }
+   ]
+  },
+  {
+   "keyword": "배성재 김다영 계류유산 고백",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-04T11:13:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'배성재♥' 김다영, 지난해 계류유산 고백⋯\"임신 이번 처음 아냐\"",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-04T12:16:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2644272"
+    },
+    {
+     "title": "'12월 출산' 김다영, 지난해 계류유산 고백 \"자책 말라는 말에 위로\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-04T11:59:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014302152"
+    },
+    {
+     "title": "'배성재♥' 김다영, 계류유산 고백…\"남편 많이 속상했을 것\" [마데핫리...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-04T11:31:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004122085"
     }
    ]
   },
@@ -237,7 +269,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 730,
+  "flagged": 732,
   "matched": 309,
   "avgLeadMin": 274,
   "recent": [
