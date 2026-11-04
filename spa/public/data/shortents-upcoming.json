@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T12:38:05.572Z",
+ "builtAt": "2026-11-04T12:48:09.071Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,58 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 25,
  "candidates": [
   {
-   "keyword": "고영표 7이닝 1실점",
+   "keyword": "조작기소 특검법 통과",
    "sources": [
     "daum"
    ],
-   "articles90": 24,
-   "recent20": 2,
-   "press": 17,
-   "firstArticleAt": "2026-11-04T11:19:00.000Z",
+   "articles90": 36,
+   "recent20": 13,
+   "press": 31,
+   "firstArticleAt": "2026-11-04T11:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'조작기소 특검법' 與 주도 법사위 통과…野, 본회의 필버 등 총력 대응...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-04T12:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003151437?sid=100"
+    },
+    {
+     "title": "[속보] 조작기소 특검법, 법사위 통과… 與 5일 본회의 처리 방침",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-04T12:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000191524?sid=100"
+    },
+    {
+     "title": "'조작기소 특검법안' 민주당 주도로 법사위 통과…국민의힘 반발·퇴장",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-04T12:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400717?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "페덱 7이닝 1실점",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 38,
+   "recent20": 1,
+   "press": 20,
+   "firstArticleAt": "2026-11-04T11:29:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[AI그래픽] 삼성 페덱 7이닝 1실점 완벽투, KS 2차전 수원 KT전 투구 분석",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-04T12:30:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261104001390"
+    },
     {
      "title": "kt 고영표 7이닝 1실점·삼성 페덱 7이닝 1실점…KS 2차전 명품 투수전",
      "press": "topstarnews.net",
@@ -33,12 +71,38 @@
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-04T12:21:00.000Z",
      "link": "https://m.sports.naver.com/kbaseball/article/079/0004206610"
+    }
+   ]
+  },
+  {
+   "keyword": "김혜수 추모해 주신",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 12,
+   "recent20": 0,
+   "press": 12,
+   "firstArticleAt": "2026-11-04T11:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "故 최불암 빈소 지킨 김혜수 \"추모해 주신 모든 분 고맙습니다\"",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-04T12:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004122103"
     },
     {
-     "title": "'4일 휴식' 삼성 페덱, 102구 역투…KT 타선 7이닝 1실점 봉쇄[KS2]",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T12:10:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/421/0009270889"
+     "title": "故 최불암 마지막 길 지킨 김혜수 “추모해 주신 주신 무든 분 감사”[...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-04T12:08:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1793794028530364005"
+    },
+    {
+     "title": "故 최불암 빈소 지킨 김혜수 \"추모해 주신 분들 감사\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-04T12:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005436758"
     }
    ]
   },
@@ -48,8 +112,8 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 32,
-   "recent20": 4,
+   "articles90": 31,
+   "recent20": 0,
    "press": 11,
    "firstArticleAt": "2026-11-04T11:28:00.000Z",
    "exclusive": false,
@@ -76,34 +140,34 @@
    ]
   },
   {
-   "keyword": "김혜수 감사 인사",
+   "keyword": "한다감 아들 공개",
    "sources": [
     "daum"
    ],
-   "articles90": 10,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-04T11:27:00.000Z",
+   "articles90": 9,
+   "recent20": 3,
+   "press": 8,
+   "firstArticleAt": "2026-11-04T11:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "故 최불암 빈소 지킨 김혜수 \"추모해 주신 모든 분 고맙습니다\"",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-04T12:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004122103"
-    },
-    {
-     "title": "故 최불암 마지막 길 지킨 김혜수 “추모해 주신 주신 무든 분 감사”[...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-04T12:08:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1793794028530364005"
-    },
-    {
-     "title": "故 최불암 빈소 지킨 김혜수 \"추모해 주신 분들 감사\"",
+     "title": "'46세' 한다감, 출산 26일 만에 되찾은 몸매…아들 비주얼도 눈길",
      "press": "mt.co.kr",
-     "publishedAt": "2026-11-04T12:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005436758"
+     "publishedAt": "2026-11-04T12:44:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005436765"
+    },
+    {
+     "title": "\"1억 제시해도 못 끊었는데\"…'슈돌' 한다감 친정아버지, 손자 탄생 후 ...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-04T12:40:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16268552"
+    },
+    {
+     "title": "한다감 아들, 생후 26일 만에 완성형 비주얼‥예비아빠 김종민도 “비주...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-04T12:36:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001184563"
     }
    ]
   },
@@ -113,10 +177,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 8,
+   "articles90": 7,
    "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-04T11:15:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-04T11:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -139,75 +203,11 @@
      "link": "https://n.news.naver.com/mnews/article/005/0001883062?sid=101"
     }
    ]
-  },
-  {
-   "keyword": "김지찬",
-   "sources": [
-    "google"
-   ],
-   "articles90": 9,
-   "recent20": 8,
-   "press": 6,
-   "firstArticleAt": "2026-11-04T11:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[사진]명품 수비 선보이는 김지찬",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-04T12:36:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/109/0005634799"
-    },
-    {
-     "title": "김지찬 ‘잡아서 정말 다행이야’ [MK포토]",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-04T12:35:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/410/0001146196"
-    },
-    {
-     "title": "[포토S] 김지찬, '실점 막아내는 호수비!\"",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-04T12:35:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/477/0000637225"
-    }
-   ]
-  },
-  {
-   "keyword": "난파선",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T11:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "고려 난파선서 길어 올린 800년 전 물류의 비밀",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-04T11:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003480730?sid=103"
-    },
-    {
-     "title": "'800년 잠든' 고려 난파선 또 발견…바닷속 배 안엔 무엇이",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-04T11:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000519173?sid=103"
-    },
-    {
-     "title": "800년 전 침몰한 '고려 난파선'의 진실, '목간'으로 밝혀졌다",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-04T11:12:00.000Z",
-     "link": "https://www.insight.co.kr/news/580644"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 735,
+  "flagged": 737,
   "matched": 311,
   "avgLeadMin": 278,
   "recent": [
