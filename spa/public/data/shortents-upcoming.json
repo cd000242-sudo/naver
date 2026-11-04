@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T00:32:10.901Z",
+ "builtAt": "2026-11-04T00:42:14.677Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,116 +8,122 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 18,
  "candidates": [
   {
-   "keyword": "갤럭시 버즈 청력 케어 허가",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 51,
-   "recent20": 14,
-   "press": 51,
-   "firstArticleAt": "2026-11-03T23:09:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "삼성 갤럭시 버즈, 청력 검사·보조 기능 탑재…식약처 의료기기 허가",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-04T00:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003151020?sid=105"
-    },
-    {
-     "title": "삼성전자, 갤럭시 버즈로 청력 검사·보조…식약처 허가 획득",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-04T00:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001071972?sid=105"
-    },
-    {
-     "title": "삼성전자, 갤럭시 버즈 청력 검사·보조 기능 식약처 허가 획득",
-     "press": "paxetv.com",
-     "publishedAt": "2026-11-04T00:28:00.000Z",
-     "link": "http://www.paxetv.com/news/articleView.html?idxno=286017"
-    }
-   ]
-  },
-  {
-   "keyword": "김민석 사과",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 30,
-   "recent20": 17,
-   "press": 26,
-   "firstArticleAt": "2026-11-03T23:11:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'전대 본질'이라더니 증거 없다는 김민석, 어떻게 책임질 건가",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-04T00:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002534578?sid=100"
-    },
-    {
-     "title": "정점식, '신천지 의혹' 사과한 김민석에 \"정계 은퇴해야\"",
-     "press": "wolyo.co.kr",
-     "publishedAt": "2026-11-04T00:30:00.000Z",
-     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=320015"
-    },
-    {
-     "title": "“왜 울었나, 법적 책임져야”… 김민석 ‘신천지 사과’에 한동훈 직격",
-     "press": "jibs.co.kr",
-     "publishedAt": "2026-11-04T00:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/661/0000086071?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "SK하이닉스 장비 반입 보류",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 16,
-   "recent20": 6,
-   "press": 16,
-   "firstArticleAt": "2026-11-03T23:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"美 정부, SK하이닉스 중국 공장 장비 반입에 제동\"",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-04T00:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000141527?sid=101"
-    },
-    {
-     "title": "美, 솔리다임 中 공장 증설 제동…SK하이닉스 난감",
-     "press": "it.chosun.com",
-     "publishedAt": "2026-11-04T00:28:00.000Z",
-     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000000185"
-    },
-    {
-     "title": "美, SK하이닉스 中공장 장비 반입 제동…뉴욕 반도체 공장 투자도 난항",
-     "press": "donga.com",
-     "publishedAt": "2026-11-04T00:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003759943?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "서예지 영화 금월도 출연",
+   "keyword": "코스피·코스닥 상승",
    "sources": [
     "nate"
    ],
-   "articles90": 14,
-   "recent20": 5,
-   "press": 14,
-   "firstArticleAt": "2026-11-03T23:08:00.000Z",
+   "articles90": 80,
+   "recent20": 33,
+   "press": 50,
+   "firstArticleAt": "2026-11-03T23:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[이 시각 시황] 반도체주 강세에 코스피 2.2% 반등…외국인·기관 동반 ...",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-04T00:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541571?sid=101"
+    },
+    {
+     "title": "코스피 5700선 탈환…반도체 급등에 증시 반격",
+     "press": "newskr.kr",
+     "publishedAt": "2026-11-04T00:40:00.000Z",
+     "link": "http://www.newskr.kr/news/articleView.html?idxno=107671"
+    },
+    {
+     "title": "코스피, 美 반도체주 반등에 2%대 상승 출발…5700선 회복",
+     "press": "greened.kr",
+     "publishedAt": "2026-11-04T00:39:00.000Z",
+     "link": "https://www.greened.kr/news/articleView.html?idxno=353777"
+    }
+   ]
+  },
+  {
+   "keyword": "HLB 간암 신약 허가 심사",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 34,
+   "recent20": 8,
+   "press": 32,
+   "firstArticleAt": "2026-11-03T23:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "HLB, '리보세라닙' 허가 내년으로 넘어간다…18%대 하락",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-04T00:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005436278?sid=101"
+    },
+    {
+     "title": "HLB, 간암 신약 FDA 본심사 재개…내년 4월 결론",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-04T00:36:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=501122"
+    },
+    {
+     "title": "HLB, 간암 신약 美 허가 네 번째 도전 … \"내년 4월 9일 허가 결정\"",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-04T00:34:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/04/2026110400062.html"
+    }
+   ]
+  },
+  {
+   "keyword": "삼성전자서비스 에어컨 AS 1위",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 25,
+   "recent20": 3,
+   "press": 23,
+   "firstArticleAt": "2026-11-03T23:17:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "삼성전자서비스, KS-SQI 에어컨 AS 부문 2년 연속 1위",
+     "press": "socialvalue.kr",
+     "publishedAt": "2026-11-04T00:36:00.000Z",
+     "link": "https://www.socialvalue.kr/news/view/1065573243656878"
+    },
+    {
+     "title": "삼성전자서비스, 에어컨 AS 품질 2년 연속 1위 … AI 원격진단·맞춤형 ...",
+     "press": "worktoday.co.kr",
+     "publishedAt": "2026-11-04T00:34:00.000Z",
+     "link": "http://www.worktoday.co.kr/news/articleView.html?idxno=91441"
+    },
+    {
+     "title": "삼성전자·삼성전자서비스, 갤럭시 버즈 '청력 체크-케어' 기능 식약처...",
+     "press": "wsobi.com",
+     "publishedAt": "2026-11-04T00:24:00.000Z",
+     "link": "http://www.wsobi.com/news/articleView.html?idxno=320988"
+    }
+   ]
+  },
+  {
+   "keyword": "서예지 영화 금월도 캐스팅",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 4,
+   "press": 13,
+   "firstArticleAt": "2026-11-03T23:16:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "사생활 논란 6년만…서예지, 뱀파이어물 ‘금월도’로 스크린 복귀 [공...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-04T00:31:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001277924"
+    },
     {
      "title": "서예지, 영화 '금월도' 캐스팅... '한국형 뱀파이어' 변신",
      "press": "newsinside.kr",
@@ -129,136 +135,32 @@
      "press": "news.jtbc.co.kr",
      "publishedAt": "2026-11-04T00:27:00.000Z",
      "link": "https://m.entertain.naver.com/article/437/0000519020"
-    },
-    {
-     "title": "[공식] 서예지, 사생활 논란 딛고 5년 만에 스크린 복귀..'금월도' 캐스...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-04T00:26:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003484455"
-    }
-   ]
-  },
-  {
-   "keyword": "이에스티",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 11,
-   "recent20": 4,
-   "press": 11,
-   "firstArticleAt": "2026-11-03T23:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[특징주] 이에스티, 코스닥 상장 첫날 강세… 공모가 대비 28%대 급등",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-04T00:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202396?sid=101"
-    },
-    {
-     "title": "이에스티, 코스닥 입성 첫날 강세…공모가 웃돌아[특징주]",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-04T00:24:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026110409195285052"
-    },
-    {
-     "title": "이에스티, 코스닥 상장 첫날 33%대 상승",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-04T00:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005436262?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "곽동신 자사주 추가 매수",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 10,
-   "recent20": 7,
-   "press": 10,
-   "firstArticleAt": "2026-11-03T23:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "곽동신 한미반도체 회장, 자사 주식 100억원 더 산다…누적 매입액 802억...",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-04T00:30:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=560964"
-    },
-    {
-     "title": "곽동신 한미반도체 회장, 자사주 100억원 추가 매수…지분율 33.69%로",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-04T00:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001071973?sid=105"
-    },
-    {
-     "title": "곽동신 한미반도체 회장, 사재 100억으로 자사주 매수…올해 5번째",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-04T00:28:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=202611040909105032139bf6e4b2_1"
-    }
-   ]
-  },
-  {
-   "keyword": "코리안 더비 뮌헨 김민재 승리",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-03T23:03:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김민재 날카로운 드리블 후 아까운 어시스트 미수! 이강인은 태클 성공...",
-     "press": "footballist.co.kr",
-     "publishedAt": "2026-11-04T00:07:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/436/0000114625"
-    },
-    {
-     "title": "[UCL REVIEW] '김민재 웃고 이강인 울었다!' UCL 코리안 더비 성사됐지만...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-03T23:51:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/477/0000637014"
-    },
-    {
-     "title": "이강인·김민재 UCL ‘코리안 더비’ 성사… 뮌헨 2대0 승",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-03T23:47:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/023/0004007672"
     }
    ]
   },
   {
    "keyword": "로봇 글로벌 대토론회",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 18,
-   "recent20": 1,
-   "press": 5,
+   "articles90": 19,
+   "recent20": 2,
+   "press": 6,
    "firstArticleAt": "2026-11-03T23:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "민주당, 피지컬AI·로봇 글로벌 최강국 전북 대토론회 개최",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-04T00:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014299872?sid=100"
+     "title": "전북도, 피지컬AI·로봇 국가거점 조성 본격 시동…국회서 대토론회",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-04T00:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003481907?sid=102"
     },
     {
-     "title": "피지컬AI·로봇 글로벌 최강국 전북 대토론회",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T23:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016420256?sid=100"
+     "title": "민주당, 피지컬AI·로봇 글로벌 최강국 전북 대토론회 개최",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-04T00:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014299899?sid=100"
     },
     {
      "title": "피지컬AI·로봇 글로벌 최강국 전북 대토론회 발언하는 신승규 현대차 ...",
@@ -269,114 +171,24 @@
    ]
   },
   {
-   "keyword": "소리새 김광석 별세",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-03T23:11:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'그대 그리고 나' 그룹 소리새 김광석 별세…향년 70세",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-04T00:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922683?sid=102"
-    },
-    {
-     "title": "'그대 그리고 나' 부른 소리새 김광석, 별세…향년 70세",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-03T23:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/629/0000548474"
-    },
-    {
-     "title": "[부고] 김광석씨(그룹 소리새 멤버) 별세",
-     "press": "public25.com",
-     "publishedAt": "2026-11-03T23:30:00.000Z",
-     "link": "https://www.public25.com/news/articleView.html?idxno=57828"
-    }
-   ]
-  },
-  {
-   "keyword": "장동혁 아카데미 발언",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-03T23:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'디지털자산과 금융혁신', 발언하는 장동혁 대표",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T23:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016420225?sid=100"
-    },
-    {
-     "title": "'굿모닝 수요정책 아카데미' 발언하는 장동혁 대표",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T23:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016420219?sid=100"
-    },
-    {
-     "title": "[포토] 정책 아카데미서 발언하는 국민의힘 장동혁 대표",
-     "press": "ilyosisa.co.kr",
-     "publishedAt": "2026-11-03T23:30:00.000Z",
-     "link": "https://www.ilyosisa.co.kr/news/article.html?no=258741"
-    }
-   ]
-  },
-  {
-   "keyword": "election",
-   "sources": [
-    "google"
-   ],
-   "articles90": 25,
-   "recent20": 6,
-   "press": 3,
-   "firstArticleAt": "2026-11-03T23:03:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "APTOPIX Election 2026 America Votes Alaska",
-     "press": null,
-     "publishedAt": "2026-11-04T00:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/077/0007226120?sid=104"
-    },
-    {
-     "title": "APTOPIX Election 2026 Michigan",
-     "press": null,
-     "publishedAt": "2026-11-04T00:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/077/0007226119?sid=104"
-    },
-    {
-     "title": "APTOPIX Election 2026 America Votes Rochester",
-     "press": null,
-     "publishedAt": "2026-11-04T00:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/077/0007226118?sid=104"
-    }
-   ]
-  },
-  {
    "keyword": "기상",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-03T23:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[건강포커스] \"취침·기상 시간 들쭉날쭉하면 심혈관질환 위험 더 높아...",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-04T00:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016420415?sid=102"
+    },
     {
      "title": "시스메이트, 조달청 안내·기상전광판 MAS서 '품질보증조달물품' 지정…...",
      "press": "it-b.co.kr",
@@ -388,22 +200,46 @@
      "press": "magazine.hankyung.com",
      "publishedAt": "2026-11-04T00:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/050/0000112798?sid=101"
-    },
-    {
-     "title": "[오늘 전국 날씨예보] 기상청 날씨누리, \"4일, 오늘 낮과 밤 기온차 큼,...",
-     "press": "lecturernews.com",
-     "publishedAt": "2026-11-03T23:52:00.000Z",
-     "link": "https://www.lecturernews.com/news/articleView.html?idxno=213161"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 518,
-  "matched": 212,
-  "avgLeadMin": 282,
+  "flagged": 522,
+  "matched": 217,
+  "avgLeadMin": 284,
   "recent": [
+   {
+    "keyword": "임영웅",
+    "hitKeyword": "임영웅 빌보드 진입",
+    "hitAt": "2026-11-04T09:30:00+09:00",
+    "leadMin": 1557
+   },
+   {
+    "keyword": "보험",
+    "hitKeyword": "분리과세 건강보험료",
+    "hitAt": "2026-11-04T09:30:00+09:00",
+    "leadMin": 129
+   },
+   {
+    "keyword": "리센느 음원차트 1위 싹쓸이",
+    "hitKeyword": "리센느 신곡 1위",
+    "hitAt": "2026-11-04T09:30:00+09:00",
+    "leadMin": 28
+   },
+   {
+    "keyword": "김민재 뮌헨 2-0 승리",
+    "hitKeyword": "이강인 김민재 코리안 더비",
+    "hitAt": "2026-11-04T09:30:00+09:00",
+    "leadMin": 18
+   },
+   {
+    "keyword": "SK하이닉스 장비 반입 보류",
+    "hitKeyword": "SK하이닉스 장비수출 보류",
+    "hitAt": "2026-11-04T09:30:00+09:00",
+    "leadMin": 18
+   },
    {
     "keyword": "HLB 간암 신약 본심사 재개",
     "hitKeyword": "hlb",
@@ -433,36 +269,6 @@
     "hitKeyword": "북한 해커 바이낸스 침투",
     "hitAt": "2026-11-04T08:30:00+09:00",
     "leadMin": 18
-   },
-   {
-    "keyword": "해커",
-    "hitKeyword": "북한 해커 바이낸스 침투",
-    "hitAt": "2026-11-04T08:30:00+09:00",
-    "leadMin": 18
-   },
-   {
-    "keyword": "혼조 마감 나스닥 0.83%↑",
-    "hitKeyword": "나스닥 기술주 상승",
-    "hitAt": "2026-11-04T08:30:00+09:00",
-    "leadMin": 8
-   },
-   {
-    "keyword": "삼성SDS 구미 데이터센터 착공",
-    "hitKeyword": "AMD 데이터센터",
-    "hitAt": "2026-11-04T08:00:00+09:00",
-    "leadMin": 1849
-   },
-   {
-    "keyword": "이강철",
-    "hitKeyword": "이강철 감독 투수 운영",
-    "hitAt": "2026-11-04T08:00:00+09:00",
-    "leadMin": 1558
-   },
-   {
-    "keyword": "이강철 감독 로건 기용 실수",
-    "hitKeyword": "이강철 감독 투수 운영",
-    "hitAt": "2026-11-04T08:00:00+09:00",
-    "leadMin": 471
    }
   ]
  }
