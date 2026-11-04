@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T11:27:27.025Z",
+ "builtAt": "2026-11-04T11:37:32.860Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,52 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 23,
  "candidates": [
-  {
-   "keyword": "호반 한진칼 최대주주",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 33,
-   "recent20": 6,
-   "press": 31,
-   "firstArticleAt": "2026-11-04T09:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[EBN 오늘(4일) 이슈 종합] 호반그룹, 한진칼 '최대주주'로... 美·EU 탈중...",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-04T11:22:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1730505"
-    },
-    {
-     "title": "한진칼 최대주주 호반건설로 변경…12월 지분 매입에 재역전 가능성",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-04T11:18:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026110420161032528"
-    },
-    {
-     "title": "호반건설, 한진칼 최대주주 올라섰다…조원태, 내달 지분 매입해 재역전...",
-     "press": "moneystorm.kr",
-     "publishedAt": "2026-11-04T11:14:00.000Z",
-     "link": "https://www.moneystorm.kr/news/articleView.html?idxno=8074"
-    }
-   ]
-  },
   {
    "keyword": "CJ컨소시엄, 중앙일보 인수계약",
    "sources": [
     "nate"
    ],
-   "articles90": 25,
-   "recent20": 3,
-   "press": 25,
-   "firstArticleAt": "2026-11-04T10:01:00.000Z",
+   "articles90": 24,
+   "recent20": 2,
+   "press": 24,
+   "firstArticleAt": "2026-11-04T10:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "중앙일보, 다우·CJ컨소시엄에 피인수…5일 5,200억 규모 신주 계약",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-04T11:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922931?sid=101"
+    },
     {
      "title": "중앙일보 주인 바뀐다…다우·CJ컨소시엄 ‘5200억’ 인수",
      "press": "munhwa.com",
@@ -65,44 +39,6 @@
      "press": "dealsite.co.kr",
      "publishedAt": "2026-11-04T11:08:00.000Z",
      "link": "https://dealsite.co.kr/articles/172115"
-    },
-    {
-     "title": "다우·CJ컨소시엄, 중앙일보 인수…5200억 신주인수계약체결",
-     "press": "news.mtn.co.kr",
-     "publishedAt": "2026-11-04T11:08:00.000Z",
-     "link": "https://news.mtn.co.kr/article/2026110420061114087"
-    }
-   ]
-  },
-  {
-   "keyword": "강호동 구속영장",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 19,
-   "recent20": 0,
-   "press": 19,
-   "firstArticleAt": "2026-11-04T10:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "경찰, 강호동 농협중앙회장 구속영장 신청…'억대' 금품·공금유용 의혹",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-04T11:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000120605?sid=102"
-    },
-    {
-     "title": "경찰, 강호동 농협중앙회장 구속영장 신청…1억대 뇌물수수 등 혐의",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-04T10:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002247335?sid=101"
-    },
-    {
-     "title": "경찰, 강호동 농협중앙회장 구속영장 신청…1억원대 금품수수 의혹",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-04T10:56:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=100628"
     }
    ]
   },
@@ -111,13 +47,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 19,
+   "articles90": 18,
    "recent20": 1,
-   "press": 18,
-   "firstArticleAt": "2026-11-04T09:59:00.000Z",
+   "press": 17,
+   "firstArticleAt": "2026-11-04T10:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "올 겨울 첫 AI 발생에 韓 총리 \"초동 방역 힘써야\"",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-04T11:28:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5079919"
+    },
     {
      "title": "연천 산란계 농장서 올겨울 첫 고병원성 AI 발생",
      "press": "yonhapnewstv.co.kr",
@@ -129,91 +71,126 @@
      "press": "bokuennews.com",
      "publishedAt": "2026-11-04T11:06:00.000Z",
      "link": "http://www.bokuennews.com/news/article.html?no=286665"
+    }
+   ]
+  },
+  {
+   "keyword": "강호동 구속영장 신청",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 17,
+   "recent20": 0,
+   "press": 17,
+   "firstArticleAt": "2026-11-04T10:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "경찰, 강호동 농협중앙회장 구속영장 신청…'억대' 금품·공금유용 의혹",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-04T11:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000120605?sid=102"
     },
     {
-     "title": "“AI 확산 막아라”… 농가 방역활동 구슬땀",
-     "press": "kyeongin.com",
-     "publishedAt": "2026-11-04T11:02:00.000Z",
-     "link": "https://www.kyeongin.com/article/1774116"
+     "title": "경찰, 강호동 농협중앙회장 구속영장 신청…1억원대 금품수수 의혹",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-04T10:56:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=100628"
+    },
+    {
+     "title": "경찰, 강호동 농협중앙회장 구속영장 신청…1억대 뇌물수수 등 혐의",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-04T10:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002247335?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "세브란스 병원",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 16,
+   "recent20": 4,
+   "press": 16,
+   "firstArticleAt": "2026-11-04T10:11:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "신촌 세브란스병원서 흉기 난동…정신건강의학과 교수 부상",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-04T11:34:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1542683"
+    },
+    {
+     "title": "신촌 세브란스 진료실서 흉기 휘두른 50대 여성…정신건강의학과 교수 ...",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-04T11:28:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261104521109?OutUrl=naver"
+    },
+    {
+     "title": "신촌세브란스병원서 교수 흉기에 찔려…50대 여성 현행범 체포",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-04T11:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/117/0004122083?sid=102"
     }
    ]
   },
   {
    "keyword": "디아즈",
    "sources": [
+    "signal.bz",
     "google"
    ],
    "articles90": 61,
-   "recent20": 11,
-   "press": 13,
-   "firstArticleAt": "2026-11-04T10:16:00.000Z",
+   "recent20": 7,
+   "press": 12,
+   "firstArticleAt": "2026-11-04T10:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[포토] 디아즈 ‘만루 만들었어’",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-04T11:20:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278213"
-    },
-    {
-     "title": "[사진]디아즈, 'KS 2차전 3타수 3안타'",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-04T11:18:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/109/0005634686"
-    },
-    {
-     "title": "디아즈 ‘걷어 올렸다’[포토]",
+     "title": "디아즈 '1루로 토스'[포토]",
      "press": "xportsnews.com",
-     "publishedAt": "2026-11-04T11:18:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/311/0002076670"
-    }
-   ]
-  },
-  {
-   "keyword": "최원준",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 40,
-   "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-04T09:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
+     "publishedAt": "2026-11-04T11:34:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/311/0002076690"
+    },
     {
-     "title": "[포토] 최원준 '내가 공보다 늦었다고?'",
+     "title": "디아즈·강민호와 기쁨 나누는 페덱",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-04T11:31:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/421/0009270822"
+    },
+    {
+     "title": "[포토]'만루다!' 디아즈",
      "press": "starnewskorea.com",
-     "publishedAt": "2026-11-04T11:18:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/108/0003484661"
-    },
-    {
-     "title": "아웃 당하는 최원준",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-04T11:14:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/003/0014302078"
-    },
-    {
-     "title": "최원준에게 박수 보내는 이강철 감독[포토]",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-04T11:12:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/311/0002076655"
+     "publishedAt": "2026-11-04T11:29:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/108/0003484665"
     }
    ]
   },
   {
    "keyword": "KT 고영표 역투",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-04T10:00:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-04T10:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "역투하는 고영표",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-04T11:32:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/003/0014302087"
+    },
     {
      "title": "6회 역투하는 고영표",
      "press": "newsis.com",
@@ -225,28 +202,59 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-04T11:11:00.000Z",
      "link": "https://m.sports.naver.com/kbaseball/article/421/0009270781"
+    }
+   ]
+  },
+  {
+   "keyword": "최원준 선두타자 2루타",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-04T10:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'1회→2회→4회' 선두타자 계속 출루 KT, 마침내 승부 원점으로!…힐리...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-04T11:02:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/311/0002076648"
     },
     {
-     "title": "고영표, 5회까지 1실점 역투",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T10:54:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/421/0009270759"
+     "title": "1위팀, 드디어 페덱에 첫 득점! 힐리어드 2루타→허경민 적시타 터졌다...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-04T10:56:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/109/0005634661"
+    },
+    {
+     "title": "KT, 4회말 힐리어드 2루타+허경민 좌전 적시타로 반격 시작…1-1 동점",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-04T10:50:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109733533901"
     }
    ]
   },
   {
    "keyword": "난파선",
    "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 4,
    "recent20": 2,
    "press": 4,
-   "firstArticleAt": "2026-11-04T10:03:00.000Z",
+   "firstArticleAt": "2026-11-04T10:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "고려 난파선서 길어 올린 800년 전 물류의 비밀",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-04T11:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003480730?sid=103"
+    },
     {
      "title": "'800년 잠든' 고려 난파선 또 발견…바닷속 배 안엔 무엇이",
      "press": "news.jtbc.co.kr",
@@ -258,12 +266,6 @@
      "press": "insight.co.kr",
      "publishedAt": "2026-11-04T11:12:00.000Z",
      "link": "https://www.insight.co.kr/news/580644"
-    },
-    {
-     "title": "태안 마도해역 ‘고려난파선’…800년 간직한 비밀은?",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-04T10:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012287362?sid=102"
     }
    ]
   },
@@ -273,7 +275,7 @@
     "nate"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-04T10:10:00.000Z",
    "exclusive": false,
@@ -286,48 +288,16 @@
      "link": "https://m.entertain.naver.com/article/009/0005759158"
     },
     {
-     "title": "'스우파2' 우승자 바다, 댄서 하울과 결별…4살 연상연하 커플 마침표",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-04T10:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005436743"
-    },
-    {
      "title": "‘베베’ 바다X‘팀아임’ 하울, 연인 관계 마침표…“좋은 동료로”",
      "press": "sportsworldi.com",
      "publishedAt": "2026-11-04T10:38:00.000Z",
      "link": "https://m.entertain.naver.com/article/396/0000760037"
-    }
-   ]
-  },
-  {
-   "keyword": "김지찬",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T10:05:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[포토] 고영표, 김지찬 투땅 직접 처리",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-04T11:12:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/108/0003484659"
     },
     {
-     "title": "[포토] 삼진 김지찬 ‘유인구에 당했어’",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-04T10:26:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278147"
-    },
-    {
-     "title": "김지찬의 발을 기대하는게 아니잖아? '기본' 망각한 디아즈의 아쉬웠던...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-04T10:25:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/076/0004463235"
+     "title": "'스우파2' 우승자 바다, 댄서 하울과 결별…4살 연상연하 커플 마침표",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-04T10:38:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005436743"
     }
    ]
   },
@@ -364,44 +334,86 @@
    ]
   },
   {
-   "keyword": "배성재 김다영 계류유산 극복",
+   "keyword": "김지찬",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T10:10:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-04T10:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "배성재·김다영 \"지난해 계류유산\"…7주차에 수술→아픔 뒤늦게 고백 [R...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-04T11:26:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001407158"
+     "title": "[포토] 고영표, 김지찬 투땅 직접 처리",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-04T11:12:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/108/0003484659"
     },
     {
-     "title": "‘배성재♥’ 김다영, 12월 출산 앞두고 과거 유산 고백 \"심장 소리 안 ...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-04T11:13:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005634677"
+     "title": "[포토] 삼진 김지찬 ‘유인구에 당했어’",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-04T10:26:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278147"
     },
     {
-     "title": "'배성재 아내' 김다영, 계류유산 극복 후 임신 \"이제 세 식구\"",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-04T10:10:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109731568826"
+     "title": "김지찬의 발을 기대하는게 아니잖아? '기본' 망각한 디아즈의 아쉬웠던...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-04T10:25:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/076/0004463235"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 721,
-  "matched": 293,
-  "avgLeadMin": 279,
+  "flagged": 723,
+  "matched": 300,
+  "avgLeadMin": 273,
   "recent": [
+   {
+    "keyword": "한국시리즈 2차전 시구",
+    "hitKeyword": "한국시리즈 삼성 KT 2차전",
+    "hitAt": "2026-11-04T20:30:00+09:00",
+    "leadMin": 53
+   },
+   {
+    "keyword": "조범현 한국시리즈 시구",
+    "hitKeyword": "조범현 이만수 시구시포",
+    "hitAt": "2026-11-04T20:30:00+09:00",
+    "leadMin": 43
+   },
+   {
+    "keyword": "호반 한진칼 최대주주",
+    "hitKeyword": "호반 한진칼",
+    "hitAt": "2026-11-04T20:30:00+09:00",
+    "leadMin": 23
+   },
+   {
+    "keyword": "미국 중간선거",
+    "hitKeyword": "중간선거 반도체 영향",
+    "hitAt": "2026-11-04T20:30:00+09:00",
+    "leadMin": 23
+   },
+   {
+    "keyword": "호반그룹 한진칼 최대주주",
+    "hitKeyword": "호반 한진칼",
+    "hitAt": "2026-11-04T20:30:00+09:00",
+    "leadMin": 13
+   },
+   {
+    "keyword": "고영표, 한국시리즈 2차전 선발",
+    "hitKeyword": "한국시리즈 삼성 KT 2차전",
+    "hitAt": "2026-11-04T20:30:00+09:00",
+    "leadMin": 13
+   },
+   {
+    "keyword": "배성재 김다영 계류유산 극복",
+    "hitKeyword": "배성재 계류유산",
+    "hitAt": "2026-11-04T20:30:00+09:00",
+    "leadMin": 3
+   },
    {
     "keyword": "신촌 세브란스 흉기 난동",
     "hitKeyword": "세브란스병원 흉기 난동 사건",
@@ -419,48 +431,6 @@
     "hitKeyword": "세브란스병원 흉기 난동 사건",
     "hitAt": "2026-11-04T20:00:00+09:00",
     "leadMin": 13
-   },
-   {
-    "keyword": "노스캐롤라이나 상원 민주 승리",
-    "hitKeyword": "민주당 상원 경합지 승리",
-    "hitAt": "2026-11-04T19:30:00+09:00",
-    "leadMin": 356
-   },
-   {
-    "keyword": "SK SK에코플랜트 공개매수",
-    "hitKeyword": "호반 한진칼 공개매수",
-    "hitAt": "2026-11-04T19:30:00+09:00",
-    "leadMin": 84
-   },
-   {
-    "keyword": "한진칼 최대주주 변경",
-    "hitKeyword": "호반 한진칼 공개매수",
-    "hitAt": "2026-11-04T19:30:00+09:00",
-    "leadMin": 44
-   },
-   {
-    "keyword": "민호 마라톤 기록 반납",
-    "hitKeyword": "샤이니 민호 마라톤",
-    "hitAt": "2026-11-04T19:00:00+09:00",
-    "leadMin": 94
-   },
-   {
-    "keyword": "美 민주당 압승",
-    "hitKeyword": "중간선거 민주당 승리",
-    "hitAt": "2026-11-04T19:00:00+09:00",
-    "leadMin": 14
-   },
-   {
-    "keyword": "코스피 하락 전환",
-    "hitKeyword": "코스피 요동 마감",
-    "hitAt": "2026-11-04T18:30:00+09:00",
-    "leadMin": 206
-   },
-   {
-    "keyword": "코스피 코스닥 상승 마감",
-    "hitKeyword": "코스피 요동 마감",
-    "hitAt": "2026-11-04T18:30:00+09:00",
-    "leadMin": 75
    }
   ]
  }
