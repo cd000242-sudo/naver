@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T08:15:26.927Z",
+ "builtAt": "2026-11-04T08:25:31.299Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "홍콩 ELS 과징금",
@@ -16,41 +16,137 @@
     "signal.bz"
    ],
    "articles90": 99,
-   "recent20": 23,
-   "press": 93,
-   "firstArticleAt": "2026-11-04T07:10:00.000Z",
+   "recent20": 19,
+   "press": 94,
+   "firstArticleAt": "2026-11-04T07:14:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "홍콩 ELS 과징금·과태료 3746억원…역대 최대 규모",
-     "press": "newsprime.co.kr",
-     "publishedAt": "2026-11-04T08:14:00.000Z",
-     "link": "http://www.newsprime.co.kr/news/article.html?no=753759"
+     "title": "홍콩 ELS 불완전판매 은행 7곳에 과징금 3620억원 확정",
+     "press": "weekly.hankooki.com",
+     "publishedAt": "2026-11-04T08:24:00.000Z",
+     "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7192259"
     },
     {
-     "title": "금융위, 홍콩 ELS 관련 은행·증권사 13곳에 3744억 과징금",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-04T08:12:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/324166/?sc=Naver"
+     "title": "홍콩 ELS 과징금 4조→2조→1.4조→3712억 … 3년 만에 '90% 감경' 결론",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-04T08:22:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/04/2026110400346.html"
     },
     {
-     "title": "금융위원회, 홍콩H지수 ELS 불완전판매 과징금 약 3700억원 최종 확정",
-     "press": "ngonews.kr",
-     "publishedAt": "2026-11-04T08:12:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=242355"
+     "title": "홍콩ELS 제재 3년 만에 마무리...7개 은행·6개 증권사에 과징금 3712억 ...",
+     "press": "consumernews.co.kr",
+     "publishedAt": "2026-11-04T08:20:00.000Z",
+     "link": "http://www.consumernews.co.kr/news/articleView.html?idxno=767583"
     }
    ]
   },
   {
-   "keyword": "코스피 코스닥 상승 마감",
+   "keyword": "코스피 하락 전환",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 63,
+   "recent20": 2,
+   "press": 55,
+   "firstArticleAt": "2026-11-04T06:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美 중간선거 개표 후 코스피 반등 성공…\"이번엔 AI 수익성이 관건\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-04T08:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005436674?sid=101"
+    },
+    {
+     "title": "[증시 오늘] 외국인 매도 폭탄에도 코스피 0.62%↑",
+     "press": "bigtanews.co.kr",
+     "publishedAt": "2026-11-04T08:06:00.000Z",
+     "link": "https://www.bigtanews.co.kr/article/view/big202611040020"
+    },
+    {
+     "title": "코스피 '블루웨이브'에 롤러코스터…급락 딛고 0.62% 상승",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-04T08:02:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1319283&inflow=N"
+    }
+   ]
+  },
+  {
+   "keyword": "대통령의 Y 국민 소통",
    "sources": [
     "nate"
    ],
-   "articles90": 74,
-   "recent20": 2,
-   "press": 61,
-   "firstArticleAt": "2026-11-04T06:46:00.000Z",
+   "articles90": 45,
+   "recent20": 6,
+   "press": 44,
+   "firstArticleAt": "2026-11-04T06:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령 유튜브 방송도 시작. <대통령의 Y> 5일 방송",
+     "press": "viewsnnews.com",
+     "publishedAt": "2026-11-04T08:18:00.000Z",
+     "link": "https://www.viewsnnews.com/article?q=239497"
+    },
+    {
+     "title": "이 대통령, 유튜브 '대통령의 Y' 론칭",
+     "press": "mediaus.co.kr",
+     "publishedAt": "2026-11-04T08:16:00.000Z",
+     "link": "https://www.mediaus.co.kr/news/articleView.html?idxno=318819"
+    },
+    {
+     "title": "이재명 대통령, 유튜브로 국민과 직접 소통…‘대통령의 Y’ 5일 첫 방송",
+     "press": "wemakenews.co.kr",
+     "publishedAt": "2026-11-04T08:14:00.000Z",
+     "link": "https://wemakenews.co.kr/news/view.php?no=26744"
+    }
+   ]
+  },
+  {
+   "keyword": "유튜브 대통령 Y 소통 방송",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 42,
+   "recent20": 5,
+   "press": 41,
+   "firstArticleAt": "2026-11-04T06:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령 유튜브 방송도 시작. <대통령의 Y> 5일 방송",
+     "press": "viewsnnews.com",
+     "publishedAt": "2026-11-04T08:18:00.000Z",
+     "link": "https://www.viewsnnews.com/article?q=239497"
+    },
+    {
+     "title": "이 대통령, 유튜브 '대통령의 Y' 론칭",
+     "press": "mediaus.co.kr",
+     "publishedAt": "2026-11-04T08:16:00.000Z",
+     "link": "https://www.mediaus.co.kr/news/articleView.html?idxno=318819"
+    },
+    {
+     "title": "이재명 대통령, 유튜브로 국민과 직접 소통…‘대통령의 Y’ 5일 첫 방송",
+     "press": "wemakenews.co.kr",
+     "publishedAt": "2026-11-04T08:14:00.000Z",
+     "link": "https://wemakenews.co.kr/news/view.php?no=26744"
+    }
+   ]
+  },
+  {
+   "keyword": "코스닥 상승 마감",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 45,
+   "recent20": 1,
+   "press": 41,
+   "firstArticleAt": "2026-11-04T06:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -61,48 +157,16 @@
      "link": "http://www.kdfnews.com/news/articleView.html?idxno=190450"
     },
     {
-     "title": "[증시 오늘] 외국인 매도 폭탄에도 코스피 0.62%↑",
-     "press": "bigtanews.co.kr",
-     "publishedAt": "2026-11-04T08:06:00.000Z",
-     "link": "https://www.bigtanews.co.kr/article/view/big202611040020"
-    },
-    {
      "title": "코스피, 美 중간선거에 내내 출렁이다 0.62% 상승",
      "press": "kookje.co.kr",
      "publishedAt": "2026-11-04T07:52:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/658/0000160380?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "유튜브 대통령 Y 소통 방송",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 55,
-   "recent20": 7,
-   "press": 53,
-   "firstArticleAt": "2026-11-04T06:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이재명 대통령, 유튜브로 국민과 직접 소통…‘대통령의 Y’ 5일 첫 방송",
-     "press": "wemakenews.co.kr",
-     "publishedAt": "2026-11-04T08:14:00.000Z",
-     "link": "https://wemakenews.co.kr/news/view.php?no=26744"
     },
     {
-     "title": "李대통령, 유튜브 대국민 직접 소통…내일 '대통령의 Y' 첫 선",
-     "press": "namdonews.com",
-     "publishedAt": "2026-11-04T08:12:00.000Z",
-     "link": "https://www.namdonews.com/news/articleView.html?idxno=928206"
-    },
-    {
-     "title": "[자막뉴스] 대국민 소통 문 '활짝'…'대통령의 Y'로 접점 더 늘린다",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-04T08:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400656?sid=100"
+     "title": "코스피, 美 중간선거 여파에 출렁···개인·기관 매수 유입 5680선 마감",
+     "press": "seoulfn.com",
+     "publishedAt": "2026-11-04T07:52:00.000Z",
+     "link": "https://www.seoulfn.com/news/articleView.html?idxno=641911"
     }
    ]
   },
@@ -112,30 +176,62 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 41,
-   "recent20": 6,
-   "press": 33,
-   "firstArticleAt": "2026-11-04T06:46:00.000Z",
+   "articles90": 38,
+   "recent20": 5,
+   "press": 29,
+   "firstArticleAt": "2026-11-04T06:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "尹 '선거법' 2심도 당선무효형...\"변호사·건진법사 발언 허위사실 공표...",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-04T08:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002393342?sid=100"
+     "title": "윤석열, 2심도 ‘당선무효형’…국힘 ‘397억’ 반환 위기",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-04T08:24:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1319261&inflow=N"
     },
     {
-     "title": "尹 선거법 2심도 유죄...민주당 \"397억 반환하라\" vs 국민의힘 \"대법원 ...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-04T08:10:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261104001284"
+     "title": "윤석열의 남은 패... '이 대통령 사건 물귀신 작전'",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-04T08:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002534666?sid=102"
     },
     {
-     "title": "범여권 \"尹 선거법 2심 유죄는 당연한 판단…국힘, 397억 반환하라\"",
-     "press": "busan.com",
-     "publishedAt": "2026-11-04T08:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001405664?sid=100"
+     "title": "국힘, '尹 선거법' 2심 유죄에 \"與, 李 선거법 사건 파기환송 사과한 적...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-04T08:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014301824?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "민호 마라톤 기록 반납",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 14,
+   "recent20": 2,
+   "press": 12,
+   "firstArticleAt": "2026-11-04T06:57:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "민호, ‘서브3’까지 단 18초였는데…부정 조력 의혹에 자진 기록 반납...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-04T08:18:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001146122"
+    },
+    {
+     "title": "'밀어주기 논란'→기록 자진 반납한 샤이니 민호, 알고 보니 '대한체육...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-04T08:15:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001407113"
+    },
+    {
+     "title": "\"부끄럽다\" 샤이니 민호, '밀어주기 논란' 마라톤 기록 자진 반납…주최...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-04T08:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000637100"
     }
    ]
   },
@@ -144,30 +240,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
+   "articles90": 13,
    "recent20": 5,
-   "press": 9,
+   "press": 11,
    "firstArticleAt": "2026-11-04T07:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "[美중간선거] 민주, 상원 7대 경합지 중 6곳 승리…54석 확보할 듯(종합...",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-04T08:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016422149?sid=104"
+    },
+    {
+     "title": "美 중간선거 민주당 압승 전망…상·하원 장악에 트럼프 '거부권' 맞불 ...",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-04T08:18:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=171950"
+    },
+    {
      "title": "美 민주당 중간선거 압승, 상하원 모두 장악…트럼프 국정운영 급제동",
      "press": "mediapen.com",
      "publishedAt": "2026-11-04T08:12:00.000Z",
      "link": "https://www.mediapen.com/news/view/1135205"
-    },
-    {
-     "title": "[美중간선거] 민주당 상·하원 모두 장악…트럼프 패배 부른 물가·이란...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-04T08:10:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16268312"
-    },
-    {
-     "title": "\"민주당, 하원 과반 확보\"...트럼프 입지 좁아질까 [이슈ON]",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-04T08:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002428307?sid=104"
     }
    ]
   },
@@ -176,78 +272,51 @@
    "sources": [
     "google"
    ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-04T06:52:00.000Z",
+   "articles90": 12,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-04T07:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "경찰, 식당 개·폐업 반복 임금체불하고 도주한 남성 검거",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-04T07:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002428298?sid=102"
+     "title": "개봉 일주일 만에 25만 명 봤다…반려인 눈물 자극하며 호평 받고 있는...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-04T08:23:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000486440"
     },
     {
-     "title": "수익률∙절세∙배당정보…금융권, 개인 자산관리 접점 넓힌다",
-     "press": "kdfnews.com",
-     "publishedAt": "2026-11-04T07:40:00.000Z",
-     "link": "http://www.kdfnews.com/news/articleView.html?idxno=190448"
+     "title": "경기북부경찰청, '식당 개·폐업 반복' 수십 명 임금 체불 30대 도피 끝...",
+     "press": "lawissue.co.kr",
+     "publishedAt": "2026-11-04T08:20:00.000Z",
+     "link": "https://www.lawissue.co.kr/view.php?ud=202611041615115635b50722e900_12"
     },
     {
-     "title": "목줄 묶인 개 걷어차고 경찰관 폭행한 60대…징역형 집행유예",
-     "press": "kgnews.co.kr",
-     "publishedAt": "2026-11-04T07:26:00.000Z",
-     "link": "https://www.kgnews.co.kr/news/article.html?no=918201"
-    }
-   ]
-  },
-  {
-   "keyword": "약국",
-   "sources": [
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 5,
-   "press": 7,
-   "firstArticleAt": "2026-11-04T07:24:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'약국에서 철근 낙찰?' 황정아 \"나라장터 부적격 낙찰 226억\"",
-     "press": "tjb.co.kr",
-     "publishedAt": "2026-11-04T08:10:00.000Z",
-     "link": "https://www.tjb.co.kr/news05/bodo/view/id/105693"
-    },
-    {
-     "title": "토니모리, 홍대 뷰티온누리약국 입점…약국 유통채널 확대",
-     "press": "newslock.co.kr",
-     "publishedAt": "2026-11-04T08:04:00.000Z",
-     "link": "http://www.newslock.co.kr/news/articleView.html?idxno=139330"
-    },
-    {
-     "title": "DRxS '내손안의약국', 공식 홈페이지 전격 개편… 일반 사용자 UX 대폭 강...",
-     "press": "bokuennews.com",
-     "publishedAt": "2026-11-04T08:04:00.000Z",
-     "link": "http://www.bokuennews.com/news/article.html?no=286647"
+     "title": "[수원지법 판결]\"짖는다\"며 묶인 개 걷어차고 경찰관 때린 60대, '징역형...",
+     "press": "lawissue.co.kr",
+     "publishedAt": "2026-11-04T08:16:00.000Z",
+     "link": "https://www.lawissue.co.kr/view.php?ud=202611041605434314b50722e900_12"
     }
    ]
   },
   {
    "keyword": "정하연 별세 애도",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 4,
    "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-04T06:55:00.000Z",
+   "firstArticleAt": "2026-11-04T07:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "채시라 “또 한분의 거장 가셨다”…故최불암 이어 故정하연 작가 애도",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-04T08:16:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000519121"
+    },
     {
      "title": "故 최불암 이어…채시라, 故 정하연 별세에 \"또 한 분의 거장 가셔\"",
      "press": "stoo.com",
@@ -259,51 +328,45 @@
      "press": "mk.co.kr",
      "publishedAt": "2026-11-04T07:38:00.000Z",
      "link": "https://m.entertain.naver.com/article/410/0001146117"
-    },
-    {
-     "title": "정하연 작가 별세…채시라 \"뵙고 싶었는데 후회\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-04T07:28:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005436609"
     }
    ]
   },
   {
-   "keyword": "이강철 감독 미소",
+   "keyword": "이재명 공공재개발 현장 방문",
    "sources": [
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T07:13:00.000Z",
+   "articles90": 3,
+   "recent20": 2,
+   "press": 2,
+   "firstArticleAt": "2026-11-04T07:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[ST포토] 이강철 감독, 여유 있는 미소",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-04T07:28:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109726483881"
+     "title": "장위 공공재개발 현장 찾은 李 \"공공재개발로 주택공급 속도내야\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-04T08:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005436686?sid=100"
     },
     {
-     "title": "[MD포토] 이강철 감독, '미소를 숨길수 없어'",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-04T07:25:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/117/0004121943"
+     "title": "이 대통령, 장위9구역 공공재개발 현장 찾아… \"공공이 하면 속도 빨라...",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-04T08:18:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261104500577"
     },
     {
-     "title": "[KS2] “대타도 힘들어…” 김상수 부상 악재, 이강철 감독의 선택은 ‘...",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-04T07:23:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/396/0000760016"
+     "title": "\"객관적 자료 잘 봐야\"…李대통령이 장위동 '재개발 현장' 간 까닭은",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-04T07:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005436635?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 664,
+  "flagged": 668,
   "matched": 276,
   "avgLeadMin": 280,
   "recent": [
