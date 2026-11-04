@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T00:42:14.677Z",
+ "builtAt": "2026-11-04T00:52:17.946Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,62 +15,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 80,
-   "recent20": 33,
-   "press": 50,
-   "firstArticleAt": "2026-11-03T23:14:00.000Z",
+   "articles90": 83,
+   "recent20": 29,
+   "press": 58,
+   "firstArticleAt": "2026-11-04T00:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[이 시각 시황] 반도체주 강세에 코스피 2.2% 반등…외국인·기관 동반 ...",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-04T00:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000541571?sid=101"
+     "title": "[개장] 코스피, 美반도체주 강세에 5700선 회복",
+     "press": "it.chosun.com",
+     "publishedAt": "2026-11-04T00:50:00.000Z",
+     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000000195"
     },
     {
-     "title": "코스피 5700선 탈환…반도체 급등에 증시 반격",
-     "press": "newskr.kr",
-     "publishedAt": "2026-11-04T00:40:00.000Z",
-     "link": "http://www.newskr.kr/news/articleView.html?idxno=107671"
+     "title": "‘외인 이번엔 진짜 돌아올까’ 美 기술주 반등에 코스피 장 초반 3% 급...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-04T00:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002718556?sid=101"
     },
     {
-     "title": "코스피, 美 반도체주 반등에 2%대 상승 출발…5700선 회복",
-     "press": "greened.kr",
-     "publishedAt": "2026-11-04T00:39:00.000Z",
-     "link": "https://www.greened.kr/news/articleView.html?idxno=353777"
-    }
-   ]
-  },
-  {
-   "keyword": "HLB 간암 신약 허가 심사",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 34,
-   "recent20": 8,
-   "press": 32,
-   "firstArticleAt": "2026-11-03T23:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "HLB, '리보세라닙' 허가 내년으로 넘어간다…18%대 하락",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-04T00:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005436278?sid=101"
-    },
-    {
-     "title": "HLB, 간암 신약 FDA 본심사 재개…내년 4월 결론",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-04T00:36:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=501122"
-    },
-    {
-     "title": "HLB, 간암 신약 美 허가 네 번째 도전 … \"내년 4월 9일 허가 결정\"",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-04T00:34:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/04/2026110400062.html"
+     "title": "\"코스피 급락에 안전자산 선호…국채 장기물 강세 마감\"<유진투자證>",
+     "press": "news2day.co.kr",
+     "publishedAt": "2026-11-04T00:48:00.000Z",
+     "link": "https://www.news2day.co.kr/article/20261104500049"
     }
    ]
   },
@@ -79,30 +47,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 25,
-   "recent20": 3,
-   "press": 23,
-   "firstArticleAt": "2026-11-03T23:17:00.000Z",
+   "articles90": 22,
+   "recent20": 5,
+   "press": 22,
+   "firstArticleAt": "2026-11-03T23:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성전자서비스, KS-SQI 에어컨 AS 부문 2년 연속 1위",
-     "press": "socialvalue.kr",
-     "publishedAt": "2026-11-04T00:36:00.000Z",
-     "link": "https://www.socialvalue.kr/news/view/1065573243656878"
+     "title": "삼성전자서비스, 한국서비스품질지수 에어컨 AS 부문 2년 연속 1위",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-04T00:48:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=901823"
     },
     {
-     "title": "삼성전자서비스, 에어컨 AS 품질 2년 연속 1위 … AI 원격진단·맞춤형 ...",
-     "press": "worktoday.co.kr",
-     "publishedAt": "2026-11-04T00:34:00.000Z",
-     "link": "http://www.worktoday.co.kr/news/articleView.html?idxno=91441"
+     "title": "삼성전자서비스, 에어컨 AS 서비스품질 2년 연속 1위…AI 원격진단·고객...",
+     "press": "straightnews.co.kr",
+     "publishedAt": "2026-11-04T00:46:00.000Z",
+     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=314571"
     },
     {
-     "title": "삼성전자·삼성전자서비스, 갤럭시 버즈 '청력 체크-케어' 기능 식약처...",
-     "press": "wsobi.com",
-     "publishedAt": "2026-11-04T00:24:00.000Z",
-     "link": "http://www.wsobi.com/news/articleView.html?idxno=320988"
+     "title": "삼성전자서비스, 품질지수 2년 연속 정상…원격진단 호평",
+     "press": "financialpost.co.kr",
+     "publishedAt": "2026-11-04T00:46:00.000Z",
+     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=284525"
+    }
+   ]
+  },
+  {
+   "keyword": "한미반도체",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 19,
+   "recent20": 4,
+   "press": 19,
+   "firstArticleAt": "2026-11-03T23:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "곽동신 한미반도체 회장, 사재로 주식 100억원 추가 매수…올해 다섯 번...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-04T00:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202412?sid=105"
+    },
+    {
+     "title": "곽동신 한미반도체 회장, 자사주 100억원 추가 매수",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-04T00:42:00.000Z",
+     "link": "https://www.viva100.com/article/20261104500312"
+    },
+    {
+     "title": "한미반도체 곽동신, 100억원 규모 자사주 추가 취득",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-04T00:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922693?sid=101"
     }
    ]
   },
@@ -111,10 +111,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 13,
-   "recent20": 4,
-   "press": 13,
-   "firstArticleAt": "2026-11-03T23:16:00.000Z",
+   "articles90": 11,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-03T23:32:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -143,10 +143,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 19,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-03T23:19:00.000Z",
+   "articles90": 18,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-03T23:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -163,10 +163,10 @@
      "link": "https://n.news.naver.com/mnews/article/003/0014299899?sid=100"
     },
     {
-     "title": "피지컬AI·로봇 글로벌 최강국 전북 대토론회 발언하는 신승규 현대차 ...",
+     "title": "피지컬AI·로봇 글로벌 최강국 전북 대토론회",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-03T23:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016420250?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/001/0016420254?sid=100"
     }
    ]
   },
@@ -202,11 +202,75 @@
      "link": "https://n.news.naver.com/mnews/article/050/0000112798?sid=101"
     }
    ]
+  },
+  {
+   "keyword": "HLB 간암 신약 지연",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-03T23:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "HLB, 기대보다 길어진 美FDA 심사 기간 결정되자 '급락'",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-04T00:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005350025?sid=101"
+    },
+    {
+     "title": "HLB 간암 신약, FDA 본심사 재진입…내년 4월 심사 목표",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-04T00:24:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=622852"
+    },
+    {
+     "title": "[핫타임]간암 신약, 美 허가 지연…HLB·HLB 제약 동반 20% 이상 '급락'",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-03T23:56:00.000Z",
+     "link": "https://www.ajunews.com/view/20261104085050913"
+    }
+   ]
+  },
+  {
+   "keyword": "러시아 우크라 구호센터 폭격",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T23:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "러, 우크라 구호센터 폭격해 최소 33명 사망…종전협상 주도권 노리나",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-04T00:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012286862?sid=104"
+    },
+    {
+     "title": "러시아, 우크라 구호품 배급소에 폭격…최소 33명 사망, 50여명 매몰 추...",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-04T00:26:00.000Z",
+     "link": "https://www.ajunews.com/view/20261104090627034"
+    },
+    {
+     "title": "“최소 33명 사망했다”…우크라 구호센터에 폭탄 9발 투하한 러시아",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-03T23:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005758624?sid=104"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 522,
+  "flagged": 524,
   "matched": 217,
   "avgLeadMin": 284,
   "recent": [
