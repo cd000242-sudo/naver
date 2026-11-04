@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T11:37:32.860Z",
+ "builtAt": "2026-11-04T11:47:43.007Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,72 +8,8 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 21,
  "candidates": [
-  {
-   "keyword": "CJ컨소시엄, 중앙일보 인수계약",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 24,
-   "recent20": 2,
-   "press": 24,
-   "firstArticleAt": "2026-11-04T10:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "중앙일보, 다우·CJ컨소시엄에 피인수…5일 5,200억 규모 신주 계약",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-04T11:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922931?sid=101"
-    },
-    {
-     "title": "중앙일보 주인 바뀐다…다우·CJ컨소시엄 ‘5200억’ 인수",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-04T11:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002830365?sid=102"
-    },
-    {
-     "title": "다우·CJ컨소시엄, 5일 중앙일보 인수계약…5200억 투입",
-     "press": "dealsite.co.kr",
-     "publishedAt": "2026-11-04T11:08:00.000Z",
-     "link": "https://dealsite.co.kr/articles/172115"
-    }
-   ]
-  },
-  {
-   "keyword": "연천 고병원성 AI 발생",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 18,
-   "recent20": 1,
-   "press": 17,
-   "firstArticleAt": "2026-11-04T10:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "올 겨울 첫 AI 발생에 韓 총리 \"초동 방역 힘써야\"",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-04T11:28:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5079919"
-    },
-    {
-     "title": "연천 산란계 농장서 올겨울 첫 고병원성 AI 발생",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-04T11:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922922?sid=101"
-    },
-    {
-     "title": "경기 연천 산란계 농장서 AI 첫 발생",
-     "press": "bokuennews.com",
-     "publishedAt": "2026-11-04T11:06:00.000Z",
-     "link": "http://www.bokuennews.com/news/article.html?no=286665"
-    }
-   ]
-  },
   {
    "keyword": "강호동 구속영장 신청",
    "sources": [
@@ -81,61 +17,61 @@
     "nate"
    ],
    "articles90": 17,
-   "recent20": 0,
+   "recent20": 2,
    "press": 17,
-   "firstArticleAt": "2026-11-04T10:12:00.000Z",
+   "firstArticleAt": "2026-11-04T10:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "경찰, ‘금품수수 혐의’ 강호동 농협중앙회장 구속영장 신청",
+     "press": "donga.com",
+     "publishedAt": "2026-11-04T11:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003760107?sid=101"
+    },
+    {
+     "title": "경찰, 강호동 농협중앙회장 구속영장 신청",
+     "press": "news.knn.co.kr",
+     "publishedAt": "2026-11-04T11:38:00.000Z",
+     "link": "https://news.knn.co.kr/news/article/194045"
+    },
     {
      "title": "경찰, 강호동 농협중앙회장 구속영장 신청…'억대' 금품·공금유용 의혹",
      "press": "ikbc.co.kr",
      "publishedAt": "2026-11-04T11:07:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/660/0000120605?sid=102"
-    },
-    {
-     "title": "경찰, 강호동 농협중앙회장 구속영장 신청…1억원대 금품수수 의혹",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-04T10:56:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=100628"
-    },
-    {
-     "title": "경찰, 강호동 농협중앙회장 구속영장 신청…1억대 뇌물수수 등 혐의",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-04T10:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002247335?sid=101"
     }
    ]
   },
   {
-   "keyword": "세브란스 병원",
+   "keyword": "삼성바이오 2차 파업",
    "sources": [
-    "daum"
+    "nate"
    ],
    "articles90": 16,
-   "recent20": 4,
+   "recent20": 2,
    "press": 16,
-   "firstArticleAt": "2026-11-04T10:11:00.000Z",
+   "firstArticleAt": "2026-11-04T10:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "신촌 세브란스병원서 흉기 난동…정신건강의학과 교수 부상",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-04T11:34:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1542683"
+     "title": "삼성바이오 노사, 재교섭도 불발… 노조는 6일 부터 2차 파업 예고",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-04T11:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202649?sid=101"
     },
     {
-     "title": "신촌 세브란스 진료실서 흉기 휘두른 50대 여성…정신건강의학과 교수 ...",
-     "press": "segyebiz.com",
-     "publishedAt": "2026-11-04T11:28:00.000Z",
-     "link": "http://www.segyebiz.com/newsView/20261104521109?OutUrl=naver"
+     "title": "삼성바이오 노조, 6일 2차 파업 예고…“회사가 교섭 불응”",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-04T11:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001883062?sid=101"
     },
     {
-     "title": "신촌세브란스병원서 교수 흉기에 찔려…50대 여성 현행범 체포",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-04T11:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/117/0004122083?sid=102"
+     "title": "삼성바이오 노조, 6일 2차 파업…회사 \"환자 피해 방지에 최선\"",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-04T11:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005350436?sid=105"
     }
    ]
   },
@@ -145,95 +81,94 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 61,
+   "articles90": 59,
    "recent20": 7,
    "press": 12,
-   "firstArticleAt": "2026-11-04T10:17:00.000Z",
+   "firstArticleAt": "2026-11-04T10:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "디아즈 '1루로 토스'[포토]",
+     "title": "디아즈 ‘점프하여 캐치’[포토]",
      "press": "xportsnews.com",
-     "publishedAt": "2026-11-04T11:34:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/311/0002076690"
+     "publishedAt": "2026-11-04T11:46:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/311/0002076699"
     },
     {
-     "title": "디아즈·강민호와 기쁨 나누는 페덱",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T11:31:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/421/0009270822"
+     "title": "디아즈와 하이파이브 나누는 페덱[포토]",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-04T11:46:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/311/0002076703"
     },
     {
-     "title": "[포토]'만루다!' 디아즈",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-04T11:29:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/108/0003484665"
+     "title": "[사진]최원준 안타 놓치는 디아즈",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-04T11:41:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/109/0005634720"
     }
    ]
   },
   {
    "keyword": "KT 고영표 역투",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 5,
+   "articles90": 10,
+   "recent20": 3,
+   "press": 7,
    "firstArticleAt": "2026-11-04T10:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "‘사자 사냥꾼’ 고영표, 좌타 라인에 고전하고도 7이닝 1실점 눈부신 호...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-04T11:46:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/144/0001148122"
+    },
+    {
+     "title": "만루 위기→병살 유도→주먹 쥐고 포효했다! '고퀄스' 고영표 또 QS, 7이...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-04T11:46:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/311/0002076702"
+    },
+    {
      "title": "역투하는 고영표",
      "press": "newsis.com",
-     "publishedAt": "2026-11-04T11:32:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/003/0014302087"
-    },
-    {
-     "title": "6회 역투하는 고영표",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-04T11:14:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/003/0014302075"
-    },
-    {
-     "title": "내가 바로 KT 고영표",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T11:11:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/421/0009270781"
+     "publishedAt": "2026-11-04T11:42:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/003/0014302113"
     }
    ]
   },
   {
-   "keyword": "최원준 선두타자 2루타",
+   "keyword": "투표록 위·변조 압수수색",
    "sources": [
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-04T10:14:00.000Z",
-   "exclusive": false,
+   "articles90": 8,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-04T10:18:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "'1회→2회→4회' 선두타자 계속 출루 KT, 마침내 승부 원점으로!…힐리...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-04T11:02:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/311/0002076648"
+     "title": "이태한 특검, 선관위 투표록 위·변조 의혹 압수수색",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-04T11:34:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1542692"
     },
     {
-     "title": "1위팀, 드디어 페덱에 첫 득점! 힐리어드 2루타→허경민 적시타 터졌다...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-04T10:56:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/109/0005634661"
+     "title": "특검 \"'투표록 사후 기재' 지시 정황 포착\"…선관위 압수수색, 10여명 입...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-04T11:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014302082?sid=102"
     },
     {
-     "title": "KT, 4회말 힐리어드 2루타+허경민 좌전 적시타로 반격 시작…1-1 동점",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-04T10:50:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109733533901"
+     "title": "[단독] 선거 4~5일 뒤 '투표록' 수정…중앙선관위 지시 정황 확인",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-04T11:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000519168?sid=102"
     }
    ]
   },
@@ -243,7 +178,7 @@
     "google"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-04T10:48:00.000Z",
    "exclusive": false,
@@ -270,66 +205,34 @@
    ]
   },
   {
-   "keyword": "바다 하울, 연인에서 동료로",
+   "keyword": "최원준 선두타자 2루타",
    "sources": [
     "nate"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T10:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘댄서 커플’ 바다·하울, 최근 결별…동료로 남기로",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-04T11:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005759158"
-    },
-    {
-     "title": "‘베베’ 바다X‘팀아임’ 하울, 연인 관계 마침표…“좋은 동료로”",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-04T10:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000760037"
-    },
-    {
-     "title": "'스우파2' 우승자 바다, 댄서 하울과 결별…4살 연상연하 커플 마침표",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-04T10:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005436743"
-    }
-   ]
-  },
-  {
-   "keyword": "코스피 하락 전환",
-   "sources": [
-    "signal.bz"
    ],
    "articles90": 4,
    "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-04T10:20:00.000Z",
+   "firstArticleAt": "2026-11-04T10:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "상승→하락→반등… 美 중간선거에 요동친 코스피",
-     "press": "segye.com",
-     "publishedAt": "2026-11-04T10:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004172552?sid=101"
+     "title": "'1회→2회→4회' 선두타자 계속 출루 KT, 마침내 승부 원점으로!…힐리...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-04T11:02:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/311/0002076648"
     },
     {
-     "title": "코스피, 400포인트 넘는 롤러코스터 장세…개인·기관 매수세에 상승 마...",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-04T10:32:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=846192"
+     "title": "1위팀, 드디어 페덱에 첫 득점! 힐리어드 2루타→허경민 적시타 터졌다...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-04T10:56:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/109/0005634661"
     },
     {
-     "title": "급등과 급락 반복한 코스피…무엇이 흔들었나 [Visual]",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-04T10:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005759149?sid=101"
+     "title": "KT, 4회말 힐리어드 2루타+허경민 좌전 적시타로 반격 시작…1-1 동점",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-04T10:50:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109733533901"
     }
    ]
   },
@@ -364,11 +267,75 @@
      "link": "https://m.sports.naver.com/kbaseball/article/076/0004463235"
     }
    ]
+  },
+  {
+   "keyword": "댄서 바다 하울 결별",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T10:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘댄서 커플’ 바다·하울, 최근 결별…동료로 남기로",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-04T11:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005759158"
+    },
+    {
+     "title": "‘베베’ 바다X‘팀아임’ 하울, 연인 관계 마침표…“좋은 동료로”",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-04T10:38:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000760037"
+    },
+    {
+     "title": "'스우파2' 우승자 바다, 댄서 하울과 결별…4살 연상연하 커플 마침표",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-04T10:38:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005436743"
+    }
+   ]
+  },
+  {
+   "keyword": "코스피 하락 전환",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T10:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "상승→하락→반등… 美 중간선거에 요동친 코스피",
+     "press": "segye.com",
+     "publishedAt": "2026-11-04T10:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004172552?sid=101"
+    },
+    {
+     "title": "코스피, 400포인트 넘는 롤러코스터 장세…개인·기관 매수세에 상승 마...",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-04T10:32:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=846192"
+    },
+    {
+     "title": "장중 400P 출렁인 '롤러코스피'…\"하루 만에 18% 올랐다\" 엇갈린 희비",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-04T10:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001271681?sid=101"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 723,
+  "flagged": 726,
   "matched": 300,
   "avgLeadMin": 273,
   "recent": [
