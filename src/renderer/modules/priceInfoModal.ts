@@ -22,6 +22,7 @@ import {
   agentConnectWriteLog,
 } from './agentConnectFlow.js';
 import { initAgentModelSelects, syncAgentModelSelects } from './agentModelSelect.js';
+import { agentHarmonyChoiceLoad, agentHarmonyChoiceValue } from './agentHarmonyChoice.js';
 import {
   formatAgentVersionLabel,
   resolvePersistedTextModelConfig,
@@ -1072,6 +1073,8 @@ export async function initPriceInfoModal(): Promise<void> {
       const el = document.getElementById(elId) as HTMLInputElement | null;
       if (el) el.value = String((config as any)[cfgKey] || '');
     }
+    // [2026-11-04] 에이전트 글 검수 방식 — 키가 없으면 조화 모드(기본), false 만 기존 검수 방식.
+    agentHarmonyChoiceLoad(config as any);
     // 값을 채운 **뒤에** 드롭다운을 비춘다 — 순서가 바뀌면 저장된 모델이 목록에 안 잡힌다.
     try {
       syncAgentModelSelects();
@@ -1426,6 +1429,7 @@ export async function initPriceInfoModal(): Promise<void> {
         const agentCodexModelValue = agentModelValue('agent-codex-model');
         const agentClaudeModelValue = agentModelValue('agent-claude-model');
         const agentGeminiModelValue = agentModelValue('agent-gemini-model');
+        const agentHarmonyModeValue = agentHarmonyChoiceValue();
         const naverAdApiKeyValue = readSecretInputValue('naver-ad-api-key', currentConfig?.naverAdApiKey);
         const naverAdSecretKeyValue = readSecretInputValue('naver-ad-secret-key', currentConfig?.naverAdSecretKey);
         // [2026-08-06] 업데이트로 라디오 목록이 바뀌어 저장된 모델이 어느 라디오와도
@@ -1518,6 +1522,8 @@ export async function initPriceInfoModal(): Promise<void> {
           ...(agentCodexModelValue ? { agentCodexModel: agentCodexModelValue } : {}),
           ...(agentClaudeModelValue ? { agentClaudeModel: agentClaudeModelValue } : {}),
           ...(agentGeminiModelValue ? { agentGeminiModel: agentGeminiModelValue } : {}),
+          // [2026-11-04] 에이전트 글 검수 방식: true 조화 모드 / false 기존 검수 방식. 칸이 없으면 싣지 않는다.
+          ...(agentHarmonyModeValue !== undefined ? { agentHarmonyMode: agentHarmonyModeValue } : {}),
           ...(naverHubClientSecretValue ? { naverHubClientSecret: naverHubClientSecretValue } : {}),
         };
 

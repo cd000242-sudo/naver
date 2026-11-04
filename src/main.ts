@@ -7077,7 +7077,7 @@ ipcMain.handle(
           },
         }
       );
-      // 2026-11-04 Release C1: observe-mode agent harmony session — default OFF (config.agentHarmonyMode / env AGENT_HARMONY=1|0).
+      // 2026-11-04 Release C1: agent harmony session — default ON, off only when config.agentHarmonyMode === false (env AGENT_HARMONY=1|0 wins).
       // Only this person-run [글 생성] handler sets it; the unattended daily and multi-account paths never do.
       if (resolveAgentHarmonyFlag((await loadConfig().catch(() => null)) as any, process.env)) {
         (source as any).agentHarmony = true;

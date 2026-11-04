@@ -73,10 +73,12 @@ const tmp = () => { const dir = mkdtempSync(path.join(tmpdir(), 'bln-harmony-wir
 afterAll(() => { while (dirs.length) rmSync(dirs.pop()!, { recursive: true, force: true }); });
 
 describe('flag and request resolution', () => {
-  it('is OFF unless config says true; env 0/1 overrides in both directions', () => {
-    expect(resolveAgentHarmonyFlag(undefined, {})).toBe(false);
-    expect(resolveAgentHarmonyFlag({}, {})).toBe(false);
-    expect(resolveAgentHarmonyFlag({ agentHarmonyMode: 'yes' }, {})).toBe(false);
+  // 2026-11-04 owner: "조화모드를 모든 사용자 기본값으로 해주고 둘다 가능하게 해줘" — ON unless the classic review is picked.
+  it('is ON unless config says false (settings → 에이전트 글 검수 방식); env 0/1 overrides in both directions', () => {
+    expect(resolveAgentHarmonyFlag(undefined, {})).toBe(true);
+    expect(resolveAgentHarmonyFlag({}, {})).toBe(true);
+    expect(resolveAgentHarmonyFlag({ agentHarmonyMode: 'yes' }, {})).toBe(true);
+    expect(resolveAgentHarmonyFlag({ agentHarmonyMode: false }, {})).toBe(false);
     expect(resolveAgentHarmonyFlag({ agentHarmonyMode: true }, {})).toBe(true);
     expect(resolveAgentHarmonyFlag({ agentHarmonyMode: true }, { AGENT_HARMONY: '0' })).toBe(false);
     expect(resolveAgentHarmonyFlag({ agentHarmonyMode: false }, { AGENT_HARMONY: '1' })).toBe(true);

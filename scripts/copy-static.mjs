@@ -650,6 +650,8 @@ try {
     'placePicker.js',
     'lewordBoardPicker.js',
     'agentModelSelect.js',
+    // [2026-11-04] 에이전트 글 검수 방식 선택 (priceInfoModal 이 import)
+    'agentHarmonyChoice.js',
     // ✅ [SPEC-DROPSHOT-2026] 이미지 생성 스튜디오 (멀티엔진 대량 생성 서브탭)
     'imageGenStudio.js',
     'imageGenStudioCore.js',

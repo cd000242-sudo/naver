@@ -773,6 +773,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/renderer/modules/accountSettingsManager.ts',
   'src/renderer/modules/agentConnectFlow.ts',
   'src/renderer/modules/agentConnectGate.ts',
+  'src/renderer/modules/agentHarmonyChoice.ts',
   'src/renderer/modules/agentModelSelect.ts',
   'src/renderer/modules/agentQuotaBadge.ts',
   'src/renderer/modules/aiAssistant.ts',

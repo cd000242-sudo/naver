@@ -212,7 +212,8 @@ export interface AppConfig {
   naverQualityLoop?: boolean;
 
   /**
-   * [2026-11-04 Release C1] Agent harmony session (agent-claude / agent-codex homefeed, observe mode). **Default OFF**, no UI.
+   * [2026-11-04 Release C1] Agent harmony session (agent-claude / agent-codex, every text mode but photo). **Default ON** since
+   * 2026-11-04; false = the classic review, picked in settings → 에이전트 글 검수 방식 (agentHarmonyChoice.ts).
    * true runs the person-run [글 생성] as one harmony session that also reports its own packet; the packet is only
    * measured (log + run artifact + ledger), the article and every gate stay as they are. Env AGENT_HARMONY=1/0 wins.
    */

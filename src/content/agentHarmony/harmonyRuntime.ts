@@ -1,7 +1,7 @@
 /**
  * Agent harmony runtime glue (Release C1, 2026-11-04) — the small, testable seam contentGenerator calls.
  *
- *   resolveAgentHarmonyFlag     config.agentHarmonyMode / env AGENT_HARMONY (default OFF, env wins)
+ *   resolveAgentHarmonyFlag     config.agentHarmonyMode / env AGENT_HARMONY (default ON since 2026-11-04, env wins)
  *   resolveAgentHarmonyRequest  should THIS generation run as a harmony session? (flag + agent engine + text mode + not V3)
  *   handleAgentHarmonyResponse  right after JSON parse: strip, verify, attach, log, write artifact + ledger
  *   attachAgentHarmony          non-enumerable `_agentHarmony` on the article (never in JSON / IPC / publish payload)
@@ -18,12 +18,16 @@ import { extractHarmonyPacket } from './harmonyPacketExtract.js';
 import { verifyHarmonyPacket } from './harmonyPacketVerify.js';
 import type { AgentHarmonyRecord, HarmonyVerification } from './harmonyPacketTypes.js';
 
-/** env AGENT_HARMONY=1/0 (also true/false/on/off) overrides; otherwise only an explicit `agentHarmonyMode: true`. */
+/**
+ * env AGENT_HARMONY=1/0 (also true/false/on/off) overrides; otherwise ON unless the person picked the classic review
+ * (`agentHarmonyMode: false`, settings → 에이전트 글 검수 방식). 2026-11-04 owner: "조화모드를 모든 사용자 기본값으로 해주고
+ * 둘다 가능하게 해줘" — a hand-set `true` had been silently lost, so the default no longer depends on a saved key.
+ */
 export function resolveAgentHarmonyFlag(config: { readonly agentHarmonyMode?: unknown } | null | undefined, env: NodeJS.ProcessEnv = process.env): boolean {
   const value = String(env.AGENT_HARMONY ?? '').trim().toLowerCase();
   if (value === '0' || value === 'false' || value === 'off') return false;
   if (value === '1' || value === 'true' || value === 'on') return true;
-  return config?.agentHarmonyMode === true;
+  return config?.agentHarmonyMode !== false;
 }
 
 /** Flag-free: a text mode with a harmony session AND a subscription agent engine (agent-claude / agent-codex). */

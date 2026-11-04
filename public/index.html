@@ -5881,6 +5881,20 @@
                                         <p style="margin: 0.3rem 0 0 0; font-size: 0.7rem; color: var(--text-muted); line-height: 1.45;"><code>agy --model</code> 에 그대로 넘어갑니다. <strong>비워 두면 Antigravity 기본 모델</strong>.</p>
                                     </div>
 
+                                    <!-- [2026-11-04] 에이전트 글 검수 방식 — 조화 모드(기본) / 기존 검수 방식. 저장값 agentHarmonyMode (agentHarmonyChoice.ts) -->
+                                    <div id="agent-harmony-choice" style="margin: 0.2rem 0 0.75rem 0; padding: 0.75rem 0.9rem; border: 1px solid var(--nv-line); border-radius: 8px; background: var(--nv-sunken);">
+                                        <div style="font-size: 0.85rem; font-weight: 800; color: var(--nv-ink); margin-bottom: 0.2rem;">🤝 에이전트 글 검수 방식</div>
+                                        <div style="font-size: 0.76rem; color: var(--nv-ink-3); margin-bottom: 0.55rem; line-height: 1.45;">Claude Code · Codex 에이전트로 글을 만들 때 적용됩니다(사진으로 글쓰기 · 매일 자동 발행은 제외).</div>
+                                        <label style="display: flex; gap: 0.55rem; align-items: flex-start; cursor: pointer; margin-bottom: 0.45rem;">
+                                            <input type="radio" name="agentHarmonyChoice" value="harmony" checked style="margin-top: 3px; cursor: pointer;">
+                                            <span style="line-height: 1.45;"><b style="font-size: 0.84rem; color: var(--nv-ink);">⚡ 조화 모드 (기본 · 빠름)</b><br><span style="font-size: 0.76rem; color: var(--nv-ink-3);">에이전트가 글을 쓰면서 제목 후보 비교 · 앱 기준 자기 점검까지 한 번에 하고, 마지막에 독립 검수를 한 번 받습니다.</span></span>
+                                        </label>
+                                        <label style="display: flex; gap: 0.55rem; align-items: flex-start; cursor: pointer;">
+                                            <input type="radio" name="agentHarmonyChoice" value="classic" style="margin-top: 3px; cursor: pointer;">
+                                            <span style="line-height: 1.45;"><b style="font-size: 0.84rem; color: var(--nv-ink);">🔍 기존 검수 방식 (느림)</b><br><span style="font-size: 0.76rem; color: var(--nv-ink-3);">글을 쓴 뒤 제목 후보 캐기 · 토너먼트 · 비평을 따로 돌리고, 다른 제목이 이기면 글 전체를 다시 씁니다(홈판 글).</span></span>
+                                        </label>
+                                    </div>
+
                                     <!-- 에이전트 모드 고지 (ToS·한도·사진모드 vision키) -->
                                     <div
                                         style="background: #fffbeb; border: 1px solid #fcd34d; border-radius: 10px; padding: 0.9rem 1.1rem; font-size: 0.82rem; color: #92400e; line-height: 1.65;">
