@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T10:46:58.692Z",
+ "builtAt": "2026-11-04T11:07:17.105Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,81 +8,178 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 21,
+ "measured": 25,
  "candidates": [
+  {
+   "keyword": "호반 한진칼 최대주주",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 39,
+   "recent20": 2,
+   "press": 38,
+   "firstArticleAt": "2026-11-04T09:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "호반그룹, 한진칼 최대주주 등극… 조원태 회장 측 0.11%P 차이로 제쳐",
+     "press": "econovill.com",
+     "publishedAt": "2026-11-04T11:00:00.000Z",
+     "link": "https://www.econovill.com/news/articleView.html?idxno=756050"
+    },
+    {
+     "title": "대한항공 통합호 출항 전 '암초'...사장 인선부터 한진칼 경영권까지 '흔...",
+     "press": "pointe.co.kr",
+     "publishedAt": "2026-11-04T10:56:00.000Z",
+     "link": "https://www.pointe.co.kr/news/articleView.html?idxno=87173"
+    },
+    {
+     "title": "호반그룹, 한진칼 최대주주 등극…조원태 회장과 지분 경쟁 새 국면",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-04T10:46:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=846196"
+    }
+   ]
+  },
   {
    "keyword": "강호동 구속영장",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 45,
-   "recent20": 6,
-   "press": 41,
-   "firstArticleAt": "2026-11-04T09:20:00.000Z",
+   "articles90": 36,
+   "recent20": 5,
+   "press": 35,
+   "firstArticleAt": "2026-11-04T09:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "경찰, '뇌물수수·공금유용 의혹' 강호동 농협중앙회장 구속영장 신청",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-04T10:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000649023?sid=102"
+     "title": "경찰, 강호동 농협중앙회장 구속영장 신청…1억대 뇌물수수 등 혐의",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-04T10:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002247335?sid=101"
     },
     {
-     "title": "경찰, 강호동 농협중앙회장 구속영장",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-04T10:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005350426?sid=102"
+     "title": "경찰, 강호동 농협중앙회장 구속영장 신청…1억원대 금품수수 의혹",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-04T10:56:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=100628"
     },
     {
-     "title": "경찰, ‘금품수수 의혹’ 강호동 농협중앙회장 구속영장 신청",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-04T10:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003695860?sid=102"
+     "title": "경찰, 강호동 농협중앙회장 구속영장 신청",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-04T10:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003480705?sid=102"
     }
    ]
   },
   {
-   "keyword": "디아즈 1타점 3루타",
+   "keyword": "CJ컨소시엄 중앙일보 인수",
    "sources": [
     "nate"
    ],
-   "articles90": 68,
+   "articles90": 33,
    "recent20": 5,
-   "press": 13,
-   "firstArticleAt": "2026-11-04T09:58:00.000Z",
+   "press": 30,
+   "firstArticleAt": "2026-11-04T09:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[KS2] '5번 타순 이동' 삼성 디아즈, 한국 무대 첫 3루타로 선취점",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-04T10:34:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261104001361"
+     "title": "중앙일보 새 주인은 다우·CJ컨소시엄…5200억 신주인수계약",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-04T11:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001883059?sid=102"
     },
     {
-     "title": "[포토]디아즈의 1타점 3루타로 기선 제압하는 삼성",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-04T10:33:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278160"
+     "title": "다우·CJ컨소시엄, 중앙일보 인수...5200억 계약 체결",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-04T11:04:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/324179/?sc=Naver"
     },
     {
-     "title": "[포토]1타점 3루타로 기선 제압한 삼성 디아즈",
+     "title": "CJ컨소시엄, 5200억 규모 중앙일보 신주인수계약 체결",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-04T10:58:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261104500633"
+    }
+   ]
+  },
+  {
+   "keyword": "미국 중간선거",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 34,
+   "recent20": 7,
+   "press": 20,
+   "firstArticleAt": "2026-11-04T10:05:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "미국의 ‘파란’…트럼프 심판했다",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-04T11:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002830752?sid=104"
+    },
+    {
+     "title": "[美중간선거] 실종된 '샤이 트럼프'…유권자 표심 가른 경제·부정부패",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-04T11:06:00.000Z",
+     "link": "https://www.ajunews.com/view/20261104200137368"
+    },
+    {
+     "title": "\"美 중간선거 패배 영향 유럽으로?\"…우려 나오는 이유",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-04T11:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001271682?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "최원준",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 59,
+   "recent20": 2,
+   "press": 12,
+   "firstArticleAt": "2026-11-04T09:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[포토S] 아웃되는 최원준",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-04T10:59:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/477/0000637179"
+    },
+    {
+     "title": "[포토] 병살로 물러나는 최원준",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-04T10:59:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/076/0004463255"
+    },
+    {
+     "title": "[포토]KT 최원준, 첫 타석부터 2루타",
      "press": "sportsseoul.com",
-     "publishedAt": "2026-11-04T10:32:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278159"
+     "publishedAt": "2026-11-04T10:42:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278178"
     }
    ]
   },
   {
    "keyword": "조범현 한국시리즈 시구",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 58,
+   "articles90": 26,
    "recent20": 0,
-   "press": 13,
-   "firstArticleAt": "2026-11-04T09:29:00.000Z",
+   "press": 11,
+   "firstArticleAt": "2026-11-04T09:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -93,80 +190,16 @@
      "link": "https://m.sports.naver.com/kbaseball/article/468/0001278140"
     },
     {
-     "title": "[포토]힘차게 시구하는 조범현 전 감독",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-04T10:20:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278139"
-    },
-    {
      "title": "[포토]조범현-이만수 전 감독, KS 2차전 시구-시포",
      "press": "sportsseoul.com",
      "publishedAt": "2026-11-04T10:20:00.000Z",
      "link": "https://m.sports.naver.com/kbaseball/article/468/0001278141"
-    }
-   ]
-  },
-  {
-   "keyword": "SK㈜, SK에코플랜트 완전자회사 추진",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-04T09:19:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "SK㈜, SK에코플랜트 상장 대신 완전자회사 편입 결정…주식 공개매수",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-04T10:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004206601?sid=101"
     },
     {
-     "title": "SK, SK에코플랜트 상장 대신 완전 자회사화 추진",
-     "press": "thelec.kr",
-     "publishedAt": "2026-11-04T09:58:00.000Z",
-     "link": "https://www.thelec.kr/news/articleView.html?idxno=64901"
-    },
-    {
-     "title": "상장 대신 SK 품으로…SK에코플랜트, 완전자회사 전환 추진",
-     "press": "betanews.net",
-     "publishedAt": "2026-11-04T09:46:00.000Z",
-     "link": "https://www.betanews.net/article/view/beta202611040160"
-    }
-   ]
-  },
-  {
-   "keyword": "영평상 시상식 참석",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 10,
-   "recent20": 6,
-   "press": 7,
-   "firstArticleAt": "2026-11-04T09:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[포토] 고은아 '영평상 공로영화인상 수상'",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-04T10:46:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=779009"
-    },
-    {
-     "title": "[포토] 조인성, 전도연 ‘제46회 영평상 주연상 주인공’",
-     "press": "heraldmuse.com",
-     "publishedAt": "2026-11-04T10:40:00.000Z",
-     "link": "https://m.entertain.naver.com/article/112/0003812185"
-    },
-    {
-     "title": "현빈, 제46회 영평상 OTT 시리즈 부문 남우주연상",
-     "press": "sports.hankooki.com",
-     "publishedAt": "2026-11-04T10:38:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6942908"
+     "title": "[포토]힘차게 시구하는 조범현 전 감독",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-04T10:20:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278139"
     }
    ]
   },
@@ -175,13 +208,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-04T09:18:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-04T09:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "상승→하락→반등… 美 중간선거에 요동친 코스피",
+     "press": "segye.com",
+     "publishedAt": "2026-11-04T10:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004172552?sid=101"
+    },
     {
      "title": "코스피, 400포인트 넘는 롤러코스터 장세…개인·기관 매수세에 상승 마...",
      "press": "jemin.com",
@@ -193,89 +232,18 @@
      "press": "mk.co.kr",
      "publishedAt": "2026-11-04T10:22:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/009/0005759149?sid=101"
-    },
-    {
-     "title": "'블루웨이브' 공포에 '롤러코스피'…\"하루 만에 18% 올랐다\" 엇갈린 희비",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-04T10:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001271681?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "테슬라",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T09:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "테슬라, 수입차 첫 연 10만대 눈앞…FSD안되는데, 30·40대 왜사나",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-04T10:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003562881?sid=101"
-    },
-    {
-     "title": "스페이스X 3.9%·테슬라 3.6% 장전 하락, 코어위브 4.2% 내려",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-04T10:22:00.000Z",
-     "link": "https://www.tokenpost.kr/news/market/432587"
-    },
-    {
-     "title": "테슬라·스페이스X 합병 전망에 비상 걸린 서학개미...주식 안팔아도 양...",
-     "press": "livebiz.today",
-     "publishedAt": "2026-11-04T10:10:00.000Z",
-     "link": "https://www.livebiz.today/news/articleView.html?idxno=206220"
-    }
-   ]
-  },
-  {
-   "keyword": "신촌 병원 흉기 난동 1명 부상",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T09:29:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "신촌 세브란스병원서 50대 여성 흉기 난동…교수 1명 부상",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-04T09:54:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261104001354"
-    },
-    {
-     "title": "세브란스병원서 흉기 휘두른 50대 체포…의사 1명 부상",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-04T09:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000548860?sid=102"
-    },
-    {
-     "title": "신촌 세브란스 병원서 흉기 난동...정신과 교수 1명 부상",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-04T09:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005759143?sid=102"
     }
    ]
   },
   {
    "keyword": "한우",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T09:24:00.000Z",
+   "articles90": 3,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-04T09:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -302,10 +270,28 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 707,
-  "matched": 290,
-  "avgLeadMin": 281,
+  "flagged": 711,
+  "matched": 293,
+  "avgLeadMin": 279,
   "recent": [
+   {
+    "keyword": "신촌 세브란스 흉기 난동",
+    "hitKeyword": "세브란스병원 흉기 난동 사건",
+    "hitAt": "2026-11-04T20:00:00+09:00",
+    "leadMin": 84
+   },
+   {
+    "keyword": "신촌 병원 흉기 난동",
+    "hitKeyword": "세브란스병원 흉기 난동 사건",
+    "hitAt": "2026-11-04T20:00:00+09:00",
+    "leadMin": 33
+   },
+   {
+    "keyword": "신촌 병원 흉기 난동 1명 부상",
+    "hitKeyword": "세브란스병원 흉기 난동 사건",
+    "hitAt": "2026-11-04T20:00:00+09:00",
+    "leadMin": 13
+   },
    {
     "keyword": "노스캐롤라이나 상원 민주 승리",
     "hitKeyword": "민주당 상원 경합지 승리",
@@ -347,24 +333,6 @@
     "hitKeyword": "코스피 요동 마감",
     "hitAt": "2026-11-04T18:30:00+09:00",
     "leadMin": 75
-   },
-   {
-    "keyword": "코스피 코스닥 상승",
-    "hitKeyword": "코스피 요동 마감",
-    "hitAt": "2026-11-04T18:30:00+09:00",
-    "leadMin": 44
-   },
-   {
-    "keyword": "2026 미래경제포럼 축사하는",
-    "hitKeyword": "최동원 2026 영웅 선정",
-    "hitAt": "2026-11-04T18:00:00+09:00",
-    "leadMin": 1574
-   },
-   {
-    "keyword": "돌싱 n 모솔",
-    "hitKeyword": "돌싱N모솔 2기",
-    "hitAt": "2026-11-04T18:00:00+09:00",
-    "leadMin": 1041
    }
   ]
  }
