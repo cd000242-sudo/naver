@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T13:48:37.287Z",
+ "builtAt": "2026-11-04T13:58:57.819Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,28 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 7,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "조작기소 특검법 법사위 통과",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate",
+    "daum"
    ],
-   "articles90": 36,
+   "articles90": 32,
    "recent20": 2,
    "press": 29,
-   "firstArticleAt": "2026-11-04T12:20:00.000Z",
+   "firstArticleAt": "2026-11-04T12:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'조작기소 특검법' 법사위 강행 처리…'공소취소' 조항 삭제·수사 대상...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-04T13:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005599600?sid=100"
+    },
     {
      "title": "조작기소 특검법, 與 주도 법사위 통과…野 \"모든 안건 필버\"",
      "press": "news.einfomax.co.kr",
@@ -33,27 +41,220 @@
      "press": "sisafocus.co.kr",
      "publishedAt": "2026-11-04T13:36:00.000Z",
      "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367207"
+    }
+   ]
+  },
+  {
+   "keyword": "원태인",
+   "sources": [
+    "google"
+   ],
+   "articles90": 58,
+   "recent20": 4,
+   "press": 14,
+   "firstArticleAt": "2026-11-04T12:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "그 누가 원태인에게 돌을 던질수 있나…밀어내기 실점에 아찔, 그러나 ...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-04T13:56:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/477/0000637278"
     },
     {
-     "title": "조작기소 특검법안, 공소취소 삭제…일각 “형소법 근거로 가능”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-04T13:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002718993?sid=100"
+     "title": "이런 시리즈는 없었다, '헌신트리오' 페덱→이승민→원태인, 삼성, 12회...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-04T13:55:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/076/0004463341"
+    },
+    {
+     "title": "‘1.2이닝 비자책’ 불펜 등판 마감한 삼성 원태인, 마음 편히 다시 선발...",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-04T13:54:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/382/0001302977"
+    }
+   ]
+  },
+  {
+   "keyword": "서울 ACL2 2연승",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 12,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-04T12:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[acl2.interview] '0-3 완패' 비엣텔 감독, \"K리그 챔피언 서울, 강도와 템...",
+     "press": "fourfourtwo.co.kr",
+     "publishedAt": "2026-11-04T13:55:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/411/0000089522"
+    },
+    {
+     "title": "포항, 감바와 3-3 무승부로 ACLE 첫 승점…서울은 ACL2 2연승",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-04T13:38:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109740867781"
+    },
+    {
+     "title": "서울의 ACL2 2연승… 김기동 감독 “목표까지 2승 남았다”",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-04T13:25:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/396/0000760045"
+    }
+   ]
+  },
+  {
+   "keyword": "김성윤",
+   "sources": [
+    "google"
+   ],
+   "articles90": 24,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-04T12:47:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[포토] 김성윤 '끝까지 가보자'",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-04T13:37:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/108/0003484744"
+    },
+    {
+     "title": "[포토] 김성윤 '마지막 기회인가'",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-04T13:36:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/108/0003484743"
+    },
+    {
+     "title": "도루 성공한 김성윤",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-04T13:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009271025?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "안현민",
+   "sources": [
+    "google"
+   ],
+   "articles90": 11,
+   "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-04T13:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "아쉬워하는 안현민",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-04T13:50:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/001/0016422755"
+    },
+    {
+     "title": "안현민 '안 풀린다'[포토]",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-04T13:50:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/311/0002076844"
+    },
+    {
+     "title": "[사진]안현민, '연장 12회 아쉬운 삼진'",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-04T13:49:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/109/0005634908"
+    }
+   ]
+  },
+  {
+   "keyword": "서인영 12월 재혼 발표",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-04T12:46:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서인영, 사업가와 두 번째 결혼...작정하고 빼버린 '2가지'",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-04T13:42:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1171912"
+    },
+    {
+     "title": "'12월 재혼' 서인영, 남친 공개 반년 만 초고속 웨딩…신혼집 마련까지...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-04T13:36:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002076823"
+    },
+    {
+     "title": "서인영, 12월 26일 재혼 확정 “린·쥬얼리 멤버들도 온다”",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-04T13:35:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001302976"
+    }
+   ]
+  },
+  {
+   "keyword": "구자욱",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-04T12:53:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "뛸 수 없는 구자욱, 승부처 삼성 아킬레스건[KS2 초점]",
+     "press": "sports.hankooki.com",
+     "publishedAt": "2026-11-04T13:54:00.000Z",
+     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6942919"
+    },
+    {
+     "title": "[포토] 구자욱, 자동 고의4구로 출루",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-04T13:19:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/108/0003484735"
+    },
+    {
+     "title": "구자욱 '승리가 눈앞'",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-04T13:03:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/001/0016422686"
     }
    ]
   },
   {
    "keyword": "이승민",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-04T12:19:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-04T12:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이런 시리즈는 없었다, '헌신트리오' 페덱→이승민→원태인, 삼성, 12회...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-04T13:55:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/076/0004463341"
+    },
     {
      "title": "이승민과 기쁨 나누는 원태인",
      "press": "news1.kr",
@@ -65,51 +266,45 @@
      "press": "osen.co.kr",
      "publishedAt": "2026-11-04T12:32:00.000Z",
      "link": "https://m.sports.naver.com/kbaseball/article/109/0005634795"
-    },
-    {
-     "title": "[MD포토] 역투하는 이승민",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-04T12:30:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/117/0004122107"
     }
    ]
   },
   {
-   "keyword": "강호동 구속영장 신청",
+   "keyword": "아이비 영어특훈",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T12:23:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T13:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "경찰 ‘합천 출신’ 강호동 농협중앙회장 구속영장 신청",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-04T13:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012287543?sid=102"
+     "title": "아이비 \"브로드웨이 입성 위해 영어 특훈...학원비만 900만원\"(유퀴즈)[...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-04T13:43:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002076834"
     },
     {
-     "title": "경찰, 강호동 농협중앙회장 구속영장 신청…금품수수 등 혐의",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-04T12:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004678836?sid=102"
+     "title": "아이비, 브로드웨이 진출에 사비 1000만원 썼다 \"원어민 9명과 매일 특훈...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-04T13:35:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004463332"
     },
     {
-     "title": "경찰, '금품수수' 강호동 농협중앙회장 구속영장 신청",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-04T12:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922945?sid=102"
+     "title": "[TVis] 아이비 “브로드웨이 진출 위해 사비 1000만원↑ 썼다” (유퀴즈...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-04T13:18:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003539245"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 756,
+  "flagged": 760,
   "matched": 325,
   "avgLeadMin": 289,
   "recent": [
