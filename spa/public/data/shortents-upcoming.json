@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T11:47:43.007Z",
+ "builtAt": "2026-11-04T11:57:47.991Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 21,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "강호동 구속영장 신청",
@@ -16,13 +16,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 17,
-   "recent20": 2,
-   "press": 17,
-   "firstArticleAt": "2026-11-04T10:22:00.000Z",
+   "articles90": 16,
+   "recent20": 3,
+   "press": 16,
+   "firstArticleAt": "2026-11-04T10:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "경찰, 강호동 농협중앙회장 구속영장 신청…뇌물 등 혐의",
+     "press": "financialpost.co.kr",
+     "publishedAt": "2026-11-04T11:56:00.000Z",
+     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=284749"
+    },
     {
      "title": "경찰, ‘금품수수 혐의’ 강호동 농협중앙회장 구속영장 신청",
      "press": "donga.com",
@@ -34,12 +40,6 @@
      "press": "news.knn.co.kr",
      "publishedAt": "2026-11-04T11:38:00.000Z",
      "link": "https://news.knn.co.kr/news/article/194045"
-    },
-    {
-     "title": "경찰, 강호동 농협중앙회장 구속영장 신청…'억대' 금품·공금유용 의혹",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-04T11:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000120605?sid=102"
     }
    ]
   },
@@ -48,10 +48,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 16,
-   "recent20": 2,
-   "press": 16,
-   "firstArticleAt": "2026-11-04T10:22:00.000Z",
+   "articles90": 14,
+   "recent20": 0,
+   "press": 14,
+   "firstArticleAt": "2026-11-04T10:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -81,30 +81,30 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 59,
+   "articles90": 48,
    "recent20": 7,
-   "press": 12,
-   "firstArticleAt": "2026-11-04T10:19:00.000Z",
+   "press": 11,
+   "firstArticleAt": "2026-11-04T10:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "디아즈 ‘점프하여 캐치’[포토]",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-04T11:46:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/311/0002076699"
+     "title": "[ST포토] 페덱, 디아즈와 하이파이브",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-04T11:56:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109736195264"
+    },
+    {
+     "title": "[포토] 디아즈 ‘나는 거미손’",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-04T11:48:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278237"
     },
     {
      "title": "디아즈와 하이파이브 나누는 페덱[포토]",
      "press": "xportsnews.com",
      "publishedAt": "2026-11-04T11:46:00.000Z",
      "link": "https://m.sports.naver.com/kbaseball/article/311/0002076703"
-    },
-    {
-     "title": "[사진]최원준 안타 놓치는 디아즈",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-04T11:41:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/109/0005634720"
     }
    ]
   },
@@ -113,30 +113,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-04T10:24:00.000Z",
+   "articles90": 14,
+   "recent20": 9,
+   "press": 9,
+   "firstArticleAt": "2026-11-04T10:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘사자 사냥꾼’ 고영표, 좌타 라인에 고전하고도 7이닝 1실점 눈부신 호...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-04T11:46:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/144/0001148122"
+     "title": "7이닝 1실점 호투 펼친 고영표",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-04T11:56:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/001/0016422521"
     },
     {
-     "title": "만루 위기→병살 유도→주먹 쥐고 포효했다! '고퀄스' 고영표 또 QS, 7이...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-04T11:46:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/311/0002076702"
+     "title": "[사진]고영표 이어 마운드 오른 손동현",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-04T11:56:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/109/0005634738"
     },
     {
-     "title": "역투하는 고영표",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-04T11:42:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/003/0014302113"
+     "title": "1사 만루 병살타 미쳤다! 107억 수원의 심장 QS+ 역투, 삼성 7이닝 1실점...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-04T11:53:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/109/0005634727"
     }
    ]
   },
@@ -145,10 +145,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-04T10:18:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-04T10:28:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -178,7 +178,7 @@
     "google"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-04T10:48:00.000Z",
    "exclusive": false,
@@ -201,70 +201,6 @@
      "press": "insight.co.kr",
      "publishedAt": "2026-11-04T11:12:00.000Z",
      "link": "https://www.insight.co.kr/news/580644"
-    }
-   ]
-  },
-  {
-   "keyword": "최원준 선두타자 2루타",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T10:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'1회→2회→4회' 선두타자 계속 출루 KT, 마침내 승부 원점으로!…힐리...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-04T11:02:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/311/0002076648"
-    },
-    {
-     "title": "1위팀, 드디어 페덱에 첫 득점! 힐리어드 2루타→허경민 적시타 터졌다...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-04T10:56:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/109/0005634661"
-    },
-    {
-     "title": "KT, 4회말 힐리어드 2루타+허경민 좌전 적시타로 반격 시작…1-1 동점",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-04T10:50:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109733533901"
-    }
-   ]
-  },
-  {
-   "keyword": "김지찬",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T10:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[포토] 고영표, 김지찬 투땅 직접 처리",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-04T11:12:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/108/0003484659"
-    },
-    {
-     "title": "[포토] 삼진 김지찬 ‘유인구에 당했어’",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-04T10:26:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278147"
-    },
-    {
-     "title": "김지찬의 발을 기대하는게 아니잖아? '기본' 망각한 디아즈의 아쉬웠던...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-04T10:25:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/076/0004463235"
     }
    ]
   },
@@ -301,34 +237,34 @@
    ]
   },
   {
-   "keyword": "코스피 하락 전환",
+   "keyword": "최원준 선두타자 2루타",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-04T10:20:00.000Z",
+   "firstArticleAt": "2026-11-04T10:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "상승→하락→반등… 美 중간선거에 요동친 코스피",
-     "press": "segye.com",
-     "publishedAt": "2026-11-04T10:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004172552?sid=101"
+     "title": "'1회→2회→4회' 선두타자 계속 출루 KT, 마침내 승부 원점으로!…힐리...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-04T11:02:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/311/0002076648"
     },
     {
-     "title": "코스피, 400포인트 넘는 롤러코스터 장세…개인·기관 매수세에 상승 마...",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-04T10:32:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=846192"
+     "title": "1위팀, 드디어 페덱에 첫 득점! 힐리어드 2루타→허경민 적시타 터졌다...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-04T10:56:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/109/0005634661"
     },
     {
-     "title": "장중 400P 출렁인 '롤러코스피'…\"하루 만에 18% 올랐다\" 엇갈린 희비",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-04T10:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001271681?sid=101"
+     "title": "KT, 4회말 힐리어드 2루타+허경민 좌전 적시타로 반격 시작…1-1 동점",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-04T10:50:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109733533901"
     }
    ]
   }
