@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T10:36:52.465Z",
+ "builtAt": "2026-11-04T10:46:58.692Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,123 +8,84 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 21,
  "candidates": [
   {
    "keyword": "강호동 구속영장",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 42,
-   "recent20": 2,
-   "press": 37,
-   "firstArticleAt": "2026-11-04T09:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "경찰, 농협 강호동 회장 구속영장 신청…뇌물·공금 유용 혐의",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-04T10:28:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5079917"
-    },
-    {
-     "title": "경찰, 강호동 농협중앙회장 구속영장 신청…금품수수 등 혐의",
-     "press": "seouleconews.com",
-     "publishedAt": "2026-11-04T10:24:00.000Z",
-     "link": "http://www.seouleconews.com/news/articleView.html?idxno=94798"
-    },
-    {
-     "title": "경찰, 강호동 농협중앙회장 구속영장 신청",
-     "press": "foodnews.co.kr",
-     "publishedAt": "2026-11-04T10:14:00.000Z",
-     "link": "http://www.foodnews.co.kr/news/articleView.html?idxno=120837"
-    }
-   ]
-  },
-  {
-   "keyword": "신촌 병원 흉기 난동",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 18,
-   "recent20": 0,
-   "press": 18,
-   "firstArticleAt": "2026-11-04T09:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "신촌 세브란스병원서 흉기 난동 … 정신건강의학과 교수 '부상'",
-     "press": "safetimes.co.kr",
-     "publishedAt": "2026-11-04T10:14:00.000Z",
-     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247196"
-    },
-    {
-     "title": "50대 女, 세브란스병원서 흉기 난동⋯정신과 교수 피습",
-     "press": "kormedi.com",
-     "publishedAt": "2026-11-04T09:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/296/0000106901?sid=102"
-    },
-    {
-     "title": "신촌 세브란스병원서 50대 여성 흉기 난동…교수 1명 부상",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-04T09:54:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261104001354"
-    }
-   ]
-  },
-  {
-   "keyword": "윤석열 재판",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 18,
-   "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-04T09:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "부메랑 되어 돌아온 대선 당시 발언...법원이 다시 짚은 '윤석열의 거짓...",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-04T10:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002428364?sid=102"
-    },
-    {
-     "title": "尹 선거법 판결 엇갈린 여야…\"당장 반환\" vs \"李 재판 재개\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-04T10:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922908?sid=161"
-    },
-    {
-     "title": "與 조작기소특검법 처리 강행…野 \"李 재판취소 조작특검\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-04T10:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000963679?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "한국시리즈 2차전 시구",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
    "articles90": 45,
-   "recent20": 4,
-   "press": 13,
-   "firstArticleAt": "2026-11-04T09:07:00.000Z",
+   "recent20": 6,
+   "press": 41,
+   "firstArticleAt": "2026-11-04T09:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[포토]KS 2차전 시구-시포 맡은 조범현-이만수 전 감독",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-04T10:20:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278142"
+     "title": "경찰, '뇌물수수·공금유용 의혹' 강호동 농협중앙회장 구속영장 신청",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-04T10:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000649023?sid=102"
     },
+    {
+     "title": "경찰, 강호동 농협중앙회장 구속영장",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-04T10:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005350426?sid=102"
+    },
+    {
+     "title": "경찰, ‘금품수수 의혹’ 강호동 농협중앙회장 구속영장 신청",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-04T10:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003695860?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "디아즈 1타점 3루타",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 68,
+   "recent20": 5,
+   "press": 13,
+   "firstArticleAt": "2026-11-04T09:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[KS2] '5번 타순 이동' 삼성 디아즈, 한국 무대 첫 3루타로 선취점",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-04T10:34:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261104001361"
+    },
+    {
+     "title": "[포토]디아즈의 1타점 3루타로 기선 제압하는 삼성",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-04T10:33:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278160"
+    },
+    {
+     "title": "[포토]1타점 3루타로 기선 제압한 삼성 디아즈",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-04T10:32:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278159"
+    }
+   ]
+  },
+  {
+   "keyword": "조범현 한국시리즈 시구",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 58,
+   "recent20": 0,
+   "press": 13,
+   "firstArticleAt": "2026-11-04T09:29:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
     {
      "title": "[포토]조범현 전 감독, KS 2차전 시구",
      "press": "sportsseoul.com",
@@ -136,18 +97,24 @@
      "press": "sportsseoul.com",
      "publishedAt": "2026-11-04T10:20:00.000Z",
      "link": "https://m.sports.naver.com/kbaseball/article/468/0001278139"
+    },
+    {
+     "title": "[포토]조범현-이만수 전 감독, KS 2차전 시구-시포",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-04T10:20:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278141"
     }
    ]
   },
   {
-   "keyword": "SK에코플랜트 완전 자회사 추진",
+   "keyword": "SK㈜, SK에코플랜트 완전자회사 추진",
    "sources": [
     "nate"
    ],
-   "articles90": 14,
+   "articles90": 11,
    "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-04T09:07:00.000Z",
+   "press": 11,
+   "firstArticleAt": "2026-11-04T09:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -172,34 +139,34 @@
    ]
   },
   {
-   "keyword": "조작기소 특검법 규탄대회",
+   "keyword": "영평상 시상식 참석",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 10,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-04T09:08:00.000Z",
+   "recent20": 6,
+   "press": 7,
+   "firstArticleAt": "2026-11-04T09:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "조작기소특검법, 법사위 안건조정위로...국힘 “본회의 상정 시 모든 법...",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-04T10:28:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1135250"
+     "title": "[포토] 고은아 '영평상 공로영화인상 수상'",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-04T10:46:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=779009"
     },
     {
-     "title": "국힘, 與 '조작기소 특검법' 추진에 맞서 필리버스터 예고",
-     "press": "wolyo.co.kr",
-     "publishedAt": "2026-11-04T10:24:00.000Z",
-     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=320063"
+     "title": "[포토] 조인성, 전도연 ‘제46회 영평상 주연상 주인공’",
+     "press": "heraldmuse.com",
+     "publishedAt": "2026-11-04T10:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/112/0003812185"
     },
     {
-     "title": "野, '조작 기소 특검법' 저지 총력전…본회의 앞두고 필리버스터 예고",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-04T10:04:00.000Z",
-     "link": "https://www.ajunews.com/view/20261104185103302"
+     "title": "현빈, 제46회 영평상 OTT 시리즈 부문 남우주연상",
+     "press": "sports.hankooki.com",
+     "publishedAt": "2026-11-04T10:38:00.000Z",
+     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6942908"
     }
    ]
   },
@@ -208,10 +175,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-04T09:11:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-04T09:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -228,7 +195,7 @@
      "link": "https://n.news.naver.com/mnews/article/009/0005759149?sid=101"
     },
     {
-     "title": "'블루웨이브' 공포에 코스피 '롤러코스터'…\"하루 만에 18% 올랐다\" 엇갈...",
+     "title": "'블루웨이브' 공포에 '롤러코스피'…\"하루 만에 18% 올랐다\" 엇갈린 희비",
      "press": "wowtv.co.kr",
      "publishedAt": "2026-11-04T10:20:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/215/0001271681?sid=101"
@@ -236,35 +203,66 @@
    ]
   },
   {
-   "keyword": "영평상 시상식 참석",
+   "keyword": "테슬라",
    "sources": [
-    "signal.bz",
-    "nate"
+    "google"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-04T09:16:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-04T09:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "서수빈, 신인여우상 영광…\"최선 다해 실수하고 배울 것\" [46회 영평상]",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T10:27:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009270712"
+     "title": "테슬라, 수입차 첫 연 10만대 눈앞…FSD안되는데, 30·40대 왜사나",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-04T10:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003562881?sid=101"
     },
     {
-     "title": "[46회 영평상] 박지훈 신인남우상…평론가 \"소년과 범의 눈 함께 연기\"",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-04T10:27:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000519148"
+     "title": "스페이스X 3.9%·테슬라 3.6% 장전 하락, 코어위브 4.2% 내려",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-04T10:22:00.000Z",
+     "link": "https://www.tokenpost.kr/news/market/432587"
     },
     {
-     "title": "전도연·조인성, 제46회 영평상 주연상 주인공",
-     "press": "sports.hankooki.com",
-     "publishedAt": "2026-11-04T10:16:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6942896"
+     "title": "테슬라·스페이스X 합병 전망에 비상 걸린 서학개미...주식 안팔아도 양...",
+     "press": "livebiz.today",
+     "publishedAt": "2026-11-04T10:10:00.000Z",
+     "link": "https://www.livebiz.today/news/articleView.html?idxno=206220"
+    }
+   ]
+  },
+  {
+   "keyword": "신촌 병원 흉기 난동 1명 부상",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-04T09:29:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "신촌 세브란스병원서 50대 여성 흉기 난동…교수 1명 부상",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-04T09:54:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261104001354"
+    },
+    {
+     "title": "세브란스병원서 흉기 휘두른 50대 체포…의사 1명 부상",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-04T09:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000548860?sid=102"
+    },
+    {
+     "title": "신촌 세브란스 병원서 흉기 난동...정신과 교수 1명 부상",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-04T09:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005759143?sid=102"
     }
    ]
   },
@@ -274,10 +272,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T09:13:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-04T09:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -300,43 +298,11 @@
      "link": "https://www.farminsight.net/news/articleView.html?idxno=17169"
     }
    ]
-  },
-  {
-   "keyword": "테슬라",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T09:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "스페이스X 3.9%·테슬라 3.6% 장전 하락, 코어위브 4.2% 내려",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-04T10:22:00.000Z",
-     "link": "https://www.tokenpost.kr/news/market/432587"
-    },
-    {
-     "title": "테슬라·스페이스X 합병 전망에 비상 걸린 서학개미...주식 안팔아도 양...",
-     "press": "livebiz.today",
-     "publishedAt": "2026-11-04T10:10:00.000Z",
-     "link": "https://www.livebiz.today/news/articleView.html?idxno=206220"
-    },
-    {
-     "title": "美장전거래서 머스크의 테슬라·스페이스X 4% 이상 하락(상보)",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-04T09:38:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443062"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 703,
+  "flagged": 707,
   "matched": 290,
   "avgLeadMin": 281,
   "recent": [
