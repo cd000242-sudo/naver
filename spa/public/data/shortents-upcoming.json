@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T02:42:58.500Z",
+ "builtAt": "2026-11-04T02:53:03.001Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,62 +15,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 79,
+   "articles90": 82,
    "recent20": 14,
-   "press": 58,
-   "firstArticleAt": "2026-11-04T01:18:00.000Z",
+   "press": 63,
+   "firstArticleAt": "2026-11-04T01:30:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "순천대 의대 설립 확정…전남 동부권 의료체계 전환점",
-     "press": "namdonews.com",
-     "publishedAt": "2026-11-04T02:42:00.000Z",
-     "link": "https://www.namdonews.com/news/articleView.html?idxno=928137"
+     "title": "경북 국립의대 안동 유치 확정···2030년 개교 목표",
+     "press": "tk.newdaily.co.kr",
+     "publishedAt": "2026-11-04T02:52:00.000Z",
+     "link": "https://tk.newdaily.co.kr/site/data/html/2026/11/04/2026110400178.html"
     },
     {
-     "title": "32년 만에 새 의대 생긴다…순천대 60명·경국대 40명 확정",
-     "press": "weekly.chosun.com",
-     "publishedAt": "2026-11-04T02:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/053/0000062826?sid=102"
+     "title": "경북 숙원 '국립 경국대 의대' 확정…\"이재명 정부, 지방의료 불균형 풀...",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-04T02:50:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=727919"
     },
     {
-     "title": "경북도, 국립경국대학교 의과대학 신설 최종 확정...교육부 4일 최종 승...",
-     "press": "eroun.net",
-     "publishedAt": "2026-11-04T02:38:00.000Z",
-     "link": "https://www.eroun.net/news/articleView.html?idxno=94307"
+     "title": "순천시, 국립의대 신설에 ‘환영’…목포 시민사회 “유감이다. 대응책...",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-04T02:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003562739?sid=102"
     }
    ]
   },
   {
-   "keyword": "김민석 공개 사과 요구",
+   "keyword": "코스피 하락 전환",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 76,
-   "recent20": 11,
-   "press": 53,
-   "firstArticleAt": "2026-11-04T01:13:00.000Z",
-   "exclusive": true,
+   "articles90": 34,
+   "recent20": 5,
+   "press": 33,
+   "firstArticleAt": "2026-11-04T01:24:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김민석 사과 하루 만에 최민희 최고위 불참…‘신천지 내홍’ 다시 커지...",
-     "press": "weekly.khan.co.kr",
-     "publishedAt": "2026-11-04T02:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/033/0000053145?sid=100"
+     "title": "코스피 변동성 급증…VI 발동 5만건 넘어 역대 최다",
+     "press": "mediaus.co.kr",
+     "publishedAt": "2026-11-04T02:46:00.000Z",
+     "link": "https://www.mediaus.co.kr/news/articleView.html?idxno=318808"
     },
     {
-     "title": "이성윤, “근거 없는 신천지 3자 비밀연합 의혹, 이제는 공개 사과와 책...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-04T02:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/468/0001277962?sid=100"
+     "title": "'상승 출발' 코스피, 하락 전환 후 낙폭 키워‥5,500선 아래로",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-04T02:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533447?sid=101"
     },
     {
-     "title": "김민석 사과에도 '신천지 내홍' 계속…친청계 \"공개 사과하라\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-04T02:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004206349?sid=100"
+     "title": "중간선거 경계감에 코스피·코스닥 약세 전환",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-04T02:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002428167?sid=101"
     }
    ]
   },
@@ -79,10 +79,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 38,
-   "recent20": 2,
-   "press": 38,
-   "firstArticleAt": "2026-11-04T01:14:00.000Z",
+   "articles90": 29,
+   "recent20": 1,
+   "press": 29,
+   "firstArticleAt": "2026-11-04T01:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,34 +107,99 @@
    ]
   },
   {
-   "keyword": "코스피 하락 전환",
+   "keyword": "김민석 최고위 참석",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 32,
-   "recent20": 6,
-   "press": 31,
-   "firstArticleAt": "2026-11-04T01:16:00.000Z",
+   "articles90": 34,
+   "recent20": 5,
+   "press": 28,
+   "firstArticleAt": "2026-11-04T01:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "코스피 이틀째 하락…5500선도 위태",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-04T02:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000541604?sid=101"
+     "title": "「M포토」 최고위 참석하는 김민석 민주당 대표",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-04T02:52:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=72568"
     },
     {
-     "title": "“트럼프 심판 시작됐나”…코스피 급락 부른 美 중간선거 [이슈+]",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-04T02:36:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261104027055215"
+     "title": "친청계, 김민석 '신천지' 사과에 정당법 위반 조사 주장",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-04T02:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002534611?sid=100"
     },
     {
-     "title": "美 중간선거 '블루웨이브' 공포에 코스피 급락 반전 … 반도체·바이오...",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-04T02:32:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/04/2026110400170.html"
+     "title": "최민희 “김민석, ‘신천지 발언 말라’ 압박…발언 왜 막나” 반발",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-04T02:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000366352?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "선관위 특검 압수수색",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 23,
+   "recent20": 4,
+   "press": 23,
+   "firstArticleAt": "2026-11-04T01:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[속보]선관위 특검, '투표록 위·변조 의혹' 중앙·서울시선관위 압수수...",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-04T02:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005436415?sid=102"
+    },
+    {
+     "title": "[속보] 특검, '투표록 위·변조' 중앙·서울시 선관위 압수수색",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-04T02:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005599229?sid=102"
+    },
+    {
+     "title": "[속보] 선관위 특검, 중앙선관위 등 압수수색…투표록 위·변조 혐의",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-04T02:46:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261104000638"
+    }
+   ]
+  },
+  {
+   "keyword": "대한민국 스포츠영웅 선정",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 23,
+   "recent20": 3,
+   "press": 23,
+   "firstArticleAt": "2026-11-04T01:25:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘무쇠팔’ 故 최동원, 야구선수 최초 스포츠영웅 선정",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-04T02:46:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611040205"
+    },
+    {
+     "title": "'84년 한국시리즈 4승 신화' 최동원, 야구 선수 최초 대한민국 스포츠영...",
+     "press": "swtvnews.com",
+     "publishedAt": "2026-11-04T02:42:00.000Z",
+     "link": "https://swtvnews.com/news/newsview.php?ncode=1065580493506752"
+    },
+    {
+     "title": "‘한국시리즈 4승’ 최동원, 대한민국 스포츠영웅 선정",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-04T02:42:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/028/0002830634"
     }
    ]
   },
@@ -143,13 +208,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 29,
+   "articles90": 21,
    "recent20": 2,
-   "press": 29,
-   "firstArticleAt": "2026-11-04T01:13:00.000Z",
+   "press": 21,
+   "firstArticleAt": "2026-11-04T01:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "北, 탄도미사일 추정체 발사…김여정, 이틀 연속 대미 담화",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-04T02:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922757?sid=100"
+    },
     {
      "title": "군 \"북, 동해상으로 미상발사체 발사\"…탄도미사일이면 나흘만",
      "press": "tbs.seoul.kr",
@@ -161,76 +232,38 @@
      "press": "dkilbo.com",
      "publishedAt": "2026-11-04T02:26:00.000Z",
      "link": "https://www.dkilbo.com/news/articleView.html?idxno=559550"
-    },
-    {
-     "title": "北, 동해상으로 미상 발사체 발사...탄도미사일이면 나흘 만",
-     "press": "wikileaks-kr.org",
-     "publishedAt": "2026-11-04T02:14:00.000Z",
-     "link": "https://www.wikileaks-kr.org/news/articleView.html?idxno=194179"
     }
    ]
   },
   {
-   "keyword": "선관위 특검 압수수색",
+   "keyword": "포스코",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 27,
-   "recent20": 2,
-   "press": 27,
-   "firstArticleAt": "2026-11-04T01:14:00.000Z",
+   "articles90": 16,
+   "recent20": 6,
+   "press": 14,
+   "firstArticleAt": "2026-11-04T01:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "선관위, '수백억대 사전투표지 발급기 사업' 특혜 의혹…특검 압수수색",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-04T02:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002464182?sid=102"
+     "title": "포스코DX, 장애인 크리에이터 공모전 ‘꿈을그린다’ 시상식",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-04T02:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002830232?sid=101"
     },
     {
-     "title": "특검, 459억 대 사전투표지 발급기 사업 특혜 포착…선관위 압수수색",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-04T02:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400547?sid=102"
+     "title": "“작은 신호도 놓치지 않는다” 포스코 포항제철소, 데이터로 설비 고장...",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-04T02:46:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261104500315"
     },
     {
-     "title": "특검, 459억대 사전투표지 발급기 사업 특혜 의혹 선관위 압수수색",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-04T02:18:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3445785"
-    }
-   ]
-  },
-  {
-   "keyword": "대한민국 스포츠영웅 선정",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 26,
-   "recent20": 3,
-   "press": 26,
-   "firstArticleAt": "2026-11-04T01:17:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'84년 한국시리즈 4승 신화' 최동원, 야구 선수 최초 대한민국 스포츠영...",
-     "press": "swtvnews.com",
-     "publishedAt": "2026-11-04T02:42:00.000Z",
-     "link": "https://swtvnews.com/news/newsview.php?ncode=1065580493506752"
-    },
-    {
-     "title": "‘한국시리즈 4승’ 최동원, 대한민국 스포츠영웅 선정",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-04T02:42:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/028/0002830634"
-    },
-    {
-     "title": "故 최동원, 야구 선수 첫 대한민국 스포츠영웅 선정",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-04T02:25:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/214/0001533439"
+     "title": "포스코DX, 장애인 유튜브 크리에이터 공모전 시상…391개 팀 참여",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-04T02:44:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=94536"
     }
    ]
   },
@@ -239,18 +272,18 @@
    "sources": [
     "google"
    ],
-   "articles90": 19,
+   "articles90": 14,
    "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-04T01:14:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-04T01:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
      "title": "2026 로보월드",
      "press": "yna.co.kr",
-     "publishedAt": "2026-11-04T02:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016420997?sid=101"
+     "publishedAt": "2026-11-04T02:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016421035?sid=101"
     },
     {
      "title": "브릴스, '2026 로보월드'서 피지컬 AI 기반 로봇 기술 공개",
@@ -263,71 +296,6 @@
      "press": "thebell.co.kr",
      "publishedAt": "2026-11-04T02:18:00.000Z",
      "link": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202611041034133680107642"
-    }
-   ]
-  },
-  {
-   "keyword": "포스코",
-   "sources": [
-    "google"
-   ],
-   "articles90": 12,
-   "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-04T01:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "포스코이앤씨, 목동 수주 전략 재편…2·4·11단지서 발 빼고 1·14 집중",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-04T02:36:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026110411210713786"
-    },
-    {
-     "title": "포스코DX, 장애인 유튜브 공모전 개최",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-04T02:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002718720?sid=105"
-    },
-    {
-     "title": "현장 직원 아이디어, 포스코 설비관리 혁신…코크스 차량·유량밸브 이...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-04T02:26:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2643961"
-    }
-   ]
-  },
-  {
-   "keyword": "더 뉴 BMW 7시리즈 상륙",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-04T01:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "더 뉴 BMW 7시리즈, 한국 시장 상륙",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-04T01:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016420664?sid=101"
-    },
-    {
-     "title": "한국 시장 상륙, 더 뉴 BMW 7시리즈",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-04T01:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016420673?sid=101"
-    },
-    {
-     "title": "한국 상륙한 더 뉴 BMW 7시리즈",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-04T01:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016420675?sid=101"
     }
    ]
   }
