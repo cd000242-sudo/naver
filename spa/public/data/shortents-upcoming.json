@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T09:05:48.999Z",
+ "builtAt": "2026-11-04T09:15:53.033Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "홍콩 ELS 과징금 확정",
+   "keyword": "공공재개발 이재명 대통령",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 67,
-   "recent20": 7,
-   "press": 66,
-   "firstArticleAt": "2026-11-04T07:36:00.000Z",
+   "articles90": 40,
+   "recent20": 13,
+   "press": 32,
+   "firstArticleAt": "2026-11-04T07:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "KB국민·하나·신한은행, ELS 제재 확정…경영 불확실성 해소",
-     "press": "sateconomy.co.kr",
-     "publishedAt": "2026-11-04T09:04:00.000Z",
-     "link": "http://sateconomy.co.kr/news/view/1065603687597666"
+     "title": "‘장위9구역’ 찾은 李 “공공재개발 조기 진행시, 용적률 등 인센티브...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-04T09:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202638?sid=100"
     },
     {
-     "title": "홍콩 ELS 부담 덜었다…과징금 대폭 감경에 은행권 환입 효과 기대",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-04T09:02:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261104010001721"
+     "title": "李대통령 \"공공재개발, '용적률·금융지원' 각종 인센티브 강화\"",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-04T09:12:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261104001308"
     },
     {
-     "title": "홍콩 ELS 6개 증권사 제재 109억원 확정…과징금 93억원",
-     "press": "sateconomy.co.kr",
-     "publishedAt": "2026-11-04T09:00:00.000Z",
-     "link": "https://sateconomy.co.kr/news/view/1065600082948082"
-    }
-   ]
-  },
-  {
-   "keyword": "SK SK에코플랜트 공개매수",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 49,
-   "recent20": 21,
-   "press": 48,
-   "firstArticleAt": "2026-11-04T08:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "SK㈜, SK에코플랜트 상장 대신 완전 자회사화 추진…'8만8000원' 공개매수",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-04T09:04:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=901964"
-    },
-    {
-     "title": "SK(주), 에코플랜트 상장 대신 완전 자회사화···주당 8만8000원 공개매...",
-     "press": "pointdaily.co.kr",
-     "publishedAt": "2026-11-04T09:04:00.000Z",
-     "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=324832"
-    },
-    {
-     "title": "SK, SK에코플랜트 IPO 대신 완전 자회사화…1.4조 투입",
-     "press": "dealsite.co.kr",
-     "publishedAt": "2026-11-04T09:02:00.000Z",
-     "link": "https://dealsite.co.kr/articles/172109"
+     "title": "이 대통령 “재개발, 공공이 하면 속도 빨라지고 부정부패 우려 적어”",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-04T09:12:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1135245"
     }
    ]
   },
@@ -79,94 +47,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 35,
-   "recent20": 10,
+   "articles90": 34,
+   "recent20": 9,
    "press": 32,
-   "firstArticleAt": "2026-11-04T07:37:00.000Z",
+   "firstArticleAt": "2026-11-04T07:46:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "與 강행 ‘조작기소 특검법’, 수사 대상 절반이 李대통령 관련 사건",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-04T09:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202637?sid=102"
-    },
-    {
-     "title": "검사 수사권 없앴는데 ‘조작 기소 특검’엔 예외 조항…법무부도 ‘난...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-04T09:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002830712?sid=102"
+     "title": "국민의힘, 與 ‘공소취소 특검법’ 총력 저지… 필리버스터·장외투쟁 ...",
+     "press": "mediawatch.kr",
+     "publishedAt": "2026-11-04T09:12:00.000Z",
+     "link": "https://www.mediawatch.kr/news/article.html?no=261628"
     },
     {
      "title": "국회 처리 앞둔 조작기소 특검법…수사대상 확대·공소취소 배제",
+     "press": "goodnews1.com",
+     "publishedAt": "2026-11-04T09:12:00.000Z",
+     "link": "https://www.goodnews1.com/news/articleView.html?idxno=465880"
+    },
+    {
+     "title": "국힘 \"조작기소 특검은 기획떴다방\"…규탄대회하며 필버 채비(종합)",
      "press": "yna.co.kr",
-     "publishedAt": "2026-11-04T09:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016422216?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "공공재개발 이재명 대통령",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 34,
-   "recent20": 12,
-   "press": 27,
-   "firstArticleAt": "2026-11-04T07:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이 대통령, 공공재개발 현장 방문…“주택 공급 속도 높여야”",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-04T09:02:00.000Z",
-     "link": "https://www.viva100.com/article/20261104501424"
-    },
-    {
-     "title": "장위뉴타운 찾은 李 \"공공재개발이 확실히 유효성 있어\"",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-04T09:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005759122?sid=100"
-    },
-    {
-     "title": "李 대통령 “2022년 인허가 급감에 주택 공급절벽”…재개발 등 신속추...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-04T09:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005759120?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "코스피 하락 전환",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 25,
-   "recent20": 6,
-   "press": 25,
-   "firstArticleAt": "2026-11-04T07:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美 '민주당 돌풍'에 코스피 요동…등락 끝 0.62% 상승 마감",
-     "press": "delighti.co.kr",
-     "publishedAt": "2026-11-04T09:04:00.000Z",
-     "link": "https://www.delighti.co.kr/news/articleView.html?idxno=124388"
-    },
-    {
-     "title": "코스피 아침 +3%, 낮 -4%…미 중간선거 개표 중 변동성 극심",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-04T09:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002830710?sid=101"
-    },
-    {
-     "title": "[마감시황] 코스피, 4% 급락 딛고 V자 반등...외국인 투매 버틴 코스피",
-     "press": "junggi.co.kr",
-     "publishedAt": "2026-11-04T09:00:00.000Z",
-     "link": "https://www.junggi.co.kr/news/articleView.html?idxno=38369"
+     "publishedAt": "2026-11-04T09:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016422225?sid=100"
     }
    ]
   },
@@ -175,30 +79,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 23,
-   "recent20": 0,
-   "press": 23,
-   "firstArticleAt": "2026-11-04T07:36:00.000Z",
+   "articles90": 24,
+   "recent20": 5,
+   "press": 24,
+   "firstArticleAt": "2026-11-04T07:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령 유튜브로 대담 '대통령의 Y' 5일 첫방송",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-04T08:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005759088?sid=100"
+     "title": "李 대통령, ‘X’ 넘어 유튜브서 대국민 소통… 5일 첫 방송",
+     "press": "segye.com",
+     "publishedAt": "2026-11-04T09:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004172532?sid=100"
     },
     {
-     "title": "‘Why’에 답하겠다…李대통령, 유튜브 ‘대통령의 Y’ 출격",
-     "press": "asiatime.co.kr",
-     "publishedAt": "2026-11-04T08:40:00.000Z",
-     "link": "https://www.asiatime.co.kr/article/20261104500408"
+     "title": "[영상] 대통령이 유튜브 방송 시작...파격 시도 공개되자 술렁",
+     "press": "facttv.kr",
+     "publishedAt": "2026-11-04T09:14:00.000Z",
+     "link": "https://www.facttv.kr/news/articleView.html?idxno=50815"
     },
     {
-     "title": "이재명 대통령, 유튜브 '대통령의 Y'로 국민과 소통한다",
-     "press": "korea.kr",
-     "publishedAt": "2026-11-04T08:40:00.000Z",
-     "link": "https://www.korea.kr/news/policyNewsView.do?newsId=148975035&call_from=naver_news"
+     "title": "'대통령의 Y' 이재명 대통령 유튜브 런칭한다 …진행자는 손정은",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-04T09:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000519134?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "코스피 하락 전환",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 21,
+   "recent20": 5,
+   "press": 21,
+   "firstArticleAt": "2026-11-04T07:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "코스피 막판 뒤집기…'블루 웨이브' 수혜주 폭등",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-04T09:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541734?sid=101"
+    },
+    {
+     "title": "美 '민주당 돌풍'에 코스피 요동…등락 끝 0.62% 상승 마감",
+     "press": "delighti.co.kr",
+     "publishedAt": "2026-11-04T09:04:00.000Z",
+     "link": "https://www.delighti.co.kr/news/articleView.html?idxno=124388"
+    },
+    {
+     "title": "코스피 아침 +3%, 낮 -4%…미 중간선거 개표 따라 ‘롤러코스터’",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-04T09:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002830710?sid=101"
     }
    ]
   },
@@ -207,30 +143,96 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 21,
-   "recent20": 3,
-   "press": 19,
-   "firstArticleAt": "2026-11-04T07:42:00.000Z",
+   "articles90": 23,
+   "recent20": 5,
+   "press": 20,
+   "firstArticleAt": "2026-11-04T07:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "尹 선거법 2심 유죄에 민주당 \"국민의힘, 397억 반환하라\"",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-04T09:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003151411?sid=100"
+     "title": "尹 선거법 위반 2심도 당선무효형...국민의힘, 397억 반환위기",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-04T09:10:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=879948"
     },
     {
-     "title": "‘항소기각’에 굳은 표정으로 재판부 응시한 윤석열…지지자들 “빨갱...",
-     "press": "hani.co.kr",
+     "title": "국힘, '확정시 선거비용 반환' 윤 2심 선고에 \"상급심 지켜볼 것\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-04T09:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002428333?sid=100"
+    },
+    {
+     "title": "[사설]‘대선 거짓말’ 윤석열 2심도 유죄, 국민의힘은 사과해야",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-04T09:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003480692?sid=110"
+    }
+   ]
+  },
+  {
+   "keyword": "홍콩 ELS 과징금 3700억 확정",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 20,
+   "recent20": 2,
+   "press": 20,
+   "firstArticleAt": "2026-11-04T07:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "홍콩 ELS 부담 덜었다…과징금 대폭 감경에 은행권 환입 효과 기대",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-04T09:02:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261104010001721"
+    },
+    {
+     "title": "'홍콩 ELS' 3746억원 제재…은행 과징금 대폭 감경",
+     "press": "4th.kr",
      "publishedAt": "2026-11-04T08:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002830705?sid=102"
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2121146"
     },
     {
-     "title": "'윤석열 입'에 국힘 397억 토해내나…이르면 내년 2월 대법 확정",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-04T08:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006403752?sid=102"
+     "title": "금융위, 홍콩 ELS 불완전판매 7개 은행·6개 증권사에 3736억 '역대 최대...",
+     "press": "intn.co.kr",
+     "publishedAt": "2026-11-04T08:40:00.000Z",
+     "link": "http://www.intn.co.kr/news/articleView.html?idxno=2054509"
+    }
+   ]
+  },
+  {
+   "keyword": "할인",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 11,
+   "recent20": 5,
+   "press": 10,
+   "firstArticleAt": "2026-11-04T08:26:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "충북농협, 농림축산식품부와 손잡고 오이 소비촉진 할인 행사 진행",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-04T09:12:00.000Z",
+     "link": "http://www.breaknews.com/1248483"
+    },
+    {
+     "title": "스마일게이트 '로드나인', 파파존스와 맞손…피자 할인·한정 아이템 제...",
+     "press": "zdnet.co.kr",
+     "publishedAt": "2026-11-04T09:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/092/0002443894?sid=105"
+    },
+    {
+     "title": "금요일엔 서울광장으로…소상공인 제품 마켓·상품권 10% 할인",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-04T09:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002718952?sid=102"
     }
    ]
   },
@@ -239,13 +241,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 14,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-04T07:40:00.000Z",
+   "articles90": 10,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-04T07:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "코스피·코스닥 동반 상승 마감… LG엔솔·에코프로 등 2차전지주 강세...",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-04T09:12:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3742217"
+    },
     {
      "title": "美 '민주당 돌풍'에 코스피 요동…등락 끝 0.62% 상승 마감",
      "press": "delighti.co.kr",
@@ -257,45 +265,6 @@
      "press": "industrynews.co.kr",
      "publishedAt": "2026-11-04T08:58:00.000Z",
      "link": "https://www.industrynews.co.kr/news/articleView.html?idxno=88908"
-    },
-    {
-     "title": "코스피, 막판 반등해 5680선 마감…美 중간선거에 출렁",
-     "press": "news.mtn.co.kr",
-     "publishedAt": "2026-11-04T08:36:00.000Z",
-     "link": "https://news.mtn.co.kr/article/2026110417112119661"
-    }
-   ]
-  },
-  {
-   "keyword": "할인",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 9,
-   "recent20": 5,
-   "press": 9,
-   "firstArticleAt": "2026-11-04T08:18:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "NH농협카드, 알리익스프레스·중국 청도서 할인 프로모션",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-04T09:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014301929?sid=101"
-    },
-    {
-     "title": "농협카드, ‘광군제·블랙프라이데이’ 중국 특화 대규모 할인 프로모션",
-     "press": "nongmin.com",
-     "publishedAt": "2026-11-04T08:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/662/0000107672?sid=101"
-    },
-    {
-     "title": "롯데마트, 메가통큰 2주차 할인…수입 돼지고기 물량 60% 확대",
-     "press": "newslock.co.kr",
-     "publishedAt": "2026-11-04T08:54:00.000Z",
-     "link": "http://www.newslock.co.kr/news/articleView.html?idxno=139370"
     }
    ]
   },
@@ -330,76 +299,11 @@
      "link": "https://www.ggilbo.com/news/articleView.html?idxno=1191205"
     }
    ]
-  },
-  {
-   "keyword": "이스타항공",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T07:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이스타항공, 도쿠시마 노선 접은 이유… 현지 지사의 '대한항공 러브콜...",
-     "press": "sisaweek.com",
-     "publishedAt": "2026-11-04T08:46:00.000Z",
-     "link": "https://www.sisaweek.com/news/articleView.html?idxno=238786"
-    },
-    {
-     "title": "부산발 국제선 14개로 늘린 이스타항공…외국인 관광객 공략",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-04T08:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/468/0001278082?sid=101"
-    },
-    {
-     "title": "이스타항공, 부산 국제선 외국인 승객 171% 늘어…노선 확대 속도",
-     "press": "pointdaily.co.kr",
-     "publishedAt": "2026-11-04T07:44:00.000Z",
-     "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=324816"
-    }
-   ]
-  },
-  {
-   "keyword": "정하연 별세 애도",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T07:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "채시라 “또 한분의 거장 가셨다”…故최불암 이어 故정하연 작가 애도",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-04T08:16:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000519121"
-    },
-    {
-     "title": "故 최불암 이어…채시라, 故 정하연 별세에 \"또 한 분의 거장 가셔\"",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-04T07:58:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109727248158"
-    },
-    {
-     "title": "채시라, ‘사극대가’ 故 정하연 작가 추모…“또 한분의 거장이 가셨다...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-04T07:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001146117"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 676,
+  "flagged": 677,
   "matched": 282,
   "avgLeadMin": 286,
   "recent": [
