@@ -40,22 +40,23 @@ describe('generation policy context', () => {
 
     expect(result.allowed).toBe(true);
     expect(result.input.recent_posts).toHaveLength(20);
+    // [2026-11-04] 프롬프트에는 최신 15편만 실린다(최신순) — 대표로 가장 최근 글을 본다.
     // [2026-09-22 실사고] 이 블록이 선언한 용도는 "제목·도입·소제목·각도·구조 반복 회피" 하나다.
     //   그 다섯 필드는 반드시 들어가고,
-    expect(result.prompt).toContain(recentPosts[0].title);
-    expect(result.prompt).toContain(recentPosts[0].intro);
-    expect(result.prompt).toContain(recentPosts[0].headings[0]);
-    expect(result.prompt).toContain(recentPosts[0].topic_angle);
-    expect(result.prompt).toContain(recentPosts[0].structure_type);
+    expect(result.prompt).toContain(recentPosts[recentPosts.length - 1].title);
+    expect(result.prompt).toContain(recentPosts[recentPosts.length - 1].intro);
+    expect(result.prompt).toContain(recentPosts[recentPosts.length - 1].headings[0]);
+    expect(result.prompt).toContain(recentPosts[recentPosts.length - 1].topic_angle);
+    expect(result.prompt).toContain(recentPosts[recentPosts.length - 1].structure_type);
     //   용도에 없는 필드는 프롬프트에 실리지 않는다(50편 기준 23,176자 = 프롬프트의 24%).
-    expect(result.prompt).not.toContain(recentPosts[0].body);
+    expect(result.prompt).not.toContain(recentPosts[recentPosts.length - 1].body);
     expect(result.prompt).not.toContain('recent-0');
-    expect(result.prompt).not.toContain(recentPosts[0].url!);
+    expect(result.prompt).not.toContain(recentPosts[recentPosts.length - 1].url!);
     expect(result.prompt).not.toContain('"published_at"');
     expect(result.prompt).not.toContain('"exposure_status"');
     expect(result.prompt).not.toContain('"template_id"');
     // 옛 글의 사실을 새 글 옆에 두지 않는다 — 블록 스스로 "베끼거나 지어내지 마라"고 금지한 항목이다.
-    expect(result.prompt).not.toContain(recentPosts[0].business_facts![0]);
+    expect(result.prompt).not.toContain(recentPosts[recentPosts.length - 1].business_facts![0]);
   });
 
   it('continues generation but requires publish review when fewer than the minimum posts are available', async () => {
@@ -76,7 +77,7 @@ describe('generation policy context', () => {
     expect(result.allowed).toBe(true);
     expect(result.reasons).toContain('BLOCK_INSUFFICIENT_RECENT_POSTS');
     expect(result.manualReviewRequired).toBe(true);
-    expect(result.prompt).toContain(recentPosts[0].title);
+    expect(result.prompt).toContain(recentPosts[recentPosts.length - 1].title);
   });
 
   it('does not require business facts for a generic informational article', async () => {
@@ -211,7 +212,7 @@ describe('generation policy context', () => {
 
     expect(result.allowed).toBe(true);
     expect(result.reasons).toContain('ADVISORY_BACKGROUND_POLICY:EXPOSURE_MONITOR_FAILURE');
-    expect(result.prompt).toContain(recentPosts[0].title);
+    expect(result.prompt).toContain(recentPosts[recentPosts.length - 1].title);
   });
 
   // [v2.11.136] 계약 변경: 손상된 발행 원장은 예전엔 영구 차단(크레딧 낭비 방지

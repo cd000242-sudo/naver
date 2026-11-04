@@ -67,6 +67,19 @@ describe('최근글 프롬프트 비용 방어', () => {
     expect(prompt).toContain('structure_type');
   });
 
+  // [2026-11-04] 글쓰기 2분대 목표: 50편 블록이 프롬프트의 23%(24,921자). 프롬프트에는 최근 15편 · 도입 90자만.
+  it('프롬프트에는 가장 최근 15편만, 도입은 앞 90자만 싣는다 (입력 순서 = 최신순)', () => {
+    const input = makeInput(50, 0);
+    (input.recent_posts as Array<{ intro: string }>)[0].intro = '도'.repeat(300);
+    const prompt = buildRecentPostsGenerationPrompt(input);
+    const parsed = JSON.parse(prompt.split('\n').find((l) => l.trim().startsWith('[{'))!);
+    expect(parsed).toHaveLength(15);
+    expect(parsed.map((p: { title: string }) => p.title)).toEqual(Array.from({ length: 15 }, (_, i) => `제목 ${i}`));
+    expect(parsed[0].introduction).toBe('도'.repeat(90));
+    expect(prompt).toContain('RECENT_POST_COUNT=15');
+    expect(input.recent_posts).toHaveLength(50); // the caller's list (used by the post-publish similarity check) is untouched
+  });
+
   it('빈 최근글이면 빈 문자열 (기존 계약 유지)', () => {
     expect(buildRecentPostsGenerationPrompt(makeInput(0, 0))).toBe('');
   });

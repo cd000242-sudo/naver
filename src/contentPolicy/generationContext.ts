@@ -94,8 +94,16 @@ function backgroundPolicyAdvisory(reason: string): string {
   return `ADVISORY_BACKGROUND_POLICY:${reason}`;
 }
 
+/**
+ * [2026-11-04] 사장님 목표 "글쓰기 2분대". 실측(run 20261104-161648): 이 블록이 프롬프트 107,009자 중 24,921자(23%),
+ * 최근 50편 × 제목·도입·소제목. 프롬프트에는 가장 최근 15편만, 도입은 앞 90자만 싣는다 — 반복 회피에 쓰는 신호
+ * 다섯 가지는 그대로다. 발행 후 유사도 검사(compare_recent_posts_recommended = 50편)는 이 블록과 별개라 그대로다.
+ */
+export const RECENT_POSTS_PROMPT_LIMIT = 15;
+const RECENT_POSTS_PROMPT_INTRO_CHARS = 90;
+
 export function buildRecentPostsGenerationPrompt(input: ContentPolicyInput): string {
-  const posts = input.recent_posts || [];
+  const posts = (input.recent_posts || []).slice(0, RECENT_POSTS_PROMPT_LIMIT);
   if (posts.length === 0) return '';
 
   // [v2.11.136] 비용 폭증 근본 수정: 예전엔 최근 글 본문 전문(body)을 통째로
@@ -114,7 +122,7 @@ export function buildRecentPostsGenerationPrompt(input: ContentPolicyInput): str
   // 선언한 용도에 쓰이는 다섯 필드만 남긴다.
   const payload = posts.map((post) => ({
     title: post.title,
-    introduction: post.intro,
+    introduction: String(post.intro || '').slice(0, RECENT_POSTS_PROMPT_INTRO_CHARS),
     headings: [...post.headings],
     topic_angle: post.topic_angle,
     structure_type: post.structure_type,
