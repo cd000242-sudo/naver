@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T15:39:46.127Z",
+ "builtAt": "2026-11-04T15:49:51.031Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,49 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "삼성 연장 12회 승리",
+   "keyword": "삼성 KT 제압",
    "sources": [
     "daum"
    ],
-   "articles90": 70,
-   "recent20": 7,
-   "press": 39,
-   "firstArticleAt": "2026-11-04T14:15:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "헤이 라이온즈, 우승 반지 약속 기억하지? ‘7이닝 1실점’ 삼성 페덱, ...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-04T15:37:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278354"
-    },
-    {
-     "title": "이제 원태인이 빠진다! → 최원태가 필승조? 삼성 지키는 운영 가능한가",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-04T15:34:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/076/0004463374"
-    },
-    {
-     "title": "[KS2] 삼성 박진만 감독 \"한숨 많이 쉬었어...디아즈 기본기 충실한 수비...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-04T15:31:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261105000001"
-    }
-   ]
-  },
-  {
-   "keyword": "kt wiz",
-   "sources": [
-    "google"
-   ],
-   "articles90": 16,
+   "articles90": 12,
    "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-04T14:12:00.000Z",
+   "press": 11,
+   "firstArticleAt": "2026-11-04T14:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -61,16 +29,16 @@
      "link": "https://www.kukinews.com/article/view/kuk202611050002"
     },
     {
-     "title": "[한국시리즈] 연장 혈투 끝 kt 꺾은 삼성… 시리즈 균형 맞추고 대구로",
-     "press": "dkilbo.com",
-     "publishedAt": "2026-11-04T15:16:00.000Z",
-     "link": "https://www.dkilbo.com/news/articleView.html?idxno=559698"
+     "title": "삼성 '죽이고 살린' 디아즈, 박진만 감독은 위로보다 쓴소리!…\"기본기...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-04T15:05:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/311/0002076879"
     },
     {
-     "title": "삼성 박진만 \"집중력이 승리 요인\"…kt 이강철 \"이런 야구 처음\"",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-04T15:06:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261105010001812"
+     "title": "‘연장 12회 혈투’ 삼성, KT 꺾고 KS 1승 1패 균형",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-04T15:03:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/056/0012287584"
     }
    ]
   },
@@ -79,10 +47,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-04T14:13:00.000Z",
+   "articles90": 11,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-04T14:22:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -109,16 +77,21 @@
   {
    "keyword": "한진칼 최대주주 호반건설",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 9,
-   "recent20": 1,
+   "recent20": 2,
    "press": 9,
-   "firstArticleAt": "2026-11-04T14:15:00.000Z",
+   "firstArticleAt": "2026-11-04T14:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "한진칼 최대주주, 조원태 회장서 호반건설로 변경",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-04T15:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922976?sid=101"
+    },
     {
      "title": "한진칼 최대주주 바뀌었다… 조원태 회장서 호반건설로",
      "press": "donga.com",
@@ -130,12 +103,6 @@
      "press": "kmib.co.kr",
      "publishedAt": "2026-11-04T15:14:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/005/0001883097?sid=101"
-    },
-    {
-     "title": "한진칼 최대주주, 조원태 측에서 호반건설로 변경…지분 20.69% 확보",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-04T15:12:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=623056"
     }
    ]
   },
@@ -144,10 +111,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 1,
+   "articles90": 6,
+   "recent20": 0,
    "press": 6,
-   "firstArticleAt": "2026-11-04T14:17:00.000Z",
+   "firstArticleAt": "2026-11-04T14:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -177,13 +144,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
    "firstArticleAt": "2026-11-04T14:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "조작기소 특검법 밀어붙인 與… 文정부때 사건까지 끼워넣기",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-04T15:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004007870?sid=100"
+    },
     {
      "title": "법사위 끝내 이재명 조작기소 특검법 강행처리 \"대통령 구하기\"",
      "press": "mediatoday.co.kr",
@@ -195,12 +168,38 @@
      "press": "ksilbo.co.kr",
      "publishedAt": "2026-11-04T15:04:00.000Z",
      "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1071597"
+    }
+   ]
+  },
+  {
+   "keyword": "강호동 구속영장 신청",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T15:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "경찰, 강호동 농협중앙회장 구속영장 신청...금품수수등 혐의",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-04T15:44:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=67101"
     },
     {
-     "title": "'조작기소 특검법' 속전속결 법사위 통과...오늘 본회의 처리 전망",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-04T15:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002428451?sid=100"
+     "title": "1억원대 금품 의혹, 신병 확보 나선 경찰···강호동 농협회장 영장 신...",
+     "press": "womaneconomy.co.kr",
+     "publishedAt": "2026-11-04T15:06:00.000Z",
+     "link": "https://www.womaneconomy.co.kr/news/articleView.html?idxno=260689"
+    },
+    {
+     "title": "경찰 ‘금품 수수·공금 유용 의혹’ 강호동 농협회장 구속영장 신청",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-04T15:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001883091?sid=102"
     }
    ]
   },
@@ -210,10 +209,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T14:12:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-04T15:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -236,43 +235,11 @@
      "link": "https://m.entertain.naver.com/article/003/0014302362"
     }
    ]
-  },
-  {
-   "keyword": "서인영 재혼",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T14:36:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "가수 서인영, 12월 26일 재혼 발표…교회서 소규모 진행",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-04T15:26:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=623059"
-    },
-    {
-     "title": "[공식] 서인영, 12월 26일 최지훈 대표와 재혼 \"축가·꽃 장식 생략..사...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-04T15:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005634967"
-    },
-    {
-     "title": "서인영, 6세 연상 남편과 12월 26일 재혼…교회에서 스몰 웨딩",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T14:36:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009271133"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 779,
+  "flagged": 780,
   "matched": 329,
   "avgLeadMin": 288,
   "recent": [
