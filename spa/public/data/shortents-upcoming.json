@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T21:01:47.410Z",
+ "builtAt": "2026-11-04T21:11:50.837Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,52 +8,59 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
+ "measured": 25,
  "candidates": [
   {
-   "keyword": "삼성, 연장 12회 승리",
+   "keyword": "이란",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-04T19:32:00.000Z",
+   "articles90": 30,
+   "recent20": 12,
+   "press": 22,
+   "firstArticleAt": "2026-11-04T19:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[KS 포커스] 못 뛰는 구자욱·못 치는 강민호...이겨도 웃지 못한 삼성의...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-04T20:54:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261104001413"
+     "title": "국제유가, 미-이란 종전 기대감에 8% 넘게 폭락...WTI, 6주만에 배럴당 ...",
+     "press": "beyondpost.co.kr",
+     "publishedAt": "2026-11-04T21:10:00.000Z",
+     "link": "http://www.beyondpost.co.kr/view.php?ud=2026110506043134502aaae0046f_30"
     },
     {
-     "title": "[KS 포커스] 디테일이 좌우한 2차전 경기 흐름, 연장 승부 끝에 웃은 삼...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-04T20:41:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261104001403"
+     "title": "민주당 상·하원 장악‥트럼프 \"이란 전쟁이 패인\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-04T21:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533571?sid=104"
     },
     {
-     "title": "[스타inKS2] 삼성 원태인, 끝내기 위기 막은 32구...불펜 투혼 마치고 선...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-04T20:29:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261104001409"
+     "title": "미 민주 압승 '이란전 종식' 기대에 국제유가 급락...WTI 8.29%↓",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-04T21:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002428487?sid=104"
     }
    ]
   },
   {
    "keyword": "주가",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 6,
+   "articles90": 7,
    "recent20": 1,
-   "press": 5,
+   "press": 6,
    "firstArticleAt": "2026-11-04T19:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "미 민주당 압승에 빅테크 주가 급등…'데이터센터 규제' 호재로 해석",
+     "press": "aitimes.com",
+     "publishedAt": "2026-11-04T21:10:00.000Z",
+     "link": "https://www.aitimes.com/news/articleView.html?idxno=217024"
+    },
     {
      "title": "HP 새 CEO에 에마 웜즐리 전 GSK 대표 선임…주가 6% 급등",
      "press": "yna.co.kr",
@@ -65,12 +72,6 @@
      "press": "jemin.com",
      "publishedAt": "2026-11-04T20:30:00.000Z",
      "link": "https://www.jemin.com/news/articleView.html?idxno=846201"
-    },
-    {
-     "title": "[우보세]AI 주가를 흔드는 숨은 변수 '서버 수명'",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-04T20:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005436816?sid=110"
     }
    ]
   },
@@ -81,12 +82,18 @@
     "nate"
    ],
    "articles90": 4,
-   "recent20": 0,
+   "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-04T19:32:00.000Z",
+   "firstArticleAt": "2026-11-04T20:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'조작기소 특검법' 본회의 상정 기로…與 '강행' 野 '전면전' 예고",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-04T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009271231?sid=100"
+    },
     {
      "title": "[사설] 수사·기소 분리해 놓고… '조작기소 특검' 강행 이중성",
      "press": "busan.com",
@@ -98,12 +105,6 @@
      "press": "seoul.co.kr",
      "publishedAt": "2026-11-04T20:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/081/0003695893?sid=100"
-    },
-    {
-     "title": "與, 조작기소 특검법 속도전…'공소취소' 빼고 논란 정면돌파",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-04T20:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004206631?sid=100"
     }
    ]
   }
@@ -111,68 +112,68 @@
  "hitRate": {
   "days": 7,
   "flagged": 790,
-  "matched": 329,
-  "avgLeadMin": 288,
+  "matched": 342,
+  "avgLeadMin": 301,
   "recent": [
    {
-    "keyword": "트럼프 중간선거 발언",
-    "hitKeyword": "트럼프 중간선거 참패",
-    "hitAt": "2026-11-05T00:00:00+09:00",
-    "leadMin": 21
+    "keyword": "mls",
+    "hitKeyword": "손흥민 MLS 유니폼",
+    "hitAt": "2026-11-05T06:00:00+09:00",
+    "leadMin": 3885
    },
    {
-    "keyword": "쿠팡 누적 영업손실",
-    "hitKeyword": "쿠팡 누적 손실 1.8조",
-    "hitAt": "2026-11-04T23:30:00+09:00",
-    "leadMin": 596
+    "keyword": "뮌헨 아틀레티코 승리",
+    "hitKeyword": "바이에른 아틀레티코",
+    "hitAt": "2026-11-05T06:00:00+09:00",
+    "leadMin": 1278
    },
    {
-    "keyword": "배성재 김다영 유산 고백",
-    "hitKeyword": "배성재 김다영 유산 고백",
-    "hitAt": "2026-11-04T23:00:00+09:00",
-    "leadMin": 52
+    "keyword": "난파선",
+    "hitKeyword": "고려 난파선 태안 발견",
+    "hitAt": "2026-11-05T06:00:00+09:00",
+    "leadMin": 583
    },
    {
-    "keyword": "미국 중간선거",
-    "hitKeyword": "미국 중간선거 민주당",
-    "hitAt": "2026-11-04T23:00:00+09:00",
-    "leadMin": 21
+    "keyword": "서인영 12월 재혼 발표",
+    "hitKeyword": "서인영 12월 재혼",
+    "hitAt": "2026-11-05T06:00:00+09:00",
+    "leadMin": 421
    },
    {
-    "keyword": "한다감 아들 최초 공개",
-    "hitKeyword": "한다감 득남",
-    "hitAt": "2026-11-04T22:30:00+09:00",
-    "leadMin": 2247
+    "keyword": "서인영 12월 26일 재혼",
+    "hitKeyword": "서인영 12월 재혼",
+    "hitAt": "2026-11-05T06:00:00+09:00",
+    "leadMin": 411
    },
    {
-    "keyword": "한다감 아들 생후 26일 공개",
-    "hitKeyword": "한다감 득남",
-    "hitAt": "2026-11-04T22:30:00+09:00",
-    "leadMin": 2206
+    "keyword": "삼성 연장 12회 승리",
+    "hitKeyword": "삼성 KS2 연장 승리",
+    "hitAt": "2026-11-05T06:00:00+09:00",
+    "leadMin": 381
    },
    {
-    "keyword": "47세 한다감 아들 첫 공개",
-    "hitKeyword": "한다감 득남",
-    "hitAt": "2026-11-04T22:30:00+09:00",
-    "leadMin": 2186
+    "keyword": "서인영 재혼",
+    "hitKeyword": "서인영 12월 재혼",
+    "hitAt": "2026-11-05T06:00:00+09:00",
+    "leadMin": 350
    },
    {
-    "keyword": "김지찬",
-    "hitKeyword": "스기모토 김지찬 사과",
-    "hitAt": "2026-11-04T22:30:00+09:00",
-    "leadMin": 123
+    "keyword": "한진칼 최대주주 호반건설",
+    "hitKeyword": "호반 한진칼 최대주주",
+    "hitAt": "2026-11-05T06:00:00+09:00",
+    "leadMin": 330
    },
    {
-    "keyword": "한다감 아들 공개",
-    "hitKeyword": "한다감 득남",
-    "hitAt": "2026-11-04T22:30:00+09:00",
-    "leadMin": 72
+    "keyword": "한진칼 최대주주 호반건설로 변경",
+    "hitKeyword": "호반 한진칼 최대주주",
+    "hitAt": "2026-11-05T06:00:00+09:00",
+    "leadMin": 290
    },
    {
-    "keyword": "7이닝 1실점 호투",
-    "hitKeyword": "고영표 7이닝 1실점",
-    "hitAt": "2026-11-04T22:30:00+09:00",
-    "leadMin": 62
+    "keyword": "삼성, 12회 연장 승리",
+    "hitKeyword": "삼성 KS2 연장 승리",
+    "hitAt": "2026-11-05T06:00:00+09:00",
+    "leadMin": 159
    }
   ]
  }
