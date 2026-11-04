@@ -61,6 +61,35 @@ export function extractClaudeEnvelopeError(stdout: string): string | null {
   return null;
 }
 
+/**
+ * [2026-11-04] One log line of what the `claude -p --output-format json` envelope reports besides the text: turns,
+ * wall / API time and token usage — the body call takes 150~204 s and nothing said where. '' when absent; never throws.
+ */
+export function describeClaudeEnvelopeStats(stdout: string): string {
+  let env: Record<string, unknown>;
+  try {
+    const parsed = JSON.parse((stdout ?? '').trim()) as unknown;
+    if (!parsed || typeof parsed !== 'object') return '';
+    env = parsed as Record<string, unknown>;
+  } catch {
+    return '';
+  }
+  const num = (value: unknown): number | undefined => (typeof value === 'number' && Number.isFinite(value) ? value : undefined);
+  const seconds = (ms: number | undefined, label: string) => (ms === undefined ? [] : [`${label} ${(ms / 1000).toFixed(1)}초`]);
+  const usage = (env.usage && typeof env.usage === 'object' ? env.usage : {}) as Record<string, unknown>;
+  const tokens = ([['입력', 'input_tokens'], ['캐시생성', 'cache_creation_input_tokens'], ['캐시읽기', 'cache_read_input_tokens'], ['출력', 'output_tokens']] as const)
+    .flatMap(([label, key]) => { const n = num(usage[key]); return n === undefined ? [] : [`${label} ${n.toLocaleString('en-US')}`]; });
+  const turns = num(env.num_turns);
+  const parts = [
+    ...(turns === undefined ? [] : [`턴 ${turns}`]),
+    ...seconds(num(env.duration_ms), '전체'),
+    ...seconds(num(env.duration_api_ms), 'API'),
+    ...tokens,
+  ];
+  if (parts.length === 0) return '';
+  return tokens.length > 0 ? `${parts.join(' · ')} 토큰` : parts.join(' · ');
+}
+
 export function parseClaudeEnvelope(stdout: string): string {
   const raw = (stdout ?? '').trim();
   if (!raw) {

@@ -23,7 +23,7 @@ import { mkdtemp, rm } from 'fs/promises';
 import { tmpdir } from 'os';
 import { join } from 'path';
 import { spawnCollect } from './spawnHelper.js';
-import { classifyExit, extractClaudeEnvelopeError, parseClaudeEnvelope } from './parse.js';
+import { classifyExit, describeClaudeEnvelopeStats, extractClaudeEnvelopeError, parseClaudeEnvelope } from './parse.js';
 import {
   buildClaudeSubscriptionEnv,
   CLAUDE_SUBSCRIPTION_ISOLATION_ARGS,
@@ -41,6 +41,8 @@ export interface ClaudeRunOptions {
   model?: string;
   /** Both tiers use the same Sonnet model today; accepted so callers can say what the call is. */
   tier?: AgentTier;
+  /** Thinking depth (`--effort`). Without one the tier profile decides (agentModelDefaults). */
+  effort?: 'low' | 'medium' | 'high';
   timeoutMs?: number;
   signal?: AbortSignal;
   /**
@@ -52,6 +54,11 @@ export interface ClaudeRunOptions {
   imagePaths?: string[];
 }
 
+/** True when the CLI refused the `--effort` flag itself (an older Claude Code), not the model or the prompt. */
+export function claudeRejectedEffortFlag(output: string): boolean {
+  return /(unknown|unrecognized|invalid) (option|argument)[^\n]*--effort|--effort[^\n]*(unknown|unrecognized|not (a )?(valid|recognized))/i.test(String(output || ''));
+}
+
 /**
  * Run `claude -p` for a single prompt and return the final message text.
  * Throws AgentCliError on failure (install / login / rate-limit / timeout / bad output).
@@ -59,7 +66,9 @@ export interface ClaudeRunOptions {
  */
 export async function runClaude(prompt: string, opts: ClaudeRunOptions = {}): Promise<string> {
   const { timeoutMs, signal, imagePaths } = opts;
-  const { model } = resolveAgentRunProfile('claude', { model: opts.model, tier: opts.tier });
+  const profile = resolveAgentRunProfile('claude', { model: opts.model, tier: opts.tier });
+  const { model } = profile;
+  const effort = opts.effort ?? profile.effort;
   const dir = await mkdtemp(join(tmpdir(), 'agentcli-claude-'));
 
   try {
@@ -75,9 +84,9 @@ export async function runClaude(prompt: string, opts: ClaudeRunOptions = {}): Pr
     ];
     if (model) args.push('--model', model);
 
-    const res = await spawnCollect({
+    const spawnOnce = (runArgs: string[]) => spawnCollect({
       command: 'claude',
-      args,
+      args: runArgs,
       provider: 'claude',
       cwd: dir,
       stdin: prompt,
@@ -85,6 +94,14 @@ export async function runClaude(prompt: string, opts: ClaudeRunOptions = {}): Pr
       signal,
       env: buildClaudeSubscriptionEnv(),
     });
+    // [2026-11-04] --effort caps the thinking: measured on the harmony body call, 71,900 output tokens for a 5,951-char
+    //   answer (487.7 s, 1 turn) and the answer overflowed so only its tail came back. An older CLI that does not know
+    //   the flag is retried once without it — same model, same engine; only the flag is dropped, and it is logged.
+    let res = await spawnOnce(effort ? [...args, '--effort', effort] : args);
+    if (effort && res.code !== 0 && claudeRejectedEffortFlag(`${res.stderr}\n${res.stdout}`)) {
+      console.warn(`[Agent] 이 Claude Code 버전은 --effort 를 모릅니다 — 같은 모델로 옵션 없이 한 번 다시 실행합니다.`);
+      res = await spawnOnce(args);
+    }
 
     if (res.code !== 0) {
       // [2026-09-22] Prefer the envelope's own error text ("API Error: 529 Overloaded…") over the
@@ -104,7 +121,11 @@ export async function runClaude(prompt: string, opts: ClaudeRunOptions = {}): Pr
 
     // claude prints the JSON envelope on stdout even on success.
     try {
-      return parseClaudeEnvelope(res.stdout);
+      const text = parseClaudeEnvelope(res.stdout);
+      // [2026-11-04] Where the 150~204 s body call goes (turns · time · tokens). Observation only.
+      const stats = describeClaudeEnvelopeStats(res.stdout);
+      if (stats) console.log(`[Agent] claude 실행 통계 (모델 ${model || 'CLI 기본'}, 생각 깊이 ${effort || '기본'}, 프롬프트 ${prompt.length.toLocaleString('en-US')}자): ${stats}`);
+      return text;
     } catch (error) {
       // An exit-0 envelope can still carry the refusal (is_error:true).
       if (error instanceof AgentCliError && error.code === 'model_unavailable') {

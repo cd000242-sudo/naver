@@ -18,7 +18,7 @@ export type AgentTier = 'main' | 'light';
 
 export interface AgentTierProfile {
   readonly model: string;
-  /** Codex only: passed as `-c model_reasoning_effort=<value>`. */
+  /** Codex: `-c model_reasoning_effort=<value>`. Claude: `--effort <value>` (claudeRunner). */
   readonly effort?: 'low' | 'medium';
 }
 
@@ -28,9 +28,12 @@ export interface AgentTierProfile {
  * Claude: Sonnet for both tiers — lowering light calls to Haiku is the owner's decision, not made here.
  */
 export const AGENT_TIER_PROFILES: Readonly<Record<AgentDefaultModelProvider, Readonly<Record<AgentTier, AgentTierProfile>>>> = Object.freeze({
+  // [2026-11-04] Claude effort = `--effort` (thinking depth). Owner target "글쓰기 2분대". Same harmony body prompt, measured:
+  //   CLI default 487.7 s / 71,900 output tokens (answer overflowed, only its tail came back); medium 140~163 s;
+  //   low 102.7~175.8 s, complete JSON both times, same structure (6 headings, ~2,000-char body, 4 title candidates).
   claude: Object.freeze({
-    main: Object.freeze({ model: 'claude-sonnet-5-5' }),
-    light: Object.freeze({ model: 'claude-sonnet-5-5' }),
+    main: Object.freeze({ model: 'claude-sonnet-5-5', effort: 'low' as const }),
+    light: Object.freeze({ model: 'claude-sonnet-5-5', effort: 'low' as const }),
   }),
   codex: Object.freeze({
     main: Object.freeze({ model: 'gpt-6.1-terra', effort: 'medium' as const }),
