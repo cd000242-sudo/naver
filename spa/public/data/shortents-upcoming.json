@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T13:18:23.781Z",
+ "builtAt": "2026-11-04T13:28:28.127Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,52 +8,51 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "조작기소 특검법 법사위 통과",
    "sources": [
     "signal.bz",
+    "nate",
     "daum"
    ],
-   "articles90": 43,
+   "articles90": 47,
    "recent20": 7,
-   "press": 31,
+   "press": 35,
    "firstArticleAt": "2026-11-04T12:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'공소 취소' 뺀 조작기소 특검법 법사위 통과…국힘 '필버 맞불' 예고",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-04T13:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000548870?sid=100"
+     "title": "조작기소 특검법안, 공소취소 삭제…일각 “형소법 근거로 가능”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-04T13:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002718993?sid=100"
     },
     {
-     "title": "與 '조작기소특검법' 속전속결",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-04T13:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005350452?sid=100"
+     "title": "조작기소 특검법 법사위 통과…\"공소취소 삭제\" 대 \"이재명 봐주기\"(종...",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-04T13:18:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1319349&inflow=N"
     },
     {
-     "title": "'조작기소 특검법' 속전속결 법사위 통과...내일 본회의 처리 전망",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-04T13:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002428407?sid=100"
+     "title": "‘조작기소 특검법’ 법사위 통과…‘공소취소’ 빼고 문 정부 사건 추...",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-04T13:18:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/324188/?sc=Naver"
     }
    ]
   },
   {
    "keyword": "페덱 7이닝 1실점 호투",
    "sources": [
-    "signal.bz",
-    "nate",
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 16,
+   "articles90": 13,
    "recent20": 0,
    "press": 13,
-   "firstArticleAt": "2026-11-04T11:51:00.000Z",
+   "firstArticleAt": "2026-11-04T12:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -83,7 +82,7 @@
     "google"
    ],
    "articles90": 32,
-   "recent20": 1,
+   "recent20": 0,
    "press": 12,
    "firstArticleAt": "2026-11-04T12:03:00.000Z",
    "exclusive": false,
@@ -96,48 +95,16 @@
      "link": "https://m.sports.naver.com/kbaseball/article/117/0004122125"
     },
     {
-     "title": "[포토]박영현과 한승택 격려하는 KT 이강철 감독",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-04T12:29:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278260"
-    },
-    {
      "title": "[포토]위기 상황 마운드 방문한 KT 이강철 감독",
      "press": "sportsseoul.com",
      "publishedAt": "2026-11-04T12:29:00.000Z",
      "link": "https://m.sports.naver.com/kbaseball/article/468/0001278261"
-    }
-   ]
-  },
-  {
-   "keyword": "제이블랙 시리 아이찡 애정",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-04T12:13:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "제이블랙, A2O LITE 시리·아이찡에 \"내 딸 같다\"",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-04T13:08:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16268563"
     },
     {
-     "title": "제이블랙, A2O LITE 향한 특급 애정 \"시리·아이찡 내 딸 같아\"",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-04T13:06:00.000Z",
-     "link": "https://www.insight.co.kr/news/580696"
-    },
-    {
-     "title": "'유퀴즈' 제이블랙, A2O LITE 인트로 터뜨린 비결",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-04T13:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000051427"
+     "title": "[포토]박영현과 한승택 격려하는 KT 이강철 감독",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-04T12:29:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278260"
     }
    ]
   },
@@ -174,66 +141,99 @@
    ]
   },
   {
-   "keyword": "정지선 셰프",
+   "keyword": "김성윤",
    "sources": [
-    "daum"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-04T11:56:00.000Z",
+   "articles90": 22,
+   "recent20": 21,
+   "press": 8,
+   "firstArticleAt": "2026-11-04T12:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정지선, 화장 지우니 순한 얼굴 깜짝 \"아이라인 2cm 그리는 이유는 차별...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-04T13:12:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004463324"
+     "title": "[MD포토] 김성윤, '기분 좋은 안타'",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-04T13:23:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/117/0004122137"
     },
     {
-     "title": "정지선, 女셰프 무시 트라우마에 \"아이라인 점점 두껍게 그려\"",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-04T13:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005634848"
+     "title": "도루 성공한 김성윤",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-04T13:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009271025?sid=102"
     },
     {
-     "title": "정지선, 잔소리하는 직원 단체방만 10개‥3개월마다 인센티브로 금융치...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-04T13:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001184566"
+     "title": "[MD포토] 김성윤, '잘 맞았다!'",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-04T13:22:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/117/0004122135"
     }
    ]
   },
   {
-   "keyword": "역투하는 박영현",
+   "keyword": "한다감 출산 몸매",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 14,
+   "articles90": 8,
    "recent20": 0,
    "press": 8,
-   "firstArticleAt": "2026-11-04T11:59:00.000Z",
+   "firstArticleAt": "2026-11-04T12:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "역투하는 박영현",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-04T12:25:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/001/0016422584"
+     "title": "'47세' 한다감, 생후 26일 아들 공개…\"1억 준대도 안 끊던 父, 손자 보고...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-04T13:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001407167"
     },
     {
-     "title": "[포토] 박영현, 돌직구 승부",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-04T12:11:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/108/0003484696"
+     "title": "한다감, 출산 26일 만에 리즈 시절 몸매 복귀…'아기만 쏙 빠져나왔나\"...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-04T13:06:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000486494"
     },
     {
-     "title": "[포토] 박영현, 8회 구원 등판",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-04T12:10:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/108/0003484694"
+     "title": "'47세 득남' 한다감, 출산 후에도 '완벽 몸매' 그대로…생후 26일 아들도...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-04T13:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002076796"
+    }
+   ]
+  },
+  {
+   "keyword": "제이블랙 아이찡 발차기 안무",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 8,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-04T12:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "제이블랙, A2O LITE 시리·아이찡에 \"내 딸 같다\"",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-04T13:08:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16268563"
+    },
+    {
+     "title": "제이블랙도 놀란 이수만의 한 끗…\"아이찡 발차기 수정본 보고 소름\" ('...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-04T12:53:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001407166"
+    },
+    {
+     "title": "제이블랙, 이수만의 한 수에 감탄 \"아이찡 발차기, 사람들이 좋아하게 ...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-04T12:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004463311"
     }
    ]
   },
@@ -243,7 +243,7 @@
     "google"
    ],
    "articles90": 9,
-   "recent20": 8,
+   "recent20": 3,
    "press": 6,
    "firstArticleAt": "2026-11-04T12:09:00.000Z",
    "exclusive": false,
@@ -270,46 +270,12 @@
    ]
   },
   {
-   "keyword": "김성윤",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 3,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T11:55:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[포토S] 기뻐하는 김성윤",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-04T13:17:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/477/0000637251"
-    },
-    {
-     "title": "환호하는 김성윤[포토]",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-04T13:16:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/311/0002076809"
-    },
-    {
-     "title": "김성윤, 득점 기회 만드는 안타",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T13:16:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/421/0009271011"
-    }
-   ]
-  },
-  {
    "keyword": "배성재 김다영 유산 고백",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-04T11:59:00.000Z",
    "exclusive": false,
@@ -334,11 +300,43 @@
      "link": "https://www.etoday.co.kr/news/view/2644272"
     }
    ]
+  },
+  {
+   "keyword": "디아즈 1타점 3루타",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T12:37:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'디아즈 정신 못차리네'…디아즈 실책 얻은 kt wiz, 10회말 2-2 동점 성공...",
+     "press": "sports.hankooki.com",
+     "publishedAt": "2026-11-04T13:14:00.000Z",
+     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6942913"
+    },
+    {
+     "title": "페덱 버티고 디아즈 때리고…KS 달군 '외국인 콤비'",
+     "press": "idaegu.co.kr",
+     "publishedAt": "2026-11-04T13:04:00.000Z",
+     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=564480"
+    },
+    {
+     "title": "'드디어 깨졌다'…삼성, 10회초 디아즈 적시타로 승리 눈앞[KS2]",
+     "press": "sports.hankooki.com",
+     "publishedAt": "2026-11-04T12:56:00.000Z",
+     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6942895"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 749,
+  "flagged": 751,
   "matched": 315,
   "avgLeadMin": 276,
   "recent": [
