@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T15:59:55.353Z",
+ "builtAt": "2026-11-04T16:09:58.979Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,48 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 25,
  "candidates": [
   {
-   "keyword": "삼성 연장 12회 승리",
+   "keyword": "한진칼 최대주주 호반건설로 변경",
    "sources": [
-    "daum"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 45,
-   "recent20": 3,
-   "press": 29,
-   "firstArticleAt": "2026-11-04T14:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "삼성, 연장 12회 혈투 끝 kt에 3-2 승리…한국시리즈 1승 1패 '원점'",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-04T15:54:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/324192/?sc=Naver"
-    },
-    {
-     "title": "연장 12회 혈투… 실책이 승부 갈랐다",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-04T15:41:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/023/0004007848"
-    },
-    {
-     "title": "'낭만 투혼' 삼성 페덱, 놀란 라이언 소환한 까닭 [한국시리즈]",
-     "press": "newsq.co.kr",
-     "publishedAt": "2026-11-04T15:40:00.000Z",
-     "link": "https://www.newsq.co.kr/news/articleView.html?idxno=500743"
-    }
-   ]
-  },
-  {
-   "keyword": "한진칼 최대주주 호반건설",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
    "firstArticleAt": "2026-11-04T14:48:00.000Z",
    "exclusive": false,
    "capped": false,
@@ -61,80 +30,48 @@
      "link": "https://n.news.naver.com/mnews/article/422/0000922976?sid=101"
     },
     {
-     "title": "한진칼 최대주주 바뀌었다… 조원태 회장서 호반건설로",
-     "press": "donga.com",
-     "publishedAt": "2026-11-04T15:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003760132?sid=101"
-    },
-    {
      "title": "한진칼 최대주주 호반건설로 변경… 조원태 회장 측, 지분 추가 매입 계...",
      "press": "kmib.co.kr",
      "publishedAt": "2026-11-04T15:14:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/005/0001883097?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "수사",
-   "sources": [
-    "google"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-04T14:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "강원경찰 과학수사의 날 맞아 유공자 포상⋯수사 역량 강화 다짐",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-04T15:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001228717?sid=102"
     },
     {
-     "title": "'한동훈 딸 의혹' 쥔 중수청, 1호 사건 부담에 이첩도 수사도 멈췄다",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-04T15:16:00.000Z",
-     "link": "https://www.insight.co.kr/news/580698"
-    },
-    {
-     "title": "보완수사 요구 50% 급증…강원경찰 수사 부담 현실화",
-     "press": "kado.net",
-     "publishedAt": "2026-11-04T15:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000209521?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "공공재개발 이재명 대통령",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-04T14:41:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "오세훈 \"이재명, 공공개발 맹신 중단해야\"…'서울 주택공급 90%는 민간 ...",
-     "press": "ppss.kr",
-     "publishedAt": "2026-11-04T15:24:00.000Z",
-     "link": "https://www.ppss.kr/news/articleView.html?idxno=319137"
-    },
-    {
-     "title": "이 대통령, X 이어 유튜브도 한다",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-04T15:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003562948?sid=100"
-    },
-    {
-     "title": "힘 받는 공공재개발…대통령 \"인센티브로 사업 속도 대폭 제고\"",
-     "press": "dailysportshankook.co.kr",
+     "title": "한진칼 최대주주, 조원태 측에서 호반건설로 변경…지분 20.69% 확보",
+     "press": "mdtoday.co.kr",
      "publishedAt": "2026-11-04T15:12:00.000Z",
-     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435171"
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=623056"
+    }
+   ]
+  },
+  {
+   "keyword": "유병권 김수미",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-04T15:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "유병권, 故 김수미 발탁으로 방송 시작...\"출연료 협상도 직접 해주셔\" ...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-04T16:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002076889"
+    },
+    {
+     "title": "'라디오스타' 유병권, 故 김수미 성대모사로 맺은 15년 인연⋯\"김치 공...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-04T15:38:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2644278"
+    },
+    {
+     "title": "유병권, 故 김수미 '숨겨진 아들' 수준..\"김치 담그는 법까지 배워\" [라...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-04T15:33:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003484793"
     }
    ]
   },
@@ -145,7 +82,7 @@
     "nate"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-04T14:40:00.000Z",
    "exclusive": false,
@@ -204,12 +141,12 @@
    ]
   },
   {
-   "keyword": "강호동 구속영장 신청",
+   "keyword": "경찰, 강호동 구속영장 신청",
    "sources": [
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-04T15:05:00.000Z",
    "exclusive": false,
@@ -271,7 +208,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 780,
+  "flagged": 783,
   "matched": 329,
   "avgLeadMin": 288,
   "recent": [
