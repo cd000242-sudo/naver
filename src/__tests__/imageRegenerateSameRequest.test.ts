@@ -58,10 +58,15 @@ describe('regenerate sends the same request as the first generation', () => {
     expect(request.missingEnglishPrompt).toBe(true);
   });
 
-  it('thumbnail: isThumbnail, heading = post title, text only when the thumbnail-text box is on', () => {
+  // [2026-11-04] 사장님: 이미지 관리 탭에서 썸네일을 만들면 글자가 안 들어간다. 슬롯 이름을 글 제목으로 바꾸면 썸네일 디렉터의
+  //   AUTO 문구(엔진이 제목 포스터를 그림)가 꺼졌다 — 디렉터는 heading '🖼️ 썸네일' 에서만 켜진다. 제목은 postTitle 로 간다.
+  it('thumbnail slot: keeps the slot name (director AUTO text), the title travels as postTitle', () => {
     page({ thumbText: true });
     const on = buildImageRegenerateRequest('🖼️ 썸네일', SCENE, { prompt: SCENE, isThumbnail: true });
-    expect(on.items[0]).toMatchObject({ heading: '청년 월세 지원 신청 방법', isThumbnail: true, allowText: true, englishPrompt: SCENE });
+    expect(on.items[0]).toMatchObject({ heading: '🖼️ 썸네일', isThumbnail: true, allowText: true, englishPrompt: SCENE });
+    expect(on.postTitle).toBe('청년 월세 지원 신청 방법');
+    const pin = buildImageRegenerateRequest('📌 썸네일', SCENE, { prompt: SCENE, isThumbnail: true });
+    expect(pin.items[0].heading).toBe('🖼️ 썸네일');
     expect(on.thumbnailTextInclude).toBe(true);
     page({ thumbText: false });
     const off = buildImageRegenerateRequest('🖼️ 썸네일', SCENE, { prompt: SCENE });

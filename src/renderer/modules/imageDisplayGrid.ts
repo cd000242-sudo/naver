@@ -832,8 +832,12 @@ export function buildImageRegenerateRequest(heading: string, prompt: string, sto
   const scene = regenerateEnglishScene(key, prompt, stored);
   let reference = {};
   if (!isThumbnail) { try { reference = resolveReferenceImageForHeading(key) || {}; } catch { reference = {}; } }
+  // [2026-11-04] A thumbnail slot keeps its slot name: the director's AUTO text mode (engine draws the title poster) only
+  //   switches on for heading '🖼️ 썸네일' (costAndAutoGen imageTabSlot); the title already travels as postTitle.
+  //   Swapping it for the post title (c2a4c5a0f) made [재생성] fall to 'exclude' — a thumbnail without text.
+  const isSlotName = key === '🖼️ 썸네일' || key === '📌 썸네일';
   const item = {
-    heading: isThumbnail ? (postTitle || key) : key,
+    heading: isThumbnail ? (isSlotName ? '🖼️ 썸네일' : (postTitle || key)) : key,
     prompt: scene || String(prompt || '').trim() || key,
     ...(scene ? { englishPrompt: scene } : {}),
     isThumbnail,

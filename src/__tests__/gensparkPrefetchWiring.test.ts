@@ -52,11 +52,13 @@ describe('generateImagesForAutomation — 젠스파크 미리 한꺼번에', () 
 
   it('이미지 관리 탭 AI 이미지 생성: 쇼핑이 아니면 한 번에 요청, 받은 칸은 엔진 분기보다 먼저 쓴다', () => {
     const tab = read('renderer/modules/headingImageGen.ts');
-    expect(tab).toMatch(/if \(gsPrefetchBatchProvider\(imageSource\) && filteredHeadings\.length >= 2 && !isShoppingConnectForCurrentPost\(\)\) \{/);
-    expect(tab).toMatch(/items: gsTabItems,[\s\S]*?allowPartialResults: true,/);
-    expect(tab).toMatch(/gsTabPrefetched = gsPrefetchMatchImages\(gsTabItems,/);
+    // [2026-11-04] 썸네일 칸은 빼고 본문 칸만 한 번에 보낸다(풀오토와 같은 gsPrefetchBodyIndexes, 2장 미만이면 1장씩).
+    expect(tab).toContain('const gsTabItems = gsPrefetchBatchProvider(imageSource) && !isShoppingConnectForCurrentPost()');
+    expect(tab).toContain('const gsTabBodyIndexes = gsPrefetchBodyIndexes(imageSource, gsTabItems);');
+    expect(tab).toMatch(/items: gsTabBatch,[\s\S]*?allowPartialResults: true,/);
+    expect(tab).toMatch(/gsTabPrefetched = gsPrefetchMatchImages\(gsTabItems, gsTabBodyIndexes,/);
     expect(tab).toMatch(/const gsTabReady = gsTabPrefetched\.get\(i\);\s*if \(gsTabReady\) \{[\s\S]*?\} else if \(isShoppingConnectForCurrentPost\(\)\) \{/);
-    expect(tab.indexOf('items: gsTabItems')).toBeLessThan(tab.indexOf('results.push(await generateOne(filteredHeadings[i], i));'));
+    expect(tab.indexOf('items: gsTabBatch')).toBeLessThan(tab.indexOf('results.push(await generateOne(filteredHeadings[i], i));'));
     expect(tab).toMatch(/from '\.\.\/\.\.\/image\/fullAuto\/gensparkBodyPrefetch\.js'/);
   });
 

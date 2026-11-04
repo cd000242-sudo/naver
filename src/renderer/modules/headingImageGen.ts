@@ -11,7 +11,7 @@ import { beginImagePreviewBatch, endImagePreviewBatch, setImagePreviewBatchSlot 
 import { hideAppProgressModal, showAppProgressModal } from '../utils/appProgressModal.js';
 import { extractSemiAutoDocumentFromBody } from '../utils/semiAutoHeadingExtractor.js';
 import { attachImagePickerPreview } from './imagePickerPreview.js';
-import { gsPrefetchBatchProvider, gsPrefetchLabel, gsPrefetchMatchImages } from '../../image/fullAuto/gensparkBodyPrefetch.js';
+import { gsPrefetchBatchProvider, gsPrefetchBodyIndexes, gsPrefetchLabel, gsPrefetchMatchImages } from '../../image/fullAuto/gensparkBodyPrefetch.js';
  
 
 // --- Global declarations (exposed by renderer.ts via window) ---
@@ -1586,29 +1586,39 @@ export function initHeadingImageGeneration(): void {
         };
 
         // [2026-11-04] codex-image 도 같은 경로: main 이 한 세션 한 장씩 4개를 동시에 돌린다(gsPrefetchBatchProvider).
-        if (gsPrefetchBatchProvider(imageSource) && filteredHeadings.length >= 2 && !isShoppingConnectForCurrentPost()) {
-          const gsTabItems = filteredHeadings.map((heading: any, i: number) => ({
-            heading: heading.title,
-            prompt: heading.prompt,
-            englishPrompt: heading.prompt,
-            isThumbnail: false,
-            allowText: false,
-            diversityIndex: i,
-            ...resolveReferenceImageForHeading(String(heading.title || '').trim()),
-          }));
-          appendLog(`🚀 ${gsPrefetchLabel(imageSource)}: 소제목 이미지 ${gsTabItems.length}장을 한 번에 요청합니다 (최대 4장 동시).`, 'images-log-output');
-          gsTabItems.forEach((_item: any, i: number) => liveImagePreview.updateItem(i, 'generating'));
+        // [2026-11-04] 사장님: "풀오토는 썸네일에 글자가 들어가는데 이미지 관리 탭에서 만들면 안 들어간다". 썸네일 칸을 본문과
+        //   같이 한 번에 보내면 isThumbnail:false · allowText:false 로 나가고, 썸네일 디렉터(문구 AUTO · 엔진이 제목 포스터를 그림)는
+        //   한 장짜리 호출에만 붙어 통째로 빠졌다. 풀오토와 같은 규칙(gsPrefetchBodyIndexes)으로 썸네일은 빼고, 1장씩 경로가 만든다.
+        const gsTabItems = gsPrefetchBatchProvider(imageSource) && !isShoppingConnectForCurrentPost()
+          ? filteredHeadings.map((heading: any, i: number) => {
+            const gsTabTitle = String(heading.title || '');
+            return {
+              heading: heading.title,
+              prompt: heading.prompt,
+              englishPrompt: heading.prompt,
+              isThumbnail: gsTabTitle.includes('🖼️ 썸네일') || gsTabTitle.includes('📌 썸네일'),
+              allowText: false,
+              diversityIndex: i,
+              ...resolveReferenceImageForHeading(gsTabTitle.trim()),
+            };
+          })
+          : [];
+        const gsTabBodyIndexes = gsPrefetchBodyIndexes(imageSource, gsTabItems);
+        if (gsTabBodyIndexes.length > 0) {
+          const gsTabBatch = gsTabBodyIndexes.map((i: number) => gsTabItems[i]);
+          appendLog(`🚀 ${gsPrefetchLabel(imageSource)}: 소제목 이미지 ${gsTabBatch.length}장을 한 번에 요청합니다 (최대 4장 동시).`, 'images-log-output');
+          gsTabBodyIndexes.forEach((i: number) => liveImagePreview.updateItem(i, 'generating'));
           try {
             const gsTabResult = await generateImagesWithCostSafety({
               provider: imageSource,
-              items: gsTabItems,
+              items: gsTabBatch,
               postTitle: blogTitle,
               isFullAuto: true,
               allowPartialResults: true,
             });
-            gsTabPrefetched = gsPrefetchMatchImages(gsTabItems, gsTabItems.map((_item: any, i: number) => i), Array.isArray(gsTabResult?.images) ? gsTabResult.images : []);
-            const gsTabMissing = gsTabItems.length - gsTabPrefetched.size;
-            appendLog(`✅ ${gsPrefetchLabel(imageSource)}: ${gsTabPrefetched.size}/${gsTabItems.length}장 받음${gsTabMissing > 0 ? ` — 못 받은 ${gsTabMissing}칸은 1장씩 다시 만듭니다` : ''}${gsTabPrefetched.size === 0 && gsTabResult?.message ? ` (${String(gsTabResult.message).substring(0, 160)})` : ''}`, 'images-log-output');
+            gsTabPrefetched = gsPrefetchMatchImages(gsTabItems, gsTabBodyIndexes, Array.isArray(gsTabResult?.images) ? gsTabResult.images : []);
+            const gsTabMissing = gsTabBatch.length - gsTabPrefetched.size;
+            appendLog(`✅ ${gsPrefetchLabel(imageSource)}: ${gsTabPrefetched.size}/${gsTabBatch.length}장 받음${gsTabMissing > 0 ? ` — 못 받은 ${gsTabMissing}칸은 1장씩 다시 만듭니다` : ''}${gsTabPrefetched.size === 0 && gsTabResult?.message ? ` (${String(gsTabResult.message).substring(0, 160)})` : ''}`, 'images-log-output');
           } catch (gsTabError) {
             appendLog(`⚠️ ${gsPrefetchLabel(imageSource)} 한꺼번에 요청 실패 — 1장씩 만듭니다: ${String((gsTabError as Error)?.message || gsTabError).substring(0, 160)}`, 'images-log-output');
           }

@@ -9,25 +9,35 @@ const read = (rel: string): string => readFileSync(new URL(`../${rel}`, import.m
 describe('이미지 관리 탭 AI 이미지 생성 (headingImageGen) — codex-image 한 번에 요청', () => {
   const tab = read('renderer/modules/headingImageGen.ts');
   const start = tab.indexOf('let gsTabPrefetched');
-  const callBlock = tab.slice(tab.indexOf('if (gsPrefetchBatchProvider(imageSource) && filteredHeadings.length >= 2'), tab.indexOf('const results: Array<any | null> = [];', start));
+  const batchAnchor = 'const gsTabItems = gsPrefetchBatchProvider(imageSource) && !isShoppingConnectForCurrentPost()';
+  const callBlock = tab.slice(tab.indexOf(batchAnchor), tab.indexOf('const results: Array<any | null> = [];', start));
 
   it('엔진 판정은 한 번에 요청하는 엔진 목록(젠스파크·codex-image)을 쓰고, 쇼핑커넥트는 제외한다', () => {
-    expect(tab).toMatch(/if \(gsPrefetchBatchProvider\(imageSource\) && filteredHeadings\.length >= 2 && !isShoppingConnectForCurrentPost\(\)\) \{/);
+    expect(tab).toContain(batchAnchor);
     expect(tab).toMatch(/import \{[^}]*gsPrefetchBatchProvider[^}]*\} from '\.\.\/\.\.\/image\/fullAuto\/gensparkBodyPrefetch\.js'/);
     expect(tab).not.toMatch(/imageSource === 'genspark' && filteredHeadings\.length/);
   });
 
-  it('소제목 항목을 먼저 모두 만들어 generateImagesWithCostSafety 를 한 번만 부른다(일부 결과 허용)', () => {
-    expect(callBlock.match(/generateImagesWithCostSafety\(/g)).toHaveLength(1);
-    expect(callBlock).toMatch(/provider: imageSource,\s*items: gsTabItems,/);
-    expect(callBlock).toMatch(/allowPartialResults: true,/);
-    // Same item shape the single path builds: heading, prompt, englishPrompt, no thumbnail, no text, reference image.
-    expect(callBlock).toMatch(/heading: heading\.title,\s*prompt: heading\.prompt,\s*englishPrompt: heading\.prompt,\s*isThumbnail: false,\s*allowText: false,/);
-    expect(callBlock).toMatch(/\.\.\.resolveReferenceImageForHeading\(String\(heading\.title \|\| ''\)\.trim\(\)\)/);
+  // [2026-11-04] 사장님: 풀오토는 썸네일에 글자가 들어가는데 이미지 관리 탭은 안 들어간다. 썸네일 칸이 본문과 함께
+  //   한 번에 나가 글자 없는 일반 이미지가 됐다(썸네일 디렉터는 한 장짜리 호출에만 붙는다). 풀오토와 같은 규칙으로 뺀다.
+  it('썸네일 칸은 한 번에 요청에서 빠지고(풀오토와 같은 gsPrefetchBodyIndexes) 1장씩 경로가 만든다', () => {
+    expect(callBlock).toMatch(/isThumbnail: gsTabTitle\.includes\('🖼️ 썸네일'\) \|\| gsTabTitle\.includes\('📌 썸네일'\),/);
+    expect(callBlock).toContain('const gsTabBodyIndexes = gsPrefetchBodyIndexes(imageSource, gsTabItems);');
+    expect(callBlock).toContain('const gsTabBatch = gsTabBodyIndexes.map((i: number) => gsTabItems[i]);');
+    expect(callBlock).not.toMatch(/isThumbnail: false,/);
   });
 
-  it('받은 이미지는 위치가 아니라 소제목 이름으로 칸에 맞춘다', () => {
-    expect(callBlock).toMatch(/gsTabPrefetched = gsPrefetchMatchImages\(gsTabItems, gsTabItems\.map\(\(_item: any, i: number\) => i\), /);
+  it('소제목 항목을 먼저 모두 만들어 generateImagesWithCostSafety 를 한 번만 부른다(일부 결과 허용)', () => {
+    expect(callBlock.match(/generateImagesWithCostSafety\(/g)).toHaveLength(1);
+    expect(callBlock).toMatch(/provider: imageSource,\s*items: gsTabBatch,/);
+    expect(callBlock).toMatch(/allowPartialResults: true,/);
+    // Same item shape the single path builds: heading, prompt, englishPrompt, no text, reference image.
+    expect(callBlock).toMatch(/heading: heading\.title,\s*prompt: heading\.prompt,\s*englishPrompt: heading\.prompt,\s*isThumbnail: [^,]+,\s*allowText: false,/);
+    expect(callBlock).toMatch(/\.\.\.resolveReferenceImageForHeading\(gsTabTitle\.trim\(\)\)/);
+  });
+
+  it('받은 이미지는 위치가 아니라 소제목 이름으로 칸에 맞춘다 (본문 칸만)', () => {
+    expect(callBlock).toMatch(/gsTabPrefetched = gsPrefetchMatchImages\(gsTabItems, gsTabBodyIndexes, /);
   });
 
   it('진행 로그는 엔진 이름을 gsPrefetchLabel 로 쓴다 (codex-image 를 "젠스파크"라고 부르지 않는다)', () => {
@@ -44,7 +54,7 @@ describe('이미지 관리 탭 AI 이미지 생성 (headingImageGen) — codex-i
     expect(tab).toMatch(/const gsTabReady = gsTabPrefetched\.get\(i\);\s*if \(gsTabReady\) \{[\s\S]*?\} else if \(isShoppingConnectForCurrentPost\(\)\) \{/);
     const one = tab.slice(
       tab.indexOf('const generateOne = async (heading: any, i: number)', start),
-      tab.indexOf('if (gsPrefetchBatchProvider(imageSource) && filteredHeadings.length >= 2', start),
+      tab.indexOf(batchAnchor, start),
     );
     expect(one).toMatch(/imageSource === 'dropshot' \|\| imageSource === 'genspark' \|\| imageSource === 'codex-image'/);
     // The single path still sends exactly one item per call.
@@ -53,7 +63,7 @@ describe('이미지 관리 탭 AI 이미지 생성 (headingImageGen) — codex-i
   });
 
   it('요청은 소제목 반복문보다 앞에서 한 번 끝난다', () => {
-    expect(tab.indexOf('items: gsTabItems')).toBeLessThan(tab.indexOf('results.push(await generateOne(filteredHeadings[i], i));'));
+    expect(tab.indexOf('items: gsTabBatch')).toBeLessThan(tab.indexOf('results.push(await generateOne(filteredHeadings[i], i));'));
   });
 });
 
