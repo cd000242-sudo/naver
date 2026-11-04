@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T10:06:32.925Z",
+ "builtAt": "2026-11-04T10:16:37.115Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "한진칼 최대주주 변경",
    "sources": [
     "daum"
    ],
-   "articles90": 64,
-   "recent20": 9,
-   "press": 52,
+   "articles90": 67,
+   "recent20": 7,
+   "press": 55,
    "firstArticleAt": "2026-11-04T09:02:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "‘최대주주 호반’ 공시에 한진칼, 애프터마켓서 한때 14%↑",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-04T10:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006403788?sid=101"
+     "title": "한진칼 지분 싸움 시계 제로… 호반그룹, 일단 최대주주로",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-04T10:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000963677?sid=101"
     },
     {
-     "title": "한진칼 최대주주 호반으로 변경…12월 조원태 측 재역전 가능성",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-04T10:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003151423?sid=101"
+     "title": "한진칼 최대주주 호반건설로 변경…조원태 회장 측과 지분 0.11%p차",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-04T10:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002247333?sid=101"
     },
     {
-     "title": "호반그룹, 한진칼 최대주주 됐다…조원태 측에 0.11%p 추월",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-04T10:00:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=901973"
+     "title": "한진칼 최대주주 올라선 호반···되찾겠다는 조원태",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-04T10:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003480700?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "신촌 세브란스 흉기 난동",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 37,
+   "recent20": 2,
+   "press": 33,
+   "firstArticleAt": "2026-11-04T08:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "신촌 세브란스병원서 흉기 난동 … 정신건강의학과 교수 '부상'",
+     "press": "safetimes.co.kr",
+     "publishedAt": "2026-11-04T10:14:00.000Z",
+     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247196"
+    },
+    {
+     "title": "50대 女, 세브란스병원서 흉기 난동⋯정신과 교수 피습",
+     "press": "kormedi.com",
+     "publishedAt": "2026-11-04T09:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/296/0000106901?sid=102"
+    },
+    {
+     "title": "신촌 세브란스병원서 50대 여성 흉기 난동…교수 1명 부상",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-04T09:54:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261104001354"
     }
    ]
   },
@@ -47,10 +79,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 44,
+   "articles90": 31,
    "recent20": 1,
-   "press": 43,
-   "firstArticleAt": "2026-11-04T08:40:00.000Z",
+   "press": 30,
+   "firstArticleAt": "2026-11-04T08:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,66 +107,98 @@
    ]
   },
   {
-   "keyword": "신촌 세브란스 흉기 난동",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 44,
-   "recent20": 2,
-   "press": 39,
-   "firstArticleAt": "2026-11-04T08:39:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "50대 女, 세브란스병원서 흉기 난동⋯정신과 교수 피습",
-     "press": "kormedi.com",
-     "publishedAt": "2026-11-04T09:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/296/0000106901?sid=102"
-    },
-    {
-     "title": "신촌 세브란스병원서 50대 여성 흉기 난동…교수 1명 부상",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-04T09:54:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261104001354"
-    },
-    {
-     "title": "신촌 세브란스병원서 50대 여성 흉기난동…정신과 교수 찔렀다",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-04T09:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005436734?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "조작기소 특검법 논란",
    "sources": [
     "signal.bz"
    ],
    "articles90": 20,
-   "recent20": 2,
+   "recent20": 3,
    "press": 18,
-   "firstArticleAt": "2026-11-04T08:46:00.000Z",
+   "firstArticleAt": "2026-11-04T08:52:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "'조작기소 특검법' 법사위 소위 통과…野 반발에 안건조정위 회부",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-04T10:14:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=728051"
+    },
+    {
+     "title": "\"공소취소용\" \"억지\"…조작기소 특검, 檢수사권·추천권 논란 [이정우의...",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-04T10:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005350420?sid=100"
+    },
     {
      "title": "조작기소 특검법, 與 주도 법사소위 통과… 국힘 \"李 위해 부역\"",
      "press": "newscj.com",
      "publishedAt": "2026-11-04T10:00:00.000Z",
      "link": "https://www.newscj.com/news/articleView.html?idxno=3445986"
+    }
+   ]
+  },
+  {
+   "keyword": "윤석열 재판",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 18,
+   "recent20": 8,
+   "press": 14,
+   "firstArticleAt": "2026-11-04T08:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "윤석열 전 대통령, 선거법 2심도 '당선무효형'",
+     "press": "safetimes.co.kr",
+     "publishedAt": "2026-11-04T10:14:00.000Z",
+     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247197"
     },
     {
-     "title": "與 ‘조작기소 특검법’ 강행 처리 돌입… 국힘 반발 필리버스터 예고",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-04T09:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001883032?sid=100"
+     "title": "날아드는 '윤석열 청구서'에 고민 쌓이는 국힘",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-04T10:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000141607?sid=100"
     },
     {
-     "title": "‘조작기소 특검법’ 법사위 문턱 넘어… 野 “李 죄 없애기 법” 반발",
-     "press": "segye.com",
-     "publishedAt": "2026-11-04T09:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004172538?sid=100"
+     "title": "선고 후 쓴웃음 지은 윤석열…\"최대한 빨리 상고할 것\"",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-04T10:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001976718?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "고영표",
+   "sources": [
+    "google"
+   ],
+   "articles90": 39,
+   "recent20": 17,
+   "press": 11,
+   "firstArticleAt": "2026-11-04T09:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "고영표 '장준원 수비 좋았어'[포토]",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-04T10:15:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/311/0002076591"
+    },
+    {
+     "title": "[사진]2회 위기 1실점으로 막아낸 KT 선발 고영표, '야수들에게 감사를...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-04T10:14:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/109/0005634568"
+    },
+    {
+     "title": "[사진]KT 선발 고영표, '2회 위기 1실점으로 넘기고'",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-04T10:14:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/109/0005634569"
     }
    ]
   },
@@ -144,13 +208,19 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 12,
+   "articles90": 11,
    "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-04T08:38:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-04T08:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "국립창원대, 폴란드 3개 대학과 국제공동연구 협력 확대",
+     "press": "mhns.co.kr",
+     "publishedAt": "2026-11-04T10:14:00.000Z",
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=767588"
+    },
     {
      "title": "충북대, QS 아시아 대학 평가 211위",
      "press": "ccdn.co.kr",
@@ -162,44 +232,6 @@
      "press": "sjbnews.com",
      "publishedAt": "2026-11-04T09:26:00.000Z",
      "link": "https://sjbnews.com/news/news.php?number=891798"
-    },
-    {
-     "title": "전공 신설·연구 교류… 해사법원 개원에 바쁜 대학가",
-     "press": "busan.com",
-     "publishedAt": "2026-11-04T09:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001405692?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "고영표",
-   "sources": [
-    "google"
-   ],
-   "articles90": 50,
-   "recent20": 11,
-   "press": 11,
-   "firstArticleAt": "2026-11-04T09:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[사진]실점 아쉬운 KT 선발 고영표",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-04T10:04:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/109/0005634550"
-    },
-    {
-     "title": "사인 교환하는 고영표",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-04T10:01:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/001/0016422330"
-    },
-    {
-     "title": "[포토] 1타점 3루타 디아즈, 고영표 상대 선취타점",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-04T10:00:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/076/0004463211"
     }
    ]
   },
@@ -240,13 +272,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-04T08:37:00.000Z",
+   "articles90": 6,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-04T09:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "태영호 전 의원 장남, '18억대 가상자산 사기' 1심 징역 3년6개월",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-04T10:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003151425?sid=102"
+    },
     {
      "title": "'18억 원대 가상자산 사기' 태영호 장남, 1심서 징역 3년 6개월",
      "press": "news.sbs.co.kr",
@@ -258,12 +296,38 @@
      "press": "kmib.co.kr",
      "publishedAt": "2026-11-04T09:59:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/005/0001883040?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "한우",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-04T09:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[현장] 9864만 원 '역대 최고가' 갈아치운 슈퍼 한우 탄생",
+     "press": "farminsight.net",
+     "publishedAt": "2026-11-04T09:54:00.000Z",
+     "link": "https://www.farminsight.net/news/articleView.html?idxno=17168"
     },
     {
-     "title": "'18억대 가상자산 사기' 태영호 장남, 1심 징역 3년6개월",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-04T09:38:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1319339&inflow=N"
+     "title": "[인터뷰] 제29회 전국한우능력평가대회 대통령상 수상 '술뫼농장' 이병...",
+     "press": "farminsight.net",
+     "publishedAt": "2026-11-04T09:54:00.000Z",
+     "link": "https://www.farminsight.net/news/articleView.html?idxno=17169"
+    },
+    {
+     "title": "대한한돈협회 고창지부·전국한우협회 고창군지부, 장학금 1천만원 기탁",
+     "press": "sjbnews.com",
+     "publishedAt": "2026-11-04T09:25:00.000Z",
+     "link": "https://sjbnews.com/news/news.php?number=891734"
     }
    ]
   },
@@ -272,10 +336,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 4,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-04T08:38:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-04T08:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -298,11 +362,43 @@
      "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261104010001721"
     }
    ]
+  },
+  {
+   "keyword": "테슬라",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T08:47:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "테슬라·스페이스X 합병 전망에 비상 걸린 서학개미...주식 안팔아도 양...",
+     "press": "livebiz.today",
+     "publishedAt": "2026-11-04T10:10:00.000Z",
+     "link": "https://www.livebiz.today/news/articleView.html?idxno=206220"
+    },
+    {
+     "title": "美장전거래서 머스크의 테슬라·스페이스X 4% 이상 하락(상보)",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-04T09:38:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443062"
+    },
+    {
+     "title": "테슬라와 스페이스X 합병하면 주식 안 판 서학개미도 세금 낸다?…국회...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-04T08:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202633?sid=101"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 692,
+  "flagged": 695,
   "matched": 287,
   "avgLeadMin": 282,
   "recent": [
