@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T12:48:09.071Z",
+ "builtAt": "2026-11-04T12:58:15.338Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,51 +15,45 @@
    "sources": [
     "daum"
    ],
-   "articles90": 36,
-   "recent20": 13,
-   "press": 31,
+   "articles90": 41,
+   "recent20": 9,
+   "press": 34,
    "firstArticleAt": "2026-11-04T11:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'조작기소 특검법' 與 주도 법사위 통과…野, 본회의 필버 등 총력 대응...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-04T12:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003151437?sid=100"
+     "title": "‘조작기소 특검법’ 하루 만에 법사위 통과…文정부 사건 4건 추가",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-04T12:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006403833?sid=100"
     },
     {
-     "title": "[속보] 조작기소 특검법, 법사위 통과… 與 5일 본회의 처리 방침",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-04T12:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000191524?sid=100"
+     "title": "‘조작기소 특검법’ 민주당 주도로 법사위 통과…국민의힘 반발·퇴장",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-04T12:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012287457?sid=100"
     },
     {
-     "title": "'조작기소 특검법안' 민주당 주도로 법사위 통과…국민의힘 반발·퇴장",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-04T12:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400717?sid=100"
+     "title": "'조작기소 특검법' 법사위 통과…공소취소권 빼고 文정부 사건 추가",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-04T12:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004206614?sid=100"
     }
    ]
   },
   {
-   "keyword": "페덱 7이닝 1실점",
+   "keyword": "고영표 7이닝 1실점",
    "sources": [
     "daum"
    ],
-   "articles90": 38,
-   "recent20": 1,
-   "press": 20,
-   "firstArticleAt": "2026-11-04T11:29:00.000Z",
+   "articles90": 22,
+   "recent20": 0,
+   "press": 17,
+   "firstArticleAt": "2026-11-04T11:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "[AI그래픽] 삼성 페덱 7이닝 1실점 완벽투, KS 2차전 수원 KT전 투구 분석",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-04T12:30:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261104001390"
-    },
     {
      "title": "kt 고영표 7이닝 1실점·삼성 페덱 7이닝 1실점…KS 2차전 명품 투수전",
      "press": "topstarnews.net",
@@ -71,38 +65,44 @@
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-04T12:21:00.000Z",
      "link": "https://m.sports.naver.com/kbaseball/article/079/0004206610"
+    },
+    {
+     "title": "'4일 휴식' 삼성 페덱, 102구 역투…KT 타선 7이닝 1실점 봉쇄[KS2]",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-04T12:10:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/421/0009270889"
     }
    ]
   },
   {
-   "keyword": "김혜수 추모해 주신",
+   "keyword": "이강철",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 12,
+   "articles90": 32,
    "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-04T11:27:00.000Z",
+   "press": 11,
+   "firstArticleAt": "2026-11-04T11:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "故 최불암 빈소 지킨 김혜수 \"추모해 주신 모든 분 고맙습니다\"",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-04T12:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004122103"
+     "title": "[포토]박영현과 한승택 격려하는 KT 이강철 감독",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-04T12:29:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278260"
     },
     {
-     "title": "故 최불암 마지막 길 지킨 김혜수 “추모해 주신 주신 무든 분 감사”[...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-04T12:08:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1793794028530364005"
+     "title": "[포토]위기 상황 마운드 방문한 KT 이강철 감독",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-04T12:29:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278261"
     },
     {
-     "title": "故 최불암 빈소 지킨 김혜수 \"추모해 주신 분들 감사\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-04T12:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005436758"
+     "title": "[포토] 이강철 감독이 직접 마운드에 올라간 이유는?",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-04T12:27:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/108/0003484707"
     }
    ]
   },
@@ -112,10 +112,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 31,
+   "articles90": 29,
    "recent20": 0,
    "press": 11,
-   "firstArticleAt": "2026-11-04T11:28:00.000Z",
+   "firstArticleAt": "2026-11-04T11:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -140,14 +140,78 @@
    ]
   },
   {
-   "keyword": "한다감 아들 공개",
+   "keyword": "김혜수 추모해 주신",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 11,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-04T11:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "故 최불암 빈소 지킨 김혜수 \"추모해 주신 모든 분 고맙습니다\"",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-04T12:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004122103"
+    },
+    {
+     "title": "故 최불암 마지막 길 지킨 김혜수 “추모해 주신 주신 무든 분 감사”[...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-04T12:08:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1793794028530364005"
+    },
+    {
+     "title": "故 최불암 빈소 지킨 김혜수 \"추모해 주신 분들 감사\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-04T12:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005436758"
+    }
+   ]
+  },
+  {
+   "keyword": "김지찬",
+   "sources": [
+    "google"
+   ],
+   "articles90": 54,
+   "recent20": 45,
+   "press": 10,
+   "firstArticleAt": "2026-11-04T12:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[사진]기뻐하는 김지찬",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-04T12:56:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/109/0005634833"
+    },
+    {
+     "title": "[포토] 연장 10회 김지찬 득점에 환호하는 삼성 벤치",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-04T12:55:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/076/0004463317"
+    },
+    {
+     "title": "[포토] 박진만 감독, 김지찬 득점에 환호!",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-04T12:54:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/076/0004463316"
+    }
+   ]
+  },
+  {
+   "keyword": "한다감 출산 몸매",
    "sources": [
     "daum"
    ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 8,
-   "firstArticleAt": "2026-11-04T11:20:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-04T12:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -158,16 +222,48 @@
      "link": "https://m.entertain.naver.com/article/008/0005436765"
     },
     {
-     "title": "\"1억 제시해도 못 끊었는데\"…'슈돌' 한다감 친정아버지, 손자 탄생 후 ...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-04T12:40:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16268552"
+     "title": "‘47세 첫 출산’ 한다감, 아이 낳고 26일 만에 이 몸매라니‥자기관리...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-04T12:29:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001184562"
     },
     {
-     "title": "한다감 아들, 생후 26일 만에 완성형 비주얼‥예비아빠 김종민도 “비주...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-04T12:36:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001184563"
+     "title": "'46세' 한다감, 출산 26일만 되찾은 미모..子 주원도 '완성형 비주얼' [슈...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-04T12:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003484695"
+    }
+   ]
+  },
+  {
+   "keyword": "이승민 마운드",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T12:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[사진]마운드 내려가는 이승민",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-04T12:32:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/109/0005634795"
+    },
+    {
+     "title": "[사진]삼성 이승민, '임무 여기까지'",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-04T12:29:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/109/0005634787"
+    },
+    {
+     "title": "[포토]삼성 이승민, 오늘도 마운드에!",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-04T12:19:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278253"
     }
    ]
   },
@@ -177,10 +273,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 3,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-04T11:20:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-04T11:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -203,11 +299,43 @@
      "link": "https://n.news.naver.com/mnews/article/005/0001883062?sid=101"
     }
    ]
+  },
+  {
+   "keyword": "김성윤",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 2,
+   "firstArticleAt": "2026-11-04T11:55:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김성윤 ‘침착하게 번트’[포토]",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-04T12:47:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/311/0002076774"
+    },
+    {
+     "title": "[사진]볼 넷 골라내는 김성윤",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-04T11:56:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/109/0005634736"
+    },
+    {
+     "title": "볼넷 출루 김성윤 '가벼운 발걸음'[포토]",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-04T11:55:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/311/0002076713"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 737,
+  "flagged": 741,
   "matched": 311,
   "avgLeadMin": 278,
   "recent": [
