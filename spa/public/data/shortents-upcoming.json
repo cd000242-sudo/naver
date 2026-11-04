@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T15:49:51.031Z",
+ "builtAt": "2026-11-04T15:59:55.353Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,66 +11,34 @@
  "measured": 27,
  "candidates": [
   {
-   "keyword": "삼성 KT 제압",
+   "keyword": "삼성 연장 12회 승리",
    "sources": [
     "daum"
    ],
-   "articles90": 12,
-   "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-04T14:20:00.000Z",
+   "articles90": 45,
+   "recent20": 3,
+   "press": 29,
+   "firstArticleAt": "2026-11-04T14:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김현수에게 잔인했던 2차전…삼성, 연장 12회 혈투 끝에 KT에 3-2 신승 [K...",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-04T15:18:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611050002"
+     "title": "삼성, 연장 12회 혈투 끝 kt에 3-2 승리…한국시리즈 1승 1패 '원점'",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-04T15:54:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/324192/?sc=Naver"
     },
     {
-     "title": "삼성 '죽이고 살린' 디아즈, 박진만 감독은 위로보다 쓴소리!…\"기본기...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-04T15:05:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/311/0002076879"
+     "title": "연장 12회 혈투… 실책이 승부 갈랐다",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-04T15:41:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/023/0004007848"
     },
     {
-     "title": "‘연장 12회 혈투’ 삼성, KT 꺾고 KS 1승 1패 균형",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-04T15:03:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/056/0012287584"
-    }
-   ]
-  },
-  {
-   "keyword": "수사",
-   "sources": [
-    "google"
-   ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-04T14:22:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "강원경찰 과학수사의 날 맞아 유공자 포상⋯수사 역량 강화 다짐",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-04T15:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001228717?sid=102"
-    },
-    {
-     "title": "'한동훈 딸 의혹' 쥔 중수청, 1호 사건 부담에 이첩도 수사도 멈췄다",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-04T15:16:00.000Z",
-     "link": "https://www.insight.co.kr/news/580698"
-    },
-    {
-     "title": "보완수사 요구 50% 급증…강원경찰 수사 부담 현실화",
-     "press": "kado.net",
-     "publishedAt": "2026-11-04T15:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000209521?sid=102"
+     "title": "'낭만 투혼' 삼성 페덱, 놀란 라이언 소환한 까닭 [한국시리즈]",
+     "press": "newsq.co.kr",
+     "publishedAt": "2026-11-04T15:40:00.000Z",
+     "link": "https://www.newsq.co.kr/news/articleView.html?idxno=500743"
     }
    ]
   },
@@ -79,10 +47,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-04T14:25:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-04T14:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -103,6 +71,38 @@
      "press": "kmib.co.kr",
      "publishedAt": "2026-11-04T15:14:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/005/0001883097?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "수사",
+   "sources": [
+    "google"
+   ],
+   "articles90": 9,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-04T14:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "강원경찰 과학수사의 날 맞아 유공자 포상⋯수사 역량 강화 다짐",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-04T15:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001228717?sid=102"
+    },
+    {
+     "title": "'한동훈 딸 의혹' 쥔 중수청, 1호 사건 부담에 이첩도 수사도 멈췄다",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-04T15:16:00.000Z",
+     "link": "https://www.insight.co.kr/news/580698"
+    },
+    {
+     "title": "보완수사 요구 50% 급증…강원경찰 수사 부담 현실화",
+     "press": "kado.net",
+     "publishedAt": "2026-11-04T15:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000209521?sid=102"
     }
    ]
   },
@@ -145,7 +145,7 @@
     "nate"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 1,
    "press": 5,
    "firstArticleAt": "2026-11-04T14:40:00.000Z",
    "exclusive": false,
@@ -168,6 +168,38 @@
      "press": "ksilbo.co.kr",
      "publishedAt": "2026-11-04T15:04:00.000Z",
      "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1071597"
+    }
+   ]
+  },
+  {
+   "keyword": "kbo",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T14:51:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오피셜] \"KBO리그 선택지\"…최고 158km! 이정후 동료가 아시아행 결심!...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-04T15:56:00.000Z",
+     "link": "https://m.sports.naver.com/wbaseball/article/477/0000637297"
+    },
+    {
+     "title": "“김도영 타격 KBO 수준 넘어섰다, 더 무서운 건…” 김태균 韓 슈퍼스...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-04T15:53:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/117/0004122166"
+    },
+    {
+     "title": "\"이런 경기는 처음\" KBO 152승·KS MVP 레전드 사령탑도 혀 내두른 4시간...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-04T14:51:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/241/0003539253"
     }
    ]
   },
