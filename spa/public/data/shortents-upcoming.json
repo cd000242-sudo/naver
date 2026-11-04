@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T22:32:19.921Z",
+ "builtAt": "2026-11-04T22:42:23.589Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,102 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 25,
  "candidates": [
-  {
-   "keyword": "뉴욕증시 급등",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 61,
-   "recent20": 15,
-   "press": 53,
-   "firstArticleAt": "2026-11-04T21:03:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "뉴욕증시, 민주당 압승에 선거불확실성 해소에 급등세⋯애플 5%대, MS 6%...",
-     "press": "econonews.co.kr",
-     "publishedAt": "2026-11-04T22:30:00.000Z",
-     "link": "http://www.econonews.co.kr/news/articleView.html?idxno=446741"
-    },
-    {
-     "title": "[오늘의 이슈]민주당 미 의회 장악에 다우 3% 급등…반도체는 약세",
-     "press": "newskr.kr",
-     "publishedAt": "2026-11-04T22:30:00.000Z",
-     "link": "http://www.newskr.kr/news/articleView.html?idxno=107715"
-    },
-    {
-     "title": "美 중간선거 끝나자 뉴욕증시 급등…다우 3% 올라 5만3000선 회복",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-04T22:29:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000079762"
-    }
-   ]
-  },
   {
    "keyword": "민주당 압승에 급등!",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 37,
+   "articles90": 34,
    "recent20": 7,
    "press": 32,
-   "firstArticleAt": "2026-11-04T21:03:00.000Z",
+   "firstArticleAt": "2026-11-04T21:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "뉴욕증시, 민주당 압승에 선거불확실성 해소에 급등세⋯애플 5%대, MS 6%...",
-     "press": "econonews.co.kr",
-     "publishedAt": "2026-11-04T22:30:00.000Z",
-     "link": "http://www.econonews.co.kr/news/articleView.html?idxno=446741"
+     "title": "[美증시] 선거 불확실성 해소·유가 폭락에 3대 지수 급등…빅테크 주도",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-04T22:40:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1135284"
     },
     {
-     "title": "美민주당 압승에 국제유가 8%대 급락, 뉴욕증시 급등",
-     "press": "donga.com",
-     "publishedAt": "2026-11-04T22:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003760238?sid=104"
+     "title": "美 민주당 의회 장악에 뉴욕증시 일제히 급등...다우 3%↑",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-04T22:38:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=72601"
     },
     {
-     "title": "[채권/외환] 민주당 중간선거 압승에 국채 금리·달러 동반 하락",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-04T22:24:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261105000039"
-    }
-   ]
-  },
-  {
-   "keyword": "오늘날씨",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-04T21:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘 날씨] 전국 대부분 가을비-오후 들어 그쳐⋯내일 찬공기 유입 기...",
-     "press": "econonews.co.kr",
-     "publishedAt": "2026-11-04T22:20:00.000Z",
-     "link": "http://www.econonews.co.kr/news/articleView.html?idxno=446738"
-    },
-    {
-     "title": "[오늘날씨] 전국 비·남해안 최대 40㎜…돌풍·천둥번개, 내일부터 추위",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-04T21:58:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16268644"
-    },
-    {
-     "title": "[오늘 날씨] 대구·경북 흐리고 '가을비'...최대 20㎜",
-     "press": "kbsm.net",
-     "publishedAt": "2026-11-04T21:48:00.000Z",
-     "link": "https://www.kbsm.net/news/view.php?idx=540473"
+     "title": "[글로벌 마켓시황] 중간선거 민주당 압승…증시 '상승세'",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-04T22:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400768?sid=101"
     }
    ]
   },
@@ -113,12 +48,18 @@
     "nate"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-04T21:03:00.000Z",
+   "firstArticleAt": "2026-11-04T21:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[오늘의 운세] 2026년 11월 5일 띠별 운세",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-04T22:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003482336?sid=103"
+    },
     {
      "title": "[오늘의 운세] 5일 목요일 나의 운세는?",
      "press": "ggilbo.com",
@@ -130,12 +71,6 @@
      "press": "dailypop.kr",
      "publishedAt": "2026-11-04T21:36:00.000Z",
      "link": "http://www.dailypop.kr/news/articleView.html?idxno=103971"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 5일 별자리 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-04T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006403892?sid=103"
     }
    ]
   }
@@ -143,9 +78,51 @@
  "hitRate": {
   "days": 7,
   "flagged": 809,
-  "matched": 352,
-  "avgLeadMin": 314,
+  "matched": 359,
+  "avgLeadMin": 328,
   "recent": [
+   {
+    "keyword": "뉴욕증시 혼조 마감.",
+    "hitKeyword": "뉴욕증시 중간선거 급등",
+    "hitAt": "2026-11-05T07:30:00+09:00",
+    "leadMin": 2827
+   },
+   {
+    "keyword": "뉴욕증시 혼조 마감",
+    "hitKeyword": "뉴욕증시 중간선거 급등",
+    "hitAt": "2026-11-05T07:30:00+09:00",
+    "leadMin": 2787
+   },
+   {
+    "keyword": "뉴욕증시 혼조",
+    "hitKeyword": "뉴욕증시 중간선거 급등",
+    "hitAt": "2026-11-05T07:30:00+09:00",
+    "leadMin": 1429
+   },
+   {
+    "keyword": "미국 중간선거 영향",
+    "hitKeyword": "뉴욕증시 중간선거 급등",
+    "hitAt": "2026-11-05T07:30:00+09:00",
+    "leadMin": 48
+   },
+   {
+    "keyword": "삼성, 12회 연장 승리",
+    "hitKeyword": "삼성 한국시리즈 2차전 승리",
+    "hitAt": "2026-11-05T07:30:00+09:00",
+    "leadMin": 48
+   },
+   {
+    "keyword": "뉴욕증시 급등",
+    "hitKeyword": "뉴욕증시 중간선거 급등",
+    "hitAt": "2026-11-05T07:30:00+09:00",
+    "leadMin": 28
+   },
+   {
+    "keyword": "삼성, 연장 혈투 3-2 승리",
+    "hitKeyword": "삼성 한국시리즈 2차전 승리",
+    "hitAt": "2026-11-05T07:30:00+09:00",
+    "leadMin": 18
+   },
    {
     "keyword": "주가",
     "hitKeyword": "삼전닉스 주가 폭락",
@@ -163,48 +140,6 @@
     "hitKeyword": "호반그룹 한진칼 최대주주",
     "hitAt": "2026-11-05T06:30:00+09:00",
     "leadMin": 2767
-   },
-   {
-    "keyword": "자동차 산업",
-    "hitKeyword": "중국 자동차 저가 공세",
-    "hitAt": "2026-11-05T06:30:00+09:00",
-    "leadMin": 2162
-   },
-   {
-    "keyword": "김혜수 감사 인사",
-    "hitKeyword": "배우 김혜수 최불암 추모",
-    "hitAt": "2026-11-05T06:30:00+09:00",
-    "leadMin": 532
-   },
-   {
-    "keyword": "김혜수 추모해 주신",
-    "hitKeyword": "배우 김혜수 최불암 추모",
-    "hitAt": "2026-11-05T06:30:00+09:00",
-    "leadMin": 522
-   },
-   {
-    "keyword": "디아즈 1타점 3루타",
-    "hitKeyword": "디아즈 90도 사과",
-    "hitAt": "2026-11-05T06:30:00+09:00",
-    "leadMin": 482
-   },
-   {
-    "keyword": "강호동 구속영장 신청",
-    "hitKeyword": "강호동 농협중앙회장 구속",
-    "hitAt": "2026-11-05T06:30:00+09:00",
-    "leadMin": 471
-   },
-   {
-    "keyword": "경찰, 강호동 구속영장 신청",
-    "hitKeyword": "강호동 농협중앙회장 구속",
-    "hitAt": "2026-11-05T06:30:00+09:00",
-    "leadMin": 320
-   },
-   {
-    "keyword": "美 민주당 압승",
-    "hitKeyword": "민주당 상하원 압승",
-    "hitAt": "2026-11-05T06:30:00+09:00",
-    "leadMin": 209
    }
   ]
  }
