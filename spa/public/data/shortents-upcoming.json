@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T19:41:16.722Z",
+ "builtAt": "2026-11-04T19:51:20.285Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,11 +8,44 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
- "candidates": [],
+ "measured": 28,
+ "candidates": [
+  {
+   "keyword": "삼성, 연장 12회 혈투 승리",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T18:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "10일 동안 295개 던진 페덱…삼성의 가을야구에 파란 물들이다[김대호의...",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-04T19:45:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/629/0000548884"
+    },
+    {
+     "title": "4시간 21분 연장 혈투, 실책이 갈랐다",
+     "press": "donga.com",
+     "publishedAt": "2026-11-04T19:32:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/020/0003760161"
+    },
+    {
+     "title": "[야구] KT, 삼성에 2-3 아쉬운 역전패…'12회 뼈아픈 실책 하나' 시리즈...",
+     "press": "suwonilbo.kr",
+     "publishedAt": "2026-11-04T18:42:00.000Z",
+     "link": "https://www.suwonilbo.kr/view.html?id=L2611050327317bd7"
+    }
+   ]
+  }
+ ],
  "hitRate": {
   "days": 7,
-  "flagged": 787,
+  "flagged": 788,
   "matched": 329,
   "avgLeadMin": 288,
   "recent": [
