@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T01:42:36.214Z",
+ "builtAt": "2026-11-04T01:52:39.960Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 63,
-   "recent20": 15,
-   "press": 50,
+   "articles90": 77,
+   "recent20": 23,
+   "press": 58,
    "firstArticleAt": "2026-11-04T00:28:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "경북과 전남에 의대 들어선다…국립경국대, 국립순천대 의대 신설 확정",
-     "press": "news.lghellovision.net",
-     "publishedAt": "2026-11-04T01:40:00.000Z",
-     "link": "http://news.lghellovision.net/news/articleView.html?idxno=560982"
+     "title": "경국대 '의대 신설'에 경북 도청신도시에 '500병상' 대학병원 건립",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-04T01:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009269302?sid=102"
     },
     {
-     "title": "순천대에 국립의대 신설 확정…정원 60명 배정",
-     "press": "gjdream.com",
-     "publishedAt": "2026-11-04T01:38:00.000Z",
-     "link": "http://www.gjdream.com/news/articleView.html?idxno=674045"
+     "title": "2030년 개교 목표, 전남·경북에 새로운 의과대학 설립 확정",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-04T01:50:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=884049"
     },
     {
-     "title": "의대 신설 확정…국립순천대 60명· 국립경국대 40명 최종 선정",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-04T01:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005837856?sid=102"
+     "title": "경북 북부권에 40명 정원 국립의대 신설 확정…“환영”",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-04T01:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002830620?sid=102"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 45,
+   "articles90": 41,
    "recent20": 7,
-   "press": 45,
-   "firstArticleAt": "2026-11-04T00:14:00.000Z",
+   "press": 41,
+   "firstArticleAt": "2026-11-04T00:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성전자, 갤럭시 버즈 청력 검사·케어 기능 식약처 허가",
-     "press": "cnbizm.com",
-     "publishedAt": "2026-11-04T01:40:00.000Z",
-     "link": "https://www.cnbizm.com/news/articleView.html?idxno=320325"
+     "title": "삼성전자 갤럭시 버즈, 청력 검사·소리 증폭 기능 식약처 허가…내년 ...",
+     "press": "sateconomy.co.kr",
+     "publishedAt": "2026-11-04T01:46:00.000Z",
+     "link": "https://sateconomy.co.kr/news/view/1065575636005783"
     },
     {
-     "title": "삼성전자, 갤럭시 버즈 '청력 체크·케어' 기능 식약처 허가 획득",
-     "press": "srtimes.kr",
-     "publishedAt": "2026-11-04T01:38:00.000Z",
-     "link": "http://www.srtimes.kr/news/articleView.html?idxno=216693"
+     "title": "삼성 '갤럭시 버즈'로 귀 건강 살핀다…청력 진단·보정 기능 식약처 의...",
+     "press": "widedaily.com",
+     "publishedAt": "2026-11-04T01:44:00.000Z",
+     "link": "https://www.widedaily.com/news/articleView.html?idxno=302801"
     },
     {
-     "title": "삼성 갤럭시 버즈 '청력 케어' 의료기기 허가 \"무선 이어폰에 보청기 기...",
-     "press": "opinionnews.co.kr",
-     "publishedAt": "2026-11-04T01:34:00.000Z",
-     "link": "http://www.opinionnews.co.kr/news/articleView.html?idxno=146629"
+     "title": "갤럭시 버즈, 청력 검사·보완까지 해준다…내년 초부터 업데이트",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-04T01:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002830619?sid=105"
     }
    ]
   },
@@ -79,30 +79,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 38,
+   "articles90": 40,
    "recent20": 4,
-   "press": 32,
-   "firstArticleAt": "2026-11-04T00:20:00.000Z",
+   "press": 33,
+   "firstArticleAt": "2026-11-04T00:27:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "특검, 459억대 사전투표용지 발급기 입찰 특혜 포착",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-04T01:38:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1542623"
+     "title": "특검, 중앙선관위 압수수색…459억 사전투표지 발급기 사업 특혜 정황",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-04T01:50:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=901843"
     },
     {
-     "title": "특검, 중앙선관위 압수수색...459억 사전투표지 발급기 사업 특혜 의혹",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-04T01:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002428127?sid=102"
+     "title": "특검, 중앙선관위 압수수색…'459억대 사전투표지 발급기 사업' 특혜 정...",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-04T01:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002393297?sid=100"
     },
     {
-     "title": "[위클리오늘] 선관위 특검, 사전투표용지 발급기 특혜 의혹 압수수색",
-     "press": "weeklytoday.com",
-     "publishedAt": "2026-11-04T01:32:00.000Z",
-     "link": "http://www.weeklytoday.com/news/articleView.html?idxno=800915"
+     "title": "특검, 사전투표지 발급기 사업 특혜 의혹에 선관위 압수수색",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-04T01:44:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611040069"
     }
    ]
   },
@@ -111,30 +111,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 31,
-   "recent20": 14,
-   "press": 25,
+   "articles90": 37,
+   "recent20": 11,
+   "press": 31,
    "firstArticleAt": "2026-11-04T01:04:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "리더십 최대 위기 김민석, 정부에 ‘이것’ 공식 제안했다…급히 전해진...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-04T01:38:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1171687"
+     "title": "김민석 \"가상자산 과세 유예, 정부에 공식 제안\"",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-04T01:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001271596?sid=101"
     },
     {
-     "title": "김민석, 정부에 “가상자산 소득 과세 유예 공식 제안”",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-04T01:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004007699?sid=100"
+     "title": "김민석, 가상자산 과세 유예 제안 보도…기본법 먼저 마련 요구",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-04T01:50:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/432340"
     },
     {
-     "title": "김민석 '가상자산 과세 유예, 당 차원서 정부에 공식 제안'",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T01:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009269235?sid=100"
+     "title": "김민석, 정부에 '가상자산 과세 유예' 공식 제안...기간 제시 없어",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-04T01:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000120558?sid=100"
     }
    ]
   },
@@ -143,13 +143,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 0,
-   "press": 14,
-   "firstArticleAt": "2026-11-04T00:20:00.000Z",
+   "articles90": 12,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-04T00:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"SK하이닉스 中공장 증설 장비반입 요청에 美 허가 보류\"",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-04T01:44:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1421563"
+    },
     {
      "title": "美 상무부, SK하이닉스 中 다롄공장 장비 반입에 제동… 1천억 달러 규모...",
      "press": "fntoday.co.kr",
@@ -157,16 +163,10 @@
      "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=396967"
     },
     {
-     "title": "로이터 “美, SK하이닉스 中공장 장비반입 승인 보류…뉴욕 공장투자도...",
-     "press": "segyebiz.com",
+     "title": "SK하이닉스, 中 장비 승인 막혀 美 투자도 ‘비상’…450억달러 뉴욕 구...",
+     "press": "mydaily.co.kr",
      "publishedAt": "2026-11-04T00:56:00.000Z",
-     "link": "http://www.segyebiz.com/newsView/20261104505089?OutUrl=naver"
-    },
-    {
-     "title": "美, SK하이닉스 中 공장 증설 반입 막았다… 투자 계획 차질 생기나",
-     "press": "mediawatch.kr",
-     "publishedAt": "2026-11-04T00:56:00.000Z",
-     "link": "https://www.mediawatch.kr/news/article.html?no=261612"
+     "link": "https://n.news.naver.com/mnews/article/117/0004121776?sid=105"
     }
    ]
   },
@@ -203,12 +203,44 @@
    ]
   },
   {
+   "keyword": "여객기",
+   "sources": [
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-04T00:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "유럽, 하늘길ㆍ먹거리 '공포' 확산... 여객기 7대 폭파 위협 신고",
+     "press": "getnews.co.kr",
+     "publishedAt": "2026-11-04T01:48:00.000Z",
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=885918"
+    },
+    {
+     "title": "유럽, 냉장고 이어 하늘길도 소동…여객기 7대 폭탄 위협에 전투기 출격",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-04T01:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003562711?sid=104"
+    },
+    {
+     "title": "유럽 여객기 7대 폭파 위협 신고…전투기 출격하고 비상착륙 소동",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-04T01:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000366339?sid=104"
+    }
+   ]
+  },
+  {
    "keyword": "로봇 최강국 전북",
    "sources": [
     "signal.bz"
    ],
    "articles90": 9,
-   "recent20": 1,
+   "recent20": 0,
    "press": 7,
    "firstArticleAt": "2026-11-04T00:27:00.000Z",
    "exclusive": false,
@@ -235,45 +267,12 @@
    ]
   },
   {
-   "keyword": "골프존카운티",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-04T00:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[Invest]입장문 공방만 몇 번째…골프존카운티 매각에서도 잡음 빚는 MB...",
-     "press": "investchosun.com",
-     "publishedAt": "2026-11-04T01:34:00.000Z",
-     "link": "https://www.investchosun.com/site/data/html_dir/2026/11/04/2026110480064.html"
-    },
-    {
-     "title": "골프존홀딩스 \"MBK, 계약 하루 전 협상 중단\" 골프존카운티 매각 공방",
-     "press": "asiaa.co.kr",
-     "publishedAt": "2026-11-04T01:20:00.000Z",
-     "link": "https://www.asiaa.co.kr/news/articleView.html?idxno=269239"
-    },
-    {
-     "title": "\"MBK, 골프존카운티 계약 전날 협상 중단\"...법적대응 예고한 골프존홀...",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-04T01:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005436301?sid=101"
-    }
-   ]
-  },
-  {
    "keyword": "32기 영수 몰카 사과",
    "sources": [
     "nate"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-04T00:25:00.000Z",
    "exclusive": false,
@@ -300,12 +299,77 @@
    ]
   },
   {
+   "keyword": "골프존카운티",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-04T00:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "골프존홀딩스, MBK와 골프존카운티 매각 갈등 격화 … \"법적 대응 불사...",
+     "press": "worktoday.co.kr",
+     "publishedAt": "2026-11-04T01:42:00.000Z",
+     "link": "http://www.worktoday.co.kr/news/articleView.html?idxno=91446"
+    },
+    {
+     "title": "[Invest]입장문 공방만 몇 번째…골프존카운티 매각에서도 잡음 빚는 MB...",
+     "press": "investchosun.com",
+     "publishedAt": "2026-11-04T01:34:00.000Z",
+     "link": "https://www.investchosun.com/site/data/html_dir/2026/11/04/2026110480064.html"
+    },
+    {
+     "title": "골프존홀딩스 \"MBK, 계약 하루 전 협상 중단\" 골프존카운티 매각 공방",
+     "press": "asiaa.co.kr",
+     "publishedAt": "2026-11-04T01:20:00.000Z",
+     "link": "https://www.asiaa.co.kr/news/articleView.html?idxno=269239"
+    }
+   ]
+  },
+  {
+   "keyword": "서예지, 6년 만에 스크린 복귀",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-04T00:23:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서예지, '금월도'로 6년 만에 스크린 복귀…한국형 뱀파이어물 도전",
+     "press": "starnewsk.com",
+     "publishedAt": "2026-11-04T01:44:00.000Z",
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60657"
+    },
+    {
+     "title": "서예지, '금월도'로 스크린 컴백…한국형 오컬트 도전",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-04T01:09:00.000Z",
+     "link": "https://m.entertain.naver.com/article/629/0000548527"
+    },
+    {
+     "title": "사생활 논란 6년만…서예지, 뱀파이어물 ‘금월도’로 스크린 복귀 [공...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-04T00:31:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001277924"
+    }
+   ]
+  },
+  {
    "keyword": "코리안 더비 뮌헨 승리",
    "sources": [
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-04T00:32:00.000Z",
    "exclusive": false,
@@ -330,43 +394,11 @@
      "link": "http://www.stoo.com/article.php?aid=109718975984"
     }
    ]
-  },
-  {
-   "keyword": "서예지, 6년 만에 스크린 복귀",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T00:23:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "서예지, '금월도'로 스크린 컴백…한국형 오컬트 도전",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-04T01:09:00.000Z",
-     "link": "https://m.entertain.naver.com/article/629/0000548527"
-    },
-    {
-     "title": "사생활 논란 6년만…서예지, 뱀파이어물 ‘금월도’로 스크린 복귀 [공...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-04T00:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001277924"
-    },
-    {
-     "title": "서예지, 사생활 논란 딛고 6년 만에 스크린으로…뱀파이어 장르물로 복...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-04T00:23:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000486288"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 541,
+  "flagged": 542,
   "matched": 224,
   "avgLeadMin": 279,
   "recent": [
