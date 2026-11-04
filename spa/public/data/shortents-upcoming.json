@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T15:19:37.059Z",
+ "builtAt": "2026-11-04T15:29:41.325Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 70,
-   "recent20": 15,
+   "articles90": 71,
+   "recent20": 8,
    "press": 40,
    "firstArticleAt": "2026-11-04T14:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김현수에게 잔인했던 2차전…삼성, 연장 12회 혈투 끝에 KT에 3-2 신승 [K...",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-04T15:18:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611050002"
-    },
-    {
-     "title": "[한국시리즈] 연장 혈투 끝 kt 꺾은 삼성… 시리즈 균형 맞추고 대구로",
-     "press": "dkilbo.com",
-     "publishedAt": "2026-11-04T15:16:00.000Z",
-     "link": "https://www.dkilbo.com/news/articleView.html?idxno=559698"
-    },
-    {
-     "title": "4안타 치고도 감독에게 고개 숙인 삼성 디아즈 \"실책에 책임 느껴 사과...",
+     "title": "열흘간 3경기 선발…삼성 페덱 \"이렇게 던진 건 처음, 아드레날린 솟아...",
      "press": "newsis.com",
-     "publishedAt": "2026-11-04T15:16:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/003/0014302380"
+     "publishedAt": "2026-11-04T15:25:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/003/0014302382"
+    },
+    {
+     "title": "[파워인터뷰] 박진만 삼성 감독 \"디아즈 수비는 개선해야\"",
+     "press": "stnsports.co.kr",
+     "publishedAt": "2026-11-04T15:24:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/450/0000155304"
+    },
+    {
+     "title": "[KS] 삼성, 연장 12회 접전 끝 3-2 승리 '1승 1패' 원점…KT 통한의 실책...",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-04T15:20:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1135257"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 21,
-   "recent20": 3,
-   "press": 15,
-   "firstArticleAt": "2026-11-04T13:56:00.000Z",
+   "articles90": 19,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-04T14:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -79,13 +79,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 13,
-   "recent20": 6,
-   "press": 12,
-   "firstArticleAt": "2026-11-04T13:54:00.000Z",
+   "articles90": 12,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-04T14:13:00.000Z",
    "exclusive": true,
-   "capped": true,
+   "capped": false,
    "samples": [
+    {
+     "title": "강원경찰 과학수사의 날 맞아 유공자 포상⋯수사 역량 강화 다짐",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-04T15:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001228717?sid=102"
+    },
     {
      "title": "'한동훈 딸 의혹' 쥔 중수청, 1호 사건 부담에 이첩도 수사도 멈췄다",
      "press": "insight.co.kr",
@@ -97,76 +103,70 @@
      "press": "kado.net",
      "publishedAt": "2026-11-04T15:09:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/654/0000209521?sid=102"
-    },
-    {
-     "title": "강원경찰청 과학수사의 날 기념식 'BEST 과학수사팀' 포상",
-     "press": "kado.net",
-     "publishedAt": "2026-11-04T15:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000209511?sid=102"
     }
    ]
   },
   {
-   "keyword": "미국 중간선거와 이란 전쟁",
+   "keyword": "한진칼 최대주주 호반건설",
    "sources": [
     "nate"
    ],
-   "articles90": 11,
-   "recent20": 4,
-   "press": 10,
+   "articles90": 8,
+   "recent20": 3,
+   "press": 8,
+   "firstArticleAt": "2026-11-04T14:15:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한진칼 최대주주 호반건설로 변경… 조원태 회장 측, 지분 추가 매입 계...",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-04T15:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001883097?sid=101"
+    },
+    {
+     "title": "한진칼 최대주주, 조원태 측에서 호반건설로 변경…지분 20.69% 확보",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-04T15:12:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=623056"
+    },
+    {
+     "title": "아이엠스팩1호 회전율 1,376%…한진칼우도 220% 돌파",
+     "press": "kjdaily.com",
+     "publishedAt": "2026-11-04T15:10:00.000Z",
+     "link": "http://www.kjdaily.com/article.php?aid=1793804861691331276"
+    }
+   ]
+  },
+  {
+   "keyword": "공공재개발 이재명 대통령",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 3,
+   "press": 6,
    "firstArticleAt": "2026-11-04T14:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이란 “전쟁 반대하는 미국인의 뜻”…중국, 대만 정책 변수될까 촉각",
+     "title": "오세훈 \"이재명, 공공개발 맹신 중단해야\"…'서울 주택공급 90%는 민간 ...",
+     "press": "ppss.kr",
+     "publishedAt": "2026-11-04T15:24:00.000Z",
+     "link": "https://www.ppss.kr/news/articleView.html?idxno=319137"
+    },
+    {
+     "title": "이 대통령, X 이어 유튜브도 한다",
      "press": "joongang.co.kr",
+     "publishedAt": "2026-11-04T15:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003562948?sid=100"
+    },
+    {
+     "title": "힘 받는 공공재개발…대통령 \"인센티브로 사업 속도 대폭 제고\"",
+     "press": "dailysportshankook.co.kr",
      "publishedAt": "2026-11-04T15:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003562942?sid=104"
-    },
-    {
-     "title": "미국 민주당 의회권력 장악…한미 안보협의 새 변수 부상",
-     "press": "kado.net",
-     "publishedAt": "2026-11-04T15:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000209522?sid=100"
-    },
-    {
-     "title": "이란 최고지도자 \"미 선거로 변화 기대하면 크나큰 착각\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-04T15:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400726?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "신촌 세브란스병원",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-04T13:51:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "신촌세브란스병원 흉기 난동에 정신과 교수 부상...경찰, 살인미수 혐의...",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-04T15:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001976749?sid=102"
-    },
-    {
-     "title": "신촌 세브란스병원서 흉기난동, 정신의학과 교수 부상",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-04T15:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003562933?sid=102"
-    },
-    {
-     "title": "세브란스병원서 흉기 난동, 50대 女 검거⋯정신과 교수 피습",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-04T15:00:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2644277"
+     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435171"
     }
    ]
   },
@@ -175,10 +175,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-04T13:53:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-04T14:01:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -203,44 +203,12 @@
    ]
   },
   {
-   "keyword": "구자욱 안타 연속",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T13:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'구자욱·박승규 망연자실' 수비 요정들의 미친 호수비 나왔는데.. \"마지...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-04T15:14:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/241/0003539258"
-    },
-    {
-     "title": "박진만 감독 \"구자욱, 아픈 몸으로 뛰어줘 고맙다, 대구에선 디아즈·최...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-04T15:10:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/241/0003539257"
-    },
-    {
-     "title": "'4안타 맹타에도 90도 사과 인사?' 디아즈 탓에 한숨…박진만 감독 \"수비...",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-04T15:06:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/079/0004206622"
-    }
-   ]
-  },
-  {
    "keyword": "사기",
    "sources": [
     "google"
    ],
    "articles90": 4,
-   "recent20": 3,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-04T14:12:00.000Z",
    "exclusive": false,
@@ -267,15 +235,47 @@
    ]
   },
   {
+   "keyword": "서인영 재혼",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T14:36:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "가수 서인영, 12월 26일 재혼 발표…교회서 소규모 진행",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-04T15:26:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=623059"
+    },
+    {
+     "title": "[공식] 서인영, 12월 26일 최지훈 대표와 재혼 \"축가·꽃 장식 생략..사...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-04T15:06:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005634967"
+    },
+    {
+     "title": "서인영, 6세 연상 남편과 12월 26일 재혼…교회에서 스몰 웨딩",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-04T14:36:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009271133"
+    }
+   ]
+  },
+  {
    "keyword": "조작기소 특검법 법사위 통과",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T13:55:00.000Z",
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T14:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -298,44 +298,11 @@
      "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5079923"
     }
    ]
-  },
-  {
-   "keyword": "우규민",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T13:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "역투하는 우규민",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-04T14:07:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/001/0016422814"
-    },
-    {
-     "title": "[포토] '최고령 한국시리즈 등판 우규민' 속이 탄다",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-04T14:07:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/108/0003484763"
-    },
-    {
-     "title": "[포토S] 생각에 잠긴 우규민",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-04T13:52:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/477/0000637274"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 778,
+  "flagged": 779,
   "matched": 329,
   "avgLeadMin": 288,
   "recent": [
