@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T11:57:47.991Z",
+ "builtAt": "2026-11-04T12:07:53.696Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,118 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 22,
  "candidates": [
   {
-   "keyword": "강호동 구속영장 신청",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 16,
-   "recent20": 3,
-   "press": 16,
-   "firstArticleAt": "2026-11-04T10:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "경찰, 강호동 농협중앙회장 구속영장 신청…뇌물 등 혐의",
-     "press": "financialpost.co.kr",
-     "publishedAt": "2026-11-04T11:56:00.000Z",
-     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=284749"
-    },
-    {
-     "title": "경찰, ‘금품수수 혐의’ 강호동 농협중앙회장 구속영장 신청",
-     "press": "donga.com",
-     "publishedAt": "2026-11-04T11:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003760107?sid=101"
-    },
-    {
-     "title": "경찰, 강호동 농협중앙회장 구속영장 신청",
-     "press": "news.knn.co.kr",
-     "publishedAt": "2026-11-04T11:38:00.000Z",
-     "link": "https://news.knn.co.kr/news/article/194045"
-    }
-   ]
-  },
-  {
-   "keyword": "삼성바이오 2차 파업",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 14,
-   "recent20": 0,
-   "press": 14,
-   "firstArticleAt": "2026-11-04T10:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "삼성바이오 노사, 재교섭도 불발… 노조는 6일 부터 2차 파업 예고",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-04T11:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202649?sid=101"
-    },
-    {
-     "title": "삼성바이오 노조, 6일 2차 파업 예고…“회사가 교섭 불응”",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-04T11:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001883062?sid=101"
-    },
-    {
-     "title": "삼성바이오 노조, 6일 2차 파업…회사 \"환자 피해 방지에 최선\"",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-04T11:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005350436?sid=105"
-    }
-   ]
-  },
-  {
-   "keyword": "디아즈",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 48,
-   "recent20": 7,
-   "press": 11,
-   "firstArticleAt": "2026-11-04T10:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[ST포토] 페덱, 디아즈와 하이파이브",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-04T11:56:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109736195264"
-    },
-    {
-     "title": "[포토] 디아즈 ‘나는 거미손’",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-04T11:48:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278237"
-    },
-    {
-     "title": "디아즈와 하이파이브 나누는 페덱[포토]",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-04T11:46:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/311/0002076703"
-    }
-   ]
-  },
-  {
-   "keyword": "KT 고영표 역투",
+   "keyword": "고영표 선발 역투",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 9,
+   "articles90": 11,
+   "recent20": 5,
    "press": 9,
-   "firstArticleAt": "2026-11-04T10:31:00.000Z",
+   "firstArticleAt": "2026-11-04T10:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[KS2] KT 고영표 7이닝 1실점 역투...7피안타에도 위기 관리 능력 과시",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-04T12:03:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261104001379"
+    },
     {
      "title": "7이닝 1실점 호투 펼친 고영표",
      "press": "yna.co.kr",
@@ -131,44 +39,134 @@
      "press": "osen.co.kr",
      "publishedAt": "2026-11-04T11:56:00.000Z",
      "link": "https://m.sports.naver.com/kbaseball/article/109/0005634738"
-    },
-    {
-     "title": "1사 만루 병살타 미쳤다! 107억 수원의 심장 QS+ 역투, 삼성 7이닝 1실점...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-04T11:53:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/109/0005634727"
     }
    ]
   },
   {
-   "keyword": "투표록 위·변조 압수수색",
+   "keyword": "세브란스병원서 정신과교수에 체포",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-04T10:28:00.000Z",
+   "articles90": 9,
+   "recent20": 4,
+   "press": 9,
+   "firstArticleAt": "2026-11-04T11:03:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "신촌 세브란스병원서 정신과 교수 흉기 피습…50대 여성 체포",
+     "press": "medipana.com",
+     "publishedAt": "2026-11-04T12:04:00.000Z",
+     "link": "https://www.medipana.com/news/articleView.html?idxno=420970"
+    },
+    {
+     "title": "신촌 세브란스병원서 정신과 교수 흉기 피습…50대 여성 검거(종합2보)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-04T11:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014302136?sid=102"
+    },
+    {
+     "title": "[속보]신촌 세브란스병원서 정신과 의사 흉기로 찌른 50대 여성 체포",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-04T11:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000160445?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "선관위 특검 압수수색",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 3,
+   "press": 8,
+   "firstArticleAt": "2026-11-04T10:41:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "이태한 특검, 선관위 투표록 위·변조 의혹 압수수색",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-04T11:34:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1542692"
+     "title": "선관위 특검, 투표록 위·변조 정황 포착… 중앙선관위 사흘째 압수수색",
+     "press": "biztribune.co.kr",
+     "publishedAt": "2026-11-04T12:00:00.000Z",
+     "link": "http://www.biztribune.co.kr/news/articleView.html?idxno=361907"
     },
     {
-     "title": "특검 \"'투표록 사후 기재' 지시 정황 포착\"…선관위 압수수색, 10여명 입...",
+     "title": "중앙선관위, ‘용지 부족’ 투표소 40여곳 투표록 사후 위·변조 지시 정...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-04T11:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003480758?sid=102"
+    },
+    {
+     "title": "[자유통일당 대변인 논평] 선관위의 459억 원 특혜 의혹, 특검은 한 점 ...",
+     "press": "christiantoday.co.kr",
+     "publishedAt": "2026-11-04T11:50:00.000Z",
+     "link": "https://www.christiantoday.co.kr/news/378387"
+    }
+   ]
+  },
+  {
+   "keyword": "배성재 김다영 계류유산 고백",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-04T10:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'12월 출산' 김다영, 지난해 계류유산 고백 \"자책 말라는 말에 위로\"",
      "press": "newsis.com",
-     "publishedAt": "2026-11-04T11:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014302082?sid=102"
+     "publishedAt": "2026-11-04T11:59:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014302152"
     },
     {
-     "title": "[단독] 선거 4~5일 뒤 '투표록' 수정…중앙선관위 지시 정황 확인",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-04T11:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000519168?sid=102"
+     "title": "'배성재♥' 김다영, 계류유산 고백…\"남편 많이 속상했을 것\" [마데핫리...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-04T11:31:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004122085"
+    },
+    {
+     "title": "배성재·김다영 \"지난해 계류유산\"…7주차에 수술→아픔 뒤늦게 고백 [R...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-04T11:26:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001407158"
+    }
+   ]
+  },
+  {
+   "keyword": "1-1 동점타 허경민",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 21,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-04T10:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[포토] '4회말 동점타 터트린' 허경민",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-04T11:05:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/108/0003484657"
+    },
+    {
+     "title": "1-1 동점타 기뻐하는 KT 허경민",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-04T10:58:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/003/0014302044"
+    },
+    {
+     "title": "[포토]동점타 친 KT 허경민",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-04T10:58:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278197"
     }
    ]
   },
@@ -201,38 +199,6 @@
      "press": "insight.co.kr",
      "publishedAt": "2026-11-04T11:12:00.000Z",
      "link": "https://www.insight.co.kr/news/580644"
-    }
-   ]
-  },
-  {
-   "keyword": "댄서 바다 하울 결별",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T10:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘댄서 커플’ 바다·하울, 최근 결별…동료로 남기로",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-04T11:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005759158"
-    },
-    {
-     "title": "‘베베’ 바다X‘팀아임’ 하울, 연인 관계 마침표…“좋은 동료로”",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-04T10:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000760037"
-    },
-    {
-     "title": "'스우파2' 우승자 바다, 댄서 하울과 결별…4살 연상연하 커플 마침표",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-04T10:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005436743"
     }
    ]
   },
@@ -271,69 +237,69 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 726,
-  "matched": 300,
-  "avgLeadMin": 273,
+  "flagged": 730,
+  "matched": 309,
+  "avgLeadMin": 274,
   "recent": [
+   {
+    "keyword": "농협",
+    "hitKeyword": "강호동 농협회장 구속영장",
+    "hitAt": "2026-11-04T21:00:00+09:00",
+    "leadMin": 2277
+   },
+   {
+    "keyword": "코스피 하락 전환",
+    "hitKeyword": "코스피 롤러코스터",
+    "hitAt": "2026-11-04T21:00:00+09:00",
+    "leadMin": 113
+   },
+   {
+    "keyword": "강호동 구속영장 신청",
+    "hitKeyword": "강호동 농협회장 구속영장",
+    "hitAt": "2026-11-04T21:00:00+09:00",
+    "leadMin": 93
+   },
+   {
+    "keyword": "강호동 구속영장",
+    "hitKeyword": "강호동 농협회장 구속영장",
+    "hitAt": "2026-11-04T21:00:00+09:00",
+    "leadMin": 83
+   },
+   {
+    "keyword": "디아즈 1타점 3루타",
+    "hitKeyword": "디아즈 3루타",
+    "hitAt": "2026-11-04T21:00:00+09:00",
+    "leadMin": 73
+   },
+   {
+    "keyword": "CJ컨소시엄 중앙일보 인수",
+    "hitKeyword": "중앙일보 인수",
+    "hitAt": "2026-11-04T21:00:00+09:00",
+    "leadMin": 53
+   },
+   {
+    "keyword": "CJ컨소시엄, 중앙일보 인수계약",
+    "hitKeyword": "중앙일보 인수",
+    "hitAt": "2026-11-04T21:00:00+09:00",
+    "leadMin": 33
+   },
+   {
+    "keyword": "디아즈",
+    "hitKeyword": "디아즈 3루타",
+    "hitAt": "2026-11-04T21:00:00+09:00",
+    "leadMin": 33
+   },
+   {
+    "keyword": "세브란스 병원",
+    "hitKeyword": "세브란스병원 흉기 사건",
+    "hitAt": "2026-11-04T21:00:00+09:00",
+    "leadMin": 22
+   },
    {
     "keyword": "한국시리즈 2차전 시구",
     "hitKeyword": "한국시리즈 삼성 KT 2차전",
     "hitAt": "2026-11-04T20:30:00+09:00",
     "leadMin": 53
-   },
-   {
-    "keyword": "조범현 한국시리즈 시구",
-    "hitKeyword": "조범현 이만수 시구시포",
-    "hitAt": "2026-11-04T20:30:00+09:00",
-    "leadMin": 43
-   },
-   {
-    "keyword": "호반 한진칼 최대주주",
-    "hitKeyword": "호반 한진칼",
-    "hitAt": "2026-11-04T20:30:00+09:00",
-    "leadMin": 23
-   },
-   {
-    "keyword": "미국 중간선거",
-    "hitKeyword": "중간선거 반도체 영향",
-    "hitAt": "2026-11-04T20:30:00+09:00",
-    "leadMin": 23
-   },
-   {
-    "keyword": "호반그룹 한진칼 최대주주",
-    "hitKeyword": "호반 한진칼",
-    "hitAt": "2026-11-04T20:30:00+09:00",
-    "leadMin": 13
-   },
-   {
-    "keyword": "고영표, 한국시리즈 2차전 선발",
-    "hitKeyword": "한국시리즈 삼성 KT 2차전",
-    "hitAt": "2026-11-04T20:30:00+09:00",
-    "leadMin": 13
-   },
-   {
-    "keyword": "배성재 김다영 계류유산 극복",
-    "hitKeyword": "배성재 계류유산",
-    "hitAt": "2026-11-04T20:30:00+09:00",
-    "leadMin": 3
-   },
-   {
-    "keyword": "신촌 세브란스 흉기 난동",
-    "hitKeyword": "세브란스병원 흉기 난동 사건",
-    "hitAt": "2026-11-04T20:00:00+09:00",
-    "leadMin": 84
-   },
-   {
-    "keyword": "신촌 병원 흉기 난동",
-    "hitKeyword": "세브란스병원 흉기 난동 사건",
-    "hitAt": "2026-11-04T20:00:00+09:00",
-    "leadMin": 33
-   },
-   {
-    "keyword": "신촌 병원 흉기 난동 1명 부상",
-    "hitKeyword": "세브란스병원 흉기 난동 사건",
-    "hitAt": "2026-11-04T20:00:00+09:00",
-    "leadMin": 13
    }
   ]
  }
