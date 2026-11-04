@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-04T20:42:35.081Z",
+  "generatedAt": "2026-11-04T20:55:53.927Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -16199,68 +16199,6 @@
       ]
     },
     {
-      "id": "2bd9b21ee7125f9c",
-      "urls": [
-        "https://flameleaf.tistory.com/entry/%ED%8F%AC%EC%9E%A5%EC%9D%B4%EC%82%AC-%EB%B9%84%EC%9A%A9-%ED%8F%89%EC%88%98%EB%B3%84-%EC%8B%9C%EC%84%B8-%EC%A0%88%EC%95%BD-%EB%B0%A9%EB%B2%95-%EC%97%85%EC%B2%B4-%EC%84%A0%ED%83%9D-%EA%B0%80%EC%9D%B4%EB%93%9C"
-      ],
-      "guide": {
-        "direction": "검색자는 평수별 견적이 바가지인지 알 수 없어 '비교받는곳'을 찾는다. 고수 글 제목은 '시세·절약·업체선택'을 다 담겠다 하면서도 지역별 실제 가격대 차이는 비워둔다. 평수별 최저-평균-최고가 표와 견적 3곳 이상 비교 체크리스트로 바가지 여부를 바로 판단하게 한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "평수별(원룸·투룸·쓰리룸) 최저가-평균가-최고가 표",
-          "지역별 가격대 사례(수지구 50~130만원 등, 확인 필요: 원출처)",
-          "반포장이사 vs 포장이사 비교(본인 포장 시 절약 가능 범위)",
-          "이사 성수기(10~11월) 가격 영향 여부(확인 필요: 업계 공지)",
-          "견적 3곳 이상 비교 체크리스트"
-        ],
-        "mustAvoid": [
-          "특정 업체 실명을 추천하는 광고성 문구",
-          "지역별 사례 가격을 전국 평균처럼 일반화",
-          "포장이사·반포장이사·일반이사를 구분 없이 혼용"
-        ],
-        "checkBefore": [
-          "평수별 최저·평균·최고가 수치는 실제 이사 견적 플랫폼 공식 데이터 확인",
-          "성수기(10~11월) 가격 상승 여부는 업계 발표 자료 확인"
-        ],
-        "solves": [
-          "평수별 견적이 적정가인지 몰라 바가지 걱정 → 최저-평균-최고가 표로 기준 제공",
-          "어떤 업체가 저렴한지 비교 못함 → 견적 3곳 이상 받는 체크리스트 제공",
-          "포장이사와 반포장이사 차이를 몰라 선택 못함 → 비교표로 선택 기준 제공"
-        ],
-        "actionTitles": [
-          "포장이사 비용 평수별 시세 확인, 견적 비교하는 법",
-          "포장이사 견적비교 받는 법, 평수별 가격표로 절약",
-          "포장이사 업체 선택 전, 평수별 적정가 체크하기"
-        ]
-      },
-      "at": "2026-11-02T21:04:13.010Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "포장이사견적비교 받는곳",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=81002&docId=413616877&answerNo=48&qb=7Y+s7J6l7J207IKsIO2PieyImOuzhCDsoIjslb0g7JeF7LK0IOyEoO2DnQ==",
-          "views": 39757,
-          "answers": 55,
-          "askedAt": "2026.03.20"
-        },
-        {
-          "title": "안동 포장이사 비용",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=81002&docId=358852530&answerNo=17&qb=7Y+s7J6l7J207IKsIO2PieyImOuzhCDsoIjslb0g7JeF7LK0IOyEoO2DnQ==",
-          "views": 9681,
-          "answers": 18,
-          "askedAt": "2024.07.30"
-        },
-        {
-          "title": "수지구 포장이사 가격",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=120923&docId=413026786&answerNo=19&qb=7Y+s7J6l7J207IKsIO2PieyImOuzhCDsoIjslb0g7JeF7LK0IOyEoO2DnQ==",
-          "views": 1373,
-          "answers": 22,
-          "askedAt": "2026.03.08"
-        }
-      ]
-    },
-    {
       "id": "ab1da1aafd19ec67",
       "urls": [
         "https://sooahealth.com/entry/%EB%AF%B8%EA%B5%AD%EC%A3%BC%EC%8B%9D-%EA%B1%B0%EB%9E%98%EC%8B%9C%EA%B0%84-%ED%95%9C%EA%B5%AD-%EC%8B%9C%EA%B0%84%EA%B3%BC-%EC%84%9C%EB%A8%B8%ED%83%80%EC%9E%84-%EC%A0%95%EB%A6%AC"
@@ -24981,336 +24919,6 @@
           "askedAt": "2026.10.29"
         }
       ]
-    },
-    {
-      "id": "1e77d7498f830bdf",
-      "urls": [
-        "https://on.sano.co.kr/%ec%9a%b0%eb%a6%ac%eb%82%98%eb%9d%bc-%ec%a0%84%ed%86%b5-%ec%9d%8c%ec%8b%9d-%ea%b9%80%ec%b9%98-%ec%98%a4%eb%9e%9c-%ec%97%ad%ec%82%ac%ec%99%80-%ea%b1%b4%ea%b0%95%ed%95%9c-%ed%9a%a8%eb%8a%a5%ec%9d%84/",
-        "https://theseusm.tistory.com/entry/%EB%A9%B8%EC%B9%98-%ED%9A%A8%EB%8A%A5-%EB%B6%80%EC%9E%91%EC%9A%A9"
-      ],
-      "guide": {
-        "direction": "검색자는 '우리나라 전통음식'을 과제·리포트용으로 찾으며 김치뿐 아니라 비빔밥·떡볶이·팥죽 같은 대표음식과 '특징'을 함께 궁금해한다. 고수 글은 김치·멸치에만 집중돼 전통음식 전체 목록과 공통 특징은 못 다룬다. 이 글은 김치의 역사·효능에 비빔밥·떡볶이·팥죽 등 대표음식과 전통음식 공통 특징을 표로 정리해 과제·검색을 한 번에 끝내준다.",
-        "searchTargets": [
-          "우리나라 전통음식 떡볶이",
-          "우리나라 전통음식 비빔밥",
-          "우리나라 전통음식 팥죽",
-          "우리나라 전통 음식 특징"
-        ],
-        "mustInclude": [
-          "김치의 발효·숙성 과정과 유산균 등 효능 수치 (확인 필요: 식품영양 공식자료)",
-          "비빔밥·떡볶이·팥죽 등 대표 전통음식 목록과 유래 정리표",
-          "전통음식 특징(발효음식 비중, 절기음식-정월대보름 오곡밥·단오 수리떡)",
-          "마늘·고추장 등 공통 재료가 들어가는 이유"
-        ],
-        "mustAvoid": [
-          "김치 기원을 다른 나라 음식과 비교하며 논쟁적으로 주장하기",
-          "지역별 김치(전라도 등) 간 우열을 비교해 갈등 유발",
-          "효능을 치료 효과처럼 의학적으로 과장"
-        ],
-        "checkBefore": [
-          "김치 유산균 함량·효능 수치 - 식품의약품안전처/농식품 공식자료 확인",
-          "단오 수리떡, 정월대보름 오곡밥 등 절기음식 유래 - 문화재청/민속자료 확인"
-        ],
-        "solves": [
-          "우리나라 전통음식이 뭐가 있는지 모르겠다 → 김치 외 비빔밥·떡볶이·팥죽까지 정리표로 제공",
-          "전통음식 특징이 뭔지 모르겠다 → 발효·절기·공통재료 기준으로 특징 정리",
-          "김치가 왜 건강에 좋은지 모르겠다 → 발효 효능을 항목별로 정리"
-        ],
-        "actionTitles": [
-          "우리나라 전통음식 특징 총정리｜김치·비빔밥·떡볶이 비교",
-          "우리나라 전통음식 비빔밥·팥죽까지 한눈에 정리하는 법",
-          "김치 효능과 전통음식 특징 한 번에 확인하는 방법"
-        ]
-      },
-      "at": "2026-11-03T20:35:13.868Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "우리나라 전통음식에대해서...",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6130105&docId=136308454&answerNo=3&qb=7Jqw66as64KY65287KCE7Ya17J2M7Iud",
-          "views": 42251,
-          "answers": 3,
-          "askedAt": "2025.11.09"
-        },
-        {
-          "title": "우리나라 전통 음식",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=130504&docId=107598695&answerNo=1&qb=7Jqw66as64KY65287KCE7Ya17J2M7Iud",
-          "views": 14939,
-          "answers": 2,
-          "askedAt": "2010.04.04"
-        },
-        {
-          "title": "우리나라 전통음식의 특징",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020103&docId=284443938&answerNo=2&qb=7Jqw66as64KY65287KCE7Ya17J2M7Iud",
-          "views": 7277,
-          "answers": 1,
-          "askedAt": "2017.09.12"
-        }
-      ]
-    },
-    {
-      "id": "45d959cdcc17ca8c",
-      "urls": [
-        "https://nav0120.tistory.com/entry/%ED%9D%B0%EB%B1%80%EC%9D%84-%EC%B0%BE%EC%95%84%EC%84%9C-%EB%82%A8%EC%83%81%EC%88%9C-%EC%82%B0%EC%B4%8C-%EC%86%8C%EB%85%80%EC%9D%98-%EB%88%88%EC%97%90-%EB%B9%84%EC%B9%9C-%EC%96%B4%EB%A5%B8%EB%93%A4%EC%9D%98-%EC%84%B8%EA%B3%84%EC%99%80-%EC%84%B1%EC%9E%A5%ED%86%B5"
-      ],
-      "guide": {
-        "direction": "검색자는 책 제목만 입력해 줄거리·결말·등장인물을 독서감상문이나 과제용으로 찾고 있을 가능성이 크다. 고수 블로그도 같은 제목만 써서 구체적 사건 요약이나 '흰뱀'이 상징하는 의미는 아직 안 풀렸다. 이 글은 산촌 소녀가 겪는 핵심 사건과 성장통의 의미를 순서대로 정리해 줄거리 검색과 감상문 쓰기를 한 번에 끝내준다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "작가 남상순의 다른 대표작 소개 (확인 필요: 출판사·작가 소개)",
-          "주인공 소녀와 산촌 배경의 구체적 설정 (확인 필요: 책 본문/출판사 소개)",
-          "'흰뱀'이 상징하는 의미 (확인 필요: 서평·출판사 자료)"
-        ],
-        "mustAvoid": [],
-        "checkBefore": [
-          "작가 남상순 및 출판사 공식 책 소개 - 출판사 홈페이지/도서 소개 페이지 확인"
-        ],
-        "solves": [
-          "독서감상문 쓰기가 막막하다 → 성장통 주제를 포인트별로 정리해 제공"
-        ],
-        "actionTitles": [
-          "흰뱀을 찾아서 독서감상문 포인트 바로 정리하는 법",
-          "흰뱀을 찾아서 결말과 성장통 의미 확인하는 법"
-        ]
-      },
-      "at": "2026-11-03T20:35:13.868Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
-    },
-    {
-      "id": "c45d43c905e873e7",
-      "urls": [
-        "https://k-girlband.tistory.com/entry/DDR4%C2%B7DDR5-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EC%B0%A8%EC%9D%B4%EC%99%80-%EA%B5%AC%EB%A7%A4-%EB%B0%A9%EB%B2%95%EF%BD%9C%EC%86%8D%EB%8F%84%C2%B7%ED%98%B8%ED%99%98%EC%84%B1%C2%B7%EA%B0%80%EA%B2%A9%C2%B7RAM-%EC%97%85%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%9C-%EA%B8%B0%EC%A4%80"
-      ],
-      "guide": {
-        "direction": "검색자는 본인 PC의 메인보드·CPU가 DDR4인지 DDR5인지 모르는 상태에서 메모리를 추가구매하거나 업그레이드하려다 막힌다. 고수 글은 '차이·구매방법'을 포괄적으로만 다뤄 '내 컴퓨터가 뭘 쓰는지 확인하는 법'과 '같이 꽂아도 되는지'는 짧게 넘어간다. 이 글은 CPU 세대·메인보드 모델명으로 DDR4/DDR5를 구분하는 법과 혼용 불가 이유를 표로 정리해 구매 전 확인을 한 번에 끝내준다.",
-        "searchTargets": [
-          "ddr4 ddr5 확인 방법",
-          "ddr4 ddr5 같이",
-          "ddr4 ddr5 메인보드",
-          "ddr4 ddr5 구분방법"
-        ],
-        "mustInclude": [
-          "CPU 세대(인텔 기준)로 DDR4/DDR5 판별 기준표 (확인 필요: 인텔/AMD 공식 사양)",
-          "메인보드 모델명으로 확인하는 법(예: P8H61-MX는 DDR5 불가 등 사례)",
-          "DDR4와 DDR5 혼용(같이 사용) 불가 이유 - 슬롯 모양·전압 차이",
-          "기존 램(예: DDR4-3200 8GB)에 추가구매 시 규격 맞추는 법",
-          "DDR4/DDR5 가격 비교 (확인 필요: 다나와 등 쇼핑몰 시세)"
-        ],
-        "mustAvoid": [
-          "특정 쇼핑몰 링크를 붙여 단일 제품만 단정적으로 추천하기",
-          "2~3세대 구형 CPU(i5-3470 등)에 DDR5가 호환된다고 혼동 유발",
-          "DDR3를 DDR4/DDR5와 섞어 설명해 세대 혼동 야기"
-        ],
-        "checkBefore": [
-          "CPU/메인보드 모델별 DDR4·DDR5 지원 여부 - 인텔/AMD, 메인보드 제조사 공식 사양 확인",
-          "DDR4/DDR5 실시간 가격 - 다나와 등 쇼핑몰 가격 확인"
-        ],
-        "solves": [
-          "내 컴퓨터가 DDR4인지 DDR5인지 모르겠다 → CPU·메인보드 모델로 확인하는 방법 정리",
-          "DDR4랑 DDR5 같이 꽂아도 되는지 모르겠다 → 슬롯·전압 차이로 혼용 불가 이유 설명",
-          "메모리 추가구매 시 뭘 사야할지 모르겠다 → 기존 램과 규격 맞추는 기준 정리"
-        ],
-        "actionTitles": [
-          "ddr4 ddr5 확인 방법｜내 메인보드 타입 구분하는 법",
-          "ddr4 ddr5 같이 써도 될까｜혼용 가능 여부 비교정리",
-          "ddr4 ddr5 메인보드 구분방법과 구매 전 체크리스트"
-        ]
-      },
-      "at": "2026-11-03T20:35:13.868Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "CPU를 교체하려고하는데..컴퓨터를 잘 몰라서 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1010302&docId=493051661&answerNo=7&qb=ZGRyNCBkZHI1IOuplOuqqOumrCDqtazrp6Qg67Cp67KV7IaN",
-          "views": 494,
-          "answers": 7,
-          "askedAt": "2026.04.21"
-        },
-        {
-          "title": "이 컴퓨터로 발로란트 하려면 뭘 사야하나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10101&docId=493586810&answerNo=6&qb=ZGRyNCBkZHI1IOuplOuqqOumrCDqtazrp6Qg67Cp67KV7IaN",
-          "views": 143,
-          "answers": 9,
-          "askedAt": "2026.05.28"
-        },
-        {
-          "title": "컴퓨터 메모리 고르는법",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=5020303&docId=492878916&answerNo=3&qb=ZGRyNCBkZHI1IOuplOuqqOumrCDqtazrp6Qg67Cp67KV7IaN",
-          "views": 83,
-          "answers": 3,
-          "askedAt": "2026.04.09"
-        }
-      ]
-    },
-    {
-      "id": "1f534968b8805f49",
-      "urls": [
-        "https://hotkim.tistory.com/entry/%EB%87%8C%EC%A1%B8%EC%A4%91-%EC%A0%84%EC%A1%B0-%EC%A6%9D%EC%83%81-%ED%99%95%EC%9D%B8%EB%B2%95%EF%BD%9C%EC%96%BC%EA%B5%B4-%EB%A7%88%EB%B9%84%C2%B7%ED%8C%94-%ED%9E%98-%EB%B9%A0%EC%A7%90%C2%B7%EC%96%B8%EC%96%B4-%EC%9E%A5%EC%95%A0%EC%99%80-%EC%9D%91%EA%B8%89-%EB%8C%80%EC%B2%98"
-      ],
-      "guide": {
-        "direction": "검색자는 한쪽 마비·힘빠짐이 생겼을 때 이게 뇌졸중인지, 단순 피로로 인한 하품·손떨림·두통·구토인지 구분이 안 돼 지식인에 묻는다. '얼굴마비·팔힘빠짐·언어장애'만 다룬 고수 글은 이런 비전형 신호와 핵심 신호를 가르는 기준을 못 짚었다. 이 글은 FAST 핵심신호와 하품·손떨림·두통 등 비전형 신호를 분리한 체크리스트, 골든타임 수치를 표로 묶어 바로 응급실행 여부를 판단하게 한다.",
-        "searchTargets": [
-          "뇌졸중 전조증상",
-          "뇌졸중 전조증상 하품",
-          "뇌졸중 전조증상 손떨림",
-          "뇌졸중 전조증상 시간"
-        ],
-        "mustInclude": [
-          "FAST 체크리스트(Face·Arm·Speech·Time) 각 항목 판별 기준",
-          "골든타임 수치(확인 필요: 질병관리청·대한뇌졸중학회)",
-          "하품·손떨림·두통·구토가 전조증상인 경우와 아닌 경우 비교표",
-          "119 신고 시 전달해야 할 증상 발생 시각·부위",
-          "단순 근육통·관절 문제와 뇌졸중 동반증상 감별 포인트"
-        ],
-        "mustAvoid": [
-          "비전형 증상(하품, 손떨림)만으로 뇌졸중을 확정 진단하는 서술",
-          "이명·메니에르·편두통 등 유사 질환과 혼동해 안심시키는 설명",
-          "특정 연령(중학생 등)은 안전하다는 식의 단정"
-        ],
-        "checkBefore": [
-          "FAST 수칙 정확한 문구와 골든타임 수치는 질병관리청·대한뇌졸중학회 공식자료에서 확인"
-        ],
-        "solves": [
-          "하품·손떨림·두통도 전조증상일 수 있나? → 비전형 신호와 FAST 핵심신호를 나눈 체크리스트 제공",
-          "오른쪽만 마비되면 뇌졸중인가, 단순 근육통인가? → 동반증상 감별표로 구분",
-          "증상 발견 후 얼마나 빨리 가야 하나? → 골든타임과 즉시 행동 순서 정리"
-        ],
-        "actionTitles": [
-          "뇌졸중 전조증상 자가진단｜FAST 체크리스트로 확인하는 법",
-          "뇌졸중 전조증상 하품·손떨림 구분하는 법"
-        ]
-      },
-      "at": "2026-11-03T20:35:13.868Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "뇌졸중 자가진단법에는 어떤 것이 있나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70108&docId=493664162&answerNo=4&qb=64eM7KG47KSRIOyghOyhsCDtmZXsnbjrspXslrzqtbQg66eI67mEIOu5oOynkA==",
-          "views": 481,
-          "answers": 4,
-          "askedAt": "2026.07.28"
-        },
-        {
-          "title": "중학생 뇌졸중",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70119&docId=495644769&answerNo=1&qb=64eM7KG47KSRIOyghOyhsCDtmZXsnbjrspXslrzqtbQg66eI67mEIOu5oOynkA==",
-          "views": 82,
-          "answers": 2,
-          "askedAt": "2026.10.21"
-        },
-        {
-          "title": "갑자기 한쪽 얼굴이 둔해지는데 뇌경색 오기 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70108&docId=495406693&answerNo=2&qb=64eM7KG47KSRIOyghOyhsCDtmZXsnbjrspXslrzqtbQg66eI67mEIOu5oOynkA==",
-          "views": 394,
-          "answers": 2,
-          "askedAt": "2026.10.04"
-        }
-      ]
-    },
-    {
-      "id": "0ac7285550d920a8",
-      "urls": [
-        "https://semo-gif.tistory.com/entry/%ED%8E%B8%EB%8F%84%EA%B2%B0%EC%84%9D%EA%B3%BC-%ED%8E%B8%EB%8F%84%EC%97%BC-%EC%B0%A8%EC%9D%B4%EF%BD%9C%EC%9E%85-%EB%83%84%EC%83%88%C2%B7%EB%AA%A9-%EC%9D%B4%EB%AC%BC%EA%B0%90-%EC%9B%90%EC%9D%B8-%EC%A0%9C%EA%B1%B0-%EB%B0%A9%EB%B2%95%EA%B3%BC-%EC%B9%98%EB%A3%8C-%EA%B8%B0%EC%A4%80"
-      ],
-      "guide": {
-        "direction": "검색자는 목 이물감·구취가 있을 때 거울로 안 보여도 편도결석인지, 편도염인지, 후비루·잇몸질환 때문인지 구분이 안 돼 지식인에 묻는다. '차이'만 제목에 건 고수 글은 보이지 않는 결석의 존재와 비슷한 원인들과의 감별을 못 다룰 가능성이 크다. 이 글은 증상·발열·고름 여부를 비교표로 정리하고 집에서 제거 가능한 경우와 병원 치료 기준을 나눠 바로 다음 행동을 고르게 한다.",
-        "searchTargets": [
-          "편도결석 편도염",
-          "편도결석 편도염 차이"
-        ],
-        "mustInclude": [
-          "편도결석 vs 편도염 증상 비교표(이물감·통증·발열·고름 여부)",
-          "거울로 안 보여도 편도 깊은 홈에 숨은 결석 가능성",
-          "이물감·구취의 다른 원인(후비루, 잇몸질환, 구강건조)과 감별 포인트",
-          "편도염에 약물치료가 잘 안 되는 이유",
-          "병원 치료(레이저 제거·편도절제) 고려 기준"
-        ],
-        "mustAvoid": [
-          "손가락·면봉으로 직접 짜내는 제거법을 권장하는 서술(출혈·감염 위험)",
-          "편도결석을 암 전조 등으로 과장해 불필요한 공포 조성",
-          "편도염을 단순 감기로 치부해 치료 지연을 유도하는 서술"
-        ],
-        "checkBefore": [
-          "레이저 제거·편도절제 등 치료 적응증은 이비인후과 전문의 자료나 공식 의학정보에서 확인"
-        ],
-        "solves": [
-          "편도결석인지 편도염인지 증상만으론 구분이 안 된다 → 이물감·통증·발열·고름 비교표로 구분",
-          "거울로 안 보이는데 목 이물감과 냄새가 난다 → 숨은 결석 가능성과 후비루 등 다른 원인 감별",
-          "편도염은 왜 약물치료가 잘 안 될까 → 치료 접근 차이와 병원 가야 하는 기준 정리"
-        ],
-        "actionTitles": [
-          "편도결석 편도염 차이 구분하는 법｜증상 비교표",
-          "편도결석 안 보이는데 목 이물감 날 때 확인할 것"
-        ]
-      },
-      "at": "2026-11-03T20:35:13.868Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "이물감이 심하고 냄새가 올라와서 편도결석 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70102&docId=268154989&answerNo=1&qb=7Y6464+E6rKw7ISdIO2OuOuPhOyXvCDssKjsnbTsnoUg64OE7IOIIOydtOusvOqwkA==",
-          "views": 187,
-          "answers": 1,
-          "askedAt": "2017.01.13"
-        },
-        {
-          "title": "편도결석이 눈에 안 보여도 냄새와 이물감이 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70102&docId=494923019&answerNo=2&qb=7Y6464+E6rKw7ISdIO2OuOuPhOyXvCDssKjsnbTsnoUg64OE7IOIIOydtOusvOqwkA==",
-          "views": 77,
-          "answers": 2,
-          "askedAt": "2026.08.31"
-        },
-        {
-          "title": "목에 이물감과 구취가 심한데 숨어있는 편도....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70102&docId=494955448&answerNo=3&qb=7Y6464+E6rKw7ISdIO2OuOuPhOyXvCDssKjsnbTsnoUg64OE7IOIIOydtOusvOqwkA==",
-          "views": 999,
-          "answers": 6,
-          "askedAt": "2026.08.31"
-        }
-      ]
-    },
-    {
-      "id": "7e436750ffba5c01",
-      "urls": [
-        "https://life.sano.co.kr/%eb%82%b4%ec%85%94%eb%84%90-%ec%a7%80%ec%98%a4%ea%b7%b8%eb%9e%98%ed%94%bd-%ea%b2%bd%eb%9f%89%ed%8c%a8%eb%94%a9-%ed%95%9c-%eb%b2%8c%eb%a1%9c-%ea%b0%84%ec%a0%88%ea%b8%b0%eb%b6%80%ed%84%b0-%ea%b2%a8/"
-      ],
-      "guide": {
-        "direction": "검색자는 여성·남성·키즈 라인별 핏과 사이즈가 달라 온라인 구매 시 어떤 걸 골라야 할지 헷갈리고, 패딩과 조끼 중 활용도를 비교하기 어렵다. '한 벌로 간절기~겨울'이라는 고수 글은 활용성만 강조하고 성별·연령별 사이즈 선택 기준, 조끼와의 차이는 못 짚었을 가능성이 크다. 이 글은 성별·사이즈·색상별 선택 체크리스트와 조끼 vs 패딩 비교표로 구매 결정까지 이어지게 한다.",
-        "searchTargets": [
-          "내셔널지오그래픽 경량패딩 여성",
-          "내셔널지오그래픽 경량패딩 남성",
-          "내셔널지오그래픽 경량패딩 조끼",
-          "내셔널지오그래픽 경량패딩 사이즈"
-        ],
-        "mustInclude": [
-          "여성·남성·키즈 라인별 사이즈표(확인 필요: 공식몰 사이즈 가이드)",
-          "경량패딩과 조끼 버전의 용도·활용 범위 차이",
-          "색상별(화이트·베이지 오염 주의, 블랙 무난, 핑크 포인트) 코디 특징",
-          "간절기~겨울 착용 가능 온도 범위(확인 필요: 제품 상세페이지 소재·충전재)"
-        ],
-        "mustAvoid": [
-          "타 브랜드 경량패딩과 보온성·소재를 근거 없이 비교해 단정",
-          "키즈 사이즈를 성인 사이즈 비례로 임의 추정해 제시"
-        ],
-        "checkBefore": [
-          "라인별(여성·남성·키즈·조끼) 사이즈표, 색상 구성, 소재·충전재 정보는 내셔널지오그래픽 공식몰·공식 SNS 공지에서 확인"
-        ],
-        "solves": [
-          "여성용·남성용 경량패딩 사이즈가 같은지 다른지 모르겠다 → 라인별 사이즈 선택 기준 정리",
-          "경량패딩과 조끼 중 뭐가 간절기에 더 활용도 높을지 모르겠다 → 조끼 vs 패딩 활용 범위 비교",
-          "화이트·베이지 색상은 금방 더러워질까 걱정된다 → 색상별 관리 난이도·코디 팁 정리"
-        ],
-        "actionTitles": [
-          "내셔널지오그래픽 경량패딩 조끼 차이 비교로 선택하기"
-        ]
-      },
-      "at": "2026-11-03T20:35:13.868Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
     },
     {
       "id": "9e9acf9e07cafe35",
@@ -69646,6 +69254,758 @@
           "askedAt": "2010.06.16"
         }
       ]
+    },
+    {
+      "id": "d4ba54946aa2eab6",
+      "urls": [
+        "https://insuranceplant.tistory.com/566",
+        "https://sweetonion1005.tistory.com/entry/%ED%8F%AC%EC%9E%A5%EC%9D%B4%EC%82%AC-%EC%97%85%EC%B2%B4-%EC%84%A0%ED%83%9D%ED%95%98%EB%8A%94-%EB%B2%95-%EC%8B%A0%EB%A2%B0%ED%95%A0-%EC%88%98-%EC%9E%88%EB%8A%94-%EA%B8%B0%EC%A4%80-7%EA%B0%80%EC%A7%80",
+        "https://flameleaf.tistory.com/entry/%ED%8F%AC%EC%9E%A5%EC%9D%B4%EC%82%AC-%EB%B9%84%EC%9A%A9-%EA%B8%B0%EC%A4%80-%EC%97%85%EC%B2%B4-%EC%84%A0%EC%A0%95-%EC%A0%88%EA%B0%90-%ED%8C%81-%EA%B3%84%EC%95%BD-%EC%B2%B4%ED%81%AC%EB%A6%AC%EC%8A%A4%ED%8A%B8-%EC%99%84%EB%B2%BD-%EC%A0%95%EB%A6%AC",
+        "https://sweetonion1005.tistory.com/entry/%ED%8F%AC%EC%9E%A5%EC%9D%B4%EC%82%AC-%EB%B9%84%EC%9A%A9-%EA%B2%AC%EC%A0%81-%EC%B6%94%EC%B2%9C-%EC%97%85%EC%B2%B4-%EC%84%A0%ED%83%9D-%EB%B0%A9%EB%B2%95-%ED%9A%A8%EC%9C%A8%EC%A0%81-%EB%B9%84%EA%B5%90-%EC%A0%84%EB%9E%B5",
+        "https://sweetonion1005.tistory.com/entry/%ED%8F%AC%EC%9E%A5%EC%9D%B4%EC%82%AC%EB%B9%84%EC%9A%A9-%ED%8F%89%EC%88%98%EB%B3%84-%EA%B0%80%EA%B2%A9%EA%B3%BC-%EC%8B%A0%EB%A2%B0%ED%95%A0-%EC%88%98-%EC%9E%88%EB%8A%94-%EC%97%85%EC%B2%B4-%EC%84%A0%ED%83%9D-%ED%8C%81"
+      ],
+      "guide": {
+        "direction": "부천·대전→세종·세종 내 이사 등 지역별 질문은 업체가 너무 많아 가격 말고 뭘 기준으로 골라야 하는지에서 막힌다. 고수 블로그들은 비용기준·계약체크리스트는 다뤘지만 지역별 업체 비교와 반포장이사 보관비용 특이점은 안 짚었다. 이 글은 허가여부·파손보상기준·포장방식·보관옵션을 담은 비교표로 독자가 바로 업체를 고르게 한다.",
+        "searchTargets": [
+          "포장이사업체추천",
+          "포장이사업체순위",
+          "대구포장이사업체"
+        ],
+        "mustInclude": [
+          "정식 허가 여부 확인 항목",
+          "파손 보상 기준 비교",
+          "반포장이사 보관비용 항목",
+          "지역별(대구 등) 업체 리스트 (확인 필요: 실제 업체명·연락처)",
+          "작업팀 경력·숙련도 확인 질문 목록"
+        ],
+        "mustAvoid": [
+          "올수리(리모델링)와 포장이사를 혼동하는 표현",
+          "특정 업체를 사실처럼 단정적으로 1위 추천",
+          "부천·대전·세종 등 지역 사례를 뒤섞어 혼동 유발"
+        ],
+        "checkBefore": [
+          "업체 정식 허가 여부는 소비자원·관할 구청 등록정보에서 확인",
+          "지역별 업체 리스트는 각 업체 공식 홈페이지·네이버 플레이스에서 확인"
+        ],
+        "solves": [
+          "업체가 너무 많아 못 고르겠다 → 허가여부·파손보상·경력 기준 비교표 제공",
+          "반포장이사 보관비용이 얼마인지 모르겠다 → 보관옵션별 비용 비교 항목 제공",
+          "세종·대구 등 지역 업체를 모르겠다 → 지역별 체크리스트 제공(확인 필요: 실제 업체명)"
+        ],
+        "actionTitles": [
+          "포장이사업체추천 고를 때 꼭 확인할 기준 7가지 체크리스트",
+          "포장이사업체순위 비교 전 반드시 확인할 파손보상기준",
+          "대구포장이사업체 선택 전 허가여부와 파손보상까지 확인하는 법"
+        ]
+      },
+      "at": "2026-11-04T20:53:36.042Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "부천포장이사 업체 찾고 있는데요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=81002&docId=461451314&answerNo=29&qb=7Y+s7J6l7J207IKs7JeF7LK0",
+          "views": 30399,
+          "answers": 21,
+          "askedAt": "2026.10.12"
+        },
+        {
+          "title": "패션 쇼룸 이사 전문 업체나 의류 전문 포장....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=81002&docId=489862006&answerNo=9&qb=7Y+s7J6l7J207IKs7JeF7LK0",
+          "views": 9875,
+          "answers": 9,
+          "askedAt": "2026.09.29"
+        },
+        {
+          "title": "대전에서 세종으로 포장이사 업체 추천해주....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70107&docId=257192253&answerNo=28&qb=7Y+s7J6l7J207IKs7JeF7LK0",
+          "views": 3091,
+          "answers": 28,
+          "askedAt": "2026.10.20"
+        }
+      ]
+    },
+    {
+      "id": "7a0998865fd8b72f",
+      "urls": [
+        "https://on.sano.co.kr/%ea%b4%91%ea%b5%b0%ec%a0%9c-%ec%95%8c%eb%a6%ac-%ec%9d%b5%ec%8a%a4%ed%94%84%eb%a0%88%ec%8a%a4-2026-%ed%95%a0%ec%9d%b8-%ec%9d%bc%ec%a0%95%ea%b3%bc-%ec%bf%a0%ed%8f%b0-%ec%82%ac%ec%9a%a9%eb%b2%95/",
+        "https://money-magazine.co.kr/%ec%95%8c%eb%a6%ac-%ed%83%80%ec%98%a4%eb%b0%94%ec%98%a4-%ea%b4%91%ea%b5%b0%ec%a0%9c-%ed%95%a0%ec%9d%b8%ec%bd%94%eb%93%9c/"
+      ],
+      "guide": {
+        "direction": "광군제 알리 질문은 쿠폰이 소진되면 끝인지, 150달러 넘으면 관부가세가 얼마인지에서 막힌다. 고수 글은 할인 일정과 쿠폰 사용법만 다뤄 매일 자정 쿠폰 리셋, 관부가세 계산, 토스카드 할인 설정법은 안 짚었다. 이 글은 쿠폰 리셋 시점, 관부가세 계산식, 카드 할인 설정 순서로 독자가 결제까지 끝내게 한다.",
+        "searchTargets": [
+          "광군제 알리 할인코드",
+          "광군제 알리 기간",
+          "광군제 알리 카드 할인",
+          "광군제 알리 구매방법"
+        ],
+        "mustInclude": [
+          "할인코드 소진 시 매일 자정 리셋 가능성",
+          "150달러 초과 시 관부가세 부과 기준",
+          "품목별 관세율이 다르다는 점(예: 특정 품목 0%)",
+          "토스카드 할인 받는 설정 경로(계정→설정→통화 USD)",
+          "표시 가격이 최저가 옵션 기준이라는 주의사항"
+        ],
+        "mustAvoid": [
+          "타오바오·테무 가격·정책을 알리와 혼동해서 서술",
+          "특정 상품 실시간 가격을 고정된 사실처럼 단정",
+          "관부가세를 모든 상품에 동일하게 적용되는 것처럼 서술"
+        ],
+        "checkBefore": [
+          "할인 일정·코드는 알리익스프레스 공식 앱·행사 페이지에서 확인",
+          "관부가세 기준·관세율은 관세청 고시로 확인"
+        ],
+        "solves": [
+          "쿠폰 소진되면 끝인지 모르겠다 → 매일 자정 리셋·취소 물량 반환 가능성 설명",
+          "관부가세 얼마 나오는지 모르겠다 → 150달러 기준과 품목별 관세율로 계산법 제공",
+          "토스카드 할인 어떻게 받는지 모르겠다 → 통화 USD 설정 경로 안내"
+        ],
+        "actionTitles": [
+          "광군제 알리 기간 중 토스카드 할인 받는 설정 방법",
+          "광군제 알리 할인 받을 때 관부가세까지 따진 구매방법"
+        ]
+      },
+      "at": "2026-11-04T20:53:36.042Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "알리 광군제 쿠폰은 빨리 사용해야하나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=512&docId=477418616&answerNo=16&qb=6rSR6rWw7KCc7JWM66as",
+          "views": 1695,
+          "answers": 16,
+          "askedAt": "2026.10.30"
+        },
+        {
+          "title": "알리에서 광군제세일로 제품을 사면 관부가....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=512&docId=477826276&answerNo=6&qb=6rSR6rWw7KCc7JWM66as",
+          "views": 1057,
+          "answers": 6,
+          "askedAt": "2026.10.29"
+        },
+        {
+          "title": "알리 광군제 할인코드 소진되면 끝인가요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=512&docId=458394325&answerNo=5&qb=6rSR6rWw7KCc7JWM66as",
+          "views": 764,
+          "answers": 6,
+          "askedAt": "2026.10.20"
+        }
+      ]
+    },
+    {
+      "id": "a0f94a99be87b172",
+      "urls": [
+        "https://sanche.co.kr/flu-return-to-school-calculator/",
+        "https://wellsy.tistory.com/entry/%EC%B4%88%EB%93%B1%ED%95%99%EC%83%9D-%EB%8F%85%EA%B0%90-%EB%93%B1%EC%9B%90-%EA%B8%B0%EC%A4%80-%ED%95%B4%EC%97%B4-%ED%9B%84-%EB%93%B1%EA%B5%90-%EC%8B%9C%EA%B8%B0%EC%99%80-%EA%B2%A9%EB%A6%AC-%EC%88%98%EC%B9%99"
+      ],
+      "guide": {
+        "direction": "초등학생 독감 질문은 해열 후 며칠 쉬어야 등교되는지, 예방접종 맞으면 결석 처리가 어떻게 되는지에서 막힌다. 고수 글은 등교가능일 계산기와 격리수칙은 다뤘지만 무료접종 연령 기준과 출석인정 여부는 안 짚었다. 이 글은 해열 후 24시간 계산기와 무료접종 연령표, 출석인정 확인 순서로 독자가 등교 여부를 바로 판단하게 한다.",
+        "searchTargets": [
+          "초등학생 독감 등교",
+          "초등학생 독감 결석",
+          "초등학생 독감 격리",
+          "초등학생 독감 무료접종"
+        ],
+        "mustInclude": [
+          "해열 후 24시간 기준 등교 가능 시각 계산 방법",
+          "무료접종 대상 연령(생후 6개월~만 12세) (확인 필요: 해당 절기 공지로 갱신 여부)",
+          "예방접종 당일 결석 시 출석인정 여부 (확인 필요: 교육청·학교 규정)",
+          "격리·등원 수칙 기간",
+          "해열 후에도 남는 두통·몸살·식욕저하 증상 주의사항"
+        ],
+        "mustAvoid": [
+          "독감 사망 사례를 자극적으로 다루거나 공포 조성",
+          "특정 학교·학생 사례를 사실처럼 단정",
+          "백신 부작용을 과장해 서술"
+        ],
+        "checkBefore": [
+          "무료접종 대상 연령·기간은 질병관리청·보건소 공지로 확인",
+          "예방접종 결석의 출석인정 여부는 교육청·학교 규정으로 확인"
+        ],
+        "solves": [
+          "해열 후 언제 등교 가능한지 모르겠다 → 해열 후 24시간 기준 계산기로 안내",
+          "예방접종 받으면 결석 처리가 되는지 모르겠다 → 출석인정 여부 확인 방법 제공",
+          "무료접종 대상인지 모르겠다 → 연령 기준표 제공"
+        ],
+        "actionTitles": [
+          "초등학생 독감 등교 가능 시각 계산하는 법 알아보기",
+          "초등학생 독감 예방접종 받으면 결석 출석인정 되는지 확인",
+          "초등학생 독감 무료접종 대상 연령 기준표로 확인하기"
+        ]
+      },
+      "at": "2026-11-04T20:53:36.042Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "초등학생 독감주사 필수 인가요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=8030404&docId=489886032&answerNo=5&qb=7LSI65Ox7ZWZ7IOd64+F6rCQ",
+          "views": 856,
+          "answers": 5,
+          "askedAt": "2025.11.04"
+        },
+        {
+          "title": "초등생 독감백신 출석인정",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=7010107&docId=406649721&answerNo=1&qb=7LSI65Ox7ZWZ7IOd64+F6rCQ",
+          "views": 346,
+          "answers": 1,
+          "askedAt": "2021.12.06"
+        },
+        {
+          "title": "초등학생 독감 예방주사, 무료 대상 연령 어....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70115&docId=491344604&answerNo=1&qb=7LSI65Ox7ZWZ7IOd64+F6rCQ",
+          "views": 130,
+          "answers": 6,
+          "askedAt": "2026.01.14"
+        }
+      ]
+    },
+    {
+      "id": "156da348282f00ed",
+      "urls": [
+        "https://withstar.tistory.com/entry/%ED%98%BC%EC%9D%B8%EC%8B%A0%EA%B3%A0-%ED%9B%84-%EA%B1%B4%EA%B0%95%EB%B3%B4%ED%97%98-%ED%94%BC%EB%B6%80%EC%96%91%EC%9E%90-%EB%B0%B0%EC%9A%B0%EC%9E%90-%EC%98%AC%EB%A6%B4-%EC%88%98-%EC%9E%88%EB%82%98%EC%9A%94"
+      ],
+      "guide": {
+        "direction": "혼인신고만 하면 자동으로 피부양자가 되는지, 직장가입자인 배우자 회사에 어떻게 신고해야 하는지, 외국인 배우자(F6)는 비자·외국인등록 전후로 언제 신고 가능한지가 지식인에서 실제로 막히는 지점이다. 기존 글은 제목만 같고 직장가입자·지역가입자·외국인배우자 케이스를 구분한 서류·절차 비교까지는 다루지 않았다. 케이스별 신청 주체와 제출서류, 소득기준을 표로 정리해 주면 독자가 바로 신고를 끝낼 수 있다.",
+        "searchTargets": [
+          "혼인신고 건강보험 피부양자"
+        ],
+        "mustInclude": [
+          "직장가입자 배우자 피부양자 등재 시 회사(사업장)에 제출하는 자격취득 신고 서류 목록(확인 필요: 국민건강보험공단 공지)",
+          "피부양자 등재 필요서류(가족관계증명서·혼인관계증명서 등)(확인 필요: 공단 서류안내)",
+          "외국인 배우자(F6) 비자·외국인등록 완료 시점과 신고 가능 시점의 관계(확인 필요: 출입국·공단 안내)",
+          "피부양자 소득·재산 요건 기준(확인 필요: 국민건강보험공단 피부양자 자격기준)",
+          "직장가입자와 지역가입자일 때 신청 주체가 다르다는 점"
+        ],
+        "mustAvoid": [
+          "외국인 배우자의 혼인·입국 경위를 사생활처럼 추측해서 서술",
+          "직장가입자 배우자 등재 절차와 지역가입자 전환 절차를 섞어서 혼동",
+          "혼전임신 등 개별 사례를 일반적인 신고 절차처럼 일반화"
+        ],
+        "checkBefore": [
+          "국민건강보험공단 공식 안내에서 피부양자 소득·재산 요건과 제출서류 최신본 확인",
+          "외국인 배우자(F6)는 출입국관리사무소 외국인등록 완료 시점 확인"
+        ],
+        "solves": [
+          "혼인신고만 하면 자동으로 피부양자가 되나요? → 자동 등록이 아니며 자격취득 신고 절차·서류를 표로 정리",
+          "회사에 뭐라고 말해야 하나요? → 직장가입자 배우자 등재 시 회사(인사팀) 제출서류와 순서 안내",
+          "외국인 배우자(F6)도 바로 가입되나요? → 외국인등록 완료 후 신고 가능한 시점과 조건 설명"
+        ],
+        "actionTitles": [
+          "혼인신고 후 건강보험 피부양자 등록 신청 서류 총정리",
+          "혼인신고 건강보험 피부양자 등록 전 확인할 조건"
+        ]
+      },
+      "at": "2026-11-04T20:53:36.042Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "외국인배우자(F6) 피부양자 의료보험 등록 질....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100401&docId=485187207&answerNo=3&qb=7Zi87J247Iug6rOgIOqxtOqwleuztO2XmCDtlLzrtoDslpHsnpAg67Cw7Jqw7J6QIOyYrOumtA==",
+          "views": 1838,
+          "answers": 4,
+          "askedAt": "2025.05.14"
+        },
+        {
+          "title": "국민건강보험 피부양자 신고관련...",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100401&docId=248824070&answerNo=1&qb=7Zi87J247Iug6rOgIOqxtOqwleuztO2XmCDtlLzrtoDslpHsnpAg67Cw7Jqw7J6QIOyYrOumtA==",
+          "views": 1533,
+          "answers": 1,
+          "askedAt": "2016.03.26"
+        },
+        {
+          "title": "건강보험자격확인서 배우자 등록",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100401&docId=480771503&answerNo=2&qb=7Zi87J247Iug6rOgIOqxtOqwleuztO2XmCDtlLzrtoDslpHsnpAg67Cw7Jqw7J6QIOyYrOumtA==",
+          "views": 846,
+          "answers": 2,
+          "askedAt": "2026.10.26"
+        }
+      ]
+    },
+    {
+      "id": "d004bacde707d511",
+      "urls": [
+        "https://life.sano.co.kr/%eb%a6%ac%eb%b3%b5-%ed%94%8c%eb%a6%ac%ec%8a%a4%ec%95%84%eb%85%b8%eb%9d%bd-%ed%9b%84%eb%93%9c-%ea%b2%a8%ec%9a%b8-%eb%b3%b4%eb%93%9c%eb%b3%b5-%eb%a0%88%ec%9d%b4%ec%96%b4%eb%93%9c%eb%a1%9c-%ec%86%90/"
+      ],
+      "guide": {
+        "direction": "검색자는 리복 플리스아노락 후드를 보드복 안에 레이어드로 입을 때 핏과 보온성이 어떤지가 궁금해 들어온다. '손이 가는 이유' 같은 감성적 제목은 실제 사이즈표나 소재 정보 없이 끝나 구매 결정에 도움이 안 된다. 사이즈 선택 기준과 소재 특성, 다른 레이어드 아이템과의 비교를 정리해 주면 글만 보고 구매 여부를 정할 수 있다.",
+        "searchTargets": [
+          "리복 플리스아노락 후드"
+        ],
+        "mustInclude": [
+          "사이즈표 및 평소 사이즈 대비 핏(확인 필요: 리복 공식몰 상품페이지)",
+          "보드복 안 레이어드 시 활동성(팔 움직임·기장)을 좌우하는 디자인 특징"
+        ],
+        "mustAvoid": [
+          "리복 외 타 브랜드 플리스/아노락 제품과 혼동해서 서술",
+          "겨울 시즌이 아닌 상품(여름용 등)과 혼동"
+        ],
+        "checkBefore": [
+          "리복 공식몰 또는 판매처에서 실제 사이즈표·소재 함량 확인"
+        ],
+        "solves": [
+          "보드복 안에 레이어드로 입을 때 핏이 어떤지 → 사이즈표와 핏 특징 정리"
+        ],
+        "actionTitles": [
+          "리복 플리스아노락 후드, 보드복 레이어드 핏 확인하는 법",
+          "리복 플리스아노락 후드 레이어드 코디 비교"
+        ]
+      },
+      "at": "2026-11-04T20:53:36.042Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "12140e61bd9ecb96",
+      "urls": [
+        "https://flameleaf.tistory.com/entry/%EB%B2%95%EC%9D%B8-%EA%B3%B5%EB%8F%99%EC%9D%B8%EC%A6%9D%EC%84%9C-%EB%B0%9C%EA%B8%89-%ED%95%84%EC%9A%94-%EC%84%9C%EB%A5%98-%EB%B9%84%EC%9A%A9-%EB%B0%9C%EA%B8%89-%EC%A0%88%EC%B0%A8-%EC%99%84%EC%A0%84-%EA%B0%80%EC%9D%B4%EB%93%9C"
+      ],
+      "guide": {
+        "direction": "자동완성에는 발급 비용·복사·갱신·등록·종류·내보내기까지 세부 액션이 갈려 있는데, 검색자는 '완전 가이드'류 글에서 이 중 자기 상황에 맞는 절차만 못 찾아 헤맨다. 고수 블로그 제목은 포괄적이지만 기관별 비용 비교나 복사·내보내기 같은 실무 단계는 비어 있기 쉽다. 발급기관별 비용·필요서류·발급부터 복사·갱신까지의 순서를 표와 체크리스트로 주면 한 번에 끝난다.",
+        "searchTargets": [
+          "법인 공동인증서 발급",
+          "법인 공동인증서 발급 비용",
+          "법인 공동인증서 복사",
+          "법인 공동인증서 갱신"
+        ],
+        "mustInclude": [
+          "발급 필요서류(법인등기부등본·사업자등록증·대표자 신분증 등)(확인 필요: 발급기관 공지)",
+          "발급 비용(은행 창구·인터넷뱅킹 등 경로별)(확인 필요: 금융결제원·이용 은행 공시)",
+          "발급기관별 비교(은행 창구 vs 인터넷뱅킹 vs 인증기관 홈페이지)",
+          "타 PC로 복사(내보내기) 절차 단계",
+          "갱신 주기 및 갱신 절차(확인 필요: 인증기관 공지)"
+        ],
+        "mustAvoid": [
+          "공동인증서(구 공인인증서)와 금융인증서·간편인증을 같은 것처럼 서술",
+          "법인 설립·사업자등록 절차와 공동인증서 발급 절차를 섞어서 혼동",
+          "특정 은행 한 곳에서만 가능한 절차를 전체 기관 공통인 것처럼 일반화"
+        ],
+        "checkBefore": [
+          "금융결제원 또는 인증기관(코스콤·한국전자인증 등) 공식 공지에서 발급비용·절차 확인",
+          "이용 은행 공식 안내로 창구/인터넷뱅킹 발급 가능 여부 확인"
+        ],
+        "solves": [
+          "법인 공동인증서 발급 비용이 얼마인지 → 기관별 비용 비교표 제공",
+          "발급받은 인증서를 다른 PC로 복사(내보내기)하는 법 → 단계별 절차 정리",
+          "공동인증서 갱신은 언제 어떻게 하나 → 갱신 주기와 절차 체크리스트"
+        ],
+        "actionTitles": [
+          "법인 공동인증서 발급 비용과 절차, 기관별 비교",
+          "법인 공동인증서 복사(내보내기)·갱신하는 법",
+          "법인 공동인증서 발급 전 준비서류 체크리스트"
+        ]
+      },
+      "at": "2026-11-04T20:53:36.042Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "법인 사업자 등록?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40302&docId=491001161&answerNo=8&qb=67KV7J24IOqzteuPmeyduOymneyEnCDtlYTsmpQg7JmE7KCE",
+          "views": 486,
+          "answers": 8,
+          "askedAt": "2026.10.30"
+        },
+        {
+          "title": "세금 체납 법인 폐업 후 법인설립",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40302&docId=495545089&answerNo=5&qb=67KV7J24IOqzteuPmeyduOymneyEnCDtlYTsmpQg7JmE7KCE",
+          "views": 131,
+          "answers": 6,
+          "askedAt": "2026.10.15"
+        },
+        {
+          "title": "1인 법인 대표가 배당을 받으려면 어떤 절차....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40309&docId=495681250&answerNo=1&qb=67KV7J24IOqzteuPmeyduOymneyEnCDtlYTsmpQg7JmE7KCE",
+          "views": 13,
+          "answers": 1,
+          "askedAt": "2026.10.24"
+        }
+      ]
+    },
+    {
+      "id": "9e3b111396b5ae62",
+      "urls": [
+        "https://sweetonion1005.tistory.com/entry/%ED%9C%B4%EB%A9%B4-%EC%98%88%EA%B8%88-%EC%A1%B0%ED%9A%8C-%EB%B0%A9%EB%B2%95-5%EB%85%84-%EC%9D%B4%EC%83%81-%EC%B0%BE%EC%95%84%EA%B0%80%EC%A7%80-%EC%95%8A%EC%9D%80-%EB%8F%88-%EC%B0%BE%EA%B8%B0"
+      ],
+      "guide": {
+        "direction": "검색자는 '조회했는데 안 나온다'는 지점에서 막힌다 — 아직 휴면 전환이 안 된 계좌는 조회 대상이 아니라는 걸 모른다. 고수 글들은 '조회 방법'만 다루고, 비활동성계좌와 휴면예금의 전환 기준 차이는 짚지 않는다. 전환 기준표와 '왜 안 뜨는지' 체크리스트로 이 글에서 끝내준다.",
+        "searchTargets": [
+          "휴면예금찾아줌",
+          "휴면예금 조회 방법",
+          "휴면예금 뜻",
+          "휴면예금 기간"
+        ],
+        "mustInclude": [
+          "서민금융진흥원 휴면예금찾아줌 사이트 조회 절차(확인 필요: 서민금융진흥원 공식 안내)",
+          "은행 예금은 5년 이상 거래 없어야 휴면예금으로 전환 — 전환 전엔 조회 불가",
+          "비활동성계좌 기준: 1만원 미만 1년, 5만원 미만 2년, 10만원 미만 3년 이상 무거래(확인 필요: 은행 공시)",
+          "보험금 휴면 전환 조건은 예금과 다름(확인 필요: 서민금융진흥원)",
+          "조회는 되는데 환급계좌 입력 시 오류나는 사례와 대처법"
+        ],
+        "mustAvoid": [
+          "비활동성계좌(단순 미사용)와 '휴면예금'을 같은 것으로 혼동",
+          "은행별로 다른 휴면 전환 기준을 하나로 일반화"
+        ],
+        "checkBefore": [
+          "서민금융진흥원 휴면예금찾아줌 공식 사이트에서 최신 조회 절차·대상 금융사 확인",
+          "보험금 휴면 전환 기준은 보험사/서민금융진흥원 공지로 확인"
+        ],
+        "solves": [
+          "조회해도 안 나온다 → 아직 휴면 전환 전인 계좌는 조회 대상이 아니므로 전환 기준표로 확인",
+          "휴면예금과 안 쓰는 계좌가 뭐가 다른가 → 비활동성계좌 기준표로 구분",
+          "통합조회 어떻게 하나 → 휴면예금찾아줌 사이트 접속·조회 순서 안내"
+        ],
+        "actionTitles": [
+          "휴면예금찾아줌 조회 방법, 5년 무거래 전환 기준 정리",
+          "휴면예금 조회 안 될 때 확인할 1년·5년 무거래 기준",
+          "휴면예금 뜻부터 지급까지, 휴면예금찾아줌 조회 순서 정리"
+        ]
+      },
+      "at": "2026-11-04T20:53:36.042Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "서민금융진흥원 휴면예금 찾기",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40107&docId=317435676&answerNo=13&qb=7Zy066m0IOyYiOq4iCDsnbTsg4Eg7LC+7JWE6rCA7KeAIOyViuydgA==",
+          "views": 13023,
+          "answers": 14,
+          "askedAt": "2025.03.21"
+        },
+        {
+          "title": "휴면계좌 통합조회 방법 어떻게 하나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40107&docId=478086155&answerNo=9&qb=7Zy066m0IOyYiOq4iCDsnbTsg4Eg7LC+7JWE6rCA7KeAIOyViuydgA==",
+          "views": 4944,
+          "answers": 9,
+          "askedAt": "2026.10.02"
+        },
+        {
+          "title": "휴면예금찾기",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40101&docId=417365717&answerNo=4&qb=7Zy066m0IOyYiOq4iCDsnbTsg4Eg7LC+7JWE6rCA7KeAIOyViuydgA==",
+          "views": 2390,
+          "answers": 8,
+          "askedAt": "2025.03.16"
+        }
+      ]
+    },
+    {
+      "id": "e81f0a59891990ed",
+      "urls": [
+        "https://edgeo.gong24.kr/83"
+      ],
+      "guide": {
+        "direction": "검색자는 편의점에서 선불카드를 직접 충전하는 것과 '자동충전'이 어떻게 다른지 헷갈린다. 고수 글은 '충전 방법'만 뭉쳐 설명하고, 자동충전형 카드는 등록계좌로만 충전되고 편의점 수동충전이 안 된다는 점은 빼놓는다. 카드 종류별(선불·자동충전·후불) 충전 방법 표로 이 글에서 혼란을 끝낸다.",
+        "searchTargets": [
+          "하이패스 충전방법",
+          "편의점 하이패스 충전",
+          "선불하이패스 충전",
+          "하이패스 충전카드"
+        ],
+        "mustInclude": [
+          "선불 하이패스카드는 편의점·휴게소에서 직접 충전 가능(카드 투입 후 금액 선택)",
+          "자동충전형 카드는 등록계좌 자동충전만 가능, 편의점 등 별도 수동충전 불가",
+          "자동충전 설정 시 최초 1회는 기준금액 이상 충전해둬야 작동함",
+          "자동충전에서 후불로 교체 시 단말기 재등록만으로 카드 교체 가능",
+          "하이플러스카드 고객센터 1644-6500 문의처(카드 유형별 문의)"
+        ],
+        "mustAvoid": [
+          "선불카드 수동충전과 자동충전형 계좌충전을 같은 '충전방법'으로 뭉쳐 설명",
+          "후불하이패스는 충전 개념이 없다는 점을 빼먹고 충전방법에 섞어 설명"
+        ],
+        "checkBefore": [
+          "카드사별(하이플러스카드 등) 자동충전 가능 여부·설정 방법은 공식 홈페이지/고객센터로 확인",
+          "편의점 충전 가능 여부는 제휴 편의점(씨유, GS25 등) 최신 현황으로 확인"
+        ],
+        "solves": [
+          "편의점에서 충전했는데 자동충전이랑 뭐가 다른가 → 선불카드 수동충전 vs 자동충전형 계좌충전 구분",
+          "자동충전 설정했는데 편의점에서 또 충전해야 하나 → 자동충전형은 편의점 수동충전 불가, 계좌충전만 가능",
+          "자동충전에서 후불로 바꾸려면 → 단말기 재등록 절차 정리"
+        ],
+        "actionTitles": [
+          "하이패스 충전방법, 편의점·휴게소 선불카드 충전 순서"
+        ]
+      },
+      "at": "2026-11-04T20:53:36.042Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "편의점 자동충전 하이패스 카드 질문",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=81103&docId=471724866&answerNo=1&qb=7ZWY7J207Yyo7IqkIOy2qeyghCDsnpDrj5nstqnsoIQ=",
+          "views": 5258,
+          "answers": 2,
+          "askedAt": "2024.06.28"
+        },
+        {
+          "title": "자동충전 셀프 하이패스카드요.",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=81208&docId=466653339&answerNo=2&qb=7ZWY7J207Yyo7IqkIOy2qeyghCDsnpDrj5nstqnsoIQ=",
+          "views": 1524,
+          "answers": 2,
+          "askedAt": "2024.03.22"
+        },
+        {
+          "title": "하이패스 자동충전에서 후불하이패스로 교체",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=81103&docId=492422450&answerNo=2&qb=7ZWY7J207Yyo7IqkIOy2qeyghCDsnpDrj5nstqnsoIQ=",
+          "views": 348,
+          "answers": 2,
+          "askedAt": "2026.03.11"
+        }
+      ]
+    },
+    {
+      "id": "fd316bddcfb015df",
+      "urls": [
+        "https://life.sano.co.kr/%eb%8b%a8%ed%92%8d-%eb%9c%bb%ea%b3%bc-%eb%8b%a8%ed%92%8d-%eb%93%a4%eb%8b%a4-%eb%8b%a8%ed%92%8d-%ec%a7%80%eb%8b%a4-%ec%b0%a8%ec%9d%b4%eb%a5%bc-%ec%95%8c%eb%a9%b4-%ea%b0%80%ec%9d%84-%eb%82%98%eb%93%a4/"
+      ],
+      "guide": {
+        "direction": "검색자는 '단풍 들다'와 '단풍 지다'를 혼용해 쓰면서 뭐가 맞는지 막힌다. 지식인 자료는 단풍(丹楓)과 단풍나무 한자 동일 여부만 다루고, '들다·지다' 용법 차이는 안 짚는다. 색이 변하는 과정(들다)과 잎이 떨어지는 단계(지다)를 예문으로 구분해 이 글에서 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "단풍(丹楓)은 늦가을에 잎이 붉고 누렇게 변한 것을 뜻함(지식인 답변 근거)",
+          "단풍나무(丹楓나무)와 단풍(丹楓)은 같은 한자를 쓰되 가리키는 대상이 다름",
+          "'단풍 들다' = 잎 색이 변하는 중(과정)을 가리키는 예문",
+          "'단풍 지다' = 색이 변한 잎이 떨어짐(낙엽)을 가리키는 예문",
+          "단풍 시기 지역별 표(확인 필요: 기상청·산림청 단풍 전망 발표)"
+        ],
+        "mustAvoid": [
+          "단풍 절정 시기를 특정 연도 날짜로 단정(해마다 기상에 따라 변동)",
+          "단풍나무 수종 설명과 '단풍이 들다'라는 현상 설명을 섞어 혼동 유발"
+        ],
+        "checkBefore": [
+          "올해 단풍 절정 시기·지역은 기상청/산림청 단풍전망 발표로 확인",
+          "한자 유래(丹楓)와 '들다·지다' 품사·뜻풀이는 국어사전으로 재확인"
+        ],
+        "solves": [
+          "단풍 들다랑 단풍 지다가 뭐가 다른가 → 색 변화(들다) vs 낙엽(지다) 단계 구분으로 해결",
+          "단풍이랑 단풍나무 한자가 같은가 → 지식인 답변 근거로 한자 동일 여부·의미 차이 정리"
+        ],
+        "actionTitles": [
+          "단풍 들다 단풍 지다 차이, 예문으로 바로 구분하는 법",
+          "단풍나무와 단풍 한자 비교, 뜻 차이 정확히 확인하기"
+        ]
+      },
+      "at": "2026-11-04T20:53:36.042Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "단풍나무와 단풍이 들었다가 같은 한자인가....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1116&docId=53112003&answerNo=1&qb=64uo7ZKNIOucu+qzvCDrk6Tri6Qg7KeA64ukIOyVjOuptA==",
+          "views": 1812,
+          "answers": 1,
+          "askedAt": "2003.11.03"
+        },
+        {
+          "title": "내공은 무었인강7",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10605&docId=65094045&answerNo=8&qb=64uo7ZKNIOucu+qzvCDrk6Tri6Qg7KeA64ukIOyVjOuptA==",
+          "views": 835,
+          "answers": 9,
+          "askedAt": "2003.02.19"
+        },
+        {
+          "title": "이 그림에 대해 아는분 설명 해주세요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=3120101&docId=334761753&answerNo=1&qb=64uo7ZKNIOucu+qzvCDrk6Tri6Qg7KeA64ukIOyVjOuptA==",
+          "views": 93,
+          "answers": 1,
+          "askedAt": "2019.08.31"
+        }
+      ]
+    },
+    {
+      "id": "dc397a72126a8434",
+      "urls": [
+        "https://nav0120.tistory.com/entry/%EA%BD%83-%EA%B0%99%EC%9D%80-%EC%8B%9C%EC%A0%88-%EA%B3%B5%EC%84%A0%EC%98%A5-%EC%A1%B0%EC%9A%A9%ED%9E%88-%EC%82%B4%EB%8B%A4-%EC%A3%BD%EA%B3%A0-%EC%8B%B6%EB%8B%A4%EB%8A%94-%EC%86%8C%EB%B0%95%ED%95%9C-%EB%B0%94%EB%9E%8C%EC%9D%B4-%EC%A7%93%EB%B0%9F%ED%9E%88%EB%8A%94-%EC%84%B8%EC%83%81%EC%97%90%EC%84%9C"
+      ],
+      "guide": {
+        "direction": "지식인에서는 '공선옥 일가'의 발단 장면을 궁금해하는데 이는 제목 '꽃 같은 시절'과 다른 단편일 수 있어 검색자가 두 작품을 헷갈려 막힌다. 고수 블로그들은 제목만 같게 베끼고 실제 줄거리·인물관계·주제 정리는 빈약하다. 이 글은 두 작품을 구분한 뒤 발단~결말 장면별 정리표와 등장인물 관계도로 혼동을 한 번에 풀어준다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "'꽃 같은 시절'과 '일가'가 같은 작품인지 다른 단편인지 먼저 구분해서 명시",
+          "발단-전개-위기-절정-결말 장면별 줄거리 정리표",
+          "'조용히 살다 죽고 싶다'는 소망이 짓밟히는 사회 비판이라는 주제 핵심 문장"
+        ],
+        "mustAvoid": [
+          "'일가'와 '꽃 같은 시절'을 같은 작품으로 혼동해 설명",
+          "작가 공선옥의 개인사·사생활을 추측해서 다루기"
+        ],
+        "checkBefore": [
+          "'꽃 같은 시절'과 '일가'가 동일 작품인지 다른 단편인지 원문/출판사 자료로 확인"
+        ],
+        "solves": [
+          "'공선옥 일가 발단이 궁금하다' → 발단 장면을 구체적으로 정리해 바로 확인시켜줌",
+          "'꽃 같은 시절 줄거리를 헷갈린다' → 두 작품 비교표로 혼동 해소"
+        ],
+        "actionTitles": [
+          "공선옥 일가와 꽃 같은 시절 줄거리 한눈에 비교하기",
+          "꽃 같은 시절 등장인물 관계도와 주제 정리해서 확인하기"
+        ]
+      },
+      "at": "2026-11-04T20:53:36.042Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "공선옥 일가..",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110301&docId=220233050&answerNo=1&qb=7Iuc7KCIIOqzteyEoOyYpSDsobDsmqntnogg7IK064ukIOyjveqzoA==",
+          "views": 2728,
+          "answers": 1,
+          "askedAt": "2015.03.10"
+        }
+      ]
+    },
+    {
+      "id": "fb7c4fa2e709b4b1",
+      "urls": [
+        "https://on.sano.co.kr/%eb%b9%bc%eb%b9%bc%eb%a1%9c-%eb%8d%b0%ec%9d%b4%ed%8e%b8%ec%a7%80%eb%a1%9c-%eb%a7%88%ec%9d%8c%ec%9d%84-%ec%a0%84%ed%95%98%eb%8a%94-%ed%8a%b9%eb%b3%84%ed%95%9c-%eb%b0%a9%eb%b2%95%ea%b3%bc-%ec%98%88/"
+      ],
+      "guide": {
+        "direction": "검색자는 11월 11일 빼빼로데이에 연인·친구·직장동료 등 대상에 따라 편지에 뭐라고 써야 할지 몰라 문구를 찾는다. 고수 블로그 제목은 '특별한 방법'이라고만 적어 대상 구분 없이 예시를 뭉쳐 나열하는 경우가 많다. 이 글은 관계별로 바로 복사해 쓸 수 있는 문구를 나눠 정리해 고민을 끝내준다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "빼빼로데이 날짜(11월 11일)와 유래(숫자 1 네 개 모양) 한 줄 설명",
+          "연인·짝사랑·친구·직장동료별로 구분한 문구 예시",
+          "편지지에 쓸 때 짧은 한 줄 문구 vs 긴 편지 중 어떤 걸 고를지 가이드",
+          "(확인 필요: 올해 빼빼로데이 관련 특별 이벤트 유무)"
+        ],
+        "mustAvoid": [
+          "모든 문구를 오글거리는 톤으로만 채워 실용성 떨어지게 구성"
+        ],
+        "checkBefore": [
+          "2026년 빼빼로데이 날짜와 요일 재확인(11월 11일 기준)",
+          "예시 문구가 직접 작성한 것으로 저작권 문제 없는지 확인"
+        ],
+        "solves": [
+          "'빼빼로데이 편지에 뭐라고 써야 할지 모르겠다' → 대상별 바로 쓸 문구 제공"
+        ],
+        "actionTitles": [
+          "빼빼로데이 편지 예시 문구 관계별로 바로 확인하는 법"
+        ]
+      },
+      "at": "2026-11-04T20:53:36.042Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "7251e25b60265f65",
+      "urls": [
+        "https://life.sano.co.kr/%eb%ac%b4-%eb%b3%b4%ea%b4%80%ed%95%98%eb%8a%94-%eb%b0%a9%eb%b2%95-%ec%9d%b4%ea%b2%83%eb%a7%8c-%ec%95%8c%eb%a9%b4-%ed%95%9c-%eb%8b%ac%eb%8f%84-%ea%b1%b0%eb%9c%ac%ed%95%98%ea%b2%8c-%eb%b3%b4%ea%b4%80/"
+      ],
+      "guide": {
+        "direction": "검색자는 무를 사두면 금방 물러지거나 썩어 냉장고에서 한 달 이상 보관하는 구체적 방법을 찾는다. 고수 블로그 제목은 '한 달도 거뜬'이라 약속만 크고 무청 분리·포장법·보관 장소별 기간 비교는 부족하다. 이 글은 보관 방법별(냉장·냉동·김치냉장고) 기간 비교표와 무청 분리 체크리스트로 바로 따라 보관하게 한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "무청(잎) 잘라서 본체와 분리 보관해야 오래간다는 점",
+          "신문지에 싸서 세워서 냉장보관 vs 흙에 묻어 보관 비교",
+          "보관 방법별(냉장/냉동/김치냉장고) 예상 보관기간(확인 필요: 정확 일수)"
+        ],
+        "mustAvoid": [
+          "전세계약·임금체불 등 무관한 생활법률 이슈와 뒤섞어 다루기",
+          "보관법 없이 무 요리 레시피로 글 방향이 새는 것"
+        ],
+        "checkBefore": [
+          "무 보관기간(냉장/냉동/실온)별 정확한 일수를 농촌진흥청 등 공식 자료로 확인",
+          "무청 분리 보관이 실제 부패 지연에 효과 있는지 재확인"
+        ],
+        "solves": [
+          "'무 한 달 넘게 보관하는 법을 모른다' → 방법별 예상 보관기간 비교표로 선택 가능"
+        ],
+        "actionTitles": [
+          "무 보관하는 방법 냉장 냉동 김치냉장고까지 비교로 확인하기",
+          "무 한달 넘게 보관하는 법 무청 분리부터 하는 순서",
+          "무 오래 보관하는 법 신문지 포장부터 냉장까지 끝내기"
+        ]
+      },
+      "at": "2026-11-04T20:53:36.042Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "전세 계약, 연장, 손해 배상 관련",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40202&docId=495075701&answerNo=1&qb=67O06rSAIOydtOqygyDslYzrqbQg64us64+EIOqxsOucrO2VmOqyjA==",
+          "views": 154,
+          "answers": 5,
+          "askedAt": "2026.09.08"
+        },
+        {
+          "title": "폭식증때문에 고시원 생활 어떤가요??",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70117&docId=494557843&answerNo=4&qb=67O06rSAIOydtOqygyDslYzrqbQg64us64+EIOqxsOucrO2VmOqyjA==",
+          "views": 104,
+          "answers": 4,
+          "askedAt": "2026.08.02"
+        },
+        {
+          "title": "임금체불이 석 달째이고 연말정산 환급금도 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60802&docId=495708122&answerNo=1&qb=67O06rSAIOydtOqygyDslYzrqbQg64us64+EIOqxsOucrO2VmOqyjA==",
+          "views": 16,
+          "answers": 1,
+          "askedAt": "2026.10.26"
+        }
+      ]
+    },
+    {
+      "id": "9179f31e1f780c08",
+      "urls": [
+        "https://best-shop.sailing-blog.click/68"
+      ],
+      "guide": {
+        "direction": "검색자는 지도 앱을 켜기 전 \"장뜰시장이 몇 시까지 열리는지, 차 댈 데가 있는지\"를 알고 싶어 글을 찾는다. 고수 글 제목은 이 두 가지를 다루겠다고 했지만 본문 근거 자료엔 정확한 영업시간·주차 면수가 없어 확인이 필요한 상태다. 이 글은 영업시간·주차 위치·정기휴무일을 표로 정리하고 인근 맛집·카페까지 묶어 방문 전 궁금증을 한 번에 끝낸다.",
+        "searchTargets": [
+          "충북 증평 지도",
+          "충북 증평 맛집 추천",
+          "충북 증평군 맛집",
+          "충북 증평 카페"
+        ],
+        "mustInclude": [
+          "장뜰시장 영업시간(확인 필요: 증평군청 홈페이지·전통시장 통합관리시스템)",
+          "주차장 위치·수용 규모(확인 필요: 증평군청 공지)",
+          "증평읍사무소~선경아파트 인근 접근 경로(지식인 자료 기준)",
+          "인근 맛집·카페 연계 정보(자동완성 수요 기준)"
+        ],
+        "mustAvoid": [
+          "괴산·청주 육거리시장 등 인근 다른 전통시장과 혼동해 정보 뒤섞기",
+          "향토유적(문화재) 위치 설명을 시장 운영 정보인 것처럼 섞어 쓰기"
+        ],
+        "checkBefore": [
+          "증평군청 또는 전통시장 통합관리시스템에서 실제 영업시간·휴무일 확인",
+          "현장 주차장 유무·위치는 지도 서비스 또는 상인회 문의로 확인"
+        ],
+        "solves": [
+          "장뜰시장 몇 시까지 하나 → 영업시간 확인 방법과 출처 안내",
+          "증평 장뜰시장 주차 되나 → 주차 가능 여부·위치 정리",
+          "증평 가서 뭐 먹지 → 인근 맛집·카페 연결 정보 제공"
+        ],
+        "actionTitles": [
+          "충북 증평 장뜰시장 영업시간·주차 정보 확인하는 법",
+          "증평 장뜰시장 가기 전 주차장 위치부터 확인하기"
+        ]
+      },
+      "at": "2026-11-04T20:53:36.042Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "증평군의 군지정 문화재",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=12161001&docId=209734320&answerNo=1&qb=7Lap67aBIOymne2PiSDsnqXrnLDsi5zsnqU=",
+          "views": 4416,
+          "answers": 1,
+          "askedAt": "2014.10.27"
+        },
+        {
+          "title": "증평군의 향토유적",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=12161001&docId=142893013&answerNo=1&qb=7Lap67aBIOymne2PiSDsnqXrnLDsi5zsnqU=",
+          "views": 4088,
+          "answers": 1,
+          "askedAt": "2012.01.05"
+        },
+        {
+          "title": "충북 - 특색있는 전통시장.",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1216&docId=314287586&answerNo=1&qb=7Lap67aBIOymne2PiSDsnqXrnLDsi5zsnqU=",
+          "views": 1485,
+          "answers": 1,
+          "askedAt": "2018.11.13"
+        }
+      ]
     }
   ],
   "misses": [
@@ -69684,6 +70044,14 @@
     {
       "id": "f36a30875d2865bd",
       "at": "2026-11-04T20:24:29.971Z"
+    },
+    {
+      "id": "23cb468814859895",
+      "at": "2026-11-04T20:53:35.315Z"
+    },
+    {
+      "id": "6d14c51551cdf359",
+      "at": "2026-11-04T20:53:35.315Z"
     }
   ]
 }
