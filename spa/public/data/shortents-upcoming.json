@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T08:55:44.040Z",
+ "builtAt": "2026-11-04T09:05:48.999Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,49 +8,177 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "홍콩 ELS 과징금",
+   "keyword": "홍콩 ELS 과징금 확정",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 67,
+   "recent20": 7,
+   "press": 66,
+   "firstArticleAt": "2026-11-04T07:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "KB국민·하나·신한은행, ELS 제재 확정…경영 불확실성 해소",
+     "press": "sateconomy.co.kr",
+     "publishedAt": "2026-11-04T09:04:00.000Z",
+     "link": "http://sateconomy.co.kr/news/view/1065603687597666"
+    },
+    {
+     "title": "홍콩 ELS 부담 덜었다…과징금 대폭 감경에 은행권 환입 효과 기대",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-04T09:02:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261104010001721"
+    },
+    {
+     "title": "홍콩 ELS 6개 증권사 제재 109억원 확정…과징금 93억원",
+     "press": "sateconomy.co.kr",
+     "publishedAt": "2026-11-04T09:00:00.000Z",
+     "link": "https://sateconomy.co.kr/news/view/1065600082948082"
+    }
+   ]
+  },
+  {
+   "keyword": "SK SK에코플랜트 공개매수",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 49,
+   "recent20": 21,
+   "press": 48,
+   "firstArticleAt": "2026-11-04T08:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "SK㈜, SK에코플랜트 상장 대신 완전 자회사화 추진…'8만8000원' 공개매수",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-04T09:04:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=901964"
+    },
+    {
+     "title": "SK(주), 에코플랜트 상장 대신 완전 자회사화···주당 8만8000원 공개매...",
+     "press": "pointdaily.co.kr",
+     "publishedAt": "2026-11-04T09:04:00.000Z",
+     "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=324832"
+    },
+    {
+     "title": "SK, SK에코플랜트 IPO 대신 완전 자회사화…1.4조 투입",
+     "press": "dealsite.co.kr",
+     "publishedAt": "2026-11-04T09:02:00.000Z",
+     "link": "https://dealsite.co.kr/articles/172109"
+    }
+   ]
+  },
+  {
+   "keyword": "조작기소 특검법 통과",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 35,
+   "recent20": 10,
+   "press": 32,
+   "firstArticleAt": "2026-11-04T07:37:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "與 강행 ‘조작기소 특검법’, 수사 대상 절반이 李대통령 관련 사건",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-04T09:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202637?sid=102"
+    },
+    {
+     "title": "검사 수사권 없앴는데 ‘조작 기소 특검’엔 예외 조항…법무부도 ‘난...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-04T09:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002830712?sid=102"
+    },
+    {
+     "title": "국회 처리 앞둔 조작기소 특검법…수사대상 확대·공소취소 배제",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-04T09:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016422216?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "공공재개발 이재명 대통령",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 34,
+   "recent20": 12,
+   "press": 27,
+   "firstArticleAt": "2026-11-04T07:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이 대통령, 공공재개발 현장 방문…“주택 공급 속도 높여야”",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-04T09:02:00.000Z",
+     "link": "https://www.viva100.com/article/20261104501424"
+    },
+    {
+     "title": "장위뉴타운 찾은 李 \"공공재개발이 확실히 유효성 있어\"",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-04T09:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005759122?sid=100"
+    },
+    {
+     "title": "李 대통령 “2022년 인허가 급감에 주택 공급절벽”…재개발 등 신속추...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-04T09:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005759120?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "코스피 하락 전환",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 99,
-   "recent20": 10,
-   "press": 93,
-   "firstArticleAt": "2026-11-04T07:26:00.000Z",
+   "articles90": 25,
+   "recent20": 6,
+   "press": 25,
+   "firstArticleAt": "2026-11-04T07:38:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "홍콩 ELS 사태 3746억 역대 최대 금전 제재···은행은 국민·증권은 한...",
-     "press": "womaneconomy.co.kr",
-     "publishedAt": "2026-11-04T08:50:00.000Z",
-     "link": "https://www.womaneconomy.co.kr/news/articleView.html?idxno=260680"
+     "title": "美 '민주당 돌풍'에 코스피 요동…등락 끝 0.62% 상승 마감",
+     "press": "delighti.co.kr",
+     "publishedAt": "2026-11-04T09:04:00.000Z",
+     "link": "https://www.delighti.co.kr/news/articleView.html?idxno=124388"
     },
     {
-     "title": "금융위, 홍콩 ELS 불완전판매 은행·증권사에 과징금 3746억 부과 최종 ...",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-04T08:46:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=451172"
+     "title": "코스피 아침 +3%, 낮 -4%…미 중간선거 개표 중 변동성 극심",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-04T09:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002830710?sid=101"
     },
     {
-     "title": "홍콩ELS 불완전판매 과징금 3,746억원…역대 최대",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-04T08:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001271664?sid=101"
+     "title": "[마감시황] 코스피, 4% 급락 딛고 V자 반등...외국인 투매 버틴 코스피",
+     "press": "junggi.co.kr",
+     "publishedAt": "2026-11-04T09:00:00.000Z",
+     "link": "https://www.junggi.co.kr/news/articleView.html?idxno=38369"
     }
    ]
   },
   {
    "keyword": "대통령의 유튜브 소통",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 31,
-   "recent20": 4,
-   "press": 31,
-   "firstArticleAt": "2026-11-04T07:28:00.000Z",
+   "articles90": 23,
+   "recent20": 0,
+   "press": 23,
+   "firstArticleAt": "2026-11-04T07:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -61,42 +189,74 @@
      "link": "https://n.news.naver.com/mnews/article/009/0005759088?sid=100"
     },
     {
-     "title": "이재명 대통령, 유튜브 '대통령의 Y'로 국민과 소통한다",
-     "press": "korea.kr",
-     "publishedAt": "2026-11-04T08:40:00.000Z",
-     "link": "https://www.korea.kr/news/policyNewsView.do?newsId=148975035&call_from=naver_news"
-    },
-    {
      "title": "‘Why’에 답하겠다…李대통령, 유튜브 ‘대통령의 Y’ 출격",
      "press": "asiatime.co.kr",
      "publishedAt": "2026-11-04T08:40:00.000Z",
      "link": "https://www.asiatime.co.kr/article/20261104500408"
+    },
+    {
+     "title": "이재명 대통령, 유튜브 '대통령의 Y'로 국민과 소통한다",
+     "press": "korea.kr",
+     "publishedAt": "2026-11-04T08:40:00.000Z",
+     "link": "https://www.korea.kr/news/policyNewsView.do?newsId=148975035&call_from=naver_news"
     }
    ]
   },
   {
-   "keyword": "코스피 코스닥 상승",
+   "keyword": "윤석열 선거법 2심 선고",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 31,
+   "articles90": 21,
    "recent20": 3,
-   "press": 29,
-   "firstArticleAt": "2026-11-04T07:27:00.000Z",
-   "exclusive": true,
+   "press": 19,
+   "firstArticleAt": "2026-11-04T07:42:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "['클릭' 증시] 美 개표 속보에 일희일비한 코스피",
-     "press": "00news.co.kr",
-     "publishedAt": "2026-11-04T08:44:00.000Z",
-     "link": "http://www.00news.co.kr/news/articleView.html?idxno=107734"
+     "title": "尹 선거법 2심 유죄에 민주당 \"국민의힘, 397억 반환하라\"",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-04T09:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003151411?sid=100"
     },
     {
-     "title": "[메가이슈분석] 증권사 13곳이 본 2027년 경제·증시·채권…코스피 1만...",
-     "press": "megaeconomy.co.kr",
-     "publishedAt": "2026-11-04T08:40:00.000Z",
-     "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065601019716525"
+     "title": "‘항소기각’에 굳은 표정으로 재판부 응시한 윤석열…지지자들 “빨갱...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-04T08:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002830705?sid=102"
+    },
+    {
+     "title": "'윤석열 입'에 국힘 397억 토해내나…이르면 내년 2월 대법 확정",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-04T08:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006403752?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "코스닥 상승 마감",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 14,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-04T07:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美 '민주당 돌풍'에 코스피 요동…등락 끝 0.62% 상승 마감",
+     "press": "delighti.co.kr",
+     "publishedAt": "2026-11-04T09:04:00.000Z",
+     "link": "https://www.delighti.co.kr/news/articleView.html?idxno=124388"
+    },
+    {
+     "title": "외국인 2조5000억원 팔아도 코스피 반등…0.62% 상승 마감",
+     "press": "industrynews.co.kr",
+     "publishedAt": "2026-11-04T08:58:00.000Z",
+     "link": "https://www.industrynews.co.kr/news/articleView.html?idxno=88908"
     },
     {
      "title": "코스피, 막판 반등해 5680선 마감…美 중간선거에 출렁",
@@ -107,105 +267,73 @@
    ]
   },
   {
-   "keyword": "윤석열 선거법 집행유예",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 28,
-   "recent20": 3,
-   "press": 22,
-   "firstArticleAt": "2026-11-04T07:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'윤석열 입'에 국힘 397억 토해내나…이르면 내년 2월 대법 확정",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-04T08:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006403752?sid=102"
-    },
-    {
-     "title": "尹 선거법 항소심도 당선무효형… 대법 확정 땐 국힘 397억원 반환",
-     "press": "segye.com",
-     "publishedAt": "2026-11-04T08:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004172508?sid=102"
-    },
-    {
-     "title": "국힘, 397억원 반환해야 할 판…윤석열, 선거법 2심도 당선무효형",
-     "press": "newsverse.kr",
-     "publishedAt": "2026-11-04T08:38:00.000Z",
-     "link": "https://www.newsverse.kr/news/articleView.html?idxno=11844"
-    }
-   ]
-  },
-  {
    "keyword": "할인",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 8,
+   "articles90": 9,
    "recent20": 5,
-   "press": 8,
-   "firstArticleAt": "2026-11-04T08:05:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-04T08:18:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
+    {
+     "title": "NH농협카드, 알리익스프레스·중국 청도서 할인 프로모션",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-04T09:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014301929?sid=101"
+    },
+    {
+     "title": "농협카드, ‘광군제·블랙프라이데이’ 중국 특화 대규모 할인 프로모션",
+     "press": "nongmin.com",
+     "publishedAt": "2026-11-04T08:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/662/0000107672?sid=101"
+    },
     {
      "title": "롯데마트, 메가통큰 2주차 할인…수입 돼지고기 물량 60% 확대",
      "press": "newslock.co.kr",
      "publishedAt": "2026-11-04T08:54:00.000Z",
      "link": "http://www.newslock.co.kr/news/articleView.html?idxno=139370"
-    },
-    {
-     "title": "충북농협, 오이 할인 판매로 농가 판로 지원",
-     "press": "ccdailynews.com",
-     "publishedAt": "2026-11-04T08:52:00.000Z",
-     "link": "https://www.ccdailynews.com/news/articleView.html?idxno=2449770"
-    },
-    {
-     "title": "홈플러스, 5~11일 신선식품·생필품 할인 행사",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-04T08:48:00.000Z",
-     "link": "http://www.breaknews.com/1248424"
     }
    ]
   },
   {
-   "keyword": "정하연 별세 애도",
+   "keyword": "위험성평가 과태료 강화",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T07:28:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T07:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "채시라 “또 한분의 거장 가셨다”…故최불암 이어 故정하연 작가 애도",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-04T08:16:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000519121"
+     "title": "위험성평가 위반 내년부터 최대 1000만원 과태료…충청권 제조업 대응 ...",
+     "press": "cctoday.co.kr",
+     "publishedAt": "2026-11-04T09:00:00.000Z",
+     "link": "https://www.cctoday.co.kr/news/articleView.html?idxno=2239648"
     },
     {
-     "title": "故 최불암 이어…채시라, 故 정하연 별세에 \"또 한 분의 거장 가셔\"",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-04T07:58:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109727248158"
+     "title": "내년부터 위험성평가 안 하면 과태료 최대 1000만원",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-04T07:48:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3445963"
     },
     {
-     "title": "채시라, ‘사극대가’ 故 정하연 작가 추모…“또 한분의 거장이 가셨다...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-04T07:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001146117"
+     "title": "위험성평가 미실시 과태료 최대 1000만 원",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-04T07:48:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1191205"
     }
    ]
   },
   {
    "keyword": "이스타항공",
    "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 3,
@@ -234,14 +362,65 @@
      "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=324816"
     }
    ]
+  },
+  {
+   "keyword": "정하연 별세 애도",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T07:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "채시라 “또 한분의 거장 가셨다”…故최불암 이어 故정하연 작가 애도",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-04T08:16:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000519121"
+    },
+    {
+     "title": "故 최불암 이어…채시라, 故 정하연 별세에 \"또 한 분의 거장 가셔\"",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-04T07:58:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109727248158"
+    },
+    {
+     "title": "채시라, ‘사극대가’ 故 정하연 작가 추모…“또 한분의 거장이 가셨다...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-04T07:38:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001146117"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 673,
-  "matched": 279,
-  "avgLeadMin": 280,
+  "flagged": 676,
+  "matched": 282,
+  "avgLeadMin": 286,
   "recent": [
+   {
+    "keyword": "2026 미래경제포럼 축사하는",
+    "hitKeyword": "최동원 2026 영웅 선정",
+    "hitAt": "2026-11-04T18:00:00+09:00",
+    "leadMin": 1574
+   },
+   {
+    "keyword": "돌싱 n 모솔",
+    "hitKeyword": "돌싱N모솔 2기",
+    "hitAt": "2026-11-04T18:00:00+09:00",
+    "leadMin": 1041
+   },
+   {
+    "keyword": "민주당 상하원 탈환",
+    "hitKeyword": "미국 중간선거 민주당",
+    "hitAt": "2026-11-04T18:00:00+09:00",
+    "leadMin": 24
+   },
    {
     "keyword": "글렌체크 김준원 아내 소속사",
     "hitKeyword": "차예련 소속사 입장",
@@ -283,24 +462,6 @@
     "hitKeyword": "야마구치 코리아오픈 16강",
     "hitAt": "2026-11-04T17:00:00+09:00",
     "leadMin": 15
-   },
-   {
-    "keyword": "차예련 소속사 허위사실 강력대응",
-    "hitKeyword": "차예련 학폭 의혹",
-    "hitAt": "2026-11-04T16:30:00+09:00",
-    "leadMin": 106
-   },
-   {
-    "keyword": "전지윤 비연예인과 결혼",
-    "hitKeyword": "전지윤 결혼",
-    "hitAt": "2026-11-04T16:30:00+09:00",
-    "leadMin": 86
-   },
-   {
-    "keyword": "전지윤 11월 결혼",
-    "hitKeyword": "전지윤 결혼",
-    "hitAt": "2026-11-04T16:30:00+09:00",
-    "leadMin": 65
    }
   ]
  }
