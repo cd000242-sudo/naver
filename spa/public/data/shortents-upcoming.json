@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T22:02:09.413Z",
+ "builtAt": "2026-11-04T22:12:12.716Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 29,
  "candidates": [
   {
    "keyword": "뉴욕증시 급등",
    "sources": [
     "daum"
    ],
-   "articles90": 41,
-   "recent20": 13,
-   "press": 34,
-   "firstArticleAt": "2026-11-04T20:36:00.000Z",
+   "articles90": 44,
+   "recent20": 7,
+   "press": 38,
+   "firstArticleAt": "2026-11-04T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美선거 끝나자 뉴욕증시 급등…국제유가는 폭락",
-     "press": "busan.com",
-     "publishedAt": "2026-11-04T22:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001405732?sid=104"
+     "title": "뉴욕증시 美 중간선거 '트럼프 참패'에 급등…다우 3%넘게↑",
+     "press": "getnews.co.kr",
+     "publishedAt": "2026-11-04T22:10:00.000Z",
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=886062"
     },
     {
-     "title": "[뉴욕증시] '블루 웨이브' 의미 확실히 보여줬다…필리 3.1%↓",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-04T22:00:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443098"
+     "title": "미국 중간선거 이후 불확실성 개선 기대감에 뉴욕 증시 급등",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-04T22:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002428496?sid=104"
     },
     {
-     "title": "뉴욕증시, 민주당 중간선거 압승에 일제히 상승…다우 3% 급등",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-04T21:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000548888?sid=104"
+     "title": "트럼프 패배 인정에 뉴욕다우 1500달러 급등…AI주는 희비",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-04T22:04:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261105500009"
     }
    ]
   },
@@ -49,28 +49,28 @@
    ],
    "articles90": 27,
    "recent20": 5,
-   "press": 24,
-   "firstArticleAt": "2026-11-04T20:33:00.000Z",
+   "press": 25,
+   "firstArticleAt": "2026-11-04T20:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美선거 끝나자 뉴욕증시 급등…국제유가는 폭락",
-     "press": "busan.com",
-     "publishedAt": "2026-11-04T22:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001405732?sid=104"
+     "title": "나스닥 1.4% 상승에도 반도체주 급락… AI 규제 우려",
+     "press": "it.chosun.com",
+     "publishedAt": "2026-11-04T22:10:00.000Z",
+     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000000287"
     },
     {
-     "title": "국제유가 8% 급락…블루 웨이브에 종전 기대감 커져 [글로벌 머니플로우...",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-04T21:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001271706?sid=101"
+     "title": "美 증시, 민주당 압승·유가 급락에 3대 지수 동반 상승",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-04T22:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003151471?sid=104"
     },
     {
-     "title": "뉴욕증시 급등 마감…다우 1,569포인트 상승·국제유가 8%대 급락",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-04T21:50:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=93088"
+     "title": "국제유가, 미 민주당 압승에 폭락...브렌트유 8.7%↓",
+     "press": "womennews.co.kr",
+     "publishedAt": "2026-11-04T22:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/310/0000141457?sid=104"
     }
    ]
   },
@@ -87,16 +87,16 @@
    "capped": false,
    "samples": [
     {
-     "title": "[오늘의 운세] 2026년 11월 5일 (목) 띠별운세 '입동을 앞두고 채비하자...",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-04T21:36:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103971"
-    },
-    {
      "title": "[오늘의 운세] 5일 목요일 나의 운세는?",
      "press": "ggilbo.com",
      "publishedAt": "2026-11-04T21:36:00.000Z",
      "link": "https://www.ggilbo.com/news/articleView.html?idxno=1190366"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 5일 (목) 띠별운세 '입동을 앞두고 채비하자...",
+     "press": "dailypop.kr",
+     "publishedAt": "2026-11-04T21:36:00.000Z",
+     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103971"
     },
     {
      "title": "[오늘의 운세] 2026년 11월 5일 별자리 운세",
@@ -107,17 +107,23 @@
    ]
   },
   {
-   "keyword": "연장 12회 승리",
+   "keyword": "삼성, 연장 혈투 3-2 승리",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-04T20:41:00.000Z",
+   "firstArticleAt": "2026-11-04T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "삼성, 연장 12회 끝에 환호…kt 꺾고 한국시리즈 1승 1패",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-04T22:02:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=779054"
+    },
     {
      "title": "‘실책이 가른 승부’…삼성, 연장 4시간 20분 혈투 끝 승리",
      "press": "news.kbs.co.kr",
@@ -125,49 +131,10 @@
      "link": "https://m.sports.naver.com/kbaseball/article/056/0012287633"
     },
     {
-     "title": "'수비 빼면 만점 활약' 삼성 디아즈, 방망이와 발로 승리 기여...경기 후...",
-     "press": "thesportstimes.co.kr",
-     "publishedAt": "2026-11-04T21:43:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/472/0000042287"
-    },
-    {
-     "title": "“심장 내려앉는 줄…10년 늙은 기분” 155km 강속구로 1점 차 승리 지킨...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-04T21:41:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/109/0005634994"
-    }
-   ]
-  },
-  {
-   "keyword": "비트코인",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T20:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "공화당 참패에도 비트코인 반등…8만달러 회복",
-     "press": "kbmaeil.com",
-     "publishedAt": "2026-11-04T21:56:00.000Z",
-     "link": "https://www.kbmaeil.com/article/20261105500006"
-    },
-    {
-     "title": "비트코인 AI 점검서 취약점 후보 1만건 넘게 나왔다",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-04T21:44:00.000Z",
-     "link": "https://www.tokenpost.kr/news/blockchain/432895"
-    },
-    {
-     "title": "비트코인 숏, 2889억6000만원어치 1시간 내 청산됐다",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-04T21:30:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/432891"
+     "title": "'무릎에 사구 → 견제 → 홈으로 폭풍질주' 삼성의 돌격대장 \"그래 어디...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-04T21:31:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/076/0004463407"
     }
    ]
   },
@@ -176,13 +143,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-04T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "서인영, 12월 26일 재혼한다…\"쥬얼리·린도 결혼식 참석\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-04T22:04:00.000Z",
+     "link": "https://www.ajunews.com/view/20261105065416596"
+    },
     {
      "title": "서인영, 12월 26일 사업가와 파격 결혼식 선언-다 뺐다",
      "press": "mediafine.co.kr",
@@ -194,22 +167,94 @@
      "press": "bntnews.co.kr",
      "publishedAt": "2026-11-04T21:08:00.000Z",
      "link": "https://www.bntnews.co.kr/article/view/bnt202611050004"
+    }
+   ]
+  },
+  {
+   "keyword": "비트코인",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 11,
+   "recent20": 4,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T20:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "비트코인 1만599개 매각해 데이터센터 개발 재원 마련한 라이엇 플랫폼...",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-04T22:06:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/432905"
     },
     {
-     "title": "\"신혼집 샀다, 가전제품 협찬 좀\"..서인영, NP 최지훈 대표와 12월 '스몰...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-04T21:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003484801"
+     "title": "비트코인 8만달러 돌파…바이낸스 현물 8만164달러",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-04T22:04:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/432904"
+    },
+    {
+     "title": "비트코인(BTC), 반등해도 부담...\"ETF 10억 달러 유출이 문제\"",
+     "press": "coinreaders.com",
+     "publishedAt": "2026-11-04T22:02:00.000Z",
+     "link": "http://coinreaders.com/267604"
+    }
+   ]
+  },
+  {
+   "keyword": "자동차",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-04T20:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "원주 자동차전용도로서 역주행 차량 충돌…운전자 병원 이송",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-04T21:48:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3742711"
+    },
+    {
+     "title": "[브랜드평판] 삼성, 대기업집단 11월 1위.... 현대자동차, KT 뒤쫓아",
+     "press": "enetnews.co.kr",
+     "publishedAt": "2026-11-04T20:48:00.000Z",
+     "link": "https://www.enetnews.co.kr/news/articleView.html?idxno=56021"
+    },
+    {
+     "title": "[브랜드평판] 삼성 이재용, CEO 11월 1위... 현대자동차 정의선, 한화 김...",
+     "press": "enetnews.co.kr",
+     "publishedAt": "2026-11-04T20:48:00.000Z",
+     "link": "https://www.enetnews.co.kr/news/articleView.html?idxno=56020"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 805,
-  "matched": 350,
-  "avgLeadMin": 315,
+  "flagged": 807,
+  "matched": 352,
+  "avgLeadMin": 314,
   "recent": [
+   {
+    "keyword": "주가",
+    "hitKeyword": "삼전닉스 주가 폭락",
+    "hitAt": "2026-11-05T07:00:00+09:00",
+    "leadMin": 58
+   },
+   {
+    "keyword": "서인영 재혼",
+    "hitKeyword": "서인영 12월 결혼",
+    "hitAt": "2026-11-05T07:00:00+09:00",
+    "leadMin": 8
+   },
    {
     "keyword": "호반그룹",
     "hitKeyword": "호반그룹 한진칼 최대주주",
@@ -257,18 +302,6 @@
     "hitKeyword": "민주당 상하원 압승",
     "hitAt": "2026-11-05T06:30:00+09:00",
     "leadMin": 209
-   },
-   {
-    "keyword": "mls",
-    "hitKeyword": "손흥민 MLS 유니폼",
-    "hitAt": "2026-11-05T06:00:00+09:00",
-    "leadMin": 3885
-   },
-   {
-    "keyword": "뮌헨 아틀레티코 승리",
-    "hitKeyword": "바이에른 아틀레티코",
-    "hitAt": "2026-11-05T06:00:00+09:00",
-    "leadMin": 1278
    }
   ]
  }
