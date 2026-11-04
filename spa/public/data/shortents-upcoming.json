@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T22:22:16.165Z",
+ "builtAt": "2026-11-04T22:32:19.921Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,70 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "뉴욕증시 급등",
    "sources": [
     "daum"
    ],
-   "articles90": 52,
-   "recent20": 10,
-   "press": 45,
-   "firstArticleAt": "2026-11-04T21:00:00.000Z",
+   "articles90": 61,
+   "recent20": 15,
+   "press": 53,
+   "firstArticleAt": "2026-11-04T21:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美 중간선거 불확실성 걷히자 뉴욕증시 급등…다우 3%↑",
-     "press": "the-today.com",
-     "publishedAt": "2026-11-04T22:18:00.000Z",
-     "link": "https://www.the-today.com/news/articleView.html?idxno=93070"
+     "title": "뉴욕증시, 민주당 압승에 선거불확실성 해소에 급등세⋯애플 5%대, MS 6%...",
+     "press": "econonews.co.kr",
+     "publishedAt": "2026-11-04T22:30:00.000Z",
+     "link": "http://www.econonews.co.kr/news/articleView.html?idxno=446741"
     },
     {
-     "title": "뉴욕증시, 미 민주당 압승에 급등…다우존스, 19개월 만에 최대 상승",
-     "press": "womennews.co.kr",
-     "publishedAt": "2026-11-04T22:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/310/0000141458?sid=104"
+     "title": "[오늘의 이슈]민주당 미 의회 장악에 다우 3% 급등…반도체는 약세",
+     "press": "newskr.kr",
+     "publishedAt": "2026-11-04T22:30:00.000Z",
+     "link": "http://www.newskr.kr/news/articleView.html?idxno=107715"
     },
     {
-     "title": "중간선거 끝나자 뉴욕증시 급등…다우 3%↑",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-04T22:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001976756?sid=104"
+     "title": "美 중간선거 끝나자 뉴욕증시 급등…다우 3% 올라 5만3000선 회복",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-04T22:29:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000079762"
     }
    ]
   },
   {
    "keyword": "민주당 압승에 급등!",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 33,
-   "recent20": 4,
-   "press": 29,
-   "firstArticleAt": "2026-11-04T21:00:00.000Z",
+   "articles90": 37,
+   "recent20": 7,
+   "press": 32,
+   "firstArticleAt": "2026-11-04T21:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "뉴욕증시, 미 민주당 압승에 급등…다우존스, 19개월 만에 최대 상승",
-     "press": "womennews.co.kr",
-     "publishedAt": "2026-11-04T22:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/310/0000141458?sid=104"
+     "title": "뉴욕증시, 민주당 압승에 선거불확실성 해소에 급등세⋯애플 5%대, MS 6%...",
+     "press": "econonews.co.kr",
+     "publishedAt": "2026-11-04T22:30:00.000Z",
+     "link": "http://www.econonews.co.kr/news/articleView.html?idxno=446741"
     },
     {
-     "title": "뉴욕증시,美 중간선거 민주당 압승에 급등 다우지수 3.3%↑…국제유가 ...",
-     "press": "public25.com",
-     "publishedAt": "2026-11-04T22:14:00.000Z",
-     "link": "https://www.public25.com/news/articleView.html?idxno=57913"
+     "title": "美민주당 압승에 국제유가 8%대 급락, 뉴욕증시 급등",
+     "press": "donga.com",
+     "publishedAt": "2026-11-04T22:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003760238?sid=104"
     },
     {
-     "title": "미국증시 다우 1,569포인트 급등…민주당 승리·유가 폭락에 환호, 반도...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-04T22:08:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16268646"
+     "title": "[채권/외환] 민주당 중간선거 압승에 국채 금리·달러 동반 하락",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-04T22:24:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261105000039"
     }
    ]
   },
@@ -79,10 +80,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 9,
+   "articles90": 5,
    "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-04T20:54:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-04T21:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,55 +108,17 @@
    ]
   },
   {
-   "keyword": "삼성, 연장 혈투 3-2 승리",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-04T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "1점 차 승부에 연장 12회까지…어제 KT·삼성 2차전서 벌어진 일",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-04T22:18:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1171942"
-    },
-    {
-     "title": "삼성, 연장 12회 끝에 환호…kt 꺾고 한국시리즈 1승 1패",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-04T22:02:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=779054"
-    },
-    {
-     "title": "‘실책이 가른 승부’…삼성, 연장 4시간 20분 혈투 끝 승리",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-04T21:47:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/056/0012287633"
-    }
-   ]
-  },
-  {
    "keyword": "2026년 11월 5일 운세",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 3,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-04T21:00:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-04T21:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "[오늘의 운세] 2026년 11월 5일 (목) 띠별운세 '입동을 앞두고 채비하자...",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-04T21:36:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103971"
-    },
     {
      "title": "[오늘의 운세] 5일 목요일 나의 운세는?",
      "press": "ggilbo.com",
@@ -163,75 +126,16 @@
      "link": "https://www.ggilbo.com/news/articleView.html?idxno=1190366"
     },
     {
+     "title": "[오늘의 운세] 2026년 11월 5일 (목) 띠별운세 '입동을 앞두고 채비하자...",
+     "press": "dailypop.kr",
+     "publishedAt": "2026-11-04T21:36:00.000Z",
+     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103971"
+    },
+    {
      "title": "[오늘의 운세] 2026년 11월 5일 별자리 운세",
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-04T21:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006403892?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "최지훈 대표와 결혼식",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-04T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "서인영, 초호화 '1억 결혼식'은 옛말…12월 재혼엔 \"꽃도 축가도 뺐어\" ...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-04T22:20:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002076923"
-    },
-    {
-     "title": "서인영, 12월 26일 재혼한다…\"쥬얼리·린도 결혼식 참석\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-04T22:04:00.000Z",
-     "link": "https://www.ajunews.com/view/20261105065416596"
-    },
-    {
-     "title": "서인영, 12월 26일 사업가와 파격 결혼식 선언-다 뺐다",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-04T21:28:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=94559"
-    }
-   ]
-  },
-  {
-   "keyword": "비트코인",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 11,
-   "recent20": 3,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T20:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "코인 동반 반등…비트코인 3%·이더리움 5.4% 상승",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-04T22:18:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2644297"
-    },
-    {
-     "title": "비트코인 1만599개 매각해 데이터센터 개발 재원 마련한 라이엇 플랫폼...",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-04T22:06:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/432905"
-    },
-    {
-     "title": "비트코인 8만달러 돌파…바이낸스 현물 8만164달러",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-04T22:04:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/432904"
     }
    ]
   }
