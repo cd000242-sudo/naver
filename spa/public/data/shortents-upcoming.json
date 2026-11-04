@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T20:11:28.303Z",
+ "builtAt": "2026-11-04T20:21:31.524Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "조작기소 특검법 법사위 통과",
@@ -16,13 +16,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 2,
-   "press": 3,
+   "press": 4,
    "firstArticleAt": "2026-11-04T19:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[사설] 수사·기소 분리해 놓고… '조작기소 특검' 강행 이중성",
+     "press": "busan.com",
+     "publishedAt": "2026-11-04T20:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001405731?sid=110"
+    },
     {
      "title": "與 ‘조작기소 특검법’ 강행… 공소 취소 조항은 삭제",
      "press": "seoul.co.kr",
@@ -34,25 +40,18 @@
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-04T20:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004206631?sid=100"
-    },
-    {
-     "title": "與, ‘조작기소 특검법’ 법사위 소위→전체회의 하루에 일방 처리",
-     "press": "donga.com",
-     "publishedAt": "2026-11-04T19:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003760164?sid=100"
     }
    ]
   },
   {
-   "keyword": "삼성, 연장 12회 접전 승리",
+   "keyword": "삼성, 연장 12회 승리",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T18:42:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-04T19:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -63,16 +62,16 @@
      "link": "https://m.sports.naver.com/general/article/422/0000922989"
     },
     {
-     "title": "4시간 21분 연장 혈투, 실책이 갈랐다",
-     "press": "donga.com",
-     "publishedAt": "2026-11-04T19:32:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/020/0003760161"
+     "title": "10일 동안 295개 던진 페덱…삼성의 가을야구에 파란 물들이다[김대호의...",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-04T19:45:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/629/0000548884"
     },
     {
-     "title": "[야구] KT, 삼성에 2-3 아쉬운 역전패…'12회 뼈아픈 실책 하나' 시리즈...",
-     "press": "suwonilbo.kr",
-     "publishedAt": "2026-11-04T18:42:00.000Z",
-     "link": "https://www.suwonilbo.kr/view.html?id=L2611050327317bd7"
+     "title": "20세 영건 배찬승, 30세 될뻔했다? 연장 12회말 대체 어떻게 막았나…\"심...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-04T19:33:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/477/0000637305"
     }
    ]
   }
