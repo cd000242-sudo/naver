@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T03:13:11.738Z",
+ "builtAt": "2026-11-04T03:23:16.366Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,66 @@
  "measured": 25,
  "candidates": [
   {
-   "keyword": "특검, 선관위 압수수색",
+   "keyword": "조작기소 특검법 상정",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 36,
-   "recent20": 13,
-   "press": 31,
-   "firstArticleAt": "2026-11-04T01:44:00.000Z",
+   "articles90": 48,
+   "recent20": 9,
+   "press": 35,
+   "firstArticleAt": "2026-11-04T01:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "특검, 중앙선관위 압수수색…459억 규모 용지 발급기 사업 의혹",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-04T03:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000548647?sid=102"
+     "title": "조작기소 특검 공방...야 \" 李 범죄 지우기\" 여 \"공소취소 억지\"",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-04T03:20:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/324091/?sc=Naver"
     },
     {
-     "title": "특검, 중앙선관위 투표록 위·변조 정황 포착…선관위 압수수색",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-04T03:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001228468?sid=102"
+     "title": "'조작기소 특검법' 법사위 상정에 국힘 퇴장...與, 5일 본회의 처리 예정",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-04T03:20:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=72573"
     },
     {
-     "title": "특검, '선관위 지시로 투표록 위·변조' 확인…중앙선관위 압수수색",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T03:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009269548?sid=102"
+     "title": "법사위, 與 주도 '조작기소 특검법' 상정…野 \"재판 거래\" 집단 퇴장",
+     "press": "hg-times.com",
+     "publishedAt": "2026-11-04T03:14:00.000Z",
+     "link": "https://www.hg-times.com/news/articleView.html?idxno=306724"
+    }
+   ]
+  },
+  {
+   "keyword": "가상자산 과세 유예 제안",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 33,
+   "recent20": 3,
+   "press": 33,
+   "firstArticleAt": "2026-11-04T01:56:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "민주당, 정부에 '가상자산 과세 유예' 공식 제안",
+     "press": "sisaweek.com",
+     "publishedAt": "2026-11-04T03:16:00.000Z",
+     "link": "https://www.sisaweek.com/news/articleView.html?idxno=238777"
+    },
+    {
+     "title": "[정책 해설] 가상자산 과세 재차 유예 제안…기본법 제정·적응기간 쟁...",
+     "press": "coinreaders.com",
+     "publishedAt": "2026-11-04T03:12:00.000Z",
+     "link": "http://coinreaders.com/267383"
+    },
+    {
+     "title": "김민석 대표, 정부에 '가상자산 과세유예' 공식제안…\"기업·투자자, 적...",
+     "press": "efnews.co.kr",
+     "publishedAt": "2026-11-04T03:04:00.000Z",
+     "link": "http://www.efnews.co.kr/news/articleView.html?idxno=133717"
     }
    ]
   },
@@ -48,30 +80,62 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 29,
-   "recent20": 0,
-   "press": 26,
-   "firstArticleAt": "2026-11-04T01:44:00.000Z",
+   "articles90": 24,
+   "recent20": 2,
+   "press": 23,
+   "firstArticleAt": "2026-11-04T01:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "최고위 불참한 최민희 \"김민석, 신천지 발언 말라 압박해\"",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-04T03:22:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3445825"
+    },
+    {
+     "title": "[포토] 최고위 참석하는 김민석·한병도",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-04T03:18:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/04/2026110400200.html"
+    },
     {
      "title": "「M포토」 최고위 참석하는 김민석 민주당 대표",
      "press": "m-economynews.com",
      "publishedAt": "2026-11-04T02:52:00.000Z",
      "link": "https://www.m-economynews.com/news/article.html?no=72568"
+    }
+   ]
+  },
+  {
+   "keyword": "대한민국 스포츠영웅 선정",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 14,
+   "recent20": 3,
+   "press": 14,
+   "firstArticleAt": "2026-11-04T01:57:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "故 최동원, 야구 선수 첫 대한민국 스포츠영웅 선정",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-04T03:22:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3445764"
     },
     {
-     "title": "친청계, 김민석 '신천지' 사과에 정당법 위반 조사 주장",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-04T02:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002534611?sid=100"
+     "title": "최동원, 그가 떠난지 15년 만에…대한체육회, 故 최동원 '2026 대한민국 ...",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-04T03:18:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1135083"
     },
     {
-     "title": "최민희 “김민석, ‘신천지 발언 말라’ 압박…발언 왜 막나” 반발",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-04T02:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000366352?sid=100"
+     "title": "'무쇠팔' 故 최동원, 2026 대한민국 스포츠영웅 선정",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-04T03:08:00.000Z",
+     "link": "https://www.ajunews.com/view/20261104120209796"
     }
    ]
   },
@@ -80,13 +144,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 21,
-   "recent20": 6,
-   "press": 20,
-   "firstArticleAt": "2026-11-04T01:44:00.000Z",
+   "articles90": 13,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-04T02:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "합참, 北 함남 선덕서 동해상으로 미사일 수발 발사…'몰아치기' 도발(...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-04T03:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005599248?sid=100"
+    },
     {
      "title": "합참, \"북, 동해상 미상 발사체 발사\"",
      "press": "news1.kr",
@@ -98,76 +168,6 @@
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-04T03:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006403493?sid=100"
-    },
-    {
-     "title": "[속보]합참 \"북한, 동해상으로 미상 발사체 발사\"",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-04T03:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001163203?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "SKT, 3분기 영업익 5523억 증가",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 16,
-   "recent20": 1,
-   "press": 16,
-   "firstArticleAt": "2026-11-04T01:47:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "통신사들, AI 날개달고 3분기 실적 ‘껑충’",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-04T02:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002830254?sid=101"
-    },
-    {
-     "title": "SKT, 해킹 충격 털고 실적 반등…통신·AI 쌍끌이 성장",
-     "press": "segyebiz.com",
-     "publishedAt": "2026-11-04T02:34:00.000Z",
-     "link": "http://www.segyebiz.com/newsView/20261104508798?OutUrl=naver"
-    },
-    {
-     "title": "SKT, 3분기 영업익 5523억…해킹 덮쳤던 전년보다 11배 넘게↑",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-04T02:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004206343?sid=105"
-    }
-   ]
-  },
-  {
-   "keyword": "대한민국 스포츠영웅 선정",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 15,
-   "recent20": 3,
-   "press": 15,
-   "firstArticleAt": "2026-11-04T01:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'무쇠팔' 故 최동원, 2026 대한민국 스포츠영웅 선정",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-04T03:08:00.000Z",
-     "link": "https://www.ajunews.com/view/20261104120209796"
-    },
-    {
-     "title": "한국 야구 전설 최동원, 2026 대한민국 스포츠영웅 선정",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-04T03:03:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/277/0005837952"
-    },
-    {
-     "title": "‘1984년 한국시리즈 4승 신화’ 故 최동원, 2026 대한민국 스포츠영웅 ...",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-04T02:54:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611040077"
     }
    ]
   },
@@ -177,10 +177,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 16,
-   "recent20": 1,
-   "press": 14,
-   "firstArticleAt": "2026-11-04T01:47:00.000Z",
+   "articles90": 14,
+   "recent20": 0,
+   "press": 12,
+   "firstArticleAt": "2026-11-04T02:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -205,14 +205,47 @@
    ]
   },
   {
+   "keyword": "SKT, 3분기 영업익 5523억 증가",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 12,
+   "recent20": 0,
+   "press": 12,
+   "firstArticleAt": "2026-11-04T01:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "통신사들, AI 날개달고 3분기 실적 ‘껑충’",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-04T02:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002830254?sid=101"
+    },
+    {
+     "title": "SKT, 해킹 충격 털고 실적 반등…통신·AI 쌍끌이 성장",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-04T02:34:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261104508798?OutUrl=naver"
+    },
+    {
+     "title": "SKT, 3분기 영업익 5523억…해킹 덮쳤던 전년보다 11배 넘게↑",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-04T02:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004206343?sid=105"
+    }
+   ]
+  },
+  {
    "keyword": "로보월드",
    "sources": [
     "google"
    ],
-   "articles90": 10,
+   "articles90": 7,
    "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-04T01:50:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-04T01:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -237,45 +270,77 @@
    ]
   },
   {
-   "keyword": "더 뉴 BMW 7시리즈 국내 출시",
+   "keyword": "미국 대선",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-04T01:54:00.000Z",
+   "articles90": 4,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-04T03:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"럭셔리 세단 왕좌 굳힌다\"…BMW, 확 달라진 7시리즈 출격",
-     "press": "dizzotv.com",
-     "publishedAt": "2026-11-04T02:38:00.000Z",
-     "link": "https://www.dizzotv.com/site/data/html_dir/2026/11/04/2026110480083.html"
+     "title": "\"공화당 텃밭 무너졌다\"…미국 최초 흑인 여성 주지사",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-04T03:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005350121?sid=104"
     },
     {
-     "title": "‘BMW 7시리즈’ 4년 만에 페이스리프트 출시…전기차는 508㎞ 달린다",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-04T02:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004007711?sid=101"
+     "title": "미국 중간선거 개표 초반…민주, 노스캐롤라이나 상원 탈환·조지아 수...",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-04T03:08:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261104010001508"
     },
     {
-     "title": "BMW, 부분변경 7시리즈 국내 출시…1억6190만원부터",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-04T02:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000548593?sid=103"
+     "title": "미국 중간선거 개표‥민주당, 노스캐롤라이나 탈환",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-04T03:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533450?sid=104"
     }
    ]
   },
   {
-   "keyword": "송중기",
+   "keyword": "예결위 인사말하는 한성숙",
    "sources": [
-    "google"
+    "nate"
    ],
    "articles90": 7,
-   "recent20": 1,
-   "press": 6,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-04T01:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국회 예결위, 인사말하는 한성숙 국무총리",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-04T02:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004206353?sid=100"
+    },
+    {
+     "title": "예결위 종합정책질의, 인사말하는 한성숙 총리",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-04T02:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004206355?sid=100"
+    },
+    {
+     "title": "국회 예결위 인사말하는 한성숙 총리",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-04T02:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003151160?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "송중기 케이티 가족 나들이",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 4,
    "firstArticleAt": "2026-11-04T02:02:00.000Z",
    "exclusive": false,
    "capped": false,
@@ -287,16 +352,16 @@
      "link": "http://www.celuvmedia.com/article.php?aid=1793759004530327005"
     },
     {
-     "title": "송중기, \"유아차 직접 끌어\" 가정적인 아빠 면모",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-04T02:52:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267942"
-    },
-    {
      "title": "\"송중기 선배님과 촬영 중\"..박지현, 이성민에게 전한 손자 근황",
      "press": "starnewskorea.com",
      "publishedAt": "2026-11-04T02:33:00.000Z",
      "link": "https://m.entertain.naver.com/article/108/0003484498"
+    },
+    {
+     "title": "송중기♥케이티, 두 자녀와 한강 산책 포착",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-04T02:22:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611040203"
     }
    ]
   },
@@ -306,7 +371,7 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-04T02:00:00.000Z",
    "exclusive": false,
@@ -331,11 +396,43 @@
      "link": "https://n.news.naver.com/mnews/article/056/0012286956?sid=104"
     }
    ]
+  },
+  {
+   "keyword": "us midterm elections",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 2,
+   "firstArticleAt": "2026-11-04T02:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "What Are Your Reactions to the Results of the 2026 Midterm Elections?",
+     "press": "nytimes.com",
+     "publishedAt": "2026-11-04T03:18:00.000Z",
+     "link": "https://www.nytimes.com/2026/11/03/learning/what-are-your-reactions-to-the-results-of-the-2026-midterm-elections.html?partner=naver"
+    },
+    {
+     "title": "USA ELECTIONS",
+     "press": null,
+     "publishedAt": "2026-11-04T03:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/091/0010358661?sid=104"
+    },
+    {
+     "title": "epaselect USA ELECTIONS",
+     "press": null,
+     "publishedAt": "2026-11-04T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/091/0010358645?sid=104"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 564,
+  "flagged": 570,
   "matched": 233,
   "avgLeadMin": 277,
   "recent": [
