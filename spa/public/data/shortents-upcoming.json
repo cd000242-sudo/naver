@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T06:44:42.826Z",
+ "builtAt": "2026-11-04T06:54:47.230Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,34 @@
  "measured": 28,
  "candidates": [
   {
-   "keyword": "윤석열 선거법 당선무효형",
+   "keyword": "윤석열 선거법 위반 2심",
    "sources": [
     "daum"
    ],
-   "articles90": 80,
-   "recent20": 7,
-   "press": 62,
-   "firstArticleAt": "2026-11-04T05:15:00.000Z",
+   "articles90": 71,
+   "recent20": 8,
+   "press": 46,
+   "firstArticleAt": "2026-11-04T05:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[뉴스특보] 尹 선거법 2심도 유죄…국힘 397억 반환 위기",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-04T06:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922843?sid=102"
+     "title": "범여, 윤석열 '선거법 2심 유죄'에 \"뻔뻔한 거짓말, 野 대가 치러야\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-04T06:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009270191?sid=100"
     },
     {
-     "title": "尹 선거법 위반 2심도 당선무효형…확정시 국힘 397억 반환",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-04T06:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003151317?sid=102"
+     "title": "尹 '국힘 397억 반환' 걸린 선거법 2심 당선무효형...法 \"엄단 필요\"",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-04T06:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002393332?sid=100"
     },
     {
-     "title": "'윤석열 선거법 위반' 2심도 당선 무효형…확정 시 국힘 397억 원 반환",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-04T06:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400623?sid=102"
+     "title": "국힘, 尹 2심 당선무효형에 397억 반환 위기…\"상급심 판단 지켜볼 것\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-04T06:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009270186?sid=100"
     }
    ]
   },
@@ -48,30 +48,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 54,
-   "recent20": 14,
-   "press": 47,
-   "firstArticleAt": "2026-11-04T05:15:00.000Z",
+   "articles90": 50,
+   "recent20": 10,
+   "press": 44,
+   "firstArticleAt": "2026-11-04T05:25:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "차예련, \"법적 대응 논의 없다\"더니 왜 달라졌나…골프장 갑질 의혹까지...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-04T06:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002076430"
+     "title": "차예련, 학폭 의혹 재차 부인…소속사 “허위사실 유포·인신공격 강경...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-04T06:53:00.000Z",
+     "link": "https://m.entertain.naver.com/article/022/0004172484"
     },
     {
-     "title": "차예련 측, 학폭 의혹에 재차 반박…\"가족까지 비난, 강력 조치 취할 것...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-04T06:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/119/0003151316"
+     "title": "“가족까지 건드리다니”…‘학폭 의혹’ 부인 차예련, 칼 빼들었다",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-04T06:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005758919?sid=103"
     },
     {
-     "title": "차예련 측, 학폭 의혹 재차 부인 \"허위사실 유포 강경 대응\"",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-04T06:42:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261104001086"
+     "title": "차예련 측, 학교폭력 의혹 '허위 사실' 재차 반박",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-04T06:49:00.000Z",
+     "link": "https://m.entertain.naver.com/article/057/0001976670"
     }
    ]
   },
@@ -80,30 +80,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 38,
-   "recent20": 7,
-   "press": 35,
-   "firstArticleAt": "2026-11-04T05:21:00.000Z",
+   "articles90": 39,
+   "recent20": 4,
+   "press": 36,
+   "firstArticleAt": "2026-11-04T05:27:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "포미닛 전지윤, 11월의 신부 된다→\"나보다 멋진 동반자\" 직접 밝힌 소감...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-04T06:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001407104"
+    },
+    {
+     "title": "포미닛 전지윤, 11월의 신부 된다…\"부끄럽고 설레\"",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-04T06:50:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1135136"
+    },
     {
      "title": "포미닛 전지윤, 웨딩화보 공개 \"11월 결혼, ♥동반자는 멋지고 따뜻한 ...",
      "press": "sportschosun.com",
      "publishedAt": "2026-11-04T06:41:00.000Z",
      "link": "https://m.entertain.naver.com/article/076/0004463101"
+    }
+   ]
+  },
+  {
+   "keyword": "골프",
+   "sources": [
+    "google"
+   ],
+   "articles90": 29,
+   "recent20": 5,
+   "press": 26,
+   "firstArticleAt": "2026-11-04T05:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "MBK파트너스의 왜곡된 주장에 대한 골프존홀딩스의 반박 성명",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-04T06:48:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3742222"
     },
     {
-     "title": "전지윤, 현아 이어 포미닛 두 번째 품절녀…“부끄럽고 설레”",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-04T06:40:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001302922"
+     "title": "\"번개 치는데 경기 강행\"…태국서 15세 골프 유망주, 대회 중 벼락 맞아...",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-04T06:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000519105?sid=104"
     },
     {
-     "title": "'포미닛 출신' 전지윤, 11월 결혼 \"예빈 신랑, 멋지고 따뜻한 마음 가져...",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-04T06:34:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60670"
+     "title": "\"그라운드골프 타고 핀 지역 화합\"… 동천안농협, 제4회 조합장배 대회...",
+     "press": "aflnews.co.kr",
+     "publishedAt": "2026-11-04T06:46:00.000Z",
+     "link": "https://www.aflnews.co.kr/news/articleView.html?idxno=331041"
     }
    ]
   },
@@ -112,30 +144,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 28,
-   "recent20": 0,
-   "press": 22,
-   "firstArticleAt": "2026-11-04T05:28:00.000Z",
+   "articles90": 26,
+   "recent20": 2,
+   "press": 21,
+   "firstArticleAt": "2026-11-04T05:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "尹, '허위사실 공표' 2심도 징역형…선고되자 한동안 판사 주시(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-04T06:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014301487?sid=102"
+    },
+    {
+     "title": "尹, 공직선거법 사건 항소심서도 당선무효형…\"허위사실 공표 인정\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-04T06:46:00.000Z",
+     "link": "https://www.ajunews.com/view/20261104151038415"
+    },
     {
      "title": "尹 '대선 허위사실 공표' 항소심도 징역형 집유…상고 시사",
      "press": "newsworks.co.kr",
      "publishedAt": "2026-11-04T06:18:00.000Z",
      "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=901905"
-    },
-    {
-     "title": "尹 '허위사실공표' 2심도 징역형·집유...국힘 397억 반환 기로",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-04T06:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005599358?sid=102"
-    },
-    {
-     "title": "尹 허위사실 공표 2심도 징역형 집유… 확정시 국힘 397억원 반환",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-04T06:02:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3445893"
     }
    ]
   },
@@ -145,12 +177,18 @@
     "nate"
    ],
    "articles90": 27,
-   "recent20": 9,
+   "recent20": 7,
    "press": 20,
-   "firstArticleAt": "2026-11-04T05:20:00.000Z",
+   "firstArticleAt": "2026-11-04T05:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "민주 상·하원 과반 확보… NBC ″상원 53, 하원 244″ [美중간선거]",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-04T06:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005599394?sid=104"
+    },
     {
      "title": "美 중간선거서 '블루쓰나미'…민주, 상ㆍ하원 의회권력 장악",
      "press": "getnews.co.kr",
@@ -162,12 +200,6 @@
      "press": "straightnews.co.kr",
      "publishedAt": "2026-11-04T06:42:00.000Z",
      "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=314625"
-    },
-    {
-     "title": "미 대륙 뒤흔든 '블루 쓰나미'…민주, 상·하원 장악 '압승'",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-04T06:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400625?sid=104"
     }
    ]
   },
@@ -176,30 +208,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 7,
-   "press": 10,
-   "firstArticleAt": "2026-11-04T05:22:00.000Z",
+   "articles90": 16,
+   "recent20": 12,
+   "press": 14,
+   "firstArticleAt": "2026-11-04T05:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "코스피, 장중 급등락 끝 0.6% 상승…코스닥 1.5%↑",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-04T06:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005350238?sid=101"
+     "title": "외인 순매도 코스피, 0.62% 오른 5683 마감...오후 들어 상승 전환",
+     "press": "opinionnews.co.kr",
+     "publishedAt": "2026-11-04T06:54:00.000Z",
+     "link": "http://www.opinionnews.co.kr/news/articleView.html?idxno=146661"
     },
     {
-     "title": "코스피, 美 중간선거에 급등락…장 막판 반등해 5680선 [MTN 마감시황]",
-     "press": "news.mtn.co.kr",
-     "publishedAt": "2026-11-04T06:42:00.000Z",
-     "link": "https://news.mtn.co.kr/article/2026110415413677797"
+     "title": "[마감시황] 코스피, 35.01포인트(+0.62%) 오른 5683.80 마감",
+     "press": "lcnews.co.kr",
+     "publishedAt": "2026-11-04T06:54:00.000Z",
+     "link": "https://www.lcnews.co.kr/news/articleView.html?idxno=210851"
     },
     {
-     "title": "美 중간선거 개표에 코스피 406p 출렁... 외국인 2.5조 순매도 [마감시황...",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-04T06:42:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2014463"
+     "title": "코스피,요동치다 0.6% 상승 5,600선 마감…코스닥도 1.5% 올라",
+     "press": "seouleconews.com",
+     "publishedAt": "2026-11-04T06:50:00.000Z",
+     "link": "http://www.seouleconews.com/news/articleView.html?idxno=94794"
     }
    ]
   },
@@ -208,13 +240,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 41,
-   "recent20": 1,
-   "press": 6,
+   "articles90": 42,
+   "recent20": 2,
+   "press": 7,
    "firstArticleAt": "2026-11-04T05:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "외국인 관광객 1300만명 넘은 서울…숙박시설 안전 사각지대 점검",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-04T06:46:00.000Z",
+     "link": "https://www.ajunews.com/view/20261104140932151"
+    },
     {
      "title": "오세훈, 캡슐형 숙박시설 방문…\"소방시설 의무화 건의\"(종합)",
      "press": "newsis.com",
@@ -222,48 +260,10 @@
      "link": "https://n.news.naver.com/mnews/article/003/0014301452?sid=102"
     },
     {
-     "title": "[포토] 오세훈 서울시장, 소규모 캡슐호텔 화재 안전 점검",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-04T06:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005838058?sid=102"
-    },
-    {
      "title": "[포토]캡슐형 숙박시설 살펴보는 오세훈 서울시장",
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-04T06:20:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006403626?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "약국",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-04T05:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "토니모리, 온누리약국 홍대점 입점",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-04T06:34:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=879806"
-    },
-    {
-     "title": "약국도 철근 낙품하는 나라장터…조달청 부실업체 검증망 '구멍'",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-04T06:06:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261104001007"
-    },
-    {
-     "title": "메디빅약국, 세이브존 전주코아점에 200평 규모 대형약국 오픈",
-     "press": "enetnews.co.kr",
-     "publishedAt": "2026-11-04T06:04:00.000Z",
-     "link": "https://www.enetnews.co.kr/news/articleView.html?idxno=56033"
     }
    ]
   },
@@ -300,16 +300,48 @@
    ]
   },
   {
-   "keyword": "강남구",
+   "keyword": "약국",
    "sources": [
     "google"
    ],
-   "articles90": 6,
-   "recent20": 1,
+   "articles90": 5,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-04T05:50:00.000Z",
    "exclusive": false,
    "capped": false,
+   "samples": [
+    {
+     "title": "토니모리, 온누리약국 홍대점 입점",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-04T06:34:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=879806"
+    },
+    {
+     "title": "약국도 철근 낙품하는 나라장터…조달청 부실업체 검증망 '구멍'",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-04T06:06:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261104001007"
+    },
+    {
+     "title": "메디빅약국, 세이브존 전주코아점에 200평 규모 대형약국 오픈",
+     "press": "enetnews.co.kr",
+     "publishedAt": "2026-11-04T06:04:00.000Z",
+     "link": "https://www.enetnews.co.kr/news/articleView.html?idxno=56033"
+    }
+   ]
+  },
+  {
+   "keyword": "강남구",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-04T06:08:00.000Z",
+   "exclusive": false,
+   "capped": true,
    "samples": [
     {
      "title": "강남구 “테헤란밸리 고용노동대학 오세요”",
@@ -332,34 +364,66 @@
    ]
   },
   {
-   "keyword": "전지명 국민통합위 부위원장",
+   "keyword": "국채",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-04T05:22:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-04T06:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국민통합위 \"유튜브 허위·왜곡 정보, 국민 통합 위협하는 중대 범죄행...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T05:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009269943?sid=100"
+     "title": "[중간선거] 美 국채 금리, 민주당 압승 전망에 하락세…3년물 8bp↓(상보...",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-04T06:44:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443014"
+    },
+    {
+     "title": "모건스탠리, 美주식·국채 토큰화···월가 합류",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-04T06:32:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=879837"
+    },
+    {
+     "title": "모건스탠리, 토큰화 대상에 미국 주식·국채 명시",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-04T06:08:00.000Z",
+     "link": "https://www.tokenpost.kr/news/blockchain/432484"
+    }
+   ]
+  },
+  {
+   "keyword": "전지명 부위원장 회의 주재",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-04T05:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "발언하는 전지명 국민통합위원회 부위원장",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-04T05:45:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261104000991"
+    },
+    {
+     "title": "모두발언하는 전지명 국민통합위원회 부위원장",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-04T05:44:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261104000989"
     },
     {
      "title": "인사하는 전지명 국민통합위 부위원장",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-04T05:44:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016421534?sid=100"
-    },
-    {
-     "title": "국기에 경례하는 전지명 국민통합위 부위원장",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-04T05:44:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261104000986"
     }
    ]
   },
@@ -376,16 +440,16 @@
    "capped": false,
    "samples": [
     {
-     "title": "美 군사 우체국 통해 대마 밀수한 주한미군 세관에 덜미",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-04T06:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002718875?sid=101"
-    },
-    {
      "title": "美군사우편으로 합성대마 밀반입한 주한미군 2명 적발",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-04T06:24:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016421719?sid=100"
+    },
+    {
+     "title": "美 군사 우체국 통해 대마 밀수한 주한미군 세관에 덜미",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-04T06:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002718875?sid=101"
     },
     {
      "title": "美군사우편으로 합성대마 밀수…주한미군 구속",
@@ -394,43 +458,11 @@
      "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611041503246580631"
     }
    ]
-  },
-  {
-   "keyword": "국채",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T06:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "모건스탠리, 美주식·국채 토큰화···월가 합류",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-04T06:32:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=879837"
-    },
-    {
-     "title": "모건스탠리, 토큰화 대상에 미국 주식·국채 명시",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-04T06:08:00.000Z",
-     "link": "https://www.tokenpost.kr/news/blockchain/432484"
-    },
-    {
-     "title": "野 예결위 \"내년 예산안 구제불능…104조 미래대응기금 전액 국채 상환...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-04T06:00:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261104000996"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 635,
+  "flagged": 637,
   "matched": 263,
   "avgLeadMin": 291,
   "recent": [
