@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T15:09:33.350Z",
+ "builtAt": "2026-11-04T15:19:37.059Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,62 +15,94 @@
    "sources": [
     "daum"
    ],
-   "articles90": 71,
-   "recent20": 14,
-   "press": 39,
-   "firstArticleAt": "2026-11-04T14:12:00.000Z",
+   "articles90": 70,
+   "recent20": 15,
+   "press": 40,
+   "firstArticleAt": "2026-11-04T14:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“이런 야구 처음 해본다” 강철매직도 혀 내두른 ‘혼돈의 연장 대혈투...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-04T15:08:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278353"
+     "title": "김현수에게 잔인했던 2차전…삼성, 연장 12회 혈투 끝에 KT에 3-2 신승 [K...",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-04T15:18:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611050002"
     },
     {
-     "title": "삼성 박진만 \"집중력이 승리 요인\"…kt 이강철 \"이런 야구 처음\"",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-04T15:06:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261105010001812"
+     "title": "[한국시리즈] 연장 혈투 끝 kt 꺾은 삼성… 시리즈 균형 맞추고 대구로",
+     "press": "dkilbo.com",
+     "publishedAt": "2026-11-04T15:16:00.000Z",
+     "link": "https://www.dkilbo.com/news/articleView.html?idxno=559698"
     },
     {
-     "title": "'12회 연장 끝 승리' 삼성 박진만 감독 \"선수들 끝까지 최선 다했어…원...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-04T15:06:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109743257358"
+     "title": "4안타 치고도 감독에게 고개 숙인 삼성 디아즈 \"실책에 책임 느껴 사과...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-04T15:16:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/003/0014302380"
     }
    ]
   },
   {
-   "keyword": "kt",
+   "keyword": "kt wiz",
    "sources": [
     "google"
    ],
-   "articles90": 27,
-   "recent20": 8,
-   "press": 22,
-   "firstArticleAt": "2026-11-04T14:24:00.000Z",
+   "articles90": 21,
+   "recent20": 3,
+   "press": 15,
+   "firstArticleAt": "2026-11-04T13:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김현수에게 잔인했던 2차전…삼성, 연장 12회 혈투 끝에 KT에 3-2 신승 [K...",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-04T15:18:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611050002"
+    },
+    {
+     "title": "[한국시리즈] 연장 혈투 끝 kt 꺾은 삼성… 시리즈 균형 맞추고 대구로",
+     "press": "dkilbo.com",
+     "publishedAt": "2026-11-04T15:16:00.000Z",
+     "link": "https://www.dkilbo.com/news/articleView.html?idxno=559698"
+    },
     {
      "title": "삼성 박진만 \"집중력이 승리 요인\"…kt 이강철 \"이런 야구 처음\"",
      "press": "asiatoday.co.kr",
      "publishedAt": "2026-11-04T15:06:00.000Z",
      "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261105010001812"
+    }
+   ]
+  },
+  {
+   "keyword": "수사",
+   "sources": [
+    "google"
+   ],
+   "articles90": 13,
+   "recent20": 6,
+   "press": 12,
+   "firstArticleAt": "2026-11-04T13:54:00.000Z",
+   "exclusive": true,
+   "capped": true,
+   "samples": [
+    {
+     "title": "'한동훈 딸 의혹' 쥔 중수청, 1호 사건 부담에 이첩도 수사도 멈췄다",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-04T15:16:00.000Z",
+     "link": "https://www.insight.co.kr/news/580698"
     },
     {
-     "title": "한국시리즈 2차전 '연장 혈투'...삼성, kt에 3대 2 진땀승",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-04T15:05:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/052/0002428450"
+     "title": "보완수사 요구 50% 급증…강원경찰 수사 부담 현실화",
+     "press": "kado.net",
+     "publishedAt": "2026-11-04T15:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000209521?sid=102"
     },
     {
-     "title": "‘연장 12회 혈투’ 삼성, KT 꺾고 KS 1승 1패 균형",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-04T15:03:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/056/0012287584"
+     "title": "강원경찰청 과학수사의 날 기념식 'BEST 과학수사팀' 포상",
+     "press": "kado.net",
+     "publishedAt": "2026-11-04T15:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000209511?sid=102"
     }
    ]
   },
@@ -81,125 +113,60 @@
    ],
    "articles90": 11,
    "recent20": 4,
-   "press": 11,
-   "firstArticleAt": "2026-11-04T13:42:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-04T14:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이란 “전쟁 반대하는 미국인의 뜻”…중국, 대만 정책 변수될까 촉각",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-04T15:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003562942?sid=104"
+    },
+    {
+     "title": "미국 민주당 의회권력 장악…한미 안보협의 새 변수 부상",
+     "press": "kado.net",
+     "publishedAt": "2026-11-04T15:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000209522?sid=100"
+    },
     {
      "title": "이란 최고지도자 \"미 선거로 변화 기대하면 크나큰 착각\"",
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-04T15:05:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001400726?sid=104"
-    },
-    {
-     "title": "국제유가 이틀 연속 하락…미·이란 종전 협상 기대 커져",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-04T15:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003562919?sid=101"
-    },
-    {
-     "title": "공화당 패배 영향 유럽으로?...이란 \"미 공격 시 확전\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-04T14:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002428442?sid=104"
     }
    ]
   },
   {
-   "keyword": "수사",
-   "sources": [
-    "google"
-   ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-04T13:54:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "경찰청, 관계성 범죄 전수점검...울산 남편 흉기위협 사건 등 수사중 사...",
-     "press": "ksilbo.co.kr",
-     "publishedAt": "2026-11-04T15:04:00.000Z",
-     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1071623"
-    },
-    {
-     "title": "[사설]대통령 본인 사건 재수사하는 특검…공정성 누가 믿겠나",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-04T15:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004678846?sid=110"
-    },
-    {
-     "title": "한 달 넘긴 중수청, 1호 수사 고심…신중 모드에 '사건 쇼핑' 지적도",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-04T15:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000548874?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "우규민",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 21,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-04T13:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "역투하는 우규민",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-04T14:07:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/001/0016422816"
-    },
-    {
-     "title": "[포토] '최고령 한국시리즈 등판 우규민' 속이 탄다",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-04T14:07:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/108/0003484763"
-    },
-    {
-     "title": "[포토S] 생각에 잠긴 우규민",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-04T13:52:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/477/0000637274"
-    }
-   ]
-  },
-  {
-   "keyword": "윤석열 재판",
+   "keyword": "신촌 세브란스병원",
    "sources": [
     "daum"
    ],
    "articles90": 7,
-   "recent20": 4,
-   "press": 6,
-   "firstArticleAt": "2026-11-04T13:54:00.000Z",
+   "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-04T13:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'선거법 위반' 윤석열 2심도 당선 무효형",
-     "press": "ksilbo.co.kr",
+     "title": "신촌세브란스병원 흉기 난동에 정신과 교수 부상...경찰, 살인미수 혐의...",
+     "press": "mbn.mk.co.kr",
      "publishedAt": "2026-11-04T15:04:00.000Z",
-     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1071599"
+     "link": "https://n.news.naver.com/mnews/article/057/0001976749?sid=102"
     },
     {
-     "title": "'내란 우두머리' 2심 결심 오늘 마무리...윤석열, 최후진술",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-04T15:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002428448?sid=102"
+     "title": "신촌 세브란스병원서 흉기난동, 정신의학과 교수 부상",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-04T15:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003562933?sid=102"
     },
     {
-     "title": "'내란 우두머리' 윤석열 오늘 항소심 최후진술…특검 구형은 사형",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-04T15:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000548880?sid=102"
+     "title": "세브란스병원서 흉기 난동, 50대 女 검거⋯정신과 교수 피습",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-04T15:00:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2644277"
     }
    ]
   },
@@ -236,35 +203,34 @@
    ]
   },
   {
-   "keyword": "조작기소 특검법 법사위 통과",
+   "keyword": "구자욱 안타 연속",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 1,
+   "articles90": 5,
+   "recent20": 3,
    "press": 4,
-   "firstArticleAt": "2026-11-04T13:46:00.000Z",
+   "firstArticleAt": "2026-11-04T13:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'조작기소 특검법' 與주도로 국회 법사소위 통과",
-     "press": "ksilbo.co.kr",
-     "publishedAt": "2026-11-04T15:04:00.000Z",
-     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1071597"
+     "title": "'구자욱·박승규 망연자실' 수비 요정들의 미친 호수비 나왔는데.. \"마지...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-04T15:14:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/241/0003539258"
     },
     {
-     "title": "'조작기소 특검법' 법사위 통과…'공소취소' 조항 삭제·수사 대상 추가",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-04T14:40:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5079923"
+     "title": "박진만 감독 \"구자욱, 아픈 몸으로 뛰어줘 고맙다, 대구에선 디아즈·최...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-04T15:10:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/241/0003539257"
     },
     {
-     "title": "'조작기소 특검법' 법사위 강행 처리…'공소취소' 조항 삭제·수사 대상...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-04T13:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005599600?sid=100"
+     "title": "'4안타 맹타에도 90도 사과 인사?' 디아즈 탓에 한숨…박진만 감독 \"수비...",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-04T15:06:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/079/0004206622"
     }
    ]
   },
@@ -273,13 +239,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 3,
+   "press": 4,
    "firstArticleAt": "2026-11-04T14:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "대출 미끼로 휴대전화 1천여 대 개통..사기 일당 검거",
+     "press": "mpmbc.co.kr",
+     "publishedAt": "2026-11-04T15:14:00.000Z",
+     "link": "https://mpmbc.co.kr/NewsArticle/1544175"
+    },
     {
      "title": "피싱 피해금 돌려 달랬더니 또 사기친 60대 실형",
      "press": "kado.net",
@@ -291,83 +263,79 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-04T15:00:00.000Z",
      "link": "https://m.entertain.naver.com/article/003/0014302362"
-    },
-    {
-     "title": "태영호 장남, 18억 사기로 징역 3년 6개월…가족사진까지 동원",
-     "press": "weekly.chosun.com",
-     "publishedAt": "2026-11-04T14:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/053/0000062837?sid=102"
     }
    ]
   },
   {
-   "keyword": "구자욱 안타 연속",
+   "keyword": "조작기소 특검법 법사위 통과",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T13:54:00.000Z",
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-04T13:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'4안타 맹타에도 90도 사과 인사?' 디아즈 탓에 한숨…박진만 감독 \"수비...",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-04T15:06:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/079/0004206622"
+     "title": "'조작기소 특검법' 與주도로 국회 법사소위 통과",
+     "press": "ksilbo.co.kr",
+     "publishedAt": "2026-11-04T15:04:00.000Z",
+     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1071597"
     },
     {
-     "title": "뛸 수 없는 구자욱, 승부처 삼성 아킬레스건[KS2 초점]",
-     "press": "sports.hankooki.com",
-     "publishedAt": "2026-11-04T13:54:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6942919"
+     "title": "'조작기소 특검법' 속전속결 법사위 통과...오늘 본회의 처리 전망",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-04T15:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002428451?sid=100"
     },
     {
-     "title": "'디아즈 결승 득점+4안타' 삼성, 연장 12회 접전 끝에 KT에 3-2 승리…시...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-04T13:54:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109741542473"
+     "title": "'조작기소 특검법' 법사위 통과…'공소취소' 조항 삭제·수사 대상 추가",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-04T14:40:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5079923"
     }
    ]
   },
   {
-   "keyword": "서인영 재혼",
+   "keyword": "우규민",
    "sources": [
-    "daum"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T13:42:00.000Z",
-   "exclusive": true,
+   "articles90": 6,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-04T13:50:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[공식] 서인영, 12월 26일 최지훈 대표와 재혼 \"축가·꽃 장식 생략..사...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-04T15:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005634967"
+     "title": "역투하는 우규민",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-04T14:07:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/001/0016422814"
     },
     {
-     "title": "서인영, 6세 연상 남편과 12월 26일 재혼…교회에서 스몰 웨딩",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T14:36:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009271133"
+     "title": "[포토] '최고령 한국시리즈 등판 우규민' 속이 탄다",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-04T14:07:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/108/0003484763"
     },
     {
-     "title": "서인영, 사업가와 두 번째 결혼...작정하고 빼버린 '2가지'",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-04T13:42:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1171912"
+     "title": "[포토S] 생각에 잠긴 우규민",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-04T13:52:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/477/0000637274"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 777,
+  "flagged": 778,
   "matched": 329,
   "avgLeadMin": 288,
   "recent": [
