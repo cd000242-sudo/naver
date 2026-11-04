@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T01:52:39.960Z",
+ "builtAt": "2026-11-04T02:02:43.596Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,81 +11,55 @@
  "measured": 24,
  "candidates": [
   {
-   "keyword": "지역의대 신설 확정",
+   "keyword": "김민석 신천지 의혹 사과",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 77,
-   "recent20": 23,
-   "press": 58,
-   "firstArticleAt": "2026-11-04T00:28:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "경국대 '의대 신설'에 경북 도청신도시에 '500병상' 대학병원 건립",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T01:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009269302?sid=102"
-    },
-    {
-     "title": "2030년 개교 목표, 전남·경북에 새로운 의과대학 설립 확정",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-04T01:50:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=884049"
-    },
-    {
-     "title": "경북 북부권에 40명 정원 국립의대 신설 확정…“환영”",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-04T01:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002830620?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "갤럭시 버즈 식약처 허가",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 41,
-   "recent20": 7,
-   "press": 41,
-   "firstArticleAt": "2026-11-04T00:23:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "삼성전자 갤럭시 버즈, 청력 검사·소리 증폭 기능 식약처 허가…내년 ...",
-     "press": "sateconomy.co.kr",
-     "publishedAt": "2026-11-04T01:46:00.000Z",
-     "link": "https://sateconomy.co.kr/news/view/1065575636005783"
-    },
-    {
-     "title": "삼성 '갤럭시 버즈'로 귀 건강 살핀다…청력 진단·보정 기능 식약처 의...",
-     "press": "widedaily.com",
-     "publishedAt": "2026-11-04T01:44:00.000Z",
-     "link": "https://www.widedaily.com/news/articleView.html?idxno=302801"
-    },
-    {
-     "title": "갤럭시 버즈, 청력 검사·보완까지 해준다…내년 초부터 업데이트",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-04T01:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002830619?sid=105"
-    }
-   ]
-  },
-  {
-   "keyword": "특검, 선관위 압수수색",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 40,
-   "recent20": 4,
-   "press": 33,
-   "firstArticleAt": "2026-11-04T00:27:00.000Z",
+   "articles90": 91,
+   "recent20": 36,
+   "press": 56,
+   "firstArticleAt": "2026-11-04T00:33:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "[오마이포토] 마이크 내리는 김민석 대표",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-04T02:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002534604?sid=100"
+    },
+    {
+     "title": "친청계, 與 최고위서 \"김민석, '신천지 의혹' 상응하는 책임져야\"",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-04T02:00:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4442938"
+    },
+    {
+     "title": "\"김민석이 신천지 발언 말라 격하게 압박\" … 친청 최민희, 최고위 회의...",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-04T02:00:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/04/2026110400137.html"
+    }
+   ]
+  },
+  {
+   "keyword": "선관위 특검 압수수색",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 40,
+   "recent20": 4,
+   "press": 34,
+   "firstArticleAt": "2026-11-04T00:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "특검, 사전투표용지 발급기 특혜 의혹 수사 착수…중앙선관위 압수수색",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-04T01:58:00.000Z",
+     "link": "https://www.ajunews.com/view/20261104100235350"
+    },
     {
      "title": "특검, 중앙선관위 압수수색…459억 사전투표지 발급기 사업 특혜 정황",
      "press": "newsworks.co.kr",
@@ -97,44 +71,134 @@
      "press": "joseilbo.com",
      "publishedAt": "2026-11-04T01:45:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/123/0002393297?sid=100"
-    },
-    {
-     "title": "특검, 사전투표지 발급기 사업 특혜 의혹에 선관위 압수수색",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-04T01:44:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611040069"
     }
    ]
   },
   {
-   "keyword": "김민석 과세 유예 제안",
+   "keyword": "북, 동해상 발사체 발사",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 37,
-   "recent20": 11,
-   "press": 31,
-   "firstArticleAt": "2026-11-04T01:04:00.000Z",
+   "articles90": 32,
+   "recent20": 7,
+   "press": 27,
+   "firstArticleAt": "2026-11-04T00:53:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "합참 \"北, 동해상으로 미상 발사체 발사\"…軍, 제원 분석 중",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-04T01:50:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=901844"
+    },
+    {
+     "title": "北, 동해상으로 미상 발사체 발사…일주일 새 네 번째 무력시위",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-04T01:50:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611040070"
+    },
+    {
+     "title": "軍 \"北, 동해상으로 미상 발사체 발사\"… 탄도미사일이면 나흘만 外 [오...",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-04T01:50:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249037"
+    }
+   ]
+  },
+  {
+   "keyword": "최동원, 스포츠영웅 선정",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 20,
+   "recent20": 4,
+   "press": 20,
+   "firstArticleAt": "2026-11-04T01:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오피셜]‘스포츠영웅’ 최동원, 이토록 잘 어울리는 이름…오히려 늦었...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-04T01:59:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/445/0000486339"
+    },
+    {
+     "title": "'무쇠팔' 故 최동원, 야구 선수 최초 '대한민국 스포츠영웅' 선정",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-04T01:57:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/660/0000120562"
+    },
+    {
+     "title": "한국시리즈 혼자 4승…'무쇠팔' 최동원, 대한민국 스포츠영웅 됐다",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-04T01:52:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/018/0006403452"
+    }
+   ]
+  },
+  {
+   "keyword": "더 뉴 BMW 7시리즈 출시",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 32,
+   "recent20": 4,
+   "press": 19,
+   "firstArticleAt": "2026-11-04T00:34:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "김민석 \"가상자산 과세 유예, 정부에 공식 제안\"",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-04T01:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001271596?sid=101"
+     "title": "BMW코리아, 7시리즈 부분변경 모델 '더 뉴 BMW 7시리즈' 국내 출시",
+     "press": "finomy.com",
+     "publishedAt": "2026-11-04T01:58:00.000Z",
+     "link": "http://www.finomy.com/news/articleView.html?idxno=265557"
     },
     {
-     "title": "김민석, 가상자산 과세 유예 제안 보도…기본법 먼저 마련 요구",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-04T01:50:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/432340"
+     "title": "BMW코리아, 럭셔리 플래그십 '더 뉴 7시리즈' 선봬…1억6190만원부터",
+     "press": "cstimes.com",
+     "publishedAt": "2026-11-04T01:54:00.000Z",
+     "link": "https://www.cstimes.com/news/articleView.html?idxno=726587"
     },
     {
-     "title": "김민석, 정부에 '가상자산 과세 유예' 공식 제안...기간 제시 없어",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-04T01:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000120558?sid=100"
+     "title": "BMW코리아, 플래그십 세단 '더 뉴 BMW 7시리즈' 국내 공개",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-04T01:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541594?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "전북 로봇 대토론회",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 9,
+   "recent20": 3,
+   "press": 9,
+   "firstArticleAt": "2026-11-04T00:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"새만금을 피지컬AI·로봇 글로벌 거점으로\"… 전북, 1조 3000억 규모 5대...",
+     "press": "greened.kr",
+     "publishedAt": "2026-11-04T02:01:00.000Z",
+     "link": "https://www.greened.kr/news/articleView.html?idxno=353782"
+    },
+    {
+     "title": "전북, 피지컬AI·로봇 글로벌 최강국 도전…1조3천억 승부수",
+     "press": "jeonmin.co.kr",
+     "publishedAt": "2026-11-04T01:54:00.000Z",
+     "link": "http://www.jeonmin.co.kr/news/articleView.html?idxno=449847"
+    },
+    {
+     "title": "전북, '피지컬 AI·로봇' 국가 거점 시동…1조 3천억 규모 5대 사업 추진",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-04T01:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004206299?sid=102"
     }
    ]
   },
@@ -143,10 +207,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
+   "articles90": 9,
    "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-04T00:23:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-04T00:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -163,42 +227,43 @@
      "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=396967"
     },
     {
-     "title": "SK하이닉스, 中 장비 승인 막혀 美 투자도 ‘비상’…450억달러 뉴욕 구...",
-     "press": "mydaily.co.kr",
+     "title": "로이터 “美, SK하이닉스 中공장 장비반입 승인 보류…뉴욕 공장투자도...",
+     "press": "segyebiz.com",
      "publishedAt": "2026-11-04T00:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/117/0004121776?sid=105"
+     "link": "http://www.segyebiz.com/newsView/20261104505089?OutUrl=naver"
     }
    ]
   },
   {
-   "keyword": "블랙 프라이데이",
+   "keyword": "송중기",
    "sources": [
+    "signal.bz",
     "google"
    ],
    "articles90": 9,
-   "recent20": 4,
+   "recent20": 0,
    "press": 9,
-   "firstArticleAt": "2026-11-04T00:24:00.000Z",
+   "firstArticleAt": "2026-11-04T00:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성물산 패션, SSF샵 연중 최대 규모 행사 '블랙프라이데이' 실시",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-04T01:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003481990?sid=101"
+     "title": "“유모차와 짐은 송중기가” 송중기♥케이티 한결같은 목격담 확산",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-04T01:37:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001184316"
     },
     {
-     "title": "\"최대 80% 할인 쿠폰\"…SSF샵, 2200개 브랜드 블랙프라이데이",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-04T01:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014300206?sid=101"
-    },
-    {
-     "title": "삼성물산 패션, SSF샵서 16일까지 블랙프라이데이…2200개 브랜드 참여",
-     "press": "sports.hankooki.com",
+     "title": "송중기♥케이트 목격담 터졌다…“가정적인 젊은 아빠”",
+     "press": "sports.khan.co.kr",
      "publishedAt": "2026-11-04T01:34:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6942854"
+     "link": "https://m.entertain.naver.com/article/144/0001148008"
+    },
+    {
+     "title": "[뮤즈★]송중기, ♥케이티·두 아이와 가족 나들이 포착 “유모차에 짐...",
+     "press": "heraldmuse.com",
+     "publishedAt": "2026-11-04T01:31:00.000Z",
+     "link": "https://m.entertain.naver.com/article/112/0003812101"
     }
    ]
   },
@@ -207,10 +272,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-04T00:24:00.000Z",
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-04T00:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -235,77 +300,12 @@
    ]
   },
   {
-   "keyword": "로봇 최강국 전북",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-04T00:27:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"새만금을 피지컬AI·로봇 산업 거점으로\"…국회서 대토론회",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-04T01:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016420621?sid=102"
-    },
-    {
-     "title": "전북도, 1조3000억원 규모 피지컬AI·로봇 국가거점 청사진",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-04T01:16:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261104010001385"
-    },
-    {
-     "title": "전북, 피지컬AI·로봇 국가거점 시동…'5대 핵심사업 1조3000억' 국가 지...",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-04T01:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002464162?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "32기 영수 몰카 사과",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-04T00:25:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘계약결혼’ 32기 영수, 몰카 논란 사과…“변명 여지 없는 내 잘못”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-04T01:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/016/0002718609"
-    },
-    {
-     "title": "'몰카 촬영 논란' 32기 영수, \"전쟁 시작\"이라더니 결국 사과문 \"나쁜 의...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-04T01:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000637024"
-    },
-    {
-     "title": "'계약결혼' 나솔 32기 영수, 몰카 논란에 공개 사과",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-04T00:30:00.000Z",
-     "link": "https://www.insight.co.kr/news/580547"
-    }
-   ]
-  },
-  {
    "keyword": "골프존카운티",
    "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-04T00:33:00.000Z",
    "exclusive": false,
@@ -332,73 +332,73 @@
    ]
   },
   {
-   "keyword": "서예지, 6년 만에 스크린 복귀",
+   "keyword": "돈 스파이크",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T00:23:00.000Z",
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T01:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "서예지, '금월도'로 6년 만에 스크린 복귀…한국형 뱀파이어물 도전",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-04T01:44:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60657"
+     "title": "'마약 실형' 돈스파이크, '1인 99,000원' 코스 논란 해명…\"파인다이닝은...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-04T02:01:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000637037"
     },
     {
-     "title": "서예지, '금월도'로 스크린 컴백…한국형 오컬트 도전",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-04T01:09:00.000Z",
-     "link": "https://m.entertain.naver.com/article/629/0000548527"
+     "title": "[TOP이슈] 돈스파이크, 출소 후 개업한 식당 가격 논란에 해명…\"할많하...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-04T01:54:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267866"
     },
     {
-     "title": "사생활 논란 6년만…서예지, 뱀파이어물 ‘금월도’로 스크린 복귀 [공...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-04T00:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001277924"
+     "title": "돈스파이크, 출소 후 식당 '9.9만원 가격 논란'…\"정성껏 구운 소갈비\" ...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-04T01:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001407068"
     }
    ]
   },
   {
-   "keyword": "코리안 더비 뮌헨 승리",
+   "keyword": "조원태",
    "sources": [
-    "signal.bz"
+    "google"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 2,
    "press": 3,
-   "firstArticleAt": "2026-11-04T00:32:00.000Z",
+   "firstArticleAt": "2026-11-04T01:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘코리안 더비’ 김민재의 뮌헨, 이강인의 아틀레티코에 2대 0 완승",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-04T01:26:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/056/0012286895"
+     "title": "조원태-호반, 한진칼 지분 경쟁...최대주주 변경 공시 시점 의문점",
+     "press": "hbnpress.com",
+     "publishedAt": "2026-11-04T01:56:00.000Z",
+     "link": "https://hbnpress.com/news/view/1065574421760395"
     },
     {
-     "title": "‘20분 코리안 더비’서 김민재 웃었다...뮌헨, 아틀레티코 원정 승리",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-04T00:41:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/018/0006403371"
+     "title": "호반이 1대주주 돼도 경영권은 조원태…한진칼 '10.58%의 전쟁'",
+     "press": "newsmap.co.kr",
+     "publishedAt": "2026-11-04T01:46:00.000Z",
+     "link": "https://www.newsmap.co.kr/news/articleView.html?idxno=4767"
     },
     {
-     "title": "김민재·이강인, UCL 코리안 더비 성사…뮌헨, 아틀레티코 2-0 완파",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-04T00:32:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109718975984"
+     "title": "호반 \"내가 한진칼 1대 주주\"…'캐스팅보터' 산은은 조원태의 편?",
+     "press": "newsquest.co.kr",
+     "publishedAt": "2026-11-04T01:10:00.000Z",
+     "link": "https://www.newsquest.co.kr/news/articleView.html?idxno=304135"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 542,
+  "flagged": 549,
   "matched": 224,
   "avgLeadMin": 279,
   "recent": [
