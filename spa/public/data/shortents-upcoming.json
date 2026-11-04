@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T10:16:37.115Z",
+ "builtAt": "2026-11-04T10:26:48.294Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,42 +15,74 @@
    "sources": [
     "daum"
    ],
-   "articles90": 67,
-   "recent20": 7,
-   "press": 55,
+   "articles90": 74,
+   "recent20": 9,
+   "press": 60,
    "firstArticleAt": "2026-11-04T09:02:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "한진칼 지분 싸움 시계 제로… 호반그룹, 일단 최대주주로",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-04T10:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000963677?sid=101"
+     "title": "[속보] 한진칼 최대주주, 조원태에서 호반그룹으로…지분 0.11%p 차이 '역...",
+     "press": "wolyo.co.kr",
+     "publishedAt": "2026-11-04T10:24:00.000Z",
+     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=320064"
     },
     {
-     "title": "한진칼 최대주주 호반건설로 변경…조원태 회장 측과 지분 0.11%p차",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-04T10:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002247333?sid=101"
+     "title": "호반, 한진칼 최대주주 등극…조원태 회장과 지분 경쟁 재점화",
+     "press": "press9.kr",
+     "publishedAt": "2026-11-04T10:22:00.000Z",
+     "link": "http://www.press9.kr/news/articleView.html?idxno=85608"
     },
     {
-     "title": "한진칼 최대주주 올라선 호반···되찾겠다는 조원태",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-04T10:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003480700?sid=101"
+     "title": "호반그룹, 한진칼 최대주주 등극. 칼자루는 산은에게?",
+     "press": "viewsnnews.com",
+     "publishedAt": "2026-11-04T10:18:00.000Z",
+     "link": "https://www.viewsnnews.com/article?q=239499"
     }
    ]
   },
   {
-   "keyword": "신촌 세브란스 흉기 난동",
+   "keyword": "강호동 구속영장 신청",
    "sources": [
     "nate"
    ],
-   "articles90": 37,
-   "recent20": 2,
-   "press": 33,
-   "firstArticleAt": "2026-11-04T08:48:00.000Z",
+   "articles90": 42,
+   "recent20": 3,
+   "press": 37,
+   "firstArticleAt": "2026-11-04T09:02:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "경찰, 강호동 농협중앙회장 구속영장 신청…금품수수 등 혐의",
+     "press": "busan.com",
+     "publishedAt": "2026-11-04T10:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001405714?sid=102"
+    },
+    {
+     "title": "경찰, 강호동 농협중앙회장 구속영장 신청",
+     "press": "foodnews.co.kr",
+     "publishedAt": "2026-11-04T10:14:00.000Z",
+     "link": "http://www.foodnews.co.kr/news/articleView.html?idxno=120837"
+    },
+    {
+     "title": "경찰, 강호동 농협중앙회장 구속영장 신청…1억원 뇌물수수 혐의",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-04T10:12:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261104001358"
+    }
+   ]
+  },
+  {
+   "keyword": "신촌 병원 흉기 난동",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 27,
+   "recent20": 1,
+   "press": 26,
+   "firstArticleAt": "2026-11-04T08:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,14 +107,14 @@
    ]
   },
   {
-   "keyword": "SK에코플랜트 완전 자회사",
+   "keyword": "SK에코플랜트 완전 자회사 추진",
    "sources": [
     "nate"
    ],
-   "articles90": 31,
-   "recent20": 1,
-   "press": 30,
-   "firstArticleAt": "2026-11-04T08:48:00.000Z",
+   "articles90": 24,
+   "recent20": 0,
+   "press": 23,
+   "firstArticleAt": "2026-11-04T08:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -111,10 +143,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 20,
-   "recent20": 3,
-   "press": 18,
-   "firstArticleAt": "2026-11-04T08:52:00.000Z",
+   "articles90": 19,
+   "recent20": 2,
+   "press": 17,
+   "firstArticleAt": "2026-11-04T09:00:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -139,66 +171,98 @@
    ]
   },
   {
-   "keyword": "윤석열 재판",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 18,
-   "recent20": 8,
-   "press": 14,
-   "firstArticleAt": "2026-11-04T08:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "윤석열 전 대통령, 선거법 2심도 '당선무효형'",
-     "press": "safetimes.co.kr",
-     "publishedAt": "2026-11-04T10:14:00.000Z",
-     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247197"
-    },
-    {
-     "title": "날아드는 '윤석열 청구서'에 고민 쌓이는 국힘",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-04T10:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000141607?sid=100"
-    },
-    {
-     "title": "선고 후 쓴웃음 지은 윤석열…\"최대한 빨리 상고할 것\"",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-04T10:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001976718?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "고영표",
    "sources": [
     "google"
    ],
-   "articles90": 39,
-   "recent20": 17,
-   "press": 11,
-   "firstArticleAt": "2026-11-04T09:42:00.000Z",
+   "articles90": 35,
+   "recent20": 21,
+   "press": 12,
+   "firstArticleAt": "2026-11-04T09:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "고영표 '장준원 수비 좋았어'[포토]",
+     "title": "[포토S] 고영표, '온 힘을 다해'",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-04T10:26:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/477/0000637157"
+    },
+    {
+     "title": "고영표의 미소[포토]",
      "press": "xportsnews.com",
-     "publishedAt": "2026-11-04T10:15:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/311/0002076591"
+     "publishedAt": "2026-11-04T10:26:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/311/0002076602"
     },
     {
-     "title": "[사진]2회 위기 1실점으로 막아낸 KT 선발 고영표, '야수들에게 감사를...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-04T10:14:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/109/0005634568"
+     "title": "KBO 한국시리즈 2차전 선발에 고영표 등판",
+     "press": "joongboo.com",
+     "publishedAt": "2026-11-04T10:24:00.000Z",
+     "link": "https://www.joongboo.com/news/articleView.html?idxno=363741541"
+    }
+   ]
+  },
+  {
+   "keyword": "코스피 하락 전환",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 10,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-04T08:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "급등과 폭락 반복한 코스피…무엇이 흔들었나 [Visual]",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-04T10:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005759149?sid=101"
     },
     {
-     "title": "[사진]KT 선발 고영표, '2회 위기 1실점으로 넘기고'",
+     "title": "'블루웨이브' 공포에 코스피 '롤러코스터'…\"하루 만에 18% 올랐다\" 엇갈...",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-04T10:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001271681?sid=101"
+    },
+    {
+     "title": "코스피, 美 중간선거에 '널뛰기'…4% 급락 후 반등",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-04T09:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922891?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "영평상 시상식 참석",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-04T08:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "전도연·조인성, 제46회 영평상 주연상 주인공",
+     "press": "sports.hankooki.com",
+     "publishedAt": "2026-11-04T10:16:00.000Z",
+     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6942896"
+    },
+    {
+     "title": "[포토] 신혜선 ‘영평상 수상하러 왔어요’",
+     "press": "heraldmuse.com",
+     "publishedAt": "2026-11-04T10:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/112/0003812174"
+    },
+    {
+     "title": "[사진]홍경표 촬영감독,'영평상 시상식 참석'",
      "press": "osen.co.kr",
-     "publishedAt": "2026-11-04T10:14:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/109/0005634569"
+     "publishedAt": "2026-11-04T09:54:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005634537"
     }
    ]
   },
@@ -208,10 +272,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 11,
+   "articles90": 7,
    "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-04T08:48:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-04T09:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -236,70 +300,6 @@
    ]
   },
   {
-   "keyword": "코스피 하락 전환",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 10,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-04T08:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "코스피, 美 중간선거에 '널뛰기'…4% 급락 후 반등",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-04T09:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922891?sid=101"
-    },
-    {
-     "title": "코스피, 4% 급락 딛고 5684 마감…미국 중간선거에 출렁",
-     "press": "koreareport.co.kr",
-     "publishedAt": "2026-11-04T09:30:00.000Z",
-     "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=54304"
-    },
-    {
-     "title": "美 중간선거 불확실성 걷혔다…코스피 반등의 조건은",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-04T09:18:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611040221"
-    }
-   ]
-  },
-  {
-   "keyword": "태영호 장남 징역 3년",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 3,
-   "press": 6,
-   "firstArticleAt": "2026-11-04T09:05:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "태영호 전 의원 장남, '18억대 가상자산 사기' 1심 징역 3년6개월",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-04T10:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003151425?sid=102"
-    },
-    {
-     "title": "'18억 원대 가상자산 사기' 태영호 장남, 1심서 징역 3년 6개월",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-04T10:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400678?sid=102"
-    },
-    {
-     "title": "부친 이름 팔아 ‘18억 투자 사기’ 태영호 장남 1심 징역 3년 6개월",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-04T09:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001883040?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "한우",
    "sources": [
     "google"
@@ -312,16 +312,16 @@
    "capped": false,
    "samples": [
     {
-     "title": "[현장] 9864만 원 '역대 최고가' 갈아치운 슈퍼 한우 탄생",
-     "press": "farminsight.net",
-     "publishedAt": "2026-11-04T09:54:00.000Z",
-     "link": "https://www.farminsight.net/news/articleView.html?idxno=17168"
-    },
-    {
      "title": "[인터뷰] 제29회 전국한우능력평가대회 대통령상 수상 '술뫼농장' 이병...",
      "press": "farminsight.net",
      "publishedAt": "2026-11-04T09:54:00.000Z",
      "link": "https://www.farminsight.net/news/articleView.html?idxno=17169"
+    },
+    {
+     "title": "[현장] 9864만 원 '역대 최고가' 갈아치운 슈퍼 한우 탄생",
+     "press": "farminsight.net",
+     "publishedAt": "2026-11-04T09:54:00.000Z",
+     "link": "https://www.farminsight.net/news/articleView.html?idxno=17168"
     },
     {
      "title": "대한한돈협회 고창지부·전국한우협회 고창군지부, 장학금 1천만원 기탁",
@@ -332,14 +332,46 @@
    ]
   },
   {
+   "keyword": "테슬라",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T09:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "스페이스X 3.9%·테슬라 3.6% 장전 하락, 코어위브 4.2% 내려",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-04T10:22:00.000Z",
+     "link": "https://www.tokenpost.kr/news/market/432587"
+    },
+    {
+     "title": "테슬라·스페이스X 합병 전망에 비상 걸린 서학개미...주식 안팔아도 양...",
+     "press": "livebiz.today",
+     "publishedAt": "2026-11-04T10:10:00.000Z",
+     "link": "https://www.livebiz.today/news/articleView.html?idxno=206220"
+    },
+    {
+     "title": "美장전거래서 머스크의 테슬라·스페이스X 4% 이상 하락(상보)",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-04T09:38:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443062"
+    }
+   ]
+  },
+  {
    "keyword": "홍콩 ELS 과징금 3700억 확정",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T08:56:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-04T09:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -364,41 +396,41 @@
    ]
   },
   {
-   "keyword": "테슬라",
+   "keyword": "블루 쓰나미 미국 정치 변화",
    "sources": [
-    "google"
+    "nate"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-04T08:47:00.000Z",
+   "firstArticleAt": "2026-11-04T09:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "테슬라·스페이스X 합병 전망에 비상 걸린 서학개미...주식 안팔아도 양...",
-     "press": "livebiz.today",
-     "publishedAt": "2026-11-04T10:10:00.000Z",
-     "link": "https://www.livebiz.today/news/articleView.html?idxno=206220"
+     "title": "[뉴스잇] 美중간선거 '블루 쓰나미' 전망…민주, 양원 모두 탈환할듯",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-04T09:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922890?sid=104"
     },
     {
-     "title": "美장전거래서 머스크의 테슬라·스페이스X 4% 이상 하락(상보)",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-04T09:38:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443062"
+     "title": "[사설]‘블루 쓰나미’ 미 중간선거, 안보·경제 파장 면밀히 대비해야",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-04T09:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003480697?sid=110"
     },
     {
-     "title": "테슬라와 스페이스X 합병하면 주식 안 판 서학개미도 세금 낸다?…국회...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-04T08:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202633?sid=101"
+     "title": "美 ‘블루 쓰나미’에도 K방산 선방…수주·실적 따라 희비",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-04T09:02:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2644163"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 695,
+  "flagged": 700,
   "matched": 287,
   "avgLeadMin": 282,
   "recent": [
