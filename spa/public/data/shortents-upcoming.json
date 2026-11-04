@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T05:03:56.933Z",
+ "builtAt": "2026-11-04T05:14:01.519Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "승리 예측 NBC",
    "sources": [
     "nate"
    ],
-   "articles90": 40,
-   "recent20": 8,
-   "press": 26,
-   "firstArticleAt": "2026-11-04T03:55:00.000Z",
+   "articles90": 42,
+   "recent20": 7,
+   "press": 28,
+   "firstArticleAt": "2026-11-04T03:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 美민주, ‘공화텃밭’ 사우스캐롤라이나 상원 승리 예측< NBC>",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-04T05:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002718810?sid=104"
+     "title": "[美 중간선거] NBC, 민주당 상하원 모두 승리 예측…\"의회 전체 장악할 ...",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-04T05:10:00.000Z",
+     "link": "https://www.ajunews.com/view/20261104134056046"
     },
     {
-     "title": "美 캔자스·아이오와 상원도 민주당 승리 예측",
+     "title": "미 중간선거 '경합지' 오하이오 상원도 민주 탈환 예측",
      "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-04T04:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533473?sid=104"
+     "publishedAt": "2026-11-04T05:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533480?sid=104"
     },
     {
-     "title": "[속보] 미국 민주, 연방 하원 이어 상원도 승리 예측 < NBC>",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-04T04:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003057090?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "조작기소 특검법 상정",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 29,
-   "recent20": 11,
-   "press": 25,
-   "firstArticleAt": "2026-11-04T03:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'조작기소 특검법' 與 주도로 법사위 상정…국힘 \"李 구하기\" 반발 퇴장",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-04T05:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000141559?sid=100"
-    },
-    {
-     "title": "'조작기소 특검법' 상정에…野 집단 퇴장, 법사위 또 파행",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-04T05:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002464220?sid=100"
-    },
-    {
-     "title": "민주당, 조작기소 특검법 법사위 상정. 5일 본회의 상정키로",
-     "press": "viewsnnews.com",
-     "publishedAt": "2026-11-04T05:02:00.000Z",
-     "link": "https://www.viewsnnews.com/article?q=239488"
+     "title": "미국 민주당, 하원 이어 상원도 승리 예측 보도…중간선거 권력 지형 변...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-04T05:04:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=623105"
     }
    ]
   },
@@ -80,30 +48,62 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 31,
-   "recent20": 9,
-   "press": 25,
-   "firstArticleAt": "2026-11-04T03:34:00.000Z",
+   "articles90": 36,
+   "recent20": 10,
+   "press": 27,
+   "firstArticleAt": "2026-11-04T03:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "팔도, '2026 푸드위크 코리아'서 '왕뚜껑 국물라볶이' 시식 행사",
+     "title": "조폐공사, 푸드위크 코리아서 'K-브랜드 정부인증제' 홍보",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-04T05:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014301073?sid=102"
+    },
+    {
+     "title": "정식품, '2026 푸드위크 코리아' 참가…'그린비아' 영양식 체험 행사",
      "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-04T05:00:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=501207"
+     "publishedAt": "2026-11-04T05:10:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=501208"
     },
     {
-     "title": "'푸드위크 코리아 2026' 4일 개막…K-푸드 세계시장 공략 본격화",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-04T05:00:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4116674"
+     "title": "세종시 농산품 우수성 '푸드위크 코리아'에서 선보여",
+     "press": "ccdn.co.kr",
+     "publishedAt": "2026-11-04T05:08:00.000Z",
+     "link": "https://www.ccdn.co.kr/news/articleView.html?idxno=1108852"
+    }
+   ]
+  },
+  {
+   "keyword": "조작기소 특검법 상정",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 26,
+   "recent20": 6,
+   "press": 23,
+   "firstArticleAt": "2026-11-04T03:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "조작기소 특검법 與주도로 결국 법사위 상정…국힘 퇴장",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-04T05:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001882952?sid=100"
     },
     {
-     "title": "[포토] 2026 푸드위크 코리아",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-04T04:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003057089?sid=101"
+     "title": "법사위, 조작기소특검법안 상정…野 \"특검 아니라 李 개인 로펌\"",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-04T05:04:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261104500267"
+    },
+    {
+     "title": "'조작기소 특검법' 與 주도로 법사위 상정…국힘 \"李 구하기\" 반발 퇴장",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-04T05:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000141559?sid=100"
     }
    ]
   },
@@ -113,12 +113,18 @@
     "signal.bz"
    ],
    "articles90": 21,
-   "recent20": 6,
-   "press": 17,
-   "firstArticleAt": "2026-11-04T03:40:00.000Z",
+   "recent20": 4,
+   "press": 16,
+   "firstArticleAt": "2026-11-04T03:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "美민주 상원 탈환…공화 텃밭 뒤집으며 트럼프에 제동",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-04T05:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006403557?sid=104"
+    },
     {
      "title": "민주, 상·하원 모두 석권 전망...'공화당 텃밭' 뒤집어 [美 중간선거]",
      "press": "fnnews.com",
@@ -130,12 +136,38 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-04T04:59:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001400584?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "집",
+   "sources": [
+    "google"
+   ],
+   "articles90": 12,
+   "recent20": 5,
+   "press": 12,
+   "firstArticleAt": "2026-11-04T04:39:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "제주 화북항에 90억 투입…어촌스테이션 신축·청소년문화의집 증축",
+     "press": "mediajeju.com",
+     "publishedAt": "2026-11-04T05:06:00.000Z",
+     "link": "https://www.mediajeju.com/news/articleView.html?idxno=367210"
     },
     {
-     "title": "민주당, 하원 이어 상원도 승리 예측 [美 중간선거]",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-04T04:56:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2644021"
+     "title": "마세라티 \"차 넘어 집까지\"···'까사 마세라티'로 레지던스 사업 진출",
+     "press": "paxetv.com",
+     "publishedAt": "2026-11-04T05:04:00.000Z",
+     "link": "http://www.paxetv.com/news/articleView.html?idxno=286038"
+    },
+    {
+     "title": "[이슈체크] 집값 25%로 입주해도 내집 아니다…20년간 이어질 자금 마련...",
+     "press": "tfmedia.co.kr",
+     "publishedAt": "2026-11-04T05:04:00.000Z",
+     "link": "https://www.tfmedia.co.kr/news/article.html?no=208629"
     }
    ]
   },
@@ -144,62 +176,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 10,
+   "articles90": 12,
+   "recent20": 3,
+   "press": 11,
    "firstArticleAt": "2026-11-04T03:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "코스피, 美 중간선거 경계감에 3%대 하락 전환",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-04T05:10:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261104000762"
+    },
+    {
+     "title": "급락은 일단 진정됐지만…외국인 2.5조 매도에 코스피 부진[fn오후시황...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-04T05:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005599299?sid=101"
+    },
+    {
      "title": "美 중간선거 개표 충격…코스피 5400선 급락, 외국인 1.8조 매도",
      "press": "mstoday.co.kr",
      "publishedAt": "2026-11-04T05:02:00.000Z",
      "link": "https://www.mstoday.co.kr/news/articleView.html?idxno=200369"
-    },
-    {
-     "title": "美 중간선거 대기에 꼬인 수급…코스피 변동성지수 하루만에 7%↑",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-04T04:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005436465?sid=101"
-    },
-    {
-     "title": "[美중간선거] AMD보다 강한 위험회피...코스피, 외인 1조 순매도에 하락...",
-     "press": "financialpost.co.kr",
-     "publishedAt": "2026-11-04T04:32:00.000Z",
-     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=284638"
     }
    ]
   },
   {
-   "keyword": "시험",
+   "keyword": "정하연 작가 별세",
    "sources": [
-    "google"
+    "daum"
    ],
-   "articles90": 8,
-   "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-04T04:40:00.000Z",
+   "articles90": 9,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-04T03:53:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "광주 붕괴사고 딛고 다시 분양⋯IPARK현대산업개발, 청약 흥행 시험대",
-     "press": "etoday.co.kr",
+     "title": "故 최불암 비보 이어…채시라, 드라마 작가 故 정하연 별세에 올린 사진...",
+     "press": "mhnse.com",
      "publishedAt": "2026-11-04T05:02:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2643554"
+     "link": "https://m.entertain.naver.com/article/445/0000486391"
     },
     {
-     "title": "투자 연결 나선 화성 MARS 2026…AI 기업 성장 가능성 시험대",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-04T04:58:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261104010001460"
+     "title": "\"특별한 인연 잊지 못해\"…채시라, 정하연 작가 별세에 애도",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-04T05:00:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=622945"
     },
     {
-     "title": "칼데라 92.7원 소폭 상승…롤업 연결 인프라 수요 시험대",
-     "press": "job-post.co.kr",
-     "publishedAt": "2026-11-04T04:50:00.000Z",
-     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=236422"
+     "title": "채시라, 故 정하연 작가 별세에 “뵙고 싶었는데…충격과 후회”",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-04T04:44:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005758823"
     }
    ]
   },
@@ -211,10 +243,16 @@
    "articles90": 8,
    "recent20": 1,
    "press": 7,
-   "firstArticleAt": "2026-11-04T03:38:00.000Z",
+   "firstArticleAt": "2026-11-04T03:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "충북 증평군, 어린이 재난안전 체험마당 13일 개최… 안전체험·공연 풍...",
+     "press": "ccdn.co.kr",
+     "publishedAt": "2026-11-04T05:12:00.000Z",
+     "link": "https://www.ccdn.co.kr/news/articleView.html?idxno=1108886"
+    },
     {
      "title": "서울교육청, 교육시설 재난 피해 회복 지원체계 확대",
      "press": "edu.chosun.com",
@@ -226,12 +264,6 @@
      "press": "smartbizn.com",
      "publishedAt": "2026-11-04T04:42:00.000Z",
      "link": "https://www.smartbizn.com/news/articleView.html?idxno=158421"
-    },
-    {
-     "title": "음성군·캄보디아 대사관, '외국인 재난 안전 앱' 홍보 협약",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-04T04:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016421303?sid=102"
     }
    ]
   },
@@ -241,15 +273,15 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-04T03:34:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-04T04:02:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "트럼프, 당장 이란 공격 안 한다지만...케슘섬 공습 등 긴장 고조",
+     "title": "트럼프 \"당장 이란 공격 계획 없다\"지만… 케슘섬 공습 등 긴장 고조",
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-04T04:56:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000963559?sid=104"
@@ -269,14 +301,47 @@
    ]
   },
   {
+   "keyword": "윤석열 선거법 2심 선고",
+   "sources": [
+    "signal.bz",
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-04T04:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "윤석열 선거법 2심 선고…방송 지켜보는 시민들",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-04T05:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016421398?sid=100"
+    },
+    {
+     "title": "윤석열 전 대통령 선거법 2심 선고",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-04T05:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009269756?sid=102"
+    },
+    {
+     "title": "尹 선거법 2심 생중계…국힘 397억 반환 기로",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-04T04:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922800?sid=102"
+    }
+   ]
+  },
+  {
    "keyword": "항의하는 국민의힘",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-04T03:36:00.000Z",
+   "articles90": 8,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-04T03:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -301,17 +366,55 @@
    ]
   },
   {
+   "keyword": "신인 드래프트 추첨 9일 개최",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T04:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "프로농구 신인 드래프트 순위 추첨 9일 실시⋯8개 구단 경쟁",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-04T05:12:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2644045"
+    },
+    {
+     "title": "2026 KBL 신인선수 드래프트 순위 추첨 행사, 9일(월) 오후 2시 KBL센터 5...",
+     "press": "basketkorea.com",
+     "publishedAt": "2026-11-04T05:02:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/351/0000089153"
+    },
+    {
+     "title": "KBL, 2026 신인 드래프트 순위 추첨 행사 9일 개최",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-04T04:52:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/445/0000486389"
+    }
+   ]
+  },
+  {
    "keyword": "중간선거 운명",
    "sources": [
     "signal.bz"
    ],
    "articles90": 5,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T03:36:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-04T03:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "트럼프 \"중간선거 내가 안 나가서 패배…결과 수용, 민주와 협력 준비\"...",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-04T05:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005838003?sid=104"
+    },
     {
      "title": "AI 데이터센터가 미국 선거판 흔든다…트럼프 정치 운명부터 빅테크 투...",
      "press": "biz.sbs.co.kr",
@@ -323,12 +426,6 @@
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-04T04:11:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000922786?sid=101"
-    },
-    {
-     "title": "트럼프 \"투표용지에 내 이름 없다…있었으면 압승\"[美 중간선거, 운명의...",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-04T04:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005837967?sid=104"
     }
    ]
   },
@@ -340,10 +437,16 @@
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-04T03:34:00.000Z",
+   "firstArticleAt": "2026-11-04T04:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "투표용지 부족 사태 은폐하려 했나…중앙선관위, 투표록 조작 지시 의혹",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-04T05:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003695680?sid=102"
+    },
     {
      "title": "특검, 투표록 위·변조 정황 포착해 압수수색…\"중앙선관위 지시\"",
      "press": "ajunews.com",
@@ -355,19 +458,45 @@
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-04T04:37:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000922792?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "trump",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 2,
+   "firstArticleAt": "2026-11-04T03:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "Đảng Dân chủ giành lại Hạ viện Mỹ, Tổng thống Trump đ",
+     "press": "vn.asiatoday.co.kr",
+     "publishedAt": "2026-11-04T05:12:00.000Z",
+     "link": "https://vn.asiatoday.co.kr/view.php?key=20261104001348471"
     },
     {
-     "title": "주진우 \"투표록 위변조는 조직적 증거인멸…선관위 최고위직 즉각 체포...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-04T03:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001038293?sid=100"
+     "title": "The American People Have Repudiated Trump",
+     "press": "nytimes.com",
+     "publishedAt": "2026-11-04T04:48:00.000Z",
+     "link": "https://www.nytimes.com/2026/11/03/opinion/democracy-midterms-trump.html?partner=naver"
+    },
+    {
+     "title": "Winning the Senate, Democrats Secure a Platform to Check Trump",
+     "press": "nytimes.com",
+     "publishedAt": "2026-11-04T04:46:00.000Z",
+     "link": "https://www.nytimes.com/2026/11/03/us/politics/senate-election-control.html?partner=naver"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 602,
+  "flagged": 605,
   "matched": 254,
   "avgLeadMin": 298,
   "recent": [
