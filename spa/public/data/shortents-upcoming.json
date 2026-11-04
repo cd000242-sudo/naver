@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T02:12:46.975Z",
+ "builtAt": "2026-11-04T02:22:51.382Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,118 +8,60 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 22,
  "candidates": [
-  {
-   "keyword": "김민석 과세 유예 제안",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 51,
-   "recent20": 13,
-   "press": 45,
-   "firstArticleAt": "2026-11-04T01:04:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김민석 민주당 대표 \"가상자산 소득 과세 유예, 정부에 공식 제안\"",
-     "press": "taxtimes.co.kr",
-     "publishedAt": "2026-11-04T02:10:00.000Z",
-     "link": "https://www.taxtimes.co.kr/news/article.html?no=277602"
-    },
-    {
-     "title": "김민석, 정부에 '가상자산 과세유예' 공식 제안",
-     "press": "seouleconews.com",
-     "publishedAt": "2026-11-04T02:06:00.000Z",
-     "link": "http://www.seouleconews.com/news/articleView.html?idxno=94776"
-    },
-    {
-     "title": "김민석 \"가상자산 과세 유예\" 제안…'신천지 의혹' 파열음은 계속",
-     "press": "hg-times.com",
-     "publishedAt": "2026-11-04T02:04:00.000Z",
-     "link": "https://www.hg-times.com/news/articleView.html?idxno=306714"
-    }
-   ]
-  },
   {
    "keyword": "선관위 특검 압수수색",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 40,
-   "recent20": 7,
-   "press": 37,
-   "firstArticleAt": "2026-11-04T00:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "선관위 특검, '사전투표용지 발급기 459억 특혜' 중앙선관위·업체 압수...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-04T02:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000963524?sid=102"
-    },
-    {
-     "title": "[속보]459억대 '투표용지발급기' 사업도 비리 있었나...특검, 선관위 추...",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-04T02:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000120565?sid=102"
-    },
-    {
-     "title": "특검팀, '사전투표용지 발급기 제작 사업 특혜 의혹' 중앙선관위 압색",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-04T02:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003151146?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "북, 동해상 발사체 발사",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 34,
-   "recent20": 2,
-   "press": 29,
+   "articles90": 41,
+   "recent20": 10,
+   "press": 39,
    "firstArticleAt": "2026-11-04T00:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "北, 동해상으로 미상 발사체 발사…김여정 대미 경고 수시간 만",
-     "press": "ppss.kr",
-     "publishedAt": "2026-11-04T02:08:00.000Z",
-     "link": "https://www.ppss.kr/news/articleView.html?idxno=318980"
+     "title": "특검, 459억대 사전투표지 발급기 사업 특혜 의혹 선관위 압수수색",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-04T02:18:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3445785"
     },
     {
-     "title": "北 ‘바이낸스 배후’ 반발하며 대화여지는 남겨…동해상에 또 미상발사...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-04T02:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002718648?sid=100"
+     "title": "선관위 특검, 459억 규모 ‘사전투표용지 발급기 특혜 의혹’ 중앙선관...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-04T02:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003695626?sid=102"
     },
     {
-     "title": "北, 동해상으로 미상 발사체 발사…일주일 새 네 번째 무력시위",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-04T01:50:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611040070"
+     "title": "선관위 특검, '사전투표용지 발급기 특혜 의혹' 중앙선관위 압수수색",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-04T02:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922741?sid=102"
     }
    ]
   },
   {
-   "keyword": "최동원, 스포츠영웅 선정",
+   "keyword": "대한민국 스포츠영웅 선정",
    "sources": [
     "nate"
    ],
-   "articles90": 23,
-   "recent20": 5,
-   "press": 23,
+   "articles90": 24,
+   "recent20": 3,
+   "press": 24,
    "firstArticleAt": "2026-11-04T01:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘KS 나홀로 4승’ 무쇠팔 최동원, 2026 스포츠영웅 선정",
+     "title": "한국시리즈 4승의 전설… 故 최동원, 2026 대한민국 스포츠영웅 선정",
+     "press": "mookas.com",
+     "publishedAt": "2026-11-04T02:14:00.000Z",
+     "link": "https://www.mookas.com/news/20190"
+    },
+    {
+     "title": "“마, 함 해보입시더” 故최동원, 2026 스포츠영웅 선정",
      "press": "donga.com",
      "publishedAt": "2026-11-04T02:10:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/020/0003759966?sid=102"
@@ -129,44 +71,38 @@
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-04T02:06:00.000Z",
      "link": "https://m.sports.naver.com/kbaseball/article/079/0004206307"
-    },
-    {
-     "title": "'불멸의 무쇠팔' 故 최동원, 2026 대한민국 스포츠영웅 선정",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-04T02:02:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/003/0014300316"
     }
    ]
   },
   {
-   "keyword": "더 뉴 BMW 7시리즈 출시",
+   "keyword": "김민석 최고위 참석",
    "sources": [
     "nate"
    ],
-   "articles90": 30,
-   "recent20": 4,
-   "press": 17,
-   "firstArticleAt": "2026-11-04T00:46:00.000Z",
-   "exclusive": true,
+   "articles90": 26,
+   "recent20": 8,
+   "press": 21,
+   "firstArticleAt": "2026-11-04T00:55:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "BMW 코리아, '노이어 클라쎄' 이식한 '더 뉴 7시리즈' 출시",
-     "press": "lcnews.co.kr",
-     "publishedAt": "2026-11-04T02:10:00.000Z",
-     "link": "https://www.lcnews.co.kr/news/articleView.html?idxno=210830"
+     "title": "최민희 “김민석이 ‘신천지 발언’ 말라고 압박”…반격 나선 친청계",
+     "press": "segye.com",
+     "publishedAt": "2026-11-04T02:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004172422?sid=100"
     },
     {
-     "title": "BMW코리아, 7시리즈 부분변경 모델 '더 뉴 BMW 7시리즈' 국내 출시",
-     "press": "finomy.com",
-     "publishedAt": "2026-11-04T01:58:00.000Z",
-     "link": "http://www.finomy.com/news/articleView.html?idxno=265557"
+     "title": "사과에도 ‘신천지 논란’ 계속...김민석 “자정 노력과 제도 개선 절차...",
+     "press": "vop.co.kr",
+     "publishedAt": "2026-11-04T02:20:00.000Z",
+     "link": "https://vop.co.kr/A00001697455.html"
     },
     {
-     "title": "BMW코리아, 플래그십 세단 '더 뉴 BMW 7시리즈' 국내 공개",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-04T01:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000541594?sid=101"
+     "title": "친정청래계 \"김민석, '정당법 위반' 조사해야\"",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-04T02:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001072049?sid=100"
     }
    ]
   },
@@ -175,30 +111,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 18,
-   "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-04T00:47:00.000Z",
+   "articles90": 20,
+   "recent20": 3,
+   "press": 16,
+   "firstArticleAt": "2026-11-04T00:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "에스오에스랩, ‘2026 로보월드’ 참가…라이다 기술력 공개랩",
-     "press": "sentv.co.kr",
-     "publishedAt": "2026-11-04T02:00:00.000Z",
-     "link": "https://www.sentv.co.kr/article/view/sentv202611040083"
+     "title": "[더벨][i-point] 에스오에스랩, '2026 로보월드' 참가",
+     "press": "thebell.co.kr",
+     "publishedAt": "2026-11-04T02:18:00.000Z",
+     "link": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202611041034133680107642"
     },
     {
-     "title": "에스비비테크, '로보월드 2026' 출격…휴머노이드 겨냥 초소형 정밀감속...",
-     "press": "widedaily.com",
-     "publishedAt": "2026-11-04T01:56:00.000Z",
-     "link": "https://www.widedaily.com/news/articleView.html?idxno=302820"
+     "title": "에스오에스랩, '2026 로보월드'서 라이다 기술 공개",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-04T02:12:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261104000451"
     },
     {
-     "title": "브릴스, 로보월드 최대 규모 참가…차세대 피지컬 AI 기술 선봬",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-04T01:52:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1730400"
+     "title": "브릴스, '2026 로보월드' 참가해 피지컬 AI 로봇 기술 공개",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-04T02:11:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261104000446"
     }
    ]
   },
@@ -208,12 +144,18 @@
     "google"
    ],
    "articles90": 13,
-   "recent20": 4,
+   "recent20": 5,
    "press": 13,
-   "firstArticleAt": "2026-11-04T00:47:00.000Z",
+   "firstArticleAt": "2026-11-04T00:54:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "장인화 포스코 회장, 금속·재료상 수상",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-04T02:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002718677?sid=101"
+    },
     {
      "title": "포스코 포항제철소, 데이터로 설비 이상 포착…예지정비 체계 고도화",
      "press": "kmib.co.kr",
@@ -225,12 +167,6 @@
      "press": "newskr.kr",
      "publishedAt": "2026-11-04T02:10:00.000Z",
      "link": "http://www.newskr.kr/news/articleView.html?idxno=107684"
-    },
-    {
-     "title": "포스코·현대제철, 철강 불황에도 수익성 반등…어떻게 꾀했나",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-04T02:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002247223?sid=101"
     }
    ]
   },
@@ -243,10 +179,16 @@
    "articles90": 11,
    "recent20": 2,
    "press": 11,
-   "firstArticleAt": "2026-11-04T00:48:00.000Z",
+   "firstArticleAt": "2026-11-04T01:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "송중기♥케이티, 두 자녀와 한강 산책 포착",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-04T02:22:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611040203"
+    },
     {
      "title": "\"가정적인 아빠\"…송중기·케이티, 두 자녀와 산책 목격담",
      "press": "stoo.com",
@@ -258,12 +200,6 @@
      "press": "spotvnews.co.kr",
      "publishedAt": "2026-11-04T02:02:00.000Z",
      "link": "https://m.entertain.naver.com/article/477/0000637039"
-    },
-    {
-     "title": "“유모차와 짐은 송중기가” 송중기♥케이티 한결같은 목격담 확산",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-04T01:37:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001184316"
     }
    ]
   },
@@ -272,13 +208,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 4,
-   "press": 9,
+   "articles90": 11,
+   "recent20": 3,
+   "press": 10,
    "firstArticleAt": "2026-11-04T00:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "기념촬영하는 한병도 원내대표와 전북지역 시도지사들",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-04T02:16:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3741916"
+    },
     {
      "title": "정부 건의문 채택한 전북 국회의원…\"피지컬 AI 내년 예산 '1조3000억원'...",
      "press": "pressian.com",
@@ -290,12 +232,38 @@
      "press": "eroun.net",
      "publishedAt": "2026-11-04T02:08:00.000Z",
      "link": "https://www.eroun.net/news/articleView.html?idxno=94336"
+    }
+   ]
+  },
+  {
+   "keyword": "북한, 동해 발사체 발사",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-04T00:55:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "북한 또다시 발사체 발사, 동해 긴장감 최고조",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-04T01:48:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=884046"
     },
     {
-     "title": "\"새만금을 피지컬AI·로봇 글로벌 거점으로\"… 전북, 1조 3000억 규모 5대...",
-     "press": "greened.kr",
-     "publishedAt": "2026-11-04T02:01:00.000Z",
-     "link": "https://www.greened.kr/news/articleView.html?idxno=353782"
+     "title": "합참 \"북한 동해상으로 미상 발사체 쐈다\"…탄도미사일 여부 분석 중",
+     "press": "pointe.co.kr",
+     "publishedAt": "2026-11-04T01:30:00.000Z",
+     "link": "https://www.pointe.co.kr/news/articleView.html?idxno=87144"
+    },
+    {
+     "title": "\"북, 동해 상으로 발사체 발사\"...미사일이면 나흘만",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-04T01:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002428113?sid=100"
     }
    ]
   },
@@ -330,11 +298,43 @@
      "link": "https://www.viva100.com/article/20261104500329"
     }
    ]
+  },
+  {
+   "keyword": "더 뉴 BMW 7시리즈 상륙",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-04T01:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한국 상륙한 더 뉴 BMW 7시리즈",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-04T01:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016420675?sid=101"
+    },
+    {
+     "title": "더 뉴 BMW 7시리즈, 한국 시장 상륙",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-04T01:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016420666?sid=101"
+    },
+    {
+     "title": "한국 시장 상륙, 더 뉴 BMW 7시리즈",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-04T01:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016420673?sid=101"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 552,
+  "flagged": 556,
   "matched": 227,
   "avgLeadMin": 279,
   "recent": [
