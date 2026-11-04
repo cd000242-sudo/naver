@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T18:20:50.920Z",
+ "builtAt": "2026-11-04T18:40:56.997Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "삼성, 12회 연장 승리",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 3,
-   "recent20": 0,
+   "articles90": 4,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-04T17:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "디아즈에 한숨, 페덱에 박수... 삼성 박진만 감독, 12회 끝에 웃고 대구...",
+     "press": "stnsports.co.kr",
+     "publishedAt": "2026-11-04T18:39:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/450/0000155310"
+    },
     {
      "title": "첫판엔 5실점, 이번엔 7이닝 1실점... 삼성 살린 '우승청부사' 페덱 MVP",
      "press": "stnsports.co.kr",
@@ -33,12 +39,6 @@
      "press": "maniareport.com",
      "publishedAt": "2026-11-04T17:16:00.000Z",
      "link": "https://m.sports.naver.com/kbaseball/article/425/0000213918"
-    },
-    {
-     "title": "“배찬승이 많이 컸다” 박진만 감독, 연장 12회 혈투 버틴 불펜에 엄지...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-04T17:11:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/109/0005634982"
     }
    ]
   }
