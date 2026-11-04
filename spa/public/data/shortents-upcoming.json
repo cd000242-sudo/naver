@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T17:50:35.056Z",
+ "builtAt": "2026-11-04T18:00:38.848Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,11 +8,44 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
- "candidates": [],
+ "measured": 26,
+ "candidates": [
+  {
+   "keyword": "美 민주당 압승",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-04T16:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美 민주당 의회 장악에도 기업들 신중론…무역정책 변화 '미지수'",
+     "press": "bloter.net",
+     "publishedAt": "2026-11-04T17:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/293/0000092731?sid=101"
+    },
+    {
+     "title": "국제유가 급락, 브렌트 9%대↓…美 민주 중간선거 압승에 종전 기대",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-04T17:16:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261105000015"
+    },
+    {
+     "title": "美 국채가, 전반적 강세…민주당 압승 프라이싱",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-04T17:12:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443082"
+    }
+   ]
+  }
+ ],
  "hitRate": {
   "days": 7,
-  "flagged": 784,
+  "flagged": 785,
   "matched": 329,
   "avgLeadMin": 288,
   "recent": [
