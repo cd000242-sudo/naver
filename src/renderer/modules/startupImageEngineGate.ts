@@ -79,12 +79,12 @@ export function startupImageBuildPlan(options: readonly StartupImageOption[], st
 
 function startupImageCard(option: StartupImageOption, checked: boolean): string {
   const price = option.price
-    ? `<div style="font-size:0.78rem;color:#4b5563;margin-top:0.15rem;line-height:1.35;">${startupImageEscape(option.price)}</div>`
+    ? `<div class="nv-modal__note" style="font-size:0.78rem;margin-top:0.15rem;line-height:1.35;">${startupImageEscape(option.price)}</div>`
     : '';
   return `
     <label data-image-engine-option="${startupImageEscape(option.value)}" style="display:flex;gap:0.7rem;align-items:flex-start;border:2px solid ${checked ? '#4f46e5' : '#e5e7eb'};border-radius:10px;padding:0.55rem 0.8rem;cursor:pointer;background:${checked ? '#eef2ff' : '#fff'};">
       <input type="radio" name="${STARTUP_IMAGE_CHOICE_NAME}" value="${startupImageEscape(option.value)}" ${checked ? 'checked' : ''} style="margin-top:3px;width:17px;height:17px;accent-color:#4f46e5;cursor:pointer;">
-      <div style="flex:1;min-width:0;"><div style="font-weight:800;color:#111827;font-size:0.92rem;">${startupImageEscape(option.title)}</div>${price}</div>
+      <div style="flex:1;min-width:0;"><div style="font-weight:800;font-size:0.92rem;">${startupImageEscape(option.title)}</div>${price}</div>
     </label>`;
 }
 
@@ -94,7 +94,7 @@ export function startupImageGateHtml(plan: StartupImagePlan): string {
   return `
       <div id="${STARTUP_IMAGE_SECTION_ID}" class="nv-gate-col">
         <div class="nv-gate-col__head">🎨 이미지 엔진</div>
-        <div style="font-size:0.82rem;color:#6b7280;margin:0.2rem 0 0.6rem;">이미지 탭의 생성 엔진과 같은 설정입니다. Flow · 리더스 나노바나나 · 젠스파크는 이미지 탭에서 로그인이 필요합니다.</div>
+        <div class="nv-modal__note" style="margin:0.2rem 0 0.6rem;">이미지 탭의 생성 엔진과 같은 설정입니다. Flow · 리더스 나노바나나 · 젠스파크는 이미지 탭에서 로그인이 필요합니다.</div>
         <div class="nv-gate-col__list" style="display:flex;flex-direction:column;gap:0.45rem;">${plan.options.map((option) => startupImageCard(option, option.value === plan.checked)).join('')}</div>
       </div>`;
 }

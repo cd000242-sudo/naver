@@ -47,9 +47,9 @@ function startupGateViewSavedLine(plan: StartupGateViewPlan): string {
     return `<div class="nv-modal__note" style="margin-bottom:0.75rem;">이전에 선택한 엔진: <b>${startupGateViewEscape(plan.saved)}</b> — 그대로 쓰려면 확인을 누르세요.</div>`;
   }
   if (plan.agentDefault) {
-    return `<div style="font-size:0.85rem;color:#4b5563;margin-bottom:0.75rem;">저장된 엔진이 없어 구독 에이전트를 먼저 골라 두었습니다. 설치·로그인이 안 된 에이전트는 확인을 누르면 이 창에서 바로 연결합니다.</div>`;
+    return `<div class="nv-modal__note" style="font-size:0.85rem;margin-bottom:0.75rem;">저장된 엔진이 없어 구독 에이전트를 먼저 골라 두었습니다. 설치·로그인이 안 된 에이전트는 확인을 누르면 이 창에서 바로 연결합니다.</div>`;
   }
-  return `<div style="font-size:0.85rem;color:#b45309;margin-bottom:0.75rem;">저장된 엔진이 없습니다. 글을 만들기 전에 엔진을 골라 주세요.</div>`;
+  return `<div style="font-size:0.85rem;color:var(--nv-amber);margin-bottom:0.75rem;">저장된 엔진이 없습니다. 글을 만들기 전에 엔진을 골라 주세요.</div>`;
 }
 
 function startupGateViewHint(plan: StartupGateViewPlan): string {
