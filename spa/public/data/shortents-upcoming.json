@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T02:53:03.001Z",
+ "builtAt": "2026-11-04T03:03:06.701Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,84 +8,90 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 24,
  "candidates": [
   {
-   "keyword": "지역의대 신설 확정",
+   "keyword": "김민석 공개 사과 요구",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 82,
-   "recent20": 14,
-   "press": 63,
-   "firstArticleAt": "2026-11-04T01:30:00.000Z",
-   "exclusive": false,
-   "capped": true,
+   "articles90": 77,
+   "recent20": 9,
+   "press": 59,
+   "firstArticleAt": "2026-11-04T01:34:00.000Z",
+   "exclusive": true,
+   "capped": false,
    "samples": [
     {
-     "title": "경북 국립의대 안동 유치 확정···2030년 개교 목표",
-     "press": "tk.newdaily.co.kr",
-     "publishedAt": "2026-11-04T02:52:00.000Z",
-     "link": "https://tk.newdaily.co.kr/site/data/html/2026/11/04/2026110400178.html"
+     "title": "김민석 '신천지 의혹' 사과에도… 친청계 \"비공개 사과로 끝낼 일인가\"",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-04T03:00:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3445811"
     },
     {
-     "title": "경북 숙원 '국립 경국대 의대' 확정…\"이재명 정부, 지방의료 불균형 풀...",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-04T02:50:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=727919"
+     "title": "지지율 하락에 '신천지' 내홍까지…김민석, 돌파구 마련 고심",
+     "press": "straightnews.co.kr",
+     "publishedAt": "2026-11-04T02:58:00.000Z",
+     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=314597"
     },
     {
-     "title": "순천시, 국립의대 신설에 ‘환영’…목포 시민사회 “유감이다. 대응책...",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-04T02:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003562739?sid=102"
+     "title": "김민석 '신천지 사과'에도 여당 내홍···야당 \"즉각 사퇴·수사 촉구\"",
+     "press": "globale.co.kr",
+     "publishedAt": "2026-11-04T02:56:00.000Z",
+     "link": "https://www.globale.co.kr/news/articleView.html?idxno=41418"
     }
    ]
   },
   {
-   "keyword": "코스피 하락 전환",
+   "keyword": "특검, 선관위 압수수색",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 34,
-   "recent20": 5,
-   "press": 33,
-   "firstArticleAt": "2026-11-04T01:24:00.000Z",
+   "articles90": 31,
+   "recent20": 14,
+   "press": 28,
+   "firstArticleAt": "2026-11-04T01:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "코스피 변동성 급증…VI 발동 5만건 넘어 역대 최다",
-     "press": "mediaus.co.kr",
-     "publishedAt": "2026-11-04T02:46:00.000Z",
-     "link": "https://www.mediaus.co.kr/news/articleView.html?idxno=318808"
+     "title": "[속보]특검 “선관위, 용지 부족 투표소에 투표록 위변조 지시”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-04T03:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003759980?sid=100"
     },
     {
-     "title": "'상승 출발' 코스피, 하락 전환 후 낙폭 키워‥5,500선 아래로",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-04T02:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533447?sid=101"
+     "title": "[속보] 특검 \"용지 부족 투표소, 선관위 지시로 '투표록 위변조' 정황\"",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-04T03:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002464194?sid=102"
     },
     {
-     "title": "중간선거 경계감에 코스피·코스닥 약세 전환",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-04T02:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002428167?sid=101"
+     "title": "[속보] 특검 \"투표지 부족 투표소, 투표록 사후 위변조\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-04T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922771?sid=102"
     }
    ]
   },
   {
    "keyword": "SKT, 3분기 영업익 5523억 증가",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 29,
+   "articles90": 24,
    "recent20": 1,
-   "press": 29,
-   "firstArticleAt": "2026-11-04T01:28:00.000Z",
+   "press": 24,
+   "firstArticleAt": "2026-11-04T01:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "통신사들, AI 날개달고 3분기 실적 ‘껑충’",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-04T02:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002830254?sid=101"
+    },
     {
      "title": "SKT, 해킹 충격 털고 실적 반등…통신·AI 쌍끌이 성장",
      "press": "segyebiz.com",
@@ -97,103 +103,64 @@
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-04T02:24:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004206343?sid=105"
-    },
-    {
-     "title": "SK텔레콤, 3분기 영업익 5500억 원 돌파…'통신·AI' 양쪽 날개 펴고 성...",
-     "press": "nbntv.co.kr",
-     "publishedAt": "2026-11-04T02:18:00.000Z",
-     "link": "https://www.nbntv.co.kr/news/articleView.html?idxno=4026968"
     }
    ]
   },
   {
-   "keyword": "김민석 최고위 참석",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 34,
-   "recent20": 5,
-   "press": 28,
-   "firstArticleAt": "2026-11-04T01:27:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "「M포토」 최고위 참석하는 김민석 민주당 대표",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-04T02:52:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=72568"
-    },
-    {
-     "title": "친청계, 김민석 '신천지' 사과에 정당법 위반 조사 주장",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-04T02:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002534611?sid=100"
-    },
-    {
-     "title": "최민희 “김민석, ‘신천지 발언 말라’ 압박…발언 왜 막나” 반발",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-04T02:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000366352?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "선관위 특검 압수수색",
+   "keyword": "동해상으로 발사체 발사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 23,
-   "recent20": 4,
+   "articles90": 24,
+   "recent20": 6,
    "press": 23,
-   "firstArticleAt": "2026-11-04T01:32:00.000Z",
+   "firstArticleAt": "2026-11-04T01:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보]선관위 특검, '투표록 위·변조 의혹' 중앙·서울시선관위 압수수...",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-04T02:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005436415?sid=102"
+     "title": "북한, 동해상으로 미상 발사체 발사",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-04T03:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016421139?sid=100"
     },
     {
-     "title": "[속보] 특검, '투표록 위·변조' 중앙·서울시 선관위 압수수색",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-04T02:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005599229?sid=102"
+     "title": "합참 \"北, 선덕 일대서 동해상으로 미사일 수 발 발사\"",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-04T03:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006403493?sid=100"
     },
     {
-     "title": "[속보] 선관위 특검, 중앙선관위 등 압수수색…투표록 위·변조 혐의",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-04T02:46:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261104000638"
+     "title": "합참, \"북, 동해상 미상 발사체 발사\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-04T03:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009269503?sid=100"
     }
    ]
   },
   {
    "keyword": "대한민국 스포츠영웅 선정",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 23,
-   "recent20": 3,
-   "press": 23,
-   "firstArticleAt": "2026-11-04T01:25:00.000Z",
+   "articles90": 18,
+   "recent20": 2,
+   "press": 18,
+   "firstArticleAt": "2026-11-04T01:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘1984년 한국시리즈 4승 신화’ 故 최동원, 2026 대한민국 스포츠영웅 ...",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-04T02:54:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611040077"
+    },
     {
      "title": "‘무쇠팔’ 故 최동원, 야구선수 최초 스포츠영웅 선정",
      "press": "bntnews.co.kr",
      "publishedAt": "2026-11-04T02:46:00.000Z",
      "link": "https://www.bntnews.co.kr/article/view/bnt202611040205"
-    },
-    {
-     "title": "'84년 한국시리즈 4승 신화' 최동원, 야구 선수 최초 대한민국 스포츠영...",
-     "press": "swtvnews.com",
-     "publishedAt": "2026-11-04T02:42:00.000Z",
-     "link": "https://swtvnews.com/news/newsview.php?ncode=1065580493506752"
     },
     {
      "title": "‘한국시리즈 4승’ 최동원, 대한민국 스포츠영웅 선정",
@@ -204,49 +171,24 @@
    ]
   },
   {
-   "keyword": "동해상으로 발사체 발사",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 21,
-   "recent20": 2,
-   "press": 21,
-   "firstArticleAt": "2026-11-04T01:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "北, 탄도미사일 추정체 발사…김여정, 이틀 연속 대미 담화",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-04T02:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922757?sid=100"
-    },
-    {
-     "title": "군 \"북, 동해상으로 미상발사체 발사\"…탄도미사일이면 나흘만",
-     "press": "tbs.seoul.kr",
-     "publishedAt": "2026-11-04T02:36:00.000Z",
-     "link": "http://tbs.seoul.kr/news/newsView.do?typ_800=9&idx_800=3538676&seq_800=20531577"
-    },
-    {
-     "title": "합참 \"北, 동해상으로 미상 발사체 발사\"",
-     "press": "dkilbo.com",
-     "publishedAt": "2026-11-04T02:26:00.000Z",
-     "link": "https://www.dkilbo.com/news/articleView.html?idxno=559550"
-    }
-   ]
-  },
-  {
    "keyword": "포스코",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 16,
-   "recent20": 6,
-   "press": 14,
+   "articles90": 17,
+   "recent20": 4,
+   "press": 15,
    "firstArticleAt": "2026-11-04T01:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "포스코 포항제철소, 현장 데이터로 설비 고장 잡는다···예지정비 체계...",
+     "press": "tk.newdaily.co.kr",
+     "publishedAt": "2026-11-04T02:56:00.000Z",
+     "link": "https://tk.newdaily.co.kr/site/data/html/2026/11/04/2026110400183.html"
+    },
     {
      "title": "포스코DX, 장애인 크리에이터 공모전 ‘꿈을그린다’ 시상식",
      "press": "munhwa.com",
@@ -258,12 +200,6 @@
      "press": "kbmaeil.com",
      "publishedAt": "2026-11-04T02:46:00.000Z",
      "link": "https://www.kbmaeil.com/article/20261104500315"
-    },
-    {
-     "title": "포스코DX, 장애인 유튜브 크리에이터 공모전 시상…391개 팀 참여",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-04T02:44:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=94536"
     }
    ]
   },
@@ -273,7 +209,7 @@
     "google"
    ],
    "articles90": 14,
-   "recent20": 2,
+   "recent20": 1,
    "press": 12,
    "firstArticleAt": "2026-11-04T01:34:00.000Z",
    "exclusive": false,
@@ -283,7 +219,7 @@
      "title": "2026 로보월드",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-04T02:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016421035?sid=101"
+     "link": "https://n.news.naver.com/mnews/article/001/0016421039?sid=101"
     },
     {
      "title": "브릴스, '2026 로보월드'서 피지컬 AI 기반 로봇 기술 공개",
@@ -298,11 +234,75 @@
      "link": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202611041034133680107642"
     }
    ]
+  },
+  {
+   "keyword": "더 뉴 BMW 7시리즈 국내 출시",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-04T01:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"럭셔리 세단 왕좌 굳힌다\"…BMW, 확 달라진 7시리즈 출격",
+     "press": "dizzotv.com",
+     "publishedAt": "2026-11-04T02:38:00.000Z",
+     "link": "https://www.dizzotv.com/site/data/html_dir/2026/11/04/2026110480083.html"
+    },
+    {
+     "title": "‘BMW 7시리즈’ 4년 만에 페이스리프트 출시…전기차는 508㎞ 달린다",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-04T02:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004007711?sid=101"
+    },
+    {
+     "title": "BMW, 부분변경 7시리즈 국내 출시…1억6190만원부터",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-04T02:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000548593?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "러시아 우크라 구호센터 폭격",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T02:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "러시아, 구호품 줄선 우크라 주민에 폭탄세례… 33명 사망",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-04T02:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002830250?sid=104"
+    },
+    {
+     "title": "러 미사일 86발 쏟아졌는데…“우크라, 새 패트리엇 2030년 말에야 받는...",
+     "press": "nownews.seoul.co.kr",
+     "publishedAt": "2026-11-04T02:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003695631?sid=104"
+    },
+    {
+     "title": "러, 우크라 구호센터 폭격해 최소 33명 사망…종전협상 주도권 노리나",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-04T02:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012286956?sid=104"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 562,
+  "flagged": 563,
   "matched": 229,
   "avgLeadMin": 277,
   "recent": [
