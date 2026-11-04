@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-03T23:51:56.436Z",
+ "builtAt": "2026-11-04T00:01:59.699Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 19,
+ "measured": 18,
  "candidates": [
   {
-   "keyword": "HLB 간암 신약 본심사 재개",
+   "keyword": "HLB 간암 신약 FDA",
    "sources": [
     "daum"
    ],
-   "articles90": 18,
+   "articles90": 25,
    "recent20": 6,
-   "press": 18,
-   "firstArticleAt": "2026-11-03T23:02:00.000Z",
+   "press": 24,
+   "firstArticleAt": "2026-11-03T23:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "HLB “간암신약 ‘리보세라닙’, 美 FDA 본심사 재개”",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-03T23:46:00.000Z",
-     "link": "https://www.viva100.com/article/20261104500148"
+     "title": "HLB 간암 신약, FDA 본심사 재개…내년 4월 9일 허가 여부 판가름",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-04T00:00:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2643801"
     },
     {
-     "title": "HLB 간암 신약, 美 FDA 허가 재도전…내년 4월 결론",
-     "press": "news.bizwatch.co.kr",
-     "publishedAt": "2026-11-03T23:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/648/0000052257?sid=101"
+     "title": "[핫타임]간암 신약, 美 허가 지연…HLB·HLB 제약 동반 20% 이상 '급락'",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-03T23:56:00.000Z",
+     "link": "https://www.ajunews.com/view/20261104085050913"
     },
     {
-     "title": "HLB 간암 신약 FDA 본심사 재개…내년 4월 허가 여부 결정",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-03T23:38:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1730361"
+     "title": "HLB, 간암 신약 ‘리보세라닙’ FDA 본심사 재개",
+     "press": "fntimes.com",
+     "publishedAt": "2026-11-03T23:54:00.000Z",
+     "link": "https://www.fntimes.com/html/view.php?ud=2026110408510173537fd637f543_18"
     }
    ]
   },
@@ -48,7 +48,7 @@
     "nate"
    ],
    "articles90": 14,
-   "recent20": 3,
+   "recent20": 1,
    "press": 13,
    "firstArticleAt": "2026-11-03T22:36:00.000Z",
    "exclusive": true,
@@ -75,34 +75,34 @@
    ]
   },
   {
-   "keyword": "뮌헨 아틀레티코 승리",
+   "keyword": "리센느 음원차트 1위 싹쓸이",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 15,
+   "articles90": 11,
    "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-03T22:22:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-03T22:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이강인·김민재 UCL ‘코리안 더비’ 성사… 뮌헨 2대0 승",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-03T23:47:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/023/0004007672"
+     "title": "리센느 일냈다…컴백하자마자 음원차트 1위 올킬",
+     "press": "ize.co.kr",
+     "publishedAt": "2026-11-03T23:55:00.000Z",
+     "link": "https://m.entertain.naver.com/article/465/0000020757"
     },
     {
-     "title": "'韓 축구 에이스 대결' 벌인 이강인·김민재 희비 엇갈렸다…뮌헨의 '높...",
-     "press": "goal.com",
-     "publishedAt": "2026-11-03T23:41:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/216/0000143564"
+     "title": "리센느 'With', 멜론 톱10 싹쓸이…'소셜 로컬힙→음원 대세힙' 진화",
+     "press": "nc.press",
+     "publishedAt": "2026-11-03T23:53:00.000Z",
+     "link": "https://www.nc.press/news/articleView.html?idxno=630164"
     },
     {
-     "title": "모레노 앞 '코리안 더비' 성사…B.뮌헨, 원정서 AT마드리드에 승리",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-03T23:28:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/417/0001163164"
+     "title": "리센느, '초동' 첫날부터 터졌다⋯음원 차트 1위 싹쓸이",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-03T23:30:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2643790"
     }
    ]
   },
@@ -111,10 +111,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-03T22:24:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-03T22:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -139,12 +139,12 @@
    ]
   },
   {
-   "keyword": "장동혁 아카데미 참석",
+   "keyword": "굿모닝 수요 아카데미",
    "sources": [
     "nate"
    ],
-   "articles90": 11,
-   "recent20": 2,
+   "articles90": 17,
+   "recent20": 3,
    "press": 6,
    "firstArticleAt": "2026-11-03T23:08:00.000Z",
    "exclusive": false,
@@ -157,16 +157,16 @@
      "link": "https://n.news.naver.com/mnews/article/001/0016420226?sid=100"
     },
     {
+     "title": "'굿모닝 수요정책 아카데미' 발언하는 장동혁 대표",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-03T23:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016420219?sid=100"
+    },
+    {
      "title": "'굿모닝 수요정책 아카데미' 참석하는 장동혁 대표",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-03T23:42:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016420216?sid=100"
-    },
-    {
-     "title": "[포토] 파이팅 외치는 장동혁 대표",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-03T23:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005837675?sid=100"
     }
    ]
   },
@@ -176,7 +176,7 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-03T22:32:00.000Z",
    "exclusive": false,
@@ -205,7 +205,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 501,
+  "flagged": 504,
   "matched": 211,
   "avgLeadMin": 283,
   "recent": [
