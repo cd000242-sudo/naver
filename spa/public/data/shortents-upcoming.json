@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T14:49:23.460Z",
+ "builtAt": "2026-11-04T14:59:29.022Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "삼성 연장 12회 승리",
@@ -16,29 +16,29 @@
     "daum"
    ],
    "articles90": 69,
-   "recent20": 14,
-   "press": 37,
-   "firstArticleAt": "2026-11-04T14:04:00.000Z",
+   "recent20": 13,
+   "press": 36,
+   "firstArticleAt": "2026-11-04T14:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성, 연장 12회 혈투 끝 KT 제압…한국시리즈 1승 1패 원점",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-04T14:44:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261104010001810"
+     "title": "\"3~5차전 모두 이겨 대구에서 우승하고싶다\" 연장 접전 승리 지킨 세이...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-04T14:57:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/117/0004122160"
     },
     {
-     "title": "연장까지 이어진 KS 2차전, 웃은 건 삼성라이온즈…선발 호투, 디아즈 4...",
-     "press": "dgmbc.com",
-     "publishedAt": "2026-11-04T14:43:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/657/0000057036"
+     "title": "'승장' 삼성 박진만 감독 \"목표했던 1승 1패로 수원 원정 마쳐…대구에...",
+     "press": "thesportstimes.co.kr",
+     "publishedAt": "2026-11-04T14:56:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/472/0000042283"
     },
     {
-     "title": "[야구] 삼성, 연장 12회 혈투 끝에 승리… KS 1승 1패",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-04T14:42:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3446025"
+     "title": "1승 1패로 대구행! 삼성 박진만 감독 \"(디아즈 때문에) 한숨 너무 많이 ...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-04T14:55:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/117/0004122159"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 18,
-   "recent20": 4,
-   "press": 13,
+   "articles90": 21,
+   "recent20": 6,
+   "press": 14,
    "firstArticleAt": "2026-11-04T13:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성, 연장 12회 혈투 끝 KT 제압…한국시리즈 1승 1패 원점",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-04T14:44:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261104010001810"
+     "title": "kt 이강철 감독 “아쉽지만 3차전 잘 준비하겠다”",
+     "press": "kyeongin.com",
+     "publishedAt": "2026-11-04T14:52:00.000Z",
+     "link": "https://www.kyeongin.com/article/1774140"
     },
     {
-     "title": "삼성, 연장 12회 혈투 끝에 웃었다…kt 꺾고 KS 1승 1패",
-     "press": "kyongbuk.co.kr",
-     "publishedAt": "2026-11-04T14:42:00.000Z",
-     "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4089737"
+     "title": "[야구] kt 소형준 vs 삼성 후라도, KS 3차전 격돌",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-04T14:50:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3446026"
     },
     {
-     "title": "이강철 감독 \"이런 야구 처음\"…kt, 연장 12회 끝 삼성에 KS 2차전 패배",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-04T14:40:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16268603"
+     "title": "'패장' kt 이강철 감독 \"이런 야구 처음…마지막에 운이 삼성 쪽으로 가...",
+     "press": "thesportstimes.co.kr",
+     "publishedAt": "2026-11-04T14:50:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/472/0000042282"
     }
    ]
   },
@@ -79,10 +79,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 12,
+   "articles90": 10,
    "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-04T13:23:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-04T13:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,49 +107,16 @@
    ]
   },
   {
-   "keyword": "박계범",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-04T13:21:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[포토] 박계범 '11회 아쉬운 삼진'",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-04T13:26:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/076/0004463329"
-    },
-    {
-     "title": "[포토] 김정운 '박계범 삼진잡고 포효'",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-04T13:24:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/108/0003484737"
-    },
-    {
-     "title": "[포토S] 역전 찬스에서 삼진 당한 박계범",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-04T13:23:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/477/0000637257"
-    }
-   ]
-  },
-  {
    "keyword": "수사",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
    "firstArticleAt": "2026-11-04T13:54:00.000Z",
-   "exclusive": false,
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
@@ -165,10 +132,74 @@
      "link": "https://n.news.naver.com/mnews/article/055/0001400721?sid=102"
     },
     {
-     "title": "[송평인 칼럼]대통령의 퇴행적 수사기관 통제",
-     "press": "donga.com",
-     "publishedAt": "2026-11-04T14:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003760124?sid=110"
+     "title": "[단독] “6.3 지방선거 수사 우려”…투표록 위조 혐의 10여 명 피의자로",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-04T14:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012287573?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "중앙선관위 투표록 수정 지시",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-04T13:53:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[단독] “6.3 지방선거 수사 우려”…투표록 위조 혐의 10여 명 피의자로",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-04T14:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012287573?sid=102"
+    },
+    {
+     "title": "선관위 특검, 중앙선관위 압수수색…투표소 40여 곳, 투표록 위·변조 의...",
+     "press": "wolyo.co.kr",
+     "publishedAt": "2026-11-04T14:16:00.000Z",
+     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=320067"
+    },
+    {
+     "title": "특검, '투표록 조작·459억 발급기 특혜' 중앙선관위 12시간 압수수색…...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-04T14:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005599602?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "트럼프 중간선거 발언",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-04T13:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "미 중간선거 민주당 상·하원 압승...트럼프 '남 탓'",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-04T14:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002428441?sid=104"
+    },
+    {
+     "title": "美 공화당 중간선거 참패 후폭풍…\"2032년까지 상원 탈환 어려울 수도\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-04T14:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009271115?sid=104"
+    },
+    {
+     "title": "트럼프 완패한 美중간선거…세계 각국 반응은?",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-04T13:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006403839?sid=104"
     }
    ]
   },
@@ -178,10 +209,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-04T13:24:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-04T13:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -210,10 +241,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-04T13:23:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-04T13:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -234,70 +265,6 @@
      "press": "xportsnews.com",
      "publishedAt": "2026-11-04T13:36:00.000Z",
      "link": "https://m.entertain.naver.com/article/311/0002076823"
-    }
-   ]
-  },
-  {
-   "keyword": "중앙선관위 투표록 수정 지시",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-04T13:53:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "선관위 특검, 중앙선관위 압수수색…투표소 40여 곳, 투표록 위·변조 의...",
-     "press": "wolyo.co.kr",
-     "publishedAt": "2026-11-04T14:16:00.000Z",
-     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=320067"
-    },
-    {
-     "title": "특검, '투표록 조작·459억 발급기 특혜' 중앙선관위 12시간 압수수색…...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-04T14:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005599602?sid=102"
-    },
-    {
-     "title": "‘투표록 사후수정’ 중앙선관위 압수수색한 특검…관계자 10명 입건",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-04T14:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005759184?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "트럼프 중간선거 발언",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-04T13:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美 공화당 중간선거 참패 후폭풍…\"2032년까지 상원 탈환 어려울 수도\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T14:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009271115?sid=104"
-    },
-    {
-     "title": "트럼프 완패한 美중간선거…세계 각국 반응은?",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-04T13:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006403839?sid=104"
-    },
-    {
-     "title": "미국 중간선거, 민심의 반란은 트럼프의 남은 2년을 어떻게 바꿀 것인가...",
-     "press": "koreaittimes.com",
-     "publishedAt": "2026-11-04T13:40:00.000Z",
-     "link": "https://www.koreaittimes.com/news/articleView.html?idxno=158830"
     }
    ]
   }
