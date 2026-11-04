@@ -196,7 +196,7 @@ describe('sheets', () => {
   it('components sheet is linked right after theme-naver.css and before the transitional sheet', () => {
     const sheets = [...html.matchAll(/<link\s+rel="stylesheet"\s+href="([^"]+)"/g)].map((m) => m[1]).filter((h) => !/^https?:/.test(h));
     // 2026-11-03: the optional dark sheet follows (themeDarkMode1103.test.ts).
-    expect(sheets.slice(-4)).toEqual(['theme-naver.css', 'theme-naver-components.css', 'theme-naver-transitional.css', 'theme-naver-dark.css']);
+    expect(sheets.slice(-5)).toEqual(['theme-naver.css', 'theme-naver-components.css', 'theme-naver-transitional.css', 'theme-naver-dark.css', 'theme-naver-tint.css']);
   });
 
   it('every theme sheet stays under 300 lines and the transitional sheet got no new rules', () => {

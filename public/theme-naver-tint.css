@@ -1,0 +1,64 @@
+/* ============================================================================
+   theme-naver-tint.css — eye-comfort screens (2026-11-04, owner: "화면밝기도 초록 파랑으로 … 눈아프다고 하시는 분들이
+   계셔서 … 눈에 최대한 좋고 눈부시지 않게 글자도 잘 보이도록").
+   Linked LAST in public/index.html, scoped to html[data-theme="green"] / html[data-theme="blue"] only.
+   Rules: no pure white surface and no pure black text (low glare, low halation), low-saturation tints, body text
+   ≥ 7:1 and every smaller text token ≥ 4.5:1 on both card and page (themeTint1104.test.ts), white text on the action
+   fill ≥ 4.5:1. Logs stay green on both (owner 2026-11-03: light-screen logs are green).
+   ========================================================================== */
+
+/* 1. Soft green (sage) */
+:root[data-theme="green"] {
+  color-scheme: light;
+  --nv-green: #3F9A63; --nv-green-hover: #358754;
+  --nv-fill: #2A7048; --nv-fill-hover: #215C3A;
+  --nv-green-text: #1F5E37;
+  --nv-green-soft: #CCE0D0; --nv-green-line: #A2C4AB;
+  --nv-ink: #18261C; --nv-ink-2: #2B3B30; --nv-ink-3: #3F5145; --nv-ink-4: #4A5C50;
+  --nv-page: #D8E6DA; --nv-card: #E6EFE7; --nv-sunken: #DEE9E0;
+  --nv-line: #A9BFAE; --nv-line-strong: #9DB4A2; --nv-line-soft: #C9D8CC; --nv-line-hover: #7F9985;
+  --nv-select-bg: #DEDAF0; --nv-select-border: #6B55D9; --nv-select-ink: #3A2A8C; --nv-select-tag-bg: #D0C8EE;
+  --nv-hover-bg: #D2E2D5;
+  --nv-red-line: #E0B4AD; --nv-amber-line: #DCC394; --nv-scrim: rgba(20, 35, 25, 0.45); --nv-scrim-light: rgba(216, 230, 218, 0.94); --nv-select-line: #B9AEE3;
+  --nv-red: #A82017; --nv-red-soft: #F0DAD5; --nv-amber: #7E4406; --nv-amber-soft: #EDE2C8;
+  --nv-blue: #1A4FA3; --nv-pink: #9A1449;
+  --nv-log-ink: #1F5E37;
+  --bg-glass: rgba(230, 239, 231, 0.97); --bg-hover: rgba(63, 154, 99, 0.10); --bg-elev: var(--nv-card);
+  --shadow-sm: 0 1px 2px rgba(24, 38, 28, 0.06); --shadow-md: 0 1px 3px rgba(24, 38, 28, 0.08);
+  --shadow-lg: 0 4px 14px rgba(24, 38, 28, 0.10); --shadow-xl: 0 12px 32px rgba(24, 38, 28, 0.16);
+}
+
+/* 2. Soft blue (slate) */
+:root[data-theme="blue"] {
+  color-scheme: light;
+  --nv-green: #3E7BC9; --nv-green-hover: #356CB2;
+  --nv-fill: #2A5C9A; --nv-fill-hover: #214A7E;
+  --nv-green-text: #1F4F8C;
+  --nv-green-soft: #CBDAEC; --nv-green-line: #A4BEDC;
+  --nv-ink: #172231; --nv-ink-2: #2A3A4E; --nv-ink-3: #3E4E63; --nv-ink-4: #48596F;
+  --nv-page: #D7E1EC; --nv-card: #E5ECF4; --nv-sunken: #DCE5EF;
+  --nv-line: #A7B9CD; --nv-line-strong: #9AAEC5; --nv-line-soft: #C8D5E3; --nv-line-hover: #7C93AE;
+  --nv-select-bg: #DCDAF1; --nv-select-border: #6B55D9; --nv-select-ink: #3A2A8C; --nv-select-tag-bg: #CFC9EE;
+  --nv-hover-bg: #D0DCE9;
+  --nv-red-line: #E0B4AD; --nv-amber-line: #DCC394; --nv-scrim: rgba(18, 28, 42, 0.45); --nv-scrim-light: rgba(215, 225, 236, 0.94); --nv-select-line: #B7AEE3;
+  --nv-red: #A82017; --nv-red-soft: #F0DAD5; --nv-amber: #7E4406; --nv-amber-soft: #EDE2C8;
+  --nv-blue: #1A4A96; --nv-pink: #9A1449;
+  --nv-log-ink: #1F5E37;
+  --bg-glass: rgba(229, 236, 244, 0.97); --bg-hover: rgba(62, 123, 201, 0.10); --bg-elev: var(--nv-card);
+  --shadow-sm: 0 1px 2px rgba(23, 34, 49, 0.06); --shadow-md: 0 1px 3px rgba(23, 34, 49, 0.08);
+  --shadow-lg: 0 4px 14px rgba(23, 34, 49, 0.10); --shadow-xl: 0 12px 32px rgba(23, 34, 49, 0.16);
+}
+
+/* 3. Glare fixes shared by both tints: light literals in the theme sheets and white inline surfaces in index.html. */
+:root[data-theme="green"] ::selection { background: #B7D6BF; color: var(--nv-ink); }
+:root[data-theme="blue"] ::selection { background: #B6CCE7; color: var(--nv-ink); }
+:root:is([data-theme="green"], [data-theme="blue"]) .loading-overlay { background: var(--nv-scrim-light); }
+:root:is([data-theme="green"], [data-theme="blue"]) #tab-image-tools,
+:root:is([data-theme="green"], [data-theme="blue"]) #image-source-studio,
+:root:is([data-theme="green"], [data-theme="blue"]) #settings-modal { color-scheme: light; }
+:root:is([data-theme="green"], [data-theme="blue"]) :is([style*="background: #fff" i], [style*="background:#fff" i], [style*="background: white" i],
+  [style*="background: rgb(255, 255, 255)"], [style*="background: rgba(255,255,255,0.8"], [style*="background: rgba(255, 255, 255, 0.9"],
+  [style*="background-color: #fff" i], [style*="background-color: white" i], [style*="background: #f3f4f6" i], [style*="background: #f8f9fa" i],
+  [style*="background: #f9fafb" i]) {
+  background: var(--nv-card) !important;
+}

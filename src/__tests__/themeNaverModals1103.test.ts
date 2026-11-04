@@ -18,7 +18,7 @@ describe('1. modal classes live in the components sheet, tokens only', () => {
   it('theme-naver.css and the link order did not change shape (no new sheet beyond the dark one, 4 theme links)', () => {
     expect(theme.split('\n').length).toBeLessThanOrEqual(300);
     const html = read('public/index.html');
-    expect(html.match(/theme-naver/g)).toHaveLength(4);
+    expect(html.match(/theme-naver/g)).toHaveLength(5); // + theme-naver-tint.css (2026-11-04)
   });
 
   it('the transitional sheet got no new rule (39 before this step)', () => {

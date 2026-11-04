@@ -42,14 +42,16 @@ describe('dark sheet wiring', () => {
   const head = html.slice(html.indexOf('<head>'), html.indexOf('</head>'));
   const sheets = [...html.matchAll(/<link\s+rel="stylesheet"\s+href="([^"]+)"/g)].map((m) => m[1]).filter((h) => !/^https?:/.test(h));
 
-  it('is the last stylesheet, linked from <head>', () => {
-    expect(sheets[sheets.length - 1]).toBe('theme-naver-dark.css');
+  // 2026-11-04: the eye-comfort tint sheet follows it (themeTint1104.test.ts).
+  it('comes right before the tint sheet at the end, linked from <head>', () => {
+    expect(sheets.slice(-2)).toEqual(['theme-naver-dark.css', 'theme-naver-tint.css']);
     expect(head).toContain('href="theme-naver-dark.css"');
   });
 
   it('a <head> script applies the saved choice before the body paints, and tolerates blocked storage', () => {
     const script = head.slice(head.indexOf('href="theme-naver-dark.css"'));
-    expect(script).toMatch(/<script>try \{ if \(localStorage\.getItem\('nv-theme'\) === 'dark'\) document\.documentElement\.setAttribute\('data-theme', 'dark'\); \} catch/);
+    // 2026-11-04: dark is the default; only a stored 'light' leaves the attribute off; green/blue restore; blocked storage = dark.
+    expect(script).toContain("var nvTheme = localStorage.getItem('nv-theme'); if (nvTheme !== 'light') document.documentElement.setAttribute('data-theme', nvTheme === 'green' || nvTheme === 'blue' ? nvTheme : 'dark'); } catch (e) { document.documentElement.setAttribute('data-theme', 'dark'); }");
   });
 });
 
@@ -155,7 +157,8 @@ describe('top-left switch', () => {
 
   it('switches to dark, remembers it, and switches back', () => {
     const box = mount();
-    const [lightBtn, darkBtn] = [...box.querySelectorAll<HTMLButtonElement>('[data-theme-choice]')];
+    const lightBtn = box.querySelector<HTMLButtonElement>('[data-theme-choice="light"]')!;
+    const darkBtn = box.querySelector<HTMLButtonElement>('[data-theme-choice="dark"]')!;
     expect(lightBtn.textContent).toContain('라이트');
     expect(darkBtn.textContent).toContain('다크');
     expect(lightBtn.getAttribute('aria-pressed')).toBe('true');

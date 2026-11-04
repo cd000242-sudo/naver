@@ -23,7 +23,9 @@
     <link rel="stylesheet" href="theme-naver-transitional.css">
     <!-- [2026-11-03] Optional dark mode: tokens scoped to html[data-theme="dark"]; applied before first paint. -->
     <link rel="stylesheet" href="theme-naver-dark.css">
-    <script>try { if (localStorage.getItem('nv-theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) { /* storage blocked: light */ }</script>
+    <!-- [2026-11-04] Eye-comfort screens: soft green / soft blue (html[data-theme="green"|"blue"]). Dark is the default screen. -->
+    <link rel="stylesheet" href="theme-naver-tint.css">
+    <script>try { var nvTheme = localStorage.getItem('nv-theme'); if (nvTheme !== 'light') document.documentElement.setAttribute('data-theme', nvTheme === 'green' || nvTheme === 'blue' ? nvTheme : 'dark'); } catch (e) { document.documentElement.setAttribute('data-theme', 'dark'); }</script>
 </head>
 
 <body>
@@ -35,26 +37,32 @@
         <header class="app-header">
             <h1 class="app-title">Better Life naver <span id="app-version-badge"
                     style="font-size: 0.6em; opacity: 0.6; font-weight: 400; vertical-align: middle;">v...</span></h1>
-            <!-- [2026-11-03] Light / dark switch, top-left next to the title. Remembered per PC (localStorage "nv-theme"). -->
-            <div id="theme-mode-switch" class="nv-theme-switch" role="group" aria-label="화면 밝기 선택">
-                <button type="button" data-theme-choice="light" aria-pressed="true">☀️ 라이트</button>
-                <button type="button" data-theme-choice="dark" aria-pressed="false">🌙 다크</button>
+            <!-- [2026-11-03] Screen switch, top-left next to the title. 2026-11-04: 다크(default) / 라이트 / 초록 / 파랑 — the soft green and
+                 soft blue screens are for readers whose eyes tire on white. Remembered per PC (localStorage "nv-theme"). -->
+            <div id="theme-mode-switch" class="nv-theme-switch" role="group" aria-label="화면 색 선택">
+                <button type="button" data-theme-choice="dark" aria-pressed="true">🌙 다크</button>
+                <button type="button" data-theme-choice="light" aria-pressed="false">☀️ 라이트</button>
+                <button type="button" data-theme-choice="green" aria-pressed="false">🌿 초록</button>
+                <button type="button" data-theme-choice="blue" aria-pressed="false">💧 파랑</button>
             </div>
             <script>
                 (function () {
                     var root = document.documentElement, box = document.getElementById('theme-mode-switch');
                     if (!box) return;
+                    var CHOICES = ['dark', 'light', 'green', 'blue'];
+                    function current() { var t = root.getAttribute('data-theme'); return CHOICES.indexOf(t) >= 0 ? t : 'light'; }
                     function paint() {
-                        var dark = root.getAttribute('data-theme') === 'dark';
+                        var now = current();
                         box.querySelectorAll('[data-theme-choice]').forEach(function (b) {
-                            b.setAttribute('aria-pressed', String((b.getAttribute('data-theme-choice') === 'dark') === dark));
+                            b.setAttribute('aria-pressed', String(b.getAttribute('data-theme-choice') === now));
                         });
                     }
                     box.addEventListener('click', function (event) {
                         var b = event.target.closest('[data-theme-choice]');
                         if (!b) return;
-                        var choice = b.getAttribute('data-theme-choice') === 'dark' ? 'dark' : 'light';
-                        if (choice === 'dark') root.setAttribute('data-theme', 'dark'); else root.removeAttribute('data-theme');
+                        var choice = b.getAttribute('data-theme-choice');
+                        if (CHOICES.indexOf(choice) < 0) choice = 'dark';
+                        if (choice === 'light') root.removeAttribute('data-theme'); else root.setAttribute('data-theme', choice);
                         try { localStorage.setItem('nv-theme', choice); } catch (e) { /* storage blocked: this session only */ }
                         paint();
                     });
