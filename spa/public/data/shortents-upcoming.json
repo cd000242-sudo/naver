@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T23:22:36.952Z",
+ "builtAt": "2026-11-04T23:32:40.731Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,49 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 26,
  "candidates": [
+  {
+   "keyword": "9월 경상수지 흑자",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 52,
+   "recent20": 16,
+   "press": 46,
+   "firstArticleAt": "2026-11-04T23:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "반도체 수출 폭발에 9월 경상흑자 첫 600억 달러 돌파…연간 4500억 달러...",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-04T23:30:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=67115"
+    },
+    {
+     "title": "9월 경상수지 흑자 615억달러…반도체 수출 260% 급증",
+     "press": "econovill.com",
+     "publishedAt": "2026-11-04T23:30:00.000Z",
+     "link": "https://www.econovill.com/news/articleView.html?idxno=756072"
+    },
+    {
+     "title": "9월 경상수지 614억달러 흑자, 사상 최대…반도체 수출 260% 급증",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-04T23:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000649088?sid=101"
+    }
+   ]
+  },
   {
    "keyword": "다우 존스 산업평균지수",
    "sources": [
     "google"
    ],
-   "articles90": 38,
-   "recent20": 6,
-   "press": 36,
-   "firstArticleAt": "2026-11-04T21:54:00.000Z",
+   "articles90": 35,
+   "recent20": 2,
+   "press": 34,
+   "firstArticleAt": "2026-11-04T22:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,47 +75,15 @@
    ]
   },
   {
-   "keyword": "날씨",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 22,
-   "recent20": 7,
-   "press": 21,
-   "firstArticleAt": "2026-11-04T21:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[날씨] 오늘 전국에 가을비…내일부터 기온 '뚝'",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-04T23:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001976781?sid=102"
-    },
-    {
-     "title": "[날씨-전남광주] 5일 오후까지 최대 30㎜ 비와 6일부터 강풍·기온 급강...",
-     "press": "newsfreezone.co.kr",
-     "publishedAt": "2026-11-04T23:16:00.000Z",
-     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=717745"
-    },
-    {
-     "title": "[날씨]전국 흐리고 비…낮 최고기온 19도",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-04T23:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005838253?sid=103"
-    }
-   ]
-  },
-  {
    "keyword": "손흥민, 유니폼 판매 2위",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-04T21:54:00.000Z",
+   "articles90": 9,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-04T22:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -108,12 +108,45 @@
    ]
   },
   {
+   "keyword": "미국 상원 하원 차이",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 10,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-04T22:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美알래스카 상원 선거 초박빙…'선호투표제'로 최종 승자 가린다",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-04T23:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009271345?sid=104"
+    },
+    {
+     "title": "미 민주, 상·하원 20년 만에 동시 탈환…상원 최소 54석·주지사 과반,...",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-04T23:04:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261105010001832"
+    },
+    {
+     "title": "[美 중간선거] 美 중간선거 민주당 상원 54석 확보…마지막 2석 초접전",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-04T23:04:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=2026110507594880459a1f309431_1"
+    }
+   ]
+  },
+  {
    "keyword": "미국 중간선거와 유가 변동",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 9,
-   "recent20": 4,
+   "recent20": 1,
    "press": 8,
    "firstArticleAt": "2026-11-04T22:06:00.000Z",
    "exclusive": false,
@@ -142,32 +175,33 @@
   {
    "keyword": "한지 태권도 北 단독 등재",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 5,
+   "articles90": 8,
+   "recent20": 3,
+   "press": 7,
    "firstArticleAt": "2026-11-04T22:10:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
+     "title": "韓 한지 유네스코 인류무형유산 등재 '청신호'…北 태권도도 '등재 권고...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-04T23:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009271355?sid=103"
+    },
+    {
+     "title": "24번째로 유네스코 등재되는 '한지'…태권도는 결국 北에 내줘",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-04T23:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005436853?sid=103"
+    },
+    {
      "title": "한지, 유네스코 인류무형유산 ‘등재 권고’…北 태권도 단독 등재 유력",
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-04T23:19:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006403940?sid=103"
-    },
-    {
-     "title": "‘태권도가 북한 전통 무술?’… 인류무형유산 北 단독 등재 확실",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-04T23:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001883154?sid=103"
-    },
-    {
-     "title": "한지 vs 서예…유네스코 무형유산서 펼쳐지는 韓日 문화외교 [도쿄나우...",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-04T22:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005350499?sid=104"
     }
    ]
   },
@@ -204,74 +238,41 @@
    ]
   },
   {
-   "keyword": "코모",
+   "keyword": "유병권 성형수술",
    "sources": [
-    "signal.bz",
-    "google"
+    "daum"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-04T22:51:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "'9골 폭발' 첫 출전에 챔피언스리그 역사 쓴 伊 코모",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-04T23:09:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/079/0004206656"
-    },
-    {
-     "title": "그야말로 '미친 화력'… 무자비한 파브레가스의 코모, 랑스 원정서 9-1 ...",
-     "press": "besteleven.com",
-     "publishedAt": "2026-11-04T22:58:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/343/0000148728"
-    },
-    {
-     "title": "아스널·맨시티 UCL서 나란히 승리…코모는 랑스 9-1 대파",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-04T22:51:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/003/0014302535"
-    }
-   ]
-  },
-  {
-   "keyword": "전기 요금",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T21:55:00.000Z",
+   "firstArticleAt": "2026-11-04T22:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "부산 소상공인 에너지지원금 20만 원…수도·택시요금도 쓴다",
-     "press": "mhns.co.kr",
-     "publishedAt": "2026-11-04T23:08:00.000Z",
-     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=767634"
+     "title": "유병권 \"성형비만 5천만 원…물가 반영하면 억대\" 솔직 고백",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-04T23:16:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=623088"
     },
     {
-     "title": "“전기료 덜 내려고”…9억 원대 ‘전기 도둑들’ 덜미",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-04T22:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012287656?sid=102"
+     "title": "'5000만원 성형' 유병권 과거 사진 공개...\"병원서 엄마 우셨다\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-04T23:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005436847"
     },
     {
-     "title": "계량기선 잘라 전기 절도‥9억 5천만 원 피해",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-04T21:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533591?sid=102"
+     "title": "유병권 \"눈·코·안면윤곽 등 성형수술…억대로 썼다\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-04T22:12:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014302511"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 818,
+  "flagged": 821,
   "matched": 366,
   "avgLeadMin": 351,
   "recent": [
