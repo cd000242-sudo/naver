@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T16:30:07.248Z",
+ "builtAt": "2026-11-04T16:40:10.927Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -10,71 +10,6 @@
  },
  "measured": 26,
  "candidates": [
-  {
-   "keyword": "kt",
-   "sources": [
-    "google"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-04T15:03:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "사자 뒷심에 마법 풀린 KT",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-04T16:05:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/005/0001883108"
-    },
-    {
-     "title": "삼성, 연장 12회 혈투 끝 kt에 3-2 승리…한국시리즈 1승 1패 '원점'",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-04T15:54:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/324192/?sc=Naver"
-    },
-    {
-     "title": "SKT 3분기 영업익 5523억… LG유플러스도 2976억",
-     "press": "donga.com",
-     "publishedAt": "2026-11-04T15:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003760147?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "한진칼 최대주주 호반건설로 변경",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-04T15:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한진칼 최대주주, 조원태 회장서 호반건설로 변경",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-04T15:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922976?sid=101"
-    },
-    {
-     "title": "한진칼 최대주주 호반건설로 변경… 조원태 회장 측, 지분 추가 매입 계...",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-04T15:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001883097?sid=101"
-    },
-    {
-     "title": "한진칼 최대주주, 조원태 측에서 호반건설로 변경…지분 20.69% 확보",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-04T15:12:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=623056"
-    }
-   ]
-  },
   {
    "keyword": "유병권 김수미",
    "sources": [
@@ -108,99 +43,67 @@
    ]
   },
   {
-   "keyword": "블루 쓰나미의 영향",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T15:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[미 중간선거] 민주당, 상·하원 동시 장악…트럼프 2기 '블루 쓰나미' ...",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-04T16:18:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=756065"
-    },
-    {
-     "title": "'블루 쓰나미' 일으킨 여성·히스패닉·무당층…트럼프 텃밭 20%p 이동",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T15:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009271145?sid=104"
-    },
-    {
-     "title": "[속보]뉴욕증시, '블루 쓰나미'에 다우 2.9% 폭등…미국 중간선거 민주...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-04T15:04:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=623316"
-    }
-   ]
-  },
-  {
-   "keyword": "조작기소 특검법 법사위 통과",
+   "keyword": "한진칼 최대주주 호반건설로 변경",
    "sources": [
     "signal.bz",
     "nate"
    ],
    "articles90": 4,
-   "recent20": 0,
+   "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-04T15:02:00.000Z",
+   "firstArticleAt": "2026-11-04T15:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "조작기소 특검법 밀어붙인 與… 文정부때 사건까지 끼워넣기",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-04T15:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004007870?sid=100"
+     "title": "[오늘의 경제뉴스] 한진칼 노리는 '최대주주' 호반의 창…조원태 방패 ...",
+     "press": "newsverse.kr",
+     "publishedAt": "2026-11-04T16:30:00.000Z",
+     "link": "https://www.newsverse.kr/news/articleView.html?idxno=11846"
     },
     {
-     "title": "법사위 끝내 이재명 조작기소 특검법 강행처리 \"대통령 구하기\"",
-     "press": "mediatoday.co.kr",
-     "publishedAt": "2026-11-04T15:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/006/0000138575?sid=100"
+     "title": "한진칼 최대주주, 조원태 회장서 호반건설로 변경",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-04T15:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922976?sid=101"
     },
     {
-     "title": "'조작기소 특검법' 與주도로 국회 법사소위 통과",
-     "press": "ksilbo.co.kr",
-     "publishedAt": "2026-11-04T15:04:00.000Z",
-     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1071597"
+     "title": "한진칼 최대주주 호반건설로 변경… 조원태 회장 측, 지분 추가 매입 계...",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-04T15:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001883097?sid=101"
     }
    ]
   },
   {
-   "keyword": "경찰, 강호동 구속영장 신청",
+   "keyword": "수사",
    "sources": [
-    "signal.bz"
+    "google"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-04T15:05:00.000Z",
+   "firstArticleAt": "2026-11-04T15:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "경찰, 강호동 농협중앙회장 구속영장 신청...금품수수등 혐의",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-04T15:44:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=67101"
+     "title": "봉제공장 화재, 방화 가능성 수사...\"경제적 어려움\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-04T16:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002428458?sid=102"
     },
     {
-     "title": "1억원대 금품 의혹, 신병 확보 나선 경찰···강호동 농협회장 영장 신...",
-     "press": "womaneconomy.co.kr",
-     "publishedAt": "2026-11-04T15:06:00.000Z",
-     "link": "https://www.womaneconomy.co.kr/news/articleView.html?idxno=260689"
+     "title": "강원경찰 과학수사의 날 맞아 유공자 포상⋯수사 역량 강화 다짐",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-04T15:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001228717?sid=102"
     },
     {
-     "title": "경찰 ‘금품 수수·공금 유용 의혹’ 강호동 농협회장 구속영장 신청",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-04T15:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001883091?sid=102"
+     "title": "'한동훈 딸 의혹' 쥔 중수청, 1호 사건 부담에 이첩도 수사도 멈췄다",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-04T15:16:00.000Z",
+     "link": "https://www.insight.co.kr/news/580698"
     }
    ]
   }
