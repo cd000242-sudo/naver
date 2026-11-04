@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T13:38:31.640Z",
+ "builtAt": "2026-11-04T13:48:37.287Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,22 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 7,
  "candidates": [
   {
    "keyword": "조작기소 특검법 법사위 통과",
    "sources": [
-    "signal.bz",
-    "nate",
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 46,
+   "articles90": 36,
    "recent20": 2,
-   "press": 35,
-   "firstArticleAt": "2026-11-04T12:09:00.000Z",
+   "press": 29,
+   "firstArticleAt": "2026-11-04T12:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "조작기소 특검법, 與 주도 법사위 통과…野 \"모든 안건 필버\"",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-04T13:46:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443073"
+    },
     {
      "title": "국힘 \"조작기소 특검법은 이재명 특별법…즉각 철회하라\"",
      "press": "sisafocus.co.kr",
@@ -35,89 +39,18 @@
      "press": "biz.heraldcorp.com",
      "publishedAt": "2026-11-04T13:24:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/016/0002718993?sid=100"
-    },
-    {
-     "title": "‘조작기소 특검법’ 법사위 통과…‘공소취소’ 빼고 문 정부 사건 추...",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-04T13:18:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/324188/?sc=Naver"
-    }
-   ]
-  },
-  {
-   "keyword": "미국 중간선거",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 31,
-   "recent20": 2,
-   "press": 20,
-   "firstArticleAt": "2026-11-04T12:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[시사천국] 美 중간선거 민주당 압승…트럼프 '백약이 무효'",
-     "press": "news.cpbc.co.kr",
-     "publishedAt": "2026-11-04T13:34:00.000Z",
-     "link": "https://news.cpbc.co.kr/article/1176836?division=NAVER"
-    },
-    {
-     "title": "미 중간선거 민주당 압승… 미 언론, 트럼프 심판론 주목",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-04T13:30:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3446020"
-    },
-    {
-     "title": "강창일 \"美 중간선거 공화당 패배, 북미회담 가속화 계기 될 수도\"",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-04T13:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005599598?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "김성윤",
-   "sources": [
-    "google"
-   ],
-   "articles90": 23,
-   "recent20": 13,
-   "press": 9,
-   "firstArticleAt": "2026-11-04T12:47:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[포토] 김성윤 '마지막 기회인가'",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-04T13:36:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/108/0003484743"
-    },
-    {
-     "title": "도루 성공한 김성윤",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T13:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009271025?sid=102"
-    },
-    {
-     "title": "[MD포토] 김성윤, '기분 좋은 안타'",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-04T13:23:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/117/0004122137"
     }
    ]
   },
   {
    "keyword": "이승민",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
-   "articles90": 19,
+   "articles90": 8,
    "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-04T12:09:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-04T12:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -142,170 +75,9 @@
    ]
   },
   {
-   "keyword": "류지혁",
-   "sources": [
-    "google"
-   ],
-   "articles90": 13,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-04T12:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "류지혁 ‘사라진 득점천스’[포토]",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-04T12:25:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/311/0002076742"
-    },
-    {
-     "title": "[포토] 류지혁, 반격의 9회",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-04T12:23:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/108/0003484705"
-    },
-    {
-     "title": "[포토] 류지혁, 9회 재역전 노리는 안타",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-04T12:21:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278256"
-    }
-   ]
-  },
-  {
-   "keyword": "제이블랙 아이찡 발차기 안무",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-04T12:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "제이블랙, A2O LITE 시리·아이찡에 \"내 딸 같다\"",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-04T13:08:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16268563"
-    },
-    {
-     "title": "제이블랙도 놀란 이수만의 한 끗…\"아이찡 발차기 수정본 보고 소름\" ('...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-04T12:53:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001407166"
-    },
-    {
-     "title": "제이블랙, 이수만의 한 수에 감탄 \"아이찡 발차기, 사람들이 좋아하게 ...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-04T12:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004463311"
-    }
-   ]
-  },
-  {
-   "keyword": "안현민",
-   "sources": [
-    "google"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-04T12:09:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "안현민, 가보자!",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T13:13:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/421/0009271009"
-    },
-    {
-     "title": "[포토] 안현민 ‘이런 행운이’",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-04T13:10:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278295"
-    },
-    {
-     "title": "[포토] 안현민, 10회 행운의 내야안타",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-04T13:10:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278294"
-    }
-   ]
-  },
-  {
-   "keyword": "구자욱",
-   "sources": [
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-04T12:09:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[포토] 구자욱, 자동 고의4구로 출루",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-04T13:19:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/108/0003484735"
-    },
-    {
-     "title": "구자욱 '승리가 눈앞'",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-04T13:03:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/001/0016422686"
-    },
-    {
-     "title": "기뻐하는 구자욱",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-04T12:57:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/003/0014302239"
-    }
-   ]
-  },
-  {
-   "keyword": "강혁 감독 우동현 칭찬",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-04T12:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"우동현과 김준일, 너무 예쁘게 잘했다\" 짜릿한 승리 거둔 강혁 감독의...",
-     "press": null,
-     "publishedAt": "2026-11-04T13:06:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/065/0000304058"
-    },
-    {
-     "title": "‘3쿼터 깜짝 활약’, SK 원정 7연패 탈출 원동력 된 우동현의 3점슛 3방",
-     "press": null,
-     "publishedAt": "2026-11-04T13:05:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/065/0000304055"
-    },
-    {
-     "title": "“오늘 내 수비 90점”…김낙현 묶고 3점슛 3개 터뜨린 우동현 [쿠키 현...",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-04T13:04:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611040256"
-    }
-   ]
-  },
-  {
    "keyword": "강호동 구속영장 신청",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 4,
    "recent20": 0,
@@ -327,74 +99,10 @@
      "link": "https://n.news.naver.com/mnews/article/011/0004678836?sid=102"
     },
     {
-     "title": "강호동 농협회장 구속 위기···공소청, 영장 청구할까",
-     "press": "enewstoday.co.kr",
+     "title": "경찰, '금품수수' 강호동 농협중앙회장 구속영장 신청",
+     "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-04T12:23:00.000Z",
-     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2488591"
-    }
-   ]
-  },
-  {
-   "keyword": "디아즈 1타점 3루타",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T12:37:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'디아즈 정신 못차리네'…디아즈 실책 얻은 kt wiz, 10회말 2-2 동점 성공...",
-     "press": "sports.hankooki.com",
-     "publishedAt": "2026-11-04T13:14:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6942913"
-    },
-    {
-     "title": "페덱 버티고 디아즈 때리고…KS 달군 '외국인 콤비'",
-     "press": "idaegu.co.kr",
-     "publishedAt": "2026-11-04T13:04:00.000Z",
-     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=564480"
-    },
-    {
-     "title": "'드디어 깨졌다'…삼성, 10회초 디아즈 적시타로 승리 눈앞[KS2]",
-     "press": "sports.hankooki.com",
-     "publishedAt": "2026-11-04T12:56:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6942895"
-    }
-   ]
-  },
-  {
-   "keyword": "서장훈의 이웃집 백만장자",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 3,
-   "press": 2,
-   "firstArticleAt": "2026-11-04T12:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[종합] \"향후 10년간은 못 먹을 맛\"… '이웃집 백만장자' 정민서, 4대째...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-04T13:32:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16268576"
-    },
-    {
-     "title": "\"황태 많이 들어가야 구수하고 아삭해진다\"… '이웃집 백만장자' 정민서...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-04T13:24:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16268575"
-    },
-    {
-     "title": "\"부도난 폐공장을 7,000평 김치공장으로\"… '이웃집 백만장자' 최연소 김...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-04T13:24:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16268571"
+     "link": "https://n.news.naver.com/mnews/article/422/0000922945?sid=102"
     }
    ]
   }
