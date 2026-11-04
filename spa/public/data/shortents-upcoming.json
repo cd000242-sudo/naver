@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T17:10:21.831Z",
+ "builtAt": "2026-11-04T17:20:25.350Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -9,40 +9,7 @@
   "minPress": 2
  },
  "measured": 26,
- "candidates": [
-  {
-   "keyword": "조작기소 특검법 통과",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T15:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "野 퇴장 속 ‘조작기소 특검법’ 법사위 통과… 與, 오늘 본회의 처리 ...",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-04T16:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003057238?sid=100"
-    },
-    {
-     "title": "[사설] 국민 우려에도 조작기소 특검법 강행하는 민주당",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-04T16:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001883119?sid=110"
-    },
-    {
-     "title": "한동훈 “조작기소 특검, 李대통령 본인이 해라”",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-04T15:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002830394?sid=100"
-    }
-   ]
-  }
- ],
+ "candidates": [],
  "hitRate": {
   "days": 7,
   "flagged": 784,
