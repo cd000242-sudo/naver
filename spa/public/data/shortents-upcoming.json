@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T07:04:51.484Z",
+ "builtAt": "2026-11-04T07:14:55.510Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,66 @@
  "measured": 28,
  "candidates": [
   {
+   "keyword": "코스피 하락 전환",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 39,
+   "recent20": 24,
+   "press": 37,
+   "firstArticleAt": "2026-11-04T05:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "코스피, 극심한 변동성 끝에 0.6% 상승한 5680선 마감...2차전지·화학주...",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-04T07:14:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=501286"
+    },
+    {
+     "title": "“美 중간선거에 400포인트 널뛰기”…코스피, 급등락 끝 0.6% 상승 마감",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-04T07:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002247295?sid=101"
+    },
+    {
+     "title": "美중간선거에 외인 투매…코스피, 개미·기관 매수세에 강보합 마감 [시...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-04T07:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003151331?sid=101"
+    }
+   ]
+  },
+  {
    "keyword": "차예련, 학폭 의혹 강력 대응",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 43,
-   "recent20": 8,
-   "press": 39,
-   "firstArticleAt": "2026-11-04T05:35:00.000Z",
+   "articles90": 37,
+   "recent20": 6,
+   "press": 37,
+   "firstArticleAt": "2026-11-04T05:47:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "'학폭 의혹' 차예련, 소속사 \"법적 대응\" 꺼냈다…진실 공방 시작 [종합...",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-04T07:13:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000326691"
+    },
+    {
+     "title": "차예련, 골프장 갑질·학폭 모두 부인? “법적 대응할 것” 경고",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-04T07:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001278041"
+    },
     {
      "title": "차예련 측, ‘학폭’ 의혹 재차 부인…법적 대응 예고",
      "press": "donga.com",
      "publishedAt": "2026-11-04T07:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/020/0003760038?sid=102"
-    },
-    {
-     "title": "차예련 측 “학폭 의혹은 허위”…익명 폭로·가족 비난에 법적 대응",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-04T06:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000130591?sid=102"
-    },
-    {
-     "title": "차예련 측, '학폭 의혹'에 공식 입장 \"사실무근, 법적 대응\" [전문]",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-04T06:58:00.000Z",
-     "link": "https://www.insight.co.kr/news/580674"
     }
    ]
   },
@@ -47,30 +79,62 @@
    "sources": [
     "daum"
    ],
-   "articles90": 50,
-   "recent20": 30,
-   "press": 37,
-   "firstArticleAt": "2026-11-04T06:32:00.000Z",
+   "articles90": 51,
+   "recent20": 32,
+   "press": 36,
+   "firstArticleAt": "2026-11-04T06:41:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "미국 민주당 상·하원 모두 탈환…트럼프 “결과 수용”",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-04T07:12:00.000Z",
+     "link": "https://www.viva100.com/article/20261104501280"
+    },
+    {
+     "title": "美공화당 '비방 광고' 역풍…민주, 오하이오 주지사 20년 만에 탈환",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-04T07:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014301629?sid=104"
+    },
+    {
+     "title": "일 언론 \"선거 패배 트럼프, 극단적 외교정책 가능성\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-04T07:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400640?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "미국 중간선거",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 45,
+   "recent20": 45,
+   "press": 32,
+   "firstArticleAt": "2026-11-04T06:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프 \"중간선거 결과 전적으로 수용... 민주당과 협력할 것\"",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-04T07:04:00.000Z",
-     "link": "https://www.insight.co.kr/news/580675"
+     "title": "“美 중간선거에 400포인트 널뛰기”…코스피, 급등락 끝 0.6% 상승 마감",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-04T07:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002247295?sid=101"
     },
     {
-     "title": "트럼프 집권 2기 21개월 '격변', 민주당 양원 탈환으로 제동…이란·관세...",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-04T07:04:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261104010001664"
+     "title": "코스피, 美 중간선거발 불확실성에 ‘출렁’…장중 급락 딛고 반등 [마...",
+     "press": "ekn.kr",
+     "publishedAt": "2026-11-04T07:14:00.000Z",
+     "link": "https://www.ekn.kr/web/view.php?key=20261104020145452"
     },
     {
-     "title": "머스크, “선거 개입 우주 레이저 효과가 없었던 듯”…공화당 패배에 ...",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-04T07:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001882984?sid=102"
+     "title": "美중간선거에 외인 투매…코스피, 개미·기관 매수세에 강보합 마감 [시...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-04T07:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003151331?sid=101"
     }
    ]
   },
@@ -79,13 +143,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 43,
+   "articles90": 39,
    "recent20": 1,
-   "press": 36,
-   "firstArticleAt": "2026-11-04T05:43:00.000Z",
+   "press": 32,
+   "firstArticleAt": "2026-11-04T05:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "윤석열, 선거법 위반 2심도 유죄…확정시 국힘 397억원 반환",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-04T07:12:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261104516639?OutUrl=naver"
+    },
     {
      "title": "尹 '국힘 397억 반환' 걸린 선거법 2심 당선무효형...法 \"엄단 필요\"",
      "press": "joseilbo.com",
@@ -97,76 +167,6 @@
      "press": "news.tf.co.kr",
      "publishedAt": "2026-11-04T06:37:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/629/0000548769?sid=100"
-    },
-    {
-     "title": "'윤석열 선거법 위반' 2심도 당선 무효형…확정 시 국힘 397억 원 반환",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-04T06:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400623?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "미국 중간선거",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 43,
-   "recent20": 43,
-   "press": 27,
-   "firstArticleAt": "2026-11-04T06:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[美 중간선거] 한국계 댄 고, 연방 하원의원 당선…역대 7번째 한국계 의...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-04T07:04:00.000Z",
-     "link": "https://www.ajunews.com/view/20261104155439579"
-    },
-    {
-     "title": "코스피, 美 중간선거 개표에 급등락… 5600선 마감",
-     "press": "the-biz.co.kr",
-     "publishedAt": "2026-11-04T07:04:00.000Z",
-     "link": "http://www.the-biz.co.kr/news/articleView.html?idxno=730680"
-    },
-    {
-     "title": "미국 중간선거 영향, 코스피 출렁...5683.80 반등 마감 [포토]",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-04T07:04:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2644151"
-    }
-   ]
-  },
-  {
-   "keyword": "코스피 하락 전환",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 29,
-   "recent20": 20,
-   "press": 27,
-   "firstArticleAt": "2026-11-04T05:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "코스피, 美 중간선거 개표에 급등락… 5600선 마감",
-     "press": "the-biz.co.kr",
-     "publishedAt": "2026-11-04T07:04:00.000Z",
-     "link": "http://www.the-biz.co.kr/news/articleView.html?idxno=730680"
-    },
-    {
-     "title": "[마감시황] 美 중간선거에 출렁인 코스피…장중 롤러코스터 끝 0.6% 상승...",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-04T07:02:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261104500489"
-    },
-    {
-     "title": "코스피, 0.62% 오른 5683.80…外人 '팔자'에 음봉 마감",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-04T07:02:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/324153/?sc=Naver"
     }
    ]
   },
@@ -175,30 +175,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 25,
+   "articles90": 22,
    "recent20": 2,
-   "press": 23,
-   "firstArticleAt": "2026-11-04T05:35:00.000Z",
+   "press": 21,
+   "firstArticleAt": "2026-11-04T05:47:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "포미닛 전지윤, 11월의 신부 된다→\"나보다 멋진 동반자\" 직접 밝힌 소감...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-04T06:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001407104"
+     "title": "전지윤, '♥11월 결혼'에 포미닛 난리났다…허가윤 \"가지마, 떠나지마\" ...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-04T07:06:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002076434"
+    },
+    {
+     "title": "포미닛 출신 전지윤, 22일 비연예인과 결혼..“나보다 더 멋진 사람”",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-04T07:06:00.000Z",
+     "link": "http://www.breaknews.com/1248380"
     },
     {
      "title": "포미닛 전지윤, 11월의 신부 된다…\"부끄럽고 설레\"",
      "press": "mediapen.com",
      "publishedAt": "2026-11-04T06:50:00.000Z",
      "link": "https://www.mediapen.com/news/view/1135136"
+    }
+   ]
+  },
+  {
+   "keyword": "노스캐롤라이나 상원 민주 승리",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-04T05:49:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "하원 따낸 민주…'상원 경합지' 7곳 중 5곳에서도 승리 예측",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-04T07:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000519111?sid=104"
     },
     {
-     "title": "\"가지 마, 그래도 축하해\" 허가윤, 포미닛 전지윤 결혼에 유쾌한 축하",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-04T06:44:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000051374"
+     "title": "美민주, 20년 만에 상·하원 동시 탈환…트럼프 남은 2년 '험로' 예고",
+     "press": "straightnews.co.kr",
+     "publishedAt": "2026-11-04T06:42:00.000Z",
+     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=314625"
+    },
+    {
+     "title": "민주당, 상원 7개 경합지 중 5곳 싹쓸이…다수당 확실시",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-04T06:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003057124?sid=104"
     }
    ]
   },
@@ -208,7 +240,7 @@
     "nate"
    ],
    "articles90": 43,
-   "recent20": 2,
+   "recent20": 0,
    "press": 8,
    "firstArticleAt": "2026-11-04T05:45:00.000Z",
    "exclusive": false,
@@ -235,38 +267,6 @@
    ]
   },
   {
-   "keyword": "노스캐롤라이나 상원 민주 승리",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-04T05:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "하원 따낸 민주…'상원 경합지' 7곳 중 5곳에서도 승리 예측",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-04T07:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000519111?sid=104"
-    },
-    {
-     "title": "美민주, 20년 만에 상·하원 동시 탈환…트럼프 남은 2년 '험로' 예고",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-04T06:42:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=314625"
-    },
-    {
-     "title": "민주당, 상원 7개 경합지 중 5곳 싹쓸이…다수당 확실시",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-04T06:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003057124?sid=104"
-    }
-   ]
-  },
-  {
    "keyword": "국채",
    "sources": [
     "google"
@@ -276,7 +276,7 @@
    "press": 5,
    "firstArticleAt": "2026-11-04T06:00:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
      "title": "‘블루 쓰나미’ 에⋯AI주ㆍ달러ㆍ코인↓ vs 친환경주ㆍ금ㆍ국채 ↑ [美...",
@@ -332,105 +332,41 @@
    ]
   },
   {
-   "keyword": "주한 미군",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T06:05:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美군사우편으로 합성대마 밀반입한 주한미군 2명 적발",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-04T06:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016421719?sid=100"
-    },
-    {
-     "title": "美 군사 우체국 통해 대마 밀수한 주한미군 세관에 덜미",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-04T06:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002718875?sid=101"
-    },
-    {
-     "title": "美군사우편으로 합성대마 밀수…주한미군 구속",
-     "press": "dnews.co.kr",
-     "publishedAt": "2026-11-04T06:20:00.000Z",
-     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611041503246580631"
-    }
-   ]
-  },
-  {
-   "keyword": "전지명 부위원장 회의 주재",
+   "keyword": "유튜브 대통령 Y 론칭",
    "sources": [
     "nate"
    ],
-   "articles90": 9,
-   "recent20": 0,
+   "articles90": 3,
+   "recent20": 2,
    "press": 3,
-   "firstArticleAt": "2026-11-04T05:40:00.000Z",
+   "firstArticleAt": "2026-11-04T06:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "발언하는 전지명 국민통합위원회 부위원장",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-04T05:45:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261104000991"
+     "title": "이재명 대통령, 유튜브로 대국민 직접 소통한다",
+     "press": "goodmorningcc.com",
+     "publishedAt": "2026-11-04T07:06:00.000Z",
+     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=455188"
     },
     {
-     "title": "인사하는 전지명 국민통합위 부위원장",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-04T05:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016421534?sid=100"
+     "title": "李대통령, 유튜브 '대통령의 Y' 채널 론칭 첫 녹화... 2~3주 간격 소통 ...",
+     "press": "lawissue.co.kr",
+     "publishedAt": "2026-11-04T07:00:00.000Z",
+     "link": "https://www.lawissue.co.kr/view.php?ud=202611041557218166b3279dfb36_12"
     },
     {
-     "title": "국민통합위원회 제22차 전체회의 주재하는 전지명 부위원장",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-04T05:44:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261104000988"
-    }
-   ]
-  },
-  {
-   "keyword": "강남구",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T06:16:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "강남구 “테헤란밸리 고용노동대학 오세요”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-04T06:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003695748?sid=100"
-    },
-    {
-     "title": "노무사가 노동법 실무교육... 강남구 '고용노동대학'",
-     "press": "public25.com",
-     "publishedAt": "2026-11-04T06:16:00.000Z",
-     "link": "https://www.public25.com/news/articleView.html?idxno=57871"
-    },
-    {
-     "title": "강남구, 결핵관리 최우수기관 선정…질병관리청장상 수상",
-     "press": "fntoday.co.kr",
-     "publishedAt": "2026-11-04T06:16:00.000Z",
-     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=397007"
+     "title": "李대통령, 유튜브 소통 프로 ‘대통령의 Y’ 론칭…5일 첫 공개",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-04T06:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002718882?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 641,
+  "flagged": 642,
   "matched": 265,
   "avgLeadMin": 289,
   "recent": [
