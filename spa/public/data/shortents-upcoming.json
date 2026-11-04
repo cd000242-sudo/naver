@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T21:21:54.152Z",
+ "builtAt": "2026-11-04T21:31:58.058Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,29 +16,61 @@
     "google"
    ],
    "articles90": 38,
-   "recent20": 15,
-   "press": 27,
-   "firstArticleAt": "2026-11-04T19:58:00.000Z",
+   "recent20": 16,
+   "press": 25,
+   "firstArticleAt": "2026-11-04T20:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[美중간선거] 트럼프 \"이란전 탓 패배 맞지만 국방장관 안 바꿔\"…탄핵...",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-04T21:20:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=100631"
+     "title": "\"이란 전쟁 끝나나\"…美 민주당 압승에 국제유가 8%대 급락",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-04T21:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005350483?sid=104"
     },
     {
-     "title": "트럼프 “이란전이 선거 패배에 영향”…헤그세스 교체에는 선 그어",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-04T21:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202672?sid=104"
+     "title": "트럼프 \"이란전 탓 패배 맞다\" 인정...본인 책임에는 '발뺌'",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-04T21:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001271699?sid=104"
     },
     {
-     "title": "트럼프 “이란전 탓 중간선거 패배” 인정…헤그세스 교체 가능성 일축",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-04T21:16:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2644282"
+     "title": "베선트 美 재무장관 \"이란 지원 세력 육·해·공 막론 제재\"",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-04T21:26:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443096"
+    }
+   ]
+  },
+  {
+   "keyword": "고속철도 통합",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 14,
+   "recent20": 0,
+   "press": 14,
+   "firstArticleAt": "2026-11-04T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "고속철 통합 두 달 성적표…이용객 늘고 할인 혜택 커졌다",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-04T21:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000548887?sid=101"
+    },
+    {
+     "title": "고속철도 통합 두 달 만에 이용객 12.6% 증가…하루 32만명 이용",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-04T21:02:00.000Z",
+     "link": "https://www.ajunews.com/view/20261104155314577"
+    },
+    {
+     "title": "KTX·SRT 통합 두 달…할인 늘고 예매도 편해졌다는데",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-04T21:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006403889?sid=101"
     }
    ]
   },
@@ -47,13 +79,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 11,
+   "articles90": 8,
    "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-04T19:59:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-04T20:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'조작기소 특검법' 법사소위 통과‥야당은 반발",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-04T21:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533578?sid=100"
+    },
     {
      "title": "민주당, 오늘 '조작기소 특검법' 처리 추진…국힘 필리버스터 예고",
      "press": "news.tvchosun.com",
@@ -65,12 +103,38 @@
      "press": "joseilbo.com",
      "publishedAt": "2026-11-04T21:04:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/123/0002393355?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "의사",
+   "sources": [
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-04T20:02:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "은퇴한 시니어 의사가 지방 병원을 다시 찾은 이유",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-04T21:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000923016?sid=102"
     },
     {
-     "title": "'조작기소 특검법' 본회의 상정 기로…與 '강행' 野 '전면전' 예고",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009271231?sid=100"
+     "title": "2회 연속 의사 출신 건보공단 이사장·심평원장",
+     "press": "dailymedi.com",
+     "publishedAt": "2026-11-04T21:12:00.000Z",
+     "link": "https://www.dailymedi.com/news/news_view.php?wr_id=941453"
+    },
+    {
+     "title": "강성연, ♥의사아내 되고 달라진 대우..남편 환자들 선물 쏟아졌다",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-04T21:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004463402"
     }
    ]
   },
@@ -83,10 +147,16 @@
    "articles90": 6,
    "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-04T19:54:00.000Z",
+   "firstArticleAt": "2026-11-04T20:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "저PBR 딱지 붙자 주가 들썩였지만…\"현금 없는 저평가주 피해야\"",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-04T21:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005838210?sid=101"
+    },
     {
      "title": "미 민주당 압승에 빅테크 주가 급등…'데이터센터 규제' 호재로 해석",
      "press": "aitimes.com",
@@ -98,19 +168,45 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-04T20:49:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016422880?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "택시",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“택시 탈 때 제일 싫어요”…승차거부도 제친 불만 1위",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-04T21:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006403895?sid=102"
     },
     {
-     "title": "[우보세]AI 주가를 흔드는 숨은 변수 '서버 수명'",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-04T20:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005436816?sid=110"
+     "title": "中 바이두, 로보택시용 AI 시뮬레이터 '아폴로 월드' 공개",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-04T21:16:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=2026110415565646620c8c1c064d_1"
+    },
+    {
+     "title": "내년부터 택시도 전기차 전환지원금 준다는데...법인택시 업계 시큰둥한...",
+     "press": "livebiz.today",
+     "publishedAt": "2026-11-04T21:00:00.000Z",
+     "link": "https://www.livebiz.today/news/articleView.html?idxno=206190"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 791,
+  "flagged": 794,
   "matched": 342,
   "avgLeadMin": 301,
   "recent": [
