@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T14:39:16.444Z",
+ "builtAt": "2026-11-04T14:49:23.460Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,101 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 29,
  "candidates": [
   {
    "keyword": "삼성 연장 12회 승리",
    "sources": [
     "daum"
    ],
-   "articles90": 64,
-   "recent20": 25,
-   "press": 32,
+   "articles90": 69,
+   "recent20": 14,
+   "press": 37,
    "firstArticleAt": "2026-11-04T14:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘실책으로 결승 득점’ 삼성, 연장 12회 접전 끝에 KT 제압…KS 1승1패 ...",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-04T14:38:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/382/0001302980"
+     "title": "삼성, 연장 12회 혈투 끝 KT 제압…한국시리즈 1승 1패 원점",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-04T14:44:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261104010001810"
     },
     {
-     "title": "'연장 12회 혈투에서 웃었다' 삼성, kt에 3-2 승리로 한국시리즈 1승 1패",
-     "press": "thesportstimes.co.kr",
-     "publishedAt": "2026-11-04T14:38:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/472/0000042281"
+     "title": "연장까지 이어진 KS 2차전, 웃은 건 삼성라이온즈…선발 호투, 디아즈 4...",
+     "press": "dgmbc.com",
+     "publishedAt": "2026-11-04T14:43:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/657/0000057036"
     },
     {
-     "title": "KS 2차전 승리 박진만 감독 “정말 힘든 경기, 목표했던 1승 1패 안고 대...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-04T14:37:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/021/0002830383"
+     "title": "[야구] 삼성, 연장 12회 혈투 끝에 승리… KS 1승 1패",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-04T14:42:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3446025"
     }
    ]
   },
   {
-   "keyword": "삼성 라이온즈",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 46,
-   "recent20": 19,
-   "press": 29,
-   "firstArticleAt": "2026-11-04T14:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'연장 접전 끝에 패배' KT 이강철 감독 \"이런 경기 처음…운이 삼성 쪽으...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-04T14:38:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109743017077"
-    },
-    {
-     "title": "‘실책으로 결승 득점’ 삼성, 연장 12회 접전 끝에 KT 제압…KS 1승1패 ...",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-04T14:38:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/382/0001302980"
-    },
-    {
-     "title": "'연장 12회 혈투에서 웃었다' 삼성, kt에 3-2 승리로 한국시리즈 1승 1패",
-     "press": "thesportstimes.co.kr",
-     "publishedAt": "2026-11-04T14:38:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/472/0000042281"
-    }
-   ]
-  },
-  {
-   "keyword": "원태인",
+   "keyword": "kt wiz",
    "sources": [
     "google"
    ],
-   "articles90": 31,
-   "recent20": 0,
-   "press": 14,
-   "firstArticleAt": "2026-11-04T13:13:00.000Z",
+   "articles90": 18,
+   "recent20": 4,
+   "press": 13,
+   "firstArticleAt": "2026-11-04T13:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[사진]박진만 감독, 원태인! 정말 잘했어",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-04T14:13:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/109/0005634948"
+     "title": "삼성, 연장 12회 혈투 끝 KT 제압…한국시리즈 1승 1패 원점",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-04T14:44:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261104010001810"
     },
     {
-     "title": "[사진]원태인과 한국시리즈 2차전 승리 기뻐하는 삼성 박진만 감독",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-04T14:11:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/109/0005634942"
+     "title": "삼성, 연장 12회 혈투 끝에 웃었다…kt 꺾고 KS 1승 1패",
+     "press": "kyongbuk.co.kr",
+     "publishedAt": "2026-11-04T14:42:00.000Z",
+     "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4089737"
     },
     {
-     "title": "[포토] 원태인, 경기 후 활짝",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-04T14:06:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278335"
+     "title": "이강철 감독 \"이런 야구 처음\"…kt, 연장 12회 끝 삼성에 KS 2차전 패배",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-04T14:40:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16268603"
     }
    ]
   },
@@ -111,10 +79,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 13,
+   "articles90": 12,
    "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-04T13:18:00.000Z",
+   "press": 11,
+   "firstArticleAt": "2026-11-04T13:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -135,39 +103,6 @@
      "press": "mdtoday.co.kr",
      "publishedAt": "2026-11-04T14:08:00.000Z",
      "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=623047"
-    }
-   ]
-  },
-  {
-   "keyword": "조작기소 특검법 법사위 통과",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-04T13:17:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'조작기소 특검법' 법사위 강행 처리…'공소취소' 조항 삭제·수사 대상...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-04T13:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005599600?sid=100"
-    },
-    {
-     "title": "조작기소 특검법, 與 주도 법사위 통과…野 \"모든 안건 필버\"",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-04T13:46:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443073"
-    },
-    {
-     "title": "국힘 \"조작기소 특검법은 이재명 특별법…즉각 철회하라\"",
-     "press": "sisafocus.co.kr",
-     "publishedAt": "2026-11-04T13:36:00.000Z",
-     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367207"
     }
    ]
   },
@@ -205,14 +140,80 @@
    ]
   },
   {
+   "keyword": "수사",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-04T13:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'조작기소 특검법' 법사위 통과…'공소취소' 조항 삭제·수사 대상 추가",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-04T14:40:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5079923"
+    },
+    {
+     "title": "'장윤기 수사' 경찰 팀장 \"성범죄 생각 못 해…사이코패스로만 의심\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-04T14:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400721?sid=102"
+    },
+    {
+     "title": "[송평인 칼럼]대통령의 퇴행적 수사기관 통제",
+     "press": "donga.com",
+     "publishedAt": "2026-11-04T14:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003760124?sid=110"
+    }
+   ]
+  },
+  {
+   "keyword": "조작기소 특검법 법사위 통과",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-04T13:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'조작기소 특검법' 법사위 통과…'공소취소' 조항 삭제·수사 대상 추가",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-04T14:40:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5079923"
+    },
+    {
+     "title": "'조작기소 특검법' 법사위 강행 처리…'공소취소' 조항 삭제·수사 대상...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-04T13:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005599600?sid=100"
+    },
+    {
+     "title": "조작기소 특검법, 與 주도 법사위 통과…野 \"모든 안건 필버\"",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-04T13:46:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443073"
+    }
+   ]
+  },
+  {
    "keyword": "서인영 12월 26일 재혼",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-04T13:16:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-04T13:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -237,35 +238,34 @@
    ]
   },
   {
-   "keyword": "수사",
+   "keyword": "중앙선관위 투표록 수정 지시",
    "sources": [
-    "signal.bz",
-    "google"
+    "nate"
    ],
-   "articles90": 5,
-   "recent20": 2,
+   "articles90": 6,
+   "recent20": 0,
    "press": 5,
-   "firstArticleAt": "2026-11-04T13:54:00.000Z",
+   "firstArticleAt": "2026-11-04T13:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'장윤기 수사' 경찰 팀장 \"성범죄 생각 못 해…사이코패스로만 의심\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-04T14:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400721?sid=102"
+     "title": "선관위 특검, 중앙선관위 압수수색…투표소 40여 곳, 투표록 위·변조 의...",
+     "press": "wolyo.co.kr",
+     "publishedAt": "2026-11-04T14:16:00.000Z",
+     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=320067"
     },
     {
-     "title": "[송평인 칼럼]대통령의 퇴행적 수사기관 통제",
-     "press": "donga.com",
-     "publishedAt": "2026-11-04T14:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003760124?sid=110"
+     "title": "특검, '투표록 조작·459억 발급기 특혜' 중앙선관위 12시간 압수수색…...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-04T14:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005599602?sid=102"
     },
     {
-     "title": "김웅 “조작기소 특검법 발의 의원, 다음 국회에서 특검 수사해야”",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-04T14:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002830381?sid=100"
+     "title": "‘투표록 사후수정’ 중앙선관위 압수수색한 특검…관계자 10명 입건",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-04T14:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005759184?sid=102"
     }
    ]
   },
@@ -300,43 +300,11 @@
      "link": "https://www.koreaittimes.com/news/articleView.html?idxno=158830"
     }
    ]
-  },
-  {
-   "keyword": "투표록 수정 지시 정황 확인",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T13:53:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "선관위 특검, 중앙선관위 압수수색…투표소 40여 곳, 투표록 위·변조 의...",
-     "press": "wolyo.co.kr",
-     "publishedAt": "2026-11-04T14:16:00.000Z",
-     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=320067"
-    },
-    {
-     "title": "특검, '투표록 조작·459억 발급기 특혜' 중앙선관위 12시간 압수수색…...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-04T14:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005599602?sid=102"
-    },
-    {
-     "title": "'투표지발급기' 압수수색 12시간만 종료…'투표록위조' 10명 입건(종합3...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T13:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009271060?sid=102"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 770,
+  "flagged": 771,
   "matched": 328,
   "avgLeadMin": 288,
   "recent": [
