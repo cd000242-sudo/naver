@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T23:42:44.310Z",
+ "builtAt": "2026-11-04T23:52:51.063Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,94 +15,62 @@
    "sources": [
     "daum"
    ],
-   "articles90": 58,
-   "recent20": 12,
-   "press": 52,
+   "articles90": 62,
+   "recent20": 9,
+   "press": 56,
    "firstArticleAt": "2026-11-04T23:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "반도체 수출 호조에 9월 경상흑자 614억달러…\"역대 최대\"",
-     "press": "youthdaily.co.kr",
-     "publishedAt": "2026-11-04T23:40:00.000Z",
-     "link": "https://www.youthdaily.co.kr/news/article.html?no=229380"
+     "title": "9월 경상수지 흑자 600억 달러 사상 첫 돌파…반도체 수출 260%↑",
+     "press": "sentv.co.kr",
+     "publishedAt": "2026-11-04T23:52:00.000Z",
+     "link": "https://www.sentv.co.kr/article/view/sentv202611050028"
     },
     {
-     "title": "반도체 '폭풍 성장' 9월 경상흑자 사상 첫 600억 달러 돌파",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-04T23:40:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=202611050825389081bb91c46fcd_1"
+     "title": "9월 경상흑자 '사상 최대'…사상 첫 600억달러 돌파",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-04T23:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000923038?sid=101"
     },
     {
-     "title": "9월 경상수지 흑자 600억달러 사상 첫 돌파…반도체 수출 260%↑",
-     "press": "tfmedia.co.kr",
-     "publishedAt": "2026-11-04T23:40:00.000Z",
-     "link": "https://www.tfmedia.co.kr/news/article.html?no=208646"
+     "title": "고점 뚫은 수출…9월 경상수지 614.6억달러 '역대 1위'",
+     "press": "news2day.co.kr",
+     "publishedAt": "2026-11-04T23:46:00.000Z",
+     "link": "https://www.news2day.co.kr/article/20261105500020"
     }
    ]
   },
   {
-   "keyword": "뉴욕증시 급등",
+   "keyword": "카카오 3분기 실적 증가",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 48,
-   "recent20": 5,
-   "press": 42,
-   "firstArticleAt": "2026-11-04T22:14:00.000Z",
+   "articles90": 17,
+   "recent20": 7,
+   "press": 17,
+   "firstArticleAt": "2026-11-04T22:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[해외시황] 뉴욕증시, 美 선거 민주당 압승·이란 전쟁 종식 기대에 '급...",
-     "press": "newsprime.co.kr",
-     "publishedAt": "2026-11-04T23:40:00.000Z",
-     "link": "http://www.newsprime.co.kr/news/article.html?no=753778"
+     "title": "카카오 6분기 연속 2천억 영업이익…AI 전환 박차",
+     "press": "koreareport.co.kr",
+     "publishedAt": "2026-11-04T23:46:00.000Z",
+     "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=54315"
     },
     {
-     "title": "[뉴욕증시] 중간선거 ‘블루웨이브’…다우 3%↑",
-     "press": "segyebiz.com",
-     "publishedAt": "2026-11-04T23:36:00.000Z",
-     "link": "http://www.segyebiz.com/newsView/20261105503441?OutUrl=naver"
+     "title": "카카오, 3분기 영업익 2403억…AI 서비스 확대 집중",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-04T23:46:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1421941"
     },
     {
-     "title": "'민주당 탈환'에 뉴욕증시 급등…'빚테크' 과열 걷힐까 기대",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-04T23:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005436856?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "다우 존스 산업평균지수",
-   "sources": [
-    "google"
-   ],
-   "articles90": 31,
-   "recent20": 1,
-   "press": 30,
-   "firstArticleAt": "2026-11-04T22:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[뉴욕증시] 중간선거 ‘블루웨이브’…다우 3%↑",
-     "press": "segyebiz.com",
-     "publishedAt": "2026-11-04T23:36:00.000Z",
-     "link": "http://www.segyebiz.com/newsView/20261105503441?OutUrl=naver"
-    },
-    {
-     "title": "美민주당 압승에 다우 3% 급등 … 이란전 종식 기대·AI주는 희비",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-04T23:18:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/05/2026110500028.html"
-    },
-    {
-     "title": "美 민주당 '블루웨이브'에 다우 3.03% 급등... 반도체는 약세 [뉴욕증시...",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-04T23:16:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2014634"
+     "title": "카카오, 3분기 영업익 2403억원 전년比 7% ↑…‘광고·선물하기·계열사...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-04T23:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202686?sid=105"
     }
    ]
   },
@@ -114,10 +82,16 @@
    "articles90": 17,
    "recent20": 5,
    "press": 16,
-   "firstArticleAt": "2026-11-04T22:14:00.000Z",
+   "firstArticleAt": "2026-11-04T22:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "모레노 봤지! 황인범, 교체투입 2분 만에 UCL 도움 작렬…포르투, 伊 나...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-04T23:43:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/076/0004463436"
+    },
     {
      "title": "포르투 황인범, 모레노 감독 앞에서 챔스리그 쐐기골 도움",
      "press": "sedaily.com",
@@ -129,44 +103,6 @@
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-04T23:37:00.000Z",
      "link": "https://m.sports.naver.com/wfootball/article/214/0001533618"
-    },
-    {
-     "title": "'대표팀 은퇴 논란' 황인범, 교체 투입 2분 만에 '시즌 2호 도움' 작렬!...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-04T23:35:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/117/0004122215"
-    }
-   ]
-  },
-  {
-   "keyword": "카카오 3분기 실적 증가",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 15,
-   "recent20": 7,
-   "press": 15,
-   "firstArticleAt": "2026-11-04T22:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"3분기 영업이익 2403억원 7% 증가\" 카카오 톡이 실적 끌고 AI가 다음 성...",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-04T23:40:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=756079"
-    },
-    {
-     "title": "카카오, 톡비즈 · 모빌리티 성장 힘입어 매출 6% · 영익 7% 증가",
-     "press": "worktoday.co.kr",
-     "publishedAt": "2026-11-04T23:38:00.000Z",
-     "link": "http://www.worktoday.co.kr/news/articleView.html?idxno=91488"
-    },
-    {
-     "title": "카톡 광고 늘고 선물하기 거래액 최대…카카오, 3Q 실적 성장",
-     "press": "sentv.co.kr",
-     "publishedAt": "2026-11-04T23:36:00.000Z",
-     "link": "https://www.sentv.co.kr/article/view/sentv202611050015"
     }
    ]
   },
@@ -177,7 +113,7 @@
     "nate"
    ],
    "articles90": 9,
-   "recent20": 4,
+   "recent20": 2,
    "press": 9,
    "firstArticleAt": "2026-11-04T22:30:00.000Z",
    "exclusive": true,
@@ -200,38 +136,6 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-04T23:26:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009271355?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "손흥민, 유니폼 판매 2위",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-04T22:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "손흥민, MLS 유니폼 판매 2년 연속 2위…1위 메시는 4년 연속",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-04T23:22:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/396/0000760069"
-    },
-    {
-     "title": "올해도 ‘메시 다음은 손흥민!’…MLS 유니폼 판매 순위서 2위!",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-04T23:14:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/144/0001148162"
-    },
-    {
-     "title": "손흥민, MLS 유니폼 판매량 ‘2년 연속 2위’…1위는?",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-04T23:12:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/119/0003151484"
     }
    ]
   },
@@ -268,35 +172,98 @@
    ]
   },
   {
-   "keyword": "보이스 피싱",
+   "keyword": "손흥민, 유니폼 판매 2위",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T22:46:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-04T22:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "성남시, 기관·단체 대상 찾아가는 보이스피싱 예방교육 신청 접수",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-04T23:32:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2014626"
+     "title": "손흥민, MLS 유니폼 판매 2년 연속 2위…1위 메시는 4년 연속",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-04T23:22:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/396/0000760069"
     },
     {
-     "title": "성남시, ‘찾아가는 보이스피싱 예방교육’ 운영… 20일까지 접수",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-04T23:32:00.000Z",
-     "link": "http://www.breaknews.com/1248555"
+     "title": "올해도 ‘메시 다음은 손흥민!’…MLS 유니폼 판매 순위서 2위!",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-04T23:14:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/144/0001148162"
     },
     {
-     "title": "성남시, 고용우수기업 14곳 선정…보이스피싱 예방교육도 운영",
-     "press": "beyondpost.co.kr",
-     "publishedAt": "2026-11-04T22:46:00.000Z",
-     "link": "http://www.beyondpost.co.kr/view.php?ud=2026110507365536684c878f8fa1_30"
+     "title": "손흥민, MLS 유니폼 판매량 ‘2년 연속 2위’…1위는?",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-04T23:12:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/119/0003151484"
+    }
+   ]
+  },
+  {
+   "keyword": "챔스",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-04T23:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘챔스 새내기’ 코모, 원정서 9-1 대승…최다 골 차 승리 타이",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-04T23:48:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/018/0006403967"
+    },
+    {
+     "title": "포르투 황인범, 모레노 감독 앞에서 챔스리그 쐐기골 도움",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-04T23:38:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/011/0004678916"
+    },
+    {
+     "title": "황인범, 교체 투입 2분 만에 어시스트…포르투, 챔스 첫 승 신고",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-04T23:25:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/079/0004206657"
+    }
+   ]
+  },
+  {
+   "keyword": "전기 요금",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-04T22:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "부산 소상공인 에너지바우처, 수도·택시요금에도 쓴다",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-04T23:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004678918?sid=102"
+    },
+    {
+     "title": "“수도요금에 택시비까지 20만원 지원”…부산 소상공인 에너지바우처...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-04T23:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002830446?sid=102"
+    },
+    {
+     "title": "부산 소상공인 에너지지원금 20만 원…수도·택시요금도 쓴다",
+     "press": "mhns.co.kr",
+     "publishedAt": "2026-11-04T23:08:00.000Z",
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=767634"
     }
    ]
   },
@@ -306,7 +273,7 @@
     "daum"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-04T22:46:00.000Z",
    "exclusive": false,
@@ -333,73 +300,42 @@
    ]
   },
   {
-   "keyword": "전기 요금",
+   "keyword": "보이스 피싱",
    "sources": [
+    "signal.bz",
     "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T22:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“수도요금에 택시비까지 20만원 지원”…부산 소상공인 에너지바우처...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-04T23:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002830446?sid=102"
-    },
-    {
-     "title": "부산 소상공인 에너지지원금 20만 원…수도·택시요금도 쓴다",
-     "press": "mhns.co.kr",
-     "publishedAt": "2026-11-04T23:08:00.000Z",
-     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=767634"
-    },
-    {
-     "title": "“전기료 덜 내려고”…9억 원대 ‘전기 도둑들’ 덜미",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-04T22:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012287656?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "대한항공 안 타 바비킴 난동",
-   "sources": [
-    "nate"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-04T22:16:00.000Z",
+   "firstArticleAt": "2026-11-04T22:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“PTSD 생겼다”…‘기내 난동’ 바비킴, 11년째 대한항공 안 타는 이유",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-04T22:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005759209?sid=103"
+     "title": "성남시, ‘찾아가는 보이스피싱 예방교육’ 운영… 20일까지 접수",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-04T23:32:00.000Z",
+     "link": "http://www.breaknews.com/1248555"
     },
     {
-     "title": "바비킴, 기내 난동 논란 언급 “좌석 트라우마 생겨...아직 대한항공 안...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-04T22:40:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003539278"
+     "title": "성남시, 기관·단체 대상 찾아가는 보이스피싱 예방교육 신청 접수",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-04T23:32:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2014626"
     },
     {
-     "title": "바비킴, 11년 전 기내 난동 논란 후유증 고백…“아직 그 항공사 안 타\"",
-     "press": "segye.com",
-     "publishedAt": "2026-11-04T22:16:00.000Z",
-     "link": "https://m.entertain.naver.com/article/022/0004172663"
+     "title": "성남시, 고용우수기업 14곳 선정…보이스피싱 예방교육도 운영",
+     "press": "beyondpost.co.kr",
+     "publishedAt": "2026-11-04T22:46:00.000Z",
+     "link": "http://www.beyondpost.co.kr/view.php?ud=2026110507365536684c878f8fa1_30"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 827,
+  "flagged": 828,
   "matched": 368,
   "avgLeadMin": 349,
   "recent": [
