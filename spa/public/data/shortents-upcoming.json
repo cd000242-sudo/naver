@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T06:04:23.430Z",
+ "builtAt": "2026-11-04T06:14:28.603Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 69,
-   "recent20": 10,
-   "press": 46,
-   "firstArticleAt": "2026-11-04T04:38:00.000Z",
+   "articles90": 67,
+   "recent20": 17,
+   "press": 49,
+   "firstArticleAt": "2026-11-04T04:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'미국 중간선거' 민주당, 상원 7대 경합지 중 공화 현역 5곳 싹쓸이",
-     "press": "busan.com",
-     "publishedAt": "2026-11-04T06:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001405622?sid=104"
+     "title": "美 민주 상·하원 장악…상원 53 vs 41, 하원 205 vs 123(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-04T06:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014301344?sid=104"
     },
     {
-     "title": "[중간선거] 美 주요 언론, 상원 격전지 중 상당수 민주당 '승' 예상",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-04T06:00:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443000"
+     "title": "[속보] 미 메인주 공화당 5선 거물도 침몰…민주, 상원 53석 확보",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-04T06:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002830665?sid=104"
     },
     {
-     "title": "美 중간선거서 민주당, 상원 7대 경합지 중 공화 현역 5곳 싹쓸이",
-     "press": "getnews.co.kr",
-     "publishedAt": "2026-11-04T06:00:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=885983"
+     "title": "美 민주당, 20년 만에 상·하원 동시 탈환 눈앞…트럼프 '여소야대' 직면",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-04T06:12:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=727965"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 42,
-   "recent20": 7,
-   "press": 34,
+   "articles90": 46,
+   "recent20": 6,
+   "press": 38,
    "firstArticleAt": "2026-11-04T05:08:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "차예련 측 “학폭 의혹 사실무근…강력 법적 대응”",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-04T06:00:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611040246"
+     "title": "차예련, '학폭 의혹' 재차 부인…\"허위사실 유포, 강력 대응\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-04T06:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005436527"
     },
     {
-     "title": "차예련 측, 학폭 논란에 2차 입장 “허위사실 유포 법적 대응”",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-04T05:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000519090"
+     "title": "차예련 측, 학폭 의혹 부인 “가족까지 비난… 허위사실 강력 조치”",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-04T06:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000366371?sid=102"
     },
     {
-     "title": "차예련 거듭 부인에도… \"강력 대응\"",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-04T05:52:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3081386"
+     "title": "'학폭 부인' 차예련 소속사 \"허위사실 유포·인신공격 법적 대응\"",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-04T06:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/018/0006403613"
     }
    ]
   },
@@ -79,30 +79,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 39,
-   "recent20": 22,
-   "press": 27,
+   "articles90": 53,
+   "recent20": 27,
+   "press": 31,
    "firstArticleAt": "2026-11-04T04:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "윤석열 '대선 허위발언' 2심도 유죄… 국민의힘 397억 원 반환 위기",
-     "press": "jibs.co.kr",
-     "publishedAt": "2026-11-04T06:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/661/0000086099?sid=100"
+     "title": "[尹 선거법 위반 2심 선고] 1심 유지에 尹측 “최대한 빨리 상고할 것”",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-04T06:10:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261104514693?OutUrl=naver"
     },
     {
-     "title": "'선거법 위반' 윤석열, 2심도 징역형 집유...확정시 국힘 397억 반환",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-04T06:02:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4116701"
+     "title": "尹 선거법 2심 유죄에 서영교 \"사필귀정\" 김용민 \"국힘 397억 반환\" 최민...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-04T06:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001038365?sid=100"
     },
     {
-     "title": "윤석열 '선거법’ 항소심도 징역형 집유...확정시 국힘 397억원 반환",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-04T06:02:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/324136/?sc=Naver"
+     "title": "尹 '선거법' 2심도 징역형 집유…국힘 397억 반환 위기",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-04T06:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009270049?sid=102"
     }
    ]
   },
@@ -111,62 +111,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 27,
-   "recent20": 4,
-   "press": 25,
-   "firstArticleAt": "2026-11-04T04:38:00.000Z",
+   "articles90": 29,
+   "recent20": 8,
+   "press": 28,
+   "firstArticleAt": "2026-11-04T04:48:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "\"MBK, 골프존카운티 계약 하루 전 파기… 강경대응 나설것\"",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-04T06:02:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/015/0005350205"
+     "title": "㈜골프존카운티, 진천군에 식료품 세트 기탁",
+     "press": "cctimes.kr",
+     "publishedAt": "2026-11-04T06:10:00.000Z",
+     "link": "http://www.cctimes.kr/news/articleView.html?idxno=935491"
     },
     {
-     "title": "여주시장배 전국파크골프대회 개막…전국 480명 기량겨뤄",
-     "press": "joongboo.com",
-     "publishedAt": "2026-11-04T06:00:00.000Z",
-     "link": "https://www.joongboo.com/news/articleView.html?idxno=363741477"
+     "title": "골프존, 주주·점주·파트너까지 '흔들린 신뢰'···성장 둔화 속 '삼중...",
+     "press": "smartbizn.com",
+     "publishedAt": "2026-11-04T06:08:00.000Z",
+     "link": "https://www.smartbizn.com/news/articleView.html?idxno=158382"
     },
     {
-     "title": "더시에나는 인수 준비하는데…골프존홀딩스, MBK 매각에 또 반발",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-04T06:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000548732?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "상원도 민주 승리 예상",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 22,
-   "recent20": 1,
-   "press": 18,
-   "firstArticleAt": "2026-11-04T04:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "미 민주, 4년만에 하원 탈환...상원도 우세 확실",
-     "press": "womennews.co.kr",
-     "publishedAt": "2026-11-04T05:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/310/0000141432?sid=104"
-    },
-    {
-     "title": "美민주, 오하이오·아이오와 상원 탈환…공화 텃밭서 잇단 승리",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-04T05:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014301223?sid=104"
-    },
-    {
-     "title": "美 민주, 중간선거서 상·하원 탈환 전망…트럼프 관세·한국 공급망 새...",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-04T05:38:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=202611041435093005fbbec65dfb_1"
+     "title": "퍼시픽링스 코리아, 2027 AJGA 풀시드 걸린 시즌 마지막 주니어 골프 대...",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-04T06:07:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/005/0001882970"
     }
    ]
   },
@@ -176,29 +144,61 @@
     "signal.bz"
    ],
    "articles90": 18,
-   "recent20": 1,
+   "recent20": 4,
    "press": 18,
-   "firstArticleAt": "2026-11-04T04:37:00.000Z",
+   "firstArticleAt": "2026-11-04T04:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "특검 “투표지 부족 투표소, 선관위 지시에 투표록 위·변조”…중앙·...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-04T05:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002718864?sid=102"
+     "title": "선관위 특검, 용지부족 투표소 '투표록 위·변조' 압수수색",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-04T06:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002428247?sid=102"
     },
     {
-     "title": "특검팀, 용지 부족 최소 40여 투표소 중앙선관위 지시 공문서 '투표록' ...",
-     "press": "hbnpress.com",
-     "publishedAt": "2026-11-04T05:42:00.000Z",
-     "link": "https://hbnpress.com/news/view/1065591491189452"
+     "title": "특검 \"중앙선관위 지시로 투표록 사후 위·변조\"… 3일째 압수수색 外 [...",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-04T06:06:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249072"
     },
     {
-     "title": "특검 \"투표지 부족 투표소, 중앙선관위 지시로 투표록 사후 위변조\"",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-04T05:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000541661?sid=101"
+     "title": "특검 “선관위, 지방선거 투표록 위‧변조 지시”…압수수색",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-04T06:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003562780?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "상원도 민주 승리 예상",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 22,
+   "recent20": 4,
+   "press": 17,
+   "firstArticleAt": "2026-11-04T04:45:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美 민주 상·하원 장악…상원 53 vs 41, 하원 205 vs 123(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-04T06:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014301344?sid=104"
+    },
+    {
+     "title": "美 민주, 상원 경합주 싹쓸이...“트럼프에 대한 강한 불만 때문”",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-04T06:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003562785?sid=104"
+    },
+    {
+     "title": "생활비 폭탄, 돌아선 민심…민주 '블루쓰나미' 상하원 싹쓸이",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-04T06:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005436524?sid=104"
     }
    ]
   },
@@ -207,13 +207,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 19,
-   "recent20": 7,
-   "press": 16,
+   "articles90": 20,
+   "recent20": 2,
+   "press": 17,
    "firstArticleAt": "2026-11-04T04:56:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "포미닛 전지윤, 11월 22일 비연예인과 결혼…현아 이어 팀 내 ‘두 번째...",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-04T06:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000760001"
+    },
     {
      "title": "포미닛 전지윤, 22일 비연예인과 결혼…\"따뜻한 마음 가진 사람\"",
      "press": "mdtoday.co.kr",
@@ -225,12 +231,6 @@
      "press": "sports.khan.co.kr",
      "publishedAt": "2026-11-04T05:53:00.000Z",
      "link": "https://m.entertain.naver.com/article/144/0001148052"
-    },
-    {
-     "title": "포미닛 출신 전지윤 \"11월에 결혼합니다, 나보다 멋진 사람\"",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-04T05:52:00.000Z",
-     "link": "http://www.joynews24.com/view/2022564"
     }
    ]
   },
@@ -239,13 +239,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 5,
+   "articles90": 8,
+   "recent20": 2,
+   "press": 6,
    "firstArticleAt": "2026-11-04T05:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'민주압승'에 놀란 코스피, 오후 5600선 회복…연기금 중심 매수세[장중...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-04T06:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009270048?sid=101"
+    },
     {
      "title": "[셀럽의 한 수] 5500선 맴도는 코스피, 조정은 어디까지? \"올해는 5000선...",
      "press": "biz.sbs.co.kr",
@@ -257,12 +263,6 @@
      "press": "newspim.com",
      "publishedAt": "2026-11-04T05:34:00.000Z",
      "link": "https://www.newspim.com/news/view/20261104000844"
-    },
-    {
-     "title": "외국인 매도세에 코스피 출렁…7개월째 '팔자' 외국인 복귀 언제쯤",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-04T05:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000541660?sid=101"
     }
    ]
   },
@@ -274,10 +274,16 @@
    "articles90": 5,
    "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-04T04:36:00.000Z",
+   "firstArticleAt": "2026-11-04T04:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'전처 폭행·외도 논란' 윤딴딴, 복귀 공연서 \"좋아할 가치 있는 사람 될...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-04T06:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000637075"
+    },
     {
      "title": "'외도 및 전처 폭행 논란' 윤딴딴, 무대 복귀→연내 추가 공연 예고…\"1...",
      "press": "topstarnews.net",
@@ -289,12 +295,6 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-04T05:13:00.000Z",
      "link": "https://m.entertain.naver.com/article/003/0014301082"
-    },
-    {
-     "title": "‘외도·전처 폭행 논란’ 윤딴딴 “좋아할 가치 있는 사람 될 것”",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-04T05:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005758840"
     }
    ]
   },
@@ -304,7 +304,7 @@
     "nate"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-04T04:52:00.000Z",
    "exclusive": true,
@@ -327,6 +327,71 @@
      "press": "dnews.co.kr",
      "publishedAt": "2026-11-04T05:02:00.000Z",
      "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611041355001460604"
+    }
+   ]
+  },
+  {
+   "keyword": "강남구",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T05:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[부음] 김지아 강남구의사회원, 부친상",
+     "press": "doctorstimes.com",
+     "publishedAt": "2026-11-04T06:12:00.000Z",
+     "link": "http://www.doctorstimes.com/news/articleView.html?idxno=240878"
+    },
+    {
+     "title": "강남구 발 공시송달 혁신, 서울시 전역으로 확대",
+     "press": "fntoday.co.kr",
+     "publishedAt": "2026-11-04T06:08:00.000Z",
+     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=397006"
+    },
+    {
+     "title": "강남구, 중소기업 인사·노무 담당자 100명 대상 무료 실무교육",
+     "press": "job-post.co.kr",
+     "publishedAt": "2026-11-04T05:50:00.000Z",
+     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=236491"
+    }
+   ]
+  },
+  {
+   "keyword": "국채",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T04:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "모건스탠리, 토큰화 대상에 미국 주식·국채 명시",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-04T06:08:00.000Z",
+     "link": "https://www.tokenpost.kr/news/blockchain/432484"
+    },
+    {
+     "title": "野 예결위 \"내년 예산안 구제불능…104조 미래대응기금 전액 국채 상환...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-04T06:00:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261104000996"
+    },
+    {
+     "title": "‘사금고’ 비판에…韓총리 “미래대응기금, 안정적 국채 시장 위한 것...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-04T04:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004678614?sid=100"
     }
    ]
   },
@@ -355,17 +420,17 @@
      "link": "https://n.news.naver.com/mnews/article/421/0009269771?sid=101"
     },
     {
-     "title": "롯데마트, 5일부터 메가통큰 2주차 돌입",
+     "title": "삼겹살부터 광어회까지…롯데마트, 5일부터 '메가통큰' 2주차 돌입",
      "press": "news1.kr",
      "publishedAt": "2026-11-04T05:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009269765?sid=101"
+     "link": "https://n.news.naver.com/mnews/article/421/0009269763?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 619,
+  "flagged": 621,
   "matched": 260,
   "avgLeadMin": 293,
   "recent": [
