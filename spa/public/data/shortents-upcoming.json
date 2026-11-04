@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T05:54:19.450Z",
+ "builtAt": "2026-11-04T06:04:23.430Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,81 +8,145 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 29,
  "candidates": [
   {
-   "keyword": "트럼프, 민주당과 협력",
+   "keyword": "민주당 상원 승리 예측",
    "sources": [
     "nate"
    ],
-   "articles90": 54,
-   "recent20": 3,
-   "press": 49,
-   "firstArticleAt": "2026-11-04T04:25:00.000Z",
+   "articles90": 69,
+   "recent20": 10,
+   "press": 46,
+   "firstArticleAt": "2026-11-04T04:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프 “이란 전쟁, 공화당 선거 패배 원인 중 하나”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-04T05:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003760012?sid=104"
+     "title": "'미국 중간선거' 민주당, 상원 7대 경합지 중 공화 현역 5곳 싹쓸이",
+     "press": "busan.com",
+     "publishedAt": "2026-11-04T06:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001405622?sid=104"
     },
     {
-     "title": "[美 중간선거] 트럼프 \"선거 결과 수용…민주당과 협력할 것\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-04T05:44:00.000Z",
-     "link": "https://www.ajunews.com/view/20261104141617176"
+     "title": "[중간선거] 美 주요 언론, 상원 격전지 중 상당수 민주당 '승' 예상",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-04T06:00:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443000"
     },
     {
-     "title": "미 중간선거, 민주당 양원 장악 예측···관세 결정권은 여전히 트럼프",
-     "press": "incheontoday.com",
-     "publishedAt": "2026-11-04T05:40:00.000Z",
-     "link": "https://www.incheontoday.com/news/articleView.html?idxno=325895"
+     "title": "美 중간선거서 민주당, 상원 7대 경합지 중 공화 현역 5곳 싹쓸이",
+     "press": "getnews.co.kr",
+     "publishedAt": "2026-11-04T06:00:00.000Z",
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=885983"
     }
    ]
   },
   {
    "keyword": "차예련 소속사 허위사실 강력대응",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 40,
-   "recent20": 13,
-   "press": 32,
+   "articles90": 42,
+   "recent20": 7,
+   "press": 34,
    "firstArticleAt": "2026-11-04T05:08:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
+     "title": "차예련 측 “학폭 의혹 사실무근…강력 법적 대응”",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-04T06:00:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611040246"
+    },
+    {
+     "title": "차예련 측, 학폭 논란에 2차 입장 “허위사실 유포 법적 대응”",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-04T05:56:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000519090"
+    },
+    {
      "title": "차예련 거듭 부인에도… \"강력 대응\"",
      "press": "newsclaim.co.kr",
      "publishedAt": "2026-11-04T05:52:00.000Z",
      "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3081386"
-    },
-    {
-     "title": "차예련 \"가족까지 비난받아…학폭 의혹 법적 대응\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-04T05:52:00.000Z",
-     "link": "https://www.ajunews.com/view/20261104144239280"
-    },
-    {
-     "title": "차예련 측, 학폭 의혹 재차 부인…\"허위사실 유포·인신공격 법적 대응...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-04T05:48:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1793770858530342006"
     }
    ]
   },
   {
-   "keyword": "상원도 민주 승리 예측",
+   "keyword": "윤석열 선거법 2심 선고",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 47,
-   "recent20": 5,
-   "press": 31,
-   "firstArticleAt": "2026-11-04T04:26:00.000Z",
+   "articles90": 39,
+   "recent20": 22,
+   "press": 27,
+   "firstArticleAt": "2026-11-04T04:59:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "윤석열 '대선 허위발언' 2심도 유죄… 국민의힘 397억 원 반환 위기",
+     "press": "jibs.co.kr",
+     "publishedAt": "2026-11-04T06:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/661/0000086099?sid=100"
+    },
+    {
+     "title": "'선거법 위반' 윤석열, 2심도 징역형 집유...확정시 국힘 397억 반환",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-04T06:02:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4116701"
+    },
+    {
+     "title": "윤석열 '선거법’ 항소심도 징역형 집유...확정시 국힘 397억원 반환",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-04T06:02:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/324136/?sc=Naver"
+    }
+   ]
+  },
+  {
+   "keyword": "골프",
+   "sources": [
+    "google"
+   ],
+   "articles90": 27,
+   "recent20": 4,
+   "press": 25,
+   "firstArticleAt": "2026-11-04T04:38:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "\"MBK, 골프존카운티 계약 하루 전 파기… 강경대응 나설것\"",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-04T06:02:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/015/0005350205"
+    },
+    {
+     "title": "여주시장배 전국파크골프대회 개막…전국 480명 기량겨뤄",
+     "press": "joongboo.com",
+     "publishedAt": "2026-11-04T06:00:00.000Z",
+     "link": "https://www.joongboo.com/news/articleView.html?idxno=363741477"
+    },
+    {
+     "title": "더시에나는 인수 준비하는데…골프존홀딩스, MBK 매각에 또 반발",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-04T06:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000548732?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "상원도 민주 승리 예상",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 22,
+   "recent20": 1,
+   "press": 18,
+   "firstArticleAt": "2026-11-04T04:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -93,64 +157,37 @@
      "link": "https://n.news.naver.com/mnews/article/310/0000141432?sid=104"
     },
     {
-     "title": "\"고물가 불만이 표심 갈랐다\"…새벽부터 대기줄, 2.5조 예측베팅",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-04T05:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005436504?sid=104"
+     "title": "美민주, 오하이오·아이오와 상원 탈환…공화 텃밭서 잇단 승리",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-04T05:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014301223?sid=104"
     },
     {
-     "title": "미 민주당 의회 장악 시 한국 유불리 따져봤더니",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-04T05:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000519086?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "골프",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 26,
-   "recent20": 4,
-   "press": 23,
-   "firstArticleAt": "2026-11-04T04:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[사람in파크골프] “2년은 못 사는 줄 알았어요”…위암을 이긴 78세, 그...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-04T05:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/468/0001277998?sid=103"
-    },
-    {
-     "title": "허또진, ‘골당TV X-라이브’ 초대 골프퀸 등극…막판 역전극",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-04T05:42:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000759997"
-    },
-    {
-     "title": "골프존홀딩스 \"MBK, 계약 하루 전 협상 중단\"…법적 대응 예고",
-     "press": "iminju.net",
+     "title": "美 민주, 중간선거서 상·하원 탈환 전망…트럼프 관세·한국 공급망 새...",
+     "press": "g-enews.com",
      "publishedAt": "2026-11-04T05:38:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=171919"
+     "link": "https://www.g-enews.com/view.php?ud=202611041435093005fbbec65dfb_1"
     }
    ]
   },
   {
    "keyword": "중앙선관위 지시 투표록 변조",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 18,
-   "recent20": 2,
+   "recent20": 1,
    "press": 18,
-   "firstArticleAt": "2026-11-04T04:32:00.000Z",
+   "firstArticleAt": "2026-11-04T04:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "특검 “투표지 부족 투표소, 선관위 지시에 투표록 위·변조”…중앙·...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-04T05:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002718864?sid=102"
+    },
     {
      "title": "특검팀, 용지 부족 최소 40여 투표소 중앙선관위 지시 공문서 '투표록' ...",
      "press": "hbnpress.com",
@@ -162,123 +199,91 @@
      "press": "biz.sbs.co.kr",
      "publishedAt": "2026-11-04T05:37:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/374/0000541661?sid=101"
-    },
-    {
-     "title": "특검 \"중앙선관위 지시로 투표록 사후 위·변조\"",
-     "press": "kgnews.co.kr",
-     "publishedAt": "2026-11-04T05:28:00.000Z",
-     "link": "https://www.kgnews.co.kr/news/article.html?no=918138"
     }
    ]
   },
   {
-   "keyword": "윤석열 선거법 2심 선고",
+   "keyword": "전지윤 비연예인과 결혼",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 22,
-   "recent20": 12,
-   "press": 17,
-   "firstArticleAt": "2026-11-04T04:59:00.000Z",
+   "articles90": 19,
+   "recent20": 7,
+   "press": 16,
+   "firstArticleAt": "2026-11-04T04:56:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "포미닛 전지윤, 22일 비연예인과 결혼…\"따뜻한 마음 가진 사람\"",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-04T05:58:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=622961"
+    },
+    {
+     "title": "[공식] 포미닛 전지윤, ♥비연예인과 22일 결혼…“제 동반자, 멋지고 따...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-04T05:53:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001148052"
+    },
+    {
+     "title": "포미닛 출신 전지윤 \"11월에 결혼합니다, 나보다 멋진 사람\"",
+     "press": "joynews24.com",
+     "publishedAt": "2026-11-04T05:52:00.000Z",
+     "link": "http://www.joynews24.com/view/2022564"
+    }
+   ]
+  },
+  {
+   "keyword": "코스피 하락 전환",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-04T05:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "尹 선거법 항소심도 당선무효형…재판 지켜보는 국민의힘",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-04T05:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004678654?sid=100"
+     "title": "[셀럽의 한 수] 5500선 맴도는 코스피, 조정은 어디까지? \"올해는 5000선...",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-04T05:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541669?sid=101"
     },
     {
-     "title": "윤석열 선거법 2심 징역 1년 6개월·집행유예 3년 선고",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-04T05:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016421567?sid=100"
+     "title": "美 중간선거 후 코스피 반등할까…AI 투자·장기 금리 향방 관건",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-04T05:34:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261104000844"
     },
     {
-     "title": "[속보]尹 '선거법 위반' 2심도 당선무효형…국힘 397억 반환 위기",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-04T05:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006403602?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "집",
-   "sources": [
-    "google"
-   ],
-   "articles90": 17,
-   "recent20": 8,
-   "press": 17,
-   "firstArticleAt": "2026-11-04T05:16:00.000Z",
-   "exclusive": true,
-   "capped": true,
-   "samples": [
-    {
-     "title": "이경규, 30년전 日옛집 방문했다가 때아닌 무례 논란..\"찐 무계획\"",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-04T05:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004463092"
-    },
-    {
-     "title": "장동혁, 李 ‘집값 폭락’ 가짜뉴스 반박에 “언론이 일제히 비판하자 ...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-04T05:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004678645?sid=100"
-    },
-    {
-     "title": "“우리 집 주인 누구야?”…등기 열람지수 금천구, 발급은 용산구 1위",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-04T05:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005758871?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "이란",
-   "sources": [
-    "google"
-   ],
-   "articles90": 11,
-   "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-04T04:32:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "트럼프 “이란 전쟁, 공화당 선거 패배 원인 중 하나”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-04T05:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003760012?sid=104"
-    },
-    {
-     "title": "트럼프 \"당장 이란 추가 공격 계획 없어…필요시 대응 준비\"",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-04T05:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005838024?sid=104"
-    },
-    {
-     "title": "트럼프 \"이란 전쟁 탓에 중간선거 패배...민주당 미친 법안에 거부권\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-04T05:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002428228?sid=104"
+     "title": "외국인 매도세에 코스피 출렁…7개월째 '팔자' 외국인 복귀 언제쯤",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-04T05:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541660?sid=101"
     }
    ]
   },
   {
    "keyword": "전처 폭행·외도 논란 윤딴딴",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-04T04:25:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-04T04:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'외도 및 전처 폭행 논란' 윤딴딴, 무대 복귀→연내 추가 공연 예고…\"1...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-04T05:54:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16268083"
+    },
     {
      "title": "'외도·전처 폭행' 논란 후 1년 만에 복귀한 男가수가 한 말",
      "press": "newsis.com",
@@ -290,12 +295,38 @@
      "press": "mk.co.kr",
      "publishedAt": "2026-11-04T05:10:00.000Z",
      "link": "https://m.entertain.naver.com/article/009/0005758840"
+    }
+   ]
+  },
+  {
+   "keyword": "김민석, 코인 과세 유예 제안",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-04T04:52:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "민주, ‘가상자산 과세 유예’ 공식 제안에…조국 “개혁 유예 정당” ...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-04T05:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002830659?sid=100"
     },
     {
-     "title": "'전처 폭행 및 외도' 윤딴딴 \"계속 좋아할 가치 있는 사람 되겠다\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-04T04:49:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005436467"
+     "title": "박수영 \"준비없는 코인과세, 유예 불가피\"",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-04T05:14:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3742082"
+    },
+    {
+     "title": "김민석, 가상자산 과세유예 정부에 공식 제안…‘2년 연장’ 가닥",
+     "press": "dnews.co.kr",
+     "publishedAt": "2026-11-04T05:02:00.000Z",
+     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611041355001460604"
     }
    ]
   },
@@ -334,10 +365,16 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 614,
-  "matched": 259,
-  "avgLeadMin": 294,
+  "flagged": 619,
+  "matched": 260,
+  "avgLeadMin": 293,
   "recent": [
+   {
+    "keyword": "트럼프, 민주당과 협력",
+    "hitKeyword": "트럼프 반대 투표 43%",
+    "hitAt": "2026-11-04T15:00:00+09:00",
+    "leadMin": 16
+   },
    {
     "keyword": "나스닥 지수",
     "hitKeyword": "중간선거 나스닥",
@@ -391,12 +428,6 @@
     "hitKeyword": "텍사스 민주당 돌풍",
     "hitAt": "2026-11-04T13:30:00+09:00",
     "leadMin": 1132
-   },
-   {
-    "keyword": "코스피·코스닥 상승 출발",
-    "hitKeyword": "코스피 전망",
-    "hitAt": "2026-11-04T13:30:00+09:00",
-    "leadMin": 177
    }
   ]
  }
