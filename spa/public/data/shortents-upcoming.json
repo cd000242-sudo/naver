@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T07:04:51.484Z",
+ "builtAt": "2026-11-04T10:46:58.692Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,133 +8,165 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 21,
  "candidates": [
   {
-   "keyword": "차예련, 학폭 의혹 강력 대응",
+   "keyword": "강호동 구속영장",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 43,
-   "recent20": 8,
-   "press": 39,
-   "firstArticleAt": "2026-11-04T05:35:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "차예련 측, ‘학폭’ 의혹 재차 부인…법적 대응 예고",
-     "press": "donga.com",
-     "publishedAt": "2026-11-04T07:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003760038?sid=102"
-    },
-    {
-     "title": "차예련 측 “학폭 의혹은 허위”…익명 폭로·가족 비난에 법적 대응",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-04T06:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000130591?sid=102"
-    },
-    {
-     "title": "차예련 측, '학폭 의혹'에 공식 입장 \"사실무근, 법적 대응\" [전문]",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-04T06:58:00.000Z",
-     "link": "https://www.insight.co.kr/news/580674"
-    }
-   ]
-  },
-  {
-   "keyword": "트럼프 공화당",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 50,
-   "recent20": 30,
-   "press": 37,
-   "firstArticleAt": "2026-11-04T06:32:00.000Z",
+   "articles90": 45,
+   "recent20": 6,
+   "press": 41,
+   "firstArticleAt": "2026-11-04T09:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프 \"중간선거 결과 전적으로 수용... 민주당과 협력할 것\"",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-04T07:04:00.000Z",
-     "link": "https://www.insight.co.kr/news/580675"
+     "title": "경찰, '뇌물수수·공금유용 의혹' 강호동 농협중앙회장 구속영장 신청",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-04T10:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000649023?sid=102"
     },
     {
-     "title": "트럼프 집권 2기 21개월 '격변', 민주당 양원 탈환으로 제동…이란·관세...",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-04T07:04:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261104010001664"
+     "title": "경찰, 강호동 농협중앙회장 구속영장",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-04T10:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005350426?sid=102"
     },
     {
-     "title": "머스크, “선거 개입 우주 레이저 효과가 없었던 듯”…공화당 패배에 ...",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-04T07:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001882984?sid=102"
+     "title": "경찰, ‘금품수수 의혹’ 강호동 농협중앙회장 구속영장 신청",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-04T10:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003695860?sid=102"
     }
    ]
   },
   {
-   "keyword": "윤석열 선거법 2심 징역형 유예",
+   "keyword": "디아즈 1타점 3루타",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 43,
+   "articles90": 68,
+   "recent20": 5,
+   "press": 13,
+   "firstArticleAt": "2026-11-04T09:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[KS2] '5번 타순 이동' 삼성 디아즈, 한국 무대 첫 3루타로 선취점",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-04T10:34:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261104001361"
+    },
+    {
+     "title": "[포토]디아즈의 1타점 3루타로 기선 제압하는 삼성",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-04T10:33:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278160"
+    },
+    {
+     "title": "[포토]1타점 3루타로 기선 제압한 삼성 디아즈",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-04T10:32:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278159"
+    }
+   ]
+  },
+  {
+   "keyword": "조범현 한국시리즈 시구",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 58,
+   "recent20": 0,
+   "press": 13,
+   "firstArticleAt": "2026-11-04T09:29:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[포토]조범현 전 감독, KS 2차전 시구",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-04T10:20:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278140"
+    },
+    {
+     "title": "[포토]힘차게 시구하는 조범현 전 감독",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-04T10:20:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278139"
+    },
+    {
+     "title": "[포토]조범현-이만수 전 감독, KS 2차전 시구-시포",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-04T10:20:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/468/0001278141"
+    }
+   ]
+  },
+  {
+   "keyword": "SK㈜, SK에코플랜트 완전자회사 추진",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 11,
    "recent20": 1,
-   "press": 36,
-   "firstArticleAt": "2026-11-04T05:43:00.000Z",
+   "press": 11,
+   "firstArticleAt": "2026-11-04T09:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "尹 '국힘 397억 반환' 걸린 선거법 2심 당선무효형...法 \"엄단 필요\"",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-04T06:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002393332?sid=100"
+     "title": "SK㈜, SK에코플랜트 상장 대신 완전자회사 편입 결정…주식 공개매수",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-04T10:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004206601?sid=101"
     },
     {
-     "title": "윤석열, 선거법 2심 선고 '징역형 집유 유지' [TF사진관]",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-04T06:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000548769?sid=100"
+     "title": "SK, SK에코플랜트 상장 대신 완전 자회사화 추진",
+     "press": "thelec.kr",
+     "publishedAt": "2026-11-04T09:58:00.000Z",
+     "link": "https://www.thelec.kr/news/articleView.html?idxno=64901"
     },
     {
-     "title": "'윤석열 선거법 위반' 2심도 당선 무효형…확정 시 국힘 397억 원 반환",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-04T06:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400623?sid=102"
+     "title": "상장 대신 SK 품으로…SK에코플랜트, 완전자회사 전환 추진",
+     "press": "betanews.net",
+     "publishedAt": "2026-11-04T09:46:00.000Z",
+     "link": "https://www.betanews.net/article/view/beta202611040160"
     }
    ]
   },
   {
-   "keyword": "미국 중간선거",
+   "keyword": "영평상 시상식 참석",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 43,
-   "recent20": 43,
-   "press": 27,
-   "firstArticleAt": "2026-11-04T06:46:00.000Z",
+   "articles90": 10,
+   "recent20": 6,
+   "press": 7,
+   "firstArticleAt": "2026-11-04T09:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[美 중간선거] 한국계 댄 고, 연방 하원의원 당선…역대 7번째 한국계 의...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-04T07:04:00.000Z",
-     "link": "https://www.ajunews.com/view/20261104155439579"
+     "title": "[포토] 고은아 '영평상 공로영화인상 수상'",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-04T10:46:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=779009"
     },
     {
-     "title": "코스피, 美 중간선거 개표에 급등락… 5600선 마감",
-     "press": "the-biz.co.kr",
-     "publishedAt": "2026-11-04T07:04:00.000Z",
-     "link": "http://www.the-biz.co.kr/news/articleView.html?idxno=730680"
+     "title": "[포토] 조인성, 전도연 ‘제46회 영평상 주연상 주인공’",
+     "press": "heraldmuse.com",
+     "publishedAt": "2026-11-04T10:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/112/0003812185"
     },
     {
-     "title": "미국 중간선거 영향, 코스피 출렁...5683.80 반등 마감 [포토]",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-04T07:04:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2644151"
+     "title": "현빈, 제46회 영평상 OTT 시리즈 부문 남우주연상",
+     "press": "sports.hankooki.com",
+     "publishedAt": "2026-11-04T10:38:00.000Z",
+     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6942908"
     }
    ]
   },
@@ -143,356 +175,196 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 29,
-   "recent20": 20,
-   "press": 27,
-   "firstArticleAt": "2026-11-04T05:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "코스피, 美 중간선거 개표에 급등락… 5600선 마감",
-     "press": "the-biz.co.kr",
-     "publishedAt": "2026-11-04T07:04:00.000Z",
-     "link": "http://www.the-biz.co.kr/news/articleView.html?idxno=730680"
-    },
-    {
-     "title": "[마감시황] 美 중간선거에 출렁인 코스피…장중 롤러코스터 끝 0.6% 상승...",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-04T07:02:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261104500489"
-    },
-    {
-     "title": "코스피, 0.62% 오른 5683.80…外人 '팔자'에 음봉 마감",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-04T07:02:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/324153/?sc=Naver"
-    }
-   ]
-  },
-  {
-   "keyword": "전지윤 22일 결혼",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 25,
-   "recent20": 2,
-   "press": 23,
-   "firstArticleAt": "2026-11-04T05:35:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "포미닛 전지윤, 11월의 신부 된다→\"나보다 멋진 동반자\" 직접 밝힌 소감...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-04T06:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001407104"
-    },
-    {
-     "title": "포미닛 전지윤, 11월의 신부 된다…\"부끄럽고 설레\"",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-04T06:50:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1135136"
-    },
-    {
-     "title": "\"가지 마, 그래도 축하해\" 허가윤, 포미닛 전지윤 결혼에 유쾌한 축하",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-04T06:44:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000051374"
-    }
-   ]
-  },
-  {
-   "keyword": "오세훈 숙박 화재 점검",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 43,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-04T05:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "오세훈, 캡슐형 숙박시설 점검…\"관광객 숙박 안전, 법령 개선 요청\"",
-     "press": "news.cpbc.co.kr",
-     "publishedAt": "2026-11-04T06:54:00.000Z",
-     "link": "https://news.cpbc.co.kr/article/1176829?division=NAVER"
-    },
-    {
-     "title": "외국인 관광객 1300만명 넘은 서울…숙박시설 안전 사각지대 점검",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-04T06:46:00.000Z",
-     "link": "https://www.ajunews.com/view/20261104140932151"
-    },
-    {
-     "title": "오세훈, 캡슐형 숙박시설 방문…\"소방시설 의무화 건의\"(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-04T06:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014301452?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "노스캐롤라이나 상원 민주 승리",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
+   "articles90": 6,
    "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-04T05:38:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-04T09:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "하원 따낸 민주…'상원 경합지' 7곳 중 5곳에서도 승리 예측",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-04T07:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000519111?sid=104"
+     "title": "코스피, 400포인트 넘는 롤러코스터 장세…개인·기관 매수세에 상승 마...",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-04T10:32:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=846192"
     },
     {
-     "title": "美민주, 20년 만에 상·하원 동시 탈환…트럼프 남은 2년 '험로' 예고",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-04T06:42:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=314625"
+     "title": "급등과 급락 반복한 코스피…무엇이 흔들었나 [Visual]",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-04T10:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005759149?sid=101"
     },
     {
-     "title": "민주당, 상원 7개 경합지 중 5곳 싹쓸이…다수당 확실시",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-04T06:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003057124?sid=104"
+     "title": "'블루웨이브' 공포에 '롤러코스피'…\"하루 만에 18% 올랐다\" 엇갈린 희비",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-04T10:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001271681?sid=101"
     }
    ]
   },
   {
-   "keyword": "국채",
+   "keyword": "테슬라",
    "sources": [
     "google"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-04T06:00:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-04T09:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘블루 쓰나미’ 에⋯AI주ㆍ달러ㆍ코인↓ vs 친환경주ㆍ금ㆍ국채 ↑ [美...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-04T07:00:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2644134"
+     "title": "테슬라, 수입차 첫 연 10만대 눈앞…FSD안되는데, 30·40대 왜사나",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-04T10:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003562881?sid=101"
     },
     {
-     "title": "[중간선거] 美 국채 금리, 민주당 압승 전망에 하락세…3년물 8bp↓(상보...",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-04T06:44:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443014"
+     "title": "스페이스X 3.9%·테슬라 3.6% 장전 하락, 코어위브 4.2% 내려",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-04T10:22:00.000Z",
+     "link": "https://www.tokenpost.kr/news/market/432587"
     },
     {
-     "title": "모건스탠리, 美주식·국채 토큰화···월가 합류",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-04T06:32:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=879837"
+     "title": "테슬라·스페이스X 합병 전망에 비상 걸린 서학개미...주식 안팔아도 양...",
+     "press": "livebiz.today",
+     "publishedAt": "2026-11-04T10:10:00.000Z",
+     "link": "https://www.livebiz.today/news/articleView.html?idxno=206220"
     }
    ]
   },
   {
-   "keyword": "약국",
+   "keyword": "신촌 병원 흉기 난동 1명 부상",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-04T09:29:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "신촌 세브란스병원서 50대 여성 흉기 난동…교수 1명 부상",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-04T09:54:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261104001354"
+    },
+    {
+     "title": "세브란스병원서 흉기 휘두른 50대 체포…의사 1명 부상",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-04T09:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000548860?sid=102"
+    },
+    {
+     "title": "신촌 세브란스 병원서 흉기 난동...정신과 교수 1명 부상",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-04T09:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005759143?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "한우",
    "sources": [
     "signal.bz",
     "google"
    ],
    "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-04T05:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "토니모리, 온누리약국 홍대점 입점",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-04T06:34:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=879806"
-    },
-    {
-     "title": "약국도 철근 낙품하는 나라장터…조달청 부실업체 검증망 '구멍'",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-04T06:06:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261104001007"
-    },
-    {
-     "title": "메디빅약국, 세이브존 전주코아점에 200평 규모 대형약국 오픈",
-     "press": "enetnews.co.kr",
-     "publishedAt": "2026-11-04T06:04:00.000Z",
-     "link": "https://www.enetnews.co.kr/news/articleView.html?idxno=56033"
-    }
-   ]
-  },
-  {
-   "keyword": "주한 미군",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T06:05:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美군사우편으로 합성대마 밀반입한 주한미군 2명 적발",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-04T06:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016421719?sid=100"
-    },
-    {
-     "title": "美 군사 우체국 통해 대마 밀수한 주한미군 세관에 덜미",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-04T06:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002718875?sid=101"
-    },
-    {
-     "title": "美군사우편으로 합성대마 밀수…주한미군 구속",
-     "press": "dnews.co.kr",
-     "publishedAt": "2026-11-04T06:20:00.000Z",
-     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611041503246580631"
-    }
-   ]
-  },
-  {
-   "keyword": "전지명 부위원장 회의 주재",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-04T05:40:00.000Z",
+   "firstArticleAt": "2026-11-04T09:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "발언하는 전지명 국민통합위원회 부위원장",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-04T05:45:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261104000991"
+     "title": "목포무안신안축협, 전국한우경진대회서 경쟁력 입증",
+     "press": "kjdaily.com",
+     "publishedAt": "2026-11-04T10:36:00.000Z",
+     "link": "http://www.kjdaily.com/article.php?aid=1793788288691287074"
     },
     {
-     "title": "인사하는 전지명 국민통합위 부위원장",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-04T05:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016421534?sid=100"
+     "title": "[현장] 9864만 원 '역대 최고가' 갈아치운 슈퍼 한우 탄생",
+     "press": "farminsight.net",
+     "publishedAt": "2026-11-04T09:54:00.000Z",
+     "link": "https://www.farminsight.net/news/articleView.html?idxno=17168"
     },
     {
-     "title": "국민통합위원회 제22차 전체회의 주재하는 전지명 부위원장",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-04T05:44:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261104000988"
-    }
-   ]
-  },
-  {
-   "keyword": "강남구",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T06:16:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "강남구 “테헤란밸리 고용노동대학 오세요”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-04T06:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003695748?sid=100"
-    },
-    {
-     "title": "노무사가 노동법 실무교육... 강남구 '고용노동대학'",
-     "press": "public25.com",
-     "publishedAt": "2026-11-04T06:16:00.000Z",
-     "link": "https://www.public25.com/news/articleView.html?idxno=57871"
-    },
-    {
-     "title": "강남구, 결핵관리 최우수기관 선정…질병관리청장상 수상",
-     "press": "fntoday.co.kr",
-     "publishedAt": "2026-11-04T06:16:00.000Z",
-     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=397007"
+     "title": "[인터뷰] 제29회 전국한우능력평가대회 대통령상 수상 '술뫼농장' 이병...",
+     "press": "farminsight.net",
+     "publishedAt": "2026-11-04T09:54:00.000Z",
+     "link": "https://www.farminsight.net/news/articleView.html?idxno=17169"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 641,
-  "matched": 265,
-  "avgLeadMin": 289,
+  "flagged": 707,
+  "matched": 290,
+  "avgLeadMin": 281,
   "recent": [
    {
-    "keyword": "정하연 작가 별세",
-    "hitKeyword": "정하연 작가 별세",
-    "hitAt": "2026-11-04T16:00:00+09:00",
-    "leadMin": 126
+    "keyword": "노스캐롤라이나 상원 민주 승리",
+    "hitKeyword": "민주당 상원 경합지 승리",
+    "hitAt": "2026-11-04T19:30:00+09:00",
+    "leadMin": 356
    },
    {
-    "keyword": "정하연 별세 애도",
-    "hitKeyword": "정하연 작가 별세",
-    "hitAt": "2026-11-04T16:00:00+09:00",
-    "leadMin": 15
+    "keyword": "SK SK에코플랜트 공개매수",
+    "hitKeyword": "호반 한진칼 공개매수",
+    "hitAt": "2026-11-04T19:30:00+09:00",
+    "leadMin": 84
    },
    {
-    "keyword": "지역의대 신설 확정",
-    "hitKeyword": "경국대 의대 신설 확정",
-    "hitAt": "2026-11-04T15:30:00+09:00",
-    "leadMin": 227
+    "keyword": "한진칼 최대주주 변경",
+    "hitKeyword": "호반 한진칼 공개매수",
+    "hitAt": "2026-11-04T19:30:00+09:00",
+    "leadMin": 44
    },
    {
-    "keyword": "민주당 상원 승리 예측",
-    "hitKeyword": "미국 중간선거 민주당",
-    "hitAt": "2026-11-04T15:30:00+09:00",
-    "leadMin": 26
+    "keyword": "민호 마라톤 기록 반납",
+    "hitKeyword": "샤이니 민호 마라톤",
+    "hitAt": "2026-11-04T19:00:00+09:00",
+    "leadMin": 94
    },
    {
-    "keyword": "민주당 승리 예상",
-    "hitKeyword": "미국 중간선거 민주당",
-    "hitAt": "2026-11-04T15:30:00+09:00",
-    "leadMin": 5
-   },
-   {
-    "keyword": "트럼프, 민주당과 협력",
-    "hitKeyword": "트럼프 반대 투표 43%",
-    "hitAt": "2026-11-04T15:00:00+09:00",
-    "leadMin": 16
-   },
-   {
-    "keyword": "나스닥 지수",
-    "hitKeyword": "중간선거 나스닥",
-    "hitAt": "2026-11-04T14:30:00+09:00",
-    "leadMin": 318
-   },
-   {
-    "keyword": "미국 중간선거",
-    "hitKeyword": "미국 중간선거 민주당",
-    "hitAt": "2026-11-04T14:30:00+09:00",
-    "leadMin": 86
-   },
-   {
-    "keyword": "SK하이닉스 주가 급락",
-    "hitKeyword": "SK하이닉스 미국 규제",
-    "hitAt": "2026-11-04T14:30:00+09:00",
-    "leadMin": 46
+    "keyword": "美 민주당 압승",
+    "hitKeyword": "중간선거 민주당 승리",
+    "hitAt": "2026-11-04T19:00:00+09:00",
+    "leadMin": 14
    },
    {
     "keyword": "코스피 하락 전환",
-    "hitKeyword": "코스피 변동성 심화",
-    "hitAt": "2026-11-04T14:30:00+09:00",
-    "leadMin": 26
+    "hitKeyword": "코스피 요동 마감",
+    "hitAt": "2026-11-04T18:30:00+09:00",
+    "leadMin": 206
+   },
+   {
+    "keyword": "코스피 코스닥 상승 마감",
+    "hitKeyword": "코스피 요동 마감",
+    "hitAt": "2026-11-04T18:30:00+09:00",
+    "leadMin": 75
+   },
+   {
+    "keyword": "코스피 코스닥 상승",
+    "hitKeyword": "코스피 요동 마감",
+    "hitAt": "2026-11-04T18:30:00+09:00",
+    "leadMin": 44
+   },
+   {
+    "keyword": "2026 미래경제포럼 축사하는",
+    "hitKeyword": "최동원 2026 영웅 선정",
+    "hitAt": "2026-11-04T18:00:00+09:00",
+    "leadMin": 1574
+   },
+   {
+    "keyword": "돌싱 n 모솔",
+    "hitKeyword": "돌싱N모솔 2기",
+    "hitAt": "2026-11-04T18:00:00+09:00",
+    "leadMin": 1041
    }
   ]
  }
