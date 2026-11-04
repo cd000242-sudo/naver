@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T08:45:39.682Z",
+ "builtAt": "2026-11-04T08:55:44.040Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,65 +13,32 @@
   {
    "keyword": "홍콩 ELS 과징금",
    "sources": [
-    "signal.bz",
-    "daum"
+    "signal.bz"
    ],
    "articles90": 99,
-   "recent20": 16,
+   "recent20": 10,
    "press": 93,
-   "firstArticleAt": "2026-11-04T07:22:00.000Z",
+   "firstArticleAt": "2026-11-04T07:26:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "금융위, 홍콩 ELS 불완전판매 7개 은행·6개 증권사에 3736억 '역대 최대...",
-     "press": "intn.co.kr",
-     "publishedAt": "2026-11-04T08:40:00.000Z",
-     "link": "http://www.intn.co.kr/news/articleView.html?idxno=2054509"
+     "title": "홍콩 ELS 사태 3746억 역대 최대 금전 제재···은행은 국민·증권은 한...",
+     "press": "womaneconomy.co.kr",
+     "publishedAt": "2026-11-04T08:50:00.000Z",
+     "link": "https://www.womaneconomy.co.kr/news/articleView.html?idxno=260680"
     },
     {
-     "title": "금융노조 \"홍콩ELS 사태, 감독 한계도 짚어야\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-04T08:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002428321?sid=101"
+     "title": "금융위, 홍콩 ELS 불완전판매 은행·증권사에 과징금 3746억 부과 최종 ...",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-04T08:46:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=451172"
     },
     {
-     "title": "홍콩ELS 과징금 3700억…은행 \"소송 검토\"",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-04T08:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005350320?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "코스피 코스닥 상승",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 47,
-   "recent20": 7,
-   "press": 42,
-   "firstArticleAt": "2026-11-04T07:16:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "['클릭' 증시] 美 개표 속보에 일희일비한 코스피",
-     "press": "00news.co.kr",
+     "title": "홍콩ELS 불완전판매 과징금 3,746억원…역대 최대",
+     "press": "wowtv.co.kr",
      "publishedAt": "2026-11-04T08:44:00.000Z",
-     "link": "http://www.00news.co.kr/news/articleView.html?idxno=107734"
-    },
-    {
-     "title": "[메가이슈분석] 증권사 13곳이 본 2027년 경제·증시·채권…코스피 1만...",
-     "press": "megaeconomy.co.kr",
-     "publishedAt": "2026-11-04T08:40:00.000Z",
-     "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065601019716525"
-    },
-    {
-     "title": "코스피, 막판 반등해 5680선 마감…美 중간선거에 출렁",
-     "press": "news.mtn.co.kr",
-     "publishedAt": "2026-11-04T08:36:00.000Z",
-     "link": "https://news.mtn.co.kr/article/2026110417112119661"
+     "link": "https://n.news.naver.com/mnews/article/215/0001271664?sid=101"
     }
    ]
   },
@@ -80,10 +47,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 35,
+   "articles90": 31,
    "recent20": 4,
-   "press": 34,
-   "firstArticleAt": "2026-11-04T07:18:00.000Z",
+   "press": 31,
+   "firstArticleAt": "2026-11-04T07:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -108,17 +75,55 @@
    ]
   },
   {
+   "keyword": "코스피 코스닥 상승",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 31,
+   "recent20": 3,
+   "press": 29,
+   "firstArticleAt": "2026-11-04T07:27:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "['클릭' 증시] 美 개표 속보에 일희일비한 코스피",
+     "press": "00news.co.kr",
+     "publishedAt": "2026-11-04T08:44:00.000Z",
+     "link": "http://www.00news.co.kr/news/articleView.html?idxno=107734"
+    },
+    {
+     "title": "[메가이슈분석] 증권사 13곳이 본 2027년 경제·증시·채권…코스피 1만...",
+     "press": "megaeconomy.co.kr",
+     "publishedAt": "2026-11-04T08:40:00.000Z",
+     "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065601019716525"
+    },
+    {
+     "title": "코스피, 막판 반등해 5680선 마감…美 중간선거에 출렁",
+     "press": "news.mtn.co.kr",
+     "publishedAt": "2026-11-04T08:36:00.000Z",
+     "link": "https://news.mtn.co.kr/article/2026110417112119661"
+    }
+   ]
+  },
+  {
    "keyword": "윤석열 선거법 집행유예",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 33,
+   "articles90": 28,
    "recent20": 3,
-   "press": 25,
-   "firstArticleAt": "2026-11-04T07:17:00.000Z",
+   "press": 22,
+   "firstArticleAt": "2026-11-04T07:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'윤석열 입'에 국힘 397억 토해내나…이르면 내년 2월 대법 확정",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-04T08:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006403752?sid=102"
+    },
     {
      "title": "尹 선거법 항소심도 당선무효형… 대법 확정 땐 국힘 397억원 반환",
      "press": "segye.com",
@@ -130,76 +135,38 @@
      "press": "newsverse.kr",
      "publishedAt": "2026-11-04T08:38:00.000Z",
      "link": "https://www.newsverse.kr/news/articleView.html?idxno=11844"
-    },
-    {
-     "title": "尹 선거법 위반 2심도 징역형 집유…확정시 국힘 397억 반환(종합2보)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-04T08:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014301848?sid=102"
     }
    ]
   },
   {
-   "keyword": "개",
+   "keyword": "할인",
    "sources": [
     "google"
    ],
-   "articles90": 9,
-   "recent20": 2,
+   "articles90": 8,
+   "recent20": 5,
    "press": 8,
-   "firstArticleAt": "2026-11-04T07:16:00.000Z",
+   "firstArticleAt": "2026-11-04T08:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "남원시 유태평양 한웅원밴드 그루브 in 판소리개최",
-     "press": "jeonmin.co.kr",
-     "publishedAt": "2026-11-04T08:40:00.000Z",
-     "link": "http://www.jeonmin.co.kr/news/articleView.html?idxno=449774"
+     "title": "롯데마트, 메가통큰 2주차 할인…수입 돼지고기 물량 60% 확대",
+     "press": "newslock.co.kr",
+     "publishedAt": "2026-11-04T08:54:00.000Z",
+     "link": "http://www.newslock.co.kr/news/articleView.html?idxno=139370"
     },
     {
-     "title": "[속보] 식당 개·폐업 반복하며 수십 명 임금 체불한 30대, 도피 끝 검거",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-04T08:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001072285?sid=102"
+     "title": "충북농협, 오이 할인 판매로 농가 판로 지원",
+     "press": "ccdailynews.com",
+     "publishedAt": "2026-11-04T08:52:00.000Z",
+     "link": "https://www.ccdailynews.com/news/articleView.html?idxno=2449770"
     },
     {
-     "title": "개봉 일주일 만에 25만 명 봤다…반려인 눈물 자극하며 호평 받고 있는...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-04T08:23:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000486440"
-    }
-   ]
-  },
-  {
-   "keyword": "이강철 감독 미소",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T07:23:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "좌타자 7명 도배한 박진만 삼성 감독 \"고영표만 내리면…\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-04T08:20:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/001/0016422147"
-    },
-    {
-     "title": "[ST포토] 이강철 감독, 여유 있는 미소",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-04T07:28:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109726483881"
-    },
-    {
-     "title": "[MD포토] 이강철 감독, '미소를 숨길수 없어'",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-04T07:25:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/117/0004121943"
+     "title": "홈플러스, 5~11일 신선식품·생필품 할인 행사",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-04T08:48:00.000Z",
+     "link": "http://www.breaknews.com/1248424"
     }
    ]
   },
@@ -236,41 +203,42 @@
    ]
   },
   {
-   "keyword": "백승엽 판사",
+   "keyword": "이스타항공",
    "sources": [
-    "daum"
+    "signal.bz",
+    "google"
    ],
    "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-04T07:20:00.000Z",
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T07:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"오차범위 접전 때 거짓말을\"‥\"죄질이\" 판사 작심 尹 질타 [현장영상]",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-04T08:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533520?sid=102"
+     "title": "이스타항공, 도쿠시마 노선 접은 이유… 현지 지사의 '대한항공 러브콜...",
+     "press": "sisaweek.com",
+     "publishedAt": "2026-11-04T08:46:00.000Z",
+     "link": "https://www.sisaweek.com/news/articleView.html?idxno=238786"
     },
     {
-     "title": "\"손바닥 王자\" 콕 짚은 판사‥\"검사였던 尹\" 유죄 부메랑 [현장영상]",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-04T07:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533507?sid=102"
+     "title": "부산발 국제선 14개로 늘린 이스타항공…외국인 관광객 공략",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-04T08:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/468/0001278082?sid=101"
     },
     {
-     "title": "윤석열 2심도 '당선무효형'…백승엽 고법판사는 누구?",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-04T07:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001976678?sid=102"
+     "title": "이스타항공, 부산 국제선 외국인 승객 171% 늘어…노선 확대 속도",
+     "press": "pointdaily.co.kr",
+     "publishedAt": "2026-11-04T07:44:00.000Z",
+     "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=324816"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 672,
+  "flagged": 673,
   "matched": 279,
   "avgLeadMin": 280,
   "recent": [
