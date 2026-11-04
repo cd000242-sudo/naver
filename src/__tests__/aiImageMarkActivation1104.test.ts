@@ -6,7 +6,8 @@
  */
 import { describe, expect, it, vi } from 'vitest';
 import {
-  confirmAiMarkActive, findVisibleAiMarkButton, readAiMarkButtonState, summarizeAiMarkResults, waitForAiMarkButton,
+  confirmAiMarkActive, findVisibleAiMarkButton, markAiImageWithRetries, readAiMarkButtonState, summarizeAiMarkResults,
+  waitForAiMarkButton,
 } from '../automation/aiImageMark';
 
 type FakeState = { visible: boolean; active: boolean };
@@ -59,6 +60,52 @@ describe('finding and confirming the AI mark button', () => {
     expect(await confirmAiMarkActive(scope(() => [turnsOn]) as any, scope(() => []) as any, noDelay)).toBe(true);
     const staysOff = button(() => ({ visible: true, active: false }));
     expect(await confirmAiMarkActive(scope(() => [staysOff]) as any, scope(() => []) as any, noDelay)).toBe(false);
+  });
+});
+
+// [2026-11-04] 사장님: "실패하면 경고로 알려도 사용자가 뭘 하겠니, 성공이 되게 해야지". 이미지마다 최대 3번 다시 시도한다.
+describe('markAiImageWithRetries', () => {
+  const run = (states: Array<FakeState | null>, attempts = 3) => {
+    let i = 0;
+    const current = () => states[Math.min(i, states.length - 1)];
+    const component = scope(() => (current() ? [button(() => current() as FakeState)] : []));
+    const selectImage = vi.fn(async () => true);
+    const clickButton = vi.fn(async () => { i++; });
+    const onRetry = vi.fn();
+    return { selectImage, clickButton, onRetry, promise: markAiImageWithRetries({
+      component: component as any, frame: scope(() => []) as any, delay: noDelay, selectImage, clickButton, onRetry, attempts,
+    }) };
+  };
+
+  it('button missing on the first look: the image is selected again and the mark is turned on', async () => {
+    let looks = 0;
+    const late = button(() => ({ visible: true, active: looks > 9 }));
+    const component = scope(() => (++looks > 8 ? [late] : []));
+    const selectImage = vi.fn(async () => true);
+    const clickButton = vi.fn(async () => undefined);
+    const result = await markAiImageWithRetries({ component: component as any, frame: scope(() => []) as any, delay: noDelay, selectImage, clickButton });
+    expect(result).toBe('enabled');
+    expect(selectImage).toHaveBeenCalledTimes(2);
+    expect(clickButton).toHaveBeenCalledTimes(1);
+  });
+
+  it('already on: never clicked (cannot be switched off by a retry)', async () => {
+    const r = run([{ visible: true, active: true }]);
+    expect(await r.promise).toBe('already-enabled');
+    expect(r.clickButton).not.toHaveBeenCalled();
+  });
+
+  it('click not confirmed: the state is re-read and clicked again only while still off', async () => {
+    const r = run([{ visible: true, active: false }, { visible: true, active: false }, { visible: true, active: true }]);
+    expect(await r.promise).toBe('enabled');
+    expect(r.clickButton).toHaveBeenCalledTimes(2);
+    expect(r.onRetry).toHaveBeenCalledTimes(1);
+  });
+
+  it('gives up only after every attempt failed', async () => {
+    const r = run([null]);
+    expect(await r.promise).toBe('button-missing');
+    expect(r.selectImage).toHaveBeenCalledTimes(3);
   });
 });
 

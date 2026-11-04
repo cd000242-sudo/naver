@@ -64,6 +64,39 @@ export async function confirmAiMarkActive(
   return false;
 }
 
+export interface AiImageMarkRetryInput {
+  readonly component: Scope;
+  readonly frame: Scope;
+  readonly delay: Delay;
+  /** Scroll the image into view and click it (coordinate click in the caller). false = the image is gone. */
+  readonly selectImage: () => Promise<boolean>;
+  /** Click the AI mark button (coordinate click in the caller). */
+  readonly clickButton: (control: AiMarkControl) => Promise<void>;
+  readonly onRetry?: (attempt: number, last: AiImageMarkResult) => void;
+  readonly attempts?: number;
+}
+
+/**
+ * [2026-11-04] Owner: "실패하면 경고로 알려도 사용자가 뭘 하겠니, 성공이 되게 해야지". Up to `attempts` (3) rounds per
+ * image: select the image again, wait for the button, read the state fresh and click only while it is off (a retry
+ * can never switch an already-on mark off), then confirm. Gives up only after every round failed.
+ */
+export async function markAiImageWithRetries(input: AiImageMarkRetryInput): Promise<AiImageMarkResult> {
+  const attempts = Math.max(1, input.attempts ?? 3);
+  let last: AiImageMarkResult = 'button-missing';
+  for (let attempt = 1; attempt <= attempts; attempt++) {
+    if (attempt > 1) input.onRetry?.(attempt, last);
+    if (!(await input.selectImage())) return last;
+    const control = await waitForAiMarkButton(input.component, input.frame, input.delay);
+    if (!control) { last = 'button-missing'; continue; }
+    if (control.state.active) return attempt === 1 ? 'already-enabled' : 'enabled';
+    await input.clickButton(control);
+    if (await confirmAiMarkActive(input.component, input.frame, input.delay)) return 'enabled';
+    last = 'unconfirmed';
+  }
+  return last;
+}
+
 /** One honest summary line: "완료" only when every target ended on. */
 export function summarizeAiMarkResults(results: readonly AiImageMarkResult[]): string {
   if (results.length === 0) return 'ℹ️ [AI 마크] 표시할 AI 이미지가 없습니다';

@@ -1,6 +1,6 @@
 import { fetchNaverPreviousPostCandidates, resolveNaverPreviousPostCategoryId } from './main/services/naverPreviousPostLookup.js';
 import { refreshRuntimePreviousPost, readEditorBlogId } from './automation/previousPostRuntimePolicy.js';
-import { confirmAiMarkActive, summarizeAiMarkResults, waitForAiMarkButton, type AiImageMarkResult } from './automation/aiImageMark.js';
+import { markAiImageWithRetries, summarizeAiMarkResults, type AiImageMarkResult } from './automation/aiImageMark.js';
 import type { PreviousPostCandidate } from './shared/previousPostPolicy.js';
 // ✅ puppeteer-extra + stealth plugin 적용 (봇 감지 완벽 우회)
 import { randomUUID } from 'node:crypto';
@@ -3110,44 +3110,45 @@ export class NaverBlogAutomation {
                     continue;
                   }
 
-                  const compCoords = await compImg.evaluate((el: HTMLImageElement) => {
-                    el.scrollIntoView({ block: 'center', behavior: 'instant' as any });
-                    void el.offsetHeight;
-                    const rect = el.getBoundingClientRect();
-                    return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2, found: true };
-                  }).catch(() => ({ x: 0, y: 0, found: false }));
-
-                  if (!compCoords.found) continue;
-
-                  const iframeOff = await page.evaluate(() => {
+                  const readIframeOffset = () => page.evaluate(() => {
                     const iframe = document.querySelector('iframe#mainFrame') as HTMLIFrameElement;
                     if (iframe) { const r = iframe.getBoundingClientRect(); return { x: r.x, y: r.y }; }
                     return { x: 0, y: 0 };
                   }).catch(() => ({ x: 0, y: 0 }));
 
-                  await page.mouse.click(iframeOff.x + compCoords.x, iframeOff.y + compCoords.y);
-
-                  // [2026-11-04] 고객 제보 "AI 활용 체크를 켜도 체크가 안 된다". 400ms 뒤 한 번만 찾고 못 찾으면 조용히
-                  //   넘어갔고, 누른 뒤 확인 없이 "완료"를 찍었다. 버튼은 최대 2초 기다리고(보이는 것만, 이미지 칸 먼저),
-                  //   누른 뒤 켜짐을 다시 읽어 확인한다(aiImageMark.ts). 누르는 방식(좌표 클릭)은 그대로.
-                  const aiControl = await waitForAiMarkButton(imageComponents[i], frame, (ms) => this.delay(ms));
-                  if (!aiControl) {
-                    aiMarkResults.push('button-missing');
-                    this.log(`   ⚠️ [AI 마크] ${i + 1}번째 이미지: 2초 안에 AI 활용 버튼을 찾지 못했습니다`);
-                    continue;
+                  // [2026-11-04] 고객 제보 "AI 활용 체크를 켜도 체크가 안 된다" + 사장님 "경고로 알려도 사용자가 뭘 하겠니,
+                  //   성공이 되게 해야지". 이미지마다 최대 3번: 다시 스크롤 · 클릭 → 버튼 최대 2초 대기 → 상태를 새로 읽어
+                  //   꺼져 있을 때만 누름(켜진 걸 끄지 않음) → 켜짐 확인(aiImageMark.markAiImageWithRetries). 좌표 클릭 그대로.
+                  const aiMarkResult = await markAiImageWithRetries({
+                    component: imageComponents[i],
+                    frame,
+                    delay: (ms) => this.delay(ms),
+                    selectImage: async () => {
+                      const compCoords = await compImg.evaluate((el: HTMLImageElement) => {
+                        el.scrollIntoView({ block: 'center', behavior: 'instant' as any });
+                        void el.offsetHeight;
+                        const rect = el.getBoundingClientRect();
+                        return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2, found: true };
+                      }).catch(() => ({ x: 0, y: 0, found: false }));
+                      if (!compCoords.found) return false;
+                      const iframeOff = await readIframeOffset();
+                      await page.mouse.click(iframeOff.x + compCoords.x, iframeOff.y + compCoords.y);
+                      return true;
+                    },
+                    clickButton: async (control) => {
+                      const aiBtnCoords = await control.button.evaluate((btn: Element) => {
+                        const rect = btn.getBoundingClientRect();
+                        return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+                      }).catch(() => ({ x: 0, y: 0 }));
+                      const iframeOff = await readIframeOffset();
+                      await page.mouse.click(iframeOff.x + aiBtnCoords.x, iframeOff.y + aiBtnCoords.y);
+                    },
+                    onRetry: (attempt, last) => this.log(`   🔁 [AI 마크] ${i + 1}번째 이미지 다시 시도 ${attempt}/3 (${last === 'button-missing' ? '버튼이 늦게 뜸' : '켜짐 미확인'})`),
+                  });
+                  aiMarkResults.push(aiMarkResult);
+                  if (aiMarkResult === 'button-missing' || aiMarkResult === 'unconfirmed') {
+                    this.log(`   ⚠️ [AI 마크] ${i + 1}번째 이미지: 3번 시도했지만 AI 활용 표시를 켜지 못했습니다(${aiMarkResult})`);
                   }
-                  if (aiControl.state.active) {
-                    aiMarkResults.push('already-enabled');
-                    continue;
-                  }
-                  const aiBtnCoords = await aiControl.button.evaluate((btn: Element) => {
-                    const rect = btn.getBoundingClientRect();
-                    return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
-                  }).catch(() => ({ x: 0, y: 0 }));
-                  await page.mouse.click(iframeOff.x + aiBtnCoords.x, iframeOff.y + aiBtnCoords.y);
-                  const aiMarkOn = await confirmAiMarkActive(imageComponents[i], frame, (ms) => this.delay(ms));
-                  aiMarkResults.push(aiMarkOn ? 'enabled' : 'unconfirmed');
-                  if (!aiMarkOn) this.log(`   ⚠️ [AI 마크] ${i + 1}번째 이미지: 눌렀지만 켜짐이 확인되지 않았습니다`);
                 }
                 this.log(`   ${summarizeAiMarkResults(aiMarkResults)}`);
               } catch (aiMarkError) {
