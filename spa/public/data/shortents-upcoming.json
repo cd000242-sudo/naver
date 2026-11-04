@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T03:03:06.701Z",
+ "builtAt": "2026-11-04T03:13:11.738Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,102 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
-  {
-   "keyword": "김민석 공개 사과 요구",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 77,
-   "recent20": 9,
-   "press": 59,
-   "firstArticleAt": "2026-11-04T01:34:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김민석 '신천지 의혹' 사과에도… 친청계 \"비공개 사과로 끝낼 일인가\"",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-04T03:00:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3445811"
-    },
-    {
-     "title": "지지율 하락에 '신천지' 내홍까지…김민석, 돌파구 마련 고심",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-04T02:58:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=314597"
-    },
-    {
-     "title": "김민석 '신천지 사과'에도 여당 내홍···야당 \"즉각 사퇴·수사 촉구\"",
-     "press": "globale.co.kr",
-     "publishedAt": "2026-11-04T02:56:00.000Z",
-     "link": "https://www.globale.co.kr/news/articleView.html?idxno=41418"
-    }
-   ]
-  },
   {
    "keyword": "특검, 선관위 압수수색",
    "sources": [
     "nate"
    ],
-   "articles90": 31,
-   "recent20": 14,
-   "press": 28,
-   "firstArticleAt": "2026-11-04T01:38:00.000Z",
+   "articles90": 36,
+   "recent20": 13,
+   "press": 31,
+   "firstArticleAt": "2026-11-04T01:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보]특검 “선관위, 용지 부족 투표소에 투표록 위변조 지시”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-04T03:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003759980?sid=100"
+     "title": "특검, 중앙선관위 압수수색…459억 규모 용지 발급기 사업 의혹",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-04T03:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000548647?sid=102"
     },
     {
-     "title": "[속보] 특검 \"용지 부족 투표소, 선관위 지시로 '투표록 위변조' 정황\"",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-04T03:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002464194?sid=102"
+     "title": "특검, 중앙선관위 투표록 위·변조 정황 포착…선관위 압수수색",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-04T03:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001228468?sid=102"
     },
     {
-     "title": "[속보] 특검 \"투표지 부족 투표소, 투표록 사후 위변조\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-04T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000922771?sid=102"
+     "title": "특검, '선관위 지시로 투표록 위·변조' 확인…중앙선관위 압수수색",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-04T03:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009269548?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "김민석 최고위 참석",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 29,
+   "recent20": 0,
+   "press": 26,
+   "firstArticleAt": "2026-11-04T01:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "「M포토」 최고위 참석하는 김민석 민주당 대표",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-04T02:52:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=72568"
+    },
+    {
+     "title": "친청계, 김민석 '신천지' 사과에 정당법 위반 조사 주장",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-04T02:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002534611?sid=100"
+    },
+    {
+     "title": "최민희 “김민석, ‘신천지 발언 말라’ 압박…발언 왜 막나” 반발",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-04T02:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000366352?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "동해상으로 발사체 발사",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 21,
+   "recent20": 6,
+   "press": 20,
+   "firstArticleAt": "2026-11-04T01:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "합참, \"북, 동해상 미상 발사체 발사\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-04T03:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009269503?sid=100"
+    },
+    {
+     "title": "합참 \"北, 선덕 일대서 동해상으로 미사일 수 발 발사\"",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-04T03:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006403493?sid=100"
+    },
+    {
+     "title": "[속보]합참 \"북한, 동해상으로 미상 발사체 발사\"",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-04T03:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001163203?sid=100"
     }
    ]
   },
@@ -79,10 +112,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 24,
+   "articles90": 16,
    "recent20": 1,
-   "press": 24,
-   "firstArticleAt": "2026-11-04T01:34:00.000Z",
+   "press": 16,
+   "firstArticleAt": "2026-11-04T01:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,66 +140,34 @@
    ]
   },
   {
-   "keyword": "동해상으로 발사체 발사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 24,
-   "recent20": 6,
-   "press": 23,
-   "firstArticleAt": "2026-11-04T01:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "북한, 동해상으로 미상 발사체 발사",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-04T03:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016421139?sid=100"
-    },
-    {
-     "title": "합참 \"北, 선덕 일대서 동해상으로 미사일 수 발 발사\"",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-04T03:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006403493?sid=100"
-    },
-    {
-     "title": "합참, \"북, 동해상 미상 발사체 발사\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T03:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009269503?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "대한민국 스포츠영웅 선정",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 18,
-   "recent20": 2,
-   "press": 18,
-   "firstArticleAt": "2026-11-04T01:34:00.000Z",
+   "articles90": 15,
+   "recent20": 3,
+   "press": 15,
+   "firstArticleAt": "2026-11-04T01:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'무쇠팔' 故 최동원, 2026 대한민국 스포츠영웅 선정",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-04T03:08:00.000Z",
+     "link": "https://www.ajunews.com/view/20261104120209796"
+    },
+    {
+     "title": "한국 야구 전설 최동원, 2026 대한민국 스포츠영웅 선정",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-04T03:03:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/277/0005837952"
+    },
     {
      "title": "‘1984년 한국시리즈 4승 신화’ 故 최동원, 2026 대한민국 스포츠영웅 ...",
      "press": "kukinews.com",
      "publishedAt": "2026-11-04T02:54:00.000Z",
      "link": "https://www.kukinews.com/article/view/kuk202611040077"
-    },
-    {
-     "title": "‘무쇠팔’ 故 최동원, 야구선수 최초 스포츠영웅 선정",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-04T02:46:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611040205"
-    },
-    {
-     "title": "‘한국시리즈 4승’ 최동원, 대한민국 스포츠영웅 선정",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-04T02:42:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/028/0002830634"
     }
    ]
   },
@@ -176,10 +177,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 17,
-   "recent20": 4,
-   "press": 15,
-   "firstArticleAt": "2026-11-04T01:34:00.000Z",
+   "articles90": 16,
+   "recent20": 1,
+   "press": 14,
+   "firstArticleAt": "2026-11-04T01:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -208,10 +209,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 14,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-04T01:34:00.000Z",
+   "articles90": 10,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-04T01:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -240,10 +241,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 10,
+   "articles90": 8,
    "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-04T01:40:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-04T01:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -264,6 +265,38 @@
      "press": "news.tf.co.kr",
      "publishedAt": "2026-11-04T02:15:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/629/0000548593?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "송중기",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-04T02:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"가정적인 ��은 아빠\"…송중기, 케이티·두 자녀와 나들이 포착",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-04T03:02:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1793759004530327005"
+    },
+    {
+     "title": "송중기, \"유아차 직접 끌어\" 가정적인 아빠 면모",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-04T02:52:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16267942"
+    },
+    {
+     "title": "\"송중기 선배님과 촬영 중\"..박지현, 이성민에게 전한 손자 근황",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-04T02:33:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003484498"
     }
    ]
   },
@@ -302,10 +335,34 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 563,
-  "matched": 229,
+  "flagged": 564,
+  "matched": 233,
   "avgLeadMin": 277,
   "recent": [
+   {
+    "keyword": "양세종 발목 골절",
+    "hitKeyword": "틈만나면 양세종",
+    "hitAt": "2026-11-04T12:00:00+09:00",
+    "leadMin": 681
+   },
+   {
+    "keyword": "뉴욕 마라톤 결승선 사망",
+    "hitKeyword": "서울 도심 마라톤 관리 강화",
+    "hitAt": "2026-11-04T12:00:00+09:00",
+    "leadMin": 218
+   },
+   {
+    "keyword": "시장",
+    "hitKeyword": "애크먼 주식시장 경고",
+    "hitAt": "2026-11-04T12:00:00+09:00",
+    "leadMin": 158
+   },
+   {
+    "keyword": "순천대 의대 신설",
+    "hitKeyword": "순천대 경국대 의대 신설",
+    "hitAt": "2026-11-04T12:00:00+09:00",
+    "leadMin": 27
+   },
    {
     "keyword": "순천대 경국대 의대 신설",
     "hitKeyword": "순천대 경국대 의대 신설",
@@ -341,30 +398,6 @@
     "hitKeyword": "반도체 역대급 전망",
     "hitAt": "2026-11-04T10:30:00+09:00",
     "leadMin": 118
-   },
-   {
-    "keyword": "코리안 더비 뮌헨 김민재 승리",
-    "hitKeyword": "이강인 김민재 더비",
-    "hitAt": "2026-11-04T10:30:00+09:00",
-    "leadMin": 58
-   },
-   {
-    "keyword": "코스피·코스닥 상승",
-    "hitKeyword": "반도체주 강세 코스피",
-    "hitAt": "2026-11-04T10:30:00+09:00",
-    "leadMin": 48
-   },
-   {
-    "keyword": "코스피 상승 출발",
-    "hitKeyword": "반도체주 강세 코스피",
-    "hitAt": "2026-11-04T10:30:00+09:00",
-    "leadMin": 8
-   },
-   {
-    "keyword": "고지용 젝키 합류 논란",
-    "hitKeyword": "고지용 근황 공개",
-    "hitAt": "2026-11-04T10:30:00+09:00",
-    "leadMin": 8
    }
   ]
  }
