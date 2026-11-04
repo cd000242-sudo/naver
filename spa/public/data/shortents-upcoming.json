@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T14:29:12.782Z",
+ "builtAt": "2026-11-04T14:39:16.444Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,50 +8,81 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 28,
  "candidates": [
+  {
+   "keyword": "삼성 연장 12회 승리",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 64,
+   "recent20": 25,
+   "press": 32,
+   "firstArticleAt": "2026-11-04T14:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘실책으로 결승 득점’ 삼성, 연장 12회 접전 끝에 KT 제압…KS 1승1패 ...",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-04T14:38:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/382/0001302980"
+    },
+    {
+     "title": "'연장 12회 혈투에서 웃었다' 삼성, kt에 3-2 승리로 한국시리즈 1승 1패",
+     "press": "thesportstimes.co.kr",
+     "publishedAt": "2026-11-04T14:38:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/472/0000042281"
+    },
+    {
+     "title": "KS 2차전 승리 박진만 감독 “정말 힘든 경기, 목표했던 1승 1패 안고 대...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-04T14:37:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/021/0002830383"
+    }
+   ]
+  },
   {
    "keyword": "삼성 라이온즈",
    "sources": [
     "nate"
    ],
-   "articles90": 41,
-   "recent20": 35,
-   "press": 24,
-   "firstArticleAt": "2026-11-04T14:07:00.000Z",
+   "articles90": 46,
+   "recent20": 19,
+   "press": 29,
+   "firstArticleAt": "2026-11-04T14:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성 연장 12회 접전 끝에 KT 3대 2로 제압…시리즈 1승 1패",
-     "press": "jbnews.com",
-     "publishedAt": "2026-11-04T14:28:00.000Z",
-     "link": "https://www.jbnews.com/news/articleView.html?idxno=1515153"
+     "title": "'연장 접전 끝에 패배' KT 이강철 감독 \"이런 경기 처음…운이 삼성 쪽으...",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-04T14:38:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109743017077"
     },
     {
-     "title": "\"연장 12회, 상대 실책에 웃었다\"…삼성, KT 꺾고 KS 1승 1패 반격",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-04T14:28:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/014/0005599604"
+     "title": "‘실책으로 결승 득점’ 삼성, 연장 12회 접전 끝에 KT 제압…KS 1승1패 ...",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-04T14:38:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/382/0001302980"
     },
     {
-     "title": "삼성, 연장 12회 혈투 끝 KT 제압…한국시리즈 1승 1패",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-04T14:28:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/422/0000922967"
+     "title": "'연장 12회 혈투에서 웃었다' 삼성, kt에 3-2 승리로 한국시리즈 1승 1패",
+     "press": "thesportstimes.co.kr",
+     "publishedAt": "2026-11-04T14:38:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/472/0000042281"
     }
    ]
   },
   {
    "keyword": "원태인",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 39,
-   "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-04T13:12:00.000Z",
+   "articles90": 31,
+   "recent20": 0,
+   "press": 14,
+   "firstArticleAt": "2026-11-04T13:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -76,45 +107,12 @@
    ]
   },
   {
-   "keyword": "조작기소 특검법 법사위 통과",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 14,
-   "recent20": 0,
-   "press": 14,
-   "firstArticleAt": "2026-11-04T13:03:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'조작기소 특검법' 법사위 강행 처리…'공소취소' 조항 삭제·수사 대상...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-04T13:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005599600?sid=100"
-    },
-    {
-     "title": "조작기소 특검법, 與 주도 법사위 통과…野 \"모든 안건 필버\"",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-04T13:46:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443073"
-    },
-    {
-     "title": "국힘 \"조작기소 특검법은 이재명 특별법…즉각 철회하라\"",
-     "press": "sisafocus.co.kr",
-     "publishedAt": "2026-11-04T13:36:00.000Z",
-     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367207"
-    }
-   ]
-  },
-  {
    "keyword": "아이비 브로드웨이 진출",
    "sources": [
     "daum"
    ],
    "articles90": 13,
-   "recent20": 2,
+   "recent20": 0,
    "press": 12,
    "firstArticleAt": "2026-11-04T13:18:00.000Z",
    "exclusive": false,
@@ -141,17 +139,89 @@
    ]
   },
   {
+   "keyword": "조작기소 특검법 법사위 통과",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-04T13:17:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'조작기소 특검법' 법사위 강행 처리…'공소취소' 조항 삭제·수사 대상...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-04T13:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005599600?sid=100"
+    },
+    {
+     "title": "조작기소 특검법, 與 주도 법사위 통과…野 \"모든 안건 필버\"",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-04T13:46:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443073"
+    },
+    {
+     "title": "국힘 \"조작기소 특검법은 이재명 특별법…즉각 철회하라\"",
+     "press": "sisafocus.co.kr",
+     "publishedAt": "2026-11-04T13:36:00.000Z",
+     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367207"
+    }
+   ]
+  },
+  {
+   "keyword": "박계범",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-04T13:21:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[포토] 박계범 '11회 아쉬운 삼진'",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-04T13:26:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/076/0004463329"
+    },
+    {
+     "title": "[포토] 김정운 '박계범 삼진잡고 포효'",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-04T13:24:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/108/0003484737"
+    },
+    {
+     "title": "[포토S] 역전 찬스에서 삼진 당한 박계범",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-04T13:23:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/477/0000637257"
+    }
+   ]
+  },
+  {
    "keyword": "서인영 12월 26일 재혼",
    "sources": [
     "nate"
    ],
    "articles90": 6,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-04T13:07:00.000Z",
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-04T13:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "서인영, 6세 연상 남편과 12월 26일 재혼…교회에서 스몰 웨딩",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-04T14:36:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009271133"
+    },
     {
      "title": "서인영, 사업가와 두 번째 결혼...작정하고 빼버린 '2가지'",
      "press": "wikitree.co.kr",
@@ -163,12 +233,71 @@
      "press": "xportsnews.com",
      "publishedAt": "2026-11-04T13:36:00.000Z",
      "link": "https://m.entertain.naver.com/article/311/0002076823"
+    }
+   ]
+  },
+  {
+   "keyword": "수사",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-04T13:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'장윤기 수사' 경찰 팀장 \"성범죄 생각 못 해…사이코패스로만 의심\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-04T14:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400721?sid=102"
     },
     {
-     "title": "서인영, 12월 26일 재혼 확정 “린·쥬얼리 멤버들도 온다”",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-04T13:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001302976"
+     "title": "[송평인 칼럼]대통령의 퇴행적 수사기관 통제",
+     "press": "donga.com",
+     "publishedAt": "2026-11-04T14:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003760124?sid=110"
+    },
+    {
+     "title": "김웅 “조작기소 특검법 발의 의원, 다음 국회에서 특검 수사해야”",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-04T14:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002830381?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "트럼프 중간선거 발언",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-04T13:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美 공화당 중간선거 참패 후폭풍…\"2032년까지 상원 탈환 어려울 수도\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-04T14:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009271115?sid=104"
+    },
+    {
+     "title": "트럼프 완패한 美중간선거…세계 각국 반응은?",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-04T13:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006403839?sid=104"
+    },
+    {
+     "title": "미국 중간선거, 민심의 반란은 트럼프의 남은 2년을 어떻게 바꿀 것인가...",
+     "press": "koreaittimes.com",
+     "publishedAt": "2026-11-04T13:40:00.000Z",
+     "link": "https://www.koreaittimes.com/news/articleView.html?idxno=158830"
     }
    ]
   },
@@ -177,10 +306,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T13:05:00.000Z",
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-04T13:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -203,46 +332,20 @@
      "link": "https://n.news.naver.com/mnews/article/421/0009271060?sid=102"
     }
    ]
-  },
-  {
-   "keyword": "수사",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T13:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[송평인 칼럼]대통령의 퇴행적 수사기관 통제",
-     "press": "donga.com",
-     "publishedAt": "2026-11-04T14:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003760124?sid=110"
-    },
-    {
-     "title": "김웅 “조작기소 특검법 발의 의원, 다음 국회에서 특검 수사해야”",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-04T14:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002830381?sid=100"
-    },
-    {
-     "title": "'조작기소 특검법' 법사위 강행 처리…'공소취소' 조항 삭제·수사 대상...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-04T13:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005599600?sid=100"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 767,
-  "matched": 327,
-  "avgLeadMin": 287,
+  "flagged": 770,
+  "matched": 328,
+  "avgLeadMin": 288,
   "recent": [
+   {
+    "keyword": "쿠팡 누적 영업손실",
+    "hitKeyword": "쿠팡 누적 손실 1.8조",
+    "hitAt": "2026-11-04T23:30:00+09:00",
+    "leadMin": 596
+   },
    {
     "keyword": "배성재 김다영 유산 고백",
     "hitKeyword": "배성재 김다영 유산 고백",
@@ -296,12 +399,6 @@
     "hitKeyword": "고영표 7이닝 1실점",
     "hitAt": "2026-11-04T22:30:00+09:00",
     "leadMin": 42
-   },
-   {
-    "keyword": "한다감 출산 몸매",
-    "hitKeyword": "한다감 득남",
-    "hitAt": "2026-11-04T22:30:00+09:00",
-    "leadMin": 32
    }
   ]
  }
