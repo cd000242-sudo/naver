@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T18:40:56.997Z",
+ "builtAt": "2026-11-04T18:51:00.655Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T17:11:00.000Z",
+   "articles90": 3,
+   "recent20": 2,
+   "press": 2,
+   "firstArticleAt": "2026-11-04T17:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[야구] KT, 삼성에 2-3 아쉬운 역전패…'12회 뼈아픈 실책 하나' 시리즈...",
+     "press": "suwonilbo.kr",
+     "publishedAt": "2026-11-04T18:42:00.000Z",
+     "link": "https://www.suwonilbo.kr/view.html?id=L2611050327317bd7"
+    },
     {
      "title": "디아즈에 한숨, 페덱에 박수... 삼성 박진만 감독, 12회 끝에 웃고 대구...",
      "press": "stnsports.co.kr",
@@ -33,12 +39,6 @@
      "press": "stnsports.co.kr",
      "publishedAt": "2026-11-04T17:57:00.000Z",
      "link": "https://m.sports.naver.com/kbaseball/article/450/0000155309"
-    },
-    {
-     "title": "'살다 살다 이런 실책 시리즈는 처음'…삼성과 KT, 우승하려면 어이없는...",
-     "press": "maniareport.com",
-     "publishedAt": "2026-11-04T17:16:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/425/0000213918"
     }
    ]
   }
