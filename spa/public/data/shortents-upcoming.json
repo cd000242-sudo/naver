@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T00:22:07.820Z",
+ "builtAt": "2026-11-04T00:32:10.901Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,210 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 21,
+ "measured": 24,
  "candidates": [
   {
-   "keyword": "김민재 뮌헨 2-0 승리",
+   "keyword": "갤럭시 버즈 청력 케어 허가",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 51,
+   "recent20": 14,
+   "press": 51,
+   "firstArticleAt": "2026-11-03T23:09:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "삼성 갤럭시 버즈, 청력 검사·보조 기능 탑재…식약처 의료기기 허가",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-04T00:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003151020?sid=105"
+    },
+    {
+     "title": "삼성전자, 갤럭시 버즈로 청력 검사·보조…식약처 허가 획득",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-04T00:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001071972?sid=105"
+    },
+    {
+     "title": "삼성전자, 갤럭시 버즈 청력 검사·보조 기능 식약처 허가 획득",
+     "press": "paxetv.com",
+     "publishedAt": "2026-11-04T00:28:00.000Z",
+     "link": "http://www.paxetv.com/news/articleView.html?idxno=286017"
+    }
+   ]
+  },
+  {
+   "keyword": "김민석 사과",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 30,
+   "recent20": 17,
+   "press": 26,
+   "firstArticleAt": "2026-11-03T23:11:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'전대 본질'이라더니 증거 없다는 김민석, 어떻게 책임질 건가",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-04T00:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002534578?sid=100"
+    },
+    {
+     "title": "정점식, '신천지 의혹' 사과한 김민석에 \"정계 은퇴해야\"",
+     "press": "wolyo.co.kr",
+     "publishedAt": "2026-11-04T00:30:00.000Z",
+     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=320015"
+    },
+    {
+     "title": "“왜 울었나, 법적 책임져야”… 김민석 ‘신천지 사과’에 한동훈 직격",
+     "press": "jibs.co.kr",
+     "publishedAt": "2026-11-04T00:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/661/0000086071?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "SK하이닉스 장비 반입 보류",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 18,
-   "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-03T22:57:00.000Z",
+   "articles90": 16,
+   "recent20": 6,
+   "press": 16,
+   "firstArticleAt": "2026-11-03T23:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"美 정부, SK하이닉스 중국 공장 장비 반입에 제동\"",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-04T00:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000141527?sid=101"
+    },
+    {
+     "title": "美, 솔리다임 中 공장 증설 제동…SK하이닉스 난감",
+     "press": "it.chosun.com",
+     "publishedAt": "2026-11-04T00:28:00.000Z",
+     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000000185"
+    },
+    {
+     "title": "美, SK하이닉스 中공장 장비 반입 제동…뉴욕 반도체 공장 투자도 난항",
+     "press": "donga.com",
+     "publishedAt": "2026-11-04T00:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003759943?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "서예지 영화 금월도 출연",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 14,
+   "recent20": 5,
+   "press": 14,
+   "firstArticleAt": "2026-11-03T23:08:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서예지, 영화 '금월도' 캐스팅... '한국형 뱀파이어' 변신",
+     "press": "newsinside.kr",
+     "publishedAt": "2026-11-04T00:30:00.000Z",
+     "link": "https://www.newsinside.kr/news/articleView.html?idxno=5040284"
+    },
+    {
+     "title": "조용하던 서예지 스크린 컴백…뱀파이어 장르 '금월도' 캐스팅",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-04T00:27:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000519020"
+    },
+    {
+     "title": "[공식] 서예지, 사생활 논란 딛고 5년 만에 스크린 복귀..'금월도' 캐스...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-04T00:26:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003484455"
+    }
+   ]
+  },
+  {
+   "keyword": "이에스티",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 11,
+   "recent20": 4,
+   "press": 11,
+   "firstArticleAt": "2026-11-03T23:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[특징주] 이에스티, 코스닥 상장 첫날 강세… 공모가 대비 28%대 급등",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-04T00:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202396?sid=101"
+    },
+    {
+     "title": "이에스티, 코스닥 입성 첫날 강세…공모가 웃돌아[특징주]",
+     "press": "newsway.co.kr",
+     "publishedAt": "2026-11-04T00:24:00.000Z",
+     "link": "https://www.newsway.co.kr/news/view?ud=2026110409195285052"
+    },
+    {
+     "title": "이에스티, 코스닥 상장 첫날 33%대 상승",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-04T00:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005436262?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "곽동신 자사주 추가 매수",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 10,
+   "recent20": 7,
+   "press": 10,
+   "firstArticleAt": "2026-11-03T23:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "곽동신 한미반도체 회장, 자사 주식 100억원 더 산다…누적 매입액 802억...",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-04T00:30:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=560964"
+    },
+    {
+     "title": "곽동신 한미반도체 회장, 자사주 100억원 추가 매수…지분율 33.69%로",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-04T00:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001071973?sid=105"
+    },
+    {
+     "title": "곽동신 한미반도체 회장, 사재 100억으로 자사주 매수…올해 5번째",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-04T00:28:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=202611040909105032139bf6e4b2_1"
+    }
+   ]
+  },
+  {
+   "keyword": "코리안 더비 뮌헨 김민재 승리",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 11,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-03T23:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -29,132 +222,37 @@
      "link": "https://m.sports.naver.com/wfootball/article/436/0000114625"
     },
     {
-     "title": "김민재·이강인, 챔피언스리그 4차전서 맞대결…뮌헨 2-0 승리",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-04T00:04:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=622841"
+     "title": "[UCL REVIEW] '김민재 웃고 이강인 울었다!' UCL 코리안 더비 성사됐지만...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-03T23:51:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/477/0000637014"
     },
     {
-     "title": "김민재, 모레노 앞에서 이강인에 판정승…맨유, 9경기 무승 탈출(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T00:02:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/421/0009268935"
-    }
-   ]
-  },
-  {
-   "keyword": "SK하이닉스 장비 반입 보류",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 14,
-   "recent20": 5,
-   "press": 14,
-   "firstArticleAt": "2026-11-03T22:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美 상무부, SK하이닉스 中 다롄 공장 증설용 장비 허가 보류…뉴욕 투자...",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-04T00:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003481892?sid=105"
-    },
-    {
-     "title": "美, SK하이닉스 中 공장 장비 반입 승인 보류···뉴욕 투자 변수 되나",
-     "press": "smartbizn.com",
-     "publishedAt": "2026-11-04T00:20:00.000Z",
-     "link": "https://www.smartbizn.com/news/articleView.html?idxno=158377"
-    },
-    {
-     "title": "\"중국은 안 된다\" SK하이닉스 '제동'…증설 막아선 美정부",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-04T00:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005350021?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "서예지 영화 금월도 출연",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 12,
-   "recent20": 4,
-   "press": 12,
-   "firstArticleAt": "2026-11-03T22:57:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "서예지, '내일의 기억' 이후 5년 만 스크린 복귀",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-04T00:16:00.000Z",
-     "link": "https://m.entertain.naver.com/article/469/0000963493"
-    },
-    {
-     "title": "서예지, 영화 ‘금월도’ 캐스팅…6년 만 스크린 복귀 예고",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-04T00:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005758640"
-    },
-    {
-     "title": "서예지, 영화 '금월도' 캐스팅…한국형 오컬트 호러 도전",
-     "press": "ent.sbs.co.kr",
-     "publishedAt": "2026-11-04T00:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/416/0000327841"
-    }
-   ]
-  },
-  {
-   "keyword": "시장",
-   "sources": [
-    "google"
-   ],
-   "articles90": 9,
-   "recent20": 9,
-   "press": 9,
-   "firstArticleAt": "2026-11-04T00:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "박찬대 인천시장 \"국비 확보·지역 현안 해결에 힘 모아 달라\"",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-04T00:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000548491?sid=102"
-    },
-    {
-     "title": "HK이노엔, '레드불' 국내 유통 맡는다…에너지 드링크 시장 진출",
-     "press": "fetv.co.kr",
-     "publishedAt": "2026-11-04T00:20:00.000Z",
-     "link": "https://www.fetv.co.kr/news/articleView.html?idxno=313036"
-    },
-    {
-     "title": "천안시, 세계 최대 스마트도시 박람회서 ‘천안관’ 개관…유럽시장 공...",
-     "press": "sisanews24.co.kr",
-     "publishedAt": "2026-11-04T00:20:00.000Z",
-     "link": "http://www.sisanews24.co.kr/19817"
+     "title": "이강인·김민재 UCL ‘코리안 더비’ 성사… 뮌헨 2대0 승",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-03T23:47:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/023/0004007672"
     }
    ]
   },
   {
    "keyword": "로봇 글로벌 대토론회",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 17,
-   "recent20": 0,
-   "press": 4,
+   "articles90": 18,
+   "recent20": 1,
+   "press": 5,
    "firstArticleAt": "2026-11-03T23:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "피지컬AI·로봇 글로벌 최강국 전북 대토론회 발언하는 신승규 현대차 ...",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T23:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016420250?sid=100"
+     "title": "민주당, 피지컬AI·로봇 글로벌 최강국 전북 대토론회 개최",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-04T00:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014299872?sid=100"
     },
     {
      "title": "피지컬AI·로봇 글로벌 최강국 전북 대토론회",
@@ -163,10 +261,42 @@
      "link": "https://n.news.naver.com/mnews/article/001/0016420256?sid=100"
     },
     {
-     "title": "피지컬AI·로봇 글로벌 최강국 전북 대토론회 발언하는 이원택 전북도지...",
+     "title": "피지컬AI·로봇 글로벌 최강국 전북 대토론회 발언하는 신승규 현대차 ...",
      "press": "yna.co.kr",
-     "publishedAt": "2026-11-03T23:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016420245?sid=100"
+     "publishedAt": "2026-11-03T23:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016420250?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "소리새 김광석 별세",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-03T23:11:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'그대 그리고 나' 그룹 소리새 김광석 별세…향년 70세",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-04T00:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922683?sid=102"
+    },
+    {
+     "title": "'그대 그리고 나' 부른 소리새 김광석, 별세…향년 70세",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-03T23:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/629/0000548474"
+    },
+    {
+     "title": "[부고] 김광석씨(그룹 소리새 멤버) 별세",
+     "press": "public25.com",
+     "publishedAt": "2026-11-03T23:30:00.000Z",
+     "link": "https://www.public25.com/news/articleView.html?idxno=57828"
     }
    ]
   },
@@ -192,7 +322,7 @@
      "title": "'굿모닝 수요정책 아카데미' 발언하는 장동혁 대표",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-03T23:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016420214?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/001/0016420219?sid=100"
     },
     {
      "title": "[포토] 정책 아카데미서 발언하는 국민의힘 장동혁 대표",
@@ -208,36 +338,69 @@
     "google"
    ],
    "articles90": 25,
-   "recent20": 5,
+   "recent20": 6,
    "press": 3,
-   "firstArticleAt": "2026-11-03T22:58:00.000Z",
+   "firstArticleAt": "2026-11-03T23:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "Why Some States Take Longer to Count and Report Election Results",
-     "press": "nytimes.com",
-     "publishedAt": "2026-11-04T00:20:00.000Z",
-     "link": "https://www.nytimes.com/live/2026/11/03/us/midterms-2026-election-day-trump/state-election-results-timing?partner=naver"
+     "title": "APTOPIX Election 2026 America Votes Alaska",
+     "press": null,
+     "publishedAt": "2026-11-04T00:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/077/0007226120?sid=104"
     },
     {
-     "title": "Appeals court to rule on ex-President Yoon's high-stakes election law cas...",
-     "press": "en.yna.co.kr",
-     "publishedAt": "2026-11-04T00:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016420353?sid=104"
+     "title": "APTOPIX Election 2026 Michigan",
+     "press": null,
+     "publishedAt": "2026-11-04T00:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/077/0007226119?sid=104"
     },
     {
-     "title": "Voters Leave Election Stickers at Alex Pretti Memorial in Minneapolis",
-     "press": "econotimes.com",
-     "publishedAt": "2026-11-04T00:14:00.000Z",
-     "link": "https://econotimes.com/Voters-Leave-Election-Stickers-at-Alex-Pretti-Memorial-in-Minneapolis-1770351"
+     "title": "APTOPIX Election 2026 America Votes Rochester",
+     "press": null,
+     "publishedAt": "2026-11-04T00:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/077/0007226118?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "기상",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-03T23:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "시스메이트, 조달청 안내·기상전광판 MAS서 '품질보증조달물품' 지정…...",
+     "press": "it-b.co.kr",
+     "publishedAt": "2026-11-04T00:02:00.000Z",
+     "link": "https://www.it-b.co.kr/news/articleView.html?idxno=90541"
+    },
+    {
+     "title": "시스메이트, 조달청 안내·기상전광판 MAS 품목서 '품질보증조달물품' ...",
+     "press": "magazine.hankyung.com",
+     "publishedAt": "2026-11-04T00:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/050/0000112798?sid=101"
+    },
+    {
+     "title": "[오늘 전국 날씨예보] 기상청 날씨누리, \"4일, 오늘 낮과 밤 기온차 큼,...",
+     "press": "lecturernews.com",
+     "publishedAt": "2026-11-03T23:52:00.000Z",
+     "link": "https://www.lecturernews.com/news/articleView.html?idxno=213161"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 511,
+  "flagged": 518,
   "matched": 212,
   "avgLeadMin": 282,
   "recent": [
