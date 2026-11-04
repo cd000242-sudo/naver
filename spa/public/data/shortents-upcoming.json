@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T04:03:31.853Z",
+ "builtAt": "2026-11-04T04:13:36.835Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 56,
-   "recent20": 24,
+   "articles90": 54,
+   "recent20": 35,
    "press": 33,
-   "firstArticleAt": "2026-11-04T03:21:00.000Z",
+   "firstArticleAt": "2026-11-04T03:37:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "미국 중간선거 결과에 월가 촉각",
-     "press": "naeil.com",
-     "publishedAt": "2026-11-04T04:02:00.000Z",
-     "link": "https://www.naeil.com/news/read/607539?ref=naver"
+     "title": "트럼프 “난 투표용지에 없었다, 있었다면 압승”…중간선거 부진에 선...",
+     "press": "donga.com",
+     "publishedAt": "2026-11-04T04:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003759986?sid=104"
     },
     {
-     "title": "美중간선거서 민주당에 하원 내준 트럼프…野견제에도 ‘거부권 마이웨...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-04T04:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002718777?sid=104"
+     "title": "[경제읽기] 상승 출발했던 코스피 하락 전환…美중간선거 주목",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-04T04:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000922786?sid=101"
     },
     {
-     "title": "美 역대 중간선거…1년 뒤 주가 10% 이상 상승",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-04T04:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004007724?sid=101"
+     "title": "[중간선거] MUFG \"민주당 양원 장악 시 亞 통화 강세 전망\"",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-04T04:10:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4442975"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 40,
-   "recent20": 12,
-   "press": 32,
-   "firstArticleAt": "2026-11-04T02:54:00.000Z",
+   "articles90": 42,
+   "recent20": 19,
+   "press": 31,
+   "firstArticleAt": "2026-11-04T03:12:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "美중간선거서 민주당에 하원 내준 트럼프…野견제에도 ‘거부권 마이웨...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-04T04:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002718777?sid=104"
+     "title": "트럼프 “난 투표용지에 없었다, 있었다면 압승”…중간선거 부진에 선...",
+     "press": "donga.com",
+     "publishedAt": "2026-11-04T04:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003759986?sid=104"
     },
     {
-     "title": "공화당 텃밭서 또 이겼다…‘친한파’ 오소프, 39세에 美대권 잠룡 부상",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-04T04:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003562754?sid=104"
+     "title": "[미 중간선거] 공화당 참패에 트럼프 \"내 이름 없어서 졌다…나왔으면 ...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-04T04:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003151210?sid=104"
     },
     {
-     "title": "[美중간선거]트럼프에 등돌린 히스패닉…60%가 민주당 후보 찍어",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T04:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009269616?sid=104"
+     "title": "[속보]텍사스 상원서도 민주당 승리 예측···공화당 30년 아성 무너뜨...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-04T04:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003480597?sid=104"
     }
    ]
   },
@@ -80,30 +80,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 39,
+   "articles90": 35,
    "recent20": 3,
-   "press": 29,
-   "firstArticleAt": "2026-11-04T02:34:00.000Z",
+   "press": 28,
+   "firstArticleAt": "2026-11-04T02:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "조작기소 특검법, 與주도 법사위 상정…5일 본회의 처리 추진",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-04T04:05:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000079517"
+    },
+    {
+     "title": "조작기소 특검법 앞두고 여야 대치 격화",
+     "press": "naeil.com",
+     "publishedAt": "2026-11-04T04:04:00.000Z",
+     "link": "https://www.naeil.com/news/read/607557?ref=naver"
+    },
     {
      "title": "'조작 기소 특검법' 상정 앞두고 법사위 퇴장한 국민의힘",
      "press": "news1.kr",
      "publishedAt": "2026-11-04T03:54:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009269609?sid=100"
-    },
-    {
-     "title": "국민의힘 '조작 기소 특검법' 규탄",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T03:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009269606?sid=100"
-    },
-    {
-     "title": "與, 법사위서 '조작기소 특검법' 상정…5일 본회의 처리 추진",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-04T03:48:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=901867"
     }
    ]
   },
@@ -112,10 +112,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 29,
-   "recent20": 3,
-   "press": 27,
-   "firstArticleAt": "2026-11-04T02:34:00.000Z",
+   "articles90": 20,
+   "recent20": 0,
+   "press": 19,
+   "firstArticleAt": "2026-11-04T02:44:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -209,10 +209,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 36,
-   "recent20": 5,
+   "articles90": 35,
+   "recent20": 4,
    "press": 13,
-   "firstArticleAt": "2026-11-04T02:40:00.000Z",
+   "firstArticleAt": "2026-11-04T02:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -229,10 +229,42 @@
      "link": "https://n.news.naver.com/mnews/article/421/0009269611?sid=100"
     },
     {
-     "title": "[포토]국민의힘 의원들, 법사위 회의 진행 항의하며 퇴장",
-     "press": "sisafocus.co.kr",
+     "title": "'조작 기소 특검법' 상정 앞두고 법사위 퇴장한 국민의힘",
+     "press": "news1.kr",
      "publishedAt": "2026-11-04T03:54:00.000Z",
-     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367183"
+     "link": "https://n.news.naver.com/mnews/article/421/0009269609?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "ap",
+   "sources": [
+    "google"
+   ],
+   "articles90": 13,
+   "recent20": 6,
+   "press": 4,
+   "firstArticleAt": "2026-11-04T03:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "APTOPIX Election 2026 Michigan",
+     "press": null,
+     "publishedAt": "2026-11-04T04:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/077/0007226506?sid=104"
+    },
+    {
+     "title": "APTOPIX Election 2026 Texas Governor",
+     "press": null,
+     "publishedAt": "2026-11-04T04:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/077/0007226502?sid=104"
+    },
+    {
+     "title": "APTOPIX Election 2026 Texas Senate",
+     "press": null,
+     "publishedAt": "2026-11-04T04:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/077/0007226489?sid=104"
     }
    ]
   },
@@ -241,13 +273,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-04T02:36:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-04T03:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“언제까지 장인 덕 볼거냐”…이용식 사위 가수 원혁 생방 중 오열, 왜...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-04T04:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005758799?sid=103"
+    },
     {
      "title": "\"언제까지 장인 덕 볼 거냐\" 원혁, '이용식 사위' 꼬리표에 오열 (아침마...",
      "press": "tvdaily.co.kr",
@@ -259,44 +297,6 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-04T03:22:00.000Z",
      "link": "https://m.entertain.naver.com/article/421/0009269562"
-    },
-    {
-     "title": "'이용식 사위' 원혁, 생방송서 끝내 오열...\"언제까지 장인 덕 보며 활동...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-04T03:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002076364"
-    }
-   ]
-  },
-  {
-   "keyword": "ap",
-   "sources": [
-    "google"
-   ],
-   "articles90": 12,
-   "recent20": 6,
-   "press": 6,
-   "firstArticleAt": "2026-11-04T03:31:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "Binance Hack Adds New Uncertainty to GOPAX Turnaround as Funding Capacity...",
-     "press": "insightkorea.co.kr",
-     "publishedAt": "2026-11-04T04:00:00.000Z",
-     "link": "https://www.insightkorea.co.kr/news/articleView.html?idxno=257986"
-    },
-    {
-     "title": "APTOPIX Election 2026 New Jersey House",
-     "press": null,
-     "publishedAt": "2026-11-04T03:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/077/0007226477?sid=104"
-    },
-    {
-     "title": "APTOPIX Election 2026 Washington",
-     "press": null,
-     "publishedAt": "2026-11-04T03:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/077/0007226460?sid=104"
     }
    ]
   },
@@ -305,10 +305,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T02:36:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-04T02:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
