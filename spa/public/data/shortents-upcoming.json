@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T08:05:22.536Z",
+ "builtAt": "2026-11-04T08:15:26.927Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,62 +15,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 98,
-   "recent20": 22,
-   "press": 92,
-   "firstArticleAt": "2026-11-04T07:04:00.000Z",
+   "articles90": 99,
+   "recent20": 23,
+   "press": 93,
+   "firstArticleAt": "2026-11-04T07:10:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "금융위, 홍콩 ELS 과징금 3712억원 확정…역대 최대",
-     "press": "paxetv.com",
-     "publishedAt": "2026-11-04T08:04:00.000Z",
-     "link": "http://www.paxetv.com/news/articleView.html?idxno=286070"
+     "title": "홍콩 ELS 과징금·과태료 3746억원…역대 최대 규모",
+     "press": "newsprime.co.kr",
+     "publishedAt": "2026-11-04T08:14:00.000Z",
+     "link": "http://www.newsprime.co.kr/news/article.html?no=753759"
     },
     {
-     "title": "금융당국, 홍콩 ELS 불완전판매 13개 금융사에 3746억 제재",
-     "press": "ziksir.com",
-     "publishedAt": "2026-11-04T08:04:00.000Z",
-     "link": "https://www.ziksir.com/news/articleView.html?idxno=152092"
+     "title": "금융위, 홍콩 ELS 관련 은행·증권사 13곳에 3744억 과징금",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-04T08:12:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/324166/?sc=Naver"
     },
     {
-     "title": "1.4조→6000억→3620억…은행 ELS 과징금 결국 '반의 반토막'",
-     "press": "news.bizwatch.co.kr",
-     "publishedAt": "2026-11-04T08:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/648/0000052292?sid=101"
+     "title": "금융위원회, 홍콩H지수 ELS 불완전판매 과징금 약 3700억원 최종 확정",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-04T08:12:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=242355"
     }
    ]
   },
   {
-   "keyword": "코스피 하락 전환",
+   "keyword": "코스피 코스닥 상승 마감",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 74,
-   "recent20": 9,
-   "press": 66,
-   "firstArticleAt": "2026-11-04T06:37:00.000Z",
+   "recent20": 2,
+   "press": 61,
+   "firstArticleAt": "2026-11-04T06:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "미국 중간선거에 장 내내 출렁...코스피 강보합 마감",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-04T08:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002428303?sid=101"
+     "title": "코스피, 장중 400포인트 넘게 등락…외국인 2.5조 매도에도 상승 마감",
+     "press": "kdfnews.com",
+     "publishedAt": "2026-11-04T08:06:00.000Z",
+     "link": "http://www.kdfnews.com/news/articleView.html?idxno=190450"
     },
     {
-     "title": "코스피 '블루웨이브'에 롤러코스터…급락 딛고 0.62% 상승",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-04T08:02:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1319283&inflow=N"
+     "title": "[증시 오늘] 외국인 매도 폭탄에도 코스피 0.62%↑",
+     "press": "bigtanews.co.kr",
+     "publishedAt": "2026-11-04T08:06:00.000Z",
+     "link": "https://www.bigtanews.co.kr/article/view/big202611040020"
     },
     {
-     "title": "코스피 급등락 속 인버스 ETF 거래 급증…KODEX 인버스 97%↑",
-     "press": "kjdaily.com",
-     "publishedAt": "2026-11-04T07:56:00.000Z",
-     "link": "http://www.kjdaily.com/article.php?aid=1793778845691240276"
+     "title": "코스피, 美 중간선거에 내내 출렁이다 0.62% 상승",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-04T07:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000160380?sid=101"
     }
    ]
   },
@@ -79,30 +79,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 63,
-   "recent20": 8,
-   "press": 60,
-   "firstArticleAt": "2026-11-04T06:37:00.000Z",
+   "articles90": 55,
+   "recent20": 7,
+   "press": 53,
+   "firstArticleAt": "2026-11-04T06:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李 대통령 유튜브 시작한다...'대통령의 Y' 내일 첫선",
-     "press": "kgnews.co.kr",
-     "publishedAt": "2026-11-04T08:04:00.000Z",
-     "link": "https://www.kgnews.co.kr/news/article.html?no=918230"
+     "title": "이재명 대통령, 유튜브로 국민과 직접 소통…‘대통령의 Y’ 5일 첫 방송",
+     "press": "wemakenews.co.kr",
+     "publishedAt": "2026-11-04T08:14:00.000Z",
+     "link": "https://wemakenews.co.kr/news/view.php?no=26744"
     },
     {
-     "title": "‘X’ 이어 ‘대통령의 Y’까지…유튜브 시작하는 이 대통령",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-04T08:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012287206?sid=100"
+     "title": "李대통령, 유튜브 대국민 직접 소통…내일 '대통령의 Y' 첫 선",
+     "press": "namdonews.com",
+     "publishedAt": "2026-11-04T08:12:00.000Z",
+     "link": "https://www.namdonews.com/news/articleView.html?idxno=928206"
     },
     {
-     "title": "X에서 하나 더 늘렸다, 대통령 유튜브로 '직접 소통' 강화",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-04T08:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002534659?sid=100"
+     "title": "[자막뉴스] 대국민 소통 문 '활짝'…'대통령의 Y'로 접점 더 늘린다",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-04T08:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400656?sid=100"
     }
    ]
   },
@@ -112,30 +112,62 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 44,
+   "articles90": 41,
    "recent20": 6,
-   "press": 36,
-   "firstArticleAt": "2026-11-04T06:36:00.000Z",
+   "press": 33,
+   "firstArticleAt": "2026-11-04T06:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "尹 '선거법' 2심도 당선무효형...\"변호사·건진법사 발언 허위사실 공표...",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-04T08:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002393342?sid=100"
+    },
+    {
+     "title": "尹 선거법 2심도 유죄...민주당 \"397억 반환하라\" vs 국민의힘 \"대법원 ...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-04T08:10:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261104001284"
+    },
     {
      "title": "범여권 \"尹 선거법 2심 유죄는 당연한 판단…국힘, 397억 반환하라\"",
      "press": "busan.com",
      "publishedAt": "2026-11-04T08:04:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/082/0001405664?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "노스캐롤라이나 상원 민주 승리",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 11,
+   "recent20": 5,
+   "press": 9,
+   "firstArticleAt": "2026-11-04T07:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美 민주당 중간선거 압승, 상하원 모두 장악…트럼프 국정운영 급제동",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-04T08:12:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1135205"
     },
     {
-     "title": "윤석열 2심 유죄에, 조국 \"박수칠 때 아니다\"... 왜?",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-04T08:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002534658?sid=100"
+     "title": "[美중간선거] 민주당 상·하원 모두 장악…트럼프 패배 부른 물가·이란...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-04T08:10:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16268312"
     },
     {
-     "title": "선거법 2심도 유죄‥확정시 국힘 397억 반환",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-04T07:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533509?sid=102"
+     "title": "\"민주당, 하원 과반 확보\"...트럼프 입지 좁아질까 [이슈ON]",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-04T08:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002428307?sid=104"
     }
    ]
   },
@@ -172,54 +204,22 @@
    ]
   },
   {
-   "keyword": "노스캐롤라이나 상원 민주 승리",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-04T06:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "민주당, 공화 상원 7석 탈환…텍사스·캔자스 아성 붕괴, 미시간 첫 무슬...",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-04T08:04:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261104010001722"
-    },
-    {
-     "title": "美 중간선거 '블루 쓰나미'…민주, 상·하원 동시 탈환",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-04T08:02:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261104500565"
-    },
-    {
-     "title": "[美중간선거]캔자스 텍사스 미시간마저…공화, 상원 6개 경합주 완패",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-04T07:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014301757?sid=104"
-    }
-   ]
-  },
-  {
    "keyword": "약국",
    "sources": [
     "google"
    ],
-   "articles90": 6,
-   "recent20": 4,
-   "press": 6,
+   "articles90": 7,
+   "recent20": 5,
+   "press": 7,
    "firstArticleAt": "2026-11-04T07:24:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "DRxS '내손안의약국', 공식 홈페이지 전격 개편… 일반 사용자 UX 대폭 강...",
-     "press": "bokuennews.com",
-     "publishedAt": "2026-11-04T08:04:00.000Z",
-     "link": "http://www.bokuennews.com/news/article.html?no=286647"
+     "title": "'약국에서 철근 낙찰?' 황정아 \"나라장터 부적격 낙찰 226억\"",
+     "press": "tjb.co.kr",
+     "publishedAt": "2026-11-04T08:10:00.000Z",
+     "link": "https://www.tjb.co.kr/news05/bodo/view/id/105693"
     },
     {
      "title": "토니모리, 홍대 뷰티온누리약국 입점…약국 유통채널 확대",
@@ -228,10 +228,10 @@
      "link": "http://www.newslock.co.kr/news/articleView.html?idxno=139330"
     },
     {
-     "title": "메가팩토리약국, \"5일부터 고함량 슈도에페드린 감기약 판매 중단\"",
-     "press": "sisunnews.co.kr",
-     "publishedAt": "2026-11-04T07:58:00.000Z",
-     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249107"
+     "title": "DRxS '내손안의약국', 공식 홈페이지 전격 개편… 일반 사용자 UX 대폭 강...",
+     "press": "bokuennews.com",
+     "publishedAt": "2026-11-04T08:04:00.000Z",
+     "link": "http://www.bokuennews.com/news/article.html?no=286647"
     }
    ]
   },
@@ -241,10 +241,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 6,
+   "articles90": 4,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-04T06:36:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-04T06:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -299,75 +299,11 @@
      "link": "https://m.sports.naver.com/kbaseball/article/396/0000760016"
     }
    ]
-  },
-  {
-   "keyword": "백승엽 판사",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T06:47:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"손바닥 王자\" 콕 짚은 판사‥\"검사였던 尹\" 유죄 부메랑 [현장영상]",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-04T07:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533507?sid=102"
-    },
-    {
-     "title": "윤석열 2심도 '당선무효형'…백승엽 고법판사는 누구?",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-04T07:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001976678?sid=102"
-    },
-    {
-     "title": "尹, '허위사실 공표' 2심도 징역형…선고되자 한동안 판사 주시(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-04T06:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014301487?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "테니스",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-04T06:44:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'윈터 테니스 셋업 제안' 세르지오 타키니, 2026 서울오픈 챌린저 공식 ...",
-     "press": "tennis.co.kr",
-     "publishedAt": "2026-11-04T07:37:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/481/0000014659"
-    },
-    {
-     "title": "세르지오 타키니, 탄생 60주년 맞아 서울오픈 테니스대회 후원",
-     "press": "ktnews.com",
-     "publishedAt": "2026-11-04T06:44:00.000Z",
-     "link": "http://www.ktnews.com/news/articleView.html?idxno=149921"
-    },
-    {
-     "title": "한국스포츠레저, ‘휠체어테니스 銀’ 임호원에 아시안패러게임 포상금...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-04T06:44:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/468/0001278030"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 663,
+  "flagged": 664,
   "matched": 276,
   "avgLeadMin": 280,
   "recent": [
