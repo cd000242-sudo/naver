@@ -280,7 +280,7 @@
               "seo": "장남 주진우 고소에 맞고발 예고, 황제 골프 의혹 어디로",
               "home": "장남의 명예훼손 고소에 주진우는 맞고발, 분위기가 묘하게 흘러간다",
               "topic": "장남 주진우 고소",
-              "topicGroup": "네이버 실시간 검색어",
+              "topicGroup": "네이트 실시간 검색어",
               "summary": "이재명 대통령 장남 이동호 씨가 주진우 의원을 명예훼손으로 고소했다. 주 의원은 맞고발로 황제 골프 의혹을 밝히겠다고 맞섰다.",
               "aiTitled": true
             },
@@ -566,7 +566,7 @@
               "전혀 몰랐던 이야기다… 솔비 와 결혼 소식에 재조명된 이규한 ‘가정사..."
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T18:30:46.878Z"
           }
         },
         {
@@ -751,18 +751,18 @@
               }
             ],
             "images": [
-              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F056%2F2026%2F11%2F04%2F12287158.jpg&type=fface200_200&expire=2&refresh=true"
+              "https://news.kbs.co.kr/resource/image/common/img_meta.png"
             ],
             "press": [
               "KBS",
               "한국경제"
             ],
             "headlines": [
-              "“대통령의 Y, 내일 밤 첫 공개… 손정은 전 MBC 아나운서 진행” [지금뉴...",
+              "KBS 뉴스",
               "李대통령, 유튜브 '대통령의 Y' 프로 신설…진행자 손정은"
             ],
-            "extraction": "search-card",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "extraction": "playwright",
+            "collectedAt": "2026-11-05T18:30:46.878Z"
           }
         },
         {
@@ -1146,7 +1146,7 @@
               "볼리비아서 뺑소니 사망 한국인, 세계일주 유튜버 ' 진쓰레블 '이었다"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T18:30:46.878Z"
           }
         },
         {
@@ -1282,317 +1282,307 @@
         {
           "id": "nate-1",
           "rank": 1,
-          "keyword": "내란 내년 선고",
-          "title": "내란 내년 선고",
-          "rawKeyword": "내란 내년 선고",
+          "keyword": "김정관 장관 중국",
+          "title": "김정관 장관 중국",
+          "rawKeyword": "김정관 장관 중국",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 100,
           "source": "nate",
           "expansions": [
-            "내란 뜻",
-            "내란재판",
-            "12.3 내란",
-            "내란특검",
-            "내란죄",
-            "내란 무죄",
-            "내란견",
-            "내란우두머리"
+            "중국 환율",
+            "중국집",
+            "중국 입국신고서",
+            "중국 여행",
+            "중국 지도",
+            "중국 이심",
+            "중국 대만",
+            "중국동방항공"
           ],
-          "expansionSeed": "내란",
+          "expansionSeed": "중국",
           "insight": {
             "titles": {
-              "seo": "내란 내년 선고 최신 이슈와 핵심 내용 정리",
-              "home": "내란 내년 선고, '내란 우두머리' 2심 내년 1월26일 선고…尹 \"내란죄 될수 없어\" 관련 확인할 점",
-              "topic": "내란 내년 선고",
+              "seo": "김정관 장관 중국 최신 이슈와 핵심 내용 정리",
+              "home": "김정관 장관 중국, 산업장관, 상하이서 한중 상무장관회의 관련 확인할 점",
+              "topic": "김정관 장관 중국",
               "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
               {
-                "text": "1심 선고 11개월여만…尹 80분 최후진술서 '메시지 계엄' 또 주장 정부 비판하며 \"나라 위기 맞구나\"…변호인은 '드레퓌스' 거론 12·3 비상계엄 관련 내란 우두머리 혐의로 기소된 윤석열 전 대통령의 항소심 선고 가 내년 1월 말에 이뤄진다.",
+                "text": "(서울=연합뉴스) 김정관 산업통상부 장관이 4일 중국 상하이에서 열린 '한중 상무장관회의'에서 왕원타오 중국 상무부 부장과 악수하고 있다.",
                 "sourceIndex": 0
               },
               {
-                "text": "12·3 비상계엄 재판의 본류로 꼽히는 윤석열 전 대통령의 ' 내란 우두머리' 혐의 항소심이 마무리됐습니다. 선고 는 내년 1월 26일 내려지는데 윤 전 대통령은 최후진술에서도 '호소형 계엄'이라는 주장을 거두지 않았습니다.",
+                "text": "산업통상부는 김정관 장관 이 4일 중국 상하이에서 왕원타오 중국 상무부 부장과 한중 상무 장관 회의를 개최하고 양국 정상회담 후속조치 이행 상황과 경제·통상 협력 방안을 논의했다고 밝혔다. 이번 회의는 현 정부 출범 이후 네 번째 열린 한중 상무 장관 회의다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.yna.co.kr/view/AKR20261105173200004?input=1195m",
+                "url": "https://www.yna.co.kr/view/PYH20261104223200013?input=1196m",
                 "press": "연합뉴스"
               },
               {
-                "url": "https://www.ytn.co.kr/_ln/0103_202611052202117253",
-                "press": "YTN"
+                "url": "https://www.newsis.com/view/NISX20261104_0003855243",
+                "press": "뉴시스"
               }
             ],
             "images": [
-              "https://img4.yna.co.kr/photo/cms/2025/12/20/04/PCM20251220000004990_P4.jpg"
+              "https://img6.yna.co.kr/photo/yna/YH/2026/11/04/PYH2026110422320001300_P4.jpg"
             ],
             "press": [
               "연합뉴스",
-              "YTN"
+              "뉴시스"
             ],
             "headlines": [
-              "'내란 우두머리' 2심 내년 1월26일 선고…尹 \"내란죄 될수 없어\"",
-              "윤석열 \"계엄은 헌법상 권한\"...' 내란 항소심' 내년 1월 26일 선고"
+              "산업장관, 상하이서 한중 상무장관회의",
+              "한중 상무 장관 , FTA 서비스·투자 협상 조속 타결 합의…경제협력 확대"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T18:30:46.878Z"
           }
         },
         {
           "id": "nate-2",
           "rank": 2,
-          "keyword": "호날두 포르투갈 은퇴",
-          "title": "호날두 포르투갈 은퇴",
-          "rawKeyword": "호날두 포르투갈 은퇴",
+          "keyword": "재혼 황후",
+          "title": "재혼 황후",
+          "rawKeyword": "재혼 황후",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 99,
           "source": "nate",
           "expansions": [
-            "호날두 1000골",
-            "호날두 나무위키",
-            "호날두 골",
-            "호날두 연봉",
-            "호날두 유니폼",
-            "호날두 짤",
-            "호날두 조지나",
-            "호날두 맨유"
+            "재혼 황후 몇부작",
+            "재혼 황후 전편다공개",
+            "재혼 황후 줄거리 결말",
+            "재혼 황후 인물 관계도",
+            "재혼 황후 등장인물",
+            "재혼 황후 반응",
+            "재혼 황후 채널",
+            "재혼 황후 기본정보"
           ],
-          "expansionSeed": "호날두",
+          "expansionSeed": "재혼 황후",
           "insight": {
             "titles": {
-              "seo": "호날두 포르투갈 은퇴 최신 이슈와 핵심 내용 정리",
-              "home": "호날두 포르투갈 은퇴, 유니폼 반납 영상에서 많이들 놓친 대목",
-              "topic": "호날두 포르투갈 은퇴",
-              "topicGroup": "네이트 실시간 검색어",
-              "summary": "포르투갈 축구 스타 호날두(41)가 국가대표팀 은퇴를 선언했다. 인스타그램에 5분짜리 영상을 올려 7번 유니폼을 반납할 때가 됐다며 팬들에게 알렸다.",
-              "aiTitled": true
+              "seo": "재혼 황후 최신 이슈와 핵심 내용 정리",
+              "home": "재혼 황후, \"주지훈 간 건강 괜찮나요?\"…' 재혼 황후 ' 뜻밖의 논란 관련 확인할 점",
+              "topic": "재혼 황후",
+              "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
               {
-                "text": "입력 2026.11.05. 20:39조선비즈 구글 검색 먼저 보기2022년 월드컵 대한민국과의 경기에 나선 호날두 모습. /연합뉴스 포르투갈 축구 스타 크리스티아누 호날두(41)가 국가대표 은퇴를 선언했다.",
+                "text": "디즈니+ 오리지널 시리즈 ' 재혼 황후 '가 공개 직후 국내외에서 엇갈린 반응을 얻고 있다. 해외 매체들은 화려한 세계관과 이야기의 몰입도를 높이 평가한 반면, 국내 온라인에서는 배우들의 의상과 스타일링을 둘러싼 논란이 불거졌다.",
                 "sourceIndex": 0
               },
               {
-                "text": "포르투갈 축구 수퍼스타 크리스티아누 호날두 (41·알나스르)가 국가대표 은퇴 를 선언했다. 국가대표팀 소집 기간 무단으로 팀을 이탈해 파문을 일으킨 지 한 달여 만에 입장을 밝혔다.",
+                "text": "한편, ‘ 재혼황후 ’는 공개와 동시에 국내외에서 뜨거운 관심을 받고 있다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://biz.chosun.com/sports/sports_general/2026/11/05/XDLGAL7QBVDWRMQQALDNXOOPJY/?utm_source=naver&utm_medium=original&utm_campaign=biz",
-                "press": "조선비즈"
+                "url": "http://www.wowtv.co.kr/NewsCenter/News/Read?articleId=A202611050095&t=NN",
+                "press": "한국경제TV"
               },
               {
-                "url": "https://www.joongang.co.kr/article/25476150",
-                "press": "중앙일보"
+                "url": "https://www.mk.co.kr/article/12198044",
+                "press": "매일경제"
               }
             ],
             "images": [
-              "https://biz.chosun.com/resizer/v2/YRQVBQDGJVMSLFVVJGM6H6MCTE.jpg?auth=1db589f6f20cb0f2786b6878574e5bc1c1e9acec31b05e212e756ff57f904301&width=1200&height=630&smart=true"
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F215%2F2026%2F11%2F05%2F1271762.jpg&type=fface200_200&expire=2&refresh=true"
             ],
             "press": [
-              "조선비즈",
-              "중앙일보"
+              "한국경제TV",
+              "매일경제"
             ],
             "headlines": [
-              "호날두, 포르투갈 축구 국가대표 은퇴 선언",
-              "호날두 , 포르투갈 국대 은퇴 선언…캠프 무단이탈 파문 한달만"
+              "\"주지훈 간 건강 괜찮나요?\"…' 재혼 황후 ' 뜻밖의 논란",
+              "“황제 얼굴이 흙빛이네”…‘ 재혼황후 ’ 주지훈, 뜻밖의 안색 논란"
             ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "extraction": "search-card",
+            "collectedAt": "2026-11-05T18:30:46.878Z"
           }
         },
         {
           "id": "nate-3",
           "rank": 3,
-          "keyword": "영국 기준금리 인상",
-          "title": "영국 기준금리 인상",
-          "rawKeyword": "영국 기준금리 인상",
+          "keyword": "조작기소 특검법",
+          "title": "조작기소 특검법",
+          "rawKeyword": "조작기소 특검법",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 98,
           "source": "nate",
           "expansions": [
-            "기준금리 인상",
-            "영국구글",
-            "영국 시간",
-            "영국 환율",
-            "영국 전쟁",
-            "영국 비상식량",
-            "영국 여행",
-            "구글영국"
+            "조작기소 특검법 뜻",
+            "조작기소 특검법 통과",
+            "조작기소 특검법이란",
+            "조작기소 특검법 발의자"
           ],
-          "expansionSeed": "영국",
+          "expansionSeed": "조작기소 특검법",
           "insight": {
             "titles": {
-              "seo": "영국 기준금리 인상, 3년 3개월 만에 위원 9명 중 8명 찬성",
-              "home": "영국 기준금리 인상, 6차례 동결 끝에 위원들 표가 갈린 이유",
-              "topic": "영국 기준금리 인상",
+              "seo": "조작기소 특검법 본회의 상정, 국민의힘 필리버스터 돌입",
+              "home": "조작기소 특검법 통과 앞두고, 국민의힘이 7일 꺼낸 장외 카드는",
+              "topic": "조작기소 특검법",
               "topicGroup": "네이트 실시간 검색어",
-              "summary": "영국이 기준금리를 0.25%p 올렸다. 2023년 8월 이후 3년 3개월 만의 인상으로, 통화정책위원 9명 중 8명이 찬성했다.",
+              "summary": "이재명 대통령 관련 조작기소 의혹을 수사할 특검법이 민주당 주도로 본회의에 상정됐다. 국민의힘은 필리버스터에 이어 주말 장외 투쟁에 나서기로 했다.",
               "aiTitled": true
             },
             "facts": [
               {
-                "text": "영국 의 기준금리 인상 은 2023년 8월 5.25%로 0.25%p 인상 된 이후 3년 3개월 만에 처음이다. 통화정책위원 9명 가운데 8명이 금리 0.25%p 인상 에 찬성했으며 나머지 1명은 4.25%로 0.5%p 인상 견해를 냈다.",
+                "text": "하지현 전상우 김윤영 정유진 기자 = 이재명 대통령 관련 사건 등의 조작기소 의혹을 수사하는 이른바 ' 조작기소 특검법 '이 5일 더불어민주당 주도로 국회 본회의에 상정됐다. 국민의힘은 이를 저지하기 위한 필리버스터(무제한 토론을 통한 합법적 의사진행방해)에 돌입했다.",
                 "sourceIndex": 0
               },
               {
-                "text": "영국 의 기준금리 인상 은 2023년 8월 이후 3년 3개월 만이다. 올해는 6차례 연속 기준금리 를 동결했다.",
+                "text": "국민의힘이 더불어민주당의 조작기소 특검법 강행 처리에 반발해 장외 투쟁에 돌입하기로 뜻을 모았다. 최수진 국민의힘 원내수석대변인은 5일 의원총회 직후 기자들과 만나 “토요일(7일) 오후 3시 경복궁역 1번 출구 앞에서 장외 투쟁에 나선다”고 밝혔다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.yna.co.kr/view/AKR20261105179052085?input=1195m",
-                "press": "연합뉴스"
+                "url": "https://www.newsis.com/view/NISX20261105_0003856726",
+                "press": "뉴시스"
               },
               {
-                "url": "https://www.hankookilbo.com/news/article/A2026110523480001641?did=NA",
-                "press": "한국일보"
+                "url": "https://www.chosun.com/politics/assembly/2026/11/05/SHJFNYBMH5AGRJ55HIRCIQYTZY/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
+                "press": "조선일보"
               }
             ],
             "images": [
-              "https://img7.yna.co.kr/photo/ap/2026/11/05/PAP20261105172301009_P4.jpg"
+              "https://img1.newsis.com/2026/11/05/NISI20261105_0021520866_web.jpg"
             ],
             "press": [
-              "연합뉴스",
-              "한국일보"
+              "뉴시스",
+              "조선일보"
             ],
             "headlines": [
-              "영국, 3년만에 금리 인상…BOE 총재 \"추가 인상도 가능\"(종합)",
-              "영국 , 3년여 만에 금리 인상 ... BOE \"추가 인상 도 가능\""
+              "'조작기소 특검법' 국회 본회의 상정…野 필리버스터 돌입",
+              "국힘, 조작기소 특검법 반발 토요일 광화문 집회"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T18:30:46.878Z"
           }
         },
         {
           "id": "nate-4",
           "rank": 4,
-          "keyword": "리노 내년 1분기",
-          "title": "리노 내년 1분기",
-          "rawKeyword": "리노 내년 1분기",
+          "keyword": "이규한 오만추 솔비",
+          "title": "이규한 오만추 솔비",
+          "rawKeyword": "이규한 오만추 솔비",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 97,
           "source": "nate",
           "expansions": [
-            "리노공업",
-            "리노공업 주가",
-            "스키즈 리노",
-            "리노 나무위키",
-            "리노스토어",
-            "리노바이러스",
-            "보칼리노",
-            "1분기 뜻"
+            "오만추 솔비 이규한",
+            "이규한 솔비",
+            "솔비 이규한",
+            "오만추 솔비",
+            "이규한 남유정",
+            "이규한 유정",
+            "이규한 나무위키",
+            "이규한 집안"
           ],
-          "expansionSeed": "리노",
+          "expansionSeed": "이규한",
           "insight": {
             "titles": {
-              "seo": "리노 내년 1분기 최신 이슈와 핵심 내용 정리",
-              "home": "리노 내년 1분기, 스트레이 키즈 리노, 내년 1분기 병역 의무 돌입…팀 첫 사례 관련 확인할 점",
-              "topic": "리노 내년 1분기",
-              "topicGroup": "네이트 실시간 검색어"
+              "seo": "이규한 오만추에서 솔비 최종선택 안 한 이유 밝혔다",
+              "home": "이규한, 오만추에서 솔비를 최종선택 않은 진짜 이유 알고 보니",
+              "topic": "이규한 오만추 솔비",
+              "topicGroup": "네이트 실시간 검색어",
+              "summary": "배우 이규한이 솔비 유튜브 채널에 출연해 먹방 데이트를 했다. 연애 프로그램 오만추에서 솔비를 최종선택하지 않은 이유를 털어놨다.",
+              "aiTitled": true
             },
             "facts": [
               {
-                "text": "(서울=연합뉴스) 이태수 기자 = 그룹 스트레이 키즈의 리노(28)가 내년 1분기 병역 의무에 돌입한다.",
+                "text": "이날 이규한 은 지난해 7월 솔비 와 동반 출연한 KBS Joy 연애 예능프로그램 '오래된 만남 추구'(이하 ' 오만추 ')를 떠올리며 “' 오만추 '에서 왜 최종선택을 안 했는지 궁금해하는 사람이 많았다”고 말했다. 그는 “나중에 지안이( 솔비 본명)한테도 말했지만 그 프로그램이 2박 3일 만에 짧게 촬영했다.",
                 "sourceIndex": 0
               },
               {
-                "text": "그룹 스트레이 키즈(Stray Kids) 멤버 리노 가 2027년 1분기 병역 의무를 이행하며, 팀에서 가장 먼저 군 복무에 나서게 됐다. 5일 소속사 JYP엔터테인먼트는 스트레이 키즈 공식 SNS를 통해 리노 의 병역 의무 이행 계획을 공지했다.",
+                "text": "주선자도 모르게 자기들끼리 연애를 시작해서 결혼 소식을 알려준 오만추 1호 커플이 탄생했다”며 솔비 와 이규한 의 결혼 소식을 전했다. 솔비 와 이규한 은 송은이, 김숙이 기획한 KBS JOY·KBS 2TV 예능 프로그램 ‘오래된 만남 추구’( 오만추 )에 함께 출연해 인연을 맺었다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.yna.co.kr/view/AKR20261105169100005?input=1195m",
-                "press": "연합뉴스"
+                "url": "https://news.jtbc.co.kr/article/NB12326734?influxDiv=NAVER",
+                "press": "JTBC"
               },
               {
-                "url": "https://www.tvreport.co.kr/music/article/1088713/",
-                "press": "TV리포트"
+                "url": "https://www.sportsseoul.com/news/read/1645020?ref=naver",
+                "press": "스포츠서울"
               }
             ],
             "images": [
-              "https://img0.yna.co.kr/etc/inner/KR/2026/11/05/AKR20261105169100005_01_i_P4.jpg"
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F437%2F2026%2F11%2F05%2F519395.jpg&type=fface200_200&expire=2&refresh=true"
             ],
             "press": [
-              "연합뉴스",
-              "TV리포트"
+              "JTBC",
+              "스포츠서울"
             ],
             "headlines": [
-              "스트레이 키즈 리노, 내년 1분기 병역 의무 돌입…팀 첫 사례",
-              "\"군백기 후 다시 모일 것\" 스트레이 키즈 리노 , 내년 1분기 입대…팀 내..."
+              "이규한 “' 오만추 '서 솔비 선택 안 한 이유? 불편해질까봐”",
+              "웨딩드레스 입은 솔비 , 신혼여행은 이탈리아로"
             ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "extraction": "search-card",
+            "collectedAt": "2026-11-05T18:30:46.878Z"
           }
         },
         {
           "id": "nate-5",
           "rank": 5,
-          "keyword": "장남 주진우 고소",
-          "title": "장남 주진우 고소",
-          "rawKeyword": "장남 주진우 고소",
+          "keyword": "소상공인정책실장에 조경원 창업정책관",
+          "title": "소상공인정책실장에 조경원 창업정책관",
+          "rawKeyword": "소상공인정책실장에 조경원 창업정책관",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 96,
           "source": "nate",
           "expansions": [
-            "주진우 의원",
-            "주진우 기자",
-            "주진우 골프",
-            "주진우 리디아고",
-            "주진우 김혜경",
-            "주진우 헬기",
-            "장남 뜻",
-            "장남감"
+            "조경원예 뜻",
+            "조경원 기자",
+            "조경 원예",
+            "조경 원로 뜻"
           ],
-          "expansionSeed": "주진우",
+          "expansionSeed": "조경원",
           "insight": {
             "titles": {
-              "seo": "장남 주진우 고소에 맞고발 예고, 황제 골프 의혹 어디로",
-              "home": "장남의 명예훼손 고소에 주진우는 맞고발, 분위기가 묘하게 흘러간다",
-              "topic": "장남 주진우 고소",
-              "topicGroup": "네이트 실시간 검색어",
-              "summary": "이재명 대통령 장남 이동호 씨가 주진우 의원을 명예훼손으로 고소했다. 주 의원은 맞고발로 황제 골프 의혹을 밝히겠다고 맞섰다.",
-              "aiTitled": true
+              "seo": "소상공인정책실장에 조경원 창업정책관 최신 이슈와 핵심 내용 정리",
+              "home": "소상공인정책실장에 조경원 창업정책관, 중기부, 소상공인정책실장에 조경원 창업정책관 발탁 관련 확인할 점",
+              "topic": "소상공인정책실장에 조경원 창업정책관",
+              "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
               {
-                "text": "오늘 이재명 대통령의 장남 이동호 씨가 국민의힘 주진우 의원을 명예훼손 혐의로 서울경찰청에 고소했습니다.",
+                "text": "이소영 장관 \"정책 아젠다",
                 "sourceIndex": 0
               },
               {
-                "text": "주진우 국민의힘 의원은 5일 이재명 대통령의 장남 이동호 씨가 자신을 명예훼손 혐의로 고소 한 데 대해 \"맞고발로 황제 골프 의혹의 진실을 밝히겠다\"고 밝혔다. 주 의원은 이날 페이스북에 \"협박은 안 통한다.",
+                "text": "중소벤처기업부는 조경원 창업정책관 을 6일자로 소상공인정책실장에 임명한다고 5일 밝혔다. 이소영 중기부 장관은 조 신임 실장의 소상공인 ·정책금융 분야 전문성과 현장 경험, 창업 정책 추진력 등을 발탁 배경으로 꼽았다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://imnews.imbc.com/news/2026/society/article/6863475_36918.html",
-                "press": "MBC"
+                "url": "https://www.newsis.com/view/NISX20261105_0003857060",
+                "press": "뉴시스"
               },
               {
-                "url": "https://www.news1.kr/politics/assembly/6344848",
-                "press": "뉴스1"
+                "url": "https://www.viva100.com/article/20261105501240",
+                "press": "브릿지경제"
               }
             ],
             "images": [
-              "https://image.imnews.imbc.com/news/2026/society/article/__icsFiles/afieldfile/2026/11/05/joo261105_2.jpg"
+              "https://img1.newsis.com/2026/03/25/NISI20260325_0021222015_web.jpg"
             ],
             "press": [
-              "MBC",
-              "뉴스1"
+              "뉴시스",
+              "브릿지경제"
             ],
             "headlines": [
-              "[단독] 이 대통령 장남 \"해군기지 골프장 간 적 없어\"‥주진우 명예훼손 고소",
-              "주진우 , 李대통령 장남 고소 에 \"맞고발로 황제골프 의혹 밝힐 것\""
+              "중기부, 소상공인정책실장에 조경원 창업정책관 발탁",
+              "중기부, 소상공인정책실장에 조경원 창업정책관"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T18:30:46.878Z"
           }
         }
       ]
@@ -2091,7 +2081,7 @@
               "403 Forbidden"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T18:30:46.878Z"
           }
         },
         {
@@ -2156,7 +2146,7 @@
               "[공식발표] ' 손흥민 선발 명단 제외 ' LAFC, 콜로라도전 'BEST 11' 공개!…..."
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T18:30:46.878Z"
           }
         },
         {
@@ -2376,7 +2366,7 @@
               "안세영이 돌아왔다! 압승, 쾌승!…유럽 최강자 블리치펠트 43분 만에 2-0 완파→세계선수권 8강행 성공"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T18:30:46.878Z"
           }
         },
         {
@@ -2496,7 +2486,7 @@
               "' 손흥민 과 한솥밥 먹었는데' 토트넘 역대 최고 이적료 주인공의 몰락…..."
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T18:30:46.878Z"
           }
         }
       ]
@@ -3688,5 +3678,5 @@
       ]
     }
   ],
-  "updatedAt": "2026-11-05T18:11:51.228Z"
+  "updatedAt": "2026-11-05T18:31:24.117Z"
 }
