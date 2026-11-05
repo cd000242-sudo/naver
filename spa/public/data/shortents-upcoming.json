@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T14:20:21.822Z",
+ "builtAt": "2026-11-05T14:30:26.395Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,52 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
+ "measured": 20,
  "candidates": [
-  {
-   "keyword": "이대통령 장남, 주진우 고소",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-05T12:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령 장남 \"골프장 간 적 없다\"…주진우 명예훼손 고소",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-05T14:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000649309?sid=102"
-    },
-    {
-     "title": "李 대통령 장남, 주진우 명예훼손 고소… “골프장 안 갔다”",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-05T13:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202932?sid=100"
-    },
-    {
-     "title": "李대통령 장남, 주진우 명예훼손 고소…\"한산대CC 안 갔다\"",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-05T13:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000542024?sid=101"
-    }
-   ]
-  },
   {
    "keyword": "영국 기준금리 인상",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-05T12:51:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-05T13:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "영국도 기준금리 인상 … 3년만에 0.25%P 올려",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-05T14:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005759830?sid=104"
+    },
     {
      "title": "영국, 3년 만에 금리 인상...\"추가 인상도 가능\"",
      "press": "ytn.co.kr",
@@ -65,12 +39,6 @@
      "press": "hankyung.com",
      "publishedAt": "2026-11-05T14:07:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/015/0005350943?sid=104"
-    },
-    {
-     "title": "英, 3년만에 금리 인상…베일리 “중동 분쟁 안 끝나면 마지막 아닐 것...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-05T14:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004172914?sid=104"
     }
    ]
   }
