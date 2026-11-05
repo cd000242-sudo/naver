@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T22:33:19.310Z",
+ "builtAt": "2026-11-05T22:43:22.777Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,13 +16,19 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 7,
-   "recent20": 2,
+   "articles90": 6,
+   "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-05T21:04:00.000Z",
+   "firstArticleAt": "2026-11-05T21:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "강남 집값은 '뚝' 외곽은 '쑥'···서울 아파트 100주 연속 상승 현실화...",
+     "press": "smartbizn.com",
+     "publishedAt": "2026-11-05T22:38:00.000Z",
+     "link": "https://www.smartbizn.com/news/articleView.html?idxno=158612"
+    },
     {
      "title": "부산 아파트 28층에서 추락사, 안전 관리의 경각심 높아져",
      "press": "gokorea.kr",
@@ -34,25 +40,114 @@
      "press": "jnilbo.com",
      "publishedAt": "2026-11-05T22:17:00.000Z",
      "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000080132"
+    }
+   ]
+  },
+  {
+   "keyword": "이스라엘 연정 구성",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-05T21:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이스라엘 대통령, 차기 정부 구성할 총리 후보 8일 발표",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-05T22:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004207073?sid=104"
     },
     {
-     "title": "“실거래가 떨어진다고?”…100주 상승 바라보는 서울 아파트값",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-05T22:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003151979?sid=101"
+     "title": "이스라엘 대통령 “총리 후보 8일 발표”…네타냐후 ‘실각 위기’",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-05T21:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003057500?sid=104"
+    },
+    {
+     "title": "이스라엘 대통령 \"새 총리 후보 8일 발표\"",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-05T21:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000542046?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "이승기 이다인 둘째 공개",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-05T21:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이승기♥이다인 딸·아들 공개…\"아빠 닮아, 너무 예뻐\" 뜨거운 반응 [엑...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-05T22:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002077328"
+    },
+    {
+     "title": "이승기♥이다인, 생후 4개월 둘째 아들 첫 공개…가족사진 눈길",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-05T22:24:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=779415"
+    },
+    {
+     "title": "이승기♥이다인, 생후 4개월 둘째 아들 공개…두 자녀와 환한 미소",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-05T22:16:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009273411"
+    }
+   ]
+  },
+  {
+   "keyword": "윤석열 2심 선고",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-05T21:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'내란 우두머리' 2심 1월 26일 선고…윤석열 전 대통령 \"계엄은 정당\"",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-05T22:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001976937?sid=102"
+    },
+    {
+     "title": "\"윤석열 전 대통령 항소심, 내란 혐의로 또다시 운명의 날 앞두다\"",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-05T22:18:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=884342"
+    },
+    {
+     "title": "윤석열 2심도 당선무효형… \"397억 토해낼 판\" \"'이재명 판결'에 당했다...",
+     "press": "mediatoday.co.kr",
+     "publishedAt": "2026-11-05T21:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/006/0000138599?sid=102"
     }
    ]
   },
   {
    "keyword": "장남 주진우 명예훼손",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T21:05:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-05T21:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -77,98 +172,34 @@
    ]
   },
   {
-   "keyword": "조작기소 특검법 처리 논란",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T21:05:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘 뉴스 4컷] 이란전 책임론 헤그세스 겨눴다…국내선 ‘조작기소 특...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-05T22:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004172993?sid=100"
-    },
-    {
-     "title": "[이충재 칼럼] 그럼에도 '조작기소 특검' 해야 한다",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-05T22:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002534827?sid=100"
-    },
-    {
-     "title": "'조작기소 특검법안' 與 주도로 본회의 표결 전망[오늘아침]",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-05T22:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004207070?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "이스라엘 연정 구성",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T21:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이스라엘 대통령 \"새 총리 후보 8일 발표\"",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-05T21:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000542046?sid=101"
-    },
-    {
-     "title": "이스라엘 대통령 “총리 후보 8일 발표”…네타냐후 ‘실각 위기’",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-05T21:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003057500?sid=104"
-    },
-    {
-     "title": "이스라엘 대통령 \"8일 연정 구성 맡을 총리 후보 결정\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T21:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014305142?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "윤석열 2심 선고",
+   "keyword": "영국 기준금리 인상",
    "sources": [
     "signal.bz"
    ],
    "articles90": 4,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T21:33:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-05T21:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"윤석열 전 대통령 항소심, 내란 혐의로 또다시 운명의 날 앞두다\"",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-05T22:18:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=884342"
+     "title": "英, 3년만에 금리 인상…BOE 총재 \"추가 인상도 가능\"",
+     "press": "getnews.co.kr",
+     "publishedAt": "2026-11-05T22:34:00.000Z",
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=886221"
     },
     {
-     "title": "윤석열 2심도 당선무효형… \"397억 토해낼 판\" \"'이재명 판결'에 당했다...",
-     "press": "mediatoday.co.kr",
-     "publishedAt": "2026-11-05T21:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/006/0000138599?sid=102"
+     "title": "영국도 금리 인상 대열 합류…3년 3개월 만",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-05T21:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000542049?sid=101"
     },
     {
-     "title": "2심 최후진술서도 \"계엄은 정당\"…내년 1월 선고",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-05T21:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001401033?sid=102"
+     "title": "영국, 3년만에 금리 연 4%로 0.25%p 인상…BOE 총재 \"추가 인상도 가능\"",
+     "press": "tfmedia.co.kr",
+     "publishedAt": "2026-11-05T21:36:00.000Z",
+     "link": "https://www.tfmedia.co.kr/news/article.html?no=208673"
     }
    ]
   },
@@ -204,43 +235,11 @@
      "link": "http://www.dailypop.kr/news/articleView.html?idxno=103972"
     }
    ]
-  },
-  {
-   "keyword": "영국 기준금리 인상",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T21:11:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "영국도 금리 인상 대열 합류…3년 3개월 만",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-05T21:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000542049?sid=101"
-    },
-    {
-     "title": "영국, 3년만에 금리 연 4%로 0.25%p 인상…BOE 총재 \"추가 인상도 가능\"",
-     "press": "tfmedia.co.kr",
-     "publishedAt": "2026-11-05T21:36:00.000Z",
-     "link": "https://www.tfmedia.co.kr/news/article.html?no=208673"
-    },
-    {
-     "title": "英, 3년 만에 금리 인상…\"마지막 인상으로 보이지도 않아\"",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-05T21:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000542040?sid=101"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1074,
+  "flagged": 1075,
   "matched": 512,
   "avgLeadMin": 486,
   "recent": [
