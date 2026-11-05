@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T05:43:34.523Z",
+ "builtAt": "2026-11-05T05:53:39.346Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,17 +11,55 @@
  "measured": 27,
  "candidates": [
   {
+   "keyword": "코스피 매도 사이드카",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 43,
+   "recent20": 27,
+   "press": 39,
+   "firstArticleAt": "2026-11-05T04:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[속보] 코스피 이어 코스닥 매도 사이드카 발동",
+     "press": "news.mtn.co.kr",
+     "publishedAt": "2026-11-05T05:52:00.000Z",
+     "link": "https://news.mtn.co.kr/article/2026110514501483753"
+    },
+    {
+     "title": "코스피 이어 코스닥 매도 사이드카 발동(1보)",
+     "press": "news2day.co.kr",
+     "publishedAt": "2026-11-05T05:52:00.000Z",
+     "link": "https://www.news2day.co.kr/article/20261105500212"
+    },
+    {
+     "title": "코스피 5300대…5%대 급락에 오전 '매도사이드카'",
+     "press": "tleaves.co.kr",
+     "publishedAt": "2026-11-05T05:52:00.000Z",
+     "link": "https://www.tleaves.co.kr/news/articleView.html?idxno=10108"
+    }
+   ]
+  },
+  {
    "keyword": "삼성미래기술육성사업 애뉴얼 포럼",
    "sources": [
     "nate"
    ],
    "articles90": 30,
-   "recent20": 3,
+   "recent20": 1,
    "press": 26,
-   "firstArticleAt": "2026-11-05T04:16:00.000Z",
+   "firstArticleAt": "2026-11-05T05:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "삼성·넷마블, 미래기술육성사업 애뉴얼 포럼 개최·'세븐나이츠 리버스...",
+     "press": "wsobi.com",
+     "publishedAt": "2026-11-05T05:48:00.000Z",
+     "link": "http://www.wsobi.com/news/articleView.html?idxno=321140"
+    },
     {
      "title": "삼성 미래기술육성사업 '2026 애뉴얼 포럼' 개최… 우수 연구자 10인 첫...",
      "press": "ddaily.co.kr",
@@ -33,76 +71,6 @@
      "press": "biz.heraldcorp.com",
      "publishedAt": "2026-11-05T05:27:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/016/0002719420?sid=101"
-    },
-    {
-     "title": "삼성, '미래기술육성사업 포럼' 개최…우수 연구자 10人 선정",
-     "press": "srtimes.kr",
-     "publishedAt": "2026-11-05T05:24:00.000Z",
-     "link": "http://www.srtimes.kr/news/articleView.html?idxno=216821"
-    }
-   ]
-  },
-  {
-   "keyword": "코스피 매도 사이드카",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 28,
-   "recent20": 23,
-   "press": 24,
-   "firstArticleAt": "2026-11-05T04:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[속보] 코스피 이어 코스닥도 매도 사이드카 발동…5.03% 급락",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-05T05:42:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261105010002112"
-    },
-    {
-     "title": "[속보] 급락장에 코스피 이어 코스닥도 매도 사이드카",
-     "press": "segye.com",
-     "publishedAt": "2026-11-05T05:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004172773?sid=101"
-    },
-    {
-     "title": "코스닥 5%대 급락에 매도 사이드카",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-05T05:42:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1319398&inflow=N"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명 대통령 격려오찬",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 28,
-   "recent20": 7,
-   "press": 23,
-   "firstArticleAt": "2026-11-05T04:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李 대통령 부부, 국제기능올림픽 선수단 격려 오찬",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-05T05:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001883231?sid=100"
-    },
-    {
-     "title": "李대통령 \"기술인재가 대한민국의 미래\"···기능올림픽 종합 2위 선수...",
-     "press": "ziksir.com",
-     "publishedAt": "2026-11-05T05:36:00.000Z",
-     "link": "https://www.ziksir.com/news/articleView.html?idxno=152199"
-    },
-    {
-     "title": "李대통령 “청년 기술인재가 대한민국 미래” 국제기능올림픽 선수단 격...",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-05T05:32:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=72644"
     }
    ]
   },
@@ -111,30 +79,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 24,
+   "articles90": 26,
    "recent20": 6,
-   "press": 22,
+   "press": 24,
    "firstArticleAt": "2026-11-05T05:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "강남 하락에도 서울 아파트값 91주째 상승…경기 ‘반도체 벨트’ 강세",
+     "press": "donga.com",
+     "publishedAt": "2026-11-05T05:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003760308?sid=101"
+    },
+    {
+     "title": "서울 아파트값 상승폭 3주째 둔화···강남권 약세 지속",
+     "press": "thereport.co.kr",
+     "publishedAt": "2026-11-05T05:44:00.000Z",
+     "link": "https://www.thereport.co.kr/news/articleView.html?idxno=93090"
+    },
+    {
      "title": "[부동산 프리즘] 서울 집값 상승세 3주째 둔화…경매시장도 매물 적체·...",
      "press": "moneystorm.kr",
      "publishedAt": "2026-11-05T05:40:00.000Z",
      "link": "https://www.moneystorm.kr/news/articleView.html?idxno=8114"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 대통령 격려오찬",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 24,
+   "recent20": 4,
+   "press": 24,
+   "firstArticleAt": "2026-11-05T04:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이재명 대통령 \"청년 기술인재가 대한민국의 미래\"…기능올림픽 선수단...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-05T05:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001038604?sid=100"
     },
     {
-     "title": "서울 아파트값 상승폭 3주째 축소…강남3구 약세 속 경기 0.20% 상승",
-     "press": "youthdaily.co.kr",
-     "publishedAt": "2026-11-05T05:38:00.000Z",
-     "link": "https://www.youthdaily.co.kr/news/article.html?no=229422"
+     "title": "李대통령 “청년 기술인재가 대한민국 미래”…실력 걸맞은 인정·존중...",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-05T05:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003057374?sid=100"
     },
     {
-     "title": "서울 아파트값 상승폭 3주째 둔화…강남·서초 낙폭 확대",
-     "press": "koreareport.co.kr",
-     "publishedAt": "2026-11-05T05:34:00.000Z",
-     "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=54343"
+     "title": "李대통령 \"기술인재가 대한민국의 미래\"···기능올림픽 종합 2위 선수...",
+     "press": "ziksir.com",
+     "publishedAt": "2026-11-05T05:36:00.000Z",
+     "link": "https://www.ziksir.com/news/articleView.html?idxno=152199"
     }
    ]
   },
@@ -143,13 +143,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 17,
+   "articles90": 18,
    "recent20": 2,
-   "press": 17,
+   "press": 18,
    "firstArticleAt": "2026-11-05T04:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "세계 청년 50만명, 서울로 온다…WYD 9개월 앞두고 폭염·인파 대비 속도",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-05T05:52:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611050133"
+    },
     {
      "title": "'2027 서울 세계청년대회', 세계 청년 맞을 준비 본격화…대회 운영계획...",
      "press": "betanews.net",
@@ -161,12 +167,6 @@
      "press": "donga.com",
      "publishedAt": "2026-11-05T05:31:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/020/0003760303?sid=103"
-    },
-    {
-     "title": "\"교황과 100만명, 성남 서울공항에 모인다\"…서울 세계청년대회 청사진...",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-05T05:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005838617?sid=103"
     }
    ]
   },
@@ -175,13 +175,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
+   "articles90": 13,
    "recent20": 1,
-   "press": 12,
+   "press": 13,
    "firstArticleAt": "2026-11-05T05:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "2027년 기초연구에 2조 9102억원… 지역·신진 연구자 지원 확대",
+     "press": "segye.com",
+     "publishedAt": "2026-11-05T05:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004172775?sid=101"
+    },
     {
      "title": "내년 기초연구 예산 최대라는데…신규과제 예산은 20.7% 감소",
      "press": "dongascience.com",
@@ -193,12 +199,6 @@
      "press": "ohmynews.com",
      "publishedAt": "2026-11-05T05:11:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/047/0002534758?sid=101"
-    },
-    {
-     "title": "정부, 내년 기초연구 2조9102억원 투입…1만8516개 지원",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-05T05:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003151724?sid=105"
     }
    ]
   },
@@ -207,13 +207,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 9,
+   "articles90": 10,
    "recent20": 1,
-   "press": 9,
+   "press": 10,
    "firstArticleAt": "2026-11-05T04:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "유연석 경찰 연행…서현진 성폭행 주장에 힘 실렸나 (라이어)",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-05T05:49:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003539393"
+    },
     {
      "title": "데이트 강간 혐의 부인 했는데…'라이어' 유연석, 또 경찰에 연행됐다",
      "press": "tenasia.co.kr",
@@ -225,12 +231,38 @@
      "press": "sports.khan.co.kr",
      "publishedAt": "2026-11-05T05:11:00.000Z",
      "link": "https://m.entertain.naver.com/article/144/0001148233"
+    }
+   ]
+  },
+  {
+   "keyword": "장동민의 데블스 플랜3",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-05T04:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"드디어 악마가 초대됐다\"…장동민, '데블스 플랜3' 우승 자신감",
+     "press": "mhns.co.kr",
+     "publishedAt": "2026-11-05T05:52:00.000Z",
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=767752"
     },
     {
-     "title": "'라이어' 유연석, 또 경찰에 연행…예상 못한 위기에 '당황'",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-05T05:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000326820"
+     "title": "정현규, '데블스 플랜2' 논란에도 시즌 3 재출연 \"성숙한 자세로 다시 증...",
+     "press": "starnewsk.com",
+     "publishedAt": "2026-11-05T05:32:00.000Z",
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60716"
+    },
+    {
+     "title": "'서바이벌 1인자' 장동민, 데블스 플랜3 출격...\"내가 살아있는 한 은퇴...",
+     "press": "starnewsk.com",
+     "publishedAt": "2026-11-05T05:22:00.000Z",
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60726"
     }
    ]
   },
@@ -267,38 +299,6 @@
    ]
   },
   {
-   "keyword": "장동민의 데블스 플랜3",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-05T04:17:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정현규, '데블스 플랜2' 논란에도 시즌 3 재출연 \"성숙한 자세로 다시 증...",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-05T05:32:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60716"
-    },
-    {
-     "title": "'서바이벌 1인자' 장동민, 데블스 플랜3 출격...\"내가 살아있는 한 은퇴...",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-05T05:22:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60726"
-    },
-    {
-     "title": "'데블스 플랜3' 장동민·하석진·정현규, '서바이벌 강자' 총출동...\"뇌지...",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-05T05:16:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60717"
-    }
-   ]
-  },
-  {
    "keyword": "신진서 83개월 1위",
    "sources": [
     "nate"
@@ -331,14 +331,46 @@
    ]
   },
   {
+   "keyword": "허가",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-05T04:50:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "주입 펌프 불필요 심장 부하제, GE헬스케어 '라피스캔' 국내 허가",
+     "press": "medical-tribune.co.kr",
+     "publishedAt": "2026-11-05T05:52:00.000Z",
+     "link": "http://www.medical-tribune.co.kr/news/articleView.html?idxno=215764"
+    },
+    {
+     "title": "레이저옵텍, 브라질 주력 제품 3종 허가…중남미 사업 확대",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-05T05:30:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1730603"
+    },
+    {
+     "title": "인천시, 연근해 불법어업 단속··· 무허가 건간망 어업 4건 적발",
+     "press": "incheontoday.com",
+     "publishedAt": "2026-11-05T05:26:00.000Z",
+     "link": "https://www.incheontoday.com/news/articleView.html?idxno=325977"
+    }
+   ]
+  },
+  {
    "keyword": "재혼 황후, 하루 만에 1위 기록",
    "sources": [
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T04:23:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-05T04:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -363,34 +395,66 @@
    ]
   },
   {
-   "keyword": "허가",
+   "keyword": "jtbc",
    "sources": [
     "google"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T04:28:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-05T05:02:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "레이저옵텍, 브라질 주력 제품 3종 허가…중남미 사업 확대",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-05T05:30:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1730603"
+     "title": "[컨콜]티빙, 3분기 영업손실 72억…JTBC 영향으로 광고 매출 3% 반영",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-05T05:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005437129?sid=105"
     },
     {
-     "title": "인천시, 연근해 불법어업 단속··· 무허가 건간망 어업 4건 적발",
-     "press": "incheontoday.com",
-     "publishedAt": "2026-11-05T05:26:00.000Z",
-     "link": "https://www.incheontoday.com/news/articleView.html?idxno=325977"
+     "title": "[컨콜] CJ ENM \"JTBC 이탈 광고 물량, 4분기 전체 광고 물량의 3% 수준\"",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-05T05:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003151739?sid=105"
     },
     {
-     "title": "롯데바이오, 송도 1공장 의약품업체 허가…상업생산 준비 진전",
-     "press": "press9.kr",
-     "publishedAt": "2026-11-05T04:50:00.000Z",
-     "link": "http://www.press9.kr/news/articleView.html?idxno=85667"
+     "title": "JTBC 공개매각 시작…내년 1월 본입찰",
+     "press": "bloter.net",
+     "publishedAt": "2026-11-05T05:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/293/0000092761?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "소아 코로나19 접종",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-05T04:43:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "고위험군 소아·영유아 코로나19 예방접종 11일부터 시작",
+     "press": "korea.kr",
+     "publishedAt": "2026-11-05T05:46:00.000Z",
+     "link": "https://www.korea.kr/news/policyNewsView.do?newsId=148975113&call_from=naver_news"
+    },
+    {
+     "title": "11일부터 6개월~11세 고위험군 코로나19 예방접종 시작",
+     "press": "rapportian.com",
+     "publishedAt": "2026-11-05T04:54:00.000Z",
+     "link": "https://www.rapportian.com/news/articleView.html?idxno=242080"
+    },
+    {
+     "title": "11일부터 고위험군 12세 미만 코로나19 무료 예방접종",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-05T04:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541897?sid=101"
     }
    ]
   }
