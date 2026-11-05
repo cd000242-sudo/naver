@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-04T23:52:51.063Z",
+ "builtAt": "2026-11-05T00:02:56.435Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,178 +8,305 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 28,
  "candidates": [
   {
-   "keyword": "9월 경상수지 흑자",
+   "keyword": "카카오 3분기 영업익 2403억 증가",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 62,
-   "recent20": 9,
-   "press": 56,
-   "firstArticleAt": "2026-11-04T23:00:00.000Z",
+   "articles90": 46,
+   "recent20": 13,
+   "press": 39,
+   "firstArticleAt": "2026-11-04T23:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "9월 경상수지 흑자 600억 달러 사상 첫 돌파…반도체 수출 260%↑",
-     "press": "sentv.co.kr",
-     "publishedAt": "2026-11-04T23:52:00.000Z",
-     "link": "https://www.sentv.co.kr/article/view/sentv202611050028"
+     "title": "카카오, 3분기 영업이익 2403억…플랫폼 성장에 실적 개선",
+     "press": "dealsite.co.kr",
+     "publishedAt": "2026-11-05T00:02:00.000Z",
+     "link": "https://dealsite.co.kr/articles/172135"
     },
     {
-     "title": "9월 경상흑자 '사상 최대'…사상 첫 600억달러 돌파",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-04T23:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000923038?sid=101"
+     "title": "카카오, 3분기 영업익 2403억···전년비 7%↑",
+     "press": "smartbizn.com",
+     "publishedAt": "2026-11-05T00:02:00.000Z",
+     "link": "https://www.smartbizn.com/news/articleView.html?idxno=158494"
     },
     {
-     "title": "고점 뚫은 수출…9월 경상수지 614.6억달러 '역대 1위'",
-     "press": "news2day.co.kr",
-     "publishedAt": "2026-11-04T23:46:00.000Z",
-     "link": "https://www.news2day.co.kr/article/20261105500020"
+     "title": "카카오, 3Q 영업익 2403억 전년比 7%↑ … 플랫폼 부문 호조",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-04T23:56:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/05/2026110500035.html"
     }
    ]
   },
   {
-   "keyword": "카카오 3분기 실적 증가",
+   "keyword": "뉴욕증시 다우 급등 3%",
    "sources": [
     "nate"
    ],
-   "articles90": 17,
-   "recent20": 7,
-   "press": 17,
-   "firstArticleAt": "2026-11-04T22:44:00.000Z",
+   "articles90": 36,
+   "recent20": 8,
+   "press": 32,
+   "firstArticleAt": "2026-11-04T22:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "카카오 6분기 연속 2천억 영업이익…AI 전환 박차",
-     "press": "koreareport.co.kr",
-     "publishedAt": "2026-11-04T23:46:00.000Z",
-     "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=54315"
+     "title": "뉴욕증시, 美 '블루웨이브' 다우 3.03% 급등…반도체주 ↓",
+     "press": "newstopkorea.com",
+     "publishedAt": "2026-11-05T00:00:00.000Z",
+     "link": "https://www.newstopkorea.com/news/articleView.html?idxno=48785"
     },
     {
-     "title": "카카오, 3분기 영업익 2403억…AI 서비스 확대 집중",
-     "press": "daily.hankooki.com",
-     "publishedAt": "2026-11-04T23:46:00.000Z",
-     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1421941"
+     "title": "뉴욕증시, 美 민주당 압승에 급등…다우 3% 상승",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-04T23:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541823?sid=104"
     },
     {
-     "title": "카카오, 3분기 영업익 2403억원 전년比 7% ↑…‘광고·선물하기·계열사...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-04T23:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202686?sid=105"
+     "title": "“美증시는 급등했는데”…삼전닉스, 프리마켓서 2~4% 급락[특징주]",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-04T23:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006403971?sid=101"
     }
    ]
   },
   {
-   "keyword": "황인범, 2분만에 도움",
+   "keyword": "국제유가 급락",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 17,
+   "articles90": 25,
    "recent20": 5,
-   "press": 16,
-   "firstArticleAt": "2026-11-04T22:27:00.000Z",
+   "press": 25,
+   "firstArticleAt": "2026-11-04T22:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "유가 급락에도 반도체 ‘찬바람’…코스피 향방은",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-05T00:02:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261105500056"
+    },
+    {
+     "title": "뉴욕증시, '블루웨이브'에 급등...국제유가는 폭락",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-04T23:58:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=880051"
+    },
+    {
+     "title": "“美증시는 급등했는데”…삼전닉스, 프리마켓서 2~4% 급락[특징주]",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-04T23:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006403971?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "황인범 2분 도움",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 18,
+   "recent20": 3,
+   "press": 17,
+   "firstArticleAt": "2026-11-04T22:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "황인범 '황금 코너킥' 배달…포르투, 나폴리 4-1 격파",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-05T00:01:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000079778"
+    },
+    {
+     "title": "모레노호 ‘중원 사령관’ 황인범, 교체 투입 2분 만에 쐐기골 도움",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-04T23:53:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/081/0003695982"
+    },
     {
      "title": "모레노 봤지! 황인범, 교체투입 2분 만에 UCL 도움 작렬…포르투, 伊 나...",
      "press": "sportschosun.com",
      "publishedAt": "2026-11-04T23:43:00.000Z",
      "link": "https://m.sports.naver.com/wfootball/article/076/0004463436"
+    }
+   ]
+  },
+  {
+   "keyword": "한지 유네스코 등재",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 18,
+   "recent20": 4,
+   "press": 16,
+   "firstArticleAt": "2026-11-04T22:50:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "韓 한지·北 태권도, 유네스코 인류무형유산 단독 등재(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T00:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014302653?sid=103"
+    },
+    {
+     "title": "한국 전통 종이 한지, 유네스코 인류무형유산 등재 권고",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-04T23:56:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=623122"
+    },
+    {
+     "title": "‘한지문화’, 유네스코 인류무형유산 등재 권고…등재 시 한국 24번째",
+     "press": "zdnet.co.kr",
+     "publishedAt": "2026-11-04T23:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/092/0002443925?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "9월 경상수지 614억 흑자",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 15,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-04T23:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "반도체 호조에 9월 경상수지 614억달러 흑자",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-04T23:58:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1135304"
+    },
+    {
+     "title": "반도체 수출 260% 급증…9월 경상수지 614억달러 사상 최대",
+     "press": "issuenbiz.com",
+     "publishedAt": "2026-11-04T23:46:00.000Z",
+     "link": "http://www.issuenbiz.com/news/articleView.html?idxno=81245"
+    },
+    {
+     "title": "반도체 수출 호조에 9월 경상흑자 614억달러…\"역대 최대\"",
+     "press": "youthdaily.co.kr",
+     "publishedAt": "2026-11-04T23:40:00.000Z",
+     "link": "https://www.youthdaily.co.kr/news/article.html?no=229380"
+    }
+   ]
+  },
+  {
+   "keyword": "신민아 이진욱 유태오 수목금 출연 확정",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-04T23:04:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "신민아, 새와 '재혼' 이어 12년 만에 첫사랑과 재회…'수목금' 출연 확정",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-04T23:37:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000637313"
+    },
+    {
+     "title": "[문화 이슈] 신민아X이진욱X유태오, 어른들의 멜로 온다…‘수목금’ 출...",
+     "press": "beyondpost.co.kr",
+     "publishedAt": "2026-11-04T23:32:00.000Z",
+     "link": "http://www.beyondpost.co.kr/view.php?ud=202611050816111205d3244b4fed_30"
+    },
+    {
+     "title": "[공식] 신민아, 첫사랑 이진욱·남편 유태오와 어른 멜로..'수목금' 확정",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-04T23:29:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003484834"
+    }
+   ]
+  },
+  {
+   "keyword": "보이스 피싱",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-04T22:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "보이스피싱 계좌정지, 범죄에 가담하지 않았는데 통장이 묶였다면 먼저...",
+     "press": "beyondpost.co.kr",
+     "publishedAt": "2026-11-05T00:02:00.000Z",
+     "link": "http://www.beyondpost.co.kr/view.php?ud=2026110415545863509aeda69934_30"
+    },
+    {
+     "title": "신한투자증권, 휴대폰 개통이력 점검 도입 1주년…보이스피싱 철통 방어",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-04T23:58:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2644369"
+    },
+    {
+     "title": "\"보이스피싱 사각지대 차단\"…신한투자증권, '휴대폰 개통이력 점검' 1년...",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-04T23:52:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=93114"
+    }
+   ]
+  },
+  {
+   "keyword": "챔스",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-04T23:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘파브레가스의 코모’ 챔스 원정 랑스에 9-1 ‘역사적 대승’···“프...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-04T23:58:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/144/0001148176"
+    },
+    {
+     "title": "‘챔스 새내기’ 코모, 원정서 9-1 대승…최다 골 차 승리 타이",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-04T23:48:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/018/0006403967"
     },
     {
      "title": "포르투 황인범, 모레노 감독 앞에서 챔스리그 쐐기골 도움",
      "press": "sedaily.com",
      "publishedAt": "2026-11-04T23:38:00.000Z",
      "link": "https://m.sports.naver.com/wfootball/article/011/0004678916"
-    },
-    {
-     "title": "포르투 황인범, 챔피언스리그 교체투입 2분 만에 도움‥팀은 대승",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-04T23:37:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/214/0001533618"
     }
    ]
   },
   {
-   "keyword": "한지 태권도 北 단독 등재",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-04T22:30:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "北태권도 유네스코 등재 눈앞…한국은 단독·확장 모두 난항 전망",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-04T23:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005599685?sid=103"
-    },
-    {
-     "title": "한국 ‘한지’, 北 ‘태권도’ 각각에 ‘등재 권고’ 나왔다",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-04T23:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004678917?sid=103"
-    },
-    {
-     "title": "韓 한지 유네스코 인류무형유산 등재 '청신호'…北 태권도도 '등재 권고...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-04T23:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009271355?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "미국 중간선거와 유가 변동",
+   "keyword": "손흥민 유니폼 2위!",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 5,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-04T22:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[마켓 프리뷰] 美증시 급등에도 코스피 변동성 전망…반도체 수급 주목",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-04T23:16:00.000Z",
-     "link": "https://www.ajunews.com/view/20261105080449698"
-    },
-    {
-     "title": "[오늘 증시] 삼성전자·SK하이닉스 변동성 커지나",
-     "press": "kjdaily.com",
-     "publishedAt": "2026-11-04T23:12:00.000Z",
-     "link": "http://www.kjdaily.com/article.php?aid=1793833897691340276"
-    },
-    {
-     "title": "이란전 끝나나…美 민주당 압승에 국제유가 8%대 급락",
-     "press": "issuenbiz.com",
-     "publishedAt": "2026-11-04T23:10:00.000Z",
-     "link": "http://www.issuenbiz.com/news/articleView.html?idxno=81243"
-    }
-   ]
-  },
-  {
-   "keyword": "손흥민, 유니폼 판매 2위",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-04T22:26:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-04T22:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -204,81 +331,23 @@
    ]
   },
   {
-   "keyword": "챔스",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-04T23:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘챔스 새내기’ 코모, 원정서 9-1 대승…최다 골 차 승리 타이",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-04T23:48:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/018/0006403967"
-    },
-    {
-     "title": "포르투 황인범, 모레노 감독 앞에서 챔스리그 쐐기골 도움",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-04T23:38:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/011/0004678916"
-    },
-    {
-     "title": "황인범, 교체 투입 2분 만에 어시스트…포르투, 챔스 첫 승 신고",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-04T23:25:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/079/0004206657"
-    }
-   ]
-  },
-  {
-   "keyword": "전기 요금",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T22:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "부산 소상공인 에너지바우처, 수도·택시요금에도 쓴다",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-04T23:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004678918?sid=102"
-    },
-    {
-     "title": "“수도요금에 택시비까지 20만원 지원”…부산 소상공인 에너지바우처...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-04T23:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002830446?sid=102"
-    },
-    {
-     "title": "부산 소상공인 에너지지원금 20만 원…수도·택시요금도 쓴다",
-     "press": "mhns.co.kr",
-     "publishedAt": "2026-11-04T23:08:00.000Z",
-     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=767634"
-    }
-   ]
-  },
-  {
    "keyword": "최지훈 대표",
    "sources": [
     "daum"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 1,
-   "press": 3,
+   "press": 4,
    "firstArticleAt": "2026-11-04T22:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "서인영, 6살 연상 기업 대표와 12월 26일 재혼",
+     "press": "ize.co.kr",
+     "publishedAt": "2026-11-04T23:55:00.000Z",
+     "link": "https://m.entertain.naver.com/article/465/0000020780"
+    },
     {
      "title": "“재혼에는 1억 꽃장식 없다” 서인영, ♥NP 최지훈 대표와 12월 26일 결...",
      "press": "newsen.com",
@@ -290,52 +359,77 @@
      "press": "newspim.com",
      "publishedAt": "2026-11-04T23:27:00.000Z",
      "link": "https://www.newspim.com/news/view/20261105000095"
-    },
-    {
-     "title": "서인영, 최지훈 대표와 12월 26일 재혼 1억 꽃장식 빼고 사회는 이재율...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-04T22:46:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001146243"
     }
    ]
   },
   {
-   "keyword": "보이스 피싱",
+   "keyword": "하지수 예능 포착",
    "sources": [
-    "signal.bz",
-    "google"
+    "daum"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 2,
    "press": 3,
-   "firstArticleAt": "2026-11-04T22:46:00.000Z",
+   "firstArticleAt": "2026-11-04T23:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "성남시, ‘찾아가는 보이스피싱 예방교육’ 운영… 20일까지 접수",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-04T23:32:00.000Z",
-     "link": "http://www.breaknews.com/1248555"
+     "title": "이찬혁-하지수, 열애설 침묵하더니 ‘전참시’서 동반 포착...손잡고 춤...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-04T23:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004463441"
     },
     {
-     "title": "성남시, 기관·단체 대상 찾아가는 보이스피싱 예방교육 신청 접수",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-04T23:32:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2014626"
+     "title": "악뮤 이찬혁, ‘열애설’ 하지수와 손잡고 스윙댄스…방송서 포착",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-04T23:51:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000051435"
     },
     {
-     "title": "성남시, 고용우수기업 14곳 선정…보이스피싱 예방교육도 운영",
-     "press": "beyondpost.co.kr",
-     "publishedAt": "2026-11-04T22:46:00.000Z",
-     "link": "http://www.beyondpost.co.kr/view.php?ud=2026110507365536684c878f8fa1_30"
+     "title": "이찬혁, 열애설 상대 하지수와 예능 포착… 손 꼭 잡고 스윙댄스",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-04T23:37:00.000Z",
+     "link": "https://m.entertain.naver.com/article/469/0000963731"
+    }
+   ]
+  },
+  {
+   "keyword": "농구",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 2,
+   "firstArticleAt": "2026-11-04T23:37:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘대학농구에서 플옵티가?’ 자줏빛으로 물든 선승관…새로운 숨결 불어...",
+     "press": null,
+     "publishedAt": "2026-11-05T00:00:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/065/0000304095"
+    },
+    {
+     "title": "\"농구 팬들 모여라\"… KB국민은행, 'KB스타뱅킹 2026-2027 여자프로농구...",
+     "press": "dailysmart.co.kr",
+     "publishedAt": "2026-11-04T23:46:00.000Z",
+     "link": "http://www.dailysmart.co.kr/news/articleView.html?idxno=132013"
+    },
+    {
+     "title": "농구 유니폼이 라인프렌즈와 만났다…NBA, 브라운 컬렉션 출시",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-04T23:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009271378?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 828,
+  "flagged": 837,
   "matched": 368,
   "avgLeadMin": 349,
   "recent": [
