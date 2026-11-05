@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T07:14:08.219Z",
+ "builtAt": "2026-11-05T07:24:12.551Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 22,
  "candidates": [
   {
-   "keyword": "김태규 제명 촉구",
+   "keyword": "김태규 제명 결의안 통과",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 61,
-   "recent20": 18,
-   "press": 38,
-   "firstArticleAt": "2026-11-05T06:16:00.000Z",
+   "articles90": 49,
+   "recent20": 17,
+   "press": 42,
+   "firstArticleAt": "2026-11-05T06:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김태규 제명 촉구 결의안, 민주당 주도로 본회의 의결",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-05T07:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003696185?sid=100"
+     "title": "‘내란 부정’ 국힘 김태규 제명촉구 결의안 국회 본회의 의결",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-05T07:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000160485?sid=100"
     },
     {
-     "title": "‘전두환·尹 내란 아니다’ 김태규 제명 촉구안, 與 주도로 국회 통과",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-05T07:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004007975?sid=100"
+     "title": "김태규 의원 제명 촉구 결의안 본회의 통과",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-05T07:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004206954?sid=100"
     },
     {
-     "title": "[속보] '전두환 내란부정' 김태규 제명촉구결의안 與주도 국회 통과",
-     "press": "tjb.co.kr",
-     "publishedAt": "2026-11-05T07:10:00.000Z",
-     "link": "https://www.tjb.co.kr/news05/bodo/view/id/105730"
+     "title": "'전두환 내란 부정' 김태규 제명 촉구 결의안 국회 본회의 통과",
+     "press": "jibs.co.kr",
+     "publishedAt": "2026-11-05T07:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/661/0000086185?sid=100"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 35,
-   "recent20": 8,
-   "press": 31,
+   "articles90": 36,
+   "recent20": 6,
+   "press": 32,
    "firstArticleAt": "2026-11-05T05:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"제 식구 감싸기 악습\"…특검, 오동운 공수처장 징역 1년 구형",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-05T07:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000141676?sid=102"
+    },
     {
      "title": "특검, ‘제 식구 봐주기’ 오동운 공수처장에 징역 1년 구형",
      "press": "news.kbs.co.kr",
@@ -65,12 +71,6 @@
      "press": "mdtoday.co.kr",
      "publishedAt": "2026-11-05T07:08:00.000Z",
      "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=623260"
-    },
-    {
-     "title": "특검, '제식구 감싸기 의혹' 오동운 공수처장에 징역 1년 구형",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-05T07:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000160483?sid=102"
     }
    ]
   },
@@ -79,30 +79,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 24,
-   "recent20": 0,
-   "press": 24,
-   "firstArticleAt": "2026-11-05T05:48:00.000Z",
+   "articles90": 22,
+   "recent20": 3,
+   "press": 22,
+   "firstArticleAt": "2026-11-05T05:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "LG화학, 3분기 영업익 5612억원···전년比 17.4% 감소",
-     "press": "finomy.com",
-     "publishedAt": "2026-11-05T06:54:00.000Z",
-     "link": "http://www.finomy.com/news/articleView.html?idxno=265770"
+     "title": "석유화학 적자 완충한 앤솔…LG화학, 3Q 영업익 5612억원",
+     "press": "ekn.kr",
+     "publishedAt": "2026-11-05T07:22:00.000Z",
+     "link": "https://www.ekn.kr/web/view.php?key=20261105028465870"
     },
     {
-     "title": "LG화학, 3분기 영업익 5612억⋯석화 적자전환에 17%↓",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-05T06:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001072588?sid=101"
+     "title": "LG화학, 석화 적자에도 배터리 선방…내년 양극재 출하 2배↑(종합2보)",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-05T07:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009272868?sid=101"
     },
     {
-     "title": "LG화학, 3분기 영업익 17% 감소 … 배터리가 석화 부진 방어",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-05T06:46:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/05/2026110500261.html"
+     "title": "LG화학, 3분기 영업익 5612억…석유화학 적자·원가 부담 영향",
+     "press": "popcornnews.net",
+     "publishedAt": "2026-11-05T07:20:00.000Z",
+     "link": "http://www.popcornnews.net/news/articleView.html?idxno=138899"
     }
    ]
   },
@@ -112,13 +112,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 27,
+   "articles90": 25,
    "recent20": 2,
-   "press": 21,
-   "firstArticleAt": "2026-11-05T05:52:00.000Z",
+   "press": 20,
+   "firstArticleAt": "2026-11-05T05:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[스틸컷] 이재명 대통령 \"복지는 기다리는 게 아닌 먼저 찾아가는 것\"[전...",
+     "press": "dailybrief.co.kr",
+     "publishedAt": "2026-11-05T07:17:00.000Z",
+     "link": "https://www.dailybrief.co.kr/news/articleView.html?idxno=7221"
+    },
     {
      "title": "조응천 “美 블루쓰나미 앞 우리 대통령은 ‘키보드워리어’”",
      "press": "munhwa.com",
@@ -130,44 +136,38 @@
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-05T06:58:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000923201?sid=100"
-    },
-    {
-     "title": "이 대통령 \"창업 사회로의 전환 필수적…'국민 창업 시대' 나아가야\"",
-     "press": "korea.kr",
-     "publishedAt": "2026-11-05T06:41:00.000Z",
-     "link": "https://www.korea.kr/news/policyNewsView.do?newsId=148975118&call_from=naver_news"
     }
    ]
   },
   {
-   "keyword": "곽도규, APBC 대표팀 낙마",
+   "keyword": "서울 아파트값 91주 상승",
    "sources": [
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-05T05:45:00.000Z",
+   "articles90": 15,
+   "recent20": 3,
+   "press": 15,
+   "firstArticleAt": "2026-11-05T05:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "KIA 투수 곽도규, 대퇴부 부상으로 APBC 대표팀 낙마",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T07:03:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/003/0014304475"
+     "title": "91주째 올랐는데 분위기는 달라졌다…서울 집값에 무슨 일이",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-05T07:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003151828?sid=101"
     },
     {
-     "title": "APBC 출격 앞두고 줄부상…곽도규 낙마에 마운드 초비상",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-05T06:53:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/021/0002830629"
+     "title": "서울 아파트값 역대 최장 91주 상승…강남3구는 하락",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-05T07:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001883259?sid=101"
     },
     {
-     "title": "곽도규마저 허벅지 부상에 낙마… ‘최원호호’ 마운드에 세 번째 악재",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-05T06:48:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/396/0000760141"
+     "title": "서울 아파트값 상승세 계속, 상승폭은 줄어···경기는 여전히 상승세...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-05T07:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003480895?sid=101"
     }
    ]
   },
@@ -176,10 +176,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
+   "articles90": 10,
    "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-05T05:52:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-05T06:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -204,55 +204,81 @@
    ]
   },
   {
-   "keyword": "경제",
-   "sources": [
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 7,
-   "press": 7,
-   "firstArticleAt": "2026-11-05T07:08:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "글로벌 경제, AI 투자가 성장 모멘텀 유지할 수 있느냐에 달렸다 [美중간...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-05T07:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005600093?sid=104"
-    },
-    {
-     "title": "인천시 지역경제 이끈 기업인 6명·우수기업 73곳 선정…‘강소기업 육...",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-05T07:12:00.000Z",
-     "link": "https://www.viva100.com/article/20261105501006"
-    },
-    {
-     "title": "농협경제지주, 수확철 농촌 일손돕기 릴레이 전개",
-     "press": "industrynews.co.kr",
-     "publishedAt": "2026-11-05T07:12:00.000Z",
-     "link": "https://www.industrynews.co.kr/news/articleView.html?idxno=88964"
-    }
-   ]
-  },
-  {
-   "keyword": "오세훈 시장, 비야케 잉겔스 전시 관람",
+   "keyword": "곽도규, APBC 낙마",
    "sources": [
     "nate"
    ],
-   "articles90": 10,
+   "articles90": 9,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T05:56:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-05T06:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“한국은 지금 르네상스”⋯세계적 건축가 비야케 잉겔스, 서울서 첫 기...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-05T07:06:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2644711"
+     "title": "'투수 19명→14명' APBC 대표팀 마운드 비상...KIA 곽도규, 허벅지 부상...",
+     "press": "maniareport.com",
+     "publishedAt": "2026-11-05T07:15:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/425/0000213955"
     },
+    {
+     "title": "KIA 투수 곽도규, 대퇴부 부상으로 APBC 대표팀 낙마",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T07:03:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/003/0014304475"
+    },
+    {
+     "title": "APBC 출격 앞두고 줄부상…곽도규 낙마에 마운드 초비상",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-05T06:53:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/021/0002830629"
+    }
+   ]
+  },
+  {
+   "keyword": "경제",
+   "sources": [
+    "google"
+   ],
+   "articles90": 9,
+   "recent20": 9,
+   "press": 8,
+   "firstArticleAt": "2026-11-05T07:18:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "인천 강화 평화경제특구 첫 용역 유찰…내년 정부 공모 준비 '비상'",
+     "press": "joongboo.com",
+     "publishedAt": "2026-11-05T07:22:00.000Z",
+     "link": "https://www.joongboo.com/news/articleView.html?idxno=363741612"
+    },
+    {
+     "title": "인천경제자유구역청, 유타대 아시아캠퍼스 융합교육원 출범으로 시민 평...",
+     "press": "kmaeil.com",
+     "publishedAt": "2026-11-05T07:22:00.000Z",
+     "link": "https://www.kmaeil.com/news/articleView.html?idxno=657210"
+    },
+    {
+     "title": "미국 중간선거에 한국경제 흔들… 반도체주 급락에 증시 '패닉'",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-05T07:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001038689?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "오세훈 시장, 덴마크 BIG 전시 관람",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-05T05:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
     {
      "title": "[포토] 덴마크 건축그룹 BIG 전시 투어하는 오세훈 시장",
      "press": "asiatoday.co.kr",
@@ -264,6 +290,12 @@
      "press": "asiatoday.co.kr",
      "publishedAt": "2026-11-05T06:50:00.000Z",
      "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261105010002181"
+    },
+    {
+     "title": "덴마크 건축그룹 BIG 머티미얼리즘 전시 관람하는 오세훈 시장",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T06:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014304275?sid=100"
     }
    ]
   },
@@ -301,73 +333,73 @@
    ]
   },
   {
-   "keyword": "jtbc",
+   "keyword": "정해인 팬미팅 투어 개최",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-05T06:00:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정해인, 홍콩→상파울루 등 팬미팅 투어 돌입",
+     "press": "enter.etoday.co.kr",
+     "publishedAt": "2026-11-05T06:32:00.000Z",
+     "link": "https://enter.etoday.co.kr/news/view/304810"
+    },
+    {
+     "title": "정해인, 2년만에 팬미팅 투어",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-05T06:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000519300"
+    },
+    {
+     "title": "정해인, 산티아고·상파울루·멕시코시티까지 간다…글로벌 팬미팅 재개",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-05T06:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000760123"
+    }
+   ]
+  },
+  {
+   "keyword": "기뢰",
    "sources": [
     "google"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-05T05:49:00.000Z",
+   "firstArticleAt": "2026-11-05T06:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "CJ ENM, 보상금 악재에도 흑자…JTBC 경영난에 반사이익",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-05T07:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005350723?sid=103"
-    },
-    {
-     "title": "JTBC, 경영권 매각 본입찰 내년 1월로… 새 주인 찾기 해 넘긴다",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-05T06:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202843?sid=101"
-    },
-    {
-     "title": "[컨콜]티빙, 3분기 영업손실 72억…JTBC 영향으로 광고 매출 3% 반영",
+     "title": "청해부대 작전지역 오만 남방까지…초계기·기뢰제거반 투입(종합)",
      "press": "mt.co.kr",
-     "publishedAt": "2026-11-05T05:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005437129?sid=105"
-    }
-   ]
-  },
-  {
-   "keyword": "추억 남기는 유학생들",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T05:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "가을 추억을 남기는 외국인 유학생들",
-     "press": "suwonilbo.kr",
-     "publishedAt": "2026-11-05T06:40:00.000Z",
-     "link": "https://www.suwonilbo.kr/view.html?id=L2611051531210694"
+     "publishedAt": "2026-11-05T07:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005437227?sid=100"
     },
     {
-     "title": "한자리 모여 추억 남기는 외국인 유학생들",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T05:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016424284?sid=102"
+     "title": "청해부대, 오만 남방까지 임무 확대…‘포세이돈’·기뢰제거 전력 보강",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-05T06:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003057394?sid=100"
     },
     {
-     "title": "추억 남기는 외국인 유학생들",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T05:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016424269?sid=102"
+     "title": "청해부대 작전구역 오만 남방까지 확대…호르무즈 기뢰 제거 대비",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-05T06:10:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2121229"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 980,
+  "flagged": 985,
   "matched": 434,
   "avgLeadMin": 384,
   "recent": [
