@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T18:42:05.972Z",
+ "builtAt": "2026-11-05T18:52:09.138Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 14,
  "candidates": [
   {
    "keyword": "비트코인",
@@ -17,7 +17,7 @@
     "google"
    ],
    "articles90": 8,
-   "recent20": 3,
+   "recent20": 1,
    "press": 2,
    "firstArticleAt": "2026-11-05T17:26:00.000Z",
    "exclusive": false,
