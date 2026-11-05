@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T21:33:01.133Z",
+ "builtAt": "2026-11-05T21:43:04.659Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,12 +11,76 @@
  "measured": 10,
  "candidates": [
   {
+   "keyword": "유럽 여객기 폭탄 위협",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 3,
+   "press": 8,
+   "firstArticleAt": "2026-11-05T20:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "여객기 27대 또 폭탄 위협‥혈액원도 해킹",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-05T21:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533839?sid=104"
+    },
+    {
+     "title": "유럽 여객기 또 폭탄 위협…비상착륙·회항 '대란'",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-05T21:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001401027?sid=104"
+    },
+    {
+     "title": "\"60분 뒤 폭발한다\"...유럽 여객기 수십편 회항·비상착륙 '소동'",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-05T21:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001271851?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "2026년 11월 6일 운세",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-05T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘의 운세] 2026년 11월 6일 (금) 띠별운세 '한 주의 짐을 덜어내자'",
+     "press": "dailypop.kr",
+     "publishedAt": "2026-11-05T21:36:00.000Z",
+     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103972"
+    },
+    {
+     "title": "[AI] 오늘의 띠별 운세...2026.11.6(금요일)",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-05T21:30:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=67177"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 6일 별자리 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-05T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006404665?sid=103"
+    }
+   ]
+  },
+  {
    "keyword": "이스라엘 연정 구성",
    "sources": [
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-05T20:14:00.000Z",
    "exclusive": false,
@@ -45,12 +109,11 @@
   {
    "keyword": "청해부대 임무 확대",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 5,
    "recent20": 1,
-   "press": 3,
+   "press": 4,
    "firstArticleAt": "2026-11-05T20:14:00.000Z",
    "exclusive": false,
    "capped": false,
@@ -62,16 +125,48 @@
      "link": "https://n.news.naver.com/mnews/article/055/0001401026?sid=100"
     },
     {
+     "title": "호르무즈에 더 가까이…‘항행 자유’ 임무 추가",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-05T21:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012288478?sid=100"
+    },
+    {
      "title": "청해부대 작전구역 2배 넓힌다‥\"전쟁은 불개입\"",
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-05T21:13:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/214/0001533832?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "영국 기준금리 인상",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-05T21:11:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "영국, 3년만에 금리 연 4%로 0.25%p 인상…BOE 총재 \"추가 인상도 가능\"",
+     "press": "tfmedia.co.kr",
+     "publishedAt": "2026-11-05T21:36:00.000Z",
+     "link": "https://www.tfmedia.co.kr/news/article.html?no=208673"
     },
     {
-     "title": "“한국, 호르무즈 인근서 뭘 노리나”…이란 언론, 청해부대 확대에 “...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-05T20:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003696393?sid=104"
+     "title": "英, 3년 만에 금리 인상…\"마지막 인상으로 보이지도 않아\"",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-05T21:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000542040?sid=101"
+    },
+    {
+     "title": "英 3년3개월만에 금리 인상…기준금리 4% 시대",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-05T21:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005838865?sid=101"
     }
    ]
   }
@@ -79,9 +174,21 @@
  "hitRate": {
   "days": 7,
   "flagged": 1070,
-  "matched": 503,
-  "avgLeadMin": 479,
+  "matched": 505,
+  "avgLeadMin": 478,
   "recent": [
+   {
+    "keyword": "데이터센터",
+    "hitKeyword": "AI 데이터센터 규제 파장",
+    "hitAt": "2026-11-06T06:30:00+09:00",
+    "leadMin": 806
+   },
+   {
+    "keyword": "미국 중간선거",
+    "hitKeyword": "공화당 중간선거 참패",
+    "hitAt": "2026-11-06T06:30:00+09:00",
+    "leadMin": 27
+   },
    {
     "keyword": "유럽 여객기 폭파 위협",
     "hitKeyword": "유럽 여객기 폭탄 위협",
@@ -129,18 +236,6 @@
     "hitKeyword": "카카오 인적분할 연기",
     "hitAt": "2026-11-06T00:00:00+09:00",
     "leadMin": 877
-   },
-   {
-    "keyword": "카카오 3분기 영업익 증가",
-    "hitKeyword": "카카오 인적분할 연기",
-    "hitAt": "2026-11-06T00:00:00+09:00",
-    "leadMin": 857
-   },
-   {
-    "keyword": "카카오 AI 운영 시작",
-    "hitKeyword": "카카오 인적분할 연기",
-    "hitAt": "2026-11-06T00:00:00+09:00",
-    "leadMin": 768
    }
   ]
  }
