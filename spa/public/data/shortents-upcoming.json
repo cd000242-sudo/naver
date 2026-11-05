@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T10:48:51.519Z",
+ "builtAt": "2026-11-05T10:58:54.814Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
+ "measured": 14,
  "candidates": [
   {
    "keyword": "내란 우두머리 선고 1월 26일",
    "sources": [
     "nate"
    ],
-   "articles90": 36,
-   "recent20": 9,
-   "press": 29,
+   "articles90": 39,
+   "recent20": 7,
+   "press": 31,
    "firstArticleAt": "2026-11-05T09:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "윤석열 ‘내란 우두머리’ 항소심, 내년 1월26일 선고",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-05T10:46:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1319496&inflow=N"
+     "title": "‘내란 우두머리 혐의’ 윤석열, 내년 1월26일 2심 선고",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-05T10:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000130837?sid=102"
     },
     {
-     "title": "‘윤석열 내란 우두머리’ 2심 내년 1월26일에 선고",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-05T10:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003480949?sid=102"
+     "title": "사형 구형받은 尹 \"내란 아냐\" 항변…내년 1월 26일 선고(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T10:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014304920?sid=102"
     },
     {
-     "title": "‘내란 우두머리’ 2심 내년 1월26일 선고…尹 “대통령 헌법상 권한행...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-05T10:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002719582?sid=102"
+     "title": "'내란 우두머리' 2심 내년 1월26일 선고…尹, 1시간 넘게 무죄 호소",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-05T10:50:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2644802"
     }
    ]
   },
@@ -48,62 +48,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 15,
-   "recent20": 1,
+   "articles90": 14,
+   "recent20": 3,
    "press": 14,
-   "firstArticleAt": "2026-11-05T09:20:00.000Z",
+   "firstArticleAt": "2026-11-05T09:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "세월호 기록물 유네스코 아태목록 등재…안산 유족·단체 '환영'",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T10:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016425054?sid=103"
+     "title": "세월호 참사 기록물 세계기록유산 아태 지역목록 올랐다",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-05T10:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002830942?sid=103"
     },
     {
-     "title": "2014년 4월에 멈춘 시간…‘세월호’ 23만점 기록 세계기록유산 올라 [세...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-05T10:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002719573?sid=103"
+     "title": "세월호 기록·한글 조리서, 세계기록유산 아태지역 등재(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T10:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014304919?sid=102"
     },
     {
-     "title": "'단원고 4.16 아카이브' 등 2건, 유네스코 아태 기록유산 등재",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-05T09:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005600270?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "LG엔솔, 3차 ESS 불참",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 10,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-05T09:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "LG엔솔, 1180MW ESS 수주전 빠졌다…삼성SDI·SK온 2파전",
-     "press": "magazine.hankyung.com",
-     "publishedAt": "2026-11-05T10:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/050/0000112890?sid=101"
-    },
-    {
-     "title": "LG엔솔, 3차 ESS 중앙계약시장 불참…가격 경쟁 대신 ‘선택과 집중’",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-05T10:24:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1319495&inflow=N"
-    },
-    {
-     "title": "LG엔솔 “3차 ESS 중앙계약시장 입찰 불참, 가격 경쟁 대신 중장기 경쟁...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-05T10:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202921?sid=101"
+     "title": "세월호 기록 23만여점 유네스코 아태목록 등재…유가족 \"기억의 새 출발...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-05T10:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009273210?sid=102"
     }
    ]
   },
@@ -112,13 +80,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 2,
+   "articles90": 8,
+   "recent20": 1,
    "press": 7,
    "firstArticleAt": "2026-11-05T09:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[KPGA] 옥태훈·왕정훈, 강풍 뚫고 최종전 첫날 공동 선두..김민규 공동...",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-05T10:53:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=747816"
+    },
     {
      "title": "옥태훈·왕정훈, KPGA투어 시즌 최종전 1라운드 선두",
      "press": "m-i.kr",
@@ -130,12 +104,70 @@
      "press": "maniareport.com",
      "publishedAt": "2026-11-05T10:35:00.000Z",
      "link": "https://m.sports.naver.com/golf/article/425/0000213989"
+    }
+   ]
+  },
+  {
+   "keyword": "LG엔솔, 3차 ESS 불참",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-05T09:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "LG엔솔, 3차 ESS 수주전 불참…삼성·SK 양강 경쟁",
+     "press": "newstopkorea.com",
+     "publishedAt": "2026-11-05T10:56:00.000Z",
+     "link": "https://www.newstopkorea.com/news/articleView.html?idxno=48809"
     },
     {
-     "title": "KPGA 시즌 최종전 투어 챔피언십 첫날, 옥태훈ㆍ왕정훈 공동 선두",
-     "press": "thegolftimes.co.kr",
-     "publishedAt": "2026-11-05T10:12:00.000Z",
-     "link": "https://www.thegolftimes.co.kr/news/articleView.html?idxno=82272"
+     "title": "LG엔솔, 1180MW ESS 수주전 빠졌다…삼성SDI·SK온 2파전",
+     "press": "magazine.hankyung.com",
+     "publishedAt": "2026-11-05T10:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/050/0000112890?sid=101"
+    },
+    {
+     "title": "LG엔솔, 3차 ESS 중앙계약시장 불참…가격 경쟁 대신 ‘선택과 집중’",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-05T10:24:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1319495&inflow=N"
+    }
+   ]
+  },
+  {
+   "keyword": "단원고 4·16 아카이브 등재",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-05T09:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "수학여행 앞둔 단원고 학생들의 흔적… 유네스코 기록유산 됐다",
+     "press": "segye.com",
+     "publishedAt": "2026-11-05T10:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004172882?sid=103"
+    },
+    {
+     "title": "세월호 기록·한글 조리서, 세계기록유산 아태지역 등재(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T10:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014304919?sid=102"
+    },
+    {
+     "title": "세월호 기록 23만여점 유네스코 아태목록 등재…유가족 \"기억의 새 출발...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-05T10:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009273210?sid=102"
     }
    ]
   },
@@ -164,74 +196,10 @@
      "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2489051"
     },
     {
-     "title": "\"한미동맹 영향 없다\"... 靑, 대미투자도 지속",
-     "press": "fnnews.com",
+     "title": "靑, 美 중간선거 결과에 \"한미동맹 굳건…대미투자 국익 우선\"",
+     "press": "ntoday.co.kr",
      "publishedAt": "2026-11-05T09:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005600247?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "단원고 4·16 아카이브 등재",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T09:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "세월호 기록물 유네스코 아태목록 등재…안산 유족·단체 '환영'",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T10:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016425054?sid=103"
-    },
-    {
-     "title": "세월호 참사 기억·옛 조리서, 세계기록유산 아태 목록 등재",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-05T09:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533752?sid=103"
-    },
-    {
-     "title": "세월호 참사 기억, 세계기록유산 아태목록 등재… 조선시대 조리서 2종...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-05T09:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000963919?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "하이닉스",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T09:20:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "서동주, 하이닉스 '226층'에 물렸다…\"다들 제가 팔면 들어간다고\"",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-05T09:33:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002077209"
-    },
-    {
-     "title": "삼성전자, 3분기 D램 매출 점유율 38%…SK하이닉스 29%",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-05T09:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000549270?sid=101"
-    },
-    {
-     "title": "SK하이닉스 40조 소각 날…2차 자사주 매입단가는 15% 낮아",
-     "press": "womentimes.co.kr",
-     "publishedAt": "2026-11-05T09:20:00.000Z",
-     "link": "https://www.womentimes.co.kr/news/articleView.html?idxno=107643"
+     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=130668"
     }
    ]
   },
@@ -242,7 +210,7 @@
     "nate"
    ],
    "articles90": 6,
-   "recent20": 5,
+   "recent20": 0,
    "press": 2,
    "firstArticleAt": "2026-11-05T09:38:00.000Z",
    "exclusive": false,
