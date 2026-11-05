@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T06:33:53.408Z",
+ "builtAt": "2026-11-05T06:43:56.829Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,66 @@
  "measured": 25,
  "candidates": [
   {
-   "keyword": "코스닥 매도 사이드카",
+   "keyword": "코스닥 매도 사이드카 발동",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 61,
-   "recent20": 5,
-   "press": 53,
-   "firstArticleAt": "2026-11-05T05:27:00.000Z",
+   "articles90": 64,
+   "recent20": 8,
+   "press": 54,
+   "firstArticleAt": "2026-11-05T05:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'美민주당 압승'에 韓증시 폭락…코스피·코스닥, 매도 사이드카",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-05T06:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000923188?sid=101"
+     "title": "\"美 중간선거 후폭풍\"…코스피·코스닥 5%대 하락 마감[시황]",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-05T06:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003151788?sid=101"
     },
     {
-     "title": "증시 급락에 코스피·코스닥 매도 사이드카 동시 발동…반도체주 직격탄",
-     "press": "delighti.co.kr",
-     "publishedAt": "2026-11-05T06:24:00.000Z",
-     "link": "https://www.delighti.co.kr/news/articleView.html?idxno=124452"
+     "title": "코스피 ·코스닥 5%대 급락…양 시장 매도 사이드카",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-05T06:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002393440?sid=101"
     },
     {
-     "title": "美 'AI 규제 쇼크'에 韓 증시 휘청…양대 시장 매도 사이드카",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-05T06:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000141665?sid=101"
+     "title": "코스피 5383·코스닥 678 동반 폭락… 양대 시장 매도 사이드카 발동",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-05T06:42:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1172180"
+    }
+   ]
+  },
+  {
+   "keyword": "구본규 부회장 승진",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 47,
+   "recent20": 21,
+   "press": 43,
+   "firstArticleAt": "2026-11-05T05:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "LS그룹 계열사 CEO 대거 유임···구본규, LS전선 부회장 승진",
+     "press": "newsfreezone.co.kr",
+     "publishedAt": "2026-11-05T06:42:00.000Z",
+     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=717879"
+    },
+    {
+     "title": "LS그룹, 구본규 LS전선 대표 부회장 승진…2027년 임원인사 단행",
+     "press": "energy-news.co.kr",
+     "publishedAt": "2026-11-05T06:40:00.000Z",
+     "link": "https://www.energy-news.co.kr/news/articleView.html?idxno=229548"
+    },
+    {
+     "title": "LS그룹, 부회장 승진에 구본규 …역대 최대 신규 이사 17명",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-05T06:40:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=2026110515201660823084322ec9_1"
     }
    ]
   },
@@ -48,23 +80,23 @@
     "signal.bz"
    ],
    "articles90": 40,
-   "recent20": 7,
-   "press": 37,
-   "firstArticleAt": "2026-11-05T05:10:00.000Z",
+   "recent20": 5,
+   "press": 38,
+   "firstArticleAt": "2026-11-05T05:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이 대통령 \"수능 첨단기기 부정행위 원천 차단하라\"",
+     "press": "kbsm.net",
+     "publishedAt": "2026-11-05T06:42:00.000Z",
+     "link": "https://www.kbsm.net/news/view.php?idx=540616"
+    },
     {
      "title": "李대통령 \"스마트안경 부정행위 원천 차단\"…수능 앞두고 '전면 대응' 지...",
      "press": "ziksir.com",
      "publishedAt": "2026-11-05T06:26:00.000Z",
      "link": "https://www.ziksir.com/news/articleView.html?idxno=152216"
-    },
-    {
-     "title": "수능 D-14…이재명 대통령 '스마트 안경 등 부정행위 원천 차단하라'",
-     "press": "jbnews.com",
-     "publishedAt": "2026-11-05T06:26:00.000Z",
-     "link": "https://www.jbnews.com/news/articleView.html?idxno=1515229"
     },
     {
      "title": "이 대통령 \"스마트 안경 등 부정행위 원천 차단\"… 수능 관리 강화 지시",
@@ -80,30 +112,94 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 45,
-   "recent20": 10,
-   "press": 30,
-   "firstArticleAt": "2026-11-05T05:04:00.000Z",
+   "articles90": 46,
+   "recent20": 8,
+   "press": 34,
+   "firstArticleAt": "2026-11-05T05:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이 대통령 \"글로벌기업 국내 투자도 지역 향해…더 많은 기회 열어주길...",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-05T06:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400907?sid=100"
+     "title": "이 대통령 \"창업 사회로의 전환 필수적…'국민 창업 시대' 나아가야\"",
+     "press": "korea.kr",
+     "publishedAt": "2026-11-05T06:41:00.000Z",
+     "link": "https://www.korea.kr/news/policyNewsView.do?newsId=148975118&call_from=naver_news"
     },
     {
-     "title": "李대통령 \"스마트안경 부정행위 원천 차단\"…수능 앞두고 '전면 대응' 지...",
-     "press": "ziksir.com",
+     "title": "장동혁 “李가 자랑하는 매물 급증·경매 증가는 국민 고통…대통령 마...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-05T06:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005759565?sid=100"
+    },
+    {
+     "title": "X에서 Y로 소통 넓히는 이 대통령, 野 \"볼륨 줄이랬더니 채널 늘려\"",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-05T06:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000160478?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "LG화학 3분기 영업익 5612억",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 29,
+   "recent20": 10,
+   "press": 29,
+   "firstArticleAt": "2026-11-05T05:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "LG화학, 3분기 영업익 5612억 원",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-05T06:39:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=747783"
+    },
+    {
+     "title": "외형 커졌는데 수익성 뒷걸음…LG화학, 석유화학에 발목",
+     "press": "news.bizwatch.co.kr",
+     "publishedAt": "2026-11-05T06:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/648/0000052331?sid=101"
+    },
+    {
+     "title": "LG화학, 배터리 선방에도 영업익 17%↓",
+     "press": "it.chosun.com",
+     "publishedAt": "2026-11-05T06:38:00.000Z",
+     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000000347"
+    }
+   ]
+  },
+  {
+   "keyword": "KIA 곽도규 부상으로",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 16,
+   "recent20": 1,
+   "press": 16,
+   "firstArticleAt": "2026-11-05T05:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오피셜]“한 명만 더 다쳐도 큰일” APBC 대표팀 부상 비상…곽도규마...",
+     "press": "mhnse.com",
      "publishedAt": "2026-11-05T06:26:00.000Z",
-     "link": "https://www.ziksir.com/news/articleView.html?idxno=152216"
+     "link": "https://m.sports.naver.com/kbaseball/article/445/0000486769"
     },
     {
-     "title": "李대통령, 국민과의 소통 위한 ‘대통령의 Y’ 유튜브 공개",
-     "press": "siminilbo.co.kr",
-     "publishedAt": "2026-11-05T06:24:00.000Z",
-     "link": "https://www.siminilbo.co.kr/news/newsview.php?ncode=1160288468398915"
+     "title": "'APBC 투수진 초토화' 최민석-신영우 이어 곽도규까지 부상으로 낙마",
+     "press": "sports.hankooki.com",
+     "publishedAt": "2026-11-05T06:18:00.000Z",
+     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6942970"
+    },
+    {
+     "title": "벌써 세 번째 투수 이탈...KIA 좌완 곽도규, 좌측 대퇴부 부상으로 APBC ...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-05T06:16:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/410/0001146320"
     }
    ]
   },
@@ -112,127 +208,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 17,
-   "recent20": 3,
-   "press": 17,
-   "firstArticleAt": "2026-11-05T05:05:00.000Z",
+   "articles90": 15,
+   "recent20": 4,
+   "press": 15,
+   "firstArticleAt": "2026-11-05T05:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "인천 구월동 주차장서 SUV 돌진…70대 여성 1명 사망·1명 중상",
-     "press": "idsn.co.kr",
-     "publishedAt": "2026-11-05T06:30:00.000Z",
-     "link": "https://idsn.co.kr/news/view/1065593157867948"
+     "title": "대낮 날벼락…인천서 30대가 몰던 SUV, 8차로 가로질러 돌진 ‘1명 사망...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-05T06:38:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1172144"
     },
     {
-     "title": "인천 구월동 상가 건물서 나오던 차량 돌진…70대 여성 1명 사망·1명 중...",
-     "press": "incheonilbo.com",
-     "publishedAt": "2026-11-05T06:14:00.000Z",
-     "link": "https://www.incheonilbo.com/news/articleView.html?idxno=1336075"
+     "title": "인천 주차장서 SUV 돌진…70대 여성 1명 사망·1명 중상",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-05T06:36:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249169"
     },
     {
-     "title": "인천 주차장 SUV 돌진사고, 70대 여성 사망...경찰 조사 착수",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-05T06:14:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=884251"
-    }
-   ]
-  },
-  {
-   "keyword": "오동운 징역 1년 구형",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 18,
-   "recent20": 6,
-   "press": 16,
-   "firstArticleAt": "2026-11-05T05:55:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "특검, '위증 제 식구 감싸기' 혐의 오동운 공수처장 징역 1년 구형",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T06:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014304273?sid=102"
-    },
-    {
-     "title": "특검, '제식구 감싸기' 오동운 공수처장에 징역 1년 구형",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-05T06:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000649202?sid=102"
-    },
-    {
-     "title": "[속보] '채상병 특검 직무유기' 오동운 공수처장에 징역 1년 구형",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-05T06:28:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=728113"
-    }
-   ]
-  },
-  {
-   "keyword": "LG화학 3분기 영업익 17%↓",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 13,
-   "recent20": 3,
-   "press": 12,
-   "firstArticleAt": "2026-11-05T05:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "LG화학, 3분기 영업익 17%↓…\"엔솔 지분 매각도 검토\"",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-05T06:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001271784?sid=101"
-    },
-    {
-     "title": "LG화학, 3분기 영업익 5612억원···전년비 17% ↓",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-05T06:30:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026110515181097633"
-    },
-    {
-     "title": "LG화학, 3Q 영업익 17% 감소…'석화 적자 전환' 직격탄",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-05T06:26:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=100700"
-    }
-   ]
-  },
-  {
-   "keyword": "신천지",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 10,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-05T05:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“전면 공개 더 문제”라며 신천지 열람 예고…김민석 우회 반격",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-05T06:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003563095?sid=100"
-    },
-    {
-     "title": "김민석, '신천지 의혹' 당내 갈등에 사과…6일부터 조사 결과 열람 허용",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-05T05:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003482672?sid=100"
-    },
-    {
-     "title": "신천지자원봉사단, 전국 10개 지부서 보훈 봉사…유공자 등 150명 지원",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-05T05:50:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261105500190"
+     "title": "[속보] 인천 구월동서 SUV 8차로 가로질러 돌진⋯70대 여성 사망",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-05T06:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001072580?sid=102"
     }
    ]
   },
@@ -265,136 +264,6 @@
      "press": "financialreview.co.kr",
      "publishedAt": "2026-11-05T06:06:00.000Z",
      "link": "http://www.financialreview.co.kr/news/articleView.html?idxno=46052"
-    }
-   ]
-  },
-  {
-   "keyword": "경제",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 5,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T06:26:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "태평양, '경제·데이터 분석센터' 확대 출범",
-     "press": "lawtimes.co.kr",
-     "publishedAt": "2026-11-05T06:30:00.000Z",
-     "link": "https://www.lawtimes.co.kr/news/articleView.html?idxno=228880"
-    },
-    {
-     "title": "양천구, 국가통계조사 유공 재정경제부 장관 표창…직원 17명도 수상",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-05T06:30:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5080226"
-    },
-    {
-     "title": "인천경제청, 유타대 아시아캠퍼스 지역 평생교육 거점 키운다",
-     "press": "discoverynews.kr",
-     "publishedAt": "2026-11-05T06:28:00.000Z",
-     "link": "https://www.discoverynews.kr/news/articleView.html?idxno=1105934"
-    }
-   ]
-  },
-  {
-   "keyword": "비트코인",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 17,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T05:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "비트코인 11월 8만5000달러 도달 확률 62%로 표시",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-05T06:30:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/433149"
-    },
-    {
-     "title": "비트코인 매도 잔량 554만2300달러 우위…바이낸스 현물서 관측",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-05T06:18:00.000Z",
-     "link": "https://www.tokenpost.kr/news/cryptocurrency/433147"
-    },
-    {
-     "title": "도지코인 0.0764달러 2.35% 상승…비트코인 동반 강세에 0.0780달러 돌파...",
-     "press": "coinreaders.com",
-     "publishedAt": "2026-11-05T06:12:00.000Z",
-     "link": "http://coinreaders.com/267726"
-    }
-   ]
-  },
-  {
-   "keyword": "신진서 83개월 1위",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T05:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘10월 9전 전승' 신진서, 83개월 연속 바둑 랭킹 1위",
-     "press": "maniareport.com",
-     "publishedAt": "2026-11-05T06:01:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/425/0000213938"
-    },
-    {
-     "title": "10월에만 상금 5억원 신진서, 83개월 연속 바둑 랭킹 1위",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-05T05:18:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/052/0002428713"
-    },
-    {
-     "title": "'10월 상금만 5억원' 신진서, 83개월 연속 바둑 랭킹 1위",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-05T05:08:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261105000990"
-    }
-   ]
-  },
-  {
-   "keyword": "재혼 황후 하루 만에 1위",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T05:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'재혼 황후' 실사화 우려 컸는데…결국 1위 찍었다",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-05T06:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000783131"
-    },
-    {
-     "title": "“언니라고 불러도 될까요?”…‘재혼 황후’ 막장 판타지 통했다…12개...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-05T05:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/021/0002830598"
-    },
-    {
-     "title": "주지훈 피부색에 이종석 의상까지 이슈몰이…‘재혼 황후’ 하루 만에 ...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-05T05:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005635152"
     }
    ]
   },
@@ -461,43 +330,11 @@
      "link": "https://n.news.naver.com/mnews/article/119/0003151739?sid=105"
     }
    ]
-  },
-  {
-   "keyword": "이형일 부총리, 피치 면담",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-05T05:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이형일 부총리, 국제신용평가사 피치 아태지역 국가신용등급 담당 면담",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T05:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016424279?sid=101"
-    },
-    {
-     "title": "악수하는 이형일 부총리와 '피치' 아태지역 국가신용등급 담당",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-05T05:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009272524?sid=101"
-    },
-    {
-     "title": "국제신용평가사 '피치' 연례협의단 만난 이형일 부총리",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-05T05:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009272527?sid=101"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 969,
+  "flagged": 972,
   "matched": 429,
   "avgLeadMin": 385,
   "recent": [
