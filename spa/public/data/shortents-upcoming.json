@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T22:23:16.501Z",
+ "builtAt": "2026-11-05T22:33:19.310Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,47 +11,48 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "2026년 11월 6일 운세",
+   "keyword": "아파트",
    "sources": [
     "signal.bz",
-    "nate"
-   ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-05T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "오늘의 MBTI 운세 11월 6일 금요일",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-05T22:12:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=401127"
-    },
-    {
-     "title": "[오늘의 운세] 띠별 운세 11월 6일",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-05T22:08:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=401125"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 6일 (금) 띠별운세 '한 주의 짐을 덜어내자'",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-05T21:36:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103972"
-    }
-   ]
-  },
-  {
-   "keyword": "장남 주진우 고소",
-   "sources": [
-    "signal.bz"
+    "google"
    ],
    "articles90": 7,
    "recent20": 2,
    "press": 6,
-   "firstArticleAt": "2026-11-05T21:01:00.000Z",
+   "firstArticleAt": "2026-11-05T21:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "부산 아파트 28층에서 추락사, 안전 관리의 경각심 높아져",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-05T22:18:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=884346"
+    },
+    {
+     "title": "석 달째 단 1채도 안 팔렸다… 광주 북구·서구 아파트에 무슨 일이?",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-05T22:17:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000080132"
+    },
+    {
+     "title": "“실거래가 떨어진다고?”…100주 상승 바라보는 서울 아파트값",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-05T22:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003151979?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "장남 주진우 명예훼손",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-05T21:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -82,11 +83,17 @@
    ],
    "articles90": 6,
    "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-05T21:00:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-05T21:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[오늘 뉴스 4컷] 이란전 책임론 헤그세스 겨눴다…국내선 ‘조작기소 특...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-05T22:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004172993?sid=100"
+    },
     {
      "title": "[이충재 칼럼] 그럼에도 '조작기소 특검' 해야 한다",
      "press": "ohmynews.com",
@@ -98,12 +105,6 @@
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-05T22:07:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004207070?sid=100"
-    },
-    {
-     "title": "조작기소 특검법 오늘 본회의 처리…국힘 장외투쟁 맞불, 정국 급랭",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-05T21:46:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=100728"
     }
    ]
   },
@@ -112,24 +113,24 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-05T20:56:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-05T21:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "이스라엘 대통령 “총리 후보 8일 발표”…네타냐후 ‘실각 위기’",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-05T21:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003057500?sid=104"
-    },
     {
      "title": "이스라엘 대통령 \"새 총리 후보 8일 발표\"",
      "press": "biz.sbs.co.kr",
      "publishedAt": "2026-11-05T21:50:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/374/0000542046?sid=101"
+    },
+    {
+     "title": "이스라엘 대통령 “총리 후보 8일 발표”…네타냐후 ‘실각 위기’",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-05T21:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003057500?sid=104"
     },
     {
      "title": "이스라엘 대통령 \"8일 연정 구성 맡을 총리 후보 결정\"",
@@ -144,10 +145,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T21:00:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-05T21:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -170,14 +171,97 @@
      "link": "https://n.news.naver.com/mnews/article/055/0001401033?sid=102"
     }
    ]
+  },
+  {
+   "keyword": "2026년 11월 6일 운세",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-05T21:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "오늘의 MBTI 운세 11월 6일 금요일",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-05T22:12:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=401127"
+    },
+    {
+     "title": "[오늘의 운세] 띠별 운세 11월 6일",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-05T22:08:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=401125"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 6일 (금) 띠별운세 '한 주의 짐을 덜어내자'",
+     "press": "dailypop.kr",
+     "publishedAt": "2026-11-05T21:36:00.000Z",
+     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103972"
+    }
+   ]
+  },
+  {
+   "keyword": "영국 기준금리 인상",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-05T21:11:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "영국도 금리 인상 대열 합류…3년 3개월 만",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-05T21:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000542049?sid=101"
+    },
+    {
+     "title": "영국, 3년만에 금리 연 4%로 0.25%p 인상…BOE 총재 \"추가 인상도 가능\"",
+     "press": "tfmedia.co.kr",
+     "publishedAt": "2026-11-05T21:36:00.000Z",
+     "link": "https://www.tfmedia.co.kr/news/article.html?no=208673"
+    },
+    {
+     "title": "英, 3년 만에 금리 인상…\"마지막 인상으로 보이지도 않아\"",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-05T21:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000542040?sid=101"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1072,
-  "matched": 509,
-  "avgLeadMin": 481,
+  "flagged": 1074,
+  "matched": 512,
+  "avgLeadMin": 486,
   "recent": [
+   {
+    "keyword": "삼성바이오 2차 파업",
+    "hitKeyword": "삼성바이오 부분파업",
+    "hitAt": "2026-11-06T07:30:00+09:00",
+    "leadMin": 2082
+   },
+   {
+    "keyword": "미국 중간선거와 이란 전쟁",
+    "hitKeyword": "이란 미국 핵 제안서",
+    "hitAt": "2026-11-06T07:30:00+09:00",
+    "leadMin": 1880
+   },
+   {
+    "keyword": "미국",
+    "hitKeyword": "이란 미국 핵 제안서",
+    "hitAt": "2026-11-06T07:30:00+09:00",
+    "leadMin": 288
+   },
    {
     "keyword": "뉴욕증시 급등",
     "hitKeyword": "뉴욕증시 하루만에 급락",
@@ -219,24 +303,6 @@
     "hitKeyword": "유럽 여객기 폭탄 위협",
     "hitAt": "2026-11-06T06:00:00+09:00",
     "leadMin": 2809
-   },
-   {
-    "keyword": "여객기",
-    "hitKeyword": "유럽 여객기 폭탄 위협",
-    "hitAt": "2026-11-06T06:00:00+09:00",
-    "leadMin": 2587
-   },
-   {
-    "keyword": "마트 냉장고 프랑스 사이버공격",
-    "hitKeyword": "프랑스 고물가 시위",
-    "hitAt": "2026-11-06T06:00:00+09:00",
-    "leadMin": 1237
-   },
-   {
-    "keyword": "서울 아파트값 91주 상승",
-    "hitKeyword": "서울 아파트값 연속 상승",
-    "hitAt": "2026-11-06T06:00:00+09:00",
-    "leadMin": 816
    }
   ]
  }
