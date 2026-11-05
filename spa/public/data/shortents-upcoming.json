@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T02:52:13.018Z",
+ "builtAt": "2026-11-05T03:02:16.263Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,70 +8,133 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "청해부대 임무 확대",
+   "keyword": "조작기소 특검법 상정",
    "sources": [
-    "nate",
     "daum"
    ],
-   "articles90": 38,
-   "recent20": 7,
-   "press": 33,
-   "firstArticleAt": "2026-11-05T01:24:00.000Z",
-   "exclusive": false,
+   "articles90": 64,
+   "recent20": 18,
+   "press": 41,
+   "firstArticleAt": "2026-11-05T01:38:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "청해부대, 호르무즈 650㎞ 앞까지 작전 확대…초계기 추가 투입(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-05T02:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009272077?sid=100"
+     "title": "[오마이포토] '조작기소 특검법' 반대 구호 외치는 국민의힘",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-05T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002534742?sid=100"
     },
     {
-     "title": "정부 \"청해부대 임무 강화\"…초계기 파견·해역 '오만 남방' 확대",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-05T02:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000923110?sid=100"
+     "title": "[포토] '조작기소 특검법' 상정 규탄하는 국민의힘",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-05T03:00:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/05/2026110500161.html"
     },
     {
-     "title": "청해부대 작전 확대안 의결…국회 제출은 국무회의 뒤",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-05T02:40:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=400880"
+     "title": "[속보]‘조작기소 특검법’ 오늘 국회 본회의 상정",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-05T03:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000366483?sid=100"
     }
    ]
   },
   {
-   "keyword": "9월 경상수지 600억 달러 흑자",
+   "keyword": "청해부대 작전 확대",
    "sources": [
     "nate"
    ],
-   "articles90": 36,
-   "recent20": 6,
-   "press": 30,
-   "firstArticleAt": "2026-11-05T01:26:00.000Z",
+   "articles90": 41,
+   "recent20": 5,
+   "press": 35,
+   "firstArticleAt": "2026-11-05T01:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "청해부대, 美 파병 요구에 화답… 호르무즈 작전영역 2배로 확대",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-05T03:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002830556?sid=100"
+    },
+    {
+     "title": "청해부대 작전구역 '호르무즈 인근 해역'까지 확대 추진",
+     "press": "newsverse.kr",
+     "publishedAt": "2026-11-05T02:58:00.000Z",
+     "link": "https://www.newsverse.kr/news/articleView.html?idxno=11849"
+    },
+    {
+     "title": "청해부대, 오만 남방까지 작전구역 확대… 해상초계기 추가 파견",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-05T02:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202775?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "9월 경상수지 600억 달러",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 34,
+   "recent20": 6,
+   "press": 29,
+   "firstArticleAt": "2026-11-05T01:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'꿈의 반도체' 600억달러 넘어선 경상흑자⋯연 5000억달러 향해 뛴다 [종...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-05T03:00:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2644515"
+    },
+    {
+     "title": "9월 경상흑자 614억달러 최대치에도… ‘반도체 겨울’ 우려, 수출 비상...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-05T02:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002830545?sid=101"
+    },
     {
      "title": "경상흑자 사상 첫 600억달러…수출 증가분 79%는 반도체",
      "press": "4th.kr",
      "publishedAt": "2026-11-05T02:46:00.000Z",
      "link": "http://www.4th.kr/news/articleView.html?idxno=2121185"
+    }
+   ]
+  },
+  {
+   "keyword": "카카오 AI 사업 2028년 목표",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 23,
+   "recent20": 4,
+   "press": 21,
+   "firstArticleAt": "2026-11-05T01:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "카카오, 1500억 자사주 매입·소각 추진…AI 매출 키워 2028년 흑자 목표...",
+     "press": "newsway.co.kr",
+     "publishedAt": "2026-11-05T02:58:00.000Z",
+     "link": "https://www.newsway.co.kr/news/view?ud=2026110511060687026"
     },
     {
-     "title": "반도체가 끌어올린 경상수지…9월 615억달러 흑자 '역대 최대'",
-     "press": "ezyeconomy.com",
-     "publishedAt": "2026-11-05T02:44:00.000Z",
-     "link": "https://www.ezyeconomy.com/news/articleView.html?idxno=241572"
+     "title": "[컨콜] 카톡 광고 35% 뛰고 콘텐츠는 역성장…카카오 “AI 2028년 손익분...",
+     "press": "ekn.kr",
+     "publishedAt": "2026-11-05T02:54:00.000Z",
+     "link": "https://www.ekn.kr/web/view.php?key=20261105025555784"
     },
     {
-     "title": "반도체 수출 호조에 경상수지 흑자 600억달러 돌파 '사상 최대'",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-05T02:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001038563?sid=101"
+     "title": "카카오, AI 확산 속도 기대 이하…'광고·커머스'로 2028년 수익화 나선...",
+     "press": "epnc.co.kr",
+     "publishedAt": "2026-11-05T02:52:00.000Z",
+     "link": "https://www.epnc.co.kr/news/articleView.html?idxno=409322"
     }
    ]
   },
@@ -80,10 +143,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 28,
+   "articles90": 21,
    "recent20": 1,
-   "press": 28,
-   "firstArticleAt": "2026-11-05T01:24:00.000Z",
+   "press": 21,
+   "firstArticleAt": "2026-11-05T01:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -113,7 +176,7 @@
     "signal.bz"
    ],
    "articles90": 21,
-   "recent20": 3,
+   "recent20": 0,
    "press": 21,
    "firstArticleAt": "2026-11-05T02:00:00.000Z",
    "exclusive": false,
@@ -140,108 +203,12 @@
    ]
   },
   {
-   "keyword": "LG, 벡 영입!",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 19,
-   "recent20": 3,
-   "press": 19,
-   "firstArticleAt": "2026-11-05T01:28:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "LG, 새 외국인 투수로 ‘이정후 동료’ 트리스탄 벡 영입",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-05T02:36:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611050087"
-    },
-    {
-     "title": "LG, 마운드 보강 칼 갈았다...현역 메이저리거 트리스탄 벡 영입",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-05T02:34:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/081/0003696070"
-    },
-    {
-     "title": "‘KS 2연패 실패’ LG, 이정후 동료 우완 투수 벡 영입",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-05T02:33:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/119/0003151670"
-    }
-   ]
-  },
-  {
-   "keyword": "카카오 AI 사업 2028년 목표",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 22,
-   "recent20": 2,
-   "press": 19,
-   "firstArticleAt": "2026-11-05T01:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "카카오, 3Q 광고·커머스 타고 '활짝'...AI 수익화도 본격 '시동'(종합)",
-     "press": "techm.kr",
-     "publishedAt": "2026-11-05T02:48:00.000Z",
-     "link": "https://www.techm.kr/news/articleView.html?idxno=156966"
-    },
-    {
-     "title": "카카오 \"AI 사업 2028년까지 수익성 개선\"…5000만 카톡 관계망으로 승부",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-05T02:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000549037?sid=105"
-    },
-    {
-     "title": "카카오, \"광고 수익화·비용 효율화로 AI 사업 2028년 손익분기점\"",
-     "press": "itdaily.kr",
-     "publishedAt": "2026-11-05T02:28:00.000Z",
-     "link": "https://www.itdaily.kr/news/articleView.html?idxno=242711"
-    }
-   ]
-  },
-  {
-   "keyword": "인천시 내년 예산 편성",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 19,
-   "recent20": 1,
-   "press": 19,
-   "firstArticleAt": "2026-11-05T01:25:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "인천시, 2027년 예산 15조9000억 편성",
-     "press": "businesskorea.co.kr",
-     "publishedAt": "2026-11-05T02:36:00.000Z",
-     "link": "https://www.businesskorea.co.kr/news/articleView.html?idxno=280549"
-    },
-    {
-     "title": "인천시, 내년 본예산 역대 최대 15조 9천억…박찬대 \"민생 지키겠다\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-05T02:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400845?sid=102"
-    },
-    {
-     "title": "인천시 내년 예산 15조9천억원…인천e음에 2천100억원 투입",
-     "press": "kyeongin.com",
-     "publishedAt": "2026-11-05T02:16:00.000Z",
-     "link": "https://www.kyeongin.com/article/1774146"
-    }
-   ]
-  },
-  {
    "keyword": "한전 전기요금 현실화",
    "sources": [
     "signal.bz"
    ],
    "articles90": 18,
-   "recent20": 2,
+   "recent20": 1,
    "press": 18,
    "firstArticleAt": "2026-11-05T02:00:00.000Z",
    "exclusive": false,
@@ -268,34 +235,98 @@
    ]
   },
   {
-   "keyword": "친환경버스 부가세 면제",
+   "keyword": "데블스 플랜 데드 어게인",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 18,
-   "recent20": 2,
-   "press": 16,
-   "firstArticleAt": "2026-11-05T02:15:00.000Z",
+   "articles90": 46,
+   "recent20": 46,
+   "press": 17,
+   "firstArticleAt": "2026-11-05T02:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "인천시 \"친환경버스 부가세 면제 종료시 1대당 3500만원 市 부담\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-05T02:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009272075?sid=102"
+     "title": "[포토] '데블스 플랜: 데드 어게인' 정종연 PD",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-05T03:01:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000486666"
     },
     {
-     "title": "“내년에만 1390억 더 들어”…16개 시도 “친환경 버스 부가세 면제 특...",
+     "title": "‘데블스 플랜3’ 정현규 “시즌2 우승 후 재도전? 성숙한 자세로 증명...",
      "press": "mk.co.kr",
-     "publishedAt": "2026-11-05T02:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005759413?sid=100"
+     "publishedAt": "2026-11-05T03:01:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005759430"
     },
     {
-     "title": "서울시 등 16개 지자체 \"친환경 버스 부가세 면제 유지해야\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-05T02:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400847?sid=102"
+     "title": "[포토] 박경림, '데블스플랜' 마더 테레사의 진행",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-05T03:01:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000326800"
+    }
+   ]
+  },
+  {
+   "keyword": "LG, 트리스탄 벡 영입",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 16,
+   "recent20": 0,
+   "press": 16,
+   "firstArticleAt": "2026-11-05T01:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "LG, 새 외국인 투수로 ‘이정후 동료’ 트리스탄 벡 영입",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-05T02:36:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611050087"
+    },
+    {
+     "title": "LG, 마운드 보강 칼 갈았다...현역 메이저리거 트리스탄 벡 영입",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-05T02:34:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/081/0003696070"
+    },
+    {
+     "title": "‘KS 2연패 실패’ LG, 이정후 동료 우완 투수 벡 영입",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-05T02:33:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/119/0003151670"
+    }
+   ]
+  },
+  {
+   "keyword": "교통",
+   "sources": [
+    "google"
+   ],
+   "articles90": 16,
+   "recent20": 8,
+   "press": 15,
+   "firstArticleAt": "2026-11-05T02:35:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "용인 동백서 자율주행 교통신호 통합기술 국내 첫 실증",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-05T03:00:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3081497"
+    },
+    {
+     "title": "대전시, 70세 이상 어르신 무제한 무임교통 지원 그대로",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-05T02:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016423786?sid=102"
+    },
+    {
+     "title": "네오에쓰앤씨, 시흥시 장애인 체육대회 무료 의료지원…교통약자 이동...",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-05T02:54:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=884219"
     }
    ]
   },
@@ -304,10 +335,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 18,
-   "recent20": 5,
-   "press": 15,
-   "firstArticleAt": "2026-11-05T01:28:00.000Z",
+   "articles90": 16,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-05T01:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -318,10 +349,10 @@
      "link": "https://n.news.naver.com/mnews/article/021/0002830518?sid=100"
     },
     {
-     "title": "본회의 통과만 앞둔 공소취소 특검법...장동혁 \"정권취소 특검 될 것\"",
+     "title": "가짜뉴스 프레임으로 언론과 싸우는 대통령...장동혁 \"말실수 해놓고 좀...",
      "press": "thepublic.kr",
      "publishedAt": "2026-11-05T02:42:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=325217"
+     "link": "https://www.thepublic.kr/news/articleView.html?idxno=325218"
     },
     {
      "title": "장동혁 \"공소취소 특검 밀어붙이면 정권 취소 특검 될 것\" '경고'",
@@ -332,14 +363,47 @@
    ]
   },
   {
+   "keyword": "다문화 가정",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 9,
+   "recent20": 8,
+   "press": 9,
+   "firstArticleAt": "2026-11-05T02:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국민 혼인·출생 늘 때 다문화는 ‘역주행’… 작년 다문화 혼인·출생...",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-05T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004007939?sid=101"
+    },
+    {
+     "title": "다문화 출생아 비중 3년 만에 감소… '한남일녀' 혼인은 역대 최다",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-05T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000963783?sid=101"
+    },
+    {
+     "title": "전체 혼인 8.1% 늘었는데 다문화 혼인은 감소…이혼은 1.4% 증가",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-05T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003482532?sid=100"
+    }
+   ]
+  },
+  {
    "keyword": "우이신설선 운행 지연",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-05T01:24:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-05T01:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -364,45 +428,13 @@
    ]
   },
   {
-   "keyword": "하지원, 23년만 다모 재현",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-05T01:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "하지원, 이서진과 23년 만에 재회 \"'다모'는 나에게 살아온 시간\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-05T02:29:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009272012"
-    },
-    {
-     "title": "\"아프냐? 나도 아프다\"…이서진·하지원, 23년 만에 '다모' 명장면 재현...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-05T02:22:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109745829061"
-    },
-    {
-     "title": "\"아프냐? 나도 아프다\"…이서진♥하지원, 애틋한 줄 알았는데 \"고막 나...",
-     "press": "atstar1.com",
-     "publishedAt": "2026-11-05T02:13:00.000Z",
-     "link": "https://m.entertain.naver.com/article/415/0000053460"
-    }
-   ]
-  },
-  {
-   "keyword": "이찬혁 하지수 전참시",
+   "keyword": "하지수 방송 포착",
    "sources": [
     "daum"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
    "firstArticleAt": "2026-11-05T02:00:00.000Z",
    "exclusive": false,
    "capped": false,
@@ -414,16 +446,16 @@
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16268894"
     },
     {
-     "title": "'열애설에 침묵' 이찬혁, 하지수와 손잡고 방송 등장…오랜 인연 재조명",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-05T02:29:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000637349"
+     "title": "이찬혁, '열애설 주인공' 하지수와 손 잡고 스윙 댄스 '눈길'",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-05T02:48:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1793845633530382006"
     },
     {
-     "title": "‘전참시’ 이찬혁, 하지수와 손잡고 스윙댄스…과거 열애설 재조명",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-05T02:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001278452"
+     "title": "이찬혁, '열애설' 하지수와 방송서 포착…뮤비 인연 계속 [N이슈]",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-05T02:28:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009272004"
     }
    ]
   },
@@ -458,75 +490,11 @@
      "link": "https://www.tgdaily.co.kr/news/articleView.html?idxno=407785"
     }
    ]
-  },
-  {
-   "keyword": "우주발사체",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T01:23:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한화 우주발사체 순천서 만든다…청년 일자리·지역경제도 함께 뜰까",
-     "press": "newswhoplus.com",
-     "publishedAt": "2026-11-05T02:40:00.000Z",
-     "link": "https://www.newswhoplus.com/news/articleView.html?idxno=73568"
-    },
-    {
-     "title": "‘우주 발사체’ 순천서 만들어 고흥서 쏜다",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-05T02:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012287856?sid=105"
-    },
-    {
-     "title": "광양경자청 \"율촌산단, 대한민국 우주발사체 핵심 생산거점\" 도약",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-05T01:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005838440?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "아이폰",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T01:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "아이폰은 C2·갤럭시는 엑시노스…스마트폰 '칩 독립' 빨라진다",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T02:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303227?sid=105"
-    },
-    {
-     "title": "애플, '아이폰18e' 성능만 높인다…A20 칩 외에는 큰 변화 없을 듯",
-     "press": "kbench.com",
-     "publishedAt": "2026-11-05T02:02:00.000Z",
-     "link": "https://kbench.com/?q=node/283076"
-    },
-    {
-     "title": "애플 아이폰 듀오 '화면 파손' 논란에…대기자 40% '구매 포기'",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-05T01:26:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=902012"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 893,
+  "flagged": 898,
   "matched": 382,
   "avgLeadMin": 373,
   "recent": [
