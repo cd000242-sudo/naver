@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T03:12:19.706Z",
+ "builtAt": "2026-11-05T03:22:26.789Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,66 @@
  "measured": 24,
  "candidates": [
   {
-   "keyword": "청해부대 작전 확대",
+   "keyword": "조작기소 특검법 상정",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 67,
+   "recent20": 10,
+   "press": 40,
+   "firstArticleAt": "2026-11-05T02:07:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "결국 본회의 가는 ‘조작기소 특검법’… 野 “독소 가득, 입법 쿠데타...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-05T03:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002830580?sid=100"
+    },
+    {
+     "title": "\"무리한 기소여도 재판서 무죄 다퉈야\"…조작기소특검 비판·우려",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-05T03:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016423855?sid=102"
+    },
+    {
+     "title": "與, ‘조작기소 특검법’ 강행 수순… 국민의힘 필리버스터·장외투쟁 ...",
+     "press": "mediawatch.kr",
+     "publishedAt": "2026-11-05T03:14:00.000Z",
+     "link": "https://www.mediawatch.kr/news/article.html?no=261634"
+    }
+   ]
+  },
+  {
+   "keyword": "청해부대 확대",
    "sources": [
     "nate"
    ],
-   "articles90": 37,
-   "recent20": 4,
-   "press": 31,
-   "firstArticleAt": "2026-11-05T01:43:00.000Z",
+   "articles90": 40,
+   "recent20": 3,
+   "press": 33,
+   "firstArticleAt": "2026-11-05T01:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "청해부대, 美 파병 요구에 화답…호르무즈 작전영역 2배로 확대",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-05T03:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002830556?sid=100"
+     "title": "청해부대 작전구역 호르무즈 인근까지 확대…기뢰제거 전력도 파견 추진",
+     "press": "ppss.kr",
+     "publishedAt": "2026-11-05T03:18:00.000Z",
+     "link": "https://www.ppss.kr/news/articleView.html?idxno=319246"
     },
     {
-     "title": "청해부대 작전구역 '호르무즈 인근 해역'까지 확대 추진",
-     "press": "newsverse.kr",
-     "publishedAt": "2026-11-05T02:58:00.000Z",
-     "link": "https://www.newsverse.kr/news/articleView.html?idxno=11849"
+     "title": "청해부대 작전 구역 오만 남방까지 확대…초계기 추가",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-05T03:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400853?sid=100"
     },
     {
-     "title": "與 \"청해부대 작전구역 확대, 해적 급증 탓…호르무즈 파병 아냐\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-05T02:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009272091?sid=100"
+     "title": "'항행 자유' 첫 임무‥오만 남쪽까지 작전 확대",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-05T03:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533672?sid=100"
     }
    ]
   },
@@ -47,94 +79,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 28,
+   "articles90": 27,
    "recent20": 3,
-   "press": 22,
-   "firstArticleAt": "2026-11-05T01:44:00.000Z",
+   "press": 21,
+   "firstArticleAt": "2026-11-05T01:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "9월 경상수지 614.6억 달러 흑자…사상 최대",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-05T03:16:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1730589"
+    },
+    {
+     "title": "경상수지 첫 600억 달러 돌파…“반도체 호조”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-05T03:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012287882?sid=101"
+    },
     {
      "title": "반도체가 다했다…경상흑자 사상 첫 600억 달러 돌파",
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-05T03:06:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000963786?sid=101"
-    },
-    {
-     "title": "'꿈의 반도체' 600억달러 넘어선 경상흑자⋯연 5000억달러 향해 뛴다 [종...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-05T03:00:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2644515"
-    },
-    {
-     "title": "9월 경상흑자 614억달러 최대치에도… ‘반도체 겨울’ 우려, 수출 비상...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-05T02:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002830545?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "데블스 플랜 데드 어게인",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 60,
-   "recent20": 60,
-   "press": 21,
-   "firstArticleAt": "2026-11-05T02:56:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "'데블스 플랜3' 장동민 “서바이벌 은퇴는 없다…도전 받아줄 것”",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-05T03:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000519269"
-    },
-    {
-     "title": "은퇴 없는 장동민→재도전 정현규…'데블스 플랜3', 두뇌 서바이벌의 진...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-05T03:10:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109749140161"
-    },
-    {
-     "title": "장동민, '데블스 플랜3' 출연 이유 밝혔다…\"도전 멈추면 삶 다한 것\"",
-     "press": "queen.co.kr",
-     "publishedAt": "2026-11-05T03:10:00.000Z",
-     "link": "http://www.queen.co.kr/news/articleView.html?idxno=465846"
-    }
-   ]
-  },
-  {
-   "keyword": "수능일 증시 오전 10시 개장",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 18,
-   "recent20": 1,
-   "press": 18,
-   "firstArticleAt": "2026-11-05T01:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수능일 증시 10시 개장…프리마켓 중단·거래시간 조정",
-     "press": "mstoday.co.kr",
-     "publishedAt": "2026-11-05T03:04:00.000Z",
-     "link": "https://www.mstoday.co.kr/news/articleView.html?idxno=200383"
-    },
-    {
-     "title": "수능날 증시 1시간 늦게 연다 … 오전 10시 개장, 넥스트레이드 프리마...",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-05T02:50:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/05/2026110500153.html"
-    },
-    {
-     "title": "\"수능날 증시 1시간 늦게 열려요\"…정규장 오전 10시~오후 4시30분",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-05T02:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001976825?sid=101"
     }
    ]
   },
@@ -171,67 +139,67 @@
    ]
   },
   {
-   "keyword": "카카오 주가",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 16,
-   "recent20": 3,
-   "press": 15,
-   "firstArticleAt": "2026-11-05T01:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "카카오, 1500억원 자사주 소각…주총 한 달 연기",
-     "press": "bloter.net",
-     "publishedAt": "2026-11-05T03:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/293/0000092750?sid=105"
-    },
-    {
-     "title": "카카오, 3분기 영업이익 2403억원…자사주 1500억원 매입·소각",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-05T03:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002830815?sid=105"
-    },
-    {
-     "title": "카카오, 1500억원 규모 자사주 매입·소각 결정에 10% 가까이 급등",
-     "press": "econonews.co.kr",
-     "publishedAt": "2026-11-05T03:04:00.000Z",
-     "link": "http://www.econonews.co.kr/news/articleView.html?idxno=446775"
-    }
-   ]
-  },
-  {
    "keyword": "교통",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 14,
+   "articles90": 16,
    "recent20": 7,
-   "press": 14,
-   "firstArticleAt": "2026-11-05T02:40:00.000Z",
+   "press": 16,
+   "firstArticleAt": "2026-11-05T02:44:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "목포~무안 잇는 광역버스 '올타2001번' 수요응답형 도입… 서부권 교통...",
-     "press": "greened.kr",
-     "publishedAt": "2026-11-05T03:09:00.000Z",
-     "link": "https://www.greened.kr/news/articleView.html?idxno=353918"
+     "title": "해외 신용카드만 찍으면 끝…외국인 관광객 교통 불편 끝낸다",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-05T03:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005350643?sid=105"
     },
     {
-     "title": "서울 지하철 7호선 온수역 기관사 교대 안전 강화…인천·서울교통공사...",
-     "press": "tournews21.com",
-     "publishedAt": "2026-11-05T03:06:00.000Z",
-     "link": "https://www.tournews21.com/news/articleView.html?idxno=147608"
+     "title": "교통사고 후 치아파절, 통증 없어도 방심 금물…치근·치수 손상 살펴야",
+     "press": "e-science.co.kr",
+     "publishedAt": "2026-11-05T03:20:00.000Z",
+     "link": "https://www.e-science.co.kr/news/articleView.html?idxno=139040"
     },
     {
-     "title": "대전시, 어르신 무임교통카드 '무제한 유지'",
-     "press": "bzeronews.com",
-     "publishedAt": "2026-11-05T03:02:00.000Z",
-     "link": "https://www.bzeronews.com/news/articleView.html?idxno=824854"
+     "title": "대전 트램 공사에 퇴근길 통행속도 최대 44%↓… 교통대책 실효성 논란",
+     "press": "chungnamilbo.co.kr",
+     "publishedAt": "2026-11-05T03:20:00.000Z",
+     "link": "http://www.chungnamilbo.co.kr/news/articleView.html?idxno=919010"
+    }
+   ]
+  },
+  {
+   "keyword": "수능일 증시 오전 10시 개장",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 12,
+   "recent20": 2,
+   "press": 12,
+   "firstArticleAt": "2026-11-05T01:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "수능일 국내 증시 오전 10시 개장… 거래 종료도 1시간 연기",
+     "press": "mediawatch.kr",
+     "publishedAt": "2026-11-05T03:18:00.000Z",
+     "link": "https://www.mediawatch.kr/news/article.html?no=261633"
+    },
+    {
+     "title": "수능일 증시 10시 개장…프리마켓 중단·거래시간 조정",
+     "press": "mstoday.co.kr",
+     "publishedAt": "2026-11-05T03:04:00.000Z",
+     "link": "https://www.mstoday.co.kr/news/articleView.html?idxno=200383"
+    },
+    {
+     "title": "수능날 증시 1시간 늦게 연다 … 오전 10시 개장, 넥스트레이드 프리마...",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-05T02:50:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/05/2026110500153.html"
     }
    ]
   },
@@ -241,7 +209,7 @@
     "google"
    ],
    "articles90": 11,
-   "recent20": 10,
+   "recent20": 0,
    "press": 11,
    "firstArticleAt": "2026-11-05T02:01:00.000Z",
    "exclusive": false,
@@ -260,10 +228,74 @@
      "link": "https://n.news.naver.com/mnews/article/028/0002830812?sid=101"
     },
     {
-     "title": "지난해 다문화 혼인 줄고 이혼 늘었다… 출생아도 감소",
-     "press": "fnnews.com",
+     "title": "국민 혼인·출생 늘 때 다문화는 ‘역주행’… 작년 다문화 혼인·출생...",
+     "press": "chosun.com",
      "publishedAt": "2026-11-05T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005599874?sid=101"
+     "link": "https://n.news.naver.com/mnews/article/023/0004007939?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "열차",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-05T02:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[공연소식] 국립정동극장 세실, 연극 '멜로드라마 열차' 내달 공연",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-05T02:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016423693?sid=103"
+    },
+    {
+     "title": "커튼·책·개미가 살아나는 열차…국립정동극장 〈멜로드라마 열차〉",
+     "press": "sctoday.co.kr",
+     "publishedAt": "2026-11-05T02:28:00.000Z",
+     "link": "https://www.sctoday.co.kr/news/articleView.html?idxno=48970"
+    },
+    {
+     "title": "출근길 우이신설선 전 구간 열차 운행 지연…4시간여만에 정상화",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-05T02:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002719301?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "데드 어게인 발표회",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 12,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-05T02:57:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "[포토] 재재 '제작발표회 MC에서 출연자로 변신'",
+     "press": "joynews24.com",
+     "publishedAt": "2026-11-05T03:20:00.000Z",
+     "link": "http://www.joynews24.com/view/2022980"
+    },
+    {
+     "title": "다시 시작된 두뇌 서바이벌 '데블스 플랜' 제작발표회 [TF사진관]",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-05T03:18:00.000Z",
+     "link": "https://m.entertain.naver.com/article/629/0000549061"
+    },
+    {
+     "title": "'데블스 플랜 : 데드 어게인' 대박",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-05T03:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009272125"
     }
    ]
   },
@@ -272,10 +304,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-05T01:48:00.000Z",
+   "articles90": 7,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-05T02:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -304,10 +336,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-05T01:48:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-05T01:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -332,34 +364,67 @@
    ]
   },
   {
-   "keyword": "인천시 부가세 면제 공동대응",
+   "keyword": "하이닉스 주가 하락",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 4,
+   "articles90": 5,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T02:15:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-05T01:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "인천시 \"친환경버스 부가세 면제 종료시 1대당 3500만원 市 부담\"",
-     "press": "news1.kr",
+     "title": "코스피 '美중간선거 쇼크'... SK하이닉스 -6.6% 삼성전자 -5.3% '휘청'",
+     "press": "newsfc.co.kr",
      "publishedAt": "2026-11-05T02:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009272075?sid=102"
+     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82258"
     },
     {
-     "title": "“내년에만 1390억 더 들어”…16개 시도 “친환경 버스 부가세 면제 특...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-05T02:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005759413?sid=100"
+     "title": "美 블루웨이브에 다시 출렁이는 삼전닉스…삼전 주가 7월말 이후 최저",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-05T02:26:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443208"
     },
     {
-     "title": "친환경버스 부가세 면제 2년 앞당겨 종료 추진…인천시 등 16개 시·도 “...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-05T02:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002830494?sid=102"
+     "title": "美 데이터센터 규제 우려에 반도체주 약세…SK하이닉스 \"영향 판단 일러...",
+     "press": "youthdaily.co.kr",
+     "publishedAt": "2026-11-05T02:22:00.000Z",
+     "link": "https://www.youthdaily.co.kr/news/article.html?no=229404"
+    }
+   ]
+  },
+  {
+   "keyword": "아이폰",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-05T02:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“아이폰 구매자에 최대 95달러 지급”",
+     "press": "koreatimes.com",
+     "publishedAt": "2026-11-05T03:18:00.000Z",
+     "link": "https://www.koreatimes.com/article/11630426?utm_source=naver"
+    },
+    {
+     "title": "아이폰은 C2·갤럭시는 엑시노스…스마트폰 '칩 독립' 빨라진다",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T02:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303227?sid=105"
+    },
+    {
+     "title": "애플, '아이폰18e' 성능만 높인다…A20 칩 외에는 큰 변화 없을 듯",
+     "press": "kbench.com",
+     "publishedAt": "2026-11-05T02:02:00.000Z",
+     "link": "https://kbench.com/?q=node/283076"
     }
    ]
   },
@@ -368,10 +433,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 1,
+   "articles90": 3,
+   "recent20": 0,
    "press": 2,
-   "firstArticleAt": "2026-11-05T01:43:00.000Z",
+   "firstArticleAt": "2026-11-05T02:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -391,14 +456,14 @@
      "title": "2026 제주올레걷기축제 개막, 19코스 걸어가는 참가자들",
      "press": "newsis.com",
      "publishedAt": "2026-11-05T02:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303346?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/003/0014303348?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 902,
+  "flagged": 905,
   "matched": 393,
   "avgLeadMin": 366,
   "recent": [
