@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T14:30:26.395Z",
+ "builtAt": "2026-11-05T14:40:32.701Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 18,
  "candidates": [
   {
    "keyword": "영국 기준금리 인상",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 4,
    "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-05T13:04:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-05T14:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -41,14 +41,85 @@
      "link": "https://n.news.naver.com/mnews/article/015/0005350943?sid=104"
     }
    ]
+  },
+  {
+   "keyword": "쿠칭시티",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-05T14:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "ACL2 H조 강원FC, 쿠칭시티에 0-2 패…승점 동률에도 조 최하위",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-05T14:34:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16269425"
+    },
+    {
+     "title": "강원, 쿠칭 시티 원정서 0-2 패배 4위 추락…조 2위 놓고 세 팀 ‘대혼전...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-05T14:16:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/468/0001278579"
+    },
+    {
+     "title": "[AFC축구 전적] 쿠칭시티 2-0 강원",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-05T14:12:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/001/0016425186"
+    }
+   ]
+  },
+  {
+   "keyword": "코스피 5%대 급락",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 2,
+   "firstArticleAt": "2026-11-05T13:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "삼성전자·SK하이닉스 급락…코스피·코스닥 5%대 하락",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-05T14:36:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=401116"
+    },
+    {
+     "title": "미 중간선거 여파에 코스피·코스닥 5%대 하락",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-05T14:24:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=401111"
+    },
+    {
+     "title": "코스피, 美 중간선거 여파...5%대 급락마감",
+     "press": "betanews.net",
+     "publishedAt": "2026-11-05T13:14:00.000Z",
+     "link": "https://www.betanews.net/article/view/beta202611050172"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1058,
-  "matched": 487,
-  "avgLeadMin": 460,
+  "flagged": 1060,
+  "matched": 488,
+  "avgLeadMin": 464,
   "recent": [
+   {
+    "keyword": "로봇 글로벌 대토론회",
+    "hitKeyword": "박민영 글로벌 인기",
+    "hitAt": "2026-11-05T23:30:00+09:00",
+    "leadMin": 2288
+   },
    {
     "keyword": "재혼 황후, 하루 만에 1위 기록",
     "hitKeyword": "재혼 황후 공개 일정",
@@ -102,12 +173,6 @@
     "hitKeyword": "이유리 새집 공개",
     "hitAt": "2026-11-05T22:30:00+09:00",
     "leadMin": 40
-   },
-   {
-    "keyword": "대통령 선수단 격려오찬",
-    "hitKeyword": "전남 선수단 폭력",
-    "hitAt": "2026-11-05T22:00:00+09:00",
-    "leadMin": 517
    }
   ]
  }
