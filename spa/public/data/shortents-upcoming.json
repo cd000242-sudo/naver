@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T03:22:26.789Z",
+ "builtAt": "2026-11-05T03:32:33.263Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "조작기소 특검법 상정",
@@ -16,12 +16,18 @@
     "daum"
    ],
    "articles90": 67,
-   "recent20": 10,
-   "press": 40,
-   "firstArticleAt": "2026-11-05T02:07:00.000Z",
+   "recent20": 6,
+   "press": 41,
+   "firstArticleAt": "2026-11-05T02:09:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "민주, ‘조작기소 특검법’ 본회의 처리 추진...국힘 필리버스터 예고",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-05T03:30:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=72630"
+    },
     {
      "title": "결국 본회의 가는 ‘조작기소 특검법’… 野 “독소 가득, 입법 쿠데타...",
      "press": "munhwa.com",
@@ -33,27 +39,60 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-05T03:14:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016423855?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "카카오 자사주 매입 소각",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 42,
+   "recent20": 4,
+   "press": 38,
+   "firstArticleAt": "2026-11-05T02:03:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "카카오 인적분할 한 달 연기…카카오AI에 2636억 추가 배정",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-05T03:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009272141?sid=105"
     },
     {
-     "title": "與, ‘조작기소 특검법’ 강행 수순… 국민의힘 필리버스터·장외투쟁 ...",
-     "press": "mediawatch.kr",
-     "publishedAt": "2026-11-05T03:14:00.000Z",
-     "link": "https://www.mediawatch.kr/news/article.html?no=261634"
+     "title": "[종합] 카카오, 3분기 영업익 2403억원…연간 1조원 가시권에 AI·1500억 ...",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-05T03:28:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=561445"
+    },
+    {
+     "title": "카카오, 1500억원 자사주 매입 뒤 전량 소각",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-05T03:28:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=400886"
     }
    ]
   },
   {
    "keyword": "청해부대 확대",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 40,
+   "articles90": 37,
    "recent20": 3,
-   "press": 33,
-   "firstArticleAt": "2026-11-05T01:55:00.000Z",
+   "press": 31,
+   "firstArticleAt": "2026-11-05T02:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "정부 \"청해부대 75명 추가 파견...작전지역도 확대\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-05T03:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002428658?sid=100"
+    },
     {
      "title": "청해부대 작전구역 호르무즈 인근까지 확대…기뢰제거 전력도 파견 추진",
      "press": "ppss.kr",
@@ -65,32 +104,91 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-05T03:13:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001400853?sid=100"
-    },
-    {
-     "title": "'항행 자유' 첫 임무‥오만 남쪽까지 작전 확대",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-05T03:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533672?sid=100"
     }
    ]
   },
   {
-   "keyword": "9월 경상수지 600억 달러 흑자",
+   "keyword": "친환경버스 부가세 면제",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 27,
-   "recent20": 3,
-   "press": 21,
-   "firstArticleAt": "2026-11-05T01:56:00.000Z",
+   "articles90": 19,
+   "recent20": 1,
+   "press": 17,
+   "firstArticleAt": "2026-11-05T02:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "9월 경상수지 614.6억 달러 흑자…사상 최대",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-05T03:16:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1730589"
+     "title": "인천시 \"친환경 버스 부가세 면제 유지 해야\"",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-05T03:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005350645?sid=102"
+    },
+    {
+     "title": "인천시 \"친환경버스 부가세 면제 종료시 1대당 3500만원 市 부담\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-05T02:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009272075?sid=102"
+    },
+    {
+     "title": "“내년에만 1390억 더 들어”…16개 시도 “친환경 버스 부가세 면제 특...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-05T02:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005759413?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "교통",
+   "sources": [
+    "google"
+   ],
+   "articles90": 14,
+   "recent20": 5,
+   "press": 14,
+   "firstArticleAt": "2026-11-05T02:52:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "서울교통공사, 1~8호선 지하철 전자파 수치 공개…KCA와 공동 추진",
+     "press": "newspost.kr",
+     "publishedAt": "2026-11-05T03:24:00.000Z",
+     "link": "https://www.newspost.kr/news/articleView.html?idxno=227083"
+    },
+    {
+     "title": "세종시, 국회세종의사당 연결 BRT 신설로 교통 혁신",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-05T03:22:00.000Z",
+     "link": "https://www.viva100.com/article/20261105500554"
+    },
+    {
+     "title": "대전 트램 공사에 퇴근길 통행속도 최대 44%↓… 교통대책 실효성 논란",
+     "press": "chungnamilbo.co.kr",
+     "publishedAt": "2026-11-05T03:20:00.000Z",
+     "link": "http://www.chungnamilbo.co.kr/news/articleView.html?idxno=919010"
+    }
+   ]
+  },
+  {
+   "keyword": "9월 경상수지 600억달러 돌파",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 19,
+   "recent20": 1,
+   "press": 14,
+   "firstArticleAt": "2026-11-05T02:09:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "반도체 수출 호조에 9월 경상수지 흑자 600억달러 돌파···사상 최대 기...",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-05T03:26:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=242400"
     },
     {
      "title": "경상수지 첫 600억 달러 돌파…“반도체 호조”",
@@ -107,67 +205,34 @@
    ]
   },
   {
-   "keyword": "한전 전기요금 현실화",
+   "keyword": "다문화 가정",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 18,
-   "recent20": 0,
-   "press": 18,
-   "firstArticleAt": "2026-11-05T02:00:00.000Z",
+   "articles90": 14,
+   "recent20": 4,
+   "press": 13,
+   "firstArticleAt": "2026-11-05T03:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“러·우 전쟁뒤 한전 적자 누적… 전기료 현실화해야”",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-05T02:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002830516?sid=101"
+     "title": "함양군, 7년 만에 다문화가족 화합 한마당 개최",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-05T03:28:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5080109"
     },
     {
-     "title": "김동철 한전 사장 \"전력망 투자 지속하려면 전기요금 현실화 필요\"",
-     "press": "electimes.com",
-     "publishedAt": "2026-11-05T02:36:00.000Z",
-     "link": "https://www.electimes.com/news/articleView.html?idxno=374382"
+     "title": "다문화 가정 남편은 미국, 아내는 베트남 가장 많았다",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-05T03:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541882?sid=104"
     },
     {
-     "title": "김동철 한전 사장 “전기요금 현실화 필요…산업용 인상은 최후 수단”",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-05T02:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006404113?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "교통",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 16,
-   "recent20": 7,
-   "press": 16,
-   "firstArticleAt": "2026-11-05T02:44:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "해외 신용카드만 찍으면 끝…외국인 관광객 교통 불편 끝낸다",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-05T03:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005350643?sid=105"
-    },
-    {
-     "title": "교통사고 후 치아파절, 통증 없어도 방심 금물…치근·치수 손상 살펴야",
-     "press": "e-science.co.kr",
-     "publishedAt": "2026-11-05T03:20:00.000Z",
-     "link": "https://www.e-science.co.kr/news/articleView.html?idxno=139040"
-    },
-    {
-     "title": "대전 트램 공사에 퇴근길 통행속도 최대 44%↓… 교통대책 실효성 논란",
-     "press": "chungnamilbo.co.kr",
-     "publishedAt": "2026-11-05T03:20:00.000Z",
-     "link": "http://www.chungnamilbo.co.kr/news/articleView.html?idxno=919010"
+     "title": "다문화 가정, 남편은 45세이상 부인은 20대 후반 가장 많아",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-05T03:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541881?sid=103"
     }
    ]
   },
@@ -176,10 +241,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-05T01:54:00.000Z",
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-05T02:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -204,46 +269,48 @@
    ]
   },
   {
-   "keyword": "다문화 가정",
+   "keyword": "데드 어게인 발표회",
    "sources": [
-    "google"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-05T02:01:00.000Z",
+   "articles90": 10,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-05T02:58:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "결혼·출산 회복세 비껴간 다문화가정…혼인·출생 소폭 감소",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-05T03:02:00.000Z",
-     "link": "https://www.ajunews.com/view/20261105091201945"
+     "title": "'데블스플랜3', \"가장 강력한 장동민\" 견제할 오현민→정현규 16人 데드...",
+     "press": "joynews24.com",
+     "publishedAt": "2026-11-05T03:24:00.000Z",
+     "link": "http://www.joynews24.com/view/2022979"
     },
     {
-     "title": "다문화 부부 3쌍 중 1쌍 ‘남편 10살 이상 연상’",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-05T03:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002830812?sid=101"
+     "title": "[포토] 재재 '제작발표회 MC에서 출연자로 변신'",
+     "press": "joynews24.com",
+     "publishedAt": "2026-11-05T03:20:00.000Z",
+     "link": "http://www.joynews24.com/view/2022980"
     },
     {
-     "title": "국민 혼인·출생 늘 때 다문화는 ‘역주행’… 작년 다문화 혼인·출생...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-05T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004007939?sid=101"
+     "title": "다시 시작된 두뇌 서바이벌 '데블스 플랜' 제작발표회 [TF사진관]",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-05T03:18:00.000Z",
+     "link": "https://m.entertain.naver.com/article/629/0000549061"
     }
    ]
   },
   {
    "keyword": "열차",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-05T02:01:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-05T02:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -268,163 +335,131 @@
    ]
   },
   {
-   "keyword": "데드 어게인 발표회",
+   "keyword": "하이닉스 주가 하락",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 3,
-   "press": 6,
-   "firstArticleAt": "2026-11-05T02:57:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "[포토] 재재 '제작발표회 MC에서 출연자로 변신'",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-05T03:20:00.000Z",
-     "link": "http://www.joynews24.com/view/2022980"
-    },
-    {
-     "title": "다시 시작된 두뇌 서바이벌 '데블스 플랜' 제작발표회 [TF사진관]",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-05T03:18:00.000Z",
-     "link": "https://m.entertain.naver.com/article/629/0000549061"
-    },
-    {
-     "title": "'데블스 플랜 : 데드 어게인' 대박",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-05T03:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009272125"
-    }
-   ]
-  },
-  {
-   "keyword": "발언하는 장동혁 대표",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 1,
+   "articles90": 6,
+   "recent20": 2,
    "press": 5,
    "firstArticleAt": "2026-11-05T02:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정점식 국민의힘 원내대표 발언 듣는 장동혁 대표",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T03:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303525?sid=100"
+     "title": "삼성전자·하이닉스 주가 폭락 중인데... 현대차는 폭등하는 이유가 있...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-05T03:24:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1172078"
     },
     {
-     "title": "의원총회 참석한 장동혁 국민의힘 대표",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-05T03:00:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261105000784"
+     "title": "SK하이닉스·삼성전자, 미국 중간선거 후 주가 폭락...골드만삭스 \"지나...",
+     "press": "coinreaders.com",
+     "publishedAt": "2026-11-05T03:22:00.000Z",
+     "link": "http://coinreaders.com/267683"
     },
-    {
-     "title": "본회의 통과만 앞둔 공소취소 특검법...장동혁 \"정권취소 특검 될 것\"",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-05T02:42:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=325217"
-    }
-   ]
-  },
-  {
-   "keyword": "경사노위 노사정 합의",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T01:55:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "소규모 사업장도 안전관리자 배치…경사노위, 이재명 정부 첫 노사정 합...",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-05T02:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000923111?sid=102"
-    },
-    {
-     "title": "소규모 사업장 안전관리자·보건관리자 둔다…경사노위 첫 합의",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-05T02:44:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261105000737"
-    },
-    {
-     "title": "소규모 사업장 산재 사각지대 해소…노사정 2차 합의 추진",
-     "press": "youthdaily.co.kr",
-     "publishedAt": "2026-11-05T02:38:00.000Z",
-     "link": "https://www.youthdaily.co.kr/news/article.html?no=229407"
-    }
-   ]
-  },
-  {
-   "keyword": "하이닉스 주가 하락",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T01:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
     {
      "title": "코스피 '美중간선거 쇼크'... SK하이닉스 -6.6% 삼성전자 -5.3% '휘청'",
      "press": "newsfc.co.kr",
      "publishedAt": "2026-11-05T02:46:00.000Z",
      "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82258"
-    },
-    {
-     "title": "美 블루웨이브에 다시 출렁이는 삼전닉스…삼전 주가 7월말 이후 최저",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-05T02:26:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443208"
-    },
-    {
-     "title": "美 데이터센터 규제 우려에 반도체주 약세…SK하이닉스 \"영향 판단 일러...",
-     "press": "youthdaily.co.kr",
-     "publishedAt": "2026-11-05T02:22:00.000Z",
-     "link": "https://www.youthdaily.co.kr/news/article.html?no=229404"
     }
    ]
   },
   {
-   "keyword": "아이폰",
+   "keyword": "한전 전기요금 현실화",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T02:02:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-05T02:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“아이폰 구매자에 최대 95달러 지급”",
-     "press": "koreatimes.com",
-     "publishedAt": "2026-11-05T03:18:00.000Z",
-     "link": "https://www.koreatimes.com/article/11630426?utm_source=naver"
+     "title": "“러·우 전쟁뒤 한전 적자 누적… 전기료 현실화해야”",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-05T02:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002830516?sid=101"
     },
     {
-     "title": "아이폰은 C2·갤럭시는 엑시노스…스마트폰 '칩 독립' 빨라진다",
-     "press": "newsis.com",
+     "title": "김동철 한전 사장 \"전력망 투자 지속하려면 전기요금 현실화 필요\"",
+     "press": "electimes.com",
+     "publishedAt": "2026-11-05T02:36:00.000Z",
+     "link": "https://www.electimes.com/news/articleView.html?idxno=374382"
+    },
+    {
+     "title": "김동철 한전 사장 “전기요금 현실화 필요…산업용 인상은 최후 수단”",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-05T02:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006404113?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "유선민 중령",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-05T02:07:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "계엄 투입 유선민 특전사 중령 \"'내란'이라 말하면 진급\"...\"李 정권, 명...",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-05T03:10:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/324250/?sc=Naver"
+    },
+    {
+     "title": "[현장영상] 특전사 중령, 계엄 군인 징계에 이재명 정부 작심 비판",
+     "press": "newscj.com",
      "publishedAt": "2026-11-05T02:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303227?sid=105"
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3446120"
     },
     {
-     "title": "애플, '아이폰18e' 성능만 높인다…A20 칩 외에는 큰 변화 없을 듯",
-     "press": "kbench.com",
-     "publishedAt": "2026-11-05T02:02:00.000Z",
-     "link": "https://kbench.com/?q=node/283076"
+     "title": "국회 찾은 특전사 중령… “내란이라 하면 진급” [현장영상]",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-05T02:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000366471?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "한국시리즈",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-05T02:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“회사 점퍼 맞춰 입고 쓰레기 투기”… 한국시리즈 민폐 응원 논란",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-05T02:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202776?sid=004"
+    },
+    {
+     "title": "[2026 한국시리즈] 선발·타선 힘 확인한 KT, 3차전서 우승 확률 88% 잡을...",
+     "press": "joongboo.com",
+     "publishedAt": "2026-11-05T02:42:00.000Z",
+     "link": "https://www.joongboo.com/news/articleView.html?idxno=363741575"
+    },
+    {
+     "title": "KT, 한국시리즈 2차전 연장 혈투 끝 석패…이강철 감독 \"선수들 모두 잘...",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-05T02:18:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=846221"
     }
    ]
   },
@@ -456,14 +491,14 @@
      "title": "2026 제주올레걷기축제 개막, 19코스 걸어가는 참가자들",
      "press": "newsis.com",
      "publishedAt": "2026-11-05T02:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303348?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/003/0014303346?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 905,
+  "flagged": 908,
   "matched": 393,
   "avgLeadMin": 366,
   "recent": [
