@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T16:11:19.682Z",
+ "builtAt": "2026-11-05T16:21:23.235Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,10 +15,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-05T14:49:00.000Z",
+   "articles90": 9,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-05T15:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -29,16 +29,16 @@
      "link": "https://n.news.naver.com/mnews/article/214/0001533816?sid=100"
     },
     {
-     "title": "與, 조작기소 특검법 오늘 처리… 野는 장외투쟁 예고",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-05T15:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004008097?sid=100"
-    },
-    {
      "title": "검사 수사권 없앤 與, ‘조작기소 특검’엔 허용… 법조계 “모순적 행...",
      "press": "chosun.com",
      "publishedAt": "2026-11-05T15:42:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/023/0004008095?sid=102"
+    },
+    {
+     "title": "與, 조작기소 특검법 오늘 처리… 野는 장외투쟁 예고",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-05T15:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004008097?sid=100"
     }
    ]
   },
@@ -48,10 +48,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 7,
+   "articles90": 5,
    "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-05T14:44:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-05T15:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
