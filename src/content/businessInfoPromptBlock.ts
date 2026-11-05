@@ -81,18 +81,24 @@ function buildVoiceLine(info: BusinessInfoPromptInput, industry: BusinessIndustr
   return '';
 }
 
+// [2026-11-05] Only fields a reader would ask about (address, hours) become "문의 시 확인" items. Listing writer-side
+//   fields there produced lines like "홈페이지 주소는 문의하실 때 확인해 주세요" — those are muted instead.
 function buildMissingLine(info: BusinessInfoPromptInput): string {
-  const missing = [
-    !info.address && '주소',
-    !info.hours && '영업시간',
+  const askable = [!info.address && '주소', !info.hours && '영업시간'].filter(Boolean);
+  const muted = [
     !info.researchUrl && '홈페이지',
     !info.industry && '업종',
     !info.extra && '특징·경력',
     !info.faq && '자주 묻는 것·진행 방식',
   ].filter(Boolean);
-  return missing.length > 0
-    ? `📭 입력 안 됨: ${missing.join(', ')} → 지어내지 말고 마지막 소제목 '문의 시 확인'으로만 다뤄라`
-    : '';
+  return [
+    askable.length > 0
+      ? `📭 입력 안 됨: ${askable.join(', ')} → 지어내지 말고 마지막 소제목 '문의 시 확인'으로만 다뤄라`
+      : '',
+    muted.length > 0
+      ? `🔇 비어 있는 칸: ${muted.join(', ')} → 글에 쓰지 마라(있다·없다, 문의해서 확인하라는 말도 쓰지 않는다)`
+      : '',
+  ].filter(Boolean).join('\n');
 }
 
 function buildTargetLines(info: BusinessInfoPromptInput): string {

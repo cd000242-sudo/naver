@@ -268,7 +268,8 @@ describe('Content Quality V3 evidence attestation', () => {
         // [2026-11-03] API 글 모델 최신화(gpt-6.x · Claude 5.5/5.1 · Gemini 3.8/3.5 Lite, modelRegistry 표시이름·해석) 로 재계산
         // [2026-11-05] 업체 홍보 개편(business/base.prompt [FLOOR]·[NEXT STEP]·[SEARCH], promptLoader·contentJsonPromptFormat, 업체 제목 프롬프트 정리)으로 재계산 (LF 체크아웃 바이트 기준)
         // [2026-11-05 2차] 업체 홍보: 다른 업체 상호·가격·사례 금지(입력 충실도 6번 · 최종 확인 7번)로 재계산
-        '1783ff32be1ff3ce7c2dbcbca58b9a793494ddfcb64200e28e69b4fb803d85f9',
+        // [2026-11-05 3차] 업체 홍보: 무관한 뉴스 금지 · 비어 있는 칸(🔇) 언급 금지로 재계산
+        'cea1ae288d7353d3b4f4ddaa9a1c6198252e31e3e80e10c8d5f47a119d973931',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

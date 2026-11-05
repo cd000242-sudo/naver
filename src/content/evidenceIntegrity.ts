@@ -33,7 +33,15 @@ const FIRST_PERSON_EXPERIENCE_PATTERNS = [
   /(?:한\s*(?:달|주|해)|\d+\s*(?:일|주|개월|달|년))\s*(?:동안\s*)?(?:써|사용|복용|신청|다녀|먹어)[^.!?\n]{0,20}/gi,
 ] as const;
 
-const CONCRETE_CLAIM_PATTERN = /-?\d[\d,]*(?:\.\d+)?\s*(?:%|퍼센트|원|천원|만원|억원|일|주|개월|달|년|시간|분|초|kg|g|cm|mm|mAh|GB|TB|Hz|점|명|건|회)/gi;
+const CONCRETE_CLAIM_PATTERN = /-?\d[\d,]*(?:\.\d+)?[ \t]*(?:%|퍼센트|원|천원|만원|억원|일|주|개월|달|년|시간|분|초|kg|g|cm|mm|mAh|GB|TB|Hz|점|명|건|회)/gi;
+
+// [2026-11-05] A number never pairs with a unit on the next line ([ \t]* above, not \s*), and phone numbers are
+//   contact details, not claims: "010-0000-0201 주소" was read as "-0201 주" (weeks) and capped safety at 35.
+const PHONE_NUMBER_PATTERN = /(?<![\d-])0\d{1,2}-\d{3,4}-\d{4}(?![\d-])/g;
+
+function claimsIn(text: string): string[] {
+  return unique(String(text || '').replace(PHONE_NUMBER_PATTERN, ' ').match(CONCRETE_CLAIM_PATTERN) || []);
+}
 
 function meaningful(value: unknown): string {
   const text = String(value || '').replace(/\s+/g, ' ').trim();
@@ -112,12 +120,10 @@ export function collectUnsupportedFirstPersonClaims(
 }
 
 export function collectUnsupportedConcreteClaims(text: string, groundingText: string): string[] {
-  const claims = unique(text.match(CONCRETE_CLAIM_PATTERN) || []);
+  const claims = claimsIn(text);
   if (claims.length === 0) return [];
 
-  const groundedClaims = new Set(
-    unique(String(groundingText || '').match(CONCRETE_CLAIM_PATTERN) || []).map(normalizeClaim),
-  );
+  const groundedClaims = new Set(claimsIn(groundingText).map(normalizeClaim));
   const grounding = String(groundingText || '');
   return claims
     .filter((claim) => !groundedClaims.has(normalizeClaim(claim)) && !isYearGroundedInText(claim, grounding))
@@ -125,12 +131,10 @@ export function collectUnsupportedConcreteClaims(text: string, groundingText: st
 }
 
 export function collectSupportedConcreteClaims(text: string, groundingText: string): string[] {
-  const claims = unique(text.match(CONCRETE_CLAIM_PATTERN) || []);
+  const claims = claimsIn(text);
   if (claims.length === 0) return [];
 
-  const groundedClaims = new Set(
-    unique(String(groundingText || '').match(CONCRETE_CLAIM_PATTERN) || []).map(normalizeClaim),
-  );
+  const groundedClaims = new Set(claimsIn(groundingText).map(normalizeClaim));
   return claims.filter((claim) => groundedClaims.has(normalizeClaim(claim)));
 }
 

@@ -228,6 +228,7 @@ import {
 } from './contentDuplicateHeuristics.js';
 import { buildUrlModeDirective } from './contentUrlModeDirective.js';
 import { buildKeywordFactChecklist } from './content/sourceFactChecklist.js';
+import { buildQualityGateGroundingText } from './content/qualityGateGrounding.js';
 import { checkTitlePayoff, describeTitlePayoff } from './content/titlePayoffCheck.js';
 import { stampGenerationMode } from './content/generationModeStamp.js';
 import { resolveTitleLengthRange } from './content/titleLengthPolicy.js';
@@ -8480,9 +8481,7 @@ async function generateStructuredContentInternal(
             toneStyle: source.toneStyle,
             categoryHint: source.categoryHint,
             firstPartyEvidenceAvailable: hasExplicitFirstPartyEvidence(source),
-            groundingText: [source.title, source.rawText, source.personalExperience]
-              .filter(Boolean)
-              .join('\n'),
+            groundingText: buildQualityGateGroundingText(source),
             affiliateEvidenceMode: source.contentMode === 'affiliate'
               ? classifyAffiliateEvidence(source).mode
               : undefined,
@@ -8740,9 +8739,7 @@ async function generateStructuredContentInternal(
                   toneStyle: source.toneStyle,
                   categoryHint: source.categoryHint,
                   firstPartyEvidenceAvailable: hasExplicitFirstPartyEvidence(source),
-                  groundingText: [source.title, source.rawText, source.personalExperience]
-                    .filter(Boolean)
-                    .join('\n'),
+                  groundingText: buildQualityGateGroundingText(source),
                   affiliateEvidenceMode: source.contentMode === 'affiliate'
                     ? classifyAffiliateEvidence(source).mode
                     : undefined,
