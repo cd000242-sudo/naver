@@ -248,7 +248,10 @@ export function validateStructuredContent(content: StructuredContent, source?: C
 
   // ✅ 비-리뷰 글에서도: 소제목이 제목(일부 포함)으로 시작하는 경우 제목 prefix 제거
   // - 제거가 실제로 발생한 경우에도 소제목에 제품명 prefix를 새로 붙이지 않음
-  if (!isReviewArticleType(source?.articleType) && content.headings && content.headings.length > 0 && content.selectedTitle) {
+  // [2026-11-05] Business posts skip this: the guessed "product name" there is the region + service phrase
+  //   ("수원 영통 욕실"), which the business prompt puts in one heading on purpose ("시공 문의 안내" lost it).
+  const keepsTitlePhraseInHeadings = (source as any)?.contentMode === 'business';
+  if (!keepsTitlePhraseInHeadings && !isReviewArticleType(source?.articleType) && content.headings && content.headings.length > 0 && content.selectedTitle) {
     const guessedProductName = extractLikelyProductNameFromTitle(content.selectedTitle);
     const selectedTitle = rawSelectedTitleForHeadingStrip || String(content.selectedTitle || '').trim();
     content.headings = content.headings.map((h) => {
@@ -274,11 +277,12 @@ export function validateStructuredContent(content: StructuredContent, source?: C
     const firstHeadingTitle = content.headings[0]?.title?.trim().toLowerCase() || '';
     const mainTitle = content.selectedTitle.trim().toLowerCase();
 
-    // 제목과 1번 소제목이 동일하거나 80% 이상 유사한 경우
+    // 제목과 1번 소제목이 같거나 한쪽이 다른 쪽을 통째로 담는 경우만 중복으로 본다.
+    // [2026-11-05] "앞 10자가 제목에 있으면 중복" 규칙을 뺐다 — "닥터웰 DR-5180 착용 방식은 편할까"처럼 상품명 ·
+    //   "수원 영통 욕실 리…"처럼 지역 + 업종으로 시작하는 정상 소제목이 내용째 사라졌다.
     const isSimilar = firstHeadingTitle === mainTitle ||
-      mainTitle.includes(firstHeadingTitle) ||
-      firstHeadingTitle.includes(mainTitle) ||
-      (firstHeadingTitle.length > 10 && mainTitle.includes(firstHeadingTitle.substring(0, 10)));
+      (firstHeadingTitle.length >= 8 && mainTitle.includes(firstHeadingTitle)) ||
+      firstHeadingTitle.includes(mainTitle);
 
     if (isSimilar) {
       console.warn(`[validateStructuredContent] 1번 소제목("${content.headings[0].title}")이 제목("${content.selectedTitle}")과 중복됨 → 1번 소제목 제거`);

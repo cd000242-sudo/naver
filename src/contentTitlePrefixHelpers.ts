@@ -84,12 +84,19 @@ export function stripReviewTitlePrefixFromHeading(headingTitle: string, selected
   for (const prefix of candidates) {
     if (!prefix) continue;
 
-    const normalizedPrefix = normalizeForPrefixMatch(prefix);
+    // [2026-11-05] Title-word candidates keep their punctuation ("미쉐린 프라이머시 4 플러스,"). Trim it so the
+    //   full phrase matches instead of a shorter one that cuts inside the product name ("플러스 소음은 줄어들까").
+    const normalizedPrefix = normalizeForPrefixMatch(prefix).replace(/[\s,·:|\-–—]+$/u, '');
     if (!normalizedPrefix) continue;
 
     if (normalizedHeading.startsWith(normalizedPrefix)) {
       let remainder = normalizedHeading.slice(normalizedPrefix.length).trim();
       remainder = remainder.replace(/^[\s\-–—:|·•,]+/, '').trim();
+
+      // The cut must not land inside the product name: "미쉐린 프라이머시 4" + "플러스" is still the name.
+      const nextWord = remainder.split(/\s+/)[0] || '';
+      const product = normalizeForPrefixMatch(productName);
+      if (nextWord && product.startsWith(`${normalizedPrefix} ${nextWord}`)) continue;
 
       // ✅ [2026-02-02] 잘린 결과가 조사로 시작하면 원본 유지 (주어 보호)
       if (remainder && startsWithParticle(remainder)) {
