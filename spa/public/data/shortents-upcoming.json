@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T05:33:30.711Z",
+ "builtAt": "2026-11-05T05:43:34.523Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,55 +8,156 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "LG화학 영업익 감소",
+   "keyword": "삼성미래기술육성사업 애뉴얼 포럼",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 27,
-   "recent20": 6,
-   "press": 24,
-   "firstArticleAt": "2026-11-05T04:41:00.000Z",
+   "articles90": 30,
+   "recent20": 3,
+   "press": 26,
+   "firstArticleAt": "2026-11-05T04:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "LG화학, 3분기 영업익 5천612억원…석화 부진에도 예상치 상회(종합)",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-05T05:26:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443252"
+     "title": "삼성 미래기술육성사업 '2026 애뉴얼 포럼' 개최… 우수 연구자 10인 첫...",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-05T05:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002247423?sid=105"
     },
     {
-     "title": "LG화학 3분기 매출 34% 늘었지만 영업익 17% 줄어",
-     "press": "cstimes.com",
+     "title": "삼성, 미래기술육성사업 포럼 개최…14년 만에 첫 시상",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-05T05:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002719420?sid=101"
+    },
+    {
+     "title": "삼성, '미래기술육성사업 포럼' 개최…우수 연구자 10人 선정",
+     "press": "srtimes.kr",
      "publishedAt": "2026-11-05T05:24:00.000Z",
-     "link": "https://www.cstimes.com/news/articleView.html?idxno=726778"
+     "link": "http://www.srtimes.kr/news/articleView.html?idxno=216821"
+    }
+   ]
+  },
+  {
+   "keyword": "코스피 매도 사이드카",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 28,
+   "recent20": 23,
+   "press": 24,
+   "firstArticleAt": "2026-11-05T04:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[속보] 코스피 이어 코스닥도 매도 사이드카 발동…5.03% 급락",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-05T05:42:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261105010002112"
     },
     {
-     "title": "LG화학, 3분기 영업이익 5,612억원…전년동기 比 17.4% 감소",
-     "press": "dnews.co.kr",
-     "publishedAt": "2026-11-05T05:22:00.000Z",
-     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611051416265990827"
+     "title": "[속보] 급락장에 코스피 이어 코스닥도 매도 사이드카",
+     "press": "segye.com",
+     "publishedAt": "2026-11-05T05:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004172773?sid=101"
+    },
+    {
+     "title": "코스닥 5%대 급락에 매도 사이드카",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-05T05:42:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1319398&inflow=N"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 대통령 격려오찬",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 28,
+   "recent20": 7,
+   "press": 23,
+   "firstArticleAt": "2026-11-05T04:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李 대통령 부부, 국제기능올림픽 선수단 격려 오찬",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-05T05:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001883231?sid=100"
+    },
+    {
+     "title": "李대통령 \"기술인재가 대한민국의 미래\"···기능올림픽 종합 2위 선수...",
+     "press": "ziksir.com",
+     "publishedAt": "2026-11-05T05:36:00.000Z",
+     "link": "https://www.ziksir.com/news/articleView.html?idxno=152199"
+    },
+    {
+     "title": "李대통령 “청년 기술인재가 대한민국 미래” 국제기능올림픽 선수단 격...",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-05T05:32:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=72644"
+    }
+   ]
+  },
+  {
+   "keyword": "서울 아파트값 상승세",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 24,
+   "recent20": 6,
+   "press": 22,
+   "firstArticleAt": "2026-11-05T05:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[부동산 프리즘] 서울 집값 상승세 3주째 둔화…경매시장도 매물 적체·...",
+     "press": "moneystorm.kr",
+     "publishedAt": "2026-11-05T05:40:00.000Z",
+     "link": "https://www.moneystorm.kr/news/articleView.html?idxno=8114"
+    },
+    {
+     "title": "서울 아파트값 상승폭 3주째 축소…강남3구 약세 속 경기 0.20% 상승",
+     "press": "youthdaily.co.kr",
+     "publishedAt": "2026-11-05T05:38:00.000Z",
+     "link": "https://www.youthdaily.co.kr/news/article.html?no=229422"
+    },
+    {
+     "title": "서울 아파트값 상승폭 3주째 둔화…강남·서초 낙폭 확대",
+     "press": "koreareport.co.kr",
+     "publishedAt": "2026-11-05T05:34:00.000Z",
+     "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=54343"
     }
    ]
   },
   {
    "keyword": "2027 서울 세계청년대회",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 18,
-   "recent20": 5,
-   "press": 16,
-   "firstArticleAt": "2026-11-05T04:07:00.000Z",
+   "articles90": 17,
+   "recent20": 2,
+   "press": 17,
+   "firstArticleAt": "2026-11-05T04:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“서울 WYD, 단절의 시대에 서로에게 마음 여는 계기 될 것”",
+     "title": "'2027 서울 세계청년대회', 세계 청년 맞을 준비 본격화…대회 운영계획...",
+     "press": "betanews.net",
+     "publishedAt": "2026-11-05T05:38:00.000Z",
+     "link": "https://www.betanews.net/article/view/beta202611050128"
+    },
+    {
+     "title": "“서울 WYD, 단절의 시대에 젊은이들 마음 여는 계기로”",
      "press": "donga.com",
      "publishedAt": "2026-11-05T05:31:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/020/0003760303?sid=103"
@@ -66,109 +167,6 @@
      "press": "view.asiae.co.kr",
      "publishedAt": "2026-11-05T05:23:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/277/0005838617?sid=103"
-    },
-    {
-     "title": "2027 서울 세계청년대회 마스코트 첫 공개…'호비·코비' [포토]",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-05T05:20:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=756147"
-    }
-   ]
-  },
-  {
-   "keyword": "코스피 매도 사이드카",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 19,
-   "recent20": 10,
-   "press": 14,
-   "firstArticleAt": "2026-11-05T04:05:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[속보] 급락장에 코스피 이어 코스닥도 매도 사이드카",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-05T05:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000541925?sid=101"
-    },
-    {
-     "title": "코스피에 이어 코스닥도 급락에 '매도 사이드카' 발동",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-05T05:32:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1172132"
-    },
-    {
-     "title": "[속보] 코스닥 급락에 매도 사이드카 발동",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-05T05:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002719427?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "BTS 스윔 표절 소송 취하",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 14,
-   "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-05T04:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "방탄소년단 'SWIM' 표절 의혹 종결⋯\"美 작곡가들 소송 취하\"",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-05T05:30:00.000Z",
-     "link": "http://www.joynews24.com/view/2023049"
-    },
-    {
-     "title": "BTS ‘스윔’ 표절 소송 원고 자진 취하…합의 여부는 확인 안돼",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-05T05:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002830840?sid=103"
-    },
-    {
-     "title": "BTS 표절 의혹 美 소송 4개월 만에 취하...\"양측 논평 무응답\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-05T05:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002428708?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명 선수단 격려오찬",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 18,
-   "recent20": 6,
-   "press": 13,
-   "firstArticleAt": "2026-11-05T04:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령 “청년 기술인재가 대한민국 미래” 국제기능올림픽 선수단 격...",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-05T05:32:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=72644"
-    },
-    {
-     "title": "李대통령, 기능올림픽 선수단과 오찬…\"실력에 걸맞은 인정 받도록\"",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-05T05:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005599983?sid=100"
-    },
-    {
-     "title": "이 대통령 \"청년 기술인재가 대한민국의 미래\"…기능올림픽 선수단 격려",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-05T05:28:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4116916"
     }
    ]
   },
@@ -177,13 +175,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 11,
+   "articles90": 12,
+   "recent20": 1,
+   "press": 12,
    "firstArticleAt": "2026-11-05T05:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "내년 기초연구 예산 최대라는데…신규과제 예산은 20.7% 감소",
+     "press": "dongascience.com",
+     "publishedAt": "2026-11-05T05:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/584/0000040014?sid=105"
+    },
     {
      "title": "내년 기초연구에 2조 9천억 투자, 지역·청년 과학자 품는다",
      "press": "ohmynews.com",
@@ -195,44 +199,6 @@
      "press": "dailian.co.kr",
      "publishedAt": "2026-11-05T05:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/119/0003151724?sid=105"
-    },
-    {
-     "title": "내년 기초연구에 2조9102억원…1만8516개 과제 역대 최대 지원",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-05T05:02:00.000Z",
-     "link": "https://www.ajunews.com/view/20261105105249390"
-    }
-   ]
-  },
-  {
-   "keyword": "북한 태권도 등재",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-05T04:08:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한지, 인류무형유산 등재 눈앞…북한 태권도 단독 등재 유력",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-05T05:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005759513?sid=103"
-    },
-    {
-     "title": "태권도, 북한 단독 유네스코 등재 사실상 확정",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T05:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016424155?sid=103"
-    },
-    {
-     "title": "태권도, 유네스코 北 단독 등재 유력…한국은 올해 3월에야 신청",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-05T05:16:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109751411305"
     }
    ]
   },
@@ -241,10 +207,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 10,
+   "articles90": 9,
    "recent20": 1,
    "press": 9,
-   "firstArticleAt": "2026-11-05T04:08:00.000Z",
+   "firstArticleAt": "2026-11-05T04:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -269,17 +235,55 @@
    ]
   },
   {
-   "keyword": "데블스플랜3",
+   "keyword": "입법박람회 조정식 국회의장",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 9,
-   "recent20": 2,
+   "articles90": 10,
+   "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-05T04:10:00.000Z",
+   "firstArticleAt": "2026-11-05T04:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "국회입법박람회 개막...조작기소특검법 전운",
+     "press": "natv.go.kr",
+     "publishedAt": "2026-11-05T05:36:00.000Z",
+     "link": "https://www.natv.go.kr/natv/news/newsView.do?newsId=514495"
+    },
+    {
+     "title": "[르포] ‘4족 보행 로봇’이 국회의장에 입법 제안문 전달…“현장의 아...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-05T05:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202795?sid=100"
+    },
+    {
+     "title": "입법박람회에 등장한 사족로봇",
+     "press": "m.skyedaily.com",
+     "publishedAt": "2026-11-05T05:16:00.000Z",
+     "link": "https://m.skyedaily.com/news_view.html?ID=314172"
+    }
+   ]
+  },
+  {
+   "keyword": "장동민의 데블스 플랜3",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-05T04:17:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정현규, '데블스 플랜2' 논란에도 시즌 3 재출연 \"성숙한 자세로 다시 증...",
+     "press": "starnewsk.com",
+     "publishedAt": "2026-11-05T05:32:00.000Z",
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60716"
+    },
     {
      "title": "'서바이벌 1인자' 장동민, 데블스 플랜3 출격...\"내가 살아있는 한 은퇴...",
      "press": "starnewsk.com",
@@ -291,12 +295,70 @@
      "press": "starnewsk.com",
      "publishedAt": "2026-11-05T05:16:00.000Z",
      "link": "http://www.starnewsk.com/news/articleView.html?idxno=60717"
+    }
+   ]
+  },
+  {
+   "keyword": "신진서 83개월 1위",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-05T04:41:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "10월에만 상금 5억원 신진서, 83개월 연속 바둑 랭킹 1위",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-05T05:18:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/052/0002428713"
     },
     {
-     "title": "장동민부터 홍진호·하석진까지…'데블스 플랜3', 역대급 두뇌 전쟁 예...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T05:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014303885"
+     "title": "'10월 상금만 5억원' 신진서, 83개월 연속 바둑 랭킹 1위",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-05T05:08:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261105000990"
+    },
+    {
+     "title": "10월에만 상금 5억…신진서, 83개월 연속 국내 바둑 1위",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-05T05:06:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/421/0009272376"
+    }
+   ]
+  },
+  {
+   "keyword": "재혼 황후, 하루 만에 1위 기록",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-05T04:23:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“언니라고 불러도 될까요?”…‘재혼 황후’ 막장 판타지 통했다…12개...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-05T05:32:00.000Z",
+     "link": "https://m.entertain.naver.com/article/021/0002830598"
+    },
+    {
+     "title": "주지훈 피부색에 이종석 의상까지 이슈몰이…‘재혼 황후’ 하루 만에 ...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-05T05:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005635152"
+    },
+    {
+     "title": "[핫OTT] ‘재혼 황후’, 공개 하루 만에 12개국 1위…글로벌 7위",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-05T04:36:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1135433"
     }
    ]
   },
@@ -305,10 +367,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T04:19:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-05T04:28:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
@@ -331,43 +393,11 @@
      "link": "http://www.press9.kr/news/articleView.html?idxno=85667"
     }
    ]
-  },
-  {
-   "keyword": "스포츠토토 투표권 체험 행사",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T04:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "스포츠토토, 오는 8일 올림픽데이런서 시민들 만난다…투표권 무료 체험...",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-05T04:55:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/396/0000760102"
-    },
-    {
-     "title": "스포츠토토, 8일 올림픽데이런서 시민들 만난다…투표권 무료 체험 행사...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-05T04:42:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/076/0004463564"
-    },
-    {
-     "title": "스포츠토토, 오는 8일 ‘올림픽데이런 2026’서 대규모 시민 참여 프로...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-05T04:10:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/410/0001146299"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 950,
+  "flagged": 956,
   "matched": 415,
   "avgLeadMin": 377,
   "recent": [
