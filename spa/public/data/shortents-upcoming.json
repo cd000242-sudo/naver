@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T12:29:33.473Z",
+ "builtAt": "2026-11-05T12:39:37.715Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,49 +8,51 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "장남, 주진우 고소",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 26,
-   "recent20": 9,
-   "press": 24,
-   "firstArticleAt": "2026-11-05T11:01:00.000Z",
+   "articles90": 31,
+   "recent20": 6,
+   "press": 29,
+   "firstArticleAt": "2026-11-05T11:16:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 李대통령 장남, 주진우 명예훼손 고소…\"골프장 간 적 없다\"",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-05T12:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001072722?sid=100"
+     "title": "\"골프장 간 적 없다\"…李대통령 장남, 주진우 명예훼손 고소",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-05T12:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001271843?sid=100"
     },
     {
-     "title": "이대통령 장남 \"황제 골프 의혹 허위\"… 주진우 의원 고소",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-05T12:18:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=728234"
+     "title": "이재명 대통령 아들, 주진우 고소...\"나는 일반인\"",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-05T12:36:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1172259"
     },
     {
-     "title": "이재명 대통령 장남, 주진우 국민의힘 의원 명예훼손으로 고소···“특...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-05T12:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003481006?sid=100"
+     "title": "李대통령 장남, 주진우 고소…해군기지 '황제골프' 의혹 관련",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T12:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014304984?sid=102"
     }
    ]
   },
   {
-   "keyword": "내란 우두머리 내년 1월26일 선고",
+   "keyword": "내란 우두머리 내년 선고",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 20,
+   "articles90": 15,
    "recent20": 1,
-   "press": 20,
-   "firstArticleAt": "2026-11-05T11:00:00.000Z",
+   "press": 15,
+   "firstArticleAt": "2026-11-05T11:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,14 +77,46 @@
    ]
   },
   {
+   "keyword": "쿠팡 개인정보 유출 과징금",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-05T11:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "법원, '개인정보 유출' 쿠팡에 4000억대 과징금 유지",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-05T12:32:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=880436"
+    },
+    {
+     "title": "법원, 쿠팡 개인정보유출 과징금 4,235억 효력 유지",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-05T12:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000923325?sid=102"
+    },
+    {
+     "title": "법원, 쿠팡의 과징금 집행정지 신청 기각",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-05T12:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003481012?sid=102"
+    }
+   ]
+  },
+  {
    "keyword": "철도노조 12월 파업 예고",
    "sources": [
     "nate"
    ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-05T11:01:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-05T11:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,46 +141,14 @@
    ]
   },
   {
-   "keyword": "쿠팡 개인정보 유출 과징금",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-05T11:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "법원, 쿠팡 개인정보유출 과징금 4,235억 효력 유지",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-05T12:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000923325?sid=102"
-    },
-    {
-     "title": "법원, 쿠팡의 과징금 집행정지 신청 기각",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-05T12:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003481012?sid=102"
-    },
-    {
-     "title": "쿠팡, 4236억원 과징금 집행정지 불발…시정명령은 효력 정지",
-     "press": "industrynews.co.kr",
-     "publishedAt": "2026-11-05T12:12:00.000Z",
-     "link": "https://www.industrynews.co.kr/news/articleView.html?idxno=88993"
-    }
-   ]
-  },
-  {
    "keyword": "리노, 내년 1분기 입대",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-05T11:02:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-05T11:16:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -173,6 +175,7 @@
   {
    "keyword": "이세영",
    "sources": [
+    "signal.bz",
     "google"
    ],
    "articles90": 4,
@@ -203,40 +206,9 @@
    ]
   },
   {
-   "keyword": "검미래위 보완 요구",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T11:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "檢미래위, '위례 신도시 사건' 재차 보완 요구…\"李공소취소, 전혀 논의...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-05T11:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003151947?sid=102"
-    },
-    {
-     "title": "檢미래위, 진상조사단에 재차 보완 요구…\"미진한 부분 반영해라\"(종합...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-05T11:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005600277?sid=102"
-    },
-    {
-     "title": "조작기소 특검 앞둔 檢미래위, 李대통령 사건 등 또 '보완 요구'",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-05T11:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004207036?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "표절",
    "sources": [
+    "signal.bz",
     "google"
    ],
    "articles90": 3,
@@ -265,14 +237,53 @@
      "link": "https://m.entertain.naver.com/article/422/0000923307"
     }
    ]
+  },
+  {
+   "keyword": "작전 지시하는 감독",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 2,
+   "firstArticleAt": "2026-11-05T11:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[프로배구] 도로공사, SOOP에 3-1...김영래 감독에 첫 승 안겨",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-05T12:29:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261105001524"
+    },
+    {
+     "title": "작전 지시하는 김세진 감독",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-05T11:26:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/001/0016425100"
+    },
+    {
+     "title": "작전 지시하는 김영래 감독",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-05T11:10:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/001/0016425072"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1043,
-  "matched": 475,
+  "flagged": 1045,
+  "matched": 476,
   "avgLeadMin": 441,
   "recent": [
+   {
+    "keyword": "케인 뮌헨 재계약!",
+    "hitKeyword": "케인 뮌헨 재계약",
+    "hitAt": "2026-11-05T21:30:00+09:00",
+    "leadMin": 81
+   },
    {
     "keyword": "수사",
     "hitKeyword": "태권도 관장 폭행 수사",
@@ -326,12 +337,6 @@
     "hitKeyword": "조세호 유튜브 복귀",
     "hitAt": "2026-11-05T19:30:00+09:00",
     "leadMin": 1625
-   },
-   {
-    "keyword": "이 대통령 유튜브 소통",
-    "hitKeyword": "조세호 유튜브 복귀",
-    "hitAt": "2026-11-05T19:30:00+09:00",
-    "leadMin": 1615
    }
   ]
  }
