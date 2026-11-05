@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T23:13:35.372Z",
+ "builtAt": "2026-11-05T23:33:42.634Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,31 +8,97 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 9,
+ "measured": 11,
  "candidates": [
   {
-   "keyword": "AI 우려 나스닥 5.5%↓",
+   "keyword": "뉴욕증시 급락",
+   "sources": [
+    "signal.bz",
+    "daum"
+   ],
+   "articles90": 44,
+   "recent20": 18,
+   "press": 40,
+   "firstArticleAt": "2026-11-05T22:35:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "[어제장 오늘장] 블루 쓰나미에 코스피 5% 급락…오늘 반도체주 더 빠지...",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-05T23:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000542072?sid=101"
+    },
+    {
+     "title": "美 나스닥 폭락에 삼전닉스 또 직격탄…프리마켓 10%대 급락",
+     "press": "news.bizwatch.co.kr",
+     "publishedAt": "2026-11-05T23:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/648/0000052353?sid=101"
+    },
+    {
+     "title": "[굿모닝 마켓] '블루 쓰나미' 뉴욕증시 폭락…AI 관련주 중심 매도세",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-05T23:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000542068?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "트럼프 300% 관세",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 41,
+   "articles90": 28,
    "recent20": 11,
-   "press": 37,
-   "firstArticleAt": "2026-11-05T21:44:00.000Z",
+   "press": 28,
+   "firstArticleAt": "2026-11-05T22:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "AI 규제 공포에 나스닥 5.5%↓…하루만에 시총 3천400조원 증발(종합2보...",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T23:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016425325?sid=101"
+     "title": "트럼프 \"미국에 공장 안 지으면 최대 300% 관세\" 강경 기조 유지",
+     "press": "news.mtn.co.kr",
+     "publishedAt": "2026-11-05T23:32:00.000Z",
+     "link": "https://news.mtn.co.kr/article/2026110608301541180"
     },
     {
-     "title": "AI 규제 우려 뉴욕증시 급락…나스닥 5.5%↓",
-     "press": "smedaily.co.kr",
-     "publishedAt": "2026-11-05T23:10:00.000Z",
-     "link": "http://www.smedaily.co.kr/news/articleView.html?idxno=365791"
+     "title": "트럼프, 선거참패에도 \"美에 공장 안 지으면 300%까지 관세\"",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-05T23:30:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=779466"
+    },
+    {
+     "title": "트럼프 \"美에 공장 안 지으면 관세 300%\"…중간선거 참패에도 관세 고수",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-05T23:28:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=242464"
+    }
+   ]
+  },
+  {
+   "keyword": "AI 투매로 나스닥 5.5%↓",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 19,
+   "recent20": 2,
+   "press": 17,
+   "firstArticleAt": "2026-11-05T22:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "AI 아마겟돈 코스피 덮치나…’블랙 프라이데이' 우려",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-05T23:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004008129?sid=101"
+    },
+    {
+     "title": "‘AI 규제 강화’ 우려에 투매 확산…나스닥 5.5%, S&P500 4.4% 폭락",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-05T23:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002830979?sid=101"
     },
     {
      "title": "나스닥 5.5% 폭락…AI 관련주 무너지며 시총 2조5천억달러 증발",
@@ -43,67 +109,34 @@
    ]
   },
   {
-   "keyword": "조작기소 특검법 본회의 상정",
+   "keyword": "차예련 학폭 갑질 논란",
    "sources": [
     "nate"
    ],
-   "articles90": 12,
+   "articles90": 4,
    "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-05T21:46:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-05T22:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'조작기소 특검법' 오늘 처리…국힘 필리버스터 이어 장외로",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-05T23:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000519410?sid=100"
+     "title": "차예련, 학폭 의혹에 \"사실무근\" 반박했는데…변호사 분석은 달랐다",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-05T23:27:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004122523"
     },
     {
-     "title": "'조작기소특검법' 필리버스터 진행 중…오늘 與주도 처리 전망",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-05T23:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000649336?sid=102"
+     "title": "\"학폭 사실 아냐\" 차예련 근황...공동구매 다시 오픈",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-05T23:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005437463"
     },
     {
-     "title": "진중권 \"조작기소 뻔뻔한 자가 둘…하나는 이재명, 다른 하나는 윤석열...",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-05T22:48:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/324358/?sc=Naver"
-    }
-   ]
-  },
-  {
-   "keyword": "아파트",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 10,
-   "recent20": 4,
-   "press": 10,
-   "firstArticleAt": "2026-11-05T22:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"복도 적치물·열린 방화문 위험\"…영월소방서, 노후 아파트 불시 단속",
-     "press": "aptn.co.kr",
-     "publishedAt": "2026-11-05T23:12:00.000Z",
-     "link": "http://www.aptn.co.kr/news/articleView.html?idxno=113205"
-    },
-    {
-     "title": "서울·수도권 아파트 분양가, 왜 비싼가 했더니…공사비 아닌 땅값 탓",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-05T23:10:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443355"
-    },
-    {
-     "title": "서울 아파트 매매값 91주째 상승…상승폭은 둔화",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-05T23:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001976948?sid=101"
+     "title": "'학폭·갑질 의혹' 차예련, 추가 폭로 터졌다…청담동 미용실서 \"감정 쓰...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-05T23:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000783202"
     }
    ]
   },
@@ -112,13 +145,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T21:44:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-05T22:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "윤석열 '내란 우두머리' 2심 내년 1월 26일 선고",
+     "press": "lawtv.kr",
+     "publishedAt": "2026-11-05T23:26:00.000Z",
+     "link": "https://www.lawtv.kr/news/articleView.html?idxno=61347"
+    },
     {
      "title": "尹 \"'조작기소 주장' 권력자들 한둘 아냐\"…내란 2심 1월 26일 선고",
      "press": "news.tvchosun.com",
@@ -130,51 +169,45 @@
      "press": "mbn.co.kr",
      "publishedAt": "2026-11-05T22:39:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/057/0001976937?sid=102"
-    },
-    {
-     "title": "\"윤석열 전 대통령 항소심, 내란 혐의로 또다시 운명의 날 앞두다\"",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-05T22:18:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=884342"
     }
    ]
   },
   {
-   "keyword": "이승기 이다인 둘째 공개",
+   "keyword": "진쓰레블",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
    "articles90": 4,
-   "recent20": 0,
+   "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-05T22:14:00.000Z",
+   "firstArticleAt": "2026-11-05T22:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이승기♥이다인, 생후 4개월 둘째 아들 첫 공개…가족사진 눈길",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-05T22:24:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=779415"
+     "title": "'남미서 뺑소니 사망' 진쓰레블 유가족, 간곡한 호소 \"한국 무사히 돌아...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-05T23:15:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004463773"
     },
     {
-     "title": "이승기♥이다인 딸·아들 공개…\"아빠 닮아, 너무 예뻐\" 뜨거운 반응 [엑...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-05T22:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002077328"
+     "title": "故 진쓰레블 친형 “가족들 볼리비아로..귀국 후 국내 장례 준비”[Oh!쎈...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-05T22:54:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005635480"
     },
     {
-     "title": "이승기♥이다인, 생후 4개월 둘째 아들 공개…두 자녀와 환한 미소",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-05T22:16:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009273411"
+     "title": "미소만 남기고..'뺑소니 사망' 故 진쓰레블 유족, 볼리비아 출국 '애도'...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-05T22:44:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003485052"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1076,
+  "flagged": 1081,
   "matched": 514,
   "avgLeadMin": 489,
   "recent": [
