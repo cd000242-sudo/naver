@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T04:33:01.803Z",
+ "builtAt": "2026-11-05T04:43:05.999Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "장동민 데블스 플랜3",
+   "keyword": "조작기소 특검법 본회의 상정",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 62,
-   "recent20": 3,
-   "press": 26,
-   "firstArticleAt": "2026-11-05T03:04:00.000Z",
+   "articles90": 22,
+   "recent20": 5,
+   "press": 21,
+   "firstArticleAt": "2026-11-05T03:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "여야, 국정감사 후 첫 본회의부터 '강대강 대치' 예고",
+     "press": "goodmorningcc.com",
+     "publishedAt": "2026-11-05T04:42:00.000Z",
+     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=455230"
+    },
+    {
+     "title": "'조작기소특검' 본회의로…野 \"필리버스터\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-05T04:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000923148?sid=100"
+    },
+    {
+     "title": "與, ‘조작기소 특검’ 속전속결…“오후 3시 본회의 상정”",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-05T04:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000366496?sid=115"
+    }
+   ]
+  },
+  {
+   "keyword": "장동민 서바이벌 은퇴 없다",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 3,
+   "press": 13,
+   "firstArticleAt": "2026-11-05T03:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“악마가 장동민을 데려왔다”…‘데블스 플랜3’, 목말랐던 ‘뇌지컬...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-05T04:34:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001148230"
+    },
+    {
+     "title": "장동민, 서바이벌 은퇴설 일축 '살아있는 한 은퇴는 없다'",
+     "press": "the-biz.co.kr",
+     "publishedAt": "2026-11-05T04:34:00.000Z",
+     "link": "http://www.the-biz.co.kr/news/articleView.html?idxno=730742"
+    },
     {
      "title": "[핌in현장] 장동민 \"살아있는 한 서바이벌 은퇴 없다\"…'데블스 플랜' 더...",
      "press": "newspim.com",
      "publishedAt": "2026-11-05T04:27:00.000Z",
      "link": "https://www.newspim.com/news/view/20261105000718"
-    },
-    {
-     "title": "장동민·하석진·넉살·신동·존박 외, 예능 천재부터 두뇌 천재까지…...",
-     "press": "the-biz.co.kr",
-     "publishedAt": "2026-11-05T04:24:00.000Z",
-     "link": "http://www.the-biz.co.kr/news/articleView.html?idxno=730741"
-    },
-    {
-     "title": "신동 “다이어트엔 ‘데블스 플랜3’가 최고”…‘인간 마운자로’ 자처",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-05T04:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001148229"
-    }
-   ]
-  },
-  {
-   "keyword": "미국 중간선거 결과",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 26,
-   "recent20": 4,
-   "press": 21,
-   "firstArticleAt": "2026-11-05T03:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[중간선거] 미국 주지사 당선인 36명 중 34명 “데이터센터 규제” 입장",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-05T04:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012287913?sid=104"
-    },
-    {
-     "title": "[美 중간선거] 한성숙 \"민주당 승리 강력…한미 관계 큰 변화 없을 것\"",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-05T04:16:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=902056"
-    },
-    {
-     "title": "미 중간선거서 한국계 3명 당선…민주당 하원으로 의회 입성",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-05T04:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001163352?sid=104"
     }
    ]
   },
@@ -79,13 +79,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 0,
-   "press": 13,
-   "firstArticleAt": "2026-11-05T03:04:00.000Z",
+   "articles90": 11,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-05T03:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "코스피도 ‘블루웨이브’… 반도체·전력기기 급락에 5400 사수 ‘안간힘...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-05T04:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004679057?sid=101"
+    },
     {
      "title": "[외환] 셀 물량에도 커스터디 달러 매수에 1,340원대로…코스피 주시",
      "press": "news.einfomax.co.kr",
@@ -97,12 +103,6 @@
      "press": "tokenpost.kr",
      "publishedAt": "2026-11-05T04:10:00.000Z",
      "link": "https://www.tokenpost.kr/news/breaking/433087"
-    },
-    {
-     "title": "반도체주 급락에 켜진 매도 사이드카...코스피 장중 5400선 붕괴 [TF사진...",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-05T04:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000549068?sid=101"
     }
    ]
   },
@@ -111,24 +111,24 @@
    "sources": [
     "google"
    ],
-   "articles90": 8,
-   "recent20": 6,
-   "press": 8,
+   "articles90": 9,
+   "recent20": 4,
+   "press": 9,
    "firstArticleAt": "2026-11-05T03:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "유치원생에 물어 뜯기고도 ‘아동학대’ 고소당한 교사…세종교육청 “...",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-05T04:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003563064?sid=102"
+    },
+    {
      "title": "인천시교육청-국립국악원, 섬마을·유치원까지 국악교육 확대",
      "press": "news.lghellovision.net",
      "publishedAt": "2026-11-05T04:30:00.000Z",
      "link": "http://news.lghellovision.net/news/articleView.html?idxno=561187"
-    },
-    {
-     "title": "충남교육청유아교육원, 유치원 원장 역량강화 연수 운영",
-     "press": "cctimes.kr",
-     "publishedAt": "2026-11-05T04:26:00.000Z",
-     "link": "http://www.cctimes.kr/news/articleView.html?idxno=935740"
     },
     {
      "title": "4살 여자아이 유치원 버스에 3시간 갇혀…부모에겐 “등원 안 했다”",
@@ -139,60 +139,28 @@
    ]
   },
   {
-   "keyword": "경상수지 600억 달러 돌파",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-05T03:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[외환] 셀 물량에도 커스터디 달러 매수에 1,340원대로…코스피 주시",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-05T04:10:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443235"
-    },
-    {
-     "title": "9월 한달 경상수지 흑자, 지난해 연간 절반 수준",
-     "press": "naeil.com",
-     "publishedAt": "2026-11-05T04:06:00.000Z",
-     "link": "https://www.naeil.com/news/read/607746?ref=naver"
-    },
-    {
-     "title": "경상수지 첫 600억 달러 돌파… 3개월 연속 사상 최대",
-     "press": "m.skyedaily.com",
-     "publishedAt": "2026-11-05T04:00:00.000Z",
-     "link": "https://m.skyedaily.com/news_view.html?ID=314147"
-    }
-   ]
-  },
-  {
    "keyword": "주식",
    "sources": [
     "google"
    ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-05T03:28:00.000Z",
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-05T04:04:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
-    {
-     "title": "피델리티 티머 “60/40, 주식·채권 음의 상관 때만 작동”",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-05T04:32:00.000Z",
-     "link": "https://www.tokenpost.kr/news/market/433096"
-    },
     {
      "title": "서루주식회사, 지하수관정 개발 견적 재검토 서비스 도입… 현장별 시공...",
      "press": "woodkorea.co.kr",
      "publishedAt": "2026-11-05T04:32:00.000Z",
      "link": "https://www.woodkorea.co.kr/news/articleView.html?idxno=92363"
+    },
+    {
+     "title": "피델리티 티머 “60/40, 주식·채권 음의 상관 때만 작동”",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-05T04:32:00.000Z",
+     "link": "https://www.tokenpost.kr/news/market/433096"
     },
     {
      "title": "수능일, 주식시장 1시간 늦게 열린다…오전 10시 개장",
@@ -203,74 +171,41 @@
    ]
   },
   {
-   "keyword": "직업계고 취업률 55.8%",
+   "keyword": "대통령 선수단 격려오찬",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-05T03:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "직업계고 취업률 55.8%로 '반등'…300인 이상 기업 취업 비중 5년 연속 상...",
-     "press": "youthdaily.co.kr",
-     "publishedAt": "2026-11-05T04:32:00.000Z",
-     "link": "https://www.youthdaily.co.kr/news/article.html?no=229416"
-    },
-    {
-     "title": "[그래픽] 직업계고 취업률 55.8%…4년 만에 '반등'",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T04:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303747?sid=101"
-    },
-    {
-     "title": "직업계고 졸업생, 300인 이상 기업 취업비중 5년째 상승",
-     "press": "jeonmae.co.kr",
-     "publishedAt": "2026-11-05T04:22:00.000Z",
-     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1308930"
-    }
-   ]
-  },
-  {
-   "keyword": "주말 서울 영하 5도 예상",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
+   "articles90": 26,
    "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-05T03:19:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-05T03:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "입동 앞두고 강원 영하 5도 강추위…주말 내륙·산지 눈 가능성",
-     "press": "kado.net",
-     "publishedAt": "2026-11-05T04:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000209574?sid=103"
+     "title": "이재명 대통령 부부, 국제기능올림픽 선수단 청와대 초청...종합 2위 성...",
+     "press": "ppss.kr",
+     "publishedAt": "2026-11-05T04:38:00.000Z",
+     "link": "https://www.ppss.kr/news/articleView.html?idxno=319202"
     },
     {
-     "title": "\"패딩 꺼내야겠네\"…주말 전국 곳곳 추위·강풍",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-05T04:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006404171?sid=103"
+     "title": "건배하는 이재명 대통령 부부",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T04:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303725?sid=100"
     },
     {
-     "title": "\"주말부터 겨울 모드\"…'입동' 맞춰 영하권 추위 온다",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-05T03:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001271758?sid=103"
+     "title": "국제기능올림픽 선수단 활약상 영상 시청하는 이재명 대통령 부부",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T04:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303727?sid=100"
     }
    ]
   },
   {
    "keyword": "조정식 의장의 입법박람회 참석",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 13,
    "recent20": 1,
@@ -292,59 +227,63 @@
      "link": "https://n.news.naver.com/mnews/article/003/0014303657?sid=100"
     },
     {
-     "title": "입법 박람회 참석한 조정식 국회의장과 국회의원들",
+     "title": "입법 박람회 참석하는 조정식 국회의장",
      "press": "newsis.com",
      "publishedAt": "2026-11-05T04:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303661?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/003/0014303659?sid=100"
     }
    ]
   },
   {
-   "keyword": "대통령 선수단 격려오찬",
+   "keyword": "2027 서울청년대회 기자간담회",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 25,
-   "recent20": 6,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T03:40:00.000Z",
+   "articles90": 12,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-05T03:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "건배하는 이재명 대통령 부부",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T04:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303725?sid=100"
+     "title": "2027 서울 세계청년대회 준비 본격화…'190개국 50만 청년 맞이한다'",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-05T04:38:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=242372"
     },
     {
-     "title": "국제기능올림픽 선수단 활약상 영상 시청하는 이재명 대통령 부부",
+     "title": "천주교서울대교구 2027 서울 세계청년대회 조직위원회 기자간담회",
      "press": "newsis.com",
-     "publishedAt": "2026-11-05T04:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303727?sid=100"
+     "publishedAt": "2026-11-05T04:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303693?sid=103"
     },
     {
-     "title": "격려사 하는 이재명 대통령",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T04:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303715?sid=100"
+     "title": "정순택 대주교 '2027 서울 세계청년대회 성공 개최를 위해'",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-05T04:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009272227?sid=103"
     }
    ]
   },
   {
    "keyword": "친환경 버스 부가세 유지해야",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
    "firstArticleAt": "2026-11-05T03:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "인천시, 전국 16개 광역자치단체와 '친환경 버스 부가세 면제 유지' 공동...",
+     "press": "kihoilbo.co.kr",
+     "publishedAt": "2026-11-05T04:36:00.000Z",
+     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3039979"
+    },
     {
      "title": "인천시 등 16개 시도, 친환경버스 부가세 면제 유지 공동 대응",
      "press": "kmaeil.com",
@@ -356,86 +295,98 @@
      "press": "discoverynews.kr",
      "publishedAt": "2026-11-05T03:44:00.000Z",
      "link": "https://www.discoverynews.kr/news/articleView.html?idxno=1105903"
-    },
-    {
-     "title": "인천시 \"친환경 버스 부가세 면제 유지 해야\"",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-05T03:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005350645?sid=102"
     }
    ]
   },
   {
-   "keyword": "필리핀",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T03:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "양구군, 필리핀 계절근로자 유치 확대…농촌 인력난 해소 나선다",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-05T04:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001228759?sid=102"
-    },
-    {
-     "title": "양구군, 필리핀 루이지애나시와 계절근로자 유치 협약…농촌 인력난 대...",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-05T03:28:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5080102"
-    },
-    {
-     "title": "양구군-필리핀 라구나주 루이지애나시 업무협약 체결",
-     "press": "jeonmae.co.kr",
-     "publishedAt": "2026-11-05T03:08:00.000Z",
-     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1308821"
-    }
-   ]
-  },
-  {
-   "keyword": "장동혁 의원총회 참석",
+   "keyword": "이번 주말 서울 영하 5도",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 2,
-   "firstArticleAt": "2026-11-05T03:06:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-05T03:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[포토] 의원총회 참석한 장동혁-정점식",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-05T04:30:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261105010002053"
+     "title": "토요일, 서울 ‘체감 영하 5도’…올 가을 가장 춥다",
+     "press": "weekly.khan.co.kr",
+     "publishedAt": "2026-11-05T04:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/033/0000053167?sid=102"
     },
     {
-     "title": "의원총회 참석하는 국민의힘 대표와 지도부",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T03:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303539?sid=100"
+     "title": "“패딩 안 꺼내면 큰일”…내일부터 체감 영하 5도, 강풍까지",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-05T04:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006404171?sid=103"
     },
     {
-     "title": "의원총회 참석한 장동혁 국민의힘 대표",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T03:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303533?sid=100"
+     "title": "[주말날씨] 겨울 문턱 입동에 기온 뚝…서울 영하권·강원 산지 눈 예보",
+     "press": "kizmom.com",
+     "publishedAt": "2026-11-05T03:28:00.000Z",
+     "link": "https://www.kizmom.com/news/articleView.html?idxno=113782"
+    }
+   ]
+  },
+  {
+   "keyword": "마라톤",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-05T03:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "도심마라톤, 관리협의체 만든다",
+     "press": "naeil.com",
+     "publishedAt": "2026-11-05T04:08:00.000Z",
+     "link": "https://www.naeil.com/news/read/607752?ref=naver"
+    },
+    {
+     "title": "효성티앤씨, 친환경 섬유 '리젠'으로 달린다… 마라톤 참가자에 굿즈 제...",
+     "press": "newsdream.kr",
+     "publishedAt": "2026-11-05T04:06:00.000Z",
+     "link": "http://www.newsdream.kr/news/articleView.html?idxno=121563"
+    },
+    {
+     "title": "효성티앤씨, ‘리젠 되돌림 캠페인’ 시민 참여로 확대…기부 마라톤서...",
+     "press": "todayeconomic.com",
+     "publishedAt": "2026-11-05T03:44:00.000Z",
+     "link": "https://www.todayeconomic.com/news/article.html?no=32738"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 930,
-  "matched": 399,
-  "avgLeadMin": 379,
+  "flagged": 934,
+  "matched": 402,
+  "avgLeadMin": 382,
   "recent": [
+   {
+    "keyword": "이란",
+    "hitKeyword": "민주당 이란전 종료 요구",
+    "hitAt": "2026-11-05T13:30:00+09:00",
+    "leadMin": 1416
+   },
+   {
+    "keyword": "유병권 김수미",
+    "hitKeyword": "유병권 김수미 추도",
+    "hitAt": "2026-11-05T13:30:00+09:00",
+    "leadMin": 740
+   },
+   {
+    "keyword": "유병권 성형수술",
+    "hitKeyword": "유병권 김수미 추도",
+    "hitAt": "2026-11-05T13:30:00+09:00",
+    "leadMin": 297
+   },
    {
     "keyword": "금감원 퇴직연금 캠페인 출범",
     "hitKeyword": "여성 마라톤 완주 캠페인",
@@ -477,24 +428,6 @@
     "hitKeyword": "차경은 11월 결혼",
     "hitAt": "2026-11-05T12:00:00+09:00",
     "leadMin": 318
-   },
-   {
-    "keyword": "하지수 예능 포착",
-    "hitKeyword": "이찬혁 하지수 전참시",
-    "hitAt": "2026-11-05T12:00:00+09:00",
-    "leadMin": 177
-   },
-   {
-    "keyword": "이찬혁 하지수 예능",
-    "hitKeyword": "이찬혁 하지수 전참시",
-    "hitAt": "2026-11-05T12:00:00+09:00",
-    "leadMin": 167
-   },
-   {
-    "keyword": "하지수 이찬혁 스윙댄스",
-    "hitKeyword": "이찬혁 하지수 전참시",
-    "hitAt": "2026-11-05T12:00:00+09:00",
-    "leadMin": 157
    }
   ]
  }
