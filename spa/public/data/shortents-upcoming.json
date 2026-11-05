@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T11:59:19.223Z",
+ "builtAt": "2026-11-05T12:09:26.609Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 14,
  "candidates": [
   {
-   "keyword": "내란 우두머리 내년 1월26일 선고",
+   "keyword": "내란 우두머리 1월 26일 선고",
    "sources": [
     "nate"
    ],
-   "articles90": 26,
-   "recent20": 4,
-   "press": 26,
-   "firstArticleAt": "2026-11-05T10:33:00.000Z",
+   "articles90": 28,
+   "recent20": 5,
+   "press": 27,
+   "firstArticleAt": "2026-11-05T10:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'내란 우두머리' 2심, 내년 1월 선고…尹 \"호소형 계엄이었다\"",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-05T11:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005838842?sid=102"
+     "title": "윤석열, 격앙된 79분 최후진술…내년 1월26일 선고",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-05T12:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000549287?sid=102"
     },
     {
-     "title": "‘내란 수괴’ 반성은 없었다···윤석열 “헌법 수호하려” 김용현 “...",
-     "press": "weekly.khan.co.kr",
-     "publishedAt": "2026-11-05T11:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/033/0000053178?sid=102"
+     "title": "尹 '내란 우두머리' 2심 내년 1월 26일 선고",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-05T12:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000923319?sid=102"
     },
     {
-     "title": "\"난 무죄\" 윤석열 26쪽 분량 최후진술…선고는 내년 1월",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-05T11:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400978?sid=102"
+     "title": "尹 1시간 20분간 최후 진술…'내란우두머리' 2심 내년 1월 26일 선고",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-05T12:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000963930?sid=102"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-05T10:30:00.000Z",
+   "articles90": 11,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-05T10:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,18 +75,55 @@
    ]
   },
   {
-   "keyword": "법원, 쿠팡 과징금 유지",
+   "keyword": "리노, 내년 1분기 입대 예정",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 6,
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-05T10:48:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "스트레이 키즈, 내년 1분기 군입대 스타트…첫 주자는 리노[공식]",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-05T12:08:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1793878660530438007"
+    },
+    {
+     "title": "스트레이 키즈 리노, 내년 1분기 병역 의무 이행… 팀 내 첫 주자",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-05T12:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000051621"
+    },
+    {
+     "title": "스트레이 키즈 리노, 팀 첫 번째로 입대… “내년 1분기 이행 예정” [공...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-05T11:43:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003539473"
+    }
+   ]
+  },
+  {
+   "keyword": "쿠팡 개인정보 유출 과징금",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 7,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-05T10:32:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-05T10:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "法, 쿠팡 '개인정보 유출' 과징금 '효력 유지'",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-05T12:02:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2015194"
+    },
     {
      "title": "법원, 개인정보 유출 쿠팡에 개보위 4200억원 과징금 유지",
      "press": "zdnet.co.kr",
@@ -98,22 +135,86 @@
      "press": "news.mtn.co.kr",
      "publishedAt": "2026-11-05T11:20:00.000Z",
      "link": "https://news.mtn.co.kr/article/2026110520175957304"
+    }
+   ]
+  },
+  {
+   "keyword": "세브란스 흉기 난동 구속영장",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-05T10:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"삼단봉 있는데\" 비상벨 눌러도‥의사는 이미 흉기에 '중상'",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-05T11:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533789?sid=102"
     },
     {
-     "title": "법원 쿠팡 개인정보 유출 과징금 4236억 효력 유지, 시정명령은 집행정...",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-05T10:54:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=451323"
+     "title": "경찰, ‘세브란스 흉기 난동’ 50대 여성 구속영장 신청",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-05T11:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004679270?sid=102"
+    },
+    {
+     "title": "\"집에서 흉기 챙겼다\"…의사 공격한 여성 '살인미수' 적용",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-05T11:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000519365?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "표절",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-05T11:15:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "방탄소년단 '스윔' 표절 소송, 美 작곡가들 취하 요청으로 마무리",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-05T12:04:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109762271578"
+    },
+    {
+     "title": "방탄소년단, '스윔' 표절 의혹 일단락…원고 전원 자진 취하",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-05T11:37:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000051619"
+    },
+    {
+     "title": "BTS '스윔' 표절 소송 종결…원고 자진 취하",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-05T11:15:00.000Z",
+     "link": "https://m.entertain.naver.com/article/422/0000923307"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1033,
-  "matched": 474,
-  "avgLeadMin": 440,
+  "flagged": 1038,
+  "matched": 475,
+  "avgLeadMin": 441,
   "recent": [
+   {
+    "keyword": "수사",
+    "hitKeyword": "태권도 관장 폭행 수사",
+    "hitAt": "2026-11-05T21:00:00+09:00",
+    "leadMin": 1291
+   },
    {
     "keyword": "삼성전자 주가",
     "hitKeyword": "삼성전자 반도체 급락",
@@ -167,12 +268,6 @@
     "hitKeyword": "조세호 유튜브 복귀",
     "hitAt": "2026-11-05T19:30:00+09:00",
     "leadMin": 1615
-   },
-   {
-    "keyword": "유튜브 대통령 Y 소통 방송",
-    "hitKeyword": "조세호 유튜브 복귀",
-    "hitAt": "2026-11-05T19:30:00+09:00",
-    "leadMin": 1605
    }
   ]
  }
