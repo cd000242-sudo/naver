@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T03:52:41.938Z",
+ "builtAt": "2026-11-05T04:02:45.538Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,116 +8,90 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "데블스 플랜 제작발표회",
+   "keyword": "조작기소 특검법 본회의 상정",
    "sources": [
     "nate"
    ],
-   "articles90": 69,
-   "recent20": 14,
-   "press": 26,
-   "firstArticleAt": "2026-11-05T03:00:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "[S포토] 정원영, '서바이벌에 나타난 올라프' (데블스플랜3)",
-     "press": "stardailynews.co.kr",
-     "publishedAt": "2026-11-05T03:46:00.000Z",
-     "link": "https://www.stardailynews.co.kr/news/articleView.html?idxno=601437"
-    },
-    {
-     "title": "[S포토] 이도, '강사 이름이 한반도 GOAT와 같으시네요' (데블스플랜3)",
-     "press": "stardailynews.co.kr",
-     "publishedAt": "2026-11-05T03:44:00.000Z",
-     "link": "https://www.stardailynews.co.kr/news/articleView.html?idxno=601436"
-    },
-    {
-     "title": "[S포토] 넉살, '작은 것의 반란' (데블스플랜3)",
-     "press": "stardailynews.co.kr",
-     "publishedAt": "2026-11-05T03:40:00.000Z",
-     "link": "https://www.stardailynews.co.kr/news/articleView.html?idxno=601433"
-    }
-   ]
-  },
-  {
-   "keyword": "코스피 매도 사이드카 발동",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 22,
+   "articles90": 52,
    "recent20": 1,
-   "press": 22,
-   "firstArticleAt": "2026-11-05T02:26:00.000Z",
-   "exclusive": false,
+   "press": 36,
+   "firstArticleAt": "2026-11-05T02:33:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "'미 중간선거 충격파' 코스피·코스닥 동시 사이드카",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-05T03:36:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3743093"
+     "title": "본회의 오르는 조작기소 특검법…국힘, 전 안건 필리버스터 예고",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-05T03:44:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=171986"
     },
     {
-     "title": "반도체 쇼크에 매도 사이드카 발동 … 코스피 5460선 급락",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-05T03:24:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/05/2026110500174.html"
+     "title": "여야, 조작기소 특검법 놓고 입장차… 국회 본희의 안건 협상 결렬 [뉴시...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T03:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303601?sid=100"
     },
     {
-     "title": "반도체 '투자 한파' 우려‥코스피 매도 사이드카",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-05T03:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533674?sid=101"
+     "title": "'조작기소 특검법'에 국회 정면충돌…여야 협상 결렬, 필리버스터 전면...",
+     "press": "ppss.kr",
+     "publishedAt": "2026-11-05T03:39:00.000Z",
+     "link": "https://www.ppss.kr/news/articleView.html?idxno=319256"
     }
    ]
   },
   {
-   "keyword": "다문화 혼인 감소",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 21,
-   "recent20": 3,
-   "press": 21,
-   "firstArticleAt": "2026-11-05T03:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "경북 출생아 100명 중 6명은 다문화 가정⋯전국 평균 웃돌아",
-     "press": "kbsm.net",
-     "publishedAt": "2026-11-05T03:48:00.000Z",
-     "link": "https://www.kbsm.net/news/view.php?idx=540572"
-    },
-    {
-     "title": "증가하던 다문화 혼인·출생 소폭 감소…작년 혼인 100쌍 중 9쌍 다문화",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-05T03:38:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/324264/?sc=Naver"
-    },
-    {
-     "title": "지난해 다문화 혼인 2만1399건… 귀화자 감소에 4년 만에 줄어",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-05T03:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202781?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "청해부대 확대",
+   "keyword": "데블스 플랜 제작발표회",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 24,
-   "recent20": 0,
-   "press": 21,
-   "firstArticleAt": "2026-11-05T02:23:00.000Z",
+   "articles90": 67,
+   "recent20": 6,
+   "press": 25,
+   "firstArticleAt": "2026-11-05T03:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘어차피 우승은 장동민?’…더 강력해진 ‘데블스 플랜3’ 최강자들의...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-05T03:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001146297"
+    },
+    {
+     "title": "재재-이도 '데블스 플랜3 뉴비들의 반란'[엑's HD포토]",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-05T03:57:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002077064"
+    },
+    {
+     "title": "'데블스 플랜: 데드 어게인' 장동민·홍진호·하석진 등 출연진 총출동...",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-05T03:54:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000519275"
+    }
+   ]
+  },
+  {
+   "keyword": "청해부대 작전구역 확대",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 17,
+   "recent20": 1,
+   "press": 15,
+   "firstArticleAt": "2026-11-05T02:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "진보당 “청해부대 호르무즈 우회 파병 철회하라” 위성락 경질 촉구",
+     "press": "vop.co.kr",
+     "publishedAt": "2026-11-05T04:00:00.000Z",
+     "link": "https://vop.co.kr/A00001697470.html"
+    },
     {
      "title": "정부 \"청해부대 75명 추가 파견...작전지역도 확대\"",
      "press": "ytn.co.kr",
@@ -129,108 +103,6 @@
      "press": "ppss.kr",
      "publishedAt": "2026-11-05T03:18:00.000Z",
      "link": "https://www.ppss.kr/news/articleView.html?idxno=319246"
-    },
-    {
-     "title": "청해부대 작전 구역 오만 남방까지 확대…초계기 추가",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-05T03:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400853?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "조작기소 특검법 법사위 통과",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 16,
-   "recent20": 3,
-   "press": 14,
-   "firstArticleAt": "2026-11-05T02:23:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국힘, 與 '조작기소 특검법' 강행에 필리버스터·장외투쟁 예고",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T03:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303599?sid=100"
-    },
-    {
-     "title": "정점식 “李정권 ‘최후의 선’ 넘었다…조작기소 특검법은 최악의 의회...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-05T03:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002719378?sid=100"
-    },
-    {
-     "title": "'조작기소 특검법' 강행 수순에 국민의힘 필리버스터…장외투쟁 검토도",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-05T03:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003151688?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "교통",
-   "sources": [
-    "google"
-   ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-05T03:02:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "고속철 통합 효과 가시화…하루 3만6000명 더 타고 교통비 515억원 절감",
-     "press": "thepowernews.co.kr",
-     "publishedAt": "2026-11-05T03:50:00.000Z",
-     "link": "https://www.thepowernews.co.kr/view.php?ud=202611051248286996de3f0aa1be_7"
-    },
-    {
-     "title": "여수시, 국가공간정보발전 유공 국토교통부장관 기관표창",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-05T03:42:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=93153"
-    },
-    {
-     "title": "장위6구역 재개발조합 교통안전시설 설치 공사업체 선정 입찰공고",
-     "press": "arunews.com",
-     "publishedAt": "2026-11-05T03:32:00.000Z",
-     "link": "https://www.arunews.com/news/articleView.html?idxno=69089"
-    }
-   ]
-  },
-  {
-   "keyword": "9월 경상수지 600억달러 돌파",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-05T02:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "반도체 수출 호조에 9월 경상수지 흑자 600억달러 돌파···사상 최대 기...",
-     "press": "ngonews.kr",
-     "publishedAt": "2026-11-05T03:26:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=242400"
-    },
-    {
-     "title": "경상수지 첫 600억 달러 돌파…“반도체 호조”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-05T03:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012287882?sid=101"
-    },
-    {
-     "title": "반도체가 다했다…경상흑자 사상 첫 600억 달러 돌파",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-05T03:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000963786?sid=101"
     }
    ]
   },
@@ -239,10 +111,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 19,
+   "articles90": 16,
    "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-05T02:29:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-05T02:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -269,12 +141,12 @@
   {
    "keyword": "발언하는 정점식 원내대표",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 12,
+   "articles90": 10,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-05T02:30:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-05T02:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -301,13 +173,12 @@
   {
    "keyword": "하이닉스 주가 하락",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T02:26:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-05T02:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -332,67 +203,100 @@
    ]
   },
   {
-   "keyword": "데드 어게인 발표회",
+   "keyword": "필리핀",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 7,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T03:00:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-05T02:34:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "'데블스플랜3', \"가장 강력한 장동민\" 견제할 오현민→정현규 16人 데드...",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-05T03:24:00.000Z",
-     "link": "http://www.joynews24.com/view/2022979"
+     "title": "양구군, 필리핀 루이지애나시와 계절근로자 유치 협약…농촌 인력난 대...",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-05T03:28:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5080102"
     },
     {
-     "title": "[포토] 재재 '제작발표회 MC에서 출연자로 변신'",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-05T03:20:00.000Z",
-     "link": "http://www.joynews24.com/view/2022980"
+     "title": "양구군-필리핀 라구나주 루이지애나시 업무협약 체결",
+     "press": "jeonmae.co.kr",
+     "publishedAt": "2026-11-05T03:08:00.000Z",
+     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1308821"
     },
     {
-     "title": "다시 시작된 두뇌 서바이벌 '데블스 플랜' 제작발표회 [TF사진관]",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-05T03:18:00.000Z",
-     "link": "https://m.entertain.naver.com/article/629/0000549061"
+     "title": "양구군, 필리핀 루이지애나시와 계절근로자 유치 협약",
+     "press": "chmbc.co.kr",
+     "publishedAt": "2026-11-05T02:36:00.000Z",
+     "link": "https://chmbc.co.kr/article/14127012"
     }
    ]
   },
   {
-   "keyword": "열차",
+   "keyword": "유치원",
    "sources": [
     "signal.bz",
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-05T02:28:00.000Z",
+   "firstArticleAt": "2026-11-05T02:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "인천지하철 1·2호선 전 열차에 5G 와이파이…퀴즈 맞히면 상품권 증정",
-     "press": "tournews21.com",
-     "publishedAt": "2026-11-05T03:40:00.000Z",
-     "link": "https://www.tournews21.com/news/articleView.html?idxno=147610"
+     "title": "부여 규암초병설유치원, '규암 꿈·행복 어울림 축제' 개최",
+     "press": "chungnamilbo.co.kr",
+     "publishedAt": "2026-11-05T03:20:00.000Z",
+     "link": "http://www.chungnamilbo.co.kr/news/articleView.html?idxno=919013"
     },
     {
-     "title": "[공연소식] 국립정동극장 세실, 연극 '멜로드라마 열차' 내달 공연",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T02:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016423693?sid=103"
+     "title": "안재욱, 민효린♥태양과 인연 있었다…\"자녀들 같은 유치원 다녀, 달리...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-05T02:54:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000486659"
     },
     {
-     "title": "커튼·책·개미가 살아나는 열차…국립정동극장 〈멜로드라마 열차〉",
-     "press": "sctoday.co.kr",
-     "publishedAt": "2026-11-05T02:28:00.000Z",
-     "link": "https://www.sctoday.co.kr/news/articleView.html?idxno=48970"
+     "title": "양산시 오봉유치원, 아나바다 수익금 기부",
+     "press": "idomin.com",
+     "publishedAt": "2026-11-05T02:36:00.000Z",
+     "link": "https://www.idomin.com/news/articleView.html?idxno=2018804"
+    }
+   ]
+  },
+  {
+   "keyword": "소아 코로나19 접종",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-05T02:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "12세 미만 고위험군 소아·영유아 코로나19 예방접종 11일 시작",
+     "press": "redian.org",
+     "publishedAt": "2026-11-05T02:58:00.000Z",
+     "link": "https://www.redian.org/news/articleView.html?idxno=257603"
+    },
+    {
+     "title": "고위험군 소아·영유아, 겨울 대비 코로나19 예방접종",
+     "press": "00news.co.kr",
+     "publishedAt": "2026-11-05T02:52:00.000Z",
+     "link": "http://www.00news.co.kr/news/articleView.html?idxno=107754"
+    },
+    {
+     "title": "고위험군 6개월~11세 코로나19 접종 11일 시작",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-05T02:36:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=400878"
     }
    ]
   },
@@ -402,7 +306,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-05T02:41:00.000Z",
    "exclusive": false,
@@ -427,43 +331,11 @@
      "link": "https://n.news.naver.com/mnews/article/030/0003482527?sid=105"
     }
    ]
-  },
-  {
-   "keyword": "2026 제주올레걷기축제 개막",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-05T02:31:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "2026 제주올레 걷기축제 개막",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T03:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016423826?sid=103"
-    },
-    {
-     "title": "가을 제주 길 따라 걷는 '2026 올레축제' 개막[뉴시스 앵글]",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T02:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303443?sid=102"
-    },
-    {
-     "title": "2026 제주올레걷기축제 개막, 19코스 걸어가는 참가자들",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T02:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303346?sid=102"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 915,
+  "flagged": 920,
   "matched": 395,
   "avgLeadMin": 374,
   "recent": [
