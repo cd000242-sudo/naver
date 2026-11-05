@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T13:50:07.852Z",
+ "builtAt": "2026-11-05T22:13:13.576Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,136 +11,200 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "영국 기준금리 인상",
+   "keyword": "2026년 11월 6일 운세",
    "sources": [
     "signal.bz",
-    "daum"
+    "nate"
    ],
-   "articles90": 14,
-   "recent20": 0,
-   "press": 13,
-   "firstArticleAt": "2026-11-05T12:24:00.000Z",
+   "articles90": 10,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-05T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "영국, 3년3개월만에 기준금리 4%로 인상…“마지막 인상 아닐 것”",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-05T13:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002830956?sid=101"
+     "title": "오늘의 MBTI 운세 11월 6일 금요일",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-05T22:12:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=401127"
     },
     {
-     "title": "영국, 3년 만에 금리 인상‥BOE 총재 \"추가 인상도 가능\"",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-05T13:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533804?sid=104"
+     "title": "[오늘의 운세] 띠별 운세 11월 6일",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-05T22:08:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=401125"
     },
     {
-     "title": "[그래픽] 영국 중앙은행 기준금리 추이",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T13:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016425181?sid=104"
+     "title": "[오늘의 운세] 2026년 11월 6일 (금) 띠별운세 '한 주의 짐을 덜어내자'",
+     "press": "dailypop.kr",
+     "publishedAt": "2026-11-05T21:36:00.000Z",
+     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103972"
     }
    ]
   },
   {
-   "keyword": "윤석열 내란 우두머리 2심 내년 선고",
+   "keyword": "이스라엘 연정 구성",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T12:35:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-05T20:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'내란 우두머리' 2심 내년 1월 26일 선고…尹 \"내란죄 될수 없어\"",
-     "press": "busan.com",
-     "publishedAt": "2026-11-05T13:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001405946?sid=102"
+     "title": "이스라엘 대통령 \"새 총리 후보 8일 발표\"",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-05T21:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000542046?sid=101"
     },
     {
-     "title": "尹 내란 2심 내년 1월 선고…\"각성 위한 계엄\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-05T12:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000923331?sid=102"
+     "title": "이스라엘 대통령 “총리 후보 8일 발표”…네타냐후 ‘실각 위기’",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-05T21:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003057500?sid=104"
+    },
+    {
+     "title": "이스라엘 대통령 \"8일 연정 구성 맡을 총리 후보 결정\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T21:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014305142?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "장남 주진우 고소",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-05T21:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"골프장 간 적 없어\"‥대통령 장남, 주진우 고소",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-05T21:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533848?sid=102"
+    },
+    {
+     "title": "이 대통령 장남, 주진우 고소…\"골프장 간 적 없어\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-05T21:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001401030?sid=100"
+    },
+    {
+     "title": "[사사건건] 李대통령 장남, 주진우 명예훼손 고소 外",
+     "press": "segye.com",
+     "publishedAt": "2026-11-05T21:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004172988?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "윤석열 2심 선고",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-05T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "윤석열 2심도 당선무효형… \"397억 토해낼 판\" \"'이재명 판결'에 당했다...",
+     "press": "mediatoday.co.kr",
+     "publishedAt": "2026-11-05T21:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/006/0000138599?sid=102"
+    },
+    {
+     "title": "2심 최후진술서도 \"계엄은 정당\"…내년 1월 선고",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-05T21:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001401033?sid=102"
     },
     {
      "title": "尹 “계엄, 헌법 권한…조작기소 주장에 나라 위기” 내란 2심 1월 선고",
      "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-05T12:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012288293?sid=102"
+     "publishedAt": "2026-11-05T21:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012288484?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1055,
-  "matched": 484,
-  "avgLeadMin": 461,
+  "flagged": 1071,
+  "matched": 509,
+  "avgLeadMin": 481,
   "recent": [
    {
-    "keyword": "웰컴저축은행 팀리그 2연승",
-    "hitKeyword": "KCC 2연승",
-    "hitAt": "2026-11-05T22:30:00+09:00",
-    "leadMin": 3646
+    "keyword": "뉴욕증시 급등",
+    "hitKeyword": "뉴욕증시 하루만에 급락",
+    "hitAt": "2026-11-06T07:00:00+09:00",
+    "leadMin": 1337
    },
    {
-    "keyword": "웰컴저축은행 에스와이 2연승",
-    "hitKeyword": "KCC 2연승",
-    "hitAt": "2026-11-05T22:30:00+09:00",
-    "leadMin": 3626
+    "keyword": "뉴욕증시 다우 급등 3%",
+    "hitKeyword": "뉴욕증시 하루만에 급락",
+    "hitAt": "2026-11-06T07:00:00+09:00",
+    "leadMin": 1317
    },
    {
-    "keyword": "웰컴저축은행, 에스와이 제압 2연승",
-    "hitKeyword": "KCC 2연승",
-    "hitAt": "2026-11-05T22:30:00+09:00",
-    "leadMin": 3586
+    "keyword": "가상자산 과세 2년 유예 추진",
+    "hitKeyword": "코인 소득 과세 유예",
+    "hitAt": "2026-11-06T07:00:00+09:00",
+    "leadMin": 399
    },
    {
-    "keyword": "서울 ACL2 2연승",
-    "hitKeyword": "KCC 2연승",
-    "hitAt": "2026-11-05T22:30:00+09:00",
-    "leadMin": 1411
+    "keyword": "뉴욕증시 급락",
+    "hitKeyword": "뉴욕증시 하루만에 급락",
+    "hitAt": "2026-11-06T07:00:00+09:00",
+    "leadMin": 138
    },
    {
-    "keyword": "세브란스 흉기 난동 구속영장",
-    "hitKeyword": "세브란스병원 흉기 난동",
-    "hitAt": "2026-11-05T22:30:00+09:00",
-    "leadMin": 81
+    "keyword": "데이터센터",
+    "hitKeyword": "AI 데이터센터 규제 파장",
+    "hitAt": "2026-11-06T06:30:00+09:00",
+    "leadMin": 806
    },
    {
-    "keyword": "이유리 배우",
-    "hitKeyword": "이유리 새집 공개",
-    "hitAt": "2026-11-05T22:30:00+09:00",
-    "leadMin": 40
+    "keyword": "미국 중간선거",
+    "hitKeyword": "공화당 중간선거 참패",
+    "hitAt": "2026-11-06T06:30:00+09:00",
+    "leadMin": 27
    },
    {
-    "keyword": "대통령 선수단 격려오찬",
-    "hitKeyword": "전남 선수단 폭력",
-    "hitAt": "2026-11-05T22:00:00+09:00",
-    "leadMin": 517
+    "keyword": "유럽 여객기 폭파 위협",
+    "hitKeyword": "유럽 여객기 폭탄 위협",
+    "hitAt": "2026-11-06T06:00:00+09:00",
+    "leadMin": 2809
    },
    {
-    "keyword": "이재명 선수단 격려오찬",
-    "hitKeyword": "전남 선수단 폭력",
-    "hitAt": "2026-11-05T22:00:00+09:00",
-    "leadMin": 446
+    "keyword": "여객기",
+    "hitKeyword": "유럽 여객기 폭탄 위협",
+    "hitAt": "2026-11-06T06:00:00+09:00",
+    "leadMin": 2587
    },
    {
-    "keyword": "케인 뮌헨 재계약!",
-    "hitKeyword": "케인 뮌헨 재계약",
-    "hitAt": "2026-11-05T21:30:00+09:00",
-    "leadMin": 81
+    "keyword": "마트 냉장고 프랑스 사이버공격",
+    "hitKeyword": "프랑스 고물가 시위",
+    "hitAt": "2026-11-06T06:00:00+09:00",
+    "leadMin": 1237
    },
    {
-    "keyword": "수사",
-    "hitKeyword": "태권도 관장 폭행 수사",
-    "hitAt": "2026-11-05T21:00:00+09:00",
-    "leadMin": 1291
+    "keyword": "서울 아파트값 91주 상승",
+    "hitKeyword": "서울 아파트값 연속 상승",
+    "hitAt": "2026-11-06T06:00:00+09:00",
+    "leadMin": 816
    }
   ]
  }
