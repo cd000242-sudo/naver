@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T14:10:17.278Z",
+ "builtAt": "2026-11-05T14:20:21.822Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 18,
  "candidates": [
   {
    "keyword": "이대통령 장남, 주진우 고소",
    "sources": [
     "nate"
    ],
-   "articles90": 14,
-   "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-05T12:41:00.000Z",
+   "articles90": 11,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-05T12:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -48,12 +48,18 @@
     "signal.bz"
    ],
    "articles90": 10,
-   "recent20": 2,
+   "recent20": 3,
    "press": 9,
-   "firstArticleAt": "2026-11-05T12:45:00.000Z",
+   "firstArticleAt": "2026-11-05T12:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "영국, 3년 만에 금리 인상...\"추가 인상도 가능\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-05T14:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002428945?sid=104"
+    },
     {
      "title": "英 물가 치솟자…기준금리 연 4%로 인상",
      "press": "hankyung.com",
@@ -65,44 +71,6 @@
      "press": "segye.com",
      "publishedAt": "2026-11-05T14:06:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/022/0004172914?sid=104"
-    },
-    {
-     "title": "영국, 3년3개월만에 기준금리 4%로 인상…“마지막 인상 아닐 것”",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-05T13:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002830956?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "윤석열 내란 2심 내년 선고",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T12:47:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'내란 우두머리' 2심 내년 1월 26일 선고…尹 \"내란죄 될수 없어\"",
-     "press": "busan.com",
-     "publishedAt": "2026-11-05T13:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001405946?sid=102"
-    },
-    {
-     "title": "尹 내란 2심 내년 1월 선고…\"각성 위한 계엄\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-05T12:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000923331?sid=102"
-    },
-    {
-     "title": "尹 “계엄, 헌법 권한…조작기소 주장에 나라 위기” 내란 2심 1월 선고",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-05T12:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012288293?sid=102"
     }
    ]
   }
