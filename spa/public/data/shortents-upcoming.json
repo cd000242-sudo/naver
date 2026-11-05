@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T05:23:27.360Z",
+ "builtAt": "2026-11-05T05:33:30.711Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,133 +8,70 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "LG화학 영업익 감소",
    "sources": [
     "daum"
    ],
-   "articles90": 25,
-   "recent20": 11,
-   "press": 23,
+   "articles90": 27,
+   "recent20": 6,
+   "press": 24,
    "firstArticleAt": "2026-11-05T04:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "LG화학, 3분기 영업익 5천612억원…석화 부진에도 예상치 상회(종합)",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-05T05:26:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443252"
+    },
+    {
+     "title": "LG화학 3분기 매출 34% 늘었지만 영업익 17% 줄어",
+     "press": "cstimes.com",
+     "publishedAt": "2026-11-05T05:24:00.000Z",
+     "link": "https://www.cstimes.com/news/articleView.html?idxno=726778"
+    },
+    {
      "title": "LG화학, 3분기 영업이익 5,612억원…전년동기 比 17.4% 감소",
      "press": "dnews.co.kr",
      "publishedAt": "2026-11-05T05:22:00.000Z",
      "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611051416265990827"
-    },
-    {
-     "title": "LG화학, 3분기 영업익 5612억원…전년比 17.4%↓",
-     "press": "weekly.hankooki.com",
-     "publishedAt": "2026-11-05T05:22:00.000Z",
-     "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7192387"
-    },
-    {
-     "title": "LG화학, 3분기 영업익 5612억원…전년 대비 17.4% 감소",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-05T05:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003057360?sid=101"
     }
    ]
   },
   {
    "keyword": "2027 서울 세계청년대회",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 23,
+   "articles90": 18,
    "recent20": 5,
-   "press": 17,
-   "firstArticleAt": "2026-11-05T03:54:00.000Z",
+   "press": 16,
+   "firstArticleAt": "2026-11-05T04:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“서울 WYD, 단절의 시대에 서로에게 마음 여는 계기 될 것”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-05T05:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003760303?sid=103"
+    },
+    {
+     "title": "\"교황과 100만명, 성남 서울공항에 모인다\"…서울 세계청년대회 청사진...",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-05T05:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005838617?sid=103"
+    },
     {
      "title": "2027 서울 세계청년대회 마스코트 첫 공개…'호비·코비' [포토]",
      "press": "econovill.com",
      "publishedAt": "2026-11-05T05:20:00.000Z",
      "link": "https://www.econovill.com/news/articleView.html?idxno=756147"
-    },
-    {
-     "title": "내년 가톨릭 최대 축제, 100만명 서울 집결…'숙박·안전 숙제'",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-05T05:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005437103?sid=103"
-    },
-    {
-     "title": "서울 세계청년대회, 마지막 무대는 성남 서울공항…\"시민 불편 최소화\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-05T05:14:00.000Z",
-     "link": "https://www.ajunews.com/view/20261105134939822"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명 대통령 격려오찬",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 22,
-   "recent20": 7,
-   "press": 16,
-   "firstArticleAt": "2026-11-05T04:03:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령 \"성장해도 일자리 안 늘어…국민 창업 시대 돼야\"",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-05T05:20:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443249"
-    },
-    {
-     "title": "李대통령 \"청년 기술인재가 韓 미래…실력 걸맞은 인정·존중받도록\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-05T05:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009272420?sid=100"
-    },
-    {
-     "title": "이 대통령 부부, 국제기능올림픽 선수단 초청 오찬",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-05T05:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400884?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "조작기소 특검법 법사위 통과",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 11,
-   "recent20": 6,
-   "press": 11,
-   "firstArticleAt": "2026-11-05T03:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "윤석열 정부 특검법 논란, 법치주의 위협과 이해충돌 문제 부상",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-05T05:20:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=884238"
-    },
-    {
-     "title": "변호사 단체들 \"조작기소 특검, 법치주의 위협…명백한 이해충돌\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-05T05:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009272417?sid=102"
-    },
-    {
-     "title": "'조작기소 특검법' 본회의 상정 추진‥'필버' 예고",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-05T05:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533692?sid=100"
     }
    ]
   },
@@ -143,30 +80,191 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-05T03:55:00.000Z",
+   "articles90": 19,
+   "recent20": 10,
+   "press": 14,
+   "firstArticleAt": "2026-11-05T04:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "코스피, 외인 2.3조 ‘팔자’에 4%대 급락…반도체 투매 지속",
-     "press": "edaily.co.kr",
+     "title": "[속보] 급락장에 코스피 이어 코스닥도 매도 사이드카",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-05T05:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000541925?sid=101"
+    },
+    {
+     "title": "코스피에 이어 코스닥도 급락에 '매도 사이드카' 발동",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-05T05:32:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1172132"
+    },
+    {
+     "title": "[속보] 코스닥 급락에 매도 사이드카 발동",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-05T05:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002719427?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "BTS 스윔 표절 소송 취하",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 14,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-05T04:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "방탄소년단 'SWIM' 표절 의혹 종결⋯\"美 작곡가들 소송 취하\"",
+     "press": "joynews24.com",
+     "publishedAt": "2026-11-05T05:30:00.000Z",
+     "link": "http://www.joynews24.com/view/2023049"
+    },
+    {
+     "title": "BTS ‘스윔’ 표절 소송 원고 자진 취하…합의 여부는 확인 안돼",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-05T05:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002830840?sid=103"
+    },
+    {
+     "title": "BTS 표절 의혹 美 소송 4개월 만에 취하...\"양측 논평 무응답\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-05T05:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002428708?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 선수단 격려오찬",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 18,
+   "recent20": 6,
+   "press": 13,
+   "firstArticleAt": "2026-11-05T04:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령 “청년 기술인재가 대한민국 미래” 국제기능올림픽 선수단 격...",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-05T05:32:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=72644"
+    },
+    {
+     "title": "李대통령, 기능올림픽 선수단과 오찬…\"실력에 걸맞은 인정 받도록\"",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-05T05:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005599983?sid=100"
+    },
+    {
+     "title": "이 대통령 \"청년 기술인재가 대한민국의 미래\"…기능올림픽 선수단 격려",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-05T05:28:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4116916"
+    }
+   ]
+  },
+  {
+   "keyword": "기초연구 예산 확대",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 11,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-05T05:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "내년 기초연구에 2조 9천억 투자, 지역·청년 과학자 품는다",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-05T05:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002534758?sid=101"
+    },
+    {
+     "title": "정부, 내년 기초연구 2조9102억원 투입…1만8516개 지원",
+     "press": "dailian.co.kr",
      "publishedAt": "2026-11-05T05:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006404203?sid=101"
+     "link": "https://n.news.naver.com/mnews/article/119/0003151724?sid=105"
     },
     {
-     "title": "\"사이드카까지 발동했는데 웬 신고가?\"…급락장 역주행한 '이 주식' 정체",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-05T04:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005838596?sid=101"
+     "title": "내년 기초연구에 2조9102억원…1만8516개 과제 역대 최대 지원",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-05T05:02:00.000Z",
+     "link": "https://www.ajunews.com/view/20261105105249390"
+    }
+   ]
+  },
+  {
+   "keyword": "북한 태권도 등재",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 9,
+   "recent20": 3,
+   "press": 9,
+   "firstArticleAt": "2026-11-05T04:08:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한지, 인류무형유산 등재 눈앞…북한 태권도 단독 등재 유력",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-05T05:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005759513?sid=103"
     },
     {
-     "title": "AI 데이터센터 규제 우려, 코스피 매도 사이드카",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-05T04:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001163358?sid=101"
+     "title": "태권도, 북한 단독 유네스코 등재 사실상 확정",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-05T05:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016424155?sid=103"
+    },
+    {
+     "title": "태권도, 유네스코 北 단독 등재 유력…한국은 올해 3월에야 신청",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-05T05:16:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109751411305"
+    }
+   ]
+  },
+  {
+   "keyword": "유연석",
+   "sources": [
+    "google"
+   ],
+   "articles90": 10,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-05T04:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "데이트 강간 혐의 부인 했는데…'라이어' 유연석, 또 경찰에 연행됐다",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-05T05:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000783114"
+    },
+    {
+     "title": "‘라이어’ 유연석, 한 밤 또다시 경찰 연행 새 국면",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-05T05:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001148233"
+    },
+    {
+     "title": "'라이어' 유연석, 또 경찰에 연행…예상 못한 위기에 '당황'",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-05T05:06:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000326820"
     }
    ]
   },
@@ -175,10 +273,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 11,
-   "recent20": 4,
-   "press": 8,
-   "firstArticleAt": "2026-11-05T03:57:00.000Z",
+   "articles90": 9,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-05T04:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -203,131 +301,34 @@
    ]
   },
   {
-   "keyword": "장동민 서바이벌 은퇴 없다",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 8,
-   "firstArticleAt": "2026-11-05T04:09:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'데블스 플랜3' 장동민·하석진·정현규, '서바이벌 강자' 총출동...\"뇌지...",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-05T05:16:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60717"
-    },
-    {
-     "title": "장동민부터 홍진호·하석진까지…'데블스 플랜3', 역대급 두뇌 전쟁 예...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T05:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014303885"
-    },
-    {
-     "title": "장동민도 “오줌 질질”…韓서바이벌 레전드 싹 모은 '데블스 플랜3'(종...",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-05T05:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000519283"
-    }
-   ]
-  },
-  {
-   "keyword": "유연석",
-   "sources": [
-    "google"
-   ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-05T04:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘라이어’ 유연석, 한 밤 또다시 경찰 연행 새 국면",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-05T05:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001148233"
-    },
-    {
-     "title": "'라이어' 유연석, 또 경찰에 연행…예상 못한 위기에 '당황'",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-05T05:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000326820"
-    },
-    {
-     "title": "거짓말탐지기는 서현진 지목했는데… 유연석 왜 또 연행됐나",
-     "press": "newsmap.co.kr",
-     "publishedAt": "2026-11-05T05:02:00.000Z",
-     "link": "https://www.newsmap.co.kr/news/articleView.html?idxno=4841"
-    }
-   ]
-  },
-  {
-   "keyword": "미국 중간선거 관련 동향",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T04:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "F4 \"미국 중간선거 영향 지속 점검…변동성 철저 대비\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T05:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016424120?sid=101"
-    },
-    {
-     "title": "민주당 압승 미국 정치 지형의 변화 글로벌 증시 영향…반도체·에너지...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-05T05:04:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=623612"
-    },
-    {
-     "title": "코트라 “미국 관세 압박 계속될 듯”",
-     "press": "naeil.com",
-     "publishedAt": "2026-11-05T04:04:00.000Z",
-     "link": "https://www.naeil.com/news/read/607692?ref=naver"
-    }
-   ]
-  },
-  {
    "keyword": "허가",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
    "firstArticleAt": "2026-11-05T04:19:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
+    {
+     "title": "레이저옵텍, 브라질 주력 제품 3종 허가…중남미 사업 확대",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-05T05:30:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1730603"
+    },
+    {
+     "title": "인천시, 연근해 불법어업 단속··· 무허가 건간망 어업 4건 적발",
+     "press": "incheontoday.com",
+     "publishedAt": "2026-11-05T05:26:00.000Z",
+     "link": "https://www.incheontoday.com/news/articleView.html?idxno=325977"
+    },
     {
      "title": "롯데바이오, 송도 1공장 의약품업체 허가…상업생산 준비 진전",
      "press": "press9.kr",
      "publishedAt": "2026-11-05T04:50:00.000Z",
      "link": "http://www.press9.kr/news/articleView.html?idxno=85667"
-    },
-    {
-     "title": "\"심장 진단의 새 선택지\"…'라피스캔주' 국내 허가",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T04:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303749?sid=102"
-    },
-    {
-     "title": "GE헬스케어, 심장 진단 약물부하제 '라피스캔' 국내 허가",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-05T04:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009272247?sid=103"
     }
    ]
   },
@@ -366,69 +367,69 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 946,
-  "matched": 404,
-  "avgLeadMin": 381,
+  "flagged": 950,
+  "matched": 415,
+  "avgLeadMin": 377,
   "recent": [
    {
-    "keyword": "한국시리즈",
-    "hitKeyword": "삼성 한국시리즈 2차전 승리",
-    "hitAt": "2026-11-05T14:00:00+09:00",
-    "leadMin": 168
+    "keyword": "최지훈 대표와 결혼식",
+    "hitKeyword": "서인영 신랑 최지훈",
+    "hitAt": "2026-11-05T14:30:00+09:00",
+    "leadMin": 468
    },
    {
-    "keyword": "마라톤",
-    "hitKeyword": "마라톤 유방암 캠페인",
-    "hitAt": "2026-11-05T14:00:00+09:00",
-    "leadMin": 17
+    "keyword": "MLS 유니폼 판매량",
+    "hitKeyword": "손흥민 MLS 유니폼 2위",
+    "hitAt": "2026-11-05T14:30:00+09:00",
+    "leadMin": 387
    },
    {
-    "keyword": "이란",
-    "hitKeyword": "민주당 이란전 종료 요구",
-    "hitAt": "2026-11-05T13:30:00+09:00",
-    "leadMin": 1416
+    "keyword": "손흥민, 유니폼 판매 2위",
+    "hitKeyword": "손흥민 MLS 유니폼 2위",
+    "hitAt": "2026-11-05T14:30:00+09:00",
+    "leadMin": 367
    },
    {
-    "keyword": "유병권 김수미",
-    "hitKeyword": "유병권 김수미 추도",
-    "hitAt": "2026-11-05T13:30:00+09:00",
-    "leadMin": 740
+    "keyword": "최지훈 대표",
+    "hitKeyword": "서인영 신랑 최지훈",
+    "hitAt": "2026-11-05T14:30:00+09:00",
+    "leadMin": 347
    },
    {
-    "keyword": "유병권 성형수술",
-    "hitKeyword": "유병권 김수미 추도",
-    "hitAt": "2026-11-05T13:30:00+09:00",
+    "keyword": "손흥민 유니폼 2위!",
+    "hitKeyword": "손흥민 MLS 유니폼 2위",
+    "hitAt": "2026-11-05T14:30:00+09:00",
+    "leadMin": 327
+   },
+   {
+    "keyword": "손흥민, MLS 유니폼 2위!",
+    "hitKeyword": "손흥민 MLS 유니폼 2위",
+    "hitAt": "2026-11-05T14:30:00+09:00",
     "leadMin": 297
    },
    {
-    "keyword": "금감원 퇴직연금 캠페인 출범",
-    "hitKeyword": "여성 마라톤 완주 캠페인",
-    "hitAt": "2026-11-05T13:00:00+09:00",
-    "leadMin": 2663
+    "keyword": "수능일 증시 오전 10시 개장",
+    "hitKeyword": "수능날 증시 개장 연기",
+    "hitAt": "2026-11-05T14:30:00+09:00",
+    "leadMin": 168
    },
    {
-    "keyword": "황인범, 2분만에 도움",
-    "hitKeyword": "황인범 포르투 도움",
-    "hitAt": "2026-11-05T13:00:00+09:00",
-    "leadMin": 257
+    "keyword": "주말 서울 영하 5도 예상",
+    "hitKeyword": "입동 서울 영하 예보",
+    "hitAt": "2026-11-05T14:30:00+09:00",
+    "leadMin": 67
    },
    {
-    "keyword": "황인범 2분 도움",
-    "hitKeyword": "황인범 포르투 도움",
-    "hitAt": "2026-11-05T13:00:00+09:00",
-    "leadMin": 237
+    "keyword": "미국 중간선거 결과",
+    "hitKeyword": "중간선거 반도체 급락",
+    "hitAt": "2026-11-05T14:30:00+09:00",
+    "leadMin": 57
    },
    {
-    "keyword": "층간소음 기준 강화",
-    "hitKeyword": "기초연금 거주 기준 강화",
-    "hitAt": "2026-11-05T13:00:00+09:00",
-    "leadMin": 88
-   },
-   {
-    "keyword": "전자발찌 청와대 칼부림 예고",
-    "hitKeyword": "세브란스병원 칼부림",
-    "hitAt": "2026-11-05T12:30:00+09:00",
-    "leadMin": 4164
+    "keyword": "이번 주말 서울 영하 5도",
+    "hitKeyword": "입동 서울 영하 예보",
+    "hitAt": "2026-11-05T14:30:00+09:00",
+    "leadMin": 47
    }
   ]
  }
