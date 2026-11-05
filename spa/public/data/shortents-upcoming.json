@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T18:01:52.244Z",
+ "builtAt": "2026-11-05T18:11:55.498Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,35 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "미국",
+   "keyword": "비트코인",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T16:32:00.000Z",
+   "articles90": 8,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-05T16:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "미 국방부, 일본 공중조기경보기 유지보수에 1691만 달러 투입…서태평...",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-05T18:00:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=20261106025521910420990b2dc5_1"
-    },
-    {
-     "title": "미국 기술주 매도세, 민주당 승리 뒤 AI 규제 우려",
+     "title": "앵커리지 디지털, 최장 1년 만기 비트코인·이더리움 옵션 추진",
      "press": "tokenpost.kr",
-     "publishedAt": "2026-11-05T17:20:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/433447"
+     "publishedAt": "2026-11-05T18:00:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/433468"
     },
     {
-     "title": "39년 만에 미국 돌아온 WRC…한국타이어, 메인 타이틀 달고 달린다",
-     "press": "bizwnews.com",
-     "publishedAt": "2026-11-05T17:02:00.000Z",
-     "link": "http://www.bizwnews.com/news/articleView.html?idxno=151082"
+     "title": "코어사이언티픽, 2026년 4분기 비트코인 자가 채굴 중단 계획",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-05T17:52:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/433463"
+    },
+    {
+     "title": "비트코인 365일 금에 뒤져…과거 두 구간 뒤 3년 연복리 58~167%",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-05T17:48:00.000Z",
+     "link": "https://www.tokenpost.kr/news/cryptocurrency/433459"
     }
    ]
   }
