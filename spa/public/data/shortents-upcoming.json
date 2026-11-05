@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T20:02:32.714Z",
+ "builtAt": "2026-11-05T20:12:36.549Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,70 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 19,
+ "measured": 9,
  "candidates": [
   {
    "keyword": "예산",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 5,
+   "articles90": 11,
+   "recent20": 7,
+   "press": 8,
    "firstArticleAt": "2026-11-05T19:16:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[단독] ‘대북 감청’ 예산 또 삭감… 2년새 65% 줄어",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-05T20:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004008113?sid=100"
+     "title": "인천시 내년 예산안 15조9천억 원…올해보다 3.8% 증가",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-05T20:08:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=93236"
     },
     {
-     "title": "[단독] 당정 “소방예산 확대”…담뱃세 7500억 떼내 지원 유력",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-05T20:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003563274?sid=100"
+     "title": "인천시 2027년 본예산 편성…‘ABC+E’ 육성 첫발, 민간 투자·국비 확보...",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-05T20:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000130855?sid=100"
     },
     {
-     "title": "국힘 장동혁·정점식, 오늘 吳와 서울시 예산정책 협의",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T20:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016425230?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "비트코인",
-   "sources": [
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T18:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "비트코인캐시, 4시간 새 5.43% 급락…274달러",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-05T20:00:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/433554"
-    },
-    {
-     "title": "비트코인 1,099개 크라켄서 지갑으로 이동 알림 게시",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-05T19:46:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/433546"
-    },
-    {
-     "title": "비트코인 선거 이듬해 54% 껑충…반감기 반등과 겹친다",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-05T19:30:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=202611060215455227e7e8286d56_1"
+     "title": "인천 내년 예산 ‘민생’ 및 ‘제값 찾기’ 초점…박찬대, ‘지원’ 33회...",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-05T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000130854?sid=100"
     }
    ]
   }
