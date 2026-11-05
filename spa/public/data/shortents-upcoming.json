@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T06:13:46.238Z",
+ "builtAt": "2026-11-05T06:23:50.188Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,131 +11,130 @@
  "measured": 23,
  "candidates": [
   {
-   "keyword": "LG화학 3분기 영업익 5612억",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 33,
-   "recent20": 3,
-   "press": 32,
-   "firstArticleAt": "2026-11-05T04:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "LG화학 3분기 영업익 5612억…석유화학은 적자 전환",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-05T06:02:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1319400&inflow=N"
-    },
-    {
-     "title": "LG화학, 3분기 영업이익 5612억…전년 대비 17%↓",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-05T05:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202831?sid=101"
-    },
-    {
-     "title": "LG화학, 석화 침체에 발목…3분기 영업익 전년比 17.4%↓",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-05T05:54:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=902078"
-    }
-   ]
-  },
-  {
    "keyword": "수능 스마트안경 부정행위 차단",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 33,
-   "recent20": 8,
-   "press": 30,
+   "articles90": 36,
+   "recent20": 5,
+   "press": 33,
    "firstArticleAt": "2026-11-05T05:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이 대통령 '취약계층 찾아가는 복지' 강조, '수능 수험생' 격려",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-05T06:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002393432?sid=100"
+     "title": "'수능 AI안경 대책' 보강 요구한 대통령 \"구석구석까지 공정성 유지\"",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-05T06:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002534775?sid=100"
     },
     {
-     "title": "'AI 안경 커닝' 서울시립대 수험생 2명 피고소…李대통령 \"부정행위 원천...",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-05T06:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000141663?sid=102"
+     "title": "이 대통령, 수능 '스마트 안경' 논란에 \"부정행위 원천 차단해야… 종합...",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-05T06:20:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261105500348"
     },
     {
-     "title": "이 대통령, 수능 2주 앞두고 “스마트 안경 활용한 부정행위 차단해야”",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-05T06:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002830853?sid=100"
+     "title": "李 대통령 \"국민 창업 시대로 나아가야…수능 부정행위 원천 차단\"",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-05T06:14:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=171997"
     }
    ]
   },
   {
-   "keyword": "이재명 대통령 격려오찬",
+   "keyword": "발언하는 이재명 대통령",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 29,
-   "recent20": 7,
-   "press": 29,
-   "firstArticleAt": "2026-11-05T04:44:00.000Z",
+   "articles90": 44,
+   "recent20": 9,
+   "press": 31,
+   "firstArticleAt": "2026-11-05T05:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이 대통령, \"청년 기술인재가 대한민국의 미래\"",
-     "press": "inews365.com",
-     "publishedAt": "2026-11-05T06:12:00.000Z",
-     "link": "https://www.inews365.com/news/article.html?no=942398"
+     "title": "전광훈의 사랑제일교회, 알박기 지적에 “대통령 본인부터 재판받아라...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-05T06:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002830614?sid=100"
     },
     {
-     "title": "이 대통령, 국제기능올림픽 韓선수단 오찬… \"실력 걸맞게 인정받는 사...",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-05T06:12:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261105500333"
+     "title": "李대통령 유튜브 소통...\"새 시도 지켜보되, 즉흥 발언의 국가적 위험 우...",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-05T06:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000120665?sid=100"
     },
     {
-     "title": "李대통령, '기능올림픽 2위' 선수단 초청 오찬... \"청년 기술인재 존중...",
-     "press": "lawissue.co.kr",
-     "publishedAt": "2026-11-05T06:10:00.000Z",
-     "link": "https://www.lawissue.co.kr/view.php?ud=202611051509098745b3279dfb36_12"
+     "title": "'수능 AI안경 대책' 보강 요구한 대통령 \"구석구석까지 공정성 유지\"",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-05T06:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002534775?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "서울 아파트값 91주 상승",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 30,
+   "recent20": 4,
+   "press": 27,
+   "firstArticleAt": "2026-11-05T05:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서울 아파트 상승세 3주째 둔화... 중위권 이하 지역도 숨고르기",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-05T06:16:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261105513157?OutUrl=naver"
+    },
+    {
+     "title": "서울 아파트값 상승세 3주째 둔화…강남권 약세 속 '숨고르기'",
+     "press": "delighti.co.kr",
+     "publishedAt": "2026-11-05T06:14:00.000Z",
+     "link": "https://www.delighti.co.kr/news/articleView.html?idxno=124443"
+    },
+    {
+     "title": "서울 아파트값 91주 연속 상승…상승폭은 축소",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-05T06:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000549117?sid=101"
     }
    ]
   },
   {
    "keyword": "2027 서울 청년대회 기자간담회",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 20,
-   "recent20": 6,
+   "articles90": 22,
+   "recent20": 7,
    "press": 19,
-   "firstArticleAt": "2026-11-05T04:44:00.000Z",
+   "firstArticleAt": "2026-11-05T04:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정순택 대주교, \"단절의 시대에 필요한 것은 만남의 용기\"…2027 서울 세...",
-     "press": "getnews.co.kr",
-     "publishedAt": "2026-11-05T06:12:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=886127"
+     "title": "[이로운현장] 내년 50만 청년들, 서울로 모인다...'세계청년대회' 준비 ...",
+     "press": "eroun.net",
+     "publishedAt": "2026-11-05T06:20:00.000Z",
+     "link": "https://www.eroun.net/news/articleView.html?idxno=94532"
     },
     {
-     "title": "'교황 방한' 세계청년대회, 광화문 대신 월드컵공원·서울공항서 열린다",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-05T06:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000963827?sid=103"
+     "title": "이경상 주교 \"WYD 서울공항 개최 준비…시민 불편·안전 고려\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-05T06:20:00.000Z",
+     "link": "https://www.ajunews.com/view/20261105145900216"
     },
     {
-     "title": "교황 방한, 최대 100만 명 참여… 내년 8월 '서울 세계청년대회' 준비 본...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-05T06:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001038625?sid=103"
+     "title": "교황 방한 2027 서울 세계 청년대회…100만 청년 '만남의 장'",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-05T06:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000549125?sid=102"
     }
    ]
   },
@@ -145,7 +144,7 @@
     "signal.bz"
    ],
    "articles90": 15,
-   "recent20": 2,
+   "recent20": 1,
    "press": 15,
    "firstArticleAt": "2026-11-05T05:00:00.000Z",
    "exclusive": false,
@@ -172,34 +171,34 @@
    ]
   },
   {
-   "keyword": "입법박람회 조정식 국회의장",
+   "keyword": "LG화학 3분기 영업익 17%↓",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-05T04:44:00.000Z",
+   "articles90": 14,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-05T04:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "로봇·수소차·누리호 한자리에…국회 '입법박람회' 5~6일 개막",
-     "press": "issuenbiz.com",
-     "publishedAt": "2026-11-05T06:10:00.000Z",
-     "link": "http://www.issuenbiz.com/news/articleView.html?idxno=81277"
+     "title": "LG화학 3분기 영업익 17%↓…고유가 부담에 석유화학 적자(종합2보)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-05T06:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016424354?sid=101"
     },
     {
-     "title": "로봇·수소차·누리호 한자리에…국회 입법박람회 개막",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-05T05:54:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=100699"
+     "title": "LG화학, 3분기 영업이익 5612억…전년 대비 17%↓",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-05T05:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202831?sid=101"
     },
     {
-     "title": "국회입법박람회 개막...조작기소특검법 전운",
-     "press": "natv.go.kr",
-     "publishedAt": "2026-11-05T05:36:00.000Z",
-     "link": "https://www.natv.go.kr/natv/news/newsView.do?newsId=514495"
+     "title": "LG화학, 매출 34% 늘고 영업익은 17% 뒷걸음…석유화학 '발목'",
+     "press": "newsinside.kr",
+     "publishedAt": "2026-11-05T05:52:00.000Z",
+     "link": "https://www.newsinside.kr/news/articleView.html?idxno=5041251"
     }
    ]
   },
@@ -209,7 +208,7 @@
     "google"
    ],
    "articles90": 7,
-   "recent20": 1,
+   "recent20": 0,
    "press": 7,
    "firstArticleAt": "2026-11-05T05:00:00.000Z",
    "exclusive": false,
@@ -236,35 +235,34 @@
    ]
   },
   {
-   "keyword": "신진서 83개월 1위",
+   "keyword": "입법박람회 조정식 국회의장",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 2,
    "press": 6,
-   "firstArticleAt": "2026-11-05T04:44:00.000Z",
+   "firstArticleAt": "2026-11-05T05:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘10월 9전 전승' 신진서, 83개월 연속 바둑 랭킹 1위",
-     "press": "maniareport.com",
-     "publishedAt": "2026-11-05T06:01:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/425/0000213938"
+     "title": "\"국민 아이디어가 법·제도 된다\"...'2026 입법 박람회' 5~6일 국회 개최",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-05T06:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002393434?sid=100"
     },
     {
-     "title": "10월에만 상금 5억원 신진서, 83개월 연속 바둑 랭킹 1위",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-05T05:18:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/052/0002428713"
+     "title": "로봇·수소차·누리호 한자리에…국회 '입법박람회' 5~6일 개막",
+     "press": "issuenbiz.com",
+     "publishedAt": "2026-11-05T06:10:00.000Z",
+     "link": "http://www.issuenbiz.com/news/articleView.html?idxno=81277"
     },
     {
-     "title": "'10월 상금만 5억원' 신진서, 83개월 연속 바둑 랭킹 1위",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-05T05:08:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261105000990"
+     "title": "로봇·수소차·누리호 한자리에…국회 입법박람회 개막",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-05T05:54:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=100699"
     }
    ]
   },
@@ -365,34 +363,35 @@
    ]
   },
   {
-   "keyword": "학폭 의혹 공구 중단",
+   "keyword": "신진서 83개월 1위",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 4,
    "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-05T05:11:00.000Z",
+   "firstArticleAt": "2026-11-05T05:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'학폭 부인' 차예련, 공구 페이지 다시 열었다 [소셜in]",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-05T05:49:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000326834"
+     "title": "‘10월 9전 전승' 신진서, 83개월 연속 바둑 랭킹 1위",
+     "press": "maniareport.com",
+     "publishedAt": "2026-11-05T06:01:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/425/0000213938"
     },
     {
-     "title": "차예련, 학폭 의혹 부인 속 외부 업체와 협업해온 공구 페이지 접속 불...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-05T05:22:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16269001"
+     "title": "10월에만 상금 5억원 신진서, 83개월 연속 바둑 랭킹 1위",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-05T05:18:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/052/0002428713"
     },
     {
-     "title": "학폭 의혹 부인·원본 글 열람 제한… 차예련, 이번엔 공구 링크 일시 '...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-05T05:20:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000486728"
+     "title": "'10월 상금만 5억원' 신진서, 83개월 연속 바둑 랭킹 1위",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-05T05:08:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261105000990"
     }
    ]
   },
@@ -428,11 +427,43 @@
      "link": "https://n.news.naver.com/mnews/article/081/0003696097?sid=104"
     }
    ]
+  },
+  {
+   "keyword": "이형일 부총리, 피치 면담",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-05T05:45:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이형일 부총리, 국제신용평가사 피치 아태지역 국가신용등급 담당 면담",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-05T05:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016424279?sid=101"
+    },
+    {
+     "title": "이형일 부총리, 국제신용평가사 '피치'와 면담",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-05T05:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009272526?sid=101"
+    },
+    {
+     "title": "이형일 부총리, 국제신용평가사 '피치' 연례협의단 면담",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-05T05:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009272529?sid=101"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 961,
+  "flagged": 964,
   "matched": 420,
   "avgLeadMin": 374,
   "recent": [
