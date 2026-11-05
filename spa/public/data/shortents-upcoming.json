@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T10:38:47.291Z",
+ "builtAt": "2026-11-05T10:48:51.519Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,18 +8,50 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 18,
  "candidates": [
+  {
+   "keyword": "내란 우두머리 선고 1월 26일",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 36,
+   "recent20": 9,
+   "press": 29,
+   "firstArticleAt": "2026-11-05T09:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "윤석열 ‘내란 우두머리’ 항소심, 내년 1월26일 선고",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-05T10:46:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1319496&inflow=N"
+    },
+    {
+     "title": "‘윤석열 내란 우두머리’ 2심 내년 1월26일에 선고",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-05T10:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003480949?sid=102"
+    },
+    {
+     "title": "‘내란 우두머리’ 2심 내년 1월26일 선고…尹 “대통령 헌법상 권한행...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-05T10:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002719582?sid=102"
+    }
+   ]
+  },
   {
    "keyword": "세계기록유산 아태 목록",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 17,
+   "articles90": 15,
    "recent20": 1,
-   "press": 16,
-   "firstArticleAt": "2026-11-05T09:14:00.000Z",
+   "press": 14,
+   "firstArticleAt": "2026-11-05T09:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -46,13 +78,12 @@
   {
    "keyword": "LG엔솔, 3차 ESS 불참",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-05T09:09:00.000Z",
+   "articles90": 10,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-05T09:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -77,14 +108,46 @@
    ]
   },
   {
+   "keyword": "KPGA 최종전 선두",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-05T09:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "옥태훈·왕정훈, KPGA투어 시즌 최종전 1라운드 선두",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-05T10:36:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2015190"
+    },
+    {
+     "title": "'강풍도 못 막았다' 옥태훈·왕정훈, KPGA 투어챔피언십 1R 4언더파 공동...",
+     "press": "maniareport.com",
+     "publishedAt": "2026-11-05T10:35:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/425/0000213989"
+    },
+    {
+     "title": "KPGA 시즌 최종전 투어 챔피언십 첫날, 옥태훈ㆍ왕정훈 공동 선두",
+     "press": "thegolftimes.co.kr",
+     "publishedAt": "2026-11-05T10:12:00.000Z",
+     "link": "https://www.thegolftimes.co.kr/news/articleView.html?idxno=82272"
+    }
+   ]
+  },
+  {
    "keyword": "청와대 한미동맹 입장",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-05T09:13:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-05T09:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -141,34 +204,34 @@
    ]
   },
   {
-   "keyword": "박민교 11번째 한라장사",
+   "keyword": "하이닉스",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T09:16:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-05T09:20:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "씨름 박민교, 의성마늘대회서 통산 11번째 한라장사",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-05T09:43:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/055/0001400959"
+     "title": "서동주, 하이닉스 '226층'에 물렸다…\"다들 제가 팔면 들어간다고\"",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-05T09:33:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002077209"
     },
     {
-     "title": "박민교, 의성마늘장사씨름대회 한라장사…통산 11번째 정상",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-05T09:40:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16269174"
+     "title": "삼성전자, 3분기 D램 매출 점유율 38%…SK하이닉스 29%",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-05T09:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000549270?sid=101"
     },
     {
-     "title": "박민교, 두 대회 연속 한라장사 등극...통산 11번째 타이틀",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-05T09:30:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/018/0006404578"
+     "title": "SK하이닉스 40조 소각 날…2차 자사주 매입단가는 15% 낮아",
+     "press": "womentimes.co.kr",
+     "publishedAt": "2026-11-05T09:20:00.000Z",
+     "link": "https://www.womentimes.co.kr/news/articleView.html?idxno=107643"
     }
    ]
   },
@@ -178,24 +241,24 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 9,
+   "articles90": 6,
    "recent20": 5,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T09:11:00.000Z",
+   "press": 2,
+   "firstArticleAt": "2026-11-05T09:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "[포토] 수원사업장 앞 구호 외치는 동행노조",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-05T10:34:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3446324"
-    },
     {
      "title": "[포토] 구호 외치는 삼성전자 동행노조 조합원들",
      "press": "newscj.com",
      "publishedAt": "2026-11-05T10:34:00.000Z",
      "link": "https://www.newscj.com/news/articleView.html?idxno=3446317"
+    },
+    {
+     "title": "[포토] 수원사업장 앞 구호 외치는 동행노조",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-05T10:34:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3446324"
     },
     {
      "title": "[포토] 구호 외치는 삼성전자 동행노조",
@@ -208,7 +271,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1022,
+  "flagged": 1024,
   "matched": 468,
   "avgLeadMin": 434,
   "recent": [
