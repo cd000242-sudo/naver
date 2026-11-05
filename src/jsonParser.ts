@@ -11,6 +11,7 @@
  */
 
 import JSON5 from 'json5';
+import { closeUnbalancedJson } from './jsonBracketCloser.js';
 
 /**
  * Thrown when the AI response could not be parsed into a complete JSON
@@ -452,6 +453,19 @@ export function safeParseJson<T>(text: string): T {
       }
     } catch (quoteError) {
       console.warn('[JSON 파싱] 1.5차 시도 실패:', (quoteError as Error).message);
+    }
+
+    // [2026-11-05] 1.6차: 끝 괄호만 빠진 응답은 괄호만 닫는다. 2차~ 의 쉼표 복구가 먼저 돌면
+    // "}," 뒤 키마다 ", " 가 붙어(", selectedTitle") 제목·소제목·본문이 전부 빈 것으로 판정됐다.
+    try {
+      const closed = closeUnbalancedJson(cleaned);
+      if (closed) {
+        const parsed = JSON5.parse(closed) as T;
+        console.warn('[JSON 파싱] ✅ 1.6차 성공: 빠진 끝 괄호만 닫음');
+        return parsed;
+      }
+    } catch (closeError) {
+      console.warn('[JSON 파싱] 1.6차 시도 실패:', (closeError as Error).message);
     }
 
     // 두 번째 시도: 수정 후 JSON5 파싱
