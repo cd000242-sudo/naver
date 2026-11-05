@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T09:58:29.228Z",
+ "builtAt": "2026-11-05T10:08:32.803Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,70 +8,38 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 8,
+ "measured": 14,
  "candidates": [
   {
    "keyword": "조작기소 특검법 상정",
    "sources": [
     "signal.bz",
-    "nate"
+    "daum"
    ],
-   "articles90": 66,
-   "recent20": 7,
-   "press": 50,
-   "firstArticleAt": "2026-11-05T08:29:00.000Z",
+   "articles90": 57,
+   "recent20": 4,
+   "press": 44,
+   "firstArticleAt": "2026-11-05T08:40:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "與, '조작기소특검법' 상정…野, 거리투쟁 불사",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-05T10:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000923288?sid=161"
+    },
+    {
+     "title": "특검법 상정에 “의회 쿠데타” 반발",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-05T10:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000366529?sid=115"
+    },
     {
      "title": "[단독] 법원·법무부 “조작기소 특검법 허술” 반발",
      "press": "kmib.co.kr",
      "publishedAt": "2026-11-05T09:57:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/005/0001883313?sid=100"
-    },
-    {
-     "title": "[TN 현장] '조작기소 특검법' 본회의 상정...국민의힘 필리버스터 돌입",
-     "press": "ntoday.co.kr",
-     "publishedAt": "2026-11-05T09:52:00.000Z",
-     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=130663"
-    },
-    {
-     "title": "‘조작기소 특검법’ 본회의 상정…국힘 필리버스터에 6일 표결 전망",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-05T09:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000130827?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "최태원 SK그룹 회장",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 69,
-   "recent20": 10,
-   "press": 45,
-   "firstArticleAt": "2026-11-05T08:30:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[포토] 학생들과 셀카 찍는 최태원 SK그룹 회장",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-05T09:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003482797?sid=102"
-    },
-    {
-     "title": "[포토] 서울대 학생들과 기념촬영하는 최태원 SK그룹 회장",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-05T09:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003482796?sid=102"
-    },
-    {
-     "title": "최태원 \"얼마나 빨리 AI 맞출 수 있는지, 국가 운명 좌우할 것\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-05T09:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009273183?sid=101"
     }
    ]
   },
@@ -80,24 +48,24 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 50,
-   "recent20": 7,
-   "press": 42,
+   "articles90": 52,
+   "recent20": 2,
+   "press": 44,
    "firstArticleAt": "2026-11-05T08:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "법원, 쿠팡 4235억원 과징금 집행정지 신청 기각",
-     "press": "digitaltoday.co.kr",
-     "publishedAt": "2026-11-05T09:48:00.000Z",
-     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=713155"
+     "title": "법원, 쿠팡 집행정지 신청 일부인용…과징금은 효력 유지",
+     "press": "dealsite.co.kr",
+     "publishedAt": "2026-11-05T10:04:00.000Z",
+     "link": "https://dealsite.co.kr/articles/172217"
     },
     {
-     "title": "쿠팡 4,236억 과징금은 그대로…법원, 시정명령만 일시 정지",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-05T09:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001976884?sid=102"
+     "title": "\"쿠팡, 4200억원 내야\"…법원, '개인정보 유출' 과징금 효력 유지",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-05T10:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005838831?sid=101"
     },
     {
      "title": "법원, 쿠팡 4236억 원 과징금 효력 유지…시정명령은 '일시 정지'",
@@ -108,142 +76,230 @@
    ]
   },
   {
-   "keyword": "넷마블 내년 신작 13종 출시",
+   "keyword": "단원고 아카이브 세계유산 등재",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 33,
-   "recent20": 1,
-   "press": 31,
-   "firstArticleAt": "2026-11-05T08:29:00.000Z",
+   "articles90": 21,
+   "recent20": 4,
+   "press": 20,
+   "firstArticleAt": "2026-11-05T08:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "넷마블, 3분기 매출 6347억원·영업이익 504억원… 모멘텀 일으킬 13개 카...",
-     "press": "ttlnews.com",
-     "publishedAt": "2026-11-05T09:42:00.000Z",
-     "link": "http://www.ttlnews.com/news/articleView.html?idxno=3159322"
+     "title": "'단원고 4.16아카이브' 유네스코 세계기록유산 등재…참사의 기억 세계...",
+     "press": "kgnews.co.kr",
+     "publishedAt": "2026-11-05T09:58:00.000Z",
+     "link": "https://www.kgnews.co.kr/news/article.html?no=918415"
     },
     {
-     "title": "[재계 포커스] 넷마블, 누적 매출 2조원 돌파·올해 전 분기 흑자···글...",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-05T09:27:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=747803"
+     "title": "'단원고 4.16아카이브', 유네스코 세계기록유산 아시아․태평양 지역목...",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-05T09:54:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=561663"
     },
     {
-     "title": "[컨콜] 넷마블, 3분기 영업이익 504억 원, 내년 총 13종 이상 신작 출시...",
-     "press": "gamechosun.co.kr",
-     "publishedAt": "2026-11-05T09:18:00.000Z",
-     "link": "https://www.gamechosun.co.kr/webzine/article/view.php?no=227262"
+     "title": "'단원고 4.16 아카이브' 등 2건, 유네스코 아태 기록유산 등재",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-05T09:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005600270?sid=103"
     }
    ]
   },
   {
-   "keyword": "나주 인공태양 연구시설 예타 통과",
+   "keyword": "언차일드 컴백 연기",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 25,
-   "recent20": 2,
-   "press": 21,
+   "articles90": 11,
+   "recent20": 0,
+   "press": 11,
    "firstArticleAt": "2026-11-05T08:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "나주시, '1조 4천8백억 인공태양'... 미래에너지 국가 거점 우뚝",
-     "press": "newsworker.co.kr",
-     "publishedAt": "2026-11-05T09:50:00.000Z",
-     "link": "https://www.newsworker.co.kr/news/articleView.html?idxno=512586"
+     "title": "\"청개구리가 아닌 독개구리로 돌아왔다\"…'콘셉트 1황' 노리는 언차일드...",
+     "press": "digitalchosun.dizzo.com",
+     "publishedAt": "2026-11-05T09:10:00.000Z",
+     "link": "http://digitalchosun.dizzo.com/site/data/html_dir/2026/11/05/2026110580182.html"
     },
     {
-     "title": "“예타 넘었다”…나주 ‘인공태양’ 연구시설 구축 본격화",
-     "press": "jndn.com",
-     "publishedAt": "2026-11-05T09:40:00.000Z",
-     "link": "http://www.jndn.com/article.php?aid=1793871409442580001"
+     "title": "\"더 별나고, 엉뚱해졌다\"…언차일드, '팅팅'의 새 얼굴 (쇼케이스)",
+     "press": "dispatch.co.kr",
+     "publishedAt": "2026-11-05T09:06:00.000Z",
+     "link": "https://m.entertain.naver.com/article/433/0000132043"
     },
     {
-     "title": "나주 인공태양 연구시설, 1조 4천800억 원 국책사업 예타 통과",
-     "press": "cnbnews.com",
-     "publishedAt": "2026-11-05T09:28:00.000Z",
-     "link": "https://www.cnbnews.com/news/articleView.html?idxno=1022578"
+     "title": "'엠카' 전체 출연 때 데뷔 실감했다는 언차일드의 \"기다렸던 컴백\"[현장...",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-05T09:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/079/0004207003"
     }
    ]
   },
   {
-   "keyword": "오동운 공수처장 구형",
+   "keyword": "프리지아 법적 대응 예고",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-05T08:37:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-05T08:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'직무유기' 오동운 징역 1년 구형…\"터무니없는 기소\" 반발(종합)",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-05T09:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000549275?sid=102"
+     "title": "프리지아 열애설에…소속사 “사실무근, 법적 대응”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-05T09:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003760392?sid=103"
     },
     {
-     "title": "'직무유기' 오동운 공수처장, 1심서 실형 구형…내년 1월 선고(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-05T09:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009273144?sid=102"
+     "title": "프리지아 측, 악성 루모 유포에 법적 대응 경고",
+     "press": "stardailynews.co.kr",
+     "publishedAt": "2026-11-05T09:02:00.000Z",
+     "link": "https://www.stardailynews.co.kr/news/articleView.html?idxno=601479"
     },
     {
-     "title": "특검, '제식구 감싸기' 오동운 공수처장 \"징역 1년\" 구형",
-     "press": "lawissue.co.kr",
-     "publishedAt": "2026-11-05T08:48:00.000Z",
-     "link": "https://www.lawissue.co.kr/view.php?ud=202611051643047658b50722e900_12"
+     "title": "'갤럭시 쓰는 남자 별루' 프리지아, 기업인과 열애설 부인 \"법적 대응\"",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-05T08:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005600153?sid=103"
     }
    ]
   },
   {
-   "keyword": "장동민",
+   "keyword": "최태원 회장과 기념촬영",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 9,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-05T09:11:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[포토] 서울대 학생들과 기념촬영하는 최태원 SK그룹 회장",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-05T09:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003482796?sid=102"
+    },
+    {
+     "title": "[포토] 학생들과 셀카 찍는 최태원 SK그룹 회장",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-05T09:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003482797?sid=102"
+    },
+    {
+     "title": "서울대 특강 마치고 학생들과 기념촬영하는 최태원 SK 회장",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T09:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014304869?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "하이닉스",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T08:58:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-05T08:40:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "서동주, 하이닉스 '226층'에 물렸다…\"다들 제가 팔면 들어간다고\"",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-05T09:33:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002077209"
+    },
+    {
+     "title": "삼성전자, 3분기 D램 매출 점유율 38%…SK하이닉스 29%",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-05T09:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000549270?sid=101"
+    },
+    {
+     "title": "SK하이닉스 40조 소각 날…2차 자사주 매입단가는 15% 낮아",
+     "press": "womentimes.co.kr",
+     "publishedAt": "2026-11-05T09:20:00.000Z",
+     "link": "https://www.womentimes.co.kr/news/articleView.html?idxno=107643"
+    }
+   ]
+  },
+  {
+   "keyword": "외치는 삼성전자 동행노조",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-05T09:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[영상] '16인의 도전자 총출동' 장동민-홍진호-하석진-정현규 외, '데블...",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-05T09:25:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000326874"
+     "title": "삼성전자 동행노조 \"메모리價 급등 완제품이 감당…가격정책 적정했나...",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-05T09:38:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443312"
     },
     {
-     "title": "[포토] 데블스 플랜 장동민 ‘다 잡아버리겠어!’",
-     "press": "heraldmuse.com",
-     "publishedAt": "2026-11-05T09:23:00.000Z",
-     "link": "https://m.entertain.naver.com/article/112/0003812340"
+     "title": "'같은회사 같은권리' 외치는 삼성전자 동행노조",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-05T09:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016424996?sid=102"
     },
     {
-     "title": "[영상] '서바이벌 1황부터 일반인 출연자까지' 장동민-하석진-정현규-스...",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-05T09:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000326868"
+     "title": "삼성전자 수원사업장 앞에서 구호 외치는 동행노조",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-05T09:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016424987?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1008,
-  "matched": 452,
-  "avgLeadMin": 417,
+  "flagged": 1014,
+  "matched": 456,
+  "avgLeadMin": 421,
   "recent": [
+   {
+    "keyword": "아이비 영어특훈",
+    "hitKeyword": "아이비 미국 진출",
+    "hitAt": "2026-11-05T19:00:00+09:00",
+    "leadMin": 1201
+   },
+   {
+    "keyword": "아이비 브로드웨이 진출",
+    "hitKeyword": "아이비 미국 진출",
+    "hitAt": "2026-11-05T19:00:00+09:00",
+    "leadMin": 1191
+   },
+   {
+    "keyword": "신민아 이진욱 유태오 수목금 출연 확정",
+    "hitKeyword": "재혼황후 신민아 주지훈",
+    "hitAt": "2026-11-05T19:00:00+09:00",
+    "leadMin": 597
+   },
+   {
+    "keyword": "교통",
+    "hitKeyword": "유튜버 진쓰레블 교통사고",
+    "hitAt": "2026-11-05T19:00:00+09:00",
+    "leadMin": 418
+   },
    {
     "keyword": "與 재경위 과세 유예 건의",
     "hitKeyword": "가상자산 과세 4번째 유예",
@@ -279,30 +335,6 @@
     "hitKeyword": "가상자산 과세 4번째 유예",
     "hitAt": "2026-11-05T18:30:00+09:00",
     "leadMin": 1646
-   },
-   {
-    "keyword": "가상자산 과세 2년 유예",
-    "hitKeyword": "가상자산 과세 4번째 유예",
-    "hitAt": "2026-11-05T18:30:00+09:00",
-    "leadMin": 106
-   },
-   {
-    "keyword": "가상자산 과세 유예",
-    "hitKeyword": "가상자산 과세 4번째 유예",
-    "hitAt": "2026-11-05T18:30:00+09:00",
-    "leadMin": 86
-   },
-   {
-    "keyword": "유치원",
-    "hitKeyword": "유치원 교사 물림 사건",
-    "hitAt": "2026-11-05T18:00:00+09:00",
-    "leadMin": 297
-   },
-   {
-    "keyword": "코스피·코스닥 급락 매도 사이드카",
-    "hitKeyword": "코스피 블루웨이브 급락",
-    "hitAt": "2026-11-05T18:00:00+09:00",
-    "leadMin": 86
    }
   ]
  }
