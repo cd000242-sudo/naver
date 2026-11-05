@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T13:40:02.922Z",
+ "builtAt": "2026-11-05T13:50:07.852Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,15 +16,15 @@
     "signal.bz",
     "daum"
    ],
-   "articles90": 20,
+   "articles90": 14,
    "recent20": 0,
-   "press": 18,
-   "firstArticleAt": "2026-11-05T12:16:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-05T12:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "영국, 3년3개월만에 기준금리 4%로 인상…영란은행 “마지막 인상 아닐...",
+     "title": "영국, 3년3개월만에 기준금리 4%로 인상…“마지막 인상 아닐 것”",
      "press": "hani.co.kr",
      "publishedAt": "2026-11-05T13:10:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/028/0002830956?sid=101"
@@ -46,8 +46,7 @@
   {
    "keyword": "윤석열 내란 우두머리 2심 내년 선고",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 4,
    "recent20": 1,
