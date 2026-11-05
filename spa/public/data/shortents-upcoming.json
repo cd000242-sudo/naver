@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T10:28:43.649Z",
+ "builtAt": "2026-11-05T10:38:47.291Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,81 +8,51 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 10,
  "candidates": [
   {
-   "keyword": "쿠팡 개인정보 유출 과징금",
+   "keyword": "세계기록유산 아태 목록",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 46,
-   "recent20": 4,
-   "press": 40,
-   "firstArticleAt": "2026-11-05T09:00:00.000Z",
+   "articles90": 17,
+   "recent20": 1,
+   "press": 16,
+   "firstArticleAt": "2026-11-05T09:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "쿠팡, 4000억원 과징금 집행정지 기각에 \"검토 후 대응\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-05T10:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005437364?sid=101"
+     "title": "세월호 기록물 유네스코 아태목록 등재…안산 유족·단체 '환영'",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-05T10:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016425054?sid=103"
     },
     {
-     "title": "법원, 쿠팡 '개인정보 유출' 4200억원대 과징금 효력 유지",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-05T10:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004207028?sid=102"
+     "title": "2014년 4월에 멈춘 시간…‘세월호’ 23만점 기록 세계기록유산 올라 [세...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-05T10:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002719573?sid=103"
     },
     {
-     "title": "쿠팡 과징금 4236억 유지…시정명령은 제동",
-     "press": "daily.hankooki.com",
-     "publishedAt": "2026-11-05T10:12:00.000Z",
-     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1422379"
-    }
-   ]
-  },
-  {
-   "keyword": "조작기소 특검법 상정",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 37,
-   "recent20": 1,
-   "press": 33,
-   "firstArticleAt": "2026-11-05T09:00:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수사·기소 분리해놓고 특검은 예외… 與 '조작기소 특검' 속도전",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-05T10:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000963924?sid=100"
-    },
-    {
-     "title": "與, '조작기소특검법' 상정…野, 거리투쟁 불사",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-05T10:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000923288?sid=161"
-    },
-    {
-     "title": "특검법 상정에 “의회 쿠데타” 반발",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-05T10:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000366529?sid=115"
+     "title": "'단원고 4.16 아카이브' 등 2건, 유네스코 아태 기록유산 등재",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-05T09:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005600270?sid=103"
     }
    ]
   },
   {
    "keyword": "LG엔솔, 3차 ESS 불참",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 22,
+   "articles90": 14,
    "recent20": 2,
-   "press": 22,
-   "firstArticleAt": "2026-11-05T09:00:00.000Z",
+   "press": 14,
+   "firstArticleAt": "2026-11-05T09:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,194 +77,66 @@
    ]
   },
   {
-   "keyword": "유네스코",
-   "sources": [
-    "google"
-   ],
-   "articles90": 23,
-   "recent20": 1,
-   "press": 21,
-   "firstArticleAt": "2026-11-05T08:59:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "단원고 4.16아카이브, 유네스코 아시아태평양 세계기록유산 등재",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-05T10:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000130832?sid=102"
-    },
-    {
-     "title": "'단원고 4.16아카이브' 유네스코 세계기록유산 등재…참사의 기억 세계...",
-     "press": "kgnews.co.kr",
-     "publishedAt": "2026-11-05T09:58:00.000Z",
-     "link": "https://www.kgnews.co.kr/news/article.html?no=918415"
-    },
-    {
-     "title": "'단원고 4.16 아카이브' 등 2건, 유네스코 아태 기록유산 등재",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-05T09:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005600270?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "외국인",
-   "sources": [
-    "google"
-   ],
-   "articles90": 16,
-   "recent20": 2,
-   "press": 16,
-   "firstArticleAt": "2026-11-05T09:06:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "출항 앞두고 잠적…울산 강동항 외국인 선원 보름째 행방묘연",
-     "press": "iusm.co.kr",
-     "publishedAt": "2026-11-05T10:10:00.000Z",
-     "link": "https://www.iusm.co.kr/news/articleView.html?idxno=1070162"
-    },
-    {
-     "title": "요양보호사 10명 중 6명 환갑 넘었는데…\"외국인력 단계적 도입 필요\"",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-05T10:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003151931?sid=102"
-    },
-    {
-     "title": "\"명품·외국인이 끌고 지누스·면세점이 버텼다…현대백화점의 '역전극...",
-     "press": "newsquest.co.kr",
-     "publishedAt": "2026-11-05T10:04:00.000Z",
-     "link": "https://www.newsquest.co.kr/news/articleView.html?idxno=304359"
-    }
-   ]
-  },
-  {
-   "keyword": "세계기록유산 아태 목록",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 17,
-   "recent20": 0,
-   "press": 16,
-   "firstArticleAt": "2026-11-05T08:59:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "2014년 4월에 멈춘 시간…‘세월호’ 23만점 기록 세계기록유산 올라 [세...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-05T10:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002719573?sid=103"
-    },
-    {
-     "title": "'단원고 4.16 아카이브' 등 2건, 유네스코 아태 기록유산 등재",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-05T09:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005600270?sid=103"
-    },
-    {
-     "title": "고조리서 '수운잡방·음식디미방', 아태기록유산에",
-     "press": "cooknchefnews.com",
-     "publishedAt": "2026-11-05T09:52:00.000Z",
-     "link": "https://cooknchefnews.com/news/view/1065606573359020"
-    }
-   ]
-  },
-  {
-   "keyword": "노용우, 디지털엑스 대표 선임",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 10,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-05T09:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "미래에셋 조직개편·임원인사…디지털엑스 대표에 노용우",
-     "press": "whitepaper.co.kr",
-     "publishedAt": "2026-11-05T09:42:00.000Z",
-     "link": "http://www.whitepaper.co.kr/news/articleView.html?idxno=268491"
-    },
-    {
-     "title": "디지털엑스 신임 대표에 노용우 미래에셋증권 부사장 낙점",
-     "press": "consumernews.co.kr",
-     "publishedAt": "2026-11-05T09:40:00.000Z",
-     "link": "http://www.consumernews.co.kr/news/articleView.html?idxno=767731"
-    },
-    {
-     "title": "미래에셋그룹 AI·디지털 중심 조직개편, 디지털X 대표에 미래에셋증권...",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-05T09:30:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=451316"
-    }
-   ]
-  },
-  {
-   "keyword": "조세호, 유튜브 복귀",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-05T09:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "조세호, '조폭연루설' 11개월만 복귀 유튜브서 사과 \"반성 많이 했다\"",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-05T09:47:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004463669"
-    },
-    {
-     "title": "조세호, '조폭 친분설' 이후 복귀 시동⋯'유퀴즈' 前 제작진과 의기투합",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-05T09:40:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2644797"
-    },
-    {
-     "title": "조세호, 복귀하더니 '프로불참러' 벗고 새 출발…\"결혼식·회식 어디든...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-05T09:40:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002077220"
-    }
-   ]
-  },
-  {
-   "keyword": "최태원 회장과 기념촬영",
+   "keyword": "청와대 한미동맹 입장",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T09:11:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-05T09:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최태원, 美 중간선거 결과에 \"증시 롤러코스터 계속될 것\"",
-     "press": "socialvalue.kr",
-     "publishedAt": "2026-11-05T10:26:00.000Z",
-     "link": "https://www.socialvalue.kr/news/view/1065607256033535"
+     "title": "'핵잠' 등 안보협의 뒤집힐까?...\"한미동맹 초당적\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-05T09:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002428886?sid=100"
     },
     {
-     "title": "[포토] 서울대 학생들과 기념촬영하는 최태원 SK그룹 회장",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-05T09:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003482796?sid=102"
+     "title": "靑 \"美 중간선거, 한미동맹 영향 없을 것...대미 투자 국익 최우선\"",
+     "press": "enewstoday.co.kr",
+     "publishedAt": "2026-11-05T09:39:00.000Z",
+     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2489051"
     },
     {
-     "title": "[포토] 학생들과 셀카 찍는 최태원 SK그룹 회장",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-05T09:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003482797?sid=102"
+     "title": "\"한미동맹 영향 없다\"... 靑, 대미투자도 지속",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-05T09:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005600247?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "단원고 4·16 아카이브 등재",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-05T09:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "세월호 기록물 유네스코 아태목록 등재…안산 유족·단체 '환영'",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-05T10:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016425054?sid=103"
+    },
+    {
+     "title": "세월호 참사 기억·옛 조리서, 세계기록유산 아태 목록 등재",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-05T09:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533752?sid=103"
+    },
+    {
+     "title": "세월호 참사 기억, 세계기록유산 아태목록 등재… 조선시대 조리서 2종...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-05T09:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000963919?sid=103"
     }
    ]
   },
@@ -303,10 +145,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T09:05:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-05T09:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -331,100 +173,35 @@
    ]
   },
   {
-   "keyword": "단원고 4·16 아카이브 등재",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T09:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "세월호 참사 기억·옛 조리서, 세계기록유산 아태 목록 등재",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-05T09:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533752?sid=103"
-    },
-    {
-     "title": "세월호 참사 기억, 세계기록유산 아태목록 등재… 조선시대 조리서 2종...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-05T09:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000963919?sid=103"
-    },
-    {
-     "title": "세월호 참사 기억물·조선 밥상 유네스코 아태목록 등재",
-     "press": "kado.net",
-     "publishedAt": "2026-11-05T09:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000209680?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "하이닉스",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T09:20:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "서동주, 하이닉스 '226층'에 물렸다…\"다들 제가 팔면 들어간다고\"",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-05T09:33:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002077209"
-    },
-    {
-     "title": "삼성전자, 3분기 D램 매출 점유율 38%…SK하이닉스 29%",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-05T09:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000549270?sid=101"
-    },
-    {
-     "title": "SK하이닉스 40조 소각 날…2차 자사주 매입단가는 15% 낮아",
-     "press": "womentimes.co.kr",
-     "publishedAt": "2026-11-05T09:20:00.000Z",
-     "link": "https://www.womentimes.co.kr/news/articleView.html?idxno=107643"
-    }
-   ]
-  },
-  {
    "keyword": "외치는 삼성전자 동행노조",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 2,
+   "articles90": 9,
+   "recent20": 5,
+   "press": 3,
    "firstArticleAt": "2026-11-05T09:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성전자 동행노조 \"메모리價 급등 완제품이 감당…가격정책 적정했나...",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-05T09:38:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443312"
+     "title": "[포토] 수원사업장 앞 구호 외치는 동행노조",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-05T10:34:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3446324"
     },
     {
-     "title": "'같은회사 같은권리' 외치는 삼성전자 동행노조",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T09:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016424996?sid=102"
+     "title": "[포토] 구호 외치는 삼성전자 동행노조 조합원들",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-05T10:34:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3446317"
     },
     {
-     "title": "삼성전자 수원사업장 앞에서 구호 외치는 동행노조",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T09:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016424987?sid=102"
+     "title": "[포토] 구호 외치는 삼성전자 동행노조",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-05T10:32:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3446329"
     }
    ]
   }
@@ -432,68 +209,68 @@
  "hitRate": {
   "days": 7,
   "flagged": 1022,
-  "matched": 456,
-  "avgLeadMin": 421,
+  "matched": 468,
+  "avgLeadMin": 434,
   "recent": [
    {
-    "keyword": "아이비 영어특훈",
-    "hitKeyword": "아이비 미국 진출",
-    "hitAt": "2026-11-05T19:00:00+09:00",
-    "leadMin": 1201
+    "keyword": "유튜브 대통령 Y 론칭",
+    "hitKeyword": "조세호 유튜브 복귀",
+    "hitAt": "2026-11-05T19:30:00+09:00",
+    "leadMin": 1635
    },
    {
-    "keyword": "아이비 브로드웨이 진출",
-    "hitKeyword": "아이비 미국 진출",
-    "hitAt": "2026-11-05T19:00:00+09:00",
-    "leadMin": 1191
+    "keyword": "이재명 유튜브 Y 시작합니다",
+    "hitKeyword": "조세호 유튜브 복귀",
+    "hitAt": "2026-11-05T19:30:00+09:00",
+    "leadMin": 1625
    },
    {
-    "keyword": "신민아 이진욱 유태오 수목금 출연 확정",
-    "hitKeyword": "재혼황후 신민아 주지훈",
-    "hitAt": "2026-11-05T19:00:00+09:00",
-    "leadMin": 597
+    "keyword": "이 대통령 유튜브 소통",
+    "hitKeyword": "조세호 유튜브 복귀",
+    "hitAt": "2026-11-05T19:30:00+09:00",
+    "leadMin": 1615
    },
    {
-    "keyword": "교통",
-    "hitKeyword": "유튜버 진쓰레블 교통사고",
-    "hitAt": "2026-11-05T19:00:00+09:00",
-    "leadMin": 418
+    "keyword": "유튜브 대통령 Y 소통 방송",
+    "hitKeyword": "조세호 유튜브 복귀",
+    "hitAt": "2026-11-05T19:30:00+09:00",
+    "leadMin": 1605
    },
    {
-    "keyword": "與 재경위 과세 유예 건의",
-    "hitKeyword": "가상자산 과세 4번째 유예",
-    "hitAt": "2026-11-05T18:30:00+09:00",
-    "leadMin": 3356
+    "keyword": "대통령의 유튜브 소통",
+    "hitKeyword": "조세호 유튜브 복귀",
+    "hitAt": "2026-11-05T19:30:00+09:00",
+    "leadMin": 1544
    },
    {
-    "keyword": "가상자산 과세 유예 건의",
-    "hitKeyword": "가상자산 과세 4번째 유예",
-    "hitAt": "2026-11-05T18:30:00+09:00",
-    "leadMin": 3326
+    "keyword": "블루 쓰나미",
+    "hitKeyword": "외국인 매도 쓰나미",
+    "hitAt": "2026-11-05T19:30:00+09:00",
+    "leadMin": 1504
    },
    {
-    "keyword": "가상자산 과세 유예 논의",
-    "hitKeyword": "가상자산 과세 4번째 유예",
-    "hitAt": "2026-11-05T18:30:00+09:00",
-    "leadMin": 3104
+    "keyword": "블루 쓰나미 미국 정치 변화",
+    "hitKeyword": "외국인 매도 쓰나미",
+    "hitAt": "2026-11-05T19:30:00+09:00",
+    "leadMin": 1443
    },
    {
-    "keyword": "김민석 과세 유예 제안",
-    "hitKeyword": "가상자산 과세 4번째 유예",
-    "hitAt": "2026-11-05T18:30:00+09:00",
-    "leadMin": 1907
+    "keyword": "최태원 SK그룹 회장",
+    "hitKeyword": "최태원 SK주식 매각",
+    "hitAt": "2026-11-05T19:30:00+09:00",
+    "leadMin": 62
    },
    {
-    "keyword": "가상자산 과세 유예 제안",
-    "hitKeyword": "가상자산 과세 4번째 유예",
-    "hitAt": "2026-11-05T18:30:00+09:00",
-    "leadMin": 1807
+    "keyword": "쿠팡 과징금 부과효력 유지",
+    "hitKeyword": "쿠팡 4천억 부과 유지",
+    "hitAt": "2026-11-05T19:30:00+09:00",
+    "leadMin": 62
    },
    {
-    "keyword": "김민석, 코인 과세 유예 제안",
-    "hitKeyword": "가상자산 과세 4번째 유예",
-    "hitAt": "2026-11-05T18:30:00+09:00",
-    "leadMin": 1646
+    "keyword": "최태원 회장과 기념촬영",
+    "hitKeyword": "최태원 SK주식 매각",
+    "hitAt": "2026-11-05T19:30:00+09:00",
+    "leadMin": 21
    }
   ]
  }
