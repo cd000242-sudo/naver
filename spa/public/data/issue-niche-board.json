@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-11-04T21:43:11.006Z",
+  "publishedAt": "2026-11-05T03:48:37.169Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 240,
+    "candidates": 213,
     "niche": 0,
-    "preemption": 29,
+    "preemption": 23,
     "pending": 0
   },
   "freeSample": {
@@ -115,7 +115,6 @@
       "keywordPool": null,
       "trend": {
         "series": [
-          7,
           70,
           93,
           58,
@@ -143,11 +142,12 @@
           20,
           28,
           11,
-          12
+          12,
+          9
         ],
         "label": "📉 단발성",
         "recommendation": "회피! 지난 며칠 폭발 후 급락 중. 글 써도 유입 없음",
-        "measuredAt": "2026-11-04T21:43:11.439Z"
+        "measuredAt": "2026-11-05T03:48:37.942Z"
       },
       "kinCount": 229,
       "kinTop": [],
@@ -281,7 +281,6 @@
       ],
       "trend": {
         "series": [
-          87,
           72,
           67,
           48,
@@ -309,11 +308,12 @@
           52,
           37,
           72,
-          76
+          76,
+          52
         ],
         "label": "🐢 연금형",
         "recommendation": "한 번 쓰면 1년 꾸준 방문자. 안정적 연금 키워드",
-        "measuredAt": "2026-11-04T21:43:11.439Z"
+        "measuredAt": "2026-11-05T03:48:37.942Z"
       },
       "kinCount": 5794,
       "kinTop": [
@@ -499,7 +499,6 @@
           0,
           0,
           0,
-          0,
           85,
           100,
           25,
@@ -520,9 +519,10 @@
           27,
           0,
           13,
-          42
+          42,
+          44
         ],
-        "measuredAt": "2026-11-04T21:43:11.439Z"
+        "measuredAt": "2026-11-05T03:48:37.942Z"
       },
       "kinCount": 312,
       "kinTop": [
@@ -548,6 +548,1888 @@
     }
   ],
   "observations": [
+    {
+      "keyword": "주식회사 에스엘즈",
+      "issue": "에스엘즈",
+      "topic": "에스엘즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 17,
+      "documentCountMeasured": true,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 10",
+        "문서수 17",
+        "선점 후보 — 경쟁 문서 17건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "에스엘즈, 스타트업 월드컵 한국 결선 우승, 글로벌 진출",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "주식회사 에스엘즈 스타트업 월드컵 한국 결선 우승 기업",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "주식회사 에스엘즈가 공간 AI로 스타트업 월드컵 한국 대표까지 간 이유 찾아봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-05T03:41:23.531Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "에스엘즈 스타트업월드컵",
+      "issue": "에스엘즈",
+      "topic": "에스엘즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 2,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 2",
+        "선점 후보 — 경쟁 문서 2건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "에스엘즈, 스타트업 월드컵 한국 결선 우승, 글로벌 진출",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "에스엘즈 스타트업월드컵 한국 결선 우승 글로벌 세미파이널 진출",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "에스엘즈가 스타트업 월드컵 한국 결선 1위 한 데는 의외의 이유가 있더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "에스엘즈",
+          "searchVolume": 170,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "에스엘즈",
+          "searchVolume": 170,
+          "documentCount": 157,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-05T03:41:23.531Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "현대제철 닽",
+      "issue": "현대제철",
+      "topic": "현대제철",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 5,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 5",
+        "선점 후보 — 경쟁 문서 5건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "현대제철, 70년 역사 담은 디지털 아카이브 'H아카이브' 개설",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "home": {
+          "text": "현대제철 닽 주가 왜 이렇게 움직이나 했더니 채용 공고까지 떠서 다시 봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "현대제철 주가",
+          "searchVolume": 172520,
+          "frame": "generic"
+        },
+        {
+          "keyword": "현대제철 채용",
+          "searchVolume": 9740,
+          "frame": "generic"
+        },
+        {
+          "keyword": "현대제철 주식",
+          "searchVolume": 4940,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "현대제철 주가",
+          "searchVolume": 172520,
+          "documentCount": 83457,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "현대제철 채용",
+          "searchVolume": 9740,
+          "documentCount": 16333,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "현대제철 주식",
+          "searchVolume": 4940,
+          "documentCount": 115084,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "현대제철 당진",
+          "searchVolume": 2060,
+          "documentCount": 36752,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "현대제철 연봉",
+          "searchVolume": 1440,
+          "documentCount": 8108,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "현대제철 인천",
+          "searchVolume": 360,
+          "documentCount": 59634,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-05T03:41:23.531Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "오픈ai 닷츠 후기",
+      "issue": "오픈AI",
+      "topic": "오픈AI",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 167,
+      "documentCountMeasured": true,
+      "searchVolume": 30,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 30",
+        "문서수 167",
+        "선점 후보 — 경쟁 문서 167건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "오픈AI, 코덱스 강화·'피에르' 품고 멀티 에이전트 확대",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "구매 검토",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "오픈ai 닷츠 후기 가격과 사용법 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "오픈ai 닷츠 써보기 전에 많이들 놓치는 부분",
+          "frame": "ai",
+          "basis": "메인+후킹 (실측 근거·확장어 미포함)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "오픈ai 닷츠 가격",
+          "searchVolume": 10,
+          "frame": "price"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "오픈ai 닷츠 가격",
+          "searchVolume": 10,
+          "documentCount": 547,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": [
+        {
+          "title": "새로운 AI 에이전트 닷츠, 실제로 얼마나 효율적일까요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1122&docId=495387990&answerNo=0",
+          "views": 119,
+          "answers": null
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-11-05T03:41:23.531Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "에스엘즈 매출",
+      "issue": "에스엘즈",
+      "topic": "에스엘즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 15,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 15",
+        "선점 후보 — 경쟁 문서 15건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "에스엘즈, 스타트업 월드컵 한국 결선 우승, 글로벌 진출",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "에스엘즈 매출과 스타트업 월드컵 우승 건설AI 기업 정보",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "에스엘즈 스타트업 월드컵 한국 결선 우승했다길래 매출 규모부터 봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "에스엘즈",
+          "searchVolume": 170,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "에스엘즈",
+          "searchVolume": 170,
+          "documentCount": 157,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-05T03:41:23.531Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "에스엘즈 채용",
+      "issue": "에스엘즈",
+      "topic": "에스엘즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 15,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 15",
+        "선점 후보 — 경쟁 문서 15건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "에스엘즈, 스타트업 월드컵 한국 결선 우승, 글로벌 진출",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "에스엘즈 채용 공고와 연봉, 스타트업 월드컵 우승 기업 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "에스엘즈 채용 보기 전에 스타트업 월드컵 한국 결선 우승 소식부터 알아야 할 것 같더라",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "에스엘즈",
+          "searchVolume": 170,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "에스엘즈",
+          "searchVolume": 170,
+          "documentCount": 157,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-05T03:41:23.531Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "포티투마루 블라인드",
+      "issue": "포티투마루",
+      "topic": "포티투마루",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 17,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 17",
+        "선점 후보 — 경쟁 문서 17건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "포티투마루, GPU 일체형 AX 솔루션 '어플라이언스42' 출시",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "포티투마루 블라인드 연봉·평점과 신제품 어플라이언스42 출시 소식",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "포티투마루 블라인드에서 연봉 궁금해서 들어갔다가 매출을 먼저 봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "포티투마루 매출",
+          "searchVolume": 10,
+          "frame": "generic"
+        },
+        {
+          "keyword": "포티투마루 연봉",
+          "searchVolume": null,
+          "frame": "generic"
+        },
+        {
+          "keyword": "포티투마루 채용",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "포티투마루 매출",
+          "searchVolume": 10,
+          "documentCount": 687,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-05T03:41:23.531Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "포티투마루 잡플래닛",
+      "issue": "포티투마루",
+      "topic": "포티투마루",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 16,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 16",
+        "선점 후보 — 경쟁 문서 16건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "포티투마루, GPU 일체형 AX 솔루션 '어플라이언스42' 출시",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "포티투마루 잡플래닛 연봉·복지·면접 후기 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "포티투마루 잡플래닛 연봉 평점만 믿고 이직하면 놓치는 게 많더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "포티투마루 연봉",
+          "searchVolume": null,
+          "frame": "generic"
+        },
+        {
+          "keyword": "포티투마루 채용",
+          "searchVolume": null,
+          "frame": "generic"
+        },
+        {
+          "keyword": "포티투마루 면접",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-05T03:41:23.531Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "경리나라 MCP 사용법",
+      "issue": "경리나라 MCP",
+      "topic": "경리나라 MCP",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "어떻게 연동하나",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 31,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 31",
+        "선점 후보 — 경쟁 문서 31건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 어떻게 연동하나"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "웹케시, 생성형 AI 연동 '경리나라 MCP' 12월 출시",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "경리나라 MCP 사용법 12월 출시 전 체험단 신청까지",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "경리나라 MCP 사용법 먼저 봤는데 다운로드부터 막혀서 한참 헤맸네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "경리나라 사용법",
+          "searchVolume": 220,
+          "frame": "howto"
+        },
+        {
+          "keyword": "경리나라 다운로드",
+          "searchVolume": 60,
+          "frame": "generic"
+        },
+        {
+          "keyword": "경리나라 가격",
+          "searchVolume": 30,
+          "frame": "price"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "경리나라 사용법",
+          "searchVolume": 220,
+          "documentCount": 12774,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "경리나라 다운로드",
+          "searchVolume": 60,
+          "documentCount": 1081,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "경리나라 가격",
+          "searchVolume": 30,
+          "documentCount": 14406,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "경리나라 AI",
+          "searchVolume": 20,
+          "documentCount": 4369,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "경리나라 로그인",
+          "searchVolume": 20,
+          "documentCount": 3103,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "경리나라 세금계산서",
+          "searchVolume": 10,
+          "documentCount": 5345,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-05T03:41:23.531Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "에스엘즈 이유미",
+      "issue": "에스엘즈",
+      "topic": "에스엘즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 29,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 29",
+        "선점 후보 — 경쟁 문서 29건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "에스엘즈, 스타트업 월드컵 한국 결선 우승, 글로벌 진출",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "에스엘즈 이유미, 스타트업 월드컵 한국 결선 우승 기업 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "에스엘즈 이유미 보려다 스타트업 월드컵 한국 결선 1위까지 알게 됐네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-05T03:41:23.531Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "포티투마루 이승현",
+      "issue": "포티투마루",
+      "topic": "포티투마루",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 28,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 28",
+        "선점 후보 — 경쟁 문서 28건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "포티투마루, GPU 일체형 AX 솔루션 '어플라이언스42' 출시",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "포티투마루 이승현 어플라이언스42 GPU 일체형 AX 솔루션",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "포티투마루 이승현이 채용 얘기하다 어플라이언스42를 꺼내더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "포티투마루",
+          "searchVolume": 670,
+          "frame": "generic"
+        },
+        {
+          "keyword": "포티투마루 채용",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "포티투마루",
+          "searchVolume": 670,
+          "documentCount": 2357,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-05T03:41:23.531Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "경리나라 MCP",
+      "issue": "경리나라 MCP",
+      "topic": "경리나라 MCP",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 51,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 1,
+      "reasons": [
+        "문서수 51",
+        "선점 후보 — 경쟁 문서 51건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 1건)"
+        }
+      ],
+      "whySearch": {
+        "text": "웹케시, 생성형 AI 연동 '경리나라 MCP' 12월 출시",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "경리나라 MCP 12월 출시, 체험단 신청 조건과 AI 기능",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "경리나라 MCP 12월 출시 소식 듣고 경리나라 가격부터 다시 들여다봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "경리나라 사용법",
+          "searchVolume": 220,
+          "frame": "howto"
+        },
+        {
+          "keyword": "경리나라 다운로드",
+          "searchVolume": 60,
+          "frame": "generic"
+        },
+        {
+          "keyword": "경리나라 가격",
+          "searchVolume": 30,
+          "frame": "price"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "경리나라 사용법",
+          "searchVolume": 220,
+          "documentCount": 12774,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "경리나라 다운로드",
+          "searchVolume": 60,
+          "documentCount": 1081,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "경리나라 가격",
+          "searchVolume": 30,
+          "documentCount": 14406,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "경리나라 로그인",
+          "searchVolume": 20,
+          "documentCount": 3103,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "경리나라 AI",
+          "searchVolume": 20,
+          "documentCount": 4369,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "경리나라 세금계산서",
+          "searchVolume": 10,
+          "documentCount": 5345,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 24,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-05T03:41:23.531Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "에스엘즈 정재헌",
+      "issue": "에스엘즈",
+      "topic": "에스엘즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 43,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 43",
+        "선점 후보 — 경쟁 문서 43건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "에스엘즈, 스타트업 월드컵 한국 결선 우승, 글로벌 진출",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "에스엘즈 정재헌, 스타트업 월드컵 한국 결선 1위 공간 AI 기업",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "에스엘즈 정재헌 대표가 스타트업 월드컵 결선 1위 한 거 의외로 모르더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-05T03:41:23.531Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "(주)에스엘즈",
+      "issue": "에스엘즈",
+      "topic": "에스엘즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 43,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 2,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 43",
+        "선점 후보 — 경쟁 문서 43건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 2건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "에스엘즈, 스타트업 월드컵 한국 결선 우승, 글로벌 진출",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "(주)에스엘즈 스타트업 월드컵 한국 결선 1위 건설 AI 기업 정보",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "(주)에스엘즈 스타트업 월드컵 한국 1위 소식에 공간 AI가 뭔지 많이들 찾더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-05T03:41:23.531Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "에스엘즈 공간AI",
+      "issue": "에스엘즈",
+      "topic": "에스엘즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 50,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 50",
+        "선점 후보 — 경쟁 문서 50건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "에스엘즈, 스타트업 월드컵 한국 결선 우승, 글로벌 진출",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "에스엘즈 공간AI 스타트업월드컵 한국결선 우승 기술력",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "에스엘즈가 공간AI 하나로 스타트업 월드컵 한국 결선 우승한 게 의외였더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-05T03:41:23.531Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "에스엘즈 건설AI",
+      "issue": "에스엘즈",
+      "topic": "에스엘즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 51,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 51",
+        "선점 후보 — 경쟁 문서 51건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "에스엘즈, 스타트업 월드컵 한국 결선 우승, 글로벌 진출",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "에스엘즈 건설AI 스타트업 월드컵 한국 결선 1위 기업 정보",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "에스엘즈 건설AI가 스타트업 월드컵 한국 결선 우승, 공간AI에서 갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-05T03:41:23.531Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "포티투마루 포티투닷",
+      "issue": "포티투마루",
+      "topic": "포티투마루",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 47,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 47",
+        "선점 후보 — 경쟁 문서 47건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "포티투마루, GPU 일체형 AX 솔루션 '어플라이언스42' 출시",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "포티투마루 포티투닷 헷갈리는 AX 솔루션 어플라이언스42",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "포티투마루 포티투닷 상장 소식 듣고 둘이 같은 회사인가 다시 찾아봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "포티투마루 상장",
+          "searchVolume": 20,
+          "frame": "generic"
+        },
+        {
+          "keyword": "포티투마루 채용",
+          "searchVolume": null,
+          "frame": "generic"
+        },
+        {
+          "keyword": "포티투마루 연봉",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "포티투마루 상장",
+          "searchVolume": 20,
+          "documentCount": 657,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-05T03:41:23.531Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "웹케시 MCP",
+      "issue": "웹케시",
+      "topic": "웹케시",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 64,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 1,
+      "reasons": [
+        "문서수 64",
+        "선점 후보 — 경쟁 문서 64건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 1건)"
+        }
+      ],
+      "whySearch": {
+        "text": "웹케시, 챗GPT·클로드 연동 '경리나라 MCP' 12월 출시",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "웹케시 MCP 12월 출시, 챗GPT·클로드로 자금·세금 조회",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "웹케시 MCP 나오면 경리나라 세금계산서까지 챗GPT로 조회된다는데",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "웹케시 주가",
+          "searchVolume": 790,
+          "frame": "generic"
+        },
+        {
+          "keyword": "웹케시 경리나라",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "웹케시 주가",
+          "searchVolume": 790,
+          "documentCount": 10473,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "웹케시 경리나라",
+          "searchVolume": 10,
+          "documentCount": 2143,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-05T03:41:23.531Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "포티투마루 면접",
+      "issue": "포티투마루",
+      "topic": "포티투마루",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 139,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 139",
+        "선점 후보 — 경쟁 문서 139건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "포티투마루, GPU 일체형 AX 솔루션 '어플라이언스42' 출시",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "포티투마루 면접 전 채용·연봉·기업정보 미리 확인",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "포티투마루 면접 전에 채용 공고 다시 보게 되는 이유 있더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "포티투마루 채용",
+          "searchVolume": null,
+          "frame": "generic"
+        },
+        {
+          "keyword": "포티투마루 연봉",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-05T03:41:23.531Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "포티투마루 연봉",
+      "issue": "포티투마루",
+      "topic": "포티투마루",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 134,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 134",
+        "선점 후보 — 경쟁 문서 134건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "포티투마루, GPU 일체형 AX 솔루션 '어플라이언스42' 출시",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "포티투마루 연봉, 채용·복지 조건과 초봉 수준 어디까지",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "포티투마루 연봉 궁금해서 채용 정보 봤더니 생각보다 다르더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "포티투마루 매출",
+          "searchVolume": 10,
+          "frame": "generic"
+        },
+        {
+          "keyword": "포티투마루 채용",
+          "searchVolume": null,
+          "frame": "generic"
+        },
+        {
+          "keyword": "포티투마루 면접",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "포티투마루 매출",
+          "searchVolume": 10,
+          "documentCount": 687,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-05T03:41:23.531Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "에스엘즈 기술",
+      "issue": "에스엘즈",
+      "topic": "에스엘즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "공간AI 내용 관심",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 134,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 134",
+        "선점 후보 — 경쟁 문서 134건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 공간AI 내용 관심"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "에스엘즈, 스타트업 월드컵 한국 결선 우승, 글로벌 진출",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "에스엘즈 기술 뭐길래 스타트업 월드컵 한국 결선 1위 했나",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "에스엘즈 기술이 스타트업 월드컵 한국 결선 1위까지 간 데는 이유가 있더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-05T03:41:23.531Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "라이프밸 벤치마크",
+      "issue": "라이프밸",
+      "topic": "라이프밸",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 180,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 180",
+        "선점 후보 — 경쟁 문서 180건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "오픈AI, 일상 업무 AI 평가 '라이프밸' 공개",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "라이프밸 벤치마크 오픈AI 생활력 테스트 결과 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "라이프밸 벤치마크 보니 AI가 장보기 식단까지 생각보다 사람처럼 하네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-05T03:41:23.531Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "웹케시 rerp",
+      "issue": "웹케시",
+      "topic": "웹케시",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 208,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 5,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 208",
+        "선점 후보 — 경쟁 문서 208건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 5건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "웹케시, 챗GPT·클로드 연동 '경리나라 MCP' 12월 출시",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "웹케시 rerp 경리나라 MCP 12월 출시 챗GPT·클로드 연동",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "웹케시 rerp 찾다 보니 경리나라에 챗GPT 붙는다더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "웹케시 주가",
+          "searchVolume": 790,
+          "frame": "generic"
+        },
+        {
+          "keyword": "웹케시 채용",
+          "searchVolume": 20,
+          "frame": "generic"
+        },
+        {
+          "keyword": "웹케시 경리나라",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "웹케시 주가",
+          "searchVolume": 790,
+          "documentCount": 10473,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "웹케시 채용",
+          "searchVolume": 20,
+          "documentCount": 1139,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "웹케시 경리나라",
+          "searchVolume": 10,
+          "documentCount": 2143,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-05T03:41:23.531Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "씨앤엠 하이퍼액트",
       "issue": "씨앤엠",
@@ -625,136 +2507,8 @@
       "monetize": null,
       "measuredAt": "2026-11-04T21:34:09.992Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "주식회사 에스엘즈",
-      "issue": "에스엘즈",
-      "topic": "에스엘즈",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 17,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 17",
-        "선점 후보 — 경쟁 문서 17건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "건설 AI 에스엘즈가 스타트업 월드컵 한국 결선 우승, 글로벌 진출",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "주식회사 에스엘즈 스타트업 월드컵 한국 결선 우승한 공간 AI 기업",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "주식회사 에스엘즈가 스타트업 월드컵 한국 결선 1위 공간 AI 생소하더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-04T21:34:09.992Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "에스엘즈 스타트업월드컵",
-      "issue": "에스엘즈",
-      "topic": "에스엘즈",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 2,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 2",
-        "선점 후보 — 경쟁 문서 2건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "건설 AI 에스엘즈가 스타트업 월드컵 한국 결선 우승, 글로벌 진출",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "에스엘즈 스타트업월드컵 한국 결선 1위, 글로벌 세미파이널 진출 소식",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "에스엘즈 스타트업월드컵 한국 대표로 뽑혔다길래 공간 AI가 뭔지 찾아봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-04T21:34:09.992Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "에스엘즈 글로벌결선",
@@ -829,7 +2583,8 @@
       "monetize": null,
       "measuredAt": "2026-11-04T21:34:09.992Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "씨앤엠 오픈패스로보틱스",
@@ -895,121 +2650,8 @@
       "monetize": null,
       "measuredAt": "2026-11-04T21:34:09.992Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "현대제철 닽",
-      "issue": "현대제철",
-      "topic": "현대제철",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 5,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 5",
-        "선점 후보 — 경쟁 문서 5건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "현대제철이 사내 AI 플랫폼 'Steel-X' 개소, 전사 AX 가속",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "home": {
-          "text": "현대제철 닽 주가 전망 찾다가 생각보다 엉뚱한 글만 걸리더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "현대제철 주가",
-          "searchVolume": 172520,
-          "frame": "generic"
-        },
-        {
-          "keyword": "현대제철 채용",
-          "searchVolume": 9740,
-          "frame": "generic"
-        },
-        {
-          "keyword": "현대제철 주가 전망",
-          "searchVolume": 1730,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "현대제철 주가",
-          "searchVolume": 172520,
-          "documentCount": 83427,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "현대제철 채용",
-          "searchVolume": 9740,
-          "documentCount": 16326,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "현대제철 주가 전망",
-          "searchVolume": 1730,
-          "documentCount": 56520,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "현대제철 연봉",
-          "searchVolume": 1440,
-          "documentCount": 8107,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "현대제철 당진공장",
-          "searchVolume": 790,
-          "documentCount": 14483,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "현대제철 배당금",
-          "searchVolume": 180,
-          "documentCount": 19197,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-04T21:34:09.992Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "씨앤엠 4족로봇",
@@ -1088,105 +2730,8 @@
       "monetize": null,
       "measuredAt": "2026-11-04T21:34:09.992Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "오픈ai 닷츠 후기",
-      "issue": "오픈AI",
-      "topic": "오픈AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 167,
-      "documentCountMeasured": true,
-      "searchVolume": 30,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 30",
-        "문서수 167",
-        "선점 후보 — 경쟁 문서 167건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "오픈AI가 전 미 육군장관 댄 드리스콜 영입, 국가안보 AI 확대",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "오픈ai 닷츠 후기 가격 실제 비용 정리",
-          "frame": "price",
-          "basis": "검색 질문 '오픈ai 닷츠 가격' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        },
-        "home": {
-          "text": "오픈ai 닷츠 후기 보다가 가격표에서 한참 멈췄어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "오픈ai 닷츠",
-          "searchVolume": 1670,
-          "frame": "generic"
-        },
-        {
-          "keyword": "오픈ai 닷츠 가격",
-          "searchVolume": 10,
-          "frame": "price"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "오픈ai 닷츠",
-          "searchVolume": 1670,
-          "documentCount": 1179,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "오픈ai 닷츠 가격",
-          "searchVolume": 10,
-          "documentCount": 547,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": [
-        {
-          "title": "새로운 AI 에이전트 닷츠, 실제로 얼마나 효율적일까요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1122&docId=495387990&answerNo=0",
-          "views": 117,
-          "answers": null
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-11-04T21:34:09.992Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "씨앤엠 액추에이터",
@@ -1265,7 +2810,8 @@
       "monetize": null,
       "measuredAt": "2026-11-04T21:34:09.992Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "씨앤엠 연봉",
@@ -1335,7 +2881,8 @@
       "monetize": null,
       "measuredAt": "2026-11-04T21:34:09.992Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "하이퍼액트 상용화",
@@ -1405,7 +2952,8 @@
       "monetize": null,
       "measuredAt": "2026-11-04T21:34:09.992Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "씨앤엠 로봇관절",
@@ -1484,139 +3032,8 @@
       "monetize": null,
       "measuredAt": "2026-11-04T21:34:09.992Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "에스엘즈 매출",
-      "issue": "에스엘즈",
-      "topic": "에스엘즈",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 15,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 15",
-        "선점 후보 — 경쟁 문서 15건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "건설 AI 에스엘즈가 스타트업 월드컵 한국 결선 우승, 글로벌 진출",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "에스엘즈 매출과 스타트업 월드컵 한국 결선 우승 후 투자 전망",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "에스엘즈 매출 찾다 보니 스타트업 월드컵 한국 결선 우승이 더 궁금해지네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-04T21:34:09.992Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "에스엘즈 채용",
-      "issue": "에스엘즈",
-      "topic": "에스엘즈",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 15,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 15",
-        "선점 후보 — 경쟁 문서 15건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "건설 AI 에스엘즈가 스타트업 월드컵 한국 결선 우승, 글로벌 진출",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "에스엘즈 채용 공고와 연봉 복지 조건 미리 살펴보기",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "에스엘즈 채용 보러 들어갔다가 스타트업 월드컵 한국 결선 결과에 눈이 멈췄네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-04T21:34:09.992Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "씨앤엠 구동부품",
@@ -1682,73 +3099,8 @@
       "monetize": null,
       "measuredAt": "2026-11-04T21:34:09.992Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "에스엘즈 이유미",
-      "issue": "에스엘즈",
-      "topic": "에스엘즈",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 29,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 29",
-        "선점 후보 — 경쟁 문서 29건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "건설 AI 에스엘즈가 스타트업 월드컵 한국 결선 우승, 글로벌 진출",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "에스엘즈 이유미 대표와 스타트업 월드컵 한국 결선 우승 정보",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "에스엘즈 이유미 대표가 스타트업 월드컵 1위 한 거 보고 회사부터 찾아봤네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-04T21:34:09.992Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "에스엘즈 투자유치",
@@ -1814,276 +3166,8 @@
       "monetize": null,
       "measuredAt": "2026-11-04T21:34:09.992Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "에스엘즈 정재헌",
-      "issue": "에스엘즈",
-      "topic": "에스엘즈",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 43,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 43",
-        "선점 후보 — 경쟁 문서 43건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "건설 AI 에스엘즈가 스타트업 월드컵 한국 결선 우승, 글로벌 진출",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "에스엘즈 정재헌 대표 스타트업 월드컵 한국 결선 우승 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "에스엘즈 정재헌 대표가 스타트업 월드컵 한국 결선서 우승한 데는 이유가 있더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-04T21:34:09.992Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "(주)에스엘즈",
-      "issue": "에스엘즈",
-      "topic": "에스엘즈",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 43,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 2,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 43",
-        "선점 후보 — 경쟁 문서 43건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 2건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "건설 AI 에스엘즈가 스타트업 월드컵 한국 결선 우승, 글로벌 진출",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "(주)에스엘즈 건설·공간 AI로 스타트업월드컵 한국 1위 한 기술",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "(주)에스엘즈가 스타트업월드컵 한국 결선에서 우승했다는데 어떤 회사길래",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-04T21:34:09.992Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "에스엘즈 공간AI",
-      "issue": "에스엘즈",
-      "topic": "에스엘즈",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 50,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 50",
-        "선점 후보 — 경쟁 문서 50건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "건설 AI 에스엘즈가 스타트업 월드컵 한국 결선 우승, 글로벌 진출",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "에스엘즈 공간AI 스타트업월드컵 한국 결선 우승 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "에스엘즈 공간AI 건설 스타트업이 한국 1위 먹고 샌프란시스코까지 간다네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "에스엘즈",
-          "searchVolume": 170,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "에스엘즈",
-          "searchVolume": 170,
-          "documentCount": 156,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-04T21:34:09.992Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "에스엘즈 건설AI",
-      "issue": "에스엘즈",
-      "topic": "에스엘즈",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 51,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 51",
-        "선점 후보 — 경쟁 문서 51건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "건설 AI 에스엘즈가 스타트업 월드컵 한국 결선 우승, 글로벌 진출",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "에스엘즈 건설AI 공간기술로 스타트업월드컵 한국 결선 1위",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "에스엘즈 건설AI가 스타트업 월드컵 한국 1위 한 거 공간 AI 덕이더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-04T21:34:09.992Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "에스엘즈 기술력",
@@ -2145,7 +3229,8 @@
       "monetize": null,
       "measuredAt": "2026-11-04T21:34:09.992Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "에스엘즈 창업자",
@@ -2207,7 +3292,8 @@
       "monetize": null,
       "measuredAt": "2026-11-04T21:34:09.992Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "에스엘즈 투자",
@@ -2269,7 +3355,8 @@
       "monetize": null,
       "measuredAt": "2026-11-04T21:34:09.992Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "오토 온톨로지 뜻",
@@ -2348,7 +3435,8 @@
       },
       "measuredAt": "2026-11-04T21:34:09.992Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "엔비디아 오토 온톨로지",
@@ -2410,7 +3498,8 @@
       "monetize": null,
       "measuredAt": "2026-11-04T21:34:09.992Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "한남더힐아파트 photos",
@@ -2480,7 +3569,8 @@
       "monetize": null,
       "measuredAt": "2026-11-04T21:34:09.992Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "amd 커옵 방법",
@@ -2553,69 +3643,8 @@
       "monetize": null,
       "measuredAt": "2026-11-04T21:34:09.992Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "라이프밸 벤치마크",
-      "issue": "라이프밸",
-      "topic": "라이프밸",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 178,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 178",
-        "선점 후보 — 경쟁 문서 178건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "오픈AI가 일상 업무 AI 평가 '라이프밸' 공개, 비서 성능 향상",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "라이프밸 벤치마크 오픈AI 공개 일상 업무 AI 평가 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "라이프밸 벤치마크 뜯어보니 AI 장보기 식단 짜기가 생각보다 이 정도네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-04T21:34:09.992Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "난파선 안토차",
@@ -4611,895 +5640,85 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "앤트로픽 엔스로픽 차이",
-      "issue": "앤트로픽",
-      "topic": "앤트로픽",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 44,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "rising",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 44",
-        "선점 후보 — 경쟁 문서 44건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "상장 앞둔 앤트로픽이 분기손실 65% 줄고 AI투자 1200조원을 약정했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "앤트로픽 엔스로픽 차이, 1200조원 투자·상장 앞둔 그 회사",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "앤트로픽 엔스로픽 차이 찾다 상장 앞둔 매출 12배에서 눈이 멈췄어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "앤트로픽 오픈ai 차이",
-          "searchVolume": 30,
-          "frame": "compare"
-        },
-        {
-          "keyword": "앤트로픽 상장",
-          "searchVolume": 22260,
-          "frame": "generic"
-        },
-        {
-          "keyword": "앤트로픽 주가",
-          "searchVolume": 7180,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "앤트로픽 상장",
-          "searchVolume": 22260,
-          "documentCount": 34297,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "앤트로픽 주가",
-          "searchVolume": 7180,
-          "documentCount": 52536,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "앤트로픽 상장일",
-          "searchVolume": 3650,
-          "documentCount": 27859,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "앤트로픽 클로드",
-          "searchVolume": 2320,
-          "documentCount": 40875,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "앤트로픽 매출",
-          "searchVolume": 870,
-          "documentCount": 43667,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "앤트로픽 기업가치",
-          "searchVolume": 70,
-          "documentCount": 42744,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "앤트로픽 투자",
-          "searchVolume": 50,
-          "documentCount": 77933,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "앤트로픽 오픈ai 차이",
-          "searchVolume": 30,
-          "documentCount": 15246,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-03T02:43:49.437Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "119만 유튜버 긱블",
-      "issue": "119만 유튜버 긱블",
-      "topic": "119만 유튜버 긱블",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 23,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "문서수 23",
-        "선점 후보 — 경쟁 문서 23건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 1건)"
-        }
-      ],
-      "whySearch": {
-        "text": "119만 유튜버 긱블이 캐릭터 로봇 시장에 출사표를 던졌다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "119만 유튜버 긱블 캐릭터 로봇 월 매출 10억 목표",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "119만 유튜버 긱블이 월 10억 목표로 꺼낸 로봇이 좀 의외더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-03T02:43:49.437Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "비드래프트 치토스",
-      "issue": "비드래프트",
-      "topic": "비드래프트",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 40,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 2,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 40",
-        "선점 후보 — 경쟁 문서 40건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 2건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "비드래프트가 AI가 해제 못 하는 킬스위치 보안OS ViKernel을 공개했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "비드래프트 치토스, 금융보안원 17개 평가기준 대응 모듈 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "비드래프트 치토스가 금융보안원 평가기준 통과한 방식이 의외더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-03T02:43:49.437Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "시스코 코드 재작성",
-      "issue": "시스코",
-      "topic": "시스코",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 36,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "문서수 36",
-        "선점 후보 — 경쟁 문서 36건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 1건)"
-        }
-      ],
-      "whySearch": {
-        "text": "시스코가 27세 직원에게 AI로 기존 코드 98% 재작성을 맡겼다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "시스코 코드 재작성 2년 내 레거시 98% 목표 실현 가능성",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "시스코 코드 재작성 2년 내 98%, 주가 반응은 또 다르더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "시스코 주가",
-          "searchVolume": 580,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "시스코 주가",
-          "searchVolume": 580,
-          "documentCount": 31661,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-03T02:43:49.437Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "비드래프트 김민식 대표",
-      "issue": "비드래프트",
-      "topic": "비드래프트",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 72,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 72",
-        "선점 후보 — 경쟁 문서 72건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "비드래프트가 AI가 해제 못 하는 킬스위치 보안OS ViKernel을 공개했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "비드래프트 김민식 대표가 공개한 보안OS ViKernel 핵심",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "비드래프트 김민식 대표가 공개한 보안OS를 AI도 못 끄게 막았다더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-03T02:43:49.437Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "비드래프트 보안OS",
-      "issue": "비드래프트",
-      "topic": "비드래프트",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 71,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 71",
-        "선점 후보 — 경쟁 문서 71건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "비드래프트가 AI가 해제 못 하는 킬스위치 보안OS ViKernel을 공개했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "비드래프트 보안OS ViKernel, 킬스위치가 기존과 다른 점",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "비드래프트 보안OS 투자하기 전에 킬스위치부터 눌러봤더니 좀 묘하더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "비드래프트 투자",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 9,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-03T02:43:49.437Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "비드래프트 다윈",
-      "issue": "비드래프트",
-      "topic": "비드래프트",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 137,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 137",
-        "선점 후보 — 경쟁 문서 137건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "비드래프트가 AI가 해제 못 하는 킬스위치 보안OS ViKernel을 공개했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "비드래프트 다윈 ViKernel 보안 OS 킬스위치 기능 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "비드래프트 다윈 AI가 스스로 못 푸는 킬스위치 이래서 내놨더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-03T02:43:49.437Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "비드래프트 김민식",
-      "issue": "비드래프트",
-      "topic": "비드래프트",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 175,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 175",
-        "선점 후보 — 경쟁 문서 175건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "비드래프트가 AI가 해제 못 하는 킬스위치 보안OS ViKernel을 공개했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "비드래프트 김민식 대표가 공개한 보안 OS ViKernel 핵심",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "비드래프트 김민식 투자 얘기 듣자마자 통장을 한참 다시 들여다봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "비드래프트 투자",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-03T02:43:49.437Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "비드래프트 킬스위치",
-      "issue": "비드래프트",
-      "topic": "비드래프트",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 151,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 151",
-        "선점 후보 — 경쟁 문서 151건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "비드래프트가 AI가 해제 못 하는 킬스위치 보안OS ViKernel을 공개했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "비드래프트 킬스위치 ViKernel, AI가 스스로 못 푸는 이유",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "비드래프트 킬스위치 ViKernel이 AI도 스스로 못 끈다는데 여기서 갈리더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 4,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-03T02:43:49.437Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "시스코 팝송",
-      "issue": "시스코",
-      "topic": "시스코",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 230,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 2,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 230",
-        "선점 후보 — 경쟁 문서 230건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 2건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "시스코가 27세 직원에게 AI로 기존 코드 98% 재작성을 맡겼다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "home": {
-          "text": "시스코 팝송 뭔지도 모르고 틀었다가 하루 종일 흥얼거리고 있네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 436,
-      "kinTop": [
-        {
-          "title": "남자 보컬 입시곡(팝송)",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=30213&docId=429846015&answerNo=1",
-          "views": 1162,
-          "answers": 1
-        },
-        {
-          "title": "올드팝송 ost 제목좀..cf에도 많이 나왔어요 포크송? 같은데요....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=3021104&docId=418837904&answerNo=1",
-          "views": 333,
-          "answers": 1
-        },
-        {
-          "title": "올드팝송 ost 제목좀..cf에도 많",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=3021104&docId=418836549&answerNo=2",
-          "views": 305,
-          "answers": 2
-        },
-        {
-          "title": "여자 팝송중에 가사안에 시스코??시스",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=30203&docId=328940505&answerNo=2",
-          "views": 136,
-          "answers": 2
-        },
-        {
-          "title": "영어공부하려고 팝송들으려고 하는데요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1103&docId=358778340&answerNo=1",
-          "views": 63,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-11-03T02:43:49.437Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "킬스위치 디브랜드",
-      "issue": "킬스위치",
-      "topic": "킬스위치",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 255,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 255",
-        "선점 후보 — 경쟁 문서 255건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "AI 폭주와 중국산 제품을 막는 킬스위치 도입 움직임이 확산하고 있다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-03T02:43:49.437Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "EU 무역 킬스위치",
-      "issue": "킬스위치",
-      "topic": "킬스위치",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 257,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 257",
-        "선점 후보 — 경쟁 문서 257건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "AI 폭주와 중국산 제품을 막는 킬스위치 도입 움직임이 확산하고 있다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-03T02:43:49.437Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
   "issues": [
     {
-      "issue": "조작기소 특검법 법사위",
+      "issue": "코스피 매도 사이드카",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": "반도체주 급락에 코스피 4~5%대 급락, 매도 사이드카 발동",
+      "headlines": [
+        {
+          "title": "반도체주 급락에 코스피 4%대↓…매도 사이드카 발동",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-05T01:31:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016423425?sid=101"
+        },
+        {
+          "title": "코스피, 장중 4%대 급락…매도 사이드카 발동",
+          "press": "news.kbs.co.kr",
+          "publishedAt": "2026-11-05T01:33:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/056/0012287768?sid=101"
+        },
+        {
+          "title": "코스피 매도 사이드카…5400선 '위태'",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-11-05T01:24:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005436952?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "코스피",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "데드 어게인 발표회",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
-      "isHot": false,
-      "why": "여권 주도로 조작기소 특검법이 법사위를 통과해 본회의 처리 추진",
+      "isHot": true,
+      "why": "'데블스 플랜: 데드 어게인' 제작발표회 개최",
+      "headlines": [
+        {
+          "title": "[포토] '데플스 플랜: 데드 어게인', 힘차게 화이팅",
+          "press": "isplus.com",
+          "publishedAt": "2026-11-05T02:56:00.000Z",
+          "link": "https://m.entertain.naver.com/article/241/0003539369"
+        },
+        {
+          "title": "[사진]'데블스 플랜: 데드 어게인' 제작발표회",
+          "press": "osen.co.kr",
+          "publishedAt": "2026-11-05T02:51:00.000Z",
+          "link": "https://m.entertain.naver.com/article/109/0005635127"
+        },
+        {
+          "title": "다시 돌아온 '데블스 플랜:데드 어게인'[★포토]",
+          "press": "starnewskorea.com",
+          "publishedAt": "2026-11-05T02:28:00.000Z",
+          "link": "https://m.entertain.naver.com/article/108/0003484871"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "조작기소 특검법 법사위",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "여당 주도 '조작기소 특검법' 법사위 통과, 본회의 추진",
       "headlines": [
         {
           "title": "與, 법사위서 '조작기소 특검법' 강행 처리…국힘 \"날치기\" 반발(종합)",
@@ -5536,141 +5755,30 @@
       "rowCount": 0
     },
     {
-      "issue": "삼성",
+      "issue": "하이닉스 주가 하락",
       "issueType": "fresh",
       "lane": "realtime",
-      "issueStatus": "stable",
+      "issueStatus": "rising",
       "isHot": true,
-      "why": "삼성 갤버즈에 식약처 허가 청력검사 기능 탑재",
+      "why": "고점 대비 반토막, 삼성전자·SK하이닉스 낙폭 확대",
       "headlines": [
         {
-          "title": "\"삼성이 이어폰에 작정하고 넣었다\"…식약처 허가한 놀라운 기능",
+          "title": "삼전닉스 빠질 때 오히려 올랐다…개미들 몰린 '뜻밖의 강자'",
           "press": "hankyung.com",
-          "publishedAt": "2026-11-04T01:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005350096?sid=101"
+          "publishedAt": "2026-11-05T02:01:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005350615?sid=101"
         },
         {
-          "title": "삼성, 연장 12회 혈투 끝에 웃었다…kt 꺾고 KS 1승 1패",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-04T14:11:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/001/0016422822"
-        },
-        {
-          "title": "삼성바이오 노조, 6일부터 2차파업…400명 규모",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-04T10:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014301990?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "삼성 라이온즈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼성 기아",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼성 서비스센터",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼성 e&a",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼성 폴드8",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼성 청소기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼성 갤럭시",
-          "searchVolume": 23520,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼성 링",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "삼성 KS 2차전",
-          "reason": "1승1패 다음 경기",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "최지훈 재혼 축하",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "서인영이 6세 연상 엔피 최지훈 대표와 하반기 재혼 발표",
-      "headlines": [
-        {
-          "title": "걸그룹 출신 결혼 러시…유지애-민희-유정은 초혼, 서인영은 ‘행복한 ...",
-          "press": "sports.khan.co.kr",
-          "publishedAt": "2026-10-28T05:33:00.000Z",
-          "link": "https://m.entertain.naver.com/article/144/0001146798"
-        },
-        {
-          "title": "서인영, 사업가와 두 번째 결혼...작정하고 빼버린 '2가지'",
-          "press": "wikitree.co.kr",
-          "publishedAt": "2026-11-04T13:42:00.000Z",
-          "link": "https://www.wikitree.co.kr/articles/1171912"
-        },
-        {
-          "title": "“몇 개월 사나 보자”…서인영, 재혼 발표 후 악플에 상처 받아",
-          "press": "sportsseoul.com",
-          "publishedAt": "2026-06-10T01:15:00.000Z",
-          "link": "https://m.entertain.naver.com/article/468/0001246108"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "美 민주당 상하원",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "미 중간선거서 민주당 상하원 다수당 탈환 확실시",
-      "headlines": [
-        {
-          "title": "美민주 상·하원 다수당 탈환 확실시…'블루 쓰나미' 목전(종합)",
-          "press": "news1.kr",
-          "publishedAt": "2026-11-04T04:37:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009269654?sid=104"
-        },
-        {
-          "title": "‘랩으로 연설’ 제프리스, 美 첫 흑인 하원의장 눈앞",
-          "press": "donga.com",
-          "publishedAt": "2026-11-04T13:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/020/0003760113?sid=104"
-        },
-        {
-          "title": "트럼프 “민주당과 협력하겠다”…美언론, 민주 상하원 승리 예측",
+          "title": "고점 대비 반토막 난 삼전닉스…내년 실적 믿고 지금 사도 될까",
           "press": "mk.co.kr",
-          "publishedAt": "2026-11-04T04:43:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005758821?sid=101"
+          "publishedAt": "2026-11-05T02:01:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005759365?sid=101"
+        },
+        {
+          "title": "삼성전자 18만원대·하이닉스 90만원까지?…지금 ‘물타기’ 말리는 이...",
+          "press": "segye.com",
+          "publishedAt": "2026-11-04T20:02:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/022/0004172614?sid=101"
         }
       ],
       "concentrated": [],
@@ -5678,78 +5786,65 @@
       "rowCount": 0
     },
     {
-      "issue": "주가",
+      "issue": "장기 기증",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "stable",
       "isHot": true,
-      "why": "한진칼 지분경쟁·크래프톤 자사주 매입에 주가 급등",
+      "why": "뇌사한 22세 전수연씨, 장기기증으로 8명에 새 생명",
       "headlines": [
         {
-          "title": "[美중간선거] \"최대 패배자는 일론 머스크\"…청문회 가능성·주가까지 ...",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-04T18:47:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016422865?sid=104"
-        },
-        {
-          "title": "6000억 베팅한 머스크 ‘날벼락’… 주가 ‘흔들’, 청문회까지?",
-          "press": "kmib.co.kr",
-          "publishedAt": "2026-11-04T20:27:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/005/0001883148?sid=104"
-        },
-        {
-          "title": "“한진칼 지분경쟁 불붙었다” 주가 또 30% 뛰며 시장 요동",
+          "title": "아픈 언니 걱정하던 20대女 돌연 쓰러져…장기기증으로 8명에 새 삶",
           "press": "donga.com",
-          "publishedAt": "2026-11-03T15:32:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/020/0003759847?sid=101"
+          "publishedAt": "2026-11-05T01:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/020/0003760252?sid=102"
+        },
+        {
+          "title": "아픈 언니 먼저 챙기던 22살…심장·눈 등 기증해 8명에 새 삶",
+          "press": "hani.co.kr",
+          "publishedAt": "2026-11-05T01:40:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/028/0002830792?sid=102"
+        },
+        {
+          "title": "\"언니 아파서\" 일찍 철든 딸…8명 구하고 하늘로",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-05T02:24:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014303308?sid=102"
         }
       ],
       "concentrated": [
         {
-          "keyword": "삼성전자 주가",
+          "keyword": "장기 기증 절차",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "하이닉스 주가",
-          "searchVolume": 5072800,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "SK하이닉스 주가",
-          "searchVolume": 4450700,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "현대차 주가",
-          "searchVolume": 1418800,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인텔 주가",
+          "keyword": "장기 기증 방법",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "애플 주가",
+          "keyword": "장기기증 신청",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "엔비디아 주가",
-          "searchVolume": 526000,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "주가 하락 원인",
+          "keyword": "장기기증 타투",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [
         {
-          "keyword": "테슬라 주가 전망",
-          "reason": "머스크 흔들 여파",
+          "keyword": "장기기증 서약방법",
+          "reason": "동참 심리 확산",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "장기기증 절차",
+          "reason": "어떻게 진행되나",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -5758,30 +5853,30 @@
       "rowCount": 0
     },
     {
-      "issue": "강호동 구속영장",
+      "issue": "한전 전기요금 현실화",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
-      "isHot": false,
-      "why": "경찰이 뇌물·공금유용 의혹 농협 강호동 회장 구속영장 신청",
+      "isHot": true,
+      "why": "한전 사장 \"전기요금 현실화 필요, 산업용 인상은 최후 수단\"",
       "headlines": [
         {
-          "title": "경찰, 강호동 농협중앙회장 구속영장 신청…금품수수 등 혐의",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-04T09:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016422240?sid=102"
-        },
-        {
-          "title": "경찰, 강호동 농협중앙회장 구속영장 신청",
-          "press": "khan.co.kr",
-          "publishedAt": "2026-11-04T10:54:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/032/0003480705?sid=102"
-        },
-        {
-          "title": "경찰, 강호동 농협중앙회장 구속영장 신청…뇌물수수 등 혐의",
+          "title": "김동철 한전사장 \"전기요금 현실화 필요…산업용 인상은 최후 수단\"",
           "press": "newsis.com",
-          "publishedAt": "2026-11-04T09:37:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014301956?sid=102"
+          "publishedAt": "2026-11-05T02:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014303178?sid=101"
+        },
+        {
+          "title": "한전 사장 \"전기요금 현실화해야…산업용 인상은 최후 수단\"",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-11-05T02:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005436998?sid=101"
+        },
+        {
+          "title": "김동철 한전 사장 “전기요금 현실화 필요…산업용 인상은 최후 수단”",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-11-05T02:17:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006404113?sid=101"
         }
       ],
       "concentrated": [],
@@ -5789,92 +5884,99 @@
       "rowCount": 0
     },
     {
-      "issue": "이다해",
+      "issue": "LG",
       "issueType": "fresh",
       "lane": "realtime",
-      "issueStatus": "declining",
+      "issueStatus": "stable",
       "isHot": true,
-      "why": "이다해가 세븐과 만삭 셀프 화보 공개, 11월 출산 앞둬",
+      "why": "LG, 그룹 안전환경 콘퍼런스 'LG SHEC' 개최",
       "headlines": [
         {
-          "title": "이다해, ♥세븐과 완성한 셀프 만삭 화보…아름다운 D라인 [N샷]",
-          "press": "news1.kr",
-          "publishedAt": "2026-11-04T06:34:00.000Z",
-          "link": "https://m.entertain.naver.com/article/421/0009270129"
+          "title": "LG, 그룹 안전환경 콘퍼런스 'LG SHEC' 진행",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-05T01:22:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016423372?sid=101"
         },
         {
-          "title": "세븐, ♥이다해 볼록 D라인에 귀 쫑긋...딸과 교감하는 '예비 아빠'",
-          "press": "sportschosun.com",
-          "publishedAt": "2026-11-04T04:55:00.000Z",
-          "link": "https://m.entertain.naver.com/article/076/0004463080"
+          "title": "\"AI가 위험상황 막는다\"…LG 16개 계열사, 안전관리 해법 위해 한자리에",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-05T01:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014302957?sid=101"
         },
         {
-          "title": "“마지막 둘만의 여행”…이다해, 세븐과 일본서 찍은 ‘만삭 사진’ 공...",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-11-04T06:29:00.000Z",
-          "link": "https://m.entertain.naver.com/article/009/0005758899"
+          "title": "LG, AI로 사업장 위험 잡는다…16개 계열사 안전혁신 공유",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-11-05T01:02:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006404037?sid=101"
         }
       ],
       "concentrated": [
         {
-          "keyword": "이다해 세븐",
+          "keyword": "lg u플러스",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "이다해 만삭",
+          "keyword": "lg u+",
+          "searchVolume": 43500,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "lg 이노텍",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "이다해 중국",
+          "keyword": "lg cns",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "이다해 나무위키",
+          "keyword": "LG 트윈스",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "세븐 이다해",
+          "keyword": "lg 청소기",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "이다해 리즈",
+          "keyword": "lg그룹",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "이다해 배우",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "추노 이다해",
+          "keyword": "lg styler",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [
         {
-          "keyword": "이다해 출산 소식",
-          "reason": "11월 출산 임박",
+          "keyword": "LG 외국인투수",
+          "reason": "영입 발표 관심",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "이다해 아기 이름",
-          "reason": "출산 후 궁금",
+          "keyword": "AI 안전관리",
+          "reason": "활용 사례 궁금",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "세븐 이다해 2세",
-          "reason": "딸 교감 언급",
+          "keyword": "LG 트윈스 전력",
+          "reason": "내년 라인업 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "LG SHEC 사례",
+          "reason": "계열사 적용법",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -5883,40 +5985,745 @@
       "rowCount": 0
     },
     {
-      "issue": "신촌 세브란스 흉기",
+      "issue": "경상수지 600억달러 돌파",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
-      "isHot": false,
-      "why": "신촌 세브란스서 50대 여성이 정신과 교수 흉기 피습, 체포",
+      "isHot": true,
+      "why": "9월 경상수지 흑자 사상 첫 600억달러 돌파, 반도체 견인",
       "headlines": [
         {
-          "title": "신촌 세브란스병원서 정신과 의사 흉기로 찌른 50대 여성 체포(종합2보...",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-04T11:36:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016422495?sid=102"
+          "title": "9월 경상수지 흑자 사상 첫 600억달러 돌파",
+          "press": "hani.co.kr",
+          "publishedAt": "2026-11-04T23:02:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/028/0002830774?sid=101"
         },
         {
-          "title": "돌연 진료실 난입…신촌세브란스 흉기 난동에 교수 중상",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-11-04T11:53:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001400696?sid=102"
+          "title": "9월 경상수지 흑자, 사상 최초 600억 달러 돌파",
+          "press": "nocutnews.co.kr",
+          "publishedAt": "2026-11-04T23:09:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/079/0004206655?sid=101"
         },
         {
-          "title": "서울 신촌 세브란스병원서 ‘흉기 난동’…의사 1명 부상",
+          "title": "9월 경상수지 사상 첫 600억 달러 돌파…“반도체 수출 증가”",
           "press": "news.kbs.co.kr",
-          "publishedAt": "2026-11-04T12:26:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/056/0012287423?sid=102"
+          "publishedAt": "2026-11-04T23:02:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/056/0012287663?sid=101"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "열차",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "출근길 우이신설선 전구간 열차 운행 지연, 복구 중",
+      "headlines": [
+        {
+          "title": "출근길 우이신설선 전구간 열차 운행 지연…복구 중",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-04T23:50:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016423026?sid=102"
+        },
+        {
+          "title": "출근길 우이신설선 전구간 열차 운행 한때 지연",
+          "press": "news.kbs.co.kr",
+          "publishedAt": "2026-11-05T00:19:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/056/0012287711?sid=102"
+        },
+        {
+          "title": "출근길 우이신설선 전 구간 열차 운행 지연…\"원인 확인 중\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-05T00:20:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014302723?sid=102"
         }
       ],
       "concentrated": [
         {
-          "keyword": "신촌세브란스",
+          "keyword": "스페인 열차",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "동해 열차 패키지",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "열차 시간표 조회",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "열차 vs 기차",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "열차 조회",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "열차 량",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "열차 고장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "열차 단선",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "지연 원인",
+          "reason": "왜 멈췄나",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "청해부대 확대",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "청해부대 임무 호르무즈 650㎞까지 확대, 초계기·75명 추가 투입",
+      "headlines": [
+        {
+          "title": "청해부대 임무 호르무즈 650㎞ 해역까지 확대…초계기 추가 투입",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-05T00:29:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016423152?sid=100"
+        },
+        {
+          "title": "'청해부대 파견 확대'…정부, 파견동의안 수정안 확정",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-11-05T01:33:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001400828?sid=100"
+        },
+        {
+          "title": "정부 \"청해부대 75명 추가 파견...작전지역도 확대\"",
+          "press": "ytn.co.kr",
+          "publishedAt": "2026-11-05T01:30:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/052/0002428586?sid=100"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "이미지스 2.6",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "오픈AI '이미지스 2.6' 공개, 챗GPT서 움직이는 GIF 생성 지원",
+      "headlines": [
+        {
+          "title": "오픈AI, '이미지스 2.6' 공개…챗GPT서 움직이는 GIF 생성 지원",
+          "press": "aitimes.com",
+          "publishedAt": "2026-11-05T03:30:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=217038"
+        },
+        {
+          "title": "[52주 최저가] CJ제일제당, 이미지스 등 24개 장중 신저가",
+          "press": "itooza.com",
+          "publishedAt": "2025-05-26T01:38:00.000Z",
+          "link": "https://www.itooza.com/common/iview.php?no=2025052609340105283"
+        },
+        {
+          "title": "[마감시황] 韓증시, 하락 마감… 이미지스 등 반도체 업종 '上'",
+          "press": "lcnews.co.kr",
+          "publishedAt": "2023-11-27T06:50:00.000Z",
+          "link": "https://www.lcnews.co.kr/news/articleView.html?idxno=64449"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "이미지스",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "오픈AI",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "오픈AI, 코덱스 강화·'피에르' 품고 멀티 에이전트 확대",
+      "headlines": [
+        {
+          "title": "[美중간선거] 빅테크 거액 낙선운동 무색…AI 규제론자들 잇단 당선",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-04T23:24:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016422992?sid=104"
+        },
+        {
+          "title": "KT, 기업용 AX플랫폼 '비즈 포털' 오픈…\"AI가 맞춤솔루션 추천\"",
+          "press": "fnnews.com",
+          "publishedAt": "2026-11-05T00:25:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/014/0005599722?sid=105"
+        },
+        {
+          "title": "머스크, 공화당 참패에 직격탄…데이터센터·AI 사업 불확실성 확대",
+          "press": "bloter.net",
+          "publishedAt": "2026-11-04T16:11:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/293/0000092730?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "오픈ai 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 대표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 종류",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 순위",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 닷츠",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "오픈AI 상장",
+          "reason": "투자 가능 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "멀티 에이전트",
+          "reason": "개념 이해 수요",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "포티투마루",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "포티투마루, GPU 일체형 AX 솔루션 '어플라이언스42' 출시",
+      "headlines": [
+        {
+          "title": "포티투마루, 서버 구축 부담 없는 AX 솔루션 출시",
+          "press": "ddaily.co.kr",
+          "publishedAt": "2026-11-05T01:19:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/138/0002247390?sid=105"
+        },
+        {
+          "title": "포티투마루, GPU-AI 일체형 솔루션 출시",
+          "press": "sedaily.com",
+          "publishedAt": "2026-11-05T01:19:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/011/0004678980?sid=105"
+        },
+        {
+          "title": "포티투마루, GPU 일체형 AX 솔루션 '어플라이언스42' 출시",
+          "press": "businesskorea.co.kr",
+          "publishedAt": "2026-11-05T00:58:00.000Z",
+          "link": "https://www.businesskorea.co.kr/news/articleView.html?idxno=280516"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "포티투마루 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "포티투마루 매출",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "포티투마루 투자",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "포티투마루 면접",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "포티투마루 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "포티투마루 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "포티투마루 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "포티투마루 대표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "포티투마루 상장",
+          "reason": "IPO 여부 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "포티투마루 채용",
+          "reason": "입사 정보 탐색",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "경리나라 MCP",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "웹케시, 생성형 AI 연동 '경리나라 MCP' 12월 출시",
+      "headlines": [
+        {
+          "title": "내달 '경리나라 MCP' 생성형 AI와 연결...체험단 모집",
+          "press": "fnnews.com",
+          "publishedAt": "2026-11-05T00:08:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/014/0005599711?sid=105"
+        },
+        {
+          "title": "AI가 우리 회사 회계 학습… 웹케시, 경리나라 MCP 출시",
+          "press": "sedaily.com",
+          "publishedAt": "2026-11-05T00:06:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/011/0004678927?sid=105"
+        },
+        {
+          "title": "\"지난달보다 지출 늘어난 곳은?\"…AI에 물으면 경리나라가 답한다",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-05T00:11:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014302696?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "경리나라",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "회계",
+          "searchVolume": 6390,
+          "origin": "related"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "경리나라 MCP 사용법",
+          "reason": "어떻게 연동하나",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "체험단 모집",
+          "reason": "참여 방법 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "웹케시",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "웹케시, 챗GPT·클로드 연동 '경리나라 MCP' 12월 출시",
+      "headlines": [
+        {
+          "title": "AI가 우리 회사 회계 학습… 웹케시, 경리나라 MCP 출시",
+          "press": "sedaily.com",
+          "publishedAt": "2026-11-05T00:06:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/011/0004678927?sid=105"
+        },
+        {
+          "title": "\"지난달보다 지출 늘어난 곳은?\"…AI에 물으면 경리나라가 답한다",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-05T00:11:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014302696?sid=105"
+        },
+        {
+          "title": "웹케시, 챗GPT·클로드에서 경리나라 데이터 조회하는 ‘MCP’ 출시",
+          "press": "datanews.co.kr",
+          "publishedAt": "2026-11-05T03:18:00.000Z",
+          "link": "http://www.datanews.co.kr/news/article.html?no=147396"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "웹케시 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "웹케시 그룹",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "웹케시 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "웹케시 기업정보",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "웹케시 대표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "웹케시 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "웹케시(주)",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "웹케시 지배구조",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "웹케시 주가",
+          "reason": "AI 수혜 기대",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "웹케시 쿠콘",
+          "reason": "계열사 연관 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "웹케시 실적",
+          "reason": "매출 흐름 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "현대제철",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "현대제철, 70년 역사 담은 디지털 아카이브 'H아카이브' 개설",
+      "headlines": [
+        {
+          "title": "현대제철, 70년 역사 담은 헤리티지 플랫폼 'H아카이브' 개설",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-05T01:03:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014302922?sid=101"
+        },
+        {
+          "title": "현대제철, 회사 기록 발굴·보존하는 아카이브 개설",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-11-05T00:59:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001202734?sid=101"
+        },
+        {
+          "title": "현대제철, 디지털 아카이브 플랫폼 개설",
+          "press": "news.tf.co.kr",
+          "publishedAt": "2026-11-05T00:05:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/629/0000548902?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "현대제철 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "현대제철 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "현대제철 당진",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "현대제철 사고",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "인천 현대제철",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "현대제철 실적",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "포항 현대제철",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "현대제철 미국",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "현대제철 주가",
+          "reason": "투자 관심 유입",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "현대제철 루이지애나",
+          "reason": "미국 공장 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "현대제철 실적",
+          "reason": "업황 확인 수요",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "현대제철 역사",
+          "reason": "70년 스토리 탐색",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "에스엘즈",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "에스엘즈, 스타트업 월드컵 한국 결선 우승, 글로벌 진출",
+      "headlines": [
+        {
+          "title": "에스엘즈, 스타트업 월드컵 한국 결선 우승…글로벌 세미파이널 진출",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-11-04T02:56:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006403491?sid=101"
+        },
+        {
+          "title": "에스엘즈, '2026 스타트업 월드컵 한국 결선' 최종 1위",
+          "press": "newspim.com",
+          "publishedAt": "2026-11-04T02:34:00.000Z",
+          "link": "https://www.newspim.com/news/view/20261104000585"
+        },
+        {
+          "title": "에스엘즈, 공간 AI 기술력 입증…스타트업 월드컵 한국 대표 선발",
+          "press": "thedailypost.kr",
+          "publishedAt": "2026-11-04T14:00:00.000Z",
+          "link": "https://www.thedailypost.kr/news/articleView.html?idxno=116662"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "에스엘즈 매출",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "에스엘즈 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "에스엘즈 이유미",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "에스엘즈 정재헌",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "(주)에스엘즈",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "주식회사 에스엘즈",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "에스엘즈 기술",
+          "reason": "공간AI 내용 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "에스엘즈 투자",
+          "reason": "투자 유치 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "에스엘즈 채용",
+          "reason": "입사 정보 수요",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "에스엘즈 대표",
+          "reason": "창업자 정보 탐색",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "라이프밸",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "오픈AI, 일상 업무 AI 평가 '라이프밸' 공개",
+      "headlines": [
+        {
+          "title": "오픈AI, 일상 업무 AI 평가 '라이프밸' 공개...개인 비서 성능 1년 새 49...",
+          "press": "aitimes.com",
+          "publishedAt": "2026-11-04T06:42:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=216996"
+        },
+        {
+          "title": "\"장보기·식단 짜기 척척, 점점 사람처럼\"…오픈AI, AI 생활력 테스트 공...",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-11-03T05:24:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006402778?sid=101"
+        },
+        {
+          "title": "‘나인 투 식스’ 박민영 철벽 흔들렸다…육성재 “옆에 꼭 붙어 있을 ...",
+          "press": "wikitree.co.kr",
+          "publishedAt": "2026-10-29T08:00:00.000Z",
+          "link": "https://www.wikitree.co.kr/articles/1170260"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [
+        {
+          "keyword": "라이프밸 순위",
+          "reason": "어느 AI 1위인가",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "라이프밸 항목",
+          "reason": "평가 기준 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
       "rowCount": 0
     },
     {
@@ -5979,311 +6786,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "오픈AI",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "오픈AI가 전 미 육군장관 댄 드리스콜 영입, 국가안보 AI 확대",
-      "headlines": [
-        {
-          "title": "마돈나·앤 해서웨이까지 나섰다…AI저작권 전쟁에 연예계 참전",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-03T23:57:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016420260?sid=104"
-        },
-        {
-          "title": "오픈AI, 전 美 육군장관 댄 드리스콜 영입…국가안보 AI 확대",
-          "press": "hankyung.com",
-          "publishedAt": "2026-11-03T12:21:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005349916?sid=101"
-        },
-        {
-          "title": "\"차라리 없었더라면\"…AI '체르노빌 사고' 위험 경고",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-11-04T09:25:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005838157?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "오픈ai 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 대표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 종류",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 순위",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 닷츠",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "오픈AI 상장 일정",
-          "reason": "IPO 관심 지속",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "오픈AI 신모델",
-          "reason": "다음 GPT 기대",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "현대제철",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "현대제철이 사내 AI 플랫폼 'Steel-X' 개소, 전사 AX 가속",
-      "headlines": [
-        {
-          "title": "현대제철, 생성형 AI 플랫폼 운영…사내 데이터 자산화",
-          "press": "daily.hankooki.com",
-          "publishedAt": "2026-11-03T23:46:00.000Z",
-          "link": "https://daily.hankooki.com/news/articleView.html?idxno=1421450"
-        },
-        {
-          "title": "현대제철, 사내 지식 AI로 통합…'스틸 엑스'로 전사 AX 가속",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-11-03T23:49:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006403325?sid=101"
-        },
-        {
-          "title": "현대제철, 사내 AI 플랫폼 'Steel-X' 개소…AX 가속화",
-          "press": "sisaon.co.kr",
-          "publishedAt": "2026-11-04T08:18:00.000Z",
-          "link": "https://www.sisaon.co.kr/news/articleView.html?idxno=205803"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "현대제철 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "현대제철 연봉",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "현대제철 당진",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "현대제철 사고",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "현대제철 실적",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인천 현대제철",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "포항 현대제철",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "현대제철 미국",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "현대제철 실적",
-          "reason": "4분기 실적 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "현대제철 루이지애나",
-          "reason": "미국 공장 진행",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "현대제철 주가",
-          "reason": "AI 호재 반영",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "에스엘즈",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "건설 AI 에스엘즈가 스타트업 월드컵 한국 결선 우승, 글로벌 진출",
-      "headlines": [
-        {
-          "title": "에스엘즈, 스타트업 월드컵 한국 결선 우승…글로벌 세미파이널 진출",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-11-04T02:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006403491?sid=101"
-        },
-        {
-          "title": "에스엘즈, '2026 스타트업 월드컵 한국 결선' 최종 1위",
-          "press": "newspim.com",
-          "publishedAt": "2026-11-04T02:34:00.000Z",
-          "link": "https://www.newspim.com/news/view/20261104000585"
-        },
-        {
-          "title": "에스엘즈, 공간 AI 기술력 입증…스타트업 월드컵 한국 대표 선발",
-          "press": "thedailypost.kr",
-          "publishedAt": "2026-11-04T14:00:00.000Z",
-          "link": "https://www.thedailypost.kr/news/articleView.html?idxno=116662"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "에스엘즈 매출",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "에스엘즈 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "에스엘즈 이유미",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "에스엘즈 정재헌",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "(주)에스엘즈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "주식회사 에스엘즈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "에스엘즈 세미파이널",
-          "reason": "샌프란시스코 결선 진출",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "에스엘즈 투자유치",
-          "reason": "우승 후 투자 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "에스엘즈 대표",
-          "reason": "창업자 정보 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "라이프밸",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "오픈AI가 일상 업무 AI 평가 '라이프밸' 공개, 비서 성능 향상",
-      "headlines": [
-        {
-          "title": "오픈AI, 일상 업무 AI 평가 '라이프밸' 공개...개인 비서 성능 1년 새 49...",
-          "press": "aitimes.com",
-          "publishedAt": "2026-11-04T06:42:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216996"
-        },
-        {
-          "title": "\"장보기·식단 짜기 척척, 점점 사람처럼\"…오픈AI, AI 생활력 테스트 공...",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-11-03T05:24:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006402778?sid=101"
-        },
-        {
-          "title": "‘나인 투 식스’ 박민영 철벽 흔들렸다…육성재 “옆에 꼭 붙어 있을 ...",
-          "press": "wikitree.co.kr",
-          "publishedAt": "2026-10-29T08:00:00.000Z",
-          "link": "https://www.wikitree.co.kr/articles/1170260"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [
-        {
-          "keyword": "라이프밸 순위",
-          "reason": "AI 비서 성능 비교",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "씨앤엠",
@@ -6377,7 +6881,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "오토 온톨로지",
@@ -6416,94 +6921,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
-    },
-    {
-      "issue": "엔비디아",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "엔비디아가 네이버에 1.3조 투자금 납부, 지분 4.13% 확보 예정",
-      "headlines": [
-        {
-          "title": "“딸은 메타, 아들은 엔비디아”…‘자식 농사’ 대박 난 여배우",
-          "press": "joongang.co.kr",
-          "publishedAt": "2026-11-04T14:07:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/025/0003562895?sid=102"
-        },
-        {
-          "title": "\"딸은 메타, 아들은 엔비디아\"…깜짝 근황 공개한 여배우",
-          "press": "wowtv.co.kr",
-          "publishedAt": "2026-11-04T12:08:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/215/0001271690?sid=103"
-        },
-        {
-          "title": "“아들은 엔비디아, 딸은 페이스북 다닌다”…자녀들 근황 공개한 여배...",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-11-04T07:49:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005758965?sid=103"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "엔비디아 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 오리로봇",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 회장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 마곡",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 그래픽카드",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "네이버 엔비디아",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "엔비디아 실적발표",
-          "reason": "분기 실적 임박",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "엔비디아 중국 수출",
-          "reason": "공급 1% 제한 파장",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "AMD",
@@ -6590,7 +7009,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "난파선",
@@ -7355,338 +7775,6 @@
         {
           "keyword": "민호 사과 반응",
           "reason": "여론 반응 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "킬스위치",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "AI 폭주와 중국산 제품을 막는 킬스위치 도입 움직임이 확산하고 있다",
-      "headlines": [
-        {
-          "title": "비드래프트, AI가 스스로 해제 못 하는 '킬스위치' 개발…보안 OS 공개",
-          "press": "aitimes.com",
-          "publishedAt": "2026-11-03T02:06:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216938"
-        },
-        {
-          "title": "[시사금융용어] AI 킬스위치법",
-          "press": "news.einfomax.co.kr",
-          "publishedAt": "2026-11-01T22:32:00.000Z",
-          "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4442384"
-        },
-        {
-          "title": "[박종원 칼럼] 킬 스위치는 누가 쥐는가: 자기개선하는 AI 시대의 안전",
-          "press": "safetimes.co.kr",
-          "publishedAt": "2026-10-29T09:20:00.000Z",
-          "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=246994"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "배터리 킬스위치",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오토바이 킬스위치",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "킬 스위치 영화",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "킬스위치 케이스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "킬 스위치 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "킬스위치 리모컨",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "킬스위치 연결방법",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "킬스위치 배터리",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "비드래프트",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "비드래프트가 AI가 해제 못 하는 킬스위치 보안OS ViKernel을 공개했다",
-      "headlines": [
-        {
-          "title": "비드래프트, 가중치 내장 보안 OS 'ViKernel' 공개",
-          "press": "hankyung.com",
-          "publishedAt": "2026-11-02T07:33:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005349257?sid=101"
-        },
-        {
-          "title": "비드래프트, AI가 스스로 해제 못 하는 '킬스위치' 개발…보안 OS 공개",
-          "press": "aitimes.com",
-          "publishedAt": "2026-11-03T02:06:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216938"
-        },
-        {
-          "title": "비드래프트, AI 모델 내부에 보안 운영체제 구현한 ‘ViKernel’ 공개",
-          "press": "hankookilbo.com",
-          "publishedAt": "2026-11-02T06:37:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/469/0000963105?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "비드래프트 투자방법",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "비드래프트 ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "비드래프트 다윈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "비드래프트 매출",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "비드래프트 투자",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "비드래프트 포켓",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "비드래프트 김민식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "비드래프트 김민식 대표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "119만 유튜버 긱블",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "119만 유튜버 긱블이 캐릭터 로봇 시장에 출사표를 던졌다",
-      "headlines": [
-        {
-          "title": "119만 유튜버 긱블, 캐릭터 로봇 시장 출사표…\"월 매출 10억 목표\"",
-          "press": "aitimes.com",
-          "publishedAt": "2026-11-02T18:46:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216922"
-        },
-        {
-          "title": "사이언스 골든벨, 유명 유튜버 한 자리에 '경기 과학문화 페스타'",
-          "press": "edaily.co.kr",
-          "publishedAt": "2024-08-29T10:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0005823262?sid=100"
-        },
-        {
-          "title": "중기부, '청소년비즈쿨 페스티벌' 진행…'학교에서 경영을 배운다'",
-          "press": "econonews.co.kr",
-          "publishedAt": "2024-11-07T14:50:00.000Z",
-          "link": "http://www.econonews.co.kr/news/articleView.html?idxno=361000"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "앤트로픽",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "상장 앞둔 앤트로픽이 분기손실 65% 줄고 AI투자 1200조원을 약정했다",
-      "headlines": [
-        {
-          "title": "상장 앞둔 앤트로픽, 분기손실 65%↓…AI투자에 1천200조원 약정",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-02T19:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016417133?sid=104"
-        },
-        {
-          "title": "앤트로픽, 3분기 순손실 2분기 대비 65% ↓⋯매출 46.7% ↑",
-          "press": "inews24.com",
-          "publishedAt": "2026-11-02T22:23:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/031/0001071593?sid=104"
-        },
-        {
-          "title": "앤트로픽, 3분기 영업적자 전환...“향후 컴퓨팅 지출액 1200조원”",
-          "press": "sedaily.com",
-          "publishedAt": "2026-11-02T23:03:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/011/0004678033?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "앤트로픽 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 ipo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 상장일",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 클로드",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 ceo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "시스코",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "시스코가 27세 직원에게 AI로 기존 코드 98% 재작성을 맡겼다",
-      "headlines": [
-        {
-          "title": "훔친 정보로 피해자 '돈 될 가치'까지 평가…AI 결합 악성코드 등장",
-          "press": "news1.kr",
-          "publishedAt": "2026-11-02T21:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009265839?sid=105"
-        },
-        {
-          "title": "시스코, 27세 엔지니어에게 AI 토큰 무제한 제공…2년 내 기존 코드 98% ...",
-          "press": "aitimes.com",
-          "publishedAt": "2026-11-02T08:04:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216918"
-        },
-        {
-          "title": "앤트로픽 몸값 2조달러…닷컴버블 닮았나",
-          "press": "kbmaeil.com",
-          "publishedAt": "2026-11-01T21:20:00.000Z",
-          "link": "https://www.kbmaeil.com/article/20261102500006"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "시스코 시스템즈",
-          "searchVolume": 1600,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "시스코 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "시스코 시스템즈 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "시스코 주가 전망",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "(주)시스코",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "시스코 결말",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "시스코 매출",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "시스코 버블",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "시스코 실적",
-          "reason": "주가 영향",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
