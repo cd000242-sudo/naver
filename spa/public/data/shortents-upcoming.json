@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T13:29:58.938Z",
+ "builtAt": "2026-11-05T13:40:02.922Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,47 +11,15 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "이동호 주진우 고소",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 32,
-   "recent20": 2,
-   "press": 30,
-   "firstArticleAt": "2026-11-05T12:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령 장남, 주진우 명예훼손 고소…\"한산대CC 안 갔다\"",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-05T13:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000542024?sid=101"
-    },
-    {
-     "title": "李대통령 장남, “황제골프 아냐”…주진우 명예훼손 고소",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-05T13:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003696292?sid=102"
-    },
-    {
-     "title": "이 대통령 장남 \"한산대CC 안 가\"…주진우 의원 명예훼손 고소",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-05T13:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000519391?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "영국 기준금리 인상",
    "sources": [
     "signal.bz",
     "daum"
    ],
-   "articles90": 25,
-   "recent20": 1,
-   "press": 19,
-   "firstArticleAt": "2026-11-05T12:00:00.000Z",
+   "articles90": 20,
+   "recent20": 0,
+   "press": 18,
+   "firstArticleAt": "2026-11-05T12:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -76,17 +44,24 @@
    ]
   },
   {
-   "keyword": "윤석열 2심 내년 선고",
+   "keyword": "윤석열 내란 우두머리 2심 내년 선고",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 5,
-   "recent20": 0,
+   "articles90": 4,
+   "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-05T12:01:00.000Z",
+   "firstArticleAt": "2026-11-05T12:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'내란 우두머리' 2심 내년 1월 26일 선고…尹 \"내란죄 될수 없어\"",
+     "press": "busan.com",
+     "publishedAt": "2026-11-05T13:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001405946?sid=102"
+    },
     {
      "title": "尹 내란 2심 내년 1월 선고…\"각성 위한 계엄\"",
      "press": "yonhapnewstv.co.kr",
@@ -98,55 +73,52 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-05T12:47:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012288293?sid=102"
-    },
-    {
-     "title": "尹 \"'조작기소 주장' 권력자들 한둘 아냐\"…내란 2심 1월 26일 선고",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-05T12:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000649300?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "이세영",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T12:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이세영, '재혼 황후' 드레스핏 위해 술까지 끊었다…\"근손실 너무 열받...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-05T12:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002077264"
-    },
-    {
-     "title": "이세영, 라스타 드레스핏 위해 술 끊었다…\"단백질 열심히 챙겨\"",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-05T12:24:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16269351"
-    },
-    {
-     "title": "이세영, '재혼 황후' 로판 비주얼 난리 날 만했네…스태프들도 \"너무 예...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-05T12:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002077258"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1054,
-  "matched": 478,
-  "avgLeadMin": 441,
+  "flagged": 1055,
+  "matched": 484,
+  "avgLeadMin": 461,
   "recent": [
+   {
+    "keyword": "웰컴저축은행 팀리그 2연승",
+    "hitKeyword": "KCC 2연승",
+    "hitAt": "2026-11-05T22:30:00+09:00",
+    "leadMin": 3646
+   },
+   {
+    "keyword": "웰컴저축은행 에스와이 2연승",
+    "hitKeyword": "KCC 2연승",
+    "hitAt": "2026-11-05T22:30:00+09:00",
+    "leadMin": 3626
+   },
+   {
+    "keyword": "웰컴저축은행, 에스와이 제압 2연승",
+    "hitKeyword": "KCC 2연승",
+    "hitAt": "2026-11-05T22:30:00+09:00",
+    "leadMin": 3586
+   },
+   {
+    "keyword": "서울 ACL2 2연승",
+    "hitKeyword": "KCC 2연승",
+    "hitAt": "2026-11-05T22:30:00+09:00",
+    "leadMin": 1411
+   },
+   {
+    "keyword": "세브란스 흉기 난동 구속영장",
+    "hitKeyword": "세브란스병원 흉기 난동",
+    "hitAt": "2026-11-05T22:30:00+09:00",
+    "leadMin": 81
+   },
+   {
+    "keyword": "이유리 배우",
+    "hitKeyword": "이유리 새집 공개",
+    "hitAt": "2026-11-05T22:30:00+09:00",
+    "leadMin": 40
+   },
    {
     "keyword": "대통령 선수단 격려오찬",
     "hitKeyword": "전남 선수단 폭력",
@@ -170,42 +142,6 @@
     "hitKeyword": "태권도 관장 폭행 수사",
     "hitAt": "2026-11-05T21:00:00+09:00",
     "leadMin": 1291
-   },
-   {
-    "keyword": "삼성전자 주가",
-    "hitKeyword": "삼성전자 반도체 급락",
-    "hitAt": "2026-11-05T20:30:00+09:00",
-    "leadMin": 226
-   },
-   {
-    "keyword": "외치는 삼성전자 동행노조",
-    "hitKeyword": "삼성전자 반도체 급락",
-    "hitAt": "2026-11-05T20:30:00+09:00",
-    "leadMin": 81
-   },
-   {
-    "keyword": "홍콩ELS 과징금 확정",
-    "hitKeyword": "쿠팡 과징금 유지",
-    "hitAt": "2026-11-05T20:00:00+09:00",
-    "leadMin": 1655
-   },
-   {
-    "keyword": "홍콩 ELS 과징금",
-    "hitKeyword": "쿠팡 과징금 유지",
-    "hitAt": "2026-11-05T20:00:00+09:00",
-    "leadMin": 1645
-   },
-   {
-    "keyword": "홍콩 ELS 과징금 3700억 확정",
-    "hitKeyword": "쿠팡 과징금 유지",
-    "hitAt": "2026-11-05T20:00:00+09:00",
-    "leadMin": 1544
-   },
-   {
-    "keyword": "쿠팡 개인정보 유출 과징금",
-    "hitKeyword": "쿠팡 과징금 유지",
-    "hitAt": "2026-11-05T20:00:00+09:00",
-    "leadMin": 82
    }
   ]
  }
