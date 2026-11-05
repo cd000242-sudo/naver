@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T12:59:45.151Z",
+ "builtAt": "2026-11-05T13:09:51.532Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,49 +8,114 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 14,
  "candidates": [
   {
-   "keyword": "장남, 주진우 고소",
+   "keyword": "이 대통령 장남, 주진우 고소",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 37,
-   "recent20": 8,
-   "press": 35,
+   "articles90": 39,
+   "recent20": 7,
+   "press": 37,
    "firstArticleAt": "2026-11-05T11:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령 장남, 주진우 명예훼손 고소…“골프장 간 적도 없다”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-05T12:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004679280?sid=100"
+     "title": "이 대통령 장남 \"한산대CC 안 가\"…주진우 의원 명예훼손 고소",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-05T13:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000519391?sid=102"
     },
     {
-     "title": "이 대통령 장남, 주진우 명예훼손 고소···“해군 기지 골프장 간 적 ...",
-     "press": "weekly.khan.co.kr",
-     "publishedAt": "2026-11-05T12:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/033/0000053180?sid=102"
+     "title": "李대통령 장남, '황제 골프' 의혹 제기 주진우 명예훼손 고소",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-05T13:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004207041?sid=102"
     },
     {
-     "title": "李대통령 장남, '황제 골프 의혹 제기' 주진우 의원 고소",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-05T12:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005838849?sid=102"
+     "title": "이 대통령 장남, 주진우 의원 명예훼손 고소…“해군기지 골프장 간 적...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-05T13:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002830955?sid=102"
     }
    ]
   },
   {
-   "keyword": "내란 우두머리 내년 선고",
+   "keyword": "영국 기준금리 인상",
+   "sources": [
+    "signal.bz",
+    "daum"
+   ],
+   "articles90": 23,
+   "recent20": 5,
+   "press": 17,
+   "firstArticleAt": "2026-11-05T12:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[그래픽] 영국 중앙은행 기준금리 추이",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-05T13:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016425181?sid=104"
+    },
+    {
+     "title": "0.25%포인트 인상한 영란은행, 기준금리 4%로 정했다",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-05T13:04:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/433293"
+    },
+    {
+     "title": "영란은행, 기준금리 0.25%p 인상해 연 4.0%로… 베일리 총재 \"이번 인상...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-05T12:57:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261105001527"
+    }
+   ]
+  },
+  {
+   "keyword": "삼성 11경기 10승 타이",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-05T12:03:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'스승' 김상식 감독, '돌아온 제자' 오마리 스펠맨 울렸다…서울 삼성,...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-05T12:47:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/076/0004463717"
+    },
+    {
+     "title": "삼성, 현대모비스 꺾고 10승 선착",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-05T12:38:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/023/0004008014"
+    },
+    {
+     "title": "삼성, 현대모비스 꺾고 11경기 만에 10승…KBL 역대 최단 경기 타이",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T12:37:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/003/0014304986"
+    }
+   ]
+  },
+  {
+   "keyword": "윤석열 2심 내년 선고",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-05T11:36:00.000Z",
+   "articles90": 7,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-05T11:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,34 +172,34 @@
    ]
   },
   {
-   "keyword": "쿠팡 개인정보 유출 과징금",
+   "keyword": "소상공인정책실장에 조경원 창업정책관",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 6,
    "recent20": 0,
    "press": 6,
-   "firstArticleAt": "2026-11-05T11:45:00.000Z",
+   "firstArticleAt": "2026-11-05T11:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "법원, '개인정보 유출' 쿠팡에 4000억대 과징금 유지",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-05T12:32:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=880436"
+     "title": "중기부, 신임 소상공인정책실장에 조경원 창업정책관 임명",
+     "press": "smedaily.co.kr",
+     "publishedAt": "2026-11-05T12:40:00.000Z",
+     "link": "http://www.smedaily.co.kr/news/articleView.html?idxno=365787"
     },
     {
-     "title": "법원, 쿠팡 개인정보유출 과징금 4,235억 효력 유지",
-     "press": "yonhapnewstv.co.kr",
+     "title": "중기부, 소상공인정책실장에 조경원 창업정책관",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-05T12:28:00.000Z",
+     "link": "https://www.viva100.com/article/20261105501240"
+    },
+    {
+     "title": "중기부, 신임 소상공인정책실장에 조경원 창업정책관 발탁",
+     "press": "yna.co.kr",
      "publishedAt": "2026-11-05T12:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000923325?sid=102"
-    },
-    {
-     "title": "법원, 쿠팡의 과징금 집행정지 신청 기각",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-05T12:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003481012?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/001/0016425149?sid=101"
     }
    ]
   },
@@ -176,10 +241,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T11:36:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-05T11:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -206,10 +271,22 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1048,
-  "matched": 476,
+  "flagged": 1052,
+  "matched": 478,
   "avgLeadMin": 441,
   "recent": [
+   {
+    "keyword": "대통령 선수단 격려오찬",
+    "hitKeyword": "전남 선수단 폭력",
+    "hitAt": "2026-11-05T22:00:00+09:00",
+    "leadMin": 517
+   },
+   {
+    "keyword": "이재명 선수단 격려오찬",
+    "hitKeyword": "전남 선수단 폭력",
+    "hitAt": "2026-11-05T22:00:00+09:00",
+    "leadMin": 446
+   },
    {
     "keyword": "케인 뮌헨 재계약!",
     "hitKeyword": "케인 뮌헨 재계약",
@@ -257,18 +334,6 @@
     "hitKeyword": "쿠팡 과징금 유지",
     "hitAt": "2026-11-05T20:00:00+09:00",
     "leadMin": 82
-   },
-   {
-    "keyword": "유튜브 대통령 Y 론칭",
-    "hitKeyword": "조세호 유튜브 복귀",
-    "hitAt": "2026-11-05T19:30:00+09:00",
-    "leadMin": 1635
-   },
-   {
-    "keyword": "이재명 유튜브 Y 시작합니다",
-    "hitKeyword": "조세호 유튜브 복귀",
-    "hitAt": "2026-11-05T19:30:00+09:00",
-    "leadMin": 1625
    }
   ]
  }
