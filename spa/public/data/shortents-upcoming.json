@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T10:08:32.803Z",
+ "builtAt": "2026-11-05T10:18:38.006Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,21 +8,59 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 10,
  "candidates": [
+  {
+   "keyword": "쿠팡 개인정보 유출 과징금",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 55,
+   "recent20": 5,
+   "press": 47,
+   "firstArticleAt": "2026-11-05T08:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "법원, 쿠팡 '개인정보 유출' 4200억원대 과징금 효력 유지",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-05T10:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004207028?sid=102"
+    },
+    {
+     "title": "쿠팡 과징금 4236억 유지…시정명령은 제동",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-05T10:12:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1422379"
+    },
+    {
+     "title": "법원, 쿠팡 4236억원 과징금 유지…시정명령은 정지",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-05T10:10:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2644798"
+    }
+   ]
+  },
   {
    "keyword": "조작기소 특검법 상정",
    "sources": [
     "signal.bz",
     "daum"
    ],
-   "articles90": 57,
-   "recent20": 4,
-   "press": 44,
-   "firstArticleAt": "2026-11-05T08:40:00.000Z",
+   "articles90": 47,
+   "recent20": 3,
+   "press": 36,
+   "firstArticleAt": "2026-11-05T08:51:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "수사·기소 분리해놓고 특검은 예외… 與 '조작기소 특검' 속도전",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-05T10:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000963924?sid=100"
+    },
     {
      "title": "與, '조작기소특검법' 상정…野, 거리투쟁 불사",
      "press": "yonhapnewstv.co.kr",
@@ -34,140 +72,6 @@
      "press": "ichannela.com",
      "publishedAt": "2026-11-05T10:05:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/449/0000366529?sid=115"
-    },
-    {
-     "title": "[단독] 법원·법무부 “조작기소 특검법 허술” 반발",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-05T09:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001883313?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "쿠팡 개인정보 유출 과징금",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 52,
-   "recent20": 2,
-   "press": 44,
-   "firstArticleAt": "2026-11-05T08:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "법원, 쿠팡 집행정지 신청 일부인용…과징금은 효력 유지",
-     "press": "dealsite.co.kr",
-     "publishedAt": "2026-11-05T10:04:00.000Z",
-     "link": "https://dealsite.co.kr/articles/172217"
-    },
-    {
-     "title": "\"쿠팡, 4200억원 내야\"…법원, '개인정보 유출' 과징금 효력 유지",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-05T10:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005838831?sid=101"
-    },
-    {
-     "title": "법원, 쿠팡 4236억 원 과징금 효력 유지…시정명령은 '일시 정지'",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-05T09:48:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=202611051844042433153ddfb15a_1"
-    }
-   ]
-  },
-  {
-   "keyword": "단원고 아카이브 세계유산 등재",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 21,
-   "recent20": 4,
-   "press": 20,
-   "firstArticleAt": "2026-11-05T08:39:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'단원고 4.16아카이브' 유네스코 세계기록유산 등재…참사의 기억 세계...",
-     "press": "kgnews.co.kr",
-     "publishedAt": "2026-11-05T09:58:00.000Z",
-     "link": "https://www.kgnews.co.kr/news/article.html?no=918415"
-    },
-    {
-     "title": "'단원고 4.16아카이브', 유네스코 세계기록유산 아시아․태평양 지역목...",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-05T09:54:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=561663"
-    },
-    {
-     "title": "'단원고 4.16 아카이브' 등 2건, 유네스코 아태 기록유산 등재",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-05T09:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005600270?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "언차일드 컴백 연기",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-05T08:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"청개구리가 아닌 독개구리로 돌아왔다\"…'콘셉트 1황' 노리는 언차일드...",
-     "press": "digitalchosun.dizzo.com",
-     "publishedAt": "2026-11-05T09:10:00.000Z",
-     "link": "http://digitalchosun.dizzo.com/site/data/html_dir/2026/11/05/2026110580182.html"
-    },
-    {
-     "title": "\"더 별나고, 엉뚱해졌다\"…언차일드, '팅팅'의 새 얼굴 (쇼케이스)",
-     "press": "dispatch.co.kr",
-     "publishedAt": "2026-11-05T09:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/433/0000132043"
-    },
-    {
-     "title": "'엠카' 전체 출연 때 데뷔 실감했다는 언차일드의 \"기다렸던 컴백\"[현장...",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-05T09:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/079/0004207003"
-    }
-   ]
-  },
-  {
-   "keyword": "프리지아 법적 대응 예고",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-05T08:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "프리지아 열애설에…소속사 “사실무근, 법적 대응”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-05T09:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003760392?sid=103"
-    },
-    {
-     "title": "프리지아 측, 악성 루모 유포에 법적 대응 경고",
-     "press": "stardailynews.co.kr",
-     "publishedAt": "2026-11-05T09:02:00.000Z",
-     "link": "https://www.stardailynews.co.kr/news/articleView.html?idxno=601479"
-    },
-    {
-     "title": "'갤럭시 쓰는 남자 별루' 프리지아, 기업인과 열애설 부인 \"법적 대응\"",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-05T08:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005600153?sid=103"
     }
    ]
   },
@@ -177,18 +81,12 @@
     "signal.bz"
    ],
    "articles90": 9,
-   "recent20": 2,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-05T09:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "[포토] 서울대 학생들과 기념촬영하는 최태원 SK그룹 회장",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-05T09:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003482796?sid=102"
-    },
     {
      "title": "[포토] 학생들과 셀카 찍는 최태원 SK그룹 회장",
      "press": "etnews.com",
@@ -196,10 +94,48 @@
      "link": "https://n.news.naver.com/mnews/article/030/0003482797?sid=102"
     },
     {
+     "title": "[포토] 서울대 학생들과 기념촬영하는 최태원 SK그룹 회장",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-05T09:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003482796?sid=102"
+    },
+    {
      "title": "서울대 특강 마치고 학생들과 기념촬영하는 최태원 SK 회장",
      "press": "newsis.com",
      "publishedAt": "2026-11-05T09:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014304869?sid=101"
+     "link": "https://n.news.naver.com/mnews/article/003/0014304867?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "단원고 4·16 아카이브 등재",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-05T09:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "세월호 참사 기억·옛 조리서, 세계기록유산 아태 목록 등재",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-05T09:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533752?sid=103"
+    },
+    {
+     "title": "세월호 참사 기억, 세계기록유산 아태목록 등재… 조선시대 조리서 2종...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-05T09:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000963919?sid=103"
+    },
+    {
+     "title": "세월호 참사 기억물·조선 밥상 유네스코 아태목록 등재",
+     "press": "kado.net",
+     "publishedAt": "2026-11-05T09:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000209680?sid=102"
     }
    ]
   },
@@ -209,12 +145,12 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T08:40:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-05T09:20:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
      "title": "서동주, 하이닉스 '226층'에 물렸다…\"다들 제가 팔면 들어간다고\"",
@@ -272,7 +208,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1014,
+  "flagged": 1015,
   "matched": 456,
   "avgLeadMin": 421,
   "recent": [
