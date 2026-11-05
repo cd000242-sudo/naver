@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T00:43:13.770Z",
+ "builtAt": "2026-11-05T00:53:17.537Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 57,
-   "recent20": 6,
-   "press": 51,
-   "firstArticleAt": "2026-11-04T23:14:00.000Z",
+   "articles90": 46,
+   "recent20": 5,
+   "press": 42,
+   "firstArticleAt": "2026-11-04T23:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "군살 뺀 정신아, 카카오 수익성 높였다…3분기 영업익 2403억",
-     "press": "peoplewatch.co.kr",
+     "title": "카카오, 3분기 영업익 2403억 ‘7.4%↑’… 정신아 “AI 서비스 확대”",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-05T00:50:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261105505208?OutUrl=naver"
+    },
+    {
+     "title": "'플랫폼 성장' 카카오, 3분기 영업익 2403억원",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-05T00:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001163323?sid=105"
+    },
+    {
+     "title": "카카오, 3분기 영업익 2403억원…플랫폼 성장에 7.4%↑",
+     "press": "m-economynews.com",
      "publishedAt": "2026-11-05T00:42:00.000Z",
-     "link": "https://www.peoplewatch.co.kr/article/view/ppw202611050002"
-    },
-    {
-     "title": "카카오, 3분기 영업익 2403억…전년比 7%↑",
-     "press": "pointdaily.co.kr",
-     "publishedAt": "2026-11-05T00:38:00.000Z",
-     "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=324860"
-    },
-    {
-     "title": "카카오, 1500억원 자사주 매입·소각에 8%대 강세[핫종목]",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-05T00:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009271568?sid=101"
+     "link": "https://www.m-economynews.com/news/article.html?no=72609"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 31,
-   "recent20": 11,
-   "press": 29,
-   "firstArticleAt": "2026-11-04T23:20:00.000Z",
+   "articles90": 32,
+   "recent20": 7,
+   "press": 30,
+   "firstArticleAt": "2026-11-04T23:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "美 증시 3% 급등했는데 코스피는 2% 급락… 반도체에 무슨 일이",
+     "press": "jibs.co.kr",
+     "publishedAt": "2026-11-05T00:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/661/0000086155?sid=101"
+    },
+    {
+     "title": "미 민주당 중간선거 압승에 국제유가 8%대 급락... 뉴욕증시 다우 3% 급...",
+     "press": "vop.co.kr",
+     "publishedAt": "2026-11-05T00:44:00.000Z",
+     "link": "https://vop.co.kr/A00001697467.html"
+    },
     {
      "title": "[그래픽] 국제유가 추이",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-05T00:38:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016423203?sid=104"
-    },
-    {
-     "title": "코스피, 반도체 급락에 5580선 출발",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-05T00:36:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=314678"
-    },
-    {
-     "title": "美증시 훈풍 무색…코스피 2%대 급락·반도체주 '와르르'",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-05T00:36:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=100654"
     }
    ]
   },
@@ -79,30 +79,63 @@
    "sources": [
     "nate"
    ],
-   "articles90": 23,
-   "recent20": 7,
-   "press": 22,
-   "firstArticleAt": "2026-11-04T23:19:00.000Z",
+   "articles90": 22,
+   "recent20": 4,
+   "press": 21,
+   "firstArticleAt": "2026-11-04T23:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김민석, ‘신천지 책임론’에 “자연스럽게 정리될 것…전면 공개해도...",
+     "title": "김민석, 신천지 논란에 \"당원께 죄송…불편한 마음 커\"",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-05T00:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001976800?sid=100"
+    },
+    {
+     "title": "김민석, ‘신천지 책임론’에 “전면 공개했어도 문제 있었을 것…자연...",
      "press": "ichannela.com",
      "publishedAt": "2026-11-05T00:40:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/449/0000366455?sid=100"
     },
     {
-     "title": "김민석, '신천지 논란'에 \"전면 공개했어도 더 큰 문제 있었을 것\"",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-05T00:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000141611?sid=100"
-    },
-    {
-     "title": "김민석 신천지 의혹에 “마음 불편…전면 공개해도 문제”",
+     "title": "김민석 신천지 의혹에 “전면 공개하면 더 큰 문제 있었을 것”",
      "press": "kmib.co.kr",
      "publishedAt": "2026-11-05T00:35:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/005/0001883163?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "우이신설선 운행 지연",
+   "sources": [
+    "signal.bz",
+    "daum"
+   ],
+   "articles90": 19,
+   "recent20": 2,
+   "press": 19,
+   "firstArticleAt": "2026-11-04T23:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "출근길 우이신설선 전구간 운행 지연…\"전자연동장치 장애\"",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-05T00:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001976799?sid=102"
+    },
+    {
+     "title": "출근길 우이신설선 전구간 열차 운행 지연…복구 중",
+     "press": "tbs.seoul.kr",
+     "publishedAt": "2026-11-05T00:40:00.000Z",
+     "link": "http://tbs.seoul.kr/news/newsView.do?typ_800=3&idx_800=3538678&seq_800=20531579"
+    },
+    {
+     "title": "출근길 '우이신설선' 전 구간 운행 지연…\"복구 작업 중\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-05T00:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004206672?sid=102"
     }
    ]
   },
@@ -111,13 +144,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 19,
-   "recent20": 2,
-   "press": 19,
-   "firstArticleAt": "2026-11-04T23:18:00.000Z",
+   "articles90": 18,
+   "recent20": 1,
+   "press": 18,
+   "firstArticleAt": "2026-11-04T23:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'최종면접', 개봉 첫날 박스오피스 1위…22일 만에 한국영화 정상 탈환",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-05T00:52:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000637325"
+    },
     {
      "title": "김재원 결국 사고쳤다…'최종면접' 개봉 첫날 '치이카와' 누르고 1위",
      "press": "tvreport.co.kr",
@@ -129,45 +168,6 @@
      "press": "swtvnews.com",
      "publishedAt": "2026-11-05T00:26:00.000Z",
      "link": "https://swtvnews.com/news/newsview.php?ncode=1065572243460460"
-    },
-    {
-     "title": "'최종면접', 개봉 첫날 박스오피스 1위 출발 [무비투데이]",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-05T00:22:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109743880063"
-    }
-   ]
-  },
-  {
-   "keyword": "우이신설선 운행 지연",
-   "sources": [
-    "signal.bz",
-    "daum"
-   ],
-   "articles90": 18,
-   "recent20": 2,
-   "press": 18,
-   "firstArticleAt": "2026-11-04T23:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "출근길 우이신설선 전 구간 열차 운행 지연…복구 중",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-05T00:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400810?sid=102"
-    },
-    {
-     "title": "출근길 '우이신설선' 전 구간 운행 지연…\"복구 작업 중\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-05T00:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004206672?sid=102"
-    },
-    {
-     "title": "출근길 우이신설선 전 구간 운행 지연…전자연동장치 장애",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-05T00:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005350543?sid=102"
     }
    ]
   },
@@ -176,30 +176,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 17,
-   "recent20": 1,
-   "press": 15,
-   "firstArticleAt": "2026-11-04T23:19:00.000Z",
+   "articles90": 18,
+   "recent20": 2,
+   "press": 16,
+   "firstArticleAt": "2026-11-04T23:25:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "\"尹정부 대응 아쉬워\"…태권도 유네스코 등재 북한에 밀리자 '책임공방...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-05T00:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001038522?sid=103"
+    },
+    {
+     "title": "한지, 인류무형유산 등재 '확실시'… 태권도는 北 단독으로",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-05T00:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000191537?sid=102"
+    },
     {
      "title": "한지, 유네스코 인류무형유산 '등재 권고'",
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-05T00:28:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004206671?sid=103"
-    },
-    {
-     "title": "한지, 유네스코 인류무형유산 '등재 권고'… 최종 결정 눈앞",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-05T00:18:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4116796"
-    },
-    {
-     "title": "왕의 종이 전주 한지, 세계의 캔버스로 도약 모색",
-     "press": "jeollailbo.com",
-     "publishedAt": "2026-11-05T00:12:00.000Z",
-     "link": "http://www.jeollailbo.com/news/articleView.html?idxno=815801"
     }
    ]
   },
@@ -209,12 +209,18 @@
     "signal.bz"
    ],
    "articles90": 15,
-   "recent20": 1,
+   "recent20": 2,
    "press": 14,
-   "firstArticleAt": "2026-11-04T23:22:00.000Z",
+   "firstArticleAt": "2026-11-04T23:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "황인범, 모레노 감독 앞에서 도움…포르투는 UCL 첫승",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-05T00:45:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/448/0000649113"
+    },
     {
      "title": "'96라인' 황인범, 모레노 앞에서 포르투 이적 후 UCL 첫 도움",
      "press": "sports.hankooki.com",
@@ -226,12 +232,38 @@
      "press": "mhnse.com",
      "publishedAt": "2026-11-05T00:19:00.000Z",
      "link": "https://m.sports.naver.com/wfootball/article/445/0000486556"
+    }
+   ]
+  },
+  {
+   "keyword": "젠지",
+   "sources": [
+    "google"
+   ],
+   "articles90": 15,
+   "recent20": 5,
+   "press": 11,
+   "firstArticleAt": "2026-11-04T23:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "젠지, LYON에 3-0 완승⋯월즈 4강 진출 확정",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-05T00:44:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2644442"
     },
     {
-     "title": "황인범, 교체투입 2분 만에 쐐기 골 도움...포르투, UCL 첫 승리",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-05T00:08:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/052/0002428537"
+     "title": "LCK 챔피언의 압도적 경기력…젠지, 라이언 꺾고 월즈 4강 진출",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-05T00:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016423210?sid=105"
+    },
+    {
+     "title": "[롤드컵]젠지, 라이온 3:0으로 꺾고 3연속 4강 진출 성공(종합)",
+     "press": "fomos.kr",
+     "publishedAt": "2026-11-05T00:40:00.000Z",
+     "link": "https://m.sports.naver.com/esports/article/236/0000257848"
     }
    ]
   },
@@ -240,30 +272,94 @@
    "sources": [
     "nate"
    ],
-   "articles90": 23,
-   "recent20": 11,
-   "press": 9,
+   "articles90": 26,
+   "recent20": 5,
+   "press": 10,
    "firstArticleAt": "2026-11-05T00:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "장동혁 \"공소취소 특검, 이재명 한명 살리는 법안…정권취소 특검될 것...",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-05T00:38:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1135336"
-    },
-    {
-     "title": "모두발언하는 장동혁 대표",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-05T00:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004206676?sid=100"
+     "title": "장동혁 \"공소취소 특검 아닌 정권취소 특검될 것\"",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-05T00:48:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443159"
     },
     {
      "title": "국민의힘 최고위원회의",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-05T00:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004206677?sid=100"
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T00:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014302848?sid=100"
+    },
+    {
+     "title": "최고위 참석한 장동혁 대표",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T00:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014302845?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "하이닉스 주가 하락",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 5,
+   "press": 7,
+   "firstArticleAt": "2026-11-05T00:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "SK하이닉스 주가, 11월 5일 장중 1,298,000원 7.02% 하락",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-05T00:50:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=561385"
+    },
+    {
+     "title": "코스피, 미 데이터센터 규제 우려에 하락 출발",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-05T00:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016423231?sid=101"
+    },
+    {
+     "title": "[전혜은 시선] \"풀베팅\" 박세익, 삼성전자·SK하이닉스 급락에...\"추가 매...",
+     "press": "weeklytoday.com",
+     "publishedAt": "2026-11-05T00:42:00.000Z",
+     "link": "http://www.weeklytoday.com/news/articleView.html?idxno=801062"
+    }
+   ]
+  },
+  {
+   "keyword": "김포시",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-04T23:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이기형 김포시장, 골드라인 노조 찾아 현장 목소리 청취…서명운동 현장...",
+     "press": "fieldnews.kr",
+     "publishedAt": "2026-11-05T00:48:00.000Z",
+     "link": "http://www.fieldnews.kr/news/articleView.html?idxno=32835"
+    },
+    {
+     "title": "[5일 김포시] 이기형 시장, 김포골드라인 노조와 소통 간담회 등",
+     "press": "asiatime.co.kr",
+     "publishedAt": "2026-11-05T00:48:00.000Z",
+     "link": "https://www.asiatime.co.kr/article/20261105500044"
+    },
+    {
+     "title": "'안전인력 충원·처우개선'…김포시-김포골드라인 노조 간담회",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-05T00:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016423206?sid=102"
     }
    ]
   },
@@ -272,13 +368,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
    "firstArticleAt": "2026-11-04T23:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이찬혁, 열애설 났던 하지수와 ‘전참시’ 동반 출연…손잡고 스윙댄스",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-05T00:49:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003539306"
+    },
     {
      "title": "투샷까지 찍혔다…'전참시' 이찬혁과 손잡고 춤춘 여성, 알고 보니 '이 ...",
      "press": "wikitree.co.kr",
@@ -290,76 +392,38 @@
      "press": "mk.co.kr",
      "publishedAt": "2026-11-05T00:03:00.000Z",
      "link": "https://m.entertain.naver.com/article/009/0005759247"
-    },
-    {
-     "title": "이찬혁-하지수, 열애설 침묵하더니 ‘전참시’서 동반 포착...손잡고 춤...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-04T23:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004463441"
     }
    ]
   },
   {
-   "keyword": "김포시",
+   "keyword": "이자",
    "sources": [
     "google"
    ],
    "articles90": 5,
    "recent20": 2,
    "press": 5,
-   "firstArticleAt": "2026-11-04T23:58:00.000Z",
+   "firstArticleAt": "2026-11-04T23:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'안전인력 충원·처우개선'…김포시-김포골드라인 노조 간담회",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T00:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016423206?sid=102"
+     "title": "한투, 중개형 ISA ‘RP 자동매수’ 도입… 예수금에 이자 붙인다",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-05T00:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004678956?sid=101"
     },
     {
-     "title": "이기형 김포시장, 김포골드라인 사우역 방문…노조와 현장 의견 청취",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-05T00:28:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3742843"
-    },
-    {
-     "title": "김포시 \"수도권 역차별, 접경지역 규제·인프라 부족 반영해야\"… 지방...",
-     "press": "ic.newdaily.co.kr",
-     "publishedAt": "2026-11-05T00:16:00.000Z",
-     "link": "https://ic.newdaily.co.kr/site/data/html/2026/11/05/2026110500045.html"
-    }
-   ]
-  },
-  {
-   "keyword": "하이닉스 주가 하락",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 3,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T00:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"美 선거 불확실성 걷히면 증시 반등\"…삼성전자·SK하이닉스 저평가 매...",
-     "press": "widedaily.com",
-     "publishedAt": "2026-11-05T00:36:00.000Z",
-     "link": "https://www.widedaily.com/news/articleView.html?idxno=302884"
-    },
-    {
-     "title": "코스피, 장 초반 2%대 하락해 5560선 후퇴...반도체주 급락",
-     "press": "pinpointnews.co.kr",
+     "title": "\"광교 신축인데 지하철 20분\"…외부인 통행에 이자 부담까지 | 광교 자연...",
+     "press": "realty.chosun.com",
      "publishedAt": "2026-11-05T00:34:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=501439"
+     "link": "https://realty.chosun.com/site/data/html_dir/2026/11/05/2026110500843.html"
     },
     {
-     "title": "삼성전자·하이닉스 주가 흔들…지금 '줍줍'할까, 좀 더 후에 들어가야...",
-     "press": "financialpost.co.kr",
-     "publishedAt": "2026-11-05T00:24:00.000Z",
-     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=284813"
+     "title": "KB국민은행, 대부업체 성실상환자 1만 명에 이자 지원",
+     "press": "handmk.com",
+     "publishedAt": "2026-11-05T00:02:00.000Z",
+     "link": "https://www.handmk.com/news/articleView.html?idxno=44785"
     }
    ]
   },
@@ -394,43 +458,11 @@
      "link": "https://m.entertain.naver.com/article/109/0005635034"
     }
    ]
-  },
-  {
-   "keyword": "이자",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-04T23:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"광교 신축인데 지하철 20분\"…외부인 통행에 이자 부담까지 | 광교 자연...",
-     "press": "realty.chosun.com",
-     "publishedAt": "2026-11-05T00:34:00.000Z",
-     "link": "https://realty.chosun.com/site/data/html_dir/2026/11/05/2026110500843.html"
-    },
-    {
-     "title": "KB국민은행, 대부업체 성실상환자 1만 명에 이자 지원",
-     "press": "handmk.com",
-     "publishedAt": "2026-11-05T00:02:00.000Z",
-     "link": "https://www.handmk.com/news/articleView.html?idxno=44785"
-    },
-    {
-     "title": "계약금도 이자도 '0원'…청라 '푸르지오 스타셀라49' 파격 금융 조건에...",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-05T00:00:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=67067"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 856,
+  "flagged": 857,
   "matched": 370,
   "avgLeadMin": 351,
   "recent": [
