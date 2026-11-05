@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T11:39:11.098Z",
+ "builtAt": "2026-11-05T11:49:14.249Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,33 +13,32 @@
   {
    "keyword": "윤석열 내란 사건 내년 선고",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 32,
    "recent20": 4,
-   "press": 30,
-   "firstArticleAt": "2026-11-05T10:12:00.000Z",
+   "press": 31,
+   "firstArticleAt": "2026-11-05T10:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "윤석열 '내란 우두머리' 혐의 2심 내년 1월 26일 선고",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-05T11:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001976922?sid=102"
+     "title": "‘내란 수괴’ 반성은 없었다···윤석열 “헌법 수호하려” 김용현 “...",
+     "press": "weekly.khan.co.kr",
+     "publishedAt": "2026-11-05T11:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/033/0000053178?sid=102"
     },
     {
-     "title": "尹 “계엄은 헌법상 권한 행사”…내란 2심 선고 내년 1월 26일",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-05T11:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002393467?sid=100"
+     "title": "\"난 무죄\" 윤석열 26쪽 분량 최후진술…선고는 내년 1월",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-05T11:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400978?sid=102"
     },
     {
-     "title": "‘사형 구형’ 尹, ‘내란우두머리’ 항소심 선고 내년 1월 26일 열린다",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-05T11:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003057490?sid=100"
+     "title": "사형 구형 받은 尹 \"계엄은 헌법상 권한\"…2심 선고 내년 1월 26일",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-05T11:40:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=728232"
     }
    ]
   },
@@ -48,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 3,
-   "press": 15,
+   "articles90": 16,
+   "recent20": 2,
+   "press": 16,
    "firstArticleAt": "2026-11-05T10:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "철도노조 쟁의행위 찬반투표 77.6% 찬성으로 가결, 12월 총파업 예고",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-05T11:40:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=451324"
+    },
     {
      "title": "철도노조, 임단협 결렬 12월 '총파업'…열차 운행 비상",
      "press": "shinailbo.co.kr",
@@ -66,12 +71,6 @@
      "press": "mt.co.kr",
      "publishedAt": "2026-11-05T11:29:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/008/0005437376?sid=102"
-    },
-    {
-     "title": "'통합' 코레일ㆍSR, 12월 총파업하나…철도노조, 쟁의행위 의결(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T11:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016425091?sid=102"
     }
    ]
   },
@@ -81,13 +80,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 8,
+   "articles90": 6,
    "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-05T10:10:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-05T10:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "법원, 개인정보 유출 쿠팡에 개보위 4200억원 과징금 유지",
+     "press": "zdnet.co.kr",
+     "publishedAt": "2026-11-05T11:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/092/0002444134?sid=103"
+    },
     {
      "title": "법원 '개인정보 유출' 과징금 효력 유지에…쿠팡 \"검토 후 대응\"",
      "press": "news.mtn.co.kr",
@@ -99,12 +104,6 @@
      "press": "businesspost.co.kr",
      "publishedAt": "2026-11-05T10:54:00.000Z",
      "link": "https://www.businesspost.co.kr/BP?command=article_view&num=451323"
-    },
-    {
-     "title": "법원, 쿠팡 '개인정보 유출' 4000억대 과징금 '효력 유지'",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-05T10:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001072701?sid=101"
     }
    ]
   }
