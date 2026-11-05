@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T04:02:45.538Z",
+ "builtAt": "2026-11-05T04:12:49.339Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 52,
-   "recent20": 1,
-   "press": 36,
-   "firstArticleAt": "2026-11-05T02:33:00.000Z",
-   "exclusive": true,
+   "articles90": 45,
+   "recent20": 2,
+   "press": 34,
+   "firstArticleAt": "2026-11-05T02:46:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "국힘 \"李·文 면죄부 나눠먹기\" … '조작기소 특검' 필리버스터 예고",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-05T04:08:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/05/2026110500179.html"
+    },
+    {
+     "title": "민주 \"조작기소 특검, 권력남용 규명\"…국힘 비판",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-05T04:06:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1542756"
+    },
     {
      "title": "본회의 오르는 조작기소 특검법…국힘, 전 안건 필리버스터 예고",
      "press": "iminju.net",
      "publishedAt": "2026-11-05T03:44:00.000Z",
      "link": "http://www.iminju.net/news/articleView.html?idxno=171986"
-    },
-    {
-     "title": "여야, 조작기소 특검법 놓고 입장차… 국회 본희의 안건 협상 결렬 [뉴시...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T03:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303601?sid=100"
-    },
-    {
-     "title": "'조작기소 특검법'에 국회 정면충돌…여야 협상 결렬, 필리버스터 전면...",
-     "press": "ppss.kr",
-     "publishedAt": "2026-11-05T03:39:00.000Z",
-     "link": "https://www.ppss.kr/news/articleView.html?idxno=319256"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 67,
+   "articles90": 69,
    "recent20": 6,
-   "press": 25,
+   "press": 26,
    "firstArticleAt": "2026-11-05T03:01:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "‘어차피 우승은 장동민?’…더 강력해진 ‘데블스 플랜3’ 최강자들의...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-05T03:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001146297"
+     "title": "[포토] 데블스 플랜3 '많이 사랑해주세요'",
+     "press": "joynews24.com",
+     "publishedAt": "2026-11-05T04:10:00.000Z",
+     "link": "http://www.joynews24.com/view/2023003"
     },
     {
-     "title": "재재-이도 '데블스 플랜3 뉴비들의 반란'[엑's HD포토]",
+     "title": "장동민 귀환→오현규 재도전, 제대로 판 키운 두뇌 서바이벌 '데블스 플...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-05T04:09:00.000Z",
+     "link": "https://m.entertain.naver.com/article/119/0003151701"
+    },
+    {
+     "title": "'데블스 플랜: 데드 어게인' 힘차게 파이팅![엑's HD포토]",
      "press": "xportsnews.com",
-     "publishedAt": "2026-11-05T03:57:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002077064"
-    },
-    {
-     "title": "'데블스 플랜: 데드 어게인' 장동민·홍진호·하석진 등 출연진 총출동...",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-05T03:54:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000519275"
+     "publishedAt": "2026-11-05T04:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002077070"
     }
    ]
   },
@@ -79,10 +79,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 17,
+   "articles90": 11,
    "recent20": 1,
-   "press": 15,
-   "firstArticleAt": "2026-11-05T02:33:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-05T02:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,66 +107,34 @@
    ]
   },
   {
-   "keyword": "장동혁 의원총회 참석",
+   "keyword": "주식",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 16,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-05T02:36:00.000Z",
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-05T03:28:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "의원총회 참석하는 국민의힘 대표와 지도부",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T03:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303535?sid=100"
+     "title": "수능날 주식시장 1시간 늦게 열린다…정규장 오전 10시 개장",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-05T04:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003057339?sid=101"
     },
     {
-     "title": "국민의힘 의원총회",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T03:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303534?sid=100"
+     "title": "주식 상승률 상위 20개 중 14개 20% 이상 급등",
+     "press": "kjdaily.com",
+     "publishedAt": "2026-11-05T04:04:00.000Z",
+     "link": "http://www.kjdaily.com/article.php?aid=1793851338691354276"
     },
     {
-     "title": "의원총회 국민의례 하는 국민의힘 의원들",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T03:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303532?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "발언하는 정점식 원내대표",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 10,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T02:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "발언하는 정점식 국민의힘 원내대표",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T03:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303536?sid=100"
-    },
-    {
-     "title": "정점식 국민의힘 원내대표 발언 듣는 장동혁 대표",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T03:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303525?sid=100"
-    },
-    {
-     "title": "[포토] 민주당 규탄하는 정점식 국민의힘 원내대표",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-05T03:02:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/05/2026110500163.html"
+     "title": "문혁수 LG이노텍 사장, 석 달 만에 자사 주식 재매수",
+     "press": "newskr.kr",
+     "publishedAt": "2026-11-05T03:36:00.000Z",
+     "link": "http://www.newskr.kr/news/articleView.html?idxno=107734"
     }
    ]
   },
@@ -203,142 +171,100 @@
    ]
   },
   {
-   "keyword": "필리핀",
+   "keyword": "장동혁 의원총회 참석",
    "sources": [
-    "signal.bz",
-    "google"
+    "nate"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T02:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "양구군, 필리핀 루이지애나시와 계절근로자 유치 협약…농촌 인력난 대...",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-05T03:28:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5080102"
-    },
-    {
-     "title": "양구군-필리핀 라구나주 루이지애나시 업무협약 체결",
-     "press": "jeonmae.co.kr",
-     "publishedAt": "2026-11-05T03:08:00.000Z",
-     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1308821"
-    },
-    {
-     "title": "양구군, 필리핀 루이지애나시와 계절근로자 유치 협약",
-     "press": "chmbc.co.kr",
-     "publishedAt": "2026-11-05T02:36:00.000Z",
-     "link": "https://chmbc.co.kr/article/14127012"
-    }
-   ]
-  },
-  {
-   "keyword": "유치원",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 3,
+   "articles90": 8,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-05T02:36:00.000Z",
+   "firstArticleAt": "2026-11-05T02:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "부여 규암초병설유치원, '규암 꿈·행복 어울림 축제' 개최",
-     "press": "chungnamilbo.co.kr",
-     "publishedAt": "2026-11-05T03:20:00.000Z",
-     "link": "http://www.chungnamilbo.co.kr/news/articleView.html?idxno=919013"
+     "title": "의원총회 참석하는 국민의힘 대표와 지도부",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T03:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303539?sid=100"
     },
     {
-     "title": "안재욱, 민효린♥태양과 인연 있었다…\"자녀들 같은 유치원 다녀, 달리...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-05T02:54:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000486659"
+     "title": "의원총회 참석한 장동혁 국민의힘 대표",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T03:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303533?sid=100"
     },
     {
-     "title": "양산시 오봉유치원, 아나바다 수익금 기부",
-     "press": "idomin.com",
-     "publishedAt": "2026-11-05T02:36:00.000Z",
-     "link": "https://www.idomin.com/news/articleView.html?idxno=2018804"
+     "title": "의원총회 국민의례 하는 국민의힘 의원들",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T03:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303532?sid=100"
     }
    ]
   },
   {
-   "keyword": "소아 코로나19 접종",
+   "keyword": "발언하는 정점식 원내대표",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 3,
+   "articles90": 6,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-05T02:36:00.000Z",
+   "firstArticleAt": "2026-11-05T03:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "12세 미만 고위험군 소아·영유아 코로나19 예방접종 11일 시작",
-     "press": "redian.org",
-     "publishedAt": "2026-11-05T02:58:00.000Z",
-     "link": "https://www.redian.org/news/articleView.html?idxno=257603"
+     "title": "발언하는 정점식 국민의힘 원내대표",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T03:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303536?sid=100"
     },
     {
-     "title": "고위험군 소아·영유아, 겨울 대비 코로나19 예방접종",
-     "press": "00news.co.kr",
-     "publishedAt": "2026-11-05T02:52:00.000Z",
-     "link": "http://www.00news.co.kr/news/articleView.html?idxno=107754"
+     "title": "정점식 국민의힘 원내대표 발언 듣는 장동혁 대표",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T03:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303525?sid=100"
     },
     {
-     "title": "고위험군 6개월~11세 코로나19 접종 11일 시작",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-05T02:36:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=400878"
-    }
-   ]
-  },
-  {
-   "keyword": "로보월드",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T02:41:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[로보월드 어워드 ①] 로봇 기술의 완성도·시장성을 묻다...올해 로봇 ...",
-     "press": "hellot.net",
-     "publishedAt": "2026-11-05T03:42:00.000Z",
-     "link": "https://www.hellot.net/news/article.html?no=116052"
-    },
-    {
-     "title": "로봇기업 현직자가 대학생 취업 상담…교육부, 로보월드 연계 부트캠프...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-05T03:00:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261105000081"
-    },
-    {
-     "title": "'정밀위치측정 등 자동화 로봇 총출동' 인아텍앤코포, 로보월드 참가",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-05T02:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003482527?sid=105"
+     "title": "[포토] 민주당 규탄하는 정점식 국민의힘 원내대표",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-05T03:02:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/05/2026110500163.html"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 920,
-  "matched": 395,
-  "avgLeadMin": 374,
+  "flagged": 921,
+  "matched": 399,
+  "avgLeadMin": 379,
   "recent": [
+   {
+    "keyword": "금감원 퇴직연금 캠페인 출범",
+    "hitKeyword": "여성 마라톤 완주 캠페인",
+    "hitAt": "2026-11-05T13:00:00+09:00",
+    "leadMin": 2663
+   },
+   {
+    "keyword": "황인범, 2분만에 도움",
+    "hitKeyword": "황인범 포르투 도움",
+    "hitAt": "2026-11-05T13:00:00+09:00",
+    "leadMin": 257
+   },
+   {
+    "keyword": "황인범 2분 도움",
+    "hitKeyword": "황인범 포르투 도움",
+    "hitAt": "2026-11-05T13:00:00+09:00",
+    "leadMin": 237
+   },
+   {
+    "keyword": "층간소음 기준 강화",
+    "hitKeyword": "기초연금 거주 기준 강화",
+    "hitAt": "2026-11-05T13:00:00+09:00",
+    "leadMin": 88
+   },
    {
     "keyword": "전자발찌 청와대 칼부림 예고",
     "hitKeyword": "세브란스병원 칼부림",
@@ -374,30 +300,6 @@
     "hitKeyword": "이찬혁 하지수 전참시",
     "hitAt": "2026-11-05T12:00:00+09:00",
     "leadMin": 157
-   },
-   {
-    "keyword": "세브란스 50대 살인미수",
-    "hitKeyword": "세브란스 흉기 사건",
-    "hitAt": "2026-11-05T12:00:00+09:00",
-    "leadMin": 48
-   },
-   {
-    "keyword": "LG 트리스탄 영입",
-    "hitKeyword": "LG 트리스탄 벡 영입",
-    "hitAt": "2026-11-05T12:00:00+09:00",
-    "leadMin": 48
-   },
-   {
-    "keyword": "LG, 트리스탄 벡 영입",
-    "hitKeyword": "LG 트리스탄 벡 영입",
-    "hitAt": "2026-11-05T12:00:00+09:00",
-    "leadMin": 38
-   },
-   {
-    "keyword": "세브란스 흉기난동 살인미수",
-    "hitKeyword": "세브란스 흉기 사건",
-    "hitAt": "2026-11-05T12:00:00+09:00",
-    "leadMin": 28
    }
   ]
  }
