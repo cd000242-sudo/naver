@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T04:22:54.399Z",
+ "builtAt": "2026-11-05T04:33:01.803Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,133 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 25,
  "candidates": [
   {
-   "keyword": "데블스 플랜 제작발표회",
+   "keyword": "장동민 데블스 플랜3",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 69,
-   "recent20": 5,
-   "press": 25,
-   "firstArticleAt": "2026-11-05T03:02:00.000Z",
+   "articles90": 62,
+   "recent20": 3,
+   "press": 26,
+   "firstArticleAt": "2026-11-05T03:04:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
+    {
+     "title": "[핌in현장] 장동민 \"살아있는 한 서바이벌 은퇴 없다\"…'데블스 플랜' 더...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-05T04:27:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261105000718"
+    },
+    {
+     "title": "장동민·하석진·넉살·신동·존박 외, 예능 천재부터 두뇌 천재까지…...",
+     "press": "the-biz.co.kr",
+     "publishedAt": "2026-11-05T04:24:00.000Z",
+     "link": "http://www.the-biz.co.kr/news/articleView.html?idxno=730741"
+    },
     {
      "title": "신동 “다이어트엔 ‘데블스 플랜3’가 최고”…‘인간 마운자로’ 자처",
      "press": "sports.khan.co.kr",
      "publishedAt": "2026-11-05T04:17:00.000Z",
      "link": "https://m.entertain.naver.com/article/144/0001148229"
+    }
+   ]
+  },
+  {
+   "keyword": "미국 중간선거 결과",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 26,
+   "recent20": 4,
+   "press": 21,
+   "firstArticleAt": "2026-11-05T03:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[중간선거] 미국 주지사 당선인 36명 중 34명 “데이터센터 규제” 입장",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-05T04:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012287913?sid=104"
     },
     {
-     "title": "[포토] 데블스 플랜3 '레전드와 신흥 강자들이 한자리에'",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-05T04:12:00.000Z",
-     "link": "http://www.joynews24.com/view/2023005"
+     "title": "[美 중간선거] 한성숙 \"민주당 승리 강력…한미 관계 큰 변화 없을 것\"",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-05T04:16:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=902056"
     },
     {
-     "title": "[포토] 데블스 플랜3 '많이 사랑해주세요'",
-     "press": "joynews24.com",
+     "title": "미 중간선거서 한국계 3명 당선…민주당 하원으로 의회 입성",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-05T04:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001163352?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "코스피 매도 사이드카",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 13,
+   "recent20": 0,
+   "press": 13,
+   "firstArticleAt": "2026-11-05T03:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[외환] 셀 물량에도 커스터디 달러 매수에 1,340원대로…코스피 주시",
+     "press": "news.einfomax.co.kr",
      "publishedAt": "2026-11-05T04:10:00.000Z",
-     "link": "http://www.joynews24.com/view/2023003"
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443235"
+    },
+    {
+     "title": "코스피 장중 5.23% 급락…외국인 1조원대 순매도",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-05T04:10:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/433087"
+    },
+    {
+     "title": "반도체주 급락에 켜진 매도 사이드카...코스피 장중 5400선 붕괴 [TF사진...",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-05T04:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000549068?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "유치원",
+   "sources": [
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 6,
+   "press": 8,
+   "firstArticleAt": "2026-11-05T03:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "인천시교육청-국립국악원, 섬마을·유치원까지 국악교육 확대",
+     "press": "news.lghellovision.net",
+     "publishedAt": "2026-11-05T04:30:00.000Z",
+     "link": "http://news.lghellovision.net/news/articleView.html?idxno=561187"
+    },
+    {
+     "title": "충남교육청유아교육원, 유치원 원장 역량강화 연수 운영",
+     "press": "cctimes.kr",
+     "publishedAt": "2026-11-05T04:26:00.000Z",
+     "link": "http://www.cctimes.kr/news/articleView.html?idxno=935740"
+    },
+    {
+     "title": "4살 여자아이 유치원 버스에 3시간 갇혀…부모에겐 “등원 안 했다”",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-05T04:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005759440?sid=102"
     }
    ]
   },
@@ -47,10 +143,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-05T03:00:00.000Z",
+   "articles90": 9,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-05T03:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,35 +171,66 @@
    ]
   },
   {
-   "keyword": "유치원",
+   "keyword": "주식",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 6,
-   "recent20": 4,
-   "press": 6,
-   "firstArticleAt": "2026-11-05T02:54:00.000Z",
+   "articles90": 7,
+   "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-05T03:28:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "피델리티 티머 “60/40, 주식·채권 음의 상관 때만 작동”",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-05T04:32:00.000Z",
+     "link": "https://www.tokenpost.kr/news/market/433096"
+    },
+    {
+     "title": "서루주식회사, 지하수관정 개발 견적 재검토 서비스 도입… 현장별 시공...",
+     "press": "woodkorea.co.kr",
+     "publishedAt": "2026-11-05T04:32:00.000Z",
+     "link": "https://www.woodkorea.co.kr/news/articleView.html?idxno=92363"
+    },
+    {
+     "title": "수능일, 주식시장 1시간 늦게 열린다…오전 10시 개장",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-05T04:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003151704?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "직업계고 취업률 55.8%",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 7,
+   "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-05T03:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "교육청, 세종 유치원 사태 지원책 발표... 교사노조 반발",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-05T04:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002534749?sid=102"
+     "title": "직업계고 취업률 55.8%로 '반등'…300인 이상 기업 취업 비중 5년 연속 상...",
+     "press": "youthdaily.co.kr",
+     "publishedAt": "2026-11-05T04:32:00.000Z",
+     "link": "https://www.youthdaily.co.kr/news/article.html?no=229416"
     },
     {
-     "title": "[5일 인천시교육청] 섬마을·유치원까지 국악교육 확대 등",
-     "press": "asiatime.co.kr",
-     "publishedAt": "2026-11-05T04:18:00.000Z",
-     "link": "https://www.asiatime.co.kr/article/20261105500247"
+     "title": "[그래픽] 직업계고 취업률 55.8%…4년 만에 '반등'",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T04:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303747?sid=101"
     },
     {
-     "title": "인천시교육청, 섬·유치원 국악교육 지원 확대… 전통음악 배움터 넓힌...",
-     "press": "lawissue.co.kr",
-     "publishedAt": "2026-11-05T04:14:00.000Z",
-     "link": "https://www.lawissue.co.kr/view.php?ud=202611051208493005d94aa4ada6_12"
+     "title": "직업계고 졸업생, 300인 이상 기업 취업비중 5년째 상승",
+     "press": "jeonmae.co.kr",
+     "publishedAt": "2026-11-05T04:22:00.000Z",
+     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1308930"
     }
    ]
   },
@@ -112,13 +239,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 6,
+   "articles90": 7,
    "recent20": 1,
-   "press": 6,
+   "press": 7,
    "firstArticleAt": "2026-11-05T03:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "입동 앞두고 강원 영하 5도 강추위…주말 내륙·산지 눈 가능성",
+     "press": "kado.net",
+     "publishedAt": "2026-11-05T04:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000209574?sid=103"
+    },
     {
      "title": "\"패딩 꺼내야겠네\"…주말 전국 곳곳 추위·강풍",
      "press": "edaily.co.kr",
@@ -130,32 +263,27 @@
      "press": "wowtv.co.kr",
      "publishedAt": "2026-11-05T03:39:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/215/0001271758?sid=103"
-    },
-    {
-     "title": "초겨울 문턱 넘는 한반도...주말 서울 올가을 첫 영하권",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-05T03:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004007942?sid=102"
     }
    ]
   },
   {
    "keyword": "조정식 의장의 입법박람회 참석",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 13,
-   "recent20": 3,
+   "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-05T03:02:00.000Z",
+   "firstArticleAt": "2026-11-05T03:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "입법 박람회 참석하는 조정식 국회의장",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T04:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303659?sid=100"
+     "title": "[전매포토] 2026 국회 입법박람회 개막식",
+     "press": "jeonmae.co.kr",
+     "publishedAt": "2026-11-05T04:26:00.000Z",
+     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1308920"
     },
     {
      "title": "이야기 나누는 조정식 국회의장과 한병도 민주당 원내대표",
@@ -172,49 +300,24 @@
    ]
   },
   {
-   "keyword": "주식",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T03:28:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "수능일, 주식시장 1시간 늦게 열린다…오전 10시 개장",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-05T04:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003151704?sid=101"
-    },
-    {
-     "title": "수능날 주식시장 1시간 늦게 열린다…정규장 오전 10시 개장",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-05T04:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003057339?sid=101"
-    },
-    {
-     "title": "주식 상승률 상위 20개 중 14개 20% 이상 급등",
-     "press": "kjdaily.com",
-     "publishedAt": "2026-11-05T04:04:00.000Z",
-     "link": "http://www.kjdaily.com/article.php?aid=1793851338691354276"
-    }
-   ]
-  },
-  {
    "keyword": "대통령 선수단 격려오찬",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 24,
+   "articles90": 25,
    "recent20": 6,
    "press": 4,
    "firstArticleAt": "2026-11-05T03:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "건배하는 이재명 대통령 부부",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T04:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303725?sid=100"
+    },
     {
      "title": "국제기능올림픽 선수단 활약상 영상 시청하는 이재명 대통령 부부",
      "press": "newsis.com",
@@ -226,76 +329,71 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-05T04:18:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014303715?sid=100"
-    },
-    {
-     "title": "건배하는 이재명 대통령",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T04:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303713?sid=100"
     }
    ]
   },
   {
-   "keyword": "발언하는 정점식 원내대표",
+   "keyword": "친환경 버스 부가세 유지해야",
    "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T03:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "발언하는 정점식 국민의힘 원내대표",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T03:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303536?sid=100"
-    },
-    {
-     "title": "정점식 국민의힘 원내대표 발언 듣는 장동혁 대표",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T03:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303525?sid=100"
-    },
-    {
-     "title": "[포토] 민주당 규탄하는 정점식 국민의힘 원내대표",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-05T03:02:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/05/2026110500163.html"
-    }
-   ]
-  },
-  {
-   "keyword": "하이닉스 주가 하락",
-   "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-05T03:22:00.000Z",
+   "firstArticleAt": "2026-11-05T03:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성전자 거래 10.7% 증가…SK하이닉스는 27.8% 감소",
-     "press": "kjdaily.com",
-     "publishedAt": "2026-11-05T03:36:00.000Z",
-     "link": "http://www.kjdaily.com/article.php?aid=1793849622691353276"
+     "title": "인천시 등 16개 시도, 친환경버스 부가세 면제 유지 공동 대응",
+     "press": "kmaeil.com",
+     "publishedAt": "2026-11-05T04:32:00.000Z",
+     "link": "https://www.kmaeil.com/news/articleView.html?idxno=657129"
     },
     {
-     "title": "삼성전자·하이닉스 주가 폭락 중인데... 현대차는 폭등하는 이유가 있...",
-     "press": "wikitree.co.kr",
+     "title": "인천시, 친환경 버스 부가세 면제 유지 위해 광역자치단체와 공조한다",
+     "press": "discoverynews.kr",
+     "publishedAt": "2026-11-05T03:44:00.000Z",
+     "link": "https://www.discoverynews.kr/news/articleView.html?idxno=1105903"
+    },
+    {
+     "title": "인천시 \"친환경 버스 부가세 면제 유지 해야\"",
+     "press": "hankyung.com",
      "publishedAt": "2026-11-05T03:24:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1172078"
+     "link": "https://n.news.naver.com/mnews/article/015/0005350645?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "필리핀",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-05T03:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "양구군, 필리핀 계절근로자 유치 확대…농촌 인력난 해소 나선다",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-05T04:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001228759?sid=102"
     },
     {
-     "title": "SK하이닉스·삼성전자, 미국 중간선거 후 주가 폭락...골드만삭스 \"지나...",
-     "press": "coinreaders.com",
-     "publishedAt": "2026-11-05T03:22:00.000Z",
-     "link": "http://coinreaders.com/267683"
+     "title": "양구군, 필리핀 루이지애나시와 계절근로자 유치 협약…농촌 인력난 대...",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-05T03:28:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5080102"
+    },
+    {
+     "title": "양구군-필리핀 라구나주 루이지애나시 업무협약 체결",
+     "press": "jeonmae.co.kr",
+     "publishedAt": "2026-11-05T03:08:00.000Z",
+     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1308821"
     }
    ]
   },
@@ -305,36 +403,36 @@
     "nate"
    ],
    "articles90": 6,
-   "recent20": 0,
+   "recent20": 1,
    "press": 2,
-   "firstArticleAt": "2026-11-05T02:53:00.000Z",
+   "firstArticleAt": "2026-11-05T03:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "[포토] 의원총회 참석한 장동혁-정점식",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-05T04:30:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261105010002053"
+    },
+    {
      "title": "의원총회 참석하는 국민의힘 대표와 지도부",
      "press": "newsis.com",
      "publishedAt": "2026-11-05T03:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303537?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/003/0014303539?sid=100"
     },
     {
      "title": "의원총회 참석한 장동혁 국민의힘 대표",
      "press": "newsis.com",
      "publishedAt": "2026-11-05T03:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303526?sid=100"
-    },
-    {
-     "title": "국민의힘 의원총회",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T03:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303534?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/003/0014303533?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 925,
+  "flagged": 930,
   "matched": 399,
   "avgLeadMin": 379,
   "recent": [
