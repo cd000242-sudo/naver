@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T20:12:36.549Z",
+ "builtAt": "2026-11-05T20:22:39.515Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 9,
+ "measured": 6,
  "candidates": [
   {
    "keyword": "예산",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 7,
-   "press": 8,
+   "articles90": 13,
+   "recent20": 4,
+   "press": 9,
    "firstArticleAt": "2026-11-05T19:16:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
+     "title": "인천시, 2027년도 예산 15조 9000억 편성…복지·민생회복에 8.2조 집중",
+     "press": "cstimes.com",
+     "publishedAt": "2026-11-05T20:20:00.000Z",
+     "link": "https://www.cstimes.com/news/articleView.html?idxno=726888"
+    },
+    {
+     "title": "인천시교육청, 2027년 본예산 5조 5811억 편성…'미래교육·환경개선' 재...",
+     "press": "cstimes.com",
+     "publishedAt": "2026-11-05T20:20:00.000Z",
+     "link": "https://www.cstimes.com/news/articleView.html?idxno=726879"
+    },
+    {
      "title": "인천시 내년 예산안 15조9천억 원…올해보다 3.8% 증가",
      "press": "thefairnews.co.kr",
      "publishedAt": "2026-11-05T20:08:00.000Z",
      "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=93236"
-    },
-    {
-     "title": "인천시 2027년 본예산 편성…‘ABC+E’ 육성 첫발, 민간 투자·국비 확보...",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-05T20:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000130855?sid=100"
-    },
-    {
-     "title": "인천 내년 예산 ‘민생’ 및 ‘제값 찾기’ 초점…박찬대, ‘지원’ 33회...",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-05T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000130854?sid=100"
     }
    ]
   }
