@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T22:03:10.447Z",
+ "builtAt": "2026-11-05T22:13:13.576Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,30 +16,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 7,
+   "articles90": 10,
+   "recent20": 2,
+   "press": 8,
    "firstArticleAt": "2026-11-05T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "오늘의 MBTI 운세 11월 6일 금요일",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-05T22:12:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=401127"
+    },
+    {
+     "title": "[오늘의 운세] 띠별 운세 11월 6일",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-05T22:08:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=401125"
+    },
+    {
      "title": "[오늘의 운세] 2026년 11월 6일 (금) 띠별운세 '한 주의 짐을 덜어내자'",
      "press": "dailypop.kr",
      "publishedAt": "2026-11-05T21:36:00.000Z",
      "link": "http://www.dailypop.kr/news/articleView.html?idxno=103972"
-    },
-    {
-     "title": "[AI] 오늘의 띠별 운세...2026.11.6(금요일)",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-05T21:30:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=67177"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 6일 별자리 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-05T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006404665?sid=103"
     }
    ]
   },
@@ -49,23 +49,23 @@
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 3,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-05T20:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이스라엘 대통령 “총리 후보 8일 발표”…네타냐후 ‘실각 위기’",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-05T21:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003057500?sid=104"
-    },
-    {
      "title": "이스라엘 대통령 \"새 총리 후보 8일 발표\"",
      "press": "biz.sbs.co.kr",
      "publishedAt": "2026-11-05T21:50:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/374/0000542046?sid=101"
+    },
+    {
+     "title": "이스라엘 대통령 “총리 후보 8일 발표”…네타냐후 ‘실각 위기’",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-05T21:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003057500?sid=104"
     },
     {
      "title": "이스라엘 대통령 \"8일 연정 구성 맡을 총리 후보 결정\"",
@@ -76,44 +76,12 @@
    ]
   },
   {
-   "keyword": "윤석열 2심 선고",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "윤석열 2심도 당선무효형… \"397억 토해낼 판\" \"'이재명 판결'에 당했다...",
-     "press": "mediatoday.co.kr",
-     "publishedAt": "2026-11-05T21:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/006/0000138599?sid=102"
-    },
-    {
-     "title": "2심 최후진술서도 \"계엄은 정당\"…내년 1월 선고",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-05T21:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001401033?sid=102"
-    },
-    {
-     "title": "尹 “계엄, 헌법 권한…조작기소 주장에 나라 위기” 내란 2심 1월 선고",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-05T21:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012288484?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "장남 주진우 고소",
    "sources": [
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-05T21:01:00.000Z",
    "exclusive": false,
@@ -136,6 +104,38 @@
      "press": "segye.com",
      "publishedAt": "2026-11-05T21:07:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/022/0004172988?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "윤석열 2심 선고",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-05T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "윤석열 2심도 당선무효형… \"397억 토해낼 판\" \"'이재명 판결'에 당했다...",
+     "press": "mediatoday.co.kr",
+     "publishedAt": "2026-11-05T21:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/006/0000138599?sid=102"
+    },
+    {
+     "title": "2심 최후진술서도 \"계엄은 정당\"…내년 1월 선고",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-05T21:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001401033?sid=102"
+    },
+    {
+     "title": "尹 “계엄, 헌법 권한…조작기소 주장에 나라 위기” 내란 2심 1월 선고",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-05T21:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012288484?sid=102"
     }
    ]
   }
