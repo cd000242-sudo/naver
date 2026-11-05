@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T18:32:02.122Z",
+ "builtAt": "2026-11-05T18:42:05.972Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 20,
  "candidates": [
   {
    "keyword": "비트코인",
@@ -16,13 +16,19 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T17:10:00.000Z",
+   "articles90": 8,
+   "recent20": 3,
+   "press": 2,
+   "firstArticleAt": "2026-11-05T17:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "美 중간선거 끝나자… V 그린 비트코인",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-05T18:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005437400?sid=101"
+    },
     {
      "title": "비트코인 201개, 한 주소서 8차례 연속 청산",
      "press": "tokenpost.kr",
@@ -34,12 +40,6 @@
      "press": "tokenpost.kr",
      "publishedAt": "2026-11-05T18:26:00.000Z",
      "link": "https://www.tokenpost.kr/news/breaking/433486"
-    },
-    {
-     "title": "앵커리지 디지털, 최장 1년 만기 비트코인·이더리움 옵션 추진",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-05T18:00:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/433468"
     }
    ]
   }
