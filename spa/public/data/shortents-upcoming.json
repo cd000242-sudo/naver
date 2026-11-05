@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T21:02:51.082Z",
+ "builtAt": "2026-11-05T21:12:54.917Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 13,
+ "measured": 17,
  "candidates": [
   {
-   "keyword": "미국 중간선거",
+   "keyword": "2026년 11월 6일 운세",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 15,
-   "recent20": 5,
-   "press": 12,
-   "firstArticleAt": "2026-11-05T19:42:00.000Z",
+   "articles90": 6,
+   "recent20": 6,
+   "press": 5,
+   "firstArticleAt": "2026-11-05T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[미 중간선거] 포드·GM도 등 돌린 車관세…현대차·기아, 정책 변화 '기...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-05T21:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003151963?sid=101"
+     "title": "[오늘의 운세] 2026년 11월 6일 별자리 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-05T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006404665?sid=103"
     },
     {
-     "title": "美 중간선거發 AI 규제 우려…삼성·SK, 메모리 수요 기반 '굳건'",
-     "press": "press9.kr",
-     "publishedAt": "2026-11-05T21:00:00.000Z",
-     "link": "http://www.press9.kr/news/articleView.html?idxno=85697"
+     "title": "[오늘의 운세] 2026년 11월 6일 띠별 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-05T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006404664?sid=103"
     },
     {
-     "title": "美 중간선거 뒤 유가 8% 급락…석유류가 밀어올린 물가, 11월엔 꺾일까",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014305120?sid=101"
+     "title": "2026년 효력(孝力) 모의고사",
+     "press": "cctoday.co.kr",
+     "publishedAt": "2026-11-05T21:02:00.000Z",
+     "link": "https://www.cctoday.co.kr/news/articleView.html?idxno=2239730"
     }
    ]
   },
@@ -73,46 +73,44 @@
      "link": "https://n.news.naver.com/mnews/article/052/0002428987?sid=104"
     }
    ]
-  },
-  {
-   "keyword": "유럽 여객기 폭탄 위협",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T20:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "또 폭탄 위협...유럽 비행기 25편 비상착륙·회항 '항공 대란'",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-05T20:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002428986?sid=104"
-    },
-    {
-     "title": "유럽 여객기 최소 27편에 또 폭탄 위협…전투기 호위도",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-05T20:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000923370?sid=104"
-    },
-    {
-     "title": "유럽 여객기 최소 27편에 또 폭탄 위협…비상착륙·회항 '대란'",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-05T20:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001976926?sid=104"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1069,
-  "matched": 498,
-  "avgLeadMin": 468,
+  "flagged": 1070,
+  "matched": 503,
+  "avgLeadMin": 479,
   "recent": [
+   {
+    "keyword": "유럽 여객기 폭파 위협",
+    "hitKeyword": "유럽 여객기 폭탄 위협",
+    "hitAt": "2026-11-06T06:00:00+09:00",
+    "leadMin": 2809
+   },
+   {
+    "keyword": "여객기",
+    "hitKeyword": "유럽 여객기 폭탄 위협",
+    "hitAt": "2026-11-06T06:00:00+09:00",
+    "leadMin": 2587
+   },
+   {
+    "keyword": "마트 냉장고 프랑스 사이버공격",
+    "hitKeyword": "프랑스 고물가 시위",
+    "hitAt": "2026-11-06T06:00:00+09:00",
+    "leadMin": 1237
+   },
+   {
+    "keyword": "서울 아파트값 91주 상승",
+    "hitKeyword": "서울 아파트값 연속 상승",
+    "hitAt": "2026-11-06T06:00:00+09:00",
+    "leadMin": 816
+   },
+   {
+    "keyword": "나스닥",
+    "hitKeyword": "나스닥 조정국면 진입",
+    "hitAt": "2026-11-06T06:00:00+09:00",
+    "leadMin": 289
+   },
    {
     "keyword": "카카오 3분기 실적 증가",
     "hitKeyword": "카카오 인적분할 연기",
@@ -142,36 +140,6 @@
     "hitKeyword": "카카오 인적분할 연기",
     "hitAt": "2026-11-06T00:00:00+09:00",
     "leadMin": 768
-   },
-   {
-    "keyword": "카카오 주가",
-    "hitKeyword": "카카오 인적분할 연기",
-    "hitAt": "2026-11-06T00:00:00+09:00",
-    "leadMin": 758
-   },
-   {
-    "keyword": "카카오 AI 사업 2028년 목표",
-    "hitKeyword": "카카오 인적분할 연기",
-    "hitAt": "2026-11-06T00:00:00+09:00",
-    "leadMin": 748
-   },
-   {
-    "keyword": "카카오 자사주 매입 소각",
-    "hitKeyword": "카카오 인적분할 연기",
-    "hitAt": "2026-11-06T00:00:00+09:00",
-    "leadMin": 687
-   },
-   {
-    "keyword": "철도노조 12월 파업 예고",
-    "hitKeyword": "서인영 12월 재혼",
-    "hitAt": "2026-11-06T00:00:00+09:00",
-    "leadMin": 150
-   },
-   {
-    "keyword": "코스피 5%대 급락",
-    "hitKeyword": "코스피 블루웨이브 급락",
-    "hitAt": "2026-11-06T00:00:00+09:00",
-    "leadMin": 19
    }
   ]
  }
