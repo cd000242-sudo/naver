@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T15:51:11.339Z",
+ "builtAt": "2026-11-05T16:01:14.436Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,46 +11,14 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "조작기소 특검법 본회의 상정",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 8,
-   "firstArticleAt": "2026-11-05T14:27:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "검사 수사권 없앤 與, ‘조작기소 특검’엔 허용… 법조계 “모순적 행...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-05T15:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004008095?sid=102"
-    },
-    {
-     "title": "與, 조작기소 특검법 오늘 처리… 野는 장외투쟁 예고",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-05T15:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004008097?sid=100"
-    },
-    {
-     "title": "국힘, '조작기소 특검법'에 전면전…필리버스터·장외투쟁 총동원",
-     "press": "dkilbo.com",
-     "publishedAt": "2026-11-05T15:40:00.000Z",
-     "link": "https://www.dkilbo.com/news/articleView.html?idxno=559838"
-    }
-   ]
-  },
-  {
    "keyword": "가상자산 과세 2년 유예 추진",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 4,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-05T14:28:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-05T14:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
