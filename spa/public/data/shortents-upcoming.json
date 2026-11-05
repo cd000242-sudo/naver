@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T11:49:14.249Z",
+ "builtAt": "2026-11-05T11:59:19.223Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,17 +11,23 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "윤석열 내란 사건 내년 선고",
+   "keyword": "내란 우두머리 내년 1월26일 선고",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 32,
+   "articles90": 26,
    "recent20": 4,
-   "press": 31,
-   "firstArticleAt": "2026-11-05T10:20:00.000Z",
+   "press": 26,
+   "firstArticleAt": "2026-11-05T10:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'내란 우두머리' 2심, 내년 1월 선고…尹 \"호소형 계엄이었다\"",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-05T11:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005838842?sid=102"
+    },
     {
      "title": "‘내란 수괴’ 반성은 없었다···윤석열 “헌법 수호하려” 김용현 “...",
      "press": "weekly.khan.co.kr",
@@ -33,12 +39,6 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-05T11:41:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001400978?sid=102"
-    },
-    {
-     "title": "사형 구형 받은 尹 \"계엄은 헌법상 권한\"…2심 선고 내년 1월 26일",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-05T11:40:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=728232"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 16,
+   "articles90": 14,
    "recent20": 2,
-   "press": 16,
-   "firstArticleAt": "2026-11-05T10:20:00.000Z",
+   "press": 14,
+   "firstArticleAt": "2026-11-05T10:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "코레일·SR 통합 후 첫 파업 위기…철도노조 “12월 총파업 불사”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-05T11:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004679275?sid=102"
+    },
     {
      "title": "철도노조 쟁의행위 찬반투표 77.6% 찬성으로 가결, 12월 총파업 예고",
      "press": "businesspost.co.kr",
@@ -65,12 +71,6 @@
      "press": "shinailbo.co.kr",
      "publishedAt": "2026-11-05T11:36:00.000Z",
      "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5080387"
-    },
-    {
-     "title": "철도노조, 12월 총파업 예고...철도대란 현실화 우려",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-05T11:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005437376?sid=102"
     }
    ]
   },
@@ -110,7 +110,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1032,
+  "flagged": 1033,
   "matched": 474,
   "avgLeadMin": 440,
   "recent": [
