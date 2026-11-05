@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T17:31:42.432Z",
+ "builtAt": "2026-11-05T17:41:46.246Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,11 +8,45 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
- "candidates": [],
+ "measured": 11,
+ "candidates": [
+  {
+   "keyword": "미국",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-05T16:15:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "미국 기술주 매도세, 민주당 승리 뒤 AI 규제 우려",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-05T17:20:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/433447"
+    },
+    {
+     "title": "39년 만에 미국 돌아온 WRC…한국타이어, 메인 타이틀 달고 달린다",
+     "press": "bizwnews.com",
+     "publishedAt": "2026-11-05T17:02:00.000Z",
+     "link": "http://www.bizwnews.com/news/articleView.html?idxno=151082"
+    },
+    {
+     "title": "[미국 특징주] 리프트, 도어대시 멤버십 담은 월 9.99달러 구독 출시…우...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-05T16:50:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261106000019"
+    }
+   ]
+  }
+ ],
  "hitRate": {
   "days": 7,
-  "flagged": 1063,
+  "flagged": 1064,
   "matched": 498,
   "avgLeadMin": 468,
   "recent": [
