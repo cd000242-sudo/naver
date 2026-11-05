@@ -131,10 +131,33 @@ function parseReport(value: unknown, issues: string[]): ComplementReport {
  * Remove harmonyPacket / complementReport from `parsed` (in place — the generator keeps working on the same object)
  * and return them validated. Never throws.
  */
+/** Fields of the article itself (JSON output contract) — never part of the harmony packet. */
+const ARTICLE_FIELDS = [
+  'preWritingAnalysis', 'selectedTitle', 'titleCandidates', 'titleAlternatives', 'finalVerdict', 'headings',
+  'summaryTable', 'introduction', 'conclusion', 'bodyPlain', 'bodyHtml', 'hashtags', 'category',
+] as const;
+
+/**
+ * [2026-11-05] A response that forgot to close "harmonyPacket" nests the whole article inside it; stripping the
+ *   packet then dropped title, headings and body (PARTIAL_RESPONSE). Move article fields (and a nested
+ *   complementReport) back out before the strip. Values the article already has are never overwritten.
+ */
+function restoreMisnestedArticleFields(article: Record<string, unknown>): void {
+  const packet = article.harmonyPacket;
+  if (!packet || typeof packet !== 'object' || Array.isArray(packet)) return;
+  const inner = packet as Record<string, unknown>;
+  for (const key of [...ARTICLE_FIELDS, 'complementReport']) {
+    if (!Object.prototype.hasOwnProperty.call(inner, key)) continue;
+    if (!Object.prototype.hasOwnProperty.call(article, key)) article[key] = inner[key];
+    delete inner[key];
+  }
+}
+
 export function extractHarmonyPacket(parsed: unknown): HarmonyExtraction {
   const issues: string[] = [];
   if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) return { present: false, packet: null, report: null, issues };
   const article = parsed as Record<string, unknown>;
+  restoreMisnestedArticleFields(article);
   const hasPacket = Object.prototype.hasOwnProperty.call(article, 'harmonyPacket');
   const hasReport = Object.prototype.hasOwnProperty.call(article, 'complementReport');
   const rawPacket = article.harmonyPacket;
