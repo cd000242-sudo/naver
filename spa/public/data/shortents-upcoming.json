@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T21:43:04.659Z",
+ "builtAt": "2026-11-05T21:53:07.561Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,14 +11,46 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "유럽 여객기 폭탄 위협",
+   "keyword": "이스라엘 연정 구성",
    "sources": [
     "signal.bz"
    ],
    "articles90": 8,
    "recent20": 3,
-   "press": 8,
-   "firstArticleAt": "2026-11-05T20:18:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-05T20:25:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이스라엘 대통령 \"새 총리 후보 8일 발표\"",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-05T21:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000542046?sid=101"
+    },
+    {
+     "title": "이스라엘 대통령 “총리 후보 8일 발표”…네타냐후 ‘실각 위기’",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-05T21:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003057500?sid=104"
+    },
+    {
+     "title": "이스라엘 대통령 \"8일 연정 구성 맡을 총리 후보 결정\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T21:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014305142?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "유럽 여객기 폭탄 위협",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-05T20:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,66 +75,66 @@
    ]
   },
   {
-   "keyword": "2026년 11월 6일 운세",
+   "keyword": "장남 주진우 고소",
    "sources": [
     "nate"
    ],
-   "articles90": 8,
+   "articles90": 5,
    "recent20": 2,
-   "press": 7,
+   "press": 4,
+   "firstArticleAt": "2026-11-05T21:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"골프장 간 적 없어\"‥대통령 장남, 주진우 고소",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-05T21:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533848?sid=102"
+    },
+    {
+     "title": "이 대통령 장남, 주진우 고소…\"골프장 간 적 없어\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-05T21:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001401030?sid=100"
+    },
+    {
+     "title": "[사사건건] 李대통령 장남, 주진우 명예훼손 고소 外",
+     "press": "segye.com",
+     "publishedAt": "2026-11-05T21:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004172988?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "윤석열 2심 선고",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
    "firstArticleAt": "2026-11-05T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오늘의 운세] 2026년 11월 6일 (금) 띠별운세 '한 주의 짐을 덜어내자'",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-05T21:36:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103972"
+     "title": "윤석열 2심도 당선무효형… \"397억 토해낼 판\" \"'이재명 판결'에 당했다...",
+     "press": "mediatoday.co.kr",
+     "publishedAt": "2026-11-05T21:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/006/0000138599?sid=102"
     },
     {
-     "title": "[AI] 오늘의 띠별 운세...2026.11.6(금요일)",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-05T21:30:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=67177"
+     "title": "2심 최후진술서도 \"계엄은 정당\"…내년 1월 선고",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-05T21:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001401033?sid=102"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 6일 별자리 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-05T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006404665?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "이스라엘 연정 구성",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T20:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이스라엘 대통령 “새 정부 구성할 총리 후보 8일 발표”",
+     "title": "尹 “계엄, 헌법 권한…조작기소 주장에 나라 위기” 내란 2심 1월 선고",
      "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-05T21:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012288469?sid=104"
-    },
-    {
-     "title": "이스라엘 야권 아이젠코트, 과반 추천 확보…네타냐후 실각 위기",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-05T21:14:00.000Z",
-     "link": "https://www.ajunews.com/view/20261106061114565"
-    },
-    {
-     "title": "이스라엘 대통령 \"새 정부 총리 후보 8일 발표\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-05T20:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002428990?sid=104"
+     "publishedAt": "2026-11-05T21:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012288484?sid=102"
     }
    ]
   },
@@ -111,10 +143,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 1,
+   "articles90": 4,
+   "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-05T20:14:00.000Z",
+   "firstArticleAt": "2026-11-05T20:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -144,7 +176,7 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-05T21:11:00.000Z",
    "exclusive": false,
@@ -173,7 +205,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1070,
+  "flagged": 1071,
   "matched": 505,
   "avgLeadMin": 478,
   "recent": [
