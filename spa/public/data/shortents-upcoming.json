@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T15:00:41.405Z",
+ "builtAt": "2026-11-05T15:10:46.233Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,7 +16,7 @@
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-05T14:06:00.000Z",
    "exclusive": false,
@@ -43,12 +43,12 @@
    ]
   },
   {
-   "keyword": "이 대통령 장남, 주진우 고소",
+   "keyword": "주진우 명예훼손 고소",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-05T13:55:00.000Z",
    "exclusive": false,
@@ -111,68 +111,68 @@
  "hitRate": {
   "days": 7,
   "flagged": 1061,
-  "matched": 488,
-  "avgLeadMin": 464,
+  "matched": 498,
+  "avgLeadMin": 468,
   "recent": [
    {
-    "keyword": "로봇 글로벌 대토론회",
-    "hitKeyword": "박민영 글로벌 인기",
-    "hitAt": "2026-11-05T23:30:00+09:00",
-    "leadMin": 2288
+    "keyword": "카카오 3분기 실적 증가",
+    "hitKeyword": "카카오 인적분할 연기",
+    "hitAt": "2026-11-06T00:00:00+09:00",
+    "leadMin": 917
    },
    {
-    "keyword": "재혼 황후, 하루 만에 1위 기록",
-    "hitKeyword": "재혼 황후 공개 일정",
-    "hitAt": "2026-11-05T23:00:00+09:00",
-    "leadMin": 496
+    "keyword": "카카오 3분기 영업익 2403억 증가",
+    "hitKeyword": "카카오 인적분할 연기",
+    "hitAt": "2026-11-06T00:00:00+09:00",
+    "leadMin": 897
    },
    {
-    "keyword": "재혼 황후 하루 만에 1위",
-    "hitKeyword": "재혼 황후 공개 일정",
-    "hitAt": "2026-11-05T23:00:00+09:00",
-    "leadMin": 476
+    "keyword": "카카오 3분기 영업익 2403억↑",
+    "hitKeyword": "카카오 인적분할 연기",
+    "hitAt": "2026-11-06T00:00:00+09:00",
+    "leadMin": 877
    },
    {
-    "keyword": "삼성 11경기 10승 타이",
-    "hitKeyword": "삼성 10승 타이기록",
-    "hitAt": "2026-11-05T23:00:00+09:00",
-    "leadMin": 50
+    "keyword": "카카오 3분기 영업익 증가",
+    "hitKeyword": "카카오 인적분할 연기",
+    "hitAt": "2026-11-06T00:00:00+09:00",
+    "leadMin": 857
    },
    {
-    "keyword": "웰컴저축은행 팀리그 2연승",
-    "hitKeyword": "KCC 2연승",
-    "hitAt": "2026-11-05T22:30:00+09:00",
-    "leadMin": 3646
+    "keyword": "카카오 AI 운영 시작",
+    "hitKeyword": "카카오 인적분할 연기",
+    "hitAt": "2026-11-06T00:00:00+09:00",
+    "leadMin": 768
    },
    {
-    "keyword": "웰컴저축은행 에스와이 2연승",
-    "hitKeyword": "KCC 2연승",
-    "hitAt": "2026-11-05T22:30:00+09:00",
-    "leadMin": 3626
+    "keyword": "카카오 주가",
+    "hitKeyword": "카카오 인적분할 연기",
+    "hitAt": "2026-11-06T00:00:00+09:00",
+    "leadMin": 758
    },
    {
-    "keyword": "웰컴저축은행, 에스와이 제압 2연승",
-    "hitKeyword": "KCC 2연승",
-    "hitAt": "2026-11-05T22:30:00+09:00",
-    "leadMin": 3586
+    "keyword": "카카오 AI 사업 2028년 목표",
+    "hitKeyword": "카카오 인적분할 연기",
+    "hitAt": "2026-11-06T00:00:00+09:00",
+    "leadMin": 748
    },
    {
-    "keyword": "서울 ACL2 2연승",
-    "hitKeyword": "KCC 2연승",
-    "hitAt": "2026-11-05T22:30:00+09:00",
-    "leadMin": 1411
+    "keyword": "카카오 자사주 매입 소각",
+    "hitKeyword": "카카오 인적분할 연기",
+    "hitAt": "2026-11-06T00:00:00+09:00",
+    "leadMin": 687
    },
    {
-    "keyword": "세브란스 흉기 난동 구속영장",
-    "hitKeyword": "세브란스병원 흉기 난동",
-    "hitAt": "2026-11-05T22:30:00+09:00",
-    "leadMin": 81
+    "keyword": "철도노조 12월 파업 예고",
+    "hitKeyword": "서인영 12월 재혼",
+    "hitAt": "2026-11-06T00:00:00+09:00",
+    "leadMin": 150
    },
    {
-    "keyword": "이유리 배우",
-    "hitKeyword": "이유리 새집 공개",
-    "hitAt": "2026-11-05T22:30:00+09:00",
-    "leadMin": 40
+    "keyword": "코스피 5%대 급락",
+    "hitKeyword": "코스피 블루웨이브 급락",
+    "hitAt": "2026-11-06T00:00:00+09:00",
+    "leadMin": 19
    }
   ]
  }
