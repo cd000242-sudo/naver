@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T16:21:23.235Z",
+ "builtAt": "2026-11-05T16:31:26.496Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 18,
  "candidates": [
   {
    "keyword": "조작기소 특검법 본회의 상정",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
+   "articles90": 7,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-05T15:01:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-05T15:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -29,16 +29,16 @@
      "link": "https://n.news.naver.com/mnews/article/214/0001533816?sid=100"
     },
     {
-     "title": "검사 수사권 없앤 與, ‘조작기소 특검’엔 허용… 법조계 “모순적 행...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-05T15:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004008095?sid=102"
-    },
-    {
      "title": "與, 조작기소 특검법 오늘 처리… 野는 장외투쟁 예고",
      "press": "chosun.com",
      "publishedAt": "2026-11-05T15:42:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/023/0004008097?sid=100"
+    },
+    {
+     "title": "검사 수사권 없앤 與, ‘조작기소 특검’엔 허용… 법조계 “모순적 행...",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-05T15:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004008095?sid=102"
     }
    ]
   },
@@ -48,13 +48,19 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 4,
+   "articles90": 6,
+   "recent20": 1,
+   "press": 5,
    "firstArticleAt": "2026-11-05T15:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[속보] 나스닥 장중 4% 이상 급락…조정장 진입",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-05T16:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003563266?sid=101"
+    },
     {
      "title": "[종합] 나스닥 5%대 급락, 조정 진입…AI·반도체 투매에 하루 만에 반전",
      "press": "newspim.com",
@@ -66,12 +72,6 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-05T16:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014305049?sid=104"
-    },
-    {
-     "title": "[속보] 나스닥, 기술주 매도에 3.7% 급락",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-05T15:16:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261106000002"
     }
    ]
   }
