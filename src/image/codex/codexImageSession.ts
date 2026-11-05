@@ -5,7 +5,7 @@
 // The files appear in <CODEX_HOME>/generated_images/<thread id>/; the thread id comes from the `thread.started` event.
 // Reuses the agentCli spawn path, subscription env, exit classifier and failure messages — no spawn path of its own.
 
-import { mkdtemp, rm } from 'fs/promises';
+import { mkdtemp, rm, writeFile } from 'fs/promises';
 import { tmpdir } from 'os';
 import { join } from 'path';
 import { spawnCollect, type SpawnArgs, type SpawnResult } from '../../agentCli/spawnHelper.js';
@@ -28,6 +28,11 @@ export interface CodexImageSessionOptions {
   timeoutMs?: number;
   /** A named model wins over the app's image default (agentModelDefaults). */
   model?: string;
+  /**
+   * [2026-11-05] Shopping product photo. Written into this session's work folder (removed with it) and passed to the
+   * image tool as its reference. Only a one-image session can carry it.
+   */
+  referenceImage?: { buffer: Buffer; fileName: string };
 }
 
 export interface CodexImageSessionResult {
@@ -62,11 +67,22 @@ export async function runCodexImageSession(
   deps: CodexImageSessionDeps = defaultDeps,
 ): Promise<CodexImageSessionResult> {
   const { model, effort } = resolveAgentImageProfile('codex', options.model);
-  const instruction = buildCodexImageInstruction(prompts);
+  const reference = options.referenceImage;
+  // The reference file name becomes a path inside the work folder: a plain file name only, never a path.
+  if (reference && (!reference.fileName || /[\\/]|^\.+$/.test(reference.fileName))) {
+    throw new Error('Codex 구독 이미지: 참고 사진 파일 이름이 올바르지 않습니다.');
+  }
+  // Checks the prompts (and the one-image-only rule of a reference) before any work folder exists.
+  let instruction = buildCodexImageInstruction(prompts, reference?.fileName);
   const env = deps.env();
   const startedAt = deps.now();
   const cwd = await mkdtemp(join(tmpdir(), 'agentcli-codex-image-'));
   try {
+    if (reference) {
+      const referenceFile = join(cwd, reference.fileName);
+      await writeFile(referenceFile, reference.buffer);
+      instruction = buildCodexImageInstruction(prompts, referenceFile);
+    }
     const args = ['exec', '--skip-git-repo-check', '--ignore-user-config', '-m', model];
     if (effort) args.push('-c', `model_reasoning_effort=${effort}`);
     args.push('--json', '-C', cwd);

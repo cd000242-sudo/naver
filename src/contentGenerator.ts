@@ -145,6 +145,7 @@ import {
   enforceContentQualityV3BusinessGuard as enforceSharedContentQualityV3BusinessGuard,
 } from './contentQualityV3/businessGuard.js';
 import { resolveProductionContentQualityV3Activation } from './contentQualityV3/releaseActivation.js';
+import { resolveBusinessIndustry } from './content/businessIndustryDetector.js';
 import {
   registerContentQualityV3GeneratedContent,
   type ContentQualityV3PublicationIssueCode,
@@ -2398,6 +2399,9 @@ export interface ContentSource {
     researchUrl?: string; // 심층 리서치 URL (홈페이지/상품 페이지)
     promoAngle?: string;          // 이번 글 강조 각도 라벨 (로테이션)
     promoAngleDirective?: string; // 각도별 작성 지시
+    industry?: string;   // [2026-11-05] 업종 (예: 고깃집, 치과)
+    faq?: string;        // [2026-11-05] 손님이 자주 묻는 것 · 실제 진행 방식 (여러 줄)
+    blogOwner?: 'owner' | 'agency'; // [2026-11-05] 업체 본인 블로그 / 대행 블로그
   };
   images?: string[]; // ✅ 크롤링된 이미지 URL 목록 (Shopping Connect)
   collectedImages?: string[]; // ✅ [2026-02-01 FIX] 수집된 이미지 (중복 크롤링 방지용)
@@ -2863,6 +2867,12 @@ async function runOpenAiDiagnosticPreflight(
   }
 }
 
+/** [2026-11-05] Industry for a business post: the 업종 field wins, then name/features/title/keyword. */
+function resolveSourceBusinessIndustry(source: ContentSource) {
+  const info = source.businessInfo;
+  return resolveBusinessIndustry(info?.industry, info?.name, info?.extra, source.title, getPrimaryKeywordFromSource(source as any));
+}
+
 // ✅ 2축 분리 구조 프롬프트 생성 함수 (노출 목적 × 카테고리)
 // ✅ [v1.4.23] export for testing (vitest)
 export function buildModeBasedPrompt(
@@ -3139,12 +3149,7 @@ export function buildModeBasedPrompt(
   //   해당 보정 프롬프트를 얹는다(감지 실패 시 base 만 — 오적용이 미적용보다 나쁘다).
   if (contentMode === 'business') {
     try {
-      const { detectBusinessIndustry } = require('./content/businessIndustryDetector.js');
-      const bizInfo = (source as any).businessInfo || {};
-      const industry = detectBusinessIndustry(
-        [bizInfo.name, bizInfo.extra, source.title, getPrimaryKeywordFromSource(source)]
-          .filter(Boolean).join(' '),
-      );
+      const industry = resolveSourceBusinessIndustry(source);
       if (industry) {
         const industryOverlay = loadPromptFile(`business/${industry}.prompt`);
         if (industryOverlay) {
@@ -3283,7 +3288,12 @@ export function buildModeBasedPrompt(
     && HOMEFEED_ISSUE_STORY_CATEGORIES.has(resolveCategory(categoryHint));
 
   if (contentMode === 'seo' || contentMode === 'homefeed' || contentMode === 'mate' || contentMode === 'business' || contentMode === 'custom') {
-    finalContract = buildEvidenceAndIntentFinalContract(source, contentMode, { usesIssueStorySkeleton: usesIssueStoryTitle });
+    // [2026-11-05] Own blog of a shop/contractor may speak as the operator (inside the memo); agency blogs may not.
+    const bizIndustry = contentMode === 'business' ? resolveSourceBusinessIndustry(source) : null;
+    const operatorVoice = contentMode === 'business'
+      && (source as any).businessInfo?.blogOwner !== 'agency'
+      && (bizIndustry === 'local' || bizIndustry === 'construction');
+    finalContract = buildEvidenceAndIntentFinalContract(source, contentMode, { usesIssueStorySkeleton: usesIssueStoryTitle, operatorVoice });
     console.log(`[PromptBuilder] 근거·의도 최종 계약 적용: ${contentMode}, firstParty=${hasExplicitFirstPartyEvidence(source)}${usesIssueStoryTitle ? ', issueStory=true' : ''}`);
   }
 
@@ -3422,6 +3432,7 @@ export function validateBusinessContent(content: StructuredContent, source: Cont
       info.hours || '',
       info.region || '',
       info.extra || '',
+      info.faq || '',
     ].join(' ');
     const businessStats = allText.match(/\d[\d,]*(?:\.\d+)?\s*(?:건|개|년|개월|평|만원|원|시간|일|회|%|퍼센트|점)/g) || [];
     const unsupportedStats = Array.from(new Set(businessStats))

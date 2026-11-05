@@ -7651,6 +7651,13 @@ function initUnifiedModeSelection(): void {
     }
     const researchUrlInput = document.getElementById('bgm-research-url') as HTMLInputElement | null;
     if (researchUrlInput) researchUrlInput.value = saved.researchUrl || '';
+    // [2026-11-05] 업종 · 자주 묻는 것 · 블로그 주인 복원
+    const industryInput = document.getElementById('bgm-industry') as HTMLInputElement | null;
+    if (industryInput) industryInput.value = saved.industry || '';
+    const faqInput = document.getElementById('bgm-faq') as HTMLTextAreaElement | null;
+    if (faqInput) faqInput.value = saved.faq || '';
+    const ownerRadio = document.getElementById(saved.blogOwner === 'agency' ? 'bgm-blog-owner-agency' : 'bgm-blog-owner-owner') as HTMLInputElement | null;
+    if (ownerRadio) ownerRadio.checked = true;
     modal.style.display = 'flex';
   };
   (window as any).openBusinessGlobalModal = openBusinessGlobalModal;
@@ -7727,6 +7734,10 @@ function initUnifiedModeSelection(): void {
       // [2026-06-12] 홍보 대상(업체 자체/취급 상품) + 심층 리서치 URL
       promoTarget: (document.getElementById('bgm-promo-product') as HTMLInputElement)?.checked ? 'product' : 'business',
       researchUrl: get('bgm-research-url'),
+      // [2026-11-05] 업종 · 손님이 자주 묻는 것/진행 방식 · 블로그 주인(대행이면 운영자 시점 금지 + 공정위 문구 기본 켬)
+      industry: get('bgm-industry'),
+      faq: get('bgm-faq'),
+      blogOwner: (document.getElementById('bgm-blog-owner-agency') as HTMLInputElement | null)?.checked ? 'agency' : 'owner',
     };
     console.log('[BusinessGlobalModal] ✅ 업체 정보 저장:', (window as any)._businessInfo);
     if ((window as any).toastManager) {
@@ -9215,7 +9226,7 @@ function addShoppingConnectSubImageModeOption(): void {
           <input type="radio" name="sc-subimage-mode-inline-radio" value="ai" style="width: 16px; height: 16px; accent-color: #8b5cf6;">
           <span style="color: var(--text-strong); font-size: 0.75rem; font-weight: 600;">🎨 AI 이미지 생성</span>
         </span>
-        <span style="font-size: 0.68rem; color: var(--text-muted); padding-left: 1.6rem;">대표 원본은 썸네일, 소제목은 대표 원본을 참조해 생성 — 지원 엔진 4종만</span>
+        <span style="font-size: 0.68rem; color: var(--text-muted); padding-left: 1.6rem;">대표 원본은 썸네일, 소제목은 대표 원본을 참조해 생성 — 지원 엔진 5종 · Codex 구독 이미지 포함</span>
       </label>
     </div>
     <label style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.6rem; padding: 0.55rem 0.6rem; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 8px; cursor: pointer;">

@@ -2,7 +2,7 @@
 // Restored from dist/renderer/modules/multiAccountManager.js after source encoding damage; keep runtime parity with the last successful build.
 "use strict";
 import { applyPreviousPostPolicy, normalizePreviousPostCategoryId } from '../../shared/previousPostPolicy.js';
-import { imgSyncNotify } from '../../runtime/imageSettingsSync.js';
+import { imgSyncNotify, imgSyncShoppingEngineFor } from '../../runtime/imageSettingsSync.js';
 import { awaitNetworkWaitRecheck, classifyPublishFailure, describeAccountStop, extractAccountStopCode, findPausedQueueAccounts, readAccountPause, stopsAllAccounts } from '../../automation/publishFailureClassifier.js';
 import { installAccountSafetyControls } from './accountSafetyControls.js';
 import { normalizeRetiredNanoEngine } from '../../runtime/imageProviderMigration.js';
@@ -2358,7 +2358,8 @@ async function initMultiAccountPublishModal() {
         radio.addEventListener('change', (e) => {
             const value = e.target.value;
             setSubImageMode(value === 'collected' ? 'collected' : 'ai');
-            if (value === 'nano-banana-2' || value === 'openai-image' || value === 'dropshot') {
+            // [2026-11-05] The engine list lives in one place (IMG_SYNC_SHOPPING_ENGINES), so the radios and the image tab agree.
+            if (imgSyncShoppingEngineFor(value)) {
                 localStorage.setItem('scAIImageEngine', value);
                 localStorage.setItem('fullAutoImageSource', value);
                 localStorage.setItem('globalImageSource', value);
@@ -3416,7 +3417,22 @@ async function initMultiAccountPublishModal() {
                         console.log(`[multiAccountManager] ✏️ customPrompt 전달 (${queueItem.contentMode || 'seo'} 모드, ${queueItem.customPrompt.length}자)`);
                     }
                     if (queueItem.contentMode === 'business' && queueItem.businessInfo) {
-                        contentPayload.assembly.businessInfo = queueItem.businessInfo;
+                        // [2026-11-05] 풀오토와 같이 강조 각도를 돌리고(업종 칸 기준 필터), 홈페이지(리서치 URL)를 자료 URL이 없을 때 싣는다.
+                        let _maBizInfo = queueItem.businessInfo;
+                        try {
+                            const _maAngle = window.rotateBusinessAngle?.(_maBizInfo.name || '', _maBizInfo, queueItem.sourceKeyword || '');
+                            if (_maAngle) {
+                                _maBizInfo = { ..._maBizInfo, promoAngle: _maAngle.label, promoAngleDirective: _maAngle.directive };
+                            }
+                        }
+                        catch (e) {
+                            console.warn('[multiAccountManager] 각도 로테이션 실패(기본 진행):', e);
+                        }
+                        const _maResearchUrl = String(_maBizInfo?.researchUrl || '').trim();
+                        if (_maResearchUrl && !queueItem.sourceUrl) {
+                            contentPayload.assembly.rssUrl = [_maResearchUrl];
+                        }
+                        contentPayload.assembly.businessInfo = _maBizInfo;
                         console.log(`[multiAccountManager] 🏢 businessInfo 전달: ${queueItem.businessInfo.name || 'unknown'}`);
                     }
                     const keywordList = queueItem.sourceKeyword
@@ -3475,12 +3491,15 @@ async function initMultiAccountPublishModal() {
                     }
                     {
                         const _isAffiliateMode = queueItem.contentMode === 'affiliate';
+                        // [2026-11-05] 대행 블로그의 업체 글은 광고이므로 공정위 문구를 기본으로 켠다(명시 설정이 있으면 그쪽이 우선).
+                        const _isAgencyBusiness = queueItem.contentMode === 'business' && queueItem.businessInfo?.blogOwner === 'agency';
+                        const _ftcDefaultOn = _isAffiliateMode || _isAgencyBusiness;
                         const _disclosureCfg = itemPipelineCfg.disclosure;
-                        const _ftcEnabled = _disclosureCfg.enabledSetting !== null ? _disclosureCfg.enabledSetting : _isAffiliateMode;
+                        const _ftcEnabled = _disclosureCfg.enabledSetting !== null ? _disclosureCfg.enabledSetting : _ftcDefaultOn;
                         const _ftcText = _ftcEnabled
-                            ? (_disclosureCfg.text || (_isAffiliateMode ? _disclosureCfg.defaultText : ''))
+                            ? (_disclosureCfg.text || (_ftcDefaultOn ? _disclosureCfg.defaultText : ''))
                             : '';
-                        const _ftcSource = _disclosureCfg.enabledSetting !== null ? 'PipelineConfig' : (_isAffiliateMode ? 'mode-default-affiliate' : 'mode-default-other');
+                        const _ftcSource = _disclosureCfg.enabledSetting !== null ? 'PipelineConfig' : (_isAffiliateMode ? 'mode-default-affiliate' : (_isAgencyBusiness ? 'mode-default-agency-business' : 'mode-default-other'));
                         if (_ftcEnabled && _ftcText && structuredContent) {
                             structuredContent.ftcDisclosure = _ftcText;
                             addMALog(`⚖️ 공정위 문구 삽입됨 (${_ftcSource}): "${_ftcText.substring(0, 30)}..."`, 'info');

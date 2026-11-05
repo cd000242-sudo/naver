@@ -5902,7 +5902,7 @@
                                         · Codex, <strong>Claude Code</strong>, <strong>Gemini CLI(Antigravity)</strong> 모두 본인 구독 로그인으로 사용할 수 있습니다. 별도 API 키는 선택한 API 키 모드에서만 필요합니다.<br>
                                         · 각 CLI 사용량은 플랜별 <strong>agentic 사용량·크레딧 풀</strong>에서 차감되며, 작업 규모와 모델에 따라 달라집니다.<br>
                                         · 각 공급자의 이용약관과 사용 한도를 준수해야 하며, 구독 자격증명을 다른 사용자 대신 라우팅하지 않습니다.<br>
-                                        · 📸 <strong>사진으로 글생성</strong> 시 이미지 분석(vision)은 CLI로 불가 → 글쓰기만 구독으로 처리되며, 이미지 분석엔 <strong>Gemini API 키가 별도로 필요</strong>합니다.
+                                        · 📸 <strong>사진으로 글생성</strong>: Claude Code · Codex 구독은 사진 분석(vision)도 구독으로 처리합니다(API 키 불필요). <strong>구글 구독(Antigravity)은</strong> 사진 분석을 지원하지 않으니 Claude · Codex 구독이나 API 키 엔진으로 바꿔 주세요.
                                     </div>
                                 </div>
                             </div>
@@ -6795,7 +6795,7 @@
                                 </div>
                                 <textarea id="business-info-extra" placeholder="✨ 특징/경력/자격증 (예: 시공 15년차, A/S 1년 보장, 평수별 견적 가이드 등)" rows="2" style="width: 100%; padding: 0.5rem; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 6px; color: var(--text-strong); font-size: 0.85rem; resize: vertical;"></textarea>
                                 <div style="margin-top: 0.6rem; padding: 0.5rem; background: rgba(59, 130, 246, 0.1); border-radius: 6px; font-size: 0.75rem; color: #93c5fd; line-height: 1.5;">
-                                    💡 <strong>키워드 입력법</strong>: 메인 키워드 = "지역+업종" (예: <code>강남 인테리어</code>), 서브 키워드 = 세부 서비스 (예: <code>철거, 도배, 욕실</code>). 본문에서 자동으로 8~12회 반복됩니다.
+                                    💡 <strong>키워드 입력법</strong>: 메인 키워드 = "지역+업종" (예: <code>강남 인테리어</code>), 서브 키워드 = 세부 서비스 (예: <code>철거, 도배, 욕실</code>). 제목 맨 앞과 본문 필요한 곳에 들어갑니다.
                                 </div>
                                 <div id="business-medical-warning" style="display: none; margin-top: 0.6rem; padding: 0.6rem; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(248, 113, 113, 0.4); border-radius: 6px; font-size: 0.78rem; color: #fca5a5; line-height: 1.5;">
                                     ⚠️ <strong>의료광고법 주의</strong>: 병원/한의원/피부과 등 의료기관 광고는 의료법 56조에 따라 환자 후기, 효과 보장, 단정 표현이 금지됩니다. 위반 시 1년 이하 징역 또는 1천만원 이하 벌금. <strong>의료광고심의 사전 신청을 권장합니다.</strong>
@@ -7730,13 +7730,19 @@
                             </label>
                             <label
                                 style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer;">
+                                <input type="radio" name="continuous-modal-shopping-subimage-source" value="codex-image"
+                                    style="accent-color: #0ea5e9;">
+                                <span style="color: var(--text-strong); font-size: 0.75rem; font-weight: 600;">🐙 Codex 구독 이미지 (AI · 별도 비용 없음)</span>
+                            </label>
+                            <label
+                                style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer;">
                                 <input type="radio" name="continuous-modal-shopping-subimage-source" value="collected"
                                     style="accent-color: #10b981;">
                                 <span style="color: var(--text-strong); font-size: 0.75rem; font-weight: 600;">📷 수집 이미지</span>
                             </label>
                         </div>
                         <p style="margin: 0.5rem 0 0 0; font-size: 0.7rem; color: var(--text-muted);">
-                            ℹ️ AI: 나노바나나2·덕트테이프(gpt-image-2.5)·리더스 무제한만 대표 상품 이미지 기반 생성 | 수집: 크롤링 원본 그대로
+                            ℹ️ AI: 나노바나나2·덕트테이프(gpt-image-2.5)·리더스 무제한·Codex 구독 이미지만 대표 상품 이미지 기반 생성 | 수집: 크롤링 원본 그대로<br>🐙 Codex 구독 이미지: 구독 사용량으로 소제목 이미지만 새로 그립니다 (썸네일은 원본 그대로)
                         </p>
                     </div>
 
@@ -9761,13 +9767,19 @@
                                 </label>
                                 <label
                                     style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer;">
+                                    <input type="radio" name="ma-shopping-subimage-source" value="codex-image"
+                                        style="accent-color: #0ea5e9;">
+                                    <span style="color: var(--text-strong); font-size: 0.75rem; font-weight: 600;">🐙 Codex 구독 이미지 (AI · 별도 비용 없음)</span>
+                                </label>
+                                <label
+                                    style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer;">
                                     <input type="radio" name="ma-shopping-subimage-source" value="collected"
                                         style="accent-color: #10b981;">
                                     <span style="color: var(--text-strong); font-size: 0.75rem; font-weight: 600;">📷 수집 이미지</span>
                                 </label>
                             </div>
                             <p style="margin: 0.5rem 0 0 0; font-size: 0.7rem; color: var(--text-muted);">
-                                ℹ️ AI: 나노바나나2·덕트테이프(gpt-image-2.5)·리더스 무제한만 대표 상품 이미지 기반 생성 | 수집: 크롤링 원본 그대로
+                                ℹ️ AI: 나노바나나2·덕트테이프(gpt-image-2.5)·리더스 무제한·Codex 구독 이미지만 대표 상품 이미지 기반 생성 | 수집: 크롤링 원본 그대로<br>🐙 Codex 구독 이미지: 구독 사용량으로 소제목 이미지만 새로 그립니다 (썸네일은 원본 그대로)
                             </p>
                         </div>
 
@@ -12906,6 +12918,10 @@
                     <input type="text" id="bgm-name" placeholder="예: ABC인테리어" style="width: 100%; padding: 0.6rem; background: rgba(0,0,0,0.3); border: 1px solid #374151; border-radius: 6px; color: #fff; font-size: 0.9rem; box-sizing: border-box;" />
                 </div>
                 <div>
+                    <label style="display: block; margin-bottom: 0.25rem; font-size: 0.75rem; color: #d1d5db; font-weight: 600;">🏷️ 업종 (선택)</label>
+                    <input type="text" id="bgm-industry" maxlength="40" placeholder="예: 고깃집, 치과" style="width: 100%; padding: 0.6rem; background: rgba(0,0,0,0.3); border: 1px solid #374151; border-radius: 6px; color: #fff; font-size: 0.9rem; box-sizing: border-box;" />
+                </div>
+                <div>
                     <label style="display: block; margin-bottom: 0.25rem; font-size: 0.75rem; color: #d1d5db; font-weight: 600;">📞 전화번호 *</label>
                     <input type="text" id="bgm-phone" placeholder="예: 051-123-4567" style="width: 100%; padding: 0.6rem; background: rgba(0,0,0,0.3); border: 1px solid #374151; border-radius: 6px; color: #fff; font-size: 0.9rem; box-sizing: border-box;" />
                 </div>
@@ -12928,7 +12944,24 @@
             </div>
             <div style="margin-bottom: 0.75rem;">
                 <label style="display: block; margin-bottom: 0.25rem; font-size: 0.75rem; color: #d1d5db; font-weight: 600;">✨ 특징/경력/자격증</label>
-                <textarea id="bgm-extra" placeholder="예: 시공 15년차, A/S 1년 보장, 평수별 견적 가이드 제공, 전국 시공 사례 200건+" rows="3" style="width: 100%; padding: 0.6rem; background: rgba(0,0,0,0.3); border: 1px solid #374151; border-radius: 6px; color: #fff; font-size: 0.9rem; resize: vertical; box-sizing: border-box; font-family: inherit;"></textarea>
+                <textarea id="bgm-extra" placeholder="예: 대표 메뉴 · 가격, 예약 방법, 주차, 휴무일, 경력 (적은 것만 글에 씁니다)" rows="3" style="width: 100%; padding: 0.6rem; background: rgba(0,0,0,0.3); border: 1px solid #374151; border-radius: 6px; color: #fff; font-size: 0.9rem; resize: vertical; box-sizing: border-box; font-family: inherit;"></textarea>
+            </div>
+
+            <!-- [2026-11-05] 손님이 자주 묻는 것 · 실제 진행 방식 — 비워도 된다. 적은 범위 안에서만 글이 답한다. -->
+            <div style="margin-bottom: 0.75rem;">
+                <label style="display: block; margin-bottom: 0.25rem; font-size: 0.75rem; color: #d1d5db; font-weight: 600;">❓ 손님이 자주 묻는 것 · 실제 진행 방식 (선택)</label>
+                <textarea id="bgm-faq" maxlength="2000" placeholder="한 줄에 하나씩&#10;예: 예약 없이 가도 되나요? 평일은 가능, 주말은 전화 예약" rows="3" style="width: 100%; padding: 0.6rem; background: rgba(0,0,0,0.3); border: 1px solid #374151; border-radius: 6px; color: #fff; font-size: 0.9rem; resize: vertical; box-sizing: border-box; font-family: inherit;"></textarea>
+            </div>
+
+            <!-- [2026-11-05] 블로그 주인 — 대행이면 운영자 시점(저희 · 제가)을 쓰지 않고 공정위 문구를 기본으로 켠다. -->
+            <div style="margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;">
+                <span style="font-size: 0.75rem; color: #d1d5db; font-weight: 600;">✍️ 이 블로그는</span>
+                <label style="display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.82rem; color: #fff; cursor: pointer;">
+                    <input type="radio" name="bgm-blog-owner" id="bgm-blog-owner-owner" value="owner" checked style="cursor: pointer;" /> 업체 본인 블로그
+                </label>
+                <label style="display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.82rem; color: #fff; cursor: pointer;">
+                    <input type="radio" name="bgm-blog-owner" id="bgm-blog-owner-agency" value="agency" style="cursor: pointer;" /> 대행 블로그
+                </label>
             </div>
 
             <!-- [2026-06-12] 홍보 대상 선택 — 업체 자체 vs 취급 상품 -->
@@ -12959,7 +12992,7 @@
 
             <!-- 키워드 가이드 -->
             <div style="margin-bottom: 0.75rem; padding: 0.6rem; background: rgba(59, 130, 246, 0.1); border-radius: 6px; font-size: 0.78rem; color: #93c5fd; line-height: 1.5;">
-                💡 <strong>키워드 입력 가이드</strong>: 메인 키워드 = "지역+업종" (예: <code style="background: rgba(255,255,255,0.1); padding: 1px 5px; border-radius: 3px;">강남 인테리어</code>), 서브 키워드 = 세부 서비스 (예: <code style="background: rgba(255,255,255,0.1); padding: 1px 5px; border-radius: 3px;">철거, 도배, 욕실</code>). 본문에서 자동으로 8~12회 반복됩니다.
+                💡 <strong>키워드 입력 가이드</strong>: 메인 키워드 = "지역+업종" (예: <code style="background: rgba(255,255,255,0.1); padding: 1px 5px; border-radius: 3px;">강남 인테리어</code>), 서브 키워드 = 세부 서비스 (예: <code style="background: rgba(255,255,255,0.1); padding: 1px 5px; border-radius: 3px;">철거, 도배, 욕실</code>). 제목 맨 앞과 본문 필요한 곳에 들어갑니다.
             </div>
 
             <!-- 의료 경고 -->

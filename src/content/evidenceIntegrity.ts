@@ -173,10 +173,24 @@ export function auditEvidenceIntegrity(input: {
   };
 }
 
+/**
+ * [2026-11-05] Business branch of the last-position contract. The old line ("전환 문구보다 정보
+ * 정확성과 근거 구분을 우선한다") pushed the closing contact guidance out of the post; accurate
+ * information and a clear next step do not conflict.
+ */
+function buildBusinessModeRule(operatorVoice: boolean): string {
+  const voiceRule = operatorVoice
+    ? `
+- 업체 본인 블로그다. 업체 메모에 적힌 범위 안에서는 운영자 시점("저희", "상담 오시면 먼저 ~를 여쭙니다")을 쓸 수 있다. 손님 체험·후기는 만들지 않는다.`
+    : '';
+  return `- 독자가 판단하는 데 필요한 사실·조건·한계를 먼저 제공하고, 마지막 소제목에서 다음 행동 하나(채널·시간·준비할 것)를 분명히 안내한다. 정확한 정보와 문의 안내는 충돌하지 않는다.
+- 제목이 던진 질문·숫자·조건·방법은 도입부 첫 3~5문장 안에서 직접 답한다. 근거로 답할 수 없는 약속은 제목에서 뺀다.${voiceRule}`;
+}
+
 export function buildEvidenceAndIntentFinalContract(
   source: EvidenceIntegritySource,
   mode: EvidenceAwareMode,
-  options?: { usesIssueStorySkeleton?: boolean },
+  options?: { usesIssueStorySkeleton?: boolean; operatorVoice?: boolean },
 ): string {
   const firstParty = hasExplicitFirstPartyEvidence(source);
   const grounded = String(source.rawText || '').trim().length >= 50;
@@ -209,7 +223,9 @@ ${homefeedPayoffRule}
 - 제목이 던진 질문·숫자·조건·방법은 도입부 첫 3~5문장 안에서 직접 답한다. 근거로 답할 수 없는 약속은 제목에서 뺀다.
 - 메인 키워드는 제목과 본문에 의미상 필요한 만큼만 쓴다. 제목 첫 3글자, 밀도, 소제목 반복을 맞추기 위한 문장 삽입은 금지한다.
 - 숫자나 표가 없더라도 정확한 답이 우선이다. 표·체크리스트는 비교나 절차를 실제로 더 명확하게 만들 때만 쓴다.`
-      : `- 독자가 판단하는 데 필요한 사실·조건·한계를 먼저 제공한다.
+      : mode === 'business'
+        ? buildBusinessModeRule(options?.operatorVoice === true)
+        : `- 독자가 판단하는 데 필요한 사실·조건·한계를 먼저 제공한다.
 - 제목이 던진 질문·숫자·조건·방법은 도입부 첫 3~5문장 안에서 직접 답한다. 근거로 답할 수 없는 약속은 제목에서 뺀다.
 - 전환 문구보다 정보 정확성과 근거 구분을 우선한다.`;
 

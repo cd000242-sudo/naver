@@ -44,6 +44,7 @@ describe('engine: one base, globalImageSource', () => {
   it('the shopping AI engine mirror only accepts the allowed engines', () => {
     expect(imgSyncShoppingEngineFor('openai-image')).toBe('openai-image');
     expect(imgSyncShoppingEngineFor('dropshot')).toBe('dropshot');
+    expect(imgSyncShoppingEngineFor('codex-image')).toBe('codex-image');
     expect(imgSyncShoppingEngineFor('flow')).toBeNull();
     expect(imgSyncShoppingEngineFor('local-folder')).toBeNull();
   });

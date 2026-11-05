@@ -47,13 +47,14 @@ export function registerMiscHandlers(): void {
     // 플랫폼에서 콘텐츠 수집 (실시간 정보)
     // [2026-09-22 P1] Shared with SmartScheduler / multi-account via collectKeywordMaterials —
     // one collect path (credentials, grounding opt-in, thin-material expansion) for every route.
-    ipcMain.handle('content:collectFromPlatforms', async (_event, keyword: string, options?: { maxPerSource?: number; targetDate?: string }) => {
+    ipcMain.handle('content:collectFromPlatforms', async (_event, keyword: string, options?: { maxPerSource?: number; targetDate?: string; skipBlogBodies?: boolean }) => {
         try {
             const { collectKeywordMaterials } = await import('../../content/generationSourceBuilder.js');
             const config = await loadConfig();
             return await collectKeywordMaterials(keyword, config, {
                 maxPerSource: options?.maxPerSource || 5,
                 targetDate: options?.targetDate,
+                skipBlogBodies: options?.skipBlogBodies === true,
                 logger: (msg: string) => console.log(msg),
             });
         } catch (error) {

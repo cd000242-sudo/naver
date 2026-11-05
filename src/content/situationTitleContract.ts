@@ -21,6 +21,12 @@ export interface SituationTitleSource {
   personalExperience?: unknown;
   /** 크롤링·자료 원문 (간접 경험 서술의 근거) */
   rawText?: unknown;
+  /** 업체 홍보 모드: 전국 서비스 여부에 따라 제목의 지역 요구가 달라진다. */
+  businessInfo?: { serviceArea?: unknown; industry?: unknown } | null;
+}
+
+function isNationwideBusiness(source?: SituationTitleSource | null): boolean {
+  return source?.businessInfo?.serviceArea === 'nationwide';
 }
 
 function hasFirstPartyMemo(source?: SituationTitleSource | null): boolean {
@@ -57,7 +63,7 @@ function buildExperienceGate(source?: SituationTitleSource | null): string {
  * 쇼핑은 검색 노출이 전부라(사장님: "쇼핑모드는 SEO가 생명, 홈판용 절대 아니다")
  * 상황 서술보다 검색되는 구매 축이 먼저다. 다른 모드는 상황 조각 그대로 간다.
  */
-function buildFragmentRule(mode: SituationTitleMode): string {
+function buildFragmentRule(mode: SituationTitleMode, source?: SituationTitleSource | null): string {
   if (mode === 'affiliate') {
     return `- [구매 축 — 필수] 제목에 아래 중 최소 1개가 들어가야 한다. 하나도 없으면 다시 써라.
   이건 상황 묘사가 아니라 **사람들이 검색창에 함께 치는 말**이다.
@@ -68,9 +74,14 @@ function buildFragmentRule(mode: SituationTitleMode): string {
   단, 자료에서 확인된 것만 쓴다. 검색량을 노리고 없는 용도를 붙이지 마라.`;
   }
   if (mode === 'business') {
-    return `- [지역·업종 축 — 필수] 이 글은 "지역+업종" 검색에 걸려야 문의가 들어온다.
-  제목에 **입력된 지역명과 업종**이 보여야 한다. 하나라도 빠지면 다시 써라.
-  (배치는 business/base [TITLE]의 지역명 배치 지시를 따른다.)
+    const axisRule = isNationwideBusiness(source)
+      ? `- [업종·세부 서비스 축 — 필수] 전국 서비스라 "지역+업종" 검색을 노릴 수 없다. 제목 앞쪽에
+  **업종과 세부 서비스**가 보여야 한다. 지역명은 억지로 넣지 않는다.
+  (배치는 business/base [SEARCH]의 지시를 따른다.)`
+      : `- [지역·업종 축 — 필수] 이 글은 "지역+업종" 검색에 걸려야 문의가 들어온다.
+  제목에 **입력된 지역명과 업종**(업종 칸이 있으면 그 말)이 보여야 한다. 하나라도 빠지면 다시 써라.
+  (배치는 business/base [SEARCH]의 지시를 따른다.)`;
+    return `${axisRule}
 
 - [상황 조각 — 필수] 지역·업종 옆에 잠재 고객이 처한 상황 하나를 붙인다.
   · 대상 조건: 처음 알아보는 / 급한 / 예산이 정해진 / 아이 동반 / 어르신
@@ -142,7 +153,7 @@ function buildModeRule(mode: SituationTitleMode): string {
     ⭕ "강남 임플란트, 보험 적용되는 경우와 안 되는 경우"
     ⭕ "분당 이사업체 견적, 짐 많은 원룸이면 달라지는 것"
 
-  · [길이] 검색 결과에서 잘리지 않게 25~45자.
+  · [길이] 검색 결과에서 잘리지 않게 28~42자.
 
   ⛔ "○○ 추천", "○○ 잘하는 곳", "○○ 1위" 같은 순위·추천 단정은 쓰지 않는다 —
      근거를 증명할 수 없고 광고 심의에도 걸린다.
@@ -176,12 +187,14 @@ AI 요약이 가져갔고, 독자는 그런 제목을 눈으로 걸러낸다.
   const emptyTitleBan = isShopping
     ? '- [금지] 구매 축이 없는 제목은 쓰지 않는다. 제품명만 덩그러니 있는 제목도 다시 써라.'
     : mode === 'business'
-      ? '- [금지] 지역·업종이 없는 제목은 쓰지 않는다. 업체명만 덩그러니 있는 제목도 다시 써라.'
+      ? (isNationwideBusiness(source)
+        ? '- [금지] 업종이 없는 제목은 쓰지 않는다. 업체명만 덩그러니 있는 제목도 다시 써라.'
+        : '- [금지] 지역·업종이 없는 제목은 쓰지 않는다. 업체명만 덩그러니 있는 제목도 다시 써라.')
       : '- [금지] 상황이 없는 제목은 쓰지 않는다.';
 
   return `${heading}
 
-${buildFragmentRule(mode)}
+${buildFragmentRule(mode, source)}
 
 ${buildExperienceGate(source)}
 

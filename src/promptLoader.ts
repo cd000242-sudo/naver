@@ -21,6 +21,7 @@ import { hasValidPrice, formatPrice } from './services/priceNormalizer.js';
 import { buildHomefeedExposureSkeleton } from './content/homefeedExposurePattern.js';
 import { normalizeHookIntroLines } from './contentHookIntroPolicy.js';
 import { buildNeoHookPromptBlock } from './content/neoHookTitles.js';
+import { excludedBusinessAngleIds, type BusinessIndustry } from './content/businessIndustryDetector.js';
 
 // 프롬프트 디렉토리 경로 (개발/프로덕션 환경 모두 지원)
 function getPromptsDir(): string {
@@ -856,10 +857,10 @@ export const MODE_VOICE_GUIDES: Record<PromptMode, string> = {
 독자 타깃: 서비스/업체 찾는 사람
 독자 심리: 전문성·신뢰·접근성 확인하고 싶음
 
-■ 글 구조:
-  1. 도입: 해결할 문제 정의 + 우리가 줄 답
-  2. 중반: 전문성 근거 (경력, 자격, 사례)
-  3. 결론: 예약/문의 CTA + 연락처·위치
+■ 글 구조 (고객의 질문이 중심, 업체는 입력된 사실로 답하는 쪽):
+  1. 도입: 고객이 망설이는 질문 인정 + 이 글에서 확인할 것
+  2. 중반: 질문에 대한 직답 → 답과 갈리는 조건 → 진행 방식 → 맞는 경우/다른 선택이 나은 경우
+  3. 결론: 판단에 필요한 사실을 준 뒤 다음 행동 안내 (채널·시간·준비할 것·연락처·위치)
 
 ■ 어미 로테이션:
   ~입니다 / ~이에요 / ~드립니다 (정중+친근 5:5)
@@ -955,7 +956,9 @@ export function buildIdentityBlock(identity?: BloggerIdentity, mode?: PromptMode
     ? `\n■ 구매자 신뢰 원칙 (리뷰·제휴 글에서 의무):
   ${id.trustPrinciple || '제휴 여부는 숨기지 않고 단점도 솔직히'}
   - 공정위·광고·제휴 고지 문구는 앱이 확정 원문을 별도로 삽입합니다. 본문이나 제목에서 생성·요약·변형·중복 삽입하지 마세요.
-  ${id.comparisonHabit !== false ? '- 리뷰 글마다 비교 대상 1개 이상 언급 ("○○랑 비교했을 때")' : ''}
+  ${mode === 'business'
+    ? '- 이 서비스가 맞지 않는 경우 1개를 밝힌다 (특정 업체를 지목하지 않는다)'
+    : id.comparisonHabit !== false ? '- 리뷰 글마다 비교 대상 1개 이상 언급 ("○○랑 비교했을 때")' : ''}
   - 단점 최소 1개 이상 명시 (무조건 찬양 금지)
   - 경력·실사용 기간은 사용자 입력에 실제 값이 있을 때만 사용
 `
@@ -1167,58 +1170,71 @@ function getContentLengthVariation(): { sentenceJitter: string; paragraphNote: s
  * ✅ [v1.4.21] 업체 홍보 모드 전용 다양성 엔진
  * 같은 업체로 반복 발행 시 매번 다른 강조 각도 선택 → 글 패턴 반복 방지
  */
-export function buildBusinessAngleDirective(): string {
+export function buildBusinessAngleDirective(industry?: BusinessIndustry | null): string {
   const safeAngles = [
     {
+      id: 'price',
       name: '가격 투명성',
       focus: '입력값에 가격·범위가 있을 때만 그대로 사용하고, 없으면 견적이 달라지는 기준과 문의 전 확인사항을 설명한다.',
       hook: '비용 불안 해소형 후킹',
       pastor: '문제 단계에서 견적이 달라지는 이유를 설명하고, 해결 단계에서 확인 체크리스트를 제시한다.',
     },
     {
+      id: 'case',
       name: '사례 근거',
       focus: '원본/업체 정보에 실제 사례가 있을 때만 사례로 쓰고, 없으면 작업 절차·상담 흐름·주의사항 중심으로 구성한다.',
       hook: '실패 방지형 후킹',
       pastor: '문제와 해결 단계 사이에 실제 입력된 특징/경력만 근거로 배치한다.',
     },
     {
+      id: 'warranty',
       name: 'A/S 안내',
       focus: 'A/S 기간·보증·사후관리 조건은 입력된 경우에만 사용하고, 없으면 문의 시 확인해야 할 항목으로 안내한다.',
       hook: '사후관리 불안 해소형 후킹',
       pastor: '해결 단계에서 상담 전 확인 질문과 연락 CTA를 자연스럽게 연결한다.',
     },
     {
+      id: 'speed',
       name: '상담 응답',
       focus: '영업시간·상담 채널·응답 가능 시간은 입력된 정보만 사용하고, 빠른 응답을 단정하지 않는다.',
       hook: '기다림 부담 해소형 후킹',
       pastor: '상담 흐름과 준비할 정보를 안내해 전환을 만든다.',
     },
     {
+      id: 'benefit',
       name: '상담 장벽 낮추기',
       focus: '무료 상담·비교 견적·방문 견적은 입력된 경우에만 표현하고, 없으면 문의 전 준비사항으로 대체한다.',
       hook: '첫 문의 부담 해소형 후킹',
       pastor: '마지막 소제목에서 연락처와 함께 문의할 내용을 정리한다.',
     },
     {
+      id: 'expertise',
       name: '전문성 근거',
       focus: '경력·자격증·장비·전문 분야는 입력된 정보만 근거로 쓰고, 입력이 없으면 작업 기준과 점검 포인트를 설명한다.',
       hook: '전문가 선택 기준형 후킹',
       pastor: '업체 선택 기준을 제시한 뒤 입력된 차별점을 연결한다.',
     },
     {
+      id: 'faq',
       name: '문의 전 체크',
       focus: '고객 후기처럼 꾸미지 말고, 독자가 문의 전에 확인할 상황·사진·면적·희망 일정 등을 정리한다.',
       hook: '실전 준비형 후킹',
       pastor: '체크리스트 또는 표를 포함해 문의 행동으로 이어지게 한다.',
     },
     {
+      id: 'compare',
       name: '트렌드 해석',
       focus: '최신/2026/인기 표현은 원본 근거가 있을 때만 쓰고, 없으면 요즘 문의에서 자주 확인하는 선택 기준으로 완화한다.',
       hook: '선택 기준 업데이트형 후킹',
       pastor: '근거 없는 유행 단정 대신 비교표와 확인 포인트로 설득한다.',
     },
   ];
-  const safeAngle = safeAngles[Math.floor(Math.random() * safeAngles.length)];
+  // [2026-11-05] Same industry filter as the renderer rotation: medical drops price/case/A-S/inducement
+  //   frames, professionals drop case/inducement, shops drop A/S.
+  const excluded = excludedBusinessAngleIds(industry);
+  const allowedAngles = safeAngles.filter((angle) => !excluded.includes(angle.id));
+  const pool = allowedAngles.length > 0 ? allowedAngles : safeAngles;
+  const safeAngle = pool[Math.floor(Math.random() * pool.length)];
   console.log(`[BusinessAngle] 이번 글 강조 각도: ${safeAngle.name}`);
   return `
 ══════════════════════════════════════════
@@ -1233,11 +1249,9 @@ export function buildBusinessAngleDirective(): string {
 ■ 도입부 후킹 스타일: ${safeAngle.hook}
 ■ PASTOR 변주: ${safeAngle.pastor}
 
-필수 안전 규칙:
-- 입력/원본에 없는 시공 건수, 평점, 가격, A/S 기간, 당일 방문 가능 여부를 만들지 말 것
-- 업체명은 제목 1회 + 도입/본문/문의 안내에 총 3~6회만 자연 노출할 것
-- 전환은 업체명 반복이 아니라 고객 상황, 선택 기준, 표/체크리스트, 문의 CTA로 만들 것
-- 후기 데이터가 없으면 실제 고객 후기처럼 쓰지 말고 문의 전 확인사항으로 대체할 것
+필수 안전 규칙 (업체명 횟수·가짜 번호 금지는 업체 정보 블록의 규칙을 따른다):
+- 이 각도의 재료가 입력에 있을 때만 쓰고, 없으면 문의 전 확인사항으로 대체할 것
+- 후기 데이터가 없으면 실제 고객 후기처럼 쓰지 말 것
 - 마지막 소제목은 문의/상담/견적/연락 안내 역할을 반드시 할 것
 ══════════════════════════════════════════
 `;

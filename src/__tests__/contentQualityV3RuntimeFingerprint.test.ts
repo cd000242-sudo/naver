@@ -602,7 +602,8 @@ describe('Content Quality V3 candidate runtime fingerprint', () => {
     expect(mainSource).toMatch(/import\s*\{[^}]*\bassembleContentSource\b[^}]*\}\s*from\s*['"]\.\/sourceAssembler\.js['"]/u);
     expect(mainSource).toMatch(/await\s+assembleContentSource\(payload\.assembly\)/u);
     expect(mainSource).toMatch(/\{\s*validateFactCheckSource\s*\}\s*=\s*await\s+import\(['"]\.\/naverFactCheckRAG\.js['"]\)/u);
-    expect(mainSource).toMatch(/await\s+validateFactCheckSource\(keywordQuery\)/u);
+    // [2026-11-05] 업체 모드는 두 번째 인자(skipBlogs)를 싣는다 — 호출이 있다는 배선만 잠근다.
+    expect(mainSource).toMatch(/await\s+validateFactCheckSource\(keywordQuery(?:,\s*\{[^}]*\})?\)/u);
     expect(mainSource).toMatch(/\{\s*validateFactsAgainstSource\s*\}\s*=\s*await\s+import\(['"]\.\/naverFactCheckRAG\.js['"]\)/u);
     expect(mainSource).toMatch(/validateFactsAgainstSource\(fullText,\s*factCheckRawSource,\s*0\.7\)/u);
 
@@ -610,7 +611,7 @@ describe('Content Quality V3 candidate runtime fingerprint', () => {
       'const { source, warnings } = await assembleContentSource(payload.assembly);',
     );
     const sourceValidationIndex = mainSource.indexOf(
-      'const validation = await validateFactCheckSource(keywordQuery);',
+      'const validation = await validateFactCheckSource(keywordQuery',
       assemblyIndex,
     );
     const blockIndex = mainSource.indexOf('if (!validation.passed)', sourceValidationIndex);

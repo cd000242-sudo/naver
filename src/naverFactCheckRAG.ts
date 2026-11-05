@@ -220,7 +220,7 @@ function extractKeywordTerms(keyword: string): string[] {
  */
 export async function validateFactCheckSource(
   keyword: string,
-  options?: { minChars?: number; minKeywordCoverage?: number },
+  options?: { minChars?: number; minKeywordCoverage?: number; skipBlogs?: boolean },
 ): Promise<FactCheckValidationResult> {
   const minChars = options?.minChars ?? 1000; // 자료 1000자 이상 필수
   const minCoverage = options?.minKeywordCoverage ?? 0.3; // 키워드 30% 이상 자료에 포함
@@ -234,10 +234,12 @@ export async function validateFactCheckSource(
   //   쓰기 시작하면 뒤에서 어떤 검증을 붙여도 늦다.
   const mix = resolveFactSourceMix({ keyword: keyword.trim() });
   console.log(`[NaverFactCheckRAG] 📚 재료 구성: ${mix.reason}`);
+  // [2026-11-05] Business mode: top blogs for "지역 + 업종" are other businesses' promo posts — only 지식iN questions stay.
+  const skipBlogs = options?.skipBlogs === true;
   const result = await collectFactCheckSourceFromNaver(keyword.trim(), {
-    blogCount: mix.blogCount,
+    blogCount: skipBlogs ? 0 : mix.blogCount,
     newsCount: mix.newsCount,
-    kinCount: mix.kinCount,
+    kinCount: skipBlogs ? Math.max(mix.kinCount, 5) : mix.kinCount,
   });
 
   if (result.totalChars < minChars) {

@@ -2046,6 +2046,14 @@ export async function collectTopArticleFullTexts(
   }
 }
 
+/**
+ * [2026-11-05] Business mode drops the top-ranked blog bodies: for a "지역 + 업종" keyword they are other
+ * businesses' promo posts, and their prices/terms would leak into this business's post as "facts".
+ * 지식iN questions (collectKinReaderContext) and the business's own homepage are collected separately and stay.
+ * Call sites: `skip ? EMPTY_FULL_TEXTS : await collectTopArticleFullTexts(...)`.
+ */
+const EMPTY_FULL_TEXTS = { text: '', count: 0, urls: [], documents: [] } as unknown as Awaited<ReturnType<typeof collectTopArticleFullTexts>>;
+
 // [v2.11.133] Reader-situation material for empathy-driven modes (homefeed/
 // business/mate): real 지식iN questions show what readers actually face before
 // they search. Full question body preferred; snippet fallback when the page
@@ -7283,7 +7291,7 @@ ${reviewSection}
         let fullTextCount = 0;
         try {
           const fullTextDeadline = Date.now() + FULLTEXT_COLLECT_BUDGET_MS;
-          const fullTexts = await collectTopArticleFullTexts(
+          const fullTexts = (input as any).contentMode === 'business' ? EMPTY_FULL_TEXTS : await collectTopArticleFullTexts(
             searchQuery, naverClientId!, naverClientSecret!, console.log, fullTextDeadline,
           );
           if (fullTexts.text) {
@@ -7823,7 +7831,7 @@ ${naverResult.content}`;
     if (naverSearchAvailable(naverClientId, naverClientSecret) && supplementQuery) {
       console.log(`[URL 심화보강] 원본 ${baseBody.length}자 < ${URL_THIN_SUPPLEMENT_THRESHOLD}자 → "${supplementQuery}" 상위글 풀텍스트 수집`);
       try {
-        const deep = await collectTopArticleFullTexts(supplementQuery, (naverClientId ?? ''), (naverClientSecret ?? ''));
+        const deep = (input as any).contentMode === 'business' ? EMPTY_FULL_TEXTS : await collectTopArticleFullTexts(supplementQuery, (naverClientId ?? ''), (naverClientSecret ?? ''));
         // 주제가 다른 자료는 배경이 아니라 오염이다. 얇은 원본이 바뀐 주제보다 낫다.
         const onTopic = filterOnTopicSupplement(baseBody, deep.text);
         if (onTopic.dropped > 0) {
@@ -8086,6 +8094,8 @@ export async function collectContentFromPlatforms(
      * 고른 저비용 설정과 무관하게 과금됐다. 명시적 옵트인일 때만 호출한다.
      */
     allowGroundingFallback?: boolean;
+    /** [2026-11-05] Business mode: do not fetch other blogs' bodies as material (see collectTopArticleFullTextsFor). */
+    skipBlogBodies?: boolean;
   } = {}
 ): Promise<{
   collectedText: string;
@@ -8167,7 +8177,7 @@ export async function collectContentFromPlatforms(
           //   **스니펫까지 포함해 수집 결과 전부가 폐기**되고 근거 0 상태로 글이 나갔다.
           //   렌더러 상한보다 넉넉히 앞서 끝내 확보한 만큼은 반드시 돌려준다.
           const fullTextDeadline = Date.now() + FULLTEXT_COLLECT_BUDGET_MS;
-          const fullTexts = await collectTopArticleFullTexts(
+          const fullTexts = options.skipBlogBodies === true ? EMPTY_FULL_TEXTS : await collectTopArticleFullTexts(
             keyword, (clientId ?? ''), (clientSecret ?? ''), logger, fullTextDeadline,
           );
           const collectedText = fullTexts.text

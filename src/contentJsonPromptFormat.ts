@@ -6,6 +6,8 @@ import {
   type PromptMode,
 } from './promptLoader.js';
 import { describeTitleLength } from './content/titleLengthPolicy.js';
+import { buildBusinessInfoBlock } from './content/businessInfoPromptBlock.js';
+import { resolveBusinessIndustry } from './content/businessIndustryDetector.js';
 import { preprocessLongKeyword } from './contentKeywordHelpers';
 import { buildVoiceProfileBlock, sampleVoiceProfile } from './contentVoiceProfile.js';
 import { annotateSearchOnlyCompounds } from './content/searchOnlyCompoundKeyword.js';
@@ -29,6 +31,10 @@ type ContentJsonPromptSource = {
     promoTarget?: string;
     promoAngle?: string;
     promoAngleDirective?: string;
+    industry?: string;
+    faq?: string;
+    blogOwner?: string;
+    researchUrl?: string;
   };
 };
 
@@ -345,57 +351,10 @@ function buildBusinessAngleBlock(
   source: ContentJsonPromptSource,
 ): string {
   if (contentMode !== 'business') return '';
-  const userAngle = source.businessInfo?.promoAngle;
-  if (userAngle && String(userAngle).trim()) return ''; // 사용자 각도는 businessInfo 블록이 주입
-  return buildBusinessAngleDirective();
-}
-
-function buildBusinessInfoBlock(source: ContentJsonPromptSource): string {
   const info = source.businessInfo;
-  if (!info) return '';
-
-  return `
-══════════════════════════════════════════
-🏢 [업체 정보 — 절대 변경/조작 금지, 그대로 사용]
-══════════════════════════════════════════
-${info.name ? `📛 업체명: ${info.name}` : ''}
-${info.phone ? `📞 전화번호: ${info.phone}` : ''}
-${info.kakao ? `💬 카카오톡: ${info.kakao}` : ''}
-${info.address ? `📍 주소: ${info.address}` : ''}
-${info.hours ? `🕐 영업시간: ${info.hours}` : ''}
-${info.serviceArea === 'nationwide' ? `🌏 서비스 범위: 전국 (지역 제한 없음)
-   → 제목/본문에 특정 지역명 강제 삽입 금지
-   → "전국 상담 가능", "지역 무관 안내", "서비스 가능 범위 확인"처럼 입력 정보 기반 표현 활용
-   → 단, 디지털·온라인 상품(앱/소프트웨어/전자책/강의/구독 등)이면 "전국" 표현 자체를 쓰지 마라 — 지역 개념이 무의미하다. 대신 사용 환경(OS·기기·사양), 라이선스 조건, 지원 채널(오픈채팅·원격)을 다뤄라
-   → 시공 건수, 거점 수, 방문 가능 시간은 특징/경력에 실제 입력된 경우에만 사용
-   → 지역 키워드 대신 업종+차별점으로 검색 노출 (예: "원목 인테리어", "친환경 도배")` : info.region ? `🗺️ 서비스 지역: ${info.region}
-   → 제목 맨 앞에 위 지역명 중 1개 필수 배치 (예: "${info.region.split(/[,/\s]+/)[0]} 인테리어")
-   → 본문에 위 지역명들을 골고루 분산 등장 (각 지역 최소 1회)
-   → 시공 건수, 당일 방문, 가격, 경력 수치는 특징/경력 또는 원본 텍스트에 실제 입력된 경우에만 사용
-   → 입력 근거가 없으면 지역별 상담 가능 범위, 문의 전 확인사항, 방문 가능 여부 확인 절차를 설명
-   → 다른 지역명(서울/강남 등) 임의 추가 절대 금지` : ''}
-${info.extra ? `✨ 특징/경력: ${info.extra}` : ''}
-${info.promoTarget === 'product' ? `
-🛍️ [홍보 대상: 취급 상품 판매]
-- 이 글의 주인공은 업체가 아니라 업체가 취급/판매하는 상품이다. 수집 자료(원문)의 상품 정보(이름·가격·조건·혜택)를 중심으로 작성하라.
-- 상품의 장점·혜택·사용 시나리오를 구체적으로 다루고, 업체는 "믿을 수 있는 판매처"로 소개하라.
-- 글의 목표는 구매·문의 전환 — 마무리에 위 연락처(전화/카카오톡)로 문의를 자연스럽게 유도하라.
-- 수집 자료에 없는 상품 스펙·가격·혜택을 지어내지 마라.` : `
-🏢 [홍보 대상: 업체 자체 홍보]
-- 이 글의 주인공은 업체다. 전문성·신뢰·서비스 품질을 중심으로 작성하라.
-- 취급 상품/서비스는 업체의 강점을 보여주는 근거로 활용하라.
-- 글의 목표는 문의 전환 — 마무리에 위 연락처로 상담 문의를 자연스럽게 유도하라.`}
-${info.promoAngle ? `
-🎯 [이번 글 강조 각도: ${info.promoAngle}]
-- ${info.promoAngleDirective || '이 각도를 글의 중심 프레임으로 사용하라.'}
-- 같은 업체로 발행된 직전 글들과 프레임이 겹치지 않도록, 제목과 소제목 구성을 이 각도 중심으로 잡아라. 마무리는 항상 문의 전환으로 수렴하라.` : ''}
-
-⛔ 위 연락처 정보는 한 글자도 변경하지 말고 그대로 사용하라.
-⛔ 절대 가짜 전화번호, 가짜 카카오톡 ID, 가짜 주소, 가짜 지역을 만들지 마라.
-⛔ 입력/원본에 없는 시공 건수·평점·가격·A/S 기간·당일 방문 가능 여부를 만들지 마라.
-⛔ 위 업체명은 제목 1회 + 도입/본문/문의 안내에 총 3~6회만 자연 노출하라.
-⛔ 업체명을 문단마다 반복하지 말고, 서비스 장점·절차·고객 상황·문의 CTA로 전환 설득을 구성하라.
-`;
+  const userAngle = info?.promoAngle;
+  if (userAngle && String(userAngle).trim()) return ''; // 사용자 각도는 businessInfo 블록이 주입
+  return buildBusinessAngleDirective(resolveBusinessIndustry(info?.industry, info?.name, info?.extra));
 }
 
 function buildCustomPromptBlock(source: ContentJsonPromptSource): string {
@@ -534,7 +493,7 @@ imagePrompt 규칙: 각 소제목 본문 문맥과 일치하는 구체적 한국
 
 [원본 텍스트]
 ${structureDirective}${buildBusinessAngleBlock(contentMode, source)}${buildVoiceProfileBlock(sampleVoiceProfile())}
-${buildPreviousTitlesBlock(source, contentMode)}${contentMode === 'business' ? buildBusinessInfoBlock(source) : ''}${buildCustomPromptBlock(source)}
+${buildPreviousTitlesBlock(source, contentMode)}${contentMode === 'business' ? buildBusinessInfoBlock(source.businessInfo, { title, primaryKeyword }) : ''}${buildCustomPromptBlock(source)}
 ══════════════════════════════════════════
 🎯 [필수 키워드 정보 — 제목/소제목 작성에 반드시 반영]
 ══════════════════════════════════════════

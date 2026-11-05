@@ -12,6 +12,8 @@ const read = (...seg: string[]): string => fs.readFileSync(path.join(process.cwd
 const readBusinessPromptSources = (): string => [
   read('src', 'contentGenerator.ts'),
   read('src', 'contentJsonPromptFormat.ts'),
+  // [2026-11-05] 업체 정보 블록이 contentJsonPromptFormat 에서 이 파일로 옮겨졌다.
+  read('src', 'content', 'businessInfoPromptBlock.ts'),
 ].join('\n');
 
 describe('업체홍보 홍보 대상 + 리서치 URL + 재오픈 (2026-06-12)', () => {

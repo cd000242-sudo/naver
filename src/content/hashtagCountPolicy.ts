@@ -29,6 +29,7 @@ const RANGES: Record<string, HashtagCountRange> = {
   mate: { min: 10, max: 15, source: 'hashtag-strategy HT-3 (SEO)' },
   homefeed: { min: 3, max: 7, source: 'hashtag-strategy HT-3 (홈판)' },
   affiliate: { min: 8, max: 12, source: 'hashtag-strategy HT-3 (쇼핑)' },
+  business: { min: 8, max: 12, source: 'hashtag-strategy HT-2 (업체 홍보)' },
 };
 
 const DEFAULT_RANGE: HashtagCountRange = RANGES.seo;

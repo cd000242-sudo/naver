@@ -6,6 +6,8 @@
 // - One `codex exec` session draws exactly ONE image, and up to CODEX_IMAGE_CONCURRENCY sessions run at the same time.
 //   A session's file comes from its own generated_images/<thread id>/ folder, so a result belongs to its item by
 //   construction — it never depends on the order in which sessions finish or on file times across sessions.
+// - Shopping: an optional cleaned product photo is attached to EVERY session as image_gen's reference (codexReferenceImage.ts);
+//   a result that is only a byte copy of that photo fails its slot. Without it nothing changes.
 // - A slot that gets no image is an explicit failure ("N번 이미지를 받지 못함"). No other engine fills it, nothing is
 //   retried silently (no automatic fallback) — the subscription limit is the user's, a retry would spend it again.
 // - A subscription-level failure (limit reached, logged out, CLI missing, plan inactive...) is the same for every
@@ -17,7 +19,8 @@ import { resolveAgentImageProfile } from '../../agentCli/agentModelDefaults.js';
 import { CODEX_IMAGE_ENGINE } from '../../runtime/codexImagePolicy.js';
 import { assertCodexImageReady } from './codexImageReadiness.js';
 import { runCodexImageSession, type CodexImageSessionOptions, type CodexImageSessionResult } from './codexImageSession.js';
-import { withCodexAspectRatio } from './codexImageInstruction.js';
+import { withCodexAspectRatio, withCodexProductReference } from './codexImageInstruction.js';
+import { isCodexReferenceCopy, type CodexReferenceImage } from './codexReferenceImage.js';
 
 /** How many single-image sessions run at the same time. */
 export const CODEX_IMAGE_CONCURRENCY = 4;
@@ -36,11 +39,18 @@ export interface CodexImageRuntime {
   /** Copies one result file into the app's image storage (same folder and format as every engine). */
   save(filePath: string, item: ImageRequestItem, postTitle?: string, postId?: string): Promise<GeneratedImage>;
   log(message: string): void;
+  /** True when a result file is a byte-identical copy of the reference photo (only asked when a reference is attached). */
+  isReferenceCopy(filePath: string, reference: CodexReferenceImage): Promise<boolean>;
 }
 
 export interface CodexImageOptions {
   /** Return the images that arrived even when some slots failed (still fails on 0 images). */
   allowPartial?: boolean;
+  /**
+   * [2026-11-05] Shopping product photo (already cleaned): attached to EVERY session as the reference. Without it the
+   * behaviour is exactly the plain one. A result that is only a copy of this photo fails its slot.
+   */
+  referenceImage?: CodexReferenceImage;
   /** How often the stop request is polled; tests shorten it. */
   pollMs?: number;
 }
@@ -98,6 +108,10 @@ function defaultRuntime(): CodexImageRuntime {
       };
     },
     log: emitCodexImageLog,
+    async isReferenceCopy(filePath, reference) {
+      const { readFile } = await import('fs/promises');
+      return isCodexReferenceCopy(await readFile(filePath), reference);
+    },
   };
 }
 
@@ -120,6 +134,8 @@ export async function generateWithCodexImage(
   await runtime.assertReady();
   const concurrency = Math.min(CODEX_IMAGE_CONCURRENCY, items.length);
   runtime.log(`🎨 Codex 구독 이미지 ${items.length}장 생성 중 (${resolveAgentImageProfile('codex').model}) · 동시 ${concurrency}개`);
+  const reference = options.referenceImage;
+  if (reference) runtime.log(`🛒 상품 사진 1장을 참고로 붙여 ${items.length}장 생성`);
 
   const startedAt = Date.now();
   const abort = new AbortController();
@@ -142,13 +158,25 @@ export async function generateWithCodexImage(
     const item = items[index];
     const sessionStartedAt = Date.now();
     try {
-      const prompt = withCodexAspectRatio(item.prompt, (item as { imageRatio?: unknown }).imageRatio);
-      const session = await runtime.runSession([prompt], { signal: abort.signal, timeoutMs: SESSION_TIMEOUT_MS });
+      // The product line goes before the ratio line, so the prompt still ends with the ratio line.
+      const prompt = withCodexAspectRatio(reference ? withCodexProductReference(item.prompt) : item.prompt, (item as { imageRatio?: unknown }).imageRatio);
+      const session = await runtime.runSession([prompt], {
+        signal: abort.signal,
+        timeoutMs: SESSION_TIMEOUT_MS,
+        ...(reference ? { referenceImage: { buffer: reference.buffer, fileName: reference.fileName } } : {}),
+      });
       if (session.files.length > 1) {
         runtime.log(`⚠️ Codex 구독 이미지: ${index + 1}번에 1장을 부탁했는데 ${session.files.length}장이 만들어져 첫 장만 씁니다`);
       }
       const file = session.files[0];
       if (!file) { reasons.set(index, ''); return; }
+      if (reference) {
+        // A file that is only the reference photo handed back is not a new image: the slot fails (no other engine fills it).
+        let copied: boolean;
+        try { copied = await runtime.isReferenceCopy(file, reference); }
+        catch (checkError) { reasons.set(index, `결과 파일을 확인하지 못함: ${describeError(checkError)}`); return; }
+        if (copied) { reasons.set(index, '참고 사진을 그대로 복사한 결과라 버렸습니다'); return; }
+      }
       try {
         const saved = await saveInTurn(file, item);
         // The engine draws the Korean copy itself: the app never overlays text on its thumbnail.

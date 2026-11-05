@@ -4,7 +4,7 @@
 // ============================================
 
 import { applyPreviousPostPolicy } from '../../shared/previousPostPolicy.js';
-import { imgSyncNotify } from '../../runtime/imageSettingsSync.js';
+import { imgSyncNotify, imgSyncShoppingEngineFor } from '../../runtime/imageSettingsSync.js';
 import { resolveRendererPublicationScope } from '../utils/previousPostScope.js';
 import { normalizeRetiredNanoEngine } from '../../runtime/imageProviderMigration.js';
 import { createTime24Select, bindTime24Events, setTime24Value, setTime24ValueByIdx } from '../utils/time24Select';
@@ -2502,7 +2502,8 @@ export function initContinuousPublishingV2(): void {
       const normalizedValue = value === 'dall-e-3' ? 'openai-image' : value;
       // ✅ [2026-05-18] mode 분리: 'collected'만 collected, 그 외는 AI 엔진 선택으로 간주
       setSubImageMode(normalizedValue === 'collected' ? 'collected' : 'ai');
-      if (normalizedValue === 'nano-banana-2' || normalizedValue === 'openai-image' || normalizedValue === 'dropshot') {
+      // [2026-11-05] The engine list lives in one place (IMG_SYNC_SHOPPING_ENGINES), so the radios and the image tab agree.
+      if (imgSyncShoppingEngineFor(normalizedValue)) {
         // AI 엔진 선택 — 전역 AI 이미지 소스와 sync (반자동 드롭다운도 업데이트)
         localStorage.setItem('scAIImageEngine', normalizedValue);
         localStorage.setItem('fullAutoImageSource', normalizedValue);

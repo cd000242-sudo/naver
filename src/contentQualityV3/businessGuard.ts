@@ -44,6 +44,7 @@ export interface ContentQualityV3BusinessInfoInput {
   readonly region?: unknown;
   readonly serviceArea?: unknown;
   readonly extra?: unknown;
+  readonly faq?: unknown;
 }
 
 export interface ContentQualityV3BusinessEvidenceInput {
@@ -60,6 +61,7 @@ export interface ContentQualityV3BusinessInfoSnapshot {
   readonly region?: string;
   readonly serviceArea?: 'nationwide' | 'regional';
   readonly extra?: string;
+  readonly faq?: string;
 }
 
 export interface ContentQualityV3BusinessEvidenceSnapshot {
@@ -112,6 +114,10 @@ export function snapshotContentQualityV3BusinessEvidence(
   }
   businessInfo.extra = boundedString(
     ownDataValue(rawBusinessInfo, 'extra'),
+    BUSINESS_EXTRA_MAX_CHARS,
+  );
+  businessInfo.faq = boundedString(
+    ownDataValue(rawBusinessInfo, 'faq'),
     BUSINESS_EXTRA_MAX_CHARS,
   );
   const rawServiceArea = ownDataValue(rawBusinessInfo, 'serviceArea');
@@ -211,6 +217,7 @@ function validateBusinessInfo(
     info.hours,
     info.region,
     info.extra,
+    info.faq,
   ].filter((value): value is string => typeof value === 'string').join(' ');
   const unsupportedStats = [...new Set(allText.match(BUSINESS_STAT_PATTERN) ?? [])]
     .filter(stat => !trustedBusinessText.includes(stat.trim()))

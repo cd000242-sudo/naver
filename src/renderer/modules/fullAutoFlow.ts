@@ -2460,7 +2460,8 @@ async function generateFullAutoContent(formData) {
     // 강조 프레임을 강제한다 (이력은 업체명 기준 localStorage).
     if (businessInfo && window.rotateBusinessAngle) {
         try {
-            const promoAngle = window.rotateBusinessAngle(businessInfo.name || '');
+            // [2026-11-05] 업종 칸 · 키워드로 업종을 정해 맞지 않는 각도(의료의 사례 · 혜택 등)는 돌리지 않는다.
+            const promoAngle = window.rotateBusinessAngle(businessInfo.name || '', businessInfo, cleanedKeywords);
             if (promoAngle) {
                 businessInfo.promoAngle = promoAngle.label;
                 businessInfo.promoAngleDirective = promoAngle.directive;
@@ -2522,6 +2523,12 @@ async function generateFullAutoContent(formData) {
             businessInfo,
             contentPolicyContext,
             manualTitleOverride,
+            // [2026-11-05] 업체 모드: 반자동과 같이 "내 경험 메모"를 싣는다(풀오토에서만 빠져 있었다). 비우면 undefined.
+            personalExperience: formData.contentMode === 'business'
+                ? ((document.getElementById('shopping-connect-personal-experience')?.value
+                    || document.getElementById('unified-personal-experience')?.value
+                    || '').trim().slice(0, 4000) || undefined)
+                : undefined,
             useKeywordAsTitle: formData.keywordAsTitle || false,
             keywordForTitle: formData.keywordAsTitle ? (cleanedKeywords || titleStr || keywordList.join(' ')) : undefined,
             useKeywordTitlePrefix: formData.keywordTitlePrefix || false,
@@ -3731,6 +3738,9 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
     const ftcCheckboxEl = document.getElementById('unified-ftc-disclosure');
     const ftcTextareaEl = document.getElementById('unified-ftc-text');
     const isAffiliateModeFtc = formData.contentMode === 'affiliate';
+    // [2026-11-05] 대행 블로그의 업체 글은 광고이므로 공정위 문구를 기본으로 켠다(체크박스 · 명시 설정이 있으면 그쪽이 우선).
+    const isAgencyBusinessFtc = formData.contentMode === 'business' && window._businessInfo?.blogOwner === 'agency';
+    const ftcDefaultOn = isAffiliateModeFtc || isAgencyBusinessFtc;
     const disclosureCfg = pipelineCfg.disclosure;
     let ftcEnabled;
     let ftcSource;
@@ -3743,13 +3753,13 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
         ftcSource = 'PipelineConfig';
     }
     else {
-        ftcEnabled = isAffiliateModeFtc;
-        ftcSource = isAffiliateModeFtc ? 'mode-default-affiliate' : 'mode-default-other';
+        ftcEnabled = ftcDefaultOn;
+        ftcSource = isAffiliateModeFtc ? 'mode-default-affiliate' : (isAgencyBusinessFtc ? 'mode-default-agency-business' : 'mode-default-other');
     }
     const ftcText = ftcEnabled
         ? (ftcTextareaEl?.value?.trim()
             || disclosureCfg.text
-            || (isAffiliateModeFtc ? disclosureCfg.defaultText : ''))
+            || (ftcDefaultOn ? disclosureCfg.defaultText : ''))
         : '';
     const finalContent = cleanedContent;
     if (ftcEnabled && ftcText) {

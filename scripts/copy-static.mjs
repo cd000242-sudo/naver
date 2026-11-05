@@ -384,6 +384,11 @@ try {
       filePath: path.join(projectRoot, 'dist', 'content', 'keywordTitlePrefixPolicy.js'),
     },
     {
+      // [2026-11-05] 업종 판정 + 각도 제외 표 — businessAngleRotation 이 값으로 가져온다(import 0 인 순수 파일, 최상위 이름은 BIZ_IND_ 접두로 유일).
+      label: 'content/businessIndustryDetector.js',
+      filePath: path.join(projectRoot, 'dist', 'content', 'businessIndustryDetector.js'),
+    },
+    {
       // [2026-10-22] 요청사항 합치기(mergeCustomPrompt) — contentGeneration · 연속발행 · 다중계정 · 풀오토가 값으로 가져온다.
       label: 'contentRequestSections.js',
       filePath: path.join(projectRoot, 'dist', 'contentRequestSections.js'),

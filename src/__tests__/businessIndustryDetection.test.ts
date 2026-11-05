@@ -45,7 +45,8 @@ describe('detectBusinessIndustry', () => {
 describe('업종 감지 배선 (소스 계약)', () => {
   it('contentGenerator 가 business 모드에서 업종 오버레이를 주입한다', () => {
     const generator = readFileSync(new URL('../contentGenerator.ts', import.meta.url), 'utf8');
-    expect(generator).toMatch(/detectBusinessIndustry/);
+    // [2026-11-05] 업종 칸 우선 판정(resolveBusinessIndustry)으로 바뀌었다 — 내부에서 detectBusinessIndustry 를 쓴다.
+    expect(generator).toMatch(/resolveBusinessIndustry/);
     expect(generator).toMatch(/business\/\$\{[^}]+\}\.prompt/);
   });
 });

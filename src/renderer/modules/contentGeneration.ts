@@ -97,6 +97,24 @@ function collectBusinessInfo(contentMode: string): any {
   }
   return info;
 }
+/**
+ * [2026-11-05] 업체 글의 강조 각도를 돌려 붙인다 — 풀오토에만 있던 로테이션을 반자동 · 연속발행에도 건다.
+ *   업종 칸 · 키워드로 업종을 정해 맞지 않는 각도(의료의 사례 · 혜택 등)는 돌리지 않는다.
+ *   전역 _businessInfo 를 건드리지 않도록 복사본을 돌려준다. 실패하면 각도 없이 진행(백엔드가 업종별 랜덤 각도).
+ */
+function withBusinessAngle(info: any, keywords: string[]): any {
+  if (!info || typeof (window as any).rotateBusinessAngle !== 'function') return info;
+  try {
+    const angle = (window as any).rotateBusinessAngle(info.name || '', info, keywords.join(' '));
+    if (angle) {
+      appendLog(`🎯 이번 글 강조 각도: ${angle.label}`);
+      return { ...info, promoAngle: angle.label, promoAngleDirective: angle.directive };
+    }
+  } catch (angleErr) {
+    console.warn('[ContentGeneration] 각도 로테이션 실패(기본 진행):', angleErr);
+  }
+  return info;
+}
 declare function setKeywordTitleOptionsFromItem(...args: any[]): void;
 declare function getProgressModal(): any;
 declare function isFullAutoStopRequested(...args: any[]): boolean;
@@ -739,7 +757,7 @@ export async function generateContentFromUrl(
   // sourceAssembler's keywords[0] fallback (main.ts:5776 guards with `if`).
   const categoryHint = resolveArticleTypeHint(articleType);
   const manualTitleOverride = readManualTitleOverrideForContent(contentMode);
-  const businessInfo = collectBusinessInfo(contentMode);
+  const businessInfo = withBusinessAngle(collectBusinessInfo(contentMode), keywordList);
   // [2026-08-05] SEO·홈판에도 경험 메모를 연다(선택형).
   //   13개 카테고리 프롬프트가 "사용자 메모가 있을 때만 1인칭"을 계약하는데,
   //   메모를 받을 경로가 쇼핑커넥트뿐이라 SEO·홈판에서는 영구히 거짓인 조건이었다.
@@ -1250,6 +1268,8 @@ export async function generateContentFromKeywords(
       const todayDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD 형식
       const targetCrawlDate = scheduleDate || todayDate; // 예약 발행 날짜가 있으면 그걸 사용, 없으면 오늘
       const crawlOptions: any = { maxPerSource: 10, targetDate: targetCrawlDate };
+      // [2026-11-05] 업체 모드: 키워드 상위 블로그는 대부분 다른 업체의 홍보글이다 — 본문을 재료로 받지 않는다(지식iN 질문은 따로 수집).
+      if (contentMode === 'business') crawlOptions.skipBlogBodies = true;
       // [2026-09-22 audit H8] The old log claimed "최근 30일 이내 자료만 수집" — the Naver search API
       //   ignores date parameters. Freshness is applied per document downstream (applyFreshnessPolicy).
       appendLog(`📅 ${scheduleDate ? '발행 날짜' : '오늘 날짜'} 기준: ${targetCrawlDate} (자료 게시일은 수집 후 개별 표시·필터)`);
@@ -1374,7 +1394,7 @@ export async function generateContentFromKeywords(
   // sourceAssembler's keywords[0] fallback (main.ts:5776 guards with `if`).
   const categoryHint = resolveArticleTypeHint(articleType);
   const manualTitleOverride = readManualTitleOverrideForContent(contentMode);
-  const businessInfo = collectBusinessInfo(contentMode);
+  const businessInfo = withBusinessAngle(collectBusinessInfo(contentMode), keywordList);
   // [2026-08-05] SEO·홈판에도 경험 메모를 연다(선택형).
   //   13개 카테고리 프롬프트가 "사용자 메모가 있을 때만 1인칭"을 계약하는데,
   //   메모를 받을 경로가 쇼핑커넥트뿐이라 SEO·홈판에서는 영구히 거짓인 조건이었다.
@@ -1421,6 +1441,8 @@ export async function generateContentFromKeywords(
       categoryHint, // ✅ 카테고리 힌트 전달 (2축 분리 프롬프트)
       isReviewType, // ✅ [FIX] 리뷰형 여부 전달 (키워드 생성에서도 반영)
       title: title || undefined,
+      // [2026-11-05] 업체 모드: 업체 정보 창의 홈페이지(리서치 URL)를 수집 파이프라인에 싣는다 — 풀오토와 같은 통로.
+      rssUrl: contentMode === 'business' ? (String(businessInfo?.researchUrl || '').trim() || undefined) : undefined,
       // ✅ 크롤링된 텍스트가 있으면 baseText로 전달 (할루시네이션 방지)
       // URL 기반처럼 실제 정보를 기반으로 생성하여 품질 향상
       baseText: crawledText || undefined,

@@ -139,6 +139,7 @@ describe('shopping representative image-to-image policy', () => {
     'nano-banana-pro',
     'openai-image',
     'dropshot',
+    'codex-image',
   ])('allows the supported reference engine %s', (engine) => {
     expect(isShoppingReferenceImageEngine(engine)).toBe(true);
   });
@@ -147,7 +148,7 @@ describe('shopping representative image-to-image policy', () => {
     expect(isShoppingReferenceImageEngine(engine)).toBe(false);
   });
 
-  it.each(['nano-banana-2', 'nano-banana-pro', 'openai-image', 'dropshot'])('allows %s in shopping mode selectors', (engine) => {
+  it.each(['nano-banana-2', 'nano-banana-pro', 'openai-image', 'dropshot', 'codex-image'])('allows %s in shopping mode selectors', (engine) => {
     expect(isShoppingSelectableReferenceEngine(engine)).toBe(true);
   });
 
@@ -162,6 +163,7 @@ describe('shopping representative image-to-image policy', () => {
     ['openai-image', 'gpt-image-2.5-sunburst'],
     ['gpt-image-2', undefined],
     ['dropshot', undefined],
+    ['codex-image', undefined],
   ])('allows the exact shopping reference selection %s / %s', (provider, model) => {
     expect(isShoppingReferenceGenerationSelectionSupported(provider, model)).toBe(true);
   });
@@ -559,8 +561,9 @@ describe('shopping reference engine UI wiring', () => {
   });
 
   it('persists dropshot as a shopping AI engine from every selector', () => {
-    expect(continuous).toMatch(/normalizedValue === 'dropshot'/);
-    expect(multi).toMatch(/value === 'dropshot'/);
+    // 2026-11-05: the two shopping radios decide through imgSyncShoppingEngineFor (nano-banana-2 / openai-image / dropshot / codex-image).
+    expect(continuous).toMatch(/imgSyncShoppingEngineFor\(normalizedValue\)/);
+    expect(multi).toMatch(/imgSyncShoppingEngineFor\(value\)/);
     expect(imageManagement).toMatch(/selectedSource === 'dropshot'/);
     expect(subImageMode).toContain("'dropshot'");
   });

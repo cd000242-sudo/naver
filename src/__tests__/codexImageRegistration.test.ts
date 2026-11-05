@@ -99,9 +99,10 @@ describe('Codex 구독 이미지 - 화면 등록 목록', () => {
     expect(read('renderer/modules/costAndAutoGen.ts')).toMatch(/SLOW_IMAGE_PROVIDERS = new Set\(\[[^\]]*'codex-image'/);
   });
 
-  it('쇼핑커넥트 상품 이미지 엔진에는 넣지 않았다', () => {
+  it('쇼핑커넥트 참고 사진 허용 목록(shoppingReferenceGeneration)에는 있고, 판정 함수 파일(shoppingConnectUtils)에는 이름을 적지 않는다', () => {
+    // 2026-11-05: the shopping AI mode now accepts this engine (product photo as reference) — see codexShoppingReferencePolicy.test.ts.
     expect(read('renderer/utils/shoppingConnectUtils.ts')).not.toContain('codex-image');
-    expect(read('image/shoppingReferenceGeneration.ts')).not.toContain('codex-image');
+    expect(read('image/shoppingReferenceGeneration.ts')).toContain("'codex-image'");
   });
 });
 

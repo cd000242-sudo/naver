@@ -6792,7 +6792,9 @@ ipcMain.handle(
           const keywordQuery = payload.assembly.keywords!.join(' ').trim();
           console.log(`[Main] 🔍 네이버 fact-check RAG 발동: keyword="${keywordQuery}", 기존 rawText=${source.rawText?.length || 0}자`);
           const { validateFactCheckSource } = await import('./naverFactCheckRAG.js');
-          const validation = await validateFactCheckSource(keywordQuery);
+          const validation = await validateFactCheckSource(keywordQuery, {
+            skipBlogs: (payload.assembly as any).contentMode === 'business',
+          });
 
           if (!validation.passed) {
             // Evidence completeness is a quality signal, not an operational

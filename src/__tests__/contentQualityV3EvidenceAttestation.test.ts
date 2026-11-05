@@ -266,7 +266,8 @@ describe('Content Quality V3 evidence attestation', () => {
         // [2026-10-20] 나노바나나2 = Nano Banana 2.1(gemini-nano-banana-2.1) + 직전 ID NANO_BANANA_2_PREV 로 재계산
         // [2026-11-03] 지원 종료 엔진 정리 — modelRegistry.normalizeImageProvider 의 deepinfra 별칭 접기 제거로 재계산
         // [2026-11-03] API 글 모델 최신화(gpt-6.x · Claude 5.5/5.1 · Gemini 3.8/3.5 Lite, modelRegistry 표시이름·해석) 로 재계산
-        '092b4ddaee0972e3391dc8514d8150604e1f3639d388b55277f2cb97eeedb086',
+        // [2026-11-05] 업체 홍보 개편(business/base.prompt [FLOOR]·[NEXT STEP]·[SEARCH], promptLoader·contentJsonPromptFormat, 업체 제목 프롬프트 정리)으로 재계산 (LF 체크아웃 바이트 기준)
+        'd4ec6d068abb42077bd8ab3979326fcf7fe18f65851082cd442f89b8536b82e7',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

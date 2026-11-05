@@ -27,6 +27,8 @@ export interface CollectKeywordOptions {
   targetDate?: string;
   /** Force the thin-material expansion even when config.expandedRetrieval is off (re-search). */
   forceExpandedRetrieval?: boolean;
+  /** [2026-11-05] Business mode: skip other blogs' bodies (지식iN questions are collected separately). */
+  skipBlogBodies?: boolean;
   logger?: (message: string) => void;
 }
 
@@ -66,6 +68,7 @@ export async function collectKeywordMaterials(
     logger,
     targetDate: options.targetDate,
     allowGroundingFallback,
+    skipBlogBodies: options.skipBlogBodies === true,
   });
   const result = await collectOnce(keyword);
 

@@ -44,6 +44,7 @@ import { reconcileOpenaiImageModelSelection } from './image/openaiImageModelReco
 import {
   buildAppManagedReferenceImageRoots,
   loadReferenceImageData,
+  type LoadedReferenceImageData,
 } from './image/referenceImageLoader.js';
 import {
   prepareProviderContextualImagePrompt,
@@ -549,12 +550,15 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
   );
   let representativeCandidate = shoppingReference.representative;
   let representativeReferenceUrl = shoppingReference.referenceUrl || crawledImages[0] || '';
+  // [2026-11-05] The loaded photo itself (not just its source string) is kept: the Codex engine attaches its bytes.
+  let shoppingReferenceData: LoadedReferenceImageData | null = null;
   if (options.isShoppingConnect && representativeCandidate) {
     const allowedReferenceRoots = await resolveManagedReferenceImageRoots();
     try {
       const loadedReference = await loadReferenceImageData(representativeCandidate, {
         allowedLocalRoots: allowedReferenceRoots,
       });
+      shoppingReferenceData = loadedReference;
       representativeReferenceUrl = loadedReference?.source || '';
     } catch {
       shoppingReference = resolveShoppingRepresentativeReference(shoppingReferenceCandidates);
@@ -564,6 +568,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
             allowedLocalRoots: allowedReferenceRoots,
           })
         : null;
+      shoppingReferenceData = loadedFallback;
       representativeReferenceUrl = loadedFallback?.source || '';
     }
   }
@@ -966,13 +971,18 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
   if (isCodexImageEngine(normalizedProvider)) {
     try {
       const { generateWithCodexImage } = await import('./image/codex/codexImageGenerator.js');
+      // [2026-11-05] Shopping: the representative product photo goes to every section session as the reference.
+      //   A photo that cannot be loaded stops here (SHOPPING_REFERENCE_LOAD_FAILED) — never a reference-free image.
+      const codexReference = options.isShoppingConnect && items.length > 0
+        ? await (await import('./image/codex/codexReferenceImage.js')).prepareCodexReferenceImage(shoppingReferenceData?.buffer)
+        : undefined;
       const codexImages = await generateWithCodexImage(
         items,
         options.postTitle,
         options.postId,
         options.stopCheck,
         onImageGenerated,
-        { allowPartial: options.allowPartialResults === true },
+        { allowPartial: options.allowPartialResults === true, ...(codexReference ? { referenceImage: codexReference } : {}) },
       );
       if (codexImages.length === 0) {
         if (options.stopCheck?.()) return [];

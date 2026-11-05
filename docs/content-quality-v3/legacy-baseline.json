@@ -39,13 +39,13 @@
     },
     {
       "path": "src/contentJsonPromptFormat.ts",
-      "sha256": "b28f5082fd183268ba2a54f3d072273847511bc6f17a6bf4082a11d661319268",
-      "bytes": 50671
+      "sha256": "ceb0e73329223274ec29934c59c3a95de561e4e1cd6807072a66aa810057fff3",
+      "bytes": 46923
     },
     {
       "path": "src/promptLoader.ts",
-      "sha256": "20a04041f990b298af3c9b279b48e0f4a94c37598c263888f395f16022e18a1d",
-      "bytes": 100448
+      "sha256": "a287f7a9ac5128dcbfbdcfede011880ac730e9b50d0ab6dc0cc45f4f55e38a01",
+      "bytes": 101322
     },
     {
       "path": "src/prompts/affiliate/chain/editor.prompt",
@@ -104,8 +104,8 @@
     },
     {
       "path": "src/prompts/business/base.prompt",
-      "sha256": "09c0f33c154bbd89483cb99d394ab356c6acfde3e0508dac8b256032f93b0d19",
-      "bytes": 8610
+      "sha256": "6dda48ec6f967e17ed09bf3b4748d5ebd245e2ff8994f888080412680c500391",
+      "bytes": 11434
     },
     {
       "path": "src/prompts/business/construction.prompt",
@@ -394,8 +394,8 @@
     },
     {
       "path": "src/prompts/title/business/base.prompt",
-      "sha256": "0d58fadbfa8cd8f16d70ced553af70d6e4e50d682f48253dfe364f8025e43022",
-      "bytes": 5528
+      "sha256": "a2aed666ced6ee82febbe87c78e58634ed92aae94e33f78b0a169f5639da5795",
+      "bytes": 5566
     },
     {
       "path": "src/prompts/title/homefeed.prompt",
@@ -554,7 +554,7 @@
     }
   ],
   "metadata": {
-    "repositoryHead": "b4badb53472227c6c5fdab830accb38fd473cf48",
+    "repositoryHead": "a334bc29a53a047b8fac8476eb88e48397ec7f59",
     "nodeVersion": "v20.20.2",
     "platform": "win32"
   }
