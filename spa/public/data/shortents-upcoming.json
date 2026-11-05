@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T07:44:20.195Z",
+ "builtAt": "2026-11-05T07:54:24.039Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,62 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 89,
-   "recent20": 17,
+   "articles90": 87,
+   "recent20": 15,
    "press": 73,
-   "firstArticleAt": "2026-11-05T06:43:00.000Z",
+   "firstArticleAt": "2026-11-05T06:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'블루 쓰나미'에 파랗게 질린 韓증시…코스피·코스닥 5%대 폭락",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-05T07:43:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=100710"
+     "title": "[오늘증시] 코스피·코스닥 5%대 동반 급락…AI 규제 우려에 반도체주 '...",
+     "press": "queen.co.kr",
+     "publishedAt": "2026-11-05T07:50:00.000Z",
+     "link": "http://www.queen.co.kr/news/articleView.html?idxno=465876"
     },
     {
-     "title": "코스피, 블루웨이브 충격에 5300대 후퇴...7개월래 최저",
-     "press": "daily.hankooki.com",
-     "publishedAt": "2026-11-05T07:42:00.000Z",
-     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1422290"
+     "title": "'블루 쓰나미'에 증시 급락...동반 매도 사이드카",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-05T07:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002428819?sid=101"
     },
     {
-     "title": "[증시 인사이트] 코스피·코스닥 급락…각각 장중 매도 사이드카",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-05T07:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000541974?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "구본규 부회장 승진",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 72,
-   "recent20": 13,
-   "press": 69,
-   "firstArticleAt": "2026-11-05T06:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "LS그룹, 2027년 임원인사…구본규 LS전선 대표 부회장 승진",
-     "press": "sisacast.kr",
-     "publishedAt": "2026-11-05T07:42:00.000Z",
-     "link": "http://www.sisacast.kr/news/articleView.html?idxno=101647"
-    },
-    {
-     "title": "LS그룹, 2027년 임원인사 단행…구본규 LS전선 사장 부회장 승진",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-05T07:38:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=94632"
-    },
-    {
-     "title": "LS그룹, 구본규 부회장 승진…안정 속 미래사업 강화 초점",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-05T07:32:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1135520"
+     "title": "외국인 3.4조 투매로 코스피 5,300대 폭락",
+     "press": "viewsnnews.com",
+     "publishedAt": "2026-11-05T07:48:00.000Z",
+     "link": "https://www.viewsnnews.com/article?q=239522"
     }
    ]
   },
@@ -79,30 +47,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 83,
-   "recent20": 22,
-   "press": 67,
+   "articles90": 86,
+   "recent20": 20,
+   "press": 71,
    "firstArticleAt": "2026-11-05T07:01:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 정부, 가상자산 과세 또 '2년 유예'…3년간 손실 이월공제",
-     "press": "economist.co.kr",
-     "publishedAt": "2026-11-05T07:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/243/0000105257?sid=101"
+     "title": "李정부, 가상자산 과세 2029년부터…국민의힘 \"투자자 혼란 사과해야\"",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-05T07:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003151875?sid=100"
     },
     {
-     "title": "정부, 가상자산 과세 또 유예…과세정책 신뢰도 타격",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-05T07:42:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2121244"
+     "title": "[일문일답] 이형일 \"가상자산 해외거래도 실효성있게 과세\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-05T07:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016424832?sid=101"
     },
     {
-     "title": "가상자산 과세 2029년으로 2년 유예…손실 이월공제 3년 도입",
-     "press": "newsfc.co.kr",
-     "publishedAt": "2026-11-05T07:42:00.000Z",
-     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82270"
+     "title": "코인 과세 갈길 먼 한국 ‘소득분류·이중과세’ 풀어야…9년전 시행 일...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-05T07:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002719528?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "구본규 부회장 승진",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 70,
+   "recent20": 5,
+   "press": 68,
+   "firstArticleAt": "2026-11-05T06:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'사상최대 실적' LS그룹 인사··· 구본규 부회장 승진 등 \"성과주의·안...",
+     "press": "greenpostkorea.co.kr",
+     "publishedAt": "2026-11-05T07:52:00.000Z",
+     "link": "https://www.greenpostkorea.co.kr/news/articleView.html?idxno=307955"
+    },
+    {
+     "title": "LS그룹, 2027년 임원인사 단행…구본규 부회장 승진·신규 이사 17명 선임",
+     "press": "popcornnews.net",
+     "publishedAt": "2026-11-05T07:48:00.000Z",
+     "link": "http://www.popcornnews.net/news/articleView.html?idxno=138901"
+    },
+    {
+     "title": "LS그룹, 임원 인사 단행…'오너 3세' 구본규, 부회장 승진",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-05T07:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004206970?sid=101"
     }
    ]
   },
@@ -111,30 +111,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 87,
-   "recent20": 25,
-   "press": 56,
-   "firstArticleAt": "2026-11-05T06:48:00.000Z",
+   "articles90": 89,
+   "recent20": 24,
+   "press": 60,
+   "firstArticleAt": "2026-11-05T06:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "與, ‘조작기소 특검법’ 본회의 상정…野 필리버스터 맞불",
-     "press": "dnews.co.kr",
-     "publishedAt": "2026-11-05T07:42:00.000Z",
-     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611051624089330870"
+     "title": "'與 숙원' 조작기소 특검법 국회 상정…'野 필버'에 6일 통과 유력",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-05T07:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000141681?sid=100"
     },
     {
-     "title": "「M포토」 박형수, ‘조작 기소 특검법’ 상정에 필버 돌입",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-05T07:42:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=72653"
+     "title": "조작기소 특검법 6일 표결 전망…국민의힘, 장외투쟁 예고",
+     "press": "newswhoplus.com",
+     "publishedAt": "2026-11-05T07:50:00.000Z",
+     "link": "https://www.newswhoplus.com/news/articleView.html?idxno=73618"
     },
     {
-     "title": "스스로 지핀 '내로남불'…조작기소 특검, 정당성 논란 불가피",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-05T07:42:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=172006"
+     "title": "국힘, 조작기소 특검법 저지 총력 '장외투쟁'",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-05T07:50:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2015024"
     }
    ]
   },
@@ -143,30 +143,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 58,
+   "articles90": 62,
    "recent20": 9,
-   "press": 47,
+   "press": 49,
    "firstArticleAt": "2026-11-05T06:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'국힘 김태규 제명촉구' 결의안, 與 주도로 본회의 의결",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-05T07:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000923225?sid=100"
+     "title": "\"윤석열 내란 아냐\" 국힘 김태규 제명 촉구안 국회 통과",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-05T07:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002534793?sid=100"
     },
     {
-     "title": "김태규 제명 촉구 결의안, 범여권 주도로 국회 본회의 통과",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-05T07:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001038702?sid=100"
+     "title": "초광역특구 특위 구성안 본회의 통과…민주유공자법은 상정 불발",
+     "press": "straightnews.co.kr",
+     "publishedAt": "2026-11-05T07:48:00.000Z",
+     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=314743"
     },
     {
-     "title": "'조작기소 특검법' 본회의 상정…여야 대치 속 '김태규 제명촉구안'도 ...",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-05T07:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003482747?sid=100"
+     "title": "'윤석열·전두환 내란 아니다' 김태규 제명 촉구 결의안 국회 본회의 통...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T07:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014304656?sid=100"
     }
    ]
   },
@@ -175,30 +175,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 26,
-   "recent20": 2,
+   "articles90": 25,
+   "recent20": 4,
    "press": 25,
-   "firstArticleAt": "2026-11-05T06:16:00.000Z",
+   "firstArticleAt": "2026-11-05T06:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "특검, ‘제식구 감싸기’ 의혹 오동운 공수처장에 징역 1년 구형",
+     "press": "segye.com",
+     "publishedAt": "2026-11-05T07:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004172819?sid=102"
+    },
+    {
+     "title": "채해병 특검, ‘제 식구 감싸기’ 오동운 공수처장에 징역 1년 구형",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-05T07:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001883274?sid=102"
+    },
     {
      "title": "특검, '제식구 감싸기' 오동운 공수처장에 징역 1년 구형",
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-05T07:39:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001400933?sid=102"
-    },
-    {
-     "title": "\"수사하랬더니 수사 막아\"…특검, 오동운 공수처장 징역 1년 구형",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-05T07:36:00.000Z",
-     "link": "https://www.ajunews.com/view/20261105160915635"
-    },
-    {
-     "title": "\"제 식구 감싸기 악습\"…특검, 오동운 공수처장 징역 1년 구형",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-05T07:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000141676?sid=102"
     }
    ]
   },
@@ -207,30 +207,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 23,
-   "recent20": 5,
-   "press": 19,
-   "firstArticleAt": "2026-11-05T06:15:00.000Z",
+   "articles90": 17,
+   "recent20": 4,
+   "press": 17,
+   "firstArticleAt": "2026-11-05T06:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "국힘 원외 당협위원장 74명 \"헌법 제84조 대통령 무죄 부여 조항 아냐\"",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-05T07:50:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=902108"
+    },
+    {
+     "title": "전광훈 사랑제일교회, 이재명 대통령 '알박기' 지적에…“재판 받으시라...",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-05T07:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000519320?sid=102"
+    },
     {
      "title": "서울시, 공공재개발 강조한 李대통령에 반박⋯\"민간이 90% 담당\"",
      "press": "etoday.co.kr",
      "publishedAt": "2026-11-05T07:42:00.000Z",
      "link": "https://www.etoday.co.kr/news/view/2644750"
-    },
-    {
-     "title": "'대통령의 Y'로 직접 소통하는 이 대통령… 목적은 설명일까, 설득일까",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-05T07:38:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261105500455"
-    },
-    {
-     "title": "서울시 \"공공·민간 재개발 이분법, 주택공급 도움 안 돼\"…李대통령 반...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-05T07:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009272937?sid=101"
     }
    ]
   },
@@ -239,13 +239,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 13,
+   "articles90": 11,
    "recent20": 3,
-   "press": 12,
-   "firstArticleAt": "2026-11-05T06:17:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-05T06:48:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
+    {
+     "title": "삼성전자 6.88%·하이닉스 8.74% 급락…미국 '블루웨이브' 충격파",
+     "press": "kado.net",
+     "publishedAt": "2026-11-05T07:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000209627?sid=101"
+    },
     {
      "title": "'블루웨이브'에 반도체 급락…삼성전자 7%·SK하이닉스 9%↓마감",
      "press": "weekly.chosun.com",
@@ -257,44 +263,6 @@
      "press": "junggi.co.kr",
      "publishedAt": "2026-11-05T07:40:00.000Z",
      "link": "https://www.junggi.co.kr/news/articleView.html?idxno=38389"
-    },
-    {
-     "title": "외국인 3.4조원 투매에 코스피 5%대 급락…삼성전자·하이닉스 '와르르...",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-05T07:30:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000080064"
-    }
-   ]
-  },
-  {
-   "keyword": "APBC 대표팀 낙마",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-05T06:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'투수 19명→14명' APBC 대표팀 마운드 비상...KIA 곽도규, 허벅지 부상...",
-     "press": "maniareport.com",
-     "publishedAt": "2026-11-05T07:15:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/425/0000213955"
-    },
-    {
-     "title": "KIA 투수 곽도규, 대퇴부 부상으로 APBC 대표팀 낙마",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T07:03:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/003/0014304475"
-    },
-    {
-     "title": "APBC 출격 앞두고 줄부상…곽도규 낙마에 마운드 초비상",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-05T06:53:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/021/0002830629"
     }
    ]
   },
@@ -304,12 +272,18 @@
     "signal.bz"
    ],
    "articles90": 7,
-   "recent20": 1,
+   "recent20": 2,
    "press": 7,
-   "firstArticleAt": "2026-11-05T06:24:00.000Z",
+   "firstArticleAt": "2026-11-05T06:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "히트상품이 끌고 외국인이 밀고…CU·GS25 갈린 건 ‘수익성’",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-05T07:46:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611050165"
+    },
     {
      "title": "GS, 3분기 영업이익 4조2507억원 달성…전년比 96.8%↑",
      "press": "energy-news.co.kr",
@@ -321,12 +295,6 @@
      "press": "livebiz.today",
      "publishedAt": "2026-11-05T07:18:00.000Z",
      "link": "https://www.livebiz.today/news/articleView.html?idxno=206251"
-    },
-    {
-     "title": "㈜GS, 3분기 영업익 1조2748억…전년비 46.4%↑",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-05T07:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000549180?sid=101"
     }
    ]
   },
@@ -363,6 +331,70 @@
    ]
   },
   {
+   "keyword": "APBC 대표팀 낙마",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-05T06:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'투수 19명→14명' APBC 대표팀 마운드 비상...KIA 곽도규, 허벅지 부상...",
+     "press": "maniareport.com",
+     "publishedAt": "2026-11-05T07:15:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/425/0000213955"
+    },
+    {
+     "title": "KIA 투수 곽도규, 대퇴부 부상으로 APBC 대표팀 낙마",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T07:03:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/003/0014304475"
+    },
+    {
+     "title": "APBC 출격 앞두고 줄부상…곽도규 낙마에 마운드 초비상",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-05T06:53:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/021/0002830629"
+    }
+   ]
+  },
+  {
+   "keyword": "제주 감귤",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-05T06:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "세계 속 제주인",
+     "press": "jejunews.com",
+     "publishedAt": "2026-11-05T07:36:00.000Z",
+     "link": "http://www.jejunews.com/news/articleView.html?idxno=2228666"
+    },
+    {
+     "title": "[사설] 올해산 감귤 가격 하락…가격안정에 힘 모아야",
+     "press": "jejunews.com",
+     "publishedAt": "2026-11-05T07:36:00.000Z",
+     "link": "http://www.jejunews.com/news/articleView.html?idxno=2228664"
+    },
+    {
+     "title": "정부세종청사 앞마당서 제주 노지감귤 홍보.특판 행사",
+     "press": "headlinejeju.co.kr",
+     "publishedAt": "2026-11-05T06:56:00.000Z",
+     "link": "https://www.headlinejeju.co.kr/news/articleView.html?idxno=601664"
+    }
+   ]
+  },
+  {
    "keyword": "경제",
    "sources": [
     "signal.bz",
@@ -371,60 +403,59 @@
    "articles90": 3,
    "recent20": 3,
    "press": 3,
-   "firstArticleAt": "2026-11-05T07:40:00.000Z",
+   "firstArticleAt": "2026-11-05T07:48:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "안동시, 2032 전국체전 유치 전략 논의…관광·지역경제 연계",
-     "press": "kyongbuk.co.kr",
-     "publishedAt": "2026-11-05T07:40:00.000Z",
-     "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4089783"
+     "title": "국민연금, 블랙스톤과 글로벌 거시경제 환경과 투자전략 논의",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-05T07:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005350765?sid=101"
     },
     {
-     "title": "경남도의회 경제환경위, 거제·산청 산업혁신 기반시설·재해복구지 점...",
-     "press": "enewstoday.co.kr",
-     "publishedAt": "2026-11-05T07:40:00.000Z",
-     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2488955"
+     "title": "논산시, '여성경제활동촉진대상' 기초자치단체 부문 대상",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-05T07:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009272975?sid=102"
     },
     {
-     "title": "춘천시, 민생경제 회복 총력…규제완화·상권 활성화 추진",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T07:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016424796?sid=101"
+     "title": "농협경제지주, 군급식 신규 품목 23종 공급 확대 추진",
+     "press": "lcnews.co.kr",
+     "publishedAt": "2026-11-05T07:48:00.000Z",
+     "link": "https://www.lcnews.co.kr/news/articleView.html?idxno=210938"
     }
    ]
   },
   {
-   "keyword": "박유천",
+   "keyword": "정해인 팬미팅 투어 개최",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-05T06:15:00.000Z",
+   "firstArticleAt": "2026-11-05T06:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"45만원 내고 추첨까지?\"…박유천, 日 디너쇼 가격에 '깜짝'",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-05T07:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000649223?sid=102"
+     "title": "정해인, 팬미팅 투어로 글로벌 팬들 만난다…내년 1월부터 '미트 미 데어...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-05T07:46:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000637398"
     },
     {
-     "title": "박유천, 日 디너쇼 티켓값이 무려 45만원…또다시 고가 논란",
-     "press": "segye.com",
-     "publishedAt": "2026-11-05T06:22:00.000Z",
-     "link": "https://m.entertain.naver.com/article/022/0004172791"
+     "title": "정해인, 홍콩→상파울루 등 팬미팅 투어 돌입",
+     "press": "enter.etoday.co.kr",
+     "publishedAt": "2026-11-05T06:32:00.000Z",
+     "link": "https://enter.etoday.co.kr/news/view/304810"
     },
     {
-     "title": "\"한국 톱가수보다 비싸다\"…박유천 디너쇼가 45만원? 엇갈린 시선 [글로...",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-05T06:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001271782?sid=103"
+     "title": "정해인, 2년만에 팬미팅 투어",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-05T06:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000519300"
     }
    ]
   },
@@ -441,16 +472,16 @@
    "capped": false,
    "samples": [
     {
-     "title": "[포토] 덴마크 건축그룹 BIG 전시 투어하는 오세훈 시장",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-05T06:50:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261105010002180"
-    },
-    {
      "title": "[포토] 오세훈 시장, 덴마크 건축그룹 BIG 전시 투어",
      "press": "asiatoday.co.kr",
      "publishedAt": "2026-11-05T06:50:00.000Z",
      "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261105010002181"
+    },
+    {
+     "title": "[포토] 덴마크 건축그룹 BIG 전시 투어하는 오세훈 시장",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-05T06:50:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261105010002180"
     },
     {
      "title": "덴마크 건축그룹 BIG 머티미얼리즘 전시 관람하는 오세훈 시장",
@@ -495,7 +526,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 992,
+  "flagged": 993,
   "matched": 435,
   "avgLeadMin": 393,
   "recent": [
