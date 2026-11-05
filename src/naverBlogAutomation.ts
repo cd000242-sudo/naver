@@ -2930,8 +2930,189 @@ export class NaverBlogAutomation {
         frame = await this.getAttachedFrame().catch(() => frame);
       }
 
+      // [2026-11-05] Representative photo + AI-use marks run for every mode: they used to live only inside the
+      //   immediate-publish branch, so draft saves and scheduled posts were left unmarked.
+      const prepareEditorImagesForCommit = async (frame: Frame): Promise<void> => {
+        // ✅ [2026-03-26 v11] 발행 모달 열기 전 대표이미지 설정 + AI 마크 일괄 활성화
+        // button.se-set-rep-image-button 직접 클릭 + button.se-set-ai-mark-button-toggle 일괄 활성화
+        try {
+          this.log('🖼️ [대표사진 v11] 에디터 내 대표이미지 직접 설정 + AI 마크 활성화 중...');
+          const page = this.ensurePage();
+
+          // Step 1: 에디터 내 모든 이미지 컴포넌트 수집
+          const imageComponents = await frame.$$('.se-component.se-image, .se-component.se-imageStrip');
+          this.log(`   📊 에디터 내 이미지 컴포넌트: ${imageComponents.length}개`);
+
+          if (imageComponents.length > 0) {
+            // Step 2: 첫 번째 이미지 컴포넌트 클릭하여 활성화 (대표사진 후보)
+            const targetComponent = imageComponents[0];
+            const imgElement = await targetComponent.$('img');
+            if (imgElement) {
+              const imgCoords = await imgElement.evaluate((el: HTMLImageElement) => {
+                el.scrollIntoView({ block: 'center', behavior: 'instant' as any });
+                void el.offsetHeight;
+                const rect = el.getBoundingClientRect();
+                return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2, found: true };
+              }).catch(() => ({ x: 0, y: 0, found: false }));
+
+              if (imgCoords.found) {
+                await this.delay(300);
+                const iframeOffset = await page.evaluate(() => {
+                  const iframe = document.querySelector('iframe#mainFrame') as HTMLIFrameElement;
+                  if (iframe) { const r = iframe.getBoundingClientRect(); return { x: r.x, y: r.y }; }
+                  return { x: 0, y: 0 };
+                }).catch(() => ({ x: 0, y: 0 }));
+
+                const clickX = iframeOffset.x + imgCoords.x;
+                const clickY = iframeOffset.y + imgCoords.y;
+                await page.mouse.click(clickX, clickY);
+                await this.delay(500);
+                await page.mouse.click(clickX, clickY);
+                await this.delay(800);
+
+                // Step 3: 대표사진 버튼 클릭 (se-set-rep-image-button)
+                const repBtn = await frame.$('button.se-set-rep-image-button').catch(() => null);
+                if (repBtn) {
+                  const isAlreadySelected = await repBtn.evaluate((btn: HTMLButtonElement) =>
+                    btn.classList.contains('se-is-selected')
+                  ).catch(() => false);
+
+                  if (isAlreadySelected) {
+                    this.log('   ✅ [대표사진 v11] 첫 번째 이미지가 이미 대표로 설정됨');
+                  } else {
+                    const repBtnCoords = await repBtn.evaluate((btn: HTMLButtonElement) => {
+                      const rect = btn.getBoundingClientRect();
+                      return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+                    }).catch(() => ({ x: 0, y: 0 }));
+                    await page.mouse.click(iframeOffset.x + repBtnCoords.x, iframeOffset.y + repBtnCoords.y);
+                    await this.delay(500);
+
+                    const verified = await frame.$eval('button.se-set-rep-image-button',
+                      (btn: Element) => btn.classList.contains('se-is-selected')
+                    ).catch(() => false);
+                    this.log(verified
+                      ? '   ✅ [대표사진 v11] 첫 번째 이미지 대표 설정 성공 (se-is-selected 확인)'
+                      : '   ⚠️ [대표사진 v11] 대표 버튼 클릭했으나 se-is-selected 미확인');
+                  }
+                } else {
+                  this.log('   ⚠️ [대표사진 v11] 대표사진 버튼 미발견 — 기본 선택 유지');
+                }
+              }
+            }
+
+            // Step 4: AI 활용 마크 일괄 활성화 (AI 생성 이미지만, 수집 이미지 제외)
+            try {
+              // [2026-09-22 사장님] 이미지 관리 탭 "AI 활용 체크하기" — 켜져 있으면 판정을 건너뛰고
+              //   모든 이미지를 마크한다. 사용자가 직접 켠 옵트인이라 실사진 오탐 걱정은 사용자 몫이다.
+              const aiMarkAllImages = await (async (): Promise<boolean> => {
+                try {
+                  const { loadConfig } = await import('./configManager.js');
+                  return (await loadConfig()).aiMarkAllImages === true;
+                } catch (configError) {
+                  // [2026-11-04] Said out loud: a failed read used to look exactly like the option being off.
+                  this.log(`   ⚠️ [AI 마크] 설정을 읽지 못해 "AI 활용 체크하기"를 꺼진 것으로 봅니다: ${(configError as Error)?.message || configError}`);
+                  return false;
+                }
+              })();
+              this.log(aiMarkAllImages
+                ? '🤖 [AI 마크] "AI 활용 체크하기" ON — 모든 이미지 마크 활성화 중...'
+                : '🤖 [AI 마크] AI 생성 이미지 마크 일괄 활성화 중...');
+              const aiMarkResults: AiImageMarkResult[] = [];
+              for (let i = 0; i < imageComponents.length; i++) {
+                const compImg = await imageComponents[i].$('img');
+                if (!compImg) continue;
+
+                // [2026-08-17] 판정 단일화 — 삽입 단계가 남긴 data-img-ai('1'/'0')가 1차 근거.
+                //   '1' = AI 엔진 허용목록(imageProvenance)으로 판정된 AI 생성 이미지만.
+                //   태그가 없으면(구버전 삽입/사용자 직접 삽입) provider 허용목록으로 2차 판정,
+                //   그래도 불명이면 마크하지 않는다 — 실사진 오탐은 구조적으로 불가(opt-in).
+                const attrs = await compImg.evaluate((el: HTMLImageElement) => ({
+                  ai: el.getAttribute('data-img-ai') || '',
+                  provider: el.getAttribute('data-img-provider') || '',
+                })).catch(() => ({ ai: '', provider: '' }));
+                // [2026-09-17] DOM 속성은 업로드 완료 재렌더에서 사라진다(라이브: AI 6장 전부 ai=없음).
+                //   삽입 단계가 같은 판정을 장부(위치=문서 순서)에도 적어 두므로 그것이 1차 근거다.
+                const ledger = readImageProvenance(this, i);
+                // [2026-09-29] Card toggle (자동/켬/끔) rides in the ledger and outranks the global checkbox.
+                const isAiTarget = resolveAiMarkTarget({
+                  aiMarkAllImages,
+                  ledger,
+                  attrAi: attrs.ai,
+                  attrProvider: attrs.provider,
+                });
+                if (!isAiTarget) {
+                  this.log(`   ⏭️ [AI 마크] 비AI 이미지(장부=${ledger ? ledger.ai : '없음'}, 카드=${ledger?.override || '자동'}, ai=${attrs.ai || '없음'}, provider=${ledger?.provider || attrs.provider || '없음'}) → 마크 스킵`);
+                  continue;
+                }
+
+                const readIframeOffset = () => page.evaluate(() => {
+                  const iframe = document.querySelector('iframe#mainFrame') as HTMLIFrameElement;
+                  if (iframe) { const r = iframe.getBoundingClientRect(); return { x: r.x, y: r.y }; }
+                  return { x: 0, y: 0 };
+                }).catch(() => ({ x: 0, y: 0 }));
+
+                // [2026-11-04] 고객 제보 "AI 활용 체크를 켜도 체크가 안 된다" + 사장님 "경고로 알려도 사용자가 뭘 하겠니,
+                //   성공이 되게 해야지". 이미지마다 최대 3번: 다시 스크롤 · 클릭 → 버튼 최대 2초 대기 → 상태를 새로 읽어
+                //   꺼져 있을 때만 누름(켜진 걸 끄지 않음) → 켜짐 확인(aiImageMark.markAiImageWithRetries). 좌표 클릭 그대로.
+                const aiMarkResult = await markAiImageWithRetries({
+                  component: imageComponents[i],
+                  frame,
+                  delay: (ms) => this.delay(ms),
+                  selectImage: async () => {
+                    const compCoords = await compImg.evaluate((el: HTMLImageElement) => {
+                      el.scrollIntoView({ block: 'center', behavior: 'instant' as any });
+                      void el.offsetHeight;
+                      const rect = el.getBoundingClientRect();
+                      return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2, found: true };
+                    }).catch(() => ({ x: 0, y: 0, found: false }));
+                    if (!compCoords.found) return false;
+                    const iframeOff = await readIframeOffset();
+                    await page.mouse.click(iframeOff.x + compCoords.x, iframeOff.y + compCoords.y);
+                    return true;
+                  },
+                  // [2026-11-04 live] The toggle (20×12 px) sits below the image, often off screen: a coordinate click
+                  //   computed after scrolling only the image hit something else (elementFromPoint ≠ toggle), so the
+                  //   mark never changed. Scroll the toggle itself into view; click it where it is the topmost element,
+                  //   otherwise click it directly (both flip se-is-selected on the toggle — measured).
+                  clickButton: async (control) => {
+                    const point = await control.button.evaluate((btn: Element) => {
+                      btn.scrollIntoView({ block: 'center', behavior: 'instant' as ScrollBehavior });
+                      const rect = btn.getBoundingClientRect();
+                      const x = rect.left + rect.width / 2;
+                      const y = rect.top + rect.height / 2;
+                      const top = document.elementFromPoint(x, y);
+                      return { x, y, topmost: !!top && (top === btn || btn.contains(top)) };
+                    }).catch(() => ({ x: 0, y: 0, topmost: false }));
+                    if (point.topmost) {
+                      const iframeOff = await readIframeOffset();
+                      await page.mouse.click(iframeOff.x + point.x, iframeOff.y + point.y);
+                    } else {
+                      await control.button.evaluate((btn: Element) => (btn as HTMLElement).click()).catch(() => undefined);
+                    }
+                  },
+                  onRetry: (attempt, last) => this.log(`   🔁 [AI 마크] ${i + 1}번째 이미지 다시 시도 ${attempt}/3 (${last === 'button-missing' ? '버튼이 늦게 뜸' : '켜짐 미확인'})`),
+                });
+                aiMarkResults.push(aiMarkResult);
+                if (aiMarkResult === 'button-missing' || aiMarkResult === 'unconfirmed') {
+                  this.log(`   ⚠️ [AI 마크] ${i + 1}번째 이미지: 3번 시도했지만 AI 활용 표시를 켜지 못했습니다(${aiMarkResult})`);
+                }
+              }
+              this.log(`   ${summarizeAiMarkResults(aiMarkResults)}`);
+            } catch (aiMarkError) {
+              this.log(`   ⚠️ [AI 마크] AI 마크 활성화 오류 (무시): ${(aiMarkError as Error).message}`);
+            }
+          } else {
+            this.log('   ℹ️ 에디터 내 이미지 컴포넌트 없음 → 대표이미지/AI 마크 설정 건너뜀');
+          }
+        } catch (v11Error) {
+          this.log(`   ⚠️ [대표사진 v11] 오류 (발행은 계속): ${(v11Error as Error).message}`);
+        }
+      };
+
       if (mode === 'draft') {
         this.log('🔄 블로그 글 임시저장 중...');
+        await prepareEditorImagesForCommit(frame);
+        await frame.evaluate(() => window.scrollTo(0, 0)).catch(() => undefined);
         // 임시저장 버튼 찾기 (제공된 셀렉터 사용)
         const saveButtonSelectors = this.SAVE_BUTTON_SELECTORS;
 
@@ -3042,180 +3223,7 @@ export class NaverBlogAutomation {
         }
 
         if (publishButton) {
-          // ✅ [2026-03-26 v11] 발행 모달 열기 전 대표이미지 설정 + AI 마크 일괄 활성화
-          // button.se-set-rep-image-button 직접 클릭 + button.se-set-ai-mark-button-toggle 일괄 활성화
-          try {
-            this.log('🖼️ [대표사진 v11] 에디터 내 대표이미지 직접 설정 + AI 마크 활성화 중...');
-            const page = this.ensurePage();
-
-            // Step 1: 에디터 내 모든 이미지 컴포넌트 수집
-            const imageComponents = await frame.$$('.se-component.se-image, .se-component.se-imageStrip');
-            this.log(`   📊 에디터 내 이미지 컴포넌트: ${imageComponents.length}개`);
-
-            if (imageComponents.length > 0) {
-              // Step 2: 첫 번째 이미지 컴포넌트 클릭하여 활성화 (대표사진 후보)
-              const targetComponent = imageComponents[0];
-              const imgElement = await targetComponent.$('img');
-              if (imgElement) {
-                const imgCoords = await imgElement.evaluate((el: HTMLImageElement) => {
-                  el.scrollIntoView({ block: 'center', behavior: 'instant' as any });
-                  void el.offsetHeight;
-                  const rect = el.getBoundingClientRect();
-                  return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2, found: true };
-                }).catch(() => ({ x: 0, y: 0, found: false }));
-
-                if (imgCoords.found) {
-                  await this.delay(300);
-                  const iframeOffset = await page.evaluate(() => {
-                    const iframe = document.querySelector('iframe#mainFrame') as HTMLIFrameElement;
-                    if (iframe) { const r = iframe.getBoundingClientRect(); return { x: r.x, y: r.y }; }
-                    return { x: 0, y: 0 };
-                  }).catch(() => ({ x: 0, y: 0 }));
-
-                  const clickX = iframeOffset.x + imgCoords.x;
-                  const clickY = iframeOffset.y + imgCoords.y;
-                  await page.mouse.click(clickX, clickY);
-                  await this.delay(500);
-                  await page.mouse.click(clickX, clickY);
-                  await this.delay(800);
-
-                  // Step 3: 대표사진 버튼 클릭 (se-set-rep-image-button)
-                  const repBtn = await frame.$('button.se-set-rep-image-button').catch(() => null);
-                  if (repBtn) {
-                    const isAlreadySelected = await repBtn.evaluate((btn: HTMLButtonElement) =>
-                      btn.classList.contains('se-is-selected')
-                    ).catch(() => false);
-
-                    if (isAlreadySelected) {
-                      this.log('   ✅ [대표사진 v11] 첫 번째 이미지가 이미 대표로 설정됨');
-                    } else {
-                      const repBtnCoords = await repBtn.evaluate((btn: HTMLButtonElement) => {
-                        const rect = btn.getBoundingClientRect();
-                        return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
-                      }).catch(() => ({ x: 0, y: 0 }));
-                      await page.mouse.click(iframeOffset.x + repBtnCoords.x, iframeOffset.y + repBtnCoords.y);
-                      await this.delay(500);
-
-                      const verified = await frame.$eval('button.se-set-rep-image-button',
-                        (btn: Element) => btn.classList.contains('se-is-selected')
-                      ).catch(() => false);
-                      this.log(verified
-                        ? '   ✅ [대표사진 v11] 첫 번째 이미지 대표 설정 성공 (se-is-selected 확인)'
-                        : '   ⚠️ [대표사진 v11] 대표 버튼 클릭했으나 se-is-selected 미확인');
-                    }
-                  } else {
-                    this.log('   ⚠️ [대표사진 v11] 대표사진 버튼 미발견 — 기본 선택 유지');
-                  }
-                }
-              }
-
-              // Step 4: AI 활용 마크 일괄 활성화 (AI 생성 이미지만, 수집 이미지 제외)
-              try {
-                // [2026-09-22 사장님] 이미지 관리 탭 "AI 활용 체크하기" — 켜져 있으면 판정을 건너뛰고
-                //   모든 이미지를 마크한다. 사용자가 직접 켠 옵트인이라 실사진 오탐 걱정은 사용자 몫이다.
-                const aiMarkAllImages = await (async (): Promise<boolean> => {
-                  try {
-                    const { loadConfig } = await import('./configManager.js');
-                    return (await loadConfig()).aiMarkAllImages === true;
-                  } catch (configError) {
-                    // [2026-11-04] Said out loud: a failed read used to look exactly like the option being off.
-                    this.log(`   ⚠️ [AI 마크] 설정을 읽지 못해 "AI 활용 체크하기"를 꺼진 것으로 봅니다: ${(configError as Error)?.message || configError}`);
-                    return false;
-                  }
-                })();
-                this.log(aiMarkAllImages
-                  ? '🤖 [AI 마크] "AI 활용 체크하기" ON — 모든 이미지 마크 활성화 중...'
-                  : '🤖 [AI 마크] AI 생성 이미지 마크 일괄 활성화 중...');
-                const aiMarkResults: AiImageMarkResult[] = [];
-                for (let i = 0; i < imageComponents.length; i++) {
-                  const compImg = await imageComponents[i].$('img');
-                  if (!compImg) continue;
-
-                  // [2026-08-17] 판정 단일화 — 삽입 단계가 남긴 data-img-ai('1'/'0')가 1차 근거.
-                  //   '1' = AI 엔진 허용목록(imageProvenance)으로 판정된 AI 생성 이미지만.
-                  //   태그가 없으면(구버전 삽입/사용자 직접 삽입) provider 허용목록으로 2차 판정,
-                  //   그래도 불명이면 마크하지 않는다 — 실사진 오탐은 구조적으로 불가(opt-in).
-                  const attrs = await compImg.evaluate((el: HTMLImageElement) => ({
-                    ai: el.getAttribute('data-img-ai') || '',
-                    provider: el.getAttribute('data-img-provider') || '',
-                  })).catch(() => ({ ai: '', provider: '' }));
-                  // [2026-09-17] DOM 속성은 업로드 완료 재렌더에서 사라진다(라이브: AI 6장 전부 ai=없음).
-                  //   삽입 단계가 같은 판정을 장부(위치=문서 순서)에도 적어 두므로 그것이 1차 근거다.
-                  const ledger = readImageProvenance(this, i);
-                  // [2026-09-29] Card toggle (자동/켬/끔) rides in the ledger and outranks the global checkbox.
-                  const isAiTarget = resolveAiMarkTarget({
-                    aiMarkAllImages,
-                    ledger,
-                    attrAi: attrs.ai,
-                    attrProvider: attrs.provider,
-                  });
-                  if (!isAiTarget) {
-                    this.log(`   ⏭️ [AI 마크] 비AI 이미지(장부=${ledger ? ledger.ai : '없음'}, 카드=${ledger?.override || '자동'}, ai=${attrs.ai || '없음'}, provider=${ledger?.provider || attrs.provider || '없음'}) → 마크 스킵`);
-                    continue;
-                  }
-
-                  const readIframeOffset = () => page.evaluate(() => {
-                    const iframe = document.querySelector('iframe#mainFrame') as HTMLIFrameElement;
-                    if (iframe) { const r = iframe.getBoundingClientRect(); return { x: r.x, y: r.y }; }
-                    return { x: 0, y: 0 };
-                  }).catch(() => ({ x: 0, y: 0 }));
-
-                  // [2026-11-04] 고객 제보 "AI 활용 체크를 켜도 체크가 안 된다" + 사장님 "경고로 알려도 사용자가 뭘 하겠니,
-                  //   성공이 되게 해야지". 이미지마다 최대 3번: 다시 스크롤 · 클릭 → 버튼 최대 2초 대기 → 상태를 새로 읽어
-                  //   꺼져 있을 때만 누름(켜진 걸 끄지 않음) → 켜짐 확인(aiImageMark.markAiImageWithRetries). 좌표 클릭 그대로.
-                  const aiMarkResult = await markAiImageWithRetries({
-                    component: imageComponents[i],
-                    frame,
-                    delay: (ms) => this.delay(ms),
-                    selectImage: async () => {
-                      const compCoords = await compImg.evaluate((el: HTMLImageElement) => {
-                        el.scrollIntoView({ block: 'center', behavior: 'instant' as any });
-                        void el.offsetHeight;
-                        const rect = el.getBoundingClientRect();
-                        return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2, found: true };
-                      }).catch(() => ({ x: 0, y: 0, found: false }));
-                      if (!compCoords.found) return false;
-                      const iframeOff = await readIframeOffset();
-                      await page.mouse.click(iframeOff.x + compCoords.x, iframeOff.y + compCoords.y);
-                      return true;
-                    },
-                    // [2026-11-04 live] The toggle (20×12 px) sits below the image, often off screen: a coordinate click
-                    //   computed after scrolling only the image hit something else (elementFromPoint ≠ toggle), so the
-                    //   mark never changed. Scroll the toggle itself into view; click it where it is the topmost element,
-                    //   otherwise click it directly (both flip se-is-selected on the toggle — measured).
-                    clickButton: async (control) => {
-                      const point = await control.button.evaluate((btn: Element) => {
-                        btn.scrollIntoView({ block: 'center', behavior: 'instant' as ScrollBehavior });
-                        const rect = btn.getBoundingClientRect();
-                        const x = rect.left + rect.width / 2;
-                        const y = rect.top + rect.height / 2;
-                        const top = document.elementFromPoint(x, y);
-                        return { x, y, topmost: !!top && (top === btn || btn.contains(top)) };
-                      }).catch(() => ({ x: 0, y: 0, topmost: false }));
-                      if (point.topmost) {
-                        const iframeOff = await readIframeOffset();
-                        await page.mouse.click(iframeOff.x + point.x, iframeOff.y + point.y);
-                      } else {
-                        await control.button.evaluate((btn: Element) => (btn as HTMLElement).click()).catch(() => undefined);
-                      }
-                    },
-                    onRetry: (attempt, last) => this.log(`   🔁 [AI 마크] ${i + 1}번째 이미지 다시 시도 ${attempt}/3 (${last === 'button-missing' ? '버튼이 늦게 뜸' : '켜짐 미확인'})`),
-                  });
-                  aiMarkResults.push(aiMarkResult);
-                  if (aiMarkResult === 'button-missing' || aiMarkResult === 'unconfirmed') {
-                    this.log(`   ⚠️ [AI 마크] ${i + 1}번째 이미지: 3번 시도했지만 AI 활용 표시를 켜지 못했습니다(${aiMarkResult})`);
-                  }
-                }
-                this.log(`   ${summarizeAiMarkResults(aiMarkResults)}`);
-              } catch (aiMarkError) {
-                this.log(`   ⚠️ [AI 마크] AI 마크 활성화 오류 (무시): ${(aiMarkError as Error).message}`);
-              }
-            } else {
-              this.log('   ℹ️ 에디터 내 이미지 컴포넌트 없음 → 대표이미지/AI 마크 설정 건너뜀');
-            }
-          } catch (v11Error) {
-            this.log(`   ⚠️ [대표사진 v11] 오류 (발행은 계속): ${(v11Error as Error).message}`);
-          }
+          await prepareEditorImagesForCommit(frame);
 
           // ✅ [2026-03-04 FIX v6] 이미지 사전 클릭으로 에디터 스크롤이 변경되었으므로
           // 상단 툴바가 보이도록 스크롤을 복귀시키고 발행 버튼 핸들을 재탐색
@@ -3796,6 +3804,9 @@ export class NaverBlogAutomation {
             }
           }
         }
+
+        await prepareEditorImagesForCommit(frame);
+        await frame.evaluate(() => window.scrollTo(0, 0)).catch(() => undefined);
 
         // ✅ [2026-03-21 FIX] 예약발행 재시도 (최대 3회, 임시저장 폴백 제거)
         const MAX_SCHEDULE_RETRIES = nativeDaily ? 1 : 2;
