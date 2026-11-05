@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T15:10:46.233Z",
+ "builtAt": "2026-11-05T15:20:49.762Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -10,6 +10,38 @@
  },
  "measured": 10,
  "candidates": [
+  {
+   "keyword": "가상자산 과세 2년 유예 추진",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-05T14:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "코인 과세 2년 또 유예…잃은 돈, 3년간 세금서 빼준다",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-05T15:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003563236?sid=101"
+    },
+    {
+     "title": "[사설] 가상화폐 과세 네 번째 유예…정책 과속·번복 언제까지",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-05T15:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004679296?sid=110"
+    },
+    {
+     "title": "이형일 부총리 \"가상자산 과세 2년 유예…내년 상반기 기준 마련\"",
+     "press": "econovill.com",
+     "publishedAt": "2026-11-05T14:44:00.000Z",
+     "link": "https://www.econovill.com/news/articleView.html?idxno=756220"
+    }
+   ]
+  },
   {
    "keyword": "영국 기준금리 인상",
    "sources": [
@@ -110,7 +142,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1061,
+  "flagged": 1062,
   "matched": 498,
   "avgLeadMin": 468,
   "recent": [
