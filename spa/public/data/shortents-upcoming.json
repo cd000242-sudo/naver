@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T21:53:07.561Z",
+ "builtAt": "2026-11-05T22:03:10.447Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,23 +11,50 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "이스라엘 연정 구성",
+   "keyword": "2026년 11월 6일 운세",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
    "articles90": 8,
-   "recent20": 3,
+   "recent20": 0,
    "press": 7,
-   "firstArticleAt": "2026-11-05T20:25:00.000Z",
+   "firstArticleAt": "2026-11-05T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이스라엘 대통령 \"새 총리 후보 8일 발표\"",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-05T21:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000542046?sid=101"
+     "title": "[오늘의 운세] 2026년 11월 6일 (금) 띠별운세 '한 주의 짐을 덜어내자'",
+     "press": "dailypop.kr",
+     "publishedAt": "2026-11-05T21:36:00.000Z",
+     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103972"
     },
+    {
+     "title": "[AI] 오늘의 띠별 운세...2026.11.6(금요일)",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-05T21:30:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=67177"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 6일 별자리 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-05T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006404665?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "이스라엘 연정 구성",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-05T20:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
     {
      "title": "이스라엘 대통령 “총리 후보 8일 발표”…네타냐후 ‘실각 위기’",
      "press": "dt.co.kr",
@@ -35,74 +62,16 @@
      "link": "https://n.news.naver.com/mnews/article/029/0003057500?sid=104"
     },
     {
+     "title": "이스라엘 대통령 \"새 총리 후보 8일 발표\"",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-05T21:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000542046?sid=101"
+    },
+    {
      "title": "이스라엘 대통령 \"8일 연정 구성 맡을 총리 후보 결정\"",
      "press": "newsis.com",
      "publishedAt": "2026-11-05T21:47:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014305142?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "유럽 여객기 폭탄 위협",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-05T20:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "여객기 27대 또 폭탄 위협‥혈액원도 해킹",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-05T21:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533839?sid=104"
-    },
-    {
-     "title": "유럽 여객기 또 폭탄 위협…비상착륙·회항 '대란'",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-05T21:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001401027?sid=104"
-    },
-    {
-     "title": "\"60분 뒤 폭발한다\"...유럽 여객기 수십편 회항·비상착륙 '소동'",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-05T21:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001271851?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "장남 주진우 고소",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T21:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"골프장 간 적 없어\"‥대통령 장남, 주진우 고소",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-05T21:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533848?sid=102"
-    },
-    {
-     "title": "이 대통령 장남, 주진우 고소…\"골프장 간 적 없어\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-05T21:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001401030?sid=100"
-    },
-    {
-     "title": "[사사건건] 李대통령 장남, 주진우 명예훼손 고소 外",
-     "press": "segye.com",
-     "publishedAt": "2026-11-05T21:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004172988?sid=102"
     }
    ]
   },
@@ -139,66 +108,34 @@
    ]
   },
   {
-   "keyword": "청해부대 임무 확대",
+   "keyword": "장남 주진우 고소",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T20:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "청해부대 작전구역, 호르무즈 650km 앞까지 확대",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-05T21:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001401026?sid=100"
-    },
-    {
-     "title": "호르무즈에 더 가까이…‘항행 자유’ 임무 추가",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-05T21:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012288478?sid=100"
-    },
-    {
-     "title": "청해부대 작전구역 2배 넓힌다‥\"전쟁은 불개입\"",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-05T21:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533832?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "영국 기준금리 인상",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
+   "articles90": 5,
    "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T21:11:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-05T21:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "영국, 3년만에 금리 연 4%로 0.25%p 인상…BOE 총재 \"추가 인상도 가능\"",
-     "press": "tfmedia.co.kr",
-     "publishedAt": "2026-11-05T21:36:00.000Z",
-     "link": "https://www.tfmedia.co.kr/news/article.html?no=208673"
+     "title": "\"골프장 간 적 없어\"‥대통령 장남, 주진우 고소",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-05T21:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533848?sid=102"
     },
     {
-     "title": "英, 3년 만에 금리 인상…\"마지막 인상으로 보이지도 않아\"",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-05T21:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000542040?sid=101"
+     "title": "이 대통령 장남, 주진우 고소…\"골프장 간 적 없어\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-05T21:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001401030?sid=100"
     },
     {
-     "title": "英 3년3개월만에 금리 인상…기준금리 4% 시대",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-05T21:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005838865?sid=101"
+     "title": "[사사건건] 李대통령 장남, 주진우 명예훼손 고소 外",
+     "press": "segye.com",
+     "publishedAt": "2026-11-05T21:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004172988?sid=102"
     }
    ]
   }
@@ -206,9 +143,33 @@
  "hitRate": {
   "days": 7,
   "flagged": 1071,
-  "matched": 505,
-  "avgLeadMin": 478,
+  "matched": 509,
+  "avgLeadMin": 481,
   "recent": [
+   {
+    "keyword": "뉴욕증시 급등",
+    "hitKeyword": "뉴욕증시 하루만에 급락",
+    "hitAt": "2026-11-06T07:00:00+09:00",
+    "leadMin": 1337
+   },
+   {
+    "keyword": "뉴욕증시 다우 급등 3%",
+    "hitKeyword": "뉴욕증시 하루만에 급락",
+    "hitAt": "2026-11-06T07:00:00+09:00",
+    "leadMin": 1317
+   },
+   {
+    "keyword": "가상자산 과세 2년 유예 추진",
+    "hitKeyword": "코인 소득 과세 유예",
+    "hitAt": "2026-11-06T07:00:00+09:00",
+    "leadMin": 399
+   },
+   {
+    "keyword": "뉴욕증시 급락",
+    "hitKeyword": "뉴욕증시 하루만에 급락",
+    "hitAt": "2026-11-06T07:00:00+09:00",
+    "leadMin": 138
+   },
    {
     "keyword": "데이터센터",
     "hitKeyword": "AI 데이터센터 규제 파장",
@@ -244,30 +205,6 @@
     "hitKeyword": "서울 아파트값 연속 상승",
     "hitAt": "2026-11-06T06:00:00+09:00",
     "leadMin": 816
-   },
-   {
-    "keyword": "나스닥",
-    "hitKeyword": "나스닥 조정국면 진입",
-    "hitAt": "2026-11-06T06:00:00+09:00",
-    "leadMin": 289
-   },
-   {
-    "keyword": "카카오 3분기 실적 증가",
-    "hitKeyword": "카카오 인적분할 연기",
-    "hitAt": "2026-11-06T00:00:00+09:00",
-    "leadMin": 917
-   },
-   {
-    "keyword": "카카오 3분기 영업익 2403억 증가",
-    "hitKeyword": "카카오 인적분할 연기",
-    "hitAt": "2026-11-06T00:00:00+09:00",
-    "leadMin": 897
-   },
-   {
-    "keyword": "카카오 3분기 영업익 2403억↑",
-    "hitKeyword": "카카오 인적분할 연기",
-    "hitAt": "2026-11-06T00:00:00+09:00",
-    "leadMin": 877
    }
   ]
  }
