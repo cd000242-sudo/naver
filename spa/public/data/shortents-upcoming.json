@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T12:49:41.168Z",
+ "builtAt": "2026-11-05T12:59:45.151Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,70 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 16,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "장남, 주진우 고소",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 33,
-   "recent20": 7,
-   "press": 31,
-   "firstArticleAt": "2026-11-05T11:27:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "주진우, 李대통령 장남 고소에 \"맞고발하겠다\"",
-     "press": "viewsnnews.com",
-     "publishedAt": "2026-11-05T12:48:00.000Z",
-     "link": "https://www.viewsnnews.com/article?q=239525"
-    },
-    {
-     "title": "李대통령 장남, 주진우 고소…“한산대CC에 간 사실 없다”",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-05T12:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002393468?sid=100"
-    },
-    {
-     "title": "李대통령 장남, 주진우 명예훼손 고소…“골프장 간 적 없다”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-05T12:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003760416?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "영국 기준금리 인상",
-   "sources": [
-    "nate",
-    "daum"
-   ],
-   "articles90": 18,
-   "recent20": 4,
-   "press": 14,
-   "firstArticleAt": "2026-11-05T12:00:00.000Z",
+   "articles90": 37,
+   "recent20": 8,
+   "press": 35,
+   "firstArticleAt": "2026-11-05T11:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "영국, 기준금리 4%로 3년여 만에 ↑…추가 인상 가능성(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-05T12:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009273248?sid=104"
+     "title": "李대통령 장남, 주진우 명예훼손 고소…“골프장 간 적도 없다”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-05T12:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004679280?sid=100"
     },
     {
-     "title": "영국, 3년여 만에 기준금리 인상…연 4%로 0.25%p↑",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-05T12:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012288278?sid=104"
+     "title": "이 대통령 장남, 주진우 명예훼손 고소···“해군 기지 골프장 간 적 ...",
+     "press": "weekly.khan.co.kr",
+     "publishedAt": "2026-11-05T12:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/033/0000053180?sid=102"
     },
     {
-     "title": "영국, 3년 만에 기준금리 인상…0.25%p 올린 4.0%",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T12:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014304989?sid=104"
+     "title": "李대통령 장남, '황제 골프 의혹 제기' 주진우 의원 고소",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-05T12:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005838849?sid=102"
     }
    ]
   },
@@ -80,30 +47,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-05T11:20:00.000Z",
+   "articles90": 12,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-05T11:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "尹 내란 2심 내년 1월 선고…\"각성 위한 계엄\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-05T12:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000923331?sid=102"
+    },
+    {
+     "title": "尹 “계엄, 헌법 권한…조작기소 주장에 나라 위기” 내란 2심 1월 선고",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-05T12:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012288293?sid=102"
+    },
     {
      "title": "尹 \"'조작기소 주장' 권력자들 한둘 아냐\"…내란 2심 1월 26일 선고",
      "press": "news.tvchosun.com",
      "publishedAt": "2026-11-05T12:35:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/448/0000649300?sid=102"
-    },
+    }
+   ]
+  },
+  {
+   "keyword": "리노, 내년 1분기 병역 의무 이행",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-05T11:43:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
     {
-     "title": "'내란 우두머리' 尹, 항소심서 79분간 무죄 주장…현 정부·여당에도 날...",
+     "title": "스트레이 키즈 리노, 내년 1분기 군 입대 발표…팀 내 첫 주자",
      "press": "news1.kr",
-     "publishedAt": "2026-11-05T12:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009273242?sid=102"
+     "publishedAt": "2026-11-05T12:56:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009273255"
     },
     {
-     "title": "尹 '내란 우두머리' 2심 내년 1월 26일 선고",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-05T12:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000923319?sid=102"
+     "title": "스트레이 키즈 리노, 내년 1분기 병역 의무 돌입",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-05T12:12:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=779370"
+    },
+    {
+     "title": "스트레이 키즈, 내년 1분기 군입대 스타트…첫 주자는 리노[공식]",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-05T12:08:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1793878660530438007"
     }
    ]
   },
@@ -112,10 +111,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-05T11:20:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-05T11:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -140,34 +139,35 @@
    ]
   },
   {
-   "keyword": "이유리 배우",
+   "keyword": "이세영",
    "sources": [
-    "daum"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 7,
+   "articles90": 5,
    "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-05T11:30:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-05T11:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'편스토랑' 이유리, 태권도 대회 금메달→홈쇼핑 2년만 총 매출 700억 근...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-05T12:38:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109762675818"
-    },
-    {
-     "title": "이유리, 홈쇼핑 2년 만에 '총 매출 700억' 대박…\"제 이름 달고\" (편스토...",
+     "title": "이세영, '재혼 황후' 드레스핏 위해 술까지 끊었다…\"근손실 너무 열받...",
      "press": "xportsnews.com",
-     "publishedAt": "2026-11-05T12:29:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002077260"
+     "publishedAt": "2026-11-05T12:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002077264"
     },
     {
-     "title": "이유리 \"미니멀리스트 추구\"…이사한 집 공개에 '깜짝'",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-05T12:20:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009273239"
+     "title": "이세영, 라스타 드레스핏 위해 술 끊었다…\"단백질 열심히 챙겨\"",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-05T12:24:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16269351"
+    },
+    {
+     "title": "이세영, '재혼 황후' 로판 비주얼 난리 날 만했네…스태프들도 \"너무 예...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-05T12:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002077258"
     }
    ]
   },
@@ -176,10 +176,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 4,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-05T11:23:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-05T11:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -202,44 +202,11 @@
      "link": "https://www.businesspost.co.kr/BP?command=article_view&num=451324"
     }
    ]
-  },
-  {
-   "keyword": "이세영",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T11:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이세영, 라스타 드레스핏 위해 술 끊었다…\"단백질 열심히 챙겨\"",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-05T12:24:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16269351"
-    },
-    {
-     "title": "이세영, '재혼 황후' 로판 비주얼 난리 날 만했네…스태프들도 \"너무 예...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-05T12:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002077258"
-    },
-    {
-     "title": "‘재혼 황후’ 이세영, 드레스핏 위해 금주…“근손실 열받아”",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-05T12:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005759810"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1047,
+  "flagged": 1048,
   "matched": 476,
   "avgLeadMin": 441,
   "recent": [
