@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T15:31:00.890Z",
+ "builtAt": "2026-11-05T15:41:06.266Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,9 +11,41 @@
  "measured": 14,
  "candidates": [
   {
-   "keyword": "가상자산 과세 2년 유예 추진",
+   "keyword": "조작기소 특검법 본회의 상정",
    "sources": [
     "nate"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-05T14:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국힘, '조작기소 특검법'에 전면전…필리버스터·장외투쟁 총동원",
+     "press": "dkilbo.com",
+     "publishedAt": "2026-11-05T15:40:00.000Z",
+     "link": "https://www.dkilbo.com/news/articleView.html?idxno=559838"
+    },
+    {
+     "title": "‘죽은 법’ 부활시킨 조작기소 특검…수사권 뺏긴 검사에 수사권",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-05T15:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003563258?sid=102"
+    },
+    {
+     "title": "여야 민생 뒷전 '조작기소 특검법' 극한대치",
+     "press": "ksilbo.co.kr",
+     "publishedAt": "2026-11-05T15:04:00.000Z",
+     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1071739"
+    }
+   ]
+  },
+  {
+   "keyword": "가상자산 과세 2년 유예 추진",
+   "sources": [
+    "signal.bz"
    ],
    "articles90": 6,
    "recent20": 0,
@@ -39,71 +71,6 @@
      "press": "econovill.com",
      "publishedAt": "2026-11-05T14:44:00.000Z",
      "link": "https://www.econovill.com/news/articleView.html?idxno=756220"
-    }
-   ]
-  },
-  {
-   "keyword": "영국 기준금리 인상",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T14:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "잉글랜드은행, 기준금리 3.75%→4%로 25bp인상(상보)",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-05T14:44:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443323"
-    },
-    {
-     "title": "미 달러화 강보합…英 추가 금리 인상 가능성에 파운드 보합권 회복",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-05T14:40:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443322"
-    },
-    {
-     "title": "영국도 기준금리 인상 … 3년만에 0.25%P 올려",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-05T14:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005759830?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "쿠칭시티",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T14:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "ACL2 H조 강원FC, 쿠칭시티에 0-2 패…승점 동률에도 조 최하위",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-05T14:34:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16269425"
-    },
-    {
-     "title": "강원, 쿠칭 시티 원정서 0-2 패배 4위 추락…조 2위 놓고 세 팀 ‘대혼전...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-05T14:16:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/468/0001278579"
-    },
-    {
-     "title": "[AFC축구 전적] 쿠칭시티 2-0 강원",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T14:12:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/001/0016425186"
     }
    ]
   }
