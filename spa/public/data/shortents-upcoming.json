@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T14:50:38.131Z",
+ "builtAt": "2026-11-05T15:00:41.405Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,7 +16,7 @@
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 1,
    "press": 5,
    "firstArticleAt": "2026-11-05T14:06:00.000Z",
    "exclusive": false,
@@ -43,14 +43,14 @@
    ]
   },
   {
-   "keyword": "주진우 명예훼손 고소",
+   "keyword": "이 대통령 장남, 주진우 고소",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T13:29:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-05T13:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -81,7 +81,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-05T14:12:00.000Z",
    "exclusive": false,
