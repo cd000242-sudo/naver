@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T07:04:04.901Z",
+ "builtAt": "2026-11-05T07:14:08.219Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,62 @@
    "sources": [
     "daum"
    ],
-   "articles90": 52,
-   "recent20": 27,
-   "press": 31,
+   "articles90": 61,
+   "recent20": 18,
+   "press": 38,
    "firstArticleAt": "2026-11-05T06:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김태규 제명 촉구 결의안, 與주도로 본회의 의결…국민의힘 표결 불참",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-05T07:00:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=779327"
-    },
-    {
-     "title": "[속보] ‘전두환 내란 부정’ 김태규 제명촉구결의안, 국회 통과",
+     "title": "김태규 제명 촉구 결의안, 민주당 주도로 본회의 의결",
      "press": "seoul.co.kr",
-     "publishedAt": "2026-11-05T06:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003696176?sid=100"
+     "publishedAt": "2026-11-05T07:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003696185?sid=100"
     },
     {
-     "title": "김태규 의원 제명 촉구 결의안 표결하는 민주당 김민석 대표",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T06:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016424591?sid=100"
+     "title": "‘전두환·尹 내란 아니다’ 김태규 제명 촉구안, 與 주도로 국회 통과",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-05T07:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004007975?sid=100"
+    },
+    {
+     "title": "[속보] '전두환 내란부정' 김태규 제명촉구결의안 與주도 국회 통과",
+     "press": "tjb.co.kr",
+     "publishedAt": "2026-11-05T07:10:00.000Z",
+     "link": "https://www.tjb.co.kr/news05/bodo/view/id/105730"
+    }
+   ]
+  },
+  {
+   "keyword": "오동운 공수처장 구형",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 35,
+   "recent20": 8,
+   "press": 31,
+   "firstArticleAt": "2026-11-05T05:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "특검, ‘제 식구 봐주기’ 오동운 공수처장에 징역 1년 구형",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-05T07:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012288018?sid=102"
+    },
+    {
+     "title": "'수사외압 의혹' 오동운 공수처장 징역 1년 구형…특검 \"권력형 범죄 수...",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-05T07:08:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=623260"
+    },
+    {
+     "title": "특검, '제식구 감싸기 의혹' 오동운 공수처장에 징역 1년 구형",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-05T07:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000160483?sid=102"
     }
    ]
   },
@@ -47,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 29,
-   "recent20": 3,
-   "press": 29,
-   "firstArticleAt": "2026-11-05T05:36:00.000Z",
+   "articles90": 24,
+   "recent20": 0,
+   "press": 24,
+   "firstArticleAt": "2026-11-05T05:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -61,48 +93,16 @@
      "link": "http://www.finomy.com/news/articleView.html?idxno=265770"
     },
     {
-     "title": "LG화학, 3분기 영업익 17% 감소 … 배터리가 석화 부진 방어",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-05T06:46:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/05/2026110500261.html"
-    },
-    {
      "title": "LG화학, 3분기 영업익 5612억⋯석화 적자전환에 17%↓",
      "press": "inews24.com",
      "publishedAt": "2026-11-05T06:46:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/031/0001072588?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "오동운 공수처장 구형",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 31,
-   "recent20": 10,
-   "press": 27,
-   "firstArticleAt": "2026-11-05T05:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "특검, '채상병 특검 직무유기' 오동운 공수처장 징역 1년 구형",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-05T07:00:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4116958"
     },
     {
-     "title": "특검, 오동운 공수처장 징역 1년 구형...'제 식구 감싸기' 혐의",
-     "press": "wikileaks-kr.org",
-     "publishedAt": "2026-11-05T06:58:00.000Z",
-     "link": "https://www.wikileaks-kr.org/news/articleView.html?idxno=194249"
-    },
-    {
-     "title": "특검, 오동운 공수처장 징역 1년 구형…\"윤 친분 검사 감싸기\"",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-05T06:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000549157?sid=102"
+     "title": "LG화학, 3분기 영업익 17% 감소 … 배터리가 석화 부진 방어",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-05T06:46:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/05/2026110500261.html"
     }
    ]
   },
@@ -112,13 +112,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 31,
-   "recent20": 1,
-   "press": 25,
-   "firstArticleAt": "2026-11-05T05:36:00.000Z",
+   "articles90": 27,
+   "recent20": 2,
+   "press": 21,
+   "firstArticleAt": "2026-11-05T05:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "조응천 “美 블루쓰나미 앞 우리 대통령은 ‘키보드워리어’”",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-05T07:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002830633?sid=100"
+    },
     {
      "title": "이 대통령 \"성장 방식 대전환 필요…국민 모두 성장 주체돼야\"",
      "press": "yonhapnewstv.co.kr",
@@ -130,12 +136,6 @@
      "press": "korea.kr",
      "publishedAt": "2026-11-05T06:41:00.000Z",
      "link": "https://www.korea.kr/news/policyNewsView.do?newsId=148975118&call_from=naver_news"
-    },
-    {
-     "title": "장동혁 “李가 자랑하는 매물 급증·경매 증가는 국민 고통…대통령 마...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-05T06:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005759565?sid=100"
     }
    ]
   },
@@ -144,13 +144,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 13,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-05T05:38:00.000Z",
+   "articles90": 12,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-05T05:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "KIA 투수 곽도규, 대퇴부 부상으로 APBC 대표팀 낙마",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T07:03:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/003/0014304475"
+    },
     {
      "title": "APBC 출격 앞두고 줄부상…곽도규 낙마에 마운드 초비상",
      "press": "munhwa.com",
@@ -162,12 +168,6 @@
      "press": "sportsworldi.com",
      "publishedAt": "2026-11-05T06:48:00.000Z",
      "link": "https://m.sports.naver.com/kbaseball/article/396/0000760141"
-    },
-    {
-     "title": "[오피셜]“한 명만 더 다쳐도 큰일” APBC 대표팀 부상 비상…곽도규마...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-05T06:26:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/445/0000486769"
     }
    ]
   },
@@ -176,10 +176,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-05T05:38:00.000Z",
+   "articles90": 11,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-05T05:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -204,17 +204,55 @@
    ]
   },
   {
+   "keyword": "경제",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 7,
+   "press": 7,
+   "firstArticleAt": "2026-11-05T07:08:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "글로벌 경제, AI 투자가 성장 모멘텀 유지할 수 있느냐에 달렸다 [美중간...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-05T07:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005600093?sid=104"
+    },
+    {
+     "title": "인천시 지역경제 이끈 기업인 6명·우수기업 73곳 선정…‘강소기업 육...",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-05T07:12:00.000Z",
+     "link": "https://www.viva100.com/article/20261105501006"
+    },
+    {
+     "title": "농협경제지주, 수확철 농촌 일손돕기 릴레이 전개",
+     "press": "industrynews.co.kr",
+     "publishedAt": "2026-11-05T07:12:00.000Z",
+     "link": "https://www.industrynews.co.kr/news/articleView.html?idxno=88964"
+    }
+   ]
+  },
+  {
    "keyword": "오세훈 시장, 비야케 잉겔스 전시 관람",
    "sources": [
     "nate"
    ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 4,
+   "articles90": 10,
+   "recent20": 1,
+   "press": 5,
    "firstArticleAt": "2026-11-05T05:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“한국은 지금 르네상스”⋯세계적 건축가 비야케 잉겔스, 서울서 첫 기...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-05T07:06:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2644711"
+    },
     {
      "title": "[포토] 덴마크 건축그룹 BIG 전시 투어하는 오세훈 시장",
      "press": "asiatoday.co.kr",
@@ -226,44 +264,6 @@
      "press": "asiatoday.co.kr",
      "publishedAt": "2026-11-05T06:50:00.000Z",
      "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261105010002181"
-    },
-    {
-     "title": "덴마크 건축그룹 BIG 머티미얼리즘 전시 관람하는 오세훈 시장",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T06:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014304275?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "jtbc",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T05:37:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "CJ ENM, 보상금 악재에도 흑자…JTBC 경영난에 반사이익",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-05T07:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005350723?sid=103"
-    },
-    {
-     "title": "JTBC, 경영권 매각 본입찰 내년 1월로… 새 주인 찾기 해 넘긴다",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-05T06:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202843?sid=101"
-    },
-    {
-     "title": "[컨콜]티빙, 3분기 영업손실 72억…JTBC 영향으로 광고 매출 3% 반영",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-05T05:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005437129?sid=105"
     }
    ]
   },
@@ -301,34 +301,34 @@
    ]
   },
   {
-   "keyword": "경제",
+   "keyword": "jtbc",
    "sources": [
     "google"
    ],
-   "articles90": 5,
-   "recent20": 5,
+   "articles90": 3,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-05T07:00:00.000Z",
+   "firstArticleAt": "2026-11-05T05:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "농협 축산경제, 전 부서 릴레이 농촌 일손돕기 실시",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-05T07:02:00.000Z",
-     "link": "https://www.ajunews.com/view/20261105155841560"
-    },
-    {
-     "title": "브리핑 하는 이형일 부총리 겸 재정경제부 장관",
-     "press": "nocutnews.co.kr",
+     "title": "CJ ENM, 보상금 악재에도 흑자…JTBC 경영난에 반사이익",
+     "press": "hankyung.com",
      "publishedAt": "2026-11-05T07:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004206926?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/015/0005350723?sid=103"
     },
     {
-     "title": "신용한 지사, 공항 성장 넘어 충북 경제 도약으로...청주공항 중심 관광...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-05T07:00:00.000Z",
-     "link": "https://www.ajunews.com/view/20261105154932503"
+     "title": "JTBC, 경영권 매각 본입찰 내년 1월로… 새 주인 찾기 해 넘긴다",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-05T06:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202843?sid=101"
+    },
+    {
+     "title": "[컨콜]티빙, 3분기 영업손실 72억…JTBC 영향으로 광고 매출 3% 반영",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-05T05:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005437129?sid=105"
     }
    ]
   },
