@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T02:11:45.861Z",
+ "builtAt": "2026-11-05T02:21:49.577Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,130 +11,162 @@
  "measured": 28,
  "candidates": [
   {
-   "keyword": "코스피 매도 사이드카 발동",
+   "keyword": "코스피 매도 사이드카",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 80,
+   "recent20": 4,
+   "press": 71,
+   "firstArticleAt": "2026-11-05T01:19:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[속보] 코스피 5500선 붕괴, 5400선도 위태...매도 사이드카 발동",
+     "press": "pennmike.com",
+     "publishedAt": "2026-11-05T02:18:00.000Z",
+     "link": "https://www.pennmike.com/news/articleView.html?idxno=131056"
+    },
+    {
+     "title": "코스피, 美 데이터센터 규제 우려에 장중 4%↓…삼전닉스 6~7%↓",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-05T02:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016423586?sid=101"
+    },
+    {
+     "title": "[Invest]'데이터센터 이제 안 짓나?' 美 블루 웨이브에 코스피 급락",
+     "press": "investchosun.com",
+     "publishedAt": "2026-11-05T02:14:00.000Z",
+     "link": "https://www.investchosun.com/site/data/html_dir/2026/11/05/2026110580071.html"
+    }
+   ]
+  },
+  {
+   "keyword": "청해부대 구역 확대",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 49,
+   "recent20": 9,
+   "press": 43,
+   "firstArticleAt": "2026-11-05T00:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "청해부대 작전구역, 호르무즈 인근 오만 남방까지 확대되나",
+     "press": "news.cpbc.co.kr",
+     "publishedAt": "2026-11-05T02:18:00.000Z",
+     "link": "https://news.cpbc.co.kr/article/1176842?division=NAVER"
+    },
+    {
+     "title": "민주당 “청해부대 작전구역 확대는 호르무즈 파병 아냐…국회 동의도...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-05T02:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012287850?sid=100"
+    },
+    {
+     "title": "호르무즈에 더 가까워진 청해부대",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-05T02:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005838532?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "에코프로 비엠",
    "sources": [
     "daum"
    ],
-   "articles90": 79,
-   "recent20": 13,
-   "press": 71,
-   "firstArticleAt": "2026-11-05T01:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "코스피, 美 '반도체 쇼크'에 매도 사이드카",
-     "press": "cstimes.com",
-     "publishedAt": "2026-11-05T02:02:00.000Z",
-     "link": "https://www.cstimes.com/news/articleView.html?idxno=726748"
-    },
-    {
-     "title": "또 켜진 매도 사이드카…삼전닉스 급락에 '5400피'로 추락",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-05T02:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000548994?sid=101"
-    },
-    {
-     "title": "코스피 5% 하락…유가증권시장 매도사이드카 발동",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-05T02:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003482485?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "청해부대 임무 확대",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 56,
-   "recent20": 6,
-   "press": 49,
-   "firstArticleAt": "2026-11-05T00:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "청해부대 임무 오만 남방까지 확대… 초계기·폭발물처리반 추가 파견",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-05T02:08:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3446119"
-    },
-    {
-     "title": "與 “청해부대 확대, 호르무즈 우회파병 아냐”…혁신당 주장 반박",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-05T02:08:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611050069"
-    },
-    {
-     "title": "청해부대, 호르무즈 650km 앞까지 확대…초계기 추가 투입",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-05T02:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001976813?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "카카오 AI 운영 시작",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 41,
+   "articles90": 45,
    "recent20": 7,
-   "press": 32,
-   "firstArticleAt": "2026-11-05T00:44:00.000Z",
+   "press": 40,
+   "firstArticleAt": "2026-11-05T00:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "에코프로비엠 3분기 영업익 120억, 76.2%↓…주가 7%대 급락",
+     "press": "newsfc.co.kr",
+     "publishedAt": "2026-11-05T02:20:00.000Z",
+     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82256"
+    },
+    {
+     "title": "에코프로비엠, 3분기 영업익 전년比 76% 급감…순이익 적자전환",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-05T02:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002393405?sid=101"
+    },
+    {
+     "title": "에코프로비엠, ESS 수요 확대 대응..LFP 양극재 투자 본격화",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-05T02:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005437011?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "LG, 트리스탄 벡 영입",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 27,
+   "recent20": 4,
+   "press": 26,
+   "firstArticleAt": "2026-11-05T01:02:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "LG, ‘이정후 동료’ 트리스탄 벡 영입",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-05T02:18:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611050172"
+    },
+    {
+     "title": "'2연패 무산' LG, 새 외국인 우완으로 이정후 SF 동료 영입",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-05T02:14:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/079/0004206768"
+    },
+    {
+     "title": "[오피셜]현역 빅리거에 영입 경쟁까지 붙었는데 87만8000달러?…LG, 트리...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-05T02:07:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/445/0000486599"
+    }
+   ]
+  },
+  {
+   "keyword": "카카오 주가",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 27,
+   "recent20": 5,
+   "press": 24,
+   "firstArticleAt": "2026-11-05T00:53:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "카카오, 3분기 영업익 2403억…1500억 자사주 매입에 주가 9.8%껑충",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-05T02:20:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=902031"
+    },
+    {
+     "title": "카카오 주가 장중 8%대 올라, 3분기 실적 개선·1500억 자사주 매입 뒤 ...",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-05T02:18:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=451238"
+    },
     {
      "title": "본업 힘 키운 카카오, '실행형 AI' 승부…주가 부진에 1500억 자사주 소...",
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-05T02:08:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006404101?sid=105"
-    },
-    {
-     "title": "“카카오톡 한물갔다더니 끄떡없잖아”…광고·선물 다음은 ‘카나나’",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-05T02:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005759372?sid=105"
-    },
-    {
-     "title": "정신아 카카오 대표 “AI 확산 기대 못 미쳤지만… 연내 AI 이용자 1000만...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-05T02:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202763?sid=105"
-    }
-   ]
-  },
-  {
-   "keyword": "세브란스 50대 살인미수",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 32,
-   "recent20": 5,
-   "press": 30,
-   "firstArticleAt": "2026-11-05T00:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'세브란스 흉기난동' 살인미수 적용…오늘 구속영장 신청",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-05T02:00:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261105000568"
-    },
-    {
-     "title": "“집에서 부엌칼 챙겼다”…세브란스 칼부림女 ‘살인미수’ 구속영장",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-05T01:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003563028?sid=102"
-    },
-    {
-     "title": "세브란스병원 의사 습격 50대는 환자…“집에서 쓰던 흉기 가져왔다”",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-05T01:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002830798?sid=102"
     }
    ]
   },
@@ -144,13 +176,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 38,
-   "recent20": 2,
-   "press": 27,
-   "firstArticleAt": "2026-11-05T00:42:00.000Z",
+   "articles90": 25,
+   "recent20": 1,
+   "press": 24,
+   "firstArticleAt": "2026-11-05T00:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "장동혁, 李 부동산 발언 직격…“없는 성과 자랑하다 말실수”",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-05T02:16:00.000Z",
+     "link": "https://www.viva100.com/article/20261105500483"
+    },
     {
      "title": "장동혁 \"'공소취소' 특검 강행하면 국민이 정권 취소\"",
      "press": "imnews.imbc.com",
@@ -162,44 +200,38 @@
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-05T01:59:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004206755?sid=100"
-    },
-    {
-     "title": "장동혁 “대통령 국민 고통 즐기는 마귀···공소취소, 정권취소로 책...",
-     "press": "weekly.khan.co.kr",
-     "publishedAt": "2026-11-05T01:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/033/0000053162?sid=100"
     }
    ]
   },
   {
-   "keyword": "LG 트리스탄 영입",
+   "keyword": "인천",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 25,
-   "recent20": 5,
-   "press": 24,
-   "firstArticleAt": "2026-11-05T01:02:00.000Z",
-   "exclusive": true,
-   "capped": false,
+   "articles90": 28,
+   "recent20": 24,
+   "press": 22,
+   "firstArticleAt": "2026-11-05T01:56:00.000Z",
+   "exclusive": false,
+   "capped": true,
    "samples": [
     {
-     "title": "[오피셜]현역 빅리거에 영입 경쟁까지 붙었는데 87만8000달러?…LG, 트리...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-05T02:07:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/445/0000486599"
+     "title": "인천조달청, 디지털 소외계층에 전산장비 무상 기증",
+     "press": "kihoilbo.co.kr",
+     "publishedAt": "2026-11-05T02:20:00.000Z",
+     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3039953"
     },
     {
-     "title": "벡 영입전 승리, 차명석 단장이 밝힌 뒷얘기 \"10개 구단이 다 보는 선수...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-05T02:06:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/477/0000637346"
+     "title": "인천 검단구 지역사회보장협의체, 합동워크숍 개최",
+     "press": "kihoilbo.co.kr",
+     "publishedAt": "2026-11-05T02:18:00.000Z",
+     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3039951"
     },
     {
-     "title": "“여기가 정후리의 나라입니까” SF에서 뛰었던 트리스탄 벡, 87만 8천 달...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-05T01:57:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/410/0001146287"
+     "title": "인천 ‘친환경 버스’ 면세 종료로 매년 79억원 부담…16개 시·도 공동...",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-05T02:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000130709?sid=102"
     }
    ]
   },
@@ -208,13 +240,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 18,
-   "recent20": 1,
-   "press": 18,
-   "firstArticleAt": "2026-11-05T00:43:00.000Z",
+   "articles90": 17,
+   "recent20": 2,
+   "press": 17,
+   "firstArticleAt": "2026-11-05T00:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "중간선거 참패에 '이란전쟁 책임' 헤그세스 국방장관 교체설",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-05T02:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000160460?sid=104"
+    },
     {
      "title": "“중간선거 참패 ‘이란전쟁’ 때문”…트럼프, 국방장관 교체 검토",
      "press": "joongang.co.kr",
@@ -226,12 +264,6 @@
      "press": "fnnews.com",
      "publishedAt": "2026-11-05T01:44:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/014/0005599807?sid=104"
-    },
-    {
-     "title": "트럼프, 미 중간선거 참패 인정하면서도 \"탄핵 추진 땐 민주당 파멸할 ...",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-05T01:42:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=728088"
     }
    ]
   },
@@ -243,10 +275,16 @@
    "articles90": 15,
    "recent20": 1,
    "press": 15,
-   "firstArticleAt": "2026-11-05T00:46:00.000Z",
+   "firstArticleAt": "2026-11-05T00:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "금융사 37곳서 정보 47만건 유출·10억원 탈취",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-05T02:18:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3446122"
+    },
     {
      "title": "금융권 한 달 새 정보 47만건 유출…당국, 580개사 보안 전수점검",
      "press": "viva100.com",
@@ -258,12 +296,6 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-05T01:49:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012287797?sid=101"
-    },
-    {
-     "title": "금융권 37개사 정보유출 47만건···10억 탈취",
-     "press": "finomy.com",
-     "publishedAt": "2026-11-05T01:46:00.000Z",
-     "link": "http://www.finomy.com/news/articleView.html?idxno=265731"
     }
    ]
   },
@@ -273,13 +305,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 2,
+   "articles90": 11,
+   "recent20": 1,
    "press": 8,
-   "firstArticleAt": "2026-11-05T00:45:00.000Z",
+   "firstArticleAt": "2026-11-05T00:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "출근길 우이신설선 전 구간 열차 운행 지연…4시간여만에 정상화(종합)",
+     "press": "tbs.seoul.kr",
+     "publishedAt": "2026-11-05T02:09:00.000Z",
+     "link": "http://tbs.seoul.kr/news/newsView.do?typ_800=3&idx_800=3538688&seq_800=20531589"
+    },
     {
      "title": "출근길에 멈춰선 우이신설선⋯4시간 15분만에 복구",
      "press": "etoday.co.kr",
@@ -291,12 +329,6 @@
      "press": "hankyung.com",
      "publishedAt": "2026-11-05T01:55:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/015/0005350606?sid=102"
-    },
-    {
-     "title": "출근길 우이신설선 전 구간 열차 운행 지연…4시간여만에 정상화(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T01:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016423493?sid=102"
     }
    ]
   },
@@ -305,10 +337,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-05T00:42:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-05T00:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -329,70 +361,6 @@
      "press": "fourfourtwo.co.kr",
      "publishedAt": "2026-11-05T01:35:00.000Z",
      "link": "https://m.sports.naver.com/wfootball/article/411/0000089538"
-    }
-   ]
-  },
-  {
-   "keyword": "박유천 日 디너쇼 45만원 고가 논란",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-05T00:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"티켓 한 장에 45만원\"…기모노 입은 박유천, 日 디너쇼 '고가 논란' 터...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-05T01:55:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000637343"
-    },
-    {
-     "title": "박윤천, 기모노 입고 日 고가 디너쇼 홍보 \"팬덤 상술\" vs \"현지 인기\" 갑...",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-05T01:54:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60701"
-    },
-    {
-     "title": "마약·체납 논란 박유천, 日서 '45만 원' 초고가 디너쇼 장사 [윤혜영의...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-05T01:26:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109745018012"
-    }
-   ]
-  },
-  {
-   "keyword": "경찰, 강호동 구속영장 신청",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T00:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'뇌물·공금유용' 혐의 강호동 농협회장, 오늘 영장 청구 전 피의자 면담",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-05T02:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009271878?sid=102"
-    },
-    {
-     "title": "[금융家] 강호동 농협중앙회장 ③ㅣ '신뢰 회복' 외쳤지만 경찰 구속영...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-05T01:48:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=623484"
-    },
-    {
-     "title": "경찰, 강호동 농협중앙회장 구속영장 신청…공소청 청구 여부 검토",
-     "press": "sateconomy.co.kr",
-     "publishedAt": "2026-11-05T01:40:00.000Z",
-     "link": "https://sateconomy.co.kr/news/view/1065576403168182"
     }
    ]
   },
@@ -429,50 +397,23 @@
    ]
   },
   {
-   "keyword": "젠지 라이언",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T00:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "젠지, 롤드컵 8강서 라이언 3대 0 완파…기인·룰러·쵸비 세트별 활약",
-     "press": "jbnews.com",
-     "publishedAt": "2026-11-05T01:56:00.000Z",
-     "link": "https://www.jbnews.com/news/articleView.html?idxno=1515175"
-    },
-    {
-     "title": "[LoL 월드 챔피언십] 젠지, 라이언 꺾고 4강 진출",
-     "press": "tgdaily.co.kr",
-     "publishedAt": "2026-11-05T01:38:00.000Z",
-     "link": "https://www.tgdaily.co.kr/news/articleView.html?idxno=407785"
-    },
-    {
-     "title": "젠지, 라이언 반격 잠재우고 '롤드컵' 4강행…3대0 완승",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-05T01:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002247388?sid=105"
-    }
-   ]
-  },
-  {
    "keyword": "한국시리즈",
    "sources": [
     "daum"
    ],
    "articles90": 4,
-   "recent20": 0,
+   "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-05T00:42:00.000Z",
+   "firstArticleAt": "2026-11-05T00:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "KT, 한국시리즈 2차전 연장 혈투 끝 석패…이강철 감독 \"선수들 모두 잘...",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-05T02:18:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=846221"
+    },
     {
      "title": "삼성, 수원 원정서 12회 혈투 승리...한국시리즈 1승 1패 원점",
      "press": "joongangenews.com",
@@ -484,12 +425,6 @@
      "press": "starnewskorea.com",
      "publishedAt": "2026-11-05T01:10:00.000Z",
      "link": "https://m.sports.naver.com/kbaseball/article/108/0003484852"
-    },
-    {
-     "title": "한국시리즈, 삼성-KT 3차전 경기 일정은?…1승 1패 동률, 우승 경우의 수...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-05T00:54:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16268803"
     }
    ]
   },
@@ -500,7 +435,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-05T01:09:00.000Z",
    "exclusive": false,
@@ -523,6 +458,39 @@
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-05T01:09:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000923073?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "젠지 라이언",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-05T01:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "젠지, 롤드컵 8강서 라이언 3대 0 완파…기인·룰러·쵸비 세트별 활약",
+     "press": "jbnews.com",
+     "publishedAt": "2026-11-05T01:56:00.000Z",
+     "link": "https://www.jbnews.com/news/articleView.html?idxno=1515175"
+    },
+    {
+     "title": "[LoL 월드 챔피언십] 젠지, 라이언 꺾고 4강 진출",
+     "press": "tgdaily.co.kr",
+     "publishedAt": "2026-11-05T01:38:00.000Z",
+     "link": "https://www.tgdaily.co.kr/news/articleView.html?idxno=407785"
+    },
+    {
+     "title": "젠지, 라이언 반격 잠재우고 '롤드컵' 4강행…3대0 완승",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-05T01:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002247388?sid=105"
     }
    ]
   },
@@ -561,7 +529,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 872,
+  "flagged": 878,
   "matched": 377,
   "avgLeadMin": 371,
   "recent": [
