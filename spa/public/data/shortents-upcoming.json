@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T18:21:58.833Z",
+ "builtAt": "2026-11-05T18:32:02.122Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 14,
  "candidates": [
   {
    "keyword": "비트코인",
@@ -16,30 +16,30 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 7,
-   "recent20": 0,
+   "articles90": 9,
+   "recent20": 2,
    "press": 3,
    "firstArticleAt": "2026-11-05T17:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "비트코인 201개, 한 주소서 8차례 연속 청산",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-05T18:30:00.000Z",
+     "link": "https://www.tokenpost.kr/news/cryptocurrency/433489"
+    },
+    {
+     "title": "비트코인 7만6000달러 하회…4시간 청산액 약 1조1800억원 달해",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-05T18:26:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/433486"
+    },
+    {
      "title": "앵커리지 디지털, 최장 1년 만기 비트코인·이더리움 옵션 추진",
      "press": "tokenpost.kr",
      "publishedAt": "2026-11-05T18:00:00.000Z",
      "link": "https://www.tokenpost.kr/news/breaking/433468"
-    },
-    {
-     "title": "코어사이언티픽, 2026년 4분기 비트코인 자가 채굴 중단 계획",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-05T17:52:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/433463"
-    },
-    {
-     "title": "비트코인 365일 금에 뒤져…과거 두 구간 뒤 3년 연복리 58~167%",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-05T17:48:00.000Z",
-     "link": "https://www.tokenpost.kr/news/cryptocurrency/433459"
     }
    ]
   }
