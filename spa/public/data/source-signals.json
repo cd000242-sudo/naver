@@ -8,11 +8,75 @@
         {
           "id": "naver-1",
           "rank": 1,
+          "keyword": "영국 기준금리 4% 인상",
+          "title": "영국 기준금리 4% 인상",
+          "rawKeyword": "영국 기준금리 4% 인상",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 100,
+          "source": "naver",
+          "expansions": [
+            "기준금리 인상",
+            "영국구글",
+            "영국 시간",
+            "영국 환율",
+            "영국 전쟁",
+            "영국 비상식량",
+            "영국 여행",
+            "구글영국"
+          ],
+          "expansionSeed": "영국",
+          "insight": {
+            "titles": {
+              "seo": "영국 기준금리 4% 인상, 3년 3개월 만에 방향 틀었다",
+              "home": "영국 기준금리 4% 인상, 환율 흔든 3년 3개월 만의 변화",
+              "topic": "영국 기준금리 4% 인상",
+              "topicGroup": "네이버 실시간 검색어",
+              "summary": "영란은행이 기준금리를 연 3.75%에서 4.00%로 0.25%포인트 올렸다. 영국의 기준금리 인상은 2023년 8월 이후 3년 3개월 만이다.",
+              "aiTitled": true
+            },
+            "facts": [
+              {
+                "text": "영국 중앙은행인 영란은행(BOE)가 5일(현지시각) 기준금리를 연 3.75%에서 4.00%로 0.25%포인트 인상했다. 영국의 기준금리 인상은 2023년 8월 5.25%로 0.25%p 인상된 이후 3년 3개월 만이다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "영국 중앙은행이 5일(현지시간) 예상대로 기준금리 를 4% 로 0.25%포인트 인상 했다. 외신에 따르면 영란은행은 이날 정례 통화정책회의를 열어 기준금리 를 종전 3.75%에서 4% 로 인상 하기로 결정했다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://biz.chosun.com/international/international_economy/2026/11/05/ZSZICEZU6FETTKPATSSTIGRFFI/?utm_source=naver&utm_medium=original&utm_campaign=biz",
+                "press": "조선비즈"
+              },
+              {
+                "url": "https://www.mt.co.kr/world/2026/11/05/2026110521031912675",
+                "press": "머니투데이"
+              }
+            ],
+            "images": [
+              "https://biz.chosun.com/resizer/v2/6CJCNGJCECU5S6AJPQSLPJSC5A.jpg?auth=8a6ec286b4e906dfe80881b63eba32a2fb6d2cda340faa4dba3809cfca8f43d6&width=601&height=315&smart=true"
+            ],
+            "press": [
+              "조선비즈",
+              "머니투데이"
+            ],
+            "headlines": [
+              "영국, 기준금리 3년여 만에 인상… 연 4%로 0.25%P ↑",
+              "영국 기준금리 3.75%→ 4% 인상 …이란 전쟁 여파에 3년여 만에 '유턴'"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-05T20:08:55.174Z"
+          }
+        },
+        {
+          "id": "naver-2",
+          "rank": 2,
           "keyword": "호날두 포르투갈 은퇴",
           "title": "호날두 포르투갈 은퇴",
           "rawKeyword": "호날두 포르투갈 은퇴",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 100,
+          "priority": 99,
           "source": "naver",
           "expansions": [
             "호날두 1000골",
@@ -30,7 +94,7 @@
               "seo": "호날두 포르투갈 은퇴 최신 이슈와 핵심 내용 정리",
               "home": "호날두 포르투갈 은퇴, 유니폼 반납 영상에서 많이들 놓친 대목",
               "topic": "호날두 포르투갈 은퇴",
-              "topicGroup": "네이버 실시간 검색어",
+              "topicGroup": "네이트 실시간 검색어",
               "summary": "포르투갈 축구 스타 호날두(41)가 국가대표팀 은퇴를 선언했다. 인스타그램에 5분짜리 영상을 올려 7번 유니폼을 반납할 때가 됐다며 팬들에게 알렸다.",
               "aiTitled": true
             },
@@ -70,70 +134,6 @@
           }
         },
         {
-          "id": "naver-2",
-          "rank": 2,
-          "keyword": "영국 기준금리 4% 인상",
-          "title": "영국 기준금리 4% 인상",
-          "rawKeyword": "영국 기준금리 4% 인상",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 99,
-          "source": "naver",
-          "expansions": [
-            "기준금리 인상",
-            "영국구글",
-            "영국 시간",
-            "영국 환율",
-            "영국 전쟁",
-            "영국 비상식량",
-            "영국 여행",
-            "구글영국"
-          ],
-          "expansionSeed": "영국",
-          "insight": {
-            "titles": {
-              "seo": "영국 기준금리 4% 인상, 3년 3개월 만에 방향 틀었다",
-              "home": "영국 기준금리 4% 인상, 환율 흔든 3년 3개월 만의 변화",
-              "topic": "영국 기준금리 4% 인상",
-              "topicGroup": "네이버 실시간 검색어",
-              "summary": "영란은행이 기준금리를 연 3.75%에서 4.00%로 0.25%포인트 올렸다. 영국의 기준금리 인상은 2023년 8월 이후 3년 3개월 만이다.",
-              "aiTitled": true
-            },
-            "facts": [
-              {
-                "text": "김우영 기자입력 2026.11.05. 21:15조선비즈 구글 검색 먼저 보기영란은행(BOE). /연합뉴스영국 중앙은행인 영란은행(BOE)가 5일(현지시각) 기준금리를 연 3.75%에서 4.00%로 0.25%포인트 인상했다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "영국 중앙은행이 5일(현지시간) 예상대로 기준금리 를 4% 로 0.25%포인트 인상 했다. 외신에 따르면 영란은행은 이날 정례 통화정책회의를 열어 기준금리 를 종전 3.75%에서 4% 로 인상 하기로 결정했다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://biz.chosun.com/international/international_economy/2026/11/05/ZSZICEZU6FETTKPATSSTIGRFFI/?utm_source=naver&utm_medium=original&utm_campaign=biz",
-                "press": "조선비즈"
-              },
-              {
-                "url": "https://www.mt.co.kr/world/2026/11/05/2026110521031912675",
-                "press": "머니투데이"
-              }
-            ],
-            "images": [
-              "https://biz.chosun.com/resizer/v2/6CJCNGJCECU5S6AJPQSLPJSC5A.jpg?auth=8a6ec286b4e906dfe80881b63eba32a2fb6d2cda340faa4dba3809cfca8f43d6&width=601&height=315&smart=true"
-            ],
-            "press": [
-              "조선비즈",
-              "머니투데이"
-            ],
-            "headlines": [
-              "영국, 기준금리 3년여 만에 인상… 연 4%로 0.25%P ↑",
-              "영국 기준금리 3.75%→ 4% 인상 …이란 전쟁 여파에 3년여 만에 '유턴'"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
-          }
-        },
-        {
           "id": "naver-3",
           "rank": 3,
           "keyword": "장남 주진우 고소",
@@ -158,13 +158,13 @@
               "seo": "장남 주진우 고소에 맞고발 예고, 황제 골프 의혹 어디로",
               "home": "장남의 명예훼손 고소에 주진우는 맞고발, 분위기가 묘하게 흘러간다",
               "topic": "장남 주진우 고소",
-              "topicGroup": "네이트 실시간 검색어",
+              "topicGroup": "네이버 실시간 검색어",
               "summary": "이재명 대통령 장남 이동호 씨가 주진우 의원을 명예훼손으로 고소했다. 주 의원은 맞고발로 황제 골프 의혹을 밝히겠다고 맞섰다.",
               "aiTitled": true
             },
             "facts": [
               {
-                "text": "오늘 이재명 대통령의 장남 이동호 씨가 국민의힘 주진우 의원을 명예훼손 혐의로 서울경찰청에 고소했습니다.",
+                "text": "이재명 대통령 가족의 '황제 골프' 의혹을 제기한 국민의힘 주진우 의원이 이 대통령 장남 에게 명예훼손 혐의로 고소 당했다. 5일 연합뉴스 취재에 따르면 이 대통령의 장남 이동호 씨는 이날 주 의원을 명예훼손 혐의로 서울경찰청에 고소 했다.",
                 "sourceIndex": 0
               },
               {
@@ -174,8 +174,8 @@
             ],
             "links": [
               {
-                "url": "https://imnews.imbc.com/news/2026/society/article/6863475_36918.html",
-                "press": "MBC"
+                "url": "https://www.yna.co.kr/view/AKR20261105178600004?input=1195m",
+                "press": "연합뉴스"
               },
               {
                 "url": "https://www.news1.kr/politics/assembly/6344848",
@@ -183,90 +183,28 @@
               }
             ],
             "images": [
-              "https://image.imnews.imbc.com/news/2026/society/article/__icsFiles/afieldfile/2026/11/05/joo261105_2.jpg"
+              "https://img5.yna.co.kr/photo/yna/YH/2026/10/29/PYH2026102915800001300_P4.jpg"
             ],
             "press": [
-              "MBC",
+              "연합뉴스",
               "뉴스1"
             ],
             "headlines": [
-              "[단독] 이 대통령 장남 \"해군기지 골프장 간 적 없어\"‥주진우 명예훼손 고소",
+              "李대통령 장남, 주진우 명예훼손 고소…\"골프장 간 적 없다\"",
               "주진우 , 李대통령 장남 고소 에 \"맞고발로 황제골프 의혹 밝힐 것\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
           "id": "naver-4",
           "rank": 4,
-          "keyword": "유럽 여객기 폭탄 위협",
-          "title": "유럽 여객기 폭탄 위협",
-          "rawKeyword": "유럽 여객기 폭탄 위협",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 97,
-          "source": "naver",
-          "expansions": [
-            "유럽 시위",
-            "유럽 지도",
-            "유럽 여행",
-            "유럽 폭동",
-            "유럽 나라",
-            "유럽증시",
-            "유럽 패키지",
-            "유럽이심"
-          ],
-          "expansionSeed": "유럽",
-          "insight": {
-            "titles": {
-              "seo": "유럽 여객기 폭탄 위협 최신 이슈와 핵심 내용 정리",
-              "home": "유럽 여객기 폭탄 위협, 유럽 여객기 최소 25편에 또 폭탄 위협…비상착륙·회항 '대란'(종합) 관련 확인할 점",
-              "topic": "유럽 여객기 폭탄 위협",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "최근 유럽 여객기 들을 겨냥한 폭탄 위협 신고가 계속되고 있지만 배후 세력은 확인되지 않고 있다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "최근 유럽 여객기 들을 겨냥한 폭탄 위협 신고가 계속되고 있지만 배후 세력은 확인되지 않고 있습니다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261105173451109?input=1195m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008833128&plink=ORI&cooper=NAVER",
-                "press": "SBS"
-              }
-            ],
-            "images": [
-              "https://img8.yna.co.kr/photo/reuters/2026/11/04/PRU20261104067601009_P4.jpg"
-            ],
-            "press": [
-              "연합뉴스",
-              "SBS"
-            ],
-            "headlines": [
-              "유럽 여객기 최소 25편에 또 폭탄 위협…비상착륙·회항 '대란'(종합)",
-              "유럽 여객기 최소 25편에 또 폭탄 위협 …비상착륙·회항 '대란'"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-05T19:09:21.495Z"
-          }
-        },
-        {
-          "id": "naver-5",
-          "rank": 5,
           "keyword": "뉴욕증시 급락",
           "title": "뉴욕증시 급락",
           "rawKeyword": "뉴욕증시 급락",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 96,
+          "priority": 97,
           "source": "naver",
           "expansions": [
             "뉴욕증시 휴장",
@@ -318,143 +256,73 @@
               "[ 뉴욕 마감]민주 압승에 다우 3% 급등…반도체지수 3% 하락, 6개월 최저"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
+          }
+        },
+        {
+          "id": "naver-5",
+          "rank": 5,
+          "keyword": "텍사스 주지사",
+          "title": "텍사스 주지사",
+          "rawKeyword": "텍사스 주지사",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 96,
+          "source": "naver",
+          "expansions": [
+            "텍사스 주지사 선거",
+            "텍사스 주지사 후보"
+          ],
+          "expansionSeed": "텍사스 주지사",
+          "insight": {
+            "titles": {
+              "seo": "텍사스 주지사 최신 이슈와 핵심 내용 정리",
+              "home": "텍사스 주지사, 6000억원 쏟고도 텍사스 뺏긴 머스크…\"데이터센터, 우주에 짓자\" 관련 확인할 점",
+              "topic": "텍사스 주지사",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "민주당이 텍사스 주지사 선거까지 승리하면서 머스크가 추진하는 데이터센터와 자율주행 사업에도 불확실성이 커졌다. 머스크는 4일(현지시간) 자신의 X 계정에 \"내 선거 개입용 우주 레이저가 이번에는 작동하지 않은 모양\"이라고 적었다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "민주당은 4일 오전 8시30분(한국 시간 오후 10시30분) 기준 공화당 출신이 주지사 로 있던 텍사스 , 오하이오, 조지아, 아이오와주(州) 등을 잇따라 탈환했다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.hankyung.com/article/202611057068i",
+                "press": "한국경제"
+              },
+              {
+                "url": "https://www.chosun.com/international/us/2026/11/04/CDMB6F4YYJG4DBVH4KYMMSNZXI/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
+                "press": "조선일보"
+              }
+            ],
+            "images": [
+              "https://img.hankyung.com/photo/202611/01.46316064.1.jpg"
+            ],
+            "press": [
+              "한국경제",
+              "조선일보"
+            ],
+            "headlines": [
+              "6000억원 쏟고도 텍사스 뺏긴 머스크…\"데이터센터, 우주에 짓자\"",
+              "美민주, 지방 권력도 장악… 20년 만에 주지사 과반 확보"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
           "id": "naver-6",
           "rank": 6,
-          "keyword": "리노 내년 1분기 입대",
-          "title": "리노 내년 1분기 입대",
-          "rawKeyword": "리노 내년 1분기 입대",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 95,
-          "source": "naver",
-          "expansions": [
-            "리노공업",
-            "리노공업 주가",
-            "스키즈 리노",
-            "리노 나무위키",
-            "리노스토어",
-            "리노바이러스",
-            "보칼리노",
-            "군입대 준비물"
-          ],
-          "expansionSeed": "리노",
-          "insight": {
-            "titles": {
-              "seo": "리노 내년 1분기 입대, JYP가 밝힌 2027년 병역 일정",
-              "home": "리노 내년 1분기 입대 발표, 스키즈 팬들 반응이 조용히 갈렸다",
-              "topic": "리노 내년 1분기 입대",
-              "topicGroup": "네이버 실시간 검색어",
-              "summary": "스트레이 키즈 리노가 2027년 1분기 입대를 예고했다. 소속사 JYP가 5일 공식 SNS로 병역 이행 일정을 알렸다.",
-              "aiTitled": true
-            },
-            "facts": [
-              {
-                "text": "그룹 스트레이 키즈(Stray Kids)의 멤버 리노 (28·본명 이민호)가 내년 1분기 입대 한다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "그룹 스트레이 키즈 멤버 리노 가 내년 상반기에 입대 한다. 소속사 JYP엔터테인먼트는 5일 공식 SNS를 통해 \" 리노 는 2027년 1분기 병역 의무 이행을 예정하고 있다\"라고 공식 입장을 밝혔다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.news1.kr/entertain/celebrity-topic/6344637",
-                "press": "뉴스1"
-              },
-              {
-                "url": "http://www.tvdaily.co.kr/read.php3?aid=17938800051808591002",
-                "press": "티브이데일리"
-              }
-            ],
-            "images": [
-              "https://i3n.news1.kr/system/photos/2026/8/6/8044480/high.jpg"
-            ],
-            "press": [
-              "뉴스1",
-              "티브이데일리"
-            ],
-            "headlines": [
-              "스트레이 키즈 리노, 내년 1분기 군 입대 발표…팀 내 첫 주자",
-              "스트레이 키즈 리노 , 내년 1분기 병역 의무 이행… 팀 내 첫 주자"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-05T19:09:21.495Z"
-          }
-        },
-        {
-          "id": "naver-7",
-          "rank": 7,
-          "keyword": "알테오젠",
-          "title": "알테오젠",
-          "rawKeyword": "알테오젠",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 94,
-          "source": "naver",
-          "expansions": [
-            "알테오젠 주가",
-            "알테오젠 합병",
-            "알테오젠 소규모 합병",
-            "알테오젠 주가전망",
-            "알테오젠 반대의사",
-            "알테오젠 실적발표",
-            "알테오젠 채용",
-            "알테오젠 실적"
-          ],
-          "expansionSeed": "알테오젠",
-          "insight": {
-            "titles": {
-              "seo": "알테오젠 최신 이슈와 핵심 내용 정리",
-              "home": "알테오젠, 알테오젠, 3분기 매출액 1198억…역대 최대 실적 관련 확인할 점",
-              "topic": "알테오젠",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "알테오젠 이 올해 3분기 연결 기준 매출액 1198억원을 기록하면서 처음으로 분기 매출 1000억원을 넘었다. 알테오젠 은 연결재무제표 기준 올해 3분기 매출액은 1198억원, 영업이익 789억원을 기록해 각각 분기 기준 최대를 달성했다고 3일 공시했다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "하나증권은 4일 알테오젠 (196170)에 대해 키트루다 알테오젠 의 올해 3분기 연결 기준 매출액은 1198억원으로 전년 동기 대비 144%, 전분기 대비 74% 증가했다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.newsis.com/view/NISX20261103_0003852739",
-                "press": "뉴시스"
-              },
-              {
-                "url": "https://www.edaily.co.kr/News/Read?newsId=03024166645642440&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
-                "press": "이데일리"
-              }
-            ],
-            "images": [
-              "https://img1.newsis.com/2025/11/20/NISI20251120_0001997751_web.jpg"
-            ],
-            "press": [
-              "뉴시스",
-              "이데일리"
-            ],
-            "headlines": [
-              "알테오젠, 3분기 매출액 1198억…역대 최대 실적",
-              "알테오젠 , 3분기 깜짝 실적에 연간 영업익 3000억 전망-하나"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-05T19:09:21.495Z"
-          }
-        },
-        {
-          "id": "naver-8",
-          "rank": 8,
           "keyword": "윤석열 2심 선고",
           "title": "윤석열 2심 선고",
           "rawKeyword": "윤석열 2심 선고",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 93,
+          "priority": 95,
           "source": "naver",
           "expansions": [
             "윤석열 2심 선고",
@@ -510,65 +378,188 @@
           }
         },
         {
-          "id": "naver-9",
-          "rank": 9,
-          "keyword": "수술",
-          "title": "수술",
-          "rawKeyword": "수술",
+          "id": "naver-7",
+          "rank": 7,
+          "keyword": "이세영 재혼 황후 비주얼",
+          "title": "이세영 재혼 황후 비주얼",
+          "rawKeyword": "이세영 재혼 황후 비주얼",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 92,
+          "priority": 94,
           "source": "naver",
           "expansions": [
-            "수술 영어로",
-            "코수술",
-            "담낭제거수술",
-            "비염수술",
-            "중개수수료",
-            "임신중절수술",
-            "포경수술",
-            "맹장수술"
+            "재혼황후",
+            "재혼황후 웹툰",
+            "재혼황후 ott",
+            "재혼황후 몇부작",
+            "재혼황후 결말",
+            "재혼황후 캐스팅",
+            "재혼황후 촬영지",
+            "이세영 배우"
           ],
-          "expansionSeed": "수술",
+          "expansionSeed": "이세영",
           "insight": {
             "titles": {
-              "seo": "수술 최신 이슈와 핵심 내용 정리",
-              "home": "수술, [단독] 기저질환 없던 60대, 무릎수술 다음날 사망 관련 확인할 점",
-              "topic": "수술",
+              "seo": "이세영 재혼 황후 비주얼 최신 이슈와 핵심 내용 정리",
+              "home": "이세영 재혼 황후 비주얼, 이세영, '재혼 황후' 로판 비주얼 난리 날 만했네…스태프들도 \"너무 예뻐\" 극찬 (에터뷰) 관련 확인할 점",
+              "topic": "이세영 재혼 황후 비주얼",
               "topicGroup": "네이버 실시간 검색어"
             },
             "facts": [
               {
-                "text": "서울 강남 병원에서 무릎 수술을 받은 60대 여성이 수술 다음 날 사망하여 서울경찰청 의료사고 전담팀이 업무상 과실치사 혐의로 수사에 착수함. 유족은 이송 지연을 주장하고 병원은 적절한 조치를 다했다고 반박하며 분쟁 중임.",
+                "text": "배우 이세영 이 ' 재혼 황후 '에서 로맨스 판타지 속 인물 같은 비주얼 로 화제를 모으는 가운데, 평소 외모 관리에 대한 솔직한 답변으로 눈길을 끌었다. 5일 유튜브 채널 '일일칠 - 117'에는 '[성찬의 에터뷰] 라스타는 성찬이랑 친하게 지내고 싶어'라는 제목의 영상이 업로드됐다.",
                 "sourceIndex": 0
               },
               {
-                "text": "수술 여파를 딛고 이뤄진 이번 교황의 발걸음이 저물어 가는 가톨릭의 영향력을 다시 되살릴 수 있을지가 이번 남미 순방의 최대 관전포인트다.",
+                "text": "작품이 공개된 후 황실 세계를 담은 압도적인 비주얼 과 강렬한 서사가 어우러지며 입소문을 타고 있다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.chosun.com/national/national_general/2026/11/05/WZ4ZUNKQWBA4JMU33QAZ3M7URU/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
-                "press": "조선일보"
+                "url": "https://www.xportsnews.com/article/2216159",
+                "press": "엑스포츠뉴스"
               },
               {
-                "url": "https://www.yna.co.kr/view/AKR20261105003400087?input=1195m",
-                "press": "연합뉴스"
+                "url": "https://www.edaily.co.kr/News/Read?newsId=06297606645642768&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+                "press": "이데일리"
               }
             ],
             "images": [
-              "https://www.chosun.com/resizer/v2/GQYTSNBUGJRDCZTEGYZDGYJRGQ.jpg?auth=47878f9f5375e9ef1536a4f0e5ef22128d2415081c5be8516056413b4bb887f2&width=1200&height=630&smart=true"
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F311%2F2026%2F11%2F05%2F2077258.jpg&type=fface200_200&expire=2&refresh=true"
             ],
             "press": [
-              "조선일보",
-              "연합뉴스"
+              "엑스포츠뉴스",
+              "이데일리"
             ],
             "headlines": [
-              "[단독] 기저질환 없던 60대, 무릎수술 다음날 사망",
-              "암 수술 후 항공기만 십여차례 강행군…교황, 6일 남미순방 시작"
+              "이세영, '재혼 황후' 로판 비주얼 난리 날 만했네…스태프들도 \"너무 예뻐\" 극찬 (에터뷰)",
+              "' 재혼 황후 ', 공개 하루만에 12개국 1위"
+            ],
+            "extraction": "search-card",
+            "collectedAt": "2026-11-05T20:08:55.174Z"
+          }
+        },
+        {
+          "id": "naver-8",
+          "rank": 8,
+          "keyword": "신민아",
+          "title": "신민아",
+          "rawKeyword": "신민아",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 93,
+          "source": "naver",
+          "expansions": [
+            "신민아 김우빈",
+            "신민아 나무위키",
+            "신민아 결혼식",
+            "신민아 드라마",
+            "신민아 골반",
+            "신민아 무보정",
+            "신민아 블로그",
+            "신민아 눈동자"
+          ],
+          "expansionSeed": "신민아",
+          "insight": {
+            "titles": {
+              "seo": "신민아 최신 이슈와 핵심 내용 정리",
+              "home": "신민아, 신민아 ·이진욱의 첫사랑 찾기…'수목금' 내년 방송 관련 확인할 점",
+              "topic": "신민아",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "배우 신민아 , 이진욱, 유태오가 MBC 새 금토극 '수목금'의 주인공으로 나선다. MBC는 5일 “'수목금'이 2027년 상반기 방송될 예정”이라고 밝혔다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "‘재혼 황후’ 신민아 , ‘퀸’에 무장해제 (제공: 디즈니+) ‘재혼 황후’ 신민아 가 신비로운 새 ‘퀸’과 특별한 교감을 나누며 애틋한 감정을 전했다. 황후의 위엄을 잠시 내려놓고 퀸에게 마음을 여는 모습이 시청자들에게 여운을 남겼다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://news.jtbc.co.kr/article/NB12326562?influxDiv=NAVER",
+                "press": "JTBC"
+              },
+              {
+                "url": "https://www.bntnews.co.kr/article/view/bnt202611050191",
+                "press": "bnt뉴스"
+              }
+            ],
+            "images": [
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F437%2F2026%2F11%2F05%2F519218.jpg&type=fface200_200&expire=2&refresh=true"
+            ],
+            "press": [
+              "JTBC",
+              "bnt뉴스"
+            ],
+            "headlines": [
+              "신민아 ·이진욱의 첫사랑 찾기…'수목금' 내년 방송",
+              "‘재혼황후’ 신민아 , ‘퀸’에 무장해제"
+            ],
+            "extraction": "search-card",
+            "collectedAt": "2026-11-05T20:08:55.174Z"
+          }
+        },
+        {
+          "id": "naver-9",
+          "rank": 9,
+          "keyword": "예산 날씨",
+          "title": "예산",
+          "rawKeyword": "예산",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 92,
+          "source": "naver",
+          "expansions": [
+            "예산 날씨",
+            "예산 가볼만한곳",
+            "예산 삼국축제",
+            "예산시장",
+            "예산 맛집",
+            "예산사과축제",
+            "예산 아그로랜드",
+            "예산 리솜"
+          ],
+          "expansionSeed": "예산",
+          "insight": {
+            "titles": {
+              "seo": "예산 날씨 최신 이슈와 핵심 내용 정리",
+              "home": "예산 날씨, [오늘의 날씨] 대전·충남(6일, 금)…아침 기온 5~7도↓ 관련 확인할 점",
+              "topic": "예산 날씨",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "지역별 최저기온은 계룡·천안 4도, 공주·논산·금산·청양·부여 5도, 대전·아산· 예산 ·서산·당진·홍성 6도, 태안·서천 7도, 보령 8도로 예보됐다. 낮 최고기온은 계룡·천안·아산· 예산 ·청양·서산·당진 10도, 대전·공주·태안·홍성·보령 11도, 논산·금산·부여·서천 12도다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "지역별 최저기온은 계룡·금산 8도, 공주·천안·청양·서산 9도, 대전·논산·아산· 예산 ·부여·태안·당진·홍성·서천 10도, 보령 11도로 예보됐다. 낮 최고기온은 계룡·금산 14도, 대전·공주·천안 15도, 논산·아산· 예산 ·청양·부여·서산·태안·당진·보령·서천 16도, 홍성 17도다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.news1.kr/local/daejeon-chungnam/6344613",
+                "press": "뉴스1"
+              },
+              {
+                "url": "https://www.news1.kr/local/daejeon-chungnam/6343425",
+                "press": "뉴스1"
+              }
+            ],
+            "images": [
+              "https://i3n.news1.kr/system/photos/2025/10/16/7545885/high.jpg"
+            ],
+            "press": [
+              "뉴스1"
+            ],
+            "headlines": [
+              "[오늘의 날씨] 대전·충남(6일, 금)…아침 기온 5~7도↓",
+              "[오늘의 날씨 ] 대전·충남(5일, 목)…5~20㎜ 비"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -632,7 +623,7 @@
               "청와대 , 미 중간선거 결과에 \" 한미동맹 은 초당적 지지 속 발전해온 관계..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         }
       ]
@@ -676,7 +667,7 @@
                 "sourceIndex": 0
               },
               {
-                "text": "김세레나 는 성형 부작용 에 시달린 경험도 공개했다. 젊은 시절에는 예쁘다는 말을 들었지만, 세월이 흐르며 외모 변화가 찾아왔고, 당시에는 보톡스나 필러가 없어 파라핀 시술을 받게 됐다고 설명했다.",
+                "text": "가수 김세레나 가 성형 부작용 과 외모에 대한 악성 댓글로 상처를 받았다고 털어놨다. 지난 5일 방송된 MBN '특종세상'에서는 김세레나 의 일상이 공개됐다.",
                 "sourceIndex": 1
               }
             ],
@@ -686,8 +677,8 @@
                 "press": "스포츠조선"
               },
               {
-                "url": "https://www.mdtoday.co.kr/news/articleView.html?idxno=623358",
-                "press": "메디컬투데이"
+                "url": "https://www.mt.co.kr/entertainment/2026/11/06/2026110523315220253",
+                "press": "머니투데이"
               }
             ],
             "images": [
@@ -695,14 +686,14 @@
             ],
             "press": [
               "스포츠조선",
-              "메디컬투데이"
+              "머니투데이"
             ],
             "headlines": [
               "김세레나, 성형 부작용에 상처 \"꼬임에 넘어가 파라핀 맞아, 안 늙으려 발악\" ('특종세상')",
-              "' 성형 부작용 ' 고백한 김세레나 …이미지 회복할 수 있을까"
+              "' 성형 부작용 ' 김세레나 근황…\"결혼 두 번 실패, 빌려준 돈만 100억\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -736,7 +727,7 @@
             },
             "facts": [
               {
-                "text": "이재명 대통령이 국민들과 직접 소통하는 유튜브 프로그램 '대통령의 Y'를 시작한다고 청와대가 4일 밝혔습니다.",
+                "text": "요청하신 페이지를 찾을 수 없습니다.",
                 "sourceIndex": 0
               },
               {
@@ -766,7 +757,7 @@
               "李대통령, 유튜브 '대통령의 Y' 프로 신설…진행자 손정은"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:30:46.878Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -830,7 +821,7 @@
               "아이비 , 브로드웨이 진출에 사비 1000만원 썼다 \"원어민 9명과 매일 특훈..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -894,7 +885,7 @@
               "“장사 안 할 거야?” 정지선 , 청두 식구들 기선 잡은 역대급 카리스마..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -958,7 +949,7 @@
               "최태원 , SK 주식 9440억 원어치 매각 … 지분 율 15.49%로"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -1022,7 +1013,7 @@
               "'미스트롯 포유' 한다성 · 염유리 , 4연승 문턱서 좌절⋯상금 1000만원도 날..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -1086,7 +1077,7 @@
               "강호동 아들 시후, 골프대회 우승에 188cm 체격까지…\"DNA 다 받은 듯\" (..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -1150,7 +1141,7 @@
               "볼리비아서 뺑소니 사망 한국인, 세계일주 유튜버 ' 진쓰레블 '이었다"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-05T19:09:21.495Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -1184,7 +1175,7 @@
             },
             "facts": [
               {
-                "text": "영화 ' 슬픈 열대 '(감독 박훈정) 측이 메인 예고편을 공개했다. 5일 배급사 마인드마크가 공개한 ' 슬픈 열대 '의 메인 예고편은 \"사부는 오랫동안 은둔해 왔어, 얼굴을 아는 사람이 몇 안 돼\"라는 대사로 시작해 열대의 절대자 사부(김명민 분)와 연결된 인물들을 차례로 비춘다.",
+                "text": "\"일말의 여지도 남기지마\"…'슬픈열대', 김명민→박해수 예측 불가 예고편2026.11.05 오전 11:33구글에서 뉴스1 즐겨찾기AI 요약 정보영화 ‘슬픈 열대’, 메인 예고편 공개사부 죽음 뒤 조직원들 의심·피의 복수은까마귀상·누보 장르 그랑프리 수상, 25일 개봉구글에서 뉴스1 즐겨찾기'슬픈 열대' 메인 예고편관련 키워드김명민슬픈열대박훈정박해수오구리 슌·변요한, 연상호 감독과 '실낙원' GV 게스트 출격김윤석·구교환 '폭설', 스토리 포스터…눈 덮인 설오역에선 무슨 일이주요",
                 "sourceIndex": 0
               },
               {
@@ -1214,7 +1205,7 @@
               "\"넷플릭스 아닙니다\" 박해수의 영화 ' 슬픈 열대 '"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -1274,7 +1265,7 @@
               "유선민 중령 님, 당신을 '나쁜 군인'이라 생각합니다"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         }
       ]
@@ -1286,75 +1277,11 @@
         {
           "id": "nate-1",
           "rank": 1,
-          "keyword": "호날두 포르투갈 은퇴",
-          "title": "호날두 포르투갈 은퇴",
-          "rawKeyword": "호날두 포르투갈 은퇴",
-          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
-          "priority": 100,
-          "source": "nate",
-          "expansions": [
-            "호날두 1000골",
-            "호날두 나무위키",
-            "호날두 골",
-            "호날두 연봉",
-            "호날두 유니폼",
-            "호날두 짤",
-            "호날두 조지나",
-            "호날두 맨유"
-          ],
-          "expansionSeed": "호날두",
-          "insight": {
-            "titles": {
-              "seo": "호날두 포르투갈 은퇴 최신 이슈와 핵심 내용 정리",
-              "home": "호날두 포르투갈 은퇴, 유니폼 반납 영상에서 많이들 놓친 대목",
-              "topic": "호날두 포르투갈 은퇴",
-              "topicGroup": "네이트 실시간 검색어",
-              "summary": "포르투갈 축구 스타 호날두(41)가 국가대표팀 은퇴를 선언했다. 인스타그램에 5분짜리 영상을 올려 7번 유니폼을 반납할 때가 됐다며 팬들에게 알렸다.",
-              "aiTitled": true
-            },
-            "facts": [
-              {
-                "text": "포르투갈 축구 스타 크리스티아누 호날두(41)가 국가대표 은퇴를 선언했다. 대표팀 소집 도중 무단으로 팀을 이탈해 파문을 일으킨 지 한 달여 만이다. 호날두는 5일 자신의 인스타그램을 통해 대표팀에서 준비한 편지를 읽으며 은퇴한다고 밝혔다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "포르투갈 축구 수퍼스타 크리스티아누 호날두 (41·알나스르)가 국가대표 은퇴 를 선언했다. 국가대표팀 소집 기간 무단으로 팀을 이탈해 파문을 일으킨 지 한 달여 만에 입장을 밝혔다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://biz.chosun.com/sports/sports_general/2026/11/05/XDLGAL7QBVDWRMQQALDNXOOPJY/?utm_source=naver&utm_medium=original&utm_campaign=biz",
-                "press": "조선비즈"
-              },
-              {
-                "url": "https://www.joongang.co.kr/article/25476150",
-                "press": "중앙일보"
-              }
-            ],
-            "images": [
-              "https://biz.chosun.com/resizer/v2/YRQVBQDGJVMSLFVVJGM6H6MCTE.jpg?auth=1db589f6f20cb0f2786b6878574e5bc1c1e9acec31b05e212e756ff57f904301&width=1200&height=630&smart=true"
-            ],
-            "press": [
-              "조선비즈",
-              "중앙일보"
-            ],
-            "headlines": [
-              "호날두, 포르투갈 축구 국가대표 은퇴 선언",
-              "호날두 , 포르투갈 국대 은퇴 선언…캠프 무단이탈 파문 한달만"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-05T19:09:21.495Z"
-          }
-        },
-        {
-          "id": "nate-2",
-          "rank": 2,
           "keyword": "영국 기준금리 인상",
           "title": "영국 기준금리 인상",
           "rawKeyword": "영국 기준금리 인상",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
-          "priority": 99,
+          "priority": 100,
           "source": "nate",
           "expansions": [
             "기준금리 인상",
@@ -1412,6 +1339,70 @@
           }
         },
         {
+          "id": "nate-2",
+          "rank": 2,
+          "keyword": "호날두 포르투갈 은퇴",
+          "title": "호날두 포르투갈 은퇴",
+          "rawKeyword": "호날두 포르투갈 은퇴",
+          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
+          "priority": 99,
+          "source": "nate",
+          "expansions": [
+            "호날두 1000골",
+            "호날두 나무위키",
+            "호날두 골",
+            "호날두 연봉",
+            "호날두 유니폼",
+            "호날두 짤",
+            "호날두 조지나",
+            "호날두 맨유"
+          ],
+          "expansionSeed": "호날두",
+          "insight": {
+            "titles": {
+              "seo": "호날두 포르투갈 은퇴 최신 이슈와 핵심 내용 정리",
+              "home": "호날두 포르투갈 은퇴, 유니폼 반납 영상에서 많이들 놓친 대목",
+              "topic": "호날두 포르투갈 은퇴",
+              "topicGroup": "네이트 실시간 검색어",
+              "summary": "포르투갈 축구 스타 호날두(41)가 국가대표팀 은퇴를 선언했다. 인스타그램에 5분짜리 영상을 올려 7번 유니폼을 반납할 때가 됐다며 팬들에게 알렸다.",
+              "aiTitled": true
+            },
+            "facts": [
+              {
+                "text": "포르투갈 축구 스타 크리스티아누 호날두(41)가 국가대표 은퇴를 선언했다. 대표팀 소집 도중 무단으로 팀을 이탈해 파문을 일으킨 지 한 달여 만이다. 호날두는 5일 자신의 인스타그램을 통해 대표팀에서 준비한 편지를 읽으며 은퇴한다고 밝혔다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "포르투갈 축구 수퍼스타 크리스티아누 호날두 (41·알나스르)가 국가대표 은퇴 를 선언했다. 국가대표팀 소집 기간 무단으로 팀을 이탈해 파문을 일으킨 지 한 달여 만에 입장을 밝혔다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://biz.chosun.com/sports/sports_general/2026/11/05/XDLGAL7QBVDWRMQQALDNXOOPJY/?utm_source=naver&utm_medium=original&utm_campaign=biz",
+                "press": "조선비즈"
+              },
+              {
+                "url": "https://www.joongang.co.kr/article/25476150",
+                "press": "중앙일보"
+              }
+            ],
+            "images": [
+              "https://biz.chosun.com/resizer/v2/YRQVBQDGJVMSLFVVJGM6H6MCTE.jpg?auth=1db589f6f20cb0f2786b6878574e5bc1c1e9acec31b05e212e756ff57f904301&width=1200&height=630&smart=true"
+            ],
+            "press": [
+              "조선비즈",
+              "중앙일보"
+            ],
+            "headlines": [
+              "호날두, 포르투갈 축구 국가대표 은퇴 선언",
+              "호날두 , 포르투갈 국대 은퇴 선언…캠프 무단이탈 파문 한달만"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-05T19:09:21.495Z"
+          }
+        },
+        {
           "id": "nate-3",
           "rank": 3,
           "keyword": "장남 주진우 고소",
@@ -1442,7 +1433,7 @@
             },
             "facts": [
               {
-                "text": "오늘 이재명 대통령의 장남 이동호 씨가 국민의힘 주진우 의원을 명예훼손 혐의로 서울경찰청에 고소했습니다.",
+                "text": "이재명 대통령 가족의 '황제 골프' 의혹을 제기한 국민의힘 주진우 의원이 이 대통령 장남 에게 명예훼손 혐의로 고소 당했다. 5일 연합뉴스 취재에 따르면 이 대통령의 장남 이동호 씨는 이날 주 의원을 명예훼손 혐의로 서울경찰청에 고소 했다.",
                 "sourceIndex": 0
               },
               {
@@ -1452,8 +1443,8 @@
             ],
             "links": [
               {
-                "url": "https://imnews.imbc.com/news/2026/society/article/6863475_36918.html",
-                "press": "MBC"
+                "url": "https://www.yna.co.kr/view/AKR20261105178600004?input=1195m",
+                "press": "연합뉴스"
               },
               {
                 "url": "https://www.news1.kr/politics/assembly/6344848",
@@ -1461,80 +1452,80 @@
               }
             ],
             "images": [
-              "https://image.imnews.imbc.com/news/2026/society/article/__icsFiles/afieldfile/2026/11/05/joo261105_2.jpg"
+              "https://img5.yna.co.kr/photo/yna/YH/2026/10/29/PYH2026102915800001300_P4.jpg"
             ],
             "press": [
-              "MBC",
+              "연합뉴스",
               "뉴스1"
             ],
             "headlines": [
-              "[단독] 이 대통령 장남 \"해군기지 골프장 간 적 없어\"‥주진우 명예훼손 고소",
+              "李대통령 장남, 주진우 명예훼손 고소…\"골프장 간 적 없다\"",
               "주진우 , 李대통령 장남 고소 에 \"맞고발로 황제골프 의혹 밝힐 것\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
           "id": "nate-4",
           "rank": 4,
-          "keyword": "리노 내년 1분기",
-          "title": "리노 내년 1분기",
-          "rawKeyword": "리노 내년 1분기",
+          "keyword": "이세영 재혼 황후",
+          "title": "이세영 재혼 황후",
+          "rawKeyword": "이세영 재혼 황후",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 97,
           "source": "nate",
           "expansions": [
-            "리노공업",
-            "리노공업 주가",
-            "스키즈 리노",
-            "리노 나무위키",
-            "리노스토어",
-            "리노바이러스",
-            "보칼리노",
-            "1분기 뜻"
+            "재혼황후",
+            "재혼황후 웹툰",
+            "재혼황후 몇부작",
+            "재혼황후 결말",
+            "재혼황후 ott",
+            "재혼황후 캐스팅",
+            "재혼황후 촬영지",
+            "이세영 배우"
           ],
-          "expansionSeed": "리노",
+          "expansionSeed": "이세영",
           "insight": {
             "titles": {
-              "seo": "리노 내년 1분기 최신 이슈와 핵심 내용 정리",
-              "home": "리노 내년 1분기, 스트레이 키즈 리노, 내년 1분기 병역 의무 돌입…팀 첫 사례 관련 확인할 점",
-              "topic": "리노 내년 1분기",
+              "seo": "이세영 재혼 황후 최신 이슈와 핵심 내용 정리",
+              "home": "이세영 재혼 황후, ‘재혼 황후’ 이세영, 드레스핏 위해 금주…“근손실 열받아” - 스타투데이 관련 확인할 점",
+              "topic": "이세영 재혼 황후",
               "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
               {
-                "text": "(서울=연합뉴스) 이태수 기자 = 그룹 스트레이 키즈의 리노(28)가 내년 1분기 병역 의무에 돌입한다.",
+                "text": "배우 이세영 이 ‘ 재혼 황후 ’ 촬영을 위해 술까지 끊은 남다른 몸매 관리 비법을 공개했다. 이세영 은 5일 유튜브 채널 ‘일일칠 - 117’을 통해 공개된 ‘성찬의 에터뷰’에 출연해 디즈니+ 오리지널 시리즈 ‘ 재혼 황후 ’ 촬영 비하인드를 털어놨다.",
                 "sourceIndex": 0
               },
               {
-                "text": "그룹 스트레이 키즈(Stray Kids) 멤버 리노 가 2027년 1분기 병역 의무를 이행하며, 팀에서 가장 먼저 군 복무에 나서게 됐다. 5일 소속사 JYP엔터테인먼트는 스트레이 키즈 공식 SNS를 통해 리노 의 병역 의무 이행 계획을 공지했다.",
+                "text": "주지훈, 이세영 과 함께 셋이 촬영한 사진도 담겼다. 그는 \"팀 재혼황후 ~ 소비스타~\"라면서 화기애애한 팀 분위기가 담긴 사진을 공개했다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.yna.co.kr/view/AKR20261105169100005?input=1195m",
-                "press": "연합뉴스"
+                "url": "https://www.mk.co.kr/article/12198980",
+                "press": "매일경제"
               },
               {
-                "url": "https://www.tvreport.co.kr/music/article/1088713/",
-                "press": "TV리포트"
+                "url": "http://www.celuvmedia.com/article.php?aid=1793855302530400005",
+                "press": "셀럽미디어"
               }
             ],
             "images": [
-              "https://img0.yna.co.kr/etc/inner/KR/2026/11/05/AKR20261105169100005_01_i_P4.jpg"
+              "https://pimg.mk.co.kr/news/cms/202611/05/news-p.v1.20261105.048f97e37e0f49038e227e30aacb835f_R.jpg"
             ],
             "press": [
-              "연합뉴스",
-              "TV리포트"
+              "매일경제",
+              "셀럽미디어"
             ],
             "headlines": [
-              "스트레이 키즈 리노, 내년 1분기 병역 의무 돌입…팀 첫 사례",
-              "\"군백기 후 다시 모일 것\" 스트레이 키즈 리노 , 내년 1분기 입대…팀 내..."
+              "‘재혼 황후’ 이세영, 드레스핏 위해 금주…“근손실 열받아” - 스타투데이",
+              "' 재혼 황후 ' 대립 구도 어디로…이종석, 주지훈· 이세영 과 훈훈 케미[셀..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T19:09:21.495Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -1576,7 +1567,7 @@
             ],
             "links": [
               {
-                "url": "https://www.yna.co.kr/view/PYH20261104223200013?input=1196m",
+                "url": "https://www.yna.co.kr/view/PYH20261104222700013?input=1196m",
                 "press": "연합뉴스"
               },
               {
@@ -1585,7 +1576,7 @@
               }
             ],
             "images": [
-              "https://img6.yna.co.kr/photo/yna/YH/2026/11/04/PYH2026110422320001300_P4.jpg"
+              "https://img8.yna.co.kr/photo/yna/YH/2026/11/04/PYH2026110422270001300_P4.jpg"
             ],
             "press": [
               "연합뉴스",
@@ -1596,7 +1587,7 @@
               "한중 상무 장관 , FTA 서비스·투자 협상 조속 타결 합의…경제협력 확대"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:30:46.878Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         }
       ]
@@ -1666,7 +1657,7 @@
               "“외국인이라 구제 안 된다니… 전세 피해 자 국적부터 따지는 정부”"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -1730,7 +1721,7 @@
               "스페이스X '0주 배정' 미래에셋 제재 착수…1조원 청약 투자자 보상은"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -1794,7 +1785,7 @@
               "이란 공격 급증 에도 호르무즈 원유수송은 현상 유지"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -1858,7 +1849,7 @@
               "LH 임대주택 150만호 에도…공급 목표, 실제 입주로 이어질까"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -1920,7 +1911,7 @@
               "[단독] “국가부채 과도하면 성장 둔화”…케네스 로고프, 韓銀 강단 오..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         }
       ]
@@ -1979,7 +1970,7 @@
               "'강정호도 아니라는데' 키움은 또 틀렸고 NC는 옳았다...데이비슨, 확실히 하락세, 키움 2용타 완전 실패"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -2042,7 +2033,7 @@
               "'韓 수비 에이스 ' 김민재 미쳤다 , 독일 생활 마침표 찍고 EPL 입성할까....."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -2095,7 +2086,7 @@
               "403 Forbidden"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-05T19:09:21.495Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -2160,7 +2151,7 @@
               "[공식발표] ' 손흥민 선발 명단 제외 ' LAFC, 콜로라도전 'BEST 11' 공개!…..."
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-05T19:09:21.495Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -2215,7 +2206,7 @@
               "\"와, 대박이다!\" 7번 물려준 그리즈만도 환호성...'데뷔전 데뷔골' 이강인 '후계자 자격' 완벽 증명"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -2270,7 +2261,7 @@
               "'와' 한국 야구 대박 터지나! 17억 이도류 유망주 156km '쾅'→2이닝 4K 무실점 호투...\"정말 인상적\" 美 극찬 이어져"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -2325,7 +2316,7 @@
               "[오피셜] 이럴수가, 배지환 ML 생존 벼랑 끝 몰렸다! 30개 구단 모두 외면…웨이버 통과→트리플A 이관 \"FA 선택할 듯\" 美 전망"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -2380,7 +2371,7 @@
               "안세영이 돌아왔다! 압승, 쾌승!…유럽 최강자 블리치펠트 43분 만에 2-0 완파→세계선수권 8강행 성공"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-05T19:09:21.495Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -2435,7 +2426,7 @@
               "[오피셜] '충격' 아슬아슬했던 전북현대 끝내 무너졌다...디펜딩 챔피언 코리아컵 16강 탈락, K3 당진 '자이언트 킬링' 성공→8개 팀 생존"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -2500,7 +2491,7 @@
               "' 손흥민 과 한솥밥 먹었는데' 토트넘 역대 최고 이적료 주인공의 몰락…..."
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-05T19:09:21.495Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         }
       ]
@@ -2568,7 +2559,7 @@
               "[복지뉴스] 동대문구, 병원 동행부터 방문진료까지…통합 돌봄 1523건 지..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -2624,7 +2615,7 @@
               "[기고] 문화 기본권, 도민 삶의 질 결정짓는 필수 안전망"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -2679,7 +2670,7 @@
               "복지부-23개 장애인 단체, 정책 현안 논의를 위한 대규모 소통의 장 마련"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -2731,7 +2722,7 @@
               "최현덕 남양주시장, 농지 규제부터 요양비 부담까지 제도 손질 촉구"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -2793,7 +2784,7 @@
               "[거창소식]2027 장애인 일자리 참여자 137명 모집 등"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -2850,7 +2841,7 @@
               "의료·정책 전문가들, 심뇌혈관질환 전주기 관리 체계 구축 촉구"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -2914,7 +2905,7 @@
               "박수 받는 광명시 ' 주거취약계층 정착+' 사업"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -2968,7 +2959,7 @@
               "한국예술인복지재단, 생활안정자금 최대 700만원 융자"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -3025,7 +3016,7 @@
               "[경남 브리핑 모음(11월5일)] 진주시, 경남 첫 ‘ 보육 사업 우수 시부’ ..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -3089,7 +3080,7 @@
               "시험대 오른 지분적립형 LH 공공분양 …제도 정착 위한 실무 과제는"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         }
       ]
@@ -3120,8 +3111,8 @@
             "나나미카"
           ],
           "expansionSeed": "나나",
-          "ago": "2시간 전",
-          "agoMinutes": 120,
+          "ago": "3시간 전",
+          "agoMinutes": 180,
           "publishedLabel": "2026.11.06 ・ 01:40",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026110600520879484_1.jpg",
           "insight": {
@@ -3155,7 +3146,7 @@
               "나나, ♥탑과 열애 인정 후 작심 발언 \"도덕적 물의? 큰 잘못 했나\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -3214,7 +3205,7 @@
               "'이숙캠' 아내, 7년째 분양권 투자 중독에 남편 퇴직금까지 손대..\"안 하면 이혼\" 협박"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -3273,7 +3264,7 @@
               "이규한, '오만추' 최종 선택 안 한 이유 \"♥솔비에 진지한 마음이라 못해\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -3332,7 +3323,7 @@
               "'이숙캠' 아내, 남편에 남은 음식만 주더니..\"다음 생엔 부자로 태어나\" 황당 각서"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -3391,7 +3382,7 @@
               "'이혼숙려캠프' 남편, 두 번 임신에도 \"기쁘지 않았다\"..아내 홀로 일용직 전전"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -3450,7 +3441,7 @@
               "김세레나, 땅·산까지 소유했던 재력가였는데..\"사기당해 다 잃어\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -3509,7 +3500,7 @@
               "이유리, 식구는 둘인데 냉장고 4대..\"80인분 잡채 만들어 냉동\" 충격"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -3568,7 +3559,7 @@
               "김세레나, 리즈 시절 어땠나..성형 부작용 고백 \"꼬임에 파라핀 맞아\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -3627,7 +3618,7 @@
               "이보미, 남편 ♥이완과 오랜만에 투샷 포착 근황 \"러키와 함께\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         },
         {
@@ -3686,11 +3677,11 @@
               "'재혼' 오윤아, 발달장애 아들 향한 시부모 사랑에 뭉클..\"무뚝뚝한 시父도 변했다\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-05T18:09:22.306Z"
+            "collectedAt": "2026-11-05T20:08:55.174Z"
           }
         }
       ]
     }
   ],
-  "updatedAt": "2026-11-05T19:10:01.888Z"
+  "updatedAt": "2026-11-05T20:11:14.945Z"
 }
