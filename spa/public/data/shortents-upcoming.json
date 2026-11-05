@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T11:19:03.862Z",
+ "builtAt": "2026-11-05T11:29:07.383Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,67 +11,34 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "내란 우두머리 선고가 1월 26일입니다.",
+   "keyword": "윤석열 내란 사건 내년 선고",
    "sources": [
     "nate"
    ],
-   "articles90": 47,
-   "recent20": 8,
-   "press": 38,
-   "firstArticleAt": "2026-11-05T09:59:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'내란 우두머리' 항소심 내년 1월 26일 선고…尹 \"헌법상 권한행사 '내란...",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-05T11:18:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=902145"
-    },
-    {
-     "title": "사형 구형 받은 尹 “계엄은 헌법상 권한”…2심 선고 내년 1월 26일",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-05T11:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004679268?sid=102"
-    },
-    {
-     "title": "尹 \"내란죄 될 수 없어\"…'내란 우두머리' 항소심 내년 1월 26일 선고",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-05T11:10:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2015192"
-    }
-   ]
-  },
-  {
-   "keyword": "윤석열 2심 선고",
-   "sources": [
-    "signal.bz",
-    "daum"
-   ],
-   "articles90": 30,
+   "articles90": 40,
    "recent20": 5,
-   "press": 27,
-   "firstArticleAt": "2026-11-05T10:00:00.000Z",
+   "press": 36,
+   "firstArticleAt": "2026-11-05T10:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "사형 구형 받은 尹 “계엄은 헌법상 권한”…2심 선고 내년 1월 26일",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-05T11:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004679268?sid=102"
+     "title": "‘사형 구형’ 尹, ‘내란우두머리’ 항소심 선고 내년 1월 26일 열린다",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-05T11:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003057490?sid=100"
     },
     {
-     "title": "사형 구형에 윤석열 \"헌법 수호하려 계엄\"…내년 1월26일 항소심 선고",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-05T11:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000649280?sid=102"
+     "title": "尹 “계엄은 헌법상 권한 행사”…내란 2심 선고 내년 1월 26일",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-05T11:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002393467?sid=100"
     },
     {
-     "title": "윤석열 내란 우두머리 항소심 내년 1월 말 선고",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-05T11:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000160547?sid=102"
+     "title": "윤석열, 항소심 내란 재판 최후진술도 궤변‥선고는 내년 1월 26일",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-05T11:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533782?sid=102"
     }
    ]
   },
@@ -80,101 +47,37 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-05T09:50:00.000Z",
+   "articles90": 9,
+   "recent20": 4,
+   "press": 8,
+   "firstArticleAt": "2026-11-05T10:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "세월호 기록 유네스코 아태목록 등재…4·16연대 \"국가 기록도 공개해야...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-05T11:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009273218?sid=102"
+    },
+    {
+     "title": "경북 ‘수운잡방·음식디미방’ 유네스코 세계기록유산 등재 확정",
+     "press": "yeongnam.com",
+     "publishedAt": "2026-11-05T11:22:00.000Z",
+     "link": "https://www.yeongnam.com/web/view.php?key=20261105027339022"
+    },
     {
      "title": "'수운잡방·음식디미방' 유네스코 아태기록유산 등재",
      "press": "bzeronews.com",
      "publishedAt": "2026-11-05T11:10:00.000Z",
      "link": "https://www.bzeronews.com/news/articleView.html?idxno=824886"
-    },
-    {
-     "title": "\"잊지 않겠습니다\"…세월호 기록물, 유네스코 아태목록 등재",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-05T11:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006404618?sid=102"
-    },
-    {
-     "title": "세월호 참사 기록물 세계기록유산 아태 지역목록 올랐다",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-05T10:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002830942?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "조슈아 웡 징역 10년",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T09:55:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "홍콩 조슈아 웡, 외국 공모 혐의 징역 10년 추가…中 “개입하지 말라”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-05T11:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004679269?sid=104"
-    },
-    {
-     "title": "홍콩 활동가 조슈아 웡, 내년 1월 출소 앞두고 10년형 추가(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T10:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014304910?sid=104"
-    },
-    {
-     "title": "출소 앞둔 홍콩 민주화 운동 상징 조슈아 웡, 징역 10년 추가",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-05T09:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003563172?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "케인 뮌헨 재계약!",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T09:50:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오피셜] 마침내 ‘공식 발표’ 손흥민 ‘영혼의 단짝’ 해리 케인, 바이...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-05T10:33:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/144/0001148296"
-    },
-    {
-     "title": "[오피셜] 최소 주급 7억, 연봉 381억…이제 토트넘으로 안 간다 → 케인...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-05T10:30:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/477/0000637421"
-    },
-    {
-     "title": "분데스리가 161경기 156골… 케인, 2029년까지 뮌헨과 재계약",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-05T09:50:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/018/0006404590"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1029,
+  "flagged": 1030,
   "matched": 472,
   "avgLeadMin": 441,
   "recent": [
