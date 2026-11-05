@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T13:50:07.852Z",
+ "builtAt": "2026-11-05T14:00:11.373Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,18 +8,81 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 20,
  "candidates": [
+  {
+   "keyword": "이 대통령 유튜브 소통",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 53,
+   "recent20": 6,
+   "press": 43,
+   "firstArticleAt": "2026-11-05T12:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李 대통령 \"알고리즘에 안갇혀…욕도 보고 비난도 본다\"",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-05T13:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005350941?sid=100"
+    },
+    {
+     "title": "이 대통령 “알고리즘에 갇혔다고? 욕도, 비난도 본다”",
+     "press": "vop.co.kr",
+     "publishedAt": "2026-11-05T13:56:00.000Z",
+     "link": "https://vop.co.kr/A00001697480.html"
+    },
+    {
+     "title": "이 대통령 \"SNS 논란 두렵지 않아\"‥\"집무실 생방송도 검토\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-05T13:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533805?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "현대캐피탈 시즌 첫 승",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 11,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-05T12:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'해결사' 허수봉 26점 폭발…남자배구 현대캐피탈, 첫 승",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-05T13:49:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/055/0001401001"
+    },
+    {
+     "title": "'허수봉 26점 폭발' 현대캐피탈, 삼성화재 꺾고 시즌 첫 승… 도로공사...",
+     "press": "dailysportshankook.co.kr",
+     "publishedAt": "2026-11-05T13:08:00.000Z",
+     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435214"
+    },
+    {
+     "title": "'모마 25점' 도로공사, 적지서 SOOP 격파…현대캐피탈 시즌 첫 승 신고",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-05T13:00:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109762723253"
+    }
+   ]
+  },
   {
    "keyword": "영국 기준금리 인상",
    "sources": [
-    "signal.bz",
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 14,
+   "articles90": 11,
    "recent20": 0,
-   "press": 13,
-   "firstArticleAt": "2026-11-05T12:24:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-05T12:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -49,7 +112,7 @@
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-05T12:35:00.000Z",
    "exclusive": false,
@@ -78,7 +141,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1055,
+  "flagged": 1057,
   "matched": 484,
   "avgLeadMin": 461,
   "recent": [
