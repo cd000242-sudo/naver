@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T10:58:54.814Z",
+ "builtAt": "2026-11-05T11:09:00.516Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,50 +8,145 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 20,
  "candidates": [
   {
-   "keyword": "내란 우두머리 선고 1월 26일",
+   "keyword": "내란 우두머리 선고가 1월 26일입니다.",
    "sources": [
     "nate"
    ],
-   "articles90": 39,
-   "recent20": 7,
-   "press": 31,
-   "firstArticleAt": "2026-11-05T09:35:00.000Z",
+   "articles90": 44,
+   "recent20": 8,
+   "press": 36,
+   "firstArticleAt": "2026-11-05T09:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘내란 우두머리 혐의’ 윤석열, 내년 1월26일 2심 선고",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-05T10:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000130837?sid=102"
+     "title": "'내란 우두머리' 결심공판 종료...윤, 1시간 20분 항변",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-05T11:04:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4116936"
     },
     {
-     "title": "사형 구형받은 尹 \"내란 아냐\" 항변…내년 1월 26일 선고(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T10:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014304920?sid=102"
+     "title": "[이슈] 尹, '내란 우두머리' 2심 최후진술 \"헌법상 권한행사, 내란죄 될...",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-05T11:03:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=747823"
     },
     {
-     "title": "'내란 우두머리' 2심 내년 1월26일 선고…尹, 1시간 넘게 무죄 호소",
-     "press": "etoday.co.kr",
+     "title": "윤석열 내란 우두머리 항소심 내년 1월 말 선고",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-05T11:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000160547?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "윤석열 2심 선고",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 30,
+   "recent20": 7,
+   "press": 27,
+   "firstArticleAt": "2026-11-05T09:49:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[이슈] 尹, '내란 우두머리' 2심 최후진술 \"헌법상 권한행사, 내란죄 될...",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-05T11:03:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=747823"
+    },
+    {
+     "title": "윤석열 내란 우두머리 항소심 내년 1월 말 선고",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-05T11:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000160547?sid=102"
+    },
+    {
+     "title": "사형 구형에 윤석열 \"헌법 수호하려 계엄\"…내년 1월26일 항소심 선고",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-05T11:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000649280?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "유네스코",
+   "sources": [
+    "google"
+   ],
+   "articles90": 12,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-05T09:41:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "조선 고조리서 ‘수운잡방’·‘음식디미방’, 유네스코 아·태 기록유...",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-05T11:08:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611050224"
+    },
+    {
+     "title": "수학여행 앞둔 단원고 학생들의 흔적… 유네스코 기록유산 됐다",
+     "press": "segye.com",
+     "publishedAt": "2026-11-05T10:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004172882?sid=103"
+    },
+    {
+     "title": "세월호 기록 23만여점 유네스코 아태목록 등재…유가족 \"기억의 새 출발...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-05T10:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009273210?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "외국인",
+   "sources": [
+    "google"
+   ],
+   "articles90": 10,
+   "recent20": 4,
+   "press": 10,
+   "firstArticleAt": "2026-11-05T09:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "파란 쓰나미에 코스피도…외국인들 팔아치운 주식 보니",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-05T10:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400969?sid=101"
+    },
+    {
+     "title": "BGF리테일, 3분기 영업익 3.2%↑…“외국인·차별화 상품이 성장 견인”",
+     "press": "byline.network",
+     "publishedAt": "2026-11-05T10:54:00.000Z",
+     "link": "https://byline.network/?p=9004111222626417"
+    },
+    {
+     "title": "“산재 사망 외국인 지원조례, 기관 협업해야 실질적 도움”",
+     "press": "kyeongin.com",
      "publishedAt": "2026-11-05T10:50:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2644802"
+     "link": "https://www.kyeongin.com/article/1774192"
     }
    ]
   },
   {
    "keyword": "세계기록유산 아태 목록",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 3,
-   "press": 14,
-   "firstArticleAt": "2026-11-05T09:29:00.000Z",
+   "articles90": 10,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-05T09:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -76,173 +171,196 @@
    ]
   },
   {
-   "keyword": "KPGA 최종전 선두",
+   "keyword": "김태규 제명촉구",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-05T09:35:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-05T09:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[KPGA] 옥태훈·왕정훈, 강풍 뚫고 최종전 첫날 공동 선두..김민규 공동...",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-05T10:53:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=747816"
-    },
-    {
-     "title": "옥태훈·왕정훈, KPGA투어 시즌 최종전 1라운드 선두",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-05T10:36:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2015190"
-    },
-    {
-     "title": "'강풍도 못 막았다' 옥태훈·왕정훈, KPGA 투어챔피언십 1R 4언더파 공동...",
-     "press": "maniareport.com",
+     "title": "이진숙 이어 김태규…제명 촉구 결의안 본회의 통과",
+     "press": "ichannela.com",
      "publishedAt": "2026-11-05T10:35:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/425/0000213989"
-    }
-   ]
-  },
-  {
-   "keyword": "LG엔솔, 3차 ESS 불참",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-05T09:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "LG엔솔, 3차 ESS 수주전 불참…삼성·SK 양강 경쟁",
-     "press": "newstopkorea.com",
-     "publishedAt": "2026-11-05T10:56:00.000Z",
-     "link": "https://www.newstopkorea.com/news/articleView.html?idxno=48809"
+     "link": "https://n.news.naver.com/mnews/article/449/0000366557?sid=100"
     },
     {
-     "title": "LG엔솔, 1180MW ESS 수주전 빠졌다…삼성SDI·SK온 2파전",
-     "press": "magazine.hankyung.com",
-     "publishedAt": "2026-11-05T10:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/050/0000112890?sid=101"
-    },
-    {
-     "title": "LG엔솔, 3차 ESS 중앙계약시장 불참…가격 경쟁 대신 ‘선택과 집중’",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-05T10:24:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1319495&inflow=N"
-    }
-   ]
-  },
-  {
-   "keyword": "단원고 4·16 아카이브 등재",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T09:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수학여행 앞둔 단원고 학생들의 흔적… 유네스코 기록유산 됐다",
-     "press": "segye.com",
-     "publishedAt": "2026-11-05T10:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004172882?sid=103"
-    },
-    {
-     "title": "세월호 기록·한글 조리서, 세계기록유산 아태지역 등재(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T10:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014304919?sid=102"
-    },
-    {
-     "title": "세월호 기록 23만여점 유네스코 아태목록 등재…유가족 \"기억의 새 출발...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-05T10:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009273210?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "청와대 한미동맹 입장",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T09:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'핵잠' 등 안보협의 뒤집힐까?...\"한미동맹 초당적\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-05T09:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002428886?sid=100"
-    },
-    {
-     "title": "靑 \"美 중간선거, 한미동맹 영향 없을 것...대미 투자 국익 최우선\"",
+     "title": "제명 촉구 결의안, \"이진숙 이어 김태규까지\"···민주당의 '압박 정치...",
      "press": "enewstoday.co.kr",
-     "publishedAt": "2026-11-05T09:39:00.000Z",
-     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2489051"
+     "publishedAt": "2026-11-05T10:08:00.000Z",
+     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2489065"
     },
     {
-     "title": "靑, 美 중간선거 결과에 \"한미동맹 굳건…대미투자 국익 우선\"",
-     "press": "ntoday.co.kr",
-     "publishedAt": "2026-11-05T09:36:00.000Z",
-     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=130668"
+     "title": "국회, 김태규 제명 촉구 결의안 의결",
+     "press": "thereport.co.kr",
+     "publishedAt": "2026-11-05T09:58:00.000Z",
+     "link": "https://www.thereport.co.kr/news/articleView.html?idxno=93102"
     }
    ]
   },
   {
-   "keyword": "외치는 삼성전자 동행노조",
+   "keyword": "하이닉스",
    "sources": [
-    "signal.bz",
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 3,
+   "press": 3,
+   "firstArticleAt": "2026-11-05T10:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "삼성전자·SK하이닉스 급락에…최태원 \"너무 많이 오른 만큼 빠지기도\"",
+     "press": "kizmom.com",
+     "publishedAt": "2026-11-05T11:08:00.000Z",
+     "link": "https://www.kizmom.com/news/articleView.html?idxno=113786"
+    },
+    {
+     "title": "[마감] 삼성전자·SK하이닉스 폭락 속...카카오 10%대 상승",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-05T10:58:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=880409"
+    },
+    {
+     "title": "마이크론, 대만 HBM 공장 건설 중단…삼성·SK하이닉스 수혜 촉각",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-05T10:54:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1730661"
+    }
+   ]
+  },
+  {
+   "keyword": "박민교 11번째 한라장사",
+   "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-05T09:38:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-05T09:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[포토] 구호 외치는 삼성전자 동행노조 조합원들",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-05T10:34:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3446317"
+     "title": "'한 판도 안 내줬다' 박민교, 의성서 통산 11번째 한라장사",
+     "press": "maniareport.com",
+     "publishedAt": "2026-11-05T11:01:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/425/0000213990"
     },
     {
-     "title": "[포토] 수원사업장 앞 구호 외치는 동행노조",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-05T10:34:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3446324"
+     "title": "씨름 박민교, 의성마늘대회서 통산 11번째 한라장사",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-05T09:43:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/055/0001400959"
     },
     {
-     "title": "[포토] 구호 외치는 삼성전자 동행노조",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-05T10:32:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3446329"
+     "title": "박민교, 의성마늘장사씨름대회 한라장사…통산 11번째 정상",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-05T09:40:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16269174"
+    }
+   ]
+  },
+  {
+   "keyword": "조슈아 웡 징역 10년",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-05T09:45:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "홍콩 활동가 조슈아 웡, 내년 1월 출소 앞두고 10년형 추가(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T10:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014304910?sid=104"
+    },
+    {
+     "title": "출소 앞둔 홍콩 민주화 운동 상징 조슈아 웡, 징역 10년 추가",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-05T09:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003563172?sid=104"
+    },
+    {
+     "title": "'홍콩 우산 혁명 주역' 조슈아 웡, 징역 10년 추가 선고",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-05T09:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004207021?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "케인 뮌헨 재계약!",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-05T09:50:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오피셜] 마침내 ‘공식 발표’ 손흥민 ‘영혼의 단짝’ 해리 케인, 바이...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-05T10:33:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/144/0001148296"
+    },
+    {
+     "title": "[오피셜] 최소 주급 7억, 연봉 381억…이제 토트넘으로 안 간다 → 케인...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-05T10:30:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/477/0000637421"
+    },
+    {
+     "title": "분데스리가 161경기 156골… 케인, 2029년까지 뮌헨과 재계약",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-05T09:50:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/018/0006404590"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1024,
-  "matched": 468,
-  "avgLeadMin": 434,
+  "flagged": 1029,
+  "matched": 472,
+  "avgLeadMin": 441,
   "recent": [
+   {
+    "keyword": "홍콩ELS 과징금 확정",
+    "hitKeyword": "쿠팡 과징금 유지",
+    "hitAt": "2026-11-05T20:00:00+09:00",
+    "leadMin": 1655
+   },
+   {
+    "keyword": "홍콩 ELS 과징금",
+    "hitKeyword": "쿠팡 과징금 유지",
+    "hitAt": "2026-11-05T20:00:00+09:00",
+    "leadMin": 1645
+   },
+   {
+    "keyword": "홍콩 ELS 과징금 3700억 확정",
+    "hitKeyword": "쿠팡 과징금 유지",
+    "hitAt": "2026-11-05T20:00:00+09:00",
+    "leadMin": 1544
+   },
+   {
+    "keyword": "쿠팡 개인정보 유출 과징금",
+    "hitKeyword": "쿠팡 과징금 유지",
+    "hitAt": "2026-11-05T20:00:00+09:00",
+    "leadMin": 82
+   },
    {
     "keyword": "유튜브 대통령 Y 론칭",
     "hitKeyword": "조세호 유튜브 복귀",
@@ -278,30 +396,6 @@
     "hitKeyword": "외국인 매도 쓰나미",
     "hitAt": "2026-11-05T19:30:00+09:00",
     "leadMin": 1504
-   },
-   {
-    "keyword": "블루 쓰나미 미국 정치 변화",
-    "hitKeyword": "외국인 매도 쓰나미",
-    "hitAt": "2026-11-05T19:30:00+09:00",
-    "leadMin": 1443
-   },
-   {
-    "keyword": "최태원 SK그룹 회장",
-    "hitKeyword": "최태원 SK주식 매각",
-    "hitAt": "2026-11-05T19:30:00+09:00",
-    "leadMin": 62
-   },
-   {
-    "keyword": "쿠팡 과징금 부과효력 유지",
-    "hitKeyword": "쿠팡 4천억 부과 유지",
-    "hitAt": "2026-11-05T19:30:00+09:00",
-    "leadMin": 62
-   },
-   {
-    "keyword": "최태원 회장과 기념촬영",
-    "hitKeyword": "최태원 SK주식 매각",
-    "hitAt": "2026-11-05T19:30:00+09:00",
-    "leadMin": 21
    }
   ]
  }
