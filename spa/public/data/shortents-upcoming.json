@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T14:40:32.701Z",
+ "builtAt": "2026-11-05T14:50:38.131Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "영국 기준금리 인상",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
+   "articles90": 6,
+   "recent20": 2,
+   "press": 5,
    "firstArticleAt": "2026-11-05T14:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "잉글랜드은행, 기준금리 3.75%→4%로 25bp인상(상보)",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-05T14:44:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443323"
+    },
+    {
+     "title": "미 달러화 강보합…英 추가 금리 인상 가능성에 파운드 보합권 회복",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-05T14:40:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443322"
+    },
+    {
      "title": "영국도 기준금리 인상 … 3년만에 0.25%P 올려",
      "press": "mk.co.kr",
      "publishedAt": "2026-11-05T14:22:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/009/0005759830?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "주진우 명예훼손 고소",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-05T13:29:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "주진우, 이재명 장남 명예훼손 고소에 \"협박 안 통해\"…맞고발 예고",
+     "press": "pennmike.com",
+     "publishedAt": "2026-11-05T14:44:00.000Z",
+     "link": "https://www.pennmike.com/news/articleView.html?idxno=131123"
     },
     {
-     "title": "영국, 3년 만에 금리 인상...\"추가 인상도 가능\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-05T14:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002428945?sid=104"
+     "title": "李대통령 장남 \"골프장 간 적 없다\"…주진우 명예훼손 고소",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-05T14:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000649309?sid=102"
     },
     {
-     "title": "英 물가 치솟자…기준금리 연 4%로 인상",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-05T14:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005350943?sid=104"
+     "title": "李 대통령 장남, 주진우 명예훼손 고소… “골프장 안 갔다”",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-05T13:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202932?sid=100"
     }
    ]
   },
@@ -74,43 +106,11 @@
      "link": "https://m.sports.naver.com/kfootball/article/001/0016425186"
     }
    ]
-  },
-  {
-   "keyword": "코스피 5%대 급락",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 2,
-   "firstArticleAt": "2026-11-05T13:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "삼성전자·SK하이닉스 급락…코스피·코스닥 5%대 하락",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-05T14:36:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=401116"
-    },
-    {
-     "title": "미 중간선거 여파에 코스피·코스닥 5%대 하락",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-05T14:24:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=401111"
-    },
-    {
-     "title": "코스피, 美 중간선거 여파...5%대 급락마감",
-     "press": "betanews.net",
-     "publishedAt": "2026-11-05T13:14:00.000Z",
-     "link": "https://www.betanews.net/article/view/beta202611050172"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1060,
+  "flagged": 1061,
   "matched": 488,
   "avgLeadMin": 464,
   "recent": [
