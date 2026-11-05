@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T22:53:27.487Z",
+ "builtAt": "2026-11-05T23:03:30.829Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,8 +8,72 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 16,
  "candidates": [
+  {
+   "keyword": "AI 우려 나스닥 5.5%↓",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 37,
+   "recent20": 9,
+   "press": 34,
+   "firstArticleAt": "2026-11-05T21:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[국제금융 브리핑] 데이터센터 규제 우려에 나스닥 5.5% 급락...영란은행...",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-05T23:02:00.000Z",
+     "link": "https://www.tokenpost.kr/news/economy/433675"
+    },
+    {
+     "title": "데이터센터 규제 우려에 AI 패닉셀링…韓도 변동성 확대[굿모닝 증시]",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-05T22:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005838893?sid=101"
+    },
+    {
+     "title": "[국내증시 전망] 코스피 또 시험대…나스닥 5.5%·반도체 12% 폭락, 삼성...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-05T22:56:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16269539"
+    }
+   ]
+  },
+  {
+   "keyword": "조작기소 특검법 본회의 상정",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-05T21:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "진중권 \"조작기소 뻔뻔한 자가 둘…하나는 이재명, 다른 하나는 윤석열...",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-05T22:48:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/324358/?sc=Naver"
+    },
+    {
+     "title": "경향신문 \"수사·기소 분리 무력화한 조작기소특검법, 민주당의 내로남...",
+     "press": "mediatoday.co.kr",
+     "publishedAt": "2026-11-05T22:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/006/0000138600?sid=102"
+    },
+    {
+     "title": "[포토] ‘조작기소 특검법’ 필리버스터",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-05T22:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005838888?sid=100"
+    }
+   ]
+  },
   {
    "keyword": "아파트",
    "sources": [
@@ -19,10 +83,16 @@
    "articles90": 7,
    "recent20": 2,
    "press": 7,
-   "firstArticleAt": "2026-11-05T21:27:00.000Z",
+   "firstArticleAt": "2026-11-05T22:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"현금 2억~3억 있으면 살 수 있다\" 전문가가 꼽은 서울 아파트",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-05T22:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005437460?sid=101"
+    },
     {
      "title": "10월 전국 아파트 경매 12년 만에 최다…전북 낙찰가율은 반등 '78.7%'",
      "press": "pressian.com",
@@ -34,44 +104,38 @@
      "press": "smartbizn.com",
      "publishedAt": "2026-11-05T22:38:00.000Z",
      "link": "https://www.smartbizn.com/news/articleView.html?idxno=158612"
-    },
-    {
-     "title": "부산 아파트 28층에서 추락사, 안전 관리의 경각심 높아져",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-05T22:18:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=884346"
     }
    ]
   },
   {
-   "keyword": "이스라엘 연정 구성",
+   "keyword": "2026년 11월 6일 운세",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 6,
    "recent20": 3,
-   "press": 6,
-   "firstArticleAt": "2026-11-05T21:47:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-05T21:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이스라엘 대통령 \"새 정부 구성할 총리 후보 8일 발표\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-05T22:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000963963?sid=104"
+     "title": "[오늘의 운세] 11월 6일 띠별 점심메뉴…일반·채식 추천",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-05T22:58:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=401121"
     },
     {
-     "title": "이스라엘, 8일 차기 총리 후보 발표…네타냐후 열세",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-05T22:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000649332?sid=104"
+     "title": "[오늘의 띠별 운세] 2026년 11월 6일 금요일",
+     "press": "mhns.co.kr",
+     "publishedAt": "2026-11-05T22:56:00.000Z",
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=767857"
     },
     {
-     "title": "이스라엘 대통령, 차기 정부 구성할 총리 후보 8일 발표",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-05T22:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004207073?sid=104"
+     "title": "[오늘의 운세] 2026년 11월 6일 띠별 운세",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-05T22:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003482859?sid=103"
     }
    ]
   },
@@ -80,10 +144,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T21:33:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-05T21:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -106,111 +170,26 @@
      "link": "https://n.news.naver.com/mnews/article/006/0000138599?sid=102"
     }
    ]
-  },
-  {
-   "keyword": "2026년 11월 6일 운세",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T21:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘의 운세] 2026년 11월 6일 띠별 운세",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-05T22:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003482859?sid=103"
-    },
-    {
-     "title": "오늘의 MBTI 운세 11월 6일 금요일",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-05T22:12:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=401127"
-    },
-    {
-     "title": "[오늘의 운세] 띠별 운세 11월 6일",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-05T22:08:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=401125"
-    }
-   ]
-  },
-  {
-   "keyword": "장남 주진우 명예훼손",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T21:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이동호 vs 주진우, '황제 골프' 의혹 진실 공방전의 결말은?",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-05T22:20:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=884347"
-    },
-    {
-     "title": "주진우, 李대통령 장남 동호씨의 고소에 \"협박 안 통해 맞고발\"",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-05T22:18:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/324356/?sc=Naver"
-    },
-    {
-     "title": "\"골프장 간 적 없어\"‥대통령 장남, 주진우 고소",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-05T21:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533848?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "영국 기준금리 인상",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T21:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "英, 3년만에 금리 인상…BOE 총재 \"추가 인상도 가능\"",
-     "press": "getnews.co.kr",
-     "publishedAt": "2026-11-05T22:34:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=886221"
-    },
-    {
-     "title": "영국도 금리 인상 대열 합류…3년 3개월 만",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-05T21:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000542049?sid=101"
-    },
-    {
-     "title": "영국, 3년만에 금리 연 4%로 0.25%p 인상…BOE 총재 \"추가 인상도 가능\"",
-     "press": "tfmedia.co.kr",
-     "publishedAt": "2026-11-05T21:36:00.000Z",
-     "link": "https://www.tfmedia.co.kr/news/article.html?no=208673"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1075,
-  "matched": 512,
-  "avgLeadMin": 486,
+  "flagged": 1076,
+  "matched": 514,
+  "avgLeadMin": 489,
   "recent": [
+   {
+    "keyword": "한지 유네스코 등재",
+    "hitKeyword": "세월호 기록물 유네스코 등재",
+    "hitAt": "2026-11-06T08:00:00+09:00",
+    "leadMin": 1377
+   },
+   {
+    "keyword": "유네스코",
+    "hitKeyword": "세월호 기록물 유네스코 등재",
+    "hitAt": "2026-11-06T08:00:00+09:00",
+    "leadMin": 751
+   },
    {
     "keyword": "삼성바이오 2차 파업",
     "hitKeyword": "삼성바이오 부분파업",
@@ -258,18 +237,6 @@
     "hitKeyword": "AI 데이터센터 규제 파장",
     "hitAt": "2026-11-06T06:30:00+09:00",
     "leadMin": 806
-   },
-   {
-    "keyword": "미국 중간선거",
-    "hitKeyword": "공화당 중간선거 참패",
-    "hitAt": "2026-11-06T06:30:00+09:00",
-    "leadMin": 27
-   },
-   {
-    "keyword": "유럽 여객기 폭파 위협",
-    "hitKeyword": "유럽 여객기 폭탄 위협",
-    "hitAt": "2026-11-06T06:00:00+09:00",
-    "leadMin": 2809
    }
   ]
  }
