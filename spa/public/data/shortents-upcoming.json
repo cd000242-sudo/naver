@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T23:03:30.829Z",
+ "builtAt": "2026-11-05T23:13:35.372Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 16,
+ "measured": 9,
  "candidates": [
   {
    "keyword": "AI 우려 나스닥 5.5%↓",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 37,
-   "recent20": 9,
-   "press": 34,
-   "firstArticleAt": "2026-11-05T21:36:00.000Z",
+   "articles90": 41,
+   "recent20": 11,
+   "press": 37,
+   "firstArticleAt": "2026-11-05T21:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[국제금융 브리핑] 데이터센터 규제 우려에 나스닥 5.5% 급락...영란은행...",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-05T23:02:00.000Z",
-     "link": "https://www.tokenpost.kr/news/economy/433675"
+     "title": "AI 규제 공포에 나스닥 5.5%↓…하루만에 시총 3천400조원 증발(종합2보...",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-05T23:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016425325?sid=101"
     },
     {
-     "title": "데이터센터 규제 우려에 AI 패닉셀링…韓도 변동성 확대[굿모닝 증시]",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-05T22:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005838893?sid=101"
+     "title": "AI 규제 우려 뉴욕증시 급락…나스닥 5.5%↓",
+     "press": "smedaily.co.kr",
+     "publishedAt": "2026-11-05T23:10:00.000Z",
+     "link": "http://www.smedaily.co.kr/news/articleView.html?idxno=365791"
     },
     {
-     "title": "[국내증시 전망] 코스피 또 시험대…나스닥 5.5%·반도체 12% 폭락, 삼성...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-05T22:56:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16269539"
+     "title": "나스닥 5.5% 폭락…AI 관련주 무너지며 시총 2조5천억달러 증발",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-05T23:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002830977?sid=104"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 9,
+   "articles90": 12,
+   "recent20": 2,
+   "press": 11,
    "firstArticleAt": "2026-11-05T21:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "'조작기소 특검법' 오늘 처리…국힘 필리버스터 이어 장외로",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-05T23:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000519410?sid=100"
+    },
+    {
+     "title": "'조작기소특검법' 필리버스터 진행 중…오늘 與주도 처리 전망",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-05T23:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000649336?sid=102"
+    },
+    {
      "title": "진중권 \"조작기소 뻔뻔한 자가 둘…하나는 이재명, 다른 하나는 윤석열...",
      "press": "jasm.co.kr",
      "publishedAt": "2026-11-05T22:48:00.000Z",
      "link": "https://www.jasm.co.kr/news/view/324358/?sc=Naver"
-    },
-    {
-     "title": "경향신문 \"수사·기소 분리 무력화한 조작기소특검법, 민주당의 내로남...",
-     "press": "mediatoday.co.kr",
-     "publishedAt": "2026-11-05T22:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/006/0000138600?sid=102"
-    },
-    {
-     "title": "[포토] ‘조작기소 특검법’ 필리버스터",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-05T22:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005838888?sid=100"
     }
    ]
   },
@@ -80,62 +80,30 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
+   "articles90": 10,
+   "recent20": 4,
+   "press": 10,
    "firstArticleAt": "2026-11-05T22:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"현금 2억~3억 있으면 살 수 있다\" 전문가가 꼽은 서울 아파트",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-05T22:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005437460?sid=101"
+     "title": "\"복도 적치물·열린 방화문 위험\"…영월소방서, 노후 아파트 불시 단속",
+     "press": "aptn.co.kr",
+     "publishedAt": "2026-11-05T23:12:00.000Z",
+     "link": "http://www.aptn.co.kr/news/articleView.html?idxno=113205"
     },
     {
-     "title": "10월 전국 아파트 경매 12년 만에 최다…전북 낙찰가율은 반등 '78.7%'",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-05T22:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002464548?sid=102"
+     "title": "서울·수도권 아파트 분양가, 왜 비싼가 했더니…공사비 아닌 땅값 탓",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-05T23:10:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443355"
     },
     {
-     "title": "강남 집값은 '뚝' 외곽은 '쑥'···서울 아파트 100주 연속 상승 현실화...",
-     "press": "smartbizn.com",
-     "publishedAt": "2026-11-05T22:38:00.000Z",
-     "link": "https://www.smartbizn.com/news/articleView.html?idxno=158612"
-    }
-   ]
-  },
-  {
-   "keyword": "2026년 11월 6일 운세",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 3,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T21:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘의 운세] 11월 6일 띠별 점심메뉴…일반·채식 추천",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-05T22:58:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=401121"
-    },
-    {
-     "title": "[오늘의 띠별 운세] 2026년 11월 6일 금요일",
-     "press": "mhns.co.kr",
-     "publishedAt": "2026-11-05T22:56:00.000Z",
-     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=767857"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 6일 띠별 운세",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-05T22:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003482859?sid=103"
+     "title": "서울 아파트 매매값 91주째 상승…상승폭은 둔화",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-05T23:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001976948?sid=101"
     }
    ]
   },
@@ -144,13 +112,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
    "firstArticleAt": "2026-11-05T21:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "尹 \"'조작기소 주장' 권력자들 한둘 아냐\"…내란 2심 1월 26일 선고",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-05T23:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000649341?sid=102"
+    },
     {
      "title": "'내란 우두머리' 2심 1월 26일 선고…윤석열 전 대통령 \"계엄은 정당\"",
      "press": "mbn.co.kr",
@@ -162,12 +136,38 @@
      "press": "gokorea.kr",
      "publishedAt": "2026-11-05T22:18:00.000Z",
      "link": "https://www.gokorea.kr/news/articleView.html?idxno=884342"
+    }
+   ]
+  },
+  {
+   "keyword": "이승기 이다인 둘째 공개",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-05T22:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이승기♥이다인, 생후 4개월 둘째 아들 첫 공개…가족사진 눈길",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-05T22:24:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=779415"
     },
     {
-     "title": "윤석열 2심도 당선무효형… \"397억 토해낼 판\" \"'이재명 판결'에 당했다...",
-     "press": "mediatoday.co.kr",
-     "publishedAt": "2026-11-05T21:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/006/0000138599?sid=102"
+     "title": "이승기♥이다인 딸·아들 공개…\"아빠 닮아, 너무 예뻐\" 뜨거운 반응 [엑...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-05T22:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002077328"
+    },
+    {
+     "title": "이승기♥이다인, 생후 4개월 둘째 아들 공개…두 자녀와 환한 미소",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-05T22:16:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009273411"
     }
    ]
   }
