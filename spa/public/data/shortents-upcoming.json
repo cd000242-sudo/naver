@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T04:12:49.339Z",
+ "builtAt": "2026-11-05T04:22:54.399Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,101 +8,166 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
-  {
-   "keyword": "조작기소 특검법 본회의 상정",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 45,
-   "recent20": 2,
-   "press": 34,
-   "firstArticleAt": "2026-11-05T02:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국힘 \"李·文 면죄부 나눠먹기\" … '조작기소 특검' 필리버스터 예고",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-05T04:08:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/05/2026110500179.html"
-    },
-    {
-     "title": "민주 \"조작기소 특검, 권력남용 규명\"…국힘 비판",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-05T04:06:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1542756"
-    },
-    {
-     "title": "본회의 오르는 조작기소 특검법…국힘, 전 안건 필리버스터 예고",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-05T03:44:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=171986"
-    }
-   ]
-  },
   {
    "keyword": "데블스 플랜 제작발표회",
    "sources": [
     "signal.bz"
    ],
    "articles90": 69,
-   "recent20": 6,
-   "press": 26,
-   "firstArticleAt": "2026-11-05T03:01:00.000Z",
+   "recent20": 5,
+   "press": 25,
+   "firstArticleAt": "2026-11-05T03:02:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
+    {
+     "title": "신동 “다이어트엔 ‘데블스 플랜3’가 최고”…‘인간 마운자로’ 자처",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-05T04:17:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001148229"
+    },
+    {
+     "title": "[포토] 데블스 플랜3 '레전드와 신흥 강자들이 한자리에'",
+     "press": "joynews24.com",
+     "publishedAt": "2026-11-05T04:12:00.000Z",
+     "link": "http://www.joynews24.com/view/2023005"
+    },
     {
      "title": "[포토] 데블스 플랜3 '많이 사랑해주세요'",
      "press": "joynews24.com",
      "publishedAt": "2026-11-05T04:10:00.000Z",
      "link": "http://www.joynews24.com/view/2023003"
-    },
-    {
-     "title": "장동민 귀환→오현규 재도전, 제대로 판 키운 두뇌 서바이벌 '데블스 플...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-05T04:09:00.000Z",
-     "link": "https://m.entertain.naver.com/article/119/0003151701"
-    },
-    {
-     "title": "'데블스 플랜: 데드 어게인' 힘차게 파이팅![엑's HD포토]",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-05T04:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002077070"
     }
    ]
   },
   {
-   "keyword": "청해부대 작전구역 확대",
+   "keyword": "경상수지 600억 달러 돌파",
    "sources": [
     "nate"
    ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-05T02:47:00.000Z",
+   "articles90": 10,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-05T03:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "진보당 “청해부대 호르무즈 우회 파병 철회하라” 위성락 경질 촉구",
-     "press": "vop.co.kr",
+     "title": "[외환] 셀 물량에도 커스터디 달러 매수에 1,340원대로…코스피 주시",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-05T04:10:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443235"
+    },
+    {
+     "title": "9월 한달 경상수지 흑자, 지난해 연간 절반 수준",
+     "press": "naeil.com",
+     "publishedAt": "2026-11-05T04:06:00.000Z",
+     "link": "https://www.naeil.com/news/read/607746?ref=naver"
+    },
+    {
+     "title": "경상수지 첫 600억 달러 돌파… 3개월 연속 사상 최대",
+     "press": "m.skyedaily.com",
      "publishedAt": "2026-11-05T04:00:00.000Z",
-     "link": "https://vop.co.kr/A00001697470.html"
+     "link": "https://m.skyedaily.com/news_view.html?ID=314147"
+    }
+   ]
+  },
+  {
+   "keyword": "유치원",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 4,
+   "press": 6,
+   "firstArticleAt": "2026-11-05T02:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "교육청, 세종 유치원 사태 지원책 발표... 교사노조 반발",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-05T04:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002534749?sid=102"
     },
     {
-     "title": "정부 \"청해부대 75명 추가 파견...작전지역도 확대\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-05T03:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002428658?sid=100"
+     "title": "[5일 인천시교육청] 섬마을·유치원까지 국악교육 확대 등",
+     "press": "asiatime.co.kr",
+     "publishedAt": "2026-11-05T04:18:00.000Z",
+     "link": "https://www.asiatime.co.kr/article/20261105500247"
     },
     {
-     "title": "청해부대 작전구역 호르무즈 인근까지 확대…기뢰제거 전력도 파견 추진",
-     "press": "ppss.kr",
-     "publishedAt": "2026-11-05T03:18:00.000Z",
-     "link": "https://www.ppss.kr/news/articleView.html?idxno=319246"
+     "title": "인천시교육청, 섬·유치원 국악교육 지원 확대… 전통음악 배움터 넓힌...",
+     "press": "lawissue.co.kr",
+     "publishedAt": "2026-11-05T04:14:00.000Z",
+     "link": "https://www.lawissue.co.kr/view.php?ud=202611051208493005d94aa4ada6_12"
+    }
+   ]
+  },
+  {
+   "keyword": "주말 서울 영하 5도 예상",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-05T03:19:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"패딩 꺼내야겠네\"…주말 전국 곳곳 추위·강풍",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-05T04:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006404171?sid=103"
+    },
+    {
+     "title": "\"주말부터 겨울 모드\"…'입동' 맞춰 영하권 추위 온다",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-05T03:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001271758?sid=103"
+    },
+    {
+     "title": "초겨울 문턱 넘는 한반도...주말 서울 올가을 첫 영하권",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-05T03:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004007942?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "조정식 의장의 입법박람회 참석",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-05T03:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "입법 박람회 참석하는 조정식 국회의장",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T04:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303659?sid=100"
+    },
+    {
+     "title": "이야기 나누는 조정식 국회의장과 한병도 민주당 원내대표",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T04:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303657?sid=100"
+    },
+    {
+     "title": "입법 박람회 참석한 조정식 국회의장과 국회의원들",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T04:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303661?sid=100"
     }
    ]
   },
@@ -111,13 +176,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
+   "articles90": 5,
+   "recent20": 3,
+   "press": 5,
    "firstArticleAt": "2026-11-05T03:28:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
+    {
+     "title": "수능일, 주식시장 1시간 늦게 열린다…오전 10시 개장",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-05T04:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003151704?sid=101"
+    },
     {
      "title": "수능날 주식시장 1시간 늦게 열린다…정규장 오전 10시 개장",
      "press": "dt.co.kr",
@@ -129,76 +200,38 @@
      "press": "kjdaily.com",
      "publishedAt": "2026-11-05T04:04:00.000Z",
      "link": "http://www.kjdaily.com/article.php?aid=1793851338691354276"
-    },
-    {
-     "title": "문혁수 LG이노텍 사장, 석 달 만에 자사 주식 재매수",
-     "press": "newskr.kr",
-     "publishedAt": "2026-11-05T03:36:00.000Z",
-     "link": "http://www.newskr.kr/news/articleView.html?idxno=107734"
     }
    ]
   },
   {
-   "keyword": "하이닉스 주가 하락",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T02:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "삼성전자 거래대금 10.7% 증가…SK하이닉스는 27.8% 감소",
-     "press": "kjdaily.com",
-     "publishedAt": "2026-11-05T03:36:00.000Z",
-     "link": "http://www.kjdaily.com/article.php?aid=1793849622691353276"
-    },
-    {
-     "title": "삼성전자·하이닉스 주가 폭락 중인데... 현대차는 폭등하는 이유가 있...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-05T03:24:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1172078"
-    },
-    {
-     "title": "SK하이닉스·삼성전자, 미국 중간선거 후 주가 폭락...골드만삭스 \"지나...",
-     "press": "coinreaders.com",
-     "publishedAt": "2026-11-05T03:22:00.000Z",
-     "link": "http://coinreaders.com/267683"
-    }
-   ]
-  },
-  {
-   "keyword": "장동혁 의원총회 참석",
+   "keyword": "대통령 선수단 격려오찬",
    "sources": [
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T02:45:00.000Z",
+   "articles90": 24,
+   "recent20": 6,
+   "press": 4,
+   "firstArticleAt": "2026-11-05T03:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "의원총회 참석하는 국민의힘 대표와 지도부",
+     "title": "국제기능올림픽 선수단 활약상 영상 시청하는 이재명 대통령 부부",
      "press": "newsis.com",
-     "publishedAt": "2026-11-05T03:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303539?sid=100"
+     "publishedAt": "2026-11-05T04:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303727?sid=100"
     },
     {
-     "title": "의원총회 참석한 장동혁 국민의힘 대표",
+     "title": "격려사 하는 이재명 대통령",
      "press": "newsis.com",
-     "publishedAt": "2026-11-05T03:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303533?sid=100"
+     "publishedAt": "2026-11-05T04:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303715?sid=100"
     },
     {
-     "title": "의원총회 국민의례 하는 국민의힘 의원들",
+     "title": "건배하는 이재명 대통령",
      "press": "newsis.com",
-     "publishedAt": "2026-11-05T03:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303532?sid=100"
+     "publishedAt": "2026-11-05T04:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303713?sid=100"
     }
    ]
   },
@@ -233,11 +266,75 @@
      "link": "https://www.newdaily.co.kr/site/data/html/2026/11/05/2026110500163.html"
     }
    ]
+  },
+  {
+   "keyword": "하이닉스 주가 하락",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-05T03:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "삼성전자 거래 10.7% 증가…SK하이닉스는 27.8% 감소",
+     "press": "kjdaily.com",
+     "publishedAt": "2026-11-05T03:36:00.000Z",
+     "link": "http://www.kjdaily.com/article.php?aid=1793849622691353276"
+    },
+    {
+     "title": "삼성전자·하이닉스 주가 폭락 중인데... 현대차는 폭등하는 이유가 있...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-05T03:24:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1172078"
+    },
+    {
+     "title": "SK하이닉스·삼성전자, 미국 중간선거 후 주가 폭락...골드만삭스 \"지나...",
+     "press": "coinreaders.com",
+     "publishedAt": "2026-11-05T03:22:00.000Z",
+     "link": "http://coinreaders.com/267683"
+    }
+   ]
+  },
+  {
+   "keyword": "장동혁 의원총회 참석",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-05T02:53:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "의원총회 참석하는 국민의힘 대표와 지도부",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T03:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303537?sid=100"
+    },
+    {
+     "title": "의원총회 참석한 장동혁 국민의힘 대표",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T03:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303526?sid=100"
+    },
+    {
+     "title": "국민의힘 의원총회",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T03:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303534?sid=100"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 921,
+  "flagged": 925,
   "matched": 399,
   "avgLeadMin": 379,
   "recent": [
