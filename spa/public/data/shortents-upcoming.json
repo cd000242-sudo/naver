@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T03:02:16.263Z",
+ "builtAt": "2026-11-05T03:12:19.706Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,54 +8,22 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 24,
  "candidates": [
-  {
-   "keyword": "조작기소 특검법 상정",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 64,
-   "recent20": 18,
-   "press": 41,
-   "firstArticleAt": "2026-11-05T01:38:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오마이포토] '조작기소 특검법' 반대 구호 외치는 국민의힘",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-05T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002534742?sid=100"
-    },
-    {
-     "title": "[포토] '조작기소 특검법' 상정 규탄하는 국민의힘",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-05T03:00:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/05/2026110500161.html"
-    },
-    {
-     "title": "[속보]‘조작기소 특검법’ 오늘 국회 본회의 상정",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-05T03:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000366483?sid=100"
-    }
-   ]
-  },
   {
    "keyword": "청해부대 작전 확대",
    "sources": [
     "nate"
    ],
-   "articles90": 41,
-   "recent20": 5,
-   "press": 35,
-   "firstArticleAt": "2026-11-05T01:33:00.000Z",
+   "articles90": 37,
+   "recent20": 4,
+   "press": 31,
+   "firstArticleAt": "2026-11-05T01:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "청해부대, 美 파병 요구에 화답… 호르무즈 작전영역 2배로 확대",
+     "title": "청해부대, 美 파병 요구에 화답…호르무즈 작전영역 2배로 확대",
      "press": "munhwa.com",
      "publishedAt": "2026-11-05T03:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/021/0002830556?sid=100"
@@ -67,25 +35,31 @@
      "link": "https://www.newsverse.kr/news/articleView.html?idxno=11849"
     },
     {
-     "title": "청해부대, 오만 남방까지 작전구역 확대… 해상초계기 추가 파견",
-     "press": "biz.chosun.com",
+     "title": "與 \"청해부대 작전구역 확대, 해적 급증 탓…호르무즈 파병 아냐\"",
+     "press": "news1.kr",
      "publishedAt": "2026-11-05T02:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202775?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/421/0009272091?sid=100"
     }
    ]
   },
   {
-   "keyword": "9월 경상수지 600억 달러",
+   "keyword": "9월 경상수지 600억 달러 흑자",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 34,
-   "recent20": 6,
-   "press": 29,
-   "firstArticleAt": "2026-11-05T01:34:00.000Z",
+   "articles90": 28,
+   "recent20": 3,
+   "press": 22,
+   "firstArticleAt": "2026-11-05T01:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "반도체가 다했다…경상흑자 사상 첫 600억 달러 돌파",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-05T03:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000963786?sid=101"
+    },
     {
      "title": "'꿈의 반도체' 600억달러 넘어선 경상흑자⋯연 5000억달러 향해 뛴다 [종...",
      "press": "etoday.co.kr",
@@ -97,44 +71,38 @@
      "press": "munhwa.com",
      "publishedAt": "2026-11-05T02:57:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/021/0002830545?sid=101"
-    },
-    {
-     "title": "경상흑자 사상 첫 600억달러…수출 증가분 79%는 반도체",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-05T02:46:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2121185"
     }
    ]
   },
   {
-   "keyword": "카카오 AI 사업 2028년 목표",
+   "keyword": "데블스 플랜 데드 어게인",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 23,
-   "recent20": 4,
+   "articles90": 60,
+   "recent20": 60,
    "press": 21,
-   "firstArticleAt": "2026-11-05T01:36:00.000Z",
+   "firstArticleAt": "2026-11-05T02:56:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "카카오, 1500억 자사주 매입·소각 추진…AI 매출 키워 2028년 흑자 목표...",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-05T02:58:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026110511060687026"
+     "title": "'데블스 플랜3' 장동민 “서바이벌 은퇴는 없다…도전 받아줄 것”",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-05T03:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000519269"
     },
     {
-     "title": "[컨콜] 카톡 광고 35% 뛰고 콘텐츠는 역성장…카카오 “AI 2028년 손익분...",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-05T02:54:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261105025555784"
+     "title": "은퇴 없는 장동민→재도전 정현규…'데블스 플랜3', 두뇌 서바이벌의 진...",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-05T03:10:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109749140161"
     },
     {
-     "title": "카카오, AI 확산 속도 기대 이하…'광고·커머스'로 2028년 수익화 나선...",
-     "press": "epnc.co.kr",
-     "publishedAt": "2026-11-05T02:52:00.000Z",
-     "link": "https://www.epnc.co.kr/news/articleView.html?idxno=409322"
+     "title": "장동민, '데블스 플랜3' 출연 이유 밝혔다…\"도전 멈추면 삶 다한 것\"",
+     "press": "queen.co.kr",
+     "publishedAt": "2026-11-05T03:10:00.000Z",
+     "link": "http://www.queen.co.kr/news/articleView.html?idxno=465846"
     }
    ]
   },
@@ -143,13 +111,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 21,
+   "articles90": 18,
    "recent20": 1,
-   "press": 21,
-   "firstArticleAt": "2026-11-05T01:34:00.000Z",
+   "press": 18,
+   "firstArticleAt": "2026-11-05T01:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "수능일 증시 10시 개장…프리마켓 중단·거래시간 조정",
+     "press": "mstoday.co.kr",
+     "publishedAt": "2026-11-05T03:04:00.000Z",
+     "link": "https://www.mstoday.co.kr/news/articleView.html?idxno=200383"
+    },
     {
      "title": "수능날 증시 1시간 늦게 연다 … 오전 10시 개장, 넥스트레이드 프리마...",
      "press": "biz.newdaily.co.kr",
@@ -161,44 +135,6 @@
      "press": "mbn.mk.co.kr",
      "publishedAt": "2026-11-05T02:24:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/057/0001976825?sid=101"
-    },
-    {
-     "title": "수능시험날 증시, 프리마켓 없이 오전 10시 개장",
-     "press": "news.bizwatch.co.kr",
-     "publishedAt": "2026-11-05T02:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/648/0000052320?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "층간소음 기준 강화",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 21,
-   "recent20": 0,
-   "press": 21,
-   "firstArticleAt": "2026-11-05T02:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "다세대·오피스텔 층간소음 차단기준 강화 … 중량·경량 충격음 49dB 이...",
-     "press": "queen.co.kr",
-     "publishedAt": "2026-11-05T02:40:00.000Z",
-     "link": "http://www.queen.co.kr/news/articleView.html?idxno=465838"
-    },
-    {
-     "title": "'층간소음 막자' 다세대주택 중량·경량충력음 모두 49dB 이하로",
-     "press": "safetynews.co.kr",
-     "publishedAt": "2026-11-05T02:40:00.000Z",
-     "link": "https://www.safetynews.co.kr/news/articleView.html?idxno=251388"
-    },
-    {
-     "title": "빌라·오피스텔 층간소음 기준 강화…아파트처럼 49dB 이하로",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-05T02:34:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=779253"
     }
    ]
   },
@@ -208,7 +144,7 @@
     "signal.bz"
    ],
    "articles90": 18,
-   "recent20": 1,
+   "recent20": 0,
    "press": 18,
    "firstArticleAt": "2026-11-05T02:00:00.000Z",
    "exclusive": false,
@@ -235,328 +171,296 @@
    ]
   },
   {
-   "keyword": "데블스 플랜 데드 어게인",
+   "keyword": "카카오 주가",
    "sources": [
-    "nate"
-   ],
-   "articles90": 46,
-   "recent20": 46,
-   "press": 17,
-   "firstArticleAt": "2026-11-05T02:53:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[포토] '데블스 플랜: 데드 어게인' 정종연 PD",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-05T03:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000486666"
-    },
-    {
-     "title": "‘데블스 플랜3’ 정현규 “시즌2 우승 후 재도전? 성숙한 자세로 증명...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-05T03:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005759430"
-    },
-    {
-     "title": "[포토] 박경림, '데블스플랜' 마더 테레사의 진행",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-05T03:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000326800"
-    }
-   ]
-  },
-  {
-   "keyword": "LG, 트리스탄 벡 영입",
-   "sources": [
-    "nate"
+    "daum"
    ],
    "articles90": 16,
-   "recent20": 0,
-   "press": 16,
-   "firstArticleAt": "2026-11-05T01:36:00.000Z",
+   "recent20": 3,
+   "press": 15,
+   "firstArticleAt": "2026-11-05T01:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "LG, 새 외국인 투수로 ‘이정후 동료’ 트리스탄 벡 영입",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-05T02:36:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611050087"
+     "title": "카카오, 1500억원 자사주 소각…주총 한 달 연기",
+     "press": "bloter.net",
+     "publishedAt": "2026-11-05T03:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/293/0000092750?sid=105"
     },
     {
-     "title": "LG, 마운드 보강 칼 갈았다...현역 메이저리거 트리스탄 벡 영입",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-05T02:34:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/081/0003696070"
+     "title": "카카오, 3분기 영업이익 2403억원…자사주 1500억원 매입·소각",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-05T03:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002830815?sid=105"
     },
     {
-     "title": "‘KS 2연패 실패’ LG, 이정후 동료 우완 투수 벡 영입",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-05T02:33:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/119/0003151670"
+     "title": "카카오, 1500억원 규모 자사주 매입·소각 결정에 10% 가까이 급등",
+     "press": "econonews.co.kr",
+     "publishedAt": "2026-11-05T03:04:00.000Z",
+     "link": "http://www.econonews.co.kr/news/articleView.html?idxno=446775"
     }
    ]
   },
   {
    "keyword": "교통",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 16,
-   "recent20": 8,
-   "press": 15,
-   "firstArticleAt": "2026-11-05T02:35:00.000Z",
+   "articles90": 14,
+   "recent20": 7,
+   "press": 14,
+   "firstArticleAt": "2026-11-05T02:40:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "용인 동백서 자율주행 교통신호 통합기술 국내 첫 실증",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-05T03:00:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3081497"
+     "title": "목포~무안 잇는 광역버스 '올타2001번' 수요응답형 도입… 서부권 교통...",
+     "press": "greened.kr",
+     "publishedAt": "2026-11-05T03:09:00.000Z",
+     "link": "https://www.greened.kr/news/articleView.html?idxno=353918"
     },
     {
-     "title": "대전시, 70세 이상 어르신 무제한 무임교통 지원 그대로",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T02:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016423786?sid=102"
+     "title": "서울 지하철 7호선 온수역 기관사 교대 안전 강화…인천·서울교통공사...",
+     "press": "tournews21.com",
+     "publishedAt": "2026-11-05T03:06:00.000Z",
+     "link": "https://www.tournews21.com/news/articleView.html?idxno=147608"
     },
     {
-     "title": "네오에쓰앤씨, 시흥시 장애인 체육대회 무료 의료지원…교통약자 이동...",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-05T02:54:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=884219"
-    }
-   ]
-  },
-  {
-   "keyword": "최고위원회의 장동혁 대표",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 16,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-05T01:39:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령 유튜브에 “‘민티’ 망했는데, ‘청티’ 만드나”…장동혁의...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-05T02:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002830518?sid=100"
-    },
-    {
-     "title": "가짜뉴스 프레임으로 언론과 싸우는 대통령...장동혁 \"말실수 해놓고 좀...",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-05T02:42:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=325218"
-    },
-    {
-     "title": "장동혁 \"공소취소 특검 밀어붙이면 정권 취소 특검 될 것\" '경고'",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-05T02:42:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=325223"
+     "title": "대전시, 어르신 무임교통카드 '무제한 유지'",
+     "press": "bzeronews.com",
+     "publishedAt": "2026-11-05T03:02:00.000Z",
+     "link": "https://www.bzeronews.com/news/articleView.html?idxno=824854"
     }
    ]
   },
   {
    "keyword": "다문화 가정",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 9,
-   "recent20": 8,
-   "press": 9,
+   "articles90": 11,
+   "recent20": 10,
+   "press": 11,
    "firstArticleAt": "2026-11-05T02:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국민 혼인·출생 늘 때 다문화는 ‘역주행’… 작년 다문화 혼인·출생...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-05T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004007939?sid=101"
+     "title": "결혼·출산 회복세 비껴간 다문화가정…혼인·출생 소폭 감소",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-05T03:02:00.000Z",
+     "link": "https://www.ajunews.com/view/20261105091201945"
     },
     {
-     "title": "다문화 출생아 비중 3년 만에 감소… '한남일녀' 혼인은 역대 최다",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-05T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000963783?sid=101"
+     "title": "다문화 부부 3쌍 중 1쌍 ‘남편 10살 이상 연상’",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-05T03:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002830812?sid=101"
     },
     {
-     "title": "전체 혼인 8.1% 늘었는데 다문화 혼인은 감소…이혼은 1.4% 증가",
-     "press": "etnews.com",
+     "title": "지난해 다문화 혼인 줄고 이혼 늘었다… 출생아도 감소",
+     "press": "fnnews.com",
      "publishedAt": "2026-11-05T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003482532?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/014/0005599874?sid=101"
     }
    ]
   },
   {
-   "keyword": "우이신설선 운행 지연",
+   "keyword": "발언하는 장동혁 대표",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-05T01:37:00.000Z",
+   "articles90": 9,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-05T01:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "우이신설선 전구간 운행 지연 4시간15분만 복구(종합)",
+     "title": "정점식 국민의힘 원내대표 발언 듣는 장동혁 대표",
      "press": "newsis.com",
-     "publishedAt": "2026-11-05T02:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303366?sid=102"
+     "publishedAt": "2026-11-05T03:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303525?sid=100"
     },
     {
-     "title": "출근길 우이신설선 전 구간 열차 운행 지연…4시간여만에 정상화",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-05T02:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002719301?sid=102"
+     "title": "의원총회 참석한 장동혁 국민의힘 대표",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-05T03:00:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261105000784"
     },
     {
-     "title": "출근길에 멈춰선 우이신설선⋯4시간 15분만에 복구",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-05T02:00:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2644536"
+     "title": "본회의 통과만 앞둔 공소취소 특검법...장동혁 \"정권취소 특검 될 것\"",
+     "press": "thepublic.kr",
+     "publishedAt": "2026-11-05T02:42:00.000Z",
+     "link": "https://www.thepublic.kr/news/articleView.html?idxno=325217"
     }
    ]
   },
   {
-   "keyword": "하지수 방송 포착",
+   "keyword": "경사노위 노사정 합의",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-05T01:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "소규모 사업장도 안전관리자 배치…경사노위, 이재명 정부 첫 노사정 합...",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-05T02:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000923111?sid=102"
+    },
+    {
+     "title": "소규모 사업장 안전관리자·보건관리자 둔다…경사노위 첫 합의",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-05T02:44:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261105000737"
+    },
+    {
+     "title": "소규모 사업장 산재 사각지대 해소…노사정 2차 합의 추진",
+     "press": "youthdaily.co.kr",
+     "publishedAt": "2026-11-05T02:38:00.000Z",
+     "link": "https://www.youthdaily.co.kr/news/article.html?no=229407"
+    }
+   ]
+  },
+  {
+   "keyword": "인천시 부가세 면제 공동대응",
    "sources": [
     "daum"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-05T02:00:00.000Z",
+   "firstArticleAt": "2026-11-05T02:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "열애설 이어 이찬혁·하지수, '전참시'서 또 투샷",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-05T02:50:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16268894"
-    },
-    {
-     "title": "이찬혁, '열애설 주인공' 하지수와 손 잡고 스윙 댄스 '눈길'",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-05T02:48:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1793845633530382006"
-    },
-    {
-     "title": "이찬혁, '열애설' 하지수와 방송서 포착…뮤비 인연 계속 [N이슈]",
+     "title": "인천시 \"친환경버스 부가세 면제 종료시 1대당 3500만원 市 부담\"",
      "press": "news1.kr",
-     "publishedAt": "2026-11-05T02:28:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009272004"
+     "publishedAt": "2026-11-05T02:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009272075?sid=102"
+    },
+    {
+     "title": "“내년에만 1390억 더 들어”…16개 시도 “친환경 버스 부가세 면제 특...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-05T02:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005759413?sid=100"
+    },
+    {
+     "title": "친환경버스 부가세 면제 2년 앞당겨 종료 추진…인천시 등 16개 시·도 “...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-05T02:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002830494?sid=102"
     }
    ]
   },
   {
-   "keyword": "젠지 라이언",
+   "keyword": "2026 제주올레걷기축제 개막",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 3,
+   "articles90": 8,
    "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T01:38:00.000Z",
+   "press": 2,
+   "firstArticleAt": "2026-11-05T01:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "유상욱 젠지 감독 “밴픽은 생각의 일치가 중요…IG 정글·바텀 경계”...",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-05T02:48:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611050065"
+     "title": "2026 제주올레 걷기축제 개막",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-05T03:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016423826?sid=103"
     },
     {
-     "title": "젠지, 롤드컵 8강서 라이언 3대 0 완파…기인·룰러·쵸비 세트별 활약",
-     "press": "jbnews.com",
-     "publishedAt": "2026-11-05T01:56:00.000Z",
-     "link": "https://www.jbnews.com/news/articleView.html?idxno=1515175"
+     "title": "가을 제주 길 따라 걷는 '2026 올레축제' 개막[뉴시스 앵글]",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T02:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303443?sid=102"
     },
     {
-     "title": "[LoL 월드 챔피언십] 젠지, 라이언 꺾고 4강 진출",
-     "press": "tgdaily.co.kr",
-     "publishedAt": "2026-11-05T01:38:00.000Z",
-     "link": "https://www.tgdaily.co.kr/news/articleView.html?idxno=407785"
+     "title": "2026 제주올레걷기축제 개막, 19코스 걸어가는 참가자들",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T02:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303346?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 898,
-  "matched": 382,
-  "avgLeadMin": 373,
+  "flagged": 902,
+  "matched": 393,
+  "avgLeadMin": 366,
   "recent": [
    {
-    "keyword": "금융권 해킹 CEO 책임",
-    "hitKeyword": "금융권 해킹 정보유출",
-    "hitAt": "2026-11-05T11:30:00+09:00",
-    "leadMin": 2634
+    "keyword": "2026년 11월 5일 운세",
+    "hitKeyword": "차경은 11월 결혼",
+    "hitAt": "2026-11-05T12:00:00+09:00",
+    "leadMin": 318
    },
    {
-    "keyword": "코스피 매도 사이드카 발동",
-    "hitKeyword": "코스피 매도 사이드카",
-    "hitAt": "2026-11-05T11:30:00+09:00",
+    "keyword": "하지수 예능 포착",
+    "hitKeyword": "이찬혁 하지수 전참시",
+    "hitAt": "2026-11-05T12:00:00+09:00",
+    "leadMin": 177
+   },
+   {
+    "keyword": "이찬혁 하지수 예능",
+    "hitKeyword": "이찬혁 하지수 전참시",
+    "hitAt": "2026-11-05T12:00:00+09:00",
+    "leadMin": 167
+   },
+   {
+    "keyword": "하지수 이찬혁 스윙댄스",
+    "hitKeyword": "이찬혁 하지수 전참시",
+    "hitAt": "2026-11-05T12:00:00+09:00",
+    "leadMin": 157
+   },
+   {
+    "keyword": "세브란스 50대 살인미수",
+    "hitKeyword": "세브란스 흉기 사건",
+    "hitAt": "2026-11-05T12:00:00+09:00",
+    "leadMin": 48
+   },
+   {
+    "keyword": "LG 트리스탄 영입",
+    "hitKeyword": "LG 트리스탄 벡 영입",
+    "hitAt": "2026-11-05T12:00:00+09:00",
+    "leadMin": 48
+   },
+   {
+    "keyword": "LG, 트리스탄 벡 영입",
+    "hitKeyword": "LG 트리스탄 벡 영입",
+    "hitAt": "2026-11-05T12:00:00+09:00",
+    "leadMin": 38
+   },
+   {
+    "keyword": "세브란스 흉기난동 살인미수",
+    "hitKeyword": "세브란스 흉기 사건",
+    "hitAt": "2026-11-05T12:00:00+09:00",
+    "leadMin": 28
+   },
+   {
+    "keyword": "LG, 벡 영입!",
+    "hitKeyword": "LG 트리스탄 벡 영입",
+    "hitAt": "2026-11-05T12:00:00+09:00",
     "leadMin": 18
    },
    {
-    "keyword": "트럼프 헤그세스 교체",
-    "hitKeyword": "헤그세스 국방장관 교체 검토",
-    "hitAt": "2026-11-05T11:30:00+09:00",
+    "keyword": "이찬혁 하지수 스윙댄스",
+    "hitKeyword": "이찬혁 하지수 전참시",
+    "hitAt": "2026-11-05T12:00:00+09:00",
     "leadMin": 18
-   },
-   {
-    "keyword": "금융사 정보유출 47만건",
-    "hitKeyword": "금융권 해킹 정보유출",
-    "hitAt": "2026-11-05T11:30:00+09:00",
-    "leadMin": 18
-   },
-   {
-    "keyword": "코스피 매도 사이드카",
-    "hitKeyword": "코스피 매도 사이드카",
-    "hitAt": "2026-11-05T11:30:00+09:00",
-    "leadMin": 8
-   },
-   {
-    "keyword": "탑 나나 생일카페 동행",
-    "hitKeyword": "허영생 생일카페",
-    "hitAt": "2026-11-05T11:00:00+09:00",
-    "leadMin": 2946
-   },
-   {
-    "keyword": "나나 생일카페 동반 방문",
-    "hitKeyword": "허영생 생일카페",
-    "hitAt": "2026-11-05T11:00:00+09:00",
-    "leadMin": 2906
-   },
-   {
-    "keyword": "최종면접 김재원 민낯",
-    "hitKeyword": "최종면접 박스오피스 1위",
-    "hitAt": "2026-11-05T11:00:00+09:00",
-    "leadMin": 2735
-   },
-   {
-    "keyword": "로보월드",
-    "hitKeyword": "로보월드 2026 K로봇",
-    "hitAt": "2026-11-05T11:00:00+09:00",
-    "leadMin": 1427
-   },
-   {
-    "keyword": "최종면접 개봉 1위",
-    "hitKeyword": "최종면접 박스오피스 1위",
-    "hitAt": "2026-11-05T11:00:00+09:00",
-    "leadMin": 97
    }
   ]
  }
