@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T17:41:46.246Z",
+ "builtAt": "2026-11-05T17:51:49.185Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,18 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 11,
+ "measured": 14,
  "candidates": [
   {
    "keyword": "미국",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 4,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T16:15:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-05T16:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
