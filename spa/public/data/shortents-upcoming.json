@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T03:32:33.263Z",
+ "builtAt": "2026-11-05T03:42:37.954Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,75 +15,42 @@
    "sources": [
     "daum"
    ],
-   "articles90": 67,
+   "articles90": 68,
    "recent20": 6,
-   "press": 41,
-   "firstArticleAt": "2026-11-05T02:09:00.000Z",
+   "press": 42,
+   "firstArticleAt": "2026-11-05T02:14:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "민주, ‘조작기소 특검법’ 본회의 처리 추진...국힘 필리버스터 예고",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-05T03:30:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=72630"
+     "title": "'조작기소 특검법'에 국회 정면충돌…여야 협상 결렬, 필리버스터 전면...",
+     "press": "ppss.kr",
+     "publishedAt": "2026-11-05T03:39:00.000Z",
+     "link": "https://www.ppss.kr/news/articleView.html?idxno=319256"
     },
     {
-     "title": "결국 본회의 가는 ‘조작기소 특검법’… 野 “독소 가득, 입법 쿠데타...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-05T03:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002830580?sid=100"
+     "title": "국힘, 與 '조작기소 특검법' 강행에 필리버스터·장외투쟁 예고",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T03:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303599?sid=100"
     },
     {
-     "title": "\"무리한 기소여도 재판서 무죄 다퉈야\"…조작기소특검 비판·우려",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T03:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016423855?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "카카오 자사주 매입 소각",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 42,
-   "recent20": 4,
-   "press": 38,
-   "firstArticleAt": "2026-11-05T02:03:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "카카오 인적분할 한 달 연기…카카오AI에 2636억 추가 배정",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-05T03:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009272141?sid=105"
-    },
-    {
-     "title": "[종합] 카카오, 3분기 영업익 2403억원…연간 1조원 가시권에 AI·1500억 ...",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-05T03:28:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=561445"
-    },
-    {
-     "title": "카카오, 1500억원 자사주 매입 뒤 전량 소각",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-05T03:28:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=400886"
+     "title": "정점식 “李정권 ‘최후의 선’ 넘었다…조작기소 특검법은 최악의 의회...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-05T03:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002719378?sid=100"
     }
    ]
   },
   {
    "keyword": "청해부대 확대",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 37,
-   "recent20": 3,
-   "press": 31,
-   "firstArticleAt": "2026-11-05T02:04:00.000Z",
+   "articles90": 32,
+   "recent20": 0,
+   "press": 27,
+   "firstArticleAt": "2026-11-05T02:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -108,34 +75,66 @@
    ]
   },
   {
-   "keyword": "친환경버스 부가세 면제",
+   "keyword": "데블스 플랜 제작발표회",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 19,
-   "recent20": 1,
-   "press": 17,
-   "firstArticleAt": "2026-11-05T02:15:00.000Z",
+   "articles90": 69,
+   "recent20": 25,
+   "press": 26,
+   "firstArticleAt": "2026-11-05T03:00:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "[S포토] 서출구, 'AI칩급 뇌연산' (데블스플랜3)",
+     "press": "stardailynews.co.kr",
+     "publishedAt": "2026-11-05T03:40:00.000Z",
+     "link": "https://www.stardailynews.co.kr/news/articleView.html?idxno=601434"
+    },
+    {
+     "title": "[S포토] 넉살, '작은 것의 반란' (데블스플랜3)",
+     "press": "stardailynews.co.kr",
+     "publishedAt": "2026-11-05T03:40:00.000Z",
+     "link": "https://www.stardailynews.co.kr/news/articleView.html?idxno=601433"
+    },
+    {
+     "title": "[S포토] 오현민, '오랜만에' (데블스플랜3)",
+     "press": "stardailynews.co.kr",
+     "publishedAt": "2026-11-05T03:40:00.000Z",
+     "link": "https://www.stardailynews.co.kr/news/articleView.html?idxno=601435"
+    }
+   ]
+  },
+  {
+   "keyword": "코스피 매도 사이드카 발동",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 25,
+   "recent20": 3,
+   "press": 25,
+   "firstArticleAt": "2026-11-05T02:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "인천시 \"친환경 버스 부가세 면제 유지 해야\"",
-     "press": "hankyung.com",
+     "title": "'미 중간선거 충격파' 코스피·코스닥 동시 사이드카",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-05T03:36:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3743093"
+    },
+    {
+     "title": "반도체 쇼크에 매도 사이드카 발동 … 코스피 5460선 급락",
+     "press": "biz.newdaily.co.kr",
      "publishedAt": "2026-11-05T03:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005350645?sid=102"
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/05/2026110500174.html"
     },
     {
-     "title": "인천시 \"친환경버스 부가세 면제 종료시 1대당 3500만원 市 부담\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-05T02:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009272075?sid=102"
-    },
-    {
-     "title": "“내년에만 1390억 더 들어”…16개 시도 “친환경 버스 부가세 면제 특...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-05T02:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005759413?sid=100"
+     "title": "반도체 '투자 한파' 우려‥코스피 매도 사이드카",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-05T03:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533674?sid=101"
     }
    ]
   },
@@ -144,13 +143,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 14,
-   "recent20": 5,
-   "press": 14,
-   "firstArticleAt": "2026-11-05T02:52:00.000Z",
+   "articles90": 13,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-05T02:54:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
+    {
+     "title": "장위6구역 재개발조합 교통안전시설 설치 공사업체 선정 입찰공고",
+     "press": "arunews.com",
+     "publishedAt": "2026-11-05T03:32:00.000Z",
+     "link": "https://www.arunews.com/news/articleView.html?idxno=69089"
+    },
     {
      "title": "서울교통공사, 1~8호선 지하철 전자파 수치 공개…KCA와 공동 추진",
      "press": "newspost.kr",
@@ -162,25 +167,18 @@
      "press": "viva100.com",
      "publishedAt": "2026-11-05T03:22:00.000Z",
      "link": "https://www.viva100.com/article/20261105500554"
-    },
-    {
-     "title": "대전 트램 공사에 퇴근길 통행속도 최대 44%↓… 교통대책 실효성 논란",
-     "press": "chungnamilbo.co.kr",
-     "publishedAt": "2026-11-05T03:20:00.000Z",
-     "link": "http://www.chungnamilbo.co.kr/news/articleView.html?idxno=919010"
     }
    ]
   },
   {
    "keyword": "9월 경상수지 600억달러 돌파",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 19,
+   "articles90": 18,
    "recent20": 1,
-   "press": 14,
-   "firstArticleAt": "2026-11-05T02:09:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-05T02:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -205,79 +203,176 @@
    ]
   },
   {
-   "keyword": "다문화 가정",
+   "keyword": "장동혁 의원총회 참석",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 14,
-   "recent20": 4,
-   "press": 13,
+   "articles90": 19,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-05T02:29:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "의원총회 참석하는 국민의힘 대표와 지도부",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T03:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303535?sid=100"
+    },
+    {
+     "title": "의원총회 참석한 장동혁 국민의힘 대표",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T03:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303533?sid=100"
+    },
+    {
+     "title": "의원총회 국민의례 하는 국민의힘 의원들",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T03:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303532?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "발언하는 정점식 원내대표",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-05T02:13:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "발언하는 정점식 국민의힘 원내대표",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T03:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303536?sid=100"
+    },
+    {
+     "title": "정점식 국민의힘 원내대표 발언 듣는 장동혁 대표",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T03:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303525?sid=100"
+    },
+    {
+     "title": "[포토] 민주당 규탄하는 정점식 국민의힘 원내대표",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-05T03:02:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/05/2026110500163.html"
+    }
+   ]
+  },
+  {
+   "keyword": "웨딩업체 17곳 과태료",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 8,
+   "recent20": 0,
+   "press": 8,
    "firstArticleAt": "2026-11-05T03:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "함양군, 7년 만에 다문화가족 화합 한마당 개최",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-05T03:28:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5080109"
+     "title": "결혼 비용도 위약금도 ‘깜깜이’…예식장 등 17곳 과태료",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-05T03:02:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2644523"
     },
     {
-     "title": "다문화 가정 남편은 미국, 아내는 베트남 가장 많았다",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-05T03:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000541882?sid=104"
+     "title": "웨딩업계 ‘깜깜이 가격’ 여전…17곳에 과태료 1560만원",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-05T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002719367?sid=101"
     },
     {
-     "title": "다문화 가정, 남편은 45세이상 부인은 20대 후반 가장 많아",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-05T03:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000541881?sid=103"
+     "title": "스드메·예식장 가격 '안 알려줌'…17곳 업체 명단 공개",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-05T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004206801?sid=101"
     }
    ]
   },
   {
-   "keyword": "수능일 증시 오전 10시 개장",
+   "keyword": "열차",
    "sources": [
-    "nate"
+    "signal.bz",
+    "google"
    ],
    "articles90": 7,
    "recent20": 1,
    "press": 7,
-   "firstArticleAt": "2026-11-05T02:04:00.000Z",
+   "firstArticleAt": "2026-11-05T02:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "수능일 국내 증시 오전 10시 개장… 거래 종료도 1시간 연기",
-     "press": "mediawatch.kr",
-     "publishedAt": "2026-11-05T03:18:00.000Z",
-     "link": "https://www.mediawatch.kr/news/article.html?no=261633"
+     "title": "인천지하철 1·2호선 전 열차에 5G 와이파이…퀴즈 맞히면 상품권 증정",
+     "press": "tournews21.com",
+     "publishedAt": "2026-11-05T03:40:00.000Z",
+     "link": "https://www.tournews21.com/news/articleView.html?idxno=147610"
     },
     {
-     "title": "수능일 증시 10시 개장…프리마켓 중단·거래시간 조정",
-     "press": "mstoday.co.kr",
-     "publishedAt": "2026-11-05T03:04:00.000Z",
-     "link": "https://www.mstoday.co.kr/news/articleView.html?idxno=200383"
+     "title": "[공연소식] 국립정동극장 세실, 연극 '멜로드라마 열차' 내달 공연",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-05T02:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016423693?sid=103"
     },
     {
-     "title": "수능날 증시 1시간 늦게 연다 … 오전 10시 개장, 넥스트레이드 프리마...",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-05T02:50:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/05/2026110500153.html"
+     "title": "커튼·책·개미가 살아나는 열차…국립정동극장 〈멜로드라마 열차〉",
+     "press": "sctoday.co.kr",
+     "publishedAt": "2026-11-05T02:28:00.000Z",
+     "link": "https://www.sctoday.co.kr/news/articleView.html?idxno=48970"
+    }
+   ]
+  },
+  {
+   "keyword": "하이닉스 주가 하락",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-05T02:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "삼성전자 거래대금 10.7% 증가…SK하이닉스는 27.8% 감소",
+     "press": "kjdaily.com",
+     "publishedAt": "2026-11-05T03:36:00.000Z",
+     "link": "http://www.kjdaily.com/article.php?aid=1793849622691353276"
+    },
+    {
+     "title": "삼성전자·하이닉스 주가 폭락 중인데... 현대차는 폭등하는 이유가 있...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-05T03:24:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1172078"
+    },
+    {
+     "title": "SK하이닉스·삼성전자, 미국 중간선거 후 주가 폭락...골드만삭스 \"지나...",
+     "press": "coinreaders.com",
+     "publishedAt": "2026-11-05T03:22:00.000Z",
+     "link": "http://coinreaders.com/267683"
     }
    ]
   },
   {
    "keyword": "데드 어게인 발표회",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 6,
-   "firstArticleAt": "2026-11-05T02:58:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-05T03:01:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
@@ -302,80 +397,14 @@
    ]
   },
   {
-   "keyword": "열차",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-05T02:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[공연소식] 국립정동극장 세실, 연극 '멜로드라마 열차' 내달 공연",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T02:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016423693?sid=103"
-    },
-    {
-     "title": "커튼·책·개미가 살아나는 열차…국립정동극장 〈멜로드라마 열차〉",
-     "press": "sctoday.co.kr",
-     "publishedAt": "2026-11-05T02:28:00.000Z",
-     "link": "https://www.sctoday.co.kr/news/articleView.html?idxno=48970"
-    },
-    {
-     "title": "출근길 우이신설선 전 구간 열차 운행 지연…4시간여만에 정상화",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-05T02:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002719301?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "하이닉스 주가 하락",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T02:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "삼성전자·하이닉스 주가 폭락 중인데... 현대차는 폭등하는 이유가 있...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-05T03:24:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1172078"
-    },
-    {
-     "title": "SK하이닉스·삼성전자, 미국 중간선거 후 주가 폭락...골드만삭스 \"지나...",
-     "press": "coinreaders.com",
-     "publishedAt": "2026-11-05T03:22:00.000Z",
-     "link": "http://coinreaders.com/267683"
-    },
-    {
-     "title": "코스피 '美중간선거 쇼크'... SK하이닉스 -6.6% 삼성전자 -5.3% '휘청'",
-     "press": "newsfc.co.kr",
-     "publishedAt": "2026-11-05T02:46:00.000Z",
-     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82258"
-    }
-   ]
-  },
-  {
    "keyword": "한전 전기요금 현실화",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T02:04:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-05T02:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -396,70 +425,6 @@
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-05T02:17:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006404113?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "유선민 중령",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T02:07:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "계엄 투입 유선민 특전사 중령 \"'내란'이라 말하면 진급\"...\"李 정권, 명...",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-05T03:10:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/324250/?sc=Naver"
-    },
-    {
-     "title": "[현장영상] 특전사 중령, 계엄 군인 징계에 이재명 정부 작심 비판",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-05T02:10:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3446120"
-    },
-    {
-     "title": "국회 찾은 특전사 중령… “내란이라 하면 진급” [현장영상]",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-05T02:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000366471?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "한국시리즈",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T02:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“회사 점퍼 맞춰 입고 쓰레기 투기”… 한국시리즈 민폐 응원 논란",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-05T02:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202776?sid=004"
-    },
-    {
-     "title": "[2026 한국시리즈] 선발·타선 힘 확인한 KT, 3차전서 우승 확률 88% 잡을...",
-     "press": "joongboo.com",
-     "publishedAt": "2026-11-05T02:42:00.000Z",
-     "link": "https://www.joongboo.com/news/articleView.html?idxno=363741575"
-    },
-    {
-     "title": "KT, 한국시리즈 2차전 연장 혈투 끝 석패…이강철 감독 \"선수들 모두 잘...",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-05T02:18:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=846221"
     }
    ]
   },
@@ -491,17 +456,29 @@
      "title": "2026 제주올레걷기축제 개막, 19코스 걸어가는 참가자들",
      "press": "newsis.com",
      "publishedAt": "2026-11-05T02:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303346?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/003/0014303355?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 908,
-  "matched": 393,
-  "avgLeadMin": 366,
+  "flagged": 913,
+  "matched": 395,
+  "avgLeadMin": 374,
   "recent": [
+   {
+    "keyword": "전자발찌 청와대 칼부림 예고",
+    "hitKeyword": "세브란스병원 칼부림",
+    "hitAt": "2026-11-05T12:30:00+09:00",
+    "leadMin": 4164
+   },
+   {
+    "keyword": "하지수 방송 포착",
+    "hitKeyword": "이찬혁 하지수 전참시",
+    "hitAt": "2026-11-05T12:30:00+09:00",
+    "leadMin": 28
+   },
    {
     "keyword": "2026년 11월 5일 운세",
     "hitKeyword": "차경은 11월 결혼",
@@ -549,18 +526,6 @@
     "hitKeyword": "세브란스 흉기 사건",
     "hitAt": "2026-11-05T12:00:00+09:00",
     "leadMin": 28
-   },
-   {
-    "keyword": "LG, 벡 영입!",
-    "hitKeyword": "LG 트리스탄 벡 영입",
-    "hitAt": "2026-11-05T12:00:00+09:00",
-    "leadMin": 18
-   },
-   {
-    "keyword": "이찬혁 하지수 스윙댄스",
-    "hitKeyword": "이찬혁 하지수 전참시",
-    "hitAt": "2026-11-05T12:00:00+09:00",
-    "leadMin": 18
    }
   ]
  }
