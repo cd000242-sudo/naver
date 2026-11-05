@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T05:13:23.376Z",
+ "builtAt": "2026-11-05T05:23:27.360Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "LG화학 영업익 감소",
    "sources": [
     "daum"
    ],
-   "articles90": 22,
-   "recent20": 18,
-   "press": 20,
+   "articles90": 25,
+   "recent20": 11,
+   "press": 23,
    "firstArticleAt": "2026-11-05T04:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "LG화학, 3Q 영업익 5612억원…전년比 17.4%↓",
+     "title": "LG화학, 3분기 영업이익 5,612억원…전년동기 比 17.4% 감소",
+     "press": "dnews.co.kr",
+     "publishedAt": "2026-11-05T05:22:00.000Z",
+     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611051416265990827"
+    },
+    {
+     "title": "LG화학, 3분기 영업익 5612억원…전년比 17.4%↓",
+     "press": "weekly.hankooki.com",
+     "publishedAt": "2026-11-05T05:22:00.000Z",
+     "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7192387"
+    },
+    {
+     "title": "LG화학, 3분기 영업익 5612억원…전년 대비 17.4% 감소",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-05T05:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003057360?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "2027 서울 세계청년대회",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 23,
+   "recent20": 5,
+   "press": 17,
+   "firstArticleAt": "2026-11-05T03:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "2027 서울 세계청년대회 마스코트 첫 공개…'호비·코비' [포토]",
      "press": "econovill.com",
-     "publishedAt": "2026-11-05T05:12:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=756139"
+     "publishedAt": "2026-11-05T05:20:00.000Z",
+     "link": "https://www.econovill.com/news/articleView.html?idxno=756147"
     },
     {
-     "title": "LG화학 3분기 영업익 17%↓…\"첨단소재 수익성은 개선\"(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T05:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016424092?sid=101"
+     "title": "내년 가톨릭 최대 축제, 100만명 서울 집결…'숙박·안전 숙제'",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-05T05:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005437103?sid=103"
     },
     {
-     "title": "매출 15조 넘었지만 웃지 못한 LG화학…석유화학 적자에 영업익 17% 감소",
-     "press": "dizzotv.com",
-     "publishedAt": "2026-11-05T05:08:00.000Z",
-     "link": "https://www.dizzotv.com/site/data/html_dir/2026/11/05/2026110580105.html"
+     "title": "서울 세계청년대회, 마지막 무대는 성남 서울공항…\"시민 불편 최소화\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-05T05:14:00.000Z",
+     "link": "https://www.ajunews.com/view/20261105134939822"
     }
    ]
   },
@@ -47,30 +79,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 32,
-   "recent20": 6,
-   "press": 13,
-   "firstArticleAt": "2026-11-05T03:44:00.000Z",
+   "articles90": 22,
+   "recent20": 7,
+   "press": 16,
+   "firstArticleAt": "2026-11-05T04:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이 대통령 \"더 많은 청년들이 기술로 꿈 펼치는 사회 만들 것\"",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-05T05:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002534759?sid=100"
+     "title": "李대통령 \"성장해도 일자리 안 늘어…국민 창업 시대 돼야\"",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-05T05:20:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443249"
     },
     {
-     "title": "李 대통령, 국제기능올림픽 선수단 초청 오찬…“청년 기술인재가 대한...",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-05T05:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000130737?sid=100"
+     "title": "李대통령 \"청년 기술인재가 韓 미래…실력 걸맞은 인정·존중받도록\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-05T05:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009272420?sid=100"
     },
     {
-     "title": "이 대통령 “청년 기술인재가 미래…실력 걸맞게 인정받는 사회 되게 노...",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-05T05:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000366500?sid=100"
+     "title": "이 대통령 부부, 국제기능올림픽 선수단 초청 오찬",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-05T05:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400884?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "조작기소 특검법 법사위 통과",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 11,
+   "recent20": 6,
+   "press": 11,
+   "firstArticleAt": "2026-11-05T03:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "윤석열 정부 특검법 논란, 법치주의 위협과 이해충돌 문제 부상",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-05T05:20:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=884238"
+    },
+    {
+     "title": "변호사 단체들 \"조작기소 특검, 법치주의 위협…명백한 이해충돌\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-05T05:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009272417?sid=102"
+    },
+    {
+     "title": "'조작기소 특검법' 본회의 상정 추진‥'필버' 예고",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-05T05:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533692?sid=100"
     }
    ]
   },
@@ -80,7 +144,7 @@
     "signal.bz"
    ],
    "articles90": 11,
-   "recent20": 1,
+   "recent20": 0,
    "press": 11,
    "firstArticleAt": "2026-11-05T03:55:00.000Z",
    "exclusive": false,
@@ -107,35 +171,66 @@
    ]
   },
   {
-   "keyword": "2027 서울청년대회 기자간담회",
+   "keyword": "데블스플랜3",
    "sources": [
-    "signal.bz",
-    "nate"
+    "google"
    ],
    "articles90": 11,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-05T03:54:00.000Z",
+   "recent20": 4,
+   "press": 8,
+   "firstArticleAt": "2026-11-05T03:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "세계 청년 50만명 서울로…2027 세계청년대회 준비 본격화",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-05T05:06:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=100687"
+     "title": "'서바이벌 1인자' 장동민, 데블스 플랜3 출격...\"내가 살아있는 한 은퇴...",
+     "press": "starnewsk.com",
+     "publishedAt": "2026-11-05T05:22:00.000Z",
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60726"
     },
     {
-     "title": "청년들이 자신의 가치 발견하도록…2027년 서울에 '세계청년대회' 열린...",
-     "press": "ftoday.co.kr",
-     "publishedAt": "2026-11-05T04:58:00.000Z",
-     "link": "http://www.ftoday.co.kr/news/articleView.html?idxno=369001"
+     "title": "'데블스 플랜3' 장동민·하석진·정현규, '서바이벌 강자' 총출동...\"뇌지...",
+     "press": "starnewsk.com",
+     "publishedAt": "2026-11-05T05:16:00.000Z",
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60717"
     },
     {
-     "title": "“단절의 시대, 필요한 건 만남의 용기”…2027 세계청년대회, 국내외 청...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-05T04:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003151715?sid=103"
+     "title": "장동민부터 홍진호·하석진까지…'데블스 플랜3', 역대급 두뇌 전쟁 예...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T05:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014303885"
+    }
+   ]
+  },
+  {
+   "keyword": "장동민 서바이벌 은퇴 없다",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 9,
+   "recent20": 3,
+   "press": 8,
+   "firstArticleAt": "2026-11-05T04:09:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'데블스 플랜3' 장동민·하석진·정현규, '서바이벌 강자' 총출동...\"뇌지...",
+     "press": "starnewsk.com",
+     "publishedAt": "2026-11-05T05:16:00.000Z",
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60717"
+    },
+    {
+     "title": "장동민부터 홍진호·하석진까지…'데블스 플랜3', 역대급 두뇌 전쟁 예...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T05:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014303885"
+    },
+    {
+     "title": "장동민도 “오줌 질질”…韓서바이벌 레전드 싹 모은 '데블스 플랜3'(종...",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-05T05:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000519283"
     }
    ]
   },
@@ -145,7 +240,7 @@
     "google"
    ],
    "articles90": 9,
-   "recent20": 4,
+   "recent20": 2,
    "press": 8,
    "firstArticleAt": "2026-11-05T04:08:00.000Z",
    "exclusive": false,
@@ -172,162 +267,34 @@
    ]
   },
   {
-   "keyword": "주식",
-   "sources": [
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 4,
-   "press": 7,
-   "firstArticleAt": "2026-11-05T04:44:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "수능 당일 주식시장 개장시간 변경…오전 10시 개장·오후 4시 30분 마감",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-05T05:06:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16268995"
-    },
-    {
-     "title": "주주환원 나선 카카오, 자사 주식 1500억원 매입 후 소각",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-05T05:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001163367?sid=105"
-    },
-    {
-     "title": "[코인 갱신 일지] AIN 신고점 경신…주식·ETF 토큰 포함 9종 신저점",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-05T05:02:00.000Z",
-     "link": "https://www.tokenpost.kr/news/cryptocurrency/433114"
-    }
-   ]
-  },
-  {
-   "keyword": "장동민 서바이벌 은퇴 없다",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-05T03:51:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "장동민도 “오줌 질질”…韓서바이벌 레전드 싹 모은 '데블스 플랜3'(종...",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-05T05:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000519283"
-    },
-    {
-     "title": "장동민, 결국 작심 발언했다…때 아닌 은퇴설에 \" 홍진호가 자꾸 헛소문...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-05T05:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000783109"
-    },
-    {
-     "title": "'태도 논란' 정현규→'은퇴설' 장동민까지 모였다…우승자 총출동한 '데...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-05T05:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000783108"
-    }
-   ]
-  },
-  {
-   "keyword": "조작기소 특검법 법사위 통과",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-05T03:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'조작기소 특검법' 처리 앞두고 첨예 대립…국민의힘 \"장외투쟁 불사\"",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-05T05:10:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=314713"
-    },
-    {
-     "title": "\"조작 기소 특검법은 하루, 부산 글로벌법은 7개월\"…김대식, 민주당에...",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-05T05:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004206834?sid=102"
-    },
-    {
-     "title": "여야 합의한 부산 글로벌법, 법사위서 7개월째 발 묶여",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-05T04:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001883215?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "장동민의 재도전, 데블스 플랜3.",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T03:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "장동민도 “오줌 질질”…韓서바이벌 레전드 싹 모은 '데블스 플랜3'(종...",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-05T05:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000519283"
-    },
-    {
-     "title": "“악마가 장동민을 데려왔다”…‘데블스 플랜3’, 목말랐던 ‘뇌지컬...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-05T04:34:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001148230"
-    },
-    {
-     "title": "[핌in현장] 장동민 \"살아있는 한 서바이벌 은퇴 없다\"…'데블스 플랜' 더...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-05T04:27:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261105000718"
-    }
-   ]
-  },
-  {
-   "keyword": "이형일 부총리 회의 주재",
+   "keyword": "미국 중간선거 관련 동향",
    "sources": [
     "nate"
    ],
    "articles90": 4,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T03:50:00.000Z",
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-05T04:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "시장상황점검회의 주재하는 이형일 부총리",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-05T04:09:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261105000872"
-    },
-    {
-     "title": "이형일 부총리, 시장상황점검회의 주재",
+     "title": "F4 \"미국 중간선거 영향 지속 점검…변동성 철저 대비\"",
      "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T04:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016423959?sid=101"
+     "publishedAt": "2026-11-05T05:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016424120?sid=101"
     },
     {
-     "title": "이형일 부총리 주재 '시장상황점검회의'",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-05T03:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009272190?sid=101"
+     "title": "민주당 압승 미국 정치 지형의 변화 글로벌 증시 영향…반도체·에너지...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-05T05:04:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=623612"
+    },
+    {
+     "title": "코트라 “미국 관세 압박 계속될 듯”",
+     "press": "naeil.com",
+     "publishedAt": "2026-11-05T04:04:00.000Z",
+     "link": "https://www.naeil.com/news/read/607692?ref=naver"
     }
    ]
   },
@@ -363,11 +330,43 @@
      "link": "https://n.news.naver.com/mnews/article/421/0009272247?sid=103"
     }
    ]
+  },
+  {
+   "keyword": "스포츠토토 투표권 체험 행사",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-05T04:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "스포츠토토, 오는 8일 올림픽데이런서 시민들 만난다…투표권 무료 체험...",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-05T04:55:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/396/0000760102"
+    },
+    {
+     "title": "스포츠토토, 8일 올림픽데이런서 시민들 만난다…투표권 무료 체험 행사...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-05T04:42:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/076/0004463564"
+    },
+    {
+     "title": "스포츠토토, 오는 8일 ‘올림픽데이런 2026’서 대규모 시민 참여 프로...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-05T04:10:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/410/0001146299"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 942,
+  "flagged": 946,
   "matched": 404,
   "avgLeadMin": 381,
   "recent": [
