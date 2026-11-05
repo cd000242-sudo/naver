@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T09:38:23.794Z",
+ "builtAt": "2026-11-05T09:48:26.182Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 7,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "조작기소 특검법 상정",
@@ -16,30 +16,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 75,
-   "recent20": 15,
-   "press": 54,
-   "firstArticleAt": "2026-11-05T08:09:00.000Z",
+   "articles90": 72,
+   "recent20": 13,
+   "press": 53,
+   "firstArticleAt": "2026-11-05T08:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"필버 으름장? 안 흔들린다\"…특검법 상정에 국힘 전면전 예고 [뉴스와...",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-05T09:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001976883?sid=102"
+     "title": "[뉴스룸 오프닝] 탄핵할까 봐 미리 '경고' / 조작기소 특검법 '상정' / '...",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-05T09:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000519343?sid=100"
     },
     {
-     "title": "청와대 정무수석, 조작기소 특검법에 \"대통령 보호 아냐…검찰 권한 남...",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-05T09:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400958?sid=100"
+     "title": "한동훈의 특검법 비판에‥홍익표 \"책임감 느끼지 않나\" 역공",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-05T09:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533753?sid=100"
     },
     {
-     "title": "‘조작기소 특검법’ 국회 본회의 상정…국힘 ‘필버’로 맞불",
-     "press": "jndn.com",
-     "publishedAt": "2026-11-05T09:36:00.000Z",
-     "link": "http://www.jndn.com/article.php?aid=1793871171442572001"
+     "title": "靑, '조작기소 특검법'에 \"대통령 보호 아닌 '檢 권한 남용 수사'\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-05T09:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000923275?sid=100"
     }
    ]
   },
@@ -49,13 +49,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 54,
+   "articles90": 55,
    "recent20": 1,
-   "press": 52,
+   "press": 53,
    "firstArticleAt": "2026-11-05T08:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "넷마블, 3분기 매출 6347억원·영업이익 504억원… 모멘텀 일으킬 13개 카...",
+     "press": "ttlnews.com",
+     "publishedAt": "2026-11-05T09:42:00.000Z",
+     "link": "http://www.ttlnews.com/news/articleView.html?idxno=3159322"
+    },
     {
      "title": "[재계 포커스] 넷마블, 누적 매출 2조원 돌파·올해 전 분기 흑자···글...",
      "press": "polinews.co.kr",
@@ -67,45 +73,38 @@
      "press": "gamechosun.co.kr",
      "publishedAt": "2026-11-05T09:18:00.000Z",
      "link": "https://www.gamechosun.co.kr/webzine/article/view.php?no=227262"
-    },
-    {
-     "title": "넷마블, 신작 지연에 3분기 실적 둔화…내년 13종·수익성 개선 추진 [컨...",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-05T09:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002247468?sid=105"
     }
    ]
   },
   {
    "keyword": "최태원 SK그룹 회장",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 71,
-   "recent20": 16,
-   "press": 45,
-   "firstArticleAt": "2026-11-05T08:20:00.000Z",
+   "articles90": 69,
+   "recent20": 9,
+   "press": 43,
+   "firstArticleAt": "2026-11-05T08:23:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "최태원 \"지금 가장 필요한 파트너는 일본\"…한·일 6조 달러 경제협력 ...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-05T09:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003151921?sid=101"
+     "title": "최태원, SK 주식 9440억원어치 매각…재산분할금 마련",
+     "press": "newsinside.kr",
+     "publishedAt": "2026-11-05T09:44:00.000Z",
+     "link": "https://www.newsinside.kr/news/articleView.html?idxno=5041268"
     },
     {
-     "title": "최태원 \"AI 전환 속도가 韓 운명 좌우\"…성장 공식 대전환 주문",
+     "title": "최태원, SK㈜ 지분 165만주 매각 완료…재산분할금 마련",
      "press": "edaily.co.kr",
-     "publishedAt": "2026-11-05T09:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006404580?sid=101"
+     "publishedAt": "2026-11-05T09:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006404584?sid=101"
     },
     {
-     "title": "최태원 회장, SK㈜ 주식 매각 완료…장동현 부회장은 특수관계 해소",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-05T09:34:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2015181"
+     "title": "최태원 \"수출 중심 성장, 더 안 통한다…성장 방정식 바꿔야\"(종합)",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-05T09:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006404583?sid=101"
     }
    ]
   },
@@ -114,30 +113,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 39,
-   "recent20": 11,
-   "press": 31,
+   "articles90": 47,
+   "recent20": 12,
+   "press": 39,
    "firstArticleAt": "2026-11-05T08:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보]법원, 쿠팡 ‘개인정보 유출’ 개보위 시정명령 집행정지…과징...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-05T09:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002830915?sid=102"
+     "title": "‘개인정보 유출’ 쿠팡 과징금 집행정지 신청 기각…“긴급성 부족”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-05T09:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012288112?sid=102"
     },
     {
-     "title": "법원, 쿠팡 '4200억원 과징금' 효력 유지…\"긴급성 부족\"",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-05T09:32:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1319491&inflow=N"
+     "title": "[속보] \"4235억 과징금 효력 정지해달라\" 쿠팡 요청, 기각당했다",
+     "press": "mediatoday.co.kr",
+     "publishedAt": "2026-11-05T09:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/006/0000138588?sid=101"
     },
     {
-     "title": "법원, 쿠팡 과징금 4천억원 효력 유지…3750만명 정보 유출",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-05T09:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000649265?sid=102"
+     "title": "쿠팡 '개보위 과징금' 4236억원 유지…시정명령은 일단 정지",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-05T09:44:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2121267"
+    }
+   ]
+  },
+  {
+   "keyword": "나주 인공태양 연구시설 예타 통과",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 24,
+   "recent20": 1,
+   "press": 21,
+   "firstArticleAt": "2026-11-05T08:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“예타 넘었다”…나주 ‘인공태양’ 연구시설 구축 본격화",
+     "press": "jndn.com",
+     "publishedAt": "2026-11-05T09:40:00.000Z",
+     "link": "http://www.jndn.com/article.php?aid=1793871409442580001"
+    },
+    {
+     "title": "나주 인공태양 연구시설, 1조 4천800억 원 국책사업 예타 통과",
+     "press": "cnbnews.com",
+     "publishedAt": "2026-11-05T09:28:00.000Z",
+     "link": "https://www.cnbnews.com/news/articleView.html?idxno=1022578"
+    },
+    {
+     "title": "나주 '인공태양' 예타 통과…1조 5천억 핵융합 거점 닻 올렸다",
+     "press": "namdonews.com",
+     "publishedAt": "2026-11-05T09:20:00.000Z",
+     "link": "https://www.namdonews.com/news/articleView.html?idxno=928362"
     }
    ]
   },
@@ -180,7 +211,7 @@
     "google"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-05T08:58:00.000Z",
    "exclusive": false,
@@ -205,11 +236,43 @@
      "link": "https://m.entertain.naver.com/article/408/0000326868"
     }
    ]
+  },
+  {
+   "keyword": "언차일드 컴백 연기 아쉬움",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-05T08:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"청개구리가 아닌 독개구리로 돌아왔다\"…'콘셉트 1황' 노리는 언차일드...",
+     "press": "digitalchosun.dizzo.com",
+     "publishedAt": "2026-11-05T09:10:00.000Z",
+     "link": "http://digitalchosun.dizzo.com/site/data/html_dir/2026/11/05/2026110580182.html"
+    },
+    {
+     "title": "\"콘셉트 1황 목표\"…언차일드 '독개구리맛'으로 돌아온 다섯 독종 히어...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-05T08:20:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1793865900530415007"
+    },
+    {
+     "title": "이렇게 깜찍한 독개구리 있나…언차일드, '컴백 지연' 딛고 히어로로 귀...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-05T08:20:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2644763"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1007,
+  "flagged": 1008,
   "matched": 452,
   "avgLeadMin": 417,
   "recent": [
