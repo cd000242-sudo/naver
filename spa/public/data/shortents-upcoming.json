@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T18:11:55.498Z",
+ "builtAt": "2026-11-05T18:21:58.833Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 20,
  "candidates": [
   {
    "keyword": "비트코인",
@@ -16,10 +16,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 8,
-   "recent20": 2,
+   "articles90": 7,
+   "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-05T16:50:00.000Z",
+   "firstArticleAt": "2026-11-05T17:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
