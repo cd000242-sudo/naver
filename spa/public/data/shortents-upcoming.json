@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T12:39:37.715Z",
+ "builtAt": "2026-11-05T12:49:41.168Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,65 +8,96 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 16,
  "candidates": [
   {
    "keyword": "장남, 주진우 고소",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 31,
-   "recent20": 6,
-   "press": 29,
-   "firstArticleAt": "2026-11-05T11:16:00.000Z",
+   "articles90": 33,
+   "recent20": 7,
+   "press": 31,
+   "firstArticleAt": "2026-11-05T11:27:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "\"골프장 간 적 없다\"…李대통령 장남, 주진우 명예훼손 고소",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-05T12:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001271843?sid=100"
+     "title": "주진우, 李대통령 장남 고소에 \"맞고발하겠다\"",
+     "press": "viewsnnews.com",
+     "publishedAt": "2026-11-05T12:48:00.000Z",
+     "link": "https://www.viewsnnews.com/article?q=239525"
     },
     {
-     "title": "이재명 대통령 아들, 주진우 고소...\"나는 일반인\"",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-05T12:36:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1172259"
+     "title": "李대통령 장남, 주진우 고소…“한산대CC에 간 사실 없다”",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-05T12:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002393468?sid=100"
     },
     {
-     "title": "李대통령 장남, 주진우 고소…해군기지 '황제골프' 의혹 관련",
+     "title": "李대통령 장남, 주진우 명예훼손 고소…“골프장 간 적 없다”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-05T12:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003760416?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "영국 기준금리 인상",
+   "sources": [
+    "nate",
+    "daum"
+   ],
+   "articles90": 18,
+   "recent20": 4,
+   "press": 14,
+   "firstArticleAt": "2026-11-05T12:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "영국, 기준금리 4%로 3년여 만에 ↑…추가 인상 가능성(종합)",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-05T12:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009273248?sid=104"
+    },
+    {
+     "title": "영국, 3년여 만에 기준금리 인상…연 4%로 0.25%p↑",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-05T12:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012288278?sid=104"
+    },
+    {
+     "title": "영국, 3년 만에 기준금리 인상…0.25%p 올린 4.0%",
      "press": "newsis.com",
-     "publishedAt": "2026-11-05T12:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014304984?sid=102"
+     "publishedAt": "2026-11-05T12:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014304989?sid=104"
     }
    ]
   },
   {
    "keyword": "내란 우두머리 내년 선고",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 15,
+   "articles90": 13,
    "recent20": 1,
-   "press": 15,
-   "firstArticleAt": "2026-11-05T11:10:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-05T11:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "尹 \"'조작기소 주장' 권력자들 한둘 아냐\"…내란 2심 1월 26일 선고",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-05T12:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000649300?sid=102"
+    },
     {
      "title": "'내란 우두머리' 尹, 항소심서 79분간 무죄 주장…현 정부·여당에도 날...",
      "press": "news1.kr",
      "publishedAt": "2026-11-05T12:24:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009273242?sid=102"
-    },
-    {
-     "title": "윤석열, 격앙된 79분 최후진술…내년 1월26일 선고",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-05T12:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000549287?sid=102"
     },
     {
      "title": "尹 '내란 우두머리' 2심 내년 1월 26일 선고",
@@ -82,7 +113,7 @@
     "signal.bz"
    ],
    "articles90": 7,
-   "recent20": 2,
+   "recent20": 1,
    "press": 7,
    "firstArticleAt": "2026-11-05T11:20:00.000Z",
    "exclusive": false,
@@ -109,23 +140,49 @@
    ]
   },
   {
-   "keyword": "철도노조 12월 파업 예고",
+   "keyword": "이유리 배우",
    "sources": [
-    "nate"
+    "daum"
    ],
    "articles90": 7,
-   "recent20": 0,
+   "recent20": 1,
    "press": 7,
-   "firstArticleAt": "2026-11-05T11:23:00.000Z",
+   "firstArticleAt": "2026-11-05T11:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "코레일·SR 통합 후 12월에 첫 파업?…노조 쟁의행위 '가결'",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-05T12:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000519386?sid=102"
+     "title": "'편스토랑' 이유리, 태권도 대회 금메달→홈쇼핑 2년만 총 매출 700억 근...",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-05T12:38:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109762675818"
     },
+    {
+     "title": "이유리, 홈쇼핑 2년 만에 '총 매출 700억' 대박…\"제 이름 달고\" (편스토...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-05T12:29:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002077260"
+    },
+    {
+     "title": "이유리 \"미니멀리스트 추구\"…이사한 집 공개에 '깜짝'",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-05T12:20:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009273239"
+    }
+   ]
+  },
+  {
+   "keyword": "철도노조 총파업 예고",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-05T11:23:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
     {
      "title": "승진제도·안전인력 놓고 '갈등'...철도노조, 12월 총파업 예고",
      "press": "newspim.com",
@@ -137,38 +194,12 @@
      "press": "sedaily.com",
      "publishedAt": "2026-11-05T11:53:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/011/0004679275?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "리노, 내년 1분기 입대",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-05T11:16:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "스트레이 키즈 리노, 내년 1분기 병역 의무 돌입",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-05T12:12:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=779370"
     },
     {
-     "title": "스트레이 키즈, 내년 1분기 군입대 스타트…첫 주자는 리노[공식]",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-05T12:08:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1793878660530438007"
-    },
-    {
-     "title": "스트레이 키즈 리노, 내년 1분기 병역 의무 이행… 팀 내 첫 주자",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-05T12:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000051621"
+     "title": "철도노조 쟁의행위 찬반투표 77.6% 찬성으로 가결, 12월 총파업 예고",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-05T11:40:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=451324"
     }
    ]
   },
@@ -179,7 +210,7 @@
     "google"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-05T11:46:00.000Z",
    "exclusive": false,
@@ -204,77 +235,11 @@
      "link": "https://m.entertain.naver.com/article/009/0005759810"
     }
    ]
-  },
-  {
-   "keyword": "표절",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T11:15:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "방탄소년단 '스윔' 표절 소송, 美 작곡가들 취하 요청으로 마무리",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-05T12:04:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109762271578"
-    },
-    {
-     "title": "방탄소년단, '스윔' 표절 의혹 일단락…원고 전원 자진 취하",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-05T11:37:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000051619"
-    },
-    {
-     "title": "BTS '스윔' 표절 소송 종결…원고 자진 취하",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-05T11:15:00.000Z",
-     "link": "https://m.entertain.naver.com/article/422/0000923307"
-    }
-   ]
-  },
-  {
-   "keyword": "작전 지시하는 감독",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 2,
-   "firstArticleAt": "2026-11-05T11:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[프로배구] 도로공사, SOOP에 3-1...김영래 감독에 첫 승 안겨",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-05T12:29:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261105001524"
-    },
-    {
-     "title": "작전 지시하는 김세진 감독",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T11:26:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/001/0016425100"
-    },
-    {
-     "title": "작전 지시하는 김영래 감독",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T11:10:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/001/0016425072"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1045,
+  "flagged": 1047,
   "matched": 476,
   "avgLeadMin": 441,
   "recent": [
