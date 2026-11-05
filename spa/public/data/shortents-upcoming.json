@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T13:09:51.532Z",
+ "builtAt": "2026-11-05T13:19:55.031Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 15,
  "candidates": [
   {
-   "keyword": "이 대통령 장남, 주진우 고소",
+   "keyword": "이 대통령 장남 주진우 고소",
    "sources": [
-    "nate"
+    "daum"
    ],
    "articles90": 39,
-   "recent20": 7,
+   "recent20": 4,
    "press": 37,
-   "firstArticleAt": "2026-11-05T11:45:00.000Z",
+   "firstArticleAt": "2026-11-05T11:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李대통령 장남, “황제골프 아냐”…주진우 명예훼손 고소",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-05T13:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003696292?sid=102"
+    },
     {
      "title": "이 대통령 장남 \"한산대CC 안 가\"…주진우 의원 명예훼손 고소",
      "press": "news.jtbc.co.kr",
@@ -33,12 +39,6 @@
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-05T13:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004207041?sid=102"
-    },
-    {
-     "title": "이 대통령 장남, 주진우 의원 명예훼손 고소…“해군기지 골프장 간 적...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-05T13:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002830955?sid=102"
     }
    ]
   },
@@ -48,62 +48,62 @@
     "signal.bz",
     "daum"
    ],
-   "articles90": 23,
-   "recent20": 5,
-   "press": 17,
+   "articles90": 25,
+   "recent20": 4,
+   "press": 19,
    "firstArticleAt": "2026-11-05T12:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "영국, 3년3개월만에 기준금리 4%로 인상…영란은행 “마지막 인상 아닐...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-05T13:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002830956?sid=101"
+    },
+    {
+     "title": "영국, 3년 만에 금리 인상‥BOE 총재 \"추가 인상도 가능\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-05T13:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533804?sid=104"
+    },
+    {
      "title": "[그래픽] 영국 중앙은행 기준금리 추이",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-05T13:06:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016425181?sid=104"
-    },
-    {
-     "title": "0.25%포인트 인상한 영란은행, 기준금리 4%로 정했다",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-05T13:04:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/433293"
-    },
-    {
-     "title": "영란은행, 기준금리 0.25%p 인상해 연 4.0%로… 베일리 총재 \"이번 인상...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-05T12:57:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261105001527"
     }
    ]
   },
   {
-   "keyword": "삼성 11경기 10승 타이",
+   "keyword": "이유리 배우",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 10,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-05T12:03:00.000Z",
+   "articles90": 11,
+   "recent20": 4,
+   "press": 8,
+   "firstArticleAt": "2026-11-05T12:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'스승' 김상식 감독, '돌아온 제자' 오마리 스펠맨 울렸다…서울 삼성,...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-05T12:47:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/076/0004463717"
+     "title": "\"전문가 18명 투입\" 이유리, 폴소유 끝판왕이었다..\"중고거래만 137개\"",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-05T13:12:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005635417"
     },
     {
-     "title": "삼성, 현대모비스 꺾고 10승 선착",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-05T12:38:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/023/0004008014"
+     "title": "[TVis] ‘총 매출 700억’ 이유리, 새 집 공개...“미니멀리스트” 아닌...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-05T13:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003539476"
     },
     {
-     "title": "삼성, 현대모비스 꺾고 11경기 만에 10승…KBL 역대 최단 경기 타이",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T12:37:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/003/0014304986"
+     "title": "이유리, 식구는 둘인데 냉장고 4대..\"80인분 잡채 만들어 냉동\" 충격 [편...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-05T13:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003485020"
     }
    ]
   },
@@ -112,10 +112,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-05T11:40:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-05T11:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -144,10 +144,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-05T11:43:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-05T12:03:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -172,47 +172,15 @@
    ]
   },
   {
-   "keyword": "소상공인정책실장에 조경원 창업정책관",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-05T11:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "중기부, 신임 소상공인정책실장에 조경원 창업정책관 임명",
-     "press": "smedaily.co.kr",
-     "publishedAt": "2026-11-05T12:40:00.000Z",
-     "link": "http://www.smedaily.co.kr/news/articleView.html?idxno=365787"
-    },
-    {
-     "title": "중기부, 소상공인정책실장에 조경원 창업정책관",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-05T12:28:00.000Z",
-     "link": "https://www.viva100.com/article/20261105501240"
-    },
-    {
-     "title": "중기부, 신임 소상공인정책실장에 조경원 창업정책관 발탁",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T12:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016425149?sid=101"
-    }
-   ]
-  },
-  {
    "keyword": "이세영",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T11:46:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-05T12:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -235,43 +203,11 @@
      "link": "https://m.entertain.naver.com/article/311/0002077258"
     }
    ]
-  },
-  {
-   "keyword": "철도노조 총파업 예고",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T11:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "승진제도·안전인력 놓고 '갈등'...철도노조, 12월 총파업 예고",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-05T12:10:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261105001516"
-    },
-    {
-     "title": "코레일·SR 통합 후 첫 파업 위기…철도노조 “12월 총파업 불사”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-05T11:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004679275?sid=102"
-    },
-    {
-     "title": "철도노조 쟁의행위 찬반투표 77.6% 찬성으로 가결, 12월 총파업 예고",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-05T11:40:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=451324"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1052,
+  "flagged": 1053,
   "matched": 478,
   "avgLeadMin": 441,
   "recent": [
