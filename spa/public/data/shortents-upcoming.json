@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T03:42:37.954Z",
+ "builtAt": "2026-11-05T03:52:41.938Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,101 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
-  {
-   "keyword": "조작기소 특검법 상정",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 68,
-   "recent20": 6,
-   "press": 42,
-   "firstArticleAt": "2026-11-05T02:14:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'조작기소 특검법'에 국회 정면충돌…여야 협상 결렬, 필리버스터 전면...",
-     "press": "ppss.kr",
-     "publishedAt": "2026-11-05T03:39:00.000Z",
-     "link": "https://www.ppss.kr/news/articleView.html?idxno=319256"
-    },
-    {
-     "title": "국힘, 與 '조작기소 특검법' 강행에 필리버스터·장외투쟁 예고",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T03:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303599?sid=100"
-    },
-    {
-     "title": "정점식 “李정권 ‘최후의 선’ 넘었다…조작기소 특검법은 최악의 의회...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-05T03:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002719378?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "청해부대 확대",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 32,
-   "recent20": 0,
-   "press": 27,
-   "firstArticleAt": "2026-11-05T02:13:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정부 \"청해부대 75명 추가 파견...작전지역도 확대\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-05T03:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002428658?sid=100"
-    },
-    {
-     "title": "청해부대 작전구역 호르무즈 인근까지 확대…기뢰제거 전력도 파견 추진",
-     "press": "ppss.kr",
-     "publishedAt": "2026-11-05T03:18:00.000Z",
-     "link": "https://www.ppss.kr/news/articleView.html?idxno=319246"
-    },
-    {
-     "title": "청해부대 작전 구역 오만 남방까지 확대…초계기 추가",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-05T03:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001400853?sid=100"
-    }
-   ]
-  },
   {
    "keyword": "데블스 플랜 제작발표회",
    "sources": [
     "nate"
    ],
    "articles90": 69,
-   "recent20": 25,
+   "recent20": 14,
    "press": 26,
    "firstArticleAt": "2026-11-05T03:00:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "[S포토] 서출구, 'AI칩급 뇌연산' (데블스플랜3)",
+     "title": "[S포토] 정원영, '서바이벌에 나타난 올라프' (데블스플랜3)",
      "press": "stardailynews.co.kr",
-     "publishedAt": "2026-11-05T03:40:00.000Z",
-     "link": "https://www.stardailynews.co.kr/news/articleView.html?idxno=601434"
+     "publishedAt": "2026-11-05T03:46:00.000Z",
+     "link": "https://www.stardailynews.co.kr/news/articleView.html?idxno=601437"
+    },
+    {
+     "title": "[S포토] 이도, '강사 이름이 한반도 GOAT와 같으시네요' (데블스플랜3)",
+     "press": "stardailynews.co.kr",
+     "publishedAt": "2026-11-05T03:44:00.000Z",
+     "link": "https://www.stardailynews.co.kr/news/articleView.html?idxno=601436"
     },
     {
      "title": "[S포토] 넉살, '작은 것의 반란' (데블스플랜3)",
      "press": "stardailynews.co.kr",
      "publishedAt": "2026-11-05T03:40:00.000Z",
      "link": "https://www.stardailynews.co.kr/news/articleView.html?idxno=601433"
-    },
-    {
-     "title": "[S포토] 오현민, '오랜만에' (데블스플랜3)",
-     "press": "stardailynews.co.kr",
-     "publishedAt": "2026-11-05T03:40:00.000Z",
-     "link": "https://www.stardailynews.co.kr/news/articleView.html?idxno=601435"
     }
    ]
   },
@@ -111,10 +47,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 25,
-   "recent20": 3,
-   "press": 25,
-   "firstArticleAt": "2026-11-05T02:14:00.000Z",
+   "articles90": 22,
+   "recent20": 1,
+   "press": 22,
+   "firstArticleAt": "2026-11-05T02:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -139,34 +75,130 @@
    ]
   },
   {
+   "keyword": "다문화 혼인 감소",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 21,
+   "recent20": 3,
+   "press": 21,
+   "firstArticleAt": "2026-11-05T03:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "경북 출생아 100명 중 6명은 다문화 가정⋯전국 평균 웃돌아",
+     "press": "kbsm.net",
+     "publishedAt": "2026-11-05T03:48:00.000Z",
+     "link": "https://www.kbsm.net/news/view.php?idx=540572"
+    },
+    {
+     "title": "증가하던 다문화 혼인·출생 소폭 감소…작년 혼인 100쌍 중 9쌍 다문화",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-05T03:38:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/324264/?sc=Naver"
+    },
+    {
+     "title": "지난해 다문화 혼인 2만1399건… 귀화자 감소에 4년 만에 줄어",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-05T03:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202781?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "청해부대 확대",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 24,
+   "recent20": 0,
+   "press": 21,
+   "firstArticleAt": "2026-11-05T02:23:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정부 \"청해부대 75명 추가 파견...작전지역도 확대\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-05T03:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002428658?sid=100"
+    },
+    {
+     "title": "청해부대 작전구역 호르무즈 인근까지 확대…기뢰제거 전력도 파견 추진",
+     "press": "ppss.kr",
+     "publishedAt": "2026-11-05T03:18:00.000Z",
+     "link": "https://www.ppss.kr/news/articleView.html?idxno=319246"
+    },
+    {
+     "title": "청해부대 작전 구역 오만 남방까지 확대…초계기 추가",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-05T03:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001400853?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "조작기소 특검법 법사위 통과",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 16,
+   "recent20": 3,
+   "press": 14,
+   "firstArticleAt": "2026-11-05T02:23:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국힘, 與 '조작기소 특검법' 강행에 필리버스터·장외투쟁 예고",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T03:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303599?sid=100"
+    },
+    {
+     "title": "정점식 “李정권 ‘최후의 선’ 넘었다…조작기소 특검법은 최악의 의회...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-05T03:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002719378?sid=100"
+    },
+    {
+     "title": "'조작기소 특검법' 강행 수순에 국민의힘 필리버스터…장외투쟁 검토도",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-05T03:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003151688?sid=100"
+    }
+   ]
+  },
+  {
    "keyword": "교통",
    "sources": [
     "google"
    ],
-   "articles90": 13,
+   "articles90": 12,
    "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-05T02:54:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-05T03:02:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
+    {
+     "title": "고속철 통합 효과 가시화…하루 3만6000명 더 타고 교통비 515억원 절감",
+     "press": "thepowernews.co.kr",
+     "publishedAt": "2026-11-05T03:50:00.000Z",
+     "link": "https://www.thepowernews.co.kr/view.php?ud=202611051248286996de3f0aa1be_7"
+    },
+    {
+     "title": "여수시, 국가공간정보발전 유공 국토교통부장관 기관표창",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-05T03:42:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=93153"
+    },
     {
      "title": "장위6구역 재개발조합 교통안전시설 설치 공사업체 선정 입찰공고",
      "press": "arunews.com",
      "publishedAt": "2026-11-05T03:32:00.000Z",
      "link": "https://www.arunews.com/news/articleView.html?idxno=69089"
-    },
-    {
-     "title": "서울교통공사, 1~8호선 지하철 전자파 수치 공개…KCA와 공동 추진",
-     "press": "newspost.kr",
-     "publishedAt": "2026-11-05T03:24:00.000Z",
-     "link": "https://www.newspost.kr/news/articleView.html?idxno=227083"
-    },
-    {
-     "title": "세종시, 국회세종의사당 연결 BRT 신설로 교통 혁신",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-05T03:22:00.000Z",
-     "link": "https://www.viva100.com/article/20261105500554"
     }
    ]
   },
@@ -175,10 +207,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 18,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-05T02:13:00.000Z",
+   "articles90": 11,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-05T02:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -221,10 +253,10 @@
      "link": "https://n.news.naver.com/mnews/article/003/0014303535?sid=100"
     },
     {
-     "title": "의원총회 참석한 장동혁 국민의힘 대표",
+     "title": "국민의힘 의원총회",
      "press": "newsis.com",
      "publishedAt": "2026-11-05T03:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303533?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/003/0014303534?sid=100"
     },
     {
      "title": "의원총회 국민의례 하는 국민의힘 의원들",
@@ -239,10 +271,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 13,
+   "articles90": 12,
    "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-05T02:13:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-05T02:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -267,80 +299,15 @@
    ]
   },
   {
-   "keyword": "웨딩업체 17곳 과태료",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-05T03:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "결혼 비용도 위약금도 ‘깜깜이’…예식장 등 17곳 과태료",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-05T03:02:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2644523"
-    },
-    {
-     "title": "웨딩업계 ‘깜깜이 가격’ 여전…17곳에 과태료 1560만원",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-05T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002719367?sid=101"
-    },
-    {
-     "title": "스드메·예식장 가격 '안 알려줌'…17곳 업체 명단 공개",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-05T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004206801?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "열차",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-05T02:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "인천지하철 1·2호선 전 열차에 5G 와이파이…퀴즈 맞히면 상품권 증정",
-     "press": "tournews21.com",
-     "publishedAt": "2026-11-05T03:40:00.000Z",
-     "link": "https://www.tournews21.com/news/articleView.html?idxno=147610"
-    },
-    {
-     "title": "[공연소식] 국립정동극장 세실, 연극 '멜로드라마 열차' 내달 공연",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T02:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016423693?sid=103"
-    },
-    {
-     "title": "커튼·책·개미가 살아나는 열차…국립정동극장 〈멜로드라마 열차〉",
-     "press": "sctoday.co.kr",
-     "publishedAt": "2026-11-05T02:28:00.000Z",
-     "link": "https://www.sctoday.co.kr/news/articleView.html?idxno=48970"
-    }
-   ]
-  },
-  {
    "keyword": "하이닉스 주가 하락",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-05T02:16:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-05T02:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -369,10 +336,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T03:01:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-05T03:00:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
@@ -397,34 +364,67 @@
    ]
   },
   {
-   "keyword": "한전 전기요금 현실화",
+   "keyword": "열차",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T02:16:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-05T02:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“러·우 전쟁뒤 한전 적자 누적… 전기료 현실화해야”",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-05T02:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002830516?sid=101"
+     "title": "인천지하철 1·2호선 전 열차에 5G 와이파이…퀴즈 맞히면 상품권 증정",
+     "press": "tournews21.com",
+     "publishedAt": "2026-11-05T03:40:00.000Z",
+     "link": "https://www.tournews21.com/news/articleView.html?idxno=147610"
     },
     {
-     "title": "김동철 한전 사장 \"전력망 투자 지속하려면 전기요금 현실화 필요\"",
-     "press": "electimes.com",
-     "publishedAt": "2026-11-05T02:36:00.000Z",
-     "link": "https://www.electimes.com/news/articleView.html?idxno=374382"
+     "title": "[공연소식] 국립정동극장 세실, 연극 '멜로드라마 열차' 내달 공연",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-05T02:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016423693?sid=103"
     },
     {
-     "title": "김동철 한전 사장 “전기요금 현실화 필요…산업용 인상은 최후 수단”",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-05T02:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006404113?sid=101"
+     "title": "커튼·책·개미가 살아나는 열차…국립정동극장 〈멜로드라마 열차〉",
+     "press": "sctoday.co.kr",
+     "publishedAt": "2026-11-05T02:28:00.000Z",
+     "link": "https://www.sctoday.co.kr/news/articleView.html?idxno=48970"
+    }
+   ]
+  },
+  {
+   "keyword": "로보월드",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-05T02:41:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[로보월드 어워드 ①] 로봇 기술의 완성도·시장성을 묻다...올해 로봇 ...",
+     "press": "hellot.net",
+     "publishedAt": "2026-11-05T03:42:00.000Z",
+     "link": "https://www.hellot.net/news/article.html?no=116052"
+    },
+    {
+     "title": "로봇기업 현직자가 대학생 취업 상담…교육부, 로보월드 연계 부트캠프...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-05T03:00:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261105000081"
+    },
+    {
+     "title": "'정밀위치측정 등 자동화 로봇 총출동' 인아텍앤코포, 로보월드 참가",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-05T02:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003482527?sid=105"
     }
    ]
   },
@@ -456,14 +456,14 @@
      "title": "2026 제주올레걷기축제 개막, 19코스 걸어가는 참가자들",
      "press": "newsis.com",
      "publishedAt": "2026-11-05T02:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014303355?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/003/0014303346?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 913,
+  "flagged": 915,
   "matched": 395,
   "avgLeadMin": 374,
   "recent": [
