@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T21:12:54.917Z",
+ "builtAt": "2026-11-05T21:22:57.916Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 17,
+ "measured": 20,
  "candidates": [
   {
-   "keyword": "2026년 11월 6일 운세",
+   "keyword": "미국 중간선거",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 6,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T21:00:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-05T20:22:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "[오늘의 운세] 2026년 11월 6일 별자리 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-05T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006404665?sid=103"
+     "title": "뉴욕증시, 중간선거발 'AI 발작'에 급락 마감…나스닥 5.5% 폭락",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-05T21:21:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261106000030"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 6일 띠별 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-05T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006404664?sid=103"
+     "title": "[미 중간선거] 포드·GM도 등 돌린 車관세…현대차·기아, 정책 변화 '기...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-05T21:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003151963?sid=101"
     },
     {
-     "title": "2026년 효력(孝力) 모의고사",
-     "press": "cctoday.co.kr",
-     "publishedAt": "2026-11-05T21:02:00.000Z",
-     "link": "https://www.cctoday.co.kr/news/articleView.html?idxno=2239730"
+     "title": "美 중간선거 후 유가 하락·환율 안정…\"항공권 유류할증료 부담도 완화...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014305109?sid=101"
     }
    ]
   },
@@ -47,30 +47,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 3,
+   "articles90": 6,
+   "recent20": 2,
+   "press": 5,
    "firstArticleAt": "2026-11-05T20:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "이스라엘 대통령 “새 정부 구성할 총리 후보 8일 발표”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-05T21:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012288469?sid=104"
+    },
+    {
+     "title": "이스라엘 야권 아이젠코트, 과반 추천 확보…네타냐후 실각 위기",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-05T21:14:00.000Z",
+     "link": "https://www.ajunews.com/view/20261106061114565"
+    },
+    {
      "title": "이스라엘 대통령 \"새 정부 총리 후보 8일 발표\"",
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-05T20:56:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002428990?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "2026년 11월 6일 운세",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-05T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘의 운세] 2026년 11월 6일 띠별 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-05T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006404664?sid=103"
     },
     {
-     "title": "이스라엘 대통령 \"새 정부 구성할 총리 후보 8일 발표\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T20:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016425235?sid=104"
+     "title": "[오늘의 운세] 2026년 11월 6일 별자리 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-05T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006404665?sid=103"
     },
     {
-     "title": "이스라엘 아랍계, 아이젠코트 지지...네타냐후 '실각 위기'",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-05T20:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002428987?sid=104"
+     "title": "2026년 효력(孝力) 모의고사",
+     "press": "cctoday.co.kr",
+     "publishedAt": "2026-11-05T21:02:00.000Z",
+     "link": "https://www.cctoday.co.kr/news/articleView.html?idxno=2239730"
     }
    ]
   }
