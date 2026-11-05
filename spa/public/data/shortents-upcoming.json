@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T11:29:07.383Z",
+ "builtAt": "2026-11-05T11:39:11.098Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,20 +13,21 @@
   {
    "keyword": "윤석열 내란 사건 내년 선고",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 40,
-   "recent20": 5,
-   "press": 36,
-   "firstArticleAt": "2026-11-05T10:01:00.000Z",
+   "articles90": 32,
+   "recent20": 4,
+   "press": 30,
+   "firstArticleAt": "2026-11-05T10:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘사형 구형’ 尹, ‘내란우두머리’ 항소심 선고 내년 1월 26일 열린다",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-05T11:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003057490?sid=100"
+     "title": "윤석열 '내란 우두머리' 혐의 2심 내년 1월 26일 선고",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-05T11:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001976922?sid=102"
     },
     {
      "title": "尹 “계엄은 헌법상 권한 행사”…내란 2심 선고 내년 1월 26일",
@@ -35,52 +36,97 @@
      "link": "https://n.news.naver.com/mnews/article/123/0002393467?sid=100"
     },
     {
-     "title": "윤석열, 항소심 내란 재판 최후진술도 궤변‥선고는 내년 1월 26일",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-05T11:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533782?sid=102"
+     "title": "‘사형 구형’ 尹, ‘내란우두머리’ 항소심 선고 내년 1월 26일 열린다",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-05T11:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003057490?sid=100"
     }
    ]
   },
   {
-   "keyword": "세계기록유산 아태 목록",
+   "keyword": "철도노조 총파업 예고",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 4,
-   "press": 8,
-   "firstArticleAt": "2026-11-05T10:03:00.000Z",
+   "articles90": 15,
+   "recent20": 3,
+   "press": 15,
+   "firstArticleAt": "2026-11-05T10:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "세월호 기록 유네스코 아태목록 등재…4·16연대 \"국가 기록도 공개해야...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-05T11:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009273218?sid=102"
+     "title": "철도노조, 임단협 결렬 12월 '총파업'…열차 운행 비상",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-05T11:36:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5080387"
     },
     {
-     "title": "경북 ‘수운잡방·음식디미방’ 유네스코 세계기록유산 등재 확정",
-     "press": "yeongnam.com",
-     "publishedAt": "2026-11-05T11:22:00.000Z",
-     "link": "https://www.yeongnam.com/web/view.php?key=20261105027339022"
+     "title": "철도노조, 12월 총파업 예고...철도대란 현실화 우려",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-05T11:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005437376?sid=102"
     },
     {
-     "title": "'수운잡방·음식디미방' 유네스코 아태기록유산 등재",
-     "press": "bzeronews.com",
-     "publishedAt": "2026-11-05T11:10:00.000Z",
-     "link": "https://www.bzeronews.com/news/articleView.html?idxno=824886"
+     "title": "'통합' 코레일ㆍSR, 12월 총파업하나…철도노조, 쟁의행위 의결(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-05T11:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016425091?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "법원, 쿠팡 과징금 유지",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-05T10:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "법원 '개인정보 유출' 과징금 효력 유지에…쿠팡 \"검토 후 대응\"",
+     "press": "news.mtn.co.kr",
+     "publishedAt": "2026-11-05T11:20:00.000Z",
+     "link": "https://news.mtn.co.kr/article/2026110520175957304"
+    },
+    {
+     "title": "법원 쿠팡 개인정보 유출 과징금 4236억 효력 유지, 시정명령은 집행정...",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-05T10:54:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=451323"
+    },
+    {
+     "title": "법원, 쿠팡 '개인정보 유출' 4000억대 과징금 '효력 유지'",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-05T10:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001072701?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1030,
-  "matched": 472,
-  "avgLeadMin": 441,
+  "flagged": 1032,
+  "matched": 474,
+  "avgLeadMin": 440,
   "recent": [
+   {
+    "keyword": "삼성전자 주가",
+    "hitKeyword": "삼성전자 반도체 급락",
+    "hitAt": "2026-11-05T20:30:00+09:00",
+    "leadMin": 226
+   },
+   {
+    "keyword": "외치는 삼성전자 동행노조",
+    "hitKeyword": "삼성전자 반도체 급락",
+    "hitAt": "2026-11-05T20:30:00+09:00",
+    "leadMin": 81
+   },
    {
     "keyword": "홍콩ELS 과징금 확정",
     "hitKeyword": "쿠팡 과징금 유지",
@@ -128,18 +174,6 @@
     "hitKeyword": "조세호 유튜브 복귀",
     "hitAt": "2026-11-05T19:30:00+09:00",
     "leadMin": 1605
-   },
-   {
-    "keyword": "대통령의 유튜브 소통",
-    "hitKeyword": "조세호 유튜브 복귀",
-    "hitAt": "2026-11-05T19:30:00+09:00",
-    "leadMin": 1544
-   },
-   {
-    "keyword": "블루 쓰나미",
-    "hitKeyword": "외국인 매도 쓰나미",
-    "hitAt": "2026-11-05T19:30:00+09:00",
-    "leadMin": 1504
    }
   ]
  }
