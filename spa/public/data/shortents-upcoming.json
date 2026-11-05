@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T06:03:42.739Z",
+ "builtAt": "2026-11-05T06:13:46.238Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,10 +15,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 34,
-   "recent20": 8,
+   "articles90": 33,
+   "recent20": 3,
    "press": 32,
-   "firstArticleAt": "2026-11-05T04:41:00.000Z",
+   "firstArticleAt": "2026-11-05T04:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -47,62 +47,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 31,
-   "recent20": 12,
-   "press": 28,
+   "articles90": 33,
+   "recent20": 8,
+   "press": 30,
    "firstArticleAt": "2026-11-05T05:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "이 대통령 '취약계층 찾아가는 복지' 강조, '수능 수험생' 격려",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-05T06:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002393432?sid=100"
+    },
+    {
+     "title": "'AI 안경 커닝' 서울시립대 수험생 2명 피고소…李대통령 \"부정행위 원천...",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-05T06:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000141663?sid=102"
+    },
+    {
      "title": "이 대통령, 수능 2주 앞두고 “스마트 안경 활용한 부정행위 차단해야”",
      "press": "hani.co.kr",
      "publishedAt": "2026-11-05T06:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/028/0002830853?sid=100"
-    },
-    {
-     "title": "‘수능 2주 앞’ 李 대통령 “스마트 안경 부정행위 차단”",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-05T06:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001883238?sid=100"
-    },
-    {
-     "title": "이 대통령 \"수능 관리 만전… 스마트안경 활용 부정행위 차단해야\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-05T06:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000963820?sid=100"
     }
    ]
   },
   {
-   "keyword": "발언하는 이재명 대통령",
+   "keyword": "이재명 대통령 격려오찬",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 38,
-   "recent20": 9,
-   "press": 27,
-   "firstArticleAt": "2026-11-05T04:39:00.000Z",
+   "articles90": 29,
+   "recent20": 7,
+   "press": 29,
+   "firstArticleAt": "2026-11-05T04:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "尹 재판에 등장한 두 개의 '이재명 판례'… 법원이 2025년 판례 택한 이...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-05T06:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000963824?sid=102"
+     "title": "이 대통령, \"청년 기술인재가 대한민국의 미래\"",
+     "press": "inews365.com",
+     "publishedAt": "2026-11-05T06:12:00.000Z",
+     "link": "https://www.inews365.com/news/article.html?no=942398"
     },
     {
-     "title": "대통령의 소통, '횟수' 보다 '태도'가 더 중요한 이유 : 이 대통령 유튜...",
-     "press": "huffingtonpost.kr",
-     "publishedAt": "2026-11-05T06:00:00.000Z",
-     "link": "https://www.huffingtonpost.kr/article/261833"
+     "title": "이 대통령, 국제기능올림픽 韓선수단 오찬… \"실력 걸맞게 인정받는 사...",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-05T06:12:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261105500333"
     },
     {
-     "title": "李대통령 \"복지는 먼저 찾아가는 것…위기 가구 선제 발굴해야\"",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-05T05:59:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261105001078"
+     "title": "李대통령, '기능올림픽 2위' 선수단 초청 오찬... \"청년 기술인재 존중...",
+     "press": "lawissue.co.kr",
+     "publishedAt": "2026-11-05T06:10:00.000Z",
+     "link": "https://www.lawissue.co.kr/view.php?ud=202611051509098745b3279dfb36_12"
     }
    ]
   },
@@ -112,30 +112,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 17,
-   "recent20": 4,
-   "press": 16,
-   "firstArticleAt": "2026-11-05T04:38:00.000Z",
+   "articles90": 20,
+   "recent20": 6,
+   "press": 19,
+   "firstArticleAt": "2026-11-05T04:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정순택 대주교 \"서울 세계청년대회, 온 국민 함께하는 만남·환대 축제...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-05T06:02:00.000Z",
-     "link": "https://www.ajunews.com/view/20261105143100032"
+     "title": "정순택 대주교, \"단절의 시대에 필요한 것은 만남의 용기\"…2027 서울 세...",
+     "press": "getnews.co.kr",
+     "publishedAt": "2026-11-05T06:12:00.000Z",
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=886127"
     },
     {
-     "title": "내년 한국 찾는 교황…서울월드컵경기장·서울공항서 신자들 만난다",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T05:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016424305?sid=103"
+     "title": "'교황 방한' 세계청년대회, 광화문 대신 월드컵공원·서울공항서 열린다",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-05T06:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000963827?sid=103"
     },
     {
-     "title": "“단절의 시대, 만남의 용기 필요”…레오 14세 교황 오는 '서울 세계청...",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-05T05:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003482670?sid=105"
+     "title": "교황 방한, 최대 100만 명 참여… 내년 8월 '서울 세계청년대회' 준비 본...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-05T06:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001038625?sid=103"
     }
    ]
   },
@@ -144,13 +144,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
+   "articles90": 15,
    "recent20": 2,
-   "press": 14,
+   "press": 15,
    "firstArticleAt": "2026-11-05T05:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "기초연구에 역대 최대 2.91조원…지역·청년 연구자 지원 확대",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-05T06:12:00.000Z",
+     "link": "https://www.viva100.com/article/20261105500633"
+    },
     {
      "title": "“내년 기초연구 2.9조원 투입”역대 최대…지역·청년 연구자 키운다",
      "press": "biz.heraldcorp.com",
@@ -162,12 +168,38 @@
      "press": "segye.com",
      "publishedAt": "2026-11-05T05:46:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/022/0004172775?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "입법박람회 조정식 국회의장",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 11,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-05T04:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "로봇·수소차·누리호 한자리에…국회 '입법박람회' 5~6일 개막",
+     "press": "issuenbiz.com",
+     "publishedAt": "2026-11-05T06:10:00.000Z",
+     "link": "http://www.issuenbiz.com/news/articleView.html?idxno=81277"
     },
     {
-     "title": "내년 기초연구 예산 최대라는데…신규과제 예산은 20.7% 감소",
-     "press": "dongascience.com",
-     "publishedAt": "2026-11-05T05:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/584/0000040014?sid=105"
+     "title": "로봇·수소차·누리호 한자리에…국회 입법박람회 개막",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-05T05:54:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=100699"
+    },
+    {
+     "title": "국회입법박람회 개막...조작기소특검법 전운",
+     "press": "natv.go.kr",
+     "publishedAt": "2026-11-05T05:36:00.000Z",
+     "link": "https://www.natv.go.kr/natv/news/newsView.do?newsId=514495"
     }
    ]
   },
@@ -176,10 +208,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-05T04:34:00.000Z",
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-05T05:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -209,10 +241,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-05T04:41:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-05T04:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -237,34 +269,34 @@
    ]
   },
   {
-   "keyword": "입법박람회 조정식 국회의장",
+   "keyword": "허가",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-05T04:44:00.000Z",
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-05T05:26:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "로봇·수소차·누리호 한자리에…국회 입법박람회 개막",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-05T05:54:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=100699"
+     "title": "HLB 3만2200원 약세…저가 3만1900원서 허가 절차 주시",
+     "press": "job-post.co.kr",
+     "publishedAt": "2026-11-05T06:12:00.000Z",
+     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=236793"
     },
     {
-     "title": "국회입법박람회 개막...조작기소특검법 전운",
-     "press": "natv.go.kr",
-     "publishedAt": "2026-11-05T05:36:00.000Z",
-     "link": "https://www.natv.go.kr/natv/news/newsView.do?newsId=514495"
+     "title": "[박재형 칼럼] 정보공개서 공시제도, '인허가 현황'도 함께 담아야 합니...",
+     "press": "financialreview.co.kr",
+     "publishedAt": "2026-11-05T06:06:00.000Z",
+     "link": "http://www.financialreview.co.kr/news/articleView.html?idxno=46052"
     },
     {
-     "title": "[르포] ‘4족 보행 로봇’이 국회의장에 입법 제안문 전달…“현장의 아...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-05T05:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202795?sid=100"
+     "title": "주입 펌프 불필요 심장 부하제, GE헬스케어 '라피스캔' 국내 허가",
+     "press": "medical-tribune.co.kr",
+     "publishedAt": "2026-11-05T05:52:00.000Z",
+     "link": "http://www.medical-tribune.co.kr/news/articleView.html?idxno=215764"
     }
    ]
   },
@@ -273,10 +305,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-05T04:34:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-05T04:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -301,12 +333,44 @@
    ]
   },
   {
+   "keyword": "jtbc",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-05T05:02:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "JTBC, 경영권 매각 본입찰 내년 1월로… 새 주인 찾기 해 넘긴다",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-05T06:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202843?sid=101"
+    },
+    {
+     "title": "[컨콜]티빙, 3분기 영업손실 72억…JTBC 영향으로 광고 매출 3% 반영",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-05T05:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005437129?sid=105"
+    },
+    {
+     "title": "[컨콜] CJ ENM \"JTBC 이탈 광고 물량, 4분기 전체 광고 물량의 3% 수준\"",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-05T05:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003151739?sid=105"
+    }
+   ]
+  },
+  {
    "keyword": "학폭 의혹 공구 중단",
    "sources": [
     "nate"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-05T05:11:00.000Z",
    "exclusive": false,
@@ -333,40 +397,9 @@
    ]
   },
   {
-   "keyword": "허가",
+   "keyword": "기뢰",
    "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T04:50:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "주입 펌프 불필요 심장 부하제, GE헬스케어 '라피스캔' 국내 허가",
-     "press": "medical-tribune.co.kr",
-     "publishedAt": "2026-11-05T05:52:00.000Z",
-     "link": "http://www.medical-tribune.co.kr/news/articleView.html?idxno=215764"
-    },
-    {
-     "title": "레이저옵텍, 브라질 주력 제품 3종 허가…중남미 사업 확대",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-05T05:30:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1730603"
-    },
-    {
-     "title": "인천시, 연근해 불법어업 단속··· 무허가 건간망 어업 4건 적발",
-     "press": "incheontoday.com",
-     "publishedAt": "2026-11-05T05:26:00.000Z",
-     "link": "https://www.incheontoday.com/news/articleView.html?idxno=325977"
-    }
-   ]
-  },
-  {
-   "keyword": "jtbc",
-   "sources": [
+    "signal.bz",
     "google"
    ],
    "articles90": 3,
@@ -374,64 +407,32 @@
    "press": 3,
    "firstArticleAt": "2026-11-05T05:02:00.000Z",
    "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "[컨콜]티빙, 3분기 영업손실 72억…JTBC 영향으로 광고 매출 3% 반영",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-05T05:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005437129?sid=105"
-    },
-    {
-     "title": "[컨콜] CJ ENM \"JTBC 이탈 광고 물량, 4분기 전체 광고 물량의 3% 수준\"",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-05T05:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003151739?sid=105"
-    },
-    {
-     "title": "JTBC 공개매각 시작…내년 1월 본입찰",
-     "press": "bloter.net",
-     "publishedAt": "2026-11-05T05:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/293/0000092761?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "재혼 황후 하루 만에 1위",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T04:36:00.000Z",
-   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“언니라고 불러도 될까요?”…‘재혼 황후’ 막장 판타지 통했다…12개...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-05T05:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/021/0002830598"
+     "title": "청해부대 작전구역 오만 남방까지 확대…호르무즈 기뢰 제거 대비",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-05T06:10:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2121229"
     },
     {
-     "title": "주지훈 피부색에 이종석 의상까지 이슈몰이…‘재혼 황후’ 하루 만에 ...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-05T05:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005635152"
+     "title": "청해부대 임무, 호르무즈 650㎞인 오만 남방까지 확대…초계기·기뢰제...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T05:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014303933?sid=100"
     },
     {
-     "title": "[핫OTT] ‘재혼 황후’, 공개 하루 만에 12개국 1위…글로벌 7위",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-05T04:36:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1135433"
+     "title": "[포착] “쓸모없는 무기는 없다”…80년 전 美 기뢰, ‘드론 탄약’으로...",
+     "press": "nownews.seoul.co.kr",
+     "publishedAt": "2026-11-05T05:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003696097?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 960,
+  "flagged": 961,
   "matched": 420,
   "avgLeadMin": 374,
   "recent": [
