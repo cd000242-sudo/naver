@@ -136,6 +136,16 @@ function isVerbalModifierToken(token: string): boolean {
   return /[가-힣]는$/.test(token) || /(같은|스러운|로운)$/.test(token);
 }
 
+// [2026-11-05] Quoted phrases are quotes or headlines ("11월 6일까지 접수", '게이 인기투표 1위') and bracketed
+//   ones are notes ("(키워드 없음)") — neither is the keyword's head noun. Quotes fall back when nothing else is left.
+const QUOTED_RE = /"[^"]*"|'[^']*'|“[^”]*”|‘[^’]*’/gu;
+const BRACKETED_RE = /\([^)]*\)|\[[^\]]*\]|【[^】]*】/gu;
+
+/** A token that starts with a digit is a date, amount or count ("6일까지", "2026", "3140만원"), not a topic. */
+function startsWithDigit(token: string): boolean {
+  return /^\p{N}/u.test(token);
+}
+
 export function resolveHeadingKeywordCore(primaryKeyword: string): HeadingKeywordCoreResult {
   const raw = String(primaryKeyword || '').trim();
   if (!raw) return { core: '', shouldPatch: false, reason: 'empty-keyword' };
@@ -152,8 +162,14 @@ export function resolveHeadingKeywordCore(primaryKeyword: string): HeadingKeywor
     return { core: '', shouldPatch: false, reason: 'sentence-keyword' };
   }
 
-  const tokens = raw.split(/[\s,/\-]+/).map((token) => token.trim()).filter(Boolean);
+  const unbracketed = raw.replace(BRACKETED_RE, ' ').trim();
+  const outsideQuotes = unbracketed.replace(QUOTED_RE, ' ').trim();
+  const coreSource = outsideQuotes || unbracketed;
+  if (!coreSource) return { core: '', shouldPatch: false, reason: 'bracketed-only-keyword' };
+
+  const tokens = coreSource.split(/[\s,/\-]+/).map((token) => token.trim()).filter(Boolean);
   const meaningful = tokens.filter((token) => stripKoreanTargetParticle(token).length >= 2);
+  const candidates = meaningful.filter((token) => !startsWithDigit(stripKoreanTargetParticle(token)));
   /*
    * [2026-09-02 실측] "9월" 이 소제목 넷에 전부 앞에 박혔다.
    *   메인키워드 "9월 가을 환절기 침구 교체: 구스 이불 vs 차렵이불 세탁"
@@ -171,10 +187,11 @@ export function resolveHeadingKeywordCore(primaryKeyword: string): HeadingKeywor
     const bare = stripKoreanTargetParticle(token);
     return !isVerbalModifierToken(bare) && isContentWord(bare);
   };
-  const firstRaw = meaningful.find(isUsableCore)
-    || meaningful.find((token) => !isVerbalModifierToken(stripKoreanTargetParticle(token)))
-    || meaningful[0]
-    || raw;
+  const firstRaw = candidates.find(isUsableCore)
+    || candidates.find((token) => !isVerbalModifierToken(stripKoreanTargetParticle(token)))
+    || candidates[0]
+    || (meaningful.length === 0 && !startsWithDigit(stripKoreanTargetParticle(coreSource)) ? coreSource : '');
+  if (!firstRaw) return { core: '', shouldPatch: false, reason: 'numeric-only-keyword' };
   const core = stripKoreanTargetParticle(firstRaw);
 
   if (!core) return { core: '', shouldPatch: false, reason: `empty-core:${firstRaw}` };

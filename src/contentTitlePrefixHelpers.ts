@@ -114,6 +114,16 @@ export function stripReviewTitlePrefixFromHeading(headingTitle: string, selected
 //   (a) 즉시 반복("{W}까지 {W}...")은 컨텍스트 무관 제거(오탐 0).
 //   (b) 제목 주어와 일치하는 선행 "{주어}까지 "는 인물/이슈 중심 글(personCentric)에서만 제거
 //       — 맛집/제품의 통합형 "{대상}까지 맛있는..."(까지=포함) 오탐 방지.
+/** True when the text opens with a verb/adjective form ("가야", "했던", "나선", "갈"), not a noun phrase. */
+function opensWithPredicate(text: string): boolean {
+  const first = String(text || '').trim().split(/\s+/)[0] || '';
+  if (/(야|서|고|며|면|게|도록)$/u.test(first)) return true;
+  const last = first.slice(-1);
+  if (first.length < 2 || last < '가' || last > '힣') return false;
+  const jong = (last.charCodeAt(0) - 0xac00) % 28;
+  return jong === 4 || jong === 8; // final ㄴ / ㄹ: modifier form (나선 · 했던 · 갈)
+}
+
 export function stripLeadingSubjectHookFromHeadings(content: StructuredContent, personCentric = false): void {
   if (!content || !Array.isArray(content.headings) || content.headings.length === 0) return;
 
@@ -135,7 +145,9 @@ export function stripLeadingSubjectHookFromHeadings(content: StructuredContent, 
     if (!rest || rest.length < 6 || startsWithParticle(rest)) return h; // 주어 보호·과다제거 방지
 
     const isRepeat = rest.startsWith(lead);                 // (a) 즉시 반복 — 오탐 0
-    const isSubjectHook = personCentric && lead.length >= 2 && title.includes(lead); // (b) 인물 중심 한정
+    // [2026-11-05] "결승까지 가야 했던 조건" → "가야 했던 조건" 실측. 뒤가 동사로 이어지면 까지는 "어디까지"라
+    //   그 동사에 붙는다 — 떼면 소제목이 망가진다. 명사구("팬들이 꼽은")로 이어질 때만 매달린 훅이다.
+    const isSubjectHook = personCentric && lead.length >= 2 && title.includes(lead) && !opensWithPredicate(rest); // (b) 인물 중심 한정
 
     return (isRepeat || isSubjectHook) ? { ...h, title: rest } : h;
   });
