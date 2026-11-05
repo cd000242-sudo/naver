@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T14:00:11.373Z",
+ "builtAt": "2026-11-05T14:10:17.278Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 10,
  "candidates": [
   {
-   "keyword": "이 대통령 유튜브 소통",
+   "keyword": "이대통령 장남, 주진우 고소",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 53,
-   "recent20": 6,
-   "press": 43,
-   "firstArticleAt": "2026-11-05T12:31:00.000Z",
+   "articles90": 14,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-05T12:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李 대통령 \"알고리즘에 안갇혀…욕도 보고 비난도 본다\"",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-05T13:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005350941?sid=100"
+     "title": "李대통령 장남 \"골프장 간 적 없다\"…주진우 명예훼손 고소",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-05T14:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000649309?sid=102"
     },
     {
-     "title": "이 대통령 “알고리즘에 갇혔다고? 욕도, 비난도 본다”",
-     "press": "vop.co.kr",
-     "publishedAt": "2026-11-05T13:56:00.000Z",
-     "link": "https://vop.co.kr/A00001697480.html"
+     "title": "李 대통령 장남, 주진우 명예훼손 고소… “골프장 안 갔다”",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-05T13:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202932?sid=100"
     },
     {
-     "title": "이 대통령 \"SNS 논란 두렵지 않아\"‥\"집무실 생방송도 검토\"",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-05T13:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533805?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "현대캐피탈 시즌 첫 승",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-05T12:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'해결사' 허수봉 26점 폭발…남자배구 현대캐피탈, 첫 승",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-05T13:49:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/055/0001401001"
-    },
-    {
-     "title": "'허수봉 26점 폭발' 현대캐피탈, 삼성화재 꺾고 시즌 첫 승… 도로공사...",
-     "press": "dailysportshankook.co.kr",
-     "publishedAt": "2026-11-05T13:08:00.000Z",
-     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435214"
-    },
-    {
-     "title": "'모마 25점' 도로공사, 적지서 SOOP 격파…현대캐피탈 시즌 첫 승 신고",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-05T13:00:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109762723253"
+     "title": "李대통령 장남, 주진우 명예훼손 고소…\"한산대CC 안 갔다\"",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-05T13:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000542024?sid=101"
     }
    ]
   },
@@ -79,42 +47,42 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-05T12:32:00.000Z",
+   "articles90": 10,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-05T12:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "英 물가 치솟자…기준금리 연 4%로 인상",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-05T14:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005350943?sid=104"
+    },
+    {
+     "title": "英, 3년만에 금리 인상…베일리 “중동 분쟁 안 끝나면 마지막 아닐 것...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-05T14:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004172914?sid=104"
+    },
     {
      "title": "영국, 3년3개월만에 기준금리 4%로 인상…“마지막 인상 아닐 것”",
      "press": "hani.co.kr",
      "publishedAt": "2026-11-05T13:10:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/028/0002830956?sid=101"
-    },
-    {
-     "title": "영국, 3년 만에 금리 인상‥BOE 총재 \"추가 인상도 가능\"",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-05T13:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533804?sid=104"
-    },
-    {
-     "title": "[그래픽] 영국 중앙은행 기준금리 추이",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T13:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016425181?sid=104"
     }
    ]
   },
   {
-   "keyword": "윤석열 내란 우두머리 2심 내년 선고",
+   "keyword": "윤석열 내란 2심 내년 선고",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T12:35:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-05T12:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -141,10 +109,28 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1057,
-  "matched": 484,
-  "avgLeadMin": 461,
+  "flagged": 1058,
+  "matched": 487,
+  "avgLeadMin": 460,
   "recent": [
+   {
+    "keyword": "재혼 황후, 하루 만에 1위 기록",
+    "hitKeyword": "재혼 황후 공개 일정",
+    "hitAt": "2026-11-05T23:00:00+09:00",
+    "leadMin": 496
+   },
+   {
+    "keyword": "재혼 황후 하루 만에 1위",
+    "hitKeyword": "재혼 황후 공개 일정",
+    "hitAt": "2026-11-05T23:00:00+09:00",
+    "leadMin": 476
+   },
+   {
+    "keyword": "삼성 11경기 10승 타이",
+    "hitKeyword": "삼성 10승 타이기록",
+    "hitAt": "2026-11-05T23:00:00+09:00",
+    "leadMin": 50
+   },
    {
     "keyword": "웰컴저축은행 팀리그 2연승",
     "hitKeyword": "KCC 2연승",
@@ -186,24 +172,6 @@
     "hitKeyword": "전남 선수단 폭력",
     "hitAt": "2026-11-05T22:00:00+09:00",
     "leadMin": 517
-   },
-   {
-    "keyword": "이재명 선수단 격려오찬",
-    "hitKeyword": "전남 선수단 폭력",
-    "hitAt": "2026-11-05T22:00:00+09:00",
-    "leadMin": 446
-   },
-   {
-    "keyword": "케인 뮌헨 재계약!",
-    "hitKeyword": "케인 뮌헨 재계약",
-    "hitAt": "2026-11-05T21:30:00+09:00",
-    "leadMin": 81
-   },
-   {
-    "keyword": "수사",
-    "hitKeyword": "태권도 관장 폭행 수사",
-    "hitAt": "2026-11-05T21:00:00+09:00",
-    "leadMin": 1291
    }
   ]
  }
