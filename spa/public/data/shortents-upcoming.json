@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T13:19:55.031Z",
+ "builtAt": "2026-11-05T13:29:58.938Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 15,
+ "measured": 10,
  "candidates": [
   {
-   "keyword": "이 대통령 장남 주진우 고소",
+   "keyword": "이동호 주진우 고소",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 39,
-   "recent20": 4,
-   "press": 37,
-   "firstArticleAt": "2026-11-05T11:51:00.000Z",
+   "articles90": 32,
+   "recent20": 2,
+   "press": 30,
+   "firstArticleAt": "2026-11-05T12:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李대통령 장남, 주진우 명예훼손 고소…\"한산대CC 안 갔다\"",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-05T13:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000542024?sid=101"
+    },
     {
      "title": "李대통령 장남, “황제골프 아냐”…주진우 명예훼손 고소",
      "press": "seoul.co.kr",
@@ -33,12 +39,6 @@
      "press": "news.jtbc.co.kr",
      "publishedAt": "2026-11-05T13:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/437/0000519391?sid=102"
-    },
-    {
-     "title": "李대통령 장남, '황제 골프' 의혹 제기 주진우 명예훼손 고소",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-05T13:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004207041?sid=102"
     }
    ]
   },
@@ -49,7 +49,7 @@
     "daum"
    ],
    "articles90": 25,
-   "recent20": 4,
+   "recent20": 1,
    "press": 19,
    "firstArticleAt": "2026-11-05T12:00:00.000Z",
    "exclusive": false,
@@ -76,46 +76,14 @@
    ]
   },
   {
-   "keyword": "이유리 배우",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 11,
-   "recent20": 4,
-   "press": 8,
-   "firstArticleAt": "2026-11-05T12:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"전문가 18명 투입\" 이유리, 폴소유 끝판왕이었다..\"중고거래만 137개\"",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-05T13:12:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005635417"
-    },
-    {
-     "title": "[TVis] ‘총 매출 700억’ 이유리, 새 집 공개...“미니멀리스트” 아닌...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-05T13:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003539476"
-    },
-    {
-     "title": "이유리, 식구는 둘인데 냉장고 4대..\"80인분 잡채 만들어 냉동\" 충격 [편...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-05T13:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003485020"
-    }
-   ]
-  },
-  {
    "keyword": "윤석열 2심 내년 선고",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T11:50:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-05T12:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -136,38 +104,6 @@
      "press": "news.tvchosun.com",
      "publishedAt": "2026-11-05T12:35:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/448/0000649300?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "리노, 내년 1분기 병역 의무 이행",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T12:03:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "스트레이 키즈 리노, 내년 1분기 군 입대 발표…팀 내 첫 주자",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-05T12:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009273255"
-    },
-    {
-     "title": "스트레이 키즈 리노, 내년 1분기 병역 의무 돌입",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-05T12:12:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=779370"
-    },
-    {
-     "title": "스트레이 키즈, 내년 1분기 군입대 스타트…첫 주자는 리노[공식]",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-05T12:08:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1793878660530438007"
     }
    ]
   },
@@ -207,7 +143,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1053,
+  "flagged": 1054,
   "matched": 478,
   "avgLeadMin": 441,
   "recent": [
