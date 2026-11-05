@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T05:53:39.346Z",
+ "builtAt": "2026-11-05T06:03:42.739Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,165 +8,134 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 23,
  "candidates": [
   {
-   "keyword": "코스피 매도 사이드카",
+   "keyword": "LG화학 3분기 영업익 5612억",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 34,
+   "recent20": 8,
+   "press": 32,
+   "firstArticleAt": "2026-11-05T04:41:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "LG화학 3분기 영업익 5612억…석유화학은 적자 전환",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-05T06:02:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1319400&inflow=N"
+    },
+    {
+     "title": "LG화학, 3분기 영업이익 5612억…전년 대비 17%↓",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-05T05:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202831?sid=101"
+    },
+    {
+     "title": "LG화학, 석화 침체에 발목…3분기 영업익 전년比 17.4%↓",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-05T05:54:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=902078"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 스마트안경 부정행위 차단",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 43,
-   "recent20": 27,
-   "press": 39,
-   "firstArticleAt": "2026-11-05T04:38:00.000Z",
+   "articles90": 31,
+   "recent20": 12,
+   "press": 28,
+   "firstArticleAt": "2026-11-05T05:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 코스피 이어 코스닥 매도 사이드카 발동",
-     "press": "news.mtn.co.kr",
-     "publishedAt": "2026-11-05T05:52:00.000Z",
-     "link": "https://news.mtn.co.kr/article/2026110514501483753"
+     "title": "이 대통령, 수능 2주 앞두고 “스마트 안경 활용한 부정행위 차단해야”",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-05T06:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002830853?sid=100"
     },
     {
-     "title": "코스피 이어 코스닥 매도 사이드카 발동(1보)",
-     "press": "news2day.co.kr",
-     "publishedAt": "2026-11-05T05:52:00.000Z",
-     "link": "https://www.news2day.co.kr/article/20261105500212"
+     "title": "‘수능 2주 앞’ 李 대통령 “스마트 안경 부정행위 차단”",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-05T06:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001883238?sid=100"
     },
     {
-     "title": "코스피 5300대…5%대 급락에 오전 '매도사이드카'",
-     "press": "tleaves.co.kr",
-     "publishedAt": "2026-11-05T05:52:00.000Z",
-     "link": "https://www.tleaves.co.kr/news/articleView.html?idxno=10108"
+     "title": "이 대통령 \"수능 관리 만전… 스마트안경 활용 부정행위 차단해야\"",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-05T06:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000963820?sid=100"
     }
    ]
   },
   {
-   "keyword": "삼성미래기술육성사업 애뉴얼 포럼",
+   "keyword": "발언하는 이재명 대통령",
    "sources": [
     "nate"
    ],
-   "articles90": 30,
-   "recent20": 1,
-   "press": 26,
-   "firstArticleAt": "2026-11-05T05:00:00.000Z",
+   "articles90": 38,
+   "recent20": 9,
+   "press": 27,
+   "firstArticleAt": "2026-11-05T04:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성·넷마블, 미래기술육성사업 애뉴얼 포럼 개최·'세븐나이츠 리버스...",
-     "press": "wsobi.com",
-     "publishedAt": "2026-11-05T05:48:00.000Z",
-     "link": "http://www.wsobi.com/news/articleView.html?idxno=321140"
+     "title": "尹 재판에 등장한 두 개의 '이재명 판례'… 법원이 2025년 판례 택한 이...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-05T06:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000963824?sid=102"
     },
     {
-     "title": "삼성 미래기술육성사업 '2026 애뉴얼 포럼' 개최… 우수 연구자 10인 첫...",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-05T05:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002247423?sid=105"
+     "title": "대통령의 소통, '횟수' 보다 '태도'가 더 중요한 이유 : 이 대통령 유튜...",
+     "press": "huffingtonpost.kr",
+     "publishedAt": "2026-11-05T06:00:00.000Z",
+     "link": "https://www.huffingtonpost.kr/article/261833"
     },
     {
-     "title": "삼성, 미래기술육성사업 포럼 개최…14년 만에 첫 시상",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-05T05:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002719420?sid=101"
+     "title": "李대통령 \"복지는 먼저 찾아가는 것…위기 가구 선제 발굴해야\"",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-05T05:59:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261105001078"
     }
    ]
   },
   {
-   "keyword": "서울 아파트값 상승세",
+   "keyword": "2027 서울 청년대회 기자간담회",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 26,
-   "recent20": 6,
-   "press": 24,
-   "firstArticleAt": "2026-11-05T05:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "강남 하락에도 서울 아파트값 91주째 상승…경기 ‘반도체 벨트’ 강세",
-     "press": "donga.com",
-     "publishedAt": "2026-11-05T05:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003760308?sid=101"
-    },
-    {
-     "title": "서울 아파트값 상승폭 3주째 둔화···강남권 약세 지속",
-     "press": "thereport.co.kr",
-     "publishedAt": "2026-11-05T05:44:00.000Z",
-     "link": "https://www.thereport.co.kr/news/articleView.html?idxno=93090"
-    },
-    {
-     "title": "[부동산 프리즘] 서울 집값 상승세 3주째 둔화…경매시장도 매물 적체·...",
-     "press": "moneystorm.kr",
-     "publishedAt": "2026-11-05T05:40:00.000Z",
-     "link": "https://www.moneystorm.kr/news/articleView.html?idxno=8114"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명 대통령 격려오찬",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 24,
+   "articles90": 17,
    "recent20": 4,
-   "press": 24,
+   "press": 16,
    "firstArticleAt": "2026-11-05T04:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이재명 대통령 \"청년 기술인재가 대한민국의 미래\"…기능올림픽 선수단...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-05T05:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001038604?sid=100"
+     "title": "정순택 대주교 \"서울 세계청년대회, 온 국민 함께하는 만남·환대 축제...",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-05T06:02:00.000Z",
+     "link": "https://www.ajunews.com/view/20261105143100032"
     },
     {
-     "title": "李대통령 “청년 기술인재가 대한민국 미래”…실력 걸맞은 인정·존중...",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-05T05:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003057374?sid=100"
+     "title": "내년 한국 찾는 교황…서울월드컵경기장·서울공항서 신자들 만난다",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-05T05:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016424305?sid=103"
     },
     {
-     "title": "李대통령 \"기술인재가 대한민국의 미래\"···기능올림픽 종합 2위 선수...",
-     "press": "ziksir.com",
-     "publishedAt": "2026-11-05T05:36:00.000Z",
-     "link": "https://www.ziksir.com/news/articleView.html?idxno=152199"
-    }
-   ]
-  },
-  {
-   "keyword": "2027 서울 세계청년대회",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 18,
-   "recent20": 2,
-   "press": 18,
-   "firstArticleAt": "2026-11-05T04:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "세계 청년 50만명, 서울로 온다…WYD 9개월 앞두고 폭염·인파 대비 속도",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-05T05:52:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611050133"
-    },
-    {
-     "title": "'2027 서울 세계청년대회', 세계 청년 맞을 준비 본격화…대회 운영계획...",
-     "press": "betanews.net",
-     "publishedAt": "2026-11-05T05:38:00.000Z",
-     "link": "https://www.betanews.net/article/view/beta202611050128"
-    },
-    {
-     "title": "“서울 WYD, 단절의 시대에 젊은이들 마음 여는 계기로”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-05T05:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003760303?sid=103"
+     "title": "“단절의 시대, 만남의 용기 필요”…레오 14세 교황 오는 '서울 세계청...",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-05T05:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003482670?sid=105"
     }
    ]
   },
@@ -175,13 +144,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 13,
+   "articles90": 14,
+   "recent20": 2,
+   "press": 14,
    "firstArticleAt": "2026-11-05T05:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“내년 기초연구 2.9조원 투입”역대 최대…지역·청년 연구자 키운다",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-05T05:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002719443?sid=105"
+    },
     {
      "title": "2027년 기초연구에 2조 9102억원… 지역·신진 연구자 지원 확대",
      "press": "segye.com",
@@ -193,12 +168,6 @@
      "press": "dongascience.com",
      "publishedAt": "2026-11-05T05:33:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/584/0000040014?sid=105"
-    },
-    {
-     "title": "내년 기초연구에 2조 9천억 투자, 지역·청년 과학자 품는다",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-05T05:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002534758?sid=101"
     }
    ]
   },
@@ -207,13 +176,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 10,
+   "articles90": 11,
+   "recent20": 2,
+   "press": 11,
    "firstArticleAt": "2026-11-05T04:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘라이어’ 서현진, 거짓말쟁이 지목에 눈물 터졌다…고개 숙인 유연석...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-05T05:56:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1172126"
+    },
     {
      "title": "유연석 경찰 연행…서현진 성폭행 주장에 힘 실렸나 (라이어)",
      "press": "isplus.com",
@@ -225,24 +200,83 @@
      "press": "tenasia.co.kr",
      "publishedAt": "2026-11-05T05:30:00.000Z",
      "link": "https://m.entertain.naver.com/article/312/0000783114"
+    }
+   ]
+  },
+  {
+   "keyword": "신진서 83개월 1위",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-05T04:41:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘10월 9전 전승' 신진서, 83개월 연속 바둑 랭킹 1위",
+     "press": "maniareport.com",
+     "publishedAt": "2026-11-05T06:01:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/425/0000213938"
     },
     {
-     "title": "‘라이어’ 유연석, 한 밤 또다시 경찰 연행 새 국면",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-05T05:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001148233"
+     "title": "10월에만 상금 5억원 신진서, 83개월 연속 바둑 랭킹 1위",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-05T05:18:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/052/0002428713"
+    },
+    {
+     "title": "'10월 상금만 5억원' 신진서, 83개월 연속 바둑 랭킹 1위",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-05T05:08:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261105000990"
+    }
+   ]
+  },
+  {
+   "keyword": "입법박람회 조정식 국회의장",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 10,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-05T04:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "로봇·수소차·누리호 한자리에…국회 입법박람회 개막",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-05T05:54:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=100699"
+    },
+    {
+     "title": "국회입법박람회 개막...조작기소특검법 전운",
+     "press": "natv.go.kr",
+     "publishedAt": "2026-11-05T05:36:00.000Z",
+     "link": "https://www.natv.go.kr/natv/news/newsView.do?newsId=514495"
+    },
+    {
+     "title": "[르포] ‘4족 보행 로봇’이 국회의장에 입법 제안문 전달…“현장의 아...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-05T05:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202795?sid=100"
     }
    ]
   },
   {
    "keyword": "장동민의 데블스 플랜3",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 9,
+   "articles90": 8,
    "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-05T04:27:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-05T04:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -267,66 +301,34 @@
    ]
   },
   {
-   "keyword": "입법박람회 조정식 국회의장",
+   "keyword": "학폭 의혹 공구 중단",
    "sources": [
     "nate"
    ],
-   "articles90": 10,
+   "articles90": 4,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-05T04:26:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-05T05:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국회입법박람회 개막...조작기소특검법 전운",
-     "press": "natv.go.kr",
-     "publishedAt": "2026-11-05T05:36:00.000Z",
-     "link": "https://www.natv.go.kr/natv/news/newsView.do?newsId=514495"
+     "title": "'학폭 부인' 차예련, 공구 페이지 다시 열었다 [소셜in]",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-05T05:49:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000326834"
     },
     {
-     "title": "[르포] ‘4족 보행 로봇’이 국회의장에 입법 제안문 전달…“현장의 아...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-05T05:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202795?sid=100"
+     "title": "차예련, 학폭 의혹 부인 속 외부 업체와 협업해온 공구 페이지 접속 불...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-05T05:22:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16269001"
     },
     {
-     "title": "입법박람회에 등장한 사족로봇",
-     "press": "m.skyedaily.com",
-     "publishedAt": "2026-11-05T05:16:00.000Z",
-     "link": "https://m.skyedaily.com/news_view.html?ID=314172"
-    }
-   ]
-  },
-  {
-   "keyword": "신진서 83개월 1위",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-05T04:41:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "10월에만 상금 5억원 신진서, 83개월 연속 바둑 랭킹 1위",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-05T05:18:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/052/0002428713"
-    },
-    {
-     "title": "'10월 상금만 5억원' 신진서, 83개월 연속 바둑 랭킹 1위",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-05T05:08:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261105000990"
-    },
-    {
-     "title": "10월에만 상금 5억…신진서, 83개월 연속 국내 바둑 1위",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-05T05:06:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/421/0009272376"
+     "title": "학폭 의혹 부인·원본 글 열람 제한… 차예련, 이번엔 공구 링크 일시 '...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-05T05:20:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000486728"
     }
    ]
   },
@@ -363,44 +365,12 @@
    ]
   },
   {
-   "keyword": "재혼 황후, 하루 만에 1위 기록",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T04:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“언니라고 불러도 될까요?”…‘재혼 황후’ 막장 판타지 통했다…12개...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-05T05:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/021/0002830598"
-    },
-    {
-     "title": "주지훈 피부색에 이종석 의상까지 이슈몰이…‘재혼 황후’ 하루 만에 ...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-05T05:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005635152"
-    },
-    {
-     "title": "[핫OTT] ‘재혼 황후’, 공개 하루 만에 12개국 1위…글로벌 7위",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-05T04:36:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1135433"
-    }
-   ]
-  },
-  {
    "keyword": "jtbc",
    "sources": [
     "google"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-05T05:02:00.000Z",
    "exclusive": false,
@@ -427,44 +397,74 @@
    ]
   },
   {
-   "keyword": "소아 코로나19 접종",
+   "keyword": "재혼 황후 하루 만에 1위",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-05T04:43:00.000Z",
+   "firstArticleAt": "2026-11-05T04:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "고위험군 소아·영유아 코로나19 예방접종 11일부터 시작",
-     "press": "korea.kr",
-     "publishedAt": "2026-11-05T05:46:00.000Z",
-     "link": "https://www.korea.kr/news/policyNewsView.do?newsId=148975113&call_from=naver_news"
+     "title": "“언니라고 불러도 될까요?”…‘재혼 황후’ 막장 판타지 통했다…12개...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-05T05:32:00.000Z",
+     "link": "https://m.entertain.naver.com/article/021/0002830598"
     },
     {
-     "title": "11일부터 6개월~11세 고위험군 코로나19 예방접종 시작",
-     "press": "rapportian.com",
-     "publishedAt": "2026-11-05T04:54:00.000Z",
-     "link": "https://www.rapportian.com/news/articleView.html?idxno=242080"
+     "title": "주지훈 피부색에 이종석 의상까지 이슈몰이…‘재혼 황후’ 하루 만에 ...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-05T05:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005635152"
     },
     {
-     "title": "11일부터 고위험군 12세 미만 코로나19 무료 예방접종",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-05T04:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000541897?sid=101"
+     "title": "[핫OTT] ‘재혼 황후’, 공개 하루 만에 12개국 1위…글로벌 7위",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-05T04:36:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1135433"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 956,
-  "matched": 415,
-  "avgLeadMin": 377,
+  "flagged": 960,
+  "matched": 420,
+  "avgLeadMin": 374,
   "recent": [
+   {
+    "keyword": "다문화 가정",
+    "hitKeyword": "다문화 혼인 감소",
+    "hitAt": "2026-11-05T15:00:00+09:00",
+    "leadMin": 228
+   },
+   {
+    "keyword": "코스피 매도 사이드카 발동",
+    "hitKeyword": "코스피 매도 사이드카",
+    "hitAt": "2026-11-05T15:00:00+09:00",
+    "leadMin": 137
+   },
+   {
+    "keyword": "다문화 혼인 감소",
+    "hitKeyword": "다문화 혼인 감소",
+    "hitAt": "2026-11-05T15:00:00+09:00",
+    "leadMin": 127
+   },
+   {
+    "keyword": "코스피 매도 사이드카",
+    "hitKeyword": "코스피 매도 사이드카",
+    "hitAt": "2026-11-05T15:00:00+09:00",
+    "leadMin": 87
+   },
+   {
+    "keyword": "데블스플랜3",
+    "hitKeyword": "데블스플랜3 귀환",
+    "hitAt": "2026-11-05T15:00:00+09:00",
+    "leadMin": 37
+   },
    {
     "keyword": "최지훈 대표와 결혼식",
     "hitKeyword": "서인영 신랑 최지훈",
@@ -494,36 +494,6 @@
     "hitKeyword": "손흥민 MLS 유니폼 2위",
     "hitAt": "2026-11-05T14:30:00+09:00",
     "leadMin": 327
-   },
-   {
-    "keyword": "손흥민, MLS 유니폼 2위!",
-    "hitKeyword": "손흥민 MLS 유니폼 2위",
-    "hitAt": "2026-11-05T14:30:00+09:00",
-    "leadMin": 297
-   },
-   {
-    "keyword": "수능일 증시 오전 10시 개장",
-    "hitKeyword": "수능날 증시 개장 연기",
-    "hitAt": "2026-11-05T14:30:00+09:00",
-    "leadMin": 168
-   },
-   {
-    "keyword": "주말 서울 영하 5도 예상",
-    "hitKeyword": "입동 서울 영하 예보",
-    "hitAt": "2026-11-05T14:30:00+09:00",
-    "leadMin": 67
-   },
-   {
-    "keyword": "미국 중간선거 결과",
-    "hitKeyword": "중간선거 반도체 급락",
-    "hitAt": "2026-11-05T14:30:00+09:00",
-    "leadMin": 57
-   },
-   {
-    "keyword": "이번 주말 서울 영하 5도",
-    "hitKeyword": "입동 서울 영하 예보",
-    "hitAt": "2026-11-05T14:30:00+09:00",
-    "leadMin": 47
    }
   ]
  }
