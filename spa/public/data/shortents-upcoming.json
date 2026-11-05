@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T15:20:49.762Z",
+ "builtAt": "2026-11-05T15:31:00.890Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 14,
  "candidates": [
   {
    "keyword": "가상자산 과세 2년 유예 추진",
@@ -16,7 +16,7 @@
     "nate"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-05T14:28:00.000Z",
    "exclusive": false,
@@ -71,38 +71,6 @@
      "press": "mk.co.kr",
      "publishedAt": "2026-11-05T14:22:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/009/0005759830?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "주진우 명예훼손 고소",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T13:55:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "주진우, 이재명 장남 명예훼손 고소에 \"협박 안 통해\"…맞고발 예고",
-     "press": "pennmike.com",
-     "publishedAt": "2026-11-05T14:44:00.000Z",
-     "link": "https://www.pennmike.com/news/articleView.html?idxno=131123"
-    },
-    {
-     "title": "李대통령 장남 \"골프장 간 적 없다\"…주진우 명예훼손 고소",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-05T14:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000649309?sid=102"
-    },
-    {
-     "title": "李 대통령 장남, 주진우 명예훼손 고소… “골프장 안 갔다”",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-05T13:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001202932?sid=100"
     }
    ]
   },
