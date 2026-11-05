@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T12:09:26.609Z",
+ "builtAt": "2026-11-05T12:19:29.885Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,31 +8,31 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 9,
  "candidates": [
   {
    "keyword": "내란 우두머리 1월 26일 선고",
    "sources": [
     "nate"
    ],
-   "articles90": 28,
-   "recent20": 5,
-   "press": 27,
-   "firstArticleAt": "2026-11-05T10:42:00.000Z",
+   "articles90": 23,
+   "recent20": 4,
+   "press": 22,
+   "firstArticleAt": "2026-11-05T10:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "윤석열, 격앙된 79분 최후진술…내년 1월26일 선고",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-05T12:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000549287?sid=102"
-    },
     {
      "title": "尹 '내란 우두머리' 2심 내년 1월 26일 선고",
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-05T12:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000923319?sid=102"
+    },
+    {
+     "title": "윤석열, 격앙된 79분 최후진술…내년 1월26일 선고",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-05T12:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000549287?sid=102"
     },
     {
      "title": "尹 1시간 20분간 최후 진술…'내란우두머리' 2심 내년 1월 26일 선고",
@@ -47,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
+   "articles90": 9,
    "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-05T10:45:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-05T10:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "승진제도·안전인력 놓고 '갈등'...철도노조, 12월 총파업 예고",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-05T12:10:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261105001516"
+    },
     {
      "title": "코레일·SR 통합 후 첫 파업 위기…철도노조 “12월 총파업 불사”",
      "press": "sedaily.com",
@@ -65,44 +71,6 @@
      "press": "businesspost.co.kr",
      "publishedAt": "2026-11-05T11:40:00.000Z",
      "link": "https://www.businesspost.co.kr/BP?command=article_view&num=451324"
-    },
-    {
-     "title": "철도노조, 임단협 결렬 12월 '총파업'…열차 운행 비상",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-05T11:36:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5080387"
-    }
-   ]
-  },
-  {
-   "keyword": "리노, 내년 1분기 입대 예정",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-05T10:48:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "스트레이 키즈, 내년 1분기 군입대 스타트…첫 주자는 리노[공식]",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-05T12:08:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1793878660530438007"
-    },
-    {
-     "title": "스트레이 키즈 리노, 내년 1분기 병역 의무 이행… 팀 내 첫 주자",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-05T12:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000051621"
-    },
-    {
-     "title": "스트레이 키즈 리노, 팀 첫 번째로 입대… “내년 1분기 이행 예정” [공...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-05T11:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003539473"
     }
    ]
   },
@@ -111,13 +79,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
    "firstArticleAt": "2026-11-05T10:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "쿠팡, 4236억원 과징금 집행정지 불발…시정명령은 효력 정지",
+     "press": "industrynews.co.kr",
+     "publishedAt": "2026-11-05T12:12:00.000Z",
+     "link": "https://www.industrynews.co.kr/news/articleView.html?idxno=88993"
+    },
     {
      "title": "法, 쿠팡 '개인정보 유출' 과징금 '효력 유지'",
      "press": "m-i.kr",
@@ -129,76 +103,6 @@
      "press": "zdnet.co.kr",
      "publishedAt": "2026-11-05T11:45:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/092/0002444134?sid=103"
-    },
-    {
-     "title": "법원 '개인정보 유출' 과징금 효력 유지에…쿠팡 \"검토 후 대응\"",
-     "press": "news.mtn.co.kr",
-     "publishedAt": "2026-11-05T11:20:00.000Z",
-     "link": "https://news.mtn.co.kr/article/2026110520175957304"
-    }
-   ]
-  },
-  {
-   "keyword": "세브란스 흉기 난동 구속영장",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T10:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"삼단봉 있는데\" 비상벨 눌러도‥의사는 이미 흉기에 '중상'",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-05T11:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533789?sid=102"
-    },
-    {
-     "title": "경찰, ‘세브란스 흉기 난동’ 50대 여성 구속영장 신청",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-05T11:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004679270?sid=102"
-    },
-    {
-     "title": "\"집에서 흉기 챙겼다\"…의사 공격한 여성 '살인미수' 적용",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-05T11:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000519365?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "표절",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T11:15:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "방탄소년단 '스윔' 표절 소송, 美 작곡가들 취하 요청으로 마무리",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-05T12:04:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109762271578"
-    },
-    {
-     "title": "방탄소년단, '스윔' 표절 의혹 일단락…원고 전원 자진 취하",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-05T11:37:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000051619"
-    },
-    {
-     "title": "BTS '스윔' 표절 소송 종결…원고 자진 취하",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-05T11:15:00.000Z",
-     "link": "https://m.entertain.naver.com/article/422/0000923307"
     }
    ]
   }
