@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T21:22:57.916Z",
+ "builtAt": "2026-11-05T21:33:01.133Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,40 +8,8 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 10,
  "candidates": [
-  {
-   "keyword": "미국 중간선거",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-05T20:22:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "뉴욕증시, 중간선거발 'AI 발작'에 급락 마감…나스닥 5.5% 폭락",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-05T21:21:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261106000030"
-    },
-    {
-     "title": "[미 중간선거] 포드·GM도 등 돌린 車관세…현대차·기아, 정책 변화 '기...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-05T21:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003151963?sid=101"
-    },
-    {
-     "title": "美 중간선거 후 유가 하락·환율 안정…\"항공권 유류할증료 부담도 완화...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014305109?sid=101"
-    }
-   ]
-  },
   {
    "keyword": "이스라엘 연정 구성",
    "sources": [
@@ -75,34 +43,35 @@
    ]
   },
   {
-   "keyword": "2026년 11월 6일 운세",
+   "keyword": "청해부대 임무 확대",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T21:00:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-05T20:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오늘의 운세] 2026년 11월 6일 띠별 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-05T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006404664?sid=103"
+     "title": "청해부대 작전구역, 호르무즈 650km 앞까지 확대",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-05T21:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001401026?sid=100"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 6일 별자리 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-05T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006404665?sid=103"
+     "title": "청해부대 작전구역 2배 넓힌다‥\"전쟁은 불개입\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-05T21:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533832?sid=100"
     },
     {
-     "title": "2026년 효력(孝力) 모의고사",
-     "press": "cctoday.co.kr",
-     "publishedAt": "2026-11-05T21:02:00.000Z",
-     "link": "https://www.cctoday.co.kr/news/articleView.html?idxno=2239730"
+     "title": "“한국, 호르무즈 인근서 뭘 노리나”…이란 언론, 청해부대 확대에 “...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-05T20:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003696393?sid=104"
     }
    ]
   }
