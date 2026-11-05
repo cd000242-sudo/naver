@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T02:21:49.577Z",
+ "builtAt": "2026-11-05T02:31:53.054Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 80,
-   "recent20": 4,
+   "articles90": 81,
+   "recent20": 6,
    "press": 71,
-   "firstArticleAt": "2026-11-05T01:19:00.000Z",
+   "firstArticleAt": "2026-11-05T01:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 코스피 5500선 붕괴, 5400선도 위태...매도 사이드카 발동",
-     "press": "pennmike.com",
-     "publishedAt": "2026-11-05T02:18:00.000Z",
-     "link": "https://www.pennmike.com/news/articleView.html?idxno=131056"
+     "title": "트럼프 패배에 뉴욕증시 '환호'…코스피는 '비명' 왜",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-05T02:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000549027?sid=101"
     },
     {
-     "title": "코스피, 美 데이터센터 규제 우려에 장중 4%↓…삼전닉스 6~7%↓",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-05T02:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016423586?sid=101"
+     "title": "코스피 4% 폭락하며 '매도 사이드카' 발동",
+     "press": "fntoday.co.kr",
+     "publishedAt": "2026-11-05T02:26:00.000Z",
+     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=397068"
     },
     {
-     "title": "[Invest]'데이터센터 이제 안 짓나?' 美 블루 웨이브에 코스피 급락",
-     "press": "investchosun.com",
-     "publishedAt": "2026-11-05T02:14:00.000Z",
-     "link": "https://www.investchosun.com/site/data/html_dir/2026/11/05/2026110580071.html"
+     "title": "코스피 4%대 급락…반도체주 폭락에 '매도 사이드카' 발동",
+     "press": "jeonmae.co.kr",
+     "publishedAt": "2026-11-05T02:26:00.000Z",
+     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1308801"
     }
    ]
   },
@@ -47,45 +47,51 @@
    "sources": [
     "nate"
    ],
-   "articles90": 49,
-   "recent20": 9,
-   "press": 43,
-   "firstArticleAt": "2026-11-05T00:52:00.000Z",
+   "articles90": 43,
+   "recent20": 11,
+   "press": 36,
+   "firstArticleAt": "2026-11-05T01:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "청해부대 작전구역, 호르무즈 인근 오만 남방까지 확대되나",
-     "press": "news.cpbc.co.kr",
-     "publishedAt": "2026-11-05T02:18:00.000Z",
-     "link": "https://news.cpbc.co.kr/article/1176842?division=NAVER"
+     "title": "국방부 '청해부대 작전구역 2배 확대' 동의안 제출… 첨단전력 대폭 증...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-05T02:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005599856?sid=100"
     },
     {
-     "title": "민주당 “청해부대 작전구역 확대는 호르무즈 파병 아냐…국회 동의도...",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-05T02:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012287850?sid=100"
+     "title": "與 \"청해부대 작전 지역 확대, 곧 국회서 논의…'우회 파병' 아냐\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-05T02:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000923102?sid=100"
     },
     {
-     "title": "호르무즈에 더 가까워진 청해부대",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-05T02:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005838532?sid=100"
+     "title": "청해부대 구역 두큼항 남단까지··· 해적 급증 대응에 EOD·소해장비 추...",
+     "press": "dkilbo.com",
+     "publishedAt": "2026-11-05T02:26:00.000Z",
+     "link": "https://www.dkilbo.com/news/articleView.html?idxno=559710"
     }
    ]
   },
   {
-   "keyword": "에코프로 비엠",
+   "keyword": "에코프로비엠 3분기 영업익 120억 감소",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 45,
-   "recent20": 7,
-   "press": 40,
-   "firstArticleAt": "2026-11-05T00:55:00.000Z",
+   "articles90": 28,
+   "recent20": 4,
+   "press": 27,
+   "firstArticleAt": "2026-11-05T01:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "에코프로비엠 “LFP라인 5만톤 규모 증설 추진…글로벌 완성車 수조원대...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-05T02:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002719315?sid=101"
+    },
     {
      "title": "에코프로비엠 3분기 영업익 120억, 76.2%↓…주가 7%대 급락",
      "press": "newsfc.co.kr",
@@ -97,12 +103,6 @@
      "press": "joseilbo.com",
      "publishedAt": "2026-11-05T02:19:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/123/0002393405?sid=101"
-    },
-    {
-     "title": "에코프로비엠, ESS 수요 확대 대응..LFP 양극재 투자 본격화",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-05T02:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005437011?sid=101"
     }
    ]
   },
@@ -111,13 +111,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 27,
-   "recent20": 4,
-   "press": 26,
+   "articles90": 28,
+   "recent20": 3,
+   "press": 27,
    "firstArticleAt": "2026-11-05T01:02:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "통합우승 2연패 실패한 LG, 빠르게 움직였다...스위퍼 주무기 삼는 트리...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-05T02:22:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/022/0004172730"
+    },
     {
      "title": "LG, ‘이정후 동료’ 트리스탄 벡 영입",
      "press": "bntnews.co.kr",
@@ -129,44 +135,102 @@
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-05T02:14:00.000Z",
      "link": "https://m.sports.naver.com/kbaseball/article/079/0004206768"
-    },
-    {
-     "title": "[오피셜]현역 빅리거에 영입 경쟁까지 붙었는데 87만8000달러?…LG, 트리...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-05T02:07:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/445/0000486599"
     }
    ]
   },
   {
-   "keyword": "카카오 주가",
+   "keyword": "카카오 AI 사업 2028년 목표",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 27,
-   "recent20": 5,
-   "press": 24,
-   "firstArticleAt": "2026-11-05T00:53:00.000Z",
+   "articles90": 26,
+   "recent20": 6,
+   "press": 22,
+   "firstArticleAt": "2026-11-05T01:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "카카오, 3분기 영업익 2403억…1500억 자사주 매입에 주가 9.8%껑충",
-     "press": "newsworks.co.kr",
+     "title": "카카오, 플랫폼 성장에 3Q 영업익 2403억…톡비즈 13%↑",
+     "press": "ziksir.com",
+     "publishedAt": "2026-11-05T02:28:00.000Z",
+     "link": "https://www.ziksir.com/news/articleView.html?idxno=152156"
+    },
+    {
+     "title": "카카오, \"광고 수익화·비용 효율화로 AI 사업 2028년 손익분기점\"",
+     "press": "itdaily.kr",
+     "publishedAt": "2026-11-05T02:28:00.000Z",
+     "link": "https://www.itdaily.kr/news/articleView.html?idxno=242711"
+    },
+    {
+     "title": "정신아 \"AI 확산 더뎌 뼈아프다\"…카카오, 2028년 AI 손익분기점 목표",
+     "press": "ebn.co.kr",
      "publishedAt": "2026-11-05T02:20:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=902031"
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1730576"
+    }
+   ]
+  },
+  {
+   "keyword": "인천",
+   "sources": [
+    "google"
+   ],
+   "articles90": 29,
+   "recent20": 24,
+   "press": 21,
+   "firstArticleAt": "2026-11-05T02:04:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "인천대 대학일자리플러스센터, '취준생 마음케어 프로그램' 3회기 운영",
+     "press": "kihoilbo.co.kr",
+     "publishedAt": "2026-11-05T02:30:00.000Z",
+     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3039956"
     },
     {
-     "title": "카카오 주가 장중 8%대 올라, 3분기 실적 개선·1500억 자사주 매입 뒤 ...",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-05T02:18:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=451238"
+     "title": "인천 사회복지사 600여 명 한자리에…'2026 인천사회복지사대회' 개최",
+     "press": "kihoilbo.co.kr",
+     "publishedAt": "2026-11-05T02:30:00.000Z",
+     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3039957"
     },
     {
-     "title": "본업 힘 키운 카카오, '실행형 AI' 승부…주가 부진에 1500억 자사주 소...",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-05T02:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006404101?sid=105"
+     "title": "[5일 인천 서해구] 청라1동 새마을부녀회, 취약계층 밑반찬 나눔 등",
+     "press": "asiatime.co.kr",
+     "publishedAt": "2026-11-05T02:30:00.000Z",
+     "link": "https://www.asiatime.co.kr/article/20261105500189"
+    }
+   ]
+  },
+  {
+   "keyword": "세브란스 흉기난동 살인미수",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 21,
+   "recent20": 3,
+   "press": 21,
+   "firstArticleAt": "2026-11-05T01:15:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "경찰, '세브란스병원 흉기 난동' 50대 여성에 구속영장 신청",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-05T02:30:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/05/2026110500132.html"
+    },
+    {
+     "title": "경찰, '세브란스 흉기 난동' 50대 살인미수 구속영장 신청키로",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-05T02:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001976826?sid=102"
+    },
+    {
+     "title": "세브란스병원 의사 피습에 대한병원협회 \"의료현장 안전대책 전면 재점...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-05T02:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/076/0004463509?sid=102"
     }
    ]
   },
@@ -176,10 +240,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 25,
+   "articles90": 20,
    "recent20": 1,
-   "press": 24,
-   "firstArticleAt": "2026-11-05T00:58:00.000Z",
+   "press": 19,
+   "firstArticleAt": "2026-11-05T01:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -204,34 +268,34 @@
    ]
   },
   {
-   "keyword": "인천",
+   "keyword": "층간소음 기준 강화",
    "sources": [
-    "google"
+    "daum"
    ],
-   "articles90": 28,
-   "recent20": 24,
-   "press": 22,
-   "firstArticleAt": "2026-11-05T01:56:00.000Z",
+   "articles90": 18,
+   "recent20": 3,
+   "press": 18,
+   "firstArticleAt": "2026-11-05T02:00:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "인천조달청, 디지털 소외계층에 전산장비 무상 기증",
-     "press": "kihoilbo.co.kr",
-     "publishedAt": "2026-11-05T02:20:00.000Z",
-     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3039953"
+     "title": "다세대·오피스텔 층간소음 기준 강화…충격음 모두 49㏈ 이하",
+     "press": "namdonews.com",
+     "publishedAt": "2026-11-05T02:22:00.000Z",
+     "link": "https://www.namdonews.com/news/articleView.html?idxno=928253"
     },
     {
-     "title": "인천 검단구 지역사회보장협의체, 합동워크숍 개최",
-     "press": "kihoilbo.co.kr",
-     "publishedAt": "2026-11-05T02:18:00.000Z",
-     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3039951"
+     "title": "\"쿵쾅거리던 오피스텔·다세대 옛말\"…층간소음 차단 기준 전격 강화",
+     "press": "theopiniontimes.news",
+     "publishedAt": "2026-11-05T02:15:00.000Z",
+     "link": "https://theopiniontimes.news/%ec%bf%b5%ec%be%85%ea%b1%b0%eb%a6%ac%eb%8d%98-%ec%98%a4%ed%94%bc%ec%8a%a4%ed%85%94%c2%b7%eb%8b%a4%ec%84%b8%eb%8c%80-%ec%98%9b%eb%a7%90%ec%b8%b5%ea%b0%84%ec%86%8c%ec%9d%8c-%ec%b0%a8/"
     },
     {
-     "title": "인천 ‘친환경 버스’ 면세 종료로 매년 79억원 부담…16개 시·도 공동...",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-05T02:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000130709?sid=102"
+     "title": "다세대·오피스텔 층간소음 차단 기준 49dB 이하로 낮춘다",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-05T02:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000160459?sid=101"
     }
    ]
   },
@@ -241,29 +305,29 @@
     "signal.bz"
    ],
    "articles90": 17,
-   "recent20": 2,
+   "recent20": 4,
    "press": 17,
-   "firstArticleAt": "2026-11-05T00:52:00.000Z",
+   "firstArticleAt": "2026-11-05T01:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "중간선거 참패에 '이란전쟁 책임' 헤그세스 국방장관 교체설",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-05T02:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000160460?sid=104"
+     "title": "‘이란전쟁 탓 패배’ 인정한 트럼프 “탄핵하면 민주당 파멸”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-05T02:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002719317?sid=104"
     },
     {
-     "title": "“중간선거 참패 ‘이란전쟁’ 때문”…트럼프, 국방장관 교체 검토",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-05T02:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003563031?sid=104"
+     "title": "“선거 이전 전쟁 끝난다”고 트럼프에 보고했던 헤그세스, 결국 팽당하...",
+     "press": "weekly.khan.co.kr",
+     "publishedAt": "2026-11-05T02:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/033/0000053164?sid=104"
     },
     {
-     "title": "트럼프, 헤그세스 해임 부인 불구 교체설 이어져 [美중간선거]",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-05T01:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005599807?sid=104"
+     "title": "'전쟁 강경파' 헤그세스 교체론 솔솔…\"트럼프, 측근과 논의중\"",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-05T02:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001976822?sid=104"
     }
    ]
   },
@@ -272,13 +336,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 1,
-   "press": 15,
-   "firstArticleAt": "2026-11-05T00:54:00.000Z",
+   "articles90": 12,
+   "recent20": 2,
+   "press": 12,
+   "firstArticleAt": "2026-11-05T01:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "금융권 덮친 해킹 쓰나미…한달 새 37곳서 47만 건 정보 털렸다",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-05T02:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001976824?sid=102"
+    },
     {
      "title": "금융사 37곳서 정보 47만건 유출·10억원 탈취",
      "press": "newscj.com",
@@ -290,12 +360,6 @@
      "press": "viva100.com",
      "publishedAt": "2026-11-05T02:00:00.000Z",
      "link": "https://www.viva100.com/article/20261105500410"
-    },
-    {
-     "title": "금융사 정보 유출 47만 건…10억 원 탈취",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-05T01:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012287797?sid=101"
     }
    ]
   },
@@ -305,18 +369,18 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 11,
+   "articles90": 9,
    "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-05T00:53:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-05T01:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "출근길 우이신설선 전 구간 열차 운행 지연…4시간여만에 정상화(종합)",
-     "press": "tbs.seoul.kr",
-     "publishedAt": "2026-11-05T02:09:00.000Z",
-     "link": "http://tbs.seoul.kr/news/newsView.do?typ_800=3&idx_800=3538688&seq_800=20531589"
+     "title": "출근길 우이신설선 전 구간 열차 운행 지연…4시간여만에 정상화",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-05T02:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002719301?sid=102"
     },
     {
      "title": "출근길에 멈춰선 우이신설선⋯4시간 15분만에 복구",
@@ -337,10 +401,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-05T00:58:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-05T01:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -369,13 +433,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T01:00:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-05T01:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "AI가 설비 제어하고 위험 평가…LG그룹, 안전 현장에 AI 도입 속도",
+     "press": "delighti.co.kr",
+     "publishedAt": "2026-11-05T02:24:00.000Z",
+     "link": "https://www.delighti.co.kr/news/articleView.html?idxno=124428"
+    },
     {
      "title": "LG그룹, AI로 산업재해 막는다…제조부터 화학까지 현장 전환 속도",
      "press": "greened.kr",
@@ -387,12 +457,6 @@
      "press": "newsfreezone.co.kr",
      "publishedAt": "2026-11-05T01:12:00.000Z",
      "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=717783"
-    },
-    {
-     "title": "LG그룹 AI로 산업현장 안전관리 체계 구축, 계열사 혁신 사례 21건 공유",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-05T01:02:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=451220"
     }
    ]
   },
@@ -401,10 +465,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T00:54:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-05T01:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -529,7 +593,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 878,
+  "flagged": 882,
   "matched": 377,
   "avgLeadMin": 371,
   "recent": [
