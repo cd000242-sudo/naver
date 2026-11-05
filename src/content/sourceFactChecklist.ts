@@ -74,7 +74,12 @@ ${numbered}
 export function buildKeywordFactChecklist(
   rawText: string | null | undefined,
   max: number = FACT_CHECKLIST_MAX,
+  options: { contentMode?: string } = {},
 ): FactChecklistResult {
+  // [2026-11-05] Business mode: the business's facts come from the business info form. Collected
+  //   material for "지역 + 업종" is mostly other businesses' posts, and a "cover every fact" list made the
+  //   model write their names, prices and cases into this business's post.
+  if (options.contentMode === 'business') return EMPTY;
   const text = String(rawText ?? '').trim();
   if (text.length < MIN_RAW_TEXT) return EMPTY;
 

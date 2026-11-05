@@ -6910,7 +6910,7 @@ async function generateStructuredContentInternal(
           //   키워드 모드도 검색·크롤링으로 모은 자료를 재료로 쓴다. 재료가 있는데 결과물이
           //   그 사실을 안 담는 문제는 URL 모드와 같다. 목록 형태도 같게 준다.
           //   URL 지시문이 붙은 경우에는 그 안에 이미 목록이 들어 있어 중복 주입하지 않는다.
-          const keywordChecklist = buildKeywordFactChecklist((source as any).rawText);
+          const keywordChecklist = buildKeywordFactChecklist((source as any).rawText, undefined, { contentMode: (source as any).contentMode });
           if (keywordChecklist.block) {
             systemPrompt = keywordChecklist.block + systemPrompt;
             console.log(`[ContentGenerator] 📋 키워드 모드 사실 목록 prepend (${keywordChecklist.facts.length}개)`);

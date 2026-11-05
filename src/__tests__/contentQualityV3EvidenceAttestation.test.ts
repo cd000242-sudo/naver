@@ -267,7 +267,8 @@ describe('Content Quality V3 evidence attestation', () => {
         // [2026-11-03] 지원 종료 엔진 정리 — modelRegistry.normalizeImageProvider 의 deepinfra 별칭 접기 제거로 재계산
         // [2026-11-03] API 글 모델 최신화(gpt-6.x · Claude 5.5/5.1 · Gemini 3.8/3.5 Lite, modelRegistry 표시이름·해석) 로 재계산
         // [2026-11-05] 업체 홍보 개편(business/base.prompt [FLOOR]·[NEXT STEP]·[SEARCH], promptLoader·contentJsonPromptFormat, 업체 제목 프롬프트 정리)으로 재계산 (LF 체크아웃 바이트 기준)
-        'd4ec6d068abb42077bd8ab3979326fcf7fe18f65851082cd442f89b8536b82e7',
+        // [2026-11-05 2차] 업체 홍보: 다른 업체 상호·가격·사례 금지(입력 충실도 6번 · 최종 확인 7번)로 재계산
+        '1783ff32be1ff3ce7c2dbcbca58b9a793494ddfcb64200e28e69b4fb803d85f9',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 
