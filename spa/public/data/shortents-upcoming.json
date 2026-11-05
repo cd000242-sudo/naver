@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T19:52:29.486Z",
+ "builtAt": "2026-11-05T20:02:32.714Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,70 +8,70 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 19,
  "candidates": [
-  {
-   "keyword": "뉴욕증시 급락",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T18:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "K증시 덮친 ‘블루 쓰나미’… AI 데이터센터 제동 우려에 5% 급락",
-     "press": "donga.com",
-     "publishedAt": "2026-11-05T19:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003760539?sid=101"
-    },
-    {
-     "title": "뉴욕증시 급락 반전…나스닥 장중 4% 이상↓ 조정국면 진입",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-05T18:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012288454?sid=104"
-    },
-    {
-     "title": "나스닥 장중 4% 이상 급락...조정장 진입",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-05T18:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002428968?sid=104"
-    }
-   ]
-  },
   {
    "keyword": "예산",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 2,
+   "articles90": 7,
+   "recent20": 3,
+   "press": 5,
    "firstArticleAt": "2026-11-05T19:16:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[단독] ‘대북 감청’ 예산 또 삭감… 2년새 65% 줄어",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-05T20:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004008113?sid=100"
+    },
+    {
+     "title": "[단독] 당정 “소방예산 확대”…담뱃세 7500억 떼내 지원 유력",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-05T20:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003563274?sid=100"
+    },
+    {
+     "title": "국힘 장동혁·정점식, 오늘 吳와 서울시 예산정책 협의",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-05T20:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016425230?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "비트코인",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-05T18:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "서울시 내년 소방예산 1조1022억 원",
-     "press": "donga.com",
-     "publishedAt": "2026-11-05T19:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003760497?sid=102"
+     "title": "비트코인캐시, 4시간 새 5.43% 급락…274달러",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-05T20:00:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/433554"
     },
     {
-     "title": "용인시, 올해 교육 분야 845억 원 투입…내년 학교환경 개선 예산 확대",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-05T19:18:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261106022016191"
+     "title": "비트코인 1,099개 크라켄서 지갑으로 이동 알림 게시",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-05T19:46:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/433546"
     },
     {
-     "title": "인천시, 2027년도 예산 15조 9,000억 편성…민생 복지·미래 성장 방점",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-05T19:16:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261106025206165"
+     "title": "비트코인 선거 이듬해 54% 껑충…반감기 반등과 겹친다",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-05T19:30:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=202611060215455227e7e8286d56_1"
     }
    ]
   }
