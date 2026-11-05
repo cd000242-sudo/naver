@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T20:42:46.239Z",
+ "builtAt": "2026-11-05T21:02:51.082Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,44 +8,108 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 13,
  "candidates": [
   {
-   "keyword": "뉴욕증시 급락",
+   "keyword": "미국 중간선거",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T19:36:00.000Z",
+   "articles90": 15,
+   "recent20": 5,
+   "press": 12,
+   "firstArticleAt": "2026-11-05T19:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美 국채금리 급락…기술주 매도에 안전자산 선호·고용보고서 대기",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-05T20:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009273349?sid=104"
+     "title": "[미 중간선거] 포드·GM도 등 돌린 車관세…현대차·기아, 정책 변화 '기...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-05T21:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003151963?sid=101"
     },
     {
-     "title": "마이크론 주가 두 자릿수 급락…AI 투자 위축 우려에 반도체 업종 매도...",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-05T20:36:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=846316"
+     "title": "美 중간선거發 AI 규제 우려…삼성·SK, 메모리 수요 기반 '굳건'",
+     "press": "press9.kr",
+     "publishedAt": "2026-11-05T21:00:00.000Z",
+     "link": "http://www.press9.kr/news/articleView.html?idxno=85697"
     },
     {
-     "title": "뉴욕증시 급락…AI 규제 우려에 나스닥 5%대 하락",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-05T20:16:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=93238"
+     "title": "美 중간선거 뒤 유가 8% 급락…석유류가 밀어올린 물가, 11월엔 꺾일까",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014305120?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "이스라엘 연정 구성",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-05T20:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이스라엘 대통령 \"새 정부 총리 후보 8일 발표\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-05T20:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002428990?sid=104"
+    },
+    {
+     "title": "이스라엘 대통령 \"새 정부 구성할 총리 후보 8일 발표\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-05T20:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016425235?sid=104"
+    },
+    {
+     "title": "이스라엘 아랍계, 아이젠코트 지지...네타냐후 '실각 위기'",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-05T20:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002428987?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "유럽 여객기 폭탄 위협",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-05T20:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "또 폭탄 위협...유럽 비행기 25편 비상착륙·회항 '항공 대란'",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-05T20:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002428986?sid=104"
+    },
+    {
+     "title": "유럽 여객기 최소 27편에 또 폭탄 위협…전투기 호위도",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-05T20:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000923370?sid=104"
+    },
+    {
+     "title": "유럽 여객기 최소 27편에 또 폭탄 위협…비상착륙·회항 '대란'",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-05T20:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001976926?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1066,
+  "flagged": 1069,
   "matched": 498,
   "avgLeadMin": 468,
   "recent": [
