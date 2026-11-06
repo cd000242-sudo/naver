@@ -986,6 +986,7 @@ export function createHeadingImageModal(): void {
             <div style="font-size: 1.5rem;">📷</div>
             <div style="font-size: 12px; font-weight: 600; color: #065f46;">관련 사진 찾기</div>
             <div style="font-size: 10px; color: #047857;">뉴스·기사 사진 · 무료 · 없으면 빈 칸</div>
+          </label>
           <label class="source-option" data-value="nano-banana-2" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #fef3c7, #fde68a); text-align: center; transition: all 0.2s;">
             <div style="font-size: 1.5rem;">🍌</div>
             <div style="font-size: 12px; font-weight: 600; color: #92400e;">나노바나나2 ★</div>
@@ -1007,7 +1008,6 @@ export function createHeadingImageModal(): void {
             <div style="font-size: 1.5rem;">🍌</div>
             <div style="font-size: 12px; font-weight: 600; color: #92400e;">리더스 나노바나나 무제한</div>
             <div style="font-size: 10px; color: #a16207;">구독자 무제한 · 추가비용 0원 · 로그인 필요</div>
-          </label>
           </label>
           <label class="source-option" data-value="local-folder" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #e0e7ff, #c7d2fe); text-align: center; transition: all 0.2s; position: relative;">
             <div style="font-size: 1.5rem;">📂</div>

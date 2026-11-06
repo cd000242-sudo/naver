@@ -1075,7 +1075,11 @@ export function initHeadingImageGeneration(): void {
           const t = String(h.title || '').trim();
           return t.includes('🖼️ 썸네일') || t.includes('📌 썸네일');
         });
-        if (!hasManualThumbnailInTab && !hasThumbnailHeading) {
+        // [2026-11-06] 관련 사진 찾기: 썸네일 칸도 소제목과 같은 한 번의 요청에 넣는다(아래 수집 블록). 따로 찾으면 수집기의
+        //   중복 거르기가 두 요청 사이에서 작동하지 않아 썸네일과 소제목에 같은 사진이 들어갔다(실측 2026-11-06).
+        const collectThumbnailWithBody = imageSource === 'collect-photos' && !hasManualThumbnailInTab && !hasThumbnailHeading
+          && !isShoppingConnectForCurrentPost();
+        if (!hasManualThumbnailInTab && !hasThumbnailHeading && !collectThumbnailWithBody) {
           try {
             const thumbnailTitle = blogTitle || resolveFirstHeadingTitleForThumbnail() || '블로그 썸네일';
             const isNanoBanana = imageSource === 'nano-banana-pro' || imageSource === 'pollinations';
@@ -1342,6 +1346,8 @@ export function initHeadingImageGeneration(): void {
         // [2026-10-10] 젠스파크·Codex 구독 이미지: 소제목 이미지를 먼저 한 번에 요청한다(4장씩 동시, 아래 반복 직전). 받은 칸은 generateOne 이
         //   그대로 쓰고, 못 받은 칸만 아래 엔진 분기가 지금처럼 1장씩 다시 만든다.
         let gsTabPrefetched = new Map<number, any>();
+        // [2026-11-06] 관련 사진 찾기: 소제목 전체를 수집기에 한 번에 물어 받은 사진(칸 위치 → 사진). 못 찾은 칸은 여기에 없고, 아래 엔진 분기가 빈 칸으로 건너뛴다.
+        let collectTabPrefetched = new Map<number, any>();
 
         const generateOne = async (heading: any, i: number): Promise<any | null> => {
           try {
@@ -1376,12 +1382,19 @@ export function initHeadingImageGeneration(): void {
             }
 
             let imageUrl: string;
+            let collectedMeta: Record<string, unknown> = {}; // [2026-11-06] 관련 사진 찾기로 받은 실사진의 꼬리표(출처 캡션 · AI 표시 제외). 다른 엔진에서는 비어 있다.
+            const collectTabReady = collectTabPrefetched.get(i);
             const gsTabReady = gsTabPrefetched.get(i);
 
             if (gsTabReady) {
               // 젠스파크·Codex 구독 이미지로 한꺼번에 받은 칸 — 다시 만들지 않는다.
               imageUrl = gsTabReady.previewDataUrl || gsTabReady.filePath;
               appendLog(`  ✨ ${gsPrefetchLabel(imageSource)}: 한꺼번에 받은 이미지를 씁니다`, 'images-log-output');
+            } else if (collectTabReady) {
+              // [2026-11-06] 관련 사진 찾기: 소제목 전체를 한 번에 물어 받은 사진 — 칸마다 다시 찾지 않는다.
+              imageUrl = collectTabReady.previewDataUrl || collectTabReady.filePath;
+              collectedMeta = headingCollectPhotoMeta(collectTabReady);
+              appendLog(`  📷 관련 사진 찾기: 찾은 사진을 씁니다`, 'images-log-output');
             // Shopping-connect guard (v1.6.3 재설계):
             //   쇼핑 커넥트 모드일 때는 엔진 허용 여부와 무관하게 이 블록으로 일원화.
             //   - 허용 엔진(nano-banana-pro, openai-image): collectedImages를 img2img 참조로 주입
@@ -1534,6 +1547,10 @@ export function initHeadingImageGeneration(): void {
               } else {
                 throw new Error(imageResult.message || `${imageSource} 이미지 생성 실패`);
               }
+            } else if (imageSource === 'collect-photos') {
+              // [2026-11-06] 관련 사진 찾기: 소제목 전체를 위에서 한 번에 물었는데 이 칸의 사진이 없다 — 그리지 않으므로 실패가 아니라 빈 칸이다.
+              //   다른 엔진으로 대체하지 않는다(자동 폴백 금지). 아래 catch 가 이 문구를 보고 건너뛴다.
+              throw new Error('관련 사진 찾기: 맞는 사진이 없어 비워 둡니다');
             } else if (imageSource === 'naver-search' || imageSource === 'naver') {
               // ✅ 네이버 이미지 검색: 사용자가 명시적으로 선택한 경우에만 사용
               imageUrl = await searchNaverImage(promptForImage);
@@ -1561,6 +1578,7 @@ export function initHeadingImageGeneration(): void {
               // [SPEC-NAVER-IMAGE-2026] Keep the thumbnail director's flags (provider / no-overlay / real photo).
               ...takeThumbnailDirectorMeta(headingForImage, imageUrl),
               url: imageUrl,
+              ...collectedMeta,
               prompt: promptForImage,
               heading: headingForImage,
               index: i
@@ -1574,6 +1592,14 @@ export function initHeadingImageGeneration(): void {
               showImagesProgress(currentProgress, `이미지 생성 중... (${completedCount}/${totalHeadings})`, `"${heading.title}" 설정상 이미지 없음`);
               liveImagePreview.updateItem(i, 'pending');
               liveImagePreview.addLog(`⏭️ ${String(heading.title || '').trim()} — 설정상 이미지 없음`);
+              return null;
+            }
+            // [2026-11-06] 관련 사진 찾기: 맞는 사진이 없는 칸은 실패가 아니라 빈 칸이다(다른 엔진으로 대체하지 않는다).
+            if (/맞는 사진이 없어 비워 둡니다/.test(String((error as Error)?.message || ''))) {
+              appendLog(`⏭️ [${completedCount}/${totalHeadings}] "${String(heading.title || '').trim()}" — 맞는 사진을 못 찾아 비워 둡니다`, 'images-log-output');
+              showImagesProgress(currentProgress, `이미지 생성 중... (${completedCount}/${totalHeadings})`, `"${heading.title}" 맞는 사진 없음`);
+              liveImagePreview.updateItem(i, 'pending');
+              liveImagePreview.addLog(`⏭️ ${String(heading.title || '').trim()} — 맞는 사진 없음, 비워 둠`);
               return null;
             }
             appendLog(`❌ [${completedCount}/${totalHeadings}] 이미지 생성 실패: ${(error as Error).message}`, 'images-log-output');
@@ -1625,6 +1651,73 @@ export function initHeadingImageGeneration(): void {
         }
 
         const results: Array<any | null> = [];
+
+        // [2026-11-06] 관련 사진 찾기: 소제목마다 따로 부르면 수집기가 글 전체(제목·도입·다른 소제목)를 못 보고 중복도 못 거른다.
+        //   소제목 전체를 한 번에 보내고, 받은 사진은 소제목 이름으로 칸에 맞춘다. 못 찾은 칸은 빈 칸 — generateOne 이 건너뛴다.
+        //   수집기가 오류(동의 없음 등)를 돌려주면 다른 엔진으로 대체하지 않고 여기서 멈춘다(바깥 catch 가 안내).
+        if (imageSource === 'collect-photos' && !isShoppingConnectForCurrentPost() && filteredHeadings.length > 0) {
+          const collectItems = filteredHeadings.map((heading: any) => ({
+            heading: heading.title,
+            prompt: heading.prompt,
+            englishPrompt: heading.prompt,
+            isThumbnail: false,
+            allowText: false,
+          }));
+          const collectThumbnailTitle = blogTitle || resolveFirstHeadingTitleForThumbnail() || '블로그 썸네일';
+          // The thumbnail slot goes last so the body slots keep their heading positions (collectTabPrefetched keys).
+          const collectRequestItems = collectThumbnailWithBody
+            ? [...collectItems, {
+              heading: collectThumbnailTitle,
+              prompt: collectThumbnailTitle,
+              englishPrompt: collectThumbnailTitle,
+              isThumbnail: true,
+              allowText: false,
+            }]
+            : collectItems;
+          appendLog(`📷 관련 사진 찾기: 소제목 ${collectItems.length}칸${collectThumbnailWithBody ? '과 썸네일' : ''}의 사진을 한 번에 찾습니다.`, 'images-log-output');
+          collectItems.forEach((_item: any, i: number) => liveImagePreview.updateItem(i, 'generating'));
+          const collectResult = await generateImagesWithCostSafety({
+            provider: 'collect-photos',
+            items: collectRequestItems,
+            postTitle: blogTitle,
+            isFullAuto: true,
+          });
+          if (collectResult?.success === false) {
+            collectItems.forEach((_item: any, i: number) => liveImagePreview.updateItem(i, 'failed'));
+            throw new Error(String(collectResult.message || '관련 사진 찾기에 실패했습니다.'));
+          }
+          collectTabPrefetched = gsPrefetchMatchImages(
+            collectItems,
+            collectItems.map((_item: any, i: number) => i),
+            Array.isArray(collectResult?.images) ? collectResult.images : [],
+          );
+          appendLog(`✅ 관련 사진 찾기: ${collectItems.length}칸 중 ${collectTabPrefetched.size}칸에 사진을 찾았습니다`, 'images-log-output');
+          if (collectThumbnailWithBody) {
+            const collectThumb = (Array.isArray(collectResult?.images) ? collectResult.images : []).find((img: any) => img?.isThumbnail === true);
+            const collectThumbUrl = String(collectThumb?.previewDataUrl || collectThumb?.filePath || '');
+            if (collectThumbUrl) {
+              ImageManager.setImage('🖼️ 썸네일', {
+                url: collectThumbUrl,
+                filePath: collectThumbUrl,
+                previewDataUrl: collectThumbUrl,
+                prompt: collectThumbnailTitle,
+                isThumbnail: true,
+                heading: '🖼️ 썸네일',
+                timestamp: Date.now(),
+                ...headingCollectPhotoMeta(collectThumb),
+              });
+              try { syncGlobalImagesFromImageManager(); } catch { /* ignore */ }
+              try {
+                if (!thumbnailGenerator) { thumbnailGenerator = new ThumbnailGenerator(); }
+                thumbnailGenerator.setMainText(blogTitle || collectThumbnailTitle);
+                await thumbnailGenerator.setBackgroundFromUrl(collectThumbUrl);
+              } catch { /* the preview is optional */ }
+              appendLog(`🖼️ 썸네일: 제목으로 찾은 사진을 넣었습니다`, 'images-log-output');
+            } else {
+              appendLog(`⚠️ 썸네일에 맞는 사진을 못 찾아 비워 둡니다`, 'images-log-output');
+            }
+          }
+        }
         if (shouldRunSequentially) {
           // [2026-10-20 사장님 "저번부터 고치라 했는데"] 9/2 의 미리보기 자리 배치(imagePreviewBatch)는 "비어있는 소제목만"
           //   버튼에만 붙어 있었다. 이 버튼의 루프도 소제목마다 IPC 1번 → main 은 늘 index 0 → 1번 타일이 생성된
@@ -1659,6 +1752,8 @@ export function initHeadingImageGeneration(): void {
               ...(img?.provider ? { provider: img.provider } : {}),
               ...(img?.disableTextOverlay === true ? { disableTextOverlay: true } : {}),
               ...(img?.isCollected === true ? { isCollected: true } : {}),
+              ...(img?.caption ? { caption: img.caption } : {}),
+              ...(img?.sourceUrl ? { sourceUrl: img.sourceUrl } : {}),
             };
           })
           .filter((v: any) => v !== null);
@@ -5088,6 +5183,20 @@ function applyImageToHeadingFromFolder(headingIndex: number, headingTitle: strin
   toastManager.success(`✅ 이미지 추가 완료!`);
 }
 
+/**
+ * [2026-11-06] 관련 사진 찾기로 받은 실사진의 꼬리표 — AI 표시 제외(provider collected) · 글자 덧그리기 금지 · 사진 아래 출처 캡션.
+ * 이미지 탭 결과 정리가 이 필드를 버리면 출처 캡션이 발행까지 가지 못한다.
+ */
+function headingCollectPhotoMeta(photo: any): Record<string, unknown> {
+  return {
+    provider: 'collected',
+    isCollected: true,
+    disableTextOverlay: true,
+    ...(photo?.caption ? { caption: photo.caption } : {}),
+    ...(photo?.sourceUrl ? { sourceUrl: photo.sourceUrl } : {}),
+  };
+}
+
 // ✅ 빈 소제목에 이미지 생성
 async function regenerateSingleImageForHeading(headingIndex: number, headingTitle: string, prompt: string): Promise<void> {
   try {
@@ -5156,6 +5265,7 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
     appendLog(`🎨 "${resolvedHeadingTitle}" 이미지 생성 시작 (${imageSource}, ${headingIndex === 0 ? '썸네일' : 'NEVER TEXT'})...`, 'images-log-output');
 
     let imageUrl: string;
+    let collectedMeta: Record<string, unknown> = {}; // [2026-11-06] 관련 사진 찾기로 받은 실사진의 꼬리표. 다른 엔진에서는 비어 있다.
 
     // ✅ [2026-03-11 FIX] 모든 엔진에서 텍스트 포함 허용 (nano-banana: AI 직접 렌더링, 기타: Sharp 후처리)
     const thumbnailTextChecked = (document.getElementById('thumbnail-text-option') as HTMLInputElement)?.checked ?? false;
@@ -5271,6 +5381,23 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
       } else {
         throw new Error(imageResult.message || `${imageSource} 이미지 생성 실패`);
       }
+    } else if (imageSource === 'collect-photos') {
+      // [2026-11-06] 관련 사진 찾기: 이 칸 하나의 사진을 수집기로 다시 찾는다. 수집기는 그리지 않으므로 못 찾으면 실패가 아니라 빈 칸이다(다른 엔진으로 대체하지 않음).
+      const imageResult = await generateImagesWithCostSafety({
+        provider: 'collect-photos',
+        items: [{ heading: resolvedHeadingTitle, prompt: finalPrompt, englishPrompt: finalPrompt, isThumbnail: headingIndex === 0, allowText: false, ...imageContextFields }],
+        postTitle: blogTitle,
+        isFullAuto: true,
+      });
+      if (imageResult.success === false) {
+        throw new Error(imageResult.message || '관련 사진 찾기에 실패했습니다.');
+      }
+      const collectedPhoto = Array.isArray(imageResult.images) ? imageResult.images[0] : undefined;
+      imageUrl = String(collectedPhoto?.previewDataUrl || collectedPhoto?.filePath || '');
+      if (!imageUrl) {
+        throw new Error('관련 사진 찾기: 맞는 사진이 없어 비워 둡니다');
+      }
+      collectedMeta = headingCollectPhotoMeta(collectedPhoto);
     } else if (imageSource === 'naver-search' || imageSource === 'naver') {
       // ✅ 네이버 이미지 검색: 사용자가 명시적으로 선택한 경우에만 사용
       imageUrl = await searchNaverImage(finalPrompt);
@@ -5310,7 +5437,8 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
       previewDataUrl: imageUrl,
       provider: imageSource,
       url: imageUrl,
-      prompt
+      prompt,
+      ...collectedMeta,
     });
 
     // ✅ [2026-02-12 FIX] ImageManager→전역변수 통합 동기화 (기존 직접 조작 제거 → 일관성 보장)
