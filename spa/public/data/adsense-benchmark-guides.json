@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-06T20:10:18.273Z",
+  "generatedAt": "2026-11-06T20:26:45.454Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -7183,73 +7183,6 @@
           "views": 11,
           "answers": 1,
           "askedAt": "2026.10.30"
-        }
-      ]
-    },
-    {
-      "id": "07d9f7a00b6e51c4",
-      "urls": [
-        "https://www.smartnotelife.kr/entry/%EC%97%AC%EC%8B%A0%EA%B1%B0%EB%9E%98-%EC%95%88%EC%8B%AC%EC%B0%A8%EB%8B%A8-%ED%95%B4%EC%A0%9C-%EC%B9%B4%EB%93%9C-%EB%B0%9C%EA%B8%89%EC%9D%B4-%EC%95%88-%EB%90%A0-%EB%95%8C",
-        "https://digital-33.tistory.com/entry/%EB%AA%85%EC%9D%98%EB%8F%84%EC%9A%A9-%EB%8C%80%EC%B6%9C-%EC%B0%A8%EB%8B%A8-2026%EF%BD%9C%EC%97%AC%EC%8B%A0%EA%B1%B0%EB%9E%98%C2%B7%EB%B9%84%EB%8C%80%EB%A9%B4-%EA%B3%84%EC%A2%8C%EA%B0%9C%EC%84%A4-%EC%95%88%EC%8B%AC%EC%B0%A8%EB%8B%A8-%EC%8B%A0%EC%B2%AD-6%EB%8B%A8%EA%B3%84%C2%B7%ED%95%B4%EC%A0%9C%C2%B7%EA%B0%80%EC%A1%B1-%EB%8C%80%EB%A6%AC%EC%8B%A0%EC%B2%AD-%EC%B4%9D%EC%A0%95%EB%A6%AC"
-      ],
-      "guide": {
-        "direction": "검색자는 안심차단을 걸어둔 뒤 카드 발급이 막혀 당황하지만, 처음 신청한 은행이 아니어도 해제되는지, 어디서 설정 여부를 조회하는지부터 모른다. 고수 글은 신청 6단계·가족 대리신청까지 다뤄도 '조회 방법'과 '타행 해제 가능 여부'는 비워둔다. 이 글은 조회→해제 신청처→기존 대출·카드 영향 없음 확인 순서로 표를 줘서 자격 판단을 끝낸다.",
-        "searchTargets": [
-          "여신거래 안심차단 해제",
-          "여신거래 안심차단 조회 방법",
-          "여신거래 안심차단 서비스 해제",
-          "여신거래 안심차단 확인"
-        ],
-        "mustInclude": [
-          "처음 신청한 은행·지점이 아니어도 해제 가능한지 여부(확인 필요: 금융위원회 안내)",
-          "해제해도 기존 대출 유지·만기연장·기존 신용카드 사용 및 재발급은 정상 가능(지식인 답변 근거)",
-          "내 안심차단 설정 여부를 조회하는 경로(확인 필요: 어느 사이트·앱)",
-          "해제 신청 후 처리 소요 시간(확인 필요: 공식 안내)"
-        ],
-        "mustAvoid": [
-          "지식인에 등장한 특정 상품권·대출중개업체명을 안심차단 공식 절차처럼 섞어 쓰기",
-          "안심차단을 대출 상품으로 오인시키는 설명(보이스피싱·명의도용 방지용 차단 서비스임을 구분)",
-          "해제 즉시 보안이 크게 취약해진다는 과장된 공포 조성"
-        ],
-        "checkBefore": [
-          "해제 신청 가능 기관(최초 신청기관 외에도 가능한지) - 금융위원회 또는 각 금융사 공식 공지 확인",
-          "안심차단 조회 경로(어떤 사이트·앱) - 공식 채널 확인"
-        ],
-        "solves": [
-          "안심차단 걸어둔 상태에서 카드 발급이 막혔다 → 해제 신청 순서와 처리 시간 정리",
-          "처음 신청한 은행이 아니면 해제 못하나 → 기관 무관 해제 가능 여부 확인",
-          "해제하면 기존 대출·카드에 영향 있나 → 유지·재발급 가능 여부 정리"
-        ],
-        "actionTitles": [
-          "여신거래 안심차단 해제 방법, 신청 은행 달라도 가능할까",
-          "여신거래 안심차단 조회 방법부터 해제까지 한 번에 확인",
-          "여신거래 안심차단 서비스 해제, 카드 발급 막혔을 때 순서"
-        ]
-      },
-      "at": "2026-11-02T20:17:10.506Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "여신거래 안심차단 서비스 해제에 관하여",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40703&docId=491081271&answerNo=5&qb=7Jes7Iug6rGw656Y7JWI7Ius7LCo64uo",
-          "views": 1796,
-          "answers": 5,
-          "askedAt": "2026.10.21"
-        },
-        {
-          "title": "여신거래 안심 차단 서비스 사용 시 대출 한....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40105&docId=490442570&answerNo=3&qb=7Jes7Iug6rGw656Y7JWI7Ius7LCo64uo",
-          "views": 737,
-          "answers": 7,
-          "askedAt": "2025.11.27"
-        },
-        {
-          "title": "여신거래 안심차단",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=401&docId=484747736&answerNo=12&qb=7Jes7Iug6rGw656Y7JWI7Ius7LCo64uo",
-          "views": 488,
-          "answers": 12,
-          "askedAt": "2026.10.28"
         }
       ]
     },
