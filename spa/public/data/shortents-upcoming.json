@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T00:03:52.707Z",
+ "builtAt": "2026-11-06T00:13:56.403Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 17,
  "candidates": [
   {
-   "keyword": "뉴욕증시 급락",
+   "keyword": "AI 규제 공포",
    "sources": [
     "daum"
    ],
-   "articles90": 49,
-   "recent20": 15,
-   "press": 43,
-   "firstArticleAt": "2026-11-05T23:12:00.000Z",
+   "articles90": 42,
+   "recent20": 6,
+   "press": 37,
+   "firstArticleAt": "2026-11-05T22:44:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
+    {
+     "title": "美 AI주 하루 2조달러 증발…민주당 압승에 데이터센터 투자 공포",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-06T00:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009273622?sid=101"
+    },
     {
      "title": "\"AI 약속 대신 가격 따질 때\"…뉴욕증시 규제·수익성 공포에 4300조 증발",
      "press": "pointdaily.co.kr",
@@ -29,16 +35,10 @@
      "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=324980"
     },
     {
-     "title": "증시 급락에…이형일 \"지나치게 반응 않도록 필요조치 선제적 강구\"",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-05T23:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005838939?sid=101"
-    },
-    {
-     "title": "[뉴욕 브리핑] AI 때린 '블루웨이브 쇼크'…나스닥 5% 급락",
-     "press": "news.dealsitetv.com",
-     "publishedAt": "2026-11-05T23:58:00.000Z",
-     "link": "https://news.dealsitetv.com/articles/178177"
+     "title": "나스닥 하루만에 시총 2조5000억달러 증발…AI 불안에 '역대 최대' 폭락",
+     "press": "kado.net",
+     "publishedAt": "2026-11-05T23:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000209799?sid=101"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 46,
-   "recent20": 21,
-   "press": 14,
+   "articles90": 52,
+   "recent20": 13,
+   "press": 18,
    "firstArticleAt": "2026-11-05T23:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "경제부총리 \"AI투자 계속될 것. 우리 펀더멘털 견고\"",
-     "press": "viewsnnews.com",
-     "publishedAt": "2026-11-06T00:02:00.000Z",
-     "link": "https://www.viewsnnews.com/article?q=239529"
+     "title": "美 증시 급락에...이형일 “국내 시장 과민반응 막을 조치 강구”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-06T00:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004679380?sid=101"
     },
     {
-     "title": "이형일 \"美 행정부·의회와 소통 강화…전략산업 협력 기회 적극 발굴\"",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-05T23:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005600366?sid=101"
+     "title": "이형일 부총리 “증시 과도한 변동성 선제 대응...필요한 조치 적기 시...",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-06T00:10:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=72673"
     },
     {
-     "title": "이형일, 美중간선거 \"글로벌 증시 파급 가능성…필요 조치 적기 시행\"(종...",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-05T23:58:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443382"
+     "title": "이형일 “美 중간선거 중요한 분기점…증시 지나치게 반응않도록 조치...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-06T00:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002719696?sid=101"
     }
    ]
   },
@@ -79,30 +79,63 @@
    "sources": [
     "nate"
    ],
-   "articles90": 23,
+   "articles90": 26,
    "recent20": 9,
-   "press": 7,
-   "firstArticleAt": "2026-11-05T22:34:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-05T22:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'조작기소 특검법' 필리버스터하는 주진우 의원",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T23:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014305274?sid=100"
+     "title": "본회의 무제한 토론 이어가는 주진우 의원",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-06T00:11:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261106000235"
     },
     {
-     "title": "주진우 의원, '조작기소 특검법' 필리버스터",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T23:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014305259?sid=100"
+     "title": "무제한 토론하는 주진우 국민의힘 의원",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-06T00:11:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261106000236"
     },
     {
-     "title": "'조작기소 특검법' 필리버스터",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-05T23:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014305264?sid=100"
+     "title": "조작기소 특검법안 필리버스터 이어가는 주진우 의원",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-06T00:11:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261106000237"
+    }
+   ]
+  },
+  {
+   "keyword": "치매",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-05T23:11:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "안마의자 누워 치매 노모에게 \"휴대전화 가져와\"…침 뱉고 떠난 요양사",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-06T00:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009273603?sid=102"
+    },
+    {
+     "title": "정명근 화성시장, 치매 예방·관리도 일상 속으로…집에서 하는 인지훈...",
+     "press": "fieldnews.kr",
+     "publishedAt": "2026-11-05T23:58:00.000Z",
+     "link": "http://www.fieldnews.kr/news/articleView.html?idxno=32866"
+    },
+    {
+     "title": "나주시, 팍스이피씨와 협약…AI 웨어러블로 치매환자 안전관리 추진",
+     "press": "newsmaker.or.kr",
+     "publishedAt": "2026-11-05T23:54:00.000Z",
+     "link": "http://www.newsmaker.or.kr/news/articleView.html?idxno=185306"
     }
    ]
   },
@@ -135,71 +168,6 @@
      "press": "gamevu.co.kr",
      "publishedAt": "2026-11-05T23:54:00.000Z",
      "link": "https://www.gamevu.co.kr/news/articleView.html?idxno=62072"
-    }
-   ]
-  },
-  {
-   "keyword": "치매",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T23:11:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정명근 화성시장, 치매 예방·관리도 일상 속으로…집에서 하는 인지훈...",
-     "press": "fieldnews.kr",
-     "publishedAt": "2026-11-05T23:58:00.000Z",
-     "link": "http://www.fieldnews.kr/news/articleView.html?idxno=32866"
-    },
-    {
-     "title": "나주시, 팍스이피씨와 협약…AI 웨어러블로 치매환자 안전관리 추진",
-     "press": "newsmaker.or.kr",
-     "publishedAt": "2026-11-05T23:54:00.000Z",
-     "link": "http://www.newsmaker.or.kr/news/articleView.html?idxno=185306"
-    },
-    {
-     "title": "KAIST 등 국내연구진, 치매 단백질 뭉침 억제하는 새로운 치료 원리 규명",
-     "press": "webeconomy.co.kr",
-     "publishedAt": "2026-11-05T23:46:00.000Z",
-     "link": "https://www.webeconomy.co.kr/news/articleView.html?idxno=2363273"
-    }
-   ]
-  },
-  {
-   "keyword": "출근길 바람에 체감온도 뚝",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T22:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "목도리 두르고 출근길…찬 바람에 체감온도 '뚝'[오늘날씨]",
-     "press": "news.unn.net",
-     "publishedAt": "2026-11-05T23:38:00.000Z",
-     "link": "https://news.unn.net/news/articleView.html?idxno=600073"
-    },
-    {
-     "title": "[날씨] 찬 바람에 기온 '뚝'…내일 서울 첫 영하권",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-05T23:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001976952?sid=102"
-    },
-    {
-     "title": "찬공기 남하에 아침 출근길 기온 뚝 떨어져…체감온도 영하권",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-05T23:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000649343?sid=102"
     }
    ]
   },
@@ -239,7 +207,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1087,
+  "flagged": 1088,
   "matched": 519,
   "avgLeadMin": 484,
   "recent": [
