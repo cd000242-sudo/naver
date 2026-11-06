@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T00:54:15.565Z",
+ "builtAt": "2026-11-06T01:04:22.609Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,17 +11,87 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "변호사 학폭 주장 송치",
+   "keyword": "롯데쇼핑 3분기 영업익 34.5% 증가",
    "sources": [
     "nate"
    ],
-   "articles90": 19,
+   "articles90": 59,
+   "recent20": 14,
+   "press": 51,
+   "firstArticleAt": "2026-11-05T23:41:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "롯데쇼핑, 3분기 영업익 1756억원…전년 대비 34.5% 증가",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-06T01:02:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2015295"
+    },
+    {
+     "title": "롯데쇼핑, 3분기 영업익 34.5% 증가…백화점 역대 최대 매출",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-06T01:02:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5080455"
+    },
+    {
+     "title": "롯데쇼핑, 3분기 영업익 34% 급증…백화점·마트가 끌었다",
+     "press": "newsinside.kr",
+     "publishedAt": "2026-11-06T01:00:00.000Z",
+     "link": "https://www.newsinside.kr/news/articleView.html?idxno=5041651"
+    }
+   ]
+  },
+  {
+   "keyword": "뉴욕증시 급락",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 34,
+   "recent20": 18,
+   "press": 26,
+   "firstArticleAt": "2026-11-06T00:26:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "정부, 증시 급락에 긴급시장상황점검회의…금융·통화당국 소집",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-06T01:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009273862?sid=101"
+    },
+    {
+     "title": "트럼프, 뉴욕증시 폭락에 \"역사상 최악의 날…공화당 아닌 민주당 책임...",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-06T01:00:00.000Z",
+     "link": "https://www.ajunews.com/view/20261106094556994"
+    },
+    {
+     "title": "[특징주] 삼성전자·SK하이닉스, 美 기술주 폭락.. 동반 '급락'",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-06T01:00:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=20261106095122655544093b5d4e_1"
+    }
+   ]
+  },
+  {
+   "keyword": "국동호 학폭 변호사 송치",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 18,
    "recent20": 1,
-   "press": 18,
-   "firstArticleAt": "2026-11-05T23:26:00.000Z",
+   "press": 17,
+   "firstArticleAt": "2026-11-05T23:38:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "‘솔로지옥4’ 국동호 학폭 의혹 제기한 변호사, 명예훼손·강요미수 혐...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-06T00:59:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003539507"
+    },
     {
      "title": "국동호 '학폭 의혹' 제기한 현직 변호사, 명예훼손·강요미수 혐의 송치...",
      "press": "tvreport.co.kr",
@@ -33,12 +103,71 @@
      "press": "xportsnews.com",
      "publishedAt": "2026-11-06T00:32:00.000Z",
      "link": "https://m.entertain.naver.com/article/311/0002077368"
+    }
+   ]
+  },
+  {
+   "keyword": "발언하는 정점식 원내대표",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 20,
+   "recent20": 9,
+   "press": 10,
+   "firstArticleAt": "2026-11-05T23:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정점식 \"이 대통령 의회 쿠테타 사주해 놓고 유튜브...끔찍한 모순\"",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-06T00:58:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1135675"
     },
     {
-     "title": "'솔로지옥4' 국동호 측 \"학폭 의혹 제기한 변호사, 공소청 송치\"",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-06T00:28:00.000Z",
-     "link": "https://m.entertain.naver.com/article/119/0003152045"
+     "title": "정점식 국민의힘 원내대표 발언",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-06T00:58:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3744052"
+    },
+    {
+     "title": "정점식 원내대표 원내대책회의 발언",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-06T00:58:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3744048"
+    }
+   ]
+  },
+  {
+   "keyword": "금값",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 11,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-05T23:36:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美 중간선거 민주당 압승에 금값 ‘반짝’… 골드바·ETF로 돈 몰려",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-06T01:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001202998?sid=101"
+    },
+    {
+     "title": "금(금값, 금시세) 11월 6일, 뉴욕증시 '폭락' 속 흐름은?",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-06T00:54:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=623978"
+    },
+    {
+     "title": "안전자산 공식 깨진 금시장…금값·ETF 동반 추락, 반등 변수는",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-06T00:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001038817?sid=101"
     }
    ]
   },
@@ -49,12 +178,18 @@
     "nate"
    ],
    "articles90": 9,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-05T23:33:00.000Z",
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-05T23:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "PGA 독점 헤게모니에 도전했던 LIV 골프, 창설 5년 만에 사업 종료…사우...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-06T01:03:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/022/0004173029"
+    },
     {
      "title": "LIV 골프, 출범 5년 만에 운영 종료 수순…파산법원에 청산 계획 제출",
      "press": "newsis.com",
@@ -66,51 +201,46 @@
      "press": "kbsm.net",
      "publishedAt": "2026-11-06T00:40:00.000Z",
      "link": "https://www.kbsm.net/news/view.php?idx=540639"
-    },
-    {
-     "title": "LIV 골프, 출범 5년 만에 역사 속으로…\"사업 종료\"(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-06T00:04:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/001/0016425438"
     }
    ]
   },
   {
-   "keyword": "주진우 의원 필리버스터",
+   "keyword": "주진우 특검 필리버스터",
    "sources": [
     "nate"
    ],
-   "articles90": 20,
-   "recent20": 2,
-   "press": 6,
+   "articles90": 13,
+   "recent20": 3,
+   "press": 7,
    "firstArticleAt": "2026-11-05T23:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "주진우 \"李, 이화영에게 협박받고 있어\"…필버서 '조작기소 특검' 직격",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-06T01:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003152074?sid=100"
+    },
+    {
+     "title": "'조작기소 특검법' 오늘 與 주도로 본회의 통과 전망",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-06T00:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000141709?sid=100"
+    },
+    {
      "title": "'조작 기소 특검' 필리버스터 17시간째...국민의힘 오후 규탄대회",
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-06T00:45:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002429053?sid=100"
-    },
-    {
-     "title": "'조작기소 특검법' 오늘 국회 표결 전망…여야 필리버스터 격돌",
-     "press": "ppss.kr",
-     "publishedAt": "2026-11-06T00:42:00.000Z",
-     "link": "https://www.ppss.kr/news/articleView.html?idxno=319420"
-    },
-    {
-     "title": "'조작기소 특검법' 필리버스터‥본회의 통과 초읽기",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-06T00:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533882?sid=100"
     }
    ]
   },
   {
-   "keyword": "이형일 부총리 대외경제장관회의 참석",
+   "keyword": "이형일 부총리 대외경제회의 참석",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
    "articles90": 14,
    "recent20": 0,
@@ -138,78 +268,38 @@
      "link": "https://www.newspim.com/news/view/20261106000175"
     }
    ]
-  },
-  {
-   "keyword": "나나, 탑과 열애 비난에 심경 고백",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-06T00:07:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "나나 \"탑과 공개열애 나의 삶, 미안해 할 일 아냐\" 악플러에 일침",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-06T00:42:00.000Z",
-     "link": "http://www.joynews24.com/view/2023309"
-    },
-    {
-     "title": "‘탑♥’ 나나 “공개 열애? 내 사생활, 무슨 큰 잘못을 했나” 악플에...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-06T00:23:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001146422"
-    },
-    {
-     "title": "나나, 탑과 열애 후 쏟아진 악플에 결국 심경 고백 \"공개 열애 미안할 부...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-06T00:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000637451"
-    }
-   ]
-  },
-  {
-   "keyword": "재혼 황후 논란",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T23:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘안색 논란’ 주지훈, ‘재혼 황후’ 화제성은 합격",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-06T00:22:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001278621"
-    },
-    {
-     "title": "'재혼 황후' 주지훈, 낯빛은 흙빛·아우라는 황금빛",
-     "press": "ize.co.kr",
-     "publishedAt": "2026-11-06T00:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/465/0000020809"
-    },
-    {
-     "title": "'피끓는 청춘' 커플, 12년만 '재혼'..이종석·이세영, 논란 하나 없었다...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-05T23:33:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003485072"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1097,
-  "matched": 521,
-  "avgLeadMin": 483,
+  "flagged": 1102,
+  "matched": 525,
+  "avgLeadMin": 485,
   "recent": [
+   {
+    "keyword": "하지원, 23년만 다모 재현",
+    "hitKeyword": "성시경 하지원",
+    "hitAt": "2026-11-06T10:00:00+09:00",
+    "leadMin": 1338
+   },
+   {
+    "keyword": "학폭 의혹 공구 중단",
+    "hitKeyword": "차예련 학폭 의혹",
+    "hitAt": "2026-11-06T10:00:00+09:00",
+    "leadMin": 1136
+   },
+   {
+    "keyword": "현대캐피탈 시즌 첫 승",
+    "hitKeyword": "현대캐피탈 시즌 첫승",
+    "hitAt": "2026-11-06T10:00:00+09:00",
+    "leadMin": 660
+   },
+   {
+    "keyword": "서킷브레이커",
+    "hitKeyword": "코스피 서킷브레이커",
+    "hitAt": "2026-11-06T10:00:00+09:00",
+    "leadMin": 26
+   },
    {
     "keyword": "blg",
     "hitKeyword": "BLG 디플러스 기아",
@@ -245,30 +335,6 @@
     "hitKeyword": "나스닥 AI 기술주 급락",
     "hitAt": "2026-11-06T09:00:00+09:00",
     "leadMin": 26
-   },
-   {
-    "keyword": "차예련 학폭 갑질 논란",
-    "hitKeyword": "차예련 태도 논란",
-    "hitAt": "2026-11-06T09:00:00+09:00",
-    "leadMin": 26
-   },
-   {
-    "keyword": "한지 유네스코 등재",
-    "hitKeyword": "세월호 기록물 유네스코 등재",
-    "hitAt": "2026-11-06T08:00:00+09:00",
-    "leadMin": 1377
-   },
-   {
-    "keyword": "유네스코",
-    "hitKeyword": "세월호 기록물 유네스코 등재",
-    "hitAt": "2026-11-06T08:00:00+09:00",
-    "leadMin": 751
-   },
-   {
-    "keyword": "삼성바이오 2차 파업",
-    "hitKeyword": "삼성바이오 부분파업",
-    "hitAt": "2026-11-06T07:30:00+09:00",
-    "leadMin": 2082
    }
   ]
  }
