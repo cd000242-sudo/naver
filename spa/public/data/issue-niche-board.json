@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-11-06T03:34:46.594Z",
+  "publishedAt": "2026-11-06T09:55:03.295Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 210,
-    "niche": 0,
-    "preemption": 3,
+    "candidates": 240,
+    "niche": 1,
+    "preemption": 2,
     "pending": 0
   },
   "freeSample": {
@@ -16,6 +16,120 @@
     ]
   },
   "rows": [
+    {
+      "keyword": "구급차 들것",
+      "issue": "구급차",
+      "topic": "구급차",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "서울에서 지방 병원으로 환자를 모셔야 할 때, 사설구급차 준비방법",
+          "사설구급차 이용방법, 전화하기 전에 준비하면 출동이 빨라지는 7가지",
+          "사설구급차 vs 119구급차 차이점｜상황별 이용방법과 비용 총정리",
+          "용산구 사설 구급차 계단 많은 집도 걱정 마세요, 어르신 자택 귀가 이송 후기",
+          "서울 사설구급차 2인 1조 이송, 의료진 동승 구급차를 찾으신다면",
+          "응급환자이송 및 와상환자 외래진료를 위한 사설구급차 이용방법 안내",
+          "사설구급차 예약, 거동 불편한 어르신 통원치료·퇴원·요양원 입소까지 이렇게 이용하세요",
+          "김포공항 환자이송 가능한 사설구급차 안내｜공항 특수구급차 예약 및 이용방법",
+          "사설구급차 의료진도 동승하나요? 응급구조사·간호사 동승부터 환자이송 방법까지",
+          "서울 민간119구급차 번호, 관악구 자택에서 양지병원까지 고령환자 외래진료 이송"
+        ],
+        "measuredAt": "2026-11-06T09:53:58.449Z"
+      },
+      "documentCount": 10825,
+      "documentCountMeasured": true,
+      "searchVolume": 440,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 0.9899999999999999,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 440",
+        "문서수 10,825",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 440 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.0배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        },
+        "home": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 764,
+      "kinTop": [
+        {
+          "title": "구급차 타본적 있나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=8110302&docId=494045781&answerNo=3",
+          "views": 64,
+          "answers": 6
+        },
+        {
+          "title": "사설구급차 업무 어떤거 하나요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70122&docId=494875236&answerNo=1",
+          "views": 34,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-11-06T09:51:49.178Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2"
+    },
     {
       "keyword": "장동민 다리",
       "issue": "장동민",
@@ -192,7 +306,7 @@
         ],
         "label": "📉 단발성",
         "recommendation": "회피! 지난 며칠 폭발 후 급락 중. 글 써도 유입 없음",
-        "measuredAt": "2026-11-06T03:34:47.320Z"
+        "measuredAt": "2026-11-06T09:55:03.880Z"
       },
       "kinCount": 44,
       "kinTop": [
@@ -272,17 +386,170 @@
       },
       "subKeywords": null,
       "keywordPool": null,
-      "trend": null,
+      "trend": {
+        "series": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          100,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "label": "📉 단발성",
+        "recommendation": "회피! 지난 며칠 폭발 후 급락 중. 글 써도 유입 없음",
+        "measuredAt": "2026-11-06T09:55:03.880Z"
+      },
       "kinCount": 0,
       "kinTop": [],
       "monetize": null,
       "measuredAt": "2026-11-06T03:30:50.401Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "kinMode": "date-views-v2"
+      "kinMode": "date-views-v2",
+      "carried": true,
+      "searchVolumeMeasuredAt": "2026-11-06T09:55:03.880Z"
     }
   ],
   "observations": [
+    {
+      "keyword": "리얼월드 류중희",
+      "issue": "리얼월드",
+      "topic": "리얼월드",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 164,
+      "documentCountMeasured": true,
+      "searchVolume": 80,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 80",
+        "문서수 164",
+        "선점 후보 — 경쟁 문서 164건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-06T09:51:49.178Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "앤트로픽 엔스로픽 차이",
+      "issue": "앤트로픽",
+      "topic": "앤트로픽",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 44,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 44",
+        "선점 후보 — 경쟁 문서 44건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "구매 검토",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "앤트로픽 엔스로픽 차이 무엇이 어떻게 다른가",
+          "frame": "compare",
+          "basis": "검색 질문 '앤트로픽 엔스로픽 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+        },
+        "home": {
+          "text": "앤트로픽 엔스로픽 차이, 기준은 하나면 됩니다",
+          "frame": "compare",
+          "basis": "검색 질문 '앤트로픽 엔스로픽 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-06T09:51:49.178Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "오픈ai 닷츠 후기",
       "issue": "오픈AI",
@@ -352,70 +619,8 @@
       "monetize": null,
       "measuredAt": "2026-11-06T03:30:50.401Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "앤트로픽 엔스로픽 차이",
-      "issue": "앤트로픽",
-      "topic": "앤트로픽",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 44,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 44",
-        "선점 후보 — 경쟁 문서 44건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "앤트로픽 엔스로픽 차이 무엇이 어떻게 다른가",
-          "frame": "compare",
-          "basis": "검색 질문 '앤트로픽 엔스로픽 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        },
-        "home": {
-          "text": "앤트로픽 엔스로픽 차이, 기준은 하나면 됩니다",
-          "frame": "compare",
-          "basis": "검색 질문 '앤트로픽 엔스로픽 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-06T03:30:50.401Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "언차일드 반가운 컴백",
@@ -4160,6 +4365,78 @@
   "rejectedCount": 0,
   "issues": [
     {
+      "issue": "구급차",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": null,
+      "headlines": [
+        {
+          "title": "구급차에서 태어난 31주 조산아…응급처치로 살렸다",
+          "press": "news.kbs.co.kr",
+          "publishedAt": "2026-11-06T02:24:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/056/0012288708?sid=102"
+        },
+        {
+          "title": "구급차에서 태어난 31주 신생아‥50일 치료 마치고 건강히 퇴원",
+          "press": "imnews.imbc.com",
+          "publishedAt": "2026-11-06T02:36:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/214/0001533921?sid=102"
+        },
+        {
+          "title": "\"운다, 울어! 살았다\"…급박했던 31주 신생아 '구급차 분만'[뉴스럽다]",
+          "press": "nocutnews.co.kr",
+          "publishedAt": "2026-11-06T07:24:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/079/0004207335?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "119 구급차 비용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "119 구급차",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구급차 장난감",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구급차 영어로",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구급차 비용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구급차 그림",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구급차 키트",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구급차 택시 결말",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 1
+    },
+    {
       "issue": "키미 K3.1 프로",
       "issueType": "fresh",
       "lane": "tech",
@@ -4194,7 +4471,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 1
+      "rowCount": 1,
+      "carried": true
     },
     {
       "issue": "장동민",
@@ -5119,7 +5397,7 @@
       "carried": true
     }
   ],
-  "enrichedAt": "2026-11-06T03:35:05.293Z",
+  "enrichedAt": "2026-11-06T09:55:24.024Z",
   "enrichStats": {
     "enriched": 0,
     "subsAdded": 0,
@@ -5128,12 +5406,12 @@
     "verified": 0,
     "judged": 0,
     "judgedBad": 0,
-    "related": 0,
+    "related": 20,
     "picked": 0,
     "pooled": 0,
     "aiTitled": 0,
     "trended": 0,
-    "aiCalls": 1,
+    "aiCalls": 2,
     "partial": false
   }
 }
