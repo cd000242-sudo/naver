@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T06:56:49.370Z",
+ "builtAt": "2026-11-06T07:06:53.233Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,17 +11,23 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "법원, 쿠팡 과징금 정지",
+   "keyword": "쿠팡 과징금 정지",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 31,
-   "recent20": 5,
-   "press": 31,
-   "firstArticleAt": "2026-11-06T05:28:00.000Z",
+   "articles90": 28,
+   "recent20": 4,
+   "press": 28,
+   "firstArticleAt": "2026-11-06T05:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "4200억 유지, 2000억 정지…쿠팡 과징금, 법원 판단 왜 갈렸나",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-06T06:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014306574?sid=102"
+    },
     {
      "title": "쿠팡 2011억원 과징금 집행 일단 멈췄다…법원 효력정지 결정",
      "press": "thefirstmedia.net",
@@ -33,28 +39,27 @@
      "press": "safetimes.co.kr",
      "publishedAt": "2026-11-06T06:50:00.000Z",
      "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247272"
-    },
-    {
-     "title": "법원, 쿠팡 6200억원 과징금 중 4200억원만 집행 허용...이유 알아보니",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-06T06:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005437720?sid=101"
     }
    ]
   },
   {
    "keyword": "한 동티모르 공동언론발표",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 23,
+   "articles90": 19,
    "recent20": 3,
-   "press": 21,
-   "firstArticleAt": "2026-11-06T05:27:00.000Z",
+   "press": 17,
+   "firstArticleAt": "2026-11-06T05:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[한-동티모르 정상회담] 李-오르타 대통령 정상회담⋯고위급 외교협의체...",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-06T07:01:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=747894"
+    },
     {
      "title": "‘DJ 노벨평화상 추천’ 동티모르 대통령 “韓 빛의 혁명, 노벨상 추천...",
      "press": "seoul.co.kr",
@@ -66,61 +71,59 @@
      "press": "sisaweek.com",
      "publishedAt": "2026-11-06T06:52:00.000Z",
      "link": "https://www.sisaweek.com/news/articleView.html?idxno=238832"
-    },
-    {
-     "title": "李, 동티모르와 지재권·기후협력 확대…2029년 아세안 공조",
-     "press": "daily.hankooki.com",
-     "publishedAt": "2026-11-06T06:38:00.000Z",
-     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1422591"
     }
    ]
   },
   {
    "keyword": "김종철 경찰청장 후보자",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 16,
-   "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-06T05:28:00.000Z",
+   "articles90": 13,
+   "recent20": 5,
+   "press": 12,
+   "firstArticleAt": "2026-11-06T05:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김종철 경찰청장 후보자 \"쇄신 요구 엄중히 인식·신뢰 회복\"(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-06T07:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016426713?sid=102"
+    },
+    {
+     "title": "김종철 경찰청장 후보자 \"이상동기·관계성 범죄 시스템 해결 급선무\"",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-06T06:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006405262?sid=102"
+    },
     {
      "title": "김종철 경찰청장 후보자 \"이상동기·관계성 범죄 대응 최우선\"",
      "press": "mt.co.kr",
      "publishedAt": "2026-11-06T06:53:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/008/0005437726?sid=102"
-    },
-    {
-     "title": "[속보] 국가경찰위, 김종철 경찰청장 후보자 임명제청 동의",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-06T06:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005600619?sid=102"
-    },
-    {
-     "title": "김종철 경찰청장 후보자 \"막중한 책임감\"… 국가경찰위 검증 착수",
-     "press": "jeonmae.co.kr",
-     "publishedAt": "2026-11-06T06:16:00.000Z",
-     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1309303"
     }
    ]
   },
   {
    "keyword": "두번째 시그널 12월 방송 확정",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 12,
-   "recent20": 4,
+   "recent20": 3,
    "press": 12,
-   "firstArticleAt": "2026-11-06T05:34:00.000Z",
+   "firstArticleAt": "2026-11-06T05:40:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "조진웅 여파 속 '시그널2', 우여곡절 끝에 편성… AI 배우 교체 검토 까...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-06T07:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/469/0000964073"
+    },
     {
      "title": "\"AI로 조진웅 교체까지 시도\"…결국 원본 그대로 공개되는 '시그널2'",
      "press": "fnnews.com",
@@ -132,87 +135,54 @@
      "press": "dailysportshankook.co.kr",
      "publishedAt": "2026-11-06T06:48:00.000Z",
      "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435242"
-    },
-    {
-     "title": "시그널2 방영일…12월 일정 확정",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-06T06:42:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611060248"
     }
    ]
   },
   {
-   "keyword": "긴급 시장상황점검회의",
+   "keyword": "경기도 말라리아 감소",
    "sources": [
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 3,
    "press": 5,
-   "firstArticleAt": "2026-11-06T05:58:00.000Z",
+   "firstArticleAt": "2026-11-06T06:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "코스피 급락에 긴급 대응…당국 \"신용융자 담보비율 의무 석 달 면제\"",
-     "press": "whitepaper.co.kr",
-     "publishedAt": "2026-11-06T06:50:00.000Z",
-     "link": "http://www.whitepaper.co.kr/news/articleView.html?idxno=268529"
+     "title": "경기도 말라리아 환자 43% 급감… 접경지 ‘집중 방역’ 통했다",
+     "press": "kgnews.co.kr",
+     "publishedAt": "2026-11-06T07:04:00.000Z",
+     "link": "https://www.kgnews.co.kr/news/article.html?no=918486"
     },
     {
-     "title": "'급한대로' 증권사 규제부터 푼다...코스피 급락에 긴급 대책회의 [자막...",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-06T06:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002429252?sid=101"
+     "title": "[위클리오늘] 경기도, 재정 자율성 제약 구조 분석",
+     "press": "weeklytoday.com",
+     "publishedAt": "2026-11-06T07:00:00.000Z",
+     "link": "http://www.weeklytoday.com/news/articleView.html?idxno=801333"
     },
     {
-     "title": "코스피, 장 초반 5천 선 깨져‥정부 '긴급 회의'",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-06T06:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533954?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "엘니뇨",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-06T05:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "5월 발생한 엘니뇨, 12월 역대 가장 강해진다",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-06T06:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000549551?sid=103"
-    },
-    {
-     "title": "올겨울 역대급 엘니뇨 온다...평년보다 따뜻하고 비 많이 내릴 듯",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-06T06:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003152239?sid=103"
-    },
-    {
-     "title": "올겨울 '역대 최강' 엘니뇨…12월 최성기, 기온 높고 비 많을 듯",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-06T06:00:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=314799"
+     "title": "경기도 말라리아 환자 전년 대비 43% 감소…퇴치 위해 민·관·군 총력",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-06T06:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005839245?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1165,
-  "matched": 555,
-  "avgLeadMin": 504,
+  "flagged": 1167,
+  "matched": 556,
+  "avgLeadMin": 503,
   "recent": [
+   {
+    "keyword": "박항서 감독 인종차별 항의",
+    "hitKeyword": "박항서 인종차별 항의",
+    "hitAt": "2026-11-06T16:00:00+09:00",
+    "leadMin": 33
+   },
    {
     "keyword": "딸은 메타, 아들은 엔비디아",
     "hitKeyword": "엔비디아 칩 트럭 도난",
@@ -266,12 +236,6 @@
     "hitKeyword": "재혼 황후 드라마",
     "hitAt": "2026-11-06T14:00:00+09:00",
     "leadMin": 316
-   },
-   {
-    "keyword": "그리 결혼 준비",
-    "hitKeyword": "그리 결혼 준비 발표",
-    "hitAt": "2026-11-06T14:00:00+09:00",
-    "leadMin": 105
    }
   ]
  }
