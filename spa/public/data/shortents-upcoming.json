@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T03:45:28.717Z",
+ "builtAt": "2026-11-06T03:55:32.837Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 52,
-   "recent20": 11,
-   "press": 47,
+   "articles90": 57,
+   "recent20": 12,
+   "press": 52,
    "firstArticleAt": "2026-11-06T02:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 당국, 증권사 담보비율 의무 3개월 면제…과도한 주식 반대매매...",
-     "press": "kado.net",
-     "publishedAt": "2026-11-06T03:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000209819?sid=100"
+     "title": "국내 증시 급락하자, 금융당국 '신용융자 담보비율 유지 의무' 3개월 면...",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-06T03:52:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4117079"
     },
     {
-     "title": "당국 \"증권사의 신용융자 담보 비율 140% 유지 의무 석 달 면제\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-06T03:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001401148?sid=101"
+     "title": "증시 급락 급한불 끈 금융당국…반대매매 막았지만 '깡통계좌' 경고",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-06T03:50:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=202611061226282044923c501012_1"
     },
     {
-     "title": "증권사 신용융자 담보비율 140% 유지의무 3개월 면제",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-06T03:42:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=623488"
+     "title": "당국, 증권사 신용융자 담보비율 의무 3개월 면제",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-06T03:48:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=172070"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 20,
+   "articles90": 18,
    "recent20": 2,
-   "press": 19,
-   "firstArticleAt": "2026-11-06T02:17:00.000Z",
+   "press": 18,
+   "firstArticleAt": "2026-11-06T02:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "AI 규제 우려로 증시 급락, 금융 당국의 긴급 조치 발표",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-06T03:46:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=884449"
+    },
     {
      "title": "F4, 증시 급락에 긴급 대응… 신용융자 담보비율 유지의무 3개월 면제",
      "press": "seoul.co.kr",
@@ -65,57 +71,18 @@
      "press": "news.tf.co.kr",
      "publishedAt": "2026-11-06T03:28:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/629/0000549444?sid=101"
-    },
-    {
-     "title": "증시 급락에 정부 긴급 대응...증권사 신용융자 담보비율 3개월 면제",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-06T03:24:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611060098"
-    }
-   ]
-  },
-  {
-   "keyword": "이형일 부총리 시장 점검 회의",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-06T02:17:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "코스피 장중 8.76% 급락에 정부 긴급 회의…외환시장도 점검",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-06T03:12:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/433837"
-    },
-    {
-     "title": "주가 폭락에 정부 긴급회의…\"증권사 신용융자 비율 3개월 면제\"",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-06T03:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000160568?sid=101"
-    },
-    {
-     "title": "이형일 \"증권사 신용융자 담보비율 140% 유지의무 3개월간 면제\"(종합)",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-06T03:06:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443476"
     }
    ]
   },
   {
    "keyword": "농구 월드컵 예선 12인 확정",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 4,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-06T02:23:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-06T02:40:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
