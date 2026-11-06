@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T00:13:56.403Z",
+ "builtAt": "2026-11-06T00:23:59.920Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,101 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 17,
+ "measured": 9,
  "candidates": [
   {
-   "keyword": "AI 규제 공포",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 42,
-   "recent20": 6,
-   "press": 37,
-   "firstArticleAt": "2026-11-05T22:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美 AI주 하루 2조달러 증발…민주당 압승에 데이터센터 투자 공포",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-06T00:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009273622?sid=101"
-    },
-    {
-     "title": "\"AI 약속 대신 가격 따질 때\"…뉴욕증시 규제·수익성 공포에 4300조 증발",
-     "press": "pointdaily.co.kr",
-     "publishedAt": "2026-11-05T23:58:00.000Z",
-     "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=324980"
-    },
-    {
-     "title": "나스닥 하루만에 시총 2조5000억달러 증발…AI 불안에 '역대 최대' 폭락",
-     "press": "kado.net",
-     "publishedAt": "2026-11-05T23:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000209799?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "대외경제장관회의 이형일 부총리",
+   "keyword": "LIV 골프, 5년 만에 종료",
    "sources": [
     "nate"
    ],
-   "articles90": 52,
-   "recent20": 13,
-   "press": 18,
-   "firstArticleAt": "2026-11-05T23:17:00.000Z",
+   "articles90": 10,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-05T23:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美 증시 급락에...이형일 “국내 시장 과민반응 막을 조치 강구”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-06T00:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004679380?sid=101"
+     "title": "LIV 골프, 출범 5년 만에 역사 속으로…\"사업 종료\"",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-06T00:20:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4117016"
     },
     {
-     "title": "이형일 부총리 “증시 과도한 변동성 선제 대응...필요한 조치 적기 시...",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-06T00:10:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=72673"
+     "title": "LIV 골프, 출범 5년 만에 역사 속으로…\"사업 종료\"(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-06T00:04:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/001/0016425438"
     },
     {
-     "title": "이형일 “美 중간선거 중요한 분기점…증시 지나치게 반응않도록 조치...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-06T00:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002719696?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "주진우 의원 필리버스터",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 26,
-   "recent20": 9,
-   "press": 8,
-   "firstArticleAt": "2026-11-05T22:47:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "본회의 무제한 토론 이어가는 주진우 의원",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-06T00:11:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261106000235"
-    },
-    {
-     "title": "무제한 토론하는 주진우 국민의힘 의원",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-06T00:11:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261106000236"
-    },
-    {
-     "title": "조작기소 특검법안 필리버스터 이어가는 주진우 의원",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-06T00:11:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261106000237"
+     "title": "LIV 골프, 사업 종료 발표…'출범 5년 만에 역사 속으로'",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-05T23:53:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/277/0005838934"
     }
    ]
   },
@@ -112,62 +48,62 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 6,
+   "articles90": 8,
    "recent20": 3,
-   "press": 6,
+   "press": 8,
    "firstArticleAt": "2026-11-05T23:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "치매 환자 기억 되살리는 AI 인형…제주대 학생들 장관상",
+     "press": "newsjeju.net",
+     "publishedAt": "2026-11-06T00:18:00.000Z",
+     "link": "https://www.newsjeju.net/news/articleView.html?idxno=428017"
+    },
+    {
+     "title": "최정원, 치매로 떠난 父 그리움에 눈물…\"기억 못 해도 곁에 계셨으면\"...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-06T00:18:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000487013"
+    },
+    {
      "title": "안마의자 누워 치매 노모에게 \"휴대전화 가져와\"…침 뱉고 떠난 요양사",
      "press": "news1.kr",
      "publishedAt": "2026-11-06T00:04:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009273603?sid=102"
-    },
-    {
-     "title": "정명근 화성시장, 치매 예방·관리도 일상 속으로…집에서 하는 인지훈...",
-     "press": "fieldnews.kr",
-     "publishedAt": "2026-11-05T23:58:00.000Z",
-     "link": "http://www.fieldnews.kr/news/articleView.html?idxno=32866"
-    },
-    {
-     "title": "나주시, 팍스이피씨와 협약…AI 웨어러블로 치매환자 안전관리 추진",
-     "press": "newsmaker.or.kr",
-     "publishedAt": "2026-11-05T23:54:00.000Z",
-     "link": "http://www.newsmaker.or.kr/news/articleView.html?idxno=185306"
     }
    ]
   },
   {
-   "keyword": "blg",
+   "keyword": "이형일 부총리 대외경제장관회의 참석",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T22:52:00.000Z",
+   "articles90": 15,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-05T23:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "DK 벼랑 끝! 中 BLG에 2세트도 내줬다…0-2 위기, 남은 건 ‘역스윕’뿐...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-06T00:00:00.000Z",
-     "link": "https://m.sports.naver.com/esports/article/468/0001278614"
+     "title": "이형일 부총리 “증시 과도한 변동성 선제 대응...필요한 조치 적기 시...",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-06T00:10:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=72673"
     },
     {
-     "title": "[롤드컵] DK, '바이퍼' 앞세운 中 BLG 공세에 2세트도 패배...0-2 벼랑 끝...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-05T23:59:00.000Z",
-     "link": "https://m.sports.naver.com/esports/article/109/0005635497"
+     "title": "이형일 \"美 증시 급락, 글로벌 파급 배제 못해…과잉반응 선제 차단\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-06T00:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009273596?sid=101"
     },
     {
-     "title": "[롤드컵] 빈틈없는 운영 앞세운 BLG, DK 상대로 2세트도 완승",
-     "press": "gamevu.co.kr",
-     "publishedAt": "2026-11-05T23:54:00.000Z",
-     "link": "https://www.gamevu.co.kr/news/articleView.html?idxno=62072"
+     "title": "제276차 대외경제장관회의 참석한 이형일 부총리",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-05T23:52:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261106000175"
     }
    ]
   },
@@ -180,10 +116,16 @@
    "articles90": 4,
    "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-05T22:44:00.000Z",
+   "firstArticleAt": "2026-11-05T23:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘안색 논란’ 주지훈, ‘재혼 황후’ 화제성은 합격",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-06T00:22:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001278621"
+    },
     {
      "title": "'재혼 황후' 주지훈, 낯빛은 흙빛·아우라는 황금빛",
      "press": "ize.co.kr",
@@ -195,19 +137,13 @@
      "press": "starnewskorea.com",
      "publishedAt": "2026-11-05T23:33:00.000Z",
      "link": "https://m.entertain.naver.com/article/108/0003485072"
-    },
-    {
-     "title": "안색 논란에도…‘재혼황후’ 주지훈, 결 다른 나쁜 남자 완성",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-05T23:19:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001148325"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1088,
+  "flagged": 1090,
   "matched": 519,
   "avgLeadMin": 484,
   "recent": [
