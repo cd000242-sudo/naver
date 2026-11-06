@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T02:34:58.238Z",
+ "builtAt": "2026-11-06T02:45:02.282Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,18 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "김민석 신천지 사과",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 64,
-   "recent20": 13,
-   "press": 58,
-   "firstArticleAt": "2026-11-06T01:05:00.000Z",
+   "articles90": 51,
+   "recent20": 7,
+   "press": 47,
+   "firstArticleAt": "2026-11-06T01:17:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -44,34 +43,34 @@
    ]
   },
   {
-   "keyword": "롯데쇼핑 영업익 34.5% 증가",
+   "keyword": "뉴욕증시 급락",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 30,
-   "recent20": 5,
-   "press": 30,
-   "firstArticleAt": "2026-11-06T01:06:00.000Z",
+   "articles90": 24,
+   "recent20": 3,
+   "press": 22,
+   "firstArticleAt": "2026-11-06T01:28:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "롯데쇼핑, 3분기 영업익 1756억…백화점이 이익 이끌었다",
-     "press": "segye.com",
-     "publishedAt": "2026-11-06T02:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004173066?sid=101"
+     "title": "[올댓차이나] 中 증시, 한미일 증시 급락에 대폭 하락세…창업판 2.46%↓",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-06T02:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014305897?sid=104"
     },
     {
-     "title": "롯데쇼핑 3분기 영업익 34.5%↑…외국인 몰린 백화점 역대 최대 매출",
-     "press": "donga.com",
-     "publishedAt": "2026-11-06T02:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003760583?sid=101"
+     "title": "'블루 쓰나미'에 나스닥 5.5%↓…엔비디아 9%↓ AI 관련주 급락",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-06T02:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000542126?sid=101"
     },
     {
-     "title": "백화점·마트 훈풍 탄 롯데쇼핑, 3분기 영업익 34.5% '쑥'",
-     "press": "enewstoday.co.kr",
-     "publishedAt": "2026-11-06T02:25:00.000Z",
-     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2489179"
+     "title": "뉴욕증시 반등 하루 만에 폭락...기술주 투매에 나스닥 5.5%↓",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-06T02:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002429137?sid=104"
     }
    ]
   },
@@ -80,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 23,
-   "recent20": 6,
-   "press": 22,
-   "firstArticleAt": "2026-11-06T01:10:00.000Z",
+   "articles90": 18,
+   "recent20": 1,
+   "press": 18,
+   "firstArticleAt": "2026-11-06T01:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -108,115 +107,56 @@
    ]
   },
   {
-   "keyword": "뉴욕증시 급락",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 22,
-   "recent20": 4,
-   "press": 21,
-   "firstArticleAt": "2026-11-06T01:24:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "대만 자취안지수 9% 급락…TSMC·미디어텍 하한가",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-06T02:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006404877?sid=104"
-    },
-    {
-     "title": "'블루 쓰나미'에 멈춰선 AI 질주…뉴욕증시 하루 만에 4300조원 증발",
-     "press": "widedaily.com",
-     "publishedAt": "2026-11-06T02:22:00.000Z",
-     "link": "https://www.widedaily.com/news/articleView.html?idxno=303048"
-    },
-    {
-     "title": "[외환] '블루쓰나미'發 주가 급락에 1,350원대 후반",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-06T02:16:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443456"
-    }
-   ]
-  },
-  {
-   "keyword": "AI 모델 프로젝트 성과 공개",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 20,
-   "recent20": 3,
-   "press": 19,
-   "firstArticleAt": "2026-11-06T01:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "후보물질 발굴부터 임상까지 AI 전환…SK바이오팜, 특화 파운데이션 모...",
-     "press": "widedaily.com",
-     "publishedAt": "2026-11-06T02:34:00.000Z",
-     "link": "https://www.widedaily.com/news/articleView.html?idxno=303064"
-    },
-    {
-     "title": "카카오, AI 에이전트 판단 특화 모델 오픈소스 공개",
-     "press": "seoulfn.com",
-     "publishedAt": "2026-11-06T02:17:00.000Z",
-     "link": "https://www.seoulfn.com/news/articleView.html?idxno=642109"
-    },
-    {
-     "title": "GPT-6보다 43배 빠르다…카카오, 업무 특화 AI 공개",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-06T02:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002719881?sid=105"
-    }
-   ]
-  },
-  {
    "keyword": "김장",
    "sources": [
     "signal.bz",
     "google"
    ],
    "articles90": 27,
-   "recent20": 4,
+   "recent20": 5,
    "press": 14,
-   "firstArticleAt": "2026-11-06T01:06:00.000Z",
+   "firstArticleAt": "2026-11-06T01:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "영월군, 취약계층 1000가구에 김장김치 나눔",
-     "press": "enewstoday.co.kr",
-     "publishedAt": "2026-11-06T02:33:00.000Z",
-     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2489289"
+     "title": "\"김장 한 포기 더\"…송미령 장관, 배추 소비촉진 당부",
+     "press": "agrinet.co.kr",
+     "publishedAt": "2026-11-06T02:42:00.000Z",
+     "link": "https://www.agrinet.co.kr/news/articleView.html?idxno=408647"
     },
     {
-     "title": "주말엔 세계유산 김장여행 어때? 평창고랭지 김장축제 11.16까지",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-06T02:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002719918?sid=103"
+     "title": "[함께가자 우리ESG] HD건설기계·HD현대사이트솔루션, 임직원 참여 김장...",
+     "press": "newslock.co.kr",
+     "publishedAt": "2026-11-06T02:40:00.000Z",
+     "link": "http://www.newslock.co.kr/news/articleView.html?idxno=139520"
     },
     {
-     "title": "HD현대 건설기계 부문, 각 사업장서 김장 나눔행사 열어",
-     "press": "weekly.hankooki.com",
-     "publishedAt": "2026-11-06T02:20:00.000Z",
-     "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7192565"
+     "title": "농수산식품유통공사, '농부가바로팜'... 김장철 맞춤 최대 20% 할인",
+     "press": "newsworker.co.kr",
+     "publishedAt": "2026-11-06T02:36:00.000Z",
+     "link": "https://www.newsworker.co.kr/news/articleView.html?idxno=512705"
     }
    ]
   },
   {
-   "keyword": "LIV 골프, 5년 만에 사업 종료",
+   "keyword": "LIV 골프 5년 만에 종료",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
+   "articles90": 9,
+   "recent20": 2,
+   "press": 9,
    "firstArticleAt": "2026-11-06T01:30:00.000Z",
-   "exclusive": false,
+   "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "‘PGA 대항마’의 쓸쓸한 퇴장… LIV 골프, 출범 5년 만에 운영 종료",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-06T02:39:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/396/0000760217"
+    },
     {
      "title": "'골프계 지각변동' LIV 골프, 출범 5년 만에 사업 종료",
      "press": "maniareport.com",
@@ -228,44 +168,6 @@
      "press": "spochoo.com",
      "publishedAt": "2026-11-06T02:12:00.000Z",
      "link": "https://m.sports.naver.com/golf/article/529/0000079180"
-    },
-    {
-     "title": "LIV 골프, 출범 5년 만에 막 내려",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-06T02:04:00.000Z",
-     "link": "https://www.viva100.com/article/20261106500240"
-    }
-   ]
-  },
-  {
-   "keyword": "여객기",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-06T01:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "인천공항경찰, 유럽 곳곳 여객기 폭탄위협에 '상시 대비태세'",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-06T02:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016425961?sid=101"
-    },
-    {
-     "title": "유럽 여객기 최소 25편 폭발물 위협…전투기 출동·긴급착륙 잇따라",
-     "press": "newsworker.co.kr",
-     "publishedAt": "2026-11-06T02:08:00.000Z",
-     "link": "https://www.newsworker.co.kr/news/articleView.html?idxno=512636"
-    },
-    {
-     "title": "유럽 여객기 최소 27편에 폭탄 위협…비상착륙에 전투기까지 출격",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-06T01:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012288681?sid=104"
     }
    ]
   },
@@ -301,43 +203,11 @@
      "link": "https://n.news.naver.com/mnews/article/030/0003482967?sid=101"
     }
    ]
-  },
-  {
-   "keyword": "amd",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-06T01:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "IBM-AMD-ORNL, 2028년 실용화 목표로 양자 오류 정정 플랫폼 구축",
-     "press": "epnc.co.kr",
-     "publishedAt": "2026-11-06T02:34:00.000Z",
-     "link": "https://www.epnc.co.kr/news/articleView.html?idxno=409393"
-    },
-    {
-     "title": "AMD 대표 AI 행사 한국 첫 개최…과기정통부-AMD 협력 본격 가동",
-     "press": "hellot.net",
-     "publishedAt": "2026-11-06T02:18:00.000Z",
-     "link": "https://www.hellot.net/news/article.html?no=116071"
-    },
-    {
-     "title": "래블업, 애플·엔비디아 이어 AMD까지…추론 엔진 지원 확대",
-     "press": "newstopkorea.com",
-     "publishedAt": "2026-11-06T01:16:00.000Z",
-     "link": "https://www.newstopkorea.com/news/articleView.html?idxno=48812"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1120,
+  "flagged": 1121,
   "matched": 532,
   "avgLeadMin": 492,
   "recent": [
