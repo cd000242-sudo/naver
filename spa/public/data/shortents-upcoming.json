@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T01:34:36.082Z",
+ "builtAt": "2026-11-06T01:44:39.587Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 14,
  "candidates": [
   {
    "keyword": "롯데쇼핑 3분기 34.5% 증가",
@@ -19,59 +19,27 @@
    "articles90": 75,
    "recent20": 10,
    "press": 72,
-   "firstArticleAt": "2026-11-06T00:12:00.000Z",
+   "firstArticleAt": "2026-11-06T00:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "신동빈의 버팀목 된 롯데쇼핑…영업익 35% '껑충'",
-     "press": "peoplewatch.co.kr",
-     "publishedAt": "2026-11-06T01:32:00.000Z",
-     "link": "https://www.peoplewatch.co.kr/article/view/ppw202611060009"
+     "title": "롯데쇼핑, 3분기 영업익 34.5% 증가…백화점·마트 실적 견인(종합)",
+     "press": "news2day.co.kr",
+     "publishedAt": "2026-11-06T01:40:00.000Z",
+     "link": "https://www.news2day.co.kr/article/20261106500103"
     },
     {
-     "title": "롯데쇼핑, 3분기 영업익 34.5% 증가…백화점·마트 실적 개선 견인",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-06T01:28:00.000Z",
-     "link": "https://www.ajunews.com/view/20261106102610117"
+     "title": "롯데쇼핑, 3분기 영업익 34.5%↑…백화점 역대 최대 매출 달성",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-06T01:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001271891?sid=103"
     },
     {
-     "title": "롯데쇼핑, 3분기 영업익 1756억원···전년比 34.5%↑",
-     "press": "seoulfn.com",
-     "publishedAt": "2026-11-06T01:27:00.000Z",
-     "link": "https://www.seoulfn.com/news/articleView.html?idxno=642097"
-    }
-   ]
-  },
-  {
-   "keyword": "도상우, 2월 결혼한다.",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 40,
-   "recent20": 4,
-   "press": 34,
-   "firstArticleAt": "2026-11-06T00:21:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "도상우, 모델 박지혜와 내년 2월 결혼 “평생 함께할 소중한 인연 만나...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-06T01:33:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001146438"
-    },
-    {
-     "title": "“가치관 확고한 사람” 도상우, 이상형 만나 결실…톱모델 박지혜와 2...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-06T01:25:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001278646"
-    },
-    {
-     "title": "‘도상우♥박지혜’ 글로벌한 신부 이력…루이비통 모델에 지드래곤과...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-06T01:23:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001278643"
+     "title": "롯데쇼핑, 3Q 영업익 1756억원…전년比 34.5% 증가",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-06T01:38:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611060059"
     }
    ]
   },
@@ -81,7 +49,7 @@
     "signal.bz"
    ],
    "articles90": 29,
-   "recent20": 12,
+   "recent20": 5,
    "press": 24,
    "firstArticleAt": "2026-11-06T00:30:00.000Z",
    "exclusive": false,
@@ -114,29 +82,29 @@
     "google"
    ],
    "articles90": 26,
-   "recent20": 7,
-   "press": 24,
-   "firstArticleAt": "2026-11-06T00:12:00.000Z",
+   "recent20": 5,
+   "press": 23,
+   "firstArticleAt": "2026-11-06T00:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "원·달러 환율, 1350원대 후반 급등…美 기술주 폭락에 위험회피 확산",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-06T01:40:00.000Z",
+     "link": "https://www.ajunews.com/view/20261106102358104"
+    },
+    {
+     "title": "[오늘 외환딜러 환율 예상레인지]",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-06T01:36:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443441"
+    },
     {
      "title": "[오늘의 환율] 11월 6일 금요일, 원·달러 환율 1355.70원…엔화·유로화...",
      "press": "job-post.co.kr",
      "publishedAt": "2026-11-06T01:30:00.000Z",
      "link": "https://www.job-post.co.kr/news/articleView.html?idxno=236839"
-    },
-    {
-     "title": "한투증권, 3분기 순익 '반토막'…환율 급락에 운용 발목",
-     "press": "news.bizwatch.co.kr",
-     "publishedAt": "2026-11-06T01:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/648/0000052361?sid=101"
-    },
-    {
-     "title": "[오늘 일본은] 국제유가 하락에도 日 엔화 약세…달러당 158엔대 유지",
-     "press": "pointe.co.kr",
-     "publishedAt": "2026-11-06T01:28:00.000Z",
-     "link": "https://www.pointe.co.kr/news/articleView.html?idxno=87258"
     }
    ]
   },
@@ -146,30 +114,30 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 15,
+   "articles90": 14,
    "recent20": 3,
-   "press": 15,
-   "firstArticleAt": "2026-11-06T00:06:00.000Z",
+   "press": 14,
+   "firstArticleAt": "2026-11-06T00:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "토스인슈어런스, 대구 오피스 개소…6대 광역시 거점 구축",
+     "press": "lawissue.co.kr",
+     "publishedAt": "2026-11-06T01:42:00.000Z",
+     "link": "https://www.lawissue.co.kr/view.php?ud=2026110610393710009817d053b9_12"
+    },
+    {
+     "title": "토스인슈어런스, 대구에 신규 오피스…6대 광역시 모두 진출",
+     "press": "datanews.co.kr",
+     "publishedAt": "2026-11-06T01:38:00.000Z",
+     "link": "http://datanews.co.kr/news/article.html?no=147421"
+    },
     {
      "title": "토스인슈어런스, 대구 오피스 개소…6대 광역시 거점 확보",
      "press": "shinailbo.co.kr",
      "publishedAt": "2026-11-06T01:26:00.000Z",
      "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5080471"
-    },
-    {
-     "title": "[N잡 앱테크] 토스행운퀴즈, 11월6일 퀴즈 정답리스트",
-     "press": "job-post.co.kr",
-     "publishedAt": "2026-11-06T01:16:00.000Z",
-     "link": "https://www.job-post.co.kr/news/articleView.html?idxno=236834"
-    },
-    {
-     "title": "토스인슈어런스, 대구에 새 거점… 6개 광역시 진출",
-     "press": "insnews.co.kr",
-     "publishedAt": "2026-11-06T01:16:00.000Z",
-     "link": "https://www.insnews.co.kr/news/articleView.html?idxno=93704"
     }
    ]
   },
@@ -179,13 +147,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 22,
+   "articles90": 23,
    "recent20": 1,
-   "press": 12,
+   "press": 13,
    "firstArticleAt": "2026-11-06T00:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "국민의힘 정점식, \"이재명 대통령의 소통 방식은 차베스 연상\" 강력 비판",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-06T01:42:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=884398"
+    },
     {
      "title": "정점식 \"李, 차베스 그대로 따라 하고 있다\"…조작기소 특검·대통령 유...",
      "press": "ziksir.com",
@@ -197,28 +171,59 @@
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-06T01:12:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006404822?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "변호사 학폭 송치",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 2,
+   "press": 12,
+   "firstArticleAt": "2026-11-06T00:15:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘솔로지옥4’ 국동호 측 “학폭 의혹 제기한 변호사, 공소청 송치\"",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-06T01:27:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000760206"
     },
     {
-     "title": "정점식 \"이 대통령 정치적 고향은 성남 아닌 베네수엘라\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-06T01:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001401090?sid=100"
+     "title": "국동호 \"고백공격으로 수치심? 모두 허위사실\"…'학폭 주장' 변호사, 명...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-06T01:26:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000487053"
+    },
+    {
+     "title": "'솔로지옥4' 국동호 \"학폭 의혹 제기한 변호사, 공소청 송치\"",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-06T01:17:00.000Z",
+     "link": "https://m.entertain.naver.com/article/629/0000549376"
     }
    ]
   },
   {
    "keyword": "삼성전자 주가",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
    "articles90": 8,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-06T00:44:00.000Z",
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-06T00:50:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
+    {
+     "title": "삼성전자·SK하이닉스 주가 급락, 투자자 혼란 가중... 이제 어디로?",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-06T01:42:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=884400"
+    },
     {
      "title": "반도체 주가 급락에 월가 긴장…AI 투자 붐 흔드는 세 가지 위험",
      "press": "betanews.net",
@@ -230,51 +235,109 @@
      "press": "topstarnews.net",
      "publishedAt": "2026-11-06T01:20:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16269733"
-    },
-    {
-     "title": "국민의힘 “곤두박질 코스피…정부 억지 주가 부양, 결국 허상”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-06T01:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012288577?sid=100"
     }
    ]
   },
   {
-   "keyword": "출근하는 조희대 대법원장",
+   "keyword": "도상우, 2월 결혼 발표",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-06T00:23:00.000Z",
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-06T00:52:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘결혼 발표’ 도상우♥박지혜, 프러포즈 현장 공개 “마음속으로만 그...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-06T01:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001146442"
+    },
+    {
+     "title": "도상우♥박지혜, 내년 2월 결혼",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-06T01:02:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611060159"
+    },
+    {
+     "title": "배우 도상우·모델 박지혜, 내년 2월 부부 된다… “따뜻한 축하 부탁”",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-06T01:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/119/0003152082"
+    }
+   ]
+  },
+  {
+   "keyword": "LIV 5년 만에 사업 종료",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-06T00:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "조희대 대법원장 출근길",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-06T00:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014305361?sid=102"
+     "title": "‘재정 위기 탈출 실패’ LIV 골프, 5년 만에 문 닫는다 “청산 절차 돌...",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-06T01:36:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/382/0001303295"
     },
     {
-     "title": "등청하는 조희대 대법원장",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-06T00:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014305360?sid=102"
+     "title": "LIV 골프, 출범 5년 만에 역사 속으로…투자 유치 실패로 사업 종료",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-06T01:30:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=94676"
     },
     {
-     "title": "출근하는 조희대 대법원장",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-06T00:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014305365?sid=102"
+     "title": "PGA 독점 헤게모니에 도전했던 LIV 골프, 창설 5년 만에 사업 종료…사우...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-06T01:03:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/022/0004173029"
+    }
+   ]
+  },
+  {
+   "keyword": "하이닉스 주가",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-06T00:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "삼성전자·SK하이닉스 주가 급락, 투자자 혼란 가중... 이제 어디로?",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-06T01:42:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=884400"
+    },
+    {
+     "title": "[특징주] SK스퀘어 주가, 11%대 급락... 왜?",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-06T00:48:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1191530"
+    },
+    {
+     "title": "SK하이닉스 주가, 11월 6일 장중 1,164,000원 7.91% 하락",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-06T00:48:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=561751"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1109,
+  "flagged": 1112,
   "matched": 527,
   "avgLeadMin": 495,
   "recent": [
