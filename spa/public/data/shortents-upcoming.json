@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T06:36:42.011Z",
+ "builtAt": "2026-11-06T06:46:46.070Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,27 +13,26 @@
   {
    "keyword": "법원, 쿠팡 과징금 정지",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 48,
-   "recent20": 8,
-   "press": 48,
-   "firstArticleAt": "2026-11-06T05:08:00.000Z",
+   "articles90": 39,
+   "recent20": 4,
+   "press": 39,
+   "firstArticleAt": "2026-11-06T05:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "쿠팡 과징금 엇갈린 결정…2천억은 멈추고 4천억은 유지",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-06T06:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000542199?sid=101"
+    },
     {
      "title": "쿠팡, 개인정보 과징금 2011억원 집행정지… 4236억원은 효력 유지",
      "press": "biztribune.co.kr",
      "publishedAt": "2026-11-06T06:34:00.000Z",
      "link": "http://www.biztribune.co.kr/news/articleView.html?idxno=362083"
-    },
-    {
-     "title": "法, 쿠팡 2000억대 과징금 집행정지 전부 인용…4000억대는 일부 인용",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-06T06:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000649451?sid=102"
     },
     {
      "title": "쿠팡 2000억대 과징금 효력정지 인용...앞서 4000억원은 '기각'",
@@ -44,16 +43,48 @@
    ]
   },
   {
+   "keyword": "한 동티모르 공동언론발표",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 24,
+   "recent20": 2,
+   "press": 22,
+   "firstArticleAt": "2026-11-06T05:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李, 동티모르와 지재권·기후협력 확대…2029년 아세안 공조",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-06T06:38:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1422591"
+    },
+    {
+     "title": "이 대통령, 동티모르와 치안·개발협력 확대...정례협의체 신설도",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-06T06:32:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1135796"
+    },
+    {
+     "title": "한-동티모르 공동언론발표 \"미래지향적 실질 협력 확대\"",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-06T06:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002393539?sid=100"
+    }
+   ]
+  },
+  {
    "keyword": "김종철 경찰청장 후보자",
    "sources": [
     "signal.bz",
-    "nate",
-    "daum"
+    "nate"
    ],
-   "articles90": 35,
+   "articles90": 21,
    "recent20": 0,
-   "press": 32,
-   "firstArticleAt": "2026-11-06T05:07:00.000Z",
+   "press": 19,
+   "firstArticleAt": "2026-11-06T05:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -78,100 +109,35 @@
    ]
   },
   {
-   "keyword": "한 동티모르 공동언론발표",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 26,
-   "recent20": 2,
-   "press": 24,
-   "firstArticleAt": "2026-11-06T05:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이 대통령, 동티모르와 치안·개발협력 확대...정례협의체 신설도",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-06T06:32:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1135796"
-    },
-    {
-     "title": "한-동티모르 공동언론발표 \"미래지향적 실질 협력 확대\"",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-06T06:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002393539?sid=100"
-    },
-    {
-     "title": "악수하는 한·동티모르 정상",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-06T06:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009274616?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "두번째 시그널 12월 방송 확정",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 14,
-   "recent20": 0,
-   "press": 14,
-   "firstArticleAt": "2026-11-06T05:12:00.000Z",
+   "articles90": 13,
+   "recent20": 3,
+   "press": 13,
+   "firstArticleAt": "2026-11-06T05:20:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[공식] '소년범 은퇴' 조진웅 옹호하는 의미 NO..'시그널2' 12월 7일 월화...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-06T06:15:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004463915"
+     "title": "시그널2 방영일…12월 일정 확정",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-06T06:42:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611060248"
     },
     {
-     "title": "'두번째 시그널', 조진웅 품고 편성 확정…'승산' 날린 이제훈에겐 희소...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-06T06:12:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002077461"
+     "title": "'시그널2', 12월 7일 방영 확정 \"조진웅 옹호 아냐…스태프 위해\"",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-06T06:39:00.000Z",
+     "link": "https://m.entertain.naver.com/article/629/0000549537"
     },
     {
-     "title": "tvN ‘시그널2’ 12월 7일 편성 확정…“조진웅 AI 대체 어려워”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-06T05:55:00.000Z",
-     "link": "https://m.entertain.naver.com/article/016/0002720016"
-    }
-   ]
-  },
-  {
-   "keyword": "긴급 시장상황점검회의",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-06T05:09:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'급한대로' 증권사 규제부터 푼다...코스피 급락에 긴급 대책회의 [자막...",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-06T06:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002429252?sid=101"
-    },
-    {
-     "title": "코스피, 장 초반 5천 선 깨져‥정부 '긴급 회의'",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-06T06:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533954?sid=101"
-    },
-    {
-     "title": "'반대매매 차단' 긴급 처방…\"신용융자 담보비율 유지의무 3개월 면제\"",
-     "press": "newsfc.co.kr",
-     "publishedAt": "2026-11-06T06:00:00.000Z",
-     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82289"
+     "title": "'두번째 시그널' 12월 7일 첫 방송…조진웅 AI 교체 왜 못했나?",
+     "press": "mhns.co.kr",
+     "publishedAt": "2026-11-06T06:36:00.000Z",
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=767990"
     }
    ]
   },
@@ -181,10 +147,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-06T05:11:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-06T05:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -205,6 +171,38 @@
      "press": "thereport.co.kr",
      "publishedAt": "2026-11-06T05:48:00.000Z",
      "link": "https://www.thereport.co.kr/news/articleView.html?idxno=93119"
+    }
+   ]
+  },
+  {
+   "keyword": "긴급 시장상황점검회의",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-06T05:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'급한대로' 증권사 규제부터 푼다...코스피 급락에 긴급 대책회의 [자막...",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-06T06:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002429252?sid=101"
+    },
+    {
+     "title": "코스피, 장 초반 5천 선 깨져‥정부 '긴급 회의'",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-06T06:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533954?sid=101"
+    },
+    {
+     "title": "'반대매매 차단' 긴급 처방…\"신용융자 담보비율 유지의무 3개월 면제\"",
+     "press": "newsfc.co.kr",
+     "publishedAt": "2026-11-06T06:00:00.000Z",
+     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82289"
     }
    ]
   }
