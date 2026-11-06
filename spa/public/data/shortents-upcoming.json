@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T03:25:21.351Z",
+ "builtAt": "2026-11-06T03:35:24.780Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 10,
  "candidates": [
   {
-   "keyword": "이 대통령 지지율 41%",
+   "keyword": "증시 급락 신용융자 면제",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 26,
-   "recent20": 0,
-   "press": 26,
-   "firstArticleAt": "2026-11-06T01:56:00.000Z",
+   "articles90": 44,
+   "recent20": 9,
+   "press": 41,
+   "firstArticleAt": "2026-11-06T02:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령 지지율 40%대 회복…與 36%·국힘 28% 오차밖 격차",
-     "press": "idaegu.co.kr",
-     "publishedAt": "2026-11-06T02:58:00.000Z",
-     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=564612"
+     "title": "美 기술주 쇼크에 국내 증시 휘청…반대매매 줄일 담보비율 의무 3개월...",
+     "press": "raonnews.com",
+     "publishedAt": "2026-11-06T03:32:00.000Z",
+     "link": "https://www.raonnews.com/news/article.html?no=62546"
     },
     {
-     "title": "이 대통령 지지율 41%…'부정'은 50% [한국갤럽]",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-06T02:54:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2015411"
+     "title": "정부, 증시 급락에 신용융자 담보비율 3개월 면제…반대매매 차단",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-06T03:32:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=880608"
     },
     {
-     "title": "갤럽 \"이 대통령 지지율 41%…2%p 반등\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-06T02:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000923466?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "김민석, 신천지 논란 사과",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 20,
-   "recent20": 4,
-   "press": 19,
-   "firstArticleAt": "2026-11-06T02:00:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김민석, '신천지 집단 입당 의혹' 공개 사과",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-06T03:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533931?sid=100"
-    },
-    {
-     "title": "金 3차례 사과에도 친청계 공세…개별열람에 신천지 내홍 기로",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-06T03:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016426095?sid=100"
-    },
-    {
-     "title": "김민석, 신천지 논란 연일 사과…친청계 “상응하는 책임져야”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-06T03:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003760598?sid=100"
+     "title": "정부, 증시 급락에 긴급 대응…증권사 신용융자 담보비율 유지의무 3개...",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-06T03:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000549444?sid=101"
     }
    ]
   },
@@ -79,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 30,
-   "recent20": 10,
-   "press": 18,
-   "firstArticleAt": "2026-11-06T01:56:00.000Z",
+   "articles90": 26,
+   "recent20": 5,
+   "press": 19,
+   "firstArticleAt": "2026-11-06T02:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "정부, 증시 급락에 긴급 대응…증권사 신용융자 담보비율 유지의무 3개...",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-06T03:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000549444?sid=101"
+    },
     {
      "title": "증시 급락에 정부 긴급 대응...증권사 신용융자 담보비율 3개월 면제",
      "press": "kukinews.com",
@@ -97,120 +71,51 @@
      "press": "mbnmoney.mbn.co.kr",
      "publishedAt": "2026-11-06T03:18:00.000Z",
      "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005956671"
-    },
-    {
-     "title": "\"빚투 주식 강제매도 줄인다\"…정부, 증시 폭락에 긴급 조치",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-06T03:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000649407?sid=101"
     }
    ]
   },
   {
-   "keyword": "뉴욕증시 급락",
+   "keyword": "이형일 부총리 시장 점검 회의",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 16,
-   "recent20": 1,
-   "press": 14,
+   "recent20": 0,
+   "press": 10,
    "firstArticleAt": "2026-11-06T02:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "하루 새 나스닥 5.52%·반도체지수 12% 넘게 급락",
+     "title": "코스피 장중 8.76% 급락에 정부 긴급 회의…외환시장도 점검",
      "press": "tokenpost.kr",
-     "publishedAt": "2026-11-06T03:22:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/433843"
+     "publishedAt": "2026-11-06T03:12:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/433837"
     },
     {
-     "title": "뉴욕증시, AI 기술주 투매에 급락…머스크 관련주 ‘폭락’",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-06T03:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012288732?sid=104"
+     "title": "주가 폭락에 정부 긴급회의…\"증권사 신용융자 비율 3개월 면제\"",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-06T03:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000160568?sid=101"
     },
     {
-     "title": "코스피 6일 장 초반 8.6% 급락…미 반도체지수 5일 12.2% 하락",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-06T02:58:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/433827"
-    }
-   ]
-  },
-  {
-   "keyword": "김장",
-   "sources": [
-    "google"
-   ],
-   "articles90": 21,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-06T01:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "경기교통공사, 양주 재가장애인 가구에 김장김치 전달",
-     "press": "cnbnews.com",
-     "publishedAt": "2026-11-06T03:18:00.000Z",
-     "link": "https://www.cnbnews.com/news/articleView.html?idxno=1022635"
-    },
-    {
-     "title": "신덕면 지역사회보장협의체 「사랑의 김장나눔사업」펼쳐",
-     "press": "jeollailbo.com",
-     "publishedAt": "2026-11-06T02:56:00.000Z",
-     "link": "http://www.jeollailbo.com/news/articleView.html?idxno=815964"
-    },
-    {
-     "title": "\"김장 한 포기 더\"…송미령 장관, 배추 소비촉진 당부",
-     "press": "agrinet.co.kr",
-     "publishedAt": "2026-11-06T02:42:00.000Z",
-     "link": "https://www.agrinet.co.kr/news/articleView.html?idxno=408647"
-    }
-   ]
-  },
-  {
-   "keyword": "장동혁과 오세훈",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 47,
-   "recent20": 12,
-   "press": 10,
-   "firstArticleAt": "2026-11-06T01:59:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "예산정책협의회 입장하는 정점식-장동혁-오세훈",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-06T03:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014306080?sid=100"
-    },
-    {
-     "title": "예산정책협의회 입장하는 장동혁-오세훈",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-06T03:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014306078?sid=100"
-    },
-    {
-     "title": "오세훈, 한동훈 복당론에 \"당내 대다수의 공감대 형성이 전제돼야\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-06T03:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014306075?sid=100"
+     "title": "이형일 \"증권사 신용융자 담보비율 140% 유지의무 3개월간 면제\"(종합)",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-06T03:06:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443476"
     }
    ]
   },
   {
    "keyword": "농구 월드컵 예선 12인 확정",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-06T02:01:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-06T02:23:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -233,46 +138,20 @@
      "link": "https://m.sports.naver.com/basketball/article/139/0002255624"
     }
    ]
-  },
-  {
-   "keyword": "에너지",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-06T02:48:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "군포시 대한민국 솔라리그 기후에너지환경부장관상 수상",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-06T03:22:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3081714"
-    },
-    {
-     "title": "\"얇은 반도체 비틀어 적외선 빛을 지배한다\"…김정용 성균관대 에너지과...",
-     "press": "dailysmart.co.kr",
-     "publishedAt": "2026-11-06T03:04:00.000Z",
-     "link": "http://www.dailysmart.co.kr/news/articleView.html?idxno=132132"
-    },
-    {
-     "title": "전남광주, 일본 에너지기업 투자유치 공략…한일 협력 확대",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-06T02:49:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000080254"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1132,
-  "matched": 538,
-  "avgLeadMin": 492,
+  "flagged": 1134,
+  "matched": 539,
+  "avgLeadMin": 491,
   "recent": [
+   {
+    "keyword": "텍사스 데이터센터 건설 제동",
+    "hitKeyword": "텍사스 센터 중단 공언",
+    "hitAt": "2026-11-06T12:30:00+09:00",
+    "leadMin": 15
+   },
    {
     "keyword": "골프",
     "hitKeyword": "LIV 골프 사업 종료",
@@ -326,12 +205,6 @@
     "hitKeyword": "진쓰레블 사망",
     "hitAt": "2026-11-06T11:00:00+09:00",
     "leadMin": 146
-   },
-   {
-    "keyword": "도상우, 2월 결혼한다.",
-    "hitKeyword": "도상우 박지혜 결혼",
-    "hitAt": "2026-11-06T11:00:00+09:00",
-    "leadMin": 35
    }
   ]
  }
