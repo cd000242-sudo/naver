@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T04:35:48.663Z",
+ "builtAt": "2026-11-06T04:45:53.318Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,168 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
+ "measured": 20,
  "candidates": [
   {
    "keyword": "신용융자 담보비율 3개월 면제",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 46,
-   "recent20": 10,
+   "recent20": 12,
    "press": 46,
-   "firstArticleAt": "2026-11-06T03:06:00.000Z",
+   "firstArticleAt": "2026-11-06T03:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "당국 \"증권사의 신용융자 담보비율 140% 유지의무 3개월 면제\"",
-     "press": "efnews.co.kr",
-     "publishedAt": "2026-11-06T04:34:00.000Z",
-     "link": "http://www.efnews.co.kr/news/articleView.html?idxno=133797"
+     "title": "9일부터 증권사의 신용융자 담보비율 유지의무 석 달 면제",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-06T04:44:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/324438/?sc=Naver"
     },
     {
-     "title": "정부 신용융자 담보비율 3개월 면제",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-06T04:33:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000080269"
+     "title": "증시 변동성 확대에 증권사 담보비율 140% 유지 3개월 면제",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-06T04:44:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1422642"
     },
     {
-     "title": "미국발 AI 쇼크에 8% 폭락한 코스피…정부, 신용융자 담보비율 면제 등...",
-     "press": "pointe.co.kr",
-     "publishedAt": "2026-11-06T04:32:00.000Z",
-     "link": "https://www.pointe.co.kr/news/articleView.html?idxno=87289"
-    }
-   ]
-  },
-  {
-   "keyword": "신세계 이석구 사장 선임",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 17,
-   "recent20": 6,
-   "press": 17,
-   "firstArticleAt": "2026-11-06T03:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "신세계, 백화점부문장에 이석구 사장 선임…면세점 대표 겸직",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-06T04:32:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026110611293778025"
-    },
-    {
-     "title": "신세계그룹, 백화점부문장에 이석구 사장…감사 기능 강화",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-06T04:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001271909?sid=103"
-    },
-    {
-     "title": "신세계, 백화점부문장 이석구 사장 선임…경영 건전성 강화",
-     "press": "goodkyung.com",
-     "publishedAt": "2026-11-06T04:30:00.000Z",
-     "link": "https://www.goodkyung.com/news/articleView.html?idxno=293194"
+     "title": "정부, 신용융자 담보비율 유지의무 9일부터 3개월간 면제",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-06T04:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001038854?sid=101"
     }
    ]
   },
   {
    "keyword": "오르타 동티모르 대통령",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 42,
-   "recent20": 14,
-   "press": 13,
-   "firstArticleAt": "2026-11-06T03:06:00.000Z",
+   "articles90": 44,
+   "recent20": 27,
+   "press": 17,
+   "firstArticleAt": "2026-11-06T03:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한-동티모르, 치안·지식재산 협력 확대…초국가 범죄 공동 대응",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-06T04:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003483012?sid=100"
+     "title": "한·동티모르 정상 공동언론발표에서 발언하는 동티모르 대통령",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-06T04:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016426265?sid=100"
     },
     {
-     "title": "韓·동티모르, 외교협의체 신설…기후변화·개발협력 확대",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-06T04:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004679470?sid=100"
+     "title": "한·동티모르 정상 공동언론발표에서 발언하는 이재명 대통령",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-06T04:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016426266?sid=100"
     },
     {
-     "title": "한-동티모르 정상, 공동언론발표",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-06T04:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014306134?sid=100"
+     "title": "韓·동티모르, 치안·개발협력 강화...\"평화·민주주의 인연 미래 동행으...",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-06T04:42:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=561836"
     }
    ]
   },
   {
    "keyword": "가능한 사랑으로 이창동 감독의 작품",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 20,
-   "recent20": 5,
-   "press": 12,
+   "articles90": 24,
+   "recent20": 6,
+   "press": 14,
    "firstArticleAt": "2026-11-06T03:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'가능한 사랑' 어린 전도연, '아이즈원' 조유리였다…'오겜2·3' 이어 전...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-06T04:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000637502"
+     "title": "'가능한 사랑' 이창동 감독 \"전도연·설경구·조여정·조인성, 완벽한 앙...",
+     "press": "starnewsk.com",
+     "publishedAt": "2026-11-06T04:44:00.000Z",
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60764"
     },
     {
-     "title": "이창동 신작 '가능한 사랑', 넷플릭스 통해 11월 6일 전 세계 공개",
-     "press": "sisunnews.co.kr",
-     "publishedAt": "2026-11-06T04:28:00.000Z",
-     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249219"
+     "title": "'가능한 사랑' 이창동 \"韓 첫 수상 '영평상'...평론가들의 인정 감사\" [K...",
+     "press": "starnewsk.com",
+     "publishedAt": "2026-11-06T04:42:00.000Z",
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60763"
     },
     {
-     "title": "‘가능한 사랑’ 이창동 감독 “넷플릭스行 주저함 없었다..돈에 안쫓겨...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-06T04:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005635583"
-    }
-   ]
-  },
-  {
-   "keyword": "2026",
-   "sources": [
-    "google"
-   ],
-   "articles90": 16,
-   "recent20": 16,
-   "press": 11,
-   "firstArticleAt": "2026-11-06T04:28:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "2026 Women in Film",
-     "press": null,
-     "publishedAt": "2026-11-06T04:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/077/0007229199?sid=104"
-    },
-    {
-     "title": "크레버스 CMS영재관, 2026 한국주니어수학올림피아드서 424명 입상",
-     "press": "edu.donga.com",
-     "publishedAt": "2026-11-06T04:34:00.000Z",
-     "link": "https://edu.donga.com/news/articleView.html?idxno=113577"
-    },
-    {
-     "title": "충주시, 2026년산 공공비축미곡 건조벼 매입 본격",
-     "press": "ccreview.co.kr",
-     "publishedAt": "2026-11-06T04:34:00.000Z",
-     "link": "https://www.ccreview.co.kr/news/articleView.html?idxno=362024"
+     "title": "이창동 '가능한 사랑', 오늘 넷플릭스 공개…전도연·설경구 재회",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-06T04:38:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2645068"
     }
    ]
   },
@@ -179,43 +112,42 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 22,
-   "recent20": 2,
-   "press": 10,
+   "articles90": 25,
+   "recent20": 5,
+   "press": 13,
    "firstArticleAt": "2026-11-06T03:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이형일 부총리, 행복한백화점 찾아 중소기업·소상공인 격려",
-     "press": "sisunnews.co.kr",
-     "publishedAt": "2026-11-06T04:34:00.000Z",
-     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249220"
+     "title": "코리아 그랜드 페스티벌 나선 이형일 부총리 [포토]",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-06T04:44:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2645074"
     },
     {
-     "title": "이형일, 코리아 그랜드 페스티벌 현장 점검…“성장의 온기 골목상권까...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-06T04:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002719973?sid=101"
+     "title": "[포토] 코리아 그랜드페스티벌에서 프라이팬 구매하는 이형일 부총리",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-06T04:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005351132?sid=101"
     },
     {
-     "title": "이형일 \"성장 온기 골목상권으로 확산돼야\"…코그페 현장 방문",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-06T03:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014306097?sid=101"
+     "title": "[포토]2026 코리아 그랜드 페스티벌 점검하는 이형일 경제부총리",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-06T04:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006405058?sid=101"
     }
    ]
   },
   {
    "keyword": "발언하는 오세훈 서울시장",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 17,
+   "articles90": 9,
    "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-06T03:07:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-06T03:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -240,42 +172,73 @@
    ]
   },
   {
-   "keyword": "연천군",
+   "keyword": "내년 일자리 예산",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-06T03:06:00.000Z",
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-06T03:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "대한전문건설협회 경기도회, 한마음 걷기대회 계기로 연천군에 500만원...",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-06T04:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000130893?sid=102"
+     "title": "국힘 이소희, 李 정부 청년 예산안에 \"우리끼리 인건비 예산인가\"",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-06T04:38:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=172073"
     },
     {
-     "title": "연천군, AI 대응 재난안전대책본부 가동…24시간 방역체계 강화",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-06T04:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000130892?sid=102"
+     "title": "경기도의회, 행정사무감사 착수…민생경제·예산 집행 검증",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-06T04:20:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2015423"
     },
     {
-     "title": "연천군, 조류인플루엔자 확산 차단 총력…재난안전대책본부 가동",
-     "press": "kihoilbo.co.kr",
-     "publishedAt": "2026-11-06T03:06:00.000Z",
-     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3040074"
+     "title": "발달장애인 작가 은혜의 눈물… '권리중심 공공일자리' 예산 삭감의 이...",
+     "press": "thescoop.co.kr",
+     "publishedAt": "2026-11-06T03:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/665/0000008505?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "2026 소상공인의 날 행사",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-06T03:23:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "소상공인의 날 행사에서 만나는 아기자기 소품들",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-06T04:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016426175?sid=102"
+    },
+    {
+     "title": "2026 서울시 소상공인의 날 기념행사 열려",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-06T04:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016426173?sid=102"
+    },
+    {
+     "title": "양평군 '소상공인의 날' 기념식 개최",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-06T04:00:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3744330"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1145,
+  "flagged": 1146,
   "matched": 545,
   "avgLeadMin": 503,
   "recent": [
