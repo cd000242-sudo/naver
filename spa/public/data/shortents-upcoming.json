@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T04:55:56.939Z",
+ "builtAt": "2026-11-06T05:06:00.251Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,195 +11,100 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "신용융자 담보비율 3개월 면제",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 45,
-   "recent20": 10,
-   "press": 45,
-   "firstArticleAt": "2026-11-06T03:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "증시 급락에 정부 긴급 대응…신용융자 담보비율 140% 의무 3개월 면제",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-06T04:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002393526?sid=101"
-    },
-    {
-     "title": "당국 \"증권사 신용융자 담보비율 140% 유지 의무 3개월 면제\"",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-06T04:52:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=756305"
-    },
-    {
-     "title": "‘블루 쓰나미’ 악재에 F4 회의 긴급 소집···신용융자 담보유지 의무...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-06T04:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003481116?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "오르타 동티모르 대통령",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 58,
-   "recent20": 33,
-   "press": 22,
-   "firstArticleAt": "2026-11-06T03:27:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한·동티모르 정상회담…개발협력 확대·치안 공조 강화 합의",
-     "press": "newswhoplus.com",
-     "publishedAt": "2026-11-06T04:54:00.000Z",
-     "link": "https://www.newswhoplus.com/news/articleView.html?idxno=73684"
-    },
-    {
-     "title": "韓-동티모르, 치안·지식재산 등 협력 확대키로",
-     "press": "idaegu.co.kr",
-     "publishedAt": "2026-11-06T04:52:00.000Z",
-     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=564616"
-    },
-    {
-     "title": "李, 동티모르와 외교부 정례협의체 신설…지식재산·치안 협력 확대",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-06T04:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006405062?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "가능한 사랑으로 이창동 감독의 작품",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 26,
-   "recent20": 6,
-   "press": 14,
-   "firstArticleAt": "2026-11-06T03:27:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'가능한 사랑' 이창동 감독 \"AI 시대, 노동 가치와 인간 존엄성을 묻다...",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-06T04:52:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60766"
-    },
-    {
-     "title": "이창동 감독 “‘기생충’ 같은 대성공, 또 나오기 어렵다”(가능한 사...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-06T04:49:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001185052"
-    },
-    {
-     "title": "'가능한 사랑' 이창동 감독 \"전도연·설경구·조여정·조인성, 완벽한 앙...",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-06T04:44:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60764"
-    }
-   ]
-  },
-  {
-   "keyword": "이형일 부총리 페스티벌 점검",
+   "keyword": "신용융자 담보비율 면제",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 25,
-   "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-06T03:30:00.000Z",
+   "articles90": 44,
+   "recent20": 8,
+   "press": 43,
+   "firstArticleAt": "2026-11-06T03:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "코리아 그랜드 페스티벌 현장점검 나선 이형일 부총리 [포토]",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-06T04:44:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2645074"
+     "title": "정부, 증시 폭락에 반대매매 급증 차단…신용융자 담보비율 의무 3개월...",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-06T05:04:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5080563"
     },
     {
-     "title": "[포토] 코리아 그랜드페스티벌에서 프라이팬 구매하는 이형일 부총리",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-06T04:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005351132?sid=101"
+     "title": "코스피 5000선 붕괴에 정부 긴급조치...신용융자 담보규제 3개월 면제",
+     "press": "wikileaks-kr.org",
+     "publishedAt": "2026-11-06T05:02:00.000Z",
+     "link": "https://www.wikileaks-kr.org/news/articleView.html?idxno=194307"
     },
     {
-     "title": "[포토]2026 코리아 그랜드 페스티벌 점검하는 이형일 경제부총리",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-06T04:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006405058?sid=101"
+     "title": "금융당국 '코스피 폭탄돌리기' 시작됐다 … '담보비율 140%' 면제, '도미...",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-06T05:02:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/06/2026110600180.html"
     }
    ]
   },
   {
    "keyword": "장동혁 국민의힘 대표",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 26,
+   "articles90": 20,
    "recent20": 5,
-   "press": 12,
-   "firstArticleAt": "2026-11-06T03:26:00.000Z",
+   "press": 14,
+   "firstArticleAt": "2026-11-06T03:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[포토] 예산정책협의회 발언하는 장동혁",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-06T04:50:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3446536"
+     "title": "국민의힘 “정부 생색내기식 기금 조성 막아야…서울 국비 지원 예산 반...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-06T05:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012288780?sid=100"
     },
     {
-     "title": "오세훈, 국힘과 국회서 대여협공…장동혁, 재정 칭찬하며 \"한팀\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-06T04:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016426310?sid=102"
+     "title": "\"김민석·장동혁 누가 더 잘하나\" 질문에…\"둘 다 못해\" 30.7%",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-06T05:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000649429?sid=100"
     },
     {
-     "title": "[포토] 국민의힘-서울특별시 예산정책협의회",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-06T04:40:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3446533"
+     "title": "장동혁 \"국민의힘과 서울시는 한 팀\" 오세훈 \"적극적 협력 부탁\" [뉴시스...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-06T04:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014306268?sid=100"
     }
    ]
   },
   {
-   "keyword": "발언하는 오세훈 서울시장",
+   "keyword": "긴급 시장상황점검회의",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-06T03:27:00.000Z",
+   "articles90": 10,
+   "recent20": 4,
+   "press": 10,
+   "firstArticleAt": "2026-11-06T03:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[포토] 예산정책협의회 발언하는 오세훈 서울시장",
-     "press": "newscj.com",
+     "title": "코스피 5000선 붕괴에 정부 긴급조치...신용융자 담보규제 3개월 면제",
+     "press": "wikileaks-kr.org",
+     "publishedAt": "2026-11-06T05:02:00.000Z",
+     "link": "https://www.wikileaks-kr.org/news/articleView.html?idxno=194307"
+    },
+    {
+     "title": "증시 급락에 정부 긴급 대응…“신용융자 담보비율 의무 3개월 면제”",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-06T04:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003483024?sid=101"
+    },
+    {
+     "title": "증시 급락에 정부 긴급 대응…신용융자 담보비율 140% 의무 3개월 면제",
+     "press": "joseilbo.com",
      "publishedAt": "2026-11-06T04:54:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3446542"
-    },
-    {
-     "title": "[포토] 예산정책협의회 발언하는 오세훈",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-06T04:52:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3446539"
-    },
-    {
-     "title": "[포토] 오세훈 시장 '국민의힘-서울시 예산정책협의회 발언'",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-06T04:30:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261106010002498"
+     "link": "https://n.news.naver.com/mnews/article/123/0002393526?sid=101"
     }
    ]
   },
@@ -209,12 +114,18 @@
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-06T03:32:00.000Z",
+   "firstArticleAt": "2026-11-06T04:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "내년 일자리 예산 25.1조···청년 첫 취업·AI 등 첨단 분야 직업훈련...",
+     "press": "smartbizn.com",
+     "publishedAt": "2026-11-06T05:04:00.000Z",
+     "link": "https://www.smartbizn.com/news/articleView.html?idxno=158684"
+    },
     {
      "title": "김영훈 장관 \"반도체 성장 온기 청년까지 못 닿아\"…일자리 대책 마련 ...",
      "press": "joongangenews.com",
@@ -226,22 +137,28 @@
      "press": "iminju.net",
      "publishedAt": "2026-11-06T04:38:00.000Z",
      "link": "http://www.iminju.net/news/articleView.html?idxno=172073"
-    },
-    {
-     "title": "경기도의회, 행정사무감사 착수…민생경제·예산 집행 검증",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-06T04:20:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2015423"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1146,
-  "matched": 545,
-  "avgLeadMin": 503,
+  "flagged": 1147,
+  "matched": 547,
+  "avgLeadMin": 502,
   "recent": [
+   {
+    "keyword": "재혼 황후 논란",
+    "hitKeyword": "재혼 황후 드라마",
+    "hitAt": "2026-11-06T14:00:00+09:00",
+    "leadMin": 316
+   },
+   {
+    "keyword": "그리 결혼 준비",
+    "hitKeyword": "그리 결혼 준비 발표",
+    "hitAt": "2026-11-06T14:00:00+09:00",
+    "leadMin": 105
+   },
    {
     "keyword": "하이닉스 주가 하락",
     "hitKeyword": "삼성전자 하이닉스 급락",
@@ -289,18 +206,6 @@
     "hitKeyword": "LIV 골프 사업 종료",
     "hitAt": "2026-11-06T12:00:00+09:00",
     "leadMin": 2726
-   },
-   {
-    "keyword": "LIV 골프, 5년 만에 종료",
-    "hitKeyword": "LIV 골프 사업 종료",
-    "hitAt": "2026-11-06T12:00:00+09:00",
-    "leadMin": 156
-   },
-   {
-    "keyword": "나나, 탑과 열애 비난에 심경 고백",
-    "hitKeyword": "나나 심경 토로",
-    "hitAt": "2026-11-06T12:00:00+09:00",
-    "leadMin": 136
    }
   ]
  }
