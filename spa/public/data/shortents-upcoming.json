@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T00:34:03.839Z",
+ "builtAt": "2026-11-06T00:44:09.877Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,84 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 10,
  "candidates": [
   {
-   "keyword": "서킷브레이커",
-   "sources": [
-    "google"
-   ],
-   "articles90": 52,
-   "recent20": 52,
-   "press": 43,
-   "firstArticleAt": "2026-11-06T00:18:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "코스피 5000선 붕괴·서킷브레이커…코스닥도 매도 사이드카[개장시황]",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-06T00:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009273729?sid=101"
-    },
-    {
-     "title": "코스피, 장 초반 8%대 급락…‘5천’선 붕괴에 서킷브레이커 발동",
-     "press": "ceoscoredaily.com",
-     "publishedAt": "2026-11-06T00:32:00.000Z",
-     "link": "https://www.ceoscoredaily.com/page/view/2026110609292356313"
-    },
-    {
-     "title": "코스피, 美 삭풍에 8%대↓ 5천피 붕괴…서킷브레이커 발동",
-     "press": "seouleconews.com",
-     "publishedAt": "2026-11-06T00:32:00.000Z",
-     "link": "http://www.seouleconews.com/news/articleView.html?idxno=94826"
-    }
-   ]
-  },
-  {
-   "keyword": "뉴욕증시 급락",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 33,
-   "recent20": 19,
-   "press": 28,
-   "firstArticleAt": "2026-11-05T23:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "코스피, 장 초반 8%대 급락…‘5천’선 붕괴에 서킷브레이커 발동",
-     "press": "ceoscoredaily.com",
-     "publishedAt": "2026-11-06T00:32:00.000Z",
-     "link": "https://www.ceoscoredaily.com/page/view/2026110609292356313"
-    },
-    {
-     "title": "코스피, 5000선 붕괴…삼전닉스 동반 급락",
-     "press": "news.mtn.co.kr",
-     "publishedAt": "2026-11-06T00:32:00.000Z",
-     "link": "https://news.mtn.co.kr/article/2026110609314696357"
-    },
-    {
-     "title": "美반도체 12% 급락 여파…코스피 서킷브레이커, 아시아 동반 폭락",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-06T00:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006404781?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "국동호 학폭 주장 변호사 송치",
+   "keyword": "변호사 학폭 주장 송치",
    "sources": [
     "nate"
    ],
-   "articles90": 21,
-   "recent20": 6,
-   "press": 20,
+   "articles90": 22,
+   "recent20": 4,
+   "press": 21,
    "firstArticleAt": "2026-11-05T23:18:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "국동호 '학폭 의혹' 제기한 현직 변호사, 명예훼손·강요미수 혐의 송치...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-06T00:42:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001407327"
+    },
     {
      "title": "[공식] '솔로지옥4' 국동호 측, 학폭 의혹 제기 변호사 송치 알렸다…\"허...",
      "press": "xportsnews.com",
@@ -97,12 +39,6 @@
      "press": "dailian.co.kr",
      "publishedAt": "2026-11-06T00:28:00.000Z",
      "link": "https://m.entertain.naver.com/article/119/0003152045"
-    },
-    {
-     "title": "\"'솔로지옥4' 국동호 학폭 주장 변호사 송치…의혹 사실과 달라\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-06T00:26:00.000Z",
-     "link": "https://m.entertain.naver.com/article/079/0004207096"
     }
    ]
   },
@@ -121,9 +57,9 @@
    "samples": [
     {
      "title": "LIV 골프, 출범 5년 만에 역사 속으로…\"사업 종료\"",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-06T00:20:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4117016"
+     "press": "kbsm.net",
+     "publishedAt": "2026-11-06T00:40:00.000Z",
+     "link": "https://www.kbsm.net/news/view.php?idx=540639"
     },
     {
      "title": "LIV 골프, 출범 5년 만에 역사 속으로…\"사업 종료\"(종합)",
@@ -140,49 +76,23 @@
    ]
   },
   {
-   "keyword": "치매",
-   "sources": [
-    "google"
-   ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 8,
-   "firstArticleAt": "2026-11-05T23:11:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "알츠하이머병과 혼동하기 쉬운 '루이소체 치매'…환각·수면장애가 초기...",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-06T00:28:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=623376"
-    },
-    {
-     "title": "최정원, 치매로 떠난 父 그리움에 눈물…\"기억 못 해도 곁에 계셨으면\"...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-06T00:18:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000487013"
-    },
-    {
-     "title": "치매 환자 기억 되살리는 AI 인형…제주대 학생들 장관상",
-     "press": "newsjeju.net",
-     "publishedAt": "2026-11-06T00:18:00.000Z",
-     "link": "https://www.newsjeju.net/news/articleView.html?idxno=428017"
-    }
-   ]
-  },
-  {
-   "keyword": "조작기소 주진우 의원",
+   "keyword": "주진우 의원 필리버스터",
    "sources": [
     "nate"
    ],
-   "articles90": 24,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-05T23:07:00.000Z",
+   "articles90": 21,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-05T23:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'조작기소 특검법' 필리버스터‥본회의 통과 초읽기",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-06T00:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533882?sid=100"
+    },
     {
      "title": "조작기소 특검법안 필리버스터 이어가는 주진우 의원",
      "press": "newspim.com",
@@ -190,123 +100,52 @@
      "link": "https://www.newspim.com/news/view/20261106000237"
     },
     {
-     "title": "무제한 토론 이어가는 주진우 국민의힘 의원",
+     "title": "본회의 무제한 토론 이어가는 주진우 의원",
      "press": "newspim.com",
      "publishedAt": "2026-11-06T00:11:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261106000233"
-    },
-    {
-     "title": "무제한 토론하는 주진우 국민의힘 의원",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-06T00:11:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261106000236"
+     "link": "https://www.newspim.com/news/view/20261106000235"
     }
    ]
   },
   {
-   "keyword": "진쓰레블",
+   "keyword": "이형일 부총리 대외경제장관회의 참석",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-05T23:15:00.000Z",
+   "articles90": 15,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-05T23:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "진쓰레블, 볼리비아서 향년 33세로 사망…가해자는 체포해 조사중",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-06T00:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000783224"
-    },
-    {
-     "title": "“비난·악플 자제해 달라”…故 진쓰레블 친형, 동생 마지막 여정 위해...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-06T00:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001278619"
-    },
-    {
-     "title": "故 진쓰레블, 볼리비아서 뺑소니 참변…유족 \"추측·악플 삼가 달라\"→...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-06T00:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001407324"
-    }
-   ]
-  },
-  {
-   "keyword": "케인, 뮌헨과 2029년까지 재계약!",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-05T23:07:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "손흥민과 헤어진 후 더 잘됐다…케인, 발롱도르+우승컵에 역대 최고 연...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-06T00:33:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/445/0000487024"
-    },
-    {
-     "title": "발롱도르 수상 케인, 뮌헨과 2029년까지 계약…“더 많은 트로피 원한다...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-06T00:00:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/028/0002830983"
-    },
-    {
-     "title": "사실상 바이에른 뮌헨서 은퇴? ‘발롱도르’ 케인, 2029년까지 재계약 ...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-05T23:44:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/468/0001278610"
-    }
-   ]
-  },
-  {
-   "keyword": "하이닉스 주가",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T23:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "폭락한 SK하이닉스 주가",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-06T00:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009273708?sid=101"
-    },
-    {
-     "title": "폭락한 삼성전자·SK하이닉스 주가",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-06T00:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009273706?sid=101"
-    },
-    {
-     "title": "한화투자증권 \"외국인 매도 압력 완화…삼성전자·SK하이닉스 주목\"",
-     "press": "srtimes.kr",
+     "title": "이형일 부총리 “증시 과도한 변동성 선제 대응...필요한 조치 적기 시...",
+     "press": "m-economynews.com",
      "publishedAt": "2026-11-06T00:10:00.000Z",
-     "link": "http://www.srtimes.kr/news/articleView.html?idxno=216877"
+     "link": "https://www.m-economynews.com/news/article.html?no=72673"
+    },
+    {
+     "title": "이형일 \"美 증시 급락, 글로벌 파급 배제 못해…과잉반응 선제 차단\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-06T00:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009273596?sid=101"
+    },
+    {
+     "title": "제276차 대외경제장관회의 참석한 이형일 부총리",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-05T23:52:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261106000175"
     }
    ]
   },
   {
    "keyword": "재혼 황후 논란",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-05T23:19:00.000Z",
    "exclusive": false,
@@ -333,42 +172,41 @@
    ]
   },
   {
-   "keyword": "이형일 부총리 대외경제장관회의 참석",
+   "keyword": "나나, 탑과 열애 비난에 심경 고백",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T23:19:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-06T00:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이형일 부총리 “증시 과도한 변동성 선제 대응...필요한 조치 적기 시...",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-06T00:10:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=72673"
+     "title": "나나 \"탑과 공개열애 나의 삶, 미안해 할 일 아냐\" 악플러에 일침",
+     "press": "joynews24.com",
+     "publishedAt": "2026-11-06T00:42:00.000Z",
+     "link": "http://www.joynews24.com/view/2023309"
     },
     {
-     "title": "이형일 \"美 증시 급락, 글로벌 파급 배제 못해…과잉반응 선제 차단\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-06T00:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009273596?sid=101"
+     "title": "‘탑♥’ 나나 “공개 열애? 내 사생활, 무슨 큰 잘못을 했나” 악플에...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-06T00:23:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001146422"
     },
     {
-     "title": "인사하는 이형일 부총리 겸 재정경제부 장관",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-05T23:52:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261106000174"
+     "title": "나나, 탑과 열애 후 쏟아진 악플에 결국 심경 고백 \"공개 열애 미안할 부...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-06T00:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000637451"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1095,
+  "flagged": 1097,
   "matched": 521,
   "avgLeadMin": 483,
   "recent": [
