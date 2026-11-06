@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T06:46:46.070Z",
+ "builtAt": "2026-11-06T06:56:49.370Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 39,
-   "recent20": 4,
-   "press": 39,
-   "firstArticleAt": "2026-11-06T05:18:00.000Z",
+   "articles90": 31,
+   "recent20": 5,
+   "press": 31,
+   "firstArticleAt": "2026-11-06T05:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "쿠팡 과징금 엇갈린 결정…2천억은 멈추고 4천억은 유지",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-06T06:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000542199?sid=101"
+     "title": "쿠팡 2011억원 과징금 집행 일단 멈췄다…법원 효력정지 결정",
+     "press": "thefirstmedia.net",
+     "publishedAt": "2026-11-06T06:54:00.000Z",
+     "link": "http://www.thefirstmedia.net/news/articleView.html?idxno=212891"
     },
     {
-     "title": "쿠팡, 개인정보 과징금 2011억원 집행정지… 4236억원은 효력 유지",
-     "press": "biztribune.co.kr",
-     "publishedAt": "2026-11-06T06:34:00.000Z",
-     "link": "http://www.biztribune.co.kr/news/articleView.html?idxno=362083"
+     "title": "쿠팡, 개인정보 유출 과징금 4235억 집행정지 '불발'",
+     "press": "safetimes.co.kr",
+     "publishedAt": "2026-11-06T06:50:00.000Z",
+     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247272"
     },
     {
-     "title": "쿠팡 2000억대 과징금 효력정지 인용...앞서 4000억원은 '기각'",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-06T06:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005600597?sid=102"
+     "title": "법원, 쿠팡 6200억원 과징금 중 4200억원만 집행 허용...이유 알아보니",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-06T06:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005437720?sid=101"
     }
    ]
   },
@@ -48,30 +48,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 24,
-   "recent20": 2,
-   "press": 22,
-   "firstArticleAt": "2026-11-06T05:18:00.000Z",
+   "articles90": 23,
+   "recent20": 3,
+   "press": 21,
+   "firstArticleAt": "2026-11-06T05:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘DJ 노벨평화상 추천’ 동티모르 대통령 “韓 빛의 혁명, 노벨상 추천...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-06T06:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003696639?sid=100"
+    },
+    {
+     "title": "[한·동티모르 정상회담] 재건 지원 신뢰, 아세안 공조로 확대",
+     "press": "sisaweek.com",
+     "publishedAt": "2026-11-06T06:52:00.000Z",
+     "link": "https://www.sisaweek.com/news/articleView.html?idxno=238832"
+    },
     {
      "title": "李, 동티모르와 지재권·기후협력 확대…2029년 아세안 공조",
      "press": "daily.hankooki.com",
      "publishedAt": "2026-11-06T06:38:00.000Z",
      "link": "https://daily.hankooki.com/news/articleView.html?idxno=1422591"
-    },
-    {
-     "title": "이 대통령, 동티모르와 치안·개발협력 확대...정례협의체 신설도",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-06T06:32:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1135796"
-    },
-    {
-     "title": "한-동티모르 공동언론발표 \"미래지향적 실질 협력 확대\"",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-06T06:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002393539?sid=100"
     }
    ]
   },
@@ -81,30 +81,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 21,
-   "recent20": 0,
-   "press": 19,
-   "firstArticleAt": "2026-11-06T05:19:00.000Z",
+   "articles90": 16,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-06T05:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김종철 경찰청장 후보자 \"이상동기·관계성 범죄 대응 최우선\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-06T06:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005437726?sid=102"
+    },
+    {
+     "title": "[속보] 국가경찰위, 김종철 경찰청장 후보자 임명제청 동의",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-06T06:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005600619?sid=102"
+    },
     {
      "title": "김종철 경찰청장 후보자 \"막중한 책임감\"… 국가경찰위 검증 착수",
      "press": "jeonmae.co.kr",
      "publishedAt": "2026-11-06T06:16:00.000Z",
      "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1309303"
-    },
-    {
-     "title": "김종철 대행, 신임 경찰청장 후보자로 지명…23개월 지휘부 공백 끝나나...",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-06T06:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000160577?sid=102"
-    },
-    {
-     "title": "23개월 공백 끝나나…새 경찰청장에 김종철 지명",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-06T06:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000923531?sid=102"
     }
    ]
   },
@@ -114,63 +114,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 13,
-   "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-06T05:20:00.000Z",
+   "articles90": 12,
+   "recent20": 4,
+   "press": 12,
+   "firstArticleAt": "2026-11-06T05:34:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "\"AI로 조진웅 교체까지 시도\"…결국 원본 그대로 공개되는 '시그널2'",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-06T06:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005600622?sid=103"
+    },
+    {
+     "title": "tvN, 조진웅 논란 딛고 '두번째 시그널' 12월 7일 첫 방송 확정",
+     "press": "dailysportshankook.co.kr",
+     "publishedAt": "2026-11-06T06:48:00.000Z",
+     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435242"
+    },
     {
      "title": "시그널2 방영일…12월 일정 확정",
      "press": "bntnews.co.kr",
      "publishedAt": "2026-11-06T06:42:00.000Z",
      "link": "https://www.bntnews.co.kr/article/view/bnt202611060248"
-    },
-    {
-     "title": "'시그널2', 12월 7일 방영 확정 \"조진웅 옹호 아냐…스태프 위해\"",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-06T06:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/629/0000549537"
-    },
-    {
-     "title": "'두번째 시그널' 12월 7일 첫 방송…조진웅 AI 교체 왜 못했나?",
-     "press": "mhns.co.kr",
-     "publishedAt": "2026-11-06T06:36:00.000Z",
-     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=767990"
-    }
-   ]
-  },
-  {
-   "keyword": "엘니뇨",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-06T05:19:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "올겨울 역대급 엘니뇨 온다...평년보다 따뜻하고 비 많이 내릴 듯",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-06T06:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003152239?sid=103"
-    },
-    {
-     "title": "올겨울 '역대 최강' 엘니뇨…12월 최성기, 기온 높고 비 많을 듯",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-06T06:00:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=314799"
-    },
-    {
-     "title": "역대 최강 엘니뇨 올겨울 지속, 12월 최성기",
-     "press": "thereport.co.kr",
-     "publishedAt": "2026-11-06T05:48:00.000Z",
-     "link": "https://www.thereport.co.kr/news/articleView.html?idxno=93119"
     }
    ]
   },
@@ -179,13 +146,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 5,
    "recent20": 1,
-   "press": 4,
+   "press": 5,
    "firstArticleAt": "2026-11-06T05:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "코스피 급락에 긴급 대응…당국 \"신용융자 담보비율 의무 석 달 면제\"",
+     "press": "whitepaper.co.kr",
+     "publishedAt": "2026-11-06T06:50:00.000Z",
+     "link": "http://www.whitepaper.co.kr/news/articleView.html?idxno=268529"
+    },
     {
      "title": "'급한대로' 증권사 규제부터 푼다...코스피 급락에 긴급 대책회의 [자막...",
      "press": "ytn.co.kr",
@@ -197,12 +170,39 @@
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-06T06:16:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/214/0001533954?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "엘니뇨",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-06T05:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "5월 발생한 엘니뇨, 12월 역대 가장 강해진다",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-06T06:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000549551?sid=103"
     },
     {
-     "title": "'반대매매 차단' 긴급 처방…\"신용융자 담보비율 유지의무 3개월 면제\"",
-     "press": "newsfc.co.kr",
+     "title": "올겨울 역대급 엘니뇨 온다...평년보다 따뜻하고 비 많이 내릴 듯",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-06T06:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003152239?sid=103"
+    },
+    {
+     "title": "올겨울 '역대 최강' 엘니뇨…12월 최성기, 기온 높고 비 많을 듯",
+     "press": "straightnews.co.kr",
      "publishedAt": "2026-11-06T06:00:00.000Z",
-     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82289"
+     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=314799"
     }
    ]
   }
