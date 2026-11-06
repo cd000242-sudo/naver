@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T06:06:23.962Z",
+ "builtAt": "2026-11-06T06:16:30.118Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,30 +16,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 45,
-   "recent20": 6,
-   "press": 35,
-   "firstArticleAt": "2026-11-06T04:39:00.000Z",
+   "articles90": 35,
+   "recent20": 4,
+   "press": 31,
+   "firstArticleAt": "2026-11-06T04:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이재명 대통령, 동티모르와 미래 협력 확대 [한강로 사진관]",
+     "title": "“아시아 민주주의 시간은 한국과 동티모르서 시작된다”… 李, 동티모...",
      "press": "segye.com",
-     "publishedAt": "2026-11-06T06:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004173100?sid=100"
+     "publishedAt": "2026-11-06T06:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004173102?sid=100"
     },
     {
-     "title": "김대중 ‘노벨상’ 추천했던 동티모르 대통령, 이번엔 “‘빛의 혁명’...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-06T05:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002831047?sid=100"
+     "title": "李대통령 \"韓-동티모르, 평화·민주주의 인연으로 미래 동행\"",
+     "press": "seouleconews.com",
+     "publishedAt": "2026-11-06T06:14:00.000Z",
+     "link": "http://www.seouleconews.com/news/articleView.html?idxno=94856"
     },
     {
-     "title": "한-동티모르 정상회담 \"평화·민주주의로 맺은 인연, 미래 동행으로\"",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-06T05:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002534899?sid=100"
+     "title": "李 \"동티모르와 협력 확대…든든한 동반자 될 것\"",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-06T06:06:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2015539"
     }
    ]
   },
@@ -48,30 +48,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 36,
+   "articles90": 28,
    "recent20": 2,
-   "press": 33,
-   "firstArticleAt": "2026-11-06T04:38:00.000Z",
+   "press": 26,
+   "firstArticleAt": "2026-11-06T04:48:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "[공식] '소년범 은퇴' 조진웅 옹호하는 의미 NO..'시그널2' 12월 7일 월화...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-06T06:15:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004463915"
+    },
+    {
+     "title": "'두번째 시그널', 조진웅 품고 편성 확정…'승산' 날린 이제훈에겐 희소...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-06T06:12:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002077461"
+    },
     {
      "title": "tvN ‘시그널2’ 12월 7일 편성 확정…“조진웅 AI 대체 어려워”",
      "press": "biz.heraldcorp.com",
      "publishedAt": "2026-11-06T05:55:00.000Z",
      "link": "https://m.entertain.naver.com/article/016/0002720016"
-    },
-    {
-     "title": "'두번째 시그널', 결국 조진웅 안고 간다…시청자 반응은 숙제 [ST이슈]",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-06T05:54:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109769543658"
-    },
-    {
-     "title": "조진웅 은퇴작 '시그널2', 12월 7일 방영일 확정…tvN \"한 사람만의 작품...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-06T05:44:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000487114"
     }
    ]
   },
@@ -81,12 +81,18 @@
     "signal.bz"
    ],
    "articles90": 15,
-   "recent20": 3,
+   "recent20": 4,
    "press": 14,
-   "firstArticleAt": "2026-11-06T04:45:00.000Z",
+   "firstArticleAt": "2026-11-06T04:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[속보] 배우 김수현, 11일 ‘가세연’ 김세의 명예훼손 재판 증인 출석",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-06T06:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003696606?sid=102"
+    },
     {
      "title": "김수현, 법정서 '가세연' 김세의 만난다.. 명예훼손 재판 증인 출석",
      "press": "fnnews.com",
@@ -98,12 +104,6 @@
      "press": "hankyung.com",
      "publishedAt": "2026-11-06T06:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/015/0005351171?sid=102"
-    },
-    {
-     "title": "김수현, 법정서 김세의 만난다…11일 증인 출석",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-06T05:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000327005"
     }
    ]
   },
@@ -112,24 +112,24 @@
    "sources": [
     "nate"
    ],
-   "articles90": 17,
+   "articles90": 13,
    "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-06T04:38:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-06T04:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "'가능한 사랑' 이창동 \"아카데미 수상? '기생충' 착시…여전히 힘들다\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-06T06:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009274576"
-    },
     {
      "title": "[인터뷰①] '가능한 사랑' 이창동 감독 \"정체성 없는 AI…노동 자체가 경...",
      "press": "maxmovie.com",
      "publishedAt": "2026-11-06T06:02:00.000Z",
      "link": "https://www.maxmovie.com/news/articleView.html?idxno=502828"
+    },
+    {
+     "title": "'가능한 사랑' 이창동 \"아카데미 수상? '기생충' 착시…여전히 힘들다\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-06T06:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009274576"
     },
     {
      "title": "'가능한 사랑' 이창동 감독 \"느린 영화…인내심 갖고 봐주길\" [MD인터뷰...",
@@ -140,50 +140,23 @@
    ]
   },
   {
-   "keyword": "엘니뇨",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-06T04:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "올겨울 '역대 최강' 엘니뇨…12월 최성기, 기온 높고 비 많을 듯",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-06T06:00:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=314799"
-    },
-    {
-     "title": "역대 최강 엘니뇨 올겨울 지속, 12월 최성기",
-     "press": "thereport.co.kr",
-     "publishedAt": "2026-11-06T05:48:00.000Z",
-     "link": "https://www.thereport.co.kr/news/articleView.html?idxno=93119"
-    },
-    {
-     "title": "역대 가장 강한 엘니뇨 발생 전망…올겨울 기온 높고 강수량 많을 듯",
-     "press": "newscammp.co.kr",
-     "publishedAt": "2026-11-06T05:20:00.000Z",
-     "link": "https://www.newscammp.co.kr/news/articleView.html?idxno=7214"
-    }
-   ]
-  },
-  {
    "keyword": "긴급 시장상황점검회의",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-06T04:38:00.000Z",
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-06T04:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'반대매매 차단' 긴급 처방…\"신용융자 담보비율 유지의무 3개월 면제\"",
+     "press": "newsfc.co.kr",
+     "publishedAt": "2026-11-06T06:00:00.000Z",
+     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82289"
+    },
     {
      "title": "증시 이틀째 급락에 정부 긴급 처방…신용융자 담보비율 140% 의무 면제",
      "press": "thepowernews.co.kr",
@@ -195,12 +168,39 @@
      "press": "newsprime.co.kr",
      "publishedAt": "2026-11-06T05:10:00.000Z",
      "link": "http://www.newsprime.co.kr/news/article.html?no=753994"
+    }
+   ]
+  },
+  {
+   "keyword": "엘니뇨",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-06T05:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "올겨울 역대급 엘니뇨 온다...평년보다 따뜻하고 비 많이 내릴 듯",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-06T06:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003152239?sid=103"
     },
     {
-     "title": "증권사 담보비율 유지 의무 3개월 면제…하락장에 긴급 대응",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-06T05:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001163489?sid=101"
+     "title": "올겨울 '역대 최강' 엘니뇨…12월 최성기, 기온 높고 비 많을 듯",
+     "press": "straightnews.co.kr",
+     "publishedAt": "2026-11-06T06:00:00.000Z",
+     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=314799"
+    },
+    {
+     "title": "역대 최강 엘니뇨 올겨울 지속, 12월 최성기",
+     "press": "thereport.co.kr",
+     "publishedAt": "2026-11-06T05:48:00.000Z",
+     "link": "https://www.thereport.co.kr/news/articleView.html?idxno=93119"
     }
    ]
   },
@@ -209,10 +209,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-06T04:38:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-06T05:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
