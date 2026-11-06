@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T04:05:35.949Z",
+ "builtAt": "2026-11-06T04:15:40.089Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 17,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "증시 급락 신용융자 면제",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 61,
-   "recent20": 9,
+   "articles90": 59,
+   "recent20": 8,
    "press": 55,
-   "firstArticleAt": "2026-11-06T02:41:00.000Z",
+   "firstArticleAt": "2026-11-06T02:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "증시 급락…정부 \"증권사 신용융자 담보비율 유지의무 3개월간 면제\"",
-     "press": "fntimes.com",
-     "publishedAt": "2026-11-06T04:04:00.000Z",
-     "link": "https://www.fntimes.com/html/view.php?ud=202611061259399190179ad43907_18"
+     "title": "정부, 증시 급락에 점검회의…신용융자 담보비율 의무 3개월간 면제",
+     "press": "news.mtn.co.kr",
+     "publishedAt": "2026-11-06T04:10:00.000Z",
+     "link": "https://news.mtn.co.kr/article/2026110613091819211"
     },
     {
-     "title": "증시 급락에 정부 긴급 대응…신용융자 담보비율 의무 3개월 면제",
-     "press": "sentv.co.kr",
-     "publishedAt": "2026-11-06T04:00:00.000Z",
-     "link": "https://www.sentv.co.kr/article/view/sentv202611060075"
+     "title": "증권사 신용융자 담보비율 140% 3개월간 면제키로...반대매매로 인한 변...",
+     "press": "beyondpost.co.kr",
+     "publishedAt": "2026-11-06T04:10:00.000Z",
+     "link": "http://www.beyondpost.co.kr/view.php?ud=2026110613041956232aaae0046f_30"
     },
     {
-     "title": "정부, 증시 급락 대응 신용융자 담보비율 3개월 면제… 9일 시행",
-     "press": "jeonmae.co.kr",
-     "publishedAt": "2026-11-06T04:00:00.000Z",
-     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1309233"
+     "title": "증권사 신용담보비율 유지 9일부터 '3개월 면제'",
+     "press": "koreareport.co.kr",
+     "publishedAt": "2026-11-06T04:08:00.000Z",
+     "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=54400"
     }
    ]
   },
@@ -48,7 +48,7 @@
     "signal.bz"
    ],
    "articles90": 18,
-   "recent20": 2,
+   "recent20": 1,
    "press": 18,
    "firstArticleAt": "2026-11-06T02:46:00.000Z",
    "exclusive": false,
@@ -75,34 +75,34 @@
    ]
   },
   {
-   "keyword": "홍익표 정무수석 사의 표명",
+   "keyword": "오르타 동티모르 대통령",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 14,
-   "recent20": 3,
-   "press": 14,
-   "firstArticleAt": "2026-11-06T02:39:00.000Z",
-   "exclusive": false,
+   "articles90": 41,
+   "recent20": 7,
+   "press": 11,
+   "firstArticleAt": "2026-11-06T02:49:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "홍익표 靑정무수석 사의…후임에 '친문' 최인호 유력",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-06T03:56:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/324423/?sc=Naver"
+     "title": "李대통령 \"동티모르와 외교·국방 협력 넓혀가길…내년은 양국 수교 25주...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-06T04:08:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261106000645"
     },
     {
-     "title": "홍익표 정무수석 사의 표명…후임에 최인호 HUG 사장 유력",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-06T03:54:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5080539"
+     "title": "한·동티모르, 첫 고위급 정례협의체 설립 합의",
+     "press": "naeil.com",
+     "publishedAt": "2026-11-06T04:02:00.000Z",
+     "link": "https://www.naeil.com/news/read/607892?ref=naver"
     },
     {
-     "title": "홍익표 정무수석 사의, 최인호 후임 유력 후보로 주목",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-06T03:46:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=884452"
+     "title": "李대통령 “동티모르 아세안 내 역할 확대 다각도로 지원”",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-06T04:02:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2645052"
     }
    ]
   },
@@ -137,108 +137,11 @@
      "link": "https://n.news.naver.com/mnews/article/079/0004207207?sid=102"
     }
    ]
-  },
-  {
-   "keyword": "이창동 감독 가능한 사랑",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 16,
-   "recent20": 5,
-   "press": 9,
-   "firstArticleAt": "2026-11-06T03:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[SC인터뷰] \"나는 정직한가?\"…이창동 감독, 넷플릭스行 '가능한 사랑'에...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-06T04:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004463885"
-    },
-    {
-     "title": "전도연 아역 된 조유리…이창동 감독 \"닮았다기보단, 느낌이 비슷\" (가능...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-06T03:54:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002077434"
-    },
-    {
-     "title": "'가능한 사랑' 이창동 \"19년 만에 만난 전도연, 더 자유롭더라…참 잘 살...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-06T03:47:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009274339"
-    }
-   ]
-  },
-  {
-   "keyword": "에너지",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-06T03:27:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "트럼프 패배가 재생에너지 산업에 활력 불어넣어, 글로벌 에너지 전환에...",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-06T03:44:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=451361"
-    },
-    {
-     "title": "미국 중간선거 이후 증시 향방은…빅테크·에너지·헬스케어 '기대감'",
-     "press": "onews.tv",
-     "publishedAt": "2026-11-06T03:44:00.000Z",
-     "link": "https://www.onews.tv/news/articleView.html?idxno=290958"
-    },
-    {
-     "title": "에너지재단, 인천 지역 사회복지시설 7곳에 태양광 발전설비 설치 지원",
-     "press": "e-platform.net",
-     "publishedAt": "2026-11-06T03:30:00.000Z",
-     "link": "http://www.e-platform.net/news/articleView.html?idxno=106773"
-    }
-   ]
-  },
-  {
-   "keyword": "기상",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-06T02:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "기상청, 경기·강원·경북 등 한파주의보 발효…밤 9시부터",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-06T03:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014306091?sid=102"
-    },
-    {
-     "title": "역대 최강 엘니뇨 온다…기상청 \"올겨울 평년보다 따뜻하고 강수량 많을...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-06T03:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005600518?sid=102"
-    },
-    {
-     "title": "현대건설, 콘크리트 품질관리 '큐콘 v3' 확대…기상·균열 데이터 통합",
-     "press": "sateconomy.co.kr",
-     "publishedAt": "2026-11-06T02:36:00.000Z",
-     "link": "https://sateconomy.co.kr/news/view/1065580113349214"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1137,
+  "flagged": 1138,
   "matched": 541,
   "avgLeadMin": 501,
   "recent": [
