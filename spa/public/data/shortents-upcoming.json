@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T04:15:40.089Z",
+ "builtAt": "2026-11-06T04:25:44.130Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 59,
-   "recent20": 8,
-   "press": 55,
-   "firstArticleAt": "2026-11-06T02:46:00.000Z",
+   "articles90": 52,
+   "recent20": 7,
+   "press": 52,
+   "firstArticleAt": "2026-11-06T02:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정부, 증시 급락에 점검회의…신용융자 담보비율 의무 3개월간 면제",
-     "press": "news.mtn.co.kr",
-     "publishedAt": "2026-11-06T04:10:00.000Z",
-     "link": "https://news.mtn.co.kr/article/2026110613091819211"
+     "title": "F4 “과도한 반대매매 방지해야…증권사 신용융자 담보비율 140% 유지의...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-06T04:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002831030?sid=101"
     },
     {
-     "title": "증권사 신용융자 담보비율 140% 3개월간 면제키로...반대매매로 인한 변...",
-     "press": "beyondpost.co.kr",
-     "publishedAt": "2026-11-06T04:10:00.000Z",
-     "link": "http://www.beyondpost.co.kr/view.php?ud=2026110613041956232aaae0046f_30"
+     "title": "증시 급락에 반대매매 막는다...증권사 담보비율 140% 의무 3개월 면제",
+     "press": "ezyeconomy.com",
+     "publishedAt": "2026-11-06T04:20:00.000Z",
+     "link": "https://www.ezyeconomy.com/news/articleView.html?idxno=241626"
     },
     {
-     "title": "증권사 신용담보비율 유지 9일부터 '3개월 면제'",
-     "press": "koreareport.co.kr",
-     "publishedAt": "2026-11-06T04:08:00.000Z",
-     "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=54400"
+     "title": "“코스피 5000선 붕괴에 반대매매 막는다”…정부, 신용융자 담보비율 ...",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-06T04:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002247556?sid=101"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 18,
-   "recent20": 1,
-   "press": 18,
-   "firstArticleAt": "2026-11-06T02:46:00.000Z",
+   "articles90": 15,
+   "recent20": 0,
+   "press": 15,
+   "firstArticleAt": "2026-11-06T03:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,49 +75,23 @@
    ]
   },
   {
-   "keyword": "오르타 동티모르 대통령",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 41,
-   "recent20": 7,
-   "press": 11,
-   "firstArticleAt": "2026-11-06T02:49:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령 \"동티모르와 외교·국방 협력 넓혀가길…내년은 양국 수교 25주...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-06T04:08:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261106000645"
-    },
-    {
-     "title": "한·동티모르, 첫 고위급 정례협의체 설립 합의",
-     "press": "naeil.com",
-     "publishedAt": "2026-11-06T04:02:00.000Z",
-     "link": "https://www.naeil.com/news/read/607892?ref=naver"
-    },
-    {
-     "title": "李대통령 “동티모르 아세안 내 역할 확대 다각도로 지원”",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-06T04:02:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2645052"
-    }
-   ]
-  },
-  {
    "keyword": "내년 일자리 예산",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 0,
-   "press": 10,
+   "articles90": 11,
+   "recent20": 1,
+   "press": 11,
    "firstArticleAt": "2026-11-06T03:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "경기도의회, 행정사무감사 착수…민생경제·예산 집행 검증",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-06T04:20:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2015423"
+    },
     {
      "title": "발달장애인 작가 은혜의 눈물… '권리중심 공공일자리' 예산 삭감의 이...",
      "press": "thescoop.co.kr",
@@ -129,19 +103,45 @@
      "press": "hani.co.kr",
      "publishedAt": "2026-11-06T03:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/028/0002831024?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "이형일 부총리 페스티벌 점검",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 20,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-06T03:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이형일 \"성장 온기 골목상권으로 확산돼야\"…코그페 현장 방문",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-06T03:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014306097?sid=101"
     },
     {
-     "title": "노동장관 \"성장의 온기, 청년 첫 일자리까지 충분히 닿지 못해\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-06T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004207207?sid=102"
+     "title": "이형일 \"소비, 경제 활력 원동력…성장 온기 골목까지\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-06T03:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001401150?sid=101"
+    },
+    {
+     "title": "프라이팬 구매하는 이형일 부총리 '엄지척'",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-06T03:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009274338?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1138,
+  "flagged": 1139,
   "matched": 541,
   "avgLeadMin": 501,
   "recent": [
