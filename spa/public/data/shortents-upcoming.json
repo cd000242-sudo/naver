@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T02:04:47.047Z",
+ "builtAt": "2026-11-06T02:14:51.629Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 60,
+   "articles90": 55,
    "recent20": 7,
-   "press": 60,
-   "firstArticleAt": "2026-11-06T00:35:00.000Z",
+   "press": 55,
+   "firstArticleAt": "2026-11-06T00:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[2026 3분기 실적] 롯데쇼핑, 백화점·마트 쌍끌이…영업익 35% ↑",
-     "press": "inthenews.co.kr",
-     "publishedAt": "2026-11-06T02:00:00.000Z",
-     "link": "https://www.inthenews.co.kr/news/article.html?no=94146"
+     "title": "롯데쇼핑, 3분기 영업이익 1,756억 원…전년 동기 대비 34.5% 증가",
+     "press": "apparelnews.co.kr",
+     "publishedAt": "2026-11-06T02:10:00.000Z",
+     "link": "http://www.apparelnews.co.kr/news/news_view/?idx=228803"
     },
     {
-     "title": "본업살린 롯데쇼핑, 백화점 최대실적·마트 영업익 87%↑…'두마리 토끼...",
-     "press": "newstopkorea.com",
-     "publishedAt": "2026-11-06T01:58:00.000Z",
-     "link": "https://www.newstopkorea.com/news/articleView.html?idxno=48824"
+     "title": "롯데쇼핑, 3분기 영업익 34.5%↑…백화점 매출 '역대 최대'",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-06T02:10:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=623462"
     },
     {
-     "title": "롯데쇼핑, 백화점·마트 호조 힘입어 3Q 영업익 34%↑...순이익도 흑자전...",
-     "press": "livebiz.today",
-     "publishedAt": "2026-11-06T01:58:00.000Z",
-     "link": "https://www.livebiz.today/news/articleView.html?idxno=206273"
+     "title": "롯데쇼핑, 3분기 영업익 34.5% 증가…순이익도 흑자 전환",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-06T02:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000649391?sid=101"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 42,
-   "recent20": 3,
-   "press": 33,
-   "firstArticleAt": "2026-11-06T00:39:00.000Z",
+   "articles90": 39,
+   "recent20": 2,
+   "press": 30,
+   "firstArticleAt": "2026-11-06T00:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "정점식 \"조작기소 특검은 '공소취소' 언어 조작...죗값 치를 것\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-06T02:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002429108?sid=100"
+    },
     {
      "title": "정점식 “주식 휴지조각 된 날, 본회의에 특검 올려”",
      "press": "kmib.co.kr",
@@ -65,12 +71,6 @@
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-06T01:49:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/214/0001533908?sid=100"
-    },
-    {
-     "title": "정점식 \"'이재명 조작 정권'…부역자 160명도 죗값 치를 것\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-06T01:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004207178?sid=100"
     }
    ]
   },
@@ -80,29 +80,29 @@
     "signal.bz"
    ],
    "articles90": 34,
-   "recent20": 8,
-   "press": 24,
-   "firstArticleAt": "2026-11-06T00:36:00.000Z",
+   "recent20": 6,
+   "press": 23,
+   "firstArticleAt": "2026-11-06T00:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "조작특검법 오늘 본회의 처리 수순…野, 필버 이후 장외투쟁으로",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-06T02:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005839107?sid=100"
+    },
+    {
+     "title": "이원석 전 검찰총장 \"조작기소 특검법은 위헌…따를 검사 없을 것\"",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-06T02:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000141720?sid=102"
+    },
     {
      "title": "[뉴스포커스] '조작기소 특검' 필버 대치…野 '장외투쟁' 예고",
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-06T02:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000923451?sid=100"
-    },
-    {
-     "title": "장동혁 \"李, 대통령Y 출연은 본인 죄지우는 무도한 특검법 시선분산 작...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-06T02:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001038840?sid=100"
-    },
-    {
-     "title": "'조작기소 특검법' 오늘 표결…野 필버 지속",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-06T02:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000923448?sid=100"
     }
    ]
   },
@@ -111,94 +111,94 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 26,
-   "recent20": 4,
+   "articles90": 24,
+   "recent20": 3,
    "press": 21,
-   "firstArticleAt": "2026-11-06T01:03:00.000Z",
+   "firstArticleAt": "2026-11-06T01:12:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "AI 충격에 한국·대만·일본 증시 6~8%대 급락",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-06T01:52:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=902179"
+     "title": "나스닥 5.5%급락에 시총 3400조원 증발…日닛케이도 6만 붕괴",
+     "press": "segye.com",
+     "publishedAt": "2026-11-06T02:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004173054?sid=101"
     },
     {
-     "title": "중화권 증시도 '블루웨이브 충격'…반도체주 CXMT·TSMC 급락",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-06T01:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016425835?sid=104"
+     "title": "뉴욕증시 폭락 여파에 비트코인도 하락 반전…1억300만원대로",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-06T02:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014305763?sid=101"
     },
     {
-     "title": "코스피 폭락에 개미 패닉…삼성전자 8% 급락",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-06T01:48:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=884403"
+     "title": "SK하이닉스 주가 장중 9%대 내려, 미국 반도체주 급락에 삼성전자도 하...",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-06T02:06:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=451357"
     }
    ]
   },
   {
-   "keyword": "LIV 골프, 5년 만에 종료",
+   "keyword": "LIV 5년 만에 사업 종료",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 9,
+   "articles90": 7,
    "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-06T00:40:00.000Z",
-   "exclusive": true,
+   "press": 7,
+   "firstArticleAt": "2026-11-06T01:03:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "세계 골프계에 큰 파문 남긴 LIV 골프, 5년 만에 공식 종료… CEO 오닐 \"...",
-     "press": "smartbizn.com",
-     "publishedAt": "2026-11-06T01:52:00.000Z",
-     "link": "https://www.smartbizn.com/news/articleView.html?idxno=158640"
+     "title": "세계 골프계 두쪽낸 LIV 골프 5년 만에 완전 폐업…PGA 투어 돌아가려는...",
+     "press": "spochoo.com",
+     "publishedAt": "2026-11-06T02:12:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/529/0000079180"
+    },
+    {
+     "title": "LIV 골프, 출범 5년 만에 막 내려",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-06T02:04:00.000Z",
+     "link": "https://www.viva100.com/article/20261106500240"
     },
     {
      "title": "[LIV] PIF 지원 중단 6개월, 출범 5년 만에 해체 결정…\"투자자와 최종 ...",
      "press": "newspim.com",
      "publishedAt": "2026-11-06T01:48:00.000Z",
      "link": "https://www.newspim.com/news/view/20261106000340"
-    },
-    {
-     "title": "‘재정 위기 탈출 실패’ LIV 골프, 5년 만에 문 닫는다 “청산 절차 돌...",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-06T01:36:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/382/0001303295"
     }
    ]
   },
   {
-   "keyword": "열애 나나 탑 논란",
+   "keyword": "하이닉스 주가",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 3,
+   "articles90": 6,
    "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-06T00:36:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-06T00:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "생일카페 데이트→악플러 공개 저격…탑♥나나, 공개 열애 후폭풍 속 '...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-06T01:57:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000637475"
+     "title": "SK하이닉스 주가 장중 9%대 내려, 미국 반도체주 급락에 삼성전자도 하...",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-06T02:06:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=451357"
     },
     {
-     "title": "나나, 탑 사과-비난에 \"제가 도덕적 물의 일으켰나?\"",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-06T01:32:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=94675"
+     "title": "삼전·닉스 폭락…7개월 전으로 돌아간 주가",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-06T01:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000542105?sid=101"
     },
     {
-     "title": "'공개 열애' 나나♥탑, 사랑이 너무 험난해요···생카 논란→심경 고...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-06T00:36:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005635519"
+     "title": "[ET특징주] 미국發 반도체 초대형 삭풍… 삼전·SK하닉 주가도 '출렁'",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-06T01:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003482967?sid=101"
     }
    ]
   }
