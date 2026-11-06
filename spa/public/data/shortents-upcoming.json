@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T02:55:06.055Z",
+ "builtAt": "2026-11-06T03:05:10.196Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,32 +13,32 @@
   {
    "keyword": "김민석 신천지 사과",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 42,
-   "recent20": 1,
+   "articles90": 40,
+   "recent20": 8,
    "press": 38,
-   "firstArticleAt": "2026-11-06T01:26:00.000Z",
+   "firstArticleAt": "2026-11-06T01:37:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "친청계 \"정청래는 피해자\"… 김민석에 직접 사과 촉구",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-06T02:54:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3446493"
+     "title": "민주당, 트럼프 가족·측근부터 '정조준' / 신천지 논란에 \"상처입은 모...",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-06T03:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001977015?sid=104"
     },
     {
-     "title": "친청계, 김민석 공개 사과에도 반발…지도부 내홍 격화",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-06T02:32:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261106010002466"
+     "title": "'신천지' 세 번째 사과한 김민석... 친청계 \"정청래 만나라\"",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-06T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002534872?sid=100"
     },
     {
-     "title": "'판도라의 상자' 닫은 김민석, '역공' 나선 정청래…與 내전 폭풍전야",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-06T02:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000141732?sid=100"
+     "title": "신천지 발언 김민석 강제 수사 요구한 임이자 \"허위사실 유포 스스로 자...",
+     "press": "thepublic.kr",
+     "publishedAt": "2026-11-06T02:58:00.000Z",
+     "link": "https://www.thepublic.kr/news/articleView.html?idxno=325391"
     }
    ]
   },
@@ -47,127 +47,94 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 25,
-   "recent20": 5,
-   "press": 22,
-   "firstArticleAt": "2026-11-06T01:30:00.000Z",
+   "articles90": 24,
+   "recent20": 4,
+   "press": 21,
+   "firstArticleAt": "2026-11-06T01:39:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
+    {
+     "title": "코스피 6일 장 초반 8.6% 급락…미 반도체지수 5일 12.2% 하락",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-06T02:58:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/433827"
+    },
+    {
+     "title": "서학개미, 뉴욕증시 급락에 하루 13조원 넘게 손실 추정...테슬라 10%, 엔...",
+     "press": "beyondpost.co.kr",
+     "publishedAt": "2026-11-06T02:56:00.000Z",
+     "link": "http://www.beyondpost.co.kr/view.php?ud=2026110611530440032aaae0046f_30"
+    },
     {
      "title": "AI 규제 우려에 반도체주 급락…닛케이 5.27%↓[Asia오전]",
      "press": "mt.co.kr",
      "publishedAt": "2026-11-06T02:49:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/008/0005437611?sid=101"
-    },
-    {
-     "title": "국고채 금리 일제히 하락…주가 급락 속 위험회피 심리",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-06T02:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016426023?sid=101"
-    },
-    {
-     "title": "[올댓차이나] 中 증시, 한미일 증시 급락에 대폭 하락세…창업판 2.46%↓",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-06T02:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014305897?sid=104"
     }
    ]
   },
   {
-   "keyword": "정점식 원내대표 회의",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 16,
-   "recent20": 1,
-   "press": 16,
-   "firstArticleAt": "2026-11-06T01:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정점식 \"이재명 정권 특기는 언어 조작\"",
-     "press": "sisafocus.co.kr",
-     "publishedAt": "2026-11-06T02:52:00.000Z",
-     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367258"
-    },
-    {
-     "title": "‘조작기소 특검법안’ 오늘 본회의 표결",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-06T02:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002719912?sid=100"
-    },
-    {
-     "title": "정점식 \"민주당 반드시 죗값 치를 것\" 강하게 성토",
-     "press": "tbs.seoul.kr",
-     "publishedAt": "2026-11-06T02:25:00.000Z",
-     "link": "http://tbs.seoul.kr/news/newsView.do?typ_800=9&idx_800=3538699&seq_800=20531600"
-    }
-   ]
-  },
-  {
-   "keyword": "김장",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 24,
-   "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-06T01:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"김장 한 포기 더\"…송미령 장관, 배추 소비촉진 당부",
-     "press": "agrinet.co.kr",
-     "publishedAt": "2026-11-06T02:42:00.000Z",
-     "link": "https://www.agrinet.co.kr/news/articleView.html?idxno=408647"
-    },
-    {
-     "title": "[함께가자 우리ESG] HD건설기계·HD현대사이트솔루션, 임직원 참여 김장...",
-     "press": "newslock.co.kr",
-     "publishedAt": "2026-11-06T02:40:00.000Z",
-     "link": "http://www.newslock.co.kr/news/articleView.html?idxno=139520"
-    },
-    {
-     "title": "농수산식품유통공사, '농부가바로팜'... 김장철 맞춤 최대 20% 할인",
-     "press": "newsworker.co.kr",
-     "publishedAt": "2026-11-06T02:36:00.000Z",
-     "link": "https://www.newsworker.co.kr/news/articleView.html?idxno=512705"
-    }
-   ]
-  },
-  {
-   "keyword": "LIV 골프 5년 만에 종료",
+   "keyword": "이형일 부총리 긴급 점검회의",
    "sources": [
     "nate"
    ],
-   "articles90": 9,
-   "recent20": 1,
+   "articles90": 26,
+   "recent20": 2,
    "press": 9,
-   "firstArticleAt": "2026-11-06T01:30:00.000Z",
-   "exclusive": true,
+   "firstArticleAt": "2026-11-06T01:43:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘PGA 대항마’의 쓸쓸한 퇴장… LIV 골프, 출범 5년 만에 운영 종료",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-06T02:39:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/396/0000760217"
+     "title": "증시 급락에 정부 긴급 대응…신용융자 담보비율 140% 유지의무 3개월 면...",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-06T03:02:00.000Z",
+     "link": "https://www.ajunews.com/view/20261106114944375"
     },
     {
-     "title": "'골프계 지각변동' LIV 골프, 출범 5년 만에 사업 종료",
-     "press": "maniareport.com",
-     "publishedAt": "2026-11-06T02:28:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/425/0000213998"
+     "title": "증시 급락에 긴급 처방…신용융자 담보비율 유지 의무 3개월 면제",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-06T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002719955?sid=101"
     },
     {
-     "title": "세계 골프계 두쪽낸 LIV 골프 5년 만에 완전 폐업…PGA 투어 돌아가려는...",
-     "press": "spochoo.com",
-     "publishedAt": "2026-11-06T02:12:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/529/0000079180"
+     "title": "이형일 부총리, '긴급 시장상황점검회의' 주재",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-06T02:24:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261106000521"
+    }
+   ]
+  },
+  {
+   "keyword": "긴급 시장상황점검회의",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 25,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-06T01:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "증시 급락에 정부 긴급 대응…신용융자 담보비율 140% 유지의무 3개월 면...",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-06T03:02:00.000Z",
+     "link": "https://www.ajunews.com/view/20261106114944375"
+    },
+    {
+     "title": "증시 급락에 긴급 처방…신용융자 담보비율 유지 의무 3개월 면제",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-06T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002719955?sid=101"
+    },
+    {
+     "title": "이형일 부총리, '긴급 시장상황점검회의' 주재",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-06T02:24:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261106000521"
     }
    ]
   },
@@ -207,10 +174,46 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1121,
-  "matched": 532,
+  "flagged": 1123,
+  "matched": 538,
   "avgLeadMin": 492,
   "recent": [
+   {
+    "keyword": "골프",
+    "hitKeyword": "LIV 골프 사업 종료",
+    "hitAt": "2026-11-06T12:00:00+09:00",
+    "leadMin": 2726
+   },
+   {
+    "keyword": "LIV 골프, 5년 만에 종료",
+    "hitKeyword": "LIV 골프 사업 종료",
+    "hitAt": "2026-11-06T12:00:00+09:00",
+    "leadMin": 156
+   },
+   {
+    "keyword": "나나, 탑과 열애 비난에 심경 고백",
+    "hitKeyword": "나나 심경 토로",
+    "hitAt": "2026-11-06T12:00:00+09:00",
+    "leadMin": 136
+   },
+   {
+    "keyword": "LIV 5년 만에 사업 종료",
+    "hitKeyword": "LIV 골프 사업 종료",
+    "hitAt": "2026-11-06T12:00:00+09:00",
+    "leadMin": 75
+   },
+   {
+    "keyword": "LIV 골프, 5년 만에 사업 종료",
+    "hitKeyword": "LIV 골프 사업 종료",
+    "hitAt": "2026-11-06T12:00:00+09:00",
+    "leadMin": 25
+   },
+   {
+    "keyword": "LIV 골프 5년 만에 종료",
+    "hitKeyword": "LIV 골프 사업 종료",
+    "hitAt": "2026-11-06T12:00:00+09:00",
+    "leadMin": 15
+   },
    {
     "keyword": "아파트",
     "hitKeyword": "현금 2억 서울 아파트",
@@ -234,42 +237,6 @@
     "hitKeyword": "도상우 박지혜 결혼",
     "hitAt": "2026-11-06T11:00:00+09:00",
     "leadMin": 35
-   },
-   {
-    "keyword": "도상우, 2월 결혼 발표",
-    "hitKeyword": "도상우 박지혜 결혼",
-    "hitAt": "2026-11-06T11:00:00+09:00",
-    "leadMin": 15
-   },
-   {
-    "keyword": "전한길 공소청 송치",
-    "hitKeyword": "전한길 허위광고 송치",
-    "hitAt": "2026-11-06T10:30:00+09:00",
-    "leadMin": 4950
-   },
-   {
-    "keyword": "미국 상원 하원 차이",
-    "hitKeyword": "미국 상원 선거 접전",
-    "hitAt": "2026-11-06T10:30:00+09:00",
-    "leadMin": 1557
-   },
-   {
-    "keyword": "하지원, 23년만 다모 재현",
-    "hitKeyword": "성시경 하지원",
-    "hitAt": "2026-11-06T10:00:00+09:00",
-    "leadMin": 1338
-   },
-   {
-    "keyword": "학폭 의혹 공구 중단",
-    "hitKeyword": "차예련 학폭 의혹",
-    "hitAt": "2026-11-06T10:00:00+09:00",
-    "leadMin": 1136
-   },
-   {
-    "keyword": "현대캐피탈 시즌 첫 승",
-    "hitKeyword": "현대캐피탈 시즌 첫승",
-    "hitAt": "2026-11-06T10:00:00+09:00",
-    "leadMin": 660
    }
   ]
  }
