@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T02:14:51.629Z",
+ "builtAt": "2026-11-06T02:24:54.882Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,66 @@
  "measured": 10,
  "candidates": [
   {
+   "keyword": "김민석 신천지 사과",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 67,
+   "recent20": 8,
+   "press": 61,
+   "firstArticleAt": "2026-11-06T00:57:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김민석 \"당원께 죄송\"…공개 최고위서도 신천지 논란 사과",
+     "press": "tbs.seoul.kr",
+     "publishedAt": "2026-11-06T02:20:00.000Z",
+     "link": "http://tbs.seoul.kr/news/newsView.do?typ_800=9&idx_800=3538698&seq_800=20531599"
+    },
+    {
+     "title": "김민석 사흘만 다시 사과했지만...친청계 \"상응하는 책임 져라\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-06T02:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000519453?sid=100"
+    },
+    {
+     "title": "김민석, 신천지 집단 입당 의혹 공식 사과 \"상처 입은 모든 분께 죄송\"",
+     "press": "mhj21.com",
+     "publishedAt": "2026-11-06T02:18:00.000Z",
+     "link": "https://www.mhj21.com/news/articleView.html?idxno=254706"
+    }
+   ]
+  },
+  {
    "keyword": "롯데쇼핑 3분기 34.5% 증가",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 55,
-   "recent20": 7,
-   "press": 55,
-   "firstArticleAt": "2026-11-06T00:48:00.000Z",
+   "articles90": 45,
+   "recent20": 5,
+   "press": 45,
+   "firstArticleAt": "2026-11-06T01:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "롯데쇼핑, 3분기 영업이익 1,756억 원…전년 동기 대비 34.5% 증가",
-     "press": "apparelnews.co.kr",
-     "publishedAt": "2026-11-06T02:10:00.000Z",
-     "link": "http://www.apparelnews.co.kr/news/news_view/?idx=228803"
+     "title": "백화점·마트 호조…롯데쇼핑, 3분기 영업익 34.5% ‘쑥’",
+     "press": "ekn.kr",
+     "publishedAt": "2026-11-06T02:22:00.000Z",
+     "link": "https://www.ekn.kr/web/view.php?key=20261106027216325"
     },
     {
-     "title": "롯데쇼핑, 3분기 영업익 34.5%↑…백화점 매출 '역대 최대'",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-06T02:10:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=623462"
+     "title": "롯데쇼핑, 3분기 영업이익 34.5% '쑥'....백화점·마트 호조에 자회사 체...",
+     "press": "techm.kr",
+     "publishedAt": "2026-11-06T02:20:00.000Z",
+     "link": "https://www.techm.kr/news/articleView.html?idxno=157005"
     },
     {
-     "title": "롯데쇼핑, 3분기 영업익 34.5% 증가…순이익도 흑자 전환",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-06T02:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000649391?sid=101"
+     "title": "롯데쇼핑·마리오아울렛, 3분기 실적 발표·'입동 맞이 프로모션' 개최",
+     "press": "wsobi.com",
+     "publishedAt": "2026-11-06T02:16:00.000Z",
+     "link": "http://www.wsobi.com/news/articleView.html?idxno=321193"
     }
    ]
   },
@@ -47,62 +79,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 39,
-   "recent20": 2,
-   "press": 30,
-   "firstArticleAt": "2026-11-06T00:45:00.000Z",
+   "articles90": 31,
+   "recent20": 3,
+   "press": 28,
+   "firstArticleAt": "2026-11-06T00:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정점식 \"조작기소 특검은 '공소취소' 언어 조작...죗값 치를 것\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-06T02:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002429108?sid=100"
+     "title": "정점식 \"李에게 소통이란 독재 연장일 뿐… 독재자 차베스와 비슷\"",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-06T02:22:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3446487"
     },
     {
-     "title": "정점식 “주식 휴지조각 된 날, 본회의에 특검 올려”",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-06T01:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001883462?sid=100"
-    },
-    {
-     "title": "정점식 \"특검은 조작 범죄‥민주 의원 전원 죗값 치를 것\"",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-06T01:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001533908?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "조작기소 특검법 필리버스터",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 34,
-   "recent20": 6,
-   "press": 23,
-   "firstArticleAt": "2026-11-06T00:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "조작특검법 오늘 본회의 처리 수순…野, 필버 이후 장외투쟁으로",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-06T02:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005839107?sid=100"
-    },
-    {
-     "title": "이원석 전 검찰총장 \"조작기소 특검법은 위헌…따를 검사 없을 것\"",
+     "title": "정점식 \"李, '재판 삭제' 사주해놓고 유튜브서 소통 연출…끔찍한 모순...",
      "press": "sisajournal.com",
-     "publishedAt": "2026-11-06T02:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000141720?sid=102"
+     "publishedAt": "2026-11-06T02:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000141727?sid=100"
     },
     {
-     "title": "[뉴스포커스] '조작기소 특검' 필버 대치…野 '장외투쟁' 예고",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-06T02:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000923451?sid=100"
+     "title": "정점식 “李 재판 지우려 3대 조작…與 부역자 160명 죗값 치를 것”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-06T02:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004679449?sid=100"
     }
    ]
   },
@@ -111,30 +111,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 24,
-   "recent20": 3,
-   "press": 21,
+   "articles90": 28,
+   "recent20": 7,
+   "press": 25,
    "firstArticleAt": "2026-11-06T01:12:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "나스닥 5.5%급락에 시총 3400조원 증발…日닛케이도 6만 붕괴",
-     "press": "segye.com",
-     "publishedAt": "2026-11-06T02:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004173054?sid=101"
+     "title": "대만 자취안지수 9% 급락…TSMC·미디어텍 하한가",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-06T02:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006404877?sid=104"
     },
     {
-     "title": "뉴욕증시 폭락 여파에 비트코인도 하락 반전…1억300만원대로",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-06T02:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014305763?sid=101"
+     "title": "'블루 쓰나미'에 멈춰선 AI 질주…뉴욕증시 하루 만에 4300조원 증발",
+     "press": "widedaily.com",
+     "publishedAt": "2026-11-06T02:22:00.000Z",
+     "link": "https://www.widedaily.com/news/articleView.html?idxno=303048"
     },
     {
-     "title": "SK하이닉스 주가 장중 9%대 내려, 미국 반도체주 급락에 삼성전자도 하...",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-06T02:06:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=451357"
+     "title": "[외환] '블루쓰나미'發 주가 급락에 1,350원대 후반",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-06T02:16:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443456"
+    }
+   ]
+  },
+  {
+   "keyword": "조작기소 특검법 필리버스터",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 33,
+   "recent20": 5,
+   "press": 23,
+   "firstArticleAt": "2026-11-06T00:55:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[뉴스포스트 한입이슈] 내란 우두머리·조작기소 특검법·청해부대 확대",
+     "press": "newspost.kr",
+     "publishedAt": "2026-11-06T02:24:00.000Z",
+     "link": "https://www.newspost.kr/news/articleView.html?idxno=227128"
+    },
+    {
+     "title": "이원석 전 검찰총장, '조작기소 특검법' 중단 촉구…\"재판 독립 침해\"",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-06T02:22:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=172057"
+    },
+    {
+     "title": "與, '조작기소 특검법' 野 반발에 \"정치검찰과 공범임을 자인한 꼴\"(종합...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-06T02:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009274135?sid=100"
     }
    ]
   },
@@ -144,7 +176,7 @@
     "signal.bz"
    ],
    "articles90": 7,
-   "recent20": 2,
+   "recent20": 1,
    "press": 7,
    "firstArticleAt": "2026-11-06T01:03:00.000Z",
    "exclusive": false,
@@ -175,10 +207,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 6,
+   "articles90": 4,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-06T00:48:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-06T01:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
