@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T03:35:24.780Z",
+ "builtAt": "2026-11-06T03:45:28.717Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 44,
-   "recent20": 9,
-   "press": 41,
+   "articles90": 52,
+   "recent20": 11,
+   "press": 47,
    "firstArticleAt": "2026-11-06T02:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美 기술주 쇼크에 국내 증시 휘청…반대매매 줄일 담보비율 의무 3개월...",
-     "press": "raonnews.com",
-     "publishedAt": "2026-11-06T03:32:00.000Z",
-     "link": "https://www.raonnews.com/news/article.html?no=62546"
+     "title": "[속보] 당국, 증권사 담보비율 의무 3개월 면제…과도한 주식 반대매매...",
+     "press": "kado.net",
+     "publishedAt": "2026-11-06T03:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000209819?sid=100"
     },
     {
-     "title": "정부, 증시 급락에 신용융자 담보비율 3개월 면제…반대매매 차단",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-06T03:32:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=880608"
+     "title": "당국 \"증권사의 신용융자 담보 비율 140% 유지 의무 석 달 면제\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-06T03:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001401148?sid=101"
     },
     {
-     "title": "정부, 증시 급락에 긴급 대응…증권사 신용융자 담보비율 유지의무 3개...",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-06T03:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000549444?sid=101"
+     "title": "증권사 신용융자 담보비율 140% 유지의무 3개월 면제",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-06T03:42:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=623488"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 26,
-   "recent20": 5,
+   "articles90": 20,
+   "recent20": 2,
    "press": 19,
-   "firstArticleAt": "2026-11-06T02:06:00.000Z",
+   "firstArticleAt": "2026-11-06T02:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "F4, 증시 급락에 긴급 대응… 신용융자 담보비율 유지의무 3개월 면제",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-06T03:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003696538?sid=101"
+    },
     {
      "title": "정부, 증시 급락에 긴급 대응…증권사 신용융자 담보비율 유지의무 3개...",
      "press": "news.tf.co.kr",
@@ -65,12 +71,6 @@
      "press": "kukinews.com",
      "publishedAt": "2026-11-06T03:24:00.000Z",
      "link": "https://www.kukinews.com/article/view/kuk202611060098"
-    },
-    {
-     "title": "'반대매매 차단' 긴급 처방…신용융자 담보비율 유지의무 3개월 면제",
-     "press": "mbnmoney.mbn.co.kr",
-     "publishedAt": "2026-11-06T03:18:00.000Z",
-     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005956671"
     }
    ]
   },
@@ -79,10 +79,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 16,
+   "articles90": 11,
    "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-06T02:06:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-06T02:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
