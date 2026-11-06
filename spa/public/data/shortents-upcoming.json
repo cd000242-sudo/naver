@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T01:04:22.609Z",
+ "builtAt": "2026-11-06T01:14:26.984Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 59,
-   "recent20": 14,
-   "press": 51,
-   "firstArticleAt": "2026-11-05T23:41:00.000Z",
+   "articles90": 62,
+   "recent20": 9,
+   "press": 55,
+   "firstArticleAt": "2026-11-05T23:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "롯데쇼핑, 3분기 영업익 1756억원…전년 대비 34.5% 증가",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-06T01:02:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2015295"
+     "title": "롯데쇼핑, 3분기 영업익 1756억원 전년비 34.5%↑…\"백화점 최대 매출\"",
+     "press": "newspost.kr",
+     "publishedAt": "2026-11-06T01:10:00.000Z",
+     "link": "https://www.newspost.kr/news/articleView.html?idxno=227121"
     },
     {
-     "title": "롯데쇼핑, 3분기 영업익 34.5% 증가…백화점 역대 최대 매출",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-06T01:02:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5080455"
+     "title": "백화점 역대 최대 매출…롯데쇼핑, 3분기 영업익 35%↑",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-06T01:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001163463?sid=101"
     },
     {
-     "title": "롯데쇼핑, 3분기 영업익 34% 급증…백화점·마트가 끌었다",
-     "press": "newsinside.kr",
-     "publishedAt": "2026-11-06T01:00:00.000Z",
-     "link": "https://www.newsinside.kr/news/articleView.html?idxno=5041651"
+     "title": "백화점 ‘훈풍’ 탄 롯데쇼핑, 3Q 영업익 1756억…전년비 34.5%↑",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-06T01:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004679413?sid=101"
     }
    ]
   },
@@ -48,29 +48,29 @@
     "signal.bz"
    ],
    "articles90": 34,
-   "recent20": 18,
-   "press": 26,
-   "firstArticleAt": "2026-11-06T00:26:00.000Z",
+   "recent20": 12,
+   "press": 25,
+   "firstArticleAt": "2026-11-06T00:32:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "정부, 증시 급락에 긴급시장상황점검회의…금융·통화당국 소집",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-06T01:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009273862?sid=101"
+     "title": "코스피 6%대 급락에 5,000선 위태…서킷브레이커 발동·반도체주 폭락",
+     "press": "news2day.co.kr",
+     "publishedAt": "2026-11-06T01:12:00.000Z",
+     "link": "https://www.news2day.co.kr/article/20261106500098"
     },
     {
-     "title": "트럼프, 뉴욕증시 폭락에 \"역사상 최악의 날…공화당 아닌 민주당 책임...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-06T01:00:00.000Z",
-     "link": "https://www.ajunews.com/view/20261106094556994"
+     "title": "AI 규제 공포에 美증시 급락…나스닥 5.5%↓·S&P500 4.3%↓",
+     "press": "whitepaper.co.kr",
+     "publishedAt": "2026-11-06T01:06:00.000Z",
+     "link": "http://www.whitepaper.co.kr/news/articleView.html?idxno=268498"
     },
     {
-     "title": "[특징주] 삼성전자·SK하이닉스, 美 기술주 폭락.. 동반 '급락'",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-06T01:00:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=20261106095122655544093b5d4e_1"
+     "title": "코스피 8%대 급락에 '서킷브레이커' 발동...5000선 붕괴",
+     "press": "newsfc.co.kr",
+     "publishedAt": "2026-11-06T01:06:00.000Z",
+     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82277"
     }
    ]
   },
@@ -79,13 +79,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 18,
-   "recent20": 1,
-   "press": 17,
-   "firstArticleAt": "2026-11-05T23:38:00.000Z",
+   "articles90": 16,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-05T23:47:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "“학폭 가해자 낙인”…‘솔로지옥4’ 국동호 의혹 제기 변호사, 공소청...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-06T01:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001146425"
+    },
     {
      "title": "‘솔로지옥4’ 국동호 학폭 의혹 제기한 변호사, 명예훼손·강요미수 혐...",
      "press": "isplus.com",
@@ -97,12 +103,6 @@
      "press": "tvreport.co.kr",
      "publishedAt": "2026-11-06T00:42:00.000Z",
      "link": "https://m.entertain.naver.com/article/213/0001407327"
-    },
-    {
-     "title": "[공식] '솔로지옥4' 국동호 측, 학폭 의혹 제기 변호사 송치 알렸다…\"허...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-06T00:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002077368"
     }
    ]
   },
@@ -111,30 +111,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 20,
-   "recent20": 9,
-   "press": 10,
-   "firstArticleAt": "2026-11-05T23:38:00.000Z",
+   "articles90": 21,
+   "recent20": 7,
+   "press": 11,
+   "firstArticleAt": "2026-11-06T00:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정점식 \"이 대통령 의회 쿠테타 사주해 놓고 유튜브...끔찍한 모순\"",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-06T00:58:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1135675"
+     "title": "정점식 \"李, 독재자 차베스와 비슷\"",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-06T01:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006404822?sid=100"
+    },
+    {
+     "title": "정점식 \"이 대통령 정치적 고향은 성남 아닌 베네수엘라\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-06T01:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001401090?sid=100"
     },
     {
      "title": "정점식 국민의힘 원내대표 발언",
      "press": "gukjenews.com",
      "publishedAt": "2026-11-06T00:58:00.000Z",
      "link": "https://www.gukjenews.com/news/articleView.html?idxno=3744052"
-    },
-    {
-     "title": "정점식 원내대표 원내대책회의 발언",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-06T00:58:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3744048"
     }
    ]
   },
@@ -147,10 +147,16 @@
    "articles90": 11,
    "recent20": 2,
    "press": 10,
-   "firstArticleAt": "2026-11-05T23:36:00.000Z",
+   "firstArticleAt": "2026-11-06T00:10:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "[오늘 금시세] 11월 6일 금 한돈 67만725원…국제 금값 반등, 미국 고용...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-06T01:10:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16269695"
+    },
     {
      "title": "美 중간선거 민주당 압승에 금값 ‘반짝’… 골드바·ETF로 돈 몰려",
      "press": "biz.chosun.com",
@@ -162,12 +168,6 @@
      "press": "cbci.co.kr",
      "publishedAt": "2026-11-06T00:54:00.000Z",
      "link": "https://www.cbci.co.kr/news/articleView.html?idxno=623978"
-    },
-    {
-     "title": "안전자산 공식 깨진 금시장…금값·ETF 동반 추락, 반등 변수는",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-06T00:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001038817?sid=101"
     }
    ]
   },
@@ -177,10 +177,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-05T23:36:00.000Z",
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-05T23:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -191,16 +191,16 @@
      "link": "https://m.sports.naver.com/golf/article/022/0004173029"
     },
     {
+     "title": "LIV 골프, 출범 5년 만에 막 내려...\"사업 정리 절차\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-06T01:03:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/052/0002429063"
+    },
+    {
      "title": "LIV 골프, 출범 5년 만에 운영 종료 수순…파산법원에 청산 계획 제출",
      "press": "newsis.com",
      "publishedAt": "2026-11-06T00:44:00.000Z",
      "link": "https://m.sports.naver.com/golf/article/003/0014305431"
-    },
-    {
-     "title": "LIV 골프, 출범 5년 만에 역사 속으로…\"사업 종료\"",
-     "press": "kbsm.net",
-     "publishedAt": "2026-11-06T00:40:00.000Z",
-     "link": "https://www.kbsm.net/news/view.php?idx=540639"
     }
    ]
   },
@@ -210,7 +210,7 @@
     "nate"
    ],
    "articles90": 13,
-   "recent20": 3,
+   "recent20": 1,
    "press": 7,
    "firstArticleAt": "2026-11-05T23:53:00.000Z",
    "exclusive": false,
@@ -242,10 +242,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 14,
+   "articles90": 6,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T23:36:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-05T23:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
