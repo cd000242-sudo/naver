@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T06:16:30.118Z",
+ "builtAt": "2026-11-06T06:26:38.209Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 20,
  "candidates": [
   {
    "keyword": "한 동티모르 공동언론발표",
@@ -16,30 +16,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 35,
-   "recent20": 4,
-   "press": 31,
-   "firstArticleAt": "2026-11-06T04:47:00.000Z",
+   "articles90": 29,
+   "recent20": 5,
+   "press": 27,
+   "firstArticleAt": "2026-11-06T04:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“아시아 민주주의 시간은 한국과 동티모르서 시작된다”… 李, 동티모...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-06T06:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004173102?sid=100"
+     "title": "한-동티모르 공동언론발표 \"미래지향적 실질 협력 확대\"",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-06T06:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002393539?sid=100"
     },
     {
-     "title": "李대통령 \"韓-동티모르, 평화·민주주의 인연으로 미래 동행\"",
-     "press": "seouleconews.com",
-     "publishedAt": "2026-11-06T06:14:00.000Z",
-     "link": "http://www.seouleconews.com/news/articleView.html?idxno=94856"
+     "title": "李 \"좋은 친구이자 든든한 동반자가 될 것\"··· 동티모르와 개발협력...",
+     "press": "dkilbo.com",
+     "publishedAt": "2026-11-06T06:16:00.000Z",
+     "link": "https://www.dkilbo.com/news/articleView.html?idxno=559846"
     },
     {
-     "title": "李 \"동티모르와 협력 확대…든든한 동반자 될 것\"",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-06T06:06:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2015539"
+     "title": "악수하는 한·동티모르 정상",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-06T06:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009274616?sid=100"
     }
    ]
   },
@@ -48,10 +48,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 28,
+   "articles90": 19,
    "recent20": 2,
-   "press": 26,
-   "firstArticleAt": "2026-11-06T04:48:00.000Z",
+   "press": 19,
+   "firstArticleAt": "2026-11-06T04:58:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -81,12 +81,18 @@
     "signal.bz"
    ],
    "articles90": 15,
-   "recent20": 4,
-   "press": 14,
-   "firstArticleAt": "2026-11-06T04:54:00.000Z",
+   "recent20": 2,
+   "press": 15,
+   "firstArticleAt": "2026-11-06T04:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김수현, ‘사생활 허위 폭로’ 가세연 김세의 재판 증인 직접 출석한다",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-06T06:23:00.000Z",
+     "link": "https://m.entertain.naver.com/article/119/0003152244"
+    },
     {
      "title": "[속보] 배우 김수현, 11일 ‘가세연’ 김세의 명예훼손 재판 증인 출석",
      "press": "seoul.co.kr",
@@ -98,76 +104,38 @@
      "press": "fnnews.com",
      "publishedAt": "2026-11-06T06:04:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/014/0005600582?sid=102"
-    },
-    {
-     "title": "김수현, 법정서 김세의와 마주하나…11일 증인 출석",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-06T06:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005351171?sid=102"
     }
    ]
   },
   {
-   "keyword": "이창동 감독의 가능한 사랑",
+   "keyword": "박항서 감독 인종차별 항의",
    "sources": [
     "nate"
    ],
-   "articles90": 13,
+   "articles90": 11,
    "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-06T04:49:00.000Z",
-   "exclusive": false,
+   "press": 11,
+   "firstArticleAt": "2026-11-06T05:00:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[인터뷰①] '가능한 사랑' 이창동 감독 \"정체성 없는 AI…노동 자체가 경...",
-     "press": "maxmovie.com",
-     "publishedAt": "2026-11-06T06:02:00.000Z",
-     "link": "https://www.maxmovie.com/news/articleView.html?idxno=502828"
+     "title": "“김치맨” 조롱에 분노한 박항서 “선수 향한 인종차별에 항의”",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-06T06:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000366638?sid=102"
     },
     {
-     "title": "'가능한 사랑' 이창동 \"아카데미 수상? '기생충' 착시…여전히 힘들다\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-06T06:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009274576"
+     "title": "\"선수 향한 인종차별에 분노\"…박항서 감독, 태국서 관중 충돌 사태에 ...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-06T06:09:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/241/0003539531"
     },
     {
-     "title": "'가능한 사랑' 이창동 감독 \"느린 영화…인내심 갖고 봐주길\" [MD인터뷰...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-06T05:33:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004122629"
-    }
-   ]
-  },
-  {
-   "keyword": "긴급 시장상황점검회의",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-06T04:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'반대매매 차단' 긴급 처방…\"신용융자 담보비율 유지의무 3개월 면제\"",
-     "press": "newsfc.co.kr",
-     "publishedAt": "2026-11-06T06:00:00.000Z",
-     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82289"
-    },
-    {
-     "title": "증시 이틀째 급락에 정부 긴급 처방…신용융자 담보비율 140% 의무 면제",
-     "press": "thepowernews.co.kr",
-     "publishedAt": "2026-11-06T05:58:00.000Z",
-     "link": "https://www.thepowernews.co.kr/view.php?ud=202611061455321820de3f0aa1be_7"
-    },
-    {
-     "title": "증시 급락에 'F4 긴급 대응'…증권사 신용융자 담보비율 유지 의무 석 달...",
-     "press": "newsprime.co.kr",
-     "publishedAt": "2026-11-06T05:10:00.000Z",
-     "link": "http://www.newsprime.co.kr/news/article.html?no=753994"
+     "title": "박항서, 태국 관중에 화난 이유 밝혔다... '선수 향한 조롱'",
+     "press": "stnsports.co.kr",
+     "publishedAt": "2026-11-06T05:55:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/450/0000155341"
     }
    ]
   },
@@ -178,7 +146,7 @@
     "google"
    ],
    "articles90": 7,
-   "recent20": 2,
+   "recent20": 1,
    "press": 7,
    "firstArticleAt": "2026-11-06T05:05:00.000Z",
    "exclusive": false,
@@ -201,6 +169,38 @@
      "press": "thereport.co.kr",
      "publishedAt": "2026-11-06T05:48:00.000Z",
      "link": "https://www.thereport.co.kr/news/articleView.html?idxno=93119"
+    }
+   ]
+  },
+  {
+   "keyword": "긴급 시장상황점검회의",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-06T05:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'반대매매 차단' 긴급 처방…\"신용융자 담보비율 유지의무 3개월 면제\"",
+     "press": "newsfc.co.kr",
+     "publishedAt": "2026-11-06T06:00:00.000Z",
+     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82289"
+    },
+    {
+     "title": "증시 이틀째 급락에 정부 긴급 처방…신용융자 담보비율 140% 의무 면제",
+     "press": "thepowernews.co.kr",
+     "publishedAt": "2026-11-06T05:58:00.000Z",
+     "link": "https://www.thepowernews.co.kr/view.php?ud=202611061455321820de3f0aa1be_7"
+    },
+    {
+     "title": "증시 급락에 'F4 긴급 대응'…증권사 신용융자 담보비율 유지 의무 석 달...",
+     "press": "newsprime.co.kr",
+     "publishedAt": "2026-11-06T05:10:00.000Z",
+     "link": "http://www.newsprime.co.kr/news/article.html?no=753994"
     }
    ]
   },
@@ -235,11 +235,43 @@
      "link": "https://www.smartbizn.com/news/articleView.html?idxno=158684"
     }
    ]
+  },
+  {
+   "keyword": "김정관, 산둥성 부성장 면담",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 3,
+   "press": 2,
+   "firstArticleAt": "2026-11-06T05:21:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "중국 산둥성 부성장 만난 김정관 산업통상부 장관",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-06T06:17:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261106000856"
+    },
+    {
+     "title": "김정관 산업통상부 장관, 중국 산둥성 부성장 면담",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-06T06:16:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261106000855"
+    },
+    {
+     "title": "중국 산둥성 부성장과 면담 갖는 김정관 장관",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-06T06:16:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261106000854"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1160,
+  "flagged": 1162,
   "matched": 555,
   "avgLeadMin": 504,
   "recent": [
