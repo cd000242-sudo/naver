@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-05T23:53:49.220Z",
+ "builtAt": "2026-11-06T00:03:52.707Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,144 +8,271 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 20,
  "candidates": [
   {
    "keyword": "뉴욕증시 급락",
    "sources": [
-    "signal.bz",
     "daum"
    ],
-   "articles90": 51,
-   "recent20": 24,
-   "press": 45,
-   "firstArticleAt": "2026-11-05T23:06:00.000Z",
+   "articles90": 49,
+   "recent20": 15,
+   "press": 43,
+   "firstArticleAt": "2026-11-05T23:12:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "비트코인, 7.5만달러대로 급락…뉴욕증시와 동반 하락[코인브리핑]",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-05T23:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009273559?sid=101"
+     "title": "\"AI 약속 대신 가격 따질 때\"…뉴욕증시 규제·수익성 공포에 4300조 증발",
+     "press": "pointdaily.co.kr",
+     "publishedAt": "2026-11-05T23:58:00.000Z",
+     "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=324980"
     },
     {
-     "title": "[마켓펄스] 美 반도체 '패닉' 국내로...삼전 11%·하이닉스 13% 급락",
-     "press": "ntoday.co.kr",
-     "publishedAt": "2026-11-05T23:52:00.000Z",
-     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=130670"
+     "title": "증시 급락에…이형일 \"지나치게 반응 않도록 필요조치 선제적 강구\"",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-05T23:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005838939?sid=101"
     },
     {
-     "title": "[오늘의 신문] 반도체 호황에 성장률 상향, 코스피 4% 급락…미국 중간...",
-     "press": "kor.theasian.asia",
-     "publishedAt": "2026-11-05T23:52:00.000Z",
-     "link": "http://kor.theasian.asia/archives/420994"
+     "title": "[뉴욕 브리핑] AI 때린 '블루웨이브 쇼크'…나스닥 5% 급락",
+     "press": "news.dealsitetv.com",
+     "publishedAt": "2026-11-05T23:58:00.000Z",
+     "link": "https://news.dealsitetv.com/articles/178177"
     }
    ]
   },
   {
-   "keyword": "트럼프 300% 관세",
+   "keyword": "대외경제장관회의 이형일 부총리",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 35,
-   "recent20": 8,
-   "press": 34,
-   "firstArticleAt": "2026-11-05T22:36:00.000Z",
+   "articles90": 46,
+   "recent20": 21,
+   "press": 14,
+   "firstArticleAt": "2026-11-05T23:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "중간선거 대패했는데…트럼프 ‘관세 300%’ 경고",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-05T23:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000366588?sid=104"
+     "title": "경제부총리 \"AI투자 계속될 것. 우리 펀더멘털 견고\"",
+     "press": "viewsnnews.com",
+     "publishedAt": "2026-11-06T00:02:00.000Z",
+     "link": "https://www.viewsnnews.com/article?q=239529"
     },
     {
-     "title": "트럼프, 선거 참패에도 관세 더 올린다…\"美에 공장 안 지으면 300%\"",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-05T23:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003152006?sid=104"
+     "title": "이형일 \"美 행정부·의회와 소통 강화…전략산업 협력 기회 적극 발굴\"",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-05T23:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005600366?sid=101"
     },
     {
-     "title": "트럼프 \"미국에 공장 안 지으면 '관세 300%'까지\"",
-     "press": "mbn.mk.co.kr",
+     "title": "이형일, 美중간선거 \"글로벌 증시 파급 가능성…필요 조치 적기 시행\"(종...",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-05T23:58:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4443382"
+    }
+   ]
+  },
+  {
+   "keyword": "주진우 의원 필리버스터",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 23,
+   "recent20": 9,
+   "press": 7,
+   "firstArticleAt": "2026-11-05T22:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'조작기소 특검법' 필리버스터하는 주진우 의원",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T23:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014305274?sid=100"
+    },
+    {
+     "title": "주진우 의원, '조작기소 특검법' 필리버스터",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T23:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014305259?sid=100"
+    },
+    {
+     "title": "'조작기소 특검법' 필리버스터",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-05T23:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014305264?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "blg",
+   "sources": [
+    "google"
+   ],
+   "articles90": 9,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-05T22:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "DK 벼랑 끝! 中 BLG에 2세트도 내줬다…0-2 위기, 남은 건 ‘역스윕’뿐...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-06T00:00:00.000Z",
+     "link": "https://m.sports.naver.com/esports/article/468/0001278614"
+    },
+    {
+     "title": "[롤드컵] DK, '바이퍼' 앞세운 中 BLG 공세에 2세트도 패배...0-2 벼랑 끝...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-05T23:59:00.000Z",
+     "link": "https://m.sports.naver.com/esports/article/109/0005635497"
+    },
+    {
+     "title": "[롤드컵] 빈틈없는 운영 앞세운 BLG, DK 상대로 2세트도 완승",
+     "press": "gamevu.co.kr",
+     "publishedAt": "2026-11-05T23:54:00.000Z",
+     "link": "https://www.gamevu.co.kr/news/articleView.html?idxno=62072"
+    }
+   ]
+  },
+  {
+   "keyword": "치매",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-05T23:11:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정명근 화성시장, 치매 예방·관리도 일상 속으로…집에서 하는 인지훈...",
+     "press": "fieldnews.kr",
+     "publishedAt": "2026-11-05T23:58:00.000Z",
+     "link": "http://www.fieldnews.kr/news/articleView.html?idxno=32866"
+    },
+    {
+     "title": "나주시, 팍스이피씨와 협약…AI 웨어러블로 치매환자 안전관리 추진",
+     "press": "newsmaker.or.kr",
+     "publishedAt": "2026-11-05T23:54:00.000Z",
+     "link": "http://www.newsmaker.or.kr/news/articleView.html?idxno=185306"
+    },
+    {
+     "title": "KAIST 등 국내연구진, 치매 단백질 뭉침 억제하는 새로운 치료 원리 규명",
+     "press": "webeconomy.co.kr",
      "publishedAt": "2026-11-05T23:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001976966?sid=104"
+     "link": "https://www.webeconomy.co.kr/news/articleView.html?idxno=2363273"
     }
    ]
   },
   {
-   "keyword": "AI 투매로 나스닥 5.5%↓",
+   "keyword": "출근길 바람에 체감온도 뚝",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 17,
-   "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-05T22:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'블루 쓰나미' 덮친 뉴욕증시… AI 기술주 투매에 나스닥 5.5%↓",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-05T23:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000963969?sid=104"
-    },
-    {
-     "title": "AI·데이터센터 규제 공포에 美 증시 기술주 '패닉셀'...나스닥 5.5%·반...",
-     "press": "livebiz.today",
-     "publishedAt": "2026-11-05T23:38:00.000Z",
-     "link": "https://www.livebiz.today/news/articleView.html?idxno=206264"
-    },
-    {
-     "title": "AI 아마겟돈 코스피 덮치나…’블랙 프라이데이' 우려",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-05T23:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004008129?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "윤석열 2심 선고",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
+   "articles90": 5,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-05T22:39:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-05T22:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "윤석열 '내란 우두머리' 2심 내년 1월 26일 선고",
-     "press": "lawtv.kr",
-     "publishedAt": "2026-11-05T23:26:00.000Z",
-     "link": "https://www.lawtv.kr/news/articleView.html?idxno=61347"
+     "title": "목도리 두르고 출근길…찬 바람에 체감온도 '뚝'[오늘날씨]",
+     "press": "news.unn.net",
+     "publishedAt": "2026-11-05T23:38:00.000Z",
+     "link": "https://news.unn.net/news/articleView.html?idxno=600073"
     },
     {
-     "title": "尹 \"'조작기소 주장' 권력자들 한둘 아냐\"…내란 2심 1월 26일 선고",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-05T23:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000649341?sid=102"
-    },
-    {
-     "title": "'내란 우두머리' 2심 1월 26일 선고…윤석열 전 대통령 \"계엄은 정당\"",
+     "title": "[날씨] 찬 바람에 기온 '뚝'…내일 서울 첫 영하권",
      "press": "mbn.co.kr",
-     "publishedAt": "2026-11-05T22:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001976937?sid=102"
+     "publishedAt": "2026-11-05T23:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001976952?sid=102"
+    },
+    {
+     "title": "찬공기 남하에 아침 출근길 기온 뚝 떨어져…체감온도 영하권",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-05T23:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000649343?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "재혼 황후 논란",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-05T22:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'재혼 황후' 주지훈, 낯빛은 흙빛·아우라는 황금빛",
+     "press": "ize.co.kr",
+     "publishedAt": "2026-11-06T00:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/465/0000020809"
+    },
+    {
+     "title": "'피끓는 청춘' 커플, 12년만 '재혼'..이종석·이세영, 논란 하나 없었다...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-05T23:33:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003485072"
+    },
+    {
+     "title": "안색 논란에도…‘재혼황후’ 주지훈, 결 다른 나쁜 남자 완성",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-05T23:19:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001148325"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1082,
-  "matched": 514,
-  "avgLeadMin": 489,
+  "flagged": 1087,
+  "matched": 519,
+  "avgLeadMin": 484,
   "recent": [
+   {
+    "keyword": "이승기 이다인 둘째 공개",
+    "hitKeyword": "이승기 이다인 자녀",
+    "hitAt": "2026-11-06T09:00:00+09:00",
+    "leadMin": 77
+   },
+   {
+    "keyword": "AI 우려 나스닥 5.5%↓",
+    "hitKeyword": "나스닥 AI 기술주 급락",
+    "hitAt": "2026-11-06T09:00:00+09:00",
+    "leadMin": 56
+   },
+   {
+    "keyword": "트럼프 300% 관세",
+    "hitKeyword": "트럼프 헤그세스 희생양",
+    "hitAt": "2026-11-06T09:00:00+09:00",
+    "leadMin": 26
+   },
+   {
+    "keyword": "AI 투매로 나스닥 5.5%↓",
+    "hitKeyword": "나스닥 AI 기술주 급락",
+    "hitAt": "2026-11-06T09:00:00+09:00",
+    "leadMin": 26
+   },
+   {
+    "keyword": "차예련 학폭 갑질 논란",
+    "hitKeyword": "차예련 태도 논란",
+    "hitAt": "2026-11-06T09:00:00+09:00",
+    "leadMin": 26
+   },
    {
     "keyword": "한지 유네스코 등재",
     "hitKeyword": "세월호 기록물 유네스코 등재",
@@ -175,36 +302,6 @@
     "hitKeyword": "이란 미국 핵 제안서",
     "hitAt": "2026-11-06T07:30:00+09:00",
     "leadMin": 288
-   },
-   {
-    "keyword": "뉴욕증시 급등",
-    "hitKeyword": "뉴욕증시 하루만에 급락",
-    "hitAt": "2026-11-06T07:00:00+09:00",
-    "leadMin": 1337
-   },
-   {
-    "keyword": "뉴욕증시 다우 급등 3%",
-    "hitKeyword": "뉴욕증시 하루만에 급락",
-    "hitAt": "2026-11-06T07:00:00+09:00",
-    "leadMin": 1317
-   },
-   {
-    "keyword": "가상자산 과세 2년 유예 추진",
-    "hitKeyword": "코인 소득 과세 유예",
-    "hitAt": "2026-11-06T07:00:00+09:00",
-    "leadMin": 399
-   },
-   {
-    "keyword": "뉴욕증시 급락",
-    "hitKeyword": "뉴욕증시 하루만에 급락",
-    "hitAt": "2026-11-06T07:00:00+09:00",
-    "leadMin": 138
-   },
-   {
-    "keyword": "데이터센터",
-    "hitKeyword": "AI 데이터센터 규제 파장",
-    "hitAt": "2026-11-06T06:30:00+09:00",
-    "leadMin": 806
    }
   ]
  }
