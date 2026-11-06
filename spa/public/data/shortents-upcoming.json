@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T05:36:12.260Z",
+ "builtAt": "2026-11-06T05:46:16.256Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,35 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "두번째 시그널 12월 7일 방송",
+   "keyword": "쿠팡 과징금 효력 정지",
    "sources": [
-    "nate"
+    "nate",
+    "daum"
    ],
-   "articles90": 47,
-   "recent20": 9,
-   "press": 43,
-   "firstArticleAt": "2026-11-06T04:34:00.000Z",
-   "exclusive": true,
+   "articles90": 56,
+   "recent20": 5,
+   "press": 51,
+   "firstArticleAt": "2026-11-06T04:28:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“‘소년범 논란’ 조진웅 옹호 아닙니다”…‘시그널2’, 12월 7일 첫방...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-06T05:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003696580?sid=103"
+     "title": "법원, ‘개인정보 무단 수집’ 쿠팡 2000억 과징금 효력 정지",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-06T05:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004679493?sid=102"
     },
     {
-     "title": "조진웅 얼굴 그대로… '두번째 시그널' 결국 공개",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-06T05:30:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3081740"
+     "title": "법원, 쿠팡 2011억 과징금 효력정지…한숨 돌린 쿠팡, 재판 준비 시간 벌...",
+     "press": "wikileaks-kr.org",
+     "publishedAt": "2026-11-06T05:32:00.000Z",
+     "link": "https://www.wikileaks-kr.org/news/articleView.html?idxno=194308"
     },
     {
-     "title": "‘두번째 시그널’ 조진웅 논란 속 결국 방송 확정",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-06T05:28:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611060233"
+     "title": "'개인정보 무단 수집' 쿠팡, 2000억 대 과징금 효력 정지",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-06T05:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000549504?sid=102"
     }
    ]
   },
@@ -48,75 +49,74 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 48,
+   "articles90": 51,
    "recent20": 7,
-   "press": 28,
+   "press": 31,
    "firstArticleAt": "2026-11-06T04:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이 대통령 \"韓-동티모르, 평화와 민주주의로 맺어진 특별한 인연\"",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-06T05:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000191683?sid=100"
+     "title": "한-동티모르 공동언론발표, 이 대통령 '추가로 하고싶었던 말'은?",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-06T05:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002393535?sid=100"
     },
     {
-     "title": "이 대통령, 오르타 동티모르 대통령과 회담…“한국 ‘빛의 혁명’ 노벨...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-06T05:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003481127?sid=100"
+     "title": "李 대통령, 오르타 동티모르 대통령과 정상회담 [청와대오늘]",
+     "press": "sisaon.co.kr",
+     "publishedAt": "2026-11-06T05:40:00.000Z",
+     "link": "https://www.sisaon.co.kr/news/articleView.html?idxno=205869"
     },
     {
-     "title": "李대통령 \"韓, 동티모르 도약 파트너…안보·경제개발 협력 확대\"",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-06T05:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000542168?sid=101"
+     "title": "韓·동티모르 정상회담서 협력 약정 3건 체결…지식재산·치안 등 협력 ...",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-06T05:36:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=728255"
     }
    ]
   },
   {
-   "keyword": "김수현, 명예훼손 재판 증인 출석",
+   "keyword": "김수현, 김세의 재판 출석",
    "sources": [
     "nate"
    ],
    "articles90": 19,
-   "recent20": 4,
+   "recent20": 5,
    "press": 18,
-   "firstArticleAt": "2026-11-06T04:07:00.000Z",
+   "firstArticleAt": "2026-11-06T04:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김수현, 김세의 만난다…11일 명예훼손 재판 증인 출석",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-06T05:44:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002077455"
+    },
+    {
+     "title": "김수현, '명예훼손' 김세의 만난다…11일 형사재판 증인출석",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-06T05:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000519492?sid=102"
+    },
     {
      "title": "김수현, 김세의 재판에 증인 출석…11일 법정 선다",
      "press": "isplus.com",
      "publishedAt": "2026-11-06T05:32:00.000Z",
      "link": "https://m.entertain.naver.com/article/241/0003539526"
-    },
-    {
-     "title": "김수현, 김세의 만난다…11일 ''명예훼손' 재판 증인 출석",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-06T05:29:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000487108"
-    },
-    {
-     "title": "김수현, '가세연' 김세의 재판에 증인으로 출석",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-06T05:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001977025?sid=102"
     }
    ]
   },
   {
    "keyword": "이창동 감독 가능 사랑을 이야기하다",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 28,
-   "recent20": 3,
-   "press": 15,
-   "firstArticleAt": "2026-11-06T04:07:00.000Z",
+   "articles90": 21,
+   "recent20": 2,
+   "press": 12,
+   "firstArticleAt": "2026-11-06T04:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -143,13 +143,12 @@
   {
    "keyword": "K리그1 중계 AR 그래픽 도입",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-06T04:08:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-06T04:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -170,38 +169,6 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-06T04:56:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/421/0009274417"
-    }
-   ]
-  },
-  {
-   "keyword": "김구라",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-06T04:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김구라, 며느리 맞이하나…아들 그리 “결혼 준비 중”",
-     "press": "segye.com",
-     "publishedAt": "2026-11-06T05:29:00.000Z",
-     "link": "https://m.entertain.naver.com/article/022/0004173095"
-    },
-    {
-     "title": "김구라 \"아들 결혼=설정\" 해명했는데…그리 또 결혼 언급",
-     "press": "atstar1.com",
-     "publishedAt": "2026-11-06T05:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/415/0000053521"
-    },
-    {
-     "title": "'유행꼰대' 김구라 아들 그리, 결혼 준비 중…“군대 기다려준 여자친구...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-06T04:50:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2645078"
     }
    ]
   },
@@ -240,7 +207,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1155,
+  "flagged": 1157,
   "matched": 551,
   "avgLeadMin": 499,
   "recent": [
