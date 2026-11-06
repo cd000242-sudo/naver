@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T05:46:16.256Z",
+ "builtAt": "2026-11-06T05:56:20.600Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,68 +11,67 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "쿠팡 과징금 효력 정지",
-   "sources": [
-    "nate",
-    "daum"
-   ],
-   "articles90": 56,
-   "recent20": 5,
-   "press": 51,
-   "firstArticleAt": "2026-11-06T04:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "법원, ‘개인정보 무단 수집’ 쿠팡 2000억 과징금 효력 정지",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-06T05:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004679493?sid=102"
-    },
-    {
-     "title": "법원, 쿠팡 2011억 과징금 효력정지…한숨 돌린 쿠팡, 재판 준비 시간 벌...",
-     "press": "wikileaks-kr.org",
-     "publishedAt": "2026-11-06T05:32:00.000Z",
-     "link": "https://www.wikileaks-kr.org/news/articleView.html?idxno=194308"
-    },
-    {
-     "title": "'개인정보 무단 수집' 쿠팡, 2000억 대 과징금 효력 정지",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-06T05:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000549504?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "한 동티모르 공동언론발표",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 51,
+   "articles90": 52,
    "recent20": 7,
-   "press": 31,
-   "firstArticleAt": "2026-11-06T04:26:00.000Z",
+   "press": 36,
+   "firstArticleAt": "2026-11-06T04:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한-동티모르 공동언론발표, 이 대통령 '추가로 하고싶었던 말'은?",
-     "press": "joseilbo.com",
+     "title": "김대중 ‘노벨상’ 추천했던 동티모르 대통령, 이번엔 “‘빛의 혁명’...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-06T05:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002831047?sid=100"
+    },
+    {
+     "title": "‘DJ노벨상 추천’ 동티모르 대통령 “빛의 혁명에 노벨평화상을”",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-06T05:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003563361?sid=100"
+    },
+    {
+     "title": "한-동티모르 정상회담 \"평화·민주주의로 맺은 인연, 미래 동행으로\"",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-06T05:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002534899?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "두번째 시그널 12월 7일 방송 확정",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 37,
+   "recent20": 4,
+   "press": 34,
+   "firstArticleAt": "2026-11-06T04:36:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "tvN ‘시그널2’ 12월 7일 편성 확정…“조진웅 AI 대체 어려워”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-06T05:55:00.000Z",
+     "link": "https://m.entertain.naver.com/article/016/0002720016"
+    },
+    {
+     "title": "'두번째 시그널', 결국 조진웅 안고 간다…시청자 반응은 숙제 [ST이슈]",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-06T05:54:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109769543658"
+    },
+    {
+     "title": "조진웅 은퇴작 '시그널2', 12월 7일 방영일 확정…tvN \"한 사람만의 작품...",
+     "press": "mhnse.com",
      "publishedAt": "2026-11-06T05:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002393535?sid=100"
-    },
-    {
-     "title": "李 대통령, 오르타 동티모르 대통령과 정상회담 [청와대오늘]",
-     "press": "sisaon.co.kr",
-     "publishedAt": "2026-11-06T05:40:00.000Z",
-     "link": "https://www.sisaon.co.kr/news/articleView.html?idxno=205869"
-    },
-    {
-     "title": "韓·동티모르 정상회담서 협력 약정 3건 체결…지식재산·치안 등 협력 ...",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-06T05:36:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=728255"
+     "link": "https://m.entertain.naver.com/article/445/0000487114"
     }
    ]
   },
@@ -81,10 +80,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 19,
-   "recent20": 5,
-   "press": 18,
-   "firstArticleAt": "2026-11-06T04:20:00.000Z",
+   "articles90": 16,
+   "recent20": 1,
+   "press": 15,
+   "firstArticleAt": "2026-11-06T04:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -113,10 +112,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 21,
-   "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-06T04:17:00.000Z",
+   "articles90": 17,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-06T04:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -145,10 +144,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-06T04:17:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-06T04:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -207,7 +206,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1157,
+  "flagged": 1158,
   "matched": 551,
   "avgLeadMin": 499,
   "recent": [
