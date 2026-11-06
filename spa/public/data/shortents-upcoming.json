@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T00:23:59.920Z",
+ "builtAt": "2026-11-06T00:34:03.839Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,15 +8,112 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 9,
+ "measured": 20,
  "candidates": [
   {
-   "keyword": "LIV 골프, 5년 만에 종료",
+   "keyword": "서킷브레이커",
+   "sources": [
+    "google"
+   ],
+   "articles90": 52,
+   "recent20": 52,
+   "press": 43,
+   "firstArticleAt": "2026-11-06T00:18:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "코스피 5000선 붕괴·서킷브레이커…코스닥도 매도 사이드카[개장시황]",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-06T00:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009273729?sid=101"
+    },
+    {
+     "title": "코스피, 장 초반 8%대 급락…‘5천’선 붕괴에 서킷브레이커 발동",
+     "press": "ceoscoredaily.com",
+     "publishedAt": "2026-11-06T00:32:00.000Z",
+     "link": "https://www.ceoscoredaily.com/page/view/2026110609292356313"
+    },
+    {
+     "title": "코스피, 美 삭풍에 8%대↓ 5천피 붕괴…서킷브레이커 발동",
+     "press": "seouleconews.com",
+     "publishedAt": "2026-11-06T00:32:00.000Z",
+     "link": "http://www.seouleconews.com/news/articleView.html?idxno=94826"
+    }
+   ]
+  },
+  {
+   "keyword": "뉴욕증시 급락",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 33,
+   "recent20": 19,
+   "press": 28,
+   "firstArticleAt": "2026-11-05T23:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "코스피, 장 초반 8%대 급락…‘5천’선 붕괴에 서킷브레이커 발동",
+     "press": "ceoscoredaily.com",
+     "publishedAt": "2026-11-06T00:32:00.000Z",
+     "link": "https://www.ceoscoredaily.com/page/view/2026110609292356313"
+    },
+    {
+     "title": "코스피, 5000선 붕괴…삼전닉스 동반 급락",
+     "press": "news.mtn.co.kr",
+     "publishedAt": "2026-11-06T00:32:00.000Z",
+     "link": "https://news.mtn.co.kr/article/2026110609314696357"
+    },
+    {
+     "title": "美반도체 12% 급락 여파…코스피 서킷브레이커, 아시아 동반 폭락",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-06T00:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006404781?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "국동호 학폭 주장 변호사 송치",
    "sources": [
     "nate"
    ],
+   "articles90": 21,
+   "recent20": 6,
+   "press": 20,
+   "firstArticleAt": "2026-11-05T23:18:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[공식] '솔로지옥4' 국동호 측, 학폭 의혹 제기 변호사 송치 알렸다…\"허...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-06T00:32:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002077368"
+    },
+    {
+     "title": "'솔로지옥4' 국동호 측 \"학폭 의혹 제기한 변호사, 공소청 송치\"",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-06T00:28:00.000Z",
+     "link": "https://m.entertain.naver.com/article/119/0003152045"
+    },
+    {
+     "title": "\"'솔로지옥4' 국동호 학폭 주장 변호사 송치…의혹 사실과 달라\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-06T00:26:00.000Z",
+     "link": "https://m.entertain.naver.com/article/079/0004207096"
+    }
+   ]
+  },
+  {
+   "keyword": "LIV 골프, 5년 만에 종료",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
    "articles90": 10,
-   "recent20": 2,
+   "recent20": 1,
    "press": 9,
    "firstArticleAt": "2026-11-05T23:15:00.000Z",
    "exclusive": false,
@@ -45,10 +142,9 @@
   {
    "keyword": "치매",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 8,
+   "articles90": 9,
    "recent20": 3,
    "press": 8,
    "firstArticleAt": "2026-11-05T23:11:00.000Z",
@@ -56,10 +152,10 @@
    "capped": false,
    "samples": [
     {
-     "title": "치매 환자 기억 되살리는 AI 인형…제주대 학생들 장관상",
-     "press": "newsjeju.net",
-     "publishedAt": "2026-11-06T00:18:00.000Z",
-     "link": "https://www.newsjeju.net/news/articleView.html?idxno=428017"
+     "title": "알츠하이머병과 혼동하기 쉬운 '루이소체 치매'…환각·수면장애가 초기...",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-06T00:28:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=623376"
     },
     {
      "title": "최정원, 치매로 떠난 父 그리움에 눈물…\"기억 못 해도 곁에 계셨으면\"...",
@@ -68,42 +164,138 @@
      "link": "https://m.entertain.naver.com/article/445/0000487013"
     },
     {
-     "title": "안마의자 누워 치매 노모에게 \"휴대전화 가져와\"…침 뱉고 떠난 요양사",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-06T00:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009273603?sid=102"
+     "title": "치매 환자 기억 되살리는 AI 인형…제주대 학생들 장관상",
+     "press": "newsjeju.net",
+     "publishedAt": "2026-11-06T00:18:00.000Z",
+     "link": "https://www.newsjeju.net/news/articleView.html?idxno=428017"
     }
    ]
   },
   {
-   "keyword": "이형일 부총리 대외경제장관회의 참석",
+   "keyword": "조작기소 주진우 의원",
    "sources": [
     "nate"
    ],
-   "articles90": 15,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T23:19:00.000Z",
+   "articles90": 24,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-05T23:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이형일 부총리 “증시 과도한 변동성 선제 대응...필요한 조치 적기 시...",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-06T00:10:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=72673"
-    },
-    {
-     "title": "이형일 \"美 증시 급락, 글로벌 파급 배제 못해…과잉반응 선제 차단\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-06T00:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009273596?sid=101"
-    },
-    {
-     "title": "제276차 대외경제장관회의 참석한 이형일 부총리",
+     "title": "조작기소 특검법안 필리버스터 이어가는 주진우 의원",
      "press": "newspim.com",
-     "publishedAt": "2026-11-05T23:52:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261106000175"
+     "publishedAt": "2026-11-06T00:11:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261106000237"
+    },
+    {
+     "title": "무제한 토론 이어가는 주진우 국민의힘 의원",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-06T00:11:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261106000233"
+    },
+    {
+     "title": "무제한 토론하는 주진우 국민의힘 의원",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-06T00:11:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261106000236"
+    }
+   ]
+  },
+  {
+   "keyword": "진쓰레블",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-05T23:15:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "진쓰레블, 볼리비아서 향년 33세로 사망…가해자는 체포해 조사중",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-06T00:32:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000783224"
+    },
+    {
+     "title": "“비난·악플 자제해 달라”…故 진쓰레블 친형, 동생 마지막 여정 위해...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-06T00:17:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001278619"
+    },
+    {
+     "title": "故 진쓰레블, 볼리비아서 뺑소니 참변…유족 \"추측·악플 삼가 달라\"→...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-06T00:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001407324"
+    }
+   ]
+  },
+  {
+   "keyword": "케인, 뮌헨과 2029년까지 재계약!",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-05T23:07:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "손흥민과 헤어진 후 더 잘됐다…케인, 발롱도르+우승컵에 역대 최고 연...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-06T00:33:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/445/0000487024"
+    },
+    {
+     "title": "발롱도르 수상 케인, 뮌헨과 2029년까지 계약…“더 많은 트로피 원한다...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-06T00:00:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/028/0002830983"
+    },
+    {
+     "title": "사실상 바이에른 뮌헨서 은퇴? ‘발롱도르’ 케인, 2029년까지 재계약 ...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-05T23:44:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/468/0001278610"
+    }
+   ]
+  },
+  {
+   "keyword": "하이닉스 주가",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-05T23:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "폭락한 SK하이닉스 주가",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-06T00:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009273708?sid=101"
+    },
+    {
+     "title": "폭락한 삼성전자·SK하이닉스 주가",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-06T00:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009273706?sid=101"
+    },
+    {
+     "title": "한화투자증권 \"외국인 매도 압력 완화…삼성전자·SK하이닉스 주목\"",
+     "press": "srtimes.kr",
+     "publishedAt": "2026-11-06T00:10:00.000Z",
+     "link": "http://www.srtimes.kr/news/articleView.html?idxno=216877"
     }
    ]
   },
@@ -139,14 +331,59 @@
      "link": "https://m.entertain.naver.com/article/108/0003485072"
     }
    ]
+  },
+  {
+   "keyword": "이형일 부총리 대외경제장관회의 참석",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 15,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-05T23:19:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이형일 부총리 “증시 과도한 변동성 선제 대응...필요한 조치 적기 시...",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-06T00:10:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=72673"
+    },
+    {
+     "title": "이형일 \"美 증시 급락, 글로벌 파급 배제 못해…과잉반응 선제 차단\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-06T00:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009273596?sid=101"
+    },
+    {
+     "title": "인사하는 이형일 부총리 겸 재정경제부 장관",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-05T23:52:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261106000174"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1090,
-  "matched": 519,
-  "avgLeadMin": 484,
+  "flagged": 1095,
+  "matched": 521,
+  "avgLeadMin": 483,
   "recent": [
+   {
+    "keyword": "blg",
+    "hitKeyword": "BLG 디플러스 기아",
+    "hitAt": "2026-11-06T09:30:00+09:00",
+    "leadMin": 26
+   },
+   {
+    "keyword": "AI 규제 공포",
+    "hitKeyword": "나스닥 AI 규제 공포",
+    "hitAt": "2026-11-06T09:30:00+09:00",
+    "leadMin": 16
+   },
    {
     "keyword": "이승기 이다인 둘째 공개",
     "hitKeyword": "이승기 이다인 자녀",
@@ -194,18 +431,6 @@
     "hitKeyword": "삼성바이오 부분파업",
     "hitAt": "2026-11-06T07:30:00+09:00",
     "leadMin": 2082
-   },
-   {
-    "keyword": "미국 중간선거와 이란 전쟁",
-    "hitKeyword": "이란 미국 핵 제안서",
-    "hitAt": "2026-11-06T07:30:00+09:00",
-    "leadMin": 1880
-   },
-   {
-    "keyword": "미국",
-    "hitKeyword": "이란 미국 핵 제안서",
-    "hitAt": "2026-11-06T07:30:00+09:00",
-    "leadMin": 288
    }
   ]
  }
