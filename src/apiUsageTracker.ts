@@ -117,6 +117,31 @@ const OPENAI_IMAGE_PRICING: Record<string, number> = {
   'gpt-image-2-low-wide':    0.005,
   'gpt-image-2-medium-wide': 0.041,
   'gpt-image-2-high-wide':   0.165,
+  // gpt-image-2.6 (sunburst / flare, 2026-11-04 출시) — 공식 장당 가격 미공개 — 토큰 단가 기준 2.5 와 같은 값으로 둔 추정치
+  //   (토큰 단가: 텍스트 입력 $5 · 이미지 입력 $8 · 이미지 출력 $30 /1M). imageCostUtils.ts 표시 단가와 같은 값이어야 한다 — 동시 갱신.
+  'gpt-image-2.6-sunburst-low':       0.0059,
+  'gpt-image-2.6-sunburst-medium':    0.0132,
+  'gpt-image-2.6-sunburst-high':      0.0527,
+  'gpt-image-2.6-sunburst-xhigh':     0.0937,
+  'gpt-image-2.6-sunburst-max':       0.2107,
+  'gpt-image-2.6-sunburst':           0.0132,  // quality 미지정 시 medium
+  'gpt-image-2.6-flare-low':          0.0059,
+  'gpt-image-2.6-flare-medium':       0.0132,
+  'gpt-image-2.6-flare-high':         0.0527,
+  'gpt-image-2.6-flare-xhigh':        0.0937,
+  'gpt-image-2.6-flare-max':          0.2107,
+  'gpt-image-2.6-flare':              0.0132,  // quality 미지정 시 medium
+  // gpt-image-2.6 비정사각(1536x1024 / 1024x1536) — 2.5 와 같은 추정치
+  'gpt-image-2.6-sunburst-low-wide':    0.0047,
+  'gpt-image-2.6-sunburst-medium-wide': 0.0103,
+  'gpt-image-2.6-sunburst-high-wide':   0.0412,
+  'gpt-image-2.6-sunburst-xhigh-wide':  0.0738,
+  'gpt-image-2.6-sunburst-max-wide':    0.1646,
+  'gpt-image-2.6-flare-low-wide':       0.0047,
+  'gpt-image-2.6-flare-medium-wide':    0.0103,
+  'gpt-image-2.6-flare-high-wide':      0.0412,
+  'gpt-image-2.6-flare-xhigh-wide':     0.0738,
+  'gpt-image-2.6-flare-max-wide':       0.1646,
   // gpt-image-2.5 (flare / sunburst, 2026-09-08 출시) — 두 모델 토큰 단가 동일($30/1M 출력),
   //   OpenAI 공식 계산기 토큰량 × 단가 (1024x1024: low 196 · medium 439 · high 1,756 · xhigh 3,122 · max 7,024 토큰).
   //   ⚠️ 라벨 의미가 바뀌었다: 2.5 의 high ≈ 구 gpt-image-2 medium, 2.5 의 max ≈ 구 high.

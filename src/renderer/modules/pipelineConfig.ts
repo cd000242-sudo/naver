@@ -337,7 +337,7 @@ export function resolvePipelineConfig(flow: PipelineFlow): PipelineConfig {
       textOnlyPublish: pipelineReadBool('textOnlyPublish'),
       imageSource: resolvedImageSource,
       imageModel: currentFullAutoImageModel
-        || (storedSelectionUsesDucttapeAlias ? 'gpt-image-2.5-sunburst' : '')
+        || (storedSelectionUsesDucttapeAlias ? 'gpt-image-2.6-sunburst' : '')
         || raw.openaiImageModel
         || '',
       imageStyle: pipelineReadString('imageStyle', 'realistic'),
@@ -352,17 +352,17 @@ export function resolvePipelineConfig(flow: PipelineFlow): PipelineConfig {
     shopping: {
       subImageMode: normalizeShoppingSubImageMode(raw, currentShoppingSelection?.subImageMode || null),
       aiImageEngine: resolvedShoppingEngine,
-      // [2026-10-10] 쇼핑에서 덕트테이프를 골라도 사용자가 고른 2.5 모델(Flare/Sunburst)을 따른다.
-      //   옛 별칭(gpt-image-2)만 Sunburst 로 잇고, 고른 값이 없거나 옛 모델이면 기본값 Sunburst.
+      // [2026-10-10] 쇼핑에서 덕트테이프를 골라도 사용자가 고른 모델(2.5·2.6 Flare/Sunburst)을 따른다.
+      //   [2026-11-06] 옛 별칭(gpt-image-2)만 2.6 Sunburst 로 잇고, 고른 값이 없거나 옛 모델이면 기본값 2.6 Sunburst.
       aiImageModel: resolvedShoppingEngine === 'openai-image'
         ? (currentFullAutoImageModel
           || (storedShoppingSelectionUsesDucttapeAlias || storedSelectionUsesDucttapeAlias
-            ? 'gpt-image-2.5-sunburst'
+            ? 'gpt-image-2.6-sunburst'
             : '')
-          || (raw.openaiImageModel === 'gpt-image-2.5-flare' || raw.openaiImageModel === 'gpt-image-2.5-sunburst'
+          || (['gpt-image-2.6-sunburst', 'gpt-image-2.6-flare', 'gpt-image-2.5-sunburst', 'gpt-image-2.5-flare'].includes(raw.openaiImageModel ?? '')
             ? raw.openaiImageModel
             : '')
-          || 'gpt-image-2.5-sunburst')
+          || 'gpt-image-2.6-sunburst')
         : '',
       autoThumbnail: raw.scAutoThumbnailSetting === 'true',
     },

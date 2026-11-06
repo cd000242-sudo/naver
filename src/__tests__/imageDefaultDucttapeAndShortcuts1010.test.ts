@@ -36,7 +36,8 @@ describe('A. 이미지 엔진 기본값 = 덕트테이프(openai-image)', () => 
   it('덕트테이프 모델 라디오의 기본 checked 는 Sunburst 하나뿐이다', () => {
     const radios = [...html.matchAll(/<input[^>]*name="openai-image-model"[^>]*>/g)].map((m) => m[0]);
     const checked = radios.filter((r) => /\schecked/.test(r)).map((r) => /value="([^"]+)"/.exec(r)?.[1]);
-    expect(checked).toEqual(['gpt-image-2.5-sunburst']);
+    // [2026-11-06] 기본 checked 는 2.6 Sunburst (2.5 는 이전 세대로 목록에 남음)
+    expect(checked).toEqual(['gpt-image-2.6-sunburst']);
   });
 
   it('저장값이 전혀 없으면 풀오토·글로벌 엔진 읽기 기본값이 openai-image 다', () => {
@@ -69,7 +70,7 @@ describe('A. 이미지 엔진 기본값 = 덕트테이프(openai-image)', () => 
       const fresh = resolvePipelineConfig('full-auto');
       expect(fresh.image.imageSource).toBe('openai-image');
       expect(fresh.shopping.aiImageEngine).toBe('openai-image');
-      expect(fresh.shopping.aiImageModel).toBe('gpt-image-2.5-sunburst');
+      expect(fresh.shopping.aiImageModel).toBe('gpt-image-2.6-sunburst'); // [2026-11-06] 기본값 2.6 Sunburst
 
       for (const engine of ['dropshot', 'nano-banana-2', 'flow']) {
         (globalThis as any).localStorage = makeStorage({
@@ -100,7 +101,7 @@ describe('A. 이미지 엔진 기본값 = 덕트테이프(openai-image)', () => 
     };
     expect(migrateOpenaiImageTwoModels(store)).toBe(1);
     expect(data).toMatchObject({
-      openaiImageModel: 'gpt-image-2.5-sunburst',
+      openaiImageModel: 'gpt-image-2.6-sunburst', // [2026-11-06] 옛 1.5 는 새 기본값 2.6 Sunburst 로 이관
       fullAutoImageSource: 'dropshot',
       globalImageSource: 'nano-banana-2',
       scAIImageEngine: 'flow',

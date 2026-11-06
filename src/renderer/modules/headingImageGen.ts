@@ -1368,7 +1368,7 @@ export function initHeadingImageGeneration(): void {
               const _ratio = _rawPipeline.imageRatio || _rawPipeline.subheadingImageRatio || '1:1';
               let _modelLabel = '';
               if (imageSource === 'openai-image') {
-                { const _oiRaw = String(_rawPipeline.openaiImageModel || '').trim(); _modelLabel = ` | 📦 모델: ${_oiRaw === 'gpt-image-2.5-flare' ? 'gpt-image-2.5-flare' : 'gpt-image-2.5-sunburst'}`; } // [2026-10-10] 실제 선택 모델 표시(명시 Flare 외에는 기본 Sunburst)
+                { const _oiRaw = String(_rawPipeline.openaiImageModel || '').trim(); _modelLabel = ` | 📦 모델: ${['gpt-image-2.6-sunburst', 'gpt-image-2.6-flare', 'gpt-image-2.5-sunburst', 'gpt-image-2.5-flare'].includes(_oiRaw) ? _oiRaw : 'gpt-image-2.6-sunburst'}`; } // [2026-11-06] 실제 선택 모델 표시(2.5·2.6 명시 선택은 그대로, 그 외에는 기본 2.6 Sunburst)
               }
               appendLog(`  🖥️ 엔진: ${_srcLabel}${_modelLabel} | 🎨 스타일: ${_styleNames[_style] || _style} | 📐 ${_ratio}`, 'images-log-output');
               liveImagePreview.addLog(`🖥️ ${_srcLabel}${_modelLabel} | 🎨 ${_styleNames[_style] || _style} | 📐 ${_ratio}`);
@@ -1911,7 +1911,7 @@ export function initHeadingImageGeneration(): void {
             const _ratio = _rawPipeline.imageRatio || _rawPipeline.subheadingImageRatio || '1:1';
             let _modelLabel = '';
             if (imageSource === 'openai-image') {
-              { const _oiRaw = String(_rawPipeline.openaiImageModel || '').trim(); _modelLabel = ` | 📦 모델: ${_oiRaw === 'gpt-image-2.5-flare' ? 'gpt-image-2.5-flare' : 'gpt-image-2.5-sunburst'}`; } // [2026-10-10] 실제 선택 모델 표시(명시 Flare 외에는 기본 Sunburst)
+              { const _oiRaw = String(_rawPipeline.openaiImageModel || '').trim(); _modelLabel = ` | 📦 모델: ${['gpt-image-2.6-sunburst', 'gpt-image-2.6-flare', 'gpt-image-2.5-sunburst', 'gpt-image-2.5-flare'].includes(_oiRaw) ? _oiRaw : 'gpt-image-2.6-sunburst'}`; } // [2026-11-06] 실제 선택 모델 표시(2.5·2.6 명시 선택은 그대로, 그 외에는 기본 2.6 Sunburst)
             }
             appendLog(`  🖥️ 엔진: ${_srcLabel}${_modelLabel} | 🎨 스타일: ${_styleNames[_style] || _style} | 📐 ${_ratio}`, 'images-log-output');
 

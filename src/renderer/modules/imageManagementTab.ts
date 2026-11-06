@@ -422,7 +422,7 @@ export async function initImageManagementTab(): Promise<void> {
       } else if (selectedSource === 'pollinations') {
         appendLog('✅ Pollinations(FLUX, 무료)가 선택되었습니다.');
       } else if (selectedSource === 'openai-image') {
-        appendLog('✅ 🦆 덕트테이프(OpenAI gpt-image-2.5 Sunburst/Flare, 기본 Sunburst)가 선택되었습니다. — OpenAI API 키 필요, 장당 ₩8~₩295 (기본 Sunburst·Medium 약 ₩18)');
+        appendLog('✅ 🦆 덕트테이프(OpenAI gpt-image-2.6 Sunburst/Flare, 기본 2.6 Sunburst)가 선택되었습니다. — OpenAI API 키 필요, 장당 ₩8~₩295 (기본 Sunburst·Medium 약 ₩18)');
       } else if (selectedSource === 'flow') {
         appendLog('✅ Flow가 선택되었습니다. Google 로그인 기반 UI 자동화로 순차 생성됩니다.');
       } else if (selectedSource === 'imagefx') {
@@ -613,16 +613,16 @@ export async function initImageManagementTab(): Promise<void> {
     let openaiUsdRate = 1400;
     const getOpenAISel = (name: string, fallback: string): string =>
       (document.querySelector(`input[name="${name}"]:checked`) as HTMLInputElement)?.value || fallback;
-    // [2026-10-10] 덕트테이프는 Sunburst(기본)·Flare 두 가지만
-    const OPENAI_MODEL_VALUES = ['gpt-image-2.5-flare', 'gpt-image-2.5-sunburst'];
+    // [2026-11-06] 덕트테이프 모델: 2.6 Sunburst(기본)·2.6 Flare, 이전 세대 2.5 Sunburst·2.5 Flare (화면 순서)
+    const OPENAI_MODEL_VALUES = ['gpt-image-2.6-sunburst', 'gpt-image-2.6-flare', 'gpt-image-2.5-sunburst', 'gpt-image-2.5-flare'];
     const OPENAI_QUALITY_VALUES = ['low', 'medium', 'high', 'xhigh', 'max'];
     /*
      * 품질 옵션별 장당 원가 표기 + 모델 호환 게이트.
-     * gpt-image-2.5 계열만 xhigh/max 5단계. 구 모델을 고르면 두 옵션은 비활성(단가 숨김)이고,
+     * gpt-image-2.5 / 2.6 계열만 xhigh/max 5단계. 구 모델을 고르면 두 옵션은 비활성(단가 숨김)이고,
      * 이미 xhigh/max 가 선택돼 있었다면 high 로 옮긴다 (생성기도 같은 규칙으로 강등하므로 실제 과금과 일치).
      */
     const refreshOpenAIQualityOptions = (): void => {
-      const model = getOpenAISel('openai-image-model', 'gpt-image-2.5-sunburst');
+      const model = getOpenAISel('openai-image-model', 'gpt-image-2.6-sunburst');
       const perImage = (window as any).getOpenAIImageCostKRW;
       openaiQualityRadios.forEach((r) => {
         const input = r as HTMLInputElement;
@@ -649,18 +649,18 @@ export async function initImageManagementTab(): Promise<void> {
       const fmt = (window as any).formatOpenAIImageCostLabel;
       if (typeof fmt === 'function') {
         openaiCostDisplay.textContent = fmt(
-          getOpenAISel('openai-image-model', 'gpt-image-2.5-sunburst'),
+          getOpenAISel('openai-image-model', 'gpt-image-2.6-sunburst'),
           getOpenAISel('openai-image-quality', 'medium'),
           openaiUsdRate,
         );
       }
     };
-    // 초기 복원: config의 모델/품질/환율 반영 (없으면 HTML 기본값 gpt-image-2.5-sunburst/medium 유지)
+    // 초기 복원: config의 모델/품질/환율 반영 (없으면 HTML 기본값 gpt-image-2.6-sunburst/medium 유지)
     try {
       const cfg = await (window as any).api?.getConfig?.();
       if (cfg) {
         openaiUsdRate = (typeof cfg.usdToKrwRate === 'number' && cfg.usdToKrwRate > 0) ? cfg.usdToKrwRate : 1400;
-        const savedModel = OPENAI_MODEL_VALUES.includes(cfg.openaiImageModel) ? cfg.openaiImageModel : 'gpt-image-2.5-sunburst';
+        const savedModel = OPENAI_MODEL_VALUES.includes(cfg.openaiImageModel) ? cfg.openaiImageModel : 'gpt-image-2.6-sunburst';
         const savedQuality = OPENAI_QUALITY_VALUES.includes(cfg.openaiImageQuality) ? cfg.openaiImageQuality : 'medium';
         const mr = document.querySelector(`input[name="openai-image-model"][value="${savedModel}"]`) as HTMLInputElement | null;
         const qr = document.querySelector(`input[name="openai-image-quality"][value="${savedQuality}"]`) as HTMLInputElement | null;
@@ -676,7 +676,7 @@ export async function initImageManagementTab(): Promise<void> {
       refreshOpenAICost();
       try {
         const cfg = await (window as any).api?.getConfig?.();
-        const model = getOpenAISel('openai-image-model', 'gpt-image-2.5-sunburst');
+        const model = getOpenAISel('openai-image-model', 'gpt-image-2.6-sunburst');
         const quality = getOpenAISel('openai-image-quality', 'medium');
         await (window as any).api?.saveConfig?.({ ...cfg, openaiImageModel: model, openaiImageQuality: quality });
         /*

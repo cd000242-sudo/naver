@@ -3655,7 +3655,7 @@
                             <option value="codex-image" data-icon="🐙" data-price="ChatGPT 구독 이미지 도구 | 별도 비용 없음 · 구독 한도 사용 | Codex 연결 필요">Codex 구독 이미지 (GPT 이미지 · 별도 비용 없음)</option>
                             <option value="collect-photos" data-icon="📷" data-price="뉴스·기사 실사진 수집 | 무료 · 저작권 안내 동의 필요 | 맞는 사진 없으면 빈 칸">관련 사진 찾기 (뉴스·기사 사진 · 무료)</option>
                             <option value="nano-banana-2" data-icon="🍌" data-price="Gemini 3.1 Flash Image | ₩97/장 | 한글 가능">나노바나나 2</option>
-                            <option value="openai-image" data-icon="🦆" data-price="gpt-image-2.5 Sunburst(기본)/Flare | $0.006~$0.21 | 한글 최강" selected>덕테이프 · OpenAI</option>
+                            <option value="openai-image" data-icon="🦆" data-price="gpt-image-2.6 Sunburst(기본)/Flare | $0.006~$0.21 | 한글 최강" selected>덕테이프 · OpenAI</option>
                             <!-- v2.10.295: DALL-E 3 옵션 완전 삭제 — OpenAI 2026-05-12 폐기 + 사용자 요청 -->
 
                             <option value="flow" data-icon="🍌" data-price="Google Flow | UI 자동화 · 로그인 필요">Google Flow</option>
@@ -3704,12 +3704,20 @@
                         <label style="display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-strong); margin-bottom: 0.5rem;">🦆 OpenAI 이미지 모델</label>
                         <div style="display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 0.85rem;">
                             <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.85rem; color: var(--text-strong);">
-                                <input type="radio" name="openai-image-model" value="gpt-image-2.5-flare" style="accent-color: #8b5cf6;">
-                                gpt-image-2.5 Flare (속도형 · 5단계 품질)
+                                <input type="radio" name="openai-image-model" value="gpt-image-2.6-sunburst" checked style="accent-color: #8b5cf6;">
+                                gpt-image-2.6 Sunburst (품질형 · 기본 · 5단계 품질)
                             </label>
                             <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.85rem; color: var(--text-strong);">
-                                <input type="radio" name="openai-image-model" value="gpt-image-2.5-sunburst" checked style="accent-color: #8b5cf6;">
-                                gpt-image-2.5 Sunburst (품질형 · 기본 · 5단계 품질)
+                                <input type="radio" name="openai-image-model" value="gpt-image-2.6-flare" style="accent-color: #8b5cf6;">
+                                gpt-image-2.6 Flare (속도형 · 5단계 품질)
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.85rem; color: var(--text-strong);">
+                                <input type="radio" name="openai-image-model" value="gpt-image-2.5-sunburst" style="accent-color: #8b5cf6;">
+                                gpt-image-2.5 Sunburst (이전 세대 · 품질형 · 5단계 품질)
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.85rem; color: var(--text-strong);">
+                                <input type="radio" name="openai-image-model" value="gpt-image-2.5-flare" style="accent-color: #8b5cf6;">
+                                gpt-image-2.5 Flare (이전 세대 · 속도형 · 5단계 품질)
                             </label>
                         </div>
                         <label style="display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-strong); margin-bottom: 0.5rem;">🎚️ 이미지 품질</label>
@@ -3737,9 +3745,9 @@
                         </div>
                         <div id="openai-image-cost-display"
                             style="font-size: 0.8rem; font-weight: 700; color: #7c3aed; padding: 0.5rem 0.7rem; background: rgba(139, 92, 246, 0.1); border-radius: 6px;">
-                            한 장당 약 ₩18원 (gpt-image-2.5-sunburst / Medium)
+                            한 장당 약 ₩18원 (gpt-image-2.6-sunburst / Medium)
                         </div>
-                        <p id="openai-image-quality-hint" style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.4rem;">💡 Sunburst + Medium이 기본값입니다. Flare는 속도형이고, XHigh/Max는 단가가 크게 올라갑니다.</p>
+                        <p id="openai-image-quality-hint" style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.4rem;">💡 2.6 Sunburst + Medium이 기본값입니다. Flare는 속도형, 2.5는 이전 세대이고, XHigh/Max는 단가가 크게 올라갑니다.</p>
                     </div>
 
                     <!-- 안내 문구 -->
@@ -5292,9 +5300,9 @@
                                     <span style="font-size: 1.5rem;">🧠</span>
                                     <div>
                                         <h4 style="color: #22c55e; margin: 0; font-size: 1rem; font-weight: 700;">
-                                            OpenAI API 키 (GPT-6.1 + 🦆 덕트테이프 gpt-image-2.5)</h4>
+                                            OpenAI API 키 (GPT-6.1 + 🦆 덕트테이프 gpt-image-2.6)</h4>
                                         <p style="color: var(--text-muted); margin: 0.15rem 0 0 0; font-size: 0.75rem;">
-                                            텍스트 생성(GPT-6.1) + 이미지 생성(덕트테이프 gpt-image-2.5) 모두 이 키 하나로 사용</p>
+                                            텍스트 생성(GPT-6.1) + 이미지 생성(덕트테이프 gpt-image-2.6) 모두 이 키 하나로 사용</p>
                                     </div>
                                 </div>
                                 <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
@@ -5310,17 +5318,17 @@
                                         발급 가이드</button>
                                     <button type="button" id="openai-validate-btn"
                                         style="padding: 0.65rem 0.85rem; background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.8rem; white-space: nowrap;">✅ 키 확인</button>
-                                    <!-- ✅ [v2.10.218] 덕트테이프(gpt-image-2.5) Organization 인증 — 환경설정에서 직접 열기 -->
+                                    <!-- ✅ [v2.10.218] 덕트테이프(gpt-image-2.6) Organization 인증 — 환경설정에서 직접 열기 -->
                                     <button type="button" id="openai-org-verify-btn"
                                         style="padding: 0.65rem 0.85rem; background: linear-gradient(135deg, #a855f7, #7c3aed); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.8rem; white-space: nowrap;"
-                                        title="덕트테이프(gpt-image-2.5) 사용을 위한 Organization 인증 페이지">🦆 덕테이프 인증</button>
+                                        title="덕트테이프(gpt-image-2.6) 사용을 위한 Organization 인증 페이지">🦆 덕테이프 인증</button>
                                 </div>
                                 <div id="openai-validate-result" style="display: none; margin-top: 0.5rem; padding: 0.6rem 0.85rem; background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.25); border-radius: 8px; font-size: 0.78rem; color: var(--text-strong); line-height: 1.5;"></div>
                                 <!-- ✅ [v2.10.218] 덕테이프 인증 안내 (접힌 상태로 시작) -->
                                 <details style="margin-top: 0.5rem; padding: 0.6rem 0.85rem; background: rgba(168, 85, 247, 0.06); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 8px;">
                                     <summary style="font-size: 0.78rem; color: #a78bfa; cursor: pointer; font-weight: 600;">🦆 덕테이프 인증이란? (1번만 하면 영구)</summary>
                                     <div style="margin-top: 0.5rem; font-size: 0.78rem; color: var(--text-muted); line-height: 1.6;">
-                                        <strong style="color: #c4b5fd;">덕트테이프(gpt-image-2.5)</strong>는 계정에 따라 Organization 인증이 필요할 수 있습니다(403 에러가 나면 인증 필요).<br>
+                                        <strong style="color: #c4b5fd;">덕트테이프(gpt-image-2.6)</strong>는 계정에 따라 Organization 인증이 필요할 수 있습니다(403 에러가 나면 인증 필요).<br>
                                         <strong>인증 절차</strong> (5~15분):
                                         <ol style="margin: 0.3rem 0 0 1.2rem; padding: 0;">
                                             <li>위 "🦆 덕테이프 인증" 버튼 → OpenAI 페이지 열림</li>
@@ -5995,9 +6003,9 @@
                                 </div>
                             </div>
 
-                            <!-- 🦆 덕트테이프 (gpt-image-2.5) — OpenAI -->
+                            <!-- 🦆 덕트테이프 (gpt-image-2.6) — OpenAI -->
                             <div style="background: rgba(139, 92, 246, 0.1); padding: 0.875rem; border-radius: 10px; border-left: 4px solid #8b5cf6;">
-                                <div style="font-weight: 700; color: #7c3aed; margin-bottom: 0.35rem; font-size: 0.95rem;">🦆 덕트테이프 (OpenAI gpt-image-2.5) <span style="font-size: 10px; background: #8b5cf6; color: white; padding: 1px 6px; border-radius: 8px; font-weight: 700;">NEW</span></div>
+                                <div style="font-weight: 700; color: #7c3aed; margin-bottom: 0.35rem; font-size: 0.95rem;">🦆 덕트테이프 (OpenAI gpt-image-2.6) <span style="font-size: 10px; background: #8b5cf6; color: white; padding: 1px 6px; border-radius: 8px; font-weight: 700;">NEW</span></div>
                                 <div style="font-size: 0.8rem; color: #1f2937; line-height: 1.7;">
                                     • Low: <strong>₩8/장</strong> (가성비)<br>
                                     • Medium: <strong>₩18/장</strong> (권장, ~$0.013)<br>
@@ -7720,7 +7728,7 @@
                                 style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer;">
                                 <input type="radio" name="continuous-modal-shopping-subimage-source" value="openai-image"
                                     style="accent-color: #8b5cf6;">
-                                <span style="color: var(--text-strong); font-size: 0.75rem; font-weight: 600;">🦆 덕트테이프 gpt-image-2.5 (AI)</span>
+                                <span style="color: var(--text-strong); font-size: 0.75rem; font-weight: 600;">🦆 덕트테이프 gpt-image-2.6 (AI)</span>
                             </label>
                             <label
                                 style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer;">
@@ -7742,7 +7750,7 @@
                             </label>
                         </div>
                         <p style="margin: 0.5rem 0 0 0; font-size: 0.7rem; color: var(--text-muted);">
-                            ℹ️ AI: 나노바나나2·덕트테이프(gpt-image-2.5)·리더스 무제한·Codex 구독 이미지만 대표 상품 이미지 기반 생성 | 수집: 크롤링 원본 그대로<br>🐙 Codex 구독 이미지: 구독 사용량으로 소제목 이미지만 새로 그립니다 (썸네일은 원본 그대로)
+                            ℹ️ AI: 나노바나나2·덕트테이프(gpt-image-2.6)·리더스 무제한·Codex 구독 이미지만 대표 상품 이미지 기반 생성 | 수집: 크롤링 원본 그대로<br>🐙 Codex 구독 이미지: 구독 사용량으로 소제목 이미지만 새로 그립니다 (썸네일은 원본 그대로)
                         </p>
                     </div>
 
@@ -8437,7 +8445,7 @@
                             <strong>ImageFX (Imagen 3.5)</strong>와 <strong>Flow (Nano Banana 2)</strong>는 Google 계정 로그인만으로 사용 가능한 <em>완전 무료</em> 엔진입니다.
                             <strong>ImageFX</strong>는 500~1,000장/일(15 RPM), <strong>Flow</strong>는 무료 50 크레딧/일 또는 AI Pro·Ultra 구독 시 확장됩니다.
                             <strong>Nano Banana Pro (Gemini 3 Pro Image · 직접 API)</strong>는 유료이며 4K 해상도까지 지원합니다.
-                            <strong>덕트테이프 (OpenAI gpt-image-2.5)</strong>는 OpenAI API 정책에 따라 과금됩니다.
+                            <strong>덕트테이프 (OpenAI gpt-image-2.6)</strong>는 OpenAI API 정책에 따라 과금됩니다.
                         </div>
                     </details>
                     <details
@@ -9757,7 +9765,7 @@
                                     style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer;">
                                     <input type="radio" name="ma-shopping-subimage-source" value="openai-image"
                                         style="accent-color: #8b5cf6;">
-                                    <span style="color: var(--text-strong); font-size: 0.75rem; font-weight: 600;">🦆 덕트테이프 gpt-image-2.5 (AI)</span>
+                                    <span style="color: var(--text-strong); font-size: 0.75rem; font-weight: 600;">🦆 덕트테이프 gpt-image-2.6 (AI)</span>
                                 </label>
                                 <label
                                     style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer;">
@@ -9779,7 +9787,7 @@
                                 </label>
                             </div>
                             <p style="margin: 0.5rem 0 0 0; font-size: 0.7rem; color: var(--text-muted);">
-                                ℹ️ AI: 나노바나나2·덕트테이프(gpt-image-2.5)·리더스 무제한·Codex 구독 이미지만 대표 상품 이미지 기반 생성 | 수집: 크롤링 원본 그대로<br>🐙 Codex 구독 이미지: 구독 사용량으로 소제목 이미지만 새로 그립니다 (썸네일은 원본 그대로)
+                                ℹ️ AI: 나노바나나2·덕트테이프(gpt-image-2.6)·리더스 무제한·Codex 구독 이미지만 대표 상품 이미지 기반 생성 | 수집: 크롤링 원본 그대로<br>🐙 Codex 구독 이미지: 구독 사용량으로 소제목 이미지만 새로 그립니다 (썸네일은 원본 그대로)
                             </p>
                         </div>
 
@@ -12484,22 +12492,22 @@
                             <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩97</td>
                             <td style="padding: 0.7rem; text-align: right; color: #4ade80;">가능 ✓</td>
                         </tr>
-                        <!-- 덕테이프 (gpt-image-2.5, 품질 5단계 중 3단계 표기) -->
+                        <!-- 덕테이프 (gpt-image-2.6, 품질 5단계 중 3단계 표기) -->
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
                             <td style="padding: 0.7rem; font-weight: bold; color: #a78bfa;">🦆 덕테이프 (low)</td>
-                            <td style="padding: 0.7rem; color: #e2e8f0;">gpt-image-2.5 · 가성비 · Org 인증 필요할 수 있음</td>
+                            <td style="padding: 0.7rem; color: #e2e8f0;">gpt-image-2.6 · 가성비 · Org 인증 필요할 수 있음</td>
                             <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩8</td>
                             <td style="padding: 0.7rem; text-align: right; color: #4ade80;">가능 ✓</td>
                         </tr>
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
                             <td style="padding: 0.7rem; font-weight: bold; color: #a78bfa;">🦆 덕테이프 (medium) <span style="font-size: 0.7rem; color: #94a3b8;">(블로그 권장)</span></td>
-                            <td style="padding: 0.7rem; color: #e2e8f0;">gpt-image-2.5 · 12단어+ 완벽 스펠링</td>
+                            <td style="padding: 0.7rem; color: #e2e8f0;">gpt-image-2.6 · 12단어+ 완벽 스펠링</td>
                             <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩18</td>
                             <td style="padding: 0.7rem; text-align: right; color: #4ade80;">가능 ✓</td>
                         </tr>
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
                             <td style="padding: 0.7rem; font-weight: bold; color: #a78bfa;">🦆 덕테이프 (high) <span style="font-size: 0.7rem; color: #94a3b8;">(썸네일 권장)</span></td>
-                            <td style="padding: 0.7rem; color: #e2e8f0;">gpt-image-2.5 · 실사화 최고급</td>
+                            <td style="padding: 0.7rem; color: #e2e8f0;">gpt-image-2.6 · 실사화 최고급</td>
                             <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩74</td>
                             <td style="padding: 0.7rem; text-align: right; color: #4ade80;">가능 ✓</td>
                         </tr>
@@ -12547,14 +12555,14 @@
                             <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩679</td>
                         </tr>
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                            <td style="padding: 0.6rem; color: #a78bfa; font-weight: bold;">🦆 덕테이프 medium (gpt-image-2.5)</td>
+                            <td style="padding: 0.6rem; color: #a78bfa; font-weight: bold;">🦆 덕테이프 medium (gpt-image-2.6)</td>
                             <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩18</td>
                             <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩18</td>
                             <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩72</td>
                             <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩126</td>
                         </tr>
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                            <td style="padding: 0.6rem; color: #a78bfa; font-weight: bold;">🦆 덕테이프 high (gpt-image-2.5, 썸네일 권장)</td>
+                            <td style="padding: 0.6rem; color: #a78bfa; font-weight: bold;">🦆 덕테이프 high (gpt-image-2.6, 썸네일 권장)</td>
                             <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩74</td>
                             <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩74</td>
                             <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩296</td>
@@ -12708,7 +12716,7 @@
                         <li>모든 가격은 <strong>2026-09 공식 단가</strong> 기준. 환율 <strong>1,400원/$</strong> 기준.</li>
                         <li>입력 10K 토큰 / 출력 4K 토큰 기준. 실제 블로그 글은 ±30% 편차 가능.</li>
                         <li><strong>캐시 적중</strong>: 시스템 프롬프트 재사용 시 자동 적용 (Claude 5분 TTL / Gemini 1시간 TTL).</li>
-                        <li><strong>Deprecated 모델</strong>: GPT-4o(2026-03-31 은퇴), DALL-E 3(2026-05-12 제거), gpt-image-1·1.5·2(덕트테이프 gpt-image-2.5로 자동 교체: 2는 Sunburst, 1·1.5는 Flare) — 앱에서 자동 회피.</li>
+                        <li><strong>Deprecated 모델</strong>: GPT-4o(2026-03-31 은퇴), DALL-E 3(2026-05-12 제거), gpt-image-1·1.5·2(덕트테이프 gpt-image-2.6 Sunburst 로 자동 교체) — 앱에서 자동 회피.</li>
                         <li><strong>Flow 쿼터 초과 시</strong>: 다른 엔진으로 직접 바꿔 주세요 (유료 엔진은 자동으로 바뀌지 않습니다).</li>
                         <li>품질 점수는 한국어 블로그 10점 만점 벤치마크 (6축 가중평균).</li>
                     </ul>

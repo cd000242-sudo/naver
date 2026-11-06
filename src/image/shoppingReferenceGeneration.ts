@@ -289,7 +289,7 @@ export function isShoppingReferenceGenerationSelectionSupported(
   const rawProvider = String(provider || '').trim();
   const normalizedProvider = rawProvider === 'gpt-image-2' ? 'openai-image' : rawProvider;
   const normalizedModel = rawProvider === 'gpt-image-2'
-    ? 'gpt-image-2.5-sunburst'
+    ? 'gpt-image-2.6-sunburst'
     : String(model || '').trim();
 
   if (!isShoppingReferenceImageEngine(normalizedProvider)) return false;
@@ -300,10 +300,11 @@ export function isShoppingReferenceGenerationSelectionSupported(
 /**
  * 대표이미지 참조(img2img) 편집을 믿고 쓸 수 있는 OpenAI 모델.
  * [2026-10-10] 덕트테이프는 gpt-image-2.5(flare/sunburst) 두 가지만 남았다. 옛 1/1.5/2 값은 설정 정규화가 기본값 Sunburst 로 돌린다.
+ * [2026-11-06] gpt-image-2.6(sunburst/flare)도 같은 대우 — 기본값은 2.6 Sunburst.
  */
 export function isShoppingReferenceCapableOpenaiModel(model: unknown): boolean {
   const m = String(model || '').trim();
-  return m.startsWith('gpt-image-2.5');
+  return m.startsWith('gpt-image-2.5') || m.startsWith('gpt-image-2.6');
 }
 
 export function assertShoppingReferenceGenerationSelectionSupported(
@@ -316,14 +317,14 @@ export function assertShoppingReferenceGenerationSelectionSupported(
   const normalizedModel = String(model || '').trim();
   if (normalizedProvider === 'openai-image' || normalizedProvider === 'gpt-image-2') {
     throw new Error(
-      `SHOPPING_REFERENCE_MODEL_UNSUPPORTED: 쇼핑커넥트 대표이미지 기반 AI 생성은 덕테이프 gpt-image-2.5 (Flare / Sunburst) 만 지원합니다. `
-      + `현재 OpenAI 이미지 모델: ${normalizedModel || '선택되지 않음'}. gpt-image-2.5 Flare 또는 Sunburst 를 선택해주세요.`,
+      `SHOPPING_REFERENCE_MODEL_UNSUPPORTED: 쇼핑커넥트 대표이미지 기반 AI 생성은 덕테이프 gpt-image-2.6 / 2.5 (Sunburst · Flare) 만 지원합니다. `
+      + `현재 OpenAI 이미지 모델: ${normalizedModel || '선택되지 않음'}. gpt-image-2.6 Sunburst 또는 Flare 를 선택해주세요.`,
     );
   }
 
   throw new Error(
     `SHOPPING_REFERENCE_PROVIDER_UNSUPPORTED: "${normalizedProvider}"는 쇼핑 대표이미지 기반 AI 생성을 지원하지 않습니다. `
-    + '나노바나나2, 덕테이프(gpt-image-2.5), 리더스 나노바나나 무제한, Codex 구독 이미지 중 하나를 선택해주세요.',
+    + '나노바나나2, 덕테이프(gpt-image-2.6), 리더스 나노바나나 무제한, Codex 구독 이미지 중 하나를 선택해주세요.',
   );
 }
 

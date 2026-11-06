@@ -32,7 +32,7 @@ const NATURAL_PHOTO_LOOK = 'PHOTO LOOK: a real camera photograph — 50mm lens, 
 //    Flare = 속도형. config 누락 시 기본(Sunburst)으로 폴백해 비용이 조용히
 //    상승하는 일을 차단한다. 두 모델 모두 Organization 인증 필요(403) 가능 —
 //    미인증 시 OPENAI_ORG_VERIFY_REQUIRED: 태그 에러로 렌더러가 안내 모달 표시.
-//    gpt-image-2.5-flare / -sunburst (2026-09) 는 5단계 품질 — resolveOpenAIImageQuality 가 모델별로 정규화.
+//    gpt-image-2.5 / 2.6 의 flare · sunburst (2026-09 / 2026-11) 는 5단계 품질 — resolveOpenAIImageQuality 가 모델별로 정규화.
 const MIN_VALID_IMAGE_BYTES = 1024;
 
 /**
@@ -299,7 +299,7 @@ export async function generateWithOpenAIImage(
                     //   원인: 'auto'가 신규 키/복잡 프롬프트/img2img 시 high를 자동 선택.
                     //   수정: 'medium' 명시 강제 → 장당 ~$0.042 (4배 절감)
                     //   사용자가 (config as any).openaiImageQuality로 'low'/'high' 선택 가능.
-                    //   gpt-image-2.5 계열은 xhigh/max 추가 — 구 모델에는 high 로 강등 (openaiImageQuality.ts).
+                    //   gpt-image-2.5 / 2.6 계열은 xhigh/max 추가 — 구 모델에는 high 로 강등 (openaiImageQuality.ts).
                     const finalQuality = resolveOpenAIImageQuality(currentModel, (config as any).openaiImageQuality);
                     const requestBody: any = {
                         model: currentModel,

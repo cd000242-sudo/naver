@@ -110,7 +110,7 @@ export const SOURCE_NAMES: Record<GlobalImageSource, string> = {
   'nano-banana-2': '나노바나나2 (₩97/장, Nano Banana 2.1)',
   'nano-banana-pro': '나노바나나 프로 (₩185/장, Gemini 3 Pro Image)',
   'pollinations': 'Pollinations',
-  'openai-image': 'OpenAI Image (gpt-image-2.5 Flare / Sunburst)',
+  'openai-image': 'OpenAI Image (gpt-image-2.6 Sunburst / Flare)',
   'dall-e-3': 'GPT 이미지 시리즈 (레거시 설정)',
   'imagefx': 'ImageFX (Google Labs, 제한 가능)',
   'flow': '🍌 Flow (Nano Banana 2)',
@@ -875,7 +875,7 @@ export function createHeadingImageModal(): void {
               <div style="font-size: 11px; color: #a5b4fc; margin-bottom: 6px; font-weight: 600;">🎨 부족분 생성에 사용할 AI 엔진</div>
               <select id="local-folder-fallback-engine" style="width: 100%; padding: 8px 10px; border-radius: 6px; background: #1e1e2e; color: #e2e8f0; border: 1px solid rgba(99,102,241,0.3); font-size: 12px; cursor: pointer;">
                 <option value="nano-banana-2" selected>나노바나나2 (₩97/장, Nano Banana 2.1)</option>
-                <option value="openai-image">덕트테이프 (gpt-image-2.5 Flare / Sunburst)</option>
+                <option value="openai-image">덕트테이프 (gpt-image-2.6 Sunburst / Flare)</option>
                 <option value="flow">Flow (Google Labs)</option>
               </select>
             </div>
@@ -995,7 +995,7 @@ export function createHeadingImageModal(): void {
           <label class="source-option" data-value="openai-image" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #ede9fe, #c4b5fd); text-align: center; transition: all 0.2s;">
             <div style="font-size: 1.5rem;">🦆</div>
             <div style="font-size: 12px; font-weight: 600; color: #5b21b6;">OpenAI Image</div>
-            <div style="font-size: 10px; color: #7c3aed;">gpt-image-2.5 Flare / Sunburst | 계정에 따라 Org 인증 필요할 수 있음</div>
+            <div style="font-size: 10px; color: #7c3aed;">gpt-image-2.6 Sunburst / Flare | 계정에 따라 Org 인증 필요할 수 있음</div>
           </label>
           <label class="source-option" data-value="flow" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #dcfce7, #86efac); text-align: center; transition: all 0.2s;">
             <div style="font-size: 1.5rem;">🍌</div>
@@ -1295,7 +1295,7 @@ export function createHeadingImageModal(): void {
               <select id="test-engine-select" style="width: 100%; padding: 10px 12px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 13px; color: #374151; background: white; cursor: pointer; transition: border-color 0.2s;" onfocus="this.style.borderColor='#6366f1'" onblur="this.style.borderColor='#e5e7eb'">
                 <option value="">📌 현재 저장된 엔진 사용</option>
                 <option value="nano-banana-2">🍌 나노바나나2 (Gemini 3.1 Flash, ₩97/장, 한글 가능) ★추천</option>
-                <option value="openai-image">🦆 덕트테이프 (gpt-image-2.5 Flare / Sunburst)</option>
+                <option value="openai-image">🦆 덕트테이프 (gpt-image-2.6 Sunburst / Flare)</option>
               </select>
             </div>
             
@@ -2431,12 +2431,14 @@ export function createHeadingImageModal(): void {
           </div>
 
           
-          <!-- 🦆 OpenAI Image (gpt-image-2.5 Flare / Sunburst) -->
+          <!-- 🦆 OpenAI Image (gpt-image-2.6 Sunburst / Flare) -->
           <div style="background: rgba(124, 58, 237, 0.1); padding: 14px; border-radius: 12px; border: 1px solid rgba(124, 58, 237, 0.3);">
             <label style="display: block; font-weight: 600; color: #a78bfa; margin-bottom: 8px; font-size: 13px;">🦆 OpenAI Image</label>
             <select id="submodal-openai-image-model" style="width: 100%; padding: 10px; background: #1a1a2e; border: 2px solid rgba(124, 58, 237, 0.4); border-radius: 8px; color: white; font-size: 13px; cursor: pointer;">
-              <option value="gpt-image-2.5-sunburst">☀️ gpt-image-2.5 Sunburst (기본 · 품질형 · 5단계 품질)</option>
-              <option value="gpt-image-2.5-flare">🔥 gpt-image-2.5 Flare (신모델 · 속도형 · 5단계 품질)</option>
+              <option value="gpt-image-2.6-sunburst">☀️ gpt-image-2.6 Sunburst (기본 · 품질형 · 5단계 품질)</option>
+              <option value="gpt-image-2.6-flare">🔥 gpt-image-2.6 Flare (신모델 · 속도형 · 5단계 품질)</option>
+              <option value="gpt-image-2.5-sunburst">☀️ gpt-image-2.5 Sunburst (이전 세대 · 품질형 · 5단계 품질)</option>
+              <option value="gpt-image-2.5-flare">🔥 gpt-image-2.5 Flare (이전 세대 · 속도형 · 5단계 품질)</option>
             </select>
             <select id="submodal-openai-image-quality" style="width: 100%; padding: 10px; margin-top: 8px; background: #1a1a2e; border: 2px solid rgba(124, 58, 237, 0.4); border-radius: 8px; color: white; font-size: 13px; cursor: pointer;">
               <option value="low">low (저비용)</option>
@@ -2499,21 +2501,21 @@ export function createHeadingImageModal(): void {
     })();
     if (nanoMainSelect) nanoMainSelect.value = migratedMain;
     if (nanoSubSelect) nanoSubSelect.value = migratedSub;
-    // [2026-05-27] OpenAI Image 모델/품질 복원 (config.json 우선, localStorage 폴백, 둘 다 없으면 Sunburst/medium)
+    // [2026-05-27] OpenAI Image 모델/품질 복원 (config.json 우선, localStorage 폴백, 둘 다 없으면 2.6 Sunburst/medium)
     if (openaiImageModelSelect) {
       const cfg = await safeIpcInvoke<any>('config:get');
-      const savedModel = (cfg?.openaiImageModel as string) || localStorage.getItem('openaiImageModel') || 'gpt-image-2.5-sunburst';
-      // [2026-10-10] 명시 선택한 Flare·Sunburst 는 그대로, 옛 1/1.5/2 와 목록 밖 값은 기본값 Sunburst 로 복원
-      const validModels = ['gpt-image-2.5-flare', 'gpt-image-2.5-sunburst'];
+      const savedModel = (cfg?.openaiImageModel as string) || localStorage.getItem('openaiImageModel') || 'gpt-image-2.6-sunburst';
+      // [2026-11-06] 명시 선택한 2.5·2.6 Flare·Sunburst 는 그대로, 옛 1/1.5/2 와 목록 밖 값은 기본값 2.6 Sunburst 로 복원
+      const validModels = ['gpt-image-2.6-sunburst', 'gpt-image-2.6-flare', 'gpt-image-2.5-sunburst', 'gpt-image-2.5-flare'];
       const restoredModel = savedModel;
-      openaiImageModelSelect.value = validModels.includes(restoredModel) ? restoredModel : 'gpt-image-2.5-sunburst';
+      openaiImageModelSelect.value = validModels.includes(restoredModel) ? restoredModel : 'gpt-image-2.6-sunburst';
       const savedQuality = (cfg?.openaiImageQuality as string) || localStorage.getItem('openaiImageQuality') || 'medium';
       if (openaiImageQualitySelect) {
         openaiImageQualitySelect.value = ['low', 'medium', 'high', 'xhigh', 'max'].includes(savedQuality) ? savedQuality : 'medium';
-        // xhigh/max 는 gpt-image-2.5 계열 전용 — 구 모델이면 비활성 + 장당 원가 표기 갱신
+        // xhigh/max 는 gpt-image-2.5 / 2.6 계열 전용 — 구 모델이면 비활성 + 장당 원가 표기 갱신
         const syncOpenAIQualityOptions = () => {
           const model = openaiImageModelSelect.value;
-          const isV25 = model.startsWith('gpt-image-2.5');
+          const isV25 = model.startsWith('gpt-image-2.5') || model.startsWith('gpt-image-2.6');
           const perImage = (window as any).getOpenAIImageCostKRW;
           Array.from(openaiImageQualitySelect.options).forEach((opt) => {
             const enabled = isV25 || opt.dataset.v25Only !== '1';
@@ -2652,7 +2654,7 @@ function showOpenAiTierWarningModal(reason: 'precheck' | 'rate-limit-hit' = 'pre
       <p style="margin: 0 0 1rem 0; color: #fde68a; font-size: 0.85rem; line-height: 1.6;">
         ${isHit
           ? '방금 발행 시도가 <b>429 Rate Limit</b> 에러로 실패했습니다. OpenAI의 Tier 시스템 한도에 도달한 것입니다. 아래 옵션 중 하나를 선택하세요.'
-          : '덕트테이프(gpt-image-2.5 Flare / Sunburst)는 <b>Tier 시스템</b>으로 사용량이 단계별로 제한됩니다. 결제 누적액에 따라 RPM 한도가 달라지며, <b>Tier 1은 분당 5장만</b> 생성 가능합니다.'}
+          : '덕트테이프(gpt-image-2.6 Sunburst / Flare)는 <b>Tier 시스템</b>으로 사용량이 단계별로 제한됩니다. 결제 누적액에 따라 RPM 한도가 달라지며, <b>Tier 1은 분당 5장만</b> 생성 가능합니다.'}
       </p>
       <div style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; padding: 0.85rem 1rem; margin-bottom: 1rem;">
         <div style="font-weight: 700; color: #f87171; font-size: 0.85rem; margin-bottom: 0.5rem;">📊 OpenAI Tier 한도 (이미지 모델)</div>
@@ -2664,7 +2666,7 @@ function showOpenAiTierWarningModal(reason: 'precheck' | 'rate-limit-hit' = 'pre
         </table>
         <div style="margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px dashed rgba(239, 68, 68, 0.3); font-size: 0.72rem; color: #fca5a5;">
           ⚠️ ChatGPT Plus/Pro 구독($20~$200/월)은 API와 <b>완전 별개</b>입니다. 구독해도 API Tier는 0.
-          덕트테이프(gpt-image-2.5)는 계정에 따라 <b>Organization 인증</b>이 필요할 수 있습니다(403 에러 시).
+          덕트테이프(gpt-image-2.6)는 계정에 따라 <b>Organization 인증</b>이 필요할 수 있습니다(403 에러 시).
         </div>
       </div>
       <div style="background: rgba(34, 197, 94, 0.08); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 8px; padding: 0.85rem 1rem; margin-bottom: 1.25rem;">

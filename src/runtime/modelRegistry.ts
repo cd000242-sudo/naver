@@ -93,6 +93,8 @@ export const IMAGEN_MODELS = {
  *   gpt-image-2: 고품질 (덕트테이프).
  *   gpt-image-2.5-flare / -sunburst (2026-09-08 출시): 2.5 세대. Flare = 경량·속도,
  *     Sunburst = 본체·품질. 토큰 단가는 gpt-image-2 와 동일, quality 에 xhigh/max 추가.
+ *   gpt-image-2.6-sunburst / -flare (2026-11-04 출시): 2.6 세대. Sunburst = 품질형, Flare = 속도형.
+ *     quality 는 2.5 와 같은 5단계(low/medium/high/xhigh/max + auto). 토큰 단가: 텍스트 입력 $5 · 이미지 입력 $8 · 이미지 출력 $30 /1M.
  *   dall-e-3: 2026-05-12 deprecation 예정 — 폴백 또는 비상용으로만.
  *   gpt-image-1: 호환용
  */
@@ -105,6 +107,10 @@ export const OPENAI_IMAGE_MODELS = {
   GPT_IMAGE_2_5_FLARE: 'gpt-image-2.5-flare',
   /** gpt-image-2.5-sunburst (2.5 본체 — 품질 우선, 편집·피사체 보존 강함) */
   GPT_IMAGE_2_5_SUNBURST: 'gpt-image-2.5-sunburst',
+  /** gpt-image-2.6-flare (2.6 속도형) */
+  GPT_IMAGE_2_6_FLARE: 'gpt-image-2.6-flare',
+  /** gpt-image-2.6-sunburst (2.6 품질형 — 덕트테이프 기본 모델) */
+  GPT_IMAGE_2_6_SUNBURST: 'gpt-image-2.6-sunburst',
   /** gpt-image-1 (호환) */
   GPT_IMAGE_1: 'gpt-image-1',
   /** DALL-E 3 (2026-05-12 sunset 예정 — 폴백 전용) */
@@ -391,6 +397,8 @@ export const VERIFIED_IMAGE_MODELS = [
   'imagen-4.0-generate-001',
   'gpt-image-2.5-flare',
   'gpt-image-2.5-sunburst',
+  'gpt-image-2.6-flare',
+  'gpt-image-2.6-sunburst',
 ] as const;
 
 /**
@@ -418,20 +426,26 @@ export function isVerifiedImageModel(id: string): boolean {
 
 // ═════════════════════════════════════════════════════════════════
 // [2026-10-10] 덕트테이프(openai-image) 세부 모델 정책 — 사장님 결정.
-//   남기는 모델은 gpt-image-2.5-sunburst(품질형, 기본)와 gpt-image-2.5-flare(속도형) 둘뿐이다.
-//   사용자가 명시적으로 고른 flare / sunburst 는 그대로 두고, 옛 gpt-image-1 / 1.5 / 2 와 빈 값·이상값은 모두 기본값 Sunburst 로 돌린다.
+//   남기는 모델은 gpt-image-2.5-sunburst(품질형)와 gpt-image-2.5-flare(속도형) 둘뿐이었다.
+//   [2026-11-06] gpt-image-2.6-sunburst(품질형, 새 기본)·gpt-image-2.6-flare(속도형)를 추가해 모두 4개. 화면 순서는 2.6 먼저.
+//   사용자가 명시적으로 고른 2.5 / 2.6 값은 그대로 두고, 옛 gpt-image-1 / 1.5 / 2 와 빈 값·이상값은 모두 기본값 2.6 Sunburst 로 돌린다.
 //   순수 함수라 main·시험이 함께 쓴다.
 // ═════════════════════════════════════════════════════════════════
 
 /** 화면·설정에 남기는 덕트테이프 모델 */
-export const OPENAI_IMAGE_MODEL_CHOICES = ['gpt-image-2.5-flare', 'gpt-image-2.5-sunburst'] as const;
+export const OPENAI_IMAGE_MODEL_CHOICES = [
+  'gpt-image-2.6-sunburst',
+  'gpt-image-2.6-flare',
+  'gpt-image-2.5-sunburst',
+  'gpt-image-2.5-flare',
+] as const;
 
 export type OpenaiImageModelChoice = (typeof OPENAI_IMAGE_MODEL_CHOICES)[number];
 
-/** 기본 모델 (Sunburst) — 2026-10-10 시니어층 배려로 Flare 에서 변경 */
-export const DEFAULT_OPENAI_IMAGE_MODEL: OpenaiImageModelChoice = 'gpt-image-2.5-sunburst';
+/** 기본 모델 (2.6 Sunburst) — 2026-11-06 사장님 결정. 설정을 안 한 분·새로 쓰는 분의 기본값 (이미 저장된 2.5 선택은 그대로). */
+export const DEFAULT_OPENAI_IMAGE_MODEL: OpenaiImageModelChoice = 'gpt-image-2.6-sunburst';
 
-/** 목록 안의 값(명시 선택)은 그대로, 옛 gpt-image-1 / 1.5 / 2 와 빈 값·이상값은 기본값 Sunburst 로 돌려준다. */
+/** 목록 안의 값(명시 선택)은 그대로, 옛 gpt-image-1 / 1.5 / 2 와 빈 값·이상값은 기본값 2.6 Sunburst 로 돌려준다. */
 export function normalizeOpenaiImageModel(value: unknown): OpenaiImageModelChoice {
   const v = typeof value === 'string' ? value.trim() : '';
   return (OPENAI_IMAGE_MODEL_CHOICES as readonly string[]).includes(v)

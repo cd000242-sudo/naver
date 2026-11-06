@@ -3228,7 +3228,7 @@ const imageSourceNames: Record<string, string> = {
   'nano-banana-pro': '🍌 나노바나나2 (Nano Banana 2.1, ₩97/장) ★',
   'naver': '🔍 네이버 검색',
   'pollinations': '🌸 Pollinations (무료)',
-  'openai-image': '🦆 덕트테이프 (gpt-image-2.5)',
+  'openai-image': '🦆 덕트테이프 (gpt-image-2.6)',
   'dall-e-3': '🦆 GPT 이미지 시리즈 (레거시 설정)',
   'imagefx': '✨ ImageFX (Google Labs, 제한 가능)',
   'flow': '🍌 Flow (Nano Banana 2)', // ✅ [v1.4.80]
@@ -3593,7 +3593,7 @@ function renderQueueListV2(): void {
   });
 }
 
-// v2.7.5: 덕트테이프(gpt-image-2.5) 사용 시 OpenAI Organization 미인증 안내 모달
+// v2.7.5: 덕트테이프(gpt-image-2.6) 사용 시 OpenAI Organization 미인증 안내 모달
 // 단일 인스턴스 가드 — 연속 발행 중 N건 연속 실패해도 모달 1개만 표시
 let __openaiOrgVerifyModalShown = false;
 function showOpenAIOrgVerifyModal(): void {
@@ -3614,7 +3614,7 @@ function showOpenAIOrgVerifyModal(): void {
         <div style="flex: 1;">
           <h2 style="margin: 0 0 4px; font-size: 1.2rem; color: var(--nv-ink);">덕트테이프 사용 — OpenAI 인증 필요</h2>
           <p style="margin: 0; font-size: 0.85rem; color: var(--nv-ink-2); line-height: 1.5;">
-            <strong style="color: var(--nv-select-ink);">덕트테이프(gpt-image-2.5)</strong>는 계정에 따라 OpenAI Organization 인증이 필요할 수 있습니다(403 시). 인증은 5~15분 정도 걸리고, 한 번만 하면 영구입니다.
+            <strong style="color: var(--nv-select-ink);">덕트테이프(gpt-image-2.6)</strong>는 계정에 따라 OpenAI Organization 인증이 필요할 수 있습니다(403 시). 인증은 5~15분 정도 걸리고, 한 번만 하면 영구입니다.
           </p>
         </div>
       </div>

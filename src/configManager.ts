@@ -239,9 +239,9 @@ export interface AppConfig {
   otherImagesModel?: 'gemini-2.5-flash' | 'gemini-2.0-flash-exp' | 'gemini-3-pro' | 'gemini-3-pro-4k';
   lockThumbnailTo4K?: boolean; // 기본값 true: 썸네일은 항상 4K 품질
 
-  // ✅ OpenAI 이미지 모델·품질 선택 ([2026-10-10] Sunburst = 기본·품질형, Flare = 속도형 두 가지만),
-  //    gpt-image-2.5-flare/sunburst = 2026-09 신모델 — xhigh/max 는 2.5 계열에서만 유효)
-  openaiImageModel?: 'gpt-image-2.5-flare' | 'gpt-image-2.5-sunburst';
+  // ✅ OpenAI 이미지 모델·품질 선택 ([2026-11-06] 2.6 Sunburst = 기본·품질형, 2.6 Flare = 속도형, 2.5 두 모델도 유지),
+  //    gpt-image-2.5 / 2.6 = 5단계 품질 — xhigh/max 는 2.5·2.6 계열에서만 유효)
+  openaiImageModel?: 'gpt-image-2.6-sunburst' | 'gpt-image-2.6-flare' | 'gpt-image-2.5-sunburst' | 'gpt-image-2.5-flare';
   openaiImageQuality?: 'low' | 'medium' | 'high' | 'xhigh' | 'max' | 'auto';
   // [2026-10-10] 젠스파크 이미지 모델 id(gensparkModels 의 id). 모르는 값도 그대로 두고 생성기가 GENSPARK_MODEL_NOT_FOUND 로 멈춘다.
   gensparkImageModel?: string;
@@ -645,10 +645,10 @@ export async function loadConfig(): Promise<AppConfig> {
       openaiImageApiKey: parsed.openaiImageApiKey || parsed['openai-image-api-key'] || parsed.openaiApiKey || parsed['openai-api-key'] || undefined,
       // ✅ [2026-01-25] Perplexity API 키 추가
       perplexityApiKey: parsed.perplexityApiKey || parsed['perplexity-api-key'] || undefined,
-      // ✅ OpenAI 이미지 모델·품질·환율 — 기본값 보장 (기본: gpt-image-2.5-sunburst + medium).
+      // ✅ OpenAI 이미지 모델·품질·환율 — 기본값 보장 (기본: gpt-image-2.6-sunburst + medium).
       //    Anything other than the explicit high-cost model falls back to the cheap default,
       //    so a missing/corrupt config can never silently select the expensive option.
-      // [2026-10-10] 목록 밖·옛 값(gpt-image-1/1.5/2)은 기본값 Sunburst 로 — 계정별 settings 파일도 이 경로를 탄다.
+      // [2026-11-06] 목록 밖·옛 값(gpt-image-1/1.5/2)은 기본값 2.6 Sunburst 로(저장된 2.5 선택은 그대로) — 계정별 settings 파일도 이 경로를 탄다.
       openaiImageModel: normalizeOpenaiImageModel(parsed.openaiImageModel),
       // [2026-10-10] 젠스파크 모델: 문자열이면 그대로(모르는 값을 조용히 바꾸지 않는다), 아니면 미지정 → 기본 모델
       gensparkImageModel: typeof parsed.gensparkImageModel === 'string' && parsed.gensparkImageModel.trim()

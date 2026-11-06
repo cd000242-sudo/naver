@@ -77,9 +77,9 @@ describe('Codex 구독 이미지 - 쇼핑 소제목 이미지 소스 라디오',
   }
 
   it('두 곳의 안내 문구가 Codex 구독 이미지를 포함한 엔진 목록을 말한다', () => {
-    const hint = 'AI: 나노바나나2·덕트테이프(gpt-image-2.5)·리더스 무제한·Codex 구독 이미지만 대표 상품 이미지 기반 생성';
+    const hint = 'AI: 나노바나나2·덕트테이프(gpt-image-2.6)·리더스 무제한·Codex 구독 이미지만 대표 상품 이미지 기반 생성';
     expect(html.split(hint).length - 1).toBe(2);
-    expect(html).not.toContain('AI: 나노바나나2·덕트테이프(gpt-image-2.5)·리더스 무제한만 대표 상품 이미지 기반 생성');
+    expect(html).not.toContain('AI: 나노바나나2·덕트테이프(gpt-image-2.6)·리더스 무제한만 대표 상품 이미지 기반 생성');
   });
 
   it('연속발행 · 다중계정 라디오 처리는 하드코딩 대신 imgSyncShoppingEngineFor 로 판정한다', () => {

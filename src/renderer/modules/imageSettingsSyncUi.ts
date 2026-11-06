@@ -19,7 +19,7 @@ import {
 /** Marks a `change` event the painter fired itself, so the image tab handler can skip its own side effects. */
 export const IMG_SYNC_PAINT_FLAG = 'blnImageSettingsPaint';
 
-const IMG_SYNC_OPENAI_MODELS = ['gpt-image-2.5-flare', 'gpt-image-2.5-sunburst'];
+const IMG_SYNC_OPENAI_MODELS = ['gpt-image-2.6-sunburst', 'gpt-image-2.6-flare', 'gpt-image-2.5-sunburst', 'gpt-image-2.5-flare'];
 const IMG_SYNC_OPENAI_QUALITIES = ['low', 'medium', 'high', 'xhigh', 'max'];
 const IMG_SYNC_RATIO_SELECTS: ReadonlyArray<readonly [string, string]> = [
   ['thumbnail-ratio-select', 'thumbnailImageRatio'],

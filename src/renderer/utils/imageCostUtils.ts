@@ -22,7 +22,7 @@ export function getCostRiskProviderLabel(provider: string): string {
     if (p === 'nano-banana') return '나노바나나 (Gemini 2.5 Flash Image, ₩54/장)';
     if (p === 'nano-banana-2') return '나노바나나2 (Nano Banana 2.1, ₩97/장)';
     if (p === 'nano-banana-pro') return '나노바나나 프로 (Gemini 3 Pro Image, ₩185/장)';
-    if (p === 'openai-image') return 'OpenAI 덕트테이프 (gpt-image-2.5 Flare / Sunburst)';
+    if (p === 'openai-image') return 'OpenAI 덕트테이프 (gpt-image-2.6 Sunburst / Flare)';
     if (p === 'dall-e-3') return 'OpenAI GPT 이미지 시리즈 (레거시 설정)';
     if (p === 'codex-image') return 'Codex 구독 이미지 (GPT 이미지 · 별도 비용 없음)';
     return p || 'AI 이미지';
@@ -45,14 +45,18 @@ export function getTodayKey(): string {
  * import할 수 없으므로 표시용 사본을 둔다 (가격 변경 시 두 곳 동시 갱신 필요).
  */
 const OPENAI_IMAGE_PRICE_USD: Record<string, Record<string, number>> = {
-    // gpt-image-2.5 (2026-09): 5단계. [2026-10-10] 덕트테이프는 이 두 모델만 남겼다 (옛 1.5/2 단가는 기록용 apiUsageTracker 에만 둔다).
+    // gpt-image-2.6 (2026-11-04): 5단계. 공식 장당 가격 미공개 — 토큰 단가 기준 2.5 와 같은 값으로 둔 추정치 (공식 가격이 공개되면 apiUsageTracker 와 함께 갱신).
+    'gpt-image-2.6-sunburst': { low: 0.0059, medium: 0.0132, high: 0.0527, xhigh: 0.0937, max: 0.2107 },
+    'gpt-image-2.6-flare': { low: 0.0059, medium: 0.0132, high: 0.0527, xhigh: 0.0937, max: 0.2107 },
+    // gpt-image-2.5 (2026-09): 5단계. [2026-10-10] 덕트테이프는 2.5 두 모델만 남겼다 (옛 1.5/2 단가는 기록용 apiUsageTracker 에만 둔다).
     'gpt-image-2.5-flare': { low: 0.0059, medium: 0.0132, high: 0.0527, xhigh: 0.0937, max: 0.2107 },
     'gpt-image-2.5-sunburst': { low: 0.0059, medium: 0.0132, high: 0.0527, xhigh: 0.0937, max: 0.2107 },
 };
 
-/** OpenAI 이미지 모델이 5단계 품질(xhigh/max)을 지원하는지 — gpt-image-2.5 계열만 */
+/** OpenAI 이미지 모델이 5단계 품질(xhigh/max)을 지원하는지 — gpt-image-2.5 / 2.6 계열만 */
 export function isOpenAIImageModelFiveTier(model: string): boolean {
-    return String(model || '').startsWith('gpt-image-2.5');
+    const m = String(model || '');
+    return m.startsWith('gpt-image-2.5') || m.startsWith('gpt-image-2.6');
 }
 
 /** 모델이 지원하는 품질 목록 (UI 옵션 활성/비활성 판단용) */
@@ -64,15 +68,15 @@ export function getOpenAIImageQualities(model: string): string[] {
 
 /** OpenAI 이미지 한 장당 예상 비용(원). 모델/품질 미지정 시 저비용 기본으로 폴백. */
 export function getOpenAIImageCostKRW(model: string, quality: string, usdToKrwRate: number = 1400): number {
-    const tier = OPENAI_IMAGE_PRICE_USD[model] || OPENAI_IMAGE_PRICE_USD['gpt-image-2.5-sunburst'];
-    // xhigh/max 는 2.5 전용 — 구 모델에 들어오면 high 로 취급 (생성기와 동일 규칙)
+    const tier = OPENAI_IMAGE_PRICE_USD[model] || OPENAI_IMAGE_PRICE_USD['gpt-image-2.6-sunburst'];
+    // xhigh/max 는 2.5·2.6 전용 — 구 모델에 들어오면 high 로 취급 (생성기와 동일 규칙)
     const usd = tier[quality] ?? (quality === 'xhigh' || quality === 'max' ? tier.high : tier.medium);
     const rate = (typeof usdToKrwRate === 'number' && usdToKrwRate > 0) ? usdToKrwRate : 1400;
     return Math.round(usd * rate);
 }
 
 /**
- * "한 장당 약 ₩18원 (gpt-image-2.5-sunburst / Medium)" 형태의 표시 문자열.
+ * "한 장당 약 ₩18원 (gpt-image-2.6-sunburst / Medium)" 형태의 표시 문자열.
  * imageCount > 1이면 "× N장 = ₩XXX" 총액을 덧붙인다.
  */
 export function formatOpenAIImageCostLabel(

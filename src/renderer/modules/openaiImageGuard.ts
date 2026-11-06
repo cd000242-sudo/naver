@@ -3,7 +3,7 @@
  *
  * 정책:
  *   - dall-e-3: 2026-05-12 OpenAI 폐기 → 5/12 이후 호출 차단, 5/12 이전은 1회성 D-Day 안내
- *   - openai-image (덕트테이프, gpt-image-2.5): 계정에 따라 OpenAI Org Verification 필요할 수 있음 →
+ *   - openai-image (덕트테이프, gpt-image-2.6): 계정에 따라 OpenAI Org Verification 필요할 수 있음 →
  *     첫 사용 시 인증 가이드 모달, 사용자가 '인증 완료' 확인하면 이후 스킵
  *
  * 사용자 원칙: 폴백 금지. 사용자가 선택한 엔진이 사용 불가하면 발행 전체를 중단하고
@@ -131,12 +131,12 @@ export async function checkDallE3Deadline(imageSource: string): Promise<GuardRes
             <p style="margin: 0 0 0.75rem;">기존 OpenAI 이미지 설정은 현재 <strong>GPT 이미지 시리즈</strong>로 전환해서 사용해야 합니다.</p>
             <p style="margin: 0 0 0.75rem; color: var(--nv-amber);">⚠️ 다른 이미지 엔진을 선택해주세요.</p>
             <ul style="margin: 0.5rem 0 0; padding-left: 1.2rem; color: var(--nv-select-ink); font-size: 0.88rem;">
-                <li><strong>덕트테이프(gpt-image-2.5)</strong> — OpenAI 계정 상태에 따라 Org 인증 필요, 한글 최강</li>
+                <li><strong>덕트테이프(gpt-image-2.6)</strong> — OpenAI 계정 상태에 따라 Org 인증 필요, 한글 최강</li>
                 <li><strong>나노바나나 프로</strong> — Gemini API, 한글 강</li>
                 <li><strong>Flow</strong> — Google AI Pro 무료 쿼터</li>
                 <li><strong>ImageFX</strong> — Google Labs 실험적 무료, 계정/IP 접근 제한 가능</li>
             </ul>
-            <p style="margin: 0.75rem 0 0; color: var(--nv-select-ink); font-size: 0.8rem;">참고: 5/12 이후 OpenAI 이미지 라인은 덕트테이프(gpt-image-2.5)만 남습니다.</p>
+            <p style="margin: 0.75rem 0 0; color: var(--nv-select-ink); font-size: 0.8rem;">참고: 5/12 이후 OpenAI 이미지 라인은 덕트테이프(gpt-image-2.6)만 남습니다.</p>
         `,
         primary: { label: '확인 (다른 엔진 선택)', danger: true },
     });
@@ -144,7 +144,7 @@ export async function checkDallE3Deadline(imageSource: string): Promise<GuardRes
 }
 
 /**
- * 덕트테이프(gpt-image-2.5) Org Verification 가이드 (모델 무관: 403 이 날 때를 대비한 안내).
+ * 덕트테이프(gpt-image-2.6) Org Verification 가이드 (모델 무관: 403 이 날 때를 대비한 안내).
  *   - 첫 선택 시 인증 가이드 모달
  *   - 사용자가 '인증 완료' 클릭하면 이후 스킵
  *   - '아직 인증 안 함' 선택 시 차단 (폴백 금지)
@@ -157,7 +157,7 @@ export async function checkOpenAIVerification(imageSource: string): Promise<Guar
         icon: '🦆',
         title: '덕트테이프 — Org 인증 확인',
         bodyHtml: `
-            <p style="margin: 0 0 0.75rem;">OpenAI 덕트테이프 모델(<strong>gpt-image-2.5</strong>)은 계정에 따라 <strong>Organization Verification</strong>이 완료돼야 호출될 수 있습니다.</p>
+            <p style="margin: 0 0 0.75rem;">OpenAI 덕트테이프 모델(<strong>gpt-image-2.6</strong>)은 계정에 따라 <strong>Organization Verification</strong>이 완료돼야 호출될 수 있습니다.</p>
             <p style="margin: 0 0 0.5rem; font-weight: 600; color: var(--nv-amber);">인증 절차</p>
             <ol style="margin: 0 0 0.75rem; padding-left: 1.2rem; color: var(--nv-select-ink); font-size: 0.88rem; line-height: 1.7;">
                 <li>OpenAI Platform 로그인 → Settings → Organization → General</li>
