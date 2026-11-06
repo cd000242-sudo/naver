@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T04:45:53.318Z",
+ "builtAt": "2026-11-06T04:55:56.939Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "신용융자 담보비율 3개월 면제",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 46,
-   "recent20": 12,
-   "press": 46,
-   "firstArticleAt": "2026-11-06T03:16:00.000Z",
+   "articles90": 45,
+   "recent20": 10,
+   "press": 45,
+   "firstArticleAt": "2026-11-06T03:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "9일부터 증권사의 신용융자 담보비율 유지의무 석 달 면제",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-06T04:44:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/324438/?sc=Naver"
+     "title": "증시 급락에 정부 긴급 대응…신용융자 담보비율 140% 의무 3개월 면제",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-06T04:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002393526?sid=101"
     },
     {
-     "title": "증시 변동성 확대에 증권사 담보비율 140% 유지 3개월 면제",
-     "press": "daily.hankooki.com",
-     "publishedAt": "2026-11-06T04:44:00.000Z",
-     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1422642"
+     "title": "당국 \"증권사 신용융자 담보비율 140% 유지 의무 3개월 면제\"",
+     "press": "econovill.com",
+     "publishedAt": "2026-11-06T04:52:00.000Z",
+     "link": "https://www.econovill.com/news/articleView.html?idxno=756305"
     },
     {
-     "title": "정부, 신용융자 담보비율 유지의무 9일부터 3개월간 면제",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-06T04:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001038854?sid=101"
+     "title": "‘블루 쓰나미’ 악재에 F4 회의 긴급 소집···신용융자 담보유지 의무...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-06T04:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003481116?sid=101"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 44,
-   "recent20": 27,
-   "press": 17,
-   "firstArticleAt": "2026-11-06T03:17:00.000Z",
+   "articles90": 58,
+   "recent20": 33,
+   "press": 22,
+   "firstArticleAt": "2026-11-06T03:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한·동티모르 정상 공동언론발표에서 발언하는 동티모르 대통령",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-06T04:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016426265?sid=100"
+     "title": "한·동티모르 정상회담…개발협력 확대·치안 공조 강화 합의",
+     "press": "newswhoplus.com",
+     "publishedAt": "2026-11-06T04:54:00.000Z",
+     "link": "https://www.newswhoplus.com/news/articleView.html?idxno=73684"
     },
     {
-     "title": "한·동티모르 정상 공동언론발표에서 발언하는 이재명 대통령",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-06T04:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016426266?sid=100"
+     "title": "韓-동티모르, 치안·지식재산 등 협력 확대키로",
+     "press": "idaegu.co.kr",
+     "publishedAt": "2026-11-06T04:52:00.000Z",
+     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=564616"
     },
     {
-     "title": "韓·동티모르, 치안·개발협력 강화...\"평화·민주주의 인연 미래 동행으...",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-06T04:42:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=561836"
+     "title": "李, 동티모르와 외교부 정례협의체 신설…지식재산·치안 협력 확대",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-06T04:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006405062?sid=100"
     }
    ]
   },
@@ -79,7 +79,7 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 24,
+   "articles90": 26,
    "recent20": 6,
    "press": 14,
    "firstArticleAt": "2026-11-06T03:27:00.000Z",
@@ -87,22 +87,22 @@
    "capped": false,
    "samples": [
     {
+     "title": "'가능한 사랑' 이창동 감독 \"AI 시대, 노동 가치와 인간 존엄성을 묻다...",
+     "press": "starnewsk.com",
+     "publishedAt": "2026-11-06T04:52:00.000Z",
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60766"
+    },
+    {
+     "title": "이창동 감독 “‘기생충’ 같은 대성공, 또 나오기 어렵다”(가능한 사...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-06T04:49:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001185052"
+    },
+    {
      "title": "'가능한 사랑' 이창동 감독 \"전도연·설경구·조여정·조인성, 완벽한 앙...",
      "press": "starnewsk.com",
      "publishedAt": "2026-11-06T04:44:00.000Z",
      "link": "http://www.starnewsk.com/news/articleView.html?idxno=60764"
-    },
-    {
-     "title": "'가능한 사랑' 이창동 \"韓 첫 수상 '영평상'...평론가들의 인정 감사\" [K...",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-06T04:42:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60763"
-    },
-    {
-     "title": "이창동 '가능한 사랑', 오늘 넷플릭스 공개…전도연·설경구 재회",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-06T04:38:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2645068"
     }
    ]
   },
@@ -113,14 +113,14 @@
     "nate"
    ],
    "articles90": 25,
-   "recent20": 5,
+   "recent20": 3,
    "press": 13,
    "firstArticleAt": "2026-11-06T03:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "코리아 그랜드 페스티벌 나선 이형일 부총리 [포토]",
+     "title": "코리아 그랜드 페스티벌 현장점검 나선 이형일 부총리 [포토]",
      "press": "etoday.co.kr",
      "publishedAt": "2026-11-06T04:44:00.000Z",
      "link": "https://www.etoday.co.kr/news/view/2645074"
@@ -140,34 +140,66 @@
    ]
   },
   {
+   "keyword": "장동혁 국민의힘 대표",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 26,
+   "recent20": 5,
+   "press": 12,
+   "firstArticleAt": "2026-11-06T03:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[포토] 예산정책협의회 발언하는 장동혁",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-06T04:50:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3446536"
+    },
+    {
+     "title": "오세훈, 국힘과 국회서 대여협공…장동혁, 재정 칭찬하며 \"한팀\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-06T04:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016426310?sid=102"
+    },
+    {
+     "title": "[포토] 국민의힘-서울특별시 예산정책협의회",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-06T04:40:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3446533"
+    }
+   ]
+  },
+  {
    "keyword": "발언하는 오세훈 서울시장",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
+   "articles90": 6,
    "recent20": 2,
    "press": 5,
-   "firstArticleAt": "2026-11-06T03:17:00.000Z",
+   "firstArticleAt": "2026-11-06T03:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[포토] 예산정책협의회 발언하는 오세훈 서울시장",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-06T04:54:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3446542"
+    },
+    {
+     "title": "[포토] 예산정책협의회 발언하는 오세훈",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-06T04:52:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3446539"
+    },
     {
      "title": "[포토] 오세훈 시장 '국민의힘-서울시 예산정책협의회 발언'",
      "press": "asiatoday.co.kr",
      "publishedAt": "2026-11-06T04:30:00.000Z",
      "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261106010002498"
-    },
-    {
-     "title": "'서울 예산' 놓고 머리 맞댄 장동혁-오세훈…\"국힘과 서울은 '한 팀'\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-06T04:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005437631?sid=100"
-    },
-    {
-     "title": "[포토] 예산정책협의회서 발언하는 오세훈 시장",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-06T04:00:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/06/2026110600159.html"
     }
    ]
   },
@@ -176,13 +208,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
    "firstArticleAt": "2026-11-06T03:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김영훈 장관 \"반도체 성장 온기 청년까지 못 닿아\"…일자리 대책 마련 ...",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-06T04:46:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=561842"
+    },
     {
      "title": "국힘 이소희, 李 정부 청년 예산안에 \"우리끼리 인건비 예산인가\"",
      "press": "iminju.net",
@@ -194,44 +232,6 @@
      "press": "m-i.kr",
      "publishedAt": "2026-11-06T04:20:00.000Z",
      "link": "https://www.m-i.kr/news/articleView.html?idxno=2015423"
-    },
-    {
-     "title": "발달장애인 작가 은혜의 눈물… '권리중심 공공일자리' 예산 삭감의 이...",
-     "press": "thescoop.co.kr",
-     "publishedAt": "2026-11-06T03:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/665/0000008505?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "2026 소상공인의 날 행사",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-06T03:23:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "소상공인의 날 행사에서 만나는 아기자기 소품들",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-06T04:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016426175?sid=102"
-    },
-    {
-     "title": "2026 서울시 소상공인의 날 기념행사 열려",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-06T04:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016426173?sid=102"
-    },
-    {
-     "title": "양평군 '소상공인의 날' 기념식 개최",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-06T04:00:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3744330"
     }
    ]
   }
