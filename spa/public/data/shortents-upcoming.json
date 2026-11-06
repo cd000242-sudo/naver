@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T00:44:09.877Z",
+ "builtAt": "2026-11-06T00:54:15.565Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,10 +15,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 22,
-   "recent20": 4,
-   "press": 21,
-   "firstArticleAt": "2026-11-05T23:18:00.000Z",
+   "articles90": 19,
+   "recent20": 1,
+   "press": 18,
+   "firstArticleAt": "2026-11-05T23:26:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -48,13 +48,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-05T23:15:00.000Z",
+   "articles90": 9,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-05T23:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "LIV 골프, 출범 5년 만에 운영 종료 수순…파산법원에 청산 계획 제출",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-06T00:44:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/003/0014305431"
+    },
     {
      "title": "LIV 골프, 출범 5년 만에 역사 속으로…\"사업 종료\"",
      "press": "kbsm.net",
@@ -66,12 +72,6 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-06T00:04:00.000Z",
      "link": "https://m.sports.naver.com/golf/article/001/0016425438"
-    },
-    {
-     "title": "LIV 골프, 사업 종료 발표…'출범 5년 만에 역사 속으로'",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-05T23:53:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/277/0005838934"
     }
    ]
   },
@@ -80,30 +80,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 21,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-05T23:15:00.000Z",
+   "articles90": 20,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-05T23:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'조작 기소 특검' 필리버스터 17시간째...국민의힘 오후 규탄대회",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-06T00:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002429053?sid=100"
+    },
+    {
+     "title": "'조작기소 특검법' 오늘 국회 표결 전망…여야 필리버스터 격돌",
+     "press": "ppss.kr",
+     "publishedAt": "2026-11-06T00:42:00.000Z",
+     "link": "https://www.ppss.kr/news/articleView.html?idxno=319420"
+    },
     {
      "title": "'조작기소 특검법' 필리버스터‥본회의 통과 초읽기",
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-06T00:34:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/214/0001533882?sid=100"
-    },
-    {
-     "title": "조작기소 특검법안 필리버스터 이어가는 주진우 의원",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-06T00:11:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261106000237"
-    },
-    {
-     "title": "본회의 무제한 토론 이어가는 주진우 의원",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-06T00:11:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261106000235"
     }
    ]
   },
@@ -112,10 +112,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
+   "articles90": 14,
    "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-05T23:19:00.000Z",
+   "firstArticleAt": "2026-11-05T23:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -136,38 +136,6 @@
      "press": "newspim.com",
      "publishedAt": "2026-11-05T23:52:00.000Z",
      "link": "https://www.newspim.com/news/view/20261106000175"
-    }
-   ]
-  },
-  {
-   "keyword": "재혼 황후 논란",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-05T23:19:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘안색 논란’ 주지훈, ‘재혼 황후’ 화제성은 합격",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-06T00:22:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001278621"
-    },
-    {
-     "title": "'재혼 황후' 주지훈, 낯빛은 흙빛·아우라는 황금빛",
-     "press": "ize.co.kr",
-     "publishedAt": "2026-11-06T00:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/465/0000020809"
-    },
-    {
-     "title": "'피끓는 청춘' 커플, 12년만 '재혼'..이종석·이세영, 논란 하나 없었다...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-05T23:33:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003485072"
     }
    ]
   },
@@ -200,6 +168,38 @@
      "press": "spotvnews.co.kr",
      "publishedAt": "2026-11-06T00:07:00.000Z",
      "link": "https://m.entertain.naver.com/article/477/0000637451"
+    }
+   ]
+  },
+  {
+   "keyword": "재혼 황후 논란",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-05T23:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘안색 논란’ 주지훈, ‘재혼 황후’ 화제성은 합격",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-06T00:22:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001278621"
+    },
+    {
+     "title": "'재혼 황후' 주지훈, 낯빛은 흙빛·아우라는 황금빛",
+     "press": "ize.co.kr",
+     "publishedAt": "2026-11-06T00:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/465/0000020809"
+    },
+    {
+     "title": "'피끓는 청춘' 커플, 12년만 '재혼'..이종석·이세영, 논란 하나 없었다...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-05T23:33:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003485072"
     }
    ]
   }
