@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T02:24:54.882Z",
+ "builtAt": "2026-11-06T02:34:58.238Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,70 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 18,
  "candidates": [
   {
    "keyword": "김민석 신천지 사과",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 67,
-   "recent20": 8,
-   "press": 61,
-   "firstArticleAt": "2026-11-06T00:57:00.000Z",
+   "articles90": 64,
+   "recent20": 13,
+   "press": 58,
+   "firstArticleAt": "2026-11-06T01:05:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "김민석 \"당원께 죄송\"…공개 최고위서도 신천지 논란 사과",
-     "press": "tbs.seoul.kr",
-     "publishedAt": "2026-11-06T02:20:00.000Z",
-     "link": "http://tbs.seoul.kr/news/newsView.do?typ_800=9&idx_800=3538698&seq_800=20531599"
+     "title": "친청계, 김민석 공개 사과에도 반발…지도부 내홍 격화",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-06T02:32:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261106010002466"
     },
     {
-     "title": "김민석 사흘만 다시 사과했지만...친청계 \"상응하는 책임 져라\"",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-06T02:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000519453?sid=100"
+     "title": "'판도라의 상자' 닫은 김민석, '역공' 나선 정청래…與 내전 폭풍전야",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-06T02:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000141732?sid=100"
     },
     {
-     "title": "김민석, 신천지 집단 입당 의혹 공식 사과 \"상처 입은 모든 분께 죄송\"",
-     "press": "mhj21.com",
-     "publishedAt": "2026-11-06T02:18:00.000Z",
-     "link": "https://www.mhj21.com/news/articleView.html?idxno=254706"
+     "title": "김민석 '신천지 입당 의혹' 공개 재사과… 당내 갈등 수습 나서",
+     "press": "jeonmae.co.kr",
+     "publishedAt": "2026-11-06T02:30:00.000Z",
+     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1309181"
     }
    ]
   },
   {
-   "keyword": "롯데쇼핑 3분기 34.5% 증가",
+   "keyword": "롯데쇼핑 영업익 34.5% 증가",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 45,
+   "articles90": 30,
    "recent20": 5,
-   "press": 45,
-   "firstArticleAt": "2026-11-06T01:00:00.000Z",
+   "press": 30,
+   "firstArticleAt": "2026-11-06T01:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "백화점·마트 호조…롯데쇼핑, 3분기 영업익 34.5% ‘쑥’",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-06T02:22:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261106027216325"
+     "title": "롯데쇼핑, 3분기 영업익 1756억…백화점이 이익 이끌었다",
+     "press": "segye.com",
+     "publishedAt": "2026-11-06T02:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004173066?sid=101"
     },
     {
-     "title": "롯데쇼핑, 3분기 영업이익 34.5% '쑥'....백화점·마트 호조에 자회사 체...",
-     "press": "techm.kr",
-     "publishedAt": "2026-11-06T02:20:00.000Z",
-     "link": "https://www.techm.kr/news/articleView.html?idxno=157005"
+     "title": "롯데쇼핑 3분기 영업익 34.5%↑…외국인 몰린 백화점 역대 최대 매출",
+     "press": "donga.com",
+     "publishedAt": "2026-11-06T02:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003760583?sid=101"
     },
     {
-     "title": "롯데쇼핑·마리오아울렛, 3분기 실적 발표·'입동 맞이 프로모션' 개최",
-     "press": "wsobi.com",
-     "publishedAt": "2026-11-06T02:16:00.000Z",
-     "link": "http://www.wsobi.com/news/articleView.html?idxno=321193"
+     "title": "백화점·마트 훈풍 탄 롯데쇼핑, 3분기 영업익 34.5% '쑥'",
+     "press": "enewstoday.co.kr",
+     "publishedAt": "2026-11-06T02:25:00.000Z",
+     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2489179"
     }
    ]
   },
@@ -79,30 +80,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 31,
-   "recent20": 3,
-   "press": 28,
-   "firstArticleAt": "2026-11-06T00:55:00.000Z",
+   "articles90": 23,
+   "recent20": 6,
+   "press": 22,
+   "firstArticleAt": "2026-11-06T01:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정점식 \"李에게 소통이란 독재 연장일 뿐… 독재자 차베스와 비슷\"",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-06T02:22:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3446487"
+     "title": "‘조작기소 특검법안’ 오늘 본회의 표결",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-06T02:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002719912?sid=100"
     },
     {
-     "title": "정점식 \"李, '재판 삭제' 사주해놓고 유튜브서 소통 연출…끔찍한 모순...",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-06T02:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000141727?sid=100"
+     "title": "정점식 \"민주당 반드시 죗값 치를 것\" 강하게 성토",
+     "press": "tbs.seoul.kr",
+     "publishedAt": "2026-11-06T02:25:00.000Z",
+     "link": "http://tbs.seoul.kr/news/newsView.do?typ_800=9&idx_800=3538699&seq_800=20531600"
     },
     {
-     "title": "정점식 “李 재판 지우려 3대 조작…與 부역자 160명 죗값 치를 것”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-06T02:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004679449?sid=100"
+     "title": "조작기소 특검법 처리 목전…여야, 본회의 표결 앞두고 격돌",
+     "press": "straightnews.co.kr",
+     "publishedAt": "2026-11-06T02:24:00.000Z",
+     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=314790"
     }
    ]
   },
@@ -111,10 +112,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 28,
-   "recent20": 7,
-   "press": 25,
-   "firstArticleAt": "2026-11-06T01:12:00.000Z",
+   "articles90": 22,
+   "recent20": 4,
+   "press": 21,
+   "firstArticleAt": "2026-11-06T01:24:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
@@ -139,49 +140,89 @@
    ]
   },
   {
-   "keyword": "조작기소 특검법 필리버스터",
+   "keyword": "AI 모델 프로젝트 성과 공개",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 33,
-   "recent20": 5,
-   "press": 23,
-   "firstArticleAt": "2026-11-06T00:55:00.000Z",
+   "articles90": 20,
+   "recent20": 3,
+   "press": 19,
+   "firstArticleAt": "2026-11-06T01:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[뉴스포스트 한입이슈] 내란 우두머리·조작기소 특검법·청해부대 확대",
-     "press": "newspost.kr",
-     "publishedAt": "2026-11-06T02:24:00.000Z",
-     "link": "https://www.newspost.kr/news/articleView.html?idxno=227128"
+     "title": "후보물질 발굴부터 임상까지 AI 전환…SK바이오팜, 특화 파운데이션 모...",
+     "press": "widedaily.com",
+     "publishedAt": "2026-11-06T02:34:00.000Z",
+     "link": "https://www.widedaily.com/news/articleView.html?idxno=303064"
     },
     {
-     "title": "이원석 전 검찰총장, '조작기소 특검법' 중단 촉구…\"재판 독립 침해\"",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-06T02:22:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=172057"
+     "title": "카카오, AI 에이전트 판단 특화 모델 오픈소스 공개",
+     "press": "seoulfn.com",
+     "publishedAt": "2026-11-06T02:17:00.000Z",
+     "link": "https://www.seoulfn.com/news/articleView.html?idxno=642109"
     },
     {
-     "title": "與, '조작기소 특검법' 野 반발에 \"정치검찰과 공범임을 자인한 꼴\"(종합...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-06T02:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009274135?sid=100"
+     "title": "GPT-6보다 43배 빠르다…카카오, 업무 특화 AI 공개",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-06T02:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002719881?sid=105"
     }
    ]
   },
   {
-   "keyword": "LIV 5년 만에 사업 종료",
+   "keyword": "김장",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-06T01:03:00.000Z",
+   "articles90": 27,
+   "recent20": 4,
+   "press": 14,
+   "firstArticleAt": "2026-11-06T01:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "영월군, 취약계층 1000가구에 김장김치 나눔",
+     "press": "enewstoday.co.kr",
+     "publishedAt": "2026-11-06T02:33:00.000Z",
+     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2489289"
+    },
+    {
+     "title": "주말엔 세계유산 김장여행 어때? 평창고랭지 김장축제 11.16까지",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-06T02:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002719918?sid=103"
+    },
+    {
+     "title": "HD현대 건설기계 부문, 각 사업장서 김장 나눔행사 열어",
+     "press": "weekly.hankooki.com",
+     "publishedAt": "2026-11-06T02:20:00.000Z",
+     "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7192565"
+    }
+   ]
+  },
+  {
+   "keyword": "LIV 골프, 5년 만에 사업 종료",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-06T01:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'골프계 지각변동' LIV 골프, 출범 5년 만에 사업 종료",
+     "press": "maniareport.com",
+     "publishedAt": "2026-11-06T02:28:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/425/0000213998"
+    },
     {
      "title": "세계 골프계 두쪽낸 LIV 골프 5년 만에 완전 폐업…PGA 투어 돌아가려는...",
      "press": "spochoo.com",
@@ -193,22 +234,49 @@
      "press": "viva100.com",
      "publishedAt": "2026-11-06T02:04:00.000Z",
      "link": "https://www.viva100.com/article/20261106500240"
+    }
+   ]
+  },
+  {
+   "keyword": "여객기",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-06T01:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "인천공항경찰, 유럽 곳곳 여객기 폭탄위협에 '상시 대비태세'",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-06T02:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016425961?sid=101"
     },
     {
-     "title": "[LIV] PIF 지원 중단 6개월, 출범 5년 만에 해체 결정…\"투자자와 최종 ...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-06T01:48:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261106000340"
+     "title": "유럽 여객기 최소 25편 폭발물 위협…전투기 출동·긴급착륙 잇따라",
+     "press": "newsworker.co.kr",
+     "publishedAt": "2026-11-06T02:08:00.000Z",
+     "link": "https://www.newsworker.co.kr/news/articleView.html?idxno=512636"
+    },
+    {
+     "title": "유럽 여객기 최소 27편에 폭탄 위협…비상착륙에 전투기까지 출격",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-06T01:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012288681?sid=104"
     }
    ]
   },
   {
    "keyword": "하이닉스 주가",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-06T01:42:00.000Z",
    "exclusive": false,
@@ -233,14 +301,58 @@
      "link": "https://n.news.naver.com/mnews/article/030/0003482967?sid=101"
     }
    ]
+  },
+  {
+   "keyword": "amd",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-06T01:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "IBM-AMD-ORNL, 2028년 실용화 목표로 양자 오류 정정 플랫폼 구축",
+     "press": "epnc.co.kr",
+     "publishedAt": "2026-11-06T02:34:00.000Z",
+     "link": "https://www.epnc.co.kr/news/articleView.html?idxno=409393"
+    },
+    {
+     "title": "AMD 대표 AI 행사 한국 첫 개최…과기정통부-AMD 협력 본격 가동",
+     "press": "hellot.net",
+     "publishedAt": "2026-11-06T02:18:00.000Z",
+     "link": "https://www.hellot.net/news/article.html?no=116071"
+    },
+    {
+     "title": "래블업, 애플·엔비디아 이어 AMD까지…추론 엔진 지원 확대",
+     "press": "newstopkorea.com",
+     "publishedAt": "2026-11-06T01:16:00.000Z",
+     "link": "https://www.newstopkorea.com/news/articleView.html?idxno=48812"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1114,
-  "matched": 530,
-  "avgLeadMin": 493,
+  "flagged": 1120,
+  "matched": 532,
+  "avgLeadMin": 492,
   "recent": [
+   {
+    "keyword": "아파트",
+    "hitKeyword": "현금 2억 서울 아파트",
+    "hitAt": "2026-11-06T11:30:00+09:00",
+    "leadMin": 237
+   },
+   {
+    "keyword": "케인, 뮌헨과 2029년까지 재계약!",
+    "hitKeyword": "해리 케인 바이에른 재계약",
+    "hitAt": "2026-11-06T11:30:00+09:00",
+    "leadMin": 116
+   },
    {
     "keyword": "진쓰레블",
     "hitKeyword": "진쓰레블 사망",
@@ -288,18 +400,6 @@
     "hitKeyword": "현대캐피탈 시즌 첫승",
     "hitAt": "2026-11-06T10:00:00+09:00",
     "leadMin": 660
-   },
-   {
-    "keyword": "서킷브레이커",
-    "hitKeyword": "코스피 서킷브레이커",
-    "hitAt": "2026-11-06T10:00:00+09:00",
-    "leadMin": 26
-   },
-   {
-    "keyword": "blg",
-    "hitKeyword": "BLG 디플러스 기아",
-    "hitAt": "2026-11-06T09:30:00+09:00",
-    "leadMin": 26
    }
   ]
  }
