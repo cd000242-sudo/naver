@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T04:25:44.130Z",
+ "builtAt": "2026-11-06T04:35:48.663Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,143 +8,301 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 18,
  "candidates": [
   {
-   "keyword": "증시 급락 신용융자 면제",
+   "keyword": "신용융자 담보비율 3개월 면제",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 52,
-   "recent20": 7,
-   "press": 52,
-   "firstArticleAt": "2026-11-06T02:56:00.000Z",
+   "articles90": 46,
+   "recent20": 10,
+   "press": 46,
+   "firstArticleAt": "2026-11-06T03:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "F4 “과도한 반대매매 방지해야…증권사 신용융자 담보비율 140% 유지의...",
-     "press": "hani.co.kr",
+     "title": "당국 \"증권사의 신용융자 담보비율 140% 유지의무 3개월 면제\"",
+     "press": "efnews.co.kr",
+     "publishedAt": "2026-11-06T04:34:00.000Z",
+     "link": "http://www.efnews.co.kr/news/articleView.html?idxno=133797"
+    },
+    {
+     "title": "정부 신용융자 담보비율 3개월 면제",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-06T04:33:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000080269"
+    },
+    {
+     "title": "미국발 AI 쇼크에 8% 폭락한 코스피…정부, 신용융자 담보비율 면제 등...",
+     "press": "pointe.co.kr",
+     "publishedAt": "2026-11-06T04:32:00.000Z",
+     "link": "https://www.pointe.co.kr/news/articleView.html?idxno=87289"
+    }
+   ]
+  },
+  {
+   "keyword": "신세계 이석구 사장 선임",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 17,
+   "recent20": 6,
+   "press": 17,
+   "firstArticleAt": "2026-11-06T03:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "신세계, 백화점부문장에 이석구 사장 선임…면세점 대표 겸직",
+     "press": "newsway.co.kr",
+     "publishedAt": "2026-11-06T04:32:00.000Z",
+     "link": "https://www.newsway.co.kr/news/view?ud=2026110611293778025"
+    },
+    {
+     "title": "신세계그룹, 백화점부문장에 이석구 사장…감사 기능 강화",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-06T04:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001271909?sid=103"
+    },
+    {
+     "title": "신세계, 백화점부문장 이석구 사장 선임…경영 건전성 강화",
+     "press": "goodkyung.com",
+     "publishedAt": "2026-11-06T04:30:00.000Z",
+     "link": "https://www.goodkyung.com/news/articleView.html?idxno=293194"
+    }
+   ]
+  },
+  {
+   "keyword": "오르타 동티모르 대통령",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 42,
+   "recent20": 14,
+   "press": 13,
+   "firstArticleAt": "2026-11-06T03:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한-동티모르, 치안·지식재산 협력 확대…초국가 범죄 공동 대응",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-06T04:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003483012?sid=100"
+    },
+    {
+     "title": "韓·동티모르, 외교협의체 신설…기후변화·개발협력 확대",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-06T04:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004679470?sid=100"
+    },
+    {
+     "title": "한-동티모르 정상, 공동언론발표",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-06T04:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014306134?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "가능한 사랑으로 이창동 감독의 작품",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 20,
+   "recent20": 5,
+   "press": 12,
+   "firstArticleAt": "2026-11-06T03:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'가능한 사랑' 어린 전도연, '아이즈원' 조유리였다…'오겜2·3' 이어 전...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-06T04:32:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000637502"
+    },
+    {
+     "title": "이창동 신작 '가능한 사랑', 넷플릭스 통해 11월 6일 전 세계 공개",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-06T04:28:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249219"
+    },
+    {
+     "title": "‘가능한 사랑’ 이창동 감독 “넷플릭스行 주저함 없었다..돈에 안쫓겨...",
+     "press": "osen.co.kr",
      "publishedAt": "2026-11-06T04:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002831030?sid=101"
-    },
-    {
-     "title": "증시 급락에 반대매매 막는다...증권사 담보비율 140% 의무 3개월 면제",
-     "press": "ezyeconomy.com",
-     "publishedAt": "2026-11-06T04:20:00.000Z",
-     "link": "https://www.ezyeconomy.com/news/articleView.html?idxno=241626"
-    },
-    {
-     "title": "“코스피 5000선 붕괴에 반대매매 막는다”…정부, 신용융자 담보비율 ...",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-06T04:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002247556?sid=101"
+     "link": "https://m.entertain.naver.com/article/109/0005635583"
     }
    ]
   },
   {
-   "keyword": "긴급 시장상황점검회의",
+   "keyword": "2026",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 15,
-   "recent20": 0,
-   "press": 15,
-   "firstArticleAt": "2026-11-06T03:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "증시 급락에 정부 긴급 대응…신용융자 담보비율 의무 3개월 면제",
-     "press": "sentv.co.kr",
-     "publishedAt": "2026-11-06T04:00:00.000Z",
-     "link": "https://www.sentv.co.kr/article/view/sentv202611060075"
-    },
-    {
-     "title": "AI 규제 우려로 증시 급락, 금융 당국의 긴급 조치 발표",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-06T03:46:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=884449"
-    },
-    {
-     "title": "F4, 증시 급락에 긴급 대응… 신용융자 담보비율 유지의무 3개월 면제",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-06T03:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003696538?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "내년 일자리 예산",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 11,
-   "recent20": 1,
+   "articles90": 16,
+   "recent20": 16,
    "press": 11,
-   "firstArticleAt": "2026-11-06T03:00:00.000Z",
-   "exclusive": false,
+   "firstArticleAt": "2026-11-06T04:28:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "경기도의회, 행정사무감사 착수…민생경제·예산 집행 검증",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-06T04:20:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2015423"
+     "title": "2026 Women in Film",
+     "press": null,
+     "publishedAt": "2026-11-06T04:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/077/0007229199?sid=104"
     },
     {
-     "title": "발달장애인 작가 은혜의 눈물… '권리중심 공공일자리' 예산 삭감의 이...",
-     "press": "thescoop.co.kr",
-     "publishedAt": "2026-11-06T03:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/665/0000008505?sid=101"
+     "title": "크레버스 CMS영재관, 2026 한국주니어수학올림피아드서 424명 입상",
+     "press": "edu.donga.com",
+     "publishedAt": "2026-11-06T04:34:00.000Z",
+     "link": "https://edu.donga.com/news/articleView.html?idxno=113577"
     },
     {
-     "title": "김영훈 장관 “반도체·수출 온기, ‘청년 첫 일자리’까지 닿지 않아”",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-06T03:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002831024?sid=102"
+     "title": "충주시, 2026년산 공공비축미곡 건조벼 매입 본격",
+     "press": "ccreview.co.kr",
+     "publishedAt": "2026-11-06T04:34:00.000Z",
+     "link": "https://www.ccreview.co.kr/news/articleView.html?idxno=362024"
     }
    ]
   },
   {
    "keyword": "이형일 부총리 페스티벌 점검",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 20,
-   "recent20": 0,
-   "press": 8,
+   "articles90": 22,
+   "recent20": 2,
+   "press": 10,
    "firstArticleAt": "2026-11-06T03:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "이형일 부총리, 행복한백화점 찾아 중소기업·소상공인 격려",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-06T04:34:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249220"
+    },
+    {
+     "title": "이형일, 코리아 그랜드 페스티벌 현장 점검…“성장의 온기 골목상권까...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-06T04:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002719973?sid=101"
+    },
+    {
      "title": "이형일 \"성장 온기 골목상권으로 확산돼야\"…코그페 현장 방문",
      "press": "newsis.com",
      "publishedAt": "2026-11-06T03:56:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014306097?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "발언하는 오세훈 서울시장",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 17,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-06T03:07:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[포토] 오세훈 시장 '국민의힘-서울시 예산정책협의회 발언'",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-06T04:30:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261106010002498"
     },
     {
-     "title": "이형일 \"소비, 경제 활력 원동력…성장 온기 골목까지\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-06T03:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001401150?sid=101"
+     "title": "'서울 예산' 놓고 머리 맞댄 장동혁-오세훈…\"국힘과 서울은 '한 팀'\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-06T04:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005437631?sid=100"
     },
     {
-     "title": "프라이팬 구매하는 이형일 부총리 '엄지척'",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-06T03:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009274338?sid=101"
+     "title": "[포토] 예산정책협의회서 발언하는 오세훈 시장",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-06T04:00:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/06/2026110600159.html"
+    }
+   ]
+  },
+  {
+   "keyword": "연천군",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-06T03:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "대한전문건설협회 경기도회, 한마음 걷기대회 계기로 연천군에 500만원...",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-06T04:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000130893?sid=102"
+    },
+    {
+     "title": "연천군, AI 대응 재난안전대책본부 가동…24시간 방역체계 강화",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-06T04:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000130892?sid=102"
+    },
+    {
+     "title": "연천군, 조류인플루엔자 확산 차단 총력…재난안전대책본부 가동",
+     "press": "kihoilbo.co.kr",
+     "publishedAt": "2026-11-06T03:06:00.000Z",
+     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3040074"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1139,
-  "matched": 541,
-  "avgLeadMin": 501,
+  "flagged": 1145,
+  "matched": 545,
+  "avgLeadMin": 503,
   "recent": [
+   {
+    "keyword": "하이닉스 주가 하락",
+    "hitKeyword": "삼성전자 하이닉스 급락",
+    "hitAt": "2026-11-06T13:30:00+09:00",
+    "leadMin": 1667
+   },
+   {
+    "keyword": "하이닉스",
+    "hitKeyword": "삼성전자 하이닉스 급락",
+    "hitAt": "2026-11-06T13:30:00+09:00",
+    "leadMin": 1101
+   },
+   {
+    "keyword": "하이닉스 주가",
+    "hitKeyword": "삼성전자 하이닉스 급락",
+    "hitAt": "2026-11-06T13:30:00+09:00",
+    "leadMin": 236
+   },
+   {
+    "keyword": "삼성전자 주가",
+    "hitKeyword": "삼성전자 하이닉스 급락",
+    "hitAt": "2026-11-06T13:30:00+09:00",
+    "leadMin": 175
+   },
    {
     "keyword": "하이브",
     "hitKeyword": "하이브 뉴진스 계약 반박",
@@ -180,30 +338,6 @@
     "hitKeyword": "나나 심경 토로",
     "hitAt": "2026-11-06T12:00:00+09:00",
     "leadMin": 136
-   },
-   {
-    "keyword": "LIV 5년 만에 사업 종료",
-    "hitKeyword": "LIV 골프 사업 종료",
-    "hitAt": "2026-11-06T12:00:00+09:00",
-    "leadMin": 75
-   },
-   {
-    "keyword": "LIV 골프, 5년 만에 사업 종료",
-    "hitKeyword": "LIV 골프 사업 종료",
-    "hitAt": "2026-11-06T12:00:00+09:00",
-    "leadMin": 25
-   },
-   {
-    "keyword": "LIV 골프 5년 만에 종료",
-    "hitKeyword": "LIV 골프 사업 종료",
-    "hitAt": "2026-11-06T12:00:00+09:00",
-    "leadMin": 15
-   },
-   {
-    "keyword": "아파트",
-    "hitKeyword": "현금 2억 서울 아파트",
-    "hitAt": "2026-11-06T11:30:00+09:00",
-    "leadMin": 237
    }
   ]
  }
