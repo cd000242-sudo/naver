@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T05:16:04.678Z",
+ "builtAt": "2026-11-06T05:26:08.406Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,81 +13,85 @@
   {
    "keyword": "신용융자 담보비율 면제",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 42,
-   "recent20": 8,
+   "recent20": 7,
    "press": 42,
-   "firstArticleAt": "2026-11-06T03:48:00.000Z",
+   "firstArticleAt": "2026-11-06T03:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "증시 급락에 당국 긴급 대응…신용융자 담보비율 의무 3개월 면제",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-06T05:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006405079?sid=101"
+     "title": "정부, 증시 급락에 반대매매 막는다…증권사 담보비율 유지의무 3개월 ...",
+     "press": "donga.com",
+     "publishedAt": "2026-11-06T05:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003760627?sid=101"
     },
     {
-     "title": "증시 급락에 'F4 긴급 대응'…증권사 신용융자 담보비율 유지 의무 석 달...",
-     "press": "newsprime.co.kr",
-     "publishedAt": "2026-11-06T05:10:00.000Z",
-     "link": "http://www.newsprime.co.kr/news/article.html?no=753994"
+     "title": "증시 급락에 반대매매 안전판 마련…증권사 담보비율 규제 3개월 유예",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-06T05:24:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=846342"
     },
     {
-     "title": "급락장 반대매매 확산 차단…신용융자 담보비율 140% 유지 의무 3개월 면...",
-     "press": "youthdaily.co.kr",
-     "publishedAt": "2026-11-06T05:10:00.000Z",
-     "link": "https://www.youthdaily.co.kr/news/article.html?no=229481"
+     "title": "반대매매 부담 낮춘다... 신용융자 담보비율 의무 3개월 면제",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-06T05:18:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2015457"
     }
    ]
   },
   {
    "keyword": "장동혁 국민의힘 대표",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 24,
-   "recent20": 7,
-   "press": 18,
-   "firstArticleAt": "2026-11-06T03:54:00.000Z",
+   "articles90": 28,
+   "recent20": 9,
+   "press": 21,
+   "firstArticleAt": "2026-11-06T03:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "오세훈·장동혁 \"우리는 한팀…시민의 삶 지키겠다\"",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-06T05:12:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/324446/?sc=Naver"
+     "title": "장동혁·오세훈, 예산정책협의서 대여 공조…“국민의힘과 서울시는 한...",
+     "press": "dnews.co.kr",
+     "publishedAt": "2026-11-06T05:22:00.000Z",
+     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611061415453000991"
     },
     {
-     "title": "오세훈 대권 지지율 1위인데 장동혁은 왜 한동훈 복당 반대하나…당권...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-06T05:10:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16269938"
+     "title": "국힘·서울시 '원팀' 강조…장동혁·정점식, 오세훈과 예산 공조",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-06T05:18:00.000Z",
+     "link": "https://www.ajunews.com/view/20261106135246565"
     },
     {
-     "title": "장동혁·오세훈, 국회서 예산정책협의회…\"서울시와 한 팀\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-06T05:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001401173?sid=100"
+     "title": "국민의힘, ‘코스피 5천피 등락’에 \"대비 부족… 미래대응기금 백지화...",
+     "press": "lawissue.co.kr",
+     "publishedAt": "2026-11-06T05:18:00.000Z",
+     "link": "https://www.lawissue.co.kr/view.php?ud=202611061416263016b3279dfb36_12"
     }
    ]
   },
   {
-   "keyword": "이창동 감독 넷플릭스 사랑",
+   "keyword": "이창동 감독 가능 사랑을 이야기하다",
    "sources": [
     "nate"
    ],
    "articles90": 27,
-   "recent20": 4,
-   "press": 17,
-   "firstArticleAt": "2026-11-06T03:47:00.000Z",
+   "recent20": 2,
+   "press": 16,
+   "firstArticleAt": "2026-11-06T04:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'가능한 사랑' 이창동 \"韓 영화 최악일 때 넷플 선택…돈에 쫓기진 않았...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-06T05:19:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009274479"
+    },
     {
      "title": "‘가능한 사랑’ 이창동 “전도연 오스카 수상? 아무도 몰라‥앞으로 하...",
      "press": "newsen.com",
@@ -99,12 +103,6 @@
      "press": "joynews24.com",
      "publishedAt": "2026-11-06T05:06:00.000Z",
      "link": "http://www.joynews24.com/view/2023480"
-    },
-    {
-     "title": "'가능한 사랑' 이창동 감독 \"전도연, 인간적으로 가까워…여유 좋았다\"...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-06T05:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004122620"
     }
    ]
   },
@@ -113,9 +111,9 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
+   "articles90": 10,
    "recent20": 3,
-   "press": 9,
+   "press": 10,
    "firstArticleAt": "2026-11-06T04:00:00.000Z",
    "exclusive": false,
    "capped": false,
@@ -133,10 +131,10 @@
      "link": "http://www.newsprime.co.kr/news/article.html?no=753994"
     },
     {
-     "title": "코스피 5000선 붕괴에 정부 긴급조치...신용융자 담보규제 3개월 면제",
-     "press": "wikileaks-kr.org",
-     "publishedAt": "2026-11-06T05:02:00.000Z",
-     "link": "https://www.wikileaks-kr.org/news/articleView.html?idxno=194307"
+     "title": "증권사 담보비율 유지 의무 3개월 면제…하락장에 긴급 대응",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-06T05:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001163489?sid=101"
     }
    ]
   },
@@ -145,13 +143,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 5,
    "recent20": 1,
-   "press": 4,
+   "press": 5,
    "firstArticleAt": "2026-11-06T04:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "예산 64% 일자리 사업 배정…노동장관 “성장 성과, 일자리로”",
+     "press": "dnews.co.kr",
+     "publishedAt": "2026-11-06T05:22:00.000Z",
+     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611061409295960989"
+    },
     {
      "title": "내년 일자리 예산 25.1조···청년 첫 취업·AI 등 첨단 분야 직업훈련...",
      "press": "smartbizn.com",
@@ -163,12 +167,6 @@
      "press": "joongangenews.com",
      "publishedAt": "2026-11-06T04:46:00.000Z",
      "link": "https://www.joongangenews.com/news/articleView.html?idxno=561842"
-    },
-    {
-     "title": "국힘 이소희, 李 정부 청년 예산안에 \"우리끼리 인건비 예산인가\"",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-06T04:38:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=172073"
     }
    ]
   },
@@ -204,43 +202,11 @@
      "link": "https://m.entertain.naver.com/article/109/0005635582"
     }
    ]
-  },
-  {
-   "keyword": "서울 소상공인 날 행사",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 2,
-   "firstArticleAt": "2026-11-06T04:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "청소년 교육·농촌일손돕기·인재육성·소상공인 지원 사회공헌 실천",
-     "press": "wsobi.com",
-     "publishedAt": "2026-11-06T05:08:00.000Z",
-     "link": "http://www.wsobi.com/news/articleView.html?idxno=321218"
-    },
-    {
-     "title": "소상공인의 날 행사에서 만나는 아기자기 소품들",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-06T04:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016426175?sid=102"
-    },
-    {
-     "title": "2026 서울시 소상공인의 날 기념행사 열려",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-06T04:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016426173?sid=102"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1150,
+  "flagged": 1151,
   "matched": 547,
   "avgLeadMin": 502,
   "recent": [
