@@ -3027,6 +3027,7 @@ export function buildModeBasedPrompt(
       undefined, // bloggerIdentity: 호출자에서 주입 가능 (v1.8.0 LDF)
       (source as any).primaryKeyword || (source as any).keywords?.[0], // v1.8.1 LDF Phase 2: CTR 훅 매개
       (source as any).structureGuideBlock, // [2026-08-19] 노출 글 구조 수치 (선택)
+      getPrimaryKeywordFromSource(source as any), // [2026-11-06] 경제 정보 글 판정용 — 실제 소스의 키워드는 metadata.keywords[0]
     );
   }
 

@@ -406,7 +406,7 @@ export function validateStructuredContent(content: StructuredContent, source?: C
     }
 
     // 상한은 hashtagCountPolicy 단일 출처(HT-3).
-    content.hashtags = clampHashtags(generatedHashtags, (source as any)?.contentMode).hashtags;
+    content.hashtags = clampHashtags(generatedHashtags, (source as any)?.contentMode, { primaryKeyword }).hashtags;
     console.log(`[validateStructuredContent] hashtags 누락 → 자동 생성: ${content.hashtags.join(', ')}`);
   } else {
     // 기존 해시태그에 # 접두사가 없으면 추가
@@ -465,7 +465,7 @@ export function validateStructuredContent(content: StructuredContent, source?: C
   // hashtag-strategy HT-2가 금지하는 "변형 채우기"가 정확히 이것이고,
   // 검색되지 않는 태그는 자리만 차지하고 노출에 기여하지 않는다.
   // 개수 상한도 모드 무관 8개 고정이 아니라 HT-3 기준(단일 출처)을 따른다.
-  const clampedHashtags = clampHashtags(normalizedHashtags, (source as any)?.contentMode);
+  const clampedHashtags = clampHashtags(normalizedHashtags, (source as any)?.contentMode, { primaryKeyword });
   content.hashtags = clampedHashtags.hashtags;
 
   // metadata 객체 복구

@@ -89,9 +89,9 @@ describe('모드별 주입 — 교차 오염 없음', () => {
 });
 
 describe('소제목 키워드 접두 — 모드별 분기', () => {
-  it('검색 모드는 접두를 유지하고 홈판만 끈다', () => {
-    expect(resolveHeadingKeywordPatchMax('seo')).toBe(2);
-    expect(resolveHeadingKeywordPatchMax('mate')).toBe(2);
+  it('검색 모드는 접두를 1개로 줄이고 홈판만 끈다', () => {
+    expect(resolveHeadingKeywordPatchMax('seo')).toBe(1);
+    expect(resolveHeadingKeywordPatchMax('mate')).toBe(1);
     expect(resolveHeadingKeywordPatchMax('homefeed')).toBe(0);
   });
 

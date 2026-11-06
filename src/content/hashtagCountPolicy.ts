@@ -39,6 +39,39 @@ export function resolveHashtagCountRange(mode: string | undefined): HashtagCount
 }
 
 /**
+ * [2026-11-06] 네이버 2026-07-06 스팸 사례 공지: 키워드 반복·남용. SEO · 메이트 글의 해시태그는 메인 키워드가
+ * 든 것을 3개까지만 남긴다(13개 중 12개가 키워드 + 수식어였다). 나머지는 관련어 태그 몫이다.
+ */
+export const KEYWORD_TAG_LIMIT = 3;
+
+function keywordTokens(keyword: string | undefined): string[] {
+  return String(keyword || '')
+    .replace(/["'“”‘’()\[\]]/gu, ' ')
+    .split(/[\s,/·\-]+/u)
+    .map((token) => token.trim().toLowerCase())
+    .filter((token) => token.length >= 2 && !/^\p{N}/u.test(token));
+}
+
+/** A tag bears the keyword when it holds a token of 3+ letters, or two different tokens. */
+function bearsKeyword(tag: string, tokens: readonly string[]): boolean {
+  const body = String(tag).replace(/^#/u, '').replace(/\s+/gu, '').toLowerCase();
+  const hits = tokens.filter((token) => body.includes(token));
+  return hits.some((token) => token.length >= 3) || new Set(hits).size >= 2;
+}
+
+function capKeywordTags(list: readonly string[], mode: string | undefined, primaryKeyword: string | undefined): string[] {
+  if (mode !== 'seo' && mode !== 'mate') return [...list];
+  const tokens = keywordTokens(primaryKeyword);
+  if (tokens.length === 0) return [...list];
+  let kept = 0;
+  return list.filter((tag) => {
+    if (!bearsKeyword(tag, tokens)) return true;
+    kept += 1;
+    return kept <= KEYWORD_TAG_LIMIT;
+  });
+}
+
+/**
  * 모드 기준을 넘는 만큼만 잘라낸다. 모자라도 채우지 않는다.
  *
  * 자를 때는 앞에서부터 남긴다 — 모델은 핵심 태그를 먼저 내놓고 조합 롱테일을
@@ -47,10 +80,12 @@ export function resolveHashtagCountRange(mode: string | undefined): HashtagCount
 export function clampHashtags(
   hashtags: readonly string[] | undefined,
   mode: string | undefined,
+  options: { readonly primaryKeyword?: string } = {},
 ): { readonly hashtags: string[]; readonly droppedCount: number; readonly max: number } {
-  const list = Array.isArray(hashtags) ? hashtags.filter(Boolean) : [];
+  const original = Array.isArray(hashtags) ? hashtags.filter(Boolean) : [];
+  const list = capKeywordTags(original, mode, options.primaryKeyword);
   const range = resolveHashtagCountRange(mode);
   const max = Math.min(range.max, NAVER_HASHTAG_HARD_LIMIT);
-  if (list.length <= max) return { hashtags: [...list], droppedCount: 0, max };
-  return { hashtags: list.slice(0, max), droppedCount: list.length - max, max };
+  if (list.length <= max) return { hashtags: [...list], droppedCount: original.length - list.length, max };
+  return { hashtags: list.slice(0, max), droppedCount: original.length - max, max };
 }

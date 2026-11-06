@@ -22,6 +22,7 @@ import { buildHomefeedExposureSkeleton } from './content/homefeedExposurePattern
 import { normalizeHookIntroLines } from './contentHookIntroPolicy.js';
 import { buildNeoHookPromptBlock } from './content/neoHookTitles.js';
 import { excludedBusinessAngleIds, type BusinessIndustry } from './content/businessIndustryDetector.js';
+import { skipsIncidentOverlays } from './content/issueOverlayGate.js';
 
 // 프롬프트 디렉토리 경로 (개발/프로덕션 환경 모두 지원)
 function getPromptsDir(): string {
@@ -184,8 +185,10 @@ export function resolveCategory(categoryHint?: string): PromptCategory {
 export function buildSystemPrompt(
   mode: PromptMode,
   category: PromptCategory = 'general',
-  options?: { geoOverlay?: boolean }
+  options?: { geoOverlay?: boolean; categoryHint?: string; primaryKeyword?: string }
 ): string {
+  // [2026-11-06] SEO/mate economy information posts do not get the incident skeleton or allegation rules.
+  const skipIncident = skipsIncidentOverlays(mode, options?.categoryHint, options?.primaryKeyword);
   // 1. 노출 목적 base 프롬프트 로드
   let basePrompt = mode === 'mate'
     ? [loadPromptFile('seo/base.prompt'), loadPromptFile('mate/base.prompt')].filter(Boolean).join('\n\n')
@@ -310,7 +313,7 @@ ${briefHeader}`;
   // 절차·비용 글까지 넓히는 것은 이 골격의 효과를 실측한 뒤 결정한다 — 근거 없이
   // 전 카테고리에 밀면 무엇이 효과였는지 영영 못 가린다.
   // 소제목 스펙(2.82) 뒤에 두어 전개 순서 규칙이 마지막 말을 갖게 한다.
-  if ((mode === 'seo' || mode === 'mate') && HOMEFEED_ISSUE_STORY_CATEGORIES.has(category)) {
+  if ((mode === 'seo' || mode === 'mate') && HOMEFEED_ISSUE_STORY_CATEGORIES.has(category) && !skipIncident) {
     const briefOverlay = loadPromptFile('shared/issue-brief-structure.prompt');
     if (briefOverlay) {
       composed = `${composed}
@@ -346,6 +349,7 @@ ${briefOverlay}`;
   if (
     (mode === 'seo' || mode === 'mate' || mode === 'homefeed')
     && HOMEFEED_ISSUE_STORY_CATEGORIES.has(category)
+    && !skipIncident
   ) {
     const claimDiscipline = loadPromptFile('shared/issue-claim-discipline.prompt');
     if (claimDiscipline) {
@@ -425,10 +429,10 @@ ${anglesOverlay}`;
 export function buildSystemPromptFromHint(
   mode: PromptMode,
   categoryHint?: string,
-  options?: { geoOverlay?: boolean }
+  options?: { geoOverlay?: boolean; primaryKeyword?: string }
 ): string {
   const category = resolveCategory(categoryHint);
-  return buildSystemPrompt(mode, category, options);
+  return buildSystemPrompt(mode, category, { ...options, categoryHint });
 }
 
 /**
@@ -1318,9 +1322,10 @@ export function buildFullPrompt(
   bloggerIdentity?: BloggerIdentity,  // ✅ [v1.8.0 LDF] 언어 DNA 페르소나
   primaryKeyword?: string,  // ✅ [v1.8.1 LDF Phase 2] CTR 훅 라이브러리 매개
   structureGuideBlock?: string,  // ✅ [2026-08-19] 노출된 글에서 뽑은 구조 수치 (문장 없음)
+  issueGateKeyword?: string,  // [2026-11-06] 사건용 블록 판정 전용 키워드(metadata 키워드). CTR 훅의 primaryKeyword 와 분리
 ): string {
   // 1. 기본 2축 분리 프롬프트
-  const basePrompt = buildSystemPromptFromHint(mode, categoryHint);
+  const basePrompt = buildSystemPromptFromHint(mode, categoryHint, { primaryKeyword: issueGateKeyword || primaryKeyword });
 
   // 2. 말투(Tone) 보정 프롬프트 추가 (가장 강력하게 작용하도록 상단 배치 고려 가능하나, 보통 뒤에 붙여도 됨)
   const tonePrompt = getToneInstruction(toneStyle);

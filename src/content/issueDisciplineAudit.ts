@@ -15,6 +15,7 @@
 // 실패는 절대 던지지 않는다 — 검수가 글 생성을 실패시켜선 안 된다(팩트체크와 같은 계약).
 
 import { auditIssueDiscipline, type IssueDisciplineFinding } from './issueDisciplineRules.js';
+import { skipsIncidentOverlays } from './issueOverlayGate.js';
 
 interface AuditableDraft {
   bodyPlain?: string;
@@ -25,6 +26,7 @@ interface AuditSource {
   contentMode?: unknown;
   categoryHint?: unknown;
   generator?: unknown;
+  metadata?: unknown;
 }
 
 export interface IssueDisciplineAuditResult {
@@ -55,6 +57,9 @@ export function isIssueDisciplineAuditEnabled(): boolean {
 export async function isIssueDisciplineTarget(source: AuditSource): Promise<boolean> {
   if (!isIssueDisciplineAuditEnabled()) return false;
   const { HOMEFEED_ISSUE_STORY_CATEGORIES, resolveCategory } = await import('../promptLoader.js');
+  const keyword = (source?.metadata as { keywords?: unknown[] } | undefined)?.keywords?.[0];
+  // [2026-11-06] SEO/mate economy information posts skip the incident audit, like the prompt overlays do.
+  if (skipsIncidentOverlays(String(source?.contentMode || ''), String(source?.categoryHint || ''), keyword ? String(keyword) : '')) return false;
   return HOMEFEED_ISSUE_STORY_CATEGORIES.has(resolveCategory(String(source?.categoryHint || '')));
 }
 

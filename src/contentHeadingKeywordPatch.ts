@@ -28,7 +28,9 @@ export interface HeadingKeywordPatchOptions {
  * passes (조사 prefix 제거, 선두 중복 collapse) still run at 0; only the forced prefix stops.
  */
 export function resolveHeadingKeywordPatchMax(mode: string | undefined): number {
-  return mode === 'homefeed' ? 0 : 2;
+  // [2026-11-06] 7/6 스팸 사례 공지(키워드 반복·남용)에 맞춰 SEO · 메이트도 2개 → 1개.
+  if (mode === 'homefeed') return 0;
+  return mode === 'seo' || mode === 'mate' ? 1 : 2;
 }
 
 export interface HeadingKeywordPatchResult<T extends HeadingKeywordPatchHeading> {
