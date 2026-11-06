@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T06:26:38.209Z",
+ "builtAt": "2026-11-06T06:36:42.011Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,32 +8,99 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 10,
  "candidates": [
+  {
+   "keyword": "법원, 쿠팡 과징금 정지",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 48,
+   "recent20": 8,
+   "press": 48,
+   "firstArticleAt": "2026-11-06T05:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "쿠팡, 개인정보 과징금 2011억원 집행정지… 4236억원은 효력 유지",
+     "press": "biztribune.co.kr",
+     "publishedAt": "2026-11-06T06:34:00.000Z",
+     "link": "http://www.biztribune.co.kr/news/articleView.html?idxno=362083"
+    },
+    {
+     "title": "法, 쿠팡 2000억대 과징금 집행정지 전부 인용…4000억대는 일부 인용",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-06T06:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000649451?sid=102"
+    },
+    {
+     "title": "쿠팡 2000억대 과징금 효력정지 인용...앞서 4000억원은 '기각'",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-06T06:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005600597?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "김종철 경찰청장 후보자",
+   "sources": [
+    "signal.bz",
+    "nate",
+    "daum"
+   ],
+   "articles90": 35,
+   "recent20": 0,
+   "press": 32,
+   "firstArticleAt": "2026-11-06T05:07:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김종철 경찰청장 후보자 \"막중한 책임감\"… 국가경찰위 검증 착수",
+     "press": "jeonmae.co.kr",
+     "publishedAt": "2026-11-06T06:16:00.000Z",
+     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1309303"
+    },
+    {
+     "title": "김종철 대행, 신임 경찰청장 후보자로 지명…23개월 지휘부 공백 끝나나...",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-06T06:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000160577?sid=102"
+    },
+    {
+     "title": "23개월 공백 끝나나…새 경찰청장에 김종철 지명",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-06T06:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000923531?sid=102"
+    }
+   ]
+  },
   {
    "keyword": "한 동티모르 공동언론발표",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 29,
-   "recent20": 5,
-   "press": 27,
-   "firstArticleAt": "2026-11-06T04:58:00.000Z",
+   "articles90": 26,
+   "recent20": 2,
+   "press": 24,
+   "firstArticleAt": "2026-11-06T05:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이 대통령, 동티모르와 치안·개발협력 확대...정례협의체 신설도",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-06T06:32:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1135796"
+    },
     {
      "title": "한-동티모르 공동언론발표 \"미래지향적 실질 협력 확대\"",
      "press": "joseilbo.com",
      "publishedAt": "2026-11-06T06:18:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/123/0002393539?sid=100"
-    },
-    {
-     "title": "李 \"좋은 친구이자 든든한 동반자가 될 것\"··· 동티모르와 개발협력...",
-     "press": "dkilbo.com",
-     "publishedAt": "2026-11-06T06:16:00.000Z",
-     "link": "https://www.dkilbo.com/news/articleView.html?idxno=559846"
     },
     {
      "title": "악수하는 한·동티모르 정상",
@@ -44,14 +111,15 @@
    ]
   },
   {
-   "keyword": "두번째 시그널 12월 7일 방송 확정",
+   "keyword": "두번째 시그널 12월 방송 확정",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 19,
-   "recent20": 2,
-   "press": 19,
-   "firstArticleAt": "2026-11-06T04:58:00.000Z",
+   "articles90": 14,
+   "recent20": 0,
+   "press": 14,
+   "firstArticleAt": "2026-11-06T05:12:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -76,66 +144,34 @@
    ]
   },
   {
-   "keyword": "김수현, 김세의 재판 출석",
+   "keyword": "긴급 시장상황점검회의",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-06T04:57:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-06T05:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김수현, ‘사생활 허위 폭로’ 가세연 김세의 재판 증인 직접 출석한다",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-06T06:23:00.000Z",
-     "link": "https://m.entertain.naver.com/article/119/0003152244"
+     "title": "'급한대로' 증권사 규제부터 푼다...코스피 급락에 긴급 대책회의 [자막...",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-06T06:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002429252?sid=101"
     },
     {
-     "title": "[속보] 배우 김수현, 11일 ‘가세연’ 김세의 명예훼손 재판 증인 출석",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-06T06:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003696606?sid=102"
+     "title": "코스피, 장 초반 5천 선 깨져‥정부 '긴급 회의'",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-06T06:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533954?sid=101"
     },
     {
-     "title": "김수현, 법정서 '가세연' 김세의 만난다.. 명예훼손 재판 증인 출석",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-06T06:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005600582?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "박항서 감독 인종차별 항의",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-06T05:00:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“김치맨” 조롱에 분노한 박항서 “선수 향한 인종차별에 항의”",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-06T06:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000366638?sid=102"
-    },
-    {
-     "title": "\"선수 향한 인종차별에 분노\"…박항서 감독, 태국서 관중 충돌 사태에 ...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-06T06:09:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/241/0003539531"
-    },
-    {
-     "title": "박항서, 태국 관중에 화난 이유 밝혔다... '선수 향한 조롱'",
-     "press": "stnsports.co.kr",
-     "publishedAt": "2026-11-06T05:55:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/450/0000155341"
+     "title": "'반대매매 차단' 긴급 처방…\"신용융자 담보비율 유지의무 3개월 면제\"",
+     "press": "newsfc.co.kr",
+     "publishedAt": "2026-11-06T06:00:00.000Z",
+     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82289"
     }
    ]
   },
@@ -145,10 +181,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-06T05:05:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-06T05:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -171,107 +207,11 @@
      "link": "https://www.thereport.co.kr/news/articleView.html?idxno=93119"
     }
    ]
-  },
-  {
-   "keyword": "긴급 시장상황점검회의",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-06T05:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'반대매매 차단' 긴급 처방…\"신용융자 담보비율 유지의무 3개월 면제\"",
-     "press": "newsfc.co.kr",
-     "publishedAt": "2026-11-06T06:00:00.000Z",
-     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82289"
-    },
-    {
-     "title": "증시 이틀째 급락에 정부 긴급 처방…신용융자 담보비율 140% 의무 면제",
-     "press": "thepowernews.co.kr",
-     "publishedAt": "2026-11-06T05:58:00.000Z",
-     "link": "https://www.thepowernews.co.kr/view.php?ud=202611061455321820de3f0aa1be_7"
-    },
-    {
-     "title": "증시 급락에 'F4 긴급 대응'…증권사 신용융자 담보비율 유지 의무 석 달...",
-     "press": "newsprime.co.kr",
-     "publishedAt": "2026-11-06T05:10:00.000Z",
-     "link": "http://www.newsprime.co.kr/news/article.html?no=753994"
-    }
-   ]
-  },
-  {
-   "keyword": "내년 일자리 예산",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-06T05:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "반도체·수출 훈풍에도 청년 일자리 '냉기'…노동부, 내년 25조 투입",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-06T05:30:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1135743"
-    },
-    {
-     "title": "예산 64% 일자리 사업 배정…노동장관 “성장 성과, 일자리로”",
-     "press": "dnews.co.kr",
-     "publishedAt": "2026-11-06T05:22:00.000Z",
-     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611061409295960989"
-    },
-    {
-     "title": "내년 일자리 예산 25.1조···청년 첫 취업·AI 등 첨단 분야 직업훈련...",
-     "press": "smartbizn.com",
-     "publishedAt": "2026-11-06T05:04:00.000Z",
-     "link": "https://www.smartbizn.com/news/articleView.html?idxno=158684"
-    }
-   ]
-  },
-  {
-   "keyword": "김정관, 산둥성 부성장 면담",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 2,
-   "firstArticleAt": "2026-11-06T05:21:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "중국 산둥성 부성장 만난 김정관 산업통상부 장관",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-06T06:17:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261106000856"
-    },
-    {
-     "title": "김정관 산업통상부 장관, 중국 산둥성 부성장 면담",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-06T06:16:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261106000855"
-    },
-    {
-     "title": "중국 산둥성 부성장과 면담 갖는 김정관 장관",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-06T06:16:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261106000854"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1162,
+  "flagged": 1165,
   "matched": 555,
   "avgLeadMin": 504,
   "recent": [
