@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T05:56:20.600Z",
+ "builtAt": "2026-11-06T06:06:23.962Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,24 +16,24 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 52,
-   "recent20": 7,
-   "press": 36,
-   "firstArticleAt": "2026-11-06T04:27:00.000Z",
+   "articles90": 45,
+   "recent20": 6,
+   "press": 35,
+   "firstArticleAt": "2026-11-06T04:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이재명 대통령, 동티모르와 미래 협력 확대 [한강로 사진관]",
+     "press": "segye.com",
+     "publishedAt": "2026-11-06T06:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004173100?sid=100"
+    },
     {
      "title": "김대중 ‘노벨상’ 추천했던 동티모르 대통령, 이번엔 “‘빛의 혁명’...",
      "press": "hani.co.kr",
      "publishedAt": "2026-11-06T05:54:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/028/0002831047?sid=100"
-    },
-    {
-     "title": "‘DJ노벨상 추천’ 동티모르 대통령 “빛의 혁명에 노벨평화상을”",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-06T05:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003563361?sid=100"
     },
     {
      "title": "한-동티모르 정상회담 \"평화·민주주의로 맺은 인연, 미래 동행으로\"",
@@ -46,12 +46,12 @@
   {
    "keyword": "두번째 시그널 12월 7일 방송 확정",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 37,
-   "recent20": 4,
-   "press": 34,
-   "firstArticleAt": "2026-11-06T04:36:00.000Z",
+   "articles90": 36,
+   "recent20": 2,
+   "press": 33,
+   "firstArticleAt": "2026-11-06T04:38:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -78,138 +78,195 @@
   {
    "keyword": "김수현, 김세의 재판 출석",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 16,
-   "recent20": 1,
-   "press": 15,
-   "firstArticleAt": "2026-11-06T04:30:00.000Z",
+   "articles90": 15,
+   "recent20": 3,
+   "press": 14,
+   "firstArticleAt": "2026-11-06T04:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김수현, 김세의 만난다…11일 명예훼손 재판 증인 출석",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-06T05:44:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002077455"
+     "title": "김수현, 법정서 '가세연' 김세의 만난다.. 명예훼손 재판 증인 출석",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-06T06:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005600582?sid=102"
     },
     {
-     "title": "김수현, '명예훼손' 김세의 만난다…11일 형사재판 증인출석",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-06T05:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000519492?sid=102"
+     "title": "김수현, 법정서 김세의와 마주하나…11일 증인 출석",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-06T06:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005351171?sid=102"
     },
     {
-     "title": "김수현, 김세의 재판에 증인 출석…11일 법정 선다",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-06T05:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003539526"
+     "title": "김수현, 법정서 김세의 만난다…11일 증인 출석",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-06T05:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000327005"
     }
    ]
   },
   {
-   "keyword": "이창동 감독 가능 사랑을 이야기하다",
+   "keyword": "이창동 감독의 가능한 사랑",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 17,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-06T04:28:00.000Z",
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-06T04:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'가능한 사랑' 이창동 \"아카데미 수상? '기생충' 착시…여전히 힘들다\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-06T06:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009274576"
+    },
+    {
+     "title": "[인터뷰①] '가능한 사랑' 이창동 감독 \"정체성 없는 AI…노동 자체가 경...",
+     "press": "maxmovie.com",
+     "publishedAt": "2026-11-06T06:02:00.000Z",
+     "link": "https://www.maxmovie.com/news/articleView.html?idxno=502828"
+    },
     {
      "title": "'가능한 사랑' 이창동 감독 \"느린 영화…인내심 갖고 봐주길\" [MD인터뷰...",
      "press": "mydaily.co.kr",
      "publishedAt": "2026-11-06T05:33:00.000Z",
      "link": "https://m.entertain.naver.com/article/117/0004122629"
-    },
-    {
-     "title": "이창동 감독 “‘가능한 사랑’, 10년전 포기했던 작품..‘내가 자격 있...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-06T05:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005635605"
-    },
-    {
-     "title": "'가능한 사랑' 이창동 \"韓 영화 최악일 때 넷플 선택…돈에 쫓기진 않았...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-06T05:19:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009274479"
     }
    ]
   },
   {
-   "keyword": "K리그1 중계 AR 그래픽 도입",
+   "keyword": "엘니뇨",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-06T04:34:00.000Z",
+   "articles90": 9,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-06T04:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "프로축구연맹, K리그1 파이널 라운드 중계에 'AR 데이터 그래픽' 도입",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-06T05:13:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/003/0014306296"
+     "title": "올겨울 '역대 최강' 엘니뇨…12월 최성기, 기온 높고 비 많을 듯",
+     "press": "straightnews.co.kr",
+     "publishedAt": "2026-11-06T06:00:00.000Z",
+     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=314799"
     },
     {
-     "title": "K리그1 중계 화면 확 달라진다… 실시간 데이터 그래픽 도입",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-06T05:08:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/396/0000760225"
+     "title": "역대 최강 엘니뇨 올겨울 지속, 12월 최성기",
+     "press": "thereport.co.kr",
+     "publishedAt": "2026-11-06T05:48:00.000Z",
+     "link": "https://www.thereport.co.kr/news/articleView.html?idxno=93119"
     },
     {
-     "title": "K리그1, 파이널라운드부터 'AR 데이터 그래픽' 도입",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-06T04:56:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/421/0009274417"
+     "title": "역대 가장 강한 엘니뇨 발생 전망…올겨울 기온 높고 강수량 많을 듯",
+     "press": "newscammp.co.kr",
+     "publishedAt": "2026-11-06T05:20:00.000Z",
+     "link": "https://www.newscammp.co.kr/news/articleView.html?idxno=7214"
     }
    ]
   },
   {
-   "keyword": "정점식 원내대표 회의",
+   "keyword": "긴급 시장상황점검회의",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-06T04:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "증시 이틀째 급락에 정부 긴급 처방…신용융자 담보비율 140% 의무 면제",
+     "press": "thepowernews.co.kr",
+     "publishedAt": "2026-11-06T05:58:00.000Z",
+     "link": "https://www.thepowernews.co.kr/view.php?ud=202611061455321820de3f0aa1be_7"
+    },
+    {
+     "title": "증시 급락에 'F4 긴급 대응'…증권사 신용융자 담보비율 유지 의무 석 달...",
+     "press": "newsprime.co.kr",
+     "publishedAt": "2026-11-06T05:10:00.000Z",
+     "link": "http://www.newsprime.co.kr/news/article.html?no=753994"
+    },
+    {
+     "title": "증권사 담보비율 유지 의무 3개월 면제…하락장에 긴급 대응",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-06T05:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001163489?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "내년 일자리 예산",
    "sources": [
     "signal.bz"
    ],
    "articles90": 5,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-06T04:42:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-06T04:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[포토] 원내대책회의 발언하는 정점식 원내대표",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-06T05:10:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3446552"
+     "title": "반도체·수출 훈풍에도 청년 일자리 '냉기'…노동부, 내년 25조 투입",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-06T05:30:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1135743"
     },
     {
-     "title": "[포토] 발언하는 정점식 원내대표",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-06T05:08:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3446551"
+     "title": "예산 64% 일자리 사업 배정…노동장관 “성장 성과, 일자리로”",
+     "press": "dnews.co.kr",
+     "publishedAt": "2026-11-06T05:22:00.000Z",
+     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611061409295960989"
     },
     {
-     "title": "[포토] 원내대책회의 발언하는 정점식",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-06T05:06:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3446549"
+     "title": "내년 일자리 예산 25.1조···청년 첫 취업·AI 등 첨단 분야 직업훈련...",
+     "press": "smartbizn.com",
+     "publishedAt": "2026-11-06T05:04:00.000Z",
+     "link": "https://www.smartbizn.com/news/articleView.html?idxno=158684"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1158,
-  "matched": 551,
-  "avgLeadMin": 499,
+  "flagged": 1160,
+  "matched": 555,
+  "avgLeadMin": 504,
   "recent": [
+   {
+    "keyword": "딸은 메타, 아들은 엔비디아",
+    "hitKeyword": "엔비디아 칩 트럭 도난",
+    "hitAt": "2026-11-06T15:00:00+09:00",
+    "leadMin": 2674
+   },
+   {
+    "keyword": "법원, 쿠팡 과징금 유지",
+    "hitKeyword": "쿠팡 과징금 효력정지",
+    "hitAt": "2026-11-06T15:00:00+09:00",
+    "leadMin": 1101
+   },
+   {
+    "keyword": "쿠팡 개인정보 유출 과징금",
+    "hitKeyword": "쿠팡 과징금 효력정지",
+    "hitAt": "2026-11-06T15:00:00+09:00",
+    "leadMin": 1071
+   },
+   {
+    "keyword": "쿠팡 과징금 효력 정지",
+    "hitKeyword": "쿠팡 과징금 효력정지",
+    "hitAt": "2026-11-06T15:00:00+09:00",
+    "leadMin": 14
+   },
    {
     "keyword": "열애 나나 탑 논란",
     "hitKeyword": "나나 탑 열애 논란",
@@ -245,30 +302,6 @@
     "hitKeyword": "그리 결혼 준비 발표",
     "hitAt": "2026-11-06T14:00:00+09:00",
     "leadMin": 105
-   },
-   {
-    "keyword": "하이닉스 주가 하락",
-    "hitKeyword": "삼성전자 하이닉스 급락",
-    "hitAt": "2026-11-06T13:30:00+09:00",
-    "leadMin": 1667
-   },
-   {
-    "keyword": "하이닉스",
-    "hitKeyword": "삼성전자 하이닉스 급락",
-    "hitAt": "2026-11-06T13:30:00+09:00",
-    "leadMin": 1101
-   },
-   {
-    "keyword": "하이닉스 주가",
-    "hitKeyword": "삼성전자 하이닉스 급락",
-    "hitAt": "2026-11-06T13:30:00+09:00",
-    "leadMin": 236
-   },
-   {
-    "keyword": "삼성전자 주가",
-    "hitKeyword": "삼성전자 하이닉스 급락",
-    "hitAt": "2026-11-06T13:30:00+09:00",
-    "leadMin": 175
    }
   ]
  }
