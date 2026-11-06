@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T02:45:02.282Z",
+ "builtAt": "2026-11-06T02:55:06.055Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 51,
-   "recent20": 7,
-   "press": 47,
-   "firstArticleAt": "2026-11-06T01:17:00.000Z",
+   "articles90": 42,
+   "recent20": 1,
+   "press": 38,
+   "firstArticleAt": "2026-11-06T01:26:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "친청계 \"정청래는 피해자\"… 김민석에 직접 사과 촉구",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-06T02:54:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3446493"
+    },
     {
      "title": "친청계, 김민석 공개 사과에도 반발…지도부 내홍 격화",
      "press": "asiatoday.co.kr",
@@ -33,12 +39,6 @@
      "press": "sisajournal.com",
      "publishedAt": "2026-11-06T02:30:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/586/0000141732?sid=100"
-    },
-    {
-     "title": "김민석 '신천지 입당 의혹' 공개 재사과… 당내 갈등 수습 나서",
-     "press": "jeonmae.co.kr",
-     "publishedAt": "2026-11-06T02:30:00.000Z",
-     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1309181"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 24,
-   "recent20": 3,
+   "articles90": 25,
+   "recent20": 5,
    "press": 22,
-   "firstArticleAt": "2026-11-06T01:28:00.000Z",
+   "firstArticleAt": "2026-11-06T01:30:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
+    {
+     "title": "AI 규제 우려에 반도체주 급락…닛케이 5.27%↓[Asia오전]",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-06T02:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005437611?sid=101"
+    },
+    {
+     "title": "국고채 금리 일제히 하락…주가 급락 속 위험회피 심리",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-06T02:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016426023?sid=101"
+    },
     {
      "title": "[올댓차이나] 中 증시, 한미일 증시 급락에 대폭 하락세…창업판 2.46%↓",
      "press": "newsis.com",
      "publishedAt": "2026-11-06T02:41:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014305897?sid=104"
-    },
-    {
-     "title": "'블루 쓰나미'에 나스닥 5.5%↓…엔비디아 9%↓ AI 관련주 급락",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-06T02:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000542126?sid=101"
-    },
-    {
-     "title": "뉴욕증시 반등 하루 만에 폭락...기술주 투매에 나스닥 5.5%↓",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-06T02:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002429137?sid=104"
     }
    ]
   },
@@ -79,13 +79,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 18,
+   "articles90": 16,
    "recent20": 1,
-   "press": 18,
-   "firstArticleAt": "2026-11-06T01:17:00.000Z",
+   "press": 16,
+   "firstArticleAt": "2026-11-06T01:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "정점식 \"이재명 정권 특기는 언어 조작\"",
+     "press": "sisafocus.co.kr",
+     "publishedAt": "2026-11-06T02:52:00.000Z",
+     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367258"
+    },
     {
      "title": "‘조작기소 특검법안’ 오늘 본회의 표결",
      "press": "biz.heraldcorp.com",
@@ -97,12 +103,6 @@
      "press": "tbs.seoul.kr",
      "publishedAt": "2026-11-06T02:25:00.000Z",
      "link": "http://tbs.seoul.kr/news/newsView.do?typ_800=9&idx_800=3538699&seq_800=20531600"
-    },
-    {
-     "title": "조작기소 특검법 처리 목전…여야, 본회의 표결 앞두고 격돌",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-06T02:24:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=314790"
     }
    ]
   },
@@ -112,10 +112,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 27,
-   "recent20": 5,
-   "press": 14,
-   "firstArticleAt": "2026-11-06T01:20:00.000Z",
+   "articles90": 24,
+   "recent20": 3,
+   "press": 13,
+   "firstArticleAt": "2026-11-06T01:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -145,7 +145,7 @@
     "nate"
    ],
    "articles90": 9,
-   "recent20": 2,
+   "recent20": 1,
    "press": 9,
    "firstArticleAt": "2026-11-06T01:30:00.000Z",
    "exclusive": true,
