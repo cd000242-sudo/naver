@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T01:54:42.834Z",
+ "builtAt": "2026-11-06T02:04:47.047Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,33 +13,64 @@
   {
    "keyword": "롯데쇼핑 3분기 34.5% 증가",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 66,
-   "recent20": 9,
-   "press": 65,
-   "firstArticleAt": "2026-11-06T00:26:00.000Z",
+   "articles90": 60,
+   "recent20": 7,
+   "press": 60,
+   "firstArticleAt": "2026-11-06T00:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "영업익 35% 늘었지만…롯데쇼핑 발목 잡은 롯데온·하이마트",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-06T01:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/117/0004122567?sid=103"
+     "title": "[2026 3분기 실적] 롯데쇼핑, 백화점·마트 쌍끌이…영업익 35% ↑",
+     "press": "inthenews.co.kr",
+     "publishedAt": "2026-11-06T02:00:00.000Z",
+     "link": "https://www.inthenews.co.kr/news/article.html?no=94146"
     },
     {
-     "title": "외국인 몰린 백화점 '초호황'...롯데쇼핑 실적 날았다",
-     "press": "nongaek.com",
-     "publishedAt": "2026-11-06T01:50:00.000Z",
-     "link": "http://www.nongaek.com/news/articleView.html?idxno=97381"
+     "title": "본업살린 롯데쇼핑, 백화점 최대실적·마트 영업익 87%↑…'두마리 토끼...",
+     "press": "newstopkorea.com",
+     "publishedAt": "2026-11-06T01:58:00.000Z",
+     "link": "https://www.newstopkorea.com/news/articleView.html?idxno=48824"
     },
     {
-     "title": "롯데쇼핑 실적 반등 본격화…백화점 앞세워 영업익 34.5% 급증",
-     "press": "financialpost.co.kr",
-     "publishedAt": "2026-11-06T01:48:00.000Z",
-     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=285210"
+     "title": "롯데쇼핑, 백화점·마트 호조 힘입어 3Q 영업익 34%↑...순이익도 흑자전...",
+     "press": "livebiz.today",
+     "publishedAt": "2026-11-06T01:58:00.000Z",
+     "link": "https://www.livebiz.today/news/articleView.html?idxno=206273"
+    }
+   ]
+  },
+  {
+   "keyword": "정점식 원내대표 회의",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 42,
+   "recent20": 3,
+   "press": 33,
+   "firstArticleAt": "2026-11-06T00:39:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정점식 “주식 휴지조각 된 날, 본회의에 특검 올려”",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-06T01:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001883462?sid=100"
+    },
+    {
+     "title": "정점식 \"특검은 조작 범죄‥민주 의원 전원 죗값 치를 것\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-06T01:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001533908?sid=100"
+    },
+    {
+     "title": "정점식 \"'이재명 조작 정권'…부역자 160명도 죗값 치를 것\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-06T01:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004207178?sid=100"
     }
    ]
   },
@@ -48,203 +79,154 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 33,
-   "recent20": 4,
-   "press": 26,
-   "firstArticleAt": "2026-11-06T00:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“사법체계 사유화 결정판” 野 ‘조작기소 특검법’에 반발...7일부터 ...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-06T01:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004008147?sid=100"
-    },
-    {
-     "title": "조국 \"조작기소 특검, 재판부가 직권으로 위헌제청 할수도\"",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-06T01:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005351086?sid=100"
-    },
-    {
-     "title": "국힘 \"특검법 필버중 李는 유튜브 소통쇼⋯끔찍한 모순\"",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-06T01:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001072805?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "달러 환율",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 25,
-   "recent20": 5,
-   "press": 22,
-   "firstArticleAt": "2026-11-06T00:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美 중간선거 충격에 환율 1350원대 급등…연말엔 다시 내릴까",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-06T01:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000549392?sid=101"
-    },
-    {
-     "title": "IBK투자증권, 달러·엔화 투자 신탁상품 3종 출시",
-     "press": "lawissue.co.kr",
-     "publishedAt": "2026-11-06T01:48:00.000Z",
-     "link": "https://www.lawissue.co.kr/view.php?ud=2026110610454973129817d053b9_12"
-    },
-    {
-     "title": "“달러 환전 없이 굴리고, 원화로 일본 국채 투자”…IBK투자증권, 외화...",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-06T01:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002247535?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "토스",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 13,
-   "recent20": 2,
-   "press": 13,
+   "articles90": 34,
+   "recent20": 8,
+   "press": 24,
    "firstArticleAt": "2026-11-06T00:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "토스인슈어런스, 대구 오피스 개소…6대 광역시 거점 구축",
-     "press": "lawissue.co.kr",
-     "publishedAt": "2026-11-06T01:42:00.000Z",
-     "link": "https://www.lawissue.co.kr/view.php?ud=2026110610393710009817d053b9_12"
+     "title": "[뉴스포커스] '조작기소 특검' 필버 대치…野 '장외투쟁' 예고",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-06T02:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000923451?sid=100"
     },
     {
-     "title": "토스인슈어런스, 대구에 신규 오피스…6대 광역시 모두 진출",
-     "press": "datanews.co.kr",
-     "publishedAt": "2026-11-06T01:38:00.000Z",
-     "link": "http://datanews.co.kr/news/article.html?no=147421"
+     "title": "장동혁 \"李, 대통령Y 출연은 본인 죄지우는 무도한 특검법 시선분산 작...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-06T02:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001038840?sid=100"
     },
     {
-     "title": "토스인슈어런스, 대구 오피스 개소…6대 광역시 거점 확보",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-06T01:26:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5080471"
+     "title": "'조작기소 특검법' 오늘 표결…野 필버 지속",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-06T02:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000923448?sid=100"
     }
    ]
   },
   {
-   "keyword": "발언하는 정점식 원내대표",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 20,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-06T00:25:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국민의힘 정점식, \"이재명 대통령의 소통 방식은 차베스 연상\" 강력 비판",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-06T01:42:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=884398"
-    },
-    {
-     "title": "정점식 \"李, 차베스 그대로 따라 하고 있다\"…조작기소 특검·대통령 유...",
-     "press": "ziksir.com",
-     "publishedAt": "2026-11-06T01:24:00.000Z",
-     "link": "https://www.ziksir.com/news/articleView.html?idxno=152310"
-    },
-    {
-     "title": "정점식 \"李, 독재자 차베스와 비슷\"",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-06T01:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006404822?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "삼성전자 주가",
+   "keyword": "뉴욕증시 급락",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
+   "articles90": 26,
    "recent20": 4,
-   "press": 8,
-   "firstArticleAt": "2026-11-06T01:00:00.000Z",
+   "press": 21,
+   "firstArticleAt": "2026-11-06T01:03:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "[ET특징주] 미국發 반도체 초대형 삭풍… 삼전·SK하닉 주가도 '출렁'",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-06T01:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003482967?sid=101"
+     "title": "AI 충격에 한국·대만·일본 증시 6~8%대 급락",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-06T01:52:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=902179"
+    },
+    {
+     "title": "중화권 증시도 '블루웨이브 충격'…반도체주 CXMT·TSMC 급락",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-06T01:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016425835?sid=104"
     },
     {
      "title": "코스피 폭락에 개미 패닉…삼성전자 8% 급락",
      "press": "gokorea.kr",
      "publishedAt": "2026-11-06T01:48:00.000Z",
      "link": "https://www.gokorea.kr/news/articleView.html?idxno=884403"
-    },
-    {
-     "title": "삼성전자 8%·SK하이닉스 10% 급락…개미들 '패닉'",
-     "press": "kjdaily.com",
-     "publishedAt": "2026-11-06T01:48:00.000Z",
-     "link": "http://www.kjdaily.com/article.php?aid=1793929557691478276"
     }
    ]
   },
   {
-   "keyword": "도상우, 2월 결혼 발표",
+   "keyword": "LIV 골프, 5년 만에 종료",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-06T00:52:00.000Z",
+   "articles90": 9,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-06T00:40:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "‘결혼 발표’ 도상우♥박지혜, 프러포즈 현장 공개 “마음속으로만 그...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-06T01:40:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001146442"
+     "title": "세계 골프계에 큰 파문 남긴 LIV 골프, 5년 만에 공식 종료… CEO 오닐 \"...",
+     "press": "smartbizn.com",
+     "publishedAt": "2026-11-06T01:52:00.000Z",
+     "link": "https://www.smartbizn.com/news/articleView.html?idxno=158640"
     },
     {
-     "title": "도상우, 내년 2월 결혼 \"평생 함께할 소중한 인연 만나\"[공식]",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-06T01:02:00.000Z",
-     "link": "http://www.joynews24.com/view/2023342"
+     "title": "[LIV] PIF 지원 중단 6개월, 출범 5년 만에 해체 결정…\"투자자와 최종 ...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-06T01:48:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261106000340"
     },
     {
-     "title": "배우 도상우·모델 박지혜, 내년 2월 부부 된다… “따뜻한 축하 부탁”",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-06T01:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/119/0003152082"
+     "title": "‘재정 위기 탈출 실패’ LIV 골프, 5년 만에 문 닫는다 “청산 절차 돌...",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-06T01:36:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/382/0001303295"
+    }
+   ]
+  },
+  {
+   "keyword": "열애 나나 탑 논란",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-06T00:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "생일카페 데이트→악플러 공개 저격…탑♥나나, 공개 열애 후폭풍 속 '...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-06T01:57:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000637475"
+    },
+    {
+     "title": "나나, 탑 사과-비난에 \"제가 도덕적 물의 일으켰나?\"",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-06T01:32:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=94675"
+    },
+    {
+     "title": "'공개 열애' 나나♥탑, 사랑이 너무 험난해요···생카 논란→심경 고...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-06T00:36:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005635519"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1112,
-  "matched": 527,
-  "avgLeadMin": 495,
+  "flagged": 1114,
+  "matched": 530,
+  "avgLeadMin": 493,
   "recent": [
+   {
+    "keyword": "진쓰레블",
+    "hitKeyword": "진쓰레블 사망",
+    "hitAt": "2026-11-06T11:00:00+09:00",
+    "leadMin": 146
+   },
+   {
+    "keyword": "도상우, 2월 결혼한다.",
+    "hitKeyword": "도상우 박지혜 결혼",
+    "hitAt": "2026-11-06T11:00:00+09:00",
+    "leadMin": 35
+   },
+   {
+    "keyword": "도상우, 2월 결혼 발표",
+    "hitKeyword": "도상우 박지혜 결혼",
+    "hitAt": "2026-11-06T11:00:00+09:00",
+    "leadMin": 15
+   },
    {
     "keyword": "전한길 공소청 송치",
     "hitKeyword": "전한길 허위광고 송치",
@@ -286,24 +268,6 @@
     "hitKeyword": "BLG 디플러스 기아",
     "hitAt": "2026-11-06T09:30:00+09:00",
     "leadMin": 26
-   },
-   {
-    "keyword": "AI 규제 공포",
-    "hitKeyword": "나스닥 AI 규제 공포",
-    "hitAt": "2026-11-06T09:30:00+09:00",
-    "leadMin": 16
-   },
-   {
-    "keyword": "이승기 이다인 둘째 공개",
-    "hitKeyword": "이승기 이다인 자녀",
-    "hitAt": "2026-11-06T09:00:00+09:00",
-    "leadMin": 77
-   },
-   {
-    "keyword": "AI 우려 나스닥 5.5%↓",
-    "hitKeyword": "나스닥 AI 기술주 급락",
-    "hitAt": "2026-11-06T09:00:00+09:00",
-    "leadMin": 56
    }
   ]
  }
