@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-07T18:44:24.129Z",
+  "generatedAt": "2026-11-07T22:45:02.392Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -929,78 +929,6 @@
       ]
     },
     {
-      "id": "b3c2d6937378569e",
-      "urls": [
-        "https://wintertree.tistory.com/48",
-        "https://sidemoneylog.tistory.com/121",
-        "https://jio-chol.tistory.com/337",
-        "https://lilablabla.com/entry/%EC%97%B0%EB%A7%90%EC%A0%95%EC%82%B0-%EA%B0%84%EC%86%8C%ED%99%94-%EB%88%84%EB%9D%BD-%EC%84%9C%EB%A5%98-2026%EB%85%84-%EC%95%88%EA%B2%BD%EB%B9%84-%EA%B5%90%EB%B3%B5%EB%B9%84-%EC%9B%94%EC%84%B8-%EC%A7%81%EC%A0%91-%EB%B0%9C%EA%B8%89%EB%B0%9B%EB%8A%94-%EA%B3%B3",
-        "https://thinkingatelier.tistory.com/entry/%EC%97%B0%EB%A7%90%EC%A0%95%EC%82%B0-%EA%B0%84%EC%86%8C%ED%99%94-%EB%A7%A4%EB%85%84-1%EC%9B%94-15%EC%9D%BC-%EA%B0%9C%ED%86%B5"
-      ],
-      "guide": {
-        "direction": "검색자는 만 19세 이상 자녀 등 부양가족 자료를 조회하려는데 동의 절차를 몰라 막히거나, 간소화에 뜬 사용액 전체와 실제 공제액이 다른 이유를 몰라 혼란스럽다. 고수 글들은 캘린더·누락서류·개통일(1월15일)은 다뤘지만 부양가족 동의 절차와 현금영수증 0원 트러블 해결은 구체적으로 안 풀었다. 동의 신청 순서표, 사용액-공제한도 구조 설명, 126 상담센터 문의 절차로 끝낸다.",
-        "searchTargets": [
-          "연말정산 간소화 동의",
-          "연말정산 간소화 자료 조회",
-          "연말정산 간소화 시기",
-          "연말정산 간소화 일괄제공"
-        ],
-        "mustInclude": [
-          "만 19세 이상 자녀의 의료비·보험료 자료는 본인 자료제공 동의가 있어야 부모가 조회 가능",
-          "간소화 자료는 1월 15일 개통(지식인 답변 근거)",
-          "현금영수증 0원 뜰 때 국세상담센터 126에 거래 시점·번호 알려 확인",
-          "간소화 자료는 사용액 전체가 조회되고 공제 한도는 연말정산 과정에서 자동 적용됨",
-          "5월 종합소득세 확정신고 시 의료비 등은 간소화 자동불러오기 대신 직접 입력"
-        ],
-        "mustAvoid": [
-          "특정 세무사·환급대행 서비스 홍보처럼 보이는 문구",
-          "미성년 자녀와 성년(19세 이상) 자녀 동의 절차를 구분 없이 뭉뚱그리기",
-          "2026년 세법 개정 공제 한도와 기존 연도 수치를 혼용"
-        ],
-        "checkBefore": [
-          "2027년 간소화 서비스 정확한 개통일(국세청 홈택스 공지)",
-          "자녀 자료제공 동의 화면의 실제 메뉴 경로(홈택스 실제 화면)",
-          "2026년 변경된 공제 항목 최신 공지(국세청 보도자료)"
-        ],
-        "solves": [
-          "부양가족 자료 조회 안 됨 → 만 19세 이상 자녀는 본인 동의부터 받는 절차 안내",
-          "현금영수증 0원 뜸 → 126 상담센터 문의 시 준비할 정보와 절차 정리",
-          "사용액은 많은데 공제액이 적음 → 사용액 전체 조회와 공제 한도 자동 적용의 차이 설명"
-        ],
-        "actionTitles": [
-          "연말정산 간소화 자료 조회 안 될 때, 부양가족 동의부터 확인",
-          "연말정산 간소화 시기 몇 월 며칠? 개통일부터 환급까지",
-          "연말정산 간소화 동의 신청, 자녀 자료 조회하는 순서"
-        ]
-      },
-      "at": "2026-11-02T20:17:10.506Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "연말정산 간소화 서비스 정보동의",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40311&docId=491392244&answerNo=11&qb=7Jew66eQ7KCV7IKw6rCE7IaM7ZmU",
-          "views": 694,
-          "answers": 11,
-          "askedAt": "2026.10.15"
-        },
-        {
-          "title": "연말정산 간소화 자료",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40311&docId=491403643&answerNo=6&qb=7Jew66eQ7KCV7IKw6rCE7IaM7ZmU",
-          "views": 205,
-          "answers": 6,
-          "askedAt": "2026.10.13"
-        },
-        {
-          "title": "연말정산 간소화 현금 영수증 0원",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40309&docId=491553673&answerNo=3&qb=7Jew66eQ7KCV7IKw6rCE7IaM7ZmU",
-          "views": 201,
-          "answers": 5,
-          "askedAt": "2026.10.11"
-        }
-      ]
-    },
-    {
       "id": "790ba3fdff4f9bd1",
       "urls": [
         "https://beyond-the-story.tistory.com/entry/%EC%97%90%ED%8E%98-%EA%B0%80%EA%B2%A9-%EC%96%BC%EB%A7%88%EC%9D%BC%EA%B9%8C-%EC%B2%AB-%EB%8B%AC-%EA%B3%B5%EA%B8%89%EA%B0%80%EC%99%80-%EC%8B%A4%EC%A0%9C-%EC%B2%98%EB%B0%A9-%EB%B9%84%EC%9A%A9-%ED%99%95%EC%9D%B8%EB%B2%95",
@@ -1205,53 +1133,6 @@
           "views": 185,
           "answers": 4,
           "askedAt": "2026.10.31"
-        }
-      ]
-    },
-    {
-      "id": "eede3899167b6b02",
-      "urls": [
-        "https://infodemic.kr/3467",
-        "https://money-phd.com/1826",
-        "https://honeypencil.tistory.com/entry/%EC%B0%A8%EC%98%88%EB%A0%A8-%ED%95%99%ED%8F%AD-%EC%9D%98%ED%98%B9-%EB%B6%80%EC%9D%B8-%EB%82%B4%EC%9A%A9-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://www.uptoinfo.com/feeds/4698219941407085015/comments/default"
-      ],
-      "guide": {
-        "direction": "검색자는 전한길이 누구인지, 나이·학력·경력이 무엇인지 알고 싶어 검색하지만 구속영장 기각 사건과 어떻게 연결되는지는 못 찾는다. 고수 블로그들은 프로필만 나열하거나 차예련·엄유신 등 다른 인물 콘텐츠와 섞여 있어 전한길 정보만 집중하지 못한다. 나이·학력·경력을 표로 정리하고 최근 구속영장 기각 이슈까지 타임라인으로 이어 붙여 한 번에 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "전한길 이름·나이·학력·경력 정리표(확인 필요: 위키백과·소속 기관 공지)",
-          "전한길 경력(한국사 강사 등)과 구속영장 기각 사건의 연결 설명",
-          "최근 이슈 타임라인(구속영장 기각 → 공소청 송치 등 순서)",
-          "학력·경력 중 확인되지 않은 부분은 출처 표기(확인 필요)"
-        ],
-        "mustAvoid": [
-          "차예련 학폭 의혹, 엄유신 조문 프로필 등 다른 인물 콘텐츠와 섞어서 쓰지 않기",
-          "확인되지 않은 학력·경력 루머를 사실처럼 단정하지 않기"
-        ],
-        "checkBefore": [
-          "전한길 정확한 나이·학력 공식 정보(위키백과 또는 소속 기관 발표)",
-          "구속영장 기각 날짜와 사유 원문(경찰·법원 발표 또는 원문 기사)"
-        ],
-        "solves": [
-          "전한길이 누구인지, 나이·학력·경력이 뭔지 모름 → 표로 한 번에 정리",
-          "프로필과 최근 사건이 어떻게 연결되는지 모름 → 타임라인으로 이어 설명"
-        ],
-        "actionTitles": [
-          "전한길 프로필 나이 학력 경력 한눈에 확인하기",
-          "전한길 나이 학력 프로필 최신 이슈까지 확인하기"
-        ]
-      },
-      "at": "2026-11-02T20:17:10.506Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "주상욱과 차예련, 그들의 케미는 어디서 나오....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=30706&docId=495648971&answerNo=1&qb=7LCo7JiI66Co7ZWZ7Y+t7J2Y7Zi5",
-          "views": 55,
-          "answers": 1,
-          "askedAt": "2026.11.01"
         }
       ]
     },
@@ -1861,75 +1742,6 @@
       ]
     },
     {
-      "id": "f0925b1fa2539a67",
-      "urls": [
-        "https://law-sense.com/inheritance-deadlines-chart",
-        "https://landgumi.com/capital-gains-tax-preliminary-return-deadline/",
-        "https://ilpaclf.linkistat.com/129",
-        "https://naturemom.co.kr/entry/%EC%A4%80%EB%B9%84%EB%AC%BC%EC%9D%80-%EB%8B%A8-%ED%95%98%EB%82%98-%EC%9E%84%EB%8C%80%EC%B0%A8-%EA%B3%84%EC%95%BD%EC%84%9C-%EC%82%AC%EC%A7%84-%ED%95%9C-%EC%9E%A5%EC%9C%BC%EB%A1%9C-%EB%81%9D%EB%82%B4%EA%B8%B0-%EC%A0%84%EC%9B%94%EC%84%B8-%EC%8B%A0%EA%B3%A0-3%EB%B6%84-%EC%BB%B7"
-      ],
-      "guide": {
-        "direction": "① 검색자는 '보증금·월세가 신고 대상인지, 확정일자는 따로 받아야 하는지, 과태료가 실제 부과되는지'를 지식인에 묻는다. ② 고수 블로그는 계약서 사진으로 신고하는 방법은 다뤘지만 '신고 대상 기준'과 '확정일자 자동부여 여부'는 명확히 안 짚었다. ③ 이 글은 보증금 6천만원·월세 30만원 기준표와 30일 기한, 확정일자·과태료 처리 순서를 체크리스트로 정리한다.",
-        "searchTargets": [
-          "주택임대차신고 기간",
-          "주택임대차신고 확정일자",
-          "주택임대차신고 과태료",
-          "주택임대차신고필증"
-        ],
-        "mustInclude": [
-          "보증금 6천만원 초과 또는 월세 30만원 초과 시 신고 의무(지식인 답변 기준)",
-          "계약 체결일부터 30일 이내 임대인·임차인 공동신고(지식인 답변 기준)",
-          "신고 시 확정일자 자동부여 여부 (확인 필요: 국토교통부 공식 안내)",
-          "과태료 근거는 법 제6조의2·제6조의3 및 별표4(지식인 답변 기준)",
-          "주택임대차신고필증 발급 방법 (확인 필요: 정부24 공식 절차)"
-        ],
-        "mustAvoid": [
-          "신고만 하면 전세사기가 예방된다고 과장(지식인 답변에서도 효과 한계 지적)",
-          "확정일자·전입신고를 임대차신고제와 혼동"
-        ],
-        "checkBefore": [
-          "신고 대상 기준·확정일자 자동부여 여부는 국토교통부 공식 안내로 확인",
-          "과태료 계도기간·실제 부과 여부는 관할 주민센터 공지로 확인"
-        ],
-        "solves": [
-          "확정일자 따로 받아야 하는지 모름 → 신고 시 자동부여 여부 정리",
-          "과태료 대상인지 모름 → 보증금·월세 기준표로 확인",
-          "온라인 신고 방법·처리기간 모름 → 정부24 신고 절차 정리"
-        ],
-        "actionTitles": [
-          "주택임대차신고 방법 온라인으로 3분에 끝내는 법",
-          "주택임대차신고 과태료 대상인지 기준으로 확인하기",
-          "주택임대차신고필증 발급과 확정일자 받는 법 정리"
-        ]
-      },
-      "at": "2026-11-02T20:17:10.506Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "주택임대차신고, 전세사기 예방에 얼마나 효....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=601&docId=494032740&answerNo=2&qb=7KO87YOd7J6E64yA7LCo7Iug6rOg",
-          "views": 81,
-          "answers": 2,
-          "askedAt": "2026.09.30"
-        },
-        {
-          "title": "안녕하세요! 주택임대차신고 관련해서 여쭙....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=4020201&docId=495193020&answerNo=3&qb=7KO87YOd7J6E64yA7LCo7Iug6rOg",
-          "views": 77,
-          "answers": 3,
-          "askedAt": "2026.09.16"
-        },
-        {
-          "title": "주택임대차신고 질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40202&docId=491071186&answerNo=1&qb=7KO87YOd7J6E64yA7LCo7Iug6rOg",
-          "views": 45,
-          "answers": 1,
-          "askedAt": "2025.12.30"
-        }
-      ]
-    },
-    {
       "id": "9a53c9231a0810fe",
       "urls": [
         "https://wooojoo.tistory.com/entry/%EC%9B%8C%EB%9D%BC%EB%B0%B8%EC%9D%BC%EC%9E%90%EB%A6%AC-%EC%9E%A5%EB%A0%A4%EA%B8%88-%EC%9B%94-%EC%B5%9C%EB%8C%80-50%EB%A7%8C%EC%9B%90-%EB%8C%80%EC%83%81%EA%B3%BC-%EC%8B%A0%EC%B2%AD%EB%B0%A9%EB%B2%95",
@@ -1989,78 +1801,6 @@
           "views": 203,
           "answers": 4,
           "askedAt": "2026.10.19"
-        }
-      ]
-    },
-    {
-      "id": "4feb439ee99a0f81",
-      "urls": [
-        "https://luvgg.com/auto-insurance-direct-comparison-2026/",
-        "https://info.mhb-blog.com/%ec%9e%90%eb%8f%99%ec%b0%a8-%eb%b3%b4%ed%97%98-%ec%a1%b0%ed%9a%8c-%ec%9d%b4%eb%b2%a4%ed%8a%b8-%ec%9e%90%eb%8f%99%ec%9e%90-%eb%b3%b4%ed%97%98-%ea%b0%80%ec%9e%85-%ec%9d%b4%eb%b2%a4%ed%8a%b8/",
-        "https://by.infotoktok.com/7627",
-        "https://by.infotoktok.com/7626",
-        "https://by.infotoktok.com/7624",
-        "https://efhdns.tistory.com/entry/%ED%95%9C%ED%99%94%EC%86%90%ED%95%B4%EB%B3%B4%ED%97%98-%EB%8B%A4%EC%9D%B4%EB%A0%89%ED%8A%B8-%EC%9E%90%EB%8F%99%EC%B0%A8%EB%B3%B4%ED%97%98-%EA%B8%B4%EA%B8%89%EC%B6%9C%EB%8F%99-%EC%A0%84%ED%99%94%EB%B2%88%ED%98%B8-%EB%B0%8F-24%EC%8B%9C%EA%B0%84-%EC%82%AC%EA%B3%A0%EC%A0%91%EC%88%98-%EB%B0%A9%EB%B2%95"
-      ],
-      "guide": {
-        "direction": "실제 검색자는 특약 비교보다 한화손해보험 다이렉트의 고객센터 번호, 가입 시 청약서 유무, 운전경력 등록 방법처럼 구체적인 절차에서 막힌다. 고수 글은 각 보험사 긴급출동 번호나 고객센터만 나열하고 다이렉트 가입 절차와 특약 선택 기준을 연결해 주지 못한다. 이 글은 가입 순서, 운전경력 등록, 특약별 손해 비교를 이어 붙여 추가 검색 없이 가입까지 끝내게 한다.",
-        "searchTargets": [
-          "한화손해보험 다이렉트 자동차보험",
-          "한화손해보험 다이렉트 고객센터",
-          "한화손해보험 다이렉트 가입",
-          "한화손해보험 다이렉트 운전자보험"
-        ],
-        "mustInclude": [
-          "한화손해보험 다이렉트 고객센터 번호(확인 필요: 한화손해보험 공식 홈페이지)",
-          "다이렉트는 청약서 없이 증권·약관을 우편으로 받는 가입 방식 설명",
-          "운전경력 등록 시 가족한정·지정1인 설정 순서",
-          "만 25세 경차 가입 시 손해율 등 고려사항",
-          "삼성화재·현대해상·KB손해보험·DB손해보험과 비교견적 병행 안내"
-        ],
-        "mustAvoid": [
-          "한화손해보험의 화재보험 상품과 자동차보험 특약을 섞어서 서술",
-          "특정 보험료·할인율 수치를 사실처럼 단정해서 제시",
-          "한화손보만 유리한 것처럼 편파적으로 서술"
-        ],
-        "checkBefore": [
-          "한화손해보험 다이렉트 고객센터 전화번호·채널 — 한화손해보험 공식 홈페이지/고객센터 공지 확인",
-          "2026년 11월 기준 각사 다이렉트 가입 이벤트·특약 조건 — 각 보험사 다이렉트 사이트 공지 확인"
-        ],
-        "solves": [
-          "다이렉트는 청약서 없이 되는지 헷갈린다 → 증권·약관 우편 수령 방식 설명",
-          "운전경력 등록 방법을 모른다 → 가족한정/지정1인 설정 순서 정리",
-          "특약을 안 넣으면 얼마나 손해인지 모른다 → 특약별 비교로 정리"
-        ],
-        "actionTitles": [
-          "한화손해보험 다이렉트 고객센터 번호 확인하고 가입하는 법",
-          "한화손해보험 다이렉트 운전경력 등록하는 방법 총정리",
-          "자동차보험 다이렉트 특약 비교로 손해 줄이는 방법 확인"
-        ]
-      },
-      "at": "2026-11-02T20:17:10.506Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "한화손해보험 화재보험 다이렉트",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=401030203&docId=490680746&answerNo=1&qb=7ZWc7ZmU7IaQ7ZW067O07ZeY64uk7J2066CJ7Yq4",
-          "views": 6192,
-          "answers": 2,
-          "askedAt": "2025.12.09"
-        },
-        {
-          "title": "한화보험 다이렉트는 정말 청약서랑 서",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=401030203&docId=302356957&answerNo=2&qb=7ZWc7ZmU7IaQ7ZW067O07ZeY64uk7J2066CJ7Yq4",
-          "views": 1110,
-          "answers": 4,
-          "askedAt": "2018.05.29"
-        },
-        {
-          "title": "만25세 경차 첫차로 한화손보 보험중ㅈ인데요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010302&docId=495309071&answerNo=1&qb=7ZWc7ZmU7IaQ7ZW067O07ZeY64uk7J2066CJ7Yq4",
-          "views": 203,
-          "answers": 1,
-          "askedAt": "2026.09.26"
         }
       ]
     },
@@ -2458,70 +2198,6 @@
           "views": 135,
           "answers": 7,
           "askedAt": "2026.08.22"
-        }
-      ]
-    },
-    {
-      "id": "a7b8e8daba6ae929",
-      "urls": [
-        "https://trendsearch.tistory.com/entry/G%EB%A7%88%EC%BC%93-%EA%B0%9C%EC%9D%B8%EC%A0%95%EB%B3%B4-%EC%9C%A0%EC%B6%9C-%ED%99%95%EC%9D%B8-%EB%B0%8F-%ED%94%BC%ED%95%B4-%EB%8C%80%EC%9D%91-%EB%B0%A9%EB%B2%95-%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8%EC%99%80-e%EC%BF%A0%ED%8F%B0-%EC%A0%90%EA%B2%80%ED%95%98%EA%B8%B0",
-        "https://trendsearch.tistory.com/entry/G%EB%A7%88%EC%BC%93-%EA%B0%9C%EC%9D%B8%EC%A0%95%EB%B3%B4-%EC%9C%A0%EC%B6%9C-%EB%B3%B4%EC%83%81-1%EB%A7%8C%EC%9B%90-%EB%8C%80%EC%83%81-%ED%99%95%EC%9D%B8-%EC%A7%80%EA%B8%89-%EC%97%AC%EB%B6%80%EC%99%80-%ED%99%95%EC%9D%B8-%EB%B0%A9%EB%B2%95",
-        "https://bongbong200.com/entry/%ED%95%A0%EB%A6%AC%EC%8A%A4-%EA%B0%9C%EC%9D%B8%EC%A0%95%EB%B3%B4-%EC%9C%A0%EC%B6%9C-%EC%82%AC%EA%B3%A0-%EC%B4%9D%EC%A0%95%EB%A6%AC-%EA%B3%B5%EC%8B%9D-%EA%B3%B5%EC%A7%80%C2%B7%EC%B2%98%EB%A6%AC%EB%B0%A9%EC%B9%A8-%EC%B0%A8%EC%9D%B4%C2%B7%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8-%EB%B3%80%EA%B2%BD%C2%B7%EB%AC%B8%EC%9D%98%EC%B2%98-%EA%B0%80%EC%9D%B4%EB%93%9C",
-        "https://healthlife88.tistory.com/entry/%ED%95%A0%EB%A6%AC%EC%8A%A4-%EA%B0%9C%EC%9D%B8%EC%A0%95%EB%B3%B4-%EC%9C%A0%EC%B6%9C-%EB%AC%B8%EC%9E%90-%EC%88%98%EC%8B%A0-%EC%8B%9C-%EB%8C%80%EC%9D%91-%EB%B0%A9%EB%B2%95-%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8-%EB%B3%80%EA%B2%BD%EB%B6%80%ED%84%B0-%EB%B3%B4%EC%83%81-%EC%A0%88%EC%B0%A8%EA%B9%8C%EC%A7%80"
-      ],
-      "guide": {
-        "direction": "실제 검색자는 유출 사고가 아니라 '내 주소·전화번호 어디서 고치나'를 몰라서 묻는다. 고수 글은 유출 피해 대응에만 집중해 정작 나의정보 메뉴 경로와 가족 명의 변경 절차를 안 알려준다. 이 글은 메뉴 경로, 주문 입력란과 계정정보의 차이, 가족 변경 시 필요 서류를 표로 정리해 끝낸다.",
-        "searchTargets": [
-          "G마켓 개인정보 수정 방법"
-        ],
-        "mustInclude": [
-          "나의정보 > 개인정보수정 메뉴 경로",
-          "주문 시 입력하는 배송용 번호와 계정 정보 번호의 차이",
-          "가족 명의 변경 시 가족관계증명서 등 필요 서류",
-          "타명의자 변경 불가 조건(지식인 기준)",
-          "유출 보상 1만원 지급 여부(확인 필요: G마켓 공식 공지)"
-        ],
-        "mustAvoid": [
-          "유출 보상금 지급 여부를 공식 확인 없이 사실처럼 서술"
-        ],
-        "checkBefore": [
-          "G마켓 고객센터 공지에서 개인정보 수정 메뉴 최신 경로 확인",
-          "유출 보상 대상·지급 여부 공식 발표 확인"
-        ],
-        "solves": [
-          "집주소·전화번호 바뀌었는데 어디서 고치는지 모름 → 나의정보 메뉴 경로로 안내",
-          "주문할 때 적는 번호와 계정 정보가 다른 이유 모름 → 입력란 구분 설명",
-          "가족 명의로 변경이 안 됨 → 필요 서류와 신청 경로 안내"
-        ],
-        "actionTitles": [
-          "G마켓 개인정보 수정 방법, 메뉴 위치부터 확인하기",
-          "G마켓 개인정보 변경 가족 명의일 때 신청 순서"
-        ]
-      },
-      "at": "2026-11-02T20:17:10.506Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "g마켓 개인정보 바꾸는곳!",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=511&docId=23474239&answerNo=2&qb=Z+uniOy8k+qwnOyduOygleuztA==",
-          "views": 2654,
-          "answers": 2,
-          "askedAt": "2006.06.03"
-        },
-        {
-          "title": "g마켓 개인정보 핸드폰",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=511&docId=28220651&answerNo=1&qb=Z+uniOy8k+qwnOyduOygleuztA==",
-          "views": 555,
-          "answers": 1,
-          "askedAt": "2009.05.05"
-        },
-        {
-          "title": "지마켓 개인정보",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60216&docId=396573441&answerNo=1&qb=Z+uniOy8k+qwnOyduOygleuztA==",
-          "views": 218,
-          "answers": 1,
-          "askedAt": "2021.08.08"
         }
       ]
     },
@@ -7057,71 +6733,6 @@
       ]
     },
     {
-      "id": "8ff3e595427dd270",
-      "urls": [
-        "https://jjyiu.tistory.com/entry/%EC%97%B0%EA%B8%88%EC%A0%80%EC%B6%95%ED%8E%80%EB%93%9C-%EC%88%98%EB%A0%B9%EB%B0%A9%EB%B2%95-%EC%B4%9D%EC%A0%95%EB%A6%AC-55%EC%84%B8-%EC%9A%94%EA%B1%B4%EA%B3%BC-%EC%97%B0%EA%B8%88%EC%86%8C%EB%93%9D%EC%84%B8%EC%9C%A8-3355",
-        "https://toeasywan.com/118",
-        "https://cheinggyemoney.tistory.com/130"
-      ],
-      "guide": {
-        "direction": "검색자는 연금저축펀드를 '어떻게 신청해서' 받는지, 55세·가입5년 요건과 세율 몇 %인지 헷갈려 막힌다. 고수 글들은 수령방법·요건은 다뤘지만 중도해지 기타소득세와의 손해 비교, 증권사 이전 시 가입기간 유지 여부는 안 다뤘다. 이 글은 금융기관 수령신청 절차, 연령별 세율표, 중도해지 손해 비교로 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "55세 이상 & 가입기간 5년 이상 수령요건 표 (확인 필요: 소득세법 시행령)",
-          "연금소득세율 70세미만 5.5%·70~79세 4.4%·80세이상 3.3% (확인 필요: 소득세법 시행령)",
-          "연금수령한도 계산식(연금계좌 평가액÷(11-수령연차)×120%) (확인 필요: 국세청)",
-          "중도해지시 기타소득세 16.5%와 연금수령시 세율 비교표",
-          "금융기관에 '연금수령신청' 하는 절차(수령주기 선택→수령개시) 순서"
-        ],
-        "mustAvoid": [
-          "퇴직연금(IRP)과 세율·요건을 같은 것처럼 섞어 쓰기",
-          "국민연금(정액 지급)과 연금저축(본인 적립금 수령)을 혼동시키는 서술",
-          "특정 증권사 상품을 권유하듯 서술하기"
-        ],
-        "checkBefore": [
-          "연금소득세율 연령 구간 — 소득세법 시행령 원문",
-          "연금수령한도 계산식 최신 조문 — 소득세법 시행령 제40조의2",
-          "중도해지 예외사유(개인회생 등) 요건 — 시행령 제40조의2 3항"
-        ],
-        "solves": [
-          "'연금저축 어떻게 받는지 모르겠다' → 금융기관 연금수령 신청 순서를 단계별로 정리",
-          "'중도해지하면 세금 얼마나 떼이나' → 기타소득세 vs 연금소득세 손해 비교표 제공",
-          "'연금저축보험을 증권사로 이전해도 가입기간 유지되나' → 이전 시 수령조건 유지 여부 정리"
-        ],
-        "actionTitles": [
-          "연금저축펀드 수령방법 신청 순서, 55세 요건 확인하기",
-          "연금소득세율 3.3~5.5% 계산법, 연금수령한도 확인하기",
-          "연금저축 중도해지 기타소득세 비교, 손해 계산해보기"
-        ]
-      },
-      "at": "2026-11-03T03:33:12.601Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "연금저축 수령방법",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100402&docId=491123236&answerNo=1&qb=7Jew6riI7KCA7LaV7Y6A65Oc7IiY66C567Cp67KV",
-          "views": 426,
-          "answers": 1,
-          "askedAt": "2026.01.03"
-        },
-        {
-          "title": "연금저축펀드 수령시 궁금증",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=495501246&answerNo=7&qb=7Jew6riI7KCA7LaV7Y6A65Oc7IiY66C567Cp67KV",
-          "views": 198,
-          "answers": 8,
-          "askedAt": "2026.10.15"
-        },
-        {
-          "title": "연금저축보험을 증권사 연금저축으로 이전하....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=495730198&answerNo=7&qb=7Jew6riI7KCA7LaV7Y6A65Oc7IiY66C567Cp67KV",
-          "views": 104,
-          "answers": 9,
-          "askedAt": "2026.10.28"
-        }
-      ]
-    },
-    {
       "id": "7ca87f91a4314e51",
       "urls": [
         "https://maruara-story.tistory.com/entry/%EC%98%A4%EB%8A%98-%EB%A7%88%EA%B0%90-%EA%B3%B5%EB%AA%A8%EC%A3%BC-%EC%B2%AD%EC%95%BD-%EC%9D%BC%EC%A0%95%EA%B3%BC-%EB%B9%84%EB%A1%80-%EB%B0%B0%EC%A0%95-%EC%9E%90%EA%B8%88-%EB%B0%B0%EB%B6%84%EB%B2%95",
@@ -10154,72 +9765,6 @@
           "views": 2233,
           "answers": 16,
           "askedAt": "2026.06.24"
-        }
-      ]
-    },
-    {
-      "id": "d844dad6387b634f",
-      "urls": [
-        "https://hyperlipidemia.tistory.com/entry/%F0%9F%94%8D-%EC%BD%9C%EB%A0%88%EC%8A%A4%ED%85%8C%EB%A1%A4%EC%9D%80-%EC%A0%95%EC%83%81%EC%9D%B8%EB%8D%B0-%EC%A4%91%EC%84%B1%EC%A7%80%EB%B0%A9%EB%A7%8C-%EB%86%92%EB%8B%A4-%E2%80%94-%EC%9B%90%EC%9D%B8%EA%B3%BC-%ED%95%B4%EA%B2%B0%EB%B2%95",
-        "https://hotkim.tistory.com/entry/%EC%BD%9C%EB%A0%88%EC%8A%A4%ED%85%8C%EB%A1%A4-%EC%A0%95%EC%83%81-%EC%88%98%EC%B9%98%EC%99%80-%EA%B4%80%EB%A6%AC-%EB%B0%A9%EB%B2%95%EF%BD%9CLDL%C2%B7HDL%C2%B7%EC%A4%91%EC%84%B1%EC%A7%80%EB%B0%A9-%EA%B2%80%EC%82%AC-%EA%B2%B0%EA%B3%BC-%EC%9D%BD%EB%8A%94-%EB%B2%95"
-      ],
-      "guide": {
-        "direction": "①검색자는 '콜레스테롤 정상수치는 얼마' 식으로 숫자만 찾다가, 총콜레스테롤·LDL은 정상인데 중성지방만 높은 자신의 결과를 해석하지 못해 막힌다. ②고수 글은 LDL·HDL 정상수치 나열에 머물고, 세 지표는 정상인데 중성지방만 튀는 경우의 원인은 다루지 않는다. ③총콜레스테롤·LDL·HDL·중성지방 기준표와 그 경우의 원인·관리법을 한 번에 제시해 글을 끝낸다.",
-        "searchTargets": [
-          "총콜레스테롤 정상수치",
-          "LDL 콜레스테롤 정상수치",
-          "HDL 콜레스테롤 정상수치",
-          "콜레스테롤 정상 수치 기준"
-        ],
-        "mustInclude": [
-          "총콜레스테롤 200mg/dL 미만, LDL 100mg/dL 미만, HDL 40mg/dL 이상, 중성지방 150mg/dL 미만 기준표",
-          "HDL은 40 이상이 기준이지만 60 이상이면 더 좋다는 보조 기준",
-          "총콜레스테롤·LDL·HDL이 정상인데 중성지방만 높은 경우의 원인 설명",
-          "한 번의 수치만 보지 않고 반복 측정·다른 위험요인과 함께 판단하는 법"
-        ],
-        "mustAvoid": [
-          "보조제·건강식품을 수치 개선 치료제처럼 과장",
-          "당뇨·고혈압·흡연 등 동반 위험요인 무시하고 수치만으로 단정"
-        ],
-        "checkBefore": [
-          "수치 기준은 검진 기관·학회 공식 가이드라인으로 재확인(버전별 기준 차이 가능)",
-          "개인 수치 해석은 의사 상담이 필요하다는 점을 명시"
-        ],
-        "solves": [
-          "HDL콜레스테롤 정상수치와 LDL수치 내리는 방법? → 수치 기준표와 생활습관 개선 방향 제공",
-          "콜레스테롤 정상수치는 어떻게 확인하나요? → 총콜레스테롤·LDL·HDL·중성지방 기준표로 정리",
-          "콜레스테롤은 정상인데 중성지방만 높은 이유는? → 원인과 관리법 설명"
-        ],
-        "actionTitles": [
-          "총콜레스테롤 LDL HDL 정상수치 기준표로 확인하기",
-          "콜레스테롤 정상인데 중성지방만 높을 때 원인 확인하기",
-          "LDL 콜레스테롤 정상수치 얼마부터 관리해야 하는지 확인"
-        ]
-      },
-      "at": "2026-11-04T01:58:27.111Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "HDL콜레스테롤 정상수치와 LDL수치 내리는방법....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=7&docId=176866790&answerNo=5&qb=7L2c66CI7Iqk7YWM66Gk7KCV7IOB7IiY7LmY",
-          "views": 35237,
-          "answers": 5,
-          "askedAt": "2026.09.07"
-        },
-        {
-          "title": "콜레스테롤 종류와 정상수치는 어떻게 되나....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70117&docId=488558459&answerNo=8&qb=7L2c66CI7Iqk7YWM66Gk7KCV7IOB7IiY7LmY",
-          "views": 2913,
-          "answers": 8,
-          "askedAt": "2026.09.07"
-        },
-        {
-          "title": "콜레스테롤 정상 수치는 어떻게 확인해야 하....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=7010103&docId=494949480&answerNo=3&qb=7L2c66CI7Iqk7YWM66Gk7KCV7IOB7IiY7LmY",
-          "views": 318,
-          "answers": 3,
-          "askedAt": "2026.09.07"
         }
       ]
     },
@@ -14587,65 +14132,6 @@
       ]
     },
     {
-      "id": "2ed798f50f69cf8b",
-      "urls": [
-        "https://moneyinftong.tistory.com/entry/i-ONE-Bank%EC%97%90-%EB%82%B4-%EC%95%84%EC%9D%B4-%EA%B3%84%EC%A2%8C-%EC%84%9C%EB%B9%84%EC%8A%A4%EB%A1%9C-%EC%9E%90%EB%85%80%EA%B3%84%EC%A2%8C%EB%A5%BC-%EA%B0%9C%EC%84%A4%ED%95%98%EB%A9%B4-%EC%B6%94%EC%B2%A8%EC%9D%84-%ED%86%B5%ED%95%B4-%ED%82%A4%EC%9E%90%EB%8B%88%EC%95%84-%EC%9E%85%EC%9E%A5%EA%B6%8C%EC%9D%84-%EB%B0%9B%EC%9D%84-%EC%88%98-%EC%9E%88%EB%8A%94-%EC%9D%B4%EB%B2%A4%ED%8A%B8%EB%A5%BC-%EC%A7%84%ED%96%89-%EC%A4%91%EC%9D%B4%EB%8B%A4",
-        "https://moneyinftong.tistory.com/entry/i-ONE-Bank%EC%97%90%EC%84%9C-IBK%ED%88%AC%EC%9E%90%EC%A6%9D%EA%B6%8C-%EA%B3%84%EC%A2%8C%EB%A5%BC-%EA%B0%9C%EC%84%A4%ED%95%98%EB%A9%B4-KOSPI-200"
-      ],
-      "guide": {
-        "direction": "검색자는 i-ONE Bank 내 아이 계좌 서비스로 자녀계좌를 만들면 키자니아 입장권 추첨 이벤트가 실제로 있는지, 어떻게 신청하는지 궁금해한다. 고수 블로그 제목은 사실 여부만 묻고 응모 기간·대상·경품 수량 같은 구체 조건은 밝히지 않는다. 이 글은 공식 공지 기준으로 진위와 응모 방법·기간·경품 조건을 표로 정리해 헷갈림을 없앤다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "응모 대상: 내 아이 계좌 서비스로 자녀계좌 개설한 보호자",
-          "경품: 키자니아 입장권(수량·추첨 방식 확인 필요)",
-          "신청 방법(앱 내 이벤트 페이지 경로, 확인 필요)"
-        ],
-        "mustAvoid": [
-          "IBK투자증권 계좌 개설·KOSPI 200 이벤트와 i-ONE Bank 자녀계좌 이벤트를 섞어서 서술",
-          "공식 공지 확인 없이 이벤트가 진행 중이라고 단정",
-          "이미 종료된 이벤트를 최신 정보처럼 안내"
-        ],
-        "checkBefore": [
-          "이벤트 진행 여부·기간·대상은 IBK기업은행 i-ONE Bank 공식 앱 이벤트 공지에서 확인"
-        ],
-        "solves": [
-          "이벤트가 진짜인지 헷갈림 → 공식 공지 기준 진위 확인",
-          "신청 방법을 몰라서 못 함 → 계좌 개설부터 응모까지 순서 정리"
-        ],
-        "actionTitles": [
-          "i-ONE Bank 내 아이 계좌 서비스 신청 방법 정리",
-          "i-ONE Bank 키자니아 입장권 응모 방법과 기간 확인",
-          "IBK기업은행 자녀계좌 개설 이벤트 진짜인지 확인하는 법"
-        ]
-      },
-      "at": "2026-11-05T02:52:11.189Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "표현의 자유",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=80101&docId=495646170&answerNo=12&qb=b25lIGJhbmsg7JWE7J20IOyEnOu5hOyKpCDsnpDrhYDqs4Tsoow=",
-          "views": 14796,
-          "answers": 13,
-          "askedAt": "2026.10.31"
-        },
-        {
-          "title": "하나은행 적금통장",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40101&docId=272686899&answerNo=1&qb=b25lIGJhbmsg7JWE7J20IOyEnOu5hOyKpCDsnpDrhYDqs4Tsoow=",
-          "views": 10419,
-          "answers": 3,
-          "askedAt": "2017.03.13"
-        },
-        {
-          "title": "롯데월드 할인카드!",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=90103&docId=75562654&answerNo=1&qb=b25lIGJhbmsg7JWE7J20IOyEnOu5hOyKpCDsnpDrhYDqs4Tsoow=",
-          "views": 8572,
-          "answers": 1,
-          "askedAt": "2009.09.21"
-        }
-      ]
-    },
-    {
       "id": "38cad2784fda8283",
       "urls": [
         "https://anotherdifference.tistory.com/2553"
@@ -16168,57 +15654,6 @@
       "at": "2026-11-05T11:53:03.658Z",
       "rules": "2026-10-20-solve",
       "provider": "claude"
-    },
-    {
-      "id": "1168c24a770281bb",
-      "urls": [
-        "https://moneyinftong.tistory.com/entry/2026-%EC%A0%95%EA%B7%9C%EC%8B%9C%EC%A6%8C-%EC%9A%B0%EC%8A%B9%ED%8C%80-KT%EC%9C%84%EC%A6%88%EC%99%80-%ED%94%8C%EB%A0%88%EC%9D%B4%EC%98%A4%ED%94%84-%EC%8A%B9%EC%9E%90-%EC%82%BC%EC%84%B1%EB%9D%BC%EC%9D%B4%EC%98%A8%EC%A6%88%EA%B0%80-%EB%A7%9E%EB%B6%99%EB%8A%94-%ED%95%9C%EA%B5%AD%EC%8B%9C%EB%A6%AC%EC%A6%88%EB%8A%94",
-        "https://honeypencil.tistory.com/entry/%ED%95%9C%EA%B5%AD%EC%8B%9C%EB%A6%AC%EC%A6%88-%EC%97%AD%EB%8C%80-%EC%9A%B0%EC%8A%B9%ED%8C%80-%EC%B4%9D%EC%A0%95%EB%A6%AC"
-      ],
-      "guide": {
-        "direction": "검색자는 단순 우승팀 나열이 아니라 KT위즈·삼성라이온즈의 한국시리즈 전적 방식(7전4선승제)과 홈구장 배정 기준을 몰라 막힌다. 고수 글은 '역대 우승팀 총정리'만 다뤄 이번 시리즈의 경기 수·일정·조건은 비어 있다. 경기 수 계산표와 진출 조건 체크리스트로 글을 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "KT위즈 정규시즌 1위, 삼성라이온즈 플레이오프 승리로 한국시리즈 진출",
-          "7전4선승제 경기 수 계산 방식",
-          "역대 양팀 상대전적(확인 필요: KBO 공식 기록)"
-        ],
-        "mustAvoid": [
-          "2026 시즌을 다른 연도 포스트시즌 결과와 혼동"
-        ],
-        "checkBefore": [
-          "KT위즈·삼성라이온즈 포스트시즌 진출 확정 여부(KBO 공식 발표)",
-          "한국시리즈 경기 일정·경기장(KBO 공식 공지)"
-        ],
-        "solves": [
-          "포스트시즌 진출 자격이 헷갈림 → 정규시즌 1위와 준플레이오프~플레이오프 승자 매칭 구조를 표로 정리",
-          "7전4선승제가 뭔지 모름 → 최대 경기 수와 종료 조건을 계산해 보여줌"
-        ],
-        "actionTitles": [
-          "KT위즈 삼성라이온즈 한국시리즈 일정 확인하는 법",
-          "한국시리즈 전적 조회 KT위즈 vs 삼성 총정리",
-          "한국시리즈 7전4선승제 진출 조건 계산해보기"
-        ]
-      },
-      "at": "2026-11-05T11:53:03.658Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "야구 포스트시즌 진출 자격",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1001020201&docId=217930562&answerNo=3&qb=7KCV6rec7Iuc7KaMIOyasOyKue2MgCBrdOychOymiCDtlIzroIjsnbTsmKTtlIQg7Iq57J6Q",
-          "views": 2724,
-          "answers": 1,
-          "askedAt": "2015.02.23"
-        },
-        {
-          "title": "야구 궁금한것 질문드려요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1001020201&docId=260449382&answerNo=1&qb=7KCV6rec7Iuc7KaMIOyasOyKue2MgCBrdOychOymiCDtlIzroIjsnbTsmKTtlIQg7Iq57J6Q",
-          "views": 1965,
-          "answers": 1,
-          "askedAt": "2016.09.13"
-        }
-      ]
     },
     {
       "id": "4e2c176b41150eba",
