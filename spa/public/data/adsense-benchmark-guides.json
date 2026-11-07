@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-07T18:20:42.716Z",
+  "generatedAt": "2026-11-07T18:44:24.129Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -11751,69 +11751,6 @@
           "views": 860,
           "answers": 2,
           "askedAt": "2017.11.05"
-        }
-      ]
-    },
-    {
-      "id": "ff67f97386f6e62b",
-      "urls": [
-        "https://easy.ddorwhat.com/219",
-        "https://cheinggyemoney.tistory.com/129"
-      ],
-      "guide": {
-        "direction": "지식인 질문들은 회계연도(1.1~12.31) 기준과 입사일 기준 중 어느 쪽으로 미사용 연차를 세야 하는지, 재직 중에도 수당을 받을 수 있는지에서 막혀 있다. 고수 블로그 제목은 '산정 방법 안내'까지만 다루고 기준별 발생일수 비교표나 실제 계산식은 비워둔다. 이 글은 두 기준의 발생일수 비교표와 통상임금 기준 계산식을 제시해 독자가 직접 자기 수당을 계산하게 한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "회계연도 기준(1.1~12.31) vs 입사일 기준 발생일수 비교",
-          "지식인 사례처럼 1년차 15일~26일까지 발생하는 구조 설명",
-          "퇴직금과 미사용 연차수당은 별도 항목으로 계산된다는 점",
-          "통상임금 기준 1일 수당 계산식과 예시(확인 필요: 근로기준법 조문)",
-          "사용촉진제도 시행 여부에 따라 지급의무가 달라지는 조건"
-        ],
-        "mustAvoid": [
-          "지식인 개별 사례(26일 등)를 모든 직장에 적용되는 법정 수치처럼 일반화",
-          "연차 사용촉진 절차를 거친 경우와 안 거친 경우를 구분 없이 설명",
-          "퇴직금 계산과 연차수당 계산을 같은 공식으로 섞어 설명"
-        ],
-        "checkBefore": [
-          "근로기준법 제60조·61조(연차휴가 발생·사용촉진) 조문을 고용노동부 자료로 확인",
-          "회사가 회계연도 기준인지 입사일 기준인지 사내 취업규칙으로 확인"
-        ],
-        "solves": [
-          "퇴사 시 미사용 연차 며칠분을 받는지 몰라서 검색 → 기준별 발생일수 비교표 제공",
-          "재직 중에도 연차수당을 받을 수 있는지 몰라서 검색 → 사용촉진 여부별 지급의무 구분 정리",
-          "연차수당 금액을 어떻게 계산하는지 몰라서 검색 → 통상임금 기준 계산식과 예시 제공"
-        ],
-        "actionTitles": [
-          "연차수당 계산법, 회계연도·입사일 기준 비교로 바로 끝내기",
-          "퇴사 전 미사용 연차수당 지급기준 조건표로 확인하기",
-          "재직 중 연차수당 받을 수 있는지 체크리스트로 계산하기"
-        ]
-      },
-      "at": "2026-11-04T12:01:15.204Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "퇴직금 산정시 연차보상에 관해서...",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60802&docId=147667835&answerNo=1&qb=7KeB7J6l7J24IOyXsOywqOycoOq4ie2ctCDrsJzsg50g66+47IKs7JqpIOyXsOywqOyImOuLuQ==",
-          "views": 373,
-          "answers": 1,
-          "askedAt": "2012.03.14"
-        },
-        {
-          "title": "첫 직장의 퇴직금과 미사용 연차수당, 계산 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60802&docId=353891047&answerNo=1&qb=7KeB7J6l7J24IOyXsOywqOycoOq4ie2ctCDrsJzsg50g66+47IKs7JqpIOyXsOywqOyImOuLuQ==",
-          "views": 100,
-          "answers": 2,
-          "askedAt": "2020.05.21"
-        },
-        {
-          "title": "직장 1년차 미사용연차수당 질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60802&docId=418033947&answerNo=1&qb=7KeB7J6l7J24IOyXsOywqOycoOq4ie2ctCDrsJzsg50g66+47IKs7JqpIOyXsOywqOyImOuLuQ==",
-          "views": 676,
-          "answers": 1,
-          "askedAt": "2022.04.25"
         }
       ]
     },
