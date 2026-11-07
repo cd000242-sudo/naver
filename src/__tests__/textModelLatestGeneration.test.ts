@@ -226,9 +226,15 @@ describe('banned / verified lists do not catch the new IDs', () => {
 
 describe('price tables', () => {
   it('Gemini text prices: Flash-Lite is not priced as 3.5 Flash', () => {
-    expect(resolveGeminiTextPricing('gemini-3.5-flash-lite', 1000)).toEqual({ input: 0.30, output: 2.50 });
-    expect(resolveGeminiTextPricing('gemini-3.8-flash', 1000)).toEqual({ input: 1.50, output: 7.50 });
-    expect(resolveGeminiTextPricing('gemini-3.6-flash', 1000)).toEqual({ input: 1.50, output: 7.50 });
+    // [2026-11-07] 3.8 / 3.6 Flash: $0.75/$3.75 until 2026-12-31, $1.50/$7.50 from 2027-01-01. The date is passed so this
+    //   test does not change meaning when the calendar moves (the full per-date table is in modelPriceRefresh1107).
+    const before = new Date('2026-11-07T12:00:00Z');
+    const after = new Date('2027-01-01T12:00:00Z');
+    expect(resolveGeminiTextPricing('gemini-3.5-flash-lite', 1000, before)).toEqual({ input: 0.30, output: 2.50 });
+    expect(resolveGeminiTextPricing('gemini-3.8-flash', 1000, before)).toEqual({ input: 0.75, output: 3.75 });
+    expect(resolveGeminiTextPricing('gemini-3.6-flash', 1000, before)).toEqual({ input: 0.75, output: 3.75 });
+    expect(resolveGeminiTextPricing('gemini-3.8-flash', 1000, after)).toEqual({ input: 1.50, output: 7.50 });
+    expect(resolveGeminiTextPricing('gemini-3.6-flash', 1000, after)).toEqual({ input: 1.50, output: 7.50 });
   });
   it('retired Gemini IDs keep their historical prices', () => {
     expect(resolveGeminiTextPricing('gemini-3.1-flash-lite', 1000)).toEqual({ input: 0.25, output: 1.50 });
@@ -239,8 +245,9 @@ describe('price tables', () => {
     expect(tracker).toMatch(/'gpt-6-luna':\s*\{\s*input:\s*0\.10[^}]*output:\s*0\.50/);
     expect(tracker).toMatch(/'gpt-6\.1-terra':\s*\{\s*input:\s*1\.00[^}]*output:\s*5\.00/);
     expect(tracker).toMatch(/'gpt-6\.1-sol':\s*\{\s*input:\s*2\.00[^}]*output:\s*10\.00/);
-    expect(tracker).toMatch(/'claude-haiku-5-5':\s*\{\s*input:\s*1\.00[^}]*output:\s*5\.00/);
-    expect(tracker).toMatch(/'claude-sonnet-5-5':\s*\{\s*input:\s*3\.00[^}]*output:\s*15\.00/);
+    // [2026-11-07] Haiku 5.5 $0.10/$0.50 (was $1/$5), Sonnet 5.5 $2/$10 (was $3/$15) - the old rows were wrong.
+    expect(tracker).toMatch(/'claude-haiku-5-5':\s*\{\s*input:\s*0\.10[^}]*output:\s*0\.50/);
+    expect(tracker).toMatch(/'claude-sonnet-5-5':\s*\{\s*input:\s*2\.00[^}]*output:\s*10\.00/);
     expect(tracker).toMatch(/'claude-fable-5-1':\s*\{\s*input:\s*10\.00[^}]*output:\s*50\.00/);
   });
 });

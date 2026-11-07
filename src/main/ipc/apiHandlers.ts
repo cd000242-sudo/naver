@@ -5,7 +5,7 @@ import { ipcMain } from 'electron';
 import { IpcContext } from '../types';
 import { loadConfig, saveConfig } from '../../configManager.js';
 import { flushGeminiUsage, getGeminiUsageSnapshot } from '../../gemini.js';
-import { flushAllApiUsage, getApiUsageSnapshot, resetApiUsage, type ApiProvider } from '../../apiUsageTracker.js';
+import { flushAllApiUsage, getApiUsageSnapshot, resetApiUsage, resolveGeminiTextPricing, type ApiProvider } from '../../apiUsageTracker.js';
 import { GEMINI_TEXT_FREE_TIER_LIMITS, formatGeminiFreeTierSummary } from '../../geminiQuotaPolicy.js';
 import { GEMINI_TEXT_MODELS } from '../../runtime/modelRegistry.js';
 
@@ -170,6 +170,8 @@ export function registerApiHandlers(_ctx: IpcContext): void {
                     note: '무료 한도는 API 키가 아니라 Google AI Studio 프로젝트 단위입니다. 429가 나면 RPM/TPM/RPD 중 하나를 넘은 상태입니다.',
                 },
             };
+            // [2026-11-07] The Flash price follows the calendar (introductory until 2026-12-31) - read it from the one price table.
+            const flashPrice = resolveGeminiTextPricing(GEMINI_TEXT_MODELS.FLASH, 0);
             const paidPlanInfo = {
                 label: '💎 유료 (Tier 1 / Pay-as-you-go)',
                 limits: {
@@ -179,10 +181,9 @@ export function registerApiHandlers(_ctx: IpcContext): void {
                     note: '유료 한도는 프로젝트 사용량 등급에 따라 달라집니다. 결제 프로젝트와 별도 무료 프로젝트 키를 보조 키 풀에 넣으면 무료 한도를 먼저 사용할 수 있습니다.',
                 },
                 pricing: {
-                    // [2026-11-03] 균형 티어 = 3.8 Flash (단가 미확인 - 직전 3.6 Flash 단가를 그대로 표시).
-                    //   Flash-Lite = 3.5 Flash-Lite ($0.30 / $2.50).
-                    flash_input: '$1.50 / 1M tokens',
-                    flash_output: '$7.50 / 1M tokens',
+                    // 균형 티어 = 3.8 Flash. Flash-Lite = 3.5 Flash-Lite ($0.30 / $2.50).
+                    flash_input: `$${flashPrice.input.toFixed(2)} / 1M tokens`,
+                    flash_output: `$${flashPrice.output.toFixed(2)} / 1M tokens`,
                     flash_lite_input: '$0.30 / 1M tokens',
                     flash_lite_output: '$2.50 / 1M tokens',
                     pro_input: '앱에서 미지원 (Flash로 자동 전환)',

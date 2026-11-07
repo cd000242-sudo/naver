@@ -4447,8 +4447,8 @@
                     <select id="sub-work-provider" style="width: 100%; padding: 0.6rem; background: var(--bg-secondary); border: 1px solid var(--border-medium); color: var(--text-strong); border-radius: 8px; font-size: 0.9rem;">
                         <option value="same">본문과 동일 모델 (기본 — silent 폴백 0)</option>
                         <option value="gpt-mini">GPT-6 Luna (가성비, 입력 $0.10/출력 $0.50)</option>
-                        <option value="gemini-flash">Gemini 3.8 Flash (선불, 입력 $1.50/출력 $7.50)</option>
-                        <option value="haiku">Claude Haiku 5.5 ($1/1M)</option>
+                        <option value="gemini-flash">Gemini 3.8 Flash (선불, 입력 $0.75/출력 $3.75 · 2027-01-01부터 $1.50/$7.50)</option>
+                        <option value="haiku">Claude Haiku 5.5 (입력 $0.10/출력 $0.50)</option>
                     </select>
                     <small style="color: var(--text-muted); font-size: 0.75rem; display: block; margin-top: 0.3rem;">
                         본문은 항상 사용자 선택 모델로 생성. 부수 작업(제목/도입부/이미지 프롬프트 변환)만 다른 모델로 명시 분리.
@@ -5546,7 +5546,7 @@
                                             <div style="font-size: 0.9rem; color: #4b5563; line-height: 1.4;">
                                                 기본값 · 품질·속도 균형 · ⚠️ 무료 티어 없음 — Google AI Studio 에서 선불 결제를 등록해야 동작합니다</div>
                                             <div style="font-size: 0.8rem; color: #0d9488; font-weight: 700; margin-top: 0.3rem;">
-                                                📊 선불 유료: 입력 $1.50 · 출력 $7.50 / 1M 토큰</div>
+                                                📊 선불 유료: 입력 $0.75 · 출력 $3.75 / 1M 토큰 (2026-12-31까지) · 2027-01-01부터 $1.50 · $7.50</div>
                                         </div>
                                     </label>
 
@@ -5568,7 +5568,7 @@
                                             <div style="font-size: 0.9rem; color: #4b5563; line-height: 1.4;">
                                                 긴 글에서 논리를 끝까지 끌고 가는 데 강점 · 직전 세대(3.8 Flash 이전 최신)</div>
                                             <div style="font-size: 0.8rem; color: #7c3aed; font-weight: 700; margin-top: 0.3rem;">
-                                                📊 선불 유료: 입력 $1.50 · 출력 $7.50 / 1M 토큰</div>
+                                                📊 선불 유료: 입력 $0.75 · 출력 $3.75 / 1M 토큰 (2026-12-31까지) · 2027-01-01부터 $1.50 · $7.50</div>
                                         </div>
                                     </label>
 
@@ -12439,8 +12439,8 @@
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); background: rgba(34, 197, 94, 0.07);">
                             <td style="padding: 0.7rem; font-weight: bold; color: #fcd34d;">⚖️ Gemini 3.8 Flash</td>
                             <td style="padding: 0.7rem; text-align: right; color: #f59e0b;">무료 없음 · 선불</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩88</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩66</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩44 <span style="font-size: 0.7rem; color: #94a3b8;">(12/31까지 · 2027년부터 ₩88)</span></td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩33 <span style="font-size: 0.7rem; color: #94a3b8;">(2027년부터 ₩66)</span></td>
                             <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">고품질</td>
                         </tr>
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
@@ -12463,14 +12463,14 @@
                             <td style="padding: 0.7rem; font-weight: bold; color: #34d399;">⚖️ GPT-6.1 Terra</td>
                             <td style="padding: 0.7rem; text-align: right; color: #94a3b8;">없음</td>
                             <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩59</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩44</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩43</td>
                             <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">균형</td>
                         </tr>
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
                             <td style="padding: 0.7rem; font-weight: bold; color: #34d399;">🚀 GPT-6.1 Sol</td>
                             <td style="padding: 0.7rem; text-align: right; color: #94a3b8;">없음</td>
                             <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩118</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩87</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩86</td>
                             <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">프리미엄</td>
                         </tr>
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
@@ -12485,15 +12485,15 @@
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); background: rgba(244, 114, 182, 0.10);">
                             <td style="padding: 0.7rem; font-weight: bold; color: #f472b6;">💜 Claude Haiku 5.5 <span style="font-size: 0.7rem; background: rgba(244, 114, 182, 0.25); color: #fce4ec; padding: 0.1rem 0.4rem; border-radius: 4px;">[★현재 기본값]</span></td>
                             <td style="padding: 0.7rem; text-align: right; color: #94a3b8;">없음</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩59</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩44</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩6</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩4</td>
                             <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">가성비</td>
                         </tr>
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
                             <td style="padding: 0.7rem; font-weight: bold; color: #f472b6;">📜 Claude Sonnet 5.5</td>
                             <td style="padding: 0.7rem; text-align: right; color: #94a3b8;">없음</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩176</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩131</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩118</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩87</td>
                             <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">균형</td>
                         </tr>
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
@@ -12542,12 +12542,15 @@
                     <h5 style="margin: 0 0 0.5rem 0; color: #34d399; font-size: 0.95rem;">💵 $10 (약 ₩14,000) 충전 시 발행 가능 편수 <span style="font-size: 0.75rem; color: #b0bec5;">(일반 요금 기준)</span></h5>
                     <ul style="margin: 0; padding-left: 1.25rem; color: #e5e7eb; font-size: 0.85rem; line-height: 1.75;">
                         <li><strong style="color: #fcd34d;">Gemini 3.5 Flash-Lite</strong>: 약 <b>538편</b></li>
-                        <li><strong style="color: #fcd34d;">Gemini 3.8 Flash</strong>: 약 <b>159편</b></li>
+                        <li><strong style="color: #fcd34d;">Gemini 3.8 Flash</strong>: 약 <b>317편</b> (2027년부터 159편)</li>
+                        <li><strong style="color: #fcd34d;">Gemini 4 Argon</strong>: 약 <b>119편</b> (12/1부터 60편)</li>
                         <li><strong style="color: #34d399;">GPT-6 Luna</strong>: 약 <b>2,381편</b></li>
                         <li><strong style="color: #34d399;">GPT-6.1 Terra</strong>: 약 <b>238편</b></li>
                         <li><strong style="color: #34d399;">GPT-6.1 Sol</strong>: 약 <b>119편</b></li>
-                        <li><strong style="color: #f472b6;">Claude Haiku 5.5</strong>: 약 <b>237편</b></li>
-                        <li><strong style="color: #f472b6;">Claude Sonnet 5.5</strong>: 약 <b>79편</b></li>
+                        <li><strong style="color: #34d399;">GPT-6 Astra</strong>: 약 <b>24편</b></li>
+                        <li><strong style="color: #f472b6;">Claude Haiku 5.5</strong>: 약 <b>2,381편</b></li>
+                        <li><strong style="color: #f472b6;">Claude Sonnet 5.5</strong>: 약 <b>119편</b></li>
+                        <li><strong style="color: #f472b6;">Claude Opus 5.5</strong>: 약 <b>60편</b></li>
                         <li><strong style="color: #f472b6;">Claude Fable 5.1</strong>: 약 <b>24편</b></li>
                     </ul>
                     <div style="margin-top: 0.75rem; padding: 0.6rem; background: rgba(251, 191, 36, 0.08); border-left: 3px solid #fbbf24; border-radius: 4px; font-size: 0.78rem; color: #fde68a;">
@@ -12768,7 +12771,7 @@
                             <span>💰</span> 유료 가성비 (API 종량제 · 쿼터 걱정 X)
                         </h5>
                         <ul style="margin: 0; padding-left: 1.2rem; color: #e5e7eb; font-size: 0.85rem; line-height: 1.7;">
-                            <li><strong>글생성:</strong> <strong>Gemini 3.5 Flash-Lite</strong> (★기본 추천 · ₩26 · 절약 ₩21) — 더 단단한 문장이 필요하면 <strong>GPT-6.1 Terra</strong>(₩59 · 절약 ₩44)</li>
+                            <li><strong>글생성:</strong> <strong>Gemini 3.5 Flash-Lite</strong> (★기본 추천 · ₩26 · 절약 ₩21) — 더 단단한 문장이 필요하면 <strong>GPT-6.1 Terra</strong>(₩59 · 절약 ₩43)</li>
                             <li><strong>이미지:</strong> 덕트테이프(Low ₩8~) · 나노바나나2(₩97, 한글 텍스트 가능)</li>
                             <li style="margin-top: 0.5rem; color: #f472b6; font-weight: bold; background: rgba(244, 114, 182, 0.15); padding: 0.25rem 0.5rem; border-radius: 4px; display: inline-block;">
                                 구독 없이 쓴 만큼만 — 한도 막힘 없음</li>
@@ -12784,7 +12787,7 @@
                             <span>👑</span> 압도적 고퀄리티
                         </h5>
                         <ul style="margin: 0; padding-left: 1.2rem; color: #e5e7eb; font-size: 0.85rem; line-height: 1.7;">
-                            <li><strong>글:</strong> Claude Fable 5.1 (₩588 · 절약 ₩437) — 균형을 원하면 Claude Sonnet 5.5 (₩176 · 절약 ₩131)</li>
+                            <li><strong>글:</strong> Claude Fable 5.1 (₩588 · 절약 ₩437) — 균형을 원하면 Claude Sonnet 5.5 (₩118 · 절약 ₩87)</li>
                             <li><strong>썸네일·본문 모두:</strong> <strong>나노바나나2</strong> (Gemini 3.1 Flash Image · 한글 가능 · ₩97/장) — 한글 썸네일 권장</li>
                             <li style="margin-top: 0.5rem; color: #fbbf24; font-weight: bold; background: rgba(245, 158, 11, 0.1); padding: 0.25rem 0.5rem; border-radius: 4px; display: inline-block;">
                                 총 비용: 약 ₩1,267 / 편 (글 ₩588 + 이미지 7장 ₩679)</li>

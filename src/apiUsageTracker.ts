@@ -55,11 +55,15 @@ export interface TrackingInput {
  *  API 유지: gpt-4.1 계열 (ChatGPT 2026-02-13 은퇴했지만 API는 유지)
  */
 const OPENAI_TEXT_PRICING: Record<string, { input: number; cachedInput: number; output: number }> = {
-  // [2026-11-03] GPT-6 generation value / balanced / premium tiers.
-  //   input/output from the research notes; cachedInput = 10% of input (same ratio as earlier tiers, UNCONFIRMED).
+  // [2026-11-07] GPT-6 generation, official pricing page (input / cached input / output per 1M tokens).
+  //   Terra and Sol cached prices were double the published ones ($0.10 / $0.20) until this date.
+  'gpt-6-astra':     { input: 10.00, cachedInput: 1.00, output: 50.00 },  // top tier
+  'gpt-6.1-sol':     { input: 2.00, cachedInput: 0.10, output: 10.00 },
+  'gpt-6.1-terra':   { input: 1.00, cachedInput: 0.05, output: 5.00 },
   'gpt-6-luna':      { input: 0.10, cachedInput: 0.01, output: 0.50 },
-  'gpt-6.1-terra':   { input: 1.00, cachedInput: 0.10, output: 5.00 },
-  'gpt-6.1-sol':     { input: 2.00, cachedInput: 0.20, output: 10.00 },
+  // GPT-6 Sol (previous generation): $2 / $10. Its cached price is not in the research notes - the 6.1 Sol value is
+  //   used as a placeholder, and nothing reads cachedInput today (calculateCost bills input and output only).
+  'gpt-6-sol':       { input: 2.00, cachedInput: 0.10, output: 10.00 },
   // Retired GPT-5.6 prices retained for historical usage records.
   'gpt-5.6-luna':    { input: 1.00, cachedInput: 0.10, output: 6.00 },
   'gpt-5.6-terra':   { input: 2.50, cachedInput: 0.25, output: 15.00 },
@@ -183,11 +187,20 @@ const OPENAI_IMAGE_PRICING: Record<string, number> = {
  *  2025-11-24 Opus 4.5 출시와 함께 Opus 전체 67% 가격 인하 ($15/$75 → $5/$25). Opus 4.6/4.7도 동일.
  *  Opus 4.1 / 4.0은 레거시 단가($15/$75) 유지.
  */
-const CLAUDE_PRICING: Record<string, { input: number; output: number }> = {
-  // [2026-11-03] Claude 5.5 / 5.1 generation. Prices UNCONFIRMED - carried over from the previous model of the same tier.
-  'claude-fable-5-1':         { input: 10.00, output: 50.00 },
-  'claude-sonnet-5-5':        { input: 3.00,  output: 15.00 },
-  'claude-haiku-5-5':         { input: 1.00,  output: 5.00 },
+interface ClaudePrice {
+  input: number;
+  output: number;
+  /** Price when the whole prompt (cached tokens included) is larger than `aboveTokens`. */
+  longContext?: { aboveTokens: number; input: number; output: number };
+}
+
+const CLAUDE_PRICING: Record<string, ClaudePrice> = {
+  // [2026-11-07] Claude 5.5 / 5.1 generation, official pricing (per 1M tokens). Sonnet was listed at $3/$15 and
+  //   Haiku at $1/$5 before this date - both wrong.
+  'claude-fable-5-1':         { input: 10.00, output: 50.00 },  // top tier, long-running work
+  'claude-opus-5-5':          { input: 4.00,  output: 20.00 },
+  'claude-sonnet-5-5':        { input: 2.00,  output: 10.00 },
+  'claude-haiku-5-5':         { input: 0.10,  output: 0.50, longContext: { aboveTokens: 100_000, input: 0.50, output: 2.50 } },
   // Retired tiers kept for historical usage records.
   'claude-fable-5':           { input: 10.00, output: 50.00 },
   'claude-sonnet-5':          { input: 3.00,  output: 15.00 },
@@ -213,6 +226,13 @@ const CLAUDE_PRICING: Record<string, { input: number; output: number }> = {
   'default':                 { input: 3.00,  output: 15.00 },
 };
 
+function resolveClaudePrice(price: ClaudePrice, promptTokens: number): { input: number; output: number } {
+  const long = price.longContext;
+  return long && promptTokens > long.aboveTokens
+    ? { input: long.input, output: long.output }
+    : { input: price.input, output: price.output };
+}
+
 /** Perplexity 모델 가격 ($/1M tokens) + 검색비용 — source: docs.perplexity.ai/pricing 2026-04
  *  2026년 기준 sonar/sonar-pro는 citation 토큰 과금 폐지.
  *  sonar-reasoning-pro(2025-12-15)가 기존 sonar-reasoning을 대체하여 현재 활성 모델은 4종(sonar / sonar-pro / sonar-reasoning-pro / sonar-deep-research).
@@ -228,15 +248,29 @@ const PERPLEXITY_PRICING: Record<string, { input: number; output: number; search
 // ==================== 가격 계산 헬퍼 ====================
 
 /**
+ * First UTC day of the higher price. Announced by Google (2026-11-07 docs): Argon $2/$10 until 2026-11-30 then
+ * $4/$20; 3.8 Flash and 3.6 Flash $0.75/$3.75 until 2026-12-31 then $1.50/$7.50. UTC is used so the answer does not
+ * depend on the PC's time zone; the vendor's own cut-over hour is not published, so the boundary day can be off by one.
+ */
+const GEMINI_ARGON_FULL_PRICE_FROM = '2026-12-01';
+const GEMINI_FLASH_FULL_PRICE_FROM = '2027-01-01';
+
+/**
  * Gemini text price ($/1M tokens) by model-ID substring. Specific IDs come first:
  * 'gemini-3.5-flash-lite' contains '3.5-flash' and must not be priced as 3.5 Flash.
  * 200K 토큰 초과 시 Pro 계열은 2배 요금 (>200K 분기 적용).
  */
-export function resolveGeminiTextPricing(model: string, totalTokens: number): { input: number; output: number } {
+export function resolveGeminiTextPricing(model: string, totalTokens: number, now: Date = new Date()): { input: number; output: number } {
   const lower = model.toLowerCase();
   const isLongContext = totalTokens > 200_000;
+  const today = now.toISOString().slice(0, 10);
   let pInput: number, pOutput: number;
-  if (lower.includes('3.5-flash-lite')) {
+  if (lower.includes('4-argon')) {
+    // [2026-11-07] Top tier, no free tier. Price doubles on 2026-12-01.
+    const full = today >= GEMINI_ARGON_FULL_PRICE_FROM;
+    pInput = full ? 4.00 : 2.00;
+    pOutput = full ? 20.00 : 10.00;
+  } else if (lower.includes('3.5-flash-lite')) {
     // [2026-11-03] 3.5 Flash-Lite (research notes). Checked before '3.5-flash' on purpose.
     pInput = 0.30;
     pOutput = 2.50;
@@ -244,9 +278,10 @@ export function resolveGeminiTextPricing(model: string, totalTokens: number): { 
     pInput = 0.25;
     pOutput = 1.50;
   } else if (lower.includes('3.8-flash') || lower.includes('3.6-flash')) {
-    // 3.8 Flash price UNCONFIRMED - the 3.6 Flash price is applied.
-    pInput = 1.50;
-    pOutput = 7.50;
+    // [2026-11-07] Introductory price until 2026-12-31, full price from 2027-01-01 (3.6 Flash follows 3.8 Flash).
+    const full = today >= GEMINI_FLASH_FULL_PRICE_FROM;
+    pInput = full ? 1.50 : 0.75;
+    pOutput = full ? 7.50 : 3.75;
   } else if (lower.includes('3.5-flash')) {
     pInput = 1.50;
     pOutput = 9.00;
@@ -282,7 +317,7 @@ function matchPricingKey(model: string, table: Record<string, any>): string {
   return 'default';
 }
 
-function calculateCost(provider: ApiProvider, input: TrackingInput): number {
+function calculateCost(provider: ApiProvider, input: TrackingInput, now: Date = new Date()): number {
   if (input.costOverride !== undefined) return input.costOverride;
 
   const model = input.model || '';
@@ -294,7 +329,7 @@ function calculateCost(provider: ApiProvider, input: TrackingInput): number {
       // ✅ [v1.4.77] 공식 2026-04 단가로 전면 교정 (이전 구 2.0 시절 단가 → Flash output 6.25배 과소 계상 버그)
       // source: ai.google.dev/gemini-api/docs/pricing
       // 200K 토큰 초과 시 Pro 계열은 2배 요금 (>200K 분기 적용)
-      const { input: pInput, output: pOutput } = resolveGeminiTextPricing(model, inTok + outTok);
+      const { input: pInput, output: pOutput } = resolveGeminiTextPricing(model, inTok + outTok, now);
       return (inTok / 1_000_000) * pInput + (outTok / 1_000_000) * pOutput;
     }
 
@@ -311,9 +346,10 @@ function calculateCost(provider: ApiProvider, input: TrackingInput): number {
 
     case 'claude': {
       const key = matchPricingKey(model, CLAUDE_PRICING);
-      const p = CLAUDE_PRICING[key];
       const cacheCreate = input.cacheCreationTokens || 0;
       const cacheRead = input.cacheReadTokens || 0;
+      // Long-context tiers (Haiku 5.5) look at the whole prompt: fresh + cache-written + cache-read tokens.
+      const p = resolveClaudePrice(CLAUDE_PRICING[key], inTok + cacheCreate + cacheRead);
       // Anthropic multipliers: write = 1.25x input, read = 0.1x input
       const base = (inTok / 1_000_000) * p.input + (outTok / 1_000_000) * p.output;
       const cacheCost = (cacheCreate / 1_000_000) * p.input * 1.25
@@ -333,6 +369,14 @@ function calculateCost(provider: ApiProvider, input: TrackingInput): number {
     default:
       return 0;
   }
+}
+
+/**
+ * 텍스트 호출 1건의 비용(USD) — 가격표 시험·견적용. calculateCost 를 그대로 쓰므로 누적기와 항상 같은 값이다.
+ * `now` 는 날짜로 바뀌는 가격(Gemini Argon·Flash)을 시험이 고정하려고 넘긴다.
+ */
+export function estimateTextCostUSD(provider: ApiProvider, input: TrackingInput, now: Date = new Date()): number {
+  return calculateCost(provider, input, now);
 }
 
 /**

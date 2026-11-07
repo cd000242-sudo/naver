@@ -82,12 +82,16 @@ function modelCard(value: string): string {
 }
 
 describe('화면에 적힌 단가가 공식 가격표와 일치한다', () => {
-  it('3.6 은 입력 $1.50 · 출력 $7.50', () => {
-    expect(modelCard('gemini-3.6-flash')).toContain('입력 $1.50 · 출력 $7.50');
+  // [2026-11-07] 3.8·3.6 Flash 는 2026-12-31 까지 입력 $0.75 · 출력 $3.75, 2027-01-01 부터 $1.50 · $7.50 (공식 문서).
+  //   이전 기대값($1.50/$7.50 고정, 3.8 은 "단가 미확인")은 그 일정을 몰랐던 값이다. 날짜별 값은 modelPriceRefresh1107 이 가격표와 대조한다.
+  it('3.6 은 입력 $0.75 · 출력 $3.75 (2026-12-31 까지), 2027-01-01 부터 $1.50 · $7.50', () => {
+    expect(modelCard('gemini-3.6-flash')).toContain('입력 $0.75 · 출력 $3.75');
+    expect(modelCard('gemini-3.6-flash')).toContain('2027-01-01부터 $1.50 · $7.50');
   });
 
-  it('3.8 은 입력 $1.50 · 출력 $7.50 (단가 미확인 — 3.6 단가를 그대로 표시)', () => {
-    expect(modelCard('gemini-3.8-flash')).toContain('입력 $1.50 · 출력 $7.50');
+  it('3.8 은 입력 $0.75 · 출력 $3.75 (2026-12-31 까지), 2027-01-01 부터 $1.50 · $7.50', () => {
+    expect(modelCard('gemini-3.8-flash')).toContain('입력 $0.75 · 출력 $3.75');
+    expect(modelCard('gemini-3.8-flash')).toContain('2027-01-01부터 $1.50 · $7.50');
   });
 
   it('가성비 모델(3.5 Flash-Lite)은 입력 $0.30 · 출력 $2.50', () => {

@@ -53,9 +53,11 @@ describe('Gemini prepaid/value text-model policy', () => {
       resolve(process.cwd(), 'src', 'main', 'ipc', 'apiHandlers.ts'),
       'utf8',
     );
-    // 균형 티어 = 3.6 Flash 공식 단가
-    expect(source).toContain("flash_input: '$1.50 / 1M tokens'");
-    expect(source).toContain("flash_output: '$7.50 / 1M tokens'");
+    // [2026-11-07] 균형 티어 = 3.8 Flash. 단가는 날짜로 바뀌므로(2026-12-31 까지 $0.75/$3.75, 이후 $1.50/$7.50)
+    //   고정 문자열이 아니라 가격표(resolveGeminiTextPricing)에서 읽는다 - 값 자체는 modelPriceRefresh1107 이 날짜별로 확인한다.
+    expect(source).toContain('resolveGeminiTextPricing(GEMINI_TEXT_MODELS.FLASH, 0)');
+    expect(source).toContain("flash_input: `$${flashPrice.input.toFixed(2)} / 1M tokens`");
+    expect(source).toContain("flash_output: `$${flashPrice.output.toFixed(2)} / 1M tokens`");
     expect(source).toContain("flash_input: '무료 티어 없음'");
     expect(source).not.toContain("flash_input: '$0 (무료)'");
   });
