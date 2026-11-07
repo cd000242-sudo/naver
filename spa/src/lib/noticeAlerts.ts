@@ -9,7 +9,8 @@ import type { HomeNotice } from './siteOps';
  *   달라도 한국 기준 자정에 풀리도록 UTC 로 환산해 저장한다.
  */
 
-const SEEN_KEY = 'leaderspro:home-notice:seen-v1';
+// [2026-11-08] v1 → v2: show the current notices once more to everyone (owner request).
+const SEEN_KEY = 'leaderspro:home-notice:seen-v2';
 const SUPPRESS_KEY = 'leaderspro:home-notice:suppress-until-v1';
 const SEEN_MAX = 60;
 const KST_OFFSET_MS = 9 * 60 * 60 * 1000;
