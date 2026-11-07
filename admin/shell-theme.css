@@ -1,0 +1,43 @@
+/* Admin shell theme tokens (design B: deep green sidebar + gold accent).
+   Light is the default; data-theme="dark" is set by shell.js (saved choice or system setting).
+   The legacy names (--bg-card, --gold, --text-secondary ...) are aliases so the old screens follow the theme. */
+:root,
+:root[data-theme="light"] {
+  --bg: #edf2ee; --surface: #ffffff; --surface-2: #f3f7f4; --line: #d8e3db; --line-strong: #bccfc2;
+  --text: #13201a; --muted: #4e6157; --faint: #6b7f74;
+  --brand: #a77a14; --brand-soft: #fbf1d6; --on-brand: #1b1505;
+  --accent: #14684c; --chart: #c4dccf; --focus: #14684c;
+  --btn: #0f4a37; --on-btn: #ffffff;
+  --ok: #22a06b; --ok-soft: #e1f2e8; --ok-text: #11744b; --warn: #9a5b00; --warn-soft: #fdf0d9;
+  --danger: #c2412d; --danger-soft: #fbe7e3; --danger-line: #efc2b9;
+  --info: #1f5f9e; --violet: #6d3fb5;
+  --side-bg: #0b3528; --side-text: #e3efe8; --side-faint: #8fb3a2; --side-line: #185040;
+  --side-hover: #11473a; --side-on: #e9c45f; --side-on-text: #1b1505;
+  --top-bg: rgba(237, 242, 238, .92); --green-soft: #e1efe7; --hero-1: #0b3528; --hero-2: #14684c;
+  --shadow: 0 2px 10px rgba(15, 74, 55, .06); --r: 16px; --radius: 16px; --radius-sm: 10px;
+  color-scheme: light;
+}
+
+:root[data-theme="dark"],
+.dark-scope, .cms-preview-pane, .cms-live-preview {
+  --bg: #07120e; --surface: #0e1d17; --surface-2: #13261e; --line: #1f3a2f; --line-strong: #2d5243;
+  --text: #e7f2ec; --muted: #a6c0b3; --faint: #8aa396;
+  --brand: #e9c45f; --brand-soft: #2b2410; --on-brand: #1b1505;
+  --accent: #38c08f; --chart: #1c4637; --focus: #e9c45f;
+  --btn: #38c08f; --on-btn: #06140f;
+  --ok: #38c08f; --ok-soft: #12322a; --ok-text: #5fd6a8; --warn: #ffc069; --warn-soft: #33270f;
+  --danger: #ff7a66; --danger-soft: #3a1c17; --danger-line: #6a2e25;
+  --info: #6db8ff; --violet: #c39bff;
+  --side-bg: #051a13; --side-line: #123526; --side-hover: #0c2a20;
+  --top-bg: rgba(7, 18, 14, .92); --green-soft: #12322a; --hero-1: #06241b; --hero-2: #0c4a37; --shadow: none;
+}
+
+/* Legacy aliases. Declared again on the dark islands (.dark-scope and the site preview panes, which show the dark public
+   site in either theme) so they resolve the dark values locally. */
+:root, :root[data-theme="dark"], .dark-scope, .cms-preview-pane, .cms-live-preview {
+  --bg-primary: var(--bg); --bg-card: var(--surface); --bg-card-hover: var(--surface-2);
+  --border: var(--line); --border-glass: var(--line-strong);
+  --gold: var(--brand); --gold-primary: var(--brand); --gold-dim: var(--brand-soft);
+  --text-primary: var(--text); --text-secondary: var(--muted); --text-muted: var(--faint);
+  --accent-green: var(--ok-text); --accent-red: var(--danger); --accent-blue: var(--info); --accent-purple: var(--violet);
+}

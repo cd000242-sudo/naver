@@ -6,24 +6,18 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://script.google.com https://*.googleusercontent.com https://api.github.com http://127.0.0.1:47615; worker-src 'self' blob:; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
     <meta name="robots" content="noindex, nofollow, noarchive" />
     <title>Leaders Pro — Admin Panel</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        /* Apply the saved (or system) colour scheme before first paint; shell.js owns the toggle. */
+        (function () {
+            var saved = ""; try { saved = localStorage.getItem("lp_admin_theme") || ""; } catch (e) { /* ignore */ }
+            var dark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+            document.documentElement.dataset.theme = saved === "dark" || saved === "light" ? saved : (dark ? "dark" : "light");
+        })();
+    </script>
+    <link rel="stylesheet" href="/admin/shell-theme.css">
     <style>
-        :root {
-            --bg-primary: #0a0a0f;
-            --bg-card: rgba(255,255,255,0.04);
-            --bg-card-hover: rgba(255,255,255,0.07);
-            --border: rgba(255,255,255,0.08);
-            --gold: #c9a84c;
-            --gold-dim: rgba(201,168,76,0.2);
-            --text-primary: #f0f0f0;
-            --text-secondary: rgba(255,255,255,0.55);
-            --accent-green: #44d7b6;
-            --accent-red: #f5576c;
-            --accent-blue: #4facfe;
-            --accent-purple: #a855f7;
-            --radius: 16px;
-            --radius-sm: 10px;
-        }
+        /* Colour tokens now live in shell-theme.css (light/dark + legacy aliases). */
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -87,7 +81,7 @@
         .form-group input {
             width: 100%;
             padding: 14px 16px;
-            background: rgba(255,255,255,0.06);
+            background: color-mix(in srgb, var(--text) 6%, transparent);
             border: 1px solid var(--border);
             border-radius: var(--radius-sm);
             color: var(--text-primary);
@@ -130,75 +124,6 @@
         .dashboard { display: none; min-height: 100vh; }
         .dashboard.active { display: flex; }
 
-        /* Sidebar */
-        .sidebar {
-            width: 260px;
-            background: rgba(255,255,255,0.02);
-            border-right: 1px solid var(--border);
-            padding: 24px 0;
-            display: flex;
-            flex-direction: column;
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100vh;
-            z-index: 100;
-        }
-        .sidebar-brand {
-            padding: 0 24px 24px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .sidebar-brand img { width: 36px; height: 36px; border-radius: 50%; }
-        .sidebar-brand h2 { font-size: 1.1rem; font-weight: 700; }
-        .sidebar-brand span { font-size: 0.7rem; color: var(--gold); font-weight: 600; }
-
-        .sidebar-nav { flex: 1; padding: 16px 12px; }
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            color: var(--text-secondary);
-            transition: all 0.2s;
-            font-size: 0.9rem;
-            font-weight: 500;
-            margin-bottom: 4px;
-        }
-        .nav-item:hover { background: var(--bg-card-hover); color: var(--text-primary); }
-        .nav-item.active { background: var(--gold-dim); color: var(--gold); }
-        .nav-item .nav-icon { font-size: 1.2rem; width: 24px; text-align: center; }
-
-        .sidebar-footer {
-            padding: 16px 24px;
-            border-top: 1px solid var(--border);
-        }
-        .logout-btn {
-            width: 100%;
-            padding: 10px;
-            background: rgba(245,87,108,0.1);
-            border: 1px solid rgba(245,87,108,0.2);
-            border-radius: var(--radius-sm);
-            color: var(--accent-red);
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-weight: 500;
-            font-family: inherit;
-            transition: all 0.2s;
-        }
-        .logout-btn:hover { background: rgba(245,87,108,0.2); }
-
-        /* Main Content */
-        .main-content {
-            flex: 1;
-            margin-left: 260px;
-            padding: 32px;
-            min-height: 100vh;
-        }
         .page-header {
             margin-bottom: 32px;
         }
@@ -243,7 +168,7 @@
             opacity: 0.08;
             transition: opacity 0.3s;
         }
-        .stat-card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-2px); }
+        .stat-card:hover { border-color: color-mix(in srgb, var(--text) 15%, transparent); transform: translateY(-2px); }
         .stat-card:hover::before { opacity: 0.15; }
         .stat-card.card-gold::before { background: var(--gold); }
         .stat-card.card-green::before { background: var(--accent-green); }
@@ -308,7 +233,7 @@
         .platform-blogger { background: rgba(255,152,0,0.15); color: #ff9800; }
         .platform-tistory { background: rgba(233,84,32,0.15); color: #e95420; }
         .platform-leword { background: rgba(168,85,247,0.15); color: #a855f7; }
-        .platform-default { background: rgba(255,255,255,0.06); color: var(--text-secondary); }
+        .platform-default { background: color-mix(in srgb, var(--text) 6%, transparent); color: var(--text-secondary); }
 
         /* Sidebar System Info */
         .sidebar-info {
@@ -401,7 +326,7 @@
             font-family: inherit;
             transition: all 0.2s;
         }
-        .btn:hover { border-color: rgba(255,255,255,0.2); }
+        .btn:hover { border-color: color-mix(in srgb, var(--text) 20%, transparent); }
         .btn-gold {
             background: linear-gradient(135deg, var(--gold), #b8962f);
             color: #0a0a0f;
@@ -426,16 +351,16 @@
             letter-spacing: 0.5px;
             color: var(--text-secondary);
             font-weight: 600;
-            background: rgba(255,255,255,0.02);
+            background: color-mix(in srgb, var(--text) 2%, transparent);
             border-bottom: 1px solid var(--border);
         }
         .data-table td {
             padding: 14px 24px;
             font-size: 0.85rem;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
+            border-bottom: 1px solid color-mix(in srgb, var(--text) 4%, transparent);
         }
         .data-table tr:hover td {
-            background: rgba(255,255,255,0.02);
+            background: color-mix(in srgb, var(--text) 2%, transparent);
         }
         .badge {
             display: inline-block;
@@ -449,7 +374,7 @@
             color: var(--accent-green);
         }
         .badge-unused {
-            background: rgba(255,255,255,0.06);
+            background: color-mix(in srgb, var(--text) 6%, transparent);
             color: var(--text-secondary);
         }
         .badge-expired {
@@ -488,7 +413,7 @@
         .editor-card textarea {
             width: 100%;
             min-height: 120px;
-            background: rgba(255,255,255,0.04);
+            background: color-mix(in srgb, var(--text) 4%, transparent);
             border: 1px solid var(--border);
             border-radius: var(--radius-sm);
             padding: 14px;
@@ -510,7 +435,7 @@
         }
         .editor-subtab {
             border: 1px solid var(--border);
-            background: rgba(255,255,255,0.04);
+            background: color-mix(in srgb, var(--text) 4%, transparent);
             color: var(--text-secondary);
             border-radius: var(--radius-sm);
             padding: 10px 14px;
@@ -553,7 +478,7 @@
             padding: 16px;
             border: 1px solid var(--border);
             border-radius: 12px;
-            background: rgba(255,255,255,.025);
+            background: color-mix(in srgb, var(--text) 2.5%, transparent);
         }
         .editor-copy-card legend {
             padding: 0 8px;
@@ -572,7 +497,7 @@
             width: 100%;
             min-height: auto;
             padding: 12px 14px;
-            background: rgba(255,255,255,0.04);
+            background: color-mix(in srgb, var(--text) 4%, transparent);
             border: 1px solid var(--border);
             border-radius: var(--radius-sm);
             color: var(--text-primary);
@@ -649,9 +574,9 @@
         .keyword-briefing-edit-table input {
             width: 100%;
             min-height: 42px;
-            border: 1px solid rgba(255,255,255,.13);
+            border: 1px solid color-mix(in srgb, var(--text) 13%, transparent);
             border-radius: 8px;
-            background: rgba(255,255,255,.05);
+            background: color-mix(in srgb, var(--text) 5%, transparent);
             color: var(--text-primary);
             padding: 9px 10px;
             font: inherit;
@@ -688,7 +613,7 @@
             padding: 6px 9px;
             border: 1px solid var(--border);
             border-radius: 8px;
-            background: rgba(255,255,255,.06);
+            background: color-mix(in srgb, var(--text) 6%, transparent);
             color: var(--text-primary);
             cursor: pointer;
             font-size: 16px;
@@ -710,7 +635,7 @@
             padding: 18px;
             border: 1px solid rgba(201,168,76,.28);
             border-radius: 14px;
-            background: linear-gradient(145deg, rgba(201,168,76,.09), rgba(255,255,255,.035));
+            background: linear-gradient(145deg, rgba(201,168,76,.09), color-mix(in srgb, var(--text) 3.5%, transparent));
             color: var(--text-primary);
             text-align: left;
             cursor: pointer;
@@ -733,12 +658,12 @@
             padding: 14px;
             border: 1px solid var(--border);
             border-radius: 12px;
-            background: rgba(255,255,255,.025);
+            background: color-mix(in srgb, var(--text) 2.5%, transparent);
         }
         .admin-content-summary span {
             padding: 10px 12px;
             border-radius: 9px;
-            background: rgba(255,255,255,.04);
+            background: color-mix(in srgb, var(--text) 4%, transparent);
             color: var(--text-secondary);
             font-size: 16px;
         }
@@ -752,7 +677,7 @@
             padding: 14px;
             border: 1px solid var(--border);
             border-radius: 12px;
-            background: rgba(255,255,255,.025);
+            background: color-mix(in srgb, var(--text) 2.5%, transparent);
         }
         .structured-row-card-head {
             display: flex;
@@ -780,7 +705,7 @@
             padding: 9px 11px;
             border: 1px solid var(--border);
             border-radius: 8px;
-            background: rgba(255,255,255,.05);
+            background: color-mix(in srgb, var(--text) 5%, transparent);
             color: var(--text-primary);
             font: inherit;
             font-size: 16px;
@@ -797,7 +722,7 @@
             padding: 7px 10px;
             border: 1px solid var(--border);
             border-radius: 8px;
-            background: rgba(255,255,255,.06);
+            background: color-mix(in srgb, var(--text) 6%, transparent);
             color: var(--text-primary);
             cursor: pointer;
             font-size: 16px;
@@ -827,7 +752,7 @@
             font-size: 16px;
         }
         .keyword-chart-label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .keyword-chart-bar { height: 9px; border-radius: 999px; background: rgba(255,255,255,.07); overflow: hidden; }
+        .keyword-chart-bar { height: 9px; border-radius: 999px; background: color-mix(in srgb, var(--text) 7%, transparent); overflow: hidden; }
         .keyword-chart-value { text-align: right; color: #44d7b6; }
         @media (max-width: 560px) {
             .keyword-chart-row { grid-template-columns: minmax(0, 1fr) auto; gap: 7px 10px; }
@@ -849,8 +774,8 @@
             width: 22px;
             height: 22px;
             border-radius: 999px;
-            border: 1px solid rgba(255,255,255,0.12);
-            background: rgba(255,255,255,0.08);
+            border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+            background: color-mix(in srgb, var(--text) 8%, transparent);
             color: #cbd5e1;
             font-size: 15px;
             line-height: 18px;
@@ -905,10 +830,10 @@
             gap: 16px;
         }
         .editor-mini-card {
-            border: 1px solid rgba(255,255,255,0.08);
+            border: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
             border-radius: var(--radius);
             padding: 18px;
-            background: rgba(255,255,255,0.025);
+            background: color-mix(in srgb, var(--text) 2.5%, transparent);
         }
         .editor-mini-card h5 {
             color: var(--gold);
@@ -969,7 +894,7 @@
         .modal .form-group select {
             width: 100%;
             padding: 12px 16px;
-            background: rgba(255,255,255,0.06);
+            background: color-mix(in srgb, var(--text) 6%, transparent);
             border: 1px solid var(--border);
             border-radius: var(--radius-sm);
             color: var(--text-primary);
@@ -994,9 +919,9 @@
             align-items: center;
             justify-content: space-between;
             padding: 16px 24px;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
+            border-bottom: 1px solid color-mix(in srgb, var(--text) 4%, transparent);
         }
-        .order-item:hover { background: rgba(255,255,255,0.02); }
+        .order-item:hover { background: color-mix(in srgb, var(--text) 2%, transparent); }
         .order-product { font-weight: 600; font-size: 0.9rem; }
         .order-email { color: var(--text-secondary); font-size: 0.8rem; }
         .order-amount { color: var(--gold); font-weight: 700; }
@@ -1024,7 +949,7 @@
         /* Search */
         .search-input {
             padding: 10px 16px;
-            background: rgba(255,255,255,0.04);
+            background: color-mix(in srgb, var(--text) 4%, transparent);
             border: 1px solid var(--border);
             border-radius: var(--radius-sm);
             color: var(--text-primary);
@@ -1048,53 +973,6 @@
             /* Login */
             .login-card { padding: 32px 20px; margin: 16px; }
 
-            /* Sidebar → Bottom Tab Bar */
-            .sidebar {
-                width: 100%;
-                height: 64px;
-                position: fixed;
-                top: auto;
-                bottom: 0;
-                left: 0;
-                flex-direction: row;
-                border-right: none;
-                border-top: 1px solid var(--border);
-                padding: 0;
-                background: rgba(10,10,15,0.95);
-                backdrop-filter: blur(20px);
-            }
-            .sidebar-brand { display: none; }
-            .sidebar-footer { display: none; }
-            .sidebar-nav {
-                display: flex;
-                flex-direction: row;
-                width: 100%;
-                padding: 0;
-                justify-content: space-around;
-                align-items: center;
-                height: 100%;
-            }
-            .nav-item {
-                flex-direction: column;
-                gap: 2px;
-                padding: 8px 4px;
-                margin-bottom: 0;
-                font-size: 0.65rem;
-                min-width: 0;
-                flex: 1;
-                justify-content: center;
-                align-items: center;
-                border-radius: 0;
-            }
-            .nav-item .nav-icon { font-size: 1.3rem; width: auto; }
-            .nav-item.active { background: transparent; border-top: 2px solid var(--gold); }
-
-            /* Main Content */
-            .main-content {
-                margin-left: 0;
-                padding: 16px 16px 80px;
-                min-height: calc(100vh - 64px);
-            }
             .page-header { margin-bottom: 20px; }
             .page-header h1 { font-size: 1.4rem; }
             .page-header p { font-size: 0.8rem; }
@@ -1141,7 +1019,6 @@
         /* Small phones */
         @media (max-width: 380px) {
             .stats-grid { grid-template-columns: 1fr; }
-            .nav-item span:not(.nav-icon) { display: none; }
         }
 
         /* CMS_WORKBENCH_V1_START */
@@ -1173,36 +1050,36 @@
         .cms-preview-frame { margin-top:12px; width:100%; height:68vh; min-height:420px; border:1px solid rgba(255,255,255,.10); border-radius:14px; background:#05070b; }
         .cms-preview-realhint { margin:12px 0 -4px; font-size:12px; color:rgba(255,255,255,.55); }
         .cms-media-tools { display:grid; grid-template-columns:92px 1fr; gap:10px; margin-top:8px; align-items:center; }
-        .cms-thumb { width:92px; height:58px; border:1px solid var(--border); border-radius:10px; background:rgba(255,255,255,.05); display:grid; place-items:center; color:var(--text-secondary); overflow:hidden; font-size:.7rem; }
+        .cms-thumb { width:92px; height:58px; border:1px solid var(--border); border-radius:10px; background:color-mix(in srgb, var(--text) 5%, transparent); display:grid; place-items:center; color:var(--text-secondary); overflow:hidden; font-size:.7rem; }
         .cms-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
-        .cms-media-tools button, .cms-small-action { border:1px solid rgba(201,168,76,.42); border-radius:10px; background:rgba(201,168,76,.09); color:#ffdf5d; padding:9px 12px; font-weight:900; cursor:pointer; }
+        .cms-media-tools button, .cms-small-action { border:1px solid rgba(201,168,76,.42); border-radius:10px; background:rgba(201,168,76,.09); color:var(--gold); padding:9px 12px; font-weight:900; cursor:pointer; }
         .cms-skin-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin:12px 0; }
         .cms-skin-option { min-height:88px; border:1px solid rgba(255,255,255,.12); border-radius:14px; background-size:cover; background-position:center; color:#fff; text-align:left; padding:12px; cursor:pointer; font-weight:900; display:flex; align-items:flex-end; box-shadow:inset 0 -70px 60px rgba(0,0,0,.52); }
         .cms-skin-option.active { outline:2px solid #ffd700; border-color:#ffd700; }
         .cms-region-editor { display:grid; gap:14px; }
-        .cms-region-block { border:1px solid rgba(255,255,255,.10); border-radius:16px; background:rgba(255,255,255,.035); padding:14px; }
+        .cms-region-block { border:1px solid color-mix(in srgb, var(--text) 10%, transparent); border-radius:16px; background:color-mix(in srgb, var(--text) 3.5%, transparent); padding:14px; }
         .cms-region-block.active { border-color:rgba(255,215,0,.62); box-shadow:0 0 0 1px rgba(255,215,0,.18), 0 18px 44px rgba(0,0,0,.22); }
-        .cms-region-block h5 { margin:0 0 6px; font-size:.95rem; color:#fff; }
+        .cms-region-block h5 { margin:0 0 6px; font-size:.95rem; color:var(--text); }
         .cms-region-block p { margin:0 0 12px; color:var(--text-secondary); font-size:.78rem; line-height:1.5; }
         .cms-region-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
         .cms-region-grid .full { grid-column:1 / -1; }
         .cms-proof-editor-list { display:grid; gap:10px; max-height:560px; overflow:auto; padding-right:4px; }
-        .cms-proof-edit-card { border:1px solid rgba(255,255,255,.10); border-radius:14px; background:rgba(0,0,0,.16); padding:12px; cursor:pointer; }
-        .cms-proof-edit-card.active { border-color:#ffd700; background:rgba(255,215,0,.08); }
-        .cms-proof-edit-head { display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:10px; color:#ffd700; font-weight:900; font-size:.78rem; }
+        .cms-proof-edit-card { border:1px solid color-mix(in srgb, var(--text) 10%, transparent); border-radius:14px; background:rgba(0,0,0,.16); padding:12px; cursor:pointer; }
+        .cms-proof-edit-card.active { border-color:var(--gold); background:rgba(255,215,0,.08); }
+        .cms-proof-edit-head { display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:10px; color:var(--gold); font-weight:900; font-size:.78rem; }
         .cms-proof-edit-actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
-        .cms-proof-edit-actions button { border:1px solid rgba(201,168,76,.42); border-radius:10px; background:rgba(201,168,76,.09); color:#ffdf5d; padding:8px 10px; font-weight:900; cursor:pointer; }
+        .cms-proof-edit-actions button { border:1px solid rgba(201,168,76,.42); border-radius:10px; background:rgba(201,168,76,.09); color:var(--gold); padding:8px 10px; font-weight:900; cursor:pointer; }
         .cms-preview-area { cursor:pointer; transition:outline-color .18s ease, box-shadow .18s ease, transform .18s ease; outline:2px solid transparent; outline-offset:-2px; }
         .cms-preview-area:hover, .cms-preview-area.active { outline-color:#ffd700; box-shadow:0 0 0 3px rgba(255,215,0,.18); }
         .cms-preview-card.cms-preview-area:hover { transform:translateY(-1px); }
         .trial-export-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-bottom:20px; }
-        .trial-export-box { border:1px solid rgba(201,168,76,.24); border-radius:16px; background:rgba(255,255,255,.035); padding:16px; }
+        .trial-export-box { border:1px solid rgba(201,168,76,.24); border-radius:16px; background:color-mix(in srgb, var(--text) 3.5%, transparent); padding:16px; }
         .trial-export-box h3 { margin:0 0 8px; font-size:1rem; }
         .trial-export-box p { margin:0 0 12px; color:var(--text-secondary); font-size:.8rem; }
         .trial-export-toolbar { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:10px; flex-wrap:wrap; }
-        .trial-export-toolbar strong { color:#ffd700; }
+        .trial-export-toolbar strong { color:var(--gold); }
         .trial-export-box textarea { width:100%; min-height:180px; resize:vertical; border:1px solid var(--border); border-radius:12px; background:rgba(0,0,0,.22); color:var(--text-primary); padding:12px; font-family:Consolas,monospace; line-height:1.55; }
-        .trial-export-box.focused { outline:2px solid #ffd700; }
+        .trial-export-box.focused { outline:2px solid var(--gold); }
         @media (max-width:1180px) { .cms-editor-shell { grid-template-columns:1fr; } .cms-preview-pane { position:static; } }
         @media (max-width:760px) { .cms-preview-grid, .trial-export-grid { grid-template-columns:1fr; } .cms-media-tools { grid-template-columns:1fr; } .cms-thumb { width:100%; height:120px; } }
         .home-ops-admin-grid { display:grid; grid-template-columns:140px 160px minmax(0,1fr); gap:12px; margin-bottom:10px; }
@@ -1214,6 +1091,8 @@
         /* CMS_WORKBENCH_V1_END */
 
     </style>
+    <link rel="stylesheet" href="/admin/shell.css">
+    <link rel="stylesheet" href="/admin/shell-compat.css">
 </head>
 <body>
     <!-- ===== LOGIN ===== -->
@@ -1240,7 +1119,7 @@
                 </div>
                 <button type="submit" class="login-btn" id="login-submit">로그인</button>
                 <p id="login-progress" style="display:none;margin:10px 0 0;color:var(--text-secondary);font-size:.74rem;">
-                    <span id="login-progress-spin" style="display:inline-block;width:11px;height:11px;border:2px solid rgba(255,255,255,.18);border-top-color:#d4af37;border-radius:50%;vertical-align:-1px;margin-right:7px;animation:loginSpin .8s linear infinite;"></span>
+                    <span id="login-progress-spin" style="display:inline-block;width:11px;height:11px;border:2px solid color-mix(in srgb, var(--text) 18%, transparent);border-top-color:#d4af37;border-radius:50%;vertical-align:-1px;margin-right:7px;animation:loginSpin .8s linear infinite;"></span>
                     <span id="login-progress-text">서버에 확인 중…</span>
                 </p>
                 <style>@keyframes loginSpin{to{transform:rotate(360deg)}}</style>
@@ -1253,80 +1132,101 @@
     <!-- ===== DASHBOARD ===== -->
     <div class="dashboard" id="dashboard">
         <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="sidebar-brand">
-                <img src="../logo.png" alt="Leaders Pro">
-                <div>
-                    <h2>Leaders Pro</h2>
-                    <span>ADMIN</span>
-                </div>
-            </div>
+        <aside class="sidebar" id="sidebar" aria-label="관리 메뉴">
+            <div class="s-brand"><span class="s-mark">LP</span><div><b>Leaders Pro</b><small>ADMIN</small></div></div>
             <nav class="sidebar-nav">
-                <div class="nav-item active" data-tab="notices" onclick="switchTab('notices')">
-                    <span class="nav-icon">📢</span>
-                    <span>홈 운영</span>
-                </div>
-                <div class="nav-item" data-tab="editor" onclick="switchTab('editor')">
-                    <span class="nav-icon">✏️</span>
-                    <span>사이트 편집</span>
-                </div>
-                <div style="padding:0 14px 10px 48px;display:grid;gap:6px;color:var(--text-secondary);font-size:0.78rem;">
-                    <button type="button" onclick="switchTab('editor'); switchEditorSubtab('home')" style="all:unset;cursor:pointer;">일반 편집</button>
-                    <button type="button" onclick="switchTab('editor'); switchEditorSubtab('site-content')" style="all:unset;cursor:pointer;">사이트 콘텐츠 관리</button>
-                </div>
-                <div class="nav-item" data-tab="leword-settings" onclick="switchTab('leword-settings')">
-                    <span class="nav-icon">⚙️</span>
-                    <span>LEWORD 관리자 설정</span>
-                </div>
-                <div class="nav-item" data-tab="trial" onclick="switchTab('trial')">
-                    <span class="nav-icon">🧪</span>
-                    <span>체험관리</span>
-                </div>
-                <div style="padding:0 14px 10px 48px;display:grid;gap:6px;color:var(--text-secondary);font-size:0.78rem;">
-                    <button type="button" onclick="switchTab('trial'); focusTrialExport('phones')" style="all:unset;cursor:pointer;">체험자 번호 모음</button>
-                    <button type="button" onclick="switchTab('trial'); focusTrialExport('emails')" style="all:unset;cursor:pointer;">체험자 이메일 모음</button>
-                </div>
-                <div class="nav-item" data-tab="analytics" onclick="switchTab('analytics')">
-                    <span class="nav-icon">📊</span>
-                    <span>매출/방문 분석</span>
-                </div>
-                <div class="nav-item" data-tab="orders" onclick="switchTab('orders')">
-                    <span class="nav-icon">🧾</span>
-                    <span>주문내역</span>
-                </div>
-                <div class="nav-item" data-tab="bank" onclick="switchTab('bank')">
-                    <span class="nav-icon">🏦</span>
-                    <span>계좌이체 주문관리</span>
-                </div>
-                <div class="nav-item" data-tab="reviews" onclick="switchTab('reviews')">
-                    <span class="nav-icon">💬</span>
-                    <span>후기관리</span>
-                </div>
-                <div class="nav-item" data-tab="income" onclick="switchTab('income')">
-                    <span class="nav-icon">💰</span>
-                    <span>수익인증 관리</span>
-                </div>
-                <div class="nav-item" data-tab="tips" onclick="switchTab('tips')">
-                    <span class="nav-icon">💡</span>
-                    <span>활용 팁 관리</span>
-                </div>
+                <button type="button" class="nav-item active" data-tab="dashboard" onclick="switchTab('dashboard')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 4l9 7v9H3z"/></svg><span>대시보드</span></button>
+                <div class="nav-gt">사이트 콘텐츠</div>
+                <button type="button" class="nav-item" data-tab="notices" onclick="switchTab('notices')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l6 4V6L7 10z"/><path d="M17 9a4 4 0 0 1 0 6"/></svg><span>홈 운영</span><small class="nav-hint">공지·황금키워드</small></button>
+                <button type="button" class="nav-item" data-tab="editor" onclick="switchTab('editor')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg><span>사이트 편집</span></button>
+                <button type="button" class="nav-item" data-tab="reviews" onclick="switchTab('reviews')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><span>후기 승인</span><em class="nav-badge" data-badge="reviews" hidden></em></button>
+                <button type="button" class="nav-item" data-tab="income" onclick="switchTab('income')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M9.5 10h4a1.5 1.5 0 0 1 0 3h-3a1.5 1.5 0 0 0 0 3h4"/></svg><span>수익 인증 승인</span><em class="nav-badge" data-badge="income" hidden></em></button>
+                <button type="button" class="nav-item" data-tab="tips" onclick="switchTab('tips')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3z"/></svg><span>활용 팁 승인</span><em class="nav-badge" data-badge="tips" hidden></em></button>
+                <div class="nav-gt">매출·주문</div>
+                <button type="button" class="nav-item" data-tab="analytics" onclick="switchTab('analytics')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>매출·방문 분석</span></button>
+                <button type="button" class="nav-item" data-tab="orders" onclick="switchTab('orders')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg><span>주문 내역</span></button>
+                <button type="button" class="nav-item" data-tab="bank" onclick="switchTab('bank')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10h18L12 4zM5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/></svg><span>계좌이체 승인</span><em class="nav-badge" data-badge="bank" hidden></em></button>
+                <div class="nav-gt">회원</div>
+                <button type="button" class="nav-item" data-tab="licenses" onclick="switchTab('licenses')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M17 6l3 3"/></svg><span>라이선스 발급·회수</span></button>
+                <button type="button" class="nav-item" data-tab="trial" onclick="switchTab('trial')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/></svg><span>체험 사용자</span></button>
+                <button type="button" class="nav-item" data-tab="leads" onclick="switchTab('leads')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v12H3z"/><path d="m3 7 9 6 9-6"/></svg><span>이메일 모음</span></button>
+                <div class="nav-gt">설정</div>
+                <button type="button" class="nav-item" data-tab="leword-settings" onclick="switchTab('leword-settings')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg><span>LEWORD 관리자 설정</span></button>
             </nav>
-            <div class="sidebar-info">
-                <div class="sidebar-info-item"><span>버전</span><span>v1.2.28</span></div>
-                <div class="sidebar-info-item"><span>엔진</span><span>GAS API</span></div>
-                <div class="sidebar-info-item"><span>라이선스</span><span id="sidebar-license-count">—</span></div>
-                <div class="sidebar-status">
-                    <div class="status-dot"></div>
-                    <span>시스템 정상 운영 중</span>
-                </div>
-            </div>
-            <div class="sidebar-footer">
-                <button class="logout-btn" onclick="handleLogout()">🚪 로그아웃</button>
+            <div class="s-foot">
+                <span class="ok"><i></i>시스템 정상</span>
+                <span>버전 v1.2.28 · 엔진 GAS API</span>
+                <span>사용 중 라이선스 <b id="sidebar-license-count">—</b></span>
+                <button type="button" class="logout-btn" onclick="handleLogout()">로그아웃</button>
             </div>
         </aside>
+        <div class="scrim" id="nav-scrim"></div>
+
+        <div class="mainwrap">
+        <header class="topbar">
+            <button type="button" class="menu-btn" id="menu-btn" aria-label="메뉴 열기" aria-controls="sidebar" aria-expanded="false"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+            <span id="crumb">대시보드</span>
+            <label class="tsearch"><span class="sr">통합 검색</span><input type="search" placeholder="통합 검색 (준비 중)" disabled></label>
+            <a class="btn site-link" href="/" target="_blank" rel="noopener">사이트 보기</a>
+            <button type="button" class="btn" id="theme-btn" aria-label="밝게/어둡게 바꾸기">화면색</button>
+            <span class="who"><i>관</i><span>관리자</span></span>
+        </header>
 
         <!-- Main Content -->
         <div class="main-content">
+
+            <!-- TAB: Dashboard (new first screen; reads existing GAS actions only) -->
+            <div class="tab-panel active" id="tab-dashboard">
+                <div class="page-header page-head-row">
+                    <div><h1>대시보드</h1><p>오늘 확인할 것만 모았습니다. <span class="faint" id="dash-updated"></span></p></div>
+                    <div class="page-act"><button type="button" class="btn" id="dash-refresh">새로고침</button></div>
+                </div>
+                <div class="kpis" id="dash-kpis"></div>
+                <div class="grid2 wide-left">
+                    <section class="panel"><div class="panel-head"><h2>오늘 할 일</h2></div><div id="dash-todo"></div></section>
+                    <section class="panel"><div class="panel-head"><h2>최근 7일 주문</h2><small>이번 달 기준</small></div><div id="dash-bars"></div></section>
+                </div>
+                <section class="panel">
+                    <div class="panel-head"><h2>최근 주문</h2><button type="button" class="mini" data-go="analytics">전체 보기</button></div>
+                    <div id="dash-recent"></div>
+                </section>
+            </div>
+
+            <!-- TAB: Licenses (existing issue/revoke functions, finally reachable) -->
+            <div class="tab-panel" id="tab-licenses">
+                <div class="page-header">
+                    <h1>라이선스 발급·회수</h1>
+                    <p>코드를 새로 발급하거나, 잘못 나간 코드를 무효로 돌립니다.</p>
+                </div>
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>라이선스 코드</h3>
+                        <div class="table-actions">
+                            <input type="search" class="search-input" id="code-search" placeholder="코드·플랫폼·사용자 검색" oninput="filterCodes()">
+                            <button class="btn btn-gold" onclick="openIssueModal()">새 코드 발급</button>
+                            <button class="btn" onclick="loadCodes()">🔄 새로고침</button>
+                        </div>
+                    </div>
+                    <div id="codes-table-body">
+                        <div class="loading-spinner"><div class="spinner-ring"></div> 코드 목록 로딩 중...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: Leads (loadLeadsAdmin / deleteLead / exportLeadsCsv) -->
+            <div class="tab-panel" id="tab-leads">
+                <div class="page-header page-head-row">
+                    <div><h1>이메일 모음</h1><p>다운로드 페이지에서 모인 이메일입니다.</p></div>
+                    <div class="page-act">
+                        <span class="faint" id="leads-count">총 0건</span>
+                        <button type="button" class="btn" onclick="loadLeadsAdmin()">🔄 새로고침</button>
+                        <button type="button" class="btn" onclick="exportLeadsCsv()">CSV 내려받기</button>
+                    </div>
+                </div>
+                <div id="leads-table-body">
+                    <div class="loading-spinner"><div class="spinner-ring"></div> 로딩 중...</div>
+                </div>
+            </div>
 
             <!-- TAB: Orders -->
             <div class="tab-panel" id="tab-orders">
@@ -1553,10 +1453,10 @@
                         -->
                         <div id="keyword-briefing-save-feedback" role="status" aria-live="assertive" style="display:none;margin-top:12px;padding:14px 16px;border-radius:12px;font-size:16px;font-weight:700;">
                             <div style="display:flex;align-items:center;gap:10px;">
-                                <span id="keyword-briefing-save-spinner" style="display:none;width:18px;height:18px;border:3px solid rgba(255,255,255,.25);border-top-color:#44d7b6;border-radius:50%;animation:kbSpin .8s linear infinite;"></span>
+                                <span id="keyword-briefing-save-spinner" style="display:none;width:18px;height:18px;border:3px solid color-mix(in srgb, var(--text) 25%, transparent);border-top-color:#44d7b6;border-radius:50%;animation:kbSpin .8s linear infinite;"></span>
                                 <span id="keyword-briefing-save-text"></span>
                             </div>
-                            <div id="keyword-briefing-save-bar" style="display:none;margin-top:10px;height:6px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden;">
+                            <div id="keyword-briefing-save-bar" style="display:none;margin-top:10px;height:6px;border-radius:999px;background:color-mix(in srgb, var(--text) 12%, transparent);overflow:hidden;">
                                 <div id="keyword-briefing-save-bar-fill" style="height:100%;width:0%;background:linear-gradient(90deg,#44d7b6,#2ed36f);transition:width .3s ease;"></div>
                             </div>
                         </div>
@@ -1822,30 +1722,30 @@
                         <p class="editor-help">Codex와 Claude Code는 관리자 전용 서버 작업자입니다. 일반 사용자는 볼 수 없고, 관리자 작업 요청에만 선택값을 사용합니다.</p>
                         <!-- 작업자 실체 = GitHub Actions agent-worker.yml (구독 OAuth). 카드 배지는 전부 실측이다. -->
                         <div id="admin-ai-worker-cards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-bottom:16px;">
-                            <div data-agent-card="claude-code" style="padding:14px;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,0.035);">
+                            <div data-agent-card="claude-code" style="padding:14px;border:1px solid var(--border);border-radius:12px;background:color-mix(in srgb, var(--text) 3.5%, transparent);">
                                 <div style="display:flex;align-items:center;gap:8px;">
                                     <strong>Claude Code 작업자</strong>
-                                    <span data-agent-badge style="font-size:0.72rem;font-weight:800;padding:2px 8px;border-radius:6px;background:rgba(255,255,255,0.08);color:var(--text-secondary);">감지 전</span>
+                                    <span data-agent-badge style="font-size:0.72rem;font-weight:800;padding:2px 8px;border-radius:6px;background:color-mix(in srgb, var(--text) 8%, transparent);color:var(--text-secondary);">감지 전</span>
                                 </div>
                                 <div data-agent-detail style="margin-top:6px;font-size:0.78rem;color:var(--text-secondary);">사장님 Claude 구독(OAuth 토큰)으로 GitHub Actions 에서 돕니다.</div>
                                 <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
                                     <button class="btn btn-gold" type="button" onclick="runAdminAiWorkerTest()" style="font-size:0.78rem;padding:5px 10px;">⚡ 테스트 실행</button>
                                 </div>
                             </div>
-                            <div data-agent-card="codex" style="padding:14px;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,0.035);opacity:0.7;">
+                            <div data-agent-card="codex" style="padding:14px;border:1px solid var(--border);border-radius:12px;background:color-mix(in srgb, var(--text) 3.5%, transparent);opacity:0.7;">
                                 <div style="display:flex;align-items:center;gap:8px;">
                                     <strong>Codex 작업자</strong>
-                                    <span style="font-size:0.72rem;font-weight:800;padding:2px 8px;border-radius:6px;background:rgba(255,255,255,0.08);color:var(--text-secondary);">준비 중</span>
+                                    <span style="font-size:0.72rem;font-weight:800;padding:2px 8px;border-radius:6px;background:color-mix(in srgb, var(--text) 8%, transparent);color:var(--text-secondary);">준비 중</span>
                                 </div>
                                 <div style="margin-top:6px;font-size:0.78rem;color:var(--text-secondary);">Actions 배선 전 — 교차 검수 작업자로 붙일 예정입니다. 있는 척하지 않습니다.</div>
                             </div>
                         </div>
-                        <div id="admin-ai-worker-progress" style="display:none;margin:0 0 14px;padding:12px 14px;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,0.03);">
+                        <div id="admin-ai-worker-progress" style="display:none;margin:0 0 14px;padding:12px 14px;border:1px solid var(--border);border-radius:12px;background:color-mix(in srgb, var(--text) 3%, transparent);">
                             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
                                 <strong style="font-size:0.85rem;">작업자 실행 진행</strong>
                                 <span id="admin-ai-progress-label" style="font-size:0.78rem;color:var(--text-secondary);"></span>
                             </div>
-                            <div style="height:6px;border-radius:3px;background:rgba(255,255,255,0.08);overflow:hidden;">
+                            <div style="height:6px;border-radius:3px;background:color-mix(in srgb, var(--text) 8%, transparent);overflow:hidden;">
                                 <div id="admin-ai-progress-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#FFD700,#FFA500);transition:width .4s;"></div>
                             </div>
                             <ul id="admin-ai-progress-steps" style="margin:10px 0 0;padding:0;list-style:none;font-size:0.78rem;color:var(--text-secondary);"></ul>
@@ -1917,6 +1817,10 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
                 <div class="page-header">
                     <h1>체험 사용자 관리</h1>
                     <p>무료 체험 사용자 목록을 조회하고 차단/해제할 수 있습니다.</p>
+                </div>
+                <div class="chips">
+                    <button type="button" class="chip" onclick="focusTrialExport('phones')">체험자 번호 모음</button>
+                    <button type="button" class="chip" onclick="focusTrialExport('emails')">체험자 이메일 모음</button>
                 </div>
                 <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 24px;">
                     <div class="stat-card card-purple">
@@ -2013,7 +1917,7 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
                     <div class="table-header">
                         <h3>계좌이체 주문 목록</h3>
                         <div class="table-actions">
-                            <select id="bank-status-filter" onchange="filterBankOrders()" style="padding:8px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:0.8rem;cursor:pointer;">
+                            <select id="bank-status-filter" onchange="filterBankOrders()" style="padding:8px 14px;background:color-mix(in srgb, var(--text) 4%, transparent);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:0.8rem;cursor:pointer;">
                                 <option value="all">전체</option>
                                 <option value="pending" selected>대기 중</option>
                                 <option value="approved">승인됨</option>
@@ -2052,7 +1956,7 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
             </div>
 
             <!-- TAB: Notices (Phase 6-B) -->
-            <div class="tab-panel active" id="tab-notices">
+            <div class="tab-panel" id="tab-notices">
                 <div class="page-header">
                     <h1>홈 운영</h1>
                     <p>홈 공지사항과 부방장 황금키워드를 직접 수정·발행합니다. 저장하기 전에는 공개 화면이 바뀌지 않습니다.</p>
@@ -2189,6 +2093,8 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
     <!-- Save Toast -->
     <div class="save-toast" id="save-toast">✅ 저장되었습니다!</div>
 
+    <script src="/admin/shell-tools.js"></script>
+    <script src="/admin/shell.js"></script>
     <script src="/admin/keyword-briefing-tools.js"></script>
     <script src="/admin/structured-editor-tools.js"></script>
     <script>
@@ -2760,7 +2666,7 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
             localStorage.setItem('lp_analytics_exclude', '1');
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('dashboard').classList.add('active');
-            switchTab('notices');
+            switchTab('dashboard');
         }
 
         // This replaces the old client-side SHA-256 comparison.  Only GAS
@@ -2884,9 +2790,9 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
 
         // ===== TAB SWITCHING =====
         function switchTab(tabId) {
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => { n.classList.remove('active'); n.removeAttribute('aria-current'); });
             const activeNav = document.querySelector(`.nav-item[data-tab="${tabId}"]`);
-            if (activeNav) activeNav.classList.add('active');
+            if (activeNav) { activeNav.classList.add('active'); activeNav.setAttribute('aria-current', 'page'); }
             document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
             const activePanel = document.getElementById(`tab-${tabId}`);
             if (activePanel) activePanel.classList.add('active');
@@ -2916,6 +2822,8 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
             if (tabId === 'tips') loadTipsAdmin(currentTipFilter);
             if (tabId === 'analytics') loadAnalyticsDashboard(currentAnalyticsPeriod);
             if (tabId === 'editor') loadEditorContent();
+            // New shell: breadcrumb, mobile menu, dashboard / leads / orders / licenses loading (admin/shell.js).
+            if (window.AdminShell) window.AdminShell.onTabChange(tabId);
         }
 
         // ===== PHASE 6-F: SEED DEFAULTS (idempotent — 시트 비어있을 때만 import) =====
@@ -3019,7 +2927,7 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
                         <div style="display:flex;gap:12px;align-items:center;margin-bottom:6px;flex-wrap:wrap;">
                             <span style="padding:3px 10px;border-radius:14px;font-size:.76rem;font-weight:700;background:rgba(201,168,76,.15);color:var(--gold-primary,#c9a84c);">${escapeHtml_(NOTICE_BADGE_LABEL[n.badge] || n.badge)}</span>
                             <span style="font-size:.86rem;color:var(--text-secondary);">${escapeHtml_(n.date)}</span>
-                            ${n.archiveOnly ? '<span style="padding:3px 9px;border-radius:14px;font-size:.72rem;font-weight:700;background:rgba(255,255,255,.08);color:var(--text-secondary);">사이트 표시중 · 아카이브</span>' : ''}
+                            ${n.archiveOnly ? '<span style="padding:3px 9px;border-radius:14px;font-size:.72rem;font-weight:700;background:color-mix(in srgb, var(--text) 8%, transparent);color:var(--text-secondary);">사이트 표시중 · 아카이브</span>' : ''}
                             <span style="font-size:.74rem;color:var(--text-muted);margin-left:auto;font-family:monospace;">${escapeHtml_(n.id)}</span>
                         </div>
                         <div style="font-size:1rem;font-weight:700;line-height:1.5;margin-bottom:5px;">${escapeHtml_(n.title)}</div>
@@ -3967,7 +3875,8 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
                     const status = c.used ? '<span class="badge badge-active">활성</span>' :
                         (c.expiresAt && new Date(c.expiresAt) < new Date() ? '<span class="badge badge-expired">만료</span>' : '<span class="badge badge-unused">미사용</span>');
                     const expires = c.expiresAt ? new Date(c.expiresAt).toLocaleDateString('ko-KR') : '—';
-                    const pwDisplay = c.userPassword && c.userPassword.length <= 30 ? c.userPassword : (c.userPassword ? c.userPassword.substring(0,6) + '...' : '—');
+                    // Passwords stay masked on screen (the issue/revoke screen is reachable again since the admin-B shell).
+                    const pwDisplay = c.userPassword ? '••••••' : '—';
                     html += `<tr>
                         <td><span class="code-text">${c.code}</span></td>
                         <td>${platformBadge(c.platform)}</td>
@@ -4018,7 +3927,8 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
                 pageItems.forEach(c => {
                     const dateStr = c.usedAt ? new Date(c.usedAt).toLocaleString('ko-KR') : '—';
                     const expires = c.expiresAt ? new Date(c.expiresAt).toLocaleDateString('ko-KR') : '영구';
-                    const pwDisplay = c.userPassword && c.userPassword.length <= 30 ? c.userPassword : (c.userPassword ? c.userPassword.substring(0,6) + '...' : '—');
+                    // Passwords stay masked on screen (the issue/revoke screen is reachable again since the admin-B shell).
+                    const pwDisplay = c.userPassword ? '••••••' : '—';
                     html += `<tr>
                         <td><span class="code-text">${c.code}</span></td>
                         <td>${platformBadge(c.platform)}</td>
@@ -5047,7 +4957,7 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
                 ok: 'background:rgba(52,211,153,0.16);color:#6ee7b7;',
                 warn: 'background:rgba(255,215,0,0.14);color:#ffd700;',
                 bad: 'background:rgba(248,113,113,0.15);color:#fca5a5;',
-                idle: 'background:rgba(255,255,255,0.08);color:var(--text-secondary);',
+                idle: 'background:color-mix(in srgb, var(--text) 8%, transparent);color:var(--text-secondary);',
             };
             badge.textContent = text;
             badge.style.cssText = 'font-size:0.72rem;font-weight:800;padding:2px 8px;border-radius:6px;' + (tones[tone] || tones.idle);
@@ -5760,7 +5670,7 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
                 fill.style.width = (state === 'success' ? 100 : Math.max(0, Math.min(100, Number(percent) || 0))) + '%';
             }
         }
-        function palette_default() { return ['rgba(255,255,255,.06)', '1px solid rgba(255,255,255,.14)', 'var(--text-secondary)']; }
+        function palette_default() { return ['color-mix(in srgb, var(--text) 6%, transparent)', '1px solid color-mix(in srgb, var(--text) 14%, transparent)', 'var(--text-secondary)']; }
 
         function keywordBriefingStatus(message, tone) {
             const node = document.getElementById('keyword-briefing-status');
@@ -6734,7 +6644,7 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
             target.innerHTML = storeProductsDraft.map((row, index) => {
                 const off = row.status === 'off';
                 const q = '&quot;';
-                return '<div style="border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:12px 14px;margin-bottom:10px;' + (off ? 'opacity:.55;' : '') + '">'
+                return '<div style="border:1px solid color-mix(in srgb, var(--text) 10%, transparent);border-radius:10px;padding:12px 14px;margin-bottom:10px;' + (off ? 'opacity:.55;' : '') + '">'
                     + '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px;">'
                     + '<button class="btn" type="button" ' + (index === 0 ? 'disabled' : '') + ' onclick="moveStoreProduct(' + q + row.id + q + ', -1)" title="위로">↑</button>'
                     + '<button class="btn" type="button" ' + (index === storeProductsDraft.length - 1 ? 'disabled' : '') + ' onclick="moveStoreProduct(' + q + row.id + q + ', 1)" title="아래로">↓</button>'

@@ -1,0 +1,33 @@
+/* Compatibility layer for the legacy screens (design B shell).
+   The old screens were written for a dark page. Their stylesheet now uses theme tokens; this file only covers
+   hard-coded status colours set by inline styles / scripts, so they stay readable on the light surface. */
+:root[data-theme="light"] :is([style*="color:#44d7b6"], [style*="color: #44d7b6"], [style*="color: rgb(68, 215, 182)"], [style*="color:#6ee7b7"]) { color: var(--ok-text); }
+:root[data-theme="light"] :is([style*="color:#ef4444"], [style*="color: #ff3b5c"], [style*="color:#ff3b5c"], [style*="color:#ff6b6b"], [style*="color:#fca5a5"], [style*="color: rgb(245, 87, 108)"], [style*="color: rgb(254, 202, 202)"], [style*="color:#ff9eaa"]) { color: var(--danger); }
+:root[data-theme="light"] :is([style*="color:#f59e0b"], [style*="color: #f5c842"], [style*="color:#ffcf70"], [style*="color:#ffb84a"]) { color: var(--warn); }
+:root[data-theme="light"] :is([style*="color:#ffd700"], [style*="color: rgb(203, 213, 225)"]) { color: var(--muted); }
+:root[data-theme="light"] .cms-small-action,
+:root[data-theme="light"] .cms-media-tools button,
+:root[data-theme="light"] .cms-proof-edit-actions button { color: var(--brand); }
+:root[data-theme="light"] .cms-region-block h5 { color: var(--text); }
+
+/* Platform pills were tuned for a dark page. */
+:root[data-theme="light"] .platform-all { color: var(--brand); }
+:root[data-theme="light"] .platform-naver { color: #0a7a3c; }
+:root[data-theme="light"] .platform-blogger { color: #9a5b00; }
+:root[data-theme="light"] .platform-tistory { color: #b23c12; }
+:root[data-theme="light"] .platform-leword { color: var(--violet); }
+:root[data-theme="light"] .trial-export-box textarea { background: var(--surface-2); }
+
+/* The site preview panes stay dark in both themes: give their text the dark colour too. */
+.cms-preview-pane, .cms-live-preview { color: var(--text); }
+
+/* Lists coming from loadLeadsAdmin() / loadCodes() draw inline-styled tables: let them breathe on phones. */
+#leads-table-body table { min-width: 0 !important; }
+#leads-table-body td, #leads-table-body th { overflow-wrap: anywhere; }
+@media (max-width: 640px) {
+  #leads-table-body thead { display: none; }
+  #leads-table-body tr { display: grid; gap: 4px; padding: 10px 0; }
+  #leads-table-body td { display: block; padding: 2px 14px !important; text-align: left !important; }
+  #leads-table-body td:last-child { padding-bottom: 8px !important; }
+  #leads-table-body .btn, #codes-table-body .btn { min-height: 44px; }
+}
