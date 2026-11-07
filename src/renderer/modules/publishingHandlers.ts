@@ -29,6 +29,7 @@ import { describeFullAutoImagePolicy } from '../../image/fullAuto/fullAutoImageP
 import { describeFullAutoImageReview } from '../../image/fullAuto/fullAutoPublishDecision.js';
 import { describeFullAutoImageStage } from '../../image/fullAuto/fullAutoImageSlots.js';
 import { recheckFullAutoDecisionBeforePublish, runFullAutoImages } from '../../image/fullAuto/fullAutoImageRunner.js';
+import { publishPreflightEnsureReady } from './publishStartPreflight.js';
 
 declare let currentStructuredContent: any;
 declare let generatedImages: any[];
@@ -1770,6 +1771,16 @@ export async function handleMultiAccountPublish(): Promise<void> {
   const intervalPolicy = getSafeSequentialMultiAccountInterval(requestedIntervalSeconds, selectedAccountIds.length, commonImageSource);
   const maPreloadedImages = ImageManager.getAllImages();
   const maHasPreloadedImages = maPreloadedImages && maPreloadedImages.length > 0;
+
+  // [2026-11-07] Readiness check before the run: a missing agent CLI / expired login (text engine, or the Codex image
+  //   engine) used to fail every account one by one. Not ready -> do not start; a short window offers "연결하기".
+  if (!(await publishPreflightEnsureReady({
+    generator: UnifiedDOMCache.getGenerator(),
+    imageSources: maHasPreloadedImages || maPipelineCfg.image.textOnlyPublish ? [] : [UnifiedDOMCache.getImageSource() || commonImageSource],
+  }))) {
+    appendLog('⛔ 글·이미지 엔진 연결이 필요해 다중계정 발행을 시작하지 않았습니다.');
+    return;
+  }
 
   if (!maHasPreloadedImages && commonImageSource === 'openai-image') {
     const config = await window.api.getConfig();

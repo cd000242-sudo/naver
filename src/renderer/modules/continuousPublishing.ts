@@ -18,6 +18,7 @@ import {
 import { resolvePublishFloorSec, publishIntervalToFields, formatContinuousIntervalLabel, DEFAULT_MIN_PUBLISH_INTERVAL_MINUTES } from '../../automation/publishIntervalPolicy.js';
 import { awaitNetworkWaitRecheck, createQueuePublishError, extractAccountStopCode, readAccountPause, requiresAccountStop } from '../../automation/publishFailureClassifier.js';
 import { showAccountPauseModal } from './accountPauseModal.js';
+import { publishPreflightEnsureReady } from './publishStartPreflight.js';
 import { describeFullAutoImagePolicy } from '../../image/fullAuto/fullAutoImagePolicy.js';
 import { describeFullAutoImageStage } from '../../image/fullAuto/fullAutoImageSlots.js';
 import { describeFullAutoImageReview } from '../../image/fullAuto/fullAutoPublishDecision.js';
@@ -4489,6 +4490,22 @@ async function startContinuousPublishingV2(): Promise<void> {
   if (continuousQueueV2.length === 0) {
     toastManager.warning('발행할 항목이 없습니다. 먼저 항목을 추가해주세요.');
     return;
+  }
+
+  // [2026-11-07] Readiness check before anything is touched: a missing agent CLI or an expired login (text engine, or
+  //   the Codex image engine) used to fail every item one by one. Not ready -> do not start; a short window offers
+  //   "연결하기" (publishStartPreflight). Checked before the failed/stopped items are reset so a refusal changes nothing.
+  const preflightItems = continuousQueueV2.filter(
+    i => i.status === 'pending' || i.status === 'failed' || i.status === 'processing' || i.status === 'cancelled'
+  );
+  if (preflightItems.length > 0) {
+    const preflightSources = resolvePipelineConfig('continuous').image.textOnlyPublish
+      ? []
+      : Array.from(new Set(preflightItems.map((item: any) => String(item.imageSource || '').trim() || UnifiedDOMCache.getImageSource())));
+    if (!(await publishPreflightEnsureReady({ generator: UnifiedDOMCache.getGenerator(), imageSources: preflightSources }))) {
+      appendLog('⛔ 글·이미지 엔진 연결이 필요해 연속발행을 시작하지 않았습니다.');
+      return;
+    }
   }
 
   // ✅ [v2.7.20 HOTFIX] 재시작 시 이전 실패/중단 항목 자동 복구

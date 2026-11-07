@@ -54,12 +54,13 @@ describe('v1.4.81 — 비용표·환경설정 현대화', () => {
   });
 
   describe('이미지 소스 드롭다운 (image-source-select)', () => {
-    it('ImageFX·Leonardo·DeepInfra·Prodia는 숨기고 Flow는 두며 기본 선택값은 덕트테이프(openai-image)다', () => {
+    it('ImageFX·Leonardo·DeepInfra·Prodia는 숨기고 Flow는 두며 기본 선택값은 Codex 구독 이미지(codex-image)다', () => {
       expect(html).not.toMatch(/<option value="imagefx"/);
       expect(html).toMatch(/<option value="flow"/);
       expect(html).not.toMatch(/<option value="(prodia|deepinfra|leonardoai)"/);
       // [2026-10-10] 시니어 배려로 기본 선택값을 dropshot → openai-image(덕트테이프)로 옮겼다
-      expect(html).toMatch(/<option value="openai-image"[^>]*selected/);
+      expect(html).toMatch(/<option value="codex-image"[^>]*selected/); // [2026-11-07] 덕트테이프에서 변경
+      expect(html).not.toMatch(/<option value="openai-image"[^>]*selected/);
       expect(html).not.toMatch(/<option value="dropshot"[^>]*selected/);
     });
 

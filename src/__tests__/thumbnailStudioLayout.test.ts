@@ -25,7 +25,7 @@ describe('thumbnail studio editing surface', () => {
     for (const id of ['image-thumbnail-quality-high', 'image-heading-text-include', 'image-look-editorial']) expect(doc.getElementById(id)).toBeNull();
     expect(doc.querySelector('#image-ai-mark-all')?.getAttribute('aria-describedby')).toContain('image-ai-mark-status');
     expect(doc.querySelector('#image-ai-mark-status')?.getAttribute('aria-live')).toBe('polite');
-    expect(doc.querySelector('#image-source-select option[selected]')?.getAttribute('value')).toBe('openai-image');
+    expect(doc.querySelector('#image-source-select option[selected]')?.getAttribute('value')).toBe('codex-image'); // [2026-11-07] 덕트테이프에서 변경
   });
   it('names every visible editable studio field and avoids nested interactive labels', () => {
     for (const input of doc.querySelectorAll('#subtab-thumbnail input:not([type="file"]), #subtab-thumbnail textarea, #subtab-thumbnail select')) {

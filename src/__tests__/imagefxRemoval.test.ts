@@ -16,8 +16,8 @@ describe('image engine selection surface', () => {
     expect(html).not.toMatch(/<option value="imagefx"/);
     expect(html).toMatch(/<option value="flow"/);
     expect(html).not.toMatch(/<option value="(prodia|deepinfra|leonardoai)"/);
-    // [2026-10-10] 기본 선택값 = 덕트테이프(openai-image)
-    expect(html).toMatch(/<option value="openai-image"[^>]*selected/);
+    // [2026-11-07] 기본 선택값 = Codex 구독 이미지(codex-image) (이전: 덕트테이프)
+    expect(html).toMatch(/<option value="codex-image"[^>]*selected/);
     expect(html).not.toMatch(/<option value="dropshot"[^>]*selected/);
   });
 
