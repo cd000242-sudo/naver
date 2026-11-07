@@ -77,6 +77,9 @@
     white-space: nowrap;
 }
 .site-nav-link:hover, .site-nav-item.open > .site-nav-link { background: var(--sn-hover); color: var(--sn-ink); }
+/* LEWORD — the flagship site, always visible on its own (사장님 2026-11-07). */
+.site-nav-link-featured { font-weight: 900; color: var(--sn-brand); box-shadow: inset 0 0 0 1.5px var(--sn-brand); }
+.site-nav-link-featured:hover { color: var(--sn-ink); }
 /* Current page — soft fill, bold, 3px underline. A group trigger gets the same mark when a page inside it is open. */
 .site-nav-link[aria-current="page"], .site-nav-link.is-active { background: var(--sn-brand-soft); color: var(--sn-ink); font-weight: 900; }
 .site-nav-link[aria-current="page"]::after, .site-nav-link.is-active::after { content: ""; position: absolute; left: 14px; right: 14px; bottom: -12px; height: 3px; border-radius: 3px; background: var(--sn-brand); }
@@ -179,3 +182,4 @@
 @media (prefers-reduced-motion: reduce) {
     .site-nav *, .site-nav *::before, .site-nav *::after { transition: none !important; }
 }
+.site-nav-sheet-item-featured { color: var(--sn-brand); font-weight: 900; }

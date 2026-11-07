@@ -38,7 +38,7 @@ function NavMobileMenu({ open, pathname, unseenNotices, account, onClose }: Prop
                         {section.items.map((row) => (
                             <Link
                                 key={row.key}
-                                className="site-nav-sheet-item"
+                                className={`site-nav-sheet-item${row.featured ? ' site-nav-sheet-item-featured' : ''}`}
                                 to={row.to}
                                 aria-current={isNavPathActive(row.to, pathname) ? 'page' : undefined}
                                 onClick={onClose}

@@ -14,12 +14,24 @@ const run = (actions, from = INITIAL_MENU_STATE) => actions.reduce(menuReducer, 
 test('menu keeps all nine pages exactly once, in the agreed grouping and order', () => {
     assert.deepEqual([...navDestinations()].sort(), [...NINE_PAGES].sort());
     assert.equal(new Set(navDestinations()).size, 9, 'no duplicate destinations');
-    assert.deepEqual(NAV_ITEMS.map((item) => item.label), ['홈', '제품', '무료 챗봇', '가격·구매', '수익 후기', '커뮤니티']);
+    assert.deepEqual(NAV_ITEMS.map((item) => item.label), ['홈', 'LEWORD', '제품', '무료 챗봇', '가격·구매', '수익 후기', '커뮤니티']);
     const product = NAV_ITEMS.find((item) => item.key === 'product');
-    assert.deepEqual(product.items.map((item) => [item.label, item.to]), [['LEWORD', '/leword'], ['제품 소개', '/products'], ['다운로드', '/download']]);
+    assert.deepEqual(product.items.map((item) => [item.label, item.to]), [['제품 소개', '/products'], ['다운로드', '/download']]);
     const buy = NAV_ITEMS.find((item) => item.key === 'buy');
     assert.deepEqual(buy.items.map((item) => [item.label, item.to]), [['무료체험·구매', '/pricing'], ['주문 조회', '/lookup']]);
     assert.deepEqual(NAV_CTA, { label: '무료체험 시작', shortLabel: '무료체험', to: '/pricing' });
+});
+
+// [2026-11-07 사장님] "LEWORD 는 따로 빼 두세요 — 제일 중요한 사이트라서 잘 보여야 합니다."
+test('LEWORD is its own top-level, highlighted menu item (not inside 제품)', () => {
+    const leword = NAV_ITEMS.find((item) => item.key === 'leword');
+    assert.equal(leword.type, 'link');
+    assert.equal(leword.to, '/leword');
+    assert.equal(leword.featured, true);
+    assert.equal(NAV_ITEMS.indexOf(leword), 1, 'right after 홈');
+    const firstMobile = NAV_MOBILE_SECTIONS[0].items;
+    assert.deepEqual(firstMobile.map((row) => row.to), ['/', '/leword']);
+    assert.equal(firstMobile[1].featured, true);
 });
 
 test('new-notice badge moved from Home to Community', () => {
@@ -56,8 +68,11 @@ test('active rule: exact page only, Home never matches other pages', () => {
 });
 
 test('group is active when a page inside its dropdown is current', () => {
-    const [, product, , buy] = NAV_ITEMS;
-    assert.equal(isNavGroupActive(product, '/leword'), true);
+    // LEWORD left the 제품 group (2026-11-07) — look groups up by key, and /leword no longer lights 제품.
+    const product = NAV_ITEMS.find((item) => item.key === 'product');
+    const buy = NAV_ITEMS.find((item) => item.key === 'buy');
+    assert.equal(isNavGroupActive(product, '/products'), true);
+    assert.equal(isNavGroupActive(product, '/leword'), false);
     assert.equal(isNavGroupActive(product, '/download.html'), true);
     assert.equal(isNavGroupActive(product, '/pricing'), false);
     assert.equal(isNavGroupActive(buy, '/lookup'), true);

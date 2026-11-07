@@ -25,9 +25,10 @@ const entry = (key, label, to, icon, desc, short) => Object.freeze({ key, label,
 /** Desktop bar. Groups open a dropdown; the notice badge rides on Community. */
 export const NAV_ITEMS = Object.freeze([
     link('home', '홈', '/'),
+    // [2026-11-07] LEWORD is the most important site — its own highlighted item, not hidden in a dropdown.
+    link('leword', 'LEWORD', '/leword', { featured: true }),
     Object.freeze({
         type: 'group', key: 'product', label: '제품', items: Object.freeze([
-            entry('leword', 'LEWORD', '/leword', 'L', '웹에서 바로 쓰는 키워드 찾기', '키워드 찾기'),
             entry('products', '제품 소개', '/products', '3', '세 제품 비교와 요금 한눈에', '비교·요금'),
             entry('download', '다운로드', '/download', '↓', 'PC 프로그램 받기', 'PC 프로그램'),
         ]),
@@ -47,10 +48,12 @@ const row = (key, label, to, small, extra = {}) => Object.freeze({ key, label, t
 
 /** Phone list: every row visible at once, grouped under short headings (title null = no heading). */
 export const NAV_MOBILE_SECTIONS = Object.freeze([
-    Object.freeze({ title: null, items: Object.freeze([row('home', '홈', '/')]) }),
+    Object.freeze({ title: null, items: Object.freeze([
+        row('home', '홈', '/'),
+        row('leword', 'LEWORD', '/leword', '키워드 찾기', { featured: true }),
+    ]) }),
     Object.freeze({
         title: '제품', items: Object.freeze([
-            row('leword', 'LEWORD', '/leword', '키워드 찾기'),
             row('products', '제품 소개', '/products', '비교·요금'),
             row('download', '다운로드', '/download', 'PC 프로그램'),
         ]),

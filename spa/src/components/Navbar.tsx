@@ -125,7 +125,7 @@ function Navbar() {
 function NavBarLink({ item, pathname, unseenNotices, onNavigate }: { item: NavLinkItem; pathname: string; unseenNotices: number; onNavigate: () => void }) {
     const current = isNavPathActive(item.to, pathname);
     return (
-        <Link className="site-nav-link" to={item.to} aria-current={current ? 'page' : undefined} onClick={onNavigate}>
+        <Link className={`site-nav-link${item.featured ? ' site-nav-link-featured' : ''}`} to={item.to} aria-current={current ? 'page' : undefined} onClick={onNavigate}>
             {item.label}
             {item.badge && <NewBadge count={unseenNotices} size="md" />}
         </Link>

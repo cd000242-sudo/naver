@@ -4,10 +4,10 @@ export const NAV_LOGIN_PATH: string;
 export const LOGIN_EVENT: string;
 
 export type NavChild = Readonly<{ key: string; label: string; to: string; icon: string; desc: string; short?: string }>;
-export type NavLinkItem = Readonly<{ type: 'link'; key: string; label: string; to: string; badge?: boolean }>;
+export type NavLinkItem = Readonly<{ type: 'link'; key: string; label: string; to: string; badge?: boolean; featured?: boolean }>;
 export type NavGroupItem = Readonly<{ type: 'group'; key: string; label: string; items: readonly NavChild[] }>;
 export type NavItem = NavLinkItem | NavGroupItem;
-export type NavSheetRow = Readonly<{ key: string; label: string; to: string; small?: string; badge?: boolean }>;
+export type NavSheetRow = Readonly<{ key: string; label: string; to: string; small?: string; badge?: boolean; featured?: boolean }>;
 export type NavSheetSection = Readonly<{ title: string | null; items: readonly NavSheetRow[] }>;
 
 export const NAV_ITEMS: readonly NavItem[];
