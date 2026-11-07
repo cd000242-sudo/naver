@@ -279,6 +279,8 @@ body.right-tools-collapsed #ai-assistant-btn {
   #right-floating-buttons {
     max-height: calc(100dvh - 280px) !important;
     overflow-y: auto !important;
+    /* The HOT badge pokes 1px past the edge; a horizontal scrollbar would steal height and force a vertical one. */
+    overflow-x: hidden !important;
   }
 }
 
