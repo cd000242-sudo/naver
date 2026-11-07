@@ -7,6 +7,7 @@ export function signupPath(next?: unknown): string;
 export function afterAuthPath(next?: unknown): string;
 
 export function validateLogin(input: { userId?: string; password?: string }): string;
+export function validateNickname(nickname: unknown): string;
 export function validateSignup(input: { userId?: string; password?: string; passwordConfirm?: string; nickname?: string }): string;
 
 export type NoticePart = Readonly<{ text: string; bold?: boolean }>;

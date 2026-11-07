@@ -54,13 +54,16 @@ export function validateLogin({ userId, password }) {
     return '';
 }
 
+export function validateNickname(nickname) {
+    return NICK_PATTERN.test(String(nickname || '').trim()) ? '' : '닉네임은 2~12자의 글자·숫자와 _ . - 만 쓸 수 있어요.';
+}
+
 export function validateSignup({ userId, password, passwordConfirm, nickname }) {
     if (!ID_PATTERN.test(String(userId || '').trim())) return '아이디는 글자·숫자와 _ . @ + - 만 쓸 수 있고 2~50자여야 해요.';
     const pw = String(password || '');
     if (pw.length < 6 || pw.length > 100) return '비밀번호는 6자 이상 입력해 주세요.';
     if (pw !== String(passwordConfirm || '')) return '비밀번호가 같지 않아요. 다시 확인해 주세요.';
-    if (!NICK_PATTERN.test(String(nickname || '').trim())) return '닉네임은 2~12자의 글자·숫자와 _ . - 만 쓸 수 있어요.';
-    return '';
+    return validateNickname(nickname);
 }
 
 /** Shown above the license-code field (agreed wording). `bold` parts are rendered as <strong>. */

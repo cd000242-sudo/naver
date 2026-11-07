@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import {
     LOGIN_PATH, SIGNUP_PATH, REGISTER_NOTICE_PARTS, REGISTER_NOTICE_TEXT,
     safeNextPath, loginPath, signupPath, afterAuthPath,
-    validateLogin, validateSignup,
+    validateLogin, validateSignup, validateNickname,
     describeRegisterFailure, isSessionFailure, mapLewordVerify,
 } from '../src/lib/siteAuthModel.mjs';
 
@@ -102,4 +102,14 @@ test('mapLewordVerify turns the server answer into one of six verdicts', () => {
     assert.deepEqual([broken.kind, broken.message], ['error', '연결에 실패했습니다.']);
     assert.equal(mapLewordVerify(null).kind, 'error');
     assert.equal(mapLewordVerify({ ok: true, valid: false }).kind, 'error', 'ok without valid is not an open door');
+});
+
+test('validateNickname: 2-12 letters, digits and _ . - only', () => {
+    assert.equal(validateNickname('새싹이'), '');
+    assert.equal(validateNickname('Leader_1.x-'), '');
+    assert.match(validateNickname(''), /닉네임/);
+    assert.match(validateNickname('가'), /닉네임/);
+    assert.match(validateNickname('가'.repeat(13)), /닉네임/);
+    assert.match(validateNickname('a b'), /닉네임/);
+    assert.match(validateNickname('<b>'), /닉네임/);
 });

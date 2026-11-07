@@ -37,12 +37,13 @@
     word-break: keep-all;
     overflow-wrap: anywhere;
 }
+/* Resets sit inside :where() so they carry no specificity: a single class (.lp-btn, .cm-like ...) always wins over them. */
 .lp *, .lp *::before, .lp *::after { box-sizing: border-box; }
-.lp h1, .lp h2, .lp h3, .lp p, .lp ul, .lp ol { margin: 0; padding: 0; }
-.lp ul, .lp ol { list-style: none; }
-.lp a { color: inherit; text-decoration: none; }
-.lp button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
-.lp :focus-visible { outline: 3px solid var(--lp-accent); outline-offset: 2px; border-radius: 8px; }
+.lp :where(h1, h2, h3, p, ul, ol, dl, dd) { margin: 0; padding: 0; }
+.lp :where(ul, ol) { list-style: none; }
+.lp :where(a) { color: inherit; text-decoration: none; }
+.lp :where(button) { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+.lp :where(:focus-visible) { outline: 3px solid var(--lp-accent); outline-offset: 2px; border-radius: 8px; }
 .lp-wrap { width: min(1180px, 100% - 40px); margin: 0 auto; }
 .lp-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 

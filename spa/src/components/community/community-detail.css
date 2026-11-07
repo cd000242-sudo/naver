@@ -1,0 +1,71 @@
+/* Community: post page, comments, write form, report dialog. Needs src/styles/light-page.css (.lp tokens). */
+.cm-detail { display: grid; gap: 16px; min-width: 0; }
+.cm-back { display: inline-flex; align-items: center; min-height: 44px; font-size: 16px; font-weight: 700; color: var(--lp-accent); }
+
+.cm-post { padding: 26px 28px; display: grid; gap: 16px; }
+.cm-post-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.cm-board-tag { display: inline-flex; align-items: center; height: 30px; padding: 0 10px; border-radius: 8px; background: var(--lp-surface-2); border: 1px solid var(--lp-line); font-size: 14px; font-weight: 700; color: var(--lp-muted); }
+.cm-post-title { font-size: 28px; font-weight: 900; line-height: 1.35; }
+.cm-post-by { display: flex; align-items: center; gap: 4px 12px; flex-wrap: wrap; font-size: 15px; color: var(--lp-muted); }
+.cm-post-by .cm-nick { color: var(--lp-text); }
+.cm-body { font-size: 18px; line-height: 1.8; white-space: pre-wrap; overflow-wrap: anywhere; padding: 8px 0 12px; border-top: 1px solid var(--lp-line); padding-top: 18px; }
+.cm-post-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; border-top: 1px solid var(--lp-line); padding-top: 14px; }
+
+.cm-promo { display: flex; align-items: center; gap: 10px 14px; flex-wrap: wrap; padding: 14px 16px; border-radius: 12px; background: var(--lp-accent-soft); }
+.cm-promo-plat { font-size: 14px; font-weight: 800; color: var(--lp-accent); }
+.cm-promo-url { flex: 1 1 240px; min-width: 0; font-size: 15px; overflow-wrap: anywhere; color: var(--lp-text); }
+.cm-promo-given { font-size: 14px; color: var(--lp-muted); }
+
+.cm-like, .cm-act {
+    display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 14px; border-radius: 10px;
+    border: 1px solid var(--lp-line-strong); background: var(--lp-surface); font-size: 15px; font-weight: 700; color: var(--lp-muted);
+}
+.cm-like b { color: var(--lp-danger); font-size: 16px; }
+.cm-like[aria-pressed="true"] { background: var(--lp-danger-soft); border-color: var(--lp-danger); color: var(--lp-danger); }
+.cm-like-static { background: var(--lp-surface-2); border-color: var(--lp-line); }
+.cm-like:hover:not([disabled]):not(.cm-like-static), .cm-act:hover:not([disabled]) { background: var(--lp-surface-2); }
+.cm-like[disabled], .cm-act[disabled] { opacity: 0.55; cursor: not-allowed; }
+
+/* Comments */
+.cm-cmts { padding: 22px 26px; display: grid; gap: 16px; }
+.cm-cmts h2 { font-size: 20px; font-weight: 900; }
+.cm-comments, .cm-replies { display: grid; gap: 4px; }
+.cm-comment { padding: 14px 0; border-bottom: 1px solid var(--lp-line); display: grid; gap: 8px; }
+.cm-comment.is-reply { border-bottom: 0; padding: 12px 14px; border-radius: 12px; background: var(--lp-surface-2); }
+.cm-replies { margin: 6px 0 0 18px; padding-left: 14px; border-left: 3px solid var(--lp-line); }
+.cm-c-head { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px; font-size: 15px; }
+.cm-c-head time { color: var(--lp-faint); font-size: 14px; }
+.cm-c-body { font-size: 17px; line-height: 1.7; white-space: pre-wrap; overflow-wrap: anywhere; }
+.cm-c-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.cm-gone { color: var(--lp-faint); font-size: 16px; font-style: italic; }
+.cm-cform { display: grid; gap: 10px; }
+.cm-cbody { min-height: 110px; }
+.cm-cform-actions { display: flex; justify-content: flex-end; gap: 8px; }
+
+/* Write form */
+.cm-form { padding: 26px 28px; display: grid; gap: 18px; }
+.cm-form-title { font-size: 26px; font-weight: 900; }
+.cm-form .lp-textarea { min-height: 260px; }
+.cm-form .cm-short { min-height: 120px; }
+.cm-form-actions { display: flex; justify-content: flex-end; gap: 10px; flex-wrap: wrap; }
+.cm-form .au-help { color: var(--lp-muted); }
+
+/* Report dialog */
+.cm-modal { position: fixed; inset: 0; z-index: 10200; display: grid; place-items: center; padding: 16px; background: rgba(20, 24, 28, 0.55); }
+.cm-dialog { width: min(520px, 100%); max-height: calc(100vh - 32px); overflow: auto; padding: 24px; }
+.cm-dialog h2 { font-size: 22px; font-weight: 900; margin-bottom: 12px; }
+.cm-dialog form { display: grid; gap: 14px; }
+.cm-reasons { border: 0; margin: 0; padding: 0; display: grid; gap: 6px; }
+.cm-reason { display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 0 12px; border: 1.5px solid var(--lp-line); border-radius: 12px; font-size: 17px; cursor: pointer; }
+.cm-reason input { width: 22px; height: 22px; accent-color: var(--lp-accent); }
+.cm-reason:has(input:checked) { border-color: var(--lp-accent); background: var(--lp-accent-soft); font-weight: 700; }
+.cm-dialog .cm-rdetail { min-height: 100px; }
+.cm-dialog-actions { display: flex; justify-content: flex-end; gap: 10px; }
+
+@media (max-width: 720px) {
+    .cm-post, .cm-form { padding: 20px 16px; }
+    .cm-post-title { font-size: 24px; }
+    .cm-cmts { padding: 18px 16px; }
+    .cm-replies { margin-left: 8px; padding-left: 10px; }
+    .cm-form-actions .lp-btn { flex: 1; }
+}
