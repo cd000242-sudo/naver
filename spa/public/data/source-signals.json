@@ -8,63 +8,53 @@
         {
           "id": "naver-1",
           "rank": 1,
-          "keyword": "삼성 우승까지 1승 남아",
-          "title": "삼성 우승까지 1승 남아",
-          "rawKeyword": "삼성 우승까지 1승 남아",
+          "keyword": "포스코 노조 임금안 부결",
+          "title": "포스코 노조 임금안 부결",
+          "rawKeyword": "포스코 노조 임금안 부결",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 100,
           "source": "naver",
           "expansions": [
-            "삼성전자",
-            "삼성 라이온즈",
-            "삼성 kt",
-            "삼성전자 주가",
-            "삼성 기아",
-            "삼성 서비스센터",
-            "삼성sdi",
-            "삼성 e&a"
+            "포스코 노조",
+            "포스코퓨처엠",
+            "포스코홀딩스",
+            "포스코dx",
+            "포스코 임금협상",
+            "포스코인터내셔널",
+            "포스코 채용",
+            "포스코 파업"
           ],
-          "expansionSeed": "삼성",
+          "expansionSeed": "임금안",
           "insight": {
             "titles": {
-              "seo": "삼성 우승까지 1승 남아 최신 이슈와 핵심 내용 정리",
-              "home": "삼성 우승까지 1승 남아, 삼성 , kt 꺾고 한국시리즈 2연승…12년 만의 우승까지 2승 남아 관련 확인할 점",
-              "topic": "삼성 우승까지 1승 남아",
+              "seo": "포스코 노조 임금안 부결 최신 이슈와 핵심 내용 정리",
+              "home": "포스코 노조 임금안 부결, 주요 노조, 사측과 교섭 난항…‘하투’ 본격화하나 - 스마트비즈 관련 확인할 점",
+              "topic": "포스코 노조 임금안 부결",
               "topicGroup": "네이버 실시간 검색어"
             },
             "facts": [
               {
-                "text": "이로써 시리즈 전적 2승 1패를 기록한 삼성 은 우승까지 2승만을 남겨뒀습니다. 역대 한국시리즈에서 1승 1패로 맞선 뒤 3차전을 이긴 팀은 18차례 가운데 16차례 우승 했습니다.",
+                "text": "[스마트에프엔=신종모 기자] 역대급 경기 불황에도 산업계 전반에 파업의 전운이 감돌고 있다.",
                 "sourceIndex": 0
-              },
-              {
-                "text": "◀박승규 / 삼성 라이온즈(3안타 3타점)▶ \"컨디션은 항상 그냥 그런데 일단 경기장에 나오면 저희 팬분들의 함성 소리와 저희 팬분들의 응원 덕분에 항상 컨디션이 최대로 올라오는 것 같습니다.\" 1패 후 내리 3연승을 거머쥐며 이제 한국시리즈 우승까지 단 1승 만 남겨 놓은 삼성 .",
-                "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://news.jtbc.co.kr/article/NB12326933?influxDiv=NAVER",
-                "press": "JTBC"
-              },
-              {
-                "url": "https://dgmbc.com/NewsArticle/872042",
-                "press": "대구MBC"
+                "url": "https://www.smartfn.co.kr/article/view/sfn202309060008",
+                "press": "스마트비즈"
               }
             ],
             "images": [
-              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F437%2F2026%2F11%2F06%2F519593.jpg&type=fface200_200&expire=2&refresh=true"
+              "https://cdn.smartbizn.com/news/photo/202309/26461_30456_2152.jpg"
             ],
             "press": [
-              "JTBC",
-              "대구MBC"
+              "스마트비즈"
             ],
             "headlines": [
-              "삼성 , kt 꺾고 한국시리즈 2연승…12년 만의 우승까지 2승 남아",
-              "한국시리즈 '1패 뒤 3연승' 삼성 라이온즈…'라팍 시대' 첫 우승 1승 남아"
+              "주요 노조, 사측과 교섭 난항…‘하투’ 본격화하나 - 스마트비즈"
             ],
-            "extraction": "search-card",
-            "collectedAt": "2026-11-07T16:54:16.375Z"
+            "extraction": "playwright",
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -126,141 +116,79 @@
               "'은평 스토킹 살인' 60대 구속 …\" 도망 할 우려 \""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
           "id": "naver-3",
           "rank": 3,
-          "keyword": "포스코 노조 부결",
-          "title": "포스코 노조 부결",
-          "rawKeyword": "포스코 노조 부결",
+          "keyword": "삼성 우승 1승 남았다",
+          "title": "삼성 우승 1승 남았다",
+          "rawKeyword": "삼성 우승 1승 남았다",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 98,
           "source": "naver",
           "expansions": [
-            "포스코 노조",
-            "포스코노조",
-            "포스코퓨처엠",
-            "포스코홀딩스",
-            "포스코dx",
-            "포스코 임금협상",
-            "포스코인터내셔널",
-            "포스코 채용"
+            "삼성전자",
+            "삼성 라이온즈",
+            "삼성 kt",
+            "삼성전자 주가",
+            "삼성 기아",
+            "삼성 서비스센터",
+            "삼성sdi",
+            "삼성 e&a"
           ],
-          "expansionSeed": "포스코",
+          "expansionSeed": "삼성",
           "insight": {
             "titles": {
-              "seo": "포스코 노조 부결 최신 이슈와 핵심 내용 정리",
-              "home": "포스코 노조 부결, 포스코 노조, 임협 잠정안 부결…노사 갈등 장기화하나 관련 확인할 점",
-              "topic": "포스코 노조 부결",
+              "seo": "삼성 우승 1승 남았다 최신 이슈와 핵심 내용 정리",
+              "home": "삼성 우승 1승 남았다, 19세 신인 장찬희 ‘깜짝 호투’... 삼성, 우승까지 1승 남았다 관련 확인할 점",
+              "topic": "삼성 우승 1승 남았다",
               "topicGroup": "네이버 실시간 검색어"
             },
             "facts": [
               {
-                "text": "포스코 노조가 올해 임금협상 잠정합의안을 부결시키면서 5개월 가까이 이어진 교섭이 원점으로 돌아갔다. 창사 이래 첫 부분파업까지 겪으며 어렵게 마련한 합의안이 조합원 투표 문턱을 넘지 못하면서 노사 갈등이 장기화할 수 있다는 우려가 커지고 있다.",
+                "text": "대구=양승수 기자대구=강우석 기자입력 2026.11.07. 17:17업데이트 2026.11.07. 20:0907일 대구 수성구 삼성라이온즈파크에서 열린 2026 KBO 포스트시즌 한국시리즈 4차전 KT 위즈와 삼성 라이온즈 경기, 4회초 삼성 선발투수 장찬희가 공을 던지고 있다.",
                 "sourceIndex": 0
               },
               {
-                "text": "포스코 노사가 마련한 올해 임금교섭 잠정 합의안이 조합원 찬반투표에서 부결 됐습니다. 대표 교섭 노조 인 포스코 노동조합은 오늘(7일) 조합원 투표 결과 찬성 48.3%, 반대 51.7%로 합의안이 최종 부결 됐다고 밝혔습니다.",
+                "text": "삼성 이 한국시리즈(7전4승제) 우승 까지 1승 을 남겨뒀다. 삼성 은 7일 대구 삼성 라이온즈파크에서 열린 KT와의 한국시리즈 4차전에서 10-5로 승리했다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.sedaily.com/article/20111465?ref=naver",
-                "press": "서울경제"
+                "url": "https://www.chosun.com/sports/baseball/2026/11/07/ACI2FFRMDRCJNH3VVCSYMOTUQY/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
+                "press": "조선일보"
               },
               {
-                "url": "https://www.ytn.co.kr/_ln/0115_202611071806272631",
-                "press": "YTN"
+                "url": "https://www.khan.co.kr/article/202611071748001",
+                "press": "경향신문"
               }
             ],
             "images": [
-              "https://wimg.sedaily.com/news/cms/2026/11/07/news-p.v1.20261107.986ea3fbe03f4c7f9872a879f0c66c4d_Z1.jpg"
+              "https://www.chosun.com/resizer/v2/PS42XSR5TRBC7I2G6AEABVQDRY.jpg?auth=39d5eb8f3073e074f865cccf2f7e4db9623c851bb01a747b240c1b11f7d31df7&width=1200&height=630&smart=true"
             ],
             "press": [
-              "서울경제",
-              "YTN"
+              "조선일보",
+              "경향신문"
             ],
             "headlines": [
-              "포스코 노조, 임협 잠정안 부결…노사 갈등 장기화하나",
-              "포스코 노사 임금 잠정합의안 부결 ...반대 51.7%"
+              "19세 신인 장찬희 ‘깜짝 호투’... 삼성, 우승까지 1승 남았다",
+              "1회 6득점·장찬희 씩씩투·박승규 3타점···4차전에도 웃은 삼성 , 우..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:54:16.375Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
           "id": "naver-4",
           "rank": 4,
-          "keyword": "버밍엄 대 스완지 시티",
-          "title": "버밍엄 대 스완지 시티",
-          "rawKeyword": "버밍엄 대 스완지 시티",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 97,
-          "source": "naver",
-          "expansions": [
-            "버밍엄시티",
-            "버밍엄시티대학교",
-            "스완지시티",
-            "스완지시티 순위",
-            "스완지시티 유니폼",
-            "브라스 버밍엄",
-            "버밍엄 대학교",
-            "버밍엄 여행"
-          ],
-          "expansionSeed": "버밍엄",
-          "insight": {
-            "titles": {
-              "seo": "버밍엄 대 스완지 시티 최신 이슈와 핵심 내용 정리",
-              "home": "버밍엄 대 스완지 시티, [공식발표]\"우리 엄지성 감히 누가 건드려\" 韓 유럽파 향한 인종차별 충격 사태에 스완지 감독 '분노'…몸푸는 EOM 향한 상대팬 관련 확인할 점",
-              "topic": "버밍엄 대 스완지 시티",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "2026년 아이치-나고야 아시안게임에서 한국 축구에 금메달을 안긴 주역인 엄지성(24·스완지시티)이 소속팀으로 돌아가자마자 인종차별 피해를 당했다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "축구 국가대표 공격수 엄지성(24· 스완지 시티 )이 2경기 연속 골을 터뜨리며 팀 승리를 이끌었다. 백승호의 소속팀 버밍엄 시티 는 사우샘프턴과 1-1로 비겼고, 승점 6(1승3무)으로 9위에 자리했다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.sportschosun.com/football/2026-10-14/202610140100088190005729",
-                "press": "스포츠조선"
-              },
-              {
-                "url": "https://www.news1.kr/sports/overseas-soccer/6276922",
-                "press": "뉴스1"
-              }
-            ],
-            "images": [
-              "https://www.sportschosun.com/article/html/2026/10/14/2026101401000881900057292.jpg"
-            ],
-            "press": [
-              "스포츠조선",
-              "뉴스1"
-            ],
-            "headlines": [
-              "[공식발표]\"우리 엄지성 감히 누가 건드려\" 韓 유럽파 향한 인종차별 충격 사태에 스완지 감독 '분노'…몸푸는 EOM 향한 상대팬의 모욕성 발언→경기 일시중단",
-              "아시안게임 앞둔 엄지성, 2경기 연속 1골 1도움… 스완지 2-0 승리"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
-          }
-        },
-        {
-          "id": "naver-5",
-          "rank": 5,
           "keyword": "국민의힘 조작기소특검법 규탄 집회",
           "title": "국민의힘 조작기소특검법 규탄 집회",
           "rawKeyword": "국민의힘 조작기소특검법 규탄 집회",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 96,
+          "priority": 97,
           "source": "naver",
           "expansions": [
             "국민의힘 당대표",
@@ -312,79 +240,264 @@
               "與, 野 ' 조작기소 특검법 ' 규탄 장외투쟁에 \"윤석열 정치검찰 방탄\"(종합..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
-          "id": "naver-6",
-          "rank": 6,
-          "keyword": "100일의 거짓말",
-          "title": "100일의 거짓말",
-          "rawKeyword": "100일의 거짓말",
+          "id": "naver-5",
+          "rank": 5,
+          "keyword": "베스트 아티스트 수상 쾌거",
+          "title": "베스트 아티스트 수상 쾌거",
+          "rawKeyword": "베스트 아티스트 수상 쾌거",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 95,
+          "priority": 96,
           "source": "naver",
           "expansions": [
-            "100일의 거짓말 몇부작",
-            "100일의 거짓말 나무위키",
-            "100일의 거짓말 등장인물",
-            "100일의 거짓말 시청률",
-            "100일의 거짓말 재방송",
-            "100일의 거짓말 원작",
-            "100일의 거짓말 작가",
-            "100일의 거짓말 ott"
+            "베스트슬립",
+            "베스트셀러",
+            "베스트셀러 순위",
+            "베스트펜",
+            "베스트내과",
+            "일간베스트",
+            "베스트이비인후과",
+            "베스트 조끼"
           ],
-          "expansionSeed": "100일의 거짓말",
+          "expansionSeed": "베스트",
           "insight": {
             "titles": {
-              "seo": "100일의 거짓말 최신 이슈와 핵심 내용 정리",
-              "home": "100일의 거짓말, &lsquo;100일의 거짓말&rsquo; 결전의 날 관련 확인할 점",
-              "topic": "100일의 거짓말",
+              "seo": "베스트 아티스트 수상 쾌거 최신 이슈와 핵심 내용 정리",
+              "home": "베스트 아티스트 수상 쾌거, [2026 KGMA] 코르티스, &lsquo;베스트 아티스트&rsquo; 수상 쾌거 - 일간스포츠 관련 확인할 점",
+              "topic": "베스트 아티스트 수상 쾌거",
               "topicGroup": "네이버 실시간 검색어"
             },
             "facts": [
               {
-                "text": "‘100일의 거짓말’ 구국단의 세 번째 작전이 마침내 시작된다.",
+                "text": "그룹 코르티스가 ‘2026 KGMA’에서 ‘베스트 아티스트’ 상을 수상했다.",
                 "sourceIndex": 0
               },
               {
-                "text": "' 100일의 거짓말 '의 한층 짙어진 로맨스를 예고하는 포옹 포스터가 공개됐다. 6일 tvN 20주년 특별기획 토일드라마 ' 100일의 거짓말 '(극본 류보리/ 연출 유인식, 김윤진) 측은 이가경(김유정 분), 김태웅(박진영 분)의 포옹 포스터와 유소란(김현주 분), 유필립(이무생 분)의 포옹 포스터를 선보였다.",
+                "text": "그룹 블랙핑크가 ‘2026 KGMA’에서 ‘ 베스트 아티스트 ’ 상을 수상 하는 쾌거 를 안았다. 블랙핑크는 7일 오후 서울 구로구 고척스카이돔에서 열리는 ‘제3회 코리아 그랜드 뮤직 어워즈’(‘2026 KGMA’) 첫째 날 ‘ 아티스트 데이’에서 ‘ 베스트 아티스트 ’ 트러피를 거머쥐었다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.bntnews.co.kr/article/view/bnt202611070064",
-                "press": "bnt뉴스"
+                "url": "https://isplus.com/article/view/isp202611040110",
+                "press": "일간스포츠"
               },
               {
-                "url": "https://www.news1.kr/entertain/broadcast-tv/6345284",
-                "press": "뉴스1"
+                "url": "https://isplus.com/article/view/isp202611040113",
+                "press": "일간스포츠"
               }
             ],
             "images": [
-              "https://www.bntnews.co.kr/data/bnt/image/2026/11/07/bnt202611070121.jpg"
+              "https://isplus.com/data/isp/image/2026/11/06/isp20261106000088.800x.0.jpg"
             ],
             "press": [
-              "bnt뉴스",
-              "뉴스1"
+              "일간스포츠"
             ],
             "headlines": [
-              "&lsquo;100일의 거짓말&rsquo; 결전의 날",
-              "' 100일의 거짓말 ' 더 짙어진 4인의 로맨스…포옹 포스터 공개"
+              "[2026 KGMA] 코르티스, &lsquo;베스트 아티스트&rsquo; 수상 쾌거 - 일간스포츠",
+              "[2026 KGMA] 블랙핑크, ‘ 베스트 아티스트 ’ 트로피 거머쥐었다"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
+          }
+        },
+        {
+          "id": "naver-6",
+          "rank": 6,
+          "keyword": "이천수",
+          "title": "이천수",
+          "rawKeyword": "이천수",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 95,
+          "source": "naver",
+          "expansions": [
+            "이천수 와이프",
+            "이천수 나무위키",
+            "이천 숙소",
+            "이천 술집",
+            "이천 순대국",
+            "이천 숯불정원",
+            "이천 수백당",
+            "김지혜 이천수"
+          ],
+          "expansionSeed": "이천수",
+          "insight": {
+            "titles": {
+              "seo": "이천수 최신 이슈와 핵심 내용 정리",
+              "home": "이천수, \"분위기 어쩌다 이렇게 됐나\"…이천수, 대표팀 갈등설에 조언 관련 확인할 점",
+              "topic": "이천수",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "축구 국가대표 출신 방송인 이천수가 최근 불거진 대표팀 내 선수들의 갈등설에 대해 중간급 선수들의 가교 역할이 중요하다며 분위기 쇄신을 당부했다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "주장 손흥민과 일부 선수들의 갈등 의혹이 제기된 가운데, 국가대표 출신 이천수 가 선수단 내부의 소통과 단합을 강조하며 쓴소리를 남겼다. 이천수 는 지난 6일 자신의 유튜브 채널 '리춘수'에 공개된 '요즘 대표팀 분위기는 어쩌다",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.newsis.com/view/NISX20261107_0003858772",
+                "press": "뉴시스"
+              },
+              {
+                "url": "https://www.spotvnews.co.kr/news/articleView.html?idxno=1018354",
+                "press": "스포티비뉴스"
+              }
+            ],
+            "images": [
+              "https://img1.newsis.com/2026/11/07/NISI20261107_0002285613_web.jpg"
+            ],
+            "press": [
+              "뉴시스",
+              "스포티비뉴스"
+            ],
+            "headlines": [
+              "\"분위기 어쩌다 이렇게 됐나\"…이천수, 대표팀 갈등설에 조언",
+              "'손흥민-96라인 불화설'...'前 국가대표' 이천수 작심 발언 \"축구에만 집..."
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
           "id": "naver-7",
           "rank": 7,
+          "keyword": "미래에셋증권 해킹 정보유출",
+          "title": "미래에셋증권 해킹 정보유출",
+          "rawKeyword": "미래에셋증권 해킹 정보유출",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 94,
+          "source": "naver",
+          "expansions": [
+            "미래에셋증권 고객센터",
+            "미래에셋증권 지점",
+            "미래에셋증권주가",
+            "미래에셋증권 cma",
+            "미래에셋증권 배당금",
+            "미래에셋증권 수수료",
+            "미래에셋증권 isa",
+            "미래에셋증권 인사"
+          ],
+          "expansionSeed": "미래에셋증권",
+          "insight": {
+            "titles": {
+              "seo": "미래에셋증권 해킹 정보유출 최신 이슈와 핵심 내용 정리",
+              "home": "미래에셋증권 해킹 정보유출, 해킹 대책 문제없나…미래에셋증권도 3만9천여명 정보유출(종합) 관련 확인할 점",
+              "topic": "미래에셋증권 해킹 정보유출",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "(서울=연합뉴스) 황철환 기자 = 금융권에서 연쇄 해킹 사고가 잇따르는 가운데 미래에셋증권에서도 해킹으로 인한 정보 유출이 발생했다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "◀ 리포트 ▶ 미래에셋증권 에서도 해킹 공격으로 개인 정보 가 유출 됐습니다. 유출 된 정보 는 고객 약 3천8백 명의 계좌번호와 임직원 3만 5천여 명의 이름과 사번입니다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261107014452008?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "https://imnews.imbc.com/replay/2026/nw1200/article/6863893_36967.html",
+                "press": "MBC"
+              }
+            ],
+            "images": [
+              "https://img0.yna.co.kr/photo/yna/YH/2026/11/07/PYH2026110701660001300_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "MBC"
+            ],
+            "headlines": [
+              "해킹 대책 문제없나…미래에셋증권도 3만9천여명 정보유출(종합)",
+              "미래에셋증권 해킹 ‥고객 3,800명 계좌번호 유출"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-07T17:09:17.278Z"
+          }
+        },
+        {
+          "id": "naver-8",
+          "rank": 8,
+          "keyword": "젠슨 황 장녀 방한 취소",
+          "title": "젠슨 황 장녀 방한 취소",
+          "rawKeyword": "젠슨 황 장녀 방한 취소",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 93,
+          "source": "naver",
+          "expansions": [
+            "젠슨황 방한",
+            "젠슨황",
+            "젠슨황 국적",
+            "젠슨황 오리",
+            "젠슨황 로봇",
+            "젠슨황 스파이",
+            "젠슨황 오리로봇",
+            "조지젠슨"
+          ],
+          "expansionSeed": "젠슨",
+          "insight": {
+            "titles": {
+              "seo": "젠슨 황 장녀 방한 취소 최신 이슈와 핵심 내용 정리",
+              "home": "젠슨 황 장녀 방한 취소, 젠슨 황 장녀 매디슨 황, 방한 하루 앞두고 취소…\"가족 사유\" 관련 확인할 점",
+              "topic": "젠슨 황 장녀 방한 취소",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "업계 일각에서는 젠슨 황 CEO 주변 인물의 중국 스파이 연루 의혹을 다룬 최근 외신 보도가 방한 취소 에 영향을 미친 게 아니냐는 관측도 제기된다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "젠슨 황 엔비디아 최고경영자(CEO) 장녀 인 매디슨 황 엔비디아 옴니버스·로보틱스 제품 마케팅 수석이사의 한국 방문 일정이 전격 취소 됐습니다. 일각에서는 젠슨 황 CEO 주변 인물의 중국 스파이 연루 의혹을 다룬 최근 외신 보도가 방한 취소 에 영향을 미친 것 아니냐는 의견도 제기됩니다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261107050000017?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "http://mbn.mk.co.kr/pages/news/newsView.php?category=mbn00003&news_seq_no=5229619",
+                "press": "MBN"
+              }
+            ],
+            "images": [
+              "https://img9.yna.co.kr/photo/yna/YH/2026/06/08/PYH2026060802320001301_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "MBN"
+            ],
+            "headlines": [
+              "젠슨 황 장녀 매디슨 황, 방한 하루 앞두고 취소…\"가족 사유\"",
+              "젠슨 황 장녀 , 방한 하루 앞두고 취소 …\"가족 사유\""
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-07T17:09:17.278Z"
+          }
+        },
+        {
+          "id": "naver-9",
+          "rank": 9,
           "keyword": "복권당첨번호",
           "title": "복권",
           "rawKeyword": "복권",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 94,
+          "priority": 92,
           "source": "naver",
           "expansions": [
             "동행복권",
@@ -440,189 +553,65 @@
           }
         },
         {
-          "id": "naver-8",
-          "rank": 8,
-          "keyword": "미래에셋증권 해킹 정보유출",
-          "title": "미래에셋증권 해킹 정보유출",
-          "rawKeyword": "미래에셋증권 해킹 정보유출",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 93,
-          "source": "naver",
-          "expansions": [
-            "미래에셋증권 고객센터",
-            "미래에셋증권 지점",
-            "미래에셋증권주가",
-            "미래에셋증권 cma",
-            "미래에셋증권 배당금",
-            "미래에셋증권 수수료",
-            "미래에셋증권 isa",
-            "미래에셋증권 인사"
-          ],
-          "expansionSeed": "미래에셋증권",
-          "insight": {
-            "titles": {
-              "seo": "미래에셋증권 해킹 정보유출 최신 이슈와 핵심 내용 정리",
-              "home": "미래에셋증권 해킹 정보유출, 해킹 대책 문제없나…미래에셋증권도 3만9천여명 정보유출(종합) 관련 확인할 점",
-              "topic": "미래에셋증권 해킹 정보유출",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "(서울=연합뉴스) 황철환 기자 = 금융권에서 연쇄 해킹 사고가 잇따르는 가운데 미래에셋증권에서도 해킹으로 인한 정보 유출이 발생했다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "◀ 리포트 ▶ 미래에셋증권 에서도 해킹 공격으로 개인 정보 가 유출 됐습니다. 유출 된 정보 는 고객 약 3천8백 명의 계좌번호와 임직원 3만 5천여 명의 이름과 사번입니다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261107014452008?input=1195m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "https://imnews.imbc.com/replay/2026/nw1200/article/6863893_36967.html",
-                "press": "MBC"
-              }
-            ],
-            "images": [
-              "https://img0.yna.co.kr/photo/yna/YH/2026/11/07/PYH2026110701660001300_P4.jpg"
-            ],
-            "press": [
-              "연합뉴스",
-              "MBC"
-            ],
-            "headlines": [
-              "해킹 대책 문제없나…미래에셋증권도 3만9천여명 정보유출(종합)",
-              "미래에셋증권 해킹 ‥고객 3,800명 계좌번호 유출"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
-          }
-        },
-        {
-          "id": "naver-9",
-          "rank": 9,
-          "keyword": "베스트 아티스트 상 수상",
-          "title": "베스트 아티스트 상 수상",
-          "rawKeyword": "베스트 아티스트 상 수상",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 92,
-          "source": "naver",
-          "expansions": [
-            "베스트슬립",
-            "베스트셀러",
-            "베스트셀러 순위",
-            "베스트펜",
-            "베스트내과",
-            "일간베스트",
-            "베스트이비인후과",
-            "베스트 조끼"
-          ],
-          "expansionSeed": "베스트",
-          "insight": {
-            "titles": {
-              "seo": "베스트 아티스트 상 수상 최신 이슈와 핵심 내용 정리",
-              "home": "베스트 아티스트 상 수상, [포토]리센느, 베스트아티스트상 수상 - 일간스포츠 관련 확인할 점",
-              "topic": "베스트 아티스트 상 수상",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "‘2026 코리아 그랜드 뮤직 어워즈’(2026 KGMA) 첫날 아티스트 데이가 7일 오후 서울 구로구 고척스카이돔에서 펼쳐졌다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "트레저가 수상 소감을 말하고 있다.(사진=KGMA특별취재단) 트레저는 7일 서울 구로구 고척스카이돔에서 열린 ‘2026 KGMA’ 첫날 ‘ 아티스트 데이’에서 ‘ 베스트 아티스트 ’ 상을 받고 “소중한 상을 주셔서 감사드린다”고 소감을 밝혔다. 이어 이들은 “오늘 보여드릴 무대를 열심히 준비했다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://isplus.com/article/view/isp202611070222",
-                "press": "일간스포츠"
-              },
-              {
-                "url": "https://www.edaily.co.kr/News/Read?newsId=03703126645643424&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
-                "press": "이데일리"
-              }
-            ],
-            "images": [
-              "https://isplus.com/data/isp/image/2026/11/07/isp20261107000246.800x.0.jpg"
-            ],
-            "press": [
-              "일간스포츠",
-              "이데일리"
-            ],
-            "headlines": [
-              "[포토]리센느, 베스트아티스트상 수상 - 일간스포츠",
-              "트레저, ' 베스트 아티스트 ' 수상 …\"소중한 상 주셔서 감사\"[2026 KGMA]"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:54:16.375Z"
-          }
-        },
-        {
           "id": "naver-10",
           "rank": 10,
-          "keyword": "블루웨이브 쇼크 시총 증발",
-          "title": "블루웨이브 쇼크 시총 증발",
-          "rawKeyword": "블루웨이브 쇼크 시총 증발",
+          "keyword": "버밍엄 대 스완지 시티",
+          "title": "버밍엄 대 스완지 시티",
+          "rawKeyword": "버밍엄 대 스완지 시티",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 91,
           "source": "naver",
           "expansions": [
-            "블루웨이브 쇼크",
-            "블루웨이브뜻",
-            "미국 블루웨이브",
-            "블루웨이브 관련주",
-            "대구 블루웨이브",
-            "마끼다 블루웨이브",
-            "미 블루웨이브",
-            "블루웨이브 수혜주"
+            "버밍엄시티",
+            "버밍엄시티대학교",
+            "스완지시티",
+            "스완지시티 순위",
+            "스완지시티 유니폼",
+            "브라스 버밍엄",
+            "버밍엄 대학교",
+            "버밍엄 여행"
           ],
-          "expansionSeed": "블루웨이브",
+          "expansionSeed": "버밍엄",
           "insight": {
             "titles": {
-              "seo": "블루웨이브 쇼크 시총 증발 최신 이슈와 핵심 내용 정리",
-              "home": "블루웨이브 쇼크 시총 증발, \"'블루웨이브 쇼크'에 세계증시 시총 하루만에 4천800조원 증발\" 관련 확인할 점",
-              "topic": "블루웨이브 쇼크 시총 증발",
+              "seo": "버밍엄 대 스완지 시티 최신 이슈와 핵심 내용 정리",
+              "home": "버밍엄 대 스완지 시티, [공식발표]\"우리 엄지성 감히 누가 건드려\" 韓 유럽파 향한 인종차별 충격 사태에 스완지 감독 '분노'…몸푸는 EOM 향한 상대팬 관련 확인할 점",
+              "topic": "버밍엄 대 스완지 시티",
               "topicGroup": "네이버 실시간 검색어"
             },
             "facts": [
               {
-                "text": "여기에 6일 도쿄증권거래소 프라임 시장에서 77조엔(약 663조원) 규모의 시총 이 사라지는 등 미국 민주당이 AI 산업을 규제할 것이라는 전망에서 초래된 이른바 ' 블루웨이브 ' 쇼크 에 따른 시총 증발 규모가 더 커졌다.",
+                "text": "2026년 아이치-나고야 아시안게임에서 한국 축구에 금메달을 안긴 주역인 엄지성(24·스완지시티)이 소속팀으로 돌아가자마자 인종차별 피해를 당했다.",
                 "sourceIndex": 0
               },
               {
-                "text": "' 블루웨이브 (Blue Wave)'는 미국 민주당의 상징색인 파란색에서 유래한 표현이다. 민주당이 선거에서 압승하는 현상을 뜻한다.",
+                "text": "축구 국가대표 공격수 엄지성(24· 스완지 시티 )이 2경기 연속 골을 터뜨리며 팀 승리를 이끌었다. 백승호의 소속팀 버밍엄 시티 는 사우샘프턴과 1-1로 비겼고, 승점 6(1승3무)으로 9위에 자리했다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.yna.co.kr/view/AKR20261107028100073?input=1195m",
-                "press": "연합뉴스"
+                "url": "https://www.sportschosun.com/football/2026-10-14/202610140100088190005729",
+                "press": "스포츠조선"
               },
               {
-                "url": "http://www.inews24.com/view/2023693",
-                "press": "아이뉴스24"
+                "url": "https://www.news1.kr/sports/overseas-soccer/6276922",
+                "press": "뉴스1"
               }
             ],
             "images": [
-              "https://img1.yna.co.kr/photo/yna/YH/2026/11/06/PYH2026110612850001300_P4.jpg"
+              "https://www.sportschosun.com/article/html/2026/10/14/2026101401000881900057292.jpg"
             ],
             "press": [
-              "연합뉴스",
-              "아이뉴스24"
+              "스포츠조선",
+              "뉴스1"
             ],
             "headlines": [
-              "\"'블루웨이브 쇼크'에 세계증시 시총 하루만에 4천800조원 증발\"",
-              "' 블루웨이브 쇼크 '에 세계증시 시총 4800조원 증발 …AI주 급락"
+              "[공식발표]\"우리 엄지성 감히 누가 건드려\" 韓 유럽파 향한 인종차별 충격 사태에 스완지 감독 '분노'…몸푸는 EOM 향한 상대팬의 모욕성 발언→경기 일시중단",
+              "아시안게임 앞둔 엄지성, 2경기 연속 1골 1도움… 스완지 2-0 승리"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         }
       ]
@@ -690,7 +679,7 @@
               "‘전참시’ 신기루 , 첫 팬미팅"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -752,7 +741,7 @@
               "의사 집안 김광진 , 금수저끼리 어울리네‥ 매니저 는 인천 유명 학교 재단 ..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -814,7 +803,7 @@
               "오승근 , 데뷔 60주년 맞아 떠올린 故 김자옥 ‥“몰래 웁니다”(백투더뮤..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -870,7 +859,7 @@
               "로또 1등 20억씩 14명…자동 7명·수동 7명"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -932,7 +921,7 @@
               "120만 인파 환호 속 광안리 밤하늘 수놓은 불꽃… 부산불꽃축제 성황"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -986,7 +975,7 @@
               "흥행 대작에 스타 배우까지…연말 뮤지컬 대전 막오른다"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -1048,7 +1037,7 @@
               "단 한 번 스킨십 없이 지상에서 가장 은밀했던 사랑, 그 절제된 미학 '화..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -1110,7 +1099,7 @@
               "정미녀, 남편 전민기 여자 문제 폭로 …'속풀이쇼 동치미'서 밝혀"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-07T16:54:16.375Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -1171,7 +1160,7 @@
               "[단독] 귀갓길에 날벼락... 온수관 파열 구멍에 빠져 중화상"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -1197,43 +1186,43 @@
           "insight": {
             "titles": {
               "seo": "김소니아 코 부상 이탈 최신 이슈와 핵심 내용 정리",
-              "home": "김소니아 코 부상 이탈, [부상] 김소니아, 5분 만에 코 부상으로 이탈…경기 도중 병원행 관련 확인할 점",
+              "home": "김소니아 코 부상 이탈, [프로농구] 신한은행, '김소니아 코 부상' BNK에 68-59 승리…우리은행도 첫 승 관련 확인할 점",
               "topic": "김소니아 코 부상 이탈",
               "topicGroup": "다음 실시간 검색어"
             },
             "facts": [
               {
-                "text": "[점프볼=부산/최창환 기자] BNK가 개막 2경기 만에 대형 악재를 맞았다. 핵심 전력 박혜진에 이어 김소니아마저 부상으로 이탈했다.부산 BNK 썸은 7일 부산사직체육관에서 인천 신한은행을 상대로 KB스타뱅킹 2026~2027 여자프로농구 정규리그 홈 개막전을 치렀다.박혜진이 엉덩이 근육통으로 결장한 BNK는 경기 개시 5분 36초 만에 또 하나의 악재를 맞았다. 김소니아가 코 부상을 입은 것.",
+                "text": "[서울=뉴스핌] 유다연 기자=꼴찌의 반란이 펼쳐졌다.",
                 "sourceIndex": 0
               },
               {
-                "text": "[서울=뉴스핌] 부산 BNK 김소니아 가 7일 부산 사직실내체육관에서 열린 신한은행과 2026~2027 경기 중 코 부상 으로 경기장을 들어가고 있다.",
+                "text": "핵심 전력 박혜진에 이어 김소니아 마저 부상 으로 이탈 했다. 박혜진이 엉덩이 근육통으로 결장한 BNK는 경기 개시 5분 36초 만에 또 하나의 악재를 맞았다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://m.sports.naver.com/basketball/article/065/0000304206",
-                "press": "점프볼"
-              },
-              {
                 "url": "https://www.newspim.com/news/view/20261107000092",
                 "press": "뉴스핌"
+              },
+              {
+                "url": "https://m.sports.naver.com/basketball/article/065/0000304206",
+                "press": "점프볼"
               }
             ],
             "images": [
-              "https://imgnews.pstatic.net/image/065/2026/11/07/0000304206_001_20261107150512996.jpg"
+              "https://img.newspim.com/news/2026/11/07/2611071736554480_532_tc.jpg"
             ],
             "press": [
-              "점프볼",
-              "뉴스핌"
+              "뉴스핌",
+              "점프볼"
             ],
             "headlines": [
-              "[부상] 김소니아, 5분 만에 코 부상으로 이탈…경기 도중 병원행",
-              "[프로농구] 신한은행, ' 김소니아 코 부상 ' BNK에 68-59 승리…우승 후보..."
+              "[프로농구] 신한은행, '김소니아 코 부상' BNK에 68-59 승리…우리은행도 첫 승",
+              "[ 부상 ] 김소니아 , 5분 만에 코 부상 으로 이탈 …경기 도중 병원행"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         }
       ]
@@ -1245,201 +1234,15 @@
         {
           "id": "nate-1",
           "rank": 1,
-          "keyword": "구속 도망 염려",
-          "title": "구속 도망 염려",
-          "rawKeyword": "구속 도망 염려",
+          "keyword": "포스코 잠정합의안 부결",
+          "title": "포스코 잠정합의안 부결",
+          "rawKeyword": "포스코 잠정합의안 부결",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 100,
           "source": "nate",
           "expansions": [
-            "구속 뜻",
-            "구속복",
-            "김감전 구속",
-            "댄서 구속",
-            "구속구",
-            "아름다운 구속",
-            "구속사",
-            "구속력"
-          ],
-          "expansionSeed": "구속",
-          "insight": {
-            "titles": {
-              "seo": "구속 도망 염려 최신 이슈와 핵심 내용 정리",
-              "home": "구속 도망 염려, '세브란스병원 흉기난동' 50대 여성 구속…법원 \"도망 염려\"(종합) 관련 확인할 점",
-              "topic": "구속 도망 염려",
-              "topicGroup": "네이트 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "(서울=연합뉴스) 윤민혁 기자 = 신촌 세브란스병원에서 정신건강의학과 의사에게 흉기를 휘두른 50대 여성이 구속됐다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "서울서부지법은 박석근 부장판사는 7일 오후 3시부터 살인 혐의를 받는 60대 남성 A씨에 대한 구속 전 피의자 심문(영장실질심사)을 진행한 뒤 \" 도망 할 염려 가 있다\"며 구속 영장을 발부했다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261107034551004?input=1195m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "https://www.newsis.com/view/NISX20261107_0003859020",
-                "press": "뉴시스"
-              }
-            ],
-            "images": [
-              "https://img4.yna.co.kr/photo/yna/YH/2026/11/07/PYH2026110703000001300_P4.jpg"
-            ],
-            "press": [
-              "연합뉴스",
-              "뉴시스"
-            ],
-            "headlines": [
-              "'세브란스병원 흉기난동' 50대 여성 구속…법원 \"도망 염려\"(종합)",
-              "'은평 스토킹 살해' 60대 남성 구속 …법원 \" 도망 염려 \"(종합)"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:54:16.375Z"
-          }
-        },
-        {
-          "id": "nate-2",
-          "rank": 2,
-          "keyword": "삼성 우승까지 1승",
-          "title": "삼성 우승까지 1승",
-          "rawKeyword": "삼성 우승까지 1승",
-          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
-          "priority": 99,
-          "source": "nate",
-          "expansions": [
-            "삼성전자",
-            "삼성 라이온즈",
-            "삼성 kt",
-            "삼성전자 주가",
-            "삼성 기아",
-            "삼성 서비스센터",
-            "삼성sdi",
-            "삼성 e&a"
-          ],
-          "expansionSeed": "삼성",
-          "insight": {
-            "titles": {
-              "seo": "삼성 우승까지 1승 최신 이슈와 핵심 내용 정리",
-              "home": "삼성 우승까지 1승, 19세 신인 장찬희 ‘깜짝 호투’... 삼성, 우승까지 1승 남았다 관련 확인할 점",
-              "topic": "삼성 우승까지 1승",
-              "topicGroup": "네이트 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "대구=양승수 기자대구=강우석 기자입력 2026.11.07. 17:17업데이트 2026.11.07. 20:0907일 대구 수성구 삼성라이온즈파크에서 열린 2026 KBO 포스트시즌 한국시리즈 4차전 KT 위즈와 삼성 라이온즈 경기, 4회초 삼성 선발투수 장찬희가 공을 던지고 있다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "삼성 이 우승까지 1승 만을 남겨둔 채 양 팀은 8일 오후 2시 같은 장소에서 한국시리즈 5차전을 펼친다. 삼성 은 불펜에서 선발로 돌아온 원태인이 우승 확정을 위해 마운드에 오른다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.chosun.com/sports/baseball/2026/11/07/ACI2FFRMDRCJNH3VVCSYMOTUQY/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
-                "press": "조선일보"
-              },
-              {
-                "url": "https://www.sedaily.com/article/20111468?ref=naver",
-                "press": "서울경제"
-              }
-            ],
-            "images": [
-              "https://www.chosun.com/resizer/v2/PS42XSR5TRBC7I2G6AEABVQDRY.jpg?auth=39d5eb8f3073e074f865cccf2f7e4db9623c851bb01a747b240c1b11f7d31df7&width=1200&height=630&smart=true"
-            ],
-            "press": [
-              "조선일보",
-              "서울경제"
-            ],
-            "headlines": [
-              "19세 신인 장찬희 ‘깜짝 호투’... 삼성, 우승까지 1승 남았다",
-              "“ 1승 남았다”… 삼성 , 12년 만에 KS 우승 에 바짝"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:54:16.375Z"
-          }
-        },
-        {
-          "id": "nate-3",
-          "rank": 3,
-          "keyword": "베스트 아티스트 수상",
-          "title": "베스트 아티스트 수상",
-          "rawKeyword": "베스트 아티스트 수상",
-          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
-          "priority": 98,
-          "source": "nate",
-          "expansions": [
-            "베스트슬립",
-            "베스트셀러",
-            "베스트셀러 순위",
-            "베스트펜",
-            "베스트내과",
-            "일간베스트",
-            "베스트이비인후과",
-            "베스트 조끼"
-          ],
-          "expansionSeed": "베스트",
-          "insight": {
-            "titles": {
-              "seo": "베스트 아티스트 수상 최신 이슈와 핵심 내용 정리",
-              "home": "베스트 아티스트 수상, [포토]리센느, 베스트아티스트상 수상 - 일간스포츠 관련 확인할 점",
-              "topic": "베스트 아티스트 수상",
-              "topicGroup": "네이트 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "‘2026 코리아 그랜드 뮤직 어워즈’(2026 KGMA) 첫날 아티스트 데이가 7일 오후 서울 구로구 고척스카이돔에서 펼쳐졌다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "(사진=KGMA특별취재단) 리센는 7일 서울 구로구 고척스카이돔에서 열린 ‘2026 KGMA’ 첫날 ‘아티스트 데이’에서 ‘ 베스트 아티스트 ’ 수상 자가 됐다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://isplus.com/article/view/isp202611070222",
-                "press": "일간스포츠"
-              },
-              {
-                "url": "https://www.edaily.co.kr/News/Read?newsId=03463686645643424&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
-                "press": "이데일리"
-              }
-            ],
-            "images": [
-              "https://isplus.com/data/isp/image/2026/11/07/isp20261107000246.800x.0.jpg"
-            ],
-            "press": [
-              "일간스포츠",
-              "이데일리"
-            ],
-            "headlines": [
-              "[포토]리센느, 베스트아티스트상 수상 - 일간스포츠",
-              "리센느, ' 베스트 아티스트 ' 수상 …\"항상 열심히 무대할 것\"[2026 KGMA]"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:54:16.375Z"
-          }
-        },
-        {
-          "id": "nate-4",
-          "rank": 4,
-          "keyword": "포스코 노조 부결",
-          "title": "포스코 노조 부결",
-          "rawKeyword": "포스코 노조 부결",
-          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
-          "priority": 97,
-          "source": "nate",
-          "expansions": [
-            "포스코 노조",
-            "포스코노조",
+            "포스코 잠정합의안",
+            "잠정합의안 부결",
             "포스코퓨처엠",
             "포스코홀딩스",
             "포스코dx",
@@ -1450,44 +1253,228 @@
           "expansionSeed": "포스코",
           "insight": {
             "titles": {
-              "seo": "포스코 노조 부결 최신 이슈와 핵심 내용 정리",
-              "home": "포스코 노조 부결, 포스코 노조, 임협 잠정안 부결…노사 갈등 장기화하나 관련 확인할 점",
-              "topic": "포스코 노조 부결",
+              "seo": "포스코 잠정합의안 부결 최신 이슈와 핵심 내용 정리",
+              "home": "포스코 잠정합의안 부결, 포스코 노조, 잠정합의안 찬반투표 부결…찬성 49%·반대 51% 관련 확인할 점",
+              "topic": "포스코 잠정합의안 부결",
               "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
               {
-                "text": "포스코 노조가 올해 임금협상 잠정합의안을 부결시키면서 5개월 가까이 이어진 교섭이 원점으로 돌아갔다. 창사 이래 첫 부분파업까지 겪으며 어렵게 마련한 합의안이 조합원 투표 문턱을 넘지 못하면서 노사 갈등이 장기화할 수 있다는 우려가 커지고 있다.",
+                "text": "포스코 노사가 마련한 임금·단체협약 잠정합의안이 노동조합 찬반투표에서 부결됐다.",
                 "sourceIndex": 0
               },
               {
-                "text": "포스코 노사가 마련한 올해 임금교섭 잠정 합의안이 조합원 찬반투표에서 부결 됐습니다. 대표 교섭 노조 인 포스코 노동조합은 오늘(7일) 조합원 투표 결과 찬성 48.3%, 반대 51.7%로 합의안이 최종 부결 됐다고 밝혔습니다.",
+                "text": "포스코 노사의 2026년도 임금교섭 잠정 합의안 이 조합원 찬반 투표에서 부결 됐다. 7일 포스코 노사에 따르면 이번 찬반 투표에선 기본금 2.6% 인상과 일시금 600만 원 지급 등에 대한 조합원 의견을 물었다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.sedaily.com/article/20111465?ref=naver",
-                "press": "서울경제"
+                "url": "https://www.newsis.com/view/NISX20261107_0003858993",
+                "press": "뉴시스"
               },
               {
-                "url": "https://www.ytn.co.kr/_ln/0115_202611071806272631",
-                "press": "YTN"
+                "url": "https://www.news1.kr/local/daegu-gyeongbuk/6346481",
+                "press": "뉴스1"
               }
             ],
             "images": [
-              "https://wimg.sedaily.com/news/cms/2026/11/07/news-p.v1.20261107.986ea3fbe03f4c7f9872a879f0c66c4d_Z1.jpg"
+              "https://img1.newsis.com/2026/09/16/NISI20260916_0021440272_web.jpg"
             ],
             "press": [
-              "서울경제",
-              "YTN"
+              "뉴시스",
+              "뉴스1"
             ],
             "headlines": [
-              "포스코 노조, 임협 잠정안 부결…노사 갈등 장기화하나",
-              "포스코 노사 임금 잠정합의안 부결 ...반대 51.7%"
+              "포스코 노조, 잠정합의안 찬반투표 부결…찬성 49%·반대 51%",
+              "포스코 노조, 임금교섭 잠정 안 '반대 51%' 부결 …갈등 장기화 우려"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:54:16.375Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
+          }
+        },
+        {
+          "id": "nate-2",
+          "rank": 2,
+          "keyword": "로또 1등 14명",
+          "title": "로또 1등 14명",
+          "rawKeyword": "로또 1등 14명",
+          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
+          "priority": 99,
+          "source": "nate",
+          "expansions": [
+            "로또 1등",
+            "로또 1등 당첨금",
+            "로또1등도출근",
+            "생방송 행복드림 로또 6/45",
+            "로또당첨번호",
+            "로또 모바일구매",
+            "로또판매점",
+            "로또당첨지역"
+          ],
+          "expansionSeed": "로또",
+          "insight": {
+            "titles": {
+              "seo": "로또 1등 14명 최신 이슈와 핵심 내용 정리",
+              "home": "로또 1등 14명, 로또 1등 14명 '대박'…1인당 20억씩 받는다 관련 확인할 점",
+              "topic": "로또 1등 14명",
+              "topicGroup": "네이트 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "제1249회 로또 복권 추첨에서 1등 당첨자 14명 이 나왔다. 로또 복권 운영사 동행복권은 7일 이번 회차 1등 당첨번호로 ‘2, 11, 16, 25, 34, 35’가 뽑혔다고 밝혔다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "7일 제1249회 로또 1등 당첨 번호는 '2·11·16·25·34·35'로 결정됐다. 당첨 번호 6개를 모두 맞힌 1등 은 14명 이다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.hankyung.com/article/2026110723997",
+                "press": "한국경제"
+              },
+              {
+                "url": "https://www.news1.kr/society/incident-accident/6346549",
+                "press": "뉴스1"
+              }
+            ],
+            "images": [
+              "https://img.hankyung.com/photo/202611/01.46344432.1.jpg"
+            ],
+            "press": [
+              "한국경제",
+              "뉴스1"
+            ],
+            "headlines": [
+              "로또 1등 14명 '대박'…1인당 20억씩 받는다",
+              "로또 1등 20억씩 14명 …자동 7명·수동 7명"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-07T17:09:17.278Z"
+          }
+        },
+        {
+          "id": "nate-3",
+          "rank": 3,
+          "keyword": "故 전유성",
+          "title": "故 전유성",
+          "rawKeyword": "故 전유성",
+          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
+          "priority": 98,
+          "source": "nate",
+          "expansions": [
+            "개그맨 전유성",
+            "전유성 나무위키",
+            "전유성 진미령",
+            "진미령 전유성",
+            "불후의명곡 전유성",
+            "전유성 김신영"
+          ],
+          "expansionSeed": "전유성",
+          "insight": {
+            "titles": {
+              "seo": "故 전유성 최신 이슈와 핵심 내용 정리",
+              "home": "故 전유성, \"한물간 것 같다\" 김신영 푸념했는데...故 전유성 위로에 '뭉클' 관련 확인할 점",
+              "topic": "故 전유성",
+              "topicGroup": "네이트 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "김신영이 故 전유성과의 특별한 우정을 떠올린다. 오늘(7일) 방송되는 KBS2 '불후의 명곡'(연출 김형석 최승범/이하 '불후') 779회는 대한민국 코미디의 전설 故 전유성의 1주기를 맞아 '전유성 없는 전유성' 특집으로 채워진다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "양희은이 고( 故 ) 전유성 을 향한 그리움을 표했다. 7일 오후 방송된 KBS2 ‘불후의 명곡’은 ‘전유성 없는 전유성 특집’ 편으로 꾸며진 가운데 전유성과 55년의 우정을 나눈 양희은의 ‘사랑 그 쓸쓸함에 대하여’ 무대가 조성됐다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.sportschosun.com/entertainment/2026-11-07/202611070100049090004946",
+                "press": "스포츠조선"
+              },
+              {
+                "url": "https://www.mk.co.kr/article/12201502",
+                "press": "매일경제"
+              }
+            ],
+            "images": [
+              "https://www.sportschosun.com/article/html/2026/11/07/2026110701000490900049462.jpg"
+            ],
+            "press": [
+              "스포츠조선",
+              "매일경제"
+            ],
+            "headlines": [
+              "\"한물간 것 같다\" 김신영 푸념했는데...故 전유성 위로에 '뭉클'",
+              "“형! 듣고 있어?”… 양희은, 55년 우정 故 전유성 향한 그리움 (‘불후..."
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-07T17:09:17.278Z"
+          }
+        },
+        {
+          "id": "nate-4",
+          "rank": 4,
+          "keyword": "닥터X",
+          "title": "닥터X",
+          "rawKeyword": "닥터X",
+          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
+          "priority": 97,
+          "source": "nate",
+          "expansions": [
+            "닥터탐정",
+            "닥터트루",
+            "닥터틸즈",
+            "닥터텅스",
+            "닥터탱글",
+            "닥터텅스 치실",
+            "닥터튠즈",
+            "닥터X : 하얀 마피아의 시대"
+          ],
+          "expansionSeed": "닥터X",
+          "insight": {
+            "titles": {
+              "seo": "닥터X 최신 이슈와 핵심 내용 정리",
+              "home": "닥터X, &lsquo;닥터X&rsquo; 이정은, 알고 보니 김지원 스승&hellip;시청률 반등 도전 - 일간스포츠 관련 확인할 점",
+              "topic": "닥터X",
+              "topicGroup": "네이트 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "‘닥터X : 하얀 마피아의 시대’ 이정은이 김지원의 스승이란 반전이 드러나며 합동 수술에 나선다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "SBS 금토드라마 ‘ 닥터X : 하얀 마피아의 시대’가 김지원의 처절한 고군분투와 반전의 엔딩으로 안방극장을 숨죽이게 했다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://isplus.com/article/view/isp202611070040",
+                "press": "일간스포츠"
+              },
+              {
+                "url": "https://sports.khan.co.kr/article/202611070018003?pt=nv",
+                "press": "스포츠경향"
+              }
+            ],
+            "images": [
+              "https://isplus.com/data/isp/image/2026/11/07/isp20261107000036.800x.0.jpg"
+            ],
+            "press": [
+              "일간스포츠",
+              "스포츠경향"
+            ],
+            "headlines": [
+              "&lsquo;닥터X&rsquo; 이정은, 알고 보니 김지원 스승&hellip;시청률 반등 도전 - 일간스포츠",
+              "‘ 닥터X ’ 이정은, 김지원 스승이었다… 제자 위기에 “외과의 장희숙”..."
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -1515,11 +1502,11 @@
               "seo": "100일의 거짓말 최신 이슈와 핵심 내용 정리",
               "home": "100일의 거짓말, &lsquo;100일의 거짓말&rsquo; 결전의 날 관련 확인할 점",
               "topic": "100일의 거짓말",
-              "topicGroup": "네이버 실시간 검색어"
+              "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
               {
-                "text": "‘100일의 거짓말’ 구국단의 세 번째 작전이 마침내 시작된다.",
+                "text": "TV ‘100일의 거짓말’ 결전의 날 송미희 기자 2026-11-07 09:27:21 자세히 알아보기편성표 확인영화 감상하기부업 정보 찾기상식 퀴즈 풀기채널 실시간 시청OTT 이용권 신청TV라디오 방송 듣기 ‘100일의 거짓말’ 결전의 날 (제공: tvN)‘100일의 거짓말’ 구국단의 세 번째 작전이 마침내 시작된다. tvN 20주년 특별기획 토일드라마 ‘100일의 거짓말’ 측은 9회 방송을 앞둔 7일 조선총독부 기송관 개통식 행사장에 모인 이가경(김유정 분), 김태웅/사토 히데오(박진영 분), 유소란(김현주 분), 유필립(이무생 분), 사토 신이치(진선규 분)의 스틸컷을 공개했다.",
                 "sourceIndex": 0
               },
               {
@@ -1549,7 +1536,7 @@
               "' 100일의 거짓말 ' 더 짙어진 4인의 로맨스…포옹 포스터 공개"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         }
       ]
@@ -1619,7 +1606,7 @@
               "전세사기 보증금 '3분의 1 보장'…나는 얼마 받을까"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -1683,7 +1670,7 @@
               "스페이스X '0주 배정' 미래에셋 제재 착수…1조원 청약 투자자 보상은"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -1747,7 +1734,7 @@
               "이란 공격 급증 에도 호르무즈 원유수송은 현상 유지"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -1811,7 +1798,7 @@
               "LH 임대주택 150만호 에도…공급 목표, 실제 입주로 이어질까"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -1873,7 +1860,7 @@
               "[노현우의 채권분석] 한은 , 괜찮은 거죠"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         }
       ]
@@ -1932,7 +1919,7 @@
               "'강정호도 아니라는데' 키움은 또 틀렸고 NC는 옳았다...데이비슨, 확실히 하락세, 키움 2용타 완전 실패"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -1995,7 +1982,7 @@
               "'韓 수비 에이스 ' 김민재 미쳤다 , 독일 생활 마침표 찍고 EPL 입성할까....."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -2048,7 +2035,7 @@
               "403 Forbidden"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-07T16:54:16.375Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -2113,7 +2100,7 @@
               "[공식발표] ' 손흥민 선발 명단 제외 ' LAFC, 콜로라도전 'BEST 11' 공개!…..."
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-07T16:54:16.375Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -2168,7 +2155,7 @@
               "\"와, 대박이다!\" 7번 물려준 그리즈만도 환호성...'데뷔전 데뷔골' 이강인 '후계자 자격' 완벽 증명"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -2223,7 +2210,7 @@
               "'와' 한국 야구 대박 터지나! 17억 이도류 유망주 156km '쾅'→2이닝 4K 무실점 호투...\"정말 인상적\" 美 극찬 이어져"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -2278,7 +2265,7 @@
               "[오피셜] 이럴수가, 배지환 ML 생존 벼랑 끝 몰렸다! 30개 구단 모두 외면…웨이버 통과→트리플A 이관 \"FA 선택할 듯\" 美 전망"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -2333,7 +2320,7 @@
               "안세영이 돌아왔다! 압승, 쾌승!…유럽 최강자 블리치펠트 43분 만에 2-0 완파→세계선수권 8강행 성공"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-07T16:54:16.375Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -2388,7 +2375,7 @@
               "[오피셜] '충격' 아슬아슬했던 전북현대 끝내 무너졌다...디펜딩 챔피언 코리아컵 16강 탈락, K3 당진 '자이언트 킬링' 성공→8개 팀 생존"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -2453,7 +2440,7 @@
               "' 손흥민 과 한솥밥 먹었는데' 토트넘 역대 최고 이적료 주인공의 몰락…..."
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-07T16:54:16.375Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         }
       ]
@@ -2521,7 +2508,7 @@
               "양산 아이돌봄 사 신규 채용"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -2577,7 +2564,7 @@
               "경북 문화 관광공사, 경주 맛집·야경 묶은 '누들패스' 출시"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -2632,7 +2619,7 @@
               "제주시, 장애인 자립자금 대여 사업 신청 접수"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -2684,7 +2671,7 @@
               "최현덕 남양주시장, 농지 규제부터 요양비 부담까지 제도 손질 촉구"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -2746,7 +2733,7 @@
               "발달 장애인 작가 은혜의 눈물… '권리중심 공공 일자리 ' 예산 삭감의 이..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -2773,7 +2760,7 @@
             },
             "facts": [
               {
-                "text": "현재 고혈압 · 당뇨병 등록관리사업 은 전국 226개 기초자치단체 가운데 19곳에서만 운영되고 있다. 사업 시행 지역이 전체의 8.4%에 그쳐 지역별 지원 격차가 발생해 왔다.",
+                "text": "광고 제주시 교육센터 2027년까지 운영 유지65세 이상 진료·약제비 지원 전환건강관리 실천 시 연 최대 8만원2028년 통합센터 전환… 대상 확대 지난해 12월 3일 서울대학교 암연구소에서 열린 '중증 당뇨병 관리 강화, 분류체계 개선을 위한 전략 모색' 토론회 참석자들이 기념촬영하고 있다. 질병관리청은 제주를 포함한 전국 19개 지역의 고혈압·당뇨병 등록교육센터를 2028년부터 만성질환 통합관리센터로 전환하는 방안을 추진하고 있다. 사진=서울대 암연구소 【파이낸셜뉴스 제주=정용복 기자】 제주시 고혈압·당뇨병 등록환자에게 제공하던 진료비·약제비 정액 감면이 건강관리 실천에 따라 포인트를 지급하는 방식으로 바뀐다.",
                 "sourceIndex": 0
               },
               {
@@ -2803,7 +2790,7 @@
               "고혈압 · 당뇨병 관리 전 연령으로 확대…내년 7월 통합센터 운영"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -2867,7 +2854,7 @@
               "광주도시공사, 주거취약계층 김장 나눔·달빛동맹 농촌 봉사… 따뜻한 ..."
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-07T16:54:16.375Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -2921,7 +2908,7 @@
               "\"예술인 생활안정자금 융자 사업, 수도권 집중\"… 비수도권 불편"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -2948,7 +2935,7 @@
             },
             "facts": [
               {
-                "text": "경남 진주시는 (사)경상남도어린이집연합회가 올해 첫 주관해 시행한 '2026년 보육사업 우수 시부' 평가에서 우수 시부로 선정됐다고 3일 밝혔다.",
+                "text": "[진주=뉴시스] 진주시, '2026년 보육사업 우수 시부' 선정.(사진=진주시 제공).2026.11.03.photo@newsis.com *재판매 및 DB 금지 [진주=뉴시스] 정경규 기자 = 경남 진주시는 (사)경상남도어린이집연합회가 올해 첫 주관해 시행한 '2026년 보육사업 우수 시부' 평가에서 우수 시부로 선정됐다고 3일 밝혔다. 시는 지난 2일 창원대학교 이룸홀에서 열린 '2026년 경남 어린이집 보육교직원 한마음 워크숍'에서 '2026년 보육사업 우수 시부'에 선정돼 감사패를 받았다. 이번 수상은 올해 처음 시행된 가운데 진주시가 첫 수상 지자체로 선정됐다는 점에서 의미가 크다.",
                 "sourceIndex": 0
               },
               {
@@ -2978,7 +2965,7 @@
               "[경남 브리핑 모음(11월5일)] 진주시, 경남 첫 ‘ 보육 사업 우수 시부’ ..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -3042,7 +3029,7 @@
               "지분적립형 '전국 1호' 어디…국토부 '첫 분양 ' 발표에 반박 나선 GH"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         }
       ]
@@ -3106,7 +3093,7 @@
               "박서진 父, 아내와 싸우고 가출에도..\"엄마도 사줘야겠다\" 반전 사랑꾼"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -3164,7 +3151,7 @@
               "최수종, ♥하희라에 첫눈에 반했다 \"스케줄 안 맞았는데 수락\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -3222,7 +3209,7 @@
               "신기루, 서장훈 추천에 소속사 이적 \"날 애착인형으로 생각하는 듯\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -3247,8 +3234,8 @@
             "김영욱"
           ],
           "expansionSeed": "김영우",
-          "ago": "1시간 전",
-          "agoMinutes": 60,
+          "ago": "2시간 전",
+          "agoMinutes": 120,
           "publishedLabel": "2026.11.08 ・ 00:04",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026110800032676940_1.jpg",
           "insight": {
@@ -3280,7 +3267,7 @@
               "스윗소로우 김영우, 연세대 교수 됐다..전현무 \"나랑 수업 같이 들어\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -3337,7 +3324,7 @@
               "김광진 매니저, 알고 보니 와세다대 출신·학교 재단 자제 \"학력 의미 NO\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -3394,7 +3381,7 @@
               "김영희, AV 배우에 DM 보내 성인영화 찍었다..\"음지의 봉준호\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -3451,7 +3438,7 @@
               "김영희, 임우일에 김신영 소개팅 주선..\"구썸녀의 인수인계\" 폭소"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -3508,7 +3495,7 @@
               "'라이어' 유연석, 서현진에 \"거짓말 멈춰\" 호소하더니..옥자연 집 침입 '충격'"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -3565,7 +3552,7 @@
               "'라이어' 서현진, 과거 父 친구에 성범죄 피해..거짓말 탐지기 '거짓' 이유"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         },
         {
@@ -3622,11 +3609,11 @@
               "'라이어' 서현진, '꽃뱀 교사' 낙인..학교서 쫓겨날 위기 \"제 인생은요?\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-07T16:09:03.484Z"
+            "collectedAt": "2026-11-07T17:09:17.278Z"
           }
         }
       ]
     }
   ],
-  "updatedAt": "2026-11-07T16:54:53.931Z"
+  "updatedAt": "2026-11-07T17:11:40.255Z"
 }
