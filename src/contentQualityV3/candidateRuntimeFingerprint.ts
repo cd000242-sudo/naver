@@ -249,6 +249,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/content/materialNarrationStrip.ts',
   'src/content/materialTierNotice.ts',
   'src/content/mobileLineBalance.ts',
+  'src/content/naverMobileSearchParse.ts',
   'src/content/neoHookTitles.ts',
   'src/content/numericGroundingCheck.ts',
   'src/content/officialExposureRubric.ts',

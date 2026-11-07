@@ -2,6 +2,7 @@ import { callNaverSearch, naverSearchAvailable, resolveAllNaverCredentials } fro
 import { isEmptyProductCrawl } from './crawler/storeCrawlSanity.js';
 import { isSearchRedirectedToHome, looksLikeEmptySearchResult } from './content/searchRedirectedHome.js';
 import { narrowSearchQueries } from './content/searchQueryNarrowing.js';
+import { parseNaverMobileSearchSnippets } from './content/naverMobileSearchParse.js';
 import type { NaverSearchParams, NaverSearchType } from './naver/index.js';
 import { orderFullTextCandidates } from './content/fullTextCandidateOrder.js';
 import { assessQueryCoverage, mergeCandidateRounds } from './content/researchRounds.js';
@@ -8239,20 +8240,9 @@ export async function collectContentFromPlatforms(
             if (resp.ok) {
               const html = await resp.text();
 
-              // 검색 결과에서 제목(class="api_txt_lines")과 설명(class="api_txt_lines dsc_txt") 추출
-              const titleMatches = html.match(/class="api_txt_lines[^"]*"[^>]*>([^<]+)</g) || [];
-              const descMatches = html.match(/class="api_txt_lines dsc_txt[^"]*"[^>]*>([^<]+)</g) || [];
-
-              // HTML 태그 제거 + 디코딩
-              const cleanText = (raw: string): string =>
-                raw.replace(/<[^>]*>/g, '').replace(/&[^;]+;/g, ' ').replace(/class="[^"]*"/g, '').replace(/>/g, '').trim();
-
-              for (let idx = 0; idx < Math.max(titleMatches.length, descMatches.length) && idx < 15; idx++) {
-                const title = titleMatches[idx] ? cleanText(titleMatches[idx]) : '';
-                const desc = descMatches[idx] ? cleanText(descMatches[idx]) : '';
-                if (desc.length > 30) {
-                  contentParts.push(title ? `【${title}】\n${desc}` : desc);
-                }
+              // [2026-11-07] Legacy api_txt_lines markup is gone; the parser reads both old and new markup.
+              for (const { title, description } of parseNaverMobileSearchSnippets(html)) {
+                contentParts.push(title ? `【${title}】\n${description}` : description);
               }
             }
           } catch (singleErr) {
