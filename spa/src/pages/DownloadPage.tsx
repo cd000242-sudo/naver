@@ -211,6 +211,8 @@ function DownloadCard({ productKey, siteContent, picked = false }: { productKey:
     const [shake, setShake] = useState(false);
     const [loading, setLoading] = useState(false);
     const [urlMissing, setUrlMissing] = useState(false);
+    // [2026-11-07] Password stays required, but it is shown on request so users need not ask the owner.
+    const [showPw, setShowPw] = useState(false);
     const [downloadKey, setDownloadKey] = useState(() => getPreferredDownload(product.downloads).key);
     const selectedDownload = product.downloads.find((item) => item.key === downloadKey) || product.downloads[0];
 
@@ -348,6 +350,19 @@ function DownloadCard({ productKey, siteContent, picked = false }: { productKey:
                         )}
                     </a>
                 </div>
+                <button
+                    type="button"
+                    onClick={() => setShowPw((v) => !v)}
+                    aria-expanded={showPw}
+                    style={{ marginTop: 10, minHeight: 44, padding: '10px 14px', width: '100%', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.14)', borderRadius: 10, color: 'rgba(255,255,255,0.85)', fontSize: 15, fontWeight: 700, cursor: 'pointer' }}
+                >
+                    🔑 {showPw ? '비밀번호 숨기기' : '비밀번호 보기'}
+                </button>
+                {showPw && (
+                    <p style={{ marginTop: 8, fontSize: 16, color: 'rgba(255,255,255,0.85)' }}>
+                        다운로드 비밀번호: <strong style={{ color: '#fff', background: 'rgba(201,168,76,0.3)', padding: '2px 10px', borderRadius: 4, letterSpacing: '0.08em' }}>{DOWNLOAD_PW}</strong> — 위 칸에 넣고 받으세요
+                    </p>
+                )}
                 {error && <p style={{ marginTop: 8, color: '#ff3b5c', fontSize: 12, fontWeight: 600 }}>비밀번호가 올바르지 않습니다.</p>}
                 {urlMissing && <p style={{ marginTop: 8, color: '#ff3b5c', fontSize: 12, fontWeight: 600 }}>이 버전의 다운로드 주소가 설정되지 않았습니다. 다른 항목을 선택하거나 1:1 문의로 알려주세요.</p>}
             </div>
