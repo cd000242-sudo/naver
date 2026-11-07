@@ -51,8 +51,8 @@ const routes = [
   },
   {
     path: 'chatbots',
-    title: '무료 제미나이 챗봇 | Leaders Pro',
-    description: '무료 제미나이 챗봇으로 글쓰기를 시작하세요. 부티크 인포의 글쓰기 프롬프트 페이지로 바로 연결합니다.',
+    title: '무료 챗봇·프롬프트 | Leaders Pro',
+    description: '글쓰기를 도와줄 무료 제미나이 챗봇과 네이버 무료 프롬프트를 바로 열어 쓰세요.',
   },
   {
     path: 'reviews',
@@ -63,6 +63,16 @@ const routes = [
     path: 'community',
     title: '커뮤니티 | Leaders Pro',
     description: 'Leaders Pro 공지, 업데이트, 사용 팁과 커뮤니티 소식을 확인하세요.',
+  },
+  {
+    path: 'login',
+    title: '로그인 | Leaders Pro',
+    description: 'Leaders Pro 계정으로 로그인하고 LEWORD와 커뮤니티를 이용하세요.',
+  },
+  {
+    path: 'signup',
+    title: '회원가입 | Leaders Pro',
+    description: 'Leaders Pro 커뮤니티 회원가입. 아이디와 비밀번호만으로 가입할 수 있습니다.',
   },
   {
     path: 'lookup',
