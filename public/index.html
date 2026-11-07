@@ -1728,6 +1728,27 @@
                         </p>
                     </div>
 
+                    <!-- [2026-11-07] 풀오토 발행 화면의 제목(썸네일)·소제목 텍스트 포함: 새 설정이 아니라 이미지 탭·풀오토 이미지 설정 창과 같은 값
+                         (localStorage thumbnailTextInclude, config.headingImageTextInclude). 풀오토 모드일 때만 보임 (tailUIUtils.syncPublishMode) -->
+                    <div id="fullauto-image-text-options"
+                        style="display: none; background: var(--bg-secondary); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-light); margin-bottom: 1.5rem;">
+                        <div style="margin-bottom: 0.5rem; font-weight: 600; color: var(--text-strong); font-size: 0.9rem;">🖼️ 이미지 글자</div>
+                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.85rem; color: var(--text-strong); margin-bottom: 0.35rem;">
+                            <input type="checkbox" id="fullauto-thumbnail-text-option"
+                                style="width: 16px; height: 16px; accent-color: var(--primary);">
+                            <span>제목(썸네일) 텍스트 포함</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.85rem; color: var(--text-strong);">
+                            <input type="checkbox" id="fullauto-heading-text-option"
+                                style="width: 16px; height: 16px; accent-color: var(--primary);">
+                            <span>소제목 텍스트 포함</span>
+                        </label>
+                        <details style="margin-top: 0.4rem;">
+                            <summary style="cursor: pointer; font-size: 0.75rem; color: var(--text-muted);">설명 보기</summary>
+                            <div style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; margin-top: 0.25rem;">이미지 탭 · 풀오토 이미지 설정과 같은 설정입니다. 제목은 썸네일에 짧은 문구로 넣고(꺼 두면 자동 판단), 소제목은 이미지에 소제목 글자를 그대로 넣습니다. 소제목은 한글을 직접 그리는 엔진만 해당합니다(관련 사진 찾기 · 내 폴더는 제외).</div>
+                        </details>
+                    </div><!-- /fullauto-image-text-options -->
+
                     <!-- 발행 버튼 영역 -->
                     <div id="publish-btn-container">
                         <!-- 통합 발행 버튼 (기본 표시) -->

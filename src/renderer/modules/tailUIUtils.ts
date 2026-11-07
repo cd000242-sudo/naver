@@ -423,6 +423,10 @@ export function initContentModeHelpAndSmartPublish() {
     if (topSelect) topSelect.value = mode;
     if (bottomSelect) bottomSelect.value = mode;
 
+    // Title / heading text switches belong to the full-auto screen only (same values as the image tab).
+    const imageTextOptions = document.getElementById('fullauto-image-text-options');
+    if (imageTextOptions) imageTextOptions.style.display = mode === 'full-auto' ? 'block' : 'none';
+
     if (mode === 'full-auto') {
       // ═══ 풀오토 모드 ═══
       // 글 생성 버튼만 비활성화 (풀오토가 자동으로 처리) — URL/키워드 입력은 유지
