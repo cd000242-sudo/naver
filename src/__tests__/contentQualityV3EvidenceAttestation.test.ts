@@ -273,7 +273,8 @@ describe('Content Quality V3 evidence attestation', () => {
         // [2026-11-06] SEO: 현재 상태 먼저 · 공식 자료 우선 · 키워드 반복 금지 · 같은 틀 반복 금지로 재계산
         // [2026-11-06] SEO: 현재 상태 먼저 · 공식 자료 우선 · 키워드 반복 금지 · 같은 틀 반복 금지로 재계산
         // [2026-11-06] gpt-image-2.6 sunburst/flare 레지스트리 등록 + 기본 모델 변경(modelRegistry 1개만 바뀜)으로 재계산
-        '5c758666e301d9c39bb4f0b9c0f1e59b24d6c4ca10e53983e568fb2c8a38e753',
+        // [2026-11-07] 모델 목록 정리(Opus 5.5 · GPT-6 Astra · Gemini 4 Argon 선택지 - modelRegistry 1개만 바뀜)로 재계산
+        'c91217e8a7621941d4f5b3b91489e1d7449058b85b3517ee8c3696d6ab877b6e',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 
