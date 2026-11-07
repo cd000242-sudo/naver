@@ -42,11 +42,11 @@ function ChatbotsPage() {
                 <section className="chatbots-hero">
                     <div className="chatbots-wrap chatbots-hero-grid">
                         <div>
-                            <span className="chatbots-kicker">FREE GEMINI CHATBOT</span>
-                            <h1>무료 제미나이 챗봇</h1>
+                            <span className="chatbots-kicker">FREE CHATBOT · PROMPT</span>
+                            <h1>무료 챗봇·프롬프트</h1>
                             <p>
-                                글쓰기의 시작을 도와줄 제미나이 챗봇을 만나보세요.
-                                부티크 인포에서 글쓰기 프롬프트를 선택해 바로 시작할 수 있습니다.
+                                글쓰기를 도와줄 무료 챗봇과 프롬프트를 모았습니다.
+                                아래 버튼을 누르면 바로 열립니다.
                             </p>
                             <div className="chatbots-actions">
                                 <a className="chatbots-btn primary" href="#chatbots-list">챗봇 바로가기</a>
@@ -65,6 +65,20 @@ function ChatbotsPage() {
                     </div>
                 </section>
 
+                <section id="chatbots-list" className="chatbots-section dark">
+                    <div className="chatbots-wrap">
+                        <div className="chatbots-section-head fade-in">
+                            <span className="chatbots-kicker">FREE TOOLS</span>
+                            <h2>바로 쓰는 무료 챗봇·프롬프트</h2>
+                            <p>버튼을 누르면 새 창에서 열립니다.</p>
+                        </div>
+
+                        <div className="hub-grid">
+                            <ChatbotTiles chatbots={siteContent?.chatbots} />
+                        </div>
+                    </div>
+                </section>
+
                 <section className="chatbots-section light">
                     <div className="chatbots-wrap">
                         <div className="chatbots-section-head fade-in">
@@ -79,20 +93,6 @@ function ChatbotsPage() {
                                     <p>{desc}</p>
                                 </article>
                             ))}
-                        </div>
-                    </div>
-                </section>
-
-                <section id="chatbots-list" className="chatbots-section dark">
-                    <div className="chatbots-wrap">
-                        <div className="chatbots-section-head fade-in">
-                            <span className="chatbots-kicker">GEMINI</span>
-                            <h2>제미나이로 글쓰기를 시작하세요</h2>
-                            <p>카드를 누르면 해당 프롬프트 페이지가 열립니다.</p>
-                        </div>
-
-                        <div className="hub-grid">
-                            <ChatbotTiles chatbots={siteContent?.chatbots} />
                         </div>
                     </div>
                 </section>
@@ -144,9 +144,10 @@ function ChatbotsPage() {
 
                 .hub-grid {
                     display: grid;
-                    grid-template-columns: minmax(0, 1fr);
+                    /* [2026-11-07] Three buttons side by side on wide screens so all show at once. */
+                    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
                     gap: 22px;
-                    max-width: 720px;
+                    max-width: 1080px;
                     margin: 0 auto;
                 }
                 .hub-tile {
@@ -197,10 +198,11 @@ function ChatbotsPage() {
                 }
 
                 .chatbots-hero {
-                    min-height: 700px;
+                    /* [2026-11-07] Compact hero so the tool buttons show on the first screen. */
+                    min-height: auto;
                     display: flex;
                     align-items: center;
-                    padding: 118px 0 70px;
+                    padding: 104px 0 44px;
                     background: linear-gradient(135deg, rgba(8, 13, 18, 0.88), rgba(17, 54, 67, 0.80) 54%, rgba(55, 43, 17, 0.76));
                     border-bottom: 1px solid rgba(255,255,255,0.10);
                 }
@@ -326,6 +328,14 @@ function ChatbotsPage() {
 
                 .chatbots-section {
                     padding: 86px 0;
+                }
+
+                #chatbots-list {
+                    padding-top: 44px;
+                }
+
+                #chatbots-list .chatbots-section-head {
+                    margin-bottom: 24px;
                 }
 
                 .chatbots-section.light {
