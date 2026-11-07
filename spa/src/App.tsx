@@ -21,6 +21,7 @@ const DownloadPage = lazy(() => import('./pages/DownloadPage'));
 const ChatbotsPage = lazy(() => import('./pages/ChatbotsPage'));
 const ReviewsPage = lazy(() => import('./pages/ReviewsPage'));
 const CommunityPage = lazy(() => import('./pages/CommunityPage'));
+const MyPage = lazy(() => import('./pages/MyPage'));
 const LookupPage = lazy(() => import('./pages/LookupPage'));
 const RefundPage = lazy(() => import('./pages/RefundPage'));
 const TermsPage = lazy(() => import('./pages/TermsPage'));
@@ -89,6 +90,7 @@ function App() {
                     <Route path="/signup" element={<SignupPage />} />
                     <Route path="/community" element={<RequireLogin area="community"><CommunityPage /></RequireLogin>} />
                     <Route path="/community.html" element={<RequireLogin area="community"><CommunityPage /></RequireLogin>} />
+                    <Route path="/me" element={<RequireLogin area="account"><MyPage /></RequireLogin>} />
                     <Route path="/lookup" element={<LookupPage />} />
                     <Route path="/lookup.html" element={<LookupPage />} />
                     <Route path="/refund" element={<RefundPage />} />

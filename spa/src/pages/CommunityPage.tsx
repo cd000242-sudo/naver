@@ -1,11 +1,13 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import CommunitySidebar, { BoardTabs } from '../components/community/CommunitySidebar';
+import ModerationPanel from '../components/community/ModerationPanel';
 import NicknameForm from '../components/community/NicknameForm';
 import PostDetail from '../components/community/PostDetail';
 import PostList from '../components/community/PostList';
 import PostWriteForm from '../components/community/PostWriteForm';
 import WeeklyTop from '../components/community/WeeklyTop';
+import { REPORTS_PATH, canModerate, isReportsView } from '../lib/accountModel.mjs';
 import { refreshCommunityProfile } from '../lib/communityAuth';
 import { boardApi } from '../lib/communityApi';
 import { normalizePosts, type PostItem } from '../lib/communityData';
@@ -88,7 +90,9 @@ function CommunityPage() {
 
     const title = view.board === ALL_BOARD ? '전체글' : boardLabel(view.board, boards);
     const note = view.board === ALL_BOARD ? ALL_NOTE : boards.find((board) => board.id === view.board)?.note;
-    const showList = !view.write && !view.post && !editing;
+    const moderator = canModerate(profile);
+    const reportsView = moderator && isReportsView(location.search);
+    const showList = !view.write && !view.post && !editing && !reportsView;
 
     return (
         <div className="lp cm">
@@ -98,9 +102,14 @@ function CommunityPage() {
                         <h1>커뮤니티</h1>
                         <p>모르는 건 묻고, 잘된 건 나누는 곳</p>
                     </div>
-                    {view.write || editing ? null : (
-                        <Link className="lp-btn lp-btn-dark" to={communityPath({ board: view.board, write: true })}>글쓰기</Link>
-                    )}
+                    <div className="cm-head-actions">
+                        {moderator ? (
+                            <Link className="lp-btn lp-btn-line" to={reportsView ? communityPath({ board: view.board }) : REPORTS_PATH}>{reportsView ? '← 커뮤니티로' : '신고 목록'}</Link>
+                        ) : null}
+                        {view.write || editing || reportsView ? null : (
+                            <Link className="lp-btn lp-btn-dark" to={communityPath({ board: view.board, write: true })}>글쓰기</Link>
+                        )}
+                    </div>
                 </div>
             </header>
             <div className="lp-wrap cm-wrap">
@@ -115,7 +124,9 @@ function CommunityPage() {
                             <NicknameForm onDone={refresh} />
                         </section>
                     ) : null}
-                    {editing ? (
+                    {reportsView ? (
+                        <ModerationPanel />
+                    ) : editing ? (
                         <PostWriteForm boards={boards} defaultBoard={editing.board} profile={profile} editing={editing}
                             onDone={afterWrite} onCancel={() => setEditing(null)} />
                     ) : view.write ? (
@@ -123,7 +134,7 @@ function CommunityPage() {
                             onDone={afterWrite} onCancel={() => navigate(communityPath({ board: view.board }))} />
                     ) : view.post ? (
                         <PostDetail key={view.post} id={view.post} boards={boards} boardId={view.board} profile={profile} reportConfig={config}
-                            onEdit={setEditing} onDeleted={() => { refresh(); navigate(communityPath({ board: view.board })); }} onVisit={visit} />
+                            onEdit={setEditing} onDeleted={() => { refresh(); navigate(communityPath({ board: view.board })); }} onVisit={visit} onModerated={refresh} />
                     ) : null}
                     {showList ? (
                         <>
@@ -131,7 +142,7 @@ function CommunityPage() {
                             <PostList title={title} note={note} boardId={view.board} boards={boards} pinned={feed.pinned} posts={feed.posts}
                                 total={feed.total} page={view.page} totalPages={feed.totalPages} sort={view.sort}
                                 loading={feed.status === 'loading'} error={feed.status === 'error' ? feed.message : ''}
-                                onVisit={visit} onRetry={feed.reload} />
+                                moderator={moderator} onVisit={visit} onRetry={feed.reload} />
                         </>
                     ) : null}
                 </div>

@@ -3,6 +3,7 @@
  * numbers stay numbers, addresses must be http(s) — so a component can draw a value without checking it,
  * and an unexpected shape can never crash a page or become a script link.
  */
+import { isNoticeId, noticeBadgeLabel } from './accountModel.mjs';
 
 export type AuthorGrade = { key: string; label: string };
 
@@ -25,6 +26,16 @@ export type PostItem = {
     status: string;
     mine: boolean;
     liked: boolean;
+    /** Moderator view: hidden by the operator, and how many open reports the post has. The server sends these to operators only. */
+    hidden: boolean;
+    openReports: number;
+    /** Came from the home-operations notice list (id starts with nt_). */
+    notice: boolean;
+    /** Notice category: important / update / event / tip, or ''. */
+    noticeBadge: string;
+    /** The server may close comments or likes for a post (notices); a missing field means allowed. */
+    commentable: boolean;
+    likable: boolean;
     /** Promo board only. */
     url: string;
     platform: string;
@@ -46,6 +57,10 @@ export type CommentItem = {
     mine: boolean;
     /** Removed by the author or hidden by the operator: shown as an empty placeholder when replies remain. */
     gone: boolean;
+    /** Hidden by the operator (not deleted). */
+    hidden: boolean;
+    /** The text of a hidden comment, kept apart from `body` so only the moderator view draws it. */
+    hiddenBody: string;
     replies: CommentItem[];
 };
 
@@ -78,6 +93,8 @@ export function normalizePost(raw: unknown): PostItem | null {
     const source = record(raw);
     const id = text(source.id).trim();
     if (!id) return null;
+    const notice = isNoticeId(id) || source.notice === true;
+    const badge = text(source.badge);
     return {
         id,
         board: text(source.board),
@@ -87,7 +104,7 @@ export function normalizePost(raw: unknown): PostItem | null {
         nickname: text(source.nickname),
         grade: toGrade(source.grade),
         isOperator: source.isOperator === true,
-        createdAt: text(source.createdAt),
+        createdAt: text(source.createdAt) || (notice ? text(source.noticeDate) : ''),
         updatedAt: text(source.updatedAt),
         views: count(source.views),
         likes: count(source.likes),
@@ -96,6 +113,12 @@ export function normalizePost(raw: unknown): PostItem | null {
         status: text(source.status),
         mine: source.mine === true,
         liked: source.liked === true,
+        hidden: source.hidden === true,
+        openReports: count(source.openReports),
+        notice,
+        noticeBadge: notice && noticeBadgeLabel(badge) ? badge : '',
+        commentable: source.commentable !== false,
+        likable: source.likable !== false,
         url: safeHttpUrl(source.url),
         platform: text(source.platform),
         visits: count(source.visits),
@@ -129,6 +152,8 @@ export function normalizeComment(raw: unknown, depth = 0): CommentItem | null {
         liked: source.liked === true,
         mine: source.mine === true,
         gone,
+        hidden: source.hidden === true && source.deleted !== true,
+        hiddenBody: source.hidden === true && source.deleted !== true ? text(source.body) : '',
         replies,
     };
 }

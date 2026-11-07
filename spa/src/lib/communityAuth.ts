@@ -14,10 +14,12 @@ import {
 } from './communitySession';
 import { clearSession, loadSession, loginWithCommunityToken, logoutWeb, type LewordSession } from './lewordAuth';
 import { describeRegisterFailure, mapLewordVerify } from './siteAuthModel.mjs';
+import { describePhoneFailure, normalizeCode, normalizePhone, type PhoneFailureKind } from './phoneAuthModel.mjs';
+import { COMMUNITY_ACTIONS } from './communityContract.mjs';
 
 export type AuthOutcome =
     | { ok: true; session: CommunitySession }
-    | { ok: false; code: string; message: string };
+    | { ok: false; code: string; message: string; kind?: PhoneFailureKind; retryAfterSec?: number };
 
 function adopt(payload: Record<string, unknown>): AuthOutcome {
     const session = toCommunitySession(payload);
@@ -31,11 +33,19 @@ function adopt(payload: Record<string, unknown>): AuthOutcome {
 
 const failed = (result: { code: string; message: string }): AuthOutcome => ({ ok: false, code: result.code, message: result.message });
 
-export async function signupCommunity(input: { userId: string; password: string; nickname: string }): Promise<AuthOutcome> {
-    const result = await callCommunity('community-signup', {
+/** Phone failures get one plain sentence and a `kind` the form can act on; every other refusal keeps the server's words. */
+function failedSignup(result: { code: string; message: string; retryAfterSec?: unknown }): AuthOutcome {
+    const phone = describePhoneFailure(result);
+    return phone.kind === 'other' ? failed(result) : { ok: false, code: result.code, message: phone.message, kind: phone.kind, retryAfterSec: phone.retryAfterSec ?? 0 };
+}
+
+/** Signup needs the phone and the 6-digit code the server texted to it (one number, one account). */
+export async function signupCommunity(input: { userId: string; password: string; nickname: string; phone: string; code: string }): Promise<AuthOutcome> {
+    const result = await callCommunity(COMMUNITY_ACTIONS.signup, {
         userId: input.userId.trim(), password: input.password, nickname: input.nickname.trim(),
+        phone: normalizePhone(input.phone), code: normalizeCode(input.code),
     });
-    return result.ok ? adopt(result) : failed(result);
+    return result.ok ? adopt(result) : failedSignup(result);
 }
 
 /** Log in; a license account also gets its LEWORD login right away (best effort — the community login stands either way). */
@@ -71,7 +81,8 @@ export async function refreshCommunityProfile(): Promise<AuthOutcome> {
     return keepToken(current, result);
 }
 
-function keepToken(current: CommunitySession, payload: Record<string, unknown>): AuthOutcome {
+/** Merge a fresh profile answer into the stored login (the token and its expiry stay unless the server sent new ones). */
+export function keepToken(current: CommunitySession, payload: Record<string, unknown>): AuthOutcome {
     const next: CommunitySession = {
         ...current,
         ...normalizeProfile({ ...payload, userId: payload.userId || current.userId }),

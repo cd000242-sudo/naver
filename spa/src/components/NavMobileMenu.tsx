@@ -27,6 +27,11 @@ function NavMobileMenu({ open, pathname, unseenNotices, account, onClose }: Prop
                     <NavSheetAccount account={account} onDone={onClose} />
                     <Link className="site-nav-btn site-nav-btn-cta" to={NAV_CTA.to} onClick={onClose}>{NAV_CTA.label}</Link>
                 </div>
+                {account.who?.community ? (
+                    <Link className="site-nav-sheet-item" to="/me" aria-current={isNavPathActive('/me', pathname) ? 'page' : undefined} onClick={onClose}>
+                        <span>내 정보</span>
+                    </Link>
+                ) : null}
                 {NAV_MOBILE_SECTIONS.map((section) => (
                     <Fragment key={section.title ?? 'top'}>
                         {section.title && <p className="site-nav-sheet-group">{section.title}</p>}

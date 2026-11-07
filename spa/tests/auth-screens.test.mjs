@@ -55,9 +55,9 @@ test('login screen ignores an outside return path', () => {
     assert.ok(!html.includes('evil.example'));
 });
 
-test('signup screen: four fields, the short promise about LEWORD, and a way back to login', () => {
+test('signup screen: account fields and the phone block, the short promise about LEWORD, and a way back to login', () => {
     const html = show('../../src/pages/SignupPage.tsx', '/signup?next=%2Fleword');
-    assert.deepEqual(tags(html, 'input').map((tag) => attr(tag, 'autocomplete')), ['username', 'new-password', 'new-password', 'nickname']);
+    assert.deepEqual(tags(html, 'input').map((tag) => attr(tag, 'autocomplete')), ['username', 'new-password', 'new-password', 'nickname', 'tel', 'one-time-code']);
     assert.match(html.replace(/<[^>]+>/g, ''), /가입하면 커뮤니티를 쓸 수 있어요\. LEWORD 등 제품은 이용권이 있어야 해요/);
     assert.ok(hrefs(html).includes('/login?next=%2Fleword'));
     assert.match(html, /<button[^>]*type="submit"[^>]*>가입하고 시작하기<\/button>/);

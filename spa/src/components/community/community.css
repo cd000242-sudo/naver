@@ -130,3 +130,4 @@
     .cm-row-end { margin-left: auto; }
     .cm-visit { width: 72px; height: 46px; }
 }
+.cm-head-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }

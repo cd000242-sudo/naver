@@ -69,3 +69,31 @@
     .cm-replies { margin-left: 8px; padding-left: 10px; }
     .cm-form-actions .lp-btn { flex: 1; }
 }
+
+/* Notice badge, moderator tools and the report desk. */
+.lp-state-notice { background: var(--lp-brand); color: #fff; margin-right: 6px; flex: none; }
+.lp-state-notice-kind { background: var(--lp-brand-soft); color: var(--lp-brand); border: 1px solid var(--lp-brand-line); margin-right: 6px; flex: none; }
+.lp-state-report { background: var(--lp-danger-soft); color: var(--lp-danger); border: 1px solid var(--lp-danger); margin-right: 6px; flex: none; }
+.cm-admin { display: grid; gap: 10px; padding: 16px 18px; border-radius: 14px; border: 1.5px dashed var(--lp-brand-line); background: var(--lp-brand-soft); }
+.cm-admin-title { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 15px; font-weight: 900; color: var(--lp-brand); }
+.cm-admin-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.cm-admin-hint { font-size: 16px; color: var(--lp-muted); }
+.cm-admin-inline { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.cm-admin-msg { padding: 8px 12px; font-size: 15px; }
+.cm-act-danger { color: var(--lp-danger); border-color: var(--lp-danger); }
+.cm-seg { display: inline-flex; width: fit-content; max-width: 100%; border: 1.5px solid var(--lp-line-strong); border-radius: 12px; overflow: hidden; background: var(--lp-surface); }
+.cm-seg-btn { min-height: 44px; padding: 0 18px; font-size: 16px; font-weight: 700; color: var(--lp-muted); }
+.cm-seg-btn + .cm-seg-btn { border-left: 1.5px solid var(--lp-line-strong); }
+.cm-seg-btn[aria-pressed="true"] { background: var(--lp-btn); color: var(--lp-on-btn); }
+.cm-seg-btn[disabled] { opacity: 0.6; cursor: not-allowed; }
+.cm-c-dim { color: var(--lp-faint); }
+
+.cm-reports { padding: 20px 22px; display: grid; gap: 14px; }
+.cm-report-list { display: grid; gap: 12px; }
+.cm-report { display: grid; gap: 8px; padding: 16px; border: 1px solid var(--lp-line); border-radius: 12px; background: var(--lp-surface); }
+.cm-report-why { display: flex; gap: 6px 12px; flex-wrap: wrap; align-items: baseline; font-size: 17px; }
+.cm-report-why span, .cm-report-by { font-size: 15px; color: var(--lp-muted); }
+.cm-report-detail { font-size: 16px; padding: 8px 12px; border-radius: 10px; background: var(--lp-surface-2); overflow-wrap: anywhere; }
+.cm-report-target { display: grid; gap: 4px; padding: 10px 12px; border-left: 4px solid var(--lp-line-strong); }
+.cm-report-target p, .cm-report-target span { font-size: 15px; color: var(--lp-muted); overflow-wrap: anywhere; }
+.cm-report .cm-act { text-decoration: none; }

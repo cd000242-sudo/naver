@@ -10,6 +10,8 @@ export function validateLogin(input: { userId?: string; password?: string }): st
 export function validateNickname(nickname: unknown): string;
 export function validateSignup(input: { userId?: string; password?: string; passwordConfirm?: string; nickname?: string }): string;
 
+export function validateSignupWithPhone(input: { userId?: string; password?: string; passwordConfirm?: string; nickname?: string; phone?: string; code?: string }): string;
+
 export type NoticePart = Readonly<{ text: string; bold?: boolean }>;
 export const REGISTER_NOTICE_PARTS: readonly NoticePart[];
 export const REGISTER_NOTICE_TEXT: string;

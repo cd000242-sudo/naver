@@ -45,3 +45,19 @@
 .au-reset .lw-auth-switch { margin-top: 16px; }
 .au-reset .lw-auth-switch button { min-height: 44px; background: none; border: 0; padding: 0; font-size: 16px; font-weight: 700; color: var(--lp-accent); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
 .au-recover { display: grid; gap: 10px; }
+
+/* Phone number + [인증번호 받기] + code box (signup, /me, password recovery). */
+.au-phone { display: grid; gap: 14px; }
+.au-phone-row { display: flex; gap: 10px; align-items: stretch; }
+.au-phone-row .lp-input { flex: 1 1 auto; min-width: 0; }
+.au-send { flex: none; min-width: 148px; padding: 0 14px; }
+@media (max-width: 480px) {
+    .au-phone-row { flex-direction: column; }
+    .au-send { min-height: 52px; }
+}
+
+/* Password recovery on /login: two kinds of account, two tabs. */
+.au-recovery { display: grid; gap: 14px; }
+.au-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 4px; border-radius: 14px; background: var(--lp-surface-2); border: 1px solid var(--lp-line); }
+.au-tab { min-height: 52px; padding: 0 8px; border-radius: 10px; font-size: 17px; font-weight: 800; color: var(--lp-muted); }
+.au-tab.on { background: var(--lp-surface); color: var(--lp-text); box-shadow: var(--lp-shadow); border: 1.5px solid var(--lp-accent); }

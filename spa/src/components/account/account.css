@@ -1,0 +1,55 @@
+/* /me — profile and settings. Needs src/styles/light-page.css (.lp tokens) and ../auth/auth.css (forms). */
+.me-wrap { padding-top: 28px; padding-bottom: 56px; width: min(760px, 100% - 40px); display: grid; gap: 20px; }
+.me-title { font-size: 30px; font-weight: 900; line-height: 1.25; }
+.me-problem { display: grid; gap: 10px; justify-items: start; }
+.me-card { padding: 24px 26px; display: grid; gap: 16px; }
+.me-card h2:not(.lp-sr) { font-size: 22px; font-weight: 900; }
+.me-card h3 { font-size: 18px; font-weight: 800; color: var(--lp-muted); }
+
+.me-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.me-name { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 8px; }
+.me-nick { font-size: 24px; font-weight: 900; }
+.me-role { display: inline-flex; align-items: center; height: 28px; padding: 0 10px; border-radius: 8px; background: var(--lp-surface-2); border: 1px solid var(--lp-line); font-size: 14px; font-weight: 700; color: var(--lp-muted); }
+.me-joined { font-size: 16px; color: var(--lp-muted); }
+
+.me-score { display: grid; gap: 2px; }
+.me-score b { font-size: 26px; font-weight: 900; }
+.me-score span { font-size: 16px; color: var(--lp-muted); }
+.me-bar { height: 12px; border-radius: 6px; background: var(--lp-surface-2); border: 1px solid var(--lp-line); overflow: hidden; }
+.me-bar i { display: block; height: 100%; background: var(--lp-accent); border-radius: 6px; }
+.me-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 0; }
+.me-stats div { text-align: center; padding: 10px 4px; border-radius: 10px; background: var(--lp-surface-2); }
+.me-stats dt { font-size: 15px; color: var(--lp-muted); }
+.me-stats dd { margin: 0; font-size: 22px; font-weight: 900; }
+
+.me-info { display: grid; gap: 4px; margin: 0; }
+.me-info > div { display: flex; align-items: center; gap: 8px 16px; flex-wrap: wrap; min-height: 52px; padding: 4px 0; border-top: 1px solid var(--lp-line); }
+.me-info dt { width: 84px; flex: none; font-size: 16px; font-weight: 700; color: var(--lp-muted); }
+.me-info dd { margin: 0; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 18px; font-weight: 700; }
+.me-ok { color: var(--lp-accent); }
+.me-verify { padding-top: 6px; }
+.me-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.me-actions .lp-btn { flex: 1 1 140px; }
+
+.me-post-list { display: grid; }
+.me-post { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; align-items: center; padding: 12px 0; border-top: 1px solid var(--lp-line); }
+.me-post-head { grid-column: 1; display: flex; align-items: baseline; gap: 8px; min-width: 0; }
+.me-post-title { font-size: 18px; font-weight: 700; overflow-wrap: anywhere; min-height: 28px; }
+.me-post-title:hover { color: var(--lp-accent); text-decoration: underline; }
+.me-cmt { font-style: normal; font-size: 15px; font-weight: 700; color: var(--lp-danger); }
+.me-post-meta { grid-column: 1; font-size: 15px; color: var(--lp-faint); }
+.me-post .lp-state { grid-column: 2; grid-row: 1 / span 2; }
+.au-tab { border: 1.5px solid transparent; }
+.me-empty { display: grid; gap: 10px; justify-items: start; font-size: 17px; color: var(--lp-muted); padding: 6px 0; }
+.me-total { font-size: 15px; color: var(--lp-faint); }
+.me-pager { display: flex; gap: 6px; flex-wrap: wrap; }
+.me-pg { min-width: 44px; min-height: 44px; border-radius: 10px; border: 1px solid var(--lp-line-strong); background: var(--lp-surface); font-size: 16px; font-weight: 700; }
+.me-pg.on { background: var(--lp-btn); border-color: var(--lp-btn); color: var(--lp-on-btn); }
+.me-logout { padding-top: 10px; border-top: 1px solid var(--lp-line); }
+
+@media (max-width: 720px) {
+    .me-wrap { width: min(760px, 100% - 28px); padding-top: 18px; }
+    .me-card { padding: 20px 16px; }
+    .me-title { font-size: 26px; }
+    .me-nick { font-size: 22px; }
+}

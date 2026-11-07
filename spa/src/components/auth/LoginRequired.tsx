@@ -4,7 +4,7 @@ import '../../styles/light-page.css';
 import './auth.css';
 
 type Props = {
-    area: 'community' | 'leword';
+    area: 'community' | 'leword' | 'account';
     /** Where to come back to after logging in (same-site path). */
     next: string;
     /** The visitor has only an old LEWORD login, which does not open the community. */
@@ -17,11 +17,12 @@ const COPY = {
     community: '커뮤니티는 로그인한 분만 볼 수 있어요. 글쓰기·댓글·좋아요도 로그인 뒤에 돼요.',
     communityLegacy: '지금 로그인은 LEWORD 전용이라 커뮤니티가 아직 안 열려요. 한 번 더 로그인하면 둘 다 열려요.',
     leword: 'LEWORD 는 로그인한 분만 쓸 수 있어요. 한 번 로그인하면 커뮤니티와 LEWORD 가 같이 열려요.',
+    account: '내 정보는 로그인한 분만 볼 수 있어요.',
 };
 
 /** "Log in first" screen shown in place of a protected page. */
 function LoginRequired({ area, next, legacy = false, message = '' }: Props) {
-    const lead = area === 'leword' ? COPY.leword : legacy ? COPY.communityLegacy : COPY.community;
+    const lead = area === 'leword' ? COPY.leword : area === 'account' ? COPY.account : legacy ? COPY.communityLegacy : COPY.community;
     return (
         <div className="lp">
             <div className="lp-wrap au-main">

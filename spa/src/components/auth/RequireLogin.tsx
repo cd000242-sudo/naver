@@ -4,7 +4,7 @@ import { useSiteSession } from '../../lib/useSiteSession';
 import LoginRequired from './LoginRequired';
 
 type Props = {
-    area: 'community' | 'leword';
+    area: 'community' | 'leword' | 'account';
     children: ReactNode;
 };
 

@@ -89,6 +89,12 @@ export function NavAccountBar({ account, open, dispatch }: BarProps) {
                     <span><b>커뮤니티 가기</b></span>
                 </Link>
             ) : null}
+            {who.community ? (
+                <Link className="site-nav-drop-item" to="/me" onClick={() => dispatch({ type: 'close-all' })}>
+                    <span className="site-nav-drop-icon" aria-hidden="true">나</span>
+                    <span><b>내 정보</b></span>
+                </Link>
+            ) : null}
             <Link className="site-nav-drop-item" to="/leword" onClick={() => dispatch({ type: 'close-all' })}>
                 <span className="site-nav-drop-icon" aria-hidden="true">L</span>
                 <span>

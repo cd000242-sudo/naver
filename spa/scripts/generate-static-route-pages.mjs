@@ -72,7 +72,12 @@ const routes = [
   {
     path: 'signup',
     title: '회원가입 | Leaders Pro',
-    description: 'Leaders Pro 커뮤니티 회원가입. 아이디와 비밀번호만으로 가입할 수 있습니다.',
+    description: 'Leaders Pro 커뮤니티 회원가입. 휴대폰 번호 하나로 계정 하나만 만들 수 있습니다.',
+  },
+  {
+    path: 'me',
+    title: '내 정보 | Leaders Pro',
+    description: 'Leaders Pro 내 정보, 내가 쓴 글, 비밀번호 설정을 확인하는 페이지입니다. 로그인이 필요합니다.',
   },
   {
     path: 'lookup',

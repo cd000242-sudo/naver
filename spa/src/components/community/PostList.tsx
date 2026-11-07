@@ -4,7 +4,7 @@ import {
     SORTS, boardLabel, communityPath, formatPostDate, pageNumbers,
     type BoardConfig, type SortKey,
 } from '../../lib/communityModel.mjs';
-import { GradeBadge, StatusBadge } from './Badges';
+import { GradeBadge, NoticeBadge, StatusBadge } from './Badges';
 
 type Props = {
     title: string;
@@ -21,19 +21,24 @@ type Props = {
     loading?: boolean;
     error?: string;
     now?: number;
+    /** The viewer is an owner: hidden posts and posts with open reports are marked. */
+    moderator?: boolean;
     onVisit: (post: PostItem) => void;
     onRetry?: () => void;
 };
 
-type RowProps = { post: PostItem; pinned: boolean; boardId: string; boards: readonly BoardConfig[]; sort: SortKey; now: number; onVisit: (post: PostItem) => void };
+type RowProps = { post: PostItem; pinned: boolean; boardId: string; boards: readonly BoardConfig[]; sort: SortKey; now: number; moderator: boolean; onVisit: (post: PostItem) => void };
 
-function PostRow({ post, pinned, boardId, boards, sort, now, onVisit }: RowProps) {
+function PostRow({ post, pinned, boardId, boards, sort, now, moderator, onVisit }: RowProps) {
     return (
         <li className={`cm-row${pinned ? ' is-pin' : ''}`}>
             <span className="cm-row-board">
                 {pinned ? <span className="cm-pin">{boardLabel(post.board, boards)}</span> : boardLabel(post.board, boards)}
             </span>
             <span className="cm-row-title">
+                {post.notice ? <NoticeBadge kind={post.noticeBadge} /> : null}
+                {moderator && post.hidden ? <span className="lp-state lp-state-wait">숨김</span> : null}
+                {moderator && post.openReports > 0 ? <span className="lp-state lp-state-report">신고 {post.openReports}</span> : null}
                 <Link className="cm-title" to={communityPath({ board: boardId, sort, post: post.id })}><span className="t">{post.title}</span></Link>
                 {post.comments > 0 ? <em className="cm-cmt">[{post.comments}]</em> : null}
             </span>
@@ -42,7 +47,7 @@ function PostRow({ post, pinned, boardId, boards, sort, now, onVisit }: RowProps
                 <span className="cm-nick">{post.nickname}</span>
             </span>
             <span className="cm-row-time">{formatPostDate(post.createdAt, now)}</span>
-            <span className="cm-row-num cm-views"><i>조회 </i>{post.views}</span>
+            <span className="cm-row-num cm-views">{post.notice ? null : <><i>조회 </i>{post.views}</>}</span>
             <span className="cm-row-num"><i>좋아요 </i>{post.likes}</span>
             <span className="cm-row-end">
                 {post.board === 'promo'
@@ -54,7 +59,7 @@ function PostRow({ post, pinned, boardId, boards, sort, now, onVisit }: RowProps
 }
 
 /** The board table: sorts, rows (pinned first), pager. Sorting and paging are links, so back/forward work. */
-function PostList({ title, note, boardId, boards, pinned, posts, total, page, totalPages, sort, loading, error, now = Date.now(), onVisit, onRetry }: Props) {
+function PostList({ title, note, boardId, boards, pinned, posts, total, page, totalPages, sort, loading, error, now = Date.now(), moderator = false, onVisit, onRetry }: Props) {
     const empty = !loading && !error && pinned.length === 0 && posts.length === 0;
     return (
         <section className="lp-box cm-board" aria-labelledby="cm-board-title">
@@ -85,8 +90,8 @@ function PostList({ title, note, boardId, boards, pinned, posts, total, page, to
             ) : null}
             {empty ? <p className="cm-empty">아직 올라온 글이 없어요. 첫 글을 남겨 보세요.</p> : null}
             <ul className="cm-rows">
-                {pinned.map((post) => <PostRow key={`pin-${post.id}`} post={post} pinned boardId={boardId} boards={boards} sort={sort} now={now} onVisit={onVisit} />)}
-                {posts.map((post) => <PostRow key={post.id} post={post} pinned={false} boardId={boardId} boards={boards} sort={sort} now={now} onVisit={onVisit} />)}
+                {pinned.map((post) => <PostRow key={`pin-${post.id}`} post={post} pinned boardId={boardId} boards={boards} sort={sort} now={now} moderator={moderator} onVisit={onVisit} />)}
+                {posts.map((post) => <PostRow key={post.id} post={post} pinned={false} boardId={boardId} boards={boards} sort={sort} now={now} moderator={moderator} onVisit={onVisit} />)}
             </ul>
             {totalPages > 1 ? (
                 <nav className="cm-pager" aria-label="쪽 이동">

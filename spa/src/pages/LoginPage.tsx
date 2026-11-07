@@ -2,7 +2,9 @@ import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import AuthField from '../components/auth/AuthField';
 import AuthShell from '../components/auth/AuthShell';
-import { PasswordResetPanel, PhoneVerifyPanel } from '../components/leword/LewordAuth';
+import PasswordRecovery from '../components/auth/PasswordRecovery';
+import { PhoneVerifyPanel } from '../components/leword/LewordAuth';
+import { resetTabFrom } from '../lib/accountModel.mjs';
 import { loginCommunity } from '../lib/communityAuth';
 import { afterAuthPath, safeNextPath, signupPath, validateLogin } from '../lib/siteAuthModel.mjs';
 import { useSiteSession } from '../lib/useSiteSession';
@@ -19,8 +21,9 @@ function LoginPage() {
     const [password, setPassword] = useState('');
     const [busy, setBusy] = useState(false);
     const [error, setError] = useState('');
-    // Password recovery reuses the existing LEWORD phone-verify / reset panels.
-    const [view, setView] = useState<'login' | 'phone' | 'pwreset'>('login');
+    // /login?view=reset | phone open a recovery screen directly (also for a logged-in license member sent here from /me).
+    const [view, setView] = useState<'login' | 'phone' | 'pwreset'>(params.get('view') === 'reset' ? 'pwreset' : params.get('view') === 'phone' ? 'phone' : 'login');
+    const leaveRecovery = () => (site.community ? navigate('/me') : setView('login'));
 
     useEffect(() => {
         const previous = document.title;
@@ -28,10 +31,10 @@ function LoginPage() {
         return () => { document.title = previous; };
     }, []);
 
-    // Already logged in (or just did): go where the person was heading.
+    // Already logged in (or just did): go where the person was heading. The recovery screens stay open.
     useEffect(() => {
-        if (site.community) navigate(afterAuthPath(next), { replace: true });
-    }, [site.community, next, navigate]);
+        if (site.community && view === 'login') navigate(afterAuthPath(next), { replace: true });
+    }, [site.community, view, next, navigate]);
 
     const submit = async (event: FormEvent) => {
         event.preventDefault();
@@ -53,14 +56,15 @@ function LoginPage() {
     if (view === 'phone') {
         return (
             <AuthShell title="본인인증" sub="휴대폰 번호를 등록해 두면 비밀번호를 혼자 바꿀 수 있어요.">
-                <div className="au-reset"><PhoneVerifyPanel defaultUserId={userId} onBack={() => setView('login')} /></div>
+                <div className="au-reset"><PhoneVerifyPanel defaultUserId={userId || site.community?.userId || ''} onBack={leaveRecovery} /></div>
             </AuthShell>
         );
     }
     if (view === 'pwreset') {
         return (
             <AuthShell title="비밀번호 변경" sub="본인인증한 휴대폰으로 확인한 뒤 새 비밀번호를 정해요.">
-                <div className="au-reset"><PasswordResetPanel defaultUserId={userId} onBack={() => setView('login')} /></div>
+                <PasswordRecovery defaultUserId={userId || site.community?.userId || ''} initialTab={resetTabFrom(params.get('tab'))}
+                    onBack={leaveRecovery} />
             </AuthShell>
         );
     }
@@ -82,7 +86,7 @@ function LoginPage() {
                 <button type="button" className="lp-btn lp-btn-line lp-btn-full" onClick={() => { setView('pwreset'); setError(''); }}>🔑 비밀번호 변경</button>
                 <button type="button" className="lp-btn lp-btn-line lp-btn-full" onClick={() => { setView('phone'); setError(''); }}>📱 본인인증</button>
             </div>
-            <p className="au-help">비밀번호 변경은 본인인증을 해 둔 이용권 계정만 돼요. 안 되면 <a href={KAKAO_HELP_URL} target="_blank" rel="noopener noreferrer">카카오톡으로 문의</a>해 주세요.</p>
+            <p className="au-help">비밀번호 변경은 휴대폰 인증을 한 계정만 돼요. 안 되면 <a href={KAKAO_HELP_URL} target="_blank" rel="noopener noreferrer">카카오톡으로 문의</a>해 주세요.</p>
         </AuthShell>
     );
 }

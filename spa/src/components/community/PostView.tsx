@@ -1,6 +1,6 @@
 import type { PostItem } from '../../lib/communityData';
 import { boardLabel, formatPostDate, platformLabel, type BoardConfig } from '../../lib/communityModel.mjs';
-import { GradeBadge, StatusBadge } from './Badges';
+import { GradeBadge, NoticeBadge, StatusBadge } from './Badges';
 
 type Props = {
     post: PostItem;
@@ -21,6 +21,7 @@ function PostView({ post, boards, busy = false, onLike, onReport, onEdit, onDele
         <article className="lp-box cm-post">
             <header className="cm-post-head">
                 <div className="cm-post-meta">
+                    {post.notice ? <NoticeBadge kind={post.noticeBadge} /> : null}
                     <span className="cm-board-tag">{boardLabel(post.board, boards)}</span>
                     <StatusBadge board={post.board} status={post.status} />
                 </div>
@@ -29,7 +30,7 @@ function PostView({ post, boards, busy = false, onLike, onReport, onEdit, onDele
                     <GradeBadge grade={post.grade} isOperator={post.isOperator} />
                     <b className="cm-nick">{post.nickname}</b>
                     <time>{formatPostDate(post.createdAt, now)}</time>
-                    <span>조회 {post.views}</span>
+                    {post.notice ? null : <span>조회 {post.views}</span>}
                 </div>
             </header>
             {promo ? (
@@ -42,10 +43,10 @@ function PostView({ post, boards, busy = false, onLike, onReport, onEdit, onDele
             ) : null}
             <div className="cm-body">{post.body}</div>
             <footer className="cm-post-actions">
-                {post.mine
+                {(post.mine && !post.notice) || !post.likable
                     ? <span className="cm-like cm-like-static"><b>{post.likes}</b> 좋아요</span>
                     : <button type="button" className="cm-like" aria-pressed={post.liked} disabled={busy} onClick={onLike}><b>{post.likes}</b> 좋아요</button>}
-                {post.mine ? (
+                {post.notice ? null : post.mine ? (
                     <>
                         <button type="button" className="cm-act" onClick={onEdit}>수정</button>
                         <button type="button" className="cm-act" onClick={onDelete} disabled={busy}>삭제</button>

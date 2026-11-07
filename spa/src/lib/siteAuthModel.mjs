@@ -4,6 +4,8 @@
  * without a browser or a server.
  */
 
+import { validateAuthCode, validatePhone } from './phoneAuthModel.mjs';
+
 export const LOGIN_PATH = '/login';
 export const SIGNUP_PATH = '/signup';
 const DEFAULT_AFTER_AUTH = '/';
@@ -64,6 +66,11 @@ export function validateSignup({ userId, password, passwordConfirm, nickname }) 
     if (pw.length < 6 || pw.length > 100) return '비밀번호는 6자 이상 입력해 주세요.';
     if (pw !== String(passwordConfirm || '')) return '비밀번호가 같지 않아요. 다시 확인해 주세요.';
     return validateNickname(nickname);
+}
+
+/** The signup form with its phone block: account fields first, then the number, then the code. */
+export function validateSignupWithPhone(form) {
+    return validateSignup(form) || validatePhone(form?.phone) || validateAuthCode(form?.code);
 }
 
 /** Shown above the license-code field (agreed wording). `bold` parts are rendered as <strong>. */

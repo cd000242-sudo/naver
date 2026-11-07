@@ -82,7 +82,7 @@ jobs:
             ! -name 'fail.html' \
             ! -name 'leword-pro-web.html' \
             -exec cp _site/index.html {} \;
-          routes=(products detail leword-detail leword orbit pricing download chatbots reviews community login signup lookup refund privacy terms)
+          routes=(products detail leword-detail leword orbit pricing download chatbots reviews community login signup me lookup refund privacy terms)
           for page in "${routes[@]}"; do
             if [ -f "_site/${page}/index.html" ]; then
               cp "_site/${page}/index.html" "_site/${page}.html"

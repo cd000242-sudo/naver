@@ -5,6 +5,7 @@ import { normalizeComments, normalizePost, type CommentItem, type PostItem } fro
 import { communityPath, reportReasons, type BoardConfig } from '../../lib/communityModel.mjs';
 import type { CommunityProfile } from '../../lib/communitySession';
 import CommentSection from './CommentSection';
+import PostAdminBar from './PostAdminBar';
 import PostView from './PostView';
 import ReportDialog from './ReportDialog';
 
@@ -17,12 +18,14 @@ type Props = {
     onEdit: (post: PostItem) => void;
     onDeleted: () => void;
     onVisit: (post: PostItem) => void;
+    /** A moderator hid, pinned or re-stated this post: the list behind it must be read again. */
+    onModerated?: () => void;
 };
 
 type ReportTarget = { targetType: 'post' | 'comment'; targetId: string };
 
 /** One post with its comments: reads it, and carries the like / report / delete actions. */
-function PostDetail({ id, boards, boardId, profile, reportConfig, onEdit, onDeleted, onVisit }: Props) {
+function PostDetail({ id, boards, boardId, profile, reportConfig, onEdit, onDeleted, onVisit, onModerated }: Props) {
     const [post, setPost] = useState<PostItem | null>(null);
     const [comments, setComments] = useState<CommentItem[]>([]);
     const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
@@ -97,7 +100,10 @@ function PostDetail({ id, boards, boardId, profile, reportConfig, onEdit, onDele
             <PostView post={post} boards={boards} busy={busy} onLike={() => { void like(); }} onEdit={() => onEdit(post)}
                 onDelete={() => { void remove(); }} onVisit={() => onVisit(post)}
                 onReport={() => { setReportError(''); setReport({ targetType: 'post', targetId: post.id }); }} />
+            <PostAdminBar post={post} boards={boards} profile={profile} onRemoved={onDeleted}
+                onChanged={(change) => { setPost({ ...post, ...change }); onModerated?.(); }} />
             <CommentSection postId={post.id} comments={comments} profile={profile} onComments={setComments} onReload={load}
+                commentable={post.commentable}
                 onReport={(targetType, targetId) => { setReportError(''); setReport({ targetType, targetId }); }} />
             {report ? (
                 <ReportDialog reasons={reportReasons(reportConfig)} busy={busy} error={reportError}

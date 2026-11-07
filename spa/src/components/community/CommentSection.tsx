@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { boardApi } from '../../lib/communityApi';
 import type { CommentItem } from '../../lib/communityData';
+import { canModerate } from '../../lib/accountModel.mjs';
 import { countComments } from '../../lib/communityModel.mjs';
 import type { CommunityProfile } from '../../lib/communitySession';
+import CommentAdminBar from './CommentAdminBar';
 import CommentForm from './CommentForm';
 import CommentTree from './CommentTree';
 
@@ -15,6 +17,8 @@ type Props = {
     /** Read the post and its comments again from the server. */
     onReload: () => Promise<void>;
     onReport: (targetType: 'post' | 'comment', targetId: string) => void;
+    /** The server closes comments for some posts (notices); a missing value means open. */
+    commentable?: boolean;
 };
 
 function patchComment(list: CommentItem[], id: string, change: Partial<CommentItem>): CommentItem[] {
@@ -25,7 +29,7 @@ function patchComment(list: CommentItem[], id: string, change: Partial<CommentIt
 }
 
 /** Comments under a post: the list, the box for a new comment, and the reply box under the comment being answered. */
-function CommentSection({ postId, comments, profile, onComments, onReload, onReport }: Props) {
+function CommentSection({ postId, comments, profile, onComments, onReload, onReport, commentable = true }: Props) {
     const [replyingTo, setReplyingTo] = useState('');
     const [notice, setNotice] = useState('');
     const canWrite = Boolean(profile.nickname) && !profile.needsNickname;
@@ -57,7 +61,7 @@ function CommentSection({ postId, comments, profile, onComments, onReload, onRep
         <section className="lp-box cm-cmts" aria-labelledby="cm-cmts-title">
             <h2 id="cm-cmts-title">댓글 {countComments(comments)}</h2>
             {notice ? <p className="lp-error" role="alert">{notice}</p> : null}
-            {comments.length === 0 ? <p className="cm-empty-sm">첫 댓글을 남겨 보세요.</p> : (
+            {comments.length === 0 ? (commentable ? <p className="cm-empty-sm">첫 댓글을 남겨 보세요.</p> : null) : (
                 <CommentTree
                     comments={comments}
                     replyingTo={replyingTo}
@@ -65,13 +69,16 @@ function CommentSection({ postId, comments, profile, onComments, onReload, onRep
                     onLike={(comment) => { void like(comment); }}
                     onDelete={(comment) => { void remove(comment); }}
                     onReport={(comment) => onReport('comment', comment.id)}
+                    renderAdmin={canModerate(profile) ? (comment) => <CommentAdminBar comment={comment} profile={profile} onDone={onReload} /> : undefined}
                     renderReplyForm={(parent) => (
                         <CommentForm placeholder={`${parent.nickname} 님에게 답글`} submitLabel="답글 올리기"
                             onSubmit={(body) => send(body, parent.id)} onCancel={() => setReplyingTo('')} />
                     )}
                 />
             )}
-            {canWrite
+            {!commentable
+                ? <p className="lp-note">이 글은 댓글을 받지 않아요.</p>
+                : canWrite
                 ? <CommentForm placeholder="댓글을 남겨 보세요" submitLabel="댓글 올리기" onSubmit={(body) => send(body)} />
                 : <p className="lp-note">닉네임을 정하면 댓글을 쓸 수 있어요. 화면 위쪽에서 닉네임을 정해 주세요.</p>}
         </section>

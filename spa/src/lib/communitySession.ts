@@ -27,6 +27,8 @@ export type CommunityProfile = {
     needsNickname: boolean;
     /** True only for the operator account (owner). */
     canWriteNews: boolean;
+    /** The server calls this account an operator. Only decides which buttons are drawn; the server re-checks every call. */
+    isOperator: boolean;
     score: number;
     activity: { posts: number; comments: number; visits: number };
     grade: CommunityGrade;
@@ -68,6 +70,7 @@ export function normalizeProfile(payload: Record<string, unknown>): CommunityPro
         nickname: text(payload.nickname),
         needsNickname: payload.needsNickname === true,
         canWriteNews: payload.canWriteNews === true,
+        isOperator: payload.isOperator === true,
         score: count(payload.score),
         activity: { posts: count(activity.posts), comments: count(activity.comments), visits: count(activity.visits) },
         grade: toGrade(payload.grade),

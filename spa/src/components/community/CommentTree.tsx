@@ -12,16 +12,23 @@ type Props = {
     onDelete: (comment: CommentItem) => void;
     onReport: (comment: CommentItem) => void;
     renderReplyForm: (parent: CommentItem) => ReactNode;
+    /** Moderator buttons for one comment; set only for an owner, so a member's page has none of it. */
+    renderAdmin?: (comment: CommentItem) => ReactNode;
     now?: number;
 };
 
 type RowProps = Omit<Props, 'comments'> & { comment: CommentItem; reply: boolean; now: number };
 
-function CommentRow({ comment, reply, replyingTo, onReply, onLike, onDelete, onReport, renderReplyForm, now }: RowProps) {
+function CommentRow({ comment, reply, replyingTo, onReply, onLike, onDelete, onReport, renderReplyForm, renderAdmin, now }: RowProps) {
     return (
         <li className={`cm-comment${reply ? ' is-reply' : ''}`}>
             {comment.gone ? (
-                <p className="cm-gone">삭제된 댓글입니다</p>
+                renderAdmin && comment.hidden ? (
+                    <>
+                        <p className="cm-gone">숨긴 댓글입니다</p>
+                        {comment.hiddenBody ? <p className="cm-c-body cm-c-dim">{comment.hiddenBody}</p> : null}
+                    </>
+                ) : <p className="cm-gone">삭제된 댓글입니다</p>
             ) : (
                 <>
                     <div className="cm-c-head">
@@ -41,12 +48,13 @@ function CommentRow({ comment, reply, replyingTo, onReply, onLike, onDelete, onR
                     </div>
                 </>
             )}
+            {renderAdmin ? renderAdmin(comment) : null}
             {!reply && replyingTo === comment.id && !comment.gone ? renderReplyForm(comment) : null}
             {comment.replies.length > 0 ? (
                 <ul className="cm-replies">
                     {comment.replies.map((child) => (
                         <CommentRow key={child.id} comment={child} reply replyingTo={replyingTo} onReply={onReply} onLike={onLike}
-                            onDelete={onDelete} onReport={onReport} renderReplyForm={renderReplyForm} now={now} />
+                            onDelete={onDelete} onReport={onReport} renderReplyForm={renderReplyForm} renderAdmin={renderAdmin} now={now} />
                     ))}
                 </ul>
             ) : null}

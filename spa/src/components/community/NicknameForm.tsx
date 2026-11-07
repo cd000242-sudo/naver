@@ -6,10 +6,11 @@ type Props = {
     /** Called once the server accepted the nickname (the stored profile is already updated). */
     onDone: () => void;
     initial?: string;
+    submitLabel?: string;
 };
 
 /** Asks for the nickname that writing and commenting need. */
-function NicknameForm({ onDone, initial = '' }: Props) {
+function NicknameForm({ onDone, initial = '', submitLabel = '닉네임 정하기' }: Props) {
     const [nickname, setNickname] = useState(initial);
     const [busy, setBusy] = useState(false);
     const [error, setError] = useState('');
@@ -36,7 +37,7 @@ function NicknameForm({ onDone, initial = '' }: Props) {
                 <small>글과 댓글에 보여요. 2~12자 · 글자·숫자와 _ . - 만 쓸 수 있어요.</small>
             </label>
             {error ? <p className="lp-error" role="alert">{error}</p> : null}
-            <button type="submit" className="lp-btn lp-btn-dark" disabled={busy}>{busy ? '저장하는 중…' : '닉네임 정하기'}</button>
+            <button type="submit" className="lp-btn lp-btn-dark" disabled={busy}>{busy ? '저장하는 중…' : submitLabel}</button>
         </form>
     );
 }
