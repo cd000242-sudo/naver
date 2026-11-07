@@ -2,7 +2,8 @@
 // Agent-first helpers for the startup engine gate (startupEngineGate.ts):
 //   - agent cards go to the top of the list,
 //   - every agent card gets a status chip that is filled in asynchronously (10s limit each),
-//   - when no engine was saved, the first READY agent is pre-selected (else the first agent).
+//   - when no engine was saved, Claude Code is pre-selected (owner decision 2026-11-07); it only gives way to
+//     another READY agent when Claude Code itself is not ready, and stays selected when nothing is ready.
 // The status calls never block the gate from showing, and a probe that cannot answer is
 // reported as "확인 지연" — never as "설치 필요".
 //
@@ -82,6 +83,16 @@ export function agentConnectOrderGateOptions<T extends { readonly value: string 
   ];
 }
 
+/** Agent pre-selected when nothing was saved. Only the pre-selection changes: the user still confirms. */
+export const AGENT_CONNECT_DEFAULT_VALUE = 'agent-claude';
+
+/** Pre-selection order: the default agent first (when its card exists), the others in their existing order. */
+export function agentConnectDefaultFirst(agentValues: readonly string[]): string[] {
+  return agentValues.includes(AGENT_CONNECT_DEFAULT_VALUE)
+    ? [AGENT_CONNECT_DEFAULT_VALUE, ...agentValues.filter((value) => value !== AGENT_CONNECT_DEFAULT_VALUE)]
+    : [...agentValues];
+}
+
 /** Value of the checked engine radio inside the gate ('' when none). */
 export function agentConnectGateChoice(overlay: HTMLElement): string {
   return overlay.querySelector<HTMLInputElement>('input[name="startup-engine-choice"]:checked')?.value || '';
@@ -138,19 +149,21 @@ export async function agentConnectFetchKind(
 }
 
 /**
- * First ready agent, decided only once every earlier agent has answered, so the selection
- * never flickers. With no ready agent the first agent stays selected. Without agents: nothing.
+ * First ready agent in pre-selection order (Claude Code first), decided only once every earlier agent
+ * has answered, so the selection never flickers. With no ready agent the default (Claude Code, else the
+ * first agent) stays selected. Without agents: nothing.
  */
 export function agentConnectPickDefault(
   agentValues: readonly string[],
   kinds: ReadonlyMap<string, AgentConnectChipKind>,
 ): { readonly value: string; readonly settled: boolean } {
-  for (const value of agentValues) {
+  const ordered = agentConnectDefaultFirst(agentValues);
+  for (const value of ordered) {
     const kind = kinds.get(value) ?? 'checking';
     if (kind === 'checking') return { value: '', settled: false };
     if (kind === 'ready') return { value, settled: true };
   }
-  return { value: agentValues[0] ?? '', settled: true };
+  return { value: ordered[0] ?? '', settled: true };
 }
 
 /** Fills the chips of every agent card and applies the default-agent rule once. */

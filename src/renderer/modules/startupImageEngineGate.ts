@@ -2,8 +2,8 @@
 // [2026-11-03] Image engine section of the startup engine gate.
 //
 // Owner decisions: (1) the choices are read from the image tab's #image-source-select (single source of truth, like
-// the text engines read the settings radios); (2) the FIRST time the window is shown, '관련 사진 찾기' is pre-selected,
-// afterwards the engine that is currently saved (= the last one confirmed here or in the image tab); (3) confirming
+// the text engines read the settings radios); (2) the FIRST time the window is shown, 'Codex 구독 이미지' (codex-image)
+// is pre-selected (2026-11-07, replacing '관련 사진 찾기'), afterwards the engine that is currently saved (= the last one confirmed here or in the image tab); (3) confirming
 // goes through the image tab's own change handler so both screens share ONE save path (globalImageSource,
 // fullAutoImageSource, shopping sync, login rows); (4) '관련 사진 찾기' needs the copyright agreement and a refusal
 // keeps the window open so another engine can be picked.
@@ -16,14 +16,15 @@ import {
   retiredImageEngineChoices,
 } from '../../runtime/retiredImageEngines.js';
 import {
-  COLLECT_ENGINE_VALUE,
   collectEngineAllowPick,
   collectEngineDispatchApprovedChange,
 } from './imageCollectEngineConsent.js';
 
 export const STARTUP_IMAGE_CHOICE_NAME = 'startup-image-engine-choice';
-/** localStorage flag: set once the user confirmed this window (the pre-selected collect-photos applies only before). */
+/** localStorage flag: set once the user confirmed this window (the pre-selected default engine applies only before). */
 export const STARTUP_IMAGE_FIRST_SHOWN_KEY = 'startupImageEngineDefaultShownV1';
+/** Engine pre-selected on the first show (the user still has to press confirm). */
+const STARTUP_IMAGE_DEFAULT_VALUE = 'codex-image';
 const STARTUP_IMAGE_SELECT_ID = 'image-source-select';
 const STARTUP_IMAGE_SECTION_ID = 'startup-engine-gate-image';
 
@@ -64,7 +65,7 @@ export function startupImageCollectOptions(root: ParentNode = document): Startup
  * is parked first (idempotent, same call the app makes at startup), so the order of the two startup steps does not matter.
  * - While a retired-engine marker is pending, only engines the retired dialog can resolve are offered
  *   (collect-photos is not one of them), so a pick here clears the marker and that dialog never shows twice.
- * - First show: collect-photos. Later: the saved engine if it is still offered, otherwise nothing (no silent default).
+ * - First show (nothing parked): codex-image. Later: the saved engine if it is still offered, otherwise nothing (no silent default).
  */
 export function startupImageBuildPlan(options: readonly StartupImageOption[], store = startupImageStore()): StartupImagePlan {
   const pending = store ? markRetiredImageEngines(store) : null;
@@ -72,7 +73,8 @@ export function startupImageBuildPlan(options: readonly StartupImageOption[], st
   const offered = pending ? options.filter((option) => resolvable.has(option.value)) : options;
   const has = (value: string | null | undefined): value is string => !!value && offered.some((option) => option.value === value);
   const first = !store || store.getItem(STARTUP_IMAGE_FIRST_SHOWN_KEY) !== '1';
-  if (first && has(COLLECT_ENGINE_VALUE)) return { options: offered, checked: COLLECT_ENGINE_VALUE };
+  // A parked retired engine means the user must choose its replacement: no pre-selection then.
+  if (first && !pending && has(STARTUP_IMAGE_DEFAULT_VALUE)) return { options: offered, checked: STARTUP_IMAGE_DEFAULT_VALUE };
   const saved = [store?.getItem('globalImageSource'), store?.getItem('fullAutoImageSource')].find(has);
   return { options: offered, checked: saved || '' };
 }

@@ -11,8 +11,9 @@
 // fields settingsModal.saveSettings writes (primaryGeminiTextModel + defaultAiProvider).
 
 // [2026-11-03] Agent-first: agent-* cards are listed on top and pre-selected when nothing was
-// saved; an agent that is not ready is connected (install -> login -> real answer) inside this
-// window. A failed connection keeps the window open: no silent engine swap.
+// saved (Claude Code first since 2026-11-07, see agentConnectDefaultFirst); an agent that is not
+// ready is connected (install -> login -> real answer) inside this window. A failed connection
+// keeps the window open: no silent engine swap.
 
 import type { AgentProvider } from '../../agentCli/types.js';
 import { resolveTextModelSelection } from '../utils/agentProductPolicyUi.js';
@@ -20,6 +21,7 @@ import { restoreTextModelRadio } from '../utils/settingsModal.js';
 import { agentConnectRun, agentConnectWriteLog } from './agentConnectFlow.js';
 import type { AgentConnectResult } from './agentConnectFlow.js';
 import {
+  agentConnectDefaultFirst,
   agentConnectGateChoice,
   agentConnectGateLock,
   agentConnectGateNeedsConnect,
@@ -210,7 +212,7 @@ export function showStartupEngineGate(savedModel: string): Promise<string | null
   const saved = options.some((option) => option.value === savedModel) ? savedModel : '';
   const agentValues = options.map((option) => option.value).filter(agentConnectIsAgentValue);
   const agentDefault = !saved && agentValues.length > 0;
-  const checked = saved || (agentDefault ? agentValues[0] : '');
+  const checked = saved || (agentDefault ? agentConnectDefaultFirst(agentValues)[0] : ''); // [2026-11-07] Claude Code first
   const imagePlan = startupImageBuildPlan(startupImageCollectOptions());
   const imageHtml = startupImageGateHtml(imagePlan);
   const ready = !!checked && (!imageHtml || !!imagePlan.checked);

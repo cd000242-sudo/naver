@@ -25,12 +25,12 @@ afterEach(() => {
   localStorage.clear();
 });
 
-describe('A. 이미지 엔진 기본값 = 덕트테이프(openai-image)', () => {
-  it('#image-source-select 의 selected option 은 openai-image 하나뿐이다', () => {
+describe('A. 이미지 엔진 기본값 = Codex 구독 이미지(codex-image) [2026-11-07 덕트테이프에서 변경]', () => {
+  it('#image-source-select 의 selected option 은 codex-image 하나뿐이다', () => {
     const start = html.indexOf('id="image-source-select"');
     const block = html.slice(start, html.indexOf('</select>', start));
     const selected = [...block.matchAll(/<option value="([^"]+)"[^>]*\sselected[\s>]/g)].map((m) => m[1]);
-    expect(selected).toEqual(['openai-image']);
+    expect(selected).toEqual(['codex-image']);
   });
 
   it('덕트테이프 모델 라디오의 기본 checked 는 Sunburst 하나뿐이다', () => {
@@ -40,10 +40,10 @@ describe('A. 이미지 엔진 기본값 = 덕트테이프(openai-image)', () => 
     expect(checked).toEqual(['gpt-image-2.6-sunburst']);
   });
 
-  it('저장값이 전혀 없으면 풀오토·글로벌 엔진 읽기 기본값이 openai-image 다', () => {
+  it('저장값이 전혀 없으면 풀오토·글로벌 엔진 읽기 기본값이 codex-image 다', () => {
     localStorage.clear();
-    expect(getFullAutoImageSource()).toBe('openai-image');
-    expect(getGlobalImageSource()).toBe('openai-image');
+    expect(getFullAutoImageSource()).toBe('codex-image');
+    expect(getGlobalImageSource()).toBe('codex-image');
   });
 
   it.each(['dropshot', 'nano-banana-2', 'flow', 'openai-image'])(

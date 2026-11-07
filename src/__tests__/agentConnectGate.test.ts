@@ -3,6 +3,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import {
   agentConnectChipLabel,
+  agentConnectDefaultFirst,
   agentConnectFetchKind,
   agentConnectGateNeedsConnect,
   agentConnectIsAgentValue,
@@ -47,17 +48,31 @@ describe('agentConnectGate — chip labels', () => {
 
 describe('agentConnectGate — default agent', () => {
   const values = ['agent-codex', 'agent-claude', 'agent-gemini'];
-  it('waits while an earlier agent is still being checked', () => {
-    const kinds = new Map<string, any>([['agent-codex', 'checking'], ['agent-claude', 'ready'], ['agent-gemini', 'checking']]);
+  it('puts Claude Code first in the pre-selection order and keeps the others in their order', () => {
+    expect(agentConnectDefaultFirst(values)).toEqual(['agent-claude', 'agent-codex', 'agent-gemini']);
+    expect(values[0]).toBe('agent-codex'); // input is not mutated
+    expect(agentConnectDefaultFirst(['agent-codex', 'agent-gemini'])).toEqual(['agent-codex', 'agent-gemini']);
+    expect(agentConnectDefaultFirst([])).toEqual([]);
+  });
+  it('waits while the default agent itself is still being checked', () => {
+    const kinds = new Map<string, any>([['agent-codex', 'ready'], ['agent-claude', 'checking'], ['agent-gemini', 'checking']]);
     expect(agentConnectPickDefault(values, kinds).settled).toBe(false);
   });
-  it('picks the first ready agent once every earlier agent answered', () => {
-    const kinds = new Map<string, any>([['agent-codex', 'login'], ['agent-claude', 'ready'], ['agent-gemini', 'checking']]);
+  it('picks Claude Code as soon as it is ready, without waiting for the other agents', () => {
+    const kinds = new Map<string, any>([['agent-codex', 'checking'], ['agent-claude', 'ready'], ['agent-gemini', 'checking']]);
     expect(agentConnectPickDefault(values, kinds)).toEqual({ value: 'agent-claude', settled: true });
   });
-  it('falls back to the first agent when none is ready', () => {
-    const kinds = new Map<string, any>([['agent-codex', 'install'], ['agent-claude', 'delayed'], ['agent-gemini', 'unavailable']]);
+  it('moves to the first other ready agent only when Claude Code is not ready', () => {
+    const kinds = new Map<string, any>([['agent-codex', 'ready'], ['agent-claude', 'login'], ['agent-gemini', 'checking']]);
     expect(agentConnectPickDefault(values, kinds)).toEqual({ value: 'agent-codex', settled: true });
+  });
+  it('falls back to Claude Code (not the first card) when none is ready', () => {
+    const kinds = new Map<string, any>([['agent-codex', 'install'], ['agent-claude', 'delayed'], ['agent-gemini', 'unavailable']]);
+    expect(agentConnectPickDefault(values, kinds)).toEqual({ value: 'agent-claude', settled: true });
+  });
+  it('falls back to the first agent when the Claude card does not exist', () => {
+    const kinds = new Map<string, any>([['agent-codex', 'install'], ['agent-gemini', 'install']]);
+    expect(agentConnectPickDefault(['agent-codex', 'agent-gemini'], kinds)).toEqual({ value: 'agent-codex', settled: true });
   });
   it('has nothing to pick without agents', () => {
     expect(agentConnectPickDefault([], new Map())).toEqual({ value: '', settled: true });

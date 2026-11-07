@@ -1,8 +1,8 @@
 // @vitest-environment happy-dom
 /**
  * [2026-11-03] 기동 엔진 선택 창의 "이미지 엔진" 칸.
- * 사장님 결정: 선택지는 이미지 탭 #image-source-select 가 단일 출처, 처음 한 번만 '관련 사진 찾기'를 미리 고르고
- * 그 뒤엔 마지막으로 확정한 엔진. 저장은 이미지 탭 change 경로를 그대로 타며, '관련 사진 찾기'는 저작권 동의가 필요하다.
+ * 사장님 결정: 선택지는 이미지 탭 #image-source-select 가 단일 출처, 처음 한 번만 'Codex 구독 이미지'를 미리 고르고
+ * (2026-11-07: 기존 '관련 사진 찾기' 자리를 대체) 그 뒤엔 마지막으로 확정한 엔진. 저장은 이미지 탭 change 경로를 그대로 타며, '관련 사진 찾기'는 저작권 동의가 필요하다.
  */
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import * as fs from 'fs';
@@ -42,6 +42,7 @@ function mountDom(): HTMLSelectElement {
       <option value="nano-banana-2" data-price="Gemini | ₩97/장">나노바나나 2</option>
       <option value="openai-image" data-price="gpt-image | ₩18/장" selected>덕테이프 · OpenAI</option>
       <option value="flow" data-price="Google Flow | 로그인 필요">Google Flow</option>
+      <option value="codex-image" data-price="ChatGPT 구독 이미지 | Codex 연결 필요">Codex 구독 이미지 (GPT 이미지 · 별도 비용 없음)</option>
       <option value="collect-photos" data-price="무료 · 저작권 안내 동의 필요">관련 사진 찾기 (뉴스·기사 사진 · 무료)</option>
     </select>`;
   const select = document.getElementById('image-source-select') as HTMLSelectElement;
@@ -84,14 +85,14 @@ beforeEach(() => {
 describe('이미지 엔진 선택지 = #image-source-select', () => {
   it('옵션의 값·제목·가격 안내를 그대로 읽는다', () => {
     const options = startupImageCollectOptions();
-    expect(options.map((o) => o.value)).toEqual(['nano-banana-2', 'openai-image', 'flow', 'collect-photos']);
-    expect(options[3]).toEqual({ value: 'collect-photos', title: '관련 사진 찾기 (뉴스·기사 사진 · 무료)', price: '무료 · 저작권 안내 동의 필요' });
+    expect(options.map((o) => o.value)).toEqual(['nano-banana-2', 'openai-image', 'flow', 'codex-image', 'collect-photos']);
+    expect(options[4]).toEqual({ value: 'collect-photos', title: '관련 사진 찾기 (뉴스·기사 사진 · 무료)', price: '무료 · 저작권 안내 동의 필요' });
   });
 
   it('창에는 그 옵션이 모두 라디오로 나온다 (collect-photos 포함)', () => {
     void showStartupEngineGate('');
     const values = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="startup-image-engine-choice"]')).map((r) => r.value);
-    expect(values).toEqual(['nano-banana-2', 'openai-image', 'flow', 'collect-photos']);
+    expect(values).toEqual(['nano-banana-2', 'openai-image', 'flow', 'codex-image', 'collect-photos']);
     expect(overlay()!.querySelectorAll('button').length).toBe(1); // still no close / skip
   });
 
@@ -105,17 +106,25 @@ describe('이미지 엔진 선택지 = #image-source-select', () => {
   });
 });
 
-describe('미리 선택 규칙 — 처음 한 번만 collect-photos', () => {
-  it('처음 표시: collect-photos 가 미리 골라져 있다', () => {
+describe('미리 선택 규칙 — 처음 한 번만 codex-image', () => {
+  it('처음 표시: codex-image 가 미리 골라져 있다 (확인을 눌러야 저장)', () => {
     void showStartupEngineGate('gemini-3.6-flash');
-    expect(checkedImage()).toBe('collect-photos');
+    expect(checkedImage()).toBe('codex-image');
     expect(confirmBtn().disabled).toBe(false);
+    expect(localStorage.getItem('globalImageSource')).toBeNull();
   });
 
-  it('처음 표시여도 저장된 이미지 엔진보다 collect-photos 가 우선이다', () => {
+  it('처음 표시여도 저장된 이미지 엔진보다 codex-image 가 우선이다 (표식이 없는 예전 설치에만 해당)', () => {
     localStorage.setItem('globalImageSource', 'flow');
     void showStartupEngineGate('gemini-3.6-flash');
-    expect(checkedImage()).toBe('collect-photos');
+    expect(checkedImage()).toBe('codex-image');
+  });
+
+  it('목록에 codex-image 가 없으면 저장된 엔진을, 그것도 없으면 아무것도 고르지 않는다', () => {
+    document.querySelector('#image-source-select option[value="codex-image"]')!.remove();
+    localStorage.setItem('globalImageSource', 'flow');
+    void showStartupEngineGate('gemini-3.6-flash');
+    expect(checkedImage()).toBe('flow');
   });
 
   it('두 번째부터는 마지막으로 확정한 엔진이 미리 골라진다', () => {
@@ -137,7 +146,7 @@ describe('미리 선택 규칙 — 처음 한 번만 collect-photos', () => {
 
   it('글 엔진을 안 골랐으면 이미지 엔진이 골라져 있어도 확인은 잠긴다', () => {
     void showStartupEngineGate('');
-    expect(checkedImage()).toBe('collect-photos');
+    expect(checkedImage()).toBe('codex-image');
     expect(confirmBtn().disabled).toBe(true);
     pickText('openai-gpt41');
     expect(confirmBtn().disabled).toBe(false);
@@ -158,9 +167,20 @@ describe('확정 — 이미지 탭 저장 경로를 탄다', () => {
     expect(overlay()).toBeNull();
   });
 
+  it('codex-image: 미리 골라진 채 확인하면 동의 질문 없이 저장되고 표식이 남는다', async () => {
+    const done = showStartupEngineGate('gemini-3.6-flash');
+    confirmBtn().click(); // codex-image is pre-selected on the first show
+    await expect(done).resolves.toBe('gemini-3.6-flash');
+    expect(consent.ensure).not.toHaveBeenCalled();
+    expect(localStorage.getItem('globalImageSource')).toBe('codex-image');
+    expect(localStorage.getItem('fullAutoImageSource')).toBe('codex-image');
+    expect(localStorage.getItem(STARTUP_IMAGE_FIRST_SHOWN_KEY)).toBe('1');
+  });
+
   it('collect-photos: 동의 한 번(이중 질문 없음) 뒤 저장되고 표식이 남는다', async () => {
     const done = showStartupEngineGate('gemini-3.6-flash');
-    confirmBtn().click(); // collect-photos is pre-selected on the first show
+    pickImage('collect-photos');
+    confirmBtn().click();
     await expect(done).resolves.toBe('gemini-3.6-flash');
     expect(consent.ensure).toHaveBeenCalledTimes(1);
     expect((config.imageCollectConsent as any)?.version).toBeGreaterThanOrEqual(1);
@@ -172,6 +192,7 @@ describe('확정 — 이미지 탭 저장 경로를 탄다', () => {
   it('collect-photos 동의를 거절하면 이미지 엔진은 저장되지 않고 창은 열린 채 다른 엔진을 고를 수 있다', async () => {
     consent.ensure.mockResolvedValue(false);
     const done = showStartupEngineGate('gemini-3.6-flash');
+    pickImage('collect-photos');
     let settled = false;
     void done.then(() => { settled = true; });
     confirmBtn().click();
@@ -194,6 +215,7 @@ describe('확정 — 이미지 탭 저장 경로를 탄다', () => {
   it('이미 동의 기록이 있으면 모달 없이 바로 저장된다', async () => {
     config.imageCollectConsent = { version: 1, agreedAt: '2026-11-03T00:00:00.000Z' };
     const done = showStartupEngineGate('gemini-3.6-flash');
+    pickImage('collect-photos');
     confirmBtn().click();
     await done;
     expect(consent.ensure).not.toHaveBeenCalled();
@@ -208,8 +230,8 @@ describe('옛 엔진 보류(retiredImageEngineGate)와의 관계', () => {
     park();
     void showStartupEngineGate('gemini-3.6-flash');
     const values = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="startup-image-engine-choice"]')).map((r) => r.value);
-    expect(values).toEqual(['nano-banana-2', 'openai-image', 'flow']);
-    expect(checkedImage()).toBeUndefined();
+    expect(values).toEqual(['nano-banana-2', 'openai-image', 'flow', 'codex-image']);
+    expect(checkedImage()).toBeUndefined(); // 보류 중에는 미리 고르지 않는다 — 옛 엔진 대신 쓸 것을 직접 고르게 한다
     expect(confirmBtn().disabled).toBe(true);
   });
 

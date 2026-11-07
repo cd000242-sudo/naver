@@ -95,12 +95,12 @@ describe('startupEngineGate — 에이전트 우선', () => {
     expect(order).toEqual(['agent-codex', 'agent-claude', 'agent-gemini', 'gemini-3.1-flash-lite', 'gemini-3.6-flash', 'openai-gpt41']);
   });
 
-  it('저장값이 없으면 상태가 오기 전에도 첫 에이전트가 미리 선택되고 확인은 활성', () => {
+  it('저장값이 없으면 상태가 오기 전에도 Claude Code 가 미리 선택되고 확인은 활성', () => {
     (window as any).api = agentApi({ codex: READY });
     void showStartupEngineGate('');
-    expect(checkedValue()).toBe('agent-codex');
+    expect(checkedValue()).toBe('agent-claude'); // [2026-11-07] 기본 글 엔진 = Claude Code (카드 순서는 그대로)
     expect(confirmBtn()?.disabled).toBe(false);
-    expect(chip('agent-codex').textContent).toBe('⏳ 확인 중');
+    expect(chip('agent-claude').textContent).toBe('⏳ 확인 중');
   });
 
   it('칩이 상태별 문구로 채워지고 조회는 forceRefresh 없이 provider 별로 한 번씩 간다', async () => {
@@ -113,19 +113,26 @@ describe('startupEngineGate — 에이전트 우선', () => {
     expect(api.agentStatus.mock.calls).toEqual([['codex'], ['claude'], ['gemini']]);
   });
 
-  it('저장값이 없으면 준비된 첫 에이전트로 미리 선택이 옮겨 간다', async () => {
-    (window as any).api = agentApi({ codex: NEEDS_LOGIN, claude: READY, gemini: READY });
+  it('Claude Code 가 준비 안 됐고 다른 에이전트가 준비됐으면 그쪽으로 미리 선택이 옮겨 간다', async () => {
+    (window as any).api = agentApi({ codex: READY, claude: NEEDS_LOGIN, gemini: READY });
     void showStartupEngineGate('');
-    await vi.waitFor(() => expect(checkedValue()).toBe('agent-claude'));
-    expect(chip('agent-claude').textContent).toBe('준비됨');
+    await vi.waitFor(() => expect(checkedValue()).toBe('agent-codex'));
+    expect(chip('agent-codex').textContent).toBe('준비됨');
     expect(confirmBtn()?.disabled).toBe(false);
   });
 
-  it('준비된 에이전트가 없으면 첫 에이전트가 그대로 선택돼 있다', async () => {
+  it('모두 준비돼 있어도 Claude Code 가 그대로 선택돼 있다', async () => {
+    (window as any).api = agentApi({ codex: READY, claude: READY, gemini: READY });
+    void showStartupEngineGate('');
+    await vi.waitFor(() => expect(chip('agent-gemini').textContent).toBe('준비됨'));
+    expect(checkedValue()).toBe('agent-claude');
+  });
+
+  it('준비된 에이전트가 없으면 Claude Code 가 그대로 선택돼 있다', async () => {
     (window as any).api = agentApi({ codex: NOT_INSTALLED, claude: NEEDS_LOGIN, gemini: NOT_INSTALLED });
     void showStartupEngineGate('');
     await vi.waitFor(() => expect(chip('agent-gemini').textContent).toBe('설치 필요'));
-    expect(checkedValue()).toBe('agent-codex');
+    expect(checkedValue()).toBe('agent-claude');
   });
 
   it('저장값이 있으면 준비된 에이전트가 있어도 저장값을 바꾸지 않는다', async () => {
@@ -155,10 +162,10 @@ describe('startupEngineGate — 에이전트 우선', () => {
     const api = agentApi({ codex: READY, claude: READY, gemini: READY });
     (window as any).api = api;
     const done = showStartupEngineGate('');
-    await vi.waitFor(() => expect(chip('agent-codex').textContent).toBe('준비됨'));
+    await vi.waitFor(() => expect(chip('agent-claude').textContent).toBe('준비됨'));
     confirmBtn()!.click();
-    await expect(done).resolves.toBe('agent-codex');
-    expect(api.saveConfig.mock.calls[0][0]).toMatchObject({ primaryGeminiTextModel: 'agent-codex', defaultAiProvider: 'agent-codex' });
+    await expect(done).resolves.toBe('agent-claude');
+    expect(api.saveConfig.mock.calls[0][0]).toMatchObject({ primaryGeminiTextModel: 'agent-claude', defaultAiProvider: 'agent-claude' });
     expect(api.agentInstall).not.toHaveBeenCalled();
     expect(api.agentGenerate).not.toHaveBeenCalled();
   });
@@ -175,19 +182,19 @@ describe('startupEngineGate — 에이전트 우선', () => {
   });
 
   it('준비 안 된 에이전트를 확정하면 창 안에서 연결 흐름을 돌리고, 성공하면 저장 후 닫는다', async () => {
-    const states: Record<string, any> = { codex: NOT_INSTALLED, claude: NEEDS_LOGIN, gemini: NOT_INSTALLED };
+    const states: Record<string, any> = { codex: NEEDS_LOGIN, claude: NOT_INSTALLED, gemini: NOT_INSTALLED };
     const api = agentApi(states, {
-      agentInstall: vi.fn(async () => { states.codex = READY; return { success: true }; }),
+      agentInstall: vi.fn(async () => { states.claude = READY; return { success: true }; }),
     });
     (window as any).api = api;
     const done = showStartupEngineGate('');
-    await vi.waitFor(() => expect(chip('agent-codex').textContent).toBe('설치 필요'));
-    expect(checkedValue()).toBe('agent-codex');
+    await vi.waitFor(() => expect(chip('agent-claude').textContent).toBe('설치 필요'));
+    expect(checkedValue()).toBe('agent-claude');
     confirmBtn()!.click();
-    await expect(done).resolves.toBe('agent-codex');
-    expect(api.agentInstall).toHaveBeenCalledWith('codex');
+    await expect(done).resolves.toBe('agent-claude');
+    expect(api.agentInstall).toHaveBeenCalledWith('claude');
     expect(api.agentGenerate).toHaveBeenCalledTimes(1);
-    expect(api.saveConfig.mock.calls[0][0].primaryGeminiTextModel).toBe('agent-codex');
+    expect(api.saveConfig.mock.calls[0][0].primaryGeminiTextModel).toBe('agent-claude');
     expect(overlay()).toBeNull();
   });
 
@@ -196,18 +203,18 @@ describe('startupEngineGate — 에이전트 우선', () => {
     const states: Record<string, any> = { codex: NOT_INSTALLED, claude: NOT_INSTALLED, gemini: NOT_INSTALLED };
     const api = agentApi(states, {
       agentInstall: vi.fn(() => new Promise((resolve) => {
-        finishInstall = () => { states.codex = READY; resolve({ success: true }); };
+        finishInstall = () => { states.claude = READY; resolve({ success: true }); };
       })),
     });
     (window as any).api = api;
     const done = showStartupEngineGate('');
-    await vi.waitFor(() => expect(chip('agent-codex').textContent).toBe('설치 필요'));
+    await vi.waitFor(() => expect(chip('agent-claude').textContent).toBe('설치 필요'));
     confirmBtn()!.click();
     await vi.waitFor(() => expect(connectLog().textContent).toContain('[2/4 설치]'));
     expect(confirmBtn()?.disabled).toBe(true);
     expect(document.querySelector<HTMLInputElement>('input[name="startup-engine-choice"][value="openai-gpt41"]')?.disabled).toBe(true);
     finishInstall();
-    await expect(done).resolves.toBe('agent-codex');
+    await expect(done).resolves.toBe('agent-claude');
   });
 
   it('연결이 실패하면 사유를 보여주고 창을 유지하며 다른 엔진을 고를 수 있다 (몰래 바꾸지 않음)', async () => {
@@ -217,13 +224,13 @@ describe('startupEngineGate — 에이전트 우선', () => {
     );
     (window as any).api = api;
     const done = showStartupEngineGate('');
-    await vi.waitFor(() => expect(chip('agent-codex').textContent).toBe('설치 필요'));
+    await vi.waitFor(() => expect(chip('agent-claude').textContent).toBe('설치 필요'));
     confirmBtn()!.click();
     await vi.waitFor(() => expect(connectLog().textContent).toBe('❌ [2/4 설치]에서 멈춤: 네트워크 오류로 보입니다'));
     await vi.waitFor(() => expect(confirmBtn()?.disabled).toBe(false));
     expect(overlay()).not.toBeNull();
     expect(api.saveConfig).not.toHaveBeenCalled();
-    expect(checkedValue()).toBe('agent-codex'); // the user's choice is never swapped silently
+    expect(checkedValue()).toBe('agent-claude'); // the user's choice is never swapped silently
     expect(confirmBtn()?.textContent).toBe('이 엔진으로 시작');
 
     pick('openai-gpt41');
@@ -270,12 +277,12 @@ describe('startupEngineGate — 에이전트 우선', () => {
     expect(api.agentGenerate).not.toHaveBeenCalled();
   });
 
-  it('기동 진입점도 저장값이 없으면 첫 에이전트를 미리 선택한 게이트를 띄운다', async () => {
+  it('기동 진입점도 저장값이 없으면 Claude Code 를 미리 선택한 게이트를 띄운다', async () => {
     (window as any).api = agentApi({ codex: NEEDS_LOGIN, claude: NEEDS_LOGIN, gemini: NEEDS_LOGIN });
     const pending = initStartupEngineGate();
     await flush(); await flush();
     expect(overlay()).not.toBeNull();
-    expect(checkedValue()).toBe('agent-codex');
+    expect(checkedValue()).toBe('agent-claude');
     void pending;
   });
 });

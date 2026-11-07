@@ -289,7 +289,7 @@ export function getHeadingImageModeDisplayText(): string {
 
 let currentHeadingImageMode: HeadingImageMode = 'all';
 // ✅ [v2.10.335] 기본값 nano-banana-2 (적정가·한글 가능 추천) — 신규 사용자 고가 프로 기본화 방지
-let currentGlobalImageSource: GlobalImageSource = 'openai-image'; // [2026-10-10] 저장값 없음 기본 = 덕트테이프(시니어 배려)
+let currentGlobalImageSource: GlobalImageSource = 'codex-image'; // [2026-11-07] 저장값 없음 기본 = Codex 구독 이미지(이전: 덕트테이프)
 let currentImageStyle: ImageStyleType = 'realistic'; // ✅ 기본값: 실사
 let currentImageRatio: ImageAspectRatio = '1:1'; // ✅ 기본값: 정사각형
 
@@ -406,8 +406,8 @@ export function getFullAutoImageSource(): GlobalImageSource {
     try { localStorage.removeItem('globalImageSource'); } catch (_) { /* ignore */ }
   }
 
-  // [2026-10-10] 저장값이 전혀 없을 때의 기본 = 덕트테이프. 저장된 값은 위에서 먼저 반환되므로 건드리지 않는다.
-  return 'openai-image';
+  // [2026-11-07] 저장값이 전혀 없을 때의 기본 = Codex 구독 이미지(이전: 덕트테이프). 저장된 값은 위에서 먼저 반환되므로 건드리지 않는다.
+  return 'codex-image';
 }
 
 export function setFullAutoImageSource(source: GlobalImageSource): void {
