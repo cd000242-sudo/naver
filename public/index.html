@@ -3783,6 +3783,21 @@
                                 <span style="font-size: 0.7rem; color: var(--text-muted); margin-left: 0.5rem;">소제목 이미지에 소제목 글자를 바꾸지 않고 그대로 넣습니다. 한글을 직접 그리는 엔진만(관련 사진 찾기·내 폴더는 제외)</span>
                             </div>
                         </label>
+                        <!-- [2026-11-07] 움짤로 만들기: config.headingImageAnimated (headingImageAnimatedSetting.ts). GPT 이미지 2.6 에서만 -->
+                        <label
+                            style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.5rem 0.75rem; background: rgba(59, 130, 246, 0.1); border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.2); margin-top: 0.5rem;">
+                            <input type="checkbox" id="heading-image-animated-option"
+                                style="width: 16px; height: 16px; accent-color: var(--primary);">
+                            <div>
+                                <span style="font-size: 0.8rem; color: var(--text-strong); font-weight: 600;">🎞️ 움짤로 만들기</span>
+                                <span style="font-size: 0.7rem; color: var(--text-muted); margin-left: 0.5rem;">소제목 이미지를 움직이는 GIF 로 (GPT 이미지 2.6)</span>
+                                <span id="heading-image-animated-option-note" style="display: block; font-size: 0.7rem; color: #7c3aed; margin-top: 2px;"></span>
+                            </div>
+                        </label>
+                        <details style="margin: 0.25rem 0 0 0.75rem;">
+                            <summary style="cursor: pointer; font-size: 0.7rem; color: var(--text-muted);">움짤 설명 보기</summary>
+                            <div style="font-size: 0.7rem; color: var(--text-muted); line-height: 1.5; margin-top: 0.25rem;">썸네일은 정지 이미지로 둡니다. 한 장에 그림 9장을 그려 비용이 늘어납니다(추정). 네이버 한도 20MB 를 넘으면 만들지 않고 멈춥니다. 소제목 카드의 [🎞️ 움짤로] 버튼으로 한 장만 만들 수도 있습니다.</div>
+                        </details>
                     </div>
 
                     <!-- [v2.11.x] AI 이미지 관련성 검증 제거 — 미사용 기능 폐지 (리스너는 getElementById null 가드로 무영향) -->

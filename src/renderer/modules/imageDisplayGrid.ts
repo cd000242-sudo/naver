@@ -4,6 +4,11 @@
 // ========================================
 
 // 글로벌 참조 (인라인 시 renderer.ts 전역 스코프에서 사용 가능)
+// [2026-11-07] 소제목 카드 "🎞️ 움짤로" 버튼 (GPT 이미지 2.6 GIF) — animatedGifCard.ts. import 하지 않는 이유: 이 파일을 노드 환경 시험이
+//   불러오는데, 카드 모듈의 가져오기 사슬(imageCostUtils)이 모듈 로드 때 window 를 만진다. 번들에서는 같은 스코프의 함수 선언이다.
+declare function animatedGifRegenerateCard(args: {
+  index: number; heading: string; prompt: string; source: string; request: any; button?: HTMLButtonElement | null;
+}): Promise<boolean>;
 declare const appendLog: any;
 declare const toastManager: any;
 declare const ImageManager: any;
@@ -144,6 +149,14 @@ export function displayGeneratedImages(images: any[]): void {
               ✕
            </button>`
         : '';
+      // [2026-11-07] 움짤 버튼: 썸네일 칸에는 달지 않는다(썸네일은 정지 이미지).
+      // 렌더 중에는 다른 모듈 함수를 부르지 않는다(그리드만 따로 불러 쓰는 하니스에서도 그려져야 한다) — 움짤 여부는 여기서 바로 판정.
+      const isAnimatedCard = /\.gif$/iu.test(String(image?.filePath || image?.savedToLocal || '').split(/[?#]/u)[0])
+        || /^data:image\/gif[;,]/iu.test(String(image?.previewDataUrl || ''));
+      const isThumbnailCard = image?.isThumbnail === true || /^(?:🖼️?\s*|📌\s*)?썸네일$/u.test(String(headingRaw).trim());
+      const animateGifButtonHtml = isThumbnailCard
+        ? ''
+        : `<button type="button" class="animate-gif-image-btn" data-image-index="${index}" title="이 그림을 움직이는 GIF 로 다시 만듭니다 (GPT 이미지 2.6)" style="width: 100%; padding: 5px 8px; background: linear-gradient(135deg, #ec4899, #db2777); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.7rem; font-weight: 600;">🎞️ ${isAnimatedCard ? '움짤 다시' : '움짤로'}</button>`;
       return `
         <div class="generated-image-item" data-image-index="${index}" style="position: relative; background: var(--bg-secondary); border-radius: 12px; overflow: hidden; border: 2px solid var(--border-light); cursor: pointer; transition: all 0.3s ease; max-width: 220px; box-shadow: none;">
           <div style="position: relative; width: 100%; aspect-ratio: 1/1; overflow: hidden;">
@@ -157,6 +170,7 @@ export function displayGeneratedImages(images: any[]): void {
               <button type="button" class="assign-to-heading-btn" data-image-index="${index}" style="width: 100%; padding: 5px 8px; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.7rem; font-weight: 600;">📍 소제목에 배치</button>
               <button type="button" class="regenerate-single-image-btn" data-image-index="${index}" style="width: 100%; padding: 5px 8px; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.7rem; font-weight: 600;">🔄 재생성</button>
               <button type="button" class="regenerate-ai-image-btn" data-image-index="${index}" style="width: 100%; padding: 5px 8px; background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.7rem; font-weight: 600;">🤖 AI 이미지 생성</button>
+              ${animateGifButtonHtml}
               <button type="button" class="replace-with-saved-btn" data-image-index="${index}" style="width: 100%; padding: 5px 8px; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.7rem; font-weight: 600;">📁 저장된 이미지</button>
               <button type="button" class="remove-image-btn" data-image-index="${index}" style="width: 100%; padding: 5px 8px; background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.7rem; font-weight: 600;">❌ 제거</button>
             </div>
@@ -251,6 +265,26 @@ export function displayGeneratedImages(images: any[]): void {
         const image = validImages[index];
         const heading = image?.heading || `소제목 ${index + 1}`;
         await regenerateWithNewAI(index, heading);
+      });
+    });
+
+    // [2026-11-07] 움짤로 버튼 — 그 카드 한 장만 GPT 이미지 2.6 GIF 로 다시 만든다(2.6 이 아니면 안내 후 멈춤)
+    generatedImagesGrid.querySelectorAll('.animate-gif-image-btn').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        const button = e.currentTarget as HTMLButtonElement;
+        const index = parseInt(button.getAttribute('data-image-index') || '0', 10);
+        const image = validImages[index];
+        const heading = image?.heading || `소제목 ${index + 1}`;
+        const prompt = image?.prompt || image?.heading || `이미지 ${index + 1}`;
+        await animatedGifRegenerateCard({
+          index,
+          heading,
+          prompt,
+          source: readSelectedImageSource(),
+          request: buildImageRegenerateRequest(heading, prompt, storedImageForRegenerate(heading)),
+          button,
+        });
       });
     });
 

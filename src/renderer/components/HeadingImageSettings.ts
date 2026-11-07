@@ -12,6 +12,8 @@ import { gsRowHtml, gsApplyEngineToRow } from '../modules/gensparkLoginUi.js';
 // [2026-11-03] 관련 사진 찾기는 저작권 안내에 동의해야 저장된다
 import { collectEngineAllowPick } from '../modules/imageCollectEngineConsent.js';
 import { headingTextSettingPaint } from '../modules/headingImageTextSetting.js';
+// [2026-11-07] 움짤로 만들기 체크 (GPT 이미지 2.6)
+import { animatedGifSettingPaint } from '../modules/headingImageAnimatedSetting.js';
 
 /** 연동 상태 줄은 계정 이메일·서버 메시지를 그대로 넣으므로 이스케이프한다. */
 function escapeHtmlForStatus(value: string): string {
@@ -840,6 +842,13 @@ export function createHeadingImageModal(): void {
               <div>
                 <div class="checkbox-label">🔤 소제목 텍스트 포함하기</div>
                 <div class="checkbox-desc">소제목 이미지에 소제목 글자를 그대로 넣습니다. 한글을 직접 그리는 엔진만(관련 사진 찾기·내 폴더 제외)</div>
+              </div>
+            </div>
+            <div class="premium-checkbox">
+              <input type="checkbox" id="heading-image-animated-include" />
+              <div>
+                <div class="checkbox-label">🎞️ 움짤로 만들기</div>
+                <div class="checkbox-desc">소제목 이미지를 움직이는 GIF 로 만듭니다 (GPT 이미지 2.6 · 썸네일은 정지) <span id="heading-image-animated-include-note" style="display: block; color: #a78bfa;"></span></div>
               </div>
             </div>
             <div class="premium-checkbox">
@@ -2713,6 +2722,7 @@ export function openHeadingImageModal(): void {
     modal.style.display = 'flex';
     // [2026-11-03] 소제목 텍스트 포함 — the modal is built on first open, so it is painted from the saved value here.
     headingTextSettingPaint();
+    animatedGifSettingPaint();
 
     // ✅ 버튼 표시 값 초기화 (통합 상수 사용)
     const currentMode = getHeadingImageMode();

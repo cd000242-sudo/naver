@@ -671,6 +671,10 @@ try {
     'imageCollectEngineConsent.js',
     // [2026-11-03] 소제목 텍스트 포함하기 체크박스 (imageManagementTab·HeadingImageSettings 가 import). 식별자 headingTextSetting 접두사
     'headingImageTextSetting.js',
+    // [2026-11-07] 움짤로 만들기 체크박스 + 소제목 카드 "움짤로" 버튼 (imageManagementTab·HeadingImageSettings·imageDisplayGrid 가 import).
+    //   식별자 animatedGif / ANIMATED_GIF 접두사. 체크박스 모듈이 카드 모듈보다 먼저 와야 한다(카드가 값을 가져다 쓴다).
+    'headingImageAnimatedSetting.js',
+    'animatedGifCard.js',
       'articleTableComposer.js',
       'contentPolicyDashboard.js',
       'revenueOperationsDashboard.js',

@@ -75,6 +75,22 @@ export function getOpenAIImageCostKRW(model: string, quality: string, usdToKrwRa
     return Math.round(usd * rate);
 }
 
+/** 움짤(GIF) 한 장에 그려지는 프레임 수 — main 의 animatedGifPolicy.GIF_FRAME_COUNT_DEFAULT 와 같은 값(9). */
+export const ANIMATED_GIF_FRAME_COUNT = 9;
+
+/**
+ * 움짤 한 장의 예상 비용(원). 장당 공식가가 공개되지 않아 "프레임 수 × 정지 이미지 단가"로 어림한 추정치다.
+ * 공식가가 공개되면 이 함수와 main 의 사용량 기록(openaiImageGenerator)을 함께 고친다.
+ */
+export function getAnimatedGifCostKRW(
+    model: string,
+    quality: string,
+    usdToKrwRate: number = 1400,
+    frames: number = ANIMATED_GIF_FRAME_COUNT,
+): number {
+    return getOpenAIImageCostKRW(model, quality, usdToKrwRate) * Math.max(1, Math.round(frames));
+}
+
 /**
  * "한 장당 약 ₩18원 (gpt-image-2.6-sunburst / Medium)" 형태의 표시 문자열.
  * imageCount > 1이면 "× N장 = ₩XXX" 총액을 덧붙인다.

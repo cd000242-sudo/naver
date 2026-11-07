@@ -73,6 +73,11 @@ export interface WriteImageFileOptions {
   keepAspect?: boolean;
   /** true 면 크기를 전혀 바꾸지 않는다 — 이미 완성된 800×800 썸네일 카드처럼 다시 키우면 글자가 흐려지는 파일 전용. */
   keepSize?: boolean;
+  /**
+   * [2026-11-07] true saves the bytes exactly as given — no crop, resize or re-encode. Animated GIF only
+   * (image/animatedGifSave): sharp would keep the first frame and the animation would be gone.
+   */
+  preserveBytes?: boolean;
 }
 
 function resolveGeneratedImageTarget(
@@ -178,7 +183,7 @@ export async function writeImageFile(
     const targetHeight = options.keepSize === true ? (metadata.height || 0) : target.height;
 
     // 이미지가 목표 크기와 다르면 리사이징 (정사각 목표는 높이도 봐야 한다 — 800x1200 이 그냥 지나가면 안 된다)
-    if (metadata.width && (metadata.width !== targetWidth || (metadata.height || 0) !== targetHeight)) {
+    if (options.preserveBytes !== true && metadata.width && (metadata.width !== targetWidth || (metadata.height || 0) !== targetHeight)) {
       const processedImage = image.resize(targetWidth, targetHeight, {
         fit: target.fit, // cover: 가운데 잘라 정사각 / inside: 비율 유지
         position: target.position === 'attention' ? sharp.strategy.attention : 'centre',
@@ -285,6 +290,7 @@ export async function writeImageFile(
       extension === 'jpg' || extension === 'jpeg' ? 'image/jpeg'
       : extension === 'png' ? 'image/png'
       : extension === 'webp' ? 'image/webp'
+      : extension === 'gif' ? 'image/gif'
       : 'application/octet-stream';
 
     const blobMeta = await getBlobStoreInstance().write(

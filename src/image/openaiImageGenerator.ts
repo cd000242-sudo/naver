@@ -21,6 +21,9 @@ import {
 } from './referenceImageLoader.js';
 import { buildOpenaiImageEditsRequest } from './openaiImageEditsRequest.js';
 import { resolveOpenAIImageQuality } from './openaiImageQuality.js';
+// [2026-11-07] GPT Image 2.6 animated GIF: policy (what may be a GIF) and raw-byte saving (no sharp, no recoding)
+import { GIF_REQUEST_TIMEOUT_MS, buildGifRequestFields, isGifFatalError, planAnimatedGif } from './animatedGifPolicy.js';
+import { writeAnimatedGifFile } from './animatedGifSave.js';
 // [SPEC-FREEZE-GUARD-001-P2 R4 / v2.10.263] Base64 디코딩 워커 분리 — gpt-image-2 b64_json 1.18MB+
 import { decodeBase64Async } from '../main/utils/base64Async.js';
 import { STOCK_PHOTO_LOOK, buildContextualImagePrompt, buildHeadingTitleTypography, buildPosterTitleTypography } from './contextualImagePrompt.js';
@@ -97,6 +100,17 @@ export async function generateWithOpenAIImage(
     const resolvedModel: string = overrideModel === 'dall-e-3' ? 'dall-e-3' : normalizeOpenaiImageModel(overrideModel || config.openaiImageModel);
     console.log(`[OpenAI-Image] 🎨 총 ${items.length}개 이미지 생성 시작 (모델: ${resolvedModel}, 키 source: ${keySource}, 키 길이: ${apiKey.length})`);
 
+    // [2026-11-07] Which items become animated GIFs. Throws the short notice (2.5 / other model / shopping) before any
+    //   paid request or reference download — an unsupported model is never swapped silently.
+    const gifPlan = planAnimatedGif({
+        provider: 'openai-image',
+        model: resolvedModel,
+        items,
+        settingOn: false,
+        articleSectionImages: false,
+        isShoppingConnect,
+    });
+
     // ✅ [2026-03-03] 참조 이미지 사전 캐싱 (쇼핑커넥트 수집 이미지)
     let cachedReferenceImage: LoadedReferenceImageData | null = null;
     if (isShoppingConnect && collectedImages && collectedImages.length > 0) {
@@ -140,7 +154,8 @@ export async function generateWithOpenAIImage(
         }
 
         const item = items[i];
-        console.log(`[OpenAI-Image] 🖼️ [${i + 1}/${items.length}] "${item.heading}" 생성 중...`);
+        const animated = gifPlan.has(item);
+        console.log(`[OpenAI-Image] 🖼️ [${i + 1}/${items.length}] "${item.heading}" ${animated ? '움짤(GIF) ' : ''}생성 중...`);
 
         try {
             // ✅ [2026-02-23] imageStyle 핸들링 구현
@@ -311,6 +326,10 @@ export async function generateWithOpenAIImage(
                     if (isDallE3) {
                         requestBody.response_format = 'b64_json'; // dall-e-3는 명시 필요
                     }
+                    // [2026-11-07] Animated GIF: output_format + frame_count + frame_duration_ms; size stays one frame's size.
+                    //   No stream / mask / transparent background (not supported with GIF) are ever added here.
+                    const gifFields = animated ? buildGifRequestFields() : null;
+                    if (gifFields) Object.assign(requestBody, gifFields);
 
                     /*
                      * [2026-09-08] 실제로 나가는 프롬프트를 남긴다.
@@ -360,7 +379,7 @@ export async function generateWithOpenAIImage(
                                     'Authorization': `Bearer ${apiKey}`,
                                     'Content-Type': 'application/json'
                                 },
-                                timeout: 120000, // 2분 타임아웃
+                                timeout: animated ? GIF_REQUEST_TIMEOUT_MS : 120000, // 2분 타임아웃 (움짤은 프레임을 모두 그리므로 더 길게)
                                 responseType: 'json'
                             }
                         );
@@ -398,8 +417,10 @@ export async function generateWithOpenAIImage(
                     // ✅ [2026-03-12 FIX] 텍스트 오버레이는 imageGenerator.ts의 applyKoreanTextOverlayIfNeeded에서 일괄 처리
                     // 여기서 추가로 적용하면 2중 오버레이가 발생하므로 제거
 
-                    // 파일 저장
-                    const savedResult = await writeImageFile(buffer, 'png', item.heading, postTitle, postId);
+                    // 파일 저장 — 움짤은 받은 바이트 그대로 .gif (20MB 초과·GIF 아님은 여기서 멈춘다)
+                    const savedResult = animated
+                        ? await writeAnimatedGifFile(buffer, item.heading, postTitle, postId)
+                        : await writeImageFile(buffer, 'png', item.heading, postTitle, postId);
 
                     results.push({
                         heading: item.heading,
@@ -407,6 +428,7 @@ export async function generateWithOpenAIImage(
                         provider: 'openai-image',
                         previewDataUrl: savedResult.previewDataUrl,
                         savedToLocal: savedResult.savedToLocal,
+                        ...(animated ? { mimeType: 'image/gif', animated: true } : {}),
                         originalIndex: (item as any).originalIndex, // ✅ [2026-03-05 FIX] headingImageMode 필터링 후 정확한 소제목 매칭
                     });
 
@@ -416,16 +438,18 @@ export async function generateWithOpenAIImage(
                     const trackedModel = isDallE3
                         ? currentModel
                         : `${currentModel}-${trackedQuality}${isWideSize ? '-wide' : ''}`;
-                    trackApiUsage('openai-image', { images: 1, model: trackedModel });
+                    // 움짤은 장당 공식가가 없어 프레임 수 × 정지 단가로 센다(추정치).
+                    const billedImages = gifFields ? gifFields.frame_count : 1;
+                    trackApiUsage('openai-image', { images: billedImages, model: trackedModel });
                     // ✅ 호출별 사용량 로그 (모델·품질·비용·타임스탬프) — best-effort
                     try {
-                        const callCostUSD = estimateImageCostUSD('openai-image', trackedModel, 1);
+                        const callCostUSD = estimateImageCostUSD('openai-image', trackedModel, billedImages);
                         const krwRate = (config.usdToKrwRate && config.usdToKrwRate > 0) ? config.usdToKrwRate : 1400;
                         logImageGeneration({
                             provider: 'openai-image',
                             model: currentModel,
                             quality: isDallE3 ? 'n/a' : trackedQuality,
-                            images: 1,
+                            images: billedImages,
                             costUSD: callCostUSD,
                             costKRW: Math.round(callCostUSD * krwRate),
                         });
@@ -448,6 +472,13 @@ export async function generateWithOpenAIImage(
                     const errMsg = apiError.response?.data?.error?.message || apiError.message || 'unknown';
                     const errCode = apiError.response?.data?.error?.code || '';
                     console.warn(`[OpenAI-Image] ⚠️ 시도 ${attempt}/${maxRetries} 실패 (model: ${currentModel}, status: ${status}, code: ${errCode}): ${errMsg}`);
+
+                    // [2026-11-07] GIF_ 오류(GIF 아님 · 20MB 초과)는 다시 해도 같은 결과에 돈만 더 든다 — 재시도하지 않는다.
+                    if (isGifFatalError(apiError)) {
+                        console.error(`[OpenAI-Image] 🎞️ 움짤 저장 불가 — 즉시 중단: ${apiError.message}`);
+                        firstFatalError = apiError;
+                        break;
+                    }
 
                     // v2.7.5: 403 + "must be verified" 패턴 감지 → Org 인증 미완료 전용 태그
                     // 렌더러가 OPENAI_ORG_VERIFY_REQUIRED 태그로 감지해 친절 모달 + 인증
@@ -478,6 +509,12 @@ export async function generateWithOpenAIImage(
                     if (isModelUnavailable) {
                         console.error(`[OpenAI-Image] 🚫 모델 미지원: ${currentModel}`);
                         firstFatalError = new Error(`OPENAI_MODEL_UNAVAILABLE:${currentModel}`);
+                        break;
+                    }
+
+                    // [2026-11-07] 움짤 요청이 400 으로 거절되면 같은 요청을 다시 보내도 같다 — 재시도(과금) 금지.
+                    if (animated && status === 400) {
+                        firstFatalError = new Error(`GIF_REJECTED: 움짤 요청이 거절되었습니다. ${errMsg}`);
                         break;
                     }
 

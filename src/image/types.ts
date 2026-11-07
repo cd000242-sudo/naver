@@ -66,6 +66,11 @@ export interface ImageRequestItem {
   headingText?: string;
   /** [2026-10-20] Image look for this item ('stock' = Orbit look, default from config; generateImages sets it). */
   imageLook?: 'stock' | 'editorial';
+  /**
+   * [2026-11-07] Make this section image an animated GIF (GPT Image 2.6 only; image/animatedGifPolicy decides).
+   * Thumbnails stay still images whatever this says.
+   */
+  animatedGif?: boolean;
 }
 
 /**
@@ -198,6 +203,8 @@ export interface GeneratedImage {
   /** [2026-11-03] Source credit line for collected photos ("출처: 언론사"); publish puts it in the photo caption. */
   caption?: string;
   originalIndex?: number; // ✅ [2026-01-24] 원래 items 배열의 인덱스 (필터링 후에도 위치 추적)
+  /** [2026-11-07] true when the saved file is an animated GIF (raw bytes, never recoded). */
+  animated?: boolean;
   isThumbnail?: boolean; // ✅ [2026-03-18 FIX] 썸네일 여부 (서론 위 이미지 배치에 사용)
   requestedProvider?: string; // 사용자가 선택/요청한 엔진
   actualProvider?: string; // 실제 산출물을 만든 엔진 또는 대체 출처

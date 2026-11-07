@@ -67,6 +67,9 @@ import * as fs from 'fs/promises';
 import { resolveThumbnailOverlayText } from './image/director/thumbnailText.js';
 import { withTextInImage } from './image/director/thumbnailTextState.js';
 import { drawsKoreanTextItself, resolveHeadingImageText } from './image/director/koreanTextEngines.js';
+// [2026-11-07] GPT Image 2.6 animated GIF: which items become GIFs (or the short "2.6 only" notice) + never overlay a GIF
+import { planAnimatedGifForCall } from './image/animatedGifRequest.js';
+import { isAnimatedGifImage } from './image/animatedGifPolicy.js';
 
 
 // Re-export types for backward compatibility
@@ -376,7 +379,8 @@ export async function applyKoreanTextOverlayIfNeeded(
     // ✅ [2026-01-30] 썸네일(0번)만 텍스트 오버레이 적용
     // - 일반 모드: 1번 소제목 = 썸네일 역할 (인덱스 0)
     // - 쇼핑커넥트: 별도 썸네일 (인덱스 0)
-    if (shouldApplyThumbnailTextOverlay(img, i, items) && img.filePath) {
+    // [2026-11-07] An animated GIF is never redrawn: the compositor keeps only the first frame.
+    if (shouldApplyThumbnailTextOverlay(img, i, items) && img.filePath && !isAnimatedGifImage(img)) {
       try {
         console.log(`[ImageGenerator] 🖼️ 썸네일에 텍스트 오버레이: "${postTitle.substring(0, 30)}..."`);
 
@@ -632,6 +636,15 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     && isKoreanTextSupportedEngine(normalizedProvider, engineModelHint)
     && generationSourceItems.some((item) => item.isThumbnail !== true);
   const headingImageTextOn = headingTextEligible && await readHeadingImageTextSetting();
+  // [2026-11-07] Animated GIF plan, decided before any engine is called: throws the notice for 2.5 / other engines
+  //   (explicit card request) so nothing is generated or billed; thumbnails always stay still images.
+  const animatedGifPlan = await planAnimatedGifForCall({
+    provider: normalizedProvider,
+    imageModel: options.imageModel,
+    items: generationSourceItems,
+    articleSectionImages: options.articleSectionImages === true,
+    isShoppingConnect: options.isShoppingConnect === true,
+  });
   const mappedItems = generationSourceItems
     .map((item, idx) => {
       const headingText = resolveHeadingImageText(item, normalizedProvider, headingImageTextOn, engineModelHint);
@@ -702,6 +715,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         articleContext,
         sectionContent: item.sectionContent,
         diversityIndex: item.diversityIndex, // openai rotates from this; it was dropped here before
+        ...(animatedGifPlan.has(item) ? { animatedGif: true } : {}),
         visualRole: engineHonorsRole ? visualRole || undefined : undefined,
 
         isThumbnail: item.isThumbnail || false, // ✅ isThumbnail 플래그 전달
