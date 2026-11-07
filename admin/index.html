@@ -1093,6 +1093,7 @@
     </style>
     <link rel="stylesheet" href="/admin/shell.css">
     <link rel="stylesheet" href="/admin/shell-compat.css">
+    <link rel="stylesheet" href="/admin/chatbot-editor.css">
 </head>
 <body>
     <!-- ===== LOGIN ===== -->
@@ -1313,37 +1314,78 @@
                 </div>
 
                 <div id="editor-sub-home" class="editor-subpanel active" role="tabpanel" aria-labelledby="editor-tab-home" aria-hidden="false">
-                    <!-- 무료 챗봇 4타일 (2026-08-19) — ChatbotsPage 가 SiteContent.chatbots 를 읽는다.
-                         비워둔 칸은 저장 patch 에서 빠져(compactObject) 사이트 내장 기본값이 쓰인다. -->
-                    <div class="editor-card">
-                        <h4>무료 챗봇 4타일</h4>
-                        <p class="editor-help">무료 챗봇 페이지의 타일 문구·링크·목록입니다. 비워둔 칸은 사이트 기본값이 그대로 쓰입니다. 저장하면 실제 페이지가 같은 데이터를 읽습니다.</p>
-                        <label>쳇지피티 타일 제목</label>
-                        <input id="edit-cb-chatgpt-title" placeholder="쳇지피티 무료챗봇">
-                        <label>쳇지피티 타일 설명</label>
-                        <textarea id="edit-cb-chatgpt-desc" rows="2" placeholder="리더남 GPTs 6종 — 목적별로 골라 쓰세요."></textarea>
-                        <label>제미나이 타일 제목</label>
-                        <input id="edit-cb-gemini-title" placeholder="무료 제미나이 챗봇">
-                        <label>제미나이 타일 설명</label>
-                        <textarea id="edit-cb-gemini-desc" rows="2" placeholder="부티크 인포의 글쓰기 프롬프트 탭에서 바로 사용합니다."></textarea>
-                        <label>제미나이 이동 주소 / 버튼 문구</label>
-                        <input id="edit-cb-gemini-url" placeholder="https://www.boutique-info.com/?page=prompt">
-                        <input id="edit-cb-gemini-cta" placeholder="사용하러 가기">
-                        <label>클로드 타일 제목</label>
-                        <input id="edit-cb-claude-title" placeholder="클로드 스킬">
-                        <label>클로드 타일 설명</label>
-                        <textarea id="edit-cb-claude-desc" rows="2" placeholder="클로드용 글쓰기 스킬 모음을 준비하고 있습니다."></textarea>
-                        <label>클로드 스킬 목록 — JSON 배열. 넣으면 '준비 중'이 목록으로 바뀝니다</label>
-                        <textarea id="edit-cb-claude-skills" rows="5" placeholder='[
-  { "title": "스킬 이름", "desc": "설명", "url": "https://..." }
-]'></textarea>
-                        <label>협업 카페 제목 / 주소</label>
-                        <input id="edit-cb-cafe-title" placeholder="부방장 협업 카페">
-                        <input id="edit-cb-cafe-url" placeholder="https://cafe.naver.com/boutiqueinfo">
-                        <label>협업 카페 설명</label>
-                        <textarea id="edit-cb-cafe-desc" rows="2" placeholder="부티크 인포 네이버 카페 — 협업·공지·자료."></textarea>
-                        <label>쳇지피티 GPTs 목록 — JSON 배열. 비우면 기본 6종 유지</label>
-                        <textarea id="edit-cb-bots" rows="6" placeholder="[]"></textarea>
+                    <!-- 무료 챗봇 — ChatbotTiles(사이트)가 SiteContent.chatbots 의 gemini · naverFree · homefeedLocked 를 읽는다.
+                         목록·암호화 로직은 admin/chatbot-editor.js. 목록 칸은 예전 JSON 칸의 id(edit-cb-bots, edit-cb-claude-skills)를 이어받는다.
+                         비워 둔 칸은 저장 값에서 빠져 사이트 내장 기본값이 쓰인다. -->
+                    <div class="editor-card" id="chatbot-editor-card">
+                        <h4>무료 챗봇</h4>
+                        <p class="editor-help">사이트 무료 챗봇 화면의 카드 세 장입니다. 비워 두면 사이트 기본 문구가 나옵니다.</p>
+                        <details class="cb-more">
+                            <summary>설명 보기</summary>
+                            <p class="editor-help">저장하면 사이트에는 몇 분 안에 반영됩니다. 주소는 https:// 로 시작해야 합니다. 비밀번호 카드의 링크는 이 화면에서 바로 암호화되어, 암호문만 저장됩니다.</p>
+                        </details>
+
+                        <section class="cb-tile" aria-labelledby="cb-h-gemini">
+                            <h5 id="cb-h-gemini">✨ 제미나이 카드</h5>
+                            <div class="editor-field-grid">
+                                <div class="editor-field"><label for="edit-cb-gemini-title">제목</label><input id="edit-cb-gemini-title" type="text" autocomplete="off" placeholder="무료 제미나이 챗봇"></div>
+                                <div class="editor-field"><label for="edit-cb-gemini-cta">버튼 문구</label><input id="edit-cb-gemini-cta" type="text" autocomplete="off" placeholder="사용하러 가기"></div>
+                                <div class="editor-field full"><label for="edit-cb-gemini-desc">설명</label><textarea id="edit-cb-gemini-desc" rows="2" placeholder="부티크 인포의 글쓰기 프롬프트 탭에서 바로 사용합니다."></textarea></div>
+                                <div class="editor-field full"><label for="edit-cb-gemini-url">이동 주소</label><input id="edit-cb-gemini-url" type="text" inputmode="url" autocomplete="off" spellcheck="false" placeholder="https://www.boutique-info.com/?page=prompt"><span class="cb-error" role="alert" data-cb-error-for="edit-cb-gemini-url"></span></div>
+                            </div>
+                        </section>
+
+                        <section class="cb-tile" aria-labelledby="cb-h-naver">
+                            <h5 id="cb-h-naver">📝 네이버 무료 프롬프트 카드</h5>
+                            <div class="editor-field-grid">
+                                <div class="editor-field"><label for="edit-cb-naver-title">제목</label><input id="edit-cb-naver-title" type="text" autocomplete="off" placeholder="네이버 무료 프롬프트"></div>
+                                <div class="editor-field"><label for="edit-cb-naver-badge">배지 (카드 오른쪽 위 작은 글자)</label><input id="edit-cb-naver-badge" type="text" autocomplete="off" placeholder="무료"></div>
+                                <div class="editor-field full"><label for="edit-cb-naver-desc">설명</label><textarea id="edit-cb-naver-desc" rows="2" placeholder="네이버 블로그 글쓰기용 무료 프롬프트입니다. 누르면 새 창에서 열립니다."></textarea></div>
+                                <div class="editor-field full"><label for="edit-cb-naver-url">이동 주소</label><input id="edit-cb-naver-url" type="text" inputmode="url" autocomplete="off" spellcheck="false" placeholder="https://..."><span class="cb-error" role="alert" data-cb-error-for="edit-cb-naver-url"></span></div>
+                                <div class="editor-field"><label for="edit-cb-naver-cta">버튼 문구</label><input id="edit-cb-naver-cta" type="text" autocomplete="off" placeholder="프롬프트 보기"></div>
+                            </div>
+                        </section>
+
+                        <section class="cb-tile" aria-labelledby="cb-h-locked">
+                            <h5 id="cb-h-locked">🔒 홈판 프롬프트 카드 (비밀번호)</h5>
+                            <div class="editor-field-grid">
+                                <div class="editor-field"><label for="edit-cb-locked-title">제목</label><input id="edit-cb-locked-title" type="text" autocomplete="off" placeholder="리더남 홈판 프롬프트 (테스트)"></div>
+                                <div class="editor-field full"><label for="edit-cb-locked-desc">설명</label><textarea id="edit-cb-locked-desc" rows="2" placeholder="테스트용입니다. 비밀번호를 아는 분만 열 수 있습니다."></textarea></div>
+                            </div>
+                            <p class="cb-status" id="cb-locked-status" role="status"></p>
+                            <div class="cb-actions">
+                                <button class="btn" type="button" id="cb-seal-toggle" aria-expanded="false" aria-controls="cb-seal-form">링크와 비밀번호 바꾸기</button>
+                                <button class="btn" type="button" id="cb-seal-reset" hidden>기본 링크로 되돌리기</button>
+                            </div>
+                            <div class="cb-seal-form" id="cb-seal-form" hidden>
+                                <p class="editor-help">여기서 바로 암호화합니다. 링크와 비밀번호 원문은 저장되지 않고 암호문만 저장됩니다. 비밀번호를 잊으면 되찾을 수 없으니 따로 적어 두세요.</p>
+                                <div class="editor-field-grid">
+                                    <div class="editor-field full"><label for="cb-seal-link">새 링크</label><input id="cb-seal-link" type="text" inputmode="url" autocomplete="off" spellcheck="false" placeholder="https://..."><span class="cb-error" role="alert" id="cb-seal-link-error"></span></div>
+                                    <div class="editor-field"><label for="cb-seal-pw">새 비밀번호</label><input id="cb-seal-pw" type="password" autocomplete="off" spellcheck="false"><span class="cb-error" role="alert" id="cb-seal-pw-error"></span><span class="cb-warn" id="cb-seal-warn" role="status"></span></div>
+                                    <div class="editor-field"><label for="cb-seal-pw2">비밀번호 한 번 더</label><input id="cb-seal-pw2" type="password" autocomplete="off" spellcheck="false"><span class="cb-error" role="alert" id="cb-seal-pw2-error"></span></div>
+                                </div>
+                                <div class="cb-actions"><button class="btn btn-gold" type="button" id="cb-seal-apply">암호화해서 적용</button></div>
+                            </div>
+                            <span class="cb-error" role="alert" id="cb-seal-pending"></span>
+                        </section>
+
+                        <details class="cb-legacy" id="cb-legacy">
+                            <summary>예전 카드 (지금 사이트에는 나오지 않습니다)</summary>
+                            <p class="editor-help">이전 화면에서 쓰던 카드입니다. 지금의 무료 챗봇 화면은 읽지 않지만, 이미 저장된 내용이 사라지지 않도록 그대로 두었습니다.</p>
+                            <div class="editor-field-grid">
+                                <div class="editor-field"><label for="edit-cb-chatgpt-title">쳇지피티 카드 제목</label><input id="edit-cb-chatgpt-title" type="text" autocomplete="off" placeholder="쳇지피티 무료챗봇"></div>
+                                <div class="editor-field full"><label for="edit-cb-chatgpt-desc">쳇지피티 카드 설명</label><textarea id="edit-cb-chatgpt-desc" rows="2" placeholder="리더남 GPTs 6종 — 목적별로 골라 쓰세요."></textarea></div>
+                                <div class="editor-field full"><label id="cb-label-bots">쳇지피티 챗봇 목록</label><div class="structured-row-list" id="edit-cb-bots" role="group" aria-labelledby="cb-label-bots"></div><button class="btn structured-row-add" type="button" data-cb-add="bots">＋ 챗봇 추가</button></div>
+                                <div class="editor-field"><label for="edit-cb-claude-title">클로드 카드 제목</label><input id="edit-cb-claude-title" type="text" autocomplete="off" placeholder="클로드 스킬"></div>
+                                <div class="editor-field full"><label for="edit-cb-claude-desc">클로드 카드 설명</label><textarea id="edit-cb-claude-desc" rows="2" placeholder="클로드용 글쓰기 스킬 모음을 준비하고 있습니다."></textarea></div>
+                                <div class="editor-field full"><label id="cb-label-skills">클로드 스킬 목록</label><div class="structured-row-list" id="edit-cb-claude-skills" role="group" aria-labelledby="cb-label-skills"></div><button class="btn structured-row-add" type="button" data-cb-add="skills">＋ 스킬 추가</button></div>
+                                <div class="editor-field"><label for="edit-cb-cafe-title">협업 카페 제목</label><input id="edit-cb-cafe-title" type="text" autocomplete="off" placeholder="부방장 협업 카페"></div>
+                                <div class="editor-field"><label for="edit-cb-cafe-url">협업 카페 주소</label><input id="edit-cb-cafe-url" type="text" inputmode="url" autocomplete="off" spellcheck="false" placeholder="https://cafe.naver.com/boutiqueinfo"><span class="cb-error" role="alert" data-cb-error-for="edit-cb-cafe-url"></span></div>
+                                <div class="editor-field full"><label for="edit-cb-cafe-desc">협업 카페 설명</label><textarea id="edit-cb-cafe-desc" rows="2" placeholder="부티크 인포 네이버 카페 — 협업·공지·자료."></textarea></div>
+                            </div>
+                        </details>
+
+                        <p class="cb-saved" id="cb-saved" role="status" hidden>저장됨 — 사이트에 반영까지 몇 분 걸립니다.</p>
                     </div>
 
                     <!-- 저장원(edit-hero-*)은 그대로 두되 입력 UI 는 숨긴다.
@@ -2097,6 +2139,10 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
     <script src="/admin/shell.js"></script>
     <script src="/admin/keyword-briefing-tools.js"></script>
     <script src="/admin/structured-editor-tools.js"></script>
+    <script src="/admin/protected-link-tools.js"></script>
+    <script src="/admin/chatbot-tiles-tools.js"></script>
+    <script src="/admin/chatbot-seal-ui.js"></script>
+    <script src="/admin/chatbot-editor.js"></script>
     <script>
         /*
          * GitHub 토큰 부트스트랩 (2026-08-17) — 사장님 PC 의 에이전트가
@@ -6390,22 +6436,11 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
             setValue('edit-hero-proofs', proofsToText(hero.proofs));
             void loadKeywordBriefingFromApi();
 
-            // 무료 챗봇 4타일 (2026-08-19) — 비어 있으면 칸도 비워 사이트 기본값이 쓰이게 둔다
-            const chatbots = data.chatbots || {};
-            const jsonOrEmpty = (v) => (Array.isArray(v) && v.length ? JSON.stringify(v, null, 2) : '');
-            setValue('edit-cb-chatgpt-title', chatbots.chatgpt?.title);
-            setValue('edit-cb-chatgpt-desc', chatbots.chatgpt?.desc);
-            setValue('edit-cb-gemini-title', chatbots.gemini?.title);
-            setValue('edit-cb-gemini-desc', chatbots.gemini?.desc);
-            setValue('edit-cb-gemini-url', chatbots.gemini?.url);
-            setValue('edit-cb-gemini-cta', chatbots.gemini?.cta);
-            setValue('edit-cb-claude-title', chatbots.claude?.title);
-            setValue('edit-cb-claude-desc', chatbots.claude?.desc);
-            setValue('edit-cb-claude-skills', jsonOrEmpty(chatbots.claude?.skills));
-            setValue('edit-cb-cafe-title', chatbots.cafe?.title);
-            setValue('edit-cb-cafe-desc', chatbots.cafe?.desc);
-            setValue('edit-cb-cafe-url', chatbots.cafe?.url);
-            setValue('edit-cb-bots', jsonOrEmpty(chatbots.bots));
+            // 무료 챗봇 — 카드·목록·암호화 칸은 admin/chatbot-editor.js 가 그린다(JSON 입력 없음).
+            // 비어 있으면 칸도 비워 사이트 기본값이 쓰이게 둔다.
+            if (!window.AdminChatbotEditor) throw new Error('무료 챗봇 편집 도구를 불러오지 못했습니다.');
+            window.AdminChatbotEditor.install({ onChange: () => { markSiteContentDirty(); refreshEditorPreview(); } });
+            window.AdminChatbotEditor.load(data.chatbots);
 
             setValue('pricing-page-eyebrow', pricingPage.eyebrow);
             setValue('pricing-tab-label', pricingPage.tabLabel);
@@ -6848,35 +6883,10 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
             return downloads;
         }
 
-        /** 무료 챗봇 4타일 수집 (2026-08-19) — 빈 칸은 compactObject 가 걷어내 사이트 기본값이 산다 */
+        /** 무료 챗봇 수집 — 화면 상태에서 만든다(JSON 입력 없음). 입력 검사는 saveEditorContent 가 validate() 로 먼저 한다. */
         function collectChatbotsTiles() {
-            const parseJsonArray = (id, label) => {
-                const raw = getValue(id);
-                if (!raw || !raw.trim()) return undefined;
-                try {
-                    const parsed = JSON.parse(raw);
-                    if (!Array.isArray(parsed)) throw new Error('배열이 아닙니다');
-                    return parsed;
-                } catch (err) {
-                    throw new Error(label + ' JSON 형식을 확인해주세요: ' + (err.message || '파싱 실패'));
-                }
-            };
-            return {
-                chatgpt: { title: getValue('edit-cb-chatgpt-title'), desc: getValue('edit-cb-chatgpt-desc') },
-                gemini: {
-                    title: getValue('edit-cb-gemini-title'),
-                    desc: getValue('edit-cb-gemini-desc'),
-                    url: getValue('edit-cb-gemini-url'),
-                    cta: getValue('edit-cb-gemini-cta')
-                },
-                claude: {
-                    title: getValue('edit-cb-claude-title'),
-                    desc: getValue('edit-cb-claude-desc'),
-                    skills: parseJsonArray('edit-cb-claude-skills', '클로드 스킬 목록')
-                },
-                cafe: { title: getValue('edit-cb-cafe-title'), desc: getValue('edit-cb-cafe-desc'), url: getValue('edit-cb-cafe-url') },
-                bots: parseJsonArray('edit-cb-bots', '쳇지피티 GPTs 목록')
-            };
+            if (!window.AdminChatbotEditor) throw new Error('무료 챗봇 편집 도구를 불러오지 못했습니다.');
+            return window.AdminChatbotEditor.collect();
         }
 
         function collectEditorPatch() {
@@ -6981,6 +6991,12 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
             let removedEmptyRowCount = 0;
             try {
                 if (!mergeTools?.mergeContent || !mergeTools?.createChangedPatch) throw new Error('구조화 편집 도구를 불러오지 못했습니다.');
+                const chatbotIssues = window.AdminChatbotEditor ? window.AdminChatbotEditor.validate() : [];
+                if (chatbotIssues.length > 0) {
+                    switchEditorSubtab('home');
+                    window.AdminChatbotEditor.focusProblem();
+                    throw new Error('무료 챗봇 입력 ' + chatbotIssues.length + '곳을 고쳐 주세요. (빨간 안내 확인)');
+                }
                 removedEmptyRowCount = pruneEmptyStructuredEditorRows();
                 currentProjection = collectEditorPatch();
                 patch = mergeTools.createChangedPatch(loadedSiteContentProjection, currentProjection);
@@ -7030,6 +7046,7 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
                     dirty: siteContentEditorState.editGeneration !== savedEditGeneration
                 };
                 renderAdminContentSummary(data);
+                if (!siteContentEditorState.dirty && window.AdminChatbotEditor) window.AdminChatbotEditor.markSaved();
                 // 저장 성공 → 실제 사이트 iframe 을 새로고침해 변경을 즉시 반영한다
                 // (site content 는 API 에서 읽으므로 재빌드 없이 바로 보인다).
                 try {

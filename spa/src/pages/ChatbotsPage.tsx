@@ -1,36 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ParticlesCanvas from '../components/ParticlesCanvas';
-import ProtectedLinkTile from '../components/chatbots/ProtectedLinkTile';
-import protectedLinks from '../data/protectedLinks.json';
+import ChatbotTiles from '../components/chatbots/ChatbotTiles';
 import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
 
 const FLOWS = [
     ['글쓰기 준비', '주제와 키워드 선택 → 대상 독자와 글의 목적 정리'],
     ['제미나이로 시작', '글쓰기 프롬프트 선택 → 초안 작성 → 사실 확인 후 내 글로 다듬기'],
 ];
-
-/** 관리자 설정이 없을 때 사용하는 제미나이 기본 안내 */
-const GEMINI_DEFAULTS = {
-    title: '무료 제미나이 챗봇',
-    desc: '부티크 인포의 글쓰기 프롬프트 탭에서 제미나이 전용 챗봇을 바로 사용합니다.',
-    url: 'https://www.boutique-info.com/?page=prompt',
-    cta: '사용하러 가기',
-};
-
-/** 네이버 무료 프롬프트 — 공개 링크라 평문 그대로 둔다. 관리자 편집 대상이 아니므로 항상 이 값이 쓰인다. */
-const NAVER_FREE = {
-    title: '네이버 무료 프롬프트',
-    desc: '네이버 블로그 글쓰기용 무료 프롬프트입니다. 누르면 새 창에서 열립니다.',
-    url: 'https://app.notion.com/p/AI-44ec04a37c4c4c928f06241828d55982?t=3ec755b0d4a28003ba8800a9a8405a2d',
-    cta: '프롬프트 보기',
-};
-
-/** 리더남 홈판 프롬프트(테스트) — 링크는 비밀번호로 암호화된 상태로만 번들에 들어간다(src/data/protectedLinks.json). */
-const HOMEFEED_LOCKED = {
-    title: '리더남 홈판 프롬프트 (테스트)',
-    desc: '테스트용입니다. 비밀번호를 아는 분만 열 수 있습니다.',
-};
 
 function ChatbotsPage() {
     const [siteContent, setSiteContent] = useState<SiteContent | null>(null);
@@ -57,8 +34,6 @@ function ChatbotsPage() {
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
         return () => observer.disconnect();
     }, []);
-
-    const tGemini = { ...GEMINI_DEFAULTS, ...siteContent?.chatbots?.gemini };
 
     return (
         <>
@@ -117,33 +92,7 @@ function ChatbotsPage() {
                         </div>
 
                         <div className="hub-grid">
-                            <a className="hub-tile fade-in" href={tGemini.url} target="_blank" rel="noopener noreferrer">
-                                <div className="hub-tile-top">
-                                    <span className="hub-emoji">✨</span>
-                                    <span className="hub-badge purple">바로 사용</span>
-                                </div>
-                                <h3>{tGemini.title}</h3>
-                                <p>{tGemini.desc}</p>
-                                <span className="hub-cta">{tGemini.cta} →</span>
-                            </a>
-
-                            <a className="hub-tile fade-in" href={NAVER_FREE.url} target="_blank" rel="noopener noreferrer">
-                                <div className="hub-tile-top">
-                                    <span className="hub-emoji">📝</span>
-                                    <span className="hub-badge">무료</span>
-                                </div>
-                                <h3>{NAVER_FREE.title}</h3>
-                                <p>{NAVER_FREE.desc}</p>
-                                <span className="hub-cta">{NAVER_FREE.cta} →</span>
-                            </a>
-
-                            <ProtectedLinkTile
-                                emoji="🔒"
-                                badge="비밀번호"
-                                title={HOMEFEED_LOCKED.title}
-                                desc={HOMEFEED_LOCKED.desc}
-                                payload={protectedLinks['homefeed-prompt']}
-                            />
+                            <ChatbotTiles chatbots={siteContent?.chatbots} />
                         </div>
                     </div>
                 </section>

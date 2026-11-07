@@ -8,11 +8,20 @@ export const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4
 export const EDGE_URL = 'https://leaderspro-edge.leword.workers.dev';
 
 export type SiteContent = {
-    /** 무료 챗봇 페이지 4타일 (2026-08-19) — 어드민 '사이트 콘텐츠 관리'에서 수정.
-     *  비어 있으면 ChatbotsPage 의 내장 기본값(fallback)이 그대로 쓰인다 — 저장 전에도 페이지는 완전하다. */
+    /** 무료 챗봇 페이지 — 어드민 '사이트 편집 > 무료 챗봇'에서 수정.
+     *  비어 있으면 ChatbotTiles 의 내장 기본값(fallback)이 그대로 쓰인다 — 저장 전에도 페이지는 완전하다.
+     *  지금 페이지가 읽는 것은 gemini · naverFree · homefeedLocked 셋뿐이다(나머지는 예전 카드의 보존용). */
     chatbots?: {
         chatgpt?: { title?: string; desc?: string };
         gemini?: { title?: string; desc?: string; url?: string; cta?: string };
+        /** 네이버 무료 프롬프트 — 공개 링크 카드 */
+        naverFree?: { title?: string; desc?: string; url?: string; cta?: string; badge?: string };
+        /** 비밀번호 보호 카드 — payload 는 암호문뿐이다(평문 링크·비밀번호는 어디에도 저장하지 않는다) */
+        homefeedLocked?: {
+            title?: string;
+            desc?: string;
+            payload?: { v: number; kdf: string; iter: number; salt: string; iv: string; ct: string };
+        };
         claude?: { title?: string; desc?: string; skills?: Array<{ title?: string; desc?: string; url?: string }> };
         cafe?: { title?: string; desc?: string; url?: string };
         bots?: Array<{ category?: string; title?: string; subtitle?: string; desc?: string; bestFor?: string[]; url?: string; accent?: string }>;

@@ -1,0 +1,81 @@
+/* Free chatbot editor (#chatbot-editor-card). Reuses the row-card look of the other list editors
+   (.structured-row-*) and adds only what they lack: error text beside a field, cards per tile, folded help. */
+#chatbot-editor-card .cb-tile {
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--text) 2.5%, transparent);
+}
+#chatbot-editor-card .cb-tile h5 { margin-bottom: 12px; font-size: 18px; font-weight: 800; }
+
+#chatbot-editor-card .cb-error,
+#chatbot-editor-card .cb-warn,
+#chatbot-editor-card .cb-status,
+#chatbot-editor-card .cb-saved { display: block; font-size: 16px; line-height: 1.5; font-weight: 700; }
+#chatbot-editor-card .cb-error { color: var(--danger); }
+#chatbot-editor-card .cb-warn { color: var(--warn); }
+#chatbot-editor-card .cb-status { margin: 12px 0 8px; color: var(--text-secondary); font-weight: 600; }
+#chatbot-editor-card .cb-saved { margin-top: 16px; color: var(--ok-text); }
+#chatbot-editor-card .cb-error:empty,
+#chatbot-editor-card .cb-warn:empty,
+#chatbot-editor-card .cb-status:empty { display: none; }
+#chatbot-editor-card .cb-saved[hidden],
+#chatbot-editor-card [hidden] { display: none; }
+
+#chatbot-editor-card [aria-invalid="true"] { border-color: var(--danger); outline: 2px solid var(--danger-soft); }
+
+#chatbot-editor-card .cb-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+#chatbot-editor-card .cb-seal-form {
+  margin-top: 14px;
+  padding: 14px;
+  border: 1px dashed var(--border-glass);
+  border-radius: 12px;
+}
+
+#chatbot-editor-card details > summary {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+}
+#chatbot-editor-card .cb-legacy { margin-top: 18px; padding-top: 6px; border-top: 1px solid var(--border); }
+
+/* Row cards: the shared .structured-row-fields only styles <input>; add textareas and the red delete button. */
+#chatbot-editor-card .structured-row-fields textarea {
+  width: 100%;
+  min-height: 72px;
+  padding: 9px 11px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 16px;
+  resize: vertical;
+}
+#chatbot-editor-card .structured-row-fields label.cb-wide { grid-column: 1 / -1; }
+#chatbot-editor-card .structured-row-actions button[data-cb-action="delete"] { color: var(--danger); }
+#chatbot-editor-card .structured-row-actions button[data-cb-action] {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 7px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: 16px;
+}
+#chatbot-editor-card .structured-row-actions button[data-cb-action]:disabled { opacity: .38; cursor: not-allowed; }
+#chatbot-editor-card .structured-row-actions button[data-cb-action="delete"] { color: var(--danger); }
+#chatbot-editor-card .cb-empty {
+  padding: 18px;
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  color: var(--text-secondary);
+  font-size: 16px;
+  text-align: center;
+}
