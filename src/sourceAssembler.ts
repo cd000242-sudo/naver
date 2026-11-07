@@ -803,6 +803,11 @@ export function readSearchStatusLedger(): SourceSearchResult[] {
   return [...searchStatusLedger];
 }
 
+/** True when a Naver Search API call was rejected with 401/403 — the saved keys are unusable for this run. */
+export function hasRejectedNaverKeys(entries: readonly SourceSearchResult[]): boolean {
+  return entries.some((entry) => entry.source.startsWith('NAVER_') && entry.status === 'SEARCH_BLOCKED');
+}
+
 function recordSearchStatus(entry: SourceSearchResult): void {
   searchStatusLedger = [...searchStatusLedger, entry];
   if (entry.status !== 'SEARCH_OK') {
@@ -8203,7 +8208,13 @@ export async function collectContentFromPlatforms(
 
     // ✅ [1.5순위] 네이버 모바일 검색 HTML 직접 파싱 (API 키 불필요, Gemini 불필요)
     // API 키 없을 때 가장 안정적인 방법: 네이버 검색 결과 페이지를 직접 fetch하여 파싱
-    if (!naverSearchAvailable(clientId, clientSecret)) {
+    // [2026-11-07] Keys present but rejected (401/403): treat them as absent for the rest of this run,
+    //   otherwise every keyless path is skipped and the article is written from 0 chars of material.
+    const naverKeysRejected = hasRejectedNaverKeys(readSearchStatusLedger());
+    if (naverKeysRejected) {
+      logger('[플랫폼 콘텐츠 수집] ⛔ 네이버 검색 키가 거부됐습니다(401/403) — 키 없는 수집 길로 이어갑니다. 설정에서 네이버 키를 확인하세요.');
+    }
+    if (!naverSearchAvailable(clientId, clientSecret) || naverKeysRejected) {
       try {
         logger(`[플랫폼 콘텐츠 수집] 🔍 네이버 API 키 없음 → 네이버 모바일 검색 직접 파싱...`);
         const fetchImpl = await ensureFetch();
@@ -8299,8 +8310,8 @@ export async function collectContentFromPlatforms(
     const urls = await searchAllRssSources(keyword, {
       maxPerSource,
       // sources 생략 → 기본값 9개 소스 전체
-      clientId,
-      clientSecret,
+      clientId: naverKeysRejected ? undefined : clientId,
+      clientSecret: naverKeysRejected ? undefined : clientSecret,
       targetDate: options.targetDate,
     });
 
@@ -8386,8 +8397,8 @@ export async function collectContentFromPlatforms(
     }
 
     if (contentParts.length === 0) {
-      // ✅ 크롤링 실패 시 네이버 검색 API로 폴백
-      if (naverSearchAvailable(clientId, clientSecret)) {
+      // ✅ 크롤링 실패 시 네이버 검색 API로 폴백 (키가 이미 거부됐으면 다시 부르지 않는다)
+      if (!naverKeysRejected && naverSearchAvailable(clientId, clientSecret)) {
         logger(`[플랫폼 콘텐츠 수집] ⚠️ 크롤링 실패 → 네이버 검색 API로 폴백 시도...`);
 
         try {
@@ -8427,7 +8438,8 @@ export async function collectContentFromPlatforms(
         sourceCount: 0,
         urls,
         success: false,
-        message: `크롤링 실패 (${searchStatus.overall}): URL ${urls.length}개 중 본문 확보 0건`,
+        message: `크롤링 실패 (${searchStatus.overall}): URL ${urls.length}개 중 본문 확보 0건`
+          + (naverKeysRejected ? ' — 네이버 검색 키가 거부됐습니다(401/403). 설정에서 네이버 키를 확인하세요.' : ''),
         sourceDocuments: [],
         searchStatus,
       };
