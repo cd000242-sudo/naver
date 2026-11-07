@@ -752,6 +752,7 @@
                                     <option value="gemini-3.5-flash-lite">💰 Gemini 3.5 Flash-Lite (무료 티어 · 짧은 글)</option>
                                     <option value="gemini-3.8-flash" selected>⚖️ Gemini 3.8 Flash (기본 · 선불 필요)</option>
                                     <option value="gemini-3.6-flash">🧠 Gemini 3.6 Flash (프리미엄 · 긴 글)</option>
+                                    <option value="gemini-4-argon">💎 Gemini 4 Argon (최상위 · 비용 큼 · 선불 필요)</option>
                                 </optgroup>
                             </select>
                             <input type="hidden" id="unified-generator" value="gemini">
@@ -5349,7 +5350,7 @@
                                     <span style="font-size: 1.5rem;">🎭</span>
                                     <div>
                                         <h4 style="color: #f97316; margin: 0; font-size: 1rem; font-weight: 700;">
-                                            Claude API 키 (Haiku 5.5 / Sonnet 5.5 / Fable 5.1)</h4>
+                                            Claude API 키 (Haiku 5.5 / Sonnet 5.5 / Opus 5.5 / Fable 5.1)</h4>
                                         <p style="color: var(--text-muted); margin: 0.15rem 0 0 0; font-size: 0.75rem;">
                                             가성비·균형·프리미엄 최신 Claude 모델로 콘텐츠 생성</p>
                                     </div>
@@ -5571,6 +5572,28 @@
                                         </div>
                                     </label>
 
+                                    <!-- 💎 Gemini 4 Argon (최상위 · 비용 큼) -->
+                                    <label class="gemini-model-card"
+                                        style="cursor: pointer; border: 2px solid #8b5cf6; border-radius: 12px; padding: 1.25rem; background: linear-gradient(135deg, #f5f3ff, #ede9fe); display: flex; align-items: center; gap: 1rem; transition: all 0.2s; box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15);">
+                                        <div
+                                            style="display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #ede9fe; border-radius: 50%;">
+                                            <input type="radio" name="primaryGeminiTextModel" value="gemini-4-argon"
+                                                style="width: 18px; height: 18px; cursor: pointer; accent-color: #8b5cf6;">
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <div
+                                                style="font-weight: 800; color: #1f2937; font-size: 1.05rem; margin-bottom: 0.35rem; display: flex; align-items: center; justify-content: space-between;">
+                                                <span>💎 Gemini 4 Argon</span>
+                                                <span
+                                                    style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700; box-shadow: 0 2px 4px rgba(139, 92, 246, 0.3);">최상위 · 비용 큼</span>
+                                            </div>
+                                            <div style="font-size: 0.9rem; color: #4b5563; line-height: 1.4;">
+                                                ⚠️ 비용이 큽니다 — 무료 티어 없음, 중요한 글에만 쓰세요 (선불 결제 필요)</div>
+                                            <div style="font-size: 0.8rem; color: #7c3aed; font-weight: 700; margin-top: 0.3rem;">
+                                                📊 선불 유료: 입력 $2 · 출력 $10 / 1M 토큰 (11/30까지) · 12/1부터 입력 $4 · 출력 $20</div>
+                                        </div>
+                                    </label>
+
                                     <!-- ═══ 🔮 PERPLEXITY 엔진 ═══ -->
                                     <div style="font-size: 0.8rem; color: #6b7280; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.75rem; padding-left: 0.25rem;">🔮 Perplexity</div>
 
@@ -5665,6 +5688,28 @@
                                         </div>
                                     </label>
 
+                                    <!-- GPT-6 Astra (최상위 · 비용 큼) -->
+                                    <label class="gemini-model-card"
+                                        style="cursor: pointer; border: 2px solid #22c55e; border-radius: 12px; padding: 1.25rem; background: linear-gradient(135deg, #f0fdf4, #dcfce7); display: flex; align-items: center; gap: 1rem; transition: all 0.2s; box-shadow: 0 4px 12px rgba(34, 197, 94, 0.15);">
+                                        <div
+                                            style="display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #dcfce7; border-radius: 50%;">
+                                            <input type="radio" name="primaryGeminiTextModel" value="openai-gpt6-astra"
+                                                style="width: 18px; height: 18px; cursor: pointer; accent-color: #22c55e;">
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <div
+                                                style="font-weight: 800; color: #15803d; font-size: 1.05rem; margin-bottom: 0.35rem; display: flex; align-items: center; justify-content: space-between;">
+                                                <span>💎 GPT-6 Astra</span>
+                                                <span
+                                                    style="background: linear-gradient(135deg, #22c55e, #16a34a); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700;">최상위 · 비용 큼</span>
+                                            </div>
+                                            <div style="font-size: 0.9rem; color: #166534; line-height: 1.4;">
+                                                OpenAI 최상위 · 가장 강한 추론 · ⚠️ 비용이 큽니다 (중요한 글에만)</div>
+                                            <div style="font-size: 0.8rem; color: #15803d; font-weight: 700; margin-top: 0.3rem;">
+                                                📊 입력 $10 · 출력 $50 / 1M 토큰</div>
+                                        </div>
+                                    </label>
+
                                     <!-- GPT-6.1 Responses API web search -->
                                     <label class="gemini-model-card"
                                         style="cursor: pointer; border: 2px solid #0ea5e9; border-radius: 12px; padding: 1.25rem; background: linear-gradient(135deg, #f0f9ff, #e0f2fe); display: flex; align-items: center; gap: 1rem; transition: all 0.2s; box-shadow: 0 4px 12px rgba(14, 165, 233, 0.15);">
@@ -5735,7 +5780,7 @@
                                         </div>
                                     </label>
 
-                                    <!-- Claude Fable 5.1 (최고 품질) -->
+                                    <!-- Claude Opus 5.5 (프리미엄) -->
                                     <label class="gemini-model-card"
                                         style="cursor: pointer; border: 2px solid #f97316; border-radius: 12px; padding: 1.25rem; background: linear-gradient(135deg, #fff7ed, #ffedd5); display: flex; align-items: center; gap: 1rem; transition: all 0.2s; box-shadow: 0 4px 12px rgba(249, 115, 22, 0.15);">
                                         <div
@@ -5746,12 +5791,34 @@
                                         <div style="flex: 1;">
                                             <div
                                                 style="font-weight: 800; color: #c2410c; font-size: 1.05rem; margin-bottom: 0.35rem; display: flex; align-items: center; justify-content: space-between;">
-                                                <span>👑 Claude Fable 5.1</span>
+                                                <span>👑 Claude Opus 5.5</span>
                                                 <span
-                                                    style="background: linear-gradient(135deg, #f97316, #ea580c); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700;">최고 품질</span>
+                                                    style="background: linear-gradient(135deg, #f97316, #ea580c); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700;">프리미엄</span>
                                             </div>
                                             <div style="font-size: 0.9rem; color: #9a3412; line-height: 1.4;">
-                                                최상급 추론 · 완벽한 글쓰기 · 프리미엄 품질</div>
+                                                깊은 추론 · 안정적인 장문 · 프리미엄 품질</div>
+                                            <div style="font-size: 0.8rem; color: #c2410c; font-weight: 700; margin-top: 0.3rem;">
+                                                📊 입력 $4 · 출력 $20 / 1M 토큰</div>
+                                        </div>
+                                    </label>
+
+                                    <!-- Claude Fable 5.1 (최상위 · 비용 큼) -->
+                                    <label class="gemini-model-card"
+                                        style="cursor: pointer; border: 2px solid #f97316; border-radius: 12px; padding: 1.25rem; background: linear-gradient(135deg, #fff7ed, #ffedd5); display: flex; align-items: center; gap: 1rem; transition: all 0.2s; box-shadow: 0 4px 12px rgba(249, 115, 22, 0.15);">
+                                        <div
+                                            style="display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #ffedd5; border-radius: 50%;">
+                                            <input type="radio" name="primaryGeminiTextModel" value="claude-fable"
+                                                style="width: 18px; height: 18px; cursor: pointer; accent-color: #f97316;">
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <div
+                                                style="font-weight: 800; color: #c2410c; font-size: 1.05rem; margin-bottom: 0.35rem; display: flex; align-items: center; justify-content: space-between;">
+                                                <span>👑 Claude Fable 5.1</span>
+                                                <span
+                                                    style="background: linear-gradient(135deg, #f97316, #ea580c); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700;">최상위 · 비용 큼</span>
+                                            </div>
+                                            <div style="font-size: 0.9rem; color: #9a3412; line-height: 1.4;">
+                                                최상급 추론 · 장기 작업용 최상위 모델 · ⚠️ 비용이 큽니다</div>
                                             <div style="font-size: 0.8rem; color: #c2410c; font-weight: 700; margin-top: 0.3rem;">
                                                 📊 입력 $10 · 출력 $50 / 1M 토큰</div>
                                         </div>
@@ -5918,7 +5985,7 @@
                             <p
                                 style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.75rem; line-height: 1.6;">
                                 ✅ <strong>정책/계정 설정에 따라 무료 티어 또는 과금</strong> | 할당량은 각 AI 정책에 따름<br>
-                                ✅ <strong>글 생성</strong>: Gemini 3.5 Flash-Lite/3.8 Flash/3.6 Flash · GPT-6/6.1 · Claude Haiku 5.5/Sonnet 5.5/Fable 5.1 (3단계 선택)<br>
+                                ✅ <strong>글 생성</strong>: Gemini 3.5 Flash-Lite/3.8 Flash/3.6 Flash/4 Argon · GPT-6/6.1/Astra · Claude Haiku 5.5/Sonnet 5.5/Opus 5.5/Fable 5.1 (3단계 + 최상위 선택)<br>
                                 ✅ <strong>이미지 생성</strong>: 나노바나나2 (Gemini 3.1 Flash · 유료) / Flow (AI Pro/Ultra 무료) / ImageFX (Imagen 3.5 · 무료) / 공공자료
                             </p>
 
@@ -12376,6 +12443,13 @@
                             <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩66</td>
                             <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">고품질</td>
                         </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 0.7rem; font-weight: bold; color: #fcd34d;">💎 Gemini 4 Argon</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #94a3b8;">무료 없음 · 선불</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩118 <span style="font-size: 0.7rem; color: #94a3b8;">(11/30까지 · 12/1부터 ₩235)</span></td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩87 <span style="font-size: 0.7rem; color: #94a3b8;">(12/1부터 ₩175)</span></td>
+                            <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">최상위·비용 큼</td>
+                        </tr>
 
                         <!-- OpenAI 계열 -->
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
@@ -12399,6 +12473,13 @@
                             <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩87</td>
                             <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">프리미엄</td>
                         </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 0.7rem; font-weight: bold; color: #34d399;">💎 GPT-6 Astra</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #94a3b8;">없음</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩588</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩437</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">최상위·비용 큼</td>
+                        </tr>
 
                         <!-- Claude 계열 -->
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); background: rgba(244, 114, 182, 0.10);">
@@ -12416,11 +12497,18 @@
                             <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">균형</td>
                         </tr>
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 0.7rem; font-weight: bold; color: #f472b6;">👑 Claude Opus 5.5</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #94a3b8;">없음</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩235</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩175</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">프리미엄</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
                             <td style="padding: 0.7rem; font-weight: bold; color: #f472b6;">👑 Claude Fable 5.1</td>
                             <td style="padding: 0.7rem; text-align: right; color: #94a3b8;">없음</td>
                             <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩588</td>
                             <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩437</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">프리미엄</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">최상위·비용 큼</td>
                         </tr>
 
                         <!-- Perplexity -->

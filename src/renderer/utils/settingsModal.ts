@@ -390,6 +390,7 @@ async function loadCurrentSettings(): Promise<void> {
                 // [2026-11-03] 균형 = 3.8 Flash(최신), 프리미엄 = 3.6 Flash(직전 세대, 긴 글 지속 추론)
                 'gemini-3.8-flash': '⚖️ Gemini 3.8 Flash (선불 고품질 · 최신)',
                 'gemini-3.6-flash': '🧠 Gemini 3.6 Flash (선불 · 긴 글 지속 추론)',
+                'gemini-4-argon': '💎 Gemini 4 Argon (선불 · 최상위 · 비용 큼)',
                 // Retired IDs: a not-yet-migrated saved value still reads right.
                 'gemini-3.1-flash-lite': '💰 Gemini 3.5 Flash-Lite (무료 · 선불 추천) ★ 기본',
                 'gemini-3.5-flash': '🧠 Gemini 3.6 Flash (선불 · 긴 글 지속 추론)',
@@ -397,10 +398,12 @@ async function loadCurrentSettings(): Promise<void> {
                 'openai-gpt4o-mini': '🧠 GPT-6 Luna (가성비)',
                 'openai-gpt41': '⚖️ GPT-6.1 Terra (균형)',
                 'openai-gpt4o': '🚀 GPT-6.1 Sol (프리미엄)',
+                'openai-gpt6-astra': '💎 GPT-6 Astra (최상위 · 비용 큼)',
                 'openai-gpt4o-search': '🔎 GPT-6.1 웹 검색 (Responses API)',
                 'claude-haiku': '🎭 Claude Haiku 5.5 (가성비)',
                 'claude-sonnet': '📜 Claude Sonnet 5.5 (균형)',
-                'claude-opus': '👑 Claude Fable 5.1 (프리미엄)',
+                'claude-opus': '👑 Claude Opus 5.5 (프리미엄)',
+                'claude-fable': '💎 Claude Fable 5.1 (최상위 · 비용 큼)',
             };
             navStatusEl.textContent = `현재: ${modelLabels[savedTextModel] || savedTextModel}`;
         }

@@ -4,7 +4,10 @@
  * [2026-11-03] 최신 세대로 이동 (메인 세션 조사, 모델 ID 실존은 무료 모델 목록 호출로 확인 예정):
  *   gemini-3.8-flash       균형  — 구글 what's-new 문서의 "newest Flash"
  *   gemini-3.5-flash-lite  가성비 — $0.30 / $2.50 (3.1 Lite $0.25 / $1.50 보다 비싸다)
- *   gemini-3.6-flash       프리미엄 — 직전 세대 운영 유지 (입력 $1.50 / 출력 $7.50)
+ *   gemini-3.6-flash       직전 세대 — 운영 유지 (3.8 Flash 와 같은 가격 일정)
+ *
+ * [2026-11-07] 최상위 칸에 gemini-4-argon 추가 (2026-10-13 GA, 무료 티어 없음). 기본(균형)은 3.8 Flash 그대로이고,
+ *   저장돼 있던 3.6 Flash 는 목록에 남아 있으므로 그대로 보존한다.
  *
  * ⚠️ 저장값 충돌: 'gemini-3.6-flash' 는 옛 균형 티어 ID 이자 새 프리미엄 ID 다.
  *   상태 없는 정규화로는 둘을 구분할 수 없어 저장된 3.6 은 그대로 3.6(모델 불변)으로 둔다.
@@ -17,6 +20,8 @@ export const GEMINI_TEXT_MODELS = {
   FLASH: 'gemini-3.8-flash',
   /** 지속 추론이 필요한 긴 글용 (직전 세대). Stable 이라 티어 제한이 없다. */
   FLASH_SUSTAINED: 'gemini-3.6-flash',
+  /** 최상위 (고가, 선불 필수). 화면에서 고를 때만 쓰인다 — 기본값이 아니다. */
+  ARGON: 'gemini-4-argon',
 } as const;
 
 const GEMINI_TEXT_MODEL_MIGRATIONS: Readonly<Record<string, string>> = {
@@ -51,7 +56,8 @@ export function normalizeGeminiTextModelId(value: unknown): string {
   if (!model) return GEMINI_TEXT_MODELS.FLASH_LITE;
   if (model === GEMINI_TEXT_MODELS.FLASH_LITE
       || model === GEMINI_TEXT_MODELS.FLASH
-      || model === GEMINI_TEXT_MODELS.FLASH_SUSTAINED) {
+      || model === GEMINI_TEXT_MODELS.FLASH_SUSTAINED
+      || model === GEMINI_TEXT_MODELS.ARGON) {
     return model;
   }
   return GEMINI_TEXT_MODEL_MIGRATIONS[model] || model;
@@ -73,7 +79,8 @@ export function normalizeGeminiPrepaidTextModelId(value: unknown): string {
   // 프리미엄(직전 세대) Flash 도 Stable 이라 선불에서 그대로 쓸 수 있다.
   if (normalizedModel === GEMINI_TEXT_MODELS.FLASH_LITE
       || normalizedModel === GEMINI_TEXT_MODELS.FLASH
-      || normalizedModel === GEMINI_TEXT_MODELS.FLASH_SUSTAINED) {
+      || normalizedModel === GEMINI_TEXT_MODELS.FLASH_SUSTAINED
+      || normalizedModel === GEMINI_TEXT_MODELS.ARGON) {
     return normalizedModel;
   }
   return GEMINI_TEXT_MODELS.FLASH_LITE;

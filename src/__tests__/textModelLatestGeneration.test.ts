@@ -47,7 +47,8 @@ describe('latest generation constants', () => {
   it('Claude models', () => {
     expect(CLAUDE_MODELS.SONNET).toBe('claude-sonnet-5-5');
     expect(CLAUDE_MODELS.FABLE).toBe('claude-fable-5-1');
-    expect(CLAUDE_MODELS.OPUS).toBe('claude-fable-5-1');
+    // [2026-11-07] OPUS is the real Opus 5.5 (premium tier); FABLE is the separate top model.
+    expect(CLAUDE_MODELS.OPUS).toBe('claude-opus-5-5');
     expect(CLAUDE_MODELS.HAIKU).toBe('claude-haiku-5-5');
   });
 
@@ -74,7 +75,8 @@ describe('resolveTextModelProfile — stable selectors keep their tier', () => {
     ['openai-gpt4o-search', 'balanced', 'gpt-6.1-terra', 'GPT-6.1 Terra + Web Search'],
     ['claude-haiku', 'value', 'claude-haiku-5-5', 'Claude Haiku 5.5'],
     ['claude-sonnet', 'balanced', 'claude-sonnet-5-5', 'Claude Sonnet 5.5'],
-    ['claude-opus', 'premium', 'claude-fable-5-1', 'Claude Fable 5.1'],
+    // [2026-11-07] 'claude-opus' = Opus 5.5 (premium); 'claude-fable' keeps Fable 5.1.
+    ['claude-opus', 'premium', 'claude-opus-5-5', 'Claude Opus 5.5'],
     ['claude-fable', 'premium', 'claude-fable-5-1', 'Claude Fable 5.1'],
   ];
   it.each(cases)('%s -> %s %s', (selector, tier, model, displayName) => {

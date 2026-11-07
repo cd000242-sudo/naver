@@ -42,7 +42,8 @@ describe('modelRegistry SSOT 회귀 가드', () => {
     expect(OPENAI_TEXT_MODELS.SOL).toBe('gpt-6.1-sol');
 
     expect(CLAUDE_MODELS.FABLE).toBe('claude-fable-5-1');
-    expect(CLAUDE_MODELS.OPUS).toBe('claude-fable-5-1');
+    // [2026-11-07] OPUS is the real Opus 5.5 (premium tier); FABLE is the separate top model.
+    expect(CLAUDE_MODELS.OPUS).toBe('claude-opus-5-5');
     expect(CLAUDE_MODELS.SONNET).toBe('claude-sonnet-5-5');
     expect(CLAUDE_MODELS.HAIKU).toBe('claude-haiku-5-5');
   });
@@ -77,7 +78,11 @@ describe('modelRegistry SSOT 회귀 가드', () => {
     expect(resolveTextModelProfile('claude-sonnet')).toMatchObject({
       vendor: 'claude', tier: 'balanced', model: 'claude-sonnet-5-5',
     });
+    // [2026-11-07] premium = Opus 5.5; Fable 5.1 is reached through its own 'claude-fable' selector.
     expect(resolveTextModelProfile('claude-opus')).toMatchObject({
+      vendor: 'claude', tier: 'premium', model: 'claude-opus-5-5',
+    });
+    expect(resolveTextModelProfile('claude-fable')).toMatchObject({
       vendor: 'claude', tier: 'premium', model: 'claude-fable-5-1',
     });
   });

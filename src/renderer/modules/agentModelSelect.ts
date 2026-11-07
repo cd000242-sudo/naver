@@ -9,7 +9,7 @@
 // 다만 목록이 울타리가 되면 안 된다 — 벤더가 새 모델을 내면 앱 업데이트를 기다려야 하므로,
 // "직접 입력" 을 남겨 둔다. 저장되는 값은 언제나 모델 이름 문자열 하나다.
 
-import { AGENT_MODEL_PRESETS, AGENT_MODEL_CUSTOM } from '../../runtime/agentModelPolicy.js';
+import { AGENT_MODEL_PRESETS, AGENT_MODEL_CUSTOM, migrateRetiredAgentModelId } from '../../runtime/agentModelPolicy.js';
 import { describeAgentModelLine } from '../../agentCli/agentModelDefaults.js';
 
 const AGENT_MODEL_FIELDS = [
@@ -29,7 +29,9 @@ function fillAgentModelSelect(selectId: string, inputId: string, provider: strin
   if (!select || !input) return;
 
   const presets = AGENT_MODEL_PRESETS[provider] ?? [];
-  const saved = input.value.trim();
+  // [2026-11-07] A saved name agy no longer offers shows as its new name, not as a dead "custom" entry.
+  const saved = migrateRetiredAgentModelId(provider, input.value.trim());
+  input.value = saved;
 
   const defaultLine = describeAgentModelLine(provider.replace(/^agent-/, ''), '');
   select.innerHTML = [

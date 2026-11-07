@@ -32,6 +32,28 @@ const PROVIDER_TO_KEY: Readonly<Record<string, (typeof AGENT_MODEL_CONFIG_KEYS)[
  */
 const SAFE_MODEL_ID = /^[A-Za-z0-9][A-Za-z0-9._:-]*$/;
 
+/*
+ * [2026-11-07] agy(안티그래비티)가 더 이상 내놓지 않는 이름 -> 가장 가까운 새 이름.
+ * `agy models` 실측에서 3.7/3.6 Flash, 3.1 Pro, Claude 4.6 이 사라졌다. 저장돼 있던 값을 그대로 넘기면 CLI 가
+ * "모르는 모델" 로 거부하므로 실행 직전에 옮긴다. 단계(low/medium/high)는 그대로 가져간다.
+ * 정규식 표는 식별자를 하나만 쓴다 — 렌더러 인라인 번들(copy-static)에서 이름이 겹치면 안 된다.
+ */
+const RETIRED_AGY_MODEL_RULES: ReadonlyArray<readonly [RegExp, string]> = [
+  [/^gemini-3\.[67]-flash-(low|medium|high)$/, 'gemini-3.8-flash-$1'],
+  [/^gemini-3\.1-pro-(low|medium|high)$/, 'gemini-4-argon-$1'],
+  [/^claude-opus-4-6-thinking$/, 'claude-opus-5-5-high'],
+  [/^claude-sonnet-4-6$/, 'claude-sonnet-5-5-high'],
+];
+
+/** 저장된 에이전트 모델이 agy 에서 사라진 이름이면 새 이름으로, 아니면 그대로(다른 에이전트 값은 건드리지 않는다). */
+export function migrateRetiredAgentModelId(provider: AgentTextProvider | string, model: string): string {
+  if (provider !== 'agent-gemini') return model;
+  for (const [pattern, replacement] of RETIRED_AGY_MODEL_RULES) {
+    if (pattern.test(model)) return model.replace(pattern, replacement);
+  }
+  return model;
+}
+
 /**
  * 고른 에이전트에 설정된 모델 이름. 없거나 안전하지 않으면 undefined —
  * 그때는 CLI 기본 모델로 간다(막지 않는다).
@@ -47,44 +69,55 @@ export function resolveAgentModel(
   if (typeof raw !== 'string') return undefined;
   const model = raw.trim();
   if (!model || !SAFE_MODEL_ID.test(model)) return undefined;
-  return model;
+  return migrateRetiredAgentModelId(provider, model);
 }
 
 /**
- * 에이전트별 모델 후보. **전부 CLI 에서 실측한 값이다**(2026-09-10).
+ * 에이전트별 모델 후보. 전부 CLI/공식 문서에서 확인한 값이다(2026-09-10 최초, 2026-11-07 갱신).
  *   claude --help  → "an alias for the latest model (e.g. 'fable', 'opus', or 'sonnet')
  *                     or a model's full name (e.g. 'claude-fable-5')"
- *   agy models     → gemini-3.8-flash-high … 목록 그대로
- *   codex          → ~/.codex/config.toml 의 model 값(gpt-6-astra) + textModelConstants 의 5.6 계열
+ *                    별칭은 opus→Opus 5.5, sonnet→Sonnet 5.5, haiku→Haiku 5.5, fable→Fable 5.1
+ *   agy models     → 2026-11-07 실측: gemini-4-argon-*, gemini-3.8-flash-*, claude-opus-5-5-*,
+ *                    claude-sonnet-5-5-*, gpt-oss-120b-medium (low/medium/high 는 목록 그대로)
+ *   codex          → 2026-11-07 구독 모델 목록 (gpt-5.5 는 10/14 은퇴)
  *
  * 목록에 없는 모델은 화면의 "직접 입력" 으로 넣는다 — 벤더가 새 모델을 내면 앱 업데이트를
  * 기다리지 않아도 되게 한다. 이 목록은 편의이지 울타리가 아니다.
  */
 export const AGENT_MODEL_PRESETS: Readonly<Record<string, ReadonlyArray<{ value: string; label: string }>>> = Object.freeze({
   'agent-codex': [
-    { value: 'gpt-6-astra', label: 'GPT-6 아스트라 (최신)' },
-    { value: 'gpt-5.6-sol', label: 'GPT-5.6 솔 (고품질)' },
-    { value: 'gpt-5.6-terra', label: 'GPT-5.6 테라 (균형)' },
-    { value: 'gpt-5.6-luna', label: 'GPT-5.6 루나 (경량·저비용)' },
+    { value: 'gpt-6.1-sol', label: 'GPT-6.1 솔 (최신·고품질)' },
+    { value: 'gpt-6-astra', label: 'GPT-6 아스트라 (최상위)' },
+    { value: 'gpt-6.1-terra', label: 'GPT-6.1 테라 (균형)' },
+    { value: 'gpt-6-sol', label: 'GPT-6 솔 (이전 세대)' },
+    { value: 'gpt-6-luna', label: 'GPT-6 루나 (경량·저비용)' },
+    { value: 'gpt-5.6-sol', label: 'GPT-5.6 솔' },
+    { value: 'gpt-5.6-terra', label: 'GPT-5.6 테라' },
+    { value: 'gpt-5.6-luna', label: 'GPT-5.6 루나' },
   ],
   'agent-claude': [
-    { value: 'fable', label: '페이블 (최신 별칭)' },
-    { value: 'opus', label: '오푸스 (최신 별칭)' },
-    { value: 'sonnet', label: '소넷 (최신 별칭)' },
-    { value: 'claude-fable-5', label: 'claude-fable-5 (버전 고정)' },
-    { value: 'claude-opus-5', label: 'claude-opus-5 (버전 고정)' },
-    { value: 'claude-sonnet-5', label: 'claude-sonnet-5 (버전 고정)' },
-    { value: 'claude-haiku-4-5-20251001', label: 'claude-haiku-4.5 (가장 빠름)' },
+    { value: 'fable', label: '페이블 5.1 (최상위 별칭)' },
+    { value: 'opus', label: '오푸스 5.5 (별칭)' },
+    { value: 'sonnet', label: '소넷 5.5 (별칭)' },
+    { value: 'haiku', label: '하이쿠 5.5 (가장 빠름·별칭)' },
+    { value: 'claude-fable-5-1', label: 'claude-fable-5-1 (버전 고정)' },
+    { value: 'claude-opus-5-5', label: 'claude-opus-5-5 (버전 고정)' },
+    { value: 'claude-sonnet-5-5', label: 'claude-sonnet-5-5 (버전 고정)' },
+    { value: 'claude-haiku-5-5', label: 'claude-haiku-5-5 (버전 고정)' },
   ],
   'agent-gemini': [
+    { value: 'gemini-4-argon-high', label: 'Gemini 4 Argon (High · 최상위·비용 큼)' },
+    { value: 'gemini-4-argon-medium', label: 'Gemini 4 Argon (Medium)' },
+    { value: 'gemini-4-argon-low', label: 'Gemini 4 Argon (Low)' },
     { value: 'gemini-3.8-flash-high', label: 'Gemini 3.8 Flash (High · 최신)' },
     { value: 'gemini-3.8-flash-medium', label: 'Gemini 3.8 Flash (Medium)' },
     { value: 'gemini-3.8-flash-low', label: 'Gemini 3.8 Flash (Low)' },
-    { value: 'gemini-3.7-flash-high', label: 'Gemini 3.7 Flash (High)' },
-    { value: 'gemini-3.6-flash-high', label: 'Gemini 3.6 Flash (High)' },
-    { value: 'gemini-3.1-pro-high', label: 'Gemini 3.1 Pro (High)' },
-    { value: 'claude-opus-4-6-thinking', label: 'Claude Opus 4.6 (Thinking)' },
-    { value: 'claude-sonnet-4-6', label: 'Claude Sonnet 4.6 (Thinking)' },
+    { value: 'claude-opus-5-5-high', label: 'Claude Opus 5.5 (High)' },
+    { value: 'claude-opus-5-5-medium', label: 'Claude Opus 5.5 (Medium)' },
+    { value: 'claude-opus-5-5-low', label: 'Claude Opus 5.5 (Low)' },
+    { value: 'claude-sonnet-5-5-high', label: 'Claude Sonnet 5.5 (High)' },
+    { value: 'claude-sonnet-5-5-medium', label: 'Claude Sonnet 5.5 (Medium)' },
+    { value: 'claude-sonnet-5-5-low', label: 'Claude Sonnet 5.5 (Low)' },
     { value: 'gpt-oss-120b-medium', label: 'GPT-OSS 120B (Medium)' },
   ],
 });

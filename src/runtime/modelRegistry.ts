@@ -184,6 +184,10 @@ export function resolveTextModelProfile(value: unknown): TextModelProfile {
     //   이전에는 Lite 가 아니면 전부 'balanced' 였고 표시 이름도 '3.5 Flash' 로 고정이라,
     //   3.6 을 골라도 화면에 3.5 로 보였다 — 모델이 안 바뀐 것처럼 보인 원인이다.
     const model = normalizeGeminiTextModelId(selector);
+    // [2026-11-07] The top slot. Own display name: the premium tier name above is the 3.6 Flash saved-value slot.
+    if (model === GEMINI_TEXT_MODELS.ARGON) {
+      return profile(selector, 'gemini', 'premium', model, 'Gemini 4 Argon');
+    }
     const tier: TextModelTier = model === GEMINI_TEXT_MODELS.FLASH_SUSTAINED
       ? 'premium'
       : model === GEMINI_TEXT_MODELS.FLASH
@@ -204,6 +208,10 @@ export function resolveTextModelProfile(value: unknown): TextModelProfile {
   if (selector === 'openai-gpt4o' || selector === 'openai-gpt56-sol' || key === OPENAI_TEXT_MODELS.SOL) {
     return profile(selector, 'openai', 'premium', OPENAI_TEXT_MODELS.SOL, 'GPT-6.1 Sol', 'medium');
   }
+  // [2026-11-07] Top tier. Reasoning model like the rest of the GPT-6 family (isOpenAiReasoningModel).
+  if (selector === 'openai-gpt6-astra' || key === OPENAI_TEXT_MODELS.ASTRA) {
+    return profile(selector, 'openai', 'premium', OPENAI_TEXT_MODELS.ASTRA, 'GPT-6 Astra', 'medium');
+  }
   if (selector === 'openai-gpt4o-search') {
     return profile(selector, 'openai', 'balanced', OPENAI_TEXT_MODELS.TERRA, 'GPT-6.1 Terra + Web Search', 'medium');
   }
@@ -219,8 +227,12 @@ export function resolveTextModelProfile(value: unknown): TextModelProfile {
   if (selector === 'claude-haiku' || key === CLAUDE_MODELS.HAIKU) {
     return profile(selector, 'claude', 'value', CLAUDE_MODELS.HAIKU, 'Claude Haiku 5.5');
   }
-  if (selector === 'claude-opus' || selector === 'claude-fable' || key === CLAUDE_MODELS.FABLE) {
+  // [2026-11-07] 'claude-opus' is the real Opus 5.5 again; Fable 5.1 keeps its own selector 'claude-fable'.
+  if (selector === 'claude-fable' || key === CLAUDE_MODELS.FABLE) {
     return profile(selector, 'claude', 'premium', CLAUDE_MODELS.FABLE, 'Claude Fable 5.1');
+  }
+  if (selector === 'claude-opus' || key === CLAUDE_MODELS.OPUS) {
+    return profile(selector, 'claude', 'premium', CLAUDE_MODELS.OPUS, 'Claude Opus 5.5');
   }
   if (selector === 'claude-sonnet' || key === CLAUDE_MODELS.SONNET) {
     return profile(selector, 'claude', 'balanced', CLAUDE_MODELS.SONNET, 'Claude Sonnet 5.5');
@@ -288,6 +300,7 @@ export type TextGeneratorKey =
   | 'gemini-3.5-flash-lite'
   | 'gemini-3.8-flash'
   | 'gemini-3.6-flash'
+  | 'gemini-4-argon'
   | 'gemini-3.1-flash-lite'  // retired - maps to the Flash-Lite slot
   | 'gemini-3.5-flash'       // retired - maps to the premium slot
   | 'gemini-3.1-pro-preview'
@@ -297,7 +310,10 @@ export type TextGeneratorKey =
   | 'perplexity-sonar'
   | 'openai-gpt4o-mini'  // 레거시 키 — gpt-4.1-mini로 매핑
   | 'openai-gpt41'
-  | 'claude-sonnet';
+  | 'openai-gpt6-astra'
+  | 'claude-sonnet'
+  | 'claude-opus'
+  | 'claude-fable';
 
 export type VisionProviderKey =
   | 'gemini-flash'
@@ -324,6 +340,7 @@ export function routeTextToVision(textKey: string): VisionRouting {
       return { provider: 'gemini-flash', model: VISION_MODELS.GEMINI_FLASH, vendor: 'gemini', fellBack: true, reason: 'Lite는 vision 없음 → Flash로 자동' };
     case GEMINI_TEXT_MODELS.FLASH:
     case GEMINI_TEXT_MODELS.FLASH_SUSTAINED:
+    case GEMINI_TEXT_MODELS.ARGON:
     case 'gemini-3.5-flash':
     case 'gemini-2.5-flash':
       return { provider: 'gemini-flash', model: VISION_MODELS.GEMINI_FLASH, vendor: 'gemini', fellBack: false };
@@ -333,6 +350,7 @@ export function routeTextToVision(textKey: string): VisionRouting {
     case 'claude-sonnet':
       return { provider: 'claude-sonnet', model: VISION_MODELS.CLAUDE_SONNET, vendor: 'claude', fellBack: false };
     case 'claude-opus':
+    case 'claude-fable':
     case 'claude-haiku':
       // Opus/Haiku도 Anthropic vision 가능하나 어댑터는 Sonnet으로 추론 통일 (동일 vendor)
       return { provider: 'claude-sonnet', model: VISION_MODELS.CLAUDE_SONNET, vendor: 'claude', fellBack: false };
@@ -341,6 +359,7 @@ export function routeTextToVision(textKey: string): VisionRouting {
     case 'openai-gpt4o-mini':
       return { provider: 'openai-41-mini', model: VISION_MODELS.OPENAI_41_MINI, vendor: 'openai', fellBack: false };
     case 'openai-gpt4o':
+    case 'openai-gpt6-astra':
     case 'openai-gpt4o-search':
       // 레거시 gpt-4o 계열 키 — vision은 현행 gpt-4.1로 추론 (동일 vendor)
       return { provider: 'openai-41', model: VISION_MODELS.OPENAI_41, vendor: 'openai', fellBack: false };

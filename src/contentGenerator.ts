@@ -3990,7 +3990,7 @@ async function callGemini(
         // ✅ [2026-01-28 FIX] 첫 응답 타임아웃 60초로 증가 (유료 API 안정성)
         // [2026-09-03 실측] gemini-3.5-flash 는 생각(thinking) 이 끝나야 첫 청크가 온다 — 53~55초 걸린 두 번은 통과, 세 번째는
         //   60초를 넘겨 "연결 타임아웃" 으로 죽었다. 3.x 모델은 첫 응답을 120초까지 기다린다(전체 스트림 상한 3분은 그대로).
-        const firstResponseTimeoutMs = Math.min(timeoutMs, /gemini-3\.\d/i.test(modelName) ? 120_000 : 60_000);
+        const firstResponseTimeoutMs = Math.min(timeoutMs, /gemini-(?:3\.\d|4-argon)/i.test(modelName) ? 120_000 : 60_000);
 
         console.log(`[Gemini] 🚀 ${modelName} 호출 (Search Grounding: ${useGrounding ? 'ON +$0.035' : 'OFF (비용 절감)'})${cachedContentName ? ' [캐시 시도 ✅]' : ''}`);
         await throttleGeminiRequest(modelName, config, options.signal);

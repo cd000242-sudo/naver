@@ -36,8 +36,9 @@ function modelToProvider(model: string): SelectableTextProvider {
     || model === 'openai-gpt4o-mini'
     || model === 'openai-gpt41'
     || model === 'openai-gpt4o-search'
+    || model === 'openai-gpt6-astra'
   ) return 'openai';
-  if (model === 'claude-haiku' || model === 'claude-sonnet' || model === 'claude-opus') {
+  if (model === 'claude-haiku' || model === 'claude-sonnet' || model === 'claude-opus' || model === 'claude-fable') {
     return 'claude';
   }
   return 'gemini';

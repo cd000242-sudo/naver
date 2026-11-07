@@ -26,7 +26,7 @@ const SETTINGS = loadSettings();
 const CURRENT_MODELS = Object.freeze({
   gemini: Object.freeze({ value: 'gemini-3.5-flash-lite', balanced: 'gemini-3.8-flash' }),
   openai: Object.freeze({ value: 'gpt-6-luna', balanced: 'gpt-6.1-terra', premium: 'gpt-6.1-sol' }),
-  claude: Object.freeze({ value: 'claude-haiku-5-5', balanced: 'claude-sonnet-5-5', premium: 'claude-fable-5-1' }),
+  claude: Object.freeze({ value: 'claude-haiku-5-5', balanced: 'claude-sonnet-5-5', premium: 'claude-opus-5-5' }),
 });
 
 function normalizeGeminiModel(value) {
@@ -253,7 +253,7 @@ async function runClaude() {
     {
       model,
       max_tokens: 1600,
-      ...(/^claude-(?:fable-5|sonnet-5)/.test(model) ? {} : { temperature: 0.3 }),
+      ...(/^claude-(?:fable-5|sonnet-5|opus-5)/.test(model) ? {} : { temperature: 0.3 }),
       messages: [{ role: 'user', content: CHECK_PROMPT }],
     },
     { signal },

@@ -283,7 +283,7 @@ describe('Live content engine diagnostics and secret safety', () => {
     expect(engineScript).not.toMatch(/Promise\.all\(runners/);
     expect(engineScript).toMatch(/for \(const \[index, \[provider, fn\]\] of enabledRunners\.entries\(\)\)/);
     expect(engineScript).toMatch(/openai:[\s\S]{0,180}?value:\s*'gpt-6-luna'[\s\S]{0,180}?balanced:\s*'gpt-6\.1-terra'[\s\S]{0,180}?premium:\s*'gpt-6\.1-sol'/);
-    expect(engineScript).toMatch(/claude:[\s\S]{0,220}?value:\s*'claude-haiku-5-5'[\s\S]{0,220}?balanced:\s*'claude-sonnet-5-5'[\s\S]{0,220}?premium:\s*'claude-fable-5-1'/);
+    expect(engineScript).toMatch(/claude:[\s\S]{0,220}?value:\s*'claude-haiku-5-5'[\s\S]{0,220}?balanced:\s*'claude-sonnet-5-5'[\s\S]{0,220}?premium:\s*'claude-opus-5-5'/);
     expect(engineScript).toMatch(/selected === 'openai-gpt4o-mini'[\s\S]{0,100}?CURRENT_MODELS\.openai\.value/);
     expect(engineScript).toMatch(/function\s+isMaskedSecretValue/);
   });

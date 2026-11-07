@@ -4,16 +4,22 @@
  * renderer build can inline it without leaving CommonJS aliases behind.
  */
 
-/** Anthropic Claude models verified for the current product tiers. */
+/**
+ * Anthropic Claude models verified for the current product tiers.
+ * [2026-11-07] OPUS is the real Opus 5.5 again (the app's 'premium' tier); FABLE is its own top model
+ * (UI selector 'claude-fable'). The two used to share one ID, which hid Opus from the screen entirely.
+ */
 export const CLAUDE_MODELS = {
   FABLE: 'claude-fable-5-1',
-  OPUS: 'claude-fable-5-1',
+  OPUS: 'claude-opus-5-5',
   SONNET: 'claude-sonnet-5-5',
   HAIKU: 'claude-haiku-5-5',
 } as const;
 
 /** OpenAI text models used by API-based prompt generation. */
 export const OPENAI_TEXT_MODELS = {
+  /** [2026-11-07] Top tier (0 / 0 per 1M); selector 'openai-gpt6-astra'. */
+  ASTRA: 'gpt-6-astra',
   LUNA: 'gpt-6-luna',
   TERRA: 'gpt-6.1-terra',
   SOL: 'gpt-6.1-sol',
@@ -36,6 +42,7 @@ export const RETIRED_API_TEXT_MODEL_IDS: Readonly<Record<string, string>> = {
   'gpt-4.1-mini': OPENAI_TEXT_MODELS.LUNA,
   'gpt-4.1-nano': OPENAI_TEXT_MODELS.LUNA,
   'claude-sonnet-5': CLAUDE_MODELS.SONNET,
+  'claude-opus-5': CLAUDE_MODELS.OPUS,
   'claude-fable-5': CLAUDE_MODELS.FABLE,
   'claude-haiku-4-5-20251001': CLAUDE_MODELS.HAIKU,
   'claude-haiku-4-5': CLAUDE_MODELS.HAIKU,

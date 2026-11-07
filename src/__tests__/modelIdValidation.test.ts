@@ -28,7 +28,8 @@ it('keeps the live content-engine smoke test on the same current model matrix', 
   expect(smoke).toContain("balanced: 'gpt-6.1-terra'");
   expect(smoke).toContain("premium: 'gpt-6.1-sol'");
   expect(smoke).toContain("balanced: 'claude-sonnet-5-5'");
-  expect(smoke).toContain("premium: 'claude-fable-5-1'");
+  // [2026-11-07] the 'claude-opus' selector (premium) is the real Opus 5.5 now; Fable 5.1 has its own 'claude-fable' selector.
+  expect(smoke).toContain("premium: 'claude-opus-5-5'");
   expect(smoke).toContain('reasoning_effort');
   expect(smoke).toContain("tools: [{ type: 'web_search' }]");
   expect(smoke).toContain('client.responses.create');

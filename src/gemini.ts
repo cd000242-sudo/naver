@@ -340,7 +340,7 @@ export async function generateBlogContent(
             generationConfig: {
               temperature: 0.95,
               // [2026-08-11] 3.5 Flash(지속 추론)에 더 큰 출력을 준다. 3.1 Pro Preview 는 제거됨.
-              maxOutputTokens: modelName === GEMINI_TEXT_MODELS.FLASH_SUSTAINED ? 16384 : modelName === GEMINI_TEXT_MODELS.FLASH ? 12288 : 8192,
+              maxOutputTokens: modelName === GEMINI_TEXT_MODELS.FLASH_SUSTAINED || modelName === GEMINI_TEXT_MODELS.ARGON ? 16384 : modelName === GEMINI_TEXT_MODELS.FLASH ? 12288 : 8192,
               topP: 0.95,
               topK: 50,
             },

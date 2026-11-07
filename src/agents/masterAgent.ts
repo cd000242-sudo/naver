@@ -518,7 +518,7 @@ export class MasterAgent {
 
         // 6. Gemini 모델 검증
         // [2026-08-11] PRO(3.1 Pro Preview) 제거 — 선불 티어에서 막혀 고를 수 없는 모델이었다
-        const validModels = [GEMINI_TEXT_MODELS.FLASH, GEMINI_TEXT_MODELS.FLASH_LITE, GEMINI_TEXT_MODELS.FLASH_SUSTAINED];
+        const validModels = [GEMINI_TEXT_MODELS.FLASH, GEMINI_TEXT_MODELS.FLASH_LITE, GEMINI_TEXT_MODELS.FLASH_SUSTAINED, GEMINI_TEXT_MODELS.ARGON];
         if (config.geminiModel && !validModels.includes(config.geminiModel)) {
           issues.push({
             category: '🤖 AI 모델',

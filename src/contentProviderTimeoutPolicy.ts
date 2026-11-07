@@ -83,7 +83,8 @@ export function getOpenAiContentTimeoutMs(
   // Retired IDs (gpt-5.6-*, gpt-4.1*) resolve to the same tier so saved values keep the wide window.
   const model = migrateRetiredApiTextModelId(String(modelName || '').trim().toLowerCase());
 
-  if (model === OPENAI_TEXT_MODELS.SOL) {
+  // [2026-11-07] Astra (top tier) reasons longer than Sol, so it gets at least the Sol window.
+  if (model === OPENAI_TEXT_MODELS.SOL || model === OPENAI_TEXT_MODELS.ASTRA) {
     return Math.max(baseTimeout, normalizedMinChars < 1000 ? 120_000 : 240_000);
   }
   if (model === OPENAI_TEXT_MODELS.TERRA) {
