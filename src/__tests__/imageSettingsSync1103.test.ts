@@ -72,9 +72,9 @@ describe('thumbnail copy: one key', () => {
     expect(imgSyncReadThumbnailText(store)).toBe(false);
     expect(seen).toEqual([{ key: 'thumbnailTextInclude', value: false, source: 'checkbox:thumbnail-text-option' }]);
   });
-  it('covers the image tab, the full-auto window, the full-auto publish screen, both continuous checkboxes and the multi-account window', () => {
+  it('covers the image tab, the full-auto window, the full-auto publish screen and both continuous checkboxes', () => {
     expect([...IMG_SYNC_THUMBNAIL_CHECKBOX_IDS].sort()).toEqual([
-      'continuous-include-thumbnail-text', 'continuous-modal-include-thumbnail-text', 'fullauto-thumbnail-text-option', 'ma-setting-thumbnail-text-option', 'thumbnail-text-include', 'thumbnail-text-option',
+      'continuous-include-thumbnail-text', 'continuous-modal-include-thumbnail-text', 'fullauto-thumbnail-text-option', 'thumbnail-text-include', 'thumbnail-text-option',
     ]);
   });
 });

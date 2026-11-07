@@ -118,7 +118,7 @@ describe('title (thumbnail) box: same value as the image tab, the full-auto wind
   beforeEach(() => {
     localStorage.clear();
     imgSyncInstallListeners();
-    document.body.innerHTML = [THUMB_ID, 'thumbnail-text-option', 'thumbnail-text-include', 'continuous-include-thumbnail-text', 'continuous-modal-include-thumbnail-text', 'ma-setting-thumbnail-text-option']
+    document.body.innerHTML = [THUMB_ID, 'thumbnail-text-option', 'thumbnail-text-include', 'continuous-include-thumbnail-text', 'continuous-modal-include-thumbnail-text']
       .map((id) => `<input type="checkbox" id="${id}">`).join('');
   });
 
@@ -155,7 +155,7 @@ describe('title (thumbnail) box: same value as the image tab, the full-auto wind
 describe('heading box: same config value as the image tab and the full-auto window', () => {
   beforeEach(() => {
     headingTextSettingResetForTest();
-    document.body.innerHTML = [HEADING_ID, 'heading-image-text-option', 'heading-image-text-include', 'continuous-include-heading-text', 'continuous-modal-include-heading-text', 'ma-setting-heading-text-option']
+    document.body.innerHTML = [HEADING_ID, 'heading-image-text-option', 'heading-image-text-include']
       .map((id) => `<input type="checkbox" id="${id}">`).join('');
   });
 

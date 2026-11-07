@@ -2,19 +2,10 @@
 // [2026-11-03] 사장님: "썸네일 텍스트 포함 아래 체크박스 하나 더 만들어서 소제목 텍스트 포함하기 — 소제목 텍스트가 그대로".
 // One switch for config.headingImageTextInclude. main reads it per generation (imageGenerator → resolveHeadingImageText)
 // and puts the heading verbatim on each section image — only for engines that draw Korean themselves
-// (koreanTextEngines); the others stay text-free. The image tab's checkbox, the full-auto image settings modal, the
-// full-auto publish screen (single publish, full-auto mode), the continuous publishing panel + settings window and the
-// multi-account full-auto settings window show the same saved value (a global switch, not a per queue item / account field).
-// Inline bundle = one scope, so top-level names carry the headingTextSetting prefix.
+// (koreanTextEngines); the others stay text-free. The image tab's checkbox, the full-auto image settings modal and the
+// full-auto publish screen (single publish, full-auto mode) show the same saved value. Inline bundle = one scope, so top-level names carry the headingTextSetting prefix.
 
-export const HEADING_TEXT_SETTING_IDS: readonly string[] = [
-  'heading-image-text-option',
-  'heading-image-text-include',
-  'fullauto-heading-text-option',
-  'continuous-include-heading-text',
-  'continuous-modal-include-heading-text',
-  'ma-setting-heading-text-option',
-];
+export const HEADING_TEXT_SETTING_IDS: readonly string[] = ['heading-image-text-option', 'heading-image-text-include', 'fullauto-heading-text-option'];
 
 interface HeadingTextSettingConfig {
   headingImageTextInclude?: boolean;
