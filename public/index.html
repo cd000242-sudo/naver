@@ -6999,6 +6999,26 @@
                                 </label>
                             </div>
 
+                            <!-- [2026-11-07] 소제목 텍스트 포함: 새 설정이 아니라 이미지 탭·풀오토 이미지 설정 창과 같은 값 (config.headingImageTextInclude).
+                                 큐 항목별 값이 아니라 전역 스위치 — main 이 이미지를 만들 때마다 읽는다 -->
+                            <div
+                                style="margin-bottom: 0.75rem; padding: 0.75rem; background: rgba(245, 158, 11, 0.10); border-radius: 8px; border: 1px solid rgba(245, 158, 11, 0.30);">
+                                <label style="display: flex; align-items: flex-start; gap: 0.5rem; cursor: pointer;">
+                                    <input type="checkbox" id="continuous-include-heading-text"
+                                        style="width: 18px; height: 18px; cursor: pointer; accent-color: #f59e0b; margin-top: 2px;">
+                                    <span style="display: flex; flex-direction: column; gap: 0.15rem;">
+                                        <span
+                                            style="font-weight: 700; color: var(--text-strong); font-size: 0.85rem;">🖼️
+                                            소제목 텍스트 포함</span>
+                                        <span style="font-size: 0.75rem; color: var(--text-muted);">체크하면 소제목 이미지에 소제목 글자를 그대로 넣습니다</span>
+                                    </span>
+                                </label>
+                                <details style="margin-top: 0.4rem;">
+                                    <summary style="cursor: pointer; font-size: 0.75rem; color: var(--text-muted);">설명 보기</summary>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; margin-top: 0.25rem;">이미지 탭 · 풀오토 이미지 설정과 같은 설정입니다. 한글을 직접 그리는 엔진만 해당합니다(관련 사진 찾기 · 내 폴더는 제외).</div>
+                                </details>
+                            </div>
+
                             <div
                                 style="margin-bottom: 0.75rem; padding: 0.75rem; background: rgba(59, 130, 246, 0.1); border-radius: 8px; border: 1px solid rgba(59, 130, 246, 0.3);">
                                 <div
@@ -7723,6 +7743,25 @@
                                         오버레이합니다</div>
                                 </div>
                             </label>
+                        </div>
+
+                        <!-- [2026-11-07] 소제목 텍스트 포함 — 연속발행 패널과 같은 값 (config.headingImageTextInclude, 전역) -->
+                        <div
+                            style="margin-bottom: 1rem; padding: 0.75rem; background: rgba(255, 255, 255, 0.03); border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.05);">
+                            <label
+                                style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer; user-select: none;">
+                                <input type="checkbox" id="continuous-modal-include-heading-text"
+                                    style="width: 20px; height: 20px; cursor: pointer; accent-color: var(--primary);">
+                                <div>
+                                    <div style="font-weight: 700; color: var(--text-strong); font-size: 0.9rem;">
+                                        🖼️ 소제목 텍스트 포함</div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted);">소제목 이미지에 소제목 글자를 그대로 넣습니다</div>
+                                </div>
+                            </label>
+                            <details style="margin-top: 0.4rem;">
+                                <summary style="cursor: pointer; font-size: 0.75rem; color: var(--text-muted);">설명 보기</summary>
+                                <div style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; margin-top: 0.25rem;">이미지 탭 · 풀오토 이미지 설정과 같은 설정입니다. 한글을 직접 그리는 엔진만 해당합니다(관련 사진 찾기 · 내 폴더는 제외).</div>
+                            </details>
                         </div>
                     </div>
                 </div>
@@ -9433,6 +9472,31 @@
                         </div>
                     </div>
 
+                    <!-- [2026-11-07] 다중계정 풀오토의 제목(썸네일)·소제목 텍스트 포함: 계정별 값이 아니라 이미지 탭·풀오토 이미지 설정 창과 같은 전역 값
+                         (localStorage thumbnailTextInclude, config.headingImageTextInclude). 발행할 때마다 그 값을 읽는다 -->
+                    <div id="ma-image-text-options" style="margin-bottom: 1rem;">
+                        <label
+                            style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600; display: block; margin-bottom: 0.5rem;">🖼️
+                            이미지 글자</label>
+                        <div style="display: flex; flex-direction: column; gap: 0.35rem;">
+                            <label
+                                style="display:flex; align-items:center; gap:0.4rem; cursor:pointer; font-size:0.8rem;">
+                                <input type="checkbox" id="ma-setting-thumbnail-text-option"
+                                    style="accent-color:#f59e0b; width:16px; height:16px;">
+                                <span style="color:var(--text-strong);">제목(썸네일) 텍스트 포함</span>
+                            </label>
+                            <label
+                                style="display:flex; align-items:center; gap:0.4rem; cursor:pointer; font-size:0.8rem;">
+                                <input type="checkbox" id="ma-setting-heading-text-option"
+                                    style="accent-color:#f59e0b; width:16px; height:16px;">
+                                <span style="color:var(--text-strong);">소제목 텍스트 포함</span>
+                            </label>
+                        </div>
+                        <details style="margin-top: 0.4rem;">
+                            <summary style="cursor: pointer; font-size: 0.75rem; color: var(--text-muted);">설명 보기</summary>
+                            <div style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; margin-top: 0.25rem;">이미지 탭 · 풀오토 이미지 설정과 같은 설정입니다. 제목은 썸네일에 짧은 문구로 넣고(꺼 두면 자동 판단), 소제목은 이미지에 소제목 글자를 그대로 넣습니다. 소제목은 한글을 직접 그리는 엔진만 해당합니다(관련 사진 찾기 · 내 폴더는 제외).</div>
+                        </details>
+                    </div><!-- /ma-image-text-options -->
 
                     <!-- 글 톤 선택 -->
                     <div style="margin-bottom: 1rem;">
