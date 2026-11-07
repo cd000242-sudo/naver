@@ -1,6 +1,6 @@
 import { Fragment, useCallback, useEffect, useState } from 'react';
 import LewordAuth from '../components/leword/LewordAuth';
-import { clearSession, daysLeft, loadSession, logoutWeb, pingWebSession, type LewordSession } from '../lib/lewordAuth';
+import { clearSession, daysLeft, loadSession, logoutWeb, pingWebSession, SESSION_CHANGED_EVENT, type LewordSession } from '../lib/lewordAuth';
 import { syncKeysWithApp } from '../lib/appKeySync';
 import { LEWORD_GUIDE_URL } from '../lib/purchaseGuide.mjs';
 
@@ -160,6 +160,24 @@ function LewordPage() {
         const open = () => setAuthOpen(true);
         window.addEventListener('leword:login', open);
         return () => window.removeEventListener('leword:login', open);
+    }, []);
+    // The top menu's [Login] reaches this page from elsewhere as ?login=1: open the dialog, then drop the flag
+    // so a reload does not reopen it. Already logged in: only the flag is dropped.
+    useEffect(() => {
+        if (searchParams.get('login') !== '1') return;
+        if (!session) setAuthOpen(true);
+        const next = new URLSearchParams(searchParams);
+        next.delete('login');
+        setSearchParams(next, { replace: true });
+    }, [searchParams, session, setSearchParams]);
+    // A login or logout done in the top menu (or another tab) must show here as well.
+    useEffect(() => {
+        const sync = () => setSession((previous) => {
+            const next = loadSession();
+            return previous?.userId === next?.userId && previous?.webSessionToken === next?.webSessionToken ? previous : next;
+        });
+        window.addEventListener(SESSION_CHANGED_EVENT, sync);
+        return () => window.removeEventListener(SESSION_CHANGED_EVENT, sync);
     }, []);
 
     /*

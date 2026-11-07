@@ -1,0 +1,181 @@
+/*
+ * Site top menu — light bar ("design 1", agreed 2026-11-07).
+ *
+ * RULE: .site-nav (and anything wrapping .site-nav-sheet) must never get filter, backdrop-filter, transform,
+ * perspective, will-change or contain. Each of those makes the bar the containing block of its position:fixed
+ * children, which clipped the opened phone menu to the bar's height. The bar is plain opaque white instead of
+ * blurred glass. Locked by tests/navbar-style.test.mjs.
+ *
+ * Height: 72px (64px on phones). The LEWORD console and sticky boards reserve 72px under the bar, so the bar
+ * must not grow past it.
+ */
+.site-nav {
+    --site-nav-h: 72px;
+    --sn-ink: #1c2024;
+    --sn-text: #2c3238;
+    --sn-muted: #545b63;
+    --sn-faint: #6a7179;
+    --sn-line: #e2e5df;
+    --sn-line-strong: #cfd4cc;
+    --sn-hover: #f2f3ef;
+    --sn-brand: #8a6a12;
+    --sn-brand-soft: #fbf1d6;
+    --sn-brand-line: #ead9a6;
+    --sn-cta: #f5b40a;
+    --sn-cta-hover: #e6a700;
+    --sn-on-cta: #1d1605;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background: #ffffff;
+    color: var(--sn-ink);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), 0 8px 26px rgba(0, 0, 0, 0.28);
+}
+.site-nav.is-scrolled { box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16), 0 10px 32px rgba(0, 0, 0, 0.4); }
+/* While the phone list is open the bar rises above the floating chat/music buttons (z-index 10000+). */
+.site-nav.is-menu-open { z-index: 10100; }
+
+.site-nav :focus-visible { outline: 3px solid #0f62fe; outline-offset: 2px; }
+.site-nav a, .site-nav button { font-family: inherit; }
+.site-nav button { cursor: pointer; }
+
+.site-nav-bar {
+    box-sizing: border-box;
+    height: var(--site-nav-h);
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid var(--sn-line);
+}
+
+.site-nav-brand { display: flex; align-items: center; gap: 10px; flex: none; min-width: 0; color: var(--sn-ink); font-weight: 900; font-size: 20px; line-height: 1.15; white-space: nowrap; }
+.site-nav-brand img { display: block; width: 40px; height: 40px; border-radius: 11px; }
+.site-nav-brand-text small { display: block; font-size: 13px; font-weight: 500; color: var(--sn-muted); }
+
+.site-nav-menu { flex: 1; min-width: 0; display: flex; justify-content: center; }
+.site-nav-list { list-style: none; display: flex; align-items: center; gap: 4px; }
+.site-nav-item { position: relative; }
+
+.site-nav-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 48px;
+    padding: 0 15px;
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--sn-text);
+    white-space: nowrap;
+}
+.site-nav-link:hover, .site-nav-item.open > .site-nav-link { background: var(--sn-hover); color: var(--sn-ink); }
+/* Current page — soft fill, bold, 3px underline. A group trigger gets the same mark when a page inside it is open. */
+.site-nav-link[aria-current="page"], .site-nav-link.is-active { background: var(--sn-brand-soft); color: var(--sn-ink); font-weight: 900; }
+.site-nav-link[aria-current="page"]::after, .site-nav-link.is-active::after { content: ""; position: absolute; left: 14px; right: 14px; bottom: -12px; height: 3px; border-radius: 3px; background: var(--sn-brand); }
+
+.site-nav-chev { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; transition: transform 0.15s; }
+.site-nav-item.open .site-nav-chev { transform: rotate(180deg); }
+
+.site-nav-drop { position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%); width: 330px; padding: 8px; display: grid; gap: 2px; background: #ffffff; border: 1px solid var(--sn-line); border-radius: 16px; box-shadow: 0 18px 50px rgba(20, 24, 28, 0.2); }
+.site-nav-drop[hidden] { display: none; }
+/* Invisible bridge so a mouse can cross the 12px gap without closing the panel. */
+.site-nav-drop::before { content: ""; position: absolute; left: 0; right: 0; top: -14px; height: 14px; }
+.site-nav-drop-account { left: auto; right: 0; transform: none; width: 280px; }
+.site-nav-drop-item { display: flex; align-items: center; gap: 14px; min-height: 68px; width: 100%; padding: 10px 12px; border: 0; border-radius: 12px; background: transparent; text-align: left; color: var(--sn-ink); }
+.site-nav-drop-item:hover { background: var(--sn-hover); }
+.site-nav-drop-item b { display: block; font-size: 18px; line-height: 1.3; }
+.site-nav-drop-item small { display: block; font-size: 15px; color: var(--sn-muted); line-height: 1.35; }
+.site-nav-drop-item[aria-current="page"] { background: var(--sn-brand-soft); }
+.site-nav-drop-icon { flex: none; width: 42px; height: 42px; display: grid; place-items: center; border-radius: 11px; border: 1px solid var(--sn-brand-line); background: var(--sn-brand-soft); color: var(--sn-brand); font-size: 18px; font-weight: 900; }
+
+.site-nav-actions { display: flex; align-items: center; gap: 10px; flex: none; }
+.site-nav-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 48px; padding: 0 20px; border-radius: 12px; font-size: 17px; font-weight: 700; white-space: nowrap; transition: background 0.15s, border-color 0.15s; }
+.site-nav-btn-cta { background: var(--sn-cta); color: var(--sn-on-cta); border: 0; }
+.site-nav-btn-cta:hover { background: var(--sn-cta-hover); }
+.site-nav-btn-line { background: #ffffff; color: var(--sn-ink); border: 1.5px solid var(--sn-line-strong); }
+.site-nav-btn-line:hover { background: var(--sn-hover); }
+.site-nav-cta-short { display: none; }
+
+.site-nav-account-btn { display: flex; align-items: center; gap: 8px; height: 48px; padding: 0 12px 0 8px; border: 1.5px solid var(--sn-line-strong); border-radius: 12px; background: #ffffff; color: var(--sn-ink); font-size: 16px; font-weight: 700; }
+.site-nav-account-btn:hover, .site-nav-account.open .site-nav-account-btn { background: var(--sn-hover); }
+.site-nav-avatar { width: 32px; height: 32px; display: grid; place-items: center; flex: none; border-radius: 50%; background: var(--sn-brand-soft); border: 1px solid var(--sn-brand-line); color: var(--sn-brand); font-weight: 900; }
+.site-nav-account-id { max-width: 130px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.site-nav-burger { display: none; align-items: center; gap: 8px; height: 48px; padding: 0 12px; border: 1.5px solid var(--sn-line-strong); border-radius: 12px; background: #ffffff; color: var(--sn-ink); font-size: 16px; font-weight: 700; }
+.site-nav-burger-lines { display: grid; gap: 4px; width: 20px; }
+.site-nav-burger-lines i { display: block; height: 2.5px; border-radius: 2px; background: currentColor; transition: transform 0.2s, opacity 0.2s; }
+.site-nav-burger[aria-expanded="true"] .site-nav-burger-lines i:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.site-nav-burger[aria-expanded="true"] .site-nav-burger-lines i:nth-child(2) { opacity: 0; }
+.site-nav-burger[aria-expanded="true"] .site-nav-burger-lines i:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* Phone / narrow-window list. Fixed under the bar down to the bottom edge, opaque, scrolls on its own. */
+.site-nav-sheet {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: var(--site-nav-h);
+    bottom: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: #ffffff;
+    border-top: 1px solid var(--sn-line);
+}
+.site-nav-sheet[hidden] { display: none; }
+.site-nav-sheet-in { max-width: 640px; margin: 0 auto; padding: 16px 16px calc(40px + env(safe-area-inset-bottom, 0px)); }
+.site-nav-sheet-who { margin: 0 4px 10px; font-size: 16px; color: var(--sn-muted); }
+.site-nav-sheet-who b { color: var(--sn-ink); }
+.site-nav-sheet-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+.site-nav-sheet-actions .site-nav-btn { height: 56px; font-size: 18px; }
+.site-nav-sheet-group { padding: 18px 4px 6px; font-size: 15px; font-weight: 700; color: var(--sn-faint); }
+.site-nav-sheet-item { display: flex; align-items: center; gap: 10px; min-height: 58px; padding: 0 16px; border-bottom: 1px solid var(--sn-line); border-radius: 12px; color: var(--sn-ink); font-size: 19px; font-weight: 700; }
+.site-nav-sheet-item small { margin-left: auto; font-size: 15px; font-weight: 500; color: var(--sn-muted); }
+.site-nav-sheet-item [role="status"] { margin-left: auto !important; }
+.site-nav-sheet-item[aria-current="page"] { background: var(--sn-brand-soft); box-shadow: inset 4px 0 0 var(--sn-brand); border-bottom-color: transparent; }
+
+/* Below 1180px the seven bar items cannot fit: the bar keeps brand + free trial + [menu]. */
+@media (max-width: 1180px) {
+    .site-nav-menu { display: none; }
+    .site-nav-burger { display: inline-flex; }
+    .site-nav-account, .site-nav-login { display: none; }
+    .site-nav-actions { margin-left: auto; }
+    .site-nav.is-menu-open .site-nav-actions > .site-nav-btn-cta { display: none; }
+}
+/* Just above the breakpoint the full bar is a tight fit (a logged-in id makes the buttons wider): trim it. */
+@media (min-width: 1181px) and (max-width: 1320px) {
+    .site-nav-bar { gap: 14px; }
+    .site-nav-link { padding: 0 11px; font-size: 17px; }
+    .site-nav-link[aria-current="page"]::after, .site-nav-link.is-active::after { left: 10px; right: 10px; }
+    .site-nav-account-id { max-width: 90px; }
+}
+/* A list left open while the window is widened must not linger over the page. */
+@media (min-width: 1181px) {
+    .site-nav-sheet { display: none !important; }
+}
+@media (max-width: 720px) {
+    .site-nav { --site-nav-h: 64px; }
+    .site-nav-bar { padding: 0 16px; gap: 10px; }
+    .site-nav-brand { font-size: 18px; }
+    .site-nav-brand img { width: 36px; height: 36px; }
+    .site-nav-brand-text small { display: none; }
+    .site-nav-actions { gap: 8px; }
+    .site-nav-actions .site-nav-btn { height: 46px; padding: 0 14px; font-size: 16px; }
+    .site-nav-cta-long { display: none; }
+    .site-nav-cta-short { display: inline; }
+    .site-nav-burger { height: 46px; padding: 0 10px; }
+}
+@media (max-width: 380px) {
+    .site-nav-bar { padding: 0 12px; }
+    .site-nav-brand { font-size: 16px; gap: 8px; }
+    .site-nav-actions .site-nav-btn { padding: 0 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .site-nav *, .site-nav *::before, .site-nav *::after { transition: none !important; }
+}

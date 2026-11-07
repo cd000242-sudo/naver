@@ -23,6 +23,20 @@ const SESSION_KEY = 'leaderspro.leword.session.v2';
 /** 이 브라우저의 임의 ID — 서버가 "같은 브라우저 재로그인"과 "다른 곳"을 가른다. 개인정보가 아니다. */
 const DEVICE_KEY = 'leaderspro.leword.device.v1';
 const TIMEOUT_MS = 20000;
+/**
+ * Fired on window after the stored login changes (login, logout, kicked). The top menu and the LEWORD page are
+ * separate React trees that both show the login, and the browser's own `storage` event only reaches other tabs.
+ */
+export const SESSION_CHANGED_EVENT = 'leword:session-changed';
+
+function announceSessionChange(): void {
+    if (typeof window === 'undefined') return;
+    try {
+        window.dispatchEvent(new Event(SESSION_CHANGED_EVENT));
+    } catch {
+        // A listener must never break login or logout.
+    }
+}
 
 export type LewordSession = {
     userId: string;
@@ -95,6 +109,7 @@ function saveSession(session: LewordSession): void {
     } catch {
         // 저장이 안 돼도 이번 화면은 열려 있어야 한다.
     }
+    announceSessionChange();
 }
 
 export function clearSession(): void {
@@ -105,6 +120,7 @@ export function clearSession(): void {
     } catch {
         // 계속
     }
+    announceSessionChange();
 }
 
 /**
