@@ -42,11 +42,14 @@ export const AGENT_NPM_PACKAGES: Readonly<Record<AgentProvider, string>> = Objec
  * ETARGET(404), surfaced misleadingly as "권한 오류". Bumped to 0.51.0 (current
  * latest). gemini-cli publishes very frequently, so installAgent also falls back
  * to @latest when the pinned version 404s (see installAgent).
+ * [2026-11-07] codex 0.167.0 (npm latest), claude 2.1.311 (npm `stable` tag; the default model claude-sonnet-5-5 needs
+ * >= 2.1.284, see agentMinVersion), gemini 0.67.0 (kept for compatibility; the gemini provider installs agy instead).
+ * All three were checked with their own --help: every flag the runners pass is still accepted.
  */
 export const AGENT_NPM_PACKAGE_VERSIONS: Readonly<Record<AgentProvider, string>> = Object.freeze({
-  codex: '0.166.0',
-  claude: '2.1.197',
-  gemini: '0.51.0',
+  codex: '0.167.0',
+  claude: '2.1.311',
+  gemini: '0.67.0',
 });
 
 const OFFICIAL_NPM_REGISTRY = 'https://registry.npmjs.org/';

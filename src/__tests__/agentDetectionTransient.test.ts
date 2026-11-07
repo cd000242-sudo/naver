@@ -58,7 +58,7 @@ describe('detectAgent transient probe failures', () => {
 
   it('reports a claude login probe timeout as timeout, never as a logout', async () => {
     spawnMock
-      .mockResolvedValueOnce({ code: 0, stdout: '2.1.0', stderr: '' })
+      .mockResolvedValueOnce({ code: 0, stdout: '2.1.311', stderr: '' })
       .mockRejectedValueOnce(timeoutError('claude'));
 
     const status = await detectAgent('claude');

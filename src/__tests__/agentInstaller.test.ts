@@ -116,9 +116,9 @@ describe('AGENT_NPM_PACKAGES', () => {
     expect(AGENT_NPM_PACKAGES.claude).toBe('@anthropic-ai/claude-code');
     expect(AGENT_NPM_PACKAGES.gemini).toBe('@google/gemini-cli');
     expect(AGENT_NPM_PACKAGE_VERSIONS).toEqual({
-      codex: '0.166.0',
-      claude: '2.1.197',
-      gemini: '0.51.0',
+      codex: '0.167.0',
+      claude: '2.1.311',
+      gemini: '0.67.0',
     });
   });
 });
@@ -149,7 +149,7 @@ describe('installAgent', () => {
     expect(first.command).toBe(APP_NODE);
     expect(first.args).toEqual([
       BUNDLED_NPM_CLI,
-      ...expectedNpmArgs('@openai/codex@0.166.0', 'openai'),
+      ...expectedNpmArgs('@openai/codex@0.167.0', 'openai'),
     ]);
     expect(first.env).toBe(BUNDLED_INVOCATION.env);
     expect(r.version).toBeTruthy(); // detect() ran via the mocked spawn
@@ -164,7 +164,7 @@ describe('installAgent', () => {
     await installAgent('claude');
     expect(spawnMock.mock.calls[0][0].args).toEqual([
       BUNDLED_NPM_CLI,
-      ...expectedNpmArgs('@anthropic-ai/claude-code@2.1.197', 'anthropic-ai'),
+      ...expectedNpmArgs('@anthropic-ai/claude-code@2.1.311', 'anthropic-ai'),
     ]);
   });
 

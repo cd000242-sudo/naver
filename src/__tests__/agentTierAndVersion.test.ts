@@ -95,19 +95,53 @@ describe('usage-limit notice with the reset moment', () => {
 describe('Codex minimum version 0.159.0', () => {
   beforeEach(() => { spawnMock.mockReset(); clearAgentDetectionCache('codex'); });
 
-  it('version comparison; unreadable versions never block; only codex has a minimum', () => {
+  it('version comparison; unreadable versions never block; gemini (agy) has no minimum', () => {
     expect(AGENT_MIN_VERSIONS.codex).toBe('0.159.0');
+    expect(AGENT_MIN_VERSIONS.claude).toBe('2.1.293');
+    expect(AGENT_MIN_VERSIONS.gemini).toBeUndefined();
     expect(isAgentVersionBelowMinimum('codex', 'Codex CLI 0.158.9')).toBe(true);
     expect(isAgentVersionBelowMinimum('codex', 'Codex CLI 0.144.1')).toBe(true);
     expect(isAgentVersionBelowMinimum('codex', 'Codex CLI 0.159.0')).toBe(false);
     expect(isAgentVersionBelowMinimum('codex', 'Codex CLI 0.166.0')).toBe(false);
     expect(isAgentVersionBelowMinimum('codex', 'Codex CLI')).toBe(false);
-    expect(isAgentVersionBelowMinimum('claude', 'Claude Code 1.0.0')).toBe(false);
+    expect(isAgentVersionBelowMinimum('claude', 'Claude Code')).toBe(false);
+    expect(isAgentVersionBelowMinimum('gemini', 'Antigravity CLI 0.1.0')).toBe(false);
   });
 
-  it('the installer pin is 0.166.0 and satisfies the minimum', () => {
-    expect(AGENT_NPM_PACKAGE_VERSIONS.codex).toBe('0.166.0');
+  // [2026-11-07] The default model claude-sonnet-5-5 needs Claude Code >= 2.1.284 (Haiku 5.5: 2.1.293).
+  it('claude: below 2.1.293 needs an update, 2.1.293 and newer do not', () => {
+    expect(isAgentVersionBelowMinimum('claude', 'Claude Code 2.1.197')).toBe(true);
+    expect(isAgentVersionBelowMinimum('claude', 'Claude Code 2.1.292')).toBe(true);
+    expect(isAgentVersionBelowMinimum('claude', 'Claude Code 1.0.0')).toBe(true);
+    expect(isAgentVersionBelowMinimum('claude', 'Claude Code 2.1.293')).toBe(false);
+    expect(isAgentVersionBelowMinimum('claude', 'Claude Code 2.1.311')).toBe(false);
+    expect(isAgentVersionBelowMinimum('claude', 'Claude Code 2.2.0')).toBe(false);
+  });
+
+  it('the installer pins satisfy the minimums (codex 0.167.0, claude 2.1.311)', () => {
+    expect(AGENT_NPM_PACKAGE_VERSIONS.codex).toBe('0.167.0');
+    expect(AGENT_NPM_PACKAGE_VERSIONS.claude).toBe('2.1.311');
+    expect(AGENT_NPM_PACKAGE_VERSIONS.gemini).toBe('0.67.0');
     expect(isAgentVersionBelowMinimum('codex', AGENT_NPM_PACKAGE_VERSIONS.codex)).toBe(false);
+    expect(isAgentVersionBelowMinimum('claude', AGENT_NPM_PACKAGE_VERSIONS.claude)).toBe(false);
+  });
+
+  it('detect (claude): an old install is update_required without a login probe, a new one goes on to auth status', async () => {
+    const claudeSpawn = (version: string) => spawnMock.mockImplementation(async (opts: { args: string[] }) => (
+      opts.args[0] === '--version'
+        ? { code: 0, stdout: `${version} (Claude Code)\n`, stderr: '' }
+        : { code: 0, stdout: JSON.stringify({ loggedIn: true, authMethod: 'claude.ai', subscriptionType: 'max' }), stderr: '' }));
+    clearAgentDetectionCache('claude');
+    claudeSpawn('2.1.197');
+    const old = await detectAgent('claude', { forceRefresh: true });
+    expect(old).toMatchObject({ installed: true, available: false, errorCode: 'update_required' });
+    expect(old.detail).toContain('2.1.293');
+    expect(spawnMock.mock.calls.some((c) => c[0].args[0] === 'auth')).toBe(false);
+    clearAgentDetectionCache('claude');
+    claudeSpawn('2.1.311');
+    expect(await detectAgent('claude', { forceRefresh: true })).toMatchObject({ installed: true, loggedIn: true });
+    expect(spawnMock.mock.calls.some((c) => c[0].args[0] === 'auth')).toBe(true);
+    clearAgentDetectionCache('claude');
   });
 
   const versionSpawn = (version: string) => spawnMock.mockImplementation(async (opts: { args: string[] }) => (

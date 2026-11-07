@@ -9,7 +9,7 @@ vi.mock('../agentCli/spawnHelper', () => ({
 import { clearAgentDetectionCache, detectAgent } from '../agentCli/detect';
 
 function versionResult() {
-  return { code: 0, stdout: '2.1.0', stderr: '' };
+  return { code: 0, stdout: '2.1.311', stderr: '' };
 }
 
 function authResult(subscriptionType = 'pro') {

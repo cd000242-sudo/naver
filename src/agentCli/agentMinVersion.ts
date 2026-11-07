@@ -1,6 +1,7 @@
 // src/agentCli/agentMinVersion.ts
 // Minimum CLI versions the app's default models need. gpt-6.1-terra is only served by Codex CLI >= 0.159.0;
-// an older CLI would answer "model not supported" on every call, so the app reports "업데이트 필요"
+// claude-sonnet-5-5 (the app's Claude default) needs Claude Code >= 2.1.284 and Haiku 5.5 needs >= 2.1.293, so 2.1.293
+// covers every Claude 5.5 model. An older CLI would answer "model not supported" on every call, so the app reports "업데이트 필요"
 // (distinct from "설치 필요") and the connect button installs the pinned version into the app folder.
 // Pure: no imports besides a type.
 
@@ -8,6 +9,7 @@ import type { AgentProvider } from './types.js';
 
 export const AGENT_MIN_VERSIONS: Readonly<Partial<Record<AgentProvider, string>>> = Object.freeze({
   codex: '0.159.0',
+  claude: '2.1.293',
 });
 
 const SEMVER_TRIPLE = /(\d+)\.(\d+)\.(\d+)/;
