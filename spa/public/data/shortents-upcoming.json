@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T05:16:04.678Z",
+ "builtAt": "2026-11-06T07:06:53.233Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,301 +8,234 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 10,
  "candidates": [
   {
-   "keyword": "신용융자 담보비율 면제",
+   "keyword": "쿠팡 과징금 정지",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 42,
-   "recent20": 8,
-   "press": 42,
-   "firstArticleAt": "2026-11-06T03:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "증시 급락에 당국 긴급 대응…신용융자 담보비율 의무 3개월 면제",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-06T05:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006405079?sid=101"
-    },
-    {
-     "title": "증시 급락에 'F4 긴급 대응'…증권사 신용융자 담보비율 유지 의무 석 달...",
-     "press": "newsprime.co.kr",
-     "publishedAt": "2026-11-06T05:10:00.000Z",
-     "link": "http://www.newsprime.co.kr/news/article.html?no=753994"
-    },
-    {
-     "title": "급락장 반대매매 확산 차단…신용융자 담보비율 140% 유지 의무 3개월 면...",
-     "press": "youthdaily.co.kr",
-     "publishedAt": "2026-11-06T05:10:00.000Z",
-     "link": "https://www.youthdaily.co.kr/news/article.html?no=229481"
-    }
-   ]
-  },
-  {
-   "keyword": "장동혁 국민의힘 대표",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 24,
-   "recent20": 7,
-   "press": 18,
-   "firstArticleAt": "2026-11-06T03:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "오세훈·장동혁 \"우리는 한팀…시민의 삶 지키겠다\"",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-06T05:12:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/324446/?sc=Naver"
-    },
-    {
-     "title": "오세훈 대권 지지율 1위인데 장동혁은 왜 한동훈 복당 반대하나…당권...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-06T05:10:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16269938"
-    },
-    {
-     "title": "장동혁·오세훈, 국회서 예산정책협의회…\"서울시와 한 팀\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-06T05:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001401173?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "이창동 감독 넷플릭스 사랑",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 27,
+   "articles90": 28,
    "recent20": 4,
-   "press": 17,
-   "firstArticleAt": "2026-11-06T03:47:00.000Z",
+   "press": 28,
+   "firstArticleAt": "2026-11-06T05:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘가능한 사랑’ 이창동 “전도연 오스카 수상? 아무도 몰라‥앞으로 하...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-06T05:09:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001185056"
+     "title": "4200억 유지, 2000억 정지…쿠팡 과징금, 법원 판단 왜 갈렸나",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-06T06:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014306574?sid=102"
     },
     {
-     "title": "이창동 감독 \"설경구 원래 잘 울어⋯나중에 알고 '왜 저리 우나' 싶었다...",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-06T05:06:00.000Z",
-     "link": "http://www.joynews24.com/view/2023480"
+     "title": "쿠팡 2011억원 과징금 집행 일단 멈췄다…법원 효력정지 결정",
+     "press": "thefirstmedia.net",
+     "publishedAt": "2026-11-06T06:54:00.000Z",
+     "link": "http://www.thefirstmedia.net/news/articleView.html?idxno=212891"
     },
     {
-     "title": "'가능한 사랑' 이창동 감독 \"전도연, 인간적으로 가까워…여유 좋았다\"...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-06T05:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004122620"
+     "title": "쿠팡, 개인정보 유출 과징금 4235억 집행정지 '불발'",
+     "press": "safetimes.co.kr",
+     "publishedAt": "2026-11-06T06:50:00.000Z",
+     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247272"
     }
    ]
   },
   {
-   "keyword": "긴급 시장상황점검회의",
+   "keyword": "한 동티모르 공동언론발표",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
+   "articles90": 19,
    "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-06T04:00:00.000Z",
+   "press": 17,
+   "firstArticleAt": "2026-11-06T05:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "증시 급락에 당국 긴급 대응…신용융자 담보비율 의무 3개월 면제",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-06T05:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006405079?sid=101"
+     "title": "[한-동티모르 정상회담] 李-오르타 대통령 정상회담⋯고위급 외교협의체...",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-06T07:01:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=747894"
     },
     {
-     "title": "증시 급락에 'F4 긴급 대응'…증권사 신용융자 담보비율 유지 의무 석 달...",
-     "press": "newsprime.co.kr",
-     "publishedAt": "2026-11-06T05:10:00.000Z",
-     "link": "http://www.newsprime.co.kr/news/article.html?no=753994"
+     "title": "‘DJ 노벨평화상 추천’ 동티모르 대통령 “韓 빛의 혁명, 노벨상 추천...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-06T06:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003696639?sid=100"
     },
     {
-     "title": "코스피 5000선 붕괴에 정부 긴급조치...신용융자 담보규제 3개월 면제",
-     "press": "wikileaks-kr.org",
-     "publishedAt": "2026-11-06T05:02:00.000Z",
-     "link": "https://www.wikileaks-kr.org/news/articleView.html?idxno=194307"
+     "title": "[한·동티모르 정상회담] 재건 지원 신뢰, 아세안 공조로 확대",
+     "press": "sisaweek.com",
+     "publishedAt": "2026-11-06T06:52:00.000Z",
+     "link": "https://www.sisaweek.com/news/articleView.html?idxno=238832"
     }
    ]
   },
   {
-   "keyword": "내년 일자리 예산",
+   "keyword": "김종철 경찰청장 후보자",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-06T04:20:00.000Z",
+   "articles90": 13,
+   "recent20": 5,
+   "press": 12,
+   "firstArticleAt": "2026-11-06T05:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "내년 일자리 예산 25.1조···청년 첫 취업·AI 등 첨단 분야 직업훈련...",
-     "press": "smartbizn.com",
-     "publishedAt": "2026-11-06T05:04:00.000Z",
-     "link": "https://www.smartbizn.com/news/articleView.html?idxno=158684"
+     "title": "김종철 경찰청장 후보자 \"쇄신 요구 엄중히 인식·신뢰 회복\"(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-06T07:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016426713?sid=102"
     },
     {
-     "title": "김영훈 장관 \"반도체 성장 온기 청년까지 못 닿아\"…일자리 대책 마련 ...",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-06T04:46:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=561842"
+     "title": "김종철 경찰청장 후보자 \"이상동기·관계성 범죄 시스템 해결 급선무\"",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-06T06:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006405262?sid=102"
     },
     {
-     "title": "국힘 이소희, 李 정부 청년 예산안에 \"우리끼리 인건비 예산인가\"",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-06T04:38:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=172073"
+     "title": "김종철 경찰청장 후보자 \"이상동기·관계성 범죄 대응 최우선\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-06T06:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005437726?sid=102"
     }
    ]
   },
   {
-   "keyword": "김구라",
+   "keyword": "두번째 시그널 12월 방송 확정",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-06T04:18:00.000Z",
-   "exclusive": false,
+   "articles90": 12,
+   "recent20": 3,
+   "press": 12,
+   "firstArticleAt": "2026-11-06T05:40:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "김구라 \"아들 결혼=설정\" 해명했는데…그리 또 결혼 언급",
-     "press": "atstar1.com",
-     "publishedAt": "2026-11-06T05:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/415/0000053521"
+     "title": "조진웅 여파 속 '시그널2', 우여곡절 끝에 편성… AI 배우 교체 검토 까...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-06T07:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/469/0000964073"
     },
     {
-     "title": "'유행꼰대' 김구라 아들 그리, 결혼 준비 중…“군대 기다려준 여자친구...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-06T04:50:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2645078"
+     "title": "\"AI로 조진웅 교체까지 시도\"…결국 원본 그대로 공개되는 '시그널2'",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-06T06:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005600622?sid=103"
     },
     {
-     "title": "김구라, 드디어 며느리 본다..子 그리 \"군대 기다려준 여친과 결혼 준비...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-06T04:18:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005635582"
+     "title": "tvN, 조진웅 논란 딛고 '두번째 시그널' 12월 7일 첫 방송 확정",
+     "press": "dailysportshankook.co.kr",
+     "publishedAt": "2026-11-06T06:48:00.000Z",
+     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435242"
     }
    ]
   },
   {
-   "keyword": "서울 소상공인 날 행사",
+   "keyword": "경기도 말라리아 감소",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 1,
-   "press": 2,
-   "firstArticleAt": "2026-11-06T04:00:00.000Z",
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-06T06:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "청소년 교육·농촌일손돕기·인재육성·소상공인 지원 사회공헌 실천",
-     "press": "wsobi.com",
-     "publishedAt": "2026-11-06T05:08:00.000Z",
-     "link": "http://www.wsobi.com/news/articleView.html?idxno=321218"
+     "title": "경기도 말라리아 환자 43% 급감… 접경지 ‘집중 방역’ 통했다",
+     "press": "kgnews.co.kr",
+     "publishedAt": "2026-11-06T07:04:00.000Z",
+     "link": "https://www.kgnews.co.kr/news/article.html?no=918486"
     },
     {
-     "title": "소상공인의 날 행사에서 만나는 아기자기 소품들",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-06T04:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016426175?sid=102"
+     "title": "[위클리오늘] 경기도, 재정 자율성 제약 구조 분석",
+     "press": "weeklytoday.com",
+     "publishedAt": "2026-11-06T07:00:00.000Z",
+     "link": "http://www.weeklytoday.com/news/articleView.html?idxno=801333"
     },
     {
-     "title": "2026 서울시 소상공인의 날 기념행사 열려",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-06T04:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016426173?sid=102"
+     "title": "경기도 말라리아 환자 전년 대비 43% 감소…퇴치 위해 민·관·군 총력",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-06T06:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005839245?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1150,
-  "matched": 547,
-  "avgLeadMin": 502,
+  "flagged": 1167,
+  "matched": 556,
+  "avgLeadMin": 503,
   "recent": [
+   {
+    "keyword": "박항서 감독 인종차별 항의",
+    "hitKeyword": "박항서 인종차별 항의",
+    "hitAt": "2026-11-06T16:00:00+09:00",
+    "leadMin": 33
+   },
+   {
+    "keyword": "딸은 메타, 아들은 엔비디아",
+    "hitKeyword": "엔비디아 칩 트럭 도난",
+    "hitAt": "2026-11-06T15:00:00+09:00",
+    "leadMin": 2674
+   },
+   {
+    "keyword": "법원, 쿠팡 과징금 유지",
+    "hitKeyword": "쿠팡 과징금 효력정지",
+    "hitAt": "2026-11-06T15:00:00+09:00",
+    "leadMin": 1101
+   },
+   {
+    "keyword": "쿠팡 개인정보 유출 과징금",
+    "hitKeyword": "쿠팡 과징금 효력정지",
+    "hitAt": "2026-11-06T15:00:00+09:00",
+    "leadMin": 1071
+   },
+   {
+    "keyword": "쿠팡 과징금 효력 정지",
+    "hitKeyword": "쿠팡 과징금 효력정지",
+    "hitAt": "2026-11-06T15:00:00+09:00",
+    "leadMin": 14
+   },
+   {
+    "keyword": "열애 나나 탑 논란",
+    "hitKeyword": "나나 탑 열애 논란",
+    "hitAt": "2026-11-06T14:30:00+09:00",
+    "leadMin": 205
+   },
+   {
+    "keyword": "증시 급락 신용융자 면제",
+    "hitKeyword": "신용융자 담보비율 면제",
+    "hitAt": "2026-11-06T14:30:00+09:00",
+    "leadMin": 115
+   },
+   {
+    "keyword": "신용융자 담보비율 3개월 면제",
+    "hitKeyword": "신용융자 담보비율 면제",
+    "hitAt": "2026-11-06T14:30:00+09:00",
+    "leadMin": 54
+   },
+   {
+    "keyword": "신용융자 담보비율 면제",
+    "hitKeyword": "신용융자 담보비율 면제",
+    "hitAt": "2026-11-06T14:30:00+09:00",
+    "leadMin": 24
+   },
    {
     "keyword": "재혼 황후 논란",
     "hitKeyword": "재혼 황후 드라마",
     "hitAt": "2026-11-06T14:00:00+09:00",
     "leadMin": 316
-   },
-   {
-    "keyword": "그리 결혼 준비",
-    "hitKeyword": "그리 결혼 준비 발표",
-    "hitAt": "2026-11-06T14:00:00+09:00",
-    "leadMin": 105
-   },
-   {
-    "keyword": "하이닉스 주가 하락",
-    "hitKeyword": "삼성전자 하이닉스 급락",
-    "hitAt": "2026-11-06T13:30:00+09:00",
-    "leadMin": 1667
-   },
-   {
-    "keyword": "하이닉스",
-    "hitKeyword": "삼성전자 하이닉스 급락",
-    "hitAt": "2026-11-06T13:30:00+09:00",
-    "leadMin": 1101
-   },
-   {
-    "keyword": "하이닉스 주가",
-    "hitKeyword": "삼성전자 하이닉스 급락",
-    "hitAt": "2026-11-06T13:30:00+09:00",
-    "leadMin": 236
-   },
-   {
-    "keyword": "삼성전자 주가",
-    "hitKeyword": "삼성전자 하이닉스 급락",
-    "hitAt": "2026-11-06T13:30:00+09:00",
-    "leadMin": 175
-   },
-   {
-    "keyword": "하이브",
-    "hitKeyword": "하이브 뉴진스 계약 반박",
-    "hitAt": "2026-11-06T13:00:00+09:00",
-    "leadMin": 5260
-   },
-   {
-    "keyword": "이세영",
-    "hitKeyword": "이세영 재혼황후",
-    "hitAt": "2026-11-06T13:00:00+09:00",
-    "leadMin": 930
-   },
-   {
-    "keyword": "텍사스 데이터센터 건설 제동",
-    "hitKeyword": "텍사스 센터 중단 공언",
-    "hitAt": "2026-11-06T12:30:00+09:00",
-    "leadMin": 15
-   },
-   {
-    "keyword": "골프",
-    "hitKeyword": "LIV 골프 사업 종료",
-    "hitAt": "2026-11-06T12:00:00+09:00",
-    "leadMin": 2726
    }
   ]
  }
