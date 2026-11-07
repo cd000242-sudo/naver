@@ -353,4 +353,6 @@ function PasswordResetPanel({ defaultUserId, onBack }: { defaultUserId: string; 
     );
 }
 
+// Reused by the site-wide /login so password recovery stays reachable.
+export { PhoneVerifyPanel, PasswordResetPanel };
 export default LewordAuth;

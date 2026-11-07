@@ -2,6 +2,7 @@ import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import AuthField from '../components/auth/AuthField';
 import AuthShell from '../components/auth/AuthShell';
+import { PasswordResetPanel, PhoneVerifyPanel } from '../components/leword/LewordAuth';
 import { loginCommunity } from '../lib/communityAuth';
 import { afterAuthPath, safeNextPath, signupPath, validateLogin } from '../lib/siteAuthModel.mjs';
 import { useSiteSession } from '../lib/useSiteSession';
@@ -18,6 +19,8 @@ function LoginPage() {
     const [password, setPassword] = useState('');
     const [busy, setBusy] = useState(false);
     const [error, setError] = useState('');
+    // Password recovery reuses the existing LEWORD phone-verify / reset panels.
+    const [view, setView] = useState<'login' | 'phone' | 'pwreset'>('login');
 
     useEffect(() => {
         const previous = document.title;
@@ -47,6 +50,21 @@ function LoginPage() {
         }
     };
 
+    if (view === 'phone') {
+        return (
+            <AuthShell title="본인인증" sub="휴대폰 번호를 등록해 두면 비밀번호를 혼자 바꿀 수 있어요.">
+                <div className="au-reset"><PhoneVerifyPanel defaultUserId={userId} onBack={() => setView('login')} /></div>
+            </AuthShell>
+        );
+    }
+    if (view === 'pwreset') {
+        return (
+            <AuthShell title="비밀번호 변경" sub="본인인증한 휴대폰으로 확인한 뒤 새 비밀번호를 정해요.">
+                <div className="au-reset"><PasswordResetPanel defaultUserId={userId} onBack={() => setView('login')} /></div>
+            </AuthShell>
+        );
+    }
+
     return (
         <AuthShell title="로그인" sub="LEWORD 아이디가 있다면 그대로 쓰세요. 한 번 로그인하면 커뮤니티와 LEWORD 가 같이 열려요.">
             <form className="au-form" onSubmit={(event) => { void submit(event); }} noValidate>
@@ -60,7 +78,11 @@ function LoginPage() {
             <div className="au-links">
                 <Link to={signupPath(next)}>처음이에요 · 회원가입</Link>
             </div>
-            <p className="au-help">비밀번호를 잊으셨나요? <a href={KAKAO_HELP_URL} target="_blank" rel="noopener noreferrer">카카오톡으로 문의</a>해 주세요.</p>
+            <div className="au-recover">
+                <button type="button" className="lp-btn lp-btn-line lp-btn-full" onClick={() => { setView('pwreset'); setError(''); }}>🔑 비밀번호 변경</button>
+                <button type="button" className="lp-btn lp-btn-line lp-btn-full" onClick={() => { setView('phone'); setError(''); }}>📱 본인인증</button>
+            </div>
+            <p className="au-help">비밀번호 변경은 본인인증을 해 둔 이용권 계정만 돼요. 안 되면 <a href={KAKAO_HELP_URL} target="_blank" rel="noopener noreferrer">카카오톡으로 문의</a>해 주세요.</p>
         </AuthShell>
     );
 }
