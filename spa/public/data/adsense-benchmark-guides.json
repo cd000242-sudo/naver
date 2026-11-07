@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-07T11:33:32.874Z",
+  "generatedAt": "2026-11-07T18:20:42.716Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -1209,73 +1209,6 @@
       ]
     },
     {
-      "id": "dca7f868ab5d9cdb",
-      "urls": [
-        "https://health11nfo.tistory.com/1575",
-        "https://noticanbutido.tistory.com/entry/best-places-to-visit-in-korea-top-10",
-        "https://info-idea114.co.kr/entry/11%EC%9B%94-%EA%B5%AD%EB%82%B4-%EC%97%AC%ED%96%89%EC%A7%80-%EC%B6%94%EC%B2%9C-%EB%8A%A6%EA%B0%80%EC%9D%84-%EB%8B%A8%ED%92%8D%EB%B6%80%ED%84%B0-%ED%9E%90%EB%A7%81-%EB%B0%94%EB%8B%A4%EA%B9%8C%EC%A7%80-%EC%99%84%EB%B2%BD-%EC%BD%94%EC%8A%A4",
-        "https://cnp.youmytv.com/37"
-      ],
-      "guide": {
-        "direction": "검색자는 단풍철 끝나는 11월에 차 없이 대중교통만으로 갈 당일·1박2일 여행지를 찾는데, 자동차 보유 여부를 전제한 추천 리스트에 막힌다. 고수 글은 모두 '베스트10' 나열형이라 지역별 대중교통 접근법과 소요시간 정보가 빠져 있다. KTX·ITX·버스 접근 방법과 소요시간, 1박2일 동선을 표로 정리하면 이 글로 끝낼 수 있다.",
-        "searchTargets": [
-          "11월 국내 여행지 추천",
-          "국내 여행지 추천",
-          "국내여행지도",
-          "겨울 국내 여행지 추천"
-        ],
-        "mustInclude": [
-          "지역별 대중교통(KTX/ITX/버스) 접근 방법과 주요 도시 기준 소요시간",
-          "1박2일 코스 순서 예시(경주 대릉원→황리단길 등 동선)(확인 필요: 최신 운행정보)",
-          "11월 늦가을 단풍 명소와 한적한 바다 명소 구분",
-          "뚜벅이(도보+대중교통) 기준 동선 난이도 정리"
-        ],
-        "mustAvoid": [
-          "자동차 필수인 외곽 명소를 '뚜벅이도 가능'처럼 소개",
-          "10곳을 단순 나열만 하고 지역별 교통수단·소요시간 생략",
-          "11월과 12월·1월 겨울 여행지 추천을 구분 없이 섞어 시기 혼동 유발"
-        ],
-        "checkBefore": [
-          "각 지역 KTX/ITX/버스 최신 시간표·배차 간격(코레일·버스 공식 홈페이지)",
-          "단풍 시기 및 명소 절정 시기(지자체 관광 공식 발표)"
-        ],
-        "solves": [
-          "차 없이 1박2일로 갈 국내 여행지를 못 찾음 → 대중교통 접근 가능한 지역만 골라 소요시간과 함께 제공",
-          "11월에 단풍과 바다 중 뭘 봐야 할지 모름 → 늦가을 단풍 명소와 한적한 바다 명소를 구분해 정리",
-          "추천 리스트는 많은데 실제 동선을 어떻게 짜야 할지 모름 → 1박2일 코스 순서를 지역별로 제시"
-        ],
-        "actionTitles": [
-          "겨울 국내 여행지 추천 전 11월 늦가을 코스 확인하기"
-        ]
-      },
-      "at": "2026-11-02T20:17:10.506Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "뚜벅이 여자 혼자 국내 여행지 추천해주세요!",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=90109&docId=445324975&answerNo=8&qb=6rWt64K07Jes7ZaJ7KeA",
-          "views": 4126,
-          "answers": 8,
-          "askedAt": "2026.10.17"
-        },
-        {
-          "title": "뚜벅이가 가기 좋은 7월 국내 여행지 추천",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=901&docId=486826098&answerNo=7&qb=6rWt64K07Jes7ZaJ7KeA",
-          "views": 2338,
-          "answers": 7,
-          "askedAt": "2026.10.17"
-        },
-        {
-          "title": "뚜벅이 1박2일 국내여행지 추천",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=901&docId=453457176&answerNo=10&qb=6rWt64K07Jes7ZaJ7KeA",
-          "views": 1477,
-          "answers": 10,
-          "askedAt": "2026.10.17"
-        }
-      ]
-    },
-    {
       "id": "eede3899167b6b02",
       "urls": [
         "https://infodemic.kr/3467",
@@ -2168,74 +2101,6 @@
       "at": "2026-11-02T20:17:10.506Z",
       "rules": "2026-10-20-solve",
       "provider": "claude"
-    },
-    {
-      "id": "7ac3ca6821808ee8",
-      "urls": [
-        "https://ingc.happycommu.com/entry/%EC%86%8C%EC%83%81%EA%B3%B5%EC%9D%B8-%EA%B2%BD%EC%98%81%EC%95%88%EC%A0%95-%EB%B0%94%EC%9A%B0%EC%B2%98-%EC%8B%A0%EC%B2%AD-%EC%A7%80%EC%9B%90%EA%B8%88-%EB%B0%94%EB%A1%9C%EA%B0%80%EA%B8%B0-kr",
-        "https://akak6062.tistory.com/30",
-        "https://moodo1.tistory.com/entry/%EC%86%8C%EC%83%81%EA%B3%B5%EC%9D%B8-%EB%B0%9B%EC%9D%84-%EC%88%98-%EC%9E%88%EB%8A%94-%EC%A0%95%EB%B6%80%EC%A7%80%EC%9B%90%EA%B8%88-%EC%A2%85%EB%A5%98-%EC%B4%9D%EC%A0%95%EB%A6%AC"
-      ],
-      "guide": {
-        "direction": "검색자는 '정책자금(대출)'과 '바우처(무상지원)'를 구분 못해 대출 중개 광고에 낚이는 지점에서 막힌다. 고수 글들은 '총정리'식 종류 나열에 그치고 조회·신청 바로가기는 안 준다. 이 글은 대출 vs 바우처 비교표와 조회·신청 단계로 끝낸다.",
-        "searchTargets": [
-          "소상공인 정부지원금 신청하기",
-          "소상공인 정부지원금 조회",
-          "소상공인 정부지원금 조회 방법",
-          "소상공인 정부지원금 사용처"
-        ],
-        "mustInclude": [
-          "경영안정 바우처(무상지원)와 정책자금(대출) 차이 비교표",
-          "바우처 신청 자격 조건 (확인 필요: 소상공인시장진흥공단 공지)",
-          "바우처 사용처(허용 업종·품목) (확인 필요: 공식 사이트)",
-          "신청 바로가기 링크 및 조회 단계",
-          "신청 기간·마감일 (확인 필요: 공고문)"
-        ],
-        "mustAvoid": [
-          "'정책자금 30조 2%대' 같은 대출 중개업체 광고 문구를 무상 지원금인 것처럼 섞기",
-          "경영위기대출(긴급자금) 같은 대출 상품을 바우처로 혼동 서술"
-        ],
-        "checkBefore": [
-          "바우처 신청 자격·기간·사용처: 소진공 공식 공지",
-          "조회·신청 바로가기 URL 유효성: 정부24 또는 소진공 홈페이지"
-        ],
-        "solves": [
-          "'정책자금과 보조금이 뭐가 다른지 모르겠다' → 대출 vs 무상지원 비교표로 구분",
-          "'소상공인 정부지원금 조회 방법을 모르겠다' → 바로가기와 조회 단계 안내",
-          "'바우처 사용처가 어디인지 모르겠다' → 허용 업종·품목 정리"
-        ],
-        "actionTitles": [
-          "소상공인 경영안정 바우처 신청 조건·바로가기 확인",
-          "소상공인 정부지원금 조회 방법, 대출과 구분하기",
-          "경영안정 바우처 사용처부터 신청까지 순서 정리"
-        ]
-      },
-      "at": "2026-11-02T20:17:10.506Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "26년 소상공인 정부 지원금 뭐 좀 있나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=404&docId=492047688&answerNo=41&qb=7IaM7IOB6rO17J247KCV67aA7KeA7JuQ6riI",
-          "views": 1256,
-          "answers": 41,
-          "askedAt": "2026.10.31"
-        },
-        {
-          "title": "소상공인정부지원금",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40106&docId=486450180&answerNo=50&qb=7IaM7IOB6rO17J247KCV67aA7KeA7JuQ6riI",
-          "views": 984,
-          "answers": 51,
-          "askedAt": "2026.09.26"
-        },
-        {
-          "title": "정부보조금 신청 절차, 어렵지 않게 할 수 있....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=601&docId=493291281&answerNo=7&qb=7IaM7IOB6rO17J247KCV67aA7KeA7JuQ6riI",
-          "views": 244,
-          "answers": 8,
-          "askedAt": "2026.10.15"
-        }
-      ]
     },
     {
       "id": "193efd028bb92a19",
@@ -3248,70 +3113,6 @@
           "views": 5055,
           "answers": 1,
           "askedAt": "2014.10.30"
-        }
-      ]
-    },
-    {
-      "id": "12c398566df9e5f3",
-      "urls": [
-        "https://hanbre.tistory.com/entry/%EB%B6%81%ED%95%9C-%EB%B0%94%EC%9D%B4%EB%82%B8%EC%8A%A4-%ED%95%B4%ED%82%B9-%EB%B0%B0%ED%9B%84-FBI-%EA%B3%B5%EC%8B%9D-%EC%A7%80%EB%AA%A9-8%EC%A1%B0%EC%9B%90-%ED%94%BC%ED%95%B4%C2%B7%EC%9E%90%EA%B8%88%EC%84%B8%ED%83%81%C2%B7%EB%B0%94%EC%9D%B4%EB%B9%84%ED%8A%B8-%ED%95%B4%ED%82%B9",
-        "https://honeypencil.tistory.com/entry/%EB%B0%94%EC%9D%B4%EB%82%B8%EC%8A%A4-%ED%95%B4%ED%82%B9-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://yoarc.tistory.com/1835"
-      ],
-      "guide": {
-        "direction": "검색자는 FBI가 북한을 배후로 지목한 바이낸스 해킹이 바이비트 해킹과 같은 사건인지 헷갈리고, 내 자산이 바이낸스에 있을 때 보상받는 절차를 모른다. 고수 블로그들은 피해 규모와 자금세탁 서술에 집중했지만 두 사건을 구분하는 표와 실제 보상 신청 경로는 다루지 않았다. 독자는 사건 구분표와 바이낸스 공식 보상 확인 절차로 글 하나에서 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "FBI 공식 발표 주체·시점(확인 필요: FBI 보도자료)",
-          "피해액 8조원 또는 8.4조원 중 정확한 수치(확인 필요: 원문 기사)",
-          "바이낸스 해킹과 바이비트 해킹을 구분하는 표(별개 거래소 사건)",
-          "라자루스그룹 자금세탁 경로 요약",
-          "바이낸스 공식 보상 공지·고객센터 확인 경로"
-        ],
-        "mustAvoid": [
-          "바이낸스 해킹과 바이비트 해킹을 같은 사건으로 혼동",
-          "특정 임원 개인 신상·사생활에 대한 추측성 서술",
-          "북한 정부의 공식 입장을 추측해 사실처럼 서술"
-        ],
-        "checkBefore": [
-          "FBI 공식 보도자료·성명에서 북한 지목 발표 날짜와 내용 확인",
-          "바이낸스 공식 공지(공식 채널·고객센터)에서 피해 규모와 보상 정책 확인"
-        ],
-        "solves": [
-          "바이낸스 해킹과 바이비트 해킹이 같은 건지 헷갈림 → 사건 구분표로 정리",
-          "내 자산 피해 보상받는 절차를 모름 → 바이낸스 공식 보상 신청 경로 안내",
-          "가상화폐 시장에 영향 있는지 궁금함 → FBI 발표 이후 시장 반응 요약"
-        ],
-        "actionTitles": [
-          "바이낸스 해킹 8조원 피해, 바이비트 사건과 구분하는 법",
-          "FBI가 지목한 북한 바이낸스 해킹, 보상 신청 방법 확인",
-          "바이낸스 해킹 자금세탁 경로와 내 자산 확인하는 법"
-        ]
-      },
-      "at": "2026-11-02T20:17:10.506Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "바이낸스 리플코인 해킹관련",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=491239449&answerNo=1&qb=67aB7ZWc67CU7J2064K47Iqk7ZW07YK5",
-          "views": 1451,
-          "answers": 2,
-          "askedAt": "2026.01.08"
-        },
-        {
-          "title": "바이낸스 비트겟 해킹",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40108&docId=483673445&answerNo=6&qb=67aB7ZWc67CU7J2064K47Iqk7ZW07YK5",
-          "views": 379,
-          "answers": 10,
-          "askedAt": "2025.03.31"
-        },
-        {
-          "title": "가상화폐가 앞으로 내릴까요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=409&docId=495783321&answerNo=6&qb=67aB7ZWc67CU7J2064K47Iqk7ZW07YK5",
-          "views": 105,
-          "answers": 6,
-          "askedAt": "2026.11.02"
         }
       ]
     },
@@ -5667,67 +5468,6 @@
       ]
     },
     {
-      "id": "06fdf9b89e299838",
-      "urls": [
-        "https://piwpiw.tistory.com/entry/2027-%EC%9E%A5%EC%95%A0%EC%9D%B8%EC%9D%BC%EC%9E%90%EB%A6%AC-%EC%B0%B8%EC%97%AC%EC%9E%90-1112%EC%9B%94-%EB%AA%A8%EC%A7%91-18%EC%84%B8-%EC%9D%B4%EC%83%81",
-        "https://bunny43.tistory.com/entry/%EC%9E%A5%EC%95%A0%EC%9D%B8%EC%9D%BC%EC%9E%90%EB%A6%AC-2027-%EB%AA%A8%EC%A7%91-%EC%96%B8%EC%A0%9C-%EC%8B%A0%EC%B2%AD%ED%95%98%EA%B3%A0-%EC%9B%94-%EC%96%BC%EB%A7%88-%EB%B0%9B%EB%82%98%EC%9A%94"
-      ],
-      "guide": {
-        "direction": "검색자는 '2년 이상 연속 참여했는데 또 신청 가능한가', '최근 1년 이내 중단조치를 받았는데 제외대상인가' 같은 자격 여부에서 막힌다. '언제 신청하고 월 얼마 받나' 식의 고수 제목은 반복참여 제한·예외대상·유형별 참여인원 차이를 못 짚었다. 이 글은 제외대상·예외조건·유형별 인원표로 신청 가능 여부를 바로 판단하게 한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "신청자격: 18세 이상 등록장애인",
-          "제외대상: 2년 이상 연속 참여자, 최근 1년 이내 참여 중단조치를 받은 자",
-          "반복참여 제한 예외: 중증장애인·만 65세 이상·기초생활수급자",
-          "사업유형별 참여인원: 일반형(전일제/시간제), 복지일자리, 발달장애인 요양보호사 보조(확인 필요: 사업안내 정원 수치)",
-          "11~12월 모집기간(확인 필요: 거주지 공고)"
-        ],
-        "mustAvoid": [
-          "노인일자리사업 등 다른 복지일자리 사업과 자격기준 혼동"
-        ],
-        "checkBefore": [
-          "복지로·워크넷 장애인일자리사업 공고에서 11~12월 모집기간과 유형별 정원 확인",
-          "한국장애인고용공단 또는 주민센터 공지에서 제외대상·예외조건 세부 확인"
-        ],
-        "solves": [
-          "2년 이상 연속 참여했는데 또 신청 가능한가 → 반복참여 제한과 예외대상 기준 정리",
-          "최근에 중단조치를 받았는데 제외대상인가 → 제외 기준 확인",
-          "사업유형별로 참여인원이 다른가 → 일반형·복지일자리·요양보호사 보조 유형별 비교표 제공"
-        ],
-        "actionTitles": [
-          "장애인일자리 2027 신청자격 확인, 제외대상까지 정리",
-          "장애인일자리 2027 반복참여 제한, 예외대상 확인하기",
-          "장애인일자리 2027 모집 유형별 참여인원 비교하기"
-        ]
-      },
-      "at": "2026-11-02T20:17:10.506Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "장애인일자리사업",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100102&docId=495400079&answerNo=3&qb=7J6l7JWg7J247J287J6Q66asIOywuOyXrOyekCDsnbTsg4E=",
-          "views": 210,
-          "answers": 5,
-          "askedAt": "2026.10.03"
-        },
-        {
-          "title": "장애인 일자리 사업",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100102&docId=495450491&answerNo=1&qb=7J6l7JWg7J247J287J6Q66asIOywuOyXrOyekCDsnbTsg4E=",
-          "views": 189,
-          "answers": 6,
-          "askedAt": "2026.10.07"
-        },
-        {
-          "title": "재가 장애인일자리를 다녔는데요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40403&docId=495233980&answerNo=1&qb=7J6l7JWg7J247J287J6Q66asIOywuOyXrOyekCDsnbTsg4E=",
-          "views": 142,
-          "answers": 5,
-          "askedAt": "2026.09.20"
-        }
-      ]
-    },
-    {
       "id": "5827a1d518de38e3",
       "urls": [
         "https://honeypencil.tistory.com/entry/%EB%93%9C%EB%9D%BC%EB%A7%88-%EB%9D%BC%EC%9D%B4%EC%96%B4-%EC%9B%90%EC%9E%91-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0",
@@ -6087,71 +5827,6 @@
       ]
     },
     {
-      "id": "31d68a1bfc41e523",
-      "urls": [
-        "https://trendsearch.tistory.com/entry/%EB%86%8D%EC%96%B4%EC%B4%8C%EA%B8%B0%EB%B3%B8%EC%86%8C%EB%93%9D-%EC%A7%80%EA%B8%89-%EC%A7%80%EC%97%AD-17%EA%B0%9C-%EA%B5%B0-%EB%AA%85%EB%8B%A8%EA%B3%BC-2027%EB%85%84-%EC%B6%94%EA%B0%80-%EA%B3%B5%EB%AA%A8-%EC%9D%BC%EC%A0%95-11%EC%9B%94-3%EC%9D%BC-%EB%A7%88%EA%B0%90%C2%B719%EC%9D%BC-%EB%B0%9C%ED%91%9C-%EC%98%88%EC%A0%95",
-        "https://honeypencil.tistory.com/entry/%EB%86%8D%EC%96%B4%EC%B4%8C-%EA%B8%B0%EB%B3%B8%EC%86%8C%EB%93%9D-%EC%B4%9D%EC%A0%95%EB%A6%AC"
-      ],
-      "guide": {
-        "direction": "검색자는 내 거주 군이 17개 지급 지역 명단에 있는지, 그리고 민생지원금·소비쿠폰 추가지급과 농어촌기본소득을 혼동해 실제 받는 돈이 얼마인지 헷갈려 한다. 고수 글은 명단과 2027년 공모 일정을 나열했지만 두 제도의 지급 기준 차이는 명확히 구분하지 않았다. 이 글은 17개 군 명단표와 11월3일 마감·19일 발표 일정, 두 제도 비교표로 혼동을 끝낸다.",
-        "searchTargets": [
-          "농어촌 기본소득 지급일",
-          "농어촌 기본소득 지급",
-          "농어촌 기본소득 지급액"
-        ],
-        "mustInclude": [
-          "17개 지급 대상 군 명단 전체 나열(확인 필요: 행정안전부·지자체 발표)",
-          "2027년 추가 공모 마감 11월3일·결과 발표 19일 일정",
-          "농어촌기본소득 1인당 지급액(확인 필요: 시범사업 공고문)",
-          "농어촌기본소득과 민생지원금·소비쿠폰 추가지급 비교표",
-          "옥천군 등 기존 시범사업 지역 사례"
-        ],
-        "mustAvoid": [
-          "농어촌기본소득을 민생지원금·소비쿠폰 인구감소지역 84곳 추가지급과 같은 제도로 혼동해 서술",
-          "지급 대상이 아직 미확정인 2027년 공모 결과를 확정된 것처럼 서술"
-        ],
-        "checkBefore": [
-          "17개 군 명단과 지급액 기준은 행안부·해당 군청 공식 공고로 재확인",
-          "11월19일 발표 결과가 나오면 공모 선정 지역 반영해 업데이트"
-        ],
-        "solves": [
-          "농어촌 기본소득 지급일이 언제인지 몰라 헷갈림 → 2027년 공모 마감11월3일·발표19일로 정리",
-          "농어촌 기본소득 지급액을 민생지원금과 혼동 → 두 제도 지급 기준 비교표로 구분",
-          "내 거주 군이 지급 대상인지 몰라 불안 → 17개 군 명단 전체 확인 제공"
-        ],
-        "actionTitles": [
-          "농어촌 기본소득 지급일 확인, 17개 군 명단 한눈에 보기",
-          "농어촌 기본소득 지급 대상 조회, 2027년 공모 일정 확인"
-        ]
-      },
-      "at": "2026-11-02T20:17:10.506Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "민생지원금 차상위계층 지급 대상 확인 방법....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100101&docId=487080945&answerNo=6&qb=64aN7Ja07LSM6riw67O47IaM65OdIOyngOq4iSDsp4Dsl60g66qF64uoIOy2lOqwgA==",
-          "views": 8157,
-          "answers": 15,
-          "askedAt": "2025.07.14"
-        },
-        {
-          "title": "소비쿠폰 농어촌인구감소지역 추가지급 84곳 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=601&docId=486893911&answerNo=10&qb=64aN7Ja07LSM6riw67O47IaM65OdIOyngOq4iSDsp4Dsl60g66qF64uoIOy2lOqwgA==",
-          "views": 2538,
-          "answers": 28,
-          "askedAt": "2025.07.08"
-        },
-        {
-          "title": "한부모 조건이 어떻게 되나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60205&docId=487412888&answerNo=6&qb=64aN7Ja07LSM6riw67O47IaM65OdIOyngOq4iSDsp4Dsl60g66qF64uoIOy2lOqwgA==",
-          "views": 393,
-          "answers": 8,
-          "askedAt": "2025.07.25"
-        }
-      ]
-    },
-    {
       "id": "2f222c97af7c48fe",
       "urls": [
         "https://jobmining.tistory.com/158",
@@ -6479,68 +6154,6 @@
           "views": 606,
           "answers": 11,
           "askedAt": "2026.10.29"
-        }
-      ]
-    },
-    {
-      "id": "caafb07e15d7458a",
-      "urls": [
-        "https://youldad.tistory.com/565",
-        "https://namuh9.tistory.com/entry/%EC%84%9C%EC%9A%B8-%EC%95%84%ED%8C%8C%ED%8A%B8-%EB%A7%A4%EB%A7%A4-%EC%A0%84%EC%84%B8-%EC%9B%94%EC%84%B8-%EC%B6%94%EC%9D%B4-%EC%B4%9D%EC%A0%95%EB%A6%AC-2026%EB%85%84-11%EC%9B%94-%EB%8C%80%EC%9D%91-%EB%B0%A9%EC%95%88"
-      ],
-      "guide": {
-        "direction": "지식인 질문들은 '서울 아파트 매물 7.9만 건'이나 '재초환 2.2조'가 많은 수치인지, 내 집과 관련 있는지 판단 기준을 묻는다. 고수 블로그 제목은 수치를 나열한 '총정리'에 그쳐 전월 대비 비교나 대상 단지 구분까지는 못 짚는다. 이 글은 매물량 추이 비교, 재초환 부과 대상 확인법, 대치동 전세 급등 영향권을 정리해 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "서울 아파트 매물 7.9만 건의 전월·전년 대비 추이(확인 필요: 원문 기사)",
-          "대치동 빌라 전세 급등 수치와 비교 시점(확인 필요: 원문 기사)",
-          "재초환 2.2조 부과 대상 단지·기준(확인 필요: 국토부·원문기사)",
-          "매매·전세·월세 추이 요약표"
-        ],
-        "mustAvoid": [
-          "대치동 사례를 서울 전체 전세 시장으로 일반화",
-          "재초환과 종부세 등 다른 부동산 세금 혼동",
-          "특정 단지를 투자 추천처럼 서술"
-        ],
-        "checkBefore": [
-          "매물 7.9만 건·재초환 2.2조 수치 원문 기사·국토부 보도자료에서 기준일 확인",
-          "대치동 전세 급등 수치의 비교 시점(전월·전년) 원문 기사에서 확인"
-        ],
-        "solves": [
-          "매물 7.9만 건이 많은지 적은지 판단 기준이 없어 헷갈림 → 전월·전년 대비 추이로 비교해 제공",
-          "재초환 2.2조가 내 집과 관련 있는지 몰라 불안함 → 부과 대상 단지·기준을 정리해 제공",
-          "대치동 전세가 왜 급등했는지 몰라 주변 영향권이 궁금함 → 원인과 영향 지역을 정리해 제공"
-        ],
-        "actionTitles": [
-          "서울 아파트 매물 7.9만 건, 많은지 적은지 비교하는 법",
-          "대치동 빌라 전세 급등, 원인과 영향 받는 지역 확인하기",
-          "재초환 2.2조 부과 대상, 우리 단지 포함인지 확인법"
-        ]
-      },
-      "at": "2026-11-02T20:17:10.506Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "서울 부동산 매매 동네 비교",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=402&docId=483175789&answerNo=3&qb=67aA64+Z7IKw7ISc7Jq4",
-          "views": 273,
-          "answers": 3,
-          "askedAt": "2026.10.02"
-        },
-        {
-          "title": "서울 부동산 집값 랭킹",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=402&docId=480661543&answerNo=3&qb=67aA64+Z7IKw7ISc7Jq4",
-          "views": 208,
-          "answers": 3,
-          "askedAt": "2026.08.04"
-        },
-        {
-          "title": "LH청년전세임대주택 매물 있는 서울부동산 찾....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=4020201&docId=495387572&answerNo=3&qb=67aA64+Z7IKw7ISc7Jq4",
-          "views": 157,
-          "answers": 3,
-          "askedAt": "2026.10.02"
         }
       ]
     },
@@ -9024,71 +8637,6 @@
       ]
     },
     {
-      "id": "ef882954c7a9761b",
-      "urls": [
-        "https://stocktt.tistory.com/144",
-        "https://eum365.tistory.com/124"
-      ],
-      "guide": {
-        "direction": "검색자는 ISA 만기일이 9999년으로 표시되거나 만기 연장이 유리한지 몰라 막힌다. 고수 글은 중도·만기해지 차이만 짚고 60일 내 연금계좌 이전 시한, 연장 횟수제한 없음 같은 실제 처리 절차는 못 다룬다. 의무가입기간 확인→해지 유형 판단→연금계좌 이전 시한→재가입 순서로 체크리스트를 주면 끝난다.",
-        "searchTargets": [
-          "isa 만기일",
-          "isa 만기 해지",
-          "isa 만기연장",
-          "isa 만기 전 해지"
-        ],
-        "mustInclude": [
-          "의무가입기간 통상 3년, 채우면 중도해지도 자유로움(확인 필요: 가입 금융사 공지)",
-          "만기 후 연금저축·IRP 이전은 만기일로부터 60일 시한",
-          "만기일자가 9999년으로 보이는 경우 세법개편 관련 표시(확인 필요: 국세청·금융사 공지)",
-          "계약기간 연장은 횟수 제한 없음, 가능 여부는 가입 금융사별 확인",
-          "중도해지 시 비과세·세제혜택 환수 여부 비교표"
-        ],
-        "mustAvoid": [
-          "ISA와 연금저축·IRP를 같은 계좌처럼 설명",
-          "모든 금융사의 연장·이전 절차가 동일하다고 일반화"
-        ],
-        "checkBefore": [
-          "의무가입기간·만기일 표시 오류 여부는 가입 증권사·은행 고객센터에서 확인",
-          "연금계좌 이전 60일 시한과 세제혜택 유지조건은 금융사·국세청 공지로 확인"
-        ],
-        "solves": [
-          "ISA 만기일이 9999년으로 나와 당황 → 세법개편 표시이며 실제 만기는 의무가입기간 기준임을 안내",
-          "만기 후 연금저축 이전, 종목 그대로 옮길 수 있나 → 60일 시한과 이전 절차 정리"
-        ],
-        "actionTitles": [
-          "ISA 만기 해지 전 의무가입기간부터 확인하는 순서",
-          "ISA 만기연장 vs 재가입, 60일 안에 끝내는 전환법"
-        ]
-      },
-      "at": "2026-11-03T11:45:42.973Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "ISA 만기 후 연금저축/IRP",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100402&docId=495388148&answerNo=6&qb=aXNh66eM6riw",
-          "views": 194,
-          "answers": 6,
-          "askedAt": "2026.10.18"
-        },
-        {
-          "title": "ISA 절세계좌 만기일자",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=494619874&answerNo=10&qb=aXNh66eM6riw",
-          "views": 145,
-          "answers": 10,
-          "askedAt": "2026.10.06"
-        },
-        {
-          "title": "ISA 만기 연장이 정말 유리한가여?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40309&docId=495453038&answerNo=6&qb=aXNh66eM6riw",
-          "views": 142,
-          "answers": 6,
-          "askedAt": "2026.10.19"
-        }
-      ]
-    },
-    {
       "id": "1cf9a33982cbab37",
       "urls": [
         "https://salespeople.tistory.com/entry/%EB%82%B4%EC%9E%A5%EC%82%B0-%EB%8B%A8%ED%92%8D%EC%B6%95%EC%A0%9C-%EA%B8%B0%EA%B0%84-1",
@@ -11063,58 +10611,6 @@
           "views": 2391,
           "answers": 2,
           "askedAt": "2012.10.05"
-        }
-      ]
-    },
-    {
-      "id": "ff5c4e520ca53050",
-      "urls": [
-        "https://16491.tistory.com/182"
-      ],
-      "guide": {
-        "direction": "검색자는 '3자 연합 40.1%'가 17.54+17.15+5.71을 그냥 더한 값인지, 중복 계산을 빼야 하는지 헷갈려 지분 구도를 못 잡는다. 고수 글은 상한가·거래량 종목만 나열하고 조현아·조원태 측 지분 계산 과정을 안 보여준다. 이 글은 지분 합산식을 표로 풀고, 그 지분 변화와 당일 상한가·보안주 강세를 연결해 '왜 올랐는지'까지 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "3자 연합 지분 17.54%+17.15%+5.71% 합산 시 중복분 제외 전후 수치 비교표",
-          "조현아 전 부사장 측과 조원태 측 지분율 대비표(확인 필요: 공시 원문)",
-          "11월 3일 상한가 종목 리스트와 거래량 천만주 이상 종목(확인 필요: 원문 기사)",
-          "보안주 강세 원인이 된 이슈(확인 필요: 당일 공시·뉴스)"
-        ],
-        "mustAvoid": [
-          "조현아 전 부사장의 개인사·가족사 추측성 서술",
-          "2020년 과거 3자 연합 지분 분쟁 수치와 최근 수치를 혼동"
-        ],
-        "checkBefore": [
-          "전자공시시스템(DART)에서 지분율 공시 원문 수치 확인",
-          "당일 상한가·거래량 상위 종목은 원문 기사 또는 거래소 공시로 재확인"
-        ],
-        "solves": [
-          "3자 연합 지분 40.1% 계산이 중복 포함인지 몰라 헷갈림 → 합산 전후 표로 정리해 제공",
-          "상한가 종목만 나오고 이유를 몰라 궁금함 → 한진칼 분쟁·보안주 강세와의 연결고리 설명",
-          "조현아·조원태 지분 구도가 헷갈림 → 양측 지분율 대비표로 한눈에 정리"
-        ],
-        "actionTitles": [
-          "한진칼 3자 연합 지분 40.1% 계산법 정리",
-          "한진칼 경영권 분쟁 조현아 조원태 지분 비교"
-        ]
-      },
-      "at": "2026-11-04T01:58:27.111Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "한진그룹 경영권 다툼 질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=343376902&answerNo=2&qb=7IOB7ZWcIOyynOunjOyjvCDtlZzsp4Tsubwg6rK97JiB6raMIOu2hOyfgQ==",
-          "views": 1373,
-          "answers": 2,
-          "askedAt": "2019.12.26"
-        },
-        {
-          "title": "한진그룹 경영권 분쟁 지분에 대해서",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=401143632&answerNo=1&qb=7IOB7ZWcIOyynOunjOyjvCDtlZzsp4Tsubwg6rK97JiB6raMIOu2hOyfgQ==",
-          "views": 35,
-          "answers": 1,
-          "askedAt": "2021.09.28"
         }
       ]
     },
@@ -13213,72 +12709,6 @@
       ]
     },
     {
-      "id": "cafed2e89c4727a9",
-      "urls": [
-        "https://flameleaf.tistory.com/entry/%EC%82%BC%EC%84%B1-%EC%9E%90%EB%8F%99%EC%B0%A8%EB%B3%B4%ED%97%98-%ED%8F%AC%EC%9D%B8%ED%8A%B8-%EC%A0%81%EB%A6%BD-%ED%95%A0%EC%9D%B8-%EB%B0%9B%EB%8A%94-%EB%B2%95-%ED%98%9C%ED%83%9D-%EC%99%84%EB%B2%BD-%EC%A0%95%EB%A6%AC"
-      ],
-      "guide": {
-        "direction": "검색자는 할인·포인트보다 해지 환급금이 언제 들어오는지, 사고접수·고객센터 전화번호가 뭔지를 더 많이 찾는다. 고수 글은 '포인트·할인·혜택'에만 집중해 해지·조회·사고접수 같은 실전 검색을 놓친다. 이 글은 상황별(가입·해지·사고) 전화번호와 환급 시점을 표로 정리해 검색을 끝낸다.",
-        "searchTargets": [
-          "삼성 자동차보험 사고접수",
-          "삼성자동차보험 해지",
-          "삼성자동차보험 조회",
-          "삼성 자동차보험 전화번호"
-        ],
-        "mustInclude": [
-          "해지 시 환급금 지급 시점(카드결제는 약 4일 후, 지식인 답변 기준) (확인 필요: 삼성화재 고객센터 공식 안내)",
-          "사고접수·긴급출동 전화번호 (확인 필요: 삼성화재 공식 홈페이지/앱)",
-          "가입내역·보장내용 조회 방법(앱/홈페이지 경로)",
-          "다이렉트·원데이 보험 가입조건과 포인트 적립·할인 항목 비교표"
-        ],
-        "mustAvoid": [
-          "사고경력자가 '무조건 거절된다'처럼 일반화하기(사고 횟수·기명피보험자 조건에 따라 다름)",
-          "환급금 지급일을 모든 결제수단에 동일하다고 확정해서 쓰기",
-          "할인·포인트 혜택을 공식 조건 확인 없이 과장하기"
-        ],
-        "checkBefore": [
-          "삼성화재 공식 고객센터·사고접수·긴급출동 전화번호(공식 홈페이지/앱)",
-          "해지 환급금 지급 기준과 결제수단별 소요일(고객센터 공지)",
-          "다이렉트·원데이 보험 가입조건, 포인트 적립 및 할인 항목(공식 상품페이지)"
-        ],
-        "solves": [
-          "해지하면 환급금이 언제 들어오는지 몰라 불안함 → 결제수단별 지급 시점 안내",
-          "사고났을 때 어디로 접수·출동요청해야 하는지 몰라 헤맴 → 사고접수·긴급출동 번호 정리",
-          "가입내역을 어디서 조회하는지 몰라 헤맴 → 조회 경로 안내"
-        ],
-        "actionTitles": [
-          "삼성자동차보험 해지 환급금 받는 법과 지급 시점",
-          "삼성자동차보험 조회부터 다이렉트 가입까지 정리"
-        ]
-      },
-      "at": "2026-11-04T12:01:15.204Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "삼성화재 자동차보험 운전경력인정 질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=401030202&docId=494387717&answerNo=2&qb=7IK87ISx7J6Q64+Z7LCo67O07ZeY",
-          "views": 4178,
-          "answers": 13,
-          "askedAt": "2026.07.20"
-        },
-        {
-          "title": "삼성화재 자동차보험",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60201&docId=495037288&answerNo=3&qb=7IK87ISx7J6Q64+Z7LCo67O07ZeY",
-          "views": 574,
-          "answers": 3,
-          "askedAt": "2026.09.05"
-        },
-        {
-          "title": "삼성화재 자동차보험해지 환급금지급",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010302&docId=494057014&answerNo=1&qb=7IK87ISx7J6Q64+Z7LCo67O07ZeY",
-          "views": 497,
-          "answers": 2,
-          "askedAt": "2026.06.27"
-        }
-      ]
-    },
-    {
       "id": "883f924a12c793fc",
       "urls": [
         "https://blanc888.tistory.com/135"
@@ -14744,70 +14174,6 @@
       ]
     },
     {
-      "id": "dc27fb65600bf646",
-      "urls": [
-        "https://gumiland.co.kr/downstairs-water-leak-liability-insurance/",
-        "https://asit.kr/2026-pipe-freeze-leak-downstairs-tenant-liability/"
-      ],
-      "guide": {
-        "direction": "지식인 질문은 보일러·수도관 동파로 아랫집이 젖었을 때 세입자 책임인지 집주인 책임인지, 동파인지 노후 파손인지 구분이 안 된다는 데 몰려 있다. 고수 글은 배상 책임 3가지 이유와 보험 청구 6단계까지 다루지만 사고 전 예방을 찾는 '동파방지' 검색은 흡수하지 못한다. 이 글은 증거확보 체크리스트와 동파방지 조치 여부를 책임 판단 기준에 연결해 검색을 끝낸다.",
-        "searchTargets": [
-          "원룸 동파",
-          "원룸 동파방지"
-        ],
-        "mustInclude": [
-          "동파와 노후배관 파손을 구분하는 증거확보 방법(사진·동영상 촬영)",
-          "임차인이 보일러·계량기 동파방지 조치를 했는지가 과실 판단 핵심 기준 (확인 필요: 관리사무소·보일러 제조사 가이드)",
-          "일반적으로 건물소유자(임대인)가 아랫집에 배상하되 임차인 관리소홀시 임차인 책임이라는 구분",
-          "일상생활배상책임보험 자기부담금 50만원과 보험 청구 순서"
-        ],
-        "mustAvoid": [
-          "특정 임대인·세입자의 실제 분쟁 사례를 추측해 각색하기",
-          "화재보험과 일상생활배상책임보험을 같은 보험으로 혼동해 서술하기"
-        ],
-        "checkBefore": [
-          "본인이 가입한 일상생활배상책임보험의 자기부담금·보장범위를 보험사 공지로 확인",
-          "임대차계약서의 관리책임 조항과 동파방지 관련 특약 유무 확인"
-        ],
-        "solves": [
-          "동파로 아랫집 누수났는데 세입자/집주인 중 책임자가 헷갈린다 → 임차목적물 관리책임 여부로 구분 기준 정리",
-          "동파인지 노후 파손인지 구분이 안 간다 → 증거확보(사진·동영상) 체크리스트 제공",
-          "겨울철 원룸 동파를 미리 막는 방법을 모른다 → 동파방지 체크리스트로 예방과 책임 회피 연결"
-        ],
-        "actionTitles": [
-          "원룸 동파로 아랫집 누수났을 때 배상 책임 확인하는 법",
-          "원룸 동파방지 체크리스트로 배상 책임 미리 줄이는 법",
-          "원룸 동파 누수 배상, 세입자 책임 여부 확인하는 법"
-        ]
-      },
-      "at": "2026-11-05T02:17:07.117Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "윗집 수도배관 동파로 천정 누수 법정소송",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60211&docId=164800129&answerNo=2&qb=7JuQ66O4IOuPme2MjCDriITsiJgg7JWE656r7KeRIOyynOyepQ==",
-          "views": 638,
-          "answers": 2,
-          "askedAt": "2013.01.09"
-        },
-        {
-          "title": "원룸 월세 보일러동파로 아랫집 누수 (세입자....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=80902&docId=492048681&answerNo=1&qb=7JuQ66O4IOuPme2MjCDriITsiJgg7JWE656r7KeRIOyynOyepQ==",
-          "views": 348,
-          "answers": 3,
-          "askedAt": "2026.02.19"
-        },
-        {
-          "title": "원룸 동파 누수 사고",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60202&docId=438287629&answerNo=1&qb=7JuQ66O4IOuPme2MjCDriITsiJgg7JWE656r7KeRIOyynOyepQ==",
-          "views": 336,
-          "answers": 1,
-          "askedAt": "2023.01.31"
-        }
-      ]
-    },
-    {
       "id": "b6753310804930f6",
       "urls": [
         "https://memo87268.tistory.com/85",
@@ -15020,66 +14386,6 @@
           "views": 17158,
           "answers": 1,
           "askedAt": "2013.11.27"
-        }
-      ]
-    },
-    {
-      "id": "161b2662a819e5d3",
-      "urls": [
-        "https://youldad.tistory.com/581",
-        "https://youldad.tistory.com/577"
-      ],
-      "guide": {
-        "direction": "서울 아파트 매물 8만 건과 대출규제 유지 소식에 검색자는 숫자가 많다는 건지 적다는 건지, 대출규제가 구체적으로 뭘 막는지 궁금해한다. 고수 글들은 매물 수와 전세난을 나열만 하고 LTV·DSR 같은 규제 기준이나 지역별 전세난 범위는 짚지 않았다. 매물 수 추이표와 대출규제 기준표, 외곽 전세난 지역 리스트를 한 번에 정리해 주면 독자가 끝까지 읽는다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "서울 아파트 매물 8만 건 수치와 전월 대비 증감 추이(확인 필요: 국토부 실거래가 공개시스템)",
-          "금융위 대출규제 유지의 구체적 내용 — LTV·DSR·스트레스DSR 기준(확인 필요: 금융위 발표)",
-          "외곽 전세난 해당 지역명과 전세가 변동률(확인 필요: 원문 기사)",
-          "11/4 기사의 거래 42% 감소·고정금리 5% 돌파 수치와 11/5 매물 8만건 수치를 구분해 표시"
-        ],
-        "mustAvoid": [
-          "11월 4일자 거래량 42%·고정금리 5% 수치를 11월 5일 매물 8만건 기사와 섞어 쓰는 것",
-          "특정 지역 집값을 '오른다/내린다' 단정하는 전망성 발언"
-        ],
-        "checkBefore": [
-          "금융위 공식 보도자료에서 대출규제 유지 항목 확인",
-          "국토부 실거래가 시스템에서 서울 아파트 매물 수 집계 기준 확인"
-        ],
-        "solves": [
-          "매물 8만건이 평소보다 많은지 적은지 헷갈린다 → 과거 추이와 비교해 표로 제시",
-          "대출규제 유지가 뭘 유지한다는 건지 모르겠다 → LTV·DSR 기준을 정리해 설명",
-          "외곽 전세난이 구체적으로 어느 동네인지 모르겠다 → 지역별 리스트로 정리"
-        ],
-        "actionTitles": [
-          "서울 아파트 매물 8만 건, 지역별로 늘어난 곳 확인하는 법",
-          "외곽 전세난 지역, 전세 구하기 전 체크리스트 정리"
-        ]
-      },
-      "at": "2026-11-05T02:17:07.117Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "LH청년전세임대주택 매물 있는 서울부동산 찾....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=4020201&docId=495387572&answerNo=3&qb=67aA64+Z7IKw7ISc7Jq4",
-          "views": 166,
-          "answers": 3,
-          "askedAt": "2026.10.02"
-        },
-        {
-          "title": "서울출산율0.5인데서울부동산은언제까지천하....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1201&docId=485327918&answerNo=1&qb=67aA64+Z7IKw7ISc7Jq4",
-          "views": 45,
-          "answers": 2,
-          "askedAt": "2025.05.18"
-        },
-        {
-          "title": "서울 부동산 매도 시 효과적인 전략은 무엇인....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=402&docId=486346988&answerNo=1&qb=67aA64+Z7IKw7ISc7Jq4",
-          "views": 38,
-          "answers": 1,
-          "askedAt": "2025.06.20"
         }
       ]
     },
@@ -15659,75 +14965,6 @@
       ]
     },
     {
-      "id": "6fba23d8389fe564",
-      "urls": [
-        "https://economyfactory.com/the-devils-plan-3-cast/",
-        "https://hanbre.tistory.com/1843",
-        "https://trendsearch.tistory.com/entry/%EB%8D%B0%EB%B8%94%EC%8A%A4-%ED%94%8C%EB%9E%9C3-%EC%B6%9C%EC%97%B0%EC%A7%84-16%EB%AA%85-%EC%A7%81%EC%97%85-%EC%A0%95%EB%A6%AC-%EC%9E%A5%EB%8F%99%EB%AF%BC%C2%B7%ED%99%8D%EC%A7%84%ED%98%B8%EB%B6%80%ED%84%B0-%EC%8B%A0%EA%B7%9C-%ED%94%8C%EB%A0%88%EC%9D%B4%EC%96%B4%EA%B9%8C%EC%A7%80"
-      ],
-      "guide": {
-        "direction": "검색자는 장동민 출연이 공식 확정인지, 포스터 속 정현규가 정말 우승자인지 헷갈려 지식인에 묻는다. 기존 고수 글들은 출연진 16명·직업 정리에 그쳐 이 '확정 vs 추측' 혼란을 풀지 못한다. 공식 발표 여부와 추측성 정보를 표로 분리해 보여주면 끝까지 읽힌다.",
-        "searchTargets": [
-          "데블스플랜3 출연진",
-          "데블스플랜3 우승자",
-          "데블스플랜3 몇부작",
-          "데블스플랜3 제작발표회"
-        ],
-        "mustInclude": [
-          "출연진 16명 명단(확인 필요: 제작발표회 공지)",
-          "공개일·몇부작 정보(확인 필요: 넷플릭스 공식 편성)",
-          "장동민 출연 공식 발표 없음 명시",
-          "포스터 복장만으로 우승자 단정 불가 안내",
-          "하석진·정현규 역할 미공개 상태 명시"
-        ],
-        "mustAvoid": [
-          "장동민 출연을 확정 사실처럼 서술",
-          "포스터 색상만으로 우승자 단정",
-          "시즌1·2 출연진과 혼동해서 서술"
-        ],
-        "checkBefore": [
-          "장동민 출연 여부 - 넷플릭스/제작발표회 공식 공지",
-          "공개일·몇부작 - 넷플릭스 공식 편성표",
-          "출연진 16명 명단 - 제작발표회 보도자료"
-        ],
-        "solves": [
-          "장동민 출연이 확정인지 헷갈림 → 공식 발표 여부를 명확히 구분해 정리",
-          "포스터 보고 우승자 추측해 혼란 → 추측과 공식 정보를 분리해 안내",
-          "하석진·정현규 역할 변화가 궁금함 → 시즌1·2 패턴 근거 예상임을 명시해 정리"
-        ],
-        "actionTitles": [
-          "데블스플랜3 출연진 16명, 공개일 몇부작 한눈에 확인",
-          "데블스플랜3 장동민 출연 여부, 공식 발표 확인하는 법"
-        ]
-      },
-      "at": "2026-11-05T11:53:03.658Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "'데블스 플랜' 시즌3, 이전 시즌과 어떤 점이 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=20301&docId=494332569&answerNo=1&qb=642w67iU7Iqk7ZSM656cMw==",
-          "views": 226,
-          "answers": 1,
-          "askedAt": "2026.07.16"
-        },
-        {
-          "title": "데블스플랜3 장동민 출연",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=3010202&docId=494493185&answerNo=1&qb=642w67iU7Iqk7ZSM656cMw==",
-          "views": 163,
-          "answers": 1,
-          "askedAt": "2026.07.29"
-        },
-        {
-          "title": "데블스 플랜 시즌3, 하석진과 정현규의 전략....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=210&docId=495514009&answerNo=2&qb=642w67iU7Iqk7ZSM656cMw==",
-          "views": 50,
-          "answers": 2,
-          "askedAt": "2026.10.12"
-        }
-      ]
-    },
-    {
       "id": "af52172293961317",
       "urls": [
         "https://ace3.jspeopleone.com/entry/%EA%B5%AD%EB%AF%BC%EC%97%B0%EA%B8%88-%EC%97%B0%EB%A7%90%EC%A0%95%EC%82%B0-%EB%B6%80%EC%96%91%EA%B0%80%EC%A1%B1-%EC%8B%A0%EA%B3%A0-12%EC%9B%94-31%EC%9D%BC%EA%B9%8C%EC%A7%80-%EC%84%B8%EA%B8%88-%EC%A4%84%EC%9D%B4%EB%8A%94-%EB%B2%95",
@@ -15790,67 +15027,6 @@
           "views": 165,
           "answers": 1,
           "askedAt": "2026.06.01"
-        }
-      ]
-    },
-    {
-      "id": "6c5b8d45088171de",
-      "urls": [
-        "https://hanbre.tistory.com/1845",
-        "https://money-phd.com/1877"
-      ],
-      "guide": {
-        "direction": "검색자는 김태규가 누구인지, 어떤 직책의 인물인지 몰라 '제명'의 의미부터 헷갈려 들어온다. 고수 글들은 찬성 166표·국민의힘 불참 사실만 나열하고 이 결의안이 실제 법적 효력이 있는 촉구성 조치인지 설명하지 않는다. 이 글은 김태규의 직책과 결의안 종류를 정리하고 투표 경과·불참 배경을 시간순으로 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "김태규의 정확한 소속·직책(확인 필요: 국회 의안정보시스템 또는 공식 보도자료)",
-          "결의안 통과 날짜·본회의 차수(확인 필요: 국회 의사일정)",
-          "찬성 166표의 전체 투표 구성-재석·반대·기권(확인 필요: 원문 기사)",
-          "국민의힘 불참 사유에 대한 공식 입장(확인 필요: 국민의힘 논평)",
-          "'제명 촉구 결의안'의 법적 구속력 여부(확인 필요: 국회법 조항)"
-        ],
-        "mustAvoid": [
-          "동명이인(세무사 등 다른 분야 인물) 김태규와 혼동하지 않기",
-          "'제명'을 국회의원 제명과 동일한 법적 절차로 단정하지 않기"
-        ],
-        "checkBefore": [
-          "김태규가 국회의원인지 임명직 공직자인지부터 원문 기사·국회 공식 자료에서 확인",
-          "찬성 166표·국민의힘 불참 사실을 원문 보도(통신사·국회 속기록)에서 재확인",
-          "결의안의 법적 효력(구속력 여부)을 국회법 또는 전문가 해설에서 확인"
-        ],
-        "solves": [
-          "김태규가 누구인지 몰라 결의안 의미를 못 알아먹음 → 직책·소속을 먼저 정리해 혼동 해소",
-          "'제명'이 국회의원 제명인지 헷갈림 → 결의안 종류와 법적 효력을 구분해 설명",
-          "국민의힘이 왜 불참했는지 궁금 → 투표 경과와 양측 입장을 시간순 정리"
-        ],
-        "actionTitles": [
-          "김태규 제명 촉구 결의안 법적 효력 있는지 확인하기"
-        ]
-      },
-      "at": "2026-11-05T11:53:03.658Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "상속세내야되나요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010301&docId=492313664&answerNo=3&qb=6rmA7YOc6rec7KCc66qF",
-          "views": 159,
-          "answers": 3,
-          "askedAt": "2026.03.05"
-        },
-        {
-          "title": "김지웅중수청후보 site:www.cvsnews24.co",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10303&docId=495396535&answerNo=1&qb=6rmA7YOc6rec7KCc66qF",
-          "views": 123,
-          "answers": 1,
-          "askedAt": "2026.10.04"
-        },
-        {
-          "title": "아파트 매수시 부부간 증여세신고",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40303&docId=492897916&answerNo=6&qb=6rmA7YOc6rec7KCc66qF",
-          "views": 1431,
-          "answers": 7,
-          "askedAt": "2026.07.07"
         }
       ]
     },
@@ -16343,46 +15519,6 @@
           "askedAt": "2022.04.05"
         }
       ]
-    },
-    {
-      "id": "fce077eb41665684",
-      "urls": [
-        "https://naver-doc.com/life/%ec%9d%b4%eb%8c%80%ec%97%ad-2%ed%98%b8%ec%84%a0-%ec%9e%85%ec%9e%a5%eb%a3%8c-%ec%a3%bc%ec%b0%a8-%ec%9c%84%ec%b9%98%eb%a7%88%eb%8d%94%eb%a6%b0%eb%9f%ac-%eb%b2%a0%ec%9d%b4%ea%b8%80-%ec%99%b8/",
-        "https://yun11.tistory.com/entry/%EC%83%9D%EC%83%9D%EC%A0%95%EB%B3%B4-%EB%8F%85%ED%95%9C%EC%9D%B8%EC%83%9D-%EB%89%B4%EC%9A%95%EC%8B%9D-%EB%B2%A0%EC%9D%B4%EA%B8%80-%EC%9D%B4%EB%8C%80-%EB%A7%88%EB%8D%94%EB%A6%B0%EB%9F%AC-%EC%9C%84%EC%B9%98%C2%B7%EB%A9%94%EB%89%B4%C2%B7%ED%83%9D%EB%B0%B0-%EC%A0%95%EB%A6%AC"
-      ],
-      "guide": {
-        "direction": "자동완성이 '생생정보 독한인생' 방송 검색에 몰려 있어, 시청자는 방송에 나온 이대 마더린러 베이글이 정확히 어디 있고 몇 회에 나왔는지를 몰라 검색한다. 고수 제목은 위치·메뉴·택배까지 다뤘지만 방영 회차(캠핑카 특집인지, 독하다독해 코너인지)와 '입장료'라는 표현이 붙은 이유는 설명하지 않는다. 독자는 방영 회차·2호선 출구별 도보경로·주차 가능 여부·택배 주문법을 한 표로 보면 바로 찾아가거나 택배를 주문하는 것으로 글을 끝낼 수 있다.",
-        "searchTargets": [
-          "생생정보 독한인생 베이글",
-          "생생정보독한인생캠핑카",
-          "생생정보독한인생독하다독해"
-        ],
-        "mustInclude": [
-          "마더린러 베이글 방영 회차명과 방영일(확인 필요: 방송사 편성표/VOD)",
-          "이대역 2호선 출구별 도보 경로와 주차 가능 여부",
-          "택배(전국배송) 주문 가능 메뉴와 신청 방법",
-          "'입장료'라는 표현이 붙은 이유(웨이팅·시식 방식 등, 확인 필요)"
-        ],
-        "mustAvoid": [
-          "독한인생의 다른 회차(캠핑카 특집 등)와 이대 베이글 편을 혼동해서 섞어 쓰지 않기",
-          "방송 캡처만 보고 실제 가격·메뉴를 단정하지 않기"
-        ],
-        "checkBefore": [
-          "마더린러 베이글 공식 SNS·네이버플레이스에서 주차 가능 여부와 택배 주문법 확인"
-        ],
-        "solves": [
-          "방송에서 본 베이글집이 어디인지 몰라 검색 → 이대역 출구·도보 경로로 위치 바로 안내",
-          "직접 가기 힘든데 택배가 되는지 궁금 → 택배 주문 가능 메뉴와 신청 방법 정리",
-          "독한인생 몇 회에 나왔는지 헷갈림 → 방영 회차와 캠핑카 특집 여부 구분해서 정리"
-        ],
-        "actionTitles": [
-          "생생정보 독한인생 마더린러 베이글 위치·주차 찾는 법",
-          "독한인생 캠핑카 특집 베이글 매장 주차 위치 확인하기"
-        ]
-      },
-      "at": "2026-11-05T11:53:03.658Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
     },
     {
       "id": "5b33997381669242",
@@ -17402,41 +16538,6 @@
           "askedAt": "2026.10.06"
         }
       ]
-    },
-    {
-      "id": "f4928c1830f81678",
-      "urls": [
-        "https://16491.tistory.com/186"
-      ],
-      "guide": {
-        "direction": "자동완성이 '프로티나 주가' 단독으로만 뜨는 건, 검색자가 급등 이유는 알지만 구체 수치를 몰라 막힌 상태임을 보여준다. 고수 글 제목은 '365억 조달·AI 바이오파운드리'라는 이유만 던지고 조달 구조와 등락률 같은 수치는 비워뒀다. 이 글은 급등 당일 등락률·거래량과 365억 조달 용도를 표로 정리해 이유를 끝낸다.",
-        "searchTargets": [
-          "프로티나 주가"
-        ],
-        "mustInclude": [
-          "365억 원 조달 방식(유상증자/전환사채 등)과 용도(확인 필요: 공시·원문 기사)",
-          "급등 당일 종가·등락률·거래량(확인 필요: 증권사 시세 데이터)",
-          "AI 바이오파운드리 사업의 구체 내용(확인 필요: 회사 공시/보도자료)",
-          "최근 프로티나 주가 추이 수치(확인 필요: 증권사 차트)"
-        ],
-        "mustAvoid": [
-          "365억 조달을 호재로만 단정하고 지분 희석 등 리스크 생략"
-        ],
-        "checkBefore": [
-          "365억 조달 규모와 방식은 DART 공시 또는 원문 기사로 확인"
-        ],
-        "solves": [
-          "프로티나 주가가 왜 급등했는지 모르겠다 → 365억 조달과 AI 바이오파운드리 사업 연결고리를 정리한다"
-        ],
-        "actionTitles": [
-          "프로티나 주가 급등 이유, 365억 조달 내용 확인",
-          "프로티나 주가 등락률 조회, 바이오파운드리 사업 정리",
-          "프로티나 주가 급등 원인 체크, 조달 구조 비교"
-        ]
-      },
-      "at": "2026-11-05T11:53:03.658Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
     },
     {
       "id": "6de32654c6bf7499",
