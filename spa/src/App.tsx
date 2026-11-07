@@ -2,12 +2,16 @@ import { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Layout from './components/Layout';
 import { recordPageView } from './lib/siteOps';
+import LewordGate from './components/auth/LewordGate';
+import RequireLogin from './components/auth/RequireLogin';
 import IndexPage from './pages/IndexPage';
 
 const ProductsPage = lazy(() => import('./pages/ProductsPage'));
 const DetailPage = lazy(() => import('./pages/DetailPage'));
 const LewordDetailPage = lazy(() => import('./pages/LewordDetailPage'));
 const LewordPage = lazy(() => import('./pages/LewordPage'));
+const LoginPage = lazy(() => import('./pages/LoginPage'));
+const SignupPage = lazy(() => import('./pages/SignupPage'));
 const BriefingPage = lazy(() => import('./pages/BriefingPage'));
 const KeywordDetailPage = lazy(() => import('./pages/KeywordDetailPage'));
 const BriefingArchivePage = lazy(() => import('./pages/BriefingArchivePage'));
@@ -60,8 +64,9 @@ function App() {
                     <Route path="/detail.html" element={<DetailPage />} />
                     <Route path="/leword-detail" element={<LewordDetailPage />} />
                     <Route path="/leword-detail.html" element={<LewordDetailPage />} />
-                    <Route path="/leword" element={<LewordPage />} />
-                    <Route path="/leword.html" element={<LewordPage />} />
+                    {/* LEWORD needs a login, and the server decides whether the account holds a license (LewordGate). */}
+                    <Route path="/leword" element={<LewordGate><LewordPage /></LewordGate>} />
+                    <Route path="/leword.html" element={<LewordGate><LewordPage /></LewordGate>} />
                     {/* 무료 선정 황금키워드 전용 페이지 — 홈 탭에서 분리해 별도 주소로 뺐다. */}
                     <Route path="/briefing" element={<BriefingPage />} />
                     <Route path="/briefing.html" element={<BriefingPage />} />
@@ -79,8 +84,11 @@ function App() {
                     <Route path="/chatbots.html" element={<ChatbotsPage />} />
                     <Route path="/reviews" element={<ReviewsPage />} />
                     <Route path="/reviews.html" element={<ReviewsPage />} />
-                    <Route path="/community" element={<CommunityPage />} />
-                    <Route path="/community.html" element={<CommunityPage />} />
+                    {/* One site login window for community and LEWORD; the community is closed to visitors who are not logged in. */}
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/signup" element={<SignupPage />} />
+                    <Route path="/community" element={<RequireLogin area="community"><CommunityPage /></RequireLogin>} />
+                    <Route path="/community.html" element={<RequireLogin area="community"><CommunityPage /></RequireLogin>} />
                     <Route path="/lookup" element={<LookupPage />} />
                     <Route path="/lookup.html" element={<LookupPage />} />
                     <Route path="/refund" element={<RefundPage />} />

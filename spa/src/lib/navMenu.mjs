@@ -1,3 +1,5 @@
+import { LOGIN_PATH, SIGNUP_PATH, loginPath } from './siteAuthModel.mjs';
+
 /**
  * Top menu model: destinations, "which item is current" rules, the dropdown / phone-menu state machine
  * and the login-button routing. Pure data and functions so node:test can pin them without a browser.
@@ -11,10 +13,10 @@ export const NAV_BREAKPOINT = 1180;
 /** Yellow call-to-action on the right of the bar. */
 export const NAV_CTA = Object.freeze({ label: '무료체험 시작', shortLabel: '무료체험', to: '/pricing' });
 
-/** Where the login button goes when the LEWORD page is not already open. The page opens its dialog for this flag. */
-export const NAV_LOGIN_PATH = '/leword?login=1';
+/** The one login window of the whole site (community and LEWORD share it). */
+export const NAV_LOGIN_PATH = LOGIN_PATH;
 
-/** Name of the window event the LEWORD page listens to for opening its login dialog. */
+/** Name of the window event the LEWORD page still listens to for opening its old login dialog. */
 export const LOGIN_EVENT = 'leword:login';
 
 const link = (key, label, to, extra = {}) => Object.freeze({ type: 'link', key, label, to, ...extra });
@@ -132,10 +134,14 @@ export function menuReducer(state, action) {
 }
 
 /**
- * What the [login] button does. LEWORD already listens for a window event, so on that page we ask it directly
- * (keeps the current tab); elsewhere we go to LEWORD with the flag that makes it open the dialog on arrival.
+ * What the [login] button does: go to the one login window, carrying the page the person is on (path + query)
+ * so a finished login comes back to it. On the login or signup screen it keeps the return path already there.
  */
-export function resolveLoginAction(pathname) {
-    if (normalizeNavPath(pathname) === '/leword') return { kind: 'event', name: LOGIN_EVENT };
-    return { kind: 'navigate', to: NAV_LOGIN_PATH };
+export function resolveLoginAction(pathname, search = '') {
+    const path = normalizeNavPath(pathname);
+    if (path === LOGIN_PATH || path === SIGNUP_PATH) {
+        const kept = new URLSearchParams(search).get('next');
+        return { kind: 'navigate', to: loginPath(kept) };
+    }
+    return { kind: 'navigate', to: loginPath(`${pathname}${search}`) };
 }

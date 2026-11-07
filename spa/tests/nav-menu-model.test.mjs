@@ -121,10 +121,16 @@ test('reducer is pure: returns the same object when nothing changes and never mu
     assert.ok(Object.isFrozen(INITIAL_MENU_STATE));
 });
 
-test('login button: on LEWORD it asks the page to open its dialog, elsewhere it goes to LEWORD with the login flag', () => {
-    assert.equal(NAV_LOGIN_PATH, '/leword?login=1');
-    assert.deepEqual(resolveLoginAction('/leword'), { kind: 'event', name: 'leword:login' });
-    assert.deepEqual(resolveLoginAction('/leword.html'), { kind: 'event', name: 'leword:login' });
-    assert.deepEqual(resolveLoginAction('/community'), { kind: 'navigate', to: '/leword?login=1' });
-    assert.deepEqual(resolveLoginAction('/'), { kind: 'navigate', to: '/leword?login=1' });
+test('login button: always the one site login window, carrying where the person was so it can come back (2026-11-08)', () => {
+    assert.equal(NAV_LOGIN_PATH, '/login');
+    assert.deepEqual(resolveLoginAction('/leword', '?tab=picks'), { kind: 'navigate', to: '/login?next=%2Fleword%3Ftab%3Dpicks' });
+    assert.deepEqual(resolveLoginAction('/leword.html'), { kind: 'navigate', to: '/login?next=%2Fleword.html' });
+    assert.deepEqual(resolveLoginAction('/community', '?board=free'), { kind: 'navigate', to: '/login?next=%2Fcommunity%3Fboard%3Dfree' });
+    assert.deepEqual(resolveLoginAction('/'), { kind: 'navigate', to: '/login' }, 'home needs no return path');
+});
+
+test('login button on the login or signup screen stays put and keeps the return path it already has', () => {
+    assert.deepEqual(resolveLoginAction('/login', '?next=%2Fcommunity'), { kind: 'navigate', to: '/login?next=%2Fcommunity' });
+    assert.deepEqual(resolveLoginAction('/signup', '?next=%2Fleword'), { kind: 'navigate', to: '/login?next=%2Fleword' });
+    assert.deepEqual(resolveLoginAction('/login'), { kind: 'navigate', to: '/login' });
 });

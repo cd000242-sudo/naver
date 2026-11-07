@@ -230,6 +230,26 @@ export async function login(userId: string, userPassword: string): Promise<AuthR
 }
 
 /**
+ * 사이트 통합 로그인(2026-11-08) — 커뮤니티 토큰으로 LEWORD 를 연다.
+ *
+ * `verify-web-login` 에 비밀번호 대신 `communityToken` 을 보낸다. 서버가 그 토큰의 이용권(올인원·LEWORD)을 시트에서
+ * 다시 확인하고, 커뮤니티 전용 가입자면 LICENSE_NOT_ACTIVATED 로 거절한다. 맞으면 아래 LEWORD 세션을 같은 모양으로
+ * 저장하므로 LEWORD 화면은 로그인 방식이 바뀐 줄 모른다. 판정(payload)은 호출한 쪽이 해석한다.
+ */
+export async function loginWithCommunityToken(communityToken: string): Promise<{ payload: Record<string, unknown>; session: LewordSession | null }> {
+    try {
+        const payload = await callGas({ action: 'verify-web-login', communityToken, deviceId: getDeviceId() });
+        if (!payload.ok || !payload.valid) return { payload, session: null };
+        const session = toSession(payload, String(payload.userId || ''));
+        if (!session.userId) return { payload: { ok: false, code: 'UNKNOWN', message: '확인하지 못했습니다.' }, session: null };
+        saveSession(session);
+        return { payload, session };
+    } catch (error) {
+        return { payload: { ok: false, code: 'NETWORK', message: error instanceof Error ? error.message : '연결에 실패했습니다.' }, session: null };
+    }
+}
+
+/**
  * 계정 만들기 · 라이선스 재인증 — 같은 경로다.
  *
  * 기간이 끝난 사람이 새 코드를 넣는 것도 이것으로 처리된다. 아이디·비밀번호를

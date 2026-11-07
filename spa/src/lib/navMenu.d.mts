@@ -26,5 +26,5 @@ export type MenuAction =
 export const INITIAL_MENU_STATE: MenuState;
 export function menuReducer(state: MenuState, action: MenuAction): MenuState;
 
-export type LoginAction = { kind: 'event'; name: string } | { kind: 'navigate'; to: string };
-export function resolveLoginAction(pathname: string): LoginAction;
+export type LoginAction = { kind: 'navigate'; to: string };
+export function resolveLoginAction(pathname: string, search?: string): LoginAction;

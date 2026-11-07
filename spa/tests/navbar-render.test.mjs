@@ -33,10 +33,14 @@ function load(path, hooks, env) {
 }
 
 /** Render the real Navbar at `path`; `forced` pre-sets the reducer state, `session` fakes the stored login. */
-function render(path, { forced = {}, unseen = 0, session = null } = {}) {
+function render(path, { forced = {}, unseen = 0, session = null, community = null } = {}) {
     const hooks = { ...React, useReducer: (reducer, init, initFn) => React.useReducer(reducer, { ...(initFn ? initFn(init) : init), ...forced }) };
     globalThis.localStorage = {
-        getItem: (key) => (key === SESSION_KEY && session ? JSON.stringify(session) : null),
+        getItem: (key) => {
+            if (key === SESSION_KEY && session) return JSON.stringify(session);
+            if (key === 'leaderspro.community.session.v1' && community) return JSON.stringify(community);
+            return null;
+        },
         setItem() {}, removeItem() {},
     };
     try {
@@ -197,6 +201,23 @@ test('logged in: id replaces the login button, account menu offers LEWORD + logo
     assert.match(sheet, /leader01/);
     assert.match(sheet, /<button[^>]*site-nav-sheet-logout[^>]*>로그아웃<\/button>/);
     assert.doesNotMatch(sheet, /site-nav-sheet-login/);
+});
+
+test('logged in with only the site (community) login: menu offers community, LEWORD and logout', () => {
+    const community = {
+        userId: 'member07', role: 'community', nickname: '새싹이', needsNickname: false, canWriteNews: false, score: 3,
+        activity: { posts: 0, comments: 0, visits: 0 }, grade: { key: 'sprout', label: '새싹', min: 0, nextAt: 100, nextLabel: '잎새' },
+        linked: false, communityToken: 'ct_abc', sessionExpiresAt: '2099-01-01T00:00:00.000Z', savedAt: '2026-11-08T00:00:00Z',
+    };
+    const html = render('/', { community, forced: { mobileOpen: true } });
+    const { bar, sheet } = regions(html);
+    assert.doesNotMatch(bar, /site-nav-login/);
+    assert.match(bar, /site-nav-account-btn[^>]*>[\s\S]*?member07/);
+    assert.match(bar, /로그아웃/);
+    assert.match(bar, /커뮤니티 회원/, 'a community-only login is named as such, not as a LEWORD plan');
+    assert.ok(hrefs(bar).includes('/community'));
+    assert.match(sheet, /member07/);
+    assert.match(sheet, /<button[^>]*site-nav-sheet-logout[^>]*>로그아웃<\/button>/);
 });
 
 test('an expired stored login is treated as logged out', () => {

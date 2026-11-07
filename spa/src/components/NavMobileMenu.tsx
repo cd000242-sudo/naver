@@ -22,7 +22,7 @@ function NavMobileMenu({ open, pathname, unseenNotices, account, onClose }: Prop
     return (
         <nav className="site-nav-sheet" id="site-nav-sheet" aria-label="전체 메뉴" hidden={!open}>
             <div className="site-nav-sheet-in">
-                <NavSheetWho session={account.session} />
+                <NavSheetWho who={account.who} />
                 <div className="site-nav-sheet-actions">
                     <NavSheetAccount account={account} onDone={onClose} />
                     <Link className="site-nav-btn site-nav-btn-cta" to={NAV_CTA.to} onClick={onClose}>{NAV_CTA.label}</Link>

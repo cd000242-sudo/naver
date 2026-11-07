@@ -1,0 +1,31 @@
+/* Login, signup and the "log in first" / "license needed" screens. Needs src/styles/light-page.css. */
+.au-main { padding: 36px 0 72px; display: grid; place-items: start center; }
+.au-card { width: min(520px, 100%); padding: 32px 30px; display: grid; gap: 18px; }
+.au-card-wide { width: min(620px, 100%); }
+.au-card h1 { font-size: 30px; font-weight: 900; line-height: 1.25; }
+.au-sub { font-size: 17px; color: var(--lp-muted); }
+.au-form { display: grid; gap: 16px; }
+.au-links { display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 16px; }
+.au-links a, .au-links button { min-height: 44px; display: inline-flex; align-items: center; font-weight: 700; color: var(--lp-accent); text-decoration: underline; text-underline-offset: 3px; }
+.au-actions { display: grid; gap: 10px; }
+.au-split { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.au-help { font-size: 15px; color: var(--lp-muted); }
+.au-help a { color: var(--lp-accent); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.au-tip { padding: 14px 16px; border-radius: 12px; background: var(--lp-surface-2); border: 1px solid var(--lp-line); font-size: 16px; color: var(--lp-muted); }
+.au-tip b { color: var(--lp-text); }
+
+/* The gate screens (login needed, license needed, checking). */
+.au-gate { width: min(640px, 100%); padding: 34px 30px; display: grid; gap: 18px; text-align: center; justify-items: center; }
+.au-gate h1 { font-size: 28px; font-weight: 900; }
+.au-gate-icon { width: 64px; height: 64px; border-radius: 18px; display: grid; place-items: center; background: var(--lp-brand-soft); color: var(--lp-brand); border: 1px solid var(--lp-brand-line); font-size: 28px; font-weight: 900; }
+.au-gate .au-actions { width: min(380px, 100%); }
+.au-gate-left { text-align: left; justify-items: stretch; width: 100%; }
+.au-register { width: 100%; text-align: left; display: grid; gap: 14px; padding: 20px; border-radius: 14px; background: var(--lp-surface-2); border: 1px solid var(--lp-line); }
+.au-register h2 { font-size: 20px; font-weight: 900; }
+
+@media (max-width: 720px) {
+    .au-main { padding: 20px 0 56px; }
+    .au-card, .au-gate { padding: 24px 18px; }
+    .au-card h1, .au-gate h1 { font-size: 26px; }
+    .au-split { grid-template-columns: 1fr; }
+}

@@ -96,12 +96,17 @@ test('LEWORD page opens its login dialog for ?login=1 (from the menu) and follow
     assert.match(page, /leword:login/, 'existing in-page login event still works');
 });
 
-test('menu account code only reads the session through lewordAuth and never stores a password', () => {
-    const hook = read('../src/lib/useLewordSession.ts');
-    assert.match(hook, /loadSession/);
-    assert.match(hook, /SESSION_CHANGED_EVENT/);
-    assert.match(hook, /'storage'/, 'other tabs');
+test('menu account code reads both logins, logs out through signOutAll (which frees the LEWORD web session too) and never stores a password', () => {
+    const lewordHook = read('../src/lib/useLewordSession.ts');
+    assert.match(lewordHook, /loadSession/);
+    assert.match(lewordHook, /SESSION_CHANGED_EVENT/);
+    assert.match(lewordHook, /'storage'/, 'other tabs');
+    const siteHook = read('../src/lib/useSiteSession.ts');
+    assert.match(siteHook, /useLewordSession/);
+    assert.match(siteHook, /COMMUNITY_SESSION_EVENT/);
+    assert.match(siteHook, /'storage'/, 'other tabs');
     const account = read('../src/components/NavAccount.tsx');
-    assert.match(account, /logoutWeb/);
+    assert.match(account, /signOutAll/);
     assert.doesNotMatch(account, /password|userPassword/i);
+    assert.match(read('../src/lib/communityAuth.ts'), /logoutWeb\(/, 'the unified logout still frees the LEWORD web session');
 });
