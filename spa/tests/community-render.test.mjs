@@ -261,16 +261,21 @@ test('write form: members choose among four boards, the operator among five; new
     assert.match(owner, /<option value="news" selected/);
 });
 
-test('write form: ordinary boards have title and body; promo has address, title (read from the address) and intro', () => {
+test('write form: ordinary boards have a title and the rich editor; promo has platform, address, title (read from the address) and intro', () => {
     const { model } = load();
     const free = render('../../src/components/community/PostWriteForm.tsx', { boards: model.boardList(null), defaultBoard: 'free', profile: profileOf(), onDone() {}, onCancel() {} });
-    assert.equal(tags(free, 'input').length, 1);
-    assert.equal(tags(free, 'textarea').length, 1);
+    assert.equal(tags(free, 'input').filter((tag) => attr(tag, 'type') === 'text').length, 1, 'the title');
+    assert.equal(tags(free, 'textarea').length, 0, 'the body is the editor, not a plain box');
+    assert.match(free, /role="textbox"/);
+    for (const label of ['굵게', '기울임', '소제목', '인용', '목록', '번호 목록', '링크', '사진', '구분선']) assert.match(text(free), new RegExp(label));
     assert.match(free, /<button[^>]*type="submit"[^>]*>올리기<\/button>/);
     const promo = render('../../src/components/community/PostWriteForm.tsx', { boards: model.boardList(null), defaultBoard: 'promo', profile: profileOf(), onDone() {}, onCancel() {} });
-    assert.equal(tags(promo, 'input').length, 2, 'address and title');
-    assert.match(tags(promo, 'input')[1], /readonly=""/i);
+    const inputs = tags(promo, 'input');
+    assert.equal(inputs.filter((tag) => attr(tag, 'type') === 'radio').length, 2, 'naver / google');
+    assert.equal(inputs.filter((tag) => attr(tag, 'type') !== 'radio').length, 2, 'address and title');
+    assert.match(inputs.find((tag) => attr(tag, 'name') === 'title'), /readonly=""/i);
     assert.equal(tags(promo, 'textarea').length, 1);
+    assert.equal(tags(promo, 'div').filter((tag) => attr(tag, 'role') === 'textbox').length, 0, 'the promo board keeps its link + intro form');
     assert.match(text(promo), /한 줄 소개/);
 });
 

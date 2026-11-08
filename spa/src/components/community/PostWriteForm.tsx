@@ -1,14 +1,20 @@
-import { useState, type FormEvent } from 'react';
+import { useMemo, useRef, useState, type FormEvent } from 'react';
 import { boardApi, type PostDraft } from '../../lib/communityApi';
 import { normalizePost, type PostItem } from '../../lib/communityData';
+import { associateWriteState, isAssociate } from '../../lib/communityLevel.mjs';
 import { BODY_MAX, TITLE_MAX, canWriteBoard, validatePostDraft, writableBoards, writeBlockedHint, type BoardConfig } from '../../lib/communityModel.mjs';
+import { checkRichDraft, parseRichBody, richPlainText, serializeRichDoc } from '../../lib/communityRich.mjs';
 import type { CommunityProfile } from '../../lib/communitySession';
-import { readPromoTitle } from '../../lib/promoTitle';
+import LevelUpCard from './LevelUpCard';
 import NicknameForm from './NicknameForm';
+import PromoFields, { usePromoDraft } from './PromoFields';
+import RichEditor, { type RichEditorHandle } from './RichEditor';
 
 type Props = {
     boards: readonly BoardConfig[];
     defaultBoard: string;
+    /** The promo sub-tab the writer came from ('naver' | 'google'). */
+    defaultPlatform?: string;
     profile: CommunityProfile;
     onDone: (post: PostItem | null) => void;
     /**
@@ -21,23 +27,28 @@ type Props = {
     editing?: PostItem;
 };
 
-/** Write or edit a post. Promo posts: the address is read to get the real title, plus a one-line intro. */
-function PostWriteForm({ boards, defaultBoard, profile, onDone, onSubmitNew, onCancel, editing }: Props) {
+/**
+ * Write or edit a post. Promo posts: the platform and address are read to get the real title, plus a one-line intro.
+ * Every other new post is written in the rich editor; an old plain-text post is edited as plain text.
+ */
+function PostWriteForm({ boards, defaultBoard, defaultPlatform, profile, onDone, onSubmitNew, onCancel, editing }: Props) {
     const choices = writableBoards(boards, profile);
     const first = choices.find((entry) => entry.id === defaultBoard) ?? choices.find((entry) => entry.id === 'free') ?? choices[0];
     const [boardId, setBoardId] = useState(editing?.board ?? first?.id ?? 'free');
     const [title, setTitle] = useState(editing?.title ?? '');
-    const [body, setBody] = useState(editing?.body ?? '');
-    const [url, setUrl] = useState(editing?.url ?? '');
-    const [readNote, setReadNote] = useState('');
-    const [reading, setReading] = useState(false);
+    const [body, setBody] = useState(editing?.format === 'rich' ? '' : editing?.body ?? '');
     const [busy, setBusy] = useState(false);
     const [error, setError] = useState('');
+    const editor = useRef<RichEditorHandle>(null);
+    const promoDraft = usePromoDraft(editing, defaultPlatform);
+    const initialBlocks = useMemo(() => (editing?.format === 'rich' ? parseRichBody(editing.body).blocks : undefined), [editing]);
 
     const board = boards.find((entry) => entry.id === boardId);
     const promo = boardId === 'promo';
+    const rich = !promo && (!editing || editing.format === 'rich');
     // Opened from the notice board: it cannot be written to, so say why and offer the other boards.
     const blocked = writeBlockedHint(defaultBoard, profile);
+    const gate = editing ? { open: true, reason: '', message: '' } : associateWriteState(profile, boardId);
 
     if (profile.needsNickname || !profile.nickname) {
         return (
@@ -49,38 +60,42 @@ function PostWriteForm({ boards, defaultBoard, profile, onDone, onSubmitNew, onC
             </section>
         );
     }
+    if (!gate.open) {
+        return (
+            <section className="lp-box cm-form">
+                <h1 className="cm-form-title">글쓰기</h1>
+                <LevelUpCard profile={profile} hint={gate.message} />
+                <button type="button" className="lp-btn lp-btn-line" onClick={onCancel}>돌아가기</button>
+            </section>
+        );
+    }
 
     const readTitle = async () => {
-        if (editing || reading || !url.trim()) return;
-        setReading(true);
-        setReadNote('글을 여는 중…');
-        const result = await readPromoTitle(url);
-        setReading(false);
-        if (result.ok) {
-            setTitle(result.title);
-            if (!body.trim() && result.description) setBody(result.description.slice(0, 200));
-            setReadNote('제목을 읽어 왔어요.');
-        } else {
-            setTitle('');
-            setReadNote(result.message);
-        }
+        const found = await promoDraft.read({ summary: body });
+        if (!found) return;
+        if (found.title !== undefined) setTitle(found.title);
+        if (found.summary) setBody(found.summary);
     };
 
     const submit = async (event: FormEvent) => {
         event.preventDefault();
         if (busy) return;
         if (!editing && !canWriteBoard(board, profile)) { setError('이 게시판에는 글을 쓸 수 없어요.'); return; }
-        const problem = validatePostDraft({ boards, board: boardId, title, body, url });
+        const written = rich ? editor.current?.read() ?? { blocks: [], images: [] } : null;
+        const text = written ? richPlainText(written.blocks) : body.trim();
+        const problem = validatePostDraft({ boards, board: boardId, title, body: text, url: promoDraft.url, platform: promo ? promoDraft.platform : undefined })
+            || (written ? checkRichDraft(written.blocks) : '');
         if (problem) { setError(problem); return; }
         setError('');
-        if (!editing && onSubmitNew) {
-            onSubmitNew({ board: boardId, title: title.trim(), body: body.trim(), url: url.trim() });
-            return;
-        }
+        const draft: PostDraft = {
+            board: boardId, title: title.trim(), body: written ? serializeRichDoc(written.blocks) : body.trim(), url: promoDraft.url.trim(),
+            ...(promo ? { platform: promoDraft.platform } : {}), ...(written ? { format: 'rich' as const, images: written.images } : {}),
+        };
+        if (!editing && onSubmitNew) { onSubmitNew(draft); return; }
         setBusy(true);
         const result = editing
-            ? await boardApi.updatePost(editing.id, { title: title.trim(), body: body.trim(), promo })
-            : await boardApi.writePost({ board: boardId, title: title.trim(), body: body.trim(), url: url.trim() });
+            ? await boardApi.updatePost(editing.id, { title: draft.title, body: draft.body, promo, images: draft.images })
+            : await boardApi.writePost(draft);
         setBusy(false);
         if (result.ok) onDone(normalizePost((result as { post?: unknown }).post));
         else setError(result.message);
@@ -100,41 +115,29 @@ function PostWriteForm({ boards, defaultBoard, profile, onDone, onSubmitNew, onC
                 </label>
             )}
             {promo ? (
-                <>
-                    <label className="lp-field">
-                        <span>글 주소</span>
-                        <input className="lp-input" type="url" inputMode="url" name="url" value={url} readOnly={Boolean(editing)}
-                            placeholder="https://blog.naver.com/…" onChange={(event) => { setUrl(event.target.value); setReadNote(''); }}
-                            onBlur={() => { void readTitle(); }} />
-                        {readNote ? <small role="status">{readNote}</small> : null}
-                    </label>
-                    <label className="lp-field">
-                        <span>제목</span>
-                        <input className="lp-input" type="text" name="title" value={title} readOnly
-                            placeholder={reading ? '읽는 중…' : '주소를 넣으면 자동으로 읽어 와요'} />
-                        <small>글에서 읽어 온 제목이에요. 실제 글과 달라지면 들른 사람이 돌아가요.</small>
-                    </label>
-                    <label className="lp-field">
-                        <span>한 줄 소개</span>
-                        <textarea className="lp-textarea cm-short" name="summary" value={body} maxLength={300}
-                            placeholder="이 글에서 무엇을 알 수 있는지 한두 문장으로" onChange={(event) => setBody(event.target.value)} />
-                        <small>‘좋은 글입니다’보다 무엇이 적혀 있는지 적어 주세요. 그래야 들러요.</small>
-                    </label>
-                </>
+                <PromoFields draft={promoDraft} editing={Boolean(editing)} title={title} summary={body} onSummary={setBody} onBlurUrl={() => { void readTitle(); }} />
             ) : (
                 <>
                     <label className="lp-field">
                         <span>제목</span>
                         <input className="lp-input" type="text" name="title" value={title} maxLength={TITLE_MAX} onChange={(event) => setTitle(event.target.value)} />
                     </label>
-                    <label className="lp-field">
-                        <span>내용</span>
-                        <textarea className="lp-textarea" name="body" value={body} maxLength={BODY_MAX} onChange={(event) => setBody(event.target.value)} />
-                        <small>{body.length.toLocaleString('en-US')}/{BODY_MAX.toLocaleString('en-US')}자</small>
-                    </label>
+                    {rich ? (
+                        <div className="lp-field">
+                            <span>내용</span>
+                            <RichEditor ref={editor} initialBlocks={initialBlocks} postId={editing?.id} disabled={busy} />
+                        </div>
+                    ) : (
+                        <label className="lp-field">
+                            <span>내용</span>
+                            <textarea className="lp-textarea" name="body" value={body} maxLength={BODY_MAX} onChange={(event) => setBody(event.target.value)} />
+                            <small>{body.length.toLocaleString('en-US')}/{BODY_MAX.toLocaleString('en-US')}자</small>
+                        </label>
+                    )}
                 </>
             )}
-            {board && !editing && board.dailyLimit > 0 ? <p className="au-help">하루에 {board.dailyLimit}개까지 올릴 수 있어요.</p> : null}
+            {isAssociate(profile) && !editing ? <p className="au-help">준회원은 자유게시판에 가입 인사 1개를 쓸 수 있어요.</p> : null}
+            {board && !editing && !isAssociate(profile) && board.dailyLimit > 0 ? <p className="au-help">하루에 {board.dailyLimit}개까지 올릴 수 있어요.</p> : null}
             {error ? <p className="lp-error" role="alert">{error}</p> : null}
             <div className="cm-form-actions">
                 <button type="button" className="lp-btn lp-btn-line" onClick={onCancel}>취소</button>
