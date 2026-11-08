@@ -1,6 +1,9 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import CommunitySidebar, { BoardTabs } from '../components/community/CommunitySidebar';
+import LevelUpCard from '../components/community/LevelUpCard';
+import ListReport from '../components/community/ListReport';
+import PromoTabs from '../components/community/PromoTabs';
 import ModerationPanel from '../components/community/ModerationPanel';
 import RewardDesk from '../components/community/RewardDesk';
 import NicknameForm from '../components/community/NicknameForm';
@@ -14,17 +17,21 @@ import { boardApi, type PostDraft } from '../lib/communityApi';
 import type { PostItem } from '../lib/communityData';
 import { findKnownPost } from '../lib/communityFeed';
 import {
-    ALL_BOARD, boardLabel, boardList, communityPath, describeVisit, parseCommunityQuery, showWriteButton,
+    ALL_BOARD, boardLabel, boardList, communityPath, describeVisit, parseCommunityQuery, reportReasons, showWriteButton,
 } from '../lib/communityModel.mjs';
+import { associateWriteState } from '../lib/communityLevel.mjs';
 import { authorOf } from '../lib/communityOutbox';
 import { visibleOutbox } from '../lib/communityPostOutbox';
+import { reportAction } from '../lib/communityReport.mjs';
 import { useBoardFeed } from '../lib/useBoardFeed';
 import { usePostOutbox } from '../lib/usePostOutbox';
+import { loginPath } from '../lib/siteAuthModel.mjs';
 import { useSiteSession } from '../lib/useSiteSession';
 import '../styles/light-page.css';
 import '../components/community/community.css';
 import '../components/community/community-detail.css';
 import '../components/community/community-speed.css';
+import '../components/community/community-forum.css';
 
 const ALL_NOTE = '전체글은 게시판마다 최신 글 20개씩 모아 보여 드려요.';
 
@@ -44,6 +51,8 @@ function CommunityPage() {
     const [reloadKey, setReloadKey] = useState(0);
     const [notice, setNotice] = useState<Notice | null>(null);
     const [editing, setEditing] = useState<PostItem | null>(null);
+    const [reporting, setReporting] = useState<PostItem | null>(null);
+    const [levelOpen, setLevelOpen] = useState(false);
     // One read brings the list, the board settings, the weekly top and a fresh profile (see useBoardFeed).
     const feed = useBoardFeed(view, reloadKey);
     const config = feed.config;
@@ -70,7 +79,7 @@ function CommunityPage() {
     }, []);
 
     // A notice belongs to the screen it was shown on.
-    useEffect(() => { setNotice(null); }, [location.search]);
+    useEffect(() => { setNotice(null); setLevelOpen(false); }, [location.search]);
 
     if (!profile) return null;
 
@@ -87,13 +96,19 @@ function CommunityPage() {
     // A new post is on top of the list at once ("sending") and goes to the server in the background.
     const submitNew = (draft: PostDraft) => {
         outbox.send(draft, authorOf(profile));
-        navigate(communityPath({ board: draft.board }));
+        navigate(communityPath({ board: draft.board, platform: draft.platform }));
     };
 
     const afterWrite = (post: PostItem | null) => {
         setEditing(null);
         refresh();
-        navigate(post ? communityPath({ board: view.board, post: post.id }) : communityPath({ board: view.board }));
+        navigate(post ? communityPath({ board: view.board, platform: view.platform, post: post.id }) : communityPath({ board: view.board, platform: view.platform }));
+    };
+
+    // [신고] from a list row; nobody logged in is sent to the login page first.
+    const startReport = (post: PostItem) => {
+        if (reportAction(post, profile) === 'login') { navigate(loginPath(communityPath({ board: view.board, post: post.id }))); return; }
+        setReporting(post);
     };
 
     const title = view.board === ALL_BOARD ? '전체글' : boardLabel(view.board, boards);
@@ -103,6 +118,7 @@ function CommunityPage() {
     const rewardsView = moderator && !reportsView && isRewardsView(location.search);
     const deskView = reportsView || rewardsView;
     const showList = !view.write && !view.post && !editing && !deskView;
+    const writeState = associateWriteState(profile, view.board);
 
     return (
         <div className="lp cm">
@@ -116,8 +132,10 @@ function CommunityPage() {
                         {moderator && deskView ? <Link className="lp-btn lp-btn-line" to={communityPath({ board: view.board })}>← 커뮤니티로</Link> : null}
                         {moderator && !reportsView ? <Link className="lp-btn lp-btn-line" to={REPORTS_PATH}>신고 목록</Link> : null}
                         {moderator && !rewardsView ? <Link className="lp-btn lp-btn-line" to={REWARDS_PATH}>보상 승인</Link> : null}
-                        {view.write || editing || deskView || !showWriteButton(view.board, boards) ? null : (
-                            <Link className="lp-btn lp-btn-dark" to={communityPath({ board: view.board, write: true })}>글쓰기</Link>
+                        {view.write || editing || deskView || !showWriteButton(view.board, boards) ? null : writeState.open ? (
+                            <Link className="lp-btn lp-btn-dark" to={communityPath({ board: view.board, platform: view.platform, write: true })}>글쓰기</Link>
+                        ) : (
+                            <button type="button" className="lp-btn lp-btn-dark is-locked" onClick={() => setLevelOpen(true)}>글쓰기</button>
                         )}
                     </div>
                 </div>
@@ -127,6 +145,8 @@ function CommunityPage() {
                 <div className="cm-main">
                     <BoardTabs boards={boards} boardId={view.board} />
                     {notice ? <p className={`cm-notice${notice.tone === 'info' ? ' is-info' : ''}`} role="status">{notice.text}</p> : null}
+                    {levelOpen ? <LevelUpCard profile={profile} hint={writeState.message || '등업 후 쓸 수 있어요.'} onDone={refresh} onClose={() => setLevelOpen(false)} /> : null}
+                    {view.board === 'promo' && showList ? <PromoTabs platform={view.platform} sort={view.sort} /> : null}
                     {profile.needsNickname || !profile.nickname ? (
                         <section className="lp-box cm-nick-card" aria-labelledby="cm-nick-title">
                             <h2 id="cm-nick-title">닉네임을 정해 주세요</h2>
@@ -142,8 +162,8 @@ function CommunityPage() {
                         <PostWriteForm boards={boards} defaultBoard={editing.board} profile={profile} editing={editing}
                             onDone={afterWrite} onCancel={() => setEditing(null)} />
                     ) : view.write ? (
-                        <PostWriteForm boards={boards} defaultBoard={view.board} profile={profile}
-                            onDone={afterWrite} onSubmitNew={submitNew} onCancel={() => navigate(communityPath({ board: view.board }))} />
+                        <PostWriteForm boards={boards} defaultBoard={view.board} defaultPlatform={view.platform} profile={profile}
+                            onDone={afterWrite} onSubmitNew={submitNew} onCancel={() => navigate(communityPath({ board: view.board, platform: view.platform }))} />
                     ) : view.post ? (
                         <PostDetail key={view.post} id={view.post} boards={boards} boardId={view.board} profile={profile} reportConfig={config}
                             preview={preview} onEdit={setEditing} onDeleted={() => { refresh(); navigate(communityPath({ board: view.board })); }} onVisit={visit} onModerated={refresh} />
@@ -155,8 +175,12 @@ function CommunityPage() {
                                 total={feed.total} page={view.page} totalPages={feed.totalPages} sort={view.sort}
                                 loading={feed.status === 'loading'} refreshing={feed.refreshing} error={feed.status === 'error' ? feed.message : ''}
                                 local={local} onRetryLocal={(post) => outbox.retry(post.id)} onDiscardLocal={(post) => outbox.discard(post.id)}
-                                moderator={moderator} onVisit={visit} onRetry={feed.reload} />
+                                moderator={moderator} onVisit={visit} onRetry={feed.reload}
+                                onReport={startReport} reportMode={(post) => reportAction(post, profile)} />
                         </>
+                    ) : null}
+                    {reporting ? (
+                        <ListReport post={reporting} reasons={reportReasons(config)} onClose={() => setReporting(null)} onSent={(text) => setNotice({ tone: 'ok', text })} />
                     ) : null}
                 </div>
             </div>

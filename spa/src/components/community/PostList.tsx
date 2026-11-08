@@ -7,6 +7,7 @@ import {
 import { useAvatars } from '../../lib/useAvatars';
 import Avatar from './Avatar';
 import { GradeBadge, NoticeBadge, StatusBadge } from './Badges';
+import RowMenu from './RowMenu';
 
 type Props = {
     title: string;
@@ -34,11 +35,15 @@ type Props = {
     moderator?: boolean;
     onVisit: (post: PostItem) => void;
     onRetry?: () => void;
+    /** [신고] in the row menu (see reportAction for who gets it). Without it the rows have no menu. */
+    onReport?: (post: PostItem) => void;
+    reportMode?: (post: PostItem) => 'hidden' | 'login' | 'report';
 };
 
 type RowProps = {
     post: PostItem; pinned: boolean; boardId: string; boards: readonly BoardConfig[]; sort: SortKey; now: number; moderator: boolean; avatars: Record<string, string>;
     onVisit: (post: PostItem) => void; onRetryLocal?: (post: PostItem) => void; onDiscardLocal?: (post: PostItem) => void;
+    onReport?: (post: PostItem) => void; reportMode?: (post: PostItem) => 'hidden' | 'login' | 'report';
 };
 
 /** The right-hand cell of a post the reader is sending: its state, and the resend when it failed. */
@@ -52,7 +57,7 @@ function LocalState({ post, onRetryLocal, onDiscardLocal }: Pick<RowProps, 'post
     );
 }
 
-function PostRow({ post, pinned, boardId, boards, sort, now, moderator, avatars, onVisit, onRetryLocal, onDiscardLocal }: RowProps) {
+function PostRow({ post, pinned, boardId, boards, sort, now, moderator, avatars, onVisit, onRetryLocal, onDiscardLocal, onReport, reportMode }: RowProps) {
     return (
         <li className={`cm-row${pinned ? ' is-pin' : ''}${post.delivery ? ` is-${post.delivery}` : ''}`}>
             <span className="cm-row-board">
@@ -66,6 +71,7 @@ function PostRow({ post, pinned, boardId, boards, sort, now, moderator, avatars,
                     ? <span className="cm-title"><span className="t">{post.title}</span></span>
                     : <Link className="cm-title" to={communityPath({ board: boardId, sort, post: post.id })}><span className="t">{post.title}</span></Link>}
                 {post.comments > 0 ? <em className="cm-cmt">[{post.comments}]</em> : null}
+                {post.hasImage ? <i className="cm-pic-mark" role="img" aria-label="사진 있음">사진</i> : null}
                 {post.delivery === 'failed' && post.failure ? <span className="cm-row-fail" role="alert">{post.failure}</span> : null}
             </span>
             <span className="cm-row-author">
@@ -83,6 +89,9 @@ function PostRow({ post, pinned, boardId, boards, sort, now, moderator, avatars,
                     ? <button type="button" className="cm-visit" onClick={() => onVisit(post)}><b>{post.visits}</b>들르기</button>
                     : <StatusBadge board={post.board} status={post.status} />}
             </span>
+            <span className="cm-row-more">
+                {onReport && reportMode && reportMode(post) !== 'hidden' ? <RowMenu post={post} onReport={onReport} /> : null}
+            </span>
         </li>
     );
 }
@@ -99,11 +108,11 @@ function Skeleton() {
     );
 }
 
-function PostList({ title, note, boardId, boards, pinned, posts, total, page, totalPages, sort, loading, refreshing = false, local = [], onRetryLocal, onDiscardLocal, error, now = Date.now(), moderator = false, onVisit, onRetry }: Props) {
+function PostList({ title, note, boardId, boards, pinned, posts, total, page, totalPages, sort, loading, refreshing = false, local = [], onRetryLocal, onDiscardLocal, error, now = Date.now(), moderator = false, onVisit, onRetry, onReport, reportMode }: Props) {
     const empty = !loading && !error && local.length === 0 && pinned.length === 0 && posts.length === 0;
     // Photos fill in after the rows are drawn (letters first); the list never waits for them.
     const avatars = useAvatars([...local, ...pinned, ...posts].map((post) => post.avatarKey));
-    const rowProps = { boardId, boards, sort, now, moderator, avatars, onVisit };
+    const rowProps = { boardId, boards, sort, now, moderator, avatars, onVisit, onReport, reportMode };
     return (
         <section className="lp-box cm-board" aria-labelledby="cm-board-title">
             <div className="cm-board-head">
@@ -123,7 +132,7 @@ function PostList({ title, note, boardId, boards, pinned, posts, total, page, to
             </div>
             {note ? <p className="cm-note">{note}</p> : null}
             <div className="cm-thead" aria-hidden="true">
-                <span>게시판</span><span>제목</span><span>글쓴이</span><span>작성일</span><span className="cm-views">조회</span><span>좋아요</span><span />
+                <span>게시판</span><span>제목</span><span>글쓴이</span><span>작성일</span><span className="cm-views">조회</span><span>좋아요</span><span /><span />
             </div>
             {loading ? <Skeleton /> : null}
             {error ? (

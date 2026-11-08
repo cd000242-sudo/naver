@@ -2,7 +2,7 @@ import type { AuthorGrade } from '../../lib/communityData';
 import { noticeBadgeLabel } from '../../lib/accountModel.mjs';
 import { statusBadge } from '../../lib/communityModel.mjs';
 
-const GRADE_KEYS = new Set(['sprout', 'leaf', 'fruit', 'tree', 'forest']);
+const GRADE_KEYS = new Set(['associate', 'sprout', 'leaf', 'fruit', 'tree', 'forest']);
 
 /** Grade next to a nickname; the operator is always 숲 and also wears the staff mark. */
 export function GradeBadge({ grade, isOperator }: { grade: AuthorGrade | null; isOperator: boolean }) {

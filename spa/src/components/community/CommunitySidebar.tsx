@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { isAssociate } from '../../lib/communityLevel.mjs';
 import type { CommunityProfile } from '../../lib/communitySession';
 import { ALL_BOARD, GRADE_GUIDE, SCORE_RULES, communityPath, gradeProgress, type BoardConfig } from '../../lib/communityModel.mjs';
 import type { GradeEntry } from '../../lib/communityGrades.mjs';
@@ -34,9 +35,11 @@ function MyActivity({ profile }: { profile: CommunityProfile }) {
             {profile.role === 'owner' ? <p className="cm-me-score is-owner"><b>{progress.text}</b></p> : (
                 <>
                     <p className="cm-me-score"><b>{profile.score}점</b><span>{progress.text}</span></p>
-                    <div className="cm-bar" role="progressbar" aria-label="다음 등급까지" aria-valuemin={0} aria-valuemax={100} aria-valuenow={progress.percent}>
-                        <i style={{ width: `${progress.percent}%` }} />
-                    </div>
+                    {isAssociate(profile) ? null : (
+                        <div className="cm-bar" role="progressbar" aria-label="다음 등급까지" aria-valuemin={0} aria-valuemax={100} aria-valuenow={progress.percent}>
+                            <i style={{ width: `${progress.percent}%` }} />
+                        </div>
+                    )}
                 </>
             )}
             <dl className="cm-me-stats">

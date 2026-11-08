@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import type { ProfileDetail } from '../../lib/communityAccount';
 import { formatJoined, phoneStatus, roleLabel } from '../../lib/accountModel.mjs';
+import { isAssociate } from '../../lib/communityLevel.mjs';
 import { gradeProgress } from '../../lib/communityModel.mjs';
 import type { CommunityProfile } from '../../lib/communitySession';
 import { GradeBadge } from '../community/Badges';
+import LevelUpCard from '../community/LevelUpCard';
 import NicknameForm from '../community/NicknameForm';
 import AvatarEditor from './AvatarEditor';
 import PhoneVerifyForm from './PhoneVerifyForm';
@@ -51,11 +53,14 @@ function ProfileCard({ profile, detail, onChanged, onDetail }: Props) {
             {owner ? <p className="me-score is-owner"><b>{progress.text}</b></p> : (
                 <>
                     <p className="me-score"><b>{profile.score}점</b><span>{progress.text}</span></p>
-                    <div className="me-bar" role="progressbar" aria-label="다음 등급까지" aria-valuemin={0} aria-valuemax={100} aria-valuenow={progress.percent}>
-                        <i style={{ width: `${progress.percent}%` }} />
-                    </div>
+                    {isAssociate(profile) ? null : (
+                        <div className="me-bar" role="progressbar" aria-label="다음 등급까지" aria-valuemin={0} aria-valuemax={100} aria-valuenow={progress.percent}>
+                            <i style={{ width: `${progress.percent}%` }} />
+                        </div>
+                    )}
                 </>
             )}
+            <LevelUpCard profile={profile} />
             <dl className="me-stats">
                 <div><dt>내 글</dt><dd>{profile.activity.posts}</dd></div>
                 <div><dt>내 댓글</dt><dd>{profile.activity.comments}</dd></div>

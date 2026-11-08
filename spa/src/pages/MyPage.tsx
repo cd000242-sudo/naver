@@ -9,6 +9,7 @@ import { useSiteSession } from '../lib/useSiteSession';
 import '../styles/light-page.css';
 import '../components/auth/auth.css';
 import '../components/account/account.css';
+import '../components/community/community-forum.css';
 
 /**
  * /me — my profile and settings (reachable only with a site login: RequireLogin in App). The profile comes from the

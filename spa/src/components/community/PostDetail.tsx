@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { boardApi } from '../../lib/communityApi';
 import { normalizeComments, normalizePost, type CommentItem, type PostItem } from '../../lib/communityData';
 import { createLikeToggle } from '../../lib/communityLikeSync';
 import { communityPath, reportReasons, type BoardConfig } from '../../lib/communityModel.mjs';
 import { runOptimistic } from '../../lib/communityOptimistic';
 import { mergeServerComments } from '../../lib/communityOutbox';
+import { reportAction } from '../../lib/communityReport.mjs';
+import { loginPath } from '../../lib/siteAuthModel.mjs';
 import type { CommunityProfile } from '../../lib/communitySession';
 import CommentSection from './CommentSection';
 import PostAdminBar from './PostAdminBar';
@@ -33,6 +35,7 @@ type ReportInput = { reason: string; detail: string };
 
 /** One post with its comments: reads it, and carries the like / report / delete actions. */
 function PostDetail({ id, boards, boardId, profile, reportConfig, preview = null, onEdit, onDeleted, onVisit, onModerated }: Props) {
+    const navigate = useNavigate();
     const [post, setPost] = useState<PostItem | null>(null);
     const [comments, setComments] = useState<CommentItem[]>([]);
     const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
@@ -117,8 +120,12 @@ function PostDetail({ id, boards, boardId, profile, reportConfig, preview = null
             <Link className="cm-back" to={back}>← 목록으로</Link>
             {notice ? <p className="lp-note" role="status">{notice}</p> : null}
             <PostView post={post} boards={boards} busy={busy} onLike={like} onEdit={() => onEdit(post)}
-                onDelete={() => { void remove(); }} onVisit={() => onVisit(post)}
-                onReport={() => { setReportError(''); setReportDraft(undefined); setReport({ targetType: 'post', targetId: post.id }); }} />
+                onDelete={() => { void remove(); }} onVisit={() => onVisit(post)} reportMode={reportAction(post, profile)}
+                onReport={() => {
+                    // Nobody logged in: the report starts at the login page and comes back here.
+                    if (reportAction(post, profile) === 'login') { navigate(loginPath(communityPath({ board: boardId, post: post.id }))); return; }
+                    setReportError(''); setReportDraft(undefined); setReport({ targetType: 'post', targetId: post.id });
+                }} />
             <PostAdminBar post={post} boards={boards} profile={profile} onRemoved={onDeleted} onSaved={onModerated}
                 onChanged={(change) => setPost((current) => (current ? { ...current, ...change } : current))} />
             <CommentSection postId={post.id} comments={comments} profile={profile} onComments={setComments} onReload={load}
