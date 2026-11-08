@@ -35,6 +35,10 @@
 .cm-guide h2 { padding: 4px 0 8px; }
 .cm-guide li { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; padding: 5px 0; color: var(--lp-muted); }
 .cm-guide-reward { flex-basis: 100%; margin-top: 2px; font-size: 14px; color: var(--lp-faint); }
+.cm-guide-cond { color: var(--lp-brand); font-weight: 700; }
+.cm-guide-more { flex-basis: 100%; font-size: 14px; }
+.cm-guide-more summary { cursor: pointer; display: inline-flex; align-items: center; min-height: 36px; color: var(--lp-accent); font-weight: 700; }
+.cm-guide-more p { margin: 2px 0 6px; font-size: 14px; color: var(--lp-muted); line-height: 1.5; }
 .cm-me-score.is-owner b { font-size: 17px; }
 .cm-guide p { margin-top: 8px; font-size: 14px; color: var(--lp-faint); }
 

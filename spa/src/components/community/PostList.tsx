@@ -4,9 +4,11 @@ import {
     SORTS, boardLabel, communityPath, formatPostDate, pageNumbers,
     type BoardConfig, type SortKey,
 } from '../../lib/communityModel.mjs';
+import { pickRowThumb } from '../../lib/communityThumb.mjs';
 import { useAvatars } from '../../lib/useAvatars';
 import Avatar from './Avatar';
 import { GradeBadge, NoticeBadge, StatusBadge } from './Badges';
+import PostThumb from './PostThumb';
 import RowMenu from './RowMenu';
 
 type Props = {
@@ -58,8 +60,9 @@ function LocalState({ post, onRetryLocal, onDiscardLocal }: Pick<RowProps, 'post
 }
 
 function PostRow({ post, pinned, boardId, boards, sort, now, moderator, avatars, onVisit, onRetryLocal, onDiscardLocal, onReport, reportMode }: RowProps) {
+    const thumb = post.delivery ? null : pickRowThumb(post);
     return (
-        <li className={`cm-row${pinned ? ' is-pin' : ''}${post.delivery ? ` is-${post.delivery}` : ''}`}>
+        <li className={`cm-row${pinned ? ' is-pin' : ''}${post.delivery ? ` is-${post.delivery}` : ''}${thumb?.has ? ' has-thumb' : ''}`}>
             <span className="cm-row-board">
                 {pinned ? <span className="cm-pin">{boardLabel(post.board, boards)}</span> : boardLabel(post.board, boards)}
             </span>
@@ -92,6 +95,11 @@ function PostRow({ post, pinned, boardId, boards, sort, now, moderator, avatars,
             <span className="cm-row-more">
                 {onReport && reportMode && reportMode(post) !== 'hidden' ? <RowMenu post={post} onReport={onReport} /> : null}
             </span>
+            {thumb?.has ? (
+                <Link className="cm-row-thumb" to={communityPath({ board: boardId, sort, post: post.id })} tabIndex={-1} aria-hidden="true">
+                    <PostThumb postId={post.id} thumbId={thumb.id} thumbUrl={thumb.url} />
+                </Link>
+            ) : null}
         </li>
     );
 }
@@ -113,8 +121,10 @@ function PostList({ title, note, boardId, boards, pinned, posts, total, page, to
     // Photos fill in after the rows are drawn (letters first); the list never waits for them.
     const avatars = useAvatars([...local, ...pinned, ...posts].map((post) => post.avatarKey));
     const rowProps = { boardId, boards, sort, now, moderator, avatars, onVisit, onReport, reportMode };
+    // One more column at the right only when some row has a picture; a list of plain text rows looks as before.
+    const anyThumb = [...pinned, ...posts].some((post) => pickRowThumb(post).has);
     return (
-        <section className="lp-box cm-board" aria-labelledby="cm-board-title">
+        <section className={`lp-box cm-board${anyThumb ? ' has-thumbs' : ''}`} aria-labelledby="cm-board-title">
             <div className="cm-board-head">
                 <h2 id="cm-board-title">{title}</h2>
                 {loading ? null : <span className="cm-count">{total}개</span>}

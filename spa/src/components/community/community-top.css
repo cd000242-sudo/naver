@@ -1,0 +1,61 @@
+/* 인기글 grid of the community home (forum contract 1115 section B). Needs src/styles/light-page.css (.lp tokens). */
+.cm-top { padding: 20px 22px 22px; }
+.cm-top-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 14px; }
+.cm-top-head h2 { font-size: 24px; font-weight: 900; }
+.cm-top-head span { font-size: 15px; color: var(--lp-faint); }
+.cm-top-grid { display: grid; gap: 14px; }
+
+.cm-top-card { display: flex; flex-direction: column; min-width: 0; overflow: hidden; border: 1px solid var(--lp-line); border-radius: 12px; background: var(--lp-surface); }
+.cm-top-card:hover { border-color: var(--lp-line-strong); box-shadow: var(--lp-shadow); }
+.cm-top-media { position: relative; display: block; flex: 1 0 auto; aspect-ratio: 16 / 10; background: var(--lp-surface-2); }
+.cm-top-card.is-wide .cm-top-media { aspect-ratio: 2 / 1; }
+.cm-top-media .cm-thumb { position: absolute; inset: 0; border-radius: 0; }
+.cm-top-body { display: grid; gap: 6px; padding: 12px 14px 14px; }
+.cm-top-title { font-size: 17px; font-weight: 700; line-height: 1.4; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.cm-top-card:hover .cm-top-body .cm-top-title { text-decoration: underline; text-underline-offset: 3px; }
+.cm-top-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 12px; font-size: 14px; color: var(--lp-muted); }
+.cm-top-board { font-weight: 700; }
+.cm-top-stat { white-space: nowrap; }
+.cm-top-card.is-hero .cm-top-body .cm-top-title { font-size: 21px; }
+
+/* The tile of a post without a picture: its board colour and its title. */
+.cm-top-tile { position: absolute; inset: 0; display: flex; align-items: flex-end; padding: 52px 16px 14px; background: #eceee9; color: #3b4046; }
+.cm-top-tile .cm-top-title { font-size: 18px; font-weight: 900; line-height: 1.35; -webkit-line-clamp: 4; }
+.cm-top-card.is-hero .cm-top-tile { padding: 64px 22px 20px; }
+.cm-top-card.is-hero .cm-top-tile .cm-top-title { font-size: 26px; -webkit-line-clamp: 5; }
+.cm-top-tile.is-tone-notice { background: #fbf1d6; color: #5b4408; }
+.cm-top-tile.is-tone-news { background: #e3eefb; color: #1d3f6e; }
+.cm-top-tile.is-tone-request { background: #efe6fa; color: #46286e; }
+.cm-top-tile.is-tone-inquiry { background: #fbe9e5; color: #8f2a1a; }
+.cm-top-tile.is-tone-free { background: #e3f4ef; color: #0a5c4a; }
+.cm-top-tile.is-tone-promo { background: #fdeccf; color: #7a4a05; }
+
+/* Rank badges: 1 gold, 2 silver, 3 bronze. */
+.cm-top-rank { display: inline-grid; place-items: center; flex: none; min-width: 30px; height: 30px; padding: 0 6px; border-radius: 15px; font-size: 16px; font-weight: 900; line-height: 1; background: rgba(28, 32, 36, 0.78); color: #ffffff; }
+.cm-top-media .cm-top-rank { position: absolute; left: 10px; top: 10px; min-width: 38px; height: 38px; border-radius: 19px; font-size: 19px; box-shadow: 0 1px 4px rgba(20, 24, 28, 0.3); }
+.cm-top-card.is-hero .cm-top-media .cm-top-rank { left: 14px; top: 14px; min-width: 46px; height: 46px; border-radius: 23px; font-size: 24px; }
+.cm-top-rank.is-gold { background: #f5b40a; color: #1d1605; }
+.cm-top-rank.is-silver { background: #c9ced6; color: #1c2024; }
+.cm-top-rank.is-bronze { background: #c4793d; color: #ffffff; }
+
+/* Ranks 6-10: a numbered list, three then two in two columns. */
+.cm-top-list { display: grid; grid-auto-flow: column; grid-template-rows: repeat(3, auto); grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 28px; margin-top: 12px; }
+.cm-top-row { display: flex; align-items: center; gap: 12px; min-height: 54px; border-bottom: 1px solid var(--lp-line); font-size: 17px; }
+.cm-top-row .cm-top-rank { min-width: 30px; height: 30px; font-size: 15px; }
+.cm-top-row .t { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500; }
+.cm-top-row:hover .t { text-decoration: underline; text-underline-offset: 3px; }
+.cm-top-row em { flex: none; font-style: normal; font-size: 14px; font-weight: 700; color: var(--lp-danger); }
+
+@media (max-width: 720px) {
+    .cm-top { padding: 16px; }
+    .cm-top-head h2 { font-size: 22px; }
+    .cm-top-grid { gap: 10px; }
+    .cm-top-body { padding: 10px 12px 12px; }
+    .cm-top-title { font-size: 16px; }
+    .cm-top-card.is-hero .cm-top-body .cm-top-title { font-size: 19px; }
+    .cm-top-tile { padding: 48px 12px 12px; }
+    .cm-top-tile .cm-top-title { font-size: 16px; -webkit-line-clamp: 4; }
+    .cm-top-card.is-hero .cm-top-tile .cm-top-title { font-size: 22px; }
+    .cm-top-media .cm-top-rank { left: 8px; top: 8px; min-width: 34px; height: 34px; border-radius: 17px; font-size: 17px; }
+    .cm-top-list { grid-auto-flow: row; grid-template-rows: none; grid-template-columns: minmax(0, 1fr); }
+}

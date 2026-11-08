@@ -5,6 +5,8 @@ import { associateWriteState, isAssociate } from '../../lib/communityLevel.mjs';
 import { BODY_MAX, TITLE_MAX, canWriteBoard, validatePostDraft, writableBoards, writeBlockedHint, type BoardConfig } from '../../lib/communityModel.mjs';
 import { checkRichDraft, parseRichBody, richPlainText, serializeRichDoc } from '../../lib/communityRich.mjs';
 import type { CommunityProfile } from '../../lib/communitySession';
+import { forgetThumbs } from '../../lib/communityThumbFetch';
+import { buildThumb } from '../../lib/communityThumbMake';
 import LevelUpCard from './LevelUpCard';
 import NicknameForm from './NicknameForm';
 import PromoFields, { usePromoDraft } from './PromoFields';
@@ -87,16 +89,20 @@ function PostWriteForm({ boards, defaultBoard, defaultPlatform, profile, onDone,
             || (written ? checkRichDraft(written.blocks) : '');
         if (problem) { setError(problem); return; }
         setError('');
+        setBusy(true);
+        // The thumbnail of the first picture rides along (never blocks the post: no thumbnail is better than no post).
+        const thumb = written ? await buildThumb({ blocks: written.blocks, images: written.images, editing }) : undefined;
         const draft: PostDraft = {
             board: boardId, title: title.trim(), body: written ? serializeRichDoc(written.blocks) : body.trim(), url: promoDraft.url.trim(),
             ...(promo ? { platform: promoDraft.platform } : {}), ...(written ? { format: 'rich' as const, images: written.images } : {}),
+            ...(thumb ? { thumb } : {}),
         };
-        if (!editing && onSubmitNew) { onSubmitNew(draft); return; }
-        setBusy(true);
+        if (!editing && onSubmitNew) { setBusy(false); onSubmitNew(draft); return; }
         const result = editing
-            ? await boardApi.updatePost(editing.id, { title: draft.title, body: draft.body, promo, images: draft.images })
+            ? await boardApi.updatePost(editing.id, { title: draft.title, body: draft.body, promo, images: draft.images, thumb: draft.thumb })
             : await boardApi.writePost(draft);
         setBusy(false);
+        if (editing && result.ok) forgetThumbs(editing.id);
         if (result.ok) onDone(normalizePost((result as { post?: unknown }).post));
         else setError(result.message);
     };

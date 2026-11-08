@@ -8,6 +8,7 @@
 
 import { clearFeedCache } from './communityFeedCache';
 import { isAvatarKey } from './communityAvatarModel.mjs';
+import { pickForest, type Forest } from './communityForest.mjs';
 import { FOREST_GRADE, normalizeRewards } from './communityGrades.mjs';
 import { ASSOCIATE_GRADE, normalizeLevel, normalizeLevelUp, type LevelKey, type LevelUpFlags } from './communityLevel.mjs';
 
@@ -57,6 +58,8 @@ export type CommunityProfile = {
     level: LevelKey;
     /** Done flags of the two conditions for [등업 신청] (an associate's checklist). */
     levelUp: LevelUpFlags;
+    /** Progress toward 숲 (likes received, weeks in the weekly top); null when the server sends none. */
+    forest: Forest | null;
 };
 
 export type CommunitySession = CommunityProfile & {
@@ -109,6 +112,7 @@ export function normalizeProfile(payload: Record<string, unknown>): CommunityPro
         rewards: normalizeRewards(payload.rewards) as CommunityReward[],
         level,
         levelUp: normalizeLevelUp(payload.levelUp),
+        forest: pickForest(payload.forest),
     };
 }
 

@@ -13,7 +13,7 @@ test('first screen: ONE call (community-feed) carries the list, settings, weekly
         assert.deepEqual(browser.actions(), ['community-feed'], 'exactly one server call');
         assert.deepEqual(
             { board: browser.calls[0].board, sort: browser.calls[0].sort, page: browser.calls[0].page, pageSize: browser.calls[0].pageSize, weeklyLimit: browser.calls[0].weeklyLimit, token: browser.calls[0].communityToken },
-            { board: 'all', sort: 'latest', page: 1, pageSize: 20, weeklyLimit: 6, token: 'ct_member_secret' },
+            { board: 'all', sort: 'latest', page: 1, pageSize: 20, weeklyLimit: 10, token: 'ct_member_secret' },
         );
         const { bundle } = result;
         assert.deepEqual(bundle.posts.map((post) => post.id), ['p1', 'p2']);

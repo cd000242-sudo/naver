@@ -14,7 +14,7 @@ export type ProfileLike = { role?: string; canWriteNews?: boolean; score?: numbe
 
 export const BOARD_ORDER: readonly BoardId[];
 export const SORTS: readonly Readonly<{ key: SortKey; label: string }>[];
-export const GRADE_GUIDE: readonly Readonly<{ key: string; label: string; min: number; range: string; reward: string }>[];
+export const GRADE_GUIDE: readonly Readonly<{ key: string; label: string; min: number; range: string; reward: string; condition: string; conditionDetail: string }>[];
 export const SCORE_RULES: string;
 export const NOTICE_WRITE_HINT: string;
 export const TITLE_MAX: number;

@@ -10,6 +10,7 @@ import NicknameForm from '../components/community/NicknameForm';
 import PostDetail from '../components/community/PostDetail';
 import PostList from '../components/community/PostList';
 import PostWriteForm from '../components/community/PostWriteForm';
+import TopGrid from '../components/community/TopGrid';
 import WeeklyTop from '../components/community/WeeklyTop';
 import { REPORTS_PATH, REWARDS_PATH, canModerate, isReportsView, isRewardsView } from '../lib/accountModel.mjs';
 import { gradeGuide, scoreRulesText } from '../lib/communityGrades.mjs';
@@ -170,7 +171,11 @@ function CommunityPage() {
                     ) : null}
                     {showList ? (
                         <>
-                            {view.page === 1 && feed.status !== 'loading' ? <WeeklyTop posts={weekly} boardId={view.board} /> : null}
+                            {view.page === 1 && feed.status !== 'loading'
+                                ? view.board === ALL_BOARD
+                                    ? <TopGrid posts={weekly} boardId={view.board} boards={boards} />
+                                    : <WeeklyTop posts={weekly.slice(0, 6)} boardId={view.board} />
+                                : null}
                             <PostList title={title} note={note} boardId={view.board} boards={boards} pinned={feed.pinned} posts={feed.posts}
                                 total={feed.total} page={view.page} totalPages={feed.totalPages} sort={view.sort}
                                 loading={feed.status === 'loading'} refreshing={feed.refreshing} error={feed.status === 'error' ? feed.message : ''}

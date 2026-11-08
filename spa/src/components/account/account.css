@@ -16,6 +16,11 @@
 .me-score b { font-size: 26px; font-weight: 900; }
 .me-score span { font-size: 16px; color: var(--lp-muted); }
 .me-score.is-owner b { font-size: 20px; }
+.me-forest { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; padding: 12px 14px; border-radius: 12px; background: var(--lp-brand-soft); font-size: 16px; }
+.me-forest span { font-size: 15px; font-weight: 700; color: var(--lp-brand); }
+.me-forest b { font-weight: 700; }
+.me-forest i { font-style: normal; }
+.me-forest i.is-done { color: var(--lp-accent); font-weight: 900; }
 .me-avatar { display: flex; align-items: center; gap: 16px; }
 .me-avatar .cm-avatar { margin-right: 0; }
 .me-avatar-side { display: grid; gap: 6px; min-width: 0; }

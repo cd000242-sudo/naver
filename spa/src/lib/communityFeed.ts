@@ -27,8 +27,8 @@ export type FeedLoad =
 /** Which extras the old way must fetch (the one-call way always brings them). */
 export type LegacyWants = { config: boolean; weekly: boolean };
 
-/** The weekly top is as long as the old screen asked for. */
-const WEEKLY_LIMIT = 6;
+/** The weekly top is as long as the 인기글 grid needs: ten places (forum contract 1115 section B). */
+const WEEKLY_LIMIT = 10;
 const UNSUPPORTED_MEMORY_MS = 5 * 60 * 1000;
 const UNSUPPORTED_KEY = 'leaderspro.community.feed.v1:unsupported';
 let unsupportedUntil = 0;
@@ -83,7 +83,7 @@ async function loadLegacy(view: FeedView, wants: LegacyWants): Promise<FeedLoad>
     const boards = view.board === ALL_BOARD ? BOARD_ORDER.filter((id) => id !== NOTICE_BOARD) : [view.board];
     const [settings, weekly, ...lists] = await Promise.all([
         wants.config ? boardApi.boards() : Promise.resolve(null),
-        wants.weekly ? boardApi.weeklyTop(6) : Promise.resolve(null),
+        wants.weekly ? boardApi.weeklyTop(WEEKLY_LIMIT) : Promise.resolve(null),
         ...boards.map((board) => boardApi.posts({ board, sort: view.sort, page: view.board === ALL_BOARD ? 1 : view.page, platform: view.platform })),
     ]);
     const failed = lists.find((result) => !result.ok);

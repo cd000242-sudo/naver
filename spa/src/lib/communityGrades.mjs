@@ -3,7 +3,10 @@
  * `grades` and `scoreRules`); the table below is what is drawn when the server sends none. Pure data and functions.
  */
 
-const entry = (key, label, min, range, reward) => Object.freeze({ key, label, min, range, reward });
+import { forestGuideDetail, forestGuideLine, pickForestExtra } from './communityForest.mjs';
+
+/** `condition` is the extra requirement line drawn under a grade and `conditionDetail` its folded explanation ('' = none; only 숲 has them, see communityForest.mjs). */
+const entry = (key, label, min, range, reward, condition = '', conditionDetail = '') => Object.freeze({ key, label, min, range, reward, condition, conditionDetail });
 
 /** 새싹 0 · 잎새 300 · 열매 1,500 · 나무 5,000 · 숲 15,000 (the owner's thresholds), one reward line each. */
 export const GRADE_TABLE = Object.freeze([
@@ -11,6 +14,7 @@ export const GRADE_TABLE = Object.freeze([
     entry('leaf', '잎새', 300, '300~1,499점', '올인원 3일'),
     entry('fruit', '열매', 1500, '1,500~4,999점', '올인원 7일'),
     entry('tree', '나무', 5000, '5,000~14,999점', '올인원 30일(확인 후 지급)'),
+    // The extra conditions are the server's numbers (`extra` on its 숲 row); this table carries none of its own.
     entry('forest', '숲', 15000, '15,000점~', '올인원 1년(확인 후 지급)'),
 ]);
 
@@ -45,11 +49,11 @@ function pickReward(raw) {
 export function pickGrades(raw) {
     const seen = new Set();
     const list = (Array.isArray(raw) ? raw : [])
-        .map((item) => ({ key: text(item?.key), label: text(item?.label), min: Number(item?.min), reward: pickReward(item?.reward) }))
+        .map((item) => ({ key: text(item?.key), label: text(item?.label), min: Number(item?.min), reward: pickReward(item?.reward), extra: pickForestExtra(item?.extra) }))
         .filter((item) => /^[a-z]{2,20}$/.test(item.key) && item.label && Number.isFinite(item.min) && item.min >= 0)
         .filter((item) => (seen.has(item.key) ? false : seen.add(item.key)))
         .sort((a, b) => a.min - b.min)
-        .map((item) => ({ key: item.key, label: item.label, min: Math.floor(item.min), reward: item.reward }));
+        .map((item) => ({ key: item.key, label: item.label, min: Math.floor(item.min), reward: item.reward, ...(item.extra ? { extra: item.extra } : {}) }));
     return list.length >= 2 ? list : [];
 }
 
@@ -60,7 +64,8 @@ export function gradeGuide(config) {
     return list.map((item, index) => {
         const next = list[index + 1];
         const range = next ? `${grouped(item.min)}~${grouped(next.min - 1)}점` : `${grouped(item.min)}점~`;
-        return entry(item.key, item.label, item.min, range, rewardText(item.reward));
+        const forest = item.key === 'forest';
+        return entry(item.key, item.label, item.min, range, rewardText(item.reward), forest ? forestGuideLine(item.min, item.extra) : '', forest ? forestGuideDetail(item.extra) : '');
     });
 }
 

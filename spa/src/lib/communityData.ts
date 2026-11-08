@@ -6,6 +6,7 @@
 import { isNoticeId, noticeBadgeLabel } from './accountModel.mjs';
 import { isAvatarKey } from './communityAvatarModel.mjs';
 import { NOTICE_BOARD } from './communityContract.mjs';
+import { normalizeThumbId } from './communityThumb.mjs';
 
 export type AuthorGrade = { key: string; label: string };
 
@@ -51,6 +52,12 @@ export type PostItem = {
     imageIds: string[];
     /** Lists only: the post has at least one picture. */
     hasImage: boolean;
+    /** Lists only: the picture id to draw as the row's thumbnail ('_thumb' when one is stored, else the first picture); '' when none. */
+    thumbId: string;
+    /** Promo rows only: an https picture address the server already knew; '' when none. */
+    thumbUrl: string;
+    /** Weekly top only: 1-based place in the ranking; 0 when the row is not ranked. */
+    rank: number;
     /** Set only on a row the reader just wrote and the server has not confirmed: sending, or failed (with `failure`). */
     delivery?: 'sending' | 'failed';
     failure?: string;
@@ -101,6 +108,12 @@ export function safeHttpUrl(value: unknown): string {
     }
 }
 
+/** Only https addresses survive (a picture address is loaded by the browser, so plain http is refused too). */
+const httpsOnly = (value: unknown): string => {
+    const url = safeHttpUrl(value);
+    return url.startsWith('https:') ? url : '';
+};
+
 function toGrade(value: unknown): AuthorGrade | null {
     const source = record(value);
     const label = text(source.label);
@@ -146,6 +159,9 @@ export function normalizePost(raw: unknown): PostItem | null {
         format: source.format === 'rich' ? 'rich' : '',
         imageIds: (Array.isArray(source.imageIds) ? source.imageIds : []).filter((id): id is string => typeof id === 'string' && IMAGE_ID.test(id)),
         hasImage: source.hasImage === true,
+        thumbId: normalizeThumbId(source.thumbId),
+        thumbUrl: httpsOnly(source.thumbUrl),
+        rank: count(source.rank),
     };
 }
 

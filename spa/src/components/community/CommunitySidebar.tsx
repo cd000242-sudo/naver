@@ -81,6 +81,13 @@ function CommunitySidebar({ profile, boards, boardId, counts, grades = GRADE_GUI
                         <li key={grade.key}>
                             <span className={`lp-grade lp-g-${grade.key}`}>{grade.label}</span><span>{grade.range}</span>
                             {grade.reward ? <small className="cm-guide-reward">{grade.reward}</small> : null}
+                            {grade.condition ? <small className="cm-guide-reward cm-guide-cond">{grade.condition}</small> : null}
+                            {grade.conditionDetail ? (
+                                <details className="cm-guide-more">
+                                    <summary>설명 보기</summary>
+                                    <p>{grade.conditionDetail}</p>
+                                </details>
+                            ) : null}
                         </li>
                     ))}
                 </ul>

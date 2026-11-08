@@ -75,15 +75,18 @@ export type PostDraft = {
     /** 'rich' = `body` is the block JSON of the new editor. */
     format?: 'rich';
     images?: UploadImage[];
+    /** Thumbnail of the first picture: base64 JPEG (forum contract 1115 section A). */
+    thumb?: string;
 };
 
 /** The promo board lists one platform at a time; every other board has no platform. */
 const platformField = (board: string, platform?: string): Record<string, string> => (board === 'promo' ? { platform: normalizePlatform(platform) } : {});
 
-/** Rich fields of a send: the format and the pictures (left out when there are none). */
-const richFields = (draft: { format?: 'rich'; images?: UploadImage[] }): Record<string, unknown> => ({
+/** Rich fields of a send: the format, the pictures and the thumbnail (each left out when there is none). */
+const richFields = (draft: { format?: 'rich'; images?: UploadImage[]; thumb?: string }): Record<string, unknown> => ({
     ...(draft.format === 'rich' ? { format: 'rich' } : {}),
     ...(draft.images && draft.images.length > 0 ? { images: draft.images } : {}),
+    ...(draft.thumb ? { thumb: draft.thumb } : {}),
 });
 export type ReportInput = { targetType: 'post' | 'comment'; targetId: string; reason: string; detail?: string };
 
@@ -94,7 +97,7 @@ export const boardApi = {
         return callWithToken('community-posts', { pageSize: 20, ...rest, ...platformField(query.board, platform) });
     },
     post: (id: string) => callWithToken('community-post', { id }),
-    weeklyTop: (limit = 6) => callWithToken('community-weekly-top', { limit }),
+    weeklyTop: (limit = 10) => callWithToken('community-weekly-top', { limit }),
     /** Pass the same `requestId` when sending again: the server then answers with the first post instead of making a twin. */
     writePost: (draft: PostDraft, requestId: string = newRequestId()): Promise<ApiResult> => (draft.board === NOTICE_BOARD
         // Notices are written in the admin home; nothing is sent from here.
@@ -104,11 +107,11 @@ export const boardApi = {
             title: draft.title,
             ...(draft.board === 'promo'
                 ? { url: draft.url, ...platformField('promo', draft.platform), summary: draft.body }
-                : { body: draft.body, ...richFields(draft) }),
+                : { body: draft.body, ...richFields({ ...draft, thumb: draft.format === 'rich' ? draft.thumb : undefined }) }),
             requestId,
         })),
-    updatePost: (id: string, draft: { title: string; body: string; promo: boolean; images?: UploadImage[] }) => callWithToken('community-post-update', {
-        id, title: draft.title, ...(draft.promo ? { summary: draft.body } : { body: draft.body, ...richFields({ images: draft.images }) }),
+    updatePost: (id: string, draft: { title: string; body: string; promo: boolean; images?: UploadImage[]; thumb?: string }) => callWithToken('community-post-update', {
+        id, title: draft.title, ...(draft.promo ? { summary: draft.body } : { body: draft.body, ...richFields({ images: draft.images, thumb: draft.thumb }) }),
     }),
     /** 준회원 → 새싹. The answer is `{ ok, level }`, or `LEVEL_UP_NOT_READY` with `need` (true = still missing). */
     levelUp: () => callWithToken(COMMUNITY_ACTIONS.levelUp),

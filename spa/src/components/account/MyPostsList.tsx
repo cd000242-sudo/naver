@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import { listMyPosts } from '../../lib/communityAccount';
 import type { PostItem } from '../../lib/communityData';
 import { boardLabel, boardList, communityPath, formatPostDate, pageNumbers } from '../../lib/communityModel.mjs';
+import { pickRowThumb } from '../../lib/communityThumb.mjs';
 import { StatusBadge } from '../community/Badges';
+import PostThumb from '../community/PostThumb';
 
 type ListProps = {
     posts: PostItem[];
@@ -36,16 +38,24 @@ export function MyPostsList({ posts, page, totalPages, total, loading, error, on
                 </div>
             ) : null}
             <ul className="me-post-list">
-                {posts.map((post) => (
-                    <li key={post.id} className="me-post">
-                        <span className="me-post-head">
-                            <Link className="me-post-title" to={communityPath({ board: post.board, post: post.id })}>{post.title}</Link>
-                            {post.comments > 0 ? <em className="me-cmt">[{post.comments}]</em> : null}
-                        </span>
-                        <span className="me-post-meta">{boardLabel(post.board, BOARDS)} · {formatPostDate(post.createdAt)}</span>
-                        <StatusBadge board={post.board} status={post.status} />
-                    </li>
-                ))}
+                {posts.map((post) => {
+                    const thumb = pickRowThumb(post);
+                    return (
+                        <li key={post.id} className={`me-post${thumb.has ? ' has-thumb' : ''}`}>
+                            <span className="me-post-head">
+                                <Link className="me-post-title" to={communityPath({ board: post.board, post: post.id })}>{post.title}</Link>
+                                {post.comments > 0 ? <em className="me-cmt">[{post.comments}]</em> : null}
+                            </span>
+                            <span className="me-post-meta">{boardLabel(post.board, BOARDS)} · {formatPostDate(post.createdAt)}</span>
+                            <StatusBadge board={post.board} status={post.status} />
+                            {thumb.has ? (
+                                <Link className="me-post-thumb" to={communityPath({ board: post.board, post: post.id })} tabIndex={-1} aria-hidden="true">
+                                    <PostThumb postId={post.id} thumbId={thumb.id} thumbUrl={thumb.url} />
+                                </Link>
+                            ) : null}
+                        </li>
+                    );
+                })}
             </ul>
             {total > 0 ? <p className="me-total">모두 {total}개</p> : null}
             {totalPages > 1 ? (

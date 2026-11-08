@@ -1,4 +1,4 @@
-export type GradeEntry = Readonly<{ key: string; label: string; min: number; range: string; reward: string }>;
+export type GradeEntry = Readonly<{ key: string; label: string; min: number; range: string; reward: string; condition: string; conditionDetail: string }>;
 export type ServerReward = { days: number; mode: 'auto' | 'approval' } | null;
 export type ScoreRules = { post: number; comment: number; visit: number; likeReceived: number; dailyCap: number };
 export type RewardStatus = 'granted' | 'pending' | 'approved' | 'rejected';
@@ -10,7 +10,7 @@ export const FOREST_GRADE: Readonly<{ key: 'forest'; label: string; min: number;
 export const OWNER_GRADE_TEXT: string;
 export const SCORE_RULES: string;
 export function rewardText(reward: { days?: unknown; mode?: unknown } | null | undefined): string;
-export function pickGrades(raw: unknown): Array<{ key: string; label: string; min: number; reward: ServerReward }>;
+export function pickGrades(raw: unknown): Array<{ key: string; label: string; min: number; reward: ServerReward; extra?: { likesMin: number; topsMin: number; topLikesMin: number } }>;
 export function gradeGuide(config: { grades?: unknown } | null | undefined): readonly GradeEntry[];
 export function pickScoreRules(raw: unknown): ScoreRules | null;
 export function scoreRulesText(raw: unknown): string;

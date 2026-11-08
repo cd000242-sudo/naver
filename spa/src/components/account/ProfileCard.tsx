@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { ProfileDetail } from '../../lib/communityAccount';
 import { formatJoined, phoneStatus, roleLabel } from '../../lib/accountModel.mjs';
+import { forestProgress } from '../../lib/communityForest.mjs';
 import { isAssociate } from '../../lib/communityLevel.mjs';
 import { gradeProgress } from '../../lib/communityModel.mjs';
 import type { CommunityProfile } from '../../lib/communitySession';
@@ -29,6 +30,8 @@ function ProfileCard({ profile, detail, onChanged, onDetail }: Props) {
     const joined = formatJoined(detail?.createdAt);
     // The owner is 숲, the top grade: no bar, no next grade, no rewards to earn.
     const owner = profile.role === 'owner';
+    // 숲 also needs likes from others and weeks in the weekly top: shown from 나무 (5,000 points) on.
+    const forest = forestProgress(profile);
 
     return (
         <section className="lp-box me-card" aria-labelledby="me-profile-title">
@@ -60,6 +63,12 @@ function ProfileCard({ profile, detail, onChanged, onDetail }: Props) {
                     )}
                 </>
             )}
+            {forest ? (
+                <p className="me-forest" aria-label="숲 조건">
+                    <span>숲 조건</span>
+                    <b><i className={forest.likesDone ? 'is-done' : undefined}>{forest.likesText}</i> · <i className={forest.topsDone ? 'is-done' : undefined}>{forest.topsText}</i></b>
+                </p>
+            ) : null}
             <LevelUpCard profile={profile} />
             <dl className="me-stats">
                 <div><dt>내 글</dt><dd>{profile.activity.posts}</dd></div>

@@ -1,0 +1,37 @@
+/* Picture of a list row (right end) and of the "my posts" rows. Needs src/styles/light-page.css (.lp tokens). */
+.cm-thumb { position: relative; display: block; width: 100%; height: 100%; overflow: hidden; border-radius: 10px; background: var(--lp-surface-2); }
+.cm-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.cm-thumb.is-failed { visibility: hidden; }
+
+/*
+ * A list where at least one row has a picture is drawn like a community-site list: the title on the first line, the
+ * small facts on the line below, the picture at the right end. (The table columns leave too little room for the title
+ * once a picture column is added.) Rows without a picture keep the same shape, they just have nothing at the right.
+ * Phones already draw rows this way (community.css), so only the picture is placed there.
+ */
+.cm-row-thumb { position: absolute; right: 22px; top: 14px; display: block; width: 72px; height: 72px; }
+.cm-row.has-thumb { min-height: 100px; }
+.cm-row.has-thumb .cm-pic-mark { display: none; }
+
+@media (min-width: 721px) {
+    .has-thumbs .cm-thead { display: none; }
+    .has-thumbs .cm-row { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; padding: 14px 22px; min-height: 0; }
+    .has-thumbs .cm-row.has-thumb { padding-right: 112px; min-height: 100px; }
+    .has-thumbs .cm-row-title { order: -1; flex: 1 1 100%; display: block; }
+    .has-thumbs .cm-title .t { display: inline; -webkit-line-clamp: unset; }
+    .has-thumbs .cm-cmt { margin-left: 6px; }
+    .has-thumbs .cm-row-author { font-size: 14px; }
+    .has-thumbs .cm-row-time, .has-thumbs .cm-row-num { font-size: 14px; }
+    .has-thumbs .cm-row-num i { display: inline; font-style: normal; margin-right: 3px; }
+    .has-thumbs .cm-views { display: block; }
+    .has-thumbs .cm-row-end { margin-left: auto; }
+    .has-thumbs .cm-row-more { margin-left: 0; }
+}
+@media (max-width: 720px) {
+    .cm-row.has-thumb { position: relative; padding-right: 96px; min-height: 92px; }
+    .cm-row-thumb { right: 16px; width: 64px; height: 64px; }
+}
+
+/* My posts */
+.me-post.has-thumb { grid-template-columns: minmax(0, 1fr) auto 64px; }
+.me-post-thumb { grid-column: 3; grid-row: 1 / span 2; display: block; width: 64px; height: 64px; }
