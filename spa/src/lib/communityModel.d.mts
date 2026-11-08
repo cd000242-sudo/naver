@@ -2,7 +2,7 @@ export type BoardId = 'notice' | 'news' | 'request' | 'inquiry' | 'free' | 'prom
 export type BoardConfig = Readonly<{
     id: BoardId;
     label: string;
-    writeRole: 'member' | 'operator';
+    writeRole: 'member' | 'operator' | 'admin';
     dailyLimit: number;
     statuses: readonly string[];
     defaultStatus: string;
@@ -14,7 +14,7 @@ export type ProfileLike = { role?: string; canWriteNews?: boolean; score?: numbe
 
 export const BOARD_ORDER: readonly BoardId[];
 export const SORTS: readonly Readonly<{ key: SortKey; label: string }>[];
-export const GRADE_GUIDE: readonly Readonly<{ key: string; label: string; range: string }>[];
+export const GRADE_GUIDE: readonly Readonly<{ key: string; label: string; min: number; range: string; reward: string }>[];
 export const SCORE_RULES: string;
 export const NOTICE_WRITE_HINT: string;
 export const TITLE_MAX: number;
@@ -26,6 +26,7 @@ export function boardLabel(id: string, boards?: readonly BoardConfig[]): string;
 export function normalizeSort(value: unknown): SortKey;
 export function statusBadge(boardId: string, status: unknown): { tone: 'wait' | 'done' | 'review'; label: string } | null;
 export function canWriteBoard(target: BoardConfig | undefined, profile: ProfileLike): boolean;
+export function showWriteButton(boardId: string, boards: readonly BoardConfig[]): boolean;
 export function isNoticePost(post: unknown): boolean;
 export function splitNoticePosts<T>(posts: readonly T[] | null | undefined): { notice: T[]; rest: T[] };
 export function writeBlockedHint(boardId: string, profile: ProfileLike): string;

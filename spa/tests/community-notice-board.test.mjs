@@ -4,7 +4,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
-    BOARD_ORDER, boardList, boardLabel, canWriteBoard, writableBoards, validatePostDraft, communityPath, parseCommunityQuery,
+    BOARD_ORDER, boardList, showWriteButton, boardLabel, canWriteBoard, writableBoards, validatePostDraft, communityPath, parseCommunityQuery,
     isNoticePost, splitNoticePosts, writeBlockedHint, NOTICE_WRITE_HINT,
 } from '../src/lib/communityModel.mjs';
 import { NOTICE_BOARD } from '../src/lib/communityContract.mjs';
@@ -45,6 +45,19 @@ test('nobody writes on 공지사항, not even the owner; 최근 소식 stays own
     assert.equal(canWriteBoard(byId.news, member), false);
     assert.deepEqual(writableBoards(boards, owner).map((board) => board.id), ['news', 'request', 'inquiry', 'free', 'promo']);
     assert.deepEqual(writableBoards(boards, member).map((board) => board.id), ['request', 'inquiry', 'free', 'promo']);
+});
+
+test('the server says notice is writeRole "admin": the board keeps it, nobody can write, and the 글쓰기 button is hidden there', () => {
+    const fromServer = boardList({ boards: [{ id: 'notice', label: '공지사항', writeRole: 'admin', dailyLimit: 0 }, { id: 'news', writeRole: 'operator' }] });
+    const byId = Object.fromEntries(fromServer.map((board) => [board.id, board]));
+    assert.equal(byId.notice.writeRole, 'admin');
+    assert.equal(boardList(null).find((board) => board.id === 'notice').writeRole, 'admin', 'the built-in board says the same');
+    assert.equal(canWriteBoard(byId.notice, owner), false);
+    assert.equal(canWriteBoard(byId.notice, { role: 'owner', canWriteNews: true, isOperator: true }), false);
+    assert.equal(showWriteButton('notice', fromServer), false);
+    assert.equal(showWriteButton('notice', boardList(null)), false);
+    for (const id of ['all', 'news', 'request', 'inquiry', 'free', 'promo']) assert.equal(showWriteButton(id, fromServer), true, id);
+    assert.equal(showWriteButton('news', boardList({ boards: [{ id: 'news', writeRole: 'admin' }] })), false, 'any board a server closes to admins loses the button');
 });
 
 test('writing to 공지사항 is refused with one clear sentence', () => {

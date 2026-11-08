@@ -33,7 +33,9 @@
 .cm-tab em { font-style: normal; font-size: 14px; color: var(--lp-faint); font-weight: 500; }
 .cm-guide { padding: 14px 20px 18px; font-size: 15px; }
 .cm-guide h2 { padding: 4px 0 8px; }
-.cm-guide li { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; color: var(--lp-muted); }
+.cm-guide li { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; padding: 5px 0; color: var(--lp-muted); }
+.cm-guide-reward { flex-basis: 100%; margin-top: 2px; font-size: 14px; color: var(--lp-faint); }
+.cm-me-score.is-owner b { font-size: 17px; }
 .cm-guide p { margin-top: 8px; font-size: 14px; color: var(--lp-faint); }
 
 .cm-htabs { display: none; gap: 8px; overflow-x: auto; padding: 2px 2px 6px; scrollbar-width: none; }

@@ -1,8 +1,10 @@
 export const FEED_PAGE_SIZE: number;
 export type FeedVerdict = 'use' | 'unsupported' | 'fatal' | 'retry-legacy';
 export type FeedConfig = {
-    boards: Array<{ id: string; label?: string; writeRole?: 'member' | 'operator'; dailyLimit?: number; statuses?: string[]; defaultStatus?: string }>;
+    boards: Array<{ id: string; label?: string; writeRole?: 'member' | 'operator' | 'admin'; dailyLimit?: number; statuses?: string[]; defaultStatus?: string }>;
     reportReasons: Array<{ key: string; label: string }>;
+    grades: Array<{ key: string; label: string; min: number; reward: { days: number; mode: 'auto' | 'approval' } | null }>;
+    scoreRules: { post: number; comment: number; visit: number; likeReceived: number; dailyCap: number } | null;
 };
 export function judgeFeedReply(result: unknown): FeedVerdict;
 export function pickCounts(raw: unknown): Record<string, number>;

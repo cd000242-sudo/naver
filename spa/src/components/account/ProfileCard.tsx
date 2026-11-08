@@ -6,6 +6,7 @@ import type { CommunityProfile } from '../../lib/communitySession';
 import { GradeBadge } from '../community/Badges';
 import NicknameForm from '../community/NicknameForm';
 import PhoneVerifyForm from './PhoneVerifyForm';
+import RewardStatus from './RewardStatus';
 
 type Props = {
     profile: CommunityProfile;
@@ -23,6 +24,8 @@ function ProfileCard({ profile, detail, onChanged, onDetail }: Props) {
     const progress = gradeProgress(profile);
     const phone = phoneStatus(detail);
     const joined = formatJoined(detail?.createdAt);
+    // The owner is 숲, the top grade: no bar, no next grade, no rewards to earn.
+    const owner = profile.role === 'owner';
 
     return (
         <section className="lp-box me-card" aria-labelledby="me-profile-title">
@@ -43,15 +46,21 @@ function ProfileCard({ profile, detail, onChanged, onDetail }: Props) {
             {editing ? (
                 <NicknameForm initial={profile.nickname} submitLabel="이 닉네임으로 바꾸기" onDone={() => { setEditing(false); onChanged(); }} />
             ) : null}
-            <p className="me-score"><b>{profile.score}점</b><span>{progress.text}</span></p>
-            <div className="me-bar" role="progressbar" aria-label="다음 등급까지" aria-valuemin={0} aria-valuemax={100} aria-valuenow={progress.percent}>
-                <i style={{ width: `${progress.percent}%` }} />
-            </div>
+            {owner ? <p className="me-score is-owner"><b>{progress.text}</b></p> : (
+                <>
+                    <p className="me-score"><b>{profile.score}점</b><span>{progress.text}</span></p>
+                    <div className="me-bar" role="progressbar" aria-label="다음 등급까지" aria-valuemin={0} aria-valuemax={100} aria-valuenow={progress.percent}>
+                        <i style={{ width: `${progress.percent}%` }} />
+                    </div>
+                </>
+            )}
             <dl className="me-stats">
                 <div><dt>내 글</dt><dd>{profile.activity.posts}</dd></div>
                 <div><dt>내 댓글</dt><dd>{profile.activity.comments}</dd></div>
                 <div><dt>들른 글</dt><dd>{profile.activity.visits}</dd></div>
+                {profile.activity.likes === null ? null : <div><dt>받은 좋아요</dt><dd>{profile.activity.likes}</dd></div>}
             </dl>
+            {owner ? null : <RewardStatus rewards={profile.rewards} />}
             <dl className="me-info">
                 <div><dt>아이디</dt><dd>{profile.userId}</dd></div>
                 <div>

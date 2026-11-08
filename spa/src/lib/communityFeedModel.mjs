@@ -3,6 +3,7 @@
  * settings, counts and saved-list keys are shaped. No browser, no network — node:test pins it directly.
  */
 import { NOTICE_BOARD } from './communityContract.mjs';
+import { pickGrades, pickScoreRules } from './communityGrades.mjs';
 import { BOARD_ORDER, splitNoticePosts } from './communityModel.mjs';
 
 export const FEED_PAGE_SIZE = 20;
@@ -48,7 +49,7 @@ function pickBoard(entry) {
     if (!BOARD_ORDER.includes(id)) return null;
     const picked = { id };
     if (text(entry.label)) picked.label = entry.label;
-    if (entry.writeRole === 'operator' || entry.writeRole === 'member') picked.writeRole = entry.writeRole;
+    if (entry.writeRole === 'operator' || entry.writeRole === 'member' || entry.writeRole === 'admin') picked.writeRole = entry.writeRole;
     if (Number.isFinite(entry.dailyLimit)) picked.dailyLimit = entry.dailyLimit;
     if (Array.isArray(entry.statuses)) picked.statuses = entry.statuses.map(String);
     if (typeof entry.defaultStatus === 'string') picked.defaultStatus = entry.defaultStatus;
@@ -69,7 +70,10 @@ export function pickConfig(result) {
     const reportReasons = (Array.isArray(reasonSource) ? reasonSource : [])
         .filter((entry) => text(entry?.key) && text(entry?.label))
         .map((entry) => ({ key: entry.key, label: entry.label }));
-    return { boards, reportReasons };
+    // Grades and score rules ride next to the boards; either may be missing on an older server.
+    const grades = pickGrades(Array.isArray(holder.grades) ? holder.grades : source.grades);
+    const scoreRules = pickScoreRules(holder.scoreRules ?? source.scoreRules);
+    return { boards, reportReasons, grades, scoreRules };
 }
 
 /** An answer for a board the server does not have (an old server asked for the notice board). */

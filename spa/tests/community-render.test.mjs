@@ -300,7 +300,7 @@ test('sidebar: my activity (nickname, grade badge, score bar, counts), board men
     assert.equal(current.length, 1);
     assert.match(attr(current[0], 'href'), /board=free/);
     assert.match(text(html), /글 10점 · 댓글 2점 · 들르기 1점/);
-    for (const range of ['0~99점', '100~499점', '500~1,499점', '1,500점~']) assert.match(text(html), new RegExp(range));
+    for (const range of ['0~99점', '100~499점', '500~1,499점', '1,500~4,999점', '5,000점~']) assert.match(text(html), new RegExp(range));
 });
 
 test('sidebar: no nickname yet asks for one; a hostile nickname is text', () => {

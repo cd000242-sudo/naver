@@ -21,6 +21,8 @@ export const COMMUNITY_ACTIONS = Object.freeze({
     adminReportResolve: 'community-admin-report-resolve',
     adminPosts: 'community-admin-posts',
     adminBoards: 'community-admin-boards',
+    adminRewards: 'community-admin-rewards',
+    adminRewardDecide: 'community-admin-reward-decide',
     /** One call for a whole community screen: list, board settings, weekly top, counts and the profile. */
     feed: 'community-feed',
 });
@@ -40,6 +42,7 @@ export const COMMUNITY_CODES = Object.freeze({
     USE_LICENSE_RESET: 'USE_LICENSE_RESET',
     PHONE_ALREADY_VERIFIED: 'PHONE_ALREADY_VERIFIED',
     USE_LICENSE_PHONE: 'USE_LICENSE_PHONE',
+    NICKNAME_TAKEN: 'NICKNAME_TAKEN',
     NOTICE_MANAGED_IN_ADMIN: 'NOTICE_MANAGED_IN_ADMIN',
     NOTICE_NOT_REPORTABLE: 'NOTICE_NOT_REPORTABLE',
     UNAUTHORIZED: 'Unauthorized',
@@ -51,6 +54,9 @@ export const NOTICE_ID_PREFIX = 'nt_';
 
 /** The board that shows only those notices. An old server files them under `news`; the screen moves them here. */
 export const NOTICE_BOARD = 'notice';
+
+/** The two answers the owner can give to a reward request (`community-admin-reward-decide`). */
+export const REWARD_DECISION = Object.freeze({ approve: 'approve', reject: 'reject' });
 
 /** Report resolution words the server accepts. */
 export const REPORT_RESOLUTION = Object.freeze({ dismissed: 'dismissed', actioned: 'actioned' });

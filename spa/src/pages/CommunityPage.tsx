@@ -2,17 +2,19 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import CommunitySidebar, { BoardTabs } from '../components/community/CommunitySidebar';
 import ModerationPanel from '../components/community/ModerationPanel';
+import RewardDesk from '../components/community/RewardDesk';
 import NicknameForm from '../components/community/NicknameForm';
 import PostDetail from '../components/community/PostDetail';
 import PostList from '../components/community/PostList';
 import PostWriteForm from '../components/community/PostWriteForm';
 import WeeklyTop from '../components/community/WeeklyTop';
-import { REPORTS_PATH, canModerate, isReportsView } from '../lib/accountModel.mjs';
+import { REPORTS_PATH, REWARDS_PATH, canModerate, isReportsView, isRewardsView } from '../lib/accountModel.mjs';
+import { gradeGuide, scoreRulesText } from '../lib/communityGrades.mjs';
 import { boardApi, type PostDraft } from '../lib/communityApi';
 import type { PostItem } from '../lib/communityData';
 import { findKnownPost } from '../lib/communityFeed';
 import {
-    ALL_BOARD, boardLabel, boardList, communityPath, describeVisit, parseCommunityQuery,
+    ALL_BOARD, boardLabel, boardList, communityPath, describeVisit, parseCommunityQuery, showWriteButton,
 } from '../lib/communityModel.mjs';
 import { authorOf } from '../lib/communityOutbox';
 import { visibleOutbox } from '../lib/communityPostOutbox';
@@ -46,6 +48,8 @@ function CommunityPage() {
     const feed = useBoardFeed(view, reloadKey);
     const config = feed.config;
     const boards = useMemo(() => boardList(config), [config]);
+    const grades = useMemo(() => gradeGuide(config), [config]);
+    const scoreRules = useMemo(() => scoreRulesText(config?.scoreRules), [config]);
     const weekly = feed.weekly;
     const refresh = useCallback(() => setReloadKey((value) => value + 1), []);
     const outbox = usePostOutbox(refresh);
@@ -96,7 +100,9 @@ function CommunityPage() {
     const note = view.board === ALL_BOARD ? ALL_NOTE : boards.find((board) => board.id === view.board)?.note;
     const moderator = canModerate(profile);
     const reportsView = moderator && isReportsView(location.search);
-    const showList = !view.write && !view.post && !editing && !reportsView;
+    const rewardsView = moderator && !reportsView && isRewardsView(location.search);
+    const deskView = reportsView || rewardsView;
+    const showList = !view.write && !view.post && !editing && !deskView;
 
     return (
         <div className="lp cm">
@@ -107,17 +113,17 @@ function CommunityPage() {
                         <p>모르는 건 묻고, 잘된 건 나누는 곳</p>
                     </div>
                     <div className="cm-head-actions">
-                        {moderator ? (
-                            <Link className="lp-btn lp-btn-line" to={reportsView ? communityPath({ board: view.board }) : REPORTS_PATH}>{reportsView ? '← 커뮤니티로' : '신고 목록'}</Link>
-                        ) : null}
-                        {view.write || editing || reportsView ? null : (
+                        {moderator && deskView ? <Link className="lp-btn lp-btn-line" to={communityPath({ board: view.board })}>← 커뮤니티로</Link> : null}
+                        {moderator && !reportsView ? <Link className="lp-btn lp-btn-line" to={REPORTS_PATH}>신고 목록</Link> : null}
+                        {moderator && !rewardsView ? <Link className="lp-btn lp-btn-line" to={REWARDS_PATH}>보상 승인</Link> : null}
+                        {view.write || editing || deskView || !showWriteButton(view.board, boards) ? null : (
                             <Link className="lp-btn lp-btn-dark" to={communityPath({ board: view.board, write: true })}>글쓰기</Link>
                         )}
                     </div>
                 </div>
             </header>
             <div className="lp-wrap cm-wrap">
-                <CommunitySidebar profile={profile} boards={boards} boardId={view.board} counts={feed.counts} />
+                <CommunitySidebar profile={profile} boards={boards} boardId={view.board} counts={feed.counts} grades={grades} scoreRules={scoreRules} />
                 <div className="cm-main">
                     <BoardTabs boards={boards} boardId={view.board} />
                     {notice ? <p className={`cm-notice${notice.tone === 'info' ? ' is-info' : ''}`} role="status">{notice.text}</p> : null}
@@ -130,6 +136,8 @@ function CommunityPage() {
                     ) : null}
                     {reportsView ? (
                         <ModerationPanel />
+                    ) : rewardsView ? (
+                        <RewardDesk />
                     ) : editing ? (
                         <PostWriteForm boards={boards} defaultBoard={editing.board} profile={profile} editing={editing}
                             onDone={afterWrite} onCancel={() => setEditing(null)} />

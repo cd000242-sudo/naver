@@ -16,6 +16,7 @@ import { clearSession, loadSession, loginWithCommunityToken, logoutWeb, type Lew
 import { describeRegisterFailure, mapLewordVerify } from './siteAuthModel.mjs';
 import { describePhoneFailure, normalizeCode, normalizePhone, type PhoneFailureKind } from './phoneAuthModel.mjs';
 import { COMMUNITY_ACTIONS } from './communityContract.mjs';
+import { describeNicknameFailure } from './accountModel.mjs';
 
 export type AuthOutcome =
     | { ok: true; session: CommunitySession }
@@ -31,7 +32,8 @@ function adopt(payload: Record<string, unknown>): AuthOutcome {
     return { ok: true, session };
 }
 
-const failed = (result: { code: string; message: string }): AuthOutcome => ({ ok: false, code: result.code, message: result.message });
+/** A refusal keeps the server's words, except a taken nickname, which gets the one sentence of the site. */
+const failed = (result: { code: string; message: string }): AuthOutcome => ({ ok: false, code: result.code, message: result.code === 'NICKNAME_TAKEN' ? describeNicknameFailure(result) : result.message });
 
 /** Phone failures get one plain sentence and a `kind` the form can act on; every other refusal keeps the server's words. */
 function failedSignup(result: { code: string; message: string; retryAfterSec?: unknown }): AuthOutcome {

@@ -139,5 +139,29 @@ export function describeModerationFailure(result) {
     return message || GENERIC_FAILURE;
 }
 
+/** The owner's reward desk, next to the report desk. */
+export const REWARDS_PATH = '/community?rewards=1';
+export const isRewardsView = (search) => new URLSearchParams(String(search || '')).get('rewards') === '1';
+
+/** One sentence for a refused nickname; the server's own words for anything else. */
+export function describeNicknameFailure(result) {
+    if (String(result?.code || '') === COMMUNITY_CODES.NICKNAME_TAKEN) return '이미 쓰는 닉네임이에요.';
+    return String(result?.message || '').trim() || '닉네임을 저장하지 못했어요. 잠시 뒤 다시 해 주세요.';
+}
+
+const REWARD_FAILURES = Object.freeze({
+    ALREADY_DECIDED: '이미 처리한 보상이에요.',
+    REWARD_NOT_FOUND: '보상 신청을 찾을 수 없어요.',
+    GRANT_FAILED: '올인원 기간을 늘리지 못했어요. 잠시 뒤 다시 해 주세요.',
+    INVALID_DECISION: '처리 방법을 알 수 없어요.',
+});
+
+/** Words for a refused reward decision or list read. */
+export function describeRewardFailure(result) {
+    const code = String(result?.code || '');
+    if (Object.hasOwn(REWARD_FAILURES, code)) return REWARD_FAILURES[code];
+    return describeModerationFailure(result);
+}
+
 export const REPORTS_PATH = '/community?reports=1';
 export const isReportsView = (search) => new URLSearchParams(String(search || '')).get('reports') === '1';

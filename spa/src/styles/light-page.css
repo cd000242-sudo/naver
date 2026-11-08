@@ -92,6 +92,7 @@
 .lp-g-leaf { color: #13806a; }
 .lp-g-fruit { color: #c05a12; }
 .lp-g-tree { color: #6b4a1f; }
+.lp-g-forest { color: #1d6b3a; }
 .lp-g-staff { color: #f5f6f2; background: var(--lp-brand); border-color: var(--lp-brand); }
 .lp-state { display: inline-flex; align-items: center; height: 30px; padding: 0 10px; border-radius: 8px; font-size: 14px; font-weight: 700; white-space: nowrap; }
 .lp-state-done { background: var(--lp-accent-soft); color: var(--lp-accent); }

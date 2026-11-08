@@ -1,4 +1,9 @@
 import { NOTICE_BOARD, NOTICE_ID_PREFIX } from './communityContract.mjs';
+import { GRADE_TABLE, OWNER_GRADE_TEXT, SCORE_RULES } from './communityGrades.mjs';
+
+export { SCORE_RULES };
+/** One grade table for the whole site (see communityGrades.mjs). */
+export const GRADE_GUIDE = GRADE_TABLE;
 
 /**
  * Community board model: the six boards, sorts, status badges, write permissions, grades, paging, dates and
@@ -16,7 +21,7 @@ const board = (id, label, writeRole, dailyLimit, statuses, defaultStatus, note) 
 
 /** Built-in board config, used until (and if) the server answers `community-boards`. */
 const BUILT_IN = Object.freeze({
-    notice: board('notice', '공지사항', 'operator', 0, [], '', '서비스 공지와 업데이트 안내예요.'),
+    notice: board('notice', '공지사항', 'admin', 0, [], '', '서비스 공지와 업데이트 안내예요.'),
     news: board('news', '최근 소식', 'operator', 0, [], '', '리더남이 전하는 AI 소식'),
     request: board('request', '요청사항', 'member', 5, ['검토 중', '반영됨'], '검토 중', '바라는 기능을 적어 주세요. 반영하면 상태가 바뀝니다.'),
     inquiry: board('inquiry', '문의', 'member', 5, ['대기', '답변 완료'], '대기', '궁금한 점을 남기면 운영자가 답해 드려요.'),
@@ -34,7 +39,7 @@ export function boardList(serverConfig) {
         return Object.freeze({
             ...base,
             label: typeof remote.label === 'string' && remote.label ? remote.label : base.label,
-            writeRole: remote.writeRole === 'operator' || remote.writeRole === 'member' ? remote.writeRole : base.writeRole,
+            writeRole: ['operator', 'member', 'admin'].includes(remote.writeRole) ? remote.writeRole : base.writeRole,
             dailyLimit: Number.isFinite(remote.dailyLimit) ? remote.dailyLimit : base.dailyLimit,
             statuses: Array.isArray(remote.statuses) ? Object.freeze(remote.statuses.map(String)) : base.statuses,
             defaultStatus: typeof remote.defaultStatus === 'string' ? remote.defaultStatus : base.defaultStatus,
@@ -84,27 +89,26 @@ export function writeBlockedHint(boardId, profile) {
     return profile?.role === 'owner' || profile?.canWriteNews === true ? NOTICE_WRITE_HINT : '공지사항에는 글을 쓸 수 없어요. 다른 게시판을 골라 주세요.';
 }
 
-/** Operator-only boards need `canWriteNews`; every other board needs just a login. 공지사항 is closed to everyone. */
+/** The 글쓰기 button belongs to boards a person can write on; 공지사항 (writeRole `admin`) has none. */
+export function showWriteButton(boardId, boards) {
+    if (boardId === NOTICE_BOARD) return false;
+    return boards.find((entry) => entry.id === boardId)?.writeRole !== 'admin';
+}
+
+/** Operator-only boards need `canWriteNews`; every other board needs just a login. 공지사항 (`admin`) is closed to everyone. */
 export function canWriteBoard(target, profile) {
     if (!profile || !target) return false;
-    if (target.id === NOTICE_BOARD) return false;
+    if (target.id === NOTICE_BOARD || target.writeRole === 'admin') return false;
     if (target.writeRole === 'operator') return profile.canWriteNews === true || profile.role === 'owner';
     return true;
 }
 
 export const writableBoards = (boards, profile) => boards.filter((entry) => canWriteBoard(entry, profile));
 
-export const GRADE_GUIDE = Object.freeze([
-    Object.freeze({ key: 'sprout', label: '새싹', range: '0~99점' }),
-    Object.freeze({ key: 'leaf', label: '잎새', range: '100~499점' }),
-    Object.freeze({ key: 'fruit', label: '열매', range: '500~1,499점' }),
-    Object.freeze({ key: 'tree', label: '나무', range: '1,500점~' }),
-]);
-
-export const SCORE_RULES = '글 10점 · 댓글 2점 · 들르기 1점';
-
 /** Progress bar numbers for the "my activity" card. */
 export function gradeProgress(profile) {
+    // The owner is always 숲, the top grade, whatever an older server said.
+    if (profile?.role === 'owner') return { percent: 100, remain: 0, nextLabel: null, text: OWNER_GRADE_TEXT };
     const grade = profile?.grade;
     const score = Number(profile?.score) || 0;
     if (!grade) return { percent: 0, remain: 0, nextLabel: null, text: '' };

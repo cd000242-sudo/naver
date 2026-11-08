@@ -4,11 +4,13 @@
  * No admin token ever reaches the browser.
  */
 import { callWithToken } from './communityApi';
-import { COMMUNITY_ACTIONS } from './communityContract.mjs';
+import { COMMUNITY_ACTIONS, REWARD_DECISION } from './communityContract.mjs';
 
 export type TargetType = 'post' | 'comment';
 export type ReportStatus = 'open' | 'all';
 export type Resolution = 'dismissed' | 'actioned';
+export type RewardFilter = 'pending' | 'all';
+export type RewardChoice = keyof typeof REWARD_DECISION;
 
 export const moderationApi = {
     /** `hidden: false` shows it again. */
@@ -20,6 +22,9 @@ export const moderationApi = {
     reports: (status: ReportStatus, page: number, pageSize = 10) =>
         callWithToken(COMMUNITY_ACTIONS.adminReports, { status, page, pageSize }),
     resolveReport: (reportId: string, status: Resolution) => callWithToken(COMMUNITY_ACTIONS.adminReportResolve, { reportId, status }),
+    /** The owner's reward desk: requests waiting for a decision (or all of them). */
+    rewards: (status: RewardFilter, page = 1, pageSize = 10) => callWithToken(COMMUNITY_ACTIONS.adminRewards, { status, page, pageSize }),
+    decideReward: (rewardId: string, choice: RewardChoice) => callWithToken(COMMUNITY_ACTIONS.adminRewardDecide, { rewardId, decision: REWARD_DECISION[choice] }),
     hiddenPosts: (page: number, pageSize = 10) => callWithToken(COMMUNITY_ACTIONS.adminPosts, { filter: 'hidden', page, pageSize }),
 };
 
@@ -76,6 +81,35 @@ function toReport(raw: unknown): ReportItem | null {
 
 export function normalizeReports(raw: unknown): ReportItem[] {
     return (Array.isArray(raw) ? raw : []).map(toReport).filter((item): item is ReportItem => item !== null);
+}
+
+export type RewardRequest = {
+    rewardId: string;
+    userId: string;
+    nickname: string;
+    tier: string;
+    tierLabel: string;
+    days: number;
+    mode: 'auto' | 'approval';
+    status: string;
+    createdAt: string;
+    decidedAt: string;
+    licenseCode: string;
+};
+
+/** The reward requests of the desk; a row without an id is dropped, a missing list is an empty one. */
+export function normalizeRewardRequests(raw: unknown): RewardRequest[] {
+    return (Array.isArray(raw) ? raw : []).flatMap((item) => {
+        const source = record(item);
+        const rewardId = text(source.rewardId).trim();
+        if (!rewardId) return [];
+        const days = Math.floor(Number(source.days));
+        return [{
+            rewardId, userId: text(source.userId), nickname: text(source.nickname), tier: text(source.tier), tierLabel: text(source.tierLabel),
+            days: Number.isFinite(days) && days > 0 ? days : 0, mode: source.mode === 'approval' ? 'approval' as const : 'auto' as const,
+            status: text(source.status), createdAt: text(source.createdAt), decidedAt: text(source.decidedAt), licenseCode: text(source.licenseCode),
+        }];
+    });
 }
 
 /** A report's post address inside the community, or '' when the target is gone. */

@@ -39,7 +39,7 @@ test('profile detail: phone state, join date and role come back; the stored logi
         assert.deepEqual([result.detail.role, result.detail.isOperator], ['owner', true]);
         assert.equal(lastCall(browser, 'community-profile').communityToken, 'ct_abc');
         const kept = session.loadCommunitySession();
-        assert.deepEqual([kept.score, kept.grade.label, kept.communityToken, kept.isOperator], [520, '열매', 'ct_abc', true]);
+        assert.deepEqual([kept.score, kept.grade.label, kept.communityToken, kept.isOperator], [520, '숲', 'ct_abc', true]);
         assert.ok(!browser.storedText().includes('010-****-5678'), 'the phone is not kept in the browser');
     });
 });

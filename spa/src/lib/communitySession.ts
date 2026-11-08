@@ -7,12 +7,23 @@
  */
 
 import { clearFeedCache } from './communityFeedCache';
+import { FOREST_GRADE, normalizeRewards } from './communityGrades.mjs';
 
 export const COMMUNITY_SESSION_KEY = 'leaderspro.community.session.v1';
 /** Fired on window after the stored login changes, so the menu and the pages (separate React trees) follow. */
 export const COMMUNITY_SESSION_EVENT = 'community:session-changed';
 
 export type CommunityRole = 'owner' | 'licensed' | 'community';
+
+export type CommunityReward = {
+    tier: string;
+    label: string;
+    days: number;
+    mode: 'auto' | 'approval';
+    status: 'granted' | 'pending' | 'approved' | 'rejected';
+    createdAt: string;
+    decidedAt: string;
+};
 
 export type CommunityGrade = {
     key: string;
@@ -32,9 +43,12 @@ export type CommunityProfile = {
     /** The server calls this account an operator. Only decides which buttons are drawn; the server re-checks every call. */
     isOperator: boolean;
     score: number;
-    activity: { posts: number; comments: number; visits: number };
+    /** `likes` (likes received) is null when the server does not send it yet. */
+    activity: { posts: number; comments: number; visits: number; likes: number | null };
     grade: CommunityGrade;
     linked: boolean;
+    /** My rewards (잎새 3일 ...); empty when the server sends none. */
+    rewards: CommunityReward[];
 };
 
 export type CommunitySession = CommunityProfile & {
@@ -74,9 +88,14 @@ export function normalizeProfile(payload: Record<string, unknown>): CommunityPro
         canWriteNews: payload.canWriteNews === true,
         isOperator: payload.isOperator === true,
         score: count(payload.score),
-        activity: { posts: count(activity.posts), comments: count(activity.comments), visits: count(activity.visits) },
-        grade: toGrade(payload.grade),
+        activity: {
+            posts: count(activity.posts), comments: count(activity.comments), visits: count(activity.visits),
+            likes: activity.likes === undefined || activity.likes === null ? null : count(activity.likes),
+        },
+        // The owner account is always 숲, even when an older server still sends a lower grade.
+        grade: role === 'owner' ? { ...FOREST_GRADE } : toGrade(payload.grade),
         linked: payload.linked === true,
+        rewards: normalizeRewards(payload.rewards) as CommunityReward[],
     };
 }
 

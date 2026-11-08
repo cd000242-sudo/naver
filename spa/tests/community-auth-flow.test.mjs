@@ -53,7 +53,7 @@ test('a refused signup says why and stores nothing', async () => {
     const reply = { ok: false, code: 'NICKNAME_TAKEN', error: '이미 사용 중인 닉네임입니다.', message: '이미 사용 중인 닉네임입니다.' };
     await withBrowser({ 'community-signup': reply }, async (browser, { auth }) => {
         const result = await auth.signupCommunity({ userId: 'leader01', password: 'secret-pw-1', nickname: '새싹이' });
-        assert.deepEqual([result.ok, result.code, result.message], [false, 'NICKNAME_TAKEN', '이미 사용 중인 닉네임입니다.']);
+        assert.deepEqual([result.ok, result.code, result.message], [false, 'NICKNAME_TAKEN', '이미 쓰는 닉네임이에요.']);
         assert.equal(browser.store.has(COMMUNITY_KEY), false);
     });
 });
@@ -264,7 +264,7 @@ test('hostile server values are turned into plain text and a known role', async 
         assert.equal(made.canWriteNews, false, 'only a real boolean true grants the operator button');
         assert.equal(typeof made.nickname, 'string');
         assert.equal(made.score, 12);
-        assert.deepEqual(made.activity, { posts: 0, comments: 0, visits: 0 });
+        assert.deepEqual(made.activity, { posts: 0, comments: 0, visits: 0, likes: null }, 'likes stays null until the server sends it');
         assert.equal(typeof made.grade.label, 'string');
         assert.equal(session.toCommunitySession({ ok: true, userId: 'a' }), null, 'no token, no session');
     });

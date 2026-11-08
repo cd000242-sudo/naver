@@ -15,6 +15,13 @@
 .me-score { display: grid; gap: 2px; }
 .me-score b { font-size: 26px; font-weight: 900; }
 .me-score span { font-size: 16px; color: var(--lp-muted); }
+.me-score.is-owner b { font-size: 20px; }
+.me-rewards { display: grid; gap: 6px; margin-top: 4px; }
+.me-rewards h3 { font-size: 16px; font-weight: 800; }
+.me-rewards ul { display: grid; gap: 6px; }
+.me-rewards li { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; min-height: 44px; padding: 6px 0; border-top: 1px solid var(--lp-line); }
+.me-rewards li span { color: var(--lp-muted); }
+.me-rewards li em { margin-left: auto; font-style: normal; }
 .me-bar { height: 12px; border-radius: 6px; background: var(--lp-surface-2); border: 1px solid var(--lp-line); overflow: hidden; }
 .me-bar i { display: block; height: 100%; background: var(--lp-accent); border-radius: 6px; }
 .me-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 0; }

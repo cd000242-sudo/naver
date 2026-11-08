@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import type { CommunityProfile } from '../../lib/communitySession';
 import { ALL_BOARD, GRADE_GUIDE, SCORE_RULES, communityPath, gradeProgress, type BoardConfig } from '../../lib/communityModel.mjs';
+import type { GradeEntry } from '../../lib/communityGrades.mjs';
 import { GradeBadge } from './Badges';
 
 type Props = {
@@ -9,6 +10,10 @@ type Props = {
     boardId: string;
     /** Post counts per board id, as far as they are known. */
     counts: Record<string, number>;
+    /** The grade scale (server grades when it sent them); the built-in table when not given. */
+    grades?: readonly GradeEntry[];
+    /** The score sentence drawn from the server's numbers; the default sentence when not given. */
+    scoreRules?: string;
 };
 
 function MyActivity({ profile }: { profile: CommunityProfile }) {
@@ -22,10 +27,14 @@ function MyActivity({ profile }: { profile: CommunityProfile }) {
                     : <b className="cm-me-nick is-empty">닉네임을 정해 주세요</b>}
                 <GradeBadge grade={profile.grade} isOperator={profile.role === 'owner'} />
             </div>
-            <p className="cm-me-score"><b>{profile.score}점</b><span>{progress.text}</span></p>
-            <div className="cm-bar" role="progressbar" aria-label="다음 등급까지" aria-valuemin={0} aria-valuemax={100} aria-valuenow={progress.percent}>
-                <i style={{ width: `${progress.percent}%` }} />
-            </div>
+            {profile.role === 'owner' ? <p className="cm-me-score is-owner"><b>{progress.text}</b></p> : (
+                <>
+                    <p className="cm-me-score"><b>{profile.score}점</b><span>{progress.text}</span></p>
+                    <div className="cm-bar" role="progressbar" aria-label="다음 등급까지" aria-valuemin={0} aria-valuemax={100} aria-valuenow={progress.percent}>
+                        <i style={{ width: `${progress.percent}%` }} />
+                    </div>
+                </>
+            )}
             <dl className="cm-me-stats">
                 <div><dt>내 글</dt><dd>{profile.activity.posts}</dd></div>
                 <div><dt>내 댓글</dt><dd>{profile.activity.comments}</dd></div>
@@ -40,7 +49,7 @@ function boardEntries(boards: readonly BoardConfig[]) {
 }
 
 /** Desktop side column: my activity, the board menu, the grade guide. */
-function CommunitySidebar({ profile, boards, boardId, counts }: Props) {
+function CommunitySidebar({ profile, boards, boardId, counts, grades = GRADE_GUIDE, scoreRules = SCORE_RULES }: Props) {
     return (
         <aside className="cm-side">
             <MyActivity profile={profile} />
@@ -61,11 +70,14 @@ function CommunitySidebar({ profile, boards, boardId, counts }: Props) {
             <section className="lp-box cm-guide" aria-labelledby="cm-guide-title">
                 <h2 id="cm-guide-title">등급 안내</h2>
                 <ul>
-                    {GRADE_GUIDE.map((grade) => (
-                        <li key={grade.key}><span className={`lp-grade lp-g-${grade.key}`}>{grade.label}</span><span>{grade.range}</span></li>
+                    {grades.map((grade) => (
+                        <li key={grade.key}>
+                            <span className={`lp-grade lp-g-${grade.key}`}>{grade.label}</span><span>{grade.range}</span>
+                            {grade.reward ? <small className="cm-guide-reward">{grade.reward}</small> : null}
+                        </li>
                     ))}
                 </ul>
-                <p>{SCORE_RULES}</p>
+                <p>{scoreRules}</p>
             </section>
         </aside>
     );

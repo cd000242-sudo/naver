@@ -65,11 +65,11 @@ test('only the operator may write on the news board; everyone logged in may writ
     assert.deepEqual(writableBoards(boards, owner).map((board) => board.id), ['news', 'request', 'inquiry', 'free', 'promo'], 'the notice board is written in the admin home, not here');
 });
 
-test('grade guide lists the four grades with their ranges and the score rules', () => {
+test('grade guide lists the five grades (with 숲) with their ranges and the score rules', () => {
     assert.deepEqual(GRADE_GUIDE.map((grade) => [grade.key, grade.label, grade.range]), [
-        ['sprout', '새싹', '0~99점'], ['leaf', '잎새', '100~499점'], ['fruit', '열매', '500~1,499점'], ['tree', '나무', '1,500점~'],
+        ['sprout', '새싹', '0~99점'], ['leaf', '잎새', '100~499점'], ['fruit', '열매', '500~1,499점'], ['tree', '나무', '1,500~4,999점'], ['forest', '숲', '5,000점~'],
     ]);
-    assert.equal(SCORE_RULES, '글 10점 · 댓글 2점 · 들르기 1점');
+    assert.equal(SCORE_RULES, '글 10점 · 댓글 2점 · 들르기 1점 · 내 글 좋아요 1점 · 하루 최대 50점');
 });
 
 test('gradeProgress shows how far to the next grade, and tops out at the last grade', () => {

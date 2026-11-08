@@ -123,7 +123,7 @@ test('an expired code asks for a new one; a taken number and a missing phone eac
 test('other signup refusals keep the server wording (nickname taken)', async () => {
     await withBrowser({ 'community-signup': { ok: false, code: 'NICKNAME_TAKEN', message: '이미 사용 중인 닉네임입니다.' } }, async (_browser, { auth }) => {
         const result = await auth.signupCommunity(input());
-        assert.deepEqual([result.code, result.message], ['NICKNAME_TAKEN', '이미 사용 중인 닉네임입니다.']);
+        assert.deepEqual([result.code, result.message], ['NICKNAME_TAKEN', '이미 쓰는 닉네임이에요.']);
         assert.equal(result.kind, undefined);
     });
 });
