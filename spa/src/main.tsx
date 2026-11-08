@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
+import AppErrorBoundary from './components/AppErrorBoundary';
+import { installChunkRecovery } from './lib/chunkRecovery.mjs';
 import './styles/global.css';
 import { startVersionWatch } from './lib/versionWatch';
 import { purgeLegacyClaudeState } from './lib/userKeys';
@@ -9,6 +11,8 @@ import { startBoardPreferenceSync } from './lib/boardPreferences';
 
 // 새 배포가 나가면 캐시에 물린 화면이 스스로 갈아탄다(탭 복귀 시 1회).
 startVersionWatch();
+// A stale chunk after a deploy must not leave an empty page (2026-11-08).
+installChunkRecovery();
 startBoardPreferenceSync();
 
 /*
@@ -25,7 +29,9 @@ if (purgeLegacyClaudeState()) {
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
         <BrowserRouter>
-            <App />
+            <AppErrorBoundary>
+                <App />
+            </AppErrorBoundary>
         </BrowserRouter>
     </React.StrictMode>
 );
