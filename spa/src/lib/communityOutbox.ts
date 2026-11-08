@@ -6,11 +6,14 @@
 import { boardApi, newRequestId, type ApiResult } from './communityApi';
 import { normalizeComment, type AuthorGrade, type CommentItem } from './communityData';
 
-export type Author = { nickname: string; grade: AuthorGrade | null; isOperator: boolean };
+export type Author = { nickname: string; grade: AuthorGrade | null; isOperator: boolean; avatarKey?: string };
 
 /** Who a just-written comment or post is shown as (the reader). */
-export function authorOf(profile: { nickname: string; role: string; grade: { key: string; label: string } }): Author {
-    return { nickname: profile.nickname, grade: profile.grade?.label ? { key: profile.grade.key, label: profile.grade.label } : null, isOperator: profile.role === 'owner' };
+export function authorOf(profile: { nickname: string; role: string; grade: { key: string; label: string }; avatarKey?: string }): Author {
+    return {
+        nickname: profile.nickname, grade: profile.grade?.label ? { key: profile.grade.key, label: profile.grade.label } : null,
+        isOperator: profile.role === 'owner', avatarKey: profile.avatarKey ?? '',
+    };
 }
 
 export type CommentPort = {
@@ -73,7 +76,7 @@ export function restoreDraft(current: string, sent: string, failure: string): st
 function pendingComment(input: { postId: string; body: string; parentId?: string; requestId: string; author: Author }): CommentItem {
     return {
         id: pendingId(input.requestId), postId: input.postId, parentId: input.parentId ?? '',
-        nickname: input.author.nickname, grade: input.author.grade, isOperator: input.author.isOperator,
+        nickname: input.author.nickname, avatarKey: input.author.avatarKey ?? '', grade: input.author.grade, isOperator: input.author.isOperator,
         body: input.body, createdAt: new Date().toISOString(), likes: 0, liked: false, mine: true,
         gone: false, hidden: false, hiddenBody: '', replies: [], delivery: 'sending',
     };

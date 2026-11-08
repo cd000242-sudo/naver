@@ -8,6 +8,7 @@ import { authorOf, discardComment, retryComment, sendComment, type CommentPort }
 import type { CommunityProfile } from '../../lib/communitySession';
 import CommentAdminBar from './CommentAdminBar';
 import CommentForm from './CommentForm';
+import { useAvatars } from '../../lib/useAvatars';
 import CommentTree from './CommentTree';
 
 type Props = {
@@ -37,6 +38,8 @@ function patchComment(list: CommentItem[], id: string, change: Partial<CommentIt
  */
 function CommentSection({ postId, comments, profile, onComments, onReload, onReport, commentable = true }: Props) {
     const [replyingTo, setReplyingTo] = useState('');
+    // Photos fill in after the comments are drawn (first letters first).
+    const avatars = useAvatars(comments.flatMap((comment) => [comment.avatarKey, ...comment.replies.map((reply) => reply.avatarKey)]));
     const [notice, setNotice] = useState('');
     const canWrite = Boolean(profile.nickname) && !profile.needsNickname;
     const likes = useRef(new Map<string, ReturnType<typeof createLikeToggle>>());
@@ -76,6 +79,7 @@ function CommentSection({ postId, comments, profile, onComments, onReload, onRep
             {comments.length === 0 ? (commentable ? <p className="cm-empty-sm">첫 댓글을 남겨 보세요.</p> : null) : (
                 <CommentTree
                     comments={comments}
+                    avatars={avatars}
                     replyingTo={replyingTo}
                     onReply={(id) => setReplyingTo((current) => (current === id ? '' : id))}
                     onLike={like}

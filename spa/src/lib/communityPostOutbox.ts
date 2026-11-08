@@ -33,7 +33,7 @@ export function newOutboxEntry(draft: PostDraft, author: Author, requestId: stri
     const promo = draft.board === 'promo';
     const base = normalizePost({
         id: `${PENDING_PREFIX}${requestId}`, board: draft.board, title: draft.title, excerpt: promo ? draft.body : '',
-        nickname: author.nickname, grade: author.grade, isOperator: author.isOperator, createdAt: new Date().toISOString(),
+        nickname: author.nickname, avatarKey: author.avatarKey, grade: author.grade, isOperator: author.isOperator, createdAt: new Date().toISOString(),
         mine: true, ...(promo ? { url: draft.url } : {}),
     }) as PostItem;
     return { requestId, draft, post: { ...base, delivery: 'sending' }, state: 'sending', failure: '' };

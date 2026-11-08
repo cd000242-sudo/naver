@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { commentModeration, describeModerationFailure } from '../../lib/accountModel.mjs';
+import { commentModeration, describeAvatarRemoveFailure, describeModerationFailure } from '../../lib/accountModel.mjs';
 import type { CommentItem } from '../../lib/communityData';
 import { moderationApi } from '../../lib/communityModeration';
 import { runOptimistic } from '../../lib/communityOptimistic';
@@ -50,6 +50,15 @@ function CommentAdminBar({ comment, profile, onDone, onPatch }: Props) {
         if (failure) setMessage(failure);
     };
 
+    const removePhoto = async () => {
+        if (busy || !comment.avatarKey) return;
+        setBusy(true);
+        setMessage('');
+        const result = await moderationApi.removeAvatar({ targetKey: comment.avatarKey });
+        setBusy(false);
+        setMessage(result.ok ? '작성자 사진을 지웠어요.' : describeAvatarRemoveFailure(result as { message: string }));
+    };
+
     const remove = () => {
         if (!window.confirm('이 댓글을 지울까요?')) return;
         void run(() => moderationApi.remove('comment', comment.id));
@@ -60,6 +69,7 @@ function CommentAdminBar({ comment, profile, onDone, onPatch }: Props) {
             <button type="button" className="cm-act" disabled={busy}
                 onClick={() => { void toggleHide(); }}>{plan.hideLabel}</button>
             {plan.remove ? <button type="button" className="cm-act cm-act-danger" disabled={busy} onClick={remove}>삭제</button> : null}
+            {comment.avatarKey && !comment.gone ? <button type="button" className="cm-act" disabled={busy} onClick={() => { void removePhoto(); }}>작성자 사진 지우기</button> : null}
             {message ? <span className="lp-error cm-admin-msg" role="alert">{message}</span> : null}
         </div>
     );

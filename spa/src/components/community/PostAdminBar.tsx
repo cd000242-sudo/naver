@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { describeModerationFailure, postModeration } from '../../lib/accountModel.mjs';
+import { describeAvatarRemoveFailure } from '../../lib/accountModel.mjs';
 import type { ApiFailure } from '../../lib/communityApi';
 import type { PostItem } from '../../lib/communityData';
 import { moderationApi } from '../../lib/communityModeration';
@@ -27,8 +28,19 @@ type Props = {
 function PostAdminBar({ post, boards, profile, onChanged, onRemoved, onSaved }: Props) {
     const [busy, setBusy] = useState(false);
     const [message, setMessage] = useState('');
+    const [note, setNote] = useState('');
     const plan = postModeration(post, profile, boards);
     if (!plan) return null;
+
+    /** Takes the author's photo down; the server answers who may. */
+    const removePhoto = async () => {
+        if (busy || !post.avatarKey) return;
+        setBusy(true);
+        setMessage('');
+        const result = await moderationApi.removeAvatar({ targetKey: post.avatarKey });
+        setBusy(false);
+        if (result.ok) setNote('작성자 사진을 지웠어요.'); else setMessage(describeAvatarRemoveFailure(result as ApiFailure));
+    };
 
     /** The change is drawn first; a refusal draws it back and shows the server's sentence. */
     const run = async (call: () => Promise<{ ok: boolean; message?: string }>, apply: () => void, revert: () => void) => {
@@ -79,6 +91,12 @@ function PostAdminBar({ post, boards, profile, onChanged, onRemoved, onSaved }: 
                 {plan.remove ? <button type="button" className="cm-act cm-act-danger" disabled={busy} onClick={() => { void remove(); }}>삭제</button> : null}
             </div>
             ) : null}
+            {post.avatarKey && !post.notice ? (
+                <div className="cm-admin-row">
+                    <button type="button" className="cm-act" disabled={busy} onClick={() => { void removePhoto(); }}>작성자 사진 지우기</button>
+                </div>
+            ) : null}
+            {note ? <p className="cm-admin-hint" role="status">{note}</p> : null}
             {plan.noticeHint ? <p className="cm-admin-hint">{plan.noticeHint}</p> : null}
             {post.openReports > 0 ? <p className="cm-admin-hint">들어온 신고 {post.openReports}건</p> : null}
             {message ? <p className="lp-error" role="alert">{message}</p> : null}

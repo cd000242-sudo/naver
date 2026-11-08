@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import type { PostItem } from '../../lib/communityData';
 import { boardLabel, formatPostDate, type BoardConfig } from '../../lib/communityModel.mjs';
+import { useAvatars } from '../../lib/useAvatars';
+import Avatar from './Avatar';
 import { GradeBadge, NoticeBadge, StatusBadge } from './Badges';
 
 type Props = { post: PostItem; boards: readonly BoardConfig[]; back: string; now?: number };
@@ -10,6 +12,7 @@ type Props = { post: PostItem; boards: readonly BoardConfig[]; back: string; now
  * No buttons: like, report and edit wait for the real post, so nothing can be done on stale numbers.
  */
 function PostPreview({ post, boards, back, now = Date.now() }: Props) {
+    const photos = useAvatars([post.avatarKey]);
     return (
         <div className="cm-detail">
             <Link className="cm-back" to={back}>← 목록으로</Link>
@@ -22,6 +25,7 @@ function PostPreview({ post, boards, back, now = Date.now() }: Props) {
                     </div>
                     <h1 className="cm-post-title">{post.title}</h1>
                     <div className="cm-post-by">
+                        <Avatar name={post.nickname} src={photos[post.avatarKey]} size={36} />
                         <GradeBadge grade={post.grade} isOperator={post.isOperator} />
                         <b className="cm-nick">{post.nickname}</b>
                         <time>{formatPostDate(post.createdAt, now)}</time>

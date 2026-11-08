@@ -21,6 +21,10 @@ export const COMMUNITY_ACTIONS = Object.freeze({
     adminReportResolve: 'community-admin-report-resolve',
     adminPosts: 'community-admin-posts',
     adminBoards: 'community-admin-boards',
+    setAvatar: 'community-set-avatar',
+    /** Many photos for a list of avatar keys, in one call (50 at most). */
+    avatars: 'community-avatars',
+    adminRemoveAvatar: 'community-admin-remove-avatar',
     adminRewards: 'community-admin-rewards',
     adminRewardDecide: 'community-admin-reward-decide',
     /** One call for a whole community screen: list, board settings, weekly top, counts and the profile. */
@@ -43,6 +47,8 @@ export const COMMUNITY_CODES = Object.freeze({
     PHONE_ALREADY_VERIFIED: 'PHONE_ALREADY_VERIFIED',
     USE_LICENSE_PHONE: 'USE_LICENSE_PHONE',
     NICKNAME_TAKEN: 'NICKNAME_TAKEN',
+    INVALID_IMAGE: 'INVALID_IMAGE',
+    AVATAR_NOT_FOUND: 'AVATAR_NOT_FOUND',
     NOTICE_MANAGED_IN_ADMIN: 'NOTICE_MANAGED_IN_ADMIN',
     NOTICE_NOT_REPORTABLE: 'NOTICE_NOT_REPORTABLE',
     UNAUTHORIZED: 'Unauthorized',

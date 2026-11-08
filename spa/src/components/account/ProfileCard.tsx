@@ -5,6 +5,7 @@ import { gradeProgress } from '../../lib/communityModel.mjs';
 import type { CommunityProfile } from '../../lib/communitySession';
 import { GradeBadge } from '../community/Badges';
 import NicknameForm from '../community/NicknameForm';
+import AvatarEditor from './AvatarEditor';
 import PhoneVerifyForm from './PhoneVerifyForm';
 import RewardStatus from './RewardStatus';
 
@@ -30,6 +31,7 @@ function ProfileCard({ profile, detail, onChanged, onDetail }: Props) {
     return (
         <section className="lp-box me-card" aria-labelledby="me-profile-title">
             <h2 id="me-profile-title" className="lp-sr">프로필</h2>
+            <AvatarEditor profile={profile} onChanged={onChanged} />
             <div className="me-top">
                 <div>
                     <p className="me-name">

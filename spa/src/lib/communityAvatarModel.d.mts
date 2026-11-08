@@ -1,0 +1,11 @@
+export const AVATAR_SIZE: number;
+export const AVATAR_MAX_BYTES: number;
+export const AVATAR_QUALITIES: readonly number[];
+export const AVATAR_KEYS_PER_CALL: number;
+export function isAvatarKey(value: unknown): value is string;
+export function safeAvatarUrl(value: unknown): string;
+export function dataUrlBytes(dataUrl: unknown): number;
+export function avatarCrop(width: number, height: number): { sx: number; sy: number; side: number } | null;
+export function fitAvatar(encode: (quality: number) => string | null | undefined): { dataUrl: string; quality: number } | null;
+export function avatarInitial(name: unknown): string;
+export function chunkKeys<T>(keys: readonly T[], size?: number): T[][];

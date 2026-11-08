@@ -4,6 +4,8 @@ import {
     SORTS, boardLabel, communityPath, formatPostDate, pageNumbers,
     type BoardConfig, type SortKey,
 } from '../../lib/communityModel.mjs';
+import { useAvatars } from '../../lib/useAvatars';
+import Avatar from './Avatar';
 import { GradeBadge, NoticeBadge, StatusBadge } from './Badges';
 
 type Props = {
@@ -35,7 +37,7 @@ type Props = {
 };
 
 type RowProps = {
-    post: PostItem; pinned: boolean; boardId: string; boards: readonly BoardConfig[]; sort: SortKey; now: number; moderator: boolean;
+    post: PostItem; pinned: boolean; boardId: string; boards: readonly BoardConfig[]; sort: SortKey; now: number; moderator: boolean; avatars: Record<string, string>;
     onVisit: (post: PostItem) => void; onRetryLocal?: (post: PostItem) => void; onDiscardLocal?: (post: PostItem) => void;
 };
 
@@ -50,7 +52,7 @@ function LocalState({ post, onRetryLocal, onDiscardLocal }: Pick<RowProps, 'post
     );
 }
 
-function PostRow({ post, pinned, boardId, boards, sort, now, moderator, onVisit, onRetryLocal, onDiscardLocal }: RowProps) {
+function PostRow({ post, pinned, boardId, boards, sort, now, moderator, avatars, onVisit, onRetryLocal, onDiscardLocal }: RowProps) {
     return (
         <li className={`cm-row${pinned ? ' is-pin' : ''}${post.delivery ? ` is-${post.delivery}` : ''}`}>
             <span className="cm-row-board">
@@ -67,6 +69,7 @@ function PostRow({ post, pinned, boardId, boards, sort, now, moderator, onVisit,
                 {post.delivery === 'failed' && post.failure ? <span className="cm-row-fail" role="alert">{post.failure}</span> : null}
             </span>
             <span className="cm-row-author">
+                <Avatar name={post.nickname} src={avatars[post.avatarKey]} size={28} />
                 <GradeBadge grade={post.grade} isOperator={post.isOperator} />
                 <span className="cm-nick">{post.nickname}</span>
             </span>
@@ -98,7 +101,9 @@ function Skeleton() {
 
 function PostList({ title, note, boardId, boards, pinned, posts, total, page, totalPages, sort, loading, refreshing = false, local = [], onRetryLocal, onDiscardLocal, error, now = Date.now(), moderator = false, onVisit, onRetry }: Props) {
     const empty = !loading && !error && local.length === 0 && pinned.length === 0 && posts.length === 0;
-    const rowProps = { boardId, boards, sort, now, moderator, onVisit };
+    // Photos fill in after the rows are drawn (letters first); the list never waits for them.
+    const avatars = useAvatars([...local, ...pinned, ...posts].map((post) => post.avatarKey));
+    const rowProps = { boardId, boards, sort, now, moderator, avatars, onVisit };
     return (
         <section className="lp-box cm-board" aria-labelledby="cm-board-title">
             <div className="cm-board-head">

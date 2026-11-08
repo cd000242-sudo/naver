@@ -16,6 +16,11 @@
 .me-score b { font-size: 26px; font-weight: 900; }
 .me-score span { font-size: 16px; color: var(--lp-muted); }
 .me-score.is-owner b { font-size: 20px; }
+.me-avatar { display: flex; align-items: center; gap: 16px; }
+.me-avatar .cm-avatar { margin-right: 0; }
+.me-avatar-side { display: grid; gap: 6px; min-width: 0; }
+.me-avatar-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.me-avatar-btn { min-height: 44px; min-width: 44px; }
 .me-rewards { display: grid; gap: 6px; margin-top: 4px; }
 .me-rewards h3 { font-size: 16px; font-weight: 800; }
 .me-rewards ul { display: grid; gap: 6px; }

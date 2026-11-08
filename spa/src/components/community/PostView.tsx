@@ -1,5 +1,7 @@
 import type { PostItem } from '../../lib/communityData';
 import { boardLabel, formatPostDate, platformLabel, type BoardConfig } from '../../lib/communityModel.mjs';
+import { useAvatars } from '../../lib/useAvatars';
+import Avatar from './Avatar';
 import { GradeBadge, NoticeBadge, StatusBadge } from './Badges';
 
 type Props = {
@@ -17,6 +19,7 @@ type Props = {
 /** One post: title, author, numbers, body (plain text, line breaks kept), and what the reader can do with it. */
 function PostView({ post, boards, busy = false, onLike, onReport, onEdit, onDelete, onVisit, now = Date.now() }: Props) {
     const promo = post.board === 'promo';
+    const photos = useAvatars([post.avatarKey]);
     return (
         <article className="lp-box cm-post">
             <header className="cm-post-head">
@@ -27,6 +30,7 @@ function PostView({ post, boards, busy = false, onLike, onReport, onEdit, onDele
                 </div>
                 <h1 className="cm-post-title">{post.title}</h1>
                 <div className="cm-post-by">
+                    <Avatar name={post.nickname} src={photos[post.avatarKey]} size={36} />
                     <GradeBadge grade={post.grade} isOperator={post.isOperator} />
                     <b className="cm-nick">{post.nickname}</b>
                     <time>{formatPostDate(post.createdAt, now)}</time>

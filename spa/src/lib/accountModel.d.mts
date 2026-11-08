@@ -17,6 +17,7 @@ export const REWARDS_PATH: string;
 export function isRewardsView(search: unknown): boolean;
 export function describeNicknameFailure(result: Failure): string;
 export function describeRewardFailure(result: Failure): string;
+export function describeAvatarRemoveFailure(result: Failure): string;
 
 export type PostModeration = {
     hide: boolean; hideLabel: string; pin: boolean; pinLabel: string; remove: boolean; noticeHint: string; statusChoices: string[];

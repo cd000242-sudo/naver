@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import type { CommunityProfile } from '../../lib/communitySession';
 import { ALL_BOARD, GRADE_GUIDE, SCORE_RULES, communityPath, gradeProgress, type BoardConfig } from '../../lib/communityModel.mjs';
 import type { GradeEntry } from '../../lib/communityGrades.mjs';
+import { useAvatars } from '../../lib/useAvatars';
+import Avatar from './Avatar';
 import { GradeBadge } from './Badges';
 
 type Props = {
@@ -18,10 +20,12 @@ type Props = {
 
 function MyActivity({ profile }: { profile: CommunityProfile }) {
     const progress = gradeProgress(profile);
+    const photos = useAvatars([profile.avatarKey]);
     return (
         <section className="lp-box cm-me" aria-labelledby="cm-me-title">
             <h2 id="cm-me-title" className="lp-sr">내 활동</h2>
             <div className="cm-me-top">
+                <Avatar name={profile.nickname || profile.userId} src={photos[profile.avatarKey]} size={40} />
                 {profile.nickname
                     ? <b className="cm-me-nick">{profile.nickname}</b>
                     : <b className="cm-me-nick is-empty">닉네임을 정해 주세요</b>}

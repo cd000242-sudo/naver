@@ -24,6 +24,8 @@ export const moderationApi = {
     resolveReport: (reportId: string, status: Resolution) => callWithToken(COMMUNITY_ACTIONS.adminReportResolve, { reportId, status }),
     /** The owner's reward desk: requests waiting for a decision (or all of them). */
     rewards: (status: RewardFilter, page = 1, pageSize = 10) => callWithToken(COMMUNITY_ACTIONS.adminRewards, { status, page, pageSize }),
+    /** Remove an author's photo by the avatar key on their post or comment (or by a post id). */
+    removeAvatar: (target: { targetKey?: string; id?: string }) => callWithToken(COMMUNITY_ACTIONS.adminRemoveAvatar, { ...target }),
     decideReward: (rewardId: string, choice: RewardChoice) => callWithToken(COMMUNITY_ACTIONS.adminRewardDecide, { rewardId, decision: REWARD_DECISION[choice] }),
     hiddenPosts: (page: number, pageSize = 10) => callWithToken(COMMUNITY_ACTIONS.adminPosts, { filter: 'hidden', page, pageSize }),
 };

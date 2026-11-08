@@ -4,6 +4,7 @@
  * and an unexpected shape can never crash a page or become a script link.
  */
 import { isNoticeId, noticeBadgeLabel } from './accountModel.mjs';
+import { isAvatarKey } from './communityAvatarModel.mjs';
 import { NOTICE_BOARD } from './communityContract.mjs';
 
 export type AuthorGrade = { key: string; label: string };
@@ -16,6 +17,8 @@ export type PostItem = {
     /** Only present on the detail reply. */
     body: string;
     nickname: string;
+    /** Key of the author's photo ('' when none); the picture itself comes from community-avatars. */
+    avatarKey: string;
     grade: AuthorGrade | null;
     isOperator: boolean;
     createdAt: string;
@@ -52,6 +55,7 @@ export type CommentItem = {
     postId: string;
     parentId: string;
     nickname: string;
+    avatarKey: string;
     grade: AuthorGrade | null;
     isOperator: boolean;
     body: string;
@@ -110,6 +114,7 @@ export function normalizePost(raw: unknown): PostItem | null {
         excerpt: text(source.excerpt),
         body: text(source.body),
         nickname: text(source.nickname),
+        avatarKey: isAvatarKey(source.avatarKey) ? source.avatarKey : '',
         grade: toGrade(source.grade),
         isOperator: source.isOperator === true,
         createdAt: text(source.createdAt) || (notice ? text(source.noticeDate) : ''),
@@ -152,6 +157,7 @@ export function normalizeComment(raw: unknown, depth = 0): CommentItem | null {
         postId: text(source.postId),
         parentId: text(source.parentId),
         nickname: gone ? '' : text(source.nickname),
+        avatarKey: gone || !isAvatarKey(source.avatarKey) ? '' : source.avatarKey,
         grade: gone ? null : toGrade(source.grade),
         isOperator: !gone && source.isOperator === true,
         body: gone ? '' : text(source.body),

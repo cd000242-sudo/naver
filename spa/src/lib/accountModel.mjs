@@ -149,6 +149,12 @@ export function describeNicknameFailure(result) {
     return String(result?.message || '').trim() || '닉네임을 저장하지 못했어요. 잠시 뒤 다시 해 주세요.';
 }
 
+/** Words for a refused removal of someone's photo. */
+export function describeAvatarRemoveFailure(result) {
+    if (String(result?.code || '') === COMMUNITY_CODES.AVATAR_NOT_FOUND) return '지울 사진이 없어요.';
+    return describeModerationFailure(result);
+}
+
 const REWARD_FAILURES = Object.freeze({
     ALREADY_DECIDED: '이미 처리한 보상이에요.',
     REWARD_NOT_FOUND: '보상 신청을 찾을 수 없어요.',

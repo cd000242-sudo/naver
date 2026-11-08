@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import type { CommentItem } from '../../lib/communityData';
 import { formatPostDate } from '../../lib/communityModel.mjs';
+import Avatar from './Avatar';
 import { GradeBadge } from './Badges';
 
 type Props = {
@@ -17,12 +18,14 @@ type Props = {
     renderReplyForm: (parent: CommentItem) => ReactNode;
     /** Moderator buttons for one comment; set only for an owner, so a member's page has none of it. */
     renderAdmin?: (comment: CommentItem) => ReactNode;
+    /** Photos by avatar key, as far as they are known; a comment without one gets its first letter. */
+    avatars?: Record<string, string>;
     now?: number;
 };
 
 type RowProps = Omit<Props, 'comments'> & { comment: CommentItem; reply: boolean; now: number };
 
-function CommentRow({ comment, reply, replyingTo, onReply, onLike, onDelete, onReport, onRetry, onDiscard, renderReplyForm, renderAdmin, now }: RowProps) {
+function CommentRow({ comment, reply, replyingTo, onReply, onLike, onDelete, onReport, onRetry, onDiscard, renderReplyForm, renderAdmin, avatars = {}, now }: RowProps) {
     return (
         <li className={`cm-comment${reply ? ' is-reply' : ''}${comment.delivery ? ` is-${comment.delivery}` : ''}`}>
             {comment.delivery ? (
@@ -51,6 +54,7 @@ function CommentRow({ comment, reply, replyingTo, onReply, onLike, onDelete, onR
             ) : (
                 <>
                     <div className="cm-c-head">
+                        <Avatar name={comment.nickname} src={avatars[comment.avatarKey]} size={28} />
                         <GradeBadge grade={comment.grade} isOperator={comment.isOperator} />
                         <b className="cm-nick">{comment.nickname}</b>
                         <time>{formatPostDate(comment.createdAt, now)}</time>
@@ -73,7 +77,7 @@ function CommentRow({ comment, reply, replyingTo, onReply, onLike, onDelete, onR
                 <ul className="cm-replies">
                     {comment.replies.map((child) => (
                         <CommentRow key={child.id} comment={child} reply replyingTo={replyingTo} onReply={onReply} onLike={onLike}
-                            onDelete={onDelete} onReport={onReport} onRetry={onRetry} onDiscard={onDiscard} renderReplyForm={renderReplyForm} renderAdmin={renderAdmin} now={now} />
+                            onDelete={onDelete} onReport={onReport} onRetry={onRetry} onDiscard={onDiscard} renderReplyForm={renderReplyForm} renderAdmin={renderAdmin} avatars={avatars} now={now} />
                     ))}
                 </ul>
             ) : null}

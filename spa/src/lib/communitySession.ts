@@ -7,6 +7,7 @@
  */
 
 import { clearFeedCache } from './communityFeedCache';
+import { isAvatarKey } from './communityAvatarModel.mjs';
 import { FOREST_GRADE, normalizeRewards } from './communityGrades.mjs';
 
 export const COMMUNITY_SESSION_KEY = 'leaderspro.community.session.v1';
@@ -37,6 +38,8 @@ export type CommunityProfile = {
     userId: string;
     role: CommunityRole;
     nickname: string;
+    /** Key of my profile photo ('' when none). */
+    avatarKey: string;
     needsNickname: boolean;
     /** True only for the operator account (owner). */
     canWriteNews: boolean;
@@ -84,6 +87,7 @@ export function normalizeProfile(payload: Record<string, unknown>): CommunityPro
         userId: text(payload.userId),
         role,
         nickname: text(payload.nickname),
+        avatarKey: isAvatarKey(payload.avatarKey) ? payload.avatarKey : '',
         needsNickname: payload.needsNickname === true,
         canWriteNews: payload.canWriteNews === true,
         isOperator: payload.isOperator === true,
