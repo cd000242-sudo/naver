@@ -1,9 +1,9 @@
 {
- "publishedAt": "2026-11-07T02:26:23.751Z",
+ "publishedAt": "2026-11-08T01:48:42.278Z",
  "publicationMode": "daily",
  "lastFullPublishedAt": "2026-11-02T01:54:41.498Z",
  "freeSample": {
-  "day": "2026-11-07",
+  "day": "2026-11-08",
   "keywords": [
    "카니발 풀체인지 시기",
    "상토 배양토 차이",
@@ -15,7 +15,7 @@
  "generator": "preemption-board-batch",
  "topicsTotal": 32,
  "topicsWithRows": 32,
- "verified": 22,
+ "verified": 16,
  "rows": [
   {
    "serpSections": [
@@ -3142,7 +3142,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -5124,7 +5124,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -8836,7 +8836,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -9203,7 +9203,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -10035,7 +10035,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -10667,7 +10667,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-10-21T00:45:40.482Z",
+    "checkedAt": "2026-11-08T01:40:15.408Z",
     "reason": "최근 검색결과 재검증에서 추천 조건을 충족하지 못했습니다."
    }
   },
@@ -14834,7 +14834,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -15574,7 +15574,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -16227,7 +16227,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -17091,7 +17091,8 @@
    "peakVolume": 2560,
    "peakConfidence": "1년치만 봄",
    "effectiveVolume": 2560,
-   "preemptRank": 2
+   "preemptRank": 2,
+   "carried": true
   },
   {
    "serpSections": [
@@ -17420,7 +17421,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -18396,7 +18397,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -19006,7 +19007,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -20415,7 +20416,8 @@
    "frontalSaturated": false,
    "effectiveVolume": 1980,
    "peakConfidence": "",
-   "preemptRank": 2
+   "preemptRank": 2,
+   "carried": true
   },
   {
    "serpSections": [
@@ -21003,7 +21005,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -21628,7 +21630,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -22398,7 +22400,7 @@
    "shortTermTrend": {
     "status": "unknown",
     "ratio": null,
-    "measuredAt": "2026-11-04T02:48:06.091Z",
+    "measuredAt": null,
     "windowEnd": "2026-11-03",
     "series": []
    },
@@ -23370,7 +23372,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -23987,7 +23989,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -24129,183 +24131,6 @@
   },
   {
    "serpSections": [
-    "인플루언서",
-    "AI추천",
-    "뉴스",
-    "지식스니펫"
-   ],
-   "layoutBestFor": "naver-blog",
-   "layoutHeadline": "블로그 글이 맨 위에 뜨는 화면 — 네이버 블로그로 붙는 자리다",
-   "layoutRanked": [
-    {
-     "surface": "naver-blog",
-     "label": "네이버 블로그·카페",
-     "position": 1
-    },
-    {
-     "surface": "kin",
-     "label": "지식iN 답변",
-     "position": 4
-    }
-   ],
-   "layoutAdsOnTop": false,
-   "earlyMover": false,
-   "earlyMoverReasons": [],
-   "sectionsMeasured": true,
-   "intentSource": "none",
-   "keyword": "늘근도둑이야기 울산",
-   "topic": "공연·전시",
-   "tier": "golden-ratio",
-   "tierLabel": "황금 비율 — 검색량 > 문서수",
-   "openSlot": 2,
-   "searchVolume": 1690,
-   "documentCount": 109,
-   "evidence": [
-    {
-     "code": "demand",
-     "text": "월 검색량 1,690 · 문서수 109"
-    },
-    {
-     "code": "open-slot",
-     "text": "상위 2번째 자리가 비어 있음"
-    },
-    {
-     "code": "contested",
-     "text": "상위 10개 중 정면으로 다룬 글 5건"
-    },
-    {
-     "code": "golden-ratio",
-     "text": "월 검색량 1,690 > 문서수 109 — 수요가 공급을 넘는 황금 비율"
-    },
-    {
-     "code": "not-realtime",
-     "text": "실시간 검색어에는 아직 없음"
-    },
-    {
-     "code": "ai-briefing",
-     "text": "AI 브리핑 없음 — 클릭이 글로 온다"
-    }
-   ],
-   "intentLabel": "분류 안 됨",
-   "briefingRisk": "low",
-   "regulatoryLabel": "",
-   "trendLabel": "판정불가",
-   "shortTermTrend": {
-    "status": "unknown",
-    "ratio": null,
-    "measuredAt": null,
-    "windowEnd": null,
-    "series": []
-   },
-   "currentSource": null,
-   "seedKind": null,
-   "expansionWords": null,
-   "timing": "",
-   "monthsToPeak": 0,
-   "timingGroup": "",
-   "titles": {
-    "seo": {
-     "text": "",
-     "frame": "generic",
-     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-    },
-    "home": {
-     "text": "",
-     "frame": "generic",
-     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-    }
-   },
-   "adsenseFit": false,
-   "adClicks": 0,
-   "adCtrPc": 0,
-   "adCtrMobile": 0,
-   "adDepth": 0,
-   "monetize": null,
-   "whySearch": null,
-   "brief": null,
-   "kinCount": 0,
-   "kinTop": [],
-   "kinMode": "date-views-v2",
-   "keywordPool": null,
-   "trend": null,
-   "adsenseReason": "검색광고 노출 0개 실측 — 광고주가 안 붙는 말이라 광고 클릭 기대가 낮다",
-   "subKeywords": [],
-   "measuredAt": "2026-10-25T23:36:31.851Z",
-   "demandAsOf": "2026-10",
-   "latestVsPeakPct": 100,
-   "monthsSincePeak": 0,
-   "recencySummary": "2026-10 기준 지금이 최고치입니다",
-   "demandSeries": [
-    {
-     "period": "2026-09-01",
-     "ratio": 70.8
-    },
-    {
-     "period": "2026-10-01",
-     "ratio": 100
-    }
-   ],
-   "meaning": {
-    "citedTitles": [],
-    "questions": [],
-    "productNames": [],
-    "priceMedian": 15900,
-    "priceSamples": 13
-   },
-   "serp": {
-    "sampledTitles": 10,
-    "exactTitleHits": 5,
-    "medianDaysAgo": 14,
-    "hasAiBriefing": false,
-    "aiBriefingSourceCount": 0,
-    "adCount": 0,
-    "slots": [
-     {
-      "rank": 1,
-      "title": "늘근도둑이야기 연극 후기, 중학생 아들도 폭소한 코미디 연극 추천(+울산문화예술회관)",
-      "coverage": 1
-     },
-     {
-      "rank": 2,
-      "title": "10월 울산문화예술회관 공연 전시",
-      "coverage": 0.5
-     },
-     {
-      "rank": 3,
-      "title": "울산 자동차 무상 안전점검 실시",
-      "coverage": 0.5
-     },
-     {
-      "rank": 4,
-      "title": "울산 10월 공연·전시·축제 | 울산에서 즐기는 문화 나들이",
-      "coverage": 0.5
-     },
-     {
-      "rank": 5,
-      "title": "대학로 연극 〈늘근도둑이야기〉 서울 아트포레스트 공연 예매 할인 기본정보!",
-      "coverage": 0.5
-     },
-     {
-      "rank": 6,
-      "title": "그들이 돌아왔다! 연극 늘근도둑이야기 울산 공연",
-      "coverage": 1
-     }
-    ]
-   },
-   "money": {
-    "value": 70,
-    "tier": "none",
-    "pc": 70,
-    "mobile": 70
-   },
-   "frontalSaturated": false,
-   "effectiveVolume": 1690,
-   "peakConfidence": "",
-   "preemptRank": 2,
-   "carried": true
-  },
-  {
-   "serpSections": [
     "AI브리핑",
     "파워링크",
     "AI추천",
@@ -24375,7 +24200,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -26979,7 +26804,12 @@
    "peakMonth": 9,
    "peakMultiplier": 8.3,
    "peakRecurring": null,
-   "peakVolume": 10210
+   "peakVolume": 10210,
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-08T01:40:13.618Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
+   }
   },
   {
    "serpSections": [
@@ -27500,7 +27330,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -29005,7 +28835,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -30752,7 +30582,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -31900,7 +31730,8 @@
    "frontalSaturated": false,
    "effectiveVolume": 1130,
    "peakConfidence": "",
-   "preemptRank": 2
+   "preemptRank": 2,
+   "carried": true
   },
   {
    "serpSections": [
@@ -35965,6 +35796,236 @@
   },
   {
    "serpSections": [
+    "AI추천",
+    "뉴스",
+    "지식스니펫",
+    "카페",
+    "이미지"
+   ],
+   "layoutBestFor": "kin",
+   "layoutHeadline": "지식iN 이 블로그보다 위에 뜬다 — 답변을 달아 내 채널로 끌어오는 편이 빠르다",
+   "layoutRanked": [
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 3
+    },
+    {
+     "surface": "naver-blog",
+     "label": "네이버 블로그·카페",
+     "position": 4
+    }
+   ],
+   "layoutAdsOnTop": false,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "serp",
+   "keyword": "늘근도둑이야기 울산",
+   "topic": "공연·전시",
+   "tier": "golden-ratio",
+   "tierLabel": "황금 비율 — 검색량 > 문서수",
+   "openSlot": 2,
+   "searchVolume": 900,
+   "documentCount": 110,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 900 · 문서수 110"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 2번째 자리가 비어 있음"
+    },
+    {
+     "code": "contested",
+     "text": "상위 10개 중 정면으로 다룬 글 5건"
+    },
+    {
+     "code": "golden-ratio",
+     "text": "월 검색량 900 > 문서수 110 — 수요가 공급을 넘는 황금 비율"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑 없음 — 클릭이 글로 온다"
+    }
+   ],
+   "intentLabel": "정보",
+   "briefingRisk": null,
+   "regulatoryLabel": "",
+   "trendLabel": "판정불가",
+   "shortTermTrend": {
+    "status": "unknown",
+    "ratio": null,
+    "measuredAt": "2026-11-08T01:48:34.124Z",
+    "windowEnd": "2026-11-07",
+    "series": [
+     {
+      "period": "2026-10-25",
+      "ratio": 0
+     },
+     {
+      "period": "2026-10-26",
+      "ratio": 0
+     },
+     {
+      "period": "2026-10-27",
+      "ratio": 0
+     },
+     {
+      "period": "2026-10-28",
+      "ratio": 0
+     },
+     {
+      "period": "2026-10-29",
+      "ratio": 0
+     },
+     {
+      "period": "2026-10-30",
+      "ratio": 0
+     },
+     {
+      "period": "2026-10-31",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-01",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-02",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-03",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-04",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-05",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-06",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-07",
+      "ratio": 0
+     }
+    ]
+   },
+   "currentSource": null,
+   "seedKind": null,
+   "expansionWords": null,
+   "timing": "",
+   "monthsToPeak": null,
+   "timingGroup": "",
+   "titles": {
+    "seo": {
+     "text": "",
+     "frame": "generic",
+     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+    },
+    "home": {
+     "text": "",
+     "frame": "generic",
+     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+    }
+   },
+   "adsenseFit": false,
+   "adClicks": null,
+   "adCtrPc": null,
+   "adCtrMobile": null,
+   "adDepth": null,
+   "monetize": null,
+   "whySearch": null,
+   "brief": null,
+   "kinCount": null,
+   "kinTop": null,
+   "keywordPool": null,
+   "trend": null,
+   "adsenseReason": "검색광고 노출 0개 실측 — 광고주가 안 붙는 말이라 광고 클릭 기대가 낮다",
+   "subKeywords": [],
+   "measuredAt": "2026-11-08T01:40:12.294Z",
+   "searchVolumeMeasuredAt": "2026-11-08T01:40:11.494Z",
+   "documentCountMeasuredAt": "2026-11-08T01:40:12.294Z",
+   "demandAsOf": "2026-10",
+   "latestVsPeakPct": 100,
+   "monthsSincePeak": 0,
+   "recencySummary": "2026-10 기준 지금이 최고치입니다",
+   "demandSeries": [
+    {
+     "period": "2026-09-01",
+     "ratio": 70.8
+    },
+    {
+     "period": "2026-10-01",
+     "ratio": 100
+    }
+   ],
+   "meaning": {
+    "citedTitles": [],
+    "questions": [],
+    "productNames": [],
+    "priceMedian": 30000,
+    "priceSamples": 2
+   },
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 5,
+    "medianDaysAgo": 21,
+    "hasAiBriefing": false,
+    "aiBriefingSourceCount": 0,
+    "adCount": 0,
+    "slots": [
+     {
+      "rank": 1,
+      "title": "늘근도둑이야기 연극 후기, 중학생 아들도 폭소한 코미디 연극 추천(+울산문화예술회관)",
+      "coverage": 1
+     },
+     {
+      "rank": 2,
+      "title": "10월 울산문화예술회관 공연 전시",
+      "coverage": 0.5
+     },
+     {
+      "rank": 3,
+      "title": "울산 자동차 무상 안전점검 실시",
+      "coverage": 0.5
+     },
+     {
+      "rank": 4,
+      "title": "그들이 돌아왔다! 연극 늘근도둑이야기 울산 공연",
+      "coverage": 1
+     },
+     {
+      "rank": 5,
+      "title": "늘근도둑이야기를 보고 - 울산",
+      "coverage": 1
+     },
+     {
+      "rank": 6,
+      "title": "울산 10월 공연·전시·축제 | 울산에서 즐기는 문화 나들이",
+      "coverage": 0.5
+     }
+    ]
+   },
+   "demandSeriesCheckedAt": "2026-11-08T01:48:26.890Z",
+   "frontalSaturated": false,
+   "effectiveVolume": 900,
+   "peakConfidence": "",
+   "preemptRank": 2
+  },
+  {
+   "serpSections": [
     "AI브리핑",
     "AI추천",
     "지식스니펫",
@@ -38059,7 +38120,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -38302,7 +38363,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -40985,189 +41046,6 @@
    "serpSections": [
     "AI브리핑",
     "파워링크",
-    "AI추천",
-    "지식스니펫"
-   ],
-   "layoutBestFor": "kin",
-   "layoutHeadline": "지식iN 이 블로그보다 위에 뜬다 — 답변을 달아 내 채널로 끌어오는 편이 빠르다",
-   "layoutRanked": [
-    {
-     "surface": "kin",
-     "label": "지식iN 답변",
-     "position": 4
-    }
-   ],
-   "layoutAdsOnTop": false,
-   "earlyMover": false,
-   "earlyMoverReasons": [],
-   "sectionsMeasured": true,
-   "intentSource": "lexical",
-   "keyword": "큐티펫 파티 쿠폰",
-   "topic": "반려동물",
-   "tier": "golden-ratio",
-   "tierLabel": "황금 비율 — 검색량 > 문서수",
-   "openSlot": 3,
-   "searchVolume": 750,
-   "documentCount": 404,
-   "evidence": [
-    {
-     "code": "demand",
-     "text": "월 검색량 750 · 문서수 404"
-    },
-    {
-     "code": "ads",
-     "text": "상단 광고 1건 — 광고주가 돈을 넣는 검색어다"
-    },
-    {
-     "code": "open-slot",
-     "text": "상위 3번째 자리가 비어 있음"
-    },
-    {
-     "code": "contested",
-     "text": "상위 10개 중 정면으로 다룬 글 1건"
-    },
-    {
-     "code": "golden-ratio",
-     "text": "월 검색량 750 > 문서수 404 — 수요가 공급을 넘는 황금 비율"
-    },
-    {
-     "code": "not-realtime",
-     "text": "실시간 검색어에는 아직 없음"
-    },
-    {
-     "code": "ai-briefing",
-     "text": "AI 브리핑이 떠 있고 2개 글을 인용 중"
-    }
-   ],
-   "intentLabel": "거래",
-   "briefingRisk": "low",
-   "regulatoryLabel": "",
-   "trendLabel": "판정불가",
-   "shortTermTrend": {
-    "status": "unknown",
-    "ratio": null,
-    "measuredAt": null,
-    "windowEnd": null,
-    "series": []
-   },
-   "currentSource": null,
-   "seedKind": null,
-   "expansionWords": null,
-   "timing": "",
-   "monthsToPeak": 0,
-   "timingGroup": "",
-   "titles": {
-    "seo": {
-     "text": "",
-     "frame": "generic",
-     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-    },
-    "home": {
-     "text": "",
-     "frame": "generic",
-     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-    }
-   },
-   "adsenseFit": false,
-   "adClicks": 4.9,
-   "adCtrPc": 0,
-   "adCtrMobile": 0.78,
-   "adDepth": 1,
-   "monetize": null,
-   "whySearch": null,
-   "brief": null,
-   "kinCount": 165,
-   "kinTop": [],
-   "kinMode": "date-views-v2",
-   "keywordPool": null,
-   "trend": null,
-   "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-   "subKeywords": [],
-   "measuredAt": "2026-10-22T23:46:08.025Z",
-   "demandAsOf": "2026-10",
-   "latestVsPeakPct": 69,
-   "monthsSincePeak": 1,
-   "recencySummary": "2026-10 기준 최고치의 69% (정점은 1개월 전)",
-   "demandSeries": [
-    {
-     "period": "2026-08-01",
-     "ratio": 7.9
-    },
-    {
-     "period": "2026-09-01",
-     "ratio": 100
-    },
-    {
-     "period": "2026-10-01",
-     "ratio": 69
-    }
-   ],
-   "meaning": {
-    "citedTitles": [
-     "큐티펫 파티 쿠폰 코드 · 게임 정보 | LINEGames",
-     "큐티펫 파티 쿠폰 최신 쿠폰공략 가을맞이 이벤트정보"
-    ],
-    "questions": [],
-    "productNames": [],
-    "priceMedian": 18970,
-    "priceSamples": 24
-   },
-   "serp": {
-    "sampledTitles": 10,
-    "exactTitleHits": 1,
-    "medianDaysAgo": 1,
-    "hasAiBriefing": true,
-    "aiBriefingSourceCount": 2,
-    "adCount": 1,
-    "slots": [
-     {
-      "rank": 1,
-      "title": "큐티펫 파티 쿠폰 최신 쿠폰공략 가을맞이 이벤트정보",
-      "coverage": 1
-     },
-     {
-      "rank": 2,
-      "title": "헌터파티키우기 쿠폰 공략 쿠폰사용 방법",
-      "coverage": 0.67
-     },
-     {
-      "rank": 3,
-      "title": "의왕요가 | 내손동요가 | 요가모아나 |시간을 거슬러온 모아나, 그 지나온 날들의 기록",
-      "coverage": 0
-     },
-     {
-      "rank": 4,
-      "title": "노템전 세팅/티어/대체 (+대운동회)",
-      "coverage": 0
-     },
-     {
-      "rank": 5,
-      "title": "중소벤처기업부 온누리상품권 가맹 말소 예고(2025. 06. 27 중소벤처기업부 전통시장과)",
-      "coverage": 0
-     },
-     {
-      "rank": 6,
-      "title": "[신규 패치 T_1.2.147] 메이플스토리 테스트서버(테섭)미리보기 : 신규 추가 아이템 - 신규 의자 라이딩, 신규 펫(원",
-      "coverage": 0
-     }
-    ]
-   },
-   "money": {
-    "value": 70,
-    "tier": "none",
-    "pc": 70,
-    "mobile": 70
-   },
-   "frontalSaturated": false,
-   "effectiveVolume": 750,
-   "peakConfidence": "",
-   "preemptRank": 2,
-   "carried": true
-  },
-  {
-   "serpSections": [
-    "AI브리핑",
-    "파워링크",
     "쇼핑",
     "지식스니펫",
     "웹사이트",
@@ -43228,257 +43106,6 @@
   },
   {
    "serpSections": [
-    "AI브리핑",
-    "AI추천",
-    "지식스니펫",
-    "카페",
-    "인플루언서",
-    "파워링크",
-    "지식iN",
-    "이미지"
-   ],
-   "layoutBestFor": "kin",
-   "layoutHeadline": "지식iN 이 블로그보다 위에 뜬다 — 답변을 달아 내 채널로 끌어오는 편이 빠르다",
-   "layoutRanked": [
-    {
-     "surface": "kin",
-     "label": "지식iN 답변",
-     "position": 3
-    },
-    {
-     "surface": "naver-blog",
-     "label": "네이버 블로그·카페",
-     "position": 4
-    }
-   ],
-   "layoutAdsOnTop": false,
-   "earlyMover": false,
-   "earlyMoverReasons": [],
-   "sectionsMeasured": true,
-   "intentSource": "lexical",
-   "keyword": "부가세 예정고지 분납 신청",
-   "topic": "비즈니스·경제",
-   "tier": "contested",
-   "tierLabel": "경합 — 정면 대응 있음",
-   "openSlot": 1,
-   "searchVolume": 690,
-   "documentCount": 1479,
-   "evidence": [
-    {
-     "code": "demand",
-     "text": "월 검색량 690 · 문서수 1,479"
-    },
-    {
-     "code": "ads",
-     "text": "상단 광고 3건 — 광고주가 돈을 넣는 검색어다"
-    },
-    {
-     "code": "open-slot",
-     "text": "상위 1번째 자리가 비어 있음"
-    },
-    {
-     "code": "contested",
-     "text": "상위 10개 중 정면으로 다룬 글 1건"
-    },
-    {
-     "code": "not-realtime",
-     "text": "실시간 검색어에는 아직 없음"
-    },
-    {
-     "code": "ai-briefing",
-     "text": "AI 브리핑이 떠 있고 7개 글을 인용 중"
-    }
-   ],
-   "intentLabel": "거래",
-   "briefingRisk": null,
-   "regulatoryLabel": "",
-   "trendLabel": "판정불가",
-   "shortTermTrend": {
-    "status": "falling",
-    "ratio": 0,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
-    "windowEnd": "2026-11-06",
-    "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 0
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 4.2735
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 5.1282
-     },
-     {
-      "period": "2026-10-27",
-      "ratio": 5.1282
-     },
-     {
-      "period": "2026-10-28",
-      "ratio": 10.25641
-     },
-     {
-      "period": "2026-10-29",
-      "ratio": 7.6923
-     },
-     {
-      "period": "2026-10-30",
-      "ratio": 6.8376
-     },
-     {
-      "period": "2026-10-31",
-      "ratio": 0
-     },
-     {
-      "period": "2026-11-01",
-      "ratio": 0
-     },
-     {
-      "period": "2026-11-02",
-      "ratio": 0
-     },
-     {
-      "period": "2026-11-03",
-      "ratio": 0
-     },
-     {
-      "period": "2026-11-04",
-      "ratio": 0
-     },
-     {
-      "period": "2026-11-05",
-      "ratio": 0
-     },
-     {
-      "period": "2026-11-06",
-      "ratio": 0
-     }
-    ]
-   },
-   "currentSource": null,
-   "seedKind": null,
-   "expansionWords": null,
-   "timing": "",
-   "monthsToPeak": null,
-   "timingGroup": "",
-   "titles": {
-    "seo": {
-     "text": "",
-     "frame": "generic",
-     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-    },
-    "home": {
-     "text": "",
-     "frame": "generic",
-     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-    }
-   },
-   "adsenseFit": false,
-   "adClicks": null,
-   "adCtrPc": null,
-   "adCtrMobile": null,
-   "adDepth": null,
-   "monetize": null,
-   "whySearch": null,
-   "brief": null,
-   "kinCount": null,
-   "kinTop": null,
-   "keywordPool": null,
-   "trend": null,
-   "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-   "subKeywords": [],
-   "measuredAt": "2026-11-07T02:10:18.761Z",
-   "searchVolumeMeasuredAt": "2026-11-07T02:10:17.876Z",
-   "documentCountMeasuredAt": "2026-11-07T02:10:18.761Z",
-   "demandAsOf": "2026-10",
-   "latestVsPeakPct": 71,
-   "monthsSincePeak": 4,
-   "recencySummary": "2026-10 기준 최고치의 71% (정점은 4개월 전)",
-   "demandSeries": [
-    {
-     "period": "2025-04-01",
-     "ratio": 100
-    },
-    {
-     "period": "2025-05-01",
-     "ratio": 0.5
-    },
-    {
-     "period": "2025-10-01",
-     "ratio": 67.5
-    },
-    {
-     "period": "2026-04-01",
-     "ratio": 34.3
-    },
-    {
-     "period": "2026-10-01",
-     "ratio": 70.8
-    }
-   ],
-   "meaning": {
-    "citedTitles": [
-     "부가가치세 예정고지 세액도 분납이 가능한가요?",
-     "부가세 분납 될까? 안 되면 납부기한 연장으로 9개월 나눠 내기",
-     "법인 2기 부가세 예정고지(10월 25일), 조회와 분납 신청 방법"
-    ],
-    "questions": [
-     "[부가가치세] 부가세 예정고지 세액 납부기한까지 못 낼 것 같다면?"
-    ],
-    "productNames": [],
-    "priceMedian": 898000,
-    "priceSamples": 2
-   },
-   "serp": {
-    "sampledTitles": 10,
-    "exactTitleHits": 1,
-    "medianDaysAgo": 21,
-    "hasAiBriefing": true,
-    "aiBriefingSourceCount": 7,
-    "adCount": 3,
-    "slots": [
-     {
-      "rank": 1,
-      "title": "2026년 11월 세무일정 총정리 | 종합소득세 중간예납, 부가세 예정고지 기한 놓치지 마세요",
-      "coverage": 0.5
-     },
-     {
-      "rank": 2,
-      "title": "2026년 11월 세무일정, 무엇부터 챙길까요? 부가세 예정고지부터 종합소득세 중간예납까지",
-      "coverage": 0.5
-     },
-     {
-      "rank": 3,
-      "title": "개인사업자 부가세 예정고지 납부 유예 및 분납 신청 방법",
-      "coverage": 1
-     },
-     {
-      "rank": 4,
-      "title": "2026 부가세 2기 예정고지 납부기한 및 대상자 조회 방법 (홈택스·손택스 납부 완벽 가이드)",
-      "coverage": 0.5
-     },
-     {
-      "rank": 5,
-      "title": "부가세 예정고지 납부기한 연장 분납 2026 총정리",
-      "coverage": 0.75
-     },
-     {
-      "rank": 6,
-      "title": "[홈택스] 부가세 예정 고지 분할납부 신청 방법",
-      "coverage": 0.75
-     }
-    ]
-   },
-   "demandSeriesCheckedAt": "2026-11-07T02:25:34.515Z",
-   "frontalSaturated": false,
-   "effectiveVolume": 690,
-   "peakConfidence": "",
-   "preemptRank": 2
-  },
-  {
-   "serpSections": [
     "지식스니펫",
     "카페",
     "이미지",
@@ -45458,7 +45085,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-10-11T01:12:29.135Z",
+    "checkedAt": "2026-11-08T01:40:21.176Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -46001,6 +45628,258 @@
     ]
    },
    "demandSeriesCheckedAt": "2026-11-07T02:25:34.515Z",
+   "frontalSaturated": false,
+   "effectiveVolume": 660,
+   "peakConfidence": "",
+   "preemptRank": 2,
+   "carried": true
+  },
+  {
+   "serpSections": [
+    "AI브리핑",
+    "AI추천",
+    "파워링크",
+    "지식스니펫",
+    "카페",
+    "인플루언서",
+    "지식iN",
+    "이미지"
+   ],
+   "layoutBestFor": "kin",
+   "layoutHeadline": "지식iN 이 블로그보다 위에 뜬다 — 답변을 달아 내 채널로 끌어오는 편이 빠르다",
+   "layoutRanked": [
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 4
+    },
+    {
+     "surface": "naver-blog",
+     "label": "네이버 블로그·카페",
+     "position": 5
+    }
+   ],
+   "layoutAdsOnTop": false,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "lexical",
+   "keyword": "부가세 예정고지 분납 신청",
+   "topic": "비즈니스·경제",
+   "tier": "contested",
+   "tierLabel": "경합 — 정면 대응 있음",
+   "openSlot": 1,
+   "searchVolume": 660,
+   "documentCount": 1483,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 660 · 문서수 1,483"
+    },
+    {
+     "code": "ads",
+     "text": "상단 광고 3건 — 광고주가 돈을 넣는 검색어다"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 1번째 자리가 비어 있음"
+    },
+    {
+     "code": "contested",
+     "text": "상위 10개 중 정면으로 다룬 글 1건"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑이 떠 있고 7개 글을 인용 중"
+    }
+   ],
+   "intentLabel": "거래",
+   "briefingRisk": null,
+   "regulatoryLabel": "",
+   "trendLabel": "판정불가",
+   "shortTermTrend": {
+    "status": "falling",
+    "ratio": 0,
+    "measuredAt": "2026-11-08T01:48:34.124Z",
+    "windowEnd": "2026-11-07",
+    "series": [
+     {
+      "period": "2026-10-25",
+      "ratio": 4.2735
+     },
+     {
+      "period": "2026-10-26",
+      "ratio": 5.1282
+     },
+     {
+      "period": "2026-10-27",
+      "ratio": 5.1282
+     },
+     {
+      "period": "2026-10-28",
+      "ratio": 10.25641
+     },
+     {
+      "period": "2026-10-29",
+      "ratio": 7.6923
+     },
+     {
+      "period": "2026-10-30",
+      "ratio": 6.8376
+     },
+     {
+      "period": "2026-10-31",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-01",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-02",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-03",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-04",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-05",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-06",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-07",
+      "ratio": 0
+     }
+    ]
+   },
+   "currentSource": null,
+   "seedKind": null,
+   "expansionWords": null,
+   "timing": "",
+   "monthsToPeak": null,
+   "timingGroup": "",
+   "titles": {
+    "seo": {
+     "text": "",
+     "frame": "generic",
+     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+    },
+    "home": {
+     "text": "",
+     "frame": "generic",
+     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+    }
+   },
+   "adsenseFit": false,
+   "adClicks": null,
+   "adCtrPc": null,
+   "adCtrMobile": null,
+   "adDepth": null,
+   "monetize": null,
+   "whySearch": null,
+   "brief": null,
+   "kinCount": null,
+   "kinTop": null,
+   "keywordPool": null,
+   "trend": null,
+   "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+   "subKeywords": [],
+   "measuredAt": "2026-11-08T01:40:10.390Z",
+   "searchVolumeMeasuredAt": "2026-11-08T01:40:09.561Z",
+   "documentCountMeasuredAt": "2026-11-08T01:40:10.390Z",
+   "demandAsOf": "2026-10",
+   "latestVsPeakPct": 71,
+   "monthsSincePeak": 4,
+   "recencySummary": "2026-10 기준 최고치의 71% (정점은 4개월 전)",
+   "demandSeries": [
+    {
+     "period": "2025-04-01",
+     "ratio": 100
+    },
+    {
+     "period": "2025-05-01",
+     "ratio": 0.5
+    },
+    {
+     "period": "2025-10-01",
+     "ratio": 67.5
+    },
+    {
+     "period": "2026-04-01",
+     "ratio": 34.3
+    },
+    {
+     "period": "2026-10-01",
+     "ratio": 70.8
+    }
+   ],
+   "meaning": {
+    "citedTitles": [
+     "부가가치세 예정고지 세액도 분납이 가능한가요?",
+     "부가세 분납 될까? 안 되면 납부기한 연장으로 9개월 나눠 내기",
+     "법인 2기 부가세 예정고지(10월 25일), 조회와 분납 신청 방법"
+    ],
+    "questions": [
+     "[부가가치세] 부가세 예정고지 세액 납부기한까지 못 낼 것 같다면?"
+    ],
+    "productNames": [],
+    "priceMedian": 898000,
+    "priceSamples": 2
+   },
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 1,
+    "medianDaysAgo": 14,
+    "hasAiBriefing": true,
+    "aiBriefingSourceCount": 7,
+    "adCount": 3,
+    "slots": [
+     {
+      "rank": 1,
+      "title": "2026 부가세 2기 예정고지 납부기한 및 대상자 조회 방법 (홈택스·손택스 납부 완벽 가이드)",
+      "coverage": 0.5
+     },
+     {
+      "rank": 2,
+      "title": "2026년 11월 세무일정 총정리 | 종합소득세 중간예납, 부가세 예정고지 기한 놓치지 마세요",
+      "coverage": 0.5
+     },
+     {
+      "rank": 3,
+      "title": "개인사업자 부가세 예정고지 납부 유예 및 분납 신청 방법",
+      "coverage": 1
+     },
+     {
+      "rank": 4,
+      "title": "2026년 11월 세무일정, 무엇부터 챙길까요? 부가세 예정고지부터 종합소득세 중간예납까지",
+      "coverage": 0.5
+     },
+     {
+      "rank": 5,
+      "title": "부가세 예정고지 납부기한 연장 분납 2026 총정리",
+      "coverage": 0.75
+     },
+     {
+      "rank": 6,
+      "title": "[홈택스] 부가세 예정 고지 분할납부 신청 방법",
+      "coverage": 0.75
+     }
+    ]
+   },
+   "demandSeriesCheckedAt": "2026-11-08T01:48:26.890Z",
    "frontalSaturated": false,
    "effectiveVolume": 660,
    "peakConfidence": "",
@@ -51008,7 +50887,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -53920,7 +53799,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -55666,7 +55545,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-10-22T00:48:28.194Z",
+    "checkedAt": "2026-11-08T01:40:22.969Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -57287,7 +57166,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -57595,7 +57474,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -57908,7 +57787,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -59036,7 +58915,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -59828,7 +59707,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -60196,6 +60075,11 @@
     "tier": "low",
     "pc": 70,
     "mobile": 90
+   },
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-08T01:40:26.747Z",
+    "reason": "최근 검색결과 재검증에서 추천 조건을 충족하지 못했습니다."
    }
   },
   {
@@ -60566,7 +60450,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -61930,7 +61814,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -62375,15 +62259,11 @@
    "regulatoryLabel": "",
    "trendLabel": "판정불가",
    "shortTermTrend": {
-    "status": "unknown",
-    "ratio": null,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
-    "windowEnd": "2026-11-06",
+    "status": "rising",
+    "ratio": 99.8381,
+    "measuredAt": "2026-11-08T01:48:34.124Z",
+    "windowEnd": "2026-11-07",
     "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 0
-     },
      {
       "period": "2026-10-25",
       "ratio": 0
@@ -62435,6 +62315,10 @@
      {
       "period": "2026-11-06",
       "ratio": 12.84246
+     },
+     {
+      "period": "2026-11-07",
+      "ratio": 11.81506
      }
     ]
    },
@@ -63123,7 +63007,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -66382,6 +66266,7 @@
    "serpSections": [
     "파워링크",
     "지식스니펫",
+    "지식iN",
     "인플루언서",
     "카페",
     "이미지"
@@ -66397,7 +66282,7 @@
     {
      "surface": "naver-blog",
      "label": "네이버 블로그·카페",
-     "position": 3
+     "position": 4
     }
    ],
    "layoutAdsOnTop": true,
@@ -66410,12 +66295,12 @@
    "tier": "golden-ratio",
    "tierLabel": "황금 비율 — 검색량 > 문서수",
    "openSlot": 8,
-   "searchVolume": 9680,
+   "searchVolume": 9610,
    "documentCount": 8465,
    "evidence": [
     {
      "code": "demand",
-     "text": "월 검색량 9,680 · 문서수 8,465"
+     "text": "월 검색량 9,610 · 문서수 8,465"
     },
     {
      "code": "ads",
@@ -66431,7 +66316,7 @@
     },
     {
      "code": "golden-ratio",
-     "text": "월 검색량 9,680 > 문서수 8,465 — 수요가 공급을 넘는 황금 비율"
+     "text": "월 검색량 9,610 > 문서수 8,465 — 수요가 공급을 넘는 황금 비율"
     },
     {
      "code": "not-realtime",
@@ -66442,20 +66327,16 @@
      "text": "AI 브리핑 없음 — 클릭이 글로 온다"
     }
    ],
-   "intentLabel": "거래",
+   "intentLabel": "정보",
    "briefingRisk": null,
    "regulatoryLabel": "",
    "trendLabel": "상승세",
    "shortTermTrend": {
     "status": "flat",
-    "ratio": 1.018,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
-    "windowEnd": "2026-11-06",
+    "ratio": 0.9941,
+    "measuredAt": "2026-11-08T01:48:34.124Z",
+    "windowEnd": "2026-11-07",
     "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 55.85585
-     },
      {
       "period": "2026-10-25",
       "ratio": 71.84684
@@ -66507,6 +66388,10 @@
      {
       "period": "2026-11-06",
       "ratio": 61.71171
+     },
+     {
+      "period": "2026-11-07",
+      "ratio": 54.95495
      }
     ]
    },
@@ -66528,7 +66413,7 @@
      "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
     }
    },
-   "adsenseFit": false,
+   "adsenseFit": true,
    "adClicks": null,
    "adCtrPc": null,
    "adCtrMobile": null,
@@ -66540,15 +66425,15 @@
    "kinTop": null,
    "keywordPool": null,
    "trend": null,
-   "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+   "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적 (노출 광고 7개 · 광고 클릭률 0.56% 실측)",
    "subKeywords": [],
-   "measuredAt": "2026-11-07T02:10:12.883Z",
-   "searchVolumeMeasuredAt": "2026-11-07T02:10:10.838Z",
-   "documentCountMeasuredAt": "2026-11-07T02:10:12.883Z",
+   "measuredAt": "2026-11-08T01:40:04.904Z",
+   "searchVolumeMeasuredAt": "2026-11-08T01:40:02.428Z",
+   "documentCountMeasuredAt": "2026-11-08T01:40:04.904Z",
    "demandAsOf": "2026-11",
-   "latestVsPeakPct": 14,
+   "latestVsPeakPct": 16,
    "monthsSincePeak": 11,
-   "recencySummary": "2026-11 기준 최고치의 14% (정점은 11개월 전)",
+   "recencySummary": "2026-11 기준 최고치의 16% (정점은 11개월 전)",
    "demandSeries": [
     {
      "period": "2025-07-01",
@@ -66616,7 +66501,7 @@
     },
     {
      "period": "2026-11-01",
-     "ratio": 14.5
+     "ratio": 16.3
     }
    ],
    "meaning": {
@@ -66636,23 +66521,23 @@
     "slots": [
      {
       "rank": 1,
-      "title": "협의이혼 서류 양식 받는곳 다운로드 및 동사무소 제출 절차 총정리",
-      "coverage": 1
-     },
-     {
-      "rank": 2,
       "title": "합의이혼 서류 양식 출력 방법, 발급처와 동사무소 이용 안내",
       "coverage": 0.67
      },
      {
+      "rank": 2,
+      "title": "이혼서류양식, 협의이혼 신청서 어디서 다운로드할까?",
+      "coverage": 0.67
+     },
+     {
       "rank": 3,
-      "title": "협의이혼 서류 양식 받는곳, 증인 2명 서명은 신청서가 아닌 이혼신고서에",
+      "title": "협의이혼 서류 양식 받는곳 다운로드 및 동사무소 제출 절차 총정리",
       "coverage": 1
      },
      {
       "rank": 4,
-      "title": "이혼서류양식, 협의이혼 신청서 어디서 다운로드할까?",
-      "coverage": 0.67
+      "title": "협의이혼 서류 양식 받는곳, 증인 2명 서명은 신청서가 아닌 이혼신고서에",
+      "coverage": 1
      },
      {
       "rank": 5,
@@ -66661,19 +66546,19 @@
      },
      {
       "rank": 6,
-      "title": "협의이혼 서류 양식 - 그대로 쓰시면 되는 신청서 한 장, 그리고 이 서류에 없는 것",
+      "title": "이혼 신청 서류 준비는? 협의이혼 신청 필요 서류 양식과 절차는",
       "coverage": 0.67
      }
     ]
    },
-   "demandSeriesCheckedAt": "2026-11-07T02:25:34.515Z",
+   "demandSeriesCheckedAt": "2026-11-08T01:48:26.890Z",
    "frontalSaturated": false,
    "peakMonth": 12,
    "peakMultiplier": 1.1,
    "peakRecurring": null,
-   "peakVolume": 12855,
+   "peakVolume": 12762,
    "peakConfidence": "1년치만 봄",
-   "effectiveVolume": 9680,
+   "effectiveVolume": 9610,
    "preemptRank": 3
   },
   {
@@ -69653,7 +69538,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -73746,7 +73631,8 @@
    "frontalSaturated": false,
    "effectiveVolume": 2370,
    "peakConfidence": "",
-   "preemptRank": 3
+   "preemptRank": 3,
+   "carried": true
   },
   {
    "serpSections": [
@@ -74865,7 +74751,7 @@
     "status": "unknown",
     "ratio": null,
     "measuredAt": null,
-    "windowEnd": "2026-11-02",
+    "windowEnd": null,
     "series": []
    },
    "currentSource": null,
@@ -75789,7 +75675,8 @@
    "peakVolume": 2734,
    "peakConfidence": "작년엔 다른 달",
    "effectiveVolume": 1780,
-   "preemptRank": 3
+   "preemptRank": 3,
+   "carried": true
   },
   {
    "serpSections": [
@@ -78650,342 +78537,6 @@
   },
   {
    "serpSections": [
-    "AI브리핑",
-    "카페",
-    "이미지",
-    "지식스니펫"
-   ],
-   "layoutBestFor": "naver-blog",
-   "layoutHeadline": "블로그 글이 맨 위에 뜨는 화면 — 네이버 블로그로 붙는 자리다",
-   "layoutRanked": [
-    {
-     "surface": "naver-blog",
-     "label": "네이버 블로그·카페",
-     "position": 2
-    },
-    {
-     "surface": "kin",
-     "label": "지식iN 답변",
-     "position": 4
-    }
-   ],
-   "layoutAdsOnTop": false,
-   "earlyMover": false,
-   "earlyMoverReasons": [],
-   "sectionsMeasured": true,
-   "intentSource": "serp",
-   "keyword": "가을길 리코더 악보",
-   "topic": "음악",
-   "tier": "golden-ratio",
-   "tierLabel": "황금 비율 — 검색량 > 문서수",
-   "openSlot": 6,
-   "searchVolume": 1220,
-   "documentCount": 322,
-   "evidence": [
-    {
-     "code": "demand",
-     "text": "월 검색량 1,220 · 문서수 322"
-    },
-    {
-     "code": "open-slot",
-     "text": "상위 6번째 자리가 비어 있음"
-    },
-    {
-     "code": "contested",
-     "text": "상위 10개 중 정면으로 다룬 글 4건"
-    },
-    {
-     "code": "golden-ratio",
-     "text": "월 검색량 1,220 > 문서수 322 — 수요가 공급을 넘는 황금 비율"
-    },
-    {
-     "code": "not-realtime",
-     "text": "실시간 검색어에는 아직 없음"
-    },
-    {
-     "code": "ai-briefing",
-     "text": "AI 브리핑이 떠 있고 3개 글을 인용 중"
-    }
-   ],
-   "intentLabel": "정보",
-   "briefingRisk": null,
-   "regulatoryLabel": "",
-   "trendLabel": "상승세",
-   "shortTermTrend": {
-    "status": "unknown",
-    "ratio": null,
-    "measuredAt": null,
-    "windowEnd": null,
-    "series": []
-   },
-   "currentSource": null,
-   "seedKind": null,
-   "expansionWords": null,
-   "timing": "",
-   "monthsToPeak": null,
-   "timingGroup": "",
-   "titles": {
-    "seo": {
-     "text": "",
-     "frame": "generic",
-     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-    },
-    "home": {
-     "text": "",
-     "frame": "generic",
-     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-    }
-   },
-   "adsenseFit": true,
-   "adClicks": 2,
-   "adCtrPc": 0,
-   "adCtrMobile": 0.2,
-   "adDepth": 1,
-   "monetize": null,
-   "whySearch": null,
-   "brief": null,
-   "kinCount": null,
-   "kinTop": null,
-   "keywordPool": [
-    {
-     "keyword": "가을길 동요 가사",
-     "searchVolume": 150,
-     "source": "ai-verified",
-     "documentCount": 6355
-    },
-    {
-     "keyword": "가을길 악보 계이름",
-     "searchVolume": 30,
-     "source": "ai-verified",
-     "documentCount": 324
-    },
-    {
-     "keyword": "가을길 동요 악보",
-     "searchVolume": 20,
-     "source": "ai-verified",
-     "documentCount": 1626
-    },
-    {
-     "keyword": "가을길 피아노 악보",
-     "searchVolume": 10,
-     "source": "ai-verified",
-     "documentCount": 7319
-    },
-    {
-     "keyword": "가을길 리코더 계이름",
-     "searchVolume": null,
-     "source": "ai-verified",
-     "documentCount": 90
-    }
-   ],
-   "trend": {
-    "series": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     14,
-     0,
-     0,
-     14,
-     14,
-     14,
-     0,
-     22,
-     20,
-     39,
-     51,
-     66,
-     78,
-     81,
-     100,
-     78,
-     76,
-     98,
-     92
-    ],
-    "label": "",
-    "recommendation": ""
-   },
-   "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적 (노출 광고 1개 · 광고 클릭률 0.20% 실측)",
-   "subKeywords": [
-    {
-     "keyword": "가을길 동요 가사",
-     "searchVolume": 150,
-     "frame": "generic"
-    },
-    {
-     "keyword": "가을길 악보 계이름",
-     "searchVolume": 30,
-     "frame": "generic"
-    },
-    {
-     "keyword": "가을길 동요 악보",
-     "searchVolume": 20,
-     "frame": "generic"
-    }
-   ],
-   "measuredAt": "2026-10-22T00:48:24.294Z",
-   "searchVolumeMeasuredAt": "2026-10-22T00:48:23.429Z",
-   "documentCountMeasuredAt": "2026-10-22T00:48:24.294Z",
-   "demandAsOf": "2026-10",
-   "latestVsPeakPct": 36,
-   "monthsSincePeak": 10,
-   "recencySummary": "2026-10 기준 최고치의 36% (정점은 10개월 전)",
-   "demandSeries": [
-    {
-     "period": "2024-10-01",
-     "ratio": 17.1
-    },
-    {
-     "period": "2024-11-01",
-     "ratio": 7.1
-    },
-    {
-     "period": "2024-12-01",
-     "ratio": 1.2
-    },
-    {
-     "period": "2025-04-01",
-     "ratio": 0.8
-    },
-    {
-     "period": "2025-05-01",
-     "ratio": 0.9
-    },
-    {
-     "period": "2025-06-01",
-     "ratio": 0.2
-    },
-    {
-     "period": "2025-07-01",
-     "ratio": 1.8
-    },
-    {
-     "period": "2025-08-01",
-     "ratio": 11.1
-    },
-    {
-     "period": "2025-09-01",
-     "ratio": 100
-    },
-    {
-     "period": "2025-10-01",
-     "ratio": 41.5
-    },
-    {
-     "period": "2025-11-01",
-     "ratio": 19.4
-    },
-    {
-     "period": "2025-12-01",
-     "ratio": 8.2
-    },
-    {
-     "period": "2026-01-01",
-     "ratio": 0.9
-    },
-    {
-     "period": "2026-05-01",
-     "ratio": 2.3
-    },
-    {
-     "period": "2026-06-01",
-     "ratio": 5
-    },
-    {
-     "period": "2026-07-01",
-     "ratio": 5.4
-    },
-    {
-     "period": "2026-08-01",
-     "ratio": 6.8
-    },
-    {
-     "period": "2026-09-01",
-     "ratio": 71.9
-    },
-    {
-     "period": "2026-10-01",
-     "ratio": 35.7
-    }
-   ],
-   "meaning": {
-    "citedTitles": [
-     "가을길 (리코더악보) (계이름) - 김규환 쉬운 리코더 악보 | siwol",
-     "가을길 계이름 악보ㅣ리코더 악보",
-     "가을 리코더 곡 추천"
-    ],
-    "questions": [],
-    "productNames": [],
-    "priceMedian": null,
-    "priceSamples": 0
-   },
-   "serp": {
-    "sampledTitles": 10,
-    "exactTitleHits": 4,
-    "medianDaysAgo": 14,
-    "hasAiBriefing": true,
-    "aiBriefingSourceCount": 3,
-    "adCount": 0,
-    "slots": [
-     {
-      "rank": 1,
-      "title": "가을길 리코더 악보 무료 다운로드 및 쉬운 계이름 구하는 법",
-      "coverage": 1
-     },
-     {
-      "rank": 2,
-      "title": "가을길 계이름 악보ㅣ리코더 악보",
-      "coverage": 1
-     },
-     {
-      "rank": 3,
-      "title": "반정아이파크캐슬 초등 리코더｜가을 동요 ‘가을길’ 리코더 연습",
-      "coverage": 0.67
-     },
-     {
-      "rank": 4,
-      "title": "[리코더 연습] '가을 길' 2중주 완벽 마스터! 초등학생 장기자랑 레전드 무대 만들기",
-      "coverage": 0.67
-     },
-     {
-      "rank": 5,
-      "title": "가을길 리코더 악보",
-      "coverage": 1
-     },
-     {
-      "rank": 6,
-      "title": "가을 리코더 곡 추천",
-      "coverage": 0.56
-     }
-    ]
-   },
-   "demandSeriesCheckedAt": "2026-10-22T01:13:43.085Z",
-   "frontalSaturated": false,
-   "peakMonth": 9,
-   "peakMultiplier": 10.4,
-   "peakRecurring": null,
-   "peakVolume": 3417,
-   "peakConfidence": "1년치만 봄",
-   "effectiveVolume": 1220,
-   "preemptRank": 3,
-   "carried": true,
-   "money": {
-    "value": 70,
-    "tier": "none",
-    "pc": 70,
-    "mobile": 70
-   }
-  },
-  {
-   "serpSections": [
     "파워링크",
     "카페",
     "이미지",
@@ -79605,7 +79156,7 @@
    "shortTermTrend": {
     "status": "unknown",
     "ratio": null,
-    "measuredAt": "2026-11-04T02:48:06.091Z",
+    "measuredAt": null,
     "windowEnd": "2026-11-03",
     "series": []
    },
@@ -80459,7 +80010,7 @@
    "shortTermTrend": {
     "status": "unknown",
     "ratio": null,
-    "measuredAt": "2026-11-04T02:48:06.091Z",
+    "measuredAt": null,
     "windowEnd": "2026-11-03",
     "series": []
    },
@@ -83324,444 +82875,6 @@
   },
   {
    "serpSections": [
-    "파워링크",
-    "AI브리핑",
-    "AI추천",
-    "지식스니펫",
-    "인플루언서",
-    "카페",
-    "뉴스",
-    "이미지"
-   ],
-   "layoutBestFor": "kin",
-   "layoutHeadline": "지식iN 이 블로그보다 위에 뜬다 — 답변을 달아 내 채널로 끌어오는 편이 빠르다",
-   "layoutRanked": [
-    {
-     "surface": "kin",
-     "label": "지식iN 답변",
-     "position": 4
-    },
-    {
-     "surface": "naver-blog",
-     "label": "네이버 블로그·카페",
-     "position": 5
-    }
-   ],
-   "layoutAdsOnTop": true,
-   "earlyMover": false,
-   "earlyMoverReasons": [],
-   "sectionsMeasured": true,
-   "intentSource": "serp",
-   "keyword": "인천 산후조리원 지원금",
-   "topic": "육아·결혼",
-   "tier": "page1-weak",
-   "tierLabel": "1페이지에 빈자리 (실시간 노출 중)",
-   "openSlot": 3,
-   "searchVolume": 900,
-   "documentCount": 8706,
-   "evidence": [
-    {
-     "code": "demand",
-     "text": "월 검색량 900 · 문서수 8,706"
-    },
-    {
-     "code": "ads",
-     "text": "상단 광고 3건 — 광고주가 돈을 넣는 검색어다"
-    },
-    {
-     "code": "open-slot",
-     "text": "상위 3번째 자리가 비어 있음"
-    },
-    {
-     "code": "empty-field",
-     "text": "상위 10개 중 정면으로 다룬 글 0건"
-    },
-    {
-     "code": "not-realtime",
-     "text": "실시간 검색어에는 아직 없음"
-    },
-    {
-     "code": "ai-briefing",
-     "text": "AI 브리핑이 떠 있고 5개 글을 인용 중"
-    }
-   ],
-   "intentLabel": "거래",
-   "briefingRisk": null,
-   "regulatoryLabel": "",
-   "trendLabel": "들쭉날쭉",
-   "shortTermTrend": {
-    "status": "flat",
-    "ratio": 1.0667,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
-    "windowEnd": "2026-11-06",
-    "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 34.61538
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 51.92307
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 53.84615
-     },
-     {
-      "period": "2026-10-27",
-      "ratio": 65.38461
-     },
-     {
-      "period": "2026-10-28",
-      "ratio": 55.76923
-     },
-     {
-      "period": "2026-10-29",
-      "ratio": 50
-     },
-     {
-      "period": "2026-10-30",
-      "ratio": 34.61538
-     },
-     {
-      "period": "2026-10-31",
-      "ratio": 32.6923
-     },
-     {
-      "period": "2026-11-01",
-      "ratio": 46.15384
-     },
-     {
-      "period": "2026-11-02",
-      "ratio": 61.53846
-     },
-     {
-      "period": "2026-11-03",
-      "ratio": 65.38461
-     },
-     {
-      "period": "2026-11-04",
-      "ratio": 67.30769
-     },
-     {
-      "period": "2026-11-05",
-      "ratio": 50
-     },
-     {
-      "period": "2026-11-06",
-      "ratio": 46.15384
-     }
-    ]
-   },
-   "currentSource": null,
-   "seedKind": null,
-   "expansionWords": null,
-   "timing": "",
-   "monthsToPeak": null,
-   "timingGroup": "",
-   "titles": {
-    "seo": {
-     "text": "인천 산후조리원 지원금 실제 비용 정리",
-     "frame": "price",
-     "basis": "검색 질문 '인천 산후조리원 비용' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-    },
-    "home": {
-     "text": "인천 산후조리원 지원금 비용, 미리 알면 다릅니다",
-     "frame": "price",
-     "basis": "검색 질문 '인천 산후조리원 비용' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-    }
-   },
-   "adsenseFit": false,
-   "adClicks": null,
-   "adCtrPc": null,
-   "adCtrMobile": null,
-   "adDepth": null,
-   "monetize": {
-    "verdict": "mixed",
-    "points": [
-     {
-      "text": "검색어가 두 덩어리로 갈린다. '인천 산후조리비 지원'(480), '인천 출산지원금'(2350), '인천 첫만남이용권'(170), '인천 임산부 교통비'(300)는 전부 '내가 받을 수 있는 정부 돈'을 찾는 절차형 검색이다. 이 사람이 손에 쥐어야 만족하는 건 도구 URL이 아니라 '얼마·자격·신청방법·정부24 링크'라는 정보/절차다."
-     },
-     {
-      "text": "반대편에 '인천 산후조리원 비용'(170), '인천 산후조리원 가격'(40), '인천 산후조리원 추천'(270), '동탄 산후조리원 비교'(310)라는 상업 클러스터가 붙어 있다. 여기가 실제 지갑을 여는 상태고, '인천 산모신생아 건강관리'(바우처=산후도우미)까지 있어 산후도우미 파견업체·조리원 광고가 뜰 소지가 있다."
-     },
-     {
-      "text": "핵심 키워드 '지원금' 자체는 광고 클릭 상태가 아니다. 출산지원금(2350)·첫만남이용권(170)을 검색하는 사람은 '공짜로 받는 돈'을 확인하러 온 거라 구매 의사가 없고, 상단은 정부24·인천시청 공식 페이지가 점유해 블로그가 클릭을 뺏기 어렵다."
-     },
-     {
-      "text": "체류시간은 나쁘지 않다. '지원금/지원'은 소득기준·신청기간·필요서류·중복수급 여부를 읽어야 풀리는 검색이라 한 줄 보고 나가는 '인천 산후조리원 순위'(10)·'가격'(40)과 다르게 스크롤이 걸린다. 다만 체류가 곧 클릭은 아니다."
-     }
-    ],
-    "angle": "'인천 산후조리비 지원(480)으로 실제 몇 원 깎이나'를 자격·신청절차로 먼저 풀어 지원금 트래픽을 받되, 본문 후반을 '그 지원금 얹어서 갈 만한 인천 조리원 비용대별 비교(비용170·가격40)'와 '산모신생아 건강관리 바우처로 부르는 산후도우미(건강관리)'로 착지시켜 정보 검색자를 상업 클러스터 쪽으로 넘긴다. 출산지원금(2350)·교통비(300)·첫",
-    "provider": "claude"
-   },
-   "whySearch": null,
-   "brief": null,
-   "kinCount": null,
-   "kinTop": null,
-   "keywordPool": [
-    {
-     "keyword": "인천 출산지원금",
-     "searchVolume": 2350,
-     "source": "ai-verified",
-     "documentCount": 46893
-    },
-    {
-     "keyword": "인천 산후조리비 지원",
-     "searchVolume": 1190,
-     "source": "ai-verified",
-     "documentCount": 8846
-    },
-    {
-     "keyword": "인천 산후도우미 지원",
-     "searchVolume": 530,
-     "source": "ai-verified",
-     "documentCount": 9681
-    },
-    {
-     "keyword": "인천 산후조리원 비용",
-     "searchVolume": 90,
-     "source": "ai-verified",
-     "documentCount": 12369
-    },
-    {
-     "keyword": "인천 임산부 지원금",
-     "searchVolume": 30,
-     "source": "ai-verified",
-     "documentCount": 15138
-    },
-    {
-     "keyword": "인천 산모신생아 건강관리",
-     "searchVolume": 20,
-     "source": "ai-verified",
-     "documentCount": 13096
-    }
-   ],
-   "trend": {
-    "series": [
-     100,
-     100,
-     51,
-     79,
-     87,
-     86,
-     64,
-     36,
-     48,
-     31,
-     31,
-     38,
-     22,
-     29,
-     18,
-     22,
-     21,
-     19,
-     62,
-     40,
-     53,
-     35,
-     43,
-     26,
-     40,
-     32,
-     45,
-     61,
-     43
-    ],
-    "label": "",
-    "recommendation": ""
-   },
-   "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-   "subKeywords": [
-    {
-     "keyword": "인천 출산지원금",
-     "searchVolume": 2350,
-     "frame": "generic"
-    },
-    {
-     "keyword": "인천 산후조리비 지원",
-     "searchVolume": 1190,
-     "frame": "generic"
-    },
-    {
-     "keyword": "인천 산후도우미 지원",
-     "searchVolume": 530,
-     "frame": "generic"
-    }
-   ],
-   "measuredAt": "2026-11-07T02:10:14.057Z",
-   "searchVolumeMeasuredAt": "2026-11-07T02:10:13.154Z",
-   "documentCountMeasuredAt": "2026-11-07T02:10:14.057Z",
-   "demandAsOf": "2026-11",
-   "latestVsPeakPct": 10,
-   "monthsSincePeak": 8,
-   "recencySummary": "2026-11 기준 최고치의 10% (정점은 8개월 전)",
-   "demandSeries": [
-    {
-     "period": "2024-11-01",
-     "ratio": 33.1
-    },
-    {
-     "period": "2024-12-01",
-     "ratio": 59.9
-    },
-    {
-     "period": "2025-01-01",
-     "ratio": 68.9
-    },
-    {
-     "period": "2025-02-01",
-     "ratio": 69.7
-    },
-    {
-     "period": "2025-03-01",
-     "ratio": 62.1
-    },
-    {
-     "period": "2025-04-01",
-     "ratio": 60
-    },
-    {
-     "period": "2025-05-01",
-     "ratio": 62.7
-    },
-    {
-     "period": "2025-06-01",
-     "ratio": 71.8
-    },
-    {
-     "period": "2025-07-01",
-     "ratio": 77
-    },
-    {
-     "period": "2025-08-01",
-     "ratio": 79.8
-    },
-    {
-     "period": "2025-09-01",
-     "ratio": 64.5
-    },
-    {
-     "period": "2025-10-01",
-     "ratio": 61.7
-    },
-    {
-     "period": "2025-11-01",
-     "ratio": 58.8
-    },
-    {
-     "period": "2025-12-01",
-     "ratio": 64.5
-    },
-    {
-     "period": "2026-01-01",
-     "ratio": 72.6
-    },
-    {
-     "period": "2026-02-01",
-     "ratio": 77.8
-    },
-    {
-     "period": "2026-03-01",
-     "ratio": 100
-    },
-    {
-     "period": "2026-04-01",
-     "ratio": 73
-    },
-    {
-     "period": "2026-05-01",
-     "ratio": 65.5
-    },
-    {
-     "period": "2026-06-01",
-     "ratio": 60.1
-    },
-    {
-     "period": "2026-07-01",
-     "ratio": 61.4
-    },
-    {
-     "period": "2026-08-01",
-     "ratio": 52.1
-    },
-    {
-     "period": "2026-09-01",
-     "ratio": 62
-    },
-    {
-     "period": "2026-10-01",
-     "ratio": 54.5
-    },
-    {
-     "period": "2026-11-01",
-     "ratio": 10.5
-    }
-   ],
-   "meaning": {
-    "citedTitles": [
-     "홈 아이플러스(i+) 1억드림 맘편한 산후조리비 지원 | 복지",
-     "맘편한 산후조리비 지원",
-     "인천 맘편한 산후조리비 신청｜35~39세 산모도 조건 충족 시 150만원 포인트"
-    ],
-    "questions": [],
-    "productNames": [],
-    "priceMedian": null,
-    "priceSamples": 0
-   },
-   "serp": {
-    "sampledTitles": 10,
-    "exactTitleHits": 0,
-    "medianDaysAgo": 14,
-    "hasAiBriefing": true,
-    "aiBriefingSourceCount": 5,
-    "adCount": 3,
-    "slots": [
-     {
-      "rank": 1,
-      "title": "2026년 기준 인천광역시 출산·육아 지원금 정리했어요!",
-      "coverage": 0.67
-     },
-     {
-      "rank": 2,
-      "title": "산후조리원 비용 2주 평균 372만 원, 지원금으로 결제되는 것과 안 되는 것",
-      "coverage": 0.67
-     },
-     {
-      "rank": 3,
-      "title": "산후도우미 정부지원 신청 시기, 조리원 퇴소 전에 복지로로 미리 하는 이유",
-      "coverage": 0.56
-     },
-     {
-      "rank": 4,
-      "title": "2026년 최신 인천광역시(아이플러스 1억드림 포함) 임신, 출산 지원금, 육아지원비 총정리! 다자녀 혜택까지 한장 정리!",
-      "coverage": 0.67
-     },
-     {
-      "rank": 5,
-      "title": "인천 쌍둥이 혜택, 소득 상관없이 150만원 산후조리비 지원금 신청방법 및 사용처",
-      "coverage": 0.93
-     },
-     {
-      "rank": 6,
-      "title": "[인천 영종구 산후조리비 50만 원 지원]소득 제한 없이 신청 가능! 병원 약국 사용 가능!",
-      "coverage": 0.82
-     }
-    ]
-   },
-   "demandSeriesCheckedAt": "2026-11-07T02:25:34.515Z",
-   "frontalSaturated": false,
-   "peakMonth": 3,
-   "peakMultiplier": 1.6,
-   "peakRecurring": false,
-   "peakVolume": 1651,
-   "peakConfidence": "작년엔 다른 달",
-   "effectiveVolume": 900,
-   "preemptRank": 3
-  },
-  {
-   "serpSections": [
     "AI브리핑",
     "인플루언서",
     "지식스니펫",
@@ -84354,6 +83467,443 @@
     "pc": 70,
     "mobile": 70
    }
+  },
+  {
+   "serpSections": [
+    "파워링크",
+    "AI브리핑",
+    "AI추천",
+    "지식스니펫",
+    "인플루언서",
+    "카페",
+    "이미지"
+   ],
+   "layoutBestFor": "kin",
+   "layoutHeadline": "지식iN 이 블로그보다 위에 뜬다 — 답변을 달아 내 채널로 끌어오는 편이 빠르다",
+   "layoutRanked": [
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 4
+    },
+    {
+     "surface": "naver-blog",
+     "label": "네이버 블로그·카페",
+     "position": 5
+    }
+   ],
+   "layoutAdsOnTop": true,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "serp",
+   "keyword": "인천 산후조리원 지원금",
+   "topic": "육아·결혼",
+   "tier": "page1-weak",
+   "tierLabel": "1페이지에 빈자리 (실시간 노출 중)",
+   "openSlot": 7,
+   "searchVolume": 880,
+   "documentCount": 8712,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 880 · 문서수 8,712"
+    },
+    {
+     "code": "ads",
+     "text": "상단 광고 3건 — 광고주가 돈을 넣는 검색어다"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 7번째 자리가 비어 있음"
+    },
+    {
+     "code": "empty-field",
+     "text": "상위 10개 중 정면으로 다룬 글 0건"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑이 떠 있고 4개 글을 인용 중"
+    }
+   ],
+   "intentLabel": "거래",
+   "briefingRisk": null,
+   "regulatoryLabel": "",
+   "trendLabel": "들쭉날쭉",
+   "shortTermTrend": {
+    "status": "flat",
+    "ratio": 1.0894,
+    "measuredAt": "2026-11-08T01:48:34.124Z",
+    "windowEnd": "2026-11-07",
+    "series": [
+     {
+      "period": "2026-10-25",
+      "ratio": 51.92307
+     },
+     {
+      "period": "2026-10-26",
+      "ratio": 53.84615
+     },
+     {
+      "period": "2026-10-27",
+      "ratio": 65.38461
+     },
+     {
+      "period": "2026-10-28",
+      "ratio": 55.76923
+     },
+     {
+      "period": "2026-10-29",
+      "ratio": 50
+     },
+     {
+      "period": "2026-10-30",
+      "ratio": 34.61538
+     },
+     {
+      "period": "2026-10-31",
+      "ratio": 32.6923
+     },
+     {
+      "period": "2026-11-01",
+      "ratio": 46.15384
+     },
+     {
+      "period": "2026-11-02",
+      "ratio": 61.53846
+     },
+     {
+      "period": "2026-11-03",
+      "ratio": 65.38461
+     },
+     {
+      "period": "2026-11-04",
+      "ratio": 67.30769
+     },
+     {
+      "period": "2026-11-05",
+      "ratio": 50
+     },
+     {
+      "period": "2026-11-06",
+      "ratio": 46.15384
+     },
+     {
+      "period": "2026-11-07",
+      "ratio": 38.46153
+     }
+    ]
+   },
+   "currentSource": null,
+   "seedKind": null,
+   "expansionWords": null,
+   "timing": "",
+   "monthsToPeak": null,
+   "timingGroup": "",
+   "titles": {
+    "seo": {
+     "text": "인천 산후조리원 지원금 실제 비용 정리",
+     "frame": "price",
+     "basis": "검색 질문 '인천 산후조리원 비용' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+    },
+    "home": {
+     "text": "인천 산후조리원 지원금 비용, 미리 알면 다릅니다",
+     "frame": "price",
+     "basis": "검색 질문 '인천 산후조리원 비용' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+    }
+   },
+   "adsenseFit": false,
+   "adClicks": null,
+   "adCtrPc": null,
+   "adCtrMobile": null,
+   "adDepth": null,
+   "monetize": {
+    "verdict": "mixed",
+    "points": [
+     {
+      "text": "검색어가 두 덩어리로 갈린다. '인천 산후조리비 지원'(480), '인천 출산지원금'(2350), '인천 첫만남이용권'(170), '인천 임산부 교통비'(300)는 전부 '내가 받을 수 있는 정부 돈'을 찾는 절차형 검색이다. 이 사람이 손에 쥐어야 만족하는 건 도구 URL이 아니라 '얼마·자격·신청방법·정부24 링크'라는 정보/절차다."
+     },
+     {
+      "text": "반대편에 '인천 산후조리원 비용'(170), '인천 산후조리원 가격'(40), '인천 산후조리원 추천'(270), '동탄 산후조리원 비교'(310)라는 상업 클러스터가 붙어 있다. 여기가 실제 지갑을 여는 상태고, '인천 산모신생아 건강관리'(바우처=산후도우미)까지 있어 산후도우미 파견업체·조리원 광고가 뜰 소지가 있다."
+     },
+     {
+      "text": "핵심 키워드 '지원금' 자체는 광고 클릭 상태가 아니다. 출산지원금(2350)·첫만남이용권(170)을 검색하는 사람은 '공짜로 받는 돈'을 확인하러 온 거라 구매 의사가 없고, 상단은 정부24·인천시청 공식 페이지가 점유해 블로그가 클릭을 뺏기 어렵다."
+     },
+     {
+      "text": "체류시간은 나쁘지 않다. '지원금/지원'은 소득기준·신청기간·필요서류·중복수급 여부를 읽어야 풀리는 검색이라 한 줄 보고 나가는 '인천 산후조리원 순위'(10)·'가격'(40)과 다르게 스크롤이 걸린다. 다만 체류가 곧 클릭은 아니다."
+     }
+    ],
+    "angle": "'인천 산후조리비 지원(480)으로 실제 몇 원 깎이나'를 자격·신청절차로 먼저 풀어 지원금 트래픽을 받되, 본문 후반을 '그 지원금 얹어서 갈 만한 인천 조리원 비용대별 비교(비용170·가격40)'와 '산모신생아 건강관리 바우처로 부르는 산후도우미(건강관리)'로 착지시켜 정보 검색자를 상업 클러스터 쪽으로 넘긴다. 출산지원금(2350)·교통비(300)·첫",
+    "provider": "claude"
+   },
+   "whySearch": null,
+   "brief": null,
+   "kinCount": null,
+   "kinTop": null,
+   "keywordPool": [
+    {
+     "keyword": "인천 출산지원금",
+     "searchVolume": 2350,
+     "source": "ai-verified",
+     "documentCount": 46893
+    },
+    {
+     "keyword": "인천 산후조리비 지원",
+     "searchVolume": 1190,
+     "source": "ai-verified",
+     "documentCount": 8846
+    },
+    {
+     "keyword": "인천 산후도우미 지원",
+     "searchVolume": 530,
+     "source": "ai-verified",
+     "documentCount": 9681
+    },
+    {
+     "keyword": "인천 산후조리원 비용",
+     "searchVolume": 90,
+     "source": "ai-verified",
+     "documentCount": 12369
+    },
+    {
+     "keyword": "인천 임산부 지원금",
+     "searchVolume": 30,
+     "source": "ai-verified",
+     "documentCount": 15138
+    },
+    {
+     "keyword": "인천 산모신생아 건강관리",
+     "searchVolume": 20,
+     "source": "ai-verified",
+     "documentCount": 13096
+    }
+   ],
+   "trend": {
+    "series": [
+     100,
+     100,
+     51,
+     79,
+     87,
+     86,
+     64,
+     36,
+     48,
+     31,
+     31,
+     38,
+     22,
+     29,
+     18,
+     22,
+     21,
+     19,
+     62,
+     40,
+     53,
+     35,
+     43,
+     26,
+     40,
+     32,
+     45,
+     61,
+     43
+    ],
+    "label": "",
+    "recommendation": ""
+   },
+   "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+   "subKeywords": [
+    {
+     "keyword": "인천 출산지원금",
+     "searchVolume": 2350,
+     "frame": "generic"
+    },
+    {
+     "keyword": "인천 산후조리비 지원",
+     "searchVolume": 1190,
+     "frame": "generic"
+    },
+    {
+     "keyword": "인천 산후도우미 지원",
+     "searchVolume": 530,
+     "frame": "generic"
+    }
+   ],
+   "measuredAt": "2026-11-08T01:40:06.002Z",
+   "searchVolumeMeasuredAt": "2026-11-08T01:40:05.133Z",
+   "documentCountMeasuredAt": "2026-11-08T01:40:06.002Z",
+   "demandAsOf": "2026-11",
+   "latestVsPeakPct": 12,
+   "monthsSincePeak": 8,
+   "recencySummary": "2026-11 기준 최고치의 12% (정점은 8개월 전)",
+   "demandSeries": [
+    {
+     "period": "2024-11-01",
+     "ratio": 33.1
+    },
+    {
+     "period": "2024-12-01",
+     "ratio": 59.9
+    },
+    {
+     "period": "2025-01-01",
+     "ratio": 68.9
+    },
+    {
+     "period": "2025-02-01",
+     "ratio": 69.7
+    },
+    {
+     "period": "2025-03-01",
+     "ratio": 62.1
+    },
+    {
+     "period": "2025-04-01",
+     "ratio": 60
+    },
+    {
+     "period": "2025-05-01",
+     "ratio": 62.7
+    },
+    {
+     "period": "2025-06-01",
+     "ratio": 71.8
+    },
+    {
+     "period": "2025-07-01",
+     "ratio": 77
+    },
+    {
+     "period": "2025-08-01",
+     "ratio": 79.8
+    },
+    {
+     "period": "2025-09-01",
+     "ratio": 64.5
+    },
+    {
+     "period": "2025-10-01",
+     "ratio": 61.7
+    },
+    {
+     "period": "2025-11-01",
+     "ratio": 58.8
+    },
+    {
+     "period": "2025-12-01",
+     "ratio": 64.5
+    },
+    {
+     "period": "2026-01-01",
+     "ratio": 72.6
+    },
+    {
+     "period": "2026-02-01",
+     "ratio": 77.8
+    },
+    {
+     "period": "2026-03-01",
+     "ratio": 100
+    },
+    {
+     "period": "2026-04-01",
+     "ratio": 73
+    },
+    {
+     "period": "2026-05-01",
+     "ratio": 65.5
+    },
+    {
+     "period": "2026-06-01",
+     "ratio": 60.1
+    },
+    {
+     "period": "2026-07-01",
+     "ratio": 61.4
+    },
+    {
+     "period": "2026-08-01",
+     "ratio": 52.1
+    },
+    {
+     "period": "2026-09-01",
+     "ratio": 62
+    },
+    {
+     "period": "2026-10-01",
+     "ratio": 54.5
+    },
+    {
+     "period": "2026-11-01",
+     "ratio": 11.7
+    }
+   ],
+   "meaning": {
+    "citedTitles": [
+     "홈 아이플러스(i+) 1억드림 맘편한 산후조리비 지원 | 복지",
+     "연수구 산후조리비용 지원사업 | 보건사업 모자보건사업 | 보건소",
+     "맘편한 산후조리비 지원"
+    ],
+    "questions": [],
+    "productNames": [],
+    "priceMedian": null,
+    "priceSamples": 0
+   },
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 0,
+    "medianDaysAgo": 21,
+    "hasAiBriefing": true,
+    "aiBriefingSourceCount": 4,
+    "adCount": 3,
+    "slots": [
+     {
+      "rank": 1,
+      "title": "2026년 기준 인천광역시 출산·육아 지원금 정리했어요!",
+      "coverage": 0.67
+     },
+     {
+      "rank": 2,
+      "title": "2026년 최신 인천광역시(아이플러스 1억드림 포함) 임신, 출산 지원금, 육아지원비 총정리! 다자녀 혜택까지 한장 정리!",
+      "coverage": 0.67
+     },
+     {
+      "rank": 3,
+      "title": "[인천 영종구 산후조리비 50만 원 지원]소득 제한 없이 신청 가능! 병원 약국 사용 가능!",
+      "coverage": 0.82
+     },
+     {
+      "rank": 4,
+      "title": "산후조리원 비용 2주 평균 372만 원, 지원금으로 결제되는 것과 안 되는 것",
+      "coverage": 0.67
+     },
+     {
+      "rank": 5,
+      "title": "산후조리비지원, 지역마다 기한이 다릅니다: 서울 180일·인천 90일·경기 12개월 (2026년 기준)",
+      "coverage": 0.82
+     },
+     {
+      "rank": 6,
+      "title": "인천에서 출산한다면? 의외로 모르는 산후조리비 150만원 지원",
+      "coverage": 0.82
+     }
+    ]
+   },
+   "demandSeriesCheckedAt": "2026-11-08T01:48:26.890Z",
+   "frontalSaturated": false,
+   "peakMonth": 3,
+   "peakMultiplier": 1.6,
+   "peakRecurring": false,
+   "peakVolume": 1615,
+   "peakConfidence": "작년엔 다른 달",
+   "effectiveVolume": 880,
+   "preemptRank": 3
   },
   {
    "serpSections": [
@@ -85481,7 +85031,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-07T02:10:15.812Z",
+    "checkedAt": "2026-11-08T01:40:07.561Z",
     "reason": "최근 검색결과 재검증에서 추천 조건을 충족하지 못했습니다."
    }
   },
@@ -85779,6 +85329,392 @@
     "checkedAt": "2026-10-31T01:43:45.627Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
+  },
+  {
+   "serpSections": [
+    "AI브리핑",
+    "카페",
+    "이미지",
+    "지식스니펫"
+   ],
+   "layoutBestFor": "naver-blog",
+   "layoutHeadline": "블로그 글이 맨 위에 뜨는 화면 — 네이버 블로그로 붙는 자리다",
+   "layoutRanked": [
+    {
+     "surface": "naver-blog",
+     "label": "네이버 블로그·카페",
+     "position": 2
+    },
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 4
+    }
+   ],
+   "layoutAdsOnTop": false,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "serp",
+   "keyword": "가을길 리코더 악보",
+   "topic": "음악",
+   "tier": "golden-ratio",
+   "tierLabel": "황금 비율 — 검색량 > 문서수",
+   "openSlot": 6,
+   "searchVolume": 800,
+   "documentCount": 331,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 800 · 문서수 331"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 6번째 자리가 비어 있음"
+    },
+    {
+     "code": "contested",
+     "text": "상위 10개 중 정면으로 다룬 글 3건"
+    },
+    {
+     "code": "golden-ratio",
+     "text": "월 검색량 800 > 문서수 331 — 수요가 공급을 넘는 황금 비율"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑이 떠 있고 5개 글을 인용 중"
+    }
+   ],
+   "intentLabel": "정보",
+   "briefingRisk": null,
+   "regulatoryLabel": "",
+   "trendLabel": "상승세",
+   "shortTermTrend": {
+    "status": "falling",
+    "ratio": 0.7308,
+    "measuredAt": "2026-11-08T01:48:34.124Z",
+    "windowEnd": "2026-11-07",
+    "series": [
+     {
+      "period": "2026-10-25",
+      "ratio": 30.95238
+     },
+     {
+      "period": "2026-10-26",
+      "ratio": 80.95238
+     },
+     {
+      "period": "2026-10-27",
+      "ratio": 52.38095
+     },
+     {
+      "period": "2026-10-28",
+      "ratio": 52.38095
+     },
+     {
+      "period": "2026-10-29",
+      "ratio": 38.09523
+     },
+     {
+      "period": "2026-10-30",
+      "ratio": 26.19047
+     },
+     {
+      "period": "2026-10-31",
+      "ratio": 28.57142
+     },
+     {
+      "period": "2026-11-01",
+      "ratio": 45.23809
+     },
+     {
+      "period": "2026-11-02",
+      "ratio": 26.19047
+     },
+     {
+      "period": "2026-11-03",
+      "ratio": 35.71428
+     },
+     {
+      "period": "2026-11-04",
+      "ratio": 28.57142
+     },
+     {
+      "period": "2026-11-05",
+      "ratio": 59.5238
+     },
+     {
+      "period": "2026-11-06",
+      "ratio": 14.28571
+     },
+     {
+      "period": "2026-11-07",
+      "ratio": 16.66666
+     }
+    ]
+   },
+   "currentSource": null,
+   "seedKind": null,
+   "expansionWords": null,
+   "timing": "",
+   "monthsToPeak": null,
+   "timingGroup": "",
+   "titles": {
+    "seo": {
+     "text": "",
+     "frame": "generic",
+     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+    },
+    "home": {
+     "text": "",
+     "frame": "generic",
+     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+    }
+   },
+   "adsenseFit": true,
+   "adClicks": null,
+   "adCtrPc": null,
+   "adCtrMobile": null,
+   "adDepth": null,
+   "monetize": null,
+   "whySearch": null,
+   "brief": null,
+   "kinCount": null,
+   "kinTop": null,
+   "keywordPool": [
+    {
+     "keyword": "가을길 동요 가사",
+     "searchVolume": 150,
+     "source": "ai-verified",
+     "documentCount": 6355
+    },
+    {
+     "keyword": "가을길 악보 계이름",
+     "searchVolume": 30,
+     "source": "ai-verified",
+     "documentCount": 324
+    },
+    {
+     "keyword": "가을길 동요 악보",
+     "searchVolume": 20,
+     "source": "ai-verified",
+     "documentCount": 1626
+    },
+    {
+     "keyword": "가을길 피아노 악보",
+     "searchVolume": 10,
+     "source": "ai-verified",
+     "documentCount": 7319
+    },
+    {
+     "keyword": "가을길 리코더 계이름",
+     "searchVolume": null,
+     "source": "ai-verified",
+     "documentCount": 90
+    }
+   ],
+   "trend": {
+    "series": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     14,
+     0,
+     0,
+     14,
+     14,
+     14,
+     0,
+     22,
+     20,
+     39,
+     51,
+     66,
+     78,
+     81,
+     100,
+     78,
+     76,
+     98,
+     92
+    ],
+    "label": "",
+    "recommendation": ""
+   },
+   "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적 (노출 광고 1개 실측)",
+   "subKeywords": [
+    {
+     "keyword": "가을길 동요 가사",
+     "searchVolume": 150,
+     "frame": "generic"
+    },
+    {
+     "keyword": "가을길 악보 계이름",
+     "searchVolume": 30,
+     "frame": "generic"
+    },
+    {
+     "keyword": "가을길 동요 악보",
+     "searchVolume": 20,
+     "frame": "generic"
+    }
+   ],
+   "measuredAt": "2026-11-08T01:40:19.166Z",
+   "searchVolumeMeasuredAt": "2026-11-08T01:40:18.332Z",
+   "documentCountMeasuredAt": "2026-11-08T01:40:19.166Z",
+   "demandAsOf": "2026-11",
+   "latestVsPeakPct": 4,
+   "monthsSincePeak": 11,
+   "recencySummary": "2026-11 기준 최고치의 4% (정점은 11개월 전)",
+   "demandSeries": [
+    {
+     "period": "2024-11-01",
+     "ratio": 7.1
+    },
+    {
+     "period": "2024-12-01",
+     "ratio": 1.2
+    },
+    {
+     "period": "2025-04-01",
+     "ratio": 0.8
+    },
+    {
+     "period": "2025-05-01",
+     "ratio": 0.9
+    },
+    {
+     "period": "2025-06-01",
+     "ratio": 0.2
+    },
+    {
+     "period": "2025-07-01",
+     "ratio": 1.8
+    },
+    {
+     "period": "2025-08-01",
+     "ratio": 11.1
+    },
+    {
+     "period": "2025-09-01",
+     "ratio": 100
+    },
+    {
+     "period": "2025-10-01",
+     "ratio": 41.5
+    },
+    {
+     "period": "2025-11-01",
+     "ratio": 19.4
+    },
+    {
+     "period": "2025-12-01",
+     "ratio": 8.2
+    },
+    {
+     "period": "2026-01-01",
+     "ratio": 0.9
+    },
+    {
+     "period": "2026-05-01",
+     "ratio": 2.3
+    },
+    {
+     "period": "2026-06-01",
+     "ratio": 5
+    },
+    {
+     "period": "2026-07-01",
+     "ratio": 5.4
+    },
+    {
+     "period": "2026-08-01",
+     "ratio": 6.8
+    },
+    {
+     "period": "2026-09-01",
+     "ratio": 71.9
+    },
+    {
+     "period": "2026-10-01",
+     "ratio": 44.5
+    },
+    {
+     "period": "2026-11-01",
+     "ratio": 4.2
+    }
+   ],
+   "meaning": {
+    "citedTitles": [
+     "가을길 / 소프라노 리코더",
+     "가을길 계이름 악보ㅣ리코더 악보",
+     "가을길 (리코더악보) - 김규환 (계이름) - siwol 리코더 악보 | 마피아"
+    ],
+    "questions": [],
+    "productNames": [],
+    "priceMedian": 2000,
+    "priceSamples": 10
+   },
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 3,
+    "medianDaysAgo": 14,
+    "hasAiBriefing": true,
+    "aiBriefingSourceCount": 5,
+    "adCount": 0,
+    "slots": [
+     {
+      "rank": 1,
+      "title": "가을길 계이름 악보ㅣ리코더 악보",
+      "coverage": 1
+     },
+     {
+      "rank": 2,
+      "title": "반정아이파크캐슬 초등 리코더｜가을 동요 ‘가을길’ 리코더 연습",
+      "coverage": 0.67
+     },
+     {
+      "rank": 3,
+      "title": "[리코더 연습] '가을 길' 2중주 완벽 마스터! 초등학생 장기자랑 레전드 무대 만들기",
+      "coverage": 0.67
+     },
+     {
+      "rank": 4,
+      "title": "가을길 리코더 악보",
+      "coverage": 1
+     },
+     {
+      "rank": 5,
+      "title": "초등학교 4학년 리코더 \"가을길\" 계이름",
+      "coverage": 0.67
+     },
+     {
+      "rank": 6,
+      "title": "가을 리코더 곡 추천",
+      "coverage": 0.56
+     }
+    ]
+   },
+   "demandSeriesCheckedAt": "2026-11-08T01:48:26.890Z",
+   "frontalSaturated": false,
+   "peakMonth": 9,
+   "peakMultiplier": 10.4,
+   "peakRecurring": null,
+   "peakVolume": 1798,
+   "peakConfidence": "1년치만 봄",
+   "effectiveVolume": 800,
+   "preemptRank": 3
   },
   {
    "serpSections": [
@@ -87038,7 +86974,7 @@
    "shortTermTrend": {
     "status": "unknown",
     "ratio": null,
-    "measuredAt": "2026-11-04T02:48:06.091Z",
+    "measuredAt": null,
     "windowEnd": "2026-11-03",
     "series": []
    },
@@ -87329,341 +87265,6 @@
     "value": 160,
     "tier": "low",
     "pc": 160,
-    "mobile": 70
-   }
-  },
-  {
-   "serpSections": [
-    "AI브리핑",
-    "파워링크",
-    "지식스니펫"
-   ],
-   "layoutBestFor": "kin",
-   "layoutHeadline": "지식iN 이 블로그보다 위에 뜬다 — 답변을 달아 내 채널로 끌어오는 편이 빠르다",
-   "layoutRanked": [
-    {
-     "surface": "kin",
-     "label": "지식iN 답변",
-     "position": 3
-    }
-   ],
-   "layoutAdsOnTop": false,
-   "earlyMover": false,
-   "earlyMoverReasons": [],
-   "sectionsMeasured": true,
-   "intentSource": "lexical",
-   "keyword": "강일테니스장 예약",
-   "topic": "스포츠",
-   "tier": "golden-ratio",
-   "tierLabel": "황금 비율 — 검색량 > 문서수",
-   "openSlot": 3,
-   "searchVolume": 760,
-   "documentCount": 340,
-   "evidence": [
-    {
-     "code": "demand",
-     "text": "월 검색량 760 · 문서수 340"
-    },
-    {
-     "code": "ads",
-     "text": "상단 광고 1건 — 광고주가 돈을 넣는 검색어다"
-    },
-    {
-     "code": "open-slot",
-     "text": "상위 3번째 자리가 비어 있음"
-    },
-    {
-     "code": "contested",
-     "text": "상위 10개 중 정면으로 다룬 글 4건"
-    },
-    {
-     "code": "golden-ratio",
-     "text": "월 검색량 760 > 문서수 340 — 수요가 공급을 넘는 황금 비율"
-    },
-    {
-     "code": "not-realtime",
-     "text": "실시간 검색어에는 아직 없음"
-    },
-    {
-     "code": "ai-briefing",
-     "text": "AI 브리핑이 떠 있고 4개 글을 인용 중"
-    }
-   ],
-   "intentLabel": "거래",
-   "briefingRisk": null,
-   "regulatoryLabel": "",
-   "trendLabel": "들쭉날쭉",
-   "shortTermTrend": {
-    "status": "unknown",
-    "ratio": null,
-    "measuredAt": null,
-    "windowEnd": null,
-    "series": []
-   },
-   "currentSource": null,
-   "seedKind": null,
-   "expansionWords": null,
-   "timing": "",
-   "monthsToPeak": null,
-   "timingGroup": "",
-   "titles": {
-    "seo": {
-     "text": "",
-     "frame": "generic",
-     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-    },
-    "home": {
-     "text": "",
-     "frame": "generic",
-     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-    }
-   },
-   "adsenseFit": false,
-   "adClicks": 0,
-   "adCtrPc": 0,
-   "adCtrMobile": 0,
-   "adDepth": 1,
-   "monetize": null,
-   "whySearch": null,
-   "brief": null,
-   "kinCount": null,
-   "kinTop": null,
-   "keywordPool": [
-    {
-     "keyword": "강동구 테니스장 예약",
-     "searchVolume": 10,
-     "source": "ai-verified",
-     "documentCount": 1662
-    },
-    {
-     "keyword": "서울 공공테니스장 예약",
-     "searchVolume": null,
-     "source": "ai-verified",
-     "documentCount": 3684
-    }
-   ],
-   "trend": {
-    "series": [
-     33,
-     25,
-     26,
-     21,
-     19,
-     21,
-     22,
-     20,
-     11,
-     5,
-     8,
-     22,
-     13,
-     15,
-     20,
-     20,
-     20,
-     20,
-     42,
-     100,
-     27,
-     17,
-     25,
-     17,
-     20,
-     25,
-     23,
-     16,
-     9
-    ],
-    "label": "📉 단발성",
-    "recommendation": "회피! 지난 며칠 폭발 후 급락 중. 글 써도 유입 없음"
-   },
-   "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-   "subKeywords": [
-    {
-     "keyword": "강동구 테니스장 예약",
-     "searchVolume": 10,
-     "frame": "generic"
-    },
-    {
-     "keyword": "서울 공공테니스장 예약",
-     "searchVolume": null,
-     "frame": "generic"
-    }
-   ],
-   "measuredAt": "2026-10-21T00:45:38.076Z",
-   "searchVolumeMeasuredAt": "2026-10-21T00:45:37.231Z",
-   "documentCountMeasuredAt": "2026-10-21T00:45:38.076Z",
-   "demandAsOf": "2026-10",
-   "latestVsPeakPct": 58,
-   "monthsSincePeak": 3,
-   "recencySummary": "2026-10 기준 최고치의 58% (정점은 3개월 전)",
-   "demandSeries": [
-    {
-     "period": "2024-10-01",
-     "ratio": 82
-    },
-    {
-     "period": "2024-11-01",
-     "ratio": 44
-    },
-    {
-     "period": "2024-12-01",
-     "ratio": 33.5
-    },
-    {
-     "period": "2025-01-01",
-     "ratio": 35.6
-    },
-    {
-     "period": "2025-02-01",
-     "ratio": 31.2
-    },
-    {
-     "period": "2025-03-01",
-     "ratio": 41.1
-    },
-    {
-     "period": "2025-04-01",
-     "ratio": 39.7
-    },
-    {
-     "period": "2025-05-01",
-     "ratio": 44.9
-    },
-    {
-     "period": "2025-06-01",
-     "ratio": 61.6
-    },
-    {
-     "period": "2025-07-01",
-     "ratio": 53.7
-    },
-    {
-     "period": "2025-08-01",
-     "ratio": 65.3
-    },
-    {
-     "period": "2025-09-01",
-     "ratio": 57.3
-    },
-    {
-     "period": "2025-10-01",
-     "ratio": 73.6
-    },
-    {
-     "period": "2025-11-01",
-     "ratio": 41.7
-    },
-    {
-     "period": "2025-12-01",
-     "ratio": 33.4
-    },
-    {
-     "period": "2026-01-01",
-     "ratio": 20.6
-    },
-    {
-     "period": "2026-02-01",
-     "ratio": 39.7
-    },
-    {
-     "period": "2026-03-01",
-     "ratio": 61.8
-    },
-    {
-     "period": "2026-04-01",
-     "ratio": 50.5
-    },
-    {
-     "period": "2026-05-01",
-     "ratio": 80.4
-    },
-    {
-     "period": "2026-06-01",
-     "ratio": 87.2
-    },
-    {
-     "period": "2026-07-01",
-     "ratio": 100
-    },
-    {
-     "period": "2026-08-01",
-     "ratio": 97.4
-    },
-    {
-     "period": "2026-09-01",
-     "ratio": 80.3
-    },
-    {
-     "period": "2026-10-01",
-     "ratio": 57.6
-    }
-   ],
-   "meaning": {
-    "citedTitles": [
-     "강동구도시관리공단 대관예약시스템 | 이용안내",
-     "강일테니스장 - 공공체육시설 찾기",
-     "강일 테니스장 예약 방법 (주차, 요금, 본인확인) 햇빛 막아주는 코트 번호 추천 (2026.05.15 update)"
-    ],
-    "questions": [],
-    "productNames": [],
-    "priceMedian": 14300,
-    "priceSamples": 18
-   },
-   "serp": {
-    "sampledTitles": 10,
-    "exactTitleHits": 4,
-    "medianDaysAgo": 14,
-    "hasAiBriefing": true,
-    "aiBriefingSourceCount": 4,
-    "adCount": 1,
-    "slots": [
-     {
-      "rank": 1,
-      "title": "강일테니스장 이용 가이드｜코트·예약·요금 정리 + 같이 칠 사람 찾기",
-      "coverage": 1
-     },
-     {
-      "rank": 2,
-      "title": "[강동] 강동구 야외 하드코트 테니스장 후기 주차 예약 I 강일테니스장",
-      "coverage": 1
-     },
-     {
-      "rank": 3,
-      "title": "강동구 테니스장 | 강일테니스장 8월 초 오후 시간대 후기☀️",
-      "coverage": 0.5
-     },
-     {
-      "rank": 4,
-      "title": "강일테니스장, 노후 테니스 코트 새단장",
-      "coverage": 0.5
-     },
-     {
-      "rank": 5,
-      "title": "[테니스]다리 밑 테니스 장 강일테니스장 예약, 주차, 코트 상태 등",
-      "coverage": 1
-     },
-     {
-      "rank": 6,
-      "title": "강일테니스장, 노후 테니스 코트 새단장",
-      "coverage": 0.5
-     }
-    ]
-   },
-   "demandSeriesCheckedAt": "2026-10-21T01:11:30.987Z",
-   "frontalSaturated": false,
-   "peakMonth": 7,
-   "peakMultiplier": 1.7,
-   "peakRecurring": false,
-   "peakVolume": 1319,
-   "peakConfidence": "작년엔 다른 달",
-   "effectiveVolume": 760,
-   "preemptRank": 3,
-   "carried": true,
-   "money": {
-    "value": 70,
-    "tier": "none",
-    "pc": 70,
     "mobile": 70
    }
   },
@@ -90180,7 +89781,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-10-21T00:45:40.779Z",
+    "checkedAt": "2026-11-08T01:40:15.619Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -90891,8 +90492,8 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-10-21T00:45:44.279Z",
-    "reason": "최근 검색결과 재검증에서 추천 조건을 충족하지 못했습니다."
+    "checkedAt": "2026-11-08T01:40:17.420Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
   {
@@ -91762,6 +91363,397 @@
     "checkedAt": "2026-11-03T03:35:00.601Z",
     "reason": "최근 검색결과 재검증에서 추천 조건을 충족하지 못했습니다."
    }
+  },
+  {
+   "serpSections": [
+    "AI브리핑",
+    "파워링크",
+    "지식스니펫",
+    "카페"
+   ],
+   "layoutBestFor": "kin",
+   "layoutHeadline": "지식iN 이 블로그보다 위에 뜬다 — 답변을 달아 내 채널로 끌어오는 편이 빠르다",
+   "layoutRanked": [
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 3
+    },
+    {
+     "surface": "naver-blog",
+     "label": "네이버 블로그·카페",
+     "position": 4
+    }
+   ],
+   "layoutAdsOnTop": false,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "lexical",
+   "keyword": "강일테니스장 예약",
+   "topic": "스포츠",
+   "tier": "golden-ratio",
+   "tierLabel": "황금 비율 — 검색량 > 문서수",
+   "openSlot": 2,
+   "searchVolume": 670,
+   "documentCount": 386,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 670 · 문서수 386"
+    },
+    {
+     "code": "ads",
+     "text": "상단 광고 1건 — 광고주가 돈을 넣는 검색어다"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 2번째 자리가 비어 있음"
+    },
+    {
+     "code": "contested",
+     "text": "상위 10개 중 정면으로 다룬 글 4건"
+    },
+    {
+     "code": "golden-ratio",
+     "text": "월 검색량 670 > 문서수 386 — 수요가 공급을 넘는 황금 비율"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑이 떠 있고 3개 글을 인용 중"
+    }
+   ],
+   "intentLabel": "거래",
+   "briefingRisk": null,
+   "regulatoryLabel": "",
+   "trendLabel": "상승세",
+   "shortTermTrend": {
+    "status": "rising",
+    "ratio": 1.22,
+    "measuredAt": "2026-11-08T01:48:34.124Z",
+    "windowEnd": "2026-11-07",
+    "series": [
+     {
+      "period": "2026-10-25",
+      "ratio": 10.81081
+     },
+     {
+      "period": "2026-10-26",
+      "ratio": 31.08108
+     },
+     {
+      "period": "2026-10-27",
+      "ratio": 28.37837
+     },
+     {
+      "period": "2026-10-28",
+      "ratio": 22.97297
+     },
+     {
+      "period": "2026-10-29",
+      "ratio": 25.67567
+     },
+     {
+      "period": "2026-10-30",
+      "ratio": 16.21621
+     },
+     {
+      "period": "2026-10-31",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-01",
+      "ratio": 10.81081
+     },
+     {
+      "period": "2026-11-02",
+      "ratio": 28.37837
+     },
+     {
+      "period": "2026-11-03",
+      "ratio": 32.43243
+     },
+     {
+      "period": "2026-11-04",
+      "ratio": 29.72972
+     },
+     {
+      "period": "2026-11-05",
+      "ratio": 21.62162
+     },
+     {
+      "period": "2026-11-06",
+      "ratio": 27.02702
+     },
+     {
+      "period": "2026-11-07",
+      "ratio": 14.86486
+     }
+    ]
+   },
+   "currentSource": null,
+   "seedKind": null,
+   "expansionWords": null,
+   "timing": "",
+   "monthsToPeak": null,
+   "timingGroup": "",
+   "titles": {
+    "seo": {
+     "text": "",
+     "frame": "generic",
+     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+    },
+    "home": {
+     "text": "",
+     "frame": "generic",
+     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+    }
+   },
+   "adsenseFit": false,
+   "adClicks": null,
+   "adCtrPc": null,
+   "adCtrMobile": null,
+   "adDepth": null,
+   "monetize": null,
+   "whySearch": null,
+   "brief": null,
+   "kinCount": null,
+   "kinTop": null,
+   "keywordPool": [
+    {
+     "keyword": "강동구 테니스장 예약",
+     "searchVolume": 10,
+     "source": "ai-verified",
+     "documentCount": 1662
+    },
+    {
+     "keyword": "서울 공공테니스장 예약",
+     "searchVolume": null,
+     "source": "ai-verified",
+     "documentCount": 3684
+    }
+   ],
+   "trend": {
+    "series": [
+     33,
+     25,
+     26,
+     21,
+     19,
+     21,
+     22,
+     20,
+     11,
+     5,
+     8,
+     22,
+     13,
+     15,
+     20,
+     20,
+     20,
+     20,
+     42,
+     100,
+     27,
+     17,
+     25,
+     17,
+     20,
+     25,
+     23,
+     16,
+     9
+    ],
+    "label": "📉 단발성",
+    "recommendation": "회피! 지난 며칠 폭발 후 급락 중. 글 써도 유입 없음"
+   },
+   "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+   "subKeywords": [
+    {
+     "keyword": "강동구 테니스장 예약",
+     "searchVolume": 10,
+     "frame": "generic"
+    },
+    {
+     "keyword": "서울 공공테니스장 예약",
+     "searchVolume": null,
+     "frame": "generic"
+    }
+   ],
+   "measuredAt": "2026-11-08T01:40:13.418Z",
+   "searchVolumeMeasuredAt": "2026-11-08T01:40:12.585Z",
+   "documentCountMeasuredAt": "2026-11-08T01:40:13.418Z",
+   "demandAsOf": "2026-11",
+   "latestVsPeakPct": 14,
+   "monthsSincePeak": 4,
+   "recencySummary": "2026-11 기준 최고치의 14% (정점은 4개월 전)",
+   "demandSeries": [
+    {
+     "period": "2024-11-01",
+     "ratio": 44
+    },
+    {
+     "period": "2024-12-01",
+     "ratio": 33.5
+    },
+    {
+     "period": "2025-01-01",
+     "ratio": 35.6
+    },
+    {
+     "period": "2025-02-01",
+     "ratio": 31.2
+    },
+    {
+     "period": "2025-03-01",
+     "ratio": 41.1
+    },
+    {
+     "period": "2025-04-01",
+     "ratio": 39.7
+    },
+    {
+     "period": "2025-05-01",
+     "ratio": 44.9
+    },
+    {
+     "period": "2025-06-01",
+     "ratio": 61.6
+    },
+    {
+     "period": "2025-07-01",
+     "ratio": 53.7
+    },
+    {
+     "period": "2025-08-01",
+     "ratio": 65.3
+    },
+    {
+     "period": "2025-09-01",
+     "ratio": 57.3
+    },
+    {
+     "period": "2025-10-01",
+     "ratio": 73.6
+    },
+    {
+     "period": "2025-11-01",
+     "ratio": 41.7
+    },
+    {
+     "period": "2025-12-01",
+     "ratio": 33.4
+    },
+    {
+     "period": "2026-01-01",
+     "ratio": 20.6
+    },
+    {
+     "period": "2026-02-01",
+     "ratio": 39.7
+    },
+    {
+     "period": "2026-03-01",
+     "ratio": 61.8
+    },
+    {
+     "period": "2026-04-01",
+     "ratio": 50.5
+    },
+    {
+     "period": "2026-05-01",
+     "ratio": 80.4
+    },
+    {
+     "period": "2026-06-01",
+     "ratio": 87.2
+    },
+    {
+     "period": "2026-07-01",
+     "ratio": 100
+    },
+    {
+     "period": "2026-08-01",
+     "ratio": 97.4
+    },
+    {
+     "period": "2026-09-01",
+     "ratio": 80.3
+    },
+    {
+     "period": "2026-10-01",
+     "ratio": 79.9
+    },
+    {
+     "period": "2026-11-01",
+     "ratio": 14.2
+    }
+   ],
+   "meaning": {
+    "citedTitles": [
+     "강동구도시관리공단 대관예약시스템 | 이용안내",
+     "강일 테니스장 예약 방법 (주차, 요금, 본인확인) 햇빛 막아주는 코트 번호 추천 (2026.05.15 update)",
+     "강일테니스장 | 강동구"
+    ],
+    "questions": [],
+    "productNames": [],
+    "priceMedian": 14300,
+    "priceSamples": 18
+   },
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 4,
+    "medianDaysAgo": 21,
+    "hasAiBriefing": true,
+    "aiBriefingSourceCount": 3,
+    "adCount": 1,
+    "slots": [
+     {
+      "rank": 1,
+      "title": "강일테니스장 이용 가이드｜코트·예약·요금 정리 + 같이 칠 사람 찾기",
+      "coverage": 1
+     },
+     {
+      "rank": 2,
+      "title": "서울 강동구 테니스장 강일테니스장",
+      "coverage": 0.5
+     },
+     {
+      "rank": 3,
+      "title": "[강동] 강동구 야외 하드코트 테니스장 후기 주차 예약 I 강일테니스장",
+      "coverage": 1
+     },
+     {
+      "rank": 4,
+      "title": "[하남 실내테니스장] 오륜실내테니스장 대관 후기 주말 가격 주차 샤워실 총정리",
+      "coverage": 0.33
+     },
+     {
+      "rank": 5,
+      "title": "강일테니스장, 노후 테니스 코트 새단장",
+      "coverage": 0.5
+     },
+     {
+      "rank": 6,
+      "title": "강동구 테니스장 | 강일테니스장 8월 초 오후 시간대 후기☀️",
+      "coverage": 0.5
+     }
+    ]
+   },
+   "demandSeriesCheckedAt": "2026-11-08T01:48:26.890Z",
+   "frontalSaturated": false,
+   "peakMonth": 7,
+   "peakMultiplier": 1.4,
+   "peakRecurring": false,
+   "peakVolume": 839,
+   "peakConfidence": "작년엔 다른 달",
+   "effectiveVolume": 670,
+   "preemptRank": 3
   },
   {
    "serpSections": [
@@ -96111,7 +96103,8 @@
    "peakVolume": 753,
    "peakConfidence": "1년치만 봄",
    "effectiveVolume": 580,
-   "preemptRank": 3
+   "preemptRank": 3,
+   "carried": true
   },
   {
    "serpSections": [
@@ -98193,319 +98186,6 @@
   },
   {
    "serpSections": [
-    "AI브리핑",
-    "웹사이트",
-    "인플루언서",
-    "인기글",
-    "지식스니펫",
-    "뉴스",
-    "카페"
-   ],
-   "layoutBestFor": "wordpress",
-   "layoutHeadline": "웹사이트가 블로그보다 위에 뜬다 — 워드프레스·자체 사이트가 유리하다",
-   "layoutRanked": [
-    {
-     "surface": "wordpress",
-     "label": "워드프레스·자체 사이트",
-     "position": 2
-    },
-    {
-     "surface": "naver-blog",
-     "label": "네이버 블로그·카페",
-     "position": 3
-    },
-    {
-     "surface": "kin",
-     "label": "지식iN 답변",
-     "position": 5
-    }
-   ],
-   "layoutAdsOnTop": false,
-   "earlyMover": false,
-   "earlyMoverReasons": [],
-   "sectionsMeasured": true,
-   "intentSource": "lexical",
-   "keyword": "산타토익 가격",
-   "topic": "어학·외국어",
-   "tier": "page1-weak",
-   "tierLabel": "1페이지에 빈자리 (실시간 노출 중)",
-   "openSlot": 1,
-   "searchVolume": 550,
-   "documentCount": 2148,
-   "evidence": [
-    {
-     "code": "demand",
-     "text": "월 검색량 550 · 문서수 2,148"
-    },
-    {
-     "code": "open-slot",
-     "text": "상위 1번째 자리가 비어 있음"
-    },
-    {
-     "code": "empty-field",
-     "text": "상위 10개 중 정면으로 다룬 글 0건"
-    },
-    {
-     "code": "not-realtime",
-     "text": "실시간 검색어에는 아직 없음"
-    },
-    {
-     "code": "ai-briefing",
-     "text": "AI 브리핑이 떠 있고 3개 글을 인용 중"
-    }
-   ],
-   "intentLabel": "거래",
-   "briefingRisk": "low",
-   "regulatoryLabel": "",
-   "trendLabel": "시즌성",
-   "shortTermTrend": {
-    "status": "unknown",
-    "ratio": null,
-    "measuredAt": null,
-    "windowEnd": null,
-    "series": []
-   },
-   "currentSource": null,
-   "seedKind": null,
-   "expansionWords": null,
-   "timing": "성수기까지 약 4개월 — 2~3개월 뒤에 쓰면 됩니다",
-   "monthsToPeak": 4,
-   "timingGroup": "준비 시기",
-   "titles": {
-    "seo": {
-     "text": "산타토익 가격 실제 비용 정리",
-     "frame": "price",
-     "basis": "검색 질문 '산타토익 가격' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-    },
-    "home": {
-     "text": "산타토익 가격, 미리 알면 다릅니다",
-     "frame": "price",
-     "basis": "검색 질문 '산타토익 가격' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-    }
-   },
-   "adsenseFit": false,
-   "adClicks": 5.4,
-   "adCtrPc": 0,
-   "adCtrMobile": 1.17,
-   "adDepth": 1,
-   "monetize": null,
-   "whySearch": null,
-   "brief": null,
-   "kinCount": 84,
-   "kinTop": [
-    {
-     "title": "산타토익 유료인가요",
-     "link": "https://kin.naver.com/qna/detail.naver?dirId=11080308&docId=489448857&answerNo=2",
-     "views": 1235,
-     "answers": 3
-    },
-    {
-     "title": "산타토익 수강권 투명성에 대해서 질문",
-     "link": "https://kin.naver.com/qna/detail.naver?dirId=60207&docId=485095336&answerNo=1",
-     "views": 471,
-     "answers": 1
-    },
-    {
-     "title": "빠른 답변 원해요!산타토익 관련",
-     "link": "https://kin.naver.com/qna/detail.naver?dirId=11080308&docId=490464816&answerNo=1",
-     "views": 323,
-     "answers": 1
-    },
-    {
-     "title": "산타토익 vs 교재 독학",
-     "link": "https://kin.naver.com/qna/detail.naver?dirId=11080308&docId=455010811&answerNo=0",
-     "views": 60,
-     "answers": 2
-    },
-    {
-     "title": "산타토익 월마다 구독형식으로 돈내는 방법",
-     "link": "https://kin.naver.com/qna/detail.naver?dirId=40608&docId=495258457&answerNo=1",
-     "views": 42,
-     "answers": 1
-    }
-   ],
-   "kinMode": "date-views-v2",
-   "keywordPool": null,
-   "trend": null,
-   "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-   "subKeywords": [],
-   "measuredAt": "2026-10-01T23:49:19.070Z",
-   "demandAsOf": "2026-09",
-   "latestVsPeakPct": 25,
-   "monthsSincePeak": 20,
-   "recencySummary": "2026-09 기준 최고치의 25% (정점은 20개월 전)",
-   "demandSeries": [
-    {
-     "period": "2024-10-01",
-     "ratio": 25
-    },
-    {
-     "period": "2024-11-01",
-     "ratio": 27.6
-    },
-    {
-     "period": "2024-12-01",
-     "ratio": 60.2
-    },
-    {
-     "period": "2025-01-01",
-     "ratio": 100
-    },
-    {
-     "period": "2025-02-01",
-     "ratio": 73.7
-    },
-    {
-     "period": "2025-03-01",
-     "ratio": 59.6
-    },
-    {
-     "period": "2025-04-01",
-     "ratio": 43.8
-    },
-    {
-     "period": "2025-05-01",
-     "ratio": 39.7
-    },
-    {
-     "period": "2025-06-01",
-     "ratio": 53
-    },
-    {
-     "period": "2025-07-01",
-     "ratio": 64.5
-    },
-    {
-     "period": "2025-08-01",
-     "ratio": 59.8
-    },
-    {
-     "period": "2025-09-01",
-     "ratio": 52.2
-    },
-    {
-     "period": "2025-10-01",
-     "ratio": 32.5
-    },
-    {
-     "period": "2025-11-01",
-     "ratio": 37.5
-    },
-    {
-     "period": "2025-12-01",
-     "ratio": 44.4
-    },
-    {
-     "period": "2026-01-01",
-     "ratio": 60.1
-    },
-    {
-     "period": "2026-02-01",
-     "ratio": 38.7
-    },
-    {
-     "period": "2026-03-01",
-     "ratio": 40.3
-    },
-    {
-     "period": "2026-04-01",
-     "ratio": 29.6
-    },
-    {
-     "period": "2026-05-01",
-     "ratio": 26.9
-    },
-    {
-     "period": "2026-06-01",
-     "ratio": 29.7
-    },
-    {
-     "period": "2026-07-01",
-     "ratio": 34.5
-    },
-    {
-     "period": "2026-08-01",
-     "ratio": 36.5
-    },
-    {
-     "period": "2026-09-01",
-     "ratio": 25
-    }
-   ],
-   "meaning": {
-    "citedTitles": [
-     "Santa(산타) 사용법·가격 — AI 토익 학습 앱 가이드 2026 | 모켓",
-     "산타토익 특가 지금 확인하세요",
-     "Riiid(산타토익) - 가장 빠르게 토익 목표 점수를 달성하는 AI"
-    ],
-    "questions": [],
-    "productNames": [],
-    "priceMedian": 137000,
-    "priceSamples": 20
-   },
-   "serp": {
-    "sampledTitles": 10,
-    "exactTitleHits": 0,
-    "medianDaysAgo": 28,
-    "hasAiBriefing": true,
-    "aiBriefingSourceCount": 3,
-    "adCount": 0,
-    "slots": [
-     {
-      "rank": 1,
-      "title": "무조건 500% 60일 환급반 산타토익 후기",
-      "coverage": 0.5
-     },
-     {
-      "rank": 2,
-      "title": "[토익독학] 토익학원 대신 산타 할인쿠폰으로 가성비 챙긴 후기",
-      "coverage": 0.5
-     },
-     {
-      "rank": 3,
-      "title": "산타토익 환급 할인코드 내돈내산 광고아님",
-      "coverage": 0.5
-     },
-     {
-      "rank": 4,
-      "title": "산타토익 할인 방법 팁!! 할인쿠폰 아님 / 토익 무료 어플 추천",
-      "coverage": 0.5
-     },
-     {
-      "rank": 5,
-      "title": "산타토익 시작하기 (D-30)",
-      "coverage": 0.5
-     },
-     {
-      "rank": 6,
-      "title": "내돈내산 산타토익 500% 환급반 달려보자!",
-      "coverage": 0.5
-     }
-    ]
-   },
-   "money": {
-    "value": 80,
-    "tier": "low",
-    "pc": 70,
-    "mobile": 80
-   },
-   "frontalSaturated": false,
-   "peakMonth": 1,
-   "peakMultiplier": 1.7,
-   "peakRecurring": true,
-   "peakVolume": 1322,
-   "peakConfidence": "2년 반복 확인",
-   "effectiveVolume": 550,
-   "preemptRank": 3,
-   "carried": true,
-   "revalidation": {
-    "status": "rejected",
-    "checkedAt": "2026-10-22T00:48:35.631Z",
-    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
-   }
-  },
-  {
-   "serpSections": [
     "인기글",
     "웹사이트",
     "지식스니펫",
@@ -99491,7 +99171,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-07T02:10:16.972Z",
+    "checkedAt": "2026-11-08T01:40:08.665Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -101013,6 +100693,335 @@
     "checkedAt": "2026-10-31T01:43:43.746Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
+  },
+  {
+   "serpSections": [
+    "파워링크",
+    "AI브리핑",
+    "지식스니펫",
+    "인플루언서"
+   ],
+   "layoutBestFor": "kin",
+   "layoutHeadline": "지식iN 이 블로그보다 위에 뜬다 — 답변을 달아 내 채널로 끌어오는 편이 빠르다",
+   "layoutRanked": [
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 3
+    },
+    {
+     "surface": "naver-blog",
+     "label": "네이버 블로그·카페",
+     "position": 4
+    }
+   ],
+   "layoutAdsOnTop": true,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "lexical",
+   "keyword": "산타토익 가격",
+   "topic": "어학·외국어",
+   "tier": "page1-weak",
+   "tierLabel": "1페이지에 빈자리 (실시간 노출 중)",
+   "openSlot": 1,
+   "searchVolume": 510,
+   "documentCount": 2364,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 510 · 문서수 2,364"
+    },
+    {
+     "code": "ads",
+     "text": "상단 광고 1건 — 광고주가 돈을 넣는 검색어다"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 1번째 자리가 비어 있음"
+    },
+    {
+     "code": "empty-field",
+     "text": "상위 10개 중 정면으로 다룬 글 0건"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑이 떠 있고 4개 글을 인용 중"
+    }
+   ],
+   "intentLabel": "거래",
+   "briefingRisk": null,
+   "regulatoryLabel": "",
+   "trendLabel": "하락세",
+   "shortTermTrend": {
+    "status": "flat",
+    "ratio": 0.9541,
+    "measuredAt": "2026-11-08T01:48:34.124Z",
+    "windowEnd": "2026-11-07",
+    "series": [
+     {
+      "period": "2026-10-25",
+      "ratio": 50
+     },
+     {
+      "period": "2026-10-26",
+      "ratio": 42.85714
+     },
+     {
+      "period": "2026-10-27",
+      "ratio": 75
+     },
+     {
+      "period": "2026-10-28",
+      "ratio": 100
+     },
+     {
+      "period": "2026-10-29",
+      "ratio": 67.85714
+     },
+     {
+      "period": "2026-10-30",
+      "ratio": 28.57142
+     },
+     {
+      "period": "2026-10-31",
+      "ratio": 25
+     },
+     {
+      "period": "2026-11-01",
+      "ratio": 35.71428
+     },
+     {
+      "period": "2026-11-02",
+      "ratio": 57.14285
+     },
+     {
+      "period": "2026-11-03",
+      "ratio": 50
+     },
+     {
+      "period": "2026-11-04",
+      "ratio": 71.42857
+     },
+     {
+      "period": "2026-11-05",
+      "ratio": 67.85714
+     },
+     {
+      "period": "2026-11-06",
+      "ratio": 42.85714
+     },
+     {
+      "period": "2026-11-07",
+      "ratio": 46.42857
+     }
+    ]
+   },
+   "currentSource": null,
+   "seedKind": null,
+   "expansionWords": null,
+   "timing": "",
+   "monthsToPeak": null,
+   "timingGroup": "",
+   "titles": {
+    "seo": {
+     "text": "산타토익 가격 실제 비용 정리",
+     "frame": "price",
+     "basis": "검색 질문 '산타토익 가격' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+    },
+    "home": {
+     "text": "산타토익 가격, 미리 알면 다릅니다",
+     "frame": "price",
+     "basis": "검색 질문 '산타토익 가격' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+    }
+   },
+   "adsenseFit": false,
+   "adClicks": null,
+   "adCtrPc": null,
+   "adCtrMobile": null,
+   "adDepth": null,
+   "monetize": null,
+   "whySearch": null,
+   "brief": null,
+   "kinCount": null,
+   "kinTop": null,
+   "keywordPool": null,
+   "trend": null,
+   "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+   "subKeywords": [],
+   "measuredAt": "2026-11-08T01:40:29.743Z",
+   "searchVolumeMeasuredAt": "2026-11-08T01:40:28.882Z",
+   "documentCountMeasuredAt": "2026-11-08T01:40:29.743Z",
+   "demandAsOf": "2026-11",
+   "latestVsPeakPct": 5,
+   "monthsSincePeak": 22,
+   "recencySummary": "2026-11 기준 최고치의 5% (정점은 22개월 전)",
+   "demandSeries": [
+    {
+     "period": "2024-11-01",
+     "ratio": 27.6
+    },
+    {
+     "period": "2024-12-01",
+     "ratio": 60.2
+    },
+    {
+     "period": "2025-01-01",
+     "ratio": 100
+    },
+    {
+     "period": "2025-02-01",
+     "ratio": 73.7
+    },
+    {
+     "period": "2025-03-01",
+     "ratio": 59.6
+    },
+    {
+     "period": "2025-04-01",
+     "ratio": 43.8
+    },
+    {
+     "period": "2025-05-01",
+     "ratio": 39.7
+    },
+    {
+     "period": "2025-06-01",
+     "ratio": 53
+    },
+    {
+     "period": "2025-07-01",
+     "ratio": 64.5
+    },
+    {
+     "period": "2025-08-01",
+     "ratio": 59.8
+    },
+    {
+     "period": "2025-09-01",
+     "ratio": 52.2
+    },
+    {
+     "period": "2025-10-01",
+     "ratio": 32.5
+    },
+    {
+     "period": "2025-11-01",
+     "ratio": 37.5
+    },
+    {
+     "period": "2025-12-01",
+     "ratio": 44.4
+    },
+    {
+     "period": "2026-01-01",
+     "ratio": 60.1
+    },
+    {
+     "period": "2026-02-01",
+     "ratio": 38.7
+    },
+    {
+     "period": "2026-03-01",
+     "ratio": 40.3
+    },
+    {
+     "period": "2026-04-01",
+     "ratio": 29.6
+    },
+    {
+     "period": "2026-05-01",
+     "ratio": 26.9
+    },
+    {
+     "period": "2026-06-01",
+     "ratio": 29.7
+    },
+    {
+     "period": "2026-07-01",
+     "ratio": 34.5
+    },
+    {
+     "period": "2026-08-01",
+     "ratio": 36.5
+    },
+    {
+     "period": "2026-09-01",
+     "ratio": 25
+    },
+    {
+     "period": "2026-10-01",
+     "ratio": 21.5
+    },
+    {
+     "period": "2026-11-01",
+     "ratio": 5.1
+    }
+   ],
+   "meaning": {
+    "citedTitles": [
+     "Santa(산타) 사용법·가격 — AI 토익 학습 앱 가이드 2026",
+     "토익 공부하기 귀찮다면? 산타토익 500% 환급반 내돈내산 후기(+ 20% 할인코드)",
+     "산타토익 환급반 내돈내산 5일 해본 후기｜예상 점수 540점에서 900점까지?"
+    ],
+    "questions": [],
+    "productNames": [],
+    "priceMedian": 159200,
+    "priceSamples": 32
+   },
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 0,
+    "medianDaysAgo": 14,
+    "hasAiBriefing": true,
+    "aiBriefingSourceCount": 4,
+    "adCount": 1,
+    "slots": [
+     {
+      "rank": 1,
+      "title": "산타토익 ㄹㅇ내돈내산 1년차 후기",
+      "coverage": 0.5
+     },
+     {
+      "rank": 2,
+      "title": "산타토익 환급반 내돈내산 5일 해본 후기｜예상 점수 540점에서 900점까지?",
+      "coverage": 0.5
+     },
+     {
+      "rank": 3,
+      "title": "[산타토익] 무조건 500% 환급반 60일 후기",
+      "coverage": 0.5
+     },
+     {
+      "rank": 4,
+      "title": "내돈내산 산타토익 500% 환급반 180일권 후기 | 추천인코드: 56PU3H",
+      "coverage": 0.5
+     },
+     {
+      "rank": 5,
+      "title": "[토익 700점 도전기③] 산타AI 90일권을 결제했습니다｜500% 환급반의 정체",
+      "coverage": 0.5
+     },
+     {
+      "rank": 6,
+      "title": "내돈내산 산타토익 500% 환급반 시작 | 20% 할인코드 X2R45D",
+      "coverage": 0.5
+     }
+    ]
+   },
+   "demandSeriesCheckedAt": "2026-11-08T01:48:26.890Z",
+   "frontalSaturated": false,
+   "peakMonth": 1,
+   "peakMultiplier": 1.7,
+   "peakRecurring": true,
+   "peakVolume": 1426,
+   "peakConfidence": "2년 반복 확인",
+   "effectiveVolume": 510,
+   "preemptRank": 3
   },
   {
    "serpSections": [
@@ -102736,7 +102745,7 @@
    "shortTermTrend": {
     "status": "unknown",
     "ratio": null,
-    "measuredAt": "2026-11-04T02:48:06.091Z",
+    "measuredAt": null,
     "windowEnd": "2026-11-03",
     "series": []
    },
@@ -103337,7 +103346,8 @@
    "peakVolume": 12629,
    "peakConfidence": "작년엔 다른 달",
    "effectiveVolume": 6340,
-   "preemptRank": 3
+   "preemptRank": 3,
+   "carried": true
   },
   {
    "serpSections": [
@@ -105350,7 +105360,7 @@
    "shortTermTrend": {
     "status": "unknown",
     "ratio": null,
-    "measuredAt": "2026-11-04T02:48:06.091Z",
+    "measuredAt": null,
     "windowEnd": "2026-11-03",
     "series": []
    },
@@ -107107,7 +107117,8 @@
    "frontalSaturated": true,
    "effectiveVolume": 740,
    "peakConfidence": "",
-   "preemptRank": 3
+   "preemptRank": 3,
+   "carried": true
   },
   {
    "serpSections": [
@@ -107552,20 +107563,16 @@
   },
   {
    "keyword": "아이맞이지원금",
-   "topic": "사회·정치",
-   "searchVolume": 16490,
-   "documentCount": 114688,
-   "measuredAt": "2026-11-07T02:10:58.727Z",
+   "topic": "비즈니스·경제",
+   "searchVolume": 15500,
+   "documentCount": 114805,
+   "measuredAt": "2026-11-08T01:40:47.761Z",
    "shortTermTrend": {
     "status": "rising",
-    "ratio": 1.9282,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
-    "windowEnd": "2026-11-06",
+    "ratio": 1.9144,
+    "measuredAt": "2026-11-08T01:48:34.124Z",
+    "windowEnd": "2026-11-07",
     "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 8.41995
-     },
      {
       "period": "2026-10-25",
       "ratio": 10.23908
@@ -107617,6 +107624,10 @@
      {
       "period": "2026-11-06",
       "ratio": 19.23076
+     },
+     {
+      "period": "2026-11-07",
+      "ratio": 11.64241
      }
     ]
    },
@@ -107637,20 +107648,133 @@
     "sampledTitles": 10,
     "exactTitleHits": 10,
     "topTitles": [
-     "2027 아이맞이지원금, 6월생도 받을까? 소급 적용이 변수",
      "아이맞이지원금 2천만원, 출산하면 받는 돈 총정리해보니",
-     "2027년 출산지원금 총정리! 둘째는 최대 5,040만 원? 아이맞이지원금·아동기본수당 달라지는 내용",
-     "2027 아이지원금 최대 2000만원 총정리/첫만남이용권/아본기본수당/아이맞이지원금",
+     "2027년 육아지원금 총정리｜아이맞이지원금 최대 2,000만 원, 아동기본수당 월 30만 원?",
      "2027년 출산지원금 총정리! 아이맞이지원금부터 아동기본수당까지 완벽 비교",
-     "2027년 바뀌는 아이맞이지원금 첫째 1000만원? 지급 대상과 출생일 기준",
+     "2027 아이맞이지원금, 6월생도 받을까? 소급 적용이 변수",
+     "2027년 출산·육아 지원금 총정리｜아이맞이지원금부터 육아휴직까지 12가지",
+     "2027 혼인지원금 100만원·아이맞이지원금 최대 2천만원｜누가, 언제 받나 (정부안)",
+     "2027년 아이맞이지원금 얼마? 아동기본수당 대상·금액 정부안 정리",
      "[2027 육아지원금] 7월 개편 총정리! 아이맞이지원금 최대 2000만원 아동기본수당 지급 기준",
-     "2027 아이맞이지원금 총정리｜첫째 1,000만 원부터 최대 2,000만 원, 아동기본수당 월 30만 원까지",
-     "아이맞이지원금 2027 1월생과 7월생 첫해 80만 원 차이, 부모급여 비교와 소급 검토 상태",
-     "아이맞이지원금 최대 2,000만원? 대상·지급액·시행시기 총정리"
+     "2027 달라지는 임신·출산·육아 지원 총정리｜아이맞이지원금·아동기본수당·혼인지원금 한눈에",
+     "2027 아이맞이지원금 총정리｜첫째 1,000만 원부터 최대 2,000만 원, 아동기본수당 월 30만 원까지"
     ]
    },
    "serpSections": [
+    "이미지",
     "뉴스",
+    "지식스니펫",
+    "카페"
+   ],
+   "monetize": null
+  },
+  {
+   "keyword": "국민연금",
+   "topic": "사회·정치",
+   "searchVolume": 305200,
+   "documentCount": 2015780,
+   "measuredAt": "2026-11-08T01:40:40.152Z",
+   "shortTermTrend": {
+    "status": "rising",
+    "ratio": 1.2113,
+    "measuredAt": "2026-11-08T01:48:34.124Z",
+    "windowEnd": "2026-11-07",
+    "series": [
+     {
+      "period": "2026-10-25",
+      "ratio": 22.34395
+     },
+     {
+      "period": "2026-10-26",
+      "ratio": 52.8043
+     },
+     {
+      "period": "2026-10-27",
+      "ratio": 49.76379
+     },
+     {
+      "period": "2026-10-28",
+      "ratio": 46.276
+     },
+     {
+      "period": "2026-10-29",
+      "ratio": 47.42687
+     },
+     {
+      "period": "2026-10-30",
+      "ratio": 48.10533
+     },
+     {
+      "period": "2026-10-31",
+      "ratio": 21.24836
+     },
+     {
+      "period": "2026-11-01",
+      "ratio": 26.53533
+     },
+     {
+      "period": "2026-11-02",
+      "ratio": 59.24716
+     },
+     {
+      "period": "2026-11-03",
+      "ratio": 66.02171
+     },
+     {
+      "period": "2026-11-04",
+      "ratio": 55.46286
+     },
+     {
+      "period": "2026-11-05",
+      "ratio": 56.69916
+     },
+     {
+      "period": "2026-11-06",
+      "ratio": 60.46336
+     },
+     {
+      "period": "2026-11-07",
+      "ratio": 24.39441
+     }
+    ]
+   },
+   "money": null,
+   "currentSource": {
+    "keyword": "국민연금",
+    "topic": "비즈니스·경제",
+    "kind": "current-benchmark",
+    "sourceAt": "2026-11-07T13:20:00.000Z",
+    "sourceUrl": "https://blog.naver.com/vipro/224466266117",
+    "sourceTitle": "국민연금 미납, 58년생부터 68년생까지 뒤늦게 확인하면 당황하는 이유",
+    "discoveryOnly": true
+   },
+   "sampledTitles": 10,
+   "facingPosts": 10,
+   "reason": "정면 대응 10건 — 자리 없음",
+   "note": "정면 대응 10건 — 자리 없음",
+   "sourceUrl": "https://blog.naver.com/vipro/224466266117",
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 10,
+    "topTitles": [
+     "67년생부터 77년생까지 국민연금, 나와 비슷한 사람들은 얼마나 받을까?",
+     "국민연금 20년·30년·40년 납입하면 얼마 받을까? 가입기간별 수령액 비교",
+     "\"매년 오르는 국민연금 보험료, 2027년 직장인 월급에서 얼마나 깎일까?",
+     "“연봉 3천으로 30년 냈다면…” 국민연금 예상수령액은 월 얼마?",
+     "2026년 국민연금 총정리! 몇 살부터 받을까? 월 150만 원 받으려면 얼마나 내야 할까?",
+     "국민연금 미납, 58년생부터 68년생까지 뒤늦게 확인하면 당황하는 이유",
+     "국민연금 800만 명 넘었는데 519만 명은 월 60만 원도 못 받는다? 2026년 충격적인 노후 현실과 내 예상수령액 확인법",
+     "국민연금 받고 있는데, 기초연금도 받을 수 있을까요?",
+     "2026년 국민연금 기초연금 역전 현상(최소가입기간 10년 수령액 비교)",
+     "국민연금 9년 냈는데 못 받는다? 딱 1년 부족할 때 해결 방법"
+    ]
+   },
+   "serpSections": [
+    "파워링크",
+    "AI브리핑",
+    "지식iN",
+    "뉴스",
+    "인플루언서",
     "이미지",
     "지식스니펫",
     "카페"
@@ -107663,8 +107787,53 @@
    "keyword": "알바 근로계약서 양식",
    "topic": "비즈니스·경제",
    "searchVolume": 680,
-   "documentCount": 7925,
+   "documentCount": 7937,
    "adCount": 10,
+   "facingPosts": 8,
+   "sampledTitles": 10,
+   "note": "상위 10개 중 8개가 이미 정면으로 다뤘습니다",
+   "intentLabel": "",
+   "trendLabel": "",
+   "recencySummary": "",
+   "demandAsOf": null,
+   "measuredAt": "2026-11-08T01:40:07.561Z"
+  },
+  {
+   "keyword": "국민연금",
+   "topic": "사회·정치",
+   "searchVolume": 305200,
+   "documentCount": 2015780,
+   "adCount": 2,
+   "facingPosts": 10,
+   "sampledTitles": 10,
+   "note": "상위 10개 중 10개가 이미 정면으로 다뤘습니다",
+   "intentLabel": "",
+   "trendLabel": "",
+   "recencySummary": "",
+   "demandAsOf": null,
+   "measuredAt": "2026-11-08T01:40:40.152Z"
+  },
+  {
+   "keyword": "아이맞이지원금",
+   "topic": "비즈니스·경제",
+   "searchVolume": 15500,
+   "documentCount": 114805,
+   "adCount": 0,
+   "facingPosts": 10,
+   "sampledTitles": 10,
+   "note": "상위 10개 중 10개가 이미 정면으로 다뤘습니다",
+   "intentLabel": "",
+   "trendLabel": "",
+   "recencySummary": "",
+   "demandAsOf": null,
+   "measuredAt": "2026-11-08T01:40:47.761Z"
+  },
+  {
+   "keyword": "고속도로 미납요금 조회",
+   "topic": "자동차",
+   "searchVolume": 4600,
+   "documentCount": 10755,
+   "adCount": 0,
    "facingPosts": 6,
    "sampledTitles": 10,
    "note": "상위 10개 중 6개가 이미 정면으로 다뤘습니다",
@@ -107672,44 +107841,14 @@
    "trendLabel": "",
    "recencySummary": "",
    "demandAsOf": null,
-   "measuredAt": "2026-11-07T02:10:15.812Z"
+   "measuredAt": "2026-11-08T01:40:15.408Z"
   },
   {
-   "keyword": "국민연금",
-   "topic": "사회·정치",
-   "searchVolume": 308500,
-   "documentCount": 2013062,
-   "adCount": 3,
-   "facingPosts": 10,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 10개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "",
-   "trendLabel": "",
-   "recencySummary": "",
-   "demandAsOf": null,
-   "measuredAt": "2026-11-07T02:10:50.831Z"
-  },
-  {
-   "keyword": "아이맞이지원금",
-   "topic": "사회·정치",
-   "searchVolume": 16490,
-   "documentCount": 114688,
-   "adCount": 0,
-   "facingPosts": 10,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 10개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "",
-   "trendLabel": "",
-   "recencySummary": "",
-   "demandAsOf": null,
-   "measuredAt": "2026-11-07T02:10:58.727Z"
-  },
-  {
-   "keyword": "국가장학금 신청기간 2027",
-   "topic": "사회·정치",
-   "searchVolume": 4630,
-   "documentCount": 6437,
-   "adCount": 0,
+   "keyword": "리센느빵 예약",
+   "topic": "스타·연예인",
+   "searchVolume": 1560,
+   "documentCount": 3365,
+   "adCount": 1,
    "facingPosts": 9,
    "sampledTitles": 10,
    "note": "상위 10개 중 9개가 이미 정면으로 다뤘습니다",
@@ -107717,56 +107856,18 @@
    "trendLabel": "",
    "recencySummary": "",
    "demandAsOf": null,
-   "measuredAt": "2026-11-07T02:10:34.427Z"
-  },
-  {
-   "keyword": "진도 진돗개분양",
-   "topic": "반려동물",
-   "searchVolume": 720,
-   "documentCount": 5027,
-   "adCount": 3,
-   "facingPosts": 4,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 4개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "",
-   "trendLabel": "",
-   "recencySummary": "",
-   "demandAsOf": null,
-   "measuredAt": "2026-11-07T02:10:35.580Z"
-  },
-  {
-   "keyword": "티켓베이 우천취소",
-   "topic": "공연·전시",
-   "searchVolume": 630,
-   "documentCount": 814,
-   "adCount": 0,
-   "facingPosts": 6,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 6개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "",
-   "trendLabel": "",
-   "recencySummary": "",
-   "demandAsOf": null,
-   "measuredAt": "2026-11-07T02:10:36.704Z"
+   "measuredAt": "2026-11-08T01:40:26.747Z"
   }
  ],
  "routedShopping": [
   {
    "topic": "맛집",
-   "keyword": "광주송정역 창억떡",
-   "searchVolume": 2770,
+   "keyword": "미미의 남도김치 주문",
+   "searchVolume": 1370,
    "reasons": [
-    "SERP 6번째 구획이 쇼핑 — 검색 화면이 상품판이다"
-   ]
-  },
-  {
-   "topic": "반려동물",
-   "keyword": "삽살개 분양",
-   "searchVolume": 2180,
-   "reasons": [
-    "SERP 6번째 구획이 쇼핑 — 검색 화면이 상품판이다"
+    "SERP 2번째 구획이 쇼핑 — 검색 화면이 상품판이다"
    ]
   }
  ],
- "revalidatedAt": "2026-11-07T02:10:36.704Z"
+ "revalidatedAt": "2026-11-08T01:40:26.747Z"
 }
