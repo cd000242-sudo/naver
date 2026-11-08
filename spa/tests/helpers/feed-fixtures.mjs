@@ -22,7 +22,8 @@ export const BOARDS = {
 export const feedReply = (extra = {}) => ({
     ok: true,
     profile: { userId: 'member1', role: 'community', nickname: '이웃', score: 40, activity: { posts: 1, comments: 2, visits: 3 }, grade: { key: 'sprout', label: '새싹' } },
-    boards: BOARDS,
+    boards: BOARDS.boards, reportReasons: BOARDS.reportReasons,
+    sorts: [{ key: 'latest', label: '최신순' }], grades: [{ key: 'sprout', label: '새싹' }], limits: { title: 100 }, weeklySince: '2026-11-01T00:00:00.000Z',
     weeklyTop: [raw('w1', 'free', { likes: 9 })],
     board: 'all', sort: 'latest', page: 1, pageSize: 20, total: 3, totalPages: 1,
     pinned: [raw('nt_1', 'news', { pinned: true })],

@@ -24,12 +24,33 @@ export type FeedLoad =
 /** Which extras the old way must fetch (the one-call way always brings them). */
 export type LegacyWants = { config: boolean; weekly: boolean };
 
+/** The weekly top is as long as the old screen asked for. */
+const WEEKLY_LIMIT = 6;
 const UNSUPPORTED_MEMORY_MS = 5 * 60 * 1000;
+const UNSUPPORTED_KEY = 'leaderspro.community.feed.v1:unsupported';
 let unsupportedUntil = 0;
+
+/** True while the server is known to be old. Also remembered across reloads of this tab, so a reload does not pay again. */
+function serverIsOld(): boolean {
+    if (Date.now() < unsupportedUntil) return true;
+    try {
+        const saved = Number(sessionStorage.getItem(UNSUPPORTED_KEY));
+        if (Number.isFinite(saved) && saved > Date.now()) { unsupportedUntil = saved; return true; }
+    } catch {
+        // No storage: the in-memory note is all there is.
+    }
+    return false;
+}
+
+function markServerOld(): void {
+    unsupportedUntil = Date.now() + UNSUPPORTED_MEMORY_MS;
+    try { sessionStorage.setItem(UNSUPPORTED_KEY, String(unsupportedUntil)); } catch { /* in-memory note only */ }
+}
 
 /** Forget that the server is old (a test, or a deploy noticed mid-session). */
 export function resetFeedSupport(): void {
     unsupportedUntil = 0;
+    try { sessionStorage.removeItem(UNSUPPORTED_KEY); } catch { /* nothing to forget */ }
 }
 
 type Reply = { posts: PostItem[]; pinned: PostItem[]; total: number };
@@ -101,8 +122,8 @@ export async function loadCommunityFeed(view: FeedView, wants: LegacyWants = { c
 }
 
 async function loadFresh(view: FeedView, wants: LegacyWants): Promise<FeedLoad> {
-    if (Date.now() < unsupportedUntil) return loadLegacy(view, wants);
-    const result = await callWithToken(COMMUNITY_ACTIONS.feed, { board: view.board, sort: view.sort, page: view.page, pageSize: FEED_PAGE_SIZE });
+    if (serverIsOld()) return loadLegacy(view, wants);
+    const result = await callWithToken(COMMUNITY_ACTIONS.feed, { board: view.board, sort: view.sort, page: view.page, pageSize: FEED_PAGE_SIZE, weeklyLimit: WEEKLY_LIMIT });
     const verdict = judgeFeedReply(result);
     if (verdict === 'use' && result.ok) {
         adoptProfile((result as { profile?: unknown }).profile);
@@ -112,7 +133,7 @@ async function loadFresh(view: FeedView, wants: LegacyWants): Promise<FeedLoad> 
         const failure = result as ApiFailure;
         return { ok: false, code: failure.code, message: failure.message };
     }
-    if (verdict === 'unsupported') unsupportedUntil = Date.now() + UNSUPPORTED_MEMORY_MS;
+    if (verdict === 'unsupported') markServerOld();
     return loadLegacy(view, wants);
 }
 

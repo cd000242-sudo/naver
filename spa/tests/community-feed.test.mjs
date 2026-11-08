@@ -2,6 +2,7 @@
 // (`community-feed`); an old server falls back to the many-call way and is remembered. No live server is touched.
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { createLoader } from './helpers/load-ts.mjs';
 import { VIEW, BOARDS, feedReply, legacyReplies, countOf, raw, withFeed } from './helpers/feed-fixtures.mjs';
 
 test('first screen: ONE call (community-feed) carries the list, settings, weekly top, counts and profile', async () => {
@@ -11,8 +12,8 @@ test('first screen: ONE call (community-feed) carries the list, settings, weekly
         assert.equal(result.source, 'feed');
         assert.deepEqual(browser.actions(), ['community-feed'], 'exactly one server call');
         assert.deepEqual(
-            { board: browser.calls[0].board, sort: browser.calls[0].sort, page: browser.calls[0].page, pageSize: browser.calls[0].pageSize, token: browser.calls[0].communityToken },
-            { board: 'all', sort: 'latest', page: 1, pageSize: 20, token: 'ct_member_secret' },
+            { board: browser.calls[0].board, sort: browser.calls[0].sort, page: browser.calls[0].page, pageSize: browser.calls[0].pageSize, weeklyLimit: browser.calls[0].weeklyLimit, token: browser.calls[0].communityToken },
+            { board: 'all', sort: 'latest', page: 1, pageSize: 20, weeklyLimit: 6, token: 'ct_member_secret' },
         );
         const { bundle } = result;
         assert.deepEqual(bundle.posts.map((post) => post.id), ['p1', 'p2']);
@@ -36,8 +37,8 @@ test('board switch, sort and page turn are each ONE call with the right fields',
     });
 });
 
-test('the settings may arrive as the whole community-boards answer or as the bare board list', async () => {
-    await withFeed({ 'community-feed': feedReply({ boards: BOARDS.boards, reportReasons: BOARDS.reportReasons }) }, async ({ feed }) => {
+test('the settings arrive at the top level (board array + reportReasons); the whole community-boards answer nested in `boards` is tolerated too', async () => {
+    await withFeed({ 'community-feed': feedReply({ boards: BOARDS, reportReasons: undefined }) }, async ({ feed }) => {
         const { bundle } = await feed.loadCommunityFeed(VIEW);
         assert.deepEqual(bundle.config.boards.map((entry) => entry.id), ['request', 'news']);
         assert.equal(bundle.config.reportReasons.length, 1);
@@ -93,6 +94,16 @@ test('an old server is remembered: the next screens do not pay for a failed comm
         feed.resetFeedSupport();
         await feed.loadCommunityFeed({ board: 'free', sort: 'latest', page: 1 });
         assert.equal(countOf(browser, 'community-feed'), 2, 'asks again once the memory is cleared');
+    });
+});
+
+test('an old server stays remembered after a reload of the tab (a fresh page load does not pay for the failed call again)', async () => {
+    await withFeed(legacyReplies({ ok: false, error: 'Unauthorized' }), async ({ browser, feed }) => {
+        await feed.loadCommunityFeed(VIEW);
+        const reloaded = createLoader()('../../src/lib/communityFeed.ts');
+        await reloaded.loadCommunityFeed(VIEW);
+        assert.equal(countOf(browser, 'community-feed'), 1, 'the second page load went straight to the old way');
+        assert.equal(countOf(browser, 'community-posts'), 10);
     });
 });
 

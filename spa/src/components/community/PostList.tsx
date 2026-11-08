@@ -103,7 +103,7 @@ function PostList({ title, note, boardId, boards, pinned, posts, total, page, to
         <section className="lp-box cm-board" aria-labelledby="cm-board-title">
             <div className="cm-board-head">
                 <h2 id="cm-board-title">{title}</h2>
-                <span className="cm-count">{total}개</span>
+                {loading ? null : <span className="cm-count">{total}개</span>}
                 <span className={`cm-refresh${refreshing ? ' on' : ''}`} role="status" aria-live="polite">{refreshing ? '새로 불러오는 중' : <span aria-hidden="true">새로 불러오는 중</span>}</span>
                 <nav className="cm-sorts" aria-label="정렬">
                     {SORTS.map((entry) => (

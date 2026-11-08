@@ -142,7 +142,7 @@ function CommunityPage() {
                     ) : null}
                     {showList ? (
                         <>
-                            {view.page === 1 ? <WeeklyTop posts={weekly} boardId={view.board} /> : null}
+                            {view.page === 1 && feed.status !== 'loading' ? <WeeklyTop posts={weekly} boardId={view.board} /> : null}
                             <PostList title={title} note={note} boardId={view.board} boards={boards} pinned={feed.pinned} posts={feed.posts}
                                 total={feed.total} page={view.page} totalPages={feed.totalPages} sort={view.sort}
                                 loading={feed.status === 'loading'} refreshing={feed.refreshing} error={feed.status === 'error' ? feed.message : ''}
