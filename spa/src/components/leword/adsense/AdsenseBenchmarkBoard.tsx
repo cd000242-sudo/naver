@@ -14,6 +14,7 @@ import { DemandBlock, NowPicksPanel } from './AdsenseDemand';
 import { SolveBlock, KinBlock, BenchmarkBlock, DemandPending } from './AdsenseWriteAids';
 // 성과 내는 순서(2026-10-22 사장님 "벤치마크로 들고 와도 어떻게 활용해야 성과가 나는지 모르겠다")
 import BenchmarkPlaybook, { BenchmarkHowTo, DemandStep, trackUrl } from '../shared/BenchmarkPlaybook';
+import WritingGuideFrame from '../shared/WritingGuideFrame';
 
 const kst = (iso: string | null | undefined) => {
     if (!iso) return '—';
@@ -164,20 +165,8 @@ function AdsenseCardView({ c, now }: { c: AdsenseCard; now: number }) {
                 <span>파워링크 3위 입찰가<b>{typeof c.metrics?.bid === 'number' && Number.isFinite(c.metrics.bid) && c.metrics.bid >= 0 ? `${c.metrics.bid.toLocaleString('ko-KR')}원` : '미측정'}</b></span>
             </div>
             {c.why?.length > 0 && <div className="hfb-why"><span>검토 이유</span><ul>{c.why.map((w) => <li key={w}>{w}</li>)}</ul></div>}
-            {/* 작성 안내(2026-10-13 사장님 "애드센스도 글 쓰는 방향 · 넣을 것 · 넣지 말 것") — 안내가 있는 카드에만 */}
-            {c.writingDirection && (
-                <div className="hfb-direction">
-                    <h4>이렇게 쓰세요</h4>
-                    <p>{c.writingDirection}</p>
-                    {(c.searchTargets?.length ?? 0) > 0 && <p className="hfb-alternatives"><span>노릴 검색어 · 네이버 자동완성</span> {c.searchTargets!.join(' · ')}</p>}
-                </div>
-            )}
-            {((c.mustInclude?.length ?? 0) > 0 || (c.mustAvoid?.length ?? 0) > 0) && (
-                <div className="hfb-writing-grid">
-                    {(c.mustInclude?.length ?? 0) > 0 && <div className="hfb-points include"><h4>반드시 들어갈 내용</h4><ul>{c.mustInclude!.map((t, i) => <li key={i}>{t}</li>)}</ul></div>}
-                    {(c.mustAvoid?.length ?? 0) > 0 && <div className="hfb-points avoid"><h4>넣지 않을 내용</h4><ul>{c.mustAvoid!.map((t, i) => <li key={i}>{t}</li>)}</ul></div>}
-                </div>
-            )}
+            {/* 작성 안내는 모든 카드가 같은 틀로(2026-11-08 사장님 "있는 카드와 없는 카드가 일관되지 않다") — 안내가 없으면 빈 틀 + '작성 안내 준비 중' */}
+            <WritingGuideFrame card={c} />
             {(c.verificationNeeded?.length ?? 0) > 0 && <div className="hfb-verify"><b>작성 전 확인</b> {c.verificationNeeded!.join(' · ')}</div>}
             <SolveBlock c={c} />
             <KinBlock c={c} />

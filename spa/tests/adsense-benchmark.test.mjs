@@ -98,6 +98,10 @@ test('애드센스 작성 안내 — 안내 파일을 판과 합쳐(withGuides) 
   const src = readFileSync(new URL('../src/components/leword/adsense/AdsenseBenchmarkBoard.tsx', import.meta.url), 'utf8');
   assert.match(src, /\/data\/adsense-benchmark-guides\.json/);
   assert.match(src, /withGuides\(/);
-  for (const label of ['이렇게 쓰세요', '노릴 검색어', '반드시 들어갈 내용', '넣지 않을 내용', '작성 전 확인']) assert.ok(src.includes(label), label);
-  assert.match(src, /c\.writingDirection &&/, '안내가 없는 카드는 칸을 그리지 않는다');
+  // 2026-11-08: 안내 칸은 공용 틀(WritingGuideFrame)이 모든 카드에 같은 모양으로 그린다 — 안내가 없으면 빈 틀 + '작성 안내 준비 중'.
+  const frame = readFileSync(new URL('../src/components/leword/shared/WritingGuideFrame.tsx', import.meta.url), 'utf8');
+  assert.match(src, /<WritingGuideFrame card=\{c\} \/>/);
+  assert.ok(src.includes('작성 전 확인'));
+  for (const label of ['이렇게 쓰세요', '노릴 검색어', '반드시 들어갈 내용', '넣지 않을 내용']) assert.ok(frame.includes(label), label);
+  assert.doesNotMatch(src, /c\.writingDirection &&/, '안내가 없는 카드도 같은 틀을 그린다');
 });
