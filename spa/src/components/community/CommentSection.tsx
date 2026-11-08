@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { boardApi } from '../../lib/communityApi';
 import type { CommentItem } from '../../lib/communityData';
 import { canModerate } from '../../lib/accountModel.mjs';
+import { createLikeToggle } from '../../lib/communityLikeSync';
 import { countComments } from '../../lib/communityModel.mjs';
+import { authorOf, discardComment, retryComment, sendComment, type CommentPort } from '../../lib/communityOutbox';
 import type { CommunityProfile } from '../../lib/communitySession';
 import CommentAdminBar from './CommentAdminBar';
 import CommentForm from './CommentForm';
@@ -12,8 +14,8 @@ type Props = {
     postId: string;
     comments: CommentItem[];
     profile: CommunityProfile;
-    /** Replace the comment list shown (like counts change locally). */
-    onComments: (next: CommentItem[]) => void;
+    /** Change the comment list shown (a like, a comment being sent, a moderator click). */
+    onComments: CommentPort['update'];
     /** Read the post and its comments again from the server. */
     onReload: () => Promise<void>;
     onReport: (targetType: 'post' | 'comment', targetId: string) => void;
@@ -28,25 +30,35 @@ function patchComment(list: CommentItem[], id: string, change: Partial<CommentIt
     }));
 }
 
-/** Comments under a post: the list, the box for a new comment, and the reply box under the comment being answered. */
+/**
+ * Comments under a post: the list, the box for a new comment, and the reply box under the comment being answered.
+ * A new comment is in the list the moment it is sent (marked "sending"); a like changes at once; both are
+ * confirmed or put right in the background.
+ */
 function CommentSection({ postId, comments, profile, onComments, onReload, onReport, commentable = true }: Props) {
     const [replyingTo, setReplyingTo] = useState('');
     const [notice, setNotice] = useState('');
     const canWrite = Boolean(profile.nickname) && !profile.needsNickname;
+    const likes = useRef(new Map<string, ReturnType<typeof createLikeToggle>>());
+    const port = useMemo<CommentPort>(() => ({ update: onComments, reload: () => { void onReload(); } }), [onComments, onReload]);
 
-    const send = async (body: string, parentId?: string): Promise<string> => {
-        const result = await boardApi.writeComment(postId, body, parentId);
-        if (!result.ok) return result.message;
+    const send = (body: string, parentId?: string): Promise<string> => {
         setReplyingTo('');
-        await onReload();
-        return '';
+        return sendComment(port, { postId, body, parentId, author: authorOf(profile) });
     };
 
-    const like = async (comment: CommentItem) => {
+    const like = (comment: CommentItem) => {
         setNotice('');
-        const result = await boardApi.like('comment', comment.id);
-        if (result.ok) onComments(patchComment(comments, comment.id, { liked: result.liked === true, likes: Number(result.likes) || 0 }));
-        else setNotice(result.message);
+        let toggle = likes.current.get(comment.id);
+        if (!toggle) {
+            toggle = createLikeToggle({
+                send: () => boardApi.like('comment', comment.id),
+                apply: (state) => onComments((list) => patchComment(list, comment.id, state)),
+                fail: setNotice,
+            });
+            likes.current.set(comment.id, toggle);
+        }
+        toggle.toggle({ liked: comment.liked, likes: comment.likes });
     };
 
     const remove = async (comment: CommentItem) => {
@@ -66,10 +78,15 @@ function CommentSection({ postId, comments, profile, onComments, onReload, onRep
                     comments={comments}
                     replyingTo={replyingTo}
                     onReply={(id) => setReplyingTo((current) => (current === id ? '' : id))}
-                    onLike={(comment) => { void like(comment); }}
+                    onLike={like}
                     onDelete={(comment) => { void remove(comment); }}
                     onReport={(comment) => onReport('comment', comment.id)}
-                    renderAdmin={canModerate(profile) ? (comment) => <CommentAdminBar comment={comment} profile={profile} onDone={onReload} /> : undefined}
+                    onRetry={(comment) => { void retryComment(port, postId, comment); }}
+                    onDiscard={(comment) => onComments((list) => discardComment(list, comment.id))}
+                    renderAdmin={canModerate(profile) ? (comment) => (
+                        <CommentAdminBar comment={comment} profile={profile} onDone={onReload}
+                            onPatch={(change) => onComments((list) => patchComment(list, comment.id, change))} />
+                    ) : undefined}
                     renderReplyForm={(parent) => (
                         <CommentForm placeholder={`${parent.nickname} 님에게 답글`} submitLabel="답글 올리기"
                             onSubmit={(body) => send(body, parent.id)} onCancel={() => setReplyingTo('')} />

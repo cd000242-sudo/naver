@@ -1,72 +1,88 @@
-import { useCallback, useEffect, useState } from 'react';
-import { boardApi } from './communityApi';
-import { normalizePosts, type PostItem } from './communityData';
-import { ALL_BOARD, BOARD_ORDER, mergeBoardPages, type SortKey } from './communityModel.mjs';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { refreshCommunityProfile } from './communityAuth';
+import type { PostItem } from './communityData';
+import { loadCommunityFeed, peekCommunityFeed, type FeedBundle, type FeedView } from './communityFeed';
+import type { FeedConfig } from './communityFeedModel.mjs';
 
 export type Feed = {
+    /** loading = nothing to draw yet (skeleton); ready = rows are drawn (saved or fresh); error = the last read failed. */
     status: 'loading' | 'ready' | 'error';
+    /** A read is in flight while rows are already drawn: show a small sign, never blank the list. */
+    refreshing: boolean;
+    /** The rows drawn are the saved ones from the last visit, not yet replaced by the server's answer. */
+    stale: boolean;
     pinned: PostItem[];
     posts: PostItem[];
     total: number;
     totalPages: number;
     message: string;
-    /** Post counts per board, as far as they are known (all-boards view knows every board). */
+    /** Post counts per board, as far as they are known. */
     counts: Record<string, number>;
+    /** Board settings and this week's top: from the same answer as the list, or saved from the last visit. */
+    config: FeedConfig | null;
+    weekly: PostItem[];
 };
 
-const EMPTY: Feed = { status: 'loading', pinned: [], posts: [], total: 0, totalPages: 0, message: '', counts: {} };
-
-type Reply = { posts: PostItem[]; pinned: PostItem[]; total: number };
-
-function toReply(result: Record<string, unknown>): Reply {
-    return {
-        posts: normalizePosts(result.posts),
-        pinned: normalizePosts(result.pinned),
-        total: Number(result.total) || 0,
-    };
-}
+type Extras = { config: FeedConfig | null; weekly: PostItem[] | null; counts: Record<string, number> };
+type Fresh = { key: string; bundle: FeedBundle };
 
 /**
- * The list for the current view. One board = one server call. "All boards" asks every board for its first page
- * (20 rows, in the chosen sort) in parallel and merges them here, because the server lists a single board at a time.
- * `reloadKey` forces a fresh read (after writing, deleting, reloading).
+ * The list for the current view, in ONE server call (`community-feed`; an old server is read the old way, see
+ * communityFeed.ts). What the browser saved last time is drawn first, at once, and replaced when the answer
+ * arrives. `reloadKey` forces a fresh read (after writing, deleting, reloading).
  */
-export function useBoardFeed(view: { board: string; sort: SortKey; page: number }, reloadKey: number): Feed & { reload: () => void } {
-    const [feed, setFeed] = useState<Feed>(EMPTY);
+export function useBoardFeed(view: FeedView, reloadKey: number): Feed & { reload: () => void } {
+    const key = `${view.board}|${view.sort}|${view.page}`;
+    const saved = useMemo(() => peekCommunityFeed(view)?.bundle ?? null, [key]); // eslint-disable-line react-hooks/exhaustive-deps
+    const [fresh, setFresh] = useState<Fresh | null>(null);
+    const [extras, setExtras] = useState<Extras>({ config: null, weekly: null, counts: {} });
+    const [read, setRead] = useState({ refreshing: true, error: '' });
     const [again, setAgain] = useState(0);
     const reload = useCallback(() => setAgain((value) => value + 1), []);
+    // Only an old server needs the settings and the weekly top as calls of their own.
+    const settingsRead = useRef(false);
+    const weeklyFor = useRef<number | null>(null);
+    const profileFor = useRef<number | null>(null);
 
     useEffect(() => {
         let alive = true;
-        setFeed((previous) => ({ ...previous, status: 'loading', message: '' }));
-        const run = async () => {
-            if (view.board !== ALL_BOARD) {
-                const result = await boardApi.posts({ board: view.board, sort: view.sort, page: view.page });
-                if (!alive) return;
-                if (!result.ok) { setFeed((previous) => ({ ...previous, status: 'error', message: result.message })); return; }
-                const reply = toReply(result);
-                setFeed((previous) => ({
-                    status: 'ready', pinned: reply.pinned, posts: reply.posts, total: reply.total,
-                    totalPages: Number(result.totalPages) || 0, message: '', counts: { ...previous.counts, [view.board]: reply.total },
-                }));
-                return;
-            }
-            const results = await Promise.all(BOARD_ORDER.map((board) => boardApi.posts({ board, sort: view.sort, page: 1 })));
+        setRead({ refreshing: true, error: '' });
+        const wants = { config: !settingsRead.current, weekly: weeklyFor.current !== reloadKey };
+        void loadCommunityFeed(view, wants).then((result) => {
             if (!alive) return;
-            const failed = results.find((result) => !result.ok);
-            if (failed && results.every((result) => !result.ok)) {
-                setFeed((previous) => ({ ...previous, status: 'error', message: failed.ok ? '' : failed.message }));
-                return;
+            if (!result.ok) { setRead({ refreshing: false, error: result.message }); return; }
+            const { bundle } = result;
+            if (bundle.config) settingsRead.current = true;
+            if (bundle.weekly) weeklyFor.current = reloadKey;
+            if (result.source === 'legacy' && profileFor.current !== reloadKey) {
+                profileFor.current = reloadKey;
+                void refreshCommunityProfile();
             }
-            const replies = results.map((result) => (result.ok ? toReply(result) : null));
-            const merged = mergeBoardPages(replies, { sort: view.sort, page: view.page });
-            const counts: Record<string, number> = {};
-            BOARD_ORDER.forEach((board, index) => { const reply = replies[index]; if (reply) counts[board] = reply.total; });
-            setFeed({ status: 'ready', ...merged, message: '', counts });
-        };
-        void run();
+            setFresh({ key, bundle });
+            setExtras((previous) => ({
+                config: bundle.config ?? previous.config,
+                weekly: bundle.weekly ?? previous.weekly,
+                counts: { ...previous.counts, ...bundle.counts },
+            }));
+            setRead({ refreshing: false, error: '' });
+        });
         return () => { alive = false; };
-    }, [view.board, view.sort, view.page, reloadKey, again]);
+    }, [view.board, view.sort, view.page, reloadKey, again]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    return { ...feed, reload };
+    const shown = fresh && fresh.key === key ? fresh.bundle : saved;
+    const status = read.error ? 'error' : shown ? 'ready' : 'loading';
+    return {
+        status,
+        refreshing: read.refreshing && shown !== null,
+        stale: read.refreshing && shown !== null && shown === saved,
+        pinned: shown?.pinned ?? [],
+        posts: shown?.posts ?? [],
+        total: shown?.total ?? 0,
+        totalPages: shown?.totalPages ?? 0,
+        message: read.error,
+        counts: { ...shown?.counts, ...extras.counts },
+        config: extras.config ?? shown?.config ?? null,
+        weekly: extras.weekly ?? shown?.weekly ?? [],
+        reload,
+    };
 }

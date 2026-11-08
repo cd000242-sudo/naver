@@ -70,18 +70,19 @@ export const boardApi = {
     posts: (query: PostsQuery) => callWithToken('community-posts', { pageSize: 20, ...query }),
     post: (id: string) => callWithToken('community-post', { id }),
     weeklyTop: (limit = 6) => callWithToken('community-weekly-top', { limit }),
-    writePost: (draft: PostDraft) => callWithToken('community-post-write', {
+    /** Pass the same `requestId` when sending again: the server then answers with the first post instead of making a twin. */
+    writePost: (draft: PostDraft, requestId: string = newRequestId()) => callWithToken('community-post-write', {
         board: draft.board,
         title: draft.title,
         ...(draft.board === 'promo' ? { url: draft.url, summary: draft.body } : { body: draft.body }),
-        requestId: newRequestId(),
+        requestId,
     }),
     updatePost: (id: string, draft: { title: string; body: string; promo: boolean }) => callWithToken('community-post-update', {
         id, title: draft.title, ...(draft.promo ? { summary: draft.body } : { body: draft.body }),
     }),
     deletePost: (id: string) => callWithToken('community-post-delete', { id }),
-    writeComment: (postId: string, body: string, parentId?: string) => callWithToken('community-comment-write', {
-        postId, body, ...(parentId ? { parentId } : {}), requestId: newRequestId(),
+    writeComment: (postId: string, body: string, parentId?: string, requestId: string = newRequestId()) => callWithToken('community-comment-write', {
+        postId, body, ...(parentId ? { parentId } : {}), requestId,
     }),
     deleteComment: (id: string) => callWithToken('community-comment-delete', { id }),
     like: (targetType: 'post' | 'comment', targetId: string) => callWithToken('community-like', { targetType, targetId }),

@@ -21,6 +21,8 @@ export const COMMUNITY_ACTIONS = Object.freeze({
     adminReportResolve: 'community-admin-report-resolve',
     adminPosts: 'community-admin-posts',
     adminBoards: 'community-admin-boards',
+    /** One call for a whole community screen: list, board settings, weekly top, counts and the profile. */
+    feed: 'community-feed',
 });
 
 export const COMMUNITY_CODES = Object.freeze({

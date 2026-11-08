@@ -2,7 +2,7 @@ export const COMMUNITY_ACTIONS: Readonly<{
     signupSendCode: string; signup: string; profile: string; myPosts: string; changePassword: string;
     resetSendCode: string; resetConfirm: string; verifyPhoneSend: string; verifyPhoneConfirm: string;
     adminHide: string; adminPin: string; adminDelete: string; adminStatus: string; adminReports: string;
-    adminReportResolve: string; adminPosts: string; adminBoards: string;
+    adminReportResolve: string; adminPosts: string; adminBoards: string; feed: string;
 }>;
 export const COMMUNITY_CODES: Readonly<Record<
     'PHONE_INVALID' | 'PHONE_TAKEN' | 'PHONE_REQUIRED' | 'PHONE_CODE_INVALID' | 'PHONE_CODE_EXPIRED' | 'TOO_MANY'

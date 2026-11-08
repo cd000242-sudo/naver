@@ -41,6 +41,9 @@ export type PostItem = {
     platform: string;
     visits: number;
     given: number;
+    /** Set only on a row the reader just wrote and the server has not confirmed: sending, or failed (with `failure`). */
+    delivery?: 'sending' | 'failed';
+    failure?: string;
 };
 
 export type CommentItem = {
@@ -62,6 +65,9 @@ export type CommentItem = {
     /** The text of a hidden comment, kept apart from `body` so only the moderator view draws it. */
     hiddenBody: string;
     replies: CommentItem[];
+    /** Set only on a comment the reader just wrote and the server has not confirmed: sending, or failed (with `failure`). */
+    delivery?: 'sending' | 'failed';
+    failure?: string;
 };
 
 const text = (value: unknown): string => (typeof value === 'string' ? value : '');

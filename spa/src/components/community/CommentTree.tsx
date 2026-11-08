@@ -11,6 +11,9 @@ type Props = {
     onLike: (comment: CommentItem) => void;
     onDelete: (comment: CommentItem) => void;
     onReport: (comment: CommentItem) => void;
+    /** A comment that failed to send: send it again / throw it away. */
+    onRetry?: (comment: CommentItem) => void;
+    onDiscard?: (comment: CommentItem) => void;
     renderReplyForm: (parent: CommentItem) => ReactNode;
     /** Moderator buttons for one comment; set only for an owner, so a member's page has none of it. */
     renderAdmin?: (comment: CommentItem) => ReactNode;
@@ -19,10 +22,26 @@ type Props = {
 
 type RowProps = Omit<Props, 'comments'> & { comment: CommentItem; reply: boolean; now: number };
 
-function CommentRow({ comment, reply, replyingTo, onReply, onLike, onDelete, onReport, renderReplyForm, renderAdmin, now }: RowProps) {
+function CommentRow({ comment, reply, replyingTo, onReply, onLike, onDelete, onReport, onRetry, onDiscard, renderReplyForm, renderAdmin, now }: RowProps) {
     return (
-        <li className={`cm-comment${reply ? ' is-reply' : ''}`}>
-            {comment.gone ? (
+        <li className={`cm-comment${reply ? ' is-reply' : ''}${comment.delivery ? ` is-${comment.delivery}` : ''}`}>
+            {comment.delivery ? (
+                <>
+                    <div className="cm-c-head">
+                        <GradeBadge grade={comment.grade} isOperator={comment.isOperator} />
+                        <b className="cm-nick">{comment.nickname}</b>
+                        <time>{comment.delivery === 'sending' ? '보내는 중' : '보내지 못했어요'}</time>
+                    </div>
+                    <p className="cm-c-body">{comment.body}</p>
+                    {comment.delivery === 'failed' ? (
+                        <div className="cm-c-fail" role="alert">
+                            {comment.failure ? <span>{comment.failure}</span> : null}
+                            <button type="button" className="cm-act" onClick={() => onRetry?.(comment)}>다시 보내기</button>
+                            <button type="button" className="cm-act" onClick={() => onDiscard?.(comment)}>지우기</button>
+                        </div>
+                    ) : null}
+                </>
+            ) : comment.gone ? (
                 renderAdmin && comment.hidden ? (
                     <>
                         <p className="cm-gone">숨긴 댓글입니다</p>
@@ -48,13 +67,13 @@ function CommentRow({ comment, reply, replyingTo, onReply, onLike, onDelete, onR
                     </div>
                 </>
             )}
-            {renderAdmin ? renderAdmin(comment) : null}
-            {!reply && replyingTo === comment.id && !comment.gone ? renderReplyForm(comment) : null}
+            {renderAdmin && !comment.delivery ? renderAdmin(comment) : null}
+            {!reply && replyingTo === comment.id && !comment.gone && !comment.delivery ? renderReplyForm(comment) : null}
             {comment.replies.length > 0 ? (
                 <ul className="cm-replies">
                     {comment.replies.map((child) => (
                         <CommentRow key={child.id} comment={child} reply replyingTo={replyingTo} onReply={onReply} onLike={onLike}
-                            onDelete={onDelete} onReport={onReport} renderReplyForm={renderReplyForm} renderAdmin={renderAdmin} now={now} />
+                            onDelete={onDelete} onReport={onReport} onRetry={onRetry} onDiscard={onDiscard} renderReplyForm={renderReplyForm} renderAdmin={renderAdmin} now={now} />
                     ))}
                 </ul>
             ) : null}

@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react';
-import { boardApi } from '../../lib/communityApi';
+import { boardApi, type PostDraft } from '../../lib/communityApi';
 import { normalizePost, type PostItem } from '../../lib/communityData';
 import { BODY_MAX, TITLE_MAX, canWriteBoard, validatePostDraft, writableBoards, type BoardConfig } from '../../lib/communityModel.mjs';
 import type { CommunityProfile } from '../../lib/communitySession';
@@ -11,13 +11,18 @@ type Props = {
     defaultBoard: string;
     profile: CommunityProfile;
     onDone: (post: PostItem | null) => void;
+    /**
+     * A NEW post: the page puts it on top of the list at once and sends it in the background, so the form
+     * does not wait for the server. Without it (or when editing) the form waits for the answer as before.
+     */
+    onSubmitNew?: (draft: PostDraft) => void;
     onCancel: () => void;
     /** Editing an existing post: the board cannot change, a promo post keeps its address and title. */
     editing?: PostItem;
 };
 
 /** Write or edit a post. Promo posts: the address is read to get the real title, plus a one-line intro. */
-function PostWriteForm({ boards, defaultBoard, profile, onDone, onCancel, editing }: Props) {
+function PostWriteForm({ boards, defaultBoard, profile, onDone, onSubmitNew, onCancel, editing }: Props) {
     const choices = writableBoards(boards, profile);
     const first = choices.find((entry) => entry.id === defaultBoard) ?? choices.find((entry) => entry.id === 'free') ?? choices[0];
     const [boardId, setBoardId] = useState(editing?.board ?? first?.id ?? 'free');
@@ -65,8 +70,12 @@ function PostWriteForm({ boards, defaultBoard, profile, onDone, onCancel, editin
         if (!editing && !canWriteBoard(board, profile)) { setError('이 게시판에는 글을 쓸 수 없어요.'); return; }
         const problem = validatePostDraft({ boards, board: boardId, title, body, url });
         if (problem) { setError(problem); return; }
-        setBusy(true);
         setError('');
+        if (!editing && onSubmitNew) {
+            onSubmitNew({ board: boardId, title: title.trim(), body: body.trim(), url: url.trim() });
+            return;
+        }
+        setBusy(true);
         const result = editing
             ? await boardApi.updatePost(editing.id, { title: title.trim(), body: body.trim(), promo })
             : await boardApi.writePost({ board: boardId, title: title.trim(), body: body.trim(), url: url.trim() });

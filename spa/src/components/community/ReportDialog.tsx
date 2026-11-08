@@ -6,14 +6,16 @@ type Props = {
     error: string;
     onSubmit: (input: { reason: string; detail: string }) => void;
     onClose: () => void;
+    /** Reopened after a failed send: what the reader had picked and written. */
+    initial?: { reason: string; detail: string };
 };
 
 const DETAIL_MAX = 200;
 
 /** Report a post or comment: pick a reason, add an optional note. Esc or [취소] closes it. */
-function ReportDialog({ reasons, busy, error, onSubmit, onClose }: Props) {
-    const [reason, setReason] = useState('');
-    const [detail, setDetail] = useState('');
+function ReportDialog({ reasons, busy, error, onSubmit, onClose, initial }: Props) {
+    const [reason, setReason] = useState(initial?.reason ?? '');
+    const [detail, setDetail] = useState(initial?.detail ?? '');
     const [problem, setProblem] = useState('');
 
     useEffect(() => {

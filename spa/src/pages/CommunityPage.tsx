@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import CommunitySidebar, { BoardTabs } from '../components/community/CommunitySidebar';
 import ModerationPanel from '../components/community/ModerationPanel';
@@ -8,17 +8,21 @@ import PostList from '../components/community/PostList';
 import PostWriteForm from '../components/community/PostWriteForm';
 import WeeklyTop from '../components/community/WeeklyTop';
 import { REPORTS_PATH, canModerate, isReportsView } from '../lib/accountModel.mjs';
-import { refreshCommunityProfile } from '../lib/communityAuth';
-import { boardApi } from '../lib/communityApi';
-import { normalizePosts, type PostItem } from '../lib/communityData';
+import { boardApi, type PostDraft } from '../lib/communityApi';
+import type { PostItem } from '../lib/communityData';
+import { findKnownPost } from '../lib/communityFeed';
 import {
     ALL_BOARD, boardLabel, boardList, communityPath, describeVisit, parseCommunityQuery,
 } from '../lib/communityModel.mjs';
+import { authorOf } from '../lib/communityOutbox';
+import { visibleOutbox } from '../lib/communityPostOutbox';
 import { useBoardFeed } from '../lib/useBoardFeed';
+import { usePostOutbox } from '../lib/usePostOutbox';
 import { useSiteSession } from '../lib/useSiteSession';
 import '../styles/light-page.css';
 import '../components/community/community.css';
 import '../components/community/community-detail.css';
+import '../components/community/community-speed.css';
 
 const ALL_NOTE = '전체글은 게시판마다 최신 글 20개씩 모아 보여 드려요.';
 
@@ -35,13 +39,25 @@ function CommunityPage() {
     const site = useSiteSession(location.pathname);
     const profile = site.community;
     const view = useMemo(() => parseCommunityQuery(location.search), [location.search]);
-    const [config, setConfig] = useState<Record<string, unknown> | null>(null);
-    const boards = useMemo(() => boardList(config), [config]);
-    const [weekly, setWeekly] = useState<PostItem[]>([]);
     const [reloadKey, setReloadKey] = useState(0);
     const [notice, setNotice] = useState<Notice | null>(null);
     const [editing, setEditing] = useState<PostItem | null>(null);
+    // One read brings the list, the board settings, the weekly top and a fresh profile (see useBoardFeed).
     const feed = useBoardFeed(view, reloadKey);
+    const config = feed.config;
+    const boards = useMemo(() => boardList(config), [config]);
+    const weekly = feed.weekly;
+    const refresh = useCallback(() => setReloadKey((value) => value + 1), []);
+    const outbox = usePostOutbox(refresh);
+    const serverIds = useMemo(() => new Set([...feed.pinned, ...feed.posts].map((post) => post.id)), [feed.pinned, feed.posts]);
+    const { prune } = outbox;
+    useEffect(() => { prune(serverIds); }, [prune, serverIds]);
+    const local = useMemo(() => visibleOutbox(outbox.entries, view, serverIds), [outbox.entries, view, serverIds]);
+    // What the list already showed of the open post: the detail page draws it while the text is read.
+    const preview = useMemo(
+        () => (view.post ? [...feed.pinned, ...feed.posts].find((post) => post.id === view.post) ?? findKnownPost(view.post) : null),
+        [view.post, feed.pinned, feed.posts],
+    );
 
     useEffect(() => {
         const previous = document.title;
@@ -49,28 +65,10 @@ function CommunityPage() {
         return () => { document.title = previous; };
     }, []);
 
-    // Once per visit: board settings, and a fresh profile (score and grade change while away).
-    useEffect(() => {
-        let alive = true;
-        void boardApi.boards().then((result) => { if (alive && result.ok) setConfig(result); });
-        void refreshCommunityProfile();
-        return () => { alive = false; };
-    }, []);
-
-    useEffect(() => {
-        let alive = true;
-        void boardApi.weeklyTop(6).then((result) => {
-            if (alive) setWeekly(result.ok ? normalizePosts(result.posts) : []);
-        });
-        return () => { alive = false; };
-    }, [reloadKey]);
-
     // A notice belongs to the screen it was shown on.
     useEffect(() => { setNotice(null); }, [location.search]);
 
     if (!profile) return null;
-
-    const refresh = () => { void refreshCommunityProfile(); setReloadKey((value) => value + 1); };
 
     const visit = (post: PostItem) => {
         if (!post.url) return;
@@ -80,6 +78,12 @@ function CommunityPage() {
             setNotice(describeVisit(result));
             if (result.ok) refresh();
         });
+    };
+
+    // A new post is on top of the list at once ("sending") and goes to the server in the background.
+    const submitNew = (draft: PostDraft) => {
+        outbox.send(draft, authorOf(profile));
+        navigate(communityPath({ board: draft.board }));
     };
 
     const afterWrite = (post: PostItem | null) => {
@@ -131,17 +135,18 @@ function CommunityPage() {
                             onDone={afterWrite} onCancel={() => setEditing(null)} />
                     ) : view.write ? (
                         <PostWriteForm boards={boards} defaultBoard={view.board} profile={profile}
-                            onDone={afterWrite} onCancel={() => navigate(communityPath({ board: view.board }))} />
+                            onDone={afterWrite} onSubmitNew={submitNew} onCancel={() => navigate(communityPath({ board: view.board }))} />
                     ) : view.post ? (
                         <PostDetail key={view.post} id={view.post} boards={boards} boardId={view.board} profile={profile} reportConfig={config}
-                            onEdit={setEditing} onDeleted={() => { refresh(); navigate(communityPath({ board: view.board })); }} onVisit={visit} onModerated={refresh} />
+                            preview={preview} onEdit={setEditing} onDeleted={() => { refresh(); navigate(communityPath({ board: view.board })); }} onVisit={visit} onModerated={refresh} />
                     ) : null}
                     {showList ? (
                         <>
                             {view.page === 1 ? <WeeklyTop posts={weekly} boardId={view.board} /> : null}
                             <PostList title={title} note={note} boardId={view.board} boards={boards} pinned={feed.pinned} posts={feed.posts}
                                 total={feed.total} page={view.page} totalPages={feed.totalPages} sort={view.sort}
-                                loading={feed.status === 'loading'} error={feed.status === 'error' ? feed.message : ''}
+                                loading={feed.status === 'loading'} refreshing={feed.refreshing} error={feed.status === 'error' ? feed.message : ''}
+                                local={local} onRetryLocal={(post) => outbox.retry(post.id)} onDiscardLocal={(post) => outbox.discard(post.id)}
                                 moderator={moderator} onVisit={visit} onRetry={feed.reload} />
                         </>
                     ) : null}

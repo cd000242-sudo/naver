@@ -6,6 +6,8 @@
  * known role, because the screen draws these values.
  */
 
+import { clearFeedCache } from './communityFeedCache';
+
 export const COMMUNITY_SESSION_KEY = 'leaderspro.community.session.v1';
 /** Fired on window after the stored login changes, so the menu and the pages (separate React trees) follow. */
 export const COMMUNITY_SESSION_EVENT = 'community:session-changed';
@@ -110,6 +112,7 @@ export function loadCommunitySession(): CommunitySession | null {
         const expiresAt = session?.sessionExpiresAt ? new Date(session.sessionExpiresAt).getTime() : NaN;
         if (!session || (Number.isFinite(expiresAt) && expiresAt <= Date.now())) {
             localStorage.removeItem(COMMUNITY_SESSION_KEY);
+            clearFeedCache();
             return null;
         }
         return { ...session, savedAt: text(stored.savedAt) || session.savedAt };
@@ -118,7 +121,19 @@ export function loadCommunitySession(): CommunitySession | null {
     }
 }
 
+/** The user id of the stored login without any side effect ('' when none or damaged). */
+function storedUserId(): string {
+    try {
+        const stored = JSON.parse(localStorage.getItem(COMMUNITY_SESSION_KEY) || 'null') as { userId?: unknown } | null;
+        return text(stored?.userId);
+    } catch {
+        return '';
+    }
+}
+
 export function saveCommunitySession(session: CommunitySession): void {
+    // Another person logging in must not inherit the list the previous person saved.
+    if (storedUserId() !== session.userId) clearFeedCache();
     try {
         localStorage.setItem(COMMUNITY_SESSION_KEY, JSON.stringify(session));
     } catch {
@@ -128,6 +143,7 @@ export function saveCommunitySession(session: CommunitySession): void {
 }
 
 export function clearCommunitySession(): void {
+    clearFeedCache();
     try {
         localStorage.removeItem(COMMUNITY_SESSION_KEY);
     } catch {
