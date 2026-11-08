@@ -11,9 +11,11 @@ import { findCachedPost, readFeedCache, writeFeedCache, type CachedFeed } from '
 import { FEED_PAGE_SIZE, answerKnowsNotice, countsForOldServer, isInvalidBoardReply, judgeFeedReply, pickConfig, pickCounts } from './communityFeedModel.mjs';
 import { loadNewsSplit, markNoticeBoardNew, markNoticeBoardOld, noticeBoardIsOld } from './communityNoticeCompat';
 import { ALL_BOARD, BOARD_ORDER, mergeBoardPages, type SortKey } from './communityModel.mjs';
+import { normalizePlatform } from './communityPlatform.mjs';
 import { loadCommunitySession, normalizeProfile } from './communitySession';
 
-export type FeedView = { board: string; sort: SortKey; page: number };
+/** `platform` matters on the promo board only (naver when missing). */
+export type FeedView = { board: string; sort: SortKey; page: number; platform?: string };
 
 /** One screen's worth of data. `config` / `weekly` are null when the answer did not carry them (keep what is known). */
 export type FeedBundle = CachedFeed;
@@ -82,7 +84,7 @@ async function loadLegacy(view: FeedView, wants: LegacyWants): Promise<FeedLoad>
     const [settings, weekly, ...lists] = await Promise.all([
         wants.config ? boardApi.boards() : Promise.resolve(null),
         wants.weekly ? boardApi.weeklyTop(6) : Promise.resolve(null),
-        ...boards.map((board) => boardApi.posts({ board, sort: view.sort, page: view.board === ALL_BOARD ? 1 : view.page })),
+        ...boards.map((board) => boardApi.posts({ board, sort: view.sort, page: view.board === ALL_BOARD ? 1 : view.page, platform: view.platform })),
     ]);
     const failed = lists.find((result) => !result.ok);
     if (failed && !failed.ok && lists.every((result) => !result.ok)) return { ok: false, code: failed.code, message: failed.message };
@@ -130,7 +132,10 @@ export async function loadCommunityFeed(view: FeedView, wants: LegacyWants = { c
 const isMixedBoard = (view: FeedView): boolean => view.board === NOTICE_BOARD || view.board === 'news';
 
 /** One call of the new action. */
-const askFeed = (view: FeedView) => callWithToken(COMMUNITY_ACTIONS.feed, { board: view.board, sort: view.sort, page: view.page, pageSize: FEED_PAGE_SIZE, weeklyLimit: WEEKLY_LIMIT });
+const askFeed = (view: FeedView) => callWithToken(COMMUNITY_ACTIONS.feed, {
+    board: view.board, sort: view.sort, page: view.page, pageSize: FEED_PAGE_SIZE, weeklyLimit: WEEKLY_LIMIT,
+    ...(view.board === 'promo' ? { platform: normalizePlatform(view.platform) } : {}),
+});
 
 /** An old server: 공지사항 / 최근 소식 are cut out of the news board here. An empty 공지사항 asks the feed once more, in case the server was updated meanwhile. */
 async function loadOldNotices(view: FeedView, wants: LegacyWants): Promise<FeedLoad> {

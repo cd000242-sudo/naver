@@ -13,7 +13,7 @@ const INDEX_KEY = `${PREFIX}:index`;
 const MAX_LISTS = 16;
 const MAX_AGE_MS = 6 * 60 * 60 * 1000;
 
-type View = { board: string; sort: string; page: number };
+type View = { board: string; sort: string; page: number; platform?: string };
 
 /** What one screen is drawn from. `config` and `weekly` are null until some answer carried them. */
 export type CachedFeed = {

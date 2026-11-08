@@ -154,9 +154,9 @@ test('community addresses keep the board, sort, page, post and write flags, and 
 });
 
 test('parseCommunityQuery trusts nothing in the address', () => {
-    assert.deepEqual(parseCommunityQuery(''), { board: 'all', sort: 'latest', page: 1, post: '', write: false });
-    assert.deepEqual(parseCommunityQuery('?board=news&sort=comments&page=4&post=pr_9f&write=1'), { board: 'news', sort: 'comments', page: 4, post: 'pr_9f', write: true });
-    assert.deepEqual(parseCommunityQuery('?board=hax&sort=drop&page=-5&post=%3Cb%3E&write=yes'), { board: 'all', sort: 'latest', page: 1, post: '', write: false });
+    assert.deepEqual(parseCommunityQuery(''), { board: 'all', platform: 'naver', sort: 'latest', page: 1, post: '', write: false });
+    assert.deepEqual(parseCommunityQuery('?board=news&sort=comments&page=4&post=pr_9f&write=1'), { board: 'news', platform: 'naver', sort: 'comments', page: 4, post: 'pr_9f', write: true });
+    assert.deepEqual(parseCommunityQuery('?board=hax&sort=drop&page=-5&post=%3Cb%3E&write=yes'), { board: 'all', platform: 'naver', sort: 'latest', page: 1, post: '', write: false });
     assert.equal(parseCommunityQuery('?page=999999999').page, 1000, 'page numbers are capped');
     assert.equal(parseCommunityQuery('?page=abc').page, 1);
 });

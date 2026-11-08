@@ -10,7 +10,7 @@ export type BoardConfig = Readonly<{
 }>;
 export type SortKey = 'latest' | 'popular' | 'comments';
 export type GradeInfo = { key: string; label: string; min?: number; nextAt?: number | null; nextLabel?: string | null };
-export type ProfileLike = { role?: string; canWriteNews?: boolean; score?: number; grade?: GradeInfo } | null | undefined;
+export type ProfileLike = { role?: string; canWriteNews?: boolean; score?: number; grade?: GradeInfo; level?: unknown; levelUp?: unknown } | null | undefined;
 
 export const BOARD_ORDER: readonly BoardId[];
 export const SORTS: readonly Readonly<{ key: SortKey; label: string }>[];
@@ -35,7 +35,7 @@ export function gradeProgress(profile: ProfileLike): { percent: number; remain: 
 export function pageNumbers(page: number, totalPages: number, span?: number): number[];
 export function formatPostDate(iso: unknown, now?: number): string;
 export function countComments(tree: unknown): number;
-export function validatePostDraft(input: { boards?: readonly BoardConfig[]; board: string; title?: string; body?: string; url?: string }): string;
+export function validatePostDraft(input: { boards?: readonly BoardConfig[]; board: string; title?: string; body?: string; url?: string; platform?: string }): string;
 export function validateCommentDraft(text: unknown): string;
 export function platformLabel(key: unknown): string;
 
@@ -43,8 +43,8 @@ export const ALL_BOARD: 'all';
 export const REPORT_REASONS: readonly Readonly<{ key: string; label: string }>[];
 export function reportReasons(serverConfig?: { reportReasons?: Array<Record<string, unknown>> } | null): Array<{ key: string; label: string }>;
 
-export type CommunityView = { board: BoardId | 'all'; sort: SortKey; page: number; post: string; write: boolean };
-export function communityPath(view?: { board?: string; sort?: string; page?: number; post?: string; write?: boolean }): string;
+export type CommunityView = { board: BoardId | 'all'; platform: 'naver' | 'google'; sort: SortKey; page: number; post: string; write: boolean };
+export function communityPath(view?: { board?: string; platform?: string; sort?: string; page?: number; post?: string; write?: boolean }): string;
 export function parseCommunityQuery(search: string): CommunityView;
 
 export type BoardReply = { posts?: any[]; pinned?: any[]; total?: number } | null | undefined;

@@ -1,7 +1,10 @@
 import { NOTICE_BOARD, NOTICE_ID_PREFIX } from './communityContract.mjs';
 import { GRADE_TABLE, OWNER_GRADE_TEXT, SCORE_RULES } from './communityGrades.mjs';
+import { isAssociate } from './communityLevel.mjs';
+import { normalizePlatform, validatePromoUrl } from './communityPlatform.mjs';
 
 export { SCORE_RULES };
+export { REPORT_REASONS, reportReasons } from './communityReport.mjs';
 /** One grade table for the whole site (see communityGrades.mjs). */
 export const GRADE_GUIDE = GRADE_TABLE;
 
@@ -98,6 +101,8 @@ export function showWriteButton(boardId, boards) {
 export function canWriteBoard(target, profile) {
     if (!profile || !target) return false;
     if (target.id === NOTICE_BOARD || target.writeRole === 'admin') return false;
+    // An associate (준회원) writes on 자유게시판 only; the counting of "one post" is in associateWriteState.
+    if (isAssociate(profile) && target.id !== 'free') return false;
     if (target.writeRole === 'operator') return profile.canWriteNews === true || profile.role === 'owner';
     return true;
 }
@@ -108,6 +113,8 @@ export const writableBoards = (boards, profile) => boards.filter((entry) => canW
 export function gradeProgress(profile) {
     // The owner is always 숲, the top grade, whatever an older server said.
     if (profile?.role === 'owner') return { percent: 100, remain: 0, nextLabel: null, text: OWNER_GRADE_TEXT };
+    // An associate has no score bar: the next step is the application, not points.
+    if (isAssociate(profile)) return { percent: 0, remain: 0, nextLabel: '새싹', text: '등업하면 새싹이 돼요' };
     const grade = profile?.grade;
     const score = Number(profile?.score) || 0;
     if (!grade) return { percent: 0, remain: 0, nextLabel: null, text: '' };
@@ -162,7 +169,7 @@ const PROMO_TITLE_MAX = 160;
 const PROMO_SUMMARY_MAX = 300;
 
 /** Pre-flight check of a new post (the server checks again). Returns a message, or '' when fine. */
-export function validatePostDraft({ boards = boardList(null), board: boardId, title, body, url }) {
+export function validatePostDraft({ boards = boardList(null), board: boardId, title, body, url, platform }) {
     const target = boards.find((entry) => entry.id === boardId);
     if (!target) return '게시판을 골라 주세요.';
     if (target.id === NOTICE_BOARD) return NOTICE_WRITE_HINT;
@@ -170,6 +177,8 @@ export function validatePostDraft({ boards = boardList(null), board: boardId, ti
     const cleanTitle = String(title || '').trim();
     const cleanBody = String(body || '').trim();
     if (promo && !/^https?:\/\/\S+$/i.test(String(url || '').trim())) return '글 주소(http:// 또는 https://)를 정확히 넣어 주세요.';
+    // The platform the writer chose decides which address fits (contract 1114 §2); without one the draft is checked as before.
+    if (promo && platform) { const mismatch = validatePromoUrl(url, platform); if (mismatch) return mismatch; }
     if (!cleanTitle) return promo ? '주소를 넣어 제목을 먼저 읽어 주세요.' : '제목을 입력해 주세요.';
     if (!cleanBody) return promo ? '한 줄 소개를 적어 주세요.' : '내용을 입력해 주세요.';
     const titleMax = promo ? PROMO_TITLE_MAX : TITLE_MAX;
@@ -187,7 +196,7 @@ export function validateCommentDraft(text) {
 }
 
 const PLATFORM_LABELS = Object.freeze({
-    naver: '네이버', tistory: '티스토리', blogspot: '블로그스팟', brunch: '브런치', etc: '기타',
+    naver: '네이버', google: '구글', tistory: '티스토리', blogspot: '블로그스팟', brunch: '브런치', etc: '기타',
 });
 
 export const platformLabel = (key) => PLATFORM_LABELS[key] || '기타';
@@ -195,31 +204,15 @@ export const platformLabel = (key) => PLATFORM_LABELS[key] || '기타';
 /** "All boards" is a screen of its own: the server lists one board at a time. */
 export const ALL_BOARD = 'all';
 
-export const REPORT_REASONS = Object.freeze([
-    Object.freeze({ key: 'spam', label: '스팸·도배' }),
-    Object.freeze({ key: 'abuse', label: '욕설·비방' }),
-    Object.freeze({ key: 'ad', label: '광고·홍보' }),
-    Object.freeze({ key: 'adult', label: '음란·불쾌' }),
-    Object.freeze({ key: 'illegal', label: '불법·사칭' }),
-    Object.freeze({ key: 'other', label: '기타' }),
-]);
-
-/** The six known reasons, with the server's wording when it sends one; the server cannot add a reason. */
-export function reportReasons(serverConfig) {
-    const remote = new Map((Array.isArray(serverConfig?.reportReasons) ? serverConfig.reportReasons : []).map((entry) => [String(entry?.key), entry]));
-    return REPORT_REASONS.map((reason) => {
-        const label = remote.get(reason.key)?.label;
-        return typeof label === 'string' && label ? Object.freeze({ key: reason.key, label }) : reason;
-    });
-}
-
 const POST_ID_PATTERN = /^[A-Za-z0-9_-]{1,80}$/;
 const PAGE_CAP = 1000;
 
 /** Address of a community screen; defaults (all boards, latest, page 1) are left out. */
-export function communityPath({ board, sort, page, post, write } = {}) {
+export function communityPath({ board, platform, sort, page, post, write } = {}) {
     const query = new URLSearchParams();
     if (board && board !== ALL_BOARD && BOARD_ORDER.includes(board)) query.set('board', board);
+    // Only the promo board has a platform, and naver is the default screen, so only google is written out.
+    if (board === 'promo' && platform === 'google') query.set('platform', 'google');
     if (sort && sort !== 'latest' && SORTS.some((entry) => entry.key === sort)) query.set('sort', sort);
     if (page && page > 1) query.set('page', String(Math.floor(page)));
     if (post && POST_ID_PATTERN.test(post)) query.set('post', post);
@@ -236,6 +229,7 @@ export function parseCommunityQuery(search) {
     const post = query.get('post') || '';
     return {
         board: BOARD_ORDER.includes(board) ? board : ALL_BOARD,
+        platform: board === 'promo' ? normalizePlatform(query.get('platform')) : normalizePlatform(),
         sort: normalizeSort(query.get('sort')),
         page: Number.isFinite(page) && page > 1 ? Math.min(page, PAGE_CAP) : 1,
         post: POST_ID_PATTERN.test(post) ? post : '',

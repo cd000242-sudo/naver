@@ -5,6 +5,7 @@
 import { NOTICE_BOARD } from './communityContract.mjs';
 import { pickGrades, pickScoreRules } from './communityGrades.mjs';
 import { BOARD_ORDER, splitNoticePosts } from './communityModel.mjs';
+import { normalizePlatform } from './communityPlatform.mjs';
 
 export const FEED_PAGE_SIZE = 20;
 
@@ -124,5 +125,5 @@ export function userTag(userId) {
     return hash.toString(36);
 }
 
-/** Saved-list key part for one screen: board, sort and page. */
-export const feedViewKey = (view) => `${view.board}:${view.sort}:${view.page}`;
+/** Saved-list key part for one screen: board, sort and page (and the platform on the promo board, which has two lists). */
+export const feedViewKey = (view) => `${view.board}:${view.sort}:${view.page}${view.board === 'promo' ? `:${normalizePlatform(view.platform)}` : ''}`;

@@ -1,4 +1,4 @@
-import { boardList, communityPath } from './communityModel.mjs';
+import { boardList, communityPath, parseCommunityQuery } from './communityModel.mjs';
 import { LOGIN_PATH, SIGNUP_PATH, loginPath } from './siteAuthModel.mjs';
 
 /**
@@ -6,7 +6,7 @@ import { LOGIN_PATH, SIGNUP_PATH, loginPath } from './siteAuthModel.mjs';
  * and the login-button routing. Pure data and functions so node:test can pin them without a browser.
  *
  * Design 1 (light bar), agreed 2026-11-07: Home · Product ▾ · Free chatbot · Price/Buy ▾ · Reviews · Community ▾
- * (the community opens straight onto one of its six boards, 2026-11-08).
+ * (the community opens straight onto one of its six boards, 2026-11-08; the promo board as two sub-tabs).
  */
 
 /** Below this width the bar turns into the [menu] button and the full-height list. */
@@ -31,13 +31,21 @@ const BOARD_DESC = Object.freeze({
     request: '바라는 기능 남기기',
     inquiry: '오류가 나면 알려 주세요',
     free: '묻고 나누는 이야기',
-    promo: '내 글 알리고 점수 받기',
+    promo: '네이버 블로그 글 알리기',
 });
 
-/** The community boards as menu entries, in the screen's own board order; each opens `/community?board=<id>`. */
-const COMMUNITY_ENTRIES = Object.freeze(boardList(null).map((board) => entry(
-    `community-${board.id}`, board.label, communityPath({ board: board.id }), undefined, BOARD_DESC[board.id], undefined,
-)));
+const boardEntry = (board) => entry(`community-${board.id}`, board.label, communityPath({ board: board.id }), undefined, BOARD_DESC[board.id], undefined);
+
+/**
+ * The community boards as menu entries, in the screen's own board order; each opens `/community?board=<id>`.
+ * The promo board has two sub-tabs (naver, google — forum stage 2026-11-08), so it is two rows that open each one.
+ */
+const COMMUNITY_ENTRIES = Object.freeze(boardList(null).flatMap((board) => (board.id === 'promo'
+    ? [
+        entry('community-promo', '내 글 홍보 · 네이버', communityPath({ board: 'promo' }), undefined, BOARD_DESC.promo, undefined),
+        entry('community-promo-google', '내 글 홍보 · 구글', communityPath({ board: 'promo', platform: 'google' }), undefined, '구글 블로그 글 알리기', undefined),
+    ]
+    : [boardEntry(board)])));
 
 /** Desktop bar. Groups open a dropdown; the notice badge rides on the Community group. */
 export const NAV_ITEMS = Object.freeze([
@@ -118,7 +126,9 @@ export function isNavPathActive(to, pathname, search = '') {
     if (normalizeNavPath(pathname) !== normalizeNavPath(target.path)) return false;
     const wanted = new URLSearchParams(target.query);
     const actual = new URLSearchParams(String(search || ''));
-    return [...wanted].every(([key, value]) => actual.get(key) === value);
+    if (![...wanted].every(([key, value]) => actual.get(key) === value)) return false;
+    // The promo board has two screens; the one without a platform is naver, so it must not light up on the google one.
+    return parseCommunityQuery(target.query).platform === parseCommunityQuery(String(search || '')).platform;
 }
 
 /** A dropdown group is "current" when one of the pages inside it is (any board of the community counts). */

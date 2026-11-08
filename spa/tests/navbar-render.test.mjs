@@ -67,13 +67,14 @@ function regions(html) {
     return { bar: html.slice(0, sheetStart), sheet: html.slice(sheetStart), sheetTag: html.slice(sheetStart, html.indexOf('>', sheetStart) + 1) };
 }
 
-const BOARD_LINKS = ['notice', 'news', 'request', 'inquiry', 'free', 'promo'].map((id) => '/community?board=' + id);
+// The promo board is two sub-tabs (naver, google) in the menu: seven links for the six boards.
+const BOARD_LINKS = [...['notice', 'news', 'request', 'inquiry', 'free', 'promo'].map((id) => '/community?board=' + id), '/community?board=promo&amp;platform=google'];
 
 test('both the bar and the phone sheet link to every one of the nine pages (community: through its six boards)', () => {
     const { bar, sheet } = regions(render('/'));
     for (const region of [bar, sheet]) {
         const boards = hrefs(region).filter((href) => href.startsWith('/community'));
-        assert.deepEqual(boards.slice(0, 6), BOARD_LINKS, 'six boards in board order');
+        assert.deepEqual(boards.slice(0, 7), BOARD_LINKS, 'six boards in board order, the promo board as naver then google');
     }
     for (const page of NINE_PAGES.filter((entry) => entry !== '/community')) {
         assert.ok(hrefs(bar).includes(page), `bar links ${page}`);

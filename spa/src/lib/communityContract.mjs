@@ -29,6 +29,10 @@ export const COMMUNITY_ACTIONS = Object.freeze({
     adminRewardDecide: 'community-admin-reward-decide',
     /** One call for a whole community screen: list, board settings, weekly top, counts and the profile. */
     feed: 'community-feed',
+    /** 준회원 → 새싹: POST with the token; answers `{ ok, level }` or `LEVEL_UP_NOT_READY` with `need`. */
+    levelUp: 'community-level-up',
+    /** One picture of a post (GET: `?action=...&postId=..&imageId=..`) answers `{ ok, mime, data }`. */
+    postImage: 'community-post-image',
 });
 
 export const COMMUNITY_CODES = Object.freeze({
@@ -53,6 +57,12 @@ export const COMMUNITY_CODES = Object.freeze({
     NOTICE_NOT_REPORTABLE: 'NOTICE_NOT_REPORTABLE',
     UNAUTHORIZED: 'Unauthorized',
     LOGIN_REQUIRED: 'LOGIN_REQUIRED',
+    LEVEL_REQUIRED: 'LEVEL_REQUIRED',
+    LEVEL_UP_NOT_READY: 'LEVEL_UP_NOT_READY',
+    INVALID_BODY: 'INVALID_BODY',
+    INVALID_URL: 'INVALID_URL',
+    INVALID_PLATFORM: 'INVALID_PLATFORM',
+    TOO_LONG: 'TOO_LONG',
 });
 
 /** A post whose id starts with this came from the home-operations notice list, not from a member. */

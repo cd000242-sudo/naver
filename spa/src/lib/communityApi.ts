@@ -3,8 +3,9 @@
  * failures come back as `{ ok: false, code, message }` — this module never throws, so a screen can always show
  * the message. A reply that says the community token is gone also makes the browser forget it.
  */
-import { COMMUNITY_CODES, NOTICE_BOARD } from './communityContract.mjs';
+import { COMMUNITY_ACTIONS, COMMUNITY_CODES, NOTICE_BOARD } from './communityContract.mjs';
 import { NOTICE_WRITE_HINT } from './communityModel.mjs';
+import { normalizePlatform } from './communityPlatform.mjs';
 import { GAS_URL } from './siteOps';
 import { isSessionFailure } from './siteAuthModel.mjs';
 import { clearCommunitySession, loadCommunitySession } from './communitySession';
@@ -63,13 +64,35 @@ export function newRequestId(): string {
     return `w${random}`.slice(0, 40);
 }
 
-export type PostsQuery = { board: string; sort: string; page: number; pageSize?: number };
-export type PostDraft = { board: string; title: string; body: string; url?: string };
+/** A picture that goes up with a post: the page's own JPEG, base64 (forum contract 1114 §3). */
+export type UploadImage = { id: string; mime: 'image/jpeg'; data: string };
+
+export type PostsQuery = { board: string; sort: string; page: number; pageSize?: number; platform?: string };
+export type PostDraft = {
+    board: string; title: string; body: string; url?: string;
+    /** Promo board: 'naver' | 'google'. */
+    platform?: string;
+    /** 'rich' = `body` is the block JSON of the new editor. */
+    format?: 'rich';
+    images?: UploadImage[];
+};
+
+/** The promo board lists one platform at a time; every other board has no platform. */
+const platformField = (board: string, platform?: string): Record<string, string> => (board === 'promo' ? { platform: normalizePlatform(platform) } : {});
+
+/** Rich fields of a send: the format and the pictures (left out when there are none). */
+const richFields = (draft: { format?: 'rich'; images?: UploadImage[] }): Record<string, unknown> => ({
+    ...(draft.format === 'rich' ? { format: 'rich' } : {}),
+    ...(draft.images && draft.images.length > 0 ? { images: draft.images } : {}),
+});
 export type ReportInput = { targetType: 'post' | 'comment'; targetId: string; reason: string; detail?: string };
 
 export const boardApi = {
     boards: () => callCommunity('community-boards'),
-    posts: (query: PostsQuery) => callWithToken('community-posts', { pageSize: 20, ...query }),
+    posts: (query: PostsQuery) => {
+        const { platform, ...rest } = query;
+        return callWithToken('community-posts', { pageSize: 20, ...rest, ...platformField(query.board, platform) });
+    },
     post: (id: string) => callWithToken('community-post', { id }),
     weeklyTop: (limit = 6) => callWithToken('community-weekly-top', { limit }),
     /** Pass the same `requestId` when sending again: the server then answers with the first post instead of making a twin. */
@@ -79,12 +102,16 @@ export const boardApi = {
         : callWithToken('community-post-write', {
             board: draft.board,
             title: draft.title,
-            ...(draft.board === 'promo' ? { url: draft.url, summary: draft.body } : { body: draft.body }),
+            ...(draft.board === 'promo'
+                ? { url: draft.url, ...platformField('promo', draft.platform), summary: draft.body }
+                : { body: draft.body, ...richFields(draft) }),
             requestId,
         })),
-    updatePost: (id: string, draft: { title: string; body: string; promo: boolean }) => callWithToken('community-post-update', {
-        id, title: draft.title, ...(draft.promo ? { summary: draft.body } : { body: draft.body }),
+    updatePost: (id: string, draft: { title: string; body: string; promo: boolean; images?: UploadImage[] }) => callWithToken('community-post-update', {
+        id, title: draft.title, ...(draft.promo ? { summary: draft.body } : { body: draft.body, ...richFields({ images: draft.images }) }),
     }),
+    /** 준회원 → 새싹. The answer is `{ ok, level }`, or `LEVEL_UP_NOT_READY` with `need` (true = still missing). */
+    levelUp: () => callWithToken(COMMUNITY_ACTIONS.levelUp),
     deletePost: (id: string) => callWithToken('community-post-delete', { id }),
     writeComment: (postId: string, body: string, parentId?: string, requestId: string = newRequestId()) => callWithToken('community-comment-write', {
         postId, body, ...(parentId ? { parentId } : {}), requestId,

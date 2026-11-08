@@ -15,4 +15,4 @@ export function countsForOldServer(counts: Record<string, number> | null | undef
 export type NewsSide<T> = { posts: T[]; pinned: T[]; total: number };
 export function splitNewsReplies<T>(pages: ReadonlyArray<{ posts?: T[]; pinned?: T[] } | null | undefined>): { notice: NewsSide<T>; news: NewsSide<T> };
 export function userTag(userId: string): string;
-export function feedViewKey(view: { board: string; sort: string; page: number }): string;
+export function feedViewKey(view: { board: string; sort: string; page: number; platform?: string }): string;

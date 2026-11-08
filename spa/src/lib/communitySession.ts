@@ -9,6 +9,7 @@
 import { clearFeedCache } from './communityFeedCache';
 import { isAvatarKey } from './communityAvatarModel.mjs';
 import { FOREST_GRADE, normalizeRewards } from './communityGrades.mjs';
+import { ASSOCIATE_GRADE, normalizeLevel, normalizeLevelUp, type LevelKey, type LevelUpFlags } from './communityLevel.mjs';
 
 export const COMMUNITY_SESSION_KEY = 'leaderspro.community.session.v1';
 /** Fired on window after the stored login changes, so the menu and the pages (separate React trees) follow. */
@@ -52,6 +53,10 @@ export type CommunityProfile = {
     linked: boolean;
     /** My rewards (잎새 3일 ...); empty when the server sends none. */
     rewards: CommunityReward[];
+    /** 준회원 / 정회원. A server that sends no level (or an old row) means a member. */
+    level: LevelKey;
+    /** Done flags of the two conditions for [등업 신청] (an associate's checklist). */
+    levelUp: LevelUpFlags;
 };
 
 export type CommunitySession = CommunityProfile & {
@@ -83,6 +88,8 @@ function toGrade(raw: unknown): CommunityGrade {
 export function normalizeProfile(payload: Record<string, unknown>): CommunityProfile {
     const activity = (payload.activity && typeof payload.activity === 'object' ? payload.activity : {}) as Record<string, unknown>;
     const role = payload.role === 'owner' || payload.role === 'licensed' ? payload.role : 'community';
+    // The owner is always a member; an associate wears 준회원 whatever the score is.
+    const level = role === 'owner' ? 'member' : normalizeLevel(payload.level);
     return {
         userId: text(payload.userId),
         role,
@@ -97,9 +104,11 @@ export function normalizeProfile(payload: Record<string, unknown>): CommunityPro
             likes: activity.likes === undefined || activity.likes === null ? null : count(activity.likes),
         },
         // The owner account is always 숲, even when an older server still sends a lower grade.
-        grade: role === 'owner' ? { ...FOREST_GRADE } : toGrade(payload.grade),
+        grade: role === 'owner' ? { ...FOREST_GRADE } : level === 'associate' ? { ...ASSOCIATE_GRADE } : toGrade(payload.grade),
         linked: payload.linked === true,
         rewards: normalizeRewards(payload.rewards) as CommunityReward[],
+        level,
+        levelUp: normalizeLevelUp(payload.levelUp),
     };
 }
 

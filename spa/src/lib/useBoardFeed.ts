@@ -32,7 +32,7 @@ type Fresh = { key: string; bundle: FeedBundle };
  * arrives. `reloadKey` forces a fresh read (after writing, deleting, reloading).
  */
 export function useBoardFeed(view: FeedView, reloadKey: number): Feed & { reload: () => void } {
-    const key = `${view.board}|${view.sort}|${view.page}`;
+    const key = `${view.board}|${view.sort}|${view.page}|${view.board === 'promo' ? view.platform ?? 'naver' : ''}`;
     const saved = useMemo(() => peekCommunityFeed(view)?.bundle ?? null, [key]); // eslint-disable-line react-hooks/exhaustive-deps
     const [fresh, setFresh] = useState<Fresh | null>(null);
     const [extras, setExtras] = useState<Extras>({ config: null, weekly: null, counts: {} });
@@ -67,7 +67,7 @@ export function useBoardFeed(view: FeedView, reloadKey: number): Feed & { reload
             setRead({ refreshing: false, error: '' });
         });
         return () => { alive = false; };
-    }, [view.board, view.sort, view.page, reloadKey, again]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [view.board, view.sort, view.page, view.platform, reloadKey, again]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const shown = fresh && fresh.key === key ? fresh.bundle : saved;
     const status = read.error ? 'error' : shown ? 'ready' : 'loading';

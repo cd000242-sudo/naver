@@ -45,6 +45,12 @@ export type PostItem = {
     platform: string;
     visits: number;
     given: number;
+    /** 'rich' = the body is the block JSON of the new editor; '' = an old plain-text post (forum contract 1114 §3). */
+    format: '' | 'rich';
+    /** Ids of the pictures of a rich post (the detail reply); the pictures themselves are fetched one by one. */
+    imageIds: string[];
+    /** Lists only: the post has at least one picture. */
+    hasImage: boolean;
     /** Set only on a row the reader just wrote and the server has not confirmed: sending, or failed (with `failure`). */
     delivery?: 'sending' | 'failed';
     failure?: string;
@@ -75,6 +81,7 @@ export type CommentItem = {
     failure?: string;
 };
 
+const IMAGE_ID = /^[A-Za-z0-9_-]{1,40}$/;
 const text = (value: unknown): string => (typeof value === 'string' ? value : '');
 const count = (value: unknown): number => {
     const number = Number(value);
@@ -136,6 +143,9 @@ export function normalizePost(raw: unknown): PostItem | null {
         platform: text(source.platform),
         visits: count(source.visits),
         given: count(source.given),
+        format: source.format === 'rich' ? 'rich' : '',
+        imageIds: (Array.isArray(source.imageIds) ? source.imageIds : []).filter((id): id is string => typeof id === 'string' && IMAGE_ID.test(id)),
+        hasImage: source.hasImage === true,
     };
 }
 

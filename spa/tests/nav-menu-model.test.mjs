@@ -12,7 +12,8 @@ const NINE_PAGES = ['/', '/leword', '/products', '/download', '/chatbots', '/pri
 
 const run = (actions, from = INITIAL_MENU_STATE) => actions.reduce(menuReducer, from);
 
-const COMMUNITY_BOARDS = ['/community?board=notice', '/community?board=news', '/community?board=request', '/community?board=inquiry', '/community?board=free', '/community?board=promo'];
+// [2026-11-08 포럼 단계] 내 글 홍보는 두 서브탭(네이버 블로그 · 구글 블로그)으로 드롭다운에서 바로 간다.
+const COMMUNITY_BOARDS = ['/community?board=notice', '/community?board=news', '/community?board=request', '/community?board=inquiry', '/community?board=free', '/community?board=promo', '/community?board=promo&platform=google'];
 const pagesOf = (list) => [...new Set(list.map((to) => to.split('?')[0]))];
 
 test('menu keeps all nine pages exactly once, in the agreed grouping and order', () => {
@@ -39,16 +40,21 @@ test('LEWORD is its own top-level, highlighted menu item (not inside 제품)', (
 });
 
 // [2026-11-08 사장님] 상단 '커뮤니티' 는 드롭다운 — 공지사항 · 최근 소식 · 요청사항 · 문의 · 자유게시판 · 내 글 홍보로 바로 간다.
-test('Community is a dropdown of the six boards in board order, each opening ?board=<id>', () => {
+test('Community is a dropdown of the six boards in board order (the promo board twice: naver, google), each opening ?board=<id>', () => {
     const community = NAV_ITEMS.find((item) => item.key === 'community');
     assert.equal(community.type, 'group');
     assert.deepEqual(community.items.map((item) => [item.label, item.to]), [
         ['공지사항', '/community?board=notice'], ['최근 소식', '/community?board=news'], ['요청사항', '/community?board=request'],
-        ['버그 및 오류 신고', '/community?board=inquiry'], ['자유게시판', '/community?board=free'], ['내 글 홍보', '/community?board=promo'],
+        ['버그 및 오류 신고', '/community?board=inquiry'], ['자유게시판', '/community?board=free'],
+        ['내 글 홍보 · 네이버', '/community?board=promo'], ['내 글 홍보 · 구글', '/community?board=promo&platform=google'],
     ]);
     assert.ok(community.items.every((item) => item.desc), 'every row has its one line');
     // The address format is the one the community page itself reads.
-    for (const item of community.items) assert.equal(parseCommunityQuery(item.to.slice(item.to.indexOf('?'))).board, item.to.split('=')[1]);
+    for (const item of community.items) {
+        const query = item.to.slice(item.to.indexOf('?'));
+        assert.equal(parseCommunityQuery(query).board, new URLSearchParams(query).get('board'));
+    }
+    assert.equal(parseCommunityQuery('?board=promo&platform=google').platform, 'google');
 });
 
 // [2026-11-08 사장님] 메뉴 아이콘 8종(menu-icons-v1): 글자 아이콘 대신. 커뮤니티 게시판 6개는 아이콘 없음.
@@ -81,7 +87,7 @@ test('mobile sheet lists every destination once, under headed groups, nothing co
     assert.equal(new Set(mobile).size, mobile.length, 'no row twice');
     assert.deepEqual(NAV_MOBILE_SECTIONS.map((section) => section.title), [null, '제품', '무료로 쓰기 · 구매', '함께하기', '커뮤니티']);
     const community = NAV_MOBILE_SECTIONS.find((section) => section.title === '커뮤니티');
-    assert.deepEqual(community.items.map((row) => row.to), COMMUNITY_BOARDS, 'six rows under the community heading');
+    assert.deepEqual(community.items.map((row) => row.to), COMMUNITY_BOARDS, 'seven rows under the community heading: six boards, the promo board as two sub-tabs');
     assert.deepEqual(NAV_MOBILE_SECTIONS.filter((section) => section.badge).map((section) => section.title), ['커뮤니티'], 'the badge rides on the community heading');
 });
 
@@ -112,6 +118,12 @@ test('active rule with a query: a board entry is current only on its own board',
     assert.equal(isNavPathActive('/community?board=free', '/community', '?board=news'), false);
     assert.equal(isNavPathActive('/community?board=free', '/community', ''), false, 'all-boards view lights no board');
     assert.equal(isNavPathActive('/community?board=free', '/me', '?board=free'), false);
+    // The promo sub-tabs: naver is the page without a platform, google needs it; each lights only itself.
+    assert.equal(isNavPathActive('/community?board=promo', '/community', '?board=promo'), true);
+    assert.equal(isNavPathActive('/community?board=promo', '/community', '?board=promo&platform=naver'), true);
+    assert.equal(isNavPathActive('/community?board=promo', '/community', '?board=promo&platform=google'), false);
+    assert.equal(isNavPathActive('/community?board=promo&platform=google', '/community', '?board=promo&platform=google&sort=popular'), true);
+    assert.equal(isNavPathActive('/community?board=promo&platform=google', '/community', '?board=promo'), false);
     const community = NAV_ITEMS.find((item) => item.key === 'community');
     assert.equal(isNavGroupActive(community, '/community'), true, 'any community screen lights the group');
     assert.equal(isNavGroupActive(community, '/community/'), true);
