@@ -29,10 +29,10 @@ const profile = (extra = {}) => ({
     activity: { posts: 4, comments: 9, visits: 21 }, grade: { key: 'leaf', label: '잎새', min: 100, nextAt: 500, nextLabel: '열매' }, linked: false, rewards: [], ...extra,
 });
 
-test('the grade table: 새싹 0~99 · 잎새 100~499 · 열매 500~1,499 · 나무 1,500~4,999 · 숲 5,000~, with one reward line each (no coupon words)', () => {
+test('the grade table: 새싹 0 · 잎새 300 · 열매 1,500 · 나무 5,000 · 숲 15,000, with one reward line each (no coupon words)', () => {
     assert.deepEqual(GRADE_TABLE.map((grade) => [grade.key, grade.label, grade.range, grade.reward]), [
-        ['sprout', '새싹', '0~99점', ''], ['leaf', '잎새', '100~499점', '올인원 3일'], ['fruit', '열매', '500~1,499점', '올인원 7일'],
-        ['tree', '나무', '1,500~4,999점', '올인원 30일(확인 후 지급)'], ['forest', '숲', '5,000점~', '올인원 1년(확인 후 지급)'],
+        ['sprout', '새싹', '0~299점', ''], ['leaf', '잎새', '300~1,499점', '올인원 3일'], ['fruit', '열매', '1,500~4,999점', '올인원 7일'],
+        ['tree', '나무', '5,000~14,999점', '올인원 30일(확인 후 지급)'], ['forest', '숲', '15,000점~', '올인원 1년(확인 후 지급)'],
     ]);
     assert.equal(GRADE_GUIDE, GRADE_TABLE, 'one table for the whole site');
     assert.equal(SCORE_RULES, '글 10점 · 댓글 2점 · 들르기 1점 · 내 글 좋아요 1점 · 하루 최대 50점');
@@ -120,7 +120,7 @@ test('/me: a member sees the reward state; the owner sees 숲 and no reward box;
     assert.match(text(withRewards), /열매.*올인원 7일.*지급 완료/);
     assert.ok(!withRewards.includes('쿠폰'));
     assert.ok(!/내 보상/.test(text(render('../../src/components/account/ProfileCard.tsx', props(profile({ rewards: [] }))))), 'no rewards, no box');
-    const owner = render('../../src/components/account/ProfileCard.tsx', props(profile({ role: 'owner', score: 0, rewards: [{ tier: 'leaf', days: 3, status: 'pending' }], grade: { key: 'forest', label: '숲', min: 5000, nextAt: null, nextLabel: null } })));
+    const owner = render('../../src/components/account/ProfileCard.tsx', props(profile({ role: 'owner', score: 0, rewards: [{ tier: 'leaf', days: 3, status: 'pending' }], grade: { key: 'forest', label: '숲', min: 15000, nextAt: null, nextLabel: null } })));
     assert.match(text(owner), /숲 · 최고 등급\(관리자\)/);
     assert.ok(!/progressbar/.test(owner), 'no progress bar for the owner');
     assert.ok(!/잎새까지/.test(text(owner)));
@@ -130,7 +130,7 @@ test('/me: a member sees the reward state; the owner sees 숲 and no reward box;
 test('sidebar guide: five grades, each reward on its own line; the score rules line; server grades are used when given', () => {
     const props = (extra = {}) => ({ profile: profile(), boards: [], boardId: 'all', counts: {}, ...extra });
     const html = render('../../src/components/community/CommunitySidebar.tsx', props());
-    for (const range of ['0~99점', '100~499점', '500~1,499점', '1,500~4,999점', '5,000점~']) assert.match(text(html), new RegExp(range));
+    for (const range of ['0~299점', '300~1,499점', '1,500~4,999점', '5,000~14,999점', '15,000점~']) assert.match(text(html), new RegExp(range));
     for (const reward of ['올인원 3일', '올인원 7일', '올인원 30일\\(확인 후 지급\\)', '올인원 1년\\(확인 후 지급\\)']) assert.match(text(html), new RegExp(reward));
     assert.match(text(html), /글 10점 · 댓글 2점 · 들르기 1점 · 내 글 좋아요 1점 · 하루 최대 50점/);
     const owner = render('../../src/components/community/CommunitySidebar.tsx', props({ profile: profile({ role: 'owner', score: 0 }) }));
@@ -142,7 +142,7 @@ test('sidebar guide: five grades, each reward on its own line; the score rules l
     }));
     assert.match(text(server), /100점~/);
     assert.match(text(server), /하루 최대 70점/);
-    assert.ok(!/5,000점~/.test(text(server)));
+    assert.ok(!/15,000점~/.test(text(server)));
 });
 
 test('author badge: an operator post shows 숲 (and the staff mark), a member shows the grade as before', () => {

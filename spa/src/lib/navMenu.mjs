@@ -29,7 +29,7 @@ const BOARD_DESC = Object.freeze({
     notice: '서비스 공지·업데이트',
     news: '리더남이 전하는 AI 소식',
     request: '바라는 기능 남기기',
-    inquiry: '궁금한 점 묻기',
+    inquiry: '오류가 나면 알려 주세요',
     free: '묻고 나누는 이야기',
     promo: '내 글 알리고 점수 받기',
 });

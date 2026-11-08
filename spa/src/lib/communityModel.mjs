@@ -24,12 +24,12 @@ const BUILT_IN = Object.freeze({
     notice: board('notice', '공지사항', 'admin', 0, [], '', '서비스 공지와 업데이트 안내예요.'),
     news: board('news', '최근 소식', 'operator', 0, [], '', '리더남이 전하는 AI 소식'),
     request: board('request', '요청사항', 'member', 5, ['검토 중', '반영됨'], '검토 중', '바라는 기능을 적어 주세요. 반영하면 상태가 바뀝니다.'),
-    inquiry: board('inquiry', '문의', 'member', 5, ['대기', '답변 완료'], '대기', '궁금한 점을 남기면 운영자가 답해 드려요.'),
+    inquiry: board('inquiry', '버그 및 오류 신고', 'member', 5, ['대기', '답변 완료'], '대기', '앱이 안 되거나 오류가 나면 알려 주세요.'),
     free: board('free', '자유게시판', 'member', 5, [], '', '묻고 나누는 이야기를 편하게 적어 주세요.'),
     promo: board('promo', '내 글 홍보', 'member', 3, [], '', '내 글을 올리고 남의 글에 들르면 점수가 쌓여요.'),
 });
 
-/** Built-in boards merged with the server's config; never adds a board, never changes the order. */
+/** Built-in boards merged with the server's config; never adds a board, never changes the order or the names (the screen's names win). */
 export function boardList(serverConfig) {
     const fromServer = new Map((Array.isArray(serverConfig?.boards) ? serverConfig.boards : []).map((entry) => [String(entry?.id), entry]));
     return BOARD_ORDER.map((id) => {
@@ -38,7 +38,6 @@ export function boardList(serverConfig) {
         if (!remote) return base;
         return Object.freeze({
             ...base,
-            label: typeof remote.label === 'string' && remote.label ? remote.label : base.label,
             writeRole: ['operator', 'member', 'admin'].includes(remote.writeRole) ? remote.writeRole : base.writeRole,
             dailyLimit: Number.isFinite(remote.dailyLimit) ? remote.dailyLimit : base.dailyLimit,
             statuses: Array.isArray(remote.statuses) ? Object.freeze(remote.statuses.map(String)) : base.statuses,

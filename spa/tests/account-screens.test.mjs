@@ -136,7 +136,7 @@ test('my posts list: each row opens the post inside the community, with board, d
     assert.ok(hrefs(html).includes('/community?board=free&amp;post=p_9'));
     assert.ok(hrefs(html).includes('/community?board=inquiry&amp;post=p_8'));
     const text = words(html);
-    assert.ok(text.includes('자유게시판') && text.includes('문의') && text.includes('답변 완료') && text.includes('[4]'));
+    assert.ok(text.includes('자유게시판') && text.includes('버그 및 오류 신고') && text.includes('답변 완료') && text.includes('[4]'));
     assert.match(html, /aria-label="2쪽"/);
 });
 

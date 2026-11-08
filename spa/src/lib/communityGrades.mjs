@@ -5,17 +5,17 @@
 
 const entry = (key, label, min, range, reward) => Object.freeze({ key, label, min, range, reward });
 
-/** 새싹 0~99 · 잎새 100~499 · 열매 500~1,499 · 나무 1,500~4,999 · 숲 5,000~, one reward line each. */
+/** 새싹 0 · 잎새 300 · 열매 1,500 · 나무 5,000 · 숲 15,000 (the owner's thresholds), one reward line each. */
 export const GRADE_TABLE = Object.freeze([
-    entry('sprout', '새싹', 0, '0~99점', ''),
-    entry('leaf', '잎새', 100, '100~499점', '올인원 3일'),
-    entry('fruit', '열매', 500, '500~1,499점', '올인원 7일'),
-    entry('tree', '나무', 1500, '1,500~4,999점', '올인원 30일(확인 후 지급)'),
-    entry('forest', '숲', 5000, '5,000점~', '올인원 1년(확인 후 지급)'),
+    entry('sprout', '새싹', 0, '0~299점', ''),
+    entry('leaf', '잎새', 300, '300~1,499점', '올인원 3일'),
+    entry('fruit', '열매', 1500, '1,500~4,999점', '올인원 7일'),
+    entry('tree', '나무', 5000, '5,000~14,999점', '올인원 30일(확인 후 지급)'),
+    entry('forest', '숲', 15000, '15,000점~', '올인원 1년(확인 후 지급)'),
 ]);
 
 /** The grade the owner account always wears, whatever an older server sent. */
-export const FOREST_GRADE = Object.freeze({ key: 'forest', label: '숲', min: 5000, nextAt: null, nextLabel: null });
+export const FOREST_GRADE = Object.freeze({ key: 'forest', label: '숲', min: 15000, nextAt: null, nextLabel: null });
 
 /** Shown for the owner instead of a score bar. */
 export const OWNER_GRADE_TEXT = '숲 · 최고 등급(관리자)';

@@ -44,7 +44,7 @@ test('Community is a dropdown of the six boards in board order, each opening ?bo
     assert.equal(community.type, 'group');
     assert.deepEqual(community.items.map((item) => [item.label, item.to]), [
         ['공지사항', '/community?board=notice'], ['최근 소식', '/community?board=news'], ['요청사항', '/community?board=request'],
-        ['문의', '/community?board=inquiry'], ['자유게시판', '/community?board=free'], ['내 글 홍보', '/community?board=promo'],
+        ['버그 및 오류 신고', '/community?board=inquiry'], ['자유게시판', '/community?board=free'], ['내 글 홍보', '/community?board=promo'],
     ]);
     assert.ok(community.items.every((item) => item.desc), 'every row has its one line');
     // The address format is the one the community page itself reads.

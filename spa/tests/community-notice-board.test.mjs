@@ -18,7 +18,7 @@ const ORDER = ['notice', 'news', 'request', 'inquiry', 'free', 'promo'];
 test('six boards in the agreed order: 공지사항, 최근 소식, 요청사항, 문의, 자유게시판, 내 글 홍보', () => {
     assert.equal(NOTICE_BOARD, 'notice');
     assert.deepEqual(BOARD_ORDER, ORDER);
-    assert.deepEqual(boardList(null).map((board) => board.label), ['공지사항', '최근 소식', '요청사항', '문의', '자유게시판', '내 글 홍보']);
+    assert.deepEqual(boardList(null).map((board) => board.label), ['공지사항', '최근 소식', '요청사항', '버그 및 오류 신고', '자유게시판', '내 글 홍보']);
     assert.equal(boardLabel('notice'), '공지사항');
     assert.equal(boardList(null).find((board) => board.id === 'news').note, '리더남이 전하는 AI 소식');
 });

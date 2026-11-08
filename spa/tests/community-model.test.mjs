@@ -14,17 +14,21 @@ const owner = { role: 'owner', canWriteNews: true };
 test('there are exactly six boards, in the agreed order, with their Korean names', () => {
     assert.deepEqual(BOARD_ORDER, ['notice', 'news', 'request', 'inquiry', 'free', 'promo']);
     const boards = boardList(null);
-    assert.deepEqual(boards.map((board) => board.label), ['공지사항', '최근 소식', '요청사항', '문의', '자유게시판', '내 글 홍보']);
+    assert.deepEqual(boards.map((board) => board.label), ['공지사항', '최근 소식', '요청사항', '버그 및 오류 신고', '자유게시판', '내 글 홍보']);
 });
 
-test('server board config wins over the built-in one but never adds or reorders boards', () => {
+test('server board settings win over the built-in ones but never add, reorder or rename boards (the screen names win)', () => {
     const boards = boardList({ boards: [
         { id: 'promo', label: '내 글 홍보', writeRole: 'member', dailyLimit: 3, statuses: [], defaultStatus: '' },
         { id: 'free', label: '자유판', writeRole: 'member', dailyLimit: 9, statuses: [], defaultStatus: '' },
+        { id: 'inquiry', label: '문의', writeRole: 'member', dailyLimit: 5, statuses: ['대기', '답변 완료'], defaultStatus: '대기' },
         { id: 'sneaky', label: '숨은 판', writeRole: 'member', dailyLimit: 1, statuses: [], defaultStatus: '' },
     ] });
     assert.deepEqual(boards.map((board) => board.id), BOARD_ORDER);
-    assert.equal(boards.find((board) => board.id === 'free').label, '자유판');
+    assert.equal(boards.find((board) => board.id === 'free').label, '자유게시판', 'a server label does not rename a board');
+    assert.equal(boards.find((board) => board.id === 'inquiry').label, '버그 및 오류 신고', 'an old server that still says 문의 changes nothing');
+    assert.equal(boards.find((board) => board.id === 'inquiry').note, '앱이 안 되거나 오류가 나면 알려 주세요.');
+    assert.deepEqual(boards.find((board) => board.id === 'inquiry').statuses, ['대기', '답변 완료'], 'ids and statuses are untouched');
     assert.equal(boards.find((board) => board.id === 'free').dailyLimit, 9);
     assert.equal(boards.find((board) => board.id === 'news').writeRole, 'operator', 'untouched boards keep the built-in rule');
 });
@@ -67,7 +71,7 @@ test('only the operator may write on the news board; everyone logged in may writ
 
 test('grade guide lists the five grades (with 숲) with their ranges and the score rules', () => {
     assert.deepEqual(GRADE_GUIDE.map((grade) => [grade.key, grade.label, grade.range]), [
-        ['sprout', '새싹', '0~99점'], ['leaf', '잎새', '100~499점'], ['fruit', '열매', '500~1,499점'], ['tree', '나무', '1,500~4,999점'], ['forest', '숲', '5,000점~'],
+        ['sprout', '새싹', '0~299점'], ['leaf', '잎새', '300~1,499점'], ['fruit', '열매', '1,500~4,999점'], ['tree', '나무', '5,000~14,999점'], ['forest', '숲', '15,000점~'],
     ]);
     assert.equal(SCORE_RULES, '글 10점 · 댓글 2점 · 들르기 1점 · 내 글 좋아요 1점 · 하루 최대 50점');
 });
