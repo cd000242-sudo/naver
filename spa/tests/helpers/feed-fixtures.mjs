@@ -26,9 +26,10 @@ export const feedReply = (extra = {}) => ({
     sorts: [{ key: 'latest', label: '최신순' }], grades: [{ key: 'sprout', label: '새싹' }], limits: { title: 100 }, weeklySince: '2026-11-01T00:00:00.000Z',
     weeklyTop: [raw('w1', 'free', { likes: 9 })],
     board: 'all', sort: 'latest', page: 1, pageSize: 20, total: 3, totalPages: 1,
-    pinned: [raw('nt_1', 'news', { pinned: true })],
+    pinned: [raw('nt_1', 'notice', { pinned: true })],
     posts: [raw('p1', 'free'), raw('p2', 'request')],
-    counts: { request: 1, inquiry: 0, free: 1, news: 1, promo: 0 },
+    // A server that knows the notice board counts it (a feed answer without `notice` is read as an old server).
+    counts: { notice: 1, request: 1, inquiry: 0, free: 1, news: 1, promo: 0 },
     ...extra,
 });
 

@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { boardApi, type PostDraft } from '../../lib/communityApi';
 import { normalizePost, type PostItem } from '../../lib/communityData';
-import { BODY_MAX, TITLE_MAX, canWriteBoard, validatePostDraft, writableBoards, type BoardConfig } from '../../lib/communityModel.mjs';
+import { BODY_MAX, TITLE_MAX, canWriteBoard, validatePostDraft, writableBoards, writeBlockedHint, type BoardConfig } from '../../lib/communityModel.mjs';
 import type { CommunityProfile } from '../../lib/communitySession';
 import { readPromoTitle } from '../../lib/promoTitle';
 import NicknameForm from './NicknameForm';
@@ -36,6 +36,8 @@ function PostWriteForm({ boards, defaultBoard, profile, onDone, onSubmitNew, onC
 
     const board = boards.find((entry) => entry.id === boardId);
     const promo = boardId === 'promo';
+    // Opened from the notice board: it cannot be written to, so say why and offer the other boards.
+    const blocked = writeBlockedHint(defaultBoard, profile);
 
     if (profile.needsNickname || !profile.nickname) {
         return (
@@ -87,6 +89,7 @@ function PostWriteForm({ boards, defaultBoard, profile, onDone, onSubmitNew, onC
     return (
         <form className="lp-box cm-form" onSubmit={(event) => { void submit(event); }} noValidate>
             <h1 className="cm-form-title">{editing ? '글 고치기' : '글쓰기'}</h1>
+            {editing || !blocked ? null : <p className="lp-note" role="note">{blocked}</p>}
             {editing ? null : (
                 <label className="lp-field">
                     <span>게시판</span>

@@ -1,20 +1,26 @@
+import { NOTICE_BOARD, NOTICE_ID_PREFIX } from './communityContract.mjs';
+
 /**
- * Community board model: the five boards, sorts, status badges, write permissions, grades, paging, dates and
+ * Community board model: the six boards, sorts, status badges, write permissions, grades, paging, dates and
  * draft checks. Pure data and functions so node:test can pin them without a browser or a server.
  * The server is the authority; these values only decide what the screen offers.
  */
 
-export const BOARD_ORDER = Object.freeze(['request', 'inquiry', 'free', 'news', 'promo']);
+export const BOARD_ORDER = Object.freeze([NOTICE_BOARD, 'news', 'request', 'inquiry', 'free', 'promo']);
+
+/** Said when someone tries to write on 공지사항: notices are written in the admin home, never here. */
+export const NOTICE_WRITE_HINT = '공지는 어드민 홈 운영에서 써요.';
 
 const board = (id, label, writeRole, dailyLimit, statuses, defaultStatus, note) =>
     Object.freeze({ id, label, writeRole, dailyLimit, statuses: Object.freeze(statuses), defaultStatus, note });
 
 /** Built-in board config, used until (and if) the server answers `community-boards`. */
 const BUILT_IN = Object.freeze({
+    notice: board('notice', '공지사항', 'operator', 0, [], '', '서비스 공지와 업데이트 안내예요.'),
+    news: board('news', '최근 소식', 'operator', 0, [], '', '리더남이 전하는 AI 소식'),
     request: board('request', '요청사항', 'member', 5, ['검토 중', '반영됨'], '검토 중', '바라는 기능을 적어 주세요. 반영하면 상태가 바뀝니다.'),
     inquiry: board('inquiry', '문의', 'member', 5, ['대기', '답변 완료'], '대기', '궁금한 점을 남기면 운영자가 답해 드려요.'),
     free: board('free', '자유게시판', 'member', 5, [], '', '묻고 나누는 이야기를 편하게 적어 주세요.'),
-    news: board('news', '최근 소식', 'operator', 0, [], '', '운영자가 올리는 업데이트와 안내입니다.'),
     promo: board('promo', '내 글 홍보', 'member', 3, [], '', '내 글을 올리고 남의 글에 들르면 점수가 쌓여요.'),
 });
 
@@ -63,9 +69,25 @@ export function statusBadge(boardId, status) {
     return { tone: tones[label] || 'review', label };
 }
 
-/** Operator-only boards need `canWriteNews`; every other board needs just a login. */
+/** A post that came from the admin-home notice list: its id starts with nt_ or the server flagged it. */
+export const isNoticePost = (post) => Boolean(post) && (post.notice === true || String(post.id || '').startsWith(NOTICE_ID_PREFIX));
+
+/** Splits rows into the notices and the rest, each in its original order. */
+export function splitNoticePosts(posts) {
+    const list = Array.isArray(posts) ? posts : [];
+    return { notice: list.filter(isNoticePost), rest: list.filter((post) => !isNoticePost(post)) };
+}
+
+/** Why the reader cannot write on this board, in one sentence; '' when the board is not 공지사항. */
+export function writeBlockedHint(boardId, profile) {
+    if (boardId !== NOTICE_BOARD) return '';
+    return profile?.role === 'owner' || profile?.canWriteNews === true ? NOTICE_WRITE_HINT : '공지사항에는 글을 쓸 수 없어요. 다른 게시판을 골라 주세요.';
+}
+
+/** Operator-only boards need `canWriteNews`; every other board needs just a login. 공지사항 is closed to everyone. */
 export function canWriteBoard(target, profile) {
     if (!profile || !target) return false;
+    if (target.id === NOTICE_BOARD) return false;
     if (target.writeRole === 'operator') return profile.canWriteNews === true || profile.role === 'owner';
     return true;
 }
@@ -140,6 +162,7 @@ const PROMO_SUMMARY_MAX = 300;
 export function validatePostDraft({ boards = boardList(null), board: boardId, title, body, url }) {
     const target = boards.find((entry) => entry.id === boardId);
     if (!target) return '게시판을 골라 주세요.';
+    if (target.id === NOTICE_BOARD) return NOTICE_WRITE_HINT;
     const promo = target.id === 'promo';
     const cleanTitle = String(title || '').trim();
     const cleanBody = String(body || '').trim();

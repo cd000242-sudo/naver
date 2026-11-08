@@ -251,13 +251,13 @@ const profileOf = (extra = {}) => ({
     activity: { posts: 4, comments: 9, visits: 21 }, grade: { key: 'leaf', label: '잎새', min: 100, nextAt: 500, nextLabel: '열매' }, linked: false, ...extra,
 });
 
-test('write form: members choose among four boards, the operator among five; news is not offered to members', () => {
+test('write form: members choose among four boards, the operator among five; news is not offered to members, notice to nobody', () => {
     const { model } = load();
     const member = render('../../src/components/community/PostWriteForm.tsx', { boards: model.boardList(null), defaultBoard: 'free', profile: profileOf(), onDone() {}, onCancel() {} });
     const options = [...member.matchAll(/<option value="([^"]+)"/g)].map((match) => match[1]);
     assert.deepEqual(options, ['request', 'inquiry', 'free', 'promo']);
     const owner = render('../../src/components/community/PostWriteForm.tsx', { boards: model.boardList(null), defaultBoard: 'news', profile: profileOf({ role: 'owner', canWriteNews: true }), onDone() {}, onCancel() {} });
-    assert.deepEqual([...owner.matchAll(/<option value="([^"]+)"/g)].map((match) => match[1]), ['request', 'inquiry', 'free', 'news', 'promo']);
+    assert.deepEqual([...owner.matchAll(/<option value="([^"]+)"/g)].map((match) => match[1]), ['news', 'request', 'inquiry', 'free', 'promo']);
     assert.match(owner, /<option value="news" selected/);
 });
 
@@ -293,7 +293,9 @@ test('sidebar: my activity (nickname, grade badge, score bar, counts), board men
     assert.match(text(html), /열매까지 350점/);
     for (const label of ['내 글', '내 댓글', '들른 글']) assert.match(text(html), new RegExp(label));
     assert.match(text(html), /21/);
-    for (const label of ['전체글', '요청사항', '문의', '자유게시판', '최근 소식', '내 글 홍보']) assert.match(text(html), new RegExp(label));
+    for (const label of ['전체글', '공지사항', '최근 소식', '요청사항', '문의', '자유게시판', '내 글 홍보']) assert.match(text(html), new RegExp(label));
+    const menu = tags(html, 'a').map((tag) => attr(tag, 'href')).filter((href) => /board=/.test(href || '')).map((href) => /board=(\w+)/.exec(href)[1]);
+    assert.deepEqual(menu, ['notice', 'news', 'request', 'inquiry', 'free', 'promo'], 'the menu follows the agreed order');
     const current = tags(html, 'a').filter((tag) => attr(tag, 'aria-current') === 'page');
     assert.equal(current.length, 1);
     assert.match(attr(current[0], 'href'), /board=free/);

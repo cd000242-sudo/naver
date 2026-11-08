@@ -1,4 +1,4 @@
-// Community board model (2026-11-08): five boards, sorts, status badges, who may write where, grades, paging, dates, comments.
+// Community board model (2026-11-08): six boards, sorts, status badges, who may write where, grades, paging, dates, comments.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
@@ -11,10 +11,10 @@ import {
 const member = { role: 'community', canWriteNews: false };
 const owner = { role: 'owner', canWriteNews: true };
 
-test('there are exactly five boards, in the agreed order, with their Korean names', () => {
-    assert.deepEqual(BOARD_ORDER, ['request', 'inquiry', 'free', 'news', 'promo']);
+test('there are exactly six boards, in the agreed order, with their Korean names', () => {
+    assert.deepEqual(BOARD_ORDER, ['notice', 'news', 'request', 'inquiry', 'free', 'promo']);
     const boards = boardList(null);
-    assert.deepEqual(boards.map((board) => board.label), ['요청사항', '문의', '자유게시판', '최근 소식', '내 글 홍보']);
+    assert.deepEqual(boards.map((board) => board.label), ['공지사항', '최근 소식', '요청사항', '문의', '자유게시판', '내 글 홍보']);
 });
 
 test('server board config wins over the built-in one but never adds or reorders boards', () => {
@@ -62,7 +62,7 @@ test('only the operator may write on the news board; everyone logged in may writ
     for (const id of ['request', 'inquiry', 'free', 'promo']) assert.equal(canWriteBoard(byId[id], member), true, id);
     assert.equal(canWriteBoard(byId.free, null), false, 'no login, no writing');
     assert.deepEqual(writableBoards(boards, member).map((board) => board.id), ['request', 'inquiry', 'free', 'promo']);
-    assert.deepEqual(writableBoards(boards, owner).map((board) => board.id), BOARD_ORDER);
+    assert.deepEqual(writableBoards(boards, owner).map((board) => board.id), ['news', 'request', 'inquiry', 'free', 'promo'], 'the notice board is written in the admin home, not here');
 });
 
 test('grade guide lists the four grades with their ranges and the score rules', () => {

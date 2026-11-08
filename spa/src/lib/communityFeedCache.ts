@@ -7,7 +7,8 @@
 import { normalizePosts, type PostItem } from './communityData';
 import { feedViewKey, userTag, type FeedConfig } from './communityFeedModel.mjs';
 
-const PREFIX = 'leaderspro.community.feed.v1';
+// v2 (2026-11-08): the notices left 최근 소식, so lists and counts saved before that must not be drawn again.
+const PREFIX = 'leaderspro.community.feed.v2';
 const INDEX_KEY = `${PREFIX}:index`;
 const MAX_LISTS = 16;
 const MAX_AGE_MS = 6 * 60 * 60 * 1000;

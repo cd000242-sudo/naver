@@ -4,6 +4,7 @@
  * and an unexpected shape can never crash a page or become a script link.
  */
 import { isNoticeId, noticeBadgeLabel } from './accountModel.mjs';
+import { NOTICE_BOARD } from './communityContract.mjs';
 
 export type AuthorGrade = { key: string; label: string };
 
@@ -103,7 +104,8 @@ export function normalizePost(raw: unknown): PostItem | null {
     const badge = text(source.badge);
     return {
         id,
-        board: text(source.board),
+        // An old server files a notice under `news`; whatever it says, a notice belongs to the notice board.
+        board: notice ? NOTICE_BOARD : text(source.board),
         title: text(source.title),
         excerpt: text(source.excerpt),
         body: text(source.body),

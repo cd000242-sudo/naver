@@ -67,7 +67,8 @@ test('OLD SERVER "Unauthorized": falls back to the many-call way, nothing breaks
         assert.equal(result.bundle.posts.length, 5);
         assert.deepEqual(result.bundle.weekly.map((post) => post.id), ['w1']);
         assert.equal(result.bundle.config.boards.length, 2);
-        assert.equal(result.bundle.counts.news, 1);
+        assert.equal(result.bundle.counts.news, undefined, 'news would include the notices on an old server');
+        assert.equal(result.bundle.counts.free, 1);
         assert.notEqual(session.loadCommunitySession(), null, 'an Unauthorized for the new action is not a logout');
     });
 });

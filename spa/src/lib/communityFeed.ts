@@ -5,10 +5,11 @@
  */
 import { boardApi, callWithToken, type ApiFailure } from './communityApi';
 import { keepToken } from './communityAuth';
-import { COMMUNITY_ACTIONS } from './communityContract.mjs';
+import { COMMUNITY_ACTIONS, NOTICE_BOARD } from './communityContract.mjs';
 import { normalizePosts, type PostItem } from './communityData';
 import { findCachedPost, readFeedCache, writeFeedCache, type CachedFeed } from './communityFeedCache';
-import { FEED_PAGE_SIZE, judgeFeedReply, pickConfig, pickCounts } from './communityFeedModel.mjs';
+import { FEED_PAGE_SIZE, answerKnowsNotice, countsForOldServer, isInvalidBoardReply, judgeFeedReply, pickConfig, pickCounts } from './communityFeedModel.mjs';
+import { loadNewsSplit, markNoticeBoardNew, markNoticeBoardOld, noticeBoardIsOld } from './communityNoticeCompat';
 import { ALL_BOARD, BOARD_ORDER, mergeBoardPages, type SortKey } from './communityModel.mjs';
 import { loadCommunitySession, normalizeProfile } from './communitySession';
 
@@ -43,6 +44,7 @@ function serverIsOld(): boolean {
 }
 
 function markServerOld(): void {
+    markNoticeBoardOld(); // a server without the one-call feed predates the notice board too
     unsupportedUntil = Date.now() + UNSUPPORTED_MEMORY_MS;
     try { sessionStorage.setItem(UNSUPPORTED_KEY, String(unsupportedUntil)); } catch { /* in-memory note only */ }
 }
@@ -51,6 +53,7 @@ function markServerOld(): void {
 export function resetFeedSupport(): void {
     unsupportedUntil = 0;
     try { sessionStorage.removeItem(UNSUPPORTED_KEY); } catch { /* nothing to forget */ }
+    markNoticeBoardNew();
 }
 
 type Reply = { posts: PostItem[]; pinned: PostItem[]; total: number };
@@ -72,9 +75,10 @@ function fromFeedAnswer(result: Record<string, unknown>): FeedBundle {
     };
 }
 
-/** The old way: the settings, the weekly top and one list per board (all boards = five lists merged here). */
+/** The old way: the settings, the weekly top and one list per board (all boards = the five old boards merged here). */
 async function loadLegacy(view: FeedView, wants: LegacyWants): Promise<FeedLoad> {
-    const boards = view.board === ALL_BOARD ? [...BOARD_ORDER] : [view.board];
+    // An old server has no notice board; its notices are inside `news` and come out as 공지사항 rows by themselves.
+    const boards = view.board === ALL_BOARD ? BOARD_ORDER.filter((id) => id !== NOTICE_BOARD) : [view.board];
     const [settings, weekly, ...lists] = await Promise.all([
         wants.config ? boardApi.boards() : Promise.resolve(null),
         wants.weekly ? boardApi.weeklyTop(6) : Promise.resolve(null),
@@ -85,6 +89,7 @@ async function loadLegacy(view: FeedView, wants: LegacyWants): Promise<FeedLoad>
     const replies = lists.map((result) => (result.ok ? toReply(result) : null));
     const counts: Record<string, number> = {};
     boards.forEach((board, index) => { const reply = replies[index]; if (reply) counts[board] = reply.total; });
+    if (view.board === ALL_BOARD) delete counts.news; // includes the notices on an old server
     const base = view.board === ALL_BOARD
         ? mergeBoardPages(replies, { sort: view.sort, page: view.page })
         : { pinned: replies[0]?.pinned ?? [], posts: replies[0]?.posts ?? [], total: replies[0]?.total ?? 0, totalPages: Number((lists[0] as { totalPages?: unknown }).totalPages) || 0 };
@@ -121,20 +126,50 @@ export async function loadCommunityFeed(view: FeedView, wants: LegacyWants = { c
     return loaded;
 }
 
+/** The two screens an old server mixes up: it lists the notices inside `news`. */
+const isMixedBoard = (view: FeedView): boolean => view.board === NOTICE_BOARD || view.board === 'news';
+
+/** One call of the new action. */
+const askFeed = (view: FeedView) => callWithToken(COMMUNITY_ACTIONS.feed, { board: view.board, sort: view.sort, page: view.page, pageSize: FEED_PAGE_SIZE, weeklyLimit: WEEKLY_LIMIT });
+
+/** An old server: 공지사항 / 최근 소식 are cut out of the news board here. An empty 공지사항 asks the feed once more, in case the server was updated meanwhile. */
+async function loadOldNotices(view: FeedView, wants: LegacyWants): Promise<FeedLoad> {
+    const split = await loadNewsSplit(view, wants);
+    if (!split.ok || view.board !== NOTICE_BOARD || split.bundle.posts.length + split.bundle.pinned.length > 0 || serverIsOld()) return split;
+    const result = await askFeed(view);
+    if (judgeFeedReply(result) !== 'use' || !result.ok) return split;
+    markNoticeBoardNew();
+    adoptProfile((result as { profile?: unknown }).profile);
+    return { ok: true, bundle: fromFeedAnswer(result), source: 'feed' };
+}
+
 async function loadFresh(view: FeedView, wants: LegacyWants): Promise<FeedLoad> {
+    if (isMixedBoard(view) && (noticeBoardIsOld() || serverIsOld())) return loadOldNotices(view, wants);
     if (serverIsOld()) return loadLegacy(view, wants);
-    const result = await callWithToken(COMMUNITY_ACTIONS.feed, { board: view.board, sort: view.sort, page: view.page, pageSize: FEED_PAGE_SIZE, weeklyLimit: WEEKLY_LIMIT });
+    const result = await askFeed(view);
     const verdict = judgeFeedReply(result);
     if (verdict === 'use' && result.ok) {
         adoptProfile((result as { profile?: unknown }).profile);
-        return { ok: true, bundle: fromFeedAnswer(result), source: 'feed' };
+        const bundle = fromFeedAnswer(result);
+        if (answerKnowsNotice(result)) {
+            markNoticeBoardNew();
+            return { ok: true, bundle, source: 'feed' };
+        }
+        // The server answers, but it predates the notice board: its `news` rows and counts still include the notices.
+        markNoticeBoardOld();
+        if (view.board === 'news') return loadOldNotices(view, wants);
+        return { ok: true, bundle: { ...bundle, counts: countsForOldServer(bundle.counts) }, source: 'feed' };
     }
     if (verdict === 'fatal') {
         const failure = result as ApiFailure;
         return { ok: false, code: failure.code, message: failure.message };
     }
+    if (view.board === NOTICE_BOARD && isInvalidBoardReply(result)) {
+        markNoticeBoardOld();
+        return loadOldNotices(view, wants);
+    }
     if (verdict === 'unsupported') markServerOld();
-    return loadLegacy(view, wants);
+    return isMixedBoard(view) ? loadOldNotices(view, wants) : loadLegacy(view, wants);
 }
 
 /** What the browser saved last time for this screen and this person, to draw before the server answers. */

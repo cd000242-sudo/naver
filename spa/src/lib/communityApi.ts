@@ -3,6 +3,8 @@
  * failures come back as `{ ok: false, code, message }` — this module never throws, so a screen can always show
  * the message. A reply that says the community token is gone also makes the browser forget it.
  */
+import { COMMUNITY_CODES, NOTICE_BOARD } from './communityContract.mjs';
+import { NOTICE_WRITE_HINT } from './communityModel.mjs';
 import { GAS_URL } from './siteOps';
 import { isSessionFailure } from './siteAuthModel.mjs';
 import { clearCommunitySession, loadCommunitySession } from './communitySession';
@@ -71,12 +73,15 @@ export const boardApi = {
     post: (id: string) => callWithToken('community-post', { id }),
     weeklyTop: (limit = 6) => callWithToken('community-weekly-top', { limit }),
     /** Pass the same `requestId` when sending again: the server then answers with the first post instead of making a twin. */
-    writePost: (draft: PostDraft, requestId: string = newRequestId()) => callWithToken('community-post-write', {
-        board: draft.board,
-        title: draft.title,
-        ...(draft.board === 'promo' ? { url: draft.url, summary: draft.body } : { body: draft.body }),
-        requestId,
-    }),
+    writePost: (draft: PostDraft, requestId: string = newRequestId()): Promise<ApiResult> => (draft.board === NOTICE_BOARD
+        // Notices are written in the admin home; nothing is sent from here.
+        ? Promise.resolve(failure(COMMUNITY_CODES.NOTICE_MANAGED_IN_ADMIN, NOTICE_WRITE_HINT))
+        : callWithToken('community-post-write', {
+            board: draft.board,
+            title: draft.title,
+            ...(draft.board === 'promo' ? { url: draft.url, summary: draft.body } : { body: draft.body }),
+            requestId,
+        })),
     updatePost: (id: string, draft: { title: string; body: string; promo: boolean }) => callWithToken('community-post-update', {
         id, title: draft.title, ...(draft.promo ? { summary: draft.body } : { body: draft.body }),
     }),

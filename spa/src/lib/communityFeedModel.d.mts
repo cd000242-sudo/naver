@@ -7,5 +7,10 @@ export type FeedConfig = {
 export function judgeFeedReply(result: unknown): FeedVerdict;
 export function pickCounts(raw: unknown): Record<string, number>;
 export function pickConfig(result: unknown): FeedConfig | null;
+export function isInvalidBoardReply(result: unknown): boolean;
+export function answerKnowsNotice(result: unknown): boolean;
+export function countsForOldServer(counts: Record<string, number> | null | undefined): Record<string, number>;
+export type NewsSide<T> = { posts: T[]; pinned: T[]; total: number };
+export function splitNewsReplies<T>(pages: ReadonlyArray<{ posts?: T[]; pinned?: T[] } | null | undefined>): { notice: NewsSide<T>; news: NewsSide<T> };
 export function userTag(userId: string): string;
 export function feedViewKey(view: { board: string; sort: string; page: number }): string;

@@ -2,7 +2,8 @@
  * Pure rules for the one-call community feed (`community-feed`): how to judge the server's answer, and how the
  * settings, counts and saved-list keys are shaped. No browser, no network — node:test pins it directly.
  */
-import { BOARD_ORDER } from './communityModel.mjs';
+import { NOTICE_BOARD } from './communityContract.mjs';
+import { BOARD_ORDER, splitNoticePosts } from './communityModel.mjs';
 
 export const FEED_PAGE_SIZE = 20;
 
@@ -29,7 +30,7 @@ export function judgeFeedReply(result) {
     return 'retry-legacy';
 }
 
-/** Post counts per board id: only the five known boards, only real numbers. */
+/** Post counts per board id: only the six known boards, only real numbers. */
 export function pickCounts(raw) {
     const source = raw && typeof raw === 'object' ? raw : {};
     const counts = {};
@@ -69,6 +70,44 @@ export function pickConfig(result) {
         .filter((entry) => text(entry?.key) && text(entry?.label))
         .map((entry) => ({ key: entry.key, label: entry.label }));
     return { boards, reportReasons };
+}
+
+/** An answer for a board the server does not have (an old server asked for the notice board). */
+export const isInvalidBoardReply = (result) => Boolean(result) && result.ok !== true && String(result.code || '') === 'INVALID_BOARD';
+
+/** True when the answer shows the server knows the notice board: a `notice` count, or `notice` among its boards. */
+export function answerKnowsNotice(result) {
+    const source = result && typeof result === 'object' ? result : {};
+    if (source.counts && typeof source.counts === 'object' && Object.hasOwn(source.counts, NOTICE_BOARD)) return true;
+    const holder = Array.isArray(source.boards) ? source : source.boards;
+    return Array.isArray(holder?.boards) && holder.boards.some((entry) => entry?.id === NOTICE_BOARD);
+}
+
+/**
+ * Counts from a server that files the notices under `news`: `news` includes them and `notice` is missing, so
+ * `news` is left out (a missing number is better than a wrong one) until a read of the whole news board knows both.
+ */
+export function countsForOldServer(counts) {
+    const { news: _mixed, ...rest } = counts && typeof counts === 'object' ? counts : {};
+    void _mixed;
+    return rest;
+}
+
+/**
+ * The whole news board of an old server (its pages, each `{ posts, pinned }`) cut into the notices and the real news.
+ * Each side is one reply for `mergeBoardPages`: `total` counts the unpinned rows, like the server's own total.
+ */
+export function splitNewsReplies(pages) {
+    const sides = { notice: { posts: [], pinned: [], total: 0 }, news: { posts: [], pinned: [], total: 0 } };
+    for (const page of Array.isArray(pages) ? pages : []) {
+        const posts = splitNoticePosts(page?.posts);
+        const pinned = splitNoticePosts(page?.pinned);
+        sides.notice.posts.push(...posts.notice); sides.news.posts.push(...posts.rest);
+        sides.notice.pinned.push(...pinned.notice); sides.news.pinned.push(...pinned.rest);
+    }
+    sides.notice.total = sides.notice.posts.length;
+    sides.news.total = sides.news.posts.length;
+    return sides;
 }
 
 /** A short one-way tag of the user id, so a saved key can tell users apart without spelling the id out. */

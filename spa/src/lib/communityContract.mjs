@@ -49,5 +49,8 @@ export const COMMUNITY_CODES = Object.freeze({
 /** A post whose id starts with this came from the home-operations notice list, not from a member. */
 export const NOTICE_ID_PREFIX = 'nt_';
 
+/** The board that shows only those notices. An old server files them under `news`; the screen moves them here. */
+export const NOTICE_BOARD = 'notice';
+
 /** Report resolution words the server accepts. */
 export const REPORT_RESOLUTION = Object.freeze({ dismissed: 'dismissed', actioned: 'actioned' });

@@ -12,4 +12,5 @@ export const COMMUNITY_CODES: Readonly<Record<
     string
 >>;
 export const NOTICE_ID_PREFIX: string;
+export const NOTICE_BOARD: 'notice';
 export const REPORT_RESOLUTION: Readonly<{ dismissed: 'dismissed'; actioned: 'actioned' }>;
