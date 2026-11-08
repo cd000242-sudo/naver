@@ -2,13 +2,13 @@ export const COMMUNITY_ACTIONS: Readonly<{
     signupSendCode: string; signup: string; profile: string; myPosts: string; changePassword: string;
     resetSendCode: string; resetConfirm: string; verifyPhoneSend: string; verifyPhoneConfirm: string;
     adminHide: string; adminPin: string; adminDelete: string; adminStatus: string; adminReports: string;
-    adminReportResolve: string; adminPosts: string; adminBoards: string; adminRewards: string; adminRewardDecide: string; setAvatar: string; avatars: string; adminRemoveAvatar: string; feed: string; levelUp: string; postImage: string;
+    adminReportResolve: string; adminPosts: string; adminBoards: string; adminRewards: string; adminRewardDecide: string; setAvatar: string; avatars: string; adminRemoveAvatar: string; feed: string; levelUp: string; postImage: string; acceptAnswer: string;
 }>;
 export const COMMUNITY_CODES: Readonly<Record<
     'PHONE_INVALID' | 'PHONE_TAKEN' | 'PHONE_REQUIRED' | 'PHONE_CODE_INVALID' | 'PHONE_CODE_EXPIRED' | 'TOO_MANY'
     | 'SMS_UNAVAILABLE' | 'INVALID_CREDENTIALS' | 'INVALID_PASSWORD' | 'INVALID_CURRENT_PASSWORD' | 'TOO_MANY_ATTEMPTS'
     | 'USE_LICENSE_RESET' | 'PHONE_ALREADY_VERIFIED' | 'USE_LICENSE_PHONE' | 'NICKNAME_TAKEN' | 'INVALID_IMAGE' | 'AVATAR_NOT_FOUND' | 'NOTICE_MANAGED_IN_ADMIN' | 'NOTICE_NOT_REPORTABLE'
-    | 'UNAUTHORIZED' | 'LOGIN_REQUIRED' | 'LEVEL_REQUIRED' | 'LEVEL_UP_NOT_READY' | 'INVALID_BODY' | 'INVALID_URL' | 'INVALID_PLATFORM' | 'TOO_LONG',
+    | 'UNAUTHORIZED' | 'LOGIN_REQUIRED' | 'LEVEL_REQUIRED' | 'LEVEL_UP_NOT_READY' | 'INVALID_BODY' | 'INVALID_URL' | 'INVALID_PLATFORM' | 'TOO_LONG' | 'ACCEPT_NOT_ALLOWED' | 'COMMENT_NOT_FOUND',
     string
 >>;
 export const NOTICE_ID_PREFIX: string;

@@ -69,20 +69,26 @@ export function gradeGuide(config) {
     });
 }
 
-/** `{ post, comment, visit, likeReceived, dailyCap }` when every number is a real positive one; else null. */
+/**
+ * `{ post, comment, visit, likeReceived, dailyCap }` when every number is a real positive one; else null.
+ * `accepted` (points for an accepted answer, 질문하기) rides along only when the server sent a real positive number.
+ */
 export function pickScoreRules(raw) {
     if (!raw || typeof raw !== 'object') return null;
     const keys = ['post', 'comment', 'visit', 'likeReceived', 'dailyCap'];
     const values = keys.map((key) => Math.floor(Number(raw[key])));
     if (!values.every(plural)) return null;
-    return Object.fromEntries(keys.map((key, index) => [key, values[index]]));
+    const rules = Object.fromEntries(keys.map((key, index) => [key, values[index]]));
+    const accepted = Math.floor(Number(raw.accepted));
+    return plural(accepted) ? { ...rules, accepted } : rules;
 }
 
-/** "글 10점 · 댓글 2점 · 들르기 1점 · 내 글 좋아요 1점 · 하루 최대 50점" from the server's numbers, or the default sentence. */
+/** "글 10점 · 댓글 2점 · 들르기 1점 · 내 글 좋아요 1점 · 채택 10점 · 하루 최대 50점" from the server's numbers (채택 only when it sent one), or the default sentence. */
 export function scoreRulesText(raw) {
     const rules = pickScoreRules(raw);
     if (!rules) return SCORE_RULES;
-    return `글 ${rules.post}점 · 댓글 ${rules.comment}점 · 들르기 ${rules.visit}점 · 내 글 좋아요 ${rules.likeReceived}점 · 하루 최대 ${rules.dailyCap}점`;
+    const accepted = rules.accepted ? ` · 채택 ${rules.accepted}점` : '';
+    return `글 ${rules.post}점 · 댓글 ${rules.comment}점 · 들르기 ${rules.visit}점 · 내 글 좋아요 ${rules.likeReceived}점${accepted} · 하루 최대 ${rules.dailyCap}점`;
 }
 
 const STATUSES = Object.freeze({

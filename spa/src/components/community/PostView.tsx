@@ -4,7 +4,7 @@ import { PROMO_PLATFORMS, promoPlatformOf } from '../../lib/communityPlatform.mj
 import { reportAction } from '../../lib/communityReport.mjs';
 import { useAvatars } from '../../lib/useAvatars';
 import Avatar from './Avatar';
-import { GradeBadge, NoticeBadge, StatusBadge } from './Badges';
+import { GradeBadge, NoticeBadge, QnaChip, StatusBadge } from './Badges';
 import RichBody from './RichBody';
 
 type Props = {
@@ -32,7 +32,7 @@ function PostView({ post, boards, busy = false, onLike, onReport, onEdit, onDele
                 <div className="cm-post-meta">
                     {post.notice ? <NoticeBadge kind={post.noticeBadge} /> : null}
                     <span className="cm-board-tag">{boardLabel(post.board, boards)}</span>
-                    <StatusBadge board={post.board} status={post.status} />
+                    {post.board === 'qna' ? <QnaChip post={post} /> : <StatusBadge board={post.board} status={post.status} />}
                 </div>
                 <h1 className="cm-post-title">{post.title}</h1>
                 <div className="cm-post-by">

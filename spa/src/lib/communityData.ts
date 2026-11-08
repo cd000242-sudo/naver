@@ -58,6 +58,10 @@ export type PostItem = {
     thumbUrl: string;
     /** Weekly top only: 1-based place in the ranking; 0 when the row is not ranked. */
     rank: number;
+    /** 질문하기: the question has an accepted answer (list rows carry the flag, the detail also the id below). */
+    solved: boolean;
+    /** 질문하기, detail reply: id of the accepted comment; '' when none. */
+    acceptedCommentId: string;
     /** Set only on a row the reader just wrote and the server has not confirmed: sending, or failed (with `failure`). */
     delivery?: 'sending' | 'failed';
     failure?: string;
@@ -82,6 +86,8 @@ export type CommentItem = {
     hidden: boolean;
     /** The text of a hidden comment, kept apart from `body` so only the moderator view draws it. */
     hiddenBody: string;
+    /** 질문하기: this comment is the accepted answer of its question. */
+    accepted: boolean;
     replies: CommentItem[];
     /** Set only on a comment the reader just wrote and the server has not confirmed: sending, or failed (with `failure`). */
     delivery?: 'sending' | 'failed';
@@ -126,6 +132,7 @@ export function normalizePost(raw: unknown): PostItem | null {
     if (!id) return null;
     const notice = isNoticeId(id) || source.notice === true;
     const badge = text(source.badge);
+    const acceptedCommentId = text(source.acceptedCommentId);
     return {
         id,
         // An old server files a notice under `news`; whatever it says, a notice belongs to the notice board.
@@ -162,6 +169,8 @@ export function normalizePost(raw: unknown): PostItem | null {
         thumbId: normalizeThumbId(source.thumbId),
         thumbUrl: httpsOnly(source.thumbUrl),
         rank: count(source.rank),
+        solved: source.solved === true || acceptedCommentId !== '',
+        acceptedCommentId,
     };
 }
 
@@ -194,6 +203,7 @@ export function normalizeComment(raw: unknown, depth = 0): CommentItem | null {
         gone,
         hidden: source.hidden === true && source.deleted !== true,
         hiddenBody: source.hidden === true && source.deleted !== true ? text(source.body) : '',
+        accepted: !gone && source.accepted === true,
         replies,
     };
 }

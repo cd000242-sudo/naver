@@ -6,7 +6,8 @@ import { LOGIN_PATH, SIGNUP_PATH, loginPath } from './siteAuthModel.mjs';
  * and the login-button routing. Pure data and functions so node:test can pin them without a browser.
  *
  * Design 1 (light bar), agreed 2026-11-07: Home · Product ▾ · Free chatbot · Price/Buy ▾ · Reviews · Community ▾
- * (the community opens straight onto one of its six boards, 2026-11-08; the promo board as two sub-tabs).
+ * (the community opens straight onto one of its seven boards, 2026-11-08; the promo board as two sub-tabs).
+ * 질문하기 (contract 1116) is also its own item right before Community: the board is a click away, not inside a dropdown.
  */
 
 /** Below this width the bar turns into the [menu] button and the full-height list. */
@@ -28,6 +29,7 @@ const entry = (key, label, to, icon, desc, short) => Object.freeze({ key, label,
 const BOARD_DESC = Object.freeze({
     notice: '서비스 공지·업데이트',
     news: '리더남이 전하는 AI 소식',
+    qna: '궁금한 걸 묻고 답 받기',
     request: '바라는 기능 남기기',
     inquiry: '오류가 나면 알려 주세요',
     free: '묻고 나누는 이야기',
@@ -46,6 +48,9 @@ const COMMUNITY_ENTRIES = Object.freeze(boardList(null).flatMap((board) => (boar
         entry('community-promo-google', '내 글 홍보 · 구글', communityPath({ board: 'promo', platform: 'google' }), undefined, '구글 블로그 글 알리기', undefined),
     ]
     : [boardEntry(board)])));
+
+/** The 질문하기 board as its own menu item (desktop bar and phone list). */
+const QNA_PATH = communityPath({ board: 'qna' });
 
 /** Desktop bar. Groups open a dropdown; the notice badge rides on the Community group. */
 export const NAV_ITEMS = Object.freeze([
@@ -66,6 +71,7 @@ export const NAV_ITEMS = Object.freeze([
         ]),
     }),
     link('reviews', '수익 후기', '/reviews'),
+    link('qna', '질문하기', QNA_PATH),
     Object.freeze({ type: 'group', key: 'community', label: '커뮤니티', badge: true, items: COMMUNITY_ENTRIES }),
 ]);
 
@@ -90,8 +96,8 @@ export const NAV_MOBILE_SECTIONS = Object.freeze([
             row('lookup', '주문 조회', '/lookup', undefined, { icon: 'order-search' }),
         ]),
     }),
-    Object.freeze({ title: '함께하기', items: Object.freeze([row('reviews', '수익 후기', '/reviews')]) }),
-    // The six boards sit under the community heading; the new-notice badge rides on the heading.
+    Object.freeze({ title: '함께하기', items: Object.freeze([row('reviews', '수익 후기', '/reviews'), row('qna', '질문하기', QNA_PATH)]) }),
+    // The seven boards sit under the community heading; the new-notice badge rides on the heading.
     Object.freeze({
         title: '커뮤니티', badge: true,
         items: Object.freeze(COMMUNITY_ENTRIES.map((child) => row(child.key, child.label, child.to, undefined))),

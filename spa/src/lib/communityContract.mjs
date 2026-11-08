@@ -33,6 +33,8 @@ export const COMMUNITY_ACTIONS = Object.freeze({
     levelUp: 'community-level-up',
     /** One picture of a post (GET: `?action=...&postId=..&imageId=..`) answers `{ ok, mime, data }`. */
     postImage: 'community-post-image',
+    /** 질문하기: POST with the token, `postId` + `commentId` ('' = take the accepted answer back). Contract 1116. */
+    acceptAnswer: 'community-accept-answer',
 });
 
 export const COMMUNITY_CODES = Object.freeze({
@@ -63,6 +65,8 @@ export const COMMUNITY_CODES = Object.freeze({
     INVALID_URL: 'INVALID_URL',
     INVALID_PLATFORM: 'INVALID_PLATFORM',
     TOO_LONG: 'TOO_LONG',
+    ACCEPT_NOT_ALLOWED: 'ACCEPT_NOT_ALLOWED',
+    COMMENT_NOT_FOUND: 'COMMENT_NOT_FOUND',
 });
 
 /** A post whose id starts with this came from the home-operations notice list, not from a member. */

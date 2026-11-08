@@ -103,14 +103,24 @@ test('bar becomes the menu button at 1180px and the sheet only exists below it',
     assert.match(css, /@media \(min-width:\s*1181px\)\s*\{[^}]*\.site-nav-sheet\s*\{[^}]*display:\s*none\s*!important/, 'a stuck-open sheet cannot survive widening the window');
 });
 
-test('just above 1181px the bar tightens so a logged-in long id cannot push the menu over the brand or the buttons', () => {
-    const block = css.match(/@media \(min-width:\s*1181px\) and \(max-width:\s*1320px\)\s*\{([\s\S]*?)\n\}/);
-    assert.ok(block, 'tight-range media block exists');
+// [계약 1116] 질문하기가 상단 메뉴에 따로 들어와 항목이 8개 — 1181px 이상 어느 폭에서도 항목이 브랜드·버튼과 겹치지 않게 조인다.
+test('from 1181px up the bar is trimmed so a logged-in long id and eight items cannot push the menu over the brand or the buttons', () => {
+    const block = css.match(/@media \(min-width:\s*1181px\)\s*\{([\s\S]*?)\n\}/);
+    assert.ok(block, 'compact media block exists');
     const tight = rules(block[1] + '\n}');
     const [link] = rulesFor(tight, '.site-nav-link');
     assert.ok(parseInt(declaration(link.body, 'padding').split(/\s+/)[1], 10) <= 12, 'link side padding shrinks');
     const [id] = rulesFor(tight, '.site-nav-account-id');
-    assert.ok(parseInt(declaration(id.body, 'max-width'), 10) <= 96, 'account id is cut short in the tight range');
+    assert.ok(parseInt(declaration(id.body, 'max-width'), 10) <= 96, 'account id is cut short');
+    assert.ok(rulesFor(tight, '.site-nav-cta-long').some((rule) => /display:\s*none/.test(rule.body)), 'the free-trial button takes its short label');
+    assert.ok(rulesFor(tight, '.site-nav-cta-short').some((rule) => /display:\s*inline/.test(rule.body)));
+});
+
+test('just above the breakpoint (up to 1279px) the brand keeps its logo and gives up the words; from 1280px it shows both', () => {
+    const block = css.match(/@media \(min-width:\s*1181px\) and \(max-width:\s*1279px\)\s*\{([\s\S]*?)\n\}/);
+    assert.ok(block, 'narrow-range media block exists');
+    assert.ok(rulesFor(rules(block[1] + '\n}'), '.site-nav-brand-text').some((rule) => /display:\s*none/.test(rule.body)));
+    assert.doesNotMatch(css.replace(block[0], ''), /\.site-nav-brand-text\s*\{[^}]*display:\s*none/, 'nowhere else is the brand text hidden for the desktop bar');
 });
 
 test('bar height stays within the 72px other layouts reserve (LEWORD console, sticky boards)', () => {

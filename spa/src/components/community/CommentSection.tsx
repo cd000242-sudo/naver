@@ -4,8 +4,10 @@ import type { CommentItem } from '../../lib/communityData';
 import { canModerate } from '../../lib/accountModel.mjs';
 import { createLikeToggle } from '../../lib/communityLikeSync';
 import { countComments } from '../../lib/communityModel.mjs';
+import { acceptedFirst } from '../../lib/communityQna.mjs';
 import { authorOf, discardComment, retryComment, sendComment, type CommentPort } from '../../lib/communityOutbox';
 import type { CommunityProfile } from '../../lib/communitySession';
+import AcceptButton, { type AcceptControls } from './AcceptButton';
 import CommentAdminBar from './CommentAdminBar';
 import CommentForm from './CommentForm';
 import { useAvatars } from '../../lib/useAvatars';
@@ -22,6 +24,8 @@ type Props = {
     onReport: (targetType: 'post' | 'comment', targetId: string) => void;
     /** The server closes comments for some posts (notices); a missing value means open. */
     commentable?: boolean;
+    /** 질문하기: set only for the asker of the question — the accept buttons under the comments. */
+    qna?: AcceptControls;
 };
 
 function patchComment(list: CommentItem[], id: string, change: Partial<CommentItem>): CommentItem[] {
@@ -36,7 +40,7 @@ function patchComment(list: CommentItem[], id: string, change: Partial<CommentIt
  * A new comment is in the list the moment it is sent (marked "sending"); a like changes at once; both are
  * confirmed or put right in the background.
  */
-function CommentSection({ postId, comments, profile, onComments, onReload, onReport, commentable = true }: Props) {
+function CommentSection({ postId, comments, profile, onComments, onReload, onReport, commentable = true, qna }: Props) {
     const [replyingTo, setReplyingTo] = useState('');
     // Photos fill in after the comments are drawn (first letters first).
     const avatars = useAvatars(comments.flatMap((comment) => [comment.avatarKey, ...comment.replies.map((reply) => reply.avatarKey)]));
@@ -44,6 +48,8 @@ function CommentSection({ postId, comments, profile, onComments, onReload, onRep
     const canWrite = Boolean(profile.nickname) && !profile.needsNickname;
     const likes = useRef(new Map<string, ReturnType<typeof createLikeToggle>>());
     const port = useMemo<CommentPort>(() => ({ update: onComments, reload: () => { void onReload(); } }), [onComments, onReload]);
+    // 질문하기: the accepted answer is the first thing under the question.
+    const ordered = useMemo(() => acceptedFirst(comments), [comments]);
 
     const send = (body: string, parentId?: string): Promise<string> => {
         setReplyingTo('');
@@ -78,7 +84,7 @@ function CommentSection({ postId, comments, profile, onComments, onReload, onRep
             {notice ? <p className="lp-error" role="alert">{notice}</p> : null}
             {comments.length === 0 ? (commentable ? <p className="cm-empty-sm">첫 댓글을 남겨 보세요.</p> : null) : (
                 <CommentTree
-                    comments={comments}
+                    comments={ordered}
                     avatars={avatars}
                     replyingTo={replyingTo}
                     onReply={(id) => setReplyingTo((current) => (current === id ? '' : id))}
@@ -87,6 +93,7 @@ function CommentSection({ postId, comments, profile, onComments, onReload, onRep
                     onReport={(comment) => onReport('comment', comment.id)}
                     onRetry={(comment) => { void retryComment(port, postId, comment); }}
                     onDiscard={(comment) => onComments((list) => discardComment(list, comment.id))}
+                    renderAccept={qna ? (comment) => <AcceptButton comment={comment} controls={qna} /> : undefined}
                     renderAdmin={canModerate(profile) ? (comment) => (
                         <CommentAdminBar comment={comment} profile={profile} onDone={onReload}
                             onPatch={(change) => onComments((list) => patchComment(list, comment.id, change))} />

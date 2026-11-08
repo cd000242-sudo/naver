@@ -6,7 +6,9 @@ import { createLikeToggle } from '../../lib/communityLikeSync';
 import { communityPath, reportReasons, type BoardConfig } from '../../lib/communityModel.mjs';
 import { runOptimistic } from '../../lib/communityOptimistic';
 import { mergeServerComments } from '../../lib/communityOutbox';
+import { isQnaPost } from '../../lib/communityQna.mjs';
 import { reportAction } from '../../lib/communityReport.mjs';
+import { useAcceptAnswer } from '../../lib/useAcceptAnswer';
 import { loginPath } from '../../lib/siteAuthModel.mjs';
 import type { CommunityProfile } from '../../lib/communitySession';
 import CommentSection from './CommentSection';
@@ -67,6 +69,9 @@ function PostDetail({ id, boards, boardId, profile, reportConfig, preview = null
         apply: (state) => setPost((current) => (current ? { ...current, ...state } : current)),
         fail: setNotice,
     }), [id]);
+
+    // 질문하기: the asker's accept buttons. Hooks stay above the early returns below.
+    const accepting = useAcceptAnswer({ post, comments, setPost, setComments, notify: setNotice, onDone: () => onModerated?.() });
 
     const back = communityPath({ board: boardId });
 
@@ -130,6 +135,7 @@ function PostDetail({ id, boards, boardId, profile, reportConfig, preview = null
                 onChanged={(change) => setPost((current) => (current ? { ...current, ...change } : current))} />
             <CommentSection postId={post.id} comments={comments} profile={profile} onComments={setComments} onReload={load}
                 commentable={post.commentable}
+                qna={isQnaPost(post) && post.mine ? accepting : undefined}
                 onReport={(targetType, targetId) => { setReportError(''); setReportDraft(undefined); setReport({ targetType, targetId }); }} />
             {report ? (
                 <ReportDialog reasons={reportReasons(reportConfig)} busy={busy} error={reportError} initial={reportDraft}

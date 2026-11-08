@@ -33,6 +33,7 @@ import '../components/community/community.css';
 import '../components/community/community-detail.css';
 import '../components/community/community-speed.css';
 import '../components/community/community-forum.css';
+import '../components/community/community-qna.css';
 
 const ALL_NOTE = '전체글은 게시판마다 최신 글 20개씩 모아 보여 드려요.';
 

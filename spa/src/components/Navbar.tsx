@@ -89,7 +89,7 @@ function Navbar() {
                                 {item.type === 'group' ? (
                                     <NavDropdown item={item} pathname={pathname} search={search} unseenNotices={unseenNotices} open={state.dropdown === item.key} dispatch={dispatch} />
                                 ) : (
-                                    <NavBarLink item={item} pathname={pathname} unseenNotices={unseenNotices} onNavigate={closeAll} />
+                                    <NavBarLink item={item} pathname={pathname} search={search} unseenNotices={unseenNotices} onNavigate={closeAll} />
                                 )}
                             </li>
                         ))}
@@ -122,8 +122,9 @@ function Navbar() {
     );
 }
 
-function NavBarLink({ item, pathname, unseenNotices, onNavigate }: { item: NavLinkItem; pathname: string; unseenNotices: number; onNavigate: () => void }) {
-    const current = isNavPathActive(item.to, pathname);
+function NavBarLink({ item, pathname, search, unseenNotices, onNavigate }: { item: NavLinkItem; pathname: string; search: string; unseenNotices: number; onNavigate: () => void }) {
+    // The address query matters for a target like /community?board=qna (a plain page link ignores it).
+    const current = isNavPathActive(item.to, pathname, search);
     return (
         <Link className={`site-nav-link${item.featured ? ' site-nav-link-featured' : ''}`} to={item.to} aria-current={current ? 'page' : undefined} onClick={onNavigate}>
             {item.label}

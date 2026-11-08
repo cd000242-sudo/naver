@@ -1,4 +1,4 @@
-export type BoardId = 'notice' | 'news' | 'request' | 'inquiry' | 'free' | 'promo';
+export type BoardId = 'notice' | 'news' | 'qna' | 'request' | 'inquiry' | 'free' | 'promo';
 export type BoardConfig = Readonly<{
     id: BoardId;
     label: string;

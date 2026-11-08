@@ -61,10 +61,10 @@ test('OLD SERVER "Unauthorized": falls back to the many-call way, nothing breaks
         assert.equal(result.ok, true);
         assert.equal(result.source, 'legacy');
         assert.equal(countOf(browser, 'community-feed'), 1, 'tried the new action once');
-        assert.equal(countOf(browser, 'community-posts'), 5, 'one per board');
+        assert.equal(countOf(browser, 'community-posts'), 6, 'one per board (질문하기 is the sixth list)');
         assert.equal(countOf(browser, 'community-boards'), 1);
         assert.equal(countOf(browser, 'community-weekly-top'), 1);
-        assert.equal(result.bundle.posts.length, 5);
+        assert.equal(result.bundle.posts.length, 6);
         assert.deepEqual(result.bundle.weekly.map((post) => post.id), ['w1']);
         assert.equal(result.bundle.config.boards.length, 2);
         assert.equal(result.bundle.counts.news, undefined, 'news would include the notices on an old server');
@@ -91,7 +91,7 @@ test('an old server is remembered: the next screens do not pay for a failed comm
         await feed.loadCommunityFeed({ board: 'free', sort: 'latest', page: 1 }, { config: false, weekly: false });
         assert.equal(countOf(browser, 'community-feed'), 1, 'asked only once');
         assert.equal(countOf(browser, 'community-boards'), 1, 'settings are not read again when not wanted');
-        assert.equal(countOf(browser, 'community-posts'), 6);
+        assert.equal(countOf(browser, 'community-posts'), 7);
         feed.resetFeedSupport();
         await feed.loadCommunityFeed({ board: 'free', sort: 'latest', page: 1 });
         assert.equal(countOf(browser, 'community-feed'), 2, 'asks again once the memory is cleared');
@@ -104,7 +104,7 @@ test('an old server stays remembered after a reload of the tab (a fresh page loa
         const reloaded = createLoader()('../../src/lib/communityFeed.ts');
         await reloaded.loadCommunityFeed(VIEW);
         assert.equal(countOf(browser, 'community-feed'), 1, 'the second page load went straight to the old way');
-        assert.equal(countOf(browser, 'community-posts'), 10);
+        assert.equal(countOf(browser, 'community-posts'), 12);
     });
 });
 
@@ -144,7 +144,7 @@ test('legacy: every board failing is an error; one failing board only drops its 
     await withFeed(replies, async ({ feed }) => {
         const result = await feed.loadCommunityFeed(VIEW);
         assert.equal(result.ok, true);
-        assert.equal(result.bundle.posts.length, 4);
+        assert.equal(result.bundle.posts.length, 5);
         assert.equal(result.bundle.counts.inquiry, undefined);
     });
     replies['community-posts'] = { ok: false, code: 'SERVER_ERROR', message: '일시 오류' };

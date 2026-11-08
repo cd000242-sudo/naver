@@ -1,6 +1,6 @@
 export type GradeEntry = Readonly<{ key: string; label: string; min: number; range: string; reward: string; condition: string; conditionDetail: string }>;
 export type ServerReward = { days: number; mode: 'auto' | 'approval' } | null;
-export type ScoreRules = { post: number; comment: number; visit: number; likeReceived: number; dailyCap: number };
+export type ScoreRules = { post: number; comment: number; visit: number; likeReceived: number; dailyCap: number; accepted?: number };
 export type RewardStatus = 'granted' | 'pending' | 'approved' | 'rejected';
 export type RewardItem = { tier: string; label: string; days: number; mode: 'auto' | 'approval'; status: RewardStatus; createdAt: string; decidedAt: string };
 export type RewardRow = { key: string; tierLabel: string; text: string; status: RewardStatus; statusLabel: string; tone: 'done' | 'wait' | 'review' };

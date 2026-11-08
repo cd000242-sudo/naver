@@ -48,7 +48,7 @@ test('an associate writes only on 자유게시판, once; a member writes anywher
     assert.deepEqual(associateWriteState(null, 'promo'), { open: true, reason: '', message: '' });
     assert.equal(associateWriteState(associate(), 'free').open, true);
     assert.equal(associateWriteState(associate(), 'all').open, true, 'the all-boards screen opens the form on 자유게시판');
-    for (const board of ['notice', 'news', 'request', 'inquiry', 'promo']) {
+    for (const board of ['notice', 'news', 'qna', 'request', 'inquiry', 'promo']) {
         const state = associateWriteState(associate(), board);
         assert.equal(state.open, false, board);
         assert.equal(state.reason, 'board');

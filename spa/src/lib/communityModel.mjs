@@ -2,6 +2,7 @@ import { NOTICE_BOARD, NOTICE_ID_PREFIX } from './communityContract.mjs';
 import { GRADE_TABLE, OWNER_GRADE_TEXT, SCORE_RULES } from './communityGrades.mjs';
 import { isAssociate } from './communityLevel.mjs';
 import { normalizePlatform, validatePromoUrl } from './communityPlatform.mjs';
+import { QNA_BOARD, QNA_OPEN, QNA_SOLVED } from './communityQna.mjs';
 
 export { SCORE_RULES };
 export { REPORT_REASONS, reportReasons } from './communityReport.mjs';
@@ -14,7 +15,7 @@ export const GRADE_GUIDE = GRADE_TABLE;
  * The server is the authority; these values only decide what the screen offers.
  */
 
-export const BOARD_ORDER = Object.freeze([NOTICE_BOARD, 'news', 'request', 'inquiry', 'free', 'promo']);
+export const BOARD_ORDER = Object.freeze([NOTICE_BOARD, 'news', QNA_BOARD, 'request', 'inquiry', 'free', 'promo']);
 
 /** Said when someone tries to write on 공지사항: notices are written in the admin home, never here. */
 export const NOTICE_WRITE_HINT = '공지는 어드민 홈 운영에서 써요.';
@@ -26,6 +27,7 @@ const board = (id, label, writeRole, dailyLimit, statuses, defaultStatus, note) 
 const BUILT_IN = Object.freeze({
     notice: board('notice', '공지사항', 'admin', 0, [], '', '서비스 공지와 업데이트 안내예요.'),
     news: board('news', '최근 소식', 'operator', 0, [], '', '리더남이 전하는 AI 소식'),
+    qna: board(QNA_BOARD, '질문하기', 'member', 5, [QNA_OPEN, QNA_SOLVED], QNA_OPEN, '막힌 건 편하게 물어보세요. 도움 된 답은 채택해 주세요.'),
     request: board('request', '요청사항', 'member', 5, ['검토 중', '반영됨'], '검토 중', '바라는 기능을 적어 주세요. 반영하면 상태가 바뀝니다.'),
     inquiry: board('inquiry', '버그 및 오류 신고', 'member', 5, ['대기', '답변 완료'], '대기', '앱이 안 되거나 오류가 나면 알려 주세요.'),
     free: board('free', '자유게시판', 'member', 5, [], '', '묻고 나누는 이야기를 편하게 적어 주세요.'),
@@ -66,9 +68,10 @@ export function normalizeSort(value) {
 const STATUS_TONES = Object.freeze({
     inquiry: { '대기': 'wait', '답변 완료': 'done' },
     request: { '검토 중': 'review', '반영됨': 'done' },
+    qna: { [QNA_OPEN]: 'wait', [QNA_SOLVED]: 'done' },
 });
 
-/** Badge for the boards that track a status (inquiry, request); null for the rest or an empty status. */
+/** Badge for the boards that track a status (inquiry, request, qna); null for the rest or an empty status. */
 export function statusBadge(boardId, status) {
     const label = String(status || '').trim();
     const tones = STATUS_TONES[boardId];

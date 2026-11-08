@@ -67,14 +67,16 @@ function regions(html) {
     return { bar: html.slice(0, sheetStart), sheet: html.slice(sheetStart), sheetTag: html.slice(sheetStart, html.indexOf('>', sheetStart) + 1) };
 }
 
-// The promo board is two sub-tabs (naver, google) in the menu: seven links for the six boards.
-const BOARD_LINKS = [...['notice', 'news', 'request', 'inquiry', 'free', 'promo'].map((id) => '/community?board=' + id), '/community?board=promo&amp;platform=google'];
+// The promo board is two sub-tabs (naver, google) in the menu: eight links for the seven boards.
+const BOARD_LINKS = [...['notice', 'news', 'qna', 'request', 'inquiry', 'free', 'promo'].map((id) => '/community?board=' + id), '/community?board=promo&amp;platform=google'];
+const QNA = '/community?board=qna';
 
-test('both the bar and the phone sheet link to every one of the nine pages (community: through its six boards)', () => {
+test('both the bar and the phone sheet link to every one of the nine pages (community: through its seven boards)', () => {
     const { bar, sheet } = regions(render('/'));
     for (const region of [bar, sheet]) {
         const boards = hrefs(region).filter((href) => href.startsWith('/community'));
-        assert.deepEqual(boards.slice(0, 7), BOARD_LINKS, 'six boards in board order, the promo board as naver then google');
+        assert.equal(boards[0], QNA, '질문하기 has its own place before the community boards');
+        assert.deepEqual(boards.slice(1, 9), BOARD_LINKS, 'seven boards in board order, the promo board as naver then google');
     }
     for (const page of NINE_PAGES.filter((entry) => entry !== '/community')) {
         assert.ok(hrefs(bar).includes(page), `bar links ${page}`);
@@ -107,6 +109,17 @@ test('current page: one aria-current in the bar, its dropdown group is marked, o
     assert.match(product, /is-active/);
     assert.doesNotMatch(buy, /is-active/);
     assert.doesNotMatch(community, /is-active/);
+});
+
+test('질문하기: the top-level link is current on the qna board (and on one of its posts), on no other community screen', () => {
+    const lit = (path) => withAttr(regions(render(path)).bar, 'aria-current', 'page').map((tag) => attr(tag, 'href'));
+    assert.ok(lit('/community?board=qna').includes(QNA));
+    assert.ok(lit('/community?board=qna&post=q_1').includes(QNA));
+    assert.ok(!lit('/community?board=free').includes(QNA));
+    assert.ok(!lit('/community').includes(QNA));
+    const link = tagsOf(regions(render('/')).bar, 'a').find((tag) => attr(tag, 'href') === QNA && /site-nav-link/.test(tag));
+    assert.ok(link, 'a plain bar link, not inside a dropdown');
+    assert.doesNotMatch(link, /site-nav-link-featured/, 'only LEWORD is highlighted');
 });
 
 test('current page: Home, .html variants, group-less pages and pages outside the menu', () => {
@@ -172,7 +185,7 @@ test('phone sheet order: login + free trial first, then headed groups, every row
     const titles = [...sheet.matchAll(/<p class="site-nav-sheet-group">([^<]*)<\/p>/g)].map((match) => match[1]);
     assert.deepEqual(titles, ['제품', '무료로 쓰기 · 구매', '함께하기', '커뮤니티']);
     const rows = tagsOf(sheet, 'a').filter((tag) => /site-nav-sheet-item/.test(tag)).map((tag) => attr(tag, 'href'));
-    assert.deepEqual(rows, ['/', '/leword', '/products', '/download', '/chatbots', '/pricing', '/lookup', '/reviews', ...BOARD_LINKS]);
+    assert.deepEqual(rows, ['/', '/leword', '/products', '/download', '/chatbots', '/pricing', '/lookup', '/reviews', QNA, ...BOARD_LINKS]);
     assert.equal(tagsOf(sheet, 'details').length, 0, 'no accordions');
 });
 

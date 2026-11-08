@@ -4,10 +4,11 @@ import {
     SORTS, boardLabel, communityPath, formatPostDate, pageNumbers,
     type BoardConfig, type SortKey,
 } from '../../lib/communityModel.mjs';
+import { QNA_BOARD, QNA_EMPTY_TEXT } from '../../lib/communityQna.mjs';
 import { pickRowThumb } from '../../lib/communityThumb.mjs';
 import { useAvatars } from '../../lib/useAvatars';
 import Avatar from './Avatar';
-import { GradeBadge, NoticeBadge, StatusBadge } from './Badges';
+import { GradeBadge, NoticeBadge, QnaChip, StatusBadge } from './Badges';
 import PostThumb from './PostThumb';
 import RowMenu from './RowMenu';
 
@@ -61,19 +62,21 @@ function LocalState({ post, onRetryLocal, onDiscardLocal }: Pick<RowProps, 'post
 
 function PostRow({ post, pinned, boardId, boards, sort, now, moderator, avatars, onVisit, onRetryLocal, onDiscardLocal, onReport, reportMode }: RowProps) {
     const thumb = post.delivery ? null : pickRowThumb(post);
+    const qna = post.board === QNA_BOARD;
     return (
         <li className={`cm-row${pinned ? ' is-pin' : ''}${post.delivery ? ` is-${post.delivery}` : ''}${thumb?.has ? ' has-thumb' : ''}`}>
             <span className="cm-row-board">
                 {pinned ? <span className="cm-pin">{boardLabel(post.board, boards)}</span> : boardLabel(post.board, boards)}
             </span>
-            <span className="cm-row-title">
+            <span className={`cm-row-title${qna ? ' is-qna' : ''}`}>
                 {post.notice ? <NoticeBadge kind={post.noticeBadge} /> : null}
                 {moderator && post.hidden ? <span className="lp-state lp-state-wait">숨김</span> : null}
                 {moderator && post.openReports > 0 ? <span className="lp-state lp-state-report">신고 {post.openReports}</span> : null}
+                <QnaChip post={post} />
                 {post.delivery
                     ? <span className="cm-title"><span className="t">{post.title}</span></span>
                     : <Link className="cm-title" to={communityPath({ board: boardId, sort, post: post.id })}><span className="t">{post.title}</span></Link>}
-                {post.comments > 0 ? <em className="cm-cmt">[{post.comments}]</em> : null}
+                {post.comments > 0 && !qna ? <em className="cm-cmt">[{post.comments}]</em> : null}
                 {post.hasImage ? <i className="cm-pic-mark" role="img" aria-label="사진 있음">사진</i> : null}
                 {post.delivery === 'failed' && post.failure ? <span className="cm-row-fail" role="alert">{post.failure}</span> : null}
             </span>
@@ -90,6 +93,8 @@ function PostRow({ post, pinned, boardId, boards, sort, now, moderator, avatars,
                     ? <LocalState post={post} onRetryLocal={onRetryLocal} onDiscardLocal={onDiscardLocal} />
                     : post.board === 'promo'
                     ? <button type="button" className="cm-visit" onClick={() => onVisit(post)}><b>{post.visits}</b>들르기</button>
+                    : qna
+                    ? <span className={`cm-qna-count${post.comments > 0 ? ' has-answers' : ''}`}>댓글 <b>{post.comments}</b></span>
                     : <StatusBadge board={post.board} status={post.status} />}
             </span>
             <span className="cm-row-more">
@@ -151,7 +156,7 @@ function PostList({ title, note, boardId, boards, pinned, posts, total, page, to
                     {onRetry ? <button type="button" className="lp-btn lp-btn-line lp-btn-sm" onClick={onRetry}>다시 불러오기</button> : null}
                 </div>
             ) : null}
-            {empty ? <p className="cm-empty">아직 올라온 글이 없어요. 첫 글을 남겨 보세요.</p> : null}
+            {empty ? <p className="cm-empty">{boardId === QNA_BOARD ? QNA_EMPTY_TEXT : '아직 올라온 글이 없어요. 첫 글을 남겨 보세요.'}</p> : null}
             <ul className="cm-rows" aria-busy={refreshing || undefined}>
                 {local.map((post) => <PostRow key={`local-${post.id}`} post={post} pinned={false} {...rowProps} onRetryLocal={onRetryLocal} onDiscardLocal={onDiscardLocal} />)}
                 {pinned.map((post) => <PostRow key={`pin-${post.id}`} post={post} pinned {...rowProps} />)}

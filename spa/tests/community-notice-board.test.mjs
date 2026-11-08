@@ -13,12 +13,12 @@ import { VIEW, feedReply, raw, countOf, withFeed } from './helpers/feed-fixtures
 
 const owner = { role: 'owner', canWriteNews: true };
 const member = { role: 'community', canWriteNews: false };
-const ORDER = ['notice', 'news', 'request', 'inquiry', 'free', 'promo'];
+const ORDER = ['notice', 'news', 'qna', 'request', 'inquiry', 'free', 'promo'];
 
-test('six boards in the agreed order: 공지사항, 최근 소식, 요청사항, 문의, 자유게시판, 내 글 홍보', () => {
+test('seven boards in the agreed order: 공지사항, 최근 소식, 질문하기, 요청사항, 문의, 자유게시판, 내 글 홍보', () => {
     assert.equal(NOTICE_BOARD, 'notice');
     assert.deepEqual(BOARD_ORDER, ORDER);
-    assert.deepEqual(boardList(null).map((board) => board.label), ['공지사항', '최근 소식', '요청사항', '버그 및 오류 신고', '자유게시판', '내 글 홍보']);
+    assert.deepEqual(boardList(null).map((board) => board.label), ['공지사항', '최근 소식', '질문하기', '요청사항', '버그 및 오류 신고', '자유게시판', '내 글 홍보']);
     assert.equal(boardLabel('notice'), '공지사항');
     assert.equal(boardList(null).find((board) => board.id === 'news').note, '리더남이 전하는 AI 소식');
 });
@@ -43,8 +43,8 @@ test('nobody writes on 공지사항, not even the owner; 최근 소식 stays own
     assert.equal(canWriteBoard({ ...byId.notice, writeRole: 'member' }, member), false, 'a server that says "member" cannot open it');
     assert.equal(canWriteBoard(byId.news, owner), true);
     assert.equal(canWriteBoard(byId.news, member), false);
-    assert.deepEqual(writableBoards(boards, owner).map((board) => board.id), ['news', 'request', 'inquiry', 'free', 'promo']);
-    assert.deepEqual(writableBoards(boards, member).map((board) => board.id), ['request', 'inquiry', 'free', 'promo']);
+    assert.deepEqual(writableBoards(boards, owner).map((board) => board.id), ['news', 'qna', 'request', 'inquiry', 'free', 'promo']);
+    assert.deepEqual(writableBoards(boards, member).map((board) => board.id), ['qna', 'request', 'inquiry', 'free', 'promo']);
 });
 
 test('the server says notice is writeRole "admin": the board keeps it, nobody can write, and the 글쓰기 button is hidden there', () => {
@@ -56,7 +56,7 @@ test('the server says notice is writeRole "admin": the board keeps it, nobody ca
     assert.equal(canWriteBoard(byId.notice, { role: 'owner', canWriteNews: true, isOperator: true }), false);
     assert.equal(showWriteButton('notice', fromServer), false);
     assert.equal(showWriteButton('notice', boardList(null)), false);
-    for (const id of ['all', 'news', 'request', 'inquiry', 'free', 'promo']) assert.equal(showWriteButton(id, fromServer), true, id);
+    for (const id of ['all', 'news', 'qna', 'request', 'inquiry', 'free', 'promo']) assert.equal(showWriteButton(id, fromServer), true, id);
     assert.equal(showWriteButton('news', boardList({ boards: [{ id: 'news', writeRole: 'admin' }] })), false, 'any board a server closes to admins loses the button');
 });
 
@@ -206,7 +206,7 @@ test('VERY OLD server (no community-feed): 공지사항 and 최근 소식 are sp
     await withFeed(server, async ({ browser, feed }) => {
         const all = await feed.loadCommunityFeed(VIEW);
         assert.equal(all.source, 'legacy');
-        assert.deepEqual([...new Set(browser.calls.filter((call) => call.action === 'community-posts').map((call) => call.board))].sort(), ['free', 'inquiry', 'news', 'promo', 'request']);
+        assert.deepEqual([...new Set(browser.calls.filter((call) => call.action === 'community-posts').map((call) => call.board))].sort(), ['free', 'inquiry', 'news', 'promo', 'qna', 'request']);
         assert.equal(all.bundle.counts.news, undefined);
         const notices = await feed.loadCommunityFeed({ ...VIEW, board: 'notice' });
         assert.deepEqual(ids(notices.bundle.posts), ['nt_3', 'nt_2', 'nt_1']);

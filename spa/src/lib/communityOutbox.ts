@@ -78,7 +78,7 @@ function pendingComment(input: { postId: string; body: string; parentId?: string
         id: pendingId(input.requestId), postId: input.postId, parentId: input.parentId ?? '',
         nickname: input.author.nickname, avatarKey: input.author.avatarKey ?? '', grade: input.author.grade, isOperator: input.author.isOperator,
         body: input.body, createdAt: new Date().toISOString(), likes: 0, liked: false, mine: true,
-        gone: false, hidden: false, hiddenBody: '', replies: [], delivery: 'sending',
+        gone: false, hidden: false, hiddenBody: '', accepted: false, replies: [], delivery: 'sending',
     };
 }
 

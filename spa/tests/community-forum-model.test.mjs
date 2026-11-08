@@ -58,9 +58,9 @@ test('platformLabel knows google', () => {
 test('an associate may write on 자유게시판 only; members and the owner write wherever the board allows', () => {
     const byId = (id) => boards.find((board) => board.id === id);
     assert.equal(canWriteBoard(byId('free'), associate()), true);
-    for (const id of ['request', 'inquiry', 'promo', 'news']) assert.equal(canWriteBoard(byId(id), associate()), false, id);
+    for (const id of ['request', 'inquiry', 'promo', 'news', 'qna']) assert.equal(canWriteBoard(byId(id), associate()), false, id);
     assert.deepEqual(writableBoards(boards, associate()).map((board) => board.id), ['free']);
-    assert.deepEqual(writableBoards(boards, member).map((board) => board.id), ['request', 'inquiry', 'free', 'promo']);
+    assert.deepEqual(writableBoards(boards, member).map((board) => board.id), ['qna', 'request', 'inquiry', 'free', 'promo']);
     assert.equal(canWriteBoard(byId('promo'), { role: 'owner', level: 'associate', canWriteNews: true }), true, 'the owner is never an associate');
     assert.equal(canWriteBoard(byId('promo'), { role: 'community' }), true, 'no level at all = a grandfathered member');
 });

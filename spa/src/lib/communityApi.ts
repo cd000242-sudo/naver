@@ -120,6 +120,8 @@ export const boardApi = {
         postId, body, ...(parentId ? { parentId } : {}), requestId,
     }),
     deleteComment: (id: string) => callWithToken('community-comment-delete', { id }),
+    /** 질문하기: the asker takes `commentId` as the answer; '' takes the accepted answer back (contract 1116). */
+    acceptAnswer: (postId: string, commentId: string) => callWithToken(COMMUNITY_ACTIONS.acceptAnswer, { postId, commentId }),
     like: (targetType: 'post' | 'comment', targetId: string) => callWithToken('community-like', { targetType, targetId }),
     report: (input: ReportInput) => callWithToken('community-report', { ...input }),
     /**

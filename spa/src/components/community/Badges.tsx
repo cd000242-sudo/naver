@@ -1,6 +1,7 @@
 import type { AuthorGrade } from '../../lib/communityData';
 import { noticeBadgeLabel } from '../../lib/accountModel.mjs';
 import { statusBadge } from '../../lib/communityModel.mjs';
+import { qnaState } from '../../lib/communityQna.mjs';
 
 const GRADE_KEYS = new Set(['associate', 'sprout', 'leaf', 'fruit', 'tree', 'forest']);
 
@@ -25,6 +26,12 @@ export function StatusBadge({ board, status }: { board: string; status: string }
     const badge = statusBadge(board, status);
     if (!badge) return null;
     return <span className={`lp-state lp-state-${badge.tone}`}>{badge.label}</span>;
+}
+
+/** 질문하기: the state of a question — amber while it waits for an answer, green once an answer is accepted. Nothing on other boards. */
+export function QnaChip({ post }: { post: { board: string; status: string; solved: boolean; acceptedCommentId: string } }) {
+    const state = qnaState(post);
+    return state ? <span className={`lp-state lp-state-${state.tone} cm-qna-chip`}>{state.label}</span> : null;
 }
 
 /** Posts that came from the home-operations notice list. */

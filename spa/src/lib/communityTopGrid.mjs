@@ -11,7 +11,7 @@ const CARD_COUNT = 5;
 /** Widths up to this are the phone grid (the same break as the community page). */
 const PHONE_MAX_WIDTH = 720;
 
-const TONES = Object.freeze(['notice', 'news', 'request', 'inquiry', 'free', 'promo']);
+const TONES = Object.freeze(['notice', 'news', 'qna', 'request', 'inquiry', 'free', 'promo']);
 
 /** The posts in rank order: the server's `rank` first (position when it sent none), no post twice, ten at most, ranks 1..n. */
 export function orderTop(items) {

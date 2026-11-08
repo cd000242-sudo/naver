@@ -11,10 +11,10 @@ import {
 const member = { role: 'community', canWriteNews: false };
 const owner = { role: 'owner', canWriteNews: true };
 
-test('there are exactly six boards, in the agreed order, with their Korean names', () => {
-    assert.deepEqual(BOARD_ORDER, ['notice', 'news', 'request', 'inquiry', 'free', 'promo']);
+test('there are exactly seven boards, in the agreed order, with their Korean names', () => {
+    assert.deepEqual(BOARD_ORDER, ['notice', 'news', 'qna', 'request', 'inquiry', 'free', 'promo']);
     const boards = boardList(null);
-    assert.deepEqual(boards.map((board) => board.label), ['공지사항', '최근 소식', '요청사항', '버그 및 오류 신고', '자유게시판', '내 글 홍보']);
+    assert.deepEqual(boards.map((board) => board.label), ['공지사항', '최근 소식', '질문하기', '요청사항', '버그 및 오류 신고', '자유게시판', '내 글 홍보']);
 });
 
 test('server board settings win over the built-in ones but never add, reorder or rename boards (the screen names win)', () => {
@@ -63,10 +63,10 @@ test('only the operator may write on the news board; everyone logged in may writ
     assert.equal(canWriteBoard(byId.news, member), false);
     assert.equal(canWriteBoard(byId.news, owner), true);
     assert.equal(canWriteBoard(byId.news, { role: 'licensed', canWriteNews: false }), false);
-    for (const id of ['request', 'inquiry', 'free', 'promo']) assert.equal(canWriteBoard(byId[id], member), true, id);
+    for (const id of ['qna', 'request', 'inquiry', 'free', 'promo']) assert.equal(canWriteBoard(byId[id], member), true, id);
     assert.equal(canWriteBoard(byId.free, null), false, 'no login, no writing');
-    assert.deepEqual(writableBoards(boards, member).map((board) => board.id), ['request', 'inquiry', 'free', 'promo']);
-    assert.deepEqual(writableBoards(boards, owner).map((board) => board.id), ['news', 'request', 'inquiry', 'free', 'promo'], 'the notice board is written in the admin home, not here');
+    assert.deepEqual(writableBoards(boards, member).map((board) => board.id), ['qna', 'request', 'inquiry', 'free', 'promo']);
+    assert.deepEqual(writableBoards(boards, owner).map((board) => board.id), ['news', 'qna', 'request', 'inquiry', 'free', 'promo'], 'the notice board is written in the admin home, not here');
 });
 
 test('grade guide lists the five grades (with 숲) with their ranges and the score rules', () => {

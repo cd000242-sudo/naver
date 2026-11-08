@@ -147,7 +147,7 @@
 .site-nav-sheet-item [role="status"] { margin-left: auto !important; }
 .site-nav-sheet-item[aria-current="page"] { background: var(--sn-brand-soft); box-shadow: inset 4px 0 0 var(--sn-brand); border-bottom-color: transparent; }
 
-/* Below 1180px the seven bar items cannot fit: the bar keeps brand + free trial + [menu]. */
+/* Below 1180px the eight bar items cannot fit: the bar keeps brand + free trial + [menu]. */
 @media (max-width: 1180px) {
     .site-nav-menu { display: none; }
     .site-nav-burger { display: inline-flex; }
@@ -155,20 +155,22 @@
     .site-nav-actions { margin-left: auto; }
     .site-nav.is-menu-open .site-nav-actions > .site-nav-btn-cta { display: none; }
 }
-/* Just above the breakpoint the full bar is a tight fit (a logged-in id makes the buttons wider): trim it. */
-@media (min-width: 1181px) and (max-width: 1320px) {
+/* The bar is a tight fit (eight items since 질문하기 got its own place, a logged-in id widens the buttons, the notice
+   badge widens 커뮤니티): from the breakpoint up the items are trimmed and the free-trial button takes its short label,
+   so the items and the buttons never touch. The bar itself stops growing at 1280px, so this holds for every wider window. */
+@media (min-width: 1181px) {
     .site-nav-bar { gap: 14px; }
-    .site-nav-link { padding: 0 11px; font-size: 17px; }
-    .site-nav-link[aria-current="page"]::after, .site-nav-link.is-active::after { left: 10px; right: 10px; }
-    .site-nav-account-id { max-width: 90px; }
-}
-/* Community became a dropdown (a chevron wider) and a logged-in id widens the buttons: from 1181px up to 1250px the
-   free-trial button takes its short label so the seven items and the buttons never touch. */
-@media (min-width: 1181px) and (max-width: 1250px) {
+    .site-nav-list { gap: 2px; }
+    .site-nav-link { padding: 0 9px; font-size: 17px; }
+    .site-nav-link[aria-current="page"]::after, .site-nav-link.is-active::after { left: 8px; right: 8px; }
     .site-nav-cta-long { display: none; }
     .site-nav-cta-short { display: inline; }
     .site-nav-actions .site-nav-btn-cta { padding: 0 16px; }
     .site-nav-account-id { max-width: 72px; }
+}
+/* Just above the breakpoint even that is not enough: the brand keeps its logo and gives up the words. */
+@media (min-width: 1181px) and (max-width: 1279px) {
+    .site-nav-brand-text { display: none; }
 }
 /* A list left open while the window is widened must not linger over the page. */
 @media (min-width: 1181px) {

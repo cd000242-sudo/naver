@@ -18,6 +18,8 @@ type Props = {
     renderReplyForm: (parent: CommentItem) => ReactNode;
     /** Moderator buttons for one comment; set only for an owner, so a member's page has none of it. */
     renderAdmin?: (comment: CommentItem) => ReactNode;
+    /** 질문하기: the accept / take-back button of one top-level comment; set only for the asker. */
+    renderAccept?: (comment: CommentItem) => ReactNode;
     /** Photos by avatar key, as far as they are known; a comment without one gets its first letter. */
     avatars?: Record<string, string>;
     now?: number;
@@ -25,9 +27,9 @@ type Props = {
 
 type RowProps = Omit<Props, 'comments'> & { comment: CommentItem; reply: boolean; now: number };
 
-function CommentRow({ comment, reply, replyingTo, onReply, onLike, onDelete, onReport, onRetry, onDiscard, renderReplyForm, renderAdmin, avatars = {}, now }: RowProps) {
+function CommentRow({ comment, reply, replyingTo, onReply, onLike, onDelete, onReport, onRetry, onDiscard, renderReplyForm, renderAdmin, renderAccept, avatars = {}, now }: RowProps) {
     return (
-        <li className={`cm-comment${reply ? ' is-reply' : ''}${comment.delivery ? ` is-${comment.delivery}` : ''}`}>
+        <li className={`cm-comment${reply ? ' is-reply' : ''}${comment.delivery ? ` is-${comment.delivery}` : ''}${comment.accepted ? ' is-accepted' : ''}`}>
             {comment.delivery ? (
                 <>
                     <div className="cm-c-head">
@@ -53,6 +55,7 @@ function CommentRow({ comment, reply, replyingTo, onReply, onLike, onDelete, onR
                 ) : <p className="cm-gone">삭제된 댓글입니다</p>
             ) : (
                 <>
+                    {comment.accepted ? <span className="lp-state lp-state-done cm-accepted-badge">채택된 답변</span> : null}
                     <div className="cm-c-head">
                         <Avatar name={comment.nickname} src={avatars[comment.avatarKey]} size={28} />
                         <GradeBadge grade={comment.grade} isOperator={comment.isOperator} />
@@ -65,6 +68,7 @@ function CommentRow({ comment, reply, replyingTo, onReply, onLike, onDelete, onR
                             ? <span className="cm-like cm-like-static"><b>{comment.likes}</b> 좋아요</span>
                             : <button type="button" className="cm-like" aria-pressed={comment.liked} onClick={() => onLike(comment)}><b>{comment.likes}</b> 좋아요</button>}
                         {reply ? null : <button type="button" className="cm-act" onClick={() => onReply(comment.id)}>답글</button>}
+                        {reply || !renderAccept ? null : renderAccept(comment)}
                         {comment.mine
                             ? <button type="button" className="cm-act" onClick={() => onDelete(comment)}>삭제</button>
                             : <button type="button" className="cm-act" onClick={() => onReport(comment)}>신고</button>}
