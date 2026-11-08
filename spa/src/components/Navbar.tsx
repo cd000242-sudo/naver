@@ -23,7 +23,7 @@ function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const rootRef = useRef<HTMLElement>(null);
     const burgerRef = useRef<HTMLButtonElement>(null);
-    const { pathname } = useLocation();
+    const { pathname, search } = useLocation();
     const unseenNotices = useUnseenNoticeCount();
     const account = useNavAccount(pathname);
 
@@ -87,7 +87,7 @@ function Navbar() {
                         {NAV_ITEMS.map((item) => (
                             <li key={item.key}>
                                 {item.type === 'group' ? (
-                                    <NavDropdown item={item} pathname={pathname} open={state.dropdown === item.key} dispatch={dispatch} />
+                                    <NavDropdown item={item} pathname={pathname} search={search} unseenNotices={unseenNotices} open={state.dropdown === item.key} dispatch={dispatch} />
                                 ) : (
                                     <NavBarLink item={item} pathname={pathname} unseenNotices={unseenNotices} onNavigate={closeAll} />
                                 )}
@@ -117,7 +117,7 @@ function Navbar() {
                 </div>
             </div>
 
-            <NavMobileMenu open={state.mobileOpen} pathname={pathname} unseenNotices={unseenNotices} account={account} onClose={closeAll} />
+            <NavMobileMenu open={state.mobileOpen} pathname={pathname} search={search} unseenNotices={unseenNotices} account={account} onClose={closeAll} />
         </header>
     );
 }

@@ -4,6 +4,7 @@ import { signOutAll } from '../lib/communityAuth';
 import { daysLeft, type LewordSession } from '../lib/lewordAuth';
 import { resolveLoginAction, type MenuAction } from '../lib/navMenu.mjs';
 import { useSiteSession, type SiteSession } from '../lib/useSiteSession';
+import MenuIcon from './MenuIcon';
 import { NavDropdownShell } from './NavDropdown';
 
 /** Who the menu shows: the id and one short line under it. */
@@ -85,25 +86,25 @@ export function NavAccountBar({ account, open, dispatch }: BarProps) {
         >
             {who.community ? (
                 <Link className="site-nav-drop-item" to="/community" onClick={() => dispatch({ type: 'close-all' })}>
-                    <span className="site-nav-drop-icon" aria-hidden="true">C</span>
+                    <MenuIcon name="community" />
                     <span><b>커뮤니티 가기</b></span>
                 </Link>
             ) : null}
             {who.community ? (
                 <Link className="site-nav-drop-item" to="/me" onClick={() => dispatch({ type: 'close-all' })}>
-                    <span className="site-nav-drop-icon" aria-hidden="true">나</span>
+                    <MenuIcon name="profile" />
                     <span><b>내 정보</b></span>
                 </Link>
             ) : null}
             <Link className="site-nav-drop-item" to="/leword" onClick={() => dispatch({ type: 'close-all' })}>
-                <span className="site-nav-drop-icon" aria-hidden="true">L</span>
+                <MenuIcon name="leword" />
                 <span>
                     <b>LEWORD 열기</b>
                     <small>{who.line}</small>
                 </span>
             </Link>
             <button type="button" className="site-nav-drop-item" onClick={() => { dispatch({ type: 'close-all' }); account.logout(); }}>
-                <span className="site-nav-drop-icon" aria-hidden="true">↩</span>
+                <MenuIcon name="logout" />
                 <span><b>로그아웃</b></span>
             </button>
         </NavDropdownShell>

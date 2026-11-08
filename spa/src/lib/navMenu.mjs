@@ -1,10 +1,12 @@
+import { boardList, communityPath } from './communityModel.mjs';
 import { LOGIN_PATH, SIGNUP_PATH, loginPath } from './siteAuthModel.mjs';
 
 /**
  * Top menu model: destinations, "which item is current" rules, the dropdown / phone-menu state machine
  * and the login-button routing. Pure data and functions so node:test can pin them without a browser.
  *
- * Design 1 (light bar), agreed 2026-11-07: Home · Product ▾ · Free chatbot · Price/Buy ▾ · Reviews · Community.
+ * Design 1 (light bar), agreed 2026-11-07: Home · Product ▾ · Free chatbot · Price/Buy ▾ · Reviews · Community ▾
+ * (the community opens straight onto one of its six boards, 2026-11-08).
  */
 
 /** Below this width the bar turns into the [menu] button and the full-height list. */
@@ -22,26 +24,41 @@ export const LOGIN_EVENT = 'leword:login';
 const link = (key, label, to, extra = {}) => Object.freeze({ type: 'link', key, label, to, ...extra });
 const entry = (key, label, to, icon, desc, short) => Object.freeze({ key, label, to, icon, desc, short });
 
-/** Desktop bar. Groups open a dropdown; the notice badge rides on Community. */
+/** One line under each board name in the community dropdown (the boards have no icon of their own). */
+const BOARD_DESC = Object.freeze({
+    notice: '서비스 공지·업데이트',
+    news: '리더남이 전하는 AI 소식',
+    request: '바라는 기능 남기기',
+    inquiry: '궁금한 점 묻기',
+    free: '묻고 나누는 이야기',
+    promo: '내 글 알리고 점수 받기',
+});
+
+/** The community boards as menu entries, in the screen's own board order; each opens `/community?board=<id>`. */
+const COMMUNITY_ENTRIES = Object.freeze(boardList(null).map((board) => entry(
+    `community-${board.id}`, board.label, communityPath({ board: board.id }), undefined, BOARD_DESC[board.id], undefined,
+)));
+
+/** Desktop bar. Groups open a dropdown; the notice badge rides on the Community group. */
 export const NAV_ITEMS = Object.freeze([
     link('home', '홈', '/'),
     // [2026-11-07] LEWORD is the most important site — its own highlighted item, not hidden in a dropdown.
     link('leword', 'LEWORD', '/leword', { featured: true }),
     Object.freeze({
         type: 'group', key: 'product', label: '제품', items: Object.freeze([
-            entry('products', '제품 소개', '/products', '3', '세 제품 비교와 요금 한눈에', '비교·요금'),
-            entry('download', '다운로드', '/download', '↓', 'PC 프로그램 받기', 'PC 프로그램'),
+            entry('products', '제품 소개', '/products', 'products', '세 제품 비교와 요금 한눈에', '비교·요금'),
+            entry('download', '다운로드', '/download', 'download', 'PC 프로그램 받기', 'PC 프로그램'),
         ]),
     }),
     link('chatbots', '무료 챗봇', '/chatbots'),
     Object.freeze({
         type: 'group', key: 'buy', label: '가격·구매', items: Object.freeze([
-            entry('pricing', '무료체험·구매', '/pricing', '₩', '요금 보고 바로 시작'),
-            entry('lookup', '주문 조회', '/lookup', '?', '결제 내역·코드 다시 보기'),
+            entry('pricing', '무료체험·구매', '/pricing', 'trial-purchase', '요금 보고 바로 시작'),
+            entry('lookup', '주문 조회', '/lookup', 'order-search', '결제 내역·코드 다시 보기'),
         ]),
     }),
     link('reviews', '수익 후기', '/reviews'),
-    link('community', '커뮤니티', '/community', { badge: true }),
+    Object.freeze({ type: 'group', key: 'community', label: '커뮤니티', badge: true, items: COMMUNITY_ENTRIES }),
 ]);
 
 const row = (key, label, to, small, extra = {}) => Object.freeze({ key, label, to, small, ...extra });
@@ -50,26 +67,26 @@ const row = (key, label, to, small, extra = {}) => Object.freeze({ key, label, t
 export const NAV_MOBILE_SECTIONS = Object.freeze([
     Object.freeze({ title: null, items: Object.freeze([
         row('home', '홈', '/'),
-        row('leword', 'LEWORD', '/leword', '키워드 찾기', { featured: true }),
+        row('leword', 'LEWORD', '/leword', '키워드 찾기', { featured: true, icon: 'leword' }),
     ]) }),
     Object.freeze({
         title: '제품', items: Object.freeze([
-            row('products', '제품 소개', '/products', '비교·요금'),
-            row('download', '다운로드', '/download', 'PC 프로그램'),
+            row('products', '제품 소개', '/products', '비교·요금', { icon: 'products' }),
+            row('download', '다운로드', '/download', 'PC 프로그램', { icon: 'download' }),
         ]),
     }),
     Object.freeze({
         title: '무료로 쓰기 · 구매', items: Object.freeze([
             row('chatbots', '무료 챗봇', '/chatbots'),
-            row('pricing', '무료체험·구매', '/pricing'),
-            row('lookup', '주문 조회', '/lookup'),
+            row('pricing', '무료체험·구매', '/pricing', undefined, { icon: 'trial-purchase' }),
+            row('lookup', '주문 조회', '/lookup', undefined, { icon: 'order-search' }),
         ]),
     }),
+    Object.freeze({ title: '함께하기', items: Object.freeze([row('reviews', '수익 후기', '/reviews')]) }),
+    // The six boards sit under the community heading; the new-notice badge rides on the heading.
     Object.freeze({
-        title: '함께하기', items: Object.freeze([
-            row('reviews', '수익 후기', '/reviews'),
-            row('community', '커뮤니티', '/community', undefined, { badge: true }),
-        ]),
+        title: '커뮤니티', badge: true,
+        items: Object.freeze(COMMUNITY_ENTRIES.map((child) => row(child.key, child.label, child.to, undefined))),
     }),
 ]);
 
@@ -78,6 +95,13 @@ export function navDestinations() {
     return NAV_ITEMS.flatMap((item) => (item.type === 'group' ? item.items.map((child) => child.to) : [item.to]));
 }
 
+/** Page part and query part of a menu target (`/community?board=free`). */
+const splitTarget = (to) => {
+    const text = String(to || '');
+    const at = text.indexOf('?');
+    return at < 0 ? { path: text, query: '' } : { path: text.slice(0, at), query: text.slice(at + 1) };
+};
+
 /** `/pricing.html`, `/pricing/` and `/index.html` are the same pages as `/pricing` and `/`. */
 export function normalizeNavPath(pathname) {
     const path = String(pathname || '');
@@ -85,14 +109,21 @@ export function normalizeNavPath(pathname) {
     return path.replace(/\.html$/, '').replace(/\/$/, '') || '/';
 }
 
-/** Exact page match only — `/leword-detail` is not LEWORD, and Home never lights up on other pages. */
-export function isNavPathActive(to, pathname) {
-    return normalizeNavPath(pathname) === normalizeNavPath(to);
+/**
+ * Exact page match only — `/leword-detail` is not LEWORD, and Home never lights up on other pages.
+ * A target with a query (`/community?board=free`) is current only when the address carries the same values.
+ */
+export function isNavPathActive(to, pathname, search = '') {
+    const target = splitTarget(to);
+    if (normalizeNavPath(pathname) !== normalizeNavPath(target.path)) return false;
+    const wanted = new URLSearchParams(target.query);
+    const actual = new URLSearchParams(String(search || ''));
+    return [...wanted].every(([key, value]) => actual.get(key) === value);
 }
 
-/** A dropdown group is "current" when one of the pages inside it is. */
+/** A dropdown group is "current" when one of the pages inside it is (any board of the community counts). */
 export function isNavGroupActive(item, pathname) {
-    return item.type === 'group' && item.items.some((child) => isNavPathActive(child.to, pathname));
+    return item.type === 'group' && item.items.some((child) => normalizeNavPath(pathname) === normalizeNavPath(splitTarget(child.to).path));
 }
 
 export const INITIAL_MENU_STATE = Object.freeze({ dropdown: null, pinned: false, mobileOpen: false });

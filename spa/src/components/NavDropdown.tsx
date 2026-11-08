@@ -1,6 +1,8 @@
 import { useRef, type Dispatch, type KeyboardEvent, type FocusEvent, type PointerEvent, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { isNavPathActive, isNavGroupActive, type MenuAction, type NavGroupItem } from '../lib/navMenu.mjs';
+import MenuIcon from './MenuIcon';
+import NewBadge from './NewBadge';
 
 function Chevron() {
     return (
@@ -71,19 +73,21 @@ export function NavDropdownShell({ dropKey, open, dispatch, className, triggerCl
     );
 }
 
-/** A "Product ▾" / "Price·Buy ▾" group of the desktop bar. */
-function NavDropdown({ item, pathname, open, dispatch }: { item: NavGroupItem; pathname: string; open: boolean; dispatch: Dispatch<MenuAction> }) {
+type GroupProps = { item: NavGroupItem; pathname: string; search: string; unseenNotices: number; open: boolean; dispatch: Dispatch<MenuAction> };
+
+/** A "Product ▾" / "Price·Buy ▾" / "Community ▾" group of the desktop bar. */
+function NavDropdown({ item, pathname, search, unseenNotices, open, dispatch }: GroupProps) {
     return (
         <NavDropdownShell
             dropKey={item.key}
             open={open}
             dispatch={dispatch}
             triggerClassName="site-nav-link site-nav-trigger"
-            triggerContent={item.label}
+            triggerContent={<>{item.label}{item.badge ? <NewBadge count={unseenNotices} size="md" /> : null}</>}
             active={isNavGroupActive(item, pathname)}
         >
             {item.items.map((child) => {
-                const current = isNavPathActive(child.to, pathname);
+                const current = isNavPathActive(child.to, pathname, search);
                 return (
                     <Link
                         key={child.key}
@@ -92,7 +96,7 @@ function NavDropdown({ item, pathname, open, dispatch }: { item: NavGroupItem; p
                         aria-current={current ? 'page' : undefined}
                         onClick={() => dispatch({ type: 'close-all' })}
                     >
-                        <span className="site-nav-drop-icon" aria-hidden="true">{child.icon}</span>
+                        <MenuIcon name={child.icon} />
                         <span>
                             <b>{child.label}</b>
                             <small>{child.desc}</small>

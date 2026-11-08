@@ -19,6 +19,7 @@ function load(path, hooks, env) {
     new Function('require', 'module', 'exports', code)((id) => {
         if (id === 'react' && hooks) return hooks;
         if (id.endsWith('.css')) return {};
+        if (id.endsWith('.svg')) return { default: id };
         if (id.endsWith('lib/siteOps')) return { GAS_URL: 'https://gas.invalid/exec' };
         if (id.endsWith('lib/useNoticeAlerts')) return { useUnseenNoticeCount: () => env.unseen };
         if (id.startsWith('.')) {
@@ -66,9 +67,15 @@ function regions(html) {
     return { bar: html.slice(0, sheetStart), sheet: html.slice(sheetStart), sheetTag: html.slice(sheetStart, html.indexOf('>', sheetStart) + 1) };
 }
 
-test('both the bar and the phone sheet link to every one of the nine pages', () => {
+const BOARD_LINKS = ['notice', 'news', 'request', 'inquiry', 'free', 'promo'].map((id) => '/community?board=' + id);
+
+test('both the bar and the phone sheet link to every one of the nine pages (community: through its six boards)', () => {
     const { bar, sheet } = regions(render('/'));
-    for (const page of NINE_PAGES) {
+    for (const region of [bar, sheet]) {
+        const boards = hrefs(region).filter((href) => href.startsWith('/community'));
+        assert.deepEqual(boards.slice(0, 6), BOARD_LINKS, 'six boards in board order');
+    }
+    for (const page of NINE_PAGES.filter((entry) => entry !== '/community')) {
         assert.ok(hrefs(bar).includes(page), `bar links ${page}`);
         assert.ok(hrefs(sheet).includes(page), `sheet links ${page}`);
     }
@@ -94,10 +101,11 @@ test('current page: one aria-current in the bar, its dropdown group is marked, o
     assert.equal(attr(current[0], 'href'), '/products');
     assert.equal(withAttr(sheet, 'aria-current', 'page').length, 1, 'sheet marks the same page once');
     const triggers = tagsOf(bar, 'button').filter((tag) => /site-nav-trigger/.test(tag));
-    assert.equal(triggers.length, 2);
-    const [product, buy] = triggers;
+    assert.equal(triggers.length, 3);
+    const [product, buy, community] = triggers;
     assert.match(product, /is-active/);
     assert.doesNotMatch(buy, /is-active/);
+    assert.doesNotMatch(community, /is-active/);
 });
 
 test('current page: Home, .html variants, group-less pages and pages outside the menu', () => {
@@ -116,7 +124,7 @@ test('current page: Home, .html variants, group-less pages and pages outside the
 test('dropdowns start closed: aria-expanded=false, panels hidden, every aria-controls points at a real panel', () => {
     const html = render('/');
     const triggers = tagsOf(html, 'button').filter((tag) => /site-nav-trigger/.test(tag));
-    assert.equal(triggers.length, 2);
+    assert.equal(triggers.length, 3);
     for (const trigger of triggers) {
         assert.equal(attr(trigger, 'aria-expanded'), 'false');
         const panel = withAttr(html, 'id', attr(trigger, 'aria-controls'));
@@ -161,18 +169,20 @@ test('phone sheet order: login + free trial first, then headed groups, every row
     const firstItem = sheet.indexOf('site-nav-sheet-item');
     assert.ok(login > 0 && cta > login && firstItem > cta, 'login, free trial, then the list');
     const titles = [...sheet.matchAll(/<p class="site-nav-sheet-group">([^<]*)<\/p>/g)].map((match) => match[1]);
-    assert.deepEqual(titles, ['제품', '무료로 쓰기 · 구매', '함께하기']);
+    assert.deepEqual(titles, ['제품', '무료로 쓰기 · 구매', '함께하기', '커뮤니티']);
     const rows = tagsOf(sheet, 'a').filter((tag) => /site-nav-sheet-item/.test(tag)).map((tag) => attr(tag, 'href'));
-    assert.deepEqual(rows, ['/', '/leword', '/products', '/download', '/chatbots', '/pricing', '/lookup', '/reviews', '/community']);
+    assert.deepEqual(rows, ['/', '/leword', '/products', '/download', '/chatbots', '/pricing', '/lookup', '/reviews', ...BOARD_LINKS]);
     assert.equal(tagsOf(sheet, 'details').length, 0, 'no accordions');
 });
 
-test('new-notice badge sits on Community (bar and sheet), not on Home', () => {
+test('new-notice badge sits on the Community group (bar button, sheet heading), not on Home', () => {
     const html = render('/', { unseen: 2 });
     const { bar, sheet } = regions(html);
+    const onBar = bar.slice(bar.indexOf('aria-controls="site-nav-drop-community"'));
+    assert.match(onBar.slice(0, 900), /role="status"[^>]*aria-label="새 소식 2건"/);
+    const onSheet = sheet.slice(sheet.indexOf('site-nav-sheet-group">커뮤니티'));
+    assert.match(onSheet.slice(0, 700), /role="status"[^>]*aria-label="새 소식 2건"/);
     for (const region of [bar, sheet]) {
-        const community = region.slice(region.indexOf('href="/community"'));
-        assert.match(community.slice(0, 700), /role="status"[^>]*aria-label="새 소식 2건"/);
         const home = region.slice(region.indexOf('href="/"'), region.indexOf('href="/leword"'));
         assert.doesNotMatch(home, /role="status"/);
     }
@@ -231,4 +241,39 @@ test('no inline blur or other containing-block style is rendered anywhere in the
     const html = render('/', { forced: { mobileOpen: true } });
     assert.doesNotMatch(html, /backdrop-?filter|filter:|transform:|will-change/i);
     assert.doesNotMatch(tagsOf(html, 'header')[0], /\sstyle=/, 'the fixed bar root carries no inline style');
+});
+
+// [2026-11-08 사장님] 메뉴 아이콘 8종 — 글자 아이콘('3', '↓', '₩', '?', 'C', '나', 'L', '↩')을 대체. 글자가 옆에 있으니 alt="" + aria-hidden.
+test('menu icons: dropdown rows draw the golden square with the icon image, hidden from screen readers, no letter icons left', () => {
+    const { bar, sheet } = regions(render('/'));
+    const imgs = (html) => tagsOf(html, 'img').filter((tag) => /menu-icons\//.test(attr(tag, 'src') || ''));
+    const names = (html) => imgs(html).map((tag) => attr(tag, 'src').split('/').pop());
+    assert.deepEqual(names(bar), ['products.svg', 'download.svg', 'trial-purchase.svg', 'order-search.svg']);
+    for (const tag of imgs(bar)) assert.equal(attr(tag, 'alt'), '', 'alt is empty: the words sit next to it');
+    assert.equal((bar.match(/site-nav-icon" aria-hidden="true"/g) || []).length, 4, 'the square is aria-hidden too');
+    assert.doesNotMatch(bar, /site-nav-drop-icon/);
+    assert.deepEqual(names(sheet), ['leword.svg', 'products.svg', 'download.svg', 'trial-purchase.svg', 'order-search.svg']);
+    assert.equal((sheet.match(/site-nav-icon site-nav-icon-sm/g) || []).length, 5, 'small squares on the phone rows');
+    // The six community boards carry no icon: the community panel has no image.
+    const panel = bar.slice(bar.indexOf('id="site-nav-drop-community"'));
+    assert.doesNotMatch(panel.slice(0, panel.indexOf('</div>')), /<img/);
+    for (const kept of ['제품 소개', '세 제품 비교와 요금 한눈에', '무료체험·구매', '요금 보고 바로 시작', '주문 조회', '결제 내역·코드 다시 보기']) assert.match(bar, new RegExp(kept));
+});
+
+test('menu icons: the account menu uses community, profile, leword and logout icons; the phone list adds the profile row icon', () => {
+    const community = {
+        userId: 'member07', role: 'community', nickname: '새싹이', needsNickname: false, canWriteNews: false, score: 3,
+        activity: { posts: 0, comments: 0, visits: 0 }, grade: { key: 'sprout', label: '새싹', min: 0, nextAt: 100, nextLabel: '잎새' },
+        linked: false, communityToken: 'ct_abc', sessionExpiresAt: '2099-01-01T00:00:00.000Z', savedAt: '2026-11-08T00:00:00Z',
+    };
+    const { bar, sheet } = regions(render('/', { community, forced: { mobileOpen: true } }));
+    const account = bar.slice(bar.indexOf('site-nav-drop-account'));
+    const used = [...account.matchAll(/menu-icons\/([a-z-]+)\.svg/g)].map((match) => match[1]);
+    assert.deepEqual(used, ['community', 'profile', 'leword', 'logout']);
+    const inSheet = [...sheet.matchAll(/menu-icons\/([a-z-]+)\.svg/g)].map((match) => match[1]);
+    assert.ok(inSheet.includes('profile'), 'the 내 정보 row of the phone list');
+    for (const tag of tagsOf(account, 'img')) assert.equal(attr(tag, 'alt'), '');
+    assert.match(account, /커뮤니티 가기/);
+    assert.match(account, /내 정보/);
+    assert.match(account, /LEWORD 열기/);
 });

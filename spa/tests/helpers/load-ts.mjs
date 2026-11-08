@@ -25,6 +25,7 @@ export function createLoader(hooks) {
         new Function('require', 'module', 'exports', code)((id) => {
             if (id === 'react' && hooks) return hooks;
             if (id.endsWith('.css')) return {};
+            if (id.endsWith('.svg')) return { default: id };
             if (id.endsWith('/siteOps') || id === './siteOps') return { GAS_URL: FAKE_GAS_URL, recordPageView() {} };
             if (id.startsWith('.')) {
                 for (const extension of EXTENSIONS) {

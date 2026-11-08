@@ -5,15 +5,19 @@ import {
     INITIAL_MENU_STATE, NAV_BREAKPOINT, NAV_CTA, NAV_ITEMS, NAV_LOGIN_PATH, NAV_MOBILE_SECTIONS,
     isNavGroupActive, isNavPathActive, menuReducer, navDestinations, normalizeNavPath, resolveLoginAction,
 } from '../src/lib/navMenu.mjs';
+import { parseCommunityQuery } from '../src/lib/communityModel.mjs';
 
 // The nine pages the previous flat menu linked to. None may be lost in the regrouping.
 const NINE_PAGES = ['/', '/leword', '/products', '/download', '/chatbots', '/pricing', '/lookup', '/reviews', '/community'];
 
 const run = (actions, from = INITIAL_MENU_STATE) => actions.reduce(menuReducer, from);
 
+const COMMUNITY_BOARDS = ['/community?board=notice', '/community?board=news', '/community?board=request', '/community?board=inquiry', '/community?board=free', '/community?board=promo'];
+const pagesOf = (list) => [...new Set(list.map((to) => to.split('?')[0]))];
+
 test('menu keeps all nine pages exactly once, in the agreed grouping and order', () => {
-    assert.deepEqual([...navDestinations()].sort(), [...NINE_PAGES].sort());
-    assert.equal(new Set(navDestinations()).size, 9, 'no duplicate destinations');
+    assert.deepEqual(pagesOf(navDestinations()).sort(), [...NINE_PAGES].sort());
+    assert.equal(new Set(navDestinations()).size, 8 + COMMUNITY_BOARDS.length, 'no duplicate destinations: eight pages plus the six boards');
     assert.deepEqual(NAV_ITEMS.map((item) => item.label), ['홈', 'LEWORD', '제품', '무료 챗봇', '가격·구매', '수익 후기', '커뮤니티']);
     const product = NAV_ITEMS.find((item) => item.key === 'product');
     assert.deepEqual(product.items.map((item) => [item.label, item.to]), [['제품 소개', '/products'], ['다운로드', '/download']]);
@@ -34,16 +38,51 @@ test('LEWORD is its own top-level, highlighted menu item (not inside 제품)', (
     assert.equal(firstMobile[1].featured, true);
 });
 
-test('new-notice badge moved from Home to Community', () => {
-    const flagged = NAV_ITEMS.filter((item) => item.badge).map((item) => item.to);
-    assert.deepEqual(flagged, ['/community']);
+// [2026-11-08 사장님] 상단 '커뮤니티' 는 드롭다운 — 공지사항 · 최근 소식 · 요청사항 · 문의 · 자유게시판 · 내 글 홍보로 바로 간다.
+test('Community is a dropdown of the six boards in board order, each opening ?board=<id>', () => {
+    const community = NAV_ITEMS.find((item) => item.key === 'community');
+    assert.equal(community.type, 'group');
+    assert.deepEqual(community.items.map((item) => [item.label, item.to]), [
+        ['공지사항', '/community?board=notice'], ['최근 소식', '/community?board=news'], ['요청사항', '/community?board=request'],
+        ['문의', '/community?board=inquiry'], ['자유게시판', '/community?board=free'], ['내 글 홍보', '/community?board=promo'],
+    ]);
+    assert.ok(community.items.every((item) => item.desc), 'every row has its one line');
+    // The address format is the one the community page itself reads.
+    for (const item of community.items) assert.equal(parseCommunityQuery(item.to.slice(item.to.indexOf('?'))).board, item.to.split('=')[1]);
+});
+
+// [2026-11-08 사장님] 메뉴 아이콘 8종(menu-icons-v1): 글자 아이콘 대신. 커뮤니티 게시판 6개는 아이콘 없음.
+test('menu icons: the dropdown rows and phone rows name the eight icons; community boards have none; words stay as they were', () => {
+    const iconOf = (group, key) => NAV_ITEMS.find((item) => item.key === group).items.find((item) => item.key === key);
+    assert.deepEqual(
+        [['product', 'products', 'products', '제품 소개'], ['product', 'download', 'download', '다운로드'], ['buy', 'pricing', 'trial-purchase', '무료체험·구매'], ['buy', 'lookup', 'order-search', '주문 조회']]
+            .map(([group, key]) => [iconOf(group, key).icon, iconOf(group, key).label]),
+        [['products', '제품 소개'], ['download', '다운로드'], ['trial-purchase', '무료체험·구매'], ['order-search', '주문 조회']],
+    );
+    assert.equal(iconOf('buy', 'pricing').desc, '요금 보고 바로 시작', 'README: names and lines stay as on screen');
+    assert.equal(iconOf('buy', 'lookup').desc, '결제 내역·코드 다시 보기');
+    assert.equal(iconOf('product', 'products').desc, '세 제품 비교와 요금 한눈에');
+    assert.equal(iconOf('product', 'download').desc, 'PC 프로그램 받기');
+    for (const child of NAV_ITEMS.find((item) => item.key === 'community').items) assert.equal(child.icon, undefined, child.label);
+    const rows = NAV_MOBILE_SECTIONS.flatMap((section) => section.items);
+    assert.deepEqual(rows.filter((row) => row.icon).map((row) => [row.key, row.icon]), [
+        ['leword', 'leword'], ['products', 'products'], ['download', 'download'], ['pricing', 'trial-purchase'], ['lookup', 'order-search'],
+    ]);
+});
+
+test('new-notice badge moved from Home to the Community group', () => {
+    const flagged = NAV_ITEMS.filter((item) => item.badge).map((item) => item.key);
+    assert.deepEqual(flagged, ['community']);
 });
 
 test('mobile sheet lists every destination once, under headed groups, nothing collapsed', () => {
     const mobile = NAV_MOBILE_SECTIONS.flatMap((section) => section.items.map((item) => item.to));
-    assert.deepEqual([...mobile].sort(), [...NINE_PAGES].sort());
-    assert.deepEqual(NAV_MOBILE_SECTIONS.map((section) => section.title), [null, '제품', '무료로 쓰기 · 구매', '함께하기']);
-    assert.equal(NAV_MOBILE_SECTIONS.flatMap((section) => section.items).filter((item) => item.badge).length, 1);
+    assert.deepEqual(pagesOf(mobile).sort(), [...NINE_PAGES].sort());
+    assert.equal(new Set(mobile).size, mobile.length, 'no row twice');
+    assert.deepEqual(NAV_MOBILE_SECTIONS.map((section) => section.title), [null, '제품', '무료로 쓰기 · 구매', '함께하기', '커뮤니티']);
+    const community = NAV_MOBILE_SECTIONS.find((section) => section.title === '커뮤니티');
+    assert.deepEqual(community.items.map((row) => row.to), COMMUNITY_BOARDS, 'six rows under the community heading');
+    assert.deepEqual(NAV_MOBILE_SECTIONS.filter((section) => section.badge).map((section) => section.title), ['커뮤니티'], 'the badge rides on the community heading');
 });
 
 test('breakpoint where the bar turns into the menu button is 1180px', () => {
@@ -65,6 +104,18 @@ test('active rule: exact page only, Home never matches other pages', () => {
     assert.equal(isNavPathActive('/products', '/products.html'), true);
     assert.equal(isNavPathActive('/leword', '/leword-detail'), false, 'prefix lookalikes are different pages');
     assert.equal(isNavPathActive('/community', '/community/'), true);
+});
+
+test('active rule with a query: a board entry is current only on its own board', () => {
+    assert.equal(isNavPathActive('/community?board=free', '/community', '?board=free'), true);
+    assert.equal(isNavPathActive('/community?board=free', '/community', '?board=free&sort=popular&page=2'), true, 'sort and page do not matter');
+    assert.equal(isNavPathActive('/community?board=free', '/community', '?board=news'), false);
+    assert.equal(isNavPathActive('/community?board=free', '/community', ''), false, 'all-boards view lights no board');
+    assert.equal(isNavPathActive('/community?board=free', '/me', '?board=free'), false);
+    const community = NAV_ITEMS.find((item) => item.key === 'community');
+    assert.equal(isNavGroupActive(community, '/community'), true, 'any community screen lights the group');
+    assert.equal(isNavGroupActive(community, '/community/'), true);
+    assert.equal(isNavGroupActive(community, '/reviews'), false);
 });
 
 test('group is active when a page inside its dropdown is current', () => {

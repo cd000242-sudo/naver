@@ -3,19 +3,20 @@ export const NAV_CTA: Readonly<{ label: string; shortLabel: string; to: string }
 export const NAV_LOGIN_PATH: string;
 export const LOGIN_EVENT: string;
 
-export type NavChild = Readonly<{ key: string; label: string; to: string; icon: string; desc: string; short?: string }>;
+/** `icon` names one of the eight menu icons (see MenuIcon); the community boards have none. */
+export type NavChild = Readonly<{ key: string; label: string; to: string; icon?: string; desc: string; short?: string }>;
 export type NavLinkItem = Readonly<{ type: 'link'; key: string; label: string; to: string; badge?: boolean; featured?: boolean }>;
-export type NavGroupItem = Readonly<{ type: 'group'; key: string; label: string; items: readonly NavChild[] }>;
+export type NavGroupItem = Readonly<{ type: 'group'; key: string; label: string; badge?: boolean; items: readonly NavChild[] }>;
 export type NavItem = NavLinkItem | NavGroupItem;
-export type NavSheetRow = Readonly<{ key: string; label: string; to: string; small?: string; badge?: boolean; featured?: boolean }>;
-export type NavSheetSection = Readonly<{ title: string | null; items: readonly NavSheetRow[] }>;
+export type NavSheetRow = Readonly<{ key: string; label: string; to: string; small?: string; badge?: boolean; featured?: boolean; icon?: string }>;
+export type NavSheetSection = Readonly<{ title: string | null; badge?: boolean; items: readonly NavSheetRow[] }>;
 
 export const NAV_ITEMS: readonly NavItem[];
 export const NAV_MOBILE_SECTIONS: readonly NavSheetSection[];
 
 export function navDestinations(): string[];
 export function normalizeNavPath(pathname: string): string;
-export function isNavPathActive(to: string, pathname: string): boolean;
+export function isNavPathActive(to: string, pathname: string, search?: string): boolean;
 export function isNavGroupActive(item: NavItem, pathname: string): boolean;
 
 export type MenuState = Readonly<{ dropdown: string | null; pinned: boolean; mobileOpen: boolean }>;

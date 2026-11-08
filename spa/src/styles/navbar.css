@@ -97,7 +97,11 @@
 .site-nav-drop-item b { display: block; font-size: 18px; line-height: 1.3; }
 .site-nav-drop-item small { display: block; font-size: 15px; color: var(--sn-muted); line-height: 1.35; }
 .site-nav-drop-item[aria-current="page"] { background: var(--sn-brand-soft); }
-.site-nav-drop-icon { flex: none; width: 42px; height: 42px; display: grid; place-items: center; border-radius: 11px; border: 1px solid var(--sn-brand-line); background: var(--sn-brand-soft); color: var(--sn-brand); font-size: 18px; font-weight: 900; }
+/* Menu icon square (menu-icons-v1): 42px, gold ground #FCF3D9, line #EBD397. The 24px drawing inside comes from assets/menu-icons. */
+.site-nav-icon { flex: none; width: 42px; height: 42px; display: grid; place-items: center; border-radius: 12px; border: 1px solid #ebd397; background: #fcf3d9; }
+.site-nav-icon img { display: block; width: 24px; height: 24px; }
+.site-nav-icon-sm { width: 32px; height: 32px; border-radius: 9px; }
+.site-nav-icon-sm img { width: 20px; height: 20px; }
 
 .site-nav-actions { display: flex; align-items: center; gap: 10px; flex: none; }
 .site-nav-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 48px; padding: 0 20px; border-radius: 12px; font-size: 17px; font-weight: 700; white-space: nowrap; transition: background 0.15s, border-color 0.15s; }
@@ -138,7 +142,7 @@
 .site-nav-sheet-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
 .site-nav-sheet-actions .site-nav-btn { height: 56px; font-size: 18px; }
 .site-nav-sheet-group { padding: 18px 4px 6px; font-size: 15px; font-weight: 700; color: var(--sn-faint); }
-.site-nav-sheet-item { display: flex; align-items: center; gap: 10px; min-height: 58px; padding: 0 16px; border-bottom: 1px solid var(--sn-line); border-radius: 12px; color: var(--sn-ink); font-size: 19px; font-weight: 700; }
+.site-nav-sheet-item { display: flex; align-items: center; gap: 14px; min-height: 58px; padding: 0 16px; border-bottom: 1px solid var(--sn-line); border-radius: 12px; color: var(--sn-ink); font-size: 19px; font-weight: 700; }
 .site-nav-sheet-item small { margin-left: auto; font-size: 15px; font-weight: 500; color: var(--sn-muted); }
 .site-nav-sheet-item [role="status"] { margin-left: auto !important; }
 .site-nav-sheet-item[aria-current="page"] { background: var(--sn-brand-soft); box-shadow: inset 4px 0 0 var(--sn-brand); border-bottom-color: transparent; }
