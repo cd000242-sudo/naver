@@ -67,7 +67,7 @@
     align-items: center;
     gap: 4px;
     height: 48px;
-    padding: 0 15px;
+    padding: 0 13px;
     border: 0;
     border-radius: 12px;
     background: transparent;
@@ -161,6 +161,14 @@
     .site-nav-link { padding: 0 11px; font-size: 17px; }
     .site-nav-link[aria-current="page"]::after, .site-nav-link.is-active::after { left: 10px; right: 10px; }
     .site-nav-account-id { max-width: 90px; }
+}
+/* Community became a dropdown (a chevron wider) and a logged-in id widens the buttons: from 1181px up to 1250px the
+   free-trial button takes its short label so the seven items and the buttons never touch. */
+@media (min-width: 1181px) and (max-width: 1250px) {
+    .site-nav-cta-long { display: none; }
+    .site-nav-cta-short { display: inline; }
+    .site-nav-actions .site-nav-btn-cta { padding: 0 16px; }
+    .site-nav-account-id { max-width: 72px; }
 }
 /* A list left open while the window is widened must not linger over the page. */
 @media (min-width: 1181px) {

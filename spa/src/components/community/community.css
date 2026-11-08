@@ -36,9 +36,6 @@
 .cm-guide li { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; padding: 5px 0; color: var(--lp-muted); }
 .cm-guide-reward { flex-basis: 100%; margin-top: 2px; font-size: 14px; color: var(--lp-faint); }
 .cm-me-score.is-owner b { font-size: 17px; }
-/* The round profile photo (or first letter) next to a nickname. */
-.cm-avatar { flex: none; display: inline-grid; place-items: center; margin-right: 6px; border-radius: 50%; overflow: hidden; background: var(--lp-brand-soft); color: var(--lp-brand); font-weight: 800; line-height: 1; vertical-align: middle; }
-.cm-avatar img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .cm-guide p { margin-top: 8px; font-size: 14px; color: var(--lp-faint); }
 
 .cm-htabs { display: none; gap: 8px; overflow-x: auto; padding: 2px 2px 6px; scrollbar-width: none; }
@@ -74,7 +71,7 @@
 .cm-sort { display: inline-flex; align-items: center; height: 44px; padding: 0 14px; border-radius: 10px; font-size: 15px; font-weight: 700; color: var(--lp-muted); border: 1px solid var(--lp-line); }
 .cm-sort.on { background: var(--lp-text); color: var(--lp-surface); border-color: var(--lp-text); }
 .cm-note { margin: 14px 22px 0; padding: 14px 16px; border-radius: 12px; background: var(--lp-accent-soft); font-size: 16px; }
-.cm-thead, .cm-row { display: grid; grid-template-columns: 84px minmax(0, 1fr) 150px 66px 58px 56px 84px; align-items: center; gap: 8px; padding: 0 22px; }
+.cm-thead, .cm-row { display: grid; grid-template-columns: 84px minmax(0, 1fr) 196px 66px 58px 56px 84px; align-items: center; gap: 8px; padding: 0 22px; }
 .cm-thead { height: 44px; margin-top: 14px; font-size: 14px; color: var(--lp-faint); font-weight: 700; border-top: 1px solid var(--lp-line); border-bottom: 1px solid var(--lp-line); background: var(--lp-surface-2); }
 .cm-thead span:nth-child(n+4) { text-align: right; }
 .cm-row { min-height: 64px; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--lp-line); }
@@ -102,7 +99,7 @@
 .cm-pg.on { background: var(--lp-text); color: var(--lp-surface); border-color: var(--lp-text); }
 
 @media (max-width: 1320px) and (min-width: 721px) {
-    .cm-thead, .cm-row { grid-template-columns: 76px minmax(0, 1fr) 140px 62px 52px 84px; }
+    .cm-thead, .cm-row { grid-template-columns: 76px minmax(0, 1fr) 176px 62px 52px 84px; }
     .cm-views { display: none; }
     .cm-row-end { grid-column: 6; }
 }

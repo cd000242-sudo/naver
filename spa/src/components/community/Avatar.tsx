@@ -1,4 +1,5 @@
 import { avatarInitial, safeAvatarUrl } from '../../lib/communityAvatarModel.mjs';
+import './avatar.css';
 
 /**
  * The round photo next to a nickname, or the first letter of the nickname in a round when there is no photo (or the
