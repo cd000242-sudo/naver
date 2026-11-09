@@ -342,6 +342,27 @@ export function getMissingExpectedHashtags(
     .filter((name) => name.length > 0 && !bodyText.includes(`#${name}`));
 }
 
+/**
+ * Re-read the body until every expected hashtag shows or the window ends. A slow PC's editor lags behind the keystrokes,
+ * so one read right after typing can miss text that is already there; typing it again doubles the hashtag line.
+ * `stats` is null when no read succeeded (the caller then keeps its earlier verdict).
+ */
+export async function waitForExpectedHashtags(
+  read: () => Promise<PrePublishStats | null>,
+  expectations: Pick<PrePublishExpectations, 'expectedHashtags'>,
+  timing: { windowMs: number; stepMs: number; delay: (ms: number) => Promise<void> },
+): Promise<{ stats: PrePublishStats | null; missing: string[] }> {
+  let stats: PrePublishStats | null = null;
+  for (let i = 0; i < Math.max(1, Math.ceil(timing.windowMs / timing.stepMs)); i++) {
+    await timing.delay(timing.stepMs);
+    const latest = await read().catch(() => null);
+    if (!latest) continue;
+    stats = latest;
+    if (getMissingExpectedHashtags(latest, expectations).length === 0) break;
+  }
+  return { stats, missing: stats ? getMissingExpectedHashtags(stats, expectations) : [] };
+}
+
 export function getExpectedHashtagNames(
   expectations: Pick<PrePublishExpectations, 'expectedHashtags'>
 ): string[] {

@@ -33,7 +33,7 @@ export interface PublishTagFieldDeps {
 
 export type PublishTagFieldStatus =
   | 'moved' | 'no-body-hashtags' | 'no-tags-in-dialog' | 'dialog-not-opened' | 'dialog-not-closed'
-  | 'delete-failed' | 'reopen-failed' | 'incomplete';
+  | 'delete-failed' | 'reopen-failed' | 'incomplete' | 'partial-registration';
 
 export interface PublishTagFieldResult {
   readonly status: PublishTagFieldStatus;
@@ -108,17 +108,52 @@ async function waitForTags(deps: PublishTagFieldDeps, expected: readonly string[
   return normalizeTagNames(await deps.readDialogTags());
 }
 
-/** Last line first, re-reading the body each round; stops after two failed deletions in a row. */
-async function deleteHashtagLines(deps: PublishTagFieldDeps, initialCount: number): Promise<{ deleted: number; remaining: number }> {
+/** One round removes at most one visual line, so a long hashtag paragraph needs many rounds; progress ends the loop, not a small cap. */
+const MAX_DELETE_ROUNDS = 40;
+/** Rounds in a row without the hashtag text getting shorter (the old cap allowed 5 rounds, so a late success must stay reachable). */
+const NO_PROGRESS_LIMIT = 5;
+/** Rounds in a row where the prose changed and was undone: stop early, as before. */
+const PROSE_TOUCHED_LIMIT = 2;
+const hashtagTextSize = (lines: readonly BodyHashtagParagraph[]): number => lines.reduce((sum, line) => sum + line.text.length, 0);
+
+/**
+ * Last line first, re-reading the body each round. A round counts only when the hashtag text really got shorter
+ * (keys that left the prose untouched are not proof of a deletion).
+ */
+async function deleteHashtagLines(deps: PublishTagFieldDeps): Promise<{ deleted: number; remaining: number; leftover: string }> {
+  let lines = await deps.findBodyHashtagParagraphs();
+  let smallest = hashtagTextSize(lines);
   let deleted = 0;
-  let failures = 0;
-  for (let round = 0; round < initialCount * 3 + 2 && failures < 2; round++) {
-    const lines = await deps.findBodyHashtagParagraphs();
-    if (lines.length === 0) return { deleted, remaining: 0 };
-    if (await deps.deleteParagraph(lines[lines.length - 1])) { deleted += 1; failures = 0; await deps.delay(200); }
-    else { failures += 1; await deps.delay(300); }
+  let stalled = 0;
+  let proseTouched = 0;
+  for (let round = 0; round < MAX_DELETE_ROUNDS && lines.length > 0 && stalled < NO_PROGRESS_LIMIT && proseTouched < PROSE_TOUCHED_LIMIT; round++) {
+    const keptProse = await deps.deleteParagraph(lines[lines.length - 1]);
+    proseTouched = keptProse ? 0 : proseTouched + 1;
+    lines = await deps.findBodyHashtagParagraphs();
+    const size = hashtagTextSize(lines);
+    if (size < smallest) { deleted += 1; stalled = 0; smallest = size; await deps.delay(200); }
+    else { stalled += 1; await deps.delay(300); }
   }
-  return { deleted, remaining: (await deps.findBodyHashtagParagraphs()).length };
+  const left = await deps.findBodyHashtagParagraphs();
+  return { deleted, remaining: left.length, leftover: left.map((line) => line.text).join(' ').slice(0, 80) };
+}
+
+/** Type the missing tags into the open dialog's tag input, then read the field again. */
+async function typeMissingTags(deps: PublishTagFieldDeps, expected: readonly string[], missing: readonly string[], t: PublishTagFieldTiming) {
+  let typed = 0;
+  for (const tag of missing) {
+    if (await deps.typeTag(tag)) typed += 1;
+    await deps.delay(300);
+  }
+  return { typed, after: await waitForTags(deps, expected, t.reopenTagsPollMs, t.pollIntervalMs) };
+}
+
+/** Warning for an unfinished move that names the unfinished half (tag field vs body line); null = nothing to warn about. */
+export function describeTagFieldWarning(result: PublishTagFieldResult): string | null {
+  if (result.status === 'reopen-failed') return '⚠️ [태그칸] 발행창을 다시 열지 못해 본문을 지운 뒤의 태그 칸을 확인하지 못했습니다 (지우기 전에는 등록이 확인됐습니다) — 발행 후 글의 태그를 확인해 주세요.';
+  if (result.status !== 'incomplete') return null;
+  if (result.missingAfter.length > 0) return `⚠️ [태그칸] 태그 칸에서 확인하지 못한 태그: ${result.missingAfter.map((tag) => `#${tag}`).join(' ')} — 발행 후 글의 태그를 확인해 주세요.`;
+  return `⚠️ [태그칸] 태그 칸에는 모두 등록됐지만 본문 끝에 해시태그 ${result.remainingBodyParagraphs}줄이 남았습니다 — 발행 후 글 끝을 확인해 주세요.`;
 }
 
 export async function moveBodyHashtagsToTagField(
@@ -140,13 +175,27 @@ export async function moveBodyHashtagsToTagField(
       return done('no-tags-in-dialog');
     }
     deps.log(`[태그칸] 발행창 태그 등록 확인: ${state.tagsBefore.map((tag) => `#${tag}`).join(' ')}`);
+    // Only tags the dialog really shows may leave the body (the whole line goes at once): type the rest in now, or keep the line.
+    const unconfirmed = missingTags(bodyTags, state.tagsBefore);
+    if (unconfirmed.length > 0) {
+      deps.log(`[태그칸] 태그 칸에 아직 없는 태그를 지우기 전에 직접 입력합니다: ${unconfirmed.map((tag) => `#${tag}`).join(' ')}`);
+      const typed = await typeMissingTags(deps, bodyTags, unconfirmed, t);
+      state.typedFallback += typed.typed;
+      state.tagsBefore = typed.after;
+      const stillMissing = missingTags(bodyTags, state.tagsBefore);
+      if (stillMissing.length > 0) {
+        deps.log(`[태그칸] 태그 칸에서 확인되지 않은 태그(${stillMissing.map((tag) => `#${tag}`).join(' ')})가 있어 해시태그를 본문에 그대로 둡니다.`);
+        await closeDialog(deps, t);
+        return done('partial-registration');
+      }
+    }
     if (!(await closeDialog(deps, t))) { deps.log('[태그칸] 발행창을 닫지 못해 본문은 그대로 둡니다.'); return done('dialog-not-closed'); }
 
-    const removed = await deleteHashtagLines(deps, lines.length);
+    const removed = await deleteHashtagLines(deps);
     state.deletedParagraphs = removed.deleted;
     state.remainingBodyParagraphs = removed.remaining;
     if (removed.deleted === 0) { deps.log('[태그칸] 본문 해시태그 줄을 지우지 못해 그대로 둡니다 (태그 칸에는 이미 등록됨).'); return done('delete-failed'); }
-    deps.log(`[태그칸] 본문 해시태그 ${removed.deleted}줄을 지웠습니다${removed.remaining > 0 ? ` (${removed.remaining}줄 남음)` : ''}.`);
+    deps.log(`[태그칸] 본문 해시태그 ${removed.deleted}줄을 지웠습니다${removed.remaining > 0 ? ` (${removed.remaining}줄 남음: ${removed.leftover})` : ''}.`);
 
     if (!(await openDialog(deps, t))) { deps.log('[태그칸] 발행창을 다시 열지 못해 태그 재확인을 못 했습니다 (지우기 전에 등록 확인은 마쳤습니다).'); return done('reopen-failed'); }
     const expected = normalizeTagNames([...state.tagsBefore, ...bodyTags]);
@@ -154,18 +203,17 @@ export async function moveBodyHashtagsToTagField(
     let missing = missingTags(expected, after);
     if (missing.length > 0) {
       deps.log(`[태그칸] 태그 칸에서 사라진 태그를 직접 입력합니다: ${missing.map((tag) => `#${tag}`).join(' ')}`);
-      for (const tag of missing) {
-        if (await deps.typeTag(tag)) state.typedFallback += 1;
-        await deps.delay(300);
-      }
-      after = await waitForTags(deps, expected, t.reopenTagsPollMs, t.pollIntervalMs);
+      const typed = await typeMissingTags(deps, expected, missing, t);
+      state.typedFallback += typed.typed;
+      after = typed.after;
       missing = missingTags(expected, after);
     }
     state.tagsAfter = after;
     state.missingAfter = missing;
     if (!(await closeDialog(deps, t))) { deps.log('[태그칸] 발행창을 닫지 못했습니다.'); return done('dialog-not-closed'); }
     if (missing.length > 0 || removed.remaining > 0) {
-      deps.log(`[태그칸] 일부만 옮겨졌습니다 — 태그 칸 누락: ${missing.map((tag) => `#${tag}`).join(' ') || '없음'} · 본문 남은 줄: ${removed.remaining}`);
+      const unexpected = missingTags(after, expected); // tags in the field that no body line announced (e.g. a leftover fragment)
+      deps.log(`[태그칸] 일부만 옮겨졌습니다 — 태그 칸 누락: ${missing.map((tag) => `#${tag}`).join(' ') || '없음'} · 본문 남은 줄: ${removed.remaining} · 예상 밖 태그: ${unexpected.map((tag) => `#${tag}`).join(' ') || '없음'}`);
       return done('incomplete');
     }
     deps.log(`[태그칸] 해시태그를 발행창 태그 칸으로 옮겼습니다: ${after.map((tag) => `#${tag}`).join(' ')}`);

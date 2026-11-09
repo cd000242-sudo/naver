@@ -76,6 +76,7 @@ import {
   getBlockingFailures,
   getHashtagPresenceDiagnostics,
   getMissingExpectedHashtags,
+  waitForExpectedHashtags,
   isEditorBodyUnreadable,
   isPrePublishBodySuspiciouslyShort,
   type PrePublishExpectations,
@@ -143,7 +144,7 @@ import {
   SAVE_BUTTON_TEXT_CANDIDATES,
 } from './automation/publishSaveButtonPolicy.js';
 import { waitForDraftSaveSignal } from './automation/draftSaveConfirmation.js';
-import { moveBodyHashtagsToTagField } from './automation/publishTagField.js';
+import { describeTagFieldWarning, moveBodyHashtagsToTagField } from './automation/publishTagField.js';
 import { createPublishTagFieldDeps } from './automation/publishTagFieldDom.js';
 import { revealBrowserWindow, type WindowCdp } from './automation/browserWindowReveal.js';
 import { resolveNaverRunOptions } from './automation/runOptionsPolicy.js';
@@ -2634,10 +2635,9 @@ export class NaverBlogAutomation {
       }));
       // Once a body line is gone the hashtags are no longer in the body, whatever else is left to report.
       if (result.deletedParagraphs > 0) this.tagFieldMovedFor = (this as any).__prePublishExpectations ?? null;
-      this.log(`[태그칸] 결과: ${result.status} · 등록 확인 ${result.tagsBefore.length}개 → ${result.tagsAfter.length}개 · 본문 줄 삭제 ${result.deletedParagraphs} · 직접 입력 ${result.typedFallback}`);
-      if (result.status === 'incomplete' || result.status === 'reopen-failed') {
-        this.log('⚠️ [태그칸] 해시태그 일부를 태그 칸에서 확인하지 못했습니다 — 발행 후 글의 태그를 확인해 주세요.');
-      }
+      this.log(`[태그칸] 결과: ${result.status} · 등록 확인 ${result.tagsBefore.length}개 → ${result.tagsAfter.length}개 · 본문 줄 삭제 ${result.deletedParagraphs} · 본문 남은 줄 ${result.remainingBodyParagraphs} · 직접 입력 ${result.typedFallback}`);
+      const warning = describeTagFieldWarning(result);
+      if (warning) this.log(warning);
     } catch (error) {
       if (this.cancelRequested || error instanceof AccountExecutionGuardError) throw error;
       this.log(`⚠️ [태그칸] 해시태그 이동 중 오류 (발행은 계속): ${(error as Error).message}`);
@@ -5713,10 +5713,22 @@ export class NaverBlogAutomation {
             return;
           }
           if (stillMissing.length > 0 && options.ensureTailReady === true) {
-            this.log(`🔁 해시태그 1차 입력 검증 실패 → 꼬리 재확보 후 누락분 재입력: ${stillMissing.map(tag => `#${tag}`).join(' ')}`);
+            // [2026-11-10] Slow PC: the editor lags behind the keystrokes, so the single read 300ms after typing can miss
+            //   tags that are already in (customer report 11/9: all 5 typed twice). Re-read until they show before typing again.
+            const settled = await waitForExpectedHashtags(
+              () => recollectHashtagStatsAfterUnreadable('apply-hashtags-settle', debugExpectations, { hashtagList, options }),
+              debugExpectations,
+              { windowMs: 5000, stepMs: 500, delay: (ms) => this.delay(ms) },
+            );
+            const toRetype = settled.stats ? settled.missing : stillMissing;
+            if (toRetype.length === 0) {
+              this.log('✅ 해시태그가 늦게 반영돼 재입력하지 않습니다 (본문에서 확인됨)');
+              return;
+            }
+            this.log(`🔁 해시태그 1차 입력 검증 실패 → 꼬리 재확보 후 누락분 재입력: ${toRetype.map(tag => `#${tag}`).join(' ')}`);
             await this.dismissEditorTransientPanels(page, frame, 'hashtag-verify-retry');
             await ensureRequiredTailReady('retry-before-type');
-            await typeHashtagBatch(stillMissing.map(tag => `#${tag}`));
+            await typeHashtagBatch(toRetype.map(tag => `#${tag}`));
             await this.delay(300);
 
             const retryStats = await recollectHashtagStatsAfterUnreadable('apply-hashtags-after-retry', debugExpectations, {

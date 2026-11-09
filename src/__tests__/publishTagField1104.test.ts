@@ -420,7 +420,8 @@ describe('source guards', () => {
 
   it('the new modules stay small and are listed in the runtime fingerprint source list', () => {
     for (const file of ['automation/publishTagField.ts', 'automation/publishTagFieldDom.ts']) {
-      expect(read(file).split(/\r?\n/).length, file).toBeLessThanOrEqual(200);
+      // 300 = the project's hard file-size limit (.claude/rules/autopus/file-size-limit.md); 200 was only the first-version size
+      expect(read(file).split(/\r?\n/).length, file).toBeLessThanOrEqual(300);
     }
     const fingerprint = read('contentQualityV3/candidateRuntimeFingerprint.ts');
     expect(fingerprint).toContain("'src/automation/publishTagField.ts'");
