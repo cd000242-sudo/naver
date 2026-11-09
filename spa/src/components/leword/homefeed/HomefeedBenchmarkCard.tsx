@@ -6,7 +6,7 @@ import type { HomefeedEvidence } from '../../../lib/homefeedEvidence.mjs';
 import type { AdsenseCard } from '../../../lib/adsenseBenchmarkModel.mjs';
 import type { KeywordEnrich } from '../../../lib/keywordEnrich.mjs';
 import { DemandBlock } from '../adsense/AdsenseDemand';
-import BenchmarkPlaybook, { DemandStep, trackUrl } from '../shared/BenchmarkPlaybook';
+import BenchmarkPlaybook, { DemandStep, guideLine, trackUrl } from '../shared/BenchmarkPlaybook';
 import WritingGuideFrame from '../shared/WritingGuideFrame';
 import BenchmarkSources from './BenchmarkSources';
 const monthDay=(day:string)=>{const m=/^\d{4}-(\d{2})-(\d{2})$/.exec(day||'');return m?`${Number(m[1])}/${Number(m[2])}`:day;};
@@ -71,7 +71,7 @@ export default function HomefeedBenchmarkCard({candidate:c,evidence,enrich}:{can
  const firstTitle=c.homeTitles[0]||c.homeTitle;
  const steps=[
   {label:'지금 쓸지',body:<>{proof?<b>같은 소재가 실제 홈판 {proof.rank?`${proof.rank}위`:''}({monthDay(proof.day)})에 올랐습니다 — 이 흐름이 살아 있을 때 쓰세요. </b>:null}<DemandStep demand={enrich?.demand} fallback={`검색 추이 그래프 준비 중 — ${c.freshnessLabel||'작성 시점'}과 원문 반응(공감 · 댓글이 늘어나는지)으로 판단하세요.`}/></>},
-  {label:'무엇을 쓸지',body:c.writingDirection?<>{c.writingDirection.split(/(?<=[.다요])\s/)[0]}{c.mustInclude.length>0?` 아래 "반드시 들어갈 내용" ${c.mustInclude.length}가지를 소제목으로 쓰세요.`:''}</>:<>원문에서 확인한 사실만으로 사건 → 사람들 반응 → 내가 짚을 한 가지 순서로 쓰세요.</>},
+  {label:'무엇을 쓸지',body:guideLine(c.writingDirection?<>{c.writingDirection.split(/(?<=[.다요])\s/)[0]}{c.mustInclude.length>0?` 아래 "반드시 들어갈 내용" ${c.mustInclude.length}가지를 소제목으로 쓰세요.`:''}</>:null)},
   {label:'제목',body:firstTitle?<>위 후킹형 제목 중 내 글과 맞는 하나를 고르세요(예: 「{firstTitle}」). 따옴표 인용은 원문에 실제로 있는 말인지 확인합니다.</>:<>회차가 제목을 짓는 중입니다 — [지금 제목 만들기]로 바로 받을 수 있습니다.</>},
   // 2026-10-27 실측(25일 · 홈판 상위 70편): 18~03시 발행 0.45% vs 12~18시 0.11%, 상위 70편 중 46편이 발행 다음 날 잡혔다.
   {label:'언제 올릴지',body:<>실측으로는 <b>저녁 6시~새벽 3시</b>에 발행한 글이 낮 12~6시 발행보다 약 4배 자주 홈판 상위에 올랐고, 대부분 <b>발행 다음 날</b> 잡혔습니다. 원글이 이미 하루를 넘겼다면 오늘 밤 안에 올리세요.</>},

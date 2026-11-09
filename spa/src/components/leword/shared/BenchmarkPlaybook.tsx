@@ -6,6 +6,7 @@
 import type { ReactNode } from 'react';
 import type { AdsenseDemand } from '../../../lib/adsenseBenchmarkModel.mjs';
 import { DemandChip } from '../adsense/AdsenseDemand';
+import { GUIDE_PENDING_TEXT } from './guideFrame';
 
 /** 판정 종류별로 할 일 — 수치 예측 없이 행동만. */
 export const DEMAND_ACTION: Record<AdsenseDemand['verdict'], string> = {
@@ -19,6 +20,11 @@ export const DEMAND_ACTION: Record<AdsenseDemand['verdict'], string> = {
 };
 
 export interface PlaybookStep { label: string; body: ReactNode }
+
+/** Body of a guide-backed line: the guide's own content, or the shared pending label so the line keeps its place and no filler sentence is invented. */
+export function guideLine(content: ReactNode): ReactNode {
+    return content === null || content === undefined || content === false || content === '' ? GUIDE_PENDING_TEXT : content;
+}
 
 export function trackUrl(keyword: string) {
     return `/leword?tab=rank&keyword=${encodeURIComponent(keyword)}`;

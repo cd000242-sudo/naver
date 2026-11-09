@@ -101,11 +101,112 @@ test('real homefeed card: a card with a guide and a card without one share the s
         const a = renderToStaticMarkup(React.createElement(Card, { candidate: withGuide }));
         const b = renderToStaticMarkup(React.createElement(Card, { candidate: without }));
         assert.ok(a.includes(READY.mustInclude[0]) && !a.includes(GUIDE_PENDING_TEXT));
-        assert.equal(b.split(GUIDE_PENDING_TEXT).length - 1, 4);
         const section = (html) => html.slice(html.indexOf('<div class="hfb-direction'), html.indexOf('<section aria-label="이 카드로 성과 내는 순서"'));
+        // The guide frame itself carries the four labels; the playbook line below it is counted in its own test.
+        assert.equal(section(b).split(GUIDE_PENDING_TEXT).length - 1, 4);
         assert.deepEqual(headings(section(b)), headings(section(a)));
         assert.deepEqual(headings(section(a)).slice(0, 3), ['이렇게 쓰세요', '반드시 들어갈 내용', '넣지 않을 내용']);
     } finally {
         restoreBrowser();
     }
+});
+
+// 2026-11-10 owner: "no guide -> no invented sentence" also covers the playbook ("이 카드로 성과 내는 순서") lines.
+const GENERIC_HOMEFEED = '원문에서 확인한 사실만으로 사건 → 사람들 반응 → 내가 짚을 한 가지 순서로 쓰세요';
+const GENERIC_ADSENSE = '공통으로 답하는 질문 하나를 정하고';
+const playbook = (html) => {
+    const start = html.indexOf('<section aria-label="이 카드로 성과 내는 순서"');
+    return start < 0 ? '' : html.slice(start, html.indexOf('</section>', start));
+};
+const stepLabels = (html) => [...playbook(html).matchAll(/<li><b[^>]*>([^<]*)<\/b>/g)].map((m) => m[1]);
+const stepText = (html, label) => {
+    const m = new RegExp(`<li><b[^>]*>${label}</b> — (.*?)</li>`).exec(playbook(html));
+    return m ? text(m[1]) : null;
+};
+
+function homefeedHtml(guide, check = []) {
+    const { normalizeBenchmarkBoard } = load('../../src/lib/homefeedBenchmarkModel.mjs');
+    const { withGuides } = load('../../src/lib/homefeedGuides.mjs');
+    const { default: Card } = load('../../src/components/leword/homefeed/HomefeedBenchmarkCard.tsx');
+    const raw = { schemaVersion: 1, generatedAt: '2026-11-10T00:00:00.000Z', sources: [], candidates: [{ id: 'x', keyword: '키워드 x', title: '제목 x', status: 'review-now', category: '사회·이슈', sources: [] }] };
+    const store = { guides: guide ? [{ id: 'x', urls: [], guide: { ...guide, checkBefore: check } }] : [] };
+    const [candidate] = normalizeBenchmarkBoard(withGuides(raw, store)).candidates;
+    return renderToStaticMarkup(React.createElement(Card, { candidate }));
+}
+
+test('homefeed playbook: a card without a guide shows the pending label on "무엇을 쓸지" and no generic sentence', () => {
+    fakeBrowser();
+    try {
+        const html = homefeedHtml(null);
+        assert.equal(stepText(html, '무엇을 쓸지'), GUIDE_PENDING_TEXT);
+        assert.ok(!html.includes(GENERIC_HOMEFEED), 'the generic sentence must be gone from the whole card');
+        assert.deepEqual(stepLabels(html), ['지금 쓸지', '무엇을 쓸지', '제목', '언제 올릴지', '발행 후']);
+    } finally {
+        restoreBrowser();
+    }
+});
+
+test('homefeed playbook: a card with a guide keeps the guide text; the line keeps its place and the other lines are unchanged', () => {
+    fakeBrowser();
+    try {
+        const guide = { direction: READY.writingDirection, searchTargets: READY.searchTargets, mustInclude: READY.mustInclude, mustAvoid: READY.mustAvoid };
+        const html = homefeedHtml(guide, ['지급일 원문 확인']);
+        const line = stepText(html, '무엇을 쓸지');
+        assert.ok(line.includes(READY.writingDirection), line);
+        assert.ok(line.includes('&quot;반드시 들어갈 내용&quot; 2가지를 소제목으로 쓰세요'), line);
+        assert.ok(!line.includes(GUIDE_PENDING_TEXT));
+        assert.deepEqual(stepLabels(html), stepLabels(homefeedHtml(null)), 'same lines in the same order with or without a guide');
+        // The other lines and the "작성 전 확인" line are not touched.
+        assert.ok(stepText(html, '언제 올릴지').includes('저녁 6시~새벽 3시'));
+        assert.ok(stepText(html, '제목').includes('회차가 제목을 짓는 중입니다'));
+        assert.ok(stepText(html, '발행 후').includes('노출 추적에 등록'));
+        assert.match(html, /<b>작성 전 확인<\/b> 지급일 원문 확인/);
+    } finally {
+        restoreBrowser();
+    }
+});
+
+function adsenseHtml(extra = {}) {
+    const { AdsenseCardView } = load('../../src/components/leword/adsense/AdsenseBenchmarkBoard.tsx');
+    const card = {
+        id: 'a', keyword: '근로장려금', title: '근로장려금 신청', category: '정책', grade: 'A', recommended: false, priority: 0,
+        publishedAt: '2026-11-09T00:00:00.000Z', capturedAt: '2026-11-10T00:00:00.000Z', why: [], titles: [],
+        metrics: { query: '근로장려금', searchVolume: 1000, documentCount: 500, bid: null, measuredAt: '2026-11-09T00:00:00.000Z' },
+        sources: [{ id: 's1', name: '블로그', grade: 'A', category: '정책', title: '근로장려금 정리', url: 'https://example.com/p/1', publishedAt: '2026-11-09T00:00:00.000Z', platform: 'tistory' }],
+        ...extra,
+    };
+    return renderToStaticMarkup(React.createElement(AdsenseCardView, { c: card, now: Date.parse('2026-11-10T00:00:00.000Z') }));
+}
+
+test('adsense playbook: a card without a guide shows the pending label on "해결할 문제" and no generic sentence', () => {
+    fakeBrowser();
+    try {
+        const html = adsenseHtml();
+        assert.equal(stepText(html, '해결할 문제'), GUIDE_PENDING_TEXT);
+        assert.ok(!html.includes(GENERIC_ADSENSE), 'the generic sentence must be gone from the whole card');
+        assert.deepEqual(stepLabels(html), ['지금 쓸지', '해결할 문제', '제목', '벤치마킹', '발행 후']);
+    } finally {
+        restoreBrowser();
+    }
+});
+
+test('adsense playbook: the guide text is used when present (solves first, then writing direction), same lines either way', () => {
+    fakeBrowser();
+    try {
+        const solved = adsenseHtml({ solves: ['신청 기한을 놓친 사람 → 기한 후 신청 방법'], writingDirection: READY.writingDirection });
+        assert.equal(stepText(solved, '해결할 문제'), '신청 기한을 놓친 사람 → 기한 후 신청 방법');
+        const directed = adsenseHtml({ writingDirection: READY.writingDirection });
+        assert.equal(stepText(directed, '해결할 문제'), READY.writingDirection);
+        assert.deepEqual(stepLabels(solved), stepLabels(adsenseHtml()));
+        assert.deepEqual(stepLabels(directed), stepLabels(adsenseHtml()));
+    } finally {
+        restoreBrowser();
+    }
+});
+
+test('the generic playbook sentences are no longer in the source', () => {
+    const home = read('../src/components/leword/homefeed/HomefeedBenchmarkCard.tsx');
+    const ads = read('../src/components/leword/adsense/AdsenseBenchmarkBoard.tsx');
+    assert.doesNotMatch(home, /원문에서 확인한 사실만으로 사건/);
+    assert.doesNotMatch(ads, /공통으로 답하는 질문 하나를 정하고/);
 });

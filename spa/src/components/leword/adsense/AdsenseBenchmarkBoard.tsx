@@ -13,7 +13,7 @@ import { useShuffleSeed } from '../../../lib/useShuffleSeed';
 import { DemandBlock, NowPicksPanel } from './AdsenseDemand';
 import { SolveBlock, KinBlock, BenchmarkBlock, DemandPending } from './AdsenseWriteAids';
 // 성과 내는 순서(2026-10-22 사장님 "벤치마크로 들고 와도 어떻게 활용해야 성과가 나는지 모르겠다")
-import BenchmarkPlaybook, { BenchmarkHowTo, DemandStep, trackUrl } from '../shared/BenchmarkPlaybook';
+import BenchmarkPlaybook, { BenchmarkHowTo, DemandStep, guideLine, trackUrl } from '../shared/BenchmarkPlaybook';
 import WritingGuideFrame from '../shared/WritingGuideFrame';
 
 const kst = (iso: string | null | undefined) => {
@@ -137,7 +137,7 @@ function AdsenseGoldStyles() {
     );
 }
 
-function AdsenseCardView({ c, now }: { c: AdsenseCard; now: number }) {
+export function AdsenseCardView({ c, now }: { c: AdsenseCard; now: number }) {
     const competition = adsenseCompetition(c, now);
     const blogs = blogCount(c);
     return (
@@ -173,7 +173,7 @@ function AdsenseCardView({ c, now }: { c: AdsenseCard; now: number }) {
             <BenchmarkBlock c={c} />
             <BenchmarkPlaybook steps={[
                 { label: '지금 쓸지', body: <><DemandStep demand={c.demand} fallback="검색 추이 그래프 준비 중 — 실측이 붙으면 판정합니다." /> 문서 경쟁: {competition.label}.</> },
-                { label: '해결할 문제', body: c.solves?.[0] || c.writingDirection || '아래 "고수들이 쓴 제목"이 공통으로 답하는 질문 하나를 정하고, 그 답을 끝까지 풀어 주세요.' },
+                { label: '해결할 문제', body: guideLine(c.solves?.[0] || c.writingDirection) },
                 { label: '제목', body: c.actionTitles?.[0] ? <>「{c.actionTitles[0]}」처럼 검색자가 바로 할 행동(조회 · 신청 · 계산)이 보이게 지으세요.</> : (c.titles?.[0] ? <>「{c.titles[0]}」 같은 검색용 제목 중 하나를 고르세요.</> : '검색용 제목을 만든 뒤 행동 키워드(조회 · 신청 · 계산)를 넣으세요.') },
                 { label: '벤치마킹', body: '위 "벤치마킹할 곳"에서 상위 글 2~3개를 열어, 그 글들이 빠뜨린 답(조건표 · 계산 예시 · 신청 순서)을 내 글에 채우세요.' },
                 { label: '발행 후', body: <><a href={trackUrl(c.metrics?.query || c.keyword)}>노출 추적에 등록</a>하고 일주일 안에 순위가 안 오르면 제목의 행동 키워드를 자동완성 표현으로 바꿔 보세요.</> },
