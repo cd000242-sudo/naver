@@ -215,7 +215,11 @@ export function applyEditedHeadingsToPreview(options: { silent?: boolean } = {})
 
   content.bodyPlain = body;
   content.content = body;
-  content.introduction = document_.introduction;
+  // autoAnalyzeHeadings draws the image tab's thumbnail card only when introduction is non-empty. The typing
+  // path falls back to the post title for that; without the same fallback a body that starts directly with a
+  // heading lost the thumbnail slot as soon as 적용 (or any panel edit) re-rendered the image tab.
+  content.introduction = document_.introduction
+    || (document_.headings.length > 0 ? String(content.selectedTitle || content.title || '').trim() : '');
   content.conclusion = '';
   const previousHeadings: any[] = Array.isArray(content.headings) ? content.headings : [];
   content.headings = document_.headings.map((heading) => {
