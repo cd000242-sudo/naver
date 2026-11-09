@@ -170,7 +170,7 @@ import {
 } from './modules/postManager.js';
 import { createLdbDraftReceiver, createLdbDraftUiReadyGate } from './modules/ldbDraftImport.js';
 const ldbDraftUiReady = createLdbDraftUiReadyGate();
-import { revealLdbDraft, selectLdbDraftPublishMode } from './modules/ldbHandoffPresentation.js';
+import { autoApplyLdbDraftHeadings, revealLdbDraft, selectLdbDraftPublishMode } from './modules/ldbHandoffPresentation.js';
 import { blockLdbAutoDraftDialog, runLdbAutoDraftSave } from './modules/ldbAutoDraftSave.js';
 // ✅ [2026-01-25 모듈화] 오류 처리 시스템
 import {
@@ -360,7 +360,7 @@ import { initImageNarrativeMode } from './modules/imageNarrativeMode.js';
 // [v2.11.206] 장소(지도) 미리 확정 UI
 import { initPlacePicker, readPickedPlace, readPickedPlaces } from './modules/placePicker.js';
 import { initLewordBoardPicker } from './modules/lewordBoardPicker.js';
-import { initHeadingControlPanel, renderHeadingList } from './modules/headingControlPanel.js';
+import { applyEditedHeadingsToPreview, initHeadingControlPanel, renderHeadingList } from './modules/headingControlPanel.js';
 import { initPublishFlowChooser } from './modules/publishFlowChooser.js';
 import { initImageTabTitleMirror } from './modules/contentGeneration.js';
 import { resetPhotoModeForNextPost } from './modules/photoModeReset.js';
@@ -907,6 +907,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const structured = (window as any).currentStructuredContent;
         hydrateImageManagerFromImages(structured, images);
         await autoAnalyzeHeadings(structured, { localOnly: true });
+        // [2026-11-10] "자동화앱에 가져가기" 뒤 ✅ 적용을 손으로 누르던 단계를 같은 함수로 대신한다(직접 호출 — window 조회 금지).
+        autoApplyLdbDraftHeadings(() => applyEditedHeadingsToPreview({ silent: true }), appendLog);
         updateUnifiedImagePreview(structured.headings, images);
         displayGeneratedImages(images);
         updatePromptItemsWithImages(images);

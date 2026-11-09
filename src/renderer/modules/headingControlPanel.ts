@@ -217,12 +217,18 @@ export function applyEditedHeadingsToPreview(options: { silent?: boolean } = {})
   content.content = body;
   content.introduction = document_.introduction;
   content.conclusion = '';
-  content.headings = document_.headings.map((heading) => ({
-    title: heading.title,
-    content: heading.content,
-    prompt: heading.prompt || heading.title,
-    source: 'user:heading-panel',
-  }));
+  const previousHeadings: any[] = Array.isArray(content.headings) ? content.headings : [];
+  content.headings = document_.headings.map((heading) => {
+    // The body extractor only echoes the title as "prompt". Keep an image prompt that was already
+    // saved for the same heading (e.g. the English prompts an extension draft arrives with).
+    const savedPrompt = String(previousHeadings.find((item) => item?.title === heading.title)?.prompt || '').trim();
+    return {
+      title: heading.title,
+      content: heading.content,
+      prompt: savedPrompt && savedPrompt !== heading.title ? savedPrompt : (heading.prompt || heading.title),
+      source: 'user:heading-panel',
+    };
+  });
   /*
    * 발행 경로(resolveSemiAutoPublishStructure)는 "기존 소제목이 더 많으면 그쪽으로 복구"하는
    * 사다리를 갖고 있다. 위에서 headings 를 본문 표기와 같게 맞췄으므로 그 사다리가 사용자의

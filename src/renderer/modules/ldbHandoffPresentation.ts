@@ -37,3 +37,21 @@ export function selectLdbDraftPublishMode(doc: Document): void {
   draft.click();
   if (hidden.value !== 'draft') throw new Error('발행 방식을 임시저장으로 바꾸지 못했습니다. 앱을 다시 열어주세요.');
 }
+
+/**
+ * 2026-11-10: press the existing "✅ 적용" handler for a freshly received draft so the user
+ * does not have to. A failure must not reject the handoff — the draft is already stored and
+ * shown — so every problem falls back to the manual button with a log line.
+ */
+export function autoApplyLdbDraftHeadings(apply: () => boolean, log: (message: string) => void): boolean {
+  try {
+    if (apply()) {
+      log('✅ 소제목을 자동으로 적용했습니다.');
+      return true;
+    }
+    log('ℹ️ 자동 적용을 하지 않았습니다. 원고를 확인한 뒤 앱에서 ✅ 적용을 눌러 주세요.');
+  } catch (error) {
+    log('⚠️ 소제목 자동 적용에 실패했습니다. 앱에서 ✅ 적용을 눌러 주세요.');
+  }
+  return false;
+}
