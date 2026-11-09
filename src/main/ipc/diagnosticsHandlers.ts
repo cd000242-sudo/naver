@@ -14,6 +14,7 @@ import * as fs from 'fs';
 import { getChromiumExecutablePath } from '../../browserUtils.js';
 import { pickProblemLogLines } from './diagnosticsLogFilter.js';
 import { describePublicationState } from './diagnosticsPublicationState.js';
+import { readLastPublishStartSummary } from './diagnosticsPublishStart.js';
 import { maskUserNameInPaths } from '../../debug/privacyScrubber.js';
 
 /** [2026-10-09] 파일마다 끝 8MB만 읽는다(회전본이 70MB를 넘은 적이 있다). */
@@ -112,6 +113,10 @@ export async function generateDiagnosticReport(context?: { lastError?: string; s
     lines.push('----- 마지막 오류 -----');
     lines.push(context.lastError);
   }
+  lines.push('');
+  // [2026-11-10] 최근 500줄 밖으로 밀려나는 발행 시작 줄([장소 추적]·[구조 진단]·[대표사진 추적])을 따로 담는다.
+  lines.push('----- 마지막 발행 시작 요약 (최대 80줄) -----');
+  lines.push(readLastPublishStartSummary(resolveMainLogFiles()));
   lines.push('');
   lines.push('----- 오늘 기록 중 오류·경고 줄 (최대 300줄, 오래된 것부터) -----');
   lines.push(readTodayProblemLines());
