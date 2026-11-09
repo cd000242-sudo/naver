@@ -173,6 +173,29 @@ function registerFullAutoThumbnailImage(image, provider, formData, originalHeadi
     }
     return normalized;
 }
+/**
+ * Keep the image management tab in step with what the full-auto run has generated so far.
+ * executeFullAutoFlow only registered images in ImageManager; nothing in it built the tab's heading cards or
+ * painted images into them, so a run that was stopped midway left the tab without its thumbnail and slots.
+ * Never throws: a tab that cannot be refreshed must not fail the run or its stop handling.
+ */
+function syncImageTabFromFullAuto(structuredContent, options = {}) {
+    try {
+        if (options.rebuildCards === true && structuredContent?.headings?.length > 0) {
+            void Promise.resolve(autoAnalyzeHeadings(structuredContent, { localOnly: true })).catch((error) => {
+                console.warn('[FullAuto] 이미지 관리 탭 카드 만들기 실패:', error?.message);
+            });
+        }
+        const images = ImageManager.getAllImages();
+        if (Array.isArray(images) && images.length > 0) {
+            displayGeneratedImages(images);
+            updatePromptItemsWithImages(images);
+        }
+    }
+    catch (error) {
+        console.warn('[FullAuto] 이미지 관리 탭 갱신 실패 (진행에는 영향 없음):', error?.message);
+    }
+}
 function normalizeReuseString(value) {
     return String(value ?? '').trim();
 }
@@ -765,6 +788,7 @@ async function executeFullAutoFlow(formData) {
         if (postId) {
             currentPostId = postId;
         }
+        syncImageTabFromFullAuto(structuredContent, { rebuildCards: true });
         await yieldToUI();
         let finalImages = [];
         const imageManagerImages = ImageManager.getAllImages();
@@ -1101,6 +1125,7 @@ async function executeFullAutoFlow(formData) {
                             if (thumbResult?.success && thumbResult.images && thumbResult.images.length > 0) {
                                 dedicatedThumbnailImage = registerFullAutoThumbnailImage(thumbResult.images[0], currentProvider, formData, fullAutoTitle || '블로그 썸네일');
                                 appendLog(`✅ [풀오토] 전용 썸네일 생성 완료!`);
+                                syncImageTabFromFullAuto(structuredContent);
                                 modal?.addLog(`✅ 전용 썸네일 생성 완료`);
                             }
                             else {
@@ -1226,6 +1251,7 @@ async function executeFullAutoFlow(formData) {
                             registerFullAutoThumbnailImage(dedicatedThumbnailImage, currentProvider, formData, fullAutoTitle || '블로그 썸네일');
                         }
                         ImageManager.syncGeneratedImagesArray?.();
+                        syncImageTabFromFullAuto(structuredContent);
                         appendLog(`✅ ${finalImages.length}개의 이미지 생성 완료! (썸네일 ${dedicatedThumbnailImage ? '포함' : '미포함'}, 엔진: ${currentProvider})`);
                         modal?.addLog(`✅ 이미지 ${finalImages.length}개 생성 완료`);
                         imageGenSuccess = true;
@@ -1434,6 +1460,8 @@ async function executeFullAutoFlow(formData) {
     }
     catch (error) {
         console.error('[FullAutoFlow] 오류:', error);
+        // A stopped run keeps its article and images — show them in the image management tab.
+        syncImageTabFromFullAuto(window.currentStructuredContent);
         try {
             resetPublishing();
         }
@@ -4108,4 +4136,4 @@ async function publishWithImageNarrative(formData) {
 }
 
 
-export { emitLog, resolveImageManagerKeys, reparseHeadingContentsFromBody, isFatalApiError, isRetryableImageError, friendlyErrorMessage, executeFullAutoFlow, executeSemiAutoFlow, updateUnifiedPreview, updateUnifiedImagePreview, initFullAutoImageSourceSelection, initFullAutoExecution, collectFullAutoFormData, validateFullAutoFormData, executeFullAutoAutomation, generateFullAutoContent, displayContentInAllTabs, generateImagesForContent, generateLibraryImagesForHeadings, generateAIImagesForHeadings, executeBlogPublishing };
+export { emitLog, syncImageTabFromFullAuto, resolveImageManagerKeys, reparseHeadingContentsFromBody, isFatalApiError, isRetryableImageError, friendlyErrorMessage, executeFullAutoFlow, executeSemiAutoFlow, updateUnifiedPreview, updateUnifiedImagePreview, initFullAutoImageSourceSelection, initFullAutoExecution, collectFullAutoFormData, validateFullAutoFormData, executeFullAutoAutomation, generateFullAutoContent, displayContentInAllTabs, generateImagesForContent, generateLibraryImagesForHeadings, generateAIImagesForHeadings, executeBlogPublishing };
