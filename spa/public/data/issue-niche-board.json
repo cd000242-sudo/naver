@@ -1,23 +1,462 @@
 {
-  "publishedAt": "2026-11-08T00:06:57.824Z",
+  "publishedAt": "2026-11-09T10:19:04.304Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
-    "issues": 18,
-    "candidates": 227,
-    "niche": 1,
-    "preemption": 4,
+    "issues": 17,
+    "candidates": 230,
+    "niche": 0,
+    "preemption": 6,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-11-08",
+    "day": "2026-11-09",
     "keywords": [
-      "구급차 들것",
-      "바이두 날씨",
-      "키미 K3.1 프로"
+      "김우석 보이스",
+      "기상청 aws",
+      "김우석 아이돌"
     ]
   },
   "rows": [
+    {
+      "keyword": "김우석 보이스",
+      "issue": "김우석",
+      "topic": "김우석",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "닥터X 김지원 옆 김우석 “햇살 인턴 박태경 누구?” 나이, 프로필, 대표작, 필모그래피",
+          "‘닥터X’에서 눈도장 찍더니.. 멜로망스 김민석이 유독 아낀다는 친동생 배우",
+          "김우석 프로필 나이 키 학력 인스타그램, 닥터X 박태경 역으로 주목받는 배우",
+          "'군검사 도베르만' 노태남이 닥터X 인턴으로? 김우석 나이·필모그래피",
+          "김우석 프로필 닥터X 박태경 나이 키 학력 멜로망스 김민석 동생",
+          "닥터X 박태경, 배우 김우석 프로필 나이 출연작 드라마 필모 총정리",
+          "닥터X 박태경 배우 김우석 나무위키, 프로필, 출연작, 김민석 동생, 군대",
+          "김우석 프로필, 닥터X 박태경은 X1 김우석 아닌 멜로망스 김민석 동생",
+          "닥터X 인턴 '박태경' 배우 김우석 프로필, 대표작, 멜로망스 김민석 형제까지 총정리",
+          "닥터X 김우석 프로필 총정리｜나이 키 학력 인스타 MBTI 김민석 강나언 열애 논란 최근 근황"
+        ],
+        "measuredAt": "2026-11-08T09:39:31.669Z"
+      },
+      "documentCount": 2038,
+      "documentCountMeasured": true,
+      "searchVolume": 320,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 0.7370241105637101,
+      "issueStatus": "declining",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 320",
+        "문서수 2,038",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 320 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.7배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        },
+        "home": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": {
+        "series": [
+          62,
+          30,
+          22,
+          32,
+          24,
+          38,
+          100,
+          65,
+          32,
+          32,
+          30,
+          14,
+          49,
+          32,
+          35,
+          16,
+          22,
+          0,
+          0,
+          22,
+          0,
+          0,
+          0,
+          0,
+          16,
+          0,
+          0,
+          0,
+          19
+        ],
+        "measuredAt": "2026-11-09T10:19:04.849Z"
+      },
+      "kinCount": 188,
+      "kinTop": [
+        {
+          "title": "보이스피싱전달책항소이유서쓰는법간단히",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=11080502&docId=411994763&answerNo=7",
+          "views": 911,
+          "answers": 11
+        },
+        {
+          "title": "게임 아이템 사기와 보이스피싱 사기방조 사건 조언",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60215&docId=494443947&answerNo=1",
+          "views": 69,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-11-08T09:32:52.929Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2",
+      "carried": true
+    },
+    {
+      "keyword": "기상청 aws",
+      "issue": "AWS",
+      "topic": "AWS",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 1건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 1,
+        "sampledTitles": 10,
+        "topTitles": [
+          "독도야 간밤에 잘 잤느냐? 10월25일, 오늘은 독도의 날",
+          "공사기간 산정용 기상자료, 그대로 사용해도 될까?",
+          "지상부터 하늘까지, 기상청은 어떻게 날씨를 관측할까? 백엽상과 레윈존데의 과학!",
+          "산행전 날씨예보 확인방법(날씨예보가 틀리는 이유, 가을등산 주의사항)",
+          "기상청 내부 자료 보니...과거날씨 데이터가 숨긴 '불편한 진실' 밝혀졌다",
+          "2026년 9월 1일~10월 25일 하루 최저 0도 아래 관측소, 네 해 같은 기간 기록이 있는 386곳 중 70곳(2025년 0곳, 2023년 68곳)이었어요",
+          "TN35 앱에서 기상청 관측소가 97개만 표시되는 이유",
+          "️ 디지털 사이니지 날씨 위젯 개발기: 무료 API의 함정부터 기상청 API 허브 정착까지",
+          "서울 영등포 40도 기록! 현실인가?역대급 서울폭염 기상청 발표와 폭염예방수칙 총정리",
+          "API를 이용한 자동기상관측장비(AWS) 자료 다운로드"
+        ],
+        "measuredAt": "2026-11-08T09:35:49.531Z"
+      },
+      "documentCount": 3692,
+      "documentCountMeasured": true,
+      "searchVolume": 1650,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 0.972389015121249,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 1,650",
+        "문서수 3,692",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 1,650 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.0배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        },
+        "home": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": {
+        "series": [
+          25,
+          36,
+          79,
+          30,
+          39,
+          18,
+          15,
+          100,
+          31,
+          35,
+          50,
+          22,
+          8,
+          28,
+          30,
+          32,
+          18,
+          18,
+          44,
+          35,
+          18,
+          52,
+          21,
+          24,
+          18,
+          45,
+          30,
+          22,
+          32
+        ],
+        "measuredAt": "2026-11-09T10:19:04.849Z"
+      },
+      "kinCount": 367,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-11-08T09:32:52.929Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2",
+      "carried": true
+    },
+    {
+      "keyword": "김우석 아이돌",
+      "issue": "김우석",
+      "topic": "김우석",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "닥터X 인턴, 의사 가운 핏 좋은 배우 누구야? 알고 보니 숨겨진 가족 정체",
+          "김우석 프로필 나이 키 고향 학력 데뷔 근황 / 군 전역 후 닥터 X 박태경으로 돌아온 가수 겸 배우",
+          "가수 지민·아이린, K-POP 팬덤 플랫폼 '베스트아이돌'남녀 부문 각각 영예의 1위",
+          "■[1212개막정보]뮤지컬 언더 문보우 Under Moonbow 창초_역대급 캐스팅_배우 윤지성 김우석(프듀출신) 차서원 이시강 외_대학로 Nol서경스퀘어 스콘2관_범죄수사물",
+          "프로듀스X101 최종 11인 근황 총정리!엑스원 데뷔하자마자 해체된 이유는?",
+          "도베르만 악역에서 햇살 인턴으로, 닥터X 김우석이 딱 맞았다",
+          "미소년에서 상남자로…공개 열애 김우석♥강나언, 전역 후 달라진 모습",
+          "베스트아이돌 투표 결과, 방탄소년단(BTS) 지민·레드벨벳 아이린 1위 차지 (10월 5주차)",
+          "\"11년 차 아이돌 남친 있다더니\"…한예종 출신 여배우 속 비치는 비키니 자태",
+          "대전 출신 연예인 아이돌 총정리, 안유진·설윤·송중기부터 EXO 첸까지"
+        ],
+        "measuredAt": "2026-11-08T09:38:29.474Z"
+      },
+      "documentCount": 6092,
+      "documentCountMeasured": true,
+      "searchVolume": 420,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 0.7180850770484347,
+      "issueStatus": "declining",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 420",
+        "문서수 6,092",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 420 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.7배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        },
+        "home": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": {
+        "series": [
+          100,
+          41,
+          0,
+          19,
+          26,
+          41,
+          85,
+          81,
+          33,
+          22,
+          0,
+          0,
+          56,
+          85,
+          78,
+          41,
+          33,
+          26,
+          19,
+          52,
+          44,
+          37,
+          22,
+          48,
+          22,
+          19,
+          41,
+          70,
+          67
+        ],
+        "measuredAt": "2026-11-09T10:19:04.849Z"
+      },
+      "kinCount": 778,
+      "kinTop": [
+        {
+          "title": "연예인(가수 아이돌) 중에 생일이 10월 27일 분들!",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=302140101&docId=131839422&answerNo=3",
+          "views": 996,
+          "answers": 3
+        },
+        {
+          "title": "10월 27일에 생일인 연예인, 아이돌 누구누구있는지 써주세요....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=13040101&docId=292506856&answerNo=3",
+          "views": 591,
+          "answers": 3
+        },
+        {
+          "title": "10월 27일 귀가 쏘옥 빠진 아이돌",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=302140101&docId=403703709&answerNo=4",
+          "views": 136,
+          "answers": 4
+        },
+        {
+          "title": "김우석이랑 홀란드 중에",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=61303&docId=495736237&answerNo=1",
+          "views": 95,
+          "answers": 2
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-11-08T09:32:52.929Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2",
+      "carried": true
+    },
     {
       "keyword": "바이두 날씨",
       "issue": "바이두",
@@ -106,7 +545,40 @@
       },
       "subKeywords": null,
       "keywordPool": null,
-      "trend": null,
+      "trend": {
+        "series": [
+          55,
+          64,
+          91,
+          73,
+          36,
+          0,
+          0,
+          50,
+          73,
+          77,
+          100,
+          23,
+          68,
+          68,
+          41,
+          95,
+          55,
+          68,
+          95,
+          50,
+          41,
+          59,
+          59,
+          41,
+          45,
+          55,
+          100,
+          59,
+          50
+        ],
+        "measuredAt": "2026-11-09T10:19:04.849Z"
+      },
       "kinCount": 94,
       "kinTop": [
         {
@@ -126,72 +598,43 @@
       "measuredAt": "2026-11-08T00:01:44.119Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "kinMode": "date-views-v2"
-    },
+      "kinMode": "date-views-v2",
+      "carried": true
+    }
+  ],
+  "observations": [
     {
-      "keyword": "구급차 들것",
-      "issue": "구급차",
-      "topic": "구급차",
+      "keyword": "스타틴 리피도",
+      "issue": "스타틴",
+      "topic": "스타틴",
       "lane": "realtime",
-      "issueType": "fresh",
+      "issueType": "entertainment",
       "isDerived": true,
       "origin": "autocomplete",
       "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 0,
-        "sampledTitles": 10,
-        "topTitles": [
-          "서울에서 지방 병원으로 환자를 모셔야 할 때, 사설구급차 준비방법",
-          "사설구급차 이용방법, 전화하기 전에 준비하면 출동이 빨라지는 7가지",
-          "사설구급차 vs 119구급차 차이점｜상황별 이용방법과 비용 총정리",
-          "용산구 사설 구급차 계단 많은 집도 걱정 마세요, 어르신 자택 귀가 이송 후기",
-          "서울 사설구급차 2인 1조 이송, 의료진 동승 구급차를 찾으신다면",
-          "응급환자이송 및 와상환자 외래진료를 위한 사설구급차 이용방법 안내",
-          "사설구급차 예약, 거동 불편한 어르신 통원치료·퇴원·요양원 입소까지 이렇게 이용하세요",
-          "김포공항 환자이송 가능한 사설구급차 안내｜공항 특수구급차 예약 및 이용방법",
-          "사설구급차 의료진도 동승하나요? 응급구조사·간호사 동승부터 환자이송 방법까지",
-          "서울 민간119구급차 번호, 관악구 자택에서 양지병원까지 고령환자 외래진료 이송"
-        ],
-        "measuredAt": "2026-11-06T09:53:58.449Z"
-      },
-      "documentCount": 10825,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 58,
       "documentCountMeasured": true,
-      "searchVolume": 440,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 0.9899999999999999,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
       "issueStatus": "stable",
       "isHot": true,
       "frontalDocCount": 0,
       "freshFrontalCount": 0,
       "reasons": [
-        "검색량 440",
-        "문서수 10,825",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+        "검색량 10",
+        "문서수 58",
+        "선점 후보 — 경쟁 문서 58건, 수요 미검출"
       ],
       "evidence": [
         {
           "code": "autocomplete",
           "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 440 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.0배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
         },
         {
           "code": "empty-field",
@@ -206,179 +649,274 @@
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "",
-          "frame": "generic",
-          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-        },
-        "home": {
-          "text": "",
-          "frame": "generic",
-          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-        }
-      },
+      "titles": null,
       "subKeywords": null,
       "keywordPool": null,
-      "trend": {
-        "series": [
-          36,
-          28,
-          32,
-          60,
-          84,
-          40,
-          100,
-          24,
-          36,
-          52,
-          44,
-          88,
-          76,
-          40,
-          0,
-          52,
-          80,
-          76,
-          100,
-          68,
-          48,
-          36,
-          36,
-          88,
-          60,
-          88,
-          40,
-          28,
-          36
-        ],
-        "measuredAt": "2026-11-08T00:06:58.583Z"
-      },
-      "kinCount": 764,
-      "kinTop": [
-        {
-          "title": "구급차 타본적 있나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8110302&docId=494045781&answerNo=3",
-          "views": 64,
-          "answers": 6
-        },
-        {
-          "title": "사설구급차 업무 어떤거 하나요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70122&docId=494875236&answerNo=1",
-          "views": 34,
-          "answers": 1
-        }
-      ],
+      "trend": null,
+      "kinCount": 7,
+      "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-11-06T09:51:49.178Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "kinMode": "date-views-v2",
-      "carried": true
+      "measuredAt": "2026-11-09T10:16:08.125Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
     },
     {
-      "keyword": "키미 K3.1 프로",
-      "issue": "키미 K3.1 프로",
-      "topic": "키미 K3.1 프로",
+      "keyword": "모티프 임정환",
+      "issue": "모티프",
+      "topic": "모티프",
       "lane": "tech",
       "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
+      "isDerived": true,
+      "origin": "autocomplete",
       "originReason": null,
       "verdict": "preemption",
-      "preemptionKind": "demand-no-volume",
+      "preemptionKind": "no-demand",
       "serp": null,
-      "documentCount": 116,
+      "documentCount": 108,
       "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 1,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
       "issueStatus": "stable",
       "isHot": false,
-      "frontalDocCount": 9,
+      "frontalDocCount": 2,
       "freshFrontalCount": 0,
       "reasons": [
-        "문서수 116",
-        "데이터랩 실측 수요",
-        "선점 후보 — 경쟁 문서 116건, 수요 잡힘·검색량 미확인"
+        "검색량 10",
+        "문서수 108",
+        "선점 후보 — 경쟁 문서 108건, 수요 미검출"
       ],
       "evidence": [
         {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.0배"
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
         },
         {
           "code": "empty-field",
-          "text": "정면으로 다룬 글 9건 (최근 0건)"
+          "text": "정면으로 다룬 글 2건 (최근 0건)"
         }
       ],
       "whySearch": null,
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "",
-          "frame": "generic",
-          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-        },
-        "home": {
-          "text": "",
-          "frame": "generic",
-          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-        }
-      },
+      "titles": null,
       "subKeywords": null,
       "keywordPool": null,
-      "trend": {
-        "series": [
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          100,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "label": "📉 단발성",
-        "recommendation": "회피! 지난 며칠 폭발 후 급락 중. 글 써도 유입 없음",
-        "measuredAt": "2026-11-08T00:06:58.583Z"
-      },
+      "trend": null,
       "kinCount": 0,
-      "kinTop": [],
+      "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-11-06T03:30:50.401Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "kinMode": "date-views-v2",
-      "carried": true,
-      "searchVolumeMeasuredAt": "2026-11-08T00:06:58.583Z"
-    }
-  ],
-  "observations": [
+      "measuredAt": "2026-11-09T10:16:08.125Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "모티프 레드힐스",
+      "issue": "모티프",
+      "topic": "모티프",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 98,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 3,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 98",
+        "선점 후보 — 경쟁 문서 98건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 3건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-09T10:16:08.125Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "모티프 키보드as",
+      "issue": "모티프",
+      "topic": "모티프",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 131,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 131",
+        "선점 후보 — 경쟁 문서 131건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-09T10:16:08.125Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "누스 리서치",
+      "issue": "누스 리서치",
+      "topic": "누스 리서치",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 244,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 2,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 244",
+        "선점 후보 — 경쟁 문서 244건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 2건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-09T10:16:08.125Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "모티프 케이스 접는법",
+      "issue": "모티프",
+      "topic": "모티프",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 247,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 247",
+        "선점 후보 — 경쟁 문서 247건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-09T10:16:08.125Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "오픈ai 닷츠 후기",
       "issue": "오픈AI",
@@ -391,7 +929,7 @@
       "verdict": "preemption",
       "preemptionKind": "no-demand",
       "serp": null,
-      "documentCount": 175,
+      "documentCount": 178,
       "documentCountMeasured": true,
       "searchVolume": 20,
       "searchVolumeLt10": false,
@@ -404,8 +942,8 @@
       "freshFrontalCount": 0,
       "reasons": [
         "검색량 20",
-        "문서수 175",
-        "선점 후보 — 경쟁 문서 175건, 수요 미검출"
+        "문서수 178",
+        "선점 후보 — 경쟁 문서 178건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -441,14 +979,209 @@
         {
           "title": "새로운 AI 에이전트 닷츠, 실제로 얼마나 효율적일까요?",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=1122&docId=495387990&answerNo=0",
-          "views": 127,
+          "views": 130,
           "answers": null
         }
       ],
       "monetize": null,
-      "measuredAt": "2026-11-08T00:01:44.119Z",
+      "measuredAt": "2026-11-09T00:08:01.641Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "JYP 오브더블루 론칭",
+      "issue": "JYP 오브더블루 론칭",
+      "topic": "JYP 오브더블루 론칭",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 149,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 149",
+        "선점 후보 — 경쟁 문서 149건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-09T00:08:01.641Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "토스페이먼츠 앤트그룹",
+      "issue": "앤트그룹",
+      "topic": "앤트그룹",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 172,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 172",
+        "선점 후보 — 경쟁 문서 172건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 3,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-09T00:08:01.641Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "김우석 조승연 연애",
+      "issue": "김우석",
+      "topic": "김우석",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 189,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "declining",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 189",
+        "선점 후보 — 경쟁 문서 189건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 23,
+      "kinTop": [
+        {
+          "title": "김우석 이랑 결혼하는 법",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80101&docId=348109657&answerNo=9",
+          "views": 1275,
+          "answers": 9
+        },
+        {
+          "title": "조승연과 결혼하려면",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80101&docId=423286976&answerNo=4",
+          "views": 1015,
+          "answers": 5
+        },
+        {
+          "title": "김우석이랑 결혼하는법",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80101&docId=461138237&answerNo=5",
+          "views": 964,
+          "answers": 6
+        },
+        {
+          "title": "조승연이랑 결혼하고 남도현이랑 바람피고 손동표랑 썸타는....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=3010101&docId=360902080&answerNo=3",
+          "views": 806,
+          "answers": 4
+        },
+        {
+          "title": "김우석이랑 결혼하는 법",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80101&docId=358981378&answerNo=2",
+          "views": 110,
+          "answers": 2
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-11-08T09:32:52.929Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "씽킹 머신스",
@@ -496,7 +1229,8 @@
       "monetize": null,
       "measuredAt": "2026-11-08T00:01:44.119Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "박수홍 친모 근황",
@@ -559,7 +1293,8 @@
       "monetize": null,
       "measuredAt": "2026-11-08T00:01:44.119Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "박수홍 모친상",
@@ -615,182 +1350,158 @@
       "monetize": null,
       "measuredAt": "2026-11-08T00:01:44.119Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "리얼월드 류중희",
-      "issue": "리얼월드",
-      "topic": "리얼월드",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 164,
-      "documentCountMeasured": true,
-      "searchVolume": 80,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 80",
-        "문서수 164",
-        "선점 후보 — 경쟁 문서 164건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-07T00:28:17.827Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "앤트로픽 엔스로픽 차이",
-      "issue": "앤트로픽",
-      "topic": "앤트로픽",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 44,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 44",
-        "선점 후보 — 경쟁 문서 44건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "앤트로픽 엔스로픽 차이 무엇이 어떻게 다른가",
-          "frame": "compare",
-          "basis": "검색 질문 '앤트로픽 엔스로픽 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        },
-        "home": {
-          "text": "앤트로픽 엔스로픽 차이, 기준은 하나면 됩니다",
-          "frame": "compare",
-          "basis": "검색 질문 '앤트로픽 엔스로픽 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-07T00:28:17.827Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "이용철 대장동 연루",
-      "issue": "이용철 대장동 연루",
-      "topic": "이용철 대장동 연루",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 85,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 85",
-        "선점 후보 — 경쟁 문서 85건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-07T00:28:17.827Z",
-      "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
     }
   ],
   "rejectedCount": 0,
   "issues": [
+    {
+      "issue": "김우석",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "declining",
+      "isHot": true,
+      "why": null,
+      "headlines": [
+        {
+          "title": "'닥터X' 김우석, 전국환 살해 시도 '충격'…17.7% [N시청률]",
+          "press": "news1.kr",
+          "publishedAt": "2026-11-08T02:20:00.000Z",
+          "link": "https://m.entertain.naver.com/article/421/0009276610"
+        },
+        {
+          "title": "‘닥터X’ 김우석 180도 돌변, 왜?",
+          "press": "sports.khan.co.kr",
+          "publishedAt": "2026-11-08T02:45:00.000Z",
+          "link": "https://m.entertain.naver.com/article/144/0001148604"
+        },
+        {
+          "title": "김지원·김우석·이진희, ‘전국환 연결고리’…충격 엔딩 (닥터X)",
+          "press": "sports.donga.com",
+          "publishedAt": "2026-11-07T23:35:00.000Z",
+          "link": "https://m.entertain.naver.com/article/382/0001303455"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "김우석 배우",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김우석 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김우석 형",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김우석 강나언",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "닥터x 김우석",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김우석 김민석",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김우석 서범준",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "배우 김우석",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 2,
+      "carried": true
+    },
+    {
+      "issue": "AWS",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": null,
+      "headlines": [
+        {
+          "title": "‘삼척 흥전 방재기상관측장비(AWS)’ 설치·운영",
+          "press": "kwnews.co.kr",
+          "publishedAt": "2026-11-08T04:04:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/087/0001229214?sid=102"
+        },
+        {
+          "title": "삼척흥전 AWS 본격 관측…위험 기상 감시망 촘촘해진다",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-06T00:29:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016425519?sid=103"
+        },
+        {
+          "title": "[인터뷰] 루크 앤더슨 AWS 아태·일본 총괄 “작업에 맞는 AI 모델 골라 ...",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-11-07T21:01:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001203246?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "aws 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아마존 aws",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "aws 자격증",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "aws 코리아",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "aws 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "aws ai 자격증",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "aws saa",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "기상청 aws",
+          "searchVolume": 1650,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 1,
+      "carried": true
+    },
     {
       "issue": "바이두",
       "issueType": "fresh",
@@ -861,135 +1572,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 1
-    },
-    {
-      "issue": "구급차",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": null,
-      "headlines": [
-        {
-          "title": "구급차에서 태어난 31주 조산아…응급처치로 살렸다",
-          "press": "news.kbs.co.kr",
-          "publishedAt": "2026-11-06T02:24:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/056/0012288708?sid=102"
-        },
-        {
-          "title": "구급차에서 태어난 31주 신생아‥50일 치료 마치고 건강히 퇴원",
-          "press": "imnews.imbc.com",
-          "publishedAt": "2026-11-06T02:36:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/214/0001533921?sid=102"
-        },
-        {
-          "title": "\"운다, 울어! 살았다\"…급박했던 31주 신생아 '구급차 분만'[뉴스럽다]",
-          "press": "nocutnews.co.kr",
-          "publishedAt": "2026-11-06T07:24:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/079/0004207335?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "119 구급차 비용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "119 구급차",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구급차 장난감",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구급차 영어로",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구급차 비용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구급차 그림",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구급차 키트",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구급차 택시 결말",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 1,
-      "carried": true
-    },
-    {
-      "issue": "키미 K3.1 프로",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": null,
-      "headlines": [
-        {
-          "title": "문샷 AI, '키미 K3.1 프로' 가중치 공개…\"딥시크 희소 어텐션 결합\"",
-          "press": "aitimes.com",
-          "publishedAt": "2026-11-05T09:00:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=217051"
-        },
-        {
-          "title": "AMD, MI355X 8개로 키미 K3.1 프로 구동법 공개",
-          "press": "tokenpost.kr",
-          "publishedAt": "2026-11-04T23:24:00.000Z",
-          "link": "https://www.tokenpost.kr/news/ai/432933"
-        },
-        {
-          "title": "\"오픈소스 최고봉 노린다\"… 中 텐센트, 차세대 모델 'Hy4' 전격 공개",
-          "press": "g-enews.com",
-          "publishedAt": "2026-11-04T23:32:00.000Z",
-          "link": "https://www.g-enews.com/view.php?ud=2026110508284677170c8c1c064d_1"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "키미",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
       "rowCount": 1,
       "carried": true
     }
-  ],
-  "enrichedAt": "2026-11-08T00:07:18.057Z",
-  "enrichStats": {
-    "enriched": 0,
-    "subsAdded": 0,
-    "titleUpgraded": 0,
-    "proposed": 0,
-    "verified": 0,
-    "judged": 0,
-    "judgedBad": 0,
-    "related": 20,
-    "picked": 0,
-    "pooled": 0,
-    "aiTitled": 0,
-    "trended": 0,
-    "aiCalls": 3,
-    "partial": false
-  }
+  ]
 }
