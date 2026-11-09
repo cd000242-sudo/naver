@@ -120,6 +120,32 @@ async function readPlaceCards(frame: Frame): Promise<PlaceCardInfo[]> {
     .catch(() => []);
 }
 
+/**
+ * Wait for the place search results instead of reading them once after a fixed delay: on a slow PC the list is
+ * still empty at that moment and the insert was skipped as "0 candidates". Stops as soon as a card matches, or
+ * when a non-empty list stays the same without a match (never settles for a wrong place).
+ */
+export async function pollPlaceCards<T>(
+  read: () => Promise<T[]>,
+  pick: (cards: T[]) => T | null,
+  wait: (ms: number) => Promise<unknown>,
+  options: { timeoutMs?: number; intervalMs?: number; now?: () => number } = {},
+): Promise<{ cards: T[]; picked: T | null }> {
+  const { timeoutMs = 8000, intervalMs = 400, now = Date.now } = options;
+  const startedAt = now();
+  let previous = '';
+  for (;;) {
+    const cards = await read();
+    const picked = pick(cards);
+    if (picked) return { cards, picked };
+    const snapshot = JSON.stringify(cards);
+    if (cards.length > 0 && snapshot === previous) return { cards, picked: null };
+    previous = snapshot;
+    if (now() - startedAt >= timeoutMs) return { cards, picked: null };
+    await wait(intervalMs);
+  }
+}
+
 /** 셀렉터 후보를 순서대로 시도해 n번째 요소를 클릭한다. */
 async function clickNth(frame: Frame, entrySelectors: readonly string[], nth: number): Promise<boolean> {
   return frame
@@ -207,8 +233,11 @@ export async function insertPlaceBlock(
     await page.keyboard.press('Enter');
     await self.delay(self.DELAYS.LONG);
 
-    const cards = await readPlaceCards(frame);
-    const picked = pickMatchingPlaceCard(cards, { name: placeName, address: target.address });
+    const { cards, picked } = await pollPlaceCards(
+      () => readPlaceCards(frame),
+      (found) => pickMatchingPlaceCard(found, { name: placeName, address: target.address }),
+      (ms) => self.delay(ms),
+    );
     if (!picked) {
       self.log(
         `   ⚠️ [장소] "${placeName}" 와 확실히 일치하는 카드를 찾지 못했습니다 ` +

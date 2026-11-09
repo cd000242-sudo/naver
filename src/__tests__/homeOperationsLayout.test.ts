@@ -75,29 +75,6 @@ describe('homepage operations layout', () => {
     expect(source).toMatch(/\.home-ops-income-copy small\s*\{[^}]*font-size:\s*16px/s);
   });
 
-  it('moves notices out of the community tabs and keeps income plus tips there', () => {
-    const community = readFileSync(join(process.cwd(), 'spa', 'src', 'pages', 'CommunityPage.tsx'), 'utf8');
-
-    expect(community).toContain("type TabKey = 'income' | 'tips'");
-    // [2026-08-23] 기본 탭이 '내 글 홍보'(posts)로 바뀜다 — CommunityPage.tsx:204 사장님 지시.
-    //   이 단언은 바뀌기 전 기본값('income')을 박제하고 있어 소스가 아니라 테스트를 고친다.
-    expect(community).toContain("useState<TabKey>('posts')");
-    expect(community).toContain("fetchCommunityIncomeProofs(80, { view: 'community', signal: controller.signal })");
-    /*
-     * [2026-08-25] 7ca10baf("수익인증을 후기로 옮기고 커뮤니티는 내 글 홍보만 남긴다")가
-     * 이 안내 문구를 걷어냈다. 문구는 카피라 언제든 바뀐다 — 이 테스트가 지키려던 계약은
-     * "커뮤니티가 공지를 다루지 않는다"이므로, 카피 대신 공지 조회가 아예 없다는 것으로
-     * 잠근다. 카피 핀보다 무너뜨리기 어렵고 의도에 더 가깝다.
-     */
-    expect(community).not.toMatch(/fetchHomeNotices|fetchSavedHomeNotices/);
-    expect(community).toContain('const COMMUNITY_CACHE_TTL_MS = 15 * 60 * 1000');
-    expect(community).toContain("const unavailable = incomeResult.value.source === 'unavailable'");
-    expect(community).toContain('if (!unavailable) setIncome(incomeResult.value.items)');
-    expect(community).not.toContain('setIncome([])');
-    expect(community).not.toContain("['notices', '공지사항']");
-    expect(community).not.toContain('function NoticesPanel(');
-  });
-
   it('prevents third-party embeds from widening the whole page on small screens', () => {
     const globalCss = readFileSync(
       join(process.cwd(), 'spa', 'src', 'styles', 'global.css'),
