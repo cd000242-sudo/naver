@@ -1,0 +1,38 @@
+/* Lead card of the 최근 소식 list: the first post of page 1 (LeadCard.tsx). Needs src/styles/light-page.css (.lp tokens). */
+
+/*
+ * Desktop: picture at the left (300-360px, the stored picture is 360px on its long side, so it is never made wider),
+ * text at the right. Phone: picture above, text below. While the card is drawn the table header is not.
+ */
+.cm-lead { position: relative; display: grid; grid-template-columns: clamp(300px, 36%, 360px) minmax(0, 1fr); gap: 20px; align-items: start; padding: 18px 22px; border-bottom: 1px solid var(--lp-line); }
+.cm-lead:hover { background: var(--lp-surface-2); }
+.has-lead .cm-thead { display: none; }
+
+.cm-lead-media { position: relative; display: block; width: 100%; max-width: 360px; aspect-ratio: 16 / 10; overflow: hidden; border-radius: 12px; background: var(--lp-surface-2); }
+.cm-lead-media .cm-thumb { position: absolute; inset: 0; border-radius: 0; }
+
+/* A post without a picture: no empty box, the text takes the whole width so a long title is read in full. */
+.cm-lead.is-plain { grid-template-columns: minmax(0, 1fr); }
+
+.cm-lead-body { min-width: 0; display: grid; gap: 8px; align-content: start; }
+.cm-lead-flags { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.cm-lead-flags .lp-state { margin-right: 0; }
+.cm-lead-title { font-size: 22px; font-weight: 800; line-height: 1.4; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.cm-lead-excerpt { font-size: 16px; line-height: 1.55; color: var(--lp-muted); overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.cm-lead:hover .cm-lead-t { text-decoration: underline; text-underline-offset: 3px; }
+
+.cm-lead-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; font-size: 14px; color: var(--lp-muted); }
+.cm-lead-author { display: flex; align-items: center; min-width: 0; font-size: 14px; color: var(--lp-text); }
+.cm-lead-stat { white-space: nowrap; }
+
+/* The title link covers the whole card; the row menu is a button beside it, above the cover. */
+.cm-lead-link { color: inherit; text-decoration: none; }
+.cm-lead-link::after { content: ''; position: absolute; inset: 0; }
+.cm-lead-link:focus-visible { outline: none; }
+.cm-lead-link:focus-visible::after { outline: 3px solid var(--lp-accent); outline-offset: -3px; border-radius: 12px; }
+.cm-lead-more { position: relative; z-index: 2; margin-left: auto; }
+
+@media (max-width: 720px) {
+    .cm-lead { grid-template-columns: minmax(0, 1fr); gap: 12px; padding: 14px 16px; }
+    .cm-lead-title { font-size: 20px; }
+}
