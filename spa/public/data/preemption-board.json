@@ -1,9 +1,9 @@
 {
- "publishedAt": "2026-11-09T04:56:36.892Z",
+ "publishedAt": "2026-11-10T04:29:20.725Z",
  "publicationMode": "daily",
  "lastFullPublishedAt": "2026-11-09T04:37:18.414Z",
  "freeSample": {
-  "day": "2026-11-09",
+  "day": "2026-11-10",
   "keywords": [
    "카니발 풀체인지 시기",
    "상토 배양토 차이",
@@ -15,7 +15,7 @@
  "generator": "preemption-board-batch",
  "topicsTotal": 32,
  "topicsWithRows": 32,
- "verified": 23,
+ "verified": 24,
  "rows": [
   {
    "serpSections": [
@@ -1481,7 +1481,8 @@
    "peakVolume": 1964,
    "peakConfidence": "2년 반복 확인",
    "effectiveVolume": 1964,
-   "preemptRank": 0
+   "preemptRank": 0,
+   "carried": true
   },
   {
    "serpSections": [
@@ -7970,6 +7971,242 @@
   },
   {
    "serpSections": [
+    "AI브리핑",
+    "인플루언서",
+    "AI추천",
+    "지식스니펫",
+    "이미지"
+   ],
+   "layoutBestFor": "naver-blog",
+   "layoutHeadline": "블로그 글이 맨 위에 뜨는 화면 — 네이버 블로그로 붙는 자리다",
+   "layoutRanked": [
+    {
+     "surface": "naver-blog",
+     "label": "네이버 블로그·카페",
+     "position": 2
+    },
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 4
+    }
+   ],
+   "layoutAdsOnTop": false,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "none",
+   "keyword": "계수정 캡슐",
+   "topic": "드라마",
+   "tier": "golden-ratio",
+   "tierLabel": "황금 비율 — 검색량 > 문서수",
+   "openSlot": 4,
+   "searchVolume": 8200,
+   "documentCount": 314,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 8,200 · 문서수 314"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 4번째 자리가 비어 있음"
+    },
+    {
+     "code": "contested",
+     "text": "상위 10개 중 정면으로 다룬 글 7건"
+    },
+    {
+     "code": "golden-ratio",
+     "text": "월 검색량 8,200 > 문서수 314 — 수요가 공급을 넘는 황금 비율"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑이 떠 있고 4개 글을 인용 중"
+    }
+   ],
+   "intentLabel": "",
+   "briefingRisk": null,
+   "regulatoryLabel": "",
+   "trendLabel": "판정불가",
+   "shortTermTrend": {
+    "status": "falling",
+    "ratio": 0.1561,
+    "measuredAt": "2026-11-10T04:29:01.366Z",
+    "windowEnd": "2026-11-09",
+    "series": [
+     {
+      "period": "2026-10-27",
+      "ratio": 4.02815
+     },
+     {
+      "period": "2026-10-28",
+      "ratio": 3.05044
+     },
+     {
+      "period": "2026-10-29",
+      "ratio": 2.8549
+     },
+     {
+      "period": "2026-10-30",
+      "ratio": 2.81579
+     },
+     {
+      "period": "2026-10-31",
+      "ratio": 10.20727
+     },
+     {
+      "period": "2026-11-01",
+      "ratio": 4.14548
+     },
+     {
+      "period": "2026-11-02",
+      "ratio": 1.21235
+     },
+     {
+      "period": "2026-11-03",
+      "ratio": 0.54751
+     },
+     {
+      "period": "2026-11-04",
+      "ratio": 0.27375
+     },
+     {
+      "period": "2026-11-05",
+      "ratio": 0.35197
+     },
+     {
+      "period": "2026-11-06",
+      "ratio": 0.66484
+     },
+     {
+      "period": "2026-11-07",
+      "ratio": 0.43019
+     },
+     {
+      "period": "2026-11-08",
+      "ratio": 0.58662
+     },
+     {
+      "period": "2026-11-09",
+      "ratio": 1.56433
+     }
+    ]
+   },
+   "currentSource": null,
+   "seedKind": null,
+   "expansionWords": null,
+   "timing": "",
+   "monthsToPeak": null,
+   "timingGroup": "",
+   "titles": {
+    "seo": {
+     "text": "",
+     "frame": "generic",
+     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+    },
+    "home": {
+     "text": "",
+     "frame": "generic",
+     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+    }
+   },
+   "adsenseFit": false,
+   "adClicks": null,
+   "adCtrPc": null,
+   "adCtrMobile": null,
+   "adDepth": null,
+   "monetize": null,
+   "whySearch": null,
+   "brief": null,
+   "kinCount": null,
+   "kinTop": null,
+   "keywordPool": null,
+   "trend": null,
+   "adsenseReason": "검색광고 노출 0개 실측 — 광고주가 안 붙는 말이라 광고 클릭 기대가 낮다",
+   "subKeywords": [],
+   "measuredAt": "2026-11-10T04:21:16.795Z",
+   "searchVolumeMeasuredAt": "2026-11-10T04:21:15.925Z",
+   "documentCountMeasuredAt": "2026-11-10T04:21:16.795Z",
+   "demandAsOf": "2026-11",
+   "latestVsPeakPct": 3,
+   "monthsSincePeak": 1,
+   "recencySummary": "2026-11 기준 최고치의 3% (정점은 1개월 전)",
+   "demandSeries": [
+    {
+     "period": "2026-10-01",
+     "ratio": 100
+    },
+    {
+     "period": "2026-11-01",
+     "ratio": 3.1
+    }
+   ],
+   "meaning": {
+    "citedTitles": [
+     "닥터X 김지원 캡슐 정체 뭐야? 계수정이 마신 슈가시럽",
+     "영양제인 줄 알았는데? 닥터X 김지원이 맹물에 타 먹는 캡슐의 진짜 정체",
+     "닥터X 계수정이 원샷하던 그 캡슐 시럽! 주피터 슈가시럽 포션 가격과 홈카페 활용 꿀팁"
+    ],
+    "questions": [
+     "'닥터X' 계수정 캡슐 정체… 계속 먹는 거 뭘까?"
+    ],
+    "productNames": [],
+    "priceMedian": 12000,
+    "priceSamples": 4
+   },
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 7,
+    "medianDaysAgo": 28,
+    "hasAiBriefing": true,
+    "aiBriefingSourceCount": 4,
+    "adCount": 0,
+    "slots": [
+     {
+      "rank": 1,
+      "title": "닥터X 계수정 캡슐, 도대체 정체가 뭐길래?",
+      "coverage": 1
+     },
+     {
+      "rank": 2,
+      "title": "닥터X 김지원 캡슐 계수정 시럽 무엇일까",
+      "coverage": 1
+     },
+     {
+      "rank": 3,
+      "title": "닥터X 김지원 캡슐 정체 뭐야? 계수정이 마신 슈가시럽",
+      "coverage": 1
+     },
+     {
+      "rank": 4,
+      "title": "닥터X 김지원 캡슐 정체 공개! 드라마 속 쥬피터 포션 시럽 성분과 특징",
+      "coverage": 0.5
+     },
+     {
+      "rank": 5,
+      "title": "닥터X 계수정이 마신 시럽 정체는? 김지원이 수술 후 마신 슈가시럽",
+      "coverage": 0.5
+     },
+     {
+      "rank": 6,
+      "title": "'닥터X' 계수정 계속 먹는 캡슐 도대체 뭐야? 물에 몇 개씩 넣던 그 하얀 캡슐 의외의 정체",
+      "coverage": 1
+     }
+    ]
+   },
+   "demandSeriesCheckedAt": "2026-11-10T04:28:52.198Z",
+   "frontalSaturated": false,
+   "effectiveVolume": 8200,
+   "peakConfidence": "",
+   "preemptRank": 2
+  },
+  {
+   "serpSections": [
     "파워링크",
     "지식스니펫",
     "지식iN",
@@ -8969,185 +9206,6 @@
    },
    "frontalSaturated": false,
    "effectiveVolume": 6560,
-   "peakConfidence": "",
-   "preemptRank": 2,
-   "carried": true
-  },
-  {
-   "serpSections": [
-    "AI브리핑",
-    "인플루언서",
-    "AI추천",
-    "지식스니펫",
-    "카페",
-    "이미지"
-   ],
-   "layoutBestFor": "naver-blog",
-   "layoutHeadline": "블로그 글이 맨 위에 뜨는 화면 — 네이버 블로그로 붙는 자리다",
-   "layoutRanked": [
-    {
-     "surface": "naver-blog",
-     "label": "네이버 블로그·카페",
-     "position": 2
-    },
-    {
-     "surface": "kin",
-     "label": "지식iN 답변",
-     "position": 4
-    }
-   ],
-   "layoutAdsOnTop": false,
-   "earlyMover": false,
-   "earlyMoverReasons": [],
-   "sectionsMeasured": true,
-   "intentSource": "serp",
-   "keyword": "계수정 캡슐",
-   "topic": "드라마",
-   "tier": "golden-ratio",
-   "tierLabel": "황금 비율 — 검색량 > 문서수",
-   "openSlot": 5,
-   "searchVolume": 6310,
-   "documentCount": 196,
-   "evidence": [
-    {
-     "code": "demand",
-     "text": "월 검색량 6,310 · 문서수 196"
-    },
-    {
-     "code": "open-slot",
-     "text": "상위 5번째 자리가 비어 있음"
-    },
-    {
-     "code": "contested",
-     "text": "상위 10개 중 정면으로 다룬 글 7건"
-    },
-    {
-     "code": "golden-ratio",
-     "text": "월 검색량 6,310 > 문서수 196 — 수요가 공급을 넘는 황금 비율"
-    },
-    {
-     "code": "not-realtime",
-     "text": "실시간 검색어에는 아직 없음"
-    },
-    {
-     "code": "ai-briefing",
-     "text": "AI 브리핑이 떠 있고 3개 글을 인용 중"
-    }
-   ],
-   "intentLabel": "정보",
-   "briefingRisk": "low",
-   "regulatoryLabel": "",
-   "trendLabel": "판정불가",
-   "shortTermTrend": {
-    "status": "unknown",
-    "ratio": null,
-    "measuredAt": null,
-    "windowEnd": null,
-    "series": []
-   },
-   "currentSource": null,
-   "seedKind": null,
-   "expansionWords": null,
-   "timing": "",
-   "monthsToPeak": 0,
-   "timingGroup": "",
-   "titles": {
-    "seo": {
-     "text": "",
-     "frame": "generic",
-     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-    },
-    "home": {
-     "text": "",
-     "frame": "generic",
-     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-    }
-   },
-   "adsenseFit": false,
-   "adClicks": 0,
-   "adCtrPc": 0,
-   "adCtrMobile": 0,
-   "adDepth": 0,
-   "monetize": null,
-   "whySearch": null,
-   "brief": null,
-   "kinCount": 0,
-   "kinTop": [],
-   "kinMode": "date-views-v2",
-   "keywordPool": null,
-   "trend": null,
-   "adsenseReason": "검색광고 노출 0개 실측 — 광고주가 안 붙는 말이라 광고 클릭 기대가 낮다",
-   "subKeywords": [],
-   "measuredAt": "2026-10-23T00:03:03.188Z",
-   "demandAsOf": "2026-10",
-   "latestVsPeakPct": 100,
-   "monthsSincePeak": 0,
-   "recencySummary": "2026-10 기준 지금이 최고치입니다",
-   "demandSeries": [
-    {
-     "period": "2026-10-01",
-     "ratio": 100
-    }
-   ],
-   "meaning": {
-    "citedTitles": [
-     "닥터X 김지원 캡슐 정체 뭐야? 계수정이 마신 슈가시럽",
-     "계수정 캡슐, 정체 알고보니 '이것' 이었다",
-     "닥터X 김지원 계수정 캡슐 정체는? 쥬피터 슈가시럽 가격 비교와 구매 팁"
-    ],
-    "questions": [],
-    "productNames": [],
-    "priceMedian": 13190,
-    "priceSamples": 4
-   },
-   "serp": {
-    "sampledTitles": 10,
-    "exactTitleHits": 7,
-    "medianDaysAgo": 5,
-    "hasAiBriefing": true,
-    "aiBriefingSourceCount": 3,
-    "adCount": 0,
-    "slots": [
-     {
-      "rank": 1,
-      "title": "닥터X 김지원 캡슐 정체 뭐야? 계수정이 마신 슈가시럽",
-      "coverage": 1
-     },
-     {
-      "rank": 2,
-      "title": "닥터X 김지원 캡슐 계수정 시럽 무엇일까",
-      "coverage": 1
-     },
-     {
-      "rank": 3,
-      "title": "닥터X 김지원 캡슐 어디꺼? 계수정이 라면에 넣은 시럽 정체",
-      "coverage": 1
-     },
-     {
-      "rank": 4,
-      "title": "닥터X 김지원 계수정 캡슐 정체는? 쥬피터 포션 슈가시럽 가격비교 정리",
-      "coverage": 1
-     },
-     {
-      "rank": 5,
-      "title": "남들 몸 관리 잔소리하더니…계수정 컵라면 옆 ‘이것’ 정체 뭐야?",
-      "coverage": 0.5
-     },
-     {
-      "rank": 6,
-      "title": "닥터X 계수정이 마신 시럽 정체는? 김지원이 수술 후 마신 슈가시럽",
-      "coverage": 0.5
-     }
-    ]
-   },
-   "money": {
-    "value": 70,
-    "tier": "none",
-    "pc": 70,
-    "mobile": 70
-   },
-   "frontalSaturated": false,
-   "effectiveVolume": 6310,
    "peakConfidence": "",
    "preemptRank": 2,
    "carried": true
@@ -12501,191 +12559,6 @@
    "peakVolume": 3540,
    "peakConfidence": "2년 반복 확인",
    "effectiveVolume": 3540,
-   "preemptRank": 2,
-   "carried": true
-  },
-  {
-   "serpSections": [
-    "인플루언서",
-    "뉴스",
-    "지식스니펫",
-    "카페",
-    "이미지"
-   ],
-   "layoutBestFor": "naver-blog",
-   "layoutHeadline": "블로그 글이 맨 위에 뜨는 화면 — 네이버 블로그로 붙는 자리다",
-   "layoutRanked": [
-    {
-     "surface": "naver-blog",
-     "label": "네이버 블로그·카페",
-     "position": 1
-    },
-    {
-     "surface": "kin",
-     "label": "지식iN 답변",
-     "position": 3
-    }
-   ],
-   "layoutAdsOnTop": false,
-   "earlyMover": false,
-   "earlyMoverReasons": [],
-   "sectionsMeasured": true,
-   "intentSource": "serp",
-   "keyword": "신인감독 김연경2 이진",
-   "topic": "방송",
-   "tier": "golden-ratio",
-   "tierLabel": "황금 비율 — 검색량 > 문서수",
-   "openSlot": 4,
-   "searchVolume": 3420,
-   "documentCount": 2603,
-   "evidence": [
-    {
-     "code": "demand",
-     "text": "월 검색량 3,420 · 문서수 2,603"
-    },
-    {
-     "code": "open-slot",
-     "text": "상위 4번째 자리가 비어 있음"
-    },
-    {
-     "code": "contested",
-     "text": "상위 10개 중 정면으로 다룬 글 6건"
-    },
-    {
-     "code": "golden-ratio",
-     "text": "월 검색량 3,420 > 문서수 2,603 — 수요가 공급을 넘는 황금 비율"
-    },
-    {
-     "code": "not-realtime",
-     "text": "실시간 검색어에는 아직 없음"
-    },
-    {
-     "code": "ai-briefing",
-     "text": "AI 브리핑 없음 — 클릭이 글로 온다"
-    }
-   ],
-   "intentLabel": "정보",
-   "briefingRisk": "low",
-   "regulatoryLabel": "",
-   "trendLabel": "판정불가",
-   "shortTermTrend": {
-    "status": "unknown",
-    "ratio": null,
-    "measuredAt": null,
-    "windowEnd": null,
-    "series": []
-   },
-   "currentSource": null,
-   "seedKind": null,
-   "expansionWords": null,
-   "timing": "",
-   "monthsToPeak": 0,
-   "timingGroup": "",
-   "titles": {
-    "seo": {
-     "text": "",
-     "frame": "generic",
-     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-    },
-    "home": {
-     "text": "",
-     "frame": "generic",
-     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-    }
-   },
-   "adsenseFit": false,
-   "adClicks": 0,
-   "adCtrPc": 0,
-   "adCtrMobile": 0,
-   "adDepth": 0,
-   "monetize": null,
-   "whySearch": null,
-   "brief": null,
-   "kinCount": 1,
-   "kinTop": [
-    {
-     "title": "신인감독 김연경의 '타미라 카드' 전략, 어떤 효과를 기대할 ....",
-     "link": "https://kin.naver.com/qna/detail.naver?dirId=10010402&docId=490231139&answerNo=3",
-     "views": 93,
-     "answers": 3
-    }
-   ],
-   "kinMode": "date-views-v2",
-   "keywordPool": null,
-   "trend": null,
-   "adsenseReason": "검색광고 노출 0개 실측 — 광고주가 안 붙는 말이라 광고 클릭 기대가 낮다",
-   "subKeywords": [],
-   "measuredAt": "2026-10-23T00:03:12.276Z",
-   "demandAsOf": "2026-10",
-   "latestVsPeakPct": 100,
-   "monthsSincePeak": 0,
-   "recencySummary": "2026-10 기준 지금이 최고치입니다",
-   "demandSeries": [
-    {
-     "period": "2026-09-01",
-     "ratio": 8.3
-    },
-    {
-     "period": "2026-10-01",
-     "ratio": 100
-    }
-   ],
-   "meaning": {
-    "citedTitles": [],
-    "questions": [],
-    "productNames": [],
-    "priceMedian": null,
-    "priceSamples": 0
-   },
-   "serp": {
-    "sampledTitles": 10,
-    "exactTitleHits": 6,
-    "medianDaysAgo": 14,
-    "hasAiBriefing": false,
-    "aiBriefingSourceCount": 0,
-    "adCount": 0,
-    "slots": [
-     {
-      "rank": 1,
-      "title": "'이진 구혜인 시즌1 원더독스 탈락, 돌아오면 안 돼?' 신인감독 김연경2 선수단",
-      "coverage": 1
-     },
-     {
-      "rank": 2,
-      "title": "\"쟤는 왜 안 뽑혔지?\" 신인감독 김연경2 이진 구혜인 탈락 비하인드",
-      "coverage": 1
-     },
-     {
-      "rank": 3,
-      "title": "신인감독 김연경2 출연진 재방송 몇부작 ott 멤버 총정리(이진 시청률 넷플릭스 편성표)",
-      "coverage": 1
-     },
-     {
-      "rank": 4,
-      "title": "'미모탑티어' 이진이 원더독스2에서 탈락한 이유, 김연경이 선택한 즉시전력감",
-      "coverage": 0.58
-     },
-     {
-      "rank": 5,
-      "title": "신인감독 김연경2 미방분 이진 구혜인 탈락 전 굳은 표정, 트라이아웃 언더독의 딜레마",
-      "coverage": 1
-     },
-     {
-      "rank": 6,
-      "title": "[MBC 예능] 신인감독 김연경2 선수 명단 원더독스 2기 멤버 이진 탈락 이유 시청률 정리 (넷플릭스/티빙 OTT 추천)",
-      "coverage": 1
-     }
-    ]
-   },
-   "money": {
-    "value": 70,
-    "tier": "none",
-    "pc": 70,
-    "mobile": 70
-   },
-   "frontalSaturated": false,
-   "effectiveVolume": 3420,
-   "peakConfidence": "",
    "preemptRank": 2,
    "carried": true
   },
@@ -16931,23 +16804,11 @@
    "regulatoryLabel": "",
    "trendLabel": "상승세",
    "shortTermTrend": {
-    "status": "falling",
-    "ratio": 0.5297,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
-    "windowEnd": "2026-11-06",
+    "status": "flat",
+    "ratio": 0.9545,
+    "measuredAt": "2026-11-10T04:29:01.366Z",
+    "windowEnd": "2026-11-09",
     "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 15.58935
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 3.61216
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 3.99239
-     },
      {
       "period": "2026-10-27",
       "ratio": 1.90114
@@ -16990,6 +16851,18 @@
      },
      {
       "period": "2026-11-06",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-07",
+      "ratio": 0.95057
+     },
+     {
+      "period": "2026-11-08",
+      "ratio": 1.14068
+     },
+     {
+      "period": "2026-11-09",
       "ratio": 0
      }
     ]
@@ -19748,13 +19621,9 @@
    "shortTermTrend": {
     "status": "unknown",
     "ratio": null,
-    "measuredAt": "2026-11-09T04:56:04.087Z",
-    "windowEnd": "2026-11-08",
+    "measuredAt": "2026-11-10T04:29:01.366Z",
+    "windowEnd": "2026-11-09",
     "series": [
-     {
-      "period": "2026-10-26",
-      "ratio": 0
-     },
      {
       "period": "2026-10-27",
       "ratio": 0
@@ -19806,6 +19675,10 @@
      {
       "period": "2026-11-08",
       "ratio": 6.92041
+     },
+     {
+      "period": "2026-11-09",
+      "ratio": 4.75778
      }
     ]
    },
@@ -20355,7 +20228,8 @@
    "frontalSaturated": false,
    "effectiveVolume": 2180,
    "peakConfidence": "",
-   "preemptRank": 2
+   "preemptRank": 2,
+   "carried": true
   },
   {
    "serpSections": [
@@ -20870,6 +20744,259 @@
   },
   {
    "serpSections": [
+    "지식스니펫"
+   ],
+   "layoutBestFor": "kin",
+   "layoutHeadline": "지식iN 이 블로그보다 위에 뜬다 — 답변을 달아 내 채널로 끌어오는 편이 빠르다",
+   "layoutRanked": [
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 1
+    }
+   ],
+   "layoutAdsOnTop": false,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "lexical",
+   "keyword": "낙화담 캠핑장 예약",
+   "topic": "공연·전시",
+   "tier": "golden-ratio",
+   "tierLabel": "황금 비율 — 검색량 > 문서수",
+   "openSlot": 5,
+   "searchVolume": 2000,
+   "documentCount": 179,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 2,000 · 문서수 179"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 5번째 자리가 비어 있음"
+    },
+    {
+     "code": "contested",
+     "text": "상위 10개 중 정면으로 다룬 글 2건"
+    },
+    {
+     "code": "golden-ratio",
+     "text": "월 검색량 2,000 > 문서수 179 — 수요가 공급을 넘는 황금 비율"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑 없음 — 클릭이 글로 온다"
+    }
+   ],
+   "intentLabel": "거래",
+   "briefingRisk": null,
+   "regulatoryLabel": "",
+   "trendLabel": "판정불가",
+   "shortTermTrend": {
+    "status": "falling",
+    "ratio": 0,
+    "measuredAt": "2026-11-10T04:29:01.366Z",
+    "windowEnd": "2026-11-09",
+    "series": [
+     {
+      "period": "2026-10-27",
+      "ratio": 4.93827
+     },
+     {
+      "period": "2026-10-28",
+      "ratio": 8.17901
+     },
+     {
+      "period": "2026-10-29",
+      "ratio": 4.32098
+     },
+     {
+      "period": "2026-10-30",
+      "ratio": 4.93827
+     },
+     {
+      "period": "2026-10-31",
+      "ratio": 8.48765
+     },
+     {
+      "period": "2026-11-01",
+      "ratio": 1.08024
+     },
+     {
+      "period": "2026-11-02",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-03",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-04",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-05",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-06",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-07",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-08",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-09",
+      "ratio": 0
+     }
+    ]
+   },
+   "currentSource": null,
+   "seedKind": null,
+   "expansionWords": null,
+   "timing": "",
+   "monthsToPeak": null,
+   "timingGroup": "",
+   "titles": {
+    "seo": {
+     "text": "",
+     "frame": "generic",
+     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+    },
+    "home": {
+     "text": "",
+     "frame": "generic",
+     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+    }
+   },
+   "adsenseFit": false,
+   "adClicks": null,
+   "adCtrPc": null,
+   "adCtrMobile": null,
+   "adDepth": null,
+   "monetize": null,
+   "whySearch": null,
+   "brief": null,
+   "kinCount": null,
+   "kinTop": null,
+   "keywordPool": null,
+   "trend": null,
+   "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+   "subKeywords": [],
+   "measuredAt": "2026-11-10T04:21:13.298Z",
+   "searchVolumeMeasuredAt": "2026-11-10T04:21:12.476Z",
+   "documentCountMeasuredAt": "2026-11-10T04:21:13.298Z",
+   "demandAsOf": "2026-11",
+   "latestVsPeakPct": 0,
+   "monthsSincePeak": 1,
+   "recencySummary": "2026-11 기준 최고치의 0% (정점은 1개월 전)",
+   "demandSeries": [
+    {
+     "period": "2024-11-01",
+     "ratio": 6.9
+    },
+    {
+     "period": "2025-03-01",
+     "ratio": 4
+    },
+    {
+     "period": "2025-04-01",
+     "ratio": 6.7
+    },
+    {
+     "period": "2025-05-01",
+     "ratio": 9.1
+    },
+    {
+     "period": "2025-06-01",
+     "ratio": 3.6
+    },
+    {
+     "period": "2025-07-01",
+     "ratio": 1.2
+    },
+    {
+     "period": "2025-10-01",
+     "ratio": 0.3
+    },
+    {
+     "period": "2026-09-01",
+     "ratio": 2.4
+    },
+    {
+     "period": "2026-10-01",
+     "ratio": 100
+    },
+    {
+     "period": "2026-11-01",
+     "ratio": 0.4
+    }
+   ],
+   "meaning": {
+    "citedTitles": [],
+    "questions": [],
+    "productNames": [],
+    "priceMedian": 5000,
+    "priceSamples": 31
+   },
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 2,
+    "medianDaysAgo": 14,
+    "hasAiBriefing": false,
+    "aiBriefingSourceCount": 0,
+    "adCount": 0,
+    "slots": [
+     {
+      "rank": 1,
+      "title": "2026 경북 칠곡 소원을 이루어주는 낙화담 낙화놀이 사전예약 주차 먹거리 체험 후기",
+      "coverage": 0.67
+     },
+     {
+      "rank": 2,
+      "title": "경북 칠곡군 낙화담 낙화놀이 일정및 예약 정보",
+      "coverage": 0.67
+     },
+     {
+      "rank": 3,
+      "title": "낙화담 낙화놀이 예약 예매 방법 별별 칠곡 낙화담캠핑장 낙화축제 일정",
+      "coverage": 1
+     },
+     {
+      "rank": 4,
+      "title": "2026 칠곡 낙화담 낙화놀이 후기｜예약·주차·준비물",
+      "coverage": 0.67
+     },
+     {
+      "rank": 5,
+      "title": "칠곡 낙화담 낙화놀이 후기｜장소·주차·시간·먹거리 총정리",
+      "coverage": 0.33
+     },
+     {
+      "rank": 6,
+      "title": "[축제/칠곡] 칠곡 낙화담 캠핑장 '낙화놀이' 솔직 방문 후기 (예약, 주차, 팁)",
+      "coverage": 1
+     }
+    ]
+   },
+   "demandSeriesCheckedAt": "2026-11-10T04:28:52.198Z",
+   "frontalSaturated": false,
+   "effectiveVolume": 2000,
+   "peakConfidence": "",
+   "preemptRank": 2
+  },
+  {
+   "serpSections": [
     "인플루언서",
     "지식스니펫",
     "이미지"
@@ -20933,21 +21060,9 @@
    "shortTermTrend": {
     "status": "falling",
     "ratio": 0,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
-    "windowEnd": "2026-11-06",
+    "measuredAt": "2026-11-10T04:29:01.366Z",
+    "windowEnd": "2026-11-09",
     "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 6.14886
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 2.58899
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 2.26537
-     },
      {
       "period": "2026-10-27",
       "ratio": 0
@@ -20990,6 +21105,18 @@
      },
      {
       "period": "2026-11-06",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-07",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-08",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-09",
       "ratio": 0
      }
     ]
@@ -23497,214 +23624,6 @@
    "peakVolume": 1780,
    "peakConfidence": "1년치만 봄",
    "effectiveVolume": 1780,
-   "preemptRank": 2,
-   "carried": true
-  },
-  {
-   "serpSections": [
-    "인플루언서",
-    "지식스니펫",
-    "카페"
-   ],
-   "layoutBestFor": "naver-blog",
-   "layoutHeadline": "블로그 글이 맨 위에 뜨는 화면 — 네이버 블로그로 붙는 자리다",
-   "layoutRanked": [
-    {
-     "surface": "naver-blog",
-     "label": "네이버 블로그·카페",
-     "position": 1
-    },
-    {
-     "surface": "kin",
-     "label": "지식iN 답변",
-     "position": 2
-    }
-   ],
-   "layoutAdsOnTop": false,
-   "earlyMover": false,
-   "earlyMoverReasons": [],
-   "sectionsMeasured": true,
-   "intentSource": "lexical",
-   "keyword": "낙화담 캠핑장 예약",
-   "topic": "공연·전시",
-   "tier": "golden-ratio",
-   "tierLabel": "황금 비율 — 검색량 > 문서수",
-   "openSlot": 8,
-   "searchVolume": 1770,
-   "documentCount": 144,
-   "evidence": [
-    {
-     "code": "demand",
-     "text": "월 검색량 1,770 · 문서수 144"
-    },
-    {
-     "code": "open-slot",
-     "text": "상위 8번째 자리가 비어 있음"
-    },
-    {
-     "code": "contested",
-     "text": "상위 10개 중 정면으로 다룬 글 1건"
-    },
-    {
-     "code": "golden-ratio",
-     "text": "월 검색량 1,770 > 문서수 144 — 수요가 공급을 넘는 황금 비율"
-    },
-    {
-     "code": "not-realtime",
-     "text": "실시간 검색어에는 아직 없음"
-    },
-    {
-     "code": "ai-briefing",
-     "text": "AI 브리핑 없음 — 클릭이 글로 온다"
-    }
-   ],
-   "intentLabel": "거래",
-   "briefingRisk": "low",
-   "regulatoryLabel": "",
-   "trendLabel": "판정불가",
-   "shortTermTrend": {
-    "status": "unknown",
-    "ratio": null,
-    "measuredAt": null,
-    "windowEnd": null,
-    "series": []
-   },
-   "currentSource": null,
-   "seedKind": null,
-   "expansionWords": null,
-   "timing": "",
-   "monthsToPeak": 0,
-   "timingGroup": "",
-   "titles": {
-    "seo": {
-     "text": "",
-     "frame": "generic",
-     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-    },
-    "home": {
-     "text": "",
-     "frame": "generic",
-     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-    }
-   },
-   "adsenseFit": false,
-   "adClicks": 0,
-   "adCtrPc": 0,
-   "adCtrMobile": 0,
-   "adDepth": 0,
-   "monetize": null,
-   "whySearch": null,
-   "brief": null,
-   "kinCount": 1,
-   "kinTop": [],
-   "kinMode": "date-views-v2",
-   "keywordPool": null,
-   "trend": null,
-   "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-   "subKeywords": [],
-   "measuredAt": "2026-10-22T23:57:20.671Z",
-   "demandAsOf": "2026-10",
-   "latestVsPeakPct": 100,
-   "monthsSincePeak": 0,
-   "recencySummary": "2026-10 기준 지금이 최고치입니다",
-   "demandSeries": [
-    {
-     "period": "2024-10-01",
-     "ratio": 45
-    },
-    {
-     "period": "2024-11-01",
-     "ratio": 8.2
-    },
-    {
-     "period": "2025-03-01",
-     "ratio": 4.8
-    },
-    {
-     "period": "2025-04-01",
-     "ratio": 8
-    },
-    {
-     "period": "2025-05-01",
-     "ratio": 10.9
-    },
-    {
-     "period": "2025-06-01",
-     "ratio": 4.3
-    },
-    {
-     "period": "2025-07-01",
-     "ratio": 1.5
-    },
-    {
-     "period": "2025-10-01",
-     "ratio": 0.4
-    },
-    {
-     "period": "2026-09-01",
-     "ratio": 2.9
-    },
-    {
-     "period": "2026-10-01",
-     "ratio": 100
-    }
-   ],
-   "meaning": {
-    "citedTitles": [],
-    "questions": [],
-    "productNames": [],
-    "priceMedian": 30000,
-    "priceSamples": 12
-   },
-   "serp": {
-    "sampledTitles": 10,
-    "exactTitleHits": 1,
-    "medianDaysAgo": 6,
-    "hasAiBriefing": false,
-    "aiBriefingSourceCount": 0,
-    "adCount": 0,
-    "slots": [
-     {
-      "rank": 1,
-      "title": "경북 칠곡군 낙화담 낙화놀이 일정및 예약 정보",
-      "coverage": 0.67
-     },
-     {
-      "rank": 2,
-      "title": "낙화담 낙화놀이 예약 예매 방법 별별 칠곡 낙화담캠핑장 낙화축제 일정",
-      "coverage": 1
-     },
-     {
-      "rank": 3,
-      "title": "2026 칠곡 별별칠곡 낙화담 낙화놀이 예약 방법 및 주차권 우편 쿠폰 (매진)",
-      "coverage": 0.67
-     },
-     {
-      "rank": 4,
-      "title": "2026 칠곡 낙화담 점화식 사전예약 불꽃 낙화놀이 공연정보",
-      "coverage": 0.67
-     },
-     {
-      "rank": 5,
-      "title": "밤하늘을 화려하게 수놓는 별별칠곡 낙화담 낙화놀이 일정 및 장소 예약",
-      "coverage": 0.67
-     },
-     {
-      "rank": 6,
-      "title": "대구 근교 강뷰 낙화담캠핑장 카라반 진입 가능한 칠곡 오토캠핑장",
-      "coverage": 0.67
-     }
-    ]
-   },
-   "money": {
-    "value": 70,
-    "tier": "none",
-    "pc": 70,
-    "mobile": 70
-   },
-   "frontalSaturated": false,
-   "effectiveVolume": 1770,
-   "peakConfidence": "",
    "preemptRank": 2,
    "carried": true
   },
@@ -26534,7 +26453,12 @@
    "peakConfidence": "2년 반복 확인",
    "effectiveVolume": 1500,
    "preemptRank": 2,
-   "carried": true
+   "carried": true,
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-10T04:21:14.472Z",
+    "reason": "최근 검색결과 재검증에서 추천 조건을 충족하지 못했습니다."
+   }
   },
   {
    "serpSections": [
@@ -28186,7 +28110,7 @@
    "carried": true,
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-09T04:48:26.970Z",
+    "checkedAt": "2026-11-10T04:20:58.045Z",
     "reason": "최근 검색결과 재검증에서 추천 조건을 충족하지 못했습니다."
    }
   },
@@ -29611,7 +29535,7 @@
    "carried": true,
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-09T04:48:37.678Z",
+    "checkedAt": "2026-11-10T04:21:05.767Z",
     "reason": "최근 검색결과 재검증에서 추천 조건을 충족하지 못했습니다."
    }
   },
@@ -30574,194 +30498,6 @@
    "peakVolume": 1250,
    "peakConfidence": "2년 반복 확인",
    "effectiveVolume": 1160,
-   "preemptRank": 2,
-   "carried": true
-  },
-  {
-   "serpSections": [
-    "파워링크",
-    "AI브리핑",
-    "카페",
-    "지식스니펫"
-   ],
-   "layoutBestFor": "naver-blog",
-   "layoutHeadline": "블로그 글이 맨 위에 뜨는 화면 — 네이버 블로그로 붙는 자리다",
-   "layoutRanked": [
-    {
-     "surface": "naver-blog",
-     "label": "네이버 블로그·카페",
-     "position": 3
-    },
-    {
-     "surface": "kin",
-     "label": "지식iN 답변",
-     "position": 4
-    }
-   ],
-   "layoutAdsOnTop": true,
-   "earlyMover": false,
-   "earlyMoverReasons": [],
-   "sectionsMeasured": true,
-   "intentSource": "serp",
-   "keyword": "블리츠웨이 후레쉬킹",
-   "topic": "만화·애니",
-   "tier": "golden-ratio",
-   "tierLabel": "황금 비율 — 검색량 > 문서수",
-   "openSlot": 2,
-   "searchVolume": 1140,
-   "documentCount": 6,
-   "evidence": [
-    {
-     "code": "demand",
-     "text": "월 검색량 1,140 · 문서수 6"
-    },
-    {
-     "code": "ads",
-     "text": "상단 광고 2건 — 광고주가 돈을 넣는 검색어다"
-    },
-    {
-     "code": "open-slot",
-     "text": "상위 2번째 자리가 비어 있음"
-    },
-    {
-     "code": "contested",
-     "text": "상위 10개 중 정면으로 다룬 글 1건"
-    },
-    {
-     "code": "golden-ratio",
-     "text": "월 검색량 1,140 > 문서수 6 — 수요가 공급을 넘는 황금 비율"
-    },
-    {
-     "code": "not-realtime",
-     "text": "실시간 검색어에는 아직 없음"
-    },
-    {
-     "code": "ai-briefing",
-     "text": "AI 브리핑이 떠 있고 2개 글을 인용 중"
-    }
-   ],
-   "intentLabel": "거래",
-   "briefingRisk": "low",
-   "regulatoryLabel": "",
-   "trendLabel": "판정불가",
-   "shortTermTrend": {
-    "status": "unknown",
-    "ratio": null,
-    "measuredAt": null,
-    "windowEnd": null,
-    "series": []
-   },
-   "currentSource": null,
-   "seedKind": null,
-   "expansionWords": null,
-   "timing": "",
-   "monthsToPeak": 0,
-   "timingGroup": "",
-   "titles": {
-    "seo": {
-     "text": "",
-     "frame": "generic",
-     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-    },
-    "home": {
-     "text": "",
-     "frame": "generic",
-     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-    }
-   },
-   "adsenseFit": false,
-   "adClicks": 4.300000000000001,
-   "adCtrPc": 0.87,
-   "adCtrMobile": 0.49,
-   "adDepth": 2,
-   "monetize": null,
-   "whySearch": null,
-   "brief": null,
-   "kinCount": 0,
-   "kinTop": [],
-   "kinMode": "date-views-v2",
-   "keywordPool": null,
-   "trend": null,
-   "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-   "subKeywords": [],
-   "measuredAt": "2026-10-22T23:55:47.894Z",
-   "demandAsOf": "2026-10",
-   "latestVsPeakPct": 100,
-   "monthsSincePeak": 0,
-   "recencySummary": "2026-10 기준 지금이 최고치입니다",
-   "demandSeries": [
-    {
-     "period": "2026-08-01",
-     "ratio": 64
-    },
-    {
-     "period": "2026-09-01",
-     "ratio": 48.6
-    },
-    {
-     "period": "2026-10-01",
-     "ratio": 100
-    }
-   ],
-   "meaning": {
-    "citedTitles": [
-     "블리츠웨이 후레쉬맨 후레쉬킹, 31cm 완전변형합체 티저라니!",
-     "블리츠웨이 후뢰시킹 피규어 공개"
-    ],
-    "questions": [],
-    "productNames": [],
-    "priceMedian": 99000,
-    "priceSamples": 8
-   },
-   "serp": {
-    "sampledTitles": 10,
-    "exactTitleHits": 1,
-    "medianDaysAgo": 21,
-    "hasAiBriefing": true,
-    "aiBriefingSourceCount": 2,
-    "adCount": 2,
-    "slots": [
-     {
-      "rank": 1,
-      "title": "블리츠웨이 후레쉬맨 후레쉬킹, 31cm 완전변형합체 티저라니!",
-      "coverage": 1
-     },
-     {
-      "rank": 2,
-      "title": "블리츠웨이 후뢰시킹 피규어 공개",
-      "coverage": 0.5
-     },
-     {
-      "rank": 3,
-      "title": "후뢰시맨] 블리츠웨이 후뢰시킹 모델링 목업 공개!",
-      "coverage": 0.5
-     },
-     {
-      "rank": 4,
-      "title": "\"이게 진짜 합체가 돼?\".. 80년대생 설레게 만든 블리츠웨이 후뢰시킹의 위엄",
-      "coverage": 0.5
-     },
-     {
-      "rank": 5,
-      "title": "블리츠웨이 후뢰시킹 출시일 가격 스펙 총정리! 2027년 완전변형 합체 기대감",
-      "coverage": 0.5
-     },
-     {
-      "rank": 6,
-      "title": "블리츠웨이 후뢰시킹",
-      "coverage": 0.5
-     }
-    ]
-   },
-   "money": {
-    "value": 130,
-    "tier": "low",
-    "pc": 100,
-    "mobile": 130
-   },
-   "frontalSaturated": false,
-   "effectiveVolume": 1140,
-   "peakConfidence": "",
    "preemptRank": 2,
    "carried": true
   },
@@ -31899,13 +31635,9 @@
    "shortTermTrend": {
     "status": "unknown",
     "ratio": null,
-    "measuredAt": "2026-11-09T04:56:04.087Z",
-    "windowEnd": "2026-11-08",
+    "measuredAt": "2026-11-10T04:29:01.366Z",
+    "windowEnd": "2026-11-09",
     "series": [
-     {
-      "period": "2026-10-26",
-      "ratio": 0
-     },
      {
       "period": "2026-10-27",
       "ratio": 0
@@ -31957,6 +31689,10 @@
      {
       "period": "2026-11-08",
       "ratio": 35.57483
+     },
+     {
+      "period": "2026-11-09",
+      "ratio": 50.75921
      }
     ]
    },
@@ -34561,7 +34297,7 @@
    "carried": true,
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-09T04:48:41.854Z",
+    "checkedAt": "2026-11-10T04:21:06.942Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -36953,13 +36689,9 @@
    "shortTermTrend": {
     "status": "unknown",
     "ratio": null,
-    "measuredAt": "2026-11-09T04:56:04.087Z",
-    "windowEnd": "2026-11-08",
+    "measuredAt": "2026-11-10T04:29:01.366Z",
+    "windowEnd": "2026-11-09",
     "series": [
-     {
-      "period": "2026-10-26",
-      "ratio": 0
-     },
      {
       "period": "2026-10-27",
       "ratio": 0
@@ -37010,6 +36742,10 @@
      },
      {
       "period": "2026-11-08",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-09",
       "ratio": 0
      }
     ]
@@ -37373,7 +37109,8 @@
    "frontalSaturated": false,
    "effectiveVolume": 880,
    "peakConfidence": "",
-   "preemptRank": 2
+   "preemptRank": 2,
+   "carried": true
   },
   {
    "serpSections": [
@@ -41866,7 +41603,8 @@
    "frontalSaturated": false,
    "effectiveVolume": 740,
    "peakConfidence": "",
-   "preemptRank": 2
+   "preemptRank": 2,
+   "carried": true
   },
   {
    "serpSections": [
@@ -42501,7 +42239,7 @@
    "carried": true,
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-09T04:48:35.921Z",
+    "checkedAt": "2026-11-10T04:21:03.958Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -46378,22 +46116,10 @@
    "trendLabel": "판정불가",
    "shortTermTrend": {
     "status": "falling",
-    "ratio": 0.6474,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
-    "windowEnd": "2026-11-06",
+    "ratio": 0.7006,
+    "measuredAt": "2026-11-10T04:29:01.366Z",
+    "windowEnd": "2026-11-09",
     "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 27.90697
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 46.51162
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 76.74418
-     },
      {
       "period": "2026-10-27",
       "ratio": 97.67441
@@ -46437,6 +46163,18 @@
      {
       "period": "2026-11-06",
       "ratio": 32.55813
+     },
+     {
+      "period": "2026-11-07",
+      "ratio": 18.60465
+     },
+     {
+      "period": "2026-11-08",
+      "ratio": 25.58139
+     },
+     {
+      "period": "2026-11-09",
+      "ratio": 39.53488
      }
     ]
    },
@@ -48513,6 +48251,250 @@
   },
   {
    "serpSections": [
+    "파워링크",
+    "AI브리핑",
+    "카페",
+    "지식스니펫"
+   ],
+   "layoutBestFor": "naver-blog",
+   "layoutHeadline": "블로그 글이 맨 위에 뜨는 화면 — 네이버 블로그로 붙는 자리다",
+   "layoutRanked": [
+    {
+     "surface": "naver-blog",
+     "label": "네이버 블로그·카페",
+     "position": 3
+    },
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 4
+    }
+   ],
+   "layoutAdsOnTop": true,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "serp",
+   "keyword": "블리츠웨이 후레쉬킹",
+   "topic": "만화·애니",
+   "tier": "golden-ratio",
+   "tierLabel": "황금 비율 — 검색량 > 문서수",
+   "openSlot": 2,
+   "searchVolume": 610,
+   "documentCount": 22,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 610 · 문서수 22"
+    },
+    {
+     "code": "ads",
+     "text": "상단 광고 2건 — 광고주가 돈을 넣는 검색어다"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 2번째 자리가 비어 있음"
+    },
+    {
+     "code": "contested",
+     "text": "상위 10개 중 정면으로 다룬 글 1건"
+    },
+    {
+     "code": "golden-ratio",
+     "text": "월 검색량 610 > 문서수 22 — 수요가 공급을 넘는 황금 비율"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑이 떠 있고 2개 글을 인용 중"
+    }
+   ],
+   "intentLabel": "거래",
+   "briefingRisk": null,
+   "regulatoryLabel": "",
+   "trendLabel": "판정불가",
+   "shortTermTrend": {
+    "status": "falling",
+    "ratio": 0.2778,
+    "measuredAt": "2026-11-10T04:29:01.366Z",
+    "windowEnd": "2026-11-09",
+    "series": [
+     {
+      "period": "2026-10-27",
+      "ratio": 9.83606
+     },
+     {
+      "period": "2026-10-28",
+      "ratio": 9.83606
+     },
+     {
+      "period": "2026-10-29",
+      "ratio": 9.83606
+     },
+     {
+      "period": "2026-10-30",
+      "ratio": 0
+     },
+     {
+      "period": "2026-10-31",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-01",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-02",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-03",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-04",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-05",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-06",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-07",
+      "ratio": 0
+     },
+     {
+      "period": "2026-11-08",
+      "ratio": 8.19672
+     },
+     {
+      "period": "2026-11-09",
+      "ratio": 0
+     }
+    ]
+   },
+   "currentSource": null,
+   "seedKind": null,
+   "expansionWords": null,
+   "timing": "",
+   "monthsToPeak": null,
+   "timingGroup": "",
+   "titles": {
+    "seo": {
+     "text": "",
+     "frame": "generic",
+     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+    },
+    "home": {
+     "text": "",
+     "frame": "generic",
+     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+    }
+   },
+   "adsenseFit": false,
+   "adClicks": null,
+   "adCtrPc": null,
+   "adCtrMobile": null,
+   "adDepth": null,
+   "monetize": null,
+   "whySearch": null,
+   "brief": null,
+   "kinCount": null,
+   "kinTop": null,
+   "keywordPool": null,
+   "trend": null,
+   "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+   "subKeywords": [],
+   "measuredAt": "2026-11-10T04:21:08.645Z",
+   "searchVolumeMeasuredAt": "2026-11-10T04:21:07.850Z",
+   "documentCountMeasuredAt": "2026-11-10T04:21:08.645Z",
+   "demandAsOf": "2026-11",
+   "latestVsPeakPct": 0,
+   "monthsSincePeak": 1,
+   "recencySummary": "2026-11 기준 최고치의 0% (정점은 1개월 전)",
+   "demandSeries": [
+    {
+     "period": "2026-08-01",
+     "ratio": 58.2
+    },
+    {
+     "period": "2026-09-01",
+     "ratio": 44.2
+    },
+    {
+     "period": "2026-10-01",
+     "ratio": 100
+    },
+    {
+     "period": "2026-11-01",
+     "ratio": 0.5
+    }
+   ],
+   "meaning": {
+    "citedTitles": [
+     "블리츠웨이 후레쉬맨 후레쉬킹, 31cm 완전변형합체 티저라니!",
+     "이게 진짜 합체가 돼? .. 80년대생 설레게 만든 블리츠웨이 후뢰시킹의 위엄"
+    ],
+    "questions": [],
+    "productNames": [],
+    "priceMedian": 99000,
+    "priceSamples": 8
+   },
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 1,
+    "medianDaysAgo": null,
+    "hasAiBriefing": true,
+    "aiBriefingSourceCount": 2,
+    "adCount": 2,
+    "slots": [
+     {
+      "rank": 1,
+      "title": "블리츠웨이 후레쉬맨 후레쉬킹, 31cm 완전변형합체 티저라니!",
+      "coverage": 1
+     },
+     {
+      "rank": 2,
+      "title": "블리츠웨이 후뢰시킹 피규어 공개",
+      "coverage": 0.5
+     },
+     {
+      "rank": 3,
+      "title": "후뢰시맨] 블리츠웨이 후뢰시킹 모델링 목업 공개!",
+      "coverage": 0.5
+     },
+     {
+      "rank": 4,
+      "title": "\"이게 진짜 합체가 돼?\".. 80년대생 설레게 만든 블리츠웨이 후뢰시킹의 위엄",
+      "coverage": 0.5
+     },
+     {
+      "rank": 5,
+      "title": "지금 너는 어딨을까",
+      "coverage": 0
+     },
+     {
+      "rank": 6,
+      "title": "꿈꾸던 꿈 내가 작은",
+      "coverage": 0
+     }
+    ]
+   },
+   "demandSeriesCheckedAt": "2026-11-10T04:28:52.198Z",
+   "frontalSaturated": false,
+   "effectiveVolume": 610,
+   "peakConfidence": "",
+   "preemptRank": 2
+  },
+  {
+   "serpSections": [
     "AI브리핑",
     "AI추천",
     "지식스니펫",
@@ -49241,7 +49223,7 @@
    "carried": true,
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-09T04:48:30.882Z",
+    "checkedAt": "2026-11-10T04:21:00.991Z",
     "reason": "최근 검색결과 재검증에서 추천 조건을 충족하지 못했습니다."
    }
   },
@@ -49501,7 +49483,7 @@
    "carried": true,
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-09T04:48:25.230Z",
+    "checkedAt": "2026-11-10T04:20:56.239Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -50672,7 +50654,7 @@
    "carried": true,
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-09T04:48:38.921Z",
+    "checkedAt": "2026-11-10T04:21:06.030Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -51861,7 +51843,7 @@
    "carried": true,
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-09T04:48:31.118Z",
+    "checkedAt": "2026-11-10T04:21:01.270Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -55225,7 +55207,7 @@
    "carried": true,
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-09T04:48:29.159Z",
+    "checkedAt": "2026-11-10T04:20:59.222Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -62219,7 +62201,12 @@
    "effectiveVolume": 1920,
    "peakConfidence": "",
    "preemptRank": 2,
-   "carried": true
+   "carried": true,
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-10T04:21:11.006Z",
+    "reason": "최근 검색결과 재검증에서 추천 조건을 충족하지 못했습니다."
+   }
   },
   {
    "serpSections": [
@@ -66234,12 +66221,12 @@
    "tier": "golden-ratio",
    "tierLabel": "황금 비율 — 검색량 > 문서수",
    "openSlot": 9,
-   "searchVolume": 9620,
-   "documentCount": 8485,
+   "searchVolume": 9740,
+   "documentCount": 8499,
    "evidence": [
     {
      "code": "demand",
-     "text": "월 검색량 9,620 · 문서수 8,485"
+     "text": "월 검색량 9,740 · 문서수 8,499"
     },
     {
      "code": "ads",
@@ -66255,7 +66242,7 @@
     },
     {
      "code": "golden-ratio",
-     "text": "월 검색량 9,620 > 문서수 8,485 — 수요가 공급을 넘는 황금 비율"
+     "text": "월 검색량 9,740 > 문서수 8,499 — 수요가 공급을 넘는 황금 비율"
     },
     {
      "code": "not-realtime",
@@ -66272,14 +66259,10 @@
    "trendLabel": "상승세",
    "shortTermTrend": {
     "status": "flat",
-    "ratio": 0.9844,
-    "measuredAt": "2026-11-09T04:56:04.087Z",
-    "windowEnd": "2026-11-08",
+    "ratio": 0.9725,
+    "measuredAt": "2026-11-10T04:29:01.366Z",
+    "windowEnd": "2026-11-09",
     "series": [
-     {
-      "period": "2026-10-26",
-      "ratio": 90.09009
-     },
      {
       "period": "2026-10-27",
       "ratio": 70.04504
@@ -66331,6 +66314,10 @@
      {
       "period": "2026-11-08",
       "ratio": 66.66666
+     },
+     {
+      "period": "2026-11-09",
+      "ratio": 82.43243
      }
     ]
    },
@@ -66366,13 +66353,13 @@
    "trend": null,
    "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적 (노출 광고 7개 · 광고 클릭률 0.56% 실측)",
    "subKeywords": [],
-   "measuredAt": "2026-11-09T04:48:16.464Z",
-   "searchVolumeMeasuredAt": "2026-11-09T04:48:14.640Z",
-   "documentCountMeasuredAt": "2026-11-09T04:48:16.464Z",
+   "measuredAt": "2026-11-10T04:20:46.790Z",
+   "searchVolumeMeasuredAt": "2026-11-10T04:20:44.918Z",
+   "documentCountMeasuredAt": "2026-11-10T04:20:46.790Z",
    "demandAsOf": "2026-11",
-   "latestVsPeakPct": 19,
+   "latestVsPeakPct": 21,
    "monthsSincePeak": 11,
-   "recencySummary": "2026-11 기준 최고치의 19% (정점은 11개월 전)",
+   "recencySummary": "2026-11 기준 최고치의 21% (정점은 11개월 전)",
    "demandSeries": [
     {
      "period": "2025-07-01",
@@ -66440,7 +66427,7 @@
     },
     {
      "period": "2026-11-01",
-     "ratio": 18.5
+     "ratio": 21.3
     }
    ],
    "meaning": {
@@ -66453,7 +66440,7 @@
    "serp": {
     "sampledTitles": 10,
     "exactTitleHits": 4,
-    "medianDaysAgo": 21,
+    "medianDaysAgo": 28,
     "hasAiBriefing": false,
     "aiBriefingSourceCount": 0,
     "adCount": 7,
@@ -66490,14 +66477,14 @@
      }
     ]
    },
-   "demandSeriesCheckedAt": "2026-11-09T04:55:48.619Z",
+   "demandSeriesCheckedAt": "2026-11-10T04:28:52.198Z",
    "frontalSaturated": false,
    "peakMonth": 12,
    "peakMultiplier": 1.1,
    "peakRecurring": null,
-   "peakVolume": 12776,
+   "peakVolume": 12935,
    "peakConfidence": "1년치만 봄",
-   "effectiveVolume": 9620,
+   "effectiveVolume": 9740,
    "preemptRank": 3
   },
   {
@@ -68495,22 +68482,10 @@
    "trendLabel": "하락세",
    "shortTermTrend": {
     "status": "flat",
-    "ratio": 0.92,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
-    "windowEnd": "2026-11-06",
+    "ratio": 0.9849,
+    "measuredAt": "2026-11-10T04:29:01.366Z",
+    "windowEnd": "2026-11-09",
     "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 100
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 73.97959
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 35.71428
-     },
      {
       "period": "2026-10-27",
       "ratio": 39.03061
@@ -68554,6 +68529,18 @@
      {
       "period": "2026-11-06",
       "ratio": 50.2551
+     },
+     {
+      "period": "2026-11-07",
+      "ratio": 64.79591
+     },
+     {
+      "period": "2026-11-08",
+      "ratio": 55.61224
+     },
+     {
+      "period": "2026-11-09",
+      "ratio": 38.77551
      }
     ]
    },
@@ -73193,68 +73180,11 @@
    "regulatoryLabel": "",
    "trendLabel": "상승세",
    "shortTermTrend": {
-    "status": "falling",
-    "ratio": 0.42,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
+    "status": "unknown",
+    "ratio": null,
+    "measuredAt": null,
     "windowEnd": "2026-11-06",
-    "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 42.35294
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 49.41176
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 31.17647
-     },
-     {
-      "period": "2026-10-27",
-      "ratio": 35.88235
-     },
-     {
-      "period": "2026-10-28",
-      "ratio": 27.64705
-     },
-     {
-      "period": "2026-10-29",
-      "ratio": 18.82352
-     },
-     {
-      "period": "2026-10-30",
-      "ratio": 30
-     },
-     {
-      "period": "2026-10-31",
-      "ratio": 34.70588
-     },
-     {
-      "period": "2026-11-01",
-      "ratio": 34.70588
-     },
-     {
-      "period": "2026-11-02",
-      "ratio": 7.64705
-     },
-     {
-      "period": "2026-11-03",
-      "ratio": 4.70588
-     },
-     {
-      "period": "2026-11-04",
-      "ratio": 5.88235
-     },
-     {
-      "period": "2026-11-05",
-      "ratio": 5.29411
-     },
-     {
-      "period": "2026-11-06",
-      "ratio": 5.88235
-     }
-    ]
+    "series": []
    },
    "currentSource": null,
    "seedKind": null,
@@ -73523,68 +73453,11 @@
    "regulatoryLabel": "",
    "trendLabel": "상승세",
    "shortTermTrend": {
-    "status": "flat",
-    "ratio": 0.9091,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
+    "status": "unknown",
+    "ratio": null,
+    "measuredAt": null,
     "windowEnd": "2026-11-06",
-    "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 90.47619
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 83.06878
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 16.40211
-     },
-     {
-      "period": "2026-10-27",
-      "ratio": 17.98941
-     },
-     {
-      "period": "2026-10-28",
-      "ratio": 19.04761
-     },
-     {
-      "period": "2026-10-29",
-      "ratio": 19.57671
-     },
-     {
-      "period": "2026-10-30",
-      "ratio": 26.98412
-     },
-     {
-      "period": "2026-10-31",
-      "ratio": 79.89417
-     },
-     {
-      "period": "2026-11-01",
-      "ratio": 80.95238
-     },
-     {
-      "period": "2026-11-02",
-      "ratio": 10.05291
-     },
-     {
-      "period": "2026-11-03",
-      "ratio": 12.16931
-     },
-     {
-      "period": "2026-11-04",
-      "ratio": 12.69841
-     },
-     {
-      "period": "2026-11-05",
-      "ratio": 20.63492
-     },
-     {
-      "period": "2026-11-06",
-      "ratio": 32.27513
-     }
-    ]
+    "series": []
    },
    "currentSource": null,
    "seedKind": null,
@@ -73878,68 +73751,11 @@
    "regulatoryLabel": "",
    "trendLabel": "판정불가",
    "shortTermTrend": {
-    "status": "flat",
-    "ratio": 0.9218,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
+    "status": "unknown",
+    "ratio": null,
+    "measuredAt": null,
     "windowEnd": "2026-11-06",
-    "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 55.83333
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 45.83333
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 58.33333
-     },
-     {
-      "period": "2026-10-27",
-      "ratio": 61.66666
-     },
-     {
-      "period": "2026-10-28",
-      "ratio": 95
-     },
-     {
-      "period": "2026-10-29",
-      "ratio": 70
-     },
-     {
-      "period": "2026-10-30",
-      "ratio": 71.66666
-     },
-     {
-      "period": "2026-10-31",
-      "ratio": 47.5
-     },
-     {
-      "period": "2026-11-01",
-      "ratio": 59.16666
-     },
-     {
-      "period": "2026-11-02",
-      "ratio": 57.5
-     },
-     {
-      "period": "2026-11-03",
-      "ratio": 49.16666
-     },
-     {
-      "period": "2026-11-04",
-      "ratio": 78.33333
-     },
-     {
-      "period": "2026-11-05",
-      "ratio": 69.16666
-     },
-     {
-      "period": "2026-11-06",
-      "ratio": 61.66666
-     }
-    ]
+    "series": []
    },
    "currentSource": null,
    "seedKind": null,
@@ -74149,22 +73965,10 @@
    "trendLabel": "판정불가",
    "shortTermTrend": {
     "status": "falling",
-    "ratio": 0.4286,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
-    "windowEnd": "2026-11-06",
+    "ratio": 0.3613,
+    "measuredAt": "2026-11-10T04:29:01.366Z",
+    "windowEnd": "2026-11-09",
     "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 4.10156
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 8.00781
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 39.45312
-     },
      {
       "period": "2026-10-27",
       "ratio": 100
@@ -74208,6 +74012,18 @@
      {
       "period": "2026-11-06",
       "ratio": 9.96093
+     },
+     {
+      "period": "2026-11-07",
+      "ratio": 13.08593
+     },
+     {
+      "period": "2026-11-08",
+      "ratio": 12.10937
+     },
+     {
+      "period": "2026-11-09",
+      "ratio": 8.78906
      }
     ]
    },
@@ -74399,22 +74215,10 @@
    "trendLabel": "들쭉날쭉",
    "shortTermTrend": {
     "status": "flat",
-    "ratio": 0.9842,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
-    "windowEnd": "2026-11-06",
+    "ratio": 0.9893,
+    "measuredAt": "2026-11-10T04:29:01.366Z",
+    "windowEnd": "2026-11-09",
     "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 67
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 79
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 100
-     },
      {
       "period": "2026-10-27",
       "ratio": 91
@@ -74458,6 +74262,18 @@
      {
       "period": "2026-11-06",
       "ratio": 67
+     },
+     {
+      "period": "2026-11-07",
+      "ratio": 90
+     },
+     {
+      "period": "2026-11-08",
+      "ratio": 70
+     },
+     {
+      "period": "2026-11-09",
+      "ratio": 71
      }
     ]
    },
@@ -74988,341 +74804,6 @@
    "peakVolume": 2093,
    "peakConfidence": "작년엔 다른 달",
    "effectiveVolume": 1930,
-   "preemptRank": 3,
-   "carried": true
-  },
-  {
-   "serpSections": [
-    "AI브리핑",
-    "파워링크",
-    "카페",
-    "지식스니펫",
-    "지식iN",
-    "이미지"
-   ],
-   "layoutBestFor": "naver-blog",
-   "layoutHeadline": "블로그 글이 맨 위에 뜨는 화면 — 네이버 블로그로 붙는 자리다",
-   "layoutRanked": [
-    {
-     "surface": "naver-blog",
-     "label": "네이버 블로그·카페",
-     "position": 3
-    },
-    {
-     "surface": "kin",
-     "label": "지식iN 답변",
-     "position": 4
-    }
-   ],
-   "layoutAdsOnTop": false,
-   "earlyMover": false,
-   "earlyMoverReasons": [],
-   "sectionsMeasured": true,
-   "intentSource": "lexical",
-   "keyword": "숏드라마 무료보기",
-   "topic": "드라마",
-   "tier": "page1-weak",
-   "tierLabel": "1페이지에 빈자리 (실시간 노출 중)",
-   "openSlot": 1,
-   "searchVolume": 1900,
-   "documentCount": 5861,
-   "evidence": [
-    {
-     "code": "demand",
-     "text": "월 검색량 1,900 · 문서수 5,861"
-    },
-    {
-     "code": "ads",
-     "text": "상단 광고 4건 — 광고주가 돈을 넣는 검색어다"
-    },
-    {
-     "code": "open-slot",
-     "text": "상위 1번째 자리가 비어 있음"
-    },
-    {
-     "code": "empty-field",
-     "text": "상위 10개 중 정면으로 다룬 글 0건"
-    },
-    {
-     "code": "not-realtime",
-     "text": "실시간 검색어에는 아직 없음"
-    },
-    {
-     "code": "ai-briefing",
-     "text": "AI 브리핑이 떠 있고 5개 글을 인용 중"
-    }
-   ],
-   "intentLabel": "거래",
-   "briefingRisk": "low",
-   "regulatoryLabel": "",
-   "trendLabel": "판정불가",
-   "shortTermTrend": {
-    "status": "unknown",
-    "ratio": null,
-    "measuredAt": null,
-    "windowEnd": null,
-    "series": []
-   },
-   "currentSource": null,
-   "seedKind": null,
-   "expansionWords": null,
-   "timing": "",
-   "monthsToPeak": 0,
-   "timingGroup": "",
-   "titles": {
-    "seo": {
-     "text": "숏드라마 무료보기 추천 고르는 기준",
-     "frame": "recommend",
-     "basis": "검색 질문 '숏드라마 추천' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-    },
-    "home": {
-     "text": "숏드라마 무료보기 고르다 지쳤다면 볼 것",
-     "frame": "recommend",
-     "basis": "검색 질문 '숏드라마 추천' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-    }
-   },
-   "adsenseFit": false,
-   "adClicks": 21.3,
-   "adCtrPc": 1.28,
-   "adCtrMobile": 1.23,
-   "adDepth": 5,
-   "monetize": null,
-   "whySearch": null,
-   "brief": null,
-   "kinCount": 42,
-   "kinTop": [
-    {
-     "title": "요즘 인기 있는 숏드라마, 어떤 작품들이 있나요?",
-     "link": "https://kin.naver.com/qna/detail.naver?dirId=30301&docId=491000836&answerNo=3",
-     "views": 310,
-     "answers": 4
-    },
-    {
-     "title": "숏 드라마 추천작, 놓치지 말아야 할 작품 있나요?",
-     "link": "https://kin.naver.com/qna/detail.naver?dirId=30101&docId=491581913&answerNo=1",
-     "views": 247,
-     "answers": 1
-    },
-    {
-     "title": "'피치못할 게이다' 숏드라마, 출퇴근길에 보기 어떨까요?",
-     "link": "https://kin.naver.com/qna/detail.naver?dirId=3010101&docId=491664883&answerNo=2",
-     "views": 184,
-     "answers": 2
-    },
-    {
-     "title": "중국 숏드라마 애증보는법",
-     "link": "https://kin.naver.com/qna/detail.naver?dirId=11080502&docId=489167711&answerNo=0",
-     "views": 42,
-     "answers": null
-    },
-    {
-     "title": "세상에 버려졌던 나 중숙 숏드라마 유튜브 영상 찾아주세요",
-     "link": "https://kin.naver.com/qna/detail.naver?dirId=30301&docId=490380671&answerNo=0",
-     "views": 40,
-     "answers": null
-    }
-   ],
-   "kinMode": "date-views-v2",
-   "keywordPool": [
-    {
-     "keyword": "숏드라마 추천",
-     "searchVolume": 580,
-     "source": "ai-verified",
-     "documentCount": 30101
-    },
-    {
-     "keyword": "숏드라마 무료",
-     "searchVolume": 100,
-     "source": "ai-verified",
-     "documentCount": 5931
-    },
-    {
-     "keyword": "숏드라마 앱",
-     "searchVolume": 40,
-     "source": "ai-verified",
-     "documentCount": 4760
-    },
-    {
-     "keyword": "숏드라마 사이트",
-     "searchVolume": 20,
-     "source": "ai-verified",
-     "documentCount": 4987
-    },
-    {
-     "keyword": "숏드라마 앱 추천",
-     "searchVolume": 20,
-     "source": "ai-verified",
-     "documentCount": 2317
-    },
-    {
-     "keyword": "숏드라마 다시보기",
-     "searchVolume": 20,
-     "source": "ai-verified",
-     "documentCount": 33933
-    }
-   ],
-   "trend": {
-    "series": [
-     19,
-     17,
-     50,
-     53,
-     43,
-     33,
-     38,
-     36,
-     49,
-     51,
-     53,
-     47,
-     38,
-     51,
-     61,
-     75,
-     86,
-     100,
-     75,
-     56,
-     35,
-     55,
-     41,
-     59,
-     62,
-     69,
-     55,
-     29,
-     30
-    ],
-    "label": "",
-    "recommendation": ""
-   },
-   "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-   "subKeywords": [
-    {
-     "keyword": "숏드라마 추천",
-     "searchVolume": 580,
-     "frame": "recommend"
-    },
-    {
-     "keyword": "숏드라마 무료",
-     "searchVolume": 100,
-     "frame": "generic"
-    },
-    {
-     "keyword": "숏드라마 앱",
-     "searchVolume": 40,
-     "frame": "generic"
-    }
-   ],
-   "measuredAt": "2026-10-23T00:00:53.420Z",
-   "demandAsOf": "2026-10",
-   "latestVsPeakPct": 57,
-   "monthsSincePeak": 2,
-   "recencySummary": "2026-10 기준 최고치의 57% (정점은 2개월 전)",
-   "demandSeries": [
-    {
-     "period": "2025-04-01",
-     "ratio": 0.3
-    },
-    {
-     "period": "2025-06-01",
-     "ratio": 0.4
-    },
-    {
-     "period": "2026-03-01",
-     "ratio": 0.2
-    },
-    {
-     "period": "2026-04-01",
-     "ratio": 12.7
-    },
-    {
-     "period": "2026-05-01",
-     "ratio": 49.4
-    },
-    {
-     "period": "2026-06-01",
-     "ratio": 50.8
-    },
-    {
-     "period": "2026-07-01",
-     "ratio": 70.8
-    },
-    {
-     "period": "2026-08-01",
-     "ratio": 100
-    },
-    {
-     "period": "2026-09-01",
-     "ratio": 73.9
-    },
-    {
-     "period": "2026-10-01",
-     "ratio": 57.1
-    }
-   ],
-   "meaning": {
-    "citedTitles": [
-     "숏드라마·숏폼드라마·쇼츠드라마 광고 없이 무료 시청 | 드라마쇼츠",
-     "다음 숏드 보는법, Daum 루프 숏드라마 무료 시청",
-     "숏드라마 추천 BEST｜합법 시청 플랫폼·어플 비교"
-    ],
-    "questions": [
-     "빙의 숏드라마 77편 · 어디서 보고 몇 화까지 무료 · ShortBox"
-    ],
-    "productNames": [],
-    "priceMedian": 174000,
-    "priceSamples": 4
-   },
-   "serp": {
-    "sampledTitles": 10,
-    "exactTitleHits": 0,
-    "medianDaysAgo": 21,
-    "hasAiBriefing": true,
-    "aiBriefingSourceCount": 5,
-    "adCount": 4,
-    "slots": [
-     {
-      "rank": 1,
-      "title": "숏드라마 입문 가이드｜첫 작품 고르는 법 3가지",
-      "coverage": 0.5
-     },
-     {
-      "rank": 2,
-      "title": "숏드라마 '10화까지 무료'라더니, 11화서 결제창 뜨는 이유",
-      "coverage": 0.75
-     },
-     {
-      "rank": 3,
-      "title": "2026 추석에 무료로 볼 만한 AI 드라마·시리즈 10선, 배우가 사람이 아니라고?",
-      "coverage": 0.63
-     },
-     {
-      "rank": 4,
-      "title": "[AI숏드라마]나를 가두려는 전남친(찐으로 광고없이 풀버전 보는법,줄거리)",
-      "coverage": 0.5
-     },
-     {
-      "rank": 5,
-      "title": "숏드라마가 중국을 이긴 이유…유명 배우까지 모이는 곳",
-      "coverage": 0.5
-     },
-     {
-      "rank": 6,
-      "title": "숏폼 드라마 무료 보기 사이트, 정말 끝까지 공짜일까",
-      "coverage": 0.88
-     }
-    ]
-   },
-   "money": {
-    "value": 140,
-    "tier": "low",
-    "pc": 120,
-    "mobile": 140
-   },
-   "frontalSaturated": false,
-   "effectiveVolume": 1900,
-   "peakConfidence": "",
    "preemptRank": 3,
    "carried": true
   },
@@ -75887,68 +75368,11 @@
    "regulatoryLabel": "",
    "trendLabel": "들쭉날쭉",
    "shortTermTrend": {
-    "status": "falling",
-    "ratio": 0.7759,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
+    "status": "unknown",
+    "ratio": null,
+    "measuredAt": null,
     "windowEnd": "2026-11-06",
-    "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 96.62921
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 100
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 85.39325
-     },
-     {
-      "period": "2026-10-27",
-      "ratio": 70.78651
-     },
-     {
-      "period": "2026-10-28",
-      "ratio": 75.28089
-     },
-     {
-      "period": "2026-10-29",
-      "ratio": 79.77528
-     },
-     {
-      "period": "2026-10-30",
-      "ratio": 78.65168
-     },
-     {
-      "period": "2026-10-31",
-      "ratio": 59.55056
-     },
-     {
-      "period": "2026-11-01",
-      "ratio": 58.42696
-     },
-     {
-      "period": "2026-11-02",
-      "ratio": 58.42696
-     },
-     {
-      "period": "2026-11-03",
-      "ratio": 61.79775
-     },
-     {
-      "period": "2026-11-04",
-      "ratio": 67.41573
-     },
-     {
-      "period": "2026-11-05",
-      "ratio": 73.0337
-     },
-     {
-      "period": "2026-11-06",
-      "ratio": 76.40449
-     }
-    ]
+    "series": []
    },
    "currentSource": null,
    "seedKind": null,
@@ -76585,22 +76009,10 @@
    "trendLabel": "들쭉날쭉",
    "shortTermTrend": {
     "status": "flat",
-    "ratio": 0.9777,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
-    "windowEnd": "2026-11-06",
+    "ratio": 0.9951,
+    "measuredAt": "2026-11-10T04:29:01.366Z",
+    "windowEnd": "2026-11-09",
     "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 25.49019
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 36.2745
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 66.66666
-     },
      {
       "period": "2026-10-27",
       "ratio": 87.2549
@@ -76644,6 +76056,18 @@
      {
       "period": "2026-11-06",
       "ratio": 63.72549
+     },
+     {
+      "period": "2026-11-07",
+      "ratio": 24.5098
+     },
+     {
+      "period": "2026-11-08",
+      "ratio": 27.45098
+     },
+     {
+      "period": "2026-11-09",
+      "ratio": 85.29411
      }
     ]
    },
@@ -76956,68 +76380,11 @@
    "regulatoryLabel": "",
    "trendLabel": "상승세",
    "shortTermTrend": {
-    "status": "flat",
-    "ratio": 0.8031,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
+    "status": "unknown",
+    "ratio": null,
+    "measuredAt": null,
     "windowEnd": "2026-11-06",
-    "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 6.37681
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 6.08695
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 5.21739
-     },
-     {
-      "period": "2026-10-27",
-      "ratio": 24.05797
-     },
-     {
-      "period": "2026-10-28",
-      "ratio": 21.15942
-     },
-     {
-      "period": "2026-10-29",
-      "ratio": 5.7971
-     },
-     {
-      "period": "2026-10-30",
-      "ratio": 6.37681
-     },
-     {
-      "period": "2026-10-31",
-      "ratio": 4.34782
-     },
-     {
-      "period": "2026-11-01",
-      "ratio": 4.34782
-     },
-     {
-      "period": "2026-11-02",
-      "ratio": 25.7971
-     },
-     {
-      "period": "2026-11-03",
-      "ratio": 9.85507
-     },
-     {
-      "period": "2026-11-04",
-      "ratio": 8.9855
-     },
-     {
-      "period": "2026-11-05",
-      "ratio": 2.89855
-     },
-     {
-      "period": "2026-11-06",
-      "ratio": 4.05797
-     }
-    ]
+    "series": []
    },
    "currentSource": null,
    "seedKind": null,
@@ -77235,6 +76602,363 @@
   },
   {
    "serpSections": [
+    "AI브리핑",
+    "파워링크",
+    "카페",
+    "지식스니펫",
+    "이미지"
+   ],
+   "layoutBestFor": "naver-blog",
+   "layoutHeadline": "블로그 글이 맨 위에 뜨는 화면 — 네이버 블로그로 붙는 자리다",
+   "layoutRanked": [
+    {
+     "surface": "naver-blog",
+     "label": "네이버 블로그·카페",
+     "position": 3
+    },
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 4
+    }
+   ],
+   "layoutAdsOnTop": false,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "lexical",
+   "keyword": "숏드라마 무료보기",
+   "topic": "드라마",
+   "tier": "contested",
+   "tierLabel": "경합 — 정면 대응 있음",
+   "openSlot": 1,
+   "searchVolume": 1770,
+   "documentCount": 6335,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 1,770 · 문서수 6,335"
+    },
+    {
+     "code": "ads",
+     "text": "상단 광고 5건 — 광고주가 돈을 넣는 검색어다"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 1번째 자리가 비어 있음"
+    },
+    {
+     "code": "contested",
+     "text": "상위 10개 중 정면으로 다룬 글 1건"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑이 떠 있고 6개 글을 인용 중"
+    }
+   ],
+   "intentLabel": "거래",
+   "briefingRisk": null,
+   "regulatoryLabel": "",
+   "trendLabel": "판정불가",
+   "shortTermTrend": {
+    "status": "flat",
+    "ratio": 1.0026,
+    "measuredAt": "2026-11-10T04:29:01.366Z",
+    "windowEnd": "2026-11-09",
+    "series": [
+     {
+      "period": "2026-10-27",
+      "ratio": 97.43589
+     },
+     {
+      "period": "2026-10-28",
+      "ratio": 74.35897
+     },
+     {
+      "period": "2026-10-29",
+      "ratio": 76.92307
+     },
+     {
+      "period": "2026-10-30",
+      "ratio": 65.38461
+     },
+     {
+      "period": "2026-10-31",
+      "ratio": 53.84615
+     },
+     {
+      "period": "2026-11-01",
+      "ratio": 51.28205
+     },
+     {
+      "period": "2026-11-02",
+      "ratio": 78.20512
+     },
+     {
+      "period": "2026-11-03",
+      "ratio": 58.97435
+     },
+     {
+      "period": "2026-11-04",
+      "ratio": 53.84615
+     },
+     {
+      "period": "2026-11-05",
+      "ratio": 65.38461
+     },
+     {
+      "period": "2026-11-06",
+      "ratio": 85.89743
+     },
+     {
+      "period": "2026-11-07",
+      "ratio": 100
+     },
+     {
+      "period": "2026-11-08",
+      "ratio": 73.07692
+     },
+     {
+      "period": "2026-11-09",
+      "ratio": 61.53846
+     }
+    ]
+   },
+   "currentSource": null,
+   "seedKind": null,
+   "expansionWords": null,
+   "timing": "",
+   "monthsToPeak": null,
+   "timingGroup": "",
+   "titles": {
+    "seo": {
+     "text": "숏드라마 무료보기 추천 고르는 기준",
+     "frame": "recommend",
+     "basis": "검색 질문 '숏드라마 추천' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+    },
+    "home": {
+     "text": "숏드라마 무료보기 고르다 지쳤다면 볼 것",
+     "frame": "recommend",
+     "basis": "검색 질문 '숏드라마 추천' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+    }
+   },
+   "adsenseFit": false,
+   "adClicks": null,
+   "adCtrPc": null,
+   "adCtrMobile": null,
+   "adDepth": null,
+   "monetize": null,
+   "whySearch": null,
+   "brief": null,
+   "kinCount": null,
+   "kinTop": null,
+   "keywordPool": [
+    {
+     "keyword": "숏드라마 추천",
+     "searchVolume": 580,
+     "source": "ai-verified",
+     "documentCount": 30101
+    },
+    {
+     "keyword": "숏드라마 무료",
+     "searchVolume": 100,
+     "source": "ai-verified",
+     "documentCount": 5931
+    },
+    {
+     "keyword": "숏드라마 앱",
+     "searchVolume": 40,
+     "source": "ai-verified",
+     "documentCount": 4760
+    },
+    {
+     "keyword": "숏드라마 사이트",
+     "searchVolume": 20,
+     "source": "ai-verified",
+     "documentCount": 4987
+    },
+    {
+     "keyword": "숏드라마 앱 추천",
+     "searchVolume": 20,
+     "source": "ai-verified",
+     "documentCount": 2317
+    },
+    {
+     "keyword": "숏드라마 다시보기",
+     "searchVolume": 20,
+     "source": "ai-verified",
+     "documentCount": 33933
+    }
+   ],
+   "trend": {
+    "series": [
+     19,
+     17,
+     50,
+     53,
+     43,
+     33,
+     38,
+     36,
+     49,
+     51,
+     53,
+     47,
+     38,
+     51,
+     61,
+     75,
+     86,
+     100,
+     75,
+     56,
+     35,
+     55,
+     41,
+     59,
+     62,
+     69,
+     55,
+     29,
+     30
+    ],
+    "label": "",
+    "recommendation": ""
+   },
+   "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+   "subKeywords": [
+    {
+     "keyword": "숏드라마 추천",
+     "searchVolume": 580,
+     "frame": "recommend"
+    },
+    {
+     "keyword": "숏드라마 무료",
+     "searchVolume": 100,
+     "frame": "generic"
+    },
+    {
+     "keyword": "숏드라마 앱",
+     "searchVolume": 40,
+     "frame": "generic"
+    }
+   ],
+   "measuredAt": "2026-11-10T04:21:15.656Z",
+   "searchVolumeMeasuredAt": "2026-11-10T04:21:14.744Z",
+   "documentCountMeasuredAt": "2026-11-10T04:21:15.656Z",
+   "demandAsOf": "2026-11",
+   "latestVsPeakPct": 22,
+   "monthsSincePeak": 3,
+   "recencySummary": "2026-11 기준 최고치의 22% (정점은 3개월 전)",
+   "demandSeries": [
+    {
+     "period": "2025-04-01",
+     "ratio": 0.3
+    },
+    {
+     "period": "2025-06-01",
+     "ratio": 0.4
+    },
+    {
+     "period": "2026-03-01",
+     "ratio": 0.2
+    },
+    {
+     "period": "2026-04-01",
+     "ratio": 12.7
+    },
+    {
+     "period": "2026-05-01",
+     "ratio": 49.4
+    },
+    {
+     "period": "2026-06-01",
+     "ratio": 50.8
+    },
+    {
+     "period": "2026-07-01",
+     "ratio": 70.8
+    },
+    {
+     "period": "2026-08-01",
+     "ratio": 100
+    },
+    {
+     "period": "2026-09-01",
+     "ratio": 73.9
+    },
+    {
+     "period": "2026-10-01",
+     "ratio": 82.5
+    },
+    {
+     "period": "2026-11-01",
+     "ratio": 21.7
+    }
+   ],
+   "meaning": {
+    "citedTitles": [
+     "[숏드라마 앱 팩트체크] 드라마박스 vs 넷숏: 무료 코인 결제 방식과 298만 명 유입의 비밀",
+     "숏드라마 '10화까지 무료'라더니, 11화서 결제창 뜨는 이유",
+     "다음 숏드 보는법 루프 숏폼에서 무료 숏드라마 시청 방법 알려드려요"
+    ],
+    "questions": [],
+    "productNames": [],
+    "priceMedian": 12000,
+    "priceSamples": 4
+   },
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 1,
+    "medianDaysAgo": 21,
+    "hasAiBriefing": true,
+    "aiBriefingSourceCount": 6,
+    "adCount": 5,
+    "slots": [
+     {
+      "rank": 1,
+      "title": "(업데이트 차원 다시 쓰는) 중국 세로 숏드라마 OTT 플랫폼 초보자 가이드",
+      "coverage": 0.5
+     },
+     {
+      "rank": 2,
+      "title": "숏드라마 무료보기, 릴숏 드라마 무료 몇 화까지? 드라마박스 무료 코인·출석 체크 받는 법",
+      "coverage": 1
+     },
+     {
+      "rank": 3,
+      "title": "숏드라마 입문 가이드｜첫 작품 고르는 법 3가지",
+      "coverage": 0.5
+     },
+     {
+      "rank": 4,
+      "title": "숏드라마 '10화까지 무료'라더니, 11화서 결제창 뜨는 이유",
+      "coverage": 0.75
+     },
+     {
+      "rank": 5,
+      "title": "2026 추석에 무료로 볼 만한 AI 드라마·시리즈 10선, 배우가 사람이 아니라고?",
+      "coverage": 0.63
+     },
+     {
+      "rank": 6,
+      "title": "숏폼 드라마 무료 보기 사이트, 정말 끝까지 공짜일까",
+      "coverage": 0.88
+     }
+    ]
+   },
+   "demandSeriesCheckedAt": "2026-11-10T04:28:52.198Z",
+   "frontalSaturated": false,
+   "effectiveVolume": 1770,
+   "peakConfidence": "",
+   "preemptRank": 3
+  },
+  {
+   "serpSections": [
     "파워링크",
     "지식스니펫",
     "이미지",
@@ -77298,68 +77022,11 @@
    "regulatoryLabel": "",
    "trendLabel": "상승세",
    "shortTermTrend": {
-    "status": "rising",
-    "ratio": 1.5305,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
+    "status": "unknown",
+    "ratio": null,
+    "measuredAt": null,
     "windowEnd": "2026-11-06",
-    "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 44
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 44
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 44
-     },
-     {
-      "period": "2026-10-27",
-      "ratio": 58.66666
-     },
-     {
-      "period": "2026-10-28",
-      "ratio": 42
-     },
-     {
-      "period": "2026-10-29",
-      "ratio": 45.33333
-     },
-     {
-      "period": "2026-10-30",
-      "ratio": 61.33333
-     },
-     {
-      "period": "2026-10-31",
-      "ratio": 62
-     },
-     {
-      "period": "2026-11-01",
-      "ratio": 100
-     },
-     {
-      "period": "2026-11-02",
-      "ratio": 70.66666
-     },
-     {
-      "period": "2026-11-03",
-      "ratio": 64
-     },
-     {
-      "period": "2026-11-04",
-      "ratio": 81.99999
-     },
-     {
-      "period": "2026-11-05",
-      "ratio": 57.33333
-     },
-     {
-      "period": "2026-11-06",
-      "ratio": 83.33333
-     }
-    ]
+    "series": []
    },
    "currentSource": null,
    "seedKind": null,
@@ -77576,6 +77243,338 @@
    "effectiveVolume": 1760,
    "preemptRank": 3,
    "carried": true
+  },
+  {
+   "serpSections": [
+    "파워링크",
+    "AI브리핑",
+    "인플루언서",
+    "카페",
+    "지식스니펫",
+    "AI추천",
+    "이미지"
+   ],
+   "layoutBestFor": "naver-blog",
+   "layoutHeadline": "블로그 글이 맨 위에 뜨는 화면 — 네이버 블로그로 붙는 자리다",
+   "layoutRanked": [
+    {
+     "surface": "naver-blog",
+     "label": "네이버 블로그·카페",
+     "position": 3
+    },
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 5
+    }
+   ],
+   "layoutAdsOnTop": true,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "serp",
+   "keyword": "기탄수학 단계표",
+   "topic": "어학·외국어",
+   "tier": "contested",
+   "tierLabel": "경합 — 정면 대응 있음",
+   "openSlot": 7,
+   "searchVolume": 1740,
+   "documentCount": 5377,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 1,740 · 문서수 5,377"
+    },
+    {
+     "code": "ads",
+     "text": "상단 광고 4건 — 광고주가 돈을 넣는 검색어다"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 7번째 자리가 비어 있음"
+    },
+    {
+     "code": "contested",
+     "text": "상위 10개 중 정면으로 다룬 글 1건"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑이 떠 있고 3개 글을 인용 중"
+    }
+   ],
+   "intentLabel": "거래",
+   "briefingRisk": null,
+   "regulatoryLabel": "",
+   "trendLabel": "상승세",
+   "shortTermTrend": {
+    "status": "flat",
+    "ratio": 0.9681,
+    "measuredAt": "2026-11-10T04:29:01.366Z",
+    "windowEnd": "2026-11-09",
+    "series": [
+     {
+      "period": "2026-10-27",
+      "ratio": 98.75
+     },
+     {
+      "period": "2026-10-28",
+      "ratio": 81.25
+     },
+     {
+      "period": "2026-10-29",
+      "ratio": 83.75
+     },
+     {
+      "period": "2026-10-30",
+      "ratio": 77.5
+     },
+     {
+      "period": "2026-10-31",
+      "ratio": 45
+     },
+     {
+      "period": "2026-11-01",
+      "ratio": 65
+     },
+     {
+      "period": "2026-11-02",
+      "ratio": 57.5
+     },
+     {
+      "period": "2026-11-03",
+      "ratio": 70
+     },
+     {
+      "period": "2026-11-04",
+      "ratio": 96.25
+     },
+     {
+      "period": "2026-11-05",
+      "ratio": 57.5
+     },
+     {
+      "period": "2026-11-06",
+      "ratio": 80
+     },
+     {
+      "period": "2026-11-07",
+      "ratio": 47.5
+     },
+     {
+      "period": "2026-11-08",
+      "ratio": 56.25
+     },
+     {
+      "period": "2026-11-09",
+      "ratio": 85
+     }
+    ]
+   },
+   "currentSource": null,
+   "seedKind": null,
+   "expansionWords": null,
+   "timing": "",
+   "monthsToPeak": null,
+   "timingGroup": "",
+   "titles": {
+    "seo": {
+     "text": "",
+     "frame": "generic",
+     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+    },
+    "home": {
+     "text": "",
+     "frame": "generic",
+     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+    }
+   },
+   "adsenseFit": false,
+   "adClicks": null,
+   "adCtrPc": null,
+   "adCtrMobile": null,
+   "adDepth": null,
+   "monetize": null,
+   "whySearch": null,
+   "brief": null,
+   "kinCount": null,
+   "kinTop": null,
+   "keywordPool": null,
+   "trend": null,
+   "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+   "subKeywords": [],
+   "measuredAt": "2026-11-10T04:21:09.837Z",
+   "searchVolumeMeasuredAt": "2026-11-10T04:21:08.934Z",
+   "documentCountMeasuredAt": "2026-11-10T04:21:09.837Z",
+   "demandAsOf": "2026-11",
+   "latestVsPeakPct": 15,
+   "monthsSincePeak": 10,
+   "recencySummary": "2026-11 기준 최고치의 15% (정점은 10개월 전)",
+   "demandSeries": [
+    {
+     "period": "2024-11-01",
+     "ratio": 2.5
+    },
+    {
+     "period": "2024-12-01",
+     "ratio": 3.7
+    },
+    {
+     "period": "2025-01-01",
+     "ratio": 5.7
+    },
+    {
+     "period": "2025-02-01",
+     "ratio": 5
+    },
+    {
+     "period": "2025-03-01",
+     "ratio": 10.4
+    },
+    {
+     "period": "2025-04-01",
+     "ratio": 8.6
+    },
+    {
+     "period": "2025-05-01",
+     "ratio": 9.6
+    },
+    {
+     "period": "2025-06-01",
+     "ratio": 9.3
+    },
+    {
+     "period": "2025-07-01",
+     "ratio": 14.7
+    },
+    {
+     "period": "2025-08-01",
+     "ratio": 22.2
+    },
+    {
+     "period": "2025-09-01",
+     "ratio": 16.3
+    },
+    {
+     "period": "2025-10-01",
+     "ratio": 13
+    },
+    {
+     "period": "2025-11-01",
+     "ratio": 13.2
+    },
+    {
+     "period": "2025-12-01",
+     "ratio": 23.5
+    },
+    {
+     "period": "2026-01-01",
+     "ratio": 100
+    },
+    {
+     "period": "2026-02-01",
+     "ratio": 66.6
+    },
+    {
+     "period": "2026-03-01",
+     "ratio": 79.9
+    },
+    {
+     "period": "2026-04-01",
+     "ratio": 59.9
+    },
+    {
+     "period": "2026-05-01",
+     "ratio": 50.6
+    },
+    {
+     "period": "2026-06-01",
+     "ratio": 57.9
+    },
+    {
+     "period": "2026-07-01",
+     "ratio": 75
+    },
+    {
+     "period": "2026-08-01",
+     "ratio": 64.8
+    },
+    {
+     "period": "2026-09-01",
+     "ratio": 46.1
+    },
+    {
+     "period": "2026-10-01",
+     "ratio": 54.1
+    },
+    {
+     "period": "2026-11-01",
+     "ratio": 15.5
+    }
+   ],
+   "meaning": {
+    "citedTitles": [
+     "기탄수학 단계표 순서 연산 습관 잡는 장단점 활용법",
+     "기탄수학 단계별 연령·학년 정리｜48개월 아들의 A단계 완주 이야기",
+     "기탄수학 단원별 세부 목차 (A~O단계 전부)(하루 페이지 권장량O)"
+    ],
+    "questions": [],
+    "productNames": [],
+    "priceMedian": 25000,
+    "priceSamples": 4
+   },
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 1,
+    "medianDaysAgo": 21,
+    "hasAiBriefing": true,
+    "aiBriefingSourceCount": 3,
+    "adCount": 4,
+    "slots": [
+     {
+      "rank": 1,
+      "title": "기탄수학 단계별 목차 A~M｜A-1부터 M-5까지 한눈에 정리",
+      "coverage": 0.83
+     },
+     {
+      "rank": 2,
+      "title": "기탄수학 단계별 연령·학년 정리｜48개월 아들의 A단계 완주 이야기",
+      "coverage": 0.83
+     },
+     {
+      "rank": 3,
+      "title": "기탄수학 단계표 순서 연산 습관 잡는 장단점 활용법",
+      "coverage": 1
+     },
+     {
+      "rank": 4,
+      "title": "기탄수학 단원별 세부 목차 (A~O단계 전부)(하루 페이지 권장량O)",
+      "coverage": 0.83
+     },
+     {
+      "rank": 5,
+      "title": "기탄수학 E단계 1권",
+      "coverage": 0.83
+     },
+     {
+      "rank": 6,
+      "title": "기탄수학 A~O단계 총정리｜초등·중등·고등 몇 학년 과정일까? 학교 수학 진도 비교",
+      "coverage": 0.83
+     }
+    ]
+   },
+   "demandSeriesCheckedAt": "2026-11-10T04:28:52.198Z",
+   "frontalSaturated": false,
+   "peakMonth": 1,
+   "peakMultiplier": 1.7,
+   "peakRecurring": false,
+   "peakVolume": 3216,
+   "peakConfidence": "작년엔 다른 달",
+   "effectiveVolume": 1740,
+   "preemptRank": 3
   },
   {
    "serpSections": [
@@ -77908,287 +77907,6 @@
   },
   {
    "serpSections": [
-    "파워링크",
-    "AI브리핑",
-    "인플루언서",
-    "카페",
-    "AI추천",
-    "지식스니펫",
-    "지식iN",
-    "이미지"
-   ],
-   "layoutBestFor": "naver-blog",
-   "layoutHeadline": "블로그 글이 맨 위에 뜨는 화면 — 네이버 블로그로 붙는 자리다",
-   "layoutRanked": [
-    {
-     "surface": "naver-blog",
-     "label": "네이버 블로그·카페",
-     "position": 3
-    },
-    {
-     "surface": "kin",
-     "label": "지식iN 답변",
-     "position": 6
-    }
-   ],
-   "layoutAdsOnTop": true,
-   "earlyMover": false,
-   "earlyMoverReasons": [],
-   "sectionsMeasured": true,
-   "intentSource": "serp",
-   "keyword": "기탄수학 단계표",
-   "topic": "어학·외국어",
-   "tier": "contested",
-   "tierLabel": "경합 — 정면 대응 있음",
-   "openSlot": 6,
-   "searchVolume": 1520,
-   "documentCount": 4925,
-   "evidence": [
-    {
-     "code": "demand",
-     "text": "월 검색량 1,520 · 문서수 4,925"
-    },
-    {
-     "code": "ads",
-     "text": "상단 광고 7건 — 광고주가 돈을 넣는 검색어다"
-    },
-    {
-     "code": "open-slot",
-     "text": "상위 6번째 자리가 비어 있음"
-    },
-    {
-     "code": "contested",
-     "text": "상위 10개 중 정면으로 다룬 글 1건"
-    },
-    {
-     "code": "not-realtime",
-     "text": "실시간 검색어에는 아직 없음"
-    },
-    {
-     "code": "ai-briefing",
-     "text": "AI 브리핑이 떠 있고 4개 글을 인용 중"
-    }
-   ],
-   "intentLabel": "정보",
-   "briefingRisk": "low",
-   "regulatoryLabel": "",
-   "trendLabel": "상승세",
-   "shortTermTrend": {
-    "status": "unknown",
-    "ratio": null,
-    "measuredAt": null,
-    "windowEnd": null,
-    "series": []
-   },
-   "currentSource": null,
-   "seedKind": null,
-   "expansionWords": null,
-   "timing": "",
-   "monthsToPeak": 0,
-   "timingGroup": "지금 뜨는 중",
-   "titles": {
-    "seo": {
-     "text": "",
-     "frame": "generic",
-     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-    },
-    "home": {
-     "text": "",
-     "frame": "generic",
-     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-    }
-   },
-   "adsenseFit": true,
-   "adClicks": 19.7,
-   "adCtrPc": 1.01,
-   "adCtrMobile": 1.54,
-   "adDepth": 5,
-   "monetize": null,
-   "whySearch": null,
-   "brief": null,
-   "kinCount": 85,
-   "kinTop": [],
-   "kinMode": "date-views-v2",
-   "keywordPool": null,
-   "trend": null,
-   "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적 (노출 광고 5개 · 광고 클릭률 1.54% 실측)",
-   "subKeywords": [],
-   "measuredAt": "2026-10-22T23:56:21.119Z",
-   "demandAsOf": "2026-10",
-   "latestVsPeakPct": 38,
-   "monthsSincePeak": 9,
-   "recencySummary": "2026-10 기준 최고치의 38% (정점은 9개월 전)",
-   "demandSeries": [
-    {
-     "period": "2024-10-01",
-     "ratio": 0.8
-    },
-    {
-     "period": "2024-11-01",
-     "ratio": 2.5
-    },
-    {
-     "period": "2024-12-01",
-     "ratio": 3.7
-    },
-    {
-     "period": "2025-01-01",
-     "ratio": 5.7
-    },
-    {
-     "period": "2025-02-01",
-     "ratio": 5
-    },
-    {
-     "period": "2025-03-01",
-     "ratio": 10.4
-    },
-    {
-     "period": "2025-04-01",
-     "ratio": 8.6
-    },
-    {
-     "period": "2025-05-01",
-     "ratio": 9.6
-    },
-    {
-     "period": "2025-06-01",
-     "ratio": 9.3
-    },
-    {
-     "period": "2025-07-01",
-     "ratio": 14.7
-    },
-    {
-     "period": "2025-08-01",
-     "ratio": 22.2
-    },
-    {
-     "period": "2025-09-01",
-     "ratio": 16.3
-    },
-    {
-     "period": "2025-10-01",
-     "ratio": 13
-    },
-    {
-     "period": "2025-11-01",
-     "ratio": 13.2
-    },
-    {
-     "period": "2025-12-01",
-     "ratio": 23.5
-    },
-    {
-     "period": "2026-01-01",
-     "ratio": 100
-    },
-    {
-     "period": "2026-02-01",
-     "ratio": 66.6
-    },
-    {
-     "period": "2026-03-01",
-     "ratio": 79.9
-    },
-    {
-     "period": "2026-04-01",
-     "ratio": 59.9
-    },
-    {
-     "period": "2026-05-01",
-     "ratio": 50.6
-    },
-    {
-     "period": "2026-06-01",
-     "ratio": 57.9
-    },
-    {
-     "period": "2026-07-01",
-     "ratio": 75
-    },
-    {
-     "period": "2026-08-01",
-     "ratio": 64.8
-    },
-    {
-     "period": "2026-09-01",
-     "ratio": 46.1
-    },
-    {
-     "period": "2026-10-01",
-     "ratio": 38.3
-    }
-   ],
-   "meaning": {
-    "citedTitles": [
-     "기탄수학 - 위키백과 한국어",
-     "기탄수학 초등수학 연산교재 단계",
-     "기탄수학 단계 선택, 7세 수학 쉬운 단계부터 시작한 이유"
-    ],
-    "questions": [],
-    "productNames": [],
-    "priceMedian": 5400,
-    "priceSamples": 4
-   },
-   "serp": {
-    "sampledTitles": 10,
-    "exactTitleHits": 1,
-    "medianDaysAgo": 7,
-    "hasAiBriefing": true,
-    "aiBriefingSourceCount": 4,
-    "adCount": 7,
-    "slots": [
-     {
-      "rank": 1,
-      "title": "기탄수학 단계별 목차 A~M｜A-1부터 M-5까지 한눈에 정리",
-      "coverage": 0.83
-     },
-     {
-      "rank": 2,
-      "title": "기탄수학 E단계 1권",
-      "coverage": 0.83
-     },
-     {
-      "rank": 3,
-      "title": "기탄수학 단원별 세부 목차 (A~O단계 전부)(하루 페이지 권장량O)",
-      "coverage": 0.83
-     },
-     {
-      "rank": 4,
-      "title": "기탄수학 단계 선택, 7세 수학 쉬운 단계부터 시작한 이유",
-      "coverage": 0.83
-     },
-     {
-      "rank": 5,
-      "title": "유아 수학 교재 추천 기탄 사고력 수학 C단계 엄마표 수학 예비초등 솔직후기",
-      "coverage": 0.83
-     },
-     {
-      "rank": 6,
-      "title": "내돈내산) 기탄수학 리얼후기",
-      "coverage": 0.5
-     }
-    ]
-   },
-   "money": {
-    "value": 480,
-    "tier": "low",
-    "pc": 230,
-    "mobile": 480
-   },
-   "frontalSaturated": false,
-   "peakMonth": 1,
-   "peakMultiplier": 1.7,
-   "peakRecurring": false,
-   "peakVolume": 3969,
-   "peakConfidence": "작년엔 다른 달",
-   "effectiveVolume": 1520,
-   "preemptRank": 3,
-   "carried": true
-  },
-  {
-   "serpSections": [
     "AI브리핑",
     "카페",
     "파워링크",
@@ -78254,23 +77972,11 @@
    "regulatoryLabel": "",
    "trendLabel": "판정불가",
    "shortTermTrend": {
-    "status": "flat",
-    "ratio": 0.9006,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
-    "windowEnd": "2026-11-06",
+    "status": "rising",
+    "ratio": 1.264,
+    "measuredAt": "2026-11-10T04:29:01.366Z",
+    "windowEnd": "2026-11-09",
     "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 61.95652
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 34.7826
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 57.60869
-     },
      {
       "period": "2026-10-27",
       "ratio": 71.73913
@@ -78314,6 +78020,18 @@
      {
       "period": "2026-11-06",
       "ratio": 100
+     },
+     {
+      "period": "2026-11-07",
+      "ratio": 61.95652
+     },
+     {
+      "period": "2026-11-08",
+      "ratio": 59.7826
+     },
+     {
+      "period": "2026-11-09",
+      "ratio": 71.73913
      }
     ]
    },
@@ -79391,7 +79109,12 @@
    "effectiveVolume": 1380,
    "peakConfidence": "",
    "preemptRank": 3,
-   "carried": true
+   "carried": true,
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-10T04:21:12.171Z",
+    "reason": "최근 검색결과 재검증에서 추천 조건을 충족하지 못했습니다."
+   }
   },
   {
    "serpSections": [
@@ -79459,68 +79182,11 @@
    "regulatoryLabel": "",
    "trendLabel": "상승세",
    "shortTermTrend": {
-    "status": "flat",
-    "ratio": 1.1139,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
+    "status": "unknown",
+    "ratio": null,
+    "measuredAt": null,
     "windowEnd": "2026-11-06",
-    "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 65
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 51.66666
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 58.33333
-     },
-     {
-      "period": "2026-10-27",
-      "ratio": 38.33333
-     },
-     {
-      "period": "2026-10-28",
-      "ratio": 55
-     },
-     {
-      "period": "2026-10-29",
-      "ratio": 26.66666
-     },
-     {
-      "period": "2026-10-30",
-      "ratio": 41.66666
-     },
-     {
-      "period": "2026-10-31",
-      "ratio": 76.66666
-     },
-     {
-      "period": "2026-11-01",
-      "ratio": 76.66666
-     },
-     {
-      "period": "2026-11-02",
-      "ratio": 28.33333
-     },
-     {
-      "period": "2026-11-03",
-      "ratio": 58.33333
-     },
-     {
-      "period": "2026-11-04",
-      "ratio": 41.66666
-     },
-     {
-      "period": "2026-11-05",
-      "ratio": 41.66666
-     },
-     {
-      "period": "2026-11-06",
-      "ratio": 51.66666
-     }
-    ]
+    "series": []
    },
    "currentSource": null,
    "seedKind": null,
@@ -81144,7 +80810,8 @@
    "frontalSaturated": false,
    "effectiveVolume": 1170,
    "peakConfidence": "",
-   "preemptRank": 3
+   "preemptRank": 3,
+   "carried": true
   },
   {
    "serpSections": [
@@ -84111,68 +83778,11 @@
    "regulatoryLabel": "",
    "trendLabel": "판정불가",
    "shortTermTrend": {
-    "status": "falling",
-    "ratio": 0,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
+    "status": "unknown",
+    "ratio": null,
+    "measuredAt": null,
     "windowEnd": "2026-11-06",
-    "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 17.70833
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 11.45833
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 5.20833
-     },
-     {
-      "period": "2026-10-27",
-      "ratio": 0
-     },
-     {
-      "period": "2026-10-28",
-      "ratio": 0
-     },
-     {
-      "period": "2026-10-29",
-      "ratio": 0
-     },
-     {
-      "period": "2026-10-30",
-      "ratio": 0
-     },
-     {
-      "period": "2026-10-31",
-      "ratio": 0
-     },
-     {
-      "period": "2026-11-01",
-      "ratio": 0
-     },
-     {
-      "period": "2026-11-02",
-      "ratio": 0
-     },
-     {
-      "period": "2026-11-03",
-      "ratio": 0
-     },
-     {
-      "period": "2026-11-04",
-      "ratio": 0
-     },
-     {
-      "period": "2026-11-05",
-      "ratio": 0
-     },
-     {
-      "period": "2026-11-06",
-      "ratio": 0
-     }
-    ]
+    "series": []
    },
    "currentSource": null,
    "seedKind": null,
@@ -84855,7 +84465,8 @@
    "frontalSaturated": false,
    "effectiveVolume": 1000,
    "peakConfidence": "",
-   "preemptRank": 3
+   "preemptRank": 3,
+   "carried": true
   },
   {
    "serpSections": [
@@ -85779,7 +85390,7 @@
    "carried": true,
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-09T04:48:21.983Z",
+    "checkedAt": "2026-11-10T04:20:52.785Z",
     "reason": "최근 검색결과 재검증에서 추천 조건을 충족하지 못했습니다."
    }
   },
@@ -85787,23 +85398,24 @@
    "serpSections": [
     "파워링크",
     "AI브리핑",
-    "AI추천",
-    "지식스니펫",
     "인플루언서",
     "카페",
+    "지식스니펫",
+    "AI추천",
+    "뉴스",
     "이미지"
    ],
-   "layoutBestFor": "kin",
-   "layoutHeadline": "지식iN 이 블로그보다 위에 뜬다 — 답변을 달아 내 채널로 끌어오는 편이 빠르다",
+   "layoutBestFor": "naver-blog",
+   "layoutHeadline": "블로그 글이 맨 위에 뜨는 화면 — 네이버 블로그로 붙는 자리다",
    "layoutRanked": [
-    {
-     "surface": "kin",
-     "label": "지식iN 답변",
-     "position": 4
-    },
     {
      "surface": "naver-blog",
      "label": "네이버 블로그·카페",
+     "position": 3
+    },
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
      "position": 5
     }
    ],
@@ -85816,13 +85428,13 @@
    "topic": "육아·결혼",
    "tier": "page1-weak",
    "tierLabel": "1페이지에 빈자리 (실시간 노출 중)",
-   "openSlot": 4,
-   "searchVolume": 890,
-   "documentCount": 8722,
+   "openSlot": 3,
+   "searchVolume": 900,
+   "documentCount": 8738,
    "evidence": [
     {
      "code": "demand",
-     "text": "월 검색량 890 · 문서수 8,722"
+     "text": "월 검색량 900 · 문서수 8,738"
     },
     {
      "code": "ads",
@@ -85830,7 +85442,7 @@
     },
     {
      "code": "open-slot",
-     "text": "상위 4번째 자리가 비어 있음"
+     "text": "상위 3번째 자리가 비어 있음"
     },
     {
      "code": "empty-field",
@@ -85848,17 +85460,13 @@
    "intentLabel": "거래",
    "briefingRisk": null,
    "regulatoryLabel": "",
-   "trendLabel": "들쭉날쭉",
+   "trendLabel": "에버그린",
    "shortTermTrend": {
     "status": "flat",
-    "ratio": 1.0795,
-    "measuredAt": "2026-11-09T04:56:04.087Z",
-    "windowEnd": "2026-11-08",
+    "ratio": 1.0667,
+    "measuredAt": "2026-11-10T04:29:01.366Z",
+    "windowEnd": "2026-11-09",
     "series": [
-     {
-      "period": "2026-10-26",
-      "ratio": 53.84615
-     },
      {
       "period": "2026-10-27",
       "ratio": 65.38461
@@ -85910,6 +85518,10 @@
      {
       "period": "2026-11-08",
       "ratio": 36.53846
+     },
+     {
+      "period": "2026-11-09",
+      "ratio": 65.38461
      }
     ]
    },
@@ -86050,13 +85662,13 @@
      "frame": "generic"
     }
    ],
-   "measuredAt": "2026-11-09T04:48:17.541Z",
-   "searchVolumeMeasuredAt": "2026-11-09T04:48:16.690Z",
-   "documentCountMeasuredAt": "2026-11-09T04:48:17.541Z",
+   "measuredAt": "2026-11-10T04:20:48.006Z",
+   "searchVolumeMeasuredAt": "2026-11-10T04:20:47.089Z",
+   "documentCountMeasuredAt": "2026-11-10T04:20:48.006Z",
    "demandAsOf": "2026-11",
-   "latestVsPeakPct": 13,
+   "latestVsPeakPct": 15,
    "monthsSincePeak": 8,
-   "recencySummary": "2026-11 기준 최고치의 13% (정점은 8개월 전)",
+   "recencySummary": "2026-11 기준 최고치의 15% (정점은 8개월 전)",
    "demandSeries": [
     {
      "period": "2024-11-01",
@@ -86156,7 +85768,7 @@
     },
     {
      "period": "2026-11-01",
-     "ratio": 12.8
+     "ratio": 14.8
     }
    ],
    "meaning": {
@@ -86167,13 +85779,13 @@
     ],
     "questions": [],
     "productNames": [],
-    "priceMedian": 20000,
-    "priceSamples": 1
+    "priceMedian": null,
+    "priceSamples": 0
    },
    "serp": {
     "sampledTitles": 10,
     "exactTitleHits": 0,
-    "medianDaysAgo": 5,
+    "medianDaysAgo": 14,
     "hasAiBriefing": true,
     "aiBriefingSourceCount": 4,
     "adCount": 2,
@@ -86185,18 +85797,18 @@
      },
      {
       "rank": 2,
-      "title": "정부지원 산후도우미 신청방법/ 산후도우미 본인부담금/ 인천 산후도우미 신청 및 연수구 산후도우미",
-      "coverage": 0.69
-     },
-     {
-      "rank": 3,
-      "title": "2026 인천 출산지원금 총정리｜강화·옹진은 따로 더 줘요 (지역별 5편)",
+      "title": "진짜 1억 받나? 인천 천사지원금·임산부 교통비 신청 방법 정리",
       "coverage": 0.67
      },
      {
-      "rank": 4,
+      "rank": 3,
       "title": "2026년 출산지원금 지역별 비교｜아기 낳으면 얼마 받을까? 부모급여·첫만남이용권 총정리",
       "coverage": 0.33
+     },
+     {
+      "rank": 4,
+      "title": "2026년 최신 인천광역시(아이플러스 1억드림 포함) 임신, 출산 지원금, 육아지원비 총정리! 다자녀 혜택까지 한장 정리!",
+      "coverage": 0.67
      },
      {
       "rank": 5,
@@ -86205,19 +85817,19 @@
      },
      {
       "rank": 6,
-      "title": "2026년 최신 인천광역시(아이플러스 1억드림 포함) 임신, 출산 지원금, 육아지원비 총정리! 다자녀 혜택까지 한장 정리!",
+      "title": "2026 인천 출산지원금 총정리｜강화·옹진은 따로 더 줘요 (지역별 5편)",
       "coverage": 0.67
      }
     ]
    },
-   "demandSeriesCheckedAt": "2026-11-09T04:55:48.619Z",
+   "demandSeriesCheckedAt": "2026-11-10T04:28:52.198Z",
    "frontalSaturated": false,
    "peakMonth": 3,
    "peakMultiplier": 1.6,
    "peakRecurring": false,
-   "peakVolume": 1633,
+   "peakVolume": 1651,
    "peakConfidence": "작년엔 다른 달",
-   "effectiveVolume": 890,
+   "effectiveVolume": 900,
    "preemptRank": 3
   },
   {
@@ -86285,68 +85897,11 @@
    "regulatoryLabel": "",
    "trendLabel": "판정불가",
    "shortTermTrend": {
-    "status": "flat",
-    "ratio": 1.1979,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
+    "status": "unknown",
+    "ratio": null,
+    "measuredAt": null,
     "windowEnd": "2026-11-06",
-    "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 69.23076
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 64.10256
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 87.17948
-     },
-     {
-      "period": "2026-10-27",
-      "ratio": 64.10256
-     },
-     {
-      "period": "2026-10-28",
-      "ratio": 51.28205
-     },
-     {
-      "period": "2026-10-29",
-      "ratio": 69.23076
-     },
-     {
-      "period": "2026-10-30",
-      "ratio": 74.35897
-     },
-     {
-      "period": "2026-10-31",
-      "ratio": 58.97435
-     },
-     {
-      "period": "2026-11-01",
-      "ratio": 79.48717
-     },
-     {
-      "period": "2026-11-02",
-      "ratio": 82.05128
-     },
-     {
-      "period": "2026-11-03",
-      "ratio": 100
-     },
-     {
-      "period": "2026-11-04",
-      "ratio": 76.92307
-     },
-     {
-      "period": "2026-11-05",
-      "ratio": 82.05128
-     },
-     {
-      "period": "2026-11-06",
-      "ratio": 94.87179
-     }
-    ]
+    "series": []
    },
    "currentSource": null,
    "seedKind": null,
@@ -86874,68 +86429,11 @@
    "regulatoryLabel": "",
    "trendLabel": "상승세",
    "shortTermTrend": {
-    "status": "falling",
-    "ratio": 0.7834,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
+    "status": "unknown",
+    "ratio": null,
+    "measuredAt": null,
     "windowEnd": "2026-11-06",
-    "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 50
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 54.54545
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 65.90909
-     },
-     {
-      "period": "2026-10-27",
-      "ratio": 18.18181
-     },
-     {
-      "period": "2026-10-28",
-      "ratio": 56.81818
-     },
-     {
-      "period": "2026-10-29",
-      "ratio": 56.81818
-     },
-     {
-      "period": "2026-10-30",
-      "ratio": 54.54545
-     },
-     {
-      "period": "2026-10-31",
-      "ratio": 36.36363
-     },
-     {
-      "period": "2026-11-01",
-      "ratio": 38.63636
-     },
-     {
-      "period": "2026-11-02",
-      "ratio": 38.63636
-     },
-     {
-      "period": "2026-11-03",
-      "ratio": 27.27272
-     },
-     {
-      "period": "2026-11-04",
-      "ratio": 34.0909
-     },
-     {
-      "period": "2026-11-05",
-      "ratio": 38.63636
-     },
-     {
-      "period": "2026-11-06",
-      "ratio": 65.90909
-     }
-    ]
+    "series": []
    },
    "currentSource": null,
    "seedKind": null,
@@ -88283,7 +87781,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-09T04:48:19.069Z",
+    "checkedAt": "2026-11-10T04:20:49.801Z",
     "reason": "최근 검색결과 재검증에서 추천 조건을 충족하지 못했습니다."
    }
   },
@@ -88610,7 +88108,8 @@
    "peakVolume": 810,
    "peakConfidence": "작년엔 다른 달",
    "effectiveVolume": 810,
-   "preemptRank": 3
+   "preemptRank": 3,
+   "carried": true
   },
   {
    "serpSections": [
@@ -88972,68 +88471,11 @@
    "regulatoryLabel": "",
    "trendLabel": "상승세",
    "shortTermTrend": {
-    "status": "flat",
-    "ratio": 0.9718,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
+    "status": "unknown",
+    "ratio": null,
+    "measuredAt": null,
     "windowEnd": "2026-11-06",
-    "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 23.25581
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 46.51162
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 55.81395
-     },
-     {
-      "period": "2026-10-27",
-      "ratio": 88.37209
-     },
-     {
-      "period": "2026-10-28",
-      "ratio": 55.81395
-     },
-     {
-      "period": "2026-10-29",
-      "ratio": 79.06976
-     },
-     {
-      "period": "2026-10-30",
-      "ratio": 62.79069
-     },
-     {
-      "period": "2026-10-31",
-      "ratio": 34.88372
-     },
-     {
-      "period": "2026-11-01",
-      "ratio": 37.2093
-     },
-     {
-      "period": "2026-11-02",
-      "ratio": 53.48837
-     },
-     {
-      "period": "2026-11-03",
-      "ratio": 93.02325
-     },
-     {
-      "period": "2026-11-04",
-      "ratio": 69.76744
-     },
-     {
-      "period": "2026-11-05",
-      "ratio": 67.44186
-     },
-     {
-      "period": "2026-11-06",
-      "ratio": 44.18604
-     }
-    ]
+    "series": []
    },
    "currentSource": null,
    "seedKind": null,
@@ -92731,68 +92173,11 @@
    "regulatoryLabel": "",
    "trendLabel": "상승세",
    "shortTermTrend": {
-    "status": "flat",
-    "ratio": 1.0325,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
+    "status": "unknown",
+    "ratio": null,
+    "measuredAt": null,
     "windowEnd": "2026-11-06",
-    "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 36.36363
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 27.27272
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 72.72727
-     },
-     {
-      "period": "2026-10-27",
-      "ratio": 90.90909
-     },
-     {
-      "period": "2026-10-28",
-      "ratio": 39.39393
-     },
-     {
-      "period": "2026-10-29",
-      "ratio": 39.39393
-     },
-     {
-      "period": "2026-10-30",
-      "ratio": 66.66666
-     },
-     {
-      "period": "2026-10-31",
-      "ratio": 24.24242
-     },
-     {
-      "period": "2026-11-01",
-      "ratio": 45.45454
-     },
-     {
-      "period": "2026-11-02",
-      "ratio": 84.84848
-     },
-     {
-      "period": "2026-11-03",
-      "ratio": 42.42424
-     },
-     {
-      "period": "2026-11-04",
-      "ratio": 54.54545
-     },
-     {
-      "period": "2026-11-05",
-      "ratio": 87.87878
-     },
-     {
-      "period": "2026-11-06",
-      "ratio": 45.45454
-     }
-    ]
+    "series": []
    },
    "currentSource": null,
    "seedKind": null,
@@ -94987,7 +94372,8 @@
    "peakVolume": 1194,
    "peakConfidence": "1년치만 봄",
    "effectiveVolume": 680,
-   "preemptRank": 3
+   "preemptRank": 3,
+   "carried": true
   },
   {
    "serpSections": [
@@ -96398,22 +95784,10 @@
    "trendLabel": "상승세",
    "shortTermTrend": {
     "status": "flat",
-    "ratio": 0.9926,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
-    "windowEnd": "2026-11-06",
+    "ratio": 0.8521,
+    "measuredAt": "2026-11-10T04:29:01.366Z",
+    "windowEnd": "2026-11-09",
     "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 31.57894
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 47.36842
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 68.42105
-     },
      {
       "period": "2026-10-27",
       "ratio": 63.15789
@@ -96457,6 +95831,18 @@
      {
       "period": "2026-11-06",
       "ratio": 63.15789
+     },
+     {
+      "period": "2026-11-07",
+      "ratio": 23.68421
+     },
+     {
+      "period": "2026-11-08",
+      "ratio": 42.10526
+     },
+     {
+      "period": "2026-11-09",
+      "ratio": 65.78947
      }
     ]
    },
@@ -96735,68 +96121,11 @@
    "regulatoryLabel": "",
    "trendLabel": "상승세",
    "shortTermTrend": {
-    "status": "falling",
-    "ratio": 0.6111,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
+    "status": "unknown",
+    "ratio": null,
+    "measuredAt": null,
     "windowEnd": "2026-11-06",
-    "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 51.35135
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 78.37837
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 37.83783
-     },
-     {
-      "period": "2026-10-27",
-      "ratio": 29.72972
-     },
-     {
-      "period": "2026-10-28",
-      "ratio": 18.91891
-     },
-     {
-      "period": "2026-10-29",
-      "ratio": 29.72972
-     },
-     {
-      "period": "2026-10-30",
-      "ratio": 45.94594
-     },
-     {
-      "period": "2026-10-31",
-      "ratio": 45.94594
-     },
-     {
-      "period": "2026-11-01",
-      "ratio": 40.54054
-     },
-     {
-      "period": "2026-11-02",
-      "ratio": 29.72972
-     },
-     {
-      "period": "2026-11-03",
-      "ratio": 21.62162
-     },
-     {
-      "period": "2026-11-04",
-      "ratio": 0
-     },
-     {
-      "period": "2026-11-05",
-      "ratio": 21.62162
-     },
-     {
-      "period": "2026-11-06",
-      "ratio": 18.91891
-     }
-    ]
+    "series": []
    },
    "currentSource": null,
    "seedKind": null,
@@ -97666,68 +96995,11 @@
    "regulatoryLabel": "",
    "trendLabel": "판정불가",
    "shortTermTrend": {
-    "status": "flat",
-    "ratio": 1.0543,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
+    "status": "unknown",
+    "ratio": null,
+    "measuredAt": null,
     "windowEnd": "2026-11-06",
-    "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 43.47826
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 19.56521
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 0
-     },
-     {
-      "period": "2026-10-27",
-      "ratio": 30.43478
-     },
-     {
-      "period": "2026-10-28",
-      "ratio": 45.65217
-     },
-     {
-      "period": "2026-10-29",
-      "ratio": 41.30434
-     },
-     {
-      "period": "2026-10-30",
-      "ratio": 19.56521
-     },
-     {
-      "period": "2026-10-31",
-      "ratio": 28.26086
-     },
-     {
-      "period": "2026-11-01",
-      "ratio": 23.91304
-     },
-     {
-      "period": "2026-11-02",
-      "ratio": 45.65217
-     },
-     {
-      "period": "2026-11-03",
-      "ratio": 26.08695
-     },
-     {
-      "period": "2026-11-04",
-      "ratio": 19.56521
-     },
-     {
-      "period": "2026-11-05",
-      "ratio": 32.60869
-     },
-     {
-      "period": "2026-11-06",
-      "ratio": 34.7826
-     }
-    ]
+    "series": []
    },
    "currentSource": null,
    "seedKind": null,
@@ -98583,68 +97855,11 @@
    "regulatoryLabel": "",
    "trendLabel": "판정불가",
    "shortTermTrend": {
-    "status": "falling",
-    "ratio": 0.4397,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
+    "status": "unknown",
+    "ratio": null,
+    "measuredAt": null,
     "windowEnd": "2026-11-06",
-    "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 52.38095
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 23.80952
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 100
-     },
-     {
-      "period": "2026-10-27",
-      "ratio": 64.28571
-     },
-     {
-      "period": "2026-10-28",
-      "ratio": 42.85714
-     },
-     {
-      "period": "2026-10-29",
-      "ratio": 19.04761
-     },
-     {
-      "period": "2026-10-30",
-      "ratio": 33.33333
-     },
-     {
-      "period": "2026-10-31",
-      "ratio": 30.95238
-     },
-     {
-      "period": "2026-11-01",
-      "ratio": 19.04761
-     },
-     {
-      "period": "2026-11-02",
-      "ratio": 30.95238
-     },
-     {
-      "period": "2026-11-03",
-      "ratio": 23.80952
-     },
-     {
-      "period": "2026-11-04",
-      "ratio": 26.19047
-     },
-     {
-      "period": "2026-11-05",
-      "ratio": 0
-     },
-     {
-      "period": "2026-11-06",
-      "ratio": 16.66666
-     }
-    ]
+    "series": []
    },
    "currentSource": null,
    "seedKind": null,
@@ -99792,68 +99007,11 @@
    "regulatoryLabel": "",
    "trendLabel": "들쭉날쭉",
    "shortTermTrend": {
-    "status": "flat",
-    "ratio": 1.125,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
+    "status": "unknown",
+    "ratio": null,
+    "measuredAt": null,
     "windowEnd": "2026-11-06",
-    "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 43.75
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 87.5
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 43.75
-     },
-     {
-      "period": "2026-10-27",
-      "ratio": 43.75
-     },
-     {
-      "period": "2026-10-28",
-      "ratio": 37.5
-     },
-     {
-      "period": "2026-10-29",
-      "ratio": 56.25
-     },
-     {
-      "period": "2026-10-30",
-      "ratio": 37.5
-     },
-     {
-      "period": "2026-10-31",
-      "ratio": 59.375
-     },
-     {
-      "period": "2026-11-01",
-      "ratio": 37.5
-     },
-     {
-      "period": "2026-11-02",
-      "ratio": 65.625
-     },
-     {
-      "period": "2026-11-03",
-      "ratio": 65.625
-     },
-     {
-      "period": "2026-11-04",
-      "ratio": 56.25
-     },
-     {
-      "period": "2026-11-05",
-      "ratio": 71.875
-     },
-     {
-      "period": "2026-11-06",
-      "ratio": 37.5
-     }
-    ]
+    "series": []
    },
    "currentSource": null,
    "seedKind": null,
@@ -101213,343 +100371,6 @@
   },
   {
    "serpSections": [
-    "AI브리핑",
-    "파워링크",
-    "AI추천",
-    "지식스니펫",
-    "인플루언서",
-    "카페"
-   ],
-   "layoutBestFor": "kin",
-   "layoutHeadline": "지식iN 이 블로그보다 위에 뜬다 — 답변을 달아 내 채널로 끌어오는 편이 빠르다",
-   "layoutRanked": [
-    {
-     "surface": "kin",
-     "label": "지식iN 답변",
-     "position": 4
-    },
-    {
-     "surface": "naver-blog",
-     "label": "네이버 블로그·카페",
-     "position": 5
-    }
-   ],
-   "layoutAdsOnTop": false,
-   "earlyMover": false,
-   "earlyMoverReasons": [],
-   "sectionsMeasured": true,
-   "intentSource": "lexical",
-   "keyword": "구글 무료 게임 포키",
-   "topic": "게임",
-   "tier": "page1-weak",
-   "tierLabel": "1페이지에 빈자리 (실시간 노출 중)",
-   "openSlot": 4,
-   "searchVolume": 570,
-   "documentCount": 285,
-   "evidence": [
-    {
-     "code": "demand",
-     "text": "월 검색량 570 · 문서수 285"
-    },
-    {
-     "code": "ads",
-     "text": "상단 광고 1건 — 광고주가 돈을 넣는 검색어다"
-    },
-    {
-     "code": "open-slot",
-     "text": "상위 4번째 자리가 비어 있음"
-    },
-    {
-     "code": "empty-field",
-     "text": "상위 10개 중 정면으로 다룬 글 0건"
-    },
-    {
-     "code": "golden-ratio",
-     "text": "월 검색량 570 > 문서수 285 — 수요가 공급을 넘는 황금 비율"
-    },
-    {
-     "code": "not-realtime",
-     "text": "실시간 검색어에는 아직 없음"
-    },
-    {
-     "code": "ai-briefing",
-     "text": "AI 브리핑이 떠 있고 4개 글을 인용 중"
-    }
-   ],
-   "intentLabel": "거래",
-   "briefingRisk": null,
-   "regulatoryLabel": "",
-   "trendLabel": "상승세",
-   "shortTermTrend": {
-    "status": "flat",
-    "ratio": 0.9926,
-    "measuredAt": "2026-11-09T04:56:04.087Z",
-    "windowEnd": "2026-11-08",
-    "series": [
-     {
-      "period": "2026-10-26",
-      "ratio": 21.62162
-     },
-     {
-      "period": "2026-10-27",
-      "ratio": 37.83783
-     },
-     {
-      "period": "2026-10-28",
-      "ratio": 21.62162
-     },
-     {
-      "period": "2026-10-29",
-      "ratio": 59.45945
-     },
-     {
-      "period": "2026-10-30",
-      "ratio": 51.35135
-     },
-     {
-      "period": "2026-10-31",
-      "ratio": 75.67567
-     },
-     {
-      "period": "2026-11-01",
-      "ratio": 100
-     },
-     {
-      "period": "2026-11-02",
-      "ratio": 45.94594
-     },
-     {
-      "period": "2026-11-03",
-      "ratio": 18.91891
-     },
-     {
-      "period": "2026-11-04",
-      "ratio": 43.24324
-     },
-     {
-      "period": "2026-11-05",
-      "ratio": 43.24324
-     },
-     {
-      "period": "2026-11-06",
-      "ratio": 54.05405
-     },
-     {
-      "period": "2026-11-07",
-      "ratio": 59.45945
-     },
-     {
-      "period": "2026-11-08",
-      "ratio": 100
-     }
-    ]
-   },
-   "currentSource": null,
-   "seedKind": null,
-   "expansionWords": null,
-   "timing": "",
-   "monthsToPeak": null,
-   "timingGroup": "",
-   "titles": {
-    "seo": {
-     "text": "",
-     "frame": "generic",
-     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-    },
-    "home": {
-     "text": "",
-     "frame": "generic",
-     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-    }
-   },
-   "adsenseFit": false,
-   "adClicks": null,
-   "adCtrPc": null,
-   "adCtrMobile": null,
-   "adDepth": null,
-   "monetize": null,
-   "whySearch": null,
-   "brief": null,
-   "kinCount": null,
-   "kinTop": null,
-   "keywordPool": null,
-   "trend": {
-    "series": [
-     67,
-     24,
-     52,
-     57,
-     39,
-     63,
-     65,
-     54,
-     52,
-     52,
-     26,
-     26,
-     63,
-     50,
-     65,
-     100,
-     67,
-     52,
-     35,
-     57,
-     43,
-     33,
-     20,
-     46,
-     59,
-     33,
-     33,
-     33,
-     48
-    ],
-    "label": "",
-    "recommendation": ""
-   },
-   "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-   "subKeywords": [],
-   "measuredAt": "2026-11-09T04:48:22.984Z",
-   "searchVolumeMeasuredAt": "2026-11-09T04:48:22.206Z",
-   "documentCountMeasuredAt": "2026-11-09T04:48:22.984Z",
-   "demandAsOf": "2026-11",
-   "latestVsPeakPct": 9,
-   "monthsSincePeak": 5,
-   "recencySummary": "2026-11 기준 최고치의 9% (정점은 5개월 전)",
-   "demandSeries": [
-    {
-     "period": "2025-04-01",
-     "ratio": 2.1
-    },
-    {
-     "period": "2025-08-01",
-     "ratio": 7.9
-    },
-    {
-     "period": "2025-09-01",
-     "ratio": 13.4
-    },
-    {
-     "period": "2025-10-01",
-     "ratio": 11.9
-    },
-    {
-     "period": "2025-11-01",
-     "ratio": 22.4
-    },
-    {
-     "period": "2025-12-01",
-     "ratio": 28
-    },
-    {
-     "period": "2026-01-01",
-     "ratio": 43.9
-    },
-    {
-     "period": "2026-02-01",
-     "ratio": 63.2
-    },
-    {
-     "period": "2026-03-01",
-     "ratio": 58.3
-    },
-    {
-     "period": "2026-04-01",
-     "ratio": 81.9
-    },
-    {
-     "period": "2026-05-01",
-     "ratio": 66.9
-    },
-    {
-     "period": "2026-06-01",
-     "ratio": 100
-    },
-    {
-     "period": "2026-07-01",
-     "ratio": 44.8
-    },
-    {
-     "period": "2026-08-01",
-     "ratio": 32.2
-    },
-    {
-     "period": "2026-09-01",
-     "ratio": 39.6
-    },
-    {
-     "period": "2026-10-01",
-     "ratio": 28.9
-    },
-    {
-     "period": "2026-11-01",
-     "ratio": 9.5
-    }
-   ],
-   "meaning": {
-    "citedTitles": [
-     "Poki (포키) - 무료 온라인 게임 - 지금 플레이하세요!",
-     "포키 무료게임하기 POKI 사이트 링크",
-     "네이버 무료게임 포키 - 접속·인기 게임 안내"
-    ],
-    "questions": [],
-    "productNames": [],
-    "priceMedian": null,
-    "priceSamples": 0
-   },
-   "serp": {
-    "sampledTitles": 10,
-    "exactTitleHits": 0,
-    "medianDaysAgo": 28,
-    "hasAiBriefing": true,
-    "aiBriefingSourceCount": 4,
-    "adCount": 1,
-    "slots": [
-     {
-      "rank": 1,
-      "title": "포키 무료게임 사이트 안내 및 인기게임 top.5",
-      "coverage": 0.75
-     },
-     {
-      "rank": 2,
-      "title": "무료게임 포키(Poki) 를 소개해요",
-      "coverage": 0.75
-     },
-     {
-      "rank": 3,
-      "title": "포키 무료 게임바로가기 https://poki.com/kr",
-      "coverage": 0.75
-     },
-     {
-      "rank": 4,
-      "title": "스도쿠 게임 링크로 바로 시작하는 숫자 퍼즐 훈련",
-      "coverage": 0.25
-     },
-     {
-      "rank": 5,
-      "title": "[포키] Poki라는 무료게임 사이트를 소개합니다",
-      "coverage": 0.75
-     },
-     {
-      "rank": 6,
-      "title": "수박게임 링크 | 모바일 PC 무설치 무료 웹게임 버전 과일 합치기 공략까지",
-      "coverage": 0.5
-     }
-    ]
-   },
-   "demandSeriesCheckedAt": "2026-11-09T04:55:48.619Z",
-   "frontalSaturated": false,
-   "peakMonth": 6,
-   "peakMultiplier": 2.3,
-   "peakRecurring": null,
-   "peakVolume": 1972,
-   "peakConfidence": "1년치만 봄",
-   "effectiveVolume": 570,
-   "preemptRank": 3
-  },
-  {
-   "serpSections": [
     "파워링크",
     "AI브리핑",
     "카페",
@@ -101781,6 +100602,343 @@
    "carried": true
   },
   {
+   "serpSections": [
+    "AI브리핑",
+    "파워링크",
+    "AI추천",
+    "지식스니펫",
+    "인플루언서",
+    "카페"
+   ],
+   "layoutBestFor": "kin",
+   "layoutHeadline": "지식iN 이 블로그보다 위에 뜬다 — 답변을 달아 내 채널로 끌어오는 편이 빠르다",
+   "layoutRanked": [
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 4
+    },
+    {
+     "surface": "naver-blog",
+     "label": "네이버 블로그·카페",
+     "position": 5
+    }
+   ],
+   "layoutAdsOnTop": false,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "lexical",
+   "keyword": "구글 무료 게임 포키",
+   "topic": "게임",
+   "tier": "page1-weak",
+   "tierLabel": "1페이지에 빈자리 (실시간 노출 중)",
+   "openSlot": 5,
+   "searchVolume": 560,
+   "documentCount": 284,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 560 · 문서수 284"
+    },
+    {
+     "code": "ads",
+     "text": "상단 광고 1건 — 광고주가 돈을 넣는 검색어다"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 5번째 자리가 비어 있음"
+    },
+    {
+     "code": "empty-field",
+     "text": "상위 10개 중 정면으로 다룬 글 0건"
+    },
+    {
+     "code": "golden-ratio",
+     "text": "월 검색량 560 > 문서수 284 — 수요가 공급을 넘는 황금 비율"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑이 떠 있고 4개 글을 인용 중"
+    }
+   ],
+   "intentLabel": "거래",
+   "briefingRisk": null,
+   "regulatoryLabel": "",
+   "trendLabel": "상승세",
+   "shortTermTrend": {
+    "status": "flat",
+    "ratio": 0.9586,
+    "measuredAt": "2026-11-10T04:29:01.366Z",
+    "windowEnd": "2026-11-09",
+    "series": [
+     {
+      "period": "2026-10-27",
+      "ratio": 37.83783
+     },
+     {
+      "period": "2026-10-28",
+      "ratio": 21.62162
+     },
+     {
+      "period": "2026-10-29",
+      "ratio": 59.45945
+     },
+     {
+      "period": "2026-10-30",
+      "ratio": 51.35135
+     },
+     {
+      "period": "2026-10-31",
+      "ratio": 75.67567
+     },
+     {
+      "period": "2026-11-01",
+      "ratio": 100
+     },
+     {
+      "period": "2026-11-02",
+      "ratio": 45.94594
+     },
+     {
+      "period": "2026-11-03",
+      "ratio": 18.91891
+     },
+     {
+      "period": "2026-11-04",
+      "ratio": 43.24324
+     },
+     {
+      "period": "2026-11-05",
+      "ratio": 43.24324
+     },
+     {
+      "period": "2026-11-06",
+      "ratio": 54.05405
+     },
+     {
+      "period": "2026-11-07",
+      "ratio": 59.45945
+     },
+     {
+      "period": "2026-11-08",
+      "ratio": 100
+     },
+     {
+      "period": "2026-11-09",
+      "ratio": 56.75675
+     }
+    ]
+   },
+   "currentSource": null,
+   "seedKind": null,
+   "expansionWords": null,
+   "timing": "",
+   "monthsToPeak": null,
+   "timingGroup": "",
+   "titles": {
+    "seo": {
+     "text": "",
+     "frame": "generic",
+     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+    },
+    "home": {
+     "text": "",
+     "frame": "generic",
+     "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+    }
+   },
+   "adsenseFit": false,
+   "adClicks": null,
+   "adCtrPc": null,
+   "adCtrMobile": null,
+   "adDepth": null,
+   "monetize": null,
+   "whySearch": null,
+   "brief": null,
+   "kinCount": null,
+   "kinTop": null,
+   "keywordPool": null,
+   "trend": {
+    "series": [
+     67,
+     24,
+     52,
+     57,
+     39,
+     63,
+     65,
+     54,
+     52,
+     52,
+     26,
+     26,
+     63,
+     50,
+     65,
+     100,
+     67,
+     52,
+     35,
+     57,
+     43,
+     33,
+     20,
+     46,
+     59,
+     33,
+     33,
+     33,
+     48
+    ],
+    "label": "",
+    "recommendation": ""
+   },
+   "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+   "subKeywords": [],
+   "measuredAt": "2026-11-10T04:20:53.932Z",
+   "searchVolumeMeasuredAt": "2026-11-10T04:20:53.073Z",
+   "documentCountMeasuredAt": "2026-11-10T04:20:53.932Z",
+   "demandAsOf": "2026-11",
+   "latestVsPeakPct": 11,
+   "monthsSincePeak": 5,
+   "recencySummary": "2026-11 기준 최고치의 11% (정점은 5개월 전)",
+   "demandSeries": [
+    {
+     "period": "2025-04-01",
+     "ratio": 2.1
+    },
+    {
+     "period": "2025-08-01",
+     "ratio": 7.9
+    },
+    {
+     "period": "2025-09-01",
+     "ratio": 13.4
+    },
+    {
+     "period": "2025-10-01",
+     "ratio": 11.9
+    },
+    {
+     "period": "2025-11-01",
+     "ratio": 22.4
+    },
+    {
+     "period": "2025-12-01",
+     "ratio": 28
+    },
+    {
+     "period": "2026-01-01",
+     "ratio": 43.9
+    },
+    {
+     "period": "2026-02-01",
+     "ratio": 63.2
+    },
+    {
+     "period": "2026-03-01",
+     "ratio": 58.3
+    },
+    {
+     "period": "2026-04-01",
+     "ratio": 81.9
+    },
+    {
+     "period": "2026-05-01",
+     "ratio": 66.9
+    },
+    {
+     "period": "2026-06-01",
+     "ratio": 100
+    },
+    {
+     "period": "2026-07-01",
+     "ratio": 44.8
+    },
+    {
+     "period": "2026-08-01",
+     "ratio": 32.2
+    },
+    {
+     "period": "2026-09-01",
+     "ratio": 39.6
+    },
+    {
+     "period": "2026-10-01",
+     "ratio": 28.9
+    },
+    {
+     "period": "2026-11-01",
+     "ratio": 10.6
+    }
+   ],
+   "meaning": {
+    "citedTitles": [
+     "Poki (포키) - 무료 온라인 게임 - 지금 플레이하세요!",
+     "포키 무료게임하기 POKI 사이트 링크",
+     "네이버 무료게임 포키 - 접속·인기 게임 안내"
+    ],
+    "questions": [],
+    "productNames": [],
+    "priceMedian": null,
+    "priceSamples": 0
+   },
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 0,
+    "medianDaysAgo": 14,
+    "hasAiBriefing": true,
+    "aiBriefingSourceCount": 4,
+    "adCount": 1,
+    "slots": [
+     {
+      "rank": 1,
+      "title": "POKI 포키 무료게임 하는 방법, PC·모바일 접속과 계정 저장",
+      "coverage": 0.75
+     },
+     {
+      "rank": 2,
+      "title": "포키 무료게임 사이트 안내 및 인기게임 top.5",
+      "coverage": 0.75
+     },
+     {
+      "rank": 3,
+      "title": "무료게임 포키(Poki) 를 소개해요",
+      "coverage": 0.75
+     },
+     {
+      "rank": 4,
+      "title": "포키 무료 게임바로가기 https://poki.com/kr",
+      "coverage": 0.75
+     },
+     {
+      "rank": 5,
+      "title": "스도쿠 게임 링크로 바로 시작하는 숫자 퍼즐 훈련",
+      "coverage": 0.25
+     },
+     {
+      "rank": 6,
+      "title": "[포키] Poki라는 무료게임 사이트를 소개합니다",
+      "coverage": 0.75
+     }
+    ]
+   },
+   "demandSeriesCheckedAt": "2026-11-10T04:28:52.198Z",
+   "frontalSaturated": false,
+   "peakMonth": 6,
+   "peakMultiplier": 2.3,
+   "peakRecurring": null,
+   "peakVolume": 1938,
+   "peakConfidence": "1년치만 봄",
+   "effectiveVolume": 560,
+   "preemptRank": 3
+  },
+  {
    "serpSections": [],
    "layoutBestFor": null,
    "layoutHeadline": "",
@@ -101820,68 +100978,11 @@
    "regulatoryLabel": "",
    "trendLabel": "시즌성",
    "shortTermTrend": {
-    "status": "rising",
-    "ratio": 1.3258,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
+    "status": "unknown",
+    "ratio": null,
+    "measuredAt": null,
     "windowEnd": "2026-11-06",
-    "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 60.60606
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 66.66666
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 21.21212
-     },
-     {
-      "period": "2026-10-27",
-      "ratio": 30.30303
-     },
-     {
-      "period": "2026-10-28",
-      "ratio": 15.15151
-     },
-     {
-      "period": "2026-10-29",
-      "ratio": 27.27272
-     },
-     {
-      "period": "2026-10-30",
-      "ratio": 48.48484
-     },
-     {
-      "period": "2026-10-31",
-      "ratio": 78.78787
-     },
-     {
-      "period": "2026-11-01",
-      "ratio": 78.78787
-     },
-     {
-      "period": "2026-11-02",
-      "ratio": 36.36363
-     },
-     {
-      "period": "2026-11-03",
-      "ratio": 39.39393
-     },
-     {
-      "period": "2026-11-04",
-      "ratio": 33.33333
-     },
-     {
-      "period": "2026-11-05",
-      "ratio": 33.33333
-     },
-     {
-      "period": "2026-11-06",
-      "ratio": 57.57575
-     }
-    ]
+    "series": []
    },
    "currentSource": null,
    "seedKind": null,
@@ -103481,7 +102582,8 @@
    "peakVolume": 1105,
    "peakConfidence": "2년 반복 확인",
    "effectiveVolume": 540,
-   "preemptRank": 3
+   "preemptRank": 3,
+   "carried": true
   },
   {
    "serpSections": [
@@ -104174,7 +103276,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-09T04:48:20.206Z",
+    "checkedAt": "2026-11-10T04:20:50.984Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -104250,68 +103352,11 @@
    "regulatoryLabel": "",
    "trendLabel": "상승세",
    "shortTermTrend": {
-    "status": "rising",
-    "ratio": 1.2553,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
+    "status": "unknown",
+    "ratio": null,
+    "measuredAt": null,
     "windowEnd": "2026-11-06",
-    "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 52.77777
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 63.88888
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 30.55555
-     },
-     {
-      "period": "2026-10-27",
-      "ratio": 13.88888
-     },
-     {
-      "period": "2026-10-28",
-      "ratio": 36.11111
-     },
-     {
-      "period": "2026-10-29",
-      "ratio": 41.66666
-     },
-     {
-      "period": "2026-10-30",
-      "ratio": 22.22222
-     },
-     {
-      "period": "2026-10-31",
-      "ratio": 27.77777
-     },
-     {
-      "period": "2026-11-01",
-      "ratio": 41.66666
-     },
-     {
-      "period": "2026-11-02",
-      "ratio": 44.44444
-     },
-     {
-      "period": "2026-11-03",
-      "ratio": 33.33333
-     },
-     {
-      "period": "2026-11-04",
-      "ratio": 33.33333
-     },
-     {
-      "period": "2026-11-05",
-      "ratio": 63.88888
-     },
-     {
-      "period": "2026-11-06",
-      "ratio": 83.33333
-     }
-    ]
+    "series": []
    },
    "currentSource": null,
    "seedKind": null,
@@ -105118,7 +104163,7 @@
    "carried": true,
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-09T04:48:34.115Z",
+    "checkedAt": "2026-11-10T04:21:02.174Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -105427,7 +104472,7 @@
    "carried": true,
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-09T04:48:27.212Z",
+    "checkedAt": "2026-11-10T04:20:58.324Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -108693,65 +107738,65 @@
    "trendLabel": "상승세",
    "shortTermTrend": {
     "status": "rising",
-    "ratio": 1.3594,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
-    "windowEnd": "2026-11-06",
+    "ratio": 1.3397,
+    "measuredAt": "2026-11-10T04:29:01.366Z",
+    "windowEnd": "2026-11-09",
     "series": [
      {
-      "period": "2026-10-24",
-      "ratio": 41.56976
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 59.01162
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 80.52325
-     },
-     {
       "period": "2026-10-27",
-      "ratio": 82.55813
+      "ratio": 61.87363
      },
      {
       "period": "2026-10-28",
-      "ratio": 67.73255
+      "ratio": 50.76252
      },
      {
       "period": "2026-10-29",
-      "ratio": 58.13953
+      "ratio": 43.57298
      },
      {
       "period": "2026-10-30",
-      "ratio": 56.10465
+      "ratio": 42.04793
      },
      {
       "period": "2026-10-31",
-      "ratio": 51.45348
+      "ratio": 38.56209
      },
      {
       "period": "2026-11-01",
-      "ratio": 86.3372
+      "ratio": 64.70588
      },
      {
       "period": "2026-11-02",
-      "ratio": 100
+      "ratio": 74.94553
      },
      {
       "period": "2026-11-03",
-      "ratio": 97.09302
+      "ratio": 72.76688
      },
      {
       "period": "2026-11-04",
-      "ratio": 96.80232
+      "ratio": 72.54901
      },
      {
       "period": "2026-11-05",
-      "ratio": 93.89534
+      "ratio": 70.37037
      },
      {
       "period": "2026-11-06",
-      "ratio": 80.23255
+      "ratio": 60.13071
+     },
+     {
+      "period": "2026-11-07",
+      "ratio": 55.33769
+     },
+     {
+      "period": "2026-11-08",
+      "ratio": 73.20261
+     },
+     {
+      "period": "2026-11-09",
+      "ratio": 100
      }
     ]
    },
@@ -109360,68 +108405,11 @@
    "regulatoryLabel": "",
    "trendLabel": "상승세",
    "shortTermTrend": {
-    "status": "rising",
-    "ratio": 1.5,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
+    "status": "unknown",
+    "ratio": null,
+    "measuredAt": null,
     "windowEnd": "2026-11-06",
-    "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 42.46031
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 51.19047
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 46.82539
-     },
-     {
-      "period": "2026-10-27",
-      "ratio": 45.23809
-     },
-     {
-      "period": "2026-10-28",
-      "ratio": 49.20634
-     },
-     {
-      "period": "2026-10-29",
-      "ratio": 51.19047
-     },
-     {
-      "period": "2026-10-30",
-      "ratio": 40.07936
-     },
-     {
-      "period": "2026-10-31",
-      "ratio": 68.25396
-     },
-     {
-      "period": "2026-11-01",
-      "ratio": 100
-     },
-     {
-      "period": "2026-11-02",
-      "ratio": 79.36507
-     },
-     {
-      "period": "2026-11-03",
-      "ratio": 61.50793
-     },
-     {
-      "period": "2026-11-04",
-      "ratio": 56.74603
-     },
-     {
-      "period": "2026-11-05",
-      "ratio": 62.69841
-     },
-     {
-      "period": "2026-11-06",
-      "ratio": 60.71428
-     }
-    ]
+    "series": []
    },
    "currentSource": null,
    "seedKind": null,
@@ -110029,68 +109017,11 @@
    "regulatoryLabel": "",
    "trendLabel": "상승세",
    "shortTermTrend": {
-    "status": "flat",
-    "ratio": 1.0157,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
+    "status": "unknown",
+    "ratio": null,
+    "measuredAt": null,
     "windowEnd": "2026-11-06",
-    "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 55.6338
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 59.15492
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 61.97183
-     },
-     {
-      "period": "2026-10-27",
-      "ratio": 41.54929
-     },
-     {
-      "period": "2026-10-28",
-      "ratio": 54.22535
-     },
-     {
-      "period": "2026-10-29",
-      "ratio": 76.76056
-     },
-     {
-      "period": "2026-10-30",
-      "ratio": 54.22535
-     },
-     {
-      "period": "2026-10-31",
-      "ratio": 66.9014
-     },
-     {
-      "period": "2026-11-01",
-      "ratio": 30.28169
-     },
-     {
-      "period": "2026-11-02",
-      "ratio": 44.36619
-     },
-     {
-      "period": "2026-11-03",
-      "ratio": 56.33802
-     },
-     {
-      "period": "2026-11-04",
-      "ratio": 72.53521
-     },
-     {
-      "period": "2026-11-05",
-      "ratio": 66.9014
-     },
-     {
-      "period": "2026-11-06",
-      "ratio": 72.53521
-     }
-    ]
+    "series": []
    },
    "currentSource": null,
    "seedKind": null,
@@ -110369,68 +109300,11 @@
    "regulatoryLabel": "",
    "trendLabel": "들쭉날쭉",
    "shortTermTrend": {
-    "status": "rising",
-    "ratio": 16.2,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
+    "status": "unknown",
+    "ratio": null,
+    "measuredAt": null,
     "windowEnd": "2026-11-06",
-    "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 4.44444
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 4.44444
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 5
-     },
-     {
-      "period": "2026-10-27",
-      "ratio": 0
-     },
-     {
-      "period": "2026-10-28",
-      "ratio": 0
-     },
-     {
-      "period": "2026-10-29",
-      "ratio": 0
-     },
-     {
-      "period": "2026-10-30",
-      "ratio": 0
-     },
-     {
-      "period": "2026-10-31",
-      "ratio": 3.33333
-     },
-     {
-      "period": "2026-11-01",
-      "ratio": 35
-     },
-     {
-      "period": "2026-11-02",
-      "ratio": 100
-     },
-     {
-      "period": "2026-11-03",
-      "ratio": 43.33333
-     },
-     {
-      "period": "2026-11-04",
-      "ratio": 21.11111
-     },
-     {
-      "period": "2026-11-05",
-      "ratio": 9.44444
-     },
-     {
-      "period": "2026-11-06",
-      "ratio": 12.77777
-     }
-    ]
+    "series": []
    },
    "currentSource": null,
    "seedKind": null,
@@ -111100,68 +109974,11 @@
    "regulatoryLabel": "",
    "trendLabel": "상승세",
    "shortTermTrend": {
-    "status": "falling",
-    "ratio": 0.5747,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
+    "status": "unknown",
+    "ratio": null,
+    "measuredAt": null,
     "windowEnd": "2026-11-06",
-    "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 100
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 69.95515
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 19.73094
-     },
-     {
-      "period": "2026-10-27",
-      "ratio": 14.34977
-     },
-     {
-      "period": "2026-10-28",
-      "ratio": 16.59192
-     },
-     {
-      "period": "2026-10-29",
-      "ratio": 12.55605
-     },
-     {
-      "period": "2026-10-30",
-      "ratio": 18.83408
-     },
-     {
-      "period": "2026-10-31",
-      "ratio": 31.39013
-     },
-     {
-      "period": "2026-11-01",
-      "ratio": 20.6278
-     },
-     {
-      "period": "2026-11-02",
-      "ratio": 17.93721
-     },
-     {
-      "period": "2026-11-03",
-      "ratio": 14.7982
-     },
-     {
-      "period": "2026-11-04",
-      "ratio": 17.04035
-     },
-     {
-      "period": "2026-11-05",
-      "ratio": 23.31838
-     },
-     {
-      "period": "2026-11-06",
-      "ratio": 19.73094
-     }
-    ]
+    "series": []
    },
    "currentSource": null,
    "seedKind": null,
@@ -111595,11 +110412,11 @@
    "tierLabel": "황금 비율 — 검색량 > 문서수",
    "openSlot": 2,
    "searchVolume": 970,
-   "documentCount": 640,
+   "documentCount": 642,
    "evidence": [
     {
      "code": "demand",
-     "text": "월 검색량 970 · 문서수 640"
+     "text": "월 검색량 970 · 문서수 642"
     },
     {
      "code": "ads",
@@ -111615,7 +110432,7 @@
     },
     {
      "code": "golden-ratio",
-     "text": "월 검색량 970 > 문서수 640 — 수요가 공급을 넘는 황금 비율"
+     "text": "월 검색량 970 > 문서수 642 — 수요가 공급을 넘는 황금 비율"
     },
     {
      "code": "not-realtime",
@@ -111632,14 +110449,10 @@
    "trendLabel": "상승세",
    "shortTermTrend": {
     "status": "flat",
-    "ratio": 0.8855,
-    "measuredAt": "2026-11-09T04:56:04.087Z",
-    "windowEnd": "2026-11-08",
+    "ratio": 0.8571,
+    "measuredAt": "2026-11-10T04:29:01.366Z",
+    "windowEnd": "2026-11-09",
     "series": [
-     {
-      "period": "2026-10-26",
-      "ratio": 75.55555
-     },
      {
       "period": "2026-10-27",
       "ratio": 57.77777
@@ -111691,6 +110504,10 @@
      {
       "period": "2026-11-08",
       "ratio": 35.55555
+     },
+     {
+      "period": "2026-11-09",
+      "ratio": 48.88888
      }
     ]
    },
@@ -111813,13 +110630,13 @@
      "frame": "generic"
     }
    ],
-   "measuredAt": "2026-11-09T04:48:25.003Z",
-   "searchVolumeMeasuredAt": "2026-11-09T04:48:24.173Z",
-   "documentCountMeasuredAt": "2026-11-09T04:48:25.003Z",
+   "measuredAt": "2026-11-10T04:20:55.965Z",
+   "searchVolumeMeasuredAt": "2026-11-10T04:20:55.115Z",
+   "documentCountMeasuredAt": "2026-11-10T04:20:55.965Z",
    "demandAsOf": "2026-11",
-   "latestVsPeakPct": 13,
+   "latestVsPeakPct": 14,
    "monthsSincePeak": 8,
-   "recencySummary": "2026-11 기준 최고치의 13% (정점은 8개월 전)",
+   "recencySummary": "2026-11 기준 최고치의 14% (정점은 8개월 전)",
    "demandSeries": [
     {
      "period": "2024-11-01",
@@ -111919,7 +110736,7 @@
     },
     {
      "period": "2026-11-01",
-     "ratio": 12.6
+     "ratio": 13.7
     }
    ],
    "meaning": {
@@ -111973,7 +110790,7 @@
      }
     ]
    },
-   "demandSeriesCheckedAt": "2026-11-09T04:55:48.619Z",
+   "demandSeriesCheckedAt": "2026-11-10T04:28:52.198Z",
    "frontalSaturated": true,
    "peakMonth": 3,
    "peakMultiplier": 1.4,
@@ -112358,68 +111175,11 @@
    "regulatoryLabel": "",
    "trendLabel": "들쭉날쭉",
    "shortTermTrend": {
-    "status": "flat",
-    "ratio": 1.0199,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
+    "status": "unknown",
+    "ratio": null,
+    "measuredAt": null,
     "windowEnd": "2026-11-06",
-    "series": [
-     {
-      "period": "2026-10-24",
-      "ratio": 97.05882
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 85.29411
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 70.58823
-     },
-     {
-      "period": "2026-10-27",
-      "ratio": 67.64705
-     },
-     {
-      "period": "2026-10-28",
-      "ratio": 29.41176
-     },
-     {
-      "period": "2026-10-29",
-      "ratio": 55.88235
-     },
-     {
-      "period": "2026-10-30",
-      "ratio": 38.23529
-     },
-     {
-      "period": "2026-10-31",
-      "ratio": 100
-     },
-     {
-      "period": "2026-11-01",
-      "ratio": 70.58823
-     },
-     {
-      "period": "2026-11-02",
-      "ratio": 70.58823
-     },
-     {
-      "period": "2026-11-03",
-      "ratio": 88.23529
-     },
-     {
-      "period": "2026-11-04",
-      "ratio": 58.82352
-     },
-     {
-      "period": "2026-11-05",
-      "ratio": 41.17647
-     },
-     {
-      "period": "2026-11-06",
-      "ratio": 23.52941
-     }
-    ]
+    "series": []
    },
    "currentSource": null,
    "seedKind": null,
@@ -112976,65 +111736,65 @@
    "trendLabel": "판정불가",
    "shortTermTrend": {
     "status": "falling",
-    "ratio": 0.6373,
-    "measuredAt": "2026-11-07T02:25:47.270Z",
-    "windowEnd": "2026-11-06",
+    "ratio": 0.75,
+    "measuredAt": "2026-11-10T04:29:01.366Z",
+    "windowEnd": "2026-11-09",
     "series": [
      {
-      "period": "2026-10-24",
-      "ratio": 15.38461
-     },
-     {
-      "period": "2026-10-25",
-      "ratio": 15.38461
-     },
-     {
-      "period": "2026-10-26",
-      "ratio": 4.1958
-     },
-     {
       "period": "2026-10-27",
-      "ratio": 5.5944
+      "ratio": 19.04761
      },
      {
       "period": "2026-10-28",
-      "ratio": 6.993
+      "ratio": 23.80952
      },
      {
       "period": "2026-10-29",
-      "ratio": 6.2937
+      "ratio": 21.42857
      },
      {
       "period": "2026-10-30",
-      "ratio": 17.48251
+      "ratio": 59.5238
      },
      {
       "period": "2026-10-31",
-      "ratio": 11.18881
+      "ratio": 38.09523
      },
      {
       "period": "2026-11-01",
-      "ratio": 5.5944
+      "ratio": 19.04761
      },
      {
       "period": "2026-11-02",
-      "ratio": 5.5944
+      "ratio": 19.04761
      },
      {
       "period": "2026-11-03",
-      "ratio": 4.8951
+      "ratio": 16.66666
      },
      {
       "period": "2026-11-04",
-      "ratio": 4.1958
+      "ratio": 14.28571
      },
      {
       "period": "2026-11-05",
-      "ratio": 3.4965
+      "ratio": 11.90476
      },
      {
       "period": "2026-11-06",
-      "ratio": 10.48951
+      "ratio": 35.71428
+     },
+     {
+      "period": "2026-11-07",
+      "ratio": 35.71428
+     },
+     {
+      "period": "2026-11-08",
+      "ratio": 21.42857
+     },
+     {
+      "period": "2026-11-09",
+      "ratio": 14.28571
      }
     ]
    },
@@ -113499,116 +112259,6 @@
  ],
  "trendCandidates": [
   {
-   "keyword": "혼인지원금",
-   "topic": "사회·정치",
-   "searchVolume": 3220,
-   "documentCount": 276159,
-   "measuredAt": "2026-11-03T03:35:20.021Z",
-   "shortTermTrend": {
-    "status": "rising",
-    "ratio": 2.8579,
-    "measuredAt": "2026-11-09T04:36:26.544Z",
-    "windowEnd": "2026-11-08",
-    "series": [
-     {
-      "period": "2026-10-26",
-      "ratio": 9.59902
-     },
-     {
-      "period": "2026-10-27",
-      "ratio": 9.84204
-     },
-     {
-      "period": "2026-10-28",
-      "ratio": 13.12272
-     },
-     {
-      "period": "2026-10-29",
-      "ratio": 25.03037
-     },
-     {
-      "period": "2026-10-30",
-      "ratio": 14.45929
-     },
-     {
-      "period": "2026-10-31",
-      "ratio": 8.86998
-     },
-     {
-      "period": "2026-11-01",
-      "ratio": 8.86998
-     },
-     {
-      "period": "2026-11-02",
-      "ratio": 100
-     },
-     {
-      "period": "2026-11-03",
-      "ratio": 82.01701
-     },
-     {
-      "period": "2026-11-04",
-      "ratio": 27.46051
-     },
-     {
-      "period": "2026-11-05",
-      "ratio": 17.49696
-     },
-     {
-      "period": "2026-11-06",
-      "ratio": 12.7582
-     },
-     {
-      "period": "2026-11-07",
-      "ratio": 5.22478
-     },
-     {
-      "period": "2026-11-08",
-      "ratio": 11.66464
-     }
-    ]
-   },
-   "money": null,
-   "currentSource": {
-    "keyword": "혼인지원금",
-    "topic": "비즈니스·경제",
-    "kind": "current-brief",
-    "sourceAt": "2026-11-02T02:56:00.000Z",
-    "sourceUrl": "https://www.newscj.com/news/articleView.html?idxno=3445106"
-   },
-   "sampledTitles": 10,
-   "facingPosts": 10,
-   "reason": "문서수 276,159 — 검색량 3,220의 86배라 소음이 너무 두껍다",
-   "note": "문서수 276,159 — 검색량 3,220의 86배라 소음이 너무 두껍다",
-   "sourceUrl": "https://www.newscj.com/news/articleView.html?idxno=3445106",
-   "serp": {
-    "sampledTitles": 10,
-    "exactTitleHits": 10,
-    "topTitles": [
-     "“혼인지원금100만원, 아이맞이지원금 최대 2000만원” 이 돈은 누가 내나요?",
-     "2027 혼인지원금 얼마 받을까? 총정리",
-     "2027년부터 결혼하면 현금 100만 원! — 나이·소득 제한 없는 혼인지원금, 재혼도 받을까?",
-     "2027년 결혼하면 100만원? 혼인지원금 대상과 조건 알아보기",
-     "혼인지원금 100만 원, 12월 혼인신고와 1월 신고가 갈리는 이유",
-     "2027년 \"혼인지원금 부부합산100만원지급\" (결혼지원금)",
-     "혼인신고, 2027년 1월 1일 이후 해야 100만 원? 혼인지원금 기준 확인",
-     "2027 혼인지원금 총정리 — 100만 원 지급 조건과 시기",
-     "2027년 혼인지원금 100만원, 혼인신고 미루면 유리할까? 조건 총정리",
-     "2027 신혼부부 혜택 정리, 혼인지원금 100만 원부터 출산지원금까지 시기별 체크리스트"
-    ]
-   },
-   "serpSections": [
-    "파워링크",
-    "AI브리핑",
-    "AI추천",
-    "뉴스",
-    "이미지",
-    "지식스니펫",
-    "카페"
-   ],
-   "monetize": null
-  },
-  {
    "keyword": "아이맞이지원금",
    "topic": "비즈니스·경제",
    "searchVolume": 15400,
@@ -113720,8 +112370,8 @@
   {
    "keyword": "알바 근로계약서 양식",
    "topic": "비즈니스·경제",
-   "searchVolume": 680,
-   "documentCount": 7949,
+   "searchVolume": 690,
+   "documentCount": 7970,
    "adCount": 10,
    "facingPosts": 6,
    "sampledTitles": 10,
@@ -113730,43 +112380,28 @@
    "trendLabel": "",
    "recencySummary": "",
    "demandAsOf": null,
-   "measuredAt": "2026-11-09T04:48:19.069Z"
+   "measuredAt": "2026-11-10T04:20:49.801Z"
   },
   {
-   "keyword": "IRP퇴직연금",
-   "topic": "비즈니스·경제",
-   "searchVolume": 14840,
-   "documentCount": 284565,
-   "adCount": 10,
-   "facingPosts": 8,
+   "keyword": "미국 10월 CPI",
+   "topic": "주제 선택 안 함",
+   "searchVolume": 510,
+   "documentCount": 277003,
+   "adCount": 1,
+   "facingPosts": 7,
    "sampledTitles": 10,
-   "note": "상위 10개 중 8개가 이미 정면으로 다뤘습니다",
+   "note": "상위 10개 중 7개가 이미 정면으로 다뤘습니다",
    "intentLabel": "",
    "trendLabel": "",
    "recencySummary": "",
    "demandAsOf": null,
-   "measuredAt": "2026-11-09T04:48:52.613Z"
-  },
-  {
-   "keyword": "아이맞이지원금",
-   "topic": "비즈니스·경제",
-   "searchVolume": 15400,
-   "documentCount": 115049,
-   "adCount": 0,
-   "facingPosts": 10,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 10개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "",
-   "trendLabel": "",
-   "recencySummary": "",
-   "demandAsOf": null,
-   "measuredAt": "2026-11-09T04:49:00.246Z"
+   "measuredAt": "2026-11-10T04:21:20.065Z"
   },
   {
    "keyword": "국민연금",
-   "topic": "사회·정치",
-   "searchVolume": 306700,
-   "documentCount": 2019553,
+   "topic": "주제 선택 안 함",
+   "searchVolume": 317500,
+   "documentCount": 2023144,
    "adCount": 2,
    "facingPosts": 10,
    "sampledTitles": 10,
@@ -113775,13 +112410,13 @@
    "trendLabel": "",
    "recencySummary": "",
    "demandAsOf": null,
-   "measuredAt": "2026-11-09T04:49:02.266Z"
+   "measuredAt": "2026-11-10T04:21:28.809Z"
   },
   {
    "keyword": "위건강엔 매스틱효능",
    "topic": "건강·의학",
-   "searchVolume": 1190,
-   "documentCount": 1746,
+   "searchVolume": 1200,
+   "documentCount": 1749,
    "adCount": 7,
    "facingPosts": 3,
    "sampledTitles": 10,
@@ -113790,12 +112425,12 @@
    "trendLabel": "",
    "recencySummary": "",
    "demandAsOf": null,
-   "measuredAt": "2026-11-09T04:48:21.983Z"
+   "measuredAt": "2026-11-10T04:20:52.785Z"
   },
   {
    "keyword": "당근쥬스 효능 부작용",
-   "topic": "건강·의학",
-   "searchVolume": 1580,
+   "topic": "주제 선택 안 함",
+   "searchVolume": 1620,
    "documentCount": 6639,
    "adCount": 2,
    "facingPosts": 2,
@@ -113805,14 +112440,14 @@
    "trendLabel": "",
    "recencySummary": "",
    "demandAsOf": null,
-   "measuredAt": "2026-11-09T04:48:37.678Z"
+   "measuredAt": "2026-11-10T04:21:05.767Z"
   },
   {
    "keyword": "사진 보정하는 앱 무료",
    "topic": "사진",
-   "searchVolume": 1100,
-   "documentCount": 12973,
-   "adCount": 5,
+   "searchVolume": 1050,
+   "documentCount": 12997,
+   "adCount": 4,
    "facingPosts": 1,
    "sampledTitles": 10,
    "note": "상위 10개 중 1개가 이미 정면으로 다뤘습니다",
@@ -113820,13 +112455,13 @@
    "trendLabel": "",
    "recencySummary": "",
    "demandAsOf": null,
-   "measuredAt": "2026-11-09T04:48:26.970Z"
+   "measuredAt": "2026-11-10T04:20:58.045Z"
   },
   {
    "keyword": "축가 mr 사이트",
    "topic": "음악",
-   "searchVolume": 720,
-   "documentCount": 3669,
+   "searchVolume": 730,
+   "documentCount": 3670,
    "adCount": 10,
    "facingPosts": 2,
    "sampledTitles": 10,
@@ -113835,9 +112470,84 @@
    "trendLabel": "",
    "recencySummary": "",
    "demandAsOf": null,
-   "measuredAt": "2026-11-09T04:48:30.882Z"
+   "measuredAt": "2026-11-10T04:21:00.991Z"
+  },
+  {
+   "keyword": "태추단감 효능",
+   "topic": "주제 선택 안 함",
+   "searchVolume": 1140,
+   "documentCount": 1865,
+   "adCount": 4,
+   "facingPosts": 10,
+   "sampledTitles": 10,
+   "note": "상위 10개 중 10개가 이미 정면으로 다뤘습니다",
+   "intentLabel": "",
+   "trendLabel": "",
+   "recencySummary": "",
+   "demandAsOf": null,
+   "measuredAt": "2026-11-10T04:21:11.006Z"
+  },
+  {
+   "keyword": "신상 아쿠아리움 무료",
+   "topic": "주제 선택 안 함",
+   "searchVolume": 1070,
+   "documentCount": 3395,
+   "adCount": 1,
+   "facingPosts": 2,
+   "sampledTitles": 10,
+   "note": "상위 10개 중 2개가 이미 정면으로 다뤘습니다",
+   "intentLabel": "",
+   "trendLabel": "",
+   "recencySummary": "",
+   "demandAsOf": null,
+   "measuredAt": "2026-11-10T04:21:12.171Z"
+  },
+  {
+   "keyword": "지역축제",
+   "topic": "주제 선택 안 함",
+   "searchVolume": 21630,
+   "documentCount": 3895309,
+   "adCount": 10,
+   "facingPosts": 6,
+   "sampledTitles": 10,
+   "note": "상위 10개 중 6개가 이미 정면으로 다뤘습니다",
+   "intentLabel": "",
+   "trendLabel": "",
+   "recencySummary": "",
+   "demandAsOf": null,
+   "measuredAt": "2026-11-10T04:21:27.457Z"
+  },
+  {
+   "keyword": "남자 100m 평균",
+   "topic": "스포츠",
+   "searchVolume": 590,
+   "documentCount": 7501,
+   "adCount": 1,
+   "facingPosts": 0,
+   "sampledTitles": 10,
+   "note": "상위 10개 중 7개가 비슷한 내용을 다뤘습니다",
+   "intentLabel": "",
+   "trendLabel": "",
+   "recencySummary": "",
+   "demandAsOf": null,
+   "measuredAt": "2026-11-10T04:21:14.472Z"
+  },
+  {
+   "keyword": "KT 토큰팩토리",
+   "topic": "주제 선택 안 함",
+   "searchVolume": 860,
+   "documentCount": 2369,
+   "adCount": 1,
+   "facingPosts": 10,
+   "sampledTitles": 10,
+   "note": "상위 10개 중 10개가 이미 정면으로 다뤘습니다",
+   "intentLabel": "",
+   "trendLabel": "",
+   "recencySummary": "",
+   "demandAsOf": null,
+   "measuredAt": "2026-11-10T04:21:25.843Z"
   }
  ],
  "routedShopping": [],
- "revalidatedAt": "2026-11-09T04:48:41.854Z"
+ "revalidatedAt": "2026-11-10T04:21:14.472Z"
 }
