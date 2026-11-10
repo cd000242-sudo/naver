@@ -8,11 +8,32 @@
         {
           "id": "naver-1",
           "rank": 1,
-          "keyword": "젠슨 황 스캔들 여파 큰데",
-          "title": "젠슨 황 스캔들 여파 큰데",
-          "rawKeyword": "젠슨 황 스캔들 여파 큰데",
+          "keyword": "이유진 장동윤 동서가 되다",
+          "title": "이유진 장동윤 동서가 되다",
+          "rawKeyword": "이유진 장동윤 동서가 되다",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 100,
+          "source": "naver",
+          "expansions": [
+            "장동윤 이유진",
+            "이유진 배우",
+            "이유진 차경은",
+            "이유진 아빠",
+            "이유진 나무위키",
+            "이유진 농구",
+            "이유진 국어",
+            "배우 이유진"
+          ],
+          "expansionSeed": "이유진"
+        },
+        {
+          "id": "naver-2",
+          "rank": 2,
+          "keyword": "젠슨 황 스캔들 파장 지속",
+          "title": "젠슨 황 스캔들 파장 지속",
+          "rawKeyword": "젠슨 황 스캔들 파장 지속",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 99,
           "source": "naver",
           "expansions": [
             "젠슨황",
@@ -24,27 +45,136 @@
             "젠슨황 오리",
             "젠슨 황 배우자"
           ],
-          "expansionSeed": "젠슨"
-        },
-        {
-          "id": "naver-2",
-          "rank": 2,
-          "keyword": "미국 10월 소비자물가",
-          "title": "미국 10월 소비자물가",
-          "rawKeyword": "미국 10월 소비자물가",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 99,
-          "source": "naver",
-          "expansions": [
-            "미국 10월 소비자물가지수",
-            "미국 10월 소비자물가 예상"
-          ],
-          "expansionSeed": "미국 10월 소비자물가",
+          "expansionSeed": "젠슨",
           "insight": {
             "titles": {
-              "seo": "미국 10월 소비자물가 최신 이슈와 핵심 내용 정리",
-              "home": "미국 10월 소비자물가, 美 10월 CPI 0.4%↑…예상 웃돌며 연준 긴축 전망 강화(종합) 관련 확인할 점",
-              "topic": "미국 10월 소비자물가",
+              "seo": "젠슨 황 스캔들 파장 지속 최신 이슈와 핵심 내용 정리",
+              "home": "젠슨 황 스캔들 파장 지속, 美 의회 권력 재편에 中 스파이 의혹까지…젠슨 황, 정치 압박 직면 관련 확인할 점",
+              "topic": "젠슨 황 스캔들 파장 지속",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "세계 인공지능(AI) 반도체 선도업체인 엔비디아의 젠슨 황 최고경영자(CEO)가 중국 정보기관 스파이로 의심받는 여성 기업과의 불륜 관계를 인정하며 파장이 커지고 있다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "젠슨 황 엔비디아 최고경영자(CEO)의 사생활 논란이 불거지면서 국내 증시에서 엔비디아 협력 관련주에 미칠 파장 에 관심이 쏠리고 있다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.bloter.net/news/articleView.html?idxno=678162",
+                "press": "블로터"
+              },
+              {
+                "url": "https://www.newsis.com/view/NISX20261109_0003860875",
+                "press": "뉴시스"
+              }
+            ],
+            "images": [
+              "https://cdn.bloter.net/news/thumbnail/202611/678162_292734_443_v150.jpg"
+            ],
+            "press": [
+              "블로터",
+              "뉴시스"
+            ],
+            "headlines": [
+              "美 의회 권력 재편에 中 스파이 의혹까지…젠슨 황, 정치 압박 직면",
+              "' 젠슨 황 ' 스캔들 에 K증시도 촉각…엔비디아 관련주에 악재 될까"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-10T21:09:02.386Z"
+          }
+        },
+        {
+          "id": "naver-3",
+          "rank": 3,
+          "keyword": "미국 이란 군사작전",
+          "title": "미국 이란 군사작전",
+          "rawKeyword": "미국 이란 군사작전",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 98,
+          "source": "naver",
+          "expansions": [
+            "미국 이란 전쟁",
+            "미국 이란",
+            "미국 이란 협상",
+            "이란 미국",
+            "미국 이란 종전",
+            "미국 중간선거",
+            "미국 환율",
+            "미국증시"
+          ],
+          "expansionSeed": "미국",
+          "insight": {
+            "titles": {
+              "seo": "미국 이란 군사작전 최신 이슈와 핵심 내용 정리",
+              "home": "미국 이란 군사작전, 미 국무 \"이란에 대한 대규모 군사작전 지금은 필요 없어\" 관련 확인할 점",
+              "topic": "미국 이란 군사작전",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "\"경제적 수단으로 목적 달성 중\"…\"우크라 종전협상 생산적, 유럽 참여중\" 김지연 특파원 = 마코 루비오 미국 국무장관이 10일(현지시간) 이란 에 대한 대규모 군사 작전 이 지금으로선 필요하지 않다고 말했다. AFP, 블룸버그 통신 등에 따르면 루비오 장관은 프랑스 파리에서 이틀째 열리고 있는 주요",
+                "sourceIndex": 0
+              },
+              {
+                "text": "이어 탄핵안은 미국 의 적들에게 “ 미국 이 합법적인 군사작전 을 성공적으로 수행한 자국 전사들과 문민 지도부를 처벌할 것이라고 알려주는 셈”이라고 말했다. 헤그세스 장관은 이란 전쟁의 정당성을 강조하는 발언도 여럿 내놓았다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261111002000085?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "https://www.hani.co.kr/arti/international/america/1286711.html",
+                "press": "한겨레"
+              }
+            ],
+            "images": [
+              "https://img7.yna.co.kr/etc/inner/KR/2026/11/11/AKR20261111002000085_01_i_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "한겨레"
+            ],
+            "headlines": [
+              "미 국무 \"이란에 대한 대규모 군사작전 지금은 필요 없어\"",
+              "‘탄핵 위기’ 헤그세스 “ 이란 전은 성공한 작전 …탄핵은 정치 쇼”"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-10T21:09:02.386Z"
+          }
+        },
+        {
+          "id": "naver-4",
+          "rank": 4,
+          "keyword": "美 10월 CPI 0.4%↑",
+          "title": "美 10월 CPI 0.4%↑",
+          "rawKeyword": "美 10월 CPI 0.4%↑",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 97,
+          "source": "naver",
+          "expansions": [
+            "10월 달력",
+            "10월 영어로",
+            "10월 모의고사",
+            "10월 축제",
+            "10월 제철음식",
+            "10월 날씨",
+            "음력 10월 1일",
+            "10월 31일"
+          ],
+          "expansionSeed": "10월",
+          "insight": {
+            "titles": {
+              "seo": "美 10월 CPI 0.4%↑ 최신 이슈와 핵심 내용 정리",
+              "home": "美 10월 CPI 0.4%↑, 美 10월 CPI 0.4%↑…예상 웃돌며 연준 긴축 전망 강화(종합) 관련 확인할 점",
+              "topic": "美 10월 CPI 0.4%↑",
               "topicGroup": "네이버 실시간 검색어"
             },
             "facts": [
@@ -53,7 +183,7 @@
                 "sourceIndex": 0
               },
               {
-                "text": "전체 CPI 0.4%·근원 CPI 0.3% 상승…시장 전망 각각 0.1%p 상회 12월 FOMC서 추가 긴축 가능성 확대 미국 의 10월 소비자물가 지수(CPI)가 시장 예상치를 웃돌면서 연방준비제도(Fed·연준)의 추가 기준금리 인상 압박이 커지고 있다. 전체 소비자물가 상승폭은 전월보다",
+                "text": "10일(현지시간) 미국 노동통계국(BLS)에 따르면 10월 CPI 는 전월 대비 0.4% 상승했다. 변동성이 큰 식품과 에너지를 제외한 근원 CPI 는 전월 대비 0.3% 상승했다.",
                 "sourceIndex": 1
               }
             ],
@@ -79,17 +209,78 @@
               "美 10월 CPI 0.4% 상승·예상치 상회…연준 12월 금리인상 '압박'"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-10T20:09:13.747Z"
+            "collectedAt": "2026-11-10T21:09:02.386Z"
           }
         },
         {
-          "id": "naver-3",
-          "rank": 3,
+          "id": "naver-5",
+          "rank": 5,
+          "keyword": "우크라이나 종전 협상",
+          "title": "우크라이나 종전 협상",
+          "rawKeyword": "우크라이나 종전 협상",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 96,
+          "source": "naver",
+          "expansions": [
+            "우크라이나 종전",
+            "우크라이나 전쟁",
+            "우크라이나 러시아 전쟁",
+            "러시아 우크라이나",
+            "우크라이나 대통령",
+            "우크라이나 수도",
+            "우크라이나 국기",
+            "우크라이나 여자"
+          ],
+          "expansionSeed": "우크라이나",
+          "insight": {
+            "titles": {
+              "seo": "우크라이나 종전 협상 최신 이슈와 핵심 내용 정리",
+              "home": "우크라이나 종전 협상, 젤렌스키, 3자 종전협상에 \"건설적이고 실질적\" 평가 관련 확인할 점",
+              "topic": "우크라이나 종전 협상",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "협상 첫날 포로 석방·우크라 안전 보장 방안 등 논의 민경락 특파원 = 미국의 중재로 10일(현지시간) 9개월 만에 재개된 러시아· 우크라이나 간 종전협상 에서 포로 석방, 우크라이나 안전 보장 방안 등이 논의된 것으로 전해졌다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "아랍에미리트(UAE) 아부다비에서 열린 미국과 러시아, 우크라이나 3자 종전협상 은 이날 약 4시간의 논의를 마치고 끝났다. 협상 은 11일에도 계속될 예정이다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261111001800109?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261110179100109?input=1195m",
+                "press": "연합뉴스"
+              }
+            ],
+            "images": [
+              "https://img6.yna.co.kr/photo/etc/af/2026/11/10/PAF20261110246701009_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스"
+            ],
+            "headlines": [
+              "젤렌스키, 3자 종전협상에 \"건설적이고 실질적\" 평가",
+              "러, '휴전 후 안보 논의' 유럽 구상 퇴짜… 종전협상 난항 예고"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-10T21:09:02.386Z"
+          }
+        },
+        {
+          "id": "naver-6",
+          "rank": 6,
           "keyword": "A매치 앞두고 소집된 대표팀",
           "title": "A매치 앞두고 소집된 대표팀",
           "rawKeyword": "A매치 앞두고 소집된 대표팀",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 98,
+          "priority": 95,
           "source": "naver",
           "expansions": [
             "축구 대표팀 명단",
@@ -144,394 +335,250 @@
           }
         },
         {
-          "id": "naver-4",
-          "rank": 4,
-          "keyword": "연준 12월 금리 인상",
-          "title": "연준 12월 금리 인상",
-          "rawKeyword": "연준 12월 금리 인상",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 97,
-          "source": "naver",
-          "expansions": [
-            "연준 금리",
-            "연준 투바투",
-            "연준 뜻",
-            "투바투 연준",
-            "연준 나무위키",
-            "미연준",
-            "미국 연준",
-            "연준석"
-          ],
-          "expansionSeed": "연준",
-          "insight": {
-            "titles": {
-              "seo": "연준 12월 금리 인상 최신 이슈와 핵심 내용 정리",
-              "home": "연준 12월 금리 인상, 美연준 월러 이사 \"12월 50bp 인상도 고려\"…'빅스텝' 거론 관련 확인할 점",
-              "topic": "연준 12월 금리 인상",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "월러 이사의 발언과 예상보다 강한 물가 지표가 잇따라 나오면서 금리 선물시장은 12월 연준 의 금리 인상 전망을 앞서 약 85%에서 100%로 끌어올렸다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "금융시장은 12월 기준 금리 0.25%포인트(P) 인상 가능성을 100% 반영했다. 연준 은 지난달 기준 금리 를 3.75~4.00%로 유지했다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261111001200072?input=1195m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "https://www.news1.kr/world/usa-canada/6349745",
-                "press": "뉴스1"
-              }
-            ],
-            "images": [
-              "https://img8.yna.co.kr/photo/reuters/2026/11/10/PRU20261110187101009_P4.jpg"
-            ],
-            "press": [
-              "연합뉴스",
-              "뉴스1"
-            ],
-            "headlines": [
-              "美연준 월러 이사 \"12월 50bp 인상도 고려\"…'빅스텝' 거론",
-              "美 10월 소비자물가 전월比 0.4%↑… 12월 금리 인상 무게(종합)"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-10T20:09:13.747Z"
-          }
-        },
-        {
-          "id": "naver-5",
-          "rank": 5,
-          "keyword": "전원주",
-          "title": "전원주",
-          "rawKeyword": "전원주",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 96,
-          "source": "naver",
-          "expansions": [
-            "전원주 며느리별세",
-            "전원주 치매",
-            "전원주 별세",
-            "전원주 나무위키",
-            "전원주 하이닉스",
-            "전원주택",
-            "전원주근황",
-            "전원주 재산"
-          ],
-          "expansionSeed": "전원주",
-          "insight": {
-            "titles": {
-              "seo": "전원주 최신 이슈와 핵심 내용 정리",
-              "home": "전원주, “치매 전 단계”… 전원주 말 어눌해진 이유 ‘경도인지장애’ 관련 확인할 점",
-              "topic": "전원주",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "나이가 들면서 생기는 기억력 저하와 발음 변화는 단순한 노화 현상일 수 있지만, 뇌가 보내는 경고 신호일 가능성도 크다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "배우 전원주 (87)의 근황이 공개된 가운데, 이전보다 다소 어눌해진 발음으로 건강을 염려하는 목소리가 나오고 있다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://health.chosun.com/site/data/html_dir/2026/11/10/2026111002626.html",
-                "press": "헬스조선"
-              },
-              {
-                "url": "https://www.newsis.com/view/NISX20261110_0003861778",
-                "press": "뉴시스"
-              }
-            ],
-            "images": [
-              "https://health.chosun.com/site/data/img_dir/2026/11/10/2026111002622_0.jpg"
-            ],
-            "press": [
-              "헬스조선",
-              "뉴시스"
-            ],
-            "headlines": [
-              "“치매 전 단계”… 전원주 말 어눌해진 이유 ‘경도인지장애’",
-              "'경도인지장애 고백' 전원주 , 어눌해진 발음에 건강 염려"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-10T20:09:13.747Z"
-          }
-        },
-        {
-          "id": "naver-6",
-          "rank": 6,
-          "keyword": "연애박사 최종회 시청률 관전포인트",
-          "title": "연애박사 최종회 시청률 관전포인트",
-          "rawKeyword": "연애박사 최종회 시청률 관전포인트",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 95,
-          "source": "naver",
-          "expansions": [
-            "닥터x 최종회",
-            "전원일기 최종회",
-            "최종회뜻",
-            "연애박사민재다리",
-            "관전 포인트",
-            "관전 포인트 뜻"
-          ],
-          "expansionSeed": "최종회",
-          "insight": {
-            "titles": {
-              "seo": "연애박사 최종회 시청률 관전포인트 최신 이슈와 핵심 내용 정리",
-              "home": "연애박사 최종회 시청률 관전포인트, 추영우♥ 김소현 '연애박사' 최고 시청률…정주행 포인트 3 - 맥스무비닷컴 관련 확인할 점",
-              "topic": "연애박사 최종회 시청률 관전포인트",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "디즈니+ 오리지널 시리즈 ' 연애박사 '가 10일 최종회 공개를 앞두고 마지막까지 놓칠 수 없는 관전 포인트 세 가지를 공개했다. 서툰 첫사랑부터 현실적인 관계의 갈등, 추영우와 김소현의 섬세한 감정 연기까지 청춘 로맨스의 매력을 집약하며 결말에 대한 궁금증을 키운다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "최종회 는 오늘 밤 10시, 디즈니+에서도 시청‘ 연애박사 ’(극본 민효정, 연출 안판석) 최종회 는 10일 오후 10시 ENA에서 방송된다. 디즈니+ 쪽은 최종회 를 앞두고 서툰 첫사랑, 현실적인 관계의 갈등, 추영우와 김소현의 감정 연기를 마지막 관전 포인트 세 가지로 제시했다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.maxmovie.com/news/articleView.html?idxno=502875",
-                "press": "맥스무비"
-              },
-              {
-                "url": "https://www.wikitree.co.kr/articles/1173351",
-                "press": "위키트리"
-              }
-            ],
-            "images": [
-              "https://cdn.maxmovie.com/news/photo/202611/502875_44012_132.jpg"
-            ],
-            "press": [
-              "맥스무비",
-              "위키트리"
-            ],
-            "headlines": [
-              "추영우♥ 김소현 '연애박사' 최고 시청률…정주행 포인트 3 - 맥스무비닷컴",
-              "추영우·김소현 ‘ 연애박사 ’ 11회서 이별 끝낼까…박민재 고백에 임유..."
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-10T20:09:13.747Z"
-          }
-        },
-        {
           "id": "naver-7",
           "rank": 7,
-          "keyword": "예금 금리",
-          "title": "예금",
-          "rawKeyword": "예금",
+          "keyword": "퇴직금계산기",
+          "title": "퇴직",
+          "rawKeyword": "퇴직",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 94,
           "source": "naver",
           "expansions": [
-            "예금 금리",
-            "예금이자계산기",
-            "정기예금 금리",
-            "예금 뜻",
-            "예금 추천",
-            "예금금리비교",
-            "예금 이자 계산",
-            "정기예금"
+            "퇴직금계산기",
+            "퇴직연금",
+            "퇴직금 지급기준",
+            "퇴직연금 DC형",
+            "퇴직금",
+            "퇴직금 중간정산",
+            "퇴직금 지급일",
+            "irp 퇴직연금"
           ],
-          "expansionSeed": "예금",
+          "expansionSeed": "퇴직",
           "insight": {
             "titles": {
-              "seo": "예금 금리 최신 이슈와 핵심 내용 정리",
-              "home": "예금 금리, [단독] \"대출도 예금도 이상하다\"…뒤집힌 금리 공식 관련 확인할 점",
-              "topic": "예금 금리",
+              "seo": "퇴직금계산기 최신 이슈와 핵심 내용 정리",
+              "home": "퇴직금계산기, 퇴직금 계산, ‘월급×근속연수’만 믿었다면…계산기 누르기 전 확인할 것은 관련 확인할 점",
+              "topic": "퇴직금계산기",
               "topicGroup": "네이버 실시간 검색어"
             },
             "facts": [
               {
-                "text": "대출도 예금도 이상하다…뒤집힌 금리 공식, 6개월이 1년보다",
+                "text": "[CBC뉴스] 퇴사를 고민할 때 가장 먼저 떠올리는 숫자 중 하나가 퇴직금이다. 다음 직장을 구하기 전 생활비가 될 수도 있고, 대출 상환이나 새로운 출발을 위한 자금이 될 수도 있다. 하지만 ‘월급에 근속연수를 곱하면 되겠지’라고 예상했다가는 실제 정산액과 차이가 날 수 있다.퇴직금 계산에서 중요한 것은 계산기를 얼마나 빨리 누르느냐보다",
                 "sourceIndex": 0
               },
               {
-                "text": "이러다보니 은행들은 연초에 3%대 초반이던 정기 예금 금리 를 앞다퉈 3%대 후반으로 올리며 모집 경쟁을 벌이고 있다. 신한은행은 전날 연 3.6~4.0% 금리를 제공하는 슈퍼솔 웰컴 정기예금을 내놨다.",
+                "text": "육아휴직 기간의 임금을 0원으로 넣은 채 휴직일수를 포함해 평균임금을 낮추는 방식은 법정 산정 원칙과 맞지 않는다. 고용노동부 퇴직금 계산기 에서도 육아휴직은 평균임금 계산에서 빼는 ‘미산입기간’으로 구분된다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.hankyung.com/article/2026111084481",
-                "press": "한국경제"
+                "url": "https://www.cbci.co.kr/news/articleView.html?idxno=616615",
+                "press": "CBC뉴스"
               },
               {
-                "url": "https://www.khan.co.kr/article/202611101633001",
-                "press": "경향신문"
+                "url": "https://www.vegannews.co.kr/news/article.html?no=385619",
+                "press": "비건뉴스"
               }
             ],
             "images": [
-              "https://img.hankyung.com/photo/202611/AA.46376956.1.jpg"
+              "https://www.cbci.co.kr/news/thumbnail/202610/616615_423664_3120_v150.jpg"
             ],
             "press": [
-              "한국경제",
-              "경향신문"
+              "CBC뉴스",
+              "비건뉴스"
             ],
             "headlines": [
-              "[단독] \"대출도 예금도 이상하다\"…뒤집힌 금리 공식",
-              "하루 2조원↑, 돌아온 ‘정기 예금 전성시대’···수출·역머니무브·금..."
+              "퇴직금 계산, ‘월급×근속연수’만 믿었다면…계산기 누르기 전 확인할 것은",
+              "육아휴직도 퇴직금 근속기간에 포함"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-10T20:09:13.747Z"
+            "collectedAt": "2026-11-10T21:09:02.386Z"
           }
         },
         {
           "id": "naver-8",
           "rank": 8,
-          "keyword": "선관위 특검 계수기 압수수색",
-          "title": "선관위 특검 계수기 압수수색",
-          "rawKeyword": "선관위 특검 계수기 압수수색",
+          "keyword": "lng선",
+          "title": "lng선",
+          "rawKeyword": "lng선",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 93,
           "source": "naver",
           "expansions": [
-            "선관위 특검",
-            "특검 선관위",
-            "선관위 자살",
-            "선관위 직원 사망",
-            "선관위 부정선거",
-            "선관위 조작",
-            "선관위 직원",
-            "선관위원장"
+            "lng 선박",
+            "lng선 크기",
+            "lng선 가격",
+            "lng선 관련주",
+            "lng 선박 관련주",
+            "lng선 발주",
+            "lng선 엔진",
+            "lng 선박 기술"
           ],
-          "expansionSeed": "선관위",
+          "expansionSeed": "lng선",
           "insight": {
             "titles": {
-              "seo": "선관위 특검 계수기 압수수색 최신 이슈와 핵심 내용 정리",
-              "home": "선관위 특검 계수기 압수수색, 선관위특검, ‘담합 혐의’ 투표지 계수기 업체 압수수색 관련 확인할 점",
-              "topic": "선관위 특검 계수기 압수수색",
+              "seo": "lng선 최신 이슈와 핵심 내용 정리",
+              "home": "lng선, 포스코 광양 LNG터미널 20년의 결실…LNG 공급망 중추 [현장+] 관련 확인할 점",
+              "topic": "lng선",
               "topicGroup": "네이버 실시간 검색어"
             },
             "facts": [
               {
-                "text": "선거관리위원회와 계약한 투표지 계수기 업체들이 가격을 담합한 정황이 파악돼 특검이 강제수사에 나섰다.",
+                "text": "전라남도 광양 포스코인터내셔널 제2LNG터미널이 종합준공 준비를 끝내고 모습을 드러냈다. 하역부두까지 이어진 길이는 약 740m에 달했다. 위로 높게 설치된 진입로에 들어서자 왼편으로 노량대교가 모습을 드러냈다.",
                 "sourceIndex": 0
               },
               {
-                "text": "국가계약법이 정한 경쟁을 부당하게 제한한 공정거래법 위반 혐의에 해당한다는 게 특검 판단입니다. 앞서 중앙 선관위 를 압수수색 했던 특검 은, 계수기 업체 관계자들을 소환하는 한편 선관위 내부 인사의 가담 여부도 규명할 방침입니다.",
+                "text": "조선업계 일각에서 LNG (액화천연가스) 운반선 시장의 ‘피크아웃(정점 후 둔화)’ 우려가 제기되고 있다. LNG 운반선 운임이 하락하고 중국과의 경쟁 속에 신규 수주 가격도 낮아지고 있어서다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://biz.chosun.com/topics/law_firm/2026/11/09/CCFJSO2JXVBRRKGZATIQFXS62Q/?utm_source=naver&utm_medium=original&utm_campaign=biz",
-                "press": "조선비즈"
+                "url": "https://www.bloter.net/news/articleView.html?idxno=677676",
+                "press": "블로터"
               },
               {
-                "url": "https://news.tvchosun.com/site/data/html_dir/2026/11/10/2026111090040.html",
-                "press": "TV조선"
+                "url": "https://biz.chosun.com/industry/company/2026/11/10/ZSEIWSZQTRAS7GKWTK3HPLDM2I/?utm_source=naver&utm_medium=original&utm_campaign=biz",
+                "press": "조선비즈"
               }
             ],
             "images": [
-              "https://biz.chosun.com/resizer/v2/GQZGMMRRGA2TMZJUGEYTIZRUMY.jpg?auth=8e714709e6a637bb1ca4c61b2a5c94cc313e659c360095db9e516287798f9b21&width=1200&height=630&smart=true"
+              "https://cdn.bloter.net/news/thumbnail/202611/677676_292333_4336_v150.jpg"
             ],
             "press": [
-              "조선비즈",
-              "TV조선"
+              "블로터",
+              "조선비즈"
             ],
             "headlines": [
-              "선관위특검, ‘담합 혐의’ 투표지 계수기 업체 압수수색",
-              "특검 , '올림픽공원 이상 투표지' 정밀 감정의뢰… 계수기 업체도 압수 수..."
+              "포스코 광양 LNG터미널 20년의 결실…LNG 공급망 중추 [현장+]",
+              "韓 ‘본업’ LNG 운반선 수주 경고음… 돌파구는 내년 북미 수요"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-10T21:09:02.386Z"
+          }
+        },
+        {
+          "id": "naver-9",
+          "rank": 9,
+          "keyword": "첫 홀 버디 성공",
+          "title": "첫 홀 버디 성공",
+          "rawKeyword": "첫 홀 버디 성공",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 92,
+          "source": "naver",
+          "expansions": [
+            "버디 뜻",
+            "버디 방탈출",
+            "버디 자전거",
+            "버디언",
+            "버디 영화",
+            "버디 미니벨로",
+            "버디버디",
+            "버디4"
+          ],
+          "expansionSeed": "버디",
+          "insight": {
+            "titles": {
+              "seo": "첫 홀 버디 성공 최신 이슈와 핵심 내용 정리",
+              "home": "첫 홀 버디 성공, [포토]전예성,첫 홀 버디 성공 관련 확인할 점",
+              "topic": "첫 홀 버디 성공",
+              "topicGroup": "네이트 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "경기도 파주에 위치한 서원힐스CC(파72.6,649yds,)에서 ‘대보 하우스디 챔피언십’(총상금12억원.우승상금3억원)최종라운드가 열렸다. 전예성이 1번홀에서 경기를 치르고 있다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "경기도 파주에 위치한 서원힐스CC(파72.6,649yds,)에서 ‘대보 하우스디 챔피언십’(총상금12억원.우승상금3억원)최종라운드가 열렸다. 김재희(SK텔레콤)가 1번홀에서 경기를 치르고 있다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.edaily.co.kr/News/Read?newsId=07757206645644408&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+                "press": "이데일리"
+              },
+              {
+                "url": "https://www.edaily.co.kr/News/Read?newsId=06933926645644408&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+                "press": "이데일리"
+              }
+            ],
+            "images": [
+              "https://image.edaily.co.kr/images/Photo/files/NP/S/2026/11/PS26111002194.jpg"
+            ],
+            "press": [
+              "이데일리"
+            ],
+            "headlines": [
+              "[포토]전예성,첫 홀 버디 성공",
+              "[포토]김재희, 첫 홀 버디 성공 인사"
             ],
             "extraction": "playwright",
             "collectedAt": "2026-11-10T20:09:13.747Z"
           }
         },
         {
-          "id": "naver-9",
-          "rank": 9,
-          "keyword": "이유진 차경은 김고은 닮음",
-          "title": "이유진 차경은 김고은 닮음",
-          "rawKeyword": "이유진 차경은 김고은 닮음",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 92,
-          "source": "naver",
-          "expansions": [
-            "이유진 차경은",
-            "이유진 배우",
-            "이유진 아빠",
-            "이유진 나무위키",
-            "이유진 농구",
-            "이유진 국어",
-            "장동윤 이유진",
-            "배우 이유진"
-          ],
-          "expansionSeed": "이유진"
-        },
-        {
           "id": "naver-10",
           "rank": 10,
-          "keyword": "금융보안원도 금융사 유출",
-          "title": "금융보안원도 금융사 유출",
-          "rawKeyword": "금융보안원도 금융사 유출",
+          "keyword": "나의 유죄인간",
+          "title": "나의 유죄인간",
+          "rawKeyword": "나의 유죄인간",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 91,
           "source": "naver",
           "expansions": [
-            "유출 뜻",
-            "개인정보유출",
-            "지마켓 유출",
-            "정보유출",
-            "기무세딘 유출",
-            "질산 유출",
-            "g마켓 유출",
-            "외교부 유출"
+            "나의 유죄인간 웹툰",
+            "나의 유죄인간 몇부작",
+            "나의 유죄인간 재방송",
+            "나의 유죄인간 ott",
+            "나의 유죄인간 인물관계도",
+            "나의 유죄인간 나무위키",
+            "나의 유죄인간 시청률",
+            "나의 유죄인간 원작"
           ],
-          "expansionSeed": "금융보안원",
+          "expansionSeed": "나의 유죄인간",
           "insight": {
             "titles": {
-              "seo": "금융보안원도 금융사 유출 최신 이슈와 핵심 내용 정리",
-              "home": "금융보안원도 금융사 유출, 금융보안원도 해킹에 뚫려…금융사 보안평가 정보 일부 유출(종합) 관련 확인할 점",
-              "topic": "금융보안원도 금융사 유출",
+              "seo": "나의 유죄인간 최신 이슈와 핵심 내용 정리",
+              "home": "나의 유죄인간, ‘나의 유죄인간’ 임시완, 설인아 구했다가 동성 스캔들 - 스타투데이 관련 확인할 점",
+              "topic": "나의 유죄인간",
               "topicGroup": "네이버 실시간 검색어"
             },
             "facts": [
               {
-                "text": "금융보안원 은 정보 유출 과 관련해 개별 금융사 를 대상으로 유출 사실을 통지하고, 이번 해킹으로 개인정보 등은 유출 되지 않았다고 설명하는 것으로 전해진다.",
+                "text": "기사 상세 방송·TV ‘나의 유죄인간’ 임시완, 설인아 구했다가 동성 스캔들 사진ㅣtvN 재벌 3세 임시완이 자신의 수행비서 설인아와 뜻밖의 스캔들에 휘말린다.10일 방송되는 tvN 월화드라마 ‘나의 유죄인간’(극본 문수정/ 연출 박단희/ 기획 CJ ENM 스튜디오스/ 제작 피타팻 스튜디오) 8회에서는 대외 이미지 관리에 심혈을 기울여 온 태강그룹 후계자 후보 윤이준(임시완 분)의 연관 검색어에 때아닌 ‘브로맨스’가 등장한다.공식 행사에 참석한 윤이준은 심상치 않은 일들을 연달아 마주했다. 누군가의 죽음을 연상케 하는 의문의 상자가 퀵서비스로 배달된 데 이어 측근이자 법무팀 변호사인 김시현(김정현 분)으로부터 회장실 비서 이혜정(연우 분)에게 위험한 일이 벌어졌다는 소식을 들은 것.정체 모를 악인의 도를 넘은 행각에 무엇보다",
                 "sourceIndex": 0
               },
               {
-                "text": "10일 금융 당국에 따르면 금융보안원 은 전날 해킹 공격으로 일부 정보가 유출 된 사실을 확인하고 금융 위원회 등 금융 당국에 신고했다. 금융 당국은 사고 경위와 피해 상황을 파악하고 있다.",
+                "text": "‘ 나의 유죄인간 ’ 임시완이 위험에 빠진 설인아를 구하며 관계의 변화를 예고했다. 설인아를 향한 짝사랑을 인정한 데 이어 위기의 순간 몸을 던져 지켜내며 설렘을 더했다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.yna.co.kr/view/AKR20261110174700002?input=1195m",
-                "press": "연합뉴스"
+                "url": "https://www.mk.co.kr/article/12204113",
+                "press": "매일경제"
               },
               {
-                "url": "https://www.newsis.com/view/NISX20261110_0003862852",
-                "press": "뉴시스"
+                "url": "https://www.bntnews.co.kr/article/view/bnt202611100082",
+                "press": "bnt뉴스"
               }
             ],
             "images": [
-              "https://img7.yna.co.kr/photo/cms/2022/01/12/23/PCM20220112000123990_P4.jpg"
+              "https://pimg.mk.co.kr/news/cms/202611/10/news-p.v1.20261110.c25ee1f9e97b497a886142a45cb1d3d1_R.png"
             ],
             "press": [
-              "연합뉴스",
-              "뉴시스"
+              "매일경제",
+              "bnt뉴스"
             ],
             "headlines": [
-              "금융보안원도 해킹에 뚫려…금융사 보안평가 정보 일부 유출(종합)",
-              "금융 권 보안 담당 금융보안원도 해킹… 금융사 제출 자료 일부 유출"
+              "‘나의 유죄인간’ 임시완, 설인아 구했다가 동성 스캔들 - 스타투데이",
+              "‘ 나의 유죄인간 ’ 임시완, 설인아 구했다"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-10T20:09:13.747Z"
+            "collectedAt": "2026-11-10T21:09:02.386Z"
           }
         }
       ]
@@ -872,44 +919,46 @@
           "expansionSeed": "한수아",
           "insight": {
             "titles": {
-              "seo": "한수아 카리나 집 최신 이슈와 핵심 내용 정리",
-              "home": "한수아 카리나 집, 한수아, 카리나와 절친 된 사연 \"먼저 번호 물어보더라…거의 매일 집에서 만나\" (우사편) 관련 확인할 점",
+              "seo": "한수아 카리나 집에 거의 매일, 두 사람 가까운 일상 공개",
+              "home": "배우 한수아, 카리나가 집에 매일 온 이유…많이들 궁금했던 사이",
               "topic": "한수아 카리나 집",
-              "topicGroup": "다음 실시간 검색어"
+              "topicGroup": "다음 실시간 검색어",
+              "summary": "한수아가 카리나와의 가까운 사이를 전했다. 카리나가 거의 매일 집에 와 저녁을 먹었고, 이번 유튜브 출연도 응원해 줬다고 밝혔다.",
+              "aiTitled": true
             },
             "facts": [
               {
-                "text": "한수아 는 바쁜 스케줄 속에서도 카리나 가 자신의 집에 자주 찾아왔다며 \"스케줄하고 저희 집 와서 저녁을 먹고, 그게 어느 순간 당연해졌던 것 같다\"고 설명했다. 또한 한수아 는 카리나 가 이번 유튜브 출연을 적극적으로 응원해 줬다고 밝혔다.",
+                "text": "\"카리나 팔이 그만해\"…절친 언급했다가 악플 폭탄 맞은 여배우 배우 한수아가 유튜브에서 그룹 에스파(aespa) 카리나와의 친분을 언급한 뒤 악성 댓글에 시달리고 있다. 일부 이용자는 한수아가 카리나와의 친분을 이용해 이름을 알리려 한다며 그의 인스타그램에 비난 댓글을 남겼다. /사진=유튜브 채널 '우리 사이엔 편지가 있다' 캡처 배우 한수아가 유튜브에서 그룹 에스파(aespa) 카리나와의 친분을 언급한 뒤 악성 댓글에 시달리고 있다.",
                 "sourceIndex": 0
               },
               {
-                "text": "한수아 는 \"거의 매일 봤다\"라며 \"저희 엄마가 뭐 하냐고 물으면 매일 지민이( 카리나 )랑 있다고 하니까 '걔 안 바쁘니?'라고 하셨다\"고 말해 웃음을 안겼다. 한수아 는 \"스케줄하고 저희 집 와서 저녁 먹고.",
+                "text": "한수아 는 바쁜 스케줄 속에서도 카리나 가 자신의 집에 자주 찾아왔다며 \"스케줄하고 저희 집 와서 저녁을 먹고, 그게 어느 순간 당연해졌던 것 같다\"고 설명했다. 또한 한수아 는 카리나 가 이번 유튜브 출연을 적극적으로 응원해 줬다고 밝혔다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.xportsnews.com/article/2218053",
-                "press": "엑스포츠뉴스"
+                "url": "https://www.mt.co.kr/entertainment/2026/11/11/2026111105282015575",
+                "press": "머니투데이"
               },
               {
-                "url": "https://www.tvreport.co.kr/breaking/article/1089836/",
-                "press": "TV리포트"
+                "url": "https://www.xportsnews.com/article/2218053",
+                "press": "엑스포츠뉴스"
               }
             ],
             "images": [
-              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F311%2F2026%2F11%2F10%2F2079108.jpg&type=fface200_200&expire=2&refresh=true"
+              "https://thumb.mt.co.kr/cdn-cgi/image/w=1200,h=670,fit=cover,bg=white,f=auto,quality=high,sharpen=2,g=face/21/2026/11/2026111105282015575_1.jpg"
             ],
             "press": [
-              "엑스포츠뉴스",
-              "TV리포트"
+              "머니투데이",
+              "엑스포츠뉴스"
             ],
             "headlines": [
-              "한수아, 카리나와 절친 된 사연 \"먼저 번호 물어보더라…거의 매일 집에서 만나\" (우사편)",
-              "\"여보\" 카리나 , 한수아 와 관계 이 정도…\"스케줄 끝나면 우리 집으로\" [..."
+              "\"카리나 팔이 그만해\"…절친 언급했다가 악플 폭탄 맞은 여배우 - 머니투데이",
+              "한수아 , 카리나 와 절친 된 사연 \"먼저 번호 물어보더라…거의 매일 집에..."
             ],
-            "extraction": "search-card",
-            "collectedAt": "2026-11-10T20:09:13.747Z"
+            "extraction": "playwright",
+            "collectedAt": "2026-11-10T21:09:02.386Z"
           }
         },
         {
@@ -1171,33 +1220,88 @@
         {
           "id": "nate-1",
           "rank": 1,
-          "keyword": "첫 홀 버디 성공",
-          "title": "첫 홀 버디 성공",
-          "rawKeyword": "첫 홀 버디 성공",
+          "keyword": "노태우 비자금 의혹",
+          "title": "노태우 비자금 의혹",
+          "rawKeyword": "노태우 비자금 의혹",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 100,
           "source": "nate",
           "expansions": [
-            "버디 뜻",
-            "버디 방탈출",
-            "버디 자전거",
-            "버디언",
-            "버디 영화",
-            "버디 미니벨로",
-            "버디버디",
-            "버디4"
+            "노태우대통령",
+            "의혹 뜻",
+            "표절의혹",
+            "의혹 영어로",
+            "의혹 해소",
+            "의혹적 뜻",
+            "의혹을 가지다",
+            "의혹 한자로"
           ],
-          "expansionSeed": "버디",
+          "expansionSeed": "노태우",
           "insight": {
             "titles": {
-              "seo": "첫 홀 버디 성공 최신 이슈와 핵심 내용 정리",
-              "home": "첫 홀 버디 성공, [포토]전예성,첫 홀 버디 성공 관련 확인할 점",
-              "topic": "첫 홀 버디 성공",
+              "seo": "노태우 비자금 의혹 최신 이슈와 핵심 내용 정리",
+              "home": "노태우 비자금 의혹, 공소청, '노태우 비자금 의혹' 노재헌 주중대사 피의자 입건 관련 확인할 점",
+              "topic": "노태우 비자금 의혹",
               "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
               {
-                "text": "경기도 파주에 위치한 서원힐스CC(파72.6,649yds,)에서 ‘대보 하우스디 챔피언십’(총상금12억원.우승상금3억원)최종라운드가 열렸다. 전예성이 1번홀에서 경기를 치르고 있다.",
+                "text": "은닉혐의 소환조사 방침…조만간 출석 일정 조율 노태우 전 대통령 일가의 비자금 은닉 의혹 을 수사하는 공소청이 노 전 대통령의 아들인 노재헌 주중한국대사를 피의자 신분으로 입건했다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "고(故) 노태우 전 대통령 일가의 비자금 은닉 의혹 을 수사 중인 공소청이 노 전 대통령 아들 노재헌 주중한국대사를 피의자로 입건했다. 공소청은 연내 노 대사를 소환해 조사할 방침이다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261110175900004?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "https://www.joongang.co.kr/article/25477425",
+                "press": "중앙일보"
+              }
+            ],
+            "images": [
+              "https://img9.yna.co.kr/photo/yna/YH/2026/05/07/PYH2026050719520008300_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "중앙일보"
+            ],
+            "headlines": [
+              "공소청, '노태우 비자금 의혹' 노재헌 주중대사 피의자 입건",
+              "공소청, ‘ 노태우 비자금 은닉 의혹 ’ 노재헌 피의자 입건…연내 소환 ..."
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-10T21:09:02.386Z"
+          }
+        },
+        {
+          "id": "nate-2",
+          "rank": 2,
+          "keyword": "첫 홀 버디",
+          "title": "첫 홀 버디",
+          "rawKeyword": "첫 홀 버디",
+          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
+          "priority": 99,
+          "source": "nate",
+          "expansions": [
+            "첫홀 버디 뜻"
+          ],
+          "expansionSeed": "첫 홀 버디",
+          "insight": {
+            "titles": {
+              "seo": "첫 홀 버디 최신 이슈와 핵심 내용 정리",
+              "home": "첫 홀 버디, [포토]이동은,첫 홀 버디 도전 관련 확인할 점",
+              "topic": "첫 홀 버디",
+              "topicGroup": "네이트 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "경기도 파주에 위치한 서원힐스CC(파72.6,649yds,)에서 ‘대보 하우스디 챔피언십’(총상금12억원.우승상금3억원)최종라운드가 열렸다. 이동은(교포SBI저축은행)이 1번홀에서 경기를 치르고 있다.",
                 "sourceIndex": 0
               },
               {
@@ -1207,222 +1311,36 @@
             ],
             "links": [
               {
-                "url": "https://www.edaily.co.kr/News/Read?newsId=07757206645644408&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+                "url": "https://www.edaily.co.kr/News/Read?newsId=07521046645644408&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
                 "press": "이데일리"
               },
               {
-                "url": "https://www.edaily.co.kr/News/Read?newsId=06933926645644408&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+                "url": "https://www.edaily.co.kr/News/Read?newsId=06927366645644408&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
                 "press": "이데일리"
               }
             ],
             "images": [
-              "https://image.edaily.co.kr/images/Photo/files/NP/S/2026/11/PS26111002194.jpg"
+              "https://image.edaily.co.kr/images/Photo/files/NP/S/2026/11/PS26111002125.jpg"
             ],
             "press": [
               "이데일리"
             ],
             "headlines": [
-              "[포토]전예성,첫 홀 버디 성공",
-              "[포토]김재희, 첫 홀 버디 성공 인사"
+              "[포토]이동은,첫 홀 버디 도전",
+              "[포토]김재희, 첫 홀 버디 도전"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-10T20:09:13.747Z"
-          }
-        },
-        {
-          "id": "nate-2",
-          "rank": 2,
-          "keyword": "금융보안원도 금융사 유출",
-          "title": "금융보안원도 금융사 유출",
-          "rawKeyword": "금융보안원도 금융사 유출",
-          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
-          "priority": 99,
-          "source": "nate",
-          "expansions": [
-            "유출 뜻",
-            "개인정보유출",
-            "지마켓 유출",
-            "정보유출",
-            "기무세딘 유출",
-            "질산 유출",
-            "g마켓 유출",
-            "외교부 유출"
-          ],
-          "expansionSeed": "금융보안원",
-          "insight": {
-            "titles": {
-              "seo": "금융보안원도 금융사 유출 최신 이슈와 핵심 내용 정리",
-              "home": "금융보안원도 금융사 유출, 금융보안원도 해킹에 뚫려…금융사 보안평가 정보 일부 유출(종합) 관련 확인할 점",
-              "topic": "금융보안원도 금융사 유출",
-              "topicGroup": "네이트 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "금융보안원 은 정보 유출 과 관련해 개별 금융사 를 대상으로 유출 사실을 통지하고, 이번 해킹으로 개인정보 등은 유출 되지 않았다고 설명하는 것으로 전해진다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "10일 금융 당국에 따르면 금융보안원 은 전날 해킹 공격으로 일부 정보가 유출 된 사실을 확인하고 금융 위원회 등 금융 당국에 신고했다. 금융 당국은 사고 경위와 피해 상황을 파악하고 있다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261110174700002?input=1195m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "https://www.newsis.com/view/NISX20261110_0003862852",
-                "press": "뉴시스"
-              }
-            ],
-            "images": [
-              "https://img7.yna.co.kr/photo/cms/2022/01/12/23/PCM20220112000123990_P4.jpg"
-            ],
-            "press": [
-              "연합뉴스",
-              "뉴시스"
-            ],
-            "headlines": [
-              "금융보안원도 해킹에 뚫려…금융사 보안평가 정보 일부 유출(종합)",
-              "금융 권 보안 담당 금융보안원도 해킹… 금융사 제출 자료 일부 유출"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-10T20:09:13.747Z"
+            "collectedAt": "2026-11-10T21:09:02.386Z"
           }
         },
         {
           "id": "nate-3",
           "rank": 3,
-          "keyword": "싱글맘 이지현 미용실",
-          "title": "싱글맘 이지현 미용실",
-          "rawKeyword": "싱글맘 이지현 미용실",
+          "keyword": "조현 환담 합의",
+          "title": "조현 환담 합의",
+          "rawKeyword": "조현 환담 합의",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 98,
-          "source": "nate",
-          "expansions": [
-            "이지현 미용실",
-            "쥬얼리 이지현",
-            "이지현3",
-            "이지현프로",
-            "이지현 배우",
-            "이지현3프로",
-            "이지현 나무위키",
-            "이지현의원"
-          ],
-          "expansionSeed": "이지현",
-          "insight": {
-            "titles": {
-              "seo": "싱글맘 이지현 미용실 최신 이슈와 핵심 내용 정리",
-              "home": "싱글맘 이지현 미용실, &lsquo;싱글맘&rsquo; 이지현, 미용실 원장직 떠난다 &ldquo;딸 다쳤는데 혼자 4바늘 꿰매&rdquo; - 일간스포 관련 확인할 점",
-              "topic": "싱글맘 이지현 미용실",
-              "topicGroup": "네이트 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "그룹 쥬얼리 출신 이지현 이 마케팅 원장으로 근무하던 미용실 을 떠난다고 알렸다. 이지현 은 홀로 아이를 키우는 싱글맘 이다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "그룹 쥬얼리 출신 이지현 이 아들과 예상 밖의 근황을 공개해 놀라움을 자아냈다. 활동하며 드라마 '사랑하기 좋은 날', '내일도 승리' 등에 출연해 연기했다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://isplus.com/article/view/isp202611100181",
-                "press": "일간스포츠"
-              },
-              {
-                "url": "https://www.tvreport.co.kr/entertainment/article/1087141/",
-                "press": "TV리포트"
-              }
-            ],
-            "images": [
-              "https://isplus.com/data/isp/image/2026/11/10/isp20261110000302.800x.0.png"
-            ],
-            "press": [
-              "일간스포츠",
-              "TV리포트"
-            ],
-            "headlines": [
-              "&lsquo;싱글맘&rsquo; 이지현, 미용실 원장직 떠난다 &ldquo;딸 다쳤는데 혼자 4바늘 꿰매&rdquo; - 일간스포츠",
-              "'결혼→이혼 반복' 이지현 , 아들 키우기 쉽지 않네…\"가출한 子 두세 시..."
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-10T20:09:13.747Z"
-          }
-        },
-        {
-          "id": "nate-4",
-          "rank": 4,
-          "keyword": "소노 5연패 탈출",
-          "title": "소노 5연패 탈출",
-          "rawKeyword": "소노 5연패 탈출",
-          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
-          "priority": 97,
-          "source": "nate",
-          "expansions": [
-            "고양 소노 농구단",
-            "소노펠리체",
-            "소노벨",
-            "소노 비발디파크",
-            "소노캄",
-            "소노캄 경주",
-            "경주 소노캄",
-            "소노벨 청송"
-          ],
-          "expansionSeed": "소노",
-          "insight": {
-            "titles": {
-              "seo": "소노 5연패 탈출 최신 이슈와 핵심 내용 정리",
-              "home": "소노 5연패 탈출, '이정현·오브라이언트 55점 합작' 소노, 현대모비스 꺾고 5연패 탈출 관련 확인할 점",
-              "topic": "소노 5연패 탈출",
-              "topicGroup": "네이트 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "'이정현·오브라이언트 55점 합작' 소노, 현대모비스 꺾고 5연패 탈출김도용 기자2026.11.10 오후 09:10구글에서 뉴스1 즐겨찾기AI 요약 정보고양 소노, 현대모비스 86-79 꺾고 5연패 탈출이정현 26점·오브라이언트 29점 12리바운드소노 5승 9패 9위…현대모비스 4연패·최하위구글에서 뉴스1 즐겨찾기86-79 승리고양 소노 이정현. 재판매 및 DB 금지)(서울=뉴스1) 김도용 기자 = 프로농구 고양 소노가 55점을 합작한 이정현과 자니 오브라이언트의 활약으로 '최하위' 울산 현대모비스를 꺾고 5연패에서 탈출했다.소노는 10일 울산동천체육관에서 열린 2026-27 KCC 프로농구 정규리그에서 현대모비스에 86-79로 승리했다.5연패에서 벗어난 소노는 5승 9패로 9위를 마크했다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "지난달 24일 부산 KCC전 승리 후 5경기를 내리 졌던 소노 는 연패 사슬을 끊으면서 최하위로 떨어질 위기도 넘겼다. 이정현(26점 3리바운드 6어시스트)과 조니 오브라이언트(29점 12리바운드)가 55점을 합작하며 팀 공격을 이끌었다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.news1.kr/sports/basketball/6349724",
-                "press": "뉴스1"
-              },
-              {
-                "url": "https://www.chosun.com/sports/basketball/2026/11/11/HMOH6UZRUJDZZJZAUYSFNLE6N4/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
-                "press": "조선일보"
-              }
-            ],
-            "images": [
-              "https://i3n.news1.kr/system/photos/2026/11/10/8207642/high.jpg"
-            ],
-            "press": [
-              "뉴스1",
-              "조선일보"
-            ],
-            "headlines": [
-              "'이정현·오브라이언트 55점 합작' 소노, 현대모비스 꺾고 5연패 탈출",
-              "이정현-오브라이언트 55점 합작... 소노 , 현대모비스 잡고 5연패 탈출"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-10T20:09:13.747Z"
-          }
-        },
-        {
-          "id": "nate-5",
-          "rank": 5,
-          "keyword": "조현 환담",
-          "title": "조현 환담",
-          "rawKeyword": "조현 환담",
-          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
-          "priority": 96,
           "source": "nate",
           "expansions": [
             "조현병",
@@ -1437,44 +1355,168 @@
           "expansionSeed": "조현",
           "insight": {
             "titles": {
-              "seo": "조현 환담 최신 이슈와 핵심 내용 정리",
-              "home": "조현 환담, 조현, 美 루비오와 환담…한미관계·북한 문제 논의 관련 확인할 점",
-              "topic": "조현 환담",
+              "seo": "조현 환담 합의 최신 이슈와 핵심 내용 정리",
+              "home": "조현 환담 합의, 조현, G7 계기 루비오 美국무와 환담…한미관계·北 문제 논의 관련 확인할 점",
+              "topic": "조현 환담 합의",
               "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
               {
-                "text": "조현 외교부 장관(왼쪽)이 현지시각 10일 프랑스 파리 주요 7개국(G7) 외교장관회의 2일차 일정 중 마코 루비오 미국 국무부 장관과 환담하고 있다. (사진: 외교부 제공) 주요",
+                "text": "정상 간 합의 이행 등 한미동맹 발전 위한 긴밀한 협력 지속키로 조현 외교부 장관이 주요 7개국(G7) 외교장관회의를 계기로 마르코 루비오 미국 국무장관과 만나 한미관계와 북한 문제 등 주요",
                 "sourceIndex": 0
               },
               {
-                "text": "조현 외교부 장관이 프랑스 파리에서 열린 주요 7개국(G7) 외교장관회의 계기에 마코 루비오 미국 국무장관과 환담 을 가졌습니다.",
+                "text": "같은 행사에서 조셉 윤 전 주한미국대사대리는 우리 정부가 의욕적으로 추진 중인 전시작전통제권 전환에 대해 미국 내부의 “ 합의 가 없다”고 했다. 따르면, 조현 외교부 장관은 이날 프랑스 파리에서 열린 주요",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.ichannela.com/news/main/news_detailPage.do?publishId=000000559347",
-                "press": "채널A"
+                "url": "https://www.news1.kr/diplomacy/defense-diplomacy/6349728",
+                "press": "뉴스1"
               },
               {
-                "url": "http://www.yonhapnewstv.co.kr/news/MYH20261111000156LlJ",
-                "press": "연합뉴스TV"
+                "url": "https://www.segye.com/newsView/20261110516088?OutUrl=naver",
+                "press": "세계일보"
               }
             ],
             "images": [
-              "https://image.ichannela.com/images/channela/2026/11/10/000003178955/00000317895520261110214430107.webp"
+              "https://i3n.news1.kr/system/photos/2026/11/10/8207650/high.jpg"
             ],
             "press": [
-              "채널A",
-              "연합뉴스TV"
+              "뉴스1",
+              "세계일보"
             ],
             "headlines": [
-              "조현, 美 루비오와 환담…한미관계·북한 문제 논의",
-              "조현 , 루비오와 G7서 별도 환담 …정상 간 합의 이행 협력"
+              "조현, G7 계기 루비오 美국무와 환담…한미관계·北 문제 논의",
+              "“워싱턴 내부 합의 없어”… 전작권·핵잠 추진 험로"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-10T20:09:13.747Z"
+            "collectedAt": "2026-11-10T21:09:02.386Z"
+          }
+        },
+        {
+          "id": "nate-4",
+          "rank": 4,
+          "keyword": "앤트로픽 공모가 70~78달러",
+          "title": "앤트로픽 공모가 70~78달러",
+          "rawKeyword": "앤트로픽 공모가 70~78달러",
+          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
+          "priority": 97,
+          "source": "nate",
+          "expansions": [
+            "앤트로픽 상장",
+            "앤트로픽 상장일",
+            "앤트로픽 주가",
+            "앤트로픽 ipo",
+            "앤트로픽 뜻",
+            "앤트로픽 ceo",
+            "앤트로픽 클로드",
+            "앤트로픽 상장 일정"
+          ],
+          "expansionSeed": "앤트로픽",
+          "insight": {
+            "titles": {
+              "seo": "앤트로픽 공모가 70~78달러 최신 이슈와 핵심 내용 정리",
+              "home": "앤트로픽 공모가 70~78달러, 앤트로픽 공모가 70∼78달러…최대 904억달러 조달 관련 확인할 점",
+              "topic": "앤트로픽 공모가 70~78달러",
+              "topicGroup": "네이트 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "10일(현지시간) 로이터 통신에 따르면 앤트로픽 은 이날 공시 자료를 통해 주당 70 ∼ 78달러 공모가 밴드에서 8억2천500만주를 매각해 최대 644억달러(86조2천700억원)의 자금을 조달할 계획이라고 밝혔다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "현지시각 10일 로이터 통신에 따르면 앤트로픽 은 이날 공시 자료를 통해 주당 70 ∼ 78달러 공모가 밴드에서 8억2천500만주를 매각해 최대 644억달러(86조2천700억원)의 자금을 조달할 계획이라고 밝혔습니다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261110176100009?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "https://biz.sbs.co.kr/article_hub/20000345534?division=NAVER",
+                "press": "SBS Biz"
+              }
+            ],
+            "images": [
+              "https://img3.yna.co.kr/photo/reuters/2026/11/10/PRU20261110111501009_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "SBS Biz"
+            ],
+            "headlines": [
+              "앤트로픽 공모가 70∼78달러…최대 904억달러 조달",
+              "앤트로픽 공모가 70~78달러 …몸값 눈높이 낮췄다"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-10T21:09:02.386Z"
+          }
+        },
+        {
+          "id": "nate-5",
+          "rank": 5,
+          "keyword": "나의 유죄인간",
+          "title": "나의 유죄인간",
+          "rawKeyword": "나의 유죄인간",
+          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
+          "priority": 96,
+          "source": "nate",
+          "expansions": [
+            "나의 유죄인간 웹툰",
+            "나의 유죄인간 몇부작",
+            "나의 유죄인간 재방송",
+            "나의 유죄인간 ott",
+            "나의 유죄인간 인물관계도",
+            "나의 유죄인간 나무위키",
+            "나의 유죄인간 시청률",
+            "나의 유죄인간 원작"
+          ],
+          "expansionSeed": "나의 유죄인간",
+          "insight": {
+            "titles": {
+              "seo": "나의 유죄인간 최신 이슈와 핵심 내용 정리",
+              "home": "나의 유죄인간, ‘나의 유죄인간’ 임시완, 설인아 구했다가 동성 스캔들 - 스타투데이 관련 확인할 점",
+              "topic": "나의 유죄인간",
+              "topicGroup": "네이트 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "10일 방송되는 tvN 월화드라마 ‘ 나의 유죄인간 ’(극본 문수정/ 연출 박단희/ 기획 CJ ENM 스튜디오스/ 제작 피타팻 스튜디오) 8회에서는 대외 이미지 관리에 심혈을 기울여 온 태강그룹 후계자 후보 윤이준(임시완 분)의 연관 검색어에 때아닌 ‘브로맨스’가 등장한다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "‘ 나의 유죄인간 ’ 임시완이 위험에 빠진 설인아를 구하며 관계의 변화를 예고했다. 설인아를 향한 짝사랑을 인정한 데 이어 위기의 순간 몸을 던져 지켜내며 설렘을 더했다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.mk.co.kr/article/12204113",
+                "press": "매일경제"
+              },
+              {
+                "url": "https://www.bntnews.co.kr/article/view/bnt202611100082",
+                "press": "bnt뉴스"
+              }
+            ],
+            "images": [
+              "https://pimg.mk.co.kr/news/cms/202611/10/news-p.v1.20261110.c25ee1f9e97b497a886142a45cb1d3d1_R.png"
+            ],
+            "press": [
+              "매일경제",
+              "bnt뉴스"
+            ],
+            "headlines": [
+              "‘나의 유죄인간’ 임시완, 설인아 구했다가 동성 스캔들 - 스타투데이",
+              "‘ 나의 유죄인간 ’ 임시완, 설인아 구했다"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-10T21:09:02.386Z"
           }
         }
       ]
@@ -1981,7 +2023,7 @@
               "403 Forbidden"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-10T20:09:13.747Z"
+            "collectedAt": "2026-11-10T21:09:02.386Z"
           }
         },
         {
@@ -2046,7 +2088,7 @@
               "[공식발표] ' 손흥민 선발 명단 제외 ' LAFC, 콜로라도전 'BEST 11' 공개!…..."
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-10T20:09:13.747Z"
+            "collectedAt": "2026-11-10T21:09:02.386Z"
           }
         },
         {
@@ -2386,7 +2428,7 @@
               "' 손흥민 과 한솥밥 먹었는데' 토트넘 역대 최고 이적료 주인공의 몰락…..."
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-10T20:09:13.747Z"
+            "collectedAt": "2026-11-10T21:09:02.386Z"
           }
         }
       ]
@@ -2996,11 +3038,253 @@
         {
           "id": "issue-1",
           "rank": 1,
+          "keyword": "\"우와!\" 이찬원도 놀란 상상 초월 도쿄 초고층 펜트하우스 매매가",
+          "title": "\"우와!\" 이찬원도 놀란 상상 초월 도쿄 초고층 펜트하우스 매매가",
+          "rawKeyword": "\"우와!\" 이찬원도 놀란 상상 초월 도쿄 초고층 펜트하우스 매매가",
+          "description": "스타뉴스 최신 기사 · \"우와!\" 이찬원도 놀란 상상 초월 도쿄 초고층 펜트하우스 매매가",
+          "priority": 100,
+          "source": "issue",
+          "officialUrl": "https://www.starnewskorea.com/broadcast-show/2026/11/11/2026111105100464041",
+          "sourceLabel": "스타뉴스",
+          "expansions": [
+            "이찬원예비신부",
+            "이찬원 콘서트",
+            "이찬원 팬카페",
+            "이찬원 갤러리",
+            "이찬원 간장계란밥",
+            "이찬원 콘드로이친",
+            "이찬원 나무위키",
+            "이찬원 올록담"
+          ],
+          "expansionSeed": "이찬원",
+          "ago": "8분 전",
+          "agoMinutes": 8,
+          "publishedLabel": "2026-11-10T21:00:00.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111105100464041_1.jpg",
+          "insight": {
+            "titles": {
+              "seo": "\"우와!\" 이찬원도 놀란 상상 초월 도쿄 초고층 펜트하우스 매매가 최신 이슈와 핵심 내용 정리",
+              "home": "\"우와!\" 이찬원도 놀란 상상 초월 도쿄 초고층 펜트하우스 매매가, \"우와!\" 이찬원도 놀란 상상 초월 도쿄 초고층 펜트하우스 매매가 관련 확인할 점",
+              "topic": "\"우와!\" 이찬원도 놀란 상상 초월 도쿄 초고층 펜트하우스 매매가",
+              "topicGroup": "이슈 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "스타뉴스 최신 기사 · \"우와!\" 이찬원도 놀란 상상 초월 도쿄 초고층 펜트하우스 매매가",
+                "sourceIndex": 0
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.starnewskorea.com/broadcast-show/2026/11/11/2026111105100464041",
+                "press": "스타뉴스"
+              }
+            ],
+            "images": [
+              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111105100464041_1.jpg"
+            ],
+            "press": [
+              "스타뉴스"
+            ],
+            "headlines": [
+              "\"우와!\" 이찬원도 놀란 상상 초월 도쿄 초고층 펜트하우스 매매가"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-10T21:09:02.386Z"
+          }
+        },
+        {
+          "id": "issue-2",
+          "rank": 2,
+          "keyword": "'젠슨 황 내연녀' 앨리스 황, 자취 감췄다..경력 조작 의혹도 \"근무 기록 찾지 못해\"",
+          "title": "'젠슨 황 내연녀' 앨리스 황, 자취 감췄다..경력 조작 의혹도 \"근무 기록 찾지 못해\"",
+          "rawKeyword": "'젠슨 황 내연녀' 앨리스 황, 자취 감췄다..경력 조작 의혹도 \"근무 기록 찾지 못해\"",
+          "description": "스타뉴스 최신 기사 · '젠슨 황 내연녀' 앨리스 황, 자취 감췄다..경력 조작 의혹도 \"근무 기록 찾지 못해\"",
+          "priority": 99,
+          "source": "issue",
+          "officialUrl": "https://www.starnewskorea.com/star/2026/11/11/2026111022121732347",
+          "sourceLabel": "스타뉴스",
+          "expansions": [
+            "젠슨황",
+            "젠슨황 스파이",
+            "젠슨황 국적",
+            "젠슨황 와이프",
+            "젠슨황 여자",
+            "젠슨황 방한",
+            "젠슨황 오리",
+            "젠슨 황 배우자"
+          ],
+          "expansionSeed": "젠슨",
+          "ago": "8분 전",
+          "agoMinutes": 8,
+          "publishedLabel": "2026-11-10T21:00:00.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111022121732347_1.jpg",
+          "insight": {
+            "titles": {
+              "seo": "'젠슨 황 내연녀' 앨리스 황, 자취 감췄다..경력 조작 의혹도 \"근무 기록 찾지 못해\" 최신 이슈와 핵심 내용 정리",
+              "home": "'젠슨 황 내연녀' 앨리스 황, 자취 감췄다..경력 조작 의혹도 \"근무 기록 찾지 못해\", '젠슨 황 내연녀' 앨리스 황, 자취 감췄다..경력 조작 의혹도 \"근무 기록 찾지 못해\" 관련 확인할 점",
+              "topic": "'젠슨 황 내연녀' 앨리스 황, 자취 감췄다..경력 조작 의혹도 \"근무 기록 찾지 못해\"",
+              "topicGroup": "이슈 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "스타뉴스 최신 기사 · '젠슨 황 내연녀' 앨리스 황, 자취 감췄다..경력 조작 의혹도 \"근무 기록 찾지 못해\"",
+                "sourceIndex": 0
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.starnewskorea.com/star/2026/11/11/2026111022121732347",
+                "press": "스타뉴스"
+              }
+            ],
+            "images": [
+              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111022121732347_1.jpg"
+            ],
+            "press": [
+              "스타뉴스"
+            ],
+            "headlines": [
+              "'젠슨 황 내연녀' 앨리스 황, 자취 감췄다..경력 조작 의혹도 \"근무 기록 찾지 못해\""
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-10T21:09:02.386Z"
+          }
+        },
+        {
+          "id": "issue-3",
+          "rank": 3,
+          "keyword": "'양육비 미지급' 고지용, 돈 벌 곳 사라졌다..'89만원' 젝키 디너쇼 무산",
+          "title": "'양육비 미지급' 고지용, 돈 벌 곳 사라졌다..'89만원' 젝키 디너쇼 무산",
+          "rawKeyword": "'양육비 미지급' 고지용, 돈 벌 곳 사라졌다..'89만원' 젝키 디너쇼 무산",
+          "description": "스타뉴스 최신 기사 · '양육비 미지급' 고지용, 돈 벌 곳 사라졌다..'89만원' 젝키 디너쇼 무산",
+          "priority": 98,
+          "source": "issue",
+          "officialUrl": "https://www.starnewskorea.com/star/2026/11/11/2026111100385479485",
+          "sourceLabel": "스타뉴스",
+          "expansions": [
+            "무산 뜻",
+            "무산사",
+            "무산되다",
+            "무산소",
+            "장흥무산김",
+            "무산김",
+            "무산소운동",
+            "무산계급"
+          ],
+          "expansionSeed": "양육비",
+          "ago": "16분 전",
+          "agoMinutes": 16,
+          "publishedLabel": "2026-11-10T20:52:00.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111100385479485_1.jpg",
+          "insight": {
+            "titles": {
+              "seo": "'양육비 미지급' 고지용, 돈 벌 곳 사라졌다..'89만원' 젝키 디너쇼 무산 최신 이슈와 핵심 내용 정리",
+              "home": "'양육비 미지급' 고지용, 돈 벌 곳 사라졌다..'89만원' 젝키 디너쇼 무산, '양육비 미지급' 고지용, 돈 벌 곳 사라졌다..'89만원' 젝키 디너쇼 무산 관련 확인할 점",
+              "topic": "'양육비 미지급' 고지용, 돈 벌 곳 사라졌다..'89만원' 젝키 디너쇼 무산",
+              "topicGroup": "이슈 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "스타뉴스 최신 기사 · '양육비 미지급' 고지용, 돈 벌 곳 사라졌다..'89만원' 젝키 디너쇼 무산",
+                "sourceIndex": 0
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.starnewskorea.com/star/2026/11/11/2026111100385479485",
+                "press": "스타뉴스"
+              }
+            ],
+            "images": [
+              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111100385479485_1.jpg"
+            ],
+            "press": [
+              "스타뉴스"
+            ],
+            "headlines": [
+              "'양육비 미지급' 고지용, 돈 벌 곳 사라졌다..'89만원' 젝키 디너쇼 무산"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-10T21:09:02.386Z"
+          }
+        },
+        {
+          "id": "issue-4",
+          "rank": 4,
+          "keyword": "강재준♥이은형, 남대문 '스카프 아저씨' 만났다..\"임영웅 팬들처럼 몰려\"",
+          "title": "강재준♥이은형, 남대문 '스카프 아저씨' 만났다..\"임영웅 팬들처럼 몰려\"",
+          "rawKeyword": "강재준♥이은형, 남대문 '스카프 아저씨' 만났다..\"임영웅 팬들처럼 몰려\"",
+          "description": "스타뉴스 최신 기사 · 강재준♥이은형, 남대문 '스카프 아저씨' 만났다..\"임영웅 팬들처럼 몰려\"",
+          "priority": 97,
+          "source": "issue",
+          "officialUrl": "https://www.starnewskorea.com/star/2026/11/11/2026111100163383624",
+          "sourceLabel": "스타뉴스",
+          "expansions": [
+            "남대문시장",
+            "남대문스카프",
+            "남대문 맛집",
+            "남대문 아동복",
+            "남대문 꽃시장",
+            "남대문 수입상가",
+            "남대문 옥반지",
+            "남대문 그릇시장"
+          ],
+          "expansionSeed": "남대문",
+          "ago": "38분 전",
+          "agoMinutes": 38,
+          "publishedLabel": "2026-11-10T20:30:00.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111100163383624_1.jpg",
+          "insight": {
+            "titles": {
+              "seo": "강재준♥이은형, 남대문 '스카프 아저씨' 만났다..\"임영웅 팬들처럼 몰려\" 최신 이슈와 핵심 내용 정리",
+              "home": "강재준♥이은형, 남대문 '스카프 아저씨' 만났다..\"임영웅 팬들처럼 몰려\", 강재준♥이은형, 남대문 '스카프 아저씨' 만났다..\"임영웅 팬들처럼 몰려\" 관련 확인할 점",
+              "topic": "강재준♥이은형, 남대문 '스카프 아저씨' 만났다..\"임영웅 팬들처럼 몰려\"",
+              "topicGroup": "이슈 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "스타뉴스 최신 기사 · 강재준♥이은형, 남대문 '스카프 아저씨' 만났다..\"임영웅 팬들처럼 몰려\"",
+                "sourceIndex": 0
+              },
+              {
+                "text": "개그맨 강재준 · 이은형 부부가 남대문 시장의 '스카프 아저씨' 를 만났다. 강재준 은 가게 앞에 모인 손님들을 아이돌 팬들에 비유했다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.starnewskorea.com/star/2026/11/11/2026111100163383624",
+                "press": "스타뉴스"
+              },
+              {
+                "url": "https://www.tenasia.co.kr/article/2026111085944",
+                "press": "텐아시아"
+              }
+            ],
+            "images": [
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F312%2F2026%2F11%2F10%2F783871.jpg&type=fface200_200&expire=2&refresh=true"
+            ],
+            "press": [
+              "스타뉴스",
+              "텐아시아"
+            ],
+            "headlines": [
+              "강재준♥이은형, 남대문 '스카프 아저씨' 만났다..\"임영웅 팬들처럼 몰려\"",
+              "\"사지 마\" 하는데 손님 몰렸다…연예인도 인증샷 찍는 '스카프 아저씨' ..."
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-10T21:09:02.386Z"
+          }
+        },
+        {
+          "id": "issue-5",
+          "rank": 5,
           "keyword": "새출발 알렸던 이지현 \"그만두기로 결정\"..아이들 위해 원장직 내려놓고 이직",
           "title": "새출발 알렸던 이지현 \"그만두기로 결정\"..아이들 위해 원장직 내려놓고 이직",
           "rawKeyword": "새출발 알렸던 이지현 \"그만두기로 결정\"..아이들 위해 원장직 내려놓고 이직",
           "description": "스타뉴스 최신 기사 · 새출발 알렸던 이지현 \"그만두기로 결정\"..아이들 위해 원장직 내려놓고 이직",
-          "priority": 100,
+          "priority": 96,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/11/11/2026111100022550174",
           "sourceLabel": "스타뉴스",
@@ -3015,8 +3299,8 @@
             "이지현의원"
           ],
           "expansionSeed": "이지현",
-          "ago": "4시간 전",
-          "agoMinutes": 240,
+          "ago": "5시간 전",
+          "agoMinutes": 300,
           "publishedLabel": "2026-11-10T15:15:16.000Z",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111100022550174_1.jpg",
           "insight": {
@@ -3052,13 +3336,13 @@
           }
         },
         {
-          "id": "issue-2",
-          "rank": 2,
+          "id": "issue-6",
+          "rank": 6,
           "keyword": "이효정, 子 이유진에 \"아직 자리 못 잡아\"..상견례서 눈물",
           "title": "이효정, 子 이유진에 \"아직 자리 못 잡아\"..상견례서 눈물",
           "rawKeyword": "이효정, 子 이유진에 \"아직 자리 못 잡아\"..상견례서 눈물",
           "description": "스타뉴스 최신 기사 · 이효정, 子 이유진에 \"아직 자리 못 잡아\"..상견례서 눈물",
-          "priority": 99,
+          "priority": 95,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/broadcast-show/2026/11/11/2026111023270222775",
           "sourceLabel": "스타뉴스",
@@ -3073,8 +3357,8 @@
             "이효정 나무위키"
           ],
           "expansionSeed": "이효정",
-          "ago": "4시간 전",
-          "agoMinutes": 240,
+          "ago": "5시간 전",
+          "agoMinutes": 300,
           "publishedLabel": "2026-11-10T15:11:29.000Z",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111023270222775_1.jpg",
           "insight": {
@@ -3118,351 +3402,9 @@
             "extraction": "playwright",
             "collectedAt": "2026-11-10T20:09:13.747Z"
           }
-        },
-        {
-          "id": "issue-3",
-          "rank": 3,
-          "keyword": "'환승연애' 김보현, ♥연상 직장인과 결혼 발표 후..깊은 고민 \"첫장 못 골라\"",
-          "title": "'환승연애' 김보현, ♥연상 직장인과 결혼 발표 후..깊은 고민 \"첫장 못 골라\"",
-          "rawKeyword": "'환승연애' 김보현, ♥연상 직장인과 결혼 발표 후..깊은 고민 \"첫장 못 골라\"",
-          "description": "스타뉴스 최신 기사 · '환승연애' 김보현, ♥연상 직장인과 결혼 발표 후..깊은 고민 \"첫장 못 골라\"",
-          "priority": 98,
-          "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/star/2026/11/10/2026111023411392928",
-          "sourceLabel": "스타뉴스",
-          "expansions": [
-            "김보현교수",
-            "김보현치과",
-            "김보현 기자",
-            "환승연애5",
-            "환승연애3",
-            "환승연애4",
-            "환승연애2",
-            "환승연애1"
-          ],
-          "expansionSeed": "김보현",
-          "ago": "2026.11.10 ・ 23:59",
-          "publishedLabel": "2026-11-10T14:59:48.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111023411392928_1.jpg",
-          "insight": {
-            "titles": {
-              "seo": "'환승연애' 김보현, ♥연상 직장인과 결혼 발표 후..깊은 고민 \"첫장 못 골라\" 최신 이슈와 핵심 내용 정리",
-              "home": "'환승연애' 김보현, ♥연상 직장인과 결혼 발표 후..깊은 고민 \"첫장 못 골라\", '환승연애' 김보현, ♥연상 직장인과 결혼 발표 후..깊은 고민 \"첫장 못 골라\" 관련 확인할 점",
-              "topic": "'환승연애' 김보현, ♥연상 직장인과 결혼 발표 후..깊은 고민 \"첫장 못 골라\"",
-              "topicGroup": "이슈 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "스타뉴스 최신 기사 · '환승연애' 김보현, ♥연상 직장인과 결혼 발표 후..깊은 고민 \"첫장 못 골라\"",
-                "sourceIndex": 0
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.starnewskorea.com/star/2026/11/10/2026111023411392928",
-                "press": "스타뉴스"
-              }
-            ],
-            "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111023411392928_1.jpg"
-            ],
-            "press": [
-              "스타뉴스"
-            ],
-            "headlines": [
-              "'환승연애' 김보현, ♥연상 직장인과 결혼 발표 후..깊은 고민 \"첫장 못 골라\""
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-10T20:09:13.747Z"
-          }
-        },
-        {
-          "id": "issue-4",
-          "rank": 4,
-          "keyword": "'조재현 딸' 조혜정, 얼마나 혹독한 시간 보냈길래..앙상해진 몸매·볼살 실종",
-          "title": "'조재현 딸' 조혜정, 얼마나 혹독한 시간 보냈길래..앙상해진 몸매·볼살 실종",
-          "rawKeyword": "'조재현 딸' 조혜정, 얼마나 혹독한 시간 보냈길래..앙상해진 몸매·볼살 실종",
-          "description": "스타뉴스 최신 기사 · '조재현 딸' 조혜정, 얼마나 혹독한 시간 보냈길래..앙상해진 몸매·볼살 실종",
-          "priority": 97,
-          "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/star/2026/11/10/2026111023282680380",
-          "sourceLabel": "스타뉴스",
-          "expansions": [
-            "실종아동찾기",
-            "테이큰: 나탈리 할로웨이 실종 사건",
-            "실종 영화",
-            "실종자",
-            "허윤진 실종",
-            "비니시우스 실종",
-            "실종아동센터",
-            "실종아동 허윤진"
-          ],
-          "expansionSeed": "조재현",
-          "ago": "2026.11.10 ・ 23:35",
-          "publishedLabel": "2026-11-10T14:35:58.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111023282680380_1.jpg",
-          "insight": {
-            "titles": {
-              "seo": "'조재현 딸' 조혜정, 얼마나 혹독한 시간 보냈길래..앙상해진 몸매·볼살 실종 최신 이슈와 핵심 내용 정리",
-              "home": "'조재현 딸' 조혜정, 얼마나 혹독한 시간 보냈길래..앙상해진 몸매·볼살 실종, '조재현 딸' 조혜정, 얼마나 혹독한 시간 보냈길래..앙상해진 몸매·볼살 실종 관련 확인할 점",
-              "topic": "'조재현 딸' 조혜정, 얼마나 혹독한 시간 보냈길래..앙상해진 몸매·볼살 실종",
-              "topicGroup": "이슈 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "스타뉴스 최신 기사 · '조재현 딸' 조혜정, 얼마나 혹독한 시간 보냈길래..앙상해진 몸매·볼살 실종",
-                "sourceIndex": 0
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.starnewskorea.com/star/2026/11/10/2026111023282680380",
-                "press": "스타뉴스"
-              }
-            ],
-            "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111023282680380_1.jpg"
-            ],
-            "press": [
-              "스타뉴스"
-            ],
-            "headlines": [
-              "'조재현 딸' 조혜정, 얼마나 혹독한 시간 보냈길래..앙상해진 몸매·볼살 실종"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-10T20:09:13.747Z"
-          }
-        },
-        {
-          "id": "issue-5",
-          "rank": 5,
-          "keyword": "이유진♥차경은, 만난 지 5개월 만에 결혼..혼전임신 고백",
-          "title": "이유진♥차경은, 만난 지 5개월 만에 결혼..혼전임신 고백",
-          "rawKeyword": "이유진♥차경은, 만난 지 5개월 만에 결혼..혼전임신 고백",
-          "description": "스타뉴스 최신 기사 · 이유진♥차경은, 만난 지 5개월 만에 결혼..혼전임신 고백",
-          "priority": 96,
-          "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/broadcast-show/2026/11/10/2026111023083829036",
-          "sourceLabel": "스타뉴스",
-          "expansions": [
-            "물만난광어",
-            "다시만난세계",
-            "불우운상: 너를 만난 순간",
-            "물만난고기",
-            "물만난유쾌",
-            "우리가 만난 겨울",
-            "숲에서 만난 바다",
-            "5개월 아기 발달"
-          ],
-          "expansionSeed": "만난",
-          "ago": "2026.11.10 ・ 23:28",
-          "publishedLabel": "2026-11-10T14:28:19.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111023083829036_1.jpg",
-          "insight": {
-            "titles": {
-              "seo": "이유진♥차경은, 만난 지 5개월 만에 결혼..혼전임신 고백 최신 이슈와 핵심 내용 정리",
-              "home": "이유진♥차경은, 만난 지 5개월 만에 결혼..혼전임신 고백, 이유진♥차경은, 만난 지 5개월 만에 결혼..혼전임신 고백 관련 확인할 점",
-              "topic": "이유진♥차경은, 만난 지 5개월 만에 결혼..혼전임신 고백",
-              "topicGroup": "이슈 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "스타뉴스 최신 기사 · 이유진♥차경은, 만난 지 5개월 만에 결혼..혼전임신 고백",
-                "sourceIndex": 0
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.starnewskorea.com/broadcast-show/2026/11/10/2026111023083829036",
-                "press": "스타뉴스"
-              }
-            ],
-            "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111023083829036_1.jpg"
-            ],
-            "press": [
-              "스타뉴스"
-            ],
-            "headlines": [
-              "이유진♥차경은, 만난 지 5개월 만에 결혼..혼전임신 고백"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-10T20:09:13.747Z"
-          }
-        },
-        {
-          "id": "issue-6",
-          "rank": 6,
-          "keyword": "'흑인' 카니, 인종차별 논란에 고개 숙였다 \"진심으로 후회\"",
-          "title": "'흑인' 카니, 인종차별 논란에 고개 숙였다 \"진심으로 후회\"",
-          "rawKeyword": "'흑인' 카니, 인종차별 논란에 고개 숙였다 \"진심으로 후회\"",
-          "description": "스타뉴스 최신 기사 · '흑인' 카니, 인종차별 논란에 고개 숙였다 \"진심으로 후회\"",
-          "priority": 95,
-          "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/star/2026/11/10/2026111022595463676",
-          "sourceLabel": "스타뉴스",
-          "expansions": [
-            "흑인 미녀",
-            "흑인 짤",
-            "흑인모델",
-            "제니 흑인",
-            "나솔사계 흑인",
-            "흑인 배우",
-            "흑인 남자",
-            "흑인여자"
-          ],
-          "expansionSeed": "흑인",
-          "ago": "2026.11.10 ・ 23:11",
-          "publishedLabel": "2026-11-10T14:11:34.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111022595463676_1.jpg",
-          "insight": {
-            "titles": {
-              "seo": "'흑인' 카니, 인종차별 논란에 고개 숙였다 \"진심으로 후회\" 최신 이슈와 핵심 내용 정리",
-              "home": "'흑인' 카니, 인종차별 논란에 고개 숙였다 \"진심으로 후회\", '흑인' 카니, 인종차별 논란에 고개 숙였다 \"진심으로 후회\" 관련 확인할 점",
-              "topic": "'흑인' 카니, 인종차별 논란에 고개 숙였다 \"진심으로 후회\"",
-              "topicGroup": "이슈 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "스타뉴스 최신 기사 · '흑인' 카니, 인종차별 논란에 고개 숙였다 \"진심으로 후회\"",
-                "sourceIndex": 0
-              },
-              {
-                "text": "댄서 카니 가 최근 불거진 인종차별 논란에 대해 직접 사과했다. 카니 는 \"먼저 제 말로 인해 상처받거나 불쾌감을 느낀 모든 분들께 진심으로 사과 드린다\"며 \"영상에서 저는 수박, 치킨, 환타를 언급하며 즉흥적인 농담을 했다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.starnewskorea.com/star/2026/11/10/2026111022595463676",
-                "press": "스타뉴스"
-              },
-              {
-                "url": "https://www.sportschosun.com/entertainment/2026-11-10/202611100100075210006961",
-                "press": "스포츠조선"
-              }
-            ],
-            "images": [
-              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F076%2F2026%2F11%2F10%2F4465614.jpg&type=fface200_200&expire=2&refresh=true"
-            ],
-            "press": [
-              "스타뉴스",
-              "스포츠조선"
-            ],
-            "headlines": [
-              "'흑인' 카니, 인종차별 논란에 고개 숙였다 \"진심으로 후회\"",
-              "'나혼산' 카니, 인종차별 논란 으로 시끌…결국 사과 \"고통스러운 역사 ..."
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-10T20:09:13.747Z"
-          }
-        },
-        {
-          "id": "issue-7",
-          "rank": 7,
-          "keyword": "'이효정 子' 이유진, 장동윤과 동서지간 됐다..집안에 배우만 6명",
-          "title": "'이효정 子' 이유진, 장동윤과 동서지간 됐다..집안에 배우만 6명",
-          "rawKeyword": "'이효정 子' 이유진, 장동윤과 동서지간 됐다..집안에 배우만 6명",
-          "description": "스타뉴스 최신 기사 · '이효정 子' 이유진, 장동윤과 동서지간 됐다..집안에 배우만 6명",
-          "priority": 94,
-          "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/broadcast-show/2026/11/10/2026111022335626303",
-          "sourceLabel": "스타뉴스",
-          "expansions": [
-            "6명 포즈",
-            "6명 걸그룹",
-            "하이디라오 6명",
-            "카카오 벤티 6명",
-            "6명 택시",
-            "6명 보드게임",
-            "6명의 대학생",
-            "6명 돌잔치"
-          ],
-          "expansionSeed": "이효정",
-          "ago": "2026.11.10 ・ 23:09",
-          "publishedLabel": "2026-11-10T14:09:55.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111022335626303_1.jpg",
-          "insight": {
-            "titles": {
-              "seo": "'이효정 子' 이유진, 장동윤과 동서지간 됐다..집안에 배우만 6명 최신 이슈와 핵심 내용 정리",
-              "home": "'이효정 子' 이유진, 장동윤과 동서지간 됐다..집안에 배우만 6명, '이효정 子' 이유진, 장동윤과 동서지간 됐다..집안에 배우만 6명 관련 확인할 점",
-              "topic": "'이효정 子' 이유진, 장동윤과 동서지간 됐다..집안에 배우만 6명",
-              "topicGroup": "이슈 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "스타뉴스 최신 기사 · '이효정 子' 이유진, 장동윤과 동서지간 됐다..집안에 배우만 6명",
-                "sourceIndex": 0
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.starnewskorea.com/broadcast-show/2026/11/10/2026111022335626303",
-                "press": "스타뉴스"
-              }
-            ],
-            "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111022335626303_1.jpg"
-            ],
-            "press": [
-              "스타뉴스"
-            ],
-            "headlines": [
-              "'이효정 子' 이유진, 장동윤과 동서지간 됐다..집안에 배우만 6명"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-10T20:09:13.747Z"
-          }
-        },
-        {
-          "id": "issue-8",
-          "rank": 8,
-          "keyword": "이광수♥이선빈, 손잡고 데이트하다 포착..설레는 키 차이",
-          "title": "이광수♥이선빈, 손잡고 데이트하다 포착..설레는 키 차이",
-          "rawKeyword": "이광수♥이선빈, 손잡고 데이트하다 포착..설레는 키 차이",
-          "description": "스타뉴스 최신 기사 · 이광수♥이선빈, 손잡고 데이트하다 포착..설레는 키 차이",
-          "priority": 93,
-          "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/star/2026/11/10/2026111022372735317",
-          "sourceLabel": "스타뉴스",
-          "expansions": [],
-          "ago": "2026.11.10 ・ 22:59",
-          "publishedLabel": "2026-11-10T13:59:16.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111022372735317_1.jpg",
-          "insight": {
-            "titles": {
-              "seo": "이광수♥이선빈, 손잡고 데이트하다 포착..설레는 키 차이 최신 이슈와 핵심 내용 정리",
-              "home": "이광수♥이선빈, 손잡고 데이트하다 포착..설레는 키 차이, 이광수♥이선빈, 손잡고 데이트하다 포착..설레는 키 차이 관련 확인할 점",
-              "topic": "이광수♥이선빈, 손잡고 데이트하다 포착..설레는 키 차이",
-              "topicGroup": "이슈 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "스타뉴스 최신 기사 · 이광수♥이선빈, 손잡고 데이트하다 포착..설레는 키 차이",
-                "sourceIndex": 0
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.starnewskorea.com/star/2026/11/10/2026111022372735317",
-                "press": "스타뉴스"
-              }
-            ],
-            "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111022372735317_1.jpg"
-            ],
-            "press": [
-              "스타뉴스"
-            ],
-            "headlines": [
-              "이광수♥이선빈, 손잡고 데이트하다 포착..설레는 키 차이"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-10T20:09:13.747Z"
-          }
         }
       ]
     }
   ],
-  "updatedAt": "2026-11-10T20:11:34.746Z"
+  "updatedAt": "2026-11-10T21:09:58.601Z"
 }
