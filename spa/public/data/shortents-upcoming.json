@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T23:05:21.010Z",
+ "builtAt": "2026-11-11T23:15:23.609Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 14,
  "candidates": [
   {
    "keyword": "젠슨 황 해임 검토",
    "sources": [
     "nate"
    ],
-   "articles90": 11,
-   "recent20": 7,
-   "press": 11,
+   "articles90": 19,
+   "recent20": 11,
+   "press": 17,
    "firstArticleAt": "2026-11-11T22:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 엔비디아 이사회, 젠슨 황 해임 검토하나…거취 논의 임박",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-11T23:04:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101110"
+     "title": "젠슨 황, 또 다른 불륜 의혹까지…WSJ \"엔비디아 이사회, 젠슨 황 해임 ...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-11T23:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000965119?sid=105"
     },
     {
-     "title": "WSJ \"엔비디아 이사회, 젠슨 황 해임 검토\"…이사회 회의 임박",
-     "press": "ngonews.kr",
-     "publishedAt": "2026-11-11T23:02:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=242970"
-    },
-    {
-     "title": "\"젠슨 황 결국 쫓겨나나\"…엔비디아 이사회, 해임 준비·이르면 11일 결...",
+     "title": "\"젠슨 황, 中스파이 의혹 이어 엔비디아 여성 임원과도 불륜\"",
      "press": "dailian.co.kr",
-     "publishedAt": "2026-11-11T22:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003154171?sid=104"
+     "publishedAt": "2026-11-11T23:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003154178?sid=104"
+    },
+    {
+     "title": "[속보] 젠슨 황, 불륜 또 터졌다...엔비디아 이사회 '해임 준비'",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-11T23:10:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=882453"
+    }
+   ]
+  },
+  {
+   "keyword": "트럼프 곧 끝날 것 93% 아닌 완전한",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-11T21:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프 \"전쟁 곧 끝날 것\"…이란 '지하 미사일 기지' 공개",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-11T22:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001977809?sid=104"
+    },
+    {
+     "title": "트럼프 \"이란전 곧 끝날 것…93% 아닌 완전한 승리 원해\"",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-11T22:40:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1320164&inflow=N"
+    },
+    {
+     "title": "트럼프 “이란전 곧 끝나…93% 아닌 완전한 승리될 것”",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-11T22:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000367226?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "2026년 11월 12일 운세",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-11T22:41:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "2026년 11월 12일, 오늘의 띠별 운세 [인포그래픽]",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-11T23:00:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249390"
+    },
+    {
+     "title": "[오늘의 띠별 운세] 2026년 11월 12일 목요일",
+     "press": "mhns.co.kr",
+     "publishedAt": "2026-11-11T22:50:00.000Z",
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=768687"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 12일 띠별 운세",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-11T22:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003484785?sid=103"
     }
    ]
   },
@@ -48,7 +112,7 @@
     "nate"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-11T21:58:00.000Z",
    "exclusive": false,
@@ -105,13 +169,45 @@
      "link": "https://n.news.naver.com/mnews/article/214/0001535046?sid=102"
     }
    ]
+  },
+  {
+   "keyword": "김정은 통천군 주택구 시찰",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-11T21:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김정은, 동해안 해군기지 건설현장 시찰…“정해진 기간 내 완결”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-11T22:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012292222?sid=100"
+    },
+    {
+     "title": "김정은, 동해안 해군기지 건설현장 시찰…\"정해진 기간내 완결\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-11T21:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016437164?sid=100"
+    },
+    {
+     "title": "김정은, 새로 건설된 강원도 통천군 주택구 시찰",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-11T21:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016437155?sid=100"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
   "flagged": 391,
-  "matched": 159,
-  "avgLeadMin": 942,
+  "matched": 158,
+  "avgLeadMin": 948,
   "recent": [
    {
     "keyword": "전세사기 피해자 추가 인정",
