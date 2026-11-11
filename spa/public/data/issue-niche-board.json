@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-11-11T01:07:46.359Z",
+  "publishedAt": "2026-11-11T10:00:45.956Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
-    "issues": 18,
+    "issues": 17,
     "candidates": 240,
     "niche": 0,
-    "preemption": 3,
+    "preemption": 2,
     "pending": 0
   },
   "freeSample": {
@@ -209,7 +209,7 @@
         ],
         "label": "🚀 떡상",
         "recommendation": "지금 당장 작성! 3일 내 급증 포착 → 선점 시 상위 노출 확률 매우 높음",
-        "measuredAt": "2026-11-11T01:07:46.925Z"
+        "measuredAt": "2026-11-11T10:00:46.720Z"
       },
       "kinCount": 0,
       "kinTop": null,
@@ -384,7 +384,7 @@
           0,
           12
         ],
-        "measuredAt": "2026-11-11T01:07:46.925Z"
+        "measuredAt": "2026-11-11T10:00:46.720Z"
       },
       "kinCount": 1,
       "kinTop": null,
@@ -521,7 +521,7 @@
           62,
           48
         ],
-        "measuredAt": "2026-11-11T01:07:46.925Z"
+        "measuredAt": "2026-11-11T10:00:46.720Z"
       },
       "kinCount": 751,
       "kinTop": [
@@ -696,7 +696,7 @@
           31,
           36
         ],
-        "measuredAt": "2026-11-11T01:07:46.925Z"
+        "measuredAt": "2026-11-11T10:00:46.720Z"
       },
       "kinCount": 52,
       "kinTop": [
@@ -715,6 +715,160 @@
     }
   ],
   "observations": [
+    {
+      "keyword": "소프트뱅크 키디 차이",
+      "issue": "소프트뱅크",
+      "topic": "소프트뱅크",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 46,
+      "documentCountMeasured": true,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 10",
+        "문서수 46",
+        "선점 후보 — 경쟁 문서 46건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "소프트뱅크가 美 데이터센터 손실로 9.5조 적자 전환해 주가가 출렁여서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "구매 검토",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "소프트뱅크 키디 차이 무엇이 어떻게 다른가",
+          "frame": "compare",
+          "basis": "검색 질문 '소프트뱅크 키디 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+        },
+        "home": {
+          "text": "소프트뱅크 키디 차이 생각보다 애매해서 매장에서 한참 캐물었네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": [
+        {
+          "title": "이심 두 개 차이가 뭔가요??",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=9020101&docId=486744568&answerNo=1",
+          "views": 2330,
+          "answers": 5
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-11-11T09:58:28.501Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "오픈ai 닷츠 후기",
+      "issue": "오픈AI",
+      "topic": "오픈AI",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 189,
+      "documentCountMeasured": true,
+      "searchVolume": 20,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 2,
+      "freshFrontalCount": 1,
+      "reasons": [
+        "검색량 20",
+        "문서수 189",
+        "선점 후보 — 경쟁 문서 189건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 2건 (최근 1건)"
+        }
+      ],
+      "whySearch": {
+        "text": "오픈AI가 3분기 매출 100억달러를 올리고 삼성에 AI 디바이스 협력을 제안해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "구매 검토",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "오픈ai 닷츠 후기, 삼성 AI 디바이스·챗GPT 기능 뭐가 다른지",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "오픈ai 닷츠 후기 보려다 3분기 매출 숫자에 자꾸 눈이 가더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "오픈ai 3분기 매출",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": [
+        {
+          "title": "새로운 AI 에이전트 닷츠, 실제로 얼마나 효율적일까요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1122&docId=495387990&answerNo=0",
+          "views": 137,
+          "answers": null
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-11-11T09:58:28.501Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "이효정 춘향뎐",
       "issue": "이효정",
@@ -844,155 +998,8 @@
       "monetize": null,
       "measuredAt": "2026-11-11T01:03:37.449Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "소프트뱅크 키디 차이",
-      "issue": "소프트뱅크",
-      "topic": "소프트뱅크",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 46,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 46",
-        "선점 후보 — 경쟁 문서 46건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "소프트뱅크가 미국 AI 데이터센터 손실로 2년 만에 적자 전환했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "소프트뱅크 키디 차이 무엇이 어떻게 다른가",
-          "frame": "compare",
-          "basis": "검색 질문 '소프트뱅크 키디 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        },
-        "home": {
-          "text": "소프트뱅크 키디 차이 뭔가 해서 요금제 다시 들여다봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": [
-        {
-          "title": "이심 두 개 차이가 뭔가요??",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=9020101&docId=486744568&answerNo=1",
-          "views": 2326,
-          "answers": 5
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-11-11T01:03:37.449Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "오픈ai 닷츠 후기",
-      "issue": "오픈AI",
-      "topic": "오픈AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 186,
-      "documentCountMeasured": true,
-      "searchVolume": 20,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 2,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "검색량 20",
-        "문서수 186",
-        "선점 후보 — 경쟁 문서 186건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 2건 (최근 1건)"
-        }
-      ],
-      "whySearch": {
-        "text": "카카오와 오픈AI가 AI 애니 '그래도, 라이언'을 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "오픈ai 닷츠 후기 가격부터 사용법까지 뭐가 다른지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "오픈ai 닷츠 후기 쓰려다 요금제에서 의외로 많이들 막히더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": [
-        {
-          "title": "새로운 AI 에이전트 닷츠, 실제로 얼마나 효율적일까요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1122&docId=495387990&answerNo=0",
-          "views": 136,
-          "answers": null
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-11-11T01:03:37.449Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "이유진 (1977년)",
@@ -2104,61 +2111,30 @@
   "rejectedCount": 0,
   "issues": [
     {
-      "issue": "장동윤 포함 가족",
+      "issue": "수능 스마트안경 연수",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "장동윤이 김승윤과 결혼식을 올리며 웨딩화보를 공개했다.",
+      "why": "수능을 앞두고 감독관의 스마트안경 식별 연수가 실시돼서",
       "headlines": [
         {
-          "title": "“팬 기만 논란 딛고”…‘김승윤♥’ 장동윤, 결혼식 당일 웨딩화보 공...",
-          "press": "sportsseoul.com",
-          "publishedAt": "2026-10-10T02:44:00.000Z",
-          "link": "https://m.entertain.naver.com/article/468/0001271645"
+          "title": "\"뿔테·렌즈 확인하라\"…수능 앞 '스마트안경 식별' 연수까지",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-11T02:31:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016435408?sid=102"
         },
         {
-          "title": "장동윤, 웨딩 화보 속 환한 미소…\"My Love·My Muse·My Home\"",
-          "press": "topstarnews.net",
-          "publishedAt": "2026-10-10T01:30:00.000Z",
-          "link": "https://www.topstarnews.net/news/articleView.html?idxno=16243002"
-        },
-        {
-          "title": "10월 결혼식만 몇 개‥KCM 14년만 결혼→장동윤♥김승윤X송지호♥김소리...",
-          "press": "newsen.com",
-          "publishedAt": "2026-10-06T05:17:00.000Z",
-          "link": "https://m.entertain.naver.com/article/609/0001175719"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "청년 고용 감소",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "10월 청년 고용률 42.9%로 코로나 이후 최저를 기록했다.",
-      "headlines": [
-        {
-          "title": "10월 취업자 13만9000명↑…청년 고용률 30개월째 하락(2보)",
+          "title": "수능 스마트안경 식별 연수",
           "press": "newsis.com",
-          "publishedAt": "2026-11-10T23:17:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014314465?sid=101"
+          "publishedAt": "2026-11-11T08:33:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014316669?sid=102"
         },
         {
-          "title": "10월 청년 고용률 42.9%.... 코로나 이후 최저",
-          "press": "biz.chosun.com",
-          "publishedAt": "2026-11-10T23:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/366/0001203909?sid=101"
-        },
-        {
-          "title": "10월 취업자 13.9만명 늘었지만…청년 고용률 6년래 최저(종합)",
-          "press": "news1.kr",
-          "publishedAt": "2026-11-10T23:30:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009282306?sid=101"
+          "title": "수능 앞두고 스마트안경 식별 연수",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-11T08:33:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014316664?sid=102"
         }
       ],
       "concentrated": [],
@@ -2166,65 +2142,1138 @@
       "rowCount": 0
     },
     {
-      "issue": "한국 디지털 AI",
+      "issue": "GS건설",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "동반성장지수 6년 연속 최우수를 받고 해킹 직권조사도 겹쳐서",
+      "headlines": [
+        {
+          "title": "GS건설, 동반성장지수 6년 연속 최우수 등급",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-11T05:05:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014315788?sid=101"
+        },
+        {
+          "title": "정부, GS건설 아파트 시스템 침해사고에 직권조사한다",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-11T08:44:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016436728?sid=101"
+        },
+        {
+          "title": "GS건설, 동반성장지수 6년 연속 ‘최우수’ 등급",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-11-11T07:06:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001204108?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "gs건설 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "gs건설 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "gs건설 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "gs건설 아파트",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "gs건설 개인정보",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "gs건설 본사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "gs건설 대표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "gs건설 자이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "GS건설 해킹 피해",
+          "reason": "유출 범위 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "GS건설 과징금",
+          "reason": "제재 수위 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "지소연 성희롱 심판",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "지소연에게 성희롱 발언한 심판이 3개월 출전정지 징계를 받아서",
+      "headlines": [
+        {
+          "title": "지소연에 '성희롱 발언'한 심판, 출전정지 3개월 징계",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-11T08:05:00.000Z",
+          "link": "https://m.sports.naver.com/kfootball/article/001/0016436669"
+        },
+        {
+          "title": "지소연에 '성희롱 발언'한 심판, 3개월 출전정지 징계",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-11T09:35:00.000Z",
+          "link": "https://m.sports.naver.com/kfootball/article/003/0014316755"
+        },
+        {
+          "title": "지소연에 성희롱 발언한 심판, 3개월 출전정지 징계 받아",
+          "press": "news1.kr",
+          "publishedAt": "2026-11-11T08:51:00.000Z",
+          "link": "https://m.sports.naver.com/kfootball/article/421/0009284191"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "코첼라 출격 K팝!",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "베이비몬스터가 K팝 5세대 최초로 2027 코첼라에 출격해서",
+      "headlines": [
+        {
+          "title": "[속보] 베이비몬스터, 5세대 K팝 최초 '2027 코첼라' 출격",
+          "press": "osen.co.kr",
+          "publishedAt": "2026-11-11T07:01:00.000Z",
+          "link": "https://m.entertain.naver.com/article/109/0005638650"
+        },
+        {
+          "title": "YG 베이비몬스터, 美 코첼라 출격…K팝 5세대 최초(공식)",
+          "press": "joynews24.com",
+          "publishedAt": "2026-11-11T07:20:00.000Z",
+          "link": "http://www.joynews24.com/view/2025117"
+        },
+        {
+          "title": "BTS는 끝내 불발…2027 코첼라, '첫 솔로' 지수→NCT·베몬 출격",
+          "press": "sportschosun.com",
+          "publishedAt": "2026-11-11T07:06:00.000Z",
+          "link": "https://m.entertain.naver.com/article/076/0004465834"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "코첼라",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "사이먼 래틀 인사",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "사이먼 래틀 경이 공식 행사에서 인사말을 해서",
+      "headlines": [
+        {
+          "title": "인사말하는 사이먼 래틀 경",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-11T07:34:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016436573?sid=103"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "마운자로",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "해외에서 산 마운자로·위고비 3개월분 국내 반입이 허용돼서",
+      "headlines": [
+        {
+          "title": "[단독] 일본서 산 마운자로, 국내 반입 허용된다…최대 12개",
+          "press": "news.mtn.co.kr",
+          "publishedAt": "2026-11-11T07:48:00.000Z",
+          "link": "https://news.mtn.co.kr/article/2026111116412519794"
+        },
+        {
+          "title": "해외서 산 마운자로·위고비 국내 반입 허용…3개월분까지",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-11-11T09:08:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001204154?sid=105"
+        },
+        {
+          "title": "해외서 구매한 '위고비·마운자로', 3개월분 국내 반입 허용",
+          "press": "news1.kr",
+          "publishedAt": "2026-11-11T08:28:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009284157?sid=103"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "마운자로 부작용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "마운자로 처방",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "마운자로 후기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "마운자로 효과",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "마운자로 용량",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "마운자로 실비",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "마운자로 술",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "마운자로 성지",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "마운자로 반입 수량",
+          "reason": "몇 개월분 허용 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "마운자로 세관",
+          "reason": "통관 절차 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "마운자로 처방전",
+          "reason": "서류 필요 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "위고비 마운자로 차이",
+          "reason": "비교 수요",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "마운자로 반입 절차",
+          "reason": "구체 방법 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "위메이드 3분기 영업익",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "위메이드 3분기 영업익이 264억원으로 전년比 0.3% 늘어서",
+      "headlines": [
+        {
+          "title": "위메이드 3분기 영업익 264억원…작년 대비 0.3%↑(종합)",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-11T07:37:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016436589?sid=101"
+        },
+        {
+          "title": "위메이드플레이, 3분기 영업익 21억원…전년比 39%↓",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-11T08:36:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014316683?sid=105"
+        },
+        {
+          "title": "위메이드, 3분기 영업익 264억원⋯전년 比 0.3%↑",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-11-11T07:41:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001204121?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "위메이드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "남지현",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "남지현이 '내가 떨릴 수 있게' 종영으로 해피엔딩을 맞아서",
+      "headlines": [
+        {
+          "title": "남지현♥김재영 성인용품 감수성 차 로맨스→해피엔딩 (내가 떨릴 수 있...",
+          "press": "sports.donga.com",
+          "publishedAt": "2026-11-09T05:21:00.000Z",
+          "link": "https://m.entertain.naver.com/article/382/0001303731"
+        },
+        {
+          "title": "‘내가 떨릴 수 있게’ 남지현X김재영, 서로의 세상 넓히며 종영",
+          "press": "bntnews.co.kr",
+          "publishedAt": "2026-11-09T01:26:00.000Z",
+          "link": "https://www.bntnews.co.kr/article/view/bnt202611090202"
+        },
+        {
+          "title": "남지현은 하차했지만 표지훈은 남았다…어쏘 변호사→장나라 오른팔로...",
+          "press": "tenasia.co.kr",
+          "publishedAt": "2026-11-10T06:30:00.000Z",
+          "link": "https://m.entertain.naver.com/article/312/0000783808"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "남지현 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "남지현 드라마",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "남지현 지창욱",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "포미닛 남지현",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "굿파트너2 남지현",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "남지현 아역",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "지창욱 남지현",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "남지현 근황",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "남지현 차기작",
+          "reason": "다음 작품 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "남지현 김재영 열애",
+          "reason": "케미 후 궁금증",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "현대엔지니어링 안성 교량",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "한국 디지털·AI 경쟁력이 세계 10위로 8단계 올랐다.",
+      "why": "현대엔지니어링이 안성 교량 붕괴로 영업정지 8개월 처분을 받아서",
       "headlines": [
         {
-          "title": "한국 디지털·AI 경쟁력 세계 10위…전년보다 8단계 상승",
+          "title": "현대엔지니어링, 안성 고속도로 붕괴에 영업정지 8개월",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-11-11T07:58:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006408363?sid=101"
+        },
+        {
+          "title": "현대엔지니어링, '안성 교량사고' 영업정지 8개월",
           "press": "yna.co.kr",
-          "publishedAt": "2026-11-10T23:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016434626?sid=105"
+          "publishedAt": "2026-11-11T06:11:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016436245?sid=101"
         },
         {
-          "title": "한국 디지털·AI 경쟁력 세계 10위... 전년보다 8단계 상승",
-          "press": "ohmynews.com",
-          "publishedAt": "2026-11-10T23:51:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/047/0002535391?sid=101"
-        },
-        {
-          "title": "韓 디지털·AI 경쟁력 세계 10위…1년 만에 8계단 상승",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-10T23:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014314443?sid=105"
+          "title": "현대엔지니어링, 안성 교량 붕괴로 8개월 영업정지…행정소송 대응 [공...",
+          "press": "joseilbo.com",
+          "publishedAt": "2026-11-11T06:31:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/123/0002393836?sid=101"
         }
       ],
-      "concentrated": [],
+      "concentrated": [
+        {
+          "keyword": "현대엔지니어링",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
       "nextWave": [],
       "rowCount": 0
     },
     {
-      "issue": "제2기 금융아카데미 입학식",
+      "issue": "제미나이 로보틱스 2.5",
       "issueType": "fresh",
-      "lane": "realtime",
+      "lane": "tech",
       "issueStatus": "unknown",
-      "isHot": true,
-      "why": "뉴시스 금융아카데미 제2기 입학식이 열렸다.",
+      "isHot": false,
+      "why": "구글이 피지컬 AI '제미나이 로보틱스 2.5'를 공개해서",
       "headlines": [
         {
-          "title": "제2기 뉴시스 금융아카데미 입학식",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-10T23:32:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014314502?sid=102"
+          "title": "구글, 최상위 AI '제미나이4 카본' 일반공개…로보틱스 2.5 첫선",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-11T02:13:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016435286?sid=104"
         },
         {
-          "title": "뉴시스 금융아카데미 제2기 입학식",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-10T23:32:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014314503?sid=102"
+          "title": "구글, 피지컬 AI 특화 '제미나이 로보틱스 2.5' 공개…'카본' 세계 출시",
+          "press": "etnews.com",
+          "publishedAt": "2026-11-11T00:20:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/030/0003484344?sid=105"
         },
         {
-          "title": "'제2기 뉴시스 금융아카데미 입학식'",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-10T23:32:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014314499?sid=102"
+          "title": "구글, '제미나이 로보틱스 2.5' 공개…리본 묶고 액체 옮긴다",
+          "press": "joseilbo.com",
+          "publishedAt": "2026-11-11T01:09:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/123/0002393797?sid=104"
         }
       ],
-      "concentrated": [],
+      "concentrated": [
+        {
+          "keyword": "제미나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 제미나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
       "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "구글",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "구글이 '제미나이 4 카본'을 공개하고 앤트로픽에 대규모 투자해서",
+      "headlines": [
+        {
+          "title": "지시 한 번에 AI가 에펠탑 건설 재현…구글, '제미나이 4 카본' 공개",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-11T07:25:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014316473?sid=105"
+        },
+        {
+          "title": "구글, 피지컬 AI 특화 '제미나이 로보틱스 2.5' 공개…'카본' 세계 출시",
+          "press": "etnews.com",
+          "publishedAt": "2026-11-11T00:20:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/030/0003484344?sid=105"
+        },
+        {
+          "title": "'최강 AI' 경쟁 다시 뛰어든 구글…카본에 피지컬AI까지",
+          "press": "news1.kr",
+          "publishedAt": "2026-11-11T01:40:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009282769?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "구글 제미나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 영국",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 번역기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 클래스룸",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 재팬",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 원",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 폼",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "구글 앤트로픽 투자",
+          "reason": "투자 규모 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "구글 주가 전망",
+          "reason": "AI 경쟁 수혜",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "메타",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "정점식이 이 대통령 '패가망신' 발언을 메타인지 상실이라 비판해서",
+      "headlines": [
+        {
+          "title": "정점식 \"李대통령 '패가망신' 메타인지 상실…민주당 '패당'은 운명\"",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-11-11T01:43:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005439494?sid=100"
+        },
+        {
+          "title": "국힘 \"李대통령 '부동산 불법행위 패가망신'?…메타인지 상실\"",
+          "press": "pressian.com",
+          "publishedAt": "2026-11-11T04:59:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/002/0002465329?sid=100"
+        },
+        {
+          "title": "AMD, 6세대 서버 CPU ‘에픽’ 출시… 메타·MS·오라클 AI 인프라 공략",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-11-11T05:25:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001204065?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "메타 ai 글라스",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "메타 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "메타 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "메타 AI",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "메타 뮤즈",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "메타 인스타",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "메타 안경",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "메타(주)",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "문샷",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "dead",
+      "isHot": false,
+      "why": "정부가 AI로 국가 과학난제를 푸는 'K-문샷' 추진 세미나를 열어서",
+      "headlines": [
+        {
+          "title": "K-문샷 속도 내려면…전문가들, 검증·규제 병목 해소 주문",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-10T07:56:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016434126?sid=105"
+        },
+        {
+          "title": "'K-문샷 정책 세미나' 개최…\"AI로 국가 과학 난제 해결\"",
+          "press": "news1.kr",
+          "publishedAt": "2026-11-10T08:44:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009281913?sid=105"
+        },
+        {
+          "title": "“국가 난제 풀려면 규제 걸림돌 없어야” K-문샷 실무 점검",
+          "press": "chosun.com",
+          "publishedAt": "2026-11-10T08:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004008822?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "시마노 문샷",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "k문샷",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "문샷 쿠션",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "k-문샷",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "시마노 문샷 96mh",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "나이키 문샷",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "시마노 문샷 86ml",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "문샷 키미",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "문샷 과제 선정",
+          "reason": "대상 분야 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "문샷 규제 개선",
+          "reason": "병목 해소 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "문샷 참여기업",
+          "reason": "누가 참여 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "TSMC",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "TSMC가 10월 월매출 사상 최대를 찍고 오픈AI·앤트로픽에 투자해서",
+      "headlines": [
+        {
+          "title": "TSMC, 10월 매출도 60% 급증…사상 최대치",
+          "press": "hankyung.com",
+          "publishedAt": "2026-11-10T10:08:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005352482?sid=101"
+        },
+        {
+          "title": "TSMC, 오픈AI·앤트로픽에 10억달러 투자…'AI 성장에 베팅'",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-11-11T07:43:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005439789?sid=104"
+        },
+        {
+          "title": "TSMC, 10월 매출 23조8000억원…월간 사상 최대",
+          "press": "view.asiae.co.kr",
+          "publishedAt": "2026-11-10T10:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/277/0005840782?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "tsmc 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "Tsmc 메모리",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "tsmc 시총",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "대만 tsmc",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "TSMC ADR 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "tsmc 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "tsmc d램",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "젠슨황 tsmc",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "TSMC 주가 전망",
+          "reason": "실적 후 주가 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "TSMC 4분기",
+          "reason": "다음 실적 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "TSMC 삼성 비교",
+          "reason": "경쟁 비교 수요",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "TSMC 배당",
+          "reason": "투자 수익 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "소프트뱅크",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "소프트뱅크가 美 데이터센터 손실로 9.5조 적자 전환해 주가가 출렁여서",
+      "headlines": [
+        {
+          "title": "소프트뱅크 주가 출렁…장초반 11% 급락후 회복",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-11T05:51:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016436115?sid=101"
+        },
+        {
+          "title": "NC, '일본 우승팀' 소프트뱅크 코치 연수…\"선수 지도에 활용\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-10T06:05:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/003/0014313517"
+        },
+        {
+          "title": "NC, 日 소프트뱅크서 코치·트레이너·구단 운영 연수 진행",
+          "press": "isplus.com",
+          "publishedAt": "2026-11-10T05:41:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/241/0003541011"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "소프트뱅크 호크스",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "소프트뱅크 이심",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "소프트뱅크 야구",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "소프트뱅크 회장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "소프트뱅크 실적",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "소프트뱅크 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "소프트뱅크 손정의",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "소프트뱅크 키디 차이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "소프트뱅크 AI투자",
+          "reason": "투자 규모 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "소프트뱅크 주가 회복",
+          "reason": "반등 여부 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "소프트뱅크 비전펀드",
+          "reason": "펀드 손실 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "소프트뱅크 엔비디아",
+          "reason": "지분 관계 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "오픈AI",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "오픈AI가 3분기 매출 100억달러를 올리고 삼성에 AI 디바이스 협력을 제안해서",
+      "headlines": [
+        {
+          "title": "[단독] 올트먼 \"삼성과 AI 디바이스 만들고 싶다\" [오픈AI, 삼성에 러브...",
+          "press": "fnnews.com",
+          "publishedAt": "2026-11-11T09:14:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/014/0005602885?sid=101"
+        },
+        {
+          "title": "TSMC, 오픈AI·앤트로픽에 10억달러 투자…'AI 성장에 베팅'",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-11-11T07:43:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005439789?sid=104"
+        },
+        {
+          "title": "오픈AI, 3분기 매출 100억달러…50% 성장 적자는 늘어",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-11-11T06:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/024/0000109559?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "오픈ai 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 대표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 종류",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 순위",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 닷츠",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai ceo",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "오픈AI 삼성 협력",
+          "reason": "협업 내용 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "오픈AI 상장",
+          "reason": "IPO 시점 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "오픈AI AI 디바이스",
+          "reason": "신제품 형태 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "오픈AI 적자 규모",
+          "reason": "손실 수준 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "중기부",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "중기부가 2030년까지 1조 가치 AI 스타트업 20곳을 육성한다고 밝혀서",
+      "headlines": [
+        {
+          "title": "중기부, '1조원 가치' AI스타트업 20곳 육성…100억원 이상 지원",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-11T05:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016435871?sid=101"
+        },
+        {
+          "title": "중기부, 2030년까지 AI 유니콘 20개 키운다",
+          "press": "donga.com",
+          "publishedAt": "2026-11-11T05:24:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/020/0003761701?sid=101"
+        },
+        {
+          "title": "\"AI 3대 강국\"…기업가치 1조 스타트업 20곳 키운다",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-11T05:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014315741?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "중기부 장관",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "중기부 차관",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "중기부 인사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "중기부 대출",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "중기부 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "중기부 국정감사 일정",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "중기부 조직도",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "중기부 수출바우처",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "중기부 지원 대상",
+          "reason": "선정 기준 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "중기부 지원 규모",
+          "reason": "100억 지원 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "중기부 추진 일정",
+          "reason": "로드맵 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
       "rowCount": 0
     },
     {
@@ -2305,927 +3354,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
-    },
-    {
-      "issue": "유류세 인하 연장",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "dead",
-      "isHot": true,
-      "why": "유류세 인하가 내년 1월까지 2개월 연장됐다.",
-      "headlines": [
-        {
-          "title": "[속보]유류세 인하, 내년 1월까지 두달 더 연장",
-          "press": "ichannela.com",
-          "publishedAt": "2026-11-11T00:16:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/449/0000367093?sid=101"
-        },
-        {
-          "title": "유류세 인하 내년 1월까지 2개월 연장…\"유류비 부담 경감\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-11T00:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016434725?sid=101"
-        },
-        {
-          "title": "유류세 인하 내년 1월까지 연장…휘발유 15·경유 25%↓",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-11-11T00:36:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001402187?sid=101"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "존박 맥도날드",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "존박 맥도날드 랩이 타인 이름으로 무단 음원 등록됐다.",
-      "headlines": [
-        {
-          "title": "[단독] 존박 ‘맥도날드 랩’ 무단 음원 등록에 소속사 “삭제 협의 중...",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-11-11T00:02:00.000Z",
-          "link": "https://m.entertain.naver.com/article/009/0005761953"
-        },
-        {
-          "title": "[전문] 존박 ‘맥도날드 랩’ 해외 도둑맞았다",
-          "press": "sports.khan.co.kr",
-          "publishedAt": "2026-11-10T23:41:00.000Z",
-          "link": "https://m.entertain.naver.com/article/144/0001149125"
-        },
-        {
-          "title": "존박 '맥도날드 랩', 타인 이름으로 무단 음원 등록돼",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-11-10T23:34:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001402169?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "존박 맥도날드 가사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "존박 맥도날드 광고",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "존박 맥도날드 랩",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "존박 맥도날드 비트",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "존박 맥도날드 세트",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "존박 맥도날드 노래",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "존박 맥도날드 버거",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "존박 맥도날드 음원",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "광주시",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "선관위 특검이 경기 광주시선관위를 압수수색했다.",
-      "headlines": [
-        {
-          "title": "선관위 특검, '개표상황표 은닉·위조' 경기 광주시 선관위 압수수색",
-          "press": "imnews.imbc.com",
-          "publishedAt": "2026-11-10T02:19:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/214/0001534596?sid=102"
-        },
-        {
-          "title": "선관위 특검, '개표상황표 위조' 경기 광주시 선관위 압수수색",
-          "press": "fnnews.com",
-          "publishedAt": "2026-11-10T02:26:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/014/0005601966?sid=102"
-        },
-        {
-          "title": "선관위 특검팀, 경기도·광주시선관위 압수수색",
-          "press": "incheonilbo.com",
-          "publishedAt": "2026-11-10T10:26:00.000Z",
-          "link": "https://www.incheonilbo.com/news/articleView.html?idxno=1336478"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "광주시 날씨",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "광주시 인구",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "광주시 경기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "광주시 남구",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "광주시 동구",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "광주시 맛집",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "광주시 병원",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "광주시 북구",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "양극화 대응 TF",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "정부가 경제부총리 팀장의 범정부 양극화 대응 TF를 띄웠다.",
-      "headlines": [
-        {
-          "title": "'양극화 해소' 5대 분야에 집중…부총리 주재 범정부 TF 가동",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-11-11T00:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005439401?sid=101"
-        },
-        {
-          "title": "수출 호황에도 커지는 소득·자산·세대 격차…정부, 양극화 대응 TF 띄...",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-11T00:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014314576?sid=101"
-        },
-        {
-          "title": "양극화 대응에 팔 걷는 정부…경제부총리가 태스크포스 팀장",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-11T00:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016434723?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "양극화",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "k자형 양극화",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "연애박사",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "안판석 유작 연애박사가 3.5% 자체 최고로 종영했다.",
-      "headlines": [
-        {
-          "title": "故 안판석 유작 ‘연애박사’ 3.5% 자체 최고 시청률로 종영",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-11-10T23:16:00.000Z",
-          "link": "https://m.entertain.naver.com/article/009/0005761935"
-        },
-        {
-          "title": "‘연애박사’ 종영…해피엔딩 결말",
-          "press": "bntnews.co.kr",
-          "publishedAt": "2026-11-10T23:08:00.000Z",
-          "link": "https://www.bntnews.co.kr/article/view/bnt202611110068"
-        },
-        {
-          "title": "'연애박사' 시청률 3.5% 종영⋯추영우♥김소현 결혼 준비",
-          "press": "etoday.co.kr",
-          "publishedAt": "2026-11-11T00:02:00.000Z",
-          "link": "https://www.etoday.co.kr/news/view/2646595"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "연애박사 드라마",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "연애박사 ott",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "연애박사 감독",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "연애박사 작가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "연애박사 OST",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "연애박사 몇부작",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "연애박사 시청률",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "연애박사 영어로",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "연애박사 다시보기",
-          "reason": "재방송 수요",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "김소현 결혼",
-          "reason": "극중 연결 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "제미나이 4 카본",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "dead",
-      "isHot": false,
-      "why": "구글이 제미나이 4 카본을 일반에 공개했다.",
-      "headlines": [
-        {
-          "title": "앤트로픽 신형 AI 모델 성능 ‘1위’",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-11-10T07:20:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/024/0000109538?sid=101"
-        },
-        {
-          "title": "구글, 피지컬 AI 특화 '제미나이 로보틱스 2.5' 공개…'카본' 세계 출시",
-          "press": "etnews.com",
-          "publishedAt": "2026-11-11T00:20:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/030/0003484344?sid=105"
-        },
-        {
-          "title": "구글, ‘제미나이 4 카본’ 일반에 공개…로봇 AI 신모델도 선보여",
-          "press": "biz.chosun.com",
-          "publishedAt": "2026-11-11T00:45:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/366/0001203960?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "제미나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 제미나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "구글",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "구글이 차세대 TPU 2종을 공개했다.",
-      "headlines": [
-        {
-          "title": "앤트로픽 가치 최대 1.4조달러…엔비디아·구글도 13조원씩 투자",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-10T22:49:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016434610?sid=101"
-        },
-        {
-          "title": "엔비디아 흔들리는 사이…구글, 차세대 칩 출시",
-          "press": "biz.sbs.co.kr",
-          "publishedAt": "2026-11-09T19:33:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/374/0000542613?sid=104"
-        },
-        {
-          "title": "구글, 피지컬 AI 특화 '제미나이 로보틱스 2.5' 공개…'카본' 세계 출시",
-          "press": "etnews.com",
-          "publishedAt": "2026-11-11T00:20:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/030/0003484344?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "구글 제미나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 영국",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 번역기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 클래스룸",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 재팬",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 원",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 폼",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "구글 주가",
-          "reason": "투자 반응 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "챗GPT",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "오픈AI가 챗GPT에 기업 AI 고객센터를 도입했다.",
-      "headlines": [
-        {
-          "title": "오픈AI, 챗GPT에 기업 AI고객센터 도입…온라인쇼핑 플랫폼 역할",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-10T23:12:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016434639?sid=104"
-        },
-        {
-          "title": "챗GPT가 라이언 애니 만들었다…카카오·오픈AI 맞손",
-          "press": "news1.kr",
-          "publishedAt": "2026-11-10T02:13:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009280725?sid=105"
-        },
-        {
-          "title": "클로드 20배 성장했지만…챗GPT, AI 챗봇 이용량 81% 독주",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-11-10T20:05:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006407839?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "챗 GPT 무료",
-          "searchVolume": 48900,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "챗 GPT 유료",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "챗gpt 프롬프트",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "챗gpt 아스트라",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "챗gpt 사주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "챗gpt 요금제",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "챗gpt vs 제미나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "챗gpt 앱",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "챗GPT 쇼핑 사용법",
-          "reason": "신기능 방법 수요",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "챗GPT 개인정보",
-          "reason": "유출 우려 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "스페이스X",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "스페이스X가 텍사스에 32조 규모 데이터센터·발전소를 추진한다.",
-      "headlines": [
-        {
-          "title": "스페이스X, 텍사스에 32조 규모 가스발전·데이터센터 건설 추진",
-          "press": "hankyung.com",
-          "publishedAt": "2026-11-10T07:28:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005352350?sid=101"
-        },
-        {
-          "title": "스페이스X, 텍사스에 32조 투입해 데이터센터·발전소 짓는다",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-11-10T06:32:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005439120?sid=101"
-        },
-        {
-          "title": "스페이스X, 텍사스에 32조원 투자 추진… AI 연산용 전력 직접 생산",
-          "press": "biz.chosun.com",
-          "publishedAt": "2026-11-10T03:15:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/366/0001203745?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "스페이스x 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "스페이스x 전망",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "스페이스x 공모가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "테슬라 스페이스X 합병",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "스페이스x etf",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "스페이스x 상장일",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "스페이스x 시총",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "스페이스x 상장가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "스페이스X 상장",
-          "reason": "투자 관심 연결",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "클로드",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "클로드 국내 기업 계정 112개가 유출돼 개인정보위가 조사에 착수했다.",
-      "headlines": [
-        {
-          "title": "'클로드' 이용 국내 기업 계정 112개 정보유출…개인정보위, 조사 착수",
-          "press": "news1.kr",
-          "publishedAt": "2026-11-10T09:24:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009281965?sid=105"
-        },
-        {
-          "title": "개인정보위, '클로드 계정정보 유출' 앤트로픽 정식 조사 착수",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-11-10T07:23:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005439168?sid=105"
-        },
-        {
-          "title": "'클로드' 앤트로픽, AI 악재에도 IPO 진행⋯'1366조' 목표",
-          "press": "inews24.com",
-          "publishedAt": "2026-11-10T13:16:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/031/0001073926?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "클로드 ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "클로드 요금제",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "클로드 무료",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "클로드 모네",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "클로드 코워크",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "클로드 프로",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "클로드 치트키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "클로드 디자인",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "클로드 안전성",
-          "reason": "사용 불안 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "BMW",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "BMW가 삼성SDI·LG엔솔과 6세대 배터리 공급 계약을 맺었다.",
-      "headlines": [
-        {
-          "title": "BMW그룹, K 배터리와 잇따라 공급 계약",
-          "press": "segye.com",
-          "publishedAt": "2026-11-10T21:04:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/022/0004174179?sid=101"
-        },
-        {
-          "title": "BMW그룹, 삼성SDI·LG엔솔과 맞손…\"유럽·미국 공급망 강화\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-10T02:58:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016433150?sid=101"
-        },
-        {
-          "title": "BMW그룹, 삼성 SDI·LG엔솔과 배터리 협력",
-          "press": "donga.com",
-          "publishedAt": "2026-11-10T06:52:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/020/0003761389?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "bmw x3",
-          "searchVolume": 99600,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "bmw x7",
-          "searchVolume": 78200,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "bmw x5",
-          "searchVolume": 120300,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "bmw 5시리즈",
-          "searchVolume": 90700,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "bmw x6",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "bmw 부품조회",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "BMW 코리아",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "bmw ix",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "BMW 전기차 신차",
-          "reason": "적용 차종 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "오픈AI",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "카카오와 오픈AI가 AI 애니 '그래도, 라이언'을 공개했다.",
-      "headlines": [
-        {
-          "title": "이노션, 강남·명동 초대형 전광판 'AI 미술관'으로 연다",
-          "press": "hankyung.com",
-          "publishedAt": "2026-11-11T00:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005352607?sid=101"
-        },
-        {
-          "title": "앤트로픽 신형 AI 모델 성능 ‘1위’",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-11-10T07:20:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/024/0000109538?sid=101"
-        },
-        {
-          "title": "[단독]“회사업무 AI, 해킹통로 될라”… 서버 8000여개 외부 인터넷 노...",
-          "press": "donga.com",
-          "publishedAt": "2026-11-10T19:34:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/020/0003761568?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "오픈ai 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 대표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 종류",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 순위",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 닷츠",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai ceo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "그래도 라이언 공개",
-          "reason": "어디서 보나",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "오픈AI 상장",
-          "reason": "IPO 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "소프트뱅크",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "소프트뱅크가 미국 AI 데이터센터 손실로 2년 만에 적자 전환했다.",
-      "headlines": [
-        {
-          "title": "소프트뱅크, 2년만 적자 전환…美 AI 데이터센터서 손실",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-10T10:12:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016434284?sid=104"
-        },
-        {
-          "title": "NC, '일본 우승팀' 소프트뱅크 코치 연수…\"선수 지도에 활용\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-10T06:05:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/003/0014313517"
-        },
-        {
-          "title": "NC, 日 소프트뱅크서 코치·트레이너·구단 운영 연수 진행",
-          "press": "isplus.com",
-          "publishedAt": "2026-11-10T05:41:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/241/0003541011"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "소프트뱅크 호크스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "소프트뱅크 이심",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "소프트뱅크 야구",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "소프트뱅크 회장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "소프트뱅크 실적",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "소프트뱅크 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "소프트뱅크 손정의",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "소프트뱅크 키디 차이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "소프트뱅크 주가",
-          "reason": "실적 반응 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "이유진",
