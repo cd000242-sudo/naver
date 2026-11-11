@@ -55,17 +55,22 @@
 .cm-rich-count.is-over { color: var(--lp-danger); font-weight: 800; }
 .cm-rich-notice { margin: 0; font-size: 16px; color: var(--lp-muted); }
 
-/* Rich body */
+/* Rich body. Blocks stack by margin-top on the later block; no element reset below may set a vertical margin, or it outranks this gap and the blocks sit flush. */
 .cm-rich-body { white-space: normal; line-height: 1.8; }
-.cm-rich-body > * + * { margin-top: 0.7em; }
-.cm-rich-body p { margin: 0; }
+.cm-rich-body > * + * { margin-top: 0.8em; }
+.cm-rich-body > :is(h2, h3) + * { margin-top: 0.6em; }
 .cm-rich-body h2 { font-size: 24px; font-weight: 900; margin-top: 1.2em; }
 .cm-rich-body h3 { font-size: 20px; font-weight: 900; margin-top: 1em; }
 .cm-rich-body blockquote { margin-left: 0; padding: 6px 16px; border-left: 4px solid var(--lp-line); color: var(--lp-muted); }
-.cm-rich-body ul, .cm-rich-body ol { margin: 0; padding-left: 1.5em; }
+.cm-rich-body ul, .cm-rich-body ol { padding-left: 1.5em; }
+.cm-rich-body li + li { margin-top: 0.35em; }
 .cm-rich-body a { color: var(--lp-accent); text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
 .cm-rich-body hr { border: 0; border-top: 2px solid var(--lp-line); margin: 1.2em 0; }
 .cm-pic { margin: 0; }
+.cm-rich-body > .cm-pic { margin-top: 18px; margin-bottom: 8px; }
+.cm-rich-body > .cm-pic + p { margin-top: 0; font-size: 16px; color: var(--lp-muted); }
+.cm-rich-body > :first-child { margin-top: 0; }
+.cm-rich-body > :last-child { margin-bottom: 0; }
 .cm-pic img { display: block; max-width: 100%; height: auto; border-radius: 10px; }
 .cm-pic.is-wait { display: grid; place-items: center; gap: 8px; min-height: 140px; padding: 16px; border-radius: 10px; background: var(--lp-surface-2); color: var(--lp-muted); font-size: 16px; text-align: center; }
 
