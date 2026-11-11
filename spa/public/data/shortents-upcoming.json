@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T20:44:24.829Z",
+ "builtAt": "2026-11-11T20:54:27.906Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,12 +16,18 @@
     "signal.bz"
    ],
    "articles90": 14,
-   "recent20": 1,
+   "recent20": 2,
    "press": 11,
-   "firstArticleAt": "2026-11-11T19:24:00.000Z",
+   "firstArticleAt": "2026-11-11T19:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"트럼프, 젠슨황 스캔들로 대중정책 모순 드러내\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-11T20:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925292?sid=104"
+    },
     {
      "title": "美 공화, 젠슨 황에 “자진 출석 안하면 강제 소환”...CEO 사퇴 요구도",
      "press": "seoul.co.kr",
@@ -33,12 +39,6 @@
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-11T20:24:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002431635?sid=104"
-    },
-    {
-     "title": "젠슨황, 과거 엔비디아 후계논의 거부…“딸 승계도 원치 않아”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-11T20:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012292176?sid=104"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
    "firstArticleAt": "2026-11-11T19:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“너흴 전멸시키겠다”… 유럽 이번엔 학교 7000곳 폭파 위협",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-11T20:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001884662?sid=104"
+    },
     {
      "title": "유럽학교 7000곳 폭파 위협…커지는 하이브리드 테러 공포",
      "press": "newsis.com",
@@ -65,12 +71,6 @@
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-11T19:42:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004208890?sid=104"
-    },
-    {
-     "title": "유럽 곳곳서 '테러 위협'… 이탈리아 학교 6300에 폭탄 협박 메일",
-     "press": "dkilbo.com",
-     "publishedAt": "2026-11-11T19:40:00.000Z",
-     "link": "https://www.dkilbo.com/news/articleView.html?idxno=560476"
     }
    ]
   },
@@ -94,16 +94,16 @@
      "link": "https://n.news.naver.com/mnews/article/081/0003698459?sid=100"
     },
     {
-     "title": "인천항 '다단계 부풀리기 전대' 의혹…해경, 전방위 수사",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-11T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004208896?sid=102"
-    },
-    {
      "title": "[단독] 각 경찰서에 '수사 회의' 도입…\"변호사·회계사 투입\"",
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-11T20:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004208892?sid=102"
+    },
+    {
+     "title": "인천항 '다단계 부풀리기 전대' 의혹…해경, 전방위 수사",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-11T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004208896?sid=102"
     }
    ]
   }
