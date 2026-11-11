@@ -4878,6 +4878,7 @@ import { registerBackupHandlers, performDataBackup } from './main/ipc/backupHand
 import { startLdbBridge } from './main/ldb-bridge.js';
 import { createAccountSafetyController } from './main/accountSafetyController.js';
 import { isLdbConnectUrl, LDB_CONNECT_SCHEME, createSerializedRefresh } from './main/ldb-launch.js';
+import { createLdbConnectConsent } from './main/ldb-connect-consent.js';
 import { deliverLdbPostsToWindow } from './main/ldb-delivery.js';
 import { createLdbAutoDraftRunner, createLdbAutoDraftStatusStore, requestLdbAutoDraftSave } from './main/ldb-auto-draft.js';
 import { materializeLdbImages } from './main/ldb-images.js';
@@ -5128,7 +5129,25 @@ ipcMain.handle('dailyPublishing:request', createDailyPublishingIpc({
 }));
 app.on('will-quit', () => dailyPublishingRuntime?.dispose());
 
-/** Fixed URI only opens the existing app/settings; never enables the bridge or publishes. */
+/** Shared by the settings switch and the connect prompt so both reach the bridge the same way. */
+const refreshLdbBridgeAfterConfigChange = async (): Promise<void> => {
+  await startLdbBridgeIfEnabled();
+  const config = await loadConfig().catch(() => ({} as AppConfig));
+  broadcastLdbBridgeState(Boolean(config.ldbBridgeEnabled));
+  await resumeLdbConnect();
+};
+/** A web page can open the URI, so the bridge is only enabled after one explicit [켜기] click. */
+const requestLdbConnectConsent = createLdbConnectConsent({
+  isEnabled: async () => Boolean((await loadConfig()).ldbBridgeEnabled),
+  showMessageBox: options => mainWindow && !mainWindow.isDestroyed() ? dialog.showMessageBox(mainWindow, options) : dialog.showMessageBox(options),
+  enable: async () => {
+    // Same route as the settings switch (config:set): save, apply to env, then refresh the bridge and token file.
+    const saved = await saveConfig({ ldbBridgeEnabled: true });
+    appConfig = saved; applyConfigToEnv(saved);
+    await refreshLdbBridgeAfterConfigChange();
+  },
+});
+/** Fixed URI brings the app forward and, when the bridge is off, asks once before enabling it; never publishes. */
 const resumeLdbConnect = async (): Promise<void> => {
   if (!ldbConnectPending || !isLicenseValid || !mainWindow || mainWindow.isDestroyed() || mainWindow.webContents.isLoading()) return;
   await startLdbBridgeIfEnabled();
@@ -5137,7 +5156,8 @@ const resumeLdbConnect = async (): Promise<void> => {
   ldbConnectPending = false;
   if (mainWindow.isMinimized()) mainWindow.restore();
   mainWindow.show(); mainWindow.focus();
-  if (!config.ldbBridgeEnabled) mainWindow.webContents.send('ldb:connect-request');
+  // If the prompt or the save fails, fall back to the settings screen so the switch can still be turned on by hand.
+  if (!config.ldbBridgeEnabled) void requestLdbConnectConsent().then(outcome => { if (outcome === 'failed' && mainWindow && !mainWindow.isDestroyed()) mainWindow.webContents.send('ldb:connect-request'); });
 };
 const handleLdbConnectUrl = (value: unknown): void => {
   if (!isLdbConnectUrl(value)) return;
@@ -7303,12 +7323,7 @@ registerConfigHandlers({
   setAppConfig: (config) => { appConfig = config; },
   sendLog,
   // 계정 설정이 살아난 지금이 확장 연결 설정을 읽을 수 있는 첫 시점이다.
-  onAccountActivated: () => { void (async () => {
-    await startLdbBridgeIfEnabled();
-    const config = await loadConfig().catch(() => ({} as AppConfig));
-    broadcastLdbBridgeState(Boolean(config.ldbBridgeEnabled));
-    await resumeLdbConnect();
-  })(); },
+  onAccountActivated: () => { void refreshLdbBridgeAfterConfigChange(); },
 });
 
 // 이미지 라이브러리 카테고리 조회 IPC 핸들러
