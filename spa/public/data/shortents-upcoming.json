@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T15:32:16.028Z",
+ "builtAt": "2026-11-11T15:42:19.771Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,50 +11,23 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "광주 아파트 화재",
+   "keyword": "러 우크라 포로교환 합의",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-11T14:05:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-11T14:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "광주 아파트서 방화 추정 화재로 14명 중경상",
-     "press": "kwangju.co.kr",
-     "publishedAt": "2026-11-11T14:52:00.000Z",
-     "link": "http://www.kwangju.co.kr/article.php?aid=1794408369805291006"
+     "title": "러·우크라, 대규모 포로 교환 합의… 영토·안전보장 등 핵심 이슈에선...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-11T15:36:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261112000003"
     },
-    {
-     "title": "전남광주 북구 아파트서 불‥주민 방화 혐의로 입건",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-11T14:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001534999?sid=102"
-    },
-    {
-     "title": "전남광주 도심 아파트 화재는 방화…40대 남성 입건",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-11T14:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014316911?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "러 우크라 포로교환 합의",
-   "sources": [
-    "signal.bz",
-    "daum"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-11T14:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
     {
      "title": "美·러·우크라 종전협상 종료…포로교환 합의에도 영토 문제 등 난항(종...",
      "press": "news1.kr",
@@ -66,12 +39,6 @@
      "press": "mdtoday.co.kr",
      "publishedAt": "2026-11-11T14:46:00.000Z",
      "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=624594"
-    },
-    {
-     "title": "러·우크라, 역대 최대 규모 포로교환 합의…안보 입장차는 여전",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-11T14:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000925255?sid=104"
     }
    ]
   },
@@ -80,10 +47,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-11T14:06:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-11T14:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -104,38 +71,6 @@
      "press": "metroseoul.co.kr",
      "publishedAt": "2026-11-11T14:28:00.000Z",
      "link": "http://www.metroseoul.co.kr/article/20261111500645"
-    }
-   ]
-  },
-  {
-   "keyword": "최민희 하이에나 사과",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-11T14:29:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[사설] 걸핏하면 언론 비하하는 최민희의 삐뚤어진 인식",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-11T15:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000965088?sid=110"
-    },
-    {
-     "title": "최민희, 기자들에 '하이에나 떼' 표현 사과…국힘 \"언론 혐오증\"",
-     "press": "kado.net",
-     "publishedAt": "2026-11-11T15:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000210843?sid=100"
-    },
-    {
-     "title": "사진기자들 ‘하이에나 떼’라는 최민희…“모욕” 비판에 “사과”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-11T14:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012292156?sid=100"
     }
    ]
   }
