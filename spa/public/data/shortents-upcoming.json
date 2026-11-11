@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T15:11:52.853Z",
+ "builtAt": "2026-11-11T15:22:12.375Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,7 +16,7 @@
     "signal.bz"
    ],
    "articles90": 12,
-   "recent20": 1,
+   "recent20": 0,
    "press": 11,
    "firstArticleAt": "2026-11-11T13:53:00.000Z",
    "exclusive": false,
@@ -48,10 +48,10 @@
     "signal.bz",
     "daum"
    ],
-   "articles90": 11,
+   "articles90": 10,
    "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-11T13:45:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-11T13:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -80,13 +80,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-11T13:42:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-11T13:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李대통령 \"당정 한마음 움직여야\"…김민석 \"양극화 대책 필요\"",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-11T15:12:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2017480"
+    },
     {
      "title": "李대통령, 민주당 지도부와 3시간 만찬… \"당정 한마음으로 움직여야\"",
      "press": "newscj.com",
@@ -98,12 +104,6 @@
      "press": "metroseoul.co.kr",
      "publishedAt": "2026-11-11T14:28:00.000Z",
      "link": "http://www.metroseoul.co.kr/article/20261111500645"
-    },
-    {
-     "title": "李대통령, 與 지도부 만찬서 “당정 한마음 한뜻으로”",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-11T14:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001884598?sid=100"
     }
    ]
   },
@@ -142,9 +142,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 400,
-  "matched": 170,
-  "avgLeadMin": 641,
+  "flagged": 399,
+  "matched": 169,
+  "avgLeadMin": 642,
   "recent": [
    {
     "keyword": "데블스플랜3",
