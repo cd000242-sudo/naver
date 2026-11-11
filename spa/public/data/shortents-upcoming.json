@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T20:34:22.056Z",
+ "builtAt": "2026-11-11T20:44:24.829Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,16 +13,21 @@
   {
    "keyword": "젠슨 황 불륜 스캔들",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 13,
+   "articles90": 14,
    "recent20": 1,
    "press": 11,
    "firstArticleAt": "2026-11-11T19:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "美 공화, 젠슨 황에 “자진 출석 안하면 강제 소환”...CEO 사퇴 요구도",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-11T20:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003698539?sid=104"
+    },
     {
      "title": "젠슨 황, 과거 엔비디아 후계논의 거부...\"딸 승계도 원치않아\"",
      "press": "ytn.co.kr",
@@ -34,12 +39,6 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-11T20:14:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012292176?sid=104"
-    },
-    {
-     "title": "[美증시 특징주] 엔비디아 급락에서 급등 반전…\"스캔들과 AI수요 폭발은...",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-11T20:14:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1136827"
     }
    ]
   },
@@ -95,16 +94,16 @@
      "link": "https://n.news.naver.com/mnews/article/081/0003698459?sid=100"
     },
     {
-     "title": "[단독] 각 경찰서에 '수사 회의' 도입…\"변호사·회계사 투입\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-11T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004208892?sid=102"
-    },
-    {
      "title": "인천항 '다단계 부풀리기 전대' 의혹…해경, 전방위 수사",
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-11T20:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004208896?sid=102"
+    },
+    {
+     "title": "[단독] 각 경찰서에 '수사 회의' 도입…\"변호사·회계사 투입\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-11T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004208892?sid=102"
     }
    ]
   }
