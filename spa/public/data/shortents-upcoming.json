@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T20:14:15.393Z",
+ "builtAt": "2026-11-11T20:24:18.975Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 9,
  "candidates": [
   {
    "keyword": "수사",
@@ -17,7 +17,7 @@
     "google"
    ],
    "articles90": 5,
-   "recent20": 4,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-11T19:00:00.000Z",
    "exclusive": true,
@@ -49,7 +49,7 @@
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 3,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-11T19:34:00.000Z",
    "exclusive": false,
@@ -74,11 +74,43 @@
      "link": "https://www.geconomy.co.kr/news/article.html?no=325583"
     }
    ]
+  },
+  {
+   "keyword": "김민석 만찬 당정 한마음 필요",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-11T19:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이 대통령·與 지도부 만찬…\"당정 한마음 한뜻\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-11T20:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925270?sid=100"
+    },
+    {
+     "title": "종부세 엇박자 속 與지도부 만난 李 “한마음 한뜻으로 움직여야”",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-11T20:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003058646?sid=100"
+    },
+    {
+     "title": "李, 與 투톱과 만찬 “당정 한뜻으로 움직여야”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-11T19:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003761871?sid=100"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 394,
+  "flagged": 395,
   "matched": 159,
   "avgLeadMin": 665,
   "recent": [
