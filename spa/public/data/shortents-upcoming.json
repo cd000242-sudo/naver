@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T20:54:27.906Z",
+ "builtAt": "2026-11-11T21:04:31.017Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,66 +11,34 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "젠슨 황 불륜 스캔들",
+   "keyword": "김민석 만찬 당정 한마음 강조",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
+   "articles90": 4,
    "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-11T19:31:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-11T20:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"트럼프, 젠슨황 스캔들로 대중정책 모순 드러내\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-11T20:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000925292?sid=104"
+     "title": "李대통령 “당정, 한마음 한뜻으로 움직여야” [청와대 24시]",
+     "press": "segye.com",
+     "publishedAt": "2026-11-11T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004174523?sid=100"
     },
     {
-     "title": "美 공화, 젠슨 황에 “자진 출석 안하면 강제 소환”...CEO 사퇴 요구도",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-11T20:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003698539?sid=104"
+     "title": "당청 '종부세 이견' 정리 국면…'과제 산적' 김민석號 힘 받을까",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-11T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009284482?sid=100"
     },
     {
-     "title": "젠슨 황, 과거 엔비디아 후계논의 거부...\"딸 승계도 원치않아\"",
-     "press": "ytn.co.kr",
+     "title": "李 “당정 한마음으로”…김민석, 소비 진작 대책 요청",
+     "press": "kbmaeil.com",
      "publishedAt": "2026-11-11T20:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002431635?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "유럽 학교 폭파 협박",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-11T19:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“너흴 전멸시키겠다”… 유럽 이번엔 학교 7000곳 폭파 위협",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-11T20:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001884662?sid=104"
-    },
-    {
-     "title": "유럽학교 7000곳 폭파 위협…커지는 하이브리드 테러 공포",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-11T20:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014316995?sid=104"
-    },
-    {
-     "title": "이탈리아 학교 수천 곳에 폭파 위협 이메일…곳곳서 대피 소동",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-11T19:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004208890?sid=104"
+     "link": "https://www.kbmaeil.com/article/20261112500003"
     }
    ]
   },
@@ -80,24 +48,24 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 5,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-11T20:00:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
+     "title": "[단독]여기저기 뚫리는데…사이버수사, '국' 복원 제동[사라진 사이버 ...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-11T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014317032?sid=102"
+    },
+    {
      "title": "법무부 “공소청 특활비 필요”… 기획처 “수사 비용 편성 불가”",
      "press": "seoul.co.kr",
      "publishedAt": "2026-11-11T20:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/081/0003698459?sid=100"
-    },
-    {
-     "title": "[단독] 각 경찰서에 '수사 회의' 도입…\"변호사·회계사 투입\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-11T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004208892?sid=102"
     },
     {
      "title": "인천항 '다단계 부풀리기 전대' 의혹…해경, 전방위 수사",
@@ -111,9 +79,39 @@
  "hitRate": {
   "days": 7,
   "flagged": 397,
-  "matched": 159,
-  "avgLeadMin": 665,
+  "matched": 163,
+  "avgLeadMin": 756,
   "recent": [
+   {
+    "keyword": "유럽 여객기 폭탄 위협",
+    "hitKeyword": "유럽 학교 폭탄 협박",
+    "hitAt": "2026-11-12T06:00:00+09:00",
+    "leadMin": 8637
+   },
+   {
+    "keyword": "신세계 이석구 사장 선임",
+    "hitKeyword": "한국투자 신세계 하향",
+    "hitAt": "2026-11-12T06:00:00+09:00",
+    "leadMin": 8184
+   },
+   {
+    "keyword": "러 우크라 포로교환 합의",
+    "hitKeyword": "러 우크라 포로 교환",
+    "hitAt": "2026-11-12T06:00:00+09:00",
+    "leadMin": 348
+   },
+   {
+    "keyword": "이란 지하 미사일 도시",
+    "hitKeyword": "이란 지하 미사일 도시",
+    "hitAt": "2026-11-12T06:00:00+09:00",
+    "leadMin": 297
+   },
+   {
+    "keyword": "유럽 학교 폭파 협박",
+    "hitKeyword": "유럽 학교 폭탄 협박",
+    "hitAt": "2026-11-12T06:00:00+09:00",
+    "leadMin": 26
+   },
    {
     "keyword": "데블스플랜3",
     "hitKeyword": "데블스플랜3 장동민",
@@ -143,36 +141,6 @@
     "hitKeyword": "국고채 담합 과징금",
     "hitAt": "2026-11-11T23:00:00+09:00",
     "leadMin": 7613
-   },
-   {
-    "keyword": "3연승 박철우 감독",
-    "hitKeyword": "우리카드 개막 3연승",
-    "hitAt": "2026-11-11T23:00:00+09:00",
-    "leadMin": 19
-   },
-   {
-    "keyword": "광주 아파트 화재",
-    "hitKeyword": "서울 아파트 매물 증가",
-    "hitAt": "2026-11-11T23:00:00+09:00",
-    "leadMin": 19
-   },
-   {
-    "keyword": "출근길 바람에 체감온도 뚝",
-    "hitKeyword": "분당 출근길 버스 사고",
-    "hitAt": "2026-11-11T22:30:00+09:00",
-    "leadMin": 8006
-   },
-   {
-    "keyword": "김수현, 명예훼손 재판 증인 출석",
-    "hitKeyword": "김수현 법정 증언",
-    "hitAt": "2026-11-11T22:30:00+09:00",
-    "leadMin": 7674
-   },
-   {
-    "keyword": "김수현, 김세의 재판 출석",
-    "hitKeyword": "김수현 법정 증언",
-    "hitAt": "2026-11-11T22:30:00+09:00",
-    "leadMin": 7664
    }
   ]
  }
