@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T21:24:35.760Z",
+ "builtAt": "2026-11-11T21:34:39.505Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,109 +8,174 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 20,
  "candidates": [
   {
    "keyword": "젠슨 황 스캔들 영향",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-11T20:00:00.000Z",
+   "articles90": 10,
+   "recent20": 4,
+   "press": 10,
+   "firstArticleAt": "2026-11-11T20:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황 사태 이후 美, 반도체 수출규제 속도전…파장은? [글로벌 뉴스픽...",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-11T21:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000543148?sid=104"
+     "title": "젠슨 황 불륜 인정…이혼하면 재산 분할 얼마나 할까? [더 머니이스트-...",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-11T21:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005352990?sid=102"
     },
     {
-     "title": "젠슨황 스캔들, K반도체에 '불똥'...對中규제 강화 움직임",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-11T21:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001272469?sid=105"
+     "title": "엔비디아 2.87% 반등…젠슨 황 스캔들에 급락 후 저가 매수 유입",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-11T21:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009284513?sid=101"
     },
     {
-     "title": "젠슨 황, 스캔들에도 리더십은 그대로? 국내 영향은 ‘아직’",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-11T21:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012292182?sid=101"
+     "title": "美의회서 젠슨황 스캔들 이후 ‘對中 칩규제 3법’ 탄력…韓영향 주목",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-11T21:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002722309?sid=104"
     }
    ]
   },
   {
-   "keyword": "수사",
+   "keyword": "김민석 만찬 당정 한마음으로",
    "sources": [
     "signal.bz",
-    "google"
+    "nate"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-11T20:00:00.000Z",
-   "exclusive": true,
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-11T20:19:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[단독]여기저기 뚫리는데…사이버수사, '국' 복원 제동[사라진 사이버 ...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-11T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014317032?sid=102"
+     "title": "李 대통령 \"당정 한마음 한뜻으로\"…김민석 \"양극화 극복 필요\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-11T21:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000650504?sid=100"
     },
     {
-     "title": "법무부 “공소청 특활비 필요”… 기획처 “수사 비용 편성 불가”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-11T20:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003698459?sid=100"
+     "title": "이 대통령, 민주당 지도부와 3시간 만찬",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-11T21:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012292187?sid=100"
     },
     {
-     "title": "[단독] 각 경찰서에 '수사 회의' 도입…\"변호사·회계사 투입\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-11T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004208892?sid=102"
+     "title": "李대통령 “당정, 한마음 한뜻으로 움직여야” [청와대 24시]",
+     "press": "segye.com",
+     "publishedAt": "2026-11-11T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004174523?sid=100"
     }
    ]
   },
   {
-   "keyword": "김민석 만찬 당정 한마음 강조",
+   "keyword": "유럽 학교 폭파 협박",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-11T20:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "유럽 학교 7천 곳 폭파 위협‥이탈리아 등 대피 소동",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-11T21:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001535025?sid=104"
+    },
+    {
+     "title": "“몰살시킬 것” 유럽 학교 7000곳 폭파 위협... 伊총리까지 협박",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-11T21:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004009181?sid=104"
+    },
+    {
+     "title": "유럽 학교 7천곳 폭파 협박‥학생 대피 소동",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-11T21:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001535020?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "강경화 핵잠 원자력 협력",
    "sources": [
     "signal.bz"
    ],
    "articles90": 4,
    "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-11T20:19:00.000Z",
+   "firstArticleAt": "2026-11-11T20:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령 “당정, 한마음 한뜻으로 움직여야” [청와대 24시]",
-     "press": "segye.com",
-     "publishedAt": "2026-11-11T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004174523?sid=100"
+     "title": "강경화 \"韓핵잠 건조·원자력 협력 진전되면 한미 안보협력 강화\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-11T21:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004208908?sid=104"
     },
     {
-     "title": "당청 '종부세 이견' 정리 국면…'과제 산적' 김민석號 힘 받을까",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-11T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009284482?sid=100"
+     "title": "강경화 \"핵잠건조·원자력 협력 진전 시 한미 안보협력 강화\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-11T21:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925302?sid=104"
     },
     {
-     "title": "李 “당정 한마음으로”…김민석, 소비 진작 대책 요청",
-     "press": "kbmaeil.com",
-     "publishedAt": "2026-11-11T20:24:00.000Z",
-     "link": "https://www.kbmaeil.com/article/20261112500003"
+     "title": "강경화 “핵잠 건조·원자력 협력 진전되면 한미 안보협력 강화될 것”",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-11T20:30:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611120004"
+    }
+   ]
+  },
+  {
+   "keyword": "수사",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 3,
+   "press": 3,
+   "firstArticleAt": "2026-11-11T21:00:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김해 초등학생 고양이·새 학대 의혹…동물단체 고발에 경찰 수사",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-11T21:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014317056?sid=102"
+    },
+    {
+     "title": "[단독] '아들 성범죄' 피해자 살해…'보복 범죄' 수사",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-11T21:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001402385?sid=102"
+    },
+    {
+     "title": "이용철 “수사지휘보다 진상규명 우선”…‘공소 취소’ 즉답은 또 피해",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-11T21:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012292185?sid=102"
     }
    ]
   },
   {
    "keyword": "무인 항공기",
    "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 3,
@@ -144,9 +209,39 @@
  "hitRate": {
   "days": 7,
   "flagged": 398,
-  "matched": 163,
-  "avgLeadMin": 756,
+  "matched": 167,
+  "avgLeadMin": 909,
   "recent": [
+   {
+    "keyword": "날씨",
+    "hitKeyword": "11월 12일 날씨",
+    "hitAt": "2026-11-12T06:30:00+09:00",
+    "leadMin": 9998
+   },
+   {
+    "keyword": "경제",
+    "hitKeyword": "AI붐 경제 영향",
+    "hitAt": "2026-11-12T06:30:00+09:00",
+    "leadMin": 9536
+   },
+   {
+    "keyword": "2026년 11월 6일 운세",
+    "hitKeyword": "11월 12일 날씨",
+    "hitAt": "2026-11-12T06:30:00+09:00",
+    "leadMin": 8657
+   },
+   {
+    "keyword": "광주 아파트 화재",
+    "hitKeyword": "광주 아파트 화재",
+    "hitAt": "2026-11-12T06:30:00+09:00",
+    "leadMin": 408
+   },
+   {
+    "keyword": "트럼프 이란전쟁 종전",
+    "hitKeyword": "트럼프 이란 전쟁",
+    "hitAt": "2026-11-12T06:30:00+09:00",
+    "leadMin": 146
+   },
    {
     "keyword": "유럽 여객기 폭탄 위협",
     "hitKeyword": "유럽 학교 폭탄 협박",
@@ -176,36 +271,6 @@
     "hitKeyword": "유럽 학교 폭탄 협박",
     "hitAt": "2026-11-12T06:00:00+09:00",
     "leadMin": 26
-   },
-   {
-    "keyword": "데블스플랜3",
-    "hitKeyword": "데블스플랜3 장동민",
-    "hitAt": "2026-11-12T00:00:00+09:00",
-    "leadMin": 9086
-   },
-   {
-    "keyword": "장동민",
-    "hitKeyword": "데블스플랜3 장동민",
-    "hitAt": "2026-11-12T00:00:00+09:00",
-    "leadMin": 8962
-   },
-   {
-    "keyword": "이 대통령 유튜브 소통",
-    "hitKeyword": "빠니보틀 유튜브 수익",
-    "hitAt": "2026-11-11T23:00:00+09:00",
-    "leadMin": 8640
-   },
-   {
-    "keyword": "법원, 쿠팡 과징금 정지",
-    "hitKeyword": "국고채 담합 과징금",
-    "hitAt": "2026-11-11T23:00:00+09:00",
-    "leadMin": 7643
-   },
-   {
-    "keyword": "쿠팡 과징금 정지",
-    "hitKeyword": "국고채 담합 과징금",
-    "hitAt": "2026-11-11T23:00:00+09:00",
-    "leadMin": 7613
    }
   ]
  }
