@@ -919,6 +919,13 @@ contextBridge.exposeInMainWorld('api', {
     category?: string
   ): Promise<{ success: boolean; filePath?: string; previewDataUrl?: string; savedToLocal?: string; message?: string }> =>
     ipcRenderer.invoke('image:downloadAndSave', imageUrl, heading, postTitle, postId, category),
+  // [2026-11-11] Delete a reference-photo copy the app made (main refuses any path outside the reference-photo folder)
+  deleteReferenceCopy: (filePath: string): Promise<{ success: boolean; deleted?: boolean; message?: string }> =>
+    ipcRenderer.invoke('image:deleteReferenceCopy', filePath),
+  clearReferenceCopies: (): Promise<{ success: boolean; deleted: number; skipped: number; failed: number }> =>
+    ipcRenderer.invoke('image:clearReferenceCopies'),
+  referenceCopyExists: (filePath: string): Promise<{ success: boolean; exists: boolean; reason?: 'missing' | 'outside' | 'not-file' | 'invalid' }> =>
+    ipcRenderer.invoke('image:referenceCopyExists', filePath),
   // ✅ URL에서 이미지 수집
   collectImagesFromUrl: (url: string): Promise<{ success: boolean; images?: string[]; message?: string }> =>
     ipcRenderer.invoke('image:collectFromUrl', url),

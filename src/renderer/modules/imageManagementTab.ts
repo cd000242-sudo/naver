@@ -10,6 +10,7 @@ import { readRawPipelineSettings } from './pipelineConfig.js';
 import { bindAllStaticDropshotLoginUis } from './dropshotLoginUi.js';
 import { gsBindAllStaticUis } from './gensparkLoginUi.js';
 import { bindImageAiDisclosureSetting } from './imageAiDisclosureSetting.js';
+import { bindCodexReferenceImages } from './codexReferenceImages.js';
 import { headingTextSettingInstall } from './headingImageTextSetting.js';
 import { animatedGifSettingInstall } from './headingImageAnimatedSetting.js';
 import { resolveImageStudioSource } from '../../runtime/imageStudioPreferences.js';
@@ -131,6 +132,13 @@ export async function initImageManagementTab(): Promise<void> {
       if (kind === 'error') toastManager.error(message);
     },
   );
+  // [2026-11-11] 참고 사진 칸(#mgmt-codex-reference) — Codex 구독 이미지를 고를 때만 보인다. 목록은 지금 글에만 쓴다.
+  try {
+    bindCodexReferenceImages((message, kind) => {
+      appendLog(message, 'images-log-output');
+      if (kind === 'error') toastManager.error(message);
+    });
+  } catch (e) { console.warn('[ImageManagementTab] 참고 사진 칸 연결 실패:', e); }
   // [2026-11-03] 소제목 텍스트 포함하기 — 이미지 탭·풀오토 이미지 설정 두 체크박스가 config.headingImageTextInclude 하나를 쓴다.
   void headingTextSettingInstall((window as any).api, (message, kind) => {
     appendLog(message, 'images-log-output');

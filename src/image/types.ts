@@ -116,6 +116,12 @@ export interface GenerateImagesOptions {
   isFullAuto?: boolean; // ✅ 풀오토 모드 (100% 성공률 보장)
   referenceImagePath?: string; // ✅ 전역 참조 이미지 경로 (모든 이미지에 공통 적용)
   isShoppingConnect?: boolean; // ✅ 쇼핑커넥트 모드 여부
+  /**
+   * [2026-11-11] Codex subscription image only: the user's own reference photos (max 3), each marked person or product.
+   * Paths must sit inside an app-managed image folder (same rule as the shopping reference). When present they are the
+   * only references — the shopping representative photo is not mixed in. Other engines ignore it.
+   */
+  userReferenceImages?: Array<{ path: string; role: 'person' | 'product' }>;
   collectedImages?: string[]; // ✅ 수집된 이미지 URL 목록
   crawledImages?: string[]; // ✅ [2026-01-28] 크롤링에서 수집된 이미지 URL (img2img 참조용)
   stopCheck?: () => boolean; // ✅ [100점 수정] 중지 여부 확인 콜백

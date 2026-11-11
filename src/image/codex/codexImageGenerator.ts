@@ -8,6 +8,8 @@
 //   construction — it never depends on the order in which sessions finish or on file times across sessions.
 // - Shopping: an optional cleaned product photo is attached to EVERY session as image_gen's reference (codexReferenceImage.ts);
 //   a result that is only a byte copy of that photo fails its slot. Without it nothing changes.
+// - [2026-11-11] The user's own reference photos (1 to 3, each person or product) are attached to EVERY session the same way;
+//   a result that is a byte copy of ANY of them fails its slot. They never combine with the shopping photo.
 // - A slot that gets no image is an explicit failure ("N번 이미지를 받지 못함"). No other engine fills it, nothing is
 //   retried silently (no automatic fallback) — the subscription limit is the user's, a retry would spend it again.
 // - A subscription-level failure (limit reached, logged out, CLI missing, plan inactive...) is the same for every
@@ -19,8 +21,8 @@ import { resolveAgentImageProfile } from '../../agentCli/agentModelDefaults.js';
 import { CODEX_IMAGE_ENGINE } from '../../runtime/codexImagePolicy.js';
 import { assertCodexImageReady } from './codexImageReadiness.js';
 import { runCodexImageSession, type CodexImageSessionOptions, type CodexImageSessionResult } from './codexImageSession.js';
-import { withCodexAspectRatio, withCodexProductReference } from './codexImageInstruction.js';
-import { isCodexReferenceCopy, type CodexReferenceImage } from './codexReferenceImage.js';
+import { CODEX_MAX_REFERENCES, withCodexAspectRatio, withCodexProductReference, withCodexReferenceRoles } from './codexImageInstruction.js';
+import { isCodexReferenceCopy, type CodexReferenceImage, type CodexRoledReference } from './codexReferenceImage.js';
 
 /** How many single-image sessions run at the same time. */
 export const CODEX_IMAGE_CONCURRENCY = 4;
@@ -39,8 +41,8 @@ export interface CodexImageRuntime {
   /** Copies one result file into the app's image storage (same folder and format as every engine). */
   save(filePath: string, item: ImageRequestItem, postTitle?: string, postId?: string): Promise<GeneratedImage>;
   log(message: string): void;
-  /** True when a result file is a byte-identical copy of the reference photo (only asked when a reference is attached). */
-  isReferenceCopy(filePath: string, reference: CodexReferenceImage): Promise<boolean>;
+  /** True when a result file is a byte-identical copy of a reference photo (only asked when a reference is attached). */
+  isReferenceCopy(filePath: string, reference: CodexReferenceImage | readonly CodexReferenceImage[]): Promise<boolean>;
 }
 
 export interface CodexImageOptions {
@@ -51,6 +53,11 @@ export interface CodexImageOptions {
    * behaviour is exactly the plain one. A result that is only a copy of this photo fails its slot.
    */
   referenceImage?: CodexReferenceImage;
+  /**
+   * [2026-11-11] The user's own reference photos (already cleaned, 1 to 3, in the user's order) with their roles.
+   * Attached to EVERY session; the prompt gets the role wording. Not combinable with referenceImage.
+   */
+  userReferences?: readonly CodexRoledReference[];
   /** How often the stop request is polled; tests shorten it. */
   pollMs?: number;
 }
@@ -119,6 +126,13 @@ function describeError(error: unknown): string {
   return error instanceof Error ? error.message : String(error);
 }
 
+/** "인물 1 · 제품 2" — display only. */
+function describeReferenceRoles(references: readonly CodexRoledReference[]): string {
+  const people = references.filter((entry) => entry.role === 'person').length;
+  const products = references.length - people;
+  return [people > 0 ? `인물 ${people}` : '', products > 0 ? `제품 ${products}` : ''].filter(Boolean).join(' · ');
+}
+
 const seconds = (fromMs: number): number => Math.max(0, Math.round((Date.now() - fromMs) / 1000));
 
 export async function generateWithCodexImage(
@@ -131,11 +145,24 @@ export async function generateWithCodexImage(
   runtime: CodexImageRuntime = defaultRuntime(),
 ): Promise<GeneratedImage[]> {
   if (items.length === 0 || stopCheck?.()) return [];
+  const reference = options.referenceImage;
+  const userReferences = options.userReferences ?? [];
+  if (reference && userReferences.length > 0) {
+    throw new Error('Codex 구독 이미지: 상품 대표 사진과 사용자 참고 사진은 함께 쓸 수 없습니다. 참고 사진은 한 가지 방식으로만 넘겨 주세요.');
+  }
+  if (userReferences.length > CODEX_MAX_REFERENCES) {
+    throw new Error(`Codex 구독 이미지: 참고 사진은 최대 ${CODEX_MAX_REFERENCES}장까지 붙일 수 있습니다.`);
+  }
   await runtime.assertReady();
   const concurrency = Math.min(CODEX_IMAGE_CONCURRENCY, items.length);
   runtime.log(`🎨 Codex 구독 이미지 ${items.length}장 생성 중 (${resolveAgentImageProfile('codex').model}) · 동시 ${concurrency}개`);
-  const reference = options.referenceImage;
   if (reference) runtime.log(`🛒 상품 사진 1장을 참고로 붙여 ${items.length}장 생성`);
+  if (userReferences.length > 0) {
+    runtime.log(`🖼️ 참고 사진 ${userReferences.length}장(${describeReferenceRoles(userReferences)})을 붙여 ${items.filter((entry) => entry.isThumbnail !== true).length}장 생성`);
+  }
+  const copyTargets = reference ?? userReferences.map((entry) => entry.image);
+  const userRoles = userReferences.map((entry) => entry.role);
+  const sessionReferences = userReferences.map(({ image }) => ({ buffer: image.buffer, fileName: image.fileName }));
 
   const startedAt = Date.now();
   const abort = new AbortController();
@@ -157,23 +184,29 @@ export async function generateWithCodexImage(
   const drawOne = async (index: number): Promise<void> => {
     const item = items[index];
     const sessionStartedAt = Date.now();
+    // A thumbnail card never gets the user's photos (the shopping thumbnail is the original photo already).
+    const attachUserReferences = userReferences.length > 0 && item.isThumbnail !== true;
     try {
-      // The product line goes before the ratio line, so the prompt still ends with the ratio line.
-      const prompt = withCodexAspectRatio(reference ? withCodexProductReference(item.prompt) : item.prompt, (item as { imageRatio?: unknown }).imageRatio);
+      // The reference line goes before the ratio line, so the prompt still ends with the ratio line.
+      const withReference = reference
+        ? withCodexProductReference(item.prompt)
+        : attachUserReferences ? withCodexReferenceRoles(item.prompt, userRoles) : item.prompt;
+      const prompt = withCodexAspectRatio(withReference, (item as { imageRatio?: unknown }).imageRatio);
       const session = await runtime.runSession([prompt], {
         signal: abort.signal,
         timeoutMs: SESSION_TIMEOUT_MS,
         ...(reference ? { referenceImage: { buffer: reference.buffer, fileName: reference.fileName } } : {}),
+        ...(attachUserReferences ? { referenceImages: sessionReferences } : {}),
       });
       if (session.files.length > 1) {
         runtime.log(`⚠️ Codex 구독 이미지: ${index + 1}번에 1장을 부탁했는데 ${session.files.length}장이 만들어져 첫 장만 씁니다`);
       }
       const file = session.files[0];
       if (!file) { reasons.set(index, ''); return; }
-      if (reference) {
-        // A file that is only the reference photo handed back is not a new image: the slot fails (no other engine fills it).
+      if (reference || attachUserReferences) {
+        // A file that is only a reference photo handed back is not a new image: the slot fails (no other engine fills it).
         let copied: boolean;
-        try { copied = await runtime.isReferenceCopy(file, reference); }
+        try { copied = await runtime.isReferenceCopy(file, copyTargets); }
         catch (checkError) { reasons.set(index, `결과 파일을 확인하지 못함: ${describeError(checkError)}`); return; }
         if (copied) { reasons.set(index, '참고 사진을 그대로 복사한 결과라 버렸습니다'); return; }
       }

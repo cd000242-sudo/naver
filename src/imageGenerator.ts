@@ -28,6 +28,7 @@ import {
 } from './image/genspark/gensparkSession.js';
 
 import { downloadAndSaveImage } from './image/imageUtils.js';
+import { resolveHasReferenceImage, userReferenceRolesOf } from './image/codex/codexUserReferencePolicy.js';
 import { getImageErrorMessage } from './image/imageErrorMessages.js';
 import {
   deduplicateReferenceImages,
@@ -556,6 +557,8 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
   let representativeReferenceUrl = shoppingReference.referenceUrl || crawledImages[0] || '';
   // [2026-11-05] The loaded photo itself (not just its source string) is kept: the Codex engine attaches its bytes.
   let shoppingReferenceData: LoadedReferenceImageData | null = null;
+  // [2026-11-11] Roles of the user's own Codex reference photos (empty for every other engine / when none were given).
+  const userReferenceRoles = isCodexImageEngine(normalizedProvider) ? userReferenceRolesOf(options.userReferenceImages) : [];
   if (options.isShoppingConnect && representativeCandidate) {
     const allowedReferenceRoots = await resolveManagedReferenceImageRoots();
     try {
@@ -567,13 +570,21 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     } catch {
       shoppingReference = resolveShoppingRepresentativeReference(shoppingReferenceCandidates);
       representativeCandidate = shoppingReference.representative;
-      const loadedFallback = representativeCandidate
-        ? await loadReferenceImageData(representativeCandidate, {
-            allowedLocalRoots: allowedReferenceRoots,
-          })
-        : null;
+      let loadedFallback: LoadedReferenceImageData | null = null;
+      let fallbackFailed = false;
+      try {
+        loadedFallback = representativeCandidate
+          ? await loadReferenceImageData(representativeCandidate, {
+              allowedLocalRoots: allowedReferenceRoots,
+            })
+          : null;
+      } catch (fallbackError) {
+        // With the user's own photos as the only references, an unreadable collected photo must not stop the call.
+        if (userReferenceRoles.length === 0) throw fallbackError;
+        fallbackFailed = true;
+      }
       shoppingReferenceData = loadedFallback;
-      representativeReferenceUrl = loadedFallback?.source || '';
+      if (!fallbackFailed) representativeReferenceUrl = loadedFallback?.source || '';
     }
   }
   const orderedCollectedImages = options.isShoppingConnect
@@ -693,7 +704,11 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         allowText,
         isThumbnail: item.isThumbnail === true,
         isShoppingConnect: options.isShoppingConnect === true,
-        hasReferenceImage: options.isShoppingConnect === true && Boolean(representativeReferenceUrl),
+        hasReferenceImage: resolveHasReferenceImage({
+          userRoles: userReferenceRoles,
+          isThumbnail: item.isThumbnail === true,
+          shoppingHasReference: options.isShoppingConnect === true && Boolean(representativeReferenceUrl),
+        }),
         viewpointIndex,
         // [2026-09-08] 각도를 스스로 돌리는 엔진에는 브리프가 카메라 줄을 넣지 않는다.
         //   종전에는 생성기가 앞머리에 각도를 박고 브리프가 뒤에서 "알맞은 시점을 골라라"
@@ -987,16 +1002,25 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
       const { generateWithCodexImage } = await import('./image/codex/codexImageGenerator.js');
       // [2026-11-05] Shopping: the representative product photo goes to every section session as the reference.
       //   A photo that cannot be loaded stops here (SHOPPING_REFERENCE_LOAD_FAILED) — never a reference-free image.
-      const codexReference = options.isShoppingConnect && items.length > 0
-        ? await (await import('./image/codex/codexReferenceImage.js')).prepareCodexReferenceImage(shoppingReferenceData?.buffer)
-        : undefined;
+      // [2026-11-11] The user's own reference photos (max 3, person/product) win: when present they are the only
+      //   references (never mixed with the shopping photo). Unreadable photos stop here (USER_REFERENCE_LOAD_FAILED).
+      let userReferenceRoots: Promise<string[]> | undefined;
+      const codexReferences = await (await import('./image/codex/codexUserReferences.js')).resolveCodexReferenceInputs({
+        userReferenceImages: options.userReferenceImages,
+        isShoppingConnect: Boolean(options.isShoppingConnect),
+        hasItems: items.length > 0,
+        shoppingBuffer: shoppingReferenceData?.buffer,
+        loadUserReference: async (referencePath) => loadReferenceImageData(referencePath, {
+          allowedLocalRoots: await (userReferenceRoots ??= resolveManagedReferenceImageRoots()),
+        }),
+      });
       const codexImages = await generateWithCodexImage(
         items,
         options.postTitle,
         options.postId,
         options.stopCheck,
         onImageGenerated,
-        { allowPartial: options.allowPartialResults === true, ...(codexReference ? { referenceImage: codexReference } : {}) },
+        { allowPartial: options.allowPartialResults === true, ...codexReferences },
       );
       if (codexImages.length === 0) {
         if (options.stopCheck?.()) return [];

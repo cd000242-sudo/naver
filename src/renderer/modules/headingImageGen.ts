@@ -7,11 +7,14 @@ import { resolveSectionContentForImage } from '../../image/contextualImagePrompt
 import { buildHeadingImageContext, looksLikeUntranslatedPrompt } from './headingImageContext.js';
 import { createShoppingCollectedPublishImages } from '../../image/shoppingReferenceGeneration.js';
 import { getSubImageMode } from '../utils/subImageMode.js';
+import { collectImageTabUrlImages } from '../utils/shoppingCollectToPool.js';
 import { beginImagePreviewBatch, endImagePreviewBatch, setImagePreviewBatchSlot } from './imagePreviewBatch.js';
 import { hideAppProgressModal, showAppProgressModal } from '../utils/appProgressModal.js';
 import { extractSemiAutoDocumentFromBody } from '../utils/semiAutoHeadingExtractor.js';
 import { attachImagePickerPreview } from './imagePickerPreview.js';
 import { gsPrefetchBatchProvider, gsPrefetchBodyIndexes, gsPrefetchLabel, gsPrefetchMatchImages } from '../../image/fullAuto/gensparkBodyPrefetch.js';
+import { codexUserReferenceOptions, describeCodexReferenceReflectionNow } from '../utils/codexReferenceImageList.js';
+import { refreshCodexReferenceImages, reportCodexReferenceFailure } from './codexReferenceImages.js';
  
 
 // --- Global declarations (exposed by renderer.ts via window) ---
@@ -63,6 +66,8 @@ declare function generateEnglishPromptForHeading(title: string, subtitle?: strin
 declare function getManualEnglishPromptOverrideForHeading(heading: string): string;
 declare function clearManualEnglishPromptOverrideForHeading(heading: string): void;
 declare function generateImagesWithCostSafety(options: any): Promise<any>;
+// [2026-11-11] Same bundle scope (codexReferenceImageList.ts): a re-created copy of the SAME post keeps the Codex reference photos.
+declare function inheritCodexReferenceKey(previous: unknown, next: unknown): string;
 declare function readSelectedImageSource(): string;
 declare function resolveImageRegenerateRoute(source: unknown): { kind: 'generate'; provider: string } | { kind: 'blocked'; message: string };
 declare function buildImageRegenerateRequest(heading: string, prompt: string, stored?: any): { items: any[]; postTitle: string; isFullAuto: true; thumbnailTextInclude?: boolean; missingEnglishPrompt: boolean };
@@ -136,6 +141,8 @@ function resolveStructuredContentForHeadingAnalysis(): any | null {
       return { ...previous, ...heading, prompt: previous?.prompt || heading.prompt || heading.title, source: 'image-tab:body-heading' };
     }),
   };
+  // `target` is the same article re-analysed as a new object: it carries the identity of the live one (reference photos stay).
+  if (typeof inheritCodexReferenceKey === 'function') inheritCodexReferenceKey(live, target);
   currentStructuredContent = target;
   (window as any).currentStructuredContent = target;
   return target;
@@ -313,6 +320,7 @@ export function initHeadingImageGeneration(): void {
         const result = await generateImagesWithCostSafety({
           provider,
           items: itemsWithPrompts,
+          ...codexUserReferenceOptions(provider),
           postTitle: currentStructuredContent?.selectedTitle,
           postId: currentPostId || undefined,
           isFullAuto: true
@@ -1431,6 +1439,7 @@ export function initHeadingImageGeneration(): void {
                 isShoppingConnect: true,
                 collectedImages: scPool,
                 thumbnailTextInclude: isThumbnailSection ? thumbnailTextInclude : false,
+                ...codexUserReferenceOptions(imageSource, { isThumbnail: isThumbnailSection }),
               });
               if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
                 imageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
@@ -1541,6 +1550,7 @@ export function initHeadingImageGeneration(): void {
                 }],
                 postTitle: blogTitle,
                 isFullAuto: true,
+                ...codexUserReferenceOptions(imageSource, { isThumbnail: isThumbnailSection }),
               });
               if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
                 imageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
@@ -1603,6 +1613,7 @@ export function initHeadingImageGeneration(): void {
               return null;
             }
             appendLog(`❌ [${completedCount}/${totalHeadings}] 이미지 생성 실패: ${(error as Error).message}`, 'images-log-output');
+            reportCodexReferenceFailure((error as Error)?.message);
             showImagesProgress(currentProgress, `이미지 생성 중... (${completedCount}/${totalHeadings})`, `"${heading.title}" 이미지 생성 실패`);
             // ✅ [2026-02-02] 실시간 미리보기 업데이트
             liveImagePreview.updateItem(i, 'failed');
@@ -1638,6 +1649,7 @@ export function initHeadingImageGeneration(): void {
             const gsTabResult = await generateImagesWithCostSafety({
               provider: imageSource,
               items: gsTabBatch,
+              ...codexUserReferenceOptions(imageSource),
               postTitle: blogTitle,
               isFullAuto: true,
               allowPartialResults: true,
@@ -2359,18 +2371,42 @@ export function initHeadingImageGeneration(): void {
         urlOnlyCollectBtn.innerHTML = '<span>🔄</span><span>URL 이미지 수집 중...</span>';
         appendLog(`🔗 URL 전용 이미지 수집 시작: ${sourceUrl.slice(0, 80)}`, 'images-log-output');
 
-        // ✅ [v2.7.87] image:crawlFromUrl IPC 직접 호출 — URL의 모든 이미지 가져오기
-        const crawlResult = await (window as any).api.crawlImagesFromUrl(sourceUrl);
-        if (!crawlResult?.success || !Array.isArray(crawlResult.images) || crawlResult.images.length === 0) {
-          throw new Error(crawlResult?.message || '페이지에서 이미지를 찾지 못했습니다');
+        /*
+         * [2026-11-11] 쇼핑몰 주소(단축 주소 포함)는 풀오토와 같은 쇼핑 수집기로 모으고,
+         * 대표 표시 + 로컬 저장 + currentStructuredContent.collectedImages 동기화까지 같은 방식으로 한다.
+         * 그 밖의 주소는 예전처럼 일반 페이지 크롤러(image:crawlFromUrl). 쇼핑 수집이 실패해도
+         * 일반 크롤러로 몰래 넘어가지 않고 이유를 그대로 보여 준다.
+         */
+        const collected = await collectImageTabUrlImages((window as any).api, sourceUrl, {
+          title: userTitle,
+          content: currentStructuredContent || (window as any).currentStructuredContent || null,
+        });
+        if (!collected.ok) {
+          if (collected.notice) appendLog(`ℹ️ ${collected.notice}`, 'images-log-output');
+          if (collected.kind === 'shopping') {
+            appendLog(`❌ 쇼핑몰 이미지 수집 실패: ${collected.message}`, 'images-log-output');
+            if ((window as any).toastManager) (window as any).toastManager.error(`❌ 쇼핑몰 이미지 수집 실패: ${collected.message}`);
+            return;
+          }
+          throw new Error(collected.message);
         }
-        const allImages: string[] = crawlResult.images;
-        appendLog(`📥 URL 페이지에서 ${allImages.length}개 이미지 발견`, 'images-log-output');
+        if (collected.notice) {
+          appendLog(`ℹ️ ${collected.notice}`, 'images-log-output');
+          if ((window as any).toastManager) (window as any).toastManager.warning(`ℹ️ ${collected.notice}`);
+        }
+        refreshCodexReferenceImages();
+        const allImages: string[] = collected.imageUrls;
+        if (collected.kind === 'shopping') {
+          appendLog(`🛒 쇼핑몰 상품 이미지 ${allImages.length}개 수집 (풀오토와 같은 방식)`, 'images-log-output');
+          appendLog(describeCodexReferenceReflectionNow(collected.poolSynced), 'images-log-output');
+        } else {
+          appendLog(`📥 URL 페이지에서 ${allImages.length}개 이미지 발견`, 'images-log-output');
+        }
 
         // ✅ [v2.7.88] 폴더명 결정 (페이지 title 폴백)
         let postTitle = userTitle;
         if (!postTitle) {
-          const pageTitle = String(crawlResult.title || '').trim();
+          const pageTitle = String(collected.title || '').trim();
           if (pageTitle) {
             // 네이버 블로그 " : 네이버 블로그" 접미사 제거
             postTitle = pageTitle.replace(/\s*[:|·]\s*네이버\s*블로그\s*$/i, '').trim();
@@ -2433,15 +2469,24 @@ export function initHeadingImageGeneration(): void {
           const heading = headingTitles[i] || `🔗 URL 이미지 ${i + 1}`;
           let filePath: string | undefined;
           let previewDataUrl: string | undefined;
+          // 쇼핑 수집은 풀을 만들 때 이미 로컬에 저장했다 — 같은 사진을 두 번 내려받지 않는다.
+          const preSaved = collected.pooledImages[i];
           try {
-            const dl = await (window as any).api.downloadAndSaveImage(imgUrl, heading, postTitle, postId);
-            if (dl?.success && dl.filePath) {
-              filePath = dl.filePath;
-              previewDataUrl = dl.previewDataUrl;
+            if (preSaved?.localPath) {
+              filePath = preSaved.localPath;
+              previewDataUrl = preSaved.previewDataUrl;
               savedCount++;
               appendLog(`💾 ${i + 1}/${allImages.length}: ${(filePath || '').split(/[\\/]/).pop() || ''}`, 'images-log-output');
             } else {
-              appendLog(`⚠️ ${i + 1}/${allImages.length} 저장 실패: ${dl?.message || 'unknown'}`, 'images-log-output');
+              const dl = await (window as any).api.downloadAndSaveImage(imgUrl, heading, postTitle, postId);
+              if (dl?.success && dl.filePath) {
+                filePath = dl.filePath;
+                previewDataUrl = dl.previewDataUrl;
+                savedCount++;
+                appendLog(`💾 ${i + 1}/${allImages.length}: ${(filePath || '').split(/[\\/]/).pop() || ''}`, 'images-log-output');
+              } else {
+                appendLog(`⚠️ ${i + 1}/${allImages.length} 저장 실패: ${dl?.message || 'unknown'}`, 'images-log-output');
+              }
             }
           } catch (e: any) {
             appendLog(`⚠️ ${i + 1}/${allImages.length} 다운로드 오류: ${e?.message?.slice(0, 50)}`, 'images-log-output');
@@ -2501,7 +2546,7 @@ export function initHeadingImageGeneration(): void {
 
         appendLog(`✅ URL 이미지 수집 완료: ${savedCount}/${allImages.length}개 폴더 저장 + 배치`, 'images-log-output');
         if (savedCount > 0) {
-          appendLog(`📁 저장 위치: Downloads/naver-blog-images/${postTitle}/`, 'images-log-output');
+          appendLog(`📁 저장 위치: ${collected.folderPath || `Downloads/naver-blog-images/${postTitle}/`}`, 'images-log-output');
         }
         if ((window as any).toastManager) (window as any).toastManager.success(`✅ URL 이미지 ${savedCount}/${allImages.length}개 수집 완료`);
       } catch (e: any) {
@@ -5316,6 +5361,7 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
         isShoppingConnect: true,
         collectedImages: scPool,
         thumbnailTextInclude: allowTextForRegen ? thumbnailTextInclude : false,
+        ...codexUserReferenceOptions(imageSource, { isThumbnail: headingIndex === 0 }),
       });
       if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
         imageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
@@ -5375,6 +5421,7 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
         items: [{ heading: resolvedHeadingTitle, prompt: finalPrompt, isThumbnail: headingIndex === 0, allowText: allowTextForRegen, ...imageContextFields }],
         postTitle: blogTitle,
         isFullAuto: true,
+        ...codexUserReferenceOptions(imageSource, { isThumbnail: headingIndex === 0 }),
       });
       if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
         imageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;

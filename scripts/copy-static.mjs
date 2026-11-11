@@ -217,6 +217,15 @@ try {
     'imageCostUtils.js',
     'shoppingConnectUtils.js',
     'shoppingImageLocalSave.js',
+    // [2026-11-11] 쇼핑 수집 → 풀 정리(풀오토 + 이미지 탭 URL 수집 공용). shoppingImageLocalSave 를 쓰므로 그 뒤에 로드.
+    //   식별자는 shoppingCollect / ShoppingCollect 접두사로 유일.
+    'shoppingCollectToPool.js',
+    // [2026-11-11] Codex 참고 사진 목록 규칙 + 지금 글 보관소 (fullAutoUtils·headingImageGen 이 import — 먼저 로드). 식별자는 codexRef/CODEX_REFERENCE 접두사로 유일.
+    'codexReferenceImageList.js',
+    // [2026-11-11] 이미지 탭 요청에 참고 사진을 한 곳에서 붙이는 판단 (costAndAutoGen 이 import — 먼저 로드). codexRef 접두사로 유일.
+    'codexReferenceCentral.js',
+    // [2026-11-11] 가져온 원고(반자동)의 글 표식 (renderer.ts 가 import — 먼저 로드). importedManuscript 접두사로 유일.
+    'importedManuscriptStamp.js',
     // ✅ [2026-05-18] scSubImageSource 키 충돌 분리: mode/engine 정규화 헬퍼
     //   HeadingImageSettings/continuousPublishing/imageManagementTab/multiAccountManager에서 import.
     //   누락 시 renderer ReferenceError → 메인 풀오토 "수집 이미지 사용" 분기 회귀.
@@ -581,6 +590,7 @@ try {
     'agentQuotaBadge.js',          // [2026-08-26] 에이전트 구독 잔여 배찌
     'noticeAdmin.js',
     'imageAiDisclosureSetting.js',
+    'codexReferenceImages.js',  // [2026-11-11] 이미지 탭 참고 사진 칸 (imageManagementTab·headingImageGen 이 import — 먼저 로드)
     'imageManagementTab.js',
     'guideModals.js',
     'dashboardUI.js',

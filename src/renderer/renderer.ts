@@ -274,6 +274,7 @@ import { getGlobalImageSettings, hydrateImageManagerFromImages, syncGlobalImages
 import { installDialogFocusGuard } from './utils/dialogFocusGuard.js';
 installDialogFocusGuard();
 import { autoSearchAndPopulateImages, runUiActionLockedCompat, ensureExternalApiCostConsent, reserveExternalApiImageQuota, generateImagesWithCostSafety, ensurePromptCardRemoveHandler } from './modules/costAndAutoGen.js';
+import { bindManuscriptBodyWatch, isWholeManuscriptReplacement, markImportedManuscript } from './utils/importedManuscriptStamp.js';
 
 const MODAL_BACKDROP_CONTENT_SELECTOR = [
   '.modal-content',
@@ -4474,6 +4475,8 @@ async function initUnifiedTab(): Promise<void> {
       _manualPasted: true,
     };
     (window as any).currentStructuredContent = sc;
+    // [2026-11-11] A new manuscript object: stamp it so the Codex reference photos of a previous manuscript are dropped.
+    markImportedManuscript(sc);
     // 발행 버튼 활성화 + 미리보기 표시
     try { (window as any).markContentGenerated?.(); } catch { /* noop */ }
     try {
@@ -4755,6 +4758,15 @@ async function initUnifiedTab(): Promise<void> {
         (window as any).toastManager?.success?.(`📋 자동 분배 완료 (소제목 ${parsed.headings.length}개)`);
       } catch { /* noop */ }
     };
+
+    // [2026-11-11] A paste over the whole filled body brings in another manuscript: renew its stamp before the text changes,
+    //   so the Codex reference photos of the previous manuscript are dropped. A paste at the caret or over a part keeps them.
+    semiAutoContent.addEventListener('paste', () => {
+      if (isWholeManuscriptReplacement(semiAutoContent)) markImportedManuscript((window as any).currentStructuredContent);
+    });
+    // [2026-11-11] The other ways another manuscript takes the body: typing/drop/IME start over the whole text, or the body
+    //   emptied and then filled again (undo keeps it). The first fill of an empty body is not a new manuscript.
+    bindManuscriptBodyWatch(semiAutoContent, () => (window as any).currentStructuredContent);
 
     semiAutoContent.addEventListener('paste', () => {
       const pasteRevision = Number((window as any).__semiAutoPasteRevision || 0) + 1;

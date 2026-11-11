@@ -30,6 +30,7 @@ import { describeFullAutoImageReview } from '../../image/fullAuto/fullAutoPublis
 import { describeFullAutoImageStage } from '../../image/fullAuto/fullAutoImageSlots.js';
 import { recheckFullAutoDecisionBeforePublish, runFullAutoImages } from '../../image/fullAuto/fullAutoImageRunner.js';
 import { publishPreflightEnsureReady } from './publishStartPreflight.js';
+import { applyShoppingCollectedToContent, prepareShoppingCollectedImages } from '../utils/shoppingCollectToPool.js';
 
 declare let currentStructuredContent: any;
 declare let generatedImages: any[];
@@ -842,27 +843,15 @@ export async function handleFullAutoPublish(): Promise<void> {
           appendLog(`✅ 제품 이미지 ${collectResult.images.length}개 수집 완료`);
 
           // 수집된 이미지를 전역 변수에 저장 (generateImagesForAutomation에서 사용)
-          const collectedImages = collectResult.images.map((imgUrl: string, idx: number) => ({
-            url: imgUrl,
-            filePath: imgUrl,
-            heading: `제품 이미지 ${idx + 1}`,
-            provider: 'collected',
-            source: idx === 0 ? 'product-main' : 'product-gallery',
-            isRepresentative: idx === 0,
-          }));
-
-          // 기존 이미지와 병합
-          const localSaveResult = await saveCollectedShoppingImagesToLocal(
-            collectedImages,
-            collectResult.productInfo?.name || structuredContent?.selectedTitle || (formData as any).postTitle || formData.title || 'shopping-connect-images',
-            { headingPrefix: '상품 이미지' }
+          // [2026-11-11] 대표 표시(0번) + 로컬 저장은 이미지 탭 URL 수집과 공용 (shoppingCollectToPool)
+          const preparedCollected = await prepareShoppingCollectedImages(
+            collectResult.images,
+            collectResult.productInfo?.name || structuredContent?.selectedTitle || (formData as any).postTitle || formData.title || 'shopping-connect-images'
           );
-          if (localSaveResult.images.length > 0) {
-            collectedImages.splice(0, collectedImages.length, ...localSaveResult.images);
-          }
-          if (localSaveResult.folderPath) {
-            modal.addLog(`📁 수집 이미지 저장 위치: ${localSaveResult.folderPath}`);
-            appendLog(`📁 수집 이미지 저장 위치: ${localSaveResult.folderPath}`);
+          const collectedImages = preparedCollected.images;
+          if (preparedCollected.folderPath) {
+            modal.addLog(`📁 수집 이미지 저장 위치: ${preparedCollected.folderPath}`);
+            appendLog(`📁 수집 이미지 저장 위치: ${preparedCollected.folderPath}`);
           }
 
           const existing = (window as any).imageManagementGeneratedImages || [];
@@ -883,14 +872,10 @@ export async function handleFullAutoPublish(): Promise<void> {
 
           // ✅ [2026-01-21 FIX] currentStructuredContent.images에도 저장 (generateImagesWithCostSafety에서 참조)
           if (structuredContent) {
-            structuredContent.images = isShoppingAiImageMode
-              ? []
-              : [...collectedImages, ...(structuredContent.images || [])];
+            // images: shopping AI mode empties it, otherwise collected first (policy 'clear' / 'prepend').
             // ✅ [2026-02-01 FIX] collectedImages에도 저장하여 generateAIImagesForHeadings에서 중복 크롤링 방지
-            structuredContent.collectedImages = resolveShoppingRepresentativeReference([
-              ...collectedImages,
-              ...(structuredContent.collectedImages || []),
-            ]).images;
+            //   (dedupe + representative first — shared with the image tab URL collect)
+            applyShoppingCollectedToContent(structuredContent, collectedImages, isShoppingAiImageMode ? 'clear' : 'prepend');
             currentStructuredContent = structuredContent;
             (window as any).currentStructuredContent = structuredContent;
             console.log('[FullAutoPublish] structuredContent.images/collectedImages에 수집 이미지 동기화:', structuredContent.images.length);
@@ -2253,6 +2238,9 @@ function _reSyncHeadingsContentLegacy(headings: any[], editedBody: string): any[
   });
 }
 
+// [2026-11-11] Same bundle scope (codexReferenceImageList.ts): a re-created copy of the SAME post keeps the Codex reference photos.
+declare function inheritCodexReferenceKey(previous: unknown, next: unknown): string;
+
 // [2026-10-21] options.ldbAutoDraft: LDB 자동 임시저장(무인). 확인창·알림 대신 오류로 멈추고, 임시저장 외 모드는 거부한다.
 export async function handleSemiAutoPublish(options: { ldbAutoDraft?: boolean } = {}): Promise<any> {
   const { title, content, ready } = readSemiAutoEditorDraft();
@@ -2398,6 +2386,8 @@ export async function handleSemiAutoPublish(options: { ldbAutoDraft?: boolean } 
   // ✅ [2026-02-27 FIX] 전역 변수 즉시 업데이트 (핵심!)
   // 다중계정 발행 시 handleMultiAccountPublish가 (window).currentStructuredContent를 읽으므로
   // 여기서 업데이트하지 않으면 stale bodyPlain이 resolveRunOptions에서 우선 적용됨
+  // The edited copy is the same article: it keeps the identity (and so the Codex reference photos) of the one it was made from.
+  if (typeof inheritCodexReferenceKey === 'function') inheritCodexReferenceKey(structuredContent, updatedStructuredContent);
   (window as any).currentStructuredContent = updatedStructuredContent;
   currentStructuredContent = updatedStructuredContent;
 

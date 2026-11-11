@@ -16,6 +16,7 @@ import { assertShoppingReferenceGenerationSelectionSupported } from '../../image
 import { reconcileOpenaiImageModelSelection } from '../../image/openaiImageModelReconcile.js';
 import { resolveImagePreviewPosition } from './imagePreviewBatch.js';
 import { fullAutoAssetLabel } from '../../image/fullAuto/fullAutoImageAsset.js';
+import { checkCodexReferenceBeforeCall, resolveCodexReferenceForCall } from '../utils/codexReferenceCentral.js';
 
 // 전역 스코프 의존성
 declare let generatedImages: any[];
@@ -871,8 +872,22 @@ async function reserveExternalApiImageQuota(provider: string, requestCount: numb
 
 
 
+// [2026-11-11] Reference-photo stops (USER_REFERENCE_*) are shown on screen from this one place, so batch, regenerate and
+// full-auto paths all tell the user why. The function lives in codexReferenceImages.ts (same bundle scope).
+declare function reportCodexReferenceFailure(message: unknown): void;
+function reportCodexReferenceStop(message: unknown): void {
+  if (typeof reportCodexReferenceFailure === 'function') reportCodexReferenceFailure(message);
+}
+
 async function generateImagesWithCostSafety(options: any): Promise<any> {
-  return runQueuedImageGeneration(options, () => generateImagesWithCostSafetyInternal(options));
+  try {
+    const result = await runQueuedImageGeneration(options, () => generateImagesWithCostSafetyInternal(options));
+    if (result && result.success === false) reportCodexReferenceStop(result.message ?? result.error);
+    return result;
+  } catch (error) {
+    reportCodexReferenceStop((error as Error)?.message);
+    throw error;
+  }
 }
 
 async function generateImagesWithCostSafetyInternal(options: any): Promise<any> {
@@ -952,6 +967,14 @@ async function generateImagesWithCostSafetyInternal(options: any): Promise<any> 
     }
   }
   provider = String(options?.provider || provider || '').trim();
+  // [2026-11-11] Codex reference photos are attached here once for every image-tab request (batch, per-cell, regenerate);
+  //   automatic publishing runs, thumbnail-only requests and requests that already carry photos are left alone.
+  // A photo whose copy file is gone stops the request here (it leaves the list; pressing again goes on with the rest).
+  // Nothing is generated with fewer photos behind the user's back. Other failures reach the user through the main process.
+  const referenceStop = await checkCodexReferenceBeforeCall(options, provider);
+  if (referenceStop) return { success: false, images: [], message: referenceStop };
+  const codexReference = resolveCodexReferenceForCall(options, provider);
+  if (codexReference.userReferenceImages) options = { ...options, ...codexReference };
   if (provider === 'openai-image') {
     /*
      * [2026-08-25 · 09-01 · 09-02 세 번째] "gpt-image-2 를 골랐는데 2 를 선택하라고 한다."

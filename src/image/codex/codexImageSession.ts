@@ -14,13 +14,18 @@ import { buildCodexSubscriptionEnv } from '../../agentCli/subscriptionEnv.js';
 import { AgentCliError, type AgentErrorCode } from '../../agentCli/types.js';
 import { buildAgentFailureMessage, buildModelUnavailableMessage } from '../../agentCli/failureMessage.js';
 import { resolveAgentImageProfile } from '../../agentCli/agentModelDefaults.js';
-import { buildCodexImageInstruction } from './codexImageInstruction.js';
+import { buildCodexImageInstruction, CODEX_MAX_REFERENCES } from './codexImageInstruction.js';
 import { extractCodexErrorText, listGeneratedImages, parseCodexThreadId, resolveCodexHome } from './codexImageFiles.js';
 
 export interface CodexImageSessionDeps {
   spawn(args: SpawnArgs): Promise<SpawnResult>;
   env(): NodeJS.ProcessEnv;
   now(): number;
+}
+
+export interface CodexSessionReferenceFile {
+  buffer: Buffer;
+  fileName: string;
 }
 
 export interface CodexImageSessionOptions {
@@ -32,7 +37,12 @@ export interface CodexImageSessionOptions {
    * [2026-11-05] Shopping product photo. Written into this session's work folder (removed with it) and passed to the
    * image tool as its reference. Only a one-image session can carry it.
    */
-  referenceImage?: { buffer: Buffer; fileName: string };
+  referenceImage?: CodexSessionReferenceFile;
+  /**
+   * [2026-11-11] The user's reference photos (1 to 3, file names reference-01.png ... in order). Same rules as
+   * referenceImage; one photo behaves exactly like referenceImage. Not combinable with referenceImage.
+   */
+  referenceImages?: readonly CodexSessionReferenceFile[];
 }
 
 export interface CodexImageSessionResult {
@@ -61,27 +71,39 @@ function failure(code: AgentErrorCode, detail: string, model: string | undefined
   return new AgentCliError(code, 'codex', message, detail);
 }
 
+/** The reference files of this session, checked before any work folder exists. */
+function collectReferences(options: CodexImageSessionOptions): CodexSessionReferenceFile[] {
+  const list = options.referenceImages ?? [];
+  if (options.referenceImage && list.length > 0) throw new Error('Codex 구독 이미지: 참고 사진은 한 가지 방식으로만 넘길 수 있습니다.');
+  const references = options.referenceImage ? [options.referenceImage] : [...list];
+  if (references.length > CODEX_MAX_REFERENCES) throw new Error(`Codex 구독 이미지: 참고 사진은 최대 ${CODEX_MAX_REFERENCES}장까지 붙일 수 있습니다.`);
+  const seen = new Set<string>();
+  for (const { fileName } of references) {
+    // The reference file name becomes a path inside the work folder: a plain file name only, never a path.
+    if (!fileName || /[\\/]|^\.+$/.test(fileName)) throw new Error('Codex 구독 이미지: 참고 사진 파일 이름이 올바르지 않습니다.');
+    if (seen.has(fileName.toLowerCase())) throw new Error('Codex 구독 이미지: 참고 사진 파일 이름이 겹칩니다.');
+    seen.add(fileName.toLowerCase());
+  }
+  return references;
+}
+
 export async function runCodexImageSession(
   prompts: readonly string[],
   options: CodexImageSessionOptions = {},
   deps: CodexImageSessionDeps = defaultDeps,
 ): Promise<CodexImageSessionResult> {
   const { model, effort } = resolveAgentImageProfile('codex', options.model);
-  const reference = options.referenceImage;
-  // The reference file name becomes a path inside the work folder: a plain file name only, never a path.
-  if (reference && (!reference.fileName || /[\\/]|^\.+$/.test(reference.fileName))) {
-    throw new Error('Codex 구독 이미지: 참고 사진 파일 이름이 올바르지 않습니다.');
-  }
+  const references = collectReferences(options);
   // Checks the prompts (and the one-image-only rule of a reference) before any work folder exists.
-  let instruction = buildCodexImageInstruction(prompts, reference?.fileName);
+  let instruction = buildCodexImageInstruction(prompts, references.length > 0 ? references.map((reference) => reference.fileName) : undefined);
   const env = deps.env();
   const startedAt = deps.now();
   const cwd = await mkdtemp(join(tmpdir(), 'agentcli-codex-image-'));
   try {
-    if (reference) {
-      const referenceFile = join(cwd, reference.fileName);
-      await writeFile(referenceFile, reference.buffer);
-      instruction = buildCodexImageInstruction(prompts, referenceFile);
+    if (references.length > 0) {
+      const referenceFiles = references.map((reference) => join(cwd, reference.fileName));
+      await Promise.all(references.map((reference, index) => writeFile(referenceFiles[index], reference.buffer)));
+      instruction = buildCodexImageInstruction(prompts, referenceFiles);
     }
     const args = ['exec', '--skip-git-repo-check', '--ignore-user-config', '-m', model];
     if (effort) args.push('-c', `model_reasoning_effort=${effort}`);

@@ -222,6 +222,8 @@ export function initThumbnailGenerator(): void {
         const result = await generateImagesWithCostSafety({
           provider: provider,
           items: [{ heading: '썸네일 배경', prompt: prompt, isThumbnail: false }],
+          // The background preview is not an article picture: the user's Codex reference photos must not be attached.
+          noUserReference: true,
           ...(scBlocked ? { isShoppingConnect: true, collectedImages: scPool } : {}),
         });
 

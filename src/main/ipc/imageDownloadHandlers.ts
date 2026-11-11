@@ -25,6 +25,7 @@ import { resolveExtensionFromBytes } from './imageExtensionPolicy.js';
 import { verifyImagePayload } from './imagePayloadPolicy.js';
 // [2026-10-01] AVIF/HEIC 는 네이버가 받지 않는다 — 저장하기 전에 JPEG 로 바꾼다.
 import { ensureNaverDecodableBuffer } from '../../image/naverImageTranscode.js';
+import { clearReferenceCopiesFromDisk, deleteReferenceCopyFromDisk, referenceCopyExistsFromDisk } from './referenceCopyDelete.js';
 
 export function registerImageDownloadHandlers(): void {
     ipcMain.handle('image:downloadAndSave', async (_event, imageUrl: string, heading: string, postTitle?: string, postId?: string, category?: string) => {
@@ -415,5 +416,12 @@ export function registerImageDownloadHandlers(): void {
         }
     });
 
-    console.log('[IPC] Image download handlers registered (2 handlers)');
+    // [2026-11-11] Deletes a copy made for the Codex reference-photo list; the path check lives in referenceCopyDelete.ts.
+    ipcMain.handle('image:deleteReferenceCopy', async (_event, filePath: unknown) => deleteReferenceCopyFromDisk(filePath));
+    // [2026-11-11] Start-up cleanup of copies a previous run left in the "참고_사진" folder (regular files only, see referenceCopyDelete.ts).
+    ipcMain.handle('image:clearReferenceCopies', async () => clearReferenceCopiesFromDisk());
+    // [2026-11-11] Read-only check that a reference copy file is still there (true only for a regular file in "참고_사진").
+    ipcMain.handle('image:referenceCopyExists', async (_event, filePath: unknown) => referenceCopyExistsFromDisk(filePath));
+
+    console.log('[IPC] Image download handlers registered (3 handlers)');
 }

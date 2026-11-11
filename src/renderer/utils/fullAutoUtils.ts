@@ -5,6 +5,8 @@
  * ✅ [2026-01-29 개선] 타입 안전성 강화
  */
 
+import { clearCodexReferenceImages } from './codexReferenceImageList.js';
+
 // 전역 ProgressModal 타입 참조
 declare class ProgressModal {
     cancelled: boolean;
@@ -170,6 +172,9 @@ export function resetAfterPublish(): void {
     setWindowState('crawledImages', []);
 
     resetPostEditingControls();
+
+    // [2026-11-11] Codex 참고 사진은 지금 글에만 쓴다 — 발행이 끝나면 비운다(메모리 목록, 저장 없음).
+    clearCodexReferenceImages();
 
     // 3. 이미지 상태 초기화
     setWindowState('generatedImages', []);

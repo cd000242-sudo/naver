@@ -358,6 +358,8 @@ interface AutomationAPI {
       regenerate?: boolean;
       sourceUrl?: string;
       isFullAuto?: boolean;
+      /** [2026-11-11] Codex 구독 이미지 전용 — 참고 사진(앱 폴더 안 경로, 최대 3장). 다른 엔진은 무시한다. */
+      userReferenceImages?: Array<{ path: string; role: 'person' | 'product' }>;
     },
   ) => Promise<{
     success: boolean;
@@ -680,6 +682,11 @@ interface AutomationAPI {
     postId?: string,
     category?: string
   ) => Promise<{ success: boolean; filePath?: string; previewDataUrl?: string; savedToLocal?: string; message?: string }>;
+  // [2026-11-11] Delete a reference-photo copy the app made (main refuses any path outside the reference-photo folder)
+  deleteReferenceCopy: (filePath: string) => Promise<{ success: boolean; deleted?: boolean; message?: string }>;
+  // [2026-11-11] Start-up cleanup of copies a previous run left behind, and a read-only check that a copy file still exists
+  clearReferenceCopies: () => Promise<{ success: boolean; deleted: number; skipped: number; failed: number }>;
+  referenceCopyExists: (filePath: string) => Promise<{ success: boolean; exists: boolean; reason?: 'missing' | 'outside' | 'not-file' | 'invalid' }>;
   collectImagesFromUrl: (url: string) => Promise<{ success: boolean; images?: string[]; message?: string }>;
   collectImagesFromShopping: (url: string) => Promise<{ success: boolean; images?: string[]; title?: string; message?: string; productInfo?: any; diagnostics?: any; resolvedUrl?: string }>;
   // ✅ [2026-02-01] Gemini 3 기반 소제목-이미지 의미적 매칭

@@ -39,6 +39,9 @@ export function toUserMessage(err: unknown): string {
   // 1. 디버그 prefix 제거 (FLOW_LOGIN_TIMEOUT:..., HTTP_401:..., NAVER_ALL_KEYS_FAILED:...)
   msg = msg.replace(PREFIX_STRIP, '');
 
+  // [2026-11-11] A message that already names Coupang as the blocker must not turn into "Naver blocked the bot".
+  if (/쿠팡|coupang/i.test(msg)) msg = msg.replace(/Access Denied/gi, '접속 거부');
+
   // 2. 영문 키워드 → 한국어
   for (const { pattern, replacement } of ERROR_KEYWORDS) {
     msg = msg.replace(pattern, replacement);

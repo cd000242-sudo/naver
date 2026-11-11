@@ -25,6 +25,8 @@ function toUserFriendlyMessage(input: string): string {
     let msg = String(input || '').trim();
     if (!msg) return '잠시 후 다시 시도해주세요.';
     msg = msg.replace(FRIENDLY_PREFIX_STRIP, '');
+    // [2026-11-11] A message that already names Coupang as the blocker must not turn into "Naver blocked the bot".
+    if (/쿠팡|coupang/i.test(msg)) msg = msg.replace(/Access Denied/gi, '접속 거부');
     for (const [pattern, replacement] of FRIENDLY_KEYWORDS) {
         msg = msg.replace(pattern, replacement);
     }

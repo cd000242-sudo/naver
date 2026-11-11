@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import ts from 'typescript';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import * as extractor from '../renderer/utils/semiAutoHeadingExtractor';
+import { bindManuscriptBodyWatch, isWholeManuscriptReplacement, markImportedManuscript } from '../renderer/utils/importedManuscriptStamp';
 import { listHeadingLines } from '../renderer/utils/headingMarkup';
 import { initHeadingControlPanel, applyEditedHeadingsToPreview, renderHeadingList } from '../renderer/modules/headingControlPanel';
 
@@ -32,6 +33,10 @@ describe('manual editor heading synchronization', () => {
     analyze = vi.fn().mockResolvedValue(undefined);
     const dependencies = {
       ...extractor,
+      // The renderer listeners call the manuscript-identity helpers (Codex reference photos); the real ones run here.
+      bindManuscriptBodyWatch,
+      isWholeManuscriptReplacement,
+      markImportedManuscript,
       listHeadingLines,
       autoAnalyzeHeadings: analyze,
       syncIntegratedPreviewFromInputs: vi.fn(),
